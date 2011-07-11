@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <color name="just_white">#FFFFFFFF</color>
+  <color name="just_black">#FF000000</color>
+  <color name="background_dark">#FF000000</color>
+  <color name="background_light">#FFFFFFFF</color>
+  <color name="background_dark_notice">#FF191919</color>
+  <color name="background_light_notice">#FFDFDFDF</color>
+  <color name="background_dark_transparent">#44000000</color>
+  <color name="background_light_transparent">#44FFFFFF</color>
+  <color name="owncache_background_dark">#FF222222</color>
+  <color name="owncache_background_light">#FFDDDDDD</color>
+  <color name="separator_dark">#44FFFFFF</color>
+  <color name="separator_light">#44000000</color>
+  <color name="text_icon">#FFFFFFFF</color>
+  <color name="text_dark">#FFFFFFFF</color>
+  <color name="text_light">#FF000000</color>
+  <color name="text_headline_dark">#66FFFFFF</color>
+  <color name="text_headline_light">#66000000</color>
+  <color name="text_grey_dark">#99FFFFFF</color>
+  <color name="text_grey_light">#99000000</color>
+  <color name="text_hint_dark">#44FFFFFF</color>
+  <color name="text_hint_light">#44000000</color>
+  <color name="link">#FF00C0FF</color>
+  <color name="button_enabled">#FF000000</color>
+  <color name="button_disabled">#66000000</color>
+</resources>

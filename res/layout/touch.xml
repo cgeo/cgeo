@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:orientation="vertical"
+		android:background="?background_color" >
+	<LinearLayout style="@style/action_bar">
+		<ImageView style="@style/action_bar_action"
+				android:onClick="goHome" />
+		<View style="@style/action_bar_separator" />
+		<TextView style="@style/action_bar_title" />
+		<ProgressBar style="@style/action_bar_progress"
+				android:visibility="gone" />
+		<ImageView style="@style/action_bar_action"
+				android:src="@drawable/actionbar_manual"
+				android:onClick="goManual" />
+	</LinearLayout>
+	<ScrollView
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:padding="4dip"
+			android:orientation="vertical" >
+		<LinearLayout
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:layout_marginTop="10dip"
+				android:orientation="vertical" >
+			<LinearLayout
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="10dip"
+					android:orientation="vertical" >
+				<LinearLayout
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal" >
+					<Button style="@style/button"
+							android:id="@+id/type"
+							android:layout_width="0dip"
+							android:layout_weight="1"
+							android:text="type" />
+					<Button style="@style/button"
+							android:id="@+id/date"
+							android:layout_width="0dip"
+							android:layout_weight="1"
+							android:text="date" />
+				</LinearLayout>
+				<EditText style="@style/edittext"
+						android:id="@+id/tracking"
+						android:inputType="textCapCharacters"
+						android:hint="@string/trackable_code" />
+				<EditText style="@style/edittext"
+						android:id="@+id/log"
+						android:hint="log"
+						android:singleLine="false"
+						android:lines="5"
+						android:capitalize="sentences" />
+				<LinearLayout android:id="@+id/tweet_box"
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal"
+						android:layout_marginLeft="10dip"
+						android:layout_marginRight="10dip"
+						android:layout_marginBottom="5dip"
+						android:visibility="gone" >
+					<CheckBox android:id="@+id/tweet"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_alignParentLeft="true"
+							android:layout_gravity="left"
+							android:padding="1px"
+							android:gravity="center" />
+					<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="center_vertical"
+							android:gravity="left"
+							android:paddingRight="3dip"
+							android:textSize="14dip"
+							android:textColor="?text_color"
+							android:text="@string/visit_tweet" />
+				</LinearLayout>
+				<Button style="@style/button"
+						android:id="@+id/post"
+						android:text="@string/log_post" />
+			</LinearLayout>
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>

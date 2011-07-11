@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:orientation="vertical"
+		android:background="?background_color" >
+	<LinearLayout style="@style/action_bar">
+		<ImageView style="@style/action_bar_action"
+				android:onClick="goHome" />
+		<View style="@style/action_bar_separator" />
+		<TextView style="@style/action_bar_title" />
+		<ImageView style="@style/action_bar_action"
+				android:src="@drawable/actionbar_manual"
+				android:onClick="goManual" />
+	</LinearLayout>
+	<ScrollView
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:padding="4dip"
+			android:orientation="vertical" >
+		<LinearLayout
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:layout_marginTop="10dip"
+				android:orientation="vertical" >
+			<EditText style="@style/edittext"
+					android:id="@+id/latitude"
+					android:hint="latitude" />
+			<EditText style="@style/edittext"
+					android:id="@+id/longitude"
+					android:hint="longitude" />
+			<Button style="@style/button"
+					android:id="@+id/current"
+					android:text="@string/waypoint_my_coordinates" />
+			<EditText style="@style/edittext"
+					android:id="@+id/bearing"
+					android:inputType="numberDecimal"
+					android:hint="@string/waypoint_bearing" />
+			<EditText style="@style/edittext"
+					android:id="@+id/distance"
+					android:hint="@string/waypoint_distance" />
+			<AutoCompleteTextView style="@style/edittext"
+					android:id="@+id/name"
+					android:hint="@string/waypoint_name" />
+			<EditText style="@style/edittext"
+					android:id="@+id/note"
+					android:hint="@string/waypoint_note"
+					android:singleLine="false"
+					android:lines="6"
+					android:capitalize="sentences" />
+			<Button style="@style/button"
+					android:id="@+id/add_waypoint"
+					android:text="@string/waypoint_save" />
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>

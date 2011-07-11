@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <string name="app_name">c:geo</string>
+  <string name="app_name_compass">c:geo kompas</string>
+
+  <!-- basics -->
+  <string name="cache">Cache</string>
+  <string name="detail">Detaljer</string>
+  <string name="search">Søg</string>
+  <string name="settings">Indstillinger</string>
+  <string name="about">Om c:geo</string>
+
+  <!-- actionbar -->
+  <string name="action_bar_share_title">Del link til cache</string>
+
+  <!-- caches -->
+  <string name="all">Alle cacher</string>
+  <string name="traditional">Traditionel cache</string>
+  <string name="multi">Multi-cache</string>
+  <string name="mystery">Ukendt cache</string>
+  <string name="letterbox">Letterbox-hybrid</string>
+  <string name="event">Event-cache</string>
+  <string name="mega">Megaevent-cache</string>
+  <string name="earth">Earth-cache</string>
+  <string name="cito">Cache in trash out-event</string>
+  <string name="webcam">Webcam-cache</string>
+  <string name="virtual">Virtuel cache</string>
+  <string name="wherigo">Wherigo-cache</string>
+  <string name="lostfound">Lost &amp; found-cache</string>
+  <string name="ape">Project ape-cache</string>
+  <string name="gchq">Groundspeak hq</string>
+  <string name="gps">GPS cache-udstilling</string>
+
+  <!-- waypoints -->
+  <string name="wp_final">Mål</string>
+  <string name="wp_stage">multi-cache post</string>
+  <string name="wp_puzzle">Spørgsmål</string>
+  <string name="wp_pkg">Parkering</string>
+  <string name="wp_trailhead">Sti</string>
+  <string name="wp_waypoint">Referencepunkt</string>
+
+  <!-- logs -->
+  <string name="log_found">Fundet</string>
+  <string name="log_dnf">Ikke fundet</string>
+  <string name="log_note">Note</string>
+  <string name="log_published">Offentliggjort</string>
+  <string name="log_enabled">Aktiveret</string>
+  <string name="log_disabled">Deaktiveret</string>
+  <string name="log_attend">Deltager</string>
+  <string name="log_attended">Deltog</string>
+  <string name="log_retrieved">Hentet</string>
+  <string name="log_grabbed">Taget fra andet sted</string>
+  <string name="log_maintained">Vedligeholdt</string>
+  <string name="log_maintenance_needed">Mangler vedligeholdelse</string>
+  <string name="log_maintenance_owner">Vedligeholdelse</string>
+  <string name="log_update">Nye koordinater</string>
+  <string name="log_archived">Arkiveret</string>
+  <string name="log_needs_archived">Mangler arkiveret</string>
+  <string name="log_discovered">Set</string>
+  <string name="log_reviewed">Godkendernote</string>
+  <string name="log_tb_nothing">Gør intet</string>
+  <string name="log_tb_visit">Besøg</string>
+  <string name="log_tb_drop">Læg her</string>
+  <string name="log_save">Gem</string>
+  <string name="log_clear">Fjern</string>
+  <string name="log_webcam">Webcamfoto taget</string>
+
+  <!-- errors, warnings, info toasts -->
+  <string name="err_none">Ok</string>
+  <string name="err_start">Forbindelse ikke oprettet</string>
+  <string name="err_parse">Login-side kan ikke indlæses</string>
+  <string name="err_server">Kan ikke forbinde til geocaching.com (server eller forbindelsesfejl?)</string>
+  <string name="err_login">Ingen login gemt</string>
+  <string name="err_unknown">Ukendt fejl</string>
+  <string name="err_comm">Ukendt forbindelsesfejl</string>
+  <string name="err_wrong">Fejl i login</string>
+  <string name="err_license">Bruger accepterer betingelser på Geocaching.com</string>
+  <string name="err_store">Beklager, c:geo kan ikke gemme cachen.</string>
+  <string name="err_drop">Beklager, c:geo kan ikke slette cachen.</string>
+  <string name="err_title_problem">Problem</string>
+  <string name="err_detail_open">Beklager, c:geo kan ikke indlæse cachedetaljer.</string>
+  <string name="err_detail_cache">Beklager, c:geo kan ikke vise denne cache.</string>
+  <string name="err_detail_cache_find">Beklager, c:geo kan ikke vise denne cache</string>
+  <string name="err_detail_cache_find_some">Beklager, c:geo kan ikke vise denne cache.</string>
+  <string name="err_detail_cache_forgot">Beklager, c:geo husker ikke hvilken cache du ønskede.</string>
+  <string name="err_detail_cache_language">c:geo kan ikke læse alle cachedetaljer. Tjek om geocaching.com er sat til engelsk. Desværre kan c:geo ikke forstå andre sprog.</string>
+  <string name="err_detail_no_spoiler">c:geo fandt ingen spoilerbilleder til denne cache.</string>
+  <string name="err_detail_no_map_static">c:geo fandt ingen statiske kort til denne cache.</string>
+  <string name="err_detail_still_removing">Fjerner stadig cachen.</string>
+  <string name="err_detail_still_saving">Gemmer stadig cachen.</string>
+  <string name="err_detail_still_refreshing">Indlæser stadig cachen.</string>
+  <string name="err_radar_title">Radar er ikke installeret.</string>
+  <string name="err_radar_message">Denne funktion kræver Radar. Ønsker du at installere Radar?</string>
+  <string name="err_radar_market">c:geo kan ikke åbne Android Marked for at søge efter Radar.</string>
+  <string name="err_radar_generic">Beklager, c:geo kan ikke starte Radar. Er den installeret?</string>
+  <string name="err_navigation_no">c:geo kan ikke finde understøttet navigation.</string>
+  <string name="err_application_no">c:geo kan ikke finde en passende applikation.</string>
+  <string name="err_auth_initialize">Beklager, c:geo kan ikke gennemføre godkendelsen.</string>
+  <string name="err_auth_process">Godkendelse fejlede.</string>
+  <string name="err_cannot_log_visit">c:geo har ikke nok informationer til at logge besøg. Log fra "Alle detaljer".</string>
+  <string name="err_init_cleared">Beklager, c:geo kan ikke slette login.</string>
+  <string name="err_no_chaches">Beklager, c:geo kan ikke indlæse cachen.</string>
+  <string name="err_download_fail">Beklager, c:geo kan ikke hente cachen pga. </string>
+  <string name="err_update_fail">Kan ikke opdatere rejsedistance.</string>
+
+  <string name="warn_save_nothing">Der er ikke noget at gemme.</string>
+  <string name="warn_no_cache_coord">Der er ingen cache med disse koordinater.</string>
+
+  <string name="info_altitude">Nuværende højde</string>
+  <string name="info_distance">Rejsedistance</string>
+  <string name="info_distance_cleared">Rejsedistance er slettet.</string>
+  <string name="info_since">\n(Siden </string>
+
+  <!-- location service -->
+  <string name="loc_last">Sidst kendte</string>
+  <string name="loc_net">Netværk</string>
+  <string name="loc_gps">GPS</string>
+  <string name="loc_sat">Sat</string>
+  <string name="loc_trying">Lokaliserer</string>
+  <string name="loc_no_addr">Ukendt adresse</string>
+
+  <!-- standard menu -->
+  <string name="menu_about">Om c:geo</string>
+  <string name="menu_settings">Indstillinger</string>
+  <string name="menu_filter">Filter</string>
+
+  <!-- main screen -->
+  <string name="live_map_button">Live-kort</string>
+  <string name="caches_nearby_button">I nærheden</string>
+  <string name="advanced_search_button">Søg</string>
+  <string name="stored_caches_button">Gemte</string>
+  <string name="any_button">Alle destinationer</string>
+  <string name="about_button">Om</string>
+  <string name="settings_button">Indstillinger</string>
+  <string name="type">Type</string>
+  <string name="now_searching">Søger</string>
+
+  <!-- caches -->
+  <string name="caches_no_cache">Ingen cache</string>
+  <string name="caches_more_caches">Flere cacher</string>
+  <string name="caches_more_caches_no">Ikke flere cacher</string>
+  <string name="caches_downloading">Henter cacher...\nETA: </string>
+  <string name="caches_eta_ltm">Under et minut</string>
+  <string name="caches_eta_mins"> minutter</string>
+  <string name="caches_no_caches"> (ingen cacher)</string>
+  <string name="caches_store_offline">Gem Offline</string>
+  <string name="caches_on_map">Vis på kort</string>
+  <string name="caches_select">Vælg fra liste</string>
+
+  <!-- about -->
+  <string name="about_changelog">Ændringslog</string>
+  <string name="about_donate">Donér</string>
+  <string name="about_detail">Detaljer</string>
+  <string name="about_donation_less">Donér\nmindre</string>
+  <string name="about_donation_more">Donér\nudvikling</string>
+
+  <!-- init -->
+  <string name="init_geocaching">Geocaching.com</string>
+  <string name="init_gcvote">GCvote.com</string>
+  <string name="init_go4cache">Go 4 Cache</string>
+  <string name="init_twitter">Twitter</string>
+  <string name="init_username">Brugernavn</string>
+  <string name="init_password">Password</string>
+  <string name="init_passvote">Password</string>
+  <string name="init_login">Check login</string>
+  <string name="init_legal">Juridisk note</string>
+  <string name="init_go4cache_connect">Forbind til Go 4 Cache</string>
+  <string name="init_twitter_authorize">Godkend c:geo</string>
+  <string name="init_twitter_publish">Offentliggør status når cache er fundet</string>
+  <string name="init_signature">Signatur</string>
+  <string name="init_other">Andre indstillinger</string>
+  <string name="init_skin">Light skin (genstart af c:geo nødvendig)</string>
+  <string name="init_transparent">Transparent c:geo hovedskærm</string>
+  <string name="init_address">Vis adresse på hovedskærm</string>
+  <string name="init_exclude">Udelad egne og fundne cacher</string>
+  <string name="init_disabled">Udelad deaktiverede cacher</string>
+  <string name="init_offline">Gem kort til offlinebrug</string>
+  <string name="init_units">Benyt britiske afstandsmål</string>
+  <string name="init_nav">Benyt Google Navigation</string>
+  <string name="init_autoload">Auto-indlæs lang cachebeskrivelse</string>
+  <string name="init_livelist">Vis retning til cacher i lister</string>
+  <string name="init_browser">Identificer c:geo som standardbrowser</string>
+  <string name="init_cleared">c:geo slettede login-informationer.</string>
+
+  <!-- auth -->
+  <string name="auth_twitter">Twitter</string>
+  <string name="auth_authorize">Godkend c:geo</string>
+  <string name="auth_start">Start godkendelse</string>
+  <string name="auth_again">Start igen</string>
+  <string name="auth_pin_hint">PIN tildelt af Twitter</string>
+  <string name="auth_finish">Færdig</string>
+  <string name="auth_dialog_wait">Venter på Twitter...</string>
+  <string name="auth_dialog_pin_title">PIN-kode</string>
+  <string name="auth_dialog_pin_message">Indtast PIN-kode fra Twitter. PIN er påkrævet for at gennemføre godkendelse.</string>
+  <string name="auth_dialog_completed">c:geo er nu godkendt til at poste beskeder på Twitter.</string>
+
+  <!-- cache -->
+  <string name="cache_count_no">Ingen cache</string>
+  <string name="cache_count_one">En cache</string>
+  <string name="cache_count_more">Cacher</string>
+  <string name="cache_offline">Offline</string>
+  <string name="cache_offline_refresh">Genindlæs</string>
+  <string name="cache_offline_drop">Fjern</string>
+  <string name="cache_offline_store">Gem</string>
+  <string name="cache_offline_stored">Gemt i telefon</string>
+  <string name="cache_offline_not_ready">Ikke klar\ntil offline brug</string>
+  <string name="cache_offline_time_about">For</string>
+  <string name="cache_offline_time_mins">minutter siden</string>
+  <string name="cache_offline_time_mins_few">få minutter siden</string>
+  <string name="cache_offline_time_hour">en time siden</string>
+  <string name="cache_offline_time_hours">timer siden</string>
+  <string name="cache_offline_time_days">dage siden</string>
+  <string name="cache_attributes">Attributter</string>
+  <string name="cache_inventory">Inventar</string>
+  <string name="cache_log_offline">Offline log</string>
+  <string name="cache_description">Beskrivelse</string>
+  <string name="cache_description_long">Lang beskrivelse</string>
+  <string name="cache_waypoints">Waypoints</string>
+  <string name="cache_waypoints_add">Tilføj waypoint</string>
+  <string name="cache_hint">Hint</string>
+  <string name="cache_logs">Logbog</string>
+  <string name="cache_dialog_loading_details">Indlæser cachedetaljer...</string>
+  <string name="cache_dialog_loading_description">Indlæser cachebeskrivelse...</string>
+  <string name="cache_dialog_offline_save_title">Offline</string>
+  <string name="cache_dialog_offline_save_message">Gemmer cache til offlinebrug...</string>
+  <string name="cache_dialog_offline_drop_title">Offline</string>
+  <string name="cache_dialog_offline_drop_message">Fjerner cache fra hukommelsen...</string>
+  <string name="cache_dialog_refresh_title">Genindlæs</string>
+  <string name="cache_dialog_refresh_message">Genindlæser cachedetaljer...</string>
+  <string name="cache_menu_navigate">Naviger</string>
+  <string name="cache_menu_compass">Kompas</string>
+  <string name="cache_menu_tbt">Vejvisning</string>
+  <string name="cache_menu_radar">Radar</string>
+  <string name="cache_menu_map">Vis på kort</string>
+  <string name="cache_menu_map_ext">Vis på ext. kort</string>
+  <string name="cache_menu_map_static">Statiske kort</string>
+  <string name="cache_menu_browser">Åbn i browser</string>
+  <string name="cache_menu_visit">Log besøg</string>
+  <string name="cache_menu_spoilers">Spoilerbilleder</string>
+  <string name="cache_menu_around">Cacher i nærheden</string>
+  <string name="cache_menu_event">Tilføj til kalender</string>
+  <string name="cache_menu_details">Detaljer</string>
+  <string name="cache_status">Status</string>
+  <string name="cache_status_offline_log">Log gemt</string>
+  <string name="cache_status_found">Fundet</string>
+  <string name="cache_status_archived">Arkiveret</string>
+  <string name="cache_status_disabled">Deaktiveret</string>
+  <string name="cache_status_premium">Kun premium-medlemmer</string>
+  <string name="cache_geocode">GC-code</string>
+  <string name="cache_type">Type</string>
+  <string name="cache_distance">Distance</string>
+  <string name="cache_difficulty">Sværhed</string>
+  <string name="cache_terrain">Terræn</string>
+  <string name="cache_rating">Vurdering</string>
+  <string name="cache_owner">Ejer</string>
+  <string name="cache_hidden">Gemt</string>
+  <string name="cache_event">Dato</string>
+  <string name="cache_location">Lokation</string>
+  <string name="cache_coordinates">Koordinater</string>
+  <string name="cache_calendars">Vælg kalender</string>
+
+  <!-- event -->
+  <string name="event_success">Eventcache tilføjet til kalender</string>
+  <string name="event_fail">Kan ikke tilføje eventcache til kalender</string>
+
+  <!-- popup -->
+  <string name="popup_more">Flere detaljer</string>
+
+  <!-- waypoint -->
+  <string name="waypoint_custom">Tilpasset</string>
+  <string name="waypoint_my_coordinates">Mine koordinater</string>
+  <string name="waypoint_bearing">Retning</string>
+  <string name="waypoint_distance">Afstand</string>
+  <string name="waypoint_name">Navn</string>
+  <string name="waypoint_edit">Rediger</string>
+  <string name="waypoint_delete">Slet</string>
+  <string name="waypoint_edit_title">Rediger waypoint</string>
+  <string name="waypoint_add_title">Tilføj waypoint</string>
+  <string name="waypoint_note">Note</string>
+  <string name="waypoint_save">Gem</string>
+
+  <!-- visit -->
+  <string name="visit_tweet">Post fund på Twitter</string>
+
+  <!-- map -->
+  <string name="map_map">Kort</string>
+  <string name="map_live">Live-kort</string>
+  <string name="map_view_satellite">Satellit-view</string>
+  <string name="map_view_map">Kort-view</string>
+  <string name="map_trail_show">Vis spor</string>
+  <string name="map_trail_hide">Skjul spor</string>
+  <string name="map_live_enable">Aktivér live</string>
+  <string name="map_live_disable">Deaktivér live</string>
+
+  <!-- search -->
+  <string name="search_coordinates">Koordinater</string>
+  <string name="search_coordinates_button">Søg fra koordinater</string>
+  <string name="search_address">Adresse</string>
+  <string name="search_address_button">Søg adresse</string>
+  <string name="search_gc">Geocode</string>
+  <string name="search_gc_button">Søg geocode</string>
+  <string name="search_kw">Nøgleord</string>
+  <string name="search_kw_prefill">Nøgleord</string>
+  <string name="search_kw_button">Søg efter nøgleord</string>
+  <string name="search_fbu">Fundet af bruger</string>
+  <string name="search_fbu_prefill">Brugernavn</string>
+  <string name="search_fbu_button">Søg brugernavn</string>
+  <string name="search_hbu">Gemt af bruger</string>
+  <string name="search_hbu_prefill">Ejer</string>
+  <string name="search_hbu_button">Søg ejer</string>
+  <string name="search_tb">Trackable</string>
+  <string name="search_tb_hint">Trackable id</string>
+  <string name="search_tb_button">Søg trackable</string>
+  <string name="search_destination">Destination</string>
+  <string name="search_direction_rel">Fra denne position</string>
+
+  <!-- navigation -->
+  <string name="navigation">Navigation</string>
+
+  <!-- next things -->
+  <string name="legal_note">For at benytte geocaching.com, skal betingelserne i <a href="http://www.geocaching.com/about/termsofuse.aspx">"Groundspeak disclaimer"</a> accepteres.</string>
+  <string name="author">Udviklet af: <a href="http://carnero.cc/">carnero</a></string>
+  <string name="support">Support: <a href="mailto:carnero@carnero.cc">carnero@carnero.cc</a></string>
+  <string name="website">Hjemmeside: <a href="http://cgeo.carnero.cc/">cgeo.carnero.cc</a></string>
+  <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
+  <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
+  <string name="about_go4cache">Servicen <b>Go 4 Cache</b> viser andre geocachere på kortet (i <b>c:geo</b> eller i browser) i realtime. Servicen kan f.eks. vise hvilken cache de er på vej hen til. Ved forbindelse til <b>Go 4 Cache</b> tillader du at <b>c:geo</b> offentliggør din position når du geocacher (kun når <b>c:geo</b> er startet).</string>
+  <string name="about_twitter">Skal <b>c:geo</b> sende status til Twitter hvergang du logger en cache?</string>
+  <string name="about_auth_1">Med denne proces tillader du at <b>c:geo</b> får adgang til din Twitter.</string>
+  <string name="about_auth_2">Klik på \"godkend c:geo\" knappen for at starte godkendelsesprocessen. Det vil åbne Twitter i en webbrowser. Log ind på siden og tillad <b>c:geo</b> at tilgå din Twitter. Når godkendt, vil Twitter vise en PIN-kode. Denne PIN skal tastes ind i <b>c:geo</b> og bekræftes.</string>
+</resources>

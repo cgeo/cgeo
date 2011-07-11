@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!-- system definitions -->
+	<style name="cgeo" parent="android:Theme.NoTitleBar">
+	</style>
+
+	<style name="button" parent="@android:style/Widget.Button">
+		<item name="android:padding">6dip</item>
+		<item name="android:lines">1</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:scrollHorizontally">true</item>
+		<item name="android:ellipsize">marquee</item>
+		<item name="android:textSize">22dip</item>
+		<item name="android:textColor">?text_color</item>
+		<item name="android:background">?button</item>
+		<item name="android:focusable">true</item>
+		<item name="android:clickable">true</item>
+		<item name="android:gravity">center</item>
+	</style>
+
+	<style name="edittext" parent="@android:style/Widget.EditText">
+		<item name="android:padding">6dip</item>
+		<item name="android:lines">1</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:autoText">true</item>
+		<item name="android:textSize">22dip</item>
+		<item name="android:textColor">?text_color</item>
+		<item name="android:textColorHint">?text_color_hint</item>
+		<item name="android:background">?input</item>
+		<item name="android:focusable">true</item>
+		<item name="android:gravity">top|left</item>
+		<item name="android:capitalize">none</item>
+	</style>
+
+<!-- own definitions -->
+<!-- actionbar -->
+	<style name="action_bar">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">@dimen/actionbar_height</item>
+		<item name="android:orientation">horizontal</item>
+		<item name="android:background">@drawable/actionbar_background</item>
+	</style>
+
+	<style name="action_bar_icon_cgeo">
+		<item name="android:layout_width">@dimen/actionbar_height</item>
+		<item name="android:layout_height">@dimen/actionbar_height</item>
+		<item name="android:padding">4dip</item>
+		<item name="android:gravity">center</item>
+		<item name="android:scaleType">center</item>
+		<item name="android:src">@drawable/actionbar_cgeo</item>
+	</style>
+
+	<style name="action_bar_action">
+		<item name="android:layout_width">@dimen/actionbar_height</item>
+		<item name="android:layout_height">@dimen/actionbar_height</item>
+		<item name="android:padding">2dip</item>
+		<item name="android:gravity">center</item>
+		<item name="android:scaleType">center</item>
+		<item name="android:src">@drawable/actionbar_home</item>
+	</style>
+
+	<style name="action_bar_separator">
+		<item name="android:layout_width">@dimen/actionbar_separator_width</item>
+		<item name="android:layout_height">@dimen/actionbar_separator_height</item>
+		<item name="android:layout_marginLeft">4dip</item>
+		<item name="android:layout_marginRight">4dip</item>
+		<item name="android:layout_marginTop">4dip</item>
+		<item name="android:layout_marginBottom">4dip</item>
+		<item name="android:gravity">center</item>
+		<item name="android:background">@drawable/actionbar_separator</item>
+	</style>
+
+	<style name="action_bar_progress" parent="@android:style/Widget.ProgressBar.Small">
+		<item name="android:id">@id/actionbar_progress</item>
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_marginLeft">14dip</item>
+		<item name="android:layout_marginRight">15dip</item>
+		<item name="android:layout_marginTop">14dip</item>
+		<item name="android:indeterminate">true</item>
+	</style>
+
+	<style name="action_bar_title">
+		<item name="android:id">@id/actionbar_title</item>
+		<item name="android:layout_width">0dip</item>
+		<item name="android:layout_height">fill_parent</item>
+		<item name="android:layout_weight">1</item>
+		<item name="android:padding">4dip</item>
+		<item name="android:gravity">center_vertical|left</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:scrollHorizontally">true</item>
+		<item name="android:ellipsize">marquee</item>
+		<item name="android:lines">1</item>
+		<item name="android:textSize">20dip</item>
+		<item name="android:textColor">@color/just_white</item>
+		<item name="android:text">c:geo</item>
+	</style>
+
+<!-- button: full width -->
+	<style name="button">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_marginLeft">10dip</item>
+		<item name="android:layout_marginRight">10dip</item>
+		<item name="android:layout_marginBottom">5dip</item>
+	</style>
+
+<!-- button: small -->
+	<style name="button_small">
+		<item name="android:layout_width">125dip</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_gravity">right</item>
+		<item name="android:layout_marginLeft">6dip</item>
+		<item name="android:layout_marginRight">6dip</item>
+		<item name="android:layout_marginTop">3dip</item>
+		<item name="android:layout_marginBottom">3dip</item>
+		<item name="android:padding">3dip</item>
+		<item name="android:textSize">14dip</item>
+	</style>
+
+<!-- edittext -->
+	<style name="edittext">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_marginLeft">10dip</item>
+		<item name="android:layout_marginRight">10dip</item>
+		<item name="android:layout_marginBottom">5dip</item>
+	</style>
+
+	<style name="edittext_dialog">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_marginLeft">10dip</item>
+		<item name="android:layout_marginRight">10dip</item>
+		<item name="android:layout_marginBottom">5dip</item>
+		<item name="android:textColor">@color/text_dark</item>
+		<item name="android:textColorHint">@color/text_hint_dark</item>
+		<item name="android:background">@drawable/input_bcg_dark</item>
+	</style>
+
+<!-- mainscreen icon -->
+	<style name="icon_mainscreen">
+		<item name="android:layout_width">48dip</item>
+		<item name="android:layout_height">48dip</item>
+		<item name="android:layout_gravity">center_horizontal</item>
+		<item name="android:gravity">center</item>
+		<item name="android:layout_margin">4dip</item>
+	</style>
+
+	<style name="icon_mainscreen_text">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_gravity">center_horizontal</item>
+		<item name="android:gravity">center</item>
+		<item name="android:paddingTop">1dip</item>
+		<item name="android:paddingBottom">1dip</item>
+		<item name="android:paddingLeft">5dip</item>
+		<item name="android:paddingRight">5dip</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:lines">1</item>
+		<item name="android:ellipsize">marquee</item>
+		<item name="android:textSize">13dip</item>
+		<item name="android:textColor">@color/text_icon</item>
+		<item name="android:background">@drawable/icon_bcg</item>
+	</style>
+
+	<style name="icon_mainscreen_count">
+		<item name="android:visibility">gone</item>
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_gravity">center_horizontal</item>
+		<item name="android:layout_alignParentTop">true</item>
+		<item name="android:layout_alignParentRight">true</item>
+		<item name="android:layout_marginRight">4dip</item>
+		<item name="android:layout_marginLeft">4dip</item>
+		<item name="android:gravity">center</item>
+		<item name="android:paddingTop">2dip</item>
+		<item name="android:paddingBottom">2dip</item>
+		<item name="android:paddingLeft">5dip</item>
+		<item name="android:paddingRight">5dip</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:lines">1</item>
+		<item name="android:ellipsize">marquee</item>
+		<item name="android:textSize">11dip</item>
+		<item name="android:textColor">@color/just_white</item>
+		<item name="android:background">@drawable/count_bcg</item>
+		<item name="android:text"></item>
+	</style>
+
+<!-- current location -->
+	<style name="location_current">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:gravity">center_horizontal</item>
+		<item name="android:paddingLeft">5dip</item>
+		<item name="android:paddingRight">5dip</item>
+		<item name="android:lines">1</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:scrollHorizontally">true</item>
+		<item name="android:ellipsize">marquee</item>
+		<item name="android:textSize">14dip</item>
+		<item name="android:textColor">@color/text_icon</item>
+		<item name="android:background">@drawable/icon_bcg</item>
+	</style>
+
+	<style name="location_current_type">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_alignParentBottom">true</item>
+		<item name="android:layout_alignParentRight">true</item>
+		<item name="android:layout_gravity">right</item>
+		<item name="android:paddingLeft">3dip</item>
+		<item name="android:paddingRight">3dip</item>
+		<item name="android:lines">1</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:scrollHorizontally">true</item>
+		<item name="android:ellipsize">marquee</item>
+		<item name="android:textSize">12dip</item>
+		<item name="android:textColor">@color/text_dark</item>
+	</style>
+
+	<style name="location_current_accuracy">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_alignParentBottom">true</item>
+		<item name="android:layout_centerHorizontal">true</item>
+		<item name="android:layout_gravity">right</item>
+		<item name="android:paddingLeft">3dip</item>
+		<item name="android:paddingRight">3dip</item>
+		<item name="android:lines">1</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:scrollHorizontally">true</item>
+		<item name="android:ellipsize">marquee</item>
+		<item name="android:textSize">12dip</item>
+		<item name="android:textColor">@color/text_dark</item>
+	</style>
+
+	<style name="location_current_satellites">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_alignParentBottom">true</item>
+		<item name="android:layout_alignParentLeft">true</item>
+		<item name="android:layout_gravity">left</item>
+		<item name="android:paddingLeft">3dip</item>
+		<item name="android:paddingRight">3dip</item>
+		<item name="android:lines">1</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:scrollHorizontally">true</item>
+		<item name="android:ellipsize">marquee</item>
+		<item name="android:textSize">12dip</item>
+		<item name="android:textColor">@color/text_dark</item>
+	</style>
+
+<!-- separators -->
+	<style name="separator_horizontal">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">1dip</item>
+		<item name="android:layout_centerInParent">true</item>
+		<item name="android:background">?separator_color</item>
+	</style>
+
+	<style name="separator_horizontal_layout">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_marginTop">2dip</item>
+		<item name="android:layout_marginBottom">2dip</item>
+	</style>
+
+	<style name="separator_horizontal_headline">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_alignParentLeft">true</item>
+		<item name="android:layout_marginLeft">15dip</item>
+		<item name="android:padding">3dip</item>
+		<item name="android:lines">1</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:scrollHorizontally">true</item>
+		<item name="android:ellipsize">marquee</item>
+		<item name="android:textSize">22dip</item>
+		<item name="android:textColor">?text_color_headline</item>
+		<item name="android:background">?background_color</item>
+	</style>
+</resources>

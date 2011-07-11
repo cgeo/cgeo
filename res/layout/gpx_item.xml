@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/button_map"
+		android:layout_height="wrap_content"
+		android:layout_width="fill_parent"
+		android:layout_margin="3dip"
+		android:paddingLeft="5dip"
+		android:paddingRight="5dip"
+		android:paddingBottom="7dip"
+		android:paddingTop="7dip"
+		android:orientation="vertical"
+		android:background="?background_color" >
+	<TextView android:id="@+id/filepath"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:scrollHorizontally="true"
+			android:textSize="12dip"
+			android:gravity="right"
+			android:lines="1"
+			android:singleLine="true"
+			android:ellipsize="marquee"
+			android:textColor="?text_color_grey" />
+	<TextView android:id="@+id/filename"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:scrollHorizontally="true"
+			android:textSize="22dip"
+			android:gravity="left"
+			android:lines="1"
+			android:singleLine="true"
+			android:ellipsize="marquee"
+			android:textColor="?text_color" />
+</LinearLayout>

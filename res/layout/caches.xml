@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:orientation="vertical"
+		android:background="?background_color" >
+	<LinearLayout style="@style/action_bar">
+		<ImageView style="@style/action_bar_action"
+				android:onClick="goHome" />
+		<View style="@style/action_bar_separator" />
+		<TextView style="@style/action_bar_title"
+				android:clickable="true"
+				android:onClick="selectList" />
+		<ProgressBar style="@style/action_bar_progress"
+				android:visibility="gone" />
+		<ImageView style="@style/action_bar_action"
+				android:src="@drawable/actionbar_map"
+				android:onClick="goMap" />
+		<View style="@style/action_bar_separator" />
+		<ImageView style="@style/action_bar_action"
+				android:src="@drawable/actionbar_manual"
+				android:onClick="goManual" />
+	</LinearLayout>
+	<ListView android:id="@android:id/list"
+		android:visibility="gone"
+		android:layout_above="@+id/counter"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_margin="0dip"
+		android:padding="0dip"
+		android:dividerHeight="1dip"
+		android:background="?background_color"
+		android:cacheColorHint="?background_color" />
+	<RelativeLayout android:id="@+id/loading"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:padding="5dip" >
+		<ProgressBar style="@android:style/Widget.ProgressBar.Large.Inverse"
+				android:layout_width="76dip"
+				android:layout_height="76dip"
+				android:layout_centerInParent="true"
+				android:gravity="center"
+				android:indeterminate="true" />
+	</RelativeLayout>
+</LinearLayout>

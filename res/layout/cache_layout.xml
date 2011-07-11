@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="3dip" >
+	<TextView android:id="@+id/name"
+			android:layout_width="80dip"
+			android:layout_height="wrap_content"
+			android:layout_alignParentTop="true"
+			android:layout_alignParentLeft="true"
+			android:layout_gravity="left|top"
+			android:layout_marginRight="4dip"
+			android:gravity="right"
+			android:lines="1"
+			android:singleLine="true"
+			android:scrollHorizontally="true"
+			android:ellipsize="end"
+			android:textSize="12dip"
+			android:textColor="?text_color_headline"
+			android:text="@null" />
+	<LinearLayout android:id="@+id/stars"
+			android:orientation="horizontal"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignParentTop="true"
+			android:layout_alignParentLeft="true"
+			android:layout_marginTop="2dip"
+			android:layout_marginLeft="83dip"
+			android:layout_marginRight="6dip"
+			android:layout_gravity="left|top" >
+		<TextView android:id="@+id/value"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginRight="5dip"
+				android:textSize="14dip"
+				android:textColor="?text_color" />
+		<TextView android:id="@+id/addition"
+				android:visibility="gone"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginLeft="5dip"
+				android:textSize="11dip"
+				android:textColor="?text_color_grey" />
+	</LinearLayout>
+</RelativeLayout>

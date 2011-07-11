@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:orientation="vertical"
+		android:background="?background_color" >
+	<LinearLayout style="@style/action_bar">
+		<ImageView style="@style/action_bar_action"
+				android:onClick="goHome" />
+		<View style="@style/action_bar_separator" />
+		<TextView style="@style/action_bar_title" />
+		<ImageView style="@style/action_bar_action"
+				android:src="@drawable/actionbar_manual"
+				android:onClick="goManual" />
+	</LinearLayout>
+	<ScrollView
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:padding="4dip"
+			android:orientation="vertical" >
+		<LinearLayout
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:layout_marginTop="10dip"
+				android:orientation="vertical" >
+			<LinearLayout
+					android:layout_width="fill_parent"
+					android:layout_height="fill_parent"
+					android:layout_marginBottom="10dip"
+					android:orientation="vertical" >
+				<RelativeLayout style="@style/separator_horizontal_layout" >
+					<View style="@style/separator_horizontal" />
+					<TextView style="@style/separator_horizontal_headline"
+							android:text="@string/search_coordinates" />
+				</RelativeLayout>
+				<EditText style="@style/edittext"
+						android:id="@+id/latitude"
+						android:hint="latitude"
+						android:imeOptions="actionGo" />
+				<EditText style="@style/edittext"
+						android:id="@+id/longitude"
+						android:hint="longitude"
+						android:imeOptions="actionGo" />
+				<Button style="@style/button"
+						android:id="@+id/search_coordinates"
+						android:text="@string/search_coordinates_button" />
+<!-- ** -->
+				<RelativeLayout style="@style/separator_horizontal_layout" >
+					<View style="@style/separator_horizontal" />
+					<TextView style="@style/separator_horizontal_headline"
+							android:text="@string/search_address" />
+				</RelativeLayout>
+				<EditText style="@style/edittext"
+						android:id="@+id/address"
+						android:hint="@string/search_address"
+						android:imeOptions="actionGo" />
+				<Button style="@style/button"
+						android:id="@+id/search_address"
+						android:text="@string/search_address_button" />
+<!-- ** -->
+				<RelativeLayout style="@style/separator_horizontal_layout" >
+					<View style="@style/separator_horizontal" />
+					<TextView style="@style/separator_horizontal_headline"
+							android:text="@string/search_gc" />
+				</RelativeLayout>
+				<AutoCompleteTextView style="@style/edittext"
+						android:id="@+id/geocode"
+						android:hint="@string/search_gc"
+						android:imeOptions="actionGo"
+						android:text="GC"
+						android:inputType="textCapCharacters" />
+				<Button style="@style/button"
+						android:id="@+id/display_geocode"
+						android:text="@string/search_gc_button" />
+<!-- ** -->
+				<RelativeLayout style="@style/separator_horizontal_layout" >
+					<View style="@style/separator_horizontal" />
+					<TextView style="@style/separator_horizontal_headline"
+							android:text="@string/search_kw" />
+				</RelativeLayout>
+				<EditText style="@style/edittext"
+						android:id="@+id/keyword"
+						android:hint="@string/search_kw_prefill"
+						android:imeOptions="actionGo" />
+				<Button style="@style/button"
+						android:id="@+id/search_keyword"
+						android:text="@string/search_kw_button" />
+<!-- ** -->
+				<RelativeLayout style="@style/separator_horizontal_layout" >
+					<View style="@style/separator_horizontal" />
+					<TextView style="@style/separator_horizontal_headline"
+							android:text="@string/search_fbu" />
+				</RelativeLayout>
+				<EditText style="@style/edittext"
+						android:id="@+id/username"
+						android:hint="@string/search_fbu_prefill"
+						android:imeOptions="actionGo" />
+				<Button style="@style/button"
+						android:id="@+id/search_username"
+						android:text="@string/search_fbu_button" />
+<!-- ** -->
+				<RelativeLayout style="@style/separator_horizontal_layout" >
+					<View style="@style/separator_horizontal" />
+					<TextView style="@style/separator_horizontal_headline"
+							android:text="@string/search_hbu" />
+				</RelativeLayout>
+				<EditText style="@style/edittext"
+						android:id="@+id/owner"
+						android:hint="@string/search_hbu_prefill"
+						android:imeOptions="actionGo" />
+				<Button style="@style/button"
+						android:id="@+id/search_owner"
+						android:text="@string/search_hbu_button" />
+<!-- ** -->
+				<RelativeLayout style="@style/separator_horizontal_layout" >
+					<View style="@style/separator_horizontal" />
+					<TextView style="@style/separator_horizontal_headline"
+							android:text="@string/search_tb" />
+				</RelativeLayout>
+				<EditText style="@style/edittext"
+						android:id="@+id/trackable"
+						android:hint="@string/search_tb_hint"
+						android:imeOptions="actionGo"
+						android:inputType="textCapCharacters" />
+				<Button style="@style/button"
+						android:id="@+id/display_trackable"
+						android:text="@string/search_tb_button" />
+			</LinearLayout>
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>

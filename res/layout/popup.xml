@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:orientation="vertical"
+		android:background="?background_color_transparent" >
+	<LinearLayout style="@style/action_bar">
+		<TextView style="@style/action_bar_title" />
+		<ImageView style="@style/action_bar_action"
+				android:src="@drawable/actionbar_compass"
+				android:onClick="goCompass" />
+	</LinearLayout>
+	<ScrollView android:id="@+id/details_list_box"
+			android:visibility="gone"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:padding="4dip"
+			android:orientation="vertical" >
+		<LinearLayout
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:orientation="vertical" >
+			<LinearLayout android:id="@+id/details_list"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical" >
+			</LinearLayout>
+			<LinearLayout android:id="@+id/more_details_box"
+					android:visibility="gone"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"  >
+				<Button style="@style/button_small"
+						android:id="@+id/more_details"
+						android:text="@string/popup_more" />
+			</LinearLayout>
+			<LinearLayout android:id="@+id/offline_box"
+					android:visibility="gone"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"  >
+				<RelativeLayout style="@style/separator_horizontal_layout" >
+					<View style="@style/separator_horizontal" />
+				</RelativeLayout>
+				<RelativeLayout
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content" >
+					<TextView android:id="@+id/offline_text"
+							android:layout_width="fill_parent"
+							android:layout_height="wrap_content"
+							android:layout_marginLeft="6dip"
+							android:layout_marginRight="130dip"
+							android:layout_alignParentLeft="true"
+							android:layout_gravity="left"
+							android:paddingRight="3dip"
+							android:textSize="14dip"
+							android:textColor="?text_color" />
+					<Button style="@style/button_small"
+							android:id="@+id/offline_refresh"
+							android:visibility="gone"
+							android:layout_width="60dip"
+							android:layout_marginRight="71dip"
+							android:layout_alignParentRight="true"
+							android:text="@string/cache_offline_refresh" />
+					<Button style="@style/button_small"
+							android:id="@+id/offline_store"
+							android:layout_width="60dip"
+							android:layout_alignParentRight="true"
+							android:text="@string/cache_offline_store" />
+				</RelativeLayout>
+			</LinearLayout>
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>

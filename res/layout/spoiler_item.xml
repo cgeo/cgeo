@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical" >
+	<RelativeLayout style="@style/separator_horizontal_layout" >
+		<View style="@style/separator_horizontal" />
+		<TextView style="@style/separator_horizontal_headline"
+				android:id="@+id/title"
+				android:text="@null" />
+	</RelativeLayout>
+	<TextView android:id="@+id/description"
+			android:visibility="gone"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="left"
+			android:padding="3dip"
+			android:textSize="14dip"
+			android:textColor="?text_color" />
+</LinearLayout>

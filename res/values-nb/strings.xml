@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <string name="app_name">c:geo</string>
+  <string name="app_name_compass">c:geo kompass</string>
+
+  <!-- basics -->
+  <string name="cache">Cache</string>
+  <string name="detail">Detalj</string>
+  <string name="search">Søk</string>
+  <string name="settings">Instillinger</string>
+  <string name="about">Om c:geo</string>
+
+  <!-- actionbar -->
+  <string name="action_bar_share_title">Del link til cachen</string>
+
+  <!-- caches -->
+  <string name="all">Alle cacher</string>
+  <string name="all_types">Alle cache typer</string>
+  <string name="traditional">Tradisjonell cache</string>
+  <string name="multi">Multi-cache</string>
+  <string name="mystery">Ukjent cache</string>
+  <string name="letterbox">Letterbox hybrid</string>
+  <string name="event">Hendelse-cache</string>
+  <string name="mega">Mega-hendelse-cache</string>
+  <string name="earth">Earthcache</string>
+  <string name="cito">"Cache in trash out"-hendelse</string>
+  <string name="webcam">Webkamera cache</string>
+  <string name="virtual">Virtuell cache</string>
+  <string name="wherigo">Wherigo cache</string>
+  <string name="lostfound">Lost &amp; found</string>
+  <string name="ape">Prosjekt A.P.E. cache</string>
+  <string name="gchq">Groundspeak hovedkvarter</string>
+  <string name="gps">GPS cache</string>
+
+  <!-- waypoints -->
+  <string name="wp_final">Sluttpunkt</string>
+  <string name="wp_stage">Multi-cache nivå</string>
+  <string name="wp_puzzle">Spørsmål til svar</string>
+  <string name="wp_pkg">Parkeringsplass</string>
+  <string name="wp_trailhead">Startpunkt</string>
+  <string name="wp_waypoint">Referanse-punkt</string>
+
+  <!-- logs -->
+  <string name="log_found">Funnet</string>
+  <string name="log_dnf">Ikke funnet</string>
+  <string name="log_note">Notat</string>
+  <string name="log_published">Publisert</string>
+  <string name="log_enabled">Aktivert</string>
+  <string name="log_disabled">Deaktivert</string>
+  <string name="log_attend">Har tenkt å komme</string>
+  <string name="log_attended">Kom</string>
+  <string name="log_retrieved">Tatt fra plassen den skulle være</string>
+  <string name="log_grabbed">Tatt fra en plass den ikke skulle vært</string>
+  <string name="log_maintained">Vedlikehold utført</string>
+  <string name="log_maintenance_needed">Trenger vedlikehold</string>
+  <string name="log_maintenance_owner">Vedlikehold</string>
+  <string name="log_update">Koordinater oppdatert</string>
+  <string name="log_archived">Arkivert</string>
+  <string name="log_needs_archived">Bør arkiveres</string>
+  <string name="log_discovered">Oppdaget</string>
+  <string name="log_reviewed">Andmeldelse</string>
+  <string name="log_tb_nothing">Ikke gjør noe</string>
+  <string name="log_tb_visit">Besøkte</string>
+  <string name="log_tb_drop">Legg igjen</string>
+  <string name="log_tb_changeall">Endre alle</string>
+  <string name="log_save">Lagre</string>
+  <string name="log_saving">Lagrer logg...</string>
+  <string name="log_clear">Slett</string>
+  <string name="log_post">Last opp loggen</string>
+  <string name="log_post_rate">Last opp loggen og rangér</string>
+  <string name="log_post_no_rate">Last opp loggen uten å rangere</string>
+  <string name="log_add">Legg til</string>
+  <string name="log_date">Dato</string>
+  <string name="log_time">Klokkelsett</string>
+  <string name="log_date_time">Dato og klokkeslett</string>
+  <string name="log_rating">Rangering</string>
+  <string name="log_no_rating">Ingen rangering</string>
+  <string name="log_stars_1">1 stjerne</string>
+  <string name="log_stars_2">2 stjerner</string>
+  <string name="log_stars_3">3 stjerner</string>
+  <string name="log_stars_4">4 stjerner</string>
+  <string name="log_stars_5">5 stjerner</string>
+  <string name="log_webcam">Webkamera-bilde tatt</string>
+  <string name="log_new_log">Logg</string>
+  <string name="log_new_log_text">Logg tekst</string>
+
+  <!-- errors, warnings, info toasts -->
+  <string name="err_none">Ok</string>
+  <string name="err_start">Klarte ikke å koble til</string>
+  <string name="err_parse">Klarte ikke å lese innloggings-siden</string>
+  <string name="err_server">Klarte ikke å koble til geocaching.com (server eller tilkobling nede?)</string>
+  <string name="err_login">Ingen innloggings-opplysninger lagret</string>
+  <string name="err_login_failed">Beklager, c:geo kan ikke logge inn.</string>
+  <string name="err_unknown">Ukjent feil</string>
+  <string name="err_comm">Ukjent tilkoblings-feil</string>
+  <string name="err_missing_auth">Brukernavn eller passord er ikke oppgitt.</string>
+  <string name="err_wrong">Feilaktige innloggings-opplysninger</string>
+  <string name="err_license">Brukeren har ikke akseptert Geocaching.com sin lisens-betingelse, så c:geo kan ikke laste cachens koordinater</string>
+  <string name="err_store">Beklager, c:geo klarte ikke å lagre cachen.</string>
+  <string name="err_drop">Beklager, c:geo klarte ikke å slette cachen.</string>
+  <string name="err_title_problem">problem</string>
+  <string name="err_detail_open">Beklager, c:geo klarte ikke å finne detaljene.</string>
+  <string name="err_detail_cache">Beklager, c:geo klarte ikke å finne den forespurte cachen. Er du sikker på at den eksisterer?</string>
+  <string name="err_detail_cache_find">Beklager, c:geo klarte ikke å finne geocachen</string>
+  <string name="err_detail_cache_find_some">Beklager, c:geo klarte ikke å finne den forespurte cachen.</string>
+  <string name="err_detail_cache_find_any">Beklager, c:geo klarte ikke finne geocacher..</string>
+  <string name="err_detail_cache_find_next">Beklager, c:geo klarte ikke å finne den neste geocachen.</string>
+  <string name="err_detail_cache_forgot">Beklager, c:geo glemte hvilken cache du ønsket.</string>
+  <string name="err_detail_cache_forgot_visit">Beklager, c:geo glemte hvilken cache du fant.</string>
+  <string name="err_detail_cache_language">c:geo klarte ikke å finne cache-detaljene. Vennligst sjekk om geocaching.com sitt språk er satt til engelsk. Desverre, forstår ikke c:geo andre språk.</string>
+  <string name="err_detail_no_spoiler">c:geo fant ingen bilder for denne cachen.</string>
+  <string name="err_detail_no_map_static">c:geo fant ingen statiske kart for denne cachen.</string>
+  <string name="err_detail_still_removing">c:geo holder fortsatt på med å slette denne cachen.</string>
+  <string name="err_detail_still_saving">c:geo holder fortsatt på med å lagre denne cachen.</string>
+  <string name="err_detail_still_refreshing">c:geo holder fortsatt på med å laste inn denne cachen på nytt.</string>
+  <string name="err_radar_title">Radar er ikke installert.</string>
+  <string name="err_radar_message">Denne funksjonen krever applikasjonen "Radar" . Burde det være installert?</string>
+  <string name="err_radar_market">c:geo klarte ikke å åpne Android Marked for å søke etter applikasjonen "Radar".</string>
+  <string name="err_radar_generic">Beklager, c:geo klarte ikke å åpne applikasjonen "Radar". Er det installert?</string>
+  <string name="err_navigation_no">c:geo klarte ikke å finne støttet navigasjon.</string>
+  <string name="err_application_no">c:geo klarte ikke å finne en passende applikasjon.</string>
+  <string name="err_auth_initialize">Beklager, c:geo klarte ikke å igangsette autoriserings-prosessen.</string>
+  <string name="err_auth_process">Autoriserings-prosessen mislyktes.</string>
+  <string name="err_cannot_log_visit">c:geo har ikke nok informasjon til å logge funn. Prøv å laste inn cachens detaljer først.</string>
+  <string name="err_init_cleared">Beklager, c:geo klarte ikke å fjerne innloggings-opplysningene.</string>
+  <string name="err_no_chaches">Beklager, c:geo klarte ikke å laste cachen eller cachenes informasjon..</string>
+  <string name="err_download_fail">Beklager. c:geo klarte ikke å laste ned cachene p.g.a.</string>
+  <string name="err_update_fail">c:geo klarte ikke å oppdatere avstanden reist</string>
+  <string name="err_list_load_fail">Beklager, c:geo klarte ikke å laste cache-listen..</string>
+  <string name="err_store_failed">Beklager, c:geo klarte ikke å lagre cachen.</string>
+  <string name="err_refresh_failed">Beklager, c:geo klarte ikke å oppdatere cachen.</string>
+  <string name="err_drop_failed">Beklager, c:geo klarte ikke å slette cachen.</string>
+  <string name="err_dwld_details_failed">Beklager, c:geo klarte ikke å laste ned cachens detaljer</string>
+  <string name="err_dwld_details_failed_reason">Beklager, c:geo klarte ikke å laste ned cachens detaljer p.g.a.</string>
+  <string name="err_load_descr_failed">Beklager, c:geo klarte ikke å åpne beskrivelsen.</string>
+
+  <string name="err_location_unknown">c:geo vet ikke hvor cachen er.</string>
+  <string name="err_tb_display">"Beklager, c:geo klarte ikke å finne trackable\'en du etterspurte. Er det virkelig en trackable?</string>
+  <string name="err_tb_details_open">Beklager, c:geo klarte ikke å åpne tracable\'ens detaljer.</string>
+  <string name="err_tb_details_download">Beklager, c:geo klarte ikke å laste ned trackable\'ens detaljer p.g.a.</string>
+  <string name="err_tb_forgot">Beklager, c:geo glemte hvilken trackable du etterspurte.</string>
+  <string name="err_tb_forgot_saw">Beklager, c:geo glemte hvilken trackable du oppdaget.</string>
+  <string name="err_tb_find">Beklager, c:geo klarte ikke å finne noen trackable\'er.</string>
+  <string name="err_tb_find_that">Beklager, c:geo kan ikke finne noen trackable\'er</string>
+
+  <string name="err_log_load_data">Beklager, c:geo klarte ikke å laste den nødvendige informasjonen for å logge funnet.</string>
+  <string name="err_log_load_data_again">Beklager, c:geo klarte ikke å laste den nødvendige informasjonen for å logge funnet. c:geo prøver på nytt.</string>
+  <string name="err_log_load_data_still">c:geo laster fortsatt informasjonen som er nødvendig for å logge funnet. Vennligst vent.</string>
+  <string name="err_log_failed_server">Beklager, c:geo klarte ikke å logge funnet fordi serveren er nede.</string>
+  <string name="err_log_post_failed">Beklager, c:geo klarte ikke å logge funnet.</string>
+  <string name="err_log_post_failed_because">Beklager, c:geo klarte ikke å logge funnet p.g.a.</string>
+
+  <string name="err_search_address_no_match">Beklager, c:geo klarte ikke å finne den forespurte adressen.</string>
+  <string name="err_search_address_forgot">Beklager, c:geo glemte adressen du prøvde å finne.</string>
+  <string name="err_search_address">Søker etter plasser</string>
+  <string name="err_parse_lat">Beklager, c:geo klarte ikke å lese breddegraden.</string>
+  <string name="err_parse_lon">Beklager, c:geo klarte ikke å lese lengdegraden.</string>
+  <string name="err_parse_bear">Beklager, c:geo klarte ikke å lese peilingen..</string>
+  <string name="err_parse_dist">Beklager, c:geo klarte ikke å lese avstanden.</string>
+
+  <string name="warn_save_nothing">Det er ingenting som kan lagres.</string>
+  <string name="warn_no_cache_coord">Det er ingen cacher som oppgir koordinater.</string>
+  <string name="warn_no_coordinates">Ingen koordinater er oppgitt.</string>
+  <string name="warn_no_keyword">Ingen stikkord er oppgitt.</string>
+  <string name="warn_no_username">Brukernavn er ikke oppgitt.</string>
+
+  <string name="warn_log_text_fill">Vennligst skriv en logg-tekst.</string>
+
+  <string name="info_altitude">Nåværende høyde</string>
+  <string name="info_distance">Avstand reist</string>
+  <string name="info_distance_cleared">Avstanden reist ble nullstilt.</string>
+  <string name="info_since">\n(siden </string>
+
+  <string name="info_log_posted">c:geo lyktes i å logge funnet.</string>
+  <string name="info_log_saved">c:geo lyktes i å lagre loggen.</string>
+  <string name="info_log_cleared">Loggen ble slettet.</string>
+  <string name="info_log_type_changed">Logg-typen har blitt forandret!</string>
+
+  <!-- location service -->
+  <string name="loc_last">Sist sett</string>
+  <string name="loc_net">Nettverk</string>
+  <string name="loc_gps">GPS</string>
+  <string name="loc_sat">Satelitt</string>
+  <string name="loc_trying">Prøver å lokalisere</string>
+  <string name="loc_no_addr">Ukjent adresse</string>
+
+  <!-- standard menu -->
+  <string name="menu_about">Om c:geo</string>
+  <string name="menu_settings">Instillinger</string>
+  <string name="menu_filter">Filter</string>
+
+  <!-- main screen -->
+  <string name="live_map_button">Live kart</string>
+  <string name="caches_nearby_button">I nærheten</string>
+  <string name="advanced_search_button">Søk</string>
+  <string name="stored_caches_button">Lagret</string>
+  <string name="any_button">Finn</string>
+  <string name="about_button">Om c:geo</string>
+  <string name="settings_button">Instillinger</string>
+  <string name="type">Type</string>
+  <string name="now_searching">Søker</string>
+
+  <!-- caches -->
+  <string name="caches_searching">Søker etter cacher</string>
+  <string name="caches_no_cache">ingen cacher</string>
+  <string name="caches_more_caches">flere cacher</string>
+  <string name="caches_more_caches_no">ingen flere cacher</string>
+  <string name="caches_downloading">Laster ned cacher...\nETA: </string>
+  <string name="caches_progress_loading_title">Laster cacher</string>
+  <string name="caches_progress_loading_text">Cachene er lagret på enheten</string>
+  <string name="caches_eta_ltm">Mindre enn ett minutt</string>
+  <string name="caches_eta_mins"> minutter</string>
+  <string name="caches_eta_min"> minutt</string>
+  <string name="caches_no_caches"> (ingen cacher)</string>
+  <string name="caches_store_offline">Lagre for offline-bruk</string>
+  <string name="caches_store_selected">Lagre valgte</string>
+  <string name="caches_stored">Lagret</string>
+  <string name="caches_on_map">Vis på kartet</string>
+  <string name="caches_select">Velg fra listen</string>
+  <string name="caches_select_mode">Velge-modus</string>
+  <string name="caches_select_mode_exit">Avslutt velge-modus</string>
+  <string name="caches_nearby">I nærheten</string>
+  <string name="caches_drop_selected">Slett valgte</string>
+  <string name="caches_drop_selected_ask">Vil du slette de valgte cachene fra enheten?</string>
+  <string name="caches_drop_all">Slett alle</string>
+  <string name="caches_drop_all_ask">Vil du slette alle cacher fra enheten?</string>
+  <string name="caches_drop_stored">Slett lagrede</string>
+  <string name="caches_refresh_selected">Oppdater valgte</string>
+  <string name="caches_refresh_all">Oppdater alle</string>
+  <string name="caches_map_cgeo">c:geo</string>
+  <string name="caches_map_locus">Locus</string>
+
+
+  <!-- about -->
+  <string name="about_changelog">Oppdateringslogg</string>
+  <string name="about_donate">Donér</string>
+  <string name="about_detail">Detaljer</string>
+  <string name="about_donation_less">Donér\nmindre</string>
+  <string name="about_donation_more">Donér til\nutviklerne</string>
+  <string name="about_contributors">Bidragsytere</string>
+
+  <!-- init -->
+  <string name="init_geocaching">Geocaching.com</string>
+  <string name="init_gcvote">GCVote.com</string>
+  <string name="init_go4cache">go 4 cache</string>
+  <string name="init_twitter">Twitter</string>
+  <string name="init_username">Brukernavn</string>
+  <string name="init_password">Passord</string>
+  <string name="init_passvote">Passord</string>
+  <string name="init_login">Sjekk innloggings-opplysninger</string>
+  <string name="init_login_popup">Logg inn</string>
+  <string name="init_login_popup_working">Logger inn på geocaching.com...</string>
+  <string name="init_login_popup_ok">Innlogging fullført.</string>
+  <string name="init_login_popup_failed">Innlogging mislyktes.</string>
+  <string name="init_login_popup_failed_reason">Innlogging mislyktes p.g.a.</string>
+  <string name="init_legal">Juridisk informasjon</string>
+  <string name="init_go4cache_connect">Koble til go 4 cache</string>
+  <string name="init_twitter_authorize">Autoriser c:geo</string>
+  <string name="init_twitter_publish">Del på Twitter når du finner cacher</string>
+  <string name="init_signature">Signatur</string>
+  <string name="init_other">Andre instillinger</string>
+  <string name="init_skin">Hvitt tema</string>
+  <string name="init_transparent">Bruk mobilens bakgrunn i menyen</string>
+  <string name="init_address">Vis adressen i menyen</string>
+  <string name="init_exclude">Ekskluder egne og funnede cacher fra kartet</string>
+  <string name="init_disabled">Ekskluder deaktiverte cacher</string>
+  <string name="init_offline">Lagre kartet for offline-bruk (små deler)</string>
+  <string name="init_units">Bruk imperialistiske måleenheter</string>
+  <string name="init_nav">Bruk Google Navigation</string>
+  <string name="init_autoload">Last full beskrivelse automatisk</string>
+  <string name="init_livelist">Vis cachers retning i listen</string>
+  <string name="init_browser">Gjør c:geo til standard cache-leser</string>
+  <string name="init_clear">Ikke husk meg</string>
+  <string name="init_cleared">c:geo fjernet innloggings-opplysningene.</string>
+
+  <!-- auth -->
+  <string name="auth_twitter">Twitter</string>
+  <string name="auth_authorize">Autoriser c:geo</string>
+  <string name="auth_start">Start autorisasjon</string>
+  <string name="auth_again">Prøv igjen</string>
+  <string name="auth_pin_hint">PIN-kode oppgitt av Twitter</string>
+  <string name="auth_finish">Fullfør</string>
+  <string name="auth_dialog_wait">venter på Twitter...</string>
+  <string name="auth_dialog_pin_title">PIN-kode</string>
+  <string name="auth_dialog_pin_message">Vennligst tast inn PIN-koden oppgitt av Twitter. Det er obligatorisk at du fullfører autorisasjonen.</string>
+  <string name="auth_dialog_completed">c:geo kan nå poste på Twitter.</string>
+
+  <!-- cache -->
+  <string name="cache_count_no">Ingen cacher</string>
+  <string name="cache_count_one">Én cache</string>
+  <string name="cache_count_more">Cacher</string>
+  <string name="cache_offline">Offline</string>
+  <string name="cache_offline_refresh">Oppdater</string>
+  <string name="cache_offline_drop">Slett</string>
+  <string name="cache_offline_store">Lagre</string>
+  <string name="cache_offline_stored">Lagret på enheten for</string>
+  <string name="cache_offline_not_ready">Kan ikke brukes\noffline (ikke lagret)</string>
+  <string name="cache_offline_time_about"></string>
+  <string name="cache_offline_time_mins">minutter siden</string>
+  <string name="cache_offline_time_mins_few">en liten stund siden</string>
+  <string name="cache_offline_time_hour">én time siden</string>
+  <string name="cache_offline_time_hours">mange timer siden</string>
+  <string name="cache_offline_time_days">mange dager siden</string>
+  <string name="cache_premium">Premium</string>
+  <string name="cache_attributes">Attributer</string>
+  <string name="cache_inventory">Inventar</string>
+  <string name="cache_log_offline">Offline logg</string>
+  <string name="cache_description">Beskrivelse</string>
+  <string name="cache_description_long">Full beskrivelse</string>
+  <string name="cache_waypoints">Veipunkter</string>
+  <string name="cache_waypoints_add">Legg til veipunkter</string>
+  <string name="cache_hint">Hint</string>
+  <string name="cache_logs">Loggbok</string>
+  <string name="cache_dialog_loading_details">Laster cachens detaljer...</string>
+  <string name="cache_dialog_loading_description">Laster cachens fulle beskrivelse...</string>
+  <string name="cache_dialog_offline_save_title">Offline</string>
+  <string name="cache_dialog_offline_save_message">Lagrer cachen for offline-bruk...</string>
+  <string name="cache_dialog_offline_drop_title">Offline</string>
+  <string name="cache_dialog_offline_drop_message">Sletter cachen fra enheten...</string>
+  <string name="cache_dialog_refresh_title">Oppdater</string>
+  <string name="cache_dialog_refresh_message">Laster cachens detaljer på nytt...</string>
+  <string name="cache_menu_navigate">Navigér</string>
+  <string name="cache_menu_compass">Kompass</string>
+  <string name="cache_menu_tbt">Punktvis navigasjon</string>
+  <string name="cache_menu_radar">Radar</string>
+  <string name="cache_menu_map">Vis på kartet</string>
+  <string name="cache_menu_map_ext">Vis på utvidet kart</string>
+  <string name="cache_menu_map_static">Statisk kart</string>
+  <string name="cache_menu_browser">Åpne med web-leseren</string>
+  <string name="cache_menu_visit">Logg funn</string>
+  <string name="cache_menu_spoilers">Bilder</string>
+  <string name="cache_menu_around">Cacher i nærheten</string>
+  <string name="cache_menu_event">Eksporter til kalender</string>
+  <string name="cache_menu_details">Detaljer</string>
+  <string name="cache_status">Status</string>
+  <string name="cache_status_offline_log">Logg lagret</string>
+  <string name="cache_status_found">Funnet</string>
+  <string name="cache_status_archived">Arkivert</string>
+  <string name="cache_status_disabled">Deaktivert</string>
+  <string name="cache_status_premium">Kun for premium-medlemmer</string>
+  <string name="cache_geocode">GC-kode</string>
+  <string name="cache_name">Navn</string>
+  <string name="cache_type">Type</string>
+  <string name="cache_distance">Avstand</string>
+  <string name="cache_difficulty">Vanskelighet</string>
+  <string name="cache_terrain">Terreng</string>
+  <string name="cache_rating">Rangering</string>
+  <string name="cache_owner">Eier</string>
+  <string name="cache_hidden">Publisert</string>
+  <string name="cache_event">Dato</string>
+  <string name="cache_location">Lokasjon</string>
+  <string name="cache_coordinates">Koordinater</string>
+  <string name="cache_calendars">Velg kalender</string>
+  <string name="cache_gpx_import">Importer GPX-fil</string>
+
+  <!-- gpx -->
+  <string name="gpx_import_searching_in">Søker etter *.GPX-filer</string>
+  <string name="gpx_import_loading_stored">Laster cacher fra *.GPX-filer\nlagret:</string>
+  <string name="gpx_import_no_files">Beklager, c:geo fant ingen *.GPX-filer.</string>
+  <string name="gpx_import_caches_imported">Cacher importert</string>
+  <string name="gpx_import_searching">Søker etter *.GPX-filer</string>
+  <string name="gpx_import_loading">Laster cacher fra .*.GPX-fil</string>
+  <string name="gpx_import_title">Importer GPX</string>
+  <string name="gpx_import_title_reading_file">Leser fil</string>
+  <string name="gpx_import_title_searching">Søker</string>
+  <string name="gpx_import_title_caches_imported">Resultat</string>
+
+  <!-- event -->
+  <string name="event_success">Hendelse-cache lagt til i kalenderen</string>
+  <string name="event_fail">c:geo klarte ikke å legge hendelse-cachen til i kalenderen</string>
+
+  <!-- popup -->
+  <string name="popup_more">Mer detaljer</string>
+  <string name="popup_offline">Offline</string>
+
+  <!-- waypoint -->
+  <string name="waypoint_custom">Eget veipunkt</string>
+  <string name="waypoint_my_coordinates">Mine koordinater</string>
+  <string name="waypoint_bearing">Peiling</string>
+  <string name="waypoint_distance">Distanse</string>
+  <string name="waypoint_name">Navn</string>
+  <string name="waypoint_edit">Rediger</string>
+  <string name="waypoint_delete">Slett</string>
+  <string name="waypoint_edit_title">Rediger veipunkt</string>
+  <string name="waypoint_add_title">Add waypoint</string>
+  <string name="waypoint_note">Note</string>
+  <string name="waypoint_save">Save</string>
+
+  <!-- visit -->
+  <string name="visit_tweet">Del dette funnet på Twitter</string>
+
+  <!-- map -->
+  <string name="map_map">Kart</string>
+  <string name="map_live">Live kart</string>
+  <string name="map_view_satellite">Satelitt-kart</string>
+  <string name="map_view_map">Vanlig kart</string>
+  <string name="map_trail_show">Vis spor</string>
+  <string name="map_trail_hide">Skjul spor</string>
+  <string name="map_live_enable">Aktiver live</string>
+  <string name="map_live_disable">Deaktiver live</string>
+
+  <!-- search -->
+  <string name="search_coordinates">Koordinater</string>
+  <string name="search_coordinates_button">Søk med koordinater</string>
+  <string name="search_address">Adresse</string>
+  <string name="search_address_button">Søk med adresse</string>
+  <string name="search_gc">Geokode</string>
+  <string name="search_gc_button">Søk med geokode</string>
+  <string name="search_kw">Nøkklord</string>
+  <string name="search_kw_prefill">Nøkkelord</string>
+  <string name="search_kw_button">Søk med nøkkelord</string>
+  <string name="search_kw_caches">Cacher med nøkkelord</string>
+  <string name="search_caches_found_by">Cacher funnet av</string>
+  <string name="search_caches_hidden_by">Cacher gjemt av</string>
+  <string name="search_fbu">Funnet av bruker</string>
+  <string name="search_fbu_prefill">Brukernavn</string>
+  <string name="search_fbu_button">Søk med brukernavn</string>
+  <string name="search_hbu">Gjemt av brukere</string>
+  <string name="search_hbu_prefill">Eier</string>
+  <string name="search_hbu_button">Søk med</string>
+  <string name="search_tb">Trackable</string>
+  <string name="search_tb_hint">Trackable-identifisering</string>
+  <string name="search_tb_button">Søk etter trackable</string>
+  <string name="search_destination">Lokaliser ved hjelp av koordinater</string>
+  <string name="search_direction_rel">Fra denne plassen</string>
+  <string name="search_lat">Peiling</string>
+  <string name="search_lon">Lengdegrad</string>
+  <string name="search_caches">Søk etter cacher</string>
+  <string name="search_caches_near">Cacher i nærheten</string>
+  <string name="search_address_started">Søker etter steder</string>
+  <string name="search_address_result">Fant plasser</string>
+
+  <!-- trackable -->
+  <string name="trackable">Trackable</string>
+  <string name="trackable_details_loading">Laster trackable\'ens detaljer</string>
+  <string name="trackable_log_touch">Log touch</string>
+  <string name="trackable_browser_open">Åpne i web-leser</string>
+  <string name="trackable_goal">Mål</string>
+  <string name="trackable_details">Detailjer</string>
+  <string name="trackable_image">Bilder</string>
+  <string name="trackable_code">TB-kode</string>
+  <string name="trackable_name">Navn</string>
+  <string name="trackable_type">Type</string>
+  <string name="trackable_owner">Eier</string>
+  <string name="trackable_spotted">Oppdaget</string>
+  <string name="trackable_origin">Start</string>
+  <string name="trackable_unknown">Ukjent</string>
+  <string name="trackable_released">Sluppet</string>
+  <string name="trackable_touch">Touch</string>
+
+  <!-- navigation -->
+  <string name="navigation">Navigasjon</string>
+  <string name="compass_title">Kompass</string>
+  <string name="use_gps">Bruk GPS</string>
+  <string name="use_compass">Bruk kompass</string>
+  <string name="destination_select">Velg destinasjon</string>
+  <string name="destination_set">Sett destinasjon</string>
+
+  <!-- license -->
+  <string name="license">Lisens</string>
+  <string name="license_show">Vis lisens</string>
+  <string name="license_dismiss">Dismiss</string>
+
+  <!-- next things -->
+  <string name="legal_note">For å bruke tjenestene til geocaching.com, må brukeren samtykke i vilkårene og betingelsene til <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak\'s ansvarsfraskrivelse</a></string>
+  <string name="author">utvikler: <a href="http://carnero.cc/">carnero</a></string>
+  <string name="support">e-post adresse: <a href="mailto:carnero@carnero.cc">carnero@carnero.cc</a></string>
+  <string name="website">web-side: <a href="http://cgeo.carnero.cc/">cgeo.carnero.cc</a></string>
+  <string name="facebook">facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
+  <string name="about_go4cache">Tjenesten <b>Go 4 cache</b> gjør det mulig for deg å se andre geocachere på kartet (i <b>c:geo</b> eller i web-leseren). Det kan for eksempel vise hvilken cache de er ute etter. Ved å koble til <b>Go 4 cache</b> får <b>c:geo</b> din tillatelse til oppgi dine koordinater til andre brukere av <b>Go 4 cache</b>, men bare mens <b>c:geo</b> kjører.</string>
+  <string name="about_twitter">Ønsker du at <b>c:geo</b> skal poste en status på Twitter hver gang du logger ett funn via <b>c:geo</b>?</string>
+  <string name="about_auth_1">Den følgende prosessen tillater <b>c:geo</b> tilgang til Twitter - hvis bruker samtykker.</string>
+  <string name="about_auth_2">Trykk på \"Start autorisasjon\" knappen for å starte prosessen. Denne prosessen vil åpne Twitter i web-leseren. Logg inn, og tillat <b>c:geo</b> tilgang til kontoen din. Hvis du aksepterer, vil Twitter oppgi en numerisk PIN-kode. Denne PIN-koden må så limes inn i <b>c:geo</b>. Verre er det ikke.</string>
+
+</resources>

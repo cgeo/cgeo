@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/mainscreen"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_gravity="center" >
+	<LinearLayout style="@style/action_bar">
+		<ImageView style="@style/action_bar_icon_cgeo"
+				android:onClick="showAbout" />
+		<View style="@style/action_bar_separator" />
+		<TextView style="@style/action_bar_title" />
+		<ImageView style="@style/action_bar_action"
+				android:src="@drawable/actionbar_search"
+				android:onClick="goSearch" />
+		<View style="@style/action_bar_separator" />
+		<ImageView style="@style/action_bar_action"
+				android:src="@drawable/actionbar_manual"
+				android:onClick="goManual" />
+	</LinearLayout>
+	<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="45dip"
+			android:layout_centerInParent="true"
+			android:gravity="center"
+			android:orientation="vertical" >
+		<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="fill_parent"
+				android:layout_margin="4dip"
+				android:gravity="center_horizontal"
+				android:orientation="horizontal" >
+			<LinearLayout android:id="@+id/map"
+					android:layout_width="74dip"
+					android:layout_height="wrap_content"
+					android:layout_margin="4dip"
+					android:orientation="vertical" >
+				<View
+						style="@style/icon_mainscreen"
+						android:background="@drawable/main_live" />
+				<TextView
+						style="@style/icon_mainscreen_text"
+						android:text="@string/live_map_button" />
+			</LinearLayout>
+			<LinearLayout android:id="@+id/nearest"
+					android:layout_width="74dip"
+					android:layout_height="wrap_content"
+					android:layout_margin="4dip"
+					android:orientation="vertical" >
+				<View
+						style="@style/icon_mainscreen"
+						android:background="@drawable/main_nearby" />
+				<TextView
+						style="@style/icon_mainscreen_text"
+						android:text="@string/caches_nearby_button" />
+			</LinearLayout>
+			<RelativeLayout android:id="@+id/search_offline"
+					android:layout_width="74dip"
+					android:layout_height="wrap_content"
+					android:layout_margin="4dip" >
+				<TextView android:id="@+id/offline_count"
+						style="@style/icon_mainscreen_count" />
+				<LinearLayout
+						android:layout_width="74dip"
+						android:layout_height="wrap_content"
+						android:orientation="vertical"
+						android:layout_alignParentTop="true" >
+					<View
+							style="@style/icon_mainscreen"
+							android:background="@drawable/main_stored" />
+					<TextView
+							style="@style/icon_mainscreen_text"
+							android:text="@string/stored_caches_button" />
+				</LinearLayout>
+			</RelativeLayout>
+		</LinearLayout>
+		<LinearLayout
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:layout_margin="4dip"
+				android:gravity="center_horizontal"
+				android:orientation="horizontal" >
+			<LinearLayout android:id="@+id/advanced_button"
+					android:layout_width="74dip"
+					android:layout_height="wrap_content"
+					android:layout_margin="4dip"
+					android:orientation="vertical" >
+				<View
+						style="@style/icon_mainscreen"
+						android:background="@drawable/main_search" />
+				<TextView
+						style="@style/icon_mainscreen_text"
+						android:text="@string/advanced_search_button" />
+			</LinearLayout>
+			<LinearLayout android:id="@+id/any_button"
+					android:layout_width="74dip"
+					android:layout_height="wrap_content"
+					android:layout_margin="4dip"
+					android:orientation="vertical" >
+				<View
+						style="@style/icon_mainscreen"
+						android:background="@drawable/main_any" />
+				<TextView
+						style="@style/icon_mainscreen_text"
+						android:text="@string/any_button" />
+			</LinearLayout>
+			<LinearLayout android:id="@+id/filter_button"
+					android:layout_width="74dip"
+					android:layout_height="wrap_content"
+					android:layout_margin="4dip"
+					android:orientation="vertical" >
+				<View
+						style="@style/icon_mainscreen"
+						android:background="@drawable/main_filter" />
+				<TextView android:id="@+id/filter_button_title"
+						style="@style/icon_mainscreen_text"
+						android:text="@null" />
+			</LinearLayout>
+		</LinearLayout>
+	</LinearLayout>
+<!-- ** -->
+	<RelativeLayout android:id="@+id/helper"
+			android:visibility="gone"
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:layout_marginLeft="16dip"
+			android:layout_marginRight="16dip"
+			android:layout_marginBottom="48dip"
+			android:background="@drawable/helper_bcg" >
+		<ImageView
+				android:layout_width="32dip"
+				android:layout_height="32dip"
+				android:layout_alignParentLeft="true"
+				android:layout_gravity="center"
+				android:gravity="center"
+				android:layout_margin="4dip"
+				android:scaleType="center"
+				android:src="@drawable/actionbar_manual" />
+		<TextView
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_alignParentLeft="true"
+				android:layout_marginLeft="34dip"
+				android:layout_gravity="center"
+				android:gravity="center"
+				android:padding="4dip"
+				android:textSize="14dip"
+				android:textColor="@color/text_icon"
+				android:text="@string/helper" />
+	</RelativeLayout>
+<!-- ** -->
+	<LinearLayout
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:layout_marginRight="6dip"
+			android:layout_marginLeft="6dip"
+			android:orientation="vertical">
+		<TextView android:id="@+id/nav_location"
+				style="@style/location_current"
+				android:text="@string/loc_trying" />
+		<RelativeLayout
+				android:layout_width="fill_parent"
+				android:layout_height="16dip" >
+			<TextView android:id="@+id/nav_type"
+					style="@style/location_current_type" />
+			<TextView android:id="@+id/nav_accuracy"
+					style="@style/location_current_accuracy" />
+			<TextView android:id="@+id/nav_satellites"
+					style="@style/location_current_satellites" />
+		</RelativeLayout>
+	</LinearLayout>
+</RelativeLayout>
