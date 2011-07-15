@@ -1,19 +1,26 @@
 package cgeo.geocaching.mapcommon;
 
-import gnu.android.app.appmanualclient.*;
+import gnu.android.app.appmanualclient.AppManualReaderClient;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import java.util.ArrayList;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.ImageView;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
@@ -34,15 +41,6 @@ import cgeo.geocaching.mapinterfaces.MapControllerImpl;
 import cgeo.geocaching.mapinterfaces.MapFactory;
 import cgeo.geocaching.mapinterfaces.MapViewImpl;
 import cgeo.geocaching.mapinterfaces.UserOverlayItemImpl;
-
-import android.util.Log;
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.ImageView;
-import cgeo.geocaching.cgSearch;
-
-import java.util.HashMap;
-import java.util.Locale;
 
 public class cgeomap extends MapBase {
 

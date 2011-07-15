@@ -1,6 +1,7 @@
 package cgeo.geocaching.mapsforge;
 
 import org.mapsforge.android.maps.GeoPoint;
+import org.mapsforge.android.maps.MapDatabase;
 import org.mapsforge.android.maps.MapView;
 import org.mapsforge.android.maps.MapViewMode;
 import org.mapsforge.android.maps.Overlay;
@@ -136,6 +137,21 @@ public class mfMapView extends MapView implements MapViewImpl {
 	public void setBuiltinScale(boolean b) {
 		setScaleBar(b);
 	}
+	
+	/**
+	 * Checks whether a given file is a valid map file.
+	 * 
+	 * @param file
+	 *            the path to the map file that should be tested.
+	 * @return true if the file is a valid map file, false otherwise.
+	 */
+	public static boolean isValidMapFile(String file) {
+		MapDatabase testDatabase = new MapDatabase();
+		boolean isValid = testDatabase.openFile(file);
+		testDatabase.closeFile();
+		return isValid;
+	}
+
 
 	@Override
 	public void setMapSource(cgSettings settings) {

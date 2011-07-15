@@ -6,6 +6,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 /**
  * Base class for the map activity. Delegates base class calls to the
@@ -13,7 +14,7 @@ import android.view.MenuItem;
  * @author rsudev
  *
  */
-public class MapBase {
+public abstract class MapBase {
 
 	ActivityImpl mapActivity;
 	
@@ -61,4 +62,8 @@ public class MapBase {
 		return mapActivity.superOnOptionsItemSelected(item);
 	}
 	
+	public abstract void goHome(View view);
+
+	public abstract void goManual(View view);
+
 }

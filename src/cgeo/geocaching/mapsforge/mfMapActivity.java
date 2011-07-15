@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import cgeo.geocaching.mapcommon.MapBase;
 import cgeo.geocaching.mapcommon.cgeomap;
 import cgeo.geocaching.mapinterfaces.ActivityImpl;
@@ -92,5 +93,15 @@ public class mfMapActivity extends MapActivity implements ActivityImpl {
 	@Override
 	public boolean superOnPrepareOptionsMenu(Menu menu) {
 		return super.onPrepareOptionsMenu(menu);
+	}
+	
+	// close activity and open homescreen
+	public void goHome(View view) {
+		mapBase.goHome(view);
+	}
+
+	// open manual entry
+	public void goManual(View view) {
+		mapBase.goManual(view);
 	}
 }

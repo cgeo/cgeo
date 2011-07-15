@@ -4,8 +4,8 @@
   <string name="app_name_compass">c:geo compass</string>
 
   <!-- keys -->
-  <string name="maps_api_keyx">0_xEJVmqy36u8h1HaFz1YeOknLa7fozNSKI4lHg</string> <!-- dev -->
-  <string name="maps_api_key">0_xEJVmqy36vnWDcOuXUXTpS6JMk-OuN3w1BfJw</string> <!-- market -->
+  <string name="maps_api_key">0_xEJVmqy36u8h1HaFz1YeOknLa7fozNSKI4lHg</string> <!-- dev -->
+  <string name="maps_api_keyx">0_xEJVmqy36vnWDcOuXUXTpS6JMk-OuN3w1BfJw</string> <!-- market -->
 
   <!-- basics -->
   <string name="cache">Cache</string>
@@ -834,13 +834,14 @@
 
   <!-- changelog -->
   <string name="changelog">\n
-    <b>2.26</b> (__.07.2011)\n
+    <b>2.26</b> (once in 2011)\n
 	· new: Autoinsert of signature\n
 	· new: Send to c:geo from web\n
 	· fix: Live map, better loading\n
 	· fix: Overwriting coords with wrong ones\n
 	· fix: Loading caches on Live map\n
 	· fix: GCVote issues\n
+	· fix: ForceClose on maps (home, help)\n
 	\n
     <b>2.25</b> (11.06.2011)\n
 	· fix: Performance &amp; usability\n
