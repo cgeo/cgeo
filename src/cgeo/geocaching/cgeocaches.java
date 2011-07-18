@@ -35,6 +35,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import cgeo.geocaching.filter.cgFilter;
 import cgeo.geocaching.filter.cgFilterBySize;
 import cgeo.geocaching.filter.cgFilterByTrackables;
 import cgeo.geocaching.filter.cgFilterByType;
@@ -921,63 +922,65 @@ public class cgeocaches extends ListActivity {
 	public boolean onContextItemSelected(MenuItem item) {
 		final int id = item.getItemId();
 		ContextMenu.ContextMenuInfo info = item.getMenuInfo();
-
 		if (info == null) {
+			cgFilter filter = null;
 			if(adapter != null){
 				if (id == 8) {
-					adapter.setFilter(new cgFilterBySize(res.getString(R.string.caches_filter_size_micro)));
+					adapter.setFilter(filter = new cgFilterBySize(res.getString(R.string.caches_filter_size_micro)));
 				} else if (id == 9) {
-					adapter.setFilter(new cgFilterBySize(res.getString(R.string.caches_filter_size_small)));
+					adapter.setFilter(filter = new cgFilterBySize(res.getString(R.string.caches_filter_size_small)));
 				} else if (id == 10) {
-					adapter.setFilter(new cgFilterBySize(res.getString(R.string.caches_filter_size_regular)));
+					adapter.setFilter(filter = new cgFilterBySize(res.getString(R.string.caches_filter_size_regular)));
 				} else if (id == 11) {
-					adapter.setFilter(new cgFilterBySize(res.getString(R.string.caches_filter_size_large)));
+					adapter.setFilter(filter = new cgFilterBySize(res.getString(R.string.caches_filter_size_large)));
 				} else if (id == 12) {
-					adapter.setFilter(new cgFilterBySize(res.getString(R.string.caches_filter_size_other)));
+					adapter.setFilter(filter = new cgFilterBySize(res.getString(R.string.caches_filter_size_other)));
 				} else if (id == 13) {
-					adapter.setFilter(new cgFilterBySize(res.getString(R.string.caches_filter_size_virtual)));
+					adapter.setFilter(filter = new cgFilterBySize(res.getString(R.string.caches_filter_size_virtual)));
 				} else if (id == 14) {
-					adapter.setFilter(new cgFilterBySize(res.getString(R.string.caches_filter_size_notchosen)));
+					adapter.setFilter(filter = new cgFilterBySize(res.getString(R.string.caches_filter_size_notchosen)));
 				} else if (id == 15) {
-					adapter.setFilter(new cgFilterByType("traditional"));
+					adapter.setFilter(filter = new cgFilterByType("traditional"));
 				} else if (id == 16) {
-					adapter.setFilter(new cgFilterByType("multi"));
+					adapter.setFilter(filter = new cgFilterByType("multi"));
 				} else if (id == 17) {
-					adapter.setFilter(new cgFilterByType("mystery"));
+					adapter.setFilter(filter = new cgFilterByType("mystery"));
 				} else if (id == 18) {
-					adapter.setFilter(new cgFilterByType("letterbox"));
+					adapter.setFilter(filter = new cgFilterByType("letterbox"));
 				} else if (id == 19) {
-					adapter.setFilter(new cgFilterByType("event"));
+					adapter.setFilter(filter = new cgFilterByType("event"));
 				} else if (id == 20) {
-					adapter.setFilter(new cgFilterByType("mega"));
+					adapter.setFilter(filter = new cgFilterByType("mega"));
 				} else if (id == 21) {
-					adapter.setFilter(new cgFilterByType("earth"));
+					adapter.setFilter(filter = new cgFilterByType("earth"));
 				} else if (id == 22) {
-					adapter.setFilter(new cgFilterByType("cito"));
+					adapter.setFilter(filter = new cgFilterByType("cito"));
 				} else if (id == 23) {
-					adapter.setFilter(new cgFilterByType("webcam"));
+					adapter.setFilter(filter = new cgFilterByType("webcam"));
 				} else if (id == 24) {
-					adapter.setFilter(new cgFilterByType("virtual"));
+					adapter.setFilter(filter = new cgFilterByType("virtual"));
 				} else if (id == 25) {
-					adapter.setFilter(new cgFilterByType("wherigo"));
+					adapter.setFilter(filter = new cgFilterByType("wherigo"));
 				} else if (id == 26) {
-					adapter.setFilter(new cgFilterByType("lostfound"));
+					adapter.setFilter(filter = new cgFilterByType("lostfound"));
 				} else if (id == 27) {
-					adapter.setFilter(new cgFilterByType("ape"));
+					adapter.setFilter(filter = new cgFilterByType("ape"));
 				} else if (id == 28) {
-					adapter.setFilter(new cgFilterByType("gchq"));
+					adapter.setFilter(filter = new cgFilterByType("gchq"));
 				} else if (id == 29) {
-					adapter.setFilter(new cgFilterByType("gps"));
-				} else {
-					return false;	
+					adapter.setFilter(filter = new cgFilterByType("gps"));
 				}
+			} 
+			if(filter != null){
 				return true;
-			} else {
-				// restore menu info for sub menu items, see https://code.google.com/p/android/issues/detail?id=7139
-				info = lastMenuInfo;
-				lastMenuInfo = null;
-				return false;				
 			}
+			if(lastMenuInfo == null){
+				return false;
+			}
+
+			// restore menu info for sub menu items, see https://code.google.com/p/android/issues/detail?id=7139
+			info = lastMenuInfo;
+			lastMenuInfo = null;
 		}
 
 		AdapterContextMenuInfo adapterInfo = null;
