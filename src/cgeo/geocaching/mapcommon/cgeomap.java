@@ -977,7 +977,7 @@ public class cgeomap extends MapBase {
 				//2. fetch and draw(in another thread) and then insert into the db caches from geocaching.com - dont draw/insert if exist in memory?
 				
 				// stage 1 - pull and render from the DB only
-				if (settings.maplive == 0) {
+				if (!live || settings.maplive == 0) {
 					searchId = app.getStoredInViewport(centerLat, centerLon, spanLat, spanLon, settings.cacheType);
 				} else {
 					searchId = app.getCachedInViewport(centerLat, centerLon, spanLat, spanLon, settings.cacheType);
@@ -1022,7 +1022,7 @@ public class cgeomap extends MapBase {
 				// stage 2 - pull and render from geocaching.com
 				//this should just fetch and insert into the db _and_ be cancel-able if the viewport changes
 
-				if (settings.maplive >= 1) {
+				if (live && settings.maplive >= 1) {
 					if (downloadThread != null && downloadThread.isWorking()) {
 						downloadThread.stopIt();
 					}
