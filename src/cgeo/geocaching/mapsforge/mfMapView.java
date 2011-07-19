@@ -146,10 +146,7 @@ public class mfMapView extends MapView implements MapViewImpl {
 	 * @return true if the file is a valid map file, false otherwise.
 	 */
 	public static boolean isValidMapFile(String file) {
-		MapDatabase testDatabase = new MapDatabase();
-		boolean isValid = testDatabase.openFile(file);
-		testDatabase.closeFile();
-		return isValid;
+		return MapDatabase.isValidMapFile(file);
 	}
 
 
