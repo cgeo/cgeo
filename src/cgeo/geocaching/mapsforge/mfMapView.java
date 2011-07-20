@@ -138,18 +138,6 @@ public class mfMapView extends MapView implements MapViewImpl {
 		setScaleBar(b);
 	}
 	
-	/**
-	 * Checks whether a given file is a valid map file.
-	 * 
-	 * @param file
-	 *            the path to the map file that should be tested.
-	 * @return true if the file is a valid map file, false otherwise.
-	 */
-	public static boolean isValidMapFile(String file) {
-		return MapDatabase.isValidMapFile(file);
-	}
-
-
 	@Override
 	public void setMapSource(cgSettings settings) {
 
@@ -163,7 +151,7 @@ public class mfMapView extends MapView implements MapViewImpl {
 				setMapViewMode(MapViewMode.OSMARENDER_TILE_DOWNLOAD);
 				break;
 			case mapsforgeOffline:
-				if (isValidMapFile(settings.getMapFile())) {
+				if (MapDatabase.isValidMapFile(settings.getMapFile())) {
 					setMapViewMode(MapViewMode.CANVAS_RENDERER);
 					super.setMapFile(settings.getMapFile());
 				}

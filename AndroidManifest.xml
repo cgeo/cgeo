@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-		android:versionCode="2"
-		android:versionName="2.26 RC1a"
+		android:versionName="2.26 RC3"
+		android:versionCode="4"
 		package="cgeo.geocaching"
 		name="c:geo"
-		android:installLocation="auto" >
+		android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="3" android:targetSdkVersion="8" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
