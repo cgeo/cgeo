@@ -35,7 +35,7 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 		@Override
 		public void handleMessage(Message msg) {
 			if (msg.obj != null && waitDialog != null) {
-				waitDialog.setMessage(res.getString(R.string.file_searching_in) + " " + (String) msg.obj);
+				waitDialog.setMessage(getRes().getString(R.string.file_searching_in) + " " + (String) msg.obj);
 			}
 		}
 	};
@@ -49,7 +49,7 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 						waitDialog.dismiss();
 					}
 
-					warning.showToast(res.getString(R.string.file_list_no_files));
+					getWarning().showToast(getRes().getString(R.string.file_list_no_files));
 
 					finish();
 					return;
@@ -80,20 +80,20 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 		res = this.getResources();
 		app = (cgeoapplication) this.getApplication();
 		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
-		base = new cgBase(app, settings, getSharedPreferences(cgSettings.preferences, 0));
+		base = new cgBase(getApp(), getSettings(), getSharedPreferences(cgSettings.preferences, 0));
 		warning = new cgWarning(this);
 
 		// set layout
-		if (settings.skin == 1) {
+		if (getSettings().skin == 1) {
 			setTheme(R.style.light);
 		} else {
 			setTheme(R.style.dark);
 		}
 		setContentView(R.layout.gpx);
-		base.setTitle(activity, res.getString(R.string.gpx_import_title));
+		getBase().setTitle(getActivity(), getRes().getString(R.string.gpx_import_title));
 
 		// google analytics
-		base.sendAnal(activity, "/file-import");
+		getBase().sendAnal(getActivity(), "/file-import");
 
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -107,8 +107,8 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 
 		waitDialog = ProgressDialog.show(
 				this,
-				res.getString(R.string.file_title_searching),
-				res.getString(R.string.file_searching),
+				getRes().getString(R.string.file_title_searching),
+				getRes().getString(R.string.file_searching),
 				true,
 				true,
 				new DialogInterface.OnCancelListener() {
@@ -132,7 +132,7 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 	public void onResume() {
 		super.onResume();
 		
-		settings.load();
+		getSettings().load();
 	}
 	
 	final protected cgSettings getSettings() {
@@ -255,6 +255,26 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 	}
 
 	public void goHome(View view) {
-		base.goHome(activity);
+		getBase().goHome(getActivity());
+	}
+
+	protected cgeoapplication getApp() {
+		return app;
+	}
+
+	protected cgBase getBase() {
+		return base;
+	}
+
+	protected cgWarning getWarning() {
+		return warning;
+	}
+
+	protected Activity getActivity() {
+		return activity;
+	}
+
+	protected Resources getRes() {
+		return res;
 	}
 }
