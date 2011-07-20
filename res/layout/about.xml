@@ -69,18 +69,18 @@
 					android:gravity="center_horizontal" >
 				<Button style="@style/button"
 						android:id="@+id/donation_more"
-						android:layout_width="180dip"
+						android:layout_width="280dip"
 						android:singleLine="false"
 						android:lines="2"
 						android:onClick="donateMore"
 						android:text="@string/about_donation_more" />
-				<Button style="@style/button"
+				<!-- Button style="@style/button"
 						android:id="@+id/donation_less"
 						android:layout_width="100dip"
 						android:singleLine="false"
 						android:lines="2"
 						android:onClick="donateLess"
-						android:text="@string/about_donation_less" />
+						android:text="@string/about_donation_less" /-->
 			</LinearLayout>
 			<RelativeLayout style="@style/separator_horizontal_layout" >
 				<View style="@style/separator_horizontal" />

@@ -689,6 +689,9 @@ public class cgeomap extends MapBase {
 				if (geo.latitudeNow != null && geo.longitudeNow != null) {
 					if (followMyLocation == true) {
 						myLocationInMiddle();
+					} else {
+						// move blue arrow
+						mapView.invalidate();
 					}
 				}
 
@@ -977,10 +980,15 @@ public class cgeomap extends MapBase {
 				//2. fetch and draw(in another thread) and then insert into the db caches from geocaching.com - dont draw/insert if exist in memory?
 				
 				// stage 1 - pull and render from the DB only
-				if (settings.maplive == 0) {
-					searchId = app.getStoredInViewport(centerLat, centerLon, spanLat, spanLon, settings.cacheType);
-				} else {
-					searchId = app.getCachedInViewport(centerLat, centerLon, spanLat, spanLon, settings.cacheType);
+				
+				if (fromDetailIntent) {
+					searchId = searchIdIntent;
+				} else {				
+					if (!live || settings.maplive == 0) {
+						searchId = app.getStoredInViewport(centerLat, centerLon, spanLat, spanLon, settings.cacheType);
+					} else {
+						searchId = app.getCachedInViewport(centerLat, centerLon, spanLat, spanLon, settings.cacheType);
+					}
 				}
 				
 				if (searchId != null) {
@@ -995,6 +1003,30 @@ public class cgeomap extends MapBase {
 				}
 				
 				caches = app.getCaches(searchId);
+				
+				//if in live map and stored caches are found / disables are also shown.
+				if (live && settings.maplive >= 1) {
+					// I know code is crude, but temporary fix
+					int i = 0;
+					boolean excludeMine = settings.excludeMine > 0;
+					boolean excludeDisabled = settings.excludeDisabled > 0;
+					
+					while (i < caches.size())
+					{
+						boolean remove = false;
+						if ((caches.get(i).found) && (excludeMine))
+							remove = true;
+						if ((caches.get(i).own) && (excludeMine))
+							remove = true;
+						if ((caches.get(i).disabled) && (excludeDisabled))
+							remove = true;
+						if (remove)
+							caches.remove(i);
+						else 
+							i++;
+					}
+					
+				}
 
 				if (stop) {
 					displayHandler.sendEmptyMessage(0);
@@ -1022,7 +1054,7 @@ public class cgeomap extends MapBase {
 				// stage 2 - pull and render from geocaching.com
 				//this should just fetch and insert into the db _and_ be cancel-able if the viewport changes
 
-				if (settings.maplive >= 1) {
+				if (live && settings.maplive >= 1) {
 					if (downloadThread != null && downloadThread.isWorking()) {
 						downloadThread.stopIt();
 					}
@@ -1171,7 +1203,7 @@ public class cgeomap extends MapBase {
 						if (cacheOne.latitude == null && cacheOne.longitude == null) {
 							continue;
 						}
-
+						
 						final cgCoord coord = new cgCoord(cacheOne);
 						coordinates.add(coord);
 
