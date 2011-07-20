@@ -494,11 +494,21 @@
 					android:layout_width="fill_parent"
 					android:layout_height="wrap_content"
 					android:prompt="@string/init_mapsource_select" />
-			<EditText style="@style/edittext"
-					android:id="@+id/mapfile"
-					android:singleLine="true"
-					android:lines="1"
-					android:scrollHorizontally="true" />
+			<LinearLayout
+					android:id="@+id/init_mapfilegroup"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:orientation="horizontal" >
+				<Button style="@style/button"
+						android:id="@+id/select_mapfile"
+						android:text="@string/init_select_mapfile"
+						android:layout_width="wrap_content" />
+				<EditText style="@style/edittext"
+						android:id="@+id/mapfile"
+						android:singleLine="true"
+						android:lines="1"
+						android:scrollHorizontally="true" />
+			</LinearLayout>
 <!-- ** -->
 			<RelativeLayout style="@style/separator_horizontal_layout" >
 				<View style="@style/separator_horizontal" />

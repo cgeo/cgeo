@@ -402,6 +402,7 @@
   <string name="init_mapsources">Map Sources</string> <!-- since: 2.26 RC3 -->
   <string name="init_mapsources_description">Here you can select the source for your maps. As an alternative to Google maps various OpenStreetMap styles are available and even off line map files (see http://code.google.com/p/mapsforge/ for details).</string> <!-- since: 2.26 RC3 -->
   <string name="init_mapsource_select">Select map source</string>
+  <string name="init_select_mapfile">...</string>
   
   <!-- map sources -->
   <string-array name="map_sources">
@@ -511,6 +512,12 @@
   <string name="cache_spoiler_images_loading">Loading spoiler images...</string>
   <string name="cache_log_types">Log types</string> <!-- since: 2.10 RC2 -->
   <string name="cache_coordinates_no">This cache has no coordinates.</string> <!-- since: 2.26 RC2 -->
+  
+  <!-- file list base -->
+  <string name="file_searching_in">Searching for files\nin</string>
+  <string name="file_list_no_files">Sorry, c:geo found no appropriate files.</string>
+  <string name="file_searching">Searching for matching files</string>
+  <string name="file_title_searching">Searching</string>
 
   <!-- gpx -->
   <string name="gpx_import_searching_in">Searching for .gpx files\nin</string>
