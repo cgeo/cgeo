@@ -32,7 +32,7 @@
 						android:layout_gravity="center"
 						android:gravity="center"
 						android:scaleType="fitXY"
-						android:src="@drawable/carnero_logo" />
+						android:src="@drawable/cgeo_logo" />
 				<TextView
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
 				<TextView style="@style/separator_horizontal_headline"
 						android:text="@string/about_detail" />
 			</RelativeLayout>
-			<TextView android:id="@+id/author"
+			<!-- TextView android:id="@+id/author"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginLeft="10dip"
@@ -102,7 +102,7 @@
 					android:focusable="true"
 					android:clickable="true"
 					android:onClick="author"
-					android:text="@string/author" />
+					android:text="@string/author" /-->
 			<TextView android:id="@+id/support"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"

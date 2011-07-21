@@ -2,11 +2,15 @@ package cgeo.geocaching;
 
 import gnu.android.app.appmanualclient.*;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Bundle;
@@ -43,6 +47,12 @@ import cgeo.geocaching.filter.cgFilterByType;
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.Locale;
 
 public class cgeocaches extends ListActivity {
@@ -81,6 +91,7 @@ public class cgeocaches extends ListActivity {
 	private geocachesLoadDetails threadD = null;
 	private geocachesLoadFromWeb threadW = null;
 	private geocachesDropDetails threadR = null;
+	private geocachesExportFieldNotes threadF = null;
 	private int listId = 0;
 	private ArrayList<cgList> lists = null;
 	private String selectedFilter = null;
@@ -390,6 +401,33 @@ public class cgeocaches extends ListActivity {
 			}
 		}
 	};
+	private Handler exportFieldNotesHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg)
+        {
+            setAdapter();
+
+            if (msg.what > -1)
+            {
+                cacheList.get(msg.what).statusChecked = false;
+                waitDialog.setProgress(detailProgress);
+            }
+            else
+            {
+                if (adapter != null)
+                {
+                    adapter.setSelectMode(false, true);
+                }
+
+                if (waitDialog != null)
+                {
+                    waitDialog.dismiss();
+                    waitDialog.setOnCancelListener(null);
+                }
+            }
+        }
+    };
 	private ContextMenuInfo lastMenuInfo;
 
 	@Override
@@ -650,6 +688,7 @@ public class cgeocaches extends ListActivity {
 			SubMenu subMenu = menu.addSubMenu(0, 103, 0, res.getString(R.string.caches_manage)).setIcon(android.R.drawable.ic_menu_save);
 			subMenu.add(0, 5, 0, res.getString(R.string.caches_drop_all)); // delete saved caches
 			subMenu.add(0, 1, 0, res.getString(R.string.cache_offline_refresh)); // download details for all caches
+			subMenu.add(0, 26, 0, res.getString(R.string.cache_export_fieldnote)); // export field notes
 			if (settings.webDeviceCode == null)
 			{
 				menu.add(0, 6, 0, res.getString(R.string.gpx_import_title)).setIcon(android.R.drawable.ic_menu_upload); // import gpx file
@@ -659,6 +698,10 @@ public class cgeocaches extends ListActivity {
 				subMenuImport.add(1, 25, 0, res.getString(R.string.web_import_title)).setCheckable(false).setChecked(false);
 			}
 		} else {
+		    if (type.equals("history"))
+		    {
+		        menu.add(0, 26, 0, res.getString(R.string.cache_export_fieldnote)).setIcon(android.R.drawable.ic_menu_save); // export field notes
+		    }
 			menu.add(0, 1, 0, res.getString(R.string.caches_store_offline)).setIcon(android.R.drawable.ic_menu_set_as); // download details for all caches
 		}
 
@@ -707,6 +750,12 @@ public class cgeocaches extends ListActivity {
 				} else {
 					menu.findItem(1).setTitle(res.getString(R.string.caches_refresh_all));
 				}
+				
+				if (adapter != null && adapter.getChecked() > 0) {
+                    menu.findItem(26).setTitle(res.getString(R.string.cache_export_fieldnote) + " (" + adapter.getChecked() + ")");
+                } else {
+                    menu.findItem(26).setTitle(res.getString(R.string.cache_export_fieldnote));
+                }
 			} else {
 				if (adapter == null) {
 					Log.i(cgSettings.tag, "No adapter");
@@ -829,6 +878,9 @@ public class cgeocaches extends ListActivity {
 			case 25:
 				importWeb();
 				return false;
+			case 26:
+                exportFieldNotes();
+                return false;
 		}
 
 		return false;
@@ -1391,6 +1443,50 @@ public class cgeocaches extends ListActivity {
 		threadD = new geocachesLoadDetails(loadDetailsHandler, listId);
 		threadD.start();
 	}
+	
+	public void exportFieldNotes()
+	{
+        if (adapter != null && adapter.getChecked() > 0)
+        {
+            // there are some checked caches
+            detailTotal = adapter.getChecked();
+        }
+        else
+        {
+            // no checked caches, export all
+            detailTotal = cacheList.size();
+        }
+        detailProgress = 0;
+
+        base.showProgress(activity, false);
+        waitDialog = new ProgressDialog(this);
+        waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+            public void onCancel(DialogInterface arg0)
+            {
+                try
+                {
+                    if (threadD != null)
+                    {
+                        threadD.kill();
+                    }
+                } catch (Exception e)
+                {
+                    Log.e(cgSettings.tag, "cgeocaches.exportFieldNotes.onCancel: " + e.toString());
+                }
+            }
+        });
+
+        waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        waitDialog.setMessage(res.getString(R.string.caches_exporting_fieldnote));
+        
+        waitDialog.setCancelable(true);
+        waitDialog.setMax(detailTotal);
+        waitDialog.show();
+
+        threadF = new geocachesExportFieldNotes(exportFieldNotesHandler);
+        threadF.start();
+    }
 
 	public void importWeb() {
 		detailProgress = 0;
@@ -1975,6 +2071,119 @@ public class cgeocaches extends ListActivity {
 			handler.sendEmptyMessage(-1);
 		}
 	}
+	
+	private class geocachesExportFieldNotes extends Thread
+	{
+        private Handler handler = null;
+        private volatile boolean needToStop = false;
+        private int checked = 0;
+
+        public geocachesExportFieldNotes(Handler handlerIn)
+        {
+            setPriority(Thread.MIN_PRIORITY);
+
+            handler = handlerIn;
+
+            if (adapter != null)
+            {
+                checked = adapter.getChecked();
+            }
+        }
+
+        public void kill()
+        {
+            needToStop = true;
+        }
+
+        @Override
+        public void run()
+        {
+            SimpleDateFormat fieldNoteDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+            StringBuffer fieldNoteBuffer = new StringBuffer(500);
+            
+            // We need our own HashMap because cgBase.LogTypes1 will give us localized and maybe
+            // different strings than gc.com expects in the field note
+            // We only need such logtypes that are possible to log via c:geo
+            HashMap<Integer, String> logTypes = new HashMap<Integer, String>();
+            logTypes.put(cgBase.LOG_FOUND_IT, "Found it");
+            logTypes.put(cgBase.LOG_DIDNT_FIND_IT, "Didn't find it");
+            logTypes.put(cgBase.LOG_NOTE, "Write Note");
+            logTypes.put(cgBase.LOG_NEEDS_ARCHIVE, "Needs archived");
+            //logTypes.put(cgBase.LOG_NEEDS_MAINTENANCE, "Needs Maintenance"); // TODO: Strange problems, gc.com aborts with a parse-error
+            
+            for (cgCache cache : cacheList) {
+                if (checked > 0 && cache.statusChecked == false) {
+                    handler.sendEmptyMessage(0);
+
+                    yield();
+                    continue;
+                }
+
+                try {
+                    if (needToStop == true)
+                    {
+                        Log.i(cgSettings.tag, "Stopped exporting process.");
+                        break;
+                    }
+                    
+                    if (cache.logOffline)
+                    {
+                        cgLog log = app.loadLogOffline(cache.geocode);
+                        
+                        if (null != logTypes.get(log.type))
+                        {
+                            fieldNoteBuffer.append(cache.geocode)
+                                           .append(",")
+                                           .append(fieldNoteDateFormat.format(new Date(log.date)))
+                                           .append(",")
+                                           .append(logTypes.get(log.type))
+                                           .append(",\"")
+                                           .append(log.log.replaceAll("\"", "'"))
+                                           .append("\"\n");
+                        }
+                    }
+
+                    detailProgress++;
+                    
+                    handler.sendEmptyMessage(cacheList.indexOf(cache));
+
+                    yield();
+                } catch (Exception e) {
+                    Log.e(cgSettings.tag, "cgeocaches.geocachesExportFieldNotes: " + e.toString());
+                }
+            }
+            
+            if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
+            {
+                File exportLocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/field-notes");
+                exportLocation.mkdirs();
+                
+                SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+                File exportFile = new File(exportLocation + "/" + fileNameDateFormat.format(new Date()) + ".txt");
+                
+                OutputStream os = null;
+                Writer       fw = null;
+                try
+                {
+                    os = new FileOutputStream(exportFile);
+                    fw = new OutputStreamWriter(os, "ISO-8859-1"); // TODO: gc.com doesn't support UTF-8
+                    fw.write(fieldNoteBuffer.toString());
+                }
+                catch (IOException e) {
+                    Log.e(cgSettings.tag, "cgeocaches.geocachesExportFieldNotes: " + e.toString());
+                }
+                finally
+                {
+                    if ( fw != null )
+                    {
+                        try { fw.close(); } catch (IOException e) { Log.e(cgSettings.tag, "cgeocaches.geocachesExportFieldNotes: " + e.toString()); }
+                    }
+                }
+            }
+
+            handler.sendEmptyMessage(-1);
+        }
+    }
 
 	private class moreCachesListener implements View.OnClickListener {
 
