@@ -1,7 +1,15 @@
 package cgeo.geocaching;
 
-import gnu.android.app.appmanualclient.*;
+import gnu.android.app.appmanualclient.AppManualReaderClient;
 
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,28 +17,30 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
-import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
-import android.os.Bundle;
-import android.util.Log;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.WindowManager;
@@ -45,15 +55,6 @@ import cgeo.geocaching.filter.cgFilterByTrackables;
 import cgeo.geocaching.filter.cgFilterByType;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
-import java.util.Locale;
 
 public class cgeocaches extends ListActivity {
 
@@ -1152,27 +1153,20 @@ public class cgeocaches extends ListActivity {
 	}
 	
 	@Override
-	public void onBackPressed() {
-		if (adapter != null) {
-			if (adapter.resetChecks() == true) {
-				return;
-			} else if (adapter.getSelectMode() == true) {
-				adapter.setSelectMode(false, true);
-
-				return;
-			}
-			
-			if (adapter.isFilter()) {
-				adapter.clearFilter();
-				
-				return;
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if (adapter != null) {
+				if (adapter.resetChecks() == true) {
+					return true;
+				} else if (adapter.getSelectMode() == true) {
+					adapter.setSelectMode(false, true);
+					return true;
+				}
 			}
 		}
-		
-		super.onBackPressed();
-		
-		return;
+		return super.onKeyDown(keyCode, event);
 	}
+
 
 	private void setAdapter() {
 		if (listFooter == null) {
