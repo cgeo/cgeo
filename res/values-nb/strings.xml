@@ -464,8 +464,8 @@
   <!-- next things -->
   <string name="legal_note">For å bruke tjenestene til geocaching.com, må brukeren samtykke i vilkårene og betingelsene til <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak\'s ansvarsfraskrivelse</a></string>
   <string name="author">utvikler: <a href="http://carnero.cc/">carnero</a></string>
-  <string name="support">e-post adresse: <a href="mailto:carnero@carnero.cc">carnero@carnero.cc</a></string>
-  <string name="website">web-side: <a href="http://cgeo.carnero.cc/">cgeo.carnero.cc</a></string>
+  <string name="support">e-post adresse: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
+  <string name="website">web-side: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
   <string name="about_go4cache">Tjenesten <b>Go 4 cache</b> gjør det mulig for deg å se andre geocachere på kartet (i <b>c:geo</b> eller i web-leseren). Det kan for eksempel vise hvilken cache de er ute etter. Ved å koble til <b>Go 4 cache</b> får <b>c:geo</b> din tillatelse til oppgi dine koordinater til andre brukere av <b>Go 4 cache</b>, men bare mens <b>c:geo</b> kjører.</string>
   <string name="about_twitter">Ønsker du at <b>c:geo</b> skal poste en status på Twitter hver gang du logger ett funn via <b>c:geo</b>?</string>

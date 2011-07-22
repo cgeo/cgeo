@@ -601,8 +601,8 @@
   <!-- next things -->
   <string name="legal_note">För att använda tjänster hos geocaching.com, måste regler och villkor i <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeaks avtal</a> godkännas.</string>
   <string name="author">Upphovsman: <a href="http://carnero.cc/">carnero</a></string>
-  <string name="support">Support: <a href="mailto:carnero@carnero.cc">carnero@carnero.cc</a></string>
-  <string name="website">Hemsida: <a href="http://cgeo.carnero.cc/">cgeo.carnero.cc</a></string>
+  <string name="support">Support: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
+  <string name="website">Hemsida: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="about_go4cache">Tjänsten <b>Go 4 Cache</b> visar andra geocachare på kartan i realtid (i <b>c:geo</b> eller webbläsaren). Du kan till exempel se vilken cache de letar efter. Genom att ansluta till <b>Go 4 Cache</b> tillåter du <b>c:geo</b> att publicera din nuvarande plats när du geocachar (bara när <b>c:geo</b> är igång).</string>

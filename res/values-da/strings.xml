@@ -320,8 +320,8 @@
   <!-- next things -->
   <string name="legal_note">For at benytte geocaching.com, skal betingelserne i <a href="http://www.geocaching.com/about/termsofuse.aspx">"Groundspeak disclaimer"</a> accepteres.</string>
   <string name="author">Udviklet af: <a href="http://carnero.cc/">carnero</a></string>
-  <string name="support">Support: <a href="mailto:carnero@carnero.cc">carnero@carnero.cc</a></string>
-  <string name="website">Hjemmeside: <a href="http://cgeo.carnero.cc/">cgeo.carnero.cc</a></string>
+  <string name="support">Support: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
+  <string name="website">Hjemmeside: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="about_go4cache">Servicen <b>Go 4 Cache</b> viser andre geocachere på kortet (i <b>c:geo</b> eller i browser) i realtime. Servicen kan f.eks. vise hvilken cache de er på vej hen til. Ved forbindelse til <b>Go 4 Cache</b> tillader du at <b>c:geo</b> offentliggør din position når du geocacher (kun når <b>c:geo</b> er startet).</string>

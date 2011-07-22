@@ -255,8 +255,8 @@
   <!-- next things -->
   <string name="legal_note">Pour utiliser les services de geocaching.com, vous devez accepter les termes et conditions de la <a href="http://www.geocaching.com/about/termsofuse.aspx">mise en garde de Groundspeak</a>.</string>
   <string name="author">auteur: <a href="http://carnero.cc/">carnero</a></string>
-  <string name="support">support: <a href="mailto:carnero@carnero.cc">carnero@carnero.cc</a></string>
-  <string name="website">site: <a href="http://cgeo.carnero.cc/">cgeo.carnero.cc</a></string>
+  <string name="support">support: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
+  <string name="website">site: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">page c:geo</a></string>
   <string name="twitter">twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="about_go4cache">Le service <b>Go 4 cache</b> vous permet de voir en temps réel d\'autres géocacheurs sur une carte (dans <b>c:geo</b> ou dans le navigateur). Il peut afficher quelles caches ils recherchent. En vous connectant sur <b>Go 4 cache</b> vous permettez à <b>c:geo</b> de publier votre publication pendant (seulement si <b>c:geo</b> fonctionne).</string>
