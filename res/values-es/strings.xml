@@ -592,10 +592,9 @@
   <!-- next things -->
   <string name="legal_note">Para utilizar los servicios de geocaching.com, debes aceptar las <a href="http://www.geocaching.com/about/termsofuse.aspx">condiciones de Groundspeak</a>.</string>
   <string name="quote">Para hacer el geocaching más sencillo, para hacer a los usuarios más vagos.</string>
-  <string name="powered_by">carnero</string>  
   <string name="author">Autor: <a href="http://carnero.cc/">carnero</a></string>
-  <string name="support">Soporte: <a href="mailto:carnero@carnero.cc">carnero@carnero.cc</a></string>
-  <string name="website">Web: <a href="http://cgeo.carnero.cc/">cgeo.carnero.cc</a></string>
+  <string name="support">Soporte: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
+  <string name="website">Web: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="nutshellmanual">Manual: <a href="http://itw.bidix.info/cgeo/">c:geo en breve</a></string>
