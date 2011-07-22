@@ -491,8 +491,8 @@
   <!-- next things -->
   <string name="legal_note">Pred používaním služieb serveru geocaching.com je potrebné súhlasiť s <a href="http://www.geocaching.com/about/disclaimer.aspx">licenčnou dohodou Groundspeaku</a>.</string>
   <string name="author">autor: <a href="http://carnero.cc/">carnero</a></string>
-  <string name="support">podpora: <a href="mailto:carnero@carnero.cc">carnero@carnero.cc</a></string>
-  <string name="website">web: <a href="http://cgeo.carnero.cc/">cgeo.carnero.cc</a></string>
+  <string name="support">podpora: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
+  <string name="website">web: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a> </string>
   <string name="twitter">twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="about_go4cache">Služba<b>Go 4 cache</b>umožňuje sledovať v reálnom čase ostatných cacherov na mape (v <b>c:geo</b>alebo v prehliadači). Môžete se tak pozrieť napríklad na to, akú skrýšu práve hľedajú. Pripojením ku službe  <b>Go 4 cache</b>umožníte aplikácii  <b>c:geo</b>zveřejňovať Vašu aktuálnu polohu (iba pokiaľ <b>c:geo</b>beží).</string>

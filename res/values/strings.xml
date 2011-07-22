@@ -317,6 +317,7 @@
   <string name="caches_filter_type_ape">Project APE cache</string>
   <string name="caches_filter_type_gchq">Groundspeak HQ</string>
   <string name="caches_filter_type_gps">GPS Cache exhibit</string>
+  <string name="caches_exporting_fieldnote">Exporting as Field Notes...</string>
   
   <!-- caches lists -->
   <string name="list_menu">List</string>
@@ -402,6 +403,7 @@
   <string name="init_mapsources">Map Sources</string> <!-- since: 2.26 RC3 -->
   <string name="init_mapsources_description">Here you can select the source for your maps. As an alternative to Google maps various OpenStreetMap styles are available and even off line map files (see http://code.google.com/p/mapsforge/ for details).</string> <!-- since: 2.26 RC3 -->
   <string name="init_mapsource_select">Select map source</string>
+  <string name="init_select_mapfile">...</string>
   
   <!-- map sources -->
   <string-array name="map_sources">
@@ -511,17 +513,20 @@
   <string name="cache_spoiler_images_loading">Loading spoiler images...</string>
   <string name="cache_log_types">Log types</string> <!-- since: 2.10 RC2 -->
   <string name="cache_coordinates_no">This cache has no coordinates.</string> <!-- since: 2.26 RC2 -->
+  <string name="cache_export_fieldnote">Export as Field Notes</string>
+  
+  <!-- file list base -->
+  <string name="file_searching_in">Searching for files\nin</string>
+  <string name="file_list_no_files">Sorry, c:geo found no appropriate files.</string>
+  <string name="file_searching">Searching for matching files</string>
+  <string name="file_title_searching">Searching</string>
 
   <!-- gpx -->
-  <string name="gpx_import_searching_in">Searching for .gpx files\nin</string>
   <string name="gpx_import_loading_stored">Loading caches from .gpx file\nStored:</string>
-  <string name="gpx_import_no_files">Sorry, c:geo found no .gpx files.</string>
   <string name="gpx_import_caches_imported">caches imported</string>
-  <string name="gpx_import_searching">Searching for .gpx files</string>
   <string name="gpx_import_loading">Loading caches from .gpx file</string>
   <string name="gpx_import_title">Import GPX</string>
   <string name="gpx_import_title_reading_file">Reading file</string>
-  <string name="gpx_import_title_searching">Searching</string>
   <string name="gpx_import_title_caches_imported">Result</string>
   
   <!--  import -->
@@ -797,7 +802,7 @@
   <string name="powered_by">carnero</string>
   <string name="author">Author: <a href="http://carnero.cc/">carnero</a></string>
   <string name="support">Support: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
-  <string name="website">Website: <a href="http://support@cgeo.org/">support@cgeo.org</a></string>
+  <string name="website">Website: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="nutshellmanual">Manual: <a href="http://cgeo.carnero.cc/manual">c:geo in a Nutshell</a></string>
@@ -810,8 +815,10 @@
 
   <!-- contributors -->
   <string name="contributors">\n
-    · Sony Ericsson (free XPERIA X10 for development)\n
+    · <a href="http://carnero.cc/">carnero</a> as the father of c:geo\n
     \n
+    · Eisbehr (code, opensource project leader)\n
+    · mucek4 (code, opensource project leader)\n
     · 0xErnie (localization DE)\n
     · Bananeweizen (code, loc. DE)\n
     · Charles (localization FR)\n
@@ -825,6 +832,7 @@
     · Peter (localization HU)\n
     · Rainer S. (code)\n
     · Ray (code, loc. JA)\n
+    · <a href="http://www.sammyshp.de/">SammysHP</a> (code, localization DE)\n
     · <a href="http://seromenho.com/">Ricardo Seromenho</a> (localization PT)\n
     · serenity (localization FR)\n
     · Shan, a.k.a. ShakurNO (localization NO)\n
@@ -837,11 +845,13 @@
     <b>2.26</b> (once in 2011)\n
 	· new: Autoinsert of signature\n
 	· new: Send to c:geo from web\n
+    · new: Export field notes\n
 	· fix: Live map, better loading\n
 	· fix: Overwriting coords with wrong ones\n
 	· fix: Loading caches on Live map\n
 	· fix: GCVote issues\n
 	· fix: ForceClose on maps (home, help)\n
+	· fix: Android 1.5, 1.6\n
 	\n
     <b>2.25</b> (11.06.2011)\n
 	· fix: Performance &amp; usability\n

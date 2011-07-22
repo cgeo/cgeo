@@ -21,6 +21,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -30,6 +31,8 @@ import java.io.File;
 import cgeo.geocaching.cgSettings.mapSourceEnum;
 
 public class cgeoinit extends Activity {
+
+	private final int SELECT_MAPFILE_REQUEST=1;
 
 	private cgeoapplication app = null;
 	private Resources res = null;
@@ -402,8 +405,17 @@ public class cgeoinit extends Activity {
 		mapSourceSelector.setSelection(mapsource);
 		mapSourceSelector.setOnItemSelectedListener(new cgeoChangeMapSource());
 		
-		EditText mfmapFileEdit = (EditText) findViewById(R.id.mapfile);
-		mfmapFileEdit.setText(prefs.getString("mfmapfile", ""));
+		initMapfileEdittext(false);
+				
+		Button selectMapfile = (Button) findViewById(R.id.select_mapfile);
+		selectMapfile.setOnClickListener(new View.OnClickListener() {
+					
+			@Override
+			public void onClick(View v) {
+				Intent selectIntent = new Intent(activity, cgSelectMapfile.class);
+				activity.startActivityForResult(selectIntent, SELECT_MAPFILE_REQUEST);
+			}
+		});
 		
 		setMapFileEditState();
 		
@@ -418,6 +430,14 @@ public class cgeoinit extends Activity {
 		
 	}
 	
+	private void initMapfileEdittext(boolean setFocus) {
+		EditText mfmapFileEdit = (EditText) findViewById(R.id.mapfile);
+		mfmapFileEdit.setText(prefs.getString("mfmapfile", ""));
+		if (setFocus) {
+			mfmapFileEdit.requestFocus();
+		}
+	}
+
 	public void backup(View view) {
 		final String file = app.backupDatabase();
 		
@@ -447,7 +467,7 @@ public class cgeoinit extends Activity {
 	}
 	
 	private void setMapFileEditState() {
-		EditText mapFileEdit = (EditText) findViewById(R.id.mapfile);
+		LinearLayout mapFileEdit = (LinearLayout) findViewById(R.id.init_mapfilegroup);
 		if (settings.mapProvider == mapSourceEnum.mapsforgeOffline) {
 			mapFileEdit.setVisibility(View.VISIBLE);
 		} else {
@@ -946,6 +966,20 @@ public class cgeoinit extends Activity {
 		}
 	}
         
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
+		if (requestCode == SELECT_MAPFILE_REQUEST) {
+			if (resultCode == RESULT_OK) {
+				if (data.hasExtra("mapfile")) {
+					settings.setMapFile(data.getStringExtra("mapfile"));
+				}
+			}
+			initMapfileEdittext(true);
+		}
+	}
+
 	public void goHome(View view) {
 		base.goHome(activity);
 	}
