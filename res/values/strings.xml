@@ -817,6 +817,8 @@
   <string name="contributors">\n
     · <a href="http://carnero.cc/">carnero</a> as the father of c:geo\n
     \n
+    · Eisbehr (code, opensource project leader)\n
+    · mucek4 (code, opensource project leader)\n
     · 0xErnie (localization DE)\n
     · Bananeweizen (code, loc. DE)\n
     · Charles (localization FR)\n
@@ -849,6 +851,7 @@
 	· fix: Loading caches on Live map\n
 	· fix: GCVote issues\n
 	· fix: ForceClose on maps (home, help)\n
+	· fix: Android 1.5, 1.6\n
 	\n
     <b>2.25</b> (11.06.2011)\n
 	· fix: Performance &amp; usability\n
