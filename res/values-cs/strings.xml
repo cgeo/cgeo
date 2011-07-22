@@ -486,8 +486,8 @@
   <!-- next things -->
   <string name="legal_note">Před používáním služeb serveru geocaching.com je potřeba souhlasit s <a href="http://www.geocaching.com/about/disclaimer.aspx">licenčním ujednáním Groundspeaku</a>.</string>
   <string name="author">autor: <a href="http://carnero.cc/">carnero</a></string>
-  <string name="support">podpora: <a href="mailto:carnero@carnero.cc">carnero@carnero.cc</a></string>
-  <string name="website">web: <a href="http://cgeo.carnero.cc/">cgeo.carnero.cc</a></string>
+  <string name="support">podpora: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
+  <string name="website">web: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a> </string>
   <string name="twitter">twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="about_go4cache">Služba<b>Go 4 cache</b>umožňuje sledovat v reálném čase ostatní kačery na mapě (v <b>c:geo</b>nebo v prohlížeči). Můžete se tak podívat třeba na to, jakou kešku právě hledají. Připojením ke službě  <b>Go 4 cache</b>umožníte aplikaci  <b>c:geo</b>zveřejňovat Vaši aktuální polohu (pouze pokud <b>c:geo</b>běží).</string>

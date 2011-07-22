@@ -586,8 +586,8 @@
   <string name="legal_note">Aby móc korzystać z usług serwisu geocaching.com <a href="http://www.geocaching.com/about/termsofuse.aspx">warunki korzystania Groundspeak</a> muszą być potwierdzone.</string>
   <string name="about_text"><b>c:geo</b> został opracowany aby był łatwym w obsłudze i wszechstronnym klientem serwisu geocaching.com. Jest i zawsze będzie za darmo. Jeśli chcesz wspierać rozwój aplikacji, donacje są mile widziane (na stronie internetowej). Pytania lub sugestie? Odwiedź mój profil w Facebook albo wyślij mi e-mail.</string>
   <string name="author">Autor: <a href="http://carnero.cc/">carnero</a></string>
-  <string name="support">Support: <a href="mailto:carnero@carnero.cc">carnero@carnero.cc</a></string>
-  <string name="website">Website: <a href="http://cgeo.carnero.cc/">cgeo.carnero.cc</a></string>
+  <string name="support">Support: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
+  <string name="website">Website: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo strona</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="nutshellmanual">Manuał: <a href="http://itw.bidix.info/cgeo/">c:geo skrócona instrukcja obsługi</a></string>
