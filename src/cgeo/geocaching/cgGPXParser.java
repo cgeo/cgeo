@@ -234,10 +234,14 @@ public class cgGPXParser {
 				}
 			}
 		});
+		
+		// for GPX 1.0, cache info comes from waypoint node (so called private children,
+		// for GPX 1.1 from extensions node
+		final Element cacheParent = version == 11 ? waypoint.getChild(ns, "extensions") : waypoint;
 
 		for (String nsGC : nsGCList) {
 			// waypoints.cache
-			final Element gcCache = waypoint.getChild(nsGC, "cache");
+			final Element gcCache = cacheParent.getChild(nsGC, "cache");
 
 			gcCache.setStartElementListener(new StartElementListener() {
 
