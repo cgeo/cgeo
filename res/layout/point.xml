@@ -21,15 +21,7 @@
 		<LinearLayout
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
-				android:orientation="vertical" >
-			<RelativeLayout android:layout_width="match_parent" style="@style/separator_horizontal_layout">
-				<View style="@style/separator_horizontal"></View>
-				<TextView android:text="@string/search_direction_rel" style="@style/separator_horizontal_headline"></TextView>
-			</RelativeLayout>
-			<RelativeLayout android:layout_width="match_parent" style="@style/separator_horizontal_layout">
-				<View style="@style/separator_horizontal"></View>
-				<TextView android:text="@string/search_direction_rel" style="@style/separator_horizontal_headline"></TextView>
-			</RelativeLayout>
+				android:orientation="vertical" android:weightSum="1">
 			<RelativeLayout style="@style/separator_horizontal_layout" >
 				<View style="@style/separator_horizontal" />
 				<TextView style="@style/separator_horizontal_headline"
@@ -61,7 +53,9 @@
 				<TextView style="@style/separator_horizontal_headline"
 						android:text="@string/search_history" />
 			</RelativeLayout>
-			<ListView android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@android:id/list"></ListView>	
+			<FrameLayout android:id="@+id/frameLayout1" android:layout_width="match_parent" android:layout_height="wrap_content">
+				<ListView android:id="@+id/historyList" android:layout_width="match_parent" android:background="@color/just_white" android:layout_gravity="fill" android:layout_height="match_parent"></ListView>
+			</FrameLayout>	
 		</LinearLayout>
 	</ScrollView>
 </LinearLayout>

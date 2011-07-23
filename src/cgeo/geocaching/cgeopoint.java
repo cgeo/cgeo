@@ -34,10 +34,12 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
-public class cgeopoint extends ListActivity {
+public class cgeopoint extends Activity {
 
 	private class DestinationHistoryAdapter extends ArrayAdapter<cgWaypoint>
 	{
@@ -53,13 +55,13 @@ public class cgeopoint extends ListActivity {
 			cgWaypoint loc = getItem(position);
 
 			View row = getInflater().inflate(R.layout.simple_way_point, null);
-			Text longitude = (Text) row.findViewById(R.id.simple_way_point_longitude);
-			Text latitude = (Text) row.findViewById(R.id.simple_way_point_latitude);
-			Text date = (Text) row.findViewById(R.id.date);
+			TextView longitude = (TextView) row.findViewById(R.id.simple_way_point_longitude);
+			TextView latitude = (TextView) row.findViewById(R.id.simple_way_point_latitude);
+			TextView date = (TextView) row.findViewById(R.id.date);
 
-			longitude.setTextContent(String.valueOf(loc.longitude));
-			latitude.setTextContent(String.valueOf(loc.latitude));
-			date.setTextContent(loc.name);
+			longitude.setText(String.valueOf(loc.longitude));
+			latitude.setText(String.valueOf(loc.latitude));
+			date.setText(loc.name);
 
 			return row;
 		}
@@ -119,10 +121,10 @@ public class cgeopoint extends ListActivity {
 		tracker.dispatch();
 		base.sendAnal(activity, tracker, "/point");
 
+		ListView listView = (ListView) findViewById(R.id.historyList);
+		listView.setAdapter(getDestionationHistoryAdapter());
+
 		init();
-		
-		setListAdapter(getDestionationHistoryAdapter());
-		
 	}
 
 	private DestinationHistoryAdapter getDestionationHistoryAdapter() 
@@ -222,6 +224,8 @@ public class cgeopoint extends ListActivity {
 
 		Button buttonCurrent = (Button) findViewById(R.id.current);
 		buttonCurrent.setOnClickListener(new currentListener());
+		
+		getDestionationHistoryAdapter().notifyDataSetChanged();
 	}
 	
 	@Override
@@ -273,7 +277,18 @@ public class cgeopoint extends ListActivity {
 		final int menuItem = item.getItemId();
 		
 		ArrayList<Double> coords = getDestination();
-
+		
+		// Add locations to history
+		cgWaypoint loc = new cgWaypoint();
+		loc.name = DateFormat.format("dd/MM/yy h:mm", new Date()).toString();
+		loc.latitude = coords.get(0);
+		loc.longitude = coords.get(1);
+		
+		getHistoryOfSearchedLocations().add(0,loc);
+		
+		// Save location
+		app.saveSearchedDestinations(getHistoryOfSearchedLocations());
+		
 		if (menuItem == 1) {
 			showOnMap();
 			return true;
@@ -347,20 +362,6 @@ public class cgeopoint extends ListActivity {
 		if (coords == null || coords.get(0) == null || coords.get(1) == null) {
 			warning.showToast(res.getString(R.string.err_location_unknown));
 		}
-		
-		// Add locations to history
-		cgWaypoint loc = new cgWaypoint();
-		loc.name = DateFormat.format("MM/dd/yy h:mmaa", new Date()).toString();
-		loc.latitude = coords.get(0);
-		loc.longitude = coords.get(1);
-		
-		getHistoryOfSearchedLocations().add(0,loc);
-		
-		// Save location
-		app.saveSearchedDestinations(getHistoryOfSearchedLocations());
-		
-		// Update list
-		getDestionationHistoryAdapter().notifyDataSetChanged();
 		
 		try {
 			if (cgBase.isIntentAvailable(activity, "com.google.android.radar.SHOW_RADAR") == true) {
