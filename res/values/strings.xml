@@ -318,7 +318,7 @@
   <string name="caches_filter_type_gchq">Groundspeak HQ</string>
   <string name="caches_filter_type_gps">GPS Cache exhibit</string>
   <string name="caches_exporting_fieldnote">Exporting as Field Notes...</string>
-  
+
   <!-- caches lists -->
   <string name="list_menu">List</string>
   <string name="list_menu_create">Create new list</string>
@@ -404,7 +404,7 @@
   <string name="init_mapsources_description">Here you can select the source for your maps. As an alternative to Google maps various OpenStreetMap styles are available and even off line map files (see http://code.google.com/p/mapsforge/ for details).</string> <!-- since: 2.26 RC3 -->
   <string name="init_mapsource_select">Select map source</string>
   <string name="init_select_mapfile">...</string>
-  
+
   <!-- map sources -->
   <string-array name="map_sources">
     <item>Google Maps</item>
@@ -514,7 +514,7 @@
   <string name="cache_log_types">Log types</string> <!-- since: 2.10 RC2 -->
   <string name="cache_coordinates_no">This cache has no coordinates.</string> <!-- since: 2.26 RC2 -->
   <string name="cache_export_fieldnote">Export as Field Notes</string>
-  
+
   <!-- file list base -->
   <string name="file_searching_in">Searching for files\nin</string>
   <string name="file_list_no_files">Sorry, c:geo found no appropriate files.</string>
@@ -528,7 +528,7 @@
   <string name="gpx_import_title">Import GPX</string>
   <string name="gpx_import_title_reading_file">Reading file</string>
   <string name="gpx_import_title_caches_imported">Result</string>
-  
+
   <!--  import -->
   <string name="import_title">Import...</string>
   <string name="web_import_title">Import from web</string>
@@ -806,7 +806,7 @@
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="nutshellmanual">Manual: <a href="http://cgeo.carnero.cc/manual">c:geo in a Nutshell</a></string>
-  <string name="about_go4cache">Service <b>Go 4 Cache</b> shows other geocachers on the map (in <b>c:geo</b> or in browser) in real time. It can show, for example, what cache they\'re searching for. By connecting to <b>Go 4 Cache</b> <b>c:geo</b> is allowed to publish current location when geocaching (only when <b>c:geo</b> is running).</string>
+  <string name="about_go4cache">The service <b>Go 4 Cache</b> shows other geocachers on the map (in <b>c:geo</b> or in browser) in real time. It can show, for example, what cache they\'re searching for. By connecting to <b>Go 4 Cache</b> <b>c:geo</b> is allowed to publish current location when geocaching (only while <b>c:geo</b> is running).</string>
   <string name="about_twitter">Should <b>c:geo</b> publish new status on Twitter everytime a cache is logged?</string>
   <string name="about_auth_1">The following process allows <b>c:geo</b> to access Twitter - if agreed.</string>
   <string name="about_auth_2">Click on \"authorize c:geo\" button will start the process. This process will open up a web browser with Twitter page. Login on this page and allow <b>c:geo</b> to access your account. If accepted, Twitter will show up a numeric PIN code. This PIN must be pasted into <b>c:geo</b> and be confirmed. That\'s all.</string>
@@ -817,8 +817,8 @@
   <string name="contributors">\n
     · <a href="http://carnero.cc/">carnero</a> as the father of c:geo\n
     \n
-    · Eisbehr (code, opensource project leader)\n
-    · mucek4 (code, opensource project leader)\n
+    · Eisbehr (code, open source project leader)\n
+    · mucek4 (code, open source project leader)\n
     · 0xErnie (localization DE)\n
     · Bananeweizen (code, loc. DE)\n
     · Charles (localization FR)\n

@@ -461,7 +461,7 @@
   <string name="cache_log_types">Logs</string>
   <string name="cache_coordinates_no">Dieser Cache hat keine Koordinaten.</string> <!-- since: 2.26 RC2 -->
   <string name="cache_export_fieldnote">Exportiere als Field Notes</string>
-  
+
   <!-- gpx -->
   <string name="gpx_import_searching_in">Suche nach GPX-Dateien\nin</string>
   <string name="gpx_import_loading_stored">Lade Caches aus GPX-Datei\nGespeichert:</string>
@@ -742,7 +742,7 @@
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="nutshellmanual">Benutzung: <a href="http://cgeo.carnero.cc/manual/">c:geo Kurzanleitung</a></string>
-  <string name="about_go4cache">Service <b>Go 4 cache</b> erlaubt es, andere Geocacher in Echtzeit auf der Karte zu sehen (in <b>c:geo</b> oder im Browser). Es kann beispielsweise anzeigen, welchen Cache sie suchen. <b>Go 4 cache</b> erlaubt <b>c:geo</b> die aktuelle Position zu veröffentlichen (nur wenn <b>c:geo</b> ausgeführt wird).</string>
+  <string name="about_go4cache">Der Service <b>Go 4 cache</b> ermöglicht es, andere Geocacher in Echtzeit auf der Karte zu sehen (in <b>c:geo</b> oder im Browser). Es kann auch angezeigt werden, welchen Cache sie suchen. Wenn <b>c:geo</b> mit <b>Go 4 cache</b> verbunden wird, kann <b>c:geo</b> die aktuelle Position veröffentlichen (nur während <b>c:geo</b> ausgeführt wird).</string>
   <string name="about_twitter">Soll jeder neue Fund auf Twitter veröffentlicht werden, wenn er über <b>c:geo</b> geloggt wird?</string>
   <string name="about_auth_1">Der folgende Prozess erlaubt es <b>c:geo</b> auf den persönlichen Twitter-Account zuzugreifen, wenn zugestimmt wird.</string>
   <string name="about_auth_2">Ein Klick auf \"Starte Autorisierung\" öffnet eine Twitter-Seite in einem Browserfenster. Durch die Anmeldung und die Bestätigung wird <b>c:geo</b> ermöglicht, auf den persönlichen Twitter-Account zuzugreifen. Wird dies bestätigt, nennt Twitter eine numerische PIN, diese muss kopiert und in <b>c:geo</b> eingefügt werden. Das ist alles.</string>
