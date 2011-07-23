@@ -965,4 +965,5 @@
 	· new: Any destination saves last used location\n
 	· fix: End of line in logs\n
 	\n</string>
+  <string name="search_history">History</string>
 </resources>

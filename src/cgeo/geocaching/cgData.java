@@ -17,6 +17,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -29,7 +30,7 @@ public class cgData {
 	private cgDbHelper dbHelper = null;
 	private SQLiteDatabase databaseRO = null;
 	private SQLiteDatabase databaseRW = null;
-	private static final int dbVersion = 51;
+	private static final int dbVersion = 54;
 	private static final String dbName = "data";
 	private static final String dbTableCaches = "cg_caches";
 	private static final String dbTableLists = "cg_lists";
@@ -40,6 +41,7 @@ public class cgData {
 	private static final String dbTableLogCount = "cg_logCount";
 	private static final String dbTableLogsOffline = "cg_logs_offline";
 	private static final String dbTableTrackables = "cg_trackables";
+	private static final String dbTableSearchDestionationHistory = "cg_search_destination_history";
 	private static final String dbCreateCaches = ""
 			+ "create table " + dbTableCaches + " ("
 			+ "_id integer primary key autoincrement, "
@@ -167,6 +169,15 @@ public class cgData {
 			+ "description text, "
 			+ "geocode text "
 			+ "); ";
+	
+	private static final String dbCreateSearchDestinationHistory = ""
+		+ "create table " + dbTableSearchDestionationHistory + " ("
+		+ "_id integer primary key autoincrement, "
+		+ "updated long not null, " // date of save
+		+ "latitude double, "
+		+ "longitude double "
+		+ "); ";
+	
 	public boolean initialized = false;
 
 	public cgData(Context contextIn) {
@@ -384,6 +395,7 @@ public class cgData {
 			db.execSQL(dbCreateLogCount);
 			db.execSQL(dbCreateLogsOffline);
 			db.execSQL(dbCreateTrackables);
+			db.execSQL(dbCreateSearchDestinationHistory);
 
 			db.execSQL("create index if not exists in_a on " + dbTableCaches + " (geocode)");
 			db.execSQL("create index if not exists in_b on " + dbTableCaches + " (guid)");
@@ -683,6 +695,16 @@ public class cgData {
 							Log.i(cgSettings.tag, "Column reliable_latlon added to " + dbTableCaches + ".");
 						} catch (Exception e) {
 							Log.e(cgSettings.tag, "Failed to upgrade to ver. 51: " + e.toString());
+						}
+					}
+					
+					if (oldVersion < 60) { // upgrade to 52
+						try {
+							db.execSQL(dbCreateSearchDestinationHistory);
+
+							Log.i(cgSettings.tag, "Added table " +dbTableSearchDestionationHistory +".");
+						} catch (Exception e) {
+							Log.e(cgSettings.tag, "Failed to upgrade to ver. 52", e);
 						}
 					}
 				}
@@ -1231,6 +1253,49 @@ public class cgData {
 		}
 
 		return true;
+	}
+	
+	/**
+	 * Persists the given <code>destinations</code> into the database. 
+	 * <p>
+	 * Note: If <code>destinations</code> is <code>null</code> or empty,
+	 * this results in removing all previous entries!
+	 * @param destinations
+	 * @return
+	 */
+	public boolean saveSearchedDestinations(List<cgWaypoint> destinations)
+	{
+		init();
+		
+		boolean success = true;
+		
+		databaseRW.beginTransaction();
+		databaseRW.delete(dbTableSearchDestionationHistory, null, null);
+		
+		try {
+			if(destinations != null)
+			{
+				for (cgWaypoint wp : destinations) 
+				{
+					ContentValues values = new ContentValues();
+					values.put("updated", wp.name);
+					values.put("latitude", wp.latitude);
+					values.put("longitude", wp.longitude);
+					
+					databaseRW.insert(dbTableSearchDestionationHistory, null, values);
+				}
+				databaseRW.setTransactionSuccessful();
+			}
+		} catch (Exception e) {
+			success = false;
+			Log.e(cgSettings.tag, "Updating searchedDestinations db failed", e);
+		}
+		finally
+		{
+			databaseRW.endTransaction();
+		}
+		
+		return success;
 	}
 
 	public boolean saveWaypoints(String geocode, ArrayList<cgWaypoint> waypoints, boolean drop) {
@@ -2075,6 +2140,43 @@ public class cgData {
 		}
 
 		return spoilers;
+	}
+	
+	public List<cgWaypoint> loadHistoryOfSearchedLocations()
+	{
+		init();
+		
+		Cursor cursor = null;
+		List<cgWaypoint> locs = new ArrayList<cgWaypoint>();
+		
+		cursor = databaseRO.query(
+				dbTableSearchDestionationHistory,
+				new String[]{"_id", "updated", "latitude", "longitude"},
+				null,
+				null,
+				null,
+				null,
+				"updated desc",
+				"100");
+		
+		if (cursor != null && cursor.getCount() > 0) {
+			cursor.moveToFirst();
+
+			do {
+				cgWaypoint wp = new cgWaypoint();
+				wp.id = (int) cursor.getInt(cursor.getColumnIndex("_id"));
+				
+				// Use name field for date information
+				wp.name = (String) cursor.getString(cursor.getColumnIndex("updated"));
+				
+				wp.latitude = (double) cursor.getDouble(cursor.getColumnIndex("latitude"));
+				wp.longitude = (double) cursor.getDouble(cursor.getColumnIndex("longitude"));
+				
+				locs.add(wp);
+			} while (cursor.moveToNext());
+		}
+		
+		return locs;
 	}
 
 	public ArrayList<cgLog> loadLogs(String geocode) {

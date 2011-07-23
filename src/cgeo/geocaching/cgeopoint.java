@@ -1,33 +1,80 @@
 package cgeo.geocaching;
 
-import gnu.android.app.appmanualclient.*;
+import gnu.android.app.appmanualclient.AppManualReaderClient;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.w3c.dom.Text;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ListActivity;
+import android.content.Context;
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class cgeopoint extends Activity {
+public class cgeopoint extends ListActivity {
 
+	private class DestinationHistoryAdapter extends ArrayAdapter<cgWaypoint>
+	{
+		private LayoutInflater inflater = null;
+
+		public DestinationHistoryAdapter(Context context, List<cgWaypoint> objects) {
+			super(context, 0, objects);
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+
+			cgWaypoint loc = getItem(position);
+
+			View row = getInflater().inflate(R.layout.simple_way_point, null);
+			Text longitude = (Text) row.findViewById(R.id.simple_way_point_longitude);
+			Text latitude = (Text) row.findViewById(R.id.simple_way_point_latitude);
+			Text date = (Text) row.findViewById(R.id.date);
+
+			longitude.setTextContent(String.valueOf(loc.longitude));
+			latitude.setTextContent(String.valueOf(loc.latitude));
+			date.setTextContent(loc.name);
+
+			return row;
+		}
+
+		private LayoutInflater getInflater()
+		{
+			if(inflater == null)
+			{
+				inflater = ((Activity) getContext()).getLayoutInflater();
+			}
+
+			return inflater;
+		}
+	}
+	
 	private Resources res = null;
 	private cgeoapplication app = null;
 	private cgSettings settings = null;
@@ -41,6 +88,8 @@ public class cgeopoint extends Activity {
 	private EditText latEdit = null;
 	private EditText lonEdit = null;
 	private boolean changed = false;
+	private List<cgWaypoint> historyOfSearchedLocations;
+	private DestinationHistoryAdapter destionationHistoryAdapter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -71,6 +120,29 @@ public class cgeopoint extends Activity {
 		base.sendAnal(activity, tracker, "/point");
 
 		init();
+		
+		setListAdapter(getDestionationHistoryAdapter());
+		
+	}
+
+	private DestinationHistoryAdapter getDestionationHistoryAdapter() 
+	{
+		if(destionationHistoryAdapter == null)
+		{
+			destionationHistoryAdapter = new DestinationHistoryAdapter(this, getHistoryOfSearchedLocations());
+		}
+		return destionationHistoryAdapter;
+	}
+
+	private List<cgWaypoint> getHistoryOfSearchedLocations() 
+	{
+		if(historyOfSearchedLocations == null)
+		{
+			// Load from database
+			historyOfSearchedLocations = app.getHistoryOfSearchedLocations();
+		}
+		
+		return historyOfSearchedLocations;
 	}
 
 	@Override
@@ -275,6 +347,20 @@ public class cgeopoint extends Activity {
 		if (coords == null || coords.get(0) == null || coords.get(1) == null) {
 			warning.showToast(res.getString(R.string.err_location_unknown));
 		}
+		
+		// Add locations to history
+		cgWaypoint loc = new cgWaypoint();
+		loc.name = DateFormat.format("MM/dd/yy h:mmaa", new Date()).toString();
+		loc.latitude = coords.get(0);
+		loc.longitude = coords.get(1);
+		
+		getHistoryOfSearchedLocations().add(0,loc);
+		
+		// Save location
+		app.saveSearchedDestinations(getHistoryOfSearchedLocations());
+		
+		// Update list
+		getDestionationHistoryAdapter().notifyDataSetChanged();
 		
 		try {
 			if (cgBase.isIntentAvailable(activity, "com.google.android.radar.SHOW_RADAR") == true) {

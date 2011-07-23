@@ -22,6 +22,14 @@
 				android:layout_width="fill_parent"
 				android:layout_height="wrap_content"
 				android:orientation="vertical" >
+			<RelativeLayout android:layout_width="match_parent" style="@style/separator_horizontal_layout">
+				<View style="@style/separator_horizontal"></View>
+				<TextView android:text="@string/search_direction_rel" style="@style/separator_horizontal_headline"></TextView>
+			</RelativeLayout>
+			<RelativeLayout android:layout_width="match_parent" style="@style/separator_horizontal_layout">
+				<View style="@style/separator_horizontal"></View>
+				<TextView android:text="@string/search_direction_rel" style="@style/separator_horizontal_headline"></TextView>
+			</RelativeLayout>
 			<RelativeLayout style="@style/separator_horizontal_layout" >
 				<View style="@style/separator_horizontal" />
 				<TextView style="@style/separator_horizontal_headline"
@@ -48,6 +56,12 @@
 			<EditText style="@style/edittext"
 					android:id="@+id/distance"
 					android:hint="@string/waypoint_distance" />
+			<RelativeLayout style="@style/separator_horizontal_layout" >
+				<View style="@style/separator_horizontal" />
+				<TextView style="@style/separator_horizontal_headline"
+						android:text="@string/search_history" />
+			</RelativeLayout>
+			<ListView android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@android:id/list"></ListView>	
 		</LinearLayout>
 	</ScrollView>
 </LinearLayout>

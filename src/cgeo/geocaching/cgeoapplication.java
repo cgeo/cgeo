@@ -513,6 +513,17 @@ public class cgeoapplication extends Application {
 
 		return search;
 	}
+	
+	public List<cgWaypoint> getHistoryOfSearchedLocations()
+	{
+		if (storage == null) {
+			storage = new cgData(this);
+		}
+		
+		// TODO: Cache results!
+		
+		return storage.loadHistoryOfSearchedLocations();
+	}
 
 	public cgSearch getHistoryOfCaches(boolean detailedOnly, String cachetype) {
 		if (storage == null) {
@@ -617,6 +628,17 @@ public class cgeoapplication extends Application {
 			storage = new cgData(this);
 		}
 		return storage.markFound(geocode);
+	}
+	
+	public boolean saveSearchedDestinations(List<cgWaypoint> destinations)
+	{
+		// TODO: This really should be done using a getter - lot's duplicated code in here!!
+		if(storage == null)
+		{
+			storage = new cgData(this);
+		}
+		
+		return storage.saveSearchedDestinations(destinations);
 	}
 
 	public boolean saveWaypoints(String geocode, ArrayList<cgWaypoint> waypoints, boolean drop) {
