@@ -1,33 +1,21 @@
 package cgeo.geocaching;
 
-import gnu.android.app.appmanualclient.*;
+import gnu.android.app.appmanualclient.AppManualReaderClient;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
-import android.os.Handler;
-import android.os.Message;
-import android.os.Bundle;
-import android.util.Log;
+import java.util.Locale;
+import java.util.Map.Entry;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
-import android.text.Html;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.method.LinkMovementMethod;
-import android.view.ContextMenu;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.LayoutInflater;
-import android.widget.ScrollView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.ImageView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -37,19 +25,32 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Display;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.SubMenu;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-import java.net.URLEncoder;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Map.Entry;
 
 public class cgeodetail extends Activity {
 	public Long searchId = null;
@@ -168,7 +169,7 @@ public class cgeodetail extends Activity {
 		public void handleMessage(Message message) {
 			BitmapDrawable image = (BitmapDrawable) message.obj;
 			ScrollView scroll = (ScrollView) findViewById(R.id.details_list_box);
-			ImageView view = (ImageView) findViewById(R.id.map_preview);
+			final ImageView view = (ImageView) findViewById(R.id.map_preview);
 
 			if (image != null && view != null) {
 				view.setImageDrawable(image);
@@ -177,6 +178,18 @@ public class cgeodetail extends Activity {
 					scroll.scrollTo(0, (int) (80 * pixelRatio));
 				}
 				view.setVisibility(View.VISIBLE);
+				view.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						try {
+							registerForContextMenu(view);
+							openContextMenu(view);
+						} catch (Exception e) {
+							// nothing
+						}
+					}
+				});
 			}
 		}
 	};
@@ -390,6 +403,10 @@ public class cgeodetail extends Activity {
 			menu.add(viewId, 2, 0, res.getString(R.string.user_menu_view_found));
 			menu.add(viewId, 3, 0, res.getString(R.string.user_menu_open_browser));
 		}
+		if (viewId == R.id.map_preview) {
+			menu.setHeaderTitle(res.getString(R.string.cache_menu_navigate));
+			addNavigationMenuItems(menu);
+		}
 	}
 
 	@Override
@@ -432,21 +449,8 @@ public class cgeodetail extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		if (cache != null && cache.latitude != null && cache.longitude != null) {
 			menu.add(0, 2, 0, res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass); // compass
-
 			SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
-			subMenu.add(0, 8, 0, res.getString(R.string.cache_menu_radar)); // radar
-			if (cache != null && cache.reason >= 1 && settings.storeOfflineMaps == 1) {
-				subMenu.add(1, 6, 0, res.getString(R.string.cache_menu_map_static)); // static maps
-			}
-			subMenu.add(0, 1, 0, res.getString(R.string.cache_menu_map)); // c:geo map
-			if (base.isLocus(activity)) {
-				subMenu.add(0, 20, 0, res.getString(R.string.cache_menu_locus)); // ext.: locus
-			}
-			if (base.isRmaps(activity)) {
-				subMenu.add(0, 21, 0, res.getString(R.string.cache_menu_rmaps)); // ext.: rmaps
-			}
-			subMenu.add(0, 23, 0, res.getString(R.string.cache_menu_map_ext)); // ext.: other
-			subMenu.add(0, 9, 0, res.getString(R.string.cache_menu_tbt)); // turn-by-turn
+			addNavigationMenuItems(subMenu);
 		}
 
 		if (cache != null && cache.hidden != null && (cache.type.equalsIgnoreCase("event") == true || cache.type.equalsIgnoreCase("mega") == true || cache.type.equalsIgnoreCase("cito") == true)) {
@@ -468,6 +472,22 @@ public class cgeodetail extends Activity {
 		menu.add(0, 12, 0, res.getString(R.string.cache_menu_share)).setIcon(android.R.drawable.ic_menu_share); // share cache
 
 		return true;
+	}
+
+	private void addNavigationMenuItems(final Menu menu) {
+		menu.add(0, 8, 0, res.getString(R.string.cache_menu_radar)); // radar
+		if (cache != null && cache.reason >= 1 && settings.storeOfflineMaps == 1) {
+			menu.add(1, 6, 0, res.getString(R.string.cache_menu_map_static)); // static maps
+		}
+		menu.add(0, 1, 0, res.getString(R.string.cache_menu_map)); // c:geo map
+		if (base.isLocus(activity)) {
+			menu.add(0, 20, 0, res.getString(R.string.cache_menu_locus)); // ext.: locus
+		}
+		if (base.isRmaps(activity)) {
+			menu.add(0, 21, 0, res.getString(R.string.cache_menu_rmaps)); // ext.: rmaps
+		}
+		menu.add(0, 23, 0, res.getString(R.string.cache_menu_map_ext)); // ext.: other
+		menu.add(0, 9, 0, res.getString(R.string.cache_menu_tbt)); // turn-by-turn
 	}
 
 	@Override
