@@ -93,7 +93,7 @@ public class cgeocaches extends ListActivity {
 	private cgGeo geo = null;
 	private cgDirection dir = null;
 	private cgUpdateLoc geoUpdate = new update();
-	private cgUpdateDir dirUpdate = new updateDir();
+	private cgUpdateDir dirUpdate = new UpdateDirection();
 	private String title = "";
 	private int detailTotal = 0;
 	private int detailProgress = 0;
@@ -1618,7 +1618,7 @@ public class cgeocaches extends ListActivity {
 		}
 	}
 
-	private class updateDir extends cgUpdateDir {
+	private class UpdateDirection extends cgUpdateDir {
 
 		@Override
 		public void updateDir(cgDirection dir) {

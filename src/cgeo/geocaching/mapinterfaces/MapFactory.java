@@ -1,18 +1,19 @@
 package cgeo.geocaching.mapinterfaces;
 
+import android.app.Activity;
 import android.content.Context;
 import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgUser;
 
 /**
  * Defines functions of a factory class to get implementation specific objects
- * (GeoPoints, OverlayItems, ...) 
+ * (GeoPoints, OverlayItems, ...)
  * @author rsudev
  *
  */
 public interface MapFactory {
 
-	public Class getMapClass();
+	public Class<?extends Activity> getMapClass();
 
 	public int getMapViewId();
 

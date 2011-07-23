@@ -36,7 +36,7 @@ public class cgeonavigate extends Activity {
 	private cgGeo geo = null;
 	private cgDirection dir = null;
 	private cgUpdateLoc geoUpdate = new update();
-	private cgUpdateDir dirUpdate = new updateDir();
+	private cgUpdateDir dirUpdate = new UpdateDirection();
 	private Double dstLatitude = null;
 	private Double dstLongitude = null;
 	private Double cacheHeading = new Double(0);
@@ -447,7 +447,7 @@ public class cgeonavigate extends Activity {
 		}
 	}
 
-	private class updateDir extends cgUpdateDir {
+	private class UpdateDirection extends cgUpdateDir {
 
 		@Override
 		public void updateDir(cgDirection dir) {

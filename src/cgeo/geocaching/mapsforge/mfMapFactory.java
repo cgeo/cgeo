@@ -1,5 +1,6 @@
 package cgeo.geocaching.mapsforge;
 
+import android.app.Activity;
 import android.content.Context;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCoord;
@@ -14,7 +15,7 @@ import cgeo.geocaching.mapinterfaces.UserOverlayItemImpl;
 public class mfMapFactory implements MapFactory{
 
 	@Override
-	public Class getMapClass() {
+	public Class<?extends Activity> getMapClass() {
 		return mfMapActivity.class;
 	}
 
@@ -38,7 +39,7 @@ public class mfMapFactory implements MapFactory{
 		mfOverlay baseOvl = new mfOverlay(ovlIn);
 		return baseOvl;
 	}
-	
+
 	@Override
 	public CacheOverlayItemImpl getCacheOverlayItem(cgCoord coordinate, String type) {
 		mfCacheOverlayItem baseItem = new mfCacheOverlayItem(coordinate, type);
