@@ -452,6 +452,14 @@ public class cgeocaches extends ListActivity {
                 cacheList.get(msg.what).statusChecked = false;
                 waitDialog.setProgress(detailProgress);
             }
+            if (-2 == msg.what)
+            {
+                warning.showToast(res.getString(R.string.info_fieldnotes_exported_to) + ": " + msg.obj.toString());
+            }
+            if (-3 == msg.what)
+            {
+                warning.showToast(res.getString(R.string.err_fieldnotes_export_failed));
+            }
             else
             {
                 if (adapter != null)
@@ -2208,9 +2216,12 @@ public class cgeocaches extends ListActivity {
                     os = new FileOutputStream(exportFile);
                     fw = new OutputStreamWriter(os, "ISO-8859-1"); // TODO: gc.com doesn't support UTF-8
                     fw.write(fieldNoteBuffer.toString());
+                    
+                    Message.obtain(handler, -2, exportFile).sendToTarget();
                 }
                 catch (IOException e) {
                     Log.e(cgSettings.tag, "cgeocaches.geocachesExportFieldNotes: " + e.toString());
+                    handler.sendEmptyMessage(-3);
                 }
                 finally
                 {
