@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -1674,7 +1675,7 @@ public class cgBase {
 								Calendar date = Calendar.getInstance();
 								date.set(year, month, day, 12, 0, 0);
 								logDate = date.getTimeInMillis();
-								logDate = (long) (Math.ceil(logDate / 1000)) * 1000;
+								logDate = (logDate / 1000L) * 1000L;
 							} else {
 								logDate = 0;
 							}
@@ -1888,9 +1889,8 @@ public class cgBase {
 
 		final HashMap<String, cgRating> ratings = getRating(guids, geocodes);
 		if(ratings != null){
-			final Set<String> ratingKeys = ratings.keySet();
-			for (String ratingKey : ratingKeys) {
-				return ratings.get(ratingKey);
+			for (Entry<String, cgRating> entry : ratings.entrySet()) {
+				return entry.getValue();
 			}
 		}
 
@@ -2354,7 +2354,7 @@ public class cgBase {
 								Calendar date = Calendar.getInstance();
 								date.set(year, month, day, 12, 0, 0);
 								logDate = date.getTimeInMillis();
-								logDate = (long) (Math.ceil(logDate / 1000)) * 1000;
+								logDate = (logDate / 1000L) * 1000L;
 							} else {
 								logDate = 0;
 							}
@@ -2732,7 +2732,7 @@ public class cgBase {
 
 	public String getHumanSpeed(float speed) {
 		double kph = speed * 3.6;
-		String unit = "kmh";
+		String unit = "km/h";
 
 		if (this.settings.units == cgSettings.unitsImperial) {
 			kph *= kmInMiles;
@@ -4184,19 +4184,19 @@ public class cgBase {
 	}
 
 	public static String implode(String delim, Object[] array) {
-		String out = "";
+		StringBuilder out = new StringBuilder();
 
 		try {
 			for (int i = 0; i < array.length; i++) {
 				if (i != 0) {
-					out += delim;
+					out.append(delim);
 				}
-				out += array[i].toString();
+				out.append(array[i].toString());
 			}
 		} catch (Exception e) {
 			Log.e(cgSettings.tag, "cgeoBase.implode: " + e.toString());
 		}
-		return out;
+		return out.toString();
 	}
 
 	public static String urlencode_rfc3986(String text) {

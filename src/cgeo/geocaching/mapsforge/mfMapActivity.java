@@ -15,16 +15,16 @@ import cgeo.geocaching.mapinterfaces.ActivityImpl;
 public class mfMapActivity extends MapActivity implements ActivityImpl {
 
 	private MapBase mapBase;
-	
+
 	public mfMapActivity() {
 		mapBase = new cgeomap(this);
 	}
-	
+
 	@Override
 	public Activity getActivity() {
 		return this;
 	}
-	
+
 	@Override
 	protected void onCreate(Bundle icicle) {
 		mapBase.onCreate(icicle);
@@ -72,7 +72,7 @@ public class mfMapActivity extends MapActivity implements ActivityImpl {
 
 	@Override
 	public boolean superOnCreateOptionsMenu(Menu menu) {
-		return superOnCreateOptionsMenu(menu);
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
@@ -94,7 +94,7 @@ public class mfMapActivity extends MapActivity implements ActivityImpl {
 	public boolean superOnPrepareOptionsMenu(Menu menu) {
 		return super.onPrepareOptionsMenu(menu);
 	}
-	
+
 	// close activity and open homescreen
 	public void goHome(View view) {
 		mapBase.goHome(view);

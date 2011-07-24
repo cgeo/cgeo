@@ -196,14 +196,14 @@ public class cgData {
 			}
 		}
 
-		if (databaseRO == null || databaseRO.isOpen() == false) {
+		if (databaseRO == null || !databaseRO.isOpen()) {
 			try {
 				if (dbHelper == null) {
 					dbHelper = new cgDbHelper(context);
 				}
 				databaseRO = dbHelper.getReadableDatabase();
 
-				if (databaseRO.needUpgrade(dbVersion) == true) {
+				if (databaseRO.needUpgrade(dbVersion)) {
 					databaseRO = null;
 				}
 
@@ -213,7 +213,7 @@ public class cgData {
 					Log.e(cgSettings.tag, "Failed to open connection to RO database.");
 				}
 
-				if (databaseRO.inTransaction() == true) {
+				if (databaseRO != null && databaseRO.inTransaction()) {
 					databaseRO.endTransaction();
 				}
 			} catch (Exception e) {
@@ -2145,8 +2145,8 @@ public class cgData {
 			cursor.moveToFirst();
 
 			do {
-				Integer type = new Integer(cursor.getInt(cursor.getColumnIndex("type")));
-				Integer count = new Integer(cursor.getInt(cursor.getColumnIndex("count")));
+				Integer type = cursor.getInt(cursor.getColumnIndex("type"));
+				Integer count = cursor.getInt(cursor.getColumnIndex("count"));
 
 				logCounts.put(type, count);
 			} while (cursor.moveToNext());

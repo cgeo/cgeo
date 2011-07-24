@@ -1,33 +1,35 @@
 package cgeo.geocaching;
 
-import gnu.android.app.appmanualclient.*;
+import gnu.android.app.appmanualclient.AppManualReaderClient;
 
 import java.net.URLEncoder;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
-import android.os.Handler;
-import android.os.Message;
-import android.os.Bundle;
-import android.util.Log;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
-import android.view.ContextMenu;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.LayoutInflater;
-import android.widget.ScrollView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 public class cgeotrackable extends Activity {
 	public cgTrackable trackable = null;
@@ -192,7 +194,7 @@ public class cgeotrackable extends Activity {
 						itemLayout.setOnClickListener(new userActions());
 						//activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?guid=" + trackable.spottedGuid)));
 					}
-					
+
 					detailsList.addView(itemLayout);
 				}
 
@@ -217,7 +219,7 @@ public class cgeotrackable extends Activity {
 					itemValue.setText(cgBase.dateOut.format(trackable.released));
 					detailsList.addView(itemLayout);
 				}
-				
+
 				// trackable distance
 				if (trackable.distance != null) {
 					itemLayout = (RelativeLayout)inflater.inflate(R.layout.cache_item, null);
@@ -229,7 +231,7 @@ public class cgeotrackable extends Activity {
 					detailsList.addView(itemLayout);
 				}
 
-				
+
 				// trackable goal
 				if (trackable.goal != null && trackable.goal.length() > 0) {
 					((LinearLayout) findViewById(R.id.goal_box)).setVisibility(View.VISIBLE);
@@ -296,11 +298,11 @@ public class cgeotrackable extends Activity {
 					imgView.addView(trackableImage);
 				}
 			} catch (Exception e) {
-				Log.e(cgSettings.tag, "cgeotrackable.loadTrackableHandler: " + e.toString() + e.getStackTrace());
+				Log.e(cgSettings.tag, "cgeotrackable.loadTrackableHandler: " + e.toString() + Arrays.toString(e.getStackTrace()));
 			}
 
 			displayLogs();
-			
+
 			if (waitDialog != null) {
 				waitDialog.dismiss();
 			}
@@ -406,7 +408,7 @@ public class cgeotrackable extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		settings.load();
 	}
 
@@ -532,7 +534,7 @@ public class cgeotrackable extends Activity {
 
 		trackable = base.searchTrackable(params);
 	}
-	
+
 	private void displayLogs() {
 		// trackable logs
 		LinearLayout listView = (LinearLayout) findViewById(R.id.log_list);
@@ -549,7 +551,7 @@ public class cgeotrackable extends Activity {
 					((TextView) rowView.findViewById(R.id.added)).setText(cgBase.dateOutShort.format(logDate));
 				}
 
-				
+
 				if (cgBase.logTypes1.containsKey(log.type) == true) {
 					((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(log.type));
 				} else {
@@ -584,7 +586,7 @@ public class cgeotrackable extends Activity {
 			}
 		}
 	}
-	
+
 	private class userActions implements View.OnClickListener {
 
 		public void onClick(View view) {
@@ -655,7 +657,7 @@ public class cgeotrackable extends Activity {
 	public void goHome(View view) {
 		base.goHome(activity);
 	}
-	
+
 	public void goManual(View view) {
 		try {
 			AppManualReaderClient.openManual(

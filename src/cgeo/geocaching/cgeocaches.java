@@ -97,7 +97,7 @@ public class cgeocaches extends ListActivity {
 	private String title = "";
 	private int detailTotal = 0;
 	private int detailProgress = 0;
-	private Long detailProgressTime = 0l;
+	private long detailProgressTime = 0l;
 	private geocachesLoadDetails threadD = null;
 	private geocachesLoadFromWeb threadW = null;
 	private geocachesDropDetails threadR = null;
@@ -288,17 +288,16 @@ public class cgeocaches extends ListActivity {
 						adapter.notifyDataSetChanged();
 					}
 
-					Float diffTime = new Float((System.currentTimeMillis() - detailProgressTime) / 1000); // seconds left
-					Float oneCache = diffTime / detailProgress; // left time per cache
-					int etaTime = (int) ((detailTotal - detailProgress) * oneCache / 60); // seconds remaining
+					int secondsElapsed = (int)((System.currentTimeMillis() - detailProgressTime) / 1000);
+					int minutesRemaining = (int) ((detailTotal - detailProgress) * secondsElapsed / detailProgress / 60);
 
 					waitDialog.setProgress(detailProgress);
-					if (etaTime < 1) {
+					if (minutesRemaining < 1) {
 						waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
-					} else if (etaTime == 1) {
-						waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + etaTime + " " + res.getString(R.string.caches_eta_min));
+					} else if (minutesRemaining == 1) {
+						waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + minutesRemaining + " " + res.getString(R.string.caches_eta_min));
 					} else {
-						waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + etaTime + " " + res.getString(R.string.caches_eta_mins));
+						waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + minutesRemaining + " " + res.getString(R.string.caches_eta_mins));
 					}
 				}
 			} else {

@@ -1,12 +1,14 @@
 package cgeo.geocaching.mapcommon;
 
+import java.util.ArrayList;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.Paint.Style;
 import android.graphics.PaintFlagsDrawFilter;
+import android.graphics.Point;
 import android.location.Location;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgBase;
@@ -14,10 +16,8 @@ import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
 import cgeo.geocaching.mapinterfaces.MapFactory;
 import cgeo.geocaching.mapinterfaces.MapProjectionImpl;
-import cgeo.geocaching.mapinterfaces.OverlayBase;
 import cgeo.geocaching.mapinterfaces.MapViewImpl;
-
-import java.util.ArrayList;
+import cgeo.geocaching.mapinterfaces.OverlayBase;
 
 public class cgMapMyOverlay implements OverlayBase {
 	private cgSettings settings = null;
@@ -55,22 +55,22 @@ public class cgMapMyOverlay implements OverlayBase {
 	@Override
 	public void drawOverlayBitmap(Canvas canvas, Point drawPosition,
 			MapProjectionImpl projection, byte drawZoomLevel) {
-		
+
 		drawInternal(canvas, projection);
 	}
-	
+
     @Override
     public void draw(Canvas canvas, MapViewImpl mapView, boolean shadow) {
-    	
+
     	drawInternal(canvas, mapView.getMapProjection());
     }
-    
+
     private void drawInternal(Canvas canvas, MapProjectionImpl projection) {
-    	
+
 		if (coordinates == null || location == null) return;
-		
+
 		MapFactory mapFactory = settings.getMapFactory();
-		
+
 		if (accuracyCircle == null) {
 			accuracyCircle = new Paint();
 			accuracyCircle.setAntiAlias(true);
@@ -137,7 +137,7 @@ public class cgMapMyOverlay implements OverlayBase {
 				int alpha = 0;
 				int alphaCnt = size - 201;
 				if (alphaCnt < 1) alphaCnt = 1;
-				
+
 				for (int cnt = 1; cnt < size; cnt ++) {
 					Location prev = history.get(cnt - 1);
 					Location now = history.get(cnt);
@@ -146,8 +146,12 @@ public class cgMapMyOverlay implements OverlayBase {
 						projection.toPixels(mapFactory.getGeoPointBase((int)(prev.getLatitude() * 1e6), (int)(prev.getLongitude() * 1e6)), historyPointP);
 						projection.toPixels(mapFactory.getGeoPointBase((int)(now.getLatitude() * 1e6), (int)(now.getLongitude() * 1e6)), historyPointN);
 
-						if ((alphaCnt - cnt) > 0) alpha = Math.round(255 / (alphaCnt - cnt));
-						else alpha = 255;
+						if ((alphaCnt - cnt) > 0) {
+							alpha = 255 / (alphaCnt - cnt);
+						}
+						else {
+							alpha = 255;
+						}
 
 						historyLineShadow.setAlpha(alpha);
 						historyLine.setAlpha(alpha);
@@ -187,12 +191,12 @@ public class cgMapMyOverlay implements OverlayBase {
 		marginLeft = center.x - (widthArrow / 2);
 		marginTop = center.y - (heightArrow / 2);
 
-		canvas.rotate(new Float(heading), center.x, center.y);
+		canvas.rotate(heading.floatValue(), center.x, center.y);
 		canvas.drawBitmap(arrow, marginLeft, marginTop, null);
-		canvas.rotate(-(new Float(heading)), center.x, center.y);
+		canvas.rotate(-(heading.floatValue()), center.x, center.y);
 
 		canvas.setDrawFilter(remfil);
-		
+
 		//super.draw(canvas, mapView, shadow);
 	}
 }

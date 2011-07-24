@@ -1,16 +1,21 @@
 package cgeo.geocaching;
 
-import gnu.android.app.appmanualclient.*;
+import gnu.android.app.appmanualclient.AppManualReaderClient;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.os.Bundle;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -21,10 +26,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class cgeopoint extends Activity {
 
@@ -151,7 +152,7 @@ public class cgeopoint extends Activity {
 		Button buttonCurrent = (Button) findViewById(R.id.current);
 		buttonCurrent.setOnClickListener(new currentListener());
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		menu.add(0, 2, 0, res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass); // compass
@@ -167,19 +168,19 @@ public class cgeopoint extends Activity {
 		}
 		subMenu.add(0, 23, 0, res.getString(R.string.cache_menu_map_ext)); // ext.: other
 		subMenu.add(0, 4, 0, res.getString(R.string.cache_menu_tbt)); // turn-by-turn
-		
+
 		menu.add(0, 5, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
 
 		return true;
 	}
-	
+
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		super.onPrepareOptionsMenu(menu);
 
 		try {
 			ArrayList<Double> coords = getDestination();
-			
+
 			if (coords != null && coords.get(0) != null && coords.get(1) != null) {
 				menu.findItem(0).setVisible(true);
 				menu.findItem(2).setVisible(true);
@@ -192,14 +193,14 @@ public class cgeopoint extends Activity {
 		} catch (Exception e) {
 			// nothing
 		}
-		
+
 		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		final int menuItem = item.getItemId();
-		
+
 		ArrayList<Double> coords = getDestination();
 
 		if (menuItem == 1) {
@@ -235,16 +236,16 @@ public class cgeopoint extends Activity {
 
 		return false;
 	}
-	
+
 	private void showOnMap() {
 		ArrayList<Double> coords = getDestination();
-		
+
 		if (coords == null || coords.get(0) == null || coords.get(1) == null) {
 			warning.showToast(res.getString(R.string.err_location_unknown));
 		}
-		
+
 		Intent mapIntent = new Intent(activity, settings.getMapFactory().getMapClass());
-		
+
 		mapIntent.putExtra("latitude", coords.get(0));
 		mapIntent.putExtra("longitude", coords.get(1));
 
@@ -253,7 +254,7 @@ public class cgeopoint extends Activity {
 
 	private void navigateTo() {
 		ArrayList<Double> coords = getDestination();
-		
+
 		if (coords == null || coords.get(0) == null || coords.get(1) == null) {
 			warning.showToast(res.getString(R.string.err_location_unknown));
 		}
@@ -271,11 +272,11 @@ public class cgeopoint extends Activity {
 
 	private void radarTo() {
 		ArrayList<Double> coords = getDestination();
-		
+
 		if (coords == null || coords.get(0) == null || coords.get(1) == null) {
 			warning.showToast(res.getString(R.string.err_location_unknown));
 		}
-		
+
 		try {
 			if (cgBase.isIntentAvailable(activity, "com.google.android.radar.SHOW_RADAR") == true) {
 				Intent radarIntent = new Intent("com.google.android.radar.SHOW_RADAR");
@@ -314,18 +315,18 @@ public class cgeopoint extends Activity {
 			Log.e(cgSettings.tag, "cgeopoint.radarTo: " + e.toString());
 		}
 	}
-	
+
 	private void cachesAround() {
 		ArrayList<Double> coords = getDestination();
-		
+
 		if (coords == null || coords.get(0) == null || coords.get(1) == null) {
 			warning.showToast(res.getString(R.string.err_location_unknown));
 		}
-		
+
 		cgeocaches cachesActivity = new cgeocaches();
 
 		Intent cachesIntent = new Intent(activity, cachesActivity.getClass());
-		
+
 		cachesIntent.putExtra("type", "coordinate");
 		cachesIntent.putExtra("latitude", coords.get(0));
 		cachesIntent.putExtra("longitude", coords.get(1));
@@ -335,7 +336,7 @@ public class cgeopoint extends Activity {
 
 		finish();
 	}
-	
+
 	private class update extends cgUpdateLoc {
 
 		@Override
@@ -503,8 +504,8 @@ public class cgeopoint extends Activity {
 		if (changed == true && latitude == null || longitude == null) {
 			SharedPreferences.Editor edit = prefs.edit();
 
-			edit.putFloat("anylatitude", new Float(latitude));
-			edit.putFloat("anylongitude", new Float(longitude));
+			edit.putFloat("anylatitude", latitude.floatValue());
+			edit.putFloat("anylongitude", longitude.floatValue());
 
 			edit.commit();
 		} else {

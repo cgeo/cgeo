@@ -163,17 +163,16 @@ public class cgeomap extends MapBase {
 		public void handleMessage(Message msg) {
 			if (msg.what == 0) {
 				if (waitDialog != null) {
-					Float diffTime = new Float((System.currentTimeMillis() - detailProgressTime) / 1000); // seconds left
-					Float oneCache = diffTime / detailProgress; // left time per cache
-					Float etaTime = (detailTotal - detailProgress) * oneCache; // seconds remaining
+					int secondsElapsed = (int)((System.currentTimeMillis() - detailProgressTime) / 1000);
+					int secondsRemaining = (detailTotal - detailProgress) * secondsElapsed / detailProgress;
 
 					waitDialog.setProgress(detailProgress);
-					if (etaTime < 40) {
+					if (secondsRemaining < 40) {
 						waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
-					} else if (etaTime < 90) {
-						waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format(Locale.getDefault(), "%.0f", (etaTime / 60)) + " " + res.getString(R.string.caches_eta_min));
+					} else if (secondsRemaining < 90) {
+						waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format(Locale.getDefault(), "%.0f", (secondsRemaining / 60)) + " " + res.getString(R.string.caches_eta_min));
 					} else {
-						waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format(Locale.getDefault(), "%.0f", (etaTime / 60)) + " " + res.getString(R.string.caches_eta_mins));
+						waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format(Locale.getDefault(), "%.0f", (secondsRemaining / 60)) + " " + res.getString(R.string.caches_eta_mins));
 					}
 				}
 			} else {
@@ -343,7 +342,7 @@ public class cgeomap extends MapBase {
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		settings.load();
 
 		app.setAction(null);
@@ -852,7 +851,7 @@ public class cgeomap extends MapBase {
 								spanLongitude = spanLongitudeNow;
 
 								showProgressHandler.sendEmptyMessage(1); // show progress
-								
+
 								loadThread = new LoadThread(centerLatitude, centerLongitude, spanLatitude, spanLongitude);
 								loadThread.setName("loadThread");
 								loadThread.start(); //loadThread will kick off downloadThread once it's done
@@ -978,19 +977,19 @@ public class cgeomap extends MapBase {
 				//LeeB - I think this can be done better:
 				//1. fetch and draw(in another thread) caches from the db (fast? db read will be the slow bit)
 				//2. fetch and draw(in another thread) and then insert into the db caches from geocaching.com - dont draw/insert if exist in memory?
-				
+
 				// stage 1 - pull and render from the DB only
-				
+
 				if (fromDetailIntent) {
 					searchId = searchIdIntent;
-				} else {				
+				} else {
 					if (!live || settings.maplive == 0) {
 						searchId = app.getStoredInViewport(centerLat, centerLon, spanLat, spanLon, settings.cacheType);
 					} else {
 						searchId = app.getCachedInViewport(centerLat, centerLon, spanLat, spanLon, settings.cacheType);
 					}
 				}
-				
+
 				if (searchId != null) {
 					downloaded = true;
 				}
@@ -1001,16 +1000,16 @@ public class cgeomap extends MapBase {
 
 					return;
 				}
-				
+
 				caches = app.getCaches(searchId);
-				
+
 				//if in live map and stored caches are found / disables are also shown.
 				if (live && settings.maplive >= 1) {
 					// I know code is crude, but temporary fix
 					int i = 0;
 					boolean excludeMine = settings.excludeMine > 0;
 					boolean excludeDisabled = settings.excludeDisabled > 0;
-					
+
 					while (i < caches.size())
 					{
 						boolean remove = false;
@@ -1022,10 +1021,10 @@ public class cgeomap extends MapBase {
 							remove = true;
 						if (remove)
 							caches.remove(i);
-						else 
+						else
 							i++;
 					}
-					
+
 				}
 
 				if (stop) {
@@ -1120,14 +1119,14 @@ public class cgeomap extends MapBase {
 
 					return;
 				}
-				
+
 				HashMap<String, String> params = new HashMap<String, String>();
 				params.put("usertoken", token);
 				params.put("latitude-min", String.format((Locale) null, "%.6f", latMin));
 				params.put("latitude-max", String.format((Locale) null, "%.6f", latMax));
 				params.put("longitude-min", String.format((Locale) null, "%.6f", lonMin));
 				params.put("longitude-max", String.format((Locale) null, "%.6f", lonMax));
-				
+
 				searchId = base.searchByViewport(params, 0);
 				if (searchId != null) {
 					downloaded = true;
@@ -1139,7 +1138,7 @@ public class cgeomap extends MapBase {
 
 					return;
 				}
-				
+
 				caches = app.getCaches(searchId, centerLat, centerLon, spanLat, spanLon);
 
 				if (stop) {
@@ -1155,7 +1154,7 @@ public class cgeomap extends MapBase {
 				}
 				displayThread = new DisplayThread(centerLat, centerLon, spanLat, spanLon);
 				displayThread.start();
-				
+
 			} finally {
 				working = false;
 			}
@@ -1203,7 +1202,7 @@ public class cgeomap extends MapBase {
 						if (cacheOne.latitude == null && cacheOne.longitude == null) {
 							continue;
 						}
-						
+
 						final cgCoord coord = new cgCoord(cacheOne);
 						coordinates.add(coord);
 
@@ -1593,16 +1592,16 @@ public class cgeomap extends MapBase {
 				Integer maxLon = null;
 
 				if (viewport.get(1) != null) {
-					minLat = new Double((Double) viewport.get(1) * 1e6).intValue();
+					minLat = (int)((Double) viewport.get(1) * 1e6);
 				}
 				if (viewport.get(2) != null) {
-					maxLat = new Double((Double) viewport.get(2) * 1e6).intValue();
+					maxLat = (int)((Double) viewport.get(2) * 1e6);
 				}
 				if (viewport.get(3) != null) {
-					maxLon = new Double((Double) viewport.get(3) * 1e6).intValue();
+					maxLon = (int)((Double) viewport.get(3) * 1e6);
 				}
 				if (viewport.get(4) != null) {
-					minLon = new Double((Double) viewport.get(4) * 1e6).intValue();
+					minLon = (int)((Double) viewport.get(4) * 1e6);
 				}
 
 				if (cnt == null || cnt <= 0 || minLat == null || maxLat == null || minLon == null || maxLon == null) {

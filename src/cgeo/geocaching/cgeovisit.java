@@ -1,32 +1,33 @@
 package cgeo.geocaching;
 
-import gnu.android.app.appmanualclient.*;
+import gnu.android.app.appmanualclient.AppManualReaderClient;
 
-import android.os.Bundle;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.util.Log;
-import android.view.ContextMenu;
-import android.view.LayoutInflater;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
+import android.widget.TextView;
 
 public class cgeovisit extends cgLogForm {
 	private cgeoapplication app = null;
@@ -271,11 +272,11 @@ public class cgeovisit extends cgLogForm {
 
 		init();
 	}
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		settings.load();
 	}
 
@@ -547,7 +548,7 @@ public class cgeovisit extends cgLogForm {
 			types.add(cgBase.LOG_TEMP_DISABLE_LISTING);
 			types.add(cgBase.LOG_ENABLE_LISTING);
 			types.add(cgBase.LOG_ARCHIVE);
-			types.remove(new Integer(cgBase.LOG_UPDATE_COORDINATES));
+			types.remove(Integer.valueOf(cgBase.LOG_UPDATE_COORDINATES));
 			if (cache.type.equals("event") || cache.type.equals("mega") || cache.type.equals("cito") || cache.type.equals("lostfound")) {
 				types.add(cgBase.LOG_ANNOUNCEMENT);
 			}
@@ -801,7 +802,7 @@ public class cgeovisit extends cgLogForm {
 				if (typesPre.size() > 0) {
 					types.clear();
 					types.addAll(typesPre);
-					types.remove(new Integer(cgBase.LOG_UPDATE_COORDINATES));
+					types.remove(Integer.valueOf(cgBase.LOG_UPDATE_COORDINATES));
 				}
 				typesPre.clear();
 			} catch (Exception e) {
