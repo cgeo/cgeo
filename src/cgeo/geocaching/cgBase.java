@@ -22,6 +22,7 @@ import java.security.MessageDigest;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -90,7 +91,8 @@ public class cgBase {
 	public static HashMap<Integer, String> logTypesTrackable = new HashMap<Integer, String>();
 	public static HashMap<Integer, String> logTypesTrackableAction = new HashMap<Integer, String>();
 	public static HashMap<Integer, String> errorRetrieve = new HashMap<Integer, String>();
-	public static SimpleDateFormat dateIn = new SimpleDateFormat("MM/dd/yyyy");
+	public static SimpleDateFormat dateInBackslash = new SimpleDateFormat("MM/dd/yyyy");
+	public static SimpleDateFormat dateInDash = new SimpleDateFormat("yyyy-MM-dd");
 	public static SimpleDateFormat dateEvIn = new SimpleDateFormat("dd MMMMM yyyy", Locale.ENGLISH); // 28 March 2009
 	public static SimpleDateFormat dateTbIn1 = new SimpleDateFormat("EEEEE, dd MMMMM yyyy", Locale.ENGLISH); // Saturday, 28 March 2009
 	public static SimpleDateFormat dateTbIn2 = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
@@ -1092,7 +1094,7 @@ public class cgBase {
 		final Pattern patternOwner = Pattern.compile("<span class=\"minorCacheDetails\">[^\\w]*An?([^\\w]*Event)?[^\\w]*cache[^\\w]*by[^<]*<a href=\"[^\"]+\">([^<]+)</a>[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 		final Pattern patternOwnerReal = Pattern.compile("<a id=\"ctl00_ContentBody_uxFindLinksHiddenByThisUser\" href=\"[^\"]*/seek/nearest\\.aspx\\?u=*([^\"]+)\">[^<]+</a>", Pattern.CASE_INSENSITIVE);
 		final Pattern patternHidden = Pattern.compile("<span[^>]*>[^\\w]*Hidden[^:]*:[^\\d]*((\\d+)\\/(\\d+)\\/(\\d+))[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-		final Pattern patternHiddenEvent = Pattern.compile("<span[^>]*>[^\\w]*Event[^\\w]*Date[^:]*:[^\\w]*[a-zA-Z]+,[^\\d]*((\\d+)[^\\w]*(\\w+)[^\\d]*(\\d+))[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+		final Pattern patternHiddenEvent = Pattern.compile("<span[^>]*>[^\\w]*Event[^\\w]*Date[^:]*:([^<]*)</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 		final Pattern patternFavourite = Pattern.compile("<a id=\"uxFavContainerLink\"[^>]*>[^<]*<div[^<]*<span class=\"favorite-value\">[^\\d]*([0-9]+)[^\\d^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 
 		final Pattern patternFound = Pattern.compile("<p>[^<]*<a id=\"ctl00_ContentBody_hlFoundItLog\"[^<]*<img src=\".*/images/stockholm/16x16/check\\.gif\"[^>]*>[^<]*</a>[^<]*</p>", Pattern.CASE_INSENSITIVE);
@@ -1284,7 +1286,7 @@ public class cgBase {
 				final Matcher matcherHidden = patternHidden.matcher(tableInside);
 				while (matcherHidden.find()) {
 					if (matcherHidden.groupCount() > 0) {
-						cache.hidden = dateIn.parse(matcherHidden.group(1));
+						cache.hidden = parseDate(matcherHidden.group(1));
 					}
 				}
 			} catch (Exception e) {
@@ -1298,7 +1300,7 @@ public class cgBase {
 					final Matcher matcherHiddenEvent = patternHiddenEvent.matcher(tableInside);
 					while (matcherHiddenEvent.find()) {
 						if (matcherHiddenEvent.groupCount() > 0) {
-							cache.hidden = dateEvIn.parse(matcherHiddenEvent.group(1));
+							cache.hidden = parseDate(matcherHiddenEvent.group(1));
 						}
 					}
 				} catch (Exception e) {
@@ -1871,6 +1873,36 @@ public class cgBase {
 		caches.cacheList.add(cache);
 
 		return caches;
+	}
+
+	private Date parseDate(String input) {
+		if (input == null) {
+			return null;
+		}
+		input = input.trim();
+		try {
+			Date result;
+			if (input.indexOf('/') > 0) {
+				result = dateInBackslash.parse(input);
+				if (result != null) {
+					return result;
+				}
+			}
+			if (input.indexOf('-') > 0) {
+				result = dateInDash.parse(input);
+				if (result != null) {
+					return result;
+				}
+			}
+			result = dateEvIn.parse(input);
+			if (result != null) {
+				return result;
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public cgRating getRating(String guid, String geocode) {

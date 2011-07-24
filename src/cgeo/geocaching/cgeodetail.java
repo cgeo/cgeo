@@ -456,7 +456,7 @@ public class cgeodetail extends Activity {
 			addNavigationMenuItems(subMenu);
 		}
 
-		if (cache != null && cache.hidden != null && (cache.type.equalsIgnoreCase("event") == true || cache.type.equalsIgnoreCase("mega") == true || cache.type.equalsIgnoreCase("cito") == true)) {
+		if (cache != null && cache.canBeAddedToCalendar()) {
 			menu.add(1, 11, 0, res.getString(R.string.cache_menu_event)).setIcon(android.R.drawable.ic_menu_agenda); // add event to calendar
 		}
 		if (settings.isLogin() == true) {
@@ -1642,6 +1642,9 @@ public class cgeodetail extends Activity {
 		@Override
 		public void updateLoc(cgGeo geo) {
 			if (geo == null) {
+				return;
+			}
+			if (cacheDistance == null) {
 				return;
 			}
 
