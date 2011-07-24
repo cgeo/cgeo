@@ -83,6 +83,8 @@ public class cgeodetail extends Activity {
 	private ProgressDialog storeDialog = null;
 	private ProgressDialog refreshDialog = null;
 	private ProgressDialog dropDialog = null;
+	private ProgressDialog watchlistDialog = null; // progress dialog for watchlist retrieval
+	private Thread watchlistThread = null; // thread for watchlist retrieval
 	private HashMap<Integer, String> calendars = new HashMap<Integer, String>();
 	private Handler storeCacheHandler = new Handler() {
 		@Override
@@ -161,6 +163,7 @@ public class cgeodetail extends Activity {
 			}
 
 			(new loadMapPreview(cache, loadMapPreviewHandler)).start();
+			(new WatchlistThread(2, WatchlistHandler)).start();
 		}
 	};
 
@@ -226,6 +229,50 @@ public class cgeodetail extends Activity {
 			}
 
 			longDescDisplayed = true;
+		}
+	};
+
+	/**
+	 * shows/hides buttons, sets text in watchlist box
+	 * 
+	 * @param result  0: cache is not on watchlist, 1: cache is on watchlist,
+	 *                -1: error occured
+	 */
+	private void updateWatchlistBox(int result) {
+		Button buttonAdd = (Button) findViewById(R.id.add_to_watchlist);
+		Button buttonRemove = (Button) findViewById(R.id.remove_from_watchlist);
+		TextView text = (TextView) findViewById(R.id.watchlist_text);
+		
+		switch (result) {
+		case -1: // error while loading state
+			buttonAdd.setVisibility(View.GONE);
+			buttonRemove.setVisibility(View.GONE);
+			text.setText(R.string.cache_watchlist_error);
+			break;
+		case 0: // not on watchlist
+			buttonAdd.setVisibility(View.VISIBLE);
+			buttonRemove.setVisibility(View.GONE);
+			text.setText(R.string.cache_watchlist_not_on);
+			break;
+		case 1: // is on watchlist
+			buttonAdd.setVisibility(View.GONE);
+			buttonRemove.setVisibility(View.VISIBLE);
+			text.setText(R.string.cache_watchlist_on);
+			break;
+		}
+
+	}
+
+	/**
+	 * Handler, called when add or remove of cache to/from watchlist is done
+	 */
+	private Handler WatchlistHandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			watchlistThread = null;
+			if (watchlistDialog != null) 
+				watchlistDialog.dismiss();
+			updateWatchlistBox(msg.what);
 		}
 	};
 
@@ -960,6 +1007,12 @@ public class cgeodetail extends Activity {
 					}
 				});
 			}
+
+			// watchlist
+			Button buttonWatchlistAdd = (Button) findViewById(R.id.add_to_watchlist);
+			Button buttonWatchlistRemove = (Button) findViewById(R.id.remove_from_watchlist);
+			buttonWatchlistAdd.setOnClickListener(new addToWatchlistClickListener());
+			buttonWatchlistRemove.setOnClickListener(new removeFromWatchlistClickListener());
 
 			// waypoints
 			LinearLayout waypoints = (LinearLayout) findViewById(R.id.waypoints);
@@ -1805,6 +1858,76 @@ public class cgeodetail extends Activity {
 		@Override
 		public void run() {
 			base.dropCache(app, activity, cache, handler);
+		}
+	}
+
+	/**
+	 * Listener for "add to watchlist" button
+	 */
+	private class addToWatchlistClickListener implements View.OnClickListener {
+		public void onClick(View arg0) {
+			if (watchlistDialog != null  &&  watchlistDialog.isShowing() == true) {
+				warning.showToast(res.getString(R.string.err_watchlist_still_surfing));
+				return;
+			}
+			watchlistDialog = ProgressDialog.show(activity, 
+					res.getString(R.string.cache_dialog_watchlist_add_title),
+					res.getString(R.string.cache_dialog_watchlist_add_message), true);
+			watchlistDialog.setCancelable(true);
+
+			if (watchlistThread != null) {
+				watchlistThread.interrupt();
+			}
+
+			watchlistThread = new WatchlistThread(1, WatchlistHandler);
+			watchlistThread.start();
+		}
+	}
+
+	/**
+	 * Listener for "remove from watchlist" button
+	 */
+	private class removeFromWatchlistClickListener implements View.OnClickListener {
+		public void onClick(View arg0) {
+			if (watchlistDialog != null  &&  watchlistDialog.isShowing() == true) {
+				warning.showToast(res.getString(R.string.err_watchlist_still_surfing));
+				return;
+			}
+			watchlistDialog = ProgressDialog.show(activity, 
+					res.getString(R.string.cache_dialog_watchlist_remove_title),
+					res.getString(R.string.cache_dialog_watchlist_remove_message), true);
+			watchlistDialog.setCancelable(true);
+
+			if (watchlistThread != null) {
+				watchlistThread.interrupt();
+			}
+
+			watchlistThread = new WatchlistThread(0, WatchlistHandler);
+			watchlistThread.start();
+		}
+	}
+
+	/**
+	 * Thread, adds/removes cache from watchlist
+	 */
+	private class WatchlistThread extends Thread {
+		private int request;
+		private Handler handler = null;
+
+		/**
+		 * Constructor
+		 * 
+		 * @param request  0: remove, 1: add, 2: get state
+		 * @param handler  Handler to send result to
+		 */
+		public WatchlistThread(int request, Handler handler) {
+			this.request = request;
+			this.handler = handler;
+		}
+
+		@Override
+		public void run() {
+			handler.sendEmptyMessage(base.manageWatchlist(request, cache));
 		}
 	}
 
