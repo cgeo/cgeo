@@ -82,6 +82,8 @@ public class cgeodetail extends Activity {
 	private ProgressDialog storeDialog = null;
 	private ProgressDialog refreshDialog = null;
 	private ProgressDialog dropDialog = null;
+	private ProgressDialog watchlistDialog = null;
+	private Thread watchlistThread = null;
 	private HashMap<Integer, String> calendars = new HashMap<Integer, String>();
 	private Handler storeCacheHandler = new Handler() {
 		@Override
@@ -160,6 +162,7 @@ public class cgeodetail extends Activity {
 			}
 
 			(new loadMapPreview(cache, loadMapPreviewHandler)).start();
+			(new LoadWatchlistState(cache, loadWatchlistStateHandler)).start();
 		}
 	};
 
@@ -213,6 +216,49 @@ public class cgeodetail extends Activity {
 			}
 
 			longDescDisplayed = true;
+		}
+	};
+
+	private Handler loadWatchlistStateHandler = new Handler() {
+		@Override
+		public void handleMessage(Message message) {
+			Log.i(cgSettings.tag, "cgeodetail.loadWatchlistStateHandler.handleMessage: result = " + message.what);
+			updateWatchlistBox(message.what);
+		}
+	};
+	
+	private void updateWatchlistBox(int result) {
+		Button buttonAdd = (Button) findViewById(R.id.add_to_watchlist);
+		Button buttonRemove = (Button) findViewById(R.id.remove_from_watchlist);
+		TextView text = (TextView) findViewById(R.id.watchlist_text);
+		
+		switch (result) {
+		case 0: // not on watchlist
+			buttonAdd.setVisibility(View.VISIBLE);
+			buttonRemove.setVisibility(View.GONE);
+			text.setText(R.string.cache_watchlist_not_on);
+			break;
+		case 1: // is on watchlist
+			buttonAdd.setVisibility(View.GONE);
+			buttonRemove.setVisibility(View.VISIBLE);
+			text.setText(R.string.cache_watchlist_on);
+			break;
+		case 2: // error while loading state
+			buttonAdd.setVisibility(View.GONE);
+			buttonRemove.setVisibility(View.GONE);
+			text.setText(R.string.cache_watchlist_error);
+			break;
+		}
+
+	}
+
+	private Handler WatchlistHandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			watchlistThread = null;
+			if (watchlistDialog != null) 
+				watchlistDialog.dismiss();
+			updateWatchlistBox(msg.what);
 		}
 	};
 
@@ -937,6 +983,12 @@ public class cgeodetail extends Activity {
 					}
 				});
 			}
+
+			// watchlist
+			Button buttonWatchlistAdd = (Button) findViewById(R.id.add_to_watchlist);
+			Button buttonWatchlistRemove = (Button) findViewById(R.id.remove_from_watchlist);
+			buttonWatchlistAdd.setOnClickListener(new addToWatchlistClickListener());
+			buttonWatchlistRemove.setOnClickListener(new removeFromWatchlistClickListener());
 
 			// waypoints
 			LinearLayout waypoints = (LinearLayout) findViewById(R.id.waypoints);
@@ -1788,6 +1840,95 @@ public class cgeodetail extends Activity {
 		@Override
 		public void run() {
 			base.dropCache(app, activity, cache, handler);
+		}
+	}
+
+
+	private class LoadWatchlistState extends Thread {
+		private cgCache cache = null;
+		private Handler handler = null;
+
+		public LoadWatchlistState(cgCache cacheIn, Handler handlerIn) {
+			cache = cacheIn;
+			handler = handlerIn;
+		}
+
+		@Override
+		public void run() {
+			if (cache == null  ||  cache.guid == null  ||  cache.guid.length() == 0) {
+				sendError();
+				return;
+			}
+			
+			try {
+				send(base.loadWatchlistState(cache));
+			} catch (Exception e) {
+				Log.w(cgSettings.tag, "cgeodetail.LoadWatchlistState.run: " + e.toString());
+				sendError();
+			}
+		}
+		
+		private void sendError() {
+			send(2);
+		}
+		
+		private void send(int result) {
+			handler.sendMessage(handler.obtainMessage(result));
+		}
+	}
+
+	private class addToWatchlistClickListener implements View.OnClickListener {
+		public void onClick(View arg0) {
+			if (watchlistDialog != null  &&  watchlistDialog.isShowing() == true) {
+				warning.showToast(res.getString(R.string.err_watchlist_still_surfing));
+				return;
+			}
+			watchlistDialog = ProgressDialog.show(activity, 
+					res.getString(R.string.cache_dialog_watchlist_add_title),
+					res.getString(R.string.cache_dialog_watchlist_add_message), true);
+			watchlistDialog.setCancelable(true);
+
+			if (watchlistThread != null) {
+				watchlistThread.interrupt();
+			}
+
+			watchlistThread = new WatchlistThread(1, WatchlistHandler);
+			watchlistThread.start();
+		}
+	}
+
+	private class removeFromWatchlistClickListener implements View.OnClickListener {
+		public void onClick(View arg0) {
+			if (watchlistDialog != null  &&  watchlistDialog.isShowing() == true) {
+				warning.showToast(res.getString(R.string.err_watchlist_still_surfing));
+				return;
+			}
+			watchlistDialog = ProgressDialog.show(activity, 
+					res.getString(R.string.cache_dialog_watchlist_remove_title),
+					res.getString(R.string.cache_dialog_watchlist_remove_message), true);
+			watchlistDialog.setCancelable(true);
+
+			if (watchlistThread != null) {
+				watchlistThread.interrupt();
+			}
+
+			watchlistThread = new WatchlistThread(0, WatchlistHandler);
+			watchlistThread.start();
+		}
+	}
+
+	private class WatchlistThread extends Thread {
+		private int request = 0;
+		private Handler handler = null;
+
+		public WatchlistThread(int request, Handler handler) {
+			this.request = request;
+			this.handler = handler;
+		}
+
+		@Override
+		public void run() {
+			base.manageWatchlist(request, app, activity, cache, handler);
 		}
 	}
 

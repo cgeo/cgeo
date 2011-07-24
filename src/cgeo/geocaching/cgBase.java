@@ -3914,6 +3914,105 @@ public class cgBase {
 		return 1000;
 	}
 
+	public int loadWatchlistState(cgCache cache) {
+		Log.i(cgSettings.tag, "cgBase.loadWatchlistState: Trying to load watchlist state for cache '" + cache.cacheid + "'");
+
+		final String host = "www.geocaching.com";
+		final String path = "/my/watchlist.aspx";
+		final String method = "GET";
+
+		String page = request(false, host, path, method, null, false, false, false).getData();
+		if (checkLogin(page) == false) {
+			int loginState = login();
+			if (loginState == 1) {
+				page = request(false, host, path, method, null, false, false, false).getData();
+			} else {
+				Log.e(cgSettings.tag, "cgeoBase.loadWatchlistState: Can not log in geocaching (error: " + loginState + ")");
+				return 2;
+			}
+		}
+
+		if (page == null || page.length() == 0) {
+			Log.e(cgSettings.tag, "cgBase.loadWatchlistState: No data from server");
+			return 2;
+		}
+
+		return  checkPageForGuid(cache, page) ? 1 : 0;
+	}
+
+	public void manageWatchlist(int request, cgeoapplication app, Activity activity, cgCache cache, Handler handler) {
+		Log.i(cgSettings.tag, "cgBase.manageWatchlist: Managing watchlist: cache='" + cache.cacheid + "', request=" + request);
+
+		String host = "www.geocaching.com";
+		String path = request == 1 
+				? "/my/watchlist.aspx?w=" + cache.cacheid
+			    : "/my/watchlist.aspx?ds=1&action=rem&id=" + cache.cacheid;
+		String method = "GET";
+
+		String page = request(false, host, path, method, null, false, false, false).getData();
+		if (checkLogin(page) == false) {
+			int loginState = login();
+			if (loginState == 1) {
+				page = request(false, host, path, method, null, false, false, false).getData();
+			} else {
+				Log.e(cgSettings.tag, "cgBase.manageWatchlist: Can not log in geocaching (error: " + loginState + ")");
+				handler.sendMessage(handler.obtainMessage(2));
+				return;
+			}
+		}
+
+		if (page == null || page.length() == 0) {
+			Log.e(cgSettings.tag, "cgBase.manageWatchlist: No data from server");
+			handler.sendMessage(handler.obtainMessage(2));
+			return;
+		}
+
+		if (request == 1) {
+			boolean guidOnPage = checkPageForGuid(cache, page);
+			if (guidOnPage)
+				Log.i(cgSettings.tag, "cgBase.manageWatchlist: cache added to watchlist");
+			else
+				Log.e(cgSettings.tag, "cgBase.manageWatchlist: cache not added to watchlist");
+			handler.sendMessage(handler.obtainMessage(guidOnPage ? 1 : 2));
+			return;
+		}
+		
+		// removal of cache needs approval by hitting "Yes" button
+		method = "POST";
+		final HashMap<String, String> params = new HashMap<String, String>();
+		String viewstate1 = findViewstate(page, 1);
+		params.put("__VIEWSTATE", findViewstate(page, 0));
+		if (viewstate1 != null) {
+			params.put("__VIEWSTATE1", viewstate1);
+			params.put("__VIEWSTATEFIELDCOUNT", "2");
+		}
+		params.put("__EVENTTARGET", "");
+		params.put("__EVENTARGUMENT", "");
+		params.put("ctl00$ContentBody$btnYes", "Yes");
+
+		page = request(false, host, path, method, params, false, false, false).getData();
+		boolean guidOnPage = checkPageForGuid(cache, page);
+		if (! guidOnPage)
+			Log.i(cgSettings.tag, "cgBase.manageWatchlist: cache removed from watchlist");
+		else
+			Log.e(cgSettings.tag, "cgBase.manageWatchlist: cache not removed from watchlist");
+		handler.sendMessage(handler.obtainMessage(guidOnPage ? 2 : 0));
+		return;
+	}
+
+	private boolean checkPageForGuid(cgCache cache, String page) {
+		// check if the guid of the cache is anywhere in the page
+		Pattern patternOk = Pattern.compile(cache.guid, Pattern.CASE_INSENSITIVE);
+		Matcher matcherOk = patternOk.matcher(page);
+		if (matcherOk.find() == true) {
+			Log.i(cgSettings.tag, "cgBase.checkPageForGuid: guid '" + cache.guid + "' found");
+			return true;
+		} else {
+			Log.i(cgSettings.tag, "cgBase.checkPageForGuid: guid '" + cache.guid + "' not found");
+			return false;
+		}
+	}
+
 	final public static HostnameVerifier doNotVerify = new HostnameVerifier() {
 
 		public boolean verify(String hostname, SSLSession session) {

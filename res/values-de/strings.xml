@@ -121,6 +121,8 @@
   <string name="err_detail_still_removing">c:geo löscht diesen Cache noch immer.</string>
   <string name="err_detail_still_saving">c:geo speichert diesen Cache noch immer.</string>
   <string name="err_detail_still_refreshing">c:geo versucht noch immer diesen Cache zu aktualiseren.</string>
+  <string name="err_watchlist_still_surfing">c:geo versucht immer noch die Watchlist zu bearbeiten.</string>
+  <string name="err_watchlist_failed">Ändern der Watchlist nicht erfolgreich.</string>
   <string name="err_radar_title">Radar-Anwendung ist nicht installiert.</string>
   <string name="err_radar_message">Diese Funktion benötigt die Radar-Anwendung. Soll diese installiert werden?</string>
   <string name="err_radar_market">c:geo konnte den Android Market nicht starten, um nach der Radar-Anwendung zu suchen.</string>
@@ -291,6 +293,7 @@
   <string name="list_menu_change">Andere Liste anzeigen</string>
   <string name="list_title">Liste wählen</string>
   <string name="list_inbox">Standardliste</string>
+  <string name="list_watchlist">Watchlist</string>
   <string name="list_wpt">Wegpunkte</string>
   <string name="list_dialog_create_title">Neue Liste</string>
   <string name="list_dialog_create">Erstellen</string>
@@ -403,6 +406,13 @@
   <string name="cache_log_offline">Offline-Log</string>
   <string name="cache_description">Beschreibung</string>
   <string name="cache_description_long">Ausführliche Beschreibung</string>
+  <string name="cache_watchlist">Watchlist</string>
+  <string name="cache_watchlist_loading">Lade Information von der Watchlist...</string>
+  <string name="cache_watchlist_on">Dieser Cache ist auf deiner Watchlist.</string>
+  <string name="cache_watchlist_not_on">Dieser Cache ist nicht auf deiner Watchlist.</string>
+  <string name="cache_watchlist_error">Konnte Watchlist nicht lesen.</string>
+  <string name="cache_watchlist_add">Hinzufügen zur Watchlist</string>
+  <string name="cache_watchlist_remove">Entfernen von der Watchlist</string>
   <string name="cache_waypoints">Wegpunkte</string>
   <string name="cache_waypoints_add">Wegpunkt hinzufügen</string>
   <string name="cache_hint">Hinweis</string>
@@ -415,6 +425,10 @@
   <string name="cache_dialog_offline_drop_message">Lösche Cache vom Gerät...</string>
   <string name="cache_dialog_refresh_title">Aktualisieren</string>
   <string name="cache_dialog_refresh_message">Aktualisieren der Cachedetails...</string>
+  <string name="cache_dialog_watchlist_add_title">Watchlist</string>
+  <string name="cache_dialog_watchlist_add_message">Füge den Cache zu deiner Watchlist hinzu...</string>
+  <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
+  <string name="cache_dialog_watchlist_remove_message">Entferne den Cache von deiner Watchlist...</string>
   <string name="cache_menu_navigate">Navigieren</string>
   <string name="cache_menu_compass">Kompass</string>
   <string name="cache_menu_tbt">GoogleMaps Navigation</string>
