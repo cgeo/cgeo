@@ -1652,23 +1652,14 @@ public class cgeodetail extends Activity {
 					dist.append(base.getHumanDistance(cgBase.getDistance(geo.latitudeNow, geo.longitudeNow, cache.latitude, cache.longitude)));
 				}
 
-				if (cache.elevation != null) {
-					Double diff = null;
+				if (cache != null && cache.elevation != null) {
 					if (geo.altitudeNow != null) {
-						diff = (cache.elevation - geo.altitudeNow);
-					}
-
-					if (diff != null && diff >= 0) {
-						dist.append(" ↗");
-						if (settings.units == cgSettings.unitsImperial) {
-							dist.append(String.format(Locale.getDefault(), "%.0f", (Math.abs(diff) * 3.2808399)));
-							dist.append(" ft");
-						} else {
-							dist.append(String.format(Locale.getDefault(), "%.0f", (Math.abs(diff))));
-							dist.append(" m");
+						Double diff = (cache.elevation - geo.altitudeNow);
+						if (diff >= 0) {
+							dist.append(" ↗");
+						} else if (diff < 0) {
+							dist.append(" ↘");
 						}
-					} else if (diff != null && diff < 0) {
-						dist.append(" ↘");
 						if (settings.units == cgSettings.unitsImperial) {
 							dist.append(String.format(Locale.getDefault(), "%.0f", (Math.abs(diff) * 3.2808399)));
 							dist.append(" ft");
