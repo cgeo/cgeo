@@ -162,7 +162,7 @@ public class cgeodetail extends Activity {
 			}
 
 			(new loadMapPreview(cache, loadMapPreviewHandler)).start();
-			(new WatchlistThread(2, loadWatchlistStateHandler)).start();
+			(new WatchlistThread(2, WatchlistHandler)).start();
 		}
 	};
 
@@ -219,19 +219,6 @@ public class cgeodetail extends Activity {
 		}
 	};
 
-	/**
-	 * Handler, called when watchlist state is retrieved
-	 * 
-	 * @see LoadWatchlistState
-	 */
-	private Handler loadWatchlistStateHandler = new Handler() {
-		@Override
-		public void handleMessage(Message message) {
-			Log.i(cgSettings.tag, "cgeodetail.loadWatchlistStateHandler.handleMessage: result = " + message.what);
-			updateWatchlistBox(message.what);
-		}
-	};
-	
 	/**
 	 * shows/hides buttons, sets text in watchlist box
 	 * 
