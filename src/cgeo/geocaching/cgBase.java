@@ -1,28 +1,58 @@
 package cgeo.geocaching;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.security.MessageDigest;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.Inflater;
+import java.util.zip.InflaterInputStream;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import java.io.InputStreamReader;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.net.URLConnection;
-import java.net.HttpURLConnection;
-import java.util.Map;
-import java.util.Calendar;
-import java.util.Locale;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import android.util.Log;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -36,40 +66,14 @@ import android.os.Message;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.style.StrikethroughSpan;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.math.BigInteger;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.net.URLDecoder;
-import java.security.MessageDigest;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Set;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.Inflater;
-import java.util.zip.InflaterInputStream;
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 public class cgBase {
 
@@ -1458,7 +1462,7 @@ public class cgBase {
 			// failed to parse short description
 			Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache description");
 		}
-		
+
 		// cache attributes
 		try {
 			final Matcher matcherAttributes = patternAttributes.matcher(page);
@@ -4477,7 +4481,7 @@ public class cgBase {
 					ins = connection.getInputStream();
 				}
 				final InputStreamReader inr = new InputStreamReader(ins);
-				final BufferedReader br = new BufferedReader(inr);
+				final BufferedReader br = new BufferedReader(inr, 16 * 1024);
 
 				readIntoBuffer(br, buffer);
 
@@ -4562,7 +4566,7 @@ public class cgBase {
 				lastWasWhitespace = false;
 			}
 		}
-		
+
 		return new String(bytes, 0, resultSize);
 	}
 

@@ -1,30 +1,32 @@
 package cgeo.geocaching;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
-import java.util.regex.Pattern;
 import java.util.regex.Matcher;
-import android.net.Uri;
-import android.content.Intent;
-import android.os.Bundle;
+import java.util.regex.Pattern;
+
+import javax.net.ssl.HttpsURLConnection;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.view.View;
-import android.widget.EditText;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
-import java.io.IOException;
-import javax.net.ssl.HttpsURLConnection;
+import android.widget.EditText;
 
 public class cgeoauth extends Activity {
 	private cgeoapplication app = null;
@@ -125,7 +127,7 @@ public class cgeoauth extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		settings.load();
 	}
 
@@ -187,7 +189,7 @@ public class cgeoauth extends Activity {
 
 					final InputStream in = connection.getInputStream();
 					final InputStreamReader ins = new InputStreamReader(in);
-					final BufferedReader br = new BufferedReader(ins);
+					final BufferedReader br = new BufferedReader(ins, 16 * 1024);
 
 					while ((lineOne = br.readLine()) != null) {
 						sb.append(lineOne);
@@ -292,7 +294,7 @@ public class cgeoauth extends Activity {
 
 				final InputStream in = connection.getInputStream();
 				final InputStreamReader ins = new InputStreamReader(in);
-				final BufferedReader br = new BufferedReader(ins);
+				final BufferedReader br = new BufferedReader(ins, 16 * 1024);
 
 				while ((lineOne = br.readLine()) != null) {
 					sb.append(lineOne);
