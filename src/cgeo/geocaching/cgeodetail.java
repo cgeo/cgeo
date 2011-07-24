@@ -442,6 +442,9 @@ public class cgeodetail extends Activity {
 				return true;
 			}
 		}
+		else {
+			return onOptionsItemSelected(item);
+		}
 		return false;
 	}
 
