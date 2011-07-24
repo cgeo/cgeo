@@ -3914,40 +3914,34 @@ public class cgBase {
 		return 1000;
 	}
 
-	public int loadWatchlistState(cgCache cache) {
-		Log.i(cgSettings.tag, "cgBase.loadWatchlistState: Trying to load watchlist state for cache '" + cache.cacheid + "'");
-
-		final String host = "www.geocaching.com";
-		final String path = "/my/watchlist.aspx";
-		final String method = "GET";
-
-		String page = request(false, host, path, method, null, false, false, false).getData();
-		if (checkLogin(page) == false) {
-			int loginState = login();
-			if (loginState == 1) {
-				page = request(false, host, path, method, null, false, false, false).getData();
-			} else {
-				Log.e(cgSettings.tag, "cgeoBase.loadWatchlistState: Can not log in geocaching (error: " + loginState + ")");
-				return 2;
-			}
-		}
-
-		if (page == null || page.length() == 0) {
-			Log.e(cgSettings.tag, "cgBase.loadWatchlistState: No data from server");
-			return 2;
-		}
-
-		return  checkPageForGuid(cache, page) ? 1 : 0;
-	}
-
-	public void manageWatchlist(int request, cgeoapplication app, Activity activity, cgCache cache, Handler handler) {
+	/**
+	 * adds/removes a cache to/from the watchlist
+	 * 
+	 * @param request   0: remove, 1: add, 2: get state
+	 * @param cache     the cache to add/remove
+	 * @return  0: removed, 1: added, -1: error occured
+	 * 
+	 * @see cgeodetail#WatchlistThread
+	 */
+	public int manageWatchlist(int request, cgCache cache) {
 		Log.i(cgSettings.tag, "cgBase.manageWatchlist: Managing watchlist: cache='" + cache.cacheid + "', request=" + request);
 
 		String host = "www.geocaching.com";
-		String path = request == 1 
-				? "/my/watchlist.aspx?w=" + cache.cacheid
-			    : "/my/watchlist.aspx?ds=1&action=rem&id=" + cache.cacheid;
-		String method = "GET";
+		String path = null;
+		switch(request) {
+		case 0: // remove
+			path = "/my/watchlist.aspx?ds=1&action=rem&id=" + cache.cacheid;
+			break;
+		case 1: // add
+			path = "/my/watchlist.aspx?w=" + cache.cacheid;
+			break;
+		case 2: // get state
+			path = "/my/watchlist.aspx";
+			break;
+		default:
+			return -1; // error
+	    }
+		String method = "POST";
 
 		String page = request(false, host, path, method, null, false, false, false).getData();
 		if (checkLogin(page) == false) {
@@ -3956,28 +3950,29 @@ public class cgBase {
 				page = request(false, host, path, method, null, false, false, false).getData();
 			} else {
 				Log.e(cgSettings.tag, "cgBase.manageWatchlist: Can not log in geocaching (error: " + loginState + ")");
-				handler.sendMessage(handler.obtainMessage(2));
-				return;
+				return -1; // error
 			}
 		}
 
 		if (page == null || page.length() == 0) {
 			Log.e(cgSettings.tag, "cgBase.manageWatchlist: No data from server");
-			handler.sendMessage(handler.obtainMessage(2));
-			return;
+			return -1; // error
 		}
 
-		if (request == 1) {
+		if (request == 1  ||  request == 2) {
+			// check if cache is listed on resulting page
 			boolean guidOnPage = checkPageForGuid(cache, page);
 			if (guidOnPage)
 				Log.i(cgSettings.tag, "cgBase.manageWatchlist: cache added to watchlist");
 			else
 				Log.e(cgSettings.tag, "cgBase.manageWatchlist: cache not added to watchlist");
-			handler.sendMessage(handler.obtainMessage(guidOnPage ? 1 : 2));
-			return;
+			if (request == 1)
+				return guidOnPage ? 1 : -1; // on watchlist (=added) / error
+			else
+				return guidOnPage ? 1 : 0; // on watchlist / not on watchlist
 		}
-		
-		// removal of cache needs approval by hitting "Yes" button
+
+		// removal of cache. needs approval by hitting "Yes" button
 		method = "POST";
 		final HashMap<String, String> params = new HashMap<String, String>();
 		String viewstate1 = findViewstate(page, 1);
@@ -3996,10 +3991,17 @@ public class cgBase {
 			Log.i(cgSettings.tag, "cgBase.manageWatchlist: cache removed from watchlist");
 		else
 			Log.e(cgSettings.tag, "cgBase.manageWatchlist: cache not removed from watchlist");
-		handler.sendMessage(handler.obtainMessage(guidOnPage ? 2 : 0));
-		return;
+		return guidOnPage ? -1 : 0; // on watchlist (=error) / not on watchlist
 	}
 
+	/**
+	 * checks if a page contains the guid of a cache
+	 * 
+	 * @param cache  the cache to look for
+	 * @param page   the page to search in
+	 * 
+	 * @return  true: page contains guid of cache, false: otherwise
+	 */
 	private boolean checkPageForGuid(cgCache cache, String page) {
 		// check if the guid of the cache is anywhere in the page
 		Pattern patternOk = Pattern.compile(cache.guid, Pattern.CASE_INSENSITIVE);

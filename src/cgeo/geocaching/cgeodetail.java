@@ -82,8 +82,8 @@ public class cgeodetail extends Activity {
 	private ProgressDialog storeDialog = null;
 	private ProgressDialog refreshDialog = null;
 	private ProgressDialog dropDialog = null;
-	private ProgressDialog watchlistDialog = null;
-	private Thread watchlistThread = null;
+	private ProgressDialog watchlistDialog = null; // progress dialog for watchlist retrieval
+	private Thread watchlistThread = null; // thread for watchlist retrieval
 	private HashMap<Integer, String> calendars = new HashMap<Integer, String>();
 	private Handler storeCacheHandler = new Handler() {
 		@Override
@@ -162,7 +162,7 @@ public class cgeodetail extends Activity {
 			}
 
 			(new loadMapPreview(cache, loadMapPreviewHandler)).start();
-			(new LoadWatchlistState(cache, loadWatchlistStateHandler)).start();
+			(new WatchlistThread(2, loadWatchlistStateHandler)).start();
 		}
 	};
 
@@ -219,6 +219,11 @@ public class cgeodetail extends Activity {
 		}
 	};
 
+	/**
+	 * Handler, called when watchlist state is retrieved
+	 * 
+	 * @see LoadWatchlistState
+	 */
 	private Handler loadWatchlistStateHandler = new Handler() {
 		@Override
 		public void handleMessage(Message message) {
@@ -227,12 +232,23 @@ public class cgeodetail extends Activity {
 		}
 	};
 	
+	/**
+	 * shows/hides buttons, sets text in watchlist box
+	 * 
+	 * @param result  0: cache is not on watchlist, 1: cache is on watchlist,
+	 *                -1: error occured
+	 */
 	private void updateWatchlistBox(int result) {
 		Button buttonAdd = (Button) findViewById(R.id.add_to_watchlist);
 		Button buttonRemove = (Button) findViewById(R.id.remove_from_watchlist);
 		TextView text = (TextView) findViewById(R.id.watchlist_text);
 		
 		switch (result) {
+		case -1: // error while loading state
+			buttonAdd.setVisibility(View.GONE);
+			buttonRemove.setVisibility(View.GONE);
+			text.setText(R.string.cache_watchlist_error);
+			break;
 		case 0: // not on watchlist
 			buttonAdd.setVisibility(View.VISIBLE);
 			buttonRemove.setVisibility(View.GONE);
@@ -243,15 +259,13 @@ public class cgeodetail extends Activity {
 			buttonRemove.setVisibility(View.VISIBLE);
 			text.setText(R.string.cache_watchlist_on);
 			break;
-		case 2: // error while loading state
-			buttonAdd.setVisibility(View.GONE);
-			buttonRemove.setVisibility(View.GONE);
-			text.setText(R.string.cache_watchlist_error);
-			break;
 		}
 
 	}
 
+	/**
+	 * Handler, called when add or remove of cache to/from watchlist is done
+	 */
 	private Handler WatchlistHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -1843,40 +1857,9 @@ public class cgeodetail extends Activity {
 		}
 	}
 
-
-	private class LoadWatchlistState extends Thread {
-		private cgCache cache = null;
-		private Handler handler = null;
-
-		public LoadWatchlistState(cgCache cacheIn, Handler handlerIn) {
-			cache = cacheIn;
-			handler = handlerIn;
-		}
-
-		@Override
-		public void run() {
-			if (cache == null  ||  cache.guid == null  ||  cache.guid.length() == 0) {
-				sendError();
-				return;
-			}
-			
-			try {
-				send(base.loadWatchlistState(cache));
-			} catch (Exception e) {
-				Log.w(cgSettings.tag, "cgeodetail.LoadWatchlistState.run: " + e.toString());
-				sendError();
-			}
-		}
-		
-		private void sendError() {
-			send(2);
-		}
-		
-		private void send(int result) {
-			handler.sendMessage(handler.obtainMessage(result));
-		}
-	}
-
+	/**
+	 * Listener for "add to watchlist" button
+	 */
 	private class addToWatchlistClickListener implements View.OnClickListener {
 		public void onClick(View arg0) {
 			if (watchlistDialog != null  &&  watchlistDialog.isShowing() == true) {
@@ -1897,6 +1880,9 @@ public class cgeodetail extends Activity {
 		}
 	}
 
+	/**
+	 * Listener for "remove from watchlist" button
+	 */
 	private class removeFromWatchlistClickListener implements View.OnClickListener {
 		public void onClick(View arg0) {
 			if (watchlistDialog != null  &&  watchlistDialog.isShowing() == true) {
@@ -1917,10 +1903,19 @@ public class cgeodetail extends Activity {
 		}
 	}
 
+	/**
+	 * Thread, adds/removes cache from watchlist
+	 */
 	private class WatchlistThread extends Thread {
-		private int request = 0;
+		private int request;
 		private Handler handler = null;
 
+		/**
+		 * Constructor
+		 * 
+		 * @param request  0: remove, 1: add, 2: get state
+		 * @param handler  Handler to send result to
+		 */
 		public WatchlistThread(int request, Handler handler) {
 			this.request = request;
 			this.handler = handler;
@@ -1928,7 +1923,7 @@ public class cgeodetail extends Activity {
 
 		@Override
 		public void run() {
-			base.manageWatchlist(request, app, activity, cache, handler);
+			handler.sendEmptyMessage(base.manageWatchlist(request, cache));
 		}
 	}
 
