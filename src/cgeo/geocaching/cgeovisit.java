@@ -565,7 +565,7 @@ public class cgeovisit extends cgLogForm {
 				}
 				post.setText(res.getString(R.string.log_post_no_rate));
 			}
-		} else if (settings.getSignature() != null && settings.getSignature().length() > 0) {
+		} else if (settings.getSignature() != null && settings.getSignature().length() > 0 && 0 == ((EditText) findViewById(R.id.log)).getText().length()) {
 			addSignature(LOG_SIGNATURE);
 		}
 

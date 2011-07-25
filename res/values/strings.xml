@@ -322,6 +322,7 @@
   <string name="caches_filter_type_gchq">Groundspeak HQ</string>
   <string name="caches_filter_type_gps">GPS Cache exhibit</string>
   <string name="caches_exporting_fieldnote">Exporting as Field Notes...</string>
+  <string name="caches_removing_from_history">Removing from history...</string>
 
   <!-- caches lists -->
   <string name="list_menu">List</string>
@@ -518,6 +519,8 @@
   <string name="cache_log_types">Log types</string> <!-- since: 2.10 RC2 -->
   <string name="cache_coordinates_no">This cache has no coordinates.</string> <!-- since: 2.26 RC2 -->
   <string name="cache_export_fieldnote">Export as Field Notes</string>
+  <string name="cache_clear_history">Clear history</string>
+  <string name="cache_remove_from_history">Remove from history</string>
 
   <!-- file list base -->
   <string name="file_searching_in">Searching for files\nin</string>
