@@ -2869,6 +2869,21 @@ public class cgData {
 			Log.e(cgSettings.tag, "cgData.saveVisitDate: " + e.toString());
 		}
 	}
+	
+	public void clearVisitDate(String geocode) {
+        if (geocode == null || geocode.length() == 0) {
+            return;
+        }
+
+        ContentValues values = new ContentValues();
+        values.put("visiteddate", 0);
+
+        try {
+            databaseRW.update(dbTableCaches, values, "geocode = \"" + geocode + "\"", null);
+        } catch (Exception e) {
+            Log.e(cgSettings.tag, "cgData.clearVisitDate: " + e.toString());
+        }
+    }
 
 	public ArrayList<cgList> getLists(Resources res) {
 		init();

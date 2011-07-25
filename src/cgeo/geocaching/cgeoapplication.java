@@ -805,6 +805,10 @@ public class cgeoapplication extends Application {
 	public void saveVisitDate(String geocode) {
 		storage.saveVisitDate(geocode);
 	}
+	
+	public void clearVisitDate(String geocode) {
+        storage.clearVisitDate(geocode);
+    }
 
 	public ArrayList<cgList> getLists() {
 		return storage.getLists(getResources());
