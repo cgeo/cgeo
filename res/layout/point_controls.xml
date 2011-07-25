@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+	android:orientation="vertical" android:weightSum="1"
+	android:layout_height="fill_parent">
+	<RelativeLayout style="@style/separator_horizontal_layout">
+		<View style="@style/separator_horizontal" />
+		<TextView style="@style/separator_horizontal_headline"
+			android:text="@string/search_coordinates" />
+	</RelativeLayout>
+	<EditText style="@style/edittext" android:id="@+id/latitude"
+		android:hint="latitude" />
+	<EditText style="@style/edittext" android:id="@+id/longitude"
+		android:hint="longitude" />
+	<Button style="@style/button" android:id="@+id/current"
+		android:text="@string/waypoint_my_coordinates" />
+	<RelativeLayout style="@style/separator_horizontal_layout">
+		<View style="@style/separator_horizontal" />
+		<TextView style="@style/separator_horizontal_headline"
+			android:text="@string/search_direction_rel" />
+	</RelativeLayout>
+	<EditText style="@style/edittext" android:id="@+id/bearing"
+		android:inputType="numberDecimal" android:hint="@string/waypoint_bearing" />
+	<EditText style="@style/edittext" android:id="@+id/distance"
+		android:hint="@string/waypoint_distance" />
+	<RelativeLayout style="@style/separator_horizontal_layout">
+		<View style="@style/separator_horizontal" />
+		<TextView style="@style/separator_horizontal_headline"
+			android:text="@string/search_history" />
+	</RelativeLayout>
+</LinearLayout>

@@ -5,8 +5,8 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent">
     <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/linearLayout1">
+        <TextView android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceSmall" android:text="TextView" android:layout_height="wrap_content" android:id="@+id/simple_way_point_latitude" android:layout_marginRight="15dp"></TextView>
         <TextView android:textAppearance="?android:attr/textAppearanceSmall" android:layout_width="wrap_content" android:text="TextView" android:layout_height="wrap_content" android:id="@+id/simple_way_point_longitude"></TextView>
-        <TextView android:textAppearance="?android:attr/textAppearanceSmall" android:layout_width="wrap_content" android:text="TextView" android:layout_height="wrap_content" android:id="@+id/simple_way_point_latitude"></TextView>
     </LinearLayout>
     <TextView android:textAppearance="?android:attr/textAppearanceSmall" android:layout_width="wrap_content" android:text="TextView" android:layout_height="wrap_content" android:id="@+id/date"></TextView>
     

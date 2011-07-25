@@ -54,16 +54,22 @@ public class cgeopoint extends Activity {
 
 			cgWaypoint loc = getItem(position);
 
-			View row = getInflater().inflate(R.layout.simple_way_point, null);
-			TextView longitude = (TextView) row.findViewById(R.id.simple_way_point_longitude);
-			TextView latitude = (TextView) row.findViewById(R.id.simple_way_point_latitude);
-			TextView date = (TextView) row.findViewById(R.id.date);
+			if(convertView == null)
+			{
+				convertView = getInflater().inflate(R.layout.simple_way_point, null);
+			}
+			TextView longitude = (TextView) convertView.findViewById(R.id.simple_way_point_longitude);
+			TextView latitude = (TextView) convertView.findViewById(R.id.simple_way_point_latitude);
+			TextView date = (TextView) convertView.findViewById(R.id.date);
 
-			longitude.setText(String.valueOf(loc.longitude));
-			latitude.setText(String.valueOf(loc.latitude));
+			String lonString = base.formatCoordinate(loc.longitude, "lon", true);
+			String latString = base.formatCoordinate(loc.latitude, "lat", true);
+			
+			longitude.setText(lonString);
+			latitude.setText(latString);
 			date.setText(loc.name);
 
-			return row;
+			return convertView;
 		}
 
 		private LayoutInflater getInflater()
@@ -122,6 +128,9 @@ public class cgeopoint extends Activity {
 		base.sendAnal(activity, tracker, "/point");
 
 		ListView listView = (ListView) findViewById(R.id.historyList);
+		
+		View pointControls = getLayoutInflater().inflate(R.layout.point_controls, null);
+		listView.addHeaderView(pointControls);
 		listView.setAdapter(getDestionationHistoryAdapter());
 
 		init();
@@ -481,7 +490,7 @@ public class cgeopoint extends Activity {
 		if (latText != null && latText.length() > 0 && lonText != null && lonText.length() > 0) {
 			// latitude & longitude
 			HashMap<String, Object> latParsed = base.parseCoordinate(latText, "lat");
-			HashMap<String, Object> lonParsed = base.parseCoordinate(lonText, "lat");
+			HashMap<String, Object> lonParsed = base.parseCoordinate(lonText, "lon");
 
 			if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
 				warning.showToast(res.getString(R.string.err_parse_lat));
