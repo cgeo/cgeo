@@ -4,9 +4,11 @@
   android:orientation="vertical"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
+    <LinearLayout android:layout_width="wrap_content" android:id="@+id/linearLayout2" android:layout_height="wrap_content">
+        <TextView android:layout_marginRight="15dp" android:textAppearance="?android:attr/textAppearanceSmall" android:id="@+id/simple_way_point_latitude" android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+        <TextView android:textAppearance="?android:attr/textAppearanceSmall" android:id="@+id/simple_way_point_longitude" android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content"></TextView>
+    </LinearLayout>
     <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/linearLayout1">
-        <TextView android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceSmall" android:text="TextView" android:layout_height="wrap_content" android:id="@+id/simple_way_point_latitude" android:layout_marginRight="15dp"></TextView>
-        <TextView android:textAppearance="?android:attr/textAppearanceSmall" android:layout_width="wrap_content" android:text="TextView" android:layout_height="wrap_content" android:id="@+id/simple_way_point_longitude"></TextView>
     </LinearLayout>
     <TextView android:textAppearance="?android:attr/textAppearanceSmall" android:layout_width="wrap_content" android:text="TextView" android:layout_height="wrap_content" android:id="@+id/date"></TextView>
     

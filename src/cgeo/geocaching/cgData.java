@@ -31,7 +31,7 @@ public class cgData {
 	private cgDbHelper dbHelper = null;
 	private SQLiteDatabase databaseRO = null;
 	private SQLiteDatabase databaseRW = null;
-	private static final int dbVersion = 54;
+	private static final int dbVersion = 52;
 	private static final String dbName = "data";
 	private static final String dbTableCaches = "cg_caches";
 	private static final String dbTableLists = "cg_lists";
@@ -174,7 +174,7 @@ public class cgData {
 	private static final String dbCreateSearchDestinationHistory = ""
 		+ "create table " + dbTableSearchDestionationHistory + " ("
 		+ "_id integer primary key autoincrement, "
-		+ "updated long not null, " // date of save
+		+ "date long not null, "
 		+ "latitude double, "
 		+ "longitude double "
 		+ "); ";
@@ -699,7 +699,7 @@ public class cgData {
 						}
 					}
 					
-					if (oldVersion < 60) { // upgrade to 52
+					if (oldVersion < 52) { // upgrade to 52
 						try {
 							db.execSQL(dbCreateSearchDestinationHistory);
 
@@ -1264,38 +1264,34 @@ public class cgData {
 	 * @param destinations
 	 * @return
 	 */
-	public boolean saveSearchedDestinations(List<cgWaypoint> destinations)
-	{
+	public boolean saveSearchedDestinations(List<cgDestination> destinations) {
 		init();
-		
+
 		boolean success = true;
-		
+
 		databaseRW.beginTransaction();
 		databaseRW.delete(dbTableSearchDestionationHistory, null, null);
-		
+
 		try {
-			if(destinations != null)
-			{
-				for (cgWaypoint wp : destinations) 
-				{
+			if (destinations != null) {
+				for (cgDestination dest : destinations) {
 					ContentValues values = new ContentValues();
-					values.put("updated", wp.name);
-					values.put("latitude", wp.latitude);
-					values.put("longitude", wp.longitude);
-					
-					databaseRW.insert(dbTableSearchDestionationHistory, null, values);
+					values.put("date", dest.getDate());
+					values.put("latitude", dest.getLatitude());
+					values.put("longitude", dest.getLongitude());
+
+					databaseRW.insert(dbTableSearchDestionationHistory, null,
+							values);
 				}
 				databaseRW.setTransactionSuccessful();
 			}
 		} catch (Exception e) {
 			success = false;
 			Log.e(cgSettings.tag, "Updating searchedDestinations db failed", e);
-		}
-		finally
-		{
+		} finally {
 			databaseRW.endTransaction();
 		}
-		
+
 		return success;
 	}
 
@@ -2143,41 +2139,31 @@ public class cgData {
 		return spoilers;
 	}
 	
-	public List<cgWaypoint> loadHistoryOfSearchedLocations()
-	{
+	public List<cgDestination> loadHistoryOfSearchedLocations() {
 		init();
-		
+
 		Cursor cursor = null;
-		List<cgWaypoint> locs = new ArrayList<cgWaypoint>();
-		
-		cursor = databaseRO.query(
-				dbTableSearchDestionationHistory,
-				new String[]{"_id", "updated", "latitude", "longitude"},
-				null,
-				null,
-				null,
-				null,
-				"updated desc",
-				"100");
-		
+		List<cgDestination> destinations = new ArrayList<cgDestination>();
+
+		cursor = databaseRO.query(dbTableSearchDestionationHistory,
+				new String[] { "_id", "date", "latitude", "longitude" }, null,
+				null, null, null, "date desc", "100");
+
 		if (cursor != null && cursor.getCount() > 0) {
 			cursor.moveToFirst();
 
 			do {
-				cgWaypoint wp = new cgWaypoint();
-				wp.id = (int) cursor.getInt(cursor.getColumnIndex("_id"));
-				
-				// Use name field for date information
-				wp.name = (String) cursor.getString(cursor.getColumnIndex("updated"));
-				
-				wp.latitude = (double) cursor.getDouble(cursor.getColumnIndex("latitude"));
-				wp.longitude = (double) cursor.getDouble(cursor.getColumnIndex("longitude"));
-				
-				locs.add(wp);
+				cgDestination dest = new cgDestination();
+
+				dest.setDate((String) cursor.getString(cursor.getColumnIndex("date")));
+				dest.setLatitude((double) cursor.getDouble(cursor.getColumnIndex("latitude")));
+				dest.setLongitude((double) cursor.getDouble(cursor.getColumnIndex("longitude")));
+
+				destinations.add(dest);
 			} while (cursor.moveToNext());
 		}
-		
-		return locs;
+
+		return destinations;
 	}
 
 	public ArrayList<cgLog> loadLogs(String geocode) {

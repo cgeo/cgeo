@@ -28,6 +28,8 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,18 +40,18 @@ import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 public class cgeopoint extends Activity {
 
-	private class DestinationHistoryAdapter extends ArrayAdapter<cgWaypoint>
+	private class DestinationHistoryAdapter extends ArrayAdapter<cgDestination>
 	{
 		private LayoutInflater inflater = null;
 
-		public DestinationHistoryAdapter(Context context, List<cgWaypoint> objects) {
+		public DestinationHistoryAdapter(Context context, List<cgDestination> objects) {
 			super(context, 0, objects);
 		}
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 
-			cgWaypoint loc = getItem(position);
+			cgDestination loc = getItem(position);
 
 			if(convertView == null)
 			{
@@ -59,12 +61,12 @@ public class cgeopoint extends Activity {
 			TextView latitude = (TextView) convertView.findViewById(R.id.simple_way_point_latitude);
 			TextView date = (TextView) convertView.findViewById(R.id.date);
 
-			String lonString = base.formatCoordinate(loc.longitude, "lon", true);
-			String latString = base.formatCoordinate(loc.latitude, "lat", true);
+			String lonString = base.formatCoordinate(loc.getLongitude(), "lon", true);
+			String latString = base.formatCoordinate(loc.getLatitude(), "lat", true);
 			
 			longitude.setText(lonString);
 			latitude.setText(latString);
-			date.setText(loc.name);
+			date.setText(loc.getDate());
 
 			return convertView;
 		}
@@ -93,8 +95,10 @@ public class cgeopoint extends Activity {
 	private EditText latEdit = null;
 	private EditText lonEdit = null;
 	private boolean changed = false;
-	private List<cgWaypoint> historyOfSearchedLocations;
+	private List<cgDestination> historyOfSearchedLocations;
 	private DestinationHistoryAdapter destionationHistoryAdapter;
+	private ListView historyListView;
+	private TextView historyFooter;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -124,13 +128,43 @@ public class cgeopoint extends Activity {
 		tracker.dispatch();
 		base.sendAnal(activity, tracker, "/point");
 
-		ListView listView = (ListView) findViewById(R.id.historyList);
+		historyListView = (ListView) findViewById(R.id.historyList);
 		
 		View pointControls = getLayoutInflater().inflate(R.layout.point_controls, null);
-		listView.addHeaderView(pointControls);
-		listView.setAdapter(getDestionationHistoryAdapter());
+		historyListView.addHeaderView(pointControls);
+		
+		if(getHistoryOfSearchedLocations().isEmpty())
+		{
+			historyListView.addFooterView(getEmptyHistoryFooter(), null, false);
+		}
+		
+		historyListView.setAdapter(getDestionationHistoryAdapter());
+		historyListView.setOnItemClickListener(new OnItemClickListener() {
 
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				Object selection = arg0.getItemAtPosition(arg2);
+				if(selection instanceof cgDestination)
+				{
+					List<Double> coords = new ArrayList<Double>(2);
+					coords.add(((cgDestination) selection).getLatitude());
+					coords.add(((cgDestination) selection).getLongitude());
+					
+					navigateTo(coords);
+				}
+			}
+		});
+		
 		init();
+	}
+
+	private TextView getEmptyHistoryFooter() {
+		if(historyFooter == null)
+		{
+			historyFooter = (TextView) getLayoutInflater().inflate(R.layout.caches_footer, null);
+			historyFooter.setText(R.string.search_history_empty);
+		}
+		return historyFooter;
 	}
 
 	private DestinationHistoryAdapter getDestionationHistoryAdapter() 
@@ -142,7 +176,7 @@ public class cgeopoint extends Activity {
 		return destionationHistoryAdapter;
 	}
 
-	private List<cgWaypoint> getHistoryOfSearchedLocations() 
+	private List<cgDestination> getHistoryOfSearchedLocations() 
 	{
 		if(historyOfSearchedLocations == null)
 		{
@@ -284,16 +318,7 @@ public class cgeopoint extends Activity {
 
 		ArrayList<Double> coords = getDestination();
 		
-		// Add locations to history
-		cgWaypoint loc = new cgWaypoint();
-		loc.name = DateFormat.format("dd/MM/yy h:mm", new Date()).toString();
-		loc.latitude = coords.get(0);
-		loc.longitude = coords.get(1);
-		
-		getHistoryOfSearchedLocations().add(0,loc);
-		
-		// Save location
-		app.saveSearchedDestinations(getHistoryOfSearchedLocations());
+		pushToHistory(coords);
 		
 		if (menuItem == 1) {
 			showOnMap();
@@ -329,6 +354,25 @@ public class cgeopoint extends Activity {
 		return false;
 	}
 
+	private void pushToHistory(ArrayList<Double> coords) {
+		// Add locations to history
+		cgDestination loc = new cgDestination();
+		loc.setLatitude(coords.get(0));
+		loc.setLongitude(coords.get(1));
+		
+		if(!getHistoryOfSearchedLocations().contains(loc))
+		{
+			loc.setDate(DateFormat.format("dd/MM/yy H:mm", new Date()).toString());
+			getHistoryOfSearchedLocations().add(0,loc);
+
+			// Save location
+			app.saveSearchedDestinations(getHistoryOfSearchedLocations());
+			
+			// Ensure to remove the footer
+			historyListView.removeFooterView(getEmptyHistoryFooter());
+		}
+	}
+
 	private void showOnMap() {
 		ArrayList<Double> coords = getDestination();
 
@@ -343,10 +387,13 @@ public class cgeopoint extends Activity {
 
 		activity.startActivity(mapIntent);
 	}
+	
+	private void navigateTo()
+	{
+		navigateTo(getDestination());
+	}
 
-	private void navigateTo() {
-		ArrayList<Double> coords = getDestination();
-
+	private void navigateTo(List<Double> coords) {
 		if (coords == null || coords.get(0) == null || coords.get(1) == null) {
 			warning.showToast(res.getString(R.string.err_location_unknown));
 		}
@@ -361,14 +408,13 @@ public class cgeopoint extends Activity {
 
 		activity.startActivity(navigateIntent);
 	}
-
+	
 	private void radarTo() {
-		ArrayList<Double> coords = getDestination();
-
+		List<Double> coords = getDestination();
 		if (coords == null || coords.get(0) == null || coords.get(1) == null) {
 			warning.showToast(res.getString(R.string.err_location_unknown));
 		}
-
+		
 		try {
 			if (cgBase.isIntentAvailable(activity, "com.google.android.radar.SHOW_RADAR") == true) {
 				Intent radarIntent = new Intent("com.google.android.radar.SHOW_RADAR");
@@ -381,7 +427,7 @@ public class cgeopoint extends Activity {
 				dialog.setMessage(res.getString(R.string.err_radar_message));
 				dialog.setCancelable(true);
 				dialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-
+		
 					public void onClick(DialogInterface dialog, int id) {
 						try {
 							activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:com.eclipsim.gpsstatus2")));
@@ -393,12 +439,12 @@ public class cgeopoint extends Activity {
 					}
 				});
 				dialog.setNegativeButton("no", new DialogInterface.OnClickListener() {
-
+		
 					public void onClick(DialogInterface dialog, int id) {
 						dialog.cancel();
 					}
 				});
-
+		
 				AlertDialog alert = dialog.create();
 				alert.show();
 			}
