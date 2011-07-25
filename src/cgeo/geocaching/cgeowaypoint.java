@@ -1,29 +1,32 @@
 package cgeo.geocaching;
 
-import gnu.android.app.appmanualclient.*;
+import gnu.android.app.appmanualclient.AppManualReaderClient;
 
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.util.Log;
-import android.text.Html;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.Html;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-import java.util.ArrayList;
 
 public class cgeowaypoint extends Activity {
 
@@ -67,9 +70,11 @@ public class cgeowaypoint extends Activity {
 				} else {
 					final TextView identification = (TextView) findViewById(R.id.identification);
 					final TextView coords = (TextView) findViewById(R.id.coordinates);
-					final TextView note = (TextView) findViewById(R.id.note);
 					final ImageView compass = (ImageView) findViewById(R.id.compass);
 					final View separator = (View) findViewById(R.id.separator);
+
+					final View headline = (View) findViewById(R.id.headline);
+					registerNavigationMenu(headline);
 
 					if (waypoint.name != null && waypoint.name.length() > 0) {
 						base.setTitle(activity, Html.fromHtml(waypoint.name.trim()).toString());
@@ -82,6 +87,7 @@ public class cgeowaypoint extends Activity {
 					} else {
 						identification.setText(res.getString(R.string.waypoint_custom));
 					}
+					registerNavigationMenu(identification);
 
 					if (waypoint.latitude != null && waypoint.longitude != null) {
 						coords.setText(Html.fromHtml(base.formatCoordinate(waypoint.latitude, "lat", true) + " | " + base.formatCoordinate(waypoint.longitude, "lon", true)), TextView.BufferType.SPANNABLE);
@@ -92,9 +98,12 @@ public class cgeowaypoint extends Activity {
 						compass.setVisibility(View.GONE);
 						separator.setVisibility(View.GONE);
 					}
+					registerNavigationMenu(coords);
 
 					if (waypoint.note != null && waypoint.note.length() > 0) {
+						final TextView note = (TextView) findViewById(R.id.note);
 						note.setText(Html.fromHtml(waypoint.note.trim()), TextView.BufferType.SPANNABLE);
+						registerNavigationMenu(note);
 					}
 
 					Button buttonEdit = (Button) findViewById(R.id.edit);
@@ -118,6 +127,17 @@ public class cgeowaypoint extends Activity {
 				}
 				Log.e(cgSettings.tag, "cgeowaypoint.loadWaypointHandler: " + e.toString());
 			}
+		}
+
+		private void registerNavigationMenu(View view) {
+			view.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					registerForContextMenu(v);
+					openContextMenu(v);
+				}
+			});
 		}
 	};
 
@@ -226,20 +246,24 @@ public class cgeowaypoint extends Activity {
 		menu.add(0, MENU_ID_COMPASS, 0, res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass); // compass
 
 		SubMenu subMenu = menu.addSubMenu(1, MENU_ID_NAVIGATION, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
-		subMenu.add(0, MENU_ID_RADAR, 0, res.getString(R.string.cache_menu_radar)); // radar
-		subMenu.add(0, MENU_ID_MAP, 0, res.getString(R.string.cache_menu_map)); // c:geo map
-		if (base.isLocus(activity)) {
-			subMenu.add(0, MENU_ID_LOCUS, 0, res.getString(R.string.cache_menu_locus)); // ext.: locus
-		}
-		if (base.isRmaps(activity)) {
-			subMenu.add(0, MENU_ID_RMAPS, 0, res.getString(R.string.cache_menu_rmaps)); // ext.: rmaps
-		}
-		subMenu.add(0, MENU_ID_EXTERN, 0, res.getString(R.string.cache_menu_map_ext)); // ext.: other
-		subMenu.add(0, MENU_ID_TURNBYTURN, 0, res.getString(R.string.cache_menu_tbt)); // turn-by-turn
+		addNavigationMenuItems(subMenu);
 
 		menu.add(0, MENU_ID_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
 
 		return true;
+	}
+
+	private void addNavigationMenuItems(Menu menu) {
+		menu.add(0, MENU_ID_RADAR, 0, res.getString(R.string.cache_menu_radar)); // radar
+		menu.add(0, MENU_ID_MAP, 0, res.getString(R.string.cache_menu_map)); // c:geo map
+		if (base.isLocus(activity)) {
+			menu.add(0, MENU_ID_LOCUS, 0, res.getString(R.string.cache_menu_locus)); // ext.: locus
+		}
+		if (base.isRmaps(activity)) {
+			menu.add(0, MENU_ID_RMAPS, 0, res.getString(R.string.cache_menu_rmaps)); // ext.: rmaps
+		}
+		menu.add(0, MENU_ID_EXTERN, 0, res.getString(R.string.cache_menu_map_ext)); // ext.: other
+		menu.add(0, MENU_ID_TURNBYTURN, 0, res.getString(R.string.cache_menu_tbt)); // turn-by-turn
 	}
 
 	@Override
@@ -461,5 +485,17 @@ public class cgeowaypoint extends Activity {
 		cgeonavigate.coordinates = new ArrayList<cgCoord>();
 		cgeonavigate.coordinates.add(new cgCoord(waypoint));
 		activity.startActivity(navigateIntent);
+	}
+
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		menu.setHeaderTitle(res.getString(R.string.cache_menu_navigate));
+		addNavigationMenuItems(menu);
+	}
+
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		return onOptionsItemSelected(item);
 	}
 }

@@ -1,14 +1,5 @@
 package cgeo.geocaching;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.res.Resources;
-import android.database.Cursor;
-import android.util.Log;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteStatement;
-import android.os.Environment;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -21,6 +12,16 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
 import java.util.Set;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
+import android.os.Environment;
+import android.util.Log;
 
 public class cgData {
 
@@ -206,14 +207,14 @@ public class cgData {
 			}
 		}
 
-		if (databaseRO == null || databaseRO.isOpen() == false) {
+		if (databaseRO == null || !databaseRO.isOpen()) {
 			try {
 				if (dbHelper == null) {
 					dbHelper = new cgDbHelper(context);
 				}
 				databaseRO = dbHelper.getReadableDatabase();
 
-				if (databaseRO.needUpgrade(dbVersion) == true) {
+				if (databaseRO.needUpgrade(dbVersion)) {
 					databaseRO = null;
 				}
 
@@ -223,7 +224,7 @@ public class cgData {
 					Log.e(cgSettings.tag, "Failed to open connection to RO database.");
 				}
 
-				if (databaseRO.inTransaction() == true) {
+				if (databaseRO != null && databaseRO.inTransaction()) {
 					databaseRO.endTransaction();
 				}
 			} catch (Exception e) {
@@ -667,7 +668,7 @@ public class cgData {
 							Log.e(cgSettings.tag, "Failed to upgrade to ver. 48: " + e.toString());
 						}
 					}
-					
+
 					if (oldVersion < 49) { // upgrade to 49
 						try {
 							db.execSQL(dbCreateLogCount);
@@ -677,7 +678,7 @@ public class cgData {
 							Log.e(cgSettings.tag, "Failed to upgrade to ver. 49: " + e.toString());
 						}
 					}
-					
+
 					if (oldVersion < 50) { // upgrade to 50
 						try {
 							db.execSQL("alter table " + dbTableCaches + " add column myvote float");
@@ -687,7 +688,7 @@ public class cgData {
 							Log.e(cgSettings.tag, "Failed to upgrade to ver. 50: " + e.toString());
 						}
 					}
-					
+
 					if (oldVersion < 51) { // upgrade to 51
 						try {
 							db.execSQL("alter table " + dbTableCaches + " add column reliable_latlon integer");
@@ -2246,8 +2247,8 @@ public class cgData {
 			cursor.moveToFirst();
 
 			do {
-				Integer type = new Integer(cursor.getInt(cursor.getColumnIndex("type")));
-				Integer count = new Integer(cursor.getInt(cursor.getColumnIndex("count")));
+				Integer type = cursor.getInt(cursor.getColumnIndex("type"));
+				Integer count = cursor.getInt(cursor.getColumnIndex("count"));
 
 				logCounts.put(type, count);
 			} while (cursor.moveToNext());
@@ -2356,8 +2357,6 @@ public class cgData {
 	}
 
 	public int getAllStoredCachesCount(boolean detailedOnly, String cachetype, Integer list) {
-		int count = 0;
-
 		String listSql = null;
 		String listSqlW = null;
 		if (list == null) {
@@ -2367,27 +2366,28 @@ public class cgData {
 			listSql = " where reason = " + list;
 			listSqlW = " and reason = " + list;
 		} else {
-			return count;
+			return 0;
 		}
 
+		int count = 0;
 		try {
+			String sql = "select count(_id) from " + dbTableCaches; // this default is not used, but we like to have variables initialized
 			if (detailedOnly == false) {
 				if (cachetype == null) {
-					SQLiteStatement sqlCount = databaseRO.compileStatement("select count(_id) from " + dbTableCaches + listSql);
-					count = (int) sqlCount.simpleQueryForLong();
+					sql = "select count(_id) from " + dbTableCaches + listSql;
 				} else {
-					SQLiteStatement sqlCount = databaseRO.compileStatement("select count(_id) from " + dbTableCaches + " where type = \"" + cachetype + "\"" + listSqlW);
-					count = (int) sqlCount.simpleQueryForLong();
+					sql = "select count(_id) from " + dbTableCaches + " where type = \"" + cachetype + "\"" + listSqlW;
 				}
 			} else {
 				if (cachetype == null) {
-					SQLiteStatement sqlCount = databaseRO.compileStatement("select count(_id) from " + dbTableCaches + " where detailed = 1" + listSqlW);
-					count = (int) sqlCount.simpleQueryForLong();
+					sql = "select count(_id) from " + dbTableCaches + " where detailed = 1" + listSqlW;
 				} else {
-					SQLiteStatement sqlCount = databaseRO.compileStatement("select count(_id) from " + dbTableCaches + " where detailed = 1 and type = \"" + cachetype + "\"" + listSqlW);
-					count = (int) sqlCount.simpleQueryForLong();
+					sql = "select count(_id) from " + dbTableCaches + " where detailed = 1 and type = \"" + cachetype + "\"" + listSqlW;
 				}
 			}
+			SQLiteStatement compiledStmnt = databaseRO.compileStatement(sql);
+			count = (int) compiledStmnt.simpleQueryForLong();
+			compiledStmnt.close();
 		} catch (Exception e) {
 			Log.e(cgSettings.tag, "cgData.loadAllStoredCachesCount: " + e.toString());
 		}
@@ -2526,11 +2526,11 @@ public class cgData {
 	public ArrayList<String> getCachedInViewport(Long centerLat, Long centerLon, Long spanLat, Long spanLon, String cachetype) {
 		return getInViewport(false, centerLat, centerLon, spanLat, spanLon, cachetype);
 	}
-	
+
 	public ArrayList<String> getStoredInViewport(Long centerLat, Long centerLon, Long spanLat, Long spanLon, String cachetype) {
 		return getInViewport(true, centerLat, centerLon, spanLat, spanLon, cachetype);
 	}
-	
+
 	public ArrayList<String> getInViewport(boolean stored, Long centerLat, Long centerLon, Long spanLat, Long spanLon, String cachetype) {
 		if (centerLat == null || centerLon == null || spanLat == null || spanLon == null) {
 			return null;

@@ -3,22 +3,17 @@ package cgeo.geocaching;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
-import android.hardware.SensorManager;
 import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Build;
-import android.util.Log;
 import android.view.Display;
 import android.view.Surface;
 
 public class cgDirection {
-	private Resources res = null;
 	private cgDirection dir = null;
-	private cgeoapplication app = null;
 	private Context context = null;
-	private cgWarning warning = null;
 	private SensorManager sensorManager = null;
 	private cgeoSensorListener sensorListener = null;
 	private cgUpdateDir dirUpdate = null;
@@ -27,11 +22,8 @@ public class cgDirection {
 	public Double directionNow = null;
 
 	public cgDirection(cgeoapplication appIn, Context contextIn, cgUpdateDir dirUpdateIn, cgWarning warningIn) {
-		app = appIn;
 		context = contextIn;
 		dirUpdate = dirUpdateIn;
-		warning = warningIn;
-		res = context.getResources();
 
 		try {
 			final int sdk = new Integer(Build.VERSION.SDK).intValue();

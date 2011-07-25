@@ -14,11 +14,11 @@ import com.google.android.maps.MapActivity;
 public class googleMapActivity extends MapActivity implements ActivityImpl {
 
 	private MapBase mapBase;
-	
+
 	public googleMapActivity() {
 		mapBase = new cgeomap(this);
 	}
-	
+
 	@Override
 	protected boolean isRouteDisplayed() {
 		return false;
@@ -28,7 +28,7 @@ public class googleMapActivity extends MapActivity implements ActivityImpl {
 	public Activity getActivity() {
 		return this;
 	}
-	
+
 	@Override
 	protected void onCreate(Bundle icicle) {
 		mapBase.onCreate(icicle);
@@ -76,7 +76,7 @@ public class googleMapActivity extends MapActivity implements ActivityImpl {
 
 	@Override
 	public boolean superOnCreateOptionsMenu(Menu menu) {
-		return superOnCreateOptionsMenu(menu);
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override

@@ -13,7 +13,6 @@ import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -53,10 +52,50 @@ import cgeo.geocaching.filter.cgFilter;
 import cgeo.geocaching.filter.cgFilterBySize;
 import cgeo.geocaching.filter.cgFilterByTrackables;
 import cgeo.geocaching.filter.cgFilterByType;
+import cgeo.geocaching.sorting.CacheComparator;
+import cgeo.geocaching.sorting.DifficultyComparator;
+import cgeo.geocaching.sorting.GeocodeComparator;
+import cgeo.geocaching.sorting.InventoryComparator;
+import cgeo.geocaching.sorting.NameComparator;
+import cgeo.geocaching.sorting.PopularityComparator;
+import cgeo.geocaching.sorting.RatingComparator;
+import cgeo.geocaching.sorting.SizeComparator;
+import cgeo.geocaching.sorting.TerrainComparator;
+import cgeo.geocaching.sorting.VoteComparator;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 public class cgeocaches extends ListActivity {
+
+	private static final int MENU_SWITCH_SELECT_MODE = 0;
+	private static final int MENU_REFRESH_STORED = 1;
+	private static final int MENU_MAP = 2;
+	private static final int MENU_LOCUS = 3;
+	private static final int MENU_DROP_CACHES = 5;
+	private static final int MENU_IMPORT_GPX = 6;
+	private static final int MENU_CREATE_LIST = 7;
+	private static final int MENU_DROP_LIST = 8;
+	private static final int MENU_INVERT_SELECTION = 9;
+	private static final int MENU_SORT_DISTANCE = 10;
+	private static final int MENU_SORT_DIFFICULTY = 11;
+	private static final int MENU_SORT_TERRAIN = 12;
+	private static final int MENU_SORT_SIZE = 13;
+	private static final int MENU_SORT_FAVORITES = 14;
+	private static final int MENU_SORT_NAME = 15;
+	private static final int MENU_SORT_GEOCODE = 16;
+	private static final int MENU_SWITCH_LIST = 17;
+	private static final int MENU_SORT_RATING = 18;
+	private static final int MENU_SORT_VOTE = 19;
+	private static final int MENU_SORT_INVENTORY = 20;
+
+	private static final int MENU_IMPORT_WEB = 25;
+	private static final int MENU_EXPORT_NOTES = 26;
+
+	private static final int MENU_DROP_CACHE = 30;
+	private static final int MENU_MOVE_TO_LIST = 31;
+
+	private static final int SUBMENU_MOVE_TO_LIST = 100;
+
 
 	private GoogleAnalyticsTracker tracker = null;
 	private String action = null;
@@ -84,11 +123,11 @@ public class cgeocaches extends ListActivity {
 	private cgGeo geo = null;
 	private cgDirection dir = null;
 	private cgUpdateLoc geoUpdate = new update();
-	private cgUpdateDir dirUpdate = new updateDir();
+	private cgUpdateDir dirUpdate = new UpdateDirection();
 	private String title = "";
 	private int detailTotal = 0;
 	private int detailProgress = 0;
-	private Long detailProgressTime = 0l;
+	private long detailProgressTime = 0l;
 	private geocachesLoadDetails threadD = null;
 	private geocachesLoadFromWeb threadW = null;
 	private geocachesDropDetails threadR = null;
@@ -96,7 +135,7 @@ public class cgeocaches extends ListActivity {
 	private int listId = 0;
 	private ArrayList<cgList> lists = null;
 	private String selectedFilter = null;
-	private cgCacheGeocodeComparator gcComparator = new cgCacheGeocodeComparator();
+	private GeocodeComparator gcComparator = new GeocodeComparator();
 	private Handler loadCachesHandler = new Handler() {
 
 		@Override
@@ -279,17 +318,16 @@ public class cgeocaches extends ListActivity {
 						adapter.notifyDataSetChanged();
 					}
 
-					Float diffTime = new Float((System.currentTimeMillis() - detailProgressTime) / 1000); // seconds left
-					Float oneCache = diffTime / detailProgress; // left time per cache
-					int etaTime = (int) ((detailTotal - detailProgress) * oneCache / 60); // seconds remaining
+					int secondsElapsed = (int)((System.currentTimeMillis() - detailProgressTime) / 1000);
+					int minutesRemaining = (int) ((detailTotal - detailProgress) * secondsElapsed / detailProgress / 60);
 
 					waitDialog.setProgress(detailProgress);
-					if (etaTime < 1) {
+					if (minutesRemaining < 1) {
 						waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
-					} else if (etaTime == 1) {
-						waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + etaTime + " " + res.getString(R.string.caches_eta_min));
+					} else if (minutesRemaining == 1) {
+						waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + minutesRemaining + " " + res.getString(R.string.caches_eta_min));
 					} else {
-						waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + etaTime + " " + res.getString(R.string.caches_eta_mins));
+						waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + minutesRemaining + " " + res.getString(R.string.caches_eta_mins));
 					}
 				}
 			} else {
@@ -327,7 +365,7 @@ public class cgeocaches extends ListActivity {
 		@Override
 		public void handleMessage(Message msg) {
 			setAdapter();
-			
+
 			if (adapter != null) {
 				adapter.notifyDataSetChanged();
 			}
@@ -348,7 +386,7 @@ public class cgeocaches extends ListActivity {
                                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                                 warning.showToast(res.getString(R.string.gpx_import_no_files));
 				finish();
-				return; 
+				return;
 			} else {
 				if (adapter != null) {
 					adapter.setSelectMode(false, true);
@@ -413,6 +451,14 @@ public class cgeocaches extends ListActivity {
             {
                 cacheList.get(msg.what).statusChecked = false;
                 waitDialog.setProgress(detailProgress);
+            }
+            if (-2 == msg.what)
+            {
+                warning.showToast(res.getString(R.string.info_fieldnotes_exported_to) + ": " + msg.obj.toString());
+            }
+            if (-3 == msg.what)
+            {
+                warning.showToast(res.getString(R.string.err_fieldnotes_export_failed));
             }
             else
             {
@@ -657,70 +703,70 @@ public class cgeocaches extends ListActivity {
 		subMenuFilter.add(0, 22, 0, res.getString(R.string.caches_filter_size));
 		subMenuFilter.add(0, 23, 0, res.getString(R.string.caches_filter_track));
 		subMenuFilter.add(0, 24, 0, res.getString(R.string.caches_filter_clear));
-		
+
 		SubMenu subMenuSort = menu.addSubMenu(0, 104, 0, res.getString(R.string.caches_sort)).setIcon(android.R.drawable.ic_menu_sort_alphabetically);
 		subMenuSort.setHeaderTitle(res.getString(R.string.caches_sort_title));
 
 		// sort the context menu labels alphabetically for easier reading
 		HashMap<String, Integer> comparators = new HashMap<String, Integer>();
-		comparators.put(res.getString(R.string.caches_sort_distance), 10);
-		comparators.put(res.getString(R.string.caches_sort_difficulty), 11);
-		comparators.put(res.getString(R.string.caches_sort_terrain), 12);
-		comparators.put(res.getString(R.string.caches_sort_size), 13);
-		comparators.put(res.getString(R.string.caches_sort_favorites), 14);
-		comparators.put(res.getString(R.string.caches_sort_name), 15);
-		comparators.put(res.getString(R.string.caches_sort_gccode), 16);
-		comparators.put(res.getString(R.string.caches_sort_rating), 18);
-		comparators.put(res.getString(R.string.caches_sort_vote), 19);
-		comparators.put(res.getString(R.string.caches_sort_inventory), 20);
+		comparators.put(res.getString(R.string.caches_sort_distance), MENU_SORT_DISTANCE);
+		comparators.put(res.getString(R.string.caches_sort_difficulty), MENU_SORT_DIFFICULTY);
+		comparators.put(res.getString(R.string.caches_sort_terrain), MENU_SORT_TERRAIN);
+		comparators.put(res.getString(R.string.caches_sort_size), MENU_SORT_SIZE);
+		comparators.put(res.getString(R.string.caches_sort_favorites), MENU_SORT_FAVORITES);
+		comparators.put(res.getString(R.string.caches_sort_name), MENU_SORT_NAME);
+		comparators.put(res.getString(R.string.caches_sort_gccode), MENU_SORT_GEOCODE);
+		comparators.put(res.getString(R.string.caches_sort_rating), MENU_SORT_RATING);
+		comparators.put(res.getString(R.string.caches_sort_vote), MENU_SORT_VOTE);
+		comparators.put(res.getString(R.string.caches_sort_inventory), MENU_SORT_INVENTORY);
 
 		ArrayList<String> sortedLabels = new ArrayList<String>(comparators.keySet());
 		Collections.sort(sortedLabels);
 		for (String label : sortedLabels) {
 			Integer id = comparators.get(label);
-			subMenuSort.add(1, id, 0, label).setCheckable(true).setChecked(id == 10);
+			subMenuSort.add(1, id, 0, label).setCheckable(true).setChecked(id == MENU_SORT_DISTANCE);
 		}
 
 		subMenuSort.setGroupCheckable(1, true, true);
 
 		menu.add(0, 0, 0, res.getString(R.string.caches_select_mode)).setIcon(android.R.drawable.ic_menu_agenda);
-		menu.add(0, 9, 0, res.getString(R.string.caches_select_invert)).setIcon(android.R.drawable.ic_menu_agenda);
+		menu.add(0, MENU_INVERT_SELECTION, 0, res.getString(R.string.caches_select_invert)).setIcon(android.R.drawable.ic_menu_agenda);
 		if (type.equals("offline") == true) {
 			SubMenu subMenu = menu.addSubMenu(0, 103, 0, res.getString(R.string.caches_manage)).setIcon(android.R.drawable.ic_menu_save);
-			subMenu.add(0, 5, 0, res.getString(R.string.caches_drop_all)); // delete saved caches
-			subMenu.add(0, 1, 0, res.getString(R.string.cache_offline_refresh)); // download details for all caches
-			subMenu.add(0, 26, 0, res.getString(R.string.cache_export_fieldnote)); // export field notes
+			subMenu.add(0, MENU_DROP_CACHES, 0, res.getString(R.string.caches_drop_all)); // delete saved caches
+			subMenu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.cache_offline_refresh)); // download details for all caches
+			subMenu.add(0, MENU_EXPORT_NOTES, 0, res.getString(R.string.cache_export_fieldnote)); // export field notes
 			if (settings.webDeviceCode == null)
 			{
-				menu.add(0, 6, 0, res.getString(R.string.gpx_import_title)).setIcon(android.R.drawable.ic_menu_upload); // import gpx file
+				menu.add(0, MENU_IMPORT_GPX, 0, res.getString(R.string.gpx_import_title)).setIcon(android.R.drawable.ic_menu_upload); // import gpx file
 			} else {
 				SubMenu subMenuImport = menu.addSubMenu(0, 105, 0, res.getString(R.string.import_title)).setIcon(android.R.drawable.ic_menu_upload); // import
-				subMenuImport.add(1, 6, 0, res.getString(R.string.gpx_import_title)).setCheckable(false).setChecked(false);
-				subMenuImport.add(1, 25, 0, res.getString(R.string.web_import_title)).setCheckable(false).setChecked(false);
+				subMenuImport.add(1, MENU_IMPORT_GPX, 0, res.getString(R.string.gpx_import_title)).setCheckable(false).setChecked(false);
+				subMenuImport.add(1, MENU_IMPORT_WEB, 0, res.getString(R.string.web_import_title)).setCheckable(false).setChecked(false);
 			}
 		} else {
 		    if (type.equals("history"))
 		    {
-		        menu.add(0, 26, 0, res.getString(R.string.cache_export_fieldnote)).setIcon(android.R.drawable.ic_menu_save); // export field notes
+		        menu.add(0, MENU_EXPORT_NOTES, 0, res.getString(R.string.cache_export_fieldnote)).setIcon(android.R.drawable.ic_menu_save); // export field notes
 		    }
-			menu.add(0, 1, 0, res.getString(R.string.caches_store_offline)).setIcon(android.R.drawable.ic_menu_set_as); // download details for all caches
+			menu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.caches_store_offline)).setIcon(android.R.drawable.ic_menu_set_as); // download details for all caches
 		}
 
 		final Intent intentTest = new Intent(Intent.ACTION_VIEW);
 		intentTest.setData(Uri.parse("menion.points:x"));
 		if (cgBase.isIntentAvailable(activity, intentTest) == true) {
 			SubMenu subMenu = menu.addSubMenu(0, 101, 0, res.getString(R.string.caches_on_map)).setIcon(android.R.drawable.ic_menu_mapmode);
-			subMenu.add(0, 2, 0, res.getString(R.string.caches_map_cgeo)); // show all caches on map using c:geo
-			subMenu.add(0, 3, 0, res.getString(R.string.caches_map_locus)); // show all caches on map using Locus
+			subMenu.add(0, MENU_MAP, 0, res.getString(R.string.caches_map_cgeo)); // show all caches on map using c:geo
+			subMenu.add(0, MENU_LOCUS, 0, res.getString(R.string.caches_map_locus)); // show all caches on map using Locus
 		} else {
-			menu.add(0, 2, 0, res.getString(R.string.caches_on_map)).setIcon(android.R.drawable.ic_menu_mapmode); // show all caches on map
+			menu.add(0, MENU_MAP, 0, res.getString(R.string.caches_on_map)).setIcon(android.R.drawable.ic_menu_mapmode); // show all caches on map
 		}
 
 		if (type.equals("offline") == true) {
 			SubMenu subMenu = menu.addSubMenu(0, 102, 0, res.getString(R.string.list_menu)).setIcon(android.R.drawable.ic_menu_more);
-			subMenu.add(0, 7, 0, res.getString(R.string.list_menu_create));
-			subMenu.add(0, 8, 0, res.getString(R.string.list_menu_drop));
-			subMenu.add(0, 17, 0, res.getString(R.string.list_menu_change));
+			subMenu.add(0, MENU_CREATE_LIST, 0, res.getString(R.string.list_menu_create));
+			subMenu.add(0, MENU_DROP_LIST, 0, res.getString(R.string.list_menu_drop));
+			subMenu.add(0, MENU_SWITCH_LIST, 0, res.getString(R.string.list_menu_change));
 		}
 
 		return true;
@@ -732,30 +778,30 @@ public class cgeocaches extends ListActivity {
 
 		try {
 			if (adapter != null && adapter.getSelectMode() == true) {
-				menu.findItem(0).setTitle(res.getString(R.string.caches_select_mode_exit));
-				menu.findItem(9).setVisible(true);
+				menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode_exit));
+				menu.findItem(MENU_INVERT_SELECTION).setVisible(true);
 			} else {
-				menu.findItem(0).setTitle(res.getString(R.string.caches_select_mode));
-				menu.findItem(9).setVisible(false);
+				menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode));
+				menu.findItem(MENU_INVERT_SELECTION).setVisible(false);
 			}
 
 			if (type != null && type.equals("offline") == true) {
 				if (adapter != null && adapter.getChecked() > 0) {
-					menu.findItem(5).setTitle(res.getString(R.string.caches_drop_selected) + " (" + adapter.getChecked() + ")");
+					menu.findItem(MENU_DROP_CACHES).setTitle(res.getString(R.string.caches_drop_selected) + " (" + adapter.getChecked() + ")");
 				} else {
-					menu.findItem(5).setTitle(res.getString(R.string.caches_drop_all));
+					menu.findItem(MENU_DROP_CACHES).setTitle(res.getString(R.string.caches_drop_all));
 				}
 
 				if (adapter != null && adapter.getChecked() > 0) {
-					menu.findItem(1).setTitle(res.getString(R.string.caches_refresh_selected) + " (" + adapter.getChecked() + ")");
+					menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_refresh_selected) + " (" + adapter.getChecked() + ")");
 				} else {
-					menu.findItem(1).setTitle(res.getString(R.string.caches_refresh_all));
+					menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_refresh_all));
 				}
-				
+
 				if (adapter != null && adapter.getChecked() > 0) {
-                    menu.findItem(26).setTitle(res.getString(R.string.cache_export_fieldnote) + " (" + adapter.getChecked() + ")");
+                    menu.findItem(MENU_EXPORT_NOTES).setTitle(res.getString(R.string.cache_export_fieldnote) + " (" + adapter.getChecked() + ")");
                 } else {
-                    menu.findItem(26).setTitle(res.getString(R.string.cache_export_fieldnote));
+                    menu.findItem(MENU_EXPORT_NOTES).setTitle(res.getString(R.string.cache_export_fieldnote));
                 }
 			} else {
 				if (adapter == null) {
@@ -764,27 +810,25 @@ public class cgeocaches extends ListActivity {
 					Log.i(cgSettings.tag, "Checked: " + adapter.getChecked());
 				}
 				if (adapter != null && adapter.getChecked() > 0) {
-					menu.findItem(1).setTitle(res.getString(R.string.caches_store_selected) + " (" + adapter.getChecked() + ")");
+					menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_store_selected) + " (" + adapter.getChecked() + ")");
 				} else {
-					menu.findItem(1).setTitle(res.getString(R.string.caches_store_offline));
+					menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_store_offline));
 				}
 			}
 
 			if (type != null && type.equals("offline") == false && (cacheList != null && app != null && cacheList.size() >= app.getTotal(searchId))) { // there are no more caches
-				menu.findItem(0).setEnabled(false);
+				menu.findItem(MENU_SWITCH_SELECT_MODE).setEnabled(false);
 			} else {
-				menu.findItem(0).setEnabled(true);
+				menu.findItem(MENU_SWITCH_SELECT_MODE).setEnabled(true);
 			}
 
-			if (listId == 1) {
-				menu.findItem(8).setVisible(false);
-			} else {
-				menu.findItem(8).setVisible(true);
+			MenuItem item = menu.findItem(MENU_DROP_LIST);
+			if (item != null) {
+				item.setVisible(listId != 1);
 			}
-			if (app.getLists().size() < 2) {
-				menu.findItem(17).setVisible(false);
-			} else {
-				menu.findItem(17).setVisible(true);
+			item = menu.findItem(MENU_SWITCH_LIST);
+			if (item != null) {
+				item.setVisible(app.getLists().size() >= 2);
 			}
 		} catch (Exception e) {
 			Log.e(cgSettings.tag, "cgeocaches.onPrepareOptionsMenu: " + e.toString());
@@ -796,69 +840,69 @@ public class cgeocaches extends ListActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-			case 0:
+			case MENU_SWITCH_SELECT_MODE:
 				if (adapter != null) {
 					adapter.switchSelectMode();
 				}
 				return true;
-			case 1:
+			case MENU_REFRESH_STORED:
 				refreshStored();
 				return true;
-			case 2:
+			case MENU_MAP:
 				showOnMap();
 				return false;
-			case 3:
+			case MENU_LOCUS:
 				showOnLocus();
 				return false;
-			case 5:
+			case MENU_DROP_CACHES:
 				dropStored();
 				return false;
-			case 6:
+			case MENU_IMPORT_GPX:
 				importGpx();
 				return false;
-			case 7:
+			case MENU_CREATE_LIST:
 				createList();
 				return false;
-			case 8:
+			case MENU_DROP_LIST:
 				removeList();
 				return false;
-			case 9:
+			case MENU_INVERT_SELECTION:
 				if (adapter != null) {
 					adapter.invertSelection();
 				}
 				return false;
-			case 10:
+			case MENU_SORT_DISTANCE:
 				setComparator(item, null);
 				return false;
-			case 11:
-				setComparator(item, new cgCacheDifficultyComparator());
+			case MENU_SORT_DIFFICULTY:
+				setComparator(item, new DifficultyComparator());
 				return false;
-			case 12:
-				setComparator(item, new cgCacheTerrainComparator());
+			case MENU_SORT_TERRAIN:
+				setComparator(item, new TerrainComparator());
 				return false;
-			case 13:
-				setComparator(item, new cgCacheSizeComparator());
+			case MENU_SORT_SIZE:
+				setComparator(item, new SizeComparator());
 				return false;
-			case 14:
-				setComparator(item, new cgCachePopularityComparator());
+			case MENU_SORT_FAVORITES:
+				setComparator(item, new PopularityComparator());
 				return false;
-			case 15:
-				setComparator(item, new cgCacheNameComparator());
+			case MENU_SORT_NAME:
+				setComparator(item, new NameComparator());
 				return false;
-			case 16:
-				setComparator(item, new cgCacheGeocodeComparator());
+			case MENU_SORT_GEOCODE:
+				setComparator(item, new GeocodeComparator());
 				return false;
-			case 17:
+			case MENU_SWITCH_LIST:
 				selectList(null);
 				return false;
-			case 18:
-				setComparator(item, new cgCacheRatingComparator());
+			case MENU_SORT_RATING:
+				setComparator(item, new RatingComparator());
 				return false;
-			case 19:
-				setComparator(item, new cgCacheVoteComparator());
+			case MENU_SORT_VOTE:
+				setComparator(item, new VoteComparator());
 				return false;
-			case 20:
-				setComparator(item, new cgCacheInventoryComparator());
+			case MENU_SORT_INVENTORY:
+				setComparator(item, new InventoryComparator());
 				return false;
 			case 21:
 				selectedFilter = res.getString(R.string.caches_filter_type);
@@ -876,10 +920,10 @@ public class cgeocaches extends ListActivity {
 					adapter.setFilter(null);
 				}
 				return false;
-			case 25:
+			case MENU_IMPORT_WEB:
 				importWeb();
 				return false;
-			case 26:
+			case MENU_EXPORT_NOTES:
                 exportFieldNotes();
                 return false;
 		}
@@ -888,7 +932,7 @@ public class cgeocaches extends ListActivity {
 	}
 
 	private void setComparator(MenuItem item,
-			Comparator<cgCache> comparator) {
+			CacheComparator comparator) {
 		if (adapter != null) {
 			adapter.setComparator(comparator);
 		}
@@ -909,7 +953,7 @@ public class cgeocaches extends ListActivity {
 		} catch (Exception e) {
 			Log.w(cgSettings.tag, "cgeocaches.onCreateContextMenu: " + e.toString());
 		}
-		
+
 		if ((adapterInfo == null || adapterInfo.position < 0) && selectedFilter != null){
 			// Context menu opened by selecting an option on the filter submenu
 
@@ -919,8 +963,8 @@ public class cgeocaches extends ListActivity {
 				menu.add(0,  9, 0, res.getString(R.string.caches_filter_size_small));
 				menu.add(0, 10, 0, res.getString(R.string.caches_filter_size_regular));
 				menu.add(0, 11, 0, res.getString(R.string.caches_filter_size_large));
-				menu.add(0, 12, 0, res.getString(R.string.caches_filter_size_other));	
-				menu.add(0, 13, 0, res.getString(R.string.caches_filter_size_virtual));	
+				menu.add(0, 12, 0, res.getString(R.string.caches_filter_size_other));
+				menu.add(0, 13, 0, res.getString(R.string.caches_filter_size_virtual));
 				menu.add(0, 14, 0, res.getString(R.string.caches_filter_size_notchosen));
 			} else if (selectedFilter.equals(res.getString(R.string.caches_filter_type))) {
 				menu.setHeaderTitle(res.getString(R.string.caches_filter_type_title));
@@ -942,13 +986,13 @@ public class cgeocaches extends ListActivity {
 			}
 		} else{
 			final cgCache cache = adapter.getItem(adapterInfo.position);
-	
+
 			if (cache.name != null && cache.name.length() > 0) {
 				menu.setHeaderTitle(cache.name);
 			} else {
 				menu.setHeaderTitle(cache.geocode);
 			}
-			
+
 			if (cache.latitude != null && cache.longitude != null) {
 				menu.add(0, 1, 0, res.getString(R.string.cache_menu_compass));
 				menu.add(0, 2, 0, res.getString(R.string.cache_menu_radar));
@@ -958,15 +1002,18 @@ public class cgeocaches extends ListActivity {
 				menu.add(0, 6, 0, res.getString(R.string.cache_menu_visit));
 				menu.add(0, 7, 0, res.getString(R.string.cache_menu_details));
 			}
+			if (cache.reason >= 1) {
+				menu.add(0, MENU_DROP_CACHE, 0, res.getString(R.string.cache_offline_drop));
+			}
 		}
-		
+
 		ArrayList<cgList> cacheLists = app.getLists();
 		int listCount = cacheLists.size();
 		if (listCount > 1) {
-			SubMenu submenu = menu.addSubMenu(0, 8, 0, res.getString(R.string.cache_menu_move_list));
+			SubMenu submenu = menu.addSubMenu(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
 			for (int i = 0; i < listCount; i++) {
 				cgList list = cacheLists.get(i);
-				submenu.add(Menu.NONE, 100+list.id, Menu.NONE, list.title);
+				submenu.add(Menu.NONE, SUBMENU_MOVE_TO_LIST + list.id, Menu.NONE, list.title);
 			}
 		}
 	}
@@ -1023,7 +1070,7 @@ public class cgeocaches extends ListActivity {
 				} else if (id == 29) {
 					adapter.setFilter(filter = new cgFilterByType("gps"));
 				}
-			} 
+			}
 			if(filter != null){
 				return true;
 			}
@@ -1137,13 +1184,21 @@ public class cgeocaches extends ListActivity {
 			activity.startActivity(cachesIntent);
 
 			return true;
-		} else if (id == 8) { // move to list (sub menu)
+		} else if (id == MENU_MOVE_TO_LIST) {
 			// we must remember the menu info for the sub menu, there is a bug in Android:
 			// https://code.google.com/p/android/issues/detail?id=7139
 			lastMenuInfo = info;
 			return true;
-		} else if (id >= 100) { // move to list
-			int newListId = id - 100;
+		} else if (id == MENU_DROP_CACHE) {
+			base.dropCache(app, activity, cache, new Handler() {
+				@Override
+				public void handleMessage(Message msg) {
+					switchList(listId, -1); // refresh
+				}
+			});
+			return true;
+		} else if (id >= SUBMENU_MOVE_TO_LIST) {
+			int newListId = id - SUBMENU_MOVE_TO_LIST;
 			app.moveToList(cache.geocode, newListId);
 			// refresh list by switching to the current list
 			switchListById(listId);
@@ -1151,7 +1206,7 @@ public class cgeocaches extends ListActivity {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -1437,7 +1492,7 @@ public class cgeocaches extends ListActivity {
 		threadD = new geocachesLoadDetails(loadDetailsHandler, listId);
 		threadD.start();
 	}
-	
+
 	public void exportFieldNotes()
 	{
         if (adapter != null && adapter.getChecked() > 0)
@@ -1473,7 +1528,7 @@ public class cgeocaches extends ListActivity {
 
         waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         waitDialog.setMessage(res.getString(R.string.caches_exporting_fieldnote));
-        
+
         waitDialog.setCancelable(true);
         waitDialog.setMax(detailTotal);
         waitDialog.show();
@@ -1516,7 +1571,7 @@ public class cgeocaches extends ListActivity {
 		threadW = new geocachesLoadFromWeb(downloadFromWebHandler, listId);
 		threadW.start();
 	}
-	
+
 	public void dropStored() {
 		AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
 		dialog.setCancelable(true);
@@ -1609,7 +1664,7 @@ public class cgeocaches extends ListActivity {
 		}
 	}
 
-	private class updateDir extends cgUpdateDir {
+	private class UpdateDirection extends cgUpdateDir {
 
 		@Override
 		public void updateDir(cgDirection dir) {
@@ -1912,15 +1967,12 @@ public class cgeocaches extends ListActivity {
 			handler.sendEmptyMessage(-1);
 		}
 	}
-	
-	//tg
+
 	private class geocachesLoadFromWeb extends Thread {
 
 		private Handler handler = null;
 		private int reason = 1;
 		private volatile boolean needToStop = false;
-		private int checked = 0;
-		private long last = 0l;
 
 		public geocachesLoadFromWeb(Handler handlerIn, int reasonIn) {
 			setPriority(Thread.MIN_PRIORITY);
@@ -1941,49 +1993,52 @@ public class cgeocaches extends ListActivity {
 			if (geo != null) {
 				geo = app.removeGeo();
 			}
-			
+
 			int delay=-1;
 			int times=0;
 
-			while (times < 36) //3 minutes max
+			while (times < 3 * 60 / 5) // maximum: 3 minutes, every 5 seconds
 			{
 				if (needToStop)
 				{
 					handler.sendEmptyMessage(-1);
 					break;
 				}
-				
+
 				//download new code
-                                String deviceCode = settings.webDeviceCode;
-                                if (deviceCode==null) deviceCode="";
+				String deviceCode = settings.webDeviceCode;
+				if (deviceCode == null) {
+					deviceCode = "";
+				}
 				cgResponse responseFromWeb = base.request(false, "send2cgeo.carnero.cc", "/readCode.php", "GET", "d=" + cgBase.urlencode_rfc3986(deviceCode), 0, true);
-                                
-                                if ((responseFromWeb.getStatusCode() == 200)&&(responseFromWeb.getData().length()>2)) {
 
-                                        String GCcode = responseFromWeb.getData();
+				if ((responseFromWeb.getStatusCode() == 200)
+						&& (responseFromWeb.getData().length() > 2)) {
 
-                                        delay=1;
+					String GCcode = responseFromWeb.getData();
+
+					delay = 1;
 					Message mes = new Message();
-					mes.what=1;
-					mes.obj=GCcode;
+					mes.what = 1;
+					mes.obj = GCcode;
 					handler.sendMessage(mes);
 					yield();
-	
+
 					base.storeCache(app, activity, null, GCcode, reason, null);
-	
+
 					Message mes1 = new Message();
-					mes1.what=2;
-					mes1.obj=GCcode;
+					mes1.what = 2;
+					mes1.obj = GCcode;
 					handler.sendMessage(mes1);
 					yield();
 				} else {
-					delay=0;
+					delay = 0;
 					handler.sendEmptyMessage(0);
 					yield();
-                                }
-                                if (responseFromWeb.getStatusCode() != 200) {
-                                        needToStop = true;
-                                        settings.setWebNameCode(null, null);
+				}
+				if (responseFromWeb.getStatusCode() != 200) {
+					needToStop = true;
+					settings.setWebNameCode(null, null);
 					handler.sendEmptyMessage(-2);
 					return;
 				}
@@ -2005,7 +2060,6 @@ public class cgeocaches extends ListActivity {
 			handler.sendEmptyMessage(-1);
 		}
 	}
-	//tg
 
 	private class geocachesDropDetails extends Thread {
 
@@ -2065,7 +2119,7 @@ public class cgeocaches extends ListActivity {
 			handler.sendEmptyMessage(-1);
 		}
 	}
-	
+
 	private class geocachesExportFieldNotes extends Thread
 	{
         private Handler handler = null;
@@ -2094,7 +2148,7 @@ public class cgeocaches extends ListActivity {
         {
             SimpleDateFormat fieldNoteDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
             StringBuffer fieldNoteBuffer = new StringBuffer(500);
-            
+
             // We need our own HashMap because cgBase.LogTypes1 will give us localized and maybe
             // different strings than gc.com expects in the field note
             // We only need such logtypes that are possible to log via c:geo
@@ -2104,7 +2158,7 @@ public class cgeocaches extends ListActivity {
             logTypes.put(cgBase.LOG_NOTE, "Write Note");
             logTypes.put(cgBase.LOG_NEEDS_ARCHIVE, "Needs archived");
             //logTypes.put(cgBase.LOG_NEEDS_MAINTENANCE, "Needs Maintenance"); // TODO: Strange problems, gc.com aborts with a parse-error
-            
+
             for (cgCache cache : cacheList) {
                 if (checked > 0 && cache.statusChecked == false) {
                     handler.sendEmptyMessage(0);
@@ -2119,11 +2173,11 @@ public class cgeocaches extends ListActivity {
                         Log.i(cgSettings.tag, "Stopped exporting process.");
                         break;
                     }
-                    
+
                     if (cache.logOffline)
                     {
                         cgLog log = app.loadLogOffline(cache.geocode);
-                        
+
                         if (null != logTypes.get(log.type))
                         {
                             fieldNoteBuffer.append(cache.geocode)
@@ -2138,7 +2192,7 @@ public class cgeocaches extends ListActivity {
                     }
 
                     detailProgress++;
-                    
+
                     handler.sendEmptyMessage(cacheList.indexOf(cache));
 
                     yield();
@@ -2146,15 +2200,15 @@ public class cgeocaches extends ListActivity {
                     Log.e(cgSettings.tag, "cgeocaches.geocachesExportFieldNotes: " + e.toString());
                 }
             }
-            
+
             if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
             {
                 File exportLocation = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/field-notes");
                 exportLocation.mkdirs();
-                
+
                 SimpleDateFormat fileNameDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
                 File exportFile = new File(exportLocation + "/" + fileNameDateFormat.format(new Date()) + ".txt");
-                
+
                 OutputStream os = null;
                 Writer       fw = null;
                 try
@@ -2162,9 +2216,12 @@ public class cgeocaches extends ListActivity {
                     os = new FileOutputStream(exportFile);
                     fw = new OutputStreamWriter(os, "ISO-8859-1"); // TODO: gc.com doesn't support UTF-8
                     fw.write(fieldNoteBuffer.toString());
+                    
+                    Message.obtain(handler, -2, exportFile).sendToTarget();
                 }
                 catch (IOException e) {
                     Log.e(cgSettings.tag, "cgeocaches.geocachesExportFieldNotes: " + e.toString());
+                    handler.sendEmptyMessage(-3);
                 }
                 finally
                 {

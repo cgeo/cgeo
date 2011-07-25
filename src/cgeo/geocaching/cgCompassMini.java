@@ -1,14 +1,14 @@
 package cgeo.geocaching;
 
-import android.util.AttributeSet;
-import android.view.View;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Paint;
-import android.graphics.PaintFlagsDrawFilter;
-import android.graphics.Canvas;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PaintFlagsDrawFilter;
+import android.util.AttributeSet;
+import android.view.View;
 
 public class cgCompassMini extends View {
 	private int arrowSkin = R.drawable.compass_arrow_mini_white;
@@ -53,7 +53,7 @@ public class cgCompassMini extends View {
 			compassArrow = null;
 		}
 	}
-	
+
 	public void setContent(cgBase baseIn, Double cacheLatIn, Double cacheLonIn) {
 		base = baseIn;
 		cacheLat = cacheLatIn;
@@ -99,7 +99,7 @@ public class cgCompassMini extends View {
 	@Override
 	protected void onDraw(Canvas canvas){
 		lock = true;
-		
+
 		super.onDraw(canvas);
 
 		Double azimuthRelative = azimuth - heading;
@@ -124,9 +124,9 @@ public class cgCompassMini extends View {
 		marginLeft = (getWidth() - compassArrowWidth) / 2;
 		marginTop = (getHeight() - compassArrowHeight) / 2;
 
-		canvas.rotate(new Float(-(azimuthRelative)), canvasCenterX, canvasCenterY);
+		canvas.rotate(-(azimuthRelative.floatValue()), canvasCenterX, canvasCenterY);
 		canvas.drawBitmap(compassArrow, marginLeft, marginTop, null);
-		canvas.rotate(new Float(azimuthRelative), canvasCenterX, canvasCenterY);
+		canvas.rotate(azimuthRelative.floatValue(), canvasCenterX, canvasCenterY);
 
 		canvas.setDrawFilter(remfil);
 
@@ -147,7 +147,7 @@ public class cgCompassMini extends View {
             result = specSize;
         } else {
             result = 21 + getPaddingLeft() + getPaddingRight();
-			
+
             if (specMode == MeasureSpec.AT_MOST) {
                 result = Math.min(result, specSize);
             }
@@ -170,7 +170,7 @@ public class cgCompassMini extends View {
                 result = Math.min(result, specSize);
             }
         }
-		
+
         return result;
     }
 }

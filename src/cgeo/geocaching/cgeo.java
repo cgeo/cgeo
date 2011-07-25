@@ -1,29 +1,6 @@
 package cgeo.geocaching;
 
-import gnu.android.app.appmanualclient.*;
-
-import android.os.Bundle;
-import android.os.Handler;
-import android.app.Activity;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.TextView;
-import android.content.Intent;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.res.Configuration;
-import android.content.res.Resources;
-import android.location.Address;
-import android.location.Geocoder;
-import android.os.Message;
-import android.util.Log;
-import android.view.ContextMenu;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import gnu.android.app.appmanualclient.AppManualReaderClient;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,6 +8,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.location.Address;
+import android.location.Geocoder;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class cgeo extends Activity {
 
@@ -199,7 +199,7 @@ public class cgeo extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		settings.load();
 		init();
 	}
@@ -285,7 +285,7 @@ public class cgeo extends Activity {
 		menu.add(1, 3, 0, res.getString(R.string.mystery));
 
 		// then add all other cache types sorted alphabetically
-		HashMap<String, String> allTypes = (HashMap<String, String>) base.cacheTypesInv.clone();
+		HashMap<String, String> allTypes = (HashMap<String, String>) cgBase.cacheTypesInv.clone();
 		allTypes.remove("traditional");
 		allTypes.remove("multi");
 		allTypes.remove("mystery");

@@ -1,28 +1,60 @@
 package cgeo.geocaching;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.security.MessageDigest;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.Inflater;
+import java.util.zip.InflaterInputStream;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import java.io.InputStreamReader;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.net.URLConnection;
-import java.net.HttpURLConnection;
-import java.util.Map;
-import java.util.Calendar;
-import java.util.Locale;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import android.util.Log;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -36,40 +68,14 @@ import android.os.Message;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.style.StrikethroughSpan;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.math.BigInteger;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.net.URLDecoder;
-import java.security.MessageDigest;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Set;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.Inflater;
-import java.util.zip.InflaterInputStream;
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 public class cgBase {
 
@@ -85,7 +91,8 @@ public class cgBase {
 	public static HashMap<Integer, String> logTypesTrackable = new HashMap<Integer, String>();
 	public static HashMap<Integer, String> logTypesTrackableAction = new HashMap<Integer, String>();
 	public static HashMap<Integer, String> errorRetrieve = new HashMap<Integer, String>();
-	public static SimpleDateFormat dateIn = new SimpleDateFormat("MM/dd/yyyy");
+	public static SimpleDateFormat dateInBackslash = new SimpleDateFormat("MM/dd/yyyy");
+	public static SimpleDateFormat dateInDash = new SimpleDateFormat("yyyy-MM-dd");
 	public static SimpleDateFormat dateEvIn = new SimpleDateFormat("dd MMMMM yyyy", Locale.ENGLISH); // 28 March 2009
 	public static SimpleDateFormat dateTbIn1 = new SimpleDateFormat("EEEEE, dd MMMMM yyyy", Locale.ENGLISH); // Saturday, 28 March 2009
 	public static SimpleDateFormat dateTbIn2 = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
@@ -1087,7 +1094,7 @@ public class cgBase {
 		final Pattern patternOwner = Pattern.compile("<span class=\"minorCacheDetails\">[^\\w]*An?([^\\w]*Event)?[^\\w]*cache[^\\w]*by[^<]*<a href=\"[^\"]+\">([^<]+)</a>[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 		final Pattern patternOwnerReal = Pattern.compile("<a id=\"ctl00_ContentBody_uxFindLinksHiddenByThisUser\" href=\"[^\"]*/seek/nearest\\.aspx\\?u=*([^\"]+)\">[^<]+</a>", Pattern.CASE_INSENSITIVE);
 		final Pattern patternHidden = Pattern.compile("<span[^>]*>[^\\w]*Hidden[^:]*:[^\\d]*((\\d+)\\/(\\d+)\\/(\\d+))[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-		final Pattern patternHiddenEvent = Pattern.compile("<span[^>]*>[^\\w]*Event[^\\w]*Date[^:]*:[^\\w]*[a-zA-Z]+,[^\\d]*((\\d+)[^\\w]*(\\w+)[^\\d]*(\\d+))[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+		final Pattern patternHiddenEvent = Pattern.compile("<span[^>]*>[^\\w]*Event[^\\w]*Date[^:]*:([^<]*)</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 		final Pattern patternFavourite = Pattern.compile("<a id=\"uxFavContainerLink\"[^>]*>[^<]*<div[^<]*<span class=\"favorite-value\">[^\\d]*([0-9]+)[^\\d^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 
 		final Pattern patternFound = Pattern.compile("<p>[^<]*<a id=\"ctl00_ContentBody_hlFoundItLog\"[^<]*<img src=\".*/images/stockholm/16x16/check\\.gif\"[^>]*>[^<]*</a>[^<]*</p>", Pattern.CASE_INSENSITIVE);
@@ -1279,7 +1286,7 @@ public class cgBase {
 				final Matcher matcherHidden = patternHidden.matcher(tableInside);
 				while (matcherHidden.find()) {
 					if (matcherHidden.groupCount() > 0) {
-						cache.hidden = dateIn.parse(matcherHidden.group(1));
+						cache.hidden = parseDate(matcherHidden.group(1));
 					}
 				}
 			} catch (Exception e) {
@@ -1293,7 +1300,7 @@ public class cgBase {
 					final Matcher matcherHiddenEvent = patternHiddenEvent.matcher(tableInside);
 					while (matcherHiddenEvent.find()) {
 						if (matcherHiddenEvent.groupCount() > 0) {
-							cache.hidden = dateEvIn.parse(matcherHiddenEvent.group(1));
+							cache.hidden = parseDate(matcherHiddenEvent.group(1));
 						}
 					}
 				} catch (Exception e) {
@@ -1458,7 +1465,7 @@ public class cgBase {
 			// failed to parse short description
 			Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache description");
 		}
-		
+
 		// cache attributes
 		try {
 			final Matcher matcherAttributes = patternAttributes.matcher(page);
@@ -1670,7 +1677,7 @@ public class cgBase {
 								Calendar date = Calendar.getInstance();
 								date.set(year, month, day, 12, 0, 0);
 								logDate = date.getTimeInMillis();
-								logDate = (long) (Math.ceil(logDate / 1000)) * 1000;
+								logDate = (logDate / 1000L) * 1000L;
 							} else {
 								logDate = 0;
 							}
@@ -1868,6 +1875,36 @@ public class cgBase {
 		return caches;
 	}
 
+	private Date parseDate(String input) {
+		if (input == null) {
+			return null;
+		}
+		input = input.trim();
+		try {
+			Date result;
+			if (input.indexOf('/') > 0) {
+				result = dateInBackslash.parse(input);
+				if (result != null) {
+					return result;
+				}
+			}
+			if (input.indexOf('-') > 0) {
+				result = dateInDash.parse(input);
+				if (result != null) {
+					return result;
+				}
+			}
+			result = dateEvIn.parse(input);
+			if (result != null) {
+				return result;
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public cgRating getRating(String guid, String geocode) {
 		ArrayList<String> guids = null;
 		ArrayList<String> geocodes = null;
@@ -1884,9 +1921,8 @@ public class cgBase {
 
 		final HashMap<String, cgRating> ratings = getRating(guids, geocodes);
 		if(ratings != null){
-			final Set<String> ratingKeys = ratings.keySet();
-			for (String ratingKey : ratingKeys) {
-				return ratings.get(ratingKey);
+			for (Entry<String, cgRating> entry : ratings.entrySet()) {
+				return entry.getValue();
 			}
 		}
 
@@ -2350,7 +2386,7 @@ public class cgBase {
 								Calendar date = Calendar.getInstance();
 								date.set(year, month, day, 12, 0, 0);
 								logDate = date.getTimeInMillis();
-								logDate = (long) (Math.ceil(logDate / 1000)) * 1000;
+								logDate = (logDate / 1000L) * 1000L;
 							} else {
 								logDate = 0;
 							}
@@ -2728,7 +2764,7 @@ public class cgBase {
 
 	public String getHumanSpeed(float speed) {
 		double kph = speed * 3.6;
-		String unit = "kmh";
+		String unit = "km/h";
 
 		if (this.settings.units == cgSettings.unitsImperial) {
 			kph *= kmInMiles;
@@ -4180,19 +4216,19 @@ public class cgBase {
 	}
 
 	public static String implode(String delim, Object[] array) {
-		String out = "";
+		StringBuilder out = new StringBuilder();
 
 		try {
 			for (int i = 0; i < array.length; i++) {
 				if (i != 0) {
-					out += delim;
+					out.append(delim);
 				}
-				out += array[i].toString();
+				out.append(array[i].toString());
 			}
 		} catch (Exception e) {
 			Log.e(cgSettings.tag, "cgeoBase.implode: " + e.toString());
 		}
-		return out;
+		return out.toString();
 	}
 
 	public static String urlencode_rfc3986(String text) {
@@ -4477,7 +4513,7 @@ public class cgBase {
 					ins = connection.getInputStream();
 				}
 				final InputStreamReader inr = new InputStreamReader(ins);
-				final BufferedReader br = new BufferedReader(inr);
+				final BufferedReader br = new BufferedReader(inr, 16 * 1024);
 
 				readIntoBuffer(br, buffer);
 
@@ -4562,7 +4598,7 @@ public class cgBase {
 				lastWasWhitespace = false;
 			}
 		}
-		
+
 		return new String(bytes, 0, resultSize);
 	}
 

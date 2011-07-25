@@ -1,10 +1,12 @@
 package cgeo.geocaching.mapcommon;
 
+import java.util.ArrayList;
+
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
@@ -20,17 +22,13 @@ import cgeo.geocaching.cgeodetail;
 import cgeo.geocaching.cgeonavigate;
 import cgeo.geocaching.cgeopopup;
 import cgeo.geocaching.cgeowaypoint;
+import cgeo.geocaching.mapinterfaces.CacheOverlayItemImpl;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
 import cgeo.geocaching.mapinterfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.mapinterfaces.MapFactory;
 import cgeo.geocaching.mapinterfaces.MapProjectionImpl;
-import cgeo.geocaching.mapinterfaces.OverlayBase;
 import cgeo.geocaching.mapinterfaces.MapViewImpl;
-import cgeo.geocaching.mapinterfaces.CacheOverlayItemImpl;
-
-import java.util.ArrayList;
-
-import org.mapsforge.android.maps.Projection;
+import cgeo.geocaching.mapinterfaces.OverlayBase;
 
 public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 
@@ -55,11 +53,11 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 		context = contextIn;
 		fromDetail = fromDetailIn;
 	}
-	
+
 	public void updateItems(CacheOverlayItemImpl item) {
 		ArrayList<CacheOverlayItemImpl> itemsPre = new ArrayList<CacheOverlayItemImpl>();
 		itemsPre.add(item);
-		
+
 		updateItems(itemsPre);
 	}
 
@@ -73,15 +71,15 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 		}
 
 //		items.clear();
-		
+
 //		if (itemsPre.size() > 0) {
 			items = (ArrayList<CacheOverlayItemImpl>) itemsPre.clone();
 //		}
-		
+
 		setLastFocusedItemIndex(-1); // to reset tap during data change
 		populate();
 	}
-	
+
 	public boolean getCircles() {
 		return displayCircles;
 	}
@@ -94,23 +92,23 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 	public void draw(Canvas canvas, MapViewImpl mapView, boolean shadow) {
 
 		drawInternal(canvas, mapView.getMapProjection());
-		
+
 		super.draw(canvas, mapView, false);
 	}
-	
+
 	@Override
 	public void drawOverlayBitmap(Canvas canvas, Point drawPosition,
 			MapProjectionImpl projection, byte drawZoomLevel) {
-		
+
 		drawInternal(canvas, projection);
-		
+
 		super.drawOverlayBitmap(canvas, drawPosition, projection, drawZoomLevel);
 	}
-	
+
 	private void drawInternal(Canvas canvas, MapProjectionImpl projection) {
-		
+
 		MapFactory mapFactory = settings.getMapFactory();
-		
+
 		if (displayCircles) {
 			if (blockedCircle == null) {
 				blockedCircle = new Paint();
@@ -154,9 +152,9 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 			}
 
 			canvas.setDrawFilter(remfil);
-		}		
+		}
 	}
-	
+
 	@Override
 	public boolean onTap(int index) {
 		try {

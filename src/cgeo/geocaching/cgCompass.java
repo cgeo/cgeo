@@ -1,16 +1,16 @@
 package cgeo.geocaching;
 
-import android.util.AttributeSet;
-import android.view.View;
 import android.content.Context;
-import android.graphics.Paint;
-import android.graphics.PaintFlagsDrawFilter;
-import android.graphics.Canvas;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PaintFlagsDrawFilter;
 import android.os.Handler;
 import android.os.Message;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
 
 public class cgCompass extends View {
 
@@ -257,16 +257,16 @@ public class cgCompass extends View {
 		marginLeftTemp = (getWidth() - compassRoseWidth) / 2;
 		marginTopTemp = (getHeight() - compassRoseHeight) / 2;
 
-		canvas.rotate(new Float(-(azimuthTemp)), canvasCenterX, canvasCenterY);
+		canvas.rotate(-(azimuthTemp.floatValue()), canvasCenterX, canvasCenterY);
 		canvas.drawBitmap(compassRose, marginLeftTemp, marginTopTemp, null);
-		canvas.rotate(new Float(azimuthTemp), canvasCenterX, canvasCenterY);
+		canvas.rotate(azimuthTemp.floatValue(), canvasCenterX, canvasCenterY);
 
 		marginLeftTemp = (getWidth() - compassArrowWidth) / 2;
 		marginTopTemp = (getHeight() - compassArrowHeight) / 2;
 
-		canvas.rotate(new Float(-(azimuthRelative)), canvasCenterX, canvasCenterY);
+		canvas.rotate(-(azimuthRelative.floatValue()), canvasCenterX, canvasCenterY);
 		canvas.drawBitmap(compassArrow, marginLeftTemp, marginTopTemp, null);
-		canvas.rotate(new Float(azimuthRelative), canvasCenterX, canvasCenterY);
+		canvas.rotate(azimuthRelative.floatValue(), canvasCenterX, canvasCenterY);
 
 		marginLeftTemp = (getWidth() - compassOverlayWidth) / 2;
 		marginTopTemp = (getHeight() - compassOverlayHeight) / 2;
