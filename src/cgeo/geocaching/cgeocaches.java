@@ -994,7 +994,7 @@ public class cgeocaches extends ListActivity {
                 exportFieldNotes();
                 return false;
 			case MENU_REMOVE_FROM_HISTORY:
-                removeFromHistory();
+                removeFromHistoryCheck();
                 return false;
 		}
 
@@ -1563,7 +1563,30 @@ public class cgeocaches extends ListActivity {
 		threadD.start();
 	}
 
-	public void removeFromHistory()
+	public void removeFromHistoryCheck()
+    {
+	    AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
+        dialog.setCancelable(true);
+        dialog.setTitle(res.getString(R.string.caches_removing_from_history));
+        dialog.setMessage((adapter != null && adapter.getChecked() > 0) ? res.getString(R.string.cache_remove_from_history)
+                                                                        : res.getString(R.string.cache_clear_history));
+        dialog.setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                removeFromHistory();
+                dialog.cancel();
+            }
+        });
+        dialog.setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog alert = dialog.create();
+        alert.show();
+    }
+
+    public void removeFromHistory()
     {
         if (adapter != null && adapter.getChecked() > 0)
         {

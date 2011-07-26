@@ -853,6 +853,7 @@
 	· new: Autoinsert of signature\n
 	· new: Send to c:geo from web\n
     · new: Export field notes\n
+    · new: Clear history\n
 	· fix: Live map, better loading\n
 	· fix: Overwriting coords with wrong ones\n
 	· fix: Loading caches on Live map\n
