@@ -339,12 +339,10 @@ public class cgeopoint extends Activity {
 				menu.findItem(0).setVisible(true);
 				menu.findItem(2).setVisible(true);
 				menu.findItem(5).setVisible(true);
-				Log.i("cgeo", "SHOW");
 			} else {
 				menu.findItem(0).setVisible(false);
 				menu.findItem(2).setVisible(false);
 				menu.findItem(5).setVisible(false);
-				Log.i("cgeo", "HIDE");
 			}
 			
 			menu.findItem(6).setEnabled(!getHistoryOfSearchedLocations().isEmpty());
