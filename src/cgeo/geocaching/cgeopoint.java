@@ -21,12 +21,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.View.OnCreateContextMenuListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -99,6 +102,8 @@ public class cgeopoint extends Activity {
 	private DestinationHistoryAdapter destionationHistoryAdapter;
 	private ListView historyListView;
 	private TextView historyFooter;
+	
+	private static final int CONTEXT_MENU_DELETE_WAYPOINT = Menu.FIRST;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -128,6 +133,12 @@ public class cgeopoint extends Activity {
 		tracker.dispatch();
 		base.sendAnal(activity, tracker, "/point");
 
+		createHistoryView();
+		
+		init();
+	}
+
+	private void createHistoryView() {
 		historyListView = (ListView) findViewById(R.id.historyList);
 		
 		View pointControls = getLayoutInflater().inflate(R.layout.point_controls, null);
@@ -154,8 +165,31 @@ public class cgeopoint extends Activity {
 				}
 			}
 		});
-		
-		init();
+		historyListView.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {
+			
+			@Override
+			public void onCreateContextMenu(ContextMenu menu, View v,
+					ContextMenuInfo menuInfo) {
+				menu.add(Menu.NONE, CONTEXT_MENU_DELETE_WAYPOINT, Menu.NONE, R.string.waypoint_delete);
+			}
+		});
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case CONTEXT_MENU_DELETE_WAYPOINT:
+			AdapterView.AdapterContextMenuInfo menuInfo = 
+					(AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+			Object destination = historyListView.getItemAtPosition(menuInfo.position);
+			if(destination instanceof cgDestination)
+			{
+				removeFromHistory((cgDestination) destination);
+			}
+			return true;
+		default:
+			return super.onContextItemSelected(item);
+		}
 	}
 
 	private TextView getEmptyHistoryFooter() {
@@ -285,7 +319,12 @@ public class cgeopoint extends Activity {
 		subMenu.add(0, 4, 0, res.getString(R.string.cache_menu_tbt)); // turn-by-turn
 
 		menu.add(0, 5, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
+		
+		// clear history
+		MenuItem clearHistoryItem = menu.add(0, 6, 0, res.getString(R.string.search_clear_history));
+		clearHistoryItem.setIcon(android.R.drawable.ic_menu_delete);
 
+		Log.i("cgeo", "Options Menu created");
 		return true;
 	}
 
@@ -300,11 +339,15 @@ public class cgeopoint extends Activity {
 				menu.findItem(0).setVisible(true);
 				menu.findItem(2).setVisible(true);
 				menu.findItem(5).setVisible(true);
+				Log.i("cgeo", "SHOW");
 			} else {
 				menu.findItem(0).setVisible(false);
 				menu.findItem(2).setVisible(false);
 				menu.findItem(5).setVisible(false);
+				Log.i("cgeo", "HIDE");
 			}
+			
+			menu.findItem(6).setEnabled(!getHistoryOfSearchedLocations().isEmpty());
 		} catch (Exception e) {
 			// nothing
 		}
@@ -318,7 +361,7 @@ public class cgeopoint extends Activity {
 
 		ArrayList<Double> coords = getDestination();
 		
-		pushToHistory(coords);
+		addToHistory(coords);
 		
 		if (menuItem == 1) {
 			showOnMap();
@@ -340,7 +383,11 @@ public class cgeopoint extends Activity {
 		} else if (menuItem == 5) {
 			cachesAround();
 			return true;
-		} else if (menuItem == 20) {
+		}
+		else if (menuItem == 6) {
+			clearHistory();
+			return true;
+		}else if (menuItem == 20) {
 			base.runExternalMap(cgBase.mapAppLocus, activity, res, warning, tracker, coords.get(0), coords.get(1)); // locus
 			return true;
 		} else if (menuItem == 21) {
@@ -354,7 +401,7 @@ public class cgeopoint extends Activity {
 		return false;
 	}
 
-	private void pushToHistory(ArrayList<Double> coords) {
+	private void addToHistory(ArrayList<Double> coords) {
 		// Add locations to history
 		cgDestination loc = new cgDestination();
 		loc.setLatitude(coords.get(0));
@@ -362,7 +409,7 @@ public class cgeopoint extends Activity {
 		
 		if(!getHistoryOfSearchedLocations().contains(loc))
 		{
-			loc.setDate(DateFormat.format("dd/MM/yy H:mm", new Date()).toString());
+			loc.setDate(DateFormat.format("dd/MM/yy kk:mm", new Date()).toString());
 			getHistoryOfSearchedLocations().add(0,loc);
 
 			// Save location
@@ -370,6 +417,49 @@ public class cgeopoint extends Activity {
 			
 			// Ensure to remove the footer
 			historyListView.removeFooterView(getEmptyHistoryFooter());
+		}
+	}
+	
+	private void removeFromHistory(cgDestination destination)
+	{
+		if(getHistoryOfSearchedLocations().contains(destination))
+		{
+			getHistoryOfSearchedLocations().remove(destination);
+			
+			// Save
+			app.saveSearchedDestinations(getHistoryOfSearchedLocations());
+			
+			if(getHistoryOfSearchedLocations().isEmpty())
+			{
+				if(historyListView.getFooterViewsCount() == 0)
+				{
+					historyListView.addFooterView(getEmptyHistoryFooter());
+				}
+			}
+			
+			getDestionationHistoryAdapter().notifyDataSetChanged();
+			
+			warning.showToast(res.getString(R.string.search_remove_destination));
+		}
+	}
+	
+	private void clearHistory()
+	{
+		if(!getHistoryOfSearchedLocations().isEmpty())
+		{
+			getHistoryOfSearchedLocations().clear();
+			
+			// Save
+			app.saveSearchedDestinations(getHistoryOfSearchedLocations());
+			
+			if(historyListView.getFooterViewsCount() == 0)
+			{
+				historyListView.addFooterView(getEmptyHistoryFooter());
+			}
+			
+			getDestionationHistoryAdapter().notifyDataSetChanged();
+			
+			warning.showToast(res.getString(R.string.search_history_cleared));
 		}
 	}
 

@@ -567,6 +567,9 @@
   <string name="waypoint_unknown_coordinates">Coordinates unknown</string>
   <string name="search_history">History</string>
   <string name="search_history_empty">No previous destinations</string>
+  <string name="search_remove_destination">Destination removed</string>
+  <string name="search_clear_history">Clear History</string>
+  <string name="search_history_cleared">History cleared</string>
 
   <!-- visit -->
   <string name="visit_tweet">Post this find to Twitter</string>

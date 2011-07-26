@@ -13,5 +13,5 @@
 				android:src="@drawable/actionbar_manual"
 				android:onClick="goManual" />
 	</LinearLayout>
-	<ListView android:id="@+id/historyList" android:layout_width="match_parent" android:layout_height="match_parent"></ListView>
+	<ListView android:id="@+id/historyList" android:layout_width="match_parent" android:layout_height="match_parent" android:headerDividersEnabled="false" android:footerDividersEnabled="false"></ListView>
 </LinearLayout>
