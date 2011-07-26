@@ -90,11 +90,19 @@ public class cgeocaches extends ListActivity {
 
 	private static final int MENU_IMPORT_WEB = 25;
 	private static final int MENU_EXPORT_NOTES = 26;
+	private static final int MENU_REMOVE_FROM_HISTORY = 27;
 
 	private static final int MENU_DROP_CACHE = 30;
 	private static final int MENU_MOVE_TO_LIST = 31;
 
 	private static final int SUBMENU_MOVE_TO_LIST = 100;
+	private static final int SUBMENU_SORT = 104;
+	private static final int SUBMENU_SHOW_MAP = 101;
+	private static final int SUBMENU_MANAGE_LISTS = 102;
+	private static final int SUBMENU_MANAGE_OFFLINE = 103;
+	private static final int SUBMENU_FILTER = 105;
+	private static final int SUBMENU_IMPORT = 106;
+	private static final int SUBMENU_MANAGE_HISTORY = 107;
 
 
 	private GoogleAnalyticsTracker tracker = null;
@@ -132,6 +140,7 @@ public class cgeocaches extends ListActivity {
 	private geocachesLoadFromWeb threadW = null;
 	private geocachesDropDetails threadR = null;
 	private geocachesExportFieldNotes threadF = null;
+	private geocachesRemoveFromHistory threadH = null;
 	private int listId = 0;
 	private ArrayList<cgList> lists = null;
 	private String selectedFilter = null;
@@ -440,6 +449,28 @@ public class cgeocaches extends ListActivity {
 			}
 		}
 	};
+    private Handler removeFromHistoryHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            setAdapter();
+
+            if (msg.what > -1) {
+                cacheList.get(msg.what).statusChecked = false;
+            } else {
+                if (adapter != null) {
+                    adapter.setSelectMode(false, true);
+                }
+
+                // TODO: Reload cacheList
+
+                if (waitDialog != null) {
+                    waitDialog.dismiss();
+                    waitDialog.setOnCancelListener(null);
+                }
+            }
+        }
+    };
 	private Handler exportFieldNotesHandler = new Handler() {
 
         @Override
@@ -697,14 +728,14 @@ public class cgeocaches extends ListActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		SubMenu subMenuFilter = menu.addSubMenu(0, 105, 0, res.getString(R.string.caches_filter)).setIcon(android.R.drawable.ic_menu_search);
+		SubMenu subMenuFilter = menu.addSubMenu(0, SUBMENU_FILTER, 0, res.getString(R.string.caches_filter)).setIcon(android.R.drawable.ic_menu_search);
 		subMenuFilter.setHeaderTitle(res.getString(R.string.caches_filter_title));
 		subMenuFilter.add(0, 21, 0, res.getString(R.string.caches_filter_type));
 		subMenuFilter.add(0, 22, 0, res.getString(R.string.caches_filter_size));
 		subMenuFilter.add(0, 23, 0, res.getString(R.string.caches_filter_track));
 		subMenuFilter.add(0, 24, 0, res.getString(R.string.caches_filter_clear));
 
-		SubMenu subMenuSort = menu.addSubMenu(0, 104, 0, res.getString(R.string.caches_sort)).setIcon(android.R.drawable.ic_menu_sort_alphabetically);
+		SubMenu subMenuSort = menu.addSubMenu(0, SUBMENU_SORT, 0, res.getString(R.string.caches_sort)).setIcon(android.R.drawable.ic_menu_sort_alphabetically);
 		subMenuSort.setHeaderTitle(res.getString(R.string.caches_sort_title));
 
 		// sort the context menu labels alphabetically for easier reading
@@ -732,7 +763,7 @@ public class cgeocaches extends ListActivity {
 		menu.add(0, 0, 0, res.getString(R.string.caches_select_mode)).setIcon(android.R.drawable.ic_menu_agenda);
 		menu.add(0, MENU_INVERT_SELECTION, 0, res.getString(R.string.caches_select_invert)).setIcon(android.R.drawable.ic_menu_agenda);
 		if (type.equals("offline") == true) {
-			SubMenu subMenu = menu.addSubMenu(0, 103, 0, res.getString(R.string.caches_manage)).setIcon(android.R.drawable.ic_menu_save);
+			SubMenu subMenu = menu.addSubMenu(0, SUBMENU_MANAGE_OFFLINE, 0, res.getString(R.string.caches_manage)).setIcon(android.R.drawable.ic_menu_save);
 			subMenu.add(0, MENU_DROP_CACHES, 0, res.getString(R.string.caches_drop_all)); // delete saved caches
 			subMenu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.cache_offline_refresh)); // download details for all caches
 			subMenu.add(0, MENU_EXPORT_NOTES, 0, res.getString(R.string.cache_export_fieldnote)); // export field notes
@@ -740,14 +771,16 @@ public class cgeocaches extends ListActivity {
 			{
 				menu.add(0, MENU_IMPORT_GPX, 0, res.getString(R.string.gpx_import_title)).setIcon(android.R.drawable.ic_menu_upload); // import gpx file
 			} else {
-				SubMenu subMenuImport = menu.addSubMenu(0, 105, 0, res.getString(R.string.import_title)).setIcon(android.R.drawable.ic_menu_upload); // import
+				SubMenu subMenuImport = menu.addSubMenu(0, SUBMENU_IMPORT, 0, res.getString(R.string.import_title)).setIcon(android.R.drawable.ic_menu_upload); // import
 				subMenuImport.add(1, MENU_IMPORT_GPX, 0, res.getString(R.string.gpx_import_title)).setCheckable(false).setChecked(false);
 				subMenuImport.add(1, MENU_IMPORT_WEB, 0, res.getString(R.string.web_import_title)).setCheckable(false).setChecked(false);
 			}
 		} else {
 		    if (type.equals("history"))
 		    {
-		        menu.add(0, MENU_EXPORT_NOTES, 0, res.getString(R.string.cache_export_fieldnote)).setIcon(android.R.drawable.ic_menu_save); // export field notes
+		        SubMenu subMenu = menu.addSubMenu(0, SUBMENU_MANAGE_HISTORY, 0, res.getString(R.string.caches_manage)).setIcon(android.R.drawable.ic_menu_save);
+		        subMenu.add(0, MENU_REMOVE_FROM_HISTORY, 0, res.getString(R.string.cache_clear_history)); // remove from history
+	            subMenu.add(0, MENU_EXPORT_NOTES, 0, res.getString(R.string.cache_export_fieldnote)); // export field notes
 		    }
 			menu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.caches_store_offline)).setIcon(android.R.drawable.ic_menu_set_as); // download details for all caches
 		}
@@ -755,7 +788,7 @@ public class cgeocaches extends ListActivity {
 		final Intent intentTest = new Intent(Intent.ACTION_VIEW);
 		intentTest.setData(Uri.parse("menion.points:x"));
 		if (cgBase.isIntentAvailable(activity, intentTest) == true) {
-			SubMenu subMenu = menu.addSubMenu(0, 101, 0, res.getString(R.string.caches_on_map)).setIcon(android.R.drawable.ic_menu_mapmode);
+			SubMenu subMenu = menu.addSubMenu(0, SUBMENU_SHOW_MAP, 0, res.getString(R.string.caches_on_map)).setIcon(android.R.drawable.ic_menu_mapmode);
 			subMenu.add(0, MENU_MAP, 0, res.getString(R.string.caches_map_cgeo)); // show all caches on map using c:geo
 			subMenu.add(0, MENU_LOCUS, 0, res.getString(R.string.caches_map_locus)); // show all caches on map using Locus
 		} else {
@@ -763,7 +796,7 @@ public class cgeocaches extends ListActivity {
 		}
 
 		if (type.equals("offline") == true) {
-			SubMenu subMenu = menu.addSubMenu(0, 102, 0, res.getString(R.string.list_menu)).setIcon(android.R.drawable.ic_menu_more);
+			SubMenu subMenu = menu.addSubMenu(0, SUBMENU_MANAGE_LISTS, 0, res.getString(R.string.list_menu)).setIcon(android.R.drawable.ic_menu_more);
 			subMenu.add(0, MENU_CREATE_LIST, 0, res.getString(R.string.list_menu_create));
 			subMenu.add(0, MENU_DROP_LIST, 0, res.getString(R.string.list_menu_drop));
 			subMenu.add(0, MENU_SWITCH_LIST, 0, res.getString(R.string.list_menu_change));
@@ -809,11 +842,25 @@ public class cgeocaches extends ListActivity {
 				} else {
 					Log.i(cgSettings.tag, "Checked: " + adapter.getChecked());
 				}
+				
 				if (adapter != null && adapter.getChecked() > 0) {
 					menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_store_selected) + " (" + adapter.getChecked() + ")");
 				} else {
 					menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_store_offline));
 				}
+				
+				// equal with above
+				if (adapter != null && adapter.getChecked() > 0) {
+                    menu.findItem(MENU_EXPORT_NOTES).setTitle(res.getString(R.string.cache_export_fieldnote) + " (" + adapter.getChecked() + ")");
+                } else {
+                    menu.findItem(MENU_EXPORT_NOTES).setTitle(res.getString(R.string.cache_export_fieldnote));
+                }
+				
+				if (adapter != null && adapter.getChecked() > 0) {
+                    menu.findItem(MENU_REMOVE_FROM_HISTORY).setTitle(res.getString(R.string.cache_remove_from_history) + " (" + adapter.getChecked() + ")");
+                } else {
+                    menu.findItem(MENU_REMOVE_FROM_HISTORY).setTitle(res.getString(R.string.cache_clear_history));
+                }
 			}
 
 			if (type != null && type.equals("offline") == false && (cacheList != null && app != null && cacheList.size() >= app.getTotal(searchId))) { // there are no more caches
@@ -925,6 +972,9 @@ public class cgeocaches extends ListActivity {
 				return false;
 			case MENU_EXPORT_NOTES:
                 exportFieldNotes();
+                return false;
+			case MENU_REMOVE_FROM_HISTORY:
+                removeFromHistory();
                 return false;
 		}
 
@@ -1493,6 +1543,50 @@ public class cgeocaches extends ListActivity {
 		threadD.start();
 	}
 
+	public void removeFromHistory()
+    {
+        if (adapter != null && adapter.getChecked() > 0)
+        {
+            // there are some checked caches
+            detailTotal = adapter.getChecked();
+        }
+        else
+        {
+            // no checked caches, remove all
+            detailTotal = cacheList.size();
+        }
+        detailProgress = 0;
+
+        base.showProgress(activity, false);
+        waitDialog = new ProgressDialog(this);
+        waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+            public void onCancel(DialogInterface arg0)
+            {
+                try
+                {
+                    if (threadH != null)
+                    {
+                        threadH.kill();
+                    }
+                } catch (Exception e)
+                {
+                    Log.e(cgSettings.tag, "cgeocaches.removeFromHistory.onCancel: " + e.toString());
+                }
+            }
+        });
+
+        waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        waitDialog.setMessage(res.getString(R.string.caches_removing_from_history));
+
+        waitDialog.setCancelable(true);
+        waitDialog.setMax(detailTotal);
+        waitDialog.show();
+
+        threadH = new geocachesRemoveFromHistory(removeFromHistoryHandler);
+        threadH.start();
+    }
+	
 	public void exportFieldNotes()
 	{
         if (adapter != null && adapter.getChecked() > 0)
@@ -1515,9 +1609,9 @@ public class cgeocaches extends ListActivity {
             {
                 try
                 {
-                    if (threadD != null)
+                    if (threadF != null)
                     {
-                        threadD.kill();
+                        threadF.kill();
                     }
                 } catch (Exception e)
                 {
@@ -2119,6 +2213,56 @@ public class cgeocaches extends ListActivity {
 			handler.sendEmptyMessage(-1);
 		}
 	}
+	
+	private class geocachesRemoveFromHistory extends Thread {
+
+        private Handler handler = null;
+        private volatile boolean needToStop = false;
+        private int checked = 0;
+
+        public geocachesRemoveFromHistory(Handler handlerIn) {
+            setPriority(Thread.MIN_PRIORITY);
+
+            handler = handlerIn;
+
+            if (adapter != null) {
+                checked = adapter.getChecked();
+            }
+        }
+
+        public void kill() {
+            needToStop = true;
+        }
+
+        @Override
+        public void run() {
+            for (cgCache cache : cacheList) {
+                if (checked > 0 && cache.statusChecked == false) {
+                    handler.sendEmptyMessage(0);
+
+                    yield();
+                    continue;
+                }
+
+                try {
+                    if (needToStop == true) {
+                        Log.i(cgSettings.tag, "Stopped removing process.");
+                        break;
+                    }
+
+                    app.clearVisitDate(cache.geocode);
+
+                    handler.sendEmptyMessage(cacheList.indexOf(cache));
+
+                    yield();
+                } catch (Exception e) {
+                    Log.e(cgSettings.tag, "cgeocaches.geocachesRemoveFromHistory: " + e.toString());
+                }
+            }
+
+            handler.sendEmptyMessage(-1);
+        }
+    }
 
 	private class geocachesExportFieldNotes extends Thread
 	{
