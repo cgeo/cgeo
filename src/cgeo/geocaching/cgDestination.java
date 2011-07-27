@@ -2,7 +2,7 @@ package cgeo.geocaching;
 
 public class cgDestination {
 	
-	private String date;
+	private long date;
 	
 	private double latitude;
 	
@@ -11,18 +11,18 @@ public class cgDestination {
 	public cgDestination() {
 	}
 
-	public cgDestination(String date, double latitude, double longitude) {
+	public cgDestination(long date, double latitude, double longitude) {
 		super();
 		this.date = date;
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
 
-	public String getDate() {
+	public long getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(long date) {
 		this.date = date;
 	}
 

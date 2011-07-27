@@ -3,7 +3,6 @@ package cgeo.geocaching;
 import gnu.android.app.appmanualclient.AppManualReaderClient;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -69,7 +68,8 @@ public class cgeopoint extends Activity {
 			
 			longitude.setText(lonString);
 			latitude.setText(latString);
-			date.setText(loc.getDate());
+			CharSequence dateString = DateFormat.format("dd/MM/yy kk:mm", loc.getDate());
+			date.setText(dateString);
 
 			return convertView;
 		}
@@ -407,7 +407,7 @@ public class cgeopoint extends Activity {
 		
 		if(!getHistoryOfSearchedLocations().contains(loc))
 		{
-			loc.setDate(DateFormat.format("dd/MM/yy kk:mm", new Date()).toString());
+			loc.setDate(System.currentTimeMillis());
 			getHistoryOfSearchedLocations().add(0,loc);
 
 			// Save location

@@ -2155,7 +2155,7 @@ public class cgData {
 			do {
 				cgDestination dest = new cgDestination();
 
-				dest.setDate((String) cursor.getString(cursor.getColumnIndex("date")));
+				dest.setDate((long) cursor.getLong(cursor.getColumnIndex("date")));
 				dest.setLatitude((double) cursor.getDouble(cursor.getColumnIndex("latitude")));
 				dest.setLongitude((double) cursor.getDouble(cursor.getColumnIndex("longitude")));
 
