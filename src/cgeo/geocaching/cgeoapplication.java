@@ -515,12 +515,11 @@ public class cgeoapplication extends Application {
 		return search;
 	}
 	
-	public List<cgDestination> getHistoryOfSearchedLocations()
-	{
+	public List<cgDestination> getHistoryOfSearchedLocations() {
 		if (storage == null) {
 			storage = new cgData(this);
 		}
-		
+
 		return storage.loadHistoryOfSearchedLocations();
 	}
 
