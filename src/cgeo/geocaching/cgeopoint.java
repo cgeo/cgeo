@@ -179,11 +179,11 @@ public class cgeopoint extends Activity {
 	public boolean onContextItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case CONTEXT_MENU_DELETE_WAYPOINT:
-			AdapterView.AdapterContextMenuInfo menuInfo = 
-					(AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-			Object destination = historyListView.getItemAtPosition(menuInfo.position);
-			if(destination instanceof cgDestination)
-			{
+			AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item
+					.getMenuInfo();
+			Object destination = historyListView
+					.getItemAtPosition(menuInfo.position);
+			if (destination instanceof cgDestination) {
 				removeFromHistory((cgDestination) destination);
 			}
 			return true;
@@ -193,31 +193,28 @@ public class cgeopoint extends Activity {
 	}
 
 	private TextView getEmptyHistoryFooter() {
-		if(historyFooter == null)
-		{
-			historyFooter = (TextView) getLayoutInflater().inflate(R.layout.caches_footer, null);
+		if (historyFooter == null) {
+			historyFooter = (TextView) getLayoutInflater().inflate(
+					R.layout.caches_footer, null);
 			historyFooter.setText(R.string.search_history_empty);
 		}
 		return historyFooter;
 	}
 
-	private DestinationHistoryAdapter getDestionationHistoryAdapter() 
-	{
-		if(destionationHistoryAdapter == null)
-		{
-			destionationHistoryAdapter = new DestinationHistoryAdapter(this, getHistoryOfSearchedLocations());
+	private DestinationHistoryAdapter getDestionationHistoryAdapter() {
+		if (destionationHistoryAdapter == null) {
+			destionationHistoryAdapter = new DestinationHistoryAdapter(this,
+					getHistoryOfSearchedLocations());
 		}
 		return destionationHistoryAdapter;
 	}
 
-	private List<cgDestination> getHistoryOfSearchedLocations() 
-	{
-		if(historyOfSearchedLocations == null)
-		{
+	private List<cgDestination> getHistoryOfSearchedLocations() {
+		if (historyOfSearchedLocations == null) {
 			// Load from database
 			historyOfSearchedLocations = app.getHistoryOfSearchedLocations();
 		}
-		
+
 		return historyOfSearchedLocations;
 	}
 
@@ -476,8 +473,7 @@ public class cgeopoint extends Activity {
 		activity.startActivity(mapIntent);
 	}
 	
-	private void navigateTo()
-	{
+	private void navigateTo() {
 		navigateTo(getDestination());
 	}
 

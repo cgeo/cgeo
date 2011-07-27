@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -2139,17 +2140,24 @@ public class cgData {
 		return spoilers;
 	}
 	
+	/**
+	 * Loads the history of previously entered destinations from
+	 * the database. If no destinations exist, an {@link Collections#emptyList()}
+	 * will be returned. 
+	 * @return A list of previously entered destinations or an empty list.
+	 */
 	public List<cgDestination> loadHistoryOfSearchedLocations() {
 		init();
 
 		Cursor cursor = null;
-		List<cgDestination> destinations = new ArrayList<cgDestination>();
+		final List<cgDestination> destinations;
 
 		cursor = databaseRO.query(dbTableSearchDestionationHistory,
 				new String[] { "_id", "date", "latitude", "longitude" }, null,
 				null, null, null, "date desc", "100");
 
 		if (cursor != null && cursor.getCount() > 0) {
+			destinations = new ArrayList<cgDestination>();
 			cursor.moveToFirst();
 
 			do {
@@ -2161,6 +2169,10 @@ public class cgData {
 
 				destinations.add(dest);
 			} while (cursor.moveToNext());
+		}
+		else
+		{
+			destinations = Collections.emptyList();
 		}
 
 		return destinations;
