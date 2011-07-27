@@ -610,8 +610,7 @@ public class cgeopoint extends Activity {
 
 		if ((bearingText == null || bearingText.length() == 0) && (distanceText == null || distanceText.length() == 0)
 				&& (latText == null || latText.length() == 0) && (lonText == null || lonText.length() == 0)) {
-//			warning.showToast(res.getString(R.string.err_point_no_position_given));
-			warning.helpDialog(res.getString(R.string.err_point_no_position_given_title), res.getString(R.string.err_point_no_position_given));
+			warning.showToast(res.getString(R.string.err_point_no_position_given));
 			return null;
 		}
 
