@@ -360,7 +360,10 @@ public class cgeopoint extends Activity {
 
 		ArrayList<Double> coords = getDestination();
 		
-		addToHistory(coords);
+		if(coords != null && !coords.isEmpty())
+		{
+			addToHistory(coords);
+		}
 		
 		if (menuItem == 1) {
 			showOnMap();
@@ -412,7 +415,7 @@ public class cgeopoint extends Activity {
 			getHistoryOfSearchedLocations().add(0,loc);
 
 			// Save location
-			app.saveSearchedDestinations(getHistoryOfSearchedLocations());
+			app.saveSearchedDestination(loc);
 			
 			// Ensure to remove the footer
 			historyListView.removeFooterView(getEmptyHistoryFooter());
@@ -424,7 +427,7 @@ public class cgeopoint extends Activity {
 			getHistoryOfSearchedLocations().remove(destination);
 
 			// Save
-			app.saveSearchedDestinations(getHistoryOfSearchedLocations());
+			app.removeSearchedDestinations(destination);
 
 			if (getHistoryOfSearchedLocations().isEmpty()) {
 				if (historyListView.getFooterViewsCount() == 0) {
@@ -443,7 +446,7 @@ public class cgeopoint extends Activity {
 			getHistoryOfSearchedLocations().clear();
 
 			// Save
-			app.saveSearchedDestinations(getHistoryOfSearchedLocations());
+			app.clearSearchedDestinations();
 
 			if (historyListView.getFooterViewsCount() == 0) {
 				historyListView.addFooterView(getEmptyHistoryFooter());

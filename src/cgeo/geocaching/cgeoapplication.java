@@ -628,14 +628,20 @@ public class cgeoapplication extends Application {
 		return storage.markFound(geocode);
 	}
 	
-	public boolean saveSearchedDestinations(List<cgDestination> destinations) {
-		// TODO: This really should be done using a getter - lot's of duplicated
-		// code in here!!
+	public boolean clearSearchedDestinations() {
 		if (storage == null) {
 			storage = new cgData(this);
 		}
 
-		return storage.saveSearchedDestinations(destinations);
+		return storage.clearSearchedDestinations();
+	}
+	
+	public boolean saveSearchedDestination(cgDestination destination) {
+		if (storage == null) {
+			storage = new cgData(this);
+		}
+
+		return storage.saveSearchedDestination(destination);
 	}
 
 	public boolean saveWaypoints(String geocode, ArrayList<cgWaypoint> waypoints, boolean drop) {
@@ -843,6 +849,10 @@ public class cgeoapplication extends Application {
 	
 	public boolean removeList(int id) {
 		return storage.removeList(id);
+	}
+	
+	public boolean removeSearchedDestinations(cgDestination destination) {
+		return storage.removeSearchedDestination(destination);
 	}
 	
 	public void moveToList(String geocode, int listId) {
