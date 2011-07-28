@@ -1258,39 +1258,37 @@ public class cgData {
 	}
 	
 	/**
-	 * Persists the given <code>destinations</code> into the database. 
-	 * <p>
-	 * Note: If <code>destinations</code> is <code>null</code> or empty,
-	 * this results in removing all previous entries!
+	 * Persists the given <code>destination</code> into the database. 
+	 * 
 	 * @param destinations
-	 * @return
+	 * @return <code>true</code> if the given destination was successfully 
+	 * persisted <code>false</code> otherwise.
 	 */
-	public boolean saveSearchedDestinations(List<cgDestination> destinations) {
-		init();
-
+	public boolean saveSearchedDestinations(cgDestination destination) {
 		boolean success = true;
 
-		databaseRW.beginTransaction();
-		databaseRW.delete(dbTableSearchDestionationHistory, null, null);
-
-		try {
-			if (destinations != null) {
-				for (cgDestination dest : destinations) {
-					ContentValues values = new ContentValues();
-					values.put("date", dest.getDate());
-					values.put("latitude", dest.getLatitude());
-					values.put("longitude", dest.getLongitude());
-
-					databaseRW.insert(dbTableSearchDestionationHistory, null,
-							values);
-				}
-				databaseRW.setTransactionSuccessful();
-			}
-		} catch (Exception e) {
+		if (destination == null) {
 			success = false;
-			Log.e(cgSettings.tag, "Updating searchedDestinations db failed", e);
-		} finally {
-			databaseRW.endTransaction();
+		} else {
+			init();
+
+			databaseRW.beginTransaction();
+			
+			try {
+				ContentValues values = new ContentValues();
+				values.put("date", destination.getDate());
+				values.put("latitude", destination.getLatitude());
+				values.put("longitude", destination.getLongitude());
+				
+				long id = databaseRW.insert(dbTableSearchDestionationHistory, null, values);
+				destination.setId(id);
+				databaseRW.setTransactionSuccessful();
+			} catch (Exception e) {
+				success = false;
+				Log.e(cgSettings.tag, "Updating searchedDestinations db failed", e);
+			} finally {
+				databaseRW.endTransaction();
+			}
 		}
 
 		return success;
@@ -2163,6 +2161,7 @@ public class cgData {
 			do {
 				cgDestination dest = new cgDestination();
 
+				dest.setId((long) cursor.getLong(cursor.getColumnIndex("_id")));
 				dest.setDate((long) cursor.getLong(cursor.getColumnIndex("date")));
 				dest.setLatitude((double) cursor.getDouble(cursor.getColumnIndex("latitude")));
 				dest.setLongitude((double) cursor.getDouble(cursor.getColumnIndex("longitude")));
@@ -2176,6 +2175,25 @@ public class cgData {
 		}
 
 		return destinations;
+	}
+	
+	public boolean clearSearchedDestinations() {
+		boolean success = true;
+		init();
+		databaseRW.beginTransaction();
+		
+		try {
+			databaseRW.delete(dbTableSearchDestionationHistory, null, null);
+			databaseRW.setTransactionSuccessful();
+		} catch (Exception e) {
+			success = false;
+			Log.e(cgSettings.tag, "Unable to clear searched destinations", e);
+		}
+		finally{
+			databaseRW.endTransaction();
+		}
+		
+		return success;
 	}
 
 	public ArrayList<cgLog> loadLogs(String geocode) {
@@ -3157,5 +3175,28 @@ public class cgData {
 		}
 
 		return true;
+	}
+
+	public boolean removeSearchedDestination(cgDestination destination) {
+		boolean success = true;
+		if(destination == null){
+			success = false;
+		} else{
+			init();
+			
+			databaseRW.beginTransaction();
+		
+			try {
+				databaseRW.delete(dbTableSearchDestionationHistory, "_id = " +destination.getId(), null);
+				databaseRW.setTransactionSuccessful();
+			} catch (Exception e) {
+				Log.e(cgSettings.tag, "Unable to remove searched destination" ,e);
+				success = false;
+			} finally{
+				databaseRW.endTransaction();
+			}
+		}
+			
+		return success;
 	}
 }
