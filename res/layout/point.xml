@@ -13,41 +13,5 @@
 				android:src="@drawable/actionbar_manual"
 				android:onClick="goManual" />
 	</LinearLayout>
-	<ScrollView
-			android:layout_width="fill_parent"
-			android:layout_height="fill_parent"
-			android:padding="4dip"
-			android:orientation="vertical" >
-		<LinearLayout
-				android:layout_width="fill_parent"
-				android:layout_height="wrap_content"
-				android:orientation="vertical" >
-			<RelativeLayout style="@style/separator_horizontal_layout" >
-				<View style="@style/separator_horizontal" />
-				<TextView style="@style/separator_horizontal_headline"
-						android:text="@string/search_coordinates" />
-			</RelativeLayout>
-			<EditText style="@style/edittext"
-					android:id="@+id/latitude"
-					android:hint="latitude" />
-			<EditText style="@style/edittext"
-					android:id="@+id/longitude"
-					android:hint="longitude" />
-			<Button style="@style/button"
-					android:id="@+id/current"
-					android:text="@string/waypoint_my_coordinates" />
-			<RelativeLayout style="@style/separator_horizontal_layout" >
-				<View style="@style/separator_horizontal" />
-				<TextView style="@style/separator_horizontal_headline"
-						android:text="@string/search_direction_rel" />
-			</RelativeLayout>
-			<EditText style="@style/edittext"
-					android:id="@+id/bearing"
-					android:inputType="numberDecimal"
-					android:hint="@string/waypoint_bearing" />
-			<EditText style="@style/edittext"
-					android:id="@+id/distance"
-					android:hint="@string/waypoint_distance" />
-		</LinearLayout>
-	</ScrollView>
+	<ListView android:id="@+id/historyList" android:layout_width="match_parent" android:layout_height="match_parent" android:headerDividersEnabled="false" android:footerDividersEnabled="false"></ListView>
 </LinearLayout>
