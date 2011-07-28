@@ -1,13 +1,14 @@
 package cgeo.geocaching;
 
-import android.app.Application;
-import android.content.Context;
-import android.util.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
+import android.app.Application;
+import android.content.Context;
+import android.util.Log;
 
 public class cgeoapplication extends Application {
 
@@ -513,6 +514,14 @@ public class cgeoapplication extends Application {
 
 		return search;
 	}
+	
+	public List<cgDestination> getHistoryOfSearchedLocations() {
+		if (storage == null) {
+			storage = new cgData(this);
+		}
+
+		return storage.loadHistoryOfSearchedLocations();
+	}
 
 	public cgSearch getHistoryOfCaches(boolean detailedOnly, String cachetype) {
 		if (storage == null) {
@@ -617,6 +626,16 @@ public class cgeoapplication extends Application {
 			storage = new cgData(this);
 		}
 		return storage.markFound(geocode);
+	}
+	
+	public boolean saveSearchedDestinations(List<cgDestination> destinations) {
+		// TODO: This really should be done using a getter - lot's of duplicated
+		// code in here!!
+		if (storage == null) {
+			storage = new cgData(this);
+		}
+
+		return storage.saveSearchedDestinations(destinations);
 	}
 
 	public boolean saveWaypoints(String geocode, ArrayList<cgWaypoint> waypoints, boolean drop) {

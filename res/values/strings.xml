@@ -568,6 +568,11 @@
   <string name="waypoint_save">Save</string>
   <string name="waypoint_loading">Loading waypoint...</string>
   <string name="waypoint_unknown_coordinates">Coordinates unknown</string>
+  <string name="search_history">History</string>
+  <string name="search_history_empty">No previous destinations</string>
+  <string name="search_remove_destination">Destination removed</string>
+  <string name="search_clear_history">Clear History</string>
+  <string name="search_history_cleared">History cleared</string>
 
   <!-- visit -->
   <string name="visit_tweet">Post this find to Twitter</string>
@@ -845,6 +850,7 @@
     · Shan, a.k.a. ShakurNO (localization NO)\n
     · thiasB (code, loc. DE EN)\n
     · YraFyra (code, loc. SV)\n
+    · zenobios (code, loc. DE EN)\n
   </string>
 
   <!-- changelog -->

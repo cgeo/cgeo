@@ -505,6 +505,10 @@
   <string name="waypoint_save">Speichern</string>
   <string name="waypoint_loading">Lade Wegpunkt...</string>
   <string name="waypoint_unknown_coordinates">Unbekannte Koordinaten</string>
+  <string name="search_history_empty">Keine Ziele bisher</string>
+  <string name="search_remove_destination">Ziel gelöscht</string>
+  <string name="search_clear_history">History löschen</string>
+  <string name="search_history_cleared">History gelöscht</string>
 
   <!-- visit -->
   <string name="visit_tweet">Diesen Eintrag auf Twitter veröffentlichen</string>
@@ -728,7 +732,7 @@
   <string name="attribute_restrooms_yes">öffentliche Toiletten in der Nähe</string>
   <string name="attribute_restrooms_no">keine öffentliche Toiletten in der Nähe</string>
   <string name="attribute_phone_yes">Telefon in der Nähe</string>
-  <string name="attribute_phone_no">Telefon in der Nähe</string>
+  <string name="attribute_phone_no">kein Telefon in der Nähe</string>
   <string name="attribute_picnic_yes">Picknicktische in der Nähe</string>
   <string name="attribute_picnic_no">keine Picknicktische in der Nähe</string>
   <string name="attribute_camping_yes">Camping möglich</string>
