@@ -2551,7 +2551,7 @@ public class cgBase {
 					String count = findMatcher.group(1);
 
 					if (count != null) {
-						count = count.trim();
+						count = count.trim().replaceAll(",", "");
 
 						if (count.length() == 0) {
 							findCount = 0;
