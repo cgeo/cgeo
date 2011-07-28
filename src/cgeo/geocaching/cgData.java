@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
@@ -2154,8 +2155,9 @@ public class cgData {
 				new String[] { "_id", "date", "latitude", "longitude" }, null,
 				null, null, null, "date desc", "100");
 
+		destinations = new LinkedList<cgDestination>();
+		
 		if (cursor != null && cursor.getCount() > 0) {
-			destinations = new ArrayList<cgDestination>();
 			cursor.moveToFirst();
 
 			do {
@@ -2168,10 +2170,6 @@ public class cgData {
 
 				destinations.add(dest);
 			} while (cursor.moveToNext());
-		}
-		else
-		{
-			destinations = Collections.emptyList();
 		}
 
 		return destinations;
