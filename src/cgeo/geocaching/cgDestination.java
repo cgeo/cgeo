@@ -2,6 +2,8 @@ package cgeo.geocaching;
 
 public class cgDestination {
 	
+	private long id;
+	
 	private long date;
 	
 	private double latitude;
@@ -11,8 +13,9 @@ public class cgDestination {
 	public cgDestination() {
 	}
 
-	public cgDestination(long date, double latitude, double longitude) {
+	public cgDestination(long id, long date, double latitude, double longitude) {
 		super();
+		this.id = id;
 		this.date = date;
 		this.latitude = latitude;
 		this.longitude = longitude;
@@ -70,6 +73,14 @@ public class cgDestination {
 				.doubleToLongBits(other.longitude))
 			return false;
 		return true;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	
