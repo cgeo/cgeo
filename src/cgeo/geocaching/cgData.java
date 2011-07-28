@@ -1265,7 +1265,7 @@ public class cgData {
 	 * @return <code>true</code> if the given destination was successfully 
 	 * persisted <code>false</code> otherwise.
 	 */
-	public boolean saveSearchedDestinations(cgDestination destination) {
+	public boolean saveSearchedDestination(cgDestination destination) {
 		boolean success = true;
 
 		if (destination == null) {

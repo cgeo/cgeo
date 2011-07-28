@@ -415,7 +415,7 @@ public class cgeopoint extends Activity {
 			getHistoryOfSearchedLocations().add(0,loc);
 
 			// Save location
-			app.saveSearchedDestinations(loc);
+			app.saveSearchedDestination(loc);
 			
 			// Ensure to remove the footer
 			historyListView.removeFooterView(getEmptyHistoryFooter());

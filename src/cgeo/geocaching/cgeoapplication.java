@@ -636,12 +636,12 @@ public class cgeoapplication extends Application {
 		return storage.clearSearchedDestinations();
 	}
 	
-	public boolean saveSearchedDestinations(cgDestination destination) {
+	public boolean saveSearchedDestination(cgDestination destination) {
 		if (storage == null) {
 			storage = new cgData(this);
 		}
 
-		return storage.saveSearchedDestinations(destination);
+		return storage.saveSearchedDestination(destination);
 	}
 
 	public boolean saveWaypoints(String geocode, ArrayList<cgWaypoint> waypoints, boolean drop) {
