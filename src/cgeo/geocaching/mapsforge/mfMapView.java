@@ -125,7 +125,7 @@ public class mfMapView extends MapView implements MapViewImpl {
 
 	@Override
 	public int getMapZoomLevel() {
-		return getZoomLevel();
+		return getZoomLevel()+1;
 	}
 
 	@Override
