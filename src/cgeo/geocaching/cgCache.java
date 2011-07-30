@@ -1,9 +1,10 @@
 package cgeo.geocaching;
 
-import android.text.Spannable;
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+
+import android.text.Spannable;
 
 public class cgCache {
 
@@ -61,11 +62,7 @@ public class cgCache {
 	public String directionImg = null;
 
 	public cgCache merge(cgData storage) {
-		//LeeB - loading cache from db is slow
-		if(false){
-			return this;
-		}
-		
+
 		boolean loadA = true;
 		boolean loadW = true;
 		boolean loadS = true;
@@ -211,8 +208,28 @@ public class cgCache {
 
 		return this;
 	}
-	
+
 	public boolean hasTrackables(){
 		return inventoryItems > 0;
+	}
+
+	public boolean canBeAddedToCalendar() {
+		// is event type?
+		if (!type.equalsIgnoreCase("event") && !type.equalsIgnoreCase("mega") && !type.equalsIgnoreCase("cito")) {
+			return false;
+		}
+		// has event date set?
+		if (hidden == null) {
+			return false;
+		}
+		// is in future?
+		Date today = new Date();
+		today.setHours(0);
+		today.setMinutes(0);
+		today.setSeconds(0);
+		if (hidden.compareTo(today) <= 0) {
+			return false;
+		}
+		return true;
 	}
 }

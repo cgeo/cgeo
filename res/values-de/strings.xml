@@ -184,6 +184,8 @@
   <string name="err_parse_lon">c:geo konnte den Längengrad nicht verarbeiten.</string>
   <string name="err_parse_bear">c:geo konnte die Richtung nicht verarbeiten.</string>
   <string name="err_parse_dist">c:geo konnte die Entfernung nicht verarbeiten.</string>
+  
+  <string name="err_fieldnotes_export_failed">Exportieren der Field Notes fehlgeschlagen.</string>
 
   <string name="warn_save_nothing">Es gibt nichts zum speichern.</string>
   <string name="warn_no_cache_coord">Es gibt hier keinen Cache mit Koordinaten.</string>
@@ -207,6 +209,8 @@
   <string name="info_log_saved">Log erfolgreich gespeichert.</string>
   <string name="info_log_cleared">Log wurde geleert.</string>
   <string name="info_log_type_changed">Logtyp wurde verändert!</string>
+  
+  <string name="info_fieldnotes_exported_to">Field Notes exportiert nach</string>
 
   <!-- location service -->
   <string name="loc_last">Letzte Position</string>
@@ -285,6 +289,7 @@
   <string name="caches_recaptcha_hint">Text vom Bild</string>
   <string name="caches_recaptcha_continue">Fortfahren</string>
   <string name="caches_exporting_fieldnote">Exportiere als Field Notes...</string>
+  <string name="caches_removing_from_history">Lösche aus Verlauf...</string>
 
   <!-- caches lists -->
   <string name="list_menu">Liste</string>
@@ -475,6 +480,8 @@
   <string name="cache_log_types">Logs</string>
   <string name="cache_coordinates_no">Dieser Cache hat keine Koordinaten.</string> <!-- since: 2.26 RC2 -->
   <string name="cache_export_fieldnote">Exportiere als Field Notes</string>
+  <string name="cache_clear_history">Verlauf leeren</string>
+  <string name="cache_remove_from_history">Aus Verlauf löschen</string>
 
   <!-- gpx -->
   <string name="gpx_import_searching_in">Suche nach GPX-Dateien\nin</string>
@@ -512,6 +519,10 @@
   <string name="waypoint_save">Speichern</string>
   <string name="waypoint_loading">Lade Wegpunkt...</string>
   <string name="waypoint_unknown_coordinates">Unbekannte Koordinaten</string>
+  <string name="search_history_empty">Keine Ziele bisher</string>
+  <string name="search_remove_destination">Ziel gelöscht</string>
+  <string name="search_clear_history">History löschen</string>
+  <string name="search_history_cleared">History gelöscht</string>
 
   <!-- visit -->
   <string name="visit_tweet">Diesen Eintrag auf Twitter veröffentlichen</string>
@@ -735,7 +746,7 @@
   <string name="attribute_restrooms_yes">öffentliche Toiletten in der Nähe</string>
   <string name="attribute_restrooms_no">keine öffentliche Toiletten in der Nähe</string>
   <string name="attribute_phone_yes">Telefon in der Nähe</string>
-  <string name="attribute_phone_no">Telefon in der Nähe</string>
+  <string name="attribute_phone_no">kein Telefon in der Nähe</string>
   <string name="attribute_picnic_yes">Picknicktische in der Nähe</string>
   <string name="attribute_picnic_no">keine Picknicktische in der Nähe</string>
   <string name="attribute_camping_yes">Camping möglich</string>

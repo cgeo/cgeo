@@ -1,13 +1,14 @@
 package cgeo.geocaching;
 
-import android.app.Application;
-import android.content.Context;
-import android.util.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
+import android.app.Application;
+import android.content.Context;
+import android.util.Log;
 
 public class cgeoapplication extends Application {
 
@@ -513,6 +514,14 @@ public class cgeoapplication extends Application {
 
 		return search;
 	}
+	
+	public List<cgDestination> getHistoryOfSearchedLocations() {
+		if (storage == null) {
+			storage = new cgData(this);
+		}
+
+		return storage.loadHistoryOfSearchedLocations();
+	}
 
 	public cgSearch getHistoryOfCaches(boolean detailedOnly, String cachetype) {
 		if (storage == null) {
@@ -617,6 +626,22 @@ public class cgeoapplication extends Application {
 			storage = new cgData(this);
 		}
 		return storage.markFound(geocode);
+	}
+	
+	public boolean clearSearchedDestinations() {
+		if (storage == null) {
+			storage = new cgData(this);
+		}
+
+		return storage.clearSearchedDestinations();
+	}
+	
+	public boolean saveSearchedDestination(cgDestination destination) {
+		if (storage == null) {
+			storage = new cgData(this);
+		}
+
+		return storage.saveSearchedDestination(destination);
 	}
 
 	public boolean saveWaypoints(String geocode, ArrayList<cgWaypoint> waypoints, boolean drop) {
@@ -805,6 +830,10 @@ public class cgeoapplication extends Application {
 	public void saveVisitDate(String geocode) {
 		storage.saveVisitDate(geocode);
 	}
+	
+	public void clearVisitDate(String geocode) {
+        storage.clearVisitDate(geocode);
+    }
 
 	public ArrayList<cgList> getLists() {
 		return storage.getLists(getResources());
@@ -820,6 +849,10 @@ public class cgeoapplication extends Application {
 	
 	public boolean removeList(int id) {
 		return storage.removeList(id);
+	}
+	
+	public boolean removeSearchedDestinations(cgDestination destination) {
+		return storage.removeSearchedDestination(destination);
 	}
 	
 	public void moveToList(String geocode, int listId) {

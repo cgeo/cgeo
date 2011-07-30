@@ -58,14 +58,11 @@ public class cgeosmaps extends Activity {
 					}
 					smapsView.removeAllViews();
 
-					int cnt = 1;
 					for (Bitmap image : maps) {
 						if (image != null) {
 							final ImageView map = (ImageView) inflater.inflate(R.layout.map_static_item, null);
 							map.setImageBitmap(image);
 							smapsView.addView(map);
-							
-							cnt++;
 						}
 					}
 				}
@@ -122,7 +119,7 @@ public class cgeosmaps extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		settings.load();
 	}
 

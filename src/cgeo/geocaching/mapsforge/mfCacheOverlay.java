@@ -1,7 +1,6 @@
 package cgeo.geocaching.mapsforge;
 
 import org.mapsforge.android.maps.ItemizedOverlay;
-import org.mapsforge.android.maps.MapView;
 import org.mapsforge.android.maps.Projection;
 
 import android.content.Context;
@@ -23,7 +22,7 @@ public class mfCacheOverlay extends ItemizedOverlay<mfCacheOverlayItem> implemen
 		super(boundCenterBottom(markerIn));
 		base = new cgMapOverlay(settingsIn, this, contextIn, fromDetailIn);
 	}
-	
+
 	@Override
 	public cgMapOverlay getBase() {
 		return base;
@@ -49,7 +48,7 @@ public class mfCacheOverlay extends ItemizedOverlay<mfCacheOverlayItem> implemen
 	protected boolean onTap(int arg0) {
 		if (base == null)
 			return false;
-		
+
 		return base.onTap(arg0);
 	}
 
@@ -58,7 +57,7 @@ public class mfCacheOverlay extends ItemizedOverlay<mfCacheOverlayItem> implemen
 			Projection projection, byte drawZoomLevel) {
 		base.drawOverlayBitmap(canvas, drawPosition, new mfMapProjection(projection), drawZoomLevel);
 	}
-	
+
 	@Override
 	public void superPopulate() {
 		populate();

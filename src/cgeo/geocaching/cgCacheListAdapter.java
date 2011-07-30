@@ -1,38 +1,40 @@
 package cgeo.geocaching;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+
 import android.app.Activity;
-import android.text.Spannable;
-import android.text.style.StrikethroughSpan;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.LayoutInflater;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.ArrayAdapter;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.text.Spannable;
+import android.text.style.StrikethroughSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.GestureDetector;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Locale;
-
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import cgeo.geocaching.filter.cgFilter;
+import cgeo.geocaching.sorting.CacheComparator;
+import cgeo.geocaching.sorting.DistanceComparator;
+import cgeo.geocaching.sorting.VisitComparator;
 
 public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
@@ -43,8 +45,8 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 	private LayoutInflater inflater = null;
 	private Activity activity = null;
 	private cgBase base = null;
-	private cgCacheDistanceComparator dstComparator = null;
-	private Comparator statComparator = null;
+	private DistanceComparator dstComparator = null;
+	private CacheComparator statComparator = null;
 	private boolean historic = false;
 	private Double latitude = null;
 	private Double longitude = null;
@@ -73,7 +75,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		settings = settingsIn;
 		list = listIn;
 		base = baseIn;
-		dstComparator = new cgCacheDistanceComparator();
+		dstComparator = new DistanceComparator();
 
 		DisplayMetrics metrics = new DisplayMetrics();
 		activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -107,12 +109,12 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		}
 	}
 
-	public void setComparator(Comparator comparator) {
+	public void setComparator(CacheComparator comparator) {
 		statComparator = comparator;
 
 		forceSort(latitude, longitude);
 	}
-	
+
 	/**
 	 * Called when a new page of caches was loaded.
 	 */
@@ -120,7 +122,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		if(currentFilter != null){
 			// Back up the list again
 			originalList = new ArrayList<cgCache>(list);
-			
+
 			currentFilter.filter(list);
 		}
 	}
@@ -133,34 +135,34 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		if (originalList == null) {
 			originalList = new ArrayList<cgCache>(list);
 		}
-		
+
 		// If there is already a filter in place, this is a request to change or clear the filter, so we have to
 		// replace the original cache list
 		if (currentFilter != null) {
 			list.clear();
 			list.addAll(originalList);
 		}
-		 
+
 		// Do the filtering or clear it
 		if (filter != null) {
 			filter.filter(list);
 		}
 		currentFilter = filter;
-		
+
 		notifyDataSetChanged();
 	}
-	
+
 	public void clearFilter() {
 		if (originalList != null) {
 			list.clear();
 			list.addAll(originalList);
-			
+
 			currentFilter = null;
 		}
-		
+
 		notifyDataSetChanged();
 	}
-	
+
 	public boolean isFilter() {
 		if (currentFilter != null) {
 			return true;
@@ -173,7 +175,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		historic = historicIn;
 
 		if (historic == true) {
-			statComparator = new cgCacheVisitComparator();
+			statComparator = new VisitComparator();
 		} else {
 			statComparator = null;
 		}
