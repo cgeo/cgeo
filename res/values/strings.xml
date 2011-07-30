@@ -333,7 +333,6 @@
   <string name="list_menu_change">Change list</string> <!-- since: 2.2 -->
   <string name="list_title">Pick a list</string>
   <string name="list_inbox">Stored</string>
-  <string name="list_watchlist">Watchlist</string>
   <string name="list_wpt">Waypoints</string>
   <string name="list_dialog_create_title">New list</string>
   <string name="list_dialog_create">Create</string>
@@ -467,7 +466,6 @@
   <string name="cache_watchlist">Watchlist</string>
   <string name="cache_watchlist_on">This cache is on your watchlist.</string>
   <string name="cache_watchlist_not_on">This cache is not on your watchlist.</string>
-  <string name="cache_watchlist_error">Could not get watchlist state.</string>
   <string name="cache_watchlist_add">Add to watchlist</string>
   <string name="cache_watchlist_remove">Remove from watchlist</string>
   <string name="cache_waypoints">Waypoints</string>

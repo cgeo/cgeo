@@ -298,7 +298,6 @@
   <string name="list_menu_change">Andere Liste anzeigen</string>
   <string name="list_title">Liste wählen</string>
   <string name="list_inbox">Standardliste</string>
-  <string name="list_watchlist">Watchlist</string>
   <string name="list_wpt">Wegpunkte</string>
   <string name="list_dialog_create_title">Neue Liste</string>
   <string name="list_dialog_create">Erstellen</string>
@@ -414,9 +413,8 @@
   <string name="cache_watchlist">Watchlist</string>
   <string name="cache_watchlist_on">Dieser Cache ist auf deiner Watchlist.</string>
   <string name="cache_watchlist_not_on">Dieser Cache ist nicht auf deiner Watchlist.</string>
-  <string name="cache_watchlist_error">Konnte Watchlist nicht lesen.</string>
-  <string name="cache_watchlist_add">Hinzufügen zur Watchlist</string>
-  <string name="cache_watchlist_remove">Entfernen von der Watchlist</string>
+  <string name="cache_watchlist_add">Hinzufügen</string>
+  <string name="cache_watchlist_remove">Entfernen</string>
   <string name="cache_waypoints">Wegpunkte</string>
   <string name="cache_waypoints_add">Wegpunkt hinzufügen</string>
   <string name="cache_hint">Hinweis</string>
@@ -430,7 +428,7 @@
   <string name="cache_dialog_refresh_title">Aktualisieren</string>
   <string name="cache_dialog_refresh_message">Aktualisieren der Cachedetails...</string>
   <string name="cache_dialog_watchlist_add_title">Watchlist</string>
-  <string name="cache_dialog_watchlist_add_message">Füge den Cache zu deiner Watchlist hinzu...</string>
+  <string name="cache_dialog_watchlist_add_message">Füge den Cache deiner Watchlist hinzu...</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Entferne den Cache von deiner Watchlist...</string>
   <string name="cache_menu_navigate">Navigieren</string>

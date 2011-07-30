@@ -1363,13 +1363,13 @@ public class cgBase {
 			Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache type");
 		}
 		
-		// cache on watchlist
+		// on watchlist
 		try {
 			final Matcher matcher = patternOnWatchlist.matcher(page);
 			cache.onWatchlist = matcher.find();
 		} catch (Exception e) {
-			// failed to parse onWatchlist
-			Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse onWatchlist");
+			// failed to parse watchlist state
+			Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse watchlist state");
 		}
 
 		// latitude and logitude
@@ -3961,7 +3961,7 @@ public class cgBase {
 	}
 
     /**
-     * Adds the cache is to the watchlist of the user.
+     * Adds the cache to the watchlist of the user.
      * 
      * @param cache     the cache to add
      * @return          -1: error occured
@@ -3986,15 +3986,15 @@ public class cgBase {
 	}
 
 	/**
-	 * Removes the given cache from the watchlist
+	 * Removes the cache from the watchlist
 	 * 
 	 * @param cache    the cache to remove
 	 * @return         -1: error occured
 	 */
 	public int removeFromWatchlist(cgCache cache) {
-	    String method = "POST";
-	    String path = "/my/watchlist.aspx?ds=1&action=rem&id=" + cache.cacheid;
 	    String host = "www.geocaching.com";
+	    String path = "/my/watchlist.aspx?ds=1&action=rem&id=" + cache.cacheid;
+	    String method = "POST";
 
 	    String page = requestLogged(false, host, path, method, null, false, false, false);
 
@@ -4003,7 +4003,7 @@ public class cgBase {
 			return -1; // error
 		}
 
-		// removal of cache needs approval by hitting "Yes" button
+		// removing cache from list needs approval by hitting "Yes" button
 		final HashMap<String, String> params = new HashMap<String, String>();
 		String viewstate1 = findViewstate(page, 1);
 		params.put("__VIEWSTATE", findViewstate(page, 0));
@@ -4036,9 +4036,11 @@ public class cgBase {
 	 */
 	private boolean checkPageForGuid(cgCache cache, String page) {
 		// check if the guid of the cache is anywhere in the page
+		if (cache.guid == null  ||  cache.guid.length() == 0)
+			return false;
 		Pattern patternOk = Pattern.compile(cache.guid, Pattern.CASE_INSENSITIVE);
 		Matcher matcherOk = patternOk.matcher(page);
-		if (matcherOk.find() == true) {
+		if (matcherOk.find()) {
 			Log.i(cgSettings.tag, "cgBase.checkPageForGuid: guid '" + cache.guid + "' found");
 			return true;
 		} else {

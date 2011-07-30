@@ -83,8 +83,8 @@ public class cgeodetail extends Activity {
 	private ProgressDialog storeDialog = null;
 	private ProgressDialog refreshDialog = null;
 	private ProgressDialog dropDialog = null;
-	private ProgressDialog watchlistDialog = null; // progress dialog for watchlist retrieval
-	private Thread watchlistThread = null; // thread for watchlist retrieval
+	private ProgressDialog watchlistDialog = null; // progress dialog for watchlist add/remove
+	private Thread watchlistThread = null; // thread for watchlist add/remove
 	private HashMap<Integer, String> calendars = new HashMap<Integer, String>();
 	private Handler storeCacheHandler = new Handler() {
 		@Override
@@ -251,7 +251,7 @@ public class cgeodetail extends Activity {
 	}
 
 	/**
-	 * Handler, called when add or remove of cache to/from watchlist is done
+	 * Handler, called when watchlist add or remove is done
 	 */
 	private Handler WatchlistHandler = new Handler() {
 		@Override
