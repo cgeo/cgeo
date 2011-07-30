@@ -1,14 +1,5 @@
 package cgeo.geocaching;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.res.Resources;
-import android.database.Cursor;
-import android.util.Log;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteStatement;
-import android.os.Environment;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -18,8 +9,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map.Entry;
 import java.util.Set;
+import java.util.Map.Entry;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.res.Resources;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
+import android.os.Environment;
+import android.util.Log;
 
 public class cgData {
 
@@ -1704,12 +1705,7 @@ public class cgData {
 
 						cache.updated = (long) cursor.getLong(cursor.getColumnIndex("updated"));
 						cache.reason = (int) cursor.getInt(cursor.getColumnIndex("reason"));
-						index = cursor.getColumnIndex("detailed");
-						if ((int) cursor.getInt(index) == 1) {
-							cache.detailed = true;
-						} else {
-							cache.detailed = false;
-						}
+						cache.detailed = cursor.getInt(cursor.getColumnIndex("detailed")) == 1;
 						cache.detailedUpdate = (Long) cursor.getLong(cursor.getColumnIndex("detailedupdate"));
 						cache.visitedDate = (Long) cursor.getLong(cursor.getColumnIndex("visiteddate"));
 						cache.geocode = (String) cursor.getString(cursor.getColumnIndex("geocode"));
@@ -1717,12 +1713,7 @@ public class cgData {
 						cache.guid = (String) cursor.getString(cursor.getColumnIndex("guid"));
 						cache.type = (String) cursor.getString(cursor.getColumnIndex("type"));
 						cache.name = (String) cursor.getString(cursor.getColumnIndex("name"));
-						index = cursor.getColumnIndex("own");
-						if ((int) cursor.getInt(index) == 1) {
-							cache.own = true;
-						} else {
-							cache.own = false;
-						}
+						cache.own = cursor.getInt(cursor.getColumnIndex("own")) == 1;
 						cache.owner = (String) cursor.getString(cursor.getColumnIndex("owner"));
 						cache.ownerReal = (String) cursor.getString(cursor.getColumnIndex("owner_real"));
 						cache.hidden = new Date((long) cursor.getLong(cursor.getColumnIndex("hidden")));
@@ -1770,37 +1761,13 @@ public class cgData {
 						cache.rating = (Float) cursor.getFloat(cursor.getColumnIndex("rating"));
 						cache.votes = (Integer) cursor.getInt(cursor.getColumnIndex("votes"));
 						cache.myVote = (Float) cursor.getFloat(cursor.getColumnIndex("myvote"));
-						index = cursor.getColumnIndex("disabled");
-						if ((int) cursor.getLong(index) == 1) {
-							cache.disabled = true;
-						} else {
-							cache.disabled = false;
-						}
-						index = cursor.getColumnIndex("archived");
-						if ((int) cursor.getLong(index) == 1) {
-							cache.archived = true;
-						} else {
-							cache.archived = false;
-						}
-						index = cursor.getColumnIndex("members");
-						if ((int) cursor.getLong(index) == 1) {
-							cache.members = true;
-						} else {
-							cache.members = false;
-						}
-						index = cursor.getColumnIndex("found");
-						if ((int) cursor.getLong(index) == 1) {
-							cache.found = true;
-						} else {
-							cache.found = false;
-						}
-						index = cursor.getColumnIndex("favourite");
-						if ((int) cursor.getLong(index) == 1) {
-							cache.favourite = true;
-						} else {
-							cache.favourite = false;
-						}
+                        cache.disabled = cursor.getLong(cursor.getColumnIndex("disabled")) == 1l;
+                        cache.archived = cursor.getLong(cursor.getColumnIndex("archived")) == 1l;
+                        cache.members = cursor.getLong(cursor.getColumnIndex("members")) == 1l;
+                        cache.found = cursor.getLong(cursor.getColumnIndex("found")) == 1l;
+                        cache.favourite = cursor.getLong(cursor.getColumnIndex("favourite")) == 1l;
 						cache.inventoryItems = (Integer) cursor.getInt(cursor.getColumnIndex("inventoryunknown"));
+						cache.onWatchlist = cursor.getLong(cursor.getColumnIndex("onWatchlist")) == 1l;
 
 						if (loadA == true) {
 							ArrayList<String> attributes = loadAttributes(cache.geocode);
@@ -1812,7 +1779,7 @@ public class cgData {
 								cache.attributes.addAll(attributes);
 							}
 						}
-
+						
 						if (loadW == true) {
 							ArrayList<cgWaypoint> waypoints = loadWaypoints(cache.geocode);
 							if (waypoints != null && waypoints.isEmpty() == false) {

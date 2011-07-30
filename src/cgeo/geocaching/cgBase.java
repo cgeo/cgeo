@@ -1,28 +1,58 @@
 package cgeo.geocaching;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.security.MessageDigest;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.Inflater;
+import java.util.zip.InflaterInputStream;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import java.io.InputStreamReader;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.net.URLConnection;
-import java.net.HttpURLConnection;
-import java.util.Map;
-import java.util.Calendar;
-import java.util.Locale;
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import android.util.Log;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -36,40 +66,14 @@ import android.os.Message;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.style.StrikethroughSpan;
+import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.math.BigInteger;
-import java.net.InetAddress;
-import java.net.NetworkInterface;
-import java.net.SocketException;
-import java.net.URLDecoder;
-import java.security.MessageDigest;
-import java.security.cert.CertificateException;
-import java.security.cert.X509Certificate;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Set;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.Inflater;
-import java.util.zip.InflaterInputStream;
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 public class cgBase {
 
@@ -3915,65 +3919,72 @@ public class cgBase {
 	}
 
 	/**
-	 * adds/removes a cache to/from the watchlist
+	 * Checks if the cache is on the watchlist of the user or not.
 	 * 
-	 * @param request   0: remove, 1: add, 2: get state
-	 * @param cache     the cache to add/remove
-	 * @return  0: removed, 1: added, -1: error occured
-	 * 
-	 * @see cgeodetail#WatchlistThread
+	 * @param cache    the cache to check
+	 * @return         0: removed, 1: added, -1: error occured
 	 */
-	public int manageWatchlist(int request, cgCache cache) {
-		Log.i(cgSettings.tag, "cgBase.manageWatchlist: Managing watchlist: cache='" + cache.cacheid + "', request=" + request);
+	public int readWatchlistState(cgCache cache) {
+	    String page = requestLogged(false, "www.geocaching.com", "/my/watchlist.aspx", 
+	            "POST", null, false, false, false);
 
-		String host = "www.geocaching.com";
-		String path = null;
-		switch(request) {
-		case 0: // remove
-			path = "/my/watchlist.aspx?ds=1&action=rem&id=" + cache.cacheid;
-			break;
-		case 1: // add
-			path = "/my/watchlist.aspx?w=" + cache.cacheid;
-			break;
-		case 2: // get state
-			path = "/my/watchlist.aspx";
-			break;
-		default:
-			return -1; // error
-	    }
-		String method = "POST";
+	    if (page == null || page.length() == 0) {
+            Log.e(cgSettings.tag, "cgBase.readWatchlistState: No data from server");
+            return -1;  // error
+        }
 
-		String page = request(false, host, path, method, null, false, false, false).getData();
-		if (checkLogin(page) == false) {
-			int loginState = login();
-			if (loginState == 1) {
-				page = request(false, host, path, method, null, false, false, false).getData();
-			} else {
-				Log.e(cgSettings.tag, "cgBase.manageWatchlist: Can not log in geocaching (error: " + loginState + ")");
-				return -1; // error
-			}
-		}
+        boolean guidOnPage = checkPageForGuid(cache, page);
+        if (guidOnPage)
+            Log.i(cgSettings.tag, "cgBase.readWatchlistState: cache is on watchlist");
+        else
+            Log.i(cgSettings.tag, "cgBase.readWatchlistState: cache is not on watchlist");
+
+        return guidOnPage ? 1 : 0;  // on watchlist / not on watchlist
+	}
+
+    /**
+     * Adds the cache is to the watchlist of the user.
+     * 
+     * @param cache     the cache to add
+     * @return          0: removed, 1: added, -1: error occured
+     */
+	public int addToWatchlist(cgCache cache) {
+        String page = requestLogged(false, "www.geocaching.com", "/my/watchlist.aspx?w=" + cache.cacheid, 
+                "POST", null, false, false, false);
+
+        if (page == null || page.length() == 0) {
+            Log.e(cgSettings.tag, "cgBase.addToWatchlist: No data from server");
+            return -1;  // error
+        }
+
+        boolean guidOnPage = checkPageForGuid(cache, page);
+        if (guidOnPage)
+            Log.i(cgSettings.tag, "cgBase.addToWatchlist: cache is on watchlist");
+        else
+            Log.e(cgSettings.tag, "cgBase.addToWatchlist: cache is not on watchlist");
+
+        return guidOnPage ? 1 : -1; // on watchlist (=added) / else: error
+	}
+
+	/**
+	 * Removes the given cache from the watchlist
+	 * 
+	 * @param cache    the cache to remove
+	 * @return         0: removed, 1: added, -1: error occured
+	 */
+	public int removeFromWatchlist(cgCache cache) {
+	    String method = "POST";
+	    String path = "/my/watchlist.aspx?ds=1&action=rem&id=" + cache.cacheid;
+	    String host = "www.geocaching.com";
+
+	    String page = requestLogged(false, host, path, method, null, false, false, false);
 
 		if (page == null || page.length() == 0) {
-			Log.e(cgSettings.tag, "cgBase.manageWatchlist: No data from server");
+			Log.e(cgSettings.tag, "cgBase.removeFromWatchlist: No data from server");
 			return -1; // error
 		}
 
-		if (request == 1  ||  request == 2) {
-			// check if cache is listed on resulting page
-			boolean guidOnPage = checkPageForGuid(cache, page);
-			if (guidOnPage)
-				Log.i(cgSettings.tag, "cgBase.manageWatchlist: cache added to watchlist");
-			else
-				Log.e(cgSettings.tag, "cgBase.manageWatchlist: cache not added to watchlist");
-			if (request == 1)
-				return guidOnPage ? 1 : -1; // on watchlist (=added) / error
-			else
-				return guidOnPage ? 1 : 0; // on watchlist / not on watchlist
-		}
-
-		// removal of cache. needs approval by hitting "Yes" button
-		method = "POST";
+		// removal of cache needs approval by hitting "Yes" button
 		final HashMap<String, String> params = new HashMap<String, String>();
 		String viewstate1 = findViewstate(page, 1);
 		params.put("__VIEWSTATE", findViewstate(page, 0));
@@ -3988,9 +3999,9 @@ public class cgBase {
 		page = request(false, host, path, method, params, false, false, false).getData();
 		boolean guidOnPage = checkPageForGuid(cache, page);
 		if (! guidOnPage)
-			Log.i(cgSettings.tag, "cgBase.manageWatchlist: cache removed from watchlist");
+			Log.i(cgSettings.tag, "cgBase.removeFromWatchlist: cache removed from watchlist");
 		else
-			Log.e(cgSettings.tag, "cgBase.manageWatchlist: cache not removed from watchlist");
+			Log.e(cgSettings.tag, "cgBase.removeFromWatchlist: cache not removed from watchlist");
 		return guidOnPage ? -1 : 0; // on watchlist (=error) / not on watchlist
 	}
 

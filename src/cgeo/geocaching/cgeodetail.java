@@ -1,33 +1,21 @@
 package cgeo.geocaching;
 
-import gnu.android.app.appmanualclient.*;
+import gnu.android.app.appmanualclient.AppManualReaderClient;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
-import android.os.Handler;
-import android.os.Message;
-import android.os.Bundle;
-import android.util.Log;
+import java.util.Locale;
+import java.util.Map.Entry;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
-import android.text.Html;
-import android.text.Spannable;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.method.LinkMovementMethod;
-import android.view.ContextMenu;
-import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.LayoutInflater;
-import android.widget.ScrollView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.ImageView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -37,19 +25,32 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.Html;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.method.LinkMovementMethod;
 import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.Display;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.SubMenu;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-import java.net.URLEncoder;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Map.Entry;
 
 public class cgeodetail extends Activity {
 	public Long searchId = null;
@@ -988,8 +989,8 @@ public class cgeodetail extends Activity {
 			// watchlist
 			Button buttonWatchlistAdd = (Button) findViewById(R.id.add_to_watchlist);
 			Button buttonWatchlistRemove = (Button) findViewById(R.id.remove_from_watchlist);
-			buttonWatchlistAdd.setOnClickListener(new addToWatchlistClickListener());
-			buttonWatchlistRemove.setOnClickListener(new removeFromWatchlistClickListener());
+			buttonWatchlistAdd.setOnClickListener(new AddToWatchlistClickListener());
+			buttonWatchlistRemove.setOnClickListener(new RemoveFromWatchlistClickListener());
 
 			// waypoints
 			LinearLayout waypoints = (LinearLayout) findViewById(R.id.waypoints);
@@ -1845,74 +1846,72 @@ public class cgeodetail extends Activity {
 	}
 
 	/**
+	 * Abstract Listener for add / remove buttons for watchlist
+	 */
+    private abstract class AbstractWatchlistClickListener implements View.OnClickListener {
+        public void doExecute(int titleId, int messageId, Thread thread) {
+            if (watchlistDialog != null  &&  watchlistDialog.isShowing() == true) {
+                warning.showToast(res.getString(R.string.err_watchlist_still_surfing));
+                return;
+            }
+            watchlistDialog = ProgressDialog.show(activity, 
+                    res.getString(titleId), res.getString(messageId), true);
+            watchlistDialog.setCancelable(true);
+
+            if (watchlistThread != null) {
+                watchlistThread.interrupt();
+            }
+
+            watchlistThread = thread;
+            watchlistThread.start();
+        }
+    }
+	
+	/**
 	 * Listener for "add to watchlist" button
 	 */
-	private class addToWatchlistClickListener implements View.OnClickListener {
+	private class AddToWatchlistClickListener extends AbstractWatchlistClickListener {
 		public void onClick(View arg0) {
-			if (watchlistDialog != null  &&  watchlistDialog.isShowing() == true) {
-				warning.showToast(res.getString(R.string.err_watchlist_still_surfing));
-				return;
-			}
-			watchlistDialog = ProgressDialog.show(activity, 
-					res.getString(R.string.cache_dialog_watchlist_add_title),
-					res.getString(R.string.cache_dialog_watchlist_add_message), true);
-			watchlistDialog.setCancelable(true);
-
-			if (watchlistThread != null) {
-				watchlistThread.interrupt();
-			}
-
-			watchlistThread = new WatchlistThread(1, WatchlistHandler);
-			watchlistThread.start();
+		    doExecute(R.string.cache_dialog_watchlist_add_title,
+		            R.string.cache_dialog_watchlist_add_message,
+		            new WatchlistAddThread(WatchlistHandler) );
 		}
 	}
 
 	/**
 	 * Listener for "remove from watchlist" button
 	 */
-	private class removeFromWatchlistClickListener implements View.OnClickListener {
-		public void onClick(View arg0) {
-			if (watchlistDialog != null  &&  watchlistDialog.isShowing() == true) {
-				warning.showToast(res.getString(R.string.err_watchlist_still_surfing));
-				return;
-			}
-			watchlistDialog = ProgressDialog.show(activity, 
-					res.getString(R.string.cache_dialog_watchlist_remove_title),
-					res.getString(R.string.cache_dialog_watchlist_remove_message), true);
-			watchlistDialog.setCancelable(true);
-
-			if (watchlistThread != null) {
-				watchlistThread.interrupt();
-			}
-
-			watchlistThread = new WatchlistThread(0, WatchlistHandler);
-			watchlistThread.start();
-		}
+	private class RemoveFromWatchlistClickListener extends AbstractWatchlistClickListener {
+        public void onClick(View arg0) {
+            doExecute(R.string.cache_dialog_watchlist_remove_title,
+                    R.string.cache_dialog_watchlist_remove_message,
+                    new WatchlistRemoveThread(WatchlistHandler) );
+        }
 	}
 
-	/**
-	 * Thread, adds/removes cache from watchlist
-	 */
-	private class WatchlistThread extends Thread {
-		private int request;
-		private Handler handler = null;
-
-		/**
-		 * Constructor
-		 * 
-		 * @param request  0: remove, 1: add, 2: get state
-		 * @param handler  Handler to send result to
-		 */
-		public WatchlistThread(int request, Handler handler) {
-			this.request = request;
-			this.handler = handler;
-		}
-
-		@Override
-		public void run() {
-			handler.sendEmptyMessage(base.manageWatchlist(request, cache));
-		}
+	/** Thread to add this cache to the watchlist of the user */ 
+	private class WatchlistAddThread extends Thread {
+	    private final Handler handler;
+        public WatchlistAddThread(Handler handler) {
+            this.handler = handler;
+        }
+        @Override
+        public void run() {
+            handler.sendEmptyMessage(base.addToWatchlist(cache));
+        }
 	}
+
+    /** Thread to remove this cache from the watchlist of the user */ 
+    private class WatchlistRemoveThread extends Thread {
+        private final Handler handler;
+        public WatchlistRemoveThread(Handler handler) {
+            this.handler = handler;
+        }
+        @Override
+        public void run() {
+            handler.sendEmptyMessage(base.removeFromWatchlist(cache));
+        }
+    }
 
 	private class addWaypoint implements View.OnClickListener {
 
