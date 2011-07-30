@@ -172,8 +172,7 @@
 							android:layout_gravity="left"
 							android:paddingRight="3dip"
 							android:textSize="14dip"
-							android:textColor="?text_color"
-							android:text="@string/cache_watchlist_loading" />
+							android:textColor="?text_color" />
 					<Button style="@style/button_small"
 							android:id="@+id/add_to_watchlist"
 							android:visibility="gone"

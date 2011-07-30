@@ -163,7 +163,6 @@ public class cgeodetail extends Activity {
 			}
 
 			(new loadMapPreview(cache, loadMapPreviewHandler)).start();
-			(new WatchlistThread(2, WatchlistHandler)).start();
 		}
 	};
 
@@ -234,33 +233,21 @@ public class cgeodetail extends Activity {
 
 	/**
 	 * shows/hides buttons, sets text in watchlist box
-	 * 
-	 * @param result  0: cache is not on watchlist, 1: cache is on watchlist,
-	 *                -1: error occured
 	 */
-	private void updateWatchlistBox(int result) {
+	private void updateWatchlistBox() {
 		Button buttonAdd = (Button) findViewById(R.id.add_to_watchlist);
 		Button buttonRemove = (Button) findViewById(R.id.remove_from_watchlist);
 		TextView text = (TextView) findViewById(R.id.watchlist_text);
 		
-		switch (result) {
-		case -1: // error while loading state
-			buttonAdd.setVisibility(View.GONE);
-			buttonRemove.setVisibility(View.GONE);
-			text.setText(R.string.cache_watchlist_error);
-			break;
-		case 0: // not on watchlist
-			buttonAdd.setVisibility(View.VISIBLE);
-			buttonRemove.setVisibility(View.GONE);
-			text.setText(R.string.cache_watchlist_not_on);
-			break;
-		case 1: // is on watchlist
+		if (cache.onWatchlist) {
 			buttonAdd.setVisibility(View.GONE);
 			buttonRemove.setVisibility(View.VISIBLE);
 			text.setText(R.string.cache_watchlist_on);
-			break;
+		} else {
+			buttonAdd.setVisibility(View.VISIBLE);
+			buttonRemove.setVisibility(View.GONE);
+			text.setText(R.string.cache_watchlist_not_on);
 		}
-
 	}
 
 	/**
@@ -272,10 +259,13 @@ public class cgeodetail extends Activity {
 			watchlistThread = null;
 			if (watchlistDialog != null) 
 				watchlistDialog.dismiss();
-			updateWatchlistBox(msg.what);
+			if (msg.what == -1) {
+				warning.showToast(res.getString(R.string.err_watchlist_failed));
+			} else {
+				updateWatchlistBox();
+			}
 		}
 	};
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -1013,6 +1003,7 @@ public class cgeodetail extends Activity {
 			Button buttonWatchlistRemove = (Button) findViewById(R.id.remove_from_watchlist);
 			buttonWatchlistAdd.setOnClickListener(new AddToWatchlistClickListener());
 			buttonWatchlistRemove.setOnClickListener(new RemoveFromWatchlistClickListener());
+			updateWatchlistBox();
 
 			// waypoints
 			LinearLayout waypoints = (LinearLayout) findViewById(R.id.waypoints);
@@ -1867,7 +1858,7 @@ public class cgeodetail extends Activity {
     private abstract class AbstractWatchlistClickListener implements View.OnClickListener {
         public void doExecute(int titleId, int messageId, Thread thread) {
             if (watchlistDialog != null  &&  watchlistDialog.isShowing() == true) {
-                warning.showToast(res.getString(R.string.err_watchlist_still_surfing));
+                warning.showToast(res.getString(R.string.err_watchlist_still_managing));
                 return;
             }
             watchlistDialog = ProgressDialog.show(activity, 

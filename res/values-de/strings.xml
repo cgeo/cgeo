@@ -121,7 +121,7 @@
   <string name="err_detail_still_removing">c:geo löscht diesen Cache noch immer.</string>
   <string name="err_detail_still_saving">c:geo speichert diesen Cache noch immer.</string>
   <string name="err_detail_still_refreshing">c:geo versucht noch immer diesen Cache zu aktualiseren.</string>
-  <string name="err_watchlist_still_surfing">c:geo versucht immer noch die Watchlist zu bearbeiten.</string>
+  <string name="err_watchlist_still_managing">c:geo versucht noch immer deine Watchlist zu aktualisieren.</string>
   <string name="err_watchlist_failed">Ändern der Watchlist nicht erfolgreich.</string>
   <string name="err_radar_title">Radar-Anwendung ist nicht installiert.</string>
   <string name="err_radar_message">Diese Funktion benötigt die Radar-Anwendung. Soll diese installiert werden?</string>
@@ -412,7 +412,6 @@
   <string name="cache_description">Beschreibung</string>
   <string name="cache_description_long">Ausführliche Beschreibung</string>
   <string name="cache_watchlist">Watchlist</string>
-  <string name="cache_watchlist_loading">Lade Information von der Watchlist...</string>
   <string name="cache_watchlist_on">Dieser Cache ist auf deiner Watchlist.</string>
   <string name="cache_watchlist_not_on">Dieser Cache ist nicht auf deiner Watchlist.</string>
   <string name="cache_watchlist_error">Konnte Watchlist nicht lesen.</string>

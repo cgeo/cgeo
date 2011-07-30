@@ -1113,6 +1113,7 @@ public class cgBase {
 		final Pattern patternSpoilersInside = Pattern.compile("[^<]*<a href=\"([^\"]+)\"[^>]*>[^<]*<img[^>]+>[^<]*<span>([^>]+)</span>[^<]*</a>[^<]*<br[^>]*>(([^<]*)(<br[^<]*>)+)?", Pattern.CASE_INSENSITIVE);
 		final Pattern patternInventory = Pattern.compile("<span id=\"ctl00_ContentBody_uxTravelBugList_uxInventoryLabel\">[^\\w]*Inventory[^<]*</span>[^<]*</h3>[^<]*<div class=\"WidgetBody\">([^<]*<ul>(([^<]*<li>[^<]*<a href=\"[^\"]+\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>[^<]+<\\/span>[^<]*<\\/a>[^<]*<\\/li>)+)[^<]*<\\/ul>)?", Pattern.CASE_INSENSITIVE);
 		final Pattern patternInventoryInside = Pattern.compile("[^<]*<li>[^<]*<a href=\"[a-z0-9\\-\\_\\.\\?\\/\\:\\@]*\\/track\\/details\\.aspx\\?guid=([0-9a-z\\-]+)[^\"]*\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>([^<]+)<\\/span>[^<]*<\\/a>[^<]*<\\/li>", Pattern.CASE_INSENSITIVE);
+		final Pattern patternOnWatchlist = Pattern.compile("<img\\s*src=\"\\/images\\/stockholm\\/16x16\\/icon_stop_watchlist.gif\"", Pattern.CASE_INSENSITIVE);
 
 		final cgCacheWrap caches = new cgCacheWrap();
 		final cgCache cache = new cgCache();
@@ -1360,6 +1361,15 @@ public class cgBase {
 		} catch (Exception e) {
 			// failed to parse type
 			Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache type");
+		}
+		
+		// cache on watchlist
+		try {
+			final Matcher matcher = patternOnWatchlist.matcher(page);
+			cache.onWatchlist = matcher.find();
+		} catch (Exception e) {
+			// failed to parse onWatchlist
+			Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse onWatchlist");
 		}
 
 		// latitude and logitude
@@ -3950,35 +3960,11 @@ public class cgBase {
 		return 1000;
 	}
 
-	/**
-	 * Checks if the cache is on the watchlist of the user or not.
-	 * 
-	 * @param cache    the cache to check
-	 * @return         0: removed, 1: added, -1: error occured
-	 */
-	public int readWatchlistState(cgCache cache) {
-	    String page = requestLogged(false, "www.geocaching.com", "/my/watchlist.aspx", 
-	            "POST", null, false, false, false);
-
-	    if (page == null || page.length() == 0) {
-            Log.e(cgSettings.tag, "cgBase.readWatchlistState: No data from server");
-            return -1;  // error
-        }
-
-        boolean guidOnPage = checkPageForGuid(cache, page);
-        if (guidOnPage)
-            Log.i(cgSettings.tag, "cgBase.readWatchlistState: cache is on watchlist");
-        else
-            Log.i(cgSettings.tag, "cgBase.readWatchlistState: cache is not on watchlist");
-
-        return guidOnPage ? 1 : 0;  // on watchlist / not on watchlist
-	}
-
     /**
      * Adds the cache is to the watchlist of the user.
      * 
      * @param cache     the cache to add
-     * @return          0: removed, 1: added, -1: error occured
+     * @return          -1: error occured
      */
 	public int addToWatchlist(cgCache cache) {
         String page = requestLogged(false, "www.geocaching.com", "/my/watchlist.aspx?w=" + cache.cacheid, 
@@ -3990,11 +3976,12 @@ public class cgBase {
         }
 
         boolean guidOnPage = checkPageForGuid(cache, page);
-        if (guidOnPage)
+        if (guidOnPage) {
             Log.i(cgSettings.tag, "cgBase.addToWatchlist: cache is on watchlist");
-        else
+            cache.onWatchlist = true;
+        } else {
             Log.e(cgSettings.tag, "cgBase.addToWatchlist: cache is not on watchlist");
-
+        }
         return guidOnPage ? 1 : -1; // on watchlist (=added) / else: error
 	}
 
@@ -4002,7 +3989,7 @@ public class cgBase {
 	 * Removes the given cache from the watchlist
 	 * 
 	 * @param cache    the cache to remove
-	 * @return         0: removed, 1: added, -1: error occured
+	 * @return         -1: error occured
 	 */
 	public int removeFromWatchlist(cgCache cache) {
 	    String method = "POST";
@@ -4030,10 +4017,12 @@ public class cgBase {
 
 		page = request(false, host, path, method, params, false, false, false).getData();
 		boolean guidOnPage = checkPageForGuid(cache, page);
-		if (! guidOnPage)
+		if (! guidOnPage) {
 			Log.i(cgSettings.tag, "cgBase.removeFromWatchlist: cache removed from watchlist");
-		else
+			cache.onWatchlist = false;
+		} else {
 			Log.e(cgSettings.tag, "cgBase.removeFromWatchlist: cache not removed from watchlist");
+		}
 		return guidOnPage ? -1 : 0; // on watchlist (=error) / not on watchlist
 	}
 

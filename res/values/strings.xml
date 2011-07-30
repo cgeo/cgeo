@@ -125,7 +125,7 @@
   <string name="err_detail_still_removing">Still removing this cache.</string>
   <string name="err_detail_still_saving">Still saving this cache.</string>
   <string name="err_detail_still_refreshing">Still reloading this cache.</string>
-  <string name="err_watchlist_still_surfing">Still managing your watchlist.</string>
+  <string name="err_watchlist_still_managing">Still managing your watchlist.</string>
   <string name="err_watchlist_failed">Changing your watchlist failed.</string>
   <string name="err_radar_title">Radar isn\'t installed.</string>
   <string name="err_radar_message">This function requires Radar application. Should it be installed?</string>
@@ -465,7 +465,6 @@
   <string name="cache_description">Description</string>
   <string name="cache_description_long">Long description</string>
   <string name="cache_watchlist">Watchlist</string>
-  <string name="cache_watchlist_loading">Loading watchlist information...</string>
   <string name="cache_watchlist_on">This cache is on your watchlist.</string>
   <string name="cache_watchlist_not_on">This cache is not on your watchlist.</string>
   <string name="cache_watchlist_error">Could not get watchlist state.</string>

@@ -49,6 +49,7 @@ public class cgCache {
 	public Integer votes = null;
 	public Float myVote = null;
 	public int inventoryItems = 0;
+	public boolean onWatchlist = false;
 	public ArrayList<String> attributes = null;
 	public ArrayList<cgWaypoint> waypoints = null;
 	public ArrayList<cgSpoiler> spoilers = null;
