@@ -504,11 +504,11 @@ public class cgeocaches extends ListActivity {
                 cacheList.get(msg.what).statusChecked = false;
                 waitDialog.setProgress(detailProgress);
             }
-            if (-2 == msg.what)
+            else if (-2 == msg.what)
             {
                 warning.showToast(res.getString(R.string.info_fieldnotes_exported_to) + ": " + msg.obj.toString());
             }
-            if (-3 == msg.what)
+            else if (-3 == msg.what)
             {
                 warning.showToast(res.getString(R.string.err_fieldnotes_export_failed));
             }
@@ -2204,7 +2204,10 @@ public class cgeocaches extends ListActivity {
             logTypes.put(cgBase.LOG_DIDNT_FIND_IT, "Didn't find it");
             logTypes.put(cgBase.LOG_NOTE, "Write Note");
             logTypes.put(cgBase.LOG_NEEDS_ARCHIVE, "Needs archived");
-            //logTypes.put(cgBase.LOG_NEEDS_MAINTENANCE, "Needs Maintenance"); // TODO: Strange problems, gc.com aborts with a parse-error
+            logTypes.put(cgBase.LOG_NEEDS_MAINTENANCE, "Needs Maintenance");
+            logTypes.put(cgBase.LOG_WILL_ATTEND, "Will Attend");
+            logTypes.put(cgBase.LOG_ATTENDED, "Attended");
+            logTypes.put(cgBase.LOG_WEBCAM_PHOTO_TAKEN, "Webcam Photo Taken");
 
             for (cgCache cache : cacheList) {
                 if (checked > 0 && cache.statusChecked == false) {
