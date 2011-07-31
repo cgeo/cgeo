@@ -375,6 +375,7 @@
   <string name="init_mapsettings">Karten-Einstellungen</string> <!-- since: 2.26 RC3 -->
   <string name="init_mapsettings_description">Du kannst statt Google Maps alternativ Karten von OpenStreetMap nutzen. Du benötigst dafür eine Kartendatei zur Offline-Darstellung (siehe http://code.google.com/p/mapsforge/ für mehr Details)</string> <!-- since: 2.26 RC3 -->
   <string name="init_mfmaps">Benutze OpenStreetMap</string> <!-- since: 2.26 RC3 -->
+  <string name="init_autovisit">Trackables automatisch auf \"besuchen\" setzen</string>
 
   <!-- auth -->
   <string name="auth_twitter">Twitter</string>
