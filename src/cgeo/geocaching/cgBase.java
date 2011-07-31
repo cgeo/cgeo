@@ -1096,7 +1096,7 @@ public class cgBase {
 		final Pattern patternLocation = Pattern.compile("<span id=\"ctl00_ContentBody_Location\"[^>]*>In ([^<]*)", Pattern.CASE_INSENSITIVE);
 		final Pattern patternHint = Pattern.compile("<p>([^<]*<strong>)?[^\\w]*Additional Hints([^<]*<\\/strong>)?[^\\(]*\\(<a[^>]+>Encrypt</a>\\)[^<]*<\\/p>[^<]*<div id=\"div_hint\"[^>]*>(.*)</div>[^<]*<div id=[\\'|\"]dk[\\'|\"]", Pattern.CASE_INSENSITIVE);
 		final Pattern patternDescShort = Pattern.compile("<div class=\"UserSuppliedContent\">[^<]*<span id=\"ctl00_ContentBody_ShortDescription\"[^>]*>((?:(?!</span>[^\\w^<]*</div>).)*)</span>[^\\w^<]*</div>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternDesc = Pattern.compile("<div class=\"UserSuppliedContent\">[^<]*<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>((?:(?!</span>[^\\w^<]*</div>).)*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>[^\\w]*Additional Hints</strong>", Pattern.CASE_INSENSITIVE);
+		final Pattern patternDesc = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>" + "(.*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>[^\\w]*Additional Hints</strong>", Pattern.CASE_INSENSITIVE);
 		final Pattern patternCountLogs = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p>(.*)<\\/p><\\/span>", Pattern.CASE_INSENSITIVE);
 		final Pattern patternCountLog = Pattern.compile(" src=\"\\/images\\/icons\\/([^\\.]*).gif\" alt=\"[^\"]*\" title=\"[^\"]*\" />([0-9]*)[^0-9]+", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 		final Pattern patternLogs = Pattern.compile("<table class=\"LogsTable[^\"]*\"[^>]*>[^<]*<tr>(.*)</tr>[^<]*</table>[^<]*<p", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
@@ -1356,7 +1356,7 @@ public class cgBase {
 			// failed to parse type
 			Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache type");
 		}
-		
+
 		// on watchlist
 		try {
 			final Matcher matcher = patternOnWatchlist.matcher(page);
@@ -1447,7 +1447,7 @@ public class cgBase {
 		// cache short description
 		try {
 			final Matcher matcherDescShort = patternDescShort.matcher(page);
-			while (matcherDescShort.find()) {
+			if (matcherDescShort.find()) {
 				if (matcherDescShort.groupCount() > 0) {
 					cache.shortdesc = matcherDescShort.group(1).trim();
 				}
@@ -1460,7 +1460,7 @@ public class cgBase {
 		// cache description
 		try {
 			final Matcher matcherDesc = patternDesc.matcher(page);
-			while (matcherDesc.find()) {
+			if (matcherDesc.find()) {
 				if (matcherDesc.groupCount() > 0) {
 					cache.description = matcherDesc.group(1);
 				}
@@ -3956,12 +3956,12 @@ public class cgBase {
 
     /**
      * Adds the cache to the watchlist of the user.
-     * 
+     *
      * @param cache     the cache to add
      * @return          -1: error occured
      */
 	public int addToWatchlist(cgCache cache) {
-        String page = requestLogged(false, "www.geocaching.com", "/my/watchlist.aspx?w=" + cache.cacheid, 
+        String page = requestLogged(false, "www.geocaching.com", "/my/watchlist.aspx?w=" + cache.cacheid,
                 "POST", null, false, false, false);
 
         if (page == null || page.length() == 0) {
@@ -3981,7 +3981,7 @@ public class cgBase {
 
 	/**
 	 * Removes the cache from the watchlist
-	 * 
+	 *
 	 * @param cache    the cache to remove
 	 * @return         -1: error occured
 	 */
@@ -4022,10 +4022,10 @@ public class cgBase {
 
 	/**
 	 * checks if a page contains the guid of a cache
-	 * 
+	 *
 	 * @param cache  the cache to look for
 	 * @param page   the page to search in
-	 * 
+	 *
 	 * @return  true: page contains guid of cache, false: otherwise
 	 */
 	private boolean checkPageForGuid(cgCache cache, String page) {
