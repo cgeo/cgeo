@@ -240,7 +240,7 @@ public class cgeodetail extends Activity {
 		Button buttonAdd = (Button) findViewById(R.id.add_to_watchlist);
 		Button buttonRemove = (Button) findViewById(R.id.remove_from_watchlist);
 		TextView text = (TextView) findViewById(R.id.watchlist_text);
-		
+
 		if (cache.onWatchlist) {
 			buttonAdd.setVisibility(View.GONE);
 			buttonRemove.setVisibility(View.VISIBLE);
@@ -259,7 +259,7 @@ public class cgeodetail extends Activity {
 		@Override
 		public void handleMessage(Message msg) {
 			watchlistThread = null;
-			if (watchlistDialog != null) 
+			if (watchlistDialog != null)
 				watchlistDialog.dismiss();
 			if (msg.what == -1) {
 				warning.showToast(res.getString(R.string.err_watchlist_failed));
@@ -640,12 +640,12 @@ public class cgeodetail extends Activity {
 			LinearLayout detailsList = (LinearLayout) findViewById(R.id.details_list);
 			detailsList.removeAllViews();
 
-			// actionbar icon
+			// actionbar icon, default myster<
+			String typeId = "mystery";
 			if (cache.type != null && gcIcons.containsKey(cache.type) == true) { // cache icon
-				((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable) activity.getResources().getDrawable(gcIcons.get(cache.type)), null, null, null);
-			} else { // unknown cache type, "mystery" icon
-				((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable) activity.getResources().getDrawable(gcIcons.get("mystery")), null, null, null);
+				typeId = cache.type;
 			}
+			((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable) activity.getResources().getDrawable(gcIcons.get(typeId)), null, null, null);
 
 			// cache name (full name)
 			itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
@@ -1023,17 +1023,20 @@ public class cgeodetail extends Activity {
 						identification.setText(res.getString(R.string.waypoint_custom));
 					}
 
+					TextView nameView = (TextView) waypointView.findViewById(R.id.name);
 					if (wpt.name.trim().length() == 0) {
-						((TextView) waypointView.findViewById(R.id.name)).setText(base.formatCoordinate(wpt.latitude, "lat", true) + " | " + base.formatCoordinate(wpt.longitude, "lon", true));
+						nameView.setText(base.formatCoordinate(wpt.latitude, "lat", true) + " | " + base.formatCoordinate(wpt.longitude, "lon", true));
 					} else {
 						// avoid HTML parsing
 						if (wpt.name.indexOf('<') >= 0 || wpt.name.indexOf('&') >= 0) {
-							((TextView) waypointView.findViewById(R.id.name)).setText(Html.fromHtml(wpt.name.trim()), TextView.BufferType.SPANNABLE);
+							nameView.setText(Html.fromHtml(wpt.name.trim()), TextView.BufferType.SPANNABLE);
 						}
 						else {
-							((TextView) waypointView.findViewById(R.id.name)).setText(wpt.name.trim());
+							nameView.setText(wpt.name.trim());
 						}
 					}
+					wpt.setIcon(res, base, nameView);
+
 					// avoid HTML parsing
 					if (wpt.note.indexOf('<') >= 0 || wpt.note.indexOf('&') >= 0) {
 						((TextView) waypointView.findViewById(R.id.note)).setText(Html.fromHtml(wpt.note.trim()), TextView.BufferType.SPANNABLE);
@@ -1770,7 +1773,7 @@ public class cgeodetail extends Activity {
                 warning.showToast(res.getString(R.string.err_watchlist_still_managing));
                 return;
             }
-            watchlistDialog = ProgressDialog.show(activity, 
+            watchlistDialog = ProgressDialog.show(activity,
                     res.getString(titleId), res.getString(messageId), true);
             watchlistDialog.setCancelable(true);
 
@@ -1782,7 +1785,7 @@ public class cgeodetail extends Activity {
             watchlistThread.start();
         }
     }
-	
+
 	/**
 	 * Listener for "add to watchlist" button
 	 */
@@ -1805,7 +1808,7 @@ public class cgeodetail extends Activity {
         }
 	}
 
-	/** Thread to add this cache to the watchlist of the user */ 
+	/** Thread to add this cache to the watchlist of the user */
 	private class WatchlistAddThread extends Thread {
 	    private final Handler handler;
         public WatchlistAddThread(Handler handler) {
@@ -1817,7 +1820,7 @@ public class cgeodetail extends Activity {
         }
 	}
 
-    /** Thread to remove this cache from the watchlist of the user */ 
+    /** Thread to remove this cache from the watchlist of the user */
     private class WatchlistRemoveThread extends Thread {
         private final Handler handler;
         public WatchlistRemoveThread(Handler handler) {

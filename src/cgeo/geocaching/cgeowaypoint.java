@@ -80,6 +80,7 @@ public class cgeowaypoint extends Activity {
 						identification.setText(res.getString(R.string.waypoint_custom));
 					}
 					registerNavigationMenu(identification);
+					waypoint.setIcon(res, base, identification);
 
 					if (waypoint.latitude != null && waypoint.longitude != null) {
 						coords.setText(Html.fromHtml(base.formatCoordinate(waypoint.latitude, "lat", true) + " | " + base.formatCoordinate(waypoint.longitude, "lon", true)), TextView.BufferType.SPANNABLE);
