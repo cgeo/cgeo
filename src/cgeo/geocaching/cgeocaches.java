@@ -65,8 +65,10 @@ import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
 public class cgeocaches extends ListActivity {
 
-	private static final int MENU_SWITCH_SELECT_MODE = 0;
-	private static final int MENU_REFRESH_STORED = 1;
+	private static final int MENU_COMPASS = 1;
+	private static final int MENU_REFRESH_STORED = 2;
+	private static final int MENU_LOG_VISIT = 3;
+	private static final int MENU_CACHE_DETAILS = 4;
 	private static final int MENU_DROP_CACHES = 5;
 	private static final int MENU_IMPORT_GPX = 6;
 	private static final int MENU_CREATE_LIST = 7;
@@ -83,23 +85,46 @@ public class cgeocaches extends ListActivity {
 	private static final int MENU_SORT_RATING = 18;
 	private static final int MENU_SORT_VOTE = 19;
 	private static final int MENU_SORT_INVENTORY = 20;
-
-	private static final int MENU_IMPORT_WEB = 25;
-	private static final int MENU_EXPORT_NOTES = 26;
-	private static final int MENU_REMOVE_FROM_HISTORY = 27;
-
-	private static final int MENU_DROP_CACHE = 30;
-	private static final int MENU_MOVE_TO_LIST = 31;
-
-	private static final int SUBMENU_MOVE_TO_LIST = 100;
-	private static final int SUBMENU_SHOW_MAP = 101;
-	private static final int SUBMENU_MANAGE_LISTS = 102;
-	private static final int SUBMENU_MANAGE_OFFLINE = 103;
-    private static final int SUBMENU_SORT = 104;
-	private static final int SUBMENU_FILTER = 105;
-	private static final int SUBMENU_IMPORT = 106;
-	private static final int SUBMENU_MANAGE_HISTORY = 107;
-
+	private static final int MENU_IMPORT_WEB = 21;
+	private static final int MENU_EXPORT_NOTES = 22;
+	private static final int MENU_REMOVE_FROM_HISTORY = 23;
+	private static final int MENU_DROP_CACHE = 24;
+	private static final int MENU_MOVE_TO_LIST = 25;
+	private static final int MENU_FILTER_CLEAR = 26;
+	private static final int MENU_FILTER_TRACKABLES = 27;
+	private static final int SUBMENU_FILTER_SIZE = 28;
+	private static final int SUBMENU_FILTER_TYPE = 29;
+	private static final int MENU_FILTER_TYPE_GPS = 30;
+	private static final int MENU_FILTER_TYPE_GCHQ = 31;
+	private static final int MENU_FILTER_TYPE_APE = 32;
+	private static final int MENU_FILTER_TYPE_LOSTFOUND = 33;
+	private static final int MENU_FILTER_TYPE_WHERIGO = 34;
+	private static final int MENU_FILTER_TYPE_VIRTUAL = 35;
+	private static final int MENU_FILTER_TYPE_WEBCAM = 36;
+	private static final int MENU_FILTER_TYPE_CITO = 37;
+	private static final int MENU_FILTER_TYPE_EARTH = 38;
+	private static final int MENU_FILTER_TYPE_MEGA = 39;
+	private static final int MENU_FILTER_TYPE_EVENT = 40;
+	private static final int MENU_FILTER_TYPE_LETTERBOX = 41;
+	private static final int MENU_FILTER_TYPE_MYSTERY = 42;
+	private static final int MENU_FILTER_TYPE_MULTI = 43;
+	private static final int MENU_FILTER_TYPE_TRADITIONAL = 44;
+	private static final int MENU_FILTER_SIZE_NOT_CHOSEN = 45;
+	private static final int MENU_FILTER_SIZE_VIRTUAL = 46;
+	private static final int MENU_FILTER_SIZE_OTHER = 47;
+	private static final int MENU_FILTER_SIZE_LARGE = 48;
+	private static final int MENU_FILTER_SIZE_REGULAR = 49;
+	private static final int MENU_FILTER_SIZE_SMALL = 50;
+	private static final int MENU_FILTER_SIZE_MICRO = 51;
+	private static final int MENU_SWITCH_SELECT_MODE = 52;
+	private static final int SUBMENU_MOVE_TO_LIST = 53;
+	private static final int SUBMENU_SHOW_MAP = 54;
+	private static final int SUBMENU_MANAGE_LISTS = 55;
+	private static final int SUBMENU_MANAGE_OFFLINE = 56;
+    private static final int SUBMENU_SORT = 57;
+	private static final int SUBMENU_FILTER = 58;
+	private static final int SUBMENU_IMPORT = 59;
+	private static final int SUBMENU_MANAGE_HISTORY = 60;
 
 	private GoogleAnalyticsTracker tracker = null;
 	private String action = null;
@@ -503,6 +528,10 @@ public class cgeocaches extends ListActivity {
         }
     };
 	private ContextMenuInfo lastMenuInfo;
+	/**
+	 * the navigation menu item for the cache list (not the context menu!), or <code>null</code>
+	 */
+	private MenuItem navigationMenu;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -726,10 +755,10 @@ public class cgeocaches extends ListActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		SubMenu subMenuFilter = menu.addSubMenu(0, SUBMENU_FILTER, 0, res.getString(R.string.caches_filter)).setIcon(android.R.drawable.ic_menu_search);
 		subMenuFilter.setHeaderTitle(res.getString(R.string.caches_filter_title));
-		subMenuFilter.add(0, 21, 0, res.getString(R.string.caches_filter_type));
-		subMenuFilter.add(0, 22, 0, res.getString(R.string.caches_filter_size));
-		subMenuFilter.add(0, 23, 0, res.getString(R.string.caches_filter_track));
-		subMenuFilter.add(0, 24, 0, res.getString(R.string.caches_filter_clear));
+		subMenuFilter.add(0, SUBMENU_FILTER_TYPE, 0, res.getString(R.string.caches_filter_type));
+		subMenuFilter.add(0, SUBMENU_FILTER_SIZE, 0, res.getString(R.string.caches_filter_size));
+		subMenuFilter.add(0, MENU_FILTER_TRACKABLES, 0, res.getString(R.string.caches_filter_track));
+		subMenuFilter.add(0, MENU_FILTER_CLEAR, 0, res.getString(R.string.caches_filter_clear));
 
 		SubMenu subMenuSort = menu.addSubMenu(0, SUBMENU_SORT, 0, res.getString(R.string.caches_sort)).setIcon(android.R.drawable.ic_menu_sort_alphabetically);
 		subMenuSort.setHeaderTitle(res.getString(R.string.caches_sort_title));
@@ -781,7 +810,7 @@ public class cgeocaches extends ListActivity {
 			menu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.caches_store_offline)).setIcon(android.R.drawable.ic_menu_set_as); // download details for all caches
 		}
 
-		CacheListAppFactory.addMenuItems(menu, activity, res);
+		navigationMenu = CacheListAppFactory.addMenuItems(menu, activity, res);
 
 		if (type.equals("offline")) {
 			SubMenu subMenu = menu.addSubMenu(0, SUBMENU_MANAGE_LISTS, 0, res.getString(R.string.list_menu)).setIcon(android.R.drawable.ic_menu_more);
@@ -831,25 +860,24 @@ public class cgeocaches extends ListActivity {
 			                                   SUBMENU_MANAGE_OFFLINE,
 			                                   SUBMENU_MANAGE_HISTORY,
 			                                   SUBMENU_SHOW_MAP,
-//			                                   MENU_MAP,
 			                                   SUBMENU_SORT,
 			                                   SUBMENU_FILTER,
 			                                   MENU_REFRESH_STORED};
 
 			boolean menuEnabled = cacheList != null && cacheList.size() > 0;
-		    for (int entryId : hideIfEmptyList)
+		    for (int itemId : hideIfEmptyList)
 		    {
-		        MenuItem item = menu.findItem(entryId);
+		        MenuItem item = menu.findItem(itemId);
 		        if (null != item)
 		        {
 		            item.setEnabled(menuEnabled);
 		        }
 		    }
+		    if (navigationMenu != null) {
+		    	navigationMenu.setEnabled(menuEnabled);
+		    }
 
-
-			MenuItem item;
-
-			item = menu.findItem(MENU_DROP_LIST);
+			MenuItem item = menu.findItem(MENU_DROP_LIST);
 			if (item != null) {
 				item.setVisible(listId != 1);
 			}
@@ -944,18 +972,18 @@ public class cgeocaches extends ListActivity {
 			case MENU_SORT_INVENTORY:
 				setComparator(item, new InventoryComparator());
 				return false;
-			case 21:
+			case SUBMENU_FILTER_TYPE:
 				selectedFilter = res.getString(R.string.caches_filter_type);
 				openContextMenu(getListView());
 				return false;
-			case 22:
+			case SUBMENU_FILTER_SIZE:
 				selectedFilter = res.getString(R.string.caches_filter_size);
 				openContextMenu(getListView());
 				return false;
-			case 23:
+			case MENU_FILTER_TRACKABLES:
 				adapter.setFilter(new cgFilterByTrackables());
 				return false;
-			case 24:
+			case MENU_FILTER_CLEAR:
 				if (adapter != null) {
 					adapter.setFilter(null);
 				}
@@ -1002,32 +1030,35 @@ public class cgeocaches extends ListActivity {
 
 			if (selectedFilter.equals(res.getString(R.string.caches_filter_size))) {
 				menu.setHeaderTitle(res.getString(R.string.caches_filter_size_title));
-				menu.add(0,  8, 0, res.getString(R.string.caches_filter_size_micro));
-				menu.add(0,  9, 0, res.getString(R.string.caches_filter_size_small));
-				menu.add(0, 10, 0, res.getString(R.string.caches_filter_size_regular));
-				menu.add(0, 11, 0, res.getString(R.string.caches_filter_size_large));
-				menu.add(0, 12, 0, res.getString(R.string.caches_filter_size_other));
-				menu.add(0, 13, 0, res.getString(R.string.caches_filter_size_virtual));
-				menu.add(0, 14, 0, res.getString(R.string.caches_filter_size_notchosen));
+				menu.add(0, MENU_FILTER_SIZE_MICRO, 0, res.getString(R.string.caches_filter_size_micro));
+				menu.add(0, MENU_FILTER_SIZE_SMALL, 0, res.getString(R.string.caches_filter_size_small));
+				menu.add(0, MENU_FILTER_SIZE_REGULAR, 0, res.getString(R.string.caches_filter_size_regular));
+				menu.add(0, MENU_FILTER_SIZE_LARGE, 0, res.getString(R.string.caches_filter_size_large));
+				menu.add(0, MENU_FILTER_SIZE_OTHER, 0, res.getString(R.string.caches_filter_size_other));
+				menu.add(0, MENU_FILTER_SIZE_VIRTUAL, 0, res.getString(R.string.caches_filter_size_virtual));
+				menu.add(0, MENU_FILTER_SIZE_NOT_CHOSEN, 0, res.getString(R.string.caches_filter_size_notchosen));
 			} else if (selectedFilter.equals(res.getString(R.string.caches_filter_type))) {
 				menu.setHeaderTitle(res.getString(R.string.caches_filter_type_title));
-				menu.add(0,  15, 0, res.getString(R.string.caches_filter_type_traditional));
-				menu.add(0,  16, 0, res.getString(R.string.caches_filter_type_multi));
-				menu.add(0,  17, 0, res.getString(R.string.caches_filter_type_mystery));
-				menu.add(0,  18, 0, res.getString(R.string.caches_filter_type_letterbox));
-				menu.add(0,  19, 0, res.getString(R.string.caches_filter_type_event));
-				menu.add(0,  20, 0, res.getString(R.string.caches_filter_type_mega));
-				menu.add(0,  21, 0, res.getString(R.string.caches_filter_type_earth));
-				menu.add(0,  22, 0, res.getString(R.string.caches_filter_type_cito));
-				menu.add(0,  23, 0, res.getString(R.string.caches_filter_type_webcam));
-				menu.add(0,  24, 0, res.getString(R.string.caches_filter_type_virtual));
-				menu.add(0,  25, 0, res.getString(R.string.caches_filter_type_wherigo));
-				menu.add(0,  26, 0, res.getString(R.string.caches_filter_type_lostfound));
-				menu.add(0,  27, 0, res.getString(R.string.caches_filter_type_ape));
-				menu.add(0,  28, 0, res.getString(R.string.caches_filter_type_gchq));
-				menu.add(0,  29, 0, res.getString(R.string.caches_filter_type_gps));
+				menu.add(0,  MENU_FILTER_TYPE_TRADITIONAL, 0, res.getString(R.string.caches_filter_type_traditional));
+				menu.add(0,  MENU_FILTER_TYPE_MULTI, 0, res.getString(R.string.caches_filter_type_multi));
+				menu.add(0,  MENU_FILTER_TYPE_MYSTERY, 0, res.getString(R.string.caches_filter_type_mystery));
+				menu.add(0,  MENU_FILTER_TYPE_LETTERBOX, 0, res.getString(R.string.caches_filter_type_letterbox));
+				menu.add(0,  MENU_FILTER_TYPE_EVENT, 0, res.getString(R.string.caches_filter_type_event));
+				menu.add(0,  MENU_FILTER_TYPE_MEGA, 0, res.getString(R.string.caches_filter_type_mega));
+				menu.add(0,  MENU_FILTER_TYPE_EARTH, 0, res.getString(R.string.caches_filter_type_earth));
+				menu.add(0,  MENU_FILTER_TYPE_CITO, 0, res.getString(R.string.caches_filter_type_cito));
+				menu.add(0,  MENU_FILTER_TYPE_WEBCAM, 0, res.getString(R.string.caches_filter_type_webcam));
+				menu.add(0,  MENU_FILTER_TYPE_VIRTUAL, 0, res.getString(R.string.caches_filter_type_virtual));
+				menu.add(0,  MENU_FILTER_TYPE_WHERIGO, 0, res.getString(R.string.caches_filter_type_wherigo));
+				menu.add(0,  MENU_FILTER_TYPE_LOSTFOUND, 0, res.getString(R.string.caches_filter_type_lostfound));
+				menu.add(0,  MENU_FILTER_TYPE_APE, 0, res.getString(R.string.caches_filter_type_ape));
+				menu.add(0,  MENU_FILTER_TYPE_GCHQ, 0, res.getString(R.string.caches_filter_type_gchq));
+				menu.add(0,  MENU_FILTER_TYPE_GPS, 0, res.getString(R.string.caches_filter_type_gps));
 			}
 		} else{
+			if (adapterInfo.position >= adapter.getCount()) {
+				return;
+			}
 			final cgCache cache = adapter.getItem(adapterInfo.position);
 
 			if (cache.name != null && cache.name.length() > 0) {
@@ -1037,11 +1068,11 @@ public class cgeocaches extends ListActivity {
 			}
 
 			if (cache.latitude != null && cache.longitude != null) {
-				menu.add(0, 1, 0, res.getString(R.string.cache_menu_compass));
+				menu.add(0, MENU_COMPASS, 0, res.getString(R.string.cache_menu_compass));
 				SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
 				NavigationAppFactory.addMenuItems(subMenu, activity, res);
-				menu.add(0, 6, 0, res.getString(R.string.cache_menu_visit));
-				menu.add(0, 7, 0, res.getString(R.string.cache_menu_details));
+				menu.add(0, MENU_LOG_VISIT, 0, res.getString(R.string.cache_menu_visit));
+				menu.add(0, MENU_CACHE_DETAILS, 0, res.getString(R.string.cache_menu_details));
 			}
 			if (cache.reason >= 1) {
 				menu.add(0, MENU_DROP_CACHE, 0, res.getString(R.string.cache_offline_drop));
@@ -1091,7 +1122,7 @@ public class cgeocaches extends ListActivity {
 			cache = null;
 		}
 
-		if (id == 1) { // compass
+		if (id == MENU_COMPASS) {
 			Intent navigateIntent = new Intent(activity, cgeonavigate.class);
 			navigateIntent.putExtra("latitude", cache.latitude);
 			navigateIntent.putExtra("longitude", cache.longitude);
@@ -1101,7 +1132,7 @@ public class cgeocaches extends ListActivity {
 			activity.startActivity(navigateIntent);
 
 			return true;
-		} else if (id == 6) { // log visit
+		} else if (id == MENU_LOG_VISIT) {
 			if (cache.cacheid == null || cache.cacheid.length() == 0) {
 				warning.showToast(res.getString(R.string.err_cannot_log_visit));
 				return true;
@@ -1115,7 +1146,7 @@ public class cgeocaches extends ListActivity {
 			activity.startActivity(logVisitIntent);
 
 			return true;
-		} else if (id == 7) { // cache details
+		} else if (id == MENU_CACHE_DETAILS) {
 			Intent cachesIntent = new Intent(activity, cgeodetail.class);
 			cachesIntent.putExtra("geocode", cache.geocode.toUpperCase());
 			cachesIntent.putExtra("name", cache.name);
@@ -1123,56 +1154,56 @@ public class cgeocaches extends ListActivity {
 
 			return true;
 		}
-		else if (id == 8) {
+		else if (id == MENU_FILTER_SIZE_MICRO) {
 			return setFilter(new cgFilterBySize(
 					res.getString(R.string.caches_filter_size_micro)));
-		} else if (id == 9) {
+		} else if (id == MENU_FILTER_SIZE_SMALL) {
 			return setFilter(new cgFilterBySize(
 					res.getString(R.string.caches_filter_size_small)));
-		} else if (id == 10) {
+		} else if (id == MENU_FILTER_SIZE_REGULAR) {
 			return setFilter(new cgFilterBySize(
 					res.getString(R.string.caches_filter_size_regular)));
-		} else if (id == 11) {
+		} else if (id == MENU_FILTER_SIZE_LARGE) {
 			return setFilter(new cgFilterBySize(
 					res.getString(R.string.caches_filter_size_large)));
-		} else if (id == 12) {
+		} else if (id == MENU_FILTER_SIZE_OTHER) {
 			return setFilter(new cgFilterBySize(
 					res.getString(R.string.caches_filter_size_other)));
-		} else if (id == 13) {
+		} else if (id == MENU_FILTER_SIZE_VIRTUAL) {
 			return setFilter(new cgFilterBySize(
 					res.getString(R.string.caches_filter_size_virtual)));
-		} else if (id == 14) {
+		} else if (id == MENU_FILTER_SIZE_NOT_CHOSEN) {
 			return setFilter(new cgFilterBySize(
 					res.getString(R.string.caches_filter_size_notchosen)));
-		} else if (id == 15) {
+		} else if (id == MENU_FILTER_TYPE_TRADITIONAL) {
 			return setFilter(new cgFilterByType("traditional"));
-		} else if (id == 16) {
+		} else if (id == MENU_FILTER_TYPE_MULTI) {
 			return setFilter(new cgFilterByType("multi"));
-		} else if (id == 17) {
+		} else if (id == MENU_FILTER_TYPE_MYSTERY) {
 			return setFilter(new cgFilterByType("mystery"));
-		} else if (id == 18) {
+		} else if (id == MENU_FILTER_TYPE_LETTERBOX) {
 			return setFilter(new cgFilterByType("letterbox"));
-		} else if (id == 19) {
+		} else if (id == MENU_FILTER_TYPE_EVENT) {
 			return setFilter(new cgFilterByType("event"));
-		} else if (id == 20) {
+		} else if (id == MENU_FILTER_TYPE_MEGA) {
 			return setFilter(new cgFilterByType("mega"));
-		} else if (id == 21) {
+		} else if (id == MENU_FILTER_TYPE_EARTH) {
 			return setFilter(new cgFilterByType("earth"));
-		} else if (id == 22) {
+		} else if (id == MENU_FILTER_TYPE_CITO) {
 			return setFilter(new cgFilterByType("cito"));
-		} else if (id == 23) {
+		} else if (id == MENU_FILTER_TYPE_WEBCAM) {
 			return setFilter(new cgFilterByType("webcam"));
-		} else if (id == 24) {
+		} else if (id == MENU_FILTER_TYPE_VIRTUAL) {
 			return setFilter(new cgFilterByType("virtual"));
-		} else if (id == 25) {
+		} else if (id == MENU_FILTER_TYPE_WHERIGO) {
 			return setFilter(new cgFilterByType("wherigo"));
-		} else if (id == 26) {
+		} else if (id == MENU_FILTER_TYPE_LOSTFOUND) {
 			return setFilter(new cgFilterByType("lostfound"));
-		} else if (id == 27) {
+		} else if (id == MENU_FILTER_TYPE_APE) {
 			return setFilter(new cgFilterByType("ape"));
-		} else if (id == 28) {
+		} else if (id == MENU_FILTER_TYPE_GCHQ) {
 			return setFilter(new cgFilterByType("gchq"));
-		} else if (id == 29) {
+		} else if (id == MENU_FILTER_TYPE_GPS) {
 			return setFilter(new cgFilterByType("gps"));
 		} else if (id == MENU_DROP_CACHE) {
 			base.dropCache(app, activity, cache, new Handler() {
