@@ -1113,6 +1113,7 @@ public class cgBase {
 		final Pattern patternSpoilersInside = Pattern.compile("[^<]*<a href=\"([^\"]+)\"[^>]*>[^<]*<img[^>]+>[^<]*<span>([^>]+)</span>[^<]*</a>[^<]*<br[^>]*>(([^<]*)(<br[^<]*>)+)?", Pattern.CASE_INSENSITIVE);
 		final Pattern patternInventory = Pattern.compile("<span id=\"ctl00_ContentBody_uxTravelBugList_uxInventoryLabel\">[^\\w]*Inventory[^<]*</span>[^<]*</h3>[^<]*<div class=\"WidgetBody\">([^<]*<ul>(([^<]*<li>[^<]*<a href=\"[^\"]+\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>[^<]+<\\/span>[^<]*<\\/a>[^<]*<\\/li>)+)[^<]*<\\/ul>)?", Pattern.CASE_INSENSITIVE);
 		final Pattern patternInventoryInside = Pattern.compile("[^<]*<li>[^<]*<a href=\"[a-z0-9\\-\\_\\.\\?\\/\\:\\@]*\\/track\\/details\\.aspx\\?guid=([0-9a-z\\-]+)[^\"]*\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>([^<]+)<\\/span>[^<]*<\\/a>[^<]*<\\/li>", Pattern.CASE_INSENSITIVE);
+		final Pattern patternOnWatchlist = Pattern.compile("<img\\s*src=\"\\/images\\/stockholm\\/16x16\\/icon_stop_watchlist.gif\"", Pattern.CASE_INSENSITIVE);
 
 		final cgCacheWrap caches = new cgCacheWrap();
 		final cgCache cache = new cgCache();
@@ -1360,6 +1361,15 @@ public class cgBase {
 		} catch (Exception e) {
 			// failed to parse type
 			Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache type");
+		}
+		
+		// on watchlist
+		try {
+			final Matcher matcher = patternOnWatchlist.matcher(page);
+			cache.onWatchlist = matcher.find();
+		} catch (Exception e) {
+			// failed to parse watchlist state
+			Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse watchlist state");
 		}
 
 		// latitude and logitude
@@ -3948,6 +3958,95 @@ public class cgBase {
 
 		Log.e(cgSettings.tag, "cgeoBase.postLogTrackable: Failed to post log because of unknown error");
 		return 1000;
+	}
+
+    /**
+     * Adds the cache to the watchlist of the user.
+     * 
+     * @param cache     the cache to add
+     * @return          -1: error occured
+     */
+	public int addToWatchlist(cgCache cache) {
+        String page = requestLogged(false, "www.geocaching.com", "/my/watchlist.aspx?w=" + cache.cacheid, 
+                "POST", null, false, false, false);
+
+        if (page == null || page.length() == 0) {
+            Log.e(cgSettings.tag, "cgBase.addToWatchlist: No data from server");
+            return -1;  // error
+        }
+
+        boolean guidOnPage = checkPageForGuid(cache, page);
+        if (guidOnPage) {
+            Log.i(cgSettings.tag, "cgBase.addToWatchlist: cache is on watchlist");
+            cache.onWatchlist = true;
+        } else {
+            Log.e(cgSettings.tag, "cgBase.addToWatchlist: cache is not on watchlist");
+        }
+        return guidOnPage ? 1 : -1; // on watchlist (=added) / else: error
+	}
+
+	/**
+	 * Removes the cache from the watchlist
+	 * 
+	 * @param cache    the cache to remove
+	 * @return         -1: error occured
+	 */
+	public int removeFromWatchlist(cgCache cache) {
+	    String host = "www.geocaching.com";
+	    String path = "/my/watchlist.aspx?ds=1&action=rem&id=" + cache.cacheid;
+	    String method = "POST";
+
+	    String page = requestLogged(false, host, path, method, null, false, false, false);
+
+		if (page == null || page.length() == 0) {
+			Log.e(cgSettings.tag, "cgBase.removeFromWatchlist: No data from server");
+			return -1; // error
+		}
+
+		// removing cache from list needs approval by hitting "Yes" button
+		final HashMap<String, String> params = new HashMap<String, String>();
+		String viewstate1 = findViewstate(page, 1);
+		params.put("__VIEWSTATE", findViewstate(page, 0));
+		if (viewstate1 != null) {
+			params.put("__VIEWSTATE1", viewstate1);
+			params.put("__VIEWSTATEFIELDCOUNT", "2");
+		}
+		params.put("__EVENTTARGET", "");
+		params.put("__EVENTARGUMENT", "");
+		params.put("ctl00$ContentBody$btnYes", "Yes");
+
+		page = request(false, host, path, method, params, false, false, false).getData();
+		boolean guidOnPage = checkPageForGuid(cache, page);
+		if (! guidOnPage) {
+			Log.i(cgSettings.tag, "cgBase.removeFromWatchlist: cache removed from watchlist");
+			cache.onWatchlist = false;
+		} else {
+			Log.e(cgSettings.tag, "cgBase.removeFromWatchlist: cache not removed from watchlist");
+		}
+		return guidOnPage ? -1 : 0; // on watchlist (=error) / not on watchlist
+	}
+
+	/**
+	 * checks if a page contains the guid of a cache
+	 * 
+	 * @param cache  the cache to look for
+	 * @param page   the page to search in
+	 * 
+	 * @return  true: page contains guid of cache, false: otherwise
+	 */
+	private boolean checkPageForGuid(cgCache cache, String page) {
+		// check if the guid of the cache is anywhere in the page
+		if (cache.guid == null  ||  cache.guid.length() == 0)
+			return false;
+		Pattern patternOk = Pattern.compile(cache.guid, Pattern.CASE_INSENSITIVE);
+		Matcher matcherOk = patternOk.matcher(page);
+		if (matcherOk.find()) {
+			Log.i(cgSettings.tag, "cgBase.checkPageForGuid: guid '" + cache.guid + "' found");
+			return true;
+		} else {
+			Log.i(cgSettings.tag, "cgBase.checkPageForGuid: guid '" + cache.guid + "' not found");
+			return false;
+		}
 	}
 
 	final public static HostnameVerifier doNotVerify = new HostnameVerifier() {

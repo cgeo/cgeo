@@ -77,6 +77,40 @@
 							android:text="@string/cache_offline_store" />
 				</RelativeLayout>
 			</LinearLayout>
+            <LinearLayout android:id="@+id/watchlist_box"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"  >
+                <RelativeLayout style="@style/separator_horizontal_layout" >
+                    <View style="@style/separator_horizontal" />
+                    <TextView style="@style/separator_horizontal_headline"
+                            android:text="@string/cache_watchlist" />
+                </RelativeLayout>
+                <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content" >
+                    <TextView android:id="@+id/watchlist_text"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="6dip"
+                            android:layout_marginRight="130dip"
+                            android:layout_alignParentLeft="true"
+                            android:layout_gravity="left"
+                            android:paddingRight="3dip"
+                            android:textSize="14dip"
+                            android:textColor="?text_color" />
+                    <Button style="@style/button_small"
+                            android:id="@+id/add_to_watchlist"
+                            android:visibility="gone"
+                            android:layout_alignParentRight="true"
+                            android:text="@string/cache_watchlist_add" />
+                    <Button style="@style/button_small"
+                            android:id="@+id/remove_from_watchlist"
+                            android:visibility="gone"
+                            android:layout_alignParentRight="true"
+                            android:text="@string/cache_watchlist_remove" />
+                </RelativeLayout>
+            </LinearLayout>
 			<LinearLayout android:id="@+id/attributes_box"
 					android:visibility="gone"
 					android:layout_width="fill_parent"

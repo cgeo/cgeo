@@ -12,8 +12,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map.Entry;
 import java.util.Set;
+import java.util.Map.Entry;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -33,7 +33,7 @@ public class cgData {
 	private cgDbHelper dbHelper = null;
 	private SQLiteDatabase databaseRO = null;
 	private SQLiteDatabase databaseRW = null;
-	private static final int dbVersion = 52;
+	private static final int dbVersion = 53;
 	private static final String dbName = "data";
 	private static final String dbTableCaches = "cg_caches";
 	private static final String dbTableLists = "cg_lists";
@@ -89,7 +89,8 @@ public class cgData {
 			+ "favourite integer not null default 0, "
 			+ "inventorycoins integer default 0, "
 			+ "inventorytags integer default 0, "
-			+ "inventoryunknown integer default 0 "
+			+ "inventoryunknown integer default 0, "
+			+ "onWatchlist integer default 0 "
 			+ "); ";
 	private static final String dbCreateLists = ""
 			+ "create table " + dbTableLists + " ("
@@ -710,6 +711,16 @@ public class cgData {
 							Log.e(cgSettings.tag, "Failed to upgrade to ver. 52", e);
 						}
 					}
+					
+					if (oldVersion < 53) { // upgrade to 53
+						try {
+							db.execSQL("alter table " + dbTableCaches + " add column onWatchlist integer");
+
+							Log.i(cgSettings.tag, "Column onWatchlist added to " + dbTableCaches +".");
+						} catch (Exception e) {
+							Log.e(cgSettings.tag, "Failed to upgrade to ver. 53", e);
+						}
+					}
 				}
 
 				db.setTransactionSuccessful();
@@ -1071,11 +1082,7 @@ public class cgData {
 			values.put("updated", cache.updated);
 		}
 		values.put("reason", cache.reason);
-		if (cache.detailed == true) {
-			values.put("detailed", 1);
-		} else {
-			values.put("detailed", 0);
-		}
+		values.put("detailed", cache.detailed ? 1 : 0);
 		values.put("detailedupdate", cache.detailedUpdate);
 		values.put("visiteddate", cache.visitedDate);
 		values.put("geocode", cache.geocode);
@@ -1083,11 +1090,7 @@ public class cgData {
 		values.put("guid", cache.guid);
 		values.put("type", cache.type);
 		values.put("name", cache.name);
-		if (cache.own == true) {
-			values.put("own", 1);
-		} else {
-			values.put("own", 0);
-		}
+		values.put("own", cache.own ? 1 : 0);
 		values.put("owner", cache.owner);
 		values.put("owner_real", cache.ownerReal);
 		if (cache.hidden == null) {
@@ -1123,32 +1126,13 @@ public class cgData {
 		values.put("rating", cache.rating);
 		values.put("votes", cache.votes);
 		values.put("myvote", cache.myVote);
-		if (cache.disabled == true) {
-			values.put("disabled", 1);
-		} else {
-			values.put("disabled", 0);
-		}
-		if (cache.archived == true) {
-			values.put("archived", 1);
-		} else {
-			values.put("archived", 0);
-		}
-		if (cache.members == true) {
-			values.put("members", 1);
-		} else {
-			values.put("members", 0);
-		}
-		if (cache.found == true) {
-			values.put("found", 1);
-		} else {
-			values.put("found", 0);
-		}
-		if (cache.favourite == true) {
-			values.put("favourite", 1);
-		} else {
-			values.put("favourite", 0);
-		}
+		values.put("disabled", cache.disabled ? 1 : 0);
+		values.put("archived", cache.archived ? 1 : 0);
+		values.put("members", cache.members ? 1 : 0);
+		values.put("found", cache.found ? 1 : 0);
+		values.put("favourite", cache.favourite ? 1 : 0);
 		values.put("inventoryunknown", cache.inventoryItems);
+		values.put("onWatchlist", cache.onWatchlist ? 1 : 0);
 
 		boolean status = false;
 		boolean statusOk = true;
@@ -1746,7 +1730,7 @@ public class cgData {
 						"_id", "updated", "reason", "detailed", "detailedupdate", "visiteddate", "geocode", "cacheid", "guid", "type", "name", "own", "owner", "owner_real", "hidden", "hint", "size",
 						"difficulty", "distance", "direction", "terrain", "latlon", "latitude_string", "longitude_string", "location", "latitude", "longitude", "elevation", "shortdesc",
 						"description", "favourite_cnt", "rating", "votes", "myvote", "disabled", "archived", "members", "found", "favourite", "inventorycoins", "inventorytags",
-						"inventoryunknown"
+						"inventoryunknown", "onWatchlist"
 					},
 					where.toString(),
 					null,
@@ -1766,12 +1750,7 @@ public class cgData {
 
 						cache.updated = (long) cursor.getLong(cursor.getColumnIndex("updated"));
 						cache.reason = (int) cursor.getInt(cursor.getColumnIndex("reason"));
-						index = cursor.getColumnIndex("detailed");
-						if ((int) cursor.getInt(index) == 1) {
-							cache.detailed = true;
-						} else {
-							cache.detailed = false;
-						}
+						cache.detailed = cursor.getInt(cursor.getColumnIndex("detailed")) == 1;
 						cache.detailedUpdate = (Long) cursor.getLong(cursor.getColumnIndex("detailedupdate"));
 						cache.visitedDate = (Long) cursor.getLong(cursor.getColumnIndex("visiteddate"));
 						cache.geocode = (String) cursor.getString(cursor.getColumnIndex("geocode"));
@@ -1779,12 +1758,7 @@ public class cgData {
 						cache.guid = (String) cursor.getString(cursor.getColumnIndex("guid"));
 						cache.type = (String) cursor.getString(cursor.getColumnIndex("type"));
 						cache.name = (String) cursor.getString(cursor.getColumnIndex("name"));
-						index = cursor.getColumnIndex("own");
-						if ((int) cursor.getInt(index) == 1) {
-							cache.own = true;
-						} else {
-							cache.own = false;
-						}
+						cache.own = cursor.getInt(cursor.getColumnIndex("own")) == 1;
 						cache.owner = (String) cursor.getString(cursor.getColumnIndex("owner"));
 						cache.ownerReal = (String) cursor.getString(cursor.getColumnIndex("owner_real"));
 						cache.hidden = new Date((long) cursor.getLong(cursor.getColumnIndex("hidden")));
@@ -1832,37 +1806,13 @@ public class cgData {
 						cache.rating = (Float) cursor.getFloat(cursor.getColumnIndex("rating"));
 						cache.votes = (Integer) cursor.getInt(cursor.getColumnIndex("votes"));
 						cache.myVote = (Float) cursor.getFloat(cursor.getColumnIndex("myvote"));
-						index = cursor.getColumnIndex("disabled");
-						if ((int) cursor.getLong(index) == 1) {
-							cache.disabled = true;
-						} else {
-							cache.disabled = false;
-						}
-						index = cursor.getColumnIndex("archived");
-						if ((int) cursor.getLong(index) == 1) {
-							cache.archived = true;
-						} else {
-							cache.archived = false;
-						}
-						index = cursor.getColumnIndex("members");
-						if ((int) cursor.getLong(index) == 1) {
-							cache.members = true;
-						} else {
-							cache.members = false;
-						}
-						index = cursor.getColumnIndex("found");
-						if ((int) cursor.getLong(index) == 1) {
-							cache.found = true;
-						} else {
-							cache.found = false;
-						}
-						index = cursor.getColumnIndex("favourite");
-						if ((int) cursor.getLong(index) == 1) {
-							cache.favourite = true;
-						} else {
-							cache.favourite = false;
-						}
+                        cache.disabled = cursor.getLong(cursor.getColumnIndex("disabled")) == 1l;
+                        cache.archived = cursor.getLong(cursor.getColumnIndex("archived")) == 1l;
+                        cache.members = cursor.getLong(cursor.getColumnIndex("members")) == 1l;
+                        cache.found = cursor.getLong(cursor.getColumnIndex("found")) == 1l;
+                        cache.favourite = cursor.getLong(cursor.getColumnIndex("favourite")) == 1l;
 						cache.inventoryItems = (Integer) cursor.getInt(cursor.getColumnIndex("inventoryunknown"));
+						cache.onWatchlist = cursor.getLong(cursor.getColumnIndex("onWatchlist")) == 1l;
 
 						if (loadA == true) {
 							ArrayList<String> attributes = loadAttributes(cache.geocode);
@@ -1874,7 +1824,7 @@ public class cgData {
 								cache.attributes.addAll(attributes);
 							}
 						}
-
+						
 						if (loadW == true) {
 							ArrayList<cgWaypoint> waypoints = loadWaypoints(cache.geocode);
 							if (waypoints != null && waypoints.isEmpty() == false) {

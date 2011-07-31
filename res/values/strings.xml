@@ -125,6 +125,8 @@
   <string name="err_detail_still_removing">Still removing this cache.</string>
   <string name="err_detail_still_saving">Still saving this cache.</string>
   <string name="err_detail_still_refreshing">Still reloading this cache.</string>
+  <string name="err_watchlist_still_managing">Still managing your watchlist.</string>
+  <string name="err_watchlist_failed">Changing your watchlist failed.</string>
   <string name="err_radar_title">Radar isn\'t installed.</string>
   <string name="err_radar_message">This function requires Radar application. Should it be installed?</string>
   <string name="err_radar_market">c:geo can\'t start Android Market to search for Radar application.</string>
@@ -461,6 +463,11 @@
   <string name="cache_log_offline">Offline log</string>
   <string name="cache_description">Description</string>
   <string name="cache_description_long">Long description</string>
+  <string name="cache_watchlist">Watchlist</string>
+  <string name="cache_watchlist_on">This cache is on your watchlist.</string>
+  <string name="cache_watchlist_not_on">This cache is not on your watchlist.</string>
+  <string name="cache_watchlist_add">Add to watchlist</string>
+  <string name="cache_watchlist_remove">Remove from watchlist</string>
   <string name="cache_waypoints">Waypoints</string>
   <string name="cache_waypoints_add">Add waypoint</string>
   <string name="cache_hint">Hint</string>
@@ -473,6 +480,10 @@
   <string name="cache_dialog_offline_drop_message">Removing cache from device memory...</string>
   <string name="cache_dialog_refresh_title">Refresh</string>
   <string name="cache_dialog_refresh_message">Reloading cache details...</string>
+  <string name="cache_dialog_watchlist_add_title">Watchlist</string>
+  <string name="cache_dialog_watchlist_add_message">Adding cache to your watchlist...</string>
+  <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
+  <string name="cache_dialog_watchlist_remove_message">Removing cache from your watchlist...</string>
   <string name="cache_menu_navigate">Navigate</string>
   <string name="cache_menu_compass">Compass</string>
   <string name="cache_menu_tbt">Turn-by-turn</string>
