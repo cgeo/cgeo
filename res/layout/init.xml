@@ -180,6 +180,29 @@
 						android:textSize="14dip"
 						android:text="@string/init_signature_help_button" />
 			</LinearLayout>
+            <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dip"
+                    android:orientation="horizontal"
+                    android:padding="3dip" >
+                <CheckBox android:id="@+id/sigautoinsert"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_gravity="left"
+                        android:padding="1px"
+                        android:gravity="center" />
+                <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="left"
+                        android:paddingRight="3dip"
+                        android:textSize="14dip"
+                        android:textColor="?text_color"
+                        android:text="@string/init_sigautoinsert" />
+            </LinearLayout>
 <!-- ** -->
 			<RelativeLayout style="@style/separator_horizontal_layout" >
 				<View style="@style/separator_horizontal" />
@@ -322,7 +345,7 @@
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal" >
-                    <CheckBox android:id="@+id/autovisit"
+                    <CheckBox android:id="@+id/trackautovisit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"
@@ -337,7 +360,7 @@
                             android:paddingRight="3dip"
                             android:textSize="14dip"
                             android:textColor="?text_color"
-                            android:text="@string/init_autovisit" />
+                            android:text="@string/init_trackautovisit" />
                 </LinearLayout>
 				<LinearLayout
 						android:layout_width="fill_parent"
