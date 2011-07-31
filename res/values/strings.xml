@@ -411,7 +411,8 @@
   <string name="init_mapsources_description">Here you can select the source for your maps. As an alternative to Google maps various OpenStreetMap styles are available and even off line map files (see http://code.google.com/p/mapsforge/ for details).</string> <!-- since: 2.26 RC3 -->
   <string name="init_mapsource_select">Select map source</string>
   <string name="init_select_mapfile">...</string>
-  <string name="init_autovisit">Set trackables automatically to \"visit\"</string>
+  <string name="init_trackautovisit">Set trackables automatically to \"visit\"</string>
+  <string name="init_sigautoinsert">Insert signature automatically</string>
 
   <!-- map sources -->
   <string-array name="map_sources">
