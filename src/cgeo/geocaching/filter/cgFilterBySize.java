@@ -8,10 +8,10 @@ public class cgFilterBySize extends cgFilter {
 	public cgFilterBySize(String size){
 		this.size = size;
 	}
-	
+
 	@Override
 	boolean applyFilter(cgCache cache) {
-		return cache.size.equals(size);
+		return size.equals(cache.size);
 	}
 
 }

@@ -122,7 +122,7 @@ public class cgeovisit extends cgLogForm {
 
 					((TextView) inventoryItem.findViewById(R.id.trackcode)).setText(tb.trackCode);
 					((TextView) inventoryItem.findViewById(R.id.name)).setText(tb.name);
-					((TextView) inventoryItem.findViewById(R.id.action)).setText(cgBase.logTypesTrackable.get(0));
+					((TextView) inventoryItem.findViewById(R.id.action)).setText(cgBase.logTypesTrackable.get(settings.trackableAutovisit ? 1 : 0));
 
 					inventoryItem.setId(tb.id);
 					final String tbCode = tb.trackCode;
@@ -144,6 +144,12 @@ public class cgeovisit extends cgLogForm {
 					});
 
 					inventoryView.addView(inventoryItem);
+					
+					if (settings.trackableAutovisit)
+                    {
+					    tb.action = 1;
+					    tbChanged = true;
+                    }
 				}
 
 				if (inventoryView.getChildCount() > 0) {
@@ -565,7 +571,10 @@ public class cgeovisit extends cgLogForm {
 				}
 				post.setText(res.getString(R.string.log_post_no_rate));
 			}
-		} else if (settings.getSignature() != null && settings.getSignature().length() > 0 && 0 == ((EditText) findViewById(R.id.log)).getText().length()) {
+		} else if (settings.getSignature() != null
+		        && settings.signatureAutoinsert
+		        && settings.getSignature().length() > 0
+		        && 0 == ((EditText) findViewById(R.id.log)).getText().length()) {
 			addSignature(LOG_SIGNATURE);
 		}
 

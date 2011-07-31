@@ -125,6 +125,8 @@
   <string name="err_detail_still_removing">Still removing this cache.</string>
   <string name="err_detail_still_saving">Still saving this cache.</string>
   <string name="err_detail_still_refreshing">Still reloading this cache.</string>
+  <string name="err_watchlist_still_managing">Still managing your watchlist.</string>
+  <string name="err_watchlist_failed">Changing your watchlist failed.</string>
   <string name="err_radar_title">Radar isn\'t installed.</string>
   <string name="err_radar_message">This function requires Radar application. Should it be installed?</string>
   <string name="err_radar_market">c:geo can\'t start Android Market to search for Radar application.</string>
@@ -187,7 +189,7 @@
   <string name="err_parse_lon">Sorry, c:geo can\'t parse longitude.</string>
   <string name="err_parse_bear">Sorry, c:geo can\'t parse bearing.</string>
   <string name="err_parse_dist">Sorry, c:geo can\'t parse distance.</string>
-  
+
   <string name="err_fieldnotes_export_failed">Export of Field Notes failed.</string>
 
   <string name="warn_save_nothing">There is nothing to be saved.</string>
@@ -212,7 +214,7 @@
   <string name="info_log_saved">c:geo successfully saved log.</string>
   <string name="info_log_cleared">Log was cleared.</string>
   <string name="info_log_type_changed">Type of log has been changed!</string>
-  
+
   <string name="info_fieldnotes_exported_to">Field Notes exported to</string>
 
   <!-- location service -->
@@ -409,6 +411,8 @@
   <string name="init_mapsources_description">Here you can select the source for your maps. As an alternative to Google maps various OpenStreetMap styles are available and even off line map files (see http://code.google.com/p/mapsforge/ for details).</string> <!-- since: 2.26 RC3 -->
   <string name="init_mapsource_select">Select map source</string>
   <string name="init_select_mapfile">...</string>
+  <string name="init_trackautovisit">Set trackables automatically to \"visit\"</string>
+  <string name="init_sigautoinsert">Insert signature automatically</string>
 
   <!-- map sources -->
   <string-array name="map_sources">
@@ -461,6 +465,11 @@
   <string name="cache_log_offline">Offline log</string>
   <string name="cache_description">Description</string>
   <string name="cache_description_long">Long description</string>
+  <string name="cache_watchlist">Watchlist</string>
+  <string name="cache_watchlist_on">This cache is on your watchlist.</string>
+  <string name="cache_watchlist_not_on">This cache is not on your watchlist.</string>
+  <string name="cache_watchlist_add">Add to watchlist</string>
+  <string name="cache_watchlist_remove">Remove from watchlist</string>
   <string name="cache_waypoints">Waypoints</string>
   <string name="cache_waypoints_add">Add waypoint</string>
   <string name="cache_hint">Hint</string>
@@ -473,6 +482,10 @@
   <string name="cache_dialog_offline_drop_message">Removing cache from device memory...</string>
   <string name="cache_dialog_refresh_title">Refresh</string>
   <string name="cache_dialog_refresh_message">Reloading cache details...</string>
+  <string name="cache_dialog_watchlist_add_title">Watchlist</string>
+  <string name="cache_dialog_watchlist_add_message">Adding cache to your watchlist...</string>
+  <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
+  <string name="cache_dialog_watchlist_remove_message">Removing cache from your watchlist...</string>
   <string name="cache_menu_navigate">Navigate</string>
   <string name="cache_menu_compass">Compass</string>
   <string name="cache_menu_tbt">Turn-by-turn</string>
@@ -492,6 +505,8 @@
   <string name="cache_menu_details">Details</string>
   <string name="cache_menu_share">Share cache</string>
   <string name="cache_menu_move_list">Move to other list</string>
+  <string name="cache_menu_gcc">GCC</string>
+  <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Saved log</string>
   <string name="cache_status_found">Found</string>

@@ -49,6 +49,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import cgeo.geocaching.apps.cache.GeneralAppsFactory;
+import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
@@ -83,6 +85,8 @@ public class cgeodetail extends Activity {
 	private ProgressDialog storeDialog = null;
 	private ProgressDialog refreshDialog = null;
 	private ProgressDialog dropDialog = null;
+	private ProgressDialog watchlistDialog = null; // progress dialog for watchlist add/remove
+	private Thread watchlistThread = null; // thread for watchlist add/remove
 	private HashMap<Integer, String> calendars = new HashMap<Integer, String>();
 	private Handler storeCacheHandler = new Handler() {
 		@Override
@@ -229,6 +233,41 @@ public class cgeodetail extends Activity {
 		}
 	};
 
+	/**
+	 * shows/hides buttons, sets text in watchlist box
+	 */
+	private void updateWatchlistBox() {
+		Button buttonAdd = (Button) findViewById(R.id.add_to_watchlist);
+		Button buttonRemove = (Button) findViewById(R.id.remove_from_watchlist);
+		TextView text = (TextView) findViewById(R.id.watchlist_text);
+
+		if (cache.onWatchlist) {
+			buttonAdd.setVisibility(View.GONE);
+			buttonRemove.setVisibility(View.VISIBLE);
+			text.setText(R.string.cache_watchlist_on);
+		} else {
+			buttonAdd.setVisibility(View.VISIBLE);
+			buttonRemove.setVisibility(View.GONE);
+			text.setText(R.string.cache_watchlist_not_on);
+		}
+	}
+
+	/**
+	 * Handler, called when watchlist add or remove is done
+	 */
+	private Handler WatchlistHandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			watchlistThread = null;
+			if (watchlistDialog != null)
+				watchlistDialog.dismiss();
+			if (msg.what == -1) {
+				warning.showToast(res.getString(R.string.err_watchlist_failed));
+			} else {
+				updateWatchlistBox();
+			}
+		}
+	};
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -478,29 +517,15 @@ public class cgeodetail extends Activity {
 	}
 
 	private void addNavigationMenuItems(final Menu menu) {
-		menu.add(0, 8, 0, res.getString(R.string.cache_menu_radar)); // radar
-		if (cache != null && cache.reason >= 1 && settings.storeOfflineMaps == 1) {
-			menu.add(1, 6, 0, res.getString(R.string.cache_menu_map_static)); // static maps
-		}
-		menu.add(0, 1, 0, res.getString(R.string.cache_menu_map)); // c:geo map
-		if (base.isLocus(activity)) {
-			menu.add(0, 20, 0, res.getString(R.string.cache_menu_locus)); // ext.: locus
-		}
-		if (base.isRmaps(activity)) {
-			menu.add(0, 21, 0, res.getString(R.string.cache_menu_rmaps)); // ext.: rmaps
-		}
-		menu.add(0, 23, 0, res.getString(R.string.cache_menu_map_ext)); // ext.: other
-		menu.add(0, 9, 0, res.getString(R.string.cache_menu_tbt)); // turn-by-turn
+		NavigationAppFactory.addMenuItems(menu, activity, res);
+		GeneralAppsFactory.addMenuItems(menu, activity, res, cache);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		final int menuItem = item.getItemId();
 
-		if (menuItem == 1) {
-			showOnMap();
-			return true;
-		} else if (menuItem == 2) {
+		if (menuItem == 2) {
 			navigateTo();
 			return true;
 		} else if (menuItem == 3) {
@@ -509,22 +534,8 @@ public class cgeodetail extends Activity {
 		} else if (menuItem == 5) {
 			showSpoilers();
 			return true;
-		} else if (menuItem == 6) {
-			showSmaps();
-			return true;
 		} else if (menuItem == 7) {
 			activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/seek/cache_details.aspx?wp=" + cache.geocode)));
-			return true;
-		} else if (menuItem == 8) {
-			radarTo();
-			return true;
-		} else if (menuItem == 9) {
-			if (geo != null) {
-				base.runNavigation(activity, res, settings, warning, tracker, cache.latitude, cache.longitude, geo.latitudeNow, geo.longitudeNow);
-			} else {
-				base.runNavigation(activity, res, settings, warning, tracker, cache.latitude, cache.longitude);
-			}
-
 			return true;
 		} else if (menuItem == 10) {
 			cachesAround();
@@ -535,18 +546,11 @@ public class cgeodetail extends Activity {
 		} else if (menuItem == 12) {
 			shareCache();
 			return true;
-		} else if (menuItem == 20) {
-			base.runExternalMap(cgBase.mapAppLocus, activity, res, warning, tracker, cache); // locus
-			return true;
-		} else if (menuItem == 21) {
-			base.runExternalMap(cgBase.mapAppRmaps, activity, res, warning, tracker, cache); // rmaps
-			return true;
-		} else if (menuItem == 23) {
-			base.runExternalMap(cgBase.mapAppAny, activity, res, warning, tracker, cache); // rmaps
+		}
+		if (NavigationAppFactory.onMenuItemSelected(item, geo, activity, res, warning, tracker, cache, searchId, null, null)) {
 			return true;
 		}
-
-		return false;
+		return GeneralAppsFactory.onMenuItemSelected(item, activity, cache);
 	}
 
 	private void init() {
@@ -636,12 +640,12 @@ public class cgeodetail extends Activity {
 			LinearLayout detailsList = (LinearLayout) findViewById(R.id.details_list);
 			detailsList.removeAllViews();
 
-			// actionbar icon
+			// actionbar icon, default myster<
+			String typeId = "mystery";
 			if (cache.type != null && gcIcons.containsKey(cache.type) == true) { // cache icon
-				((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable) activity.getResources().getDrawable(gcIcons.get(cache.type)), null, null, null);
-			} else { // unknown cache type, "mystery" icon
-				((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable) activity.getResources().getDrawable(gcIcons.get("mystery")), null, null, null);
+				typeId = cache.type;
 			}
+			((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable) activity.getResources().getDrawable(gcIcons.get(typeId)), null, null, null);
 
 			// cache name (full name)
 			itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
@@ -961,6 +965,13 @@ public class cgeodetail extends Activity {
 				});
 			}
 
+			// watchlist
+			Button buttonWatchlistAdd = (Button) findViewById(R.id.add_to_watchlist);
+			Button buttonWatchlistRemove = (Button) findViewById(R.id.remove_from_watchlist);
+			buttonWatchlistAdd.setOnClickListener(new AddToWatchlistClickListener());
+			buttonWatchlistRemove.setOnClickListener(new RemoveFromWatchlistClickListener());
+			updateWatchlistBox();
+
 			// waypoints
 			LinearLayout waypoints = (LinearLayout) findViewById(R.id.waypoints);
 			waypoints.removeAllViews();
@@ -1012,17 +1023,20 @@ public class cgeodetail extends Activity {
 						identification.setText(res.getString(R.string.waypoint_custom));
 					}
 
+					TextView nameView = (TextView) waypointView.findViewById(R.id.name);
 					if (wpt.name.trim().length() == 0) {
-						((TextView) waypointView.findViewById(R.id.name)).setText(base.formatCoordinate(wpt.latitude, "lat", true) + " | " + base.formatCoordinate(wpt.longitude, "lon", true));
+						nameView.setText(base.formatCoordinate(wpt.latitude, "lat", true) + " | " + base.formatCoordinate(wpt.longitude, "lon", true));
 					} else {
 						// avoid HTML parsing
 						if (wpt.name.indexOf('<') >= 0 || wpt.name.indexOf('&') >= 0) {
-							((TextView) waypointView.findViewById(R.id.name)).setText(Html.fromHtml(wpt.name.trim()), TextView.BufferType.SPANNABLE);
+							nameView.setText(Html.fromHtml(wpt.name.trim()), TextView.BufferType.SPANNABLE);
 						}
 						else {
-							((TextView) waypointView.findViewById(R.id.name)).setText(wpt.name.trim());
+							nameView.setText(wpt.name.trim());
 						}
 					}
+					wpt.setIcon(res, base, nameView);
+
 					// avoid HTML parsing
 					if (wpt.note.indexOf('<') >= 0 || wpt.note.indexOf('&') >= 0) {
 						((TextView) waypointView.findViewById(R.id.note)).setText(Html.fromHtml(wpt.note.trim()), TextView.BufferType.SPANNABLE);
@@ -1358,14 +1372,6 @@ public class cgeodetail extends Activity {
 		return coordinates;
 	}
 
-	private void showOnMap() {
-		Intent mapIntent = new Intent(activity, settings.getMapFactory().getMapClass());
-		mapIntent.putExtra("detail", true);
-		mapIntent.putExtra("searchid", searchId);
-
-		activity.startActivity(mapIntent);
-	}
-
 	private void cachesAround() {
 		cgeocaches cachesActivity = new cgeocaches();
 
@@ -1522,46 +1528,6 @@ public class cgeodetail extends Activity {
 		activity.startActivity(navigateIntent);
 	}
 
-	private void radarTo() {
-		try {
-			if (cgBase.isIntentAvailable(activity, "com.google.android.radar.SHOW_RADAR") == true) {
-				Intent radarIntent = new Intent("com.google.android.radar.SHOW_RADAR");
-				radarIntent.putExtra("latitude", new Float(cache.latitude));
-				radarIntent.putExtra("longitude", new Float(cache.longitude));
-				activity.startActivity(radarIntent);
-			} else {
-				AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
-				dialog.setTitle(res.getString(R.string.err_radar_title));
-				dialog.setMessage(res.getString(R.string.err_radar_message));
-				dialog.setCancelable(true);
-				dialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-
-					public void onClick(DialogInterface dialog, int id) {
-						try {
-							activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:com.eclipsim.gpsstatus2")));
-							dialog.cancel();
-						} catch (Exception e) {
-							warning.showToast(res.getString(R.string.err_radar_market));
-							Log.e(cgSettings.tag, "cgeodetail.radarTo.onClick: " + e.toString());
-						}
-					}
-				});
-				dialog.setNegativeButton("no", new DialogInterface.OnClickListener() {
-
-					public void onClick(DialogInterface dialog, int id) {
-						dialog.cancel();
-					}
-				});
-
-				AlertDialog alert = dialog.create();
-				alert.show();
-			}
-		} catch (Exception e) {
-			warning.showToast(res.getString(R.string.err_radar_generic));
-			Log.e(cgSettings.tag, "cgeodetail.radarTo: " + e.toString());
-		}
-	}
-
 	public void shareCache() {
 		if (geocode == null && cache == null) {
 			return;
@@ -1617,16 +1583,6 @@ public class cgeodetail extends Activity {
 		Intent spoilersIntent = new Intent(activity, cgeospoilers.class);
 		spoilersIntent.putExtra("geocode", geocode.toUpperCase());
 		activity.startActivity(spoilersIntent);
-	}
-
-	private void showSmaps() {
-		if (cache == null || cache.reason == 0) {
-			warning.showToast(res.getString(R.string.err_detail_no_map_static));
-		}
-
-		Intent smapsIntent = new Intent(activity, cgeosmaps.class);
-		smapsIntent.putExtra("geocode", geocode.toUpperCase());
-		activity.startActivity(smapsIntent);
 	}
 
 	public class codeHint implements View.OnClickListener {
@@ -1807,6 +1763,74 @@ public class cgeodetail extends Activity {
 			base.dropCache(app, activity, cache, handler);
 		}
 	}
+
+	/**
+	 * Abstract Listener for add / remove buttons for watchlist
+	 */
+    private abstract class AbstractWatchlistClickListener implements View.OnClickListener {
+        public void doExecute(int titleId, int messageId, Thread thread) {
+            if (watchlistDialog != null  &&  watchlistDialog.isShowing() == true) {
+                warning.showToast(res.getString(R.string.err_watchlist_still_managing));
+                return;
+            }
+            watchlistDialog = ProgressDialog.show(activity,
+                    res.getString(titleId), res.getString(messageId), true);
+            watchlistDialog.setCancelable(true);
+
+            if (watchlistThread != null) {
+                watchlistThread.interrupt();
+            }
+
+            watchlistThread = thread;
+            watchlistThread.start();
+        }
+    }
+
+	/**
+	 * Listener for "add to watchlist" button
+	 */
+	private class AddToWatchlistClickListener extends AbstractWatchlistClickListener {
+		public void onClick(View arg0) {
+		    doExecute(R.string.cache_dialog_watchlist_add_title,
+		            R.string.cache_dialog_watchlist_add_message,
+		            new WatchlistAddThread(WatchlistHandler) );
+		}
+	}
+
+	/**
+	 * Listener for "remove from watchlist" button
+	 */
+	private class RemoveFromWatchlistClickListener extends AbstractWatchlistClickListener {
+        public void onClick(View arg0) {
+            doExecute(R.string.cache_dialog_watchlist_remove_title,
+                    R.string.cache_dialog_watchlist_remove_message,
+                    new WatchlistRemoveThread(WatchlistHandler) );
+        }
+	}
+
+	/** Thread to add this cache to the watchlist of the user */
+	private class WatchlistAddThread extends Thread {
+	    private final Handler handler;
+        public WatchlistAddThread(Handler handler) {
+            this.handler = handler;
+        }
+        @Override
+        public void run() {
+            handler.sendEmptyMessage(base.addToWatchlist(cache));
+        }
+	}
+
+    /** Thread to remove this cache from the watchlist of the user */
+    private class WatchlistRemoveThread extends Thread {
+        private final Handler handler;
+        public WatchlistRemoveThread(Handler handler) {
+            this.handler = handler;
+        }
+        @Override
+        public void run() {
+            handler.sendEmptyMessage(base.removeFromWatchlist(cache));
+        }
+    }
 
 	private class addWaypoint implements View.OnClickListener {
 

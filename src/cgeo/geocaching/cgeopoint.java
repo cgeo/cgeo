@@ -9,14 +9,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -37,6 +34,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
@@ -87,7 +85,7 @@ public class cgeopoint extends Activity {
 			return inflater;
 		}
 	}
-	
+
 	private Resources res = null;
 	private cgeoapplication app = null;
 	private cgSettings settings = null;
@@ -105,7 +103,7 @@ public class cgeopoint extends Activity {
 	private DestinationHistoryAdapter destionationHistoryAdapter;
 	private ListView historyListView;
 	private TextView historyFooter;
-	
+
 	private static final int CONTEXT_MENU_DELETE_WAYPOINT = Menu.FIRST;
 
 	@Override
@@ -137,7 +135,7 @@ public class cgeopoint extends Activity {
 		base.sendAnal(activity, tracker, "/point");
 
 		createHistoryView();
-		
+
 		init();
 	}
 
@@ -179,7 +177,7 @@ public class cgeopoint extends Activity {
 					}
 				});
 	}
-	
+
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -300,7 +298,7 @@ public class cgeopoint extends Activity {
 
 		Button buttonCurrent = (Button) findViewById(R.id.current);
 		buttonCurrent.setOnClickListener(new currentListener());
-		
+
 		getDestionationHistoryAdapter().notifyDataSetChanged();
 	}
 
@@ -309,19 +307,10 @@ public class cgeopoint extends Activity {
 		menu.add(0, 2, 0, res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass); // compass
 
 		SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
-		subMenu.add(0, 3, 0, res.getString(R.string.cache_menu_radar)); // radar
-		subMenu.add(0, 1, 0, res.getString(R.string.cache_menu_map)); // c:geo map
-		if (base.isLocus(activity)) {
-			subMenu.add(0, 20, 0, res.getString(R.string.cache_menu_locus)); // ext.: locus
-		}
-		if (base.isRmaps(activity)) {
-			subMenu.add(0, 21, 0, res.getString(R.string.cache_menu_rmaps)); // ext.: rmaps
-		}
-		subMenu.add(0, 23, 0, res.getString(R.string.cache_menu_map_ext)); // ext.: other
-		subMenu.add(0, 4, 0, res.getString(R.string.cache_menu_tbt)); // turn-by-turn
+		NavigationAppFactory.addMenuItems(subMenu, activity, res);
 
 		menu.add(0, 5, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
-		
+
 		// clear history
 		MenuItem clearHistoryItem = menu.add(0, 6, 0, res.getString(R.string.search_clear_history));
 		clearHistoryItem.setIcon(android.R.drawable.ic_menu_delete);
@@ -345,7 +334,7 @@ public class cgeopoint extends Activity {
 				menu.findItem(2).setVisible(false);
 				menu.findItem(5).setVisible(false);
 			}
-			
+
 			menu.findItem(6).setEnabled(!getHistoryOfSearchedLocations().isEmpty());
 		} catch (Exception e) {
 			// nothing
@@ -359,28 +348,14 @@ public class cgeopoint extends Activity {
 		final int menuItem = item.getItemId();
 
 		ArrayList<Double> coords = getDestination();
-		
+
 		if(coords != null && !coords.isEmpty())
 		{
 			addToHistory(coords);
 		}
-		
-		if (menuItem == 1) {
-			showOnMap();
-			return true;
-		} else if (menuItem == 2) {
-			navigateTo();
-			return true;
-		} else if (menuItem == 3) {
-			radarTo();
-			return true;
-		} else if (menuItem == 4) {
-			if (geo != null) {
-				base.runNavigation(activity, res, settings, warning, tracker, coords.get(0), coords.get(1), geo.latitudeNow, geo.longitudeNow);
-			} else {
-				base.runNavigation(activity, res, settings, warning, tracker, coords.get(0), coords.get(1));
-			}
 
+		if (menuItem == 2) {
+			navigateTo();
 			return true;
 		} else if (menuItem == 5) {
 			cachesAround();
@@ -389,18 +364,9 @@ public class cgeopoint extends Activity {
 		else if (menuItem == 6) {
 			clearHistory();
 			return true;
-		}else if (menuItem == 20) {
-			base.runExternalMap(cgBase.mapAppLocus, activity, res, warning, tracker, coords.get(0), coords.get(1)); // locus
-			return true;
-		} else if (menuItem == 21) {
-			base.runExternalMap(cgBase.mapAppRmaps, activity, res, warning, tracker, coords.get(0), coords.get(1)); // rmaps
-			return true;
-		} else if (menuItem == 23) {
-			base.runExternalMap(cgBase.mapAppAny, activity, res, warning, tracker, coords.get(0), coords.get(1)); // rmaps
-			return true;
 		}
 
-		return false;
+		return NavigationAppFactory.onMenuItemSelected(item, geo, activity, res, warning, tracker, null, null, null, coords);
 	}
 
 	private void addToHistory(ArrayList<Double> coords) {
@@ -408,7 +374,7 @@ public class cgeopoint extends Activity {
 		cgDestination loc = new cgDestination();
 		loc.setLatitude(coords.get(0));
 		loc.setLongitude(coords.get(1));
-		
+
 		if(!getHistoryOfSearchedLocations().contains(loc))
 		{
 			loc.setDate(System.currentTimeMillis());
@@ -416,12 +382,12 @@ public class cgeopoint extends Activity {
 
 			// Save location
 			app.saveSearchedDestination(loc);
-			
+
 			// Ensure to remove the footer
 			historyListView.removeFooterView(getEmptyHistoryFooter());
 		}
 	}
-	
+
 	private void removeFromHistory(cgDestination destination) {
 		if (getHistoryOfSearchedLocations().contains(destination)) {
 			getHistoryOfSearchedLocations().remove(destination);
@@ -458,21 +424,6 @@ public class cgeopoint extends Activity {
 		}
 	}
 
-	private void showOnMap() {
-		ArrayList<Double> coords = getDestination();
-
-		if (coords == null || coords.get(0) == null || coords.get(1) == null) {
-			warning.showToast(res.getString(R.string.err_location_unknown));
-		}
-
-		Intent mapIntent = new Intent(activity, settings.getMapFactory().getMapClass());
-
-		mapIntent.putExtra("latitude", coords.get(0));
-		mapIntent.putExtra("longitude", coords.get(1));
-
-		activity.startActivity(mapIntent);
-	}
-	
 	private void navigateTo() {
 		navigateTo(getDestination());
 	}
@@ -491,51 +442,6 @@ public class cgeopoint extends Activity {
 		navigateIntent.putExtra("name", "Some destination");
 
 		activity.startActivity(navigateIntent);
-	}
-	
-	private void radarTo() {
-		List<Double> coords = getDestination();
-		if (coords == null || coords.get(0) == null || coords.get(1) == null) {
-			warning.showToast(res.getString(R.string.err_location_unknown));
-		}
-		
-		try {
-			if (cgBase.isIntentAvailable(activity, "com.google.android.radar.SHOW_RADAR") == true) {
-				Intent radarIntent = new Intent("com.google.android.radar.SHOW_RADAR");
-				radarIntent.putExtra("latitude", new Float(coords.get(0)));
-				radarIntent.putExtra("longitude", new Float(coords.get(1)));
-				activity.startActivity(radarIntent);
-			} else {
-				AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
-				dialog.setTitle(res.getString(R.string.err_radar_title));
-				dialog.setMessage(res.getString(R.string.err_radar_message));
-				dialog.setCancelable(true);
-				dialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-		
-					public void onClick(DialogInterface dialog, int id) {
-						try {
-							activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:com.eclipsim.gpsstatus2")));
-							dialog.cancel();
-						} catch (Exception e) {
-							warning.showToast(res.getString(R.string.err_radar_market));
-							Log.e(cgSettings.tag, "cgeopoint.radarTo.onClick: " + e.toString());
-						}
-					}
-				});
-				dialog.setNegativeButton("no", new DialogInterface.OnClickListener() {
-		
-					public void onClick(DialogInterface dialog, int id) {
-						dialog.cancel();
-					}
-				});
-		
-				AlertDialog alert = dialog.create();
-				alert.show();
-			}
-		} catch (Exception e) {
-			warning.showToast(res.getString(R.string.err_radar_generic));
-			Log.e(cgSettings.tag, "cgeopoint.radarTo: " + e.toString());
-		}
 	}
 
 	private void cachesAround() {

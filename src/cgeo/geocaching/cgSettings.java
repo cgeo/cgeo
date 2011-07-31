@@ -84,8 +84,10 @@ public class cgSettings {
 	public String cacheType = null;
 	public String tokenPublic = null;
 	public String tokenSecret = null;
-        public String webDeviceName = null;
-        public String webDeviceCode = null;
+    public String webDeviceName = null;
+    public String webDeviceCode = null;
+    public boolean trackableAutovisit = false;
+    public boolean signatureAutoinsert = false;
 
 	// usable values
 	public static final String tag = "c:geo";
@@ -153,6 +155,8 @@ public class cgSettings {
 		mapProvider = mapSourceEnum.fromInt(prefs.getInt("mapsource", 0));
 		webDeviceName = prefs.getString("webDeviceName", null);
 		webDeviceCode = prefs.getString("webDeviceCode", null);
+		trackableAutovisit = prefs.getBoolean("trackautovisit", false);
+		signatureAutoinsert = prefs.getBoolean("sigautoinsert", false);
 		
 		setLanguage(useEnglish);
 	}
