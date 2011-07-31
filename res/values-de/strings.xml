@@ -121,6 +121,8 @@
   <string name="err_detail_still_removing">c:geo löscht diesen Cache noch immer.</string>
   <string name="err_detail_still_saving">c:geo speichert diesen Cache noch immer.</string>
   <string name="err_detail_still_refreshing">c:geo versucht noch immer diesen Cache zu aktualiseren.</string>
+  <string name="err_watchlist_still_managing">c:geo versucht noch immer deine Watchlist zu aktualisieren.</string>
+  <string name="err_watchlist_failed">Ändern der Watchlist nicht erfolgreich.</string>
   <string name="err_radar_title">Radar-Anwendung ist nicht installiert.</string>
   <string name="err_radar_message">Diese Funktion benötigt die Radar-Anwendung. Soll diese installiert werden?</string>
   <string name="err_radar_market">c:geo konnte den Android Market nicht starten, um nach der Radar-Anwendung zu suchen.</string>
@@ -287,6 +289,7 @@
   <string name="caches_recaptcha_hint">Text vom Bild</string>
   <string name="caches_recaptcha_continue">Fortfahren</string>
   <string name="caches_exporting_fieldnote">Exportiere als Field Notes...</string>
+  <string name="caches_removing_from_history">Lösche aus Verlauf...</string>
 
   <!-- caches lists -->
   <string name="list_menu">Liste</string>
@@ -407,6 +410,11 @@
   <string name="cache_log_offline">Offline-Log</string>
   <string name="cache_description">Beschreibung</string>
   <string name="cache_description_long">Ausführliche Beschreibung</string>
+  <string name="cache_watchlist">Watchlist</string>
+  <string name="cache_watchlist_on">Dieser Cache ist auf deiner Watchlist.</string>
+  <string name="cache_watchlist_not_on">Dieser Cache ist nicht auf deiner Watchlist.</string>
+  <string name="cache_watchlist_add">Hinzufügen</string>
+  <string name="cache_watchlist_remove">Entfernen</string>
   <string name="cache_waypoints">Wegpunkte</string>
   <string name="cache_waypoints_add">Wegpunkt hinzufügen</string>
   <string name="cache_hint">Hinweis</string>
@@ -419,6 +427,10 @@
   <string name="cache_dialog_offline_drop_message">Lösche Cache vom Gerät...</string>
   <string name="cache_dialog_refresh_title">Aktualisieren</string>
   <string name="cache_dialog_refresh_message">Aktualisieren der Cachedetails...</string>
+  <string name="cache_dialog_watchlist_add_title">Watchlist</string>
+  <string name="cache_dialog_watchlist_add_message">Füge den Cache deiner Watchlist hinzu...</string>
+  <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
+  <string name="cache_dialog_watchlist_remove_message">Entferne den Cache von deiner Watchlist...</string>
   <string name="cache_menu_navigate">Navigieren</string>
   <string name="cache_menu_compass">Kompass</string>
   <string name="cache_menu_tbt">GoogleMaps Navigation</string>
@@ -465,6 +477,8 @@
   <string name="cache_log_types">Logs</string>
   <string name="cache_coordinates_no">Dieser Cache hat keine Koordinaten.</string> <!-- since: 2.26 RC2 -->
   <string name="cache_export_fieldnote">Exportiere als Field Notes</string>
+  <string name="cache_clear_history">Verlauf leeren</string>
+  <string name="cache_remove_from_history">Aus Verlauf löschen</string>
 
   <!-- gpx -->
   <string name="gpx_import_searching_in">Suche nach GPX-Dateien\nin</string>
@@ -502,6 +516,10 @@
   <string name="waypoint_save">Speichern</string>
   <string name="waypoint_loading">Lade Wegpunkt...</string>
   <string name="waypoint_unknown_coordinates">Unbekannte Koordinaten</string>
+  <string name="search_history_empty">Keine Ziele bisher</string>
+  <string name="search_remove_destination">Ziel gelöscht</string>
+  <string name="search_clear_history">History löschen</string>
+  <string name="search_history_cleared">History gelöscht</string>
 
   <!-- visit -->
   <string name="visit_tweet">Diesen Eintrag auf Twitter veröffentlichen</string>
@@ -725,7 +743,7 @@
   <string name="attribute_restrooms_yes">öffentliche Toiletten in der Nähe</string>
   <string name="attribute_restrooms_no">keine öffentliche Toiletten in der Nähe</string>
   <string name="attribute_phone_yes">Telefon in der Nähe</string>
-  <string name="attribute_phone_no">Telefon in der Nähe</string>
+  <string name="attribute_phone_no">kein Telefon in der Nähe</string>
   <string name="attribute_picnic_yes">Picknicktische in der Nähe</string>
   <string name="attribute_picnic_no">keine Picknicktische in der Nähe</string>
   <string name="attribute_camping_yes">Camping möglich</string>
