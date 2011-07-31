@@ -49,6 +49,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import cgeo.geocaching.apps.cache.GeneralAppsFactory;
+import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
@@ -478,29 +480,15 @@ public class cgeodetail extends Activity {
 	}
 
 	private void addNavigationMenuItems(final Menu menu) {
-		menu.add(0, 8, 0, res.getString(R.string.cache_menu_radar)); // radar
-		if (cache != null && cache.reason >= 1 && settings.storeOfflineMaps == 1) {
-			menu.add(1, 6, 0, res.getString(R.string.cache_menu_map_static)); // static maps
-		}
-		menu.add(0, 1, 0, res.getString(R.string.cache_menu_map)); // c:geo map
-		if (base.isLocus(activity)) {
-			menu.add(0, 20, 0, res.getString(R.string.cache_menu_locus)); // ext.: locus
-		}
-		if (base.isRmaps(activity)) {
-			menu.add(0, 21, 0, res.getString(R.string.cache_menu_rmaps)); // ext.: rmaps
-		}
-		menu.add(0, 23, 0, res.getString(R.string.cache_menu_map_ext)); // ext.: other
-		menu.add(0, 9, 0, res.getString(R.string.cache_menu_tbt)); // turn-by-turn
+		NavigationAppFactory.addMenuItems(menu, activity, res);
+		GeneralAppsFactory.addMenuItems(menu, activity, res, cache);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		final int menuItem = item.getItemId();
 
-		if (menuItem == 1) {
-			showOnMap();
-			return true;
-		} else if (menuItem == 2) {
+		if (menuItem == 2) {
 			navigateTo();
 			return true;
 		} else if (menuItem == 3) {
@@ -509,22 +497,8 @@ public class cgeodetail extends Activity {
 		} else if (menuItem == 5) {
 			showSpoilers();
 			return true;
-		} else if (menuItem == 6) {
-			showSmaps();
-			return true;
 		} else if (menuItem == 7) {
 			activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/seek/cache_details.aspx?wp=" + cache.geocode)));
-			return true;
-		} else if (menuItem == 8) {
-			radarTo();
-			return true;
-		} else if (menuItem == 9) {
-			if (geo != null) {
-				base.runNavigation(activity, res, settings, warning, tracker, cache.latitude, cache.longitude, geo.latitudeNow, geo.longitudeNow);
-			} else {
-				base.runNavigation(activity, res, settings, warning, tracker, cache.latitude, cache.longitude);
-			}
-
 			return true;
 		} else if (menuItem == 10) {
 			cachesAround();
@@ -535,18 +509,11 @@ public class cgeodetail extends Activity {
 		} else if (menuItem == 12) {
 			shareCache();
 			return true;
-		} else if (menuItem == 20) {
-			base.runExternalMap(cgBase.mapAppLocus, activity, res, warning, tracker, cache); // locus
-			return true;
-		} else if (menuItem == 21) {
-			base.runExternalMap(cgBase.mapAppRmaps, activity, res, warning, tracker, cache); // rmaps
-			return true;
-		} else if (menuItem == 23) {
-			base.runExternalMap(cgBase.mapAppAny, activity, res, warning, tracker, cache); // rmaps
+		}
+		if (NavigationAppFactory.onMenuItemSelected(item, geo, activity, res, warning, tracker, cache, searchId, null, null)) {
 			return true;
 		}
-
-		return false;
+		return GeneralAppsFactory.onMenuItemSelected(item, activity, cache);
 	}
 
 	private void init() {
@@ -1358,14 +1325,6 @@ public class cgeodetail extends Activity {
 		return coordinates;
 	}
 
-	private void showOnMap() {
-		Intent mapIntent = new Intent(activity, settings.getMapFactory().getMapClass());
-		mapIntent.putExtra("detail", true);
-		mapIntent.putExtra("searchid", searchId);
-
-		activity.startActivity(mapIntent);
-	}
-
 	private void cachesAround() {
 		cgeocaches cachesActivity = new cgeocaches();
 
@@ -1522,46 +1481,6 @@ public class cgeodetail extends Activity {
 		activity.startActivity(navigateIntent);
 	}
 
-	private void radarTo() {
-		try {
-			if (cgBase.isIntentAvailable(activity, "com.google.android.radar.SHOW_RADAR") == true) {
-				Intent radarIntent = new Intent("com.google.android.radar.SHOW_RADAR");
-				radarIntent.putExtra("latitude", new Float(cache.latitude));
-				radarIntent.putExtra("longitude", new Float(cache.longitude));
-				activity.startActivity(radarIntent);
-			} else {
-				AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
-				dialog.setTitle(res.getString(R.string.err_radar_title));
-				dialog.setMessage(res.getString(R.string.err_radar_message));
-				dialog.setCancelable(true);
-				dialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-
-					public void onClick(DialogInterface dialog, int id) {
-						try {
-							activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:com.eclipsim.gpsstatus2")));
-							dialog.cancel();
-						} catch (Exception e) {
-							warning.showToast(res.getString(R.string.err_radar_market));
-							Log.e(cgSettings.tag, "cgeodetail.radarTo.onClick: " + e.toString());
-						}
-					}
-				});
-				dialog.setNegativeButton("no", new DialogInterface.OnClickListener() {
-
-					public void onClick(DialogInterface dialog, int id) {
-						dialog.cancel();
-					}
-				});
-
-				AlertDialog alert = dialog.create();
-				alert.show();
-			}
-		} catch (Exception e) {
-			warning.showToast(res.getString(R.string.err_radar_generic));
-			Log.e(cgSettings.tag, "cgeodetail.radarTo: " + e.toString());
-		}
-	}
-
 	public void shareCache() {
 		if (geocode == null && cache == null) {
 			return;
@@ -1617,16 +1536,6 @@ public class cgeodetail extends Activity {
 		Intent spoilersIntent = new Intent(activity, cgeospoilers.class);
 		spoilersIntent.putExtra("geocode", geocode.toUpperCase());
 		activity.startActivity(spoilersIntent);
-	}
-
-	private void showSmaps() {
-		if (cache == null || cache.reason == 0) {
-			warning.showToast(res.getString(R.string.err_detail_no_map_static));
-		}
-
-		Intent smapsIntent = new Intent(activity, cgeosmaps.class);
-		smapsIntent.putExtra("geocode", geocode.toUpperCase());
-		activity.startActivity(smapsIntent);
 	}
 
 	public class codeHint implements View.OnClickListener {

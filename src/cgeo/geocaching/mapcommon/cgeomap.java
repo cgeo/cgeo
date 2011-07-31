@@ -1207,7 +1207,7 @@ public class cgeomap extends MapBase {
 						coordinates.add(coord);
 
 						item = settings.getMapFactory().getCacheOverlayItem(coord, cacheOne.type);
-						icon = base.getIcon(true, cacheOne.type, cacheOne.own, cacheOne.found, cacheOne.disabled || cacheOne.archived);
+						icon = cgBase.getIcon(true, cacheOne.type, cacheOne.own, cacheOne.found, cacheOne.disabled || cacheOne.archived);
 						pin = null;
 
 						if (iconsCache.containsKey(icon)) {
@@ -1259,7 +1259,7 @@ public class cgeomap extends MapBase {
 									coordinates.add(coord);
 									item = settings.getMapFactory().getCacheOverlayItem(coord, null);
 
-									icon = base.getIcon(false, oneWaypoint.type, false, false, false);
+									icon = cgBase.getIcon(false, oneWaypoint.type, false, false, false);
 									if (iconsCache.containsKey(icon)) {
 										pin = iconsCache.get(icon);
 									} else {
@@ -1415,7 +1415,7 @@ public class cgeomap extends MapBase {
 				coordinates.add(coord);
 				CacheOverlayItemImpl item = settings.getMapFactory().getCacheOverlayItem(coord, null);
 
-				final int icon = base.getIcon(false, waypointTypeIntent, false, false, false);
+				final int icon = cgBase.getIcon(false, waypointTypeIntent, false, false, false);
 				Drawable pin = null;
 				if (iconsCache.containsKey(icon)) {
 					pin = iconsCache.get(icon);

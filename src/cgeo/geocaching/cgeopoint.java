@@ -8,13 +8,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -24,6 +21,7 @@ import android.view.SubMenu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 
 import com.google.android.apps.analytics.GoogleAnalyticsTracker;
 
@@ -158,16 +156,7 @@ public class cgeopoint extends Activity {
 		menu.add(0, 2, 0, res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass); // compass
 
 		SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
-		subMenu.add(0, 3, 0, res.getString(R.string.cache_menu_radar)); // radar
-		subMenu.add(0, 1, 0, res.getString(R.string.cache_menu_map)); // c:geo map
-		if (base.isLocus(activity)) {
-			subMenu.add(0, 20, 0, res.getString(R.string.cache_menu_locus)); // ext.: locus
-		}
-		if (base.isRmaps(activity)) {
-			subMenu.add(0, 21, 0, res.getString(R.string.cache_menu_rmaps)); // ext.: rmaps
-		}
-		subMenu.add(0, 23, 0, res.getString(R.string.cache_menu_map_ext)); // ext.: other
-		subMenu.add(0, 4, 0, res.getString(R.string.cache_menu_tbt)); // turn-by-turn
+		NavigationAppFactory.addMenuItems(subMenu, activity, res);
 
 		menu.add(0, 5, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
 
@@ -209,32 +198,12 @@ public class cgeopoint extends Activity {
 		} else if (menuItem == 2) {
 			navigateTo();
 			return true;
-		} else if (menuItem == 3) {
-			radarTo();
-			return true;
-		} else if (menuItem == 4) {
-			if (geo != null) {
-				base.runNavigation(activity, res, settings, warning, tracker, coords.get(0), coords.get(1), geo.latitudeNow, geo.longitudeNow);
-			} else {
-				base.runNavigation(activity, res, settings, warning, tracker, coords.get(0), coords.get(1));
-			}
-
-			return true;
 		} else if (menuItem == 5) {
 			cachesAround();
 			return true;
-		} else if (menuItem == 20) {
-			base.runExternalMap(cgBase.mapAppLocus, activity, res, warning, tracker, coords.get(0), coords.get(1)); // locus
-			return true;
-		} else if (menuItem == 21) {
-			base.runExternalMap(cgBase.mapAppRmaps, activity, res, warning, tracker, coords.get(0), coords.get(1)); // rmaps
-			return true;
-		} else if (menuItem == 23) {
-			base.runExternalMap(cgBase.mapAppAny, activity, res, warning, tracker, coords.get(0), coords.get(1)); // rmaps
-			return true;
 		}
 
-		return false;
+		return NavigationAppFactory.onMenuItemSelected(item, geo, activity, res, warning, tracker, null, null, null, coords);
 	}
 
 	private void showOnMap() {
@@ -268,52 +237,6 @@ public class cgeopoint extends Activity {
 		navigateIntent.putExtra("name", "Some destination");
 
 		activity.startActivity(navigateIntent);
-	}
-
-	private void radarTo() {
-		ArrayList<Double> coords = getDestination();
-
-		if (coords == null || coords.get(0) == null || coords.get(1) == null) {
-			warning.showToast(res.getString(R.string.err_location_unknown));
-		}
-
-		try {
-			if (cgBase.isIntentAvailable(activity, "com.google.android.radar.SHOW_RADAR") == true) {
-				Intent radarIntent = new Intent("com.google.android.radar.SHOW_RADAR");
-				radarIntent.putExtra("latitude", new Float(coords.get(0)));
-				radarIntent.putExtra("longitude", new Float(coords.get(1)));
-				activity.startActivity(radarIntent);
-			} else {
-				AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
-				dialog.setTitle(res.getString(R.string.err_radar_title));
-				dialog.setMessage(res.getString(R.string.err_radar_message));
-				dialog.setCancelable(true);
-				dialog.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-
-					public void onClick(DialogInterface dialog, int id) {
-						try {
-							activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:com.eclipsim.gpsstatus2")));
-							dialog.cancel();
-						} catch (Exception e) {
-							warning.showToast(res.getString(R.string.err_radar_market));
-							Log.e(cgSettings.tag, "cgeopoint.radarTo.onClick: " + e.toString());
-						}
-					}
-				});
-				dialog.setNegativeButton("no", new DialogInterface.OnClickListener() {
-
-					public void onClick(DialogInterface dialog, int id) {
-						dialog.cancel();
-					}
-				});
-
-				AlertDialog alert = dialog.create();
-				alert.show();
-			}
-		} catch (Exception e) {
-			warning.showToast(res.getString(R.string.err_radar_generic));
-			Log.e(cgSettings.tag, "cgeopoint.radarTo: " + e.toString());
-		}
 	}
 
 	private void cachesAround() {

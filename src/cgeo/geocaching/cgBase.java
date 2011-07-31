@@ -1,8 +1,6 @@
 package cgeo.geocaching;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,7 +27,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -58,10 +55,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
@@ -5012,19 +5006,6 @@ public class cgBase {
 		return (path.delete());
 	}
 
-	public static boolean isIntentAvailable(Context context, String action) {
-		final Intent intent = new Intent(action);
-
-		return isIntentAvailable(context, intent);
-	}
-
-	public static boolean isIntentAvailable(Context context, Intent intent) {
-		final PackageManager packageManager = context.getPackageManager();
-		final List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
-
-		return (list.size() > 0);
-	}
-
 	public void storeCache(cgeoapplication app, Activity activity, cgCache cache, String geocode, int listId, Handler handler) {
 		try {
 			// cache details
@@ -5312,7 +5293,7 @@ public class cgBase {
 		return out;
 	}
 
-	public int getIcon(boolean cache, String type, boolean own, boolean found, boolean disabled) {
+	public static int getIcon(boolean cache, String type, boolean own, boolean found, boolean disabled) {
 		if (gcIcons.isEmpty()) {
 			// default markers
 			gcIcons.put("ape", R.drawable.marker_cache_ape);
@@ -5423,258 +5404,6 @@ public class cgBase {
 		}
 
 		return icon;
-	}
-
-	public boolean isLocus(Context context) {
-		boolean locus = false;
-		final Intent intentTest = new Intent(Intent.ACTION_VIEW);
-		intentTest.setData(Uri.parse("menion.points:x"));
-		if (isIntentAvailable(context, intentTest) == true) {
-			locus = true;
-		}
-
-		return locus;
-	}
-
-	public boolean isRmaps(Context context) {
-		boolean rmaps = false;
-		final Intent intent = new Intent("com.robert.maps.action.SHOW_POINTS");
-		if (isIntentAvailable(context, intent) == true) {
-			rmaps = true;
-		}
-
-		return rmaps;
-	}
-
-	public boolean runExternalMap(int application, Activity activity, Resources res, cgWarning warning, GoogleAnalyticsTracker tracker, Double latitude, Double longitude) {
-		// waypoint
-		return runExternalMap(application, activity, res, warning, tracker, null, null, latitude, longitude);
-	}
-
-	public boolean runExternalMap(int application, Activity activity, Resources res, cgWarning warning, GoogleAnalyticsTracker tracker, cgWaypoint waypoint) {
-		// waypoint
-		return runExternalMap(application, activity, res, warning, tracker, null, waypoint, null, null);
-	}
-
-	public boolean runExternalMap(int application, Activity activity, Resources res, cgWarning warning, GoogleAnalyticsTracker tracker, cgCache cache) {
-		// cache
-		return runExternalMap(application, activity, res, warning, tracker, cache, null, null, null);
-	}
-
-	public boolean runExternalMap(int application, Activity activity, Resources res, cgWarning warning, GoogleAnalyticsTracker tracker, cgCache cache, cgWaypoint waypoint, Double latitude, Double longitude) {
-		if (cache == null && waypoint == null && latitude == null && longitude == null) {
-			return false;
-		}
-
-		if (application == mapAppLocus) {
-			// locus
-			try {
-				final Intent intentTest = new Intent(Intent.ACTION_VIEW);
-				intentTest.setData(Uri.parse("menion.points:x"));
-
-				if (isIntentAvailable(activity, intentTest) == true) {
-					final ArrayList<cgWaypoint> waypoints = new ArrayList<cgWaypoint>();
-					// get only waypoints with coordinates
-					if (cache != null && cache.waypoints != null && cache.waypoints.isEmpty() == false) {
-						for (cgWaypoint wp : cache.waypoints) {
-							if (wp.latitude != null && wp.longitude != null) {
-								waypoints.add(wp);
-							}
-						}
-					}
-
-					final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-					final DataOutputStream dos = new DataOutputStream(baos);
-
-					dos.writeInt(1); // not used
-					if (cache != null) {
-						if (waypoints == null || waypoints.isEmpty() == true) {
-							dos.writeInt(1); // cache only
-						} else {
-							dos.writeInt((1 + waypoints.size())); // cache and waypoints
-						}
-					} else {
-						dos.writeInt(1); // one waypoint
-					}
-
-					int icon = -1;
-					if (cache != null) {
-						icon = getIcon(true, cache.type, cache.own, cache.found, cache.disabled || cache.archived);
-					} else if (waypoint != null) {
-						icon = getIcon(false, waypoint.type, false, false, false);
-					} else {
-						icon = getIcon(false, "waypoint", false, false, false);
-					}
-
-					if (icon > 0) {
-						// load icon
-						Bitmap bitmap = BitmapFactory.decodeResource(res, icon);
-						ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
-						bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos2);
-						byte[] image = baos2.toByteArray();
-
-						dos.writeInt(image.length);
-						dos.write(image);
-					} else {
-						// no icon
-						dos.writeInt(0); // no image
-					}
-
-					// name
-					if (cache != null && cache.name != null && cache.name.length() > 0) {
-						dos.writeUTF(cache.name);
-					} else if (waypoint != null && waypoint.name != null && waypoint.name.length() > 0) {
-						dos.writeUTF(waypoint.name);
-					} else {
-						dos.writeUTF("");
-					}
-
-					// description
-					if (cache != null && cache.geocode != null && cache.geocode.length() > 0) {
-						dos.writeUTF(cache.geocode.toUpperCase());
-					} else if (waypoint != null && waypoint.lookup != null && waypoint.lookup.length() > 0) {
-						dos.writeUTF(waypoint.lookup.toUpperCase());
-					} else {
-						dos.writeUTF("");
-					}
-
-					// additional data :: keyword, button title, package, activity, data name, data content
-					if (cache != null && cache.geocode != null && cache.geocode.length() > 0) {
-						dos.writeUTF("intent;c:geo;cgeo.geocaching;cgeo.geocaching.cgeodetail;geocode;" + cache.geocode);
-					} else if (waypoint != null && waypoint.id != null && waypoint.id > 0) {
-						dos.writeUTF("intent;c:geo;cgeo.geocaching;cgeo.geocaching.cgeowaypoint;id;" + waypoint.id);
-					} else {
-						dos.writeUTF("");
-					}
-
-					if (cache != null && cache.latitude != null && cache.longitude != null) {
-						dos.writeDouble(cache.latitude); // latitude
-						dos.writeDouble(cache.longitude); // longitude
-					} else if (waypoint != null && waypoint.latitude != null && waypoint.longitude != null) {
-						dos.writeDouble(waypoint.latitude); // latitude
-						dos.writeDouble(waypoint.longitude); // longitude
-					} else {
-						dos.writeDouble(latitude); // latitude
-						dos.writeDouble(longitude); // longitude
-					}
-
-					// cache waypoints
-					if (waypoints != null && waypoints.isEmpty() == false) {
-						for (cgWaypoint wp : waypoints) {
-							if (wp == null || wp.latitude == null || wp.longitude == null) {
-								continue;
-							}
-
-							final int wpIcon = getIcon(false, wp.type, false, false, false);
-
-							if (wpIcon > 0) {
-								// load icon
-								Bitmap bitmap = BitmapFactory.decodeResource(res, wpIcon);
-								ByteArrayOutputStream baos2 = new ByteArrayOutputStream();
-								bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos2);
-								byte[] image = baos2.toByteArray();
-
-								dos.writeInt(image.length);
-								dos.write(image);
-							} else {
-								// no icon
-								dos.writeInt(0); // no image
-							}
-
-							// name
-							if (wp.lookup != null && wp.lookup.length() > 0) {
-								dos.writeUTF(wp.lookup.toUpperCase());
-							} else {
-								dos.writeUTF("");
-							}
-
-							// description
-							if (wp.name != null && wp.name.length() > 0) {
-								dos.writeUTF(wp.name);
-							} else {
-								dos.writeUTF("");
-							}
-
-							// additional data :: keyword, button title, package, activity, data name, data content
-							if (wp.id != null && wp.id > 0) {
-								dos.writeUTF("intent;c:geo;cgeo.geocaching;cgeo.geocaching.cgeowaypoint;id;" + wp.id);
-							} else {
-								dos.writeUTF("");
-							}
-
-							dos.writeDouble(wp.latitude); // latitude
-							dos.writeDouble(wp.longitude); // longitude
-						}
-					}
-
-					final Intent intent = new Intent();
-					intent.setAction(Intent.ACTION_VIEW);
-					intent.setData(Uri.parse("menion.points:data"));
-					intent.putExtra("data", baos.toByteArray());
-
-					activity.startActivity(intent);
-
-					sendAnal(activity, tracker, "/external/locus");
-
-					return true;
-				}
-			} catch (Exception e) {
-				// nothing
-			}
-		}
-
-		if (application == mapAppRmaps) {
-			// rmaps
-			try {
-				final Intent intent = new Intent("com.robert.maps.action.SHOW_POINTS");
-
-				if (isIntentAvailable(activity, intent) == true) {
-					final ArrayList<String> locations = new ArrayList<String>();
-					if (cache != null && cache.latitude != null && cache.longitude != null) {
-						locations.add(String.format((Locale) null, "%.6f", cache.latitude) + "," + String.format((Locale) null, "%.6f", cache.longitude) + ";" + cache.geocode + ";" + cache.name);
-					} else if (waypoint != null && waypoint.latitude != null && waypoint.longitude != null) {
-						locations.add(String.format((Locale) null, "%.6f", waypoint.latitude) + "," + String.format((Locale) null, "%.6f", waypoint.longitude) + ";" + waypoint.lookup + ";" + waypoint.name);
-					}
-
-					intent.putStringArrayListExtra("locations", locations);
-
-					activity.startActivity(intent);
-
-					sendAnal(activity, tracker, "/external/rmaps");
-
-					return true;
-				}
-			} catch (Exception e) {
-				// nothing
-			}
-		}
-
-		if (application == mapAppAny) {
-			// fallback
-			try {
-				if (cache != null && cache.latitude != null && cache.longitude != null) {
-					activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("geo:" + cache.latitude + "," + cache.longitude)));
-					// INFO: q parameter works with Google Maps, but breaks cooperation with all other apps
-				} else if (waypoint != null && waypoint.latitude != null && waypoint.longitude != null) {
-					activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("geo:" + waypoint.latitude + "," + waypoint.longitude)));
-					// INFO: q parameter works with Google Maps, but breaks cooperation with all other apps
-				}
-
-				sendAnal(activity, tracker, "/external/native/maps");
-
-				return true;
-			} catch (Exception e) {
-				// nothing
-			}
-		}
-
-		Log.i(cgSettings.tag, "cgBase.runExternalMap: No maps application available.");
-
-		if (warning != null && res != null) {
-			warning.showToast(res.getString(R.string.err_application_no));
-		}
-
-		return false;
 	}
 
 	public boolean runNavigation(Activity activity, Resources res, cgSettings settings, cgWarning warning, GoogleAnalyticsTracker tracker, Double latitude, Double longitude) {

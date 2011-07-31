@@ -187,7 +187,7 @@
   <string name="err_parse_lon">Sorry, c:geo can\'t parse longitude.</string>
   <string name="err_parse_bear">Sorry, c:geo can\'t parse bearing.</string>
   <string name="err_parse_dist">Sorry, c:geo can\'t parse distance.</string>
-  
+
   <string name="err_fieldnotes_export_failed">Export of Field Notes failed.</string>
 
   <string name="warn_save_nothing">There is nothing to be saved.</string>
@@ -212,7 +212,7 @@
   <string name="info_log_saved">c:geo successfully saved log.</string>
   <string name="info_log_cleared">Log was cleared.</string>
   <string name="info_log_type_changed">Type of log has been changed!</string>
-  
+
   <string name="info_fieldnotes_exported_to">Field Notes exported to</string>
 
   <!-- location service -->
@@ -491,6 +491,8 @@
   <string name="cache_menu_details">Details</string>
   <string name="cache_menu_share">Share cache</string>
   <string name="cache_menu_move_list">Move to other list</string>
+  <string name="cache_menu_gcc">GCC</string>
+  <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Saved log</string>
   <string name="cache_status_found">Found</string>
