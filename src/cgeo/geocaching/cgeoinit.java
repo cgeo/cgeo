@@ -320,6 +320,14 @@ public class cgeoinit extends Activity {
 			disabledButton.setChecked(true);
 		}
 		disabledButton.setOnClickListener(new cgeoChangeDisabled());
+		
+		CheckBox autovisitButton = (CheckBox) findViewById(R.id.autovisit);
+        if (prefs.getBoolean("autovisit", false)) {
+            autovisitButton.setChecked(true);
+        } else {
+            autovisitButton.setChecked(false);
+        }
+        autovisitButton.setOnClickListener(new cgeoChangeAutovisit());
 
 		CheckBox offlineButton = (CheckBox) findViewById(R.id.offline);
 		if (prefs.getInt("offlinemaps", 1) == 0) {
@@ -704,6 +712,30 @@ public class cgeoinit extends Activity {
 			return;
 		}
 	}
+	
+	private class cgeoChangeAutovisit implements View.OnClickListener {
+
+        public void onClick(View arg0) {
+            SharedPreferences.Editor edit = prefs.edit();
+            if (prefs.getBoolean("autovisit", false)) {
+                edit.putBoolean("autovisit", false);
+                settings.autovisit = false;
+            } else {
+                edit.putBoolean("autovisit", true);
+                settings.autovisit = true;
+            }
+            edit.commit();
+
+            CheckBox autovisitButton = (CheckBox) findViewById(R.id.autovisit);
+            if (prefs.getBoolean("autovisit", false) == false) {
+                autovisitButton.setChecked(false);
+            } else {
+                autovisitButton.setChecked(true);
+            }
+
+            return;
+        }
+    }
 
 	private class cgeoChangeDisabled implements View.OnClickListener {
 
