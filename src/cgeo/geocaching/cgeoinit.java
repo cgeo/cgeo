@@ -271,6 +271,13 @@ public class cgeoinit extends Activity {
 				warning.helpDialog(res.getString(R.string.init_signature_help_title), res.getString(R.string.init_signature_help_text));
 			}
 		});
+		CheckBox autoinsertButton = (CheckBox) findViewById(R.id.sigautoinsert);
+        if (prefs.getBoolean("sigautoinsert", false)) {
+            autoinsertButton.setChecked(true);
+        } else {
+            autoinsertButton.setChecked(false);
+        }
+        autoinsertButton.setOnClickListener(new cgeoChangeSignatureAutoinsert());
 
 		// Other settings
 		CheckBox skinButton = (CheckBox) findViewById(R.id.skin);
@@ -321,8 +328,8 @@ public class cgeoinit extends Activity {
 		}
 		disabledButton.setOnClickListener(new cgeoChangeDisabled());
 		
-		CheckBox autovisitButton = (CheckBox) findViewById(R.id.autovisit);
-        if (prefs.getBoolean("autovisit", false)) {
+		CheckBox autovisitButton = (CheckBox) findViewById(R.id.trackautovisit);
+        if (prefs.getBoolean("trackautovisit", false)) {
             autovisitButton.setChecked(true);
         } else {
             autovisitButton.setChecked(false);
@@ -717,20 +724,44 @@ public class cgeoinit extends Activity {
 
         public void onClick(View arg0) {
             SharedPreferences.Editor edit = prefs.edit();
-            if (prefs.getBoolean("autovisit", false)) {
-                edit.putBoolean("autovisit", false);
-                settings.autovisit = false;
+            if (prefs.getBoolean("trackautovisit", false)) {
+                edit.putBoolean("trackautovisit", false);
+                settings.trackableAutovisit = false;
             } else {
-                edit.putBoolean("autovisit", true);
-                settings.autovisit = true;
+                edit.putBoolean("trackautovisit", true);
+                settings.trackableAutovisit = true;
             }
             edit.commit();
 
-            CheckBox autovisitButton = (CheckBox) findViewById(R.id.autovisit);
-            if (prefs.getBoolean("autovisit", false) == false) {
+            CheckBox autovisitButton = (CheckBox) findViewById(R.id.trackautovisit);
+            if (prefs.getBoolean("trackautovisit", false) == false) {
                 autovisitButton.setChecked(false);
             } else {
                 autovisitButton.setChecked(true);
+            }
+
+            return;
+        }
+    }
+	
+	private class cgeoChangeSignatureAutoinsert implements View.OnClickListener {
+
+        public void onClick(View arg0) {
+            SharedPreferences.Editor edit = prefs.edit();
+            if (prefs.getBoolean("sigautoinsert", false)) {
+                edit.putBoolean("sigautoinsert", false);
+                settings.signatureAutoinsert = false;
+            } else {
+                edit.putBoolean("sigautoinsert", true);
+                settings.signatureAutoinsert = true;
+            }
+            edit.commit();
+
+            CheckBox autoinsertButton = (CheckBox) findViewById(R.id.sigautoinsert);
+            if (prefs.getBoolean("sigautoinsert", false) == false) {
+                autoinsertButton.setChecked(false);
+            } else {
+                autoinsertButton.setChecked(true);
             }
 
             return;
