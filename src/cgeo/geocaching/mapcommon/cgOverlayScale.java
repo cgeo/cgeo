@@ -9,6 +9,7 @@ import android.graphics.Typeface;
 import android.util.DisplayMetrics;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
 import cgeo.geocaching.mapinterfaces.MapProjectionImpl;
 import cgeo.geocaching.mapinterfaces.OverlayBase;
@@ -119,7 +120,7 @@ public class cgOverlayScale implements OverlayBase {
 			scale.setTypeface(Typeface.DEFAULT_BOLD);
 		}
 
-		if (mapView.isSatellite()) {
+		if (mapSourceEnum.googleSat == settings.mapSource) {
 			scaleShadow.setColor(0xFF000000);
 			scale.setColor(0xFFFFFFFF);
 		} else {

@@ -4,6 +4,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.HashMap;
 
+import org.mapsforge.android.maps.MapDatabase;
+
 import cgeo.geocaching.googlemaps.googleMapFactory;
 import cgeo.geocaching.mapinterfaces.MapFactory;
 import cgeo.geocaching.mapsforge.mfMapFactory;
@@ -18,6 +20,7 @@ public class cgSettings {
 	
 	public enum mapSourceEnum {
 		googleMap,
+		googleSat,
 		mapsforgeMapnik,
 		mapsforgeOsmarender,
 		mapsforgeCycle,
@@ -31,13 +34,19 @@ public class cgSettings {
 				return googleMap;
 			}
 		}
+
+		public boolean isGoogleMapSource() {
+			if (googleMap == this || googleSat == this) {
+				return true;
+			}
+			
+			return false;
+		}
 	}
 	
 	// constants
 	public final static int unitsMetric = 1;
 	public final static int unitsImperial = 2;
-	public final static int mapSatellite = 1;
-	public final static int mapClassic = 2;
 	public final static String cache = ".cgeo";
 	public final static String analytics = "UA-1103507-15";
 
@@ -64,7 +73,6 @@ public class cgSettings {
 	public int autoLoadDesc = 0;
 	public int units = unitsMetric;
 	public int livelist = 1;
-	public int maptype = mapSatellite;
 	public int mapzoom = 14;
 	public int maplive = 1;
 	public int maptrail = 1;
@@ -103,12 +111,11 @@ public class cgSettings {
 	private String passVote = null;
 	
 	// maps
-	public static final int MAP_GOOGLE = 0;
-	public static final int MAP_MF = 1;
 	public MapFactory mapFactory = null;
-	public mapSourceEnum mapProviderUsed = mapSourceEnum.googleMap;
-	public mapSourceEnum mapProvider = mapSourceEnum.googleMap;
-	public String mapFile = null;
+	public mapSourceEnum mapSourceUsed = mapSourceEnum.googleMap;
+	public mapSourceEnum mapSource = mapSourceEnum.googleMap;
+	private String mapFile = null;
+	private boolean mapFileValid = false;
 
 	public cgSettings(Context contextIn, SharedPreferences prefsIn) {
 		context = contextIn;
@@ -131,7 +138,6 @@ public class cgSettings {
 		autoLoadDesc = prefs.getInt("autoloaddesc", 0);
 		units = prefs.getInt("units", 1);
 		livelist = prefs.getInt("livelist", 1);
-		maptype = prefs.getInt("maptype", 1);
 		maplive = prefs.getInt("maplive", 1);
 		mapzoom = prefs.getInt("mapzoom", 14);
 		maptrail = prefs.getInt("maptrail", 1);
@@ -152,7 +158,8 @@ public class cgSettings {
 		tokenPublic = prefs.getString("tokenpublic", null);
 		tokenSecret = prefs.getString("tokensecret", null);
 		mapFile = prefs.getString("mfmapfile", null);
-		mapProvider = mapSourceEnum.fromInt(prefs.getInt("mapsource", 0));
+		mapFileValid = checkMapfile(mapFile);
+		mapSource = mapSourceEnum.fromInt(prefs.getInt("mapsource", 0));
 		webDeviceName = prefs.getString("webDeviceName", null);
 		webDeviceCode = prefs.getString("webDeviceCode", null);
 		trackableAutovisit = prefs.getBoolean("trackautovisit", false);
@@ -482,15 +489,15 @@ public class cgSettings {
 	}
 	
 	public MapFactory getMapFactory() {
-		if (mapProvider == mapSourceEnum.googleMap) {
-			if (mapProviderUsed != mapSourceEnum.googleMap || mapFactory == null) {
+		if (mapSource.isGoogleMapSource()) {
+			if (!mapSourceUsed.isGoogleMapSource() || mapFactory == null) {
 				mapFactory = new googleMapFactory();
-				mapProviderUsed = mapProvider;
+				mapSourceUsed = mapSource;
 			}
-		} else if (mapProvider != mapSourceEnum.googleMap) {
-			if (mapProviderUsed == mapSourceEnum.googleMap || mapFactory == null) {
+		} else if (!mapSource.isGoogleMapSource()) {
+			if (mapSourceUsed.isGoogleMapSource() || mapFactory == null) {
 				mapFactory = new mfMapFactory();
-				mapProviderUsed = mapProvider;
+				mapSourceUsed = mapSource;
 			}
 		}
 		
@@ -505,12 +512,23 @@ public class cgSettings {
 		final SharedPreferences.Editor prefsEdit = prefs.edit();
 
 		prefsEdit.putString("mfmapfile", mapFileIn);
+		
+		boolean commitResult = prefsEdit.commit(); 
 
 		mapFile = mapFileIn;
-
-		return prefsEdit.commit();		
+		mapFileValid = checkMapfile(mapFile);
+		
+		return commitResult;
 	}
 	
+	public boolean hasValidMapFile() {
+		return mapFileValid;
+	}
+	
+	private boolean checkMapfile(String mapFileIn) {
+		return MapDatabase.isValidMapFile(mapFileIn);
+	}
+
 	public Context getContext() {
 		return context;
 	}

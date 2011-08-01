@@ -9,6 +9,7 @@ import java.util.Locale;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -18,6 +19,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -28,6 +30,7 @@ import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgDirection;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.cgUpdateDir;
 import cgeo.geocaching.cgUpdateLoc;
 import cgeo.geocaching.cgUser;
@@ -43,6 +46,19 @@ import cgeo.geocaching.mapinterfaces.MapViewImpl;
 import cgeo.geocaching.mapinterfaces.UserOverlayItemImpl;
 
 public class cgeomap extends MapBase {
+	
+	private static final int MENU_SELECT_MAPVIEW = 1;
+	private static final int MENU_MAP_LIVE = 2;
+	private static final int MENU_STORE_CACHES = 3; 
+	private static final int MENU_TRAIL_MODE = 4;
+	private static final int MENU_CIRCLE_MODE = 5;
+	
+	private static final int SUBMENU_VIEW_GOOGLE_MAP = 10;
+	private static final int SUBMENU_VIEW_GOOGLE_SAT = 11;
+	private static final int SUBMENU_VIEW_MF_MAPNIK = 13;
+	private static final int SUBMENU_VIEW_MF_OSMARENDER = 14;
+	private static final int SUBMENU_VIEW_MF_CYCLEMAP = 15;
+	private static final int SUBMENU_VIEW_MF_OFFLINE = 16;
 
 	private Resources res = null;
 	private Activity activity = null;
@@ -64,6 +80,7 @@ public class cgeomap extends MapBase {
 	private Double latitudeIntent = null;
 	private Double longitudeIntent = null;
 	private String waypointTypeIntent = null;
+	private int[] mapStateIntent = null;
 	// status data
 	private Long searchId = null;
 	private String token = null;
@@ -247,17 +264,11 @@ public class cgeomap extends MapBase {
 			dir = app.startDir(activity, dirUpdate, warning);
 		}
 
+		// initialize map
 		mapView = (MapViewImpl) activity.findViewById(mapFactory.getMapViewId());
 		mapView.setMapSource(settings);
 		if (!mapView.needsScaleOverlay()) {
 			mapView.setBuiltinScale(true);
-		}
-
-		// initialize map
-		if (settings.maptype == cgSettings.mapSatellite) {
-			mapView.setSatellite(true);
-		} else {
-			mapView.setSatellite(false);
 		}
 		mapView.setBuiltInZoomControls(true);
 		mapView.displayZoomControls(true);
@@ -306,6 +317,7 @@ public class cgeomap extends MapBase {
 			latitudeIntent = extras.getDouble("latitude");
 			longitudeIntent = extras.getDouble("longitude");
 			waypointTypeIntent = extras.getString("wpttype");
+			mapStateIntent = extras.getIntArray("mapstate");
 
 			if (searchIdIntent == 0l) {
 				searchIdIntent = null;
@@ -334,11 +346,12 @@ public class cgeomap extends MapBase {
 			base.sendAnal(activity, "/map/normal");
 
 			followMyLocation = false;
-
-			if (geocodeIntent != null || searchIdIntent != null || (latitudeIntent != null && longitudeIntent != null)) {
-				centerMap(geocodeIntent, searchIdIntent, latitudeIntent, longitudeIntent);
-			}
 		}
+		if (geocodeIntent != null || searchIdIntent != null || (latitudeIntent != null && longitudeIntent != null) || mapStateIntent != null) {
+			centerMap(geocodeIntent, searchIdIntent, latitudeIntent, longitudeIntent, mapStateIntent);
+		}
+		
+		
 		setMyLoc(null);
 		startTimer();
 	}
@@ -453,13 +466,27 @@ public class cgeomap extends MapBase {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0, 1, 0, res.getString(R.string.caches_on_map)).setIcon(android.R.drawable.ic_menu_mapmode);
-		menu.add(0, 3, 0, res.getString(R.string.map_live_disable)).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
-		menu.add(0, 4, 0, res.getString(R.string.caches_store_offline)).setIcon(android.R.drawable.ic_menu_set_as).setEnabled(false);
-		menu.add(0, 2, 0, res.getString(R.string.map_trail_hide)).setIcon(android.R.drawable.ic_menu_recent_history);
-		menu.add(0, 5, 0, res.getString(R.string.map_circles_hide)).setIcon(android.R.drawable.ic_menu_view);
+		
+		SubMenu submenu = menu.addSubMenu(1, MENU_SELECT_MAPVIEW, 0, res.getString(R.string.map_view_map)).setIcon(android.R.drawable.ic_menu_more);
+		addMapViewMenuItems(submenu);
+		
+		menu.add(0, MENU_MAP_LIVE, 0, res.getString(R.string.map_live_disable)).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
+		menu.add(0, MENU_STORE_CACHES, 0, res.getString(R.string.caches_store_offline)).setIcon(android.R.drawable.ic_menu_set_as).setEnabled(false);
+		menu.add(0, MENU_TRAIL_MODE, 0, res.getString(R.string.map_trail_hide)).setIcon(android.R.drawable.ic_menu_recent_history);
+		menu.add(0, MENU_CIRCLE_MODE, 0, res.getString(R.string.map_circles_hide)).setIcon(android.R.drawable.ic_menu_view);
 
 		return true;
+	}
+	
+	private void addMapViewMenuItems(final Menu menu) {
+		String[] mapViews = res.getStringArray(R.array.map_sources);
+		
+		menu.add(0, SUBMENU_VIEW_GOOGLE_MAP, 0, mapViews[0]);
+		menu.add(0, SUBMENU_VIEW_GOOGLE_SAT, 0, mapViews[1]);
+		menu.add(0, SUBMENU_VIEW_MF_MAPNIK, 0, mapViews[2]);
+		menu.add(0, SUBMENU_VIEW_MF_OSMARENDER, 0, mapViews[3]);
+		menu.add(0, SUBMENU_VIEW_MF_CYCLEMAP, 0, mapViews[4]);
+		menu.add(0, SUBMENU_VIEW_MF_OFFLINE, 0, mapViews[5]);
 	}
 
 	@Override
@@ -468,21 +495,14 @@ public class cgeomap extends MapBase {
 
 		MenuItem item;
 		try {
-			item = menu.findItem(1); // view
-			if (mapView != null && mapView.isSatellite() == false) {
-				item.setTitle(res.getString(R.string.map_view_satellite));
-			} else {
-				item.setTitle(res.getString(R.string.map_view_map));
-			}
-
-			item = menu.findItem(2); // show trail
+			item = menu.findItem(MENU_TRAIL_MODE); // show trail
 			if (settings.maptrail == 1) {
 				item.setTitle(res.getString(R.string.map_trail_hide));
 			} else {
 				item.setTitle(res.getString(R.string.map_trail_show));
 			}
 
-			item = menu.findItem(3); // live map
+			item = menu.findItem(MENU_MAP_LIVE); // live map
 			if (live == false) {
 				item.setEnabled(false);
 				item.setTitle(res.getString(R.string.map_live_enable));
@@ -494,18 +514,25 @@ public class cgeomap extends MapBase {
 				}
 			}
 
-			item = menu.findItem(4); // store loaded
+			item = menu.findItem(MENU_STORE_CACHES); // store loaded
 			if (live && !isLoading() && app.getNotOfflineCount(searchId) > 0 && caches != null && caches.size() > 0) {
 				item.setEnabled(true);
 			} else {
 				item.setEnabled(false);
 			}
 
-			item = menu.findItem(5); // show circles
+			item = menu.findItem(MENU_CIRCLE_MODE); // show circles
 			if (overlayCaches != null && overlayCaches.getCircles()) {
 				item.setTitle(res.getString(R.string.map_circles_hide));
 			} else {
 				item.setTitle(res.getString(R.string.map_circles_show));
+			}
+			
+			item = menu.findItem(SUBMENU_VIEW_MF_OFFLINE);
+			if (settings.hasValidMapFile()) {
+				item.setEnabled(true);
+			} else {
+				item.setEnabled(false);
 			}
 		} catch (Exception e) {
 			Log.e(cgSettings.tag, "cgeomap.onPrepareOptionsMenu: " + e.toString());
@@ -518,21 +545,7 @@ public class cgeomap extends MapBase {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		final int id = item.getItemId();
 
-		if (id == 1) {
-			if (mapView != null && mapView.isSatellite() == false) {
-				mapView.setSatellite(true);
-
-				prefsEdit.putInt("maptype", cgSettings.mapSatellite);
-				prefsEdit.commit();
-			} else {
-				mapView.setSatellite(false);
-
-				prefsEdit.putInt("maptype", cgSettings.mapClassic);
-				prefsEdit.commit();
-			}
-
-			return true;
-		} else if (id == 2) {
+		if (id == MENU_TRAIL_MODE) {
 			if (settings.maptrail == 1) {
 				prefsEdit.putInt("maptrail", 0);
 				prefsEdit.commit();
@@ -544,7 +557,7 @@ public class cgeomap extends MapBase {
 
 				settings.maptrail = 1;
 			}
-		} else if (id == 3) {
+		} else if (id == MENU_MAP_LIVE) {
 			if (settings.maplive == 1) {
 				settings.liveMapDisable();
 			} else {
@@ -553,7 +566,7 @@ public class cgeomap extends MapBase {
 			liveChanged = true;
 			searchId = null;
 			searchIdIntent = null;
-		} else if (id == 4) {
+		} else if (id == MENU_STORE_CACHES) {
 			if (live && !isLoading() && caches != null && !caches.isEmpty()) {
 				final ArrayList<String> geocodes = new ArrayList<String>();
 
@@ -627,15 +640,81 @@ public class cgeomap extends MapBase {
 
 				return true;
 			}
-		} else if (id == 5) {
+		} else if (id == MENU_CIRCLE_MODE) {
 			if (overlayCaches == null) {
 				return false;
 			}
 
 			overlayCaches.switchCircles();
+			
+		} else if (SUBMENU_VIEW_GOOGLE_MAP <= id && SUBMENU_VIEW_MF_OFFLINE >= id) {
+			
+			mapSourceEnum mapSource = getMapSourceFromMenuId(id);
+			
+			boolean mapRestartRequired = switchMapSource(mapSource);
+			
+			if (mapRestartRequired) {
+				Intent mapIntent = new Intent(activity, settings.getMapFactory().getMapClass());
+	
+				mapIntent.putExtra("detail", fromDetailIntent);
+				mapIntent.putExtra("searchid", searchIdIntent);
+				mapIntent.putExtra("geocode", geocodeIntent);
+				mapIntent.putExtra("latitude", latitudeIntent);
+				mapIntent.putExtra("longitude", longitudeIntent);
+				mapIntent.putExtra("wpttype", waypointTypeIntent);
+				int[] mapState = new int[3];
+				GeoPointImpl mapCenter = mapView.getMapViewCenter();
+				mapState[0] = mapCenter.getLatitudeE6();
+				mapState[1] = mapCenter.getLongitudeE6();
+				mapState[2] = mapView.getMapZoomLevel();
+				mapIntent.putExtra("mapstate", mapState);
+	
+				activity.startActivity(mapIntent);
+	
+				activity.finish();
+			}
+			
+			return true;
 		}
+		
 
 		return false;
+	}
+	
+	private mapSourceEnum getMapSourceFromMenuId(int menuItemId) {
+		
+		switch(menuItemId) {
+		case SUBMENU_VIEW_GOOGLE_MAP:
+			return mapSourceEnum.googleMap;
+		case SUBMENU_VIEW_GOOGLE_SAT:
+			return mapSourceEnum.googleSat;
+		case SUBMENU_VIEW_MF_OSMARENDER:
+			return mapSourceEnum.mapsforgeOsmarender;
+		case SUBMENU_VIEW_MF_MAPNIK:
+			return mapSourceEnum.mapsforgeMapnik;
+		case SUBMENU_VIEW_MF_CYCLEMAP:
+			return mapSourceEnum.mapsforgeCycle;
+		case SUBMENU_VIEW_MF_OFFLINE:
+			return mapSourceEnum.mapsforgeOffline;
+		default:
+			return mapSourceEnum.googleMap;
+		}
+	}
+	
+	private boolean switchMapSource(mapSourceEnum mapSource) {
+
+		settings.mapSource = mapSource;
+		
+		prefsEdit.putInt("mapsource", settings.mapSource.ordinal());
+		prefsEdit.commit();
+
+		boolean mapRestartRequired = settings.mapSource.isGoogleMapSource()!= settings.mapSourceUsed.isGoogleMapSource();
+		
+		if (!mapRestartRequired) {
+			mapView.setMapSource(settings);
+		}
+		
+		return mapRestartRequired;
 	}
 
 	private void savePrefs() {
@@ -643,17 +722,10 @@ public class cgeomap extends MapBase {
 			return;
 		}
 
-		if (mapView.isSatellite()) {
-			prefsEdit.putInt("maptype", cgSettings.mapSatellite);
-			settings.maptype = cgSettings.mapSatellite;
-		} else {
-			prefsEdit.putInt("maptype", cgSettings.mapClassic);
-			settings.maptype = cgSettings.mapClassic;
-		}
-
 		if (prefsEdit == null) {
 			prefsEdit = activity.getSharedPreferences(cgSettings.preferences, 0).edit();
 		}
+
 		prefsEdit.putInt("mapzoom", mapView.getMapZoomLevel());
 		prefsEdit.commit();
 	}
@@ -1578,8 +1650,19 @@ public class cgeomap extends MapBase {
 	}
 
 	// move map to view results of searchIdIntent
-	private void centerMap(String geocodeCenter, Long searchIdCenter, Double latitudeCenter, Double longitudeCenter) {
-		if (!centered && (geocodeCenter != null || searchIdIntent != null)) {
+	private void centerMap(String geocodeCenter, Long searchIdCenter, Double latitudeCenter, Double longitudeCenter, int[] mapState) {
+		
+		if (!centered && mapState != null) {
+			try {
+				mapController.setCenter(settings.getMapFactory().getGeoPointBase(mapState[0], mapState[1]));
+				mapController.setZoom(mapState[2]);
+			} catch (Exception e) {
+				// nothing at all
+			}
+	
+			centered = true;
+			alreadyCentered = true;			
+		} else if (!centered && (geocodeCenter != null || searchIdIntent != null)) {
 			try {
 				ArrayList<Object> viewport;
 

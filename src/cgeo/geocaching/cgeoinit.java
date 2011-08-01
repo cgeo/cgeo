@@ -432,8 +432,6 @@ public class cgeoinit extends Activity {
 			}
 		});
 		
-		setMapFileEditState();
-		
 		// Cache db backup
 		TextView lastBackup = (TextView) findViewById(R.id.backup_last);
 		File lastBackupFile = app.isRestoreFile();
@@ -481,15 +479,6 @@ public class cgeoinit extends Activity {
 		}
 	}
 	
-	private void setMapFileEditState() {
-		LinearLayout mapFileEdit = (LinearLayout) findViewById(R.id.init_mapfilegroup);
-		if (settings.mapProvider == mapSourceEnum.mapsforgeOffline) {
-			mapFileEdit.setVisibility(View.VISIBLE);
-		} else {
-			mapFileEdit.setVisibility(View.INVISIBLE);
-		}
-	}
-
 	public boolean saveValues() {
 		String usernameNew = ((EditText) findViewById(R.id.username)).getText().toString();
 		String passwordNew = ((EditText) findViewById(R.id.password)).getText().toString();
@@ -941,17 +930,15 @@ public class cgeoinit extends Activity {
 		@Override
 		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
-			settings.mapProvider = mapSourceEnum.fromInt(arg2);
+			settings.mapSource = mapSourceEnum.fromInt(arg2);
 			SharedPreferences.Editor edit = prefs.edit();
 			edit.putInt("mapsource", arg2);
 			edit.commit();
-			setMapFileEditState();
 		}
 
 		@Override
 		public void onNothingSelected(AdapterView<?> arg0) {
-			arg0.setSelection(settings.mapProvider.ordinal());
-			setMapFileEditState();
+			arg0.setSelection(settings.mapSource.ordinal());
 		}
 	}
 
