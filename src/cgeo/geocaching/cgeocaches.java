@@ -453,6 +453,8 @@ public class cgeocaches extends ListActivity {
 					adapter.setSelectMode(false, true);
 				}
 
+				switchList(listId, -1);
+				
 				cacheList.clear();
 
 				final ArrayList<cgCache> cacheListTmp = app.getCaches(searchId);
