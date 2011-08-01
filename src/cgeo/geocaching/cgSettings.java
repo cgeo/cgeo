@@ -1,23 +1,23 @@
 package cgeo.geocaching;
 
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.HashMap;
 
 import org.mapsforge.android.maps.MapDatabase;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.os.Environment;
+import android.util.Log;
 import cgeo.geocaching.googlemaps.googleMapFactory;
 import cgeo.geocaching.mapinterfaces.MapFactory;
 import cgeo.geocaching.mapsforge.mfMapFactory;
-import android.os.Environment;
-import android.content.Intent;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.res.Configuration;
-import android.util.Log;
 
 public class cgSettings {
-	
+
 	public enum mapSourceEnum {
 		googleMap,
 		googleSat,
@@ -25,7 +25,7 @@ public class cgSettings {
 		mapsforgeOsmarender,
 		mapsforgeCycle,
 		mapsforgeOffline;
-		
+
 		static mapSourceEnum fromInt(int id) {
 			mapSourceEnum[] values = mapSourceEnum.values();
 			if (id >= 0 && id < values.length) {
@@ -39,11 +39,11 @@ public class cgSettings {
 			if (googleMap == this || googleSat == this) {
 				return true;
 			}
-			
+
 			return false;
 		}
 	}
-	
+
 	// constants
 	public final static int unitsMetric = 1;
 	public final static int unitsImperial = 2;
@@ -62,7 +62,7 @@ public class cgSettings {
 	public int buttonActive = R.drawable.action_button_dark;
 	public int buttonInactive = R.drawable.action_button_dark_off;
 	public int buttonPressed = R.drawable.action_button_dark_pressed;
-	
+
 	// settings
 	public boolean loaded = false;
 	public boolean hideMySearch = false;
@@ -109,7 +109,7 @@ public class cgSettings {
 	private String username = null;
 	private String password = null;
 	private String passVote = null;
-	
+
 	// maps
 	public MapFactory mapFactory = null;
 	public mapSourceEnum mapSourceUsed = mapSourceEnum.googleMap;
@@ -129,7 +129,7 @@ public class cgSettings {
 
 		initialized = prefs.getInt("initialized", 0);
 		helper = prefs.getInt("helper", 0);
-		
+
 		skin = prefs.getInt("skin", 0);
 		setSkinDefaults();
 
@@ -164,10 +164,10 @@ public class cgSettings {
 		webDeviceCode = prefs.getString("webDeviceCode", null);
 		trackableAutovisit = prefs.getBoolean("trackautovisit", false);
 		signatureAutoinsert = prefs.getBoolean("sigautoinsert", false);
-		
+
 		setLanguage(useEnglish);
 	}
-	
+
 	private void setSkinDefaults() {
 		if (skin == 1) {
 			buttonActive = R.drawable.action_button_light;
@@ -190,7 +190,7 @@ public class cgSettings {
 			setSkinDefaults();
 		}
 	}
-	
+
 	public void setLanguage(boolean useEnglish) {
 		Locale locale = Locale.getDefault();
 		if (useEnglish) {
@@ -306,7 +306,7 @@ public class cgSettings {
 
 		this.username = username;
 		this.password = password;
-		
+
 		return prefsEdit.commit();
 	}
 
@@ -463,31 +463,31 @@ public class cgSettings {
 			maplive = 0;
 		}
 	}
-	
+
 	public int getLastList() {
 		int listId = prefs.getInt("lastlist", -1);
-		
+
 		return listId;
 	}
-	
+
 	public void saveLastList(int listId) {
 		final SharedPreferences.Editor edit = prefs.edit();
-		
+
 		edit.putInt("lastlist", listId);
 		edit.commit();
 	}
 
 	public void setWebNameCode(String name, String code) {
 	final SharedPreferences.Editor edit = prefs.edit();
-                
+
 		this.webDeviceCode=code;
 		this.webDeviceName=name;
-		
+
 		edit.putString("webDeviceName", name);
 		edit.putString("webDeviceCode", code);
 		edit.commit();
 	}
-	
+
 	public MapFactory getMapFactory() {
 		if (mapSource.isGoogleMapSource()) {
 			if (!mapSourceUsed.isGoogleMapSource() || mapFactory == null) {
@@ -500,32 +500,32 @@ public class cgSettings {
 				mapSourceUsed = mapSource;
 			}
 		}
-		
+
 		return mapFactory;
 	}
-	
+
 	public String getMapFile() {
 		return mapFile;
 	}
-	
+
 	public boolean setMapFile(String mapFileIn) {
 		final SharedPreferences.Editor prefsEdit = prefs.edit();
 
 		prefsEdit.putString("mfmapfile", mapFileIn);
-		
-		boolean commitResult = prefsEdit.commit(); 
+
+		boolean commitResult = prefsEdit.commit();
 
 		mapFile = mapFileIn;
 		mapFileValid = checkMapfile(mapFile);
-		
+
 		return commitResult;
 	}
-	
+
 	public boolean hasValidMapFile() {
 		return mapFileValid;
 	}
-	
-	private boolean checkMapfile(String mapFileIn) {
+
+	private static boolean checkMapfile(String mapFileIn) {
 		return MapDatabase.isValidMapFile(mapFileIn);
 	}
 

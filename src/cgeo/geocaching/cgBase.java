@@ -97,7 +97,7 @@ public class cgBase {
 	public static DateFormat dateOutShort = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
 	private Resources res = null;
 	private HashMap<String, String> cookies = new HashMap<String, String>();
-	private final String passMatch = "[/\\?&]*[Pp]ass(word)?=[^&^#^$]+";
+	private static final String passMatch = "[/\\?&]*[Pp]ass(word)?=[^&^#^$]+";
 	private final Pattern patternLoggedIn = Pattern.compile("<span class=\"Success\">You are logged in as[^<]*<strong[^>]*>([^<]+)</strong>[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	private final Pattern patternLogged2In = Pattern.compile("<strong>[^\\w]*Hello,[^<]*<a[^>]+>([^<]+)</a>[^<]*</strong>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	private final Pattern patternViewstate = Pattern.compile("id=\"__VIEWSTATE\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
@@ -106,9 +106,6 @@ public class cgBase {
 	public static final double deg2rad = Math.PI / 180;
 	public static final double rad2deg = 180 / Math.PI;
 	public static final float erad = 6371.0f;
-	public static final int mapAppAny = 0;
-	public static final int mapAppLocus = 1;
-	public static final int mapAppRmaps = 2;
 	private cgeoapplication app = null;
 	private cgSettings settings = null;
 	private SharedPreferences prefs = null;
@@ -1879,7 +1876,7 @@ public class cgBase {
 		return caches;
 	}
 
-	private Date parseDate(String input) {
+	private static Date parseDate(String input) {
 		if (input == null) {
 			return null;
 		}
@@ -3969,7 +3966,7 @@ public class cgBase {
             return -1;  // error
         }
 
-        boolean guidOnPage = checkPageForGuid(cache, page);
+        boolean guidOnPage = cache.isGuidContainedInPage(page);
         if (guidOnPage) {
             Log.i(cgSettings.tag, "cgBase.addToWatchlist: cache is on watchlist");
             cache.onWatchlist = true;
@@ -4010,7 +4007,7 @@ public class cgBase {
 		params.put("ctl00$ContentBody$btnYes", "Yes");
 
 		page = request(false, host, path, method, params, false, false, false).getData();
-		boolean guidOnPage = checkPageForGuid(cache, page);
+		boolean guidOnPage = cache.isGuidContainedInPage(page);
 		if (! guidOnPage) {
 			Log.i(cgSettings.tag, "cgBase.removeFromWatchlist: cache removed from watchlist");
 			cache.onWatchlist = false;
@@ -4018,29 +4015,6 @@ public class cgBase {
 			Log.e(cgSettings.tag, "cgBase.removeFromWatchlist: cache not removed from watchlist");
 		}
 		return guidOnPage ? -1 : 0; // on watchlist (=error) / not on watchlist
-	}
-
-	/**
-	 * checks if a page contains the guid of a cache
-	 *
-	 * @param cache  the cache to look for
-	 * @param page   the page to search in
-	 *
-	 * @return  true: page contains guid of cache, false: otherwise
-	 */
-	private boolean checkPageForGuid(cgCache cache, String page) {
-		// check if the guid of the cache is anywhere in the page
-		if (cache.guid == null  ||  cache.guid.length() == 0)
-			return false;
-		Pattern patternOk = Pattern.compile(cache.guid, Pattern.CASE_INSENSITIVE);
-		Matcher matcherOk = patternOk.matcher(page);
-		if (matcherOk.find()) {
-			Log.i(cgSettings.tag, "cgBase.checkPageForGuid: guid '" + cache.guid + "' found");
-			return true;
-		} else {
-			Log.i(cgSettings.tag, "cgBase.checkPageForGuid: guid '" + cache.guid + "' not found");
-			return false;
-		}
 	}
 
 	final public static HostnameVerifier doNotVerify = new HostnameVerifier() {
@@ -4183,7 +4157,7 @@ public class cgBase {
 		}
 	}
 
-	private void readIntoBuffer(BufferedReader br, StringBuffer buffer) throws IOException {
+	private static void readIntoBuffer(BufferedReader br, StringBuffer buffer) throws IOException {
 		int bufferSize = 1024*16;
 		char[] bytes = new char[bufferSize];
 		int bytesRead;
@@ -4196,99 +4170,6 @@ public class cgBase {
 			}
 		}
 	}
-
-	/*
-	public ArrayList<String> translate(ArrayList<String> text, String target) {
-		if (settings.translate == false) {
-			return text;
-		}
-
-		String[] languages = null;
-		if (settings.languages != null) {
-			languages = settings.languages.split(" ");
-		}
-
-		ArrayList<String> translated = new ArrayList<String>();
-		String language = null;
-
-		if (text == null || text.isEmpty()) {
-			return text;
-		}
-
-		// cut to 5000 characters (limitation of Google Translation API)
-		for (String textOne : text) {
-			int len = urlencode_rfc3986(textOne).length();
-			if (len > 5000) {
-				textOne = Html.fromHtml(textOne).toString();
-				len = urlencode_rfc3986(textOne).length();
-
-				if (len > 5000) {
-					int cut = 2000;
-					if (textOne.length() > cut) {
-						cut = 1000;
-					}
-
-					textOne = textOne.substring(0, cut) + "...";
-				}
-			}
-		}
-
-		try {
-			if (target == null) {
-				final Locale locale = Locale.getDefault();
-				target = locale.getLanguage();
-			}
-
-			final String scheme = "https://";
-			final String host = "www.googleapis.com";
-			final String path = "/language/translate/v2";
-
-			final ArrayList<String> params = new ArrayList<String>();
-			params.add("key=" + urlencode_rfc3986("AIzaSyAJH8x5etFHUbFifmgChlWoCVmwBFSwShQ"));
-			params.add("target=" + urlencode_rfc3986(target));
-			for (String textOne : text) {
-				params.add("q=" + urlencode_rfc3986(textOne));
-			}
-			params.add("format=" + urlencode_rfc3986("html"));
-
-			String page = requestJSON(scheme, host, path, "POST", implode("&", params.toArray()));
-
-			if (page == null || page.length() == 0) {
-				return text;
-			}
-
-			JSONObject json = new JSONObject(page);
-			JSONObject jsonData = json.getJSONObject("data");
-			JSONArray jsonTranslations = jsonData.getJSONArray("translations");
-			int translationCnt = jsonTranslations.length();
-
-			for (int i = 0; i < translationCnt; i ++) {
-				JSONObject jsonTranslation = jsonTranslations.getJSONObject(i);
-				language = jsonTranslation.getString("detectedSourceLanguage");
-
-				boolean toTranslate = true;
-				if (languages != null) {
-					for (String lng : languages) {
-						if (lng.equalsIgnoreCase(language)) {
-							toTranslate = false;
-						}
-					}
-				}
-
-				if (toTranslate == false) {
-					translated.add(text.get(i));
-				} else {
-					Log.i(cgSettings.tag, "Translating #" + i + ": " + language + ">" + target);
-					translated.add(jsonTranslation.getString("translatedText"));
-				}
-			}
-		} catch (Exception e) {
-			Log.w(cgSettings.tag, "cgBase.translate: " + e.toString());
-		}
-
-		return translated;
-	}
-	*/
 
 	public String getLocalIpAddress() {
 		try {
@@ -4673,7 +4554,7 @@ public class cgBase {
 		return response;
 	}
 
-	private String replaceWhitespace(final StringBuffer buffer) {
+	private static String replaceWhitespace(final StringBuffer buffer) {
 		final int length = buffer.length();
 		final char[] bytes = new char[length];
 		buffer.getChars(0, length, bytes, 0);

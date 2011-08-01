@@ -1,8 +1,5 @@
 package cgeo.geocaching.googlemaps;
 
-import org.mapsforge.android.maps.MapDatabase;
-import org.mapsforge.android.maps.MapViewMode;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
@@ -86,12 +83,12 @@ public class googleMapView extends MapView implements MapViewImpl{
 	@Override
 	public cgMapOverlay createAddMapOverlay(cgSettings settings,
 			Context context, Drawable drawable, boolean fromDetailIntent) {
-		
+
 		googleCacheOverlay ovl = new googleCacheOverlay(settings, context, drawable, fromDetailIntent);
 		getOverlays().add(ovl);
 		return ovl.getBase();
 	}
-	
+
 	@Override
 	public cgUsersOverlay createAddUsersOverlay(Context context, Drawable markerIn) {
 		googleUsersOverlay ovl = new googleUsersOverlay(context, markerIn);
@@ -106,7 +103,7 @@ public class googleMapView extends MapView implements MapViewImpl{
 
 	@Override
 	public void setMapSource(cgSettings settings) {
-		
+
 		switch(settings.mapSource) {
 		case googleSat:
 			setSatellite(true);
@@ -114,8 +111,8 @@ public class googleMapView extends MapView implements MapViewImpl{
 		default:
 			setSatellite(false);
 	}
-		
-		
+
+
 	}
 
 	@Override
