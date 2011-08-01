@@ -164,15 +164,19 @@ public class cgeomap extends MapBase {
 			if (msg.what == 0) {
 				if (waitDialog != null) {
 					int secondsElapsed = (int)((System.currentTimeMillis() - detailProgressTime) / 1000);
-					int secondsRemaining = (detailTotal - detailProgress) * secondsElapsed / detailProgress;
+					int secondsRemaining;
+					if (detailProgress > 0)  //DP can be zero and cause devisionByZero
+						secondsRemaining = (detailTotal - detailProgress) * secondsElapsed / detailProgress;
+					else
+						secondsRemaining = (detailTotal - detailProgress) * secondsElapsed;
 
 					waitDialog.setProgress(detailProgress);
 					if (secondsRemaining < 40) {
 						waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
 					} else if (secondsRemaining < 90) {
-						waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format(Locale.getDefault(), "%.0f", (secondsRemaining / 60)) + " " + res.getString(R.string.caches_eta_min));
+						waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format(Locale.getDefault(), "%d", (secondsRemaining / 60)) + " " + res.getString(R.string.caches_eta_min));
 					} else {
-						waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format(Locale.getDefault(), "%.0f", (secondsRemaining / 60)) + " " + res.getString(R.string.caches_eta_mins));
+						waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format(Locale.getDefault(), "%d", (secondsRemaining / 60)) + " " + res.getString(R.string.caches_eta_mins));
 					}
 				}
 			} else {
