@@ -416,7 +416,8 @@
 
   <!-- map sources -->
   <string-array name="map_sources">
-    <item>Google Maps</item>
+    <item>Google: Map</item>
+    <item>Google: Satellite</item>
     <item>OSM: Mapnik</item>
     <item>OSM: Osmarender</item>
     <item>OSM: Cyclemap</item>
@@ -595,7 +596,6 @@
   <!-- map -->
   <string name="map_map">Map</string>
   <string name="map_live">Live map</string>
-  <string name="map_view_satellite">Satellite view</string>
   <string name="map_view_map">Map view</string>
   <string name="map_trail_show">Show trail</string>
   <string name="map_trail_hide">Hide trail</string>

@@ -109,17 +109,7 @@ public class mfMapView extends MapView implements MapViewImpl {
 	}
 
 	@Override
-	public boolean isSatellite() {
-		return false;
-	}
-
-	@Override
 	public void preLoad() {
-		// Nothing to do here
-	}
-
-	@Override
-	public void setSatellite(boolean b) {
 		// Nothing to do here
 	}
 
@@ -140,21 +130,22 @@ public class mfMapView extends MapView implements MapViewImpl {
 	
 	@Override
 	public void setMapSource(cgSettings settings) {
-
-		setMapViewMode(MapViewMode.MAPNIK_TILE_DOWNLOAD);
 		
-		switch(settings.mapProvider) {
-			case mapsforgeMapnik:
-				// is default
-				break;
+		switch(settings.mapSource) {
 			case mapsforgeOsmarender:
 				setMapViewMode(MapViewMode.OSMARENDER_TILE_DOWNLOAD);
+				break;
+			case mapsforgeCycle:
+				setMapViewMode(MapViewMode.OPENCYCLEMAP_TILE_DOWNLOAD);
 				break;
 			case mapsforgeOffline:
 				if (MapDatabase.isValidMapFile(settings.getMapFile())) {
 					setMapViewMode(MapViewMode.CANVAS_RENDERER);
 					super.setMapFile(settings.getMapFile());
 				}
+				break;
+			default:
+				setMapViewMode(MapViewMode.MAPNIK_TILE_DOWNLOAD);
 		}
 	}
 }

@@ -16,8 +16,6 @@ public interface MapViewImpl {
 
 	void invalidate();
 
-	void setSatellite(boolean b);
-
 	void setBuiltInZoomControls(boolean b);
 
 	void displayZoomControls(boolean b);
@@ -31,8 +29,6 @@ public interface MapViewImpl {
 	MapControllerImpl getMapController();
 
 	void destroyDrawingCache();
-
-	boolean isSatellite();
 
 	GeoPointImpl getMapViewCenter();
 
