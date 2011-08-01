@@ -33,7 +33,7 @@ public class cgData {
 	private cgDbHelper dbHelper = null;
 	private SQLiteDatabase databaseRO = null;
 	private SQLiteDatabase databaseRW = null;
-	private static final int dbVersion = 53;
+	private static final int dbVersion = 54;
 	private static final String dbName = "data";
 	private static final String dbTableCaches = "cg_caches";
 	private static final String dbTableLists = "cg_lists";
@@ -42,6 +42,7 @@ public class cgData {
 	private static final String dbTableSpoilers = "cg_spoilers";
 	private static final String dbTableLogs = "cg_logs";
 	private static final String dbTableLogCount = "cg_logCount";
+	private static final String dbTableLogImages = "cg_logImages";
 	private static final String dbTableLogsOffline = "cg_logs_offline";
 	private static final String dbTableTrackables = "cg_trackables";
 	private static final String dbTableSearchDestionationHistory = "cg_search_destination_history";
@@ -150,6 +151,13 @@ public class cgData {
 			+ "updated long not null, " // date of save
 			+ "type integer not null default 4, "
 			+ "count integer not null default 0 "
+			+ "); ";
+	private static final String dbCreateLogImages = ""
+			+ "create table " + dbTableLogImages + " ("
+			+ "_id integer primary key autoincrement, "
+			+ "log_id integer not null, " 
+			+ "title text not null, "
+			+ "url text not null"
 			+ "); ";
 	private static final String dbCreateLogsOffline = ""
 			+ "create table " + dbTableLogsOffline + " ("
@@ -397,6 +405,7 @@ public class cgData {
 			db.execSQL(dbCreateSpoilers);
 			db.execSQL(dbCreateLogs);
 			db.execSQL(dbCreateLogCount);
+			db.execSQL(dbCreateLogImages);
 			db.execSQL(dbCreateLogsOffline);
 			db.execSQL(dbCreateTrackables);
 			db.execSQL(dbCreateSearchDestinationHistory);
@@ -701,7 +710,7 @@ public class cgData {
 							Log.e(cgSettings.tag, "Failed to upgrade to ver. 51: " + e.toString());
 						}
 					}
-					
+
 					if (oldVersion < 52) { // upgrade to 52
 						try {
 							db.execSQL(dbCreateSearchDestinationHistory);
@@ -711,7 +720,7 @@ public class cgData {
 							Log.e(cgSettings.tag, "Failed to upgrade to ver. 52", e);
 						}
 					}
-					
+			
 					if (oldVersion < 53) { // upgrade to 53
 						try {
 							db.execSQL("alter table " + dbTableCaches + " add column onWatchlist integer");
@@ -719,6 +728,15 @@ public class cgData {
 							Log.i(cgSettings.tag, "Column onWatchlist added to " + dbTableCaches +".");
 						} catch (Exception e) {
 							Log.e(cgSettings.tag, "Failed to upgrade to ver. 53", e);
+						}
+					}
+
+					if (oldVersion < 54) { // update to 54
+						try {
+							db.execSQL(dbCreateLogImages);						
+						} catch (Exception e) {
+							Log.e(cgSettings.tag, "Failed to upgrade to ver. 54: " + e.toString());
+
 						}
 					}
 				}
@@ -1386,7 +1404,7 @@ public class cgData {
 		return false;
 	}
 
-	public boolean saveSpoilers(String geocode, ArrayList<cgSpoiler> spoilers) {
+	public boolean saveSpoilers(String geocode, ArrayList<cgImage> spoilers) {
 		init();
 
 		if (geocode == null || geocode.length() == 0 || spoilers == null) {
@@ -1399,7 +1417,7 @@ public class cgData {
 
 			if (!spoilers.isEmpty()) {
 				ContentValues values = new ContentValues();
-				for (cgSpoiler oneSpoiler : spoilers) {
+				for (cgImage oneSpoiler : spoilers) {
 					values.clear();
 					values.put("geocode", geocode);
 					values.put("updated", System.currentTimeMillis());
@@ -1446,8 +1464,18 @@ public class cgData {
 					values.put("log", oneLog.log);
 					values.put("date", oneLog.date);
 					values.put("found", oneLog.found);
-
-					databaseRW.insert(dbTableLogs, null, values);
+					
+					long log_id = databaseRW.insert(dbTableLogs, null, values);
+					
+					if ((oneLog.logImages != null) && (oneLog.logImages.size() > 0)) { 
+						for (cgImage img : oneLog.logImages) {
+							values.clear();
+							values.put("log_id", log_id);
+							values.put("title", img.title);
+							values.put("url", img.url);
+							databaseRW.insert(dbTableLogImages, null, values);
+						}
+					}
 				}
 			}
 			databaseRW.setTransactionSuccessful();
@@ -1837,10 +1865,10 @@ public class cgData {
 						}
 
 						if (loadS == true) {
-							ArrayList<cgSpoiler> spoilers = loadSpoilers(cache.geocode);
+							ArrayList<cgImage> spoilers = loadSpoilers(cache.geocode);
 							if (spoilers != null && spoilers.isEmpty() == false) {
 								if (cache.spoilers == null)
-									cache.spoilers = new ArrayList<cgSpoiler>();
+									cache.spoilers = new ArrayList<cgImage>();
 								else
 									cache.spoilers.clear();
 								cache.spoilers.addAll(spoilers);
@@ -2049,7 +2077,7 @@ public class cgData {
 		return waypoints;
 	}
 
-	public ArrayList<cgSpoiler> loadSpoilers(String geocode) {
+	public ArrayList<cgImage> loadSpoilers(String geocode) {
 		init();
 
 		if (geocode == null || geocode.length() == 0) {
@@ -2057,7 +2085,7 @@ public class cgData {
 		}
 
 		Cursor cursor = null;
-		ArrayList<cgSpoiler> spoilers = new ArrayList<cgSpoiler>();
+		ArrayList<cgImage> spoilers = new ArrayList<cgImage>();
 
 		cursor = databaseRO.query(
 				dbTableSpoilers,
@@ -2073,7 +2101,7 @@ public class cgData {
 			cursor.moveToFirst();
 
 			do {
-				cgSpoiler spoiler = new cgSpoiler();
+				cgImage spoiler = new cgImage();
 				spoiler.url = (String) cursor.getString(cursor.getColumnIndex("url"));
 				spoiler.title = (String) cursor.getString(cursor.getColumnIndex("title"));
 				spoiler.description = (String) cursor.getString(cursor.getColumnIndex("description"));
@@ -2175,7 +2203,8 @@ public class cgData {
 				log.log = (String) cursor.getString(cursor.getColumnIndex("log"));
 				log.date = (long) cursor.getLong(cursor.getColumnIndex("date"));
 				log.found = (int) cursor.getInt(cursor.getColumnIndex("found"));
-
+				log.logImages = loadLogImages(log.id);
+				
 				logs.add(log);
 			} while (cursor.moveToNext());
 		}
@@ -2223,6 +2252,42 @@ public class cgData {
 		}
 
 		return logCounts;
+	}
+	
+	public ArrayList<cgImage> loadLogImages(int log_id) {
+		init();
+		
+		ArrayList<cgImage> logImgList = new ArrayList<cgImage>();
+		
+		Cursor cursor = null;
+		cursor = databaseRO.query(
+				dbTableLogImages,
+				new String[]{"_id", "log_id", "title", "url"},
+				"log_id = \"" + log_id + "\"",
+				null,
+				null,
+				null,
+				null,
+				"100");
+		
+		if (cursor != null && cursor.getCount() > 0) {
+			cursor.moveToFirst();
+
+			do {
+				final cgImage log_img = new cgImage();
+				log_img.title = (String)cursor.getString(cursor.getColumnIndex("title"));
+				log_img.url = (String)cursor.getString(cursor.getColumnIndex("url"));
+				if (logImgList != null) {
+					logImgList.add(log_img);
+				}
+			} while (cursor.moveToNext());
+		}
+
+		if (cursor != null) {
+			cursor.close();
+		}
+		
+		return logImgList;		
 	}
 
 	public ArrayList<cgTrackable> loadInventory(String geocode) {

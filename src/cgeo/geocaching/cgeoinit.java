@@ -344,6 +344,15 @@ public class cgeoinit extends Activity {
 		}
 		offlineButton.setOnClickListener(new cgeoChangeOffline());
 
+		CheckBox saveLogImgButton = (CheckBox) findViewById(R.id.save_log_img);
+		if (prefs.getInt("logimages", 1) == 0) {
+			saveLogImgButton.setChecked(false);
+		} else {
+			saveLogImgButton.setChecked(true);
+		}
+		saveLogImgButton.setOnClickListener(new cgeoChangeSaveLogImg());
+
+		
 		CheckBox autoloadButton = (CheckBox) findViewById(R.id.autoload);
 		if (prefs.getInt("autoloaddesc", 0) == 0) {
 			autoloadButton.setChecked(false);
@@ -810,6 +819,30 @@ public class cgeoinit extends Activity {
 				offlineButton.setChecked(false);
 			} else {
 				offlineButton.setChecked(true);
+			}
+
+			return;
+		}
+	}
+	
+	private class cgeoChangeSaveLogImg implements View.OnClickListener {
+
+		public void onClick(View arg0) {
+			SharedPreferences.Editor edit = prefs.edit();
+			if (prefs.getInt("logimages", 1) == 0) {
+				edit.putInt("logimages", 1);
+				settings.storeLogImg = 1;
+			} else {
+				edit.putInt("logimages", 0);
+				settings.storeLogImg = 0;
+			}
+			edit.commit();
+
+			CheckBox saveLogImgButton = (CheckBox) findViewById(R.id.save_log_img);
+			if (prefs.getInt("logimages", 1) == 0) {
+				saveLogImgButton.setChecked(false);
+			} else {
+				saveLogImgButton.setChecked(true);
 			}
 
 			return;

@@ -90,15 +90,22 @@
 				android:layout_marginBottom="2dip"
 				android:scaleType="fitXY"
 				android:src="@drawable/mark_red_more" />
+	</LinearLayout>	
+	<LinearLayout android:id="@+id/log_layout"  
+				android:layout_height="wrap_content"
+				android:layout_width="fill_parent" 
+				android:orientation="vertical"
+				android:padding="3dip"
+				android:textSize="14dip"
+				android:layout_marginLeft="84dip">
+			<TextView android:id="@+id/log"
+				android:layout_width="fill_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="22dip"				
+				android:layout_gravity="left"
+				android:gravity="left"
+				android:padding="3dip"
+				android:textSize="14dip"
+				android:textColor="?text_color" />
 	</LinearLayout>
-	<TextView android:id="@+id/log"
-			android:layout_width="fill_parent"
-			android:layout_height="wrap_content"
-			android:layout_marginTop="22dip"
-			android:layout_marginLeft="82dip"
-			android:layout_gravity="left"
-			android:gravity="left"
-			android:padding="3dip"
-			android:textSize="14dip"
-			android:textColor="?text_color" />
 </RelativeLayout>

@@ -769,7 +769,7 @@ public class cgeoapplication extends Application {
 		return storage.loadInventory(geocode);
 	}
 
-	public ArrayList<cgSpoiler> loadSpoilers(String geocode) {
+	public ArrayList<cgImage> loadSpoilers(String geocode) {
 		return storage.loadSpoilers(geocode);
 	}
 

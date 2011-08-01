@@ -31,6 +31,7 @@ public class cgHtmlImg implements Html.ImageGetter {
 	private boolean placement = true;
 	private int reason = 0;
 	private boolean onlySave = false;
+	private boolean save = true;
 	private BitmapFactory.Options bfOptions = new BitmapFactory.Options();
 	private Display display = null;
 	private int maxWidth = 0;
@@ -38,7 +39,7 @@ public class cgHtmlImg implements Html.ImageGetter {
 	private double ratio = 1.0d;
 	private int width = 0;
 	private int height = 0;
-
+	
 	public cgHtmlImg(Activity activityIn, cgSettings settingsIn, String geocodeIn, boolean placementIn, int reasonIn, boolean onlySaveIn) {
 		activity = activityIn;
 		settings = settingsIn;
@@ -52,6 +53,22 @@ public class cgHtmlImg implements Html.ImageGetter {
 		display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 		maxWidth = display.getWidth() - 25;
 		maxHeight = display.getHeight() - 25;
+	}
+	
+	public cgHtmlImg(Activity activityIn, cgSettings settingsIn, String geocodeIn, boolean placementIn, int reasonIn, boolean onlySaveIn, boolean saveIn) {		
+		activity = activityIn;
+		settings = settingsIn;
+		geocode = geocodeIn;
+		placement = placementIn;
+		reason = reasonIn;
+		onlySave = onlySaveIn;
+		save = saveIn;
+
+		bfOptions.inTempStorage = new byte[16 * 1024];
+		
+		display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+		maxWidth = display.getWidth() - 25;
+		maxHeight = display.getHeight() - 25;	
 	}
 
 	@Override
@@ -212,27 +229,29 @@ public class cgHtmlImg implements Html.ImageGetter {
 				}
 			}
 
-			try {
-				// save to memory/SD cache
-				if (bufferedEntity != null) {
-					final InputStream is = (InputStream) bufferedEntity.getContent();
-					final FileOutputStream fos = new FileOutputStream(fileName);
-					try {
-						final byte[] buffer = new byte[4096];
-						int l;
-						while ((l = is.read(buffer)) != -1) {
-							fos.write(buffer, 0, l);
+			if (save == true) {
+				try {
+					// save to memory/SD cache
+					if (bufferedEntity != null) {
+						final InputStream is = (InputStream) bufferedEntity.getContent();
+						final FileOutputStream fos = new FileOutputStream(fileName);
+						try {
+							final byte[] buffer = new byte[4096];
+							int l;
+							while ((l = is.read(buffer)) != -1) {
+								fos.write(buffer, 0, l);
+							}
+						} catch (IOException e) {
+							Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (saving to cache): " + e.toString());
+						} finally {
+							is.close();
+							fos.flush();
+							fos.close();
 						}
-					} catch (IOException e) {
-						Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (saving to cache): " + e.toString());
-					} finally {
-						is.close();
-						fos.flush();
-						fos.close();
 					}
+				} catch (Exception e) {
+					Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (saving to cache): " + e.toString());
 				}
-			} catch (Exception e) {
-				Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (saving to cache): " + e.toString());
 			}
 
 			entity = null;
@@ -282,5 +301,5 @@ public class cgHtmlImg implements Html.ImageGetter {
 		image.setBounds(new Rect(0, 0, width, height));
 		
 		return image;
-	}
+	}	
 }

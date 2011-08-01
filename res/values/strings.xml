@@ -994,4 +994,7 @@
 	· new: Any destination saves last used location\n
 	· fix: End of line in logs\n
 	\n</string>
+  <string name="cache_log_images_loading">Loading log Image ...</string>
+  <string name="cache_log_images_title">Logimage</string>
+  <string name="save_log_img">Save Images from Logs</string>
 </resources>
