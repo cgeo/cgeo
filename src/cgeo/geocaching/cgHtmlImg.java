@@ -39,20 +39,9 @@ public class cgHtmlImg implements Html.ImageGetter {
 	private double ratio = 1.0d;
 	private int width = 0;
 	private int height = 0;
-	
-	public cgHtmlImg(Activity activityIn, cgSettings settingsIn, String geocodeIn, boolean placementIn, int reasonIn, boolean onlySaveIn) {
-		activity = activityIn;
-		settings = settingsIn;
-		geocode = geocodeIn;
-		placement = placementIn;
-		reason = reasonIn;
-		onlySave = onlySaveIn;
-
-		bfOptions.inTempStorage = new byte[16 * 1024];
 		
-		display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-		maxWidth = display.getWidth() - 25;
-		maxHeight = display.getHeight() - 25;
+	public cgHtmlImg(Activity activityIn, cgSettings settingsIn, String geocodeIn, boolean placementIn, int reasonIn, boolean onlySaveIn) {
+		this(activityIn, settingsIn, geocodeIn, placementIn, reasonIn, onlySaveIn, true);
 	}
 	
 	public cgHtmlImg(Activity activityIn, cgSettings settingsIn, String geocodeIn, boolean placementIn, int reasonIn, boolean onlySaveIn, boolean saveIn) {		

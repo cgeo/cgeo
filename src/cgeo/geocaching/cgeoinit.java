@@ -345,7 +345,7 @@ public class cgeoinit extends Activity {
 		offlineButton.setOnClickListener(new cgeoChangeOffline());
 
 		CheckBox saveLogImgButton = (CheckBox) findViewById(R.id.save_log_img);
-		if (prefs.getInt("logimages", 1) == 0) {
+		if (prefs.getBoolean("logimages", false) == false) {
 			saveLogImgButton.setChecked(false);
 		} else {
 			saveLogImgButton.setChecked(true);
@@ -829,17 +829,17 @@ public class cgeoinit extends Activity {
 
 		public void onClick(View arg0) {
 			SharedPreferences.Editor edit = prefs.edit();
-			if (prefs.getInt("logimages", 1) == 0) {
-				edit.putInt("logimages", 1);
-				settings.storeLogImg = 1;
+			if (prefs.getBoolean("logimages", true) == false) {
+				edit.putBoolean("logimages", true);
+				settings.storelogimages = true;
 			} else {
-				edit.putInt("logimages", 0);
-				settings.storeLogImg = 0;
+				edit.putBoolean("logimages", false);
+				settings.storelogimages = false;
 			}
 			edit.commit();
 
 			CheckBox saveLogImgButton = (CheckBox) findViewById(R.id.save_log_img);
-			if (prefs.getInt("logimages", 1) == 0) {
+			if (prefs.getBoolean("logimages", true) == false) {
 				saveLogImgButton.setChecked(false);
 			} else {
 				saveLogImgButton.setChecked(true);

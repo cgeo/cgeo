@@ -2277,9 +2277,7 @@ public class cgData {
 				final cgImage log_img = new cgImage();
 				log_img.title = (String)cursor.getString(cursor.getColumnIndex("title"));
 				log_img.url = (String)cursor.getString(cursor.getColumnIndex("url"));
-				if (logImgList != null) {
-					logImgList.add(log_img);
-				}
+				logImgList.add(log_img);
 			} while (cursor.moveToNext());
 		}
 

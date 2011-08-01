@@ -1204,7 +1204,7 @@ public class cgeodetail extends Activity {
 					for (int i_img_cnt = 0; i_img_cnt < log.logImages.size(); i_img_cnt++) {
 						String img_title = log.logImages.get(i_img_cnt).title;
 						if (img_title.equals("")) {
-							img_title = "Photo";
+							img_title = res.getString(R.string.cache_log_image_default_title);
 						}
 						final String title = img_title;
 						final String url = log.logImages.get(i_img_cnt).url;

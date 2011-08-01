@@ -5157,7 +5157,7 @@ public class cgBase {
 			}
 			
 			// store images from logs
-			if (settings.storeLogImg == 1) {
+			if (settings.storelogimages == true) {
 				for (cgLog log : cache.logs) {
 					if (log.logImages != null && log.logImages.isEmpty() == false) {
 						for (cgImage oneLogImg : log.logImages) {

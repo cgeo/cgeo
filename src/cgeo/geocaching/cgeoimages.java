@@ -57,10 +57,10 @@ public class cgeoimages extends Activity {
 					}
 					switch (img_type) {
 					case LOG_IMAGE:
-						warning.showToast("Sorry, c:geo failed to load log image.");
+						warning.showToast(res.getString(R.string.warn_load_log_image));
 						break;
 					case SPOILER_IMAGE:
-						warning.showToast("Sorry, c:geo failed to load spoiler images.");
+						warning.showToast(res.getString(R.string.warn_load_spoiler_image));
 						break;
 					}					
 
@@ -197,7 +197,7 @@ public class cgeoimages extends Activity {
 			break;
 		case LOG_IMAGE:
 			load_process_string = res.getString(R.string.cache_log_images_loading);
-			if (settings.storeLogImg == 1) {
+			if (settings.storelogimages == true) {
 				save = true;
 			} else {
 				save = false;
