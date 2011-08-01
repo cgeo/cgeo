@@ -26,7 +26,7 @@ public class mfMapController implements MapControllerImpl {
 
 	@Override
 	public void setZoom(int mapzoom) {
-		mapController.setZoom(mapzoom);
+		mapController.setZoom(mapzoom-1);
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class mfMapController implements MapControllerImpl {
 			// calculate zoomlevel
 			int distDegree = Math.max(latSpanE6, lonSpanE6);
 			int zoomLevel = (int) Math.floor(Math.log(360.0*1e6/distDegree)/Math.log(2));
-			mapController.setZoom(zoomLevel);
+			mapController.setZoom(zoomLevel+1);
 			}		
 	}	
 }

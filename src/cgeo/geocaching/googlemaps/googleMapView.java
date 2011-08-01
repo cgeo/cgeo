@@ -1,5 +1,8 @@
 package cgeo.geocaching.googlemaps;
 
+import org.mapsforge.android.maps.MapDatabase;
+import org.mapsforge.android.maps.MapViewMode;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
@@ -103,7 +106,16 @@ public class googleMapView extends MapView implements MapViewImpl{
 
 	@Override
 	public void setMapSource(cgSettings settings) {
-		// nothing to do for google maps...
+		
+		switch(settings.mapSource) {
+		case googleSat:
+			setSatellite(true);
+			break;
+		default:
+			setSatellite(false);
+	}
+		
+		
 	}
 
 	@Override
