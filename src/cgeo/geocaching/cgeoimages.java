@@ -162,10 +162,8 @@ public class cgeoimages extends Activity {
 		if (img_type == SPOILER_IMAGE) 
 		{
 			base.setTitle(activity, res.getString(R.string.cache_spoiler_images_title));
-			base.sendAnal(activity, "/spoilers");
 		} else if (img_type == LOG_IMAGE) {
 			base.setTitle(activity, res.getString(R.string.cache_log_images_title));
-			base.sendAnal(activity, "/logimg");
 		}
 		
 		if (geocode == null) {
