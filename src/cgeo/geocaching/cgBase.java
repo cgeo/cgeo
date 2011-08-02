@@ -69,8 +69,6 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
 public class cgBase {
 
 	public static HashMap<String, String> cacheTypes = new HashMap<String, String>();
@@ -5411,11 +5409,11 @@ public class cgBase {
 		return icon;
 	}
 
-	public boolean runNavigation(Activity activity, Resources res, cgSettings settings, cgWarning warning, GoogleAnalyticsTracker tracker, Double latitude, Double longitude) {
-		return runNavigation(activity, res, settings, warning, tracker, latitude, longitude, null, null);
+	public boolean runNavigation(Activity activity, Resources res, cgSettings settings, cgWarning warning, Double latitude, Double longitude) {
+		return runNavigation(activity, res, settings, warning, latitude, longitude, null, null);
 	}
 
-	public boolean runNavigation(Activity activity, Resources res, cgSettings settings, cgWarning warning, GoogleAnalyticsTracker tracker, Double latitude, Double longitude, Double latitudeNow, Double longitudeNow) {
+	public boolean runNavigation(Activity activity, Resources res, cgSettings settings, cgWarning warning, Double latitude, Double longitude, Double latitudeNow, Double longitudeNow) {
 		if (activity == null) {
 			return false;
 		}
@@ -5427,8 +5425,6 @@ public class cgBase {
 		if (settings.useGNavigation == 1) {
 			try {
 				activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("google.navigation:ll=" + latitude + "," + longitude)));
-
-				sendAnal(activity, tracker, "/external/native/navigation");
 
 				return true;
 			} catch (Exception e) {
@@ -5443,8 +5439,6 @@ public class cgBase {
 			} else {
 				activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?f=d&daddr=" + latitude + "," + longitude)));
 			}
-
-			sendAnal(activity, tracker, "/external/native/maps");
 
 			return true;
 		} catch (Exception e) {
@@ -5481,54 +5475,6 @@ public class cgBase {
 		}
 
 		return usertoken;
-	}
-
-	public void sendAnal(Context context, String page) {
-		(new sendAnalThread(context, null, page)).start();
-	}
-
-	public void sendAnal(Context context, GoogleAnalyticsTracker tracker, String page) {
-		(new sendAnalThread(context, tracker, page)).start();
-	}
-
-	private class sendAnalThread extends Thread {
-
-		Context context = null;
-		GoogleAnalyticsTracker tracker = null;
-		String page = null;
-		boolean startedHere = false;
-
-		public sendAnalThread(Context contextIn, GoogleAnalyticsTracker trackerIn, String pageIn) {
-			context = contextIn;
-			tracker = trackerIn;
-			page = pageIn;
-		}
-
-		@Override
-		public void run() {
-			try {
-				if (page == null || page.length() == 0) {
-					page = "/";
-				}
-
-				if (tracker == null && context != null) {
-					startedHere = true;
-					tracker = GoogleAnalyticsTracker.getInstance();
-					tracker.start(cgSettings.analytics, context);
-				}
-
-				tracker.trackPageView(page);
-				tracker.dispatch();
-
-				Log.i(cgSettings.tag, "Logged use of " + page);
-
-				if (startedHere == true) {
-					tracker.stop();
-				}
-			} catch (Exception e) {
-				// nothing
-			}
-		}
 	}
 
 	public Double getElevation(Double latitude, Double longitude) {

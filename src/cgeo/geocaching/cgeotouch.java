@@ -139,9 +139,6 @@ public class cgeotouch extends cgLogForm {
 		setContentView(R.layout.touch);
 		base.setTitle(activity, res.getString(R.string.trackable_touch));
 
-		// google analytics
-		base.sendAnal(activity, "/trackable/touch");
-
 		// get parameters
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {

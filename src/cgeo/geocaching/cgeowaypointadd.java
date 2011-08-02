@@ -104,9 +104,6 @@ public class cgeowaypointadd extends Activity {
 		setContentView(R.layout.waypoint_new);
 		base.setTitle(activity, "waypoint");
 
-		// google analytics
-		base.sendAnal(activity, "/waypoint/new");
-
 		if (geo == null) {
 			geo = app.startGeo(activity, geoUpdate, base, settings, warning, 0, 0);
 		}

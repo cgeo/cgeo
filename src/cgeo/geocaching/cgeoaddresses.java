@@ -114,9 +114,6 @@ public class cgeoaddresses extends Activity {
 		setContentView(R.layout.addresses);
 		base.setTitle(activity, res.getString(R.string.search_address_result));
 
-		// google analytics
-		base.sendAnal(activity, "/addresses");
-
 		// get parameters
 		Bundle extras = getIntent().getExtras();
 

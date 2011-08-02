@@ -10,8 +10,6 @@ import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgWarning;
 import cgeo.geocaching.cgWaypoint;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
 class InternalMap extends AbstractInternalMap implements
 		NavigationApp {
 
@@ -21,7 +19,7 @@ class InternalMap extends AbstractInternalMap implements
 
 	@Override
 	public boolean invoke(cgGeo geo, Activity activity, Resources res,
-			cgWarning warning, GoogleAnalyticsTracker tracker, cgCache cache,
+			cgWarning warning, cgCache cache,
 			Long searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
 		cgSettings settings = getSettings(activity);
 		Intent mapIntent = new Intent(activity, settings.getMapFactory().getMapClass());

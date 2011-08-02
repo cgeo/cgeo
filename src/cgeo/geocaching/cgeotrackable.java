@@ -330,9 +330,6 @@ public class cgeotrackable extends Activity {
 		setContentView(R.layout.trackable_detail);
 		base.setTitle(activity, res.getString(R.string.trackable));
 
-		// google analytics
-		base.sendAnal(activity, "/trackable/detail");
-
 		// get parameters
 		Bundle extras = getIntent().getExtras();
 		Uri uri = getIntent().getData();

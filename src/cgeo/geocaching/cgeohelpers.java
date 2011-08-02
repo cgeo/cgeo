@@ -40,9 +40,6 @@ public class cgeohelpers extends Activity {
 		}
 		setContentView(R.layout.helpers);
 		base.setTitle(activity, res.getString(R.string.helpers));
-
-		// google analytics
-		base.sendAnal(activity, "/helpers");
 	}
 
 	@Override

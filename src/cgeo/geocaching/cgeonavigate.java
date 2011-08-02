@@ -87,9 +87,6 @@ public class cgeonavigate extends Activity {
 		setContentView(R.layout.navigate);
 		base.setTitle(activity, res.getString(R.string.compass_title));
 
-		// google analytics
-		base.sendAnal(activity, "/navigate");
-
 		// sensor & geolocation manager
 		if (geo == null) {
 			geo = app.startGeo(activity, geoUpdate, base, settings, warning, 0, 0);

@@ -37,9 +37,6 @@ public class cgeoabout extends Activity {
 		setContentView(R.layout.about);
 		base.setTitle(activity, res.getString(R.string.about));
 
-		// google analytics
-		base.sendAnal(activity, "/about");
-
 		init();
 	}
 	
