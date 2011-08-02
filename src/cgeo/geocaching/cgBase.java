@@ -1098,6 +1098,7 @@ public class cgBase {
 		final Pattern patternCountLog = Pattern.compile(" src=\"\\/images\\/icons\\/([^\\.]*).gif\" alt=\"[^\"]*\" title=\"[^\"]*\" />([0-9]*)[^0-9]+", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 		final Pattern patternLogs = Pattern.compile("<table class=\"LogsTable[^\"]*\"[^>]*>[^<]*<tr>(.*)</tr>[^<]*</table>[^<]*<p", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 		final Pattern patternLog = Pattern.compile("<td[^>]*>[^<]*<strong>[^<]*<img src=\"[^\"]*/images/icons/([^\\.]+)\\.[a-z]{2,5}\"[^>]*>&nbsp;([a-zA-Z]+) (\\d+)(, (\\d+))? by <a href=[^>]+>([^<]+)</a>[<^]*</strong>([^\\(]*\\((\\d+) found\\))?(<br[^>]*>)+((?:(?!<small>).)*)(<br[^>]*>)+<small>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+		final Pattern patternLogImgs = Pattern.compile("a href=\"http://img.geocaching.com/cache/log/([^\"]+)\".+?<span>([^<]*)", Pattern.CASE_INSENSITIVE);
 		final Pattern patternAttributes = Pattern.compile("<h3 class=\"WidgetHeader\">[^<]*<img[^>]+>[^\\w]*Attributes[^<]*</h3>[^<]*<div class=\"WidgetBody\">(([^<]*<img src=\"[^\"]+\" alt=\"[^\"]+\"[^>]*>)+)[^<]*<p", Pattern.CASE_INSENSITIVE);
 		final Pattern patternAttributesInside = Pattern.compile("[^<]*<img src=\"([^\"]+)\" alt=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
 		final Pattern patternSpoilers = Pattern.compile("<span id=\"ctl00_ContentBody_Images\">((<a href=\"[^\"]+\"[^>]*>[^<]*<img[^>]+>[^<]*<span>[^>]+</span>[^<]*</a>[^<]*<br[^>]*>([^<]*(<br[^>]*>)+)?)+)[^<]*</span>", Pattern.CASE_INSENSITIVE);
@@ -1512,7 +1513,7 @@ public class cgBase {
 
 					while (matcherSpoilersInside.find()) {
 						if (matcherSpoilersInside.groupCount() > 0) {
-							final cgSpoiler spoiler = new cgSpoiler();
+							final cgImage spoiler = new cgImage();
 							spoiler.url = matcherSpoilersInside.group(1);
 
 							if (matcherSpoilersInside.group(2) != null) {
@@ -1523,7 +1524,7 @@ public class cgBase {
 							}
 
 							if (cache.spoilers == null) {
-								cache.spoilers = new ArrayList<cgSpoiler>();
+								cache.spoilers = new ArrayList<cgImage>();
 							}
 							cache.spoilers.add(spoiler);
 						}
@@ -1694,6 +1695,19 @@ public class cgBase {
 							if (matcherLog.group(8) != null) {
 								logDone.found = new Integer(matcherLog.group(8));
 							}
+							
+							final Matcher matcherImg = patternLogImgs.matcher(logs[k]);
+							
+							while (matcherImg.find()) {		
+								final cgImage logImage = new cgImage();
+								logImage.url = "http://img.geocaching.com/cache/log/" + matcherImg.group(1);
+								logImage.title = matcherImg.group(2);								
+								if (logDone.logImages == null) {
+									logDone.logImages = new ArrayList<cgImage>();
+								}
+								logDone.logImages.add(logImage);															    								
+							}
+							
 							logDone.log = logTmp;
 
 							if (cache.logs == null) {
@@ -5018,8 +5032,19 @@ public class cgBase {
 
 			// store spoilers
 			if (cache.spoilers != null && cache.spoilers.isEmpty() == false) {
-				for (cgSpoiler oneSpoiler : cache.spoilers) {
+				for (cgImage oneSpoiler : cache.spoilers) {
 					imgGetter.getDrawable(oneSpoiler.url);
+				}
+			}
+			
+			// store images from logs
+			if (settings.storelogimages == true) {
+				for (cgLog log : cache.logs) {
+					if (log.logImages != null && log.logImages.isEmpty() == false) {
+						for (cgImage oneLogImg : log.logImages) {
+							imgGetter.getDrawable(oneLogImg.url);
+						}
+					}
 				}
 			}
 

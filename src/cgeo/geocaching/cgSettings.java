@@ -81,6 +81,7 @@ public class cgSettings {
 	public int excludeMine = 0;
 	public int excludeDisabled = 0;
 	public int storeOfflineMaps = 0;
+	public boolean storelogimages = false;
 	public int asBrowser = 1;
 	public int useCompass = 1;
 	public int useGNavigation = 1;
@@ -146,6 +147,7 @@ public class cgSettings {
 		excludeMine = prefs.getInt("excludemine", 0);
 		excludeDisabled = prefs.getInt("excludedisabled", 0);
 		storeOfflineMaps = prefs.getInt("offlinemaps", 1);
+		storelogimages = prefs.getBoolean("logimages", false);
 		asBrowser = prefs.getInt("asbrowser", 1);
 		useCompass = prefs.getInt("usecompass", 1);
 		useGNavigation = prefs.getInt("usegnav", 1);

@@ -55,7 +55,7 @@ public class cgCache {
 	public boolean onWatchlist = false;
 	public ArrayList<String> attributes = null;
 	public ArrayList<cgWaypoint> waypoints = null;
-	public ArrayList<cgSpoiler> spoilers = null;
+	public ArrayList<cgImage> spoilers = null;
 	public ArrayList<cgLog> logs = null;
 	public ArrayList<cgTrackable> inventory = null;
 	public HashMap<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
