@@ -3,18 +3,15 @@
 	  xmlns:android="http://schemas.android.com/apk/res/android"	  
 	  android:layout_width="match_parent"
 	  android:layout_height="match_parent">
-    <ImageView 
-    	android:layout_height="wrap_content"    	 
-    	android:src="@drawable/log_img" 
-    	android:layout_width="wrap_content"/>
-    <TextView 
+    <TextView
     	android:id="@+id/title"
-    	android:text="TextView" 
-    	android:layout_width="wrap_content" 
+    	android:text="Photo"
+    	android:layout_width="wrap_content"
     	android:layout_height="wrap_content"
     	android:layout_alignParentTop="true"
 		android:layout_gravity="left|top"
+        android:drawableLeft="@drawable/log_img"
+        android:drawablePadding="3dip"
     	android:textSize="14dip"
-    	android:layout_marginLeft="2dip"
-		android:textColor="?text_color"/>    
+		android:textColor="?text_color"/>
 </LinearLayout>
