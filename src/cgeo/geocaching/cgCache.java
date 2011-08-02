@@ -3,8 +3,11 @@ package cgeo.geocaching;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.text.Spannable;
+import android.util.Log;
 
 public class cgCache {
 
@@ -52,7 +55,7 @@ public class cgCache {
 	public boolean onWatchlist = false;
 	public ArrayList<String> attributes = null;
 	public ArrayList<cgWaypoint> waypoints = null;
-	public ArrayList<cgSpoiler> spoilers = null;
+	public ArrayList<cgImage> spoilers = null;
 	public ArrayList<cgLog> logs = null;
 	public ArrayList<cgTrackable> inventory = null;
 	public HashMap<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
@@ -233,4 +236,30 @@ public class cgCache {
 		}
 		return true;
 	}
+
+	/**
+	 * checks if a page contains the guid of a cache
+	 *
+	 * @param cache  the cache to look for
+	 * @param page   the page to search in
+	 *
+	 * @return  true: page contains guid of cache, false: otherwise
+	 */
+	boolean isGuidContainedInPage(final String page) {
+		// check if the guid of the cache is anywhere in the page
+		if (guid == null  || guid.length() == 0) {
+			return false;
+		}
+		Pattern patternOk = Pattern.compile(guid, Pattern.CASE_INSENSITIVE);
+		Matcher matcherOk = patternOk.matcher(page);
+		if (matcherOk.find()) {
+			Log.i(cgSettings.tag, "cgCache.isGuidContainedInPage: guid '" + guid + "' found");
+			return true;
+		} else {
+			Log.i(cgSettings.tag, "cgCache.isGuidContainedInPage: guid '" + guid + "' not found");
+			return false;
+		}
+	}
+
+
 }

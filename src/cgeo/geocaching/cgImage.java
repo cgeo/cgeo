@@ -1,6 +1,6 @@
 package cgeo.geocaching;
 
-public class cgSpoiler {
+public class cgImage {
 	public String url = "";
 	public String title = "";
 	public String description = "";

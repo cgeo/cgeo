@@ -30,7 +30,7 @@ public class SizeComparator extends AbstractCacheComparator {
 	 * @param cache
 	 * @return
 	 */
-	private int getSize(final cgCache cache) {
+	private static int getSize(final cgCache cache) {
 		char c = cache.size.charAt(0);
 		switch (c) {
 		case 'm': // micro

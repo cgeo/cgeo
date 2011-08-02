@@ -24,7 +24,7 @@ class RadarApp extends AbstractNavigationApp implements NavigationApp {
 		return true; // seems like Radar is assumed to be available always
 	}
 
-	private void navigateTo(Activity activity, Double latitude, Double longitude) {
+	private static void navigateTo(Activity activity, Double latitude, Double longitude) {
 		Intent radarIntent = new Intent(INTENT);
 		radarIntent.putExtra("latitude", Float.valueOf(latitude.floatValue()));
 		radarIntent.putExtra("longitude", Float.valueOf(longitude.floatValue()));

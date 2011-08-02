@@ -46,13 +46,13 @@ import cgeo.geocaching.mapinterfaces.MapViewImpl;
 import cgeo.geocaching.mapinterfaces.UserOverlayItemImpl;
 
 public class cgeomap extends MapBase {
-	
+
 	private static final int MENU_SELECT_MAPVIEW = 1;
 	private static final int MENU_MAP_LIVE = 2;
-	private static final int MENU_STORE_CACHES = 3; 
+	private static final int MENU_STORE_CACHES = 3;
 	private static final int MENU_TRAIL_MODE = 4;
 	private static final int MENU_CIRCLE_MODE = 5;
-	
+
 	private static final int SUBMENU_VIEW_GOOGLE_MAP = 10;
 	private static final int SUBMENU_VIEW_GOOGLE_SAT = 11;
 	private static final int SUBMENU_VIEW_MF_MAPNIK = 13;
@@ -346,8 +346,8 @@ public class cgeomap extends MapBase {
 		if (geocodeIntent != null || searchIdIntent != null || (latitudeIntent != null && longitudeIntent != null) || mapStateIntent != null) {
 			centerMap(geocodeIntent, searchIdIntent, latitudeIntent, longitudeIntent, mapStateIntent);
 		}
-		
-		
+
+
 		setMyLoc(null);
 		startTimer();
 	}
@@ -462,10 +462,10 @@ public class cgeomap extends MapBase {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		
+
 		SubMenu submenu = menu.addSubMenu(1, MENU_SELECT_MAPVIEW, 0, res.getString(R.string.map_view_map)).setIcon(android.R.drawable.ic_menu_more);
 		addMapViewMenuItems(submenu);
-		
+
 		menu.add(0, MENU_MAP_LIVE, 0, res.getString(R.string.map_live_disable)).setIcon(android.R.drawable.ic_menu_close_clear_cancel);
 		menu.add(0, MENU_STORE_CACHES, 0, res.getString(R.string.caches_store_offline)).setIcon(android.R.drawable.ic_menu_set_as).setEnabled(false);
 		menu.add(0, MENU_TRAIL_MODE, 0, res.getString(R.string.map_trail_hide)).setIcon(android.R.drawable.ic_menu_recent_history);
@@ -473,10 +473,10 @@ public class cgeomap extends MapBase {
 
 		return true;
 	}
-	
+
 	private void addMapViewMenuItems(final Menu menu) {
 		String[] mapViews = res.getStringArray(R.array.map_sources);
-		
+
 		menu.add(0, SUBMENU_VIEW_GOOGLE_MAP, 0, mapViews[0]);
 		menu.add(0, SUBMENU_VIEW_GOOGLE_SAT, 0, mapViews[1]);
 		menu.add(0, SUBMENU_VIEW_MF_MAPNIK, 0, mapViews[2]);
@@ -523,7 +523,7 @@ public class cgeomap extends MapBase {
 			} else {
 				item.setTitle(res.getString(R.string.map_circles_show));
 			}
-			
+
 			item = menu.findItem(SUBMENU_VIEW_MF_OFFLINE);
 			if (settings.hasValidMapFile()) {
 				item.setEnabled(true);
@@ -642,16 +642,16 @@ public class cgeomap extends MapBase {
 			}
 
 			overlayCaches.switchCircles();
-			
+
 		} else if (SUBMENU_VIEW_GOOGLE_MAP <= id && SUBMENU_VIEW_MF_OFFLINE >= id) {
-			
+
 			mapSourceEnum mapSource = getMapSourceFromMenuId(id);
-			
+
 			boolean mapRestartRequired = switchMapSource(mapSource);
-			
+
 			if (mapRestartRequired) {
 				Intent mapIntent = new Intent(activity, settings.getMapFactory().getMapClass());
-	
+
 				mapIntent.putExtra("detail", fromDetailIntent);
 				mapIntent.putExtra("searchid", searchIdIntent);
 				mapIntent.putExtra("geocode", geocodeIntent);
@@ -664,21 +664,21 @@ public class cgeomap extends MapBase {
 				mapState[1] = mapCenter.getLongitudeE6();
 				mapState[2] = mapView.getMapZoomLevel();
 				mapIntent.putExtra("mapstate", mapState);
-	
+
 				activity.startActivity(mapIntent);
-	
+
 				activity.finish();
 			}
-			
+
 			return true;
 		}
-		
+
 
 		return false;
 	}
-	
-	private mapSourceEnum getMapSourceFromMenuId(int menuItemId) {
-		
+
+	private static mapSourceEnum getMapSourceFromMenuId(int menuItemId) {
+
 		switch(menuItemId) {
 		case SUBMENU_VIEW_GOOGLE_MAP:
 			return mapSourceEnum.googleMap;
@@ -696,20 +696,20 @@ public class cgeomap extends MapBase {
 			return mapSourceEnum.googleMap;
 		}
 	}
-	
+
 	private boolean switchMapSource(mapSourceEnum mapSource) {
 
 		settings.mapSource = mapSource;
-		
+
 		prefsEdit.putInt("mapsource", settings.mapSource.ordinal());
 		prefsEdit.commit();
 
 		boolean mapRestartRequired = settings.mapSource.isGoogleMapSource()!= settings.mapSourceUsed.isGoogleMapSource();
-		
+
 		if (!mapRestartRequired) {
 			mapView.setMapSource(settings);
 		}
-		
+
 		return mapRestartRequired;
 	}
 
@@ -1647,7 +1647,7 @@ public class cgeomap extends MapBase {
 
 	// move map to view results of searchIdIntent
 	private void centerMap(String geocodeCenter, Long searchIdCenter, Double latitudeCenter, Double longitudeCenter, int[] mapState) {
-		
+
 		if (!centered && mapState != null) {
 			try {
 				mapController.setCenter(settings.getMapFactory().getGeoPointBase(mapState[0], mapState[1]));
@@ -1655,9 +1655,9 @@ public class cgeomap extends MapBase {
 			} catch (Exception e) {
 				// nothing at all
 			}
-	
+
 			centered = true;
-			alreadyCentered = true;			
+			alreadyCentered = true;
 		} else if (!centered && (geocodeCenter != null || searchIdIntent != null)) {
 			try {
 				ArrayList<Object> viewport;

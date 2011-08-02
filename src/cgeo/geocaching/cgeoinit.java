@@ -1,33 +1,31 @@
 package cgeo.geocaching;
 
-import gnu.android.app.appmanualclient.*;
+import gnu.android.app.appmanualclient.AppManualReaderClient;
 
-import android.os.Bundle;
+import java.io.File;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.view.View;
-import android.widget.EditText;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
-import android.util.Log;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemSelectedListener;
-
-import java.io.File;
-
 import cgeo.geocaching.cgSettings.mapSourceEnum;
 
 public class cgeoinit extends Activity {
@@ -75,7 +73,7 @@ public class cgeoinit extends Activity {
 			init();
 		}
 	};
-        
+
 	private Handler webAuthHandler = new Handler() {
 
 		@Override
@@ -132,7 +130,7 @@ public class cgeoinit extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		settings.load();
 	}
 
@@ -192,7 +190,7 @@ public class cgeoinit extends Activity {
 	}
 
 	public void init() {
-		
+
 		// geocaching.com settings
 		String usernameNow = prefs.getString("username", null);
 		if (usernameNow != null) {
@@ -202,7 +200,7 @@ public class cgeoinit extends Activity {
 		if (usernameNow != null) {
 			((EditText) findViewById(R.id.password)).setText(passwordNow);
 		}
-		
+
 		Button logMeIn = (Button) findViewById(R.id.log_me_in);
 		logMeIn.setOnClickListener(new logIn());
 
@@ -324,7 +322,7 @@ public class cgeoinit extends Activity {
 			disabledButton.setChecked(true);
 		}
 		disabledButton.setOnClickListener(new cgeoChangeDisabled());
-		
+
 		CheckBox autovisitButton = (CheckBox) findViewById(R.id.trackautovisit);
         if (prefs.getBoolean("trackautovisit", false)) {
             autovisitButton.setChecked(true);
@@ -341,6 +339,15 @@ public class cgeoinit extends Activity {
 		}
 		offlineButton.setOnClickListener(new cgeoChangeOffline());
 
+		CheckBox saveLogImgButton = (CheckBox) findViewById(R.id.save_log_img);
+		if (prefs.getBoolean("logimages", false) == false) {
+			saveLogImgButton.setChecked(false);
+		} else {
+			saveLogImgButton.setChecked(true);
+		}
+		saveLogImgButton.setOnClickListener(new cgeoChangeSaveLogImg());
+
+		
 		CheckBox autoloadButton = (CheckBox) findViewById(R.id.autoload);
 		if (prefs.getInt("autoloaddesc", 0) == 0) {
 			autoloadButton.setChecked(false);
@@ -380,14 +387,14 @@ public class cgeoinit extends Activity {
 			browserButton.setChecked(true);
 		}
 		browserButton.setOnClickListener(new cgeoChangeBrowser());
-		
+
 		// Altitude settings
 		EditText altitudeEdit = (EditText) findViewById(R.id.altitude);
 		altitudeEdit.setText("" + prefs.getInt("altcorrection", 0));
 
 		//Send2cgeo settings
                 String webDeviceName = prefs.getString("webDeviceName", null);
-                
+
 		if ((webDeviceName != null) &&(webDeviceName.length() > 0)) {
 			((EditText) findViewById(R.id.webDeviceName)).setText(webDeviceName);
 		} else {
@@ -397,7 +404,7 @@ public class cgeoinit extends Activity {
 
 		Button webAuth = (Button) findViewById(R.id.sendToCgeo_register);
 		webAuth.setOnClickListener(new webAuth());
-                
+
                 /*TextView webText = (TextView) findViewById(R.id.sendToCgeo);
 		webText.setClickable(true);
 		webText.setOnClickListener(new View.OnClickListener() {
@@ -406,29 +413,29 @@ public class cgeoinit extends Activity {
 				activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://send2cgeo.carnero.cc/")));
 			}
 		});*/
-		
+
 		// Map source settings
 		Spinner mapSourceSelector = (Spinner) findViewById(R.id.mapsource);
 	    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
 	            this, R.array.map_sources, android.R.layout.simple_spinner_item);
 	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-	    mapSourceSelector.setAdapter(adapter);		
+	    mapSourceSelector.setAdapter(adapter);
 		int mapsource = prefs.getInt("mapsource", 0);
 		mapSourceSelector.setSelection(mapsource);
 		mapSourceSelector.setOnItemSelectedListener(new cgeoChangeMapSource());
-		
+
 		initMapfileEdittext(false);
-				
+
 		Button selectMapfile = (Button) findViewById(R.id.select_mapfile);
 		selectMapfile.setOnClickListener(new View.OnClickListener() {
-					
+
 			@Override
 			public void onClick(View v) {
 				Intent selectIntent = new Intent(activity, cgSelectMapfile.class);
 				activity.startActivityForResult(selectIntent, SELECT_MAPFILE_REQUEST);
 			}
 		});
-		
+
 		// Cache db backup
 		TextView lastBackup = (TextView) findViewById(R.id.backup_last);
 		File lastBackupFile = app.isRestoreFile();
@@ -437,9 +444,9 @@ public class cgeoinit extends Activity {
 		} else {
 			lastBackup.setText(res.getString(R.string.init_backup_last_no));
 		}
-		
+
 	}
-	
+
 	private void initMapfileEdittext(boolean setFocus) {
 		EditText mfmapFileEdit = (EditText) findViewById(R.id.mapfile);
 		mfmapFileEdit.setText(prefs.getString("mfmapfile", ""));
@@ -450,13 +457,13 @@ public class cgeoinit extends Activity {
 
 	public void backup(View view) {
 		final String file = app.backupDatabase();
-		
+
 		if (file != null) {
 			warning.helpDialog(res.getString(R.string.init_backup_backup), res.getString(R.string.init_backup_success) + "\n" + file);
 		} else {
 			warning.helpDialog(res.getString(R.string.init_backup_backup), res.getString(R.string.init_backup_failed));
 		}
-		
+
 		TextView lastBackup = (TextView) findViewById(R.id.backup_last);
 		File lastBackupFile = app.isRestoreFile();
 		if (lastBackupFile != null) {
@@ -465,17 +472,17 @@ public class cgeoinit extends Activity {
 			lastBackup.setText(res.getString(R.string.init_backup_last_no));
 		}
 	}
-	
+
 	public void restore(View view) {
 		final boolean status = app.restoreDatabase();
-		
+
 		if (status) {
 			warning.helpDialog(res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_success));
 		} else {
 			warning.helpDialog(res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_failed));
 		}
 	}
-	
+
 	public boolean saveValues() {
 		String usernameNew = ((EditText) findViewById(R.id.username)).getText().toString();
 		String passwordNew = ((EditText) findViewById(R.id.password)).getText().toString();
@@ -496,14 +503,14 @@ public class cgeoinit extends Activity {
 		if (signatureNew == null) {
 			signatureNew = "";
 		}
-		
+
 		int altitudeNewInt = 0;
 		if (altitudeNew == null) {
 			altitudeNewInt = 0;
 		} else {
 			altitudeNewInt = new Integer(altitudeNew);
 		}
-		
+
 		if (mfmapFileNew == null) {
 			mfmapFileNew = "";
 		}
@@ -705,7 +712,7 @@ public class cgeoinit extends Activity {
 			return;
 		}
 	}
-	
+
 	private class cgeoChangeAutovisit implements View.OnClickListener {
 
         public void onClick(View arg0) {
@@ -729,7 +736,7 @@ public class cgeoinit extends Activity {
             return;
         }
     }
-	
+
 	private class cgeoChangeSignatureAutoinsert implements View.OnClickListener {
 
         public void onClick(View arg0) {
@@ -796,6 +803,30 @@ public class cgeoinit extends Activity {
 				offlineButton.setChecked(false);
 			} else {
 				offlineButton.setChecked(true);
+			}
+
+			return;
+		}
+	}
+	
+	private class cgeoChangeSaveLogImg implements View.OnClickListener {
+
+		public void onClick(View arg0) {
+			SharedPreferences.Editor edit = prefs.edit();
+			if (prefs.getBoolean("logimages", true) == false) {
+				edit.putBoolean("logimages", true);
+				settings.storelogimages = true;
+			} else {
+				edit.putBoolean("logimages", false);
+				settings.storelogimages = false;
+			}
+			edit.commit();
+
+			CheckBox saveLogImgButton = (CheckBox) findViewById(R.id.save_log_img);
+			if (prefs.getBoolean("logimages", true) == false) {
+				saveLogImgButton.setChecked(false);
+			} else {
+				saveLogImgButton.setChecked(true);
 			}
 
 			return;
@@ -986,14 +1017,14 @@ public class cgeoinit extends Activity {
 				@Override
 				public void run() {
                                         int pin = 0;
-                                        
+
                                         String nam = deviceName==null?"":deviceName;
                                         String cod = deviceCode==null?"":deviceCode;
-                                        
+
                                         String params = "name="+cgBase.urlencode_rfc3986(nam)+"&code="+cgBase.urlencode_rfc3986(cod);
-                                        
+
                                         cgResponse response = base.request(false, "send2cgeo.carnero.cc", "/authDev.php", "GET", params, 0, true);
-                                        
+
                                         if (response.getStatusCode() == 200)
                                         {
                                             //response was OK
@@ -1006,17 +1037,17 @@ public class cgeoinit extends Activity {
                                             String code = strings[0];
                                             settings.setWebNameCode(nam, code);
                                         }
-                                        
+
 					webAuthHandler.sendEmptyMessage(pin);
 				}
 			}).start();
 		}
 	}
-        
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		
+
 		if (requestCode == SELECT_MAPFILE_REQUEST) {
 			if (resultCode == RESULT_OK) {
 				if (data.hasExtra("mapfile")) {
