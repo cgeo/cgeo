@@ -16,7 +16,7 @@ I.  Ant
             ant release
     
 
-II. Other
+II. Other (only once before your normal build)
 
     follow steps from above, but run
         ant -pre-build

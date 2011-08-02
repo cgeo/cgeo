@@ -863,6 +863,7 @@ public class cgeocaches extends ListActivity {
 		            item.setEnabled(menuEnabled);
 		        }
 		    }
+		    
 		    if (navigationMenu != null) {
 		    	navigationMenu.setEnabled(menuEnabled);
 		    }
@@ -892,6 +893,18 @@ public class cgeocaches extends ListActivity {
                     item.setTitle(res.getString(R.string.cache_export_fieldnote) + " (" + adapter.getChecked() + ")");
                 } else {
                     item.setTitle(res.getString(R.string.cache_export_fieldnote));
+                }
+            }
+			
+			// Hide Field Notes export if there are no caches with logs
+            item = menu.findItem(MENU_EXPORT_NOTES);
+            item.setEnabled(false);
+            for (cgCache cache : cacheList)
+            {
+                if (cache.logOffline)
+                {
+                    item.setEnabled(true);
+                    break;
                 }
             }
 		} catch (Exception e) {
