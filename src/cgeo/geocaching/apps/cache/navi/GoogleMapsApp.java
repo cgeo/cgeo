@@ -13,8 +13,6 @@ import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgWarning;
 import cgeo.geocaching.cgWaypoint;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
 class GoogleMapsApp extends AbstractNavigationApp implements NavigationApp {
 
 	GoogleMapsApp(final Resources res) {
@@ -27,7 +25,7 @@ class GoogleMapsApp extends AbstractNavigationApp implements NavigationApp {
 	}
 
 	public boolean invoke(cgGeo geo, Activity activity, Resources res,
-			cgWarning warning, GoogleAnalyticsTracker tracker, cgCache cache,
+			cgWarning warning, cgCache cache,
 			Long searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
 		if (cache == null && waypoint == null && latitude == null && longitude == null) {
 			return false;
@@ -41,8 +39,6 @@ class GoogleMapsApp extends AbstractNavigationApp implements NavigationApp {
 				activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("geo:" + waypoint.latitude + "," + waypoint.longitude)));
 				// INFO: q parameter works with Google Maps, but breaks cooperation with all other apps
 			}
-
-			sendAnal(activity, tracker, "/external/native/maps");
 
 			return true;
 		} catch (Exception e) {

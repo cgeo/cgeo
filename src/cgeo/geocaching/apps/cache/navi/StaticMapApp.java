@@ -11,8 +11,6 @@ import cgeo.geocaching.cgWarning;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeosmaps;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
 class StaticMapApp extends AbstractNavigationApp implements
 		NavigationApp {
 
@@ -27,7 +25,7 @@ class StaticMapApp extends AbstractNavigationApp implements
 
 	@Override
 	public boolean invoke(cgGeo geo, Activity activity, Resources res,
-			cgWarning warning, GoogleAnalyticsTracker tracker, cgCache cache,
+			cgWarning warning, cgCache cache,
 			Long searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
 
 		if (cache == null || cache.reason == 0) {

@@ -13,8 +13,6 @@ import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgWarning;
 import cgeo.geocaching.cgWaypoint;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
 class GoogleNavigationApp extends AbstractNavigationApp implements
 		NavigationApp {
 
@@ -29,7 +27,7 @@ class GoogleNavigationApp extends AbstractNavigationApp implements
 
 	@Override
 	public boolean invoke(cgGeo geo, Activity activity, Resources res,
-			cgWarning warning, GoogleAnalyticsTracker tracker, cgCache cache,
+			cgWarning warning, cgCache cache,
 			Long searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
 		if (activity == null) {
 			return false;
@@ -50,8 +48,6 @@ class GoogleNavigationApp extends AbstractNavigationApp implements
 						.parse("google.navigation:ll=" + latitude + ","
 								+ longitude)));
 
-				sendAnal(activity, tracker, "/external/native/navigation");
-
 				return true;
 			} catch (Exception e) {
 				// nothing
@@ -70,8 +66,6 @@ class GoogleNavigationApp extends AbstractNavigationApp implements
 						.parse("http://maps.google.com/maps?f=d&daddr="
 								+ latitude + "," + longitude)));
 			}
-
-			sendAnal(activity, tracker, "/external/native/maps");
 
 			return true;
 		} catch (Exception e) {

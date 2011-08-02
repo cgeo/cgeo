@@ -10,8 +10,6 @@ import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgWarning;
 import cgeo.geocaching.cgWaypoint;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
 class RadarApp extends AbstractNavigationApp implements NavigationApp {
 
 	private static final String INTENT = "com.google.android.radar.SHOW_RADAR";
@@ -35,7 +33,7 @@ class RadarApp extends AbstractNavigationApp implements NavigationApp {
 
 	@Override
 	public boolean invoke(cgGeo geo, Activity activity, Resources res,
-			cgWarning warning, GoogleAnalyticsTracker tracker, cgCache cache,
+			cgWarning warning, cgCache cache,
 			Long searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
 		if (cache != null) {
 			if (cache.latitude != null && cache.longitude != null) {

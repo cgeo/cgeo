@@ -24,14 +24,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
 public class cgeowaypoint extends Activity {
 
 	private static final int MENU_ID_NAVIGATION = 0;
 	private static final int MENU_ID_CACHES_AROUND = 5;
 	private static final int MENU_ID_COMPASS = 2;
-	private GoogleAnalyticsTracker tracker = null;
 	private cgWaypoint waypoint = null;
 	private String geocode = null;
 	private int id = -1;
@@ -155,12 +152,6 @@ public class cgeowaypoint extends Activity {
 		setContentView(R.layout.waypoint);
 		base.setTitle(activity, "waypoint");
 
-		// google analytics
-		tracker = GoogleAnalyticsTracker.getInstance();
-		tracker.start(cgSettings.analytics, this);
-		tracker.dispatch();
-		base.sendAnal(activity, tracker, "/waypoint/detail");
-
 		// get parameters
 		Bundle extras = getIntent().getExtras();
 
@@ -208,9 +199,6 @@ public class cgeowaypoint extends Activity {
 	public void onDestroy() {
 		if (geo != null) {
 			geo = app.removeGeo();
-		}
-		if (tracker != null) {
-			tracker.stop();
 		}
 
 		super.onDestroy();
@@ -277,7 +265,7 @@ public class cgeowaypoint extends Activity {
 			return true;
 		}
 
-		return NavigationAppFactory.onMenuItemSelected(item, geo, activity, res, warning, tracker, null, null, waypoint, null);
+		return NavigationAppFactory.onMenuItemSelected(item, geo, activity, res, warning, null, null, waypoint, null);
 	}
 
 	private void cachesAround() {

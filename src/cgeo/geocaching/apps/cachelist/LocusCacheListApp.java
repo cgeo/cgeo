@@ -16,8 +16,6 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.apps.AbstractLocusApp;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
 class LocusCacheListApp extends AbstractLocusApp implements CacheListApp {
 
 	LocusCacheListApp(Resources res) {
@@ -25,7 +23,7 @@ class LocusCacheListApp extends AbstractLocusApp implements CacheListApp {
 	}
 
 	@Override
-	public boolean invoke(cgGeo geo, List<cgCache> cacheList, Activity activity, Resources res, GoogleAnalyticsTracker tracker, final Integer searchId) {
+	public boolean invoke(cgGeo geo, List<cgCache> cacheList, Activity activity, Resources res, final Integer searchId) {
 		if (cacheList == null || cacheList.isEmpty() == true) {
 			return false;
 		}
@@ -95,8 +93,6 @@ class LocusCacheListApp extends AbstractLocusApp implements CacheListApp {
 			intent.putExtra("data", baos.toByteArray());
 
 			activity.startActivity(intent);
-
-			sendAnal(activity, tracker, "/external/locus");
 		} catch (Exception e) {
 			// nothing
 		}

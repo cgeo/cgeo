@@ -36,8 +36,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
 public class cgeopoint extends Activity {
 
 	private class DestinationHistoryAdapter extends ArrayAdapter<cgDestination> {
@@ -93,7 +91,6 @@ public class cgeopoint extends Activity {
 	private cgBase base = null;
 	private cgWarning warning = null;
 	private Activity activity = null;
-	private GoogleAnalyticsTracker tracker = null;
 	private cgGeo geo = null;
 	private cgUpdateLoc geoUpdate = new update();
 	private EditText latEdit = null;
@@ -127,12 +124,6 @@ public class cgeopoint extends Activity {
 		}
 		setContentView(R.layout.point);
 		base.setTitle(activity, res.getString(R.string.search_destination));
-
-		// google analytics
-		tracker = GoogleAnalyticsTracker.getInstance();
-		tracker.start(cgSettings.analytics, this);
-		tracker.dispatch();
-		base.sendAnal(activity, tracker, "/point");
 
 		createHistoryView();
 
@@ -240,9 +231,6 @@ public class cgeopoint extends Activity {
 	public void onDestroy() {
 		if (geo != null) {
 			geo = app.removeGeo();
-		}
-		if (tracker != null) {
-			tracker.stop();
 		}
 
 		super.onDestroy();
@@ -366,7 +354,7 @@ public class cgeopoint extends Activity {
 			return true;
 		}
 
-		return NavigationAppFactory.onMenuItemSelected(item, geo, activity, res, warning, tracker, null, null, null, coords);
+		return NavigationAppFactory.onMenuItemSelected(item, geo, activity, res, warning, null, null, null, coords);
 	}
 
 	private void addToHistory(ArrayList<Double> coords) {

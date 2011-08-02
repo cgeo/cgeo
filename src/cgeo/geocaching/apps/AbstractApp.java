@@ -9,8 +9,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import cgeo.geocaching.cgSettings;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
 public abstract class AbstractApp implements App {
 
 	protected String packageName;
@@ -67,12 +65,6 @@ public abstract class AbstractApp implements App {
 	@Override
 	public int getId() {
 		return getName().hashCode();
-	}
-
-	protected void sendAnal(Activity activity, GoogleAnalyticsTracker tracker,
-			String string) {
-		// TODO Auto-generated method stub
-
 	}
 
 	protected cgSettings getSettings(Activity activity) {

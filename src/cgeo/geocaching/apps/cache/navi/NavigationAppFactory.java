@@ -12,8 +12,6 @@ import cgeo.geocaching.cgWarning;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.apps.AbstractAppFactory;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
 public final class NavigationAppFactory extends AbstractAppFactory {
 	private static NavigationApp[] apps = new NavigationApp[] {};
 
@@ -40,7 +38,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 
 	public static boolean onMenuItemSelected(final MenuItem item,
 			final cgGeo geo, Activity activity, Resources res,
-			cgWarning warning, GoogleAnalyticsTracker tracker, cgCache cache,
+			cgWarning warning, cgCache cache,
 			Long searchId, cgWaypoint waypoint, ArrayList<Double> destination) {
 		NavigationApp app = (NavigationApp) getAppFromMenuItem(item, apps);
 		if (app != null) {
@@ -50,7 +48,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 				latitude = destination.get(0);
 				longitude = destination.get(1);
 			}
-			return app.invoke(geo, activity, res, warning, tracker, cache,
+			return app.invoke(geo, activity, res, warning, cache,
 					searchId, waypoint, latitude, longitude);
 		}
 		return false;

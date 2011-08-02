@@ -339,12 +339,8 @@ public class cgeomap extends MapBase {
 
 		// google analytics
 		if (live) {
-			base.sendAnal(activity, "/map/live");
-
 			followMyLocation = true;
 		} else {
-			base.sendAnal(activity, "/map/normal");
-
 			followMyLocation = false;
 		}
 		if (geocodeIntent != null || searchIdIntent != null || (latitudeIntent != null && longitudeIntent != null) || mapStateIntent != null) {

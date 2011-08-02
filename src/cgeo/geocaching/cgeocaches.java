@@ -61,8 +61,6 @@ import cgeo.geocaching.sorting.SizeComparator;
 import cgeo.geocaching.sorting.TerrainComparator;
 import cgeo.geocaching.sorting.VoteComparator;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
 public class cgeocaches extends ListActivity {
 
 	private static final int MENU_COMPASS = 1;
@@ -126,7 +124,6 @@ public class cgeocaches extends ListActivity {
 	private static final int SUBMENU_IMPORT = 59;
 	private static final int SUBMENU_MANAGE_HISTORY = 60;
 
-	private GoogleAnalyticsTracker tracker = null;
 	private String action = null;
 	private String type = null;
 	private Double latitude = null;
@@ -557,12 +554,6 @@ public class cgeocaches extends ListActivity {
 		setContentView(R.layout.caches);
 		base.setTitle(activity, "caches");
 
-		// google analytics
-		tracker = GoogleAnalyticsTracker.getInstance();
-		tracker.start(cgSettings.analytics, this);
-		tracker.dispatch();
-		base.sendAnal(activity, tracker, "/cache/list");
-
 		// get parameters
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -721,9 +712,6 @@ public class cgeocaches extends ListActivity {
 		}
 		if (geo != null) {
 			geo = app.removeGeo();
-		}
-		if (tracker != null) {
-			tracker.stop();
 		}
 
 		super.onDestroy();
@@ -1001,7 +989,7 @@ public class cgeocaches extends ListActivity {
                 return false;
 		}
 
-		return CacheListAppFactory.onMenuItemSelected(item, geo, cacheList, activity, res, tracker, null);
+		return CacheListAppFactory.onMenuItemSelected(item, geo, cacheList, activity, res, null);
 	}
 
 	private void setComparator(MenuItem item,
@@ -1228,7 +1216,7 @@ public class cgeocaches extends ListActivity {
 		lastMenuInfo = info;
 
 		return NavigationAppFactory.onMenuItemSelected(item, geo, activity,
-				res, warning, tracker, cache, null, null, null);
+				res, warning, cache, null, null, null);
 	}
 
 	private boolean setFilter(cgFilter filter) {

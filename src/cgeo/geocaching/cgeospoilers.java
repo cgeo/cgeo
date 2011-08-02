@@ -134,9 +134,6 @@ public class cgeospoilers extends Activity {
 		setContentView(R.layout.spoilers);
 		base.setTitle(activity, res.getString(R.string.cache_spoiler_images_title));
 
-		// google analytics
-		base.sendAnal(activity, "/spoilers");
-
 		// get parameters
 		Bundle extras = getIntent().getExtras();
 

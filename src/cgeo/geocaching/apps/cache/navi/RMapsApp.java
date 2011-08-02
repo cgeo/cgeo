@@ -12,8 +12,6 @@ import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgWarning;
 import cgeo.geocaching.cgWaypoint;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
 class RMapsApp extends AbstractNavigationApp implements NavigationApp {
 
 	private static final String INTENT = "com.robert.maps.action.SHOW_POINTS";
@@ -24,7 +22,7 @@ class RMapsApp extends AbstractNavigationApp implements NavigationApp {
 
 	@Override
 	public boolean invoke(cgGeo geo, Activity activity, Resources res,
-			cgWarning warning, GoogleAnalyticsTracker tracker, cgCache cache,
+			cgWarning warning, cgCache cache,
 			Long searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
 		if (cache == null && waypoint == null && latitude == null
 				&& longitude == null) {
@@ -62,8 +60,6 @@ class RMapsApp extends AbstractNavigationApp implements NavigationApp {
 				intent.putStringArrayListExtra("locations", locations);
 
 				activity.startActivity(intent);
-
-				sendAnal(activity, tracker, "/external/rmaps");
 
 				return true;
 			}

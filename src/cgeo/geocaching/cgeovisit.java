@@ -240,9 +240,6 @@ public class cgeovisit extends cgLogForm {
 		setContentView(R.layout.visit);
 		base.setTitle(activity, res.getString(R.string.log_new_log));
 
-		// google analytics
-		base.sendAnal(activity, "/visit");
-
 		// get parameters
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
