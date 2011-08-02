@@ -155,7 +155,7 @@ public class cgeovisit extends cgLogForm {
 				if (inventoryView.getChildCount() > 0) {
 					((LinearLayout) findViewById(R.id.inventory_box)).setVisibility(View.VISIBLE);
 				}
-				if (inventoryView.getChildCount() > 1 && inventoryView.getChildCount() <= 20) {
+				if (inventoryView.getChildCount() > 1) {
 					final LinearLayout inventoryChangeAllView = (LinearLayout) findViewById(R.id.inventory_changeall);
 
 					Button changeButton = (Button) inventoryChangeAllView.findViewById(R.id.changebutton);
