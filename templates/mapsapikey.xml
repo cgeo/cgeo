@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="maps_api_key">@maps.api.key@</string>
+</resources>

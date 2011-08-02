@@ -1,2 +1,5 @@
 /bin
 /gen
+/local.properties
+/private.properties
+/res/values/mapsapikey.xml

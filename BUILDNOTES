@@ -1,0 +1,32 @@
++------------------------------------------------------------------------------+
+|                                                                              |
+|                                Building c:geo                                |
+|                                                                              |
++------------------------------------------------------------------------------+
+
+
+I.  Ant
+
+    1. copy ./templates/private.properties to ./
+    2. edit private.properties (see comments)
+    3. run in ./ one of the following commands:
+            ant help
+            ant clean
+            ant debug
+            ant release
+    
+
+II. Other
+
+    follow steps from above, but run
+        ant -pre-build
+        
+    -- or --
+    
+    1) copy ./templates/mapsapikey.xml to ./res/values/
+    2) edit ./templates/mapsapikey.xml and insert your api-key
+
+
+Notes for Eclipse:
+    You can't select the targets from above in ant-configuration, but you can
+    add one of them in Main->Arguments.
