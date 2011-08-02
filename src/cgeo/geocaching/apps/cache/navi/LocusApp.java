@@ -17,8 +17,6 @@ import cgeo.geocaching.cgWarning;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.apps.AbstractLocusApp;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
 class LocusApp extends AbstractLocusApp implements NavigationApp {
 
 	LocusApp(Resources res) {
@@ -27,7 +25,7 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 
 	@Override
 	public boolean invoke(cgGeo geo, Activity activity, Resources res,
-			cgWarning warning, GoogleAnalyticsTracker tracker, cgCache cache,
+			cgWarning warning, cgCache cache,
 			Long searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
 		if (cache == null && waypoint == null && latitude == null
 				&& longitude == null) {
@@ -195,8 +193,6 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 				intent.putExtra("data", baos.toByteArray());
 
 				activity.startActivity(intent);
-
-				sendAnal(activity, tracker, "/external/locus");
 
 				return true;
 			}

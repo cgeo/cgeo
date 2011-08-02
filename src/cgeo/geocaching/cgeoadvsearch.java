@@ -72,9 +72,6 @@ public class cgeoadvsearch extends Activity {
 		setContentView(R.layout.search);
 		base.setTitle(activity, res.getString(R.string.search));
 
-		// google analytics
-		base.sendAnal(activity, "/advanced-search");
-
 		init();
 	}
 

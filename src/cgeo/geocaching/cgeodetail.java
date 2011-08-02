@@ -52,15 +52,12 @@ import android.widget.TextView;
 import cgeo.geocaching.apps.cache.GeneralAppsFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
 public class cgeodetail extends Activity {
 	public Long searchId = null;
 	public cgCache cache = null;
 	public String geocode = null;
 	public String name = null;
 	public String guid = null;
-	private GoogleAnalyticsTracker tracker = null;
 	private Resources res = null;
 	private Activity activity = null;
 	private LayoutInflater inflater = null;
@@ -340,14 +337,6 @@ public class cgeodetail extends Activity {
 			}
 		}
 
-		// google analytics
-		tracker = GoogleAnalyticsTracker.getInstance();
-		tracker.start(cgSettings.analytics, this);
-		tracker.dispatch();
-		if (geocode != null) {
-			base.sendAnal(activity, tracker, "/cache/detail#" + geocode);
-		}
-
 		// no given data
 		if (geocode == null && guid == null) {
 			warning.showToast(res.getString(R.string.err_detail_cache));
@@ -398,7 +387,6 @@ public class cgeodetail extends Activity {
 		if (geo != null) {
 			geo = app.removeGeo();
 		}
-		if (tracker != null) tracker.stop();
 
 		super.onDestroy();
 	}
@@ -547,7 +535,7 @@ public class cgeodetail extends Activity {
 			shareCache();
 			return true;
 		}
-		if (NavigationAppFactory.onMenuItemSelected(item, geo, activity, res, warning, tracker, cache, searchId, null, null)) {
+		if (NavigationAppFactory.onMenuItemSelected(item, geo, activity, res, warning, cache, searchId, null, null)) {
 			return true;
 		}
 		return GeneralAppsFactory.onMenuItemSelected(item, activity, cache);
@@ -599,12 +587,6 @@ public class cgeodetail extends Activity {
 
 			finish();
 			return;
-		}
-
-		if (cache.reason >= 1) {
-			base.sendAnal(activity, tracker, "/cache/detail/stored");
-		} else {
-			base.sendAnal(activity, tracker, "/cache/detail/online");
 		}
 
 		try {

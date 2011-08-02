@@ -30,11 +30,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
 public class cgeopopup extends Activity {
 
-	private GoogleAnalyticsTracker tracker = null;
 	private Activity activity = null;
 	private Resources res = null;
 	private cgeoapplication app = null;
@@ -128,12 +125,6 @@ public class cgeopopup extends Activity {
 		setContentView(R.layout.popup);
 		base.setTitle(activity, res.getString(R.string.detail));
 
-		// google analytics
-		tracker = GoogleAnalyticsTracker.getInstance();
-		tracker.start(cgSettings.analytics, this);
-		tracker.dispatch();
-		base.sendAnal(activity, tracker, "/popup");
-
 		// get parameters
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -220,7 +211,7 @@ public class cgeopopup extends Activity {
 			return true;
 		}
 
-		return NavigationAppFactory.onMenuItemSelected(item, geo, activity, res, warning, tracker, cache, null, null, null);
+		return NavigationAppFactory.onMenuItemSelected(item, geo, activity, res, warning, cache, null, null, null);
 	}
 
 	private void init() {
@@ -529,9 +520,6 @@ public class cgeopopup extends Activity {
 	public void onDestroy() {
 		if (geo != null) {
 			geo = app.removeGeo();
-		}
-		if (tracker != null) {
-			tracker.stop();
 		}
 
 		super.onDestroy();

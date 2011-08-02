@@ -92,9 +92,6 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 		setContentView(R.layout.gpx);
 		getBase().setTitle(getActivity(), getRes().getString(R.string.gpx_import_title));
 
-		// google analytics
-		getBase().sendAnal(getActivity(), "/file-import");
-
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			listId = extras.getInt("list");

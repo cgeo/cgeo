@@ -13,8 +13,6 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.apps.AbstractAppFactory;
 
-import com.google.android.apps.analytics.GoogleAnalyticsTracker;
-
 public final class CacheListAppFactory extends AbstractAppFactory {
 	private static CacheListApp[] apps = new CacheListApp[] {};
 
@@ -60,11 +58,11 @@ public final class CacheListAppFactory extends AbstractAppFactory {
 
 	public static boolean onMenuItemSelected(final MenuItem item,
 			final cgGeo geo, final List<cgCache> caches, final Activity activity, final Resources res,
-			final GoogleAnalyticsTracker tracker, final Integer searchId) {
+			final Integer searchId) {
 		CacheListApp app = (CacheListApp) getAppFromMenuItem(
 				item, apps);
 		if (app != null) {
-			return app.invoke(geo, caches, activity, res, tracker, searchId);
+			return app.invoke(geo, caches, activity, res, searchId);
 		}
 		return false;
 	}
