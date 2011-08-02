@@ -193,7 +193,7 @@
 			</intent-filter>
 		</activity>
 		<activity
-			android:name=".cgeospoilers"
+			android:name=".cgeoimages"
 			android:label="@string/app_name"
 			android:configChanges="keyboardHidden|orientation" >
 			<intent-filter>

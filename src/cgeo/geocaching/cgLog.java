@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import java.util.ArrayList;
+
 public class cgLog {
 	public int id = 0;
 	public int type = 4; // note
@@ -7,6 +9,7 @@ public class cgLog {
 	public String log = "";
 	public long date = 0;
 	public int found = -1;
+	public ArrayList<cgImage> logImages = null;
 	public String cacheName = ""; // used for trackables
 	public String cacheGuid = ""; // used for trackables
 }
