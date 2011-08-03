@@ -73,6 +73,9 @@ public class cgeoimages extends Activity {
 
 					if (app.isOffline(geocode, null) == true) {
 						offline = 1;
+						if ((img_type == LOG_IMAGE) && (settings.storelogimages == false)) { 
+							offline = 0;
+						}						
 					} else {
 						offline = 0;
 					}
