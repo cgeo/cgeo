@@ -1,7 +1,10 @@
 package cgeo.geocaching;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.net.Uri;
@@ -17,6 +20,7 @@ import android.widget.LinearLayout;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Rect;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.ViewGroup.LayoutParams;
 
@@ -249,7 +253,7 @@ public class cgeoimages extends Activity {
 
 				loadImagesHandler.sendMessage(new Message());
 			} catch (Exception e) {
-				Log.e(cgSettings.tag, "cgeospoilers.loadSpoilers.run: " + e.toString());
+				Log.e(cgSettings.tag, "cgeoimages.loadSpoilers.run: " + e.toString());
 			}
 		}
 	}
@@ -257,16 +261,14 @@ public class cgeoimages extends Activity {
 	private class onLoadHandler extends Handler {
 
 		LinearLayout view = null;
-		cgImage img = null;
 
 		public onLoadHandler(LinearLayout view, cgImage image) {
 			this.view = view;
-			this.img = image;
 		}
 
 		@Override
 		public void handleMessage(Message message) {
-			BitmapDrawable image = (BitmapDrawable) message.obj;
+			final BitmapDrawable image = (BitmapDrawable) message.obj;
 			if (image != null) {
 				ImageView image_view = null;
 				image_view = (ImageView) inflater.inflate(R.layout.image_item, null);
@@ -278,10 +280,28 @@ public class cgeoimages extends Activity {
 				image_view.setOnClickListener(new View.OnClickListener() {
 
 					public void onClick(View arg0) {
-						activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(img.url)));
+						final String directoryTarget = Environment.getExternalStorageDirectory() + "/" + cgSettings.cache + "/" + "temp.jpg";					
+						File file = new File(directoryTarget);
+						FileOutputStream fos;
+						try {
+							fos = new FileOutputStream(file);
+							image.getBitmap().compress(CompressFormat.JPEG, 100, fos);
+							fos.close();
+						} catch (Exception e) {
+							Log.e(cgSettings.tag, "cgeoimages.handleMessage.onClick: " + e.toString());
+							return;
+						}
+
+						Intent intent = new Intent();
+						intent.setAction(android.content.Intent.ACTION_VIEW);
+						intent.setDataAndType(Uri.fromFile(file), "image/jpg");
+						activity.startActivity(intent);
+
+						if (file.exists())
+							file.deleteOnExit();
 					}
 				});
-				image_view.setImageDrawable((BitmapDrawable) message.obj);
+				image_view.setImageDrawable(image);
 				image_view.setScaleType(ImageView.ScaleType.CENTER_CROP);
 				image_view.setLayoutParams(new LayoutParams(bounds.width(), bounds.height()));
 
