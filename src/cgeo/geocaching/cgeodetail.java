@@ -607,14 +607,11 @@ public class cgeodetail extends Activity {
 				gcIcons.put("mystery", R.drawable.type_mystery);
 			}
 
-			if (cache.name != null && cache.name.length() > 0) {
-				base.setTitle(activity, cache.name);
-			} else {
-				base.setTitle(activity, geocode.toUpperCase());
-			}
+			geocode = geocode.toUpperCase();
+			
+			base.setTitle(activity, geocode);
 
 			inflater = activity.getLayoutInflater();
-			geocode = cache.geocode.toUpperCase();
 
 			ScrollView scroll = (ScrollView) findViewById(R.id.details_list_box);
 			scroll.setVisibility(View.VISIBLE);
