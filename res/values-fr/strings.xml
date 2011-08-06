@@ -181,9 +181,9 @@
   <string name="cache_offline_store">enregistrer</string>
   <string name="cache_offline_stored">enregistrée</string>
   <string name="cache_offline_not_ready">hors ligne indisponible</string>
-  <string name="cache_offline_time_about">il y a environ</string>
-  <string name="cache_offline_time_mins">quelques minutes</string>
-  <string name="cache_offline_time_mins_few">moins d\'une heure</string>
+  <string name="cache_offline_time_about">il y a</string>
+  <string name="cache_offline_time_mins">minutes</string>
+  <string name="cache_offline_time_mins_few">quelques minutes</string>
   <string name="cache_offline_time_hour">une heure</string>
   <string name="cache_offline_time_hours">heures</string>
   <string name="cache_offline_time_days">jours</string>
