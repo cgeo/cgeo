@@ -642,6 +642,7 @@ public class cgeomap extends MapBase {
 			}
 
 			overlayCaches.switchCircles();
+			mapView.invalidate();
 
 		} else if (SUBMENU_VIEW_GOOGLE_MAP <= id && SUBMENU_VIEW_MF_OFFLINE >= id) {
 
