@@ -200,6 +200,7 @@ public class cgCache {
 		if (waypoints == null) {
 			waypoints = oldCache.waypoints;
 		}
+		cgWaypoint.mergeWayPoints(waypoints, oldCache.waypoints);
 		if (spoilers == null) {
 			spoilers = oldCache.spoilers;
 		}
