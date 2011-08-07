@@ -82,9 +82,13 @@
   <string name="log_rating">Rating</string>
   <string name="log_no_rating">No rating</string>
   <string name="log_stars_1">1 star</string>
+  <string name="log_stars_15">1.5 stars</string>
   <string name="log_stars_2">2 stars</string>
+  <string name="log_stars_25">2.5 stars</string>
   <string name="log_stars_3">3 stars</string>
+  <string name="log_stars_35">3.5 stars</string>
   <string name="log_stars_4">4 stars</string>
+  <string name="log_stars_45">4.5 stars</string>
   <string name="log_stars_5">5 stars</string>
   <string name="log_webcam">Webcam photo taken</string>
   <string name="log_new_log">Log</string>
@@ -361,7 +365,7 @@
   <string name="init_passvote">Password</string>
   <string name="init_login">Check login</string>
   <string name="init_login_popup">Login</string>
-  <string name="init_login_popup_working">Logging to geocaching.com...</string>
+  <string name="init_login_popup_working">Logging into geocaching.com...</string>
   <string name="init_login_popup_ok">Login ok.</string>
   <string name="init_login_popup_failed">Login failed.</string>
   <string name="init_login_popup_failed_reason">Login failed because of </string>
@@ -465,7 +469,7 @@
   <string name="cache_log_offline">Offline log</string>
   <string name="cache_log_images_loading">Loading log Image ...</string>
   <string name="cache_log_images_title">Logimage</string>
-  <string name="cache_log_image_default_title">Photo</string>    
+  <string name="cache_log_image_default_title">Photo</string>
   <string name="cache_description">Description</string>
   <string name="cache_description_long">Long description</string>
   <string name="cache_watchlist">Watchlist</string>

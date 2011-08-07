@@ -566,9 +566,9 @@ public class cgeomap extends MapBase {
 			if (live && !isLoading() && caches != null && !caches.isEmpty()) {
 				final ArrayList<String> geocodes = new ArrayList<String>();
 
-				ArrayList<cgCache> cachesProtected = (ArrayList<cgCache>) caches.clone();
+				ArrayList<cgCache> cachesProtected = new ArrayList<cgCache>(caches);
 				try {
-					if (cachesProtected != null && cachesProtected.size() > 0) {
+					if (cachesProtected.size() > 0) {
 						final GeoPointImpl mapCenter = mapView.getMapViewCenter();
 						final int mapCenterLat = mapCenter.getLatitudeE6();
 						final int mapCenterLon = mapCenter.getLongitudeE6();
@@ -642,6 +642,7 @@ public class cgeomap extends MapBase {
 			}
 
 			overlayCaches.switchCircles();
+			mapView.invalidate();
 
 		} else if (SUBMENU_VIEW_GOOGLE_MAP <= id && SUBMENU_VIEW_MF_OFFLINE >= id) {
 
@@ -1254,7 +1255,7 @@ public class cgeomap extends MapBase {
 				}
 
 				// display caches
-				final ArrayList<cgCache> cachesProtected = (ArrayList<cgCache>) caches.clone();
+				final ArrayList<cgCache> cachesProtected = new ArrayList<cgCache>(caches);
 				final ArrayList<CacheOverlayItemImpl> items = new ArrayList<CacheOverlayItemImpl>();
 
 				if (cachesProtected != null && !cachesProtected.isEmpty()) {

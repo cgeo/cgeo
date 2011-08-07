@@ -2,14 +2,11 @@ package cgeo.geocaching;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Configuration;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Build;
-import android.view.Display;
-import android.view.Surface;
+import cgeo.geocaching.compatibility.Compatibility;
 
 public class cgDirection {
 	private cgDirection dir = null;
@@ -17,21 +14,12 @@ public class cgDirection {
 	private SensorManager sensorManager = null;
 	private cgeoSensorListener sensorListener = null;
 	private cgUpdateDir dirUpdate = null;
-	private cg8wrap cg8 = null;
 
 	public Double directionNow = null;
 
 	public cgDirection(cgeoapplication appIn, Context contextIn, cgUpdateDir dirUpdateIn, cgWarning warningIn) {
 		context = contextIn;
 		dirUpdate = dirUpdateIn;
-
-		try {
-			final int sdk = new Integer(Build.VERSION.SDK).intValue();
-			if (sdk >= 8) cg8 = new cg8wrap((Activity)context);
-		} catch (Exception e) {
-			// nothing
-		}
-
 		sensorListener = new cgeoSensorListener();
 	}
 
@@ -53,7 +41,9 @@ public class cgDirection {
 	public void replaceUpdate(cgUpdateDir dirUpdateIn) {
 		dirUpdate = dirUpdateIn;
 
-		if (dirUpdate != null && directionNow != null) dirUpdate.updateDir(dir);
+		if (dirUpdate != null && directionNow != null) {
+			dirUpdate.updateDir(dir);
+		}
 	}
 
 	private class cgeoSensorListener implements SensorEventListener {
@@ -75,20 +65,11 @@ public class cgDirection {
 		public void onSensorChanged(SensorEvent event) {
 			Double directionNowPre = new Double(event.values[0]);
 
-			if (cg8 != null) {
-				final int rotation = cg8.getRotation();
-				if (rotation == Surface.ROTATION_90) directionNowPre = directionNowPre + 90;
-				else if (rotation == Surface.ROTATION_180) directionNowPre = directionNowPre + 180;
-				else if (rotation == Surface.ROTATION_270) directionNowPre = directionNowPre + 270;
-			} else {
-				final Display display = ((Activity)context).getWindowManager().getDefaultDisplay();
-				final int rotation = display.getOrientation();
-				if (rotation == Configuration.ORIENTATION_LANDSCAPE) directionNowPre = directionNowPre + 90;
+			directionNow = Compatibility.getDirectionNow(directionNowPre, (Activity)context);
+
+			if (dirUpdate != null && directionNow != null) {
+				dirUpdate.updateDir(dir);
 			}
-
-			directionNow = directionNowPre;
-
-			if (dirUpdate != null && directionNow != null) dirUpdate.updateDir(dir);
 		}
 	}
 }

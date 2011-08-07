@@ -1073,7 +1073,7 @@ public class cgBase {
 
 		final Pattern patternGeocode = Pattern.compile("<meta name=\"og:url\" content=\"[^\"]+/(GC[0-9A-Z]+)\"[^>]*>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 		final Pattern patternCacheId = Pattern.compile("/seek/log\\.aspx\\?ID=(\\d+)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-		final Pattern patternCacheGuid = Pattern.compile("<link rel=\"alternate\" href=\"[^\"]*/datastore/rss_galleryimages\\.ashx\\?guid=([0-9a-z\\-]+)\"[^>]*>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+		final Pattern patternCacheGuid = Pattern.compile(Pattern.quote("&wid=") + "([0-9a-z\\-]+)" + Pattern.quote("&"), Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 		final Pattern patternType = Pattern.compile("<img src=\"[^\"]*/WptTypes/\\d+\\.gif\" alt=\"([^\"]+)\" (title=\"[^\"]*\" )?width=\"32\" height=\"32\"[^>]*>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 
 		final Pattern patternName = Pattern.compile("<h2[^>]*>[^<]*<span id=\"ctl00_ContentBody_CacheName\">([^<]+)<\\/span>[^<]*<\\/h2>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
@@ -1172,7 +1172,7 @@ public class cgBase {
 		// cache guid
 		try {
 			final Matcher matcherCacheGuid = patternCacheGuid.matcher(page);
-			while (matcherCacheGuid.find()) {
+			if (matcherCacheGuid.find()) {
 				if (matcherCacheGuid.groupCount() > 0) {
 					cache.guid = (String) matcherCacheGuid.group(1);
 				}
@@ -1693,19 +1693,19 @@ public class cgBase {
 							if (matcherLog.group(8) != null) {
 								logDone.found = new Integer(matcherLog.group(8));
 							}
-							
+
 							final Matcher matcherImg = patternLogImgs.matcher(logs[k]);
-							
-							while (matcherImg.find()) {		
+
+							while (matcherImg.find()) {
 								final cgImage logImage = new cgImage();
 								logImage.url = "http://img.geocaching.com/cache/log/" + matcherImg.group(1);
-								logImage.title = matcherImg.group(2);								
+								logImage.title = matcherImg.group(2);
 								if (logDone.logImages == null) {
 									logDone.logImages = new ArrayList<cgImage>();
 								}
-								logDone.logImages.add(logImage);															    								
+								logDone.logImages.add(logImage);
 							}
-							
+
 							logDone.log = logTmp;
 
 							if (cache.logs == null) {
@@ -2059,35 +2059,6 @@ public class cgBase {
 		}
 
 		return ratings;
-	}
-
-	public boolean setRating(String guid, int vote) {
-		if (guid == null || guid.length() == 0) {
-			return false;
-		}
-		if (vote < 0 || vote > 5) {
-			return false;
-		}
-
-		final HashMap<String, String> login = settings.getGCvoteLogin();
-		if (login == null) {
-			return false;
-		}
-
-		final HashMap<String, String> params = new HashMap<String, String>();
-		params.put("userName", login.get("username"));
-		params.put("password", login.get("password"));
-		params.put("cacheId", guid);
-		params.put("voteUser", Integer.toString(vote));
-		params.put("version", "cgeo");
-
-		final String result = request(false, "gcvote.com", "/setVote.php", "GET", params, false, false, false).getData();
-
-		if (result.trim().equalsIgnoreCase("ok") == true) {
-			return true;
-		}
-
-		return false;
 	}
 
 	public Long parseGPX(cgeoapplication app, File file, int listId, Handler handler) {
@@ -5034,7 +5005,7 @@ public class cgBase {
 					imgGetter.getDrawable(oneSpoiler.url);
 				}
 			}
-			
+
 			// store images from logs
 			if (settings.storelogimages == true) {
 				for (cgLog log : cache.logs) {

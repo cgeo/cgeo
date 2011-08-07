@@ -528,6 +528,9 @@ public class cgSettings {
 	}
 
 	private static boolean checkMapfile(String mapFileIn) {
+		if (null == mapFileIn) {
+			return false;
+		}
 		return MapDatabase.isValidMapFile(mapFileIn);
 	}
 

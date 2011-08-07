@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PaintFlagsDrawFilter;
@@ -70,11 +71,7 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 			item.setMarker(boundCenterBottom(item.getMarker(0)));
 		}
 
-//		items.clear();
-
-//		if (itemsPre.size() > 0) {
-			items = (ArrayList<CacheOverlayItemImpl>) itemsPre.clone();
-//		}
+		items = new ArrayList<CacheOverlayItemImpl>(itemsPre);
 
 		setLastFocusedItemIndex(-1); // to reset tap during data change
 		populate();
@@ -114,6 +111,8 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 				blockedCircle = new Paint();
 				blockedCircle.setAntiAlias(true);
 				blockedCircle.setStrokeWidth(1.0f);
+				blockedCircle.setARGB(127, 0, 0, 0);
+				blockedCircle.setPathEffect(new DashPathEffect(new float[] {3,2}, 0));
 			}
 
 			if (setfil == null) setfil = new PaintFlagsDrawFilter(0, Paint.FILTER_BITMAP_FLAG);

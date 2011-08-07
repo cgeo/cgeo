@@ -12,24 +12,24 @@ I.  Ant
     2. edit private.properties (see comments)
     3. copy ./templates/local.properties to ./
     4. edit local.properties (see comments)
-    
+
     (every build)
     5. run in ./ one of the following commands:
             ant help
             ant clean
             ant debug
             ant release
-    
+
 
 II. Other (only once before your normal build)
 
     follow steps from above, but run
         ant -pre-build
-        
+
     -- or --
-    
+
     1) copy ./templates/mapsapikey.xml to ./res/values/
-    2) edit ./templates/mapsapikey.xml and insert your api-key
+    2) edit ./res/values/mapsapikey.xml and insert your api-key
 
 
 Notes for Eclipse:

@@ -347,7 +347,7 @@ public class cgeoinit extends Activity {
 		}
 		saveLogImgButton.setOnClickListener(new cgeoChangeSaveLogImg());
 
-		
+
 		CheckBox autoloadButton = (CheckBox) findViewById(R.id.autoload);
 		if (prefs.getInt("autoloaddesc", 0) == 0) {
 			autoloadButton.setChecked(false);
@@ -456,6 +456,11 @@ public class cgeoinit extends Activity {
 	}
 
 	public void backup(View view) {
+		// avoid overwriting an existing backup with an empty database (can happen directly after reinstalling the app)
+		if (app.getAllStoredCachesCount(true, null, null) == 0) {
+			return;
+		}
+
 		final String file = app.backupDatabase();
 
 		if (file != null) {
@@ -808,7 +813,7 @@ public class cgeoinit extends Activity {
 			return;
 		}
 	}
-	
+
 	private class cgeoChangeSaveLogImg implements View.OnClickListener {
 
 		public void onClick(View arg0) {

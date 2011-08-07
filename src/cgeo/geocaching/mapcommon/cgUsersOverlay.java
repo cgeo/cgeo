@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.util.Log;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgUser;
@@ -38,7 +37,7 @@ public class cgUsersOverlay extends ItemizedOverlayBase implements OverlayBase {
 	protected void updateItems(UserOverlayItemImpl item) {
 		ArrayList<UserOverlayItemImpl> itemsPre = new ArrayList<UserOverlayItemImpl>();
 		itemsPre.add(item);
-		
+
 		updateItems(itemsPre);
 	}
 
@@ -52,11 +51,11 @@ public class cgUsersOverlay extends ItemizedOverlayBase implements OverlayBase {
 		}
 
 		items.clear();
-		
+
 		if (itemsPre.size() > 0) {
-			items = (ArrayList<UserOverlayItemImpl>) itemsPre.clone();
+			items = new ArrayList<UserOverlayItemImpl>(itemsPre);
 		}
-		
+
 		setLastFocusedItemIndex(-1); // to reset tap during data change
 		populate();
 	}
@@ -92,7 +91,7 @@ public class cgUsersOverlay extends ItemizedOverlayBase implements OverlayBase {
 			} else {
 				action = user.action;
 			}
-			
+
 			// set icon
 			int icon = -1;
 			if (user.client.equalsIgnoreCase("c:geo") == true) {
