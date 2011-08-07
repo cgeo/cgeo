@@ -1073,7 +1073,7 @@ public class cgBase {
 
 		final Pattern patternGeocode = Pattern.compile("<meta name=\"og:url\" content=\"[^\"]+/(GC[0-9A-Z]+)\"[^>]*>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 		final Pattern patternCacheId = Pattern.compile("/seek/log\\.aspx\\?ID=(\\d+)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-		final Pattern patternCacheGuid = Pattern.compile("<link rel=\"alternate\" href=\"[^\"]*/datastore/rss_galleryimages\\.ashx\\?guid=([0-9a-z\\-]+)\"[^>]*>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+		final Pattern patternCacheGuid = Pattern.compile(Pattern.quote("&wid=") + "([0-9a-z\\-]+)" + Pattern.quote("&"), Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 		final Pattern patternType = Pattern.compile("<img src=\"[^\"]*/WptTypes/\\d+\\.gif\" alt=\"([^\"]+)\" (title=\"[^\"]*\" )?width=\"32\" height=\"32\"[^>]*>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 
 		final Pattern patternName = Pattern.compile("<h2[^>]*>[^<]*<span id=\"ctl00_ContentBody_CacheName\">([^<]+)<\\/span>[^<]*<\\/h2>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
@@ -1172,7 +1172,7 @@ public class cgBase {
 		// cache guid
 		try {
 			final Matcher matcherCacheGuid = patternCacheGuid.matcher(page);
-			while (matcherCacheGuid.find()) {
+			if (matcherCacheGuid.find()) {
 				if (matcherCacheGuid.groupCount() > 0) {
 					cache.guid = (String) matcherCacheGuid.group(1);
 				}
