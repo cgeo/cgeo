@@ -23,6 +23,10 @@ class InternalMap extends AbstractInternalMap implements
 			Long searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
 		cgSettings settings = getSettings(activity);
 		Intent mapIntent = new Intent(activity, settings.getMapFactory().getMapClass());
+		if (cache != null) {
+			mapIntent.putExtra("detail", false);
+			mapIntent.putExtra("geocode", cache.geocode);
+		}
 		if (searchId != null) {
 			mapIntent.putExtra("detail", true);
 			mapIntent.putExtra("searchid", searchId);
@@ -31,10 +35,6 @@ class InternalMap extends AbstractInternalMap implements
 			mapIntent.putExtra("latitude", waypoint.latitude);
 			mapIntent.putExtra("longitude", waypoint.longitude);
 			mapIntent.putExtra("wpttype", waypoint.type);
-		}
-		if (cache != null) {
-			mapIntent.putExtra("latitude", cache.latitude);
-			mapIntent.putExtra("longitude", cache.longitude);
 		}
 
 		activity.startActivity(mapIntent);
