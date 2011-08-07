@@ -283,7 +283,7 @@ public class cgeo extends Activity {
 		menu.add(1, 3, 0, res.getString(R.string.mystery));
 
 		// then add all other cache types sorted alphabetically
-		HashMap<String, String> allTypes = (HashMap<String, String>) cgBase.cacheTypesInv.clone();
+		HashMap<String, String> allTypes = new HashMap<String, String>(cgBase.cacheTypesInv);
 		allTypes.remove("traditional");
 		allTypes.remove("multi");
 		allTypes.remove("mystery");

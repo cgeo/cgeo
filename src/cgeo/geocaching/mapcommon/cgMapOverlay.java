@@ -70,11 +70,7 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 			item.setMarker(boundCenterBottom(item.getMarker(0)));
 		}
 
-//		items.clear();
-
-//		if (itemsPre.size() > 0) {
-			items = (ArrayList<CacheOverlayItemImpl>) itemsPre.clone();
-//		}
+		items = new ArrayList<CacheOverlayItemImpl>(itemsPre);
 
 		setLastFocusedItemIndex(-1); // to reset tap during data change
 		populate();

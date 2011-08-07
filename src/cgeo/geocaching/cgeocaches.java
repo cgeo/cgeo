@@ -451,7 +451,7 @@ public class cgeocaches extends ListActivity {
 				}
 
 				switchList(listId, -1);
-				
+
 				cacheList.clear();
 
 				final ArrayList<cgCache> cacheListTmp = app.getCaches(searchId);
@@ -863,7 +863,7 @@ public class cgeocaches extends ListActivity {
 		            item.setEnabled(menuEnabled);
 		        }
 		    }
-		    
+
 		    if (navigationMenu != null) {
 		    	navigationMenu.setEnabled(menuEnabled);
 		    }
@@ -895,7 +895,7 @@ public class cgeocaches extends ListActivity {
                     item.setTitle(res.getString(R.string.cache_export_fieldnote));
                 }
             }
-			
+
 			// Hide Field Notes export if there are no caches with logs
             item = menu.findItem(MENU_EXPORT_NOTES);
             item.setEnabled(false);
@@ -1916,7 +1916,7 @@ public class cgeocaches extends ListActivity {
 				geo = app.removeGeo();
 			}
 
-			final ArrayList<cgCache> cacheListTemp = (ArrayList<cgCache>) cacheList.clone();
+			final ArrayList<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
 			for (cgCache cache : cacheListTemp) {
 				if (checked > 0 && cache.statusChecked == false) {
 					handler.sendEmptyMessage(0);
@@ -2090,7 +2090,7 @@ public class cgeocaches extends ListActivity {
 				geo = app.removeGeo();
 			}
 
-			final ArrayList<cgCache> cacheListTemp = (ArrayList<cgCache>) cacheList.clone();
+			final ArrayList<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
 			for (cgCache cache : cacheListTemp) {
 				if (checked > 0 && cache.statusChecked == false) {
 					handler.sendEmptyMessage(0);
@@ -2400,7 +2400,7 @@ public class cgeocaches extends ListActivity {
 		public void run() {
 			int checked = adapter.getChecked();
 			if (checked > 0) {
-				final ArrayList<cgCache> cacheListTemp = (ArrayList<cgCache>) cacheList.clone();
+				final ArrayList<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
 				for (cgCache cache : cacheListTemp) {
 					if (cache.statusChecked != false) {
 						app.moveToList(cache.geocode, listId);
