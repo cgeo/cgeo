@@ -1,16 +1,14 @@
-package cgeo.geocaching;
+package cgeo.geocaching.compatibility;
 
 import android.app.Activity;
 import android.view.Display;
 
-public class cg8 {
-	private Activity  activity = null;
+class AndroidLevel8Internal {
 
-	public cg8(Activity activityIn) {
-		activity = activityIn;
+	public AndroidLevel8Internal() {
 	}
 
-	public int getRotation() {
+	public int getRotation(final Activity activity) {
 		Display display = activity.getWindowManager().getDefaultDisplay();
 		return display.getRotation();
 	}
