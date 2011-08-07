@@ -58,7 +58,29 @@
   <string name="log_tb_nothing">ne fait rien</string>
   <string name="log_tb_visit">visité</string>
   <string name="log_tb_drop">déposé ici</string>
-  <string name="log_webcam">webcam photo taken</string>
+  <string name="log_tb_changeall">Tout modifier</string>
+  <string name="log_save">Enregistrer</string>
+  <string name="log_saving">Enregistrement en cours...</string>
+  <string name="log_clear">Effacer</string>
+  <string name="log_post">Envoyer</string>
+  <string name="log_post_rate">Envoyer &amp; noter</string>
+  <string name="log_post_no_rate">Envoyer &amp; ne pas noter</string>
+  <string name="log_add">Ajouter</string>
+  <string name="log_date">Date</string>
+  <string name="log_time">Heure</string>
+  <string name="log_date_time">Date &amp; heure</string>
+  <string name="log_rating">Note</string>
+  <string name="log_no_rating">Pas de note</string>
+  <string name="log_stars_1">1 étoile</string>
+  <string name="log_stars_15">1,5 étoiles</string>
+  <string name="log_stars_2">2 étoiles</string>
+  <string name="log_stars_25">2,5 étoiles</string>
+  <string name="log_stars_3">3 étoiles</string>
+  <string name="log_stars_35">3,5 étoiles</string>
+  <string name="log_stars_4">4 étoiles</string>
+  <string name="log_stars_45">4,5 étoiles</string>
+  <string name="log_stars_5">5 étoiles</string>
+  <string name="log_webcam">photo webcam prise</string>
 
   <!-- errors -->
   <string name="err_none">ok</string>
@@ -144,7 +166,7 @@
   <string name="init_go4cache_connect">connection à Go 4 Cache</string>
   <string name="init_twitter_authorize">autorisation de c:geo</string>
   <string name="init_twitter_publish">publication d\'une cache trouvée</string>
-  <string name="init_signature">signature</string>
+  <string name="init_signature">Signature</string>
   <string name="init_other">autres options</string>
   <string name="init_skin">aspect sobre (nécessite le redémarrage de c:geo)</string>
   <string name="init_transparent">accueil de c:geo transparent</string>
