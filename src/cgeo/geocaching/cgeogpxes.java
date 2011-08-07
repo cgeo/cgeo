@@ -1,13 +1,14 @@
 package cgeo.geocaching;
 
+import java.io.File;
+import java.util.ArrayList;
+
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
-import java.io.File;
-import java.util.ArrayList;
 
 public class cgeogpxes extends cgFileList<cgGPXListAdapter> {
 
@@ -62,6 +63,14 @@ public class cgeogpxes extends cgFileList<cgGPXListAdapter> {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			listId = extras.getInt("list");
+		}
+		if (listId <= 0) {
+			listId = 1;
+		}
 
 	}
 
