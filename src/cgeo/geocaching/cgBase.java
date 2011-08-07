@@ -1693,19 +1693,19 @@ public class cgBase {
 							if (matcherLog.group(8) != null) {
 								logDone.found = new Integer(matcherLog.group(8));
 							}
-							
+
 							final Matcher matcherImg = patternLogImgs.matcher(logs[k]);
-							
-							while (matcherImg.find()) {		
+
+							while (matcherImg.find()) {
 								final cgImage logImage = new cgImage();
 								logImage.url = "http://img.geocaching.com/cache/log/" + matcherImg.group(1);
-								logImage.title = matcherImg.group(2);								
+								logImage.title = matcherImg.group(2);
 								if (logDone.logImages == null) {
 									logDone.logImages = new ArrayList<cgImage>();
 								}
-								logDone.logImages.add(logImage);															    								
+								logDone.logImages.add(logImage);
 							}
-							
+
 							logDone.log = logTmp;
 
 							if (cache.logs == null) {
@@ -2059,35 +2059,6 @@ public class cgBase {
 		}
 
 		return ratings;
-	}
-
-	public boolean setRating(String guid, int vote) {
-		if (guid == null || guid.length() == 0) {
-			return false;
-		}
-		if (vote < 0 || vote > 5) {
-			return false;
-		}
-
-		final HashMap<String, String> login = settings.getGCvoteLogin();
-		if (login == null) {
-			return false;
-		}
-
-		final HashMap<String, String> params = new HashMap<String, String>();
-		params.put("userName", login.get("username"));
-		params.put("password", login.get("password"));
-		params.put("cacheId", guid);
-		params.put("voteUser", Integer.toString(vote));
-		params.put("version", "cgeo");
-
-		final String result = request(false, "gcvote.com", "/setVote.php", "GET", params, false, false, false).getData();
-
-		if (result.trim().equalsIgnoreCase("ok") == true) {
-			return true;
-		}
-
-		return false;
 	}
 
 	public Long parseGPX(cgeoapplication app, File file, int listId, Handler handler) {
@@ -5034,7 +5005,7 @@ public class cgBase {
 					imgGetter.getDrawable(oneSpoiler.url);
 				}
 			}
-			
+
 			// store images from logs
 			if (settings.storelogimages == true) {
 				for (cgLog log : cache.logs) {

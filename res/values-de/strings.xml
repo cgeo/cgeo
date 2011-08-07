@@ -82,9 +82,13 @@
   <string name="log_rating">Bewertung</string>
   <string name="log_no_rating">Keine Bewertung</string>
   <string name="log_stars_1">1 Stern</string>
+  <string name="log_stars_15">1,5 Sterne</string>
   <string name="log_stars_2">2 Sterne</string>
+  <string name="log_stars_25">2,5 Sterne</string>
   <string name="log_stars_3">3 Sterne</string>
+  <string name="log_stars_35">3,5 Sterne</string>
   <string name="log_stars_4">4 Sterne</string>
+  <string name="log_stars_45">4,5 Sterne</string>
   <string name="log_stars_5">5 Sterne</string>
   <string name="log_webcam">Webcam-Foto gemacht</string>
   <string name="log_new_log">Loggen</string>

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -57,7 +58,7 @@ public class cgeovisit extends cgLogForm {
 	private Button clear = null;
 	private CheckBox tweetCheck = null;
 	private LinearLayout tweetBox = null;
-	private int rating = 0;
+	private double rating = 0.0;
 	private boolean tbChanged = false;
 	// constants
 	private final static int LOG_SIGNATURE = 0x1;
@@ -144,7 +145,7 @@ public class cgeovisit extends cgLogForm {
 					});
 
 					inventoryView.addView(inventoryItem);
-					
+
 					if (settings.trackableAutovisit)
                     {
 					    tb.action = 1;
@@ -292,41 +293,38 @@ public class cgeovisit extends cgLogForm {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		SubMenu subMenu = null;
+		SubMenu menuLog = null;
 
-		subMenu = menu.addSubMenu(0, 0, 0, res.getString(R.string.log_add)).setIcon(android.R.drawable.ic_menu_add);
-		subMenu.add(0, LOG_DATE_TIME, 0, res.getString(R.string.log_date_time));
-		subMenu.add(0, LOG_DATE, 0, res.getString(R.string.log_date));
-		subMenu.add(0, LOG_TIME, 0, res.getString(R.string.log_time));
-		subMenu.add(0, LOG_SIGNATURE, 0, res.getString(R.string.init_signature));
-		subMenu.add(0, LOG_SIGNATURE_DATE_TIME, 0, res.getString(R.string.log_date_time) + " & " + res.getString(R.string.init_signature));
+		menuLog = menu.addSubMenu(0, 0, 0, res.getString(R.string.log_add)).setIcon(android.R.drawable.ic_menu_add);
+		menuLog.add(0, LOG_DATE_TIME, 0, res.getString(R.string.log_date_time));
+		menuLog.add(0, LOG_DATE, 0, res.getString(R.string.log_date));
+		menuLog.add(0, LOG_TIME, 0, res.getString(R.string.log_time));
+		menuLog.add(0, LOG_SIGNATURE, 0, res.getString(R.string.init_signature));
+		menuLog.add(0, LOG_SIGNATURE_DATE_TIME, 0, res.getString(R.string.log_date_time) + " & " + res.getString(R.string.init_signature));
 
-		subMenu = menu.addSubMenu(0, 9, 0, res.getString(R.string.log_rating)).setIcon(android.R.drawable.ic_menu_sort_by_size);
-		subMenu.add(0, 10, 0, res.getString(R.string.log_no_rating));
-		subMenu.add(0, 15, 0, res.getString(R.string.log_stars_5));
-		subMenu.add(0, 14, 0, res.getString(R.string.log_stars_4));
-		subMenu.add(0, 13, 0, res.getString(R.string.log_stars_3));
-		subMenu.add(0, 12, 0, res.getString(R.string.log_stars_2));
-		subMenu.add(0, 11, 0, res.getString(R.string.log_stars_1));
+		SubMenu menuStars = menu.addSubMenu(0, 9, 0, res.getString(R.string.log_rating)).setIcon(android.R.drawable.ic_menu_sort_by_size);
+		menuStars.add(0, 10, 0, res.getString(R.string.log_no_rating));
+		menuStars.add(0, 19, 0, res.getString(R.string.log_stars_5));
+		menuStars.add(0, 18, 0, res.getString(R.string.log_stars_45));
+		menuStars.add(0, 17, 0, res.getString(R.string.log_stars_4));
+		menuStars.add(0, 16, 0, res.getString(R.string.log_stars_35));
+		menuStars.add(0, 15, 0, res.getString(R.string.log_stars_3));
+		menuStars.add(0, 14, 0, res.getString(R.string.log_stars_25));
+		menuStars.add(0, 13, 0, res.getString(R.string.log_stars_2));
+		menuStars.add(0, 12, 0, res.getString(R.string.log_stars_15));
+		menuStars.add(0, 11, 0, res.getString(R.string.log_stars_1));
 
 		return true;
 	}
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		if (settings.getSignature() == null) {
-			menu.findItem(LOG_SIGNATURE).setVisible(false);
-			menu.findItem(LOG_SIGNATURE_DATE_TIME).setVisible(false);
-		} else {
-			menu.findItem(LOG_SIGNATURE).setVisible(true);
-			menu.findItem(LOG_SIGNATURE_DATE_TIME).setVisible(true);
-		}
+		boolean signatureAvailable = settings.getSignature() != null;
+		menu.findItem(LOG_SIGNATURE).setVisible(signatureAvailable);
+		menu.findItem(LOG_SIGNATURE_DATE_TIME).setVisible(signatureAvailable);
 
-		if (settings.isGCvoteLogin() && typeSelected == cgBase.LOG_FOUND_IT && cache.guid != null && cache.guid.length() > 0) {
-			menu.findItem(9).setVisible(true);
-		} else {
-			menu.findItem(9).setVisible(false);
-		}
+		boolean voteAvailable = settings.isGCvoteLogin() && typeSelected == cgBase.LOG_FOUND_IT && cache.guid != null && cache.guid.length() > 0;
+		menu.findItem(9).setVisible(voteAvailable);
 
 		return true;
 	}
@@ -339,20 +337,49 @@ public class cgeovisit extends cgLogForm {
 			addSignature(id);
 
 			return true;
-		} else if (id >= 10 && id <= 15) {
-			rating = id - 10;
+		} else if (id >= 10 && id <= 19) {
+			rating = (id - 9) / 2.0;
 
 			if (post == null) {
 				post = (Button) findViewById(R.id.post);
 			}
-			if (rating == 0) {
+			if (rating == 0.0) {
 				post.setText(res.getString(R.string.log_post_no_rate));
 			} else {
-				post.setText(res.getString(R.string.log_post_rate) + " " + rating + "*");
+				post.setText(res.getString(R.string.log_post_rate) + " " + ratingTextValue(rating) + "*");
 			}
 		}
 
 		return false;
+	}
+
+	private static String ratingTextValue(final double rating) {
+		return String.format(Locale.getDefault(), "%.1f", rating);
+	}
+
+	public boolean setRating(String guid, double vote) {
+		if (guid == null || guid.length() == 0) {
+			return false;
+		}
+		if (vote < 0.0 || vote > 5.0) {
+			return false;
+		}
+
+		final HashMap<String, String> login = settings.getGCvoteLogin();
+		if (login == null) {
+			return false;
+		}
+
+		final HashMap<String, String> params = new HashMap<String, String>();
+		params.put("userName", login.get("username"));
+		params.put("password", login.get("password"));
+		params.put("cacheId", guid);
+		params.put("voteUser", String.format("%.1f", rating).replace(',', '.'));
+		params.put("version", "cgeo");
+
+		final String result = base.request(false, "gcvote.com", "/setVote.php", "GET", params, false, false, false).getData();
+
+		return result.trim().equalsIgnoreCase("ok");
 	}
 
 	public void addSignature(int id) {
@@ -681,7 +708,7 @@ public class cgeovisit extends cgLogForm {
 			if (rating == 0) {
 				post.setText(res.getString(R.string.log_post_no_rate));
 			} else {
-				post.setText(res.getString(R.string.log_post_rate) + " " + rating + "*");
+				post.setText(res.getString(R.string.log_post_rate) + " " + ratingTextValue(rating) + "*");
 			}
 		} else {
 			post.setText(res.getString(R.string.log_post));
@@ -889,7 +916,7 @@ public class cgeovisit extends cgLogForm {
 			}
 
 			if (status == 1 && typeSelected == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin() == true) {
-				base.setRating(cache.guid, rating);
+				setRating(cache.guid, rating);
 			}
 
 			return status;
