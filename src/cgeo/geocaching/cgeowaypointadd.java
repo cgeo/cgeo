@@ -355,15 +355,7 @@ public class cgeowaypointadd extends Activity {
 	private String getLonStr() {
 	  return bLon.getText()+" "+eLonDeg.getText()+"° "+eLonMin.getText()+","+eLonSec.getText();
 	}
-	
-	private class editClick implements android.view.View.OnClickListener {
-
-	  @Override
-	  public void onClick(View v) {
-
-	  }
-	}
-	    
+		    
 	private class currentListener implements View.OnClickListener {
 
 		public void onClick(View arg0) {
