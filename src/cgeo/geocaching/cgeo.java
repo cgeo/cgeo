@@ -27,7 +27,6 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -446,6 +445,8 @@ public class cgeo extends Activity {
 					LinearLayout findNearest = (LinearLayout) findViewById(R.id.nearest);
 					findNearest.setClickable(true);
 					findNearest.setOnClickListener(new cgeoFindNearestListener());
+					View findNearestView = (View)findNearest.findViewById(R.id.view_nearest);
+					findNearestView.setBackgroundResource(R.drawable.main_nearby);
 
 					String satellites = null;
 					if (geo.satellitesVisible != null && geo.satellitesFixed != null && geo.satellitesFixed > 0) {
@@ -496,9 +497,12 @@ public class cgeo extends Activity {
 						}
 					}
 				} else {
-					Button findNearest = (Button) findViewById(R.id.nearest);
+					LinearLayout findNearest = (LinearLayout) findViewById(R.id.nearest);
 					findNearest.setClickable(false);
 					findNearest.setOnClickListener(null);
+
+					View findNearestView = (View)findNearest.findViewById(R.id.view_nearest);
+					findNearestView.setBackgroundResource(R.drawable.main_nearby_disabled);
 
 					navType.setText(null);
 					navAccuracy.setText(null);
