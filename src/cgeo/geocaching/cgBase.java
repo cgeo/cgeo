@@ -1146,9 +1146,9 @@ public class cgBase {
 		// cache geocode
 		try {
 			final Matcher matcherGeocode = patternGeocode.matcher(page);
-			while (matcherGeocode.find()) {
+			if (matcherGeocode.find()) {
 				if (matcherGeocode.groupCount() > 0) {
-					cache.geocode = (String) matcherGeocode.group(1);
+					cache.geocode = getMatch(matcherGeocode.group(1));
 				}
 			}
 		} catch (Exception e) {
@@ -1159,9 +1159,9 @@ public class cgBase {
 		// cache id
 		try {
 			final Matcher matcherCacheId = patternCacheId.matcher(page);
-			while (matcherCacheId.find()) {
+			if (matcherCacheId.find()) {
 				if (matcherCacheId.groupCount() > 0) {
-					cache.cacheid = (String) matcherCacheId.group(1);
+					cache.cacheid = getMatch(matcherCacheId.group(1));
 				}
 			}
 		} catch (Exception e) {
@@ -1174,7 +1174,7 @@ public class cgBase {
 			final Matcher matcherCacheGuid = patternCacheGuid.matcher(page);
 			if (matcherCacheGuid.find()) {
 				if (matcherCacheGuid.groupCount() > 0) {
-					cache.guid = (String) matcherCacheGuid.group(1);
+					cache.guid = getMatch(matcherCacheGuid.group(1));
 				}
 			}
 		} catch (Exception e) {
@@ -1185,7 +1185,7 @@ public class cgBase {
 		// name
 		try {
 			final Matcher matcherName = patternName.matcher(page);
-			while (matcherName.find()) {
+			if (matcherName.find()) {
 				if (matcherName.groupCount() > 0) {
 					cache.name = Html.fromHtml(matcherName.group(1)).toString();
 				}
@@ -1198,7 +1198,7 @@ public class cgBase {
 		// owner real name
 		try {
 			final Matcher matcherOwnerReal = patternOwnerReal.matcher(page);
-			while (matcherOwnerReal.find()) {
+			if (matcherOwnerReal.find()) {
 				if (matcherOwnerReal.groupCount() > 0) {
 					cache.ownerReal = URLDecoder.decode(matcherOwnerReal.group(1));
 				}
@@ -1236,7 +1236,7 @@ public class cgBase {
 			// cache terrain
 			try {
 				final Matcher matcherTerrain = patternTerrain.matcher(tableInside);
-				while (matcherTerrain.find()) {
+				if (matcherTerrain.find()) {
 					if (matcherTerrain.groupCount() > 0) {
 						cache.terrain = new Float(Pattern.compile("_").matcher(matcherTerrain.group(1)).replaceAll("."));
 					}
@@ -1249,7 +1249,7 @@ public class cgBase {
 			// cache difficulty
 			try {
 				final Matcher matcherDifficulty = patternDifficulty.matcher(tableInside);
-				while (matcherDifficulty.find()) {
+				if (matcherDifficulty.find()) {
 					if (matcherDifficulty.groupCount() > 0) {
 						cache.difficulty = new Float(Pattern.compile("_").matcher(matcherDifficulty.group(1)).replaceAll("."));
 					}
@@ -1262,7 +1262,7 @@ public class cgBase {
 			// owner
 			try {
 				final Matcher matcherOwner = patternOwner.matcher(tableInside);
-				while (matcherOwner.find()) {
+				if (matcherOwner.find()) {
 					if (matcherOwner.groupCount() > 0) {
 						cache.owner = Html.fromHtml(matcherOwner.group(2)).toString();
 					}
@@ -1275,7 +1275,7 @@ public class cgBase {
 			// hidden
 			try {
 				final Matcher matcherHidden = patternHidden.matcher(tableInside);
-				while (matcherHidden.find()) {
+				if (matcherHidden.find()) {
 					if (matcherHidden.groupCount() > 0) {
 						cache.hidden = parseDate(matcherHidden.group(1));
 					}
@@ -1289,7 +1289,7 @@ public class cgBase {
 				// event date
 				try {
 					final Matcher matcherHiddenEvent = patternHiddenEvent.matcher(tableInside);
-					while (matcherHiddenEvent.find()) {
+					if (matcherHiddenEvent.find()) {
 						if (matcherHiddenEvent.groupCount() > 0) {
 							cache.hidden = parseDate(matcherHiddenEvent.group(1));
 						}
@@ -1303,7 +1303,7 @@ public class cgBase {
 			// favourite
 			try {
 				final Matcher matcherFavourite = patternFavourite.matcher(tableInside);
-				while (matcherFavourite.find()) {
+				if (matcherFavourite.find()) {
 					if (matcherFavourite.groupCount() > 0) {
 						cache.favouriteCnt = Integer.parseInt(matcherFavourite.group(1));
 					}
@@ -1316,9 +1316,9 @@ public class cgBase {
 			// cache size
 			try {
 				final Matcher matcherSize = patternSize.matcher(tableInside);
-				while (matcherSize.find()) {
+				if (matcherSize.find()) {
 					if (matcherSize.groupCount() > 0) {
-						cache.size = matcherSize.group(1).toLowerCase();
+						cache.size = getMatch(matcherSize.group(1)).toLowerCase();
 					}
 				}
 			} catch (Exception e) {
@@ -1330,7 +1330,7 @@ public class cgBase {
 		// cache found
 		try {
 			final Matcher matcherFound = patternFound.matcher(page);
-			while (matcherFound.find()) {
+			if (matcherFound.find()) {
 				if (matcherFound.group() != null && matcherFound.group().length() > 0) {
 					cache.found = true;
 				}
@@ -1343,7 +1343,7 @@ public class cgBase {
 		// cache type
 		try {
 			final Matcher matcherType = patternType.matcher(page);
-			while (matcherType.find()) {
+			if (matcherType.find()) {
 				if (matcherType.groupCount() > 0) {
 					cache.type = cacheTypes.get(matcherType.group(1).toLowerCase());
 				}
@@ -1365,9 +1365,9 @@ public class cgBase {
 		// latitude and logitude
 		try {
 			final Matcher matcherLatLon = patternLatLon.matcher(page);
-			while (matcherLatLon.find()) {
+			if (matcherLatLon.find()) {
 				if (matcherLatLon.groupCount() > 0) {
-					cache.latlon = matcherLatLon.group(2); // first is <b>
+					cache.latlon = getMatch(matcherLatLon.group(2)); // first is <b>
 
 					HashMap<String, Object> tmp = this.parseLatlon(cache.latlon);
 					if (tmp.size() > 0) {
@@ -1388,9 +1388,9 @@ public class cgBase {
 		// cache location
 		try {
 			final Matcher matcherLocation = patternLocation.matcher(page);
-			while (matcherLocation.find()) {
+			if (matcherLocation.find()) {
 				if (matcherLocation.groupCount() > 0) {
-					cache.location = matcherLocation.group(1);
+					cache.location = getMatch(matcherLocation.group(1));
 				}
 			}
 		} catch (Exception e) {
@@ -1401,7 +1401,7 @@ public class cgBase {
 		// cache hint
 		try {
 			final Matcher matcherHint = patternHint.matcher(page);
-			while (matcherHint.find()) {
+			if (matcherHint.find()) {
 				if (matcherHint.groupCount() > 2 && matcherHint.group(3) != null) {
 					// replace linebreak and paragraph tags
 					String hint = Pattern.compile("<(br|p)[^>]*>").matcher(matcherHint.group(3)).replaceAll("\n");
@@ -1445,7 +1445,7 @@ public class cgBase {
 			final Matcher matcherDescShort = patternDescShort.matcher(page);
 			if (matcherDescShort.find()) {
 				if (matcherDescShort.groupCount() > 0) {
-					cache.shortdesc = matcherDescShort.group(1).trim();
+					cache.shortdesc = getMatch(matcherDescShort.group(1));
 				}
 			}
 		} catch (Exception e) {
@@ -1458,7 +1458,7 @@ public class cgBase {
 			final Matcher matcherDesc = patternDesc.matcher(page);
 			if (matcherDesc.find()) {
 				if (matcherDesc.groupCount() > 0) {
-					cache.description = matcherDesc.group(1);
+					cache.description = getMatch(matcherDesc.group(1));
 				}
 			}
 		} catch (Exception e) {
@@ -1886,6 +1886,16 @@ public class cgBase {
 		caches.cacheList.add(cache);
 
 		return caches;
+	}
+
+	private static String getMatch(String match) {
+		// creating a new String via String constructor is necessary here!!
+		return new String(match);
+		// Java copies the whole page String, when matching with regular expressions
+		// later this would block the garbage collector, as we only need tiny parts of the page
+		// see http://developer.android.com/reference/java/lang/String.html#backing_array
+
+		// And BTW: You cannot even see that effect in the debugger, but must use a separate memory profiler!
 	}
 
 	private static Date parseDate(String input) {
@@ -4501,7 +4511,6 @@ public class cgBase {
 		}
 
 		cgResponse response = new cgResponse();
-		String data = null;
 
 		try {
 			if (httpCode == 302 && httpLocation != null) {
@@ -4517,7 +4526,8 @@ public class cgBase {
 				}
 			} else {
 				if (buffer != null && buffer.length() > 0) {
-					data = replaceWhitespace(buffer);
+					replaceWhitespace(buffer);
+					String data = buffer.toString();
 					buffer = null;
 
 					if (data != null) {
@@ -4537,26 +4547,26 @@ public class cgBase {
 		return response;
 	}
 
-	private static String replaceWhitespace(final StringBuffer buffer) {
+	private static void replaceWhitespace(final StringBuffer buffer) {
 		final int length = buffer.length();
-		final char[] bytes = new char[length];
-		buffer.getChars(0, length, bytes, 0);
+		final char[] chars = new char[length];
+		buffer.getChars(0, length, chars, 0);
 		int resultSize = 0;
 		boolean lastWasWhitespace = false;
 		for (int i = 0; i < length; i++) {
-			char c = bytes[i];
+			char c = chars[i];
 			if (c == ' ' || c == '\n' || c == '\r' || c == '\t') {
 				if (!lastWasWhitespace) {
-					bytes[resultSize++] =' ';
+					chars[resultSize++] =' ';
 				}
 				lastWasWhitespace = true;
 			} else {
-				bytes[resultSize++] = c;
+				chars[resultSize++] = c;
 				lastWasWhitespace = false;
 			}
 		}
-
-		return new String(bytes, 0, resultSize);
+		buffer.setLength(0);
+		buffer.append(chars);
 	}
 
 	public String requestJSONgc(String host, String path, String params) {
@@ -4736,7 +4746,8 @@ public class cgBase {
 				page = requestJSONgc(newLocation.getHost(), newLocation.getPath(), params);
 			}
 		} else {
-			page = replaceWhitespace(buffer);
+			replaceWhitespace(buffer);
+			page = buffer.toString();
 		}
 
 		if (page != null) {
@@ -4877,7 +4888,8 @@ public class cgBase {
 				page = requestJSONgc(newLocation.getHost(), newLocation.getPath(), params);
 			}
 		} else {
-			page = replaceWhitespace(buffer);
+			replaceWhitespace(buffer);
+			page = buffer.toString();
 		}
 
 		if (page != null) {

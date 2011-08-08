@@ -161,7 +161,7 @@ public class cgeodetail extends Activity {
 				}
 			}
 
-			(new loadMapPreview(cache, loadMapPreviewHandler)).start();
+			(new loadMapPreview(loadMapPreviewHandler)).start();
 		}
 	};
 
@@ -608,7 +608,7 @@ public class cgeodetail extends Activity {
 			}
 
 			geocode = geocode.toUpperCase();
-			
+
 			base.setTitle(activity, geocode);
 
 			inflater = activity.getLayoutInflater();
@@ -1178,8 +1178,8 @@ public class cgeodetail extends Activity {
 				}
 				// add LogImages
 				LinearLayout logLayout = (LinearLayout) rowView.findViewById(R.id.log_layout);
-				
-				if ((log.logImages != null) && (!log.logImages.isEmpty())) {					
+
+				if ((log.logImages != null) && (!log.logImages.isEmpty())) {
 					for (int i_img_cnt = 0; i_img_cnt < log.logImages.size(); i_img_cnt++) {
 						String img_title = log.logImages.get(i_img_cnt).title;
 						if (img_title.equals("")) {
@@ -1188,12 +1188,12 @@ public class cgeodetail extends Activity {
 						final String title = img_title;
 						final String url = log.logImages.get(i_img_cnt).url;
 						LinearLayout log_imgView = (LinearLayout) inflater.inflate(R.layout.log_img, null);
-						TextView log_img_title = (TextView)log_imgView.findViewById(R.id.title);						
-						log_img_title.setText(title);						
-						log_img_title.setOnClickListener(new View.OnClickListener() {							
+						TextView log_img_title = (TextView)log_imgView.findViewById(R.id.title);
+						log_img_title.setText(title);
+						log_img_title.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
-								Intent logImgIntent = new Intent(activity, cgeoimages.class);								
+								Intent logImgIntent = new Intent(activity, cgeoimages.class);
 								logImgIntent.putExtra("geocode", geocode.toUpperCase());
 								logImgIntent.putExtra("type", cgeoimages.LOG_IMAGE);
 								logImgIntent.putExtra("title", title);
@@ -1204,7 +1204,7 @@ public class cgeodetail extends Activity {
 						logLayout.addView(log_imgView);
 					}
 				}
-				
+
 				final ImageView markFound = (ImageView) rowView.findViewById(R.id.found_mark);
 				final ImageView markDNF = (ImageView) rowView.findViewById(R.id.dnf_mark);
 				final ImageView markDisabled = (ImageView) rowView.findViewById(R.id.disabled_mark);
@@ -1226,7 +1226,7 @@ public class cgeodetail extends Activity {
 					markDisabled.setVisibility(View.GONE);
 				}
 
-				((TextView) rowView.findViewById(R.id.author)).setOnClickListener(new userActions());				
+				((TextView) rowView.findViewById(R.id.author)).setOnClickListener(new userActions());
 				((TextView) logLayout.findViewById(R.id.log)).setOnClickListener(new decryptLog());
 
 				listView.addView(rowView);
@@ -1275,11 +1275,9 @@ public class cgeodetail extends Activity {
 	}
 
 	private class loadMapPreview extends Thread {
-		private cgCache cache = null;
 		private Handler handler = null;
 
-		public loadMapPreview(cgCache cacheIn, Handler handlerIn) {
-			cache = cacheIn;
+		public loadMapPreview(Handler handlerIn) {
 			handler = handlerIn;
 		}
 
@@ -1910,7 +1908,7 @@ public class cgeodetail extends Activity {
 			}
 		}
 	}
-	
+
 	public void goHome(View view) {
 		base.goHome(activity);
 	}
