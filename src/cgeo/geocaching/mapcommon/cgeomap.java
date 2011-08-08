@@ -278,7 +278,7 @@ public class cgeomap extends MapBase {
 		mapView.clearOverlays();
 
 		if (overlayMyLoc == null) {
-			overlayMyLoc = new cgMapMyOverlay(settings);
+			overlayMyLoc = new cgMapMyOverlay(settings, activity);
 			mapView.addOverlay(mapFactory.getOverlayBaseWrapper(overlayMyLoc));
 		}
 
@@ -750,7 +750,7 @@ public class cgeomap extends MapBase {
 
 			try {
 				if (overlayMyLoc == null && mapView != null) {
-					overlayMyLoc = new cgMapMyOverlay(settings);
+					overlayMyLoc = new cgMapMyOverlay(settings, activity);
 					mapView.addOverlay(settings.getMapFactory().getOverlayBaseWrapper(overlayMyLoc));
 				}
 

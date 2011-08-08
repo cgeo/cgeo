@@ -1,5 +1,9 @@
 package cgeo.geocaching;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Locale;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.GpsSatellite;
@@ -9,9 +13,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Locale;
 
 public class cgGeo {
 
@@ -19,7 +20,6 @@ public class cgGeo {
 	private cgeoapplication app = null;
 	private LocationManager geoManager = null;
 	private cgUpdateLoc geoUpdate = null;
-	private cgWarning warning = null;
 	private cgBase base = null;
 	private cgSettings settings = null;
 	private SharedPreferences prefs = null;
@@ -48,13 +48,12 @@ public class cgGeo {
 	public Integer satellitesFixed = null;
 	public double distanceNow = 0d;
 
-	public cgGeo(Context contextIn, cgeoapplication appIn, cgUpdateLoc geoUpdateIn, cgBase baseIn, cgSettings settingsIn, cgWarning warningIn, int timeIn, int distanceIn) {
+	public cgGeo(Context contextIn, cgeoapplication appIn, cgUpdateLoc geoUpdateIn, cgBase baseIn, cgSettings settingsIn, int timeIn, int distanceIn) {
 		context = contextIn;
 		app = appIn;
 		geoUpdate = geoUpdateIn;
 		base = baseIn;
 		settings = settingsIn;
-		warning = warningIn;
 		time = timeIn;
 		distance = distanceIn;
 
@@ -423,7 +422,7 @@ public class cgGeo {
 		assign(app.getLastLat(), app.getLastLon());
 
 		Location lastGps = geoManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-		
+
 		if (lastGps != null) {
 			lastGps.setProvider("last");
 			assign(lastGps);
@@ -431,7 +430,7 @@ public class cgGeo {
 			Log.i(cgSettings.tag, "Using last location from GPS");
 			return;
 		}
-		
+
 		Location lastGsm = geoManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
 		if (lastGsm != null) {

@@ -446,7 +446,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		if (compasses.contains(holder.direction) == false) {
 			compasses.add(holder.direction);
 		}
-		holder.direction.setContent(base, cache.latitude, cache.longitude);
+		holder.direction.setContent(cache.latitude, cache.longitude);
 
 		if (cache.logOffline == true) {
 			holder.offlineMark.setVisibility(View.VISIBLE);

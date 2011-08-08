@@ -1,18 +1,16 @@
 package cgeo.geocaching;
 
+import java.util.Calendar;
+
 import android.app.Activity;
-import android.os.Bundle;
 import android.app.Dialog;
+import android.os.Bundle;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.DatePicker;
-import java.util.Calendar;
 
 public class cgeodate extends Dialog {
 
-	private cgSettings settings = null;
-	private cgBase base = null;
-	private cgWarning warning = null;
 	private cgLogForm parent = null;
 	private Calendar date = Calendar.getInstance();
 
@@ -20,11 +18,7 @@ public class cgeodate extends Dialog {
 		super(contextIn);
 
 		// init
-		settings = new cgSettings(contextIn, contextIn.getSharedPreferences(cgSettings.preferences, 0));
-		base = new cgBase((cgeoapplication) contextIn.getApplication(), settings, contextIn.getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(contextIn);
 		date = dateIn;
-
 		parent = parentIn;
 	}
 

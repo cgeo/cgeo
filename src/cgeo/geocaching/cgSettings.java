@@ -9,6 +9,7 @@ import org.mapsforge.android.maps.MapDatabase;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.os.Environment;
 import android.util.Log;
@@ -17,6 +18,45 @@ import cgeo.geocaching.mapinterfaces.MapFactory;
 import cgeo.geocaching.mapsforge.mfMapFactory;
 
 public class cgSettings {
+
+	private static final String KEY_WEB_DEVICE_CODE = "webDeviceCode";
+	private static final String KEY_WEBDEVICE_NAME = "webDeviceName";
+	private static final String KEY_MAP_LIVE = "maplive";
+	private static final String KEY_MAP_SOURCE = "mapsource";
+	private static final String KEY_USE_TWITTER = "twitter";
+	private static final String KEY_SHOW_ADDRESS = "showaddress";
+	private static final String KEY_SHOW_CAPTCHA = "showcaptcha";
+	private static final String KEY_MAP_TRAIL = "maptrail";
+	private static final String KEY_LAST_MAP_ZOOM = "mapzoom";
+	private static final String KEY_LIVE_LIST = "livelist";
+	private static final String KEY_METRIC_UNITS = "units";
+	private static final String KEY_SKIN = "skin";
+	private static final String KEY_LAST_USED_LIST = "lastlist";
+	private static final String KEY_CACHE_TYPE = "cachetype";
+	private static final String KEY_INITIALIZED = "initialized";
+	private static final String KEY_TWITTER_TOKEN_SECRET = "tokensecret";
+	private static final String KEY_TWITTER_TOKEN_PUBLIC = "tokenpublic";
+	private static final String KEY_VERSION = "version";
+	private static final String KEY_LOAD_DESCRIPTION = "autoloaddesc";
+	private static final String KEY_USE_ENGLISH = "useenglish";
+	private static final String KEY_AS_BROWSER = "asbrowser";
+	private static final String KEY_USE_COMPASS = "usecompass";
+	private static final String KEY_AUTO_VISIT_TRACKABLES = "trackautovisit";
+	private static final String KEY_AUTO_INSERT_SIGNATURE = "sigautoinsert";
+	private static final String KEY_ALTITUDE_CORRECTION = "altcorrection";
+	private static final String KEY_USE_GOOGLE_NAVIGATION = "usegnav";
+	private static final String KEY_STORE_LOG_IMAGES = "logimages";
+	private static final String KEY_EXCLUDE_DISABLED = "excludedisabled";
+	private static final String KEY_EXCLUDE_OWN = "excludemine";
+	private static final String KEY_MAPFILE = "mfmapfile";
+	private static final String KEY_SIGNATURE = "signature";
+	private static final String KEY_GCVOTE_PASSWORD = "pass-vote";
+	private static final String KEY_PASSWORD = "password";
+	private static final String KEY_USERNAME = "username";
+
+	private interface PrefRunnable {
+		void edit(final Editor edit);
+	}
 
 	public enum mapSourceEnum {
 		googleMap,
@@ -48,7 +88,6 @@ public class cgSettings {
 	public final static int unitsMetric = 1;
 	public final static int unitsImperial = 2;
 	public final static String cache = ".cgeo";
-	public final static String analytics = "UA-1103507-15";
 
 	// twitter api keys
 	public final static String keyConsumerPublic = "RFafPiNi3xRhcS1TPE3wTw";
@@ -59,17 +98,10 @@ public class cgSettings {
 
 	// skin
 	public int skin = 0;
-	public int buttonActive = R.drawable.action_button_dark;
-	public int buttonInactive = R.drawable.action_button_dark_off;
-	public int buttonPressed = R.drawable.action_button_dark_pressed;
 
 	// settings
-	public boolean loaded = false;
-	public boolean hideMySearch = false;
 	public int helper = 0;
 	public int initialized = 0;
-	public String languages = null;
-	public int cachesFound = 0;
 	public int autoLoadDesc = 0;
 	public int units = unitsMetric;
 	public int livelist = 1;
@@ -89,7 +121,6 @@ public class cgSettings {
 	public int publicLoc = 0;
 	public int twitter = 0;
 	public int altCorrection = 0;
-	public String signature = null;
 	public String cacheType = null;
 	public String tokenPublic = null;
 	public String tokenSecret = null;
@@ -109,7 +140,6 @@ public class cgSettings {
 	private SharedPreferences prefs = null;
 	private String username = null;
 	private String password = null;
-	private String passVote = null;
 
 	// maps
 	public MapFactory mapFactory = null;
@@ -126,70 +156,51 @@ public class cgSettings {
 	}
 
 	public void load() {
-		version = prefs.getInt("version", 0);
+		version = prefs.getInt(KEY_VERSION, 0);
 
-		initialized = prefs.getInt("initialized", 0);
+		initialized = prefs.getInt(KEY_INITIALIZED, 0);
 		helper = prefs.getInt("helper", 0);
 
-		skin = prefs.getInt("skin", 0);
-		setSkinDefaults();
+		skin = prefs.getInt(KEY_SKIN, 0);
 
-		languages = prefs.getString("languages", null);
-		cachesFound = prefs.getInt("found", 0);
-		autoLoadDesc = prefs.getInt("autoloaddesc", 0);
-		units = prefs.getInt("units", 1);
-		livelist = prefs.getInt("livelist", 1);
-		maplive = prefs.getInt("maplive", 1);
-		mapzoom = prefs.getInt("mapzoom", 14);
-		maptrail = prefs.getInt("maptrail", 1);
-		useEnglish = prefs.getBoolean("useenglish", false);
-		showCaptcha = prefs.getBoolean("showcaptcha", false);
-		excludeMine = prefs.getInt("excludemine", 0);
-		excludeDisabled = prefs.getInt("excludedisabled", 0);
+		autoLoadDesc = prefs.getInt(KEY_LOAD_DESCRIPTION, 0);
+		units = prefs.getInt(KEY_METRIC_UNITS, 1);
+		livelist = prefs.getInt(KEY_LIVE_LIST, 1);
+		maplive = prefs.getInt(KEY_MAP_LIVE, 1);
+		mapzoom = prefs.getInt(KEY_LAST_MAP_ZOOM, 14);
+		maptrail = prefs.getInt(KEY_MAP_TRAIL, 1);
+		useEnglish = prefs.getBoolean(KEY_USE_ENGLISH, false);
+		showCaptcha = prefs.getBoolean(KEY_SHOW_CAPTCHA, false);
+		excludeMine = prefs.getInt(KEY_EXCLUDE_OWN, 0);
+		excludeDisabled = prefs.getInt(KEY_EXCLUDE_DISABLED, 0);
 		storeOfflineMaps = prefs.getInt("offlinemaps", 1);
-		storelogimages = prefs.getBoolean("logimages", false);
-		asBrowser = prefs.getInt("asbrowser", 1);
-		useCompass = prefs.getInt("usecompass", 1);
-		useGNavigation = prefs.getInt("usegnav", 1);
-		showAddress = prefs.getInt("showaddress", 1);
+		storelogimages = prefs.getBoolean(KEY_STORE_LOG_IMAGES, false);
+		asBrowser = prefs.getInt(KEY_AS_BROWSER, 1);
+		useCompass = prefs.getInt(KEY_USE_COMPASS, 1);
+		useGNavigation = prefs.getInt(KEY_USE_GOOGLE_NAVIGATION, 1);
+		showAddress = prefs.getInt(KEY_SHOW_ADDRESS, 1);
 		publicLoc = prefs.getInt("publicloc", 0);
-		twitter = prefs.getInt("twitter", 0);
-		altCorrection = prefs.getInt("altcorrection", 0);
-		signature = prefs.getString("signature", null);
-		cacheType = prefs.getString("cachetype", null);
-		tokenPublic = prefs.getString("tokenpublic", null);
-		tokenSecret = prefs.getString("tokensecret", null);
-		mapFile = prefs.getString("mfmapfile", null);
+		twitter = prefs.getInt(KEY_USE_TWITTER, 0);
+		altCorrection = prefs.getInt(KEY_ALTITUDE_CORRECTION, 0);
+		cacheType = prefs.getString(KEY_CACHE_TYPE, null);
+		tokenPublic = prefs.getString(KEY_TWITTER_TOKEN_PUBLIC, null);
+		tokenSecret = prefs.getString(KEY_TWITTER_TOKEN_SECRET, null);
+		mapFile = prefs.getString(KEY_MAPFILE, null);
 		mapFileValid = checkMapfile(mapFile);
-		mapSource = mapSourceEnum.fromInt(prefs.getInt("mapsource", 0));
-		webDeviceName = prefs.getString("webDeviceName", null);
-		webDeviceCode = prefs.getString("webDeviceCode", null);
-		trackableAutovisit = prefs.getBoolean("trackautovisit", false);
-		signatureAutoinsert = prefs.getBoolean("sigautoinsert", false);
+		mapSource = mapSourceEnum.fromInt(prefs.getInt(KEY_MAP_SOURCE, 0));
+		webDeviceName = prefs.getString(KEY_WEBDEVICE_NAME, null);
+		webDeviceCode = prefs.getString(KEY_WEB_DEVICE_CODE, null);
+		trackableAutovisit = prefs.getBoolean(KEY_AUTO_VISIT_TRACKABLES, false);
+		signatureAutoinsert = prefs.getBoolean(KEY_AUTO_INSERT_SIGNATURE, false);
 
 		setLanguage(useEnglish);
-	}
-
-	private void setSkinDefaults() {
-		if (skin == 1) {
-			buttonActive = R.drawable.action_button_light;
-			buttonInactive = R.drawable.action_button_light_off;
-			buttonPressed = R.drawable.action_button_light_pressed;
-		} else {
-			skin = 0;
-			buttonActive = R.drawable.action_button_dark;
-			buttonInactive = R.drawable.action_button_dark_off;
-			buttonPressed = R.drawable.action_button_dark_pressed;
-		}
 	}
 
 	public void setSkin(int skinIn) {
 		if (skin == 1) {
 			skin = 1;
-			setSkinDefaults();
 		} else {
 			skin = 0;
-			setSkinDefaults();
 		}
 	}
 
@@ -205,12 +216,12 @@ public class cgSettings {
 	}
 
 	public void reloadTwitterTokens() {
-		tokenPublic = prefs.getString("tokenpublic", null);
-		tokenSecret = prefs.getString("tokensecret", null);
+		tokenPublic = prefs.getString(KEY_TWITTER_TOKEN_PUBLIC, null);
+		tokenSecret = prefs.getString(KEY_TWITTER_TOKEN_SECRET, null);
 	}
 
 	public void reloadCacheType() {
-		cacheType = prefs.getString("cachetype", null);
+		cacheType = prefs.getString(KEY_CACHE_TYPE, null);
 	}
 
 	public String getStorage() {
@@ -222,22 +233,19 @@ public class cgSettings {
 	}
 
 	public String[] getStorageSpecific(Boolean hidden) {
-		String[] storage = new String[2];
+		String external = Environment.getExternalStorageDirectory() + "/" + cache + "/";
+		String data = Environment.getDataDirectory() + "/data/cgeo.geocaching/" + cache + "/";
 
 		if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-			storage[0] = Environment.getExternalStorageDirectory() + "/" + cache + "/";
-			storage[1] = Environment.getDataDirectory() + "/data/cgeo.geocaching/" + cache + "/";
+			return new String[] {external, data};
 		} else {
-			storage[0] = Environment.getDataDirectory() + "/data/cgeo.geocaching/" + cache + "/";
-			storage[1] = Environment.getExternalStorageDirectory() + "/" + cache + "/";
+			return new String[] {data, external};
 		}
-
-		return storage;
 	}
 
 	public boolean isLogin() {
-		final String preUsername = prefs.getString("username", null);
-		final String prePassword = prefs.getString("password", null);
+		final String preUsername = prefs.getString(KEY_USERNAME, null);
+		final String prePassword = prefs.getString(KEY_PASSWORD, null);
 
 		if (preUsername == null || prePassword == null || preUsername.length() == 0 || prePassword.length() == 0) {
 			return false;
@@ -250,15 +258,15 @@ public class cgSettings {
 		final HashMap<String, String> login = new HashMap<String, String>();
 
 		if (username == null || password == null) {
-			final String preUsername = prefs.getString("username", null);
-			final String prePassword = prefs.getString("password", null);
+			final String preUsername = prefs.getString(KEY_USERNAME, null);
+			final String prePassword = prefs.getString(KEY_PASSWORD, null);
 
 			if (initialized == 0 && (preUsername == null || prePassword == null)) {
 				Intent initIntent = new Intent(context, cgeoinit.class);
 				context.startActivity(initIntent);
 
 				final SharedPreferences.Editor prefsEdit = prefs.edit();
-				prefsEdit.putInt("initialized", 1);
+				prefsEdit.putInt(KEY_INITIALIZED, 1);
 				prefsEdit.commit();
 
 				initialized = 1;
@@ -268,53 +276,50 @@ public class cgSettings {
 				return null;
 			}
 
-			login.put("username", preUsername);
-			login.put("password", prePassword);
+			login.put(KEY_USERNAME, preUsername);
+			login.put(KEY_PASSWORD, prePassword);
 
 			username = preUsername;
 			password = prePassword;
 		} else {
-			login.put("username", username);
-			login.put("password", password);
+			login.put(KEY_USERNAME, username);
+			login.put(KEY_PASSWORD, password);
 		}
 
 		return login;
 	}
 
 	public String getUsername() {
-		String user = null;
-
 		if (username == null) {
-			user = prefs.getString("username", null);
+			return prefs.getString(KEY_USERNAME, null);
 		} else {
-			user = username;
+			return username;
 		}
-
-		return user;
 	}
 
-	public boolean setLogin(String username, String password) {
-		final SharedPreferences.Editor prefsEdit = prefs.edit();
-
-		if (username == null || username.length() == 0 || password == null || password.length() == 0) {
-			// erase username and password
-			prefsEdit.remove("username");
-			prefsEdit.remove("password");
-		} else {
-			// save username and password
-			prefsEdit.putString("username", username);
-			prefsEdit.putString("password", password);
-		}
-
+	public boolean setLogin(final String username, final String password) {
 		this.username = username;
 		this.password = password;
+		return editSettings(new PrefRunnable() {
 
-		return prefsEdit.commit();
+			@Override
+			public void edit(Editor edit) {
+				if (username == null || username.length() == 0 || password == null || password.length() == 0) {
+					// erase username and password
+					edit.remove(KEY_USERNAME);
+					edit.remove(KEY_PASSWORD);
+				} else {
+					// save username and password
+					edit.putString(KEY_USERNAME, username);
+					edit.putString(KEY_PASSWORD, password);
+				}
+			}
+		});
 	}
 
 	public boolean isGCvoteLogin() {
-		final String preUsername = prefs.getString("username", null);
-		final String prePassword = prefs.getString("pass-vote", null);
+		final String preUsername = prefs.getString(KEY_USERNAME, null);
+		final String prePassword = prefs.getString(KEY_GCVOTE_PASSWORD, null);
 
 		if (preUsername == null || prePassword == null || preUsername.length() == 0 || prePassword.length() == 0) {
 			return false;
@@ -323,125 +328,106 @@ public class cgSettings {
 		}
 	}
 
-	public boolean setGCvoteLogin(String password) {
-		final SharedPreferences.Editor prefsEdit = prefs.edit();
+	public boolean setGCvoteLogin(final String password) {
+		return editSettings(new PrefRunnable() {
 
-		if (password == null || password.length() == 0) {
-			// erase password
-			prefsEdit.remove("pass-vote");
-		} else {
-			// save password
-			prefsEdit.putString("pass-vote", password);
-		}
-
-		passVote = password;
-
-		return prefsEdit.commit();
+			@Override
+			public void edit(Editor edit) {
+				if (password == null || password.length() == 0) {
+					// erase password
+					edit.remove(KEY_GCVOTE_PASSWORD);
+				} else {
+					// save password
+					edit.putString(KEY_GCVOTE_PASSWORD, password);
+				}
+			}
+		});
 	}
 
 	public HashMap<String, String> getGCvoteLogin() {
 		final HashMap<String, String> login = new HashMap<String, String>();
 
 		if (username == null || password == null) {
-			final String preUsername = prefs.getString("username", null);
-			final String prePassword = prefs.getString("pass-vote", null);
+			final String preUsername = prefs.getString(KEY_USERNAME, null);
+			final String prePassword = prefs.getString(KEY_GCVOTE_PASSWORD, null);
 
 			if (preUsername == null || prePassword == null) {
 				return null;
 			}
 
-			login.put("username", preUsername);
-			login.put("password", prePassword);
+			login.put(KEY_USERNAME, preUsername);
+			login.put(KEY_PASSWORD, prePassword);
 
 			username = preUsername;
-			passVote = prePassword;
 		} else {
-			login.put("username", username);
-			login.put("password", password);
+			login.put(KEY_USERNAME, username);
+			login.put(KEY_PASSWORD, password);
 		}
 
 		return login;
 	}
 
-	public boolean setSignature(String signature) {
-		final SharedPreferences.Editor prefsEdit = prefs.edit();
+	public boolean setSignature(final String signature) {
+		return editSettings(new PrefRunnable() {
 
-		if (signature == null || signature.length() == 0) {
-			// erase signature
-			prefsEdit.remove("signature");
-		} else {
-			// save signature
-			prefsEdit.putString("signature", signature);
-		}
-
-		this.signature = signature;
-
-		return prefsEdit.commit();
+			@Override
+			public void edit(Editor edit) {
+				if (signature == null || signature.length() == 0) {
+					// erase signature
+					edit.remove(KEY_SIGNATURE);
+				} else {
+					// save signature
+					edit.putString(KEY_SIGNATURE, signature);
+				}
+			}
+		});
 	}
 
 	public String getSignature() {
-		return prefs.getString("signature", null);
+		return prefs.getString(KEY_SIGNATURE, null);
 	}
 
-	public boolean setLanguages(String languages) {
-		final SharedPreferences.Editor prefsEdit = prefs.edit();
-
-		if (languages == null || languages.length() == 0) {
-			// erase languages
-			prefsEdit.remove("languages");
-		} else {
-			// save langauges
-			languages = languages.toLowerCase();
-			languages = languages.replaceAll("([^a-z]+)", " ");
-			languages = languages.replaceAll("([ ]+)", " ");
-
-			prefsEdit.putString("languages", languages);
-		}
-
-		this.languages = languages;
-
-		return prefsEdit.commit();
-	}
-
-	public boolean setAltCorrection(int altitude) {
-		final SharedPreferences.Editor prefsEdit = prefs.edit();
-
-		prefsEdit.putInt("altcorrection", altitude);
-
+	public boolean setAltCorrection(final int altitude) {
 		altCorrection = altitude;
+		return editSettings(new PrefRunnable() {
 
-		return prefsEdit.commit();
-	}
-
-	public String getLanguages() {
-		return prefs.getString("languages", null);
+			@Override
+			public void edit(Editor edit) {
+				edit.putInt(KEY_ALTITUDE_CORRECTION, altitude);
+			}
+		});
 	}
 
 	public void deleteCookies() {
-		SharedPreferences.Editor prefsEdit = prefs.edit();
+		editSettings(new PrefRunnable() {
 
-		// delete cookies
-		Map<String, ?> prefsValues = prefs.getAll();
+			@Override
+			public void edit(Editor edit) {
+				// delete cookies
+				Map<String, ?> prefsValues = prefs.getAll();
 
-		if (prefsValues != null && prefsValues.size() > 0) {
-			Log.i(cgSettings.tag, "Removing cookies");
+				if (prefsValues != null && prefsValues.size() > 0) {
+					Log.i(cgSettings.tag, "Removing cookies");
 
-			Object[] keys = prefsValues.keySet().toArray();
+					Object[] keys = prefsValues.keySet().toArray();
 
-			for (int i = 0; i < keys.length; i++) {
-				if (keys[i].toString().length() > 7 && keys[i].toString().substring(0, 7).equals("cookie_") == true) {
-					prefsEdit.remove(keys[i].toString());
+					for (int i = 0; i < keys.length; i++) {
+						if (keys[i].toString().length() > 7 && keys[i].toString().substring(0, 7).equals("cookie_")) {
+							edit.remove(keys[i].toString());
+						}
+					}
 				}
 			}
-		}
-
-		prefsEdit.commit();
+		});
 	}
 
-	public String setCacheType(String cacheTypeIn) {
-		final SharedPreferences.Editor edit = prefs.edit();
-		edit.putString("cachetype", cacheTypeIn);
-		edit.commit();
+	public String setCacheType(final String cacheTypeIn) {
+		editSettings(new PrefRunnable() {
+			@Override
+			public void edit(Editor edit) {
+				edit.putString(KEY_CACHE_TYPE, cacheTypeIn);
+			}
+		});
 
 		cacheType = cacheTypeIn;
 
@@ -449,45 +435,58 @@ public class cgSettings {
 	}
 
 	public void liveMapEnable() {
-		final SharedPreferences.Editor edit = prefs.edit();
-		edit.putInt("maplive", 1);
+		if (editSettings(new PrefRunnable() {
 
-		if (edit.commit() == true) {
+			@Override
+			public void edit(Editor edit) {
+				edit.putInt(KEY_MAP_LIVE, 1);
+			}
+		})) {
 			maplive = 1;
 		}
 	}
 
 	public void liveMapDisable() {
-		final SharedPreferences.Editor edit = prefs.edit();
-		edit.putInt("maplive", 0);
+		if (editSettings(new PrefRunnable() {
 
-		if (edit.commit() == true) {
+			@Override
+			public void edit(Editor edit) {
+				edit.putInt(KEY_MAP_LIVE, 0);
+			}
+		})) {
 			maplive = 0;
 		}
 	}
 
 	public int getLastList() {
-		int listId = prefs.getInt("lastlist", -1);
+		int listId = prefs.getInt(KEY_LAST_USED_LIST, -1);
 
 		return listId;
 	}
 
-	public void saveLastList(int listId) {
-		final SharedPreferences.Editor edit = prefs.edit();
+	public void saveLastList(final int listId) {
+		editSettings(new PrefRunnable() {
 
-		edit.putInt("lastlist", listId);
-		edit.commit();
+			@Override
+			public void edit(Editor edit) {
+				edit.putInt(KEY_LAST_USED_LIST, listId);
+			}
+		});
 	}
 
-	public void setWebNameCode(String name, String code) {
-	final SharedPreferences.Editor edit = prefs.edit();
+	public void setWebNameCode(final String name, final String code) {
+		if (editSettings(new PrefRunnable() {
 
-		this.webDeviceCode=code;
-		this.webDeviceName=name;
+			@Override
+			public void edit(Editor edit) {
 
-		edit.putString("webDeviceName", name);
-		edit.putString("webDeviceCode", code);
-		edit.commit();
+				edit.putString(KEY_WEBDEVICE_NAME, name);
+				edit.putString(KEY_WEB_DEVICE_CODE, code);
+			}
+		})) {
+			webDeviceCode=code;
+			webDeviceName=name;
+		}
 	}
 
 	public MapFactory getMapFactory() {
@@ -510,12 +509,14 @@ public class cgSettings {
 		return mapFile;
 	}
 
-	public boolean setMapFile(String mapFileIn) {
-		final SharedPreferences.Editor prefsEdit = prefs.edit();
+	public boolean setMapFile(final String mapFileIn) {
+		boolean commitResult = editSettings(new PrefRunnable() {
 
-		prefsEdit.putString("mfmapfile", mapFileIn);
-
-		boolean commitResult = prefsEdit.commit();
+			@Override
+			public void edit(Editor edit) {
+				edit.putString(KEY_MAPFILE, mapFileIn);
+			}
+		});
 
 		mapFile = mapFileIn;
 		mapFileValid = checkMapfile(mapFile);
@@ -534,7 +535,15 @@ public class cgSettings {
 		return MapDatabase.isValidMapFile(mapFileIn);
 	}
 
-	public Context getContext() {
-		return context;
+	/**
+	 * edit some settings without knowing how to get the settings editor or how to commit
+	 * @param runnable
+	 * @return commit result
+	 */
+	private boolean editSettings(final PrefRunnable runnable) {
+		final SharedPreferences.Editor prefsEdit = prefs.edit();
+		runnable.edit(prefsEdit);
+		return prefsEdit.commit();
 	}
+
 }

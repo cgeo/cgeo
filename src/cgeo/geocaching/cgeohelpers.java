@@ -1,13 +1,14 @@
 package cgeo.geocaching;
 
-import android.os.Bundle;
+import java.util.Locale;
+
 import android.app.Activity;
 import android.content.Intent;
-import android.view.View;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.net.Uri;
-import java.util.Locale;
+import android.os.Bundle;
+import android.view.View;
 
 public class cgeohelpers extends Activity {
 
@@ -16,7 +17,6 @@ public class cgeohelpers extends Activity {
 	private Activity activity = null;
 	private cgSettings settings = null;
 	private cgBase base = null;
-	private cgWarning warning = null;
 	private SharedPreferences prefs = null;
 
 	@Override
@@ -30,7 +30,6 @@ public class cgeohelpers extends Activity {
 		prefs = getSharedPreferences(cgSettings.preferences, 0);
 		settings = new cgSettings(this, prefs);
 		base = new cgBase(app, settings, prefs);
-		warning = new cgWarning(this);
 
 		// set layout
 		if (settings.skin == 1) {
@@ -45,7 +44,7 @@ public class cgeohelpers extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		settings.load();
 	}
 

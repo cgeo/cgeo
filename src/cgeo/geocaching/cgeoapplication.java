@@ -98,7 +98,7 @@ public class cgeoapplication extends Application {
 
 	public cgGeo startGeo(Context context, cgUpdateLoc geoUpdate, cgBase base, cgSettings settings, cgWarning warning, int time, int distance) {
 		if (geo == null) {
-			geo = new cgGeo(context, this, geoUpdate, base, settings, warning, time, distance);
+			geo = new cgGeo(context, this, geoUpdate, base, settings, time, distance);
 			geo.initGeo();
 
 			Log.i(cgSettings.tag, "Location service started");

@@ -12,9 +12,7 @@ import android.view.View;
 
 public class cgCompassMini extends View {
 	private int arrowSkin = R.drawable.compass_arrow_mini_white;
-	private Boolean lock = false;
 	private Context context = null;
-	private cgBase base = null;
 	private Double cacheLat = null;
 	private Double cacheLon = null;
 	private Bitmap compassArrow = null;
@@ -54,8 +52,7 @@ public class cgCompassMini extends View {
 		}
 	}
 
-	public void setContent(cgBase baseIn, Double cacheLatIn, Double cacheLonIn) {
-		base = baseIn;
+	public void setContent(Double cacheLatIn, Double cacheLonIn) {
 		cacheLat = cacheLatIn;
 		cacheLon = cacheLonIn;
 	}
@@ -98,8 +95,6 @@ public class cgCompassMini extends View {
 
 	@Override
 	protected void onDraw(Canvas canvas){
-		lock = true;
-
 		super.onDraw(canvas);
 
 		Double azimuthRelative = azimuth - heading;
@@ -129,8 +124,6 @@ public class cgCompassMini extends View {
 		canvas.rotate(azimuthRelative.floatValue(), canvasCenterX, canvasCenterY);
 
 		canvas.setDrawFilter(remfil);
-
-		lock = false;
 	}
 
     @Override
