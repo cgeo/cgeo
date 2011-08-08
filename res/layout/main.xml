@@ -49,6 +49,7 @@
 					android:orientation="vertical" >
 				<View
 						style="@style/icon_mainscreen"
+						android:id="@+id/view_nearest"
 						android:background="@drawable/main_nearby" />
 				<TextView
 						style="@style/icon_mainscreen_text"
