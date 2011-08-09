@@ -91,6 +91,16 @@ public class mfMapActivity extends MapActivity implements ActivityImpl {
 	}
 
 	@Override
+	public void superOnStop() {
+		super.onStop();
+	}
+
+	@Override
+	public void superOnPause() {
+		super.onPause();
+	}
+
+	@Override
 	public boolean superOnPrepareOptionsMenu(Menu menu) {
 		return super.onPrepareOptionsMenu(menu);
 	}
