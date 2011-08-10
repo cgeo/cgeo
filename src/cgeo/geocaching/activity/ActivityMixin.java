@@ -29,7 +29,7 @@ public final class ActivityMixin {
 					"c-geo",
 					helpTopic,
 					context,
-					"http://cgeo.carnero.cc/manual/");
+					"http://manual.cgeo.org/");
 		} catch (Exception e) {
 			// nothing
 		}
