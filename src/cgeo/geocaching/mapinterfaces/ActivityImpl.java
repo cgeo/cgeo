@@ -25,6 +25,10 @@ public interface ActivityImpl {
 
 	void superOnDestroy();
 
+	void superOnStop();
+
+	void superOnPause();
+
 	boolean superOnCreateOptionsMenu(Menu menu);
 
 	boolean superOnPrepareOptionsMenu(Menu menu);
