@@ -414,6 +414,10 @@
   <string name="cache_attributes">Attribute</string>
   <string name="cache_inventory">Inventar</string>
   <string name="cache_log_offline">Offline-Log</string>
+  <string name="cache_log_images_loading">Lade Logbild ...</string>
+  <string name="cache_log_images_title">Logbild</string>
+  <string name="cache_log_image_default_title">Bild</string>
+  <string name="cache_personal_note">Persönliche Notiz</string>
   <string name="cache_description">Beschreibung</string>
   <string name="cache_description_long">Ausführliche Beschreibung</string>
   <string name="cache_watchlist">Watchlist</string>
