@@ -68,4 +68,7 @@ public abstract class AbstractListActivity extends ListActivity implements
 		base = new cgBase(app, settings, prefs);
 	}
 
+	final public void setTitle(final String title) {
+		ActivityMixin.setTitle(this, title);
+	}
 }

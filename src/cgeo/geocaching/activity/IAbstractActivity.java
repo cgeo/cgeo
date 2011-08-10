@@ -16,4 +16,7 @@ public interface IAbstractActivity {
 	public void showShortToast(String text);
 
 	public void helpDialog(String title, String message);
+
+	public void setTitle(final String title);
+
 }
