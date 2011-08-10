@@ -2160,6 +2160,8 @@ public class cgData {
 
 				destinations.add(dest);
 			} while (cursor.moveToNext());
+
+			cursor.close();
 		}
 
 		return destinations;
