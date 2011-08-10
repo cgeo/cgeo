@@ -2161,6 +2161,9 @@ public class cgData {
 				destinations.add(dest);
 			} while (cursor.moveToNext());
 
+		}
+		
+		if (cursor != null) {
 			cursor.close();
 		}
 
