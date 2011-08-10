@@ -1,7 +1,5 @@
 package cgeo.geocaching;
 
-import gnu.android.app.appmanualclient.AppManualReaderClient;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -9,7 +7,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,8 +27,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 
-public class cgeo extends Activity {
+public class cgeo extends AbstractActivity {
 
 	private Resources res = null;
 	private cgeoapplication app = null;
@@ -118,6 +117,10 @@ public class cgeo extends Activity {
 		}
 	};
 
+	public cgeo() {
+		super("c:geo-main-screen");
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -160,16 +163,7 @@ public class cgeo extends Activity {
 					helper.setOnClickListener(new View.OnClickListener() {
 
 						public void onClick(View view) {
-							try {
-								AppManualReaderClient.openManual(
-										"c-geo",
-										"c:geo-intro",
-										context,
-										"http://cgeo.carnero.cc/manual/");
-							} catch (Exception e) {
-								// nothing
-							}
-
+							ActivityMixin.goManual(context, "c:geo-intro");
 							view.setVisibility(View.GONE);
 						}
 					});
@@ -655,17 +649,5 @@ public class cgeo extends Activity {
 
 	public void goSearch(View view) {
 		onSearchRequested();
-	}
-
-	public void goManual(View view) {
-		try {
-			AppManualReaderClient.openManual(
-					"c-geo",
-					"c:geo-main-screen",
-					context,
-					"http://cgeo.carnero.cc/manual/");
-		} catch (Exception e) {
-			// nothing
-		}
 	}
 }

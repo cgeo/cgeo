@@ -470,6 +470,7 @@
   <string name="cache_log_images_loading">Loading log Image ...</string>
   <string name="cache_log_images_title">Logimage</string>
   <string name="cache_log_image_default_title">Photo</string>
+  <string name="cache_personal_note">Personal note</string>
   <string name="cache_description">Description</string>
   <string name="cache_description_long">Long description</string>
   <string name="cache_watchlist">Watchlist</string>

@@ -3,8 +3,6 @@ package cgeo.geocaching;
 import java.io.File;
 import java.util.ArrayList;
 
-import android.app.Activity;
-import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.res.Resources;
@@ -13,17 +11,16 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
+import cgeo.geocaching.activity.AbstractListActivity;
 
-public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActivity {
+public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractListActivity {
 
 	private ArrayList<File> files = new ArrayList<File>();
 	private cgeoapplication app = null;
 	private cgSettings settings = null;
 	private cgBase base = null;
 	private cgWarning warning = null;
-	private Activity activity = null;
 	private T adapter = null;
 	private ProgressDialog waitDialog = null;
 	private Resources res = null;
@@ -76,21 +73,15 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 		super.onCreate(savedInstanceState);
 
 		// init
-		activity = this;
 		res = this.getResources();
 		app = (cgeoapplication) this.getApplication();
 		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
 		base = new cgBase(getApp(), getSettings(), getSharedPreferences(cgSettings.preferences, 0));
 		warning = new cgWarning(this);
 
-		// set layout
-		if (getSettings().skin == 1) {
-			setTheme(R.style.light);
-		} else {
-			setTheme(R.style.dark);
-		}
+		setTheme();
 		setContentView(R.layout.gpx);
-		getBase().setTitle(getActivity(), getRes().getString(R.string.gpx_import_title));
+		setTitle(getRes().getString(R.string.gpx_import_title));
 
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -128,14 +119,14 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		getSettings().load();
 	}
-	
+
 	final protected cgSettings getSettings() {
 		return settings;
 	}
-	
+
 	protected abstract T getAdapter(ArrayList<File> files);
 
 	private void setAdapter() {
@@ -144,13 +135,13 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 			setListAdapter(adapter);
 		}
 	}
-	
+
 	/**
 	 * Gets the base folder for file searches
 	 * @return The folder to start the recursive search in
 	 */
-	protected abstract String[] getBaseFolders(); 
-	
+	protected abstract String[] getBaseFolders();
+
 	private class loadFiles extends Thread {
 		public void notifyEnd() {
 			endSearching = true;
@@ -166,7 +157,7 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 					for(String baseFolder : getBaseFolders())
 					{
 						final File dir = new File(baseFolder);
-					
+
 						if (dir.exists() && dir.isDirectory()) {
 							listDir(list, dir);
 							if (list.size() > 0) {
@@ -198,7 +189,7 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 
 	/**
 	 * Get the file extension to search for
-	 * @return The file extension 
+	 * @return The file extension
 	 */
 	protected abstract String getFileExtension();
 
@@ -251,10 +242,6 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 		return;
 	}
 
-	public void goHome(View view) {
-		getBase().goHome(getActivity());
-	}
-
 	protected cgeoapplication getApp() {
 		return app;
 	}
@@ -265,10 +252,6 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 
 	protected cgWarning getWarning() {
 		return warning;
-	}
-
-	protected Activity getActivity() {
-		return activity;
 	}
 
 	protected Resources getRes() {

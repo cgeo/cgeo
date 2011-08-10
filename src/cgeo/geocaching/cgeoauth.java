@@ -14,7 +14,6 @@ import java.util.regex.Pattern;
 
 import javax.net.ssl.HttpsURLConnection;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,13 +26,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import cgeo.geocaching.activity.AbstractActivity;
 
-public class cgeoauth extends Activity {
+public class cgeoauth extends AbstractActivity {
 	private cgeoapplication app = null;
 	private Resources res = null;
-	private Activity activity = null;
 	private cgSettings settings = null;
-	private cgBase base = null;
 	private cgWarning warning = null;
 	private SharedPreferences prefs = null;
 	private String OAtoken = null;
@@ -100,23 +98,16 @@ public class cgeoauth extends Activity {
 		super.onCreate(savedInstanceState);
 
 		// init
-		activity = this;
 		res = this.getResources();
 		app = (cgeoapplication) this.getApplication();
 		app.setAction("setting up");
 		prefs = getSharedPreferences(cgSettings.preferences, 0);
 		settings = new cgSettings(this, prefs);
-		base = new cgBase(app, settings, prefs);
 		warning = new cgWarning(this);
 
-		// set layout
-		if (settings.skin == 1) {
-			setTheme(R.style.light);
-		} else {
-			setTheme(R.style.dark);
-		}
+		setTheme();
 		setContentView(R.layout.auth);
-		base.setTitle(activity, res.getString(R.string.auth_twitter));
+		setTitle(res.getString(R.string.auth_twitter));
 
 		init();
 	}
@@ -354,7 +345,7 @@ public class cgeoauth extends Activity {
 
 		public void onClick(View arg0) {
 			if (requestTokenDialog == null) {
-				requestTokenDialog = new ProgressDialog(activity);
+				requestTokenDialog = new ProgressDialog(cgeoauth.this);
 				requestTokenDialog.setCancelable(false);
 				requestTokenDialog.setMessage(res.getString(R.string.auth_dialog_wait));
 			}
@@ -387,7 +378,7 @@ public class cgeoauth extends Activity {
 			}
 
 			if (changeTokensDialog == null) {
-				changeTokensDialog = new ProgressDialog(activity);
+				changeTokensDialog = new ProgressDialog(cgeoauth.this);
 				changeTokensDialog.setCancelable(false);
 				changeTokensDialog.setMessage(res.getString(R.string.auth_dialog_wait));
 			}
@@ -404,9 +395,5 @@ public class cgeoauth extends Activity {
 				}
 			}).start();
 		}
-	}
-
-	public void goHome(View view) {
-		base.goHome(activity);
 	}
 }

@@ -1,12 +1,12 @@
 package cgeo.geocaching.mapcommon;
 
-import cgeo.geocaching.mapinterfaces.ActivityImpl;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import cgeo.geocaching.mapinterfaces.ActivityImpl;
 
 /**
  * Base class for the map activity. Delegates base class calls to the
@@ -39,11 +39,11 @@ public abstract class MapBase {
 	}
 
 	public void onStop() {
-		mapActivity.superOnResume();
+		mapActivity.superOnStop();
 	}
 
 	public void onPause() {
-		mapActivity.superOnResume();
+		mapActivity.superOnPause();
 	}
 
 	public void onDestroy() {

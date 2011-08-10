@@ -12,8 +12,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -33,7 +33,7 @@ public class cgData {
 	private cgDbHelper dbHelper = null;
 	private SQLiteDatabase databaseRO = null;
 	private SQLiteDatabase databaseRW = null;
-	private static final int dbVersion = 54;
+	private static final int dbVersion = 55;
 	private static final String dbName = "data";
 	private static final String dbTableCaches = "cg_caches";
 	private static final String dbTableLists = "cg_lists";
@@ -77,6 +77,7 @@ public class cgData {
 			+ "longitude double, "
 			+ "reliable_latlon integer, "
 			+ "elevation double, "
+			+ "personal_note text, "
 			+ "shortdesc text, "
 			+ "description text, "
 			+ "favourite_cnt integer, "
@@ -739,6 +740,15 @@ public class cgData {
 
 						}
 					}
+
+					if (oldVersion < 55) { // update to 55
+						try {
+							db.execSQL("alter table " + dbTableCaches + " add column personal_note text");						
+						} catch (Exception e) {
+							Log.e(cgSettings.tag, "Failed to upgrade to ver. 55: " + e.toString());
+
+						}
+					}
 				}
 
 				db.setTransactionSuccessful();
@@ -1139,6 +1149,7 @@ public class cgData {
 		}
 		values.put("elevation", cache.elevation);
 		values.put("shortdesc", cache.shortdesc);
+		values.put("personal_note", cache.personalNote);
 		values.put("description", cache.description);
 		values.put("favourite_cnt", cache.favouriteCnt);
 		values.put("rating", cache.rating);
@@ -1758,7 +1769,7 @@ public class cgData {
 						"_id", "updated", "reason", "detailed", "detailedupdate", "visiteddate", "geocode", "cacheid", "guid", "type", "name", "own", "owner", "owner_real", "hidden", "hint", "size",
 						"difficulty", "distance", "direction", "terrain", "latlon", "latitude_string", "longitude_string", "location", "latitude", "longitude", "elevation", "shortdesc",
 						"description", "favourite_cnt", "rating", "votes", "myvote", "disabled", "archived", "members", "found", "favourite", "inventorycoins", "inventorytags",
-						"inventoryunknown", "onWatchlist"
+						"inventoryunknown", "onWatchlist", "personal_note"
 					},
 					where.toString(),
 					null,
@@ -1828,6 +1839,7 @@ public class cgData {
 						} else {
 							cache.elevation = (Double) cursor.getDouble(index);
 						}
+						cache.personalNote = (String) cursor.getString(cursor.getColumnIndex("personal_note"));
 						cache.shortdesc = (String) cursor.getString(cursor.getColumnIndex("shortdesc"));
 						cache.description = (String) cursor.getString(cursor.getColumnIndex("description"));
 						cache.favouriteCnt = (Integer) cursor.getInt(cursor.getColumnIndex("favourite_cnt"));
@@ -2495,6 +2507,7 @@ public class cgData {
 
 				cursor.close();
 			}
+
 		} catch (Exception e) {
 			Log.e(cgSettings.tag, "cgData.loadBatchOfStoredGeocodes: " + e.toString());
 		}

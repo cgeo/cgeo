@@ -1,7 +1,5 @@
 package cgeo.geocaching.mapcommon;
 
-import gnu.android.app.appmanualclient.AppManualReaderClient;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
@@ -37,6 +35,7 @@ import cgeo.geocaching.cgUser;
 import cgeo.geocaching.cgWarning;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.mapinterfaces.ActivityImpl;
 import cgeo.geocaching.mapinterfaces.CacheOverlayItemImpl;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
@@ -155,7 +154,7 @@ public class cgeomap extends MapBase {
 					title.append("]");
 				}
 
-				base.setTitle(activity, title.toString());
+				ActivityMixin.setTitle(activity, title.toString());
 			} else if (what == 1 && mapView != null) {
 				mapView.invalidate();
 			}
@@ -168,9 +167,9 @@ public class cgeomap extends MapBase {
 			final int what = msg.what;
 
 			if (what == 0) {
-				base.showProgress(activity, false);
+				ActivityMixin.showProgress(activity, false);
 			} else if (what == 1) {
-				base.showProgress(activity, true);
+				ActivityMixin.showProgress(activity, true);
 			}
 		}
 	};
@@ -249,13 +248,9 @@ public class cgeomap extends MapBase {
 		activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 		// set layout
-		if (settings.skin == 1) {
-			activity.setTheme(R.style.light);
-		} else {
-			activity.setTheme(R.style.dark);
-		}
+		ActivityMixin.setTheme(activity);
 		activity.setContentView(settings.getMapFactory().getMapLayoutId());
-		base.setTitle(activity, res.getString(R.string.map_map));
+		ActivityMixin.setTitle(activity, res.getString(R.string.map_map));
 
 		if (geo == null) {
 			geo = app.startGeo(activity, geoUpdate, base, settings, warning, 0, 0);
@@ -1781,19 +1776,11 @@ public class cgeomap extends MapBase {
 
 	// close activity and open homescreen
 	public void goHome(View view) {
-		base.goHome(activity);
+		ActivityMixin.goHome(activity);
 	}
 
 	// open manual entry
 	public void goManual(View view) {
-		try {
-			AppManualReaderClient.openManual(
-					"c-geo",
-					"c:geo-live-map",
-					activity,
-					"http://cgeo.carnero.cc/manual/");
-		} catch (Exception e) {
-			// nothing
-		}
+		ActivityMixin.goManual(activity, "c:geo-live-map");
 	}
 }
