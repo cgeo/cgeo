@@ -21,6 +21,7 @@ public final class Compatibility {
 			} catch (Exception e) {
 				// nothing
 			}
+			initialized = true;
 		}
 		return level8;
 	}
