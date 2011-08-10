@@ -1,7 +1,5 @@
 package cgeo.geocaching;
 
-import gnu.android.app.appmanualclient.AppManualReaderClient;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,9 +32,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 
-public class cgeopoint extends Activity {
+public class cgeopoint extends AbstractActivity {
 
 	private class DestinationHistoryAdapter extends ArrayAdapter<cgDestination> {
 		private LayoutInflater inflater = null;
@@ -90,7 +89,6 @@ public class cgeopoint extends Activity {
 	private SharedPreferences prefs = null;
 	private cgBase base = null;
 	private cgWarning warning = null;
-	private Activity activity = null;
 	private cgGeo geo = null;
 	private cgUpdateLoc geoUpdate = new update();
 	private EditText latEdit = null;
@@ -103,27 +101,25 @@ public class cgeopoint extends Activity {
 
 	private static final int CONTEXT_MENU_DELETE_WAYPOINT = Menu.FIRST;
 
+	public cgeopoint() {
+		super("c:geo-navigate-any");
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		// init
-		activity = this;
 		app = (cgeoapplication) this.getApplication();
 		res = this.getResources();
-		settings = new cgSettings(activity, activity.getSharedPreferences(cgSettings.preferences, 0));
+		settings = new cgSettings(this, this.getSharedPreferences(cgSettings.preferences, 0));
 		prefs = getSharedPreferences(cgSettings.preferences, 0);
-		base = new cgBase(app, settings, activity.getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(activity);
+		base = new cgBase(app, settings, this.getSharedPreferences(cgSettings.preferences, 0));
+		warning = new cgWarning(this);
 
-		// set layout
-		if (settings.skin == 1) {
-			setTheme(R.style.light);
-		} else {
-			setTheme(R.style.dark);
-		}
+		setTheme();
 		setContentView(R.layout.point);
-		base.setTitle(activity, res.getString(R.string.search_destination));
+		setTitle(res.getString(R.string.search_destination));
 
 		createHistoryView();
 
@@ -256,7 +252,7 @@ public class cgeopoint extends Activity {
 
 	private void init() {
 		if (geo == null) {
-			geo = app.startGeo(activity, geoUpdate, base, settings, warning, 0, 0);
+			geo = app.startGeo(this, geoUpdate, base, settings, warning, 0, 0);
 		}
 
 		EditText latitudeEdit = (EditText) findViewById(R.id.latitude);
@@ -295,7 +291,7 @@ public class cgeopoint extends Activity {
 		menu.add(0, 2, 0, res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass); // compass
 
 		SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
-		NavigationAppFactory.addMenuItems(subMenu, activity, res);
+		NavigationAppFactory.addMenuItems(subMenu, this, res);
 
 		menu.add(0, 5, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
 
@@ -354,7 +350,7 @@ public class cgeopoint extends Activity {
 			return true;
 		}
 
-		return NavigationAppFactory.onMenuItemSelected(item, geo, activity, res, warning, null, null, null, coords);
+		return NavigationAppFactory.onMenuItemSelected(item, geo, this, res, warning, null, null, null, coords);
 	}
 
 	private void addToHistory(ArrayList<Double> coords) {
@@ -423,13 +419,13 @@ public class cgeopoint extends Activity {
 
 		cgeonavigate navigateActivity = new cgeonavigate();
 
-		Intent navigateIntent = new Intent(activity, navigateActivity.getClass());
+		Intent navigateIntent = new Intent(this, navigateActivity.getClass());
 		navigateIntent.putExtra("latitude", coords.get(0));
 		navigateIntent.putExtra("longitude", coords.get(1));
 		navigateIntent.putExtra("geocode", "");
 		navigateIntent.putExtra("name", "Some destination");
 
-		activity.startActivity(navigateIntent);
+		startActivity(navigateIntent);
 	}
 
 	private void cachesAround() {
@@ -441,14 +437,14 @@ public class cgeopoint extends Activity {
 
 		cgeocaches cachesActivity = new cgeocaches();
 
-		Intent cachesIntent = new Intent(activity, cachesActivity.getClass());
+		Intent cachesIntent = new Intent(this, cachesActivity.getClass());
 
 		cachesIntent.putExtra("type", "coordinate");
 		cachesIntent.putExtra("latitude", coords.get(0));
 		cachesIntent.putExtra("longitude", coords.get(1));
 		cachesIntent.putExtra("cachetype", settings.cacheType);
 
-		activity.startActivity(cachesIntent);
+		startActivity(cachesIntent);
 
 		finish();
 	}
@@ -631,22 +627,6 @@ public class cgeopoint extends Activity {
 			edit.remove("anylongitude");
 
 			edit.commit();
-		}
-	}
-
-	public void goHome(View view) {
-		base.goHome(activity);
-	}
-
-	public void goManual(View view) {
-		try {
-			AppManualReaderClient.openManual(
-					"c-geo",
-					"c:geo-navigate-any",
-					activity,
-					"http://cgeo.carnero.cc/manual/");
-		} catch (Exception e) {
-			// nothing
 		}
 	}
 }

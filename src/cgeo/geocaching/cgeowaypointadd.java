@@ -1,11 +1,13 @@
 package cgeo.geocaching;
 
-import gnu.android.app.appmanualclient.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.os.Bundle;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
@@ -15,19 +17,16 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 
-public class cgeowaypointadd extends Activity {
+public class cgeowaypointadd extends AbstractActivity {
 
 	private cgeoapplication app = null;
 	private Resources res = null;
 	private cgSettings settings = null;
 	private cgBase base = null;
 	private cgWarning warning = null;
-	private Activity activity = null;
 	private String geocode = null;
 	private int id = -1;
 	private cgGeo geo = null;
@@ -88,24 +87,18 @@ public class cgeowaypointadd extends Activity {
 		super.onCreate(savedInstanceState);
 
 		// init
-		activity = this;
 		res = this.getResources();
 		app = (cgeoapplication) this.getApplication();
-		settings = new cgSettings(activity, activity.getSharedPreferences(cgSettings.preferences, 0));
-		base = new cgBase(app, settings, activity.getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(activity);
+		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
+		base = new cgBase(app, settings, getSharedPreferences(cgSettings.preferences, 0));
+		warning = new cgWarning(this);
 
-		// set layout
-		if (settings.skin == 1) {
-			setTheme(R.style.light);
-		} else {
-			setTheme(R.style.dark);
-		}
+		setTheme();
 		setContentView(R.layout.waypoint_new);
-		base.setTitle(activity, "waypoint");
+		setTitle("waypoint");
 
 		if (geo == null) {
-			geo = app.startGeo(activity, geoUpdate, base, settings, warning, 0, 0);
+			geo = app.startGeo(this, geoUpdate, base, settings, warning, 0, 0);
 		}
 
 		// get parameters
@@ -124,9 +117,9 @@ public class cgeowaypointadd extends Activity {
 		}
 
 		if (id <= 0) {
-			base.setTitle(activity, res.getString(R.string.waypoint_add_title));
+			setTitle(res.getString(R.string.waypoint_add_title));
 		} else {
-			base.setTitle(activity, res.getString(R.string.waypoint_edit_title));
+			setTitle(res.getString(R.string.waypoint_edit_title));
 		}
 
 		if (geocode != null) {
@@ -156,11 +149,11 @@ public class cgeowaypointadd extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		settings.load();
 
 		if (geo == null) {
-			geo = app.startGeo(activity, geoUpdate, base, settings, warning, 0, 0);
+			geo = app.startGeo(this, geoUpdate, base, settings, warning, 0, 0);
 		}
 
 		if (id > 0) {
@@ -403,29 +396,11 @@ public class cgeowaypointadd extends Activity {
 		}
 	}
 
-	public void goHome(View view) {
-		base.goHome(activity);
-	}
-
 	public void goManual(View view) {
-		try {
-			if (id >= 0) {
-				AppManualReaderClient.openManual(
-					"c-geo",
-					"c:geo-waypoint-edit",
-					activity,
-					"http://cgeo.carnero.cc/manual/"
-				);
-			} else {
-				AppManualReaderClient.openManual(
-					"c-geo",
-					"c:geo-waypoint-new",
-					activity,
-					"http://cgeo.carnero.cc/manual/"
-				);
-			}
-		} catch (Exception e) {
-			// nothing
+		if (id >= 0) {
+			ActivityMixin.goManual(this, "c:geo-waypoint-edit");
+		} else {
+			ActivityMixin.goManual(this, "c:geo-waypoint-new");
 		}
 	}
 }

@@ -1,26 +1,25 @@
 package cgeo.geocaching;
 
+import java.io.File;
 import java.util.List;
+
 import android.app.Activity;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.LayoutInflater;
-import android.widget.TextView;
 import android.widget.ArrayAdapter;
-import android.util.Log;
-import java.io.File;
+import android.widget.TextView;
 
 public class cgGPXListAdapter extends ArrayAdapter<File> {
 	private cgGPXView holder = null;
 	private cgeogpxes parent = null;
-	private cgSettings settings = null;
 	private LayoutInflater inflater = null;
 
 	public cgGPXListAdapter(cgeogpxes parentIn, cgSettings settingsIn, List<File> listIn) {
 		super(parentIn, 0, listIn);
 
 		parent = parentIn;
-		settings = settingsIn;
 	}
 
     @Override
@@ -40,7 +39,7 @@ public class cgGPXListAdapter extends ArrayAdapter<File> {
 			holder = new cgGPXView();
 			holder.filepath = (TextView)rowView.findViewById(R.id.filepath);
 			holder.filename = (TextView)rowView.findViewById(R.id.filename);
-			
+
 			rowView.setTag(holder);
 		} else {
 			holder = (cgGPXView)rowView.getTag();
@@ -54,7 +53,7 @@ public class cgGPXListAdapter extends ArrayAdapter<File> {
 
 		return rowView;
 	}
-	
+
 	@Override
 	public void notifyDataSetChanged() {
 		super.notifyDataSetChanged();

@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.view.View;
 
 public class cgeogpxes extends cgFileList<cgGPXListAdapter> {
 
@@ -63,7 +62,7 @@ public class cgeogpxes extends cgFileList<cgGPXListAdapter> {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			listId = extras.getInt("list");
@@ -77,7 +76,7 @@ public class cgeogpxes extends cgFileList<cgGPXListAdapter> {
 	public void loadGPX(File file) {
 
 		parseDialog = ProgressDialog.show(
-				getActivity(),
+				this,
 				getRes().getString(R.string.gpx_import_title_reading_file),
 				getRes().getString(R.string.gpx_import_loading),
 				true,
@@ -103,9 +102,4 @@ public class cgeogpxes extends cgFileList<cgGPXListAdapter> {
 			loadCachesHandler.sendMessage(new Message());
 		}
 	}
-
-	public void goHome(View view) {
-		getBase().goHome(getActivity());
-	}
-
 }

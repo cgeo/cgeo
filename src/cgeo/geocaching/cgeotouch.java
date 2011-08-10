@@ -1,12 +1,10 @@
 package cgeo.geocaching;
 
-import gnu.android.app.appmanualclient.*;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import android.app.Activity;
+
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.res.Configuration;
@@ -16,7 +14,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.ContextMenu;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -29,9 +26,7 @@ import android.widget.TextView;
 
 public class cgeotouch extends cgLogForm {
 	private cgeoapplication app = null;
-	private Activity activity = null;
 	private Resources res = null;
-	private LayoutInflater inflater = null;
 	private cgBase base = null;
 	private cgSettings settings = null;
 	private cgWarning warning = null;
@@ -40,7 +35,6 @@ public class cgeotouch extends cgLogForm {
 	private ProgressDialog waitDialog = null;
 	private String guid = null;
 	private String geocode = null;
-	private String text = null;
 	private String viewstate = null;
 	private String viewstate1 = null;
 	private Boolean gettingViewstate = true;
@@ -53,7 +47,7 @@ public class cgeotouch extends cgLogForm {
 	private Handler showProgressHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			base.showProgress(activity, true);
+			showProgress(true);
 		}
 	};
 
@@ -70,7 +64,7 @@ public class cgeotouch extends cgLogForm {
 				return;
 			} else if ((viewstate == null || viewstate.length() == 0) && attempts >= 2) {
 				warning.showToast(res.getString(R.string.err_log_load_data));
-				base.showProgress(activity, false);
+				showProgress(false);
 
 				return;
 			}
@@ -81,7 +75,7 @@ public class cgeotouch extends cgLogForm {
 			buttonPost.setEnabled(true);
 			buttonPost.setOnClickListener(new postListener());
 
-			base.showProgress(activity, false);
+			showProgress(false);
 		}
 	};
 
@@ -118,41 +112,38 @@ public class cgeotouch extends cgLogForm {
 		}
 	};
 
+	public cgeotouch() {
+		super("c:geo-log-trackable");
+	}
+
     @Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		// init
-		activity = this;
 		res = this.getResources();
 		app = (cgeoapplication)this.getApplication();
 		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
 		base = new cgBase(app, settings, getSharedPreferences(cgSettings.preferences, 0));
 		warning = new cgWarning(this);
 
-		// set layout
-		if (settings.skin == 1) {
-			setTheme(R.style.light);
-		} else {
-			setTheme(R.style.dark);
-		}
+		setTheme();
 		setContentView(R.layout.touch);
-		base.setTitle(activity, res.getString(R.string.trackable_touch));
+		setTitle(res.getString(R.string.trackable_touch));
 
 		// get parameters
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			geocode = extras.getString("geocode");
 			guid = extras.getString("guid");
-			text = extras.getString("text");
 		}
 
 		trackable = app.getTrackableByGeocode("logging trackable");
 
 		if (trackable.name != null && trackable.name.length() > 0) {
-			base.setTitle(activity, res.getString(R.string.trackable_touch) + trackable.name);
+			setTitle(res.getString(R.string.trackable_touch) + trackable.name);
 		} else {
-			base.setTitle(activity, res.getString(R.string.trackable_touch) + trackable.geocode.toUpperCase());
+			setTitle(res.getString(R.string.trackable_touch) + trackable.geocode.toUpperCase());
 		}
 
 		app.setAction("logging trackable");
@@ -170,7 +161,7 @@ public class cgeotouch extends cgLogForm {
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		settings.load();
 	}
 
@@ -222,7 +213,7 @@ public class cgeotouch extends cgLogForm {
 			textContent = text.getText().toString();
 			dateString = cgBase.dateOut.format(new Date());
 			timeString = cgBase.timeOut.format(new Date());
-		
+
 			if ((id & 0x4) == 0x4) {
 				addText += dateString;
 				if ((id & 0x2) == 0x2) {
@@ -342,7 +333,7 @@ public class cgeotouch extends cgLogForm {
 
 	private class cgeotouchDateListener implements View.OnClickListener {
 		public void onClick(View arg0) {
-			Dialog dateDialog = new cgeodate(activity, (cgeotouch)activity, date);
+			Dialog dateDialog = new cgeodate(cgeotouch.this, cgeotouch.this, date);
 			dateDialog.setCancelable(true);
 			dateDialog.show();
 		}
@@ -351,7 +342,7 @@ public class cgeotouch extends cgLogForm {
 	private class postListener implements View.OnClickListener {
 		public void onClick(View arg0) {
 			if (gettingViewstate == false) {
-				waitDialog = ProgressDialog.show(activity, null, res.getString(R.string.log_saving), true);
+				waitDialog = ProgressDialog.show(cgeotouch.this, null, res.getString(R.string.log_saving), true);
 				waitDialog.setCancelable(true);
 
 				String tracking = ((EditText)findViewById(R.id.tracking)).getText().toString();
@@ -463,22 +454,5 @@ public class cgeotouch extends cgLogForm {
 		}
 
 		return 1000;
-	}
-
-	public void goHome(View view) {
-		base.goHome(activity);
-	}
-	
-	public void goManual(View view) {
-		try {
-			AppManualReaderClient.openManual(
-				"c-geo",
-				"c:geo-log-trackable",
-				activity,
-				"http://cgeo.carnero.cc/manual/"
-			);
-		} catch (Exception e) {
-			// nothing
-		}
 	}
 }

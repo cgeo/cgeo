@@ -1,10 +1,7 @@
 package cgeo.geocaching;
 
-import gnu.android.app.appmanualclient.AppManualReaderClient;
-
 import java.io.File;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -27,14 +24,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import cgeo.geocaching.cgSettings.mapSourceEnum;
+import cgeo.geocaching.activity.AbstractActivity;
 
-public class cgeoinit extends Activity {
+public class cgeoinit extends AbstractActivity {
 
 	private final int SELECT_MAPFILE_REQUEST=1;
 
 	private cgeoapplication app = null;
 	private Resources res = null;
-	private Activity activity = null;
 	private cgSettings settings = null;
 	private cgBase base = null;
 	private cgWarning warning = null;
@@ -102,12 +99,15 @@ public class cgeoinit extends Activity {
 		}
 	};
 
+	public cgeoinit() {
+		super("c:geo-configuration");
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		// init
-		activity = this;
 		res = this.getResources();
 		app = (cgeoapplication) this.getApplication();
 		prefs = getSharedPreferences(cgSettings.preferences, 0);
@@ -115,14 +115,9 @@ public class cgeoinit extends Activity {
 		base = new cgBase(app, settings, prefs);
 		warning = new cgWarning(this);
 
-		// set layout
-		if (settings.skin == 1) {
-			setTheme(R.style.light);
-		} else {
-			setTheme(R.style.dark);
-		}
+		setTheme();
 		setContentView(R.layout.init);
-		base.setTitle(activity, res.getString(R.string.settings));
+		setTitle(res.getString(R.string.settings));
 
 		init();
 	}
@@ -209,7 +204,7 @@ public class cgeoinit extends Activity {
 		legalNote.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View arg0) {
-				activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/about/termsofuse.aspx")));
+				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/about/termsofuse.aspx")));
 			}
 		});
 
@@ -225,7 +220,7 @@ public class cgeoinit extends Activity {
 		go4cache.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View arg0) {
-				activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://go4cache.com/")));
+				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://go4cache.com/")));
 			}
 		});
 
@@ -242,8 +237,8 @@ public class cgeoinit extends Activity {
 		authorizeTwitter.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View arg0) {
-				Intent authIntent = new Intent(activity, cgeoauth.class);
-				activity.startActivity(authIntent);
+				Intent authIntent = new Intent(cgeoinit.this, cgeoauth.class);
+				startActivity(authIntent);
 			}
 		});
 
@@ -431,8 +426,8 @@ public class cgeoinit extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent selectIntent = new Intent(activity, cgSelectMapfile.class);
-				activity.startActivityForResult(selectIntent, SELECT_MAPFILE_REQUEST);
+				Intent selectIntent = new Intent(cgeoinit.this, cgSelectMapfile.class);
+				startActivityForResult(selectIntent, SELECT_MAPFILE_REQUEST);
 			}
 		});
 
@@ -552,8 +547,8 @@ public class cgeoinit extends Activity {
 				edit.commit();
 
 				if (settings.twitter == 1 && (settings.tokenPublic == null || settings.tokenPublic.length() == 0 || settings.tokenSecret == null || settings.tokenSecret.length() == 0)) {
-					Intent authIntent = new Intent(activity, cgeoauth.class);
-					activity.startActivity(authIntent);
+					Intent authIntent = new Intent(cgeoinit.this, cgeoauth.class);
+					startActivity(authIntent);
 				}
 
 				if (prefs.getInt("twitter", 0) == 0) {
@@ -986,7 +981,7 @@ public class cgeoinit extends Activity {
 				return;
 			}
 
-			loginDialog = ProgressDialog.show(activity, res.getString(R.string.init_login_popup), res.getString(R.string.init_login_popup_working), true);
+			loginDialog = ProgressDialog.show(cgeoinit.this, res.getString(R.string.init_login_popup), res.getString(R.string.init_login_popup_working), true);
 			loginDialog.setCancelable(false);
 
 			settings.setLogin(username, password);
@@ -1014,7 +1009,7 @@ public class cgeoinit extends Activity {
 				return;
 			}
 
-			webDialog = ProgressDialog.show(activity, res.getString(R.string.init_sendToCgeo), res.getString(R.string.init_sendToCgeo_registering), true);
+			webDialog = ProgressDialog.show(cgeoinit.this, res.getString(R.string.init_sendToCgeo), res.getString(R.string.init_sendToCgeo_registering), true);
 			webDialog.setCancelable(false);
 
 			(new Thread() {
@@ -1060,23 +1055,6 @@ public class cgeoinit extends Activity {
 				}
 			}
 			initMapfileEdittext(true);
-		}
-	}
-
-	public void goHome(View view) {
-		base.goHome(activity);
-	}
-
-	public void goManual(View view) {
-		try {
-			AppManualReaderClient.openManual(
-				"c-geo",
-				"c:geo-configuration",
-				activity,
-				"http://cgeo.carnero.cc/manual/"
-			);
-		} catch (Exception e) {
-			// nothing
 		}
 	}
 }

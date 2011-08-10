@@ -64,10 +64,7 @@ import android.text.Spannable;
 import android.text.style.StrikethroughSpan;
 import android.util.Log;
 import android.view.Display;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 public class cgBase {
 
@@ -5491,37 +5488,5 @@ public class cgBase {
 		}
 
 		return elv;
-	}
-
-	public void showProgress(Activity activity, boolean status) {
-		if (activity == null) {
-			return;
-		}
-
-		final ProgressBar progress = (ProgressBar) activity.findViewById(R.id.actionbar_progress);
-		if (status == true) {
-			progress.setVisibility(View.VISIBLE);
-		} else {
-			progress.setVisibility(View.GONE);
-		}
-	}
-
-	public void goHome(Activity activity) {
-		final Intent intent = new Intent(activity, cgeo.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-		activity.startActivity(intent);
-		activity.finish();
-	}
-
-	public void setTitle(Activity activity, String text) {
-		if (activity == null || text == null) {
-			return;
-		}
-
-		final TextView title = (TextView) activity.findViewById(R.id.actionbar_title);
-		if (title != null) {
-			title.setText(text);
-		}
 	}
 }
