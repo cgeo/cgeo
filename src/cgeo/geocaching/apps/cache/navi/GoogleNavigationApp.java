@@ -10,8 +10,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.cgWarning;
 import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.activity.ActivityMixin;
 
 class GoogleNavigationApp extends AbstractNavigationApp implements
 		NavigationApp {
@@ -27,7 +27,7 @@ class GoogleNavigationApp extends AbstractNavigationApp implements
 
 	@Override
 	public boolean invoke(final cgGeo geo, final Activity activity, final Resources res,
-			final cgWarning warning, final cgCache cache,
+			final cgCache cache,
 			final Long searchId, final cgWaypoint waypoint, final Double latitude, final Double longitude) {
 		if (activity == null) {
 			return false;
@@ -45,8 +45,8 @@ class GoogleNavigationApp extends AbstractNavigationApp implements
 		}
 
 		if (!navigationResult) {
-			if (warning != null && res != null) {
-				warning.showToast(res.getString(R.string.err_navigation_no));
+			if (res != null) {
+				ActivityMixin.showToast(activity, res.getString(R.string.err_navigation_no));
 			}
 			return false;
 		}
@@ -54,7 +54,7 @@ class GoogleNavigationApp extends AbstractNavigationApp implements
 		return true;
 	}
 
-	private boolean navigateToCoordinates(cgGeo geo, Activity activity, Double latitude,
+	private static boolean navigateToCoordinates(cgGeo geo, Activity activity, Double latitude,
 			Double longitude) {
 		Double latitudeNow = null;
 		Double longitudeNow = null;

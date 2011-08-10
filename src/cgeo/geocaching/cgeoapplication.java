@@ -66,8 +66,8 @@ public class cgeoapplication extends Application {
 		return storage.backupDatabase();
 	}
 
-	public File isRestoreFile() {
-		return storage.isRestoreFile();
+	public static File isRestoreFile() {
+		return cgData.isRestoreFile();
 	}
 
 	public boolean restoreDatabase() {
@@ -96,7 +96,7 @@ public class cgeoapplication extends Application {
 		return true;
 	}
 
-	public cgGeo startGeo(Context context, cgUpdateLoc geoUpdate, cgBase base, cgSettings settings, cgWarning warning, int time, int distance) {
+	public cgGeo startGeo(Context context, cgUpdateLoc geoUpdate, cgBase base, cgSettings settings, int time, int distance) {
 		if (geo == null) {
 			geo = new cgGeo(context, this, geoUpdate, base, settings, time, distance);
 			geo.initGeo();
@@ -140,9 +140,9 @@ public class cgeoapplication extends Application {
 		}
 	}
 
-	public cgDirection startDir(Context context, cgUpdateDir dirUpdate, cgWarning warning) {
+	public cgDirection startDir(Context context, cgUpdateDir dirUpdate) {
 		if (dir == null) {
-			dir = new cgDirection(this, context, dirUpdate, warning);
+			dir = new cgDirection(context, dirUpdate);
 			dir.initDir();
 
 			Log.i(cgSettings.tag, "Direction service started");

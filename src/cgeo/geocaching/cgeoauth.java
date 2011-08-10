@@ -17,7 +17,6 @@ import javax.net.ssl.HttpsURLConnection;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -29,11 +28,6 @@ import android.widget.EditText;
 import cgeo.geocaching.activity.AbstractActivity;
 
 public class cgeoauth extends AbstractActivity {
-	private cgeoapplication app = null;
-	private Resources res = null;
-	private cgSettings settings = null;
-	private cgWarning warning = null;
-	private SharedPreferences prefs = null;
 	private String OAtoken = null;
 	private String OAtokenSecret = null;
 	private final Pattern paramsPattern1 = Pattern.compile("oauth_token=([a-zA-Z0-9\\-\\_\\.]+)");
@@ -61,7 +55,7 @@ public class cgeoauth extends AbstractActivity {
 				pinEntryButton.setVisibility(View.VISIBLE);
 				pinEntryButton.setOnClickListener(new confirmPINListener());
 			} else {
-				warning.showToast(res.getString(R.string.err_auth_initialize));
+				showToast(res.getString(R.string.err_auth_initialize));
 				startButton.setText(res.getString(R.string.auth_start));
 			}
 		}
@@ -78,13 +72,13 @@ public class cgeoauth extends AbstractActivity {
 			pinEntryButton.setEnabled(true);
 
 			if (msg.what == 1) {
-				warning.showToast(res.getString(R.string.auth_dialog_completed));
+				showToast(res.getString(R.string.auth_dialog_completed));
 
 				pinEntryButton.setVisibility(View.GONE);
 
 				finish();
 			} else {
-				warning.showToast(res.getString(R.string.err_auth_process));
+				showToast(res.getString(R.string.err_auth_process));
 
 				pinEntry.setVisibility(View.GONE);
 				pinEntryButton.setVisibility(View.GONE);
@@ -98,12 +92,7 @@ public class cgeoauth extends AbstractActivity {
 		super.onCreate(savedInstanceState);
 
 		// init
-		res = this.getResources();
-		app = (cgeoapplication) this.getApplication();
 		app.setAction("setting up");
-		prefs = getSharedPreferences(cgSettings.preferences, 0);
-		settings = new cgSettings(this, prefs);
-		warning = new cgWarning(this);
 
 		setTheme();
 		setContentView(R.layout.auth);
@@ -373,7 +362,7 @@ public class cgeoauth extends AbstractActivity {
 
 		public void onClick(View arg0) {
 			if (((EditText) findViewById(R.id.pin)).getText().toString().length() == 0) {
-				warning.helpDialog(res.getString(R.string.auth_dialog_pin_title), res.getString(R.string.auth_dialog_pin_message));
+				helpDialog(res.getString(R.string.auth_dialog_pin_title), res.getString(R.string.auth_dialog_pin_message));
 				return;
 			}
 

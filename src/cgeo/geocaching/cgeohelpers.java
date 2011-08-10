@@ -3,8 +3,6 @@ package cgeo.geocaching;
 import java.util.Locale;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -12,19 +10,11 @@ import cgeo.geocaching.activity.AbstractActivity;
 
 public class cgeohelpers extends AbstractActivity {
 
-	private Resources res = null;
-	private cgSettings settings = null;
-	private SharedPreferences prefs = null;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		// init
-		res = this.getResources();
-		prefs = getSharedPreferences(cgSettings.preferences, 0);
-		settings = new cgSettings(this, prefs);
-
 		setTheme();
 		setContentView(R.layout.helpers);
 		setTitle(res.getString(R.string.helpers));

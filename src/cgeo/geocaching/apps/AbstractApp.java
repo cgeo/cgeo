@@ -67,7 +67,7 @@ public abstract class AbstractApp implements App {
 		return getName().hashCode();
 	}
 
-	protected cgSettings getSettings(Activity activity) {
+	protected static cgSettings getSettings(Activity activity) {
 		return new cgSettings(activity,
 				activity.getSharedPreferences(cgSettings.preferences, 0));
 	}

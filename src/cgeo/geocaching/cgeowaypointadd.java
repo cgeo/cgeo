@@ -6,7 +6,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import android.app.ProgressDialog;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,11 +21,6 @@ import cgeo.geocaching.activity.ActivityMixin;
 
 public class cgeowaypointadd extends AbstractActivity {
 
-	private cgeoapplication app = null;
-	private Resources res = null;
-	private cgSettings settings = null;
-	private cgBase base = null;
-	private cgWarning warning = null;
 	private String geocode = null;
 	private int id = -1;
 	private cgGeo geo = null;
@@ -62,8 +56,8 @@ public class cgeowaypointadd extends AbstractActivity {
 
 					app.setAction(geocode);
 
-					((EditText) findViewById(R.id.latitude)).setText(base.formatCoordinate(waypoint.latitude, "lat", true));
-					((EditText) findViewById(R.id.longitude)).setText(base.formatCoordinate(waypoint.longitude, "lon", true));
+					((EditText) findViewById(R.id.latitude)).setText(cgBase.formatCoordinate(waypoint.latitude, "lat", true));
+					((EditText) findViewById(R.id.longitude)).setText(cgBase.formatCoordinate(waypoint.longitude, "lon", true));
 					((EditText) findViewById(R.id.name)).setText(Html.fromHtml(waypoint.name.trim()).toString());
 					((EditText) findViewById(R.id.note)).setText(Html.fromHtml(waypoint.note.trim()).toString());
 
@@ -86,19 +80,12 @@ public class cgeowaypointadd extends AbstractActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// init
-		res = this.getResources();
-		app = (cgeoapplication) this.getApplication();
-		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
-		base = new cgBase(app, settings, getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(this);
-
 		setTheme();
 		setContentView(R.layout.waypoint_new);
 		setTitle("waypoint");
 
 		if (geo == null) {
-			geo = app.startGeo(this, geoUpdate, base, settings, warning, 0, 0);
+			geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
 		}
 
 		// get parameters
@@ -110,7 +97,7 @@ public class cgeowaypointadd extends AbstractActivity {
 		}
 
 		if ((geocode == null || geocode.length() == 0) && id <= 0) {
-			warning.showToast(res.getString(R.string.err_waypoint_cache_unknown));
+			showToast(res.getString(R.string.err_waypoint_cache_unknown));
 
 			finish();
 			return;
@@ -153,7 +140,7 @@ public class cgeowaypointadd extends AbstractActivity {
 		settings.load();
 
 		if (geo == null) {
-			geo = app.startGeo(this, geoUpdate, base, settings, warning, 0, 0);
+			geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
 		}
 
 		if (id > 0) {
@@ -209,8 +196,8 @@ public class cgeowaypointadd extends AbstractActivity {
 					lonEdit = (EditText) findViewById(R.id.longitude);
 				}
 
-				latEdit.setHint(base.formatCoordinate(geo.latitudeNow, "lat", false));
-				lonEdit.setHint(base.formatCoordinate(geo.longitudeNow, "lon", false));
+				latEdit.setHint(cgBase.formatCoordinate(geo.latitudeNow, "lat", false));
+				lonEdit.setHint(cgBase.formatCoordinate(geo.longitudeNow, "lon", false));
 			} catch (Exception e) {
 				Log.w(cgSettings.tag, "Failed to update location.");
 			}
@@ -235,12 +222,12 @@ public class cgeowaypointadd extends AbstractActivity {
 
 		public void onClick(View arg0) {
 			if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null) {
-				warning.showToast(res.getString(R.string.err_point_unknown_position));
+				showToast(res.getString(R.string.err_point_unknown_position));
 				return;
 			}
 
-			((EditText) findViewById(R.id.latitude)).setText(base.formatCoordinate(geo.latitudeNow, "lat", true));
-			((EditText) findViewById(R.id.longitude)).setText(base.formatCoordinate(geo.longitudeNow, "lon", true));
+			((EditText) findViewById(R.id.latitude)).setText(cgBase.formatCoordinate(geo.latitudeNow, "lat", true));
+			((EditText) findViewById(R.id.longitude)).setText(cgBase.formatCoordinate(geo.longitudeNow, "lon", true));
 		}
 	}
 
@@ -258,22 +245,22 @@ public class cgeowaypointadd extends AbstractActivity {
 
 			if ((bearingText == null || bearingText.length() == 0) && (distanceText == null || distanceText.length() == 0)
 							&& (latText == null || latText.length() == 0) && (lonText == null || lonText.length() == 0)) {
-				warning.helpDialog(res.getString(R.string.err_point_no_position_given_title), res.getString(R.string.err_point_no_position_given));
+				helpDialog(res.getString(R.string.err_point_no_position_given_title), res.getString(R.string.err_point_no_position_given));
 				return;
 			}
 
 			if (latText != null && latText.length() > 0 && lonText != null && lonText.length() > 0) {
 				// latitude & longitude
-				HashMap<String, Object> latParsed = base.parseCoordinate(latText, "lat");
-				HashMap<String, Object> lonParsed = base.parseCoordinate(lonText, "lat");
+				HashMap<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
+				HashMap<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lat");
 
 				if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
-					warning.showToast(res.getString(R.string.err_parse_lat));
+					showToast(res.getString(R.string.err_parse_lat));
 					return;
 				}
 
 				if (lonParsed == null || lonParsed.get("coordinate") == null || lonParsed.get("string") == null) {
-					warning.showToast(res.getString(R.string.err_parse_lon));
+					showToast(res.getString(R.string.err_parse_lon));
 					return;
 				}
 
@@ -281,7 +268,7 @@ public class cgeowaypointadd extends AbstractActivity {
 				longitude = (Double) lonParsed.get("coordinate");
 			} else {
 				if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null) {
-					warning.showToast(res.getString(R.string.err_point_curr_position_unavailable));
+					showToast(res.getString(R.string.err_point_curr_position_unavailable));
 					return;
 				}
 
@@ -298,7 +285,7 @@ public class cgeowaypointadd extends AbstractActivity {
 					// probably not a number
 				}
 				if (bearing == null) {
-					warning.helpDialog(res.getString(R.string.err_point_bear_and_dist_title), res.getString(R.string.err_point_bear_and_dist));
+					helpDialog(res.getString(R.string.err_point_bear_and_dist_title), res.getString(R.string.err_point_bear_and_dist));
 					return;
 				}
 
@@ -339,20 +326,20 @@ public class cgeowaypointadd extends AbstractActivity {
 				}
 
 				if (distance == null) {
-					warning.showToast(res.getString(R.string.err_parse_dist));
+					showToast(res.getString(R.string.err_parse_dist));
 					return;
 				}
 
 				Double latParsed = null;
 				Double lonParsed = null;
 
-				HashMap<String, Double> coordsDst = base.getRadialDistance(latitude, longitude, bearing, distance);
+				HashMap<String, Double> coordsDst = cgBase.getRadialDistance(latitude, longitude, bearing, distance);
 
 				latParsed = coordsDst.get("latitude");
 				lonParsed = coordsDst.get("longitude");
 
 				if (latParsed == null || lonParsed == null) {
-					warning.showToast(res.getString(R.string.err_point_location_error));
+					showToast(res.getString(R.string.err_point_location_error));
 					return;
 				}
 
@@ -362,7 +349,7 @@ public class cgeowaypointadd extends AbstractActivity {
 				coords.add(0, latitude);
 				coords.add(1, longitude);
 			} else {
-				warning.showToast(res.getString(R.string.err_point_location_error));
+				showToast(res.getString(R.string.err_point_location_error));
 				return;
 			}
 
@@ -381,8 +368,8 @@ public class cgeowaypointadd extends AbstractActivity {
 			waypoint.name = name;
 			waypoint.latitude = coords.get(0);
 			waypoint.longitude = coords.get(1);
-			waypoint.latitudeString = base.formatCoordinate(coords.get(0), "lat", true);
-			waypoint.longitudeString = base.formatCoordinate(coords.get(1), "lon", true);
+			waypoint.latitudeString = cgBase.formatCoordinate(coords.get(0), "lat", true);
+			waypoint.longitudeString = cgBase.formatCoordinate(coords.get(1), "lon", true);
 			waypoint.note = note;
 
 			if (app.saveOwnWaypoint(id, geocode, waypoint) == true) {
@@ -391,7 +378,7 @@ public class cgeowaypointadd extends AbstractActivity {
 				finish();
 				return;
 			} else {
-				warning.showToast(res.getString(R.string.err_waypoint_add_failed));
+				showToast(res.getString(R.string.err_waypoint_add_failed));
 			}
 		}
 	}

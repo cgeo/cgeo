@@ -65,6 +65,7 @@ import android.text.style.StrikethroughSpan;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
+import cgeo.geocaching.activity.ActivityMixin;
 
 public class cgBase {
 
@@ -355,7 +356,7 @@ public class cgBase {
 		}
 	}
 
-	public String findViewstate(String page, int index) {
+	public static String findViewstate(String page, int index) {
 		String viewstate = null;
 
 		if (index == 0) {
@@ -472,13 +473,13 @@ public class cgBase {
 			return -5; // no login page
 		}
 	}
-	
+
 	public static Boolean isPremium(String page)
 	{
 		if (checkLogin(page)) {
 			final Matcher matcherIsPremium = patternIsPremium.matcher(page);
 			return matcherIsPremium.find();
-		} else 
+		} else
 			return false;
 	}
 
@@ -953,13 +954,11 @@ public class cgBase {
 		}
 
 		// get direction images
-		cgDirectionImg dirImgDownloader = new cgDirectionImg(settings);
 		for (cgCache oneCache : caches.cacheList) {
 			if (oneCache.latitude == null && oneCache.longitude == null && oneCache.direction == null && oneCache.directionImg != null) {
-				dirImgDownloader.getDrawable(oneCache.geocode, oneCache.directionImg);
+				cgDirectionImg.getDrawable(oneCache.geocode, oneCache.directionImg);
 			}
 		}
-		dirImgDownloader = null;
 
 		// get ratings
 		if (guids.size() > 0) {
@@ -988,7 +987,7 @@ public class cgBase {
 		return caches;
 	}
 
-	public cgCacheWrap parseMapJSON(String url, String data) {
+	public static cgCacheWrap parseMapJSON(String url, String data) {
 		if (data == null || data.length() == 0) {
 			Log.e(cgSettings.tag, "cgeoBase.parseMapJSON: No page given");
 			return null;
@@ -1377,7 +1376,7 @@ public class cgBase {
 				if (matcherLatLon.groupCount() > 0) {
 					cache.latlon = getMatch(matcherLatLon.group(2)); // first is <b>
 
-					HashMap<String, Object> tmp = this.parseLatlon(cache.latlon);
+					HashMap<String, Object> tmp = cgBase.parseLatlon(cache.latlon);
 					if (tmp.size() > 0) {
 						cache.latitude = (Double) tmp.get("latitude");
 						cache.longitude = (Double) tmp.get("longitude");
@@ -1848,7 +1847,7 @@ public class cgBase {
 							if (matcherWpLatLon.groupCount() > 1) {
 								waypoint.latlon = Html.fromHtml(matcherWpLatLon.group(2)).toString();
 
-								final HashMap<String, Object> tmp = this.parseLatlon(waypoint.latlon);
+								final HashMap<String, Object> tmp = cgBase.parseLatlon(waypoint.latlon);
 								if (tmp.size() > 0) {
 									waypoint.latitude = (Double) tmp.get("latitude");
 									waypoint.longitude = (Double) tmp.get("longitude");
@@ -2092,12 +2091,12 @@ public class cgBase {
 		return ratings;
 	}
 
-	public Long parseGPX(cgeoapplication app, File file, int listId, Handler handler) {
+	public static Long parseGPX(cgeoapplication app, File file, int listId, Handler handler) {
 		cgSearch search = new cgSearch();
 		long searchId = 0l;
 
 		try {
-			cgGPXParser GPXparser = new cgGPXParser(app, this, listId, search);
+			cgGPXParser GPXparser = new cgGPXParser(app, listId, search);
 
 			searchId = GPXparser.parse(file, 10, handler);
 			if (searchId == 0l) {
@@ -2435,7 +2434,7 @@ public class cgBase {
 		return trackable;
 	}
 
-	public ArrayList<Integer> parseTypes(String page) {
+	public static ArrayList<Integer> parseTypes(String page) {
 		if (page == null || page.length() == 0) {
 			return null;
 		}
@@ -2469,7 +2468,7 @@ public class cgBase {
 		return types;
 	}
 
-	public ArrayList<cgTrackableLog> parseTrackableLog(String page) {
+	public static ArrayList<cgTrackableLog> parseTrackableLog(String page) {
 		if (page == null || page.length() == 0) {
 			return null;
 		}
@@ -2551,7 +2550,7 @@ public class cgBase {
 		return trackables;
 	}
 
-	public int parseFindCount(String page) {
+	public static int parseFindCount(String page) {
 		if (page == null || page.length() == 0) {
 			return -1;
 		}
@@ -2716,7 +2715,7 @@ public class cgBase {
 		return result;
 	}
 
-	public HashMap<String, Double> getRadialDistance(Double latitude, Double longitude, Double bearing, Double distance) {
+	public static HashMap<String, Double> getRadialDistance(Double latitude, Double longitude, Double bearing, Double distance) {
 		final Double rlat1 = latitude * deg2rad;
 		final Double rlon1 = longitude * deg2rad;
 		final Double rbearing = bearing * deg2rad;
@@ -2793,7 +2792,7 @@ public class cgBase {
 		}
 	}
 
-	public HashMap<String, Object> parseLatlon(String latlon) {
+	public static HashMap<String, Object> parseLatlon(String latlon) {
 		final HashMap<String, Object> result = new HashMap<String, Object>();
 		final Pattern patternLatlon = Pattern.compile("([NS])[^\\d]*(\\d+)[^°]*° (\\d+)\\.(\\d+) ([WE])[^\\d]*(\\d+)[^°]*° (\\d+)\\.(\\d+)", Pattern.CASE_INSENSITIVE);
 		final Matcher matcherLatlon = patternLatlon.matcher(latlon);
@@ -2820,7 +2819,7 @@ public class cgBase {
 		return result;
 	}
 
-	public String formatCoordinate(Double coord, String latlon, boolean degrees) {
+	public static String formatCoordinate(Double coord, String latlon, boolean degrees) {
 		String formatted = "";
 
 		if (coord == null) {
@@ -2862,7 +2861,7 @@ public class cgBase {
 		return formatted;
 	}
 
-	public HashMap<String, Object> parseCoordinate(String coord, String latlon) {
+	public static HashMap<String, Object> parseCoordinate(String coord, String latlon) {
 		final HashMap<String, Object> coords = new HashMap<String, Object>();
 
 		final Pattern patternA = Pattern.compile("^([NSWE])[^\\d]*(\\d+)°? +(\\d+)([\\.|,](\\d+))?$", Pattern.CASE_INSENSITIVE);
@@ -4063,7 +4062,7 @@ public class cgBase {
 		}
 	}
 
-	public void postTweetCache(cgeoapplication app, cgSettings settings, String geocode) {
+	public static void postTweetCache(cgeoapplication app, cgSettings settings, String geocode) {
 		final cgCache cache = app.getCacheByGeocode(geocode);
 		String name = cache.name;
 		if (name.length() > 84) {
@@ -4074,7 +4073,7 @@ public class cgBase {
 		postTweet(app, settings, status, null, null);
 	}
 
-	public void postTweetTrackable(cgeoapplication app, cgSettings settings, String geocode) {
+	public static void postTweetTrackable(cgeoapplication app, cgSettings settings, String geocode) {
 		final cgTrackable trackable = app.getTrackableByGeocode(geocode);
 		String name = trackable.name;
 		if (name.length() > 82) {
@@ -4085,7 +4084,7 @@ public class cgBase {
 		postTweet(app, settings, status, null, null);
 	}
 
-	public void postTweet(cgeoapplication app, cgSettings settings, String status, Double latitude, Double longitude) {
+	public static void postTweet(cgeoapplication app, cgSettings settings, String status, Double latitude, Double longitude) {
 		if (app == null) {
 			return;
 		}
@@ -4185,7 +4184,7 @@ public class cgBase {
 		}
 	}
 
-	public String getLocalIpAddress() {
+	public static String getLocalIpAddress() {
 		try {
 			for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
 				NetworkInterface intf = en.nextElement();
@@ -4778,11 +4777,11 @@ public class cgBase {
 		}
 	}
 
-	public String requestJSON(String host, String path, String params) {
+	public static String requestJSON(String host, String path, String params) {
 		return requestJSON("http://", host, path, "GET", params);
 	}
 
-	public String requestJSON(String scheme, String host, String path, String method, String params) {
+	public static String requestJSON(String scheme, String host, String path, String method, String params) {
 		int httpCode = -1;
 		//String httpLocation = null;
 
@@ -5027,7 +5026,7 @@ public class cgBase {
 				return;
 			}
 
-			final cgHtmlImg imgGetter = new cgHtmlImg(activity, settings, cache.geocode, false, listId, true);
+			final cgHtmlImg imgGetter = new cgHtmlImg(activity, cache.geocode, false, listId, true);
 
 			// store images from description
 			if (cache.description != null) {
@@ -5096,7 +5095,7 @@ public class cgBase {
 				final int finalEdge = edge;
 				Thread staticMapsThread = new Thread("getting static map") {@Override
 				public void run() {
-					cgMapImg mapGetter = new cgMapImg(settings, code);
+					cgMapImg mapGetter = new cgMapImg(code);
 
 					mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?center=" + latlonMap + "&zoom=20&size=" + finalEdge + "x" + finalEdge + "&maptype=satellite&markers=icon%3A" + markerUrl + "%7C" + latlonMap + waypoints.toString() + "&sensor=false", 1);
 					mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?center=" + latlonMap + "&zoom=18&size=" + finalEdge + "x" + finalEdge + "&maptype=satellite&markers=icon%3A" + markerUrl + "%7C" + latlonMap + waypoints.toString() + "&sensor=false", 2);
@@ -5119,7 +5118,7 @@ public class cgBase {
 		}
 	}
 
-	public void dropCache(cgeoapplication app, Activity activity, cgCache cache, Handler handler) {
+	public static void dropCache(cgeoapplication app, Activity activity, cgCache cache, Handler handler) {
 		try {
 			app.markDropped(cache.geocode);
 			app.removeCacheFromCache(cache.geocode);
@@ -5130,7 +5129,7 @@ public class cgBase {
 		}
 	}
 
-	public boolean isInViewPort(int centerLat1, int centerLon1, int centerLat2, int centerLon2, int spanLat1, int spanLon1, int spanLat2, int spanLon2) {
+	public static boolean isInViewPort(int centerLat1, int centerLon1, int centerLat2, int centerLon2, int spanLat1, int spanLon1, int spanLat2, int spanLon2) {
 		try {
 			// expects coordinates in E6 format
 			final int left1 = centerLat1 - (spanLat1 / 2);
@@ -5163,7 +5162,7 @@ public class cgBase {
 		}
 	}
 
-	public boolean isCacheInViewPort(int centerLat, int centerLon, int spanLat, int spanLon, Double cacheLat, Double cacheLon) {
+	public static boolean isCacheInViewPort(int centerLat, int centerLon, int spanLat, int spanLon, Double cacheLat, Double cacheLon) {
 		if (cacheLat == null || cacheLon == null) {
 			return false;
 		}
@@ -5415,11 +5414,11 @@ public class cgBase {
 		return icon;
 	}
 
-	public boolean runNavigation(Activity activity, Resources res, cgSettings settings, cgWarning warning, Double latitude, Double longitude) {
-		return runNavigation(activity, res, settings, warning, latitude, longitude, null, null);
+	public static boolean runNavigation(Activity activity, Resources res, cgSettings settings, Double latitude, Double longitude) {
+		return runNavigation(activity, res, settings, latitude, longitude, null, null);
 	}
 
-	public boolean runNavigation(Activity activity, Resources res, cgSettings settings, cgWarning warning, Double latitude, Double longitude, Double latitudeNow, Double longitudeNow) {
+	public static boolean runNavigation(Activity activity, Resources res, cgSettings settings, Double latitude, Double longitude, Double latitudeNow, Double longitudeNow) {
 		if (activity == null) {
 			return false;
 		}
@@ -5453,8 +5452,8 @@ public class cgBase {
 
 		Log.i(cgSettings.tag, "cgBase.runNavigation: No navigation application available.");
 
-		if (warning != null && res != null) {
-			warning.showToast(res.getString(R.string.err_navigation_no));
+		if (res != null) {
+			ActivityMixin.showToast(activity, res.getString(R.string.err_navigation_no));
 		}
 
 		return false;
@@ -5483,7 +5482,7 @@ public class cgBase {
 		return usertoken;
 	}
 
-	public Double getElevation(Double latitude, Double longitude) {
+	public static Double getElevation(Double latitude, Double longitude) {
 		Double elv = null;
 
 		try {

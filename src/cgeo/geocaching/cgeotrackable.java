@@ -7,7 +7,6 @@ import java.util.HashMap;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -36,12 +35,7 @@ public class cgeotrackable extends AbstractActivity {
 	public String guid = null;
 	public String id = null;
 	private String contextMenuUser = null;
-	private Resources res = null;
-	private cgeoapplication app = null;
 	private LayoutInflater inflater = null;
-	private cgSettings settings = null;
-	private cgBase base = null;
-	private cgWarning warning = null;
 	private ProgressDialog waitDialog = null;
 	private Handler loadTrackableHandler = new Handler() {
 
@@ -52,14 +46,14 @@ public class cgeotrackable extends AbstractActivity {
 			TextView itemValue;
 
 			if (trackable != null && trackable.errorRetrieve != 0) {
-				warning.showToast(res.getString(R.string.err_tb_details_download) + " " + cgBase.errorRetrieve.get(trackable.errorRetrieve) + ".");
+				showToast(res.getString(R.string.err_tb_details_download) + " " + cgBase.errorRetrieve.get(trackable.errorRetrieve) + ".");
 
 				finish();
 				return;
 			}
 
 			if (trackable != null && trackable.error.length() > 0) {
-				warning.showToast(res.getString(R.string.err_tb_details_download)  + " " + trackable.error + ".");
+				showToast(res.getString(R.string.err_tb_details_download)  + " " + trackable.error + ".");
 
 				finish();
 				return;
@@ -71,9 +65,9 @@ public class cgeotrackable extends AbstractActivity {
 				}
 
 				if (geocode != null && geocode.length() > 0) {
-					warning.showToast(res.getString(R.string.err_tb_find) + " " + geocode + ".");
+					showToast(res.getString(R.string.err_tb_find) + " " + geocode + ".");
 				} else {
-					warning.showToast(res.getString(R.string.err_tb_find_that));
+					showToast(res.getString(R.string.err_tb_find_that));
 				}
 
 				finish();
@@ -234,7 +228,7 @@ public class cgeotrackable extends AbstractActivity {
 					((LinearLayout) findViewById(R.id.goal_box)).setVisibility(View.VISIBLE);
 					TextView descView = (TextView) findViewById(R.id.goal);
 					descView.setVisibility(View.VISIBLE);
-					descView.setText(Html.fromHtml(trackable.goal, new cgHtmlImg(cgeotrackable.this, settings, geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
+					descView.setText(Html.fromHtml(trackable.goal, new cgHtmlImg(cgeotrackable.this, geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
 					descView.setMovementMethod(LinkMovementMethod.getInstance());
 				}
 
@@ -243,7 +237,7 @@ public class cgeotrackable extends AbstractActivity {
 					((LinearLayout) findViewById(R.id.details_box)).setVisibility(View.VISIBLE);
 					TextView descView = (TextView) findViewById(R.id.details);
 					descView.setVisibility(View.VISIBLE);
-					descView.setText(Html.fromHtml(trackable.details, new cgHtmlImg(cgeotrackable.this, settings, geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
+					descView.setText(Html.fromHtml(trackable.details, new cgHtmlImg(cgeotrackable.this, geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
 					descView.setMovementMethod(LinkMovementMethod.getInstance());
 				}
 
@@ -281,7 +275,7 @@ public class cgeotrackable extends AbstractActivity {
 						public void run() {
 							BitmapDrawable image = null;
 							try {
-								cgHtmlImg imgGetter = new cgHtmlImg(cgeotrackable.this, settings, geocode, true, 0, false);
+								cgHtmlImg imgGetter = new cgHtmlImg(cgeotrackable.this, geocode, true, 0, false);
 
 								image = imgGetter.getDrawable(trackable.image);
 								Message message = handler.obtainMessage(0, image);
@@ -313,13 +307,6 @@ public class cgeotrackable extends AbstractActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		// init
-		res = this.getResources();
-		app = (cgeoapplication) this.getApplication();
-		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
-		base = new cgBase(app, settings, getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(this);
 
 		setTheme();
 		setContentView(R.layout.trackable_detail);
@@ -358,7 +345,7 @@ public class cgeotrackable extends AbstractActivity {
 					guid = null;
 					id = id.toLowerCase();
 				} else {
-					warning.showToast(res.getString(R.string.err_tb_details_open));
+					showToast(res.getString(R.string.err_tb_details_open));
 					finish();
 					return;
 				}
@@ -369,7 +356,7 @@ public class cgeotrackable extends AbstractActivity {
 					guid = null;
 					id = null;
 				} else {
-					warning.showToast(res.getString(R.string.err_tb_details_open));
+					showToast(res.getString(R.string.err_tb_details_open));
 					finish();
 					return;
 				}
@@ -378,7 +365,7 @@ public class cgeotrackable extends AbstractActivity {
 
 		// no given data
 		if (geocode == null && guid == null && id == null) {
-			warning.showToast(res.getString(R.string.err_tb_display));
+			showToast(res.getString(R.string.err_tb_display));
 			finish();
 			return;
 		}
@@ -497,7 +484,7 @@ public class cgeotrackable extends AbstractActivity {
 			id = idIn;
 
 			if (geocode == null && guid == null && id == null) {
-				warning.showToast(res.getString(R.string.err_tb_forgot));
+				showToast(res.getString(R.string.err_tb_forgot));
 
 				stop();
 				finish();
@@ -567,7 +554,7 @@ public class cgeotrackable extends AbstractActivity {
 					});
 				}
 
-				((TextView) rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log, new cgHtmlImg(cgeotrackable.this, settings, null, false, 0, false), null), TextView.BufferType.SPANNABLE);
+				((TextView) rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log, new cgHtmlImg(cgeotrackable.this, null, false, 0, false), null), TextView.BufferType.SPANNABLE);
 
 				((TextView) rowView.findViewById(R.id.author)).setOnClickListener(new userActions());
 				listView.addView(rowView);
@@ -619,7 +606,7 @@ public class cgeotrackable extends AbstractActivity {
 
 			BitmapDrawable image = null;
 			try {
-				cgHtmlImg imgGetter = new cgHtmlImg(cgeotrackable.this, settings, trackable.geocode, false, 0, false);
+				cgHtmlImg imgGetter = new cgHtmlImg(cgeotrackable.this, trackable.geocode, false, 0, false);
 
 				image = imgGetter.getDrawable(url);
 				Message message = handler.obtainMessage(0, image);

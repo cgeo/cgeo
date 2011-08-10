@@ -3,7 +3,6 @@ package cgeo.geocaching;
 import java.util.ArrayList;
 
 import android.app.ProgressDialog;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -19,9 +18,6 @@ public class cgeosmaps extends AbstractActivity {
 
 	private ArrayList<Bitmap> maps = new ArrayList<Bitmap>();
 	private String geocode = null;
-	private Resources res = null;
-	private cgSettings settings = null;
-	private cgWarning warning = null;
 	private LayoutInflater inflater = null;
 	private ProgressDialog waitDialog = null;
 	private LinearLayout smapsView = null;
@@ -36,7 +32,7 @@ public class cgeosmaps extends AbstractActivity {
 						waitDialog.dismiss();
 					}
 
-					warning.showToast(res.getString(R.string.err_detail_not_load_map_static));
+					showToast(res.getString(R.string.err_detail_not_load_map_static));
 
 					finish();
 					return;
@@ -75,11 +71,6 @@ public class cgeosmaps extends AbstractActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// init
-		res = this.getResources();
-		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(this);
-
 		setTheme();
 		setContentView(R.layout.map_static);
 		setTitle(res.getString(R.string.map_static_title));
@@ -93,7 +84,7 @@ public class cgeosmaps extends AbstractActivity {
 		}
 
 		if (geocode == null) {
-			warning.showToast("Sorry, c:geo forgot for what cache you want to load static maps.");
+			showToast("Sorry, c:geo forgot for what cache you want to load static maps.");
 			finish();
 			return;
 		}
@@ -122,7 +113,7 @@ public class cgeosmaps extends AbstractActivity {
 
 				for (int level = 1; level <= 5; level++) {
 					try {
-						Bitmap image = BitmapFactory.decodeFile(settings.getStorage() + geocode + "/map_" + level);
+						Bitmap image = BitmapFactory.decodeFile(cgSettings.getStorage() + geocode + "/map_" + level);
 						if (image != null) {
 							maps.add(image);
 						}
@@ -134,7 +125,7 @@ public class cgeosmaps extends AbstractActivity {
 				if (maps.isEmpty() == true) {
 					for (int level = 1; level <= 5; level++) {
 						try {
-							Bitmap image = BitmapFactory.decodeFile(settings.getStorageSec() + geocode + "/map_" + level);
+							Bitmap image = BitmapFactory.decodeFile(cgSettings.getStorageSec() + geocode + "/map_" + level);
 							if (image != null) {
 								maps.add(image);
 							}

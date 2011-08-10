@@ -17,7 +17,7 @@ public class cgDirection {
 
 	public Double directionNow = null;
 
-	public cgDirection(cgeoapplication appIn, Context contextIn, cgUpdateDir dirUpdateIn, cgWarning warningIn) {
+	public cgDirection(Context contextIn, cgUpdateDir dirUpdateIn) {
 		context = contextIn;
 		dirUpdate = dirUpdateIn;
 		sensorListener = new cgeoSensorListener();

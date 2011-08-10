@@ -156,7 +156,7 @@ public class cgData {
 	private static final String dbCreateLogImages = ""
 			+ "create table " + dbTableLogImages + " ("
 			+ "_id integer primary key autoincrement, "
-			+ "log_id integer not null, " 
+			+ "log_id integer not null, "
 			+ "title text not null, "
 			+ "url text not null"
 			+ "); ";
@@ -182,7 +182,7 @@ public class cgData {
 			+ "description text, "
 			+ "geocode text "
 			+ "); ";
-	
+
 	private static final String dbCreateSearchDestinationHistory = ""
 		+ "create table " + dbTableSearchDestionationHistory + " ("
 		+ "_id integer primary key autoincrement, "
@@ -190,7 +190,7 @@ public class cgData {
 		+ "latitude double, "
 		+ "longitude double "
 		+ "); ";
-	
+
 	public boolean initialized = false;
 
 	public cgData(Context contextIn) {
@@ -329,7 +329,7 @@ public class cgData {
 		return null;
 	}
 
-	public File isRestoreFile() {
+	public static File isRestoreFile() {
 		final String directoryImg = cgSettings.cache;
 		final String fileSource = Environment.getExternalStorageDirectory() + "/" + directoryImg + "/cgeo.sqlite";
 
@@ -721,7 +721,7 @@ public class cgData {
 							Log.e(cgSettings.tag, "Failed to upgrade to ver. 52", e);
 						}
 					}
-			
+
 					if (oldVersion < 53) { // upgrade to 53
 						try {
 							db.execSQL("alter table " + dbTableCaches + " add column onWatchlist integer");
@@ -734,7 +734,7 @@ public class cgData {
 
 					if (oldVersion < 54) { // update to 54
 						try {
-							db.execSQL(dbCreateLogImages);						
+							db.execSQL(dbCreateLogImages);
 						} catch (Exception e) {
 							Log.e(cgSettings.tag, "Failed to upgrade to ver. 54: " + e.toString());
 
@@ -743,7 +743,7 @@ public class cgData {
 
 					if (oldVersion < 55) { // update to 55
 						try {
-							db.execSQL("alter table " + dbTableCaches + " add column personal_note text");						
+							db.execSQL("alter table " + dbTableCaches + " add column personal_note text");
 						} catch (Exception e) {
 							Log.e(cgSettings.tag, "Failed to upgrade to ver. 55: " + e.toString());
 
@@ -1270,12 +1270,12 @@ public class cgData {
 
 		return true;
 	}
-	
+
 	/**
-	 * Persists the given <code>destination</code> into the database. 
-	 * 
+	 * Persists the given <code>destination</code> into the database.
+	 *
 	 * @param destinations
-	 * @return <code>true</code> if the given destination was successfully 
+	 * @return <code>true</code> if the given destination was successfully
 	 * persisted <code>false</code> otherwise.
 	 */
 	public boolean saveSearchedDestination(cgDestination destination) {
@@ -1287,13 +1287,13 @@ public class cgData {
 			init();
 
 			databaseRW.beginTransaction();
-			
+
 			try {
 				ContentValues values = new ContentValues();
 				values.put("date", destination.getDate());
 				values.put("latitude", destination.getLatitude());
 				values.put("longitude", destination.getLongitude());
-				
+
 				long id = databaseRW.insert(dbTableSearchDestionationHistory, null, values);
 				destination.setId(id);
 				databaseRW.setTransactionSuccessful();
@@ -1475,10 +1475,10 @@ public class cgData {
 					values.put("log", oneLog.log);
 					values.put("date", oneLog.date);
 					values.put("found", oneLog.found);
-					
+
 					long log_id = databaseRW.insert(dbTableLogs, null, values);
-					
-					if ((oneLog.logImages != null) && (oneLog.logImages.size() > 0)) { 
+
+					if ((oneLog.logImages != null) && (oneLog.logImages.size() > 0)) {
 						for (cgImage img : oneLog.logImages) {
 							values.clear();
 							values.put("log_id", log_id);
@@ -1864,7 +1864,7 @@ public class cgData {
 								cache.attributes.addAll(attributes);
 							}
 						}
-						
+
 						if (loadW == true) {
 							ArrayList<cgWaypoint> waypoints = loadWaypoints(cache.geocode);
 							if (waypoints != null && waypoints.isEmpty() == false) {
@@ -2128,11 +2128,11 @@ public class cgData {
 
 		return spoilers;
 	}
-	
+
 	/**
 	 * Loads the history of previously entered destinations from
 	 * the database. If no destinations exist, an {@link Collections#emptyList()}
-	 * will be returned. 
+	 * will be returned.
 	 * @return A list of previously entered destinations or an empty list.
 	 */
 	public List<cgDestination> loadHistoryOfSearchedLocations() {
@@ -2146,7 +2146,7 @@ public class cgData {
 				null, null, null, "date desc", "100");
 
 		destinations = new LinkedList<cgDestination>();
-		
+
 		if (cursor != null && cursor.getCount() > 0) {
 			cursor.moveToFirst();
 
@@ -2162,19 +2162,19 @@ public class cgData {
 			} while (cursor.moveToNext());
 
 		}
-		
+
 		if (cursor != null) {
 			cursor.close();
 		}
 
 		return destinations;
 	}
-	
+
 	public boolean clearSearchedDestinations() {
 		boolean success = true;
 		init();
 		databaseRW.beginTransaction();
-		
+
 		try {
 			databaseRW.delete(dbTableSearchDestionationHistory, null, null);
 			databaseRW.setTransactionSuccessful();
@@ -2185,7 +2185,7 @@ public class cgData {
 		finally{
 			databaseRW.endTransaction();
 		}
-		
+
 		return success;
 	}
 
@@ -2221,7 +2221,7 @@ public class cgData {
 				log.date = (long) cursor.getLong(cursor.getColumnIndex("date"));
 				log.found = (int) cursor.getInt(cursor.getColumnIndex("found"));
 				log.logImages = loadLogImages(log.id);
-				
+
 				logs.add(log);
 			} while (cursor.moveToNext());
 		}
@@ -2270,12 +2270,12 @@ public class cgData {
 
 		return logCounts;
 	}
-	
+
 	public ArrayList<cgImage> loadLogImages(int log_id) {
 		init();
-		
+
 		ArrayList<cgImage> logImgList = new ArrayList<cgImage>();
-		
+
 		Cursor cursor = null;
 		cursor = databaseRO.query(
 				dbTableLogImages,
@@ -2286,7 +2286,7 @@ public class cgData {
 				null,
 				null,
 				"100");
-		
+
 		if (cursor != null && cursor.getCount() > 0) {
 			cursor.moveToFirst();
 
@@ -2301,8 +2301,8 @@ public class cgData {
 		if (cursor != null) {
 			cursor.close();
 		}
-		
-		return logImgList;		
+
+		return logImgList;
 	}
 
 	public ArrayList<cgTrackable> loadInventory(String geocode) {
@@ -3016,7 +3016,7 @@ public class cgData {
 			Log.e(cgSettings.tag, "cgData.saveVisitDate: " + e.toString());
 		}
 	}
-	
+
 	public void clearVisitDate(String geocode) {
         if (geocode == null || geocode.length() == 0) {
             return;
@@ -3212,9 +3212,9 @@ public class cgData {
 			success = false;
 		} else{
 			init();
-			
+
 			databaseRW.beginTransaction();
-		
+
 			try {
 				databaseRW.delete(dbTableSearchDestionationHistory, "_id = " +destination.getId(), null);
 				databaseRW.setTransactionSuccessful();
@@ -3225,7 +3225,7 @@ public class cgData {
 				databaseRW.endTransaction();
 			}
 		}
-			
+
 		return success;
 	}
 }
