@@ -39,6 +39,7 @@ public class cgCache {
 	public Double longitude = null;
 	public boolean reliableLatLon = false;
 	public Double elevation = null;
+	public String personalNote = null;
 	public String shortdesc = "";
 	public String description = "";
 	public boolean disabled = false;
@@ -172,6 +173,9 @@ public class cgCache {
 		}
 		if (elevation == null) {
 			elevation = oldCache.elevation;
+		}
+		if (personalNote == null || personalNote.length() == 0) {
+			personalNote = oldCache.personalNote;
 		}
 		if (shortdesc == null || shortdesc.length() == 0) {
 			shortdesc = oldCache.shortdesc;

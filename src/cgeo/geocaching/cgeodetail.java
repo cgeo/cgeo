@@ -899,6 +899,16 @@ public class cgeodetail extends AbstractActivity {
 				offlineStore.setOnClickListener(new storeCache());
 			}
 
+			// cache personal note
+			if (cache.personalNote != null && cache.personalNote.length() > 0) {
+				((LinearLayout) findViewById(R.id.personalnote_box)).setVisibility(View.VISIBLE);
+
+				TextView personalNoteText = (TextView) findViewById(R.id.personalnote);
+				personalNoteText.setVisibility(View.VISIBLE);
+				personalNoteText.setText(cache.personalNote, TextView.BufferType.SPANNABLE);
+				personalNoteText.setMovementMethod(LinkMovementMethod.getInstance());
+			}
+
 			// cache short desc
 			if (cache.shortdesc != null && cache.shortdesc.length() > 0) {
 				((LinearLayout) findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
@@ -1468,6 +1478,10 @@ public class cgeodetail extends AbstractActivity {
 			description.append("\n\n");
 			if (cache.shortdesc != null && cache.shortdesc.length() > 0) {
 				description.append(Html.fromHtml(cache.shortdesc).toString());
+			}
+
+			if (cache.personalNote != null && cache.personalNote.length() > 0) {
+				description.append("\n\n"+Html.fromHtml(cache.personalNote).toString());
 			}
 
 			ContentValues event = new ContentValues();

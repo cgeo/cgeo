@@ -93,10 +93,11 @@ public class cgBase {
 	private Resources res = null;
 	private HashMap<String, String> cookies = new HashMap<String, String>();
 	private static final String passMatch = "[/\\?&]*[Pp]ass(word)?=[^&^#^$]+";
-	private final Pattern patternLoggedIn = Pattern.compile("<span class=\"Success\">You are logged in as[^<]*<strong[^>]*>([^<]+)</strong>[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-	private final Pattern patternLogged2In = Pattern.compile("<strong>[^\\w]*Hello,[^<]*<a[^>]+>([^<]+)</a>[^<]*</strong>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-	private final Pattern patternViewstate = Pattern.compile("id=\"__VIEWSTATE\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-	private final Pattern patternViewstate1 = Pattern.compile("id=\"__VIEWSTATE1\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+	private static final Pattern patternLoggedIn = Pattern.compile("<span class=\"Success\">You are logged in as[^<]*<strong[^>]*>([^<]+)</strong>[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+	private static final Pattern patternLogged2In = Pattern.compile("<strong>[^\\w]*Hello,[^<]*<a[^>]+>([^<]+)</a>[^<]*</strong>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+	private static final Pattern patternViewstate = Pattern.compile("id=\"__VIEWSTATE\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+	private static final Pattern patternViewstate1 = Pattern.compile("id=\"__VIEWSTATE1\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+	private static final Pattern patternIsPremium = Pattern.compile("<span id=\"ctl00_litPMLevel\"", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	public static final double kmInMiles = 1 / 1.609344;
 	public static final double deg2rad = Math.PI / 180;
 	public static final double rad2deg = 180 / Math.PI;
@@ -471,8 +472,17 @@ public class cgBase {
 			return -5; // no login page
 		}
 	}
+	
+	public static Boolean isPremium(String page)
+	{
+		if (checkLogin(page)) {
+			final Matcher matcherIsPremium = patternIsPremium.matcher(page);
+			return matcherIsPremium.find();
+		} else 
+			return false;
+	}
 
-	public Boolean checkLogin(String page) {
+	public static Boolean checkLogin(String page) {
 		if (page == null || page.length() == 0) {
 			Log.e(cgSettings.tag, "cgeoBase.checkLogin: No page given");
 			return false;
@@ -1087,6 +1097,7 @@ public class cgBase {
 		final Pattern patternLatLon = Pattern.compile("<span id=\"ctl00_ContentBody_LatLon\"[^>]*>(<b>)?([^<]*)(<\\/b>)?<\\/span>", Pattern.CASE_INSENSITIVE);
 		final Pattern patternLocation = Pattern.compile("<span id=\"ctl00_ContentBody_Location\"[^>]*>In ([^<]*)", Pattern.CASE_INSENSITIVE);
 		final Pattern patternHint = Pattern.compile("<p>([^<]*<strong>)?[^\\w]*Additional Hints([^<]*<\\/strong>)?[^\\(]*\\(<a[^>]+>Encrypt</a>\\)[^<]*<\\/p>[^<]*<div id=\"div_hint\"[^>]*>(.*)</div>[^<]*<div id=[\\'|\"]dk[\\'|\"]", Pattern.CASE_INSENSITIVE);
+		final Pattern patternPersonalNote = Pattern.compile("<p id=\"cache_note\"[^>]*>([^<]*)</p>", Pattern.CASE_INSENSITIVE);
 		final Pattern patternDescShort = Pattern.compile("<div class=\"UserSuppliedContent\">[^<]*<span id=\"ctl00_ContentBody_ShortDescription\"[^>]*>((?:(?!</span>[^\\w^<]*</div>).)*)</span>[^\\w^<]*</div>", Pattern.CASE_INSENSITIVE);
 		final Pattern patternDesc = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>" + "(.*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>[^\\w]*Additional Hints</strong>", Pattern.CASE_INSENSITIVE);
 		final Pattern patternCountLogs = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p>(.*)<\\/p><\\/span>", Pattern.CASE_INSENSITIVE);
@@ -1436,6 +1447,19 @@ public class cgBase {
 		Log.d(cgSettings.tag, "location: " + cache.location);
 		Log.d(cgSettings.tag, "hint: " + cache.hint);
 		*/
+
+		// cache personal note
+		try {
+			final Matcher matcherPersonalNote = patternPersonalNote.matcher(page);
+			if (matcherPersonalNote.find()) {
+				if (matcherPersonalNote.groupCount() > 0) {
+					cache.personalNote = getMatch(matcherPersonalNote.group(1).trim());
+				}
+			}
+		} catch (Exception e) {
+			// failed to parse cache personal note
+			Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache personal note");
+		}
 
 		// cache short description
 		try {
@@ -4760,7 +4784,7 @@ public class cgBase {
 
 	public String requestJSON(String scheme, String host, String path, String method, String params) {
 		int httpCode = -1;
-		String httpLocation = null;
+		//String httpLocation = null;
 
 		if (method == null) {
 			method = "GET";
@@ -4877,17 +4901,19 @@ public class cgBase {
 		}
 
 		String page = null;
-		if (httpCode == 302 && httpLocation != null) {
+		//This is reported as beeing deadCode (httpLocation is always null)
+		//2011-08-09 - 302 is redirect so something should probably be done
+		/*if (httpCode == 302 && httpLocation != null) {
 			final Uri newLocation = Uri.parse(httpLocation);
 			if (newLocation.isRelative() == true) {
 				page = requestJSONgc(host, path, params);
 			} else {
 				page = requestJSONgc(newLocation.getHost(), newLocation.getPath(), params);
 			}
-		} else {
+		} else {*/
 			replaceWhitespace(buffer);
 			page = buffer.toString();
-		}
+		//}
 
 		if (page != null) {
 			return page;
