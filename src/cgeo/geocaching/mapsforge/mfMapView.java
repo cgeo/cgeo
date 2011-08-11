@@ -89,23 +89,41 @@ public class mfMapView extends MapView implements MapViewImpl {
 
 	@Override
 	public int getLatitudeSpan() {
+		
+		int span = 0;
 
 		Projection projection = getProjection();
 		
-		GeoPoint low = projection.fromPixels(0, 0);
-		GeoPoint high = projection.fromPixels(0, getHeight());
+		if (projection != null && getHeight() > 0) {
+		
+			GeoPoint low = projection.fromPixels(0, 0);
+			GeoPoint high = projection.fromPixels(0, getHeight());
 
-		return Math.abs(high.getLatitudeE6() - low.getLatitudeE6());
+			if (low != null && high != null) {
+				span = Math.abs(high.getLatitudeE6() - low.getLatitudeE6());
+			}
+		}
+		
+		return span;
 	}
 
 	@Override
 	public int getLongitudeSpan() {
+		
+		int span = 0;
+		
 		Projection projection = getProjection();
 		
-		GeoPoint low = projection.fromPixels(0, 0);
-		GeoPoint high = projection.fromPixels(getWidth(), 0);
+		if (projection != null && getWidth() > 0) {
+			GeoPoint low = projection.fromPixels(0, 0);
+			GeoPoint high = projection.fromPixels(getWidth(), 0);
 
-		return Math.abs(high.getLongitudeE6() - low.getLongitudeE6());
+			if (low != null && high != null) {
+				span = Math.abs(high.getLongitudeE6() - low.getLongitudeE6());
+			}
+		}
+
+		return span;
 	}
 
 	@Override
