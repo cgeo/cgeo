@@ -409,14 +409,7 @@ public class cgeoinit extends AbstractActivity {
 			}
 		});
 
-		// Cache db backup
-		TextView lastBackup = (TextView) findViewById(R.id.backup_last);
-		File lastBackupFile = cgeoapplication.isRestoreFile();
-		if (lastBackupFile != null) {
-			lastBackup.setText(res.getString(R.string.init_backup_last) + " " + cgBase.timeOut.format(lastBackupFile.lastModified()) + ", " + cgBase.dateOut.format(lastBackupFile.lastModified()));
-		} else {
-			lastBackup.setText(res.getString(R.string.init_backup_last_no));
-		}
+		showBackupDate();
 
 	}
 
@@ -442,10 +435,14 @@ public class cgeoinit extends AbstractActivity {
 			helpDialog(res.getString(R.string.init_backup_backup), res.getString(R.string.init_backup_failed));
 		}
 
+		showBackupDate();
+	}
+
+	private void showBackupDate() {
 		TextView lastBackup = (TextView) findViewById(R.id.backup_last);
 		File lastBackupFile = cgeoapplication.isRestoreFile();
 		if (lastBackupFile != null) {
-			lastBackup.setText(res.getString(R.string.init_backup_last) + " " + cgBase.timeOut.format(lastBackupFile.lastModified()) + ", " + cgBase.dateOut.format(lastBackupFile.lastModified()));
+			lastBackup.setText(res.getString(R.string.init_backup_last) + " " + base.formatTime(lastBackupFile.lastModified()) + ", " + base.formatDate(lastBackupFile.lastModified()));
 		} else {
 			lastBackup.setText(res.getString(R.string.init_backup_last_no));
 		}

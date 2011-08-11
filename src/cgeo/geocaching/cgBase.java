@@ -19,7 +19,6 @@ import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -61,6 +60,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
 import android.text.Spannable;
+import android.text.format.DateUtils;
 import android.text.style.StrikethroughSpan;
 import android.util.Log;
 import android.view.Display;
@@ -88,9 +88,6 @@ public class cgBase {
 	public static SimpleDateFormat dateTbIn2 = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
 	public static SimpleDateFormat dateSqlIn = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 2010-07-25 14:44:01
 	public static SimpleDateFormat dateGPXIn = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // 2010-04-20T07:00:00Z
-	public static DateFormat dateOut = DateFormat.getDateInstance(DateFormat.LONG, Locale.getDefault());
-	public static DateFormat timeOut = DateFormat.getTimeInstance(DateFormat.SHORT, Locale.getDefault());
-	public static DateFormat dateOutShort = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
 	private Resources res = null;
 	private HashMap<String, String> cookies = new HashMap<String, String>();
 	private static final String passMatch = "[/\\?&]*[Pp]ass(word)?=[^&^#^$]+";
@@ -5513,5 +5510,54 @@ public class cgBase {
 		}
 
 		return elv;
+	}
+
+	/**
+	 * Generate a time string according to system-wide settings (locale, 12/24 hour)
+	 * such as "13:24".
+	 *
+	 * @param context a context
+	 * @param date milliseconds since the epoch
+	 * @return the formatted string
+	 */
+	public String formatTime(long date) {
+		return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_TIME);
+	}
+
+	/**
+	 * Generate a date string according to system-wide settings (locale, date format)
+	 * such as "20 December" or "20 December 2010". The year will only be included when necessary.
+	 *
+	 * @param context a context
+	 * @param date milliseconds since the epoch
+	 * @return the formatted string
+	 */
+	public String formatDate(long date) {
+		return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE);
+	}
+
+	/**
+	 * Generate a date string according to system-wide settings (locale, date format)
+	 * such as "20 December 2010". The year will always be included, making it suitable
+	 * to generate long-lived log entries.
+	 *
+	 * @param context a context
+	 * @param date milliseconds since the epoch
+	 * @return the formatted string
+	 */
+	public String formatFullDate(long date) {
+		return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR);
+	}
+
+	/**
+	 * Generate a numeric date string according to system-wide settings (locale, date format)
+	 * such as "10/20/2010".
+	 *
+	 * @param context a context
+	 * @param date milliseconds since the epoch
+	 * @return the formatted string
+	 */
+	public String formatShortDate(long date) {
+		return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_NUMERIC_DATE);
 	}
 }

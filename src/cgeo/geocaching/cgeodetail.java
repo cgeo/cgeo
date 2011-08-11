@@ -766,7 +766,7 @@ public class cgeodetail extends AbstractActivity {
 				} else {
 					itemName.setText(res.getString(R.string.cache_hidden));
 				}
-				itemValue.setText(cgBase.dateOut.format(cache.hidden));
+				itemValue.setText(base.formatFullDate(cache.hidden.getTime()));
 				detailsList.addView(itemLayout);
 			}
 
@@ -1136,8 +1136,7 @@ public class cgeodetail extends AbstractActivity {
 				rowView = (RelativeLayout) inflater.inflate(R.layout.log_item, null);
 
 				if (log.date > 0) {
-					final Date logDate = new Date(log.date);
-					((TextView) rowView.findViewById(R.id.added)).setText(cgBase.dateOutShort.format(logDate));
+					((TextView) rowView.findViewById(R.id.added)).setText(base.formatShortDate(log.date));
 				}
 
 				if (cgBase.logTypes1.containsKey(log.type) == true) {
