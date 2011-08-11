@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 
 import android.app.Dialog;
@@ -198,8 +197,10 @@ public class cgeotouch extends cgLogForm {
 		if ((id >= 0x1 && id <= 0x7)) {
 			text = (EditText) findViewById(R.id.log);
 			textContent = text.getText().toString();
-			dateString = cgBase.dateOut.format(new Date());
-			timeString = cgBase.timeOut.format(new Date());
+
+			final long now = System.currentTimeMillis();
+			dateString = base.formatDate(now);
+			timeString = base.formatTime(now);
 
 			if ((id & 0x4) == 0x4) {
 				addText += dateString;
@@ -277,7 +278,7 @@ public class cgeotouch extends cgLogForm {
 		});
 
 		Button dateButton = (Button)findViewById(R.id.date);
-		dateButton.setText(cgBase.dateOutShort.format(date.getTime()));
+		dateButton.setText(base.formatShortDate(date.getTime().getTime()));
 		dateButton.setOnClickListener(new cgeotouchDateListener());
 
         if (tweetBox == null) tweetBox = (LinearLayout)findViewById(R.id.tweet_box);
@@ -303,7 +304,7 @@ public class cgeotouch extends cgLogForm {
 		date = dateIn;
 
 		final Button dateButton = (Button)findViewById(R.id.date);
-		dateButton.setText(cgBase.dateOutShort.format(date.getTime()));
+		dateButton.setText(base.formatShortDate(date.getTime().getTime()));
 	}
 
 	public void setType(int type) {

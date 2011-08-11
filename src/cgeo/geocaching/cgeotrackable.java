@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import java.net.URLEncoder;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 
 import android.app.ProgressDialog;
@@ -207,7 +206,7 @@ public class cgeotrackable extends AbstractActivity {
 					itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
 					itemName.setText(res.getString(R.string.trackable_released));
-					itemValue.setText(cgBase.dateOut.format(trackable.released));
+					itemValue.setText(base.formatDate(trackable.released.getTime()));
 					detailsList.addView(itemLayout);
 				}
 
@@ -526,8 +525,7 @@ public class cgeotrackable extends AbstractActivity {
 				rowView = (RelativeLayout) inflater.inflate(R.layout.trackable_logitem, null);
 
 				if (log.date > 0) {
-					final Date logDate = new Date(log.date);
-					((TextView) rowView.findViewById(R.id.added)).setText(cgBase.dateOutShort.format(logDate));
+					((TextView) rowView.findViewById(R.id.added)).setText(base.formatShortDate(log.date));
 				}
 
 
