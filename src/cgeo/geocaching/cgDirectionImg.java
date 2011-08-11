@@ -82,7 +82,7 @@ public class cgDirectionImg {
 					}
 				}
 
-				if (ok == true) {
+				if (ok) {
 					break;
 				}
 			} catch (Exception e) {

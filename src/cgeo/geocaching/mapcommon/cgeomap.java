@@ -139,7 +139,7 @@ public class cgeomap extends MapBase {
 				// set title
 				final StringBuilder title = new StringBuilder();
 
-				if (live == true) {
+				if (live) {
 					title.append(res.getString(R.string.map_live));
 				} else {
 					title.append(res.getString(R.string.map_map));
@@ -611,7 +611,7 @@ public class cgeomap extends MapBase {
 					}
 				});
 
-				Float etaTime = new Float((detailTotal * (float) 7) / 60);
+				Float etaTime = Float.valueOf((detailTotal * (float) 7) / 60);
 				if (etaTime < 0.4) {
 					waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
 				} else if (etaTime < 1.5) {
@@ -643,6 +643,10 @@ public class cgeomap extends MapBase {
 			boolean mapRestartRequired = switchMapSource(mapSource);
 
 			if (mapRestartRequired) {
+				// close old mapview
+				activity.finish();
+			
+				// prepare information to restart a similar view
 				Intent mapIntent = new Intent(activity, settings.getMapFactory().getMapClass());
 
 				mapIntent.putExtra("detail", fromDetailIntent);
@@ -657,10 +661,10 @@ public class cgeomap extends MapBase {
 				mapState[1] = mapCenter.getLongitudeE6();
 				mapState[2] = mapView.getMapZoomLevel();
 				mapIntent.putExtra("mapstate", mapState);
-
+				
+				// start the new map
 				activity.startActivity(mapIntent);
-
-				activity.finish();
+				
 			}
 
 			return true;
@@ -696,7 +700,7 @@ public class cgeomap extends MapBase {
 
 		prefsEdit.putInt("mapsource", settings.mapSource.ordinal());
 		prefsEdit.commit();
-
+		
 		boolean mapRestartRequired = settings.mapSource.isGoogleMapSource()!= settings.mapSourceUsed.isGoogleMapSource();
 
 		if (!mapRestartRequired) {
@@ -751,7 +755,7 @@ public class cgeomap extends MapBase {
 				}
 
 				if (geo.latitudeNow != null && geo.longitudeNow != null) {
-					if (followMyLocation == true) {
+					if (followMyLocation) {
 						myLocationInMiddle();
 					} else {
 						// move blue arrow
@@ -763,7 +767,7 @@ public class cgeomap extends MapBase {
 					if (geo.bearingNow != null) {
 						overlayMyLoc.setHeading(geo.bearingNow);
 					} else {
-						overlayMyLoc.setHeading(new Double(0));
+						overlayMyLoc.setHeading(Double.valueOf(0));
 					}
 				}
 			} catch (Exception e) {
@@ -1576,7 +1580,7 @@ public class cgeomap extends MapBase {
 
 			for (String geocode : geocodes) {
 				try {
-					if (stop == true) {
+					if (stop) {
 						break;
 					}
 
@@ -1594,7 +1598,7 @@ public class cgeomap extends MapBase {
 							}
 						}
 
-						if (stop == true) {
+						if (stop) {
 							Log.i(cgSettings.tag, "Stopped storing process.");
 
 							break;
@@ -1729,13 +1733,13 @@ public class cgeomap extends MapBase {
 		}
 
 		if (status == null) {
-			if (followMyLocation == true) {
+			if (followMyLocation) {
 				myLocSwitch.setImageResource(R.drawable.my_location_on);
 			} else {
 				myLocSwitch.setImageResource(R.drawable.my_location_off);
 			}
 		} else {
-			if (status == true) {
+			if (status) {
 				myLocSwitch.setImageResource(R.drawable.my_location_on);
 			} else {
 				myLocSwitch.setImageResource(R.drawable.my_location_off);
@@ -1753,7 +1757,7 @@ public class cgeomap extends MapBase {
 				myLocSwitch = (ImageView) activity.findViewById(R.id.my_position);
 			}
 
-			if (followMyLocation == true) {
+			if (followMyLocation) {
 				followMyLocation = false;
 
 				myLocSwitch.setImageResource(R.drawable.my_location_off);

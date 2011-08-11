@@ -9,8 +9,8 @@ public class cgCoord {
 	public String name = "";
 	public boolean found = false;
 	public boolean disabled = false;
-	public Double latitude = new Double(0);
-	public Double longitude = new Double(0);
+	public Double latitude = Double.valueOf(0);
+	public Double longitude = Double.valueOf(0);
 	public Float difficulty = null;
 	public Float terrain = null;
 	public String size = null;

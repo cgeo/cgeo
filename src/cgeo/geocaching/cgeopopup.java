@@ -156,7 +156,7 @@ public class cgeopopup extends AbstractActivity {
 				menu.findItem(5).setVisible(false);
 			}
 
-			if (fromDetail == false && settings.isLogin() == true) {
+			if (fromDetail == false && settings.isLogin()) {
 				menu.findItem(6).setEnabled(true);
 			} else {
 				menu.findItem(6).setEnabled(false);
@@ -254,7 +254,7 @@ public class cgeopopup extends AbstractActivity {
 			detailsList.removeAllViews();
 
 			// actionbar icon
-			if (cache.type != null && gcIcons.containsKey(cache.type) == true) { // cache icon
+			if (cache.type != null && gcIcons.containsKey(cache.type)) { // cache icon
 				((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable) getResources().getDrawable(gcIcons.get(cache.type)), null, null, null);
 			} else { // unknown cache type, "mystery" icon
 				((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable) getResources().getDrawable(gcIcons.get("mystery")), null, null, null);
@@ -266,7 +266,7 @@ public class cgeopopup extends AbstractActivity {
 			itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
 			itemName.setText(res.getString(R.string.cache_type));
-			if (cgBase.cacheTypesInv.containsKey(cache.type) == true) { // cache icon
+			if (cgBase.cacheTypesInv.containsKey(cache.type)) { // cache icon
 				if (cache.size != null && cache.size.length() > 0) {
 					itemValue.setText(cgBase.cacheTypesInv.get(cache.type) + " (" + cache.size + ")");
 				} else {
@@ -291,7 +291,7 @@ public class cgeopopup extends AbstractActivity {
 			detailsList.addView(itemLayout);
 
 			// cache state
-			if (cache.archived == true || cache.disabled == true || cache.members == true || cache.found == true) {
+			if (cache.archived || cache.disabled || cache.members || cache.found) {
 				itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
 				itemName = (TextView) itemLayout.findViewById(R.id.name);
 				itemValue = (TextView) itemLayout.findViewById(R.id.value);
@@ -299,25 +299,25 @@ public class cgeopopup extends AbstractActivity {
 				itemName.setText(res.getString(R.string.cache_status));
 
 				StringBuilder state = new StringBuilder();
-				if (cache.found == true) {
+				if (cache.found) {
 					if (state.length() > 0) {
 						state.append(", ");
 					}
 					state.append(res.getString(R.string.cache_status_found));
 				}
-				if (cache.archived == true) {
+				if (cache.archived) {
 					if (state.length() > 0) {
 						state.append(", ");
 					}
 					state.append(res.getString(R.string.cache_status_archived));
 				}
-				if (cache.disabled == true) {
+				if (cache.disabled) {
 					if (state.length() > 0) {
 						state.append(", ");
 					}
 					state.append(res.getString(R.string.cache_status_disabled));
 				}
-				if (cache.members == true) {
+				if (cache.members) {
 					if (state.length() > 0) {
 						state.append(", ");
 					}
@@ -587,7 +587,7 @@ public class cgeopopup extends AbstractActivity {
 	private class storeCache implements View.OnClickListener {
 
 		public void onClick(View arg0) {
-			if (dropDialog != null && dropDialog.isShowing() == true) {
+			if (dropDialog != null && dropDialog.isShowing()) {
 				showToast("Still removing this cache.");
 				return;
 			}
@@ -616,7 +616,7 @@ public class cgeopopup extends AbstractActivity {
 	private class dropCache implements View.OnClickListener {
 
 		public void onClick(View arg0) {
-			if (storeDialog != null && storeDialog.isShowing() == true) {
+			if (storeDialog != null && storeDialog.isShowing()) {
 				showToast("Still saving this cache.");
 				return;
 			}
