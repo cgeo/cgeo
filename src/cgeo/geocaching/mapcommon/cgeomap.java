@@ -139,7 +139,7 @@ public class cgeomap extends MapBase {
 				// set title
 				final StringBuilder title = new StringBuilder();
 
-				if (live == true) {
+				if (live) {
 					title.append(res.getString(R.string.map_live));
 				} else {
 					title.append(res.getString(R.string.map_map));
@@ -755,7 +755,7 @@ public class cgeomap extends MapBase {
 				}
 
 				if (geo.latitudeNow != null && geo.longitudeNow != null) {
-					if (followMyLocation == true) {
+					if (followMyLocation) {
 						myLocationInMiddle();
 					} else {
 						// move blue arrow
@@ -1580,7 +1580,7 @@ public class cgeomap extends MapBase {
 
 			for (String geocode : geocodes) {
 				try {
-					if (stop == true) {
+					if (stop) {
 						break;
 					}
 
@@ -1598,7 +1598,7 @@ public class cgeomap extends MapBase {
 							}
 						}
 
-						if (stop == true) {
+						if (stop) {
 							Log.i(cgSettings.tag, "Stopped storing process.");
 
 							break;
@@ -1733,13 +1733,13 @@ public class cgeomap extends MapBase {
 		}
 
 		if (status == null) {
-			if (followMyLocation == true) {
+			if (followMyLocation) {
 				myLocSwitch.setImageResource(R.drawable.my_location_on);
 			} else {
 				myLocSwitch.setImageResource(R.drawable.my_location_off);
 			}
 		} else {
-			if (status == true) {
+			if (status) {
 				myLocSwitch.setImageResource(R.drawable.my_location_on);
 			} else {
 				myLocSwitch.setImageResource(R.drawable.my_location_off);
@@ -1757,7 +1757,7 @@ public class cgeomap extends MapBase {
 				myLocSwitch = (ImageView) activity.findViewById(R.id.my_position);
 			}
 
-			if (followMyLocation == true) {
+			if (followMyLocation) {
 				followMyLocation = false;
 
 				myLocSwitch.setImageResource(R.drawable.my_location_off);

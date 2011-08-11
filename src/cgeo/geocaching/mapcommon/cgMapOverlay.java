@@ -173,14 +173,14 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 			CacheOverlayItemImpl item = items.get(index);
 			cgCoord coordinate = item.getCoord();
 
-			if (coordinate.type != null && coordinate.type.equalsIgnoreCase("cache") == true && coordinate.geocode != null && coordinate.geocode.length() > 0) {
+			if (coordinate.type != null && coordinate.type.equalsIgnoreCase("cache") && coordinate.geocode != null && coordinate.geocode.length() > 0) {
 				Intent popupIntent = new Intent(context, cgeopopup.class);
 
 				popupIntent.putExtra("fromdetail", fromDetail);
 				popupIntent.putExtra("geocode", coordinate.geocode);
 
 				context.startActivity(popupIntent);
-			} else if (coordinate.type != null && coordinate.type.equalsIgnoreCase("waypoint") == true && coordinate.id != null && coordinate.id > 0) {
+			} else if (coordinate.type != null && coordinate.type.equalsIgnoreCase("waypoint") && coordinate.id != null && coordinate.id > 0) {
 				Intent popupIntent = new Intent(context, cgeowaypoint.class);
 
 				popupIntent.putExtra("waypoint", coordinate.id);
@@ -240,7 +240,7 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 				dialog.setTitle("cache");
 
 				String cacheType;
-				if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec) == true) {
+				if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec)) {
 					cacheType = cgBase.cacheTypesInv.get(coordinate.typeSpec);
 				} else {
 					cacheType = cgBase.cacheTypesInv.get("mystery");
@@ -280,7 +280,7 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 				dialog.setTitle("waypoint");
 
 				String waypointType;
-				if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec) == true) {
+				if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec)) {
 					waypointType = cgBase.waypointTypes.get(coordinate.typeSpec);
 				} else {
 					waypointType = cgBase.waypointTypes.get("waypoint");

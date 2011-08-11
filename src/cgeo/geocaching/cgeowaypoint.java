@@ -91,7 +91,7 @@ public class cgeowaypoint extends AbstractActivity {
 					buttonEdit.setOnClickListener(new editWaypointListener(waypoint.id));
 
 					Button buttonDelete = (Button) findViewById(R.id.delete);
-					if (waypoint.type != null && waypoint.type.equalsIgnoreCase("own") == true) {
+					if (waypoint.type != null && waypoint.type.equalsIgnoreCase("own")) {
 						buttonDelete.setOnClickListener(new deleteWaypointListener(waypoint.id));
 						buttonDelete.setVisibility(View.VISIBLE);
 					}

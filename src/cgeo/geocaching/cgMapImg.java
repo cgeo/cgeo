@@ -103,7 +103,7 @@ public class cgMapImg {
 					}
 				}
 
-				if (ok == true) {
+				if (ok) {
 					break;
 				}
 			} catch (Exception e) {

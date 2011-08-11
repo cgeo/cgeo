@@ -187,7 +187,7 @@ public class cgGPXParser {
 
 				final String content = Html.fromHtml(body).toString().trim();
 				cache.name = content;
-				if (cache.name.length() > 2 && cache.name.substring(0, 2).equalsIgnoreCase("GC") == true) {
+				if (cache.name.length() > 2 && cache.name.substring(0, 2).equalsIgnoreCase("GC")) {
 					cache.geocode = cache.name.toUpperCase();
 				}
 			}
@@ -514,7 +514,7 @@ public class cgGPXParser {
 
 				public void end(String body) {
 					final String content = body.trim().toLowerCase();
-					if (cgBase.logTypes0.containsKey(content) == true) {
+					if (cgBase.logTypes0.containsKey(content)) {
 						log.type = cgBase.logTypes0.get(content);
 					} else {
 						log.type = 4;
