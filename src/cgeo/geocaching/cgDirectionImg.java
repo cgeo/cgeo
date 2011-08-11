@@ -73,11 +73,11 @@ public class cgDirectionImg {
 							fos.write(buffer, 0, l);
 						}
 						ok = true;
+						fos.flush();
 					} catch (IOException e) {
 						Log.e(cgSettings.tag, "cgDirectionImg.getDrawable (saving to cache): " + e.toString());
 					} finally {
 						is.close();
-						fos.flush();
 						fos.close();
 					}
 				}
