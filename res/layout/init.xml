@@ -169,6 +169,17 @@
 					android:gravity="right"
 					android:orientation="vertical" >
 				<Button style="@style/button"
+						android:id="@+id/signature_template"
+						android:layout_width="wrap_content"
+						android:layout_weight="2"
+						android:layout_marginLeft="10dip"
+						android:layout_marginRight="10dip"
+						android:layout_marginBottom="5dip"
+						android:layout_alignParentLeft="true"
+						android:gravity="center_horizontal"
+						android:textSize="14dip"
+						android:text="@string/init_signature_template_button" />
+				<Button style="@style/button"
 						android:id="@+id/signature_help"
 						android:layout_width="wrap_content"
 						android:layout_weight="1"
@@ -176,7 +187,7 @@
 						android:layout_marginRight="10dip"
 						android:layout_marginBottom="5dip"
 						android:layout_alignParentRight="true"
-						android:gravity="right"
+						android:gravity="center_horizontal"
 						android:textSize="14dip"
 						android:text="@string/init_signature_help_button" />
 			</LinearLayout>

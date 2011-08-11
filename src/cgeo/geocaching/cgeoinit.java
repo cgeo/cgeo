@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +28,11 @@ import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.activity.AbstractActivity;
 
 public class cgeoinit extends AbstractActivity {
+
+	private static final int MENU_ITEM_DATE = 1;
+	private static final int MENU_ITEM_TIME = 2;
+	private static final int MENU_ITEM_USER = 3;
+	private static final int MENU_ITEM_NUMBER = 4;
 
 	private final int SELECT_MAPFILE_REQUEST=1;
 
@@ -91,6 +98,7 @@ public class cgeoinit extends AbstractActivity {
 			init();
 		}
 	};
+	protected boolean enableTemplatesMenu = false;
 
 	public cgeoinit() {
 		super("c:geo-configuration");
@@ -171,6 +179,44 @@ public class cgeoinit extends AbstractActivity {
 		return false;
 	}
 
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		if (enableTemplatesMenu) {
+			menu.setHeaderTitle(R.string.init_signature_template_button);
+			menu.add(0, MENU_ITEM_DATE, 0, R.string.init_signature_template_date);
+			menu.add(0, MENU_ITEM_TIME, 0, R.string.init_signature_template_time);
+			menu.add(0, MENU_ITEM_USER, 0, R.string.init_signature_template_user);
+			menu.add(0, MENU_ITEM_NUMBER, 0, R.string.init_signature_template_number);
+		}
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case MENU_ITEM_DATE:
+			return insertSignatureTemplate("DATE");
+		case MENU_ITEM_NUMBER:
+			return insertSignatureTemplate("NUMBER");
+		case MENU_ITEM_TIME:
+			return insertSignatureTemplate("TIME");
+		case MENU_ITEM_USER:
+			return insertSignatureTemplate("USER");
+		default:
+			break;
+		}
+		return super.onContextItemSelected(item);
+	}
+	
+	private boolean insertSignatureTemplate(final String template) {
+		EditText sig = (EditText) findViewById(R.id.signature);
+		String insertText = "["+template+"]";
+		int start = sig.getSelectionStart();
+		int end = sig.getSelectionEnd();
+		sig.getText().replace(Math.min(start, end), Math.max(start, end), insertText);
+		return true;
+	}
+
 	public void init() {
 
 		// geocaching.com settings
@@ -248,12 +294,17 @@ public class cgeoinit extends AbstractActivity {
 				helpDialog(res.getString(R.string.init_signature_help_title), res.getString(R.string.init_signature_help_text));
 			}
 		});
+		Button templates = (Button) findViewById(R.id.signature_template);
+		registerForContextMenu(templates);
+		templates.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				enableTemplatesMenu = true;
+				openContextMenu(v);
+				enableTemplatesMenu = false;
+			}
+		});
 		CheckBox autoinsertButton = (CheckBox) findViewById(R.id.sigautoinsert);
-        if (prefs.getBoolean("sigautoinsert", false)) {
-            autoinsertButton.setChecked(true);
-        } else {
-            autoinsertButton.setChecked(false);
-        }
+        autoinsertButton.setChecked(prefs.getBoolean("sigautoinsert", false));
         autoinsertButton.setOnClickListener(new cgeoChangeSignatureAutoinsert());
 
 		// Other settings
