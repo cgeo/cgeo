@@ -1653,13 +1653,15 @@ public class cgeomap extends MapBase {
 			alreadyCentered = true;
 		} else if (!centered && (geocodeCenter != null || searchIdIntent != null)) {
 			try {
-				ArrayList<Object> viewport;
+				ArrayList<Object> viewport = null;
 
 				if (geocodeCenter != null) {
 					viewport = app.getBounds(geocodeCenter);
 				} else {
 					viewport = app.getBounds(searchIdCenter);
 				}
+				
+				if (viewport == null) return;
 
 				Integer cnt = (Integer) viewport.get(0);
 				Integer minLat = null;
