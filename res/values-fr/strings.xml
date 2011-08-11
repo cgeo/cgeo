@@ -167,6 +167,11 @@
   <string name="init_twitter_authorize">autorisation de c:geo</string>
   <string name="init_twitter_publish">publication d\'une cache trouvée</string>
   <string name="init_signature">Signature</string>
+  <string name="init_signature_template_button">Insérer modèle</string>
+  <string name="init_signature_template_date">Date</string>
+  <string name="init_signature_template_time">Heure</string>
+  <string name="init_signature_template_user">Utilisateur</string>
+  <string name="init_signature_template_number">Nombre</string>
   <string name="init_other">autres options</string>
   <string name="init_skin">aspect sobre (nécessite le redémarrage de c:geo)</string>
   <string name="init_transparent">accueil de c:geo transparent</string>
