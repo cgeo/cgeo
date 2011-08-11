@@ -122,7 +122,7 @@ public class cgeosmaps extends AbstractActivity {
 					}
 				}
 
-				if (maps.isEmpty() == true) {
+				if (maps.isEmpty()) {
 					for (int level = 1; level <= 5; level++) {
 						try {
 							Bitmap image = BitmapFactory.decodeFile(cgSettings.getStorageSec() + geocode + "/map_" + level);

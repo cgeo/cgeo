@@ -41,7 +41,7 @@ public class cgeoauth extends AbstractActivity {
 
 		@Override
 		public void handleMessage(Message msg) {
-			if (requestTokenDialog != null && requestTokenDialog.isShowing() == true) {
+			if (requestTokenDialog != null && requestTokenDialog.isShowing()) {
 				requestTokenDialog.dismiss();
 			}
 
@@ -64,7 +64,7 @@ public class cgeoauth extends AbstractActivity {
 
 		@Override
 		public void handleMessage(Message msg) {
-			if (changeTokensDialog != null && changeTokensDialog.isShowing() == true) {
+			if (changeTokensDialog != null && changeTokensDialog.isShowing()) {
 				changeTokensDialog.dismiss();
 			}
 
@@ -187,11 +187,11 @@ public class cgeoauth extends AbstractActivity {
 
 				if (line != null && line.length() > 0) {
 					final Matcher paramsMatcher1 = paramsPattern1.matcher(line);
-					if (paramsMatcher1.find() == true && paramsMatcher1.groupCount() > 0) {
+					if (paramsMatcher1.find() && paramsMatcher1.groupCount() > 0) {
 						OAtoken = paramsMatcher1.group(1).toString();
 					}
 					final Matcher paramsMatcher2 = paramsPattern2.matcher(line);
-					if (paramsMatcher2.find() == true && paramsMatcher2.groupCount() > 0) {
+					if (paramsMatcher2.find() && paramsMatcher2.groupCount() > 0) {
 						OAtokenSecret = paramsMatcher2.group(1).toString();
 					}
 
@@ -295,11 +295,11 @@ public class cgeoauth extends AbstractActivity {
 			OAtokenSecret = "";
 
 			final Matcher paramsMatcher1 = paramsPattern1.matcher(line);
-			if (paramsMatcher1.find() == true && paramsMatcher1.groupCount() > 0) {
+			if (paramsMatcher1.find() && paramsMatcher1.groupCount() > 0) {
 				OAtoken = paramsMatcher1.group(1).toString();
 			}
 			final Matcher paramsMatcher2 = paramsPattern2.matcher(line);
-			if (paramsMatcher2.find() == true && paramsMatcher2.groupCount() > 0) {
+			if (paramsMatcher2.find() && paramsMatcher2.groupCount() > 0) {
 				OAtokenSecret = paramsMatcher2.group(1).toString();
 			}
 

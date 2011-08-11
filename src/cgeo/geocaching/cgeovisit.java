@@ -60,7 +60,7 @@ public class cgeovisit extends cgLogForm {
 	private Handler showProgressHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			if (progressBar == true) {
+			if (progressBar) {
 				showProgress(true);
 			}
 		}
@@ -392,7 +392,7 @@ public class cgeovisit extends cgLogForm {
 				addText.append("\n");
 			}
 
-			if (settings.getSignature().contains("[NUMBER]") == true) {
+			if (settings.getSignature().contains("[NUMBER]")) {
 				final HashMap<String, String> params = new HashMap<String, String>();
 				final String page = base.request(false, "www.geocaching.com", "/my/", "GET", params, false, false, false).getData();
 				int current = cgBase.parseFindCount(page);
@@ -554,7 +554,7 @@ public class cgeovisit extends cgLogForm {
 			types.add(cgBase.LOG_NEEDS_ARCHIVE);
 			types.add(cgBase.LOG_NEEDS_MAINTENANCE);
 		}
-		if (cache.owner.equalsIgnoreCase(settings.getUsername()) == true) {
+		if (cache.owner.equalsIgnoreCase(settings.getUsername())) {
 			types.add(cgBase.LOG_OWNER_MAINTENANCE);
 			types.add(cgBase.LOG_TEMP_DISABLE_LISTING);
 			types.add(cgBase.LOG_ENABLE_LISTING);
@@ -570,7 +570,7 @@ public class cgeovisit extends cgLogForm {
 			typeSelected = log.type;
 			date.setTime(new Date(log.date));
 			text = log.log;
-			if (typeSelected == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin() == true) {
+			if (typeSelected == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin()) {
 				if (post == null) {
 					post = (Button) findViewById(R.id.post);
 				}
@@ -584,7 +584,7 @@ public class cgeovisit extends cgLogForm {
 		}
 
 		if (types.contains(typeSelected) == false) {
-			if (alreadyFound == true) {
+			if (alreadyFound) {
 				typeSelected = cgBase.LOG_NOTE;
 			} else {
 				typeSelected = types.get(0);
@@ -685,7 +685,7 @@ public class cgeovisit extends cgLogForm {
 			post = (Button) findViewById(R.id.post);
 		}
 
-		if (type == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin() == true) {
+		if (type == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin()) {
 			if (rating == 0) {
 				post.setText(res.getString(R.string.log_post_no_rate));
 			} else {
@@ -731,7 +731,7 @@ public class cgeovisit extends cgLogForm {
 			}
 			save.setOnClickListener(new saveListener());
 
-			if (status == true) {
+			if (status) {
 				showToast(res.getString(R.string.info_log_saved));
 				app.saveVisitDate(geocode);
 			} else {
@@ -745,7 +745,7 @@ public class cgeovisit extends cgLogForm {
 		public void onClick(View arg0) {
 			app.clearLogOffline(geocode);
 
-			if (alreadyFound == true) {
+			if (alreadyFound) {
 				typeSelected = cgBase.LOG_NOTE;
 			} else {
 				typeSelected = types.get(0);
@@ -891,12 +891,12 @@ public class cgeovisit extends cgLogForm {
 			if (
 					status == 1 && typeSelected == cgBase.LOG_FOUND_IT && settings.twitter == 1
 					&& settings.tokenPublic != null && settings.tokenPublic.length() > 0 && settings.tokenSecret != null
-					&& settings.tokenSecret.length() > 0 && tweetCheck.isChecked() == true && tweetBox.getVisibility() == View.VISIBLE
+					&& settings.tokenSecret.length() > 0 && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE
 			) {
 				cgBase.postTweetCache(app, settings, geocode);
 			}
 
-			if (status == 1 && typeSelected == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin() == true) {
+			if (status == 1 && typeSelected == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin()) {
 				setRating(cache.guid, rating);
 			}
 

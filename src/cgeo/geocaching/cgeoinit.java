@@ -36,14 +36,14 @@ public class cgeoinit extends AbstractActivity {
 		@Override
 		public void handleMessage(Message msg) {
 			try {
-				if (loginDialog != null && loginDialog.isShowing() == true) {
+				if (loginDialog != null && loginDialog.isShowing()) {
 					loginDialog.dismiss();
 				}
 
 				if (msg.what == 1) {
 					helpDialog(res.getString(R.string.init_login_popup), res.getString(R.string.init_login_popup_ok));
 				} else {
-					if (cgBase.errorRetrieve.containsKey(msg.what) == true) {
+					if (cgBase.errorRetrieve.containsKey(msg.what)) {
 						helpDialog(res.getString(R.string.init_login_popup),
 								res.getString(R.string.init_login_popup_failed_reason) + " " + cgBase.errorRetrieve.get(msg.what) + ".");
 					} else {
@@ -56,7 +56,7 @@ public class cgeoinit extends AbstractActivity {
 				Log.e(cgSettings.tag, "cgeoinit.logInHandler: " + e.toString());
 			}
 
-			if (loginDialog != null && loginDialog.isShowing() == true) {
+			if (loginDialog != null && loginDialog.isShowing()) {
 				loginDialog.dismiss();
 			}
 
@@ -69,7 +69,7 @@ public class cgeoinit extends AbstractActivity {
 		@Override
 		public void handleMessage(Message msg) {
 			try {
-				if (webDialog != null && webDialog.isShowing() == true) {
+				if (webDialog != null && webDialog.isShowing()) {
 					webDialog.dismiss();
 				}
 
@@ -84,7 +84,7 @@ public class cgeoinit extends AbstractActivity {
 				Log.e(cgSettings.tag, "cgeoinit.webHandler: " + e.toString());
 			}
 
-			if (webDialog != null && webDialog.isShowing() == true) {
+			if (webDialog != null && webDialog.isShowing()) {
 				webDialog.dismiss();
 			}
 
@@ -159,7 +159,7 @@ public class cgeoinit extends AbstractActivity {
 			((EditText) findViewById(R.id.passvote)).setText("");
 
 			status = saveValues();
-			if (status == true) {
+			if (status) {
 				showToast(res.getString(R.string.init_cleared));
 			} else {
 				showToast(res.getString(R.string.err_init_cleared));
@@ -508,7 +508,7 @@ public class cgeoinit extends AbstractActivity {
 		public void onClick(View arg0) {
 			CheckBox twitterButton = (CheckBox) findViewById(R.id.twitter_option);
 
-			if (twitterButton.isChecked() == true) {
+			if (twitterButton.isChecked()) {
 				settings.reloadTwitterTokens();
 
 				SharedPreferences.Editor edit = prefs.edit();

@@ -260,7 +260,7 @@ public class cgeopoint extends AbstractActivity {
 			}
 		});
 
-		if (prefs.contains("anylatitude") == true && prefs.contains("anylongitude") == true) {
+		if (prefs.contains("anylatitude") && prefs.contains("anylongitude")) {
 			latitudeEdit.setText(cgBase.formatCoordinate(Double.valueOf(prefs.getFloat("anylatitude", 0f)), "lat", true));
 			longitudeEdit.setText(cgBase.formatCoordinate(Double.valueOf(prefs.getFloat("anylongitude", 0f)), "lon", true));
 		}
@@ -543,15 +543,15 @@ public class cgeopoint extends AbstractActivity {
 			Matcher matcherD = patternD.matcher(distanceText);
 			Matcher matcherE = patternE.matcher(distanceText);
 
-			if (matcherA.find() == true && matcherA.groupCount() > 0) {
+			if (matcherA.find() && matcherA.groupCount() > 0) {
 				distance = (new Double(matcherA.group(1))) * 0.001;
-			} else if (matcherB.find() == true && matcherB.groupCount() > 0) {
+			} else if (matcherB.find() && matcherB.groupCount() > 0) {
 				distance = new Double(matcherB.group(1));
-			} else if (matcherC.find() == true && matcherC.groupCount() > 0) {
+			} else if (matcherC.find() && matcherC.groupCount() > 0) {
 				distance = (new Double(matcherC.group(1))) * 0.0003048;
-			} else if (matcherD.find() == true && matcherD.groupCount() > 0) {
+			} else if (matcherD.find() && matcherD.groupCount() > 0) {
 				distance = (new Double(matcherD.group(1))) * 0.0009144;
-			} else if (matcherE.find() == true && matcherE.groupCount() > 0) {
+			} else if (matcherE.find() && matcherE.groupCount() > 0) {
 				distance = (new Double(matcherE.group(1))) * 1.609344;
 			} else {
 				try {
@@ -598,7 +598,7 @@ public class cgeopoint extends AbstractActivity {
 	}
 
 	private void saveCoords(Double latitude, Double longitude) {
-		if (changed == true && latitude == null || longitude == null) {
+		if (changed && latitude == null || longitude == null) {
 			SharedPreferences.Editor edit = prefs.edit();
 
 			edit.putFloat("anylatitude", latitude.floatValue());
