@@ -84,6 +84,6 @@ public class cgeoabout extends AbstractActivity {
 	}
 
 	public void nutshellmanual(View view) {
-		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://cgeo.carnero.cc/manual/")));
+		startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.cgeo.org/")));
 	}
 }

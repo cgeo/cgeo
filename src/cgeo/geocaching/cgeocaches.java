@@ -1990,7 +1990,7 @@ public class cgeocaches extends AbstractListActivity {
 				if (deviceCode == null) {
 					deviceCode = "";
 				}
-				cgResponse responseFromWeb = base.request(false, "send2cgeo.carnero.cc", "/readCode.php", "GET", "d=" + cgBase.urlencode_rfc3986(deviceCode), 0, true);
+				cgResponse responseFromWeb = base.request(false, "send2.cgeo.org", "/read.html", "GET", "code=" + cgBase.urlencode_rfc3986(deviceCode), 0, true);
 
 				if ((responseFromWeb.getStatusCode() == 200)
 						&& (responseFromWeb.getData().length() > 2)) {

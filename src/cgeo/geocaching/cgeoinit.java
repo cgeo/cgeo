@@ -387,15 +387,6 @@ public class cgeoinit extends AbstractActivity {
 		Button webAuth = (Button) findViewById(R.id.sendToCgeo_register);
 		webAuth.setOnClickListener(new webAuth());
 
-                /*TextView webText = (TextView) findViewById(R.id.sendToCgeo);
-		webText.setClickable(true);
-		webText.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View arg0) {
-				activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://send2cgeo.carnero.cc/")));
-			}
-		});*/
-
 		// Map source settings
 		Spinner mapSourceSelector = (Spinner) findViewById(R.id.mapsource);
 	    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -1010,7 +1001,7 @@ public class cgeoinit extends AbstractActivity {
 
                                         String params = "name="+cgBase.urlencode_rfc3986(nam)+"&code="+cgBase.urlencode_rfc3986(cod);
 
-                                        cgResponse response = base.request(false, "send2cgeo.carnero.cc", "/authDev.php", "GET", params, 0, true);
+                                        cgResponse response = base.request(false, "send2.cgeo.org", "/auth.html", "GET", params, 0, true);
 
                                         if (response.getStatusCode() == 200)
                                         {
