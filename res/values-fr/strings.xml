@@ -246,11 +246,13 @@
   <string name="cache_status_disabled">désactivée</string>
   <string name="cache_status_premium">membres privilégiés seulement</string>
   <string name="cache_geocode">code gc</string>
+  <string name="cache_name">nom</string>
   <string name="cache_type">type</string>
   <string name="cache_distance">distance</string>
   <string name="cache_difficulty">difficultée</string>
   <string name="cache_terrain">terrain</string>
   <string name="cache_rating">note</string>
+  <string name="cache_favourite">favorie</string>
   <string name="cache_owner">propriétaire</string>
   <string name="cache_hidden">cachée</string>
   <string name="cache_event">date</string>
