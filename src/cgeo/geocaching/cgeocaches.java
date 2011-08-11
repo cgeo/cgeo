@@ -136,7 +136,7 @@ public class cgeocaches extends AbstractListActivity {
 	private View listFooter = null;
 	private TextView listFooterText = null;
 	private ProgressDialog waitDialog = null;
-	private Double northHeading = new Double(0);
+	private Double northHeading = Double.valueOf(0);
 	private cgGeo geo = null;
 	private cgDirection dir = null;
 	private cgUpdateLoc geoUpdate = new update();
@@ -1631,7 +1631,7 @@ public class cgeocaches extends AbstractListActivity {
 						if (geo.bearingNow != null) {
 							adapter.setActualHeading(geo.bearingNow);
 						} else {
-							adapter.setActualHeading(new Double(0));
+							adapter.setActualHeading(Double.valueOf(0));
 						}
 					}
 					if (northHeading != null) {

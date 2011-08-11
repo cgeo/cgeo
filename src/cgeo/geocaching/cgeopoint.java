@@ -261,8 +261,8 @@ public class cgeopoint extends AbstractActivity {
 		});
 
 		if (prefs.contains("anylatitude") == true && prefs.contains("anylongitude") == true) {
-			latitudeEdit.setText(cgBase.formatCoordinate(new Double(prefs.getFloat("anylatitude", 0f)), "lat", true));
-			longitudeEdit.setText(cgBase.formatCoordinate(new Double(prefs.getFloat("anylongitude", 0f)), "lon", true));
+			latitudeEdit.setText(cgBase.formatCoordinate(Double.valueOf(prefs.getFloat("anylatitude", 0f)), "lat", true));
+			longitudeEdit.setText(cgBase.formatCoordinate(Double.valueOf(prefs.getFloat("anylongitude", 0f)), "lon", true));
 		}
 
 		Button buttonCurrent = (Button) findViewById(R.id.current);
