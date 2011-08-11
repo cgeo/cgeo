@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
@@ -32,13 +31,9 @@ public class cgeoimages extends AbstractActivity {
 
 	private int img_type;
 	private ArrayList<cgImage> images = new ArrayList<cgImage>();
-	private Resources res = null;
 	private String geocode = null;
 	private String title = null;
 	private String url = null;
-	private cgeoapplication app = null;
-	private cgSettings settings = null;
-	private cgWarning warning = null;
 	private LayoutInflater inflater = null;
 	private ProgressDialog progressDialog = null;
 	private ProgressDialog waitDialog = null;
@@ -60,10 +55,10 @@ public class cgeoimages extends AbstractActivity {
 					}
 					switch (img_type) {
 					case LOG_IMAGE:
-						warning.showToast(res.getString(R.string.warn_load_log_image));
+						showToast(res.getString(R.string.warn_load_log_image));
 						break;
 					case SPOILER_IMAGE:
-						warning.showToast(res.getString(R.string.warn_load_spoiler_image));
+						showToast(res.getString(R.string.warn_load_spoiler_image));
 						break;
 					}
 
@@ -111,7 +106,7 @@ public class cgeoimages extends AbstractActivity {
 							public void run() {
 								BitmapDrawable image = null;
 								try {
-									cgHtmlImg imgGetter = new cgHtmlImg(cgeoimages.this, settings, geocode, true, offline, false, save);
+									cgHtmlImg imgGetter = new cgHtmlImg(cgeoimages.this, geocode, true, offline, false, save);
 
 									image = imgGetter.getDrawable(img.url);
 									Message message = handler.obtainMessage(0, image);
@@ -140,11 +135,6 @@ public class cgeoimages extends AbstractActivity {
 		super.onCreate(savedInstanceState);
 
 		// init
-		res = this.getResources();
-		app = (cgeoapplication) this.getApplication();
-		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(this);
-
 		setTheme();
 		setContentView(R.layout.spoilers);
 
@@ -166,7 +156,7 @@ public class cgeoimages extends AbstractActivity {
 		}
 
 		if (geocode == null) {
-			warning.showToast("Sorry, c:geo forgot for what cache you want to load spoiler images.");
+			showToast("Sorry, c:geo forgot for what cache you want to load spoiler images.");
 			finish();
 			return;
 		}
@@ -175,7 +165,7 @@ public class cgeoimages extends AbstractActivity {
 			title = extras.getString("title");
 			url = extras.getString("url");
 			if ((title == null) || (url == null)) {
-				warning.showToast("Sorry, c:geo forgot which logimage you wanted to load.");
+				showToast("Sorry, c:geo forgot which logimage you wanted to load.");
 				finish();
 				return;
 			}
@@ -223,7 +213,7 @@ public class cgeoimages extends AbstractActivity {
 			(new loadSpoilers()).start();
 			break;
 		default:
-			warning.showToast("Sorry, can't load unknown image type.");
+			showToast("Sorry, can't load unknown image type.");
 			finish();
 		}
 

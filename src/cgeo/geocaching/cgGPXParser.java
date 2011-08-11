@@ -1,5 +1,14 @@
 package cgeo.geocaching;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.xml.sax.Attributes;
+
 import android.os.Handler;
 import android.os.Message;
 import android.sax.Element;
@@ -10,18 +19,10 @@ import android.sax.StartElementListener;
 import android.text.Html;
 import android.util.Log;
 import android.util.Xml;
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import org.xml.sax.Attributes;
 
 public class cgGPXParser {
 
 	private cgeoapplication app = null;
-	private cgBase base = null;
 	private int listId = 1;
 	private cgSearch search = null;
 	private Handler handler = null;
@@ -39,9 +40,8 @@ public class cgGPXParser {
 	private String cmt = null;
 	private String desc = null;
 
-	public cgGPXParser(cgeoapplication appIn, cgBase baseIn, int listIdIn, cgSearch searchIn) {
+	public cgGPXParser(cgeoapplication appIn, int listIdIn, cgSearch searchIn) {
 		app = appIn;
-		base = baseIn;
 		listId = listIdIn;
 		search = searchIn;
 
@@ -130,8 +130,8 @@ public class cgGPXParser {
 						&& ((type == null && sym == null)
 						|| (type != null && type.indexOf("geocache") > -1)
 						|| (sym != null && sym.indexOf("geocache") > -1))) {
-					cache.latitudeString = base.formatCoordinate(cache.latitude, "lat", true);
-					cache.longitudeString = base.formatCoordinate(cache.longitude, "lon", true);
+					cache.latitudeString = cgBase.formatCoordinate(cache.latitude, "lat", true);
+					cache.longitudeString = cgBase.formatCoordinate(cache.longitude, "lon", true);
 					if (cache.inventory != null) {
 						cache.inventoryItems = cache.inventory.size();
 					} else {
@@ -234,7 +234,7 @@ public class cgGPXParser {
 				}
 			}
 		});
-		
+
 		// for GPX 1.0, cache info comes from waypoint node (so called private children,
 		// for GPX 1.1 from extensions node
 		final Element cacheParent = version == 11 ? waypoint.getChild(ns, "extensions") : waypoint;

@@ -10,8 +10,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.cgWarning;
 import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.activity.ActivityMixin;
 
 class GoogleMapsApp extends AbstractNavigationApp implements NavigationApp {
 
@@ -25,7 +25,7 @@ class GoogleMapsApp extends AbstractNavigationApp implements NavigationApp {
 	}
 
 	public boolean invoke(cgGeo geo, Activity activity, Resources res,
-			cgWarning warning, cgCache cache,
+			cgCache cache,
 			Long searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
 		if (cache == null && waypoint == null && latitude == null && longitude == null) {
 			return false;
@@ -47,8 +47,8 @@ class GoogleMapsApp extends AbstractNavigationApp implements NavigationApp {
 
 		Log.i(cgSettings.tag, "cgBase.runExternalMap: No maps application available.");
 
-		if (warning != null && res != null) {
-			warning.showToast(res.getString(R.string.err_application_no));
+		if (res != null) {
+			ActivityMixin.showToast(activity, res.getString(R.string.err_application_no));
 		}
 
 		return false;

@@ -3,7 +3,6 @@ package cgeo.geocaching;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
@@ -13,16 +12,10 @@ import android.widget.TextView;
 import cgeo.geocaching.activity.AbstractActivity;
 
 public class cgeoabout extends AbstractActivity {
-	private Resources res = null;
-	private cgSettings settings = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		// init
-		res = this.getResources();
-		settings = new cgSettings(this, this.getSharedPreferences(cgSettings.preferences, 0));
 
 		setTheme();
 		setContentView(R.layout.about);

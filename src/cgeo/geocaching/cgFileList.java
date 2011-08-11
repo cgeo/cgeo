@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -17,13 +16,8 @@ import cgeo.geocaching.activity.AbstractListActivity;
 public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractListActivity {
 
 	private ArrayList<File> files = new ArrayList<File>();
-	private cgeoapplication app = null;
-	private cgSettings settings = null;
-	private cgBase base = null;
-	private cgWarning warning = null;
 	private T adapter = null;
 	private ProgressDialog waitDialog = null;
-	private Resources res = null;
 	private loadFiles searchingThread = null;
 	private boolean endSearching = false;
 	private int listId = 1;
@@ -32,7 +26,7 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 		@Override
 		public void handleMessage(Message msg) {
 			if (msg.obj != null && waitDialog != null) {
-				waitDialog.setMessage(getRes().getString(R.string.file_searching_in) + " " + (String) msg.obj);
+				waitDialog.setMessage(res.getString(R.string.file_searching_in) + " " + (String) msg.obj);
 			}
 		}
 	};
@@ -46,7 +40,7 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 						waitDialog.dismiss();
 					}
 
-					getWarning().showToast(getRes().getString(R.string.file_list_no_files));
+					showToast(res.getString(R.string.file_list_no_files));
 
 					finish();
 					return;
@@ -72,16 +66,9 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// init
-		res = this.getResources();
-		app = (cgeoapplication) this.getApplication();
-		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
-		base = new cgBase(getApp(), getSettings(), getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(this);
-
 		setTheme();
 		setContentView(R.layout.gpx);
-		setTitle(getRes().getString(R.string.gpx_import_title));
+		setTitle(res.getString(R.string.gpx_import_title));
 
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -95,8 +82,8 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 
 		waitDialog = ProgressDialog.show(
 				this,
-				getRes().getString(R.string.file_title_searching),
-				getRes().getString(R.string.file_searching),
+				res.getString(R.string.file_title_searching),
+				res.getString(R.string.file_searching),
 				true,
 				true,
 				new DialogInterface.OnCancelListener() {
@@ -240,21 +227,5 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 		}
 
 		return;
-	}
-
-	protected cgeoapplication getApp() {
-		return app;
-	}
-
-	protected cgBase getBase() {
-		return base;
-	}
-
-	protected cgWarning getWarning() {
-		return warning;
-	}
-
-	protected Resources getRes() {
-		return res;
 	}
 }

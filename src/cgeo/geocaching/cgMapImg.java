@@ -1,10 +1,10 @@
 package cgeo.geocaching;
 
-import android.util.Log;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -12,23 +12,23 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.util.Log;
+
 public class cgMapImg {
 	/**
 	 * in my tests the "no image available" image had 5470 bytes, while "street only" maps had at least 20000 bytes
 	 */
 	private static final int MIN_MAP_IMAGE_BYTES = 6000;
-	private cgSettings settings = null;
 	private String geocode = null;
 
-	public cgMapImg(cgSettings settingsIn, String geocodeIn) {
+	public cgMapImg(String geocodeIn) {
 		geocode = geocodeIn;
-		settings = settingsIn;
 
 		if (geocode != null && geocode.length() > 0) {
-			final String dirName = settings.getStorage() + geocode + "/";
+			final String dirName = cgSettings.getStorage() + geocode + "/";
 
 			File dir = null;
-			dir = new File(settings.getStorage());
+			dir = new File(cgSettings.getStorage());
 			if (dir.exists() == false) {
 				dir.mkdirs();
 			}
@@ -49,7 +49,7 @@ public class cgMapImg {
 			return;
 		}
 
-		final String fileName = settings.getStorage() + geocode + "/map_" + level;
+		final String fileName = cgSettings.getStorage() + geocode + "/map_" + level;
 		HttpClient client = null;
 		HttpGet getMethod = null;
 		HttpResponse httpResponse = null;

@@ -6,7 +6,6 @@ import java.util.Locale;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,11 +29,6 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 
 public class cgeopopup extends AbstractActivity {
 
-	private Resources res = null;
-	private cgeoapplication app = null;
-	private cgSettings settings = null;
-	private cgBase base = null;
-	private cgWarning warning = null;
 	private Boolean fromDetail = false;
 	private LayoutInflater inflater = null;
 	private String geocode = null;
@@ -70,7 +64,7 @@ public class cgeopopup extends AbstractActivity {
 				finish();
 				return;
 			} catch (Exception e) {
-				warning.showToast(res.getString(R.string.err_store));
+				showToast(res.getString(R.string.err_store));
 
 				Log.e(cgSettings.tag, "cgeopopup.storeCacheHandler: " + e.toString());
 			}
@@ -93,7 +87,7 @@ public class cgeopopup extends AbstractActivity {
 				finish();
 				return;
 			} catch (Exception e) {
-				warning.showToast(res.getString(R.string.err_drop));
+				showToast(res.getString(R.string.err_drop));
 
 				Log.e(cgSettings.tag, "cgeopopup.dropCacheHandler: " + e.toString());
 			}
@@ -113,13 +107,6 @@ public class cgeopopup extends AbstractActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// init
-		res = this.getResources();
-		app = (cgeoapplication) this.getApplication();
-		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
-		base = new cgBase(app, settings, getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(this);
-
 		// set layout
 		setTheme(R.style.transparent);
 		setContentView(R.layout.popup);
@@ -133,7 +120,7 @@ public class cgeopopup extends AbstractActivity {
 		}
 
 		if (geocode == null || geocode.length() == 0) {
-			warning.showToast(res.getString(R.string.err_detail_cache_find));
+			showToast(res.getString(R.string.err_detail_cache_find));
 
 			finish();
 			return;
@@ -193,7 +180,7 @@ public class cgeopopup extends AbstractActivity {
 			return true;
 		} else if (menuItem == 6) {
 			if (cache.cacheid == null || cache.cacheid.length() == 0) {
-				warning.showToast(res.getString(R.string.err_cannot_log_visit));
+				showToast(res.getString(R.string.err_cannot_log_visit));
 				return false;
 			}
 
@@ -211,12 +198,12 @@ public class cgeopopup extends AbstractActivity {
 			return true;
 		}
 
-		return NavigationAppFactory.onMenuItemSelected(item, geo, this, res, warning, cache, null, null, null);
+		return NavigationAppFactory.onMenuItemSelected(item, geo, this, res, cache, null, null, null);
 	}
 
 	private void init() {
 		if (geo == null) {
-			geo = app.startGeo(this, geoUpdate, base, settings, warning, 0, 0);
+			geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
 		}
 
 		app.setAction(geocode);
@@ -224,7 +211,7 @@ public class cgeopopup extends AbstractActivity {
 		cache = app.getCacheByGeocode(geocode);
 
 		if (cache == null) {
-			warning.showToast(res.getString(R.string.err_detail_cache_find));
+			showToast(res.getString(R.string.err_detail_cache_find));
 
 			finish();
 			return;
@@ -564,7 +551,7 @@ public class cgeopopup extends AbstractActivity {
 
 	private void navigateTo() {
 		if (cache == null || cache.latitude == null || cache.longitude == null) {
-			warning.showToast(res.getString(R.string.err_location_unknown));
+			showToast(res.getString(R.string.err_location_unknown));
 		}
 
 		cgeonavigate navigateActivity = new cgeonavigate();
@@ -580,7 +567,7 @@ public class cgeopopup extends AbstractActivity {
 
 	private void cachesAround() {
 		if (cache == null || cache.latitude == null || cache.longitude == null) {
-			warning.showToast(res.getString(R.string.err_location_unknown));
+			showToast(res.getString(R.string.err_location_unknown));
 		}
 
 		cgeocaches cachesActivity = new cgeocaches();
@@ -601,7 +588,7 @@ public class cgeopopup extends AbstractActivity {
 
 		public void onClick(View arg0) {
 			if (dropDialog != null && dropDialog.isShowing() == true) {
-				warning.showToast("Still removing this cache.");
+				showToast("Still removing this cache.");
 				return;
 			}
 
@@ -630,7 +617,7 @@ public class cgeopopup extends AbstractActivity {
 
 		public void onClick(View arg0) {
 			if (storeDialog != null && storeDialog.isShowing() == true) {
-				warning.showToast("Still saving this cache.");
+				showToast("Still saving this cache.");
 				return;
 			}
 
@@ -651,7 +638,7 @@ public class cgeopopup extends AbstractActivity {
 
 		@Override
 		public void run() {
-			base.dropCache(app, cgeopopup.this, cache, handler);
+			cgBase.dropCache(app, cgeopopup.this, cache, handler);
 		}
 	}
 
@@ -694,7 +681,7 @@ public class cgeopopup extends AbstractActivity {
 
 	public void goCompass(View view) {
 		if (cache == null || cache.latitude == null || cache.longitude == null) {
-			warning.showToast(res.getString(R.string.cache_coordinates_no));
+			showToast(res.getString(R.string.cache_coordinates_no));
 
 			return;
 		}

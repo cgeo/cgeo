@@ -224,15 +224,15 @@ public class cgSettings {
 		cacheType = prefs.getString(KEY_CACHE_TYPE, null);
 	}
 
-	public String getStorage() {
+	public static String getStorage() {
 		return getStorageSpecific(null)[0];
 	}
 
-	public String getStorageSec() {
+	public static String getStorageSec() {
 		return getStorageSpecific(null)[1];
 	}
 
-	public String[] getStorageSpecific(Boolean hidden) {
+	public static String[] getStorageSpecific(Boolean hidden) {
 		String external = Environment.getExternalStorageDirectory() + "/" + cache + "/";
 		String data = Environment.getDataDirectory() + "/data/cgeo.geocaching/" + cache + "/";
 
