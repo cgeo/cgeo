@@ -40,7 +40,7 @@ public class cgSearchThread extends Thread {
 		notify();
 	}
 
-	public String getText() {
+	public synchronized String getText() {
 		return recaptchaText;
 	}
 }
