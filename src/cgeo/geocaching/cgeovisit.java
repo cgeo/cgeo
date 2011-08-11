@@ -364,16 +364,16 @@ public class cgeovisit extends cgLogForm {
 	}
 
 	public void addSignature(int id) {
+		final long now = System.currentTimeMillis();
+		final String dateString = base.formatFullDate(now);
+		final String timeString = base.formatTime(now);
 		EditText text = null;
 		String textContent = null;
-		String dateString = null;
-		String timeString = null;
 		StringBuilder addText = new StringBuilder();
 
 		text = (EditText) findViewById(R.id.log);
 		textContent = text.getText().toString();
-		dateString = cgBase.dateOut.format(new Date());
-		timeString = cgBase.timeOut.format(new Date());
+
 
 		if ((id & LOG_DATE) == LOG_DATE) {
 			addText.append(dateString);
@@ -603,7 +603,7 @@ public class cgeovisit extends cgLogForm {
 		});
 
 		Button dateButton = (Button) findViewById(R.id.date);
-		dateButton.setText(cgBase.dateOutShort.format(date.getTime()));
+		dateButton.setText(base.formatShortDate(date.getTime().getTime()));
 		dateButton.setOnClickListener(new cgeovisitDateListener());
 
 		EditText logView = (EditText) findViewById(R.id.log);
@@ -651,7 +651,7 @@ public class cgeovisit extends cgLogForm {
 		date = dateIn;
 
 		final Button dateButton = (Button) findViewById(R.id.date);
-		dateButton.setText(cgBase.dateOutShort.format(date.getTime()));
+		dateButton.setText(base.formatShortDate(date.getTime().getTime()));
 	}
 
 	public void setType(int type) {
@@ -756,7 +756,7 @@ public class cgeovisit extends cgLogForm {
 			setType(typeSelected);
 
 			Button dateButton = (Button) findViewById(R.id.date);
-			dateButton.setText(cgBase.dateOutShort.format(date.getTime()));
+			dateButton.setText(base.formatShortDate(date.getTime().getTime()));
 			dateButton.setOnClickListener(new cgeovisitDateListener());
 
 			EditText logView = (EditText) findViewById(R.id.log);
