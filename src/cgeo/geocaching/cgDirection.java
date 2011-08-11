@@ -63,9 +63,7 @@ public class cgDirection {
 
 		@Override
 		public void onSensorChanged(SensorEvent event) {
-			Double directionNowPre = new Double(event.values[0]);
-
-			directionNow = Compatibility.getDirectionNow(directionNowPre, (Activity)context);
+			directionNow = Compatibility.getDirectionNow(Double.valueOf(event.values[0]), (Activity)context);
 
 			if (dirUpdate != null && directionNow != null) {
 				dirUpdate.updateDir(dir);

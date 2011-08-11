@@ -16,8 +16,8 @@ public class cgCompassMini extends View {
 	private Double cacheLat = null;
 	private Double cacheLon = null;
 	private Bitmap compassArrow = null;
-	private Double azimuth = new Double(0);
-	private Double heading = new Double(0);
+	private Double azimuth = Double.valueOf(0);
+	private Double heading = Double.valueOf(0);
 	private PaintFlagsDrawFilter setfil = null;
 	private PaintFlagsDrawFilter remfil = null;
 

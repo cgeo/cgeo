@@ -50,7 +50,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 	private boolean historic = false;
 	private Double latitude = null;
 	private Double longitude = null;
-	private Double azimuth = new Double(0);
+	private Double azimuth = Double.valueOf(0);
 	private long lastSort = 0l;
 	private boolean sort = true;
 	private int checked = 0;

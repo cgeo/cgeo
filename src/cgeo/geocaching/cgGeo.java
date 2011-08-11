@@ -290,7 +290,7 @@ public class cgGeo {
 		latitudeNow = lat;
 		longitudeNow = lon;
 		altitudeNow = null;
-		bearingNow = new Double(0);
+		bearingNow = Double.valueOf(0);
 		speedNow = 0f;
 		accuracyNow = 999f;
 
@@ -326,9 +326,9 @@ public class cgGeo {
 			altitudeNow = null;
 		}
 		if (location.hasBearing() && gps != -1) {
-			bearingNow = new Double(location.getBearing());
+			bearingNow = Double.valueOf(location.getBearing());
 		} else {
-			bearingNow = new Double(0);
+			bearingNow = Double.valueOf(0);
 		}
 		if (location.hasSpeed() && gps != -1) {
 			speedNow = location.getSpeed();

@@ -27,8 +27,8 @@ public class cgCache {
 	public Date hidden = null;
 	public String hint = "";
 	public String size = "";
-	public Float difficulty = new Float(0);
-	public Float terrain = new Float(0);
+	public Float difficulty = Float.valueOf(0);
+	public Float terrain = Float.valueOf(0);
 	public Double direction = null;
 	public Double distance = null;
 	public String latlon = "";

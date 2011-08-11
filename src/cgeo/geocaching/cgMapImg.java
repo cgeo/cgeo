@@ -86,12 +86,12 @@ public class cgMapImg {
 							fos.write(buffer, 0, bytesRead);
 							fileSize += bytesRead;
 						}
+						fos.flush();
 						ok = true;
 					} catch (IOException e) {
 						Log.e(cgSettings.tag, "cgMapImg.getDrawable (saving to cache): " + e.toString());
 					} finally {
 						is.close();
-						fos.flush();
 						fos.close();
 					}
 
