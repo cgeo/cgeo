@@ -224,7 +224,7 @@ public class cgCache {
 
 	public boolean canBeAddedToCalendar() {
 		// is event type?
-		if (!type.equalsIgnoreCase("event") && !type.equalsIgnoreCase("mega") && !type.equalsIgnoreCase("cito")) {
+		if (!isEventCache()) {
 			return false;
 		}
 		// has event date set?
@@ -264,6 +264,13 @@ public class cgCache {
 			Log.i(cgSettings.tag, "cgCache.isGuidContainedInPage: guid '" + guid + "' not found");
 			return false;
 		}
+	}
+
+	public boolean isEventCache() {
+		if (type.equalsIgnoreCase("event") || type.equalsIgnoreCase("mega") || type.equalsIgnoreCase("cito")) {
+			return true;
+		}
+		return false;
 	}
 
 

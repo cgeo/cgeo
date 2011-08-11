@@ -48,6 +48,7 @@ import cgeo.geocaching.filter.cgFilterBySize;
 import cgeo.geocaching.filter.cgFilterByTrackables;
 import cgeo.geocaching.filter.cgFilterByType;
 import cgeo.geocaching.sorting.CacheComparator;
+import cgeo.geocaching.sorting.DateComparator;
 import cgeo.geocaching.sorting.DifficultyComparator;
 import cgeo.geocaching.sorting.GeocodeComparator;
 import cgeo.geocaching.sorting.InventoryComparator;
@@ -120,6 +121,7 @@ public class cgeocaches extends AbstractListActivity {
 	private static final int SUBMENU_FILTER = 58;
 	private static final int SUBMENU_IMPORT = 59;
 	private static final int SUBMENU_MANAGE_HISTORY = 60;
+	private static final int MENU_SORT_DATE = 61;
 
 	private String action = null;
 	private String type = null;
@@ -745,6 +747,7 @@ public class cgeocaches extends AbstractListActivity {
 		comparators.put(res.getString(R.string.caches_sort_rating), MENU_SORT_RATING);
 		comparators.put(res.getString(R.string.caches_sort_vote), MENU_SORT_VOTE);
 		comparators.put(res.getString(R.string.caches_sort_inventory), MENU_SORT_INVENTORY);
+		comparators.put(res.getString(R.string.caches_sort_date), MENU_SORT_DATE);
 
 		ArrayList<String> sortedLabels = new ArrayList<String>(comparators.keySet());
 		Collections.sort(sortedLabels);
@@ -954,6 +957,9 @@ public class cgeocaches extends AbstractListActivity {
 				return false;
 			case MENU_SORT_INVENTORY:
 				setComparator(item, new InventoryComparator());
+				return false;
+			case MENU_SORT_DATE:
+				setComparator(item, new DateComparator());
 				return false;
 			case SUBMENU_FILTER_TYPE:
 				selectedFilter = res.getString(R.string.caches_filter_type);
