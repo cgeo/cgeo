@@ -2642,9 +2642,9 @@ public class cgBase {
 		while (matcher.find()) {
 			if (matcher.groupCount() > 1) {
 				if (matcher.group(2).equalsIgnoreCase("km") == true) {
-					distance = new Double(matcher.group(1));
+					distance = Double.valueOf(matcher.group(1));
 				} else {
-					distance = new Double(matcher.group(1)) / kmInMiles;
+					distance = Double.valueOf(matcher.group(1)) / kmInMiles;
 				}
 			}
 		}
@@ -2673,7 +2673,7 @@ public class cgBase {
 	}
 
 	public static Double getHeading(Double lat1, Double lon1, Double lat2, Double lon2) {
-		Double result = new Double(0);
+		Double result = Double.valueOf(0);
 
 		int ilat1 = (int) Math.round(0.5 + lat1 * 360000);
 		int ilon1 = (int) Math.round(0.5 + lon1 * 360000);
@@ -2686,21 +2686,21 @@ public class cgBase {
 		lon2 *= deg2rad;
 
 		if (ilat1 == ilat2 && ilon1 == ilon2) {
-			return new Double(result);
+			return Double.valueOf(result);
 		} else if (ilat1 == ilat2) {
 			if (ilon1 > ilon2) {
-				result = new Double(270);
+				result = Double.valueOf(270);
 			} else {
-				result = new Double(90);
+				result = Double.valueOf(90);
 			}
 		} else if (ilon1 == ilon2) {
 			if (ilat1 > ilat2) {
-				result = new Double(180);
+				result = Double.valueOf(180);
 			}
 		} else {
 			Double c = Math.acos(Math.sin(lat2) * Math.sin(lat1) + Math.cos(lat2) * Math.cos(lat1) * Math.cos(lon2 - lon1));
 			Double A = Math.asin(Math.cos(lat2) * Math.sin(lon2 - lon1) / Math.sin(c));
-			result = new Double(A * rad2deg);
+			result = Double.valueOf(A * rad2deg);
 			if (ilat2 > ilat1 && ilon2 > ilon1) {
 				// result don't need change
 			} else if (ilat2 < ilat1 && ilon2 < ilon1) {
@@ -2736,7 +2736,7 @@ public class cgBase {
 			return "?";
 		}
 
-		return getHumanDistance(new Double(distance));
+		return getHumanDistance(Double.valueOf(distance));
 	}
 
 	public String getHumanDistance(Double distance) {
@@ -2747,31 +2747,31 @@ public class cgBase {
 		if (settings.units == cgSettings.unitsImperial) {
 			distance *= kmInMiles;
 			if (distance > 100) {
-				return String.format(Locale.getDefault(), "%.0f", new Double(Math.round(distance))) + " mi";
+				return String.format(Locale.getDefault(), "%.0f", Double.valueOf(Math.round(distance))) + " mi";
 			} else if (distance > 0.5) {
-				return String.format(Locale.getDefault(), "%.1f", new Double(Math.round(distance * 10.0) / 10.0)) + " mi";
+				return String.format(Locale.getDefault(), "%.1f", Double.valueOf(Math.round(distance * 10.0) / 10.0)) + " mi";
 			} else if (distance > 0.1) {
-				return String.format(Locale.getDefault(), "%.2f", new Double(Math.round(distance * 100.0) / 100.0)) + " mi";
+				return String.format(Locale.getDefault(), "%.2f", Double.valueOf(Math.round(distance * 100.0) / 100.0)) + " mi";
 			} else if (distance > 0.05) {
-				return String.format(Locale.getDefault(), "%.0f", new Double(Math.round(distance * 5280.0))) + " ft";
+				return String.format(Locale.getDefault(), "%.0f", Double.valueOf(Math.round(distance * 5280.0))) + " ft";
 			} else if (distance > 0.01) {
-				return String.format(Locale.getDefault(), "%.1f", new Double(Math.round(distance * 5280 * 10.0) / 10.0)) + " ft";
+				return String.format(Locale.getDefault(), "%.1f", Double.valueOf(Math.round(distance * 5280 * 10.0) / 10.0)) + " ft";
 			} else {
-				return String.format(Locale.getDefault(), "%.2f", new Double(Math.round(distance * 5280 * 100.0) / 100.0)) + " ft";
+				return String.format(Locale.getDefault(), "%.2f", Double.valueOf(Math.round(distance * 5280 * 100.0) / 100.0)) + " ft";
 			}
 		} else {
 			if (distance > 100) {
-				return String.format(Locale.getDefault(), "%.0f", new Double(Math.round(distance))) + " km";
+				return String.format(Locale.getDefault(), "%.0f", Double.valueOf(Math.round(distance))) + " km";
 			} else if (distance > 10) {
-				return String.format(Locale.getDefault(), "%.1f", new Double(Math.round(distance * 10.0) / 10.0)) + " km";
+				return String.format(Locale.getDefault(), "%.1f", Double.valueOf(Math.round(distance * 10.0) / 10.0)) + " km";
 			} else if (distance > 1) {
-				return String.format(Locale.getDefault(), "%.2f", new Double(Math.round(distance * 100.0) / 100.0)) + " km";
+				return String.format(Locale.getDefault(), "%.2f", Double.valueOf(Math.round(distance * 100.0) / 100.0)) + " km";
 			} else if (distance > 0.1) {
-				return String.format(Locale.getDefault(), "%.0f", new Double(Math.round(distance * 1000.0))) + " m";
+				return String.format(Locale.getDefault(), "%.0f", Double.valueOf(Math.round(distance * 1000.0))) + " m";
 			} else if (distance > 0.01) {
-				return String.format(Locale.getDefault(), "%.1f", new Double(Math.round(distance * 1000.0 * 10.0) / 10.0)) + " m";
+				return String.format(Locale.getDefault(), "%.1f", Double.valueOf(Math.round(distance * 1000.0 * 10.0) / 10.0)) + " m";
 			} else {
-				return String.format(Locale.getDefault(), "%.2f", new Double(Math.round(distance * 1000.0 * 100.0) / 100.0)) + " m";
+				return String.format(Locale.getDefault(), "%.2f", Double.valueOf(Math.round(distance * 1000.0 * 100.0) / 100.0)) + " m";
 			}
 		}
 	}
@@ -2786,9 +2786,9 @@ public class cgBase {
 		}
 
 		if (kph < 10) {
-			return String.format(Locale.getDefault(), "%.1f", new Double((Math.round(kph * 10) / 10))) + " " + unit;
+			return String.format(Locale.getDefault(), "%.1f", Double.valueOf((Math.round(kph * 10) / 10))) + " " + unit;
 		} else {
-			return String.format(Locale.getDefault(), "%.0f", new Double(Math.round(kph))) + " " + unit;
+			return String.format(Locale.getDefault(), "%.0f", Double.valueOf(Math.round(kph))) + " " + unit;
 		}
 	}
 
@@ -2809,8 +2809,8 @@ public class cgBase {
 				if (matcherLatlon.group(5).equalsIgnoreCase("E")) {
 					lonNegative = 1;
 				}
-				result.put("latitude", new Double(latNegative * (new Float(matcherLatlon.group(2)) + new Float(matcherLatlon.group(3) + "." + matcherLatlon.group(4)) / 60)));
-				result.put("longitude", new Double(lonNegative * (new Float(matcherLatlon.group(6)) + new Float(matcherLatlon.group(7) + "." + matcherLatlon.group(8)) / 60)));
+				result.put("latitude", Double.valueOf(latNegative * (Float.valueOf(matcherLatlon.group(2)) + Float.valueOf(matcherLatlon.group(3) + "." + matcherLatlon.group(4)) / 60)));
+				result.put("longitude", Double.valueOf(lonNegative * (Float.valueOf(matcherLatlon.group(6)) + Float.valueOf(matcherLatlon.group(7) + "." + matcherLatlon.group(8)) / 60)));
 			} else {
 				Log.w(cgSettings.tag, "cgBase.parseLatlon: Failed to parse coordinates.");
 			}
@@ -2891,10 +2891,10 @@ public class cgBase {
 			}
 
 			if (matcherA.groupCount() < 5 || matcherA.group(5) == null) {
-				coords.put("coordinate", new Double(latlonNegative * (new Double(matcherA.group(2)) + new Double(matcherA.group(3) + ".0") / 60)));
+				coords.put("coordinate", Double.valueOf(latlonNegative * (Double.valueOf(matcherA.group(2)) + Double.valueOf(matcherA.group(3) + ".0") / 60)));
 				coords.put("string", matcherA.group(1) + " " + matcherA.group(2) + "° " + matcherA.group(3) + ".000");
 			} else {
-				coords.put("coordinate", new Double(latlonNegative * (new Double(matcherA.group(2)) + new Double(matcherA.group(3) + "." + matcherA.group(5)) / 60)));
+				coords.put("coordinate", Double.valueOf(latlonNegative * (Double.valueOf(matcherA.group(2)) + Double.valueOf(matcherA.group(3) + "." + matcherA.group(5)) / 60)));
 				coords.put("string", matcherA.group(1) + " " + matcherA.group(2) + "° " + matcherA.group(3) + "." + matcherA.group(5));
 			}
 
@@ -2907,15 +2907,15 @@ public class cgBase {
 			}
 
 			if (matcherB.groupCount() < 4 || matcherB.group(4) == null) {
-				coords.put("coordinate", new Double(latlonNegative * (new Double(matcherB.group(2) + ".0"))));
+				coords.put("coordinate", Double.valueOf(latlonNegative * (Double.valueOf(matcherB.group(2) + ".0"))));
 			} else {
-				coords.put("coordinate", new Double(latlonNegative * (new Double(matcherB.group(2) + "." + matcherB.group(4)))));
+				coords.put("coordinate", Double.valueOf(latlonNegative * (Double.valueOf(matcherB.group(2) + "." + matcherB.group(4)))));
 			}
 		} else if (matcherC.find() == true && matcherC.groupCount() > 0) {
 			if (matcherC.groupCount() < 3 || matcherC.group(3) == null) {
-				coords.put("coordinate", new Double(new Float(matcherC.group(1) + ".0")));
+				coords.put("coordinate", Double.valueOf(new Float(matcherC.group(1) + ".0")));
 			} else {
-				coords.put("coordinate", new Double(new Float(matcherC.group(1) + "." + matcherC.group(3))));
+				coords.put("coordinate", Double.valueOf(new Float(matcherC.group(1) + "." + matcherC.group(3))));
 			}
 		} else if (matcherD.find() == true && matcherD.groupCount() > 0) {
 			if (matcherD.group(1).equalsIgnoreCase("N") || matcherD.group(1).equalsIgnoreCase("E")) {
@@ -2924,9 +2924,9 @@ public class cgBase {
 				latlonNegative = -1;
 			}
 
-			coords.put("coordinate", new Double(latlonNegative * (new Double(matcherB.group(2)))));
+			coords.put("coordinate", Double.valueOf(latlonNegative * (Double.valueOf(matcherB.group(2)))));
 		} else if (matcherE.find() == true && matcherE.groupCount() > 0) {
-			coords.put("coordinate", new Double(matcherE.group(1)));
+			coords.put("coordinate", Double.valueOf(matcherE.group(1)));
 		} else if (matcherF.find() == true && matcherF.groupCount() > 0) {
 			if (matcherF.group(1).equalsIgnoreCase("N") || matcherF.group(1).equalsIgnoreCase("E")) {
 				latlonNegative = 1;
@@ -2934,7 +2934,7 @@ public class cgBase {
 				latlonNegative = -1;
 			}
 
-			coords.put("coordinate", new Double(latlonNegative * (new Double(matcherB.group(2)))));
+			coords.put("coordinate", Double.valueOf(latlonNegative * (Double.valueOf(matcherB.group(2)))));
 		} else {
 			return null;
 		}
@@ -4191,7 +4191,7 @@ public class cgBase {
 				for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
 					InetAddress inetAddress = enumIpAddr.nextElement();
 					if (!inetAddress.isLoopbackAddress()) {
-						return inetAddress.getHostAddress().toString();
+						return inetAddress.getHostAddress();
 					}
 				}
 			}

@@ -611,7 +611,7 @@ public class cgeomap extends MapBase {
 					}
 				});
 
-				Float etaTime = new Float((detailTotal * (float) 7) / 60);
+				Float etaTime = Float.valueOf((detailTotal * (float) 7) / 60);
 				if (etaTime < 0.4) {
 					waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
 				} else if (etaTime < 1.5) {
@@ -763,7 +763,7 @@ public class cgeomap extends MapBase {
 					if (geo.bearingNow != null) {
 						overlayMyLoc.setHeading(geo.bearingNow);
 					} else {
-						overlayMyLoc.setHeading(new Double(0));
+						overlayMyLoc.setHeading(Double.valueOf(0));
 					}
 				}
 			} catch (Exception e) {
