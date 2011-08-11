@@ -1,8 +1,8 @@
 package cgeo.geocaching;
 
-import java.util.Date;
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 
 public class cgOAuth {
@@ -35,7 +35,7 @@ public class cgOAuth {
 		for (int i = 0; i < keys.length; i++) {
 			String value = params.get(keys[i].toString());
 
-			paramsEncoded.add(keys[i] + "=" + cgBase.urlencode_rfc3986(value.toString()));
+			paramsEncoded.add(keys[i] + "=" + cgBase.urlencode_rfc3986(value));
 		}
 
 		String keysPacked;
