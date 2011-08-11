@@ -429,7 +429,7 @@
 
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Your device name:</string>
-  <string name="init_sendToCgeo_description">Send to c:geo allows you to recieve caches directly from geocaching site using special plugin for Firefox or Chrome. Before registration please read <a href="http://send2cgeo.carnero.cc/">http://send2cgeo.carnero.cc/</a>.</string>
+  <string name="init_sendToCgeo_description">Send to c:geo allows you to recieve caches directly from geocaching site using special plugin for Firefox or Chrome. Before registration please read <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>.</string>
   <string name="init_sendToCgeo_register">Request registration</string>
   <string name="init_sendToCgeo_registering">Registering your device for "Send to c:geo"...</string>
   <string name="init_sendToCgeo_register_ok">Registration succesful. PIN code is ####. Use it on c:geo website to add this device to your browser.</string>
@@ -839,7 +839,7 @@
   <string name="website">Website: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
-  <string name="nutshellmanual">Manual: <a href="http://cgeo.carnero.cc/manual">c:geo in a Nutshell</a></string>
+  <string name="nutshellmanual">Manual: <a href="http://manual.cgeo.org/">c:geo in a Nutshell</a></string>
   <string name="about_go4cache">The service <b>Go 4 Cache</b> shows other geocachers on the map (in <b>c:geo</b> or in browser) in real time. It can show, for example, what cache they\'re searching for. By connecting to <b>Go 4 Cache</b> <b>c:geo</b> is allowed to publish current location when geocaching (only while <b>c:geo</b> is running).</string>
   <string name="about_twitter">Should <b>c:geo</b> publish new status on Twitter everytime a cache is logged?</string>
   <string name="about_auth_1">The following process allows <b>c:geo</b> to access Twitter - if agreed.</string>
