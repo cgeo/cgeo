@@ -230,11 +230,11 @@ public class cgHtmlImg implements Html.ImageGetter {
 							while ((l = is.read(buffer)) != -1) {
 								fos.write(buffer, 0, l);
 							}
+							fos.flush();
 						} catch (IOException e) {
 							Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (saving to cache): " + e.toString());
 						} finally {
 							is.close();
-							fos.flush();
 							fos.close();
 						}
 					}
