@@ -80,7 +80,7 @@ public class cgCompassMini extends View {
 	}
 
 	protected void updateDirection() {
-		if (compassArrow == null || compassArrow.isRecycled() == true) {
+		if (compassArrow == null || compassArrow.isRecycled()) {
 			return;
 		}
 

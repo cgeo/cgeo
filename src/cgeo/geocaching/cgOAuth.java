@@ -42,7 +42,7 @@ public class cgOAuth {
 		String requestPacked;
 
 		keysPacked = cgSettings.keyConsumerSecret + "&" + tokenSecret; // both even if empty some of them!
-		if (https == true) requestPacked = method + "&" + cgBase.urlencode_rfc3986("https://" + host + path) + "&" + cgBase.urlencode_rfc3986(cgBase.implode("&", paramsEncoded.toArray()));
+		if (https) requestPacked = method + "&" + cgBase.urlencode_rfc3986("https://" + host + path) + "&" + cgBase.urlencode_rfc3986(cgBase.implode("&", paramsEncoded.toArray()));
 		else requestPacked = method + "&" + cgBase.urlencode_rfc3986("http://" + host + path) + "&" + cgBase.urlencode_rfc3986(cgBase.implode("&", paramsEncoded.toArray()));
 		paramsEncoded.add("oauth_signature=" + cgBase.urlencode_rfc3986(cgBase.base64Encode(cgBase.hashHmac(requestPacked, keysPacked))));
 

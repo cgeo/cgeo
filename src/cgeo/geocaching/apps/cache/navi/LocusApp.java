@@ -48,7 +48,7 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 
 				dos.writeInt(1); // not used
 				if (cache != null) {
-					if (waypoints == null || waypoints.isEmpty() == true) {
+					if (waypoints == null || waypoints.isEmpty()) {
 						dos.writeInt(1); // cache only
 					} else {
 						dos.writeInt((1 + waypoints.size())); // cache and

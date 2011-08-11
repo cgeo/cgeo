@@ -431,7 +431,7 @@ public class cgeotouch extends cgLogForm {
 			if (
 				status == 1 && settings.twitter == 1 &&
 				settings.tokenPublic != null && settings.tokenPublic.length() > 0 && settings.tokenSecret != null && settings.tokenSecret.length() > 0 &&
-				tweetCheck.isChecked() == true && tweetBox.getVisibility() == View.VISIBLE
+				tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE
 			) {
 				cgBase.postTweetTrackable(app, settings, geocode);
 			}

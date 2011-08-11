@@ -221,10 +221,10 @@ public class cgCompass extends View {
 
 	@Override
 	protected void onDraw(Canvas canvas) {
-		if (lock == true) {
+		if (lock) {
 			return;
 		}
-		if (drawing == true) {
+		if (drawing) {
 			return;
 		}
 

@@ -326,7 +326,7 @@ public class cgeotrackable extends AbstractActivity {
 		// try to get data from URI
 		if (geocode == null && guid == null && id == null && uri != null) {
 			String uriHost = uri.getHost().toLowerCase();
-			if (uriHost.contains("geocaching.com") == true) {
+			if (uriHost.contains("geocaching.com")) {
 				geocode = uri.getQueryParameter("tracker");
 				guid = uri.getQueryParameter("guid");
 				id = uri.getQueryParameter("id");
@@ -348,9 +348,9 @@ public class cgeotrackable extends AbstractActivity {
 					finish();
 					return;
 				}
-			} else if (uriHost.contains("coord.info") == true) {
+			} else if (uriHost.contains("coord.info")) {
 				String uriPath = uri.getPath().toLowerCase();
-				if (uriPath != null && uriPath.startsWith("/tb") == true) {
+				if (uriPath != null && uriPath.startsWith("/tb")) {
 					geocode = uriPath.substring(1).toUpperCase();
 					guid = null;
 					id = null;
@@ -529,7 +529,7 @@ public class cgeotrackable extends AbstractActivity {
 				}
 
 
-				if (cgBase.logTypes1.containsKey(log.type) == true) {
+				if (cgBase.logTypes1.containsKey(log.type)) {
 					((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(log.type));
 				} else {
 					((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(4)); // note if type is unknown
