@@ -643,6 +643,10 @@ public class cgeomap extends MapBase {
 			boolean mapRestartRequired = switchMapSource(mapSource);
 
 			if (mapRestartRequired) {
+				// close old mapview
+				activity.finish();
+			
+				// prepare information to restart a similar view
 				Intent mapIntent = new Intent(activity, settings.getMapFactory().getMapClass());
 
 				mapIntent.putExtra("detail", fromDetailIntent);
@@ -657,10 +661,10 @@ public class cgeomap extends MapBase {
 				mapState[1] = mapCenter.getLongitudeE6();
 				mapState[2] = mapView.getMapZoomLevel();
 				mapIntent.putExtra("mapstate", mapState);
-
+				
+				// start the new map
 				activity.startActivity(mapIntent);
-
-				activity.finish();
+				
 			}
 
 			return true;
@@ -696,7 +700,7 @@ public class cgeomap extends MapBase {
 
 		prefsEdit.putInt("mapsource", settings.mapSource.ordinal());
 		prefsEdit.commit();
-
+		
 		boolean mapRestartRequired = settings.mapSource.isGoogleMapSource()!= settings.mapSourceUsed.isGoogleMapSource();
 
 		if (!mapRestartRequired) {

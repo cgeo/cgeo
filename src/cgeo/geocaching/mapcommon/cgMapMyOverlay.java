@@ -40,10 +40,12 @@ public class cgMapMyOverlay implements OverlayBase {
 	private Point historyPointN = new Point();
 	private Point historyPointP = new Point();
 	private Activity activity;
+	private MapFactory mapFactory = null;
 
 	public cgMapMyOverlay(cgSettings settingsIn, Activity activity) {
 		settings = settingsIn;
 		this.activity = activity;
+		this.mapFactory = settings.getMapFactory();
 	}
 
 	public void setCoordinates(Location coordinatesIn) {
@@ -71,8 +73,6 @@ public class cgMapMyOverlay implements OverlayBase {
     private void drawInternal(Canvas canvas, MapProjectionImpl projection) {
 
 		if (coordinates == null || location == null) return;
-
-		MapFactory mapFactory = settings.getMapFactory();
 
 		if (accuracyCircle == null) {
 			accuracyCircle = new Paint();
