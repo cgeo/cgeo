@@ -24,7 +24,7 @@ public class cgMapMyOverlay implements OverlayBase {
 	private cgSettings settings = null;
 	private Location coordinates = null;
 	private GeoPointImpl location = null;
-	private Double heading = new Double(0);
+	private Double heading = Double.valueOf(0);
 	private Paint accuracyCircle = null;
 	private Paint historyLine = null;
 	private Paint historyLineShadow = null;
