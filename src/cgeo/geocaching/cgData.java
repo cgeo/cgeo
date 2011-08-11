@@ -197,7 +197,7 @@ public class cgData {
 		context = contextIn;
 	}
 
-	public void init() {
+	public synchronized void init() {
 		if (databaseRW == null || databaseRW.isOpen() == false) {
 			try {
 				if (dbHelper == null) {
