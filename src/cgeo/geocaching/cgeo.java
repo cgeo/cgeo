@@ -337,7 +337,7 @@ public class cgeo extends AbstractActivity {
 	}
 
 	private void init() {
-		if (initialized == true) {
+		if (initialized) {
 			return;
 		}
 
@@ -346,7 +346,7 @@ public class cgeo extends AbstractActivity {
 		settings.getLogin();
 		settings.reloadCacheType();
 
-		if (app.firstRun == true) {
+		if (app.firstRun) {
 			new Thread() {
 
 				@Override
@@ -577,7 +577,7 @@ public class cgeo extends AbstractActivity {
 			if (app == null) {
 				return;
 			}
-			if (cleanupRunning == true) {
+			if (cleanupRunning) {
 				return;
 			}
 
@@ -611,7 +611,7 @@ public class cgeo extends AbstractActivity {
 			if (geo == null) {
 				return;
 			}
-			if (addressObtaining == true) {
+			if (addressObtaining) {
 				return;
 			}
 			addressObtaining = true;

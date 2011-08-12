@@ -167,6 +167,11 @@
   <string name="init_twitter_authorize">autorisation de c:geo</string>
   <string name="init_twitter_publish">publication d\'une cache trouvée</string>
   <string name="init_signature">Signature</string>
+  <string name="init_signature_template_button">Insérer modèle</string>
+  <string name="init_signature_template_date">Date</string>
+  <string name="init_signature_template_time">Heure</string>
+  <string name="init_signature_template_user">Utilisateur</string>
+  <string name="init_signature_template_number">Nombre</string>
   <string name="init_other">autres options</string>
   <string name="init_skin">aspect sobre (nécessite le redémarrage de c:geo)</string>
   <string name="init_transparent">accueil de c:geo transparent</string>
@@ -246,11 +251,13 @@
   <string name="cache_status_disabled">désactivée</string>
   <string name="cache_status_premium">membres privilégiés seulement</string>
   <string name="cache_geocode">code gc</string>
+  <string name="cache_name">nom</string>
   <string name="cache_type">type</string>
   <string name="cache_distance">distance</string>
-  <string name="cache_difficulty">difficultée</string>
+  <string name="cache_difficulty">difficulté</string>
   <string name="cache_terrain">terrain</string>
   <string name="cache_rating">note</string>
+  <string name="cache_favourite">favorie</string>
   <string name="cache_owner">propriétaire</string>
   <string name="cache_hidden">cachée</string>
   <string name="cache_event">date</string>

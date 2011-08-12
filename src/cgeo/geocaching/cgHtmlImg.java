@@ -109,7 +109,7 @@ public class cgHtmlImg implements Html.ImageGetter {
 				final Date now = new Date();
 
 				final File file = new File(fileName);
-				if (file.exists() == true) {
+				if (file.exists()) {
 					final long imageSize = file.length();
 
 					// large images will be downscaled on input to save memory
@@ -132,7 +132,7 @@ public class cgHtmlImg implements Html.ImageGetter {
 
 				if (imagePre == null) {
 					final File fileSec = new File(fileNameSec);
-					if (fileSec.exists() == true) {
+					if (fileSec.exists()) {
 						final long imageSize = fileSec.length();
 
 						// large images will be downscaled on input to save memory
@@ -159,7 +159,7 @@ public class cgHtmlImg implements Html.ImageGetter {
 		}
 
 		// download image and save it to the cache
-		if ((imagePre == null && reason == 0) || onlySave == true) {
+		if ((imagePre == null && reason == 0) || onlySave) {
 			Uri uri = null;
 			HttpClient client = null;
 			HttpGet getMethod = null;
@@ -218,7 +218,7 @@ public class cgHtmlImg implements Html.ImageGetter {
 				}
 			}
 
-			if (save == true) {
+			if (save) {
 				try {
 					// save to memory/SD cache
 					if (bufferedEntity != null) {
@@ -230,11 +230,11 @@ public class cgHtmlImg implements Html.ImageGetter {
 							while ((l = is.read(buffer)) != -1) {
 								fos.write(buffer, 0, l);
 							}
+							fos.flush();
 						} catch (IOException e) {
 							Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (saving to cache): " + e.toString());
 						} finally {
 							is.close();
-							fos.flush();
 							fos.close();
 						}
 					}
@@ -247,7 +247,7 @@ public class cgHtmlImg implements Html.ImageGetter {
 			bufferedEntity = null;
 		}
 
-		if (onlySave == true) {
+		if (onlySave) {
 			return null;
 		}
 

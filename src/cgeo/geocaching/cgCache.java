@@ -27,8 +27,8 @@ public class cgCache {
 	public Date hidden = null;
 	public String hint = "";
 	public String size = "";
-	public Float difficulty = new Float(0);
-	public Float terrain = new Float(0);
+	public Float difficulty = Float.valueOf(0);
+	public Float terrain = Float.valueOf(0);
 	public Double direction = null;
 	public Double distance = null;
 	public String latlon = "";
@@ -74,19 +74,19 @@ public class cgCache {
 		boolean loadL = true;
 		boolean loadI = true;
 
-		if (attributes == null || attributes.isEmpty() == true) {
+		if (attributes == null || attributes.isEmpty()) {
 			loadA = false;
 		}
-		if (waypoints == null || waypoints.isEmpty() == true) {
+		if (waypoints == null || waypoints.isEmpty()) {
 			loadW = false;
 		}
-		if (spoilers == null || spoilers.isEmpty() == true) {
+		if (spoilers == null || spoilers.isEmpty()) {
 			loadS = false;
 		}
-		if (logs == null || logs.isEmpty() == true) {
+		if (logs == null || logs.isEmpty()) {
 			loadL = false;
 		}
-		if (inventory == null || inventory.isEmpty() == true) {
+		if (inventory == null || inventory.isEmpty()) {
 			loadI = false;
 		}
 
@@ -97,7 +97,7 @@ public class cgCache {
 		}
 
 		updated = System.currentTimeMillis();
-		if (detailed == false && oldCache.detailed == true) {
+		if (detailed == false && oldCache.detailed) {
 			detailed = true;
 			detailedUpdate = System.currentTimeMillis();
 		}

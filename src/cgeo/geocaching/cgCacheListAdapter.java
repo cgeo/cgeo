@@ -50,7 +50,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 	private boolean historic = false;
 	private Double latitude = null;
 	private Double longitude = null;
-	private Double azimuth = new Double(0);
+	private Double azimuth = Double.valueOf(0);
 	private long lastSort = 0l;
 	private boolean sort = true;
 	private int checked = 0;
@@ -174,7 +174,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 	public void setHistoric(boolean historicIn) {
 		historic = historicIn;
 
-		if (historic == true) {
+		if (historic) {
 			statComparator = new VisitComparator();
 		} else {
 			statComparator = null;
@@ -188,13 +188,13 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 	public boolean setSelectMode(boolean status, boolean clear) {
 		selectMode = status;
 
-		if (selectMode == false && clear == true) {
+		if (selectMode == false && clear) {
 			for (cgCache cache : list) {
 				cache.statusChecked = false;
 				cache.statusCheckedView = false;
 			}
 			checked = 0;
-		} else if (selectMode == true) {
+		} else if (selectMode) {
 			for (cgCache cache : list) {
 				cache.statusCheckedView = false;
 			}
@@ -219,7 +219,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 				cache.statusCheckedView = false;
 			}
 			checked = 0;
-		} else if (selectMode == true) {
+		} else if (selectMode) {
 			for (cgCache cache : list) {
 				cache.statusCheckedView = false;
 			}
@@ -233,7 +233,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		int check = 0;
 
 		for (cgCache cache : list) {
-			if (cache.statusChecked == true) {
+			if (cache.statusChecked) {
 				cache.statusChecked = false;
 				cache.statusCheckedView = false;
 			} else {
@@ -249,7 +249,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 	}
 
 	public void forceSort(Double latitudeIn, Double longitudeIn) {
-		if (list == null || list.isEmpty() == true) {
+		if (list == null || list.isEmpty()) {
 			return;
 		}
 		if (sort == false) {
@@ -281,7 +281,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		latitude = latitudeIn;
 		longitude = longitudeIn;
 
-		if (list != null && list.isEmpty() == false && (System.currentTimeMillis() - lastSort) > 1000 && sort == true) {
+		if (list != null && list.isEmpty() == false && (System.currentTimeMillis() - lastSort) > 1000 && sort) {
 			try {
 				if (statComparator != null) {
 					Collections.sort((List<cgCache>) list, statComparator);
@@ -325,7 +325,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 	}
 
 	public boolean resetChecks() {
-		if (list.isEmpty() == true) {
+		if (list.isEmpty()) {
 			return false;
 		}
 		if (checked <= 0) {
@@ -335,7 +335,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		boolean status = getSelectMode();
 		int cleared = 0;
 		for (cgCache cache : list) {
-			if (cache.statusChecked == true) {
+			if (cache.statusChecked) {
 				cache.statusChecked = false;
 
 				checkChecked(-1);
@@ -345,7 +345,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		setSelectMode(false, false);
 		notifyDataSetChanged();
 
-		if (cleared > 0 || status == true) {
+		if (cleared > 0 || status) {
 			return true;
 		} else {
 			return false;
@@ -391,7 +391,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 			holder = (cgCacheView) rowView.getTag();
 		}
 
-		if (cache.own == true) {
+		if (cache.own) {
 			if (settings.skin == 1) {
 				holder.oneInfo.setBackgroundResource(R.color.owncache_background_light);
 				holder.oneCheckbox.setBackgroundResource(R.color.owncache_background_light);
@@ -415,15 +415,15 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		rowView.setOnTouchListener(touchLst);
 		rowView.setLongClickable(true);
 
-		if (selectMode == true) {
-			if (cache.statusCheckedView == true) {
+		if (selectMode) {
+			if (cache.statusCheckedView) {
 				moveRight(holder, cache, true); // move fast when already slided
 			} else {
 				moveRight(holder, cache, false);
 			}
-		} else if (cache.statusChecked == true) {
+		} else if (cache.statusChecked) {
 			holder.checkbox.setChecked(true);
-			if (cache.statusCheckedView == true) {
+			if (cache.statusCheckedView) {
 				moveRight(holder, cache, true); // move fast when already slided
 			} else {
 				moveRight(holder, cache, false);
@@ -448,10 +448,10 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		}
 		holder.direction.setContent(cache.latitude, cache.longitude);
 
-		if (cache.logOffline == true) {
+		if (cache.logOffline) {
 			holder.offlineMark.setVisibility(View.VISIBLE);
 			holder.foundMark.setVisibility(View.GONE);
-		} else if (cache.found == true) {
+		} else if (cache.found) {
 			holder.offlineMark.setVisibility(View.GONE);
 			holder.foundMark.setVisibility(View.VISIBLE);
 		} else {
@@ -461,13 +461,13 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
 		if (cache.nameSp == null) {
 			cache.nameSp = (new Spannable.Factory()).newSpannable(cache.name);
-			if (cache.disabled == true || cache.archived == true) { // strike
+			if (cache.disabled || cache.archived) { // strike
 				cache.nameSp.setSpan(new StrikethroughSpan(), 0, cache.nameSp.toString().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			}
 		}
 
 		holder.text.setText(cache.nameSp, TextView.BufferType.SPANNABLE);
-		if (gcIcons.containsKey(cache.type) == true) { // cache icon
+		if (gcIcons.containsKey(cache.type)) { // cache icon
 			holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIcons.get(cache.type), null, null, null);
 		} else { // unknown cache type, "mystery" icon
 			holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIcons.get("mystery"), null, null, null);
@@ -510,7 +510,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 			}
 		}
 
-		if (setDiDi == true) {
+		if (setDiDi) {
 			holder.directionLayout.setVisibility(View.VISIBLE);
 			holder.dirImgLayout.setVisibility(View.GONE);
 		} else {
@@ -583,10 +583,10 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		holder.favourite.setBackgroundResource(favoriteBack);
 
 		StringBuilder cacheInfo = new StringBuilder();
-		if (historic == true && cache.visitedDate != null) {
-			cacheInfo.append(cgBase.timeOut.format(cache.visitedDate));
+		if (historic && cache.visitedDate != null) {
+			cacheInfo.append(base.formatTime(cache.visitedDate));
 			cacheInfo.append("; ");
-			cacheInfo.append(cgBase.dateOut.format(cache.visitedDate));
+			cacheInfo.append(base.formatDate(cache.visitedDate));
 		} else {
 			if (cache.geocode != null && cache.geocode.length() > 0) {
 				cacheInfo.append(cache.geocode);
@@ -611,7 +611,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 					cacheInfo.append(String.format(Locale.getDefault(), "%.1f", cache.terrain));
 				}
 			}
-			if (cache.members == true) {
+			if (cache.members) {
 				if (cacheInfo.length() > 0) {
 					cacheInfo.append(" | ");
 				}
@@ -635,7 +635,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
 		checked = 0;
 		for (cgCache cache : list) {
-			if (cache.statusChecked == true) {
+			if (cache.statusChecked) {
 				checked++;
 			}
 		}
@@ -655,7 +655,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		public void onClick(View view) {
 			final boolean checkNow = ((CheckBox) view).isChecked();
 
-			if (checkNow == true) {
+			if (checkNow) {
 				cache.statusChecked = true;
 				checked++;
 			} else {
@@ -690,7 +690,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 				return;
 			}
 
-			if (getSelectMode() == true || getChecked() > 0) {
+			if (getSelectMode() || getChecked() > 0) {
 				return;
 			}
 
@@ -714,7 +714,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
 		// swipe on item
 		public boolean onTouch(View view, MotionEvent event) {
-			if (gestureDetector.onTouchEvent(event) == true) {
+			if (gestureDetector.onTouchEvent(event)) {
 				touch = false;
 
 				return true;
@@ -737,7 +737,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		@Override
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 			try {
-				if (getSelectMode() == true) {
+				if (getSelectMode()) {
 					return false;
 				}
 
@@ -747,7 +747,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
 				if ((e2.getX() - e1.getX()) > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > Math.abs(velocityY)) {
 					// left to right swipe
-					if (cache.statusChecked == true) {
+					if (cache.statusChecked) {
 						return true;
 					}
 
@@ -766,7 +766,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 					}
 
 					if (holder != null && holder.oneInfo != null) {
-						if (getSelectMode() == true) {
+						if (getSelectMode()) {
 							setSelectMode(false, false);
 						}
 
@@ -798,7 +798,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 			statusChecked = true;
 		}
 
-		if (getSelectMode() == true) {
+		if (getSelectMode()) {
 			statusSort = false;
 		} else {
 			statusSort = true;
@@ -810,7 +810,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 			sort = true;
 		}
 
-		if (sort == true) {
+		if (sort) {
 			forceSort(latitude, longitude);
 		}
 	}
@@ -826,7 +826,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 			// slide cache info
 			Animation showCheckbox = new TranslateAnimation(0, (int) (SWIPE_DISTANCE * pixelDensity), 0, 0);
 			showCheckbox.setRepeatCount(0);
-			if (force == true) {
+			if (force) {
 				showCheckbox.setDuration(0);
 			} else {
 				showCheckbox.setDuration(400);
@@ -838,7 +838,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 			// dim cache info
 			Animation dimInfo = new AlphaAnimation(1.0f, SWIPE_OPACITY);
 			dimInfo.setRepeatCount(0);
-			if (force == true) {
+			if (force) {
 				dimInfo.setDuration(0);
 			} else {
 				dimInfo.setDuration(400);
@@ -873,7 +873,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 			// slide cache info
 			Animation hideCheckbox = new TranslateAnimation((int) (SWIPE_DISTANCE * pixelDensity), 0, 0, 0);
 			hideCheckbox.setRepeatCount(0);
-			if (force == true) {
+			if (force) {
 				hideCheckbox.setDuration(0);
 			} else {
 				hideCheckbox.setDuration(400);
@@ -885,7 +885,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 			// brighten cache info
 			Animation brightenInfo = new AlphaAnimation(SWIPE_OPACITY, 1.0f);
 			brightenInfo.setRepeatCount(0);
-			if (force == true) {
+			if (force) {
 				brightenInfo.setDuration(0);
 			} else {
 				brightenInfo.setDuration(400);
