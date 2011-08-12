@@ -1,28 +1,24 @@
 package cgeo.geocaching;
 
-import gnu.android.app.appmanualclient.AppManualReaderClient;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import gnu.android.app.appmanualclient.*;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.res.Resources;
 import android.os.Bundle;
+import android.content.res.Resources;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Editable;
 import android.text.Html;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class cgeowaypointadd extends Activity {
 
@@ -36,12 +32,8 @@ public class cgeowaypointadd extends Activity {
 	private int id = -1;
 	private cgGeo geo = null;
 	private cgUpdateLoc geoUpdate = new update();
-	
-	private Button bLat;
-	private Button bLon;
-	private EditText eLatDeg, eLatMin, eLatSec;
-	private EditText eLonDeg, eLonMin, eLonSec;
-	
+	private EditText latEdit = null;
+	private EditText lonEdit = null;
 	private ProgressDialog waitDialog = null;
 	private cgWaypoint waypoint = null;
 	private String type = "own";
@@ -71,7 +63,8 @@ public class cgeowaypointadd extends Activity {
 
 					app.setAction(geocode);
 
-					updateLatLonFields(waypoint.latitude, waypoint.longitude);
+					((EditText) findViewById(R.id.latitude)).setText(base.formatCoordinate(waypoint.latitude, "lat", true));
+					((EditText) findViewById(R.id.longitude)).setText(base.formatCoordinate(waypoint.longitude, "lon", true));
 					((EditText) findViewById(R.id.name)).setText(Html.fromHtml(waypoint.name.trim()).toString());
 					((EditText) findViewById(R.id.note)).setText(Html.fromHtml(waypoint.note.trim()).toString());
 
@@ -158,101 +151,7 @@ public class cgeowaypointadd extends Activity {
 
 			(new loadWaypoint()).start();
 		}
-		
-		bLat = (Button) findViewById(R.id.ButtonLat);
-		eLatDeg  = (EditText) findViewById(R.id.EditTextLatDeg);
-		eLatMin  = (EditText) findViewById(R.id.EditTextLatMin);
-		eLatSec  = (EditText) findViewById(R.id.EditTextLatSec);
-
-		bLon = (Button) findViewById(R.id.ButtonLon);
-		eLonDeg  = (EditText) findViewById(R.id.EditTextLonDeg);
-		eLonMin  = (EditText) findViewById(R.id.EditTextLonMin);
-		eLonSec  = (EditText) findViewById(R.id.EditTextLonSec);
-		
-		bLat.setOnClickListener(new buttonClickListener());
-		bLon.setOnClickListener(new buttonClickListener());
-		eLatDeg.addTextChangedListener(new textChangedListener(1));
-		eLatMin.addTextChangedListener(new textChangedListener(2));
-		eLatSec.addTextChangedListener(new textChangedListener(3));
-		eLonDeg.addTextChangedListener(new textChangedListener(4));
-		eLonMin.addTextChangedListener(new textChangedListener(5));
-		eLonSec.addTextChangedListener(new textChangedListener(6));
-		
-		((EditText) findViewById(R.id.name)).requestFocus();//TODO
-		
 	}
-	
-	private class buttonClickListener implements OnClickListener {
-
-	  @Override
-	  public void onClick(View v) {
-	    Button e = (Button) v;
-	    char[] c = e.getText().toString().toCharArray();
-	    switch (c[0]) {
-	      case 'N':
-	        e.setText("S");
-	        break;
-	      case 'S':
-	        e.setText("N");
-                break;
-              case 'E':
-                e.setText("W");
-                break;
-              case 'W':
-                e.setText("E");
-                break;
-	    }
-	  }
-	  
-	}
-	
-	private class textChangedListener implements TextWatcher {
-
-	  private int editTextId;
-	  
-	  public textChangedListener(int id) {
-            editTextId = id;
-          }
-	  
-	  @Override
-	  public void afterTextChanged(Editable s) {
-	    int maxLength = 2;
-            if (editTextId == 3 || editTextId == 4 || editTextId == 6)
-              maxLength = 3;
-            Log.d("cgeo", "Max Length " + maxLength);
-            if (s.length() == maxLength) {
-              switch (editTextId) {
-                case 1:
-                  eLatMin.requestFocus();
-                  break;
-                case 2:
-                  eLatSec.requestFocus();
-                  break;
-                case 3:
-                  eLonDeg.requestFocus();
-                  break;
-                case 4:
-                  eLonMin.requestFocus();
-                  break;
-                case 5:
-                  eLonSec.requestFocus();
-                  break;
-                case 6:
-                  ((EditText) findViewById(R.id.name)).requestFocus();
-                  break;
-              }
-            }
-            
-	  }
-
-	  @Override
-	  public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-	  @Override
-	  public void onTextChanged(CharSequence s, int start, int before, int count) {}
-
-	}
-
 
 	@Override
 	public void onResume() {
@@ -310,7 +209,15 @@ public class cgeowaypointadd extends Activity {
 			}
 
 			try {
+				if (latEdit == null) {
+					latEdit = (EditText) findViewById(R.id.latitude);
+				}
+				if (lonEdit == null) {
+					lonEdit = (EditText) findViewById(R.id.longitude);
+				}
 
+				latEdit.setHint(base.formatCoordinate(geo.latitudeNow, "lat", false));
+				lonEdit.setHint(base.formatCoordinate(geo.longitudeNow, "lon", false));
 			} catch (Exception e) {
 				Log.w(cgSettings.tag, "Failed to update location.");
 			}
@@ -330,32 +237,7 @@ public class cgeowaypointadd extends Activity {
 			}
 		}
 	}
-	
-	private void updateLatLonFields(Double latitude, Double longitude) {
-	      // Format: N 00° 00.000
-	      //         012345678901
-	      char[] lat = base.formatCoordinate(latitude, "lat", true).toCharArray();
-	      bLat.setText(lat, 0, 1);
-	      eLatDeg.setText(lat, 2, 2);
-	      eLatMin.setText(lat, 6, 2);
-	      eLatSec.setText(lat, 9, 3);
-	      // Format: E 008° 00.000
-	      //         0123456789012
-	      char[] lon = base.formatCoordinate(longitude, "lon", true).toCharArray();
-	      bLon.setText(lon, 0, 1);
-	      eLonDeg.setText(lon, 2, 3);
-	      eLonMin.setText(lon, 7, 2);
-	      eLonSec.setText(lon, 10, 3);
-	}
-	
-	private String getLatStr() {
-	  return bLat.getText()+" "+eLatDeg.getText()+"° "+eLatMin.getText()+","+eLatSec.getText();
-	}
-	
-	private String getLonStr() {
-	  return bLon.getText()+" "+eLonDeg.getText()+"° "+eLonMin.getText()+","+eLonSec.getText();
-	}
-		    
+
 	private class currentListener implements View.OnClickListener {
 
 		public void onClick(View arg0) {
@@ -364,7 +246,8 @@ public class cgeowaypointadd extends Activity {
 				return;
 			}
 
-			updateLatLonFields(geo.latitudeNow, geo.longitudeNow);
+			((EditText) findViewById(R.id.latitude)).setText(base.formatCoordinate(geo.latitudeNow, "lat", true));
+			((EditText) findViewById(R.id.longitude)).setText(base.formatCoordinate(geo.longitudeNow, "lon", true));
 		}
 	}
 
@@ -377,8 +260,8 @@ public class cgeowaypointadd extends Activity {
 
 			final String bearingText = ((EditText) findViewById(R.id.bearing)).getText().toString();
 			final String distanceText = ((EditText) findViewById(R.id.distance)).getText().toString();
-			final String latText = getLatStr();
-			final String lonText = getLonStr();
+			final String latText = ((EditText) findViewById(R.id.latitude)).getText().toString();
+			final String lonText = ((EditText) findViewById(R.id.longitude)).getText().toString();
 
 			if ((bearingText == null || bearingText.length() == 0) && (distanceText == null || distanceText.length() == 0)
 							&& (latText == null || latText.length() == 0) && (lonText == null || lonText.length() == 0)) {

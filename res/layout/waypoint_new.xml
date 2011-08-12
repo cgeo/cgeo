@@ -23,41 +23,12 @@
 				android:layout_height="fill_parent"
 				android:layout_marginTop="10dip"
 				android:orientation="vertical" >
-		
-			<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-						 android:id="@+id/tableLayout1" android:layout_width="fill_parent"
-						 android:layout_height="fill_parent" android:stretchColumns="0,1,3,5"
-						 android:layout_weight="1">
-				<TableRow android:id="@+id/tableRow1">
-					<Button style="@style/button" android:text="N" android:id="@+id/ButtonLat"></Button>
-					<EditText style="@style/edittext" android:id="@+id/EditTextLatDeg"
-							  android:maxLength="2" android:gravity="right" android:inputType="number"
-						 	  android:selectAllOnFocus="true"></EditText>
-					<TextView android:text="°" android:id="@+id/textView4"></TextView>
-					<EditText style="@style/edittext" android:id="@+id/EditTextLatMin"
-							  android:maxLength="2" android:gravity="right" android:inputType="number"
-							  android:selectAllOnFocus="true"></EditText>
-					<TextView android:text="," android:id="@+id/textView5"></TextView>
-					<EditText style="@style/edittext" android:id="@+id/EditTextLatSec"
-						      android:maxLength="3" android:inputType="number"
-				              android:selectAllOnFocus="true"></EditText>
-				</TableRow>
-				<TableRow android:id="@+id/tableRow2">
-					<Button style="@style/button" android:text="E" android:id="@+id/ButtonLon"></Button>
-					<EditText style="@style/edittext" android:id="@+id/EditTextLonDeg"
-							  android:maxLength="3" android:gravity="right" android:inputType="number"
-							  android:selectAllOnFocus="true"></EditText>
-					<TextView android:text="°" android:id="@+id/textView1"></TextView>
-					<EditText style="@style/edittext" android:id="@+id/EditTextLonMin"
-							  android:maxLength="2" android:gravity="right" android:inputType="number"
-							  android:selectAllOnFocus="true"></EditText>
-					<TextView android:text="," android:id="@+id/textView2"></TextView>
-					<EditText style="@style/edittext" android:id="@+id/EditTextLonSec"
-					 		  android:maxLength="3" android:inputType="number"
-							  android:selectAllOnFocus="true"></EditText>
-				</TableRow>
-			</TableLayout>
-					
+			<EditText style="@style/edittext"
+					android:id="@+id/latitude"
+					android:hint="latitude" />
+			<EditText style="@style/edittext"
+					android:id="@+id/longitude"
+					android:hint="longitude" />
 			<Button style="@style/button"
 					android:id="@+id/current"
 					android:text="@string/waypoint_my_coordinates" />
