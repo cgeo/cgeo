@@ -3198,7 +3198,7 @@ public class cgData {
 		}
 	}
 
-	public boolean status() {
+	public synchronized boolean status() {
 		if (databaseRO == null || databaseRW == null || initialized == false) {
 			return false;
 		}
