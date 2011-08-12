@@ -2,7 +2,9 @@ package cgeo.geocaching;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -291,42 +293,55 @@ public class cgData {
 
 		closeDb();
 
-		try {
-			final String directoryImg = cgSettings.cache;
-			final String directoryTarget = Environment.getExternalStorageDirectory() + "/" + directoryImg + "/";
-			final String fileTarget = directoryTarget + "cgeo.sqlite";
-			final String fileSource = path;
+		boolean backupDone = false;
+		final String directoryImg = cgSettings.cache;
+		final String directoryTarget = Environment.getExternalStorageDirectory() + "/" + directoryImg + "/";
+		final String fileTarget = directoryTarget + "cgeo.sqlite";
+		final String fileSource = path;
 
-			File directoryTargetFile = new File(directoryTarget);
-			if (directoryTargetFile.exists() == false) {
-				directoryTargetFile.mkdir();
-			}
-
-			InputStream input = new FileInputStream(fileSource);
-			OutputStream output = new FileOutputStream(fileTarget);
-
-			byte[] buffer = new byte[1024];
-			int length;
-			while ((length = input.read(buffer)) > 0) {
-				output.write(buffer, 0, length);
-			}
-
-			output.flush();
-			output.close();
-			input.close();
-
-			Log.i(cgSettings.tag, "Database was copied to " + fileTarget);
-
-			init();
-
-			return fileTarget;
-		} catch (Exception e) {
-			Log.w(cgSettings.tag, "Database wasn't backed up: " + e.toString());
+		File directoryTargetFile = new File(directoryTarget);
+		if (directoryTargetFile.exists() == false) {
+			directoryTargetFile.mkdir();
 		}
+
+		InputStream  input  = null;
+		OutputStream output = null;
+		try {
+			input  = new FileInputStream(fileSource);
+			output = new FileOutputStream(fileTarget);
+		} catch (FileNotFoundException e) {
+			Log.e(cgSettings.tag, "Database wasn't backed up, could not open file: " + e.toString());
+		}
+
+		byte[] buffer = new byte[1024];
+		int length;
+		if ((input != null) && (output != null)) {
+			try {
+				while ((length = input.read(buffer)) > 0) {
+					output.write(buffer, 0, length);
+				}
+				output.flush();
+				backupDone = true;
+			} catch (IOException e) {
+				Log.e(cgSettings.tag, "Database wasn't backed up, could not read/write file: " + e.toString());
+			}
+		}
+
+		try {
+			if (output != null)
+				output.close();
+			if (input != null)
+				input.close();
+		} catch (IOException e) {
+			Log.e(cgSettings.tag, "Database wasn't backed up, could not close file: " + e.toString());
+		}
+
+		if (backupDone)
+			Log.i(cgSettings.tag, "Database was copied to " + fileTarget);
 
 		init();
 
-		return null;
+		return backupDone ? fileTarget : null;
 	}
 
 	public static File isRestoreFile() {
@@ -350,45 +365,59 @@ public class cgData {
 
 		closeDb();
 
-		try {
-			final String directoryImg = cgSettings.cache;
-			final String fileSource = Environment.getExternalStorageDirectory() + "/" + directoryImg + "/cgeo.sqlite";
-			final String fileTarget = path;
+		boolean restoreDone = false;
 
-			File fileSourceFile = new File(fileSource);
-			if (fileSourceFile.exists() == false) {
-				Log.w(cgSettings.tag, "Database backup was not found");
+		final String directoryImg = cgSettings.cache;
+		final String fileSource = Environment.getExternalStorageDirectory() + "/" + directoryImg + "/cgeo.sqlite";
+		final String fileTarget = path;
 
-				init();
-
-				return false;
-			}
-
-			InputStream input = new FileInputStream(fileSource);
-			OutputStream output = new FileOutputStream(fileTarget);
-
-			byte[] buffer = new byte[1024];
-			int length;
-			while ((length = input.read(buffer)) > 0) {
-				output.write(buffer, 0, length);
-			}
-
-			output.flush();
-			output.close();
-			input.close();
-
-			Log.i(cgSettings.tag, "Database was restored");
+		File fileSourceFile = new File(fileSource);
+		if (fileSourceFile.exists() == false) {
+			Log.w(cgSettings.tag, "Database backup was not found");
 
 			init();
 
-			return true;
-		} catch (Exception e) {
-			Log.w(cgSettings.tag, "Database wasn't restored: " + e.toString());
+			return restoreDone;
 		}
+
+		InputStream  input  = null;
+		OutputStream output = null;
+		try {
+			input  = new FileInputStream(fileSource);
+			output = new FileOutputStream(fileTarget);
+		} catch (FileNotFoundException e) {
+			Log.e(cgSettings.tag, "Database wasn't restored, could not open file: " + e.toString());
+		}
+
+		byte[] buffer = new byte[1024];
+		int length;
+		if ((input != null) && (output != null)) {
+			try {
+				while ((length = input.read(buffer)) > 0) {
+					output.write(buffer, 0, length);
+				}
+				output.flush();
+				restoreDone = true;
+			} catch (IOException e) {
+				Log.e(cgSettings.tag, "Database wasn't restored, could not read/write file: " + e.toString());
+			}
+		}
+
+		try {
+			if (output != null)
+				output.close();
+			if (input != null)
+				input.close();
+		} catch (IOException e) {
+			Log.e(cgSettings.tag, "Database wasn't restored, could not close file: " + e.toString());
+		}
+
+		if (restoreDone)
+			Log.i(cgSettings.tag, "Database was restored");
 
 		init();
 
-		return false;
+		return restoreDone;
 	}
 
 	private class cgDbHelper extends SQLiteOpenHelper {
