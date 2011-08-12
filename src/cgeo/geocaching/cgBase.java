@@ -2782,8 +2782,8 @@ public class cgBase {
 			unit = "mph";
 		}
 
-		if (kph < 10) {
-			return String.format(Locale.getDefault(), "%.1f", Double.valueOf((Math.round(kph * 10) / 10))) + " " + unit;
+		if (kph < 10.0) {
+			return String.format(Locale.getDefault(), "%.1f", Double.valueOf((Math.round(kph * 10.0) / 10.0))) + " " + unit;
 		} else {
 			return String.format(Locale.getDefault(), "%.0f", Double.valueOf(Math.round(kph))) + " " + unit;
 		}

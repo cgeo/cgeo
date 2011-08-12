@@ -1255,7 +1255,6 @@ public class cgeomap extends MapBase {
 				final ArrayList<CacheOverlayItemImpl> items = new ArrayList<CacheOverlayItemImpl>();
 
 				if (cachesProtected != null && !cachesProtected.isEmpty()) {
-					int counter = 0;
 					int icon = 0;
 					Drawable pin = null;
 					CacheOverlayItemImpl item = null;
@@ -1290,14 +1289,6 @@ public class cgeomap extends MapBase {
 						item.setMarker(pin);
 
 						items.add(item);
-
-						/*
-						counter++;
-						if ((counter % 10) == 0) {
-							overlayCaches.updateItems(items);
-							displayHandler.sendEmptyMessage(1);
-						}
-						*/
 					}
 
 					overlayCaches.updateItems(items);

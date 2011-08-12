@@ -36,7 +36,7 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 
 public class cgeopoint extends AbstractActivity {
 
-	private class DestinationHistoryAdapter extends ArrayAdapter<cgDestination> {
+	private static class DestinationHistoryAdapter extends ArrayAdapter<cgDestination> {
 		private LayoutInflater inflater = null;
 
 		public DestinationHistoryAdapter(Context context,
@@ -400,6 +400,7 @@ public class cgeopoint extends AbstractActivity {
 	private void navigateTo(List<Double> coords) {
 		if (coords == null || coords.get(0) == null || coords.get(1) == null) {
 			showToast(res.getString(R.string.err_location_unknown));
+			return;
 		}
 
 		cgeonavigate navigateActivity = new cgeonavigate();
@@ -418,6 +419,7 @@ public class cgeopoint extends AbstractActivity {
 
 		if (coords == null || coords.get(0) == null || coords.get(1) == null) {
 			showToast(res.getString(R.string.err_location_unknown));
+			return;
 		}
 
 		cgeocaches cachesActivity = new cgeocaches();
@@ -598,7 +600,7 @@ public class cgeopoint extends AbstractActivity {
 	}
 
 	private void saveCoords(Double latitude, Double longitude) {
-		if (changed && latitude == null || longitude == null) {
+		if (changed && latitude != null && longitude != null) {
 			SharedPreferences.Editor edit = prefs.edit();
 
 			edit.putFloat("anylatitude", latitude.floatValue());

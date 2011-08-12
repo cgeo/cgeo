@@ -282,7 +282,7 @@ public class cgeowaypoint extends AbstractActivity {
 		}
 	}
 
-	private class update extends cgUpdateLoc {
+	private static class update extends cgUpdateLoc {
 
 		@Override
 		public void updateLoc(cgGeo geo) {
@@ -336,9 +336,6 @@ public class cgeowaypoint extends AbstractActivity {
 		navigateIntent.putExtra("geocode", waypoint.prefix.trim() + "/" + waypoint.lookup.trim());
 		navigateIntent.putExtra("name", waypoint.name);
 
-		if (cgeonavigate.coordinates != null) {
-			cgeonavigate.coordinates.clear();
-		}
 		cgeonavigate.coordinates = new ArrayList<cgCoord>();
 		cgeonavigate.coordinates.add(new cgCoord(waypoint));
 		startActivity(navigateIntent);

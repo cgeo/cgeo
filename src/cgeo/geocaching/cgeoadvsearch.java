@@ -8,8 +8,6 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -169,7 +167,6 @@ public class cgeoadvsearch extends AbstractActivity {
 			final ArrayAdapter<String> geocodesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, geocodesInCache);
 			geocodeEdit.setAdapter(geocodesAdapter);
 		}
-		// geocodeEdit.addTextChangedListener(new UpperCaseTextWatcher(geocodeEdit));
 
 		final Button displayByGeocode = (Button) findViewById(R.id.display_geocode);
 		displayByGeocode.setOnClickListener(new findByGeocodeListener());
@@ -191,46 +188,9 @@ public class cgeoadvsearch extends AbstractActivity {
 
 		EditText trackable = (EditText) findViewById(R.id.trackable);
 		trackable.setOnEditorActionListener(new findTrackableAction());
-		// trackable.addTextChangedListener(new UpperCaseTextWatcher(trackable)); // not working with HTC IMEs.
 
 		final Button displayTrackable = (Button) findViewById(R.id.display_trackable);
 		displayTrackable.setOnClickListener(new findTrackableListener());
-	}
-
-	/**
-	 * converts user input to uppercase during typing
-	 * @author bananeweizen
-	 *
-	 */
-	private final class UpperCaseTextWatcher implements TextWatcher {
-
-		private final EditText editText;
-
-		private UpperCaseTextWatcher(EditText editText) {
-			this.editText = editText;
-		}
-
-		@Override
-		public void afterTextChanged(Editable arg0) {
-			// empty
-		}
-
-		@Override
-		public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-			// empty
-		}
-
-		@Override
-		public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-			String oldText = editText.getText().toString();
-			String upperText = oldText.toUpperCase();
-			if (!oldText.equals(upperText)) {
-				int selectionStart = editText.getSelectionStart();
-				int selectionEnd = editText.getSelectionEnd();
-				editText.setText(upperText);
-				editText.setSelection(selectionStart, selectionEnd);
-			}
-		}
 	}
 
 	private class update extends cgUpdateLoc {

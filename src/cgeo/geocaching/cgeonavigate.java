@@ -441,7 +441,7 @@ public class cgeonavigate extends AbstractActivity {
 		}
 	}
 
-	private class updaterThread extends Thread {
+	private static class updaterThread extends Thread {
 
 		private Handler handler = null;
 

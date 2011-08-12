@@ -191,7 +191,7 @@ public class cgeoimages extends AbstractActivity {
 			}
 			break;
 		default:
-			load_process_string = new String("Loading...");
+			load_process_string = "Loading...";
 		}
 		waitDialog = ProgressDialog.show(this, null, load_process_string, true);
 		waitDialog.setCancelable(true);

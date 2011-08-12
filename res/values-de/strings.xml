@@ -189,7 +189,7 @@
   <string name="err_parse_lon">c:geo konnte den Längengrad nicht verarbeiten.</string>
   <string name="err_parse_bear">c:geo konnte die Richtung nicht verarbeiten.</string>
   <string name="err_parse_dist">c:geo konnte die Entfernung nicht verarbeiten.</string>
-  
+
   <string name="err_fieldnotes_export_failed">Exportieren der Field Notes fehlgeschlagen.</string>
 
   <string name="warn_save_nothing">Es gibt nichts zum speichern.</string>
@@ -216,7 +216,7 @@
   <string name="info_log_saved">Log erfolgreich gespeichert.</string>
   <string name="info_log_cleared">Log wurde geleert.</string>
   <string name="info_log_type_changed">Logtyp wurde verändert!</string>
-  
+
   <string name="info_fieldnotes_exported_to">Field Notes exportiert nach</string>
 
   <!-- location service -->
@@ -275,6 +275,7 @@
   <string name="caches_sort_rating">Bewertung</string>
   <string name="caches_sort_vote">Eigene Bewertung</string>
   <string name="caches_sort_inventory">Inventaranzahl</string>
+  <string name="caches_sort_date">Datum (Event-Caches)</string>
   <string name="caches_select">Wähle von Liste</string>
   <string name="caches_select_mode">Auswahlmodus</string>
   <string name="caches_select_mode_exit">Auswahlmodus beenden</string>

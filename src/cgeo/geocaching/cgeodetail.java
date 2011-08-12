@@ -20,7 +20,6 @@ import android.database.Cursor;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -48,6 +47,7 @@ import android.widget.TextView;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.GeneralAppsFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.compatibility.Compatibility;
 
 public class cgeodetail extends AbstractActivity {
 
@@ -1385,13 +1385,7 @@ public class cgeodetail extends AbstractActivity {
 
 	private void addToCalendar() {
 		String[] projection = new String[] { "_id", "displayName" };
-		Uri calendarProvider = null;
-		final int sdk = new Integer(Build.VERSION.SDK).intValue();
-		if (sdk >= 8) {
-			calendarProvider = Uri.parse("content://com.android.calendar/calendars");
-		} else {
-			calendarProvider = Uri.parse("content://calendar/calendars");
-		}
+		Uri calendarProvider = Compatibility.getCalendarProviderURI();
 
 		Cursor cursor = managedQuery(calendarProvider, projection, "selected=1", null, null);
 
@@ -1442,13 +1436,7 @@ public class cgeodetail extends AbstractActivity {
 		}
 
 		try {
-			Uri calendarProvider = null;
-			final int sdk = new Integer(Build.VERSION.SDK).intValue();
-			if (sdk >= 8) {
-				calendarProvider = Uri.parse("content://com.android.calendar/events");
-			} else {
-				calendarProvider = Uri.parse("content://calendar/events");
-			}
+			Uri calendarProvider = Compatibility.getCalenderEventsProviderURI();
 
 			final Integer[] keys = calendars.keySet().toArray(new Integer[calendars.size()]);
 			final Integer calId = keys[index];
@@ -1850,7 +1838,7 @@ public class cgeodetail extends AbstractActivity {
 		}
 	}
 
-	private class decryptLog implements View.OnClickListener {
+	private static class decryptLog implements View.OnClickListener {
 
 		public void onClick(View view) {
 			if (view == null) {

@@ -211,7 +211,7 @@ public class cgData {
 					Log.e(cgSettings.tag, "Failed to open connection to RW database.");
 				}
 
-				if (databaseRW.inTransaction()) {
+				if (databaseRW != null && databaseRW.inTransaction()) {
 					databaseRW.endTransaction();
 				}
 			} catch (Exception e) {
@@ -391,7 +391,7 @@ public class cgData {
 		return false;
 	}
 
-	private class cgDbHelper extends SQLiteOpenHelper {
+	private static class cgDbHelper extends SQLiteOpenHelper {
 
 		cgDbHelper(Context context) {
 			super(context, dbName, null, dbVersion);
@@ -3198,7 +3198,7 @@ public class cgData {
 		}
 	}
 
-	public boolean status() {
+	public synchronized boolean status() {
 		if (databaseRO == null || databaseRW == null || initialized == false) {
 			return false;
 		}
