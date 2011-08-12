@@ -80,7 +80,7 @@ public class cgCompass extends View {
 
 		wantStop = false;
 
-		watchdog = new changeThread(changeHandler);
+		watchdog = new changeThread();
 		watchdog.start();
 	}
 
@@ -111,12 +111,6 @@ public class cgCompass extends View {
 	}
 
 	private class changeThread extends Thread {
-
-		Handler handler = null;
-
-		public changeThread(Handler handlerIn) {
-			handler = handlerIn;
-		}
 
 		@Override
 		public void run() {

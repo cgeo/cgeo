@@ -837,7 +837,7 @@ public class cgeocaches extends AbstractListActivity {
 			                                   SUBMENU_FILTER,
 			                                   MENU_REFRESH_STORED};
 
-			boolean menuEnabled = cacheList != null && cacheList.size() > 0;
+			boolean menuEnabled = cacheList.size() > 0;
 		    for (int itemId : hideIfEmptyList)
 		    {
 		        MenuItem item = menu.findItem(itemId);

@@ -83,7 +83,7 @@ public class cgMapfileListAdapter extends ArrayAdapter<File> {
 		}
 	}
 	
-	private class MapfileView {
+	private static class MapfileView {
 		public TextView filepath;
 		public TextView filename;
 	}

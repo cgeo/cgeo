@@ -1838,7 +1838,7 @@ public class cgeodetail extends AbstractActivity {
 		}
 	}
 
-	private class decryptLog implements View.OnClickListener {
+	private static class decryptLog implements View.OnClickListener {
 
 		public void onClick(View view) {
 			if (view == null) {

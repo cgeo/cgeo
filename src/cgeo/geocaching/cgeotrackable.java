@@ -615,7 +615,7 @@ public class cgeotrackable extends AbstractActivity {
 		}
 	}
 
-	private class tbIconHandler extends Handler {
+	private static class tbIconHandler extends Handler {
 		TextView view = null;
 
 		public tbIconHandler(TextView viewIn) {

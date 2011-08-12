@@ -12,8 +12,8 @@ import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
 import cgeo.geocaching.mapinterfaces.MapProjectionImpl;
-import cgeo.geocaching.mapinterfaces.OverlayBase;
 import cgeo.geocaching.mapinterfaces.MapViewImpl;
+import cgeo.geocaching.mapinterfaces.OverlayBase;
 
 public class cgOverlayScale implements OverlayBase {
 	private cgSettings settings = null;
@@ -49,7 +49,7 @@ public class cgOverlayScale implements OverlayBase {
 		final double span = mapView.getLongitudeSpan() / 1e6;
 		final GeoPointImpl center = mapView.getMapViewCenter();
 
-		pixels = mapView.getWidth() / 2; // pixels related to following latitude span
+		pixels = mapView.getWidth() / 2.0; // pixels related to following latitude span
 		bottom = mapView.getHeight() - 14; // pixels from bottom side of screen
 		distance = cgBase.getDistance((center.getLatitudeE6() / 1e6), ((center.getLongitudeE6() / 1e6) - (span /2)), (center.getLatitudeE6() / 1e6), ((center.getLongitudeE6() / 1e6) + (span /2)));
 		distance = distance / 2;
