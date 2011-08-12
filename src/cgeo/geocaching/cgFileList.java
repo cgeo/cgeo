@@ -68,7 +68,7 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 
 		setTheme();
 		setContentView(R.layout.gpx);
-		setTitle(res.getString(R.string.gpx_import_title));
+		setTitle();
 
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -128,6 +128,11 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 	 * @return The folder to start the recursive search in
 	 */
 	protected abstract String[] getBaseFolders();
+	
+	/**
+	 * Triggers the deriving class to set the title
+	 */
+	protected abstract void setTitle();
 
 	private class loadFiles extends Thread {
 		public void notifyEnd() {
