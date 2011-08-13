@@ -611,7 +611,6 @@
   <!-- map -->
   <string name="map_map">Karte</string>
   <string name="map_live">Live-Karte</string>
-  <string name="map_view_satellite">Satellit</string>
   <string name="map_view_map">Karte</string>
   <string name="map_trail_show">Spur einblenden</string>
   <string name="map_trail_hide">Spur ausblenden</string>
@@ -770,10 +769,18 @@
   <string name="attribute_hike_med_no">kein mittlerer Marsch</string>
   <string name="attribute_hike_long_yes">langer Marsch (mehr als 10 km)</string>
   <string name="attribute_hike_long_no">kein langer Marsch</string>
+  <string name="attribute_seasonal_yes">Saisonabhängiger Zugang</string>
+  <string name="attribute_seasonal_no">Zugang nicht saisonabhängig</string>
+  <string name="attribute_touristOK_yes">touristenfreundlich</string>
+  <string name="attribute_touristOK_no">nicht touristenfreundlich</string>
+  <string name="attribute_frontyard_yes">Privatgrundstück</string>
+  <string name="attribute_frontyard_no">kein Privatgrundstück</string>
+  <string name="attribute_teamwork_yes">Teamwork notwendig</string>
+  <string name="attribute_teamwork_no">Teamwork nicht notwendig</string>
   <string name="attribute_landf_yes">\'Lost and found\' Tour</string>
   <string name="attribute_landf_no">keine \'Lost and found\' Tour</string>
-  <string name="attribute_partnership_yes">gesponserter Cache</string>
-  <string name="attribute_partnership_no">nicht gesponserter Cache</string>
+  <string name="attribute_partnership_yes">Partnerschafts-Cache</string>
+  <string name="attribute_partnership_no">kein Partnerschafts-Cache</string>
 
   <!--  attributes (equipment -> required, not required) -->
   <string name="attribute_fee_yes">Eintrittsgeld notwendig</string>
@@ -796,6 +803,8 @@
   <string name="attribute_s_tool_no">Besondere Werkzeuge nicht notwendig</string>
   <string name="attribute_wirelessbeacon_yes">Radiosignal</string>
   <string name="attribute_wirelessbeacon_no">kein Radiosignal</string>
+  <string name="attribute_treeclimbing_yes">auf Bäume klettern notwendig</string>
+  <string name="attribute_treeclimbing_no">auf Bäume klettern nicht notwendig</string>
 
   <!--  attributes (hazards -> present, not present) -->
   <string name="attribute_poisonoak_yes">giftige Pflanzen</string>
