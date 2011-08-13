@@ -188,11 +188,11 @@ public class cgeoauth extends AbstractActivity {
 				if (line != null && line.length() > 0) {
 					final Matcher paramsMatcher1 = paramsPattern1.matcher(line);
 					if (paramsMatcher1.find() && paramsMatcher1.groupCount() > 0) {
-						OAtoken = paramsMatcher1.group(1).toString();
+						OAtoken = paramsMatcher1.group(1);
 					}
 					final Matcher paramsMatcher2 = paramsPattern2.matcher(line);
 					if (paramsMatcher2.find() && paramsMatcher2.groupCount() > 0) {
-						OAtokenSecret = paramsMatcher2.group(1).toString();
+						OAtokenSecret = paramsMatcher2.group(1);
 					}
 
 					if (OAtoken != null && OAtoken.length() > 0 && OAtokenSecret != null && OAtokenSecret.length() > 0) {
@@ -296,11 +296,11 @@ public class cgeoauth extends AbstractActivity {
 
 			final Matcher paramsMatcher1 = paramsPattern1.matcher(line);
 			if (paramsMatcher1.find() && paramsMatcher1.groupCount() > 0) {
-				OAtoken = paramsMatcher1.group(1).toString();
+				OAtoken = paramsMatcher1.group(1);
 			}
 			final Matcher paramsMatcher2 = paramsPattern2.matcher(line);
 			if (paramsMatcher2.find() && paramsMatcher2.groupCount() > 0) {
-				OAtokenSecret = paramsMatcher2.group(1).toString();
+				OAtokenSecret = paramsMatcher2.group(1);
 			}
 
 			if (OAtoken.length() == 0 || OAtokenSecret.length() == 0) {
