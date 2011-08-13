@@ -69,7 +69,7 @@ public class cgeoimages extends AbstractActivity {
 						waitDialog.dismiss();
 					}
 
-					if (app.isOffline(geocode, null) == true) {
+					if (app.isOffline(geocode, null)) {
 						offline = 1;
 						if ((img_type == LOG_IMAGE) && (settings.storelogimages == false)) {
 							offline = 0;
@@ -184,14 +184,14 @@ public class cgeoimages extends AbstractActivity {
 			break;
 		case LOG_IMAGE:
 			load_process_string = res.getString(R.string.cache_log_images_loading);
-			if (settings.storelogimages == true) {
+			if (settings.storelogimages) {
 				save = true;
 			} else {
 				save = false;
 			}
 			break;
 		default:
-			load_process_string = new String("Loading...");
+			load_process_string = "Loading...";
 		}
 		waitDialog = ProgressDialog.show(this, null, load_process_string, true);
 		waitDialog.setCancelable(true);

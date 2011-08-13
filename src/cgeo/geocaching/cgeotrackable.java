@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import java.net.URLEncoder;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 
 import android.app.ProgressDialog;
@@ -207,7 +206,7 @@ public class cgeotrackable extends AbstractActivity {
 					itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
 					itemName.setText(res.getString(R.string.trackable_released));
-					itemValue.setText(cgBase.dateOut.format(trackable.released));
+					itemValue.setText(base.formatDate(trackable.released.getTime()));
 					detailsList.addView(itemLayout);
 				}
 
@@ -327,7 +326,7 @@ public class cgeotrackable extends AbstractActivity {
 		// try to get data from URI
 		if (geocode == null && guid == null && id == null && uri != null) {
 			String uriHost = uri.getHost().toLowerCase();
-			if (uriHost.contains("geocaching.com") == true) {
+			if (uriHost.contains("geocaching.com")) {
 				geocode = uri.getQueryParameter("tracker");
 				guid = uri.getQueryParameter("guid");
 				id = uri.getQueryParameter("id");
@@ -349,9 +348,9 @@ public class cgeotrackable extends AbstractActivity {
 					finish();
 					return;
 				}
-			} else if (uriHost.contains("coord.info") == true) {
+			} else if (uriHost.contains("coord.info")) {
 				String uriPath = uri.getPath().toLowerCase();
-				if (uriPath != null && uriPath.startsWith("/tb") == true) {
+				if (uriPath != null && uriPath.startsWith("/tb")) {
 					geocode = uriPath.substring(1).toUpperCase();
 					guid = null;
 					id = null;
@@ -526,12 +525,11 @@ public class cgeotrackable extends AbstractActivity {
 				rowView = (RelativeLayout) inflater.inflate(R.layout.trackable_logitem, null);
 
 				if (log.date > 0) {
-					final Date logDate = new Date(log.date);
-					((TextView) rowView.findViewById(R.id.added)).setText(cgBase.dateOutShort.format(logDate));
+					((TextView) rowView.findViewById(R.id.added)).setText(base.formatShortDate(log.date));
 				}
 
 
-				if (cgBase.logTypes1.containsKey(log.type) == true) {
+				if (cgBase.logTypes1.containsKey(log.type)) {
 					((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(log.type));
 				} else {
 					((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(4)); // note if type is unknown
@@ -617,7 +615,7 @@ public class cgeotrackable extends AbstractActivity {
 		}
 	}
 
-	private class tbIconHandler extends Handler {
+	private static class tbIconHandler extends Handler {
 		TextView view = null;
 
 		public tbIconHandler(TextView viewIn) {

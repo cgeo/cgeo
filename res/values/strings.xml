@@ -275,6 +275,7 @@
   <string name="caches_sort_rating">rating</string>
   <string name="caches_sort_vote">vote (own rating)</string>
   <string name="caches_sort_inventory">count of inventory</string>
+  <string name="caches_sort_date">date (event caches)</string>
   <string name="caches_select">Select from list</string>
   <string name="caches_select_mode">Select mode</string>
   <string name="caches_select_mode_exit">Exit select mode</string>
@@ -377,6 +378,11 @@
   <string name="init_signature_help_button">Help</string>
   <string name="init_signature_help_title">Signature tips and tricks</string>
   <string name="init_signature_help_text">Write your signature to use in log text.\nSpecial strings that can be used are: [DATE] , [TIME], [USER] &amp; [NUMBER].\nThese will be expanded when the signature is inserted.</string>
+  <string name="init_signature_template_button">Insert template</string>
+  <string name="init_signature_template_date">Date</string>
+  <string name="init_signature_template_time">Time</string>
+  <string name="init_signature_template_user">User</string>
+  <string name="init_signature_template_number">Number</string>
   <string name="init_languages">Translation</string>
   <string name="init_languages_description">Which languages you don\'t need to translate? Please provide two-character language codes.</string>
   <string name="init_languages_hint">en es de cs</string>
@@ -558,6 +564,9 @@
   <string name="gpx_import_title">Import GPX</string>
   <string name="gpx_import_title_reading_file">Reading file</string>
   <string name="gpx_import_title_caches_imported">Result</string>
+
+  <!-- map file select -->
+  <string name="map_file_select_title">Select map file</string>
 
   <!--  import -->
   <string name="import_title">Import...</string>

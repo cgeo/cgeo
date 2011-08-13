@@ -44,6 +44,11 @@ public class cgSelectMapfile extends cgFileList<cgMapfileListAdapter> {
 		return "map";
 	}
 	
+	@Override
+	protected void setTitle() {
+		setTitle(res.getString(R.string.map_file_select_title));
+	}
+	
 	public String getCurrentMapfile() {
 		return mapFile;
 	}

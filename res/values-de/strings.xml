@@ -151,6 +151,7 @@
   <string name="err_manual_title">Anleitung ist nicht installiert.</string>
   <string name="err_manual_message">Bedienungsanleitung für c:geo ist auf dem Gerät nicht vorhanden. Jetzt installieren?</string>
   <string name="err_manual_market">c:geo konnte den Android Market nicht starten, um nach der Anleitung zu suchen.</string>
+  <string name="err_missing_device_name">Bitte legen Sie einen Namen für Ihr Handy fest, bevor Sie sich registrieren.</string>
 
   <string name="err_tb_display">"c:geo kann den gewünschten Trackable nicht anzeigen. Ist es wirklich einer?</string>
   <string name="err_tb_details_open">c:geo konnte Details des Trackables nicht öffnen.</string>
@@ -188,7 +189,7 @@
   <string name="err_parse_lon">c:geo konnte den Längengrad nicht verarbeiten.</string>
   <string name="err_parse_bear">c:geo konnte die Richtung nicht verarbeiten.</string>
   <string name="err_parse_dist">c:geo konnte die Entfernung nicht verarbeiten.</string>
-  
+
   <string name="err_fieldnotes_export_failed">Exportieren der Field Notes fehlgeschlagen.</string>
 
   <string name="warn_save_nothing">Es gibt nichts zum speichern.</string>
@@ -203,6 +204,8 @@
   <string name="warn_search_help_user">Name eines Benutzers auf Geocaching.com eingeben.</string>
   <string name="warn_search_help_tb">Code des Trackables eingeben, z.B. \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Bitte Text einfügen.</string>
+  <string name="warn_load_log_image">c:geo konnte das Log Bild nicht laden.</string>
+  <string name="warn_load_spoiler_image">c:geo konnte das Spoiler Bild nicht laden.</string>
 
   <string name="info_altitude">Momentane Höhe</string>
   <string name="info_distance">Gereiste Strecke</string>
@@ -213,7 +216,7 @@
   <string name="info_log_saved">Log erfolgreich gespeichert.</string>
   <string name="info_log_cleared">Log wurde geleert.</string>
   <string name="info_log_type_changed">Logtyp wurde verändert!</string>
-  
+
   <string name="info_fieldnotes_exported_to">Field Notes exportiert nach</string>
 
   <!-- location service -->
@@ -272,6 +275,7 @@
   <string name="caches_sort_rating">Bewertung</string>
   <string name="caches_sort_vote">Eigene Bewertung</string>
   <string name="caches_sort_inventory">Inventaranzahl</string>
+  <string name="caches_sort_date">Datum (Event-Caches)</string>
   <string name="caches_select">Wähle von Liste</string>
   <string name="caches_select_mode">Auswahlmodus</string>
   <string name="caches_select_mode_exit">Auswahlmodus beenden</string>
@@ -292,6 +296,36 @@
   <string name="caches_recaptcha_explanation">Bitte Text vom Bild abschreiben. Wichtig, um Koordinaten des Caches laden zu können. Optional, kann in den Einstellungen deaktiviert werden.</string>
   <string name="caches_recaptcha_hint">Text vom Bild</string>
   <string name="caches_recaptcha_continue">Fortfahren</string>
+  <string name="caches_filter">Filter</string>
+  <string name="caches_filter_title">Filtern nach</string>
+  <string name="caches_filter_size">Größe</string>
+  <string name="caches_filter_type">Typ</string>
+  <string name="caches_filter_track">mit Trackables</string>
+  <string name="caches_filter_clear">Filter zurücksetzen</string>
+  <string name="caches_filter_size_title">Größe wählen</string>
+  <string name="caches_filter_size_micro">micro</string>
+  <string name="caches_filter_size_small">small</string>
+  <string name="caches_filter_size_regular">regular</string>
+  <string name="caches_filter_size_large">large</string>
+  <string name="caches_filter_size_other">other</string>
+  <string name="caches_filter_size_virtual">virtual</string>
+  <string name="caches_filter_size_notchosen">not chosen</string>
+  <string name="caches_filter_type_title">Wähle den Typ</string>
+  <string name="caches_filter_type_traditional">Traditional cache</string>
+  <string name="caches_filter_type_multi">Multi-cache</string>
+  <string name="caches_filter_type_mystery">Unknown cache</string>
+  <string name="caches_filter_type_letterbox">Letterbox Hybrid</string>
+  <string name="caches_filter_type_event">Event cache</string>
+  <string name="caches_filter_type_mega">Mega-event cache</string>
+  <string name="caches_filter_type_earth">Earth cache</string>
+  <string name="caches_filter_type_cito">Cache In Trash Out event</string>
+  <string name="caches_filter_type_webcam">Webcam cache</string>
+  <string name="caches_filter_type_virtual">Virtual cache</string>
+  <string name="caches_filter_type_wherigo">Wherigo cache</string>
+  <string name="caches_filter_type_lostfound">Lost &amp; Found</string>
+  <string name="caches_filter_type_ape">Project APE cache</string>
+  <string name="caches_filter_type_gchq">Groundspeak HQ</string>
+  <string name="caches_filter_type_gps">GPS Cache exhibit</string>
   <string name="caches_exporting_fieldnote">Exportiere als Field Notes...</string>
   <string name="caches_removing_from_history">Lösche aus Verlauf...</string>
 
@@ -344,6 +378,11 @@
   <string name="init_signature_help_button">Hilfe</string>
   <string name="init_signature_help_title">Tipps und Tricks für die Signatur</string>
   <string name="init_signature_help_text">Verfasse eine Signatur für deinen Logtext.\nErlaubte Platzhalter sind: [DATE], [TIME], [USER] &amp; [NUMBER]. Diese werden beim Einfügen der Signatur durch ihre Werte ersetzt.</string>
+  <string name="init_signature_template_button">Platzhalter einfügen</string>
+  <string name="init_signature_template_date">Datum</string>
+  <string name="init_signature_template_time">Zeit</string>
+  <string name="init_signature_template_user">Benutzer</string>
+  <string name="init_signature_template_number">Nummer</string>
   <string name="init_languages">Übersetzung</string>
   <string name="init_languages_description">Welche Sprachen verstehst du? (zweistelliger Code)</string>
   <string name="init_languages_hint">de en es</string>
@@ -357,6 +396,7 @@
   <string name="init_exclude">Eigene und gefundene Caches ausblenden</string>
   <string name="init_disabled">Deaktivierte Caches ausblenden</string>
   <string name="init_offline">Statische Karten für Offline-Verwendung speichern</string>
+  <string name="init_save_log_img">Logbilder abspeichern</string>
   <string name="init_units">Imperiale Einheiten (Meilen/Fuß)</string>
   <string name="init_nav">Google Navigation verwenden</string>
   <string name="init_autoload">Ausführliche Beschreibung automatisch laden</string>
@@ -376,11 +416,30 @@
   <string name="init_restore_failed">Wiederherstellung fehlgeschlagen.</string>
   <string name="init_backup_last">Backup verfügbar von</string>
   <string name="init_backup_last_no">Keine Datei mit Datenbanksicherung gefunden.</string>
-  <string name="init_mapsettings">Karten-Einstellungen</string> <!-- since: 2.26 RC3 -->
-  <string name="init_mapsettings_description">Du kannst statt Google Maps alternativ Karten von OpenStreetMap nutzen. Du benötigst dafür eine Kartendatei zur Offline-Darstellung (siehe http://code.google.com/p/mapsforge/ für mehr Details)</string> <!-- since: 2.26 RC3 -->
-  <string name="init_mfmaps">Benutze OpenStreetMap</string> <!-- since: 2.26 RC3 -->
+  <string name="init_mapsources">Kertenherkunft</string> <!-- since: 2.26 RC3 -->
+  <string name="init_mapsources_description">Hier kannst du die Quelle für deine Karte wählen. Alternativ zu Google maps stehen verschiedene OpenStreetMap-Stile zur Verfügung und daneben auch Karten-Dateien für die Offline-Nutzung (siehe http://code.google.com/p/mapsforge/ für die Details).</string> <!-- since: 2.26 RC3 -->
+  <string name="init_mapsource_select">Wähle eine Kartenquelle</string>
+  <string name="init_select_mapfile">...</string>
   <string name="init_trackautovisit">Trackables automatisch auf \"besuchen\" setzen</string>
   <string name="init_sigautoinsert">Signatur automatisch einfügen</string>
+
+  <!-- map sources -->
+  <string-array name="map_sources">
+    <item>Google: Map</item>
+    <item>Google: Satellit</item>
+    <item>OSM: Mapnik</item>
+    <item>OSM: Osmarender</item>
+    <item>OSM: Cyclemap</item>
+    <item>OSM: Offline</item>
+  </string-array>
+
+  <string name="init_sendToCgeo">Send to c:geo</string>
+  <string name="init_sendToCgeo_name">Der Name deines Handys:</string>
+  <string name="init_sendToCgeo_description">Send to c:geo erlaubt es mit einem speziellen Plugin für Firefox oder Chrome Caches direkt von der Geocachingseite zu empfangen. Bitte lesen Sie die Details vor einer Registrierung auf <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a> nach.</string>
+  <string name="init_sendToCgeo_register">Registrierung anfordern</string>
+  <string name="init_sendToCgeo_registering">Regsitriere Ihr Handy für "Send to c:geo"...</string>
+  <string name="init_sendToCgeo_register_ok">Registrierung erfolgreic. Ihr PIN code ist ####. Benutzen Sie diesen auf der c:geo website um Ihr Handy im Browser hinzuzufügen.</string>
+  <string name="init_sendToCgeo_register_fail">Registrierung fehlgeschlagen.</string>
 
   <!-- auth -->
   <string name="auth_twitter">Twitter</string>
@@ -460,6 +519,8 @@
   <string name="cache_menu_details">Details</string>
   <string name="cache_menu_share">Weiterleiten</string>
   <string name="cache_menu_move_list">Auf andere Liste verschieben</string>
+  <string name="cache_menu_gcc">GCC</string>
+  <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Gespeicherter Log</string>
   <string name="cache_status_found">Gefunden</string>
@@ -490,17 +551,30 @@
   <string name="cache_clear_history">Verlauf leeren</string>
   <string name="cache_remove_from_history">Aus Verlauf löschen</string>
 
+  <!-- file list base -->
+  <string name="file_searching_in">Suche nach Dateien\nin</string>
+  <string name="file_list_no_files">c:geo hat keine passenden Dateien gefunden.</string>
+  <string name="file_searching">Suche nach passenden Dateien</string>
+  <string name="file_title_searching">Suche</string>
+
   <!-- gpx -->
-  <string name="gpx_import_searching_in">Suche nach GPX-Dateien\nin</string>
   <string name="gpx_import_loading_stored">Lade Caches aus GPX-Datei\nGespeichert:</string>
-  <string name="gpx_import_no_files">c:geo hat keine GPX-Dateien gefunden.</string>
   <string name="gpx_import_caches_imported">Caches importiert.</string>
-  <string name="gpx_import_searching">Suche nach GPX-Dateien</string>
   <string name="gpx_import_loading">Lade Caches aus GPX-Datei</string>
   <string name="gpx_import_title">Importiere GPX-Datei</string>
   <string name="gpx_import_title_reading_file">Lese Datei</string>
-  <string name="gpx_import_title_searching">Suche</string>
   <string name="gpx_import_title_caches_imported">Ergebnis</string>
+
+  <!-- map file select -->
+  <string name="map_file_select_title">Wähle eine Kartendatei</string>
+
+  <!--  import -->
+  <string name="import_title">Importiere...</string>
+  <string name="web_import_title">Aus dem Internet importieren</string>
+  <string name="web_import_server_problem">Beim Datenaustausch mit dem Server ist ein Problem aufgereten. Bitte registrieren Sie Ihr Handy erneut und versuchen Sie es dann noch einmal.</string>
+  <string name="web_import_waiting">Erwarte neue Caches aus dem Internet...</string>
+  <string name="web_downloading">Lade herunter</string>
+  <string name="web_downloaded">Heruntergeladen</string>
 
   <!-- event -->
   <string name="event_success">Event-Cache zum Kalender hinzugefügt</string>
