@@ -684,8 +684,8 @@
   <string name="attribute_nightcache_no">kein Nacht-Cache</string>
   <string name="attribute_parkngrab_yes">halten und mitnehmen</string>
   <string name="attribute_parkngrab_no">kein halten und mitnehmen</string>
-  <string name="attribute_abandonedbuilding_yes">leerstehendes Gebäude</string>
-  <string name="attribute_abandonedbuilding_no">kein leerstehendes Gebäude</string>
+  <string name="attribute_AbandonedBuilding_yes">leerstehendes Gebäude</string>
+  <string name="attribute_AbandonedBuilding_no">kein leerstehendes Gebäude</string>
   <string name="attribute_hike_short_yes">kurzer Marsch (weniger als 1 km)</string>
   <string name="attribute_hike_short_no">kein kurzer Marsch</string>
   <string name="attribute_hike_med_yes">mittlerer Marsch (1 bis 10 km)</string>
@@ -694,8 +694,8 @@
   <string name="attribute_hike_long_no">kein langer Marsch</string>
   <string name="attribute_landf_yes">\'Lost and found\' Tour</string>
   <string name="attribute_landf_no">keine \'Lost and found\' Tour</string>
-  <string name="attribute_sponsored_yes">gesponserter Cache</string>
-  <string name="attribute_sponsored_no">nicht gesponserter Cache</string>
+  <string name="attribute_partnership_yes">gesponserter Cache</string>
+  <string name="attribute_partnership_no">nicht gesponserter Cache</string>
 
   <!--  attributes (equipment -> required, not required) -->
   <string name="attribute_fee_yes">Eintrittsgeld notwendig</string>

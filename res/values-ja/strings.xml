@@ -648,8 +648,8 @@
   <string name="attribute_nightcache_no">ナイトキャッシュではない</string>
   <string name="attribute_parkngrab_yes">Park and grab</string>
   <string name="attribute_parkngrab_no">No park and grab</string>
-  <string name="attribute_abandonedbuilding_yes">廃墟</string>
-  <string name="attribute_abandonedbuilding_no">廃墟ではない</string>
+  <string name="attribute_AbandonedBuilding_yes">廃墟</string>
+  <string name="attribute_AbandonedBuilding_no">廃墟ではない</string>
   <string name="attribute_hike_short_yes">短距離の歩行(1km以下)</string>
   <string name="attribute_hike_short_no">短距離の歩行ではない</string>
   <string name="attribute_hike_med_yes">中距離の歩行(1kmから10km)</string>
@@ -658,8 +658,8 @@
   <string name="attribute_hike_long_no">長距離の歩行ではない</string>
   <string name="attribute_landf_yes">Lost and found tour</string>
   <string name="attribute_landf_no">No lost and found tour</string>
-  <string name="attribute_sponsored_yes">Sponsored cache</string>
-  <string name="attribute_sponsored_no">Non sponsored cache</string>
+  <string name="attribute_partnership_yes">Sponsored cache</string>
+  <string name="attribute_partnership_no">Non sponsored cache</string>
 
   <!--  attributes (equipment -> required, not required) -->
   <string name="attribute_fee_yes">交通料金や駐車料金が必要</string>
