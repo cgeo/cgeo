@@ -72,6 +72,11 @@ public class cgeogpxes extends cgFileList<cgGPXListAdapter> {
 		}
 
 	}
+	
+	@Override
+	protected void setTitle() {
+		setTitle(res.getString(R.string.gpx_import_title));
+	}
 
 	public void loadGPX(File file) {
 
