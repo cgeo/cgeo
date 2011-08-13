@@ -11,4 +11,12 @@ public interface IAbstractActivity {
 
 	public void setTheme();
 
+	public void showToast(String text);
+
+	public void showShortToast(String text);
+
+	public void helpDialog(String title, String message);
+
+	public void setTitle(final String title);
+
 }

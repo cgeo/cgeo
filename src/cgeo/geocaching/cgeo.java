@@ -13,7 +13,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -32,13 +31,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 
 public class cgeo extends AbstractActivity {
 
-	private Resources res = null;
-	private cgeoapplication app = null;
 	private Context context = null;
-	private cgSettings settings = null;
-	private SharedPreferences prefs = null;
-	private cgBase base = null;
-	private cgWarning warning = null;
 	private Integer version = null;
 	private cgGeo geo = null;
 	private cgUpdateLoc geoUpdate = new update();
@@ -126,13 +119,7 @@ public class cgeo extends AbstractActivity {
 		super.onCreate(savedInstanceState);
 
 		context = this;
-		res = this.getResources();
-		app = (cgeoapplication) this.getApplication();
 		app.setAction(null);
-		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
-		prefs = getSharedPreferences(cgSettings.preferences, 0);
-		base = new cgBase(app, settings, getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(this);
 
 		app.cleanGeo();
 		app.cleanDir();
@@ -350,7 +337,7 @@ public class cgeo extends AbstractActivity {
 	}
 
 	private void init() {
-		if (initialized == true) {
+		if (initialized) {
 			return;
 		}
 
@@ -359,7 +346,7 @@ public class cgeo extends AbstractActivity {
 		settings.getLogin();
 		settings.reloadCacheType();
 
-		if (app.firstRun == true) {
+		if (app.firstRun) {
 			new Thread() {
 
 				@Override
@@ -381,7 +368,7 @@ public class cgeo extends AbstractActivity {
 		}
 
 		if (geo == null) {
-			geo = app.startGeo(context, geoUpdate, base, settings, warning, 0, 0);
+			geo = app.startGeo(context, geoUpdate, base, settings, 0, 0);
 		}
 
 		navType = (TextView) findViewById(R.id.nav_type);
@@ -485,9 +472,9 @@ public class cgeo extends AbstractActivity {
 							} else {
 								humanAlt = String.format("%.0f", geo.altitudeNow) + " m";
 							}
-							navLocation.setText(base.formatCoordinate(geo.latitudeNow, "lat", true) + " | " + base.formatCoordinate(geo.longitudeNow, "lon", true) + " | " + humanAlt);
+							navLocation.setText(cgBase.formatCoordinate(geo.latitudeNow, "lat", true) + " | " + cgBase.formatCoordinate(geo.longitudeNow, "lon", true) + " | " + humanAlt);
 						} else {
-							navLocation.setText(base.formatCoordinate(geo.latitudeNow, "lat", true) + " | " + base.formatCoordinate(geo.longitudeNow, "lon", true));
+							navLocation.setText(cgBase.formatCoordinate(geo.latitudeNow, "lat", true) + " | " + cgBase.formatCoordinate(geo.longitudeNow, "lon", true));
 						}
 					}
 				} else {
@@ -590,7 +577,7 @@ public class cgeo extends AbstractActivity {
 			if (app == null) {
 				return;
 			}
-			if (cleanupRunning == true) {
+			if (cleanupRunning) {
 				return;
 			}
 
@@ -624,7 +611,7 @@ public class cgeo extends AbstractActivity {
 			if (geo == null) {
 				return;
 			}
-			if (addressObtaining == true) {
+			if (addressObtaining) {
 				return;
 			}
 			addressObtaining = true;

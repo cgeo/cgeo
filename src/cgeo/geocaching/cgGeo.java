@@ -61,7 +61,7 @@ public class cgGeo {
 			prefs = context.getSharedPreferences(cgSettings.preferences, 0);
 		}
 		distanceNow = prefs.getFloat("dst", 0f);
-		if (Double.isNaN(distanceNow) == true) {
+		if (Double.isNaN(distanceNow)) {
 			distanceNow = 0d;
 		}
 		if (distanceNow == 0f) {
@@ -153,10 +153,10 @@ public class cgGeo {
 
 		@Override
 		public void onLocationChanged(Location location) {
-			if (location.getProvider().equals(LocationManager.GPS_PROVIDER) == true) {
+			if (location.getProvider().equals(LocationManager.GPS_PROVIDER)) {
 				locGps = location;
 				locGpsLast = System.currentTimeMillis();
-			} else if (location.getProvider().equals(LocationManager.NETWORK_PROVIDER) == true) {
+			} else if (location.getProvider().equals(LocationManager.NETWORK_PROVIDER)) {
 				locNet = location;
 			}
 
@@ -165,11 +165,11 @@ public class cgGeo {
 
 		@Override
 		public void onProviderDisabled(String provider) {
-			if (provider.equals(LocationManager.NETWORK_PROVIDER) == true) {
+			if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
 				if (geoManager != null && geoNetListener != null) {
 					geoManager.removeUpdates(geoNetListener);
 				}
-			} else if (provider.equals(LocationManager.GPS_PROVIDER) == true) {
+			} else if (provider.equals(LocationManager.GPS_PROVIDER)) {
 				if (geoManager != null && geoGpsListener != null) {
 					geoManager.removeUpdates(geoGpsListener);
 				}
@@ -178,12 +178,12 @@ public class cgGeo {
 
 		@Override
 		public void onProviderEnabled(String provider) {
-			if (provider.equals(LocationManager.NETWORK_PROVIDER) == true) {
+			if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
 				if (geoNetListener == null) {
 					geoNetListener = new cgeoGeoListener();
 				}
 				geoNetListener.setProvider(LocationManager.NETWORK_PROVIDER);
-			} else if (provider.equals(LocationManager.GPS_PROVIDER) == true) {
+			} else if (provider.equals(LocationManager.GPS_PROVIDER)) {
 				if (geoGpsListener == null) {
 					geoGpsListener = new cgeoGeoListener();
 				}
@@ -192,14 +192,14 @@ public class cgGeo {
 		}
 
 		public void setProvider(String provider) {
-			if (provider.equals(LocationManager.GPS_PROVIDER) == true) {
-				if (geoManager != null && geoManager.isProviderEnabled(LocationManager.GPS_PROVIDER) == true) {
+			if (provider.equals(LocationManager.GPS_PROVIDER)) {
+				if (geoManager != null && geoManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 					active = provider;
 				} else {
 					active = null;
 				}
-			} else if (provider.equals(LocationManager.NETWORK_PROVIDER) == true) {
-				if (geoManager != null && geoManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER) == true) {
+			} else if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
+				if (geoManager != null && geoManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
 					active = provider;
 				} else {
 					active = null;
@@ -221,7 +221,7 @@ public class cgGeo {
 
 				while (statusIterator.hasNext()) {
 					GpsSatellite sat = statusIterator.next();
-					if (sat.usedInFix() == true) {
+					if (sat.usedInFix()) {
 						fixed++;
 					}
 					satellites++;
@@ -245,7 +245,7 @@ public class cgGeo {
 					changed = true;
 				}
 
-				if (changed == true) {
+				if (changed) {
 					selectBest(null);
 				}
 			}
@@ -268,7 +268,7 @@ public class cgGeo {
 			return;
 		}
 
-		if (initProvider != null && initProvider.equals(LocationManager.GPS_PROVIDER) == true) { // we have new location from GPS
+		if (initProvider != null && initProvider.equals(LocationManager.GPS_PROVIDER)) { // we have new location from GPS
 			assign(locGps);
 			return;
 		}
@@ -290,7 +290,7 @@ public class cgGeo {
 		latitudeNow = lat;
 		longitudeNow = lon;
 		altitudeNow = null;
-		bearingNow = new Double(0);
+		bearingNow = Double.valueOf(0);
 		speedNow = 0f;
 		accuracyNow = 999f;
 
@@ -308,11 +308,11 @@ public class cgGeo {
 		location = loc;
 
 		String provider = location.getProvider();
-		if (provider.equals(LocationManager.GPS_PROVIDER) == true) {
+		if (provider.equals(LocationManager.GPS_PROVIDER)) {
 			gps = 1;
-		} else if (provider.equals(LocationManager.NETWORK_PROVIDER) == true) {
+		} else if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
 			gps = 0;
-		} else if (provider.equals("last") == true) {
+		} else if (provider.equals("last")) {
 			gps = -1;
 		}
 
@@ -326,9 +326,9 @@ public class cgGeo {
 			altitudeNow = null;
 		}
 		if (location.hasBearing() && gps != -1) {
-			bearingNow = new Double(location.getBearing());
+			bearingNow = Double.valueOf(location.getBearing());
 		} else {
-			bearingNow = new Double(0);
+			bearingNow = Double.valueOf(0);
 		}
 		if (location.hasSpeed() && gps != -1) {
 			speedNow = location.getSpeed();
@@ -375,7 +375,7 @@ public class cgGeo {
 
 		@Override
 		public void run() {
-			if (g4cRunning == true) {
+			if (g4cRunning) {
 				return;
 			}
 

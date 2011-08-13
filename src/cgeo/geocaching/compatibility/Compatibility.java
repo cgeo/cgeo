@@ -2,6 +2,7 @@ package cgeo.geocaching.compatibility;
 
 import android.app.Activity;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Build;
 import android.view.Display;
 import android.view.Surface;
@@ -21,6 +22,7 @@ public final class Compatibility {
 			} catch (Exception e) {
 				// nothing
 			}
+			initialized = true;
 		}
 		return level8;
 	}
@@ -47,6 +49,24 @@ public final class Compatibility {
 			}
 		}
 		return directionNowPre;
+	}
+
+	public static Uri getCalendarProviderURI() {
+		final int sdk = new Integer(Build.VERSION.SDK).intValue();
+		if (sdk >= 8) {
+			return Uri.parse("content://com.android.calendar/calendars");
+		} else {
+			return Uri.parse("content://calendar/calendars");
+		}
+	}
+
+	public static Uri getCalenderEventsProviderURI() {
+		final int sdk = new Integer(Build.VERSION.SDK).intValue();
+		if (sdk >= 8) {
+			return Uri.parse("content://com.android.calendar/events");
+		} else {
+			return Uri.parse("content://calendar/events");
+		}
 	}
 
 }

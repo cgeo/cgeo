@@ -1,5 +1,17 @@
 package cgeo.geocaching;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+
 import android.os.Handler;
 import android.os.Message;
 import android.sax.Element;
@@ -10,18 +22,10 @@ import android.sax.StartElementListener;
 import android.text.Html;
 import android.util.Log;
 import android.util.Xml;
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import org.xml.sax.Attributes;
 
 public class cgGPXParser {
 
 	private cgeoapplication app = null;
-	private cgBase base = null;
 	private int listId = 1;
 	private cgSearch search = null;
 	private Handler handler = null;
@@ -39,9 +43,8 @@ public class cgGPXParser {
 	private String cmt = null;
 	private String desc = null;
 
-	public cgGPXParser(cgeoapplication appIn, cgBase baseIn, int listIdIn, cgSearch searchIn) {
+	public cgGPXParser(cgeoapplication appIn, int listIdIn, cgSearch searchIn) {
 		app = appIn;
-		base = baseIn;
 		listId = listIdIn;
 		search = searchIn;
 
@@ -130,8 +133,8 @@ public class cgGPXParser {
 						&& ((type == null && sym == null)
 						|| (type != null && type.indexOf("geocache") > -1)
 						|| (sym != null && sym.indexOf("geocache") > -1))) {
-					cache.latitudeString = base.formatCoordinate(cache.latitude, "lat", true);
-					cache.longitudeString = base.formatCoordinate(cache.longitude, "lon", true);
+					cache.latitudeString = cgBase.formatCoordinate(cache.latitude, "lat", true);
+					cache.longitudeString = cgBase.formatCoordinate(cache.longitude, "lon", true);
 					if (cache.inventory != null) {
 						cache.inventoryItems = cache.inventory.size();
 					} else {
@@ -184,7 +187,7 @@ public class cgGPXParser {
 
 				final String content = Html.fromHtml(body).toString().trim();
 				cache.name = content;
-				if (cache.name.length() > 2 && cache.name.substring(0, 2).equalsIgnoreCase("GC") == true) {
+				if (cache.name.length() > 2 && cache.name.substring(0, 2).equalsIgnoreCase("GC")) {
 					cache.geocode = cache.name.toUpperCase();
 				}
 			}
@@ -234,7 +237,7 @@ public class cgGPXParser {
 				}
 			}
 		});
-		
+
 		// for GPX 1.0, cache info comes from waypoint node (so called private children,
 		// for GPX 1.1 from extensions node
 		final Element cacheParent = version == 11 ? waypoint.getChild(ns, "extensions") : waypoint;
@@ -511,7 +514,7 @@ public class cgGPXParser {
 
 				public void end(String body) {
 					final String content = body.trim().toLowerCase();
-					if (cgBase.logTypes0.containsKey(content) == true) {
+					if (cgBase.logTypes0.containsKey(content)) {
 						log.type = cgBase.logTypes0.get(content);
 					} else {
 						log.type = 4;
@@ -537,15 +540,26 @@ public class cgGPXParser {
 				}
 			});
 		}
-
+		FileInputStream fis = null;
+		boolean parsed = false;
 		try {
-			Xml.parse(new FileInputStream(file), Xml.Encoding.UTF_8, root.getContentHandler());
-
-			return search.getCurrentId();
-		} catch (Exception e) {
-			Log.e(cgSettings.tag, "Cannot parse .gpx file " + file.getAbsolutePath() + " as GPX " + version + ": " + e.toString());
+			fis = new FileInputStream(file);
+		} catch (FileNotFoundException e) {
+			Log.e(cgSettings.tag, "Cannot parse .gpx file " + file.getAbsolutePath() + " as GPX " + version + ": file not found!");
 		}
-
-		return 0l;
+		try {
+			Xml.parse(fis, Xml.Encoding.UTF_8, root.getContentHandler());
+			parsed = true;
+		} catch (IOException e) {
+			Log.e(cgSettings.tag, "Cannot parse .gpx file " + file.getAbsolutePath() + " as GPX " + version + ": could not read file!");
+		} catch (SAXException e) {
+			Log.e(cgSettings.tag, "Cannot parse .gpx file " + file.getAbsolutePath() + " as GPX " + version + ": could not parse XML - " + e.toString());
+		}
+		try {
+			fis.close();
+		} catch (IOException e) {
+			Log.e(cgSettings.tag, "Error after parsing .gpx file " + file.getAbsolutePath() + " as GPX " + version + ": could not close file!");
+		}
+		return parsed ? search.getCurrentId() : 0l;
 	}
 }

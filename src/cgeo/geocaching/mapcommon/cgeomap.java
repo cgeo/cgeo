@@ -32,7 +32,6 @@ import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.cgUpdateDir;
 import cgeo.geocaching.cgUpdateLoc;
 import cgeo.geocaching.cgUser;
-import cgeo.geocaching.cgWarning;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -65,7 +64,6 @@ public class cgeomap extends MapBase {
 	private MapControllerImpl mapController = null;
 	private cgSettings settings = null;
 	private cgBase base = null;
-	private cgWarning warning = null;
 	private cgeoapplication app = null;
 	private SharedPreferences.Editor prefsEdit = null;
 	private cgGeo geo = null;
@@ -141,7 +139,7 @@ public class cgeomap extends MapBase {
 				// set title
 				final StringBuilder title = new StringBuilder();
 
-				if (live == true) {
+				if (live) {
 					title.append(res.getString(R.string.map_live));
 				} else {
 					title.append(res.getString(R.string.map_map));
@@ -202,10 +200,10 @@ public class cgeomap extends MapBase {
 				}
 
 				if (geo == null) {
-					geo = app.startGeo(activity, geoUpdate, base, settings, warning, 0, 0);
+					geo = app.startGeo(activity, geoUpdate, base, settings, 0, 0);
 				}
 				if (settings.useCompass == 1 && dir == null) {
-					dir = app.startDir(activity, dirUpdate, warning);
+					dir = app.startDir(activity, dirUpdate);
 				}
 			}
 		}
@@ -215,7 +213,7 @@ public class cgeomap extends MapBase {
 		@Override
 		public void handleMessage(Message msg) {
 			if (!noMapTokenShowed) {
-				warning.showToast(res.getString(R.string.map_token_err));
+				ActivityMixin.showToast(activity, res.getString(R.string.map_token_err));
 
 				noMapTokenShowed = true;
 			}
@@ -237,7 +235,6 @@ public class cgeomap extends MapBase {
 		app.setAction(null);
 		settings = new cgSettings(activity, activity.getSharedPreferences(cgSettings.preferences, 0));
 		base = new cgBase(app, settings, activity.getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(activity);
 		prefsEdit = activity.getSharedPreferences(cgSettings.preferences, 0).edit();
 		MapFactory mapFactory = settings.getMapFactory();
 
@@ -253,10 +250,10 @@ public class cgeomap extends MapBase {
 		ActivityMixin.setTitle(activity, res.getString(R.string.map_map));
 
 		if (geo == null) {
-			geo = app.startGeo(activity, geoUpdate, base, settings, warning, 0, 0);
+			geo = app.startGeo(activity, geoUpdate, base, settings, 0, 0);
 		}
 		if (settings.useCompass == 1 && dir == null) {
-			dir = app.startDir(activity, dirUpdate, warning);
+			dir = app.startDir(activity, dirUpdate);
 		}
 
 		// initialize map
@@ -355,10 +352,10 @@ public class cgeomap extends MapBase {
 
 		app.setAction(null);
 		if (geo == null) {
-			geo = app.startGeo(activity, geoUpdate, base, settings, warning, 0, 0);
+			geo = app.startGeo(activity, geoUpdate, base, settings, 0, 0);
 		}
 		if (settings.useCompass == 1 && dir == null) {
-			dir = app.startDir(activity, dirUpdate, warning);
+			dir = app.startDir(activity, dirUpdate);
 		}
 
 		if (geo != null) {
@@ -572,7 +569,7 @@ public class cgeomap extends MapBase {
 
 						for (cgCache oneCache : cachesProtected) {
 							if (oneCache != null && oneCache.latitude != null && oneCache.longitude != null) {
-								if (base.isCacheInViewPort(mapCenterLat, mapCenterLon, mapSpanLat, mapSpanLon, oneCache.latitude, oneCache.longitude) && app.isOffline(oneCache.geocode, null) == false) {
+								if (cgBase.isCacheInViewPort(mapCenterLat, mapCenterLon, mapSpanLat, mapSpanLon, oneCache.latitude, oneCache.longitude) && app.isOffline(oneCache.geocode, null) == false) {
 									geocodes.add(oneCache.geocode);
 								}
 							}
@@ -585,7 +582,7 @@ public class cgeomap extends MapBase {
 				detailTotal = geocodes.size();
 
 				if (detailTotal == 0) {
-					warning.showToast(res.getString(R.string.warn_save_nothing));
+					ActivityMixin.showToast(activity, res.getString(R.string.warn_save_nothing));
 
 					return true;
 				}
@@ -603,10 +600,10 @@ public class cgeomap extends MapBase {
 							}
 
 							if (geo == null) {
-								geo = app.startGeo(activity, geoUpdate, base, settings, warning, 0, 0);
+								geo = app.startGeo(activity, geoUpdate, base, settings, 0, 0);
 							}
 							if (settings.useCompass == 1 && dir == null) {
-								dir = app.startDir(activity, dirUpdate, warning);
+								dir = app.startDir(activity, dirUpdate);
 							}
 						} catch (Exception e) {
 							Log.e(cgSettings.tag, "cgeocaches.onPrepareOptionsMenu.onCancel: " + e.toString());
@@ -614,7 +611,7 @@ public class cgeomap extends MapBase {
 					}
 				});
 
-				Float etaTime = new Float((detailTotal * (float) 7) / 60);
+				Float etaTime = Float.valueOf((detailTotal * (float) 7) / 60);
 				if (etaTime < 0.4) {
 					waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
 				} else if (etaTime < 1.5) {
@@ -646,6 +643,10 @@ public class cgeomap extends MapBase {
 			boolean mapRestartRequired = switchMapSource(mapSource);
 
 			if (mapRestartRequired) {
+				// close old mapview
+				activity.finish();
+			
+				// prepare information to restart a similar view
 				Intent mapIntent = new Intent(activity, settings.getMapFactory().getMapClass());
 
 				mapIntent.putExtra("detail", fromDetailIntent);
@@ -660,10 +661,10 @@ public class cgeomap extends MapBase {
 				mapState[1] = mapCenter.getLongitudeE6();
 				mapState[2] = mapView.getMapZoomLevel();
 				mapIntent.putExtra("mapstate", mapState);
-
+				
+				// start the new map
 				activity.startActivity(mapIntent);
-
-				activity.finish();
+				
 			}
 
 			return true;
@@ -699,7 +700,7 @@ public class cgeomap extends MapBase {
 
 		prefsEdit.putInt("mapsource", settings.mapSource.ordinal());
 		prefsEdit.commit();
-
+		
 		boolean mapRestartRequired = settings.mapSource.isGoogleMapSource()!= settings.mapSourceUsed.isGoogleMapSource();
 
 		if (!mapRestartRequired) {
@@ -754,7 +755,7 @@ public class cgeomap extends MapBase {
 				}
 
 				if (geo.latitudeNow != null && geo.longitudeNow != null) {
-					if (followMyLocation == true) {
+					if (followMyLocation) {
 						myLocationInMiddle();
 					} else {
 						// move blue arrow
@@ -766,7 +767,7 @@ public class cgeomap extends MapBase {
 					if (geo.bearingNow != null) {
 						overlayMyLoc.setHeading(geo.bearingNow);
 					} else {
-						overlayMyLoc.setHeading(new Double(0));
+						overlayMyLoc.setHeading(Double.valueOf(0));
 					}
 				}
 			} catch (Exception e) {
@@ -878,7 +879,7 @@ public class cgeomap extends MapBase {
 						} else if (((Math.abs(spanLatitudeNow - spanLatitude) > 50) || (Math.abs(spanLongitudeNow - spanLongitude) > 50) || // changed zoom
 								(Math.abs(centerLatitudeNow - centerLatitude) > (spanLatitudeNow / 4)) || (Math.abs(centerLongitudeNow - centerLongitude) > (spanLongitudeNow / 4)) // map moved
 								) && (cachesCnt <= 0 || caches == null || caches.isEmpty()
-								|| !base.isInViewPort(centerLatitude, centerLongitude, centerLatitudeNow, centerLongitudeNow, spanLatitude, spanLongitude, spanLatitudeNow, spanLongitudeNow))) {
+								|| !cgBase.isInViewPort(centerLatitude, centerLongitude, centerLatitudeNow, centerLongitudeNow, spanLatitude, spanLongitude, spanLatitudeNow, spanLongitudeNow))) {
 							moved = true;
 						}
 
@@ -993,7 +994,7 @@ public class cgeomap extends MapBase {
 							moved = true;
 						} else if (((Math.abs(spanLatitudeNow - spanLatitudeUsers) > 50) || (Math.abs(spanLongitudeNow - spanLongitudeUsers) > 50) || // changed zoom
 								(Math.abs(centerLatitudeNow - centerLatitudeUsers) > (spanLatitudeNow / 4)) || (Math.abs(centerLongitudeNow - centerLongitudeUsers) > (spanLongitudeNow / 4)) // map moved
-								) && !base.isInViewPort(centerLatitudeUsers, centerLongitudeUsers, centerLatitudeNow, centerLongitudeNow, spanLatitudeUsers, spanLongitudeUsers, spanLatitudeNow, spanLongitudeNow)) {
+								) && !cgBase.isInViewPort(centerLatitudeUsers, centerLongitudeUsers, centerLatitudeNow, centerLongitudeNow, spanLatitudeUsers, spanLongitudeUsers, spanLatitudeNow, spanLongitudeNow)) {
 							moved = true;
 						}
 
@@ -1254,7 +1255,6 @@ public class cgeomap extends MapBase {
 				final ArrayList<CacheOverlayItemImpl> items = new ArrayList<CacheOverlayItemImpl>();
 
 				if (cachesProtected != null && !cachesProtected.isEmpty()) {
-					int counter = 0;
 					int icon = 0;
 					Drawable pin = null;
 					CacheOverlayItemImpl item = null;
@@ -1289,14 +1289,6 @@ public class cgeomap extends MapBase {
 						item.setMarker(pin);
 
 						items.add(item);
-
-						/*
-						counter++;
-						if ((counter % 10) == 0) {
-							overlayCaches.updateItems(items);
-							displayHandler.sendEmptyMessage(1);
-						}
-						*/
 					}
 
 					overlayCaches.updateItems(items);
@@ -1579,7 +1571,7 @@ public class cgeomap extends MapBase {
 
 			for (String geocode : geocodes) {
 				try {
-					if (stop == true) {
+					if (stop) {
 						break;
 					}
 
@@ -1597,7 +1589,7 @@ public class cgeomap extends MapBase {
 							}
 						}
 
-						if (stop == true) {
+						if (stop) {
 							Log.i(cgSettings.tag, "Stopped storing process.");
 
 							break;
@@ -1732,13 +1724,13 @@ public class cgeomap extends MapBase {
 		}
 
 		if (status == null) {
-			if (followMyLocation == true) {
+			if (followMyLocation) {
 				myLocSwitch.setImageResource(R.drawable.my_location_on);
 			} else {
 				myLocSwitch.setImageResource(R.drawable.my_location_off);
 			}
 		} else {
-			if (status == true) {
+			if (status) {
 				myLocSwitch.setImageResource(R.drawable.my_location_on);
 			} else {
 				myLocSwitch.setImageResource(R.drawable.my_location_off);
@@ -1756,7 +1748,7 @@ public class cgeomap extends MapBase {
 				myLocSwitch = (ImageView) activity.findViewById(R.id.my_position);
 			}
 
-			if (followMyLocation == true) {
+			if (followMyLocation) {
 				followMyLocation = false;
 
 				myLocSwitch.setImageResource(R.drawable.my_location_off);

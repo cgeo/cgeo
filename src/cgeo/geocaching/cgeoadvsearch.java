@@ -7,10 +7,7 @@ import java.util.regex.Pattern;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -24,11 +21,6 @@ import cgeo.geocaching.activity.AbstractActivity;
 
 public class cgeoadvsearch extends AbstractActivity {
 
-	private Resources res = null;
-	private cgeoapplication app = null;
-	private cgSettings settings = null;
-	private cgBase base = null;
-	private cgWarning warning = null;
 	private cgGeo geo = null;
 	private cgUpdateLoc geoUpdate = new update();
 	private EditText latEdit = null;
@@ -44,12 +36,7 @@ public class cgeoadvsearch extends AbstractActivity {
 		super.onCreate(savedInstanceState);
 
 		// init
-		res = this.getResources();
-		app = (cgeoapplication) this.getApplication();
 		app.setAction(null);
-		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
-		base = new cgBase(app, settings, getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(this);
 
 		// search query
 		Intent intent = getIntent();
@@ -159,7 +146,7 @@ public class cgeoadvsearch extends AbstractActivity {
 		}
 
 		if (geo == null) {
-			geo = app.startGeo(this, geoUpdate, base, settings, warning, 0, 0);
+			geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
 		}
 
 		((EditText) findViewById(R.id.latitude)).setOnEditorActionListener(new findByCoordsAction());
@@ -180,7 +167,6 @@ public class cgeoadvsearch extends AbstractActivity {
 			final ArrayAdapter<String> geocodesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, geocodesInCache);
 			geocodeEdit.setAdapter(geocodesAdapter);
 		}
-		// geocodeEdit.addTextChangedListener(new UpperCaseTextWatcher(geocodeEdit));
 
 		final Button displayByGeocode = (Button) findViewById(R.id.display_geocode);
 		displayByGeocode.setOnClickListener(new findByGeocodeListener());
@@ -202,46 +188,9 @@ public class cgeoadvsearch extends AbstractActivity {
 
 		EditText trackable = (EditText) findViewById(R.id.trackable);
 		trackable.setOnEditorActionListener(new findTrackableAction());
-		// trackable.addTextChangedListener(new UpperCaseTextWatcher(trackable)); // not working with HTC IMEs.
 
 		final Button displayTrackable = (Button) findViewById(R.id.display_trackable);
 		displayTrackable.setOnClickListener(new findTrackableListener());
-	}
-
-	/**
-	 * converts user input to uppercase during typing
-	 * @author bananeweizen
-	 *
-	 */
-	private final class UpperCaseTextWatcher implements TextWatcher {
-
-		private final EditText editText;
-
-		private UpperCaseTextWatcher(EditText editText) {
-			this.editText = editText;
-		}
-
-		@Override
-		public void afterTextChanged(Editable arg0) {
-			// empty
-		}
-
-		@Override
-		public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-			// empty
-		}
-
-		@Override
-		public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-			String oldText = editText.getText().toString();
-			String upperText = oldText.toUpperCase();
-			if (!oldText.equals(upperText)) {
-				int selectionStart = editText.getSelectionStart();
-				int selectionEnd = editText.getSelectionEnd();
-				editText.setText(upperText);
-				editText.setSelection(selectionStart, selectionEnd);
-			}
-		}
 	}
 
 	private class update extends cgUpdateLoc {
@@ -261,8 +210,8 @@ public class cgeoadvsearch extends AbstractActivity {
 				}
 
 				if (geo.latitudeNow != null && geo.longitudeNow != null) {
-					latEdit.setHint(base.formatCoordinate(geo.latitudeNow, "lat", false));
-					lonEdit.setHint(base.formatCoordinate(geo.longitudeNow, "lon", false));
+					latEdit.setHint(cgBase.formatCoordinate(geo.latitudeNow, "lat", false));
+					lonEdit.setHint(cgBase.formatCoordinate(geo.longitudeNow, "lon", false));
 				}
 			} catch (Exception e) {
 				Log.w(cgSettings.tag, "Failed to update location.");
@@ -297,19 +246,19 @@ public class cgeoadvsearch extends AbstractActivity {
 		final String lonText = lonView.getText().toString();
 
 		if (latText == null || latText.length() == 0 || lonText == null || lonText.length() == 0) {
-			latView.setText(base.formatCoordinate(geo.latitudeNow, "lat", true));
-			lonView.setText(base.formatCoordinate(geo.longitudeNow, "lon", true));
+			latView.setText(cgBase.formatCoordinate(geo.latitudeNow, "lat", true));
+			lonView.setText(cgBase.formatCoordinate(geo.longitudeNow, "lon", true));
 		} else {
-			HashMap<String, Object> latParsed = base.parseCoordinate(latText, "lat");
-			HashMap<String, Object> lonParsed = base.parseCoordinate(lonText, "lat");
+			HashMap<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
+			HashMap<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lat");
 
 			if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
-				warning.showToast(res.getString(R.string.err_parse_lat));
+				showToast(res.getString(R.string.err_parse_lat));
 				return;
 			}
 
 			if (lonParsed == null || lonParsed.get("coordinate") == null || lonParsed.get("string") == null) {
-				warning.showToast(res.getString(R.string.err_parse_lon));
+				showToast(res.getString(R.string.err_parse_lon));
 				return;
 			}
 
@@ -347,7 +296,7 @@ public class cgeoadvsearch extends AbstractActivity {
 		String keyText = ((EditText) findViewById(R.id.keyword)).getText().toString();
 
 		if (keyText == null || keyText.length() == 0) {
-			warning.helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_keyword));
+			helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_keyword));
 			return;
 		}
 
@@ -382,7 +331,7 @@ public class cgeoadvsearch extends AbstractActivity {
 		final String addText = ((EditText) findViewById(R.id.address)).getText().toString();
 
 		if (addText == null || addText.length() == 0) {
-			warning.helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_address));
+			helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_address));
 			return;
 		}
 
@@ -415,7 +364,7 @@ public class cgeoadvsearch extends AbstractActivity {
 		final String usernameText = ((EditText) findViewById(R.id.username)).getText().toString();
 
 		if (usernameText == null || usernameText.length() == 0) {
-			warning.helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_user));
+			helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_user));
 			return;
 		}
 
@@ -450,7 +399,7 @@ public class cgeoadvsearch extends AbstractActivity {
 		final String usernameText = ((EditText) findViewById(R.id.owner)).getText().toString();
 
 		if (usernameText == null || usernameText.length() == 0) {
-			warning.helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_user));
+			helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_user));
 			return;
 		}
 
@@ -485,7 +434,7 @@ public class cgeoadvsearch extends AbstractActivity {
 		final String geocodeText = ((EditText) findViewById(R.id.geocode)).getText().toString();
 
 		if (geocodeText == null || geocodeText.length() == 0 || geocodeText.equalsIgnoreCase("GC")) {
-			warning.helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_gccode));
+			helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_gccode));
 			return;
 		}
 
@@ -518,7 +467,7 @@ public class cgeoadvsearch extends AbstractActivity {
 		final String trackableText = ((EditText) findViewById(R.id.trackable)).getText().toString();
 
 		if (trackableText == null || trackableText.length() == 0 || trackableText.equalsIgnoreCase("TB")) {
-			warning.helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_tb));
+			helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_tb));
 			return;
 		}
 

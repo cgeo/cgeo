@@ -44,6 +44,7 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 	private PaintFlagsDrawFilter setfil = null;
 	private PaintFlagsDrawFilter remfil = null;
 	private cgSettings settings;
+	private MapFactory mapFactory = null;
 
 	public cgMapOverlay(cgSettings settingsIn, ItemizedOverlayImpl ovlImpl, Context contextIn, Boolean fromDetailIn) {
 		super(ovlImpl);
@@ -53,8 +54,10 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 
 		context = contextIn;
 		fromDetail = fromDetailIn;
+		
+		mapFactory = settings.getMapFactory();
 	}
-
+	
 	public void updateItems(CacheOverlayItemImpl item) {
 		ArrayList<CacheOverlayItemImpl> itemsPre = new ArrayList<CacheOverlayItemImpl>();
 		itemsPre.add(item);
@@ -103,8 +106,6 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 	}
 
 	private void drawInternal(Canvas canvas, MapProjectionImpl projection) {
-
-		MapFactory mapFactory = settings.getMapFactory();
 
 		if (displayCircles) {
 			if (blockedCircle == null) {
@@ -156,6 +157,7 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 
 	@Override
 	public boolean onTap(int index) {
+
 		try {
 			if (items.size() <= index) {
 				return false;
@@ -171,14 +173,14 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 			CacheOverlayItemImpl item = items.get(index);
 			cgCoord coordinate = item.getCoord();
 
-			if (coordinate.type != null && coordinate.type.equalsIgnoreCase("cache") == true && coordinate.geocode != null && coordinate.geocode.length() > 0) {
+			if (coordinate.type != null && coordinate.type.equalsIgnoreCase("cache") && coordinate.geocode != null && coordinate.geocode.length() > 0) {
 				Intent popupIntent = new Intent(context, cgeopopup.class);
 
 				popupIntent.putExtra("fromdetail", fromDetail);
 				popupIntent.putExtra("geocode", coordinate.geocode);
 
 				context.startActivity(popupIntent);
-			} else if (coordinate.type != null && coordinate.type.equalsIgnoreCase("waypoint") == true && coordinate.id != null && coordinate.id > 0) {
+			} else if (coordinate.type != null && coordinate.type.equalsIgnoreCase("waypoint") && coordinate.id != null && coordinate.id > 0) {
 				Intent popupIntent = new Intent(context, cgeowaypoint.class);
 
 				popupIntent.putExtra("waypoint", coordinate.id);
@@ -221,6 +223,7 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 	}
 
 	public void infoDialog(int index) {
+		
 		final CacheOverlayItemImpl item = items.get(index);
 		final cgCoord coordinate = item.getCoord();
 
@@ -237,7 +240,7 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 				dialog.setTitle("cache");
 
 				String cacheType;
-				if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec) == true) {
+				if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec)) {
 					cacheType = cgBase.cacheTypesInv.get(coordinate.typeSpec);
 				} else {
 					cacheType = cgBase.cacheTypesInv.get("mystery");
@@ -277,7 +280,7 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 				dialog.setTitle("waypoint");
 
 				String waypointType;
-				if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec) == true) {
+				if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec)) {
 					waypointType = cgBase.waypointTypes.get(coordinate.typeSpec);
 				} else {
 					waypointType = cgBase.waypointTypes.get("waypoint");

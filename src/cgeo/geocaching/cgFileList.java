@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -17,13 +16,8 @@ import cgeo.geocaching.activity.AbstractListActivity;
 public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractListActivity {
 
 	private ArrayList<File> files = new ArrayList<File>();
-	private cgeoapplication app = null;
-	private cgSettings settings = null;
-	private cgBase base = null;
-	private cgWarning warning = null;
 	private T adapter = null;
 	private ProgressDialog waitDialog = null;
-	private Resources res = null;
 	private loadFiles searchingThread = null;
 	private boolean endSearching = false;
 	private int listId = 1;
@@ -32,7 +26,7 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 		@Override
 		public void handleMessage(Message msg) {
 			if (msg.obj != null && waitDialog != null) {
-				waitDialog.setMessage(getRes().getString(R.string.file_searching_in) + " " + (String) msg.obj);
+				waitDialog.setMessage(res.getString(R.string.file_searching_in) + " " + (String) msg.obj);
 			}
 		}
 	};
@@ -46,7 +40,7 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 						waitDialog.dismiss();
 					}
 
-					getWarning().showToast(getRes().getString(R.string.file_list_no_files));
+					showToast(res.getString(R.string.file_list_no_files));
 
 					finish();
 					return;
@@ -72,16 +66,9 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// init
-		res = this.getResources();
-		app = (cgeoapplication) this.getApplication();
-		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
-		base = new cgBase(getApp(), getSettings(), getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(this);
-
 		setTheme();
 		setContentView(R.layout.gpx);
-		setTitle(getRes().getString(R.string.gpx_import_title));
+		setTitle();
 
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -95,8 +82,8 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 
 		waitDialog = ProgressDialog.show(
 				this,
-				getRes().getString(R.string.file_title_searching),
-				getRes().getString(R.string.file_searching),
+				res.getString(R.string.file_title_searching),
+				res.getString(R.string.file_searching),
 				true,
 				true,
 				new DialogInterface.OnCancelListener() {
@@ -104,7 +91,7 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 						if (searchingThread != null && searchingThread.isAlive()) {
 							searchingThread.notifyEnd();
 						}
-						if (files.isEmpty() == true) {
+						if (files.isEmpty()) {
 							finish();
 						}
 					}
@@ -141,6 +128,11 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 	 * @return The folder to start the recursive search in
 	 */
 	protected abstract String[] getBaseFolders();
+	
+	/**
+	 * Triggers the deriving class to set the title
+	 */
+	protected abstract void setTitle();
 
 	private class loadFiles extends Thread {
 		public void notifyEnd() {
@@ -152,7 +144,7 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 			ArrayList<File> list = new ArrayList<File>();
 
 			try {
-				if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) == true) {
+				if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 					boolean loaded = false;
 					for(String baseFolder : getBaseFolders())
 					{
@@ -205,11 +197,11 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 			final int listCnt = listPre.length;
 
 			for (int i = 0; i < listCnt; i++) {
-				if (endSearching == true) {
+				if (endSearching) {
 					return;
 				}
 
-				if (listPre[i].canRead() == true && listPre[i].isFile() == true) {
+				if (listPre[i].canRead() && listPre[i].isFile()) {
 					final String[] nameParts = listPre[i].getName().split("\\.");
 					if (nameParts.length > 1) {
 						final String extension = nameParts[(nameParts.length - 1)].toLowerCase();
@@ -222,10 +214,10 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 					}
 
 					list.add(listPre[i]); // add file to list
-				} else if (listPre[i].canRead() == true && listPre[i].isDirectory() == true) {
+				} else if (listPre[i].canRead() && listPre[i].isDirectory()) {
 					final Message msg = new Message();
 					String name = listPre[i].getName();
-					if (name.substring(0, 1).equals(".") == true) {
+					if (name.substring(0, 1).equals(".")) {
 						continue; // skip hidden directories
 					}
 					if (name.length() > 16) {
@@ -240,21 +232,5 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 		}
 
 		return;
-	}
-
-	protected cgeoapplication getApp() {
-		return app;
-	}
-
-	protected cgBase getBase() {
-		return base;
-	}
-
-	protected cgWarning getWarning() {
-		return warning;
-	}
-
-	protected Resources getRes() {
-		return res;
 	}
 }

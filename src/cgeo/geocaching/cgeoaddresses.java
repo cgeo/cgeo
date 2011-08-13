@@ -6,7 +6,6 @@ import java.util.Locale;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -22,9 +21,6 @@ import cgeo.geocaching.activity.AbstractActivity;
 public class cgeoaddresses extends AbstractActivity {
 	private final ArrayList<Address> addresses = new ArrayList<Address>();
 	private String keyword = null;
-	private cgSettings settings = null;
-	private Resources res = null;
-	private cgWarning warning = null;
 	private LayoutInflater inflater = null;
 	private LinearLayout addList = null;
 	private ProgressDialog waitDialog = null;
@@ -42,7 +38,7 @@ public class cgeoaddresses extends AbstractActivity {
 						waitDialog.dismiss();
 					}
 
-					warning.showToast(res.getString(R.string.err_search_address_no_match));
+					showToast(res.getString(R.string.err_search_address_no_match));
 
 					finish();
 					return;
@@ -95,9 +91,6 @@ public class cgeoaddresses extends AbstractActivity {
 		super.onCreate(savedInstanceState);
 
 		// init
-		res = this.getResources();
-		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(this);
 		inflater = getLayoutInflater();
 
 		setTheme();
@@ -113,7 +106,7 @@ public class cgeoaddresses extends AbstractActivity {
 		}
 
 		if (keyword == null) {
-			warning.showToast(res.getString(R.string.err_search_address_forgot));
+			showToast(res.getString(R.string.err_search_address_forgot));
 			finish();
 			return;
 		}

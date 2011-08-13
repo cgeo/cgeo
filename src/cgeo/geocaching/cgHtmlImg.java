@@ -1,21 +1,11 @@
 package cgeo.geocaching;
 
-import android.app.Activity;
-import android.util.Log;
-import android.text.Html;
-import android.view.Display;
-import android.view.WindowManager;
-import android.content.Context;
-import android.graphics.Rect;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -23,10 +13,21 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.text.Html;
+import android.util.Log;
+import android.view.Display;
+import android.view.WindowManager;
+
 public class cgHtmlImg implements Html.ImageGetter {
 
 	private Activity activity = null;
-	private cgSettings settings = null;
 	private String geocode = null;
 	private boolean placement = true;
 	private int reason = 0;
@@ -39,14 +40,13 @@ public class cgHtmlImg implements Html.ImageGetter {
 	private double ratio = 1.0d;
 	private int width = 0;
 	private int height = 0;
-		
-	public cgHtmlImg(Activity activityIn, cgSettings settingsIn, String geocodeIn, boolean placementIn, int reasonIn, boolean onlySaveIn) {
-		this(activityIn, settingsIn, geocodeIn, placementIn, reasonIn, onlySaveIn, true);
+
+	public cgHtmlImg(Activity activityIn, String geocodeIn, boolean placementIn, int reasonIn, boolean onlySaveIn) {
+		this(activityIn, geocodeIn, placementIn, reasonIn, onlySaveIn, true);
 	}
-	
-	public cgHtmlImg(Activity activityIn, cgSettings settingsIn, String geocodeIn, boolean placementIn, int reasonIn, boolean onlySaveIn, boolean saveIn) {		
+
+	public cgHtmlImg(Activity activityIn, String geocodeIn, boolean placementIn, int reasonIn, boolean onlySaveIn, boolean saveIn) {
 		activity = activityIn;
-		settings = settingsIn;
 		geocode = geocodeIn;
 		placement = placementIn;
 		reason = reasonIn;
@@ -54,10 +54,10 @@ public class cgHtmlImg implements Html.ImageGetter {
 		save = saveIn;
 
 		bfOptions.inTempStorage = new byte[16 * 1024];
-		
+
 		display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 		maxWidth = display.getWidth() - 25;
-		maxHeight = display.getHeight() - 25;	
+		maxHeight = display.getHeight() - 25;
 	}
 
 	@Override
@@ -83,17 +83,17 @@ public class cgHtmlImg implements Html.ImageGetter {
 		}
 
 		if (geocode != null && geocode.length() > 0) {
-			dirName = settings.getStorage() + geocode + "/";
-			fileName = settings.getStorage() + geocode + "/" + cgBase.md5(url) + urlExt;
-			fileNameSec = settings.getStorageSec() + geocode + "/" + cgBase.md5(url) + urlExt;
+			dirName = cgSettings.getStorage() + geocode + "/";
+			fileName = cgSettings.getStorage() + geocode + "/" + cgBase.md5(url) + urlExt;
+			fileNameSec = cgSettings.getStorageSec() + geocode + "/" + cgBase.md5(url) + urlExt;
 		} else {
-			dirName = settings.getStorage() + "_others/";
-			fileName = settings.getStorage() + "_others/" + cgBase.md5(url) + urlExt;
-			fileNameSec = settings.getStorageSec() + "_others/" + cgBase.md5(url) + urlExt;
+			dirName = cgSettings.getStorage() + "_others/";
+			fileName = cgSettings.getStorage() + "_others/" + cgBase.md5(url) + urlExt;
+			fileNameSec = cgSettings.getStorageSec() + "_others/" + cgBase.md5(url) + urlExt;
 		}
-		
+
 		File dir = null;
-		dir = new File(settings.getStorage());
+		dir = new File(cgSettings.getStorage());
 		if (dir.exists() == false) {
 			dir.mkdirs();
 		}
@@ -109,7 +109,7 @@ public class cgHtmlImg implements Html.ImageGetter {
 				final Date now = new Date();
 
 				final File file = new File(fileName);
-				if (file.exists() == true) {
+				if (file.exists()) {
 					final long imageSize = file.length();
 
 					// large images will be downscaled on input to save memory
@@ -132,7 +132,7 @@ public class cgHtmlImg implements Html.ImageGetter {
 
 				if (imagePre == null) {
 					final File fileSec = new File(fileNameSec);
-					if (fileSec.exists() == true) {
+					if (fileSec.exists()) {
 						final long imageSize = fileSec.length();
 
 						// large images will be downscaled on input to save memory
@@ -157,9 +157,9 @@ public class cgHtmlImg implements Html.ImageGetter {
 				Log.w(cgSettings.tag, "cgHtmlImg.getDrawable (reading cache): " + e.toString());
 			}
 		}
-		
+
 		// download image and save it to the cache
-		if ((imagePre == null && reason == 0) || onlySave == true) {
+		if ((imagePre == null && reason == 0) || onlySave) {
 			Uri uri = null;
 			HttpClient client = null;
 			HttpGet getMethod = null;
@@ -218,7 +218,7 @@ public class cgHtmlImg implements Html.ImageGetter {
 				}
 			}
 
-			if (save == true) {
+			if (save) {
 				try {
 					// save to memory/SD cache
 					if (bufferedEntity != null) {
@@ -230,11 +230,11 @@ public class cgHtmlImg implements Html.ImageGetter {
 							while ((l = is.read(buffer)) != -1) {
 								fos.write(buffer, 0, l);
 							}
+							fos.flush();
 						} catch (IOException e) {
 							Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (saving to cache): " + e.toString());
 						} finally {
 							is.close();
-							fos.flush();
 							fos.close();
 						}
 					}
@@ -246,8 +246,8 @@ public class cgHtmlImg implements Html.ImageGetter {
 			entity = null;
 			bufferedEntity = null;
 		}
-		
-		if (onlySave == true) {
+
+		if (onlySave) {
 			return null;
 		}
 
@@ -264,7 +264,7 @@ public class cgHtmlImg implements Html.ImageGetter {
 
 		final int imgWidth = imagePre.getWidth();
 		final int imgHeight = imagePre.getHeight();
-		
+
 		if (imgWidth > maxWidth || imgHeight > maxHeight) {
 			if ((maxWidth / imgWidth) > (maxHeight / imgHeight)) {
 				ratio = (double) maxHeight / (double) imgHeight;
@@ -288,7 +288,7 @@ public class cgHtmlImg implements Html.ImageGetter {
 
 		final BitmapDrawable image = new BitmapDrawable(imagePre);
 		image.setBounds(new Rect(0, 0, width, height));
-		
+
 		return image;
-	}	
+	}
 }

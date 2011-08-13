@@ -23,10 +23,10 @@ public class cgCompass extends View {
 	private Bitmap compassRose = null;
 	private Bitmap compassArrow = null;
 	private Bitmap compassOverlay = null;
-	private Double azimuth = new Double(0);
-	private Double heading = new Double(0);
-	private Double cacheHeading = new Double(0);
-	private Double northHeading = new Double(0);
+	private Double azimuth = Double.valueOf(0);
+	private Double heading = Double.valueOf(0);
+	private Double cacheHeading = Double.valueOf(0);
+	private Double northHeading = Double.valueOf(0);
 	private PaintFlagsDrawFilter setfil = null;
 	private PaintFlagsDrawFilter remfil = null;
 	private int compassUnderlayWidth = 0;
@@ -80,7 +80,7 @@ public class cgCompass extends View {
 
 		wantStop = false;
 
-		watchdog = new changeThread(changeHandler);
+		watchdog = new changeThread();
 		watchdog.start();
 	}
 
@@ -112,12 +112,6 @@ public class cgCompass extends View {
 
 	private class changeThread extends Thread {
 
-		Handler handler = null;
-
-		public changeThread(Handler handlerIn) {
-			handler = handlerIn;
-		}
-
 		@Override
 		public void run() {
 			while (wantStop == false) {
@@ -133,10 +127,10 @@ public class cgCompass extends View {
 
 				lock = true;
 
-				Double diff = new Double(0);
-				Double diffAbs = new Double(0);
-				Double tempAzimuth = new Double(0);
-				Double tempHeading = new Double(0);
+				Double diff = Double.valueOf(0);
+				Double diffAbs = Double.valueOf(0);
+				Double tempAzimuth = Double.valueOf(0);
+				Double tempHeading = Double.valueOf(0);
 
 				Double actualAzimuth = azimuth;
 				Double actualHeading = heading;
@@ -221,10 +215,10 @@ public class cgCompass extends View {
 
 	@Override
 	protected void onDraw(Canvas canvas) {
-		if (lock == true) {
+		if (lock) {
 			return;
 		}
-		if (drawing == true) {
+		if (drawing) {
 			return;
 		}
 

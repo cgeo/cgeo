@@ -18,9 +18,6 @@ import cgeo.geocaching.activity.AbstractActivity;
 public class cgeotrackables extends AbstractActivity {
 	private ArrayList<cgTrackable> trackables = new ArrayList<cgTrackable>();
 	private String geocode = null;
-	private cgeoapplication app = null;
-	private cgSettings settings = null;
-	private cgWarning warning = null;
 	private LayoutInflater inflater = null;
 	private LinearLayout addList = null;
 	private ProgressDialog waitDialog = null;
@@ -42,7 +39,7 @@ public class cgeotrackables extends AbstractActivity {
 						waitDialog.dismiss();
 					}
 
-					warning.showToast("Sorry, c:geo failed to load cache inventory.");
+					showToast("Sorry, c:geo failed to load cache inventory.");
 
 					finish();
 					return;
@@ -84,11 +81,6 @@ public class cgeotrackables extends AbstractActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// init
-		app = (cgeoapplication) this.getApplication();
-		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(this);
-
 		setTheme();
 		setContentView(R.layout.trackables);
 		setTitle("Trackables");
@@ -102,7 +94,7 @@ public class cgeotrackables extends AbstractActivity {
 		}
 
 		if (geocode == null) {
-			warning.showToast("Sorry, c:geo forgot for what cache you want to load trackables.");
+			showToast("Sorry, c:geo forgot for what cache you want to load trackables.");
 			finish();
 			return;
 		}
