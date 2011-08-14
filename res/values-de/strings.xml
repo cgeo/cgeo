@@ -504,7 +504,7 @@
   <string name="cache_menu_compass">Kompass</string>
   <string name="cache_menu_tbt">GoogleMaps Navigation</string>
   <string name="cache_menu_radar">Radar</string>
-  <string name="cache_menu_map">Auf Karte zeigen</string>
+  <string name="cache_menu_map">Karte</string>
   <string name="cache_menu_map_static">Statische Karte</string>
   <string name="cache_menu_locus">Locus</string>
   <string name="cache_menu_rmaps">Rmaps</string>

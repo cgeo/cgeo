@@ -18,8 +18,10 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 		if (null == apps || 0 == apps.length) {
 			apps = new NavigationApp[] {
 					// compass
-					new RadarApp(res), new StaticMapApp(res),
-					new InternalMap(res), new LocusApp(res),
+					new RadarApp(res), 
+					new InternalMap(res), 
+					new StaticMapApp(res),
+					new LocusApp(res),
 					new RMapsApp(res), new GoogleMapsApp(res),
 					new GoogleNavigationApp(res) };
 		}

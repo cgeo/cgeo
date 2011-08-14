@@ -13,7 +13,7 @@ class InternalMap extends AbstractInternalMap implements
 		NavigationApp {
 
 	InternalMap(Resources res) {
-		super(res.getString(R.string.caches_map_cgeo), null);
+		super(res.getString(R.string.cache_menu_map), null);
 	}
 
 	@Override
