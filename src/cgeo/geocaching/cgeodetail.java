@@ -28,6 +28,7 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
+import android.text.style.StrikethroughSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -615,7 +616,11 @@ public class cgeodetail extends AbstractActivity {
 			itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
 			itemName.setText(res.getString(R.string.cache_name));
-			itemValue.setText(Html.fromHtml(cache.name).toString());
+			Spannable span = (new Spannable.Factory()).newSpannable(Html.fromHtml(cache.name).toString());
+			if (cache.disabled || cache.archived) { // strike
+				span.setSpan(new StrikethroughSpan(), 0, span.toString().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			}
+			itemValue.setText(span);
 			detailsList.addView(itemLayout);
 
 			// cache type
