@@ -897,7 +897,7 @@
   <!-- changelog -->
   <string name="changelog">\n
     <b>15.08.2011</b>\n
-    · new: OpenStreetMap support 
+    · new: OpenStreetMap support\n 
 	· new: Send to c:geo from web\n
     · new: Export field notes\n
     · new: Clear history\n
