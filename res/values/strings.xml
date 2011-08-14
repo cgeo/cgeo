@@ -271,11 +271,11 @@
   <string name="caches_sort_size">size</string> <!-- since: 2.10 RC3 -->
   <string name="caches_sort_favorites">popularity</string> <!-- since: 2.10 RC3 -->
   <string name="caches_sort_name">name</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_gccode">GC-code (age)</string> <!-- since: 2.2 -->
+  <string name="caches_sort_gccode">GC-code</string> <!-- since: 2.2 -->
   <string name="caches_sort_rating">rating</string>
   <string name="caches_sort_vote">vote (own rating)</string>
   <string name="caches_sort_inventory">count of inventory</string>
-  <string name="caches_sort_date">date (event caches)</string>
+  <string name="caches_sort_date">date</string>
   <string name="caches_select">Select from list</string>
   <string name="caches_select_mode">Select mode</string>
   <string name="caches_select_mode_exit">Exit select mode</string>

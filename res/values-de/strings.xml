@@ -271,11 +271,11 @@
   <string name="caches_sort_size">Größe</string>
   <string name="caches_sort_favorites">Beliebtheit</string>
   <string name="caches_sort_name">Name</string>
-  <string name="caches_sort_gccode">GC-Code (Alter)</string>
+  <string name="caches_sort_gccode">GC-Code</string>
   <string name="caches_sort_rating">Bewertung</string>
   <string name="caches_sort_vote">Eigene Bewertung</string>
   <string name="caches_sort_inventory">Inventaranzahl</string>
-  <string name="caches_sort_date">Datum (Event-Caches)</string>
+  <string name="caches_sort_date">Datum</string>
   <string name="caches_select">Wähle von Liste</string>
   <string name="caches_select_mode">Auswahlmodus</string>
   <string name="caches_select_mode_exit">Auswahlmodus beenden</string>
