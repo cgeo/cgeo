@@ -1,7 +1,6 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import cgeo.geocaching.R;
@@ -16,11 +15,6 @@ class RadarApp extends AbstractNavigationApp implements NavigationApp {
 
 	RadarApp(final Resources res) {
 		super(res.getString(R.string.cache_menu_radar), INTENT, PACKAGE_NAME);
-	}
-
-	@Override
-	public boolean isInstalled(Context context) {
-		return true; // seems like Radar is assumed to be available always
 	}
 
 	private static void navigateTo(Activity activity, Double latitude, Double longitude) {

@@ -2,9 +2,11 @@ package cgeo.geocaching.apps.cache;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.apps.AbstractAppFactory;
 
 public final class GeneralAppsFactory extends AbstractAppFactory {
@@ -31,7 +33,11 @@ public final class GeneralAppsFactory extends AbstractAppFactory {
 			Activity activity, cgCache cache) {
 		GeneralApp app = (GeneralApp) getAppFromMenuItem(item, apps);
 		if (app != null) {
-			return app.invoke(activity, cache);
+			try {
+				return app.invoke(activity, cache);
+			} catch (Exception e) {
+				Log.e(cgSettings.tag, "GeneralAppsFactory.onMenuItemSelected: " + e.toString());
+			}
 		}
 		return false;
 	}

@@ -5,12 +5,14 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
+import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.apps.AbstractAppFactory;
 
 public final class CacheListAppFactory extends AbstractAppFactory {
@@ -62,7 +64,11 @@ public final class CacheListAppFactory extends AbstractAppFactory {
 		CacheListApp app = (CacheListApp) getAppFromMenuItem(
 				item, apps);
 		if (app != null) {
-			return app.invoke(geo, caches, activity, res, searchId);
+			try {
+				return app.invoke(geo, caches, activity, res, searchId);
+			} catch (Exception e) {
+				Log.e(cgSettings.tag, "CacheListAppFactory.onMenuItemSelected: " + e.toString());
+			}
 		}
 		return false;
 	}

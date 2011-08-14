@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
+import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.apps.AbstractAppFactory;
 
@@ -49,8 +51,12 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 				latitude = destination.get(0);
 				longitude = destination.get(1);
 			}
-			return app.invoke(geo, activity, res, cache,
-					searchId, waypoint, latitude, longitude);
+			try {
+				return app.invoke(geo, activity, res, cache,
+						searchId, waypoint, latitude, longitude);
+			} catch (Exception e) {
+				Log.e(cgSettings.tag, "NavigationAppFactory.onMenuItemSelected: " + e.toString());
+			}
 		}
 		return false;
 	}
