@@ -63,8 +63,6 @@ import android.text.Spannable;
 import android.text.format.DateUtils;
 import android.text.style.StrikethroughSpan;
 import android.util.Log;
-import android.view.Display;
-import android.view.WindowManager;
 import android.widget.EditText;
 import cgeo.geocaching.activity.ActivityMixin;
 
@@ -5050,60 +5048,7 @@ public class cgBase {
 			}
 
 			// store map previews
-			if (settings.storeOfflineMaps == 1 && cache.latitude != null && cache.longitude != null) {
-				final String latlonMap = String.format((Locale) null, "%.6f", cache.latitude) + "," + String.format((Locale) null, "%.6f", cache.longitude);
-				final Display display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-				final int maxWidth = display.getWidth() - 25;
-				final int maxHeight = display.getHeight() - 25;
-				int edge = 0;
-				if (maxWidth > maxHeight) {
-					edge = maxWidth;
-				} else {
-					edge = maxHeight;
-				}
-
-				String type = "mystery";
-				if (cache.found) {
-					type = cache.type + "_found";
-				} else if (cache.disabled) {
-					type = cache.type + "_disabled";
-				} else {
-					type = cache.type;
-				}
-
-				final String markerUrl = urlencode_rfc3986("http://cgeo.carnero.cc/_markers/marker_cache_" + type + ".png");
-				final StringBuilder waypoints = new StringBuilder();
-				if (cache.waypoints != null && cache.waypoints.size() > 0) {
-					for (cgWaypoint waypoint : cache.waypoints) {
-						if (waypoint.latitude == null && waypoint.longitude == null) {
-							continue;
-						}
-
-						waypoints.append("&markers=icon%3Ahttp://cgeo.carnero.cc/_markers/marker_waypoint_");
-						waypoints.append(waypoint.type);
-						waypoints.append(".png%7C");
-						waypoints.append(String.format((Locale) null, "%.6f", waypoint.latitude));
-						waypoints.append(",");
-						waypoints.append(String.format((Locale) null, "%.6f", waypoint.longitude));
-					}
-				}
-
-				// download map images in separate background thread for higher performance
-				final String code = cache.geocode;
-				final int finalEdge = edge;
-				Thread staticMapsThread = new Thread("getting static map") {@Override
-				public void run() {
-					cgMapImg mapGetter = new cgMapImg(code);
-
-					mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?center=" + latlonMap + "&zoom=20&size=" + finalEdge + "x" + finalEdge + "&maptype=satellite&markers=icon%3A" + markerUrl + "%7C" + latlonMap + waypoints.toString() + "&sensor=false", 1);
-					mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?center=" + latlonMap + "&zoom=18&size=" + finalEdge + "x" + finalEdge + "&maptype=satellite&markers=icon%3A" + markerUrl + "%7C" + latlonMap + waypoints.toString() + "&sensor=false", 2);
-					mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?center=" + latlonMap + "&zoom=16&size=" + finalEdge + "x" + finalEdge + "&maptype=roadmap&markers=icon%3A" + markerUrl + "%7C" + latlonMap + waypoints.toString() + "&sensor=false", 3);
-					mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?center=" + latlonMap + "&zoom=14&size=" + finalEdge + "x" + finalEdge + "&maptype=roadmap&markers=icon%3A" + markerUrl + "%7C" + latlonMap + waypoints.toString() + "&sensor=false", 4);
-					mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?center=" + latlonMap + "&zoom=11&size=" + finalEdge + "x" + finalEdge + "&maptype=roadmap&markers=icon%3A" + markerUrl + "%7C" + latlonMap + waypoints.toString() + "&sensor=false", 5);
-				}};
-				staticMapsThread.setPriority(Thread.MIN_PRIORITY);
-				staticMapsThread.start();
-			}
+			StaticMapsProvider.downloadMaps(cache, settings, activity);
 
 			app.markStored(cache.geocode, listId);
 			app.removeCacheFromCache(cache.geocode);
