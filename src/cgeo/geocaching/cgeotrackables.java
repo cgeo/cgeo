@@ -1,9 +1,7 @@
 package cgeo.geocaching;
 
-import gnu.android.app.appmanualclient.*;
-
 import java.util.ArrayList;
-import android.app.Activity;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,15 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import cgeo.geocaching.activity.AbstractActivity;
 
-public class cgeotrackables extends Activity {
+public class cgeotrackables extends AbstractActivity {
 	private ArrayList<cgTrackable> trackables = new ArrayList<cgTrackable>();
 	private String geocode = null;
-	private cgeoapplication app = null;
-	private cgSettings settings = null;
-	private cgBase base = null;
-	private cgWarning warning = null;
-	private Activity activity = null;
 	private LayoutInflater inflater = null;
 	private LinearLayout addList = null;
 	private ProgressDialog waitDialog = null;
@@ -33,7 +27,7 @@ public class cgeotrackables extends Activity {
 		public void handleMessage(Message msg) {
 			try {
 				if (inflater == null) {
-					inflater = activity.getLayoutInflater();
+					inflater = getLayoutInflater();
 				}
 
 				if (addList == null) {
@@ -45,7 +39,7 @@ public class cgeotrackables extends Activity {
 						waitDialog.dismiss();
 					}
 
-					warning.showToast("Sorry, c:geo failed to load cache inventory.");
+					showToast("Sorry, c:geo failed to load cache inventory.");
 
 					finish();
 					return;
@@ -79,25 +73,17 @@ public class cgeotrackables extends Activity {
 		}
 	};
 
+	public cgeotrackables() {
+		super("c:geo-trackable-list");
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// init
-		activity = this;
-		app = (cgeoapplication) this.getApplication();
-		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
-		base = new cgBase(app, settings, getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(this);
-
-		// set layout
-		if (settings.skin == 1) {
-			setTheme(R.style.light);
-		} else {
-			setTheme(R.style.dark);
-		}
+		setTheme();
 		setContentView(R.layout.trackables);
-		base.setTitle(activity, "Trackables");
+		setTitle("Trackables");
 
 		// get parameters
 		Bundle extras = getIntent().getExtras();
@@ -108,7 +94,7 @@ public class cgeotrackables extends Activity {
 		}
 
 		if (geocode == null) {
-			warning.showToast("Sorry, c:geo forgot for what cache you want to load trackables.");
+			showToast("Sorry, c:geo forgot for what cache you want to load trackables.");
 			finish();
 			return;
 		}
@@ -118,11 +104,11 @@ public class cgeotrackables extends Activity {
 
 		(new loadInventory()).start();
 	}
-	
+
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		settings.load();
 	}
 
@@ -153,31 +139,14 @@ public class cgeotrackables extends Activity {
 		}
 
 		public void onClick(View arg0) {
-			Intent trackableIntent = new Intent(activity, cgeotrackable.class);
+			Intent trackableIntent = new Intent(cgeotrackables.this, cgeotrackable.class);
 			trackableIntent.putExtra("guid", guid);
 			trackableIntent.putExtra("geocode", geocode);
 			trackableIntent.putExtra("name", name);
-			activity.startActivity(trackableIntent);
+			startActivity(trackableIntent);
 
 			finish();
 			return;
-		}
-	}
-
-	public void goHome(View view) {
-		base.goHome(activity);
-	}
-	
-	public void goManual(View view) {
-		try {
-			AppManualReaderClient.openManual(
-				"c-geo",
-				"c:geo-trackable-list",
-				activity,
-				"http://cgeo.carnero.cc/manual/"
-			);
-		} catch (Exception e) {
-			// nothing
 		}
 	}
 }

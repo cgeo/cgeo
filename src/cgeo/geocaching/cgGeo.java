@@ -1,5 +1,9 @@
 package cgeo.geocaching;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Locale;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.GpsSatellite;
@@ -9,9 +13,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Locale;
 
 public class cgGeo {
 
@@ -19,7 +20,6 @@ public class cgGeo {
 	private cgeoapplication app = null;
 	private LocationManager geoManager = null;
 	private cgUpdateLoc geoUpdate = null;
-	private cgWarning warning = null;
 	private cgBase base = null;
 	private cgSettings settings = null;
 	private SharedPreferences prefs = null;
@@ -48,13 +48,12 @@ public class cgGeo {
 	public Integer satellitesFixed = null;
 	public double distanceNow = 0d;
 
-	public cgGeo(Context contextIn, cgeoapplication appIn, cgUpdateLoc geoUpdateIn, cgBase baseIn, cgSettings settingsIn, cgWarning warningIn, int timeIn, int distanceIn) {
+	public cgGeo(Context contextIn, cgeoapplication appIn, cgUpdateLoc geoUpdateIn, cgBase baseIn, cgSettings settingsIn, int timeIn, int distanceIn) {
 		context = contextIn;
 		app = appIn;
 		geoUpdate = geoUpdateIn;
 		base = baseIn;
 		settings = settingsIn;
-		warning = warningIn;
 		time = timeIn;
 		distance = distanceIn;
 
@@ -62,7 +61,7 @@ public class cgGeo {
 			prefs = context.getSharedPreferences(cgSettings.preferences, 0);
 		}
 		distanceNow = prefs.getFloat("dst", 0f);
-		if (Double.isNaN(distanceNow) == true) {
+		if (Double.isNaN(distanceNow)) {
 			distanceNow = 0d;
 		}
 		if (distanceNow == 0f) {
@@ -154,10 +153,10 @@ public class cgGeo {
 
 		@Override
 		public void onLocationChanged(Location location) {
-			if (location.getProvider().equals(LocationManager.GPS_PROVIDER) == true) {
+			if (location.getProvider().equals(LocationManager.GPS_PROVIDER)) {
 				locGps = location;
 				locGpsLast = System.currentTimeMillis();
-			} else if (location.getProvider().equals(LocationManager.NETWORK_PROVIDER) == true) {
+			} else if (location.getProvider().equals(LocationManager.NETWORK_PROVIDER)) {
 				locNet = location;
 			}
 
@@ -166,11 +165,11 @@ public class cgGeo {
 
 		@Override
 		public void onProviderDisabled(String provider) {
-			if (provider.equals(LocationManager.NETWORK_PROVIDER) == true) {
+			if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
 				if (geoManager != null && geoNetListener != null) {
 					geoManager.removeUpdates(geoNetListener);
 				}
-			} else if (provider.equals(LocationManager.GPS_PROVIDER) == true) {
+			} else if (provider.equals(LocationManager.GPS_PROVIDER)) {
 				if (geoManager != null && geoGpsListener != null) {
 					geoManager.removeUpdates(geoGpsListener);
 				}
@@ -179,12 +178,12 @@ public class cgGeo {
 
 		@Override
 		public void onProviderEnabled(String provider) {
-			if (provider.equals(LocationManager.NETWORK_PROVIDER) == true) {
+			if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
 				if (geoNetListener == null) {
 					geoNetListener = new cgeoGeoListener();
 				}
 				geoNetListener.setProvider(LocationManager.NETWORK_PROVIDER);
-			} else if (provider.equals(LocationManager.GPS_PROVIDER) == true) {
+			} else if (provider.equals(LocationManager.GPS_PROVIDER)) {
 				if (geoGpsListener == null) {
 					geoGpsListener = new cgeoGeoListener();
 				}
@@ -193,14 +192,14 @@ public class cgGeo {
 		}
 
 		public void setProvider(String provider) {
-			if (provider.equals(LocationManager.GPS_PROVIDER) == true) {
-				if (geoManager != null && geoManager.isProviderEnabled(LocationManager.GPS_PROVIDER) == true) {
+			if (provider.equals(LocationManager.GPS_PROVIDER)) {
+				if (geoManager != null && geoManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 					active = provider;
 				} else {
 					active = null;
 				}
-			} else if (provider.equals(LocationManager.NETWORK_PROVIDER) == true) {
-				if (geoManager != null && geoManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER) == true) {
+			} else if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
+				if (geoManager != null && geoManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
 					active = provider;
 				} else {
 					active = null;
@@ -222,7 +221,7 @@ public class cgGeo {
 
 				while (statusIterator.hasNext()) {
 					GpsSatellite sat = statusIterator.next();
-					if (sat.usedInFix() == true) {
+					if (sat.usedInFix()) {
 						fixed++;
 					}
 					satellites++;
@@ -246,7 +245,7 @@ public class cgGeo {
 					changed = true;
 				}
 
-				if (changed == true) {
+				if (changed) {
 					selectBest(null);
 				}
 			}
@@ -269,7 +268,7 @@ public class cgGeo {
 			return;
 		}
 
-		if (initProvider != null && initProvider.equals(LocationManager.GPS_PROVIDER) == true) { // we have new location from GPS
+		if (initProvider != null && initProvider.equals(LocationManager.GPS_PROVIDER)) { // we have new location from GPS
 			assign(locGps);
 			return;
 		}
@@ -291,7 +290,7 @@ public class cgGeo {
 		latitudeNow = lat;
 		longitudeNow = lon;
 		altitudeNow = null;
-		bearingNow = new Double(0);
+		bearingNow = Double.valueOf(0);
 		speedNow = 0f;
 		accuracyNow = 999f;
 
@@ -309,11 +308,11 @@ public class cgGeo {
 		location = loc;
 
 		String provider = location.getProvider();
-		if (provider.equals(LocationManager.GPS_PROVIDER) == true) {
+		if (provider.equals(LocationManager.GPS_PROVIDER)) {
 			gps = 1;
-		} else if (provider.equals(LocationManager.NETWORK_PROVIDER) == true) {
+		} else if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
 			gps = 0;
-		} else if (provider.equals("last") == true) {
+		} else if (provider.equals("last")) {
 			gps = -1;
 		}
 
@@ -327,9 +326,9 @@ public class cgGeo {
 			altitudeNow = null;
 		}
 		if (location.hasBearing() && gps != -1) {
-			bearingNow = new Double(location.getBearing());
+			bearingNow = Double.valueOf(location.getBearing());
 		} else {
-			bearingNow = new Double(0);
+			bearingNow = Double.valueOf(0);
 		}
 		if (location.hasSpeed() && gps != -1) {
 			speedNow = location.getSpeed();
@@ -376,7 +375,7 @@ public class cgGeo {
 
 		@Override
 		public void run() {
-			if (g4cRunning == true) {
+			if (g4cRunning) {
 				return;
 			}
 
@@ -423,7 +422,7 @@ public class cgGeo {
 		assign(app.getLastLat(), app.getLastLon());
 
 		Location lastGps = geoManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-		
+
 		if (lastGps != null) {
 			lastGps.setProvider("last");
 			assign(lastGps);
@@ -431,7 +430,7 @@ public class cgGeo {
 			Log.i(cgSettings.tag, "Using last location from GPS");
 			return;
 		}
-		
+
 		Location lastGsm = geoManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 
 		if (lastGsm != null) {

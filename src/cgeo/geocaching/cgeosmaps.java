@@ -2,9 +2,7 @@ package cgeo.geocaching;
 
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -12,20 +10,14 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import cgeo.geocaching.activity.AbstractActivity;
 
-public class cgeosmaps extends Activity {
+public class cgeosmaps extends AbstractActivity {
 
 	private ArrayList<Bitmap> maps = new ArrayList<Bitmap>();
 	private String geocode = null;
-	private Resources res = null;
-	private cgeoapplication app = null;
-	private Activity activity = null;
-	private cgSettings settings = null;
-	private cgBase base = null;
-	private cgWarning warning = null;
 	private LayoutInflater inflater = null;
 	private ProgressDialog waitDialog = null;
 	private LinearLayout smapsView = null;
@@ -40,7 +32,7 @@ public class cgeosmaps extends Activity {
 						waitDialog.dismiss();
 					}
 
-					warning.showToast(res.getString(R.string.err_detail_not_load_map_static));
+					showToast(res.getString(R.string.err_detail_not_load_map_static));
 
 					finish();
 					return;
@@ -50,7 +42,7 @@ public class cgeosmaps extends Activity {
 					}
 
 					if (inflater == null) {
-						inflater = activity.getLayoutInflater();
+						inflater = getLayoutInflater();
 					}
 
 					if (smapsView == null) {
@@ -79,22 +71,9 @@ public class cgeosmaps extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// init
-		activity = this;
-		res = this.getResources();
-		app = (cgeoapplication) this.getApplication();
-		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
-		base = new cgBase(app, settings, getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(this);
-
-		// set layout
-		if (settings.skin == 1) {
-			setTheme(R.style.light);
-		} else {
-			setTheme(R.style.dark);
-		}
+		setTheme();
 		setContentView(R.layout.map_static);
-		base.setTitle(activity, res.getString(R.string.map_static_title));
+		setTitle(res.getString(R.string.map_static_title));
 
 		// get parameters
 		Bundle extras = getIntent().getExtras();
@@ -105,7 +84,7 @@ public class cgeosmaps extends Activity {
 		}
 
 		if (geocode == null) {
-			warning.showToast("Sorry, c:geo forgot for what cache you want to load static maps.");
+			showToast("Sorry, c:geo forgot for what cache you want to load static maps.");
 			finish();
 			return;
 		}
@@ -134,7 +113,7 @@ public class cgeosmaps extends Activity {
 
 				for (int level = 1; level <= 5; level++) {
 					try {
-						Bitmap image = BitmapFactory.decodeFile(settings.getStorage() + geocode + "/map_" + level);
+						Bitmap image = BitmapFactory.decodeFile(cgSettings.getStorage() + geocode + "/map_" + level);
 						if (image != null) {
 							maps.add(image);
 						}
@@ -143,10 +122,10 @@ public class cgeosmaps extends Activity {
 					}
 				}
 
-				if (maps.isEmpty() == true) {
+				if (maps.isEmpty()) {
 					for (int level = 1; level <= 5; level++) {
 						try {
-							Bitmap image = BitmapFactory.decodeFile(settings.getStorageSec() + geocode + "/map_" + level);
+							Bitmap image = BitmapFactory.decodeFile(cgSettings.getStorageSec() + geocode + "/map_" + level);
 							if (image != null) {
 								maps.add(image);
 							}
@@ -161,9 +140,5 @@ public class cgeosmaps extends Activity {
 				Log.e(cgSettings.tag, "cgeosmaps.loadMaps.run: " + e.toString());
 			}
 		}
-	}
-
-	public void goHome(View view) {
-		base.goHome(activity);
 	}
 }

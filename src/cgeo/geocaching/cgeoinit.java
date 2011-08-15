@@ -1,20 +1,18 @@
 package cgeo.geocaching;
 
-import gnu.android.app.appmanualclient.AppManualReaderClient;
-
 import java.io.File;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,18 +25,17 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import cgeo.geocaching.cgSettings.mapSourceEnum;
+import cgeo.geocaching.activity.AbstractActivity;
 
-public class cgeoinit extends Activity {
+public class cgeoinit extends AbstractActivity {
+
+	private static final int MENU_ITEM_DATE = 1;
+	private static final int MENU_ITEM_TIME = 2;
+	private static final int MENU_ITEM_USER = 3;
+	private static final int MENU_ITEM_NUMBER = 4;
 
 	private final int SELECT_MAPFILE_REQUEST=1;
 
-	private cgeoapplication app = null;
-	private Resources res = null;
-	private Activity activity = null;
-	private cgSettings settings = null;
-	private cgBase base = null;
-	private cgWarning warning = null;
-	private SharedPreferences prefs = null;
 	private ProgressDialog loginDialog = null;
 	private ProgressDialog webDialog = null;
 	private Handler logInHandler = new Handler() {
@@ -46,27 +43,27 @@ public class cgeoinit extends Activity {
 		@Override
 		public void handleMessage(Message msg) {
 			try {
-				if (loginDialog != null && loginDialog.isShowing() == true) {
+				if (loginDialog != null && loginDialog.isShowing()) {
 					loginDialog.dismiss();
 				}
 
 				if (msg.what == 1) {
-					warning.helpDialog(res.getString(R.string.init_login_popup), res.getString(R.string.init_login_popup_ok));
+					helpDialog(res.getString(R.string.init_login_popup), res.getString(R.string.init_login_popup_ok));
 				} else {
-					if (cgBase.errorRetrieve.containsKey(msg.what) == true) {
-						warning.helpDialog(res.getString(R.string.init_login_popup),
+					if (cgBase.errorRetrieve.containsKey(msg.what)) {
+						helpDialog(res.getString(R.string.init_login_popup),
 								res.getString(R.string.init_login_popup_failed_reason) + " " + cgBase.errorRetrieve.get(msg.what) + ".");
 					} else {
-						warning.helpDialog(res.getString(R.string.init_login_popup), res.getString(R.string.init_login_popup_failed));
+						helpDialog(res.getString(R.string.init_login_popup), res.getString(R.string.init_login_popup_failed));
 					}
 				}
 			} catch (Exception e) {
-				warning.showToast(res.getString(R.string.err_login_failed));
+				showToast(res.getString(R.string.err_login_failed));
 
 				Log.e(cgSettings.tag, "cgeoinit.logInHandler: " + e.toString());
 			}
 
-			if (loginDialog != null && loginDialog.isShowing() == true) {
+			if (loginDialog != null && loginDialog.isShowing()) {
 				loginDialog.dismiss();
 			}
 
@@ -79,50 +76,43 @@ public class cgeoinit extends Activity {
 		@Override
 		public void handleMessage(Message msg) {
 			try {
-				if (webDialog != null && webDialog.isShowing() == true) {
+				if (webDialog != null && webDialog.isShowing()) {
 					webDialog.dismiss();
 				}
 
 				if (msg.what > 0) {
-					warning.helpDialog(res.getString(R.string.init_sendToCgeo), res.getString(R.string.init_sendToCgeo_register_ok).replace("####", ""+msg.what));
+					helpDialog(res.getString(R.string.init_sendToCgeo), res.getString(R.string.init_sendToCgeo_register_ok).replace("####", ""+msg.what));
 				} else {
-					warning.helpDialog(res.getString(R.string.init_sendToCgeo), res.getString(R.string.init_sendToCgeo_register_fail));
+					helpDialog(res.getString(R.string.init_sendToCgeo), res.getString(R.string.init_sendToCgeo_register_fail));
 				}
 			} catch (Exception e) {
-				warning.showToast(res.getString(R.string.init_sendToCgeo_register_fail));
+				showToast(res.getString(R.string.init_sendToCgeo_register_fail));
 
 				Log.e(cgSettings.tag, "cgeoinit.webHandler: " + e.toString());
 			}
 
-			if (webDialog != null && webDialog.isShowing() == true) {
+			if (webDialog != null && webDialog.isShowing()) {
 				webDialog.dismiss();
 			}
 
 			init();
 		}
 	};
+	protected boolean enableTemplatesMenu = false;
+
+	public cgeoinit() {
+		super("c:geo-configuration");
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		// init
-		activity = this;
-		res = this.getResources();
-		app = (cgeoapplication) this.getApplication();
-		prefs = getSharedPreferences(cgSettings.preferences, 0);
-		settings = new cgSettings(this, prefs);
-		base = new cgBase(app, settings, prefs);
-		warning = new cgWarning(this);
 
-		// set layout
-		if (settings.skin == 1) {
-			setTheme(R.style.light);
-		} else {
-			setTheme(R.style.dark);
-		}
+		setTheme();
 		setContentView(R.layout.init);
-		base.setTitle(activity, res.getString(R.string.settings));
+		setTitle(res.getString(R.string.settings));
 
 		init();
 	}
@@ -177,16 +167,54 @@ public class cgeoinit extends Activity {
 			((EditText) findViewById(R.id.passvote)).setText("");
 
 			status = saveValues();
-			if (status == true) {
-				warning.showToast(res.getString(R.string.init_cleared));
+			if (status) {
+				showToast(res.getString(R.string.init_cleared));
 			} else {
-				warning.showToast(res.getString(R.string.err_init_cleared));
+				showToast(res.getString(R.string.err_init_cleared));
 			}
 
 			finish();
 		}
 
 		return false;
+	}
+
+	@Override
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		if (enableTemplatesMenu) {
+			menu.setHeaderTitle(R.string.init_signature_template_button);
+			menu.add(0, MENU_ITEM_DATE, 0, R.string.init_signature_template_date);
+			menu.add(0, MENU_ITEM_TIME, 0, R.string.init_signature_template_time);
+			menu.add(0, MENU_ITEM_USER, 0, R.string.init_signature_template_user);
+			menu.add(0, MENU_ITEM_NUMBER, 0, R.string.init_signature_template_number);
+		}
+	}
+	
+	@Override
+	public boolean onContextItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case MENU_ITEM_DATE:
+			return insertSignatureTemplate("DATE");
+		case MENU_ITEM_NUMBER:
+			return insertSignatureTemplate("NUMBER");
+		case MENU_ITEM_TIME:
+			return insertSignatureTemplate("TIME");
+		case MENU_ITEM_USER:
+			return insertSignatureTemplate("USER");
+		default:
+			break;
+		}
+		return super.onContextItemSelected(item);
+	}
+	
+	private boolean insertSignatureTemplate(final String template) {
+		EditText sig = (EditText) findViewById(R.id.signature);
+		String insertText = "["+template+"]";
+		int start = sig.getSelectionStart();
+		int end = sig.getSelectionEnd();
+		sig.getText().replace(Math.min(start, end), Math.max(start, end), insertText);
+		return true;
 	}
 
 	public void init() {
@@ -209,7 +237,7 @@ public class cgeoinit extends Activity {
 		legalNote.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View arg0) {
-				activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/about/termsofuse.aspx")));
+				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/about/termsofuse.aspx")));
 			}
 		});
 
@@ -225,7 +253,7 @@ public class cgeoinit extends Activity {
 		go4cache.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View arg0) {
-				activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://go4cache.com/")));
+				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://go4cache.com/")));
 			}
 		});
 
@@ -242,8 +270,8 @@ public class cgeoinit extends Activity {
 		authorizeTwitter.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View arg0) {
-				Intent authIntent = new Intent(activity, cgeoauth.class);
-				activity.startActivity(authIntent);
+				Intent authIntent = new Intent(cgeoinit.this, cgeoauth.class);
+				startActivity(authIntent);
 			}
 		});
 
@@ -263,15 +291,20 @@ public class cgeoinit extends Activity {
 		Button sigBtn = (Button) findViewById(R.id.signature_help);
 		sigBtn.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				warning.helpDialog(res.getString(R.string.init_signature_help_title), res.getString(R.string.init_signature_help_text));
+				helpDialog(res.getString(R.string.init_signature_help_title), res.getString(R.string.init_signature_help_text));
+			}
+		});
+		Button templates = (Button) findViewById(R.id.signature_template);
+		registerForContextMenu(templates);
+		templates.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				enableTemplatesMenu = true;
+				openContextMenu(v);
+				enableTemplatesMenu = false;
 			}
 		});
 		CheckBox autoinsertButton = (CheckBox) findViewById(R.id.sigautoinsert);
-        if (prefs.getBoolean("sigautoinsert", false)) {
-            autoinsertButton.setChecked(true);
-        } else {
-            autoinsertButton.setChecked(false);
-        }
+        autoinsertButton.setChecked(prefs.getBoolean("sigautoinsert", false));
         autoinsertButton.setOnClickListener(new cgeoChangeSignatureAutoinsert());
 
 		// Other settings
@@ -405,15 +438,6 @@ public class cgeoinit extends Activity {
 		Button webAuth = (Button) findViewById(R.id.sendToCgeo_register);
 		webAuth.setOnClickListener(new webAuth());
 
-                /*TextView webText = (TextView) findViewById(R.id.sendToCgeo);
-		webText.setClickable(true);
-		webText.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View arg0) {
-				activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://send2cgeo.carnero.cc/")));
-			}
-		});*/
-
 		// Map source settings
 		Spinner mapSourceSelector = (Spinner) findViewById(R.id.mapsource);
 	    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
@@ -431,19 +455,12 @@ public class cgeoinit extends Activity {
 
 			@Override
 			public void onClick(View v) {
-				Intent selectIntent = new Intent(activity, cgSelectMapfile.class);
-				activity.startActivityForResult(selectIntent, SELECT_MAPFILE_REQUEST);
+				Intent selectIntent = new Intent(cgeoinit.this, cgSelectMapfile.class);
+				startActivityForResult(selectIntent, SELECT_MAPFILE_REQUEST);
 			}
 		});
 
-		// Cache db backup
-		TextView lastBackup = (TextView) findViewById(R.id.backup_last);
-		File lastBackupFile = app.isRestoreFile();
-		if (lastBackupFile != null) {
-			lastBackup.setText(res.getString(R.string.init_backup_last) + " " + cgBase.timeOut.format(lastBackupFile.lastModified()) + ", " + cgBase.dateOut.format(lastBackupFile.lastModified()));
-		} else {
-			lastBackup.setText(res.getString(R.string.init_backup_last_no));
-		}
+		showBackupDate();
 
 	}
 
@@ -464,15 +481,19 @@ public class cgeoinit extends Activity {
 		final String file = app.backupDatabase();
 
 		if (file != null) {
-			warning.helpDialog(res.getString(R.string.init_backup_backup), res.getString(R.string.init_backup_success) + "\n" + file);
+			helpDialog(res.getString(R.string.init_backup_backup), res.getString(R.string.init_backup_success) + "\n" + file);
 		} else {
-			warning.helpDialog(res.getString(R.string.init_backup_backup), res.getString(R.string.init_backup_failed));
+			helpDialog(res.getString(R.string.init_backup_backup), res.getString(R.string.init_backup_failed));
 		}
 
+		showBackupDate();
+	}
+
+	private void showBackupDate() {
 		TextView lastBackup = (TextView) findViewById(R.id.backup_last);
-		File lastBackupFile = app.isRestoreFile();
+		File lastBackupFile = cgeoapplication.isRestoreFile();
 		if (lastBackupFile != null) {
-			lastBackup.setText(res.getString(R.string.init_backup_last) + " " + cgBase.timeOut.format(lastBackupFile.lastModified()) + ", " + cgBase.dateOut.format(lastBackupFile.lastModified()));
+			lastBackup.setText(res.getString(R.string.init_backup_last) + " " + base.formatTime(lastBackupFile.lastModified()) + ", " + base.formatDate(lastBackupFile.lastModified()));
 		} else {
 			lastBackup.setText(res.getString(R.string.init_backup_last_no));
 		}
@@ -482,9 +503,9 @@ public class cgeoinit extends Activity {
 		final boolean status = app.restoreDatabase();
 
 		if (status) {
-			warning.helpDialog(res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_success));
+			helpDialog(res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_success));
 		} else {
-			warning.helpDialog(res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_failed));
+			helpDialog(res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_failed));
 		}
 	}
 
@@ -538,7 +559,7 @@ public class cgeoinit extends Activity {
 		public void onClick(View arg0) {
 			CheckBox twitterButton = (CheckBox) findViewById(R.id.twitter_option);
 
-			if (twitterButton.isChecked() == true) {
+			if (twitterButton.isChecked()) {
 				settings.reloadTwitterTokens();
 
 				SharedPreferences.Editor edit = prefs.edit();
@@ -552,8 +573,8 @@ public class cgeoinit extends Activity {
 				edit.commit();
 
 				if (settings.twitter == 1 && (settings.tokenPublic == null || settings.tokenPublic.length() == 0 || settings.tokenSecret == null || settings.tokenSecret.length() == 0)) {
-					Intent authIntent = new Intent(activity, cgeoauth.class);
-					activity.startActivity(authIntent);
+					Intent authIntent = new Intent(cgeoinit.this, cgeoauth.class);
+					startActivity(authIntent);
 				}
 
 				if (prefs.getInt("twitter", 0) == 0) {
@@ -982,11 +1003,11 @@ public class cgeoinit extends Activity {
 			final String password = ((EditText) findViewById(R.id.password)).getText().toString();
 
 			if (username == null || username.length() == 0 || password == null || password.length() == 0) {
-				warning.showToast(res.getString(R.string.err_missing_auth));
+				showToast(res.getString(R.string.err_missing_auth));
 				return;
 			}
 
-			loginDialog = ProgressDialog.show(activity, res.getString(R.string.init_login_popup), res.getString(R.string.init_login_popup_working), true);
+			loginDialog = ProgressDialog.show(cgeoinit.this, res.getString(R.string.init_login_popup), res.getString(R.string.init_login_popup_working), true);
 			loginDialog.setCancelable(false);
 
 			settings.setLogin(username, password);
@@ -1010,11 +1031,11 @@ public class cgeoinit extends Activity {
 
 
 			if (deviceName == null || deviceName.length() == 0) {
-				warning.showToast(res.getString(R.string.err_missing_device_name));
+				showToast(res.getString(R.string.err_missing_device_name));
 				return;
 			}
 
-			webDialog = ProgressDialog.show(activity, res.getString(R.string.init_sendToCgeo), res.getString(R.string.init_sendToCgeo_registering), true);
+			webDialog = ProgressDialog.show(cgeoinit.this, res.getString(R.string.init_sendToCgeo), res.getString(R.string.init_sendToCgeo_registering), true);
 			webDialog.setCancelable(false);
 
 			(new Thread() {
@@ -1028,7 +1049,7 @@ public class cgeoinit extends Activity {
 
                                         String params = "name="+cgBase.urlencode_rfc3986(nam)+"&code="+cgBase.urlencode_rfc3986(cod);
 
-                                        cgResponse response = base.request(false, "send2cgeo.carnero.cc", "/authDev.php", "GET", params, 0, true);
+                                        cgResponse response = base.request(false, "send2.cgeo.org", "/auth.html", "GET", params, 0, true);
 
                                         if (response.getStatusCode() == 200)
                                         {
@@ -1060,23 +1081,6 @@ public class cgeoinit extends Activity {
 				}
 			}
 			initMapfileEdittext(true);
-		}
-	}
-
-	public void goHome(View view) {
-		base.goHome(activity);
-	}
-
-	public void goManual(View view) {
-		try {
-			AppManualReaderClient.openManual(
-				"c-geo",
-				"c:geo-configuration",
-				activity,
-				"http://cgeo.carnero.cc/manual/"
-			);
-		} catch (Exception e) {
-			// nothing
 		}
 	}
 }

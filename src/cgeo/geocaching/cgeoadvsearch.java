@@ -1,54 +1,44 @@
 package cgeo.geocaching;
 
-import gnu.android.app.appmanualclient.*;
-
 import java.util.HashMap;
-import android.os.Bundle;
-import android.app.Activity;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import android.app.SearchManager;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.EditText;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.Resources;
+import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import cgeo.geocaching.activity.AbstractActivity;
 
-public class cgeoadvsearch extends Activity {
+public class cgeoadvsearch extends AbstractActivity {
 
-	private Resources res = null;
-	private Activity activity = null;
-	private cgeoapplication app = null;
-	private cgSettings settings = null;
-	private cgBase base = null;
-	private cgWarning warning = null;
 	private cgGeo geo = null;
 	private cgUpdateLoc geoUpdate = new update();
 	private EditText latEdit = null;
 	private EditText lonEdit = null;
 	private String[] geocodesInCache = null;
 
+	public cgeoadvsearch() {
+		super("c:geo-search");
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		// init
-		activity = this;
-		res = this.getResources();
-		app = (cgeoapplication) this.getApplication();
 		app.setAction(null);
-		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
-		base = new cgBase(app, settings, getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(this);
 
 		// search query
 		Intent intent = getIntent();
@@ -63,14 +53,9 @@ public class cgeoadvsearch extends Activity {
 			}
 		}
 
-		// set layout
-		if (settings.skin == 1) {
-			setTheme(R.style.light);
-		} else {
-			setTheme(R.style.dark);
-		}
+		setTheme();
 		setContentView(R.layout.search);
-		base.setTitle(activity, res.getString(R.string.search));
+		setTitle(res.getString(R.string.search));
 
 		init();
 	}
@@ -127,23 +112,23 @@ public class cgeoadvsearch extends Activity {
 
 		try {
 			if (gcCodeM.find()) { // GC-code
-				final Intent cachesIntent = new Intent(activity, cgeodetail.class);
+				final Intent cachesIntent = new Intent(this, cgeodetail.class);
 				cachesIntent.putExtra("geocode", query.trim().toUpperCase());
-				activity.startActivity(cachesIntent);
+				startActivity(cachesIntent);
 
 				found = true;
 			} else if (tbCodeM.find()) { // TB-code
-				final Intent trackablesIntent = new Intent(activity, cgeotrackable.class);
+				final Intent trackablesIntent = new Intent(this, cgeotrackable.class);
 				trackablesIntent.putExtra("geocode", query.trim().toUpperCase());
-				activity.startActivity(trackablesIntent);
+				startActivity(trackablesIntent);
 
 				found = true;
 			} else { // keyword (fallback)
-				final Intent cachesIntent = new Intent(activity, cgeocaches.class);
+				final Intent cachesIntent = new Intent(this, cgeocaches.class);
 				cachesIntent.putExtra("type", "keyword");
 				cachesIntent.putExtra("keyword", query);
 				cachesIntent.putExtra("cachetype", settings.cacheType);
-				activity.startActivity(cachesIntent);
+				startActivity(cachesIntent);
 
 				found = true;
 			}
@@ -163,7 +148,7 @@ public class cgeoadvsearch extends Activity {
 		}
 
 		if (geo == null) {
-			geo = app.startGeo(activity, geoUpdate, base, settings, warning, 0, 0);
+			geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
 		}
 
 		((EditText) findViewById(R.id.latitude)).setOnEditorActionListener(new findByCoordsAction());
@@ -265,8 +250,8 @@ public class cgeoadvsearch extends Activity {
 				}
 
 				if (geo.latitudeNow != null && geo.longitudeNow != null) {
-					latEdit.setHint(base.formatCoordinate(geo.latitudeNow, "lat", false));
-					lonEdit.setHint(base.formatCoordinate(geo.longitudeNow, "lon", false));
+					latEdit.setHint(cgBase.formatCoordinate(geo.latitudeNow, "lat", false));
+					lonEdit.setHint(cgBase.formatCoordinate(geo.longitudeNow, "lon", false));
 				}
 			} catch (Exception e) {
 				Log.w(cgSettings.tag, "Failed to update location.");
@@ -301,28 +286,28 @@ public class cgeoadvsearch extends Activity {
 		final String lonText = lonView.getText().toString();
 
 		if (latText == null || latText.length() == 0 || lonText == null || lonText.length() == 0) {
-			latView.setText(base.formatCoordinate(geo.latitudeNow, "lat", true));
-			lonView.setText(base.formatCoordinate(geo.longitudeNow, "lon", true));
+			latView.setText(cgBase.formatCoordinate(geo.latitudeNow, "lat", true));
+			lonView.setText(cgBase.formatCoordinate(geo.longitudeNow, "lon", true));
 		} else {
-			HashMap<String, Object> latParsed = base.parseCoordinate(latText, "lat");
-			HashMap<String, Object> lonParsed = base.parseCoordinate(lonText, "lat");
+			HashMap<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
+			HashMap<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lat");
 
 			if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
-				warning.showToast(res.getString(R.string.err_parse_lat));
+				showToast(res.getString(R.string.err_parse_lat));
 				return;
 			}
 
 			if (lonParsed == null || lonParsed.get("coordinate") == null || lonParsed.get("string") == null) {
-				warning.showToast(res.getString(R.string.err_parse_lon));
+				showToast(res.getString(R.string.err_parse_lon));
 				return;
 			}
 
-			final Intent cachesIntent = new Intent(activity, cgeocaches.class);
+			final Intent cachesIntent = new Intent(this, cgeocaches.class);
 			cachesIntent.putExtra("type", "coordinate");
 			cachesIntent.putExtra("latitude", (Double) latParsed.get("coordinate"));
 			cachesIntent.putExtra("longitude", (Double) lonParsed.get("coordinate"));
 			cachesIntent.putExtra("cachetype", settings.cacheType);
-			activity.startActivity(cachesIntent);
+			startActivity(cachesIntent);
 		}
 	}
 
@@ -351,15 +336,15 @@ public class cgeoadvsearch extends Activity {
 		String keyText = ((EditText) findViewById(R.id.keyword)).getText().toString();
 
 		if (keyText == null || keyText.length() == 0) {
-			warning.helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_keyword));
+			helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_keyword));
 			return;
 		}
 
-		final Intent cachesIntent = new Intent(activity, cgeocaches.class);
+		final Intent cachesIntent = new Intent(this, cgeocaches.class);
 		cachesIntent.putExtra("type", "keyword");
 		cachesIntent.putExtra("keyword", keyText);
 		cachesIntent.putExtra("cachetype", settings.cacheType);
-		activity.startActivity(cachesIntent);
+		startActivity(cachesIntent);
 	}
 
 	private class findByAddressAction implements TextView.OnEditorActionListener {
@@ -386,13 +371,13 @@ public class cgeoadvsearch extends Activity {
 		final String addText = ((EditText) findViewById(R.id.address)).getText().toString();
 
 		if (addText == null || addText.length() == 0) {
-			warning.helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_address));
+			helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_address));
 			return;
 		}
 
-		final Intent addressesIntent = new Intent(activity, cgeoaddresses.class);
+		final Intent addressesIntent = new Intent(this, cgeoaddresses.class);
 		addressesIntent.putExtra("keyword", addText);
-		activity.startActivity(addressesIntent);
+		startActivity(addressesIntent);
 	}
 
 	private class findByUsernameAction implements TextView.OnEditorActionListener {
@@ -419,15 +404,15 @@ public class cgeoadvsearch extends Activity {
 		final String usernameText = ((EditText) findViewById(R.id.username)).getText().toString();
 
 		if (usernameText == null || usernameText.length() == 0) {
-			warning.helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_user));
+			helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_user));
 			return;
 		}
 
-		final Intent cachesIntent = new Intent(activity, cgeocaches.class);
+		final Intent cachesIntent = new Intent(this, cgeocaches.class);
 		cachesIntent.putExtra("type", "username");
 		cachesIntent.putExtra("username", usernameText);
 		cachesIntent.putExtra("cachetype", settings.cacheType);
-		activity.startActivity(cachesIntent);
+		startActivity(cachesIntent);
 	}
 
 	private class findByOwnerAction implements TextView.OnEditorActionListener {
@@ -454,15 +439,15 @@ public class cgeoadvsearch extends Activity {
 		final String usernameText = ((EditText) findViewById(R.id.owner)).getText().toString();
 
 		if (usernameText == null || usernameText.length() == 0) {
-			warning.helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_user));
+			helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_user));
 			return;
 		}
 
-		final Intent cachesIntent = new Intent(activity, cgeocaches.class);
+		final Intent cachesIntent = new Intent(this, cgeocaches.class);
 		cachesIntent.putExtra("type", "owner");
 		cachesIntent.putExtra("username", usernameText);
 		cachesIntent.putExtra("cachetype", settings.cacheType);
-		activity.startActivity(cachesIntent);
+		startActivity(cachesIntent);
 	}
 
 	private class findByGeocodeAction implements TextView.OnEditorActionListener {
@@ -489,13 +474,13 @@ public class cgeoadvsearch extends Activity {
 		final String geocodeText = ((EditText) findViewById(R.id.geocode)).getText().toString();
 
 		if (geocodeText == null || geocodeText.length() == 0 || geocodeText.equalsIgnoreCase("GC")) {
-			warning.helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_gccode));
+			helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_gccode));
 			return;
 		}
 
-		final Intent cachesIntent = new Intent(activity, cgeodetail.class);
+		final Intent cachesIntent = new Intent(this, cgeodetail.class);
 		cachesIntent.putExtra("geocode", geocodeText.toUpperCase());
-		activity.startActivity(cachesIntent);
+		startActivity(cachesIntent);
 	}
 
 	private class findTrackableAction implements TextView.OnEditorActionListener {
@@ -522,28 +507,12 @@ public class cgeoadvsearch extends Activity {
 		final String trackableText = ((EditText) findViewById(R.id.trackable)).getText().toString();
 
 		if (trackableText == null || trackableText.length() == 0 || trackableText.equalsIgnoreCase("TB")) {
-			warning.helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_tb));
+			helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_tb));
 			return;
 		}
 
-		final Intent trackablesIntent = new Intent(activity, cgeotrackable.class);
+		final Intent trackablesIntent = new Intent(this, cgeotrackable.class);
 		trackablesIntent.putExtra("geocode", trackableText.toUpperCase());
-		activity.startActivity(trackablesIntent);
-	}
-
-	public void goHome(View view) {
-		base.goHome(activity);
-	}
-
-	public void goManual(View view) {
-		try {
-			AppManualReaderClient.openManual(
-					"c-geo",
-					"c:geo-search",
-					activity,
-					"http://cgeo.carnero.cc/manual/");
-		} catch (Exception e) {
-			// nothing
-		}
+		startActivity(trackablesIntent);
 	}
 }

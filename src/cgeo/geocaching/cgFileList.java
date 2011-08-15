@@ -3,30 +3,21 @@ package cgeo.geocaching;
 import java.io.File;
 import java.util.ArrayList;
 
-import android.app.Activity;
-import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.View;
 import android.widget.ArrayAdapter;
+import cgeo.geocaching.activity.AbstractListActivity;
 
-public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActivity {
+public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractListActivity {
 
 	private ArrayList<File> files = new ArrayList<File>();
-	private cgeoapplication app = null;
-	private cgSettings settings = null;
-	private cgBase base = null;
-	private cgWarning warning = null;
-	private Activity activity = null;
 	private T adapter = null;
 	private ProgressDialog waitDialog = null;
-	private Resources res = null;
 	private loadFiles searchingThread = null;
 	private boolean endSearching = false;
 	private int listId = 1;
@@ -35,7 +26,7 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 		@Override
 		public void handleMessage(Message msg) {
 			if (msg.obj != null && waitDialog != null) {
-				waitDialog.setMessage(getRes().getString(R.string.file_searching_in) + " " + (String) msg.obj);
+				waitDialog.setMessage(res.getString(R.string.file_searching_in) + " " + (String) msg.obj);
 			}
 		}
 	};
@@ -49,7 +40,7 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 						waitDialog.dismiss();
 					}
 
-					getWarning().showToast(getRes().getString(R.string.file_list_no_files));
+					showToast(res.getString(R.string.file_list_no_files));
 
 					finish();
 					return;
@@ -75,22 +66,9 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// init
-		activity = this;
-		res = this.getResources();
-		app = (cgeoapplication) this.getApplication();
-		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
-		base = new cgBase(getApp(), getSettings(), getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(this);
-
-		// set layout
-		if (getSettings().skin == 1) {
-			setTheme(R.style.light);
-		} else {
-			setTheme(R.style.dark);
-		}
+		setTheme();
 		setContentView(R.layout.gpx);
-		getBase().setTitle(getActivity(), getRes().getString(R.string.gpx_import_title));
+		setTitle(res.getString(R.string.gpx_import_title));
 
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -104,8 +82,8 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 
 		waitDialog = ProgressDialog.show(
 				this,
-				getRes().getString(R.string.file_title_searching),
-				getRes().getString(R.string.file_searching),
+				res.getString(R.string.file_title_searching),
+				res.getString(R.string.file_searching),
 				true,
 				true,
 				new DialogInterface.OnCancelListener() {
@@ -113,7 +91,7 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 						if (searchingThread != null && searchingThread.isAlive()) {
 							searchingThread.notifyEnd();
 						}
-						if (files.isEmpty() == true) {
+						if (files.isEmpty()) {
 							finish();
 						}
 					}
@@ -128,14 +106,14 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		getSettings().load();
 	}
-	
+
 	final protected cgSettings getSettings() {
 		return settings;
 	}
-	
+
 	protected abstract T getAdapter(ArrayList<File> files);
 
 	private void setAdapter() {
@@ -144,13 +122,13 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 			setListAdapter(adapter);
 		}
 	}
-	
+
 	/**
 	 * Gets the base folder for file searches
 	 * @return The folder to start the recursive search in
 	 */
-	protected abstract String[] getBaseFolders(); 
-	
+	protected abstract String[] getBaseFolders();
+
 	private class loadFiles extends Thread {
 		public void notifyEnd() {
 			endSearching = true;
@@ -161,12 +139,12 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 			ArrayList<File> list = new ArrayList<File>();
 
 			try {
-				if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) == true) {
+				if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
 					boolean loaded = false;
 					for(String baseFolder : getBaseFolders())
 					{
 						final File dir = new File(baseFolder);
-					
+
 						if (dir.exists() && dir.isDirectory()) {
 							listDir(list, dir);
 							if (list.size() > 0) {
@@ -198,7 +176,7 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 
 	/**
 	 * Get the file extension to search for
-	 * @return The file extension 
+	 * @return The file extension
 	 */
 	protected abstract String getFileExtension();
 
@@ -214,11 +192,11 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 			final int listCnt = listPre.length;
 
 			for (int i = 0; i < listCnt; i++) {
-				if (endSearching == true) {
+				if (endSearching) {
 					return;
 				}
 
-				if (listPre[i].canRead() == true && listPre[i].isFile() == true) {
+				if (listPre[i].canRead() && listPre[i].isFile()) {
 					final String[] nameParts = listPre[i].getName().split("\\.");
 					if (nameParts.length > 1) {
 						final String extension = nameParts[(nameParts.length - 1)].toLowerCase();
@@ -231,10 +209,10 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 					}
 
 					list.add(listPre[i]); // add file to list
-				} else if (listPre[i].canRead() == true && listPre[i].isDirectory() == true) {
+				} else if (listPre[i].canRead() && listPre[i].isDirectory()) {
 					final Message msg = new Message();
 					String name = listPre[i].getName();
-					if (name.substring(0, 1).equals(".") == true) {
+					if (name.substring(0, 1).equals(".")) {
 						continue; // skip hidden directories
 					}
 					if (name.length() > 16) {
@@ -249,29 +227,5 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends ListActiv
 		}
 
 		return;
-	}
-
-	public void goHome(View view) {
-		getBase().goHome(getActivity());
-	}
-
-	protected cgeoapplication getApp() {
-		return app;
-	}
-
-	protected cgBase getBase() {
-		return base;
-	}
-
-	protected cgWarning getWarning() {
-		return warning;
-	}
-
-	protected Activity getActivity() {
-		return activity;
-	}
-
-	protected Resources getRes() {
-		return res;
 	}
 }

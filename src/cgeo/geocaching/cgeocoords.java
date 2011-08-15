@@ -3,9 +3,7 @@ package cgeo.geocaching;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,15 +17,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import cgeo.geocaching.activity.AbstractActivity;
 
 public class cgeocoords extends Dialog {
 
-	private Context context = null;
+	private AbstractActivity context = null;
 	private cgGeo geo = null;
-	private cgSettings settings = null;
-	private cgBase base = null;
 	private Double latitude = 0.0, longitude = 0.0;
-	private cgWarning warning = null;
 	
 	private EditText eLat, eLon;
 	private Button bLat, bLon;
@@ -44,14 +40,11 @@ public class cgeocoords extends Dialog {
 	final int formatMin	= 2;
 	final int formatSec	= 3;
 	
-	public cgeocoords(final Activity contextIn, final cgWaypoint waypoint, final cgGeo geoIn) {
+	public cgeocoords(final AbstractActivity contextIn, final cgWaypoint waypoint, final cgGeo geoIn) {
 		super(contextIn);
 		context = contextIn;
-		warning = new cgWarning(context);
 		geo = geoIn;
 
-		settings = new cgSettings(contextIn, contextIn.getSharedPreferences(cgSettings.preferences, 0));
-		base = new cgBase((cgeoapplication) contextIn.getApplication(), settings, contextIn.getSharedPreferences(cgSettings.preferences, 0));
 		if (waypoint != null) {
 			latitude = waypoint.latitude;
 			longitude = waypoint.longitude;
@@ -160,8 +153,8 @@ public class cgeocoords extends Dialog {
 				findViewById(R.id.coordTable).setVisibility(View.GONE);
 				eLat.setVisibility(View.VISIBLE);
 				eLon.setVisibility(View.VISIBLE);
-				eLat.setText(base.formatCoordinate(latitude, "lat", true));
-				eLon.setText(base.formatCoordinate(longitude, "lon", true));				
+				eLat.setText(cgBase.formatCoordinate(latitude, "lat", true));
+				eLon.setText(cgBase.formatCoordinate(longitude, "lon", true));				
 				break;
 			case formatDeg: // DDD.DDDDD°
 				findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
@@ -429,7 +422,7 @@ public class cgeocoords extends Dialog {
 
 		public void onClick(View v) {
 			if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null) {
-				warning.showToast(context.getResources().getString(R.string.err_point_unknown_position));
+				context.showToast(context.getResources().getString(R.string.err_point_unknown_position));
 				return;
 			}
 			
@@ -445,16 +438,16 @@ public class cgeocoords extends Dialog {
 			if (currentFormat == formatPlain) {
 				if (eLat.length() > 0 && eLon.length() > 0) {
 					// latitude & longitude
-					HashMap<String, Object> latParsed = base.parseCoordinate(eLat.getText().toString(), "lat");
-					HashMap<String, Object> lonParsed = base.parseCoordinate(eLon.getText().toString(), "lon");
+					HashMap<String, Object> latParsed = cgBase.parseCoordinate(eLat.getText().toString(), "lat");
+					HashMap<String, Object> lonParsed = cgBase.parseCoordinate(eLon.getText().toString(), "lon");
 
 					if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
-						warning.showToast(context.getResources().getString(R.string.err_parse_lat));
+						context.showToast(context.getResources().getString(R.string.err_parse_lat));
 						return;
 					}
 
 					if (lonParsed == null || lonParsed.get("coordinate") == null || lonParsed.get("string") == null) {
-						warning.showToast(context.getResources().getString(R.string.err_parse_lon));
+						context.showToast(context.getResources().getString(R.string.err_parse_lon));
 						return;
 					}
 
@@ -462,7 +455,7 @@ public class cgeocoords extends Dialog {
 					longitude = (Double) lonParsed.get("coordinate");
 				} else {
 					if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null) {
-						warning.showToast(context.getResources().getString(R.string.err_point_curr_position_unavailable));
+						context.showToast(context.getResources().getString(R.string.err_point_curr_position_unavailable));
 						return;
 					}
 

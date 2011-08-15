@@ -10,8 +10,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.cgWarning;
 import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.activity.ActivityMixin;
 
 class GoogleNavigationApp extends AbstractNavigationApp implements
 		NavigationApp {
@@ -26,20 +26,44 @@ class GoogleNavigationApp extends AbstractNavigationApp implements
 	}
 
 	@Override
-	public boolean invoke(cgGeo geo, Activity activity, Resources res,
-			cgWarning warning, cgCache cache,
-			Long searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
+	public boolean invoke(final cgGeo geo, final Activity activity, final Resources res,
+			final cgCache cache,
+			final Long searchId, final cgWaypoint waypoint, final Double latitude, final Double longitude) {
 		if (activity == null) {
 			return false;
 		}
-		cgSettings settings = getSettings(activity);
 
+		boolean navigationResult = false;
+		if (latitude != null && longitude != null) {
+			navigationResult = navigateToCoordinates(geo, activity, latitude, longitude);
+		}
+		else if (waypoint != null) {
+			navigationResult = navigateToCoordinates(geo, activity, waypoint.latitude, waypoint.longitude);
+		}
+		else if (cache != null) {
+			navigationResult = navigateToCoordinates(geo, activity, cache.latitude, cache.longitude);
+		}
+
+		if (!navigationResult) {
+			if (res != null) {
+				ActivityMixin.showToast(activity, res.getString(R.string.err_navigation_no));
+			}
+			return false;
+		}
+
+		return true;
+	}
+
+	private static boolean navigateToCoordinates(cgGeo geo, Activity activity, Double latitude,
+			Double longitude) {
 		Double latitudeNow = null;
 		Double longitudeNow = null;
 		if (geo != null) {
 			latitudeNow = geo.latitudeNow;
 			longitudeNow = geo.longitudeNow;
 		}
+
+		cgSettings settings = getSettings(activity);
 
 		// Google Navigation
 		if (settings.useGNavigation == 1) {
@@ -74,11 +98,6 @@ class GoogleNavigationApp extends AbstractNavigationApp implements
 
 		Log.i(cgSettings.tag,
 				"cgBase.runNavigation: No navigation application available.");
-
-		if (warning != null && res != null) {
-			warning.showToast(res.getString(R.string.err_navigation_no));
-		}
-
 		return false;
 	}
 

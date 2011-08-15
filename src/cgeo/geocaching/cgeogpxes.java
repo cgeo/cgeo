@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.view.View;
 
 public class cgeogpxes extends cgFileList<cgGPXListAdapter> {
 
@@ -21,7 +20,7 @@ public class cgeogpxes extends cgFileList<cgGPXListAdapter> {
 		@Override
 		public void handleMessage(Message msg) {
 			if (msg.obj != null && parseDialog != null) {
-				parseDialog.setMessage(getRes().getString(R.string.gpx_import_loading_stored) + " " + (Integer) msg.obj);
+				parseDialog.setMessage(res.getString(R.string.gpx_import_loading_stored) + " " + (Integer) msg.obj);
 			}
 		}
 	};
@@ -34,7 +33,7 @@ public class cgeogpxes extends cgFileList<cgGPXListAdapter> {
 					parseDialog.dismiss();
 				}
 
-				getWarning().helpDialog(getRes().getString(R.string.gpx_import_title_caches_imported), imported + " " + getRes().getString(R.string.gpx_import_caches_imported));
+				helpDialog(res.getString(R.string.gpx_import_title_caches_imported), imported + " " + res.getString(R.string.gpx_import_caches_imported));
 				imported = 0;
 			} catch (Exception e) {
 				if (parseDialog != null) {
@@ -63,7 +62,7 @@ public class cgeogpxes extends cgFileList<cgGPXListAdapter> {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			listId = extras.getInt("list");
@@ -77,9 +76,9 @@ public class cgeogpxes extends cgFileList<cgGPXListAdapter> {
 	public void loadGPX(File file) {
 
 		parseDialog = ProgressDialog.show(
-				getActivity(),
-				getRes().getString(R.string.gpx_import_title_reading_file),
-				getRes().getString(R.string.gpx_import_loading),
+				this,
+				res.getString(R.string.gpx_import_title_reading_file),
+				res.getString(R.string.gpx_import_loading),
 				true,
 				false);
 
@@ -96,16 +95,11 @@ public class cgeogpxes extends cgFileList<cgGPXListAdapter> {
 
 		@Override
 		public void run() {
-			final long searchId = getBase().parseGPX(getApp(), file, listId, changeParseDialogHandler);
+			final long searchId = cgBase.parseGPX(app, file, listId, changeParseDialogHandler);
 
-			imported = getApp().getCount(searchId);
+			imported = app.getCount(searchId);
 
 			loadCachesHandler.sendMessage(new Message());
 		}
 	}
-
-	public void goHome(View view) {
-		getBase().goHome(getActivity());
-	}
-
 }

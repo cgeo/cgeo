@@ -2,6 +2,7 @@ package cgeo.geocaching.mapcommon;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -23,7 +24,7 @@ public class cgMapMyOverlay implements OverlayBase {
 	private cgSettings settings = null;
 	private Location coordinates = null;
 	private GeoPointImpl location = null;
-	private Double heading = new Double(0);
+	private Double heading = Double.valueOf(0);
 	private Paint accuracyCircle = null;
 	private Paint historyLine = null;
 	private Paint historyLineShadow = null;
@@ -38,9 +39,13 @@ public class cgMapMyOverlay implements OverlayBase {
 	private ArrayList<Location> history = new ArrayList<Location>();
 	private Point historyPointN = new Point();
 	private Point historyPointP = new Point();
+	private Activity activity;
+	private MapFactory mapFactory = null;
 
-	public cgMapMyOverlay(cgSettings settingsIn) {
+	public cgMapMyOverlay(cgSettings settingsIn, Activity activity) {
 		settings = settingsIn;
+		this.activity = activity;
+		this.mapFactory = settings.getMapFactory();
 	}
 
 	public void setCoordinates(Location coordinatesIn) {
@@ -68,8 +73,6 @@ public class cgMapMyOverlay implements OverlayBase {
     private void drawInternal(Canvas canvas, MapProjectionImpl projection) {
 
 		if (coordinates == null || location == null) return;
-
-		MapFactory mapFactory = settings.getMapFactory();
 
 		if (accuracyCircle == null) {
 			accuracyCircle = new Paint();
@@ -180,7 +183,7 @@ public class cgMapMyOverlay implements OverlayBase {
 		}
 
 		if (arrow == null) {
-			arrow = BitmapFactory.decodeResource(settings.getContext().getResources(), R.drawable.my_location_chevron);
+			arrow = BitmapFactory.decodeResource(activity.getResources(), R.drawable.my_location_chevron);
 			widthArrow = arrow.getWidth();
 			heightArrow = arrow.getHeight();
 		}

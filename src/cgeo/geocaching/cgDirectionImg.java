@@ -1,10 +1,10 @@
 package cgeo.geocaching;
 
-import android.util.Log;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -12,14 +12,11 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import android.util.Log;
+
 public class cgDirectionImg {
-	private cgSettings settings = null;
 
-	public cgDirectionImg(cgSettings settingsIn) {
-		settings = settingsIn;
-	}
-
-	public void getDrawable(String geocode, String code) {
+	public static void getDrawable(String geocode, String code) {
 		String dirName;
 		String fileName;
 
@@ -28,14 +25,14 @@ public class cgDirectionImg {
 		}
 
 		if (geocode != null && geocode.length() > 0) {
-			dirName = settings.getStorage() + geocode + "/";
-			fileName = settings.getStorage() + geocode + "/direction.png";
+			dirName = cgSettings.getStorage() + geocode + "/";
+			fileName = cgSettings.getStorage() + geocode + "/direction.png";
 		} else {
 			return;
 		}
 
 		File dir = null;
-		dir = new File(settings.getStorage());
+		dir = new File(cgSettings.getStorage());
 		if (dir.exists() == false) {
 			dir.mkdirs();
 		}
@@ -76,16 +73,16 @@ public class cgDirectionImg {
 							fos.write(buffer, 0, l);
 						}
 						ok = true;
+						fos.flush();
 					} catch (IOException e) {
 						Log.e(cgSettings.tag, "cgDirectionImg.getDrawable (saving to cache): " + e.toString());
 					} finally {
 						is.close();
-						fos.flush();
 						fos.close();
 					}
 				}
 
-				if (ok == true) {
+				if (ok) {
 					break;
 				}
 			} catch (Exception e) {

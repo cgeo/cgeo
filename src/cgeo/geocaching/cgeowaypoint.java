@@ -1,13 +1,9 @@
 package cgeo.geocaching;
 
-import gnu.android.app.appmanualclient.AppManualReaderClient;
-
 import java.util.ArrayList;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,9 +18,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 
-public class cgeowaypoint extends Activity {
+public class cgeowaypoint extends AbstractActivity {
 
 	private static final int MENU_ID_NAVIGATION = 0;
 	private static final int MENU_ID_CACHES_AROUND = 5;
@@ -32,12 +29,6 @@ public class cgeowaypoint extends Activity {
 	private cgWaypoint waypoint = null;
 	private String geocode = null;
 	private int id = -1;
-	private cgeoapplication app = null;
-	private Resources res = null;
-	private Activity activity = null;
-	private cgSettings settings = null;
-	private cgBase base = null;
-	private cgWarning warning = null;
 	private ProgressDialog waitDialog = null;
 	private cgGeo geo = null;
 	private cgUpdateLoc geoUpdate = new update();
@@ -52,7 +43,7 @@ public class cgeowaypoint extends Activity {
 						waitDialog = null;
 					}
 
-					warning.showToast(res.getString(R.string.err_waypoint_load_failed));
+					showToast(res.getString(R.string.err_waypoint_load_failed));
 
 					finish();
 					return;
@@ -66,9 +57,9 @@ public class cgeowaypoint extends Activity {
 					registerNavigationMenu(headline);
 
 					if (waypoint.name != null && waypoint.name.length() > 0) {
-						base.setTitle(activity, Html.fromHtml(waypoint.name.trim()).toString());
+						setTitle(Html.fromHtml(waypoint.name.trim()).toString());
 					} else {
-						base.setTitle(activity, res.getString(R.string.waypoint_title));
+						setTitle(res.getString(R.string.waypoint_title));
 					}
 
 					if (waypoint.prefix.equalsIgnoreCase("OWN") == false) {
@@ -80,7 +71,7 @@ public class cgeowaypoint extends Activity {
 					waypoint.setIcon(res, base, identification);
 
 					if (waypoint.latitude != null && waypoint.longitude != null) {
-						coords.setText(Html.fromHtml(base.formatCoordinate(waypoint.latitude, "lat", true) + " | " + base.formatCoordinate(waypoint.longitude, "lon", true)), TextView.BufferType.SPANNABLE);
+						coords.setText(Html.fromHtml(cgBase.formatCoordinate(waypoint.latitude, "lat", true) + " | " + cgBase.formatCoordinate(waypoint.longitude, "lon", true)), TextView.BufferType.SPANNABLE);
 						compass.setVisibility(View.VISIBLE);
 						separator.setVisibility(View.VISIBLE);
 					} else {
@@ -100,7 +91,7 @@ public class cgeowaypoint extends Activity {
 					buttonEdit.setOnClickListener(new editWaypointListener(waypoint.id));
 
 					Button buttonDelete = (Button) findViewById(R.id.delete);
-					if (waypoint.type != null && waypoint.type.equalsIgnoreCase("own") == true) {
+					if (waypoint.type != null && waypoint.type.equalsIgnoreCase("own")) {
 						buttonDelete.setOnClickListener(new deleteWaypointListener(waypoint.id));
 						buttonDelete.setVisibility(View.VISIBLE);
 					}
@@ -131,26 +122,17 @@ public class cgeowaypoint extends Activity {
 		}
 	};
 
+	public cgeowaypoint() {
+		super("c:geo-waypoint-details");
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// init
-		activity = this;
-		res = this.getResources();
-		app = (cgeoapplication) this.getApplication();
-		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
-		base = new cgBase(app, settings, getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(this);
-
-		// set layout
-		if (settings.skin == 1) {
-			setTheme(R.style.light);
-		} else {
-			setTheme(R.style.dark);
-		}
+		setTheme();
 		setContentView(R.layout.waypoint);
-		base.setTitle(activity, "waypoint");
+		setTitle("waypoint");
 
 		// get parameters
 		Bundle extras = getIntent().getExtras();
@@ -162,13 +144,13 @@ public class cgeowaypoint extends Activity {
 		}
 
 		if (id <= 0) {
-			warning.showToast(res.getString(R.string.err_waypoint_unknown));
+			showToast(res.getString(R.string.err_waypoint_unknown));
 			finish();
 			return;
 		}
 
 		if (geo == null) {
-			geo = app.startGeo(activity, geoUpdate, base, settings, warning, 0, 0);
+			geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
 		}
 
 		waitDialog = ProgressDialog.show(this, null, res.getString(R.string.waypoint_loading), true);
@@ -184,7 +166,7 @@ public class cgeowaypoint extends Activity {
 		settings.load();
 
 		if (geo == null) {
-			geo = app.startGeo(activity, geoUpdate, base, settings, warning, 0, 0);
+			geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
 		}
 
 		if (waitDialog == null) {
@@ -235,7 +217,7 @@ public class cgeowaypoint extends Activity {
 	}
 
 	private void addNavigationMenuItems(Menu menu) {
-		NavigationAppFactory.addMenuItems(menu, activity, res);
+		NavigationAppFactory.addMenuItems(menu, this, res);
 	}
 
 	@Override
@@ -265,23 +247,23 @@ public class cgeowaypoint extends Activity {
 			return true;
 		}
 
-		return NavigationAppFactory.onMenuItemSelected(item, geo, activity, res, warning, null, null, waypoint, null);
+		return NavigationAppFactory.onMenuItemSelected(item, geo, this, res, null, null, waypoint, null);
 	}
 
 	private void cachesAround() {
 		if (waypoint == null || waypoint.latitude == null || waypoint.longitude == null) {
-			warning.showToast(res.getString(R.string.err_location_unknown));
+			showToast(res.getString(R.string.err_location_unknown));
 		}
 
 		cgeocaches cachesActivity = new cgeocaches();
 
-		Intent cachesIntent = new Intent(activity, cachesActivity.getClass());
+		Intent cachesIntent = new Intent(this, cachesActivity.getClass());
 		cachesIntent.putExtra("type", "coordinate");
 		cachesIntent.putExtra("latitude", waypoint.latitude);
 		cachesIntent.putExtra("longitude", waypoint.longitude);
 		cachesIntent.putExtra("cachetype", settings.cacheType);
 
-		activity.startActivity(cachesIntent);
+		startActivity(cachesIntent);
 
 		finish();
 	}
@@ -317,9 +299,9 @@ public class cgeowaypoint extends Activity {
 		}
 
 		public void onClick(View arg0) {
-			Intent editIntent = new Intent(activity, cgeowaypointadd.class);
+			Intent editIntent = new Intent(cgeowaypoint.this, cgeowaypointadd.class);
 			editIntent.putExtra("waypoint", id);
-			activity.startActivity(editIntent);
+			startActivity(editIntent);
 		}
 	}
 
@@ -333,7 +315,7 @@ public class cgeowaypoint extends Activity {
 
 		public void onClick(View arg0) {
 			if (app.deleteWaypoint(id) == false) {
-				warning.showToast(res.getString(R.string.err_waypoint_delete_failed));
+				showToast(res.getString(R.string.err_waypoint_delete_failed));
 			} else {
 				app.removeCacheFromCache(geocode);
 
@@ -343,28 +325,12 @@ public class cgeowaypoint extends Activity {
 		}
 	}
 
-	public void goHome(View view) {
-		base.goHome(activity);
-	}
-
-	public void goManual(View view) {
-		try {
-			AppManualReaderClient.openManual(
-					"c-geo",
-					"c:geo-waypoint-details",
-					activity,
-					"http://cgeo.carnero.cc/manual/");
-		} catch (Exception e) {
-			// nothing
-		}
-	}
-
 	public void goCompass(View view) {
 		if (waypoint == null || waypoint.latitude == null || waypoint.longitude == null) {
-			warning.showToast(res.getString(R.string.err_location_unknown));
+			showToast(res.getString(R.string.err_location_unknown));
 		}
 
-		Intent navigateIntent = new Intent(activity, cgeonavigate.class);
+		Intent navigateIntent = new Intent(this, cgeonavigate.class);
 		navigateIntent.putExtra("latitude", waypoint.latitude);
 		navigateIntent.putExtra("longitude", waypoint.longitude);
 		navigateIntent.putExtra("geocode", waypoint.prefix.trim() + "/" + waypoint.lookup.trim());
@@ -375,7 +341,7 @@ public class cgeowaypoint extends Activity {
 		}
 		cgeonavigate.coordinates = new ArrayList<cgCoord>();
 		cgeonavigate.coordinates.add(new cgCoord(waypoint));
-		activity.startActivity(navigateIntent);
+		startActivity(navigateIntent);
 	}
 
 	@Override

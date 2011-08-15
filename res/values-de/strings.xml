@@ -414,6 +414,10 @@
   <string name="cache_attributes">Attribute</string>
   <string name="cache_inventory">Inventar</string>
   <string name="cache_log_offline">Offline-Log</string>
+  <string name="cache_log_images_loading">Lade Logbild ...</string>
+  <string name="cache_log_images_title">Logbild</string>
+  <string name="cache_log_image_default_title">Bild</string>
+  <string name="cache_personal_note">Persönliche Notiz</string>
   <string name="cache_description">Beschreibung</string>
   <string name="cache_description_long">Ausführliche Beschreibung</string>
   <string name="cache_watchlist">Watchlist</string>
@@ -769,7 +773,7 @@
   <string name="website">Webseite: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
-  <string name="nutshellmanual">Benutzung: <a href="http://cgeo.carnero.cc/manual/">c:geo Kurzanleitung</a></string>
+  <string name="nutshellmanual">Benutzung: <a href="http://manual.cgeo.org/">c:geo Kurzanleitung</a></string>
   <string name="about_go4cache">Der Service <b>Go 4 cache</b> ermöglicht es, andere Geocacher in Echtzeit auf der Karte zu sehen (in <b>c:geo</b> oder im Browser). Es kann auch angezeigt werden, welchen Cache sie suchen. Wenn <b>c:geo</b> mit <b>Go 4 cache</b> verbunden wird, kann <b>c:geo</b> die aktuelle Position veröffentlichen (nur während <b>c:geo</b> ausgeführt wird).</string>
   <string name="about_twitter">Soll jeder neue Fund auf Twitter veröffentlicht werden, wenn er über <b>c:geo</b> geloggt wird?</string>
   <string name="about_auth_1">Der folgende Prozess erlaubt es <b>c:geo</b> auf den persönlichen Twitter-Account zuzugreifen, wenn zugestimmt wird.</string>

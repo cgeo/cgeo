@@ -13,7 +13,6 @@ import android.net.Uri;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.cgWarning;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.apps.AbstractLocusApp;
 
@@ -25,7 +24,7 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 
 	@Override
 	public boolean invoke(cgGeo geo, Activity activity, Resources res,
-			cgWarning warning, cgCache cache,
+			cgCache cache,
 			Long searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
 		if (cache == null && waypoint == null && latitude == null
 				&& longitude == null) {
@@ -49,7 +48,7 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 
 				dos.writeInt(1); // not used
 				if (cache != null) {
-					if (waypoints == null || waypoints.isEmpty() == true) {
+					if (waypoints == null || waypoints.isEmpty()) {
 						dos.writeInt(1); // cache only
 					} else {
 						dos.writeInt((1 + waypoints.size())); // cache and

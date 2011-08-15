@@ -1,7 +1,5 @@
 package cgeo.geocaching;
 
-import gnu.android.app.appmanualclient.AppManualReaderClient;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -16,14 +14,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -44,6 +39,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import cgeo.geocaching.activity.AbstractListActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cachelist.CacheListAppFactory;
 import cgeo.geocaching.filter.cgFilter;
@@ -61,7 +58,7 @@ import cgeo.geocaching.sorting.SizeComparator;
 import cgeo.geocaching.sorting.TerrainComparator;
 import cgeo.geocaching.sorting.VoteComparator;
 
-public class cgeocaches extends ListActivity {
+public class cgeocaches extends AbstractListActivity {
 
 	private static final int MENU_COMPASS = 1;
 	private static final int MENU_REFRESH_STORED = 2;
@@ -134,18 +131,12 @@ public class cgeocaches extends ListActivity {
 	private String username = null;
 	private Long searchId = null;
 	private ArrayList<cgCache> cacheList = new ArrayList<cgCache>();
-	private cgeoapplication app = null;
-	private Resources res = null;
-	private static Activity activity = null;
 	private cgCacheListAdapter adapter = null;
 	private LayoutInflater inflater = null;
 	private View listFooter = null;
 	private TextView listFooterText = null;
-	private cgSettings settings = null;
-	private cgBase base = null;
-	private cgWarning warning = null;
 	private ProgressDialog waitDialog = null;
-	private Double northHeading = new Double(0);
+	private Double northHeading = Double.valueOf(0);
 	private cgGeo geo = null;
 	private cgDirection dir = null;
 	private cgUpdateLoc geoUpdate = new update();
@@ -169,7 +160,7 @@ public class cgeocaches extends ListActivity {
 		public void handleMessage(Message msg) {
 			try {
 				if (searchId != null && searchId > 0) {
-					base.setTitle(activity, title + " [" + app.getCount(searchId) + "]");
+					setTitle(title + " [" + app.getCount(searchId) + "]");
 					cacheList.clear();
 
 					final ArrayList<cgCache> cacheListTmp = app.getCaches(searchId);
@@ -180,13 +171,13 @@ public class cgeocaches extends ListActivity {
 						Collections.sort((List<cgCache>)cacheList, gcComparator);
 					}
 				} else {
-					base.setTitle(activity, title);
+					setTitle(title);
 				}
 
 				setAdapter();
 
 				if (cacheList == null) {
-					warning.showToast(res.getString(R.string.err_list_load_fail));
+					showToast(res.getString(R.string.err_list_load_fail));
 					setMoreCaches(false);
 				} else {
 					final Integer count = app.getTotal(searchId);
@@ -202,8 +193,8 @@ public class cgeocaches extends ListActivity {
 					}
 				}
 
-				if (cacheList != null && app.getError(searchId) != null && app.getError(searchId).equalsIgnoreCase(cgBase.errorRetrieve.get(-7)) == true) {
-					AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
+				if (cacheList != null && app.getError(searchId) != null && app.getError(searchId).equalsIgnoreCase(cgBase.errorRetrieve.get(-7))) {
+					AlertDialog.Builder dialog = new AlertDialog.Builder(cgeocaches.this);
 					dialog.setTitle(res.getString(R.string.license));
 					dialog.setMessage(res.getString(R.string.err_license));
 					dialog.setCancelable(true);
@@ -218,17 +209,17 @@ public class cgeocaches extends ListActivity {
 
 						public void onClick(DialogInterface dialog, int id) {
 							settings.deleteCookies();
-							activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/software/agreement.aspx?ID=0")));
+							startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/software/agreement.aspx?ID=0")));
 						}
 					});
 
 					AlertDialog alert = dialog.create();
 					alert.show();
 				} else if (app != null && app.getError(searchId) != null && app.getError(searchId).length() > 0) {
-					warning.showToast(res.getString(R.string.err_download_fail) + app.getError(searchId) + ".");
+					showToast(res.getString(R.string.err_download_fail) + app.getError(searchId) + ".");
 
 					hideLoading();
-					base.showProgress(activity, false);
+					showProgress(false);
 
 					finish();
 					return;
@@ -239,11 +230,11 @@ public class cgeocaches extends ListActivity {
 					adapter.setActualHeading(northHeading);
 				}
 			} catch (Exception e) {
-				warning.showToast(res.getString(R.string.err_detail_cache_find_any));
+				showToast(res.getString(R.string.err_detail_cache_find_any));
 				Log.e(cgSettings.tag, "cgeocaches.loadCachesHandler: " + e.toString());
 
 				hideLoading();
-				base.showProgress(activity, false);
+				showProgress(false);
 
 				finish();
 				return;
@@ -251,7 +242,7 @@ public class cgeocaches extends ListActivity {
 
 			try {
 				hideLoading();
-				base.showProgress(activity, false);
+				showProgress(false);
 			} catch (Exception e2) {
 				Log.e(cgSettings.tag, "cgeocaches.loadCachesHandler.2: " + e2.toString());
 			}
@@ -267,7 +258,7 @@ public class cgeocaches extends ListActivity {
 		public void handleMessage(Message msg) {
 			try {
 				if (searchId != null && searchId > 0) {
-					base.setTitle(activity, title + " [" + app.getCount(searchId) + "]");
+					setTitle(title + " [" + app.getCount(searchId) + "]");
 					cacheList.clear();
 
 					final ArrayList<cgCache> cacheListTmp = app.getCaches(searchId);
@@ -280,13 +271,13 @@ public class cgeocaches extends ListActivity {
 						adapter.reFilter();
 					}
 				} else {
-					base.setTitle(activity, title);
+					setTitle(title);
 				}
 
 				setAdapter();
 
 				if (cacheList == null) {
-					warning.showToast(res.getString(R.string.err_list_load_fail));
+					showToast(res.getString(R.string.err_list_load_fail));
 					setMoreCaches(false);
 				} else {
 					final Integer count = app.getTotal(searchId);
@@ -302,11 +293,11 @@ public class cgeocaches extends ListActivity {
 				}
 
 				if (app.getError(searchId) != null && app.getError(searchId).length() > 0) {
-					warning.showToast(res.getString(R.string.err_download_fail) + app.getError(searchId) + ".");
+					showToast(res.getString(R.string.err_download_fail) + app.getError(searchId) + ".");
 
 					listFooter.setOnClickListener(new moreCachesListener());
 					hideLoading();
-					base.showProgress(activity, false);
+					showProgress(false);
 
 					finish();
 					return;
@@ -317,14 +308,14 @@ public class cgeocaches extends ListActivity {
 					adapter.setActualHeading(northHeading);
 				}
 			} catch (Exception e) {
-				warning.showToast(res.getString(R.string.err_detail_cache_find_next));
+				showToast(res.getString(R.string.err_detail_cache_find_next));
 				Log.e(cgSettings.tag, "cgeocaches.loadNextPageHandler: " + e.toString());
 			}
 
 			listFooter.setOnClickListener(new moreCachesListener());
 
 			hideLoading();
-			base.showProgress(activity, false);
+			showProgress(false);
 
 			if (adapter != null) {
 				adapter.setSelectMode(false, true);
@@ -373,17 +364,17 @@ public class cgeocaches extends ListActivity {
 					adapter.setActualHeading(northHeading);
 				}
 
-				base.showProgress(activity, false);
+				showProgress(false);
 				if (waitDialog != null) {
 					waitDialog.dismiss();
 					waitDialog.setOnCancelListener(null);
 				}
 
 				if (geo == null) {
-					geo = app.startGeo(activity, geoUpdate, base, settings, warning, 0, 0);
+					geo = app.startGeo(cgeocaches.this, geoUpdate, base, settings, 0, 0);
 				}
 				if (settings.livelist == 1 && settings.useCompass == 1 && dir == null) {
-					dir = app.startDir(activity, dirUpdate, warning);
+					dir = app.startDir(cgeocaches.this, dirUpdate);
 				}
 			}
 		}
@@ -410,8 +401,8 @@ public class cgeocaches extends ListActivity {
 					waitDialog.dismiss();
 					waitDialog.setOnCancelListener(null);
 				}
-                                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-                                warning.showToast(res.getString(R.string.gpx_import_no_files));
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                showToast(res.getString(R.string.gpx_import_no_files));
 				finish();
 				return;
 			} else {
@@ -505,11 +496,11 @@ public class cgeocaches extends ListActivity {
             }
             else if (-2 == msg.what)
             {
-                warning.showToast(res.getString(R.string.info_fieldnotes_exported_to) + ": " + msg.obj.toString());
+                showToast(res.getString(R.string.info_fieldnotes_exported_to) + ": " + msg.obj.toString());
             }
             else if (-3 == msg.what)
             {
-                warning.showToast(res.getString(R.string.err_fieldnotes_export_failed));
+                showToast(res.getString(R.string.err_fieldnotes_export_failed));
             }
             else
             {
@@ -537,22 +528,11 @@ public class cgeocaches extends ListActivity {
 		super.onCreate(savedInstanceState);
 
 		// init
-		activity = this;
-		res = this.getResources();
-		app = (cgeoapplication) this.getApplication();
 		app.setAction(action);
-		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
-		base = new cgBase(app, settings, getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(this);
 
-		// set layout
-		if (settings.skin == 1) {
-			setTheme(R.style.light);
-		} else {
-			setTheme(R.style.dark);
-		}
+		setTheme();
 		setContentView(R.layout.caches);
-		base.setTitle(activity, "caches");
+		setTitle("caches");
 
 		// get parameters
 		Bundle extras = getIntent().getExtras();
@@ -571,7 +551,7 @@ public class cgeocaches extends ListActivity {
 		Thread threadPure;
 		cgSearchThread thread;
 
-		if (type.equals("offline") == true) {
+		if (type.equals("offline")) {
 			listId = settings.getLastList();
 			if (listId <= 0) {
 				listId = 1;
@@ -581,91 +561,91 @@ public class cgeocaches extends ListActivity {
 				title = list.title;
 			}
 
-			base.setTitle(activity, title);
-			base.showProgress(activity, true);
+			setTitle(title);
+			showProgress(true);
 			setLoadingCaches();
 
 			threadPure = new geocachesLoadByOffline(loadCachesHandler, latitude, longitude, listId);
 			threadPure.start();
-		} else if (type.equals("history") == true) {
+		} else if (type.equals("history")) {
 			if (adapter != null) {
 				adapter.setHistoric(true);
 			}
 
 			title = res.getString(R.string.caches_history);
-			base.setTitle(activity, title);
-			base.showProgress(activity, true);
+			setTitle(title);
+			showProgress(true);
 			setLoadingCaches();
 
 			threadPure = new geocachesLoadByHistory(loadCachesHandler);
 			threadPure.start();
-		} else if (type.equals("nearest") == true) {
+		} else if (type.equals("nearest")) {
 			action = "pending";
 			title = res.getString(R.string.caches_nearby);
-			base.setTitle(activity, title);
-			base.showProgress(activity, true);
+			setTitle(title);
+			showProgress(true);
 			setLoadingCaches();
 
 			thread = new geocachesLoadByCoords(loadCachesHandler, latitude, longitude, cachetype);
-			thread.setRecaptchaHandler(new cgSearchHandler(activity, res, thread));
+			thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
 			thread.start();
-		} else if (type.equals("coordinate") == true) {
+		} else if (type.equals("coordinate")) {
 			action = "planning";
-			title = base.formatCoordinate(latitude, res.getString(R.string.search_lat), true) + " | " + base.formatCoordinate(longitude, res.getString(R.string.search_lon), true);
-			base.setTitle(activity, title);
-			base.showProgress(activity, true);
+			title = cgBase.formatCoordinate(latitude, res.getString(R.string.search_lat), true) + " | " + cgBase.formatCoordinate(longitude, res.getString(R.string.search_lon), true);
+			setTitle(title);
+			showProgress(true);
 			setLoadingCaches();
 
 			thread = new geocachesLoadByCoords(loadCachesHandler, latitude, longitude, cachetype);
-			thread.setRecaptchaHandler(new cgSearchHandler(activity, res, thread));
+			thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
 			thread.start();
-		} else if (type.equals("keyword") == true) {
+		} else if (type.equals("keyword")) {
 			title = keyword;
-			base.setTitle(activity, title);
-			base.showProgress(activity, true);
+			setTitle(title);
+			showProgress(true);
 			setLoadingCaches();
 
 			thread = new geocachesLoadByKeyword(loadCachesHandler, keyword, cachetype);
-			thread.setRecaptchaHandler(new cgSearchHandler(activity, res, thread));
+			thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
 			thread.start();
-		} else if (type.equals("address") == true) {
+		} else if (type.equals("address")) {
 			action = "planning";
 			if (address != null && address.length() > 0) {
 				title = address;
-				base.setTitle(activity, title);
-				base.showProgress(activity, true);
+				setTitle(title);
+				showProgress(true);
 				setLoadingCaches();
 			} else {
-				title = base.formatCoordinate(latitude, res.getString(R.string.search_lat), true) + " | " + base.formatCoordinate(longitude, res.getString(R.string.search_lon), true);
-				base.setTitle(activity, title);
-				base.showProgress(activity, true);
+				title = cgBase.formatCoordinate(latitude, res.getString(R.string.search_lat), true) + " | " + cgBase.formatCoordinate(longitude, res.getString(R.string.search_lon), true);
+				setTitle(title);
+				showProgress(true);
 				setLoadingCaches();
 			}
 
 			thread = new geocachesLoadByCoords(loadCachesHandler, latitude, longitude, cachetype);
-			thread.setRecaptchaHandler(new cgSearchHandler(activity, res, thread));
+			thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
 			thread.start();
-		} else if (type.equals("username") == true) {
+		} else if (type.equals("username")) {
 			title = username;
-			base.setTitle(activity, title);
-			base.showProgress(activity, true);
+			setTitle(title);
+			showProgress(true);
 			setLoadingCaches();
 
 			thread = new geocachesLoadByUserName(loadCachesHandler, username, cachetype);
-			thread.setRecaptchaHandler(new cgSearchHandler(activity, res, thread));
+			thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
 			thread.start();
-		} else if (type.equals("owner") == true) {
+		} else if (type.equals("owner")) {
 			title = username;
-			base.setTitle(activity, title);
-			base.showProgress(activity, true);
+			setTitle(title);
+			showProgress(true);
 			setLoadingCaches();
 
 			thread = new geocachesLoadByOwner(loadCachesHandler, username, cachetype);
-			thread.setRecaptchaHandler(new cgSearchHandler(activity, res, thread));
+			thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
 			thread.start();
 		} else {
 			title = "caches";
-			base.setTitle(activity, title);
+			setTitle(title);
 			Log.e(cgSettings.tag, "cgeocaches.onCreate: No action or unknown action specified");
 		}
 	}
@@ -800,7 +780,7 @@ public class cgeocaches extends ListActivity {
 			menu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.caches_store_offline)).setIcon(android.R.drawable.ic_menu_set_as); // download details for all caches
 		}
 
-		navigationMenu = CacheListAppFactory.addMenuItems(menu, activity, res);
+		navigationMenu = CacheListAppFactory.addMenuItems(menu, this, res);
 
 		if (type.equals("offline")) {
 			SubMenu subMenu = menu.addSubMenu(0, SUBMENU_MANAGE_LISTS, 0, res.getString(R.string.list_menu)).setIcon(android.R.drawable.ic_menu_more);
@@ -817,7 +797,7 @@ public class cgeocaches extends ListActivity {
 		super.onPrepareOptionsMenu(menu);
 
 		try {
-			if (adapter != null && adapter.getSelectMode() == true) {
+			if (adapter != null && adapter.getSelectMode()) {
 				menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode_exit));
 				menu.findItem(MENU_INVERT_SELECTION).setVisible(true);
 			} else {
@@ -825,7 +805,7 @@ public class cgeocaches extends ListActivity {
 				menu.findItem(MENU_INVERT_SELECTION).setVisible(false);
 			}
 
-			if (type != null && type.equals("offline") == true) { // only offline list
+			if (type != null && type.equals("offline")) { // only offline list
 				if (adapter != null && adapter.getChecked() > 0) {
 					menu.findItem(MENU_DROP_CACHES).setTitle(res.getString(R.string.caches_drop_selected) + " (" + adapter.getChecked() + ")");
 				} else {
@@ -1002,7 +982,7 @@ public class cgeocaches extends ListActivity {
                 return false;
 		}
 
-		return CacheListAppFactory.onMenuItemSelected(item, geo, cacheList, activity, res, null);
+		return CacheListAppFactory.onMenuItemSelected(item, geo, cacheList, this, res, null);
 	}
 
 	private void setComparator(MenuItem item,
@@ -1073,7 +1053,7 @@ public class cgeocaches extends ListActivity {
 			if (cache.latitude != null && cache.longitude != null) {
 				menu.add(0, MENU_COMPASS, 0, res.getString(R.string.cache_menu_compass));
 				SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
-				NavigationAppFactory.addMenuItems(subMenu, activity, res);
+				NavigationAppFactory.addMenuItems(subMenu, this, res);
 				menu.add(0, MENU_LOG_VISIT, 0, res.getString(R.string.cache_menu_visit));
 				menu.add(0, MENU_CACHE_DETAILS, 0, res.getString(R.string.cache_menu_details));
 			}
@@ -1126,34 +1106,34 @@ public class cgeocaches extends ListActivity {
 		}
 
 		if (id == MENU_COMPASS) {
-			Intent navigateIntent = new Intent(activity, cgeonavigate.class);
+			Intent navigateIntent = new Intent(this, cgeonavigate.class);
 			navigateIntent.putExtra("latitude", cache.latitude);
 			navigateIntent.putExtra("longitude", cache.longitude);
 			navigateIntent.putExtra("geocode", cache.geocode.toUpperCase());
 			navigateIntent.putExtra("name", cache.name);
 
-			activity.startActivity(navigateIntent);
+			startActivity(navigateIntent);
 
 			return true;
 		} else if (id == MENU_LOG_VISIT) {
 			if (cache.cacheid == null || cache.cacheid.length() == 0) {
-				warning.showToast(res.getString(R.string.err_cannot_log_visit));
+				showToast(res.getString(R.string.err_cannot_log_visit));
 				return true;
 			}
 
-			Intent logVisitIntent = new Intent(activity, cgeovisit.class);
+			Intent logVisitIntent = new Intent(this, cgeovisit.class);
 			logVisitIntent.putExtra("id", cache.cacheid);
 			logVisitIntent.putExtra("geocode", cache.geocode.toUpperCase());
 			logVisitIntent.putExtra("type", cache.type.toLowerCase());
 
-			activity.startActivity(logVisitIntent);
+			startActivity(logVisitIntent);
 
 			return true;
 		} else if (id == MENU_CACHE_DETAILS) {
-			Intent cachesIntent = new Intent(activity, cgeodetail.class);
+			Intent cachesIntent = new Intent(this, cgeodetail.class);
 			cachesIntent.putExtra("geocode", cache.geocode.toUpperCase());
 			cachesIntent.putExtra("name", cache.name);
-			activity.startActivity(cachesIntent);
+			startActivity(cachesIntent);
 
 			return true;
 		}
@@ -1209,7 +1189,7 @@ public class cgeocaches extends ListActivity {
 		} else if (id == MENU_FILTER_TYPE_GPS) {
 			return setFilter(new cgFilterByType("gps"));
 		} else if (id == MENU_DROP_CACHE) {
-			base.dropCache(app, activity, cache, new Handler() {
+			cgBase.dropCache(app, this, cache, new Handler() {
 				@Override
 				public void handleMessage(Message msg) {
 					switchList(listId, -1); // refresh
@@ -1228,8 +1208,8 @@ public class cgeocaches extends ListActivity {
 		// https://code.google.com/p/android/issues/detail?id=7139
 		lastMenuInfo = info;
 
-		return NavigationAppFactory.onMenuItemSelected(item, geo, activity,
-				res, warning, cache, null, null, null);
+		return NavigationAppFactory.onMenuItemSelected(item, geo, this,
+				res, cache, null, null, null);
 	}
 
 	private boolean setFilter(cgFilter filter) {
@@ -1244,9 +1224,9 @@ public class cgeocaches extends ListActivity {
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			if (adapter != null) {
-				if (adapter.resetChecks() == true) {
+				if (adapter.resetChecks()) {
 					return true;
-				} else if (adapter.getSelectMode() == true) {
+				} else if (adapter.getSelectMode()) {
 					adapter.setSelectMode(false, true);
 					return true;
 				}
@@ -1259,7 +1239,7 @@ public class cgeocaches extends ListActivity {
 	private void setAdapter() {
 		if (listFooter == null) {
 			if (inflater == null) {
-				inflater = activity.getLayoutInflater();
+				inflater = getLayoutInflater();
 			}
 			listFooter = inflater.inflate(R.layout.caches_footer, null);
 
@@ -1277,7 +1257,7 @@ public class cgeocaches extends ListActivity {
 			list.setLongClickable(true);
 			list.addFooterView(listFooter);
 
-			adapter = new cgCacheListAdapter(activity, settings, cacheList, base);
+			adapter = new cgCacheListAdapter(this, settings, cacheList, base);
 			setListAdapter(adapter);
 		} else {
 			adapter.notifyDataSetChanged();
@@ -1330,31 +1310,31 @@ public class cgeocaches extends ListActivity {
 	private void init() {
 		// sensor & geolocation manager
 		if (geo == null) {
-			geo = app.startGeo(activity, geoUpdate, base, settings, warning, 0, 0);
+			geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
 		}
 		if (settings.livelist == 1 && settings.useCompass == 1 && dir == null) {
-			dir = app.startDir(activity, dirUpdate, warning);
+			dir = app.startDir(this, dirUpdate);
 		}
 
 		if (cacheList != null) {
-			base.setTitle(activity, title);
+			setTitle(title);
 		}
 
 		if (cacheList != null && cacheList.isEmpty() == false) {
 			final Integer count = app.getTotal(searchId);
 			if (count != null && count > 0) {
-				base.setTitle(activity, title);
+				setTitle(title);
 				if (cacheList.size() < app.getTotal(searchId) && cacheList.size() < 1000) {
 					setMoreCaches(true);
 				} else {
 					setMoreCaches(false);
 				}
 			} else {
-				base.setTitle(activity, title);
+				setTitle(title);
 				setMoreCaches(false);
 			}
 		} else {
-			base.setTitle(activity, title);
+			setTitle(title);
 		}
 
 		setAdapter();
@@ -1368,9 +1348,9 @@ public class cgeocaches extends ListActivity {
 	}
 
 	private void importGpx() {
-		final Intent intent = new Intent(activity, cgeogpxes.class);
+		final Intent intent = new Intent(this, cgeogpxes.class);
 		intent.putExtra("list", listId);
-		activity.startActivity(intent);
+		startActivity(intent);
 
 		finish();
 	}
@@ -1385,7 +1365,7 @@ public class cgeocaches extends ListActivity {
 		}
 		detailProgress = 0;
 
-		base.showProgress(activity, false);
+		showProgress(false);
 		waitDialog = new ProgressDialog(this);
 		waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
@@ -1396,10 +1376,10 @@ public class cgeocaches extends ListActivity {
 					}
 
 					if (geo == null) {
-						geo = app.startGeo(activity, geoUpdate, base, settings, warning, 0, 0);
+						geo = app.startGeo(cgeocaches.this, geoUpdate, base, settings, 0, 0);
 					}
 					if (settings.livelist == 1 && settings.useCompass == 1 && dir == null) {
-						dir = app.startDir(activity, dirUpdate, warning);
+						dir = app.startDir(cgeocaches.this, dirUpdate);
 					}
 				} catch (Exception e) {
 					Log.e(cgSettings.tag, "cgeocaches.onOptionsItemSelected.onCancel: " + e.toString());
@@ -1428,7 +1408,7 @@ public class cgeocaches extends ListActivity {
 
 	public void removeFromHistoryCheck()
     {
-	    AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
+	    AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setCancelable(true);
         dialog.setTitle(res.getString(R.string.caches_removing_from_history));
         dialog.setMessage((adapter != null && adapter.getChecked() > 0) ? res.getString(R.string.cache_remove_from_history)
@@ -1463,7 +1443,7 @@ public class cgeocaches extends ListActivity {
         }
         detailProgress = 0;
 
-        base.showProgress(activity, false);
+        showProgress(false);
         waitDialog = new ProgressDialog(this);
         waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
@@ -1507,7 +1487,7 @@ public class cgeocaches extends ListActivity {
         }
         detailProgress = 0;
 
-        base.showProgress(activity, false);
+        showProgress(false);
         waitDialog = new ProgressDialog(this);
         waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
@@ -1541,7 +1521,7 @@ public class cgeocaches extends ListActivity {
 		detailProgress = 0;
 
                 getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		base.showProgress(activity, false);
+		showProgress(false);
 		waitDialog = new ProgressDialog(this);
 		waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
@@ -1552,10 +1532,10 @@ public class cgeocaches extends ListActivity {
 					}
 
 					if (geo == null) {
-						geo = app.startGeo(activity, geoUpdate, base, settings, warning, 0, 0);
+						geo = app.startGeo(cgeocaches.this, geoUpdate, base, settings, 0, 0);
 					}
 					if (settings.livelist == 1 && settings.useCompass == 1 && dir == null) {
-						dir = app.startDir(activity, dirUpdate, warning);
+						dir = app.startDir(cgeocaches.this, dirUpdate);
 					}
 				} catch (Exception e) {
 					Log.e(cgSettings.tag, "cgeocaches.importWeb.onCancel: " + e.toString());
@@ -1573,7 +1553,7 @@ public class cgeocaches extends ListActivity {
 	}
 
 	public void dropStored() {
-		AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
+		AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 		dialog.setCancelable(true);
 		dialog.setTitle(res.getString(R.string.caches_drop_stored));
 
@@ -1651,7 +1631,7 @@ public class cgeocaches extends ListActivity {
 						if (geo.bearingNow != null) {
 							adapter.setActualHeading(geo.bearingNow);
 						} else {
-							adapter.setActualHeading(new Double(0));
+							adapter.setActualHeading(Double.valueOf(0));
 						}
 					}
 					if (northHeading != null) {
@@ -1765,7 +1745,7 @@ public class cgeocaches extends ListActivity {
 			cachetype = cachetypeIn;
 
 			if (latitude == null || longitude == null) {
-				warning.showToast(res.getString(R.string.warn_no_coordinates));
+				showToast(res.getString(R.string.warn_no_coordinates));
 
 				finish();
 				return;
@@ -1799,7 +1779,7 @@ public class cgeocaches extends ListActivity {
 			cachetype = cachetypeIn;
 
 			if (keyword == null) {
-				warning.showToast(res.getString(R.string.warn_no_keyword));
+				showToast(res.getString(R.string.warn_no_keyword));
 
 				finish();
 				return;
@@ -1832,7 +1812,7 @@ public class cgeocaches extends ListActivity {
 			cachetype = cachetypeIn;
 
 			if (username == null || username.length() == 0) {
-				warning.showToast(res.getString(R.string.warn_no_username));
+				showToast(res.getString(R.string.warn_no_username));
 
 				finish();
 				return;
@@ -1865,7 +1845,7 @@ public class cgeocaches extends ListActivity {
 			cachetype = cachetypeIn;
 
 			if (username == null || username.length() == 0) {
-				warning.showToast(res.getString(R.string.warn_no_username));
+				showToast(res.getString(R.string.warn_no_username));
 
 				finish();
 				return;
@@ -1926,7 +1906,7 @@ public class cgeocaches extends ListActivity {
 				}
 
 				try {
-					if (needToStop == true) {
+					if (needToStop) {
 						Log.i(cgSettings.tag, "Stopped storing process.");
 						break;
 					}
@@ -1945,13 +1925,13 @@ public class cgeocaches extends ListActivity {
 						}
 					}
 
-					if (needToStop == true) {
+					if (needToStop) {
 						Log.i(cgSettings.tag, "Stopped storing process.");
 						break;
 					}
 
 					detailProgress++;
-					base.storeCache(app, activity, cache, null, reason, handler);
+					base.storeCache(app, cgeocaches.this, cache, null, reason, handler);
 
 					handler.sendEmptyMessage(cacheList.indexOf(cache));
 
@@ -2010,7 +1990,7 @@ public class cgeocaches extends ListActivity {
 				if (deviceCode == null) {
 					deviceCode = "";
 				}
-				cgResponse responseFromWeb = base.request(false, "send2cgeo.carnero.cc", "/readCode.php", "GET", "d=" + cgBase.urlencode_rfc3986(deviceCode), 0, true);
+				cgResponse responseFromWeb = base.request(false, "send2.cgeo.org", "/read.html", "GET", "code=" + cgBase.urlencode_rfc3986(deviceCode), 0, true);
 
 				if ((responseFromWeb.getStatusCode() == 200)
 						&& (responseFromWeb.getData().length() > 2)) {
@@ -2024,7 +2004,7 @@ public class cgeocaches extends ListActivity {
 					handler.sendMessage(mes);
 					yield();
 
-					base.storeCache(app, activity, null, GCcode, reason, null);
+					base.storeCache(app, cgeocaches.this, null, GCcode, reason, null);
 
 					Message mes1 = new Message();
 					mes1.what = 2;
@@ -2100,7 +2080,7 @@ public class cgeocaches extends ListActivity {
 				}
 
 				try {
-					if (needToStop == true) {
+					if (needToStop) {
 						Log.i(cgSettings.tag, "Stopped dropping process.");
 						break;
 					}
@@ -2151,7 +2131,7 @@ public class cgeocaches extends ListActivity {
                 }
 
                 try {
-                    if (needToStop == true) {
+                    if (needToStop) {
                         Log.i(cgSettings.tag, "Stopped removing process.");
                         break;
                     }
@@ -2221,7 +2201,7 @@ public class cgeocaches extends ListActivity {
                 }
 
                 try {
-                    if (needToStop == true)
+                    if (needToStop)
                     {
                         Log.i(cgSettings.tag, "Stopped exporting process.");
                         break;
@@ -2293,13 +2273,13 @@ public class cgeocaches extends ListActivity {
 
 		@Override
 		public void onClick(View arg0) {
-			base.showProgress(activity, true);
+			showProgress(true);
 			setLoadingCaches();
 			listFooter.setOnClickListener(null);
 
 			geocachesLoadNextPage thread;
 			thread = new geocachesLoadNextPage(loadNextPageHandler);
-			thread.setRecaptchaHandler(new cgSearchHandler(activity, res, thread));
+			thread.setRecaptchaHandler(new cgSearchHandler(cgeocaches.this, res, thread));
 			thread.start();
 		}
 	}
@@ -2332,7 +2312,7 @@ public class cgeocaches extends ListActivity {
 
 		final CharSequence[] items = new CharSequence[listsTitle.size()];
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setTitle(res.getString(R.string.list_title));
 		builder.setItems(listsTitle.toArray(items), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialogInterface, int item) {
@@ -2373,7 +2353,7 @@ public class cgeocaches extends ListActivity {
 
 		settings.saveLastList(listId);
 
-		base.showProgress(activity, true);
+		showProgress(true);
 		setLoadingCaches();
 
 		Handler handlerMove = new Handler() {
@@ -2402,7 +2382,7 @@ public class cgeocaches extends ListActivity {
 			if (checked > 0) {
 				final ArrayList<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
 				for (cgCache cache : cacheListTemp) {
-					if (cache.statusChecked != false) {
+					if (cache.statusChecked) {
 						app.moveToList(cache.geocode, listId);
 					}
 				}
@@ -2431,9 +2411,9 @@ public class cgeocaches extends ListActivity {
 					int newId = app.createList(value);
 
 					if (newId >= 10) {
-						warning.showToast(res.getString(R.string.list_dialog_create_ok));
+						showToast(res.getString(R.string.list_dialog_create_ok));
 					} else {
-						warning.showToast(res.getString(R.string.list_dialog_create_err));
+						showToast(res.getString(R.string.list_dialog_create_err));
 					}
 				}
 			}
@@ -2457,10 +2437,10 @@ public class cgeocaches extends ListActivity {
 				boolean status = app.removeList(listId);
 
 				if (status) {
-					warning.showToast(res.getString(R.string.list_dialog_remove_ok));
+					showToast(res.getString(R.string.list_dialog_remove_ok));
 					switchListById(1);
 				} else {
-					warning.showToast(res.getString(R.string.list_dialog_remove_err));
+					showToast(res.getString(R.string.list_dialog_remove_err));
 				}
 			}
 		});
@@ -2474,46 +2454,26 @@ public class cgeocaches extends ListActivity {
 	}
 
 	public void goMap(View view) {
-		if (searchId == null || searchId == 0 || cacheList == null || cacheList.isEmpty() == true) {
-			warning.showToast(res.getString(R.string.warn_no_cache_coord));
+		if (searchId == null || searchId == 0 || cacheList == null || cacheList.isEmpty()) {
+			showToast(res.getString(R.string.warn_no_cache_coord));
 
 			return;
 		}
 
-		Intent mapIntent = new Intent(activity, settings.getMapFactory().getMapClass());
+		Intent mapIntent = new Intent(this, settings.getMapFactory().getMapClass());
 		mapIntent.putExtra("detail", false);
 		mapIntent.putExtra("searchid", searchId);
 
-		activity.startActivity(mapIntent);
-	}
-
-	public void goHome(View view) {
-		base.goHome(activity);
+		startActivity(mapIntent);
 	}
 
 	public void goManual(View view) {
-		try {
-			if (type != null && type.equals("offline") == true) {
-				AppManualReaderClient.openManual(
-						"c-geo",
-						"c:geo-stored",
-						activity,
-						"http://cgeo.carnero.cc/manual/");
-			} else if (type != null && type.equals("history") == true) {
-				AppManualReaderClient.openManual(
-						"c-geo",
-						"c:geo-history",
-						activity,
-						"http://cgeo.carnero.cc/manual/");
-			} else {
-				AppManualReaderClient.openManual(
-						"c-geo",
-						"c:geo-nearby",
-						activity,
-						"http://cgeo.carnero.cc/manual/");
-			}
-		} catch (Exception e) {
-			// nothing
+		if (type != null && type.equals("offline")) {
+			ActivityMixin.goManual(this, "c:geo-stored");
+		} else if (type != null && type.equals("history")) {
+			ActivityMixin.goManual(this, "c:geo-history");
+		} else {
+			ActivityMixin.goManual(this, "c:geo-nearby");
 		}
 	}
 }

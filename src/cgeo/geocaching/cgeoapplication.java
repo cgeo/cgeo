@@ -66,8 +66,8 @@ public class cgeoapplication extends Application {
 		return storage.backupDatabase();
 	}
 
-	public File isRestoreFile() {
-		return storage.isRestoreFile();
+	public static File isRestoreFile() {
+		return cgData.isRestoreFile();
 	}
 
 	public boolean restoreDatabase() {
@@ -96,9 +96,9 @@ public class cgeoapplication extends Application {
 		return true;
 	}
 
-	public cgGeo startGeo(Context context, cgUpdateLoc geoUpdate, cgBase base, cgSettings settings, cgWarning warning, int time, int distance) {
+	public cgGeo startGeo(Context context, cgUpdateLoc geoUpdate, cgBase base, cgSettings settings, int time, int distance) {
 		if (geo == null) {
-			geo = new cgGeo(context, this, geoUpdate, base, settings, warning, time, distance);
+			geo = new cgGeo(context, this, geoUpdate, base, settings, time, distance);
 			geo.initGeo();
 
 			Log.i(cgSettings.tag, "Location service started");
@@ -140,9 +140,9 @@ public class cgeoapplication extends Application {
 		}
 	}
 
-	public cgDirection startDir(Context context, cgUpdateDir dirUpdate, cgWarning warning) {
+	public cgDirection startDir(Context context, cgUpdateDir dirUpdate) {
 		if (dir == null) {
-			dir = new cgDirection(this, context, dirUpdate, warning);
+			dir = new cgDirection(context, dirUpdate);
 			dir.initDir();
 
 			Log.i(cgSettings.tag, "Direction service started");
@@ -185,7 +185,7 @@ public class cgeoapplication extends Application {
 	}
 
 	public void cleanDatabase(boolean more) {
-		if (databaseCleaned == true) {
+		if (databaseCleaned) {
 			return;
 		}
 
@@ -343,7 +343,7 @@ public class cgeoapplication extends Application {
 		}
 
 		cgCache cache = null;
-		if (cachesCache.containsKey(geocode) == true) {
+		if (cachesCache.containsKey(geocode)) {
 			cache = cachesCache.get(geocode);
 		} else {
 			if (storage == null) {
@@ -351,7 +351,7 @@ public class cgeoapplication extends Application {
 			}
 			cache = storage.loadCache(geocode, null, loadA, loadW, loadS, loadL, loadI, loadO);
 
-			if (cache != null && cache.detailed == true && loadA == true && loadW == true && loadS == true && loadL == true && loadI == true) {
+			if (cache != null && cache.detailed && loadA && loadW && loadS && loadL && loadI) {
 				putCacheInCache(cache);
 			}
 		}
@@ -371,7 +371,7 @@ public class cgeoapplication extends Application {
 	}
 
 	public void removeCacheFromCache(String geocode) {
-		if (geocode != null && cachesCache.containsKey(geocode) == true) {
+		if (geocode != null && cachesCache.containsKey(geocode)) {
 			cachesCache.remove(geocode);
 		}
 	}
@@ -381,7 +381,7 @@ public class cgeoapplication extends Application {
 			return;
 		}
 
-		if (cachesCache.containsKey(cache.geocode) == true) {
+		if (cachesCache.containsKey(cache.geocode)) {
 			cachesCache.remove(cache.geocode);
 		}
 
@@ -750,7 +750,7 @@ public class cgeoapplication extends Application {
 			status = storage.saveCache(mergedCache);
 		}
 
-		if (status == true) {
+		if (status) {
 			search.addGeocode(cache.geocode);
 		}
 

@@ -1,7 +1,5 @@
 package cgeo.geocaching;
 
-import gnu.android.app.appmanualclient.AppManualReaderClient;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -9,14 +7,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -27,20 +23,15 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 
-public class cgeo extends Activity {
+public class cgeo extends AbstractActivity {
 
-	private Resources res = null;
-	private cgeoapplication app = null;
 	private Context context = null;
-	private cgSettings settings = null;
-	private SharedPreferences prefs = null;
-	private cgBase base = null;
-	private cgWarning warning = null;
 	private Integer version = null;
 	private cgGeo geo = null;
 	private cgUpdateLoc geoUpdate = new update();
@@ -119,18 +110,16 @@ public class cgeo extends Activity {
 		}
 	};
 
+	public cgeo() {
+		super("c:geo-main-screen");
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
 		context = this;
-		res = this.getResources();
-		app = (cgeoapplication) this.getApplication();
 		app.setAction(null);
-		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
-		prefs = getSharedPreferences(cgSettings.preferences, 0);
-		base = new cgBase(app, settings, getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(this);
 
 		app.cleanGeo();
 		app.cleanDir();
@@ -161,16 +150,7 @@ public class cgeo extends Activity {
 					helper.setOnClickListener(new View.OnClickListener() {
 
 						public void onClick(View view) {
-							try {
-								AppManualReaderClient.openManual(
-										"c-geo",
-										"c:geo-intro",
-										context,
-										"http://cgeo.carnero.cc/manual/");
-							} catch (Exception e) {
-								// nothing
-							}
-
+							ActivityMixin.goManual(context, "c:geo-intro");
 							view.setVisibility(View.GONE);
 						}
 					});
@@ -357,7 +337,7 @@ public class cgeo extends Activity {
 	}
 
 	private void init() {
-		if (initialized == true) {
+		if (initialized) {
 			return;
 		}
 
@@ -366,7 +346,7 @@ public class cgeo extends Activity {
 		settings.getLogin();
 		settings.reloadCacheType();
 
-		if (app.firstRun == true) {
+		if (app.firstRun) {
 			new Thread() {
 
 				@Override
@@ -388,7 +368,7 @@ public class cgeo extends Activity {
 		}
 
 		if (geo == null) {
-			geo = app.startGeo(context, geoUpdate, base, settings, warning, 0, 0);
+			geo = app.startGeo(context, geoUpdate, base, settings, 0, 0);
 		}
 
 		navType = (TextView) findViewById(R.id.nav_type);
@@ -446,6 +426,8 @@ public class cgeo extends Activity {
 					LinearLayout findNearest = (LinearLayout) findViewById(R.id.nearest);
 					findNearest.setClickable(true);
 					findNearest.setOnClickListener(new cgeoFindNearestListener());
+					View findNearestView = (View)findNearest.findViewById(R.id.view_nearest);
+					findNearestView.setBackgroundResource(R.drawable.main_nearby);
 
 					String satellites = null;
 					if (geo.satellitesVisible != null && geo.satellitesFixed != null && geo.satellitesFixed > 0) {
@@ -490,15 +472,18 @@ public class cgeo extends Activity {
 							} else {
 								humanAlt = String.format("%.0f", geo.altitudeNow) + " m";
 							}
-							navLocation.setText(base.formatCoordinate(geo.latitudeNow, "lat", true) + " | " + base.formatCoordinate(geo.longitudeNow, "lon", true) + " | " + humanAlt);
+							navLocation.setText(cgBase.formatCoordinate(geo.latitudeNow, "lat", true) + " | " + cgBase.formatCoordinate(geo.longitudeNow, "lon", true) + " | " + humanAlt);
 						} else {
-							navLocation.setText(base.formatCoordinate(geo.latitudeNow, "lat", true) + " | " + base.formatCoordinate(geo.longitudeNow, "lon", true));
+							navLocation.setText(cgBase.formatCoordinate(geo.latitudeNow, "lat", true) + " | " + cgBase.formatCoordinate(geo.longitudeNow, "lon", true));
 						}
 					}
 				} else {
-					Button findNearest = (Button) findViewById(R.id.nearest);
+					LinearLayout findNearest = (LinearLayout) findViewById(R.id.nearest);
 					findNearest.setClickable(false);
 					findNearest.setOnClickListener(null);
+
+					View findNearestView = (View)findNearest.findViewById(R.id.view_nearest);
+					findNearestView.setBackgroundResource(R.drawable.main_nearby_disabled);
 
 					navType.setText(null);
 					navAccuracy.setText(null);
@@ -592,7 +577,7 @@ public class cgeo extends Activity {
 			if (app == null) {
 				return;
 			}
-			if (cleanupRunning == true) {
+			if (cleanupRunning) {
 				return;
 			}
 
@@ -626,7 +611,7 @@ public class cgeo extends Activity {
 			if (geo == null) {
 				return;
 			}
-			if (addressObtaining == true) {
+			if (addressObtaining) {
 				return;
 			}
 			addressObtaining = true;
@@ -651,17 +636,5 @@ public class cgeo extends Activity {
 
 	public void goSearch(View view) {
 		onSearchRequested();
-	}
-
-	public void goManual(View view) {
-		try {
-			AppManualReaderClient.openManual(
-					"c-geo",
-					"c:geo-main-screen",
-					context,
-					"http://cgeo.carnero.cc/manual/");
-		} catch (Exception e) {
-			// nothing
-		}
 	}
 }

@@ -3,43 +3,37 @@ package cgeo.geocaching;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.net.Uri;
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.util.Log;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.LinearLayout;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.Rect;
-import android.graphics.Bitmap.CompressFormat;
-import android.graphics.drawable.BitmapDrawable;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import cgeo.geocaching.activity.AbstractActivity;
 
-public class cgeoimages extends Activity {	
-	
+public class cgeoimages extends AbstractActivity {
+
 	public static final int LOG_IMAGE = 1;
 	public static final int SPOILER_IMAGE = 2;
-	
+
 	private int img_type;
 	private ArrayList<cgImage> images = new ArrayList<cgImage>();
-	private Resources res = null;
 	private String geocode = null;
 	private String title = null;
-	private String url = null;	
-	private cgeoapplication app = null;
-	private Activity activity = null;
-	private cgSettings settings = null;
-	private cgBase base = null;
-	private cgWarning warning = null;
+	private String url = null;
 	private LayoutInflater inflater = null;
 	private ProgressDialog progressDialog = null;
 	private ProgressDialog waitDialog = null;
@@ -49,7 +43,7 @@ public class cgeoimages extends Activity {
 	private int count = 0;
 	private int countDone = 0;
 	private String load_process_string;
-	
+
 	private Handler loadImagesHandler = new Handler() {
 
 		@Override
@@ -61,12 +55,12 @@ public class cgeoimages extends Activity {
 					}
 					switch (img_type) {
 					case LOG_IMAGE:
-						warning.showToast(res.getString(R.string.warn_load_log_image));
+						showToast(res.getString(R.string.warn_load_log_image));
 						break;
 					case SPOILER_IMAGE:
-						warning.showToast(res.getString(R.string.warn_load_spoiler_image));
+						showToast(res.getString(R.string.warn_load_spoiler_image));
 						break;
-					}					
+					}
 
 					finish();
 					return;
@@ -75,17 +69,17 @@ public class cgeoimages extends Activity {
 						waitDialog.dismiss();
 					}
 
-					if (app.isOffline(geocode, null) == true) {
+					if (app.isOffline(geocode, null)) {
 						offline = 1;
-						if ((img_type == LOG_IMAGE) && (settings.storelogimages == false)) { 
+						if ((img_type == LOG_IMAGE) && (settings.storelogimages == false)) {
 							offline = 0;
-						}						
+						}
 					} else {
 						offline = 0;
 					}
 
 					count = images.size();
-					progressDialog = new ProgressDialog(activity);
+					progressDialog = new ProgressDialog(cgeoimages.this);
 					progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 					progressDialog.setMessage(load_process_string);
 					progressDialog.setCancelable(true);
@@ -112,7 +106,7 @@ public class cgeoimages extends Activity {
 							public void run() {
 								BitmapDrawable image = null;
 								try {
-									cgHtmlImg imgGetter = new cgHtmlImg(activity, settings, geocode, true, offline, false, save);
+									cgHtmlImg imgGetter = new cgHtmlImg(cgeoimages.this, geocode, true, offline, false, save);
 
 									image = imgGetter.getDrawable(img.url);
 									Message message = handler.obtainMessage(0, image);
@@ -141,40 +135,28 @@ public class cgeoimages extends Activity {
 		super.onCreate(savedInstanceState);
 
 		// init
-		activity = this;
-		res = this.getResources();
-		app = (cgeoapplication) this.getApplication();
-		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
-		base = new cgBase(app, settings, getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(this);
-
-		// set layout
-		if (settings.skin == 1) {
-			setTheme(R.style.light);
-		} else {
-			setTheme(R.style.dark);
-		}
-		setContentView(R.layout.spoilers);		
+		setTheme();
+		setContentView(R.layout.spoilers);
 
 		// get parameters
 		Bundle extras = getIntent().getExtras();
 
 		// try to get data from extras
 		if (extras != null) {
-			geocode = extras.getString("geocode");	
-			img_type = extras.getInt("type", 0);					
+			geocode = extras.getString("geocode");
+			img_type = extras.getInt("type", 0);
 		}
-		
+
 		// google analytics
-		if (img_type == SPOILER_IMAGE) 
+		if (img_type == SPOILER_IMAGE)
 		{
-			base.setTitle(activity, res.getString(R.string.cache_spoiler_images_title));
+			setTitle(res.getString(R.string.cache_spoiler_images_title));
 		} else if (img_type == LOG_IMAGE) {
-			base.setTitle(activity, res.getString(R.string.cache_log_images_title));
+			setTitle(res.getString(R.string.cache_log_images_title));
 		}
-		
+
 		if (geocode == null) {
-			warning.showToast("Sorry, c:geo forgot for what cache you want to load spoiler images.");
+			showToast("Sorry, c:geo forgot for what cache you want to load spoiler images.");
 			finish();
 			return;
 		}
@@ -183,18 +165,18 @@ public class cgeoimages extends Activity {
 			title = extras.getString("title");
 			url = extras.getString("url");
 			if ((title == null) || (url == null)) {
-				warning.showToast("Sorry, c:geo forgot which logimage you wanted to load.");
+				showToast("Sorry, c:geo forgot which logimage you wanted to load.");
 				finish();
 				return;
 			}
 			break;
 		}
-		
-		inflater = activity.getLayoutInflater();
+
+		inflater = getLayoutInflater();
 		if (imagesView == null) {
 			imagesView = (LinearLayout) findViewById(R.id.spoiler_list);
 		}
-		
+
 		switch (img_type) {
 		case SPOILER_IMAGE:
 			load_process_string = res.getString(R.string.cache_spoiler_images_loading);
@@ -202,7 +184,7 @@ public class cgeoimages extends Activity {
 			break;
 		case LOG_IMAGE:
 			load_process_string = res.getString(R.string.cache_log_images_loading);
-			if (settings.storelogimages == true) {
+			if (settings.storelogimages) {
 				save = true;
 			} else {
 				save = false;
@@ -227,20 +209,20 @@ public class cgeoimages extends Activity {
 				Log.e(cgSettings.tag, "cgeoimages.loadImagesHandler.sendMessage: " + e.toString());
 			}
 			break;
-		case SPOILER_IMAGE:		
+		case SPOILER_IMAGE:
 			(new loadSpoilers()).start();
 			break;
 		default:
-			warning.showToast("Sorry, can't load unknown image type.");
+			showToast("Sorry, can't load unknown image type.");
 			finish();
 		}
-			
+
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		settings.load();
 	}
 
@@ -280,7 +262,7 @@ public class cgeoimages extends Activity {
 				image_view.setOnClickListener(new View.OnClickListener() {
 
 					public void onClick(View arg0) {
-						final String directoryTarget = Environment.getExternalStorageDirectory() + "/" + cgSettings.cache + "/" + "temp.jpg";					
+						final String directoryTarget = Environment.getExternalStorageDirectory() + "/" + cgSettings.cache + "/" + "temp.jpg";
 						File file = new File(directoryTarget);
 						FileOutputStream fos;
 						try {
@@ -295,7 +277,7 @@ public class cgeoimages extends Activity {
 						Intent intent = new Intent();
 						intent.setAction(android.content.Intent.ACTION_VIEW);
 						intent.setDataAndType(Uri.fromFile(file), "image/jpg");
-						activity.startActivity(intent);
+						startActivity(intent);
 
 						if (file.exists())
 							file.deleteOnExit();
@@ -314,9 +296,5 @@ public class cgeoimages extends Activity {
 				progressDialog.dismiss();
 			}
 		}
-	}
-
-	public void goHome(View view) {
-		base.goHome(activity);
 	}
 }

@@ -1,32 +1,26 @@
 package cgeo.geocaching;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
 import java.util.ArrayList;
-import android.os.Bundle;
-import android.view.View;
-import android.view.LayoutInflater;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.location.Address;
-import android.location.Geocoder;
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
 import java.util.List;
 import java.util.Locale;
 
-public class cgeoaddresses extends Activity {
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import cgeo.geocaching.activity.AbstractActivity;
+
+public class cgeoaddresses extends AbstractActivity {
 	private final ArrayList<Address> addresses = new ArrayList<Address>();
 	private String keyword = null;
-	private Activity activity = null;
-	private cgeoapplication app = null;
-	private cgSettings settings = null;
-	private cgBase base = null;
-	private Resources res = null;
-	private cgWarning warning = null;
 	private LayoutInflater inflater = null;
 	private LinearLayout addList = null;
 	private ProgressDialog waitDialog = null;
@@ -44,7 +38,7 @@ public class cgeoaddresses extends Activity {
 						waitDialog.dismiss();
 					}
 
-					warning.showToast(res.getString(R.string.err_search_address_no_match));
+					showToast(res.getString(R.string.err_search_address_no_match));
 
 					finish();
 					return;
@@ -97,22 +91,11 @@ public class cgeoaddresses extends Activity {
 		super.onCreate(savedInstanceState);
 
 		// init
-		activity = this;
-		res = this.getResources();
-		app = (cgeoapplication) this.getApplication();
-		settings = new cgSettings(this, getSharedPreferences(cgSettings.preferences, 0));
-		base = new cgBase(app, settings, getSharedPreferences(cgSettings.preferences, 0));
-		warning = new cgWarning(this);
 		inflater = getLayoutInflater();
 
-		// set layout
-		if (settings.skin == 1) {
-			setTheme(R.style.light);
-		} else {
-			setTheme(R.style.dark);
-		}
+		setTheme();
 		setContentView(R.layout.addresses);
-		base.setTitle(activity, res.getString(R.string.search_address_result));
+		setTitle(res.getString(R.string.search_address_result));
 
 		// get parameters
 		Bundle extras = getIntent().getExtras();
@@ -123,7 +106,7 @@ public class cgeoaddresses extends Activity {
 		}
 
 		if (keyword == null) {
-			warning.showToast(res.getString(R.string.err_search_address_forgot));
+			showToast(res.getString(R.string.err_search_address_forgot));
 			finish();
 			return;
 		}
@@ -137,7 +120,7 @@ public class cgeoaddresses extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		
+
 		settings.load();
 	}
 
@@ -150,7 +133,7 @@ public class cgeoaddresses extends Activity {
 
 		@Override
 		public void run() {
-			Geocoder geocoder = new Geocoder(activity, Locale.getDefault());
+			Geocoder geocoder = new Geocoder(cgeoaddresses.this, Locale.getDefault());
 			try {
 				List<Address> knownLocations = geocoder.getFromLocationName(keyword, 20);
 
@@ -179,20 +162,16 @@ public class cgeoaddresses extends Activity {
 		}
 
 		public void onClick(View arg0) {
-			Intent addressIntent = new Intent(activity, cgeocaches.class);
+			Intent addressIntent = new Intent(cgeoaddresses.this, cgeocaches.class);
 			addressIntent.putExtra("type", "address");
 			addressIntent.putExtra("latitude", (Double) latitude);
 			addressIntent.putExtra("longitude", (Double) longitude);
 			addressIntent.putExtra("address", (String) address);
 			addressIntent.putExtra("cachetype", settings.cacheType);
-			activity.startActivity(addressIntent);
+			startActivity(addressIntent);
 
 			finish();
 			return;
 		}
-	}
-
-	public void goHome(View view) {
-		base.goHome(activity);
 	}
 }

@@ -151,6 +151,26 @@
 						android:linksClickable="true"
 						android:textColorLink="?text_color_link" />
 			</LinearLayout>
+			<LinearLayout android:id="@+id/personalnote_box"
+					android:visibility="gone"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"  >
+				<RelativeLayout style="@style/separator_horizontal_layout" >
+					<View style="@style/separator_horizontal" />
+					<TextView style="@style/separator_horizontal_headline"
+							android:text="@string/cache_personal_note" />
+				</RelativeLayout>
+				<TextView android:id="@+id/personalnote"
+						android:visibility="gone"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginBottom="10dip"
+						android:textSize="14dip"
+						android:textColor="?text_color"
+						android:linksClickable="true"
+						android:textColorLink="?text_color_link" />
+			</LinearLayout>
 			<LinearLayout android:id="@+id/desc_box"
 					android:visibility="gone"
 					android:layout_width="fill_parent"
