@@ -267,10 +267,7 @@ public class cgCache {
 	}
 
 	public boolean isEventCache() {
-		if (type.equalsIgnoreCase("event") || type.equalsIgnoreCase("mega") || type.equalsIgnoreCase("cito")) {
-			return true;
-		}
-		return false;
+		return (type.equalsIgnoreCase("event") || type.equalsIgnoreCase("mega") || type.equalsIgnoreCase("cito"));
 	}
 
 

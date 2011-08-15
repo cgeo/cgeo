@@ -65,6 +65,7 @@ import android.text.style.StrikethroughSpan;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
+import android.widget.EditText;
 import cgeo.geocaching.activity.ActivityMixin;
 
 public class cgBase {
@@ -5559,5 +5560,35 @@ public class cgBase {
 	 */
 	public String formatShortDate(long date) {
 		return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_NUMERIC_DATE);
+	}
+
+	/**
+	 * TODO This method is only needed until the settings are a singleton
+	 * @return
+	 */
+	public String getUserName() {
+		return settings.getUsername();
+	}
+	
+	/**
+	 * insert text into the EditText at the current cursor position
+	 * @param editText
+	 * @param insertText
+	 * @param addSpace add a space character, if there is no whitespace before the current cursor position
+	 */
+	static void insertAtPosition(final EditText editText, String insertText, final boolean addSpace) {
+		int selectionStart = editText.getSelectionStart();
+		int selectionEnd = editText.getSelectionEnd();
+		int start = Math.min(selectionStart, selectionEnd);
+		int end = Math.max(selectionStart, selectionEnd);
+		
+		String content = editText.getText().toString();
+		if (start > 0 && !Character.isWhitespace(content.charAt(start - 1))) {
+			insertText = " " + insertText;
+		}
+		
+		editText.getText().replace(start, end, insertText);
+		int newCursor = start + insertText.length();
+		editText.setSelection(newCursor, newCursor);
 	}
 }
