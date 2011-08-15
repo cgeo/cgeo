@@ -1,9 +1,9 @@
-package cgeo.geocaching;
+package cgeo.geocaching.geopoint;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class cgGeopointFormatter
+public class GeopointFormatter
 {
     private final String format;
     private final Format enumFormat;
@@ -43,7 +43,7 @@ public class cgGeopointFormatter
      * @param format the format-string
      * @see format()
      */
-    public cgGeopointFormatter(final String format)
+    public GeopointFormatter(final String format)
     {
         enumFormat = null;
         this.format = format;
@@ -53,16 +53,16 @@ public class cgGeopointFormatter
      * Creates a new formatter with given default-format.
      *
      * @param format one of the default formats
-     * @see cgeo.geocaching.cgGeopointFormatter.Format
+     * @see GeopointFormatter.Format
      */
-    public cgGeopointFormatter(final Format format)
+    public GeopointFormatter(final Format format)
     {
         enumFormat  = format;
         this.format = format.toString();
     }
 
     /**
-     * Formats a cgGeopoint.
+     * Formats a Geopoint.
      *
      * Syntax:
      *      %[dir][precision][value]
@@ -85,11 +85,11 @@ public class cgGeopointFormatter
      *
      * All other characters are not interpreted and can be used.
      *
-     * @param gp the cgGeopoint to format
+     * @param gp the Geopoint to format
      * @param format the format-string with syntax from above
      * @return the formatted coordinates
      */
-    public static String format(final String format, final cgGeopoint gp)
+    public static String format(final String format, final Geopoint gp)
     {
         final Pattern pattern = Pattern.compile("%([yx])(\\d)?([ndms])");
         final Matcher matcher = pattern.matcher(format);
@@ -145,14 +145,14 @@ public class cgGeopointFormatter
     }
 
     /**
-     * Formats a cgGeopoint.
+     * Formats a Geopoint.
      *
-     * @param gp the cgGeopoint to format
+     * @param gp the Geopoint to format
      * @param format one of the default formats
-     * @see cgeo.geocaching.cgGeopointFormatter.Format
+     * @see cgeo.geocaching.GeopointFormatter.Format
      * @return the formatted coordinates
      */
-    public static String format(final Format format, final cgGeopoint gp)
+    public static String format(final Format format, final Geopoint gp)
     {
         // Don't parse often used formats
 
@@ -180,12 +180,12 @@ public class cgGeopointFormatter
     }
 
     /**
-     * Formats a cgGeopoint with the format of this instance.
+     * Formats a Geopoint with the format of this instance.
      *
-     * @param gp the cgGeopoint to format
-     * @return the formatted coordinates of the cgGeopoint
+     * @param gp the Geopoint to format
+     * @return the formatted coordinates of the Geopoint
      */
-    public String format(final cgGeopoint gp)
+    public String format(final Geopoint gp)
     {
         if (null == enumFormat)
         {

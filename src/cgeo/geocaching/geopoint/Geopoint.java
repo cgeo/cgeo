@@ -1,4 +1,4 @@
-package cgeo.geocaching;
+package cgeo.geocaching.geopoint;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 /**
  * Abstraction of geographic point.
  */
-public class cgGeopoint
+public class Geopoint
 {
     public static final double kmInMiles = 1 / 1.609344;
     public static final double deg2rad   = Math.PI / 180;
@@ -23,44 +23,44 @@ public class cgGeopoint
     private double longitude;
 
     /**
-     * Creates new cgGeopoint with latitude and longitude set to 0.
+     * Creates new Geopoint with latitude and longitude set to 0.
      */
-    public cgGeopoint()
+    public Geopoint()
     {
         setLatitude(0);
         setLongitude(0);
     }
 
     /**
-     * Creates new cgGeopoint with given latitude and longitude (both degree).
+     * Creates new Geopoint with given latitude and longitude (both degree).
      *
      * @param lat latitude
      * @param lon longitude
      */
-    public cgGeopoint(final double lat, final double lon)
+    public Geopoint(final double lat, final double lon)
     {
         setLatitude(lat);
         setLongitude(lon);
     }
 
     /**
-     * Creates new cgGeopoint with latitude and longitude parsed from string.
+     * Creates new Geopoint with latitude and longitude parsed from string.
      *
      * @param text string to parse
      * @see parse()
      */
-    public cgGeopoint(final String text)
+    public Geopoint(final String text)
     {
         setLatitude(parseLatitude(text));
         setLongitude(parseLongitude(text));
     }
 
     /**
-     * Creates new cgGeopoint with given cgGeopoint. This is similar to clone().
+     * Creates new Geopoint with given Geopoint. This is similar to clone().
      *
-     * @param gp the gcGeopoint to clone
+     * @param gp the Geopoint to clone
      */
-    public cgGeopoint(final cgGeopoint gp)
+    public Geopoint(final Geopoint gp)
     {
         this(gp.getLatitude(), gp.getLongitude());
     }
@@ -80,16 +80,16 @@ public class cgGeopoint
      * Both . and , are accepted, also variable count of spaces (also 0)
      *
      * @param text the string to parse
-     * @return an cgGeopoint with parsed latitude and longitude
+     * @return an Geopoint with parsed latitude and longitude
      * @throws ParseException if lat or lon could not be parsed
      */
-    public static cgGeopoint parse(final String text)
+    public static Geopoint parse(final String text)
     {
         
         double lat = parseLatitude(text);
         double lon = parseLongitude(text);
         
-        return new cgGeopoint(lat, lon);
+        return new Geopoint(lat, lon);
     }
     
     /* (non JavaDoc)
@@ -195,7 +195,7 @@ public class cgGeopoint
      * @return this
      * @throws MalformedCoordinateException if not -90 <= lat <= 90
      */
-    public cgGeopoint setLatitude(final double lat)
+    public Geopoint setLatitude(final double lat)
     {
         if (lat <= 90 && lat >= -90)
         {
@@ -217,7 +217,7 @@ public class cgGeopoint
      * @see setLatitude(final double lat)
      * @throws MalformedCoordinateException if not -90 <= (lat * 1E-6) <= 90
      */
-    public cgGeopoint setLatitudeE6(final int lat)
+    public Geopoint setLatitudeE6(final int lat)
     {
         return setLatitude(lat * 1E-6);
     }
@@ -231,7 +231,7 @@ public class cgGeopoint
      * @throws ParseException if lat could not be parsed
      * @throws MalformedCoordinateException if not -90 <= lat <= 90
      */
-    public cgGeopoint setLatitude(final String lat)
+    public Geopoint setLatitude(final String lat)
     {
         return setLatitude(parseLatitude(lat));
     }
@@ -263,7 +263,7 @@ public class cgGeopoint
      * @return this
      * @throws MalformedCoordinateException if not -180 <= lon <= 180
      */
-    public cgGeopoint setLongitude(final double lon)
+    public Geopoint setLongitude(final double lon)
     {
         if (lon <= 180 && lon >=-180)
         {
@@ -285,7 +285,7 @@ public class cgGeopoint
      * @see setLongitude(final double lon)
      * @throws MalformedCoordinateException if not -180 <= (lon * 1E-6) <= 180
      */
-    public cgGeopoint setLongitudeE6(final int lon)
+    public Geopoint setLongitudeE6(final int lon)
     {
         return setLongitude(lon * 1E-6);
     }
@@ -299,7 +299,7 @@ public class cgGeopoint
      * @throws ParseException if lon could not be parsed
      * @throws MalformedCoordinateException if not -180 <= lon <= 180
      */
-    public cgGeopoint setLongitude(final String lon)
+    public Geopoint setLongitude(final String lon)
     {
         return setLongitude(parseLongitude(lon));
     }
@@ -325,13 +325,13 @@ public class cgGeopoint
     }
 
     /**
-     * Calculates distance to given cgGeopoint in km.
+     * Calculates distance to given Geopoint in km.
      *
      * @param gp target
      * @return distance in km
      * @throws GeopointException if there is an error in distance calculation
      */
-    public double distanceTo(final cgGeopoint gp)
+    public double distanceTo(final Geopoint gp)
     {
         final double lat1 = deg2rad * latitude;
         final double lon1 = deg2rad * longitude;
@@ -352,12 +352,12 @@ public class cgGeopoint
     }
 
     /**
-     * Calculates bearing to given cgGeopoint in degree.
+     * Calculates bearing to given Geopoint in degree.
      *
      * @param gp target
      * @return bearing in degree.
      */
-    public double bearingTo(final cgGeopoint gp)
+    public double bearingTo(final Geopoint gp)
     {
         final int ilat1 = (int) Math.round(0.5 + latitude * 360000);
         final int ilon1 = (int) Math.round(0.5 + longitude * 360000);
@@ -429,7 +429,7 @@ public class cgGeopoint
      * @param distance distance in km
      * @return the projected geopoint
      */
-    public cgGeopoint project(final double bearing, final double distance)
+    public Geopoint project(final double bearing, final double distance)
     {
         final double rlat1     = latitude * deg2rad;
         final double rlon1     = longitude * deg2rad;
@@ -439,28 +439,28 @@ public class cgGeopoint
         final double rlat = Math.asin(Math.sin(rlat1) * Math.cos(rdistance) + Math.cos(rlat1) * Math.sin(rdistance) * Math.cos(rbearing));
         final double rlon = rlon1 + Math.atan2(Math.sin(rbearing) * Math.sin(rdistance) * Math.cos(rlat1), Math.cos(rdistance) - Math.sin(rlat1) * Math.sin(rlat));
 
-        return new cgGeopoint(rlat * rad2deg, rlon * rad2deg);
+        return new Geopoint(rlat * rad2deg, rlon * rad2deg);
     }
 
     /**
-     * Checks if given cgGeopoint is identical with this cgGeopoint.
+     * Checks if given Geopoint is identical with this Geopoint.
      *
-     * @param gp cgGeopoint to check
+     * @param gp Geopoint to check
      * @return true if identical, false otherwise
      */
-    public boolean equals(cgGeopoint gp)
+    public boolean equals(Geopoint gp)
     {
         return (gp.getLatitude() == latitude && gp.getLongitude() == longitude);
     }
 
     /**
-     * Checks if given cgGeopoint is similar to this cgGeopoint with tolerance.
+     * Checks if given Geopoint is similar to this Geopoint with tolerance.
      *
-     * @param gp cgGeopoint to check
+     * @param gp Geopoint to check
      * @param tolerance tolerance in km
      * @return true if similar, false otherwise
      */
-    public boolean equals(cgGeopoint gp, double tolerance)
+    public boolean equals(Geopoint gp, double tolerance)
     {
         return (distanceTo(gp) <= tolerance);
     }
@@ -469,10 +469,10 @@ public class cgGeopoint
      * Returns formatted coordinates.
      *
      * @param format the desired format
-     * @see cgeo.geocaching.cgGeopointFormatter
+     * @see GeopointFormatter
      * @return formatted coordinates
      */
-    public String format(cgGeopointFormatter format)
+    public String format(GeopointFormatter format)
     {
         return format.format(this);
     }
@@ -481,24 +481,24 @@ public class cgGeopoint
      * Returns formatted coordinates.
      *
      * @param format the desired format
-     * @see cgeo.geocaching.cgGeopointFormatter
+     * @see GeopointFormatter
      * @return formatted coordinates
      */
     public String format(String format)
     {
-        return cgGeopointFormatter.format(format, this);
+        return GeopointFormatter.format(format, this);
     }
 
     /**
      * Returns formatted coordinates.
      *
      * @param format the desired format
-     * @see cgeo.geocaching.cgGeopointFormatter
+     * @see GeopointFormatter
      * @return formatted coordinates
      */
-    public String format(cgGeopointFormatter.Format format)
+    public String format(GeopointFormatter.Format format)
     {
-        return cgGeopointFormatter.format(format, this);
+        return GeopointFormatter.format(format, this);
     }
 
     /**
@@ -509,7 +509,7 @@ public class cgGeopoint
      */
     public String toString()
     {
-        return format(cgGeopointFormatter.Format.LAT_LON_DECMINUTE);
+        return format(GeopointFormatter.Format.LAT_LON_DECMINUTE);
     }
 
     public static class GeopointException
