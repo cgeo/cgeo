@@ -3,6 +3,9 @@ package cgeo.geocaching.geopoint;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Formatting of Geopoint.
+ */
 public class GeopointFormatter
 {
     private final String format;
@@ -151,6 +154,7 @@ public class GeopointFormatter
      * @param format one of the default formats
      * @see cgeo.geocaching.GeopointFormatter.Format
      * @return the formatted coordinates
+     * @todo move to enum-methods
      */
     public static String format(final Format format, final Geopoint gp)
     {
