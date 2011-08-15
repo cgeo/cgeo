@@ -168,7 +168,7 @@ public class cgGeopoint
      * @see parse()
      * @param text the string to be parsed
      * @return the latitude as decimaldegree
-     * @throws RuntimeException if latitude could not be parsed
+     * @throws ParseException if latitude could not be parsed
      */
     public static double parseLatitude(final String text)
     {
@@ -181,7 +181,7 @@ public class cgGeopoint
      * @see parse()
      * @param text the string to be parsed
      * @return the longitude as decimaldegree
-     * @throws RuntimeException if longitude could not be parsed
+     * @throws ParseException if longitude could not be parsed
      */
     public static double parseLongitude(final String text)
     {
@@ -189,7 +189,7 @@ public class cgGeopoint
     }
 
     /**
-     * Set latitude (in degree).
+     * Set latitude in degree.
      *
      * @param lat latitude
      * @return this
@@ -208,6 +208,19 @@ public class cgGeopoint
 
         return this;
     }
+    
+    /**
+     * Set latitude in microdegree.
+     *
+     * @param lat latitude
+     * @return this
+     * @see setLatitude(final double lat)
+     * @throws MalformedCoordinateException if not -90 <= (lat * 1E-6) <= 90
+     */
+    public cgGeopoint setLatitudeE6(final int lat)
+    {
+        return setLatitude(lat * 1E-6);
+    }
 
     /**
      * Set latitude by parsing string.
@@ -216,15 +229,15 @@ public class cgGeopoint
      * @return this
      * @see setLatitude(final double lat)
      * @throws ParseException if lat could not be parsed
+     * @throws MalformedCoordinateException if not -90 <= lat <= 90
      */
     public cgGeopoint setLatitude(final String lat)
     {
-        setLongitude(parseLatitude(lat));
-        return this;
+        return setLatitude(parseLatitude(lat));
     }
 
     /**
-     * Get latitude (in degree).
+     * Get latitude in degree.
      *
      * @return latitude
      */
@@ -232,9 +245,19 @@ public class cgGeopoint
     {
         return latitude;
     }
+    
+    /**
+     * Get latitude in microdegree.
+     *
+     * @return latitude
+     */
+    public int getLatitudeE6()
+    {
+        return (int) (latitude * 1E6);
+    }
 
     /**
-     * Set longitude (in degree).
+     * Set longitude in degree.
      *
      * @param lon longitude
      * @return this
@@ -253,6 +276,19 @@ public class cgGeopoint
 
         return this;
     }
+    
+    /**
+     * Set longitude in microdegree.
+     *
+     * @param lon longitude
+     * @return this
+     * @see setLongitude(final double lon)
+     * @throws MalformedCoordinateException if not -180 <= (lon * 1E-6) <= 180
+     */
+    public cgGeopoint setLongitudeE6(final int lon)
+    {
+        return setLongitude(lon * 1E-6);
+    }
 
     /**
      * Set longitude by parsing string.
@@ -261,21 +297,31 @@ public class cgGeopoint
      * @return this
      * @see setLongitude(final double lon)
      * @throws ParseException if lon could not be parsed
+     * @throws MalformedCoordinateException if not -180 <= lon <= 180
      */
     public cgGeopoint setLongitude(final String lon)
     {
-        setLongitude(parseLongitude(lon));
-        return this;
+        return setLongitude(parseLongitude(lon));
     }
 
     /**
-     * Get longitude (in degree).
+     * Get longitude in degree.
      *
      * @return longitude
      */
     public double getLongitude()
     {
         return longitude;
+    }
+    
+    /**
+     * Get longitude in microdegree.
+     *
+     * @return longitude
+     */
+    public int getLongitudeE6()
+    {
+        return (int) (longitude * 1E6);
     }
 
     /**
@@ -423,10 +469,10 @@ public class cgGeopoint
      * Returns formatted coordinates.
      *
      * @param format the desired format
-     * @see cgeo.geocaching.cgGeopointFormat
+     * @see cgeo.geocaching.cgGeopointFormatter
      * @return formatted coordinates
      */
-    public String format(cgGeopointFormat format)
+    public String format(cgGeopointFormatter format)
     {
         return format.format(this);
     }
@@ -435,24 +481,24 @@ public class cgGeopoint
      * Returns formatted coordinates.
      *
      * @param format the desired format
-     * @see cgeo.geocaching.cgGeopointFormat
+     * @see cgeo.geocaching.cgGeopointFormatter
      * @return formatted coordinates
      */
     public String format(String format)
     {
-        return (new cgGeopointFormat(format)).format(this);
+        return cgGeopointFormatter.format(format, this);
     }
 
     /**
      * Returns formatted coordinates.
      *
      * @param format the desired format
-     * @see cgeo.geocaching.cgGeopointFormat
+     * @see cgeo.geocaching.cgGeopointFormatter
      * @return formatted coordinates
      */
-    public String format(cgGeopointFormat.Format format)
+    public String format(cgGeopointFormatter.Format format)
     {
-        return (new cgGeopointFormat(format)).format(this);
+        return cgGeopointFormatter.format(format, this);
     }
 
     /**
@@ -463,12 +509,14 @@ public class cgGeopoint
      */
     public String toString()
     {
-        return format(new cgGeopointFormat(cgGeopointFormat.Format.LAT_LON_DECMINUTE));
+        return format(cgGeopointFormatter.Format.LAT_LON_DECMINUTE);
     }
 
     public static class GeopointException
         extends RuntimeException
     {
+        private static final long serialVersionUID = 1L;
+
         public GeopointException(String msg)
         {
             super(msg);
@@ -478,6 +526,8 @@ public class cgGeopoint
     public static class ParseException
         extends GeopointException
     {
+        private static final long serialVersionUID = 1L;
+
         public ParseException(String msg)
         {
             super(msg);
@@ -487,6 +537,8 @@ public class cgGeopoint
     public static class MalformedCoordinateException
         extends GeopointException
     {
+        private static final long serialVersionUID = 1L;
+
         public MalformedCoordinateException(String msg)
         {
             super(msg);

@@ -3,7 +3,7 @@ package cgeo.geocaching;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class cgGeopointFormat
+public class cgGeopointFormatter
 {
     private final String format;
     private final Format enumFormat;
@@ -43,7 +43,7 @@ public class cgGeopointFormat
      * @param format the format-string
      * @see format()
      */
-    public cgGeopointFormat(final String format)
+    public cgGeopointFormatter(final String format)
     {
         enumFormat = null;
         this.format = format;
@@ -53,9 +53,9 @@ public class cgGeopointFormat
      * Creates a new formatter with given default-format.
      *
      * @param format one of the default formats
-     * @see cgeo.geocaching.cgGeopointFormat.Format
+     * @see cgeo.geocaching.cgGeopointFormatter.Format
      */
-    public cgGeopointFormat(final Format format)
+    public cgGeopointFormatter(final Format format)
     {
         enumFormat  = format;
         this.format = format.toString();
@@ -89,7 +89,7 @@ public class cgGeopointFormat
      * @param format the format-string with syntax from above
      * @return the formatted coordinates
      */
-    public static String format(final cgGeopoint gp, final String format)
+    public static String format(final String format, final cgGeopoint gp)
     {
         final Pattern pattern = Pattern.compile("%([yx])(\\d)?([ndms])");
         final Matcher matcher = pattern.matcher(format);
@@ -149,10 +149,10 @@ public class cgGeopointFormat
      *
      * @param gp the cgGeopoint to format
      * @param format one of the default formats
-     * @see cgeo.geocaching.cgGeopointFormat.Format
+     * @see cgeo.geocaching.cgGeopointFormatter.Format
      * @return the formatted coordinates
      */
-    public static String format(final cgGeopoint gp, final Format format)
+    public static String format(final Format format, final cgGeopoint gp)
     {
         // Don't parse often used formats
 
@@ -175,7 +175,7 @@ public class cgGeopointFormat
                                                                         (lon - Math.floor(lon)) * 60);
 
             default:
-                return format(gp, format.toString());
+                return format(format.toString(), gp);
         }
     }
 
@@ -189,11 +189,11 @@ public class cgGeopointFormat
     {
         if (null == enumFormat)
         {
-        return format(gp, format);
+        return format(format, gp);
         }
         else
         {
-            return format(gp, enumFormat);
+            return format( enumFormat, gp);
         }
     }
 
