@@ -417,7 +417,7 @@
   <string name="init_backup_last">Available backup from</string>
   <string name="init_backup_last_no">There is no file with backup.</string>
   <string name="init_mapsources">Map Sources</string> <!-- since: 2.26 RC3 -->
-  <string name="init_mapsources_description">Here you can select the source for your maps. As an alternative to Google maps various OpenStreetMap styles are available and even off line map files (see http://code.google.com/p/mapsforge/ for details).</string> <!-- since: 2.26 RC3 -->
+  <string name="init_mapsources_description">Here you can select the source for your maps. As an alternative to Google maps various OpenStreetMap styles are available and even off line map files (see <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> for details).</string> <!-- since: 2.26 RC3 -->
   <string name="init_mapsource_select">Select map source</string>
   <string name="init_select_mapfile">...</string>
   <string name="init_trackautovisit">Set trackables automatically to \"visit\"</string>
