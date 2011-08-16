@@ -10,11 +10,14 @@ import cgeo.geocaching.geopoint.Geopoint.GeopointException;
  */
 public class GeopointParser
 {
+    private static final Pattern patternLat = Pattern.compile("([NS])\\s*(\\d+)°?(\\s*(\\d+)([\\.,](\\d+)|'?\\s*(\\d+)(''|\")?)?)?");
+    private static final Pattern patternLon = Pattern.compile("([WE])\\s*(\\d+)°?(\\s*(\\d+)([\\.,](\\d+)|'?\\s*(\\d+)(''|\")?)?)?");
+    private static final Pattern patternDec = Pattern.compile("^(-?\\d+([\\.,]\\d+)?)\\s*(-?\\d+([\\.,]\\d+)?)?$");
+
     private enum LatLon
     {
         LAT,
-        LON,
-        LATLON
+        LON
     }
     
     /**
@@ -49,9 +52,6 @@ public class GeopointParser
      */
     private static double parseHelper(final String text, final LatLon latlon)
     {
-        final Pattern patternLat = Pattern.compile("([NS])\\s*(\\d+)°?(\\s*(\\d+)([\\.,](\\d+)|'?\\s*(\\d+)(''|\")?)?)?");
-        final Pattern patternLon = Pattern.compile("([WE])\\s*(\\d+)°?(\\s*(\\d+)([\\.,](\\d+)|'?\\s*(\\d+)(''|\")?)?)?");
-        final Pattern patternDec = Pattern.compile("^(-?\\d+([\\.,]\\d+)?)\\s*(-?\\d+([\\.,]\\d+)?)?$");
 
         Matcher matcher;
 
