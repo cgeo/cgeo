@@ -1273,6 +1273,7 @@ public class cgeocaches extends AbstractListActivity {
 		} else {
 			adapter.notifyDataSetChanged();
 		}
+		adapter.reFilter();
 
 		if (adapter != null && geo != null) {
 			adapter.setActualCoordinates(geo.latitudeNow, geo.longitudeNow);
