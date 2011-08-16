@@ -154,7 +154,6 @@ public class GeopointFormatter
      * @param format one of the default formats
      * @see cgeo.geocaching.GeopointFormatter.Format
      * @return the formatted coordinates
-     * @todo move to enum-methods
      */
     public static String format(final Format format, final Geopoint gp)
     {
