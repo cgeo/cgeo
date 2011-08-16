@@ -17,11 +17,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import cgeo.geocaching.cgSettings.coordInputFormatEnum;
 import cgeo.geocaching.activity.AbstractActivity;
 
 public class cgeocoords extends Dialog {
 
 	private AbstractActivity context = null;
+	private cgSettings settings = null;
 	private cgGeo geo = null;
 	private Double latitude = 0.0, longitude = 0.0;
 	
@@ -34,15 +36,12 @@ public class cgeocoords extends Dialog {
 	
 	CoordinateUpdate cuListener;
 	
-	int currentFormat;
-	final int formatPlain	= 0;
-	final int formatDeg	= 1;
-	final int formatMin	= 2;
-	final int formatSec	= 3;
+	coordInputFormatEnum currentFormat;
 	
-	public cgeocoords(final AbstractActivity contextIn, final cgWaypoint waypoint, final cgGeo geoIn) {
+	public cgeocoords(final AbstractActivity contextIn, cgSettings settingsIn, final cgWaypoint waypoint, final cgGeo geoIn) {
 		super(contextIn);
 		context = contextIn;
+		settings = settingsIn;
 		geo = geoIn;
 
 		if (waypoint != null) {
@@ -74,7 +73,7 @@ public class cgeocoords extends Dialog {
 				                                android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		s.setAdapter(adapter);
-		s.setSelection(formatMin);
+		s.setSelection(settings.getCoordInputFormat().ordinal());
 		
 		s.setOnItemSelectedListener(new CoordinateFormatListener());
 		
@@ -149,14 +148,14 @@ public class cgeocoords extends Dialog {
 		int lonSecFrac = (int) Math.round((((lon - lonDeg) * 60 - lonMin) * 60 - lonSec) * 1000);
 
 		switch (currentFormat) {
-			case formatPlain: 
+			case Plain: 
 				findViewById(R.id.coordTable).setVisibility(View.GONE);
 				eLat.setVisibility(View.VISIBLE);
 				eLon.setVisibility(View.VISIBLE);
 				eLat.setText(cgBase.formatCoordinate(latitude, "lat", true));
 				eLon.setText(cgBase.formatCoordinate(longitude, "lon", true));				
 				break;
-			case formatDeg: // DDD.DDDDD°
+			case Deg: // DDD.DDDDD°
 				findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
 				eLat.setVisibility(View.GONE);
 				eLon.setVisibility(View.GONE);
@@ -178,7 +177,7 @@ public class cgeocoords extends Dialog {
 				eLonDeg.setText(addZeros(latDeg, 3) + Integer.toString(lonDeg));
 				eLonMin.setText(Integer.toString(lonDegFrac) + addZeros(lonDegFrac, 5));
 				break;
-			case formatMin: // DDD° MM.MMM
+			case Min: // DDD° MM.MMM
 				findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
 				eLat.setVisibility(View.GONE);
 				eLon.setVisibility(View.GONE);
@@ -204,7 +203,7 @@ public class cgeocoords extends Dialog {
 				eLonMin.setText(addZeros(lonMin, 2) + Integer.toString(lonMin));
 				eLonSec.setText(Integer.toString(lonMinFrac) + addZeros(lonMinFrac, 3));
 				break;
-			case formatSec: // DDD° MM SS.S
+			case Sec: // DDD° MM SS.SSS
 				findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
 				eLat.setVisibility(View.GONE);
 				eLon.setVisibility(View.GONE);
@@ -291,15 +290,15 @@ public class cgeocoords extends Dialog {
 			 * formatSec 2/3 2   2   3
 			 */
 			
-			if (currentFormat == formatPlain)
+			if (currentFormat == coordInputFormatEnum.Plain)
 				return;
 			
 			int maxLength = 2;
 			if (editTextId == 5 || editTextId == 4 || editTextId == 8)
 				maxLength = 3;
-			if ((editTextId == 2 || editTextId == 6) && currentFormat == formatDeg)
+			if ((editTextId == 2 || editTextId == 6) && currentFormat == coordInputFormatEnum.Deg)
 				maxLength = 5;
-			if ((editTextId == 3 || editTextId == 7) && currentFormat == formatMin)
+			if ((editTextId == 3 || editTextId == 7) && currentFormat == coordInputFormatEnum.Min)
 				maxLength = 3;
 			
 			if (s.length() == maxLength) {
@@ -353,7 +352,7 @@ public class cgeocoords extends Dialog {
 	}
 	
 	private void calc() {
-		if (currentFormat == formatPlain) // should not happen
+		if (currentFormat == coordInputFormatEnum.Plain) // should not happen
 			return;
 		
 		int latDeg = 0, latMin = 0, latSec = 0, latSub = 0;
@@ -370,7 +369,7 @@ public class cgeocoords extends Dialog {
 		} catch (NumberFormatException e) {}
 
 		switch (currentFormat) {
-			case formatDeg:
+			case Deg:
 				Double latDegFrac = latMin * 1.0;
 				while (latDegFrac > 1)
 					latDegFrac /= 10;
@@ -380,7 +379,7 @@ public class cgeocoords extends Dialog {
 				latitude = latDeg + latDegFrac;
 				longitude = lonDeg + lonDegFrac;
 				break;
-			case formatMin:
+			case Min:
 				Double latMinFrac = latSec * 1.0;
 				while (latMinFrac > 1)
 					latMinFrac /= 10;
@@ -390,7 +389,7 @@ public class cgeocoords extends Dialog {
 				latitude = latDeg + latMin/60.0 + latMinFrac/60.0;
 				longitude = lonDeg + lonMin/60.0 + lonMinFrac/60.0; 
 				break;
-			case formatSec:
+			case Sec:
 				Double latSecFrac = latSub * 1.0;
 				while (latSecFrac > 1)
 					latSecFrac /= 10;
@@ -409,7 +408,8 @@ public class cgeocoords extends Dialog {
 
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-			currentFormat = pos;
+			currentFormat = coordInputFormatEnum.fromInt(pos);
+			settings.setCoordInputFormat(currentFormat);
 			updateGUI();			
 		}
 
@@ -435,7 +435,7 @@ public class cgeocoords extends Dialog {
 	private class InputDoneListener implements View.OnClickListener {
 
 		public void onClick(View v) {
-			if (currentFormat == formatPlain) {
+			if (currentFormat == coordInputFormatEnum.Plain) {
 				if (eLat.length() > 0 && eLon.length() > 0) {
 					// latitude & longitude
 					HashMap<String, Object> latParsed = cgBase.parseCoordinate(eLat.getText().toString(), "lat");

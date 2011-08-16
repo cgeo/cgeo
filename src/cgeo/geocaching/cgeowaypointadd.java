@@ -216,7 +216,7 @@ public class cgeowaypointadd extends AbstractActivity {
 	private class coordDialogListener implements View.OnClickListener {
 
 		public void onClick(View arg0) {
-			cgeocoords coordsDialog = new cgeocoords(cgeowaypointadd.this, waypoint, geo);
+			cgeocoords coordsDialog = new cgeocoords(cgeowaypointadd.this, settings, waypoint, geo);
 			coordsDialog.setCancelable(true);
 			coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
 				@Override

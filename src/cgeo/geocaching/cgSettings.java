@@ -53,6 +53,7 @@ public class cgSettings {
 	private static final String KEY_GCVOTE_PASSWORD = "pass-vote";
 	private static final String KEY_PASSWORD = "password";
 	private static final String KEY_USERNAME = "username";
+	private static final String KEY_COORD_INPUT_FORMAT = "coordinputformat";
 
 	private interface PrefRunnable {
 		void edit(final Editor edit);
@@ -81,6 +82,22 @@ public class cgSettings {
 			}
 
 			return false;
+		}
+	}
+
+	public enum coordInputFormatEnum {
+		Plain,
+		Deg,
+		Min,
+		Sec;
+
+		static coordInputFormatEnum fromInt(int id) {
+			coordInputFormatEnum[] values = coordInputFormatEnum.values();
+			if (id >= 0 && id < values.length) {
+				return values[id];
+			} else {
+				return Min;
+			}
 		}
 	}
 
@@ -140,6 +157,7 @@ public class cgSettings {
 	private SharedPreferences prefs = null;
 	private String username = null;
 	private String password = null;
+	private coordInputFormatEnum coordInput = coordInputFormatEnum.Plain;
 
 	// maps
 	public MapFactory mapFactory = null;
@@ -192,6 +210,7 @@ public class cgSettings {
 		webDeviceCode = prefs.getString(KEY_WEB_DEVICE_CODE, null);
 		trackableAutovisit = prefs.getBoolean(KEY_AUTO_VISIT_TRACKABLES, false);
 		signatureAutoinsert = prefs.getBoolean(KEY_AUTO_INSERT_SIGNATURE, false);
+		coordInput = coordInputFormatEnum.fromInt(prefs.getInt(KEY_COORD_INPUT_FORMAT, 0));
 
 		setLanguage(useEnglish);
 	}
@@ -533,6 +552,22 @@ public class cgSettings {
 			return false;
 		}
 		return MapDatabase.isValidMapFile(mapFileIn);
+	}
+
+	public coordInputFormatEnum getCoordInputFormat() {
+		return coordInput;
+	}
+
+	public boolean setCoordInputFormat (coordInputFormatEnum format) {
+		coordInput = format;
+		boolean commitResult = editSettings(new PrefRunnable() {
+
+			@Override
+			public void edit(Editor edit) {
+				edit.putInt(KEY_COORD_INPUT_FORMAT, coordInput.ordinal());
+			}
+		});
+		return commitResult;
 	}
 
 	/**
