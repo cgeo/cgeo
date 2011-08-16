@@ -14,7 +14,7 @@ import cgeo.geocaching.apps.AbstractApp;
 class InternalCacheListMap extends AbstractApp implements CacheListApp {
 
 	InternalCacheListMap(Resources res) {
-		super(res.getString(R.string.caches_map_cgeo), null);
+		super(res.getString(R.string.cache_menu_map), null);
 	}
 
 	@Override
@@ -23,7 +23,7 @@ class InternalCacheListMap extends AbstractApp implements CacheListApp {
 	}
 
 	@Override
-	public boolean invoke(cgGeo geo, List<cgCache> caches, Activity activity, Resources res, Integer searchId) {
+	public boolean invoke(cgGeo geo, List<cgCache> caches, Activity activity, Resources res, Long searchId) {
 		Intent mapIntent = new Intent(activity, getSettings(activity).getMapFactory()
 				.getMapClass());
 		mapIntent.putExtra("detail", false); // this is the main difference to the activity for a single point

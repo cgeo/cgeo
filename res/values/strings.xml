@@ -90,6 +90,15 @@
   <string name="log_stars_4">4 stars</string>
   <string name="log_stars_45">4.5 stars</string>
   <string name="log_stars_5">5 stars</string>
+  <string name="log_stars_1_description">poor</string>
+  <string name="log_stars_15_description">fairly poor</string>
+  <string name="log_stars_2_description">below average</string>
+  <string name="log_stars_25_description">not so bad</string>
+  <string name="log_stars_3_description">average </string>
+  <string name="log_stars_35_description">not bad at all</string>
+  <string name="log_stars_4_description">better than average</string>
+  <string name="log_stars_45_description">very good</string>
+  <string name="log_stars_5_description">awesome</string>
   <string name="log_webcam">Webcam photo taken</string>
   <string name="log_new_log">Log</string>
   <string name="log_new_log_text">Log text</string>
@@ -290,6 +299,8 @@
   <string name="caches_drop_progress">Removing caches</string>
   <string name="caches_refresh_selected">Refresh selected</string>
   <string name="caches_refresh_all">Refresh all</string>
+  <string name="caches_move_selected">Move selected</string>
+  <string name="caches_move_all">Move all</string>
   <string name="caches_map_cgeo">c:geo</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
@@ -435,7 +446,7 @@
 
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Your device name:</string>
-  <string name="init_sendToCgeo_description">Send to c:geo allows you to receive caches directly from the geocaching site using a special plugin for Firefox or Chrome. Before registration please read <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>.</string>
+  <string name="init_sendToCgeo_description">Send to c:geo allows you to recieve caches directly from the geocaching site using a special plugin for Firefox or Chrome. Before registration please read <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. You only need to register if you will use send2cgeo. C:geo will also work without registering your device.</string>
   <string name="init_sendToCgeo_register">Request registration</string>
   <string name="init_sendToCgeo_registering">Registering your device for "Send to c:geo"...</string>
   <string name="init_sendToCgeo_register_ok">Registration succesful. PIN code is ####. Use it on c:geo website to add this device to your browser.</string>
@@ -605,6 +616,13 @@
   <string name="search_remove_destination">Destination removed</string>
   <string name="search_clear_history">Clear History</string>
   <string name="search_history_cleared">History cleared</string>
+
+  <string-array name="waypoint_coordinate_formats">
+    <item>Plain</item>
+	<item>DDD.DDDDD°</item>
+	<item>DDD°MM.MMM\'</item>
+	<item>DDD°MM\'SS.SSS\"</item>
+  </string-array>
 
   <!-- visit -->
   <string name="visit_tweet">Post this find to Twitter</string>
@@ -897,128 +915,11 @@
 
   <!-- changelog -->
   <string name="changelog">\n
-    <b>2.26</b> (once in 2011)\n
-	· new: Autoinsert of signature\n
+    <b>15.08.2011</b>\n
+    · new: OpenStreetMap support\n 
 	· new: Send to c:geo from web\n
     · new: Export field notes\n
     · new: Clear history\n
-	· fix: Live map, better loading\n
-	· fix: Overwriting coords with wrong ones\n
-	· fix: Loading caches on Live map\n
-	· fix: GCVote issues\n
-	· fix: ForceClose on maps (home, help)\n
-	· fix: Android 1.5, 1.6\n
-	\n
-    <b>2.25</b> (11.06.2011)\n
-	· fix: Performance &amp; usability\n
-	· fix: Maps in Japan\n
-	\n
-    <b>2.24</b> (31.05.2011)\n
-	· fix: Performance optimizations\n
-	· fix: Other users on map\n
-	· fix: Displaying single cache on map\n
-	· fix: LOT of different things\n
-	· new: Distance circles for caches\n
-	\n
-    <b>2.22</b> (18.05.2011)\n
-	· fix: Few minor problems\n
-	\n
-    <b>2.21.x</b> (10.05.2011)\n
-	· fix: Names in list\n
-	· fix: Found caches\n
-	· fix: Switching to English\n
-	· fix: Live map\n
-	· fix: Logging of trackables\n
-	\n
-    <b>2.20</b> (06.05.2011)\n
-	· Fixed many issues from prev. version\n
-	· Finished adaptation\n
-	\n
-    <b>2.13.x</b> (05.05.2011)\n
-	· change: Optimized map\n
-	· change: Search for GPX files in /gpx\n
-	· fix: Adaptation on GC.com changes\n
-	· fix: Posting logs with a lot of TBs\n
-	· fix: Logtypes for cache owner\n
-	· fix: Displaying spoiler images\n
-	· missing: Other users on map\n
-	· missing: Action for all TBs when logging\n
-	\n
-    <b>2.13</b> (14.04.2011)\n
-	· fix: Own waypoints on map\n
-	\n
-    <b>2.12, 2.11</b> (13.04.2011)\n
-	· fix: Sorting caches with disabled GPS\n
-	· fix: Compatibility issues for &lt;2.1\n
-	\n
-    <b>2.10</b> (13.04.2011)\n
-	· fix: Moving caches during refresh\n
-	· fix: Opening Radar\n
-	· remove: Closest cache bubble on Live map\n
-	· new: Remembering last used list\n
-	· new: Number of logs in detail\n
-	· new: Sorting caches in list\n
-	\n
-    <b>2.09</b> (24.03.2011)\n
-	· new: Caches lists\n
-	· fix: Disabling of Twitter\n
-	· fix: Unified navigation options\n
-	· fix: Line breaks in logs\n
-	\n
-    <b>2.08</b> (17.03.2011)\n
-	· fix: Faster displaying caches on the map\n
-	· change: Visual style of loading of caches\n
-	· return: Static maps\n
-	\n
-    <b>2.07</b> (16.03.2011)\n
-	· new: Approx. elevation in details\n
-	· new: Terrain preview\n
-	· new: Own waypoints on map\n
-	· new: Translation of description &amp; hint\n
-	· new: Database backup/restore\n
-	· remove: Static maps\n
-	\n
-    <b>2.06</b> (10.03.2011)\n
-	· fix: Size of caches in lists\n
-	· fix: Marking own caches\n
-	· new: Translation PL\n
-	\n
-    <b>2.05</b> (09.03.2011)\n
-	· fix: Marking caches as found\n
-	· fix: Own caches\n
-	· fix: Some optimizations\n
-	· fix: Event caches\n
-	· new: Trackable icon\n
-	· new: Search using HW key\n
-	· new: List of supported apps\n
-	\n
-    <b>2.04</b> (20.02.2011)\n
-	· new: Logs for trackables\n
-	· new: Access to map from "any dest."\n
-	· new: Ability to force English\n
-	· fix: Favorites count\n
-	· update: Translation\n
-	\n
-    <b>2.03</b> (13.02.2011)\n
-	· fix: Loading images in cache description\n
-	· fix: GC/TB code input\n
-	· update: Translation (SV, PT)\n
-	\n
-    <b>2.02</b> (02.02.2011)\n
-	· new: History of logged caches (online&amp;offline)\n
-	· fix: Number of found caches in signature\n
-	· fix: Exact position of caches on Live Map\n
-	· fix: Adaptation for GC.com changes\n
-	\n
-    <b>2.01</b> (23.01.2011)\n
-	· fix: Fixed crashing due to loading large images\n
-	\n
-    <b>2.00</b> (23.01.2011)\n
-	· new: Context menu for geocachers (in cache detail)\n
-	· new: Option to add date, time and signature at once\n
-	· new: Better trackable support\n
-	· new: Signature template\n
-	· new: Any destination saves last used location\n
-	· fix: End of line in logs\n
+	· fix: Alot of bugs\n
 	\n</string>
 </resources>

@@ -24,15 +24,11 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import cgeo.geocaching.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.activity.AbstractActivity;
 
 public class cgeoinit extends AbstractActivity {
-
-	private static final int MENU_ITEM_DATE = 1;
-	private static final int MENU_ITEM_TIME = 2;
-	private static final int MENU_ITEM_USER = 3;
-	private static final int MENU_ITEM_NUMBER = 4;
 
 	private final int SELECT_MAPFILE_REQUEST=1;
 
@@ -184,36 +180,25 @@ public class cgeoinit extends AbstractActivity {
 			ContextMenuInfo menuInfo) {
 		if (enableTemplatesMenu) {
 			menu.setHeaderTitle(R.string.init_signature_template_button);
-			menu.add(0, MENU_ITEM_DATE, 0, R.string.init_signature_template_date);
-			menu.add(0, MENU_ITEM_TIME, 0, R.string.init_signature_template_time);
-			menu.add(0, MENU_ITEM_USER, 0, R.string.init_signature_template_user);
-			menu.add(0, MENU_ITEM_NUMBER, 0, R.string.init_signature_template_number);
+			for (LogTemplate template : LogTemplateProvider.getTemplates()) {
+				menu.add(0, template.getItemId(), 0, template.getResourceId());
+			}
 		}
 	}
 	
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case MENU_ITEM_DATE:
-			return insertSignatureTemplate("DATE");
-		case MENU_ITEM_NUMBER:
-			return insertSignatureTemplate("NUMBER");
-		case MENU_ITEM_TIME:
-			return insertSignatureTemplate("TIME");
-		case MENU_ITEM_USER:
-			return insertSignatureTemplate("USER");
-		default:
-			break;
+		LogTemplate template = LogTemplateProvider.getTemplate(item.getItemId());
+		if (template != null) {
+			return insertSignatureTemplate(template);
 		}
 		return super.onContextItemSelected(item);
 	}
 	
-	private boolean insertSignatureTemplate(final String template) {
+	private boolean insertSignatureTemplate(final LogTemplate template) {
 		EditText sig = (EditText) findViewById(R.id.signature);
-		String insertText = "["+template+"]";
-		int start = sig.getSelectionStart();
-		int end = sig.getSelectionEnd();
-		sig.getText().replace(Math.min(start, end), Math.max(start, end), insertText);
+		String insertText = "[" + template.getTemplateString() + "]";
+		cgBase.insertAtPosition(sig, insertText, true);
 		return true;
 	}
 

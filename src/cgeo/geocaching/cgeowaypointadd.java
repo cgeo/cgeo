@@ -25,8 +25,6 @@ public class cgeowaypointadd extends AbstractActivity {
 	private int id = -1;
 	private cgGeo geo = null;
 	private cgUpdateLoc geoUpdate = new update();
-	private EditText latEdit = null;
-	private EditText lonEdit = null;
 	private ProgressDialog waitDialog = null;
 	private cgWaypoint waypoint = null;
 	private String type = "own";
@@ -56,8 +54,8 @@ public class cgeowaypointadd extends AbstractActivity {
 
 					app.setAction(geocode);
 
-					((EditText) findViewById(R.id.latitude)).setText(cgBase.formatCoordinate(waypoint.latitude, "lat", true));
-					((EditText) findViewById(R.id.longitude)).setText(cgBase.formatCoordinate(waypoint.longitude, "lon", true));
+					((Button) findViewById(R.id.buttonLatitude)).setText(cgBase.formatCoordinate(waypoint.latitude, "lat", true));
+					((Button) findViewById(R.id.buttonLongitude)).setText(cgBase.formatCoordinate(waypoint.longitude, "lon", true));
 					((EditText) findViewById(R.id.name)).setText(Html.fromHtml(waypoint.name.trim()).toString());
 					((EditText) findViewById(R.id.note)).setText(Html.fromHtml(waypoint.note.trim()).toString());
 
@@ -113,8 +111,10 @@ public class cgeowaypointadd extends AbstractActivity {
 			app.setAction(geocode);
 		}
 
-		Button buttonCurrent = (Button) findViewById(R.id.current);
-		buttonCurrent.setOnClickListener(new currentListener());
+		Button buttonLat = (Button) findViewById(R.id.buttonLatitude);
+		buttonLat.setOnClickListener(new coordDialogListener());
+		Button buttonLon = (Button) findViewById(R.id.buttonLongitude);
+		buttonLon.setOnClickListener(new coordDialogListener());
 
 		Button addWaypoint = (Button) findViewById(R.id.add_waypoint);
 		addWaypoint.setOnClickListener(new coordsListener());
@@ -184,20 +184,15 @@ public class cgeowaypointadd extends AbstractActivity {
 
 		@Override
 		public void updateLoc(cgGeo geo) {
-			if (geo == null) {
+			if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null) {
 				return;
 			}
 
 			try {
-				if (latEdit == null) {
-					latEdit = (EditText) findViewById(R.id.latitude);
-				}
-				if (lonEdit == null) {
-					lonEdit = (EditText) findViewById(R.id.longitude);
-				}
-
-				latEdit.setHint(cgBase.formatCoordinate(geo.latitudeNow, "lat", false));
-				lonEdit.setHint(cgBase.formatCoordinate(geo.longitudeNow, "lon", false));
+				Button bLat = (Button) findViewById(R.id.buttonLatitude);
+				Button bLon = (Button) findViewById(R.id.buttonLongitude);
+				bLat.setHint(cgBase.formatCoordinate(geo.latitudeNow, "lat", false));
+				bLon.setHint(cgBase.formatCoordinate(geo.longitudeNow, "lon", false));
 			} catch (Exception e) {
 				Log.w(cgSettings.tag, "Failed to update location.");
 			}
@@ -218,16 +213,23 @@ public class cgeowaypointadd extends AbstractActivity {
 		}
 	}
 
-	private class currentListener implements View.OnClickListener {
+	private class coordDialogListener implements View.OnClickListener {
 
 		public void onClick(View arg0) {
-			if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null) {
-				showToast(res.getString(R.string.err_point_unknown_position));
-				return;
-			}
-
-			((EditText) findViewById(R.id.latitude)).setText(cgBase.formatCoordinate(geo.latitudeNow, "lat", true));
-			((EditText) findViewById(R.id.longitude)).setText(cgBase.formatCoordinate(geo.longitudeNow, "lon", true));
+			cgeocoords coordsDialog = new cgeocoords(cgeowaypointadd.this, settings, waypoint, geo);
+			coordsDialog.setCancelable(true);
+			coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
+				@Override
+				public void update(ArrayList<Double> coords) {
+					((Button) findViewById(R.id.buttonLatitude)).setText(cgBase.formatCoordinate(coords.get(0), "lat", true));
+					((Button) findViewById(R.id.buttonLongitude)).setText(cgBase.formatCoordinate(coords.get(1), "lon", true));
+					if (waypoint != null) {
+						waypoint.latitude = coords.get(0);
+						waypoint.longitude = coords.get(1);
+					}
+				}
+			});
+			coordsDialog.show();
 		}
 	}
 
@@ -240,8 +242,8 @@ public class cgeowaypointadd extends AbstractActivity {
 
 			final String bearingText = ((EditText) findViewById(R.id.bearing)).getText().toString();
 			final String distanceText = ((EditText) findViewById(R.id.distance)).getText().toString();
-			final String latText = ((EditText) findViewById(R.id.latitude)).getText().toString();
-			final String lonText = ((EditText) findViewById(R.id.longitude)).getText().toString();
+			final String latText = ((Button) findViewById(R.id.buttonLatitude)).getText().toString();
+			final String lonText = ((Button) findViewById(R.id.buttonLongitude)).getText().toString();
 
 			if ((bearingText == null || bearingText.length() == 0) && (distanceText == null || distanceText.length() == 0)
 							&& (latText == null || latText.length() == 0) && (lonText == null || lonText.length() == 0)) {
@@ -252,7 +254,7 @@ public class cgeowaypointadd extends AbstractActivity {
 			if (latText != null && latText.length() > 0 && lonText != null && lonText.length() > 0) {
 				// latitude & longitude
 				HashMap<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
-				HashMap<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lat");
+				HashMap<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lon");
 
 				if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
 					showToast(res.getString(R.string.err_parse_lat));

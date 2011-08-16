@@ -435,7 +435,7 @@
 
   <string name="init_sendToCgeo">Enviar para o c:geo</string>
   <string name="init_sendToCgeo_name">Nome do seu dispositivo:</string>
-  <string name="init_sendToCgeo_description">Enviar para o c: geo permite-lhe receber caches directamente do site Geocaching.com, utilizando um plugin especial para o Firefox ou Chrome. Antes de se registar, por favor leia <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>.</string>
+  <string name="init_sendToCgeo_description">Enviar para o c: geo permite-lhe receber caches directamente do site Geocaching.com, utilizando um plugin especial para o Firefox ou Chrome. Antes de se registar, por favor leia <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Apenas necessita de registar, se pretender utilizar o send2cgeo. O c:geo irá funcionar mesmo sem este registo.</string>
   <string name="init_sendToCgeo_register">Solicitar registo</string>
   <string name="init_sendToCgeo_registering">Registando o seu dispositivo para "Enviar para o c:geo"...</string>
   <string name="init_sendToCgeo_register_ok">Registo bem sucedido. O código PIN é ####. Use-o no site do c:geo para adicionar este dispositivo ao seu browser.</string>

@@ -28,8 +28,8 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
+import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
@@ -63,8 +63,7 @@ import android.text.Spannable;
 import android.text.format.DateUtils;
 import android.text.style.StrikethroughSpan;
 import android.util.Log;
-import android.view.Display;
-import android.view.WindowManager;
+import android.widget.EditText;
 import cgeo.geocaching.activity.ActivityMixin;
 
 public class cgBase {
@@ -93,8 +92,8 @@ public class cgBase {
 	private static final String passMatch = "[/\\?&]*[Pp]ass(word)?=[^&^#^$]+";
 	private static final Pattern patternLoggedIn = Pattern.compile("<span class=\"Success\">You are logged in as[^<]*<strong[^>]*>([^<]+)</strong>[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	private static final Pattern patternLogged2In = Pattern.compile("<strong>[^\\w]*Hello,[^<]*<a[^>]+>([^<]+)</a>[^<]*</strong>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-	private static final Pattern patternViewstate = Pattern.compile("id=\"__VIEWSTATE\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-	private static final Pattern patternViewstate1 = Pattern.compile("id=\"__VIEWSTATE1\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+	private static final Pattern patternViewstateFieldCount = Pattern.compile("id=\"__VIEWSTATEFIELDCOUNT\"[^(value)]+value=\"(\\d+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+	private static final Pattern patternViewstates = Pattern.compile("id=\"__VIEWSTATE(\\d*)\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	private static final Pattern patternIsPremium = Pattern.compile("<span id=\"ctl00_litPMLevel\"", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	public static final double kmInMiles = 1 / 1.609344;
 	public static final double deg2rad = Math.PI / 180;
@@ -353,26 +352,76 @@ public class cgBase {
 		}
 	}
 
-	public static String findViewstate(String page, int index) {
-		String viewstate = null;
+	/**
+	 * read all viewstates from page
+	 * 
+	 * @return  String[] with all view states
+	 */
+	public static String[] getViewstates(String page) {
+		// Get the number of viewstates.
+		// If there is only one viewstate, __VIEWSTATEFIELDCOUNT is not present 
+		int count = 1;
+		final Matcher matcherViewstateCount = patternViewstateFieldCount.matcher(page);
+		if (matcherViewstateCount.find())
+			count = Integer.parseInt(matcherViewstateCount.group(1));
+		
+		String[] viewstates = new String[count];
 
-		if (index == 0) {
-			final Matcher matcherViewstate = patternViewstate.matcher(page);
-			while (matcherViewstate.find()) {
-				if (matcherViewstate.groupCount() > 0) {
-					viewstate = matcherViewstate.group(1);
-				}
-			}
-		} else if (index == 1) {
-			final Matcher matcherViewstate = patternViewstate1.matcher(page);
-			while (matcherViewstate.find()) {
-				if (matcherViewstate.groupCount() > 0) {
-					viewstate = matcherViewstate.group(1);
-				}
-			}
+		// Get the viewstates
+		final Matcher matcherViewstates = patternViewstates.matcher(page);
+		while (matcherViewstates.find()) {
+			String sno = matcherViewstates.group(1); // number of viewstate
+			int no;
+			if ("".equals(sno))
+				no = 0;
+			else
+				no = Integer.parseInt(sno);
+			viewstates[no] = matcherViewstates.group(2);
 		}
 
-		return viewstate;
+		if (viewstates.length == 1  &&  viewstates[0] == null)
+			// no viewstates were present
+			return  null;
+		else
+			return  viewstates;
+	}
+
+	/** 
+	 * put viewstates into request parameters
+	 */
+	public void setViewstates(String[] viewstates, HashMap<String, String> params) {
+		if (viewstates == null  ||  viewstates.length == 0)
+			return;
+		params.put("__VIEWSTATE", viewstates[0]);
+		if (viewstates.length > 1) {
+			for (int i = 1; i < viewstates.length; i++)
+				params.put("__VIEWSTATE" + i, viewstates[i]);
+			params.put("__VIEWSTATEFIELDCOUNT", viewstates.length + "");
+		}
+	}
+
+	/**
+	 * transfers the viewstates variables from a page (response) to parameters
+	 * (next request)
+	 */
+	public void transferViewstates(String page, HashMap<String, String> params) {
+		setViewstates(getViewstates(page), params);
+	}
+	
+	/**
+	 * checks if an Array of Strings is empty or not. Empty means:
+	 *  - Array is null
+	 *  - or all elements are null or empty strings
+	 */
+	public static boolean isEmpty(String[] a) {
+	    if (a == null)
+	        return  true;
+
+	    for (String s: a)
+	        if (s != null  &&  s.length() > 0)
+	            return  false;
+	    
+	    return  true;
 	}
 
 	public class loginThread extends Thread {
@@ -389,8 +438,7 @@ public class cgBase {
 		cgResponse loginResponse = null;
 		String loginData = null;
 
-		String viewstate = null;
-		String viewstate1 = null;
+		String[] viewstates = null;
 
 		final HashMap<String, String> loginStart = settings.getLogin();
 
@@ -404,17 +452,16 @@ public class cgBase {
 			if (checkLogin(loginData)) {
 				Log.i(cgSettings.tag, "Already logged in Geocaching.com as " + loginStart.get("username"));
 
-				switchToEnglish(viewstate, viewstate1);
+				switchToEnglish(viewstates);
 
 				return 1; // logged in
 			}
 
-			viewstate = findViewstate(loginData, 0);
-			viewstate1 = findViewstate(loginData, 1);
+			viewstates = getViewstates(loginData);
 
-			if (viewstate == null || viewstate.length() == 0) {
-				Log.e(cgSettings.tag, "cgeoBase.login: Failed to find viewstate");
-				return -1; // no viewstate
+			if (isEmpty(viewstates)) {
+				Log.e(cgSettings.tag, "cgeoBase.login: Failed to find viewstates");
+				return -1; // no viewstates
 			}
 		} else {
 			Log.e(cgSettings.tag, "cgeoBase.login: Failed to retrieve login page (1st)");
@@ -433,11 +480,7 @@ public class cgBase {
 
 		params.put("__EVENTTARGET", "");
 		params.put("__EVENTARGUMENT", "");
-		params.put("__VIEWSTATE", viewstate);
-		if (viewstate1 != null) {
-			params.put("__VIEWSTATE1", viewstate1);
-			params.put("__VIEWSTATEFIELDCOUNT", "2");
-		}
+		setViewstates(viewstates, params);
 		params.put("ctl00$SiteContent$tbUsername", login.get("username"));
 		params.put("ctl00$SiteContent$tbPassword", login.get("password"));
 		params.put("ctl00$SiteContent$cbRememberMe", "on");
@@ -450,7 +493,7 @@ public class cgBase {
 			if (checkLogin(loginData)) {
 				Log.i(cgSettings.tag, "Successfully logged in Geocaching.com as " + login.get("username"));
 
-				switchToEnglish(findViewstate(loginData, 0), findViewstate(loginData, 1));
+				switchToEnglish(getViewstates(loginData));
 
 				return 1; // logged in
 			} else {
@@ -501,18 +544,12 @@ public class cgBase {
 		return false;
 	}
 
-	public String switchToEnglish(String viewstate, String viewstate1) {
+	public String switchToEnglish(String[] viewstates) {
 		final String host = "www.geocaching.com";
 		final String path = "/default.aspx";
 		final HashMap<String, String> params = new HashMap<String, String>();
 
-		if (viewstate != null) {
-			params.put("__VIEWSTATE", viewstate);
-		}
-		if (viewstate1 != null) {
-			params.put("__VIEWSTATE1", viewstate1);
-			params.put("__VIEWSTATEFIELDCOUNT", "2");
-		}
+		setViewstates(viewstates, params);
 		params.put("__EVENTTARGET", "ctl00$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem"); // switch to english
 		params.put("__EVENTARGUMENT", "");
 
@@ -545,8 +582,7 @@ public class cgBase {
 		final Pattern patternRecaptcha = Pattern.compile("<script[^>]*src=\"[^\"]*/recaptcha/api/challenge\\?k=([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
 		final Pattern patternRecaptchaChallenge = Pattern.compile("challenge : '([^']+)'", Pattern.CASE_INSENSITIVE);
 
-		caches.viewstate = findViewstate(page, 0);
-		caches.viewstate1 = findViewstate(page, 1);
+		caches.viewstates = getViewstates(page);
 
 		// recaptcha
 		if (showCaptcha) {
@@ -824,17 +860,17 @@ public class cgBase {
 				params.append("__EVENTTARGET=");
 				params.append("&");
 				params.append("__EVENTARGUMENT=");
-				params.append("&");
-				params.append("__VIEWSTATE=");
-				params.append(urlencode_rfc3986(caches.viewstate));
-				if (caches.viewstate1 != null) {
-					params.append("&");
-					params.append("__VIEWSTATE1=");
-					params.append(urlencode_rfc3986(caches.viewstate1));
-					params.append("&");
-					params.append("__VIEWSTATEFIELDCOUNT=2");
+				if (caches.viewstates != null  &&  caches.viewstates.length > 0) {
+					params.append("&__VIEWSTATE=");
+					params.append(urlencode_rfc3986(caches.viewstates[0]));
+					if (caches.viewstates.length > 1) {
+						for (int i = 1; i < caches.viewstates.length; i++) {
+							params.append("&__VIEWSTATE" + i + "=");
+							params.append(urlencode_rfc3986(caches.viewstates[i]));
+						}
+						params.append("&__VIEWSTATEFIELDCOUNT=" + caches.viewstates.length);
+					}
 				}
-
 				for (String cid : cids) {
 					params.append("&");
 					params.append("CID=");
@@ -2970,8 +3006,7 @@ public class cgBase {
 	}
 
 	public Long searchByNextPage(cgSearchThread thread, Long searchId, int reason, boolean showCaptcha) {
-		final String viewstate = app.getViewstate(searchId);
-		final String viewstate1 = app.getViewstate1(searchId);
+		final String[] viewstates = app.getViewstates(searchId);
 		cgCacheWrap caches = new cgCacheWrap();
 		String url = app.getUrl(searchId);
 
@@ -2980,7 +3015,7 @@ public class cgBase {
 			return searchId;
 		}
 
-		if (viewstate == null || viewstate.length() == 0) {
+		if (isEmpty(viewstates)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByNextPage: No viewstate given");
 			return searchId;
 		}
@@ -3011,11 +3046,7 @@ public class cgBase {
 		}
 
 		final HashMap<String, String> params = new HashMap<String, String>();
-		params.put("__VIEWSTATE", viewstate);
-		if (viewstate1 != null) {
-			params.put("__VIEWSTATE1", viewstate1);
-			params.put("__VIEWSTATEFIELDCOUNT", "2");
-		}
+		setViewstates(viewstates, params);
 		params.put("__EVENTTARGET", "ctl00$ContentBody$pgrBottom$ctl08");
 		params.put("__EVENTARGUMENT", "");
 
@@ -3046,8 +3077,7 @@ public class cgBase {
 
 		// save to application
 		app.setError(searchId, caches.error);
-		app.setViewstate(searchId, caches.viewstate);
-		app.setViewstate1(searchId, caches.viewstate1);
+		app.setViewstates(searchId, caches.viewstates);
 
 		final ArrayList<cgCache> cacheList = new ArrayList<cgCache>();
 		for (cgCache cache : caches.cacheList) {
@@ -3155,12 +3185,7 @@ public class cgBase {
 			if (caches.url != null && caches.url.length() > 0) {
 				search.url = caches.url;
 			}
-			if (caches.viewstate != null && caches.viewstate.length() > 0) {
-				search.viewstate = caches.viewstate;
-			}
-			if (caches.viewstate1 != null && caches.viewstate1.length() > 0) {
-				search.viewstate1 = caches.viewstate1;
-			}
+			search.viewstates = caches.viewstates;
 			search.totalCnt = caches.totalCnt;
 
 			for (cgCache cache : caches.cacheList) {
@@ -3284,12 +3309,7 @@ public class cgBase {
 			if (caches.url != null && caches.url.length() > 0) {
 				search.url = caches.url;
 			}
-			if (caches.viewstate != null && caches.viewstate.length() > 0) {
-				search.viewstate = caches.viewstate;
-			}
-			if (caches.viewstate1 != null && caches.viewstate1.length() > 0) {
-				search.viewstate1 = caches.viewstate1;
-			}
+			search.viewstates = caches.viewstates;
 			search.totalCnt = caches.totalCnt;
 
 			for (cgCache cache : caches.cacheList) {
@@ -3357,12 +3377,7 @@ public class cgBase {
 			if (caches.url != null && caches.url.length() > 0) {
 				search.url = caches.url;
 			}
-			if (caches.viewstate != null && caches.viewstate.length() > 0) {
-				search.viewstate = caches.viewstate;
-			}
-			if (caches.viewstate1 != null && caches.viewstate1.length() > 0) {
-				search.viewstate1 = caches.viewstate1;
-			}
+			search.viewstates = caches.viewstates;
 			search.totalCnt = caches.totalCnt;
 
 			for (cgCache cache : caches.cacheList) {
@@ -3436,12 +3451,7 @@ public class cgBase {
 			if (caches.url != null && caches.url.length() > 0) {
 				search.url = caches.url;
 			}
-			if (caches.viewstate != null && caches.viewstate.length() > 0) {
-				search.viewstate = caches.viewstate;
-			}
-			if (caches.viewstate1 != null && caches.viewstate1.length() > 0) {
-				search.viewstate1 = caches.viewstate1;
-			}
+			search.viewstates = caches.viewstates;
 			search.totalCnt = caches.totalCnt;
 
 			for (cgCache cache : caches.cacheList) {
@@ -3509,12 +3519,7 @@ public class cgBase {
 			if (caches.url != null && caches.url.length() > 0) {
 				search.url = caches.url;
 			}
-			if (caches.viewstate != null && caches.viewstate.length() > 0) {
-				search.viewstate = caches.viewstate;
-			}
-			if (caches.viewstate1 != null && caches.viewstate1.length() > 0) {
-				search.viewstate1 = caches.viewstate1;
-			}
+			search.viewstates = caches.viewstates;
 			search.totalCnt = caches.totalCnt;
 
 			for (cgCache cache : caches.cacheList) {
@@ -3583,12 +3588,7 @@ public class cgBase {
 			if (caches.url != null && caches.url.length() > 0) {
 				search.url = caches.url;
 			}
-			if (caches.viewstate != null && caches.viewstate.length() > 0) {
-				search.viewstate = caches.viewstate;
-			}
-			if (caches.viewstate1 != null && caches.viewstate1.length() > 0) {
-				search.viewstate1 = caches.viewstate1;
-			}
+			search.viewstates = caches.viewstates;
 			search.totalCnt = caches.totalCnt;
 
 			if (caches.cacheList != null && caches.cacheList.size() > 0) {
@@ -3712,8 +3712,9 @@ public class cgBase {
 		return trackable;
 	}
 
-	public int postLog(cgeoapplication app, String geocode, String cacheid, String viewstate, String viewstate1, int logType, int year, int month, int day, String log, ArrayList<cgTrackableLog> trackables) {
-		if (viewstate == null || viewstate.length() == 0) {
+	public int postLog(cgeoapplication app, String geocode, String cacheid, String[] viewstates, 
+			int logType, int year, int month, int day, String log, ArrayList<cgTrackableLog> trackables) {
+		if (isEmpty(viewstates)) {
 			Log.e(cgSettings.tag, "cgeoBase.postLog: No viewstate given");
 			return 1000;
 		}
@@ -3758,11 +3759,7 @@ public class cgBase {
 		final String method = "POST";
 		final HashMap<String, String> params = new HashMap<String, String>();
 
-		params.put("__VIEWSTATE", viewstate);
-		if (viewstate1 != null) {
-			params.put("__VIEWSTATE1", viewstate1);
-			params.put("__VIEWSTATEFIELDCOUNT", "2");
-		}
+		setViewstates(viewstates, params);
 		params.put("__EVENTTARGET", "");
 		params.put("__EVENTARGUMENT", "");
 		params.put("__LASTFOCUS", "");
@@ -3812,20 +3809,15 @@ public class cgBase {
 
 		try {
 			if (matcher.find() && matcher.groupCount() > 0) {
-				final String viewstateConfirm = findViewstate(page, 0);
-				final String viewstate1Confirm = findViewstate(page, 1);
+				final String[] viewstatesConfirm = getViewstates(page);
 
-				if (viewstateConfirm == null || viewstateConfirm.length() == 0) {
+				if (isEmpty(viewstatesConfirm)) {
 					Log.e(cgSettings.tag, "cgeoBase.postLog: No viewstate for confirm log");
 					return 1000;
 				}
 
 				params.clear();
-				params.put("__VIEWSTATE", viewstateConfirm);
-				if (viewstate1 != null) {
-					params.put("__VIEWSTATE1", viewstate1Confirm);
-					params.put("__VIEWSTATEFIELDCOUNT", "2");
-				}
+				setViewstates(viewstatesConfirm, params);
 				params.put("__EVENTTARGET", "");
 				params.put("__EVENTARGUMENT", "");
 				params.put("__LASTFOCUS", "");
@@ -3882,8 +3874,9 @@ public class cgBase {
 		return 1000;
 	}
 
-	public int postLogTrackable(String tbid, String trackingCode, String viewstate, String viewstate1, int logType, int year, int month, int day, String log) {
-		if (viewstate == null || viewstate.length() == 0) {
+	public int postLogTrackable(String tbid, String trackingCode, String[] viewstates, 
+			int logType, int year, int month, int day, String log) {
+		if (isEmpty(viewstates)) {
 			Log.e(cgSettings.tag, "cgeoBase.postLogTrackable: No viewstate given");
 			return 1000;
 		}
@@ -3908,11 +3901,7 @@ public class cgBase {
 		final String method = "POST";
 		final HashMap<String, String> params = new HashMap<String, String>();
 
-		params.put("__VIEWSTATE", viewstate);
-		if (viewstate1 != null) {
-			params.put("__VIEWSTATE1", viewstate1);
-			params.put("__VIEWSTATEFIELDCOUNT", "2");
-		}
+		setViewstates(viewstates, params);
 		params.put("__EVENTTARGET", "");
 		params.put("__EVENTARGUMENT", "");
 		params.put("__LASTFOCUS", "");
@@ -4006,12 +3995,7 @@ public class cgBase {
 
 		// removing cache from list needs approval by hitting "Yes" button
 		final HashMap<String, String> params = new HashMap<String, String>();
-		String viewstate1 = findViewstate(page, 1);
-		params.put("__VIEWSTATE", findViewstate(page, 0));
-		if (viewstate1 != null) {
-			params.put("__VIEWSTATE1", viewstate1);
-			params.put("__VIEWSTATEFIELDCOUNT", "2");
-		}
+		transferViewstates(page, params);
 		params.put("__EVENTTARGET", "");
 		params.put("__EVENTARGUMENT", "");
 		params.put("ctl00$ContentBody$btnYes", "Yes");
@@ -4263,16 +4247,10 @@ public class cgBase {
 		return paramsDone;
 	}
 
-	public String requestViewstate(boolean secure, String host, String path, String method, HashMap<String, String> params, boolean xContentType, boolean my) {
+	public String[] requestViewstates(boolean secure, String host, String path, String method, HashMap<String, String> params, boolean xContentType, boolean my) {
 		final cgResponse response = request(secure, host, path, method, params, xContentType, my, false);
 
-		return findViewstate(response.getData(), 0);
-	}
-
-	public String requestViewstate1(boolean secure, String host, String path, String method, HashMap<String, String> params, boolean xContentType, boolean my) {
-		final cgResponse response = request(secure, host, path, method, params, xContentType, my, false);
-
-		return findViewstate(response.getData(), 1);
+		return getViewstates(response.getData());
 	}
 
 	public String requestLogged(boolean secure, String host, String path, String method, HashMap<String, String> params, boolean xContentType, boolean my, boolean addF) {
@@ -5049,60 +5027,7 @@ public class cgBase {
 			}
 
 			// store map previews
-			if (settings.storeOfflineMaps == 1 && cache.latitude != null && cache.longitude != null) {
-				final String latlonMap = String.format((Locale) null, "%.6f", cache.latitude) + "," + String.format((Locale) null, "%.6f", cache.longitude);
-				final Display display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-				final int maxWidth = display.getWidth() - 25;
-				final int maxHeight = display.getHeight() - 25;
-				int edge = 0;
-				if (maxWidth > maxHeight) {
-					edge = maxWidth;
-				} else {
-					edge = maxHeight;
-				}
-
-				String type = "mystery";
-				if (cache.found) {
-					type = cache.type + "_found";
-				} else if (cache.disabled) {
-					type = cache.type + "_disabled";
-				} else {
-					type = cache.type;
-				}
-
-				final String markerUrl = urlencode_rfc3986("http://cgeo.carnero.cc/_markers/marker_cache_" + type + ".png");
-				final StringBuilder waypoints = new StringBuilder();
-				if (cache.waypoints != null && cache.waypoints.size() > 0) {
-					for (cgWaypoint waypoint : cache.waypoints) {
-						if (waypoint.latitude == null && waypoint.longitude == null) {
-							continue;
-						}
-
-						waypoints.append("&markers=icon%3Ahttp://cgeo.carnero.cc/_markers/marker_waypoint_");
-						waypoints.append(waypoint.type);
-						waypoints.append(".png%7C");
-						waypoints.append(String.format((Locale) null, "%.6f", waypoint.latitude));
-						waypoints.append(",");
-						waypoints.append(String.format((Locale) null, "%.6f", waypoint.longitude));
-					}
-				}
-
-				// download map images in separate background thread for higher performance
-				final String code = cache.geocode;
-				final int finalEdge = edge;
-				Thread staticMapsThread = new Thread("getting static map") {@Override
-				public void run() {
-					cgMapImg mapGetter = new cgMapImg(code);
-
-					mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?center=" + latlonMap + "&zoom=20&size=" + finalEdge + "x" + finalEdge + "&maptype=satellite&markers=icon%3A" + markerUrl + "%7C" + latlonMap + waypoints.toString() + "&sensor=false", 1);
-					mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?center=" + latlonMap + "&zoom=18&size=" + finalEdge + "x" + finalEdge + "&maptype=satellite&markers=icon%3A" + markerUrl + "%7C" + latlonMap + waypoints.toString() + "&sensor=false", 2);
-					mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?center=" + latlonMap + "&zoom=16&size=" + finalEdge + "x" + finalEdge + "&maptype=roadmap&markers=icon%3A" + markerUrl + "%7C" + latlonMap + waypoints.toString() + "&sensor=false", 3);
-					mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?center=" + latlonMap + "&zoom=14&size=" + finalEdge + "x" + finalEdge + "&maptype=roadmap&markers=icon%3A" + markerUrl + "%7C" + latlonMap + waypoints.toString() + "&sensor=false", 4);
-					mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?center=" + latlonMap + "&zoom=11&size=" + finalEdge + "x" + finalEdge + "&maptype=roadmap&markers=icon%3A" + markerUrl + "%7C" + latlonMap + waypoints.toString() + "&sensor=false", 5);
-				}};
-				staticMapsThread.setPriority(Thread.MIN_PRIORITY);
-				staticMapsThread.start();
-			}
+			StaticMapsProvider.downloadMaps(cache, settings, activity);
 
 			app.markStored(cache.geocode, listId);
 			app.removeCacheFromCache(cache.geocode);
@@ -5559,5 +5484,35 @@ public class cgBase {
 	 */
 	public String formatShortDate(long date) {
 		return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_NUMERIC_DATE);
+	}
+
+	/**
+	 * TODO This method is only needed until the settings are a singleton
+	 * @return
+	 */
+	public String getUserName() {
+		return settings.getUsername();
+	}
+	
+	/**
+	 * insert text into the EditText at the current cursor position
+	 * @param editText
+	 * @param insertText
+	 * @param addSpace add a space character, if there is no whitespace before the current cursor position
+	 */
+	static void insertAtPosition(final EditText editText, String insertText, final boolean addSpace) {
+		int selectionStart = editText.getSelectionStart();
+		int selectionEnd = editText.getSelectionEnd();
+		int start = Math.min(selectionStart, selectionEnd);
+		int end = Math.max(selectionStart, selectionEnd);
+		
+		String content = editText.getText().toString();
+		if (start > 0 && !Character.isWhitespace(content.charAt(start - 1))) {
+			insertText = " " + insertText;
+		}
+		
+		editText.getText().replace(start, end, insertText);
+		int newCursor = start + insertText.length();
+		editText.setSelection(newCursor, newCursor);
 	}
 }

@@ -260,41 +260,23 @@ public class cgeoapplication extends Application {
 		return true;
 	}
 
-	public String getViewstate(Long searchId) {
+	public String[] getViewstates(Long searchId) {
 		if (searchId == null || searches.containsKey(searchId) == false) {
 			return null;
 		}
 
-		return searches.get(searchId).viewstate;
+		return searches.get(searchId).viewstates;
 	}
 
-	public String getViewstate1(Long searchId) {
-		if (searchId == null || searches.containsKey(searchId) == false) {
-			return null;
-		}
-
-		return searches.get(searchId).viewstate1;
-	}
-
-	public boolean setViewstate(Long searchId, String viewstate) {
-		if (viewstate == null || viewstate.length() == 0) {
+	public boolean setViewstates(Long searchId, String[] viewstates) {
+		if (cgBase.isEmpty(viewstates)) {
 			return false;
 		}
 		if (searchId == null || searches.containsKey(searchId) == false) {
 			return false;
 		}
 
-		searches.get(searchId).viewstate = viewstate;
-
-		return true;
-	}
-
-	public boolean setViewstate1(Long searchId, String viewstate1) {
-		if (searchId == null || searches.containsKey(searchId) == false) {
-			return false;
-		}
-
-		searches.get(searchId).viewstate1 = viewstate1;
+		searches.get(searchId).viewstates = viewstates;
 
 		return true;
 	}
