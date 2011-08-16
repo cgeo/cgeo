@@ -428,7 +428,7 @@
   <string name="init_backup_last">Available backup from</string>
   <string name="init_backup_last_no">There is no file with backup.</string>
   <string name="init_mapsources">Map Sources</string> <!-- since: 2.26 RC3 -->
-  <string name="init_mapsources_description">Here you can select the source for your maps. As an alternative to Google maps various OpenStreetMap styles are available and even off line map files (see http://code.google.com/p/mapsforge/ for details).</string> <!-- since: 2.26 RC3 -->
+  <string name="init_mapsources_description">Here you can select the source for your maps. As an alternative to Google maps various OpenStreetMap styles are available and even off line map files (see <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> for details).</string> <!-- since: 2.26 RC3 -->
   <string name="init_mapsource_select">Select map source</string>
   <string name="init_select_mapfile">...</string>
   <string name="init_trackautovisit">Set trackables automatically to \"visit\"</string>
@@ -446,7 +446,7 @@
 
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Your device name:</string>
-  <string name="init_sendToCgeo_description">Send to c:geo allows you to recieve caches directly from geocaching site using special plugin for Firefox or Chrome. Before registration please read <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. You only need to register if you will use send2cgeo. C:geo will also work without registrating your device.</string>
+  <string name="init_sendToCgeo_description">Send to c:geo allows you to recieve caches directly from the geocaching site using a special plugin for Firefox or Chrome. Before registration please read <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. You only need to register if you will use send2cgeo. C:geo will also work without registering your device.</string>
   <string name="init_sendToCgeo_register">Request registration</string>
   <string name="init_sendToCgeo_registering">Registering your device for "Send to c:geo"...</string>
   <string name="init_sendToCgeo_register_ok">Registration succesful. PIN code is ####. Use it on c:geo website to add this device to your browser.</string>
@@ -485,7 +485,7 @@
   <string name="cache_inventory">Inventory</string>
   <string name="cache_log_offline">Offline log</string>
   <string name="cache_log_images_loading">Loading log Image ...</string>
-  <string name="cache_log_images_title">Logimage</string>
+  <string name="cache_log_images_title">Log image</string>
   <string name="cache_log_image_default_title">Photo</string>
   <string name="cache_personal_note">Personal note</string>
   <string name="cache_description">Description</string>
@@ -878,7 +878,7 @@
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
   <string name="nutshellmanual">Manual: <a href="http://manual.cgeo.org/">c:geo in a Nutshell</a></string>
   <string name="about_go4cache">The service <b>Go 4 Cache</b> shows other geocachers on the map (in <b>c:geo</b> or in browser) in real time. It can show, for example, what cache they\'re searching for. By connecting to <b>Go 4 Cache</b> <b>c:geo</b> is allowed to publish current location when geocaching (only while <b>c:geo</b> is running).</string>
-  <string name="about_twitter">Should <b>c:geo</b> publish new status on Twitter everytime a cache is logged?</string>
+  <string name="about_twitter">Should <b>c:geo</b> publish new status on Twitter every time a cache is logged?</string>
   <string name="about_auth_1">The following process allows <b>c:geo</b> to access Twitter - if agreed.</string>
   <string name="about_auth_2">Click on \"authorize c:geo\" button will start the process. This process will open up a web browser with Twitter page. Login on this page and allow <b>c:geo</b> to access your account. If accepted, Twitter will show up a numeric PIN code. This PIN must be pasted into <b>c:geo</b> and be confirmed. That\'s all.</string>
 
@@ -905,6 +905,7 @@
     · Ray (code, loc. JA)\n
     · <a href="http://www.sammyshp.de/">SammysHP</a> (code, localization DE)\n
     · <a href="http://seromenho.com/">Ricardo Seromenho</a> (localization PT)\n
+    · ncorreia (code, localization PT)\n
     · serenity (localization FR)\n
     · Shan, a.k.a. ShakurNO (localization NO)\n
     · thiasB (code, loc. DE EN)\n
