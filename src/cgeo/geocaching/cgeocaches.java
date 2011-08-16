@@ -988,7 +988,7 @@ public class cgeocaches extends AbstractListActivity {
                 return false;
 		}
 
-		return CacheListAppFactory.onMenuItemSelected(item, geo, cacheList, this, res, null);
+		return CacheListAppFactory.onMenuItemSelected(item, geo, cacheList, this, res, searchId);
 	}
 
 	private void setComparator(MenuItem item,
@@ -1214,8 +1214,13 @@ public class cgeocaches extends AbstractListActivity {
 		// https://code.google.com/p/android/issues/detail?id=7139
 		lastMenuInfo = info;
 
+		// create a searchId for a single cache (as if in details view)
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("geocode", cache.geocode);
+		Long singleSearchId = base.searchByGeocode(params, 0, false);
+
 		return NavigationAppFactory.onMenuItemSelected(item, geo, this,
-				res, cache, null, null, null);
+				res, cache, singleSearchId, null, null);
 	}
 
 	private boolean setFilter(cgFilter filter) {

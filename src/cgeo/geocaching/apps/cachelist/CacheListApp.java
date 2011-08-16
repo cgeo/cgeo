@@ -12,6 +12,6 @@ interface CacheListApp extends App {
 
 	boolean invoke(final cgGeo geo, final List<cgCache> caches,
 			final Activity activity, final Resources res,
-			final Integer searchId);
+			final Long searchId);
 
 }
