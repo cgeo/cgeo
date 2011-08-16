@@ -290,6 +290,8 @@
   <string name="caches_drop_progress">Removing caches</string>
   <string name="caches_refresh_selected">Refresh selected</string>
   <string name="caches_refresh_all">Refresh all</string>
+  <string name="caches_move_selected">Move selected</string>
+  <string name="caches_move_all">Move all</string>
   <string name="caches_map_cgeo">c:geo</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
