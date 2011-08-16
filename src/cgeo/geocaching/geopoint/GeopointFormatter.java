@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
  */
 public class GeopointFormatter
 {
+    private static final Pattern pattern = Pattern.compile("%([yx])(\\d)?([ndms])");
     private final String format;
     private final Format enumFormat;
 
@@ -94,7 +95,6 @@ public class GeopointFormatter
      */
     public static String format(final String format, final Geopoint gp)
     {
-        final Pattern pattern = Pattern.compile("%([yx])(\\d)?([ndms])");
         final Matcher matcher = pattern.matcher(format);
         final StringBuffer formattedResult = new StringBuffer();
 
