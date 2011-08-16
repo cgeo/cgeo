@@ -39,8 +39,7 @@ public class cgeovisit extends cgLogForm {
 	private String geocode = null;
 	private String text = null;
 	private boolean alreadyFound = false;
-	private String viewstate = null;
-	private String viewstate1 = null;
+	private String[] viewstates = null;
 	private Boolean gettingViewstate = true;
 	private ArrayList<cgTrackableLog> trackables = null;
 	private Calendar date = Calendar.getInstance();
@@ -75,7 +74,7 @@ public class cgeovisit extends cgLogForm {
 				showToast(res.getString(R.string.info_log_type_changed));
 			}
 
-			if ((viewstate == null || viewstate.length() == 0) && attempts < 2) {
+			if (cgBase.isEmpty(viewstates) && attempts < 2) {
 				showToast(res.getString(R.string.err_log_load_data_again));
 
 				loadData thread;
@@ -83,7 +82,7 @@ public class cgeovisit extends cgLogForm {
 				thread.start();
 
 				return;
-			} else if ((viewstate == null || viewstate.length() == 0) && attempts >= 2) {
+			} else if (cgBase.isEmpty(viewstates) && attempts >= 2) {
 				showToast(res.getString(R.string.err_log_load_data));
 				showProgress(false);
 
@@ -576,7 +575,7 @@ public class cgeovisit extends cgLogForm {
 		if (post == null) {
 			post = (Button) findViewById(R.id.post);
 		}
-		if (viewstate == null || viewstate.length() == 0) {
+		if (cgBase.isEmpty(viewstates)) {
 			post.setEnabled(false);
 			post.setOnTouchListener(null);
 			post.setOnClickListener(null);
@@ -761,8 +760,7 @@ public class cgeovisit extends cgLogForm {
 
 				final String page = base.request(false, "www.geocaching.com", "/seek/log.aspx", "GET", params, false, false, false).getData();
 
-				viewstate = cgBase.findViewstate(page, 0);
-				viewstate1 = cgBase.findViewstate(page, 1);
+				viewstates = cgBase.getViewstates(page);
 				trackables = cgBase.parseTrackableLog(page);
 
 				final ArrayList<Integer> typesPre = cgBase.parseTypes(page);
@@ -811,7 +809,9 @@ public class cgeovisit extends cgLogForm {
 				tweetCheck = (CheckBox) findViewById(R.id.tweet);
 			}
 
-			status = base.postLog(app, geocode, cacheid, viewstate, viewstate1, typeSelected, date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE), log, trackables);
+			status = base.postLog(app, geocode, cacheid, viewstates, typeSelected, 
+					date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE), 
+					log, trackables);
 
 			if (status == 1) {
 				cgLog logNow = new cgLog();

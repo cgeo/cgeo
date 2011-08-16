@@ -28,8 +28,7 @@ public class cgeotouch extends cgLogForm {
 	private ProgressDialog waitDialog = null;
 	private String guid = null;
 	private String geocode = null;
-	private String viewstate = null;
-	private String viewstate1 = null;
+	private String[] viewstates = null;
 	private Boolean gettingViewstate = true;
 	private Calendar date = Calendar.getInstance();
 	private int typeSelected = -1;
@@ -47,7 +46,7 @@ public class cgeotouch extends cgLogForm {
 	private Handler loadDataHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			if ((viewstate == null || viewstate.length() == 0) && attempts < 2) {
+			if (cgBase.isEmpty(viewstates) && attempts < 2) {
 				showToast(res.getString(R.string.err_log_load_data_again));
 
 				loadData thread;
@@ -55,7 +54,7 @@ public class cgeotouch extends cgLogForm {
 				thread.start();
 
 				return;
-			} else if ((viewstate == null || viewstate.length() == 0) && attempts >= 2) {
+			} else if (cgBase.isEmpty(viewstates) && attempts >= 2) {
 				showToast(res.getString(R.string.err_log_load_data));
 				showProgress(false);
 
@@ -286,7 +285,7 @@ public class cgeotouch extends cgLogForm {
         tweetCheck.setChecked(true);
 
 		Button buttonPost = (Button)findViewById(R.id.post);
-		if (viewstate == null || viewstate.length() == 0) {
+		if (cgBase.isEmpty(viewstates)) {
 			buttonPost.setEnabled(false);
 			buttonPost.setOnTouchListener(null);
 			buttonPost.setOnClickListener(null);
@@ -375,8 +374,7 @@ public class cgeotouch extends cgLogForm {
 
 				final String page = base.request(false, "www.geocaching.com", "/track/log.aspx", "GET", params, false, false, false).getData();
 
-				viewstate = cgBase.findViewstate(page, 0);
-				viewstate1 = cgBase.findViewstate(page, 1);
+				viewstates = cgBase.getViewstates(page);
 
 				final ArrayList<Integer> typesPre = cgBase.parseTypes(page);
 				if (typesPre.size() > 0) {
@@ -426,7 +424,7 @@ public class cgeotouch extends cgLogForm {
 			if (tweetBox == null) tweetBox = (LinearLayout)findViewById(R.id.tweet_box);
 			if (tweetCheck == null) tweetCheck = (CheckBox)findViewById(R.id.tweet);
 
-			status = base.postLogTrackable(guid, tracking, viewstate, viewstate1, typeSelected, date.get(Calendar.YEAR), (date.get(Calendar.MONTH ) + 1), date.get(Calendar.DATE), log);
+			status = base.postLogTrackable(guid, tracking, viewstates, typeSelected, date.get(Calendar.YEAR), (date.get(Calendar.MONTH ) + 1), date.get(Calendar.DATE), log);
 
 			if (
 				status == 1 && settings.twitter == 1 &&

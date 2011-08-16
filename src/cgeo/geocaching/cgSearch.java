@@ -9,8 +9,7 @@ public class cgSearch {
 	public int errorRetrieve = 0;
 	public String error = null;
 	public String url = "";
-	public String viewstate = "";
-	public String viewstate1 = "";
+	public String[] viewstates = null;
 	public int totalCnt = 0;
 
 	public cgSearch() {
