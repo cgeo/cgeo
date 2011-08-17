@@ -376,15 +376,12 @@
   <string name="cache_spoiler_images_loading">Loading spoiler images...</string>
 
   <!-- gpx -->
-  <string name="gpx_import_searching_in">hľadanie .gpx súborov\nv</string>
   <string name="gpx_import_loading_stored">nahrávanie skrýš z .gpx súboru\nuložených:</string>
   <string name="gpx_import_no_files">c:geo nenašlo žiadny .gpx soubor</string>
   <string name="gpx_import_caches_imported">skrýše importované</string>
-  <string name="gpx_import_searching">vyhľadávanie .gpx súborov</string>
   <string name="gpx_import_loading">nahrávanie skrýš z .gpx súboru</string>
   <string name="gpx_import_title">Import GPX</string>
   <string name="gpx_import_title_reading_file">čítanie souboru</string>
-  <string name="gpx_import_title_searching">hľadanie</string>
   <string name="gpx_import_title_caches_imported">výsledok</string>
 
   <!-- event -->
@@ -416,7 +413,6 @@
   <!-- map -->
   <string name="map_map">Mapa</string>
   <string name="map_live">aktívna mapa</string>
-  <string name="map_view_satellite">satelitný pohľad</string>
   <string name="map_view_map">pohľad do mapy</string>
   <string name="map_trail_show">zobraziť záznam trasy</string>
   <string name="map_trail_hide">skryť záznam trasy</string>

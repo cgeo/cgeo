@@ -459,15 +459,12 @@
   <string name="cache_log_types">Loggtyper</string> <!-- Since: 2.10 RC2 -->
 
   <!-- gpx -->
-  <string name="gpx_import_searching_in">Söker efter .gpx filer\ni</string>
   <string name="gpx_import_loading_stored">Laddar cacher från .gpx fil\nSparat:</string>
   <string name="gpx_import_no_files">Tyvärr, c:geo hittade ingen .gpx fil.</string>
   <string name="gpx_import_caches_imported">cacher importerade</string>
-  <string name="gpx_import_searching">Söker efter .gpx filer</string>
   <string name="gpx_import_loading">Laddar cacher från .gpx fil</string>
   <string name="gpx_import_title">Importera GPX</string>
   <string name="gpx_import_title_reading_file">Läser fil</string>
-  <string name="gpx_import_title_searching">Söker</string>
   <string name="gpx_import_title_caches_imported">Resultat</string>
 
   <!-- event -->
@@ -501,7 +498,6 @@
   <!-- map -->
   <string name="map_map">Karta</string>
   <string name="map_live">Live karta</string>
-  <string name="map_view_satellite">Satellitvy</string>
   <string name="map_view_map">Kartvy</string>
   <string name="map_trail_show">Visa spår</string>
   <string name="map_trail_hide">Dölj spår</string>

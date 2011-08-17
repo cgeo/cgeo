@@ -285,7 +285,6 @@
   <!-- map -->
   <string name="map_map">Kort</string>
   <string name="map_live">Live-kort</string>
-  <string name="map_view_satellite">Satellit-view</string>
   <string name="map_view_map">Kort-view</string>
   <string name="map_trail_show">Vis spor</string>
   <string name="map_trail_hide">Skjul spor</string>

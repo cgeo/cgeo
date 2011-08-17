@@ -446,15 +446,12 @@
   <string name="cache_log_types">Rodzaj logu</string> <!-- Since: 2.10 RC2 -->
 
   <!-- gpx -->
-  <string name="gpx_import_searching_in">Szukam pliki .gpx\nw</string>
   <string name="gpx_import_loading_stored">Ładuje skrzynki z pliku .gpx\nZapisane:</string>
   <string name="gpx_import_no_files">Przepraszam, c:geo nie znalazł plików .gpx</string>
   <string name="gpx_import_caches_imported">skrzynek importowanych</string>
-  <string name="gpx_import_searching">Szukam za plikami .gpx</string>
   <string name="gpx_import_loading">Ładuje skrzynki z pliku .gpx</string>
   <string name="gpx_import_title">Import GPX</string>
   <string name="gpx_import_title_reading_file">Czytanie pliku</string>
-  <string name="gpx_import_title_searching">Wyszukiwanie</string>
   <string name="gpx_import_title_caches_imported">Wynik</string>
 
   <!-- event -->
@@ -487,7 +484,6 @@
   <!-- map -->
   <string name="map_map">Mapa</string>
   <string name="map_live">Live mapa</string>
-  <string name="map_view_satellite">Widok z satelity</string>
   <string name="map_view_map">Widok mapy</string>
   <string name="map_trail_show">Pokaż szlak</string>
   <string name="map_trail_hide">Ukryj szlak</string>
@@ -584,7 +580,6 @@
 
   <!-- next things -->
   <string name="legal_note">Aby móc korzystać z usług serwisu geocaching.com <a href="http://www.geocaching.com/about/termsofuse.aspx">warunki korzystania Groundspeak</a> muszą być potwierdzone.</string>
-  <string name="about_text"><b>c:geo</b> został opracowany aby był łatwym w obsłudze i wszechstronnym klientem serwisu geocaching.com. Jest i zawsze będzie za darmo. Jeśli chcesz wspierać rozwój aplikacji, donacje są mile widziane (na stronie internetowej). Pytania lub sugestie? Odwiedź mój profil w Facebook albo wyślij mi e-mail.</string>
   <string name="author">Autor: <a href="http://carnero.cc/">carnero</a></string>
   <string name="support">Support: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">Website: <a href="http://cgeo.org/">cgeo.org</a></string>
