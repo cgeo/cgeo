@@ -1,7 +1,0 @@
-Missing translations for language 'de':
-Only in values/strings.xml (this doesn't mean, that everything has to be translated):
-  <string name="search_history">History</string>
-  <string name="powered_by">carnero</string>
-  <string name="contributors">\n
-  <string name="changelog">\n
-Only in values-de/strings.xml:

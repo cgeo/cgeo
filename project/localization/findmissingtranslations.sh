@@ -1,7 +1,7 @@
 #!/bin/sh
 
 getnames () {
-    grep "<string\(-array\)*\s*name" "$1" | sed "s/^.*<string\(-array\)*\s*name\s*=\s*\"\([^\"]*\)\".*$/\2/"
+    grep "<string" "$1" | grep "name=" | sed "s/^.*<string\(-array\)*\s*name\s*=\s*\"\([^\"]*\)\".*$/\2/"
 }
 
 finddiffs () {
@@ -13,14 +13,16 @@ finddiffs () {
     done >> $1.missing
     echo "Only in values-$1/strings.xml:" >> $1.missing
     grep ">\||" tmp.str | sed "s/^/x/;s/\s\s*/ /g" | cut -d " " -f 3 | while read s; do
-        grep "string\s*name\s*=\s*\"$s\"" ../../res/values-$1/strings.xml
+        grep "<string" ../../res/values-$1/strings.xml | grep "name=\"$s\""
     done >> $1.missing
     rm tmp.str
     [ `cat $1.missing | wc -l` -lt 4 ] && rm $1.missing
 }
 
+echo processing en...
 getnames ../../res/values/strings.xml > en.str
 for l in `find ../../res/values-* -name "strings.xml" | sed "s/^.*values-\(..\).*$/\1/"`; do
+    echo processing $l...
     getnames ../../res/values-$l/strings.xml > $l.str
     finddiffs $l
 done
