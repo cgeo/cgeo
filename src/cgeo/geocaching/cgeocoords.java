@@ -117,18 +117,26 @@ public class cgeocoords extends Dialog {
 	}
 	
 	private void updateGUI() {
-		if (latitude < 0)
-			bLat.setText("S");
-		else
-			bLat.setText("N");
-		if (longitude < 0)
-			bLon.setText("W");
-		else
-			bLon.setText("E");
-		
-		Double lat = Math.abs(latitude);
-		Double lon = Math.abs(longitude);
-
+		Double lat = 0.0;
+		if (latitude != null) {
+			if (latitude < 0) {
+				bLat.setText("S");
+			} else {
+				bLat.setText("N");
+			}
+			
+			lat = Math.abs(latitude);
+		}
+		Double lon = 0.0;
+		if (longitude != null) {
+			if (longitude < 0) {
+				bLon.setText("W");
+			} else {
+				bLon.setText("E");
+			}
+			
+			lon = Math.abs(longitude);
+		}
 		int latDeg = (int) Math.floor(lat);
 		int latDegFrac = (int) Math.round((lat - latDeg) * 100000);
 
@@ -152,8 +160,12 @@ public class cgeocoords extends Dialog {
 				findViewById(R.id.coordTable).setVisibility(View.GONE);
 				eLat.setVisibility(View.VISIBLE);
 				eLon.setVisibility(View.VISIBLE);
-				eLat.setText(cgBase.formatCoordinate(latitude, "lat", true));
-				eLon.setText(cgBase.formatCoordinate(longitude, "lon", true));				
+				if (latitude != null) {
+					eLat.setText(cgBase.formatCoordinate(latitude, "lat", true));
+				}
+				if (longitude != null) {
+					eLon.setText(cgBase.formatCoordinate(longitude, "lon", true));				
+				}
 				break;
 			case Deg: // DDD.DDDDD°
 				findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
@@ -171,11 +183,14 @@ public class cgeocoords extends Dialog {
 				tLatSep2.setText("°");
 				tLonSep2.setText("°");
 
-				eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
-				eLatMin.setText(Integer.toString(latDegFrac) + addZeros(latDegFrac, 5));
-
-				eLonDeg.setText(addZeros(latDeg, 3) + Integer.toString(lonDeg));
-				eLonMin.setText(Integer.toString(lonDegFrac) + addZeros(lonDegFrac, 5));
+				if (latitude != null) {
+					eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
+					eLatMin.setText(Integer.toString(latDegFrac) + addZeros(latDegFrac, 5));
+				}
+				if (longitude != null) {
+					eLonDeg.setText(addZeros(latDeg, 3) + Integer.toString(lonDeg));
+					eLonMin.setText(Integer.toString(lonDegFrac) + addZeros(lonDegFrac, 5));
+				}
 				break;
 			case Min: // DDD° MM.MMM
 				findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
@@ -195,13 +210,16 @@ public class cgeocoords extends Dialog {
 				tLatSep3.setText("'");
 				tLonSep3.setText("'");
 
-				eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
-				eLatMin.setText(addZeros(latMin, 2) + Integer.toString(latMin));
-				eLatSec.setText(Integer.toString(latMinFrac) + addZeros(latMinFrac, 3));
-
-				eLonDeg.setText(addZeros(lonDeg, 3) + Integer.toString(lonDeg));
-				eLonMin.setText(addZeros(lonMin, 2) + Integer.toString(lonMin));
-				eLonSec.setText(Integer.toString(lonMinFrac) + addZeros(lonMinFrac, 3));
+				if (latitude != null) {
+					eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
+					eLatMin.setText(addZeros(latMin, 2) + Integer.toString(latMin));
+					eLatSec.setText(Integer.toString(latMinFrac) + addZeros(latMinFrac, 3));
+				}
+				if (longitude != null) {
+					eLonDeg.setText(addZeros(lonDeg, 3) + Integer.toString(lonDeg));
+					eLonMin.setText(addZeros(lonMin, 2) + Integer.toString(lonMin));
+					eLonSec.setText(Integer.toString(lonMinFrac) + addZeros(lonMinFrac, 3));
+				}
 				break;
 			case Sec: // DDD° MM SS.SSS
 				findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
@@ -221,23 +239,27 @@ public class cgeocoords extends Dialog {
 				tLatSep3.setText(".");
 				tLonSep3.setText(".");
 
-				eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
-				eLatMin.setText(addZeros(latMin, 2) + Integer.toString(latMin));
-				eLatSec.setText(addZeros(latSec, 2) + Integer.toString(latSec));
-				eLatSub.setText(Integer.toString(latSecFrac) + addZeros(latSecFrac, 3));
-
-				eLonDeg.setText(addZeros(lonDeg, 3) + Integer.toString(lonDeg));
-				eLonMin.setText(addZeros(lonMin, 2) + Integer.toString(lonMin));
-				eLonSec.setText(addZeros(lonSec, 2) + Integer.toString(lonSec));
-				eLonSub.setText(Integer.toString(lonSecFrac) + addZeros(lonSecFrac, 3));
+				if (latitude != null) {
+					eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
+					eLatMin.setText(addZeros(latMin, 2) + Integer.toString(latMin));
+					eLatSec.setText(addZeros(latSec, 2) + Integer.toString(latSec));
+					eLatSub.setText(Integer.toString(latSecFrac) + addZeros(latSecFrac, 3));
+				}
+				if (longitude != null) {
+					eLonDeg.setText(addZeros(lonDeg, 3) + Integer.toString(lonDeg));
+					eLonMin.setText(addZeros(lonMin, 2) + Integer.toString(lonMin));
+					eLonSec.setText(addZeros(lonSec, 2) + Integer.toString(lonSec));
+					eLonSub.setText(Integer.toString(lonSecFrac) + addZeros(lonSecFrac, 3));
+				}
 				break;
 		}
 	}
 	
 	private String addZeros(int value, int len) {
 		String zeros = "";
-		if (value == 0)
+		if (value == 0) {
 			value = 1;
+		}
 		while (value < Math.pow(10, len-1)) {
 			zeros += "0";
 			value *= 10;
@@ -290,16 +312,20 @@ public class cgeocoords extends Dialog {
 			 * formatSec 2/3 2   2   3
 			 */
 			
-			if (currentFormat == coordInputFormatEnum.Plain)
+			if (currentFormat == coordInputFormatEnum.Plain) {
 				return;
+			}
 			
 			int maxLength = 2;
-			if (editTextId == 5 || editTextId == 4 || editTextId == 8)
+			if (editTextId == 5 || editTextId == 4 || editTextId == 8) {
 				maxLength = 3;
-			if ((editTextId == 2 || editTextId == 6) && currentFormat == coordInputFormatEnum.Deg)
+			}
+			if ((editTextId == 2 || editTextId == 6) && currentFormat == coordInputFormatEnum.Deg) {
 				maxLength = 5;
-			if ((editTextId == 3 || editTextId == 7) && currentFormat == coordInputFormatEnum.Min)
+			}
+			if ((editTextId == 3 || editTextId == 7) && currentFormat == coordInputFormatEnum.Min) {
 				maxLength = 3;
+			}
 			
 			if (s.length() == maxLength) {
 				switch (editTextId) {
@@ -307,16 +333,18 @@ public class cgeocoords extends Dialog {
 						eLatMin.requestFocus();
 						break;
 					case 2:
-						if (eLatSec.getVisibility() == View.GONE)
+						if (eLatSec.getVisibility() == View.GONE) {
 							eLonDeg.requestFocus();
-						else
+						} else {
 							eLatSec.requestFocus();
+						}
 						break;
 					case 3:
-						if (eLatSub.getVisibility() == View.GONE)
+						if (eLatSub.getVisibility() == View.GONE) {
 							eLonDeg.requestFocus();
-						else
+						} else {
 							eLatSub.requestFocus();
+						}
 						break;
 					case 4:
 						eLonDeg.requestFocus();
@@ -325,16 +353,18 @@ public class cgeocoords extends Dialog {
 						eLonMin.requestFocus();
 						break;
 					case 6:
-						if (eLonSec.getVisibility() == View.GONE)
+						if (eLonSec.getVisibility() == View.GONE) {
 							eLatDeg.requestFocus();
-						else
+						} else {
 							eLonSec.requestFocus();
+						}
 						break;
 					case 7:
-						if (eLonSub.getVisibility() == View.GONE)
+						if (eLonSub.getVisibility() == View.GONE) {
 							eLatDeg.requestFocus();
-						else
+						} else {
 							eLonSub.requestFocus();
+						}
 						break;
 					case 8:
 						eLatDeg.requestFocus();
@@ -352,8 +382,9 @@ public class cgeocoords extends Dialog {
 	}
 	
 	private void calc() {
-		if (currentFormat == coordInputFormatEnum.Plain) // should not happen
+		if (currentFormat == coordInputFormatEnum.Plain) {
 			return;
+		}
 		
 		int latDeg = 0, latMin = 0, latSec = 0, latSub = 0;
 		int lonDeg = 0, lonMin = 0, lonSec = 0, lonSub = 0;
@@ -371,31 +402,37 @@ public class cgeocoords extends Dialog {
 		switch (currentFormat) {
 			case Deg:
 				Double latDegFrac = latMin * 1.0;
-				while (latDegFrac > 1)
+				while (latDegFrac > 1) {
 					latDegFrac /= 10;
+				}
 				Double lonDegFrac = lonMin * 1.0;
-				while (lonDegFrac > 1)
+				while (lonDegFrac > 1) {
 					lonDegFrac /= 10;
+				}
 				latitude = latDeg + latDegFrac;
 				longitude = lonDeg + lonDegFrac;
 				break;
 			case Min:
 				Double latMinFrac = latSec * 1.0;
-				while (latMinFrac > 1)
+				while (latMinFrac > 1) {
 					latMinFrac /= 10;
+				}
 				Double lonMinFrac = lonSec * 1.0;
-				while (lonMinFrac > 1)
+				while (lonMinFrac > 1) {
 					lonMinFrac /= 10;
+				}
 				latitude = latDeg + latMin/60.0 + latMinFrac/60.0;
 				longitude = lonDeg + lonMin/60.0 + lonMinFrac/60.0; 
 				break;
 			case Sec:
 				Double latSecFrac = latSub * 1.0;
-				while (latSecFrac > 1)
+				while (latSecFrac > 1) {
 					latSecFrac /= 10;
+				}
 				Double lonSecFrac = lonSub * 1.0;
-				while (lonSecFrac > 1)
+				while (lonSecFrac > 1) {
 					lonSecFrac /= 10;
+				}
 				latitude = latDeg + latMin/60.0 + latSec/60.0/60.0 + latSecFrac/60.0/60.0;
 				longitude = lonDeg + lonMin/60.0 + lonSec/60.0/60.0 + lonSecFrac/60.0/60.0;
 				break;
@@ -420,6 +457,7 @@ public class cgeocoords extends Dialog {
 
 	private class CurrentListener implements View.OnClickListener {
 
+		@Override
 		public void onClick(View v) {
 			if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null) {
 				context.showToast(context.getResources().getString(R.string.err_point_unknown_position));
@@ -434,6 +472,7 @@ public class cgeocoords extends Dialog {
 	
 	private class InputDoneListener implements View.OnClickListener {
 
+		@Override
 		public void onClick(View v) {
 			if (currentFormat == coordInputFormatEnum.Plain) {
 				if (eLat.length() > 0 && eLon.length() > 0) {
