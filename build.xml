@@ -46,9 +46,18 @@
      in between standard targets -->
 
     <target name="-pre-build">
-        <filterset id="build-tokens">
-            <filter token="maps.api.key" value="${maps.api.key}"/>
-        </filterset>
+        <if condition="${build.mode.release}">
+            <then>
+                <filterset id="build-tokens">
+                    <filter token="maps.api.key" value="${maps.api.key.market}"/>
+                </filterset>
+            </then>
+            <else>
+                <filterset id="build-tokens">
+                    <filter token="maps.api.key" value="${maps.api.key}"/>
+                </filterset>
+            </else>
+        </if>
         <copy file="./templates/mapsapikey.xml" todir="./res/values/" overwrite="true">
             <filterset refid="build-tokens" />
         </copy>
@@ -62,7 +71,9 @@
     <target name="-post-compile">
     </target>
 
-
+	<target name="debugAPI" depends="-pre-build"
+		description="Changes API key to debug">
+	</target>
     <!-- Execute the Android Setup task that will setup some properties
          specific to the target, and import the build rules files.
 
