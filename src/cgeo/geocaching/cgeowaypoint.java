@@ -116,7 +116,9 @@ public class cgeowaypoint extends AbstractActivity {
 				@Override
 				public void onClick(View v) {
 					registerForContextMenu(v);
-					openContextMenu(v);
+					if (navigationPossible()) {
+						openContextMenu(v);
+					}
 				}
 			});
 		}
@@ -326,8 +328,8 @@ public class cgeowaypoint extends AbstractActivity {
 	}
 
 	public void goCompass(View view) {
-		if (waypoint == null || waypoint.latitude == null || waypoint.longitude == null) {
-			showToast(res.getString(R.string.err_location_unknown));
+		if (!navigationPossible()) {
+			return;
 		}
 
 		Intent navigateIntent = new Intent(this, cgeonavigate.class);
@@ -341,11 +343,21 @@ public class cgeowaypoint extends AbstractActivity {
 		startActivity(navigateIntent);
 	}
 
+	private boolean navigationPossible() {
+		if (waypoint == null || waypoint.latitude == null || waypoint.longitude == null) {
+			showToast(res.getString(R.string.err_location_unknown));
+			return false;
+		}
+		return true;
+	}
+
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v,
 			ContextMenuInfo menuInfo) {
-		menu.setHeaderTitle(res.getString(R.string.cache_menu_navigate));
-		addNavigationMenuItems(menu);
+		if (navigationPossible()) {
+			menu.setHeaderTitle(res.getString(R.string.cache_menu_navigate));
+			addNavigationMenuItems(menu);
+		}
 	}
 
 	@Override
