@@ -468,13 +468,15 @@ public class cgeomap extends MapBase {
 
 	private void addMapViewMenuItems(final Menu menu) {
 		String[] mapViews = res.getStringArray(R.array.map_sources);
-
-		menu.add(0, SUBMENU_VIEW_GOOGLE_MAP, 0, mapViews[0]);
-		menu.add(0, SUBMENU_VIEW_GOOGLE_SAT, 0, mapViews[1]);
-		menu.add(0, SUBMENU_VIEW_MF_MAPNIK, 0, mapViews[2]);
-		menu.add(0, SUBMENU_VIEW_MF_OSMARENDER, 0, mapViews[3]);
-		menu.add(0, SUBMENU_VIEW_MF_CYCLEMAP, 0, mapViews[4]);
-		menu.add(0, SUBMENU_VIEW_MF_OFFLINE, 0, mapViews[5]);
+		mapSourceEnum mapSource = settings.mapSource;
+		
+		menu.add(1, SUBMENU_VIEW_GOOGLE_MAP, 0, mapViews[0]).setCheckable(true).setChecked(mapSource == mapSourceEnum.googleMap);
+		menu.add(1, SUBMENU_VIEW_GOOGLE_SAT, 0, mapViews[1]).setCheckable(true).setChecked(mapSource == mapSourceEnum.googleSat);
+		menu.add(1, SUBMENU_VIEW_MF_MAPNIK, 0, mapViews[2]).setCheckable(true).setChecked(mapSource == mapSourceEnum.mapsforgeMapnik);
+		menu.add(1, SUBMENU_VIEW_MF_OSMARENDER, 0, mapViews[3]).setCheckable(true).setChecked(mapSource == mapSourceEnum.mapsforgeOsmarender);
+		menu.add(1, SUBMENU_VIEW_MF_CYCLEMAP, 0, mapViews[4]).setCheckable(true).setChecked(mapSource == mapSourceEnum.mapsforgeCycle);
+		menu.add(1, SUBMENU_VIEW_MF_OFFLINE, 0, mapViews[5]).setCheckable(true).setChecked(mapSource == mapSourceEnum.mapsforgeOffline);
+		menu.setGroupCheckable(1, true, true);
 	}
 
 	@Override
@@ -638,6 +640,7 @@ public class cgeomap extends MapBase {
 
 		} else if (SUBMENU_VIEW_GOOGLE_MAP <= id && SUBMENU_VIEW_MF_OFFLINE >= id) {
 
+			item.setChecked(true);
 			mapSourceEnum mapSource = getMapSourceFromMenuId(id);
 
 			boolean mapRestartRequired = switchMapSource(mapSource);

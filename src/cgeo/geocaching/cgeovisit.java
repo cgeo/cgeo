@@ -282,15 +282,15 @@ public class cgeovisit extends cgLogForm {
 
 		SubMenu menuStars = menu.addSubMenu(0, SUBMENU_VOTE, 0, res.getString(R.string.log_rating)).setIcon(android.R.drawable.ic_menu_sort_by_size);
 		menuStars.add(0, 10, 0, res.getString(R.string.log_no_rating));
-		menuStars.add(0, 19, 0, res.getString(R.string.log_stars_5));
-		menuStars.add(0, 18, 0, res.getString(R.string.log_stars_45));
-		menuStars.add(0, 17, 0, res.getString(R.string.log_stars_4));
-		menuStars.add(0, 16, 0, res.getString(R.string.log_stars_35));
-		menuStars.add(0, 15, 0, res.getString(R.string.log_stars_3));
-		menuStars.add(0, 14, 0, res.getString(R.string.log_stars_25));
-		menuStars.add(0, 13, 0, res.getString(R.string.log_stars_2));
-		menuStars.add(0, 12, 0, res.getString(R.string.log_stars_15));
-		menuStars.add(0, 11, 0, res.getString(R.string.log_stars_1));
+		menuStars.add(0, 19, 0, res.getString(R.string.log_stars_5) + " (" + res.getString(R.string.log_stars_5_description) + ")");
+		menuStars.add(0, 18, 0, res.getString(R.string.log_stars_45) + " (" + res.getString(R.string.log_stars_45_description) + ")");
+		menuStars.add(0, 17, 0, res.getString(R.string.log_stars_4) + " (" + res.getString(R.string.log_stars_4_description) + ")");
+		menuStars.add(0, 16, 0, res.getString(R.string.log_stars_35) + " (" + res.getString(R.string.log_stars_35_description) + ")");
+		menuStars.add(0, 15, 0, res.getString(R.string.log_stars_3) + " (" + res.getString(R.string.log_stars_3_description) + ")");
+		menuStars.add(0, 14, 0, res.getString(R.string.log_stars_25) + " (" + res.getString(R.string.log_stars_25_description) + ")");
+		menuStars.add(0, 13, 0, res.getString(R.string.log_stars_2) + " (" + res.getString(R.string.log_stars_2_description) + ")");
+		menuStars.add(0, 12, 0, res.getString(R.string.log_stars_15) + " (" + res.getString(R.string.log_stars_15_description) + ")");
+		menuStars.add(0, 11, 0, res.getString(R.string.log_stars_1) + " (" + res.getString(R.string.log_stars_1_description) + ")");
 
 		return true;
 	}
