@@ -28,8 +28,8 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
@@ -4220,14 +4220,13 @@ public class cgBase {
 		}
 
 		if (params != null) {
-			Object[] keys = params.keySet().toArray();
+			Set<Map.Entry<String, String>> entrySet = params.entrySet();
 			ArrayList<String> paramsEncoded = new ArrayList<String>();
-			String key;
-			String value;
-
-			for (int i = 0; i < keys.length; i++) {
-				key = (String) keys[i];
-				value = (String) params.get(key);
+			
+			for(Map.Entry<String, String> entry : entrySet)
+			{
+				String key = entry.getKey();
+				String value = entry.getValue();
 
 				if (key.charAt(0) == '^') {
 					key = "";
@@ -4314,25 +4313,25 @@ public class cgBase {
 			}
 
 			final Map<String, ?> prefsAll = prefs.getAll();
-			final Set<String> prefsKeys = prefsAll.keySet();
-
-			for (String key : prefsKeys) {
+			final Set<? extends Map.Entry<String, ?>> entrySet = prefsAll.entrySet();
+			
+			for(Map.Entry<String, ?> entry : entrySet){
+				String key = entry.getKey();
 				if (key.matches("cookie_.+")) {
 					final String cookieKey = key.substring(7);
-					final String cookieValue = (String) prefsAll.get(key);
+					final String cookieValue = (String) entry.getValue();
 
 					cookies.put(cookieKey, cookieValue);
 				}
 			}
 		}
 
-		if (cookies != null && !cookies.isEmpty() && cookies.keySet().size() > 0) {
-			final Object[] keys = cookies.keySet().toArray();
+		if (cookies != null) {
+			final Set<Map.Entry<String, String>> entrySet = cookies.entrySet();
 			final ArrayList<String> cookiesEncoded = new ArrayList<String>();
-
-			for (int i = 0; i < keys.length; i++) {
-				String value = cookies.get(keys[i].toString());
-				cookiesEncoded.add(keys[i] + "=" + value);
+			
+			for(Map.Entry<String, String> entry : entrySet){
+				cookiesEncoded.add(entry.getKey() + "=" + entry.getValue());
 			}
 
 			if (cookiesEncoded.size() > 0) {
@@ -4344,13 +4343,13 @@ public class cgBase {
 			Map<String, ?> prefsValues = prefs.getAll();
 
 			if (prefsValues != null && prefsValues.size() > 0 && prefsValues.keySet().size() > 0) {
-				final Object[] keys = prefsValues.keySet().toArray();
+				final Set<? extends Map.Entry<String, ?>> entrySet = prefsValues.entrySet();
 				final ArrayList<String> cookiesEncoded = new ArrayList<String>();
-				final int length = keys.length;
 
-				for (int i = 0; i < length; i++) {
-					if (keys[i].toString().length() > 7 && keys[i].toString().substring(0, 7).equals("cookie_")) {
-						cookiesEncoded.add(keys[i].toString().substring(7) + "=" + prefsValues.get(keys[i].toString()));
+				for(Map.Entry<String, ?> entry : entrySet){
+					String key = entry.getKey();
+					if (key.length() > 7 && key.substring(0, 7).equals("cookie_")) {
+						cookiesEncoded.add(key + "=" + entry.getValue());						
 					}
 				}
 
@@ -4576,12 +4575,13 @@ public class cgBase {
 			}
 
 			final Map<String, ?> prefsAll = prefs.getAll();
-			final Set<String> prefsKeys = prefsAll.keySet();
-
-			for (String key : prefsKeys) {
+			final Set<? extends Map.Entry<String, ?>> entrySet = prefsAll.entrySet();
+			
+			for(Map.Entry<String, ?> entry : entrySet){
+				String key = entry.getKey();
 				if (key.matches("cookie_.+")) {
 					final String cookieKey = key.substring(7);
-					final String cookieValue = (String) prefsAll.get(key);
+					final String cookieValue = (String) entry.getValue();
 
 					cookies.put(cookieKey, cookieValue);
 				}
@@ -4589,12 +4589,11 @@ public class cgBase {
 		}
 
 		if (cookies != null) {
-			final Object[] keys = cookies.keySet().toArray();
+			final Set<Map.Entry<String, String>> entrySet = cookies.entrySet();
 			final ArrayList<String> cookiesEncoded = new ArrayList<String>();
-
-			for (int i = 0; i < keys.length; i++) {
-				String value = cookies.get(keys[i].toString());
-				cookiesEncoded.add(keys[i] + "=" + value);
+			
+			for(Map.Entry<String, String> entry : entrySet){
+				cookiesEncoded.add(entry.getKey() + "=" + entry.getValue());
 			}
 
 			if (cookiesEncoded.size() > 0) {
@@ -4606,13 +4605,13 @@ public class cgBase {
 			Map<String, ?> prefsValues = prefs.getAll();
 
 			if (prefsValues != null && prefsValues.size() > 0) {
-				final Object[] keys = prefsValues.keySet().toArray();
+				final Set<? extends Map.Entry<String, ?>> entrySet = prefsValues.entrySet();
 				final ArrayList<String> cookiesEncoded = new ArrayList<String>();
-				final int length = keys.length;
 
-				for (int i = 0; i < length; i++) {
-					if (keys[i].toString().length() > 7 && keys[i].toString().substring(0, 7).equals("cookie_")) {
-						cookiesEncoded.add(keys[i].toString().substring(7) + "=" + prefsValues.get(keys[i].toString()));
+				for(Map.Entry<String, ?> entry : entrySet){
+					String key = entry.getKey();
+					if (key.length() > 7 && key.substring(0, 7).equals("cookie_")) {
+						cookiesEncoded.add(key + "=" + entry.getValue());						
 					}
 				}
 
