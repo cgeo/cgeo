@@ -375,15 +375,12 @@
   <string name="cache_spoiler_images_loading">Spoiler afbeeldingen laden...</string>
 
   <!-- gpx -->
-  <string name="gpx_import_searching_in">Zoeken naar .gpx bestanden\nin</string>
   <string name="gpx_import_loading_stored">Caches laden van .gpx bestand\nstored:</string>
   <string name="gpx_import_no_files">Sorry, c:geo heeft geen .gpx bestanden gevonden.</string>
   <string name="gpx_import_caches_imported">Caches geïmporteerd</string>
-  <string name="gpx_import_searching">Zoeken naar .gpx bestanden</string>
   <string name="gpx_import_loading">Caches laden uit .gpx bestand</string>
   <string name="gpx_import_title">Importeer GPX</string>
   <string name="gpx_import_title_reading_file">Bestand aan het lezen</string>
-  <string name="gpx_import_title_searching">Bezig met zoeken</string>
   <string name="gpx_import_title_caches_imported">Resultaat</string>
 
 
@@ -416,7 +413,6 @@
   <!-- map -->
   <string name="map_map">Kaart</string>
   <string name="map_live">Live kaart</string>
-  <string name="map_view_satellite">Satelliet weergave</string>
   <string name="map_view_map">Kaart weergave</string>
   <string name="map_trail_show">Toon spoor</string>
   <string name="map_trail_hide">Verberg spoor</string>

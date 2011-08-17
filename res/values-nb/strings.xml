@@ -351,18 +351,14 @@
   <string name="cache_location">Lokasjon</string>
   <string name="cache_coordinates">Koordinater</string>
   <string name="cache_calendars">Velg kalender</string>
-  <string name="cache_gpx_import">Importer GPX-fil</string>
 
   <!-- gpx -->
-  <string name="gpx_import_searching_in">Søker etter *.GPX-filer</string>
   <string name="gpx_import_loading_stored">Laster cacher fra *.GPX-filer\nlagret:</string>
   <string name="gpx_import_no_files">Beklager, c:geo fant ingen *.GPX-filer.</string>
   <string name="gpx_import_caches_imported">Cacher importert</string>
-  <string name="gpx_import_searching">Søker etter *.GPX-filer</string>
   <string name="gpx_import_loading">Laster cacher fra .*.GPX-fil</string>
   <string name="gpx_import_title">Importer GPX</string>
   <string name="gpx_import_title_reading_file">Leser fil</string>
-  <string name="gpx_import_title_searching">Søker</string>
   <string name="gpx_import_title_caches_imported">Resultat</string>
 
   <!-- event -->
@@ -392,7 +388,6 @@
   <!-- map -->
   <string name="map_map">Kart</string>
   <string name="map_live">Live kart</string>
-  <string name="map_view_satellite">Satelitt-kart</string>
   <string name="map_view_map">Vanlig kart</string>
   <string name="map_trail_show">Vis spor</string>
   <string name="map_trail_hide">Skjul spor</string>

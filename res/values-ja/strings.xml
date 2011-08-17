@@ -456,15 +456,12 @@
   <string name="cache_log_types">ログタイプ</string> <!-- Since: 2.10 RC2 -->
 
   <!-- gpx -->
-  <string name="gpx_import_searching_in">GPXファイルを検索中\nフォルダ:</string>
   <string name="gpx_import_loading_stored">GPXファイルをロード中\n保存済み:</string>
   <string name="gpx_import_no_files">GPXファイルが見つかりません。</string>
   <string name="gpx_import_caches_imported">個のキャッシュを読み込みました</string>
-  <string name="gpx_import_searching">GPXファイルを検索中</string>
   <string name="gpx_import_loading">GPXファイルをロード中</string>
   <string name="gpx_import_title">GPXファイルの読み込み</string>
   <string name="gpx_import_title_reading_file">ファイルを読み込み中</string>
-  <string name="gpx_import_title_searching">検索中</string>
   <string name="gpx_import_title_caches_imported">結果</string>
 
   <!-- event -->
@@ -498,7 +495,6 @@
   <!-- map -->
   <string name="map_map">地図</string>
   <string name="map_live">オンライン地図</string>
-  <string name="map_view_satellite">航空写真表示</string>
   <string name="map_view_map">地図表示</string>
   <string name="map_trail_show">軌跡表示</string>
   <string name="map_trail_hide">軌跡非表示</string>

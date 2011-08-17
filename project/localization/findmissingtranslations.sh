@@ -9,7 +9,7 @@ finddiffs () {
     diff -y en.str $1.str > tmp.str
     echo "Only in values/strings.xml (this doesn't mean, that everything has to be translated):" >> $1.missing
     grep "<\||" tmp.str | cut -d " " -f 1 | while read s; do
-        grep "string\s*name\s*=\s*\"$s\"" ../../res/values/strings.xml
+        grep "<string" ../../res/values/strings.xml | grep "name=\"$s\""
     done >> $1.missing
     echo "Only in values-$1/strings.xml:" >> $1.missing
     grep ">\||" tmp.str | sed "s/^/x/;s/\s\s*/ /g" | cut -d " " -f 3 | while read s; do
