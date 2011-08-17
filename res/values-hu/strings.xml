@@ -285,7 +285,6 @@
   <!-- map -->
   <string name="map_map">Térkép</string>
   <string name="map_live">Élő térkép</string>
-  <string name="map_view_satellite">Műhold nézet</string>
   <string name="map_view_map">Térkép nézet</string>
   <string name="map_trail_show">Nyomvonal mutatása</string>
   <string name="map_trail_hide">Nyomvonal elrejtése</string>
