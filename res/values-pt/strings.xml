@@ -90,6 +90,15 @@
   <string name="log_stars_4">4 estrelas</string>
   <string name="log_stars_45">4.5 estrelas</string>
   <string name="log_stars_5">5 estrelas</string>
+  <string name="log_stars_1_description">terrível</string>
+  <string name="log_stars_15_description">muito má</string>
+  <string name="log_stars_2_description">má</string>
+  <string name="log_stars_25_description">abaixo da média</string>
+  <string name="log_stars_3_description">mediana</string>
+  <string name="log_stars_35_description">acima da média</string>
+  <string name="log_stars_4_description">boa</string>
+  <string name="log_stars_45_description">muito boa</string>
+  <string name="log_stars_5_description">excelente</string>
   <string name="log_webcam">Fotografia tirada pela webcam</string>
   <string name="log_new_log">Log</string>
   <string name="log_new_log_text">Registar texto</string>
@@ -290,6 +299,8 @@
   <string name="caches_drop_progress">A remover caches</string>
   <string name="caches_refresh_selected">Actualizar seleccionada</string>
   <string name="caches_refresh_all">Actualizar todas</string>
+  <string name="caches_move_selected">Mover seleccionadas</string>
+  <string name="caches_move_all">Mover todas</string>
   <string name="caches_map_cgeo">c:geo</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
@@ -559,6 +570,7 @@
 
   <!-- gpx -->
   <string name="gpx_import_loading_stored">a carregar caches do ficheiro .gpx\narmazenado:</string>
+  <string name="gpx_import_no_files">Desculpe, o c:geo não encontrou ficheiros .gpx.</string>
   <string name="gpx_import_caches_imported">Caches importadas</string>
   <string name="gpx_import_loading">A carregar caches do ficheiro .gpx</string>
   <string name="gpx_import_title">Importar GPX</string>
