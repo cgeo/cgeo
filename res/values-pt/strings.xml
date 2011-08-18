@@ -774,8 +774,8 @@
   <string name="attribute_nightcache_no">Cache não nocturna</string>
   <string name="attribute_parkngrab_yes">Estacionar e encontrar</string>
   <string name="attribute_parkngrab_no">Não é só estacionar e encontrar</string>
-  <string name="attribute_AbandonedBuilding_yes">Estrutura abandonada</string>
-  <string name="attribute_AbandonedBuilding_no">Não é uma estrutura abandonada</string>
+  <string name="attribute_abandonedbuilding_yes">Estrutura abandonada</string>
+  <string name="attribute_abandonedbuilding_no">Não é uma estrutura abandonada</string>
   <string name="attribute_hike_short_yes">Pequena caminhada (menos de 1 Km)</string>
   <string name="attribute_hike_short_no">Não é uma pequena caminhada</string>
   <string name="attribute_hike_med_yes">Caminhada média (1 Km a 10 Km)</string>
@@ -784,8 +784,8 @@
   <string name="attribute_hike_long_no">Não é uma longa caminhada</string>
   <string name="attribute_seasonal_yes">Acesso sazonal</string>
   <string name="attribute_seasonal_no">Não é de acesso sazonal</string>
-  <string name="attribute_touristOK_yes">Turística</string>
-  <string name="attribute_touristOK_no">Não turística</string>
+  <string name="attribute_touristok_yes">Turística</string>
+  <string name="attribute_touristok_no">Não turística</string>
   <string name="attribute_frontyard_yes">Residência privada</string>
   <string name="attribute_frontyard_no">Não é uma residência privada</string>
   <string name="attribute_teamwork_yes">Requer trabalho de equipa</string>
@@ -806,8 +806,8 @@
   <string name="attribute_scuba_no">Não requer equipamento de mergulho</string>
   <string name="attribute_flashlight_yes">Requer lanterna</string>
   <string name="attribute_flashlight_no">Não requer lanterna</string>
-  <string name="attribute_UV_yes">Requer luz UV</string>
-  <string name="attribute_UV_no">Não requer luz UV</string>
+  <string name="attribute_uv_yes">Requer luz UV</string>
+  <string name="attribute_uv_no">Não requer luz UV</string>
   <string name="attribute_snowshoes_yes">Requer calçado de neve</string>
   <string name="attribute_snowshoes_no">Não requer calçado de neve</string>
   <string name="attribute_skiis_yes">Requer equipamento de esqui nórdico</string>

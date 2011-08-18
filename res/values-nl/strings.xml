@@ -781,8 +781,8 @@
   <string name="attribute_nightcache_no">Geen nachtcache</string>
   <string name="attribute_parkngrab_yes">Parkeer en log</string>
   <string name="attribute_parkngrab_no">Geen parkeer en log</string>
-  <string name="attribute_AbandonedBuilding_yes">Verlaten gebouw</string>
-  <string name="attribute_AbandonedBuilding_no">Geen verlaten gebouw</string>
+  <string name="attribute_abandonedbuilding_yes">Verlaten gebouw</string>
+  <string name="attribute_abandonedbuilding_no">Geen verlaten gebouw</string>
   <string name="attribute_hike_short_yes">Korte wandeling (minder dan 1 km)</string>
   <string name="attribute_hike_short_no">Geen korte wandeling</string>
   <string name="attribute_hike_med_yes">Matige wandeling (1 km tot 10 km)</string>
@@ -791,8 +791,8 @@
   <string name="attribute_hike_long_no">Geen lange wandeling</string>
   <string name="attribute_seasonal_yes">Seizoens toegang</string>
   <string name="attribute_seasonal_no">Geen seizoens Toegang</string>
-  <string name="attribute_touristOK_yes">Toerist-vriendelijk</string>
-  <string name="attribute_touristOK_no">Niet toerist-vriendelijk</string>
+  <string name="attribute_touristok_yes">Toerist-vriendelijk</string>
+  <string name="attribute_touristok_no">Niet toerist-vriendelijk</string>
   <string name="attribute_frontyard_yes">Prive woonplaats</string>
   <string name="attribute_frontyard_no">Geen prive woonplaats</string>
   <string name="attribute_teamwork_yes">Teamsamenwerking noodzakelijk</string>
@@ -813,8 +813,8 @@
   <string name="attribute_scuba_no">Geen duikuitrusting nodig</string>
   <string name="attribute_flashlight_yes">Zaklamp benodigd</string>
   <string name="attribute_flashlight_no">Geen zaklamp nodig</string>
-  <string name="attribute_UV_yes">UV lamp benodigd</string>
-  <string name="attribute_UV_no">Geen UV lamp nodig</string>
+  <string name="attribute_uv_yes">UV lamp benodigd</string>
+  <string name="attribute_uv_no">Geen UV lamp nodig</string>
   <string name="attribute_snowshoes_yes">Sneeuwschoenen benodigd</string>
   <string name="attribute_snowshoes_no">Geen sneeuwschoenen nodig</string>
   <string name="attribute_skiis_yes">Langlaufski\'s nodig</string>
