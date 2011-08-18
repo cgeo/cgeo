@@ -570,7 +570,7 @@
 
   <!-- gpx -->
   <string name="gpx_import_loading_stored">Loading caches from .gpx file\nStored:</string>
-  <string name="gpx_import_no_files">Sorry, c:geo did not .gpx files.</string>
+  <string name="gpx_import_no_files">Sorry, c:geo did not find any .gpx files.</string>
   <string name="gpx_import_caches_imported">caches imported</string>
   <string name="gpx_import_loading">Loading caches from .gpx file</string>
   <string name="gpx_import_title">Import GPX</string>
@@ -781,8 +781,8 @@
   <string name="attribute_nightcache_no">No night cache</string>
   <string name="attribute_parkngrab_yes">Park and grab</string>
   <string name="attribute_parkngrab_no">No park and grab</string>
-  <string name="attribute_AbandonedBuilding_yes">Abandoned structure</string>
-  <string name="attribute_AbandonedBuilding_no">No abandoned structure</string>
+  <string name="attribute_abandonedbuilding_yes">Abandoned structure</string>
+  <string name="attribute_abandonedbuilding_no">No abandoned structure</string>
   <string name="attribute_hike_short_yes">Short hike (less than 1 km)</string>
   <string name="attribute_hike_short_no">No short hike</string>
   <string name="attribute_hike_med_yes">Medium hike (1 km to 10 km)</string>
@@ -791,8 +791,8 @@
   <string name="attribute_hike_long_no">No long hike</string>
   <string name="attribute_seasonal_yes">Seasonal access</string>
   <string name="attribute_seasonal_no">No seasonal access</string>
-  <string name="attribute_touristOK_yes">Tourist friendly</string>
-  <string name="attribute_touristOK_no">Not tourist friendly</string>
+  <string name="attribute_touristok_yes">Tourist friendly</string>
+  <string name="attribute_touristok_no">Not tourist friendly</string>
   <string name="attribute_frontyard_yes">Private residence</string>
   <string name="attribute_frontyard_no">No private residence</string>
   <string name="attribute_teamwork_yes">Teamwork required</string>
@@ -813,8 +813,8 @@
   <string name="attribute_scuba_no">Scuba gear not required</string>
   <string name="attribute_flashlight_yes">Flashlight required</string>
   <string name="attribute_flashlight_no">Flashlight not required</string>
-  <string name="attribute_UV_yes">UV light required</string>
-  <string name="attribute_UV_no">UV light not required</string>
+  <string name="attribute_uv_yes">UV light required</string>
+  <string name="attribute_uv_no">UV light not required</string>
   <string name="attribute_snowshoes_yes">Snowshoes required</string>
   <string name="attribute_snowshoes_no">Snowshoes not required</string>
   <string name="attribute_skiis_yes">Cross country skis required</string>

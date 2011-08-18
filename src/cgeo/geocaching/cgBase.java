@@ -1542,7 +1542,7 @@ public class cgBase {
 								int start = imageName.lastIndexOf('/');
 								int end = imageName.lastIndexOf('.');
 								if (start >= 0 && end>= 0) {
-									attribute = imageName.substring(start + 1, end).replace('-', '_');
+									attribute = imageName.substring(start + 1, end).replace('-', '_').toLowerCase();
 								}
 							}
 							cache.attributes.add(attribute);
