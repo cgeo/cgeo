@@ -316,9 +316,9 @@ public class Geopoint
      * @param gp Geopoint to check
      * @return true if identical, false otherwise
      */
-    public boolean equals(Geopoint gp)
+    public boolean isEqualTo(Geopoint gp)
     {
-        return (gp.getLatitude() == latitude && gp.getLongitude() == longitude);
+        return (null != gp && gp.getLatitude() == latitude && gp.getLongitude() == longitude);
     }
 
     /**
@@ -328,9 +328,9 @@ public class Geopoint
      * @param tolerance tolerance in km
      * @return true if similar, false otherwise
      */
-    public boolean equals(Geopoint gp, double tolerance)
+    public boolean isEqualTo(Geopoint gp, double tolerance)
     {
-        return (distanceTo(gp) <= tolerance);
+        return (null != gp && distanceTo(gp) <= tolerance);
     }
 
     /**
