@@ -304,7 +304,7 @@
   <string name="caches_map_cgeo">c:geo</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
-  <string name="caches_recaptcha_explanation">Vul de tekst uit de afbeelding in. Dit is nodig voor het downloaden van de coordinaten van de caches. Dit is optioneel en kan in de instellingen uitgeschakeld worden.</string>
+  <string name="caches_recaptcha_explanation">Vul de tekst uit de afbeelding in. Dit is nodig voor het downloaden van de coördinaten van de caches. Dit is optioneel en kan in de instellingen uitgeschakeld worden.</string>
   <string name="caches_recaptcha_hint">Tekst uit de afbeelding</string>
   <string name="caches_recaptcha_continue">Doorgaan</string>
   <string name="caches_filter">Filter</string>
@@ -444,13 +444,13 @@
     <item>OSM: Offline</item>
   </string-array>
 
-  <string name="init_sendToCgeo">Send to c:geo</string>
-  <string name="init_sendToCgeo_name">Your device name:</string>
-  <string name="init_sendToCgeo_description">Send to c:geo allows you to recieve caches directly from the geocaching site using a special plugin for Firefox or Chrome. Before registration please read <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. You only need to register if you will use send2cgeo. C:geo will also work without registering your device.</string>
-  <string name="init_sendToCgeo_register">Request registration</string>
-  <string name="init_sendToCgeo_registering">Registering your device for "Send to c:geo"...</string>
-  <string name="init_sendToCgeo_register_ok">Registration succesful. PIN code is ####. Use it on c:geo website to add this device to your browser.</string>
-  <string name="init_sendToCgeo_register_fail">Registration failed.</string>
+  <string name="init_sendToCgeo">Verstuur naar c:geo</string>
+  <string name="init_sendToCgeo_name">Jouw apparaatnaam:</string>
+  <string name="init_sendToCgeo_description">Verstuur naar c:geo zorgt ervoor dat je caches direct vanaf de geocaching website kan ontvangen door middel van een plugin in je webbrowser (Firefox of Chrome). Lees het volgende voordat je registreerd <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registratie is alleen nodig als je send2cgeo wil gebruiken. C:geo werkt ook zonder het registreren van je apparaat.</string>
+  <string name="init_sendToCgeo_register">Verstuur registratieverzoek</string>
+  <string name="init_sendToCgeo_registering">Bezig met het registreren voor "Send to c:geo"...</string>
+  <string name="init_sendToCgeo_register_ok">Registratie gelukt. PIN code is ####. Gebruik dit op de c:geo website om dit apparaat aan je browser toe te voegen.</string>
+  <string name="init_sendToCgeo_register_fail">Registratie is niet gelukt.</string>
 
   <!-- auth -->
   <string name="auth_twitter">Twitter</string>
@@ -484,10 +484,10 @@
   <string name="cache_attributes">Attributen</string>
   <string name="cache_inventory">Inventaris</string>
   <string name="cache_log_offline">Offline log</string>
-  <string name="cache_log_images_loading">Loading log Image ...</string>
-  <string name="cache_log_images_title">Log image</string>
-  <string name="cache_log_image_default_title">Photo</string>
-  <string name="cache_personal_note">Personal note</string>
+  <string name="cache_log_images_loading">Laden van logafbeeldingen...</string>
+  <string name="cache_log_images_title">Logafbeelding</string>
+  <string name="cache_log_image_default_title">Foto</string>
+  <string name="cache_personal_note">Persoonlijke aantekening</string>
   <string name="cache_description">Omschrijving</string>
   <string name="cache_description_long">Lange omschrijving</string>
   <string name="cache_watchlist">Watchlist</string>
@@ -557,7 +557,7 @@
   <string name="cache_spoiler_images_title">Spoiler afbeeldingen</string>
   <string name="cache_spoiler_images_loading">Spoiler afbeeldingen laden...</string>
   <string name="cache_log_types">Log types</string> <!-- since: 2.10 RC2 -->
-  <string name="cache_coordinates_no">Deze cache heeft geen coordinaten.</string> <!-- since: 2.26 RC2 -->
+  <string name="cache_coordinates_no">Deze cache heeft geen coördinaten.</string> <!-- since: 2.26 RC2 -->
   <string name="cache_export_fieldnote">Exporteer als Field Notes</string>
   <string name="cache_clear_history">Maak geschiedenis leeg</string>
   <string name="cache_remove_from_history">Verwijder uit geschiedenis</string>
@@ -586,7 +586,7 @@
   <string name="web_import_server_problem">Er is een probleem opgetreden tijdens communicatie met de server. Meld je telefoon opnieuw aan en probeer het nogmaals.</string>
   <string name="web_import_waiting">Aan het wachten voor nieuwe caches van het web...</string>
   <string name="web_downloading">Downloading</string>
-  <string name="web_downloaded">Downloaded</string>
+  <string name="web_downloaded">Gedownload</string>
 
   <!-- event -->
   <string name="event_success">Event cache toegevoegd aan kalender</string>
@@ -600,7 +600,7 @@
   <string name="waypoint">Waypoint</string>
   <string name="waypoint_title">Waypoint</string>
   <string name="waypoint_custom">Aangepast</string>
-  <string name="waypoint_my_coordinates">Mijn coordinaten</string>
+  <string name="waypoint_my_coordinates">Mijn coördinaten</string>
   <string name="waypoint_bearing">Richting</string>
   <string name="waypoint_distance">Afstand</string>
   <string name="waypoint_name">Naam</string>
@@ -611,7 +611,7 @@
   <string name="waypoint_note">Notitie</string>
   <string name="waypoint_save">Opslaan</string>
   <string name="waypoint_loading">Waypoint laden...</string>
-  <string name="waypoint_unknown_coordinates">Coordinaten niet bekend</string>
+  <string name="waypoint_unknown_coordinates">coördinaten niet bekend</string>
   <string name="search_history">Geschiedenis</string>
   <string name="search_history_empty">Geen eerdere bestemmingen</string>
   <string name="search_remove_destination">Bestemming verwijderd</string>
@@ -640,7 +640,7 @@
   <string name="map_live_disable">Live uitzetten</string>
   <string name="map_static_title">Statische kaarten</string>
   <string name="map_static_loading">Statische kaarten laden...</string>
-  <string name="map_token_err">Omdat c:geo alleen gedeeltelijke gegevens kan downloaden, kunnen de coordinaten inaccuraat zijn.</string> <!-- since: 2.26 RC3 -->
+  <string name="map_token_err">Omdat c:geo alleen gedeeltelijke gegevens kan downloaden, kunnen de coördinaten inaccuraat zijn.</string> <!-- since: 2.26 RC3 -->
 
   <!-- search -->
   <string name="search_bar_hint">Zoek naar caches</string>
@@ -803,70 +803,70 @@
   <string name="attribute_partnership_no">Geen partnership cache</string>
 
   <!--  attributes (equipment -> required, not required) -->
-  <string name="attribute_fee_yes">Access or parking fee required</string>
-  <string name="attribute_fee_no">Access or parking fee not required</string>
-  <string name="attribute_rappelling_yes">Climbing gear required</string>
-  <string name="attribute_rappelling_no">Climbing gear not required</string>
-  <string name="attribute_boat_yes">Boat required</string>
-  <string name="attribute_boat_no">Boat not required</string>
-  <string name="attribute_scuba_yes">Scuba gear required</string>
-  <string name="attribute_scuba_no">Scuba gear not required</string>
-  <string name="attribute_flashlight_yes">Flashlight required</string>
-  <string name="attribute_flashlight_no">Flashlight not required</string>
-  <string name="attribute_UV_yes">UV light required</string>
-  <string name="attribute_UV_no">UV light not required</string>
-  <string name="attribute_snowshoes_yes">Snowshoes required</string>
-  <string name="attribute_snowshoes_no">Snowshoes not required</string>
-  <string name="attribute_skiis_yes">Cross country skis required</string>
-  <string name="attribute_skiis_no">Cross country skis not required</string>
-  <string name="attribute_s_tool_yes">Special tools required</string>
-  <string name="attribute_s_tool_no">Special tools not required</string>
+  <string name="attribute_fee_yes">Toegang-of parkeerkosten van toepassing</string>
+  <string name="attribute_fee_no">Geen toegang-of parkeerkosten van toepassing</string>
+  <string name="attribute_rappelling_yes">Klimuitrusting benodigd</string>
+  <string name="attribute_rappelling_no">Geen klimuitrusing nodig</string>
+  <string name="attribute_boat_yes">Bood benodigd</string>
+  <string name="attribute_boat_no">Geen boot nodig</string>
+  <string name="attribute_scuba_yes">Duikuitrusting nodig</string>
+  <string name="attribute_scuba_no">Geen duikuitrusting nodig</string>
+  <string name="attribute_flashlight_yes">Zaklamp benodigd</string>
+  <string name="attribute_flashlight_no">Geen zaklamp nodig</string>
+  <string name="attribute_UV_yes">UV lamp benodigd</string>
+  <string name="attribute_UV_no">Geen UV lamp nodig</string>
+  <string name="attribute_snowshoes_yes">Sneeuwschoenen benodigd</string>
+  <string name="attribute_snowshoes_no">Geen sneeuwschoenen nodig</string>
+  <string name="attribute_skiis_yes">Langlaufski\'s nodig</string>
+  <string name="attribute_skiis_no">Langlaufski\'s niet nodig</string>
+  <string name="attribute_s_tool_yes">Speciate gereedschappen nodig</string>
+  <string name="attribute_s_tool_no">Geen speciale gereedschappen nodig</string>
   <string name="attribute_wirelessbeacon_yes">Wireless beacon</string>
   <string name="attribute_wirelessbeacon_no">No wireless beacon</string>
-  <string name="attribute_treeclimbing_yes">Tree climbing required</string>
-  <string name="attribute_treeclimbing_no">Tree climbing not required</string>
+  <string name="attribute_treeclimbing_yes">Boomklimmen noodzakelijk</string>
+  <string name="attribute_treeclimbing_no">Boomklimmen niet nodig</string>
 
   <!--  attributes (hazards -> present, not present) -->
-  <string name="attribute_poisonoak_yes">Poisonous plants</string>
-  <string name="attribute_poisonoak_no">No poisonous plants</string>
-  <string name="attribute_dangerousanimals_yes">Dangerous animals</string>
-  <string name="attribute_dangerousanimals_no">No dangerous animals</string>
-  <string name="attribute_ticks_yes">Ticks</string>
-  <string name="attribute_ticks_no">No ticks</string>
-  <string name="attribute_mine_yes">Abandoned mines</string>
-  <string name="attribute_mine_no">No abandoned mines</string>
-  <string name="attribute_cliff_yes">Cliff / falling rocks</string>
-  <string name="attribute_cliff_no">No cliff / falling rocks</string>
-  <string name="attribute_hunting_yes">Hunting</string>
-  <string name="attribute_hunting_no">No hunting</string>
-  <string name="attribute_danger_yes">Dangerous area</string>
-  <string name="attribute_danger_no">No dangerous area</string>
-  <string name="attribute_thorn_yes">Thorns</string>
-  <string name="attribute_thorn_no">No thorns</string>
+  <string name="attribute_poisonoak_yes">Giftige planten</string>
+  <string name="attribute_poisonoak_no">Geen giftige planten</string>
+  <string name="attribute_dangerousanimals_yes">Gevaarlijke dieren</string>
+  <string name="attribute_dangerousanimals_no">Geen gevaarlijke dieren</string>
+  <string name="attribute_ticks_yes">Teken</string>
+  <string name="attribute_ticks_no">Geen teken</string>
+  <string name="attribute_mine_yes">Verlaten mijnen</string>
+  <string name="attribute_mine_no">Geen verlaten mijnen</string>
+  <string name="attribute_cliff_yes">Rotswand / vallende rotsen</string>
+  <string name="attribute_cliff_no">Geen rotswand / vallende rotsen</string>
+  <string name="attribute_hunting_yes">Jacht</string>
+  <string name="attribute_hunting_no">Geen jacht</string>
+  <string name="attribute_danger_yes">Gevaarlijk gebied</string>
+  <string name="attribute_danger_no">Geen gevaarlijk gebied</string>
+  <string name="attribute_thorn_yes">Doornen</string>
+  <string name="attribute_thorn_no">Geen doornen</string>
 
   <!--  attributes (facilities -> yes, no) -->
-  <string name="attribute_wheelchair_yes">Wheelchair accessible</string>
-  <string name="attribute_wheelchair_no">Not wheelchair accessible</string>
-  <string name="attribute_parking_yes">Parking available</string>
-  <string name="attribute_parking_no">No parking available</string>
-  <string name="attribute_public_yes">Public transportation</string>
-  <string name="attribute_public_no">No public transportation</string>
-  <string name="attribute_water_yes">Drinking water nearby</string>
-  <string name="attribute_water_no">No drinking water nearby</string>
-  <string name="attribute_restrooms_yes">Public restrooms nearby</string>
-  <string name="attribute_restrooms_no">No public restrooms nearby</string>
-  <string name="attribute_phone_yes">Telephone nearby</string>
-  <string name="attribute_phone_no">No telephone nearby</string>
-  <string name="attribute_picnic_yes">Picnic tables nearby</string>
-  <string name="attribute_picnic_no">No picnic tables nearby</string>
-  <string name="attribute_camping_yes">Camping available</string>
-  <string name="attribute_camping_no">No camping available</string>
-  <string name="attribute_stroller_yes">Stroller accessible</string>
-  <string name="attribute_stroller_no">Not stroller accessible</string>
-  <string name="attribute_fuel_yes">Fuel nearby</string>
-  <string name="attribute_fuel_no">No fuel nearby</string>
-  <string name="attribute_food_yes">Food nearby</string>
-  <string name="attribute_food_no">No food nearby</string>
+  <string name="attribute_wheelchair_yes">Rolstoel toegankelijk</string>
+  <string name="attribute_wheelchair_no">Niet rolstoel toegankelijk</string>
+  <string name="attribute_parking_yes">Parkeerplaats beschikbaar</string>
+  <string name="attribute_parking_no">Geen parkeergelegenheid</string>
+  <string name="attribute_public_yes">Openbaar vervoer</string>
+  <string name="attribute_public_no">Geen openbaar vervoer</string>
+  <string name="attribute_water_yes">Drinkwater in de buurt</string>
+  <string name="attribute_water_no">Geen drinkwater in de buurt</string>
+  <string name="attribute_restrooms_yes">Toilet beschikbaar in de buurt</string>
+  <string name="attribute_restrooms_no">Geen toilet beschikbaar in de buurt</string>
+  <string name="attribute_phone_yes">Telefoon in de buurt</string>
+  <string name="attribute_phone_no">Geen telefoon in de buurt</string>
+  <string name="attribute_picnic_yes">Picnicktafels in de buurt</string>
+  <string name="attribute_picnic_no">Geen picnicktafels in de buurt</string>
+  <string name="attribute_camping_yes">Camping beschikbaar</string>
+  <string name="attribute_camping_no">Geen camping beschikbaar</string>
+  <string name="attribute_stroller_yes">Wandelaar toegankelijk</string>
+  <string name="attribute_stroller_no">Niet wandelaar toegankelijk</string>
+  <string name="attribute_fuel_yes">Brandstof in de buurt</string>
+  <string name="attribute_fuel_no">Geen brandstof in de buurt</string>
+  <string name="attribute_food_yes">Eetgelegenheid in de buurt</string>
+  <string name="attribute_food_no">Geen eetgelegenheid in de buurt</string>
 
   <!-- next things -->
   <string name="legal_note">Voor het gebruik van de diensten van geocaching.com, dient akkoord te worden gegaan met de <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak voorwaarden</a>.</string>
