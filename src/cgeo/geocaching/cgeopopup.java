@@ -134,7 +134,8 @@ public class cgeopopup extends AbstractActivity {
 		SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
 		NavigationAppFactory.addMenuItems(subMenu, this, res);
 
-		menu.add(0, 6, 0, res.getString(R.string.cache_menu_visit)).setIcon(android.R.drawable.ic_menu_agenda); // log visit
+		String label = settings.getLogOffline()? res.getString(R.string.cache_menu_visit_offline) : res.getString(R.string.cache_menu_visit);
+		menu.add(0, 6, 0, label).setIcon(android.R.drawable.ic_menu_agenda); // log visit
 		menu.add(0, 5, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
 		menu.add(0, 7, 0, res.getString(R.string.cache_menu_browser)).setIcon(android.R.drawable.ic_menu_info_details); // browser
 
@@ -179,17 +180,7 @@ public class cgeopopup extends AbstractActivity {
 			cachesAround();
 			return true;
 		} else if (menuItem == 6) {
-			if (cache.cacheid == null || cache.cacheid.length() == 0) {
-				showToast(res.getString(R.string.err_cannot_log_visit));
-				return false;
-			}
-
-			Intent logVisitIntent = new Intent(this, cgeovisit.class);
-			logVisitIntent.putExtra("id", cache.cacheid);
-			logVisitIntent.putExtra("geocode", cache.geocode.toUpperCase());
-			logVisitIntent.putExtra("type", cache.type.toLowerCase());
-			startActivity(logVisitIntent);
-
+			cache.logVisit(this);
 			finish();
 
 			return true;

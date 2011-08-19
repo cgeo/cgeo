@@ -403,6 +403,7 @@
   <string name="init_nav">Google Navigation verwenden</string>
   <string name="init_autoload">Ausführliche Beschreibung automatisch laden</string>
   <string name="init_livelist">Richtung zum Cache in der Cache-Liste anzeigen</string>
+  <string name="init_log_offline">Offline loggen (Dialog für Online-Log nicht anzeigen)</string>
   <string name="init_browser">c:geo als normalen Internet-Browser tarnen</string>
   <string name="init_altitude">Höhenkorrektur</string>
   <string name="init_altitude_description">Falls das GPS eine falsche Höhe ermittelt, kannst du diese durch Angabe eines positiven oder negativen Wertes in Metern korrigieren.</string>
@@ -515,6 +516,7 @@
   <string name="cache_menu_map_ext_short">Externe Karte</string>
   <string name="cache_menu_browser">Im Browser öffnen</string>
   <string name="cache_menu_visit">Besuch loggen</string>
+  <string name="cache_menu_visit_offline">Besuch offline loggen (beim Loggen keinen Dialog anzeigen, Status immer auf \'Gefunden\' setzen, nicht online senden)</string>
   <string name="cache_menu_spoilers">Hinweisbild</string>
   <string name="cache_menu_around">Caches im Umkreis</string>
   <string name="cache_menu_event">Zum Kalender hinzufügen</string>

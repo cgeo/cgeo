@@ -398,6 +398,17 @@ public class cgeoinit extends AbstractActivity {
 		}
 		gnavButton.setOnClickListener(new cgeoChangeGNav());
 
+		final CheckBox logOffline = (CheckBox) findViewById(R.id.log_offline);
+		logOffline.setChecked(settings.getLogOffline());
+		logOffline.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				settings.setLogOffline(!settings.getLogOffline());
+				logOffline.setChecked(settings.getLogOffline());
+			}
+		});
+
 		CheckBox browserButton = (CheckBox) findViewById(R.id.browser);
 		if (prefs.getInt("asbrowser", 1) == 0) {
 			browserButton.setChecked(false);

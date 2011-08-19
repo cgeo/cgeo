@@ -1,6 +1,7 @@
 package cgeo.geocaching.activity;
 
 import android.view.View;
+import cgeo.geocaching.cgSettings;
 
 public interface IAbstractActivity {
 	public void goHome(View view);
@@ -18,5 +19,10 @@ public interface IAbstractActivity {
 	public void helpDialog(String title, String message);
 
 	public void setTitle(final String title);
+
+	/**
+	 * TODO: remove after settings are a singleton
+	 */
+	public cgSettings getSettings();
 
 }

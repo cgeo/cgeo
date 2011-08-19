@@ -28,6 +28,11 @@ import android.widget.TextView;
 import cgeo.geocaching.LogTemplateProvider.LogTemplate;
 
 public class cgeovisit extends cgLogForm {
+	static final String EXTRAS_FOUND = "found";
+	static final String EXTRAS_TEXT = "text";
+	static final String EXTRAS_GEOCODE = "geocode";
+	static final String EXTRAS_ID = "id";
+	
 	private static final int MENU_SIGNATURE = 1;
 	private static final int SUBMENU_VOTE = 2;
 	
@@ -121,7 +126,7 @@ public class cgeovisit extends cgLogForm {
 
 						public void onClick(View view) {
 							final Intent trackablesIntent = new Intent(cgeovisit.this, cgeotrackable.class);
-							trackablesIntent.putExtra("geocode", tbCode);
+							trackablesIntent.putExtra(EXTRAS_GEOCODE, tbCode);
 							startActivity(trackablesIntent);
 						}
 					});
@@ -223,10 +228,10 @@ public class cgeovisit extends cgLogForm {
 		// get parameters
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
-			cacheid = extras.getString("id");
-			geocode = extras.getString("geocode");
-			text = extras.getString("text");
-			alreadyFound = extras.getBoolean("found");
+			cacheid = extras.getString(EXTRAS_ID);
+			geocode = extras.getString(EXTRAS_GEOCODE);
+			text = extras.getString(EXTRAS_TEXT);
+			alreadyFound = extras.getBoolean(EXTRAS_FOUND);
 		}
 
 		if ((cacheid == null || cacheid.length() == 0) && geocode != null && geocode.length() > 0) {
@@ -591,7 +596,14 @@ public class cgeovisit extends cgLogForm {
 		if (save == null) {
 			save = (Button) findViewById(R.id.save);
 		}
-		save.setOnClickListener(new saveListener());
+		save.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				String log = ((EditText) findViewById(R.id.log)).getText().toString();
+				cache.logOffline(cgeovisit.this, log, date);
+			}
+		});
 
 		if (clear == null) {
 			clear = (Button) findViewById(R.id.clear);
@@ -669,25 +681,6 @@ public class cgeovisit extends cgLogForm {
 				thread.start();
 			} else {
 				showToast(res.getString(R.string.err_log_load_data_still));
-			}
-		}
-	}
-
-	private class saveListener implements View.OnClickListener {
-
-		public void onClick(View arg0) {
-			String log = ((EditText) findViewById(R.id.log)).getText().toString();
-			final boolean status = app.saveLogOffline(geocode, date.getTime(), typeSelected, log);
-			if (save == null) {
-				save = (Button) findViewById(R.id.save);
-			}
-			save.setOnClickListener(new saveListener());
-
-			if (status) {
-				showToast(res.getString(R.string.info_log_saved));
-				app.saveVisitDate(geocode);
-			} else {
-				showToast(res.getString(R.string.err_log_post_failed));
 			}
 		}
 	}
@@ -862,4 +855,5 @@ public class cgeovisit extends cgLogForm {
 
 		return 1000;
 	}
+
 }

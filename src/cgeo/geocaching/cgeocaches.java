@@ -1091,7 +1091,8 @@ public class cgeocaches extends AbstractListActivity {
 				menu.add(0, MENU_COMPASS, 0, res.getString(R.string.cache_menu_compass));
 				SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
 				NavigationAppFactory.addMenuItems(subMenu, this, res);
-				menu.add(0, MENU_LOG_VISIT, 0, res.getString(R.string.cache_menu_visit));
+				String label = settings.getLogOffline()? res.getString(R.string.cache_menu_visit_offline) : res.getString(R.string.cache_menu_visit);
+				menu.add(0, MENU_LOG_VISIT, 0, label);
 				menu.add(0, MENU_CACHE_DETAILS, 0, res.getString(R.string.cache_menu_details));
 			}
 			if (cache.reason >= 1) {
@@ -1159,19 +1160,7 @@ public class cgeocaches extends AbstractListActivity {
 
 			return true;
 		} else if (id == MENU_LOG_VISIT) {
-			if (cache.cacheid == null || cache.cacheid.length() == 0) {
-				showToast(res.getString(R.string.err_cannot_log_visit));
-				return true;
-			}
-
-			Intent logVisitIntent = new Intent(this, cgeovisit.class);
-			logVisitIntent.putExtra("id", cache.cacheid);
-			logVisitIntent.putExtra("geocode", cache.geocode.toUpperCase());
-			logVisitIntent.putExtra("type", cache.type.toLowerCase());
-
-			startActivity(logVisitIntent);
-
-			return true;
+			return cache.logVisit(this);
 		} else if (id == MENU_CACHE_DETAILS) {
 			Intent cachesIntent = new Intent(this, cgeodetail.class);
 			cachesIntent.putExtra("geocode", cache.geocode.toUpperCase());

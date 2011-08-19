@@ -71,4 +71,8 @@ public abstract class AbstractListActivity extends ListActivity implements
 	final public void setTitle(final String title) {
 		ActivityMixin.setTitle(this, title);
 	}
+	
+	final public cgSettings getSettings() {
+		return settings;
+	}
 }

@@ -110,10 +110,6 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 		getSettings().load();
 	}
 
-	final protected cgSettings getSettings() {
-		return settings;
-	}
-
 	protected abstract T getAdapter(ArrayList<File> files);
 
 	private void setAdapter() {

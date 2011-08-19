@@ -471,7 +471,8 @@ public class cgeodetail extends AbstractActivity {
 			menu.add(1, 11, 0, res.getString(R.string.cache_menu_event)).setIcon(android.R.drawable.ic_menu_agenda); // add event to calendar
 		}
 		if (settings.isLogin()) {
-			menu.add(1, 3, 0, res.getString(R.string.cache_menu_visit)).setIcon(android.R.drawable.ic_menu_agenda); // log visit
+			String label = settings.getLogOffline()? res.getString(R.string.cache_menu_visit_offline) : res.getString(R.string.cache_menu_visit);
+			menu.add(1, 3, 0, label).setIcon(android.R.drawable.ic_menu_agenda); // log visit
 		}
 
 		if (cache != null && cache.spoilers != null && cache.spoilers.size() > 0) {
@@ -1561,12 +1562,7 @@ public class cgeodetail extends AbstractActivity {
 	}
 
 	private void logVisit() {
-		Intent logVisitIntent = new Intent(this, cgeovisit.class);
-		logVisitIntent.putExtra("id", cache.cacheid);
-		logVisitIntent.putExtra("geocode", cache.geocode.toUpperCase());
-		logVisitIntent.putExtra("type", cache.type.toLowerCase());
-		logVisitIntent.putExtra("found", cache.found);
-		startActivity(logVisitIntent);
+		cache.logVisit(this);
 	}
 
 	private void showSpoilers() {

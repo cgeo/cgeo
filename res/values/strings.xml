@@ -412,6 +412,7 @@
   <string name="init_nav">Use Google Navigation</string>
   <string name="init_autoload">Auto-loading long description</string>
   <string name="init_livelist">Show direction to caches in its list</string>
+  <string name="init_log_offline">When logging, always log offline (don\'t show online log screen when logging, don\'t send the log online)</string>
   <string name="init_browser">Identify c:geo as standard browser</string>
   <string name="init_altitude">Altitude correction</string>
   <string name="init_altitude_description">If GPS is giving wrong altitude to you, you can correct with a positive or negative number. Correction is always in metres.</string>
@@ -524,6 +525,7 @@
   <string name="cache_menu_map_ext_short">Ext. map</string>
   <string name="cache_menu_browser">Open in browser</string>
   <string name="cache_menu_visit">Log visit</string>
+  <string name="cache_menu_visit_offline">Log visit offline</string>
   <string name="cache_menu_spoilers">Spoiler images</string>
   <string name="cache_menu_around">Caches around</string>
   <string name="cache_menu_event">Add to calendar</string>

@@ -1,13 +1,18 @@
 package cgeo.geocaching;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.content.res.Resources;
 import android.text.Spannable;
 import android.util.Log;
+import cgeo.geocaching.activity.IAbstractActivity;
 
 public class cgCache {
 
@@ -270,5 +275,37 @@ public class cgCache {
 		return (type.equalsIgnoreCase("event") || type.equalsIgnoreCase("mega") || type.equalsIgnoreCase("cito"));
 	}
 
+	public boolean logVisit(IAbstractActivity fromActivity) {
+		if (cacheid == null || cacheid.length() == 0) {
+			fromActivity.showToast(((Activity)fromActivity).getResources().getString(R.string.err_cannot_log_visit));
+			return true;
+		}
+		if (fromActivity.getSettings().getLogOffline()) {
+			logOffline(fromActivity, "", Calendar.getInstance());
+			return true;
+		}
+
+		Intent logVisitIntent = new Intent((Activity)fromActivity, cgeovisit.class);
+		logVisitIntent.putExtra(cgeovisit.EXTRAS_ID, cacheid);
+		logVisitIntent.putExtra(cgeovisit.EXTRAS_GEOCODE, geocode.toUpperCase());
+		logVisitIntent.putExtra(cgeovisit.EXTRAS_FOUND, found);
+
+		((Activity)fromActivity).startActivity(logVisitIntent);
+
+		return true;
+	}
+	
+	void logOffline(final IAbstractActivity fromActivity, final String log, Calendar date) {
+		cgeoapplication app = (cgeoapplication)((Activity)fromActivity).getApplication();
+		final boolean status = app.saveLogOffline(geocode, date.getTime(), cgBase.LOG_FOUND_IT, log);
+		
+		Resources res = ((Activity)fromActivity).getResources();
+		if (status) {
+			fromActivity.showToast(res.getString(R.string.info_log_saved));
+			app.saveVisitDate(geocode);
+		} else {
+			fromActivity.showToast(res.getString(R.string.err_log_post_failed));
+		}
+	}
 
 }

@@ -71,4 +71,7 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
 		base = new cgBase(app, settings, prefs);
 	}
 
+	final public cgSettings getSettings() {
+		return settings;
+	}
 }

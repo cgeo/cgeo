@@ -54,6 +54,7 @@ public class cgSettings {
 	private static final String KEY_PASSWORD = "password";
 	private static final String KEY_USERNAME = "username";
 	private static final String KEY_COORD_INPUT_FORMAT = "coordinputformat";
+	private static final String KEY_LOG_OFFLINE = "log_offline";
 
 	private interface PrefRunnable {
 		void edit(final Editor edit);
@@ -579,6 +580,20 @@ public class cgSettings {
 		final SharedPreferences.Editor prefsEdit = prefs.edit();
 		runnable.edit(prefsEdit);
 		return prefsEdit.commit();
+	}
+	
+	void setLogOffline(final boolean offline) {
+		editSettings(new PrefRunnable() {
+
+			@Override
+			public void edit(Editor edit) {
+				edit.putBoolean(KEY_LOG_OFFLINE, offline);
+			}
+		});
+	}
+	
+	public boolean getLogOffline() {
+		return prefs.getBoolean(KEY_LOG_OFFLINE, false);
 	}
 
 }
