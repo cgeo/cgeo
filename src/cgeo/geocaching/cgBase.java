@@ -28,8 +28,8 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
+import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
@@ -93,7 +93,7 @@ public class cgBase {
 	private final static Pattern patternCountLogs = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p>(.*)<\\/p><\\/span>", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternCountLog = Pattern.compile(" src=\"\\/images\\/icons\\/([^\\.]*).gif\" alt=\"[^\"]*\" title=\"[^\"]*\" />([0-9]*)[^0-9]+", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	private final static Pattern patternLogs = Pattern.compile("<table class=\"LogsTable[^\"]*\"[^>]*>[^<]*<tr>(.*)</tr>[^<]*</table>[^<]*<p", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-	private final static Pattern patternLog = Pattern.compile("<td[^>]*>[^<]*<strong>[^<]*<img src=\"[^\"]*/images/icons/([^\\.]+)\\.[a-z]{2,5}\"[^>]*>&nbsp;([a-zA-Z]+) (\\d+)(, (\\d+))? by <a href=[^>]+>([^<]+)</a>[<^]*</strong>([^\\(]*\\((\\d+) found\\))?(<br[^>]*>)+((?:(?!<small>).)*)(<br[^>]*>)+<small>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+	private final static Pattern patternLog = Pattern.compile("<td.*?<a href=\"/profile/\\?guid=[^>]*>([^<]+)</a>.*LogType.*?<img.*?/images/icons/([^\\.]+)\\.[^>]*title=\"([^\"]+)\".*LogDate[^>]*>([^<]+)<.*LogText[^>]*>([^<]+)<.*", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	private final static Pattern patternLogImgs = Pattern.compile("a href=\"http://img.geocaching.com/cache/log/([^\"]+)\".+?<span>([^<]*)", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternAttributes = Pattern.compile("<h3 class=\"WidgetHeader\">[^<]*<img[^>]+>\\W*Attributes[^<]*</h3>[^<]*<div class=\"WidgetBody\">(([^<]*<img src=\"[^\"]+\" alt=\"[^\"]+\"[^>]*>)+)[^<]*<p", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternAttributesInside = Pattern.compile("[^<]*<img src=\"([^\"]+)\" alt=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
@@ -1672,81 +1672,81 @@ public class cgBase {
 						if (matcherLog.find()) {
 							final cgLog logDone = new cgLog();
 
-							String logTmp = matcherLog.group(10);
+							String logTmp = matcherLog.group(5);
 
-							int day = -1;
-							try {
-								day = Integer.parseInt(matcherLog.group(3));
-							} catch (Exception e) {
-								Log.w(cgSettings.tag, "Failed to parse logs date (day): " + e.toString());
-							}
+//							int day = -1;
+//							try {
+//								day = Integer.parseInt(matcherLog.group(3));
+//							} catch (Exception e) {
+//								Log.w(cgSettings.tag, "Failed to parse logs date (day): " + e.toString());
+//							}
+//
+//							int month = -1;
+//							// January  | February  | March  | April  | May | June | July | August  | September | October  | November  | December
+//							if (matcherLog.group(2).equalsIgnoreCase("January")) {
+//								month = 0;
+//							} else if (matcherLog.group(2).equalsIgnoreCase("February")) {
+//								month = 1;
+//							} else if (matcherLog.group(2).equalsIgnoreCase("March")) {
+//								month = 2;
+//							} else if (matcherLog.group(2).equalsIgnoreCase("April")) {
+//								month = 3;
+//							} else if (matcherLog.group(2).equalsIgnoreCase("May")) {
+//								month = 4;
+//							} else if (matcherLog.group(2).equalsIgnoreCase("June")) {
+//								month = 5;
+//							} else if (matcherLog.group(2).equalsIgnoreCase("July")) {
+//								month = 6;
+//							} else if (matcherLog.group(2).equalsIgnoreCase("August")) {
+//								month = 7;
+//							} else if (matcherLog.group(2).equalsIgnoreCase("September")) {
+//								month = 8;
+//							} else if (matcherLog.group(2).equalsIgnoreCase("October")) {
+//								month = 9;
+//							} else if (matcherLog.group(2).equalsIgnoreCase("November")) {
+//								month = 10;
+//							} else if (matcherLog.group(2).equalsIgnoreCase("December")) {
+//								month = 11;
+//							} else {
+//								Log.w(cgSettings.tag, "Failed to parse logs date (month).");
+//							}
+//
+//
+//							int year = -1;
+//							final String yearPre = matcherLog.group(5);
+//
+//							if (yearPre == null) {
+//								Calendar date = Calendar.getInstance();
+//								year = date.get(Calendar.YEAR);
+//							} else {
+//								try {
+//									year = Integer.parseInt(matcherLog.group(5));
+//								} catch (Exception e) {
+//									Log.w(cgSettings.tag, "Failed to parse logs date (year): " + e.toString());
+//								}
+//							}
+//
+//							long logDate;
+//							if (year > 0 && month >= 0 && day > 0) {
+//								Calendar date = Calendar.getInstance();
+//								date.set(year, month, day, 12, 0, 0);
+//								logDate = date.getTimeInMillis();
+//								logDate = (logDate / 1000L) * 1000L;
+//							} else {
+//								logDate = 0;
+//							}
 
-							int month = -1;
-							// January  | February  | March  | April  | May | June | July | August  | September | October  | November  | December
-							if (matcherLog.group(2).equalsIgnoreCase("January")) {
-								month = 0;
-							} else if (matcherLog.group(2).equalsIgnoreCase("February")) {
-								month = 1;
-							} else if (matcherLog.group(2).equalsIgnoreCase("March")) {
-								month = 2;
-							} else if (matcherLog.group(2).equalsIgnoreCase("April")) {
-								month = 3;
-							} else if (matcherLog.group(2).equalsIgnoreCase("May")) {
-								month = 4;
-							} else if (matcherLog.group(2).equalsIgnoreCase("June")) {
-								month = 5;
-							} else if (matcherLog.group(2).equalsIgnoreCase("July")) {
-								month = 6;
-							} else if (matcherLog.group(2).equalsIgnoreCase("August")) {
-								month = 7;
-							} else if (matcherLog.group(2).equalsIgnoreCase("September")) {
-								month = 8;
-							} else if (matcherLog.group(2).equalsIgnoreCase("October")) {
-								month = 9;
-							} else if (matcherLog.group(2).equalsIgnoreCase("November")) {
-								month = 10;
-							} else if (matcherLog.group(2).equalsIgnoreCase("December")) {
-								month = 11;
-							} else {
-								Log.w(cgSettings.tag, "Failed to parse logs date (month).");
-							}
-
-
-							int year = -1;
-							final String yearPre = matcherLog.group(5);
-
-							if (yearPre == null) {
-								Calendar date = Calendar.getInstance();
-								year = date.get(Calendar.YEAR);
-							} else {
-								try {
-									year = Integer.parseInt(matcherLog.group(5));
-								} catch (Exception e) {
-									Log.w(cgSettings.tag, "Failed to parse logs date (year): " + e.toString());
-								}
-							}
-
-							long logDate;
-							if (year > 0 && month >= 0 && day > 0) {
-								Calendar date = Calendar.getInstance();
-								date.set(year, month, day, 12, 0, 0);
-								logDate = date.getTimeInMillis();
-								logDate = (logDate / 1000L) * 1000L;
-							} else {
-								logDate = 0;
-							}
-
-							if (logTypes.containsKey(matcherLog.group(1).toLowerCase())) {
-								logDone.type = logTypes.get(matcherLog.group(1).toLowerCase());
+							if (logTypes.containsKey(matcherLog.group(2).toLowerCase())) {
+								logDone.type = logTypes.get(matcherLog.group(2).toLowerCase());
 							} else {
 								logDone.type = logTypes.get("icon_note");
 							}
 
-							logDone.author = Html.fromHtml(matcherLog.group(6)).toString();
-							logDone.date = logDate;
-							if (matcherLog.group(8) != null) {
-								logDone.found = new Integer(matcherLog.group(8));
-							}
+							logDone.author = Html.fromHtml(matcherLog.group(1)).toString();
+							//logDone.date = logDate;
+//							if (matcherLog.group(8) != null) {
+//								logDone.found = new Integer(matcherLog.group(8));
+//							}
 
 							final Matcher matcherImg = patternLogImgs.matcher(logs[k]);
 
