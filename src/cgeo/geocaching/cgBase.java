@@ -28,8 +28,8 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
@@ -93,7 +93,7 @@ public class cgBase {
 	private final static Pattern patternCountLogs = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p>(.*)<\\/p><\\/span>", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternCountLog = Pattern.compile(" src=\"\\/images\\/icons\\/([^\\.]*).gif\" alt=\"[^\"]*\" title=\"[^\"]*\" />([0-9]*)[^0-9]+", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	private final static Pattern patternLogs = Pattern.compile("<table class=\"LogsTable[^\"]*\"[^>]*>[^<]*<tr>(.*)</tr>[^<]*</table>[^<]*<p", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-	private final static Pattern patternLog = Pattern.compile("<td.*?<a href=\"/profile/\\?guid=[^>]*>([^<]+)</a>.*LogType.*?<img.*?/images/icons/([^\\.]+)\\.[^>]*title=\"([^\"]+)\".*LogDate[^>]*>([^<]+)<.*LogText[^>]*>([^<]+)<.*", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+	private final static Pattern patternLog = Pattern.compile("<td.*?<a href=\"/profile/\\?guid=[^>]*>([^<]+)</a>.*LogType.*?<img.*?/images/icons/([^\\.]+)\\.[^>]*title=\"([^\"]+)\".*LogDate[^>]*>([^<]+)<.*LogText[^>]*>(.*?)</p>.*", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	private final static Pattern patternLogImgs = Pattern.compile("a href=\"http://img.geocaching.com/cache/log/([^\"]+)\".+?<span>([^<]*)", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternAttributes = Pattern.compile("<h3 class=\"WidgetHeader\">[^<]*<img[^>]+>\\W*Attributes[^<]*</h3>[^<]*<div class=\"WidgetBody\">(([^<]*<img src=\"[^\"]+\" alt=\"[^\"]+\"[^>]*>)+)[^<]*<p", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternAttributesInside = Pattern.compile("[^<]*<img src=\"([^\"]+)\" alt=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
