@@ -92,9 +92,9 @@ public class cgBase {
 	private final static Pattern patternDesc = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>" + "(.*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternCountLogs = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p>(.*)<\\/p><\\/span>", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternCountLog = Pattern.compile(" src=\"\\/images\\/icons\\/([^\\.]*).gif\" alt=\"[^\"]*\" title=\"[^\"]*\" />([0-9]*)[^0-9]+", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-	private final static Pattern patternLogs = Pattern.compile("<table class=\"LogsTable[^\"]*\"[^>]*>[^<]*<tr>(.*)</tr>[^<]*</table>[^<]*<p", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-	private final static Pattern patternLog = Pattern.compile("<td.*?<a href=\"/profile/\\?guid=[^>]*>([^<]+)</a>.*LogType.*?<img.*?/images/icons/([^\\.]+)\\.[^>]*title=\"([^\"]+)\".*LogDate[^>]*>([^<]+)<.*LogText[^>]*>(.*?)</p>.*", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-	private final static Pattern patternLogImgs = Pattern.compile("a href=\"http://img.geocaching.com/cache/log/([^\"]+)\".+?<span>([^<]*)", Pattern.CASE_INSENSITIVE);
+	private final static Pattern patternLogs = Pattern.compile("<table class=\"LogsTable\">(.*?)</table>\\s*<p", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+	private final static Pattern patternLog = Pattern.compile("<tr><td class.+?<a href=\"/profile/\\?guid=.+?>(.+?)</a>.+?logOwnerStats.+?guid.+?>(\\d+)</a>.+?LogType.+?<img.+?/images/icons/([^\\.]+)\\..+?title=\"(.+?)\".+?LogDate.+?>(.+?)<.+?LogText.+?>(.*?)</p>(.*?)</div></div></div></td></tr>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+	private final static Pattern patternLogImgs = Pattern.compile("href=\"(http://img.geocaching.com/cache/log/.+?)\".+?<span>([^<]*)", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternAttributes = Pattern.compile("<h3 class=\"WidgetHeader\">[^<]*<img[^>]+>\\W*Attributes[^<]*</h3>[^<]*<div class=\"WidgetBody\">(([^<]*<img src=\"[^\"]+\" alt=\"[^\"]+\"[^>]*>)+)[^<]*<p", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternAttributesInside = Pattern.compile("[^<]*<img src=\"([^\"]+)\" alt=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternSpoilers = Pattern.compile("<span id=\"ctl00_ContentBody_Images\">((<a href=\"[^\"]+\"[^>]*>[^<]*<img[^>]+>[^<]*<span>[^>]+</span>[^<]*</a>[^<]*<br[^>]*>([^<]*(<br[^>]*>)+)?)+)[^<]*</span>", Pattern.CASE_INSENSITIVE);
@@ -1659,118 +1659,65 @@ public class cgBase {
 		}
 
 		// cache logs
-		try {
-			final Matcher matcherLogs = patternLogs.matcher(page);
-			while (matcherLogs.find()) {
-				if (matcherLogs.groupCount() > 0) {
-					final String[] logs = matcherLogs.group(1).split("</tr><tr>");
-					final int logsCnt = logs.length;
+		try
+		{
+//			final Matcher matcherLogs = patternLogs.matcher(page);
+//			
+//			if (matcherLogs.find())
+//			{
+		        /*
+		        1- Author
+		        2- Finds-count
+                3- Log type image name (e.g. "icon_smile")
+                4- Type string (e.g. "Found it")
+                5- Date string (e.g. "about 4 days ago")
+                6- Log text
+                7- The rest (e.g. log-images, maybe faster)
+		        */
+			    final Matcher matcherLog = patternLog.matcher(page);//(matcherLogs.group(1));
+			    
+				while (matcherLog.find())
+				{
+					final cgLog logDone = new cgLog();
 
-					for (int k = 0; k < logsCnt; k++) {
-						final Matcher matcherLog = patternLog.matcher(logs[k]);
-
-						if (matcherLog.find()) {
-							final cgLog logDone = new cgLog();
-
-							String logTmp = matcherLog.group(5);
-
-//							int day = -1;
-//							try {
-//								day = Integer.parseInt(matcherLog.group(3));
-//							} catch (Exception e) {
-//								Log.w(cgSettings.tag, "Failed to parse logs date (day): " + e.toString());
-//							}
-//
-//							int month = -1;
-//							// January  | February  | March  | April  | May | June | July | August  | September | October  | November  | December
-//							if (matcherLog.group(2).equalsIgnoreCase("January")) {
-//								month = 0;
-//							} else if (matcherLog.group(2).equalsIgnoreCase("February")) {
-//								month = 1;
-//							} else if (matcherLog.group(2).equalsIgnoreCase("March")) {
-//								month = 2;
-//							} else if (matcherLog.group(2).equalsIgnoreCase("April")) {
-//								month = 3;
-//							} else if (matcherLog.group(2).equalsIgnoreCase("May")) {
-//								month = 4;
-//							} else if (matcherLog.group(2).equalsIgnoreCase("June")) {
-//								month = 5;
-//							} else if (matcherLog.group(2).equalsIgnoreCase("July")) {
-//								month = 6;
-//							} else if (matcherLog.group(2).equalsIgnoreCase("August")) {
-//								month = 7;
-//							} else if (matcherLog.group(2).equalsIgnoreCase("September")) {
-//								month = 8;
-//							} else if (matcherLog.group(2).equalsIgnoreCase("October")) {
-//								month = 9;
-//							} else if (matcherLog.group(2).equalsIgnoreCase("November")) {
-//								month = 10;
-//							} else if (matcherLog.group(2).equalsIgnoreCase("December")) {
-//								month = 11;
-//							} else {
-//								Log.w(cgSettings.tag, "Failed to parse logs date (month).");
-//							}
-//
-//
-//							int year = -1;
-//							final String yearPre = matcherLog.group(5);
-//
-//							if (yearPre == null) {
-//								Calendar date = Calendar.getInstance();
-//								year = date.get(Calendar.YEAR);
-//							} else {
-//								try {
-//									year = Integer.parseInt(matcherLog.group(5));
-//								} catch (Exception e) {
-//									Log.w(cgSettings.tag, "Failed to parse logs date (year): " + e.toString());
-//								}
-//							}
-//
-//							long logDate;
-//							if (year > 0 && month >= 0 && day > 0) {
-//								Calendar date = Calendar.getInstance();
-//								date.set(year, month, day, 12, 0, 0);
-//								logDate = date.getTimeInMillis();
-//								logDate = (logDate / 1000L) * 1000L;
-//							} else {
-//								logDate = 0;
-//							}
-
-							if (logTypes.containsKey(matcherLog.group(2).toLowerCase())) {
-								logDone.type = logTypes.get(matcherLog.group(2).toLowerCase());
-							} else {
-								logDone.type = logTypes.get("icon_note");
-							}
-
-							logDone.author = Html.fromHtml(matcherLog.group(1)).toString();
-							//logDone.date = logDate;
-//							if (matcherLog.group(8) != null) {
-//								logDone.found = new Integer(matcherLog.group(8));
-//							}
-
-							final Matcher matcherImg = patternLogImgs.matcher(logs[k]);
-
-							while (matcherImg.find()) {
-								final cgImage logImage = new cgImage();
-								logImage.url = "http://img.geocaching.com/cache/log/" + matcherImg.group(1);
-								logImage.title = matcherImg.group(2);
-								if (logDone.logImages == null) {
-									logDone.logImages = new ArrayList<cgImage>();
-								}
-								logDone.logImages.add(logImage);
-							}
-
-							logDone.log = logTmp;
-
-							if (cache.logs == null) {
-								cache.logs = new ArrayList<cgLog>();
-							}
-							cache.logs.add(logDone);
-						}
+					if (logTypes.containsKey(matcherLog.group(3).toLowerCase()))
+					{
+						logDone.type = logTypes.get(matcherLog.group(3).toLowerCase());
 					}
+					else
+					{
+						logDone.type = logTypes.get("icon_note");
+					}
+
+					logDone.author = Html.fromHtml(matcherLog.group(1)).toString();
+
+					logDone.found = Integer.parseInt(matcherLog.group(2));
+					
+					logDone.log = matcherLog.group(6);
+
+					final Matcher matcherImg = patternLogImgs.matcher(matcherLog.group(7));
+					while (matcherImg.find())
+					{
+						final cgImage logImage = new cgImage();
+						logImage.url = matcherImg.group(1);
+						logImage.title = matcherImg.group(2);
+						if (logDone.logImages == null)
+						{
+							logDone.logImages = new ArrayList<cgImage>();
+						}
+						logDone.logImages.add(logImage);
+					}
+
+					if (null == cache.logs)
+					{
+						cache.logs = new ArrayList<cgLog>();
+					}
+					cache.logs.add(logDone);
 				}
-			}
-		} catch (Exception e) {
+//			}
+		}
+		catch (Exception e)
+		{
 			// failed to parse logs
 			Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache logs");
 		}
