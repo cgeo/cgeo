@@ -1146,7 +1146,9 @@ public class cgeodetail extends AbstractActivity {
 
 				if (log.date > 0) {
 					((TextView) rowView.findViewById(R.id.added)).setText(base.formatShortDate(log.date));
-				}
+				} else {
+				    ((TextView) rowView.findViewById(R.id.added)).setVisibility(View.GONE);
+		        }
 
 				if (cgBase.logTypes1.containsKey(log.type)) {
 					((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(log.type));
@@ -1206,25 +1208,34 @@ public class cgeodetail extends AbstractActivity {
 					}
 				}
 
-				final ImageView markFound = (ImageView) rowView.findViewById(R.id.found_mark);
-				final ImageView markDNF = (ImageView) rowView.findViewById(R.id.dnf_mark);
-				final ImageView markDisabled = (ImageView) rowView.findViewById(R.id.disabled_mark);
-				if (log.type == 2 || log.type == 9 || log.type == 10) { // found, will attend, attended
-					markFound.setVisibility(View.VISIBLE);
-					markDNF.setVisibility(View.GONE);
-					markDisabled.setVisibility(View.GONE);
-				} else if (log.type == 3) { // did not find
-					markFound.setVisibility(View.GONE);
-					markDNF.setVisibility(View.VISIBLE);
-					markDisabled.setVisibility(View.GONE);
-				} else if (log.type == 7 || log.type == 8) { // disabled, archived
-					markFound.setVisibility(View.GONE);
-					markDNF.setVisibility(View.GONE);
-					markDisabled.setVisibility(View.VISIBLE);
-				} else {
-					markFound.setVisibility(View.GONE);
-					markDNF.setVisibility(View.GONE);
-					markDisabled.setVisibility(View.GONE);
+				// Add colored mark
+				final ImageView logMark = (ImageView) rowView.findViewById(R.id.log_mark);
+				if (log.type == cgBase.LOG_FOUND_IT
+				        || log.type == cgBase.LOG_WEBCAM_PHOTO_TAKEN
+				        || log.type == cgBase.LOG_ATTENDED)
+				{
+				    logMark.setImageResource(R.drawable.mark_green);
+				}
+				else if (log.type == cgBase.LOG_PUBLISH_LISTING
+                        || log.type == cgBase.LOG_ENABLE_LISTING
+                        || log.type == cgBase.LOG_OWNER_MAINTENANCE)
+                {
+                    logMark.setImageResource(R.drawable.mark_green_more);
+                }
+				else if (log.type == cgBase.LOG_DIDNT_FIND_IT
+				        || log.type == cgBase.LOG_NEEDS_MAINTENANCE
+				        || log.type == cgBase.LOG_NEEDS_ARCHIVE)
+				{
+				    logMark.setImageResource(R.drawable.mark_red);
+				}
+				else if (log.type == cgBase.LOG_TEMP_DISABLE_LISTING
+				        || log.type == cgBase.LOG_ARCHIVE)
+				{
+				    logMark.setImageResource(R.drawable.mark_red_more);
+				}
+				else
+				{
+				    logMark.setVisibility(View.GONE);
 				}
 
 				((TextView) rowView.findViewById(R.id.author)).setOnClickListener(new userActions());
