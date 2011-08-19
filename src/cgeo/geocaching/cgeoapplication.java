@@ -89,11 +89,7 @@ public class cgeoapplication extends Application {
 	}
 
 	public boolean storageStatus() {
-		if (storage.status() == false) {
-			return false;
-		}
-
-		return true;
+		return storage.status();
 	}
 
 	public cgGeo startGeo(Context context, cgUpdateLoc geoUpdate, cgBase base, cgSettings settings, int time, int distance) {
