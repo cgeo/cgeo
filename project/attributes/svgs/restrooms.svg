@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="100px"
+   height="92.253px"
+   viewBox="0 0 100 92.253"
+   enable-background="new 0 0 100 92.253"
+   xml:space="preserve"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="restrooms.svg"><metadata
+   id="metadata2960"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs2958"><inkscape:perspective
+     sodipodi:type="inkscape:persp3d"
+     inkscape:vp_x="0 : 46.126499 : 1"
+     inkscape:vp_y="0 : 1000 : 0"
+     inkscape:vp_z="100 : 46.126499 : 1"
+     inkscape:persp3d-origin="50 : 30.750999 : 1"
+     id="perspective2962" /></defs><sodipodi:namedview
+   pagecolor="#009674"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="1"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="504"
+   id="namedview2956"
+   showgrid="false"
+   inkscape:zoom="2.5581824"
+   inkscape:cx="50"
+   inkscape:cy="46.126499"
+   inkscape:window-x="0"
+   inkscape:window-y="24"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="Layer_1" />
+<polygon
+   points="56.674,0.833 56.674,91.756 48.129,91.756 48.129,0.833 56.674,0.833 "
+   id="polygon2940"
+   style="fill:#ffffff" />
+<path
+   d="M52.403,46.267"
+   id="path2942"
+   style="fill:#ffffff" />
+<path
+   d="M21.169,14.979c4.156,0.022,7.511-3.332,7.489-7.49C28.68,3.37,25.325,0.016,21.169,0c-4.118,0.016-7.473,3.37-7.489,7.488  C13.696,11.647,17.051,15,21.169,14.979L21.169,14.979z"
+   id="path2944"
+   style="fill:#ffffff" />
+<path
+   d="M21.169,7.488"
+   id="path2946"
+   style="fill:#ffffff" />
+<path
+   d="M20.06,62.521v26.185c0.023,4.725-7.042,4.725-7.045,0V62.521H3.64L13.68,27.738h-1.608L6.19,47.598  c-1.399,4.34-7.342,2.56-5.992-2.051l6.547-21.582c0.715-2.47,3.826-6.831,9.209-6.824h4.937l0,0h5.382  c5.325-0.006,8.447,4.389,9.264,6.824l6.546,21.523c1.31,4.645-4.587,6.566-5.993,2.052l-5.878-19.803h-1.721l10.096,34.782h-9.374  v26.24c-0.003,4.669-7.039,4.645-7.045,0v-26.24H20.06L20.06,62.521z"
+   id="path2948"
+   style="fill:#ffffff" />
+<path
+   d="M74.647,17.086c-5.265,0.021-9.504,4.382-9.486,9.819v23.188c-0.018,4.505,6.486,4.505,6.491,0V28.904h1.552V87.65  c-0.019,6.009,8.643,5.829,8.655,0V53.256h1.498V87.65c-0.02,5.829,8.689,6.009,8.707,0V28.904h1.5v21.189  c-0.014,4.542,6.455,4.54,6.436,0v-23.02c0.008-5.044-3.832-9.957-9.598-9.932L74.647,17.086L74.647,17.086z"
+   id="path2950"
+   style="fill:#ffffff" />
+<path
+   d="M82.579,14.979c4.116,0.022,7.471-3.332,7.489-7.49C90.05,3.37,86.695,0.016,82.579,0c-4.159,0.016-7.514,3.37-7.487,7.488  C75.065,11.647,78.42,15,82.579,14.979L82.579,14.979z"
+   id="path2952"
+   style="fill:#ffffff" />
+<path
+   d="M82.579,7.488"
+   id="path2954"
+   style="fill:#ffffff" />
+</svg>

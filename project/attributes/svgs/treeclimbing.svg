@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="61.784px"
+   height="100px"
+   viewBox="0 0 61.784 100"
+   enable-background="new 0 0 61.784 100"
+   xml:space="preserve"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="treeclimbing.svg"><metadata
+   id="metadata2894"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs2892"><inkscape:perspective
+     sodipodi:type="inkscape:persp3d"
+     inkscape:vp_x="0 : 50 : 1"
+     inkscape:vp_y="0 : 1000 : 0"
+     inkscape:vp_z="61.784 : 50 : 1"
+     inkscape:persp3d-origin="30.892 : 33.333333 : 1"
+     id="perspective2896" /></defs><sodipodi:namedview
+   pagecolor="#009674"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="1"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="504"
+   id="namedview2890"
+   showgrid="false"
+   inkscape:zoom="2.36"
+   inkscape:cx="30.892"
+   inkscape:cy="50"
+   inkscape:window-x="0"
+   inkscape:window-y="24"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="Layer_1" />
+<path
+   d="M30.892,100h4.558V76.894l0.003,0.005h25.463c0.491-0.006,0.868-0.526,0.868-1.038c0-0.188-0.048-0.363-0.139-0.516  l-13.293-22.36c-0.146-0.242-0.345-0.923,0.424-1.051l3.312-0.336c0.489-0.007,0.863-0.525,0.863-1.037  c0-0.188-0.053-0.363-0.143-0.516L42.12,31.705c-0.214-0.335-0.116-0.824,0.339-0.893l1.933-0.329  c0.488-0.083,0.773-0.661,0.688-1.169c-0.021-0.118-0.061-0.231-0.116-0.329l-7.709-13.36c-0.15-0.284,0.027-0.622,0.284-0.7  l1.008-0.306c0.475-0.142,0.686-0.756,0.536-1.248c-0.023-0.078-0.057-0.154-0.096-0.22L31.641,0.428  C31.482,0.173,31.215,0,30.892,0c-0.322,0-0.59,0.173-0.748,0.428l-7.345,12.724c-0.039,0.066-0.072,0.142-0.097,0.22  c-0.149,0.492,0.062,1.105,0.537,1.248l1.009,0.306c0.256,0.078,0.435,0.416,0.284,0.7l-7.71,13.36  c-0.055,0.098-0.094,0.211-0.114,0.329c-0.087,0.508,0.199,1.086,0.686,1.169l1.933,0.329c0.455,0.069,0.553,0.558,0.338,0.893  L8.976,50.045c-0.089,0.152-0.142,0.327-0.142,0.516c0,0.511,0.374,1.03,0.863,1.037l3.312,0.336  c0.767,0.128,0.568,0.809,0.425,1.051L0.139,75.345C0.049,75.497,0,75.672,0,75.86c0,0.512,0.378,1.032,0.868,1.038h25.464  l0.003-0.005V100H30.892z"
+   id="path2888"
+   style="fill:#ffffff" />
+</svg>
