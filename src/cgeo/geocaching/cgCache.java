@@ -280,11 +280,6 @@ public class cgCache {
 			fromActivity.showToast(((Activity)fromActivity).getResources().getString(R.string.err_cannot_log_visit));
 			return true;
 		}
-		if (fromActivity.getSettings().getLogOffline()) {
-			logOffline(fromActivity, "", Calendar.getInstance());
-			return true;
-		}
-
 		Intent logVisitIntent = new Intent((Activity)fromActivity, cgeovisit.class);
 		logVisitIntent.putExtra(cgeovisit.EXTRAS_ID, cacheid);
 		logVisitIntent.putExtra(cgeovisit.EXTRAS_GEOCODE, geocode.toUpperCase());
@@ -295,9 +290,17 @@ public class cgCache {
 		return true;
 	}
 	
-	void logOffline(final IAbstractActivity fromActivity, final String log, Calendar date) {
+	public boolean logOffline(final IAbstractActivity fromActivity, final int logType) {
+		logOffline(fromActivity, "", Calendar.getInstance(), logType);
+		return true;
+	}
+	
+	void logOffline(final IAbstractActivity fromActivity, final String log, Calendar date, final int logType) {
+		if (logType <= 0) {
+			return;
+		}
 		cgeoapplication app = (cgeoapplication)((Activity)fromActivity).getApplication();
-		final boolean status = app.saveLogOffline(geocode, date.getTime(), cgBase.LOG_FOUND_IT, log);
+		final boolean status = app.saveLogOffline(geocode, date.getTime(), logType, log);
 		
 		Resources res = ((Activity)fromActivity).getResources();
 		if (status) {
@@ -306,6 +309,40 @@ public class cgCache {
 		} else {
 			fromActivity.showToast(res.getString(R.string.err_log_post_failed));
 		}
+	}
+	
+	public ArrayList<Integer> getPossibleLogTypes(cgSettings settings) {
+		boolean isOwner = owner.equalsIgnoreCase(settings.getUsername());
+		ArrayList<Integer> types = new ArrayList<Integer>();
+		if (type.equals("event") || type.equals("mega") || type.equals("cito") || type.equals("lostfound")) {
+			types.add(cgBase.LOG_WILL_ATTEND);
+			types.add(cgBase.LOG_NOTE);
+			types.add(cgBase.LOG_ATTENDED);
+			types.add(cgBase.LOG_NEEDS_ARCHIVE);
+			if (isOwner) {
+				types.add(cgBase.LOG_ANNOUNCEMENT);
+			}
+		} else if (type.equals("webcam")) {
+			types.add(cgBase.LOG_WEBCAM_PHOTO_TAKEN);
+			types.add(cgBase.LOG_DIDNT_FIND_IT);
+			types.add(cgBase.LOG_NOTE);
+			types.add(cgBase.LOG_NEEDS_ARCHIVE);
+			types.add(cgBase.LOG_NEEDS_MAINTENANCE);
+		} else {
+			types.add(cgBase.LOG_FOUND_IT);
+			types.add(cgBase.LOG_DIDNT_FIND_IT);
+			types.add(cgBase.LOG_NOTE);
+			types.add(cgBase.LOG_NEEDS_ARCHIVE);
+			types.add(cgBase.LOG_NEEDS_MAINTENANCE);
+		}
+		if (isOwner) {
+			types.add(cgBase.LOG_OWNER_MAINTENANCE);
+			types.add(cgBase.LOG_TEMP_DISABLE_LISTING);
+			types.add(cgBase.LOG_ENABLE_LISTING);
+			types.add(cgBase.LOG_ARCHIVE);
+			types.remove(Integer.valueOf(cgBase.LOG_UPDATE_COORDINATES));
+		}
+		return types;
 	}
 
 }

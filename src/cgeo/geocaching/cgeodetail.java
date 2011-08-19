@@ -470,10 +470,7 @@ public class cgeodetail extends AbstractActivity {
 		if (cache != null && cache.canBeAddedToCalendar()) {
 			menu.add(1, 11, 0, res.getString(R.string.cache_menu_event)).setIcon(android.R.drawable.ic_menu_agenda); // add event to calendar
 		}
-		if (settings.isLogin()) {
-			String label = settings.getLogOffline()? res.getString(R.string.cache_menu_visit_offline) : res.getString(R.string.cache_menu_visit);
-			menu.add(1, 3, 0, label).setIcon(android.R.drawable.ic_menu_agenda); // log visit
-		}
+		addVisitMenu(menu, cache);
 
 		if (cache != null && cache.spoilers != null && cache.spoilers.size() > 0) {
 			menu.add(1, 5, 0, res.getString(R.string.cache_menu_spoilers)).setIcon(android.R.drawable.ic_menu_gallery); // spoiler images
@@ -501,7 +498,7 @@ public class cgeodetail extends AbstractActivity {
 		if (menuItem == 2) {
 			navigateTo();
 			return true;
-		} else if (menuItem == 3) {
+		} else if (menuItem == MENU_LOG_VISIT) {
 			logVisit();
 			return true;
 		} else if (menuItem == 5) {
@@ -523,7 +520,13 @@ public class cgeodetail extends AbstractActivity {
 		if (NavigationAppFactory.onMenuItemSelected(item, geo, this, res, cache, searchId, null, null)) {
 			return true;
 		}
-		return GeneralAppsFactory.onMenuItemSelected(item, this, cache);
+		if (GeneralAppsFactory.onMenuItemSelected(item, this, cache)) {
+			return true;
+		}
+		
+		int logType = menuItem - MENU_LOG_VISIT_OFFLINE;
+		cache.logOffline(this, logType);
+		return true;
 	}
 
 	private void init() {

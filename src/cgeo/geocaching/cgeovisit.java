@@ -387,7 +387,7 @@ public class cgeovisit extends cgLogForm {
 		if (viewId == R.id.type) {
 			for (final int typeOne : types) {
 				menu.add(viewId, typeOne, 0, cgBase.logTypes2.get(typeOne));
-				Log.w(cgSettings.tag, "Addig " + typeOne + " " + cgBase.logTypes2.get(typeOne));
+				Log.w(cgSettings.tag, "Adding " + typeOne + " " + cgBase.logTypes2.get(typeOne));
 			}
 		} else if (viewId == R.id.changebutton) {
 			final int textId = ((TextView) findViewById(viewId)).getId();
@@ -485,42 +485,7 @@ public class cgeovisit extends cgLogForm {
 			app.setAction(geocode);
 		}
 
-		types.clear();
-
-		if (cache.type.equals("event") || cache.type.equals("mega") || cache.type.equals("cito") || cache.type.equals("lostfound")) {
-			types.add(cgBase.LOG_WILL_ATTEND);
-			types.add(cgBase.LOG_NOTE);
-			types.add(cgBase.LOG_ATTENDED);
-			types.add(cgBase.LOG_NEEDS_ARCHIVE);
-		} else if (cache.type.equals("earth")) {
-			types.add(cgBase.LOG_FOUND_IT);
-			types.add(cgBase.LOG_DIDNT_FIND_IT);
-			types.add(cgBase.LOG_NOTE);
-			types.add(cgBase.LOG_NEEDS_MAINTENANCE);
-			types.add(cgBase.LOG_NEEDS_ARCHIVE);
-		} else if (cache.type.equals("webcam")) {
-			types.add(cgBase.LOG_WEBCAM_PHOTO_TAKEN);
-			types.add(cgBase.LOG_DIDNT_FIND_IT);
-			types.add(cgBase.LOG_NOTE);
-			types.add(cgBase.LOG_NEEDS_ARCHIVE);
-			types.add(cgBase.LOG_NEEDS_MAINTENANCE);
-		} else {
-			types.add(cgBase.LOG_FOUND_IT);
-			types.add(cgBase.LOG_DIDNT_FIND_IT);
-			types.add(cgBase.LOG_NOTE);
-			types.add(cgBase.LOG_NEEDS_ARCHIVE);
-			types.add(cgBase.LOG_NEEDS_MAINTENANCE);
-		}
-		if (cache.owner.equalsIgnoreCase(settings.getUsername())) {
-			types.add(cgBase.LOG_OWNER_MAINTENANCE);
-			types.add(cgBase.LOG_TEMP_DISABLE_LISTING);
-			types.add(cgBase.LOG_ENABLE_LISTING);
-			types.add(cgBase.LOG_ARCHIVE);
-			types.remove(Integer.valueOf(cgBase.LOG_UPDATE_COORDINATES));
-			if (cache.type.equals("event") || cache.type.equals("mega") || cache.type.equals("cito") || cache.type.equals("lostfound")) {
-				types.add(cgBase.LOG_ANNOUNCEMENT);
-			}
-		}
+		types = cache.getPossibleLogTypes(settings);
 
 		final cgLog log = app.loadLogOffline(geocode);
 		if (log != null) {
@@ -601,7 +566,7 @@ public class cgeovisit extends cgLogForm {
 			@Override
 			public void onClick(View v) {
 				String log = ((EditText) findViewById(R.id.log)).getText().toString();
-				cache.logOffline(cgeovisit.this, log, date);
+				cache.logOffline(cgeovisit.this, log, date, typeSelected);
 			}
 		});
 

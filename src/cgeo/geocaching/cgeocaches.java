@@ -63,7 +63,6 @@ public class cgeocaches extends AbstractListActivity {
 
 	private static final int MENU_COMPASS = 1;
 	private static final int MENU_REFRESH_STORED = 2;
-	private static final int MENU_LOG_VISIT = 3;
 	private static final int MENU_CACHE_DETAILS = 4;
 	private static final int MENU_DROP_CACHES = 5;
 	private static final int MENU_IMPORT_GPX = 6;
@@ -1093,8 +1092,9 @@ public class cgeocaches extends AbstractListActivity {
 				menu.add(0, MENU_COMPASS, 0, res.getString(R.string.cache_menu_compass));
 				SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
 				NavigationAppFactory.addMenuItems(subMenu, this, res);
-				String label = settings.getLogOffline()? res.getString(R.string.cache_menu_visit_offline) : res.getString(R.string.cache_menu_visit);
-				menu.add(0, MENU_LOG_VISIT, 0, label);
+				addVisitMenu(menu, cache);
+//				String label = settings.getLogOffline()? res.getString(R.string.cache_menu_visit_offline) : res.getString(R.string.cache_menu_visit);
+//				menu.add(0, MENU_LOG_VISIT, 0, label);
 				menu.add(0, MENU_CACHE_DETAILS, 0, res.getString(R.string.cache_menu_details));
 			}
 			if (cache.reason >= 1) {
@@ -1266,8 +1266,16 @@ public class cgeocaches extends AbstractListActivity {
 		params.put("geocode", cache.geocode);
 		Long singleSearchId = base.searchByGeocode(params, 0, false);
 
-		return NavigationAppFactory.onMenuItemSelected(item, geo, this,
-				res, cache, singleSearchId, null, null);
+		if (NavigationAppFactory.onMenuItemSelected(item, geo, this,
+				res, cache, singleSearchId, null, null)) {
+			return true;
+		}
+		
+		if (cache != null) {
+			int logType = id - MENU_LOG_VISIT_OFFLINE;
+			cache.logOffline(this, logType);
+		}
+		return true;
 	}
 
 	private boolean setFilter(cgFilter filter) {

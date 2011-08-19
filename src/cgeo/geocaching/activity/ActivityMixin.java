@@ -1,21 +1,31 @@
 package cgeo.geocaching.activity;
 
 import gnu.android.app.appmanualclient.AppManualReaderClient;
+
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import cgeo.geocaching.R;
+import cgeo.geocaching.cgBase;
+import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgeo;
 
 public final class ActivityMixin {
+	private static final int MENU_ICON_LOG_VISIT = android.R.drawable.ic_menu_agenda;
+
 	public final static void goHome(final Activity fromActivity) {
 		final Intent intent = new Intent(fromActivity, cgeo.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -107,6 +117,25 @@ public final class ActivityMixin {
 
 	   AlertDialog alert = dialog.create();
 	   alert.show();
+	}
+
+	protected static void addVisitMenu(IAbstractActivity activity, Menu menu, cgCache cache) {
+		cgSettings settings = activity.getSettings();
+		Resources res = ((Activity)activity).getResources();
+		if (settings.isLogin()) {
+			if (settings.getLogOffline()) {
+				SubMenu logMenu = menu.addSubMenu(1, IAbstractActivity.MENU_LOG_VISIT_OFFLINE, 0, res.getString(R.string.cache_menu_visit_offline)).setIcon(MENU_ICON_LOG_VISIT);
+				ArrayList<Integer> logTypes = cache.getPossibleLogTypes(settings);
+				for (Integer logType : logTypes) {
+					String label = cgBase.logTypes2.get(logType);
+					logMenu.add(1, IAbstractActivity.MENU_LOG_VISIT_OFFLINE + logType, 0, label);
+				}
+				logMenu.add(1, IAbstractActivity.MENU_LOG_VISIT, 0, res.getString(R.string.cache_menu_visit));
+			}
+			else {
+				menu.add(1, IAbstractActivity.MENU_LOG_VISIT, 0, res.getString(R.string.cache_menu_visit)).setIcon(MENU_ICON_LOG_VISIT);
+			}
+		}
 	}
 
 }

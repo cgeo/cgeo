@@ -133,9 +133,7 @@ public class cgeopopup extends AbstractActivity {
 
 		SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
 		NavigationAppFactory.addMenuItems(subMenu, this, res);
-
-		String label = settings.getLogOffline()? res.getString(R.string.cache_menu_visit_offline) : res.getString(R.string.cache_menu_visit);
-		menu.add(0, 6, 0, label).setIcon(android.R.drawable.ic_menu_agenda); // log visit
+		addVisitMenu(menu, cache);
 		menu.add(0, 5, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
 		menu.add(0, 7, 0, res.getString(R.string.cache_menu_browser)).setIcon(android.R.drawable.ic_menu_info_details); // browser
 
@@ -157,11 +155,8 @@ public class cgeopopup extends AbstractActivity {
 				menu.findItem(5).setVisible(false);
 			}
 
-			if (fromDetail == false && settings.isLogin()) {
-				menu.findItem(6).setEnabled(true);
-			} else {
-				menu.findItem(6).setEnabled(false);
-			}
+			boolean visitPossible = fromDetail == false && settings.isLogin();
+			menu.findItem(MENU_LOG_VISIT).setEnabled(visitPossible);
 		} catch (Exception e) {
 			// nothing
 		}
@@ -179,17 +174,22 @@ public class cgeopopup extends AbstractActivity {
 		} else if (menuItem == 5) {
 			cachesAround();
 			return true;
-		} else if (menuItem == 6) {
+		} else if (menuItem == MENU_LOG_VISIT) {
 			cache.logVisit(this);
 			finish();
-
 			return true;
 		} else if (menuItem == 7) {
 			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/seek/cache_details.aspx?wp=" + cache.geocode)));
 			return true;
 		}
 
-		return NavigationAppFactory.onMenuItemSelected(item, geo, this, res, cache, null, null, null);
+		if (NavigationAppFactory.onMenuItemSelected(item, geo, this, res, cache, null, null, null)) {
+			return true;
+		}
+		
+		int logType = menuItem - MENU_LOG_VISIT_OFFLINE;
+		cache.logOffline(this, logType);
+		return true;
 	}
 
 	private void init() {

@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import cgeo.geocaching.cgBase;
+import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgeoapplication;
 
@@ -74,4 +76,9 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
 	final public cgSettings getSettings() {
 		return settings;
 	}
+	
+	public void addVisitMenu(Menu menu, cgCache cache) {
+		ActivityMixin.addVisitMenu(this, menu, cache);
+	}
+
 }

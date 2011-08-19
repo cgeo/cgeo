@@ -516,7 +516,7 @@
   <string name="cache_menu_map_ext_short">Externe Karte</string>
   <string name="cache_menu_browser">Im Browser öffnen</string>
   <string name="cache_menu_visit">Besuch loggen</string>
-  <string name="cache_menu_visit_offline">Besuch offline loggen (beim Loggen keinen Dialog anzeigen, Status immer auf \'Gefunden\' setzen, nicht online senden)</string>
+  <string name="cache_menu_visit_offline">Besuch offline loggen</string>
   <string name="cache_menu_spoilers">Hinweisbild</string>
   <string name="cache_menu_around">Caches im Umkreis</string>
   <string name="cache_menu_event">Zum Kalender hinzufügen</string>
