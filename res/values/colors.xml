@@ -15,10 +15,10 @@
   <color name="text_icon">#FFFFFFFF</color>
   <color name="text_dark">#FFFFFFFF</color>
   <color name="text_light">#FF000000</color>
-  <color name="text_headline_dark">#66FFFFFF</color>
-  <color name="text_headline_light">#66000000</color>
-  <color name="text_grey_dark">#99FFFFFF</color>
-  <color name="text_grey_light">#99000000</color>
+  <color name="text_headline_dark">#88FFFFFF</color>
+  <color name="text_headline_light">#88000000</color>
+  <color name="text_grey_dark">#AAFFFFFF</color>
+  <color name="text_grey_light">#AA000000</color>
   <color name="text_hint_dark">#44FFFFFF</color>
   <color name="text_hint_light">#44000000</color>
   <color name="link">#FF00C0FF</color>

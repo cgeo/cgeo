@@ -914,13 +914,15 @@
     · thiasB (code, loc. DE EN)\n
     · YraFyra (code, loc. SV)\n
     · zenobios (code, loc. DE EN)\n
+    \n
+    · <a href="http://code.google.com/p/mapsforge/">Mapsforge</a> (OSM-rendering)\n
   </string>
 
   <!-- changelog -->
   <string name="changelog">\n
     <b>19.08.2011</b>\n
     · new: Numeric entry for coordinates\n
-    · fix: quick addapt to GC.com changes\n 
+    · fix: adaption to GC.com changes\n 
 	\n\n
     <b>15.08.2011</b>\n
     · new: OpenStreetMap support\n 

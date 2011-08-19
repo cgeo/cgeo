@@ -23,6 +23,7 @@
 			android:layout_height="wrap_content"
 			android:layout_alignParentTop="true"
 			android:layout_alignParentLeft="true"
+            android:layout_alignBaseline="@id/name"
 			android:layout_marginTop="2dip"
 			android:layout_marginLeft="83dip"
 			android:layout_marginRight="6dip"
