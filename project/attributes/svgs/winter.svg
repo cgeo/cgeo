@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="88.108px"
+   height="100px"
+   viewBox="0 0 88.108 100"
+   enable-background="new 0 0 88.108 100"
+   xml:space="preserve"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="winter.svg"><metadata
+   id="metadata2960"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs2958"><inkscape:perspective
+     sodipodi:type="inkscape:persp3d"
+     inkscape:vp_x="0 : 50 : 1"
+     inkscape:vp_y="0 : 1000 : 0"
+     inkscape:vp_z="88.108002 : 50 : 1"
+     inkscape:persp3d-origin="44.054001 : 33.333333 : 1"
+     id="perspective2962" /></defs><sodipodi:namedview
+   pagecolor="#009674"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="1"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="504"
+   id="namedview2956"
+   showgrid="false"
+   inkscape:zoom="2.36"
+   inkscape:cx="44.054001"
+   inkscape:cy="50"
+   inkscape:window-x="0"
+   inkscape:window-y="24"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="Layer_1" />
+<path
+   id="path5156"
+   d="M36.786,50.287l3.955,5.841h7.365l3.398-5.841l-3.58-6.22h-7.379L36.786,50.287z M39.819,97.261V84.054  l-7.379,4.15l-3.759-2.152v-4.653l10.943-6.22v-8.68l-7.939,5.102v-9.196l-7.589,4.374v12.468l-4.151,2.572l-3.508-2.321v-8.356  L4.919,77.64L0,75.57V70.3l12.089-6.609L4.528,59.89v-4.822l4.291-2.349l10.845,6.386l7.533-4.346l-0.182-0.139l-7.701-4.417  l7.477-4.64l-7.505-4.346L8.442,47.589l-4.068-2.026v-4.808l7.339-4.123L0,30.272v-5.269l4.5-2.319l11.544,6.666v-8.497l3.48-2.348  l4.264,2.46L23.76,33.683l7.756,4.43l-0.027-8.986l8.134,4.375v-8.68L28.68,18.589v-4.612l3.759-2.18l7.379,4.151V2.768L44.04,0  l4.261,2.768v13.18l7.646-4.235l3.845,2.544v4.151L48.47,24.822v8.68l7.744-4.724v9.448l7.979-4.348V20.28l3.844-1.789l4.038,1.789  v8.694l11.879-6.416l4.153,2.53v4.919l-11.601,6.597l7.254,4.066v4.697L80,47.45l-11.138-6.583l-7.702,4.892l7.449,4.642  l-7.673,4.416l7.926,4.15L80,52.746l3.578,2.53v4.487L76.59,63.69L87.716,70.3v5.188l-4.71,2.152l-10.931-6.221v8.232l-3.927,2.194  l-3.843-2.194V67.155l-8.092-4.611v8.68l-7.744-4.725v8.68l10.944,6.22v4.92l-3.776,1.886l-7.337-4.15v13.207L44.04,100  L39.819,97.261z"
+   style="fill:#ffffff" />
+</svg>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="92.949px"
+   height="100px"
+   viewBox="0 0 92.949 100"
+   enable-background="new 0 0 92.949 100"
+   xml:space="preserve"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="campfires.svg"><metadata
+   id="metadata19"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs17"><inkscape:perspective
+     sodipodi:type="inkscape:persp3d"
+     inkscape:vp_x="0 : 50 : 1"
+     inkscape:vp_y="0 : 1000 : 0"
+     inkscape:vp_z="92.948997 : 50 : 1"
+     inkscape:persp3d-origin="46.474499 : 33.333333 : 1"
+     id="perspective21" /></defs><sodipodi:namedview
+   pagecolor="#009674"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="1"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="504"
+   id="namedview15"
+   showgrid="false"
+   inkscape:zoom="2.36"
+   inkscape:cx="46.474499"
+   inkscape:cy="50"
+   inkscape:window-x="0"
+   inkscape:window-y="24"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="Layer_1" />
+<path
+   d="M8.319,74.501H0v16.382C0,95.903,4.512,100,10.055,100h72.832c5.543,0,10.062-4.097,10.062-9.116V74.501h-8.326v14.644  c0,1.836-1.65,3.33-3.68,3.33H11.991c-2.036,0-3.672-1.494-3.672-3.33V74.501z"
+   id="path3"
+   style="fill:#ffffff" />
+<polygon
+   points="74.466,85.455 74.466,72.545 18.404,53.817 18.404,66.736 "
+   id="polygon5"
+   style="fill:#ffffff" />
+<path
+   d="M31.336,53.833c-1.931-2.176-14.746-16.991-1.815-29.809C40.298,13.332,41.87,4.354,38.241,0  c0,0,27.433,11.274,11.297,37.422c-2.762,4.439-9.661,9.683-6.054,20.492L31.336,53.833z"
+   id="path7"
+   style="fill:#ffffff" />
+<path
+   d="M48.182,57.381c-0.589-2.194-3.221-6.971,4.804-16.473c4.289-5.064,5.902-12.573,6.29-15.398c0,0,14.209,8.146,0.072,28.079  L48.182,57.381z"
+   id="path9"
+   style="fill:#ffffff" />
+<polygon
+   points="51.201,60.438 74.466,52.669 74.466,65.579 70.521,66.878 "
+   id="polygon11"
+   style="fill:#ffffff" />
+<polygon
+   points="41.676,78.839 18.404,86.593 18.404,73.683 22.362,72.393 "
+   id="polygon13"
+   style="fill:#ffffff" />
+</svg>

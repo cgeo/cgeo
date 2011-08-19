@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="100px"
+   height="83.419px"
+   viewBox="0 0 100 83.419"
+   enable-background="new 0 0 100 83.419"
+   xml:space="preserve"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="wirelessbeacon.svg"><metadata
+   id="metadata3283"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs3281"><inkscape:perspective
+     sodipodi:type="inkscape:persp3d"
+     inkscape:vp_x="0 : 41.709499 : 1"
+     inkscape:vp_y="0 : 1000 : 0"
+     inkscape:vp_z="100 : 41.709499 : 1"
+     inkscape:persp3d-origin="50 : 27.806333 : 1"
+     id="perspective3285" /></defs><sodipodi:namedview
+   pagecolor="#009674"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="1"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="504"
+   id="namedview3279"
+   showgrid="false"
+   inkscape:zoom="2.8290917"
+   inkscape:cx="49.999999"
+   inkscape:cy="41.709498"
+   inkscape:window-x="0"
+   inkscape:window-y="24"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="Layer_1" />
+<path
+   fill-opacity="0.875"
+   d="M68.2,55.555l4.742,4.792c6.451-6.143,10.461-14.861,10.461-24.532c0-9.521-3.901-18.122-10.184-24.25  l-5.159,5.356c5.06,4.861,8.228,11.724,8.228,19.317C76.288,43.797,73.217,50.701,68.2,55.555z"
+   id="path3263"
+   style="fill:#ffffff" />
+<path
+   fill-opacity="0.875"
+   d="M56.625,43.85l5.856,5.923c3.591-3.371,5.857-8.176,5.857-13.535c0-5.425-2.322-10.297-5.996-13.676  l-5.858,6.063c2.083,1.862,3.486,4.559,3.486,7.613C59.971,39.257,58.664,41.993,56.625,43.85z"
+   id="path3265"
+   style="fill:#ffffff" />
+<path
+   fill-opacity="0.875"
+   d="M20.082,7.333l-5.996-6.063C5.388,10.352,0,22.63,0,36.237c0,13.575,5.286,25.895,13.945,34.967  l6.137-6.203C12.987,57.483,8.646,47.283,8.646,36.097C8.646,24.914,12.987,14.819,20.082,7.333z"
+   id="path3267"
+   style="fill:#ffffff" />
+<path
+   fill-opacity="0.875"
+   d="M78.66,66.129l6.137,6.202C94.124,63.162,100,50.43,100,36.237C100,21.979,94.071,9.186,84.658,0  L78.66,6.064c7.797,7.588,12.691,18.201,12.691,30.032C91.352,47.896,86.418,58.51,78.66,66.129z"
+   id="path3269"
+   style="fill:#ffffff" />
+<path
+   fill-opacity="0.875"
+   d="M25.661,12.972c-5.5,6.013-8.926,14.014-8.926,22.843c0,9.017,3.499,17.218,9.205,23.266l4.742-4.796  c-4.303-4.749-6.974-11.085-6.974-18.047c0-6.996,2.628-13.424,6.974-18.19L25.661,12.972z"
+   id="path3271"
+   style="fill:#ffffff" />
+<path
+   fill-opacity="0.875"
+   d="M42.258,42.583c-1.398-1.747-2.23-3.93-2.23-6.346c0-2.48,0.897-4.718,2.371-6.486l-5.858-5.779  c-2.938,3.268-4.882,7.514-4.882,12.265c0,4.718,1.84,9.005,4.743,12.268L42.258,42.583z"
+   id="path3273"
+   style="fill:#ffffff" />
+<path
+   d="M45.838,36.237c0,2.324,1.865,4.208,4.16,4.208c2.298,0,4.159-1.884,4.159-4.208c0-2.321-1.861-4.204-4.159-4.204  C47.703,32.033,45.838,33.917,45.838,36.237z"
+   id="path3275"
+   style="fill:#ffffff" />
+<path
+   fill-opacity="0.875"
+   d="M45.313,46.234L34.497,83.419h30.286L53.966,46.234C51.102,46.874,48.226,47.098,45.313,46.234z"
+   id="path3277"
+   style="fill:#ffffff" />
+</svg>
