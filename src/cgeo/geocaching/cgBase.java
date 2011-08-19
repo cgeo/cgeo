@@ -2584,15 +2584,13 @@ public class cgBase {
 		int findCount = -1;
 
 		try {
-			final Pattern findPattern = Pattern.compile("<strong>Caches Found:<\\/strong>([^<]+)<br", Pattern.CASE_INSENSITIVE);
+			final Pattern findPattern = Pattern.compile("Finds\\s*</strong>\\s*<span class=\"statcount\">(\\d+)</span>", Pattern.CASE_INSENSITIVE);
 			final Matcher findMatcher = findPattern.matcher(page);
 			if (findMatcher.find()) {
 				if (findMatcher.groupCount() > 0) {
 					String count = findMatcher.group(1);
 
 					if (count != null) {
-						count = count.trim().replaceAll(",", "");
-
 						if (count.length() == 0) {
 							findCount = 0;
 						} else {
