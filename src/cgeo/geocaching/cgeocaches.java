@@ -848,7 +848,6 @@ public class cgeocaches extends AbstractListActivity {
 			                                   SUBMENU_MANAGE_HISTORY,
 			                                   SUBMENU_SHOW_MAP,
 			                                   SUBMENU_SORT,
-			                                   SUBMENU_FILTER,
 			                                   MENU_REFRESH_STORED};
 
 			boolean menuEnabled = cacheList.size() > 0;
