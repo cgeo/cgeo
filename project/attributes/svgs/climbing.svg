@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="99.572px"
+   height="99.993px"
+   viewBox="0 0 99.572 99.993"
+   enable-background="new 0 0 99.572 99.993"
+   xml:space="preserve"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="climbing.svg"><metadata
+   id="metadata2876"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs2874"><inkscape:perspective
+     sodipodi:type="inkscape:persp3d"
+     inkscape:vp_x="0 : 49.996498 : 1"
+     inkscape:vp_y="0 : 1000 : 0"
+     inkscape:vp_z="99.571999 : 49.996498 : 1"
+     inkscape:persp3d-origin="49.785999 : 33.330999 : 1"
+     id="perspective2878" /></defs><sodipodi:namedview
+   pagecolor="#009674"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="1"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="504"
+   id="namedview2872"
+   showgrid="false"
+   inkscape:zoom="2.3601653"
+   inkscape:cx="49.785999"
+   inkscape:cy="49.996498"
+   inkscape:window-x="0"
+   inkscape:window-y="24"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="Layer_1" />
+<path
+   d="M11.271,42.81c-0.451,0.927-0.777,1.955-0.952,3.058c-0.075,0.552-0.126,1.103-0.126,1.654l0.401,25.259L1.871,91.579  c-0.301,0.552-0.526,1.203-0.626,1.88c-0.477,3.107,1.654,5.99,4.762,6.467c2.406,0.376,4.712-0.853,5.815-2.883l9.6-20.553  c0.2-0.477,0.376-0.978,0.451-1.529c0.024-0.25,0.05-0.525,0.05-0.776l-0.075-15.608l14.738,6.435l2.381,15.265  c0.477,2.23,2.306,4.01,4.688,4.386c3.107,0.451,5.99-1.679,6.466-4.763c0.075-0.525,0.075-1.053,0.025-1.553L47.238,59.93  c-0.352-1.78-1.529-3.309-3.184-4.086l-13.184-5.865l8.396-14.613l4.161,5.289c0.426,0.477,0.977,0.877,1.604,1.128l15.866,4.637  c2.105,0.451,4.261-0.652,5.088-2.682c0.928-2.306-0.176-4.913-2.456-5.84c-0.075-0.025-0.15-0.05-0.226-0.075l-13.786-4.061  L39.143,21.305c-1.555-1.654-3.635-2.832-6.041-3.208c-4.211-0.627-8.196,1.378-10.302,4.787L11.271,42.81z"
+   id="path2864"
+   style="fill:#ffffff" />
+<path
+   d="M56.787,79.021l-1.002,7.57L28.49,93.233l0.25,4.687h66.571c2.356,0,4.261-1.904,4.261-4.26L99.497,3.935l-9.123-2.13  L85.136,25.39l-8.748,3.685l-7.77,21.756l7.369,16.636l-2.081,6.392L56.787,79.021z"
+   id="path2866"
+   style="fill:#ffffff" />
+<path
+   d="M38.24,16.994c4.687,0,8.496-3.81,8.496-8.497C46.736,3.81,42.927,0,38.24,0c-4.688,0-8.497,3.81-8.497,8.497  C29.743,13.184,33.553,16.994,38.24,16.994z"
+   id="path2868"
+   style="fill:#ffffff" />
+<path
+   d="M21.347,18.322c0.651-1.153,0.275-2.657-0.902-3.309l-4.11-2.406c-1.179-0.652-2.657-0.276-3.334,0.902L0.317,35.391  c-0.651,1.153-0.275,2.632,0.902,3.309l4.136,2.381c1.153,0.677,2.632,0.276,3.309-0.877L21.347,18.322z"
+   id="path2870"
+   style="fill:#ffffff" />
+</svg>

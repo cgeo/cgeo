@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="55.373615"
+   height="45.085098"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="landf.svg">
+  <defs
+     id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective10" />
+    <inkscape:perspective
+       id="perspective2830"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2830-8"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2830-6"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2830-7"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2881"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#009674"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.9598977"
+     inkscape:cx="124.00257"
+     inkscape:cy="28.949377"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1280"
+     inkscape:window-height="749"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2818"
+       empspacing="5"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-35.637847,-749.4123)">
+    <g
+       id="g2973"
+       transform="matrix(0.94487485,-0.32743169,0.32743169,0.94487485,-249.14029,64.0692)"
+       style="fill:#ffffff">
+      <path
+         d="m 38.935988,757.37477 7.519531,0 0,23.47656 13.203125,0 0,5.6836 -20.722656,0 0,-29.16016"
+         style="font-size:40px;font-style:normal;font-weight:bold;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Charter Bold"
+         id="path2963" />
+      <path
+         d="m 72.188219,757.37477 20.29297,0 0,5.68359 -12.773439,0 0,5.42969 12.011719,0 0,5.6836 -12.011719,0 0,12.36328 -7.519531,0 0,-29.16016"
+         style="font-size:40px;font-style:normal;font-weight:bold;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Charter Bold"
+         id="path2965" />
+      <path
+         d="m 58.383697,763.77084 4.680033,5.14918 c 0.404291,-0.53399 0.709428,-1.13282 0.915409,-1.7965 0.213581,-0.66366 0.33945,-1.41506 0.377607,-2.25419 l 3.558655,0 c -0.114445,1.38838 -0.385253,2.62418 -0.812426,3.70741 -0.41958,1.08324 -1.006968,2.03297 -1.762164,2.84921 l 3.352688,3.68452 -4.851671,0 -1.121377,-1.24724 c -0.800996,0.53399 -1.643935,0.93066 -2.528819,1.19003 -0.884906,0.25937 -1.8232,0.38905 -2.814885,0.38905 -2.006279,0 -3.63113,-0.52636 -4.874557,-1.57908 -1.235805,-1.06035 -1.853706,-2.42583 -1.853704,-4.09646 -2e-6,-1.11374 0.270807,-2.09781 0.812426,-2.9522 0.549243,-0.862 1.441766,-1.69731 2.677573,-2.50593 -0.320398,-0.4043 -0.556879,-0.8086 -0.709443,-1.21292 -0.152572,-0.40429 -0.228856,-0.82767 -0.228852,-1.27013 -4e-6,-1.24342 0.4844,-2.23892 1.453213,-2.98652 0.968802,-0.74757 2.258003,-1.12136 3.867606,-1.12138 0.694176,2e-5 1.41506,0.0572 2.162655,0.17164 0.755201,0.10681 1.540927,0.27082 2.35718,0.49203 l 0,3.18105 c -0.717084,-0.36615 -1.396012,-0.63696 -2.036786,-0.81243 -0.640798,-0.17544 -1.266328,-0.26316 -1.87659,-0.26318 -0.587397,2e-5 -1.045102,0.11444 -1.373115,0.34328 -0.320401,0.22124 -0.480598,0.53782 -0.48059,0.94974 -8e-6,0.25938 0.09153,0.55689 0.274623,0.89252 0.190702,0.32804 0.469139,0.6942 0.835311,1.0985 m -2.277081,2.83777 c -0.495853,0.35854 -0.869645,0.76666 -1.121377,1.22436 -0.251743,0.45008 -0.377612,0.94593 -0.377607,1.48754 -5e-6,0.87727 0.324202,1.62485 0.972623,2.24275 0.648408,0.61791 1.426506,0.92686 2.334295,0.92685 0.511095,1e-5 0.98787,-0.0763 1.430328,-0.22885 0.442437,-0.16019 0.854371,-0.39667 1.235803,-0.70944 l -4.474065,-4.94321"
+         style="font-size:23.43448830000000171px;font-style:normal;font-weight:bold;fill:#ffffff;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Charter Bold"
+         id="path2968" />
+    </g>
+  </g>
+</svg>

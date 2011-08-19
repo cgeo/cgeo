@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 12.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 51448)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   height="272.768"
+   id="Layer_1"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="cow.svg"
+   sodipodi:version="0.32"
+   space="preserve"
+   style="overflow: visible;"
+   version="1.1"
+   viewBox="0 0 412.808 272.768"
+   width="412.808">
+  <metadata
+     id="metadata2881">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:title>Various Cliparts</dc:title>
+        <dc:description />
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li />
+          </rdf:Bag>
+        </dc:subject>
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://www.openclipart.org/">
+            <dc:title />
+          </cc:Agent>
+        </dc:publisher>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Architetto Francesco Rollandin</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>Architetto Francesco Rollandin</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:date />
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://web.resource.org/cc/PublicDomain" />
+        <dc:language>en</dc:language>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://web.resource.org/cc/PublicDomain">
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Reproduction" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/Distribution" />
+        <cc:permits
+           rdf:resource="http://web.resource.org/cc/DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs8">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 136.384 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="412.80801 : 136.384 : 1"
+       inkscape:persp3d-origin="206.40401 : 90.922668 : 1"
+       id="perspective2887" />
+  </defs>
+  <sodipodi:namedview
+     bordercolor="#666666"
+     borderopacity="1.0"
+     id="base"
+     inkscape:current-layer="Layer_1"
+     inkscape:cx="206.40401"
+     inkscape:cy="136.384"
+     inkscape:pageopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:window-height="510"
+     inkscape:window-width="787"
+     inkscape:window-x="88"
+     inkscape:window-y="116"
+     inkscape:zoom="1.3198029"
+     pagecolor="#009674"
+     showgrid="false"
+     inkscape:window-maximized="0" />
+  <g
+     id="g3"
+     style="fill:#ffffff">
+    <path
+       d="   M403.708,176.375c1.256,5.879,3.666,8.828,9.101,10.238c-4.676-7.569-2.75-17.25-4.551-28.439   c-1.793-11.136-6.874-14.828-10.238-22.751c-5.168-12.177-4.461-33.679-7.963-51.19c-3.663-18.313-9.642-36.224-22.75-42.09   c-16.272-7.281-38.882-4.316-58.017-2.275c-43.039,4.592-83.136-3.559-123.996-7.963c-22.659-2.442-44.037,1.505-65.979,2.275   c-11.758,0.413-24.414,1.839-27.302-6.825c-3.449-10.348,8.876-17.063-4.55-17.063c-3.966,0-8.018,6.132-10.238,5.688   c-7.841-1.567-2.718-5.781-6.826-10.238c-8.679-9.418-13.03-4.717-23.889-3.413c-9.482,1.138-34.782-3.91-22.751,6.826   c6.424,5.731,27.072,6.237,35.264,6.825C44.327,21.858,32.209,32.57,22.622,42.143C11.094,53.653-13.109,65.537,8.971,76.27   c15.039,7.31,39.659,1.628,54.603,9.101c14.168,7.084,19.949,26.218,28.439,44.365c4.841,10.349,11.218,26.934,17.063,36.402   c5.665,9.176,18.045,9.79,22.751,17.063c7.614,11.768,1.188,44.382-3.413,56.879c-4.065,11.045-10.786,16.83-12.513,29.576   c19.458,0,20.116,1.024,22.751-14.787c7.774,6.139,6.545-17.919,7.963-25.027c1.288-6.452,5.364-31.82,10.238-27.302   c5.151,4.776,0.811,31.921,0,38.678c-1.676,13.965-6.475,17.213-10.238,28.438c4.784,0,20.355,2.756,23.89,0   c1.097-0.855-1.104-5.981,0-6.825c-0.698,0.533,6.771-10.455,5.687-6.824c2.627-8.794,1.173-26.918,2.275-36.403   c1.761-15.153,8.073-36.45,18.201-40.953c12.552-5.577,48.643,2.431,65.979,1.138c14.416-1.074,13.821-1.699,21.613,5.688   c2.939,2.788,3.771,5.902,7.963,7.963c4.729,2.324,4.314,0.233,7.963,1.138c-3.613-0.895,13.204,1.763,9.102,2.275   c1.999-0.251,8.475-4.64,9.101-4.551c10.487,1.498,6.382,12.712,3.412,25.026c-5.343,22.156-15.633,32.851-19.339,51.19   c27.559,0,27.065-17.853,30.715-40.952c2.008-12.707,10.382-37.419,19.339-43.228c7.536,13.695,11.611,32.542,9.1,53.466   c-0.919,7.67-4.262,15.206-6.824,21.613c-0.476,1.19-5.544,7.233-4.551,9.101c2.989,5.62,17.462,5.315,21.613,1.138   c2.264-2.277-0.434-10.555,0-11.376c1.979-3.736,6.575-2.663,7.963-6.825c2.762-8.282-1.138-16.397-1.138-25.025   c0-9.43,6.062-17.752,6.826-25.027c0.889-8.461-4.225-15.273-6.826-23.889c-8.997-29.802-3.412-76.706-3.412-112.619   c10.35,18.973,12.839,34.897,13.65,58.016c0.376,10.685,0.622,22.687,4.551,31.852   C397.153,163.355,403.164,166.347,403.708,176.375"
+       id="path5"
+       style="fill-rule:evenodd;clip-rule:evenodd;stroke:rgb(0, 0, 0);stroke-width:0pt;stroke-linecap:square;stroke-miterlimit:10;fill:#ffffff" />
+  </g>
+</svg>
