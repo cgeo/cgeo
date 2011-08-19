@@ -618,6 +618,8 @@ public class cgBase {
 		final Pattern patternRecaptchaChallenge = Pattern.compile("challenge : '([^']+)'", Pattern.CASE_INSENSITIVE);
 
 		caches.viewstates = getViewstates(page);
+		
+		boolean isPremiumUser = isPremium(page);
 
 		// recaptcha
 		if (showCaptcha) {
@@ -756,16 +758,18 @@ public class cgBase {
 			}
 
 			// cache direction - image
-			try {
-				final Matcher matcherDirection = patternDirection.matcher(row);
-				while (matcherDirection.find()) {
-					if (matcherDirection.groupCount() > 0) {
-						cache.directionImg = matcherDirection.group(1);
-					}
-				}
-			} catch (Exception e) {
-				// failed to parse direction image
-				Log.w(cgSettings.tag, "cgeoBase.parseSearch: Failed to parse cache direction image");
+			if (!isPremiumUser) {
+			    try {
+			        final Matcher matcherDirection = patternDirection.matcher(row);
+			        while (matcherDirection.find()) {
+			            if (matcherDirection.groupCount() > 0) {
+			                cache.directionImg = matcherDirection.group(1);
+			            }
+			        }
+			    } catch (Exception e) {
+			        // failed to parse direction image
+			        Log.w(cgSettings.tag, "cgeoBase.parseSearch: Failed to parse cache direction image");
+			    }
 			}
 
 			// cache inventory
@@ -1022,10 +1026,12 @@ public class cgBase {
 		}
 
 		// get direction images
-		for (cgCache oneCache : caches.cacheList) {
-			if (oneCache.latitude == null && oneCache.longitude == null && oneCache.direction == null && oneCache.directionImg != null) {
-				cgDirectionImg.getDrawable(oneCache.geocode, oneCache.directionImg);
-			}
+		if (!isPremiumUser) {
+		    for (cgCache oneCache : caches.cacheList) {
+		        if (oneCache.latitude == null && oneCache.longitude == null && oneCache.direction == null && oneCache.directionImg != null) {
+		            cgDirectionImg.getDrawable(oneCache.geocode, oneCache.directionImg);
+		        }
+		    }
 		}
 
 		// get ratings
@@ -2818,13 +2824,13 @@ public class cgBase {
 
 	public static HashMap<String, Object> parseLatlon(String latlon) {
 		final HashMap<String, Object> result = new HashMap<String, Object>();
-		final Pattern patternLatlon = Pattern.compile("([NS])[^\\d]*(\\d+)[^°]*° (\\d+)\\.(\\d+) ([WE])[^\\d]*(\\d+)[^°]*° (\\d+)\\.(\\d+)", Pattern.CASE_INSENSITIVE);
+		final Pattern patternLatlon = Pattern.compile("([NS])[^\\d]*(\\d+)[^Â°]*Â° (\\d+)\\.(\\d+) ([WE])[^\\d]*(\\d+)[^Â°]*Â° (\\d+)\\.(\\d+)", Pattern.CASE_INSENSITIVE);
 		final Matcher matcherLatlon = patternLatlon.matcher(latlon);
 
 		while (matcherLatlon.find()) {
 			if (matcherLatlon.groupCount() > 0) {
-				result.put("latitudeString", (String) (matcherLatlon.group(1) + " " + matcherLatlon.group(2) + "° " + matcherLatlon.group(3) + "." + matcherLatlon.group(4)));
-				result.put("longitudeString", (String) (matcherLatlon.group(5) + " " + matcherLatlon.group(6) + "° " + matcherLatlon.group(7) + "." + matcherLatlon.group(8)));
+				result.put("latitudeString", (String) (matcherLatlon.group(1) + " " + matcherLatlon.group(2) + "Â° " + matcherLatlon.group(3) + "." + matcherLatlon.group(4)));
+				result.put("longitudeString", (String) (matcherLatlon.group(5) + " " + matcherLatlon.group(6) + "Â° " + matcherLatlon.group(7) + "." + matcherLatlon.group(8)));
 				int latNegative = -1;
 				int lonNegative = -1;
 				if (matcherLatlon.group(1).equalsIgnoreCase("N")) {
@@ -2870,13 +2876,13 @@ public class cgBase {
 
 		if (latlon.equalsIgnoreCase("lat")) {
 			if (degrees) {
-				formatted = worldSide + String.format(Locale.getDefault(), "%02.0f", Math.floor(coord)) + "° " + String.format(Locale.getDefault(), "%06.3f", ((coord - Math.floor(coord)) * 60));
+				formatted = worldSide + String.format(Locale.getDefault(), "%02.0f", Math.floor(coord)) + "Â° " + String.format(Locale.getDefault(), "%06.3f", ((coord - Math.floor(coord)) * 60));
 			} else {
 				formatted = worldSide + String.format(Locale.getDefault(), "%02.0f", Math.floor(coord)) + " " + String.format(Locale.getDefault(), "%06.3f", ((coord - Math.floor(coord)) * 60));
 			}
 		} else {
 			if (degrees) {
-				formatted = worldSide + String.format(Locale.getDefault(), "%03.0f", Math.floor(coord)) + "° " + String.format(Locale.getDefault(), "%06.3f", ((coord - Math.floor(coord)) * 60));
+				formatted = worldSide + String.format(Locale.getDefault(), "%03.0f", Math.floor(coord)) + "Â° " + String.format(Locale.getDefault(), "%06.3f", ((coord - Math.floor(coord)) * 60));
 			} else {
 				formatted = worldSide + String.format(Locale.getDefault(), "%03.0f", Math.floor(coord)) + " " + String.format(Locale.getDefault(), "%06.3f", ((coord - Math.floor(coord)) * 60));
 			}
@@ -2888,11 +2894,11 @@ public class cgBase {
 	public static HashMap<String, Object> parseCoordinate(String coord, String latlon) {
 		final HashMap<String, Object> coords = new HashMap<String, Object>();
 
-		final Pattern patternA = Pattern.compile("^([NSWE])[^\\d]*(\\d+)°? +(\\d+)([\\.|,](\\d+))?$", Pattern.CASE_INSENSITIVE);
+		final Pattern patternA = Pattern.compile("^([NSWE])[^\\d]*(\\d+)Â°? +(\\d+)([\\.|,](\\d+))?$", Pattern.CASE_INSENSITIVE);
 		final Pattern patternB = Pattern.compile("^([NSWE])[^\\d]*(\\d+)([\\.|,](\\d+))?$", Pattern.CASE_INSENSITIVE);
 		final Pattern patternC = Pattern.compile("^(-?\\d+)([\\.|,](\\d+))?$", Pattern.CASE_INSENSITIVE);
-		final Pattern patternD = Pattern.compile("^([NSWE])[^\\d]*(\\d+)°?$", Pattern.CASE_INSENSITIVE);
-		final Pattern patternE = Pattern.compile("^(-?\\d+)°?$", Pattern.CASE_INSENSITIVE);
+		final Pattern patternD = Pattern.compile("^([NSWE])[^\\d]*(\\d+)Â°?$", Pattern.CASE_INSENSITIVE);
+		final Pattern patternE = Pattern.compile("^(-?\\d+)Â°?$", Pattern.CASE_INSENSITIVE);
 		final Pattern patternF = Pattern.compile("^([NSWE])[^\\d]*(\\d+)$", Pattern.CASE_INSENSITIVE);
 		final Pattern pattern0 = Pattern.compile("^(-?\\d+)([\\.|,](\\d+))?$", Pattern.CASE_INSENSITIVE);
 
@@ -2916,10 +2922,10 @@ public class cgBase {
 
 			if (matcherA.groupCount() < 5 || matcherA.group(5) == null) {
 				coords.put("coordinate", Double.valueOf(latlonNegative * (Double.valueOf(matcherA.group(2)) + Double.valueOf(matcherA.group(3) + ".0") / 60)));
-				coords.put("string", matcherA.group(1) + " " + matcherA.group(2) + "° " + matcherA.group(3) + ".000");
+				coords.put("string", matcherA.group(1) + " " + matcherA.group(2) + "Â° " + matcherA.group(3) + ".000");
 			} else {
 				coords.put("coordinate", Double.valueOf(latlonNegative * (Double.valueOf(matcherA.group(2)) + Double.valueOf(matcherA.group(3) + "." + matcherA.group(5)) / 60)));
-				coords.put("string", matcherA.group(1) + " " + matcherA.group(2) + "° " + matcherA.group(3) + "." + matcherA.group(5));
+				coords.put("string", matcherA.group(1) + " " + matcherA.group(2) + "Â° " + matcherA.group(3) + "." + matcherA.group(5));
 			}
 
 			return coords;
@@ -2988,7 +2994,7 @@ public class cgBase {
 				}
 			}
 
-			coords.put("string", tmpDir + " " + matcher0.group(1) + "° " + (Math.round(tmpCoord / (1 / 60) * 1000) * 1000));
+			coords.put("string", tmpDir + " " + matcher0.group(1) + "Â° " + (Math.round(tmpCoord / (1 / 60) * 1000) * 1000));
 
 			return coords;
 		} else {
