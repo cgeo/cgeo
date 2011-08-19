@@ -342,8 +342,8 @@ public class cgeocaches extends AbstractListActivity {
 					}
 
 					int secondsElapsed = (int)((System.currentTimeMillis() - detailProgressTime) / 1000);
-					int minutesRemaining = (int) ((detailTotal - detailProgress) * secondsElapsed / detailProgress / 60);
-
+					int minutesRemaining = (int) ((detailTotal - detailProgress) * secondsElapsed / ((detailProgress > 0) ? detailProgress : 1) / 60);
+					
 					waitDialog.setProgress(detailProgress);
 					if (minutesRemaining < 1) {
 						waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
@@ -901,13 +901,15 @@ public class cgeocaches extends AbstractListActivity {
 
 			// Hide Field Notes export if there are no caches with logs
             item = menu.findItem(MENU_EXPORT_NOTES);
-            item.setEnabled(false);
-            for (cgCache cache : cacheList)
-            {
-                if (cache.logOffline)
+            if (null != item) {
+                item.setEnabled(false);
+                for (cgCache cache : cacheList)
                 {
-                    item.setEnabled(true);
-                    break;
+                    if (cache.logOffline)
+                    {
+                        item.setEnabled(true);
+                        break;
+                    }
                 }
             }
 		} catch (Exception e) {

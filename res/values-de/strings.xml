@@ -765,8 +765,8 @@
   <string name="attribute_nightcache_no">kein Nacht-Cache</string>
   <string name="attribute_parkngrab_yes">halten und mitnehmen</string>
   <string name="attribute_parkngrab_no">kein halten und mitnehmen</string>
-  <string name="attribute_AbandonedBuilding_yes">leerstehendes Gebäude</string>
-  <string name="attribute_AbandonedBuilding_no">kein leerstehendes Gebäude</string>
+  <string name="attribute_abandonedbuilding_yes">leerstehendes Gebäude</string>
+  <string name="attribute_abandonedbuilding_no">kein leerstehendes Gebäude</string>
   <string name="attribute_hike_short_yes">kurzer Marsch (weniger als 1 km)</string>
   <string name="attribute_hike_short_no">kein kurzer Marsch</string>
   <string name="attribute_hike_med_yes">mittlerer Marsch (1 bis 10 km)</string>
@@ -775,8 +775,8 @@
   <string name="attribute_hike_long_no">kein langer Marsch</string>
   <string name="attribute_seasonal_yes">Saisonabhängiger Zugang</string>
   <string name="attribute_seasonal_no">Zugang nicht saisonabhängig</string>
-  <string name="attribute_touristOK_yes">touristenfreundlich</string>
-  <string name="attribute_touristOK_no">nicht touristenfreundlich</string>
+  <string name="attribute_touristok_yes">touristenfreundlich</string>
+  <string name="attribute_touristok_no">nicht touristenfreundlich</string>
   <string name="attribute_frontyard_yes">Privatgrundstück</string>
   <string name="attribute_frontyard_no">kein Privatgrundstück</string>
   <string name="attribute_teamwork_yes">Teamwork notwendig</string>
@@ -797,8 +797,8 @@
   <string name="attribute_scuba_no">Tauchausrüstung nicht notwendig</string>
   <string name="attribute_flashlight_yes">Taschenlampe notwendig</string>
   <string name="attribute_flashlight_no">Taschenlampe nicht notwendig</string>
-  <string name="attribute_UV_yes">UV-Taschenlampe notwendig</string>
-  <string name="attribute_UV_no">UV-Taschenlampe nicht notwendig</string>
+  <string name="attribute_uv_yes">UV-Taschenlampe notwendig</string>
+  <string name="attribute_uv_no">UV-Taschenlampe nicht notwendig</string>
   <string name="attribute_snowshoes_yes">Schneeschuhe notwendig</string>
   <string name="attribute_snowshoes_no">Schneeschuhe nicht notwendig</string>
   <string name="attribute_skiis_yes">Ski notwendig</string>
