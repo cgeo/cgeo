@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.0"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="100px"
+   height="83.101px"
+   viewBox="0 0 100 83.101"
+   enable-background="new 0 0 100 83.101"
+   xml:space="preserve"
+   inkscape:version="0.47 r22583"
+   sodipodi:docname="scuba.svg"><metadata
+   id="metadata2835"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs2833"><inkscape:perspective
+     sodipodi:type="inkscape:persp3d"
+     inkscape:vp_x="0 : 41.550499 : 1"
+     inkscape:vp_y="0 : 1000 : 0"
+     inkscape:vp_z="100 : 41.550499 : 1"
+     inkscape:persp3d-origin="50 : 27.700333 : 1"
+     id="perspective2837" /></defs><sodipodi:namedview
+   pagecolor="#009674"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="1"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="504"
+   id="namedview2831"
+   showgrid="false"
+   inkscape:zoom="2.8399178"
+   inkscape:cx="50.000001"
+   inkscape:cy="41.5505"
+   inkscape:window-x="0"
+   inkscape:window-y="24"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="Layer_1" />
+<polygon
+   points="15.868,16.397 21.961,10.867 16.444,0.05 0,0 "
+   id="polygon2821"
+   style="fill:#ffffff"
+   transform="matrix(-1,0,0,1,100,0)" />
+<path
+   d="m 28.466,45.935 c -3,0.834 -6.223,-0.882 -7.079,-3.962 -0.822,-3.032 0.929,-6.218 3.951,-7.076 l 2.354,-0.662 3.046,11.019 -2.272,0.681 z"
+   id="path2823"
+   style="fill:#ffffff" />
+<path
+   d="m 30.313,33.533 18.995,-5.412 c 1.249,-0.329 2.503,0.429 2.847,1.692 l 1.785,6.42 c 0.351,1.261 -0.329,2.555 -1.609,2.934 L 33.335,44.521 30.313,33.533 z"
+   id="path2825"
+   style="fill:#ffffff" />
+<path
+   d="m 27.313,51.773 c 1.448,-1.393 3.249,-2.499 5.35,-3.083 l 23.028,-6.515 0,0 14.149,-25.373 c 0.745,-1.311 1.944,-2.354 3.496,-2.783 3.103,-0.882 6.327,0.961 7.174,4.098 0.423,1.489 0.223,3.009 -0.448,4.295 l -17.701,31.38 c 0,0 -1.448,2.353 -5.095,3.563 L 25.088,66.475 10.166,81.79 C 9.67,82.314 9.021,82.72 8.246,82.945 5.999,83.575 3.647,82.217 2.99,79.97 2.565,78.376 3.071,76.703 4.191,75.668 L 27.313,51.773 z"
+   id="path2827"
+   style="fill:#ffffff" />
+<path
+   d="M 10.143,58.11 6.798,62.533 0,55.03 5.741,51.797 C 5.2,47.73 7.693,43.792 11.692,42.651 c 4.399,-1.236 8.973,1.342 10.196,5.79 1.249,4.471 -1.326,9.071 -5.728,10.309 -2.09,0.605 -4.219,0.275 -6.017,-0.64 z"
+   id="path2829"
+   style="fill:#ffffff" />
+</svg>
