@@ -595,9 +595,17 @@ public class cgeodetail extends AbstractActivity {
 				gcIcons.put("mystery", R.drawable.type_mystery);
 			}
 
-			geocode = geocode.toUpperCase();
+			if (null == geocode && cache.geocode.length() > 0)
+            {
+			    geocode = cache.geocode;
+            }
+			
+			if (null == guid && cache.guid.length() > 0)
+            {
+                guid = cache.guid;
+            }
 
-			setTitle(geocode);
+			setTitle(cache.geocode.toUpperCase());
 
 			inflater = getLayoutInflater();
 
