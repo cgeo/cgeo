@@ -2600,37 +2600,6 @@ public class cgBase {
 		return trackables;
 	}
 
-	public static int parseFindCount(String page) {
-		if (page == null || page.length() == 0) {
-			return -1;
-		}
-
-		int findCount = -1;
-
-		try {
-			final Pattern findPattern = Pattern.compile("Finds\\s*</strong>\\s*<span class=\"statcount\">(\\d+)</span>", Pattern.CASE_INSENSITIVE);
-			final Matcher findMatcher = findPattern.matcher(page);
-			if (findMatcher.find()) {
-				if (findMatcher.groupCount() > 0) {
-					String count = findMatcher.group(1);
-
-					if (count != null) {
-						if (count.length() == 0) {
-							findCount = 0;
-						} else {
-							findCount = Integer.parseInt(count);
-						}
-					}
-				}
-			}
-		} catch (Exception e) {
-			Log.w(cgSettings.tag, "cgBase.parseFindCount: " + e.toString());
-		}
-
-		return findCount;
-	}
-
-
 	public static String stripParagraphs(String text) {
 		if (text == null) {
 			return "";
