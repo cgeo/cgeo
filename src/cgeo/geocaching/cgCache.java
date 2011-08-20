@@ -272,7 +272,7 @@ public class cgCache {
 	}
 
 	public boolean isEventCache() {
-		return (type.equalsIgnoreCase("event") || type.equalsIgnoreCase("mega") || type.equalsIgnoreCase("cito"));
+		return ("event".equalsIgnoreCase(type) || "mega".equalsIgnoreCase(type) || "cito".equalsIgnoreCase(type));
 	}
 
 	public boolean logVisit(IAbstractActivity fromActivity) {
@@ -312,9 +312,9 @@ public class cgCache {
 	}
 	
 	public ArrayList<Integer> getPossibleLogTypes(cgSettings settings) {
-		boolean isOwner = owner.equalsIgnoreCase(settings.getUsername());
+		boolean isOwner = owner != null && owner.equalsIgnoreCase(settings.getUsername());
 		ArrayList<Integer> types = new ArrayList<Integer>();
-		if (type.equals("event") || type.equals("mega") || type.equals("cito") || type.equals("lostfound")) {
+		if ("event".equals(type) || "mega".equals(type) || "cito".equals(type) || "lostfound".equals(type)) {
 			types.add(cgBase.LOG_WILL_ATTEND);
 			types.add(cgBase.LOG_NOTE);
 			types.add(cgBase.LOG_ATTENDED);
@@ -322,7 +322,7 @@ public class cgCache {
 			if (isOwner) {
 				types.add(cgBase.LOG_ANNOUNCEMENT);
 			}
-		} else if (type.equals("webcam")) {
+		} else if ("webcam".equals(type)) {
 			types.add(cgBase.LOG_WEBCAM_PHOTO_TAKEN);
 			types.add(cgBase.LOG_DIDNT_FIND_IT);
 			types.add(cgBase.LOG_NOTE);
