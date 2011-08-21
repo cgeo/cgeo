@@ -15,7 +15,7 @@ public final class Compatibility {
 	private static AndroidLevel8 getLevel8() {
 		if (!initialized) {
 			try {
-				final int sdk = new Integer(Build.VERSION.SDK).intValue();
+				final int sdk = Integer.valueOf(Build.VERSION.SDK).intValue();
 				if (sdk >= 8) {
 					level8 = new AndroidLevel8();
 				}
@@ -52,7 +52,7 @@ public final class Compatibility {
 	}
 
 	public static Uri getCalendarProviderURI() {
-		final int sdk = new Integer(Build.VERSION.SDK).intValue();
+		final int sdk = Integer.valueOf(Build.VERSION.SDK).intValue();
 		if (sdk >= 8) {
 			return Uri.parse("content://com.android.calendar/calendars");
 		} else {
@@ -61,7 +61,7 @@ public final class Compatibility {
 	}
 
 	public static Uri getCalenderEventsProviderURI() {
-		final int sdk = new Integer(Build.VERSION.SDK).intValue();
+		final int sdk = Integer.valueOf(Build.VERSION.SDK).intValue();
 		if (sdk >= 8) {
 			return Uri.parse("content://com.android.calendar/events");
 		} else {
