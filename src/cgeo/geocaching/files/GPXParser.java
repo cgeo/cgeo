@@ -1,4 +1,4 @@
-package cgeo.geocaching;
+package cgeo.geocaching.files;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,6 +10,14 @@ import java.util.regex.Pattern;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
+
+import cgeo.geocaching.cgBase;
+import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgLog;
+import cgeo.geocaching.cgSearch;
+import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.cgTrackable;
+import cgeo.geocaching.cgeoapplication;
 
 import android.os.Handler;
 import android.sax.Element;

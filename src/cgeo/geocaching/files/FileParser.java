@@ -1,4 +1,4 @@
-package cgeo.geocaching;
+package cgeo.geocaching.files;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -6,6 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Date;
+
+import cgeo.geocaching.cgBase;
+import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgSearch;
 
 import android.os.Handler;
 import android.os.Message;

@@ -2804,14 +2804,15 @@ public class cgData {
 			if (size > 0) {
 				Log.d(cgSettings.tag, "Database clean: removing " + size + " geocaches");
 
-				databaseRW.execSQL("delete from " + dbTableCaches + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableAttributes + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableSpoilers + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableLogs + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableLogCount + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableLogsOffline + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableWaypoints + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ") and type <> \"own\"");
-				databaseRW.execSQL("delete from " + dbTableTrackables + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
+				String geocodeList = cgBase.implode(", ", geocodes.toArray());
+				databaseRW.execSQL("delete from " + dbTableCaches + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableAttributes + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableSpoilers + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableLogs + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableLogCount + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableLogsOffline + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableWaypoints + " where geocode in (" + geocodeList + ") and type <> \"own\"");
+				databaseRW.execSQL("delete from " + dbTableTrackables + " where geocode in (" + geocodeList + ")");
 
 				geocodes.clear();
 			}
@@ -2861,14 +2862,15 @@ public class cgData {
 			}
 
 			if (geocodes.size() > 0) {
-				databaseRW.execSQL("delete from " + dbTableCaches + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableAttributes + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableSpoilers + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableLogs + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableLogCount + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableLogsOffline + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableWaypoints + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ") and type <> \"own\"");
-				databaseRW.execSQL("delete from " + dbTableTrackables + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
+				String geocodeList = cgBase.implode(", ", geocodes.toArray());
+				databaseRW.execSQL("delete from " + dbTableCaches + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableAttributes + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableSpoilers + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableLogs + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableLogCount + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableLogsOffline + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableWaypoints + " where geocode in (" + geocodeList + ") and type <> \"own\"");
+				databaseRW.execSQL("delete from " + dbTableTrackables + " where geocode in (" + geocodeList + ")");
 
 				geocodes.clear();
 			}

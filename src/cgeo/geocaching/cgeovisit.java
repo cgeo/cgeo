@@ -774,7 +774,7 @@ public class cgeovisit extends cgLogForm {
 				logNow.type = typeSelected;
 				logNow.log = log;
 
-				if (cache != null) {
+				if (cache != null && null != cache.logs) {
 					cache.logs.add(0, logNow);
 				}
 				app.addLog(geocode, logNow);

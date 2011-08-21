@@ -1,5 +1,7 @@
-package cgeo.geocaching;
+package cgeo.geocaching.files;
 
+import cgeo.geocaching.cgSearch;
+import cgeo.geocaching.cgeoapplication;
 import android.sax.Element;
 
 public final class GPX10Parser extends GPXParser {

@@ -3,6 +3,8 @@ package cgeo.geocaching;
 import java.io.File;
 import java.util.ArrayList;
 
+import cgeo.geocaching.files.FileList;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;

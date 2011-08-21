@@ -3,6 +3,10 @@ package cgeo.geocaching;
 import java.io.File;
 import java.util.ArrayList;
 
+import cgeo.geocaching.files.FileList;
+import cgeo.geocaching.files.GPXParser;
+import cgeo.geocaching.files.LocParser;
+
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Environment;

@@ -1,10 +1,18 @@
-package cgeo.geocaching;
+package cgeo.geocaching.files;
 
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import cgeo.geocaching.cgBase;
+import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgCacheWrap;
+import cgeo.geocaching.cgCoord;
+import cgeo.geocaching.cgSearch;
+import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.cgeoapplication;
 
 import android.os.Handler;
 import android.util.Log;

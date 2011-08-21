@@ -1,4 +1,4 @@
-package cgeo.geocaching;
+package cgeo.geocaching.files;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -11,6 +11,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import cgeo.geocaching.R;
+import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.activity.AbstractListActivity;
 
 public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractListActivity {

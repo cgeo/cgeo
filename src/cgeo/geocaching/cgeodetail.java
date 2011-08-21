@@ -595,9 +595,17 @@ public class cgeodetail extends AbstractActivity {
 				gcIcons.put("mystery", R.drawable.type_mystery);
 			}
 
-			geocode = geocode.toUpperCase();
+			if (null == geocode && cache.geocode.length() > 0)
+            {
+			    geocode = cache.geocode;
+            }
+			
+			if (null == guid && cache.guid.length() > 0)
+            {
+                guid = cache.guid;
+            }
 
-			setTitle(geocode);
+			setTitle(cache.geocode.toUpperCase());
 
 			inflater = getLayoutInflater();
 
@@ -807,9 +815,7 @@ public class cgeodetail extends AbstractActivity {
 				final TextView attribView = (TextView) findViewById(R.id.attributes);
 
 				StringBuilder buffer = new StringBuilder();
-				String attribute;
-				for (int i = 0; i < cache.attributes.size(); i++) {
-					attribute = cache.attributes.get(i);
+				for (String attribute : cache.attributes) {
 
 					// dynamically search for a translation of the attribute
 				    int id = res.getIdentifier("attribute_" + attribute, "string", base.context.getPackageName());
