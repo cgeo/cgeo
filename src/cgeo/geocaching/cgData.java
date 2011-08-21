@@ -2819,10 +2819,12 @@ public class cgData {
 
 			databaseRW.execSQL("delete from " + dbTableCaches + " where geocode = \"\"");
 
-			final SQLiteStatement countSql = databaseRO.compileStatement("select count(_id) from " + dbTableCaches + " where reason = 0");
-			final int count = (int) countSql.simpleQueryForLong();
-			countSql.close();
-			Log.d(cgSettings.tag, "Database clean: " + count + " cached geocaches remaining");
+			if (Log.isLoggable(cgSettings.tag, Log.DEBUG)) {
+				final SQLiteStatement countSql = databaseRO.compileStatement("select count(_id) from " + dbTableCaches + " where reason = 0");
+				final int count = (int) countSql.simpleQueryForLong();
+				countSql.close();
+				Log.d(cgSettings.tag, "Database clean: " + count + " cached geocaches remaining");
+			}
 		} catch (Exception e) {
 			Log.w(cgSettings.tag, "cgData.clean: " + e.toString());
 		}
@@ -2968,22 +2970,18 @@ public class cgData {
 			return false;
 		}
 
+		int count = 0;
 		init();
-
 		try {
 			final SQLiteStatement countSql = databaseRO.compileStatement("select count(_id) from " + dbTableLogsOffline + " where geocode = \"" + geocode.toUpperCase() + "\"");
-			final int count = (int) countSql.simpleQueryForLong();
-
-			if (count > 0) {
-				return true;
-			}
+			count = (int) countSql.simpleQueryForLong();
 
 			countSql.close();
 		} catch (Exception e) {
 			Log.e(cgSettings.tag, "cgData.hasLogOffline: " + e.toString());
 		}
 
-		return false;
+		return count > 0;
 	}
 
 	public void saveVisitDate(String geocode) {
