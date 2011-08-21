@@ -30,6 +30,8 @@ BCOL=black
 SSTROKE=5
 # color of the strikethru bar
 SCOL=\#c00000
+# file name of strike thru bar
+SFNAME="drawable/attribute__strikethru.png"
 
 #calculated values
 BNDIST=$(( ${ICONSIZE} - ${BDIST} ))
@@ -39,6 +41,7 @@ res=48
 [ -d drawable ] || mkdir drawable
 
 # create border
+echo "drawing border"
 convert -size ${ICONSIZE}x${ICONSIZE} xc:none -fill ${BCOL} -strokewidth 1 \
     -draw "roundrectangle ${BDIST},${BDIST} ${BNDIST},${BNDIST} ${BROUND},${BROUND}" \
     -strokewidth ${BSTROKE} -stroke ${FCOL} \
@@ -46,9 +49,17 @@ convert -size ${ICONSIZE}x${ICONSIZE} xc:none -fill ${BCOL} -strokewidth 1 \
     border.png
 
 # create strike-thru bar as overlay for _no images
+echo "drawing ${SFNAME}"
+convert -size ${ICONSIZE}x${ICONSIZE} xc:none -fill ${BCOL} -strokewidth 1 \
+    -draw "roundrectangle ${BDIST},${BDIST} ${BNDIST},${BNDIST} ${BROUND},${BROUND}" \
+    mask1.png
+convert -size ${ICONSIZE}x${ICONSIZE} xc:none -fill none -strokewidth ${BSTROKE} -stroke ${FCOL} \
+    -draw "roundrectangle ${BDIST},${BDIST} ${BNDIST},${BNDIST} ${BROUND},${BROUND}" \
+    mask2.png
 convert -size ${ICONSIZE}x${ICONSIZE} xc:none -stroke "${SCOL}" -strokewidth ${SSTROKE} \
-    -draw "line 0,0 ${ICONSIZE},${ICONSIZE}" border.png -compose DstIn -composite -depth 8 drawable/strikethru.png
-optipng -quiet drawable/strikethru.png
+    -draw "line 0,0 ${ICONSIZE},${ICONSIZE}" mask1.png -compose DstIn -composite tmp.png
+convert tmp.png mask2.png -compose DstOut -composite -depth 8 ${SFNAME}
+optipng -quiet ${SFNAME}
 
 if [ $# -gt 0 ]; then
     svgs="$@"
@@ -70,4 +81,5 @@ for s in $svgs; do
 done
 
 
-rm tmp.png border.png
+rm tmp.png border.png mask1.png mask2.png
+

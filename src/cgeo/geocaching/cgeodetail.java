@@ -38,8 +38,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
+import android.view.ViewParent;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -82,6 +86,11 @@ public class cgeodetail extends AbstractActivity {
 	private ProgressDialog watchlistDialog = null; // progress dialog for watchlist add/remove
 	private Thread watchlistThread = null; // thread for watchlist add/remove
 	private HashMap<Integer, String> calendars = new HashMap<Integer, String>();
+	private ViewGroup attributeIconsLayout; // layout for attribute icons
+	private ViewGroup attributeDescriptionsLayout; // layout for attribute descriptions
+	private boolean attributesShowAsIcons = true; // default: show icons
+	private int attributeBoxMaxWidth;
+	
 	private Handler storeCacheHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -811,30 +820,38 @@ public class cgeodetail extends AbstractActivity {
 
 			// cache attributes
 			if (cache.attributes != null && cache.attributes.size() > 0) {
-				final LinearLayout attribBox = (LinearLayout) findViewById(R.id.attributes_box);
-				final TextView attribView = (TextView) findViewById(R.id.attributes);
+				final LinearLayout attribBox = (LinearLayout) findViewById(R.id.attributes_innerbox);
 
-				StringBuilder buffer = new StringBuilder();
-				String attribute;
-				for (int i = 0; i < cache.attributes.size(); i++) {
-					attribute = cache.attributes.get(i);
+		    	// maximum width for attribute icons is screen width - paddings of parents
+		        attributeBoxMaxWidth = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
+		        		.getDefaultDisplay().getWidth();
+		        ViewParent child = attribBox;
+		        do {
+		        	if (child instanceof View)
+		        	attributeBoxMaxWidth = attributeBoxMaxWidth - ((View) child).getPaddingLeft() 
+		        			- ((View) child).getPaddingRight();
+		        	child = child.getParent();
+		        } while (child != null);
+		 
+				// delete views holding description / icons
+		        attributeDescriptionsLayout = null;
+		        attributeIconsLayout = null;
 
-					// dynamically search for a translation of the attribute
-				    int id = res.getIdentifier("attribute_" + attribute, "string", base.context.getPackageName());
-				    if (id > 0) {
-				    	String translated = res.getString(id);
-				    	if (translated != null && translated.length() > 0) {
-				    		attribute = translated;
-				    	}
-				    }
-				    if (buffer.length() > 0) {
-				    	buffer.append('\n');
-				    }
-				    buffer.append(attribute);
-				}
+				attribBox.setOnClickListener(new View.OnClickListener() {    
+		                @Override
+		                public void onClick(View v) {
+		                	// toggle between attribute icons and descriptions
+		                	toggleAttributeDisplay(attribBox, attributeBoxMaxWidth);
+		                }
+		            } );
 
-				attribView.setText(buffer);
-				attribBox.setVisibility(View.VISIBLE);
+		        // icons or text?
+				if (attributesShowAsIcons)
+					showAttributeIcons(attribBox, attributeBoxMaxWidth);
+				else
+					showAttributeDescriptions(attribBox);
+
+				findViewById(R.id.attributes_box).setVisibility(View.VISIBLE);
 			}
 
 			// cache inventory
@@ -1935,4 +1952,122 @@ public class cgeodetail extends AbstractActivity {
 		cgeonavigate.coordinates = getCoordinates();
 		startActivity(navigateIntent);
 	}
+	
+	/**
+	 * lazy-creates the layout holding the icons of the chaches attributes
+	 * and makes it visible
+	 */
+	private void showAttributeIcons(LinearLayout attribBox, int parentWidth) {
+		if (attributeIconsLayout == null)
+			attributeIconsLayout = createAttributeIconsLayout(parentWidth);
+		attribBox.removeAllViews();
+		attribBox.addView(attributeIconsLayout);
+		attributesShowAsIcons = true;
+	}
+
+	/**
+	 * lazy-creates the layout holding the discriptions of the chaches attributes
+	 * and makes it visible
+	 */
+	private void showAttributeDescriptions(LinearLayout attribBox) {
+		if (attributeDescriptionsLayout == null)
+			attributeDescriptionsLayout = createAttributeDescriptionsLayout();
+		attribBox.removeAllViews();
+		attribBox.addView(attributeDescriptionsLayout);
+		attributesShowAsIcons = false;
+	}
+	
+	/**
+	 * toggle attribute descriptions and icons
+	 */
+	private void toggleAttributeDisplay(LinearLayout attribBox, int parentWidth) {
+		if (attributesShowAsIcons)
+			showAttributeDescriptions(attribBox);
+		else
+			showAttributeIcons(attribBox, parentWidth);
+	}
+
+	private ViewGroup createAttributeIconsLayout(int parentWidth) {
+    	LinearLayout rows = new LinearLayout(this);
+    	rows.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+    	rows.setOrientation(LinearLayout.VERTICAL);
+
+    	LinearLayout attributeRow = newAttributeIconsRow();
+        rows.addView(attributeRow);
+        
+        for(String attributeName : cache.attributes) {
+			boolean strikethru = attributeName.endsWith("_no");
+			// cut off _yes / _no
+			if (attributeName.endsWith("_no") || attributeName.endsWith("_yes"))
+				attributeName = attributeName.substring(0, attributeName.lastIndexOf("_"));
+			// check if another attribute icon fits in this row
+        	attributeRow.measure(0, 0);
+        	int rowWidth = attributeRow.getMeasuredWidth();
+        	FrameLayout fl = (FrameLayout) inflater.inflate(R.layout.attribute_image, null);
+        	ImageView iv = (ImageView) fl.getChildAt(0);
+        	if ((parentWidth - rowWidth) < iv.getLayoutParams().width) {
+        		// make a new row
+        		attributeRow = newAttributeIconsRow();
+        		rows.addView(attributeRow);
+        	}
+
+			// dynamically search icon of the attribute
+        	Drawable d = null;
+		    int id = res.getIdentifier("attribute_" + attributeName, "drawable", base.context.getPackageName());
+		    if (id > 0)
+		    	d = res.getDrawable(id);
+		    else
+		    	d = res.getDrawable(R.drawable.attribute_icon_not_found);
+	        iv.setImageDrawable(d);
+
+	        // strike through?
+        	if (strikethru) {
+        		// generate strikethru image with same properties as attribute image
+        		ImageView strikethruImage = new ImageView(this);
+        		strikethruImage.setLayoutParams(iv.getLayoutParams());
+        		d = res.getDrawable(R.drawable.attribute__strikethru);
+    	        strikethruImage.setImageDrawable(d);
+    	        fl.addView(strikethruImage);
+        	}
+        	attributeRow.addView(fl);
+        }
+        
+        return rows;
+    }
+    
+    private LinearLayout newAttributeIconsRow() {
+    	 LinearLayout rowLayout = new LinearLayout(this);
+         rowLayout.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+                 LayoutParams.WRAP_CONTENT));
+         rowLayout.setOrientation(LinearLayout.HORIZONTAL);
+         return rowLayout;
+    }
+    
+    private ViewGroup createAttributeDescriptionsLayout() {
+    	final LinearLayout descriptions = (LinearLayout) inflater.inflate(R.layout.attribute_descriptions, null);
+    	TextView attribView = (TextView) descriptions.getChildAt(0);
+
+		StringBuilder buffer = new StringBuilder();
+		String attribute;
+		for (int i = 0; i < cache.attributes.size(); i++) {
+			attribute = cache.attributes.get(i);
+
+			// dynamically search for a translation of the attribute
+		    int id = res.getIdentifier("attribute_" + attribute, "string", base.context.getPackageName());
+		    if (id > 0) {
+		    	String translated = res.getString(id);
+		    	if (translated != null && translated.length() > 0) {
+		    		attribute = translated;
+		    	}
+		    }
+		    if (buffer.length() > 0) {
+		    	buffer.append('\n');
+		    }
+		    buffer.append(attribute);
+		}
+
+		attribView.setText(buffer);
+        
+        return descriptions;
+    }
 }
