@@ -10,7 +10,10 @@ BGCOLOR=$BG0
 
 addrow () {
     echo "<tr bgcolor='$BGCOLOR'>" >> "${OUT}"
-    echo "<td><img src='./drawable/${1}.png'></td>" >> "${OUT}"
+    echo "<td><img src='./drawable/${1}.png'>" >> "${OUT}"
+    echo "<img style='background:url(./drawable/${1}.png' src='./drawable/strikethru.png'>" >> "${OUT}"
+#    echo "<img style='background:url(./drawable/${1}.png' src='./drawable/strikethru1.png'>" >> "${OUT}"
+    echo "</td>" >> "${OUT}"
     desc=`grep "${1}_yes" ../../res/values/strings.xml | sed "s/^.*>\(.*\)<.*$/\1/"`
     echo "<td>$desc</td><td>$1</td></tr>" >> "${OUT}"
     BG=$(( $BG + 1 ))
@@ -26,6 +29,5 @@ cat iconlist.txt | grep -v "^#" | while read i; do
     name=`echo $i | cut -d "|" -f 1 | sed "s/ //g"`
     addrow attribute_$name
 done
-addrow strikethru
 
 echo "</table></body></html>" >> "${OUT}"

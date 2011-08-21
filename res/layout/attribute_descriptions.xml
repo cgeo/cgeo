@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:id="@+id/attribute_descriptions"
+		android:layout_width="fill_parent" 
+		android:layout_height="wrap_content" >
+    <TextView android:id="@+id/attribute_descriptions_textview"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:textSize="14dip"
+            android:textColor="?text_color"
+            android:textColorLink="?text_color_link" 
+            android:linksClickable="true" />
+</LinearLayout>
