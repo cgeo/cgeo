@@ -1,6 +1,8 @@
 package cgeo.geocaching.mapcommon;
 
 import java.util.ArrayList;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -45,6 +47,7 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 	private PaintFlagsDrawFilter remfil = null;
 	private cgSettings settings;
 	private MapFactory mapFactory = null;
+    static private Lock lock = new ReentrantLock();
 
 	public cgMapOverlay(cgSettings settingsIn, ItemizedOverlayImpl ovlImpl, Context contextIn, Boolean fromDetailIn) {
 		super(ovlImpl);
@@ -74,10 +77,11 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 			item.setMarker(boundCenterBottom(item.getMarker(0)));
 		}
 
-		items = new ArrayList<CacheOverlayItemImpl>(itemsPre);
-
+		lock.lock();
+        items = new ArrayList<CacheOverlayItemImpl>(itemsPre);
 		setLastFocusedItemIndex(-1); // to reset tap during data change
 		populate();
+        lock.unlock();
 	}
 
 	public boolean getCircles() {
@@ -90,10 +94,10 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 
 	@Override
 	public void draw(Canvas canvas, MapViewImpl mapView, boolean shadow) {
-
+        lock.lock();
 		drawInternal(canvas, mapView.getMapProjection());
-
 		super.draw(canvas, mapView, false);
+        lock.unlock();
 	}
 
 	@Override
