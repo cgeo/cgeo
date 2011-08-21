@@ -190,15 +190,14 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 		String fileExt = getFileExtension();
 
 		if (listPre != null && listPre.length > 0) {
-			final int listCnt = listPre.length;
 
-			for (int i = 0; i < listCnt; i++) {
+			for (File file : listPre) {
 				if (endSearching) {
 					return;
 				}
 
-				if (listPre[i].canRead() && listPre[i].isFile()) {
-					final String[] nameParts = listPre[i].getName().split("\\.");
+				if (file.canRead() && file.isFile()) {
+					final String[] nameParts = file.getName().split("\\.");
 					if (nameParts.length > 1) {
 						final String extension = nameParts[(nameParts.length - 1)].toLowerCase();
 
@@ -209,10 +208,10 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 						continue; // file has no extension
 					}
 
-					list.add(listPre[i]); // add file to list
-				} else if (listPre[i].canRead() && listPre[i].isDirectory()) {
+					list.add(file); // add file to list
+				} else if (file.canRead() && file.isDirectory()) {
 					final Message msg = new Message();
-					String name = listPre[i].getName();
+					String name = file.getName();
 					if (name.substring(0, 1).equals(".")) {
 						continue; // skip hidden directories
 					}
@@ -222,7 +221,7 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 					msg.obj = name;
 					changeWaitDialogHandler.sendMessage(msg);
 
-					listDir(list, listPre[i]); // go deeper
+					listDir(list, file); // go deeper
 				}
 			}
 		}
