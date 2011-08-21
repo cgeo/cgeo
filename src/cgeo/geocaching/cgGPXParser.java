@@ -254,20 +254,10 @@ public class cgGPXParser {
 							cache.cacheid = attrs.getValue("id");
 						}
 						if (attrs.getIndex("archived") > -1) {
-							final String at = attrs.getValue("archived").toLowerCase();
-							if (at.equals("true")) {
-								cache.archived = true;
-							} else {
-								cache.archived = false;
-							}
+							cache.archived = attrs.getValue("archived").equalsIgnoreCase("true");
 						}
 						if (attrs.getIndex("available") > -1) {
-							final String at = attrs.getValue("available").toLowerCase();
-							if (at.equals("true")) {
-								cache.disabled = false;
-							} else {
-								cache.disabled = true;
-							}
+							cache.disabled = !attrs.getValue("available").equalsIgnoreCase("true");
 						}
 					} catch (Exception e) {
 						Log.w(cgSettings.tag, "Failed to parse cache attributes.");
@@ -280,7 +270,7 @@ public class cgGPXParser {
 
 				public void end(String body) {
 					final String content = Html.fromHtml(body).toString().trim();
-					cache.name = content;
+					cache.name = validate(content);
 				}
 			});
 
@@ -289,7 +279,7 @@ public class cgGPXParser {
 
 				public void end(String body) {
 					final String content = Html.fromHtml(body).toString().trim();
-					cache.owner = content;
+					cache.owner = validate(content);
 				}
 			});
 
@@ -297,8 +287,8 @@ public class cgGPXParser {
 			gcCache.getChild(nsGC, "type").setEndTextElementListener(new EndTextElementListener() {
 
 				public void end(String body) {
-					final String content = cgBase.cacheTypes.get(body.toLowerCase());
-					cache.type = content;
+					String parsedString = validate(body.toLowerCase());
+					setType(parsedString);
 				}
 			});
 
@@ -307,7 +297,7 @@ public class cgGPXParser {
 
 				public void end(String body) {
 					final String content = body.toLowerCase();
-					cache.size = content;
+					cache.size = validate(content);
 				}
 			});
 
@@ -340,7 +330,7 @@ public class cgGPXParser {
 
 				public void end(String body) {
 					if (cache.location == null || cache.location.length() == 0) {
-						cache.location = body.trim();
+						cache.location = validate(body.trim());
 					} else {
 						cache.location = cache.location + ", " + body.trim();
 					}
@@ -352,7 +342,7 @@ public class cgGPXParser {
 
 				public void end(String body) {
 					if (cache.location == null || cache.location.length() == 0) {
-						cache.location = body.trim();
+						cache.location = validate(body.trim());
 					} else {
 						cache.location = body.trim() + ", " + cache.location;
 					}
@@ -363,7 +353,7 @@ public class cgGPXParser {
 			gcCache.getChild(nsGC, "encoded_hints").setEndTextElementListener(new EndTextElementListener() {
 
 				public void end(String body) {
-					cache.hint = body.trim();
+					cache.hint = validate(body.trim());
 				}
 			});
 
@@ -373,8 +363,8 @@ public class cgGPXParser {
 				public void start(Attributes attrs) {
 					try {
 						if (attrs.getIndex("html") > -1) {
-							final String at = attrs.getValue("html").toLowerCase();
-							if (at.equals("false")) {
+							final String at = attrs.getValue("html");
+							if (at.equalsIgnoreCase("false")) {
 								htmlShort = false;
 							}
 						}
@@ -387,7 +377,7 @@ public class cgGPXParser {
 			gcCache.getChild(nsGC, "short_description").setEndTextElementListener(new EndTextElementListener() {
 
 				public void end(String body) {
-					if (htmlShort == false) {
+					if (!htmlShort) {
 						cache.shortdesc = Html.fromHtml(body).toString();
 					} else {
 						cache.shortdesc = body;
@@ -401,8 +391,7 @@ public class cgGPXParser {
 				public void start(Attributes attrs) {
 					try {
 						if (attrs.getIndex("html") > -1) {
-							final String at = attrs.getValue("html").toLowerCase();
-							if (at.equals("false")) {
+							if (attrs.getValue("html").equalsIgnoreCase("false")) {
 								htmlLong = false;
 							}
 						}
@@ -561,5 +550,24 @@ public class cgGPXParser {
 			Log.e(cgSettings.tag, "Error after parsing .gpx file " + file.getAbsolutePath() + " as GPX " + version + ": could not close file!");
 		}
 		return parsed ? search.getCurrentId() : 0l;
+	}
+
+	protected String validate(String input) {
+		if ("nil".equalsIgnoreCase(input)) {
+			return "";
+		}
+		return input;
+	}
+
+	private void setType(String parsedString) {
+		final String knownType = cgBase.cacheTypes.get(parsedString);
+		if (knownType != null) {
+			cache.type = knownType;
+		}
+		else {
+			if (cache.type == null || cache.type.length() == 0) {
+				cache.type = "mystery"; // default for not recognized types
+			}
+		}
 	}
 }

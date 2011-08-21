@@ -411,6 +411,7 @@
   <string name="init_units">Use miles/feet\n(imperial units)</string>
   <string name="init_nav">Use Google Navigation</string>
   <string name="init_autoload">Auto-loading long description</string>
+  <string name="init_log_offline">When logging, always log offline (don\'t show online log screen when logging, don\'t send the log online)</string>
   <string name="init_livelist">Show direction to caches in its list</string>
   <string name="init_browser">Identify c:geo as standard browser</string>
   <string name="init_altitude">Altitude correction</string>

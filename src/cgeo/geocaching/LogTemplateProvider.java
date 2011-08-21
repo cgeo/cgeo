@@ -1,6 +1,10 @@
 package cgeo.geocaching;
 
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import android.util.Log;
 
 
 /**
@@ -32,7 +36,10 @@ public class LogTemplateProvider {
 		}
 
 		protected String apply(String input, cgBase base) {
-			return input.replaceAll("\\[" + template + "\\]", getValue(base));
+			if (input.contains("[" + template + "]")) {
+				return input.replaceAll("\\[" + template + "\\]", getValue(base));
+			}
+			return input;
 		}
 	}
 
@@ -69,7 +76,7 @@ public class LogTemplateProvider {
 					String findCount = "";
 					final HashMap<String, String> params = new HashMap<String, String>();
 					final String page = base.request(false, "www.geocaching.com", "/my/", "GET", params, false, false, false).getData();
-					int current = cgBase.parseFindCount(page);
+					int current = parseFindCount(page);
 
 					if (current >= 0) {
 						findCount = String.valueOf(current + 1);
@@ -101,5 +108,37 @@ public class LogTemplateProvider {
 		}
 		return result;
 	}
+	
+	private static int parseFindCount(String page) {
+		if (page == null || page.length() == 0) {
+			return -1;
+		}
+
+		int findCount = -1;
+
+		try {
+			final Pattern findPattern = Pattern.compile("Finds\\s*</strong>\\s*<span class=\"statcount\">(\\d+)</span>", Pattern.CASE_INSENSITIVE);
+			final Matcher findMatcher = findPattern.matcher(page);
+			if (findMatcher.find()) {
+				if (findMatcher.groupCount() > 0) {
+					String count = findMatcher.group(1);
+
+					if (count != null) {
+						if (count.length() == 0) {
+							findCount = 0;
+						} else {
+							findCount = Integer.parseInt(count);
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			Log.w(cgSettings.tag, "cgBase.parseFindCount: " + e.toString());
+		}
+
+		return findCount;
+	}
+
+	
 
 }

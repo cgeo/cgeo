@@ -92,7 +92,7 @@ public class cgBase {
 	private final static Pattern patternDesc = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>" + "(.*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternCountLogs = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p>(.*)<\\/p><\\/span>", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternCountLog = Pattern.compile(" src=\"\\/images\\/icons\\/([^\\.]*).gif\" alt=\"[^\"]*\" title=\"[^\"]*\" />([0-9]*)[^0-9]+", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-	private final static Pattern patternLogs = Pattern.compile("<table class=\"LogsTable\">(.*?)</table>\\s*<p", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+	//private final static Pattern patternLogs = Pattern.compile("<table class=\"LogsTable\">(.*?)</table>\\s*<p", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	private final static Pattern patternLog = Pattern.compile("<tr><td class.+?<a href=\"/profile/\\?guid=.+?>(.+?)</a>.+?logOwnerStats.+?guid.+?>(\\d+)</a>.+?LogType.+?<img.+?/images/icons/([^\\.]+)\\..+?title=\"(.+?)\".+?LogDate.+?>(.+?)<.+?LogText.+?>(.*?)</p>(.*?)</div></div></div></td></tr>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	private final static Pattern patternLogImgs = Pattern.compile("href=\"(http://img.geocaching.com/cache/log/.+?)\".+?<span>([^<]*)", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternAttributes = Pattern.compile("<h3 class=\"WidgetHeader\">[^<]*<img[^>]+>\\W*Attributes[^<]*</h3>[^<]*<div class=\"WidgetBody\">(([^<]*<img src=\"[^\"]+\" alt=\"[^\"]+\"[^>]*>)+)[^<]*<p", Pattern.CASE_INSENSITIVE);
@@ -115,13 +115,15 @@ public class cgBase {
 	public static HashMap<Integer, String> logTypesTrackable = new HashMap<Integer, String>();
 	public static HashMap<Integer, String> logTypesTrackableAction = new HashMap<Integer, String>();
 	public static HashMap<Integer, String> errorRetrieve = new HashMap<Integer, String>();
-	public static SimpleDateFormat dateInBackslash = new SimpleDateFormat("MM/dd/yyyy");
-	public static SimpleDateFormat dateInDash = new SimpleDateFormat("yyyy-MM-dd");
-	public static SimpleDateFormat dateEvIn = new SimpleDateFormat("dd MMMMM yyyy", Locale.ENGLISH); // 28 March 2009
-	public static SimpleDateFormat dateTbIn1 = new SimpleDateFormat("EEEEE, dd MMMMM yyyy", Locale.ENGLISH); // Saturday, 28 March 2009
-	public static SimpleDateFormat dateTbIn2 = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
-	public static SimpleDateFormat dateSqlIn = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 2010-07-25 14:44:01
-	public static SimpleDateFormat dateGPXIn = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // 2010-04-20T07:00:00Z
+	public final static SimpleDateFormat dateInBackslash = new SimpleDateFormat("MM/dd/yyyy");
+	public final static SimpleDateFormat dateInDash = new SimpleDateFormat("yyyy-MM-dd");
+	public final static SimpleDateFormat dateEvIn = new SimpleDateFormat("dd MMMMM yyyy", Locale.ENGLISH); // 28 March 2009
+	public final static SimpleDateFormat dateTbIn1 = new SimpleDateFormat("EEEEE, dd MMMMM yyyy", Locale.ENGLISH); // Saturday, 28 March 2009
+	public final static SimpleDateFormat dateTbIn2 = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
+	public final static SimpleDateFormat dateSqlIn = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 2010-07-25 14:44:01
+	public final static SimpleDateFormat dateGPXIn = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // 2010-04-20T07:00:00Z
+	public final static SimpleDateFormat dateLogs1 = new SimpleDateFormat("MMMMM dd, yyyy", Locale.ENGLISH);  // March 28, 2009
+	public final static SimpleDateFormat dateLogs2 = new SimpleDateFormat("MMMMM dd", Locale.ENGLISH);  // March 28
 	private Resources res = null;
 	private HashMap<String, String> cookies = new HashMap<String, String>();
 	private static final String passMatch = "[/\\?&]*[Pp]ass(word)?=[^&^#^$]+";
@@ -1670,7 +1672,7 @@ public class cgBase {
 		        2- Finds-count
                 3- Log type image name (e.g. "icon_smile")
                 4- Type string (e.g. "Found it")
-                5- Date string (e.g. "about 4 days ago")
+                5- Date string (e.g. "March 28, 2009")
                 6- Log text
                 7- The rest (e.g. log-images, maybe faster)
 		        */
@@ -1687,6 +1689,28 @@ public class cgBase {
 					else
 					{
 						logDone.type = logTypes.get("icon_note");
+					}
+					
+					try
+					{
+					    logDone.date = dateLogs1.parse(matcherLog.group(5)).getTime(); // long format
+					}
+					catch (ParseException e)
+					{
+					    try
+					    {
+					        // short format, with current year
+					        final Date date    = dateLogs2.parse(matcherLog.group(5));
+					        final Calendar cal = Calendar.getInstance();
+					        final int year     = cal.get(Calendar.YEAR);
+					        cal.setTime(date);
+					        cal.set(Calendar.YEAR, year);
+					        logDone.date = cal.getTimeInMillis();
+					    }
+					    catch (ParseException ee)
+					    {
+					        Log.w(cgSettings.tag, "Failed to parse logs date: " + ee.toString());
+					    }
 					}
 
 					logDone.author = Html.fromHtml(matcherLog.group(1)).toString();
@@ -2575,37 +2599,6 @@ public class cgBase {
 
 		return trackables;
 	}
-
-	public static int parseFindCount(String page) {
-		if (page == null || page.length() == 0) {
-			return -1;
-		}
-
-		int findCount = -1;
-
-		try {
-			final Pattern findPattern = Pattern.compile("Finds\\s*</strong>\\s*<span class=\"statcount\">(\\d+)</span>", Pattern.CASE_INSENSITIVE);
-			final Matcher findMatcher = findPattern.matcher(page);
-			if (findMatcher.find()) {
-				if (findMatcher.groupCount() > 0) {
-					String count = findMatcher.group(1);
-
-					if (count != null) {
-						if (count.length() == 0) {
-							findCount = 0;
-						} else {
-							findCount = Integer.parseInt(count);
-						}
-					}
-				}
-			}
-		} catch (Exception e) {
-			Log.w(cgSettings.tag, "cgBase.parseFindCount: " + e.toString());
-		}
-
-		return findCount;
-	}
-
 
 	public static String stripParagraphs(String text) {
 		if (text == null) {
