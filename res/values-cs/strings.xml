@@ -258,7 +258,7 @@
   <string name="init_gcvote">gcvote.com</string>
   <string name="init_go4cache">Go 4 Cache</string>
   <string name="init_twitter">twitter</string>
-  <string name="init_username">uživatelské heslo</string>
+  <string name="init_username">uživatelské jméno</string>
   <string name="init_password">heslo</string>
   <string name="init_passvote">heslo</string>
   <string name="init_login">zkontrolovat</string>
