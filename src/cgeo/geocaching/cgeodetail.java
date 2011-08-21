@@ -807,9 +807,7 @@ public class cgeodetail extends AbstractActivity {
 				final TextView attribView = (TextView) findViewById(R.id.attributes);
 
 				StringBuilder buffer = new StringBuilder();
-				String attribute;
-				for (int i = 0; i < cache.attributes.size(); i++) {
-					attribute = cache.attributes.get(i);
+				for (String attribute : cache.attributes) {
 
 					// dynamically search for a translation of the attribute
 				    int id = res.getIdentifier("attribute_" + attribute, "string", base.context.getPackageName());

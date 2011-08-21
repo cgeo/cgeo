@@ -867,7 +867,7 @@ public class cgBase {
 			while (matcherTotalCnt.find()) {
 				if (matcherTotalCnt.groupCount() > 0) {
 					if (matcherTotalCnt.group(1) != null) {
-						caches.totalCnt = new Integer(matcherTotalCnt.group(1));
+						caches.totalCnt = Integer.valueOf(matcherTotalCnt.group(1));
 					}
 				}
 			}
@@ -2557,12 +2557,12 @@ public class cgBase {
 					continue;
 				}
 				if (trackableMatcher.group(3) != null) {
-					trackable.ctl = new Integer(trackableMatcher.group(3));
+					trackable.ctl = Integer.valueOf(trackableMatcher.group(3));
 				} else {
 					continue;
 				}
 				if (trackableMatcher.group(5) != null) {
-					trackable.id = new Integer(trackableMatcher.group(5));
+					trackable.id = Integer.valueOf(trackableMatcher.group(5));
 				} else {
 					continue;
 				}
@@ -4296,63 +4296,7 @@ public class cgBase {
 			scheme = "https://";
 		}
 
-		// prepare cookies
-		String cookiesDone = null;
-		if (cookies == null || cookies.isEmpty()) {
-			if (cookies == null) {
-				cookies = new HashMap<String, String>();
-			}
-
-			final Map<String, ?> prefsAll = prefs.getAll();
-			final Set<? extends Map.Entry<String, ?>> entrySet = prefsAll.entrySet();
-			
-			for(Map.Entry<String, ?> entry : entrySet){
-				String key = entry.getKey();
-				if (key.matches("cookie_.+")) {
-					final String cookieKey = key.substring(7);
-					final String cookieValue = (String) entry.getValue();
-
-					cookies.put(cookieKey, cookieValue);
-				}
-			}
-		}
-
-		if (cookies != null) {
-			final Set<Map.Entry<String, String>> entrySet = cookies.entrySet();
-			final ArrayList<String> cookiesEncoded = new ArrayList<String>();
-			
-			for(Map.Entry<String, String> entry : entrySet){
-				cookiesEncoded.add(entry.getKey() + "=" + entry.getValue());
-			}
-
-			if (cookiesEncoded.size() > 0) {
-				cookiesDone = implode("; ", cookiesEncoded.toArray());
-			}
-		}
-
-		if (cookiesDone == null) {
-			Map<String, ?> prefsValues = prefs.getAll();
-
-			if (prefsValues != null && prefsValues.size() > 0 && prefsValues.keySet().size() > 0) {
-				final Set<? extends Map.Entry<String, ?>> entrySet = prefsValues.entrySet();
-				final ArrayList<String> cookiesEncoded = new ArrayList<String>();
-
-				for(Map.Entry<String, ?> entry : entrySet){
-					String key = entry.getKey();
-					if (key.length() > 7 && key.substring(0, 7).equals("cookie_")) {
-						cookiesEncoded.add(key + "=" + entry.getValue());						
-					}
-				}
-
-				if (cookiesEncoded.size() > 0) {
-					cookiesDone = implode("; ", cookiesEncoded.toArray());
-				}
-			}
-		}
-
-		if (cookiesDone == null) {
-			cookiesDone = "";
-		}
+		String cookiesDone = getCookiesAsString();
 
 		URLConnection uc = null;
 		HttpURLConnection connection = null;
@@ -4454,16 +4398,7 @@ public class cgBase {
 				}
 				prefsEditor.commit();
 
-				final String encoding = connection.getContentEncoding();
-				InputStream ins;
-
-				if (encoding != null && encoding.equalsIgnoreCase("gzip")) {
-					ins = new GZIPInputStream(connection.getInputStream());
-				} else if (encoding != null && encoding.equalsIgnoreCase("deflate")) {
-					ins = new InflaterInputStream(connection.getInputStream(), new Inflater(true));
-				} else {
-					ins = connection.getInputStream();
-				}
+				InputStream ins = getInputstreamFromConnection(connection);
 				final InputStreamReader inr = new InputStreamReader(ins);
 				final BufferedReader br = new BufferedReader(inr, 16 * 1024);
 
@@ -4532,32 +4467,7 @@ public class cgBase {
 		return response;
 	}
 
-	private static void replaceWhitespace(final StringBuffer buffer) {
-		final int length = buffer.length();
-		final char[] chars = new char[length];
-		buffer.getChars(0, length, chars, 0);
-		int resultSize = 0;
-		boolean lastWasWhitespace = false;
-		for (int i = 0; i < length; i++) {
-			char c = chars[i];
-			if (c == ' ' || c == '\n' || c == '\r' || c == '\t') {
-				if (!lastWasWhitespace) {
-					chars[resultSize++] =' ';
-				}
-				lastWasWhitespace = true;
-			} else {
-				chars[resultSize++] = c;
-				lastWasWhitespace = false;
-			}
-		}
-		buffer.setLength(0);
-		buffer.append(chars);
-	}
-
-	public String requestJSONgc(String host, String path, String params) {
-		int httpCode = -1;
-		String httpLocation = null;
-
+	private String getCookiesAsString() {
 		// prepare cookies
 		String cookiesDone = null;
 		if (cookies == null || cookies.isEmpty()) {
@@ -4615,6 +4525,35 @@ public class cgBase {
 		if (cookiesDone == null) {
 			cookiesDone = "";
 		}
+		return cookiesDone;
+	}
+
+	private static void replaceWhitespace(final StringBuffer buffer) {
+		final int length = buffer.length();
+		final char[] chars = new char[length];
+		buffer.getChars(0, length, chars, 0);
+		int resultSize = 0;
+		boolean lastWasWhitespace = false;
+		for (char c : chars) {
+			if (c == ' ' || c == '\n' || c == '\r' || c == '\t') {
+				if (!lastWasWhitespace) {
+					chars[resultSize++] =' ';
+				}
+				lastWasWhitespace = true;
+			} else {
+				chars[resultSize++] = c;
+				lastWasWhitespace = false;
+			}
+		}
+		buffer.setLength(0);
+		buffer.append(chars);
+	}
+
+	public String requestJSONgc(String host, String path, String params) {
+		int httpCode = -1;
+		String httpLocation = null;
+
+		String cookiesDone = getCookiesAsString();
 
 		URLConnection uc = null;
 		HttpURLConnection connection = null;
@@ -4686,16 +4625,7 @@ public class cgBase {
 				}
 				prefsEditor.commit();
 
-				final String encoding = connection.getContentEncoding();
-				InputStream ins;
-
-				if (encoding != null && encoding.equalsIgnoreCase("gzip")) {
-					ins = new GZIPInputStream(connection.getInputStream());
-				} else if (encoding != null && encoding.equalsIgnoreCase("deflate")) {
-					ins = new InflaterInputStream(connection.getInputStream(), new Inflater(true));
-				} else {
-					ins = connection.getInputStream();
-				}
+				InputStream ins = getInputstreamFromConnection(connection);
 				final InputStreamReader inr = new InputStreamReader(ins);
 				final BufferedReader br = new BufferedReader(inr);
 
@@ -4740,6 +4670,20 @@ public class cgBase {
 		} else {
 			return "";
 		}
+	}
+
+	private static InputStream getInputstreamFromConnection(HttpURLConnection connection) throws IOException {
+		final String encoding = connection.getContentEncoding();
+		InputStream ins;
+
+		if (encoding != null && encoding.equalsIgnoreCase("gzip")) {
+			ins = new GZIPInputStream(connection.getInputStream());
+		} else if (encoding != null && encoding.equalsIgnoreCase("deflate")) {
+			ins = new InflaterInputStream(connection.getInputStream(), new Inflater(true));
+		} else {
+			ins = connection.getInputStream();
+		}
+		return ins;
 	}
 
 	public static String requestJSON(String host, String path, String params) {
@@ -4821,16 +4765,7 @@ public class cgBase {
 					}
 
 
-					final String encoding = connection.getContentEncoding();
-					InputStream ins;
-
-					if (encoding != null && encoding.equalsIgnoreCase("gzip")) {
-						ins = new GZIPInputStream(connection.getInputStream());
-					} else if (encoding != null && encoding.equalsIgnoreCase("deflate")) {
-						ins = new InflaterInputStream(connection.getInputStream(), new Inflater(true));
-					} else {
-						ins = connection.getInputStream();
-					}
+					InputStream ins = getInputstreamFromConnection(connection);
 					final InputStreamReader inr = new InputStreamReader(ins);
 					final BufferedReader br = new BufferedReader(inr, 1024);
 
@@ -4956,11 +4891,11 @@ public class cgBase {
 		if (path.exists()) {
 			File[] files = path.listFiles();
 
-			for (int i = 0; i < files.length; i++) {
-				if (files[i].isDirectory()) {
-					deleteDirectory(files[i]);
+			for (File file : files) {
+				if (file.isDirectory()) {
+					deleteDirectory(file);
 				} else {
-					files[i].delete();
+					file.delete();
 				}
 			}
 		}
