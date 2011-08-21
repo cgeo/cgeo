@@ -419,7 +419,7 @@
   <string name="init_restore_failed">Wiederherstellung fehlgeschlagen.</string>
   <string name="init_backup_last">Backup verfügbar von</string>
   <string name="init_backup_last_no">Keine Datei mit Datenbanksicherung gefunden.</string>
-  <string name="init_mapsources">Kertenherkunft</string> <!-- since: 2.26 RC3 -->
+  <string name="init_mapsources">Kartenherkunft</string> <!-- since: 2.26 RC3 -->
   <string name="init_mapsources_description">Hier kannst du die Quelle für deine Karte wählen. Alternativ zu Google maps stehen verschiedene OpenStreetMap-Stile zur Verfügung und daneben auch Karten-Dateien für die Offline-Nutzung (siehe http://code.google.com/p/mapsforge/ für die Details).</string> <!-- since: 2.26 RC3 -->
   <string name="init_mapsource_select">Wähle eine Kartenquelle</string>
   <string name="init_select_mapfile">...</string>
