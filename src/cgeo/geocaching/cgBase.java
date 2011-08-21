@@ -759,16 +759,19 @@ public class cgBase {
 			}
 
 			// cache direction - image
-			try {
-				final Matcher matcherDirection = patternDirection.matcher(row);
-				while (matcherDirection.find()) {
-					if (matcherDirection.groupCount() > 0) {
-						cache.directionImg = matcherDirection.group(1);
-					}
-				}
-			} catch (Exception e) {
-				// failed to parse direction image
-				Log.w(cgSettings.tag, "cgeoBase.parseSearch: Failed to parse cache direction image");
+			if (settings.loadDirectionImg)
+			{
+    			try {
+    				final Matcher matcherDirection = patternDirection.matcher(row);
+    				while (matcherDirection.find()) {
+    					if (matcherDirection.groupCount() > 0) {
+    						cache.directionImg = matcherDirection.group(1);
+    					}
+    				}
+    			} catch (Exception e) {
+    				// failed to parse direction image
+    				Log.w(cgSettings.tag, "cgeoBase.parseSearch: Failed to parse cache direction image");
+    			}
 			}
 
 			// cache inventory
@@ -945,10 +948,13 @@ public class cgBase {
 		}
 
 		// get direction images
-		for (cgCache oneCache : caches.cacheList) {
-			if (oneCache.latitude == null && oneCache.longitude == null && oneCache.direction == null && oneCache.directionImg != null) {
-				cgDirectionImg.getDrawable(oneCache.geocode, oneCache.directionImg);
-			}
+		if (settings.loadDirectionImg)
+		{
+    		for (cgCache oneCache : caches.cacheList) {
+    			if (oneCache.latitude == null && oneCache.longitude == null && oneCache.directionImg != null) {
+    				cgDirectionImg.getDrawable(oneCache.geocode, oneCache.directionImg);
+    			}
+    		}
 		}
 
 		// get ratings

@@ -434,6 +434,7 @@
   <string name="init_select_mapfile">...</string>
   <string name="init_trackautovisit">Set trackables automatically to \"visit\"</string>
   <string name="init_sigautoinsert">Insert signature automatically</string>
+  <string name="init_loaddirectionimg">Load direction-image if necessary</string>
 
   <!-- map sources -->
   <string-array name="map_sources">

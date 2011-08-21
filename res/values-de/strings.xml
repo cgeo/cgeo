@@ -425,6 +425,7 @@
   <string name="init_select_mapfile">...</string>
   <string name="init_trackautovisit">Trackables automatisch auf \"besuchen\" setzen</string>
   <string name="init_sigautoinsert">Signatur automatisch einfügen</string>
+  <string name="init_loaddirectionimg">Richtungs-Grafik laden wenn nötig</string>
 
   <!-- map sources -->
   <string-array name="map_sources">
