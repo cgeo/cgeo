@@ -505,7 +505,7 @@ public class cgeodetail extends AbstractActivity {
 			showSpoilers();
 			return true;
 		} else if (menuItem == 7) {
-			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/seek/cache_details.aspx?wp=" + cache.geocode)));
+			cache.openInBrowser(this);
 			return true;
 		} else if (menuItem == 10) {
 			cachesAround();

@@ -11,14 +11,6 @@ import java.util.regex.Pattern;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
-import cgeo.geocaching.cgBase;
-import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgLog;
-import cgeo.geocaching.cgSearch;
-import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.cgTrackable;
-import cgeo.geocaching.cgeoapplication;
-
 import android.os.Handler;
 import android.sax.Element;
 import android.sax.EndElementListener;
@@ -28,6 +20,13 @@ import android.sax.StartElementListener;
 import android.text.Html;
 import android.util.Log;
 import android.util.Xml;
+import cgeo.geocaching.cgBase;
+import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgLog;
+import cgeo.geocaching.cgSearch;
+import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.cgTrackable;
+import cgeo.geocaching.cgeoapplication;
 
 public abstract class GPXParser extends FileParser {
 
@@ -44,7 +43,7 @@ public abstract class GPXParser extends FileParser {
 	private String sym = null;
 	protected String namespace = null;
 	private ArrayList<String> nsGCList = new ArrayList<String>();
-	private static final Pattern patternGeocode = Pattern.compile("(GC[0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
+	private static final Pattern patternGeocode = Pattern.compile("([A-Z]C[0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
 	private String name = null;
 	private String cmt = null;
 	private String desc = null;
