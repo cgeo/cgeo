@@ -1354,7 +1354,7 @@ public class cgData {
 			if (!waypoints.isEmpty()) {
 				ContentValues values = new ContentValues();
 				for (cgWaypoint oneWaypoint : waypoints) {
-					if (oneWaypoint.type.equalsIgnoreCase("own")) {
+					if (oneWaypoint.isUserDefined()) {
 						continue;
 					}
 

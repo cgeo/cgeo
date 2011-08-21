@@ -935,87 +935,7 @@ public class cgBase {
 					}
 				}
 
-				if (coordinates != null && coordinates.length() > 0) {
-					final HashMap<String, cgCoord> cidCoords = new HashMap<String, cgCoord>();
-					final Pattern patternCidCode = Pattern.compile("name id=\"([^\"]+)\"");
-					final Pattern patternCidLat = Pattern.compile("lat=\"([^\"]+)\"");
-					final Pattern patternCidLon = Pattern.compile("lon=\"([^\"]+)\"");
-					// premium only >>
-					final Pattern patternCidDif = Pattern.compile("<difficulty>([^<]+)</difficulty>");
-					final Pattern patternCidTer = Pattern.compile("<terrain>([^<]+)</terrain>");
-					final Pattern patternCidCon = Pattern.compile("<container>([^<]+)</container>");
-					// >> premium only
-
-					final String[] points = coordinates.split("<waypoint>");
-
-					// parse coordinates
-					for (String point : points) {
-						final cgCoord pointCoord = new cgCoord();
-						final Matcher matcherCidCode = patternCidCode.matcher(point);
-						final Matcher matcherLatCode = patternCidLat.matcher(point);
-						final Matcher matcherLonCode = patternCidLon.matcher(point);
-						final Matcher matcherDifCode = patternCidDif.matcher(point);
-						final Matcher matcherTerCode = patternCidTer.matcher(point);
-						final Matcher matcherConCode = patternCidCon.matcher(point);
-						HashMap<String, Object> tmp = null;
-
-						if (matcherCidCode.find()) {
-							pointCoord.name = matcherCidCode.group(1).trim().toUpperCase();
-						}
-						if (matcherLatCode.find()) {
-							tmp = parseCoordinate(matcherLatCode.group(1), "lat");
-							pointCoord.latitude = (Double) tmp.get("coordinate");
-						}
-						if (matcherLonCode.find()) {
-							tmp = parseCoordinate(matcherLonCode.group(1), "lon");
-							pointCoord.longitude = (Double) tmp.get("coordinate");
-						}
-						if (matcherDifCode.find()) {
-							pointCoord.difficulty = new Float(matcherDifCode.group(1));
-						}
-						if (matcherTerCode.find()) {
-							pointCoord.terrain = new Float(matcherTerCode.group(1));
-						}
-						if (matcherConCode.find()) {
-							final int size = Integer.parseInt(matcherConCode.group(1));
-
-							if (size == 1) {
-								pointCoord.size = "not chosen";
-							} else if (size == 2) {
-								pointCoord.size = "micro";
-							} else if (size == 3) {
-								pointCoord.size = "regular";
-							} else if (size == 4) {
-								pointCoord.size = "large";
-							} else if (size == 5) {
-								pointCoord.size = "virtual";
-							} else if (size == 6) {
-								pointCoord.size = "other";
-							} else if (size == 8) {
-								pointCoord.size = "small";
-							} else {
-								pointCoord.size = "unknown";
-							}
-						}
-
-						cidCoords.put(pointCoord.name, pointCoord);
-					}
-
-					Log.i(cgSettings.tag, "Coordinates found in .loc file: " + cidCoords.size());
-
-					// save found cache coordinates
-					for (cgCache oneCache : caches.cacheList) {
-						if (cidCoords.containsKey(oneCache.geocode)) {
-							cgCoord thisCoords = cidCoords.get(oneCache.geocode);
-
-							oneCache.latitude = thisCoords.latitude;
-							oneCache.longitude = thisCoords.longitude;
-							oneCache.difficulty = thisCoords.difficulty;
-							oneCache.terrain = thisCoords.terrain;
-							oneCache.size = thisCoords.size;
-						}
-					}
-				}
+				LocParser.parseLoc(caches, coordinates);
 			} catch (Exception e) {
 				Log.e(cgSettings.tag, "cgBase.parseSearch.CIDs: " + e.toString());
 			}
@@ -2115,26 +2035,6 @@ public class cgBase {
 		}
 
 		return ratings;
-	}
-
-	public static Long parseGPX(cgeoapplication app, File file, int listId, Handler handler) {
-		cgSearch search = new cgSearch();
-		long searchId = 0l;
-
-		try {
-			cgGPXParser GPXparser = new cgGPXParser(app, listId, search);
-
-			searchId = GPXparser.parse(file, 10, handler);
-			if (searchId == 0l) {
-				searchId = GPXparser.parse(file, 11, handler);
-			}
-		} catch (Exception e) {
-			Log.e(cgSettings.tag, "cgBase.parseGPX: " + e.toString());
-		}
-
-		Log.i(cgSettings.tag, "Caches found in .gpx file: " + app.getCount(searchId));
-
-		return search.getCurrentId();
 	}
 
 	public cgTrackable parseTrackable(String page) {

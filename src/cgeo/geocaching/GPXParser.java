@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,7 +12,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
 import android.os.Handler;
-import android.os.Message;
 import android.sax.Element;
 import android.sax.EndElementListener;
 import android.sax.EndTextElementListener;
@@ -23,12 +21,12 @@ import android.text.Html;
 import android.util.Log;
 import android.util.Xml;
 
-public class cgGPXParser {
+public abstract class GPXParser extends FileParser {
 
-	private cgeoapplication app = null;
-	private int listId = 1;
 	private cgSearch search = null;
 	private Handler handler = null;
+	private cgeoapplication app = null;
+	private int listId = 1;
 	private cgCache cache = new cgCache();
 	private cgTrackable trackable = new cgTrackable();
 	private cgLog log = new cgLog();
@@ -36,14 +34,15 @@ public class cgGPXParser {
 	private boolean htmlLong = true;
 	private String type = null;
 	private String sym = null;
-	private String ns = null;
+	protected String namespace = null;
 	private ArrayList<String> nsGCList = new ArrayList<String>();
-	private final Pattern patternGeocode = Pattern.compile("(GC[0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
+	private static final Pattern patternGeocode = Pattern.compile("(GC[0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
 	private String name = null;
 	private String cmt = null;
 	private String desc = null;
+	private String version;
 
-	public cgGPXParser(cgeoapplication appIn, int listIdIn, cgSearch searchIn) {
+	public GPXParser(cgeoapplication appIn, int listIdIn, cgSearch searchIn, String namespaceIn, String versionIn) {
 		app = appIn;
 		listId = listIdIn;
 		search = searchIn;
@@ -51,21 +50,19 @@ public class cgGPXParser {
 		nsGCList.add("http://www.groundspeak.com/cache/1/1"); // PQ 1.1
 		nsGCList.add("http://www.groundspeak.com/cache/1/0/1"); // PQ 1.0.1
 		nsGCList.add("http://www.groundspeak.com/cache/1/0"); // PQ 1.0
+		
+		namespace = namespaceIn;
+		version = versionIn;
 	}
 
-	public long parse(File file, int version, Handler handlerIn) {
+	public long parse(File file, Handler handlerIn) {
 		handler = handlerIn;
 		if (file == null) {
 			return 0l;
 		}
 
-		if (version == 11) {
-			ns = "http://www.topografix.com/GPX/1/1"; // GPX 1.1
-		} else {
-			ns = "http://www.topografix.com/GPX/1/0"; // GPX 1.0
-		}
-		final RootElement root = new RootElement(ns, "gpx");
-		final Element waypoint = root.getChild(ns, "wpt");
+		final RootElement root = new RootElement(namespace, "gpx");
+		final Element waypoint = root.getChild(namespace, "wpt");
 
 		// waypoint - attributes
 		waypoint.setStartElementListener(new StartElementListener() {
@@ -133,26 +130,14 @@ public class cgGPXParser {
 						&& ((type == null && sym == null)
 						|| (type != null && type.indexOf("geocache") > -1)
 						|| (sym != null && sym.indexOf("geocache") > -1))) {
-					cache.latitudeString = cgBase.formatCoordinate(cache.latitude, "lat", true);
-					cache.longitudeString = cgBase.formatCoordinate(cache.longitude, "lon", true);
-					if (cache.inventory != null) {
-						cache.inventoryItems = cache.inventory.size();
-					} else {
-						cache.inventoryItems = 0;
-					}
+					fixCache(cache);
 					cache.reason = listId;
-					cache.updated = new Date().getTime();
-					cache.detailedUpdate = new Date().getTime();
 					cache.detailed = true;
 
 					app.addCacheToSearch(search, cache);
 				}
 
-				if (handler != null) {
-					final Message msg = new Message();
-					msg.obj = search.getCount();
-					handler.sendMessage(msg);
-				}
+				showFinishedMessage(handler, search);
 
 				htmlShort = true;
 				htmlLong = true;
@@ -168,7 +153,7 @@ public class cgGPXParser {
 		});
 
 		// waypoint.time
-		waypoint.getChild(ns, "time").setEndTextElementListener(new EndTextElementListener() {
+		waypoint.getChild(namespace, "time").setEndTextElementListener(new EndTextElementListener() {
 
 			public void end(String body) {
 				try {
@@ -180,7 +165,7 @@ public class cgGPXParser {
 		});
 
 		// waypoint.name
-		waypoint.getChild(ns, "name").setEndTextElementListener(new EndTextElementListener() {
+		waypoint.getChild(namespace, "name").setEndTextElementListener(new EndTextElementListener() {
 
 			public void end(String body) {
 				name = body;
@@ -194,7 +179,7 @@ public class cgGPXParser {
 		});
 
 		// waypoint.desc
-		waypoint.getChild(ns, "desc").setEndTextElementListener(new EndTextElementListener() {
+		waypoint.getChild(namespace, "desc").setEndTextElementListener(new EndTextElementListener() {
 
 			public void end(String body) {
 				desc = body;
@@ -205,7 +190,7 @@ public class cgGPXParser {
 		});
 
 		// waypoint.cmt
-		waypoint.getChild(ns, "cmt").setEndTextElementListener(new EndTextElementListener() {
+		waypoint.getChild(namespace, "cmt").setEndTextElementListener(new EndTextElementListener() {
 
 			public void end(String body) {
 				cmt = body;
@@ -216,7 +201,7 @@ public class cgGPXParser {
 		});
 
 		// waypoint.type
-		waypoint.getChild(ns, "type").setEndTextElementListener(new EndTextElementListener() {
+		waypoint.getChild(namespace, "type").setEndTextElementListener(new EndTextElementListener() {
 
 			public void end(String body) {
 				final String[] content = body.split("\\|");
@@ -227,7 +212,7 @@ public class cgGPXParser {
 		});
 
 		// waypoint.sym
-		waypoint.getChild(ns, "sym").setEndTextElementListener(new EndTextElementListener() {
+		waypoint.getChild(namespace, "sym").setEndTextElementListener(new EndTextElementListener() {
 
 			public void end(String body) {
 				body = body.toLowerCase();
@@ -240,7 +225,7 @@ public class cgGPXParser {
 
 		// for GPX 1.0, cache info comes from waypoint node (so called private children,
 		// for GPX 1.1 from extensions node
-		final Element cacheParent = version == 11 ? waypoint.getChild(ns, "extensions") : waypoint;
+		final Element cacheParent = getCacheParent(waypoint);
 
 		for (String nsGC : nsGCList) {
 			// waypoints.cache
@@ -552,6 +537,8 @@ public class cgGPXParser {
 		return parsed ? search.getCurrentId() : 0l;
 	}
 
+	protected abstract Element getCacheParent(Element waypoint);
+
 	protected String validate(String input) {
 		if ("nil".equalsIgnoreCase(input)) {
 			return "";
@@ -569,5 +556,25 @@ public class cgGPXParser {
 				cache.type = "mystery"; // default for not recognized types
 			}
 		}
+	}
+	
+	public static Long parseGPX(cgeoapplication app, File file, int listId, Handler handler) {
+		cgSearch search = new cgSearch();
+		long searchId = 0l;
+
+		try {
+			GPXParser parser = new GPX10Parser(app, listId, search);
+			searchId = parser.parse(file, handler);
+			if (searchId == 0l) {
+				parser = new GPX11Parser(app, listId, search);
+				searchId = parser.parse(file, handler);
+			}
+		} catch (Exception e) {
+			Log.e(cgSettings.tag, "cgBase.parseGPX: " + e.toString());
+		}
+
+		Log.i(cgSettings.tag, "Caches found in .gpx file: " + app.getCount(searchId));
+
+		return search.getCurrentId();
 	}
 }

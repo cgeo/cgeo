@@ -83,7 +83,7 @@ public class cgeovisit extends cgLogForm {
 				showToast(res.getString(R.string.err_log_load_data_again));
 
 				loadData thread;
-				thread = new loadData(cacheid);
+				thread = new loadData();
 				thread.start();
 
 				return;
@@ -551,7 +551,7 @@ public class cgeovisit extends cgLogForm {
 			post.setOnClickListener(null);
 
 			loadData thread;
-			thread = new loadData(cacheid);
+			thread = new loadData();
 			thread.start();
 		} else {
 			post.setEnabled(true);
@@ -687,11 +687,7 @@ public class cgeovisit extends cgLogForm {
 
 	private class loadData extends Thread {
 
-		private String cacheid = null;
-
-		public loadData(String cacheidIn) {
-			cacheid = cacheidIn;
-
+		public loadData() {
 			if (cacheid == null) {
 				showToast(res.getString(R.string.err_detail_cache_forgot_visit));
 

@@ -90,4 +90,8 @@ public class cgWaypoint {
 			}
 		}
 	}
+
+	public boolean isUserDefined() {
+		return type != null && type.equalsIgnoreCase("own");
+	}
 }

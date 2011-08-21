@@ -7,7 +7,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 
-public class cgSelectMapfile extends cgFileList<cgMapfileListAdapter> {
+public class cgSelectMapfile extends FileList<cgMapfileListAdapter> {
+
+	public cgSelectMapfile() {
+		super("map");
+	}
 
 	String mapFile;
 	
@@ -39,11 +43,6 @@ public class cgSelectMapfile extends cgFileList<cgMapfileListAdapter> {
 		return new String[]{base + "/mfmaps", base + "/Locus/mapsVector"};
 	}
 
-	@Override
-	protected String getFileExtension() {
-		return "map";
-	}
-	
 	@Override
 	protected void setTitle() {
 		setTitle(res.getString(R.string.map_file_select_title));

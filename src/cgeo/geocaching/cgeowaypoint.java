@@ -88,11 +88,11 @@ public class cgeowaypoint extends AbstractActivity {
 					}
 
 					Button buttonEdit = (Button) findViewById(R.id.edit);
-					buttonEdit.setOnClickListener(new editWaypointListener(waypoint.id));
+					buttonEdit.setOnClickListener(new editWaypointListener());
 
 					Button buttonDelete = (Button) findViewById(R.id.delete);
-					if (waypoint.type != null && waypoint.type.equalsIgnoreCase("own")) {
-						buttonDelete.setOnClickListener(new deleteWaypointListener(waypoint.id));
+					if (waypoint.isUserDefined()) {
+						buttonDelete.setOnClickListener(new deleteWaypointListener());
 						buttonDelete.setVisibility(View.VISIBLE);
 					}
 
@@ -294,12 +294,6 @@ public class cgeowaypoint extends AbstractActivity {
 
 	private class editWaypointListener implements View.OnClickListener {
 
-		private int id = -1;
-
-		public editWaypointListener(int idIn) {
-			id = idIn;
-		}
-
 		public void onClick(View arg0) {
 			Intent editIntent = new Intent(cgeowaypoint.this, cgeowaypointadd.class);
 			editIntent.putExtra("waypoint", id);
@@ -308,12 +302,6 @@ public class cgeowaypoint extends AbstractActivity {
 	}
 
 	private class deleteWaypointListener implements View.OnClickListener {
-
-		private Integer id = null;
-
-		public deleteWaypointListener(int idIn) {
-			id = idIn;
-		}
 
 		public void onClick(View arg0) {
 			if (app.deleteWaypoint(id) == false) {
