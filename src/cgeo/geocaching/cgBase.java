@@ -1614,24 +1614,23 @@ public class cgBase {
 					
 					try
 					{
-					    logDone.date = dateLogs1.parse(matcherLog.group(5)).getTime(); // long format
+					    if (matcherLog.group(5).indexOf(',') > 0)
+					    {
+					        logDone.date = dateLogs1.parse(matcherLog.group(5)).getTime(); // long format
+					    }
+					    else
+					    {
+					        // short format, with current year
+                            final Calendar cal = Calendar.getInstance();
+                            final int year     = cal.get(Calendar.YEAR);
+                            cal.setTime(dateLogs2.parse(matcherLog.group(5)));
+                            cal.set(Calendar.YEAR, year);
+                            logDone.date = cal.getTimeInMillis();
+					    }
 					}
 					catch (ParseException e)
 					{
-					    try
-					    {
-					        // short format, with current year
-					        final Date date    = dateLogs2.parse(matcherLog.group(5));
-					        final Calendar cal = Calendar.getInstance();
-					        final int year     = cal.get(Calendar.YEAR);
-					        cal.setTime(date);
-					        cal.set(Calendar.YEAR, year);
-					        logDone.date = cal.getTimeInMillis();
-					    }
-					    catch (ParseException ee)
-					    {
-					        Log.w(cgSettings.tag, "Failed to parse logs date: " + ee.toString());
-					    }
+				        Log.w(cgSettings.tag, "Failed to parse logs date: " + e.toString());
 					}
 
 					logDone.author = Html.fromHtml(matcherLog.group(1)).toString();

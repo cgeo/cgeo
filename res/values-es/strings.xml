@@ -604,7 +604,6 @@
 
   <!-- waypoint -->
   <string name="waypoint_title">Punto de referencia</string>
-<string name="waypoint_title">Punto de referencia</string>  
   <string name="waypoint_custom">A medida</string>
   <string name="waypoint_my_coordinates">Mis coordenadas</string>
   <string name="waypoint_bearing">Orientación</string>
