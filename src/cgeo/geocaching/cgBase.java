@@ -65,6 +65,7 @@ import android.text.style.StrikethroughSpan;
 import android.util.Log;
 import android.widget.EditText;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.files.LocParser;
 
 public class cgBase {
 
@@ -869,7 +870,7 @@ public class cgBase {
 			while (matcherTotalCnt.find()) {
 				if (matcherTotalCnt.groupCount() > 0) {
 					if (matcherTotalCnt.group(1) != null) {
-						caches.totalCnt = new Integer(matcherTotalCnt.group(1));
+						caches.totalCnt = Integer.valueOf(matcherTotalCnt.group(1));
 					}
 				}
 			}
@@ -937,87 +938,7 @@ public class cgBase {
 					}
 				}
 
-				if (coordinates != null && coordinates.length() > 0) {
-					final HashMap<String, cgCoord> cidCoords = new HashMap<String, cgCoord>();
-					final Pattern patternCidCode = Pattern.compile("name id=\"([^\"]+)\"");
-					final Pattern patternCidLat = Pattern.compile("lat=\"([^\"]+)\"");
-					final Pattern patternCidLon = Pattern.compile("lon=\"([^\"]+)\"");
-					// premium only >>
-					final Pattern patternCidDif = Pattern.compile("<difficulty>([^<]+)</difficulty>");
-					final Pattern patternCidTer = Pattern.compile("<terrain>([^<]+)</terrain>");
-					final Pattern patternCidCon = Pattern.compile("<container>([^<]+)</container>");
-					// >> premium only
-
-					final String[] points = coordinates.split("<waypoint>");
-
-					// parse coordinates
-					for (String point : points) {
-						final cgCoord pointCoord = new cgCoord();
-						final Matcher matcherCidCode = patternCidCode.matcher(point);
-						final Matcher matcherLatCode = patternCidLat.matcher(point);
-						final Matcher matcherLonCode = patternCidLon.matcher(point);
-						final Matcher matcherDifCode = patternCidDif.matcher(point);
-						final Matcher matcherTerCode = patternCidTer.matcher(point);
-						final Matcher matcherConCode = patternCidCon.matcher(point);
-						HashMap<String, Object> tmp = null;
-
-						if (matcherCidCode.find()) {
-							pointCoord.name = matcherCidCode.group(1).trim().toUpperCase();
-						}
-						if (matcherLatCode.find()) {
-							tmp = parseCoordinate(matcherLatCode.group(1), "lat");
-							pointCoord.latitude = (Double) tmp.get("coordinate");
-						}
-						if (matcherLonCode.find()) {
-							tmp = parseCoordinate(matcherLonCode.group(1), "lon");
-							pointCoord.longitude = (Double) tmp.get("coordinate");
-						}
-						if (matcherDifCode.find()) {
-							pointCoord.difficulty = new Float(matcherDifCode.group(1));
-						}
-						if (matcherTerCode.find()) {
-							pointCoord.terrain = new Float(matcherTerCode.group(1));
-						}
-						if (matcherConCode.find()) {
-							final int size = Integer.parseInt(matcherConCode.group(1));
-
-							if (size == 1) {
-								pointCoord.size = "not chosen";
-							} else if (size == 2) {
-								pointCoord.size = "micro";
-							} else if (size == 3) {
-								pointCoord.size = "regular";
-							} else if (size == 4) {
-								pointCoord.size = "large";
-							} else if (size == 5) {
-								pointCoord.size = "virtual";
-							} else if (size == 6) {
-								pointCoord.size = "other";
-							} else if (size == 8) {
-								pointCoord.size = "small";
-							} else {
-								pointCoord.size = "unknown";
-							}
-						}
-
-						cidCoords.put(pointCoord.name, pointCoord);
-					}
-
-					Log.i(cgSettings.tag, "Coordinates found in .loc file: " + cidCoords.size());
-
-					// save found cache coordinates
-					for (cgCache oneCache : caches.cacheList) {
-						if (cidCoords.containsKey(oneCache.geocode)) {
-							cgCoord thisCoords = cidCoords.get(oneCache.geocode);
-
-							oneCache.latitude = thisCoords.latitude;
-							oneCache.longitude = thisCoords.longitude;
-							oneCache.difficulty = thisCoords.difficulty;
-							oneCache.terrain = thisCoords.terrain;
-							oneCache.size = thisCoords.size;
-						}
-					}
-				}
+				LocParser.parseLoc(caches, coordinates);
 			} catch (Exception e) {
 				Log.e(cgSettings.tag, "cgBase.parseSearch.CIDs: " + e.toString());
 			}
@@ -2141,26 +2062,6 @@ public class cgBase {
 		return ratings;
 	}
 
-	public static Long parseGPX(cgeoapplication app, File file, int listId, Handler handler) {
-		cgSearch search = new cgSearch();
-		long searchId = 0l;
-
-		try {
-			cgGPXParser GPXparser = new cgGPXParser(app, listId, search);
-
-			searchId = GPXparser.parse(file, 10, handler);
-			if (searchId == 0l) {
-				searchId = GPXparser.parse(file, 11, handler);
-			}
-		} catch (Exception e) {
-			Log.e(cgSettings.tag, "cgBase.parseGPX: " + e.toString());
-		}
-
-		Log.i(cgSettings.tag, "Caches found in .gpx file: " + app.getCount(searchId));
-
-		return search.getCurrentId();
-	}
-
 	public cgTrackable parseTrackable(String page) {
 		if (page == null || page.length() == 0) {
 			Log.e(cgSettings.tag, "cgeoBase.parseTrackable: No page given");
@@ -2581,12 +2482,12 @@ public class cgBase {
 					continue;
 				}
 				if (trackableMatcher.group(3) != null) {
-					trackable.ctl = new Integer(trackableMatcher.group(3));
+					trackable.ctl = Integer.valueOf(trackableMatcher.group(3));
 				} else {
 					continue;
 				}
 				if (trackableMatcher.group(5) != null) {
-					trackable.id = new Integer(trackableMatcher.group(5));
+					trackable.id = Integer.valueOf(trackableMatcher.group(5));
 				} else {
 					continue;
 				}
@@ -4289,63 +4190,7 @@ public class cgBase {
 			scheme = "https://";
 		}
 
-		// prepare cookies
-		String cookiesDone = null;
-		if (cookies == null || cookies.isEmpty()) {
-			if (cookies == null) {
-				cookies = new HashMap<String, String>();
-			}
-
-			final Map<String, ?> prefsAll = prefs.getAll();
-			final Set<? extends Map.Entry<String, ?>> entrySet = prefsAll.entrySet();
-			
-			for(Map.Entry<String, ?> entry : entrySet){
-				String key = entry.getKey();
-				if (key.matches("cookie_.+")) {
-					final String cookieKey = key.substring(7);
-					final String cookieValue = (String) entry.getValue();
-
-					cookies.put(cookieKey, cookieValue);
-				}
-			}
-		}
-
-		if (cookies != null) {
-			final Set<Map.Entry<String, String>> entrySet = cookies.entrySet();
-			final ArrayList<String> cookiesEncoded = new ArrayList<String>();
-			
-			for(Map.Entry<String, String> entry : entrySet){
-				cookiesEncoded.add(entry.getKey() + "=" + entry.getValue());
-			}
-
-			if (cookiesEncoded.size() > 0) {
-				cookiesDone = implode("; ", cookiesEncoded.toArray());
-			}
-		}
-
-		if (cookiesDone == null) {
-			Map<String, ?> prefsValues = prefs.getAll();
-
-			if (prefsValues != null && prefsValues.size() > 0 && prefsValues.keySet().size() > 0) {
-				final Set<? extends Map.Entry<String, ?>> entrySet = prefsValues.entrySet();
-				final ArrayList<String> cookiesEncoded = new ArrayList<String>();
-
-				for(Map.Entry<String, ?> entry : entrySet){
-					String key = entry.getKey();
-					if (key.length() > 7 && key.substring(0, 7).equals("cookie_")) {
-						cookiesEncoded.add(key + "=" + entry.getValue());						
-					}
-				}
-
-				if (cookiesEncoded.size() > 0) {
-					cookiesDone = implode("; ", cookiesEncoded.toArray());
-				}
-			}
-		}
-
-		if (cookiesDone == null) {
-			cookiesDone = "";
-		}
+		String cookiesDone = getCookiesAsString();
 
 		URLConnection uc = null;
 		HttpURLConnection connection = null;
@@ -4447,16 +4292,7 @@ public class cgBase {
 				}
 				prefsEditor.commit();
 
-				final String encoding = connection.getContentEncoding();
-				InputStream ins;
-
-				if (encoding != null && encoding.equalsIgnoreCase("gzip")) {
-					ins = new GZIPInputStream(connection.getInputStream());
-				} else if (encoding != null && encoding.equalsIgnoreCase("deflate")) {
-					ins = new InflaterInputStream(connection.getInputStream(), new Inflater(true));
-				} else {
-					ins = connection.getInputStream();
-				}
+				InputStream ins = getInputstreamFromConnection(connection);
 				final InputStreamReader inr = new InputStreamReader(ins);
 				final BufferedReader br = new BufferedReader(inr, 16 * 1024);
 
@@ -4525,32 +4361,7 @@ public class cgBase {
 		return response;
 	}
 
-	private static void replaceWhitespace(final StringBuffer buffer) {
-		final int length = buffer.length();
-		final char[] chars = new char[length];
-		buffer.getChars(0, length, chars, 0);
-		int resultSize = 0;
-		boolean lastWasWhitespace = false;
-		for (int i = 0; i < length; i++) {
-			char c = chars[i];
-			if (c == ' ' || c == '\n' || c == '\r' || c == '\t') {
-				if (!lastWasWhitespace) {
-					chars[resultSize++] =' ';
-				}
-				lastWasWhitespace = true;
-			} else {
-				chars[resultSize++] = c;
-				lastWasWhitespace = false;
-			}
-		}
-		buffer.setLength(0);
-		buffer.append(chars);
-	}
-
-	public String requestJSONgc(String host, String path, String params) {
-		int httpCode = -1;
-		String httpLocation = null;
-
+	private String getCookiesAsString() {
 		// prepare cookies
 		String cookiesDone = null;
 		if (cookies == null || cookies.isEmpty()) {
@@ -4608,6 +4419,35 @@ public class cgBase {
 		if (cookiesDone == null) {
 			cookiesDone = "";
 		}
+		return cookiesDone;
+	}
+
+	private static void replaceWhitespace(final StringBuffer buffer) {
+		final int length = buffer.length();
+		final char[] chars = new char[length];
+		buffer.getChars(0, length, chars, 0);
+		int resultSize = 0;
+		boolean lastWasWhitespace = false;
+		for (char c : chars) {
+			if (c == ' ' || c == '\n' || c == '\r' || c == '\t') {
+				if (!lastWasWhitespace) {
+					chars[resultSize++] =' ';
+				}
+				lastWasWhitespace = true;
+			} else {
+				chars[resultSize++] = c;
+				lastWasWhitespace = false;
+			}
+		}
+		buffer.setLength(0);
+		buffer.append(chars);
+	}
+
+	public String requestJSONgc(String host, String path, String params) {
+		int httpCode = -1;
+		String httpLocation = null;
+
+		String cookiesDone = getCookiesAsString();
 
 		URLConnection uc = null;
 		HttpURLConnection connection = null;
@@ -4679,16 +4519,7 @@ public class cgBase {
 				}
 				prefsEditor.commit();
 
-				final String encoding = connection.getContentEncoding();
-				InputStream ins;
-
-				if (encoding != null && encoding.equalsIgnoreCase("gzip")) {
-					ins = new GZIPInputStream(connection.getInputStream());
-				} else if (encoding != null && encoding.equalsIgnoreCase("deflate")) {
-					ins = new InflaterInputStream(connection.getInputStream(), new Inflater(true));
-				} else {
-					ins = connection.getInputStream();
-				}
+				InputStream ins = getInputstreamFromConnection(connection);
 				final InputStreamReader inr = new InputStreamReader(ins);
 				final BufferedReader br = new BufferedReader(inr);
 
@@ -4733,6 +4564,20 @@ public class cgBase {
 		} else {
 			return "";
 		}
+	}
+
+	private static InputStream getInputstreamFromConnection(HttpURLConnection connection) throws IOException {
+		final String encoding = connection.getContentEncoding();
+		InputStream ins;
+
+		if (encoding != null && encoding.equalsIgnoreCase("gzip")) {
+			ins = new GZIPInputStream(connection.getInputStream());
+		} else if (encoding != null && encoding.equalsIgnoreCase("deflate")) {
+			ins = new InflaterInputStream(connection.getInputStream(), new Inflater(true));
+		} else {
+			ins = connection.getInputStream();
+		}
+		return ins;
 	}
 
 	public static String requestJSON(String host, String path, String params) {
@@ -4814,16 +4659,7 @@ public class cgBase {
 					}
 
 
-					final String encoding = connection.getContentEncoding();
-					InputStream ins;
-
-					if (encoding != null && encoding.equalsIgnoreCase("gzip")) {
-						ins = new GZIPInputStream(connection.getInputStream());
-					} else if (encoding != null && encoding.equalsIgnoreCase("deflate")) {
-						ins = new InflaterInputStream(connection.getInputStream(), new Inflater(true));
-					} else {
-						ins = connection.getInputStream();
-					}
+					InputStream ins = getInputstreamFromConnection(connection);
 					final InputStreamReader inr = new InputStreamReader(ins);
 					final BufferedReader br = new BufferedReader(inr, 1024);
 
@@ -4949,11 +4785,11 @@ public class cgBase {
 		if (path.exists()) {
 			File[] files = path.listFiles();
 
-			for (int i = 0; i < files.length; i++) {
-				if (files[i].isDirectory()) {
-					deleteDirectory(files[i]);
+			for (File file : files) {
+				if (file.isDirectory()) {
+					deleteDirectory(file);
 				} else {
-					files[i].delete();
+					file.delete();
 				}
 			}
 		}

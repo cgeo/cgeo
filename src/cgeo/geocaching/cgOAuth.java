@@ -27,15 +27,15 @@ public class cgOAuth {
 		params.put("oauth_timestamp", Long.toString(currentTime));
 		params.put("oauth_token", token);
 		params.put("oauth_version", "1.0");
-
-		Object[] keys = params.keySet().toArray();
+		
+		String[] keys = new String[params.keySet().size()];
+		params.keySet().toArray(keys);
 		Arrays.sort(keys);
 
 		ArrayList<String> paramsEncoded = new ArrayList<String>();
-		for (int i = 0; i < keys.length; i++) {
-			String value = params.get(keys[i].toString());
-
-			paramsEncoded.add(keys[i] + "=" + cgBase.urlencode_rfc3986(value));
+		for (String key : keys) {
+			String value = params.get(key);
+			paramsEncoded.add(key + "=" + cgBase.urlencode_rfc3986(value));
 		}
 
 		String keysPacked;

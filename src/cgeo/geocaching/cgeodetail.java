@@ -352,7 +352,7 @@ public class cgeodetail extends AbstractActivity {
 			// nothing, we lost the window
 		}
 
-		threadCache = new loadCache(loadCacheHandler, geocode, guid);
+		threadCache = new loadCache(loadCacheHandler);
 		threadCache.start();
 	}
 
@@ -820,6 +820,7 @@ public class cgeodetail extends AbstractActivity {
 
 			// cache attributes
 			if (cache.attributes != null && cache.attributes.size() > 0) {
+
 				final LinearLayout attribBox = (LinearLayout) findViewById(R.id.attributes_innerbox);
 
 		    	// maximum width for attribute icons is screen width - paddings of parents
@@ -1278,13 +1279,9 @@ public class cgeodetail extends AbstractActivity {
 	private class loadCache extends Thread {
 
 		private Handler handler = null;
-		private String geocode = null;
-		private String guid = null;
 
-		public loadCache(Handler handlerIn, String geocodeIn, String guidIn) {
+		public loadCache(Handler handlerIn) {
 			handler = handlerIn;
-			geocode = geocodeIn;
-			guid = guidIn;
 
 			if (geocode == null && guid == null) {
 				showToast(res.getString(R.string.err_detail_cache_forgot));

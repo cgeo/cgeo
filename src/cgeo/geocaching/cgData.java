@@ -1354,7 +1354,7 @@ public class cgData {
 			if (!waypoints.isEmpty()) {
 				ContentValues values = new ContentValues();
 				for (cgWaypoint oneWaypoint : waypoints) {
-					if (oneWaypoint.type.equalsIgnoreCase("own")) {
+					if (oneWaypoint.isUserDefined()) {
 						continue;
 					}
 
@@ -2804,24 +2804,27 @@ public class cgData {
 			if (size > 0) {
 				Log.d(cgSettings.tag, "Database clean: removing " + size + " geocaches");
 
-				databaseRW.execSQL("delete from " + dbTableCaches + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableAttributes + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableSpoilers + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableLogs + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableLogCount + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableLogsOffline + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableWaypoints + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ") and type <> \"own\"");
-				databaseRW.execSQL("delete from " + dbTableTrackables + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
+				String geocodeList = cgBase.implode(", ", geocodes.toArray());
+				databaseRW.execSQL("delete from " + dbTableCaches + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableAttributes + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableSpoilers + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableLogs + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableLogCount + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableLogsOffline + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableWaypoints + " where geocode in (" + geocodeList + ") and type <> \"own\"");
+				databaseRW.execSQL("delete from " + dbTableTrackables + " where geocode in (" + geocodeList + ")");
 
 				geocodes.clear();
 			}
 
 			databaseRW.execSQL("delete from " + dbTableCaches + " where geocode = \"\"");
 
-			final SQLiteStatement countSql = databaseRO.compileStatement("select count(_id) from " + dbTableCaches + " where reason = 0");
-			final int count = (int) countSql.simpleQueryForLong();
-			countSql.close();
-			Log.d(cgSettings.tag, "Database clean: " + count + " cached geocaches remaining");
+			if (Log.isLoggable(cgSettings.tag, Log.DEBUG)) {
+				final SQLiteStatement countSql = databaseRO.compileStatement("select count(_id) from " + dbTableCaches + " where reason = 0");
+				final int count = (int) countSql.simpleQueryForLong();
+				countSql.close();
+				Log.d(cgSettings.tag, "Database clean: " + count + " cached geocaches remaining");
+			}
 		} catch (Exception e) {
 			Log.w(cgSettings.tag, "cgData.clean: " + e.toString());
 		}
@@ -2861,14 +2864,15 @@ public class cgData {
 			}
 
 			if (geocodes.size() > 0) {
-				databaseRW.execSQL("delete from " + dbTableCaches + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableAttributes + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableSpoilers + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableLogs + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableLogCount + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableLogsOffline + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
-				databaseRW.execSQL("delete from " + dbTableWaypoints + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ") and type <> \"own\"");
-				databaseRW.execSQL("delete from " + dbTableTrackables + " where geocode in (" + cgBase.implode(", ", geocodes.toArray()) + ")");
+				String geocodeList = cgBase.implode(", ", geocodes.toArray());
+				databaseRW.execSQL("delete from " + dbTableCaches + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableAttributes + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableSpoilers + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableLogs + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableLogCount + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableLogsOffline + " where geocode in (" + geocodeList + ")");
+				databaseRW.execSQL("delete from " + dbTableWaypoints + " where geocode in (" + geocodeList + ") and type <> \"own\"");
+				databaseRW.execSQL("delete from " + dbTableTrackables + " where geocode in (" + geocodeList + ")");
 
 				geocodes.clear();
 			}
@@ -2966,22 +2970,18 @@ public class cgData {
 			return false;
 		}
 
+		int count = 0;
 		init();
-
 		try {
 			final SQLiteStatement countSql = databaseRO.compileStatement("select count(_id) from " + dbTableLogsOffline + " where geocode = \"" + geocode.toUpperCase() + "\"");
-			final int count = (int) countSql.simpleQueryForLong();
-
-			if (count > 0) {
-				return true;
-			}
+			count = (int) countSql.simpleQueryForLong();
 
 			countSql.close();
 		} catch (Exception e) {
 			Log.e(cgSettings.tag, "cgData.hasLogOffline: " + e.toString());
 		}
 
-		return false;
+		return count > 0;
 	}
 
 	public void saveVisitDate(String geocode) {

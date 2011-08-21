@@ -429,11 +429,9 @@ public class cgSettings {
 				if (prefsValues != null && prefsValues.size() > 0) {
 					Log.i(cgSettings.tag, "Removing cookies");
 
-					Object[] keys = prefsValues.keySet().toArray();
-
-					for (int i = 0; i < keys.length; i++) {
-						if (keys[i].toString().length() > 7 && keys[i].toString().substring(0, 7).equals("cookie_")) {
-							edit.remove(keys[i].toString());
+					for (String key : prefsValues.keySet()) {
+						if (key.length() > 7 && key.substring(0, 7).equals("cookie_")) {
+							edit.remove(key);
 						}
 					}
 				}
