@@ -70,7 +70,7 @@
   <string name="log_tb_drop">Lämna här</string>
   <string name="log_tb_changeall">Ändra alla</string>
   <string name="log_save">Spara</string>
-  <string name="log_saving">Sparar logg...</string>
+  <string name="log_saving">Sparar logg…</string>
   <string name="log_clear">Rensa</string>
   <string name="log_post">Posta logg</string>
   <string name="log_post_rate">Posta logg &amp; ge betyget</string>
@@ -178,7 +178,7 @@
   <string name="err_point_unknown_position">Tyvärr, c:geo kan inte bestämma din position.</string>
   <string name="err_point_no_position_given_title">Mer info krävs</string>
   <string name="err_point_no_position_given">Ange minst latitud och longitud eller avstånd och riktning. Du kan också ange alla fyra.</string>
-  <string name="err_point_curr_position_unavailable">c:geo har ännu inte nuvarande koordinater. Vänta en stund...</string>
+  <string name="err_point_curr_position_unavailable">c:geo har ännu inte nuvarande koordinater. Vänta en stund…</string>
   <string name="err_point_bear_and_dist_title">Tips!</string>
   <string name="err_point_bear_and_dist">Ange både riktning och avstånd. Rikting är en vinkel mellan 0 och 360 grader relativt norr. Avstånd anges med eller utan enhet.</string>
   <string name="err_point_location_error">Tyvärr, c:geo kan inte få fram platsen för din punkt.</string>
@@ -259,8 +259,8 @@
   <string name="caches_no_cache">Det finns ingen cache</string>
   <string name="caches_more_caches">Ladda fler cacher</string>
   <string name="caches_more_caches_no">Inga fler cacher att ladda</string>
-  <string name="caches_more_caches_loading">Laddar fler cacher...</string>
-  <string name="caches_downloading">Laddar ner cacher...\nTid kvar: </string>
+  <string name="caches_more_caches_loading">Laddar fler cacher…</string>
+  <string name="caches_downloading">Laddar ner cacher…\nTid kvar: </string>
   <string name="caches_progress_loading_title">Laddar cacher</string>
   <string name="caches_progress_loading_text">Cacher sparade i enheten</string>
   <string name="caches_eta_ltm">mindre än en minut</string>
@@ -337,8 +337,8 @@
   <string name="caches_filter_type_ape">Project APE cache</string>
   <string name="caches_filter_type_gchq">Groundspeak HQ</string>
   <string name="caches_filter_type_gps">GPS Cache utställning</string>
-  <string name="caches_exporting_fieldnote">Exporterar som Field Notes...</string>
-  <string name="caches_removing_from_history">Tar bort från historik...</string>
+  <string name="caches_exporting_fieldnote">Exporterar som Field Notes…</string>
+  <string name="caches_removing_from_history">Tar bort från historik…</string>
 
   <!-- caches lists -->
   <string name="list_menu">Listor</string>
@@ -377,7 +377,7 @@
   <string name="init_passvote">Lösenord</string>
   <string name="init_login">Testa inloggning</string>
   <string name="init_login_popup">Inloggning</string>
-  <string name="init_login_popup_working">Testar inloggning mot geocaching.com...</string>
+  <string name="init_login_popup_working">Testar inloggning mot geocaching.com…</string>
   <string name="init_login_popup_ok">Inloggning ok.</string>
   <string name="init_login_popup_failed">Inloggning misslyckades.</string>
   <string name="init_login_popup_failed_reason">Inloggning misslyckades pga </string>
@@ -431,7 +431,7 @@
   <string name="init_mapsources">Kartkällor</string>
   <string name="init_mapsources_description">Här kan du vilken typ av kartor du vill använda. Som alternativ till Google Maps finns olika varianter av OpenStreetMap och till och med offline kartor (se <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> för detaljer).</string>
   <string name="init_mapsource_select">Välj kartkälla</string>
-  <string name="init_select_mapfile">...</string>
+  <string name="init_select_mapfile">…</string>
   <string name="init_trackautovisit">Sätt trackable automatiskt till \"besök\" vid loggning av en cache</string>
   <string name="init_sigautoinsert">Infoga signatur automatiskt i loggar</string>
 
@@ -449,7 +449,7 @@
   <string name="init_sendToCgeo_name">Namnet på din enhet:</string>
   <string name="init_sendToCgeo_description">Skicka till c:geo gör det möjligt att ta emot cacher direkt från geocaching hemsidan genom att använda en speciell plugin till Firefox eller Chrome. Innan registrering läs detta: <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Du behöver bara registrera om du kommer att använda send2cgeo. C:geo kommer också fungera utan registrering.</string>
   <string name="init_sendToCgeo_register">Letar efter registrering</string>
-  <string name="init_sendToCgeo_registering">Registrerar din enhet för "send2cgeo"...</string>
+  <string name="init_sendToCgeo_registering">Registrerar din enhet för "send2cgeo"…</string>
   <string name="init_sendToCgeo_register_ok">Registreringen lyckades. PIN koden är ####. Använd den på c:geos hemsida för att lägga till enheten i den webbläsare.</string>
   <string name="init_sendToCgeo_register_fail">Registreringen misslyckades.</string>
 
@@ -460,7 +460,7 @@
   <string name="auth_again">Påbörja koppling mot Twitter igen</string>
   <string name="auth_pin_hint">PIN erhållen från Twitter</string>
   <string name="auth_finish">Bekräfta PIN</string>
-  <string name="auth_dialog_wait">Väntar på Twitter...</string>
+  <string name="auth_dialog_wait">Väntar på Twitter…</string>
   <string name="auth_dialog_pin_title">PIN kod</string>
   <string name="auth_dialog_pin_message">Vänligen skriv in PIN koden du fick på Twitters hemsida. Den krävs för att slutföra kopplingen.</string>
   <string name="auth_dialog_completed">c:geo är nu godkänd att posta på Twitter.</string>
@@ -485,7 +485,7 @@
   <string name="cache_attributes">Attribut</string>
   <string name="cache_inventory">Innehåll</string>
   <string name="cache_log_offline">Offline logg</string>
-  <string name="cache_log_images_loading">Laddar loggbilder...</string>
+  <string name="cache_log_images_loading">Laddar loggbilder…</string>
   <string name="cache_log_images_title">Loggbild</string>
   <string name="cache_log_image_default_title">Foto</string>
   <string name="cache_personal_note">Personlig anteckning</string>
@@ -500,18 +500,18 @@
   <string name="cache_waypoints_add">Lägg till punkt</string>
   <string name="cache_hint">Tips</string>
   <string name="cache_logs">Loggbok</string>
-  <string name="cache_dialog_loading_details">Laddar detaljer om cachen...</string>
-  <string name="cache_dialog_loading_description">Laddar beskrivning om cachen...</string>
+  <string name="cache_dialog_loading_details">Laddar detaljer om cachen…</string>
+  <string name="cache_dialog_loading_description">Laddar beskrivning om cachen…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
-  <string name="cache_dialog_offline_save_message">Sparar cachen för användning offline...</string>
+  <string name="cache_dialog_offline_save_message">Sparar cachen för användning offline…</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>
-  <string name="cache_dialog_offline_drop_message">Tar bort cachen från enhetens minne...</string>
+  <string name="cache_dialog_offline_drop_message">Tar bort cachen från enhetens minne…</string>
   <string name="cache_dialog_refresh_title">Uppdatera</string>
-  <string name="cache_dialog_refresh_message">Uppdaterar detaljer om cachen...</string>
+  <string name="cache_dialog_refresh_message">Uppdaterar detaljer om cachen…</string>
   <string name="cache_dialog_watchlist_add_title">Watchlist</string>
-  <string name="cache_dialog_watchlist_add_message">Lägger till cachen till din watchlist...</string>
+  <string name="cache_dialog_watchlist_add_message">Lägger till cachen till din watchlist…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
-  <string name="cache_dialog_watchlist_remove_message">Tar bort cachen från din watchlist...</string>
+  <string name="cache_dialog_watchlist_remove_message">Tar bort cachen från din watchlist…</string>
   <string name="cache_menu_navigate">Navigera</string>
   <string name="cache_menu_compass">Kompass</string>
   <string name="cache_menu_tbt">Sväng-för-sväng</string>
@@ -557,7 +557,7 @@
   <string name="cache_elevation">Höjd</string>
   <string name="cache_calendars">Välj kalender</string>
   <string name="cache_spoiler_images_title">Spoiler bilder</string>
-  <string name="cache_spoiler_images_loading">Laddar spoiler bilder...</string>
+  <string name="cache_spoiler_images_loading">Laddar spoiler bilder…</string>
   <string name="cache_log_types">Loggtyper</string> <!-- Since: 2.10 RC2 -->
   <string name="cache_coordinates_no">Cachen saknar koordinater.</string>
   <string name="cache_export_fieldnote">Exportera som Field Notes</string>
@@ -583,10 +583,10 @@
   <string name="map_file_select_title">Välj kartfil</string>
 
   <!--  import -->
-  <string name="import_title">Importerar...</string>
+  <string name="import_title">Importerar…</string>
   <string name="web_import_title">Importerar från webben</string>
   <string name="web_import_server_problem">Det uppstod problem under kommunikationen med servern. Vänligen försök att registrera din enhet igen.</string>
-  <string name="web_import_waiting">Väntar på nya cacher från webben...</string>
+  <string name="web_import_waiting">Väntar på nya cacher från webben…</string>
   <string name="web_downloading">Laddar ner</string>
   <string name="web_downloaded">Nerladdat</string>
 
@@ -612,7 +612,7 @@
   <string name="waypoint_add_title">Lägg till punkt</string>
   <string name="waypoint_note">Kommentar</string>
   <string name="waypoint_save">Spara</string>
-  <string name="waypoint_loading">Laddar punkt...</string>
+  <string name="waypoint_loading">Laddar punkt…</string>
   <string name="waypoint_unknown_coordinates">Koordinaterna ogiltiga</string>
   <string name="search_history">Historik</string>
   <string name="search_history_empty">Inga tidigare destinationer</string>
@@ -641,7 +641,7 @@
   <string name="map_live_enable">Aktivera live</string>
   <string name="map_live_disable">Inaktivera live</string>
   <string name="map_static_title">Sparade kartor</string>
-  <string name="map_static_loading">Laddar sparade kartor...</string>
+  <string name="map_static_loading">Laddar sparade kartor…</string>
   <string name="map_token_err">Eftersom c:geo bara kunde hämta en del av informationen så kan positionen för cacher vara felaktig.</string>
 
   <!-- search -->
@@ -680,7 +680,7 @@
   <!-- trackable -->
   <string name="trackable">Trackable</string>
   <string name="trackable_select_title">Trackables</string>
-  <string name="trackable_details_loading">Laddar detaljer om trackable...</string>
+  <string name="trackable_details_loading">Laddar detaljer om trackable…</string>
   <string name="trackable_log_touch">Logga</string>
   <string name="trackable_browser_open">Öppna i webbläsare</string>
   <string name="trackable_goal">Uppdrag</string>
