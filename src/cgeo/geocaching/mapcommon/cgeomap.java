@@ -102,7 +102,6 @@ public class cgeomap extends MapBase {
 	private DisplayUsersThread displayUsersThread = null;
 	private LoadDetails loadDetailsThread = null;
 	private volatile long loadThreadRun = 0l;
-	private volatile long downloadThreadRun = 0l;
 	private volatile long usersThreadRun = 0l;
 	private volatile boolean downloaded = false;
 	// overlays
@@ -467,7 +466,7 @@ public class cgeomap extends MapBase {
 	private void addMapViewMenuItems(final Menu menu) {
 		String[] mapViews = res.getStringArray(R.array.map_sources);
 		mapSourceEnum mapSource = settings.mapSource;
-		
+
 		menu.add(1, SUBMENU_VIEW_GOOGLE_MAP, 0, mapViews[0]).setCheckable(true).setChecked(mapSource == mapSourceEnum.googleMap);
 		menu.add(1, SUBMENU_VIEW_GOOGLE_SAT, 0, mapViews[1]).setCheckable(true).setChecked(mapSource == mapSourceEnum.googleSat);
 		menu.add(1, SUBMENU_VIEW_MF_MAPNIK, 0, mapViews[2]).setCheckable(true).setChecked(mapSource == mapSourceEnum.mapsforgeMapnik);
@@ -646,7 +645,7 @@ public class cgeomap extends MapBase {
 			if (mapRestartRequired) {
 				// close old mapview
 				activity.finish();
-			
+
 				// prepare information to restart a similar view
 				Intent mapIntent = new Intent(activity, settings.getMapFactory().getMapClass());
 
@@ -662,10 +661,10 @@ public class cgeomap extends MapBase {
 				mapState[1] = mapCenter.getLongitudeE6();
 				mapState[2] = mapView.getMapZoomLevel();
 				mapIntent.putExtra("mapstate", mapState);
-				
+
 				// start the new map
 				activity.startActivity(mapIntent);
-				
+
 			}
 
 			return true;
@@ -701,7 +700,7 @@ public class cgeomap extends MapBase {
 
 		prefsEdit.putInt("mapsource", settings.mapSource.ordinal());
 		prefsEdit.commit();
-		
+
 		boolean mapRestartRequired = settings.mapSource.isGoogleMapSource()!= settings.mapSourceUsed.isGoogleMapSource();
 
 		if (!mapRestartRequired) {
@@ -1155,7 +1154,6 @@ public class cgeomap extends MapBase {
 			try {
 				stop = false;
 				working = true;
-				downloadThreadRun = System.currentTimeMillis();
 
 				if (stop) {
 					displayHandler.sendEmptyMessage(0);
@@ -1662,7 +1660,7 @@ public class cgeomap extends MapBase {
 				} else {
 					viewport = app.getBounds(searchIdCenter);
 				}
-				
+
 				if (viewport == null) return;
 
 				Integer cnt = (Integer) viewport.get(0);

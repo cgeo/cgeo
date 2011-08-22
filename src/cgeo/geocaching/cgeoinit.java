@@ -317,9 +317,16 @@ public class cgeoinit extends AbstractActivity {
 		}
 		captchaButton.setOnClickListener(new cgeoChangeCaptcha());
 		
-		CheckBox dirImgButton = (CheckBox) findViewById(R.id.loaddirectionimg);
-		dirImgButton.setChecked(prefs.getBoolean("loaddirectionimg", true));
-		dirImgButton.setOnClickListener(new cgeoChangeDirImg());
+		final CheckBox dirImgButton = (CheckBox) findViewById(R.id.loaddirectionimg);
+		dirImgButton.setChecked(settings.getLoadDirImg());
+		dirImgButton.setOnClickListener(new View.OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                settings.setLoadDirImg(!settings.getLoadDirImg());
+                dirImgButton.setChecked(settings.getLoadDirImg());
+            }
+        });
 
 		CheckBox useEnglishButton = (CheckBox) findViewById(R.id.useenglish);
 		if (prefs.getBoolean("useenglish", false) == false) {
@@ -688,26 +695,6 @@ public class cgeoinit extends AbstractActivity {
 			return;
 		}
 	}
-	
-	private class cgeoChangeDirImg implements View.OnClickListener {
-
-        public void onClick(View arg0) {
-            SharedPreferences.Editor edit = prefs.edit();
-            if (prefs.getBoolean("loaddirectionimg", true)) {
-                edit.putBoolean("loaddirectionimg", false);
-                settings.loadDirectionImg = false;
-            } else {
-                edit.putBoolean("loaddirectionimg", true);
-                settings.loadDirectionImg = true;
-            }
-            edit.commit();
-
-            CheckBox dirImgButton = (CheckBox) findViewById(R.id.loaddirectionimg);
-            dirImgButton.setChecked(prefs.getBoolean("loaddirectionimg", true));
-
-            return;
-        }
-    }
 
 	private class cgeoChangeUseEnglish implements View.OnClickListener {
 

@@ -70,7 +70,7 @@
   <string name="log_tb_drop">ここに置く</string>
   <string name="log_tb_changeall">Change all</string>
   <string name="log_save">保存</string>
-  <string name="log_saving">ログを保存中...</string>
+  <string name="log_saving">ログを保存中…</string>
   <string name="log_clear">消去</string>
   <string name="log_post">ログを投稿</string>
   <string name="log_post_rate">ログを投稿し、評価も行う</string>
@@ -162,7 +162,7 @@
   <string name="err_point_unknown_position">現在地を認識できません。</string>
   <string name="err_point_no_position_given_title">必要な情報</string>
   <string name="err_point_no_position_given">少なくとも経度、緯度、または距離と方位を入力してください。全てを入力することもできます。</string>
-  <string name="err_point_curr_position_unavailable">現在地の座標が分かりません。もう少しお待ちください...</string>
+  <string name="err_point_curr_position_unavailable">現在地の座標が分かりません。もう少しお待ちください…</string>
   <string name="err_point_bear_and_dist_title">ヘルプが必要?</string>
   <string name="err_point_bear_and_dist">距離と方位を半角英数字で入力してください。方位は北を基準として時計回りに0～360度で表し単位は付けないでください。距離は単位を付けなければメートルとして扱われ、他にkmなどの単位を付けることができます。</string>
   <string name="err_point_location_error">ウェイポイントの場所が得られません。</string>
@@ -237,8 +237,8 @@
   <string name="caches_no_cache">キャッシュはありません</string>
   <string name="caches_more_caches">次のキャッシュ</string>
   <string name="caches_more_caches_no">キャッシュは以上です</string>
-  <string name="caches_more_caches_loading">キャッシュ情報をロード中...</string>
-  <string name="caches_downloading">キャッシュ情報をダウンロード中...\n残り時間: </string>
+  <string name="caches_more_caches_loading">キャッシュ情報をロード中…</string>
+  <string name="caches_downloading">キャッシュ情報をダウンロード中…\n残り時間: </string>
   <string name="caches_progress_loading_title">キャッシュ情報をロード中</string>
   <string name="caches_progress_loading_text">デバイスに保存されたキャッシュ</string>
   <string name="caches_eta_ltm">1分以内</string>
@@ -320,7 +320,7 @@
   <string name="init_passvote">パスワード</string>
   <string name="init_login">ログインをチェックする</string>
   <string name="init_login_popup">ログイン</string>
-  <string name="init_login_popup_working">Geocaching.comにログイン中...</string>
+  <string name="init_login_popup_working">Geocaching.comにログイン中…</string>
   <string name="init_login_popup_ok">ログインに成功しました。</string>
   <string name="init_login_popup_failed">ログインに失敗しました。</string>
   <string name="init_login_popup_failed_reason">ログインに失敗しました。原因: </string>
@@ -372,7 +372,7 @@
   <string name="auth_again">再度認証を開始する</string>
   <string name="auth_pin_hint">TwitterのPINコード</string>
   <string name="auth_finish">完了</string>
-  <string name="auth_dialog_wait">Twitterからの返答を待っています...</string>
+  <string name="auth_dialog_wait">Twitterからの返答を待っています…</string>
   <string name="auth_dialog_pin_title">PINコード</string>
   <string name="auth_dialog_pin_message">Twitterのサイトで表示されたPINコードを入力してください。認証を完了するために必要です。</string>
   <string name="auth_dialog_completed">c:geoはTwitterにポストするための認証を受けました。</string>
@@ -403,14 +403,14 @@
   <string name="cache_waypoints_add">ウェイポイント追加</string>
   <string name="cache_hint">ヒント</string>
   <string name="cache_logs">ログブック</string>
-  <string name="cache_dialog_loading_details">キャッシュの詳細をロード中...</string>
-  <string name="cache_dialog_loading_description">キャッシュの説明をロード中...</string>
+  <string name="cache_dialog_loading_details">キャッシュの詳細をロード中…</string>
+  <string name="cache_dialog_loading_description">キャッシュの説明をロード中…</string>
   <string name="cache_dialog_offline_save_title">オフライン</string>
-  <string name="cache_dialog_offline_save_message">オフライン用にキャッシュを保存中...</string>
+  <string name="cache_dialog_offline_save_message">オフライン用にキャッシュを保存中…</string>
   <string name="cache_dialog_offline_drop_title">オフライン</string>
-  <string name="cache_dialog_offline_drop_message">デバイスからキャッシュ情報を削除中...</string>
+  <string name="cache_dialog_offline_drop_message">デバイスからキャッシュ情報を削除中…</string>
   <string name="cache_dialog_refresh_title">更新</string>
-  <string name="cache_dialog_refresh_message">キャッシュの詳細を再ロード中...</string>
+  <string name="cache_dialog_refresh_message">キャッシュの詳細を再ロード中…</string>
   <string name="cache_menu_navigate">ナビゲーション</string>
   <string name="cache_menu_compass">コンパス</string>
   <string name="cache_menu_tbt">道順ナビ</string>
@@ -452,7 +452,7 @@
   <string name="cache_elevation">高度</string>
   <string name="cache_calendars">カレンダーを選択</string>
   <string name="cache_spoiler_images_title">スポイラー画像</string>
-  <string name="cache_spoiler_images_loading">スポイラー画像をロード中...</string>
+  <string name="cache_spoiler_images_loading">スポイラー画像をロード中…</string>
   <string name="cache_log_types">ログタイプ</string> <!-- Since: 2.10 RC2 -->
 
   <!-- gpx -->
@@ -486,7 +486,7 @@
   <string name="waypoint_add_title">ウェイポイントを追加</string>
   <string name="waypoint_note">メモ</string>
   <string name="waypoint_save">保存</string>
-  <string name="waypoint_loading">ウェイポイントをロード中...</string>
+  <string name="waypoint_loading">ウェイポイントをロード中…</string>
   <string name="waypoint_unknown_coordinates">Coordinates unknown</string>
 
   <!-- visit -->
@@ -503,7 +503,7 @@
   <string name="map_live_enable">オンラインで取得</string>
   <string name="map_live_disable">保存済みキャッシュのみ</string>
   <string name="map_static_title">オフライン地図</string>
-  <string name="map_static_loading">オフライン地図をロード中...</string>
+  <string name="map_static_loading">オフライン地図をロード中…</string>
 
   <!-- search -->
   <string name="search_bar_hint">キャッシュ検索</string>
@@ -541,7 +541,7 @@
   <!-- trackable -->
   <string name="trackable">トラッカブルアイテム</string>
   <string name="trackable_select_title">トラッカブルアイテム</string>
-  <string name="trackable_details_loading">トラッカブルアイテムの詳細をロード中...</string>
+  <string name="trackable_details_loading">トラッカブルアイテムの詳細をロード中…</string>
   <string name="trackable_log_touch">Log touch</string>
   <string name="trackable_browser_open">ブラウザで開く</string>
   <string name="trackable_goal">目的</string>

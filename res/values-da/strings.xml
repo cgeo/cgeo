@@ -139,7 +139,7 @@
   <string name="caches_no_cache">Ingen cache</string>
   <string name="caches_more_caches">Flere cacher</string>
   <string name="caches_more_caches_no">Ikke flere cacher</string>
-  <string name="caches_downloading">Henter cacher...\nETA: </string>
+  <string name="caches_downloading">Henter cacher…\nETA: </string>
   <string name="caches_eta_ltm">Under et minut</string>
   <string name="caches_eta_mins"> minutter</string>
   <string name="caches_no_caches"> (ingen cacher)</string>
@@ -189,7 +189,7 @@
   <string name="auth_again">Start igen</string>
   <string name="auth_pin_hint">PIN tildelt af Twitter</string>
   <string name="auth_finish">Færdig</string>
-  <string name="auth_dialog_wait">Venter på Twitter...</string>
+  <string name="auth_dialog_wait">Venter på Twitter…</string>
   <string name="auth_dialog_pin_title">PIN-kode</string>
   <string name="auth_dialog_pin_message">Indtast PIN-kode fra Twitter. PIN er påkrævet for at gennemføre godkendelse.</string>
   <string name="auth_dialog_completed">c:geo er nu godkendt til at poste beskeder på Twitter.</string>
@@ -219,14 +219,14 @@
   <string name="cache_waypoints_add">Tilføj waypoint</string>
   <string name="cache_hint">Hint</string>
   <string name="cache_logs">Logbog</string>
-  <string name="cache_dialog_loading_details">Indlæser cachedetaljer...</string>
-  <string name="cache_dialog_loading_description">Indlæser cachebeskrivelse...</string>
+  <string name="cache_dialog_loading_details">Indlæser cachedetaljer…</string>
+  <string name="cache_dialog_loading_description">Indlæser cachebeskrivelse…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
-  <string name="cache_dialog_offline_save_message">Gemmer cache til offlinebrug...</string>
+  <string name="cache_dialog_offline_save_message">Gemmer cache til offlinebrug…</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>
-  <string name="cache_dialog_offline_drop_message">Fjerner cache fra hukommelsen...</string>
+  <string name="cache_dialog_offline_drop_message">Fjerner cache fra hukommelsen…</string>
   <string name="cache_dialog_refresh_title">Genindlæs</string>
-  <string name="cache_dialog_refresh_message">Genindlæser cachedetaljer...</string>
+  <string name="cache_dialog_refresh_message">Genindlæser cachedetaljer…</string>
   <string name="cache_menu_navigate">Naviger</string>
   <string name="cache_menu_compass">Kompas</string>
   <string name="cache_menu_tbt">Vejvisning</string>

@@ -94,7 +94,7 @@ public class cgBase {
 	private final static Pattern patternCountLogs = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p>(.*)<\\/p><\\/span>", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternCountLog = Pattern.compile(" src=\"\\/images\\/icons\\/([^\\.]*).gif\" alt=\"[^\"]*\" title=\"[^\"]*\" />([0-9]*)[^0-9]+", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	//private final static Pattern patternLogs = Pattern.compile("<table class=\"LogsTable\">(.*?)</table>\\s*<p", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-	private final static Pattern patternLog = Pattern.compile("<tr><td class.+?<a href=\"/profile/\\?guid=.+?>(.+?)</a>.+?logOwnerStats.+?guid.+?>(\\d+)</a>.+?LogType.+?<img.+?/images/icons/([^\\.]+)\\..+?title=\"(.+?)\".+?LogDate.+?>(.+?)<.+?LogText.+?>(.*?)</p>(.*?)</div></div></div></td></tr>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+	private final static Pattern patternLog = Pattern.compile("<tr><td class.+?<a href=\"/profile/\\?guid=.+?>(.+?)</a>.+?(?:logOwnerStats.+?guid.+?>(\\d+)</a>.+?)?LogType.+?<img.+?/images/icons/([^\\.]+)\\..+?title=\"(.+?)\".+?LogDate.+?>(.+?)<.+?LogText.+?>(.*?)</p>(.*?)</div></div></div></td></tr>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	private final static Pattern patternLogImgs = Pattern.compile("href=\"(http://img.geocaching.com/cache/log/.+?)\".+?<span>([^<]*)", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternAttributes = Pattern.compile("<h3 class=\"WidgetHeader\">[^<]*<img[^>]+>\\W*Attributes[^<]*</h3>[^<]*<div class=\"WidgetBody\">(([^<]*<img src=\"[^\"]+\" alt=\"[^\"]+\"[^>]*>)+)[^<]*<p", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternAttributesInside = Pattern.compile("[^<]*<img src=\"([^\"]+)\" alt=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
@@ -103,7 +103,7 @@ public class cgBase {
 	private final static Pattern patternInventory = Pattern.compile("<span id=\"ctl00_ContentBody_uxTravelBugList_uxInventoryLabel\">\\W*Inventory[^<]*</span>[^<]*</h3>[^<]*<div class=\"WidgetBody\">([^<]*<ul>(([^<]*<li>[^<]*<a href=\"[^\"]+\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>[^<]+<\\/span>[^<]*<\\/a>[^<]*<\\/li>)+)[^<]*<\\/ul>)?", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternInventoryInside = Pattern.compile("[^<]*<li>[^<]*<a href=\"[a-z0-9\\-\\_\\.\\?\\/\\:\\@]*\\/track\\/details\\.aspx\\?guid=([0-9a-z\\-]+)[^\"]*\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>([^<]+)<\\/span>[^<]*<\\/a>[^<]*<\\/li>", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternOnWatchlist = Pattern.compile("<img\\s*src=\"\\/images\\/stockholm\\/16x16\\/icon_stop_watchlist.gif\"", Pattern.CASE_INSENSITIVE);
-	
+
 	public static HashMap<String, String> cacheTypes = new HashMap<String, String>();
 	public static HashMap<String, String> cacheTypesInv = new HashMap<String, String>();
 	public static HashMap<String, String> cacheIDs = new HashMap<String, String>();
@@ -392,17 +392,17 @@ public class cgBase {
 
 	/**
 	 * read all viewstates from page
-	 * 
+	 *
 	 * @return  String[] with all view states
 	 */
 	public static String[] getViewstates(String page) {
 		// Get the number of viewstates.
-		// If there is only one viewstate, __VIEWSTATEFIELDCOUNT is not present 
+		// If there is only one viewstate, __VIEWSTATEFIELDCOUNT is not present
 		int count = 1;
 		final Matcher matcherViewstateCount = patternViewstateFieldCount.matcher(page);
 		if (matcherViewstateCount.find())
 			count = Integer.parseInt(matcherViewstateCount.group(1));
-		
+
 		String[] viewstates = new String[count];
 
 		// Get the viewstates
@@ -424,10 +424,10 @@ public class cgBase {
 			return  viewstates;
 	}
 
-	/** 
+	/**
 	 * put viewstates into request parameters
 	 */
-	public void setViewstates(String[] viewstates, HashMap<String, String> params) {
+	private static void setViewstates(String[] viewstates, HashMap<String, String> params) {
 		if (viewstates == null  ||  viewstates.length == 0)
 			return;
 		params.put("__VIEWSTATE", viewstates[0]);
@@ -442,10 +442,10 @@ public class cgBase {
 	 * transfers the viewstates variables from a page (response) to parameters
 	 * (next request)
 	 */
-	public void transferViewstates(String page, HashMap<String, String> params) {
+	public static void transferViewstates(String page, HashMap<String, String> params) {
 		setViewstates(getViewstates(page), params);
 	}
-	
+
 	/**
 	 * checks if an Array of Strings is empty or not. Empty means:
 	 *  - Array is null
@@ -458,7 +458,7 @@ public class cgBase {
 	    for (String s: a)
 	        if (s != null  &&  s.length() > 0)
 	            return  false;
-	    
+
 	    return  true;
 	}
 
@@ -759,7 +759,7 @@ public class cgBase {
 			}
 
 			// cache direction - image
-			if (settings.loadDirectionImg)
+			if (settings.getLoadDirImg())
 			{
     			try {
     				final Matcher matcherDirection = patternDirection.matcher(row);
@@ -948,7 +948,7 @@ public class cgBase {
 		}
 
 		// get direction images
-		if (settings.loadDirectionImg)
+		if (settings.getLoadDirImg())
 		{
     		for (cgCache oneCache : caches.cacheList) {
     			if (oneCache.latitude == null && oneCache.longitude == null && oneCache.directionImg != null) {
@@ -1591,7 +1591,7 @@ public class cgBase {
 		try
 		{
 //			final Matcher matcherLogs = patternLogs.matcher(page);
-//			
+//
 //			if (matcherLogs.find())
 //			{
 		        /*
@@ -1604,7 +1604,7 @@ public class cgBase {
                 7- The rest (e.g. log-images, maybe faster)
 		        */
 			    final Matcher matcherLog = patternLog.matcher(page);//(matcherLogs.group(1));
-			    
+
 				while (matcherLog.find())
 				{
 					final cgLog logDone = new cgLog();
@@ -1617,7 +1617,7 @@ public class cgBase {
 					{
 						logDone.type = logTypes.get("icon_note");
 					}
-					
+
 					try
 					{
 					    if (matcherLog.group(5).indexOf(',') > 0)
@@ -1641,8 +1641,11 @@ public class cgBase {
 
 					logDone.author = Html.fromHtml(matcherLog.group(1)).toString();
 
-					logDone.found = Integer.parseInt(matcherLog.group(2));
-					
+					if (null != matcherLog.group(2))
+					{
+					    logDone.found = Integer.parseInt(matcherLog.group(2));
+					}
+
 					logDone.log = matcherLog.group(6);
 
 					final Matcher matcherImg = patternLogImgs.matcher(matcherLog.group(7));
@@ -1839,7 +1842,7 @@ public class cgBase {
 		return caches;
 	}
 
-	private void checkFields(cgCache cache) {
+	private static void checkFields(cgCache cache) {
 		if (cache.geocode == null || cache.geocode.length() == 0) {
 			Log.w(cgSettings.tag, "geo code not parsed correctly");
 		}
@@ -3602,7 +3605,7 @@ public class cgBase {
 		return trackable;
 	}
 
-	public int postLog(cgeoapplication app, String geocode, String cacheid, String[] viewstates, 
+	public int postLog(cgeoapplication app, String geocode, String cacheid, String[] viewstates,
 			int logType, int year, int month, int day, String log, ArrayList<cgTrackableLog> trackables) {
 		if (isEmpty(viewstates)) {
 			Log.e(cgSettings.tag, "cgeoBase.postLog: No viewstate given");
@@ -3764,7 +3767,7 @@ public class cgBase {
 		return 1000;
 	}
 
-	public int postLogTrackable(String tbid, String trackingCode, String[] viewstates, 
+	public int postLogTrackable(String tbid, String trackingCode, String[] viewstates,
 			int logType, int year, int month, int day, String log) {
 		if (isEmpty(viewstates)) {
 			Log.e(cgSettings.tag, "cgeoBase.postLogTrackable: No viewstate given");
@@ -4112,7 +4115,7 @@ public class cgBase {
 		if (params != null) {
 			Set<Map.Entry<String, String>> entrySet = params.entrySet();
 			ArrayList<String> paramsEncoded = new ArrayList<String>();
-			
+
 			for(Map.Entry<String, String> entry : entrySet)
 			{
 				String key = entry.getKey();
@@ -4376,7 +4379,7 @@ public class cgBase {
 
 			final Map<String, ?> prefsAll = prefs.getAll();
 			final Set<? extends Map.Entry<String, ?>> entrySet = prefsAll.entrySet();
-			
+
 			for(Map.Entry<String, ?> entry : entrySet){
 				String key = entry.getKey();
 				if (key.matches("cookie_.+")) {
@@ -4391,7 +4394,7 @@ public class cgBase {
 		if (cookies != null) {
 			final Set<Map.Entry<String, String>> entrySet = cookies.entrySet();
 			final ArrayList<String> cookiesEncoded = new ArrayList<String>();
-			
+
 			for(Map.Entry<String, String> entry : entrySet){
 				cookiesEncoded.add(entry.getKey() + "=" + entry.getValue());
 			}
@@ -4411,7 +4414,7 @@ public class cgBase {
 				for(Map.Entry<String, ?> entry : entrySet){
 					String key = entry.getKey();
 					if (key.length() > 7 && key.substring(0, 7).equals("cookie_")) {
-						cookiesEncoded.add(key + "=" + entry.getValue());						
+						cookiesEncoded.add(key + "=" + entry.getValue());
 					}
 				}
 
@@ -5317,7 +5320,7 @@ public class cgBase {
 	public String getUserName() {
 		return settings.getUsername();
 	}
-	
+
 	/**
 	 * insert text into the EditText at the current cursor position
 	 * @param editText
@@ -5329,12 +5332,12 @@ public class cgBase {
 		int selectionEnd = editText.getSelectionEnd();
 		int start = Math.min(selectionStart, selectionEnd);
 		int end = Math.max(selectionStart, selectionEnd);
-		
+
 		String content = editText.getText().toString();
 		if (start > 0 && !Character.isWhitespace(content.charAt(start - 1))) {
 			insertText = " " + insertText;
 		}
-		
+
 		editText.getText().replace(start, end, insertText);
 		int newCursor = start + insertText.length();
 		editText.setSelection(newCursor, newCursor);

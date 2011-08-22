@@ -8,7 +8,7 @@ class AndroidLevel8Internal {
 	public AndroidLevel8Internal() {
 	}
 
-	public int getRotation(final Activity activity) {
+	public static int getRotation(final Activity activity) {
 		Display display = activity.getWindowManager().getDefaultDisplay();
 		return display.getRotation();
 	}
