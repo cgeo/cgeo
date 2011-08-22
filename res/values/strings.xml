@@ -434,6 +434,7 @@
   <string name="init_select_mapfile">…</string>
   <string name="init_trackautovisit">Set trackables automatically to \"visit\"</string>
   <string name="init_sigautoinsert">Insert signature automatically</string>
+  <string name="init_loaddirectionimg">Load direction-image if necessary</string>
 
   <!-- map sources -->
   <string-array name="map_sources">
@@ -902,6 +903,7 @@
     · <a href="http://iirojappinen.com/">Iiro Jäppinen</a> (graphic)\n
     · inkantis (localization PL)\n
     · <a href="http://www.jaytech.cz/">Jan Žatecký</a> (graphic)\n
+    · <a href="http://github.com/koem">Köm</a> (code, artwork computation)\n
     · MichielK (code, loc. NL)\n
     · Pascal (localization NL)\n
     · Peter (localization HU)\n
@@ -917,6 +919,7 @@
     · zenobios (code, loc. DE EN)\n
     \n
     · <a href="http://code.google.com/p/mapsforge/">Mapsforge</a> (OSM-rendering)\n
+    · <a href="http://thenounproject.com/">The Noun Project</a> (graphics)\n
   </string>
 
   <!-- changelog -->
