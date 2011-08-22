@@ -47,7 +47,7 @@ public class mfMapView extends MapView implements MapViewImpl {
 
 	@Override
 	public MapControllerImpl getMapController() {
-		return new mfMapController(getController());
+		return new mfMapController(getController(), getMaxZoomLevel());
 	}
 
 	@Override
