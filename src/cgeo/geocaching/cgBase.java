@@ -759,7 +759,7 @@ public class cgBase {
 			}
 
 			// cache direction - image
-			if (settings.loadDirectionImg)
+			if (settings.getLoadDirImg())
 			{
     			try {
     				final Matcher matcherDirection = patternDirection.matcher(row);
@@ -948,7 +948,7 @@ public class cgBase {
 		}
 
 		// get direction images
-		if (settings.loadDirectionImg)
+		if (settings.getLoadDirImg())
 		{
     		for (cgCache oneCache : caches.cacheList) {
     			if (oneCache.latitude == null && oneCache.longitude == null && oneCache.directionImg != null) {

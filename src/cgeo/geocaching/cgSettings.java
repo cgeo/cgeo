@@ -55,6 +55,7 @@ public class cgSettings {
 	private static final String KEY_USERNAME = "username";
 	private static final String KEY_COORD_INPUT_FORMAT = "coordinputformat";
 	private static final String KEY_LOG_OFFLINE = "log_offline";
+	private static final String KEY_LOAD_DIRECTION_IMG = "loaddirectionimg";
 
 	private interface PrefRunnable {
 		void edit(final Editor edit);
@@ -146,7 +147,6 @@ public class cgSettings {
     public String webDeviceCode = null;
     public boolean trackableAutovisit = false;
     public boolean signatureAutoinsert = false;
-    public boolean loadDirectionImg = true;
 
 	// usable values
 	public static final String tag = "c:geo";
@@ -595,4 +595,17 @@ public class cgSettings {
 		return prefs.getBoolean(KEY_LOG_OFFLINE, false);
 	}
 
+	void setLoadDirImg(final boolean value) {
+        editSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putBoolean(KEY_LOAD_DIRECTION_IMG, value);
+            }
+        });
+    }
+    
+    public boolean getLoadDirImg() {
+        return prefs.getBoolean(KEY_LOAD_DIRECTION_IMG, true);
+    }
 }
