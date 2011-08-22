@@ -106,13 +106,13 @@ public class cgGeo {
 		try {
 			geoManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, time, distance, geoNetListener);
 		} catch (Exception e) {
-			Log.e(cgSettings.tag, "There is no NETWORK location provider");
+			Log.e(cgSettings.tag, "There is no NETWORK location provider: " + e.toString());
 		}
 
 		try {
 			geoManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, time, distance, geoGpsListener);
 		} catch (Exception e) {
-			Log.e(cgSettings.tag, "There is no GPS location provider");
+			Log.e(cgSettings.tag, "There is no GPS location provider: " + e.toString());
 		}
 	}
 
@@ -225,14 +225,6 @@ public class cgGeo {
 						fixed++;
 					}
 					satellites++;
-
-					/* satellite signal strength
-					if (sat.usedInFix()) {
-						Log.d(cgSettings.tag, "Sat #" + satellites + ": " + sat.getSnr() + " FIX");
-					} else {
-						Log.d(cgSettings.tag, "Sat #" + satellites + ": " + sat.getSnr());
-					}
-					 */
 				}
 
 				boolean changed = false;
@@ -427,7 +419,7 @@ public class cgGeo {
 			lastGps.setProvider("last");
 			assign(lastGps);
 
-			Log.i(cgSettings.tag, "Using last location from GPS");
+			Log.d(cgSettings.tag, "Using last location from GPS");
 			return;
 		}
 
@@ -437,7 +429,7 @@ public class cgGeo {
 			lastGsm.setProvider("last");
 			assign(lastGsm);
 
-			Log.i(cgSettings.tag, "Using last location from NETWORK");
+			Log.d(cgSettings.tag, "Using last location from NETWORK");
 			return;
 		}
 	}

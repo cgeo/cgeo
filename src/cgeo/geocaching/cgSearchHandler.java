@@ -1,5 +1,10 @@
 package cgeo.geocaching;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -13,10 +18,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class cgSearchHandler extends Handler {
 	private Activity activity = null;
@@ -97,7 +98,7 @@ public class cgSearchHandler extends Handler {
 
 				imgHandler.sendEmptyMessage(0);
 			} catch (IOException e) {
-				Log.e(cgSettings.tag, "Failed to download reCAPTCHA image");
+				Log.e(cgSettings.tag, "Failed to download reCAPTCHA image: " + e.toString());
 			}
 		}
 	}

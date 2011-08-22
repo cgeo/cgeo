@@ -269,7 +269,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 			}
 			notifyDataSetChanged();
 		} catch (Exception e) {
-			Log.w(cgSettings.tag, "cgCacheListAdapter.setActualCoordinates: failed to sort caches in list");
+			Log.e(cgSettings.tag, "cgCacheListAdapter.setActualCoordinates: failed to sort caches in list - " + e.toString());
 		}
 	}
 
@@ -291,7 +291,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 				}
 				notifyDataSetChanged();
 			} catch (Exception e) {
-				Log.w(cgSettings.tag, "cgCacheListAdapter.setActualCoordinates: failed to sort caches in list");
+				Log.e(cgSettings.tag, "cgCacheListAdapter.setActualCoordinates: failed to sort caches in list - " + e.toString());
 			}
 
 			lastSort = System.currentTimeMillis();
@@ -363,7 +363,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		}
 
 		if (position > getCount()) {
-			Log.w(cgSettings.tag, "cgCacheListAdapter.getView: Attempt to access missing item #" + position);
+			Log.d(cgSettings.tag, "cgCacheListAdapter.getView: Attempt to access missing item #" + position);
 			return null;
 		}
 
@@ -783,7 +783,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 					return true;
 				}
 			} catch (Exception e) {
-				Log.w(cgSettings.tag, "cgCacheListAdapter.detectGesture.onFling: " + e.toString());
+				Log.e(cgSettings.tag, "cgCacheListAdapter.detectGesture.onFling: " + e.toString());
 			}
 
 			return false;

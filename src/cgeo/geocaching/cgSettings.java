@@ -428,7 +428,7 @@ public class cgSettings {
 				Map<String, ?> prefsValues = prefs.getAll();
 
 				if (prefsValues != null && prefsValues.size() > 0) {
-					Log.i(cgSettings.tag, "Removing cookies");
+					Log.d(cgSettings.tag, "Removing cookies");
 
 					for (String key : prefsValues.keySet()) {
 						if (key.length() > 7 && key.substring(0, 7).equals("cookie_")) {

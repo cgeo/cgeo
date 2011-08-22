@@ -131,7 +131,7 @@ public class cgeoadvsearch extends AbstractActivity {
 				found = true;
 			}
 		} catch (Exception e) {
-			Log.w(cgSettings.tag, "cgeoadvsearch.instantSearch: " + e.toString());
+			Log.e(cgSettings.tag, "cgeoadvsearch.instantSearch: " + e.toString());
 		}
 
 		return found;
@@ -214,7 +214,7 @@ public class cgeoadvsearch extends AbstractActivity {
 					lonEdit.setHint(cgBase.formatCoordinate(geo.longitudeNow, "lon", false));
 				}
 			} catch (Exception e) {
-				Log.w(cgSettings.tag, "Failed to update location.");
+				Log.e(cgSettings.tag, "Failed to update location: " + e.toString());
 			}
 		}
 	}

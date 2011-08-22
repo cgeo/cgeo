@@ -387,7 +387,7 @@ public class cgeovisit extends cgLogForm {
 		if (viewId == R.id.type) {
 			for (final int typeOne : types) {
 				menu.add(viewId, typeOne, 0, cgBase.logTypes2.get(typeOne));
-				Log.w(cgSettings.tag, "Adding " + typeOne + " " + cgBase.logTypes2.get(typeOne));
+				Log.d(cgSettings.tag, "Adding " + typeOne + " " + cgBase.logTypes2.get(typeOne));
 			}
 		} else if (viewId == R.id.changebutton) {
 			final int textId = ((TextView) findViewById(viewId)).getId();
@@ -466,7 +466,7 @@ public class cgeovisit extends cgLogForm {
 							tb.action = id;
 							tbText.setText(logTbAction);
 
-							Log.i(cgSettings.tag, "Trackable " + tb.trackCode + " (" + tb.name + ") has new action: #" + id);
+							Log.d(cgSettings.tag, "Trackable " + tb.trackCode + " (" + tb.name + ") has new action: #" + id);
 						}
 					}
 

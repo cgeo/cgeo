@@ -27,7 +27,7 @@ public class cgGPXListAdapter extends ArrayAdapter<File> {
 		if (inflater == null) inflater = ((Activity)getContext()).getLayoutInflater();
 
 		if (position > getCount()) {
-			Log.w(cgSettings.tag, "cgGPXListAdapter.getView: Attempt to access missing item #" + position);
+			Log.d(cgSettings.tag, "cgGPXListAdapter.getView: Attempt to access missing item #" + position);
 			return null;
 		}
 

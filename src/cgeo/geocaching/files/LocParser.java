@@ -136,7 +136,7 @@ public final class LocParser extends FileParser {
 			}
 		}
 
-		Log.i(cgSettings.tag,
+		Log.d(cgSettings.tag,
 				"Coordinates found in .loc file: " + coords.size());
 		return coords;
 	}
@@ -170,7 +170,7 @@ public final class LocParser extends FileParser {
 			Log.e(cgSettings.tag, "cgBase.parseGPX: " + e.toString());
 		}
 
-		Log.i(cgSettings.tag, "Caches found in .gpx file: " + app.getCount(searchId));
+		Log.d(cgSettings.tag, "Caches found in .gpx file: " + app.getCount(searchId));
 
 		return search.getCurrentId();
 	}

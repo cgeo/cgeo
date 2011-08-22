@@ -67,7 +67,7 @@ public class StaticMapsProvider {
 		boolean ok = false;
 
 		for (int i = 0; i < 3; i ++) {
-			if (i > 0) Log.w(cgSettings.tag, "cgMapImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
+			if (i > 0) Log.d(cgSettings.tag, "cgMapImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
 
 			try {
 				client = new DefaultHttpClient();

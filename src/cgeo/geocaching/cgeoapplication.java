@@ -34,7 +34,7 @@ public class cgeoapplication extends Application {
 
 	@Override
 	public void onLowMemory() {
-		Log.i(cgSettings.tag, "Cleaning applications cache.");
+		Log.d(cgSettings.tag, "Cleaning applications cache.");
 
 		cachesCache.clear();
 	}
@@ -97,7 +97,7 @@ public class cgeoapplication extends Application {
 			geo = new cgGeo(context, this, geoUpdate, base, settings, time, distance);
 			geo.initGeo();
 
-			Log.i(cgSettings.tag, "Location service started");
+			Log.d(cgSettings.tag, "Location service started");
 		}
 
 		geo.replaceUpdate(geoUpdate);
@@ -131,7 +131,7 @@ public class cgeoapplication extends Application {
 				geo.closeGeo();
 				geo = null;
 
-				Log.i(cgSettings.tag, "Location service stopped");
+				Log.d(cgSettings.tag, "Location service stopped");
 			}
 		}
 	}
@@ -141,7 +141,7 @@ public class cgeoapplication extends Application {
 			dir = new cgDirection(context, dirUpdate);
 			dir.initDir();
 
-			Log.i(cgSettings.tag, "Direction service started");
+			Log.d(cgSettings.tag, "Direction service started");
 		}
 
 		dir.replaceUpdate(dirUpdate);
@@ -175,7 +175,7 @@ public class cgeoapplication extends Application {
 				dir.closeDir();
 				dir = null;
 
-				Log.i(cgSettings.tag, "Direction service stopped");
+				Log.d(cgSettings.tag, "Direction service stopped");
 			}
 		}
 	}

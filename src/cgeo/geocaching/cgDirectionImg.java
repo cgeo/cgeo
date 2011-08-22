@@ -51,7 +51,7 @@ public class cgDirectionImg {
 		boolean ok = false;
 
 		for (int i = 0; i < 3; i ++) {
-			if (i > 0) Log.w(cgSettings.tag, "cgDirectionImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
+			if (i > 0) Log.d(cgSettings.tag, "cgDirectionImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
 
 			try {
 				client = new DefaultHttpClient();
@@ -60,7 +60,7 @@ public class cgDirectionImg {
 				entity = httpResponse.getEntity();
 				bufferedEntity = new BufferedHttpEntity(entity);
 
-				Log.i(cgSettings.tag, "[" + entity.getContentLength() + "B] Downloading direction image " + code);
+				Log.d(cgSettings.tag, "[" + entity.getContentLength() + "B] Downloading direction image " + code);
 
 				if (bufferedEntity != null) {
 					InputStream is = (InputStream)bufferedEntity.getContent();

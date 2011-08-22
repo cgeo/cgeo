@@ -422,7 +422,7 @@ public class cgeonavigate extends AbstractActivity {
 					}
 				}
 			} catch (Exception e) {
-				Log.w(cgSettings.tag, "Failed to update location.");
+				Log.e(cgSettings.tag, "Failed to update location: " + e.toString());
 			}
 		}
 	}

@@ -65,7 +65,7 @@ public class cgeo extends AbstractActivity {
 					countBubble.setVisibility(View.VISIBLE);
 				}
 			} catch (Exception e) {
-				Log.w(cgSettings.tag, "cgeo.countBubbleHander: " + e.toString());
+				Log.e(cgSettings.tag, "cgeo.countBubbleHander: " + e.toString());
 			}
 		}
 	};
@@ -133,12 +133,12 @@ public class cgeo extends AbstractActivity {
 
 			version = info.versionCode;
 
-			Log.i(cgSettings.tag, "Starting " + info.packageName + " " + info.versionCode + " a.k.a " + info.versionName + "...");
+			Log.d(cgSettings.tag, "Starting " + info.packageName + " " + info.versionCode + " a.k.a " + info.versionName + "...");
 
 			info = null;
 			manager = null;
 		} catch (Exception e) {
-			Log.i(cgSettings.tag, "No info.");
+			Log.e(cgSettings.tag, "No info: " + e.toString());
 		}
 
 		try {
@@ -490,7 +490,7 @@ public class cgeo extends AbstractActivity {
 					navLocation.setText(res.getString(R.string.loc_trying));
 				}
 			} catch (Exception e) {
-				Log.w(cgSettings.tag, "Failed to update location.");
+				Log.e(cgSettings.tag, "Failed to update location: " + e.toString());
 			}
 		}
 	}
@@ -583,7 +583,7 @@ public class cgeo extends AbstractActivity {
 
 			boolean more = false;
 			if (version != settings.version) {
-				Log.i(cgSettings.tag, "Initializing hard cleanup - version changed from " + settings.version + " to " + version + ".");
+				Log.d(cgSettings.tag, "Initializing hard cleanup - version changed from " + settings.version + " to " + version + ".");
 
 				more = true;
 			}
@@ -621,7 +621,7 @@ public class cgeo extends AbstractActivity {
 
 				addresses = geocoder.getFromLocation(geo.latitudeNow, geo.longitudeNow, 1);
 			} catch (Exception e) {
-				Log.i(cgSettings.tag, "Failed to obtain address");
+				Log.e(cgSettings.tag, "Failed to obtain address: " + e.toString());
 			}
 
 			obtainAddressHandler.sendEmptyMessage(0);

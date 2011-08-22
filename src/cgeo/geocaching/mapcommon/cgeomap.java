@@ -774,7 +774,7 @@ public class cgeomap extends MapBase {
 					}
 				}
 			} catch (Exception e) {
-				Log.w(cgSettings.tag, "Failed to update location.");
+				Log.e(cgSettings.tag, "Failed to update location: " + e.toString());
 			}
 		}
 	}
@@ -937,7 +937,7 @@ public class cgeomap extends MapBase {
 
 					yield();
 				} catch (Exception e) {
-					Log.w(cgSettings.tag, "cgeomap.LoadTimer.run: " + e.toString());
+					Log.e(cgSettings.tag, "cgeomap.LoadTimer.run: " + e.toString());
 				}
 			};
 		}
@@ -1019,7 +1019,7 @@ public class cgeomap extends MapBase {
 
 					yield();
 				} catch (Exception e) {
-					Log.w(cgSettings.tag, "cgeomap.LoadUsersTimer.run: " + e.toString());
+					Log.e(cgSettings.tag, "cgeomap.LoadUsersTimer.run: " + e.toString());
 				}
 			};
 		}
@@ -1593,7 +1593,7 @@ public class cgeomap extends MapBase {
 						}
 
 						if (stop) {
-							Log.i(cgSettings.tag, "Stopped storing process.");
+							Log.d(cgSettings.tag, "Stopped storing process.");
 
 							break;
 						}

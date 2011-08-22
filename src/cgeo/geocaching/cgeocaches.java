@@ -654,7 +654,7 @@ public class cgeocaches extends AbstractListActivity {
 		} else {
 			title = "caches";
 			setTitle(title);
-			Log.e(cgSettings.tag, "cgeocaches.onCreate: No action or unknown action specified");
+			Log.d(cgSettings.tag, "cgeocaches.onCreate: No action or unknown action specified");
 		}
 	}
 
@@ -1042,7 +1042,7 @@ public class cgeocaches extends AbstractListActivity {
 		try {
 			adapterInfo = (AdapterContextMenuInfo) info;
 		} catch (Exception e) {
-			Log.w(cgSettings.tag, "cgeocaches.onCreateContextMenu: " + e.toString());
+			Log.e(cgSettings.tag, "cgeocaches.onCreateContextMenu: " + e.toString());
 		}
 
 		if ((adapterInfo == null || adapterInfo.position < 0) && selectedFilter != null){
@@ -1137,7 +1137,7 @@ public class cgeocaches extends AbstractListActivity {
 		try {
 			adapterInfo = (AdapterContextMenuInfo) info;
 		} catch (Exception e) {
-			Log.w(cgSettings.tag, "cgeocaches.onContextItemSelected: " + e.toString());
+			Log.e(cgSettings.tag, "cgeocaches.onContextItemSelected: " + e.toString());
 		}
 
 		// the context menu may be invoked for the cache or for the filter list
@@ -1705,7 +1705,7 @@ public class cgeocaches extends AbstractListActivity {
 					}
 				}
 			} catch (Exception e) {
-				Log.w(cgSettings.tag, "Failed to update location.");
+				Log.e(cgSettings.tag, "Failed to update location: " + e.toString());
 			}
 		}
 	}
@@ -1973,7 +1973,7 @@ public class cgeocaches extends AbstractListActivity {
 
 				try {
 					if (needToStop) {
-						Log.i(cgSettings.tag, "Stopped storing process.");
+						Log.d(cgSettings.tag, "Stopped storing process.");
 						break;
 					}
 
@@ -1984,7 +1984,7 @@ public class cgeocaches extends AbstractListActivity {
 								delay = 500;
 							}
 
-							Log.i(cgSettings.tag, "Waiting for next cache " + delay + " ms");
+							Log.d(cgSettings.tag, "Waiting for next cache " + delay + " ms");
 							sleep(delay);
 						} catch (Exception e) {
 							Log.e(cgSettings.tag, "cgeocaches.geocachesLoadDetails.sleep: " + e.toString());
@@ -1992,7 +1992,7 @@ public class cgeocaches extends AbstractListActivity {
 					}
 
 					if (needToStop) {
-						Log.i(cgSettings.tag, "Stopped storing process.");
+						Log.d(cgSettings.tag, "Stopped storing process.");
 						break;
 					}
 
@@ -2147,7 +2147,7 @@ public class cgeocaches extends AbstractListActivity {
 
 				try {
 					if (needToStop) {
-						Log.i(cgSettings.tag, "Stopped dropping process.");
+						Log.d(cgSettings.tag, "Stopped dropping process.");
 						break;
 					}
 
@@ -2198,7 +2198,7 @@ public class cgeocaches extends AbstractListActivity {
 
                 try {
                     if (needToStop) {
-                        Log.i(cgSettings.tag, "Stopped removing process.");
+                        Log.d(cgSettings.tag, "Stopped removing process.");
                         break;
                     }
 
@@ -2269,7 +2269,7 @@ public class cgeocaches extends AbstractListActivity {
                 try {
                     if (needToStop)
                     {
-                        Log.i(cgSettings.tag, "Stopped exporting process.");
+                        Log.d(cgSettings.tag, "Stopped exporting process.");
                         break;
                     }
 
