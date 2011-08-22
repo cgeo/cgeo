@@ -70,7 +70,7 @@
   <string name="log_tb_drop">Colocar aquí</string>
   <string name="log_tb_changeall">Cambiar todo</string>
   <string name="log_save">Guardar</string>
-  <string name="log_saving">Guardando registo...</string>
+  <string name="log_saving">Guardando registo…</string>
   <string name="log_clear">Limpiar</string>
   <string name="log_post">Enviar registro</string>
   <string name="log_post_rate">Enviar registro y puntuación</string>
@@ -178,7 +178,7 @@
   <string name="err_point_unknown_position">Lo siento, c:geo n puedo identificar donde estás.</string>
   <string name="err_point_no_position_given_title">Información obligatoria</string>
   <string name="err_point_no_position_given">Rellena como mínimo latitud y longitud o distancia y orientación. También puedes rellenar los cuatro campos.</string>
-  <string name="err_point_curr_position_unavailable">c:geo sigue sin obtener las coordenadas actuales. Espera un poco mas...</string>
+  <string name="err_point_curr_position_unavailable">c:geo sigue sin obtener las coordenadas actuales. Espera un poco mas…</string>
   <string name="err_point_bear_and_dist_title">¿Necesitas ayuda?</string>
   <string name="err_point_bear_and_dist">Rellena ambos, orientación y distancia. La orientación es un ángulo de 0 a 360 grados relativo al norte. Distancia con o sin unidades.</string>
 
@@ -261,8 +261,8 @@
   <string name="caches_no_cache">Ningún escondite</string>
   <string name="caches_more_caches">Buscar mas</string>
   <string name="caches_more_caches_no">No hay mas escondites</string>
-  <string name="caches_more_caches_loading">Cargando escondites...</string>
-  <string name="caches_downloading">Descargando escondites...\nFaltan: </string>
+  <string name="caches_more_caches_loading">Cargando escondites…</string>
+  <string name="caches_downloading">Descargando escondites…\nFaltan: </string>
   <string name="caches_progress_loading_title">Cargando escondites</string>
   <string name="caches_progress_loading_text">Escondites almacenados en el dispositivo</string>
   <string name="caches_eta_ltm">Menos de un minuto</string>
@@ -340,8 +340,8 @@
   <string name="caches_filter_type_ape">Projecto APE</string>
   <string name="caches_filter_type_gchq">Groundspeak HQ</string>
   <string name="caches_filter_type_gps">GPS Cache exhibit</string>
-  <string name="caches_exporting_fieldnote">Exportando como Notas de campo...</string>
-  <string name="caches_removing_from_history">Borrando del historial...</string>
+  <string name="caches_exporting_fieldnote">Exportando como Notas de campo…</string>
+  <string name="caches_removing_from_history">Borrando del historial…</string>
   
   <!-- caches lists -->
   <string name="list_menu">Lista</string>
@@ -380,7 +380,7 @@
   <string name="init_passvote">Contraseña</string>
   <string name="init_login">Acceder</string>
   <string name="init_login_popup">Acceso</string>
-  <string name="init_login_popup_working">Accediendo a geocaching.com...</string>
+  <string name="init_login_popup_working">Accediendo a geocaching.com…</string>
   <string name="init_login_popup_ok">Acceso conseguido.</string>
   <string name="init_login_popup_failed">Error en el acceso.</string>
   <string name="init_login_popup_failed_reason">El acceso ha fallado debido a </string>
@@ -435,7 +435,7 @@
   <string name="init_mapsources">Proveedor de mapas</string> <!-- since: 2.26 RC3 -->
   <string name="init_mapsources_description">Aquí puedes seleccionar un proveedor de mapas. Como alternativa a Google Maps están disponibles varios estilos de OpenStreetMap e incluso mapas fuera de linea (mira <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> para más información).</string> <!-- since: 2.26 RC3 -->
   <string name="init_mapsource_select">Elige proveedor de mapas</string>
-  <string name="init_select_mapfile">...</string>
+  <string name="init_select_mapfile">…</string>
   <string name="init_trackautovisit">Convertir rastreables automáticamente a \"visita\"</string>
   <string name="init_sigautoinsert">Insertar firma automáticamente</string>
 
@@ -453,7 +453,7 @@
   <string name="init_sendToCgeo_name">Nombre de tu dispositivo:</string>
   <string name="init_sendToCgeo_description">Enviar a c:geo (send2cgeo)te permite recibir escondites automáticamente desde la web de geocaching usando un complemento especialpara Firefox o Chrome. Antes de registrarte, te sugerimos que leas <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Sólo necesitas registarte si vas a usar send2cgeo. C:geo funciona sin tener que registrar tu dispositivo.</string>
   <string name="init_sendToCgeo_register">Solicitar registro</string>
-  <string name="init_sendToCgeo_registering">Registrando "Enviar a c:geo"...</string>
+  <string name="init_sendToCgeo_registering">Registrando "Enviar a c:geo"…</string>
   <string name="init_sendToCgeo_register_ok">Registro finalizado. Tu código PIN ####. Úsalo en la web de c:geo para añadir este dispositivo a tu navegador.</string>
   <string name="init_sendToCgeo_register_fail">Error al registrarse.</string>  
 
@@ -464,7 +464,7 @@
   <string name="auth_again">Volver a iniciar</string>
   <string name="auth_pin_hint">PIN asignado por Twitter</string>
   <string name="auth_finish">Fin</string>
-  <string name="auth_dialog_wait">Esperando por Twitter...</string>
+  <string name="auth_dialog_wait">Esperando por Twitter…</string>
   <string name="auth_dialog_pin_title">Código PIN</string>
   <string name="auth_dialog_pin_message">Debes usar el codigo PIN suministrado por Twitter. Es obligatorio completar la autorización.</string>
   <string name="auth_dialog_completed">c:geo ahora está autorizado para publicar en Twitter.</string>
@@ -489,7 +489,7 @@
   <string name="cache_attributes">Atributos</string>
   <string name="cache_inventory">Inventario</string>
   <string name="cache_log_offline">Registro desconectado</string>
-  <string name="cache_log_images_loading">Cargando imagen de registro ...</string>
+  <string name="cache_log_images_loading">Cargando imagen de registro …</string>
   <string name="cache_log_images_title">Imagen de resgistro</string>
   <string name="cache_log_image_default_title">Foto</string>
   <string name="cache_personal_note">Nota personal</string>
@@ -504,18 +504,18 @@
   <string name="cache_waypoints_add">Añadir referencia</string>
   <string name="cache_hint">Pista</string>
   <string name="cache_logs">Bitácora</string>
-  <string name="cache_dialog_loading_details">Cargando detalles del escondite...</string>
-  <string name="cache_dialog_loading_description">Cargando descripción del escondite...</string>
+  <string name="cache_dialog_loading_details">Cargando detalles del escondite…</string>
+  <string name="cache_dialog_loading_description">Cargando descripción del escondite…</string>
   <string name="cache_dialog_offline_save_title">Desconectado</string>
-  <string name="cache_dialog_offline_save_message">Guardando escondite para usar desconectado...</string>
+  <string name="cache_dialog_offline_save_message">Guardando escondite para usar desconectado…</string>
   <string name="cache_dialog_offline_drop_title">Desconectado</string>
-  <string name="cache_dialog_offline_drop_message">Borrando escondite de la memoria del dispositivo...</string>
+  <string name="cache_dialog_offline_drop_message">Borrando escondite de la memoria del dispositivo…</string>
   <string name="cache_dialog_refresh_title">Actualizar</string>
-  <string name="cache_dialog_refresh_message">Recargando detalles del escondite...</string>
+  <string name="cache_dialog_refresh_message">Recargando detalles del escondite…</string>
   <string name="cache_dialog_watchlist_add_title">Lista de seguimiento</string>
-  <string name="cache_dialog_watchlist_add_message">Añadiendo el escondite a tu Lista de seguimiento...</string>
+  <string name="cache_dialog_watchlist_add_message">Añadiendo el escondite a tu Lista de seguimiento…</string>
   <string name="cache_dialog_watchlist_remove_title">Lista de seguimiento</string>
-  <string name="cache_dialog_watchlist_remove_message">Borrando escondite de tu Lista de seguimiento...</string>
+  <string name="cache_dialog_watchlist_remove_message">Borrando escondite de tu Lista de seguimiento…</string>
   <string name="cache_menu_navigate">Navegar</string>
   <string name="cache_menu_compass">Brújula</string>
   <string name="cache_menu_tbt">Paso a paso</string>
@@ -561,7 +561,7 @@
   <string name="cache_elevation">Elevación</string>  
   <string name="cache_calendars">Elegir calendario</string>
   <string name="cache_spoiler_images_title">Imágenes reveladoras</string>
-  <string name="cache_spoiler_images_loading">Cargando imágenes reveladoras...</string>
+  <string name="cache_spoiler_images_loading">Cargando imágenes reveladoras…</string>
   <string name="cache_log_types">Tipos de registro</string> <!-- Since: 2.10 RC2 -->
   <string name="cache_coordinates_no">Este escondite no tiene coordenadas.</string> <!-- since: 2.26 RC2 -->
   <string name="cache_export_fieldnote">Exportar como Notas de campo</string>
@@ -587,10 +587,10 @@
   <string name="map_file_select_title">Selecciona un mapa</string>  
   
   <!--  import -->
-  <string name="import_title">Importar...</string>
+  <string name="import_title">Importar…</string>
   <string name="web_import_title">Importar de la web</string>
   <string name="web_import_server_problem">ha habido un problema al contactar con el servidor. Vuelve a registrar tu dispositivo e inténtalo de nuevo.</string>
-  <string name="web_import_waiting">Esperando por nuevos escondites desde la web...</string>
+  <string name="web_import_waiting">Esperando por nuevos escondites desde la web…</string>
   <string name="web_downloading">Descargando</string>
   <string name="web_downloaded">Descargados</string>  
   
@@ -615,7 +615,7 @@
   <string name="waypoint_add_title">Añadir referencia</string>
   <string name="waypoint_note">Nota</string>
   <string name="waypoint_save">Guardar</string>
-  <string name="waypoint_loading">Cargando punto de referencia...</string>
+  <string name="waypoint_loading">Cargando punto de referencia…</string>
   <string name="waypoint_unknown_coordinates">Coordenadas desconocidas</string>
   <string name="search_history">Historial</string>
   <string name="search_history_empty">No hay destinos anteriores</string>
@@ -644,7 +644,7 @@
   <string name="map_live_enable">Activar en vivo</string>
   <string name="map_live_disable">Desactivar en vivo</string>
   <string name="map_static_title">Mapas estáticos</string>
-  <string name="map_static_loading">Cargando mapas estáticos...</string>
+  <string name="map_static_loading">Cargando mapas estáticos…</string>
   <string name="map_token_err">Dado que c:geo sólo es capaz de descargar datos parciales, la coordenadas de algunso escondites pueden ser inexactas.</string> <!-- since: 2.26 RC3 -->
 
   <!-- search -->
@@ -683,7 +683,7 @@
   <!-- trackable -->
   <string name="trackable">Rastreable</string>
   <string name="trackable_select_title">Rastreables</string>
-  <string name="trackable_details_loading">Cargando detalles del rastreable...</string>
+  <string name="trackable_details_loading">Cargando detalles del rastreable…</string>
   <string name="trackable_log_touch">Registrar contacto</string>
   <string name="trackable_browser_open">Abrir en navegador</string>
   <string name="trackable_goal">Meta</string>

@@ -148,7 +148,7 @@
   <string name="err_point_unknown_position">c:geo neví kde jste.</string>
   <string name="err_point_no_position_given_title">popis je požadovaný</string>
   <string name="err_point_no_position_given">Vyplňte alespoň šířku nebo délku nebo vzdálenost a směr. Můžete také vyplnit všechny čtyři pole.</string>
-  <string name="err_point_curr_position_unavailable">c:geo stále nemá aktuální polohu. Prosím, čekejte...</string>
+  <string name="err_point_curr_position_unavailable">c:geo stále nemá aktuální polohu. Prosím, čekejte…</string>
   <string name="err_point_bear_and_dist_title">Potřebujete poradit?</string>
   <string name="err_point_bear_and_dist">Vyplňte jak směru a vzdálenosti. Úhel je úhel 0 - 360 stupňů vzhledem k severu. Vzdálenost s nebo bez jednotek.</string>
   <string name="err_point_location_error">c:geo nemůže získat polohu bodu cesty.</string>
@@ -216,7 +216,7 @@
   <string name="caches_no_cache">žádná keš</string>
   <string name="caches_more_caches">další keše</string>
   <string name="caches_more_caches_no">žádné další keše</string>
-  <string name="caches_downloading">stahuji keše...\nETA:</string>
+  <string name="caches_downloading">stahuji keše…\nETA:</string>
   <string name="caches_progress_loading_title">načítám keše</string>
   <string name="caches_progress_loading_text">Keš uložena v přístroji</string>
   <string name="caches_eta_ltm">méně než minutu</string>
@@ -263,7 +263,7 @@
   <string name="init_passvote">heslo</string>
   <string name="init_login">zkontrolovat</string>
   <string name="init_login_popup">přihlášení</string>
-  <string name="init_login_popup_working">přihlašování na geocaching.com...</string>
+  <string name="init_login_popup_working">přihlašování na geocaching.com…</string>
   <string name="init_login_popup_ok">přihlášení proběhlo</string>
   <string name="init_login_popup_failed">přihlášení neproběhlo</string>
   <string name="init_login_popup_failed_reason">přihlášení neproběhlo, protože</string>
@@ -294,7 +294,7 @@
   <string name="auth_again">znovu autorizovat</string>
   <string name="auth_pin_hint">pin přidělený twitterem</string>
   <string name="auth_finish">dokončit</string>
-  <string name="auth_dialog_wait">Čekám na Twitter...</string>
+  <string name="auth_dialog_wait">Čekám na Twitter…</string>
   <string name="auth_dialog_pin_title">pin kód</string>
   <string name="auth_dialog_pin_message">Prosím, napište PIN kód který Vám byl přidelen Twitterem. Je potřeba pro dokončení autorizace.</string>
   <string name="auth_dialog_completed">c:geo nyní může posílat zprávy na Váš Twitter.</string>
@@ -325,14 +325,14 @@
   <string name="cache_waypoints_add">přidat bod</string>
   <string name="cache_hint">nápověda</string>
   <string name="cache_logs">logbook</string>
-  <string name="cache_dialog_loading_details">načítám detaily keše...</string>
-  <string name="cache_dialog_loading_description">načítám popis keše...</string>
+  <string name="cache_dialog_loading_details">načítám detaily keše…</string>
+  <string name="cache_dialog_loading_description">načítám popis keše…</string>
   <string name="cache_dialog_offline_save_title">offline</string>
-  <string name="cache_dialog_offline_save_message">Ukládám keš pro použití offline...</string>
+  <string name="cache_dialog_offline_save_message">Ukládám keš pro použití offline…</string>
   <string name="cache_dialog_offline_drop_title">offline</string>
-  <string name="cache_dialog_offline_drop_message">Odstraňuji keš z paměti zařízení...</string>
+  <string name="cache_dialog_offline_drop_message">Odstraňuji keš z paměti zařízení…</string>
   <string name="cache_dialog_refresh_title">aktualizace</string>
-  <string name="cache_dialog_refresh_message">Aktualizuji detaily keše...</string>
+  <string name="cache_dialog_refresh_message">Aktualizuji detaily keše…</string>
   <string name="cache_menu_navigate">navigovat</string>
   <string name="cache_menu_compass">kompas</string>
   <string name="cache_menu_tbt">turn-by-turn</string>
@@ -368,7 +368,7 @@
   <string name="cache_coordinates">souřadnice</string>
   <string name="cache_calendars">vyberte kalendář</string>
   <string name="cache_spoiler_images_title">Spoiler images</string>
-  <string name="cache_spoiler_images_loading">Loading spoiler images...</string>
+  <string name="cache_spoiler_images_loading">Loading spoiler images…</string>
 
   <!-- gpx -->
   <string name="gpx_import_loading_stored">nahrávání keší z .gpx souboru\nuloženo:</string>
@@ -400,7 +400,7 @@
   <string name="waypoint_add_title">nový bod trasy</string>
   <string name="waypoint_note">poznámka</string>
   <string name="waypoint_save">uložit</string>
-  <string name="waypoint_loading">načítání bodu trasy...</string>
+  <string name="waypoint_loading">načítání bodu trasy…</string>
 
   <!-- visit -->
   <string name="visit_tweet">informovat o nálezu na twitteru</string>
@@ -414,7 +414,7 @@
   <string name="map_live_enable">povolit aktuální polohu</string>
   <string name="map_live_disable">zakázat aktuální polohu</string>
   <string name="map_static_title">statické mapy</string>
-  <string name="map_static_loading">načítání statických map...</string>
+  <string name="map_static_loading">načítání statických map…</string>
 
   <!-- search -->
   <string name="search_coordinates">souřadnice</string>
@@ -450,7 +450,7 @@
   <!-- trackable -->
   <string name="trackable">Trackable</string>
   <string name="trackable_select_title">Trackables</string>
-  <string name="trackable_details_loading">načítání detailů...</string>
+  <string name="trackable_details_loading">načítání detailů…</string>
   <string name="trackable_log_touch">hlášení zahlédnutí</string>
   <string name="trackable_browser_open">otevřít v prohlížeči</string>
   <string name="trackable_goal">cíl</string>

@@ -70,7 +70,7 @@
   <string name="log_tb_drop">Odłożyć</string>
   <string name="log_tb_changeall">Wszystkie zmienić</string>
   <string name="log_save">Zapisz</string>
-  <string name="log_saving">Wpis w dzienniku...</string>
+  <string name="log_saving">Wpis w dzienniku…</string>
   <string name="log_clear">Oczyść</string>
   <string name="log_post">Wpisz do dziennika</string>
   <string name="log_post_rate">Wpisz do dziennika &amp; oceń</string>
@@ -161,7 +161,7 @@
   <string name="err_point_unknown_position">Przepraszam, c:geo nie może określić twojej lokalizacji.</string>
   <string name="err_point_no_position_given_title">Informacje wymagane</string>
   <string name="err_point_no_position_given">Wypełnij co najmniej szerokość i długość geograficzną lub odległość i namiar. Można również wypełnić wszystkie cztery pola.</string>
-  <string name="err_point_curr_position_unavailable">c:geo nadal nie zna aktualnych współrzędnych. Proszę chwilę poczekać...</string>
+  <string name="err_point_curr_position_unavailable">c:geo nadal nie zna aktualnych współrzędnych. Proszę chwilę poczekać…</string>
   <string name="err_point_bear_and_dist_title">Potrzebujesz pomocy?</string>
   <string name="err_point_bear_and_dist">Wypełnij zarówno namiar i odległość. Biorąc kąt od 0 do 360 stopni w stosunku do północy. Odległość z lub bez jednostki.</string>
   <string name="err_point_location_error">Przepraszam, c:geo nie może rozpoznać lokalizacji punktu nawigacyjnego.</string>
@@ -229,15 +229,15 @@
   <string name="about_button">O c:geo</string>
   <string name="settings_button">Ustawienia</string>
   <string name="type">Filter</string>
-  <string name="now_searching">Szukam...</string>
+  <string name="now_searching">Szukam…</string>
 
   <!-- caches -->
   <string name="caches_searching">Szukam skrzynki</string>
   <string name="caches_no_cache">Nie ma skrzynki</string>
   <string name="caches_more_caches">Więcej skrzynek</string>
   <string name="caches_more_caches_no">Nie ma więcej skrzynek</string>
-  <string name="caches_more_caches_loading">Ładuję skrzynki...</string>
-  <string name="caches_downloading">Ładuję skrzynki...\nSzacowany czas: </string>
+  <string name="caches_more_caches_loading">Ładuję skrzynki…</string>
+  <string name="caches_downloading">Ładuję skrzynki…\nSzacowany czas: </string>
   <string name="caches_progress_loading_title">Ładuję skrzynki</string>
   <string name="caches_progress_loading_text">Zapisane skrzynki</string>
   <string name="caches_eta_ltm">Mniej niż minutę</string>
@@ -312,7 +312,7 @@
   <string name="init_passvote">Hasło</string>
   <string name="init_login">Sprawdź Logowanie</string>
   <string name="init_login_popup">Logowanie</string>
-  <string name="init_login_popup_working">Logowanie w geocaching.com...</string>
+  <string name="init_login_popup_working">Logowanie w geocaching.com…</string>
   <string name="init_login_popup_ok">Login ok.</string>
   <string name="init_login_popup_failed">Logowanie nie powiodło się.</string>
   <string name="init_login_popup_failed_reason">Logowanie nie powiodło się, ponieważ </string>
@@ -362,7 +362,7 @@
   <string name="auth_again">Startuję ponownie autoryzację</string>
   <string name="auth_pin_hint">PIN nadany przez Twitter</string>
   <string name="auth_finish">Gotowe</string>
-  <string name="auth_dialog_wait">Czekam na Twitter...</string>
+  <string name="auth_dialog_wait">Czekam na Twitter…</string>
   <string name="auth_dialog_pin_title">kod PIN</string>
   <string name="auth_dialog_pin_message">Proszę wpisać kod PIN dostarczony przez stronę Twitter. To jest obowiązkowe do ukończenia zezwolenia.</string>
   <string name="auth_dialog_completed">c:geo jest teraz upoważniony do postu na Twitter.</string>
@@ -393,14 +393,14 @@
   <string name="cache_waypoints_add">Dodaj punkt nawigacji</string>
   <string name="cache_hint">Wskazówka</string>
   <string name="cache_logs">Dziennik</string>
-  <string name="cache_dialog_loading_details">Ładuje szczegóły skrzynki...</string>
-  <string name="cache_dialog_loading_description">Ładuje opis skrzynki...</string>
+  <string name="cache_dialog_loading_details">Ładuje szczegóły skrzynki…</string>
+  <string name="cache_dialog_loading_description">Ładuje opis skrzynki…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
-  <string name="cache_dialog_offline_save_message">Zapisywanie skrzynek do trybu offline...</string>
+  <string name="cache_dialog_offline_save_message">Zapisywanie skrzynek do trybu offline…</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>
-  <string name="cache_dialog_offline_drop_message">Kasuję skrzynkę z pamięci...</string>
+  <string name="cache_dialog_offline_drop_message">Kasuję skrzynkę z pamięci…</string>
   <string name="cache_dialog_refresh_title">Odśwież</string>
-  <string name="cache_dialog_refresh_message">Aktualizuje szczegóły skrzynki...</string>
+  <string name="cache_dialog_refresh_message">Aktualizuje szczegóły skrzynki…</string>
   <string name="cache_menu_navigate">Nawigować</string>
   <string name="cache_menu_compass">Kompas</string>
   <string name="cache_menu_tbt">Zakręt po zakręcie</string>
@@ -442,7 +442,7 @@
   <string name="cache_elevation">Wzniesienie</string>
   <string name="cache_calendars">Wybierz kalendarz</string>
   <string name="cache_spoiler_images_title">Zdjęcie spoiler</string>
-  <string name="cache_spoiler_images_loading">Ładuje zdjęcia spoiler...</string>
+  <string name="cache_spoiler_images_loading">Ładuje zdjęcia spoiler…</string>
   <string name="cache_log_types">Rodzaj logu</string> <!-- Since: 2.10 RC2 -->
 
   <!-- gpx -->
@@ -475,7 +475,7 @@
   <string name="waypoint_add_title">Dodaj punkt nawigacyjny</string>
   <string name="waypoint_note">Notatka</string>
   <string name="waypoint_save">Zapisz</string>
-  <string name="waypoint_loading">Ładuje punkt nawigacyjny...</string>
+  <string name="waypoint_loading">Ładuje punkt nawigacyjny…</string>
   <string name="waypoint_unknown_coordinates">Współrzędne nieznane</string>
 
   <!-- visit -->
@@ -490,7 +490,7 @@
   <string name="map_live_enable">Włącz live</string>
   <string name="map_live_disable">Wyłącz live</string>
   <string name="map_static_title">Statyczna mapa</string>
-  <string name="map_static_loading">Ładuje statyczną mapę...</string>
+  <string name="map_static_loading">Ładuje statyczną mapę…</string>
 
   <!-- search -->
   <string name="search_bar_hint">Szukaj skrzynki</string>
@@ -528,7 +528,7 @@
   <!-- trackable -->
   <string name="trackable">Przedmiot podróżny</string>
   <string name="trackable_select_title">Przedmioty podróżne</string>
-  <string name="trackable_details_loading">Ładuje szczegóły przedmiotu podróżnego...</string>
+  <string name="trackable_details_loading">Ładuje szczegóły przedmiotu podróżnego…</string>
   <string name="trackable_log_touch">Wpisz odkrycie</string>
   <string name="trackable_browser_open">Otwórz w przeglądarce</string>
   <string name="trackable_goal">Cel</string>

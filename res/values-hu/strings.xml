@@ -139,7 +139,7 @@
   <string name="caches_no_cache">Nincs cache</string>
   <string name="caches_more_caches">Több cache</string>
   <string name="caches_more_caches_no">Nincs több cache</string>
-  <string name="caches_downloading">Cache letöltés...\nHátralévő idő: </string>
+  <string name="caches_downloading">Cache letöltés…\nHátralévő idő: </string>
   <string name="caches_eta_ltm">Kevesebb, mint egy perc</string>
   <string name="caches_eta_mins"> perc</string>
   <string name="caches_no_caches"> (nincs cache)</string>
@@ -189,7 +189,7 @@
   <string name="auth_again">Újrakezdés</string>
   <string name="auth_pin_hint">Twitter PIN kódja</string>
   <string name="auth_finish">Kész</string>
-  <string name="auth_dialog_wait">Várakozás a Twitter-re...</string>
+  <string name="auth_dialog_wait">Várakozás a Twitter-re…</string>
   <string name="auth_dialog_pin_title">PIN kód</string>
   <string name="auth_dialog_pin_message">Add meg a Twitter oldalán kapott PIN kódot. Ez kötelező az engedélyezés befejezéséhez.</string>
   <string name="auth_dialog_completed">A c:geo engedélyt kapott Twitter üzenetek létrehozásához.</string>
@@ -219,14 +219,14 @@
   <string name="cache_waypoints_add">Útpont hozzáadása</string>
   <string name="cache_hint">Segítség</string>
   <string name="cache_logs">Logbook</string>
-  <string name="cache_dialog_loading_details">Cache részletek betöltése...</string>
-  <string name="cache_dialog_loading_description">Cache leírás betöltése...</string>
+  <string name="cache_dialog_loading_details">Cache részletek betöltése…</string>
+  <string name="cache_dialog_loading_description">Cache leírás betöltése…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
-  <string name="cache_dialog_offline_save_message">Cache mentése offline használathoz...</string>
+  <string name="cache_dialog_offline_save_message">Cache mentése offline használathoz…</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>
-  <string name="cache_dialog_offline_drop_message">Cache eltávolítása a memóriából...</string>
+  <string name="cache_dialog_offline_drop_message">Cache eltávolítása a memóriából…</string>
   <string name="cache_dialog_refresh_title">Frissítés</string>
-  <string name="cache_dialog_refresh_message">Cache részleteinek frissítése...</string>
+  <string name="cache_dialog_refresh_message">Cache részleteinek frissítése…</string>
   <string name="cache_menu_navigate">Navigáció</string>
   <string name="cache_menu_compass">Iránytű</string>
   <string name="cache_menu_tbt">Utakon</string>
