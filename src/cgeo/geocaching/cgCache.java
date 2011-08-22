@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.text.Spannable;
 import android.util.Log;
 import cgeo.geocaching.activity.IAbstractActivity;
@@ -343,6 +344,17 @@ public class cgCache {
 			types.remove(Integer.valueOf(cgBase.LOG_UPDATE_COORDINATES));
 		}
 		return types;
+	}
+
+	public void openInBrowser(Activity fromActivity) {
+		fromActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getCacheUrl() + geocode)));
+	}
+
+	private String getCacheUrl() {
+		if (geocode.startsWith("OC")) { // TODO refactor method into connectors, once available
+			return "http://www.opencaching.de/viewcache.php?wp=";
+		}
+		return "http://www.geocaching.com/seek/cache_details.aspx?wp=";
 	}
 
 }

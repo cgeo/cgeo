@@ -3,13 +3,23 @@ package cgeo.geocaching;
 import java.io.File;
 import java.util.ArrayList;
 
+import cgeo.geocaching.files.FileList;
+import cgeo.geocaching.files.GPXParser;
+import cgeo.geocaching.files.LocParser;
+
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 
-public class cgeogpxes extends cgFileList<cgGPXListAdapter> {
+public class cgeogpxes extends FileList<cgGPXListAdapter> {
+
+	public cgeogpxes() {
+		super(new String[] {"gpx"
+			// TODO	, "loc" 
+				});
+	}
 
 	private ProgressDialog parseDialog = null;
 	private int listId = 1;
@@ -55,11 +65,6 @@ public class cgeogpxes extends cgFileList<cgGPXListAdapter> {
 	}
 
 	@Override
-	protected String getFileExtension() {
-		return "gpx";
-	}
-
-	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
@@ -100,8 +105,14 @@ public class cgeogpxes extends cgFileList<cgGPXListAdapter> {
 
 		@Override
 		public void run() {
-			final long searchId = cgBase.parseGPX(app, file, listId, changeParseDialogHandler);
-
+			final long searchId;
+			String name = file.getName().toLowerCase();
+			if (name.endsWith("gpx")) {
+				searchId = GPXParser.parseGPX(app, file, listId, changeParseDialogHandler);
+			}
+			else {
+				searchId = LocParser.parseLoc(app, file, listId, changeParseDialogHandler);
+			}
 			imported = app.getCount(searchId);
 
 			loadCachesHandler.sendMessage(new Message());

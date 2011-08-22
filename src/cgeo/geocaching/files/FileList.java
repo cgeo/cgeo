@@ -1,4 +1,4 @@
-package cgeo.geocaching;
+package cgeo.geocaching.files;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -11,9 +11,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import cgeo.geocaching.R;
+import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.activity.AbstractListActivity;
 
-public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractListActivity {
+public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractListActivity {
 
 	private ArrayList<File> files = new ArrayList<File>();
 	private T adapter = null;
@@ -61,6 +63,7 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 			}
 		}
 	};
+	private String[] extensions;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -175,57 +178,64 @@ public abstract class cgFileList<T extends ArrayAdapter<File>> extends AbstractL
 		}
 	}
 
-	/**
-	 * Get the file extension to search for
-	 * @return The file extension
-	 */
-	protected abstract String getFileExtension();
-
-	private void listDir(ArrayList<File> list, File directory) {
-		if (directory == null || directory.isDirectory() == false || directory.canRead() == false) {
+	private void listDir(ArrayList<File> result, File directory) {
+		if (directory == null || !directory.isDirectory() || !directory.canRead()) {
 			return;
 		}
 
-		final File[] listPre = directory.listFiles();
-		String fileExt = getFileExtension();
+		final File[] files = directory.listFiles();
 
-		if (listPre != null && listPre.length > 0) {
-
-			for (File file : listPre) {
+		if (files != null && files.length > 0) {
+			for (File file : files) {
 				if (endSearching) {
 					return;
 				}
-
-				if (file.canRead() && file.isFile()) {
-					final String[] nameParts = file.getName().split("\\.");
-					if (nameParts.length > 1) {
-						final String extension = nameParts[(nameParts.length - 1)].toLowerCase();
-
-						if (extension.equals(fileExt) == false) {
-							continue;
+				if (!file.canRead()) {
+					continue;
+				}
+				String name = file.getName();
+				if (file.isFile()) {
+					for (String ext : extensions) {
+						int extLength = ext.length();
+						if (name.length() > extLength && name.substring(name.length() - extLength, name.length()).equalsIgnoreCase(ext)) {
+							result.add(file); // add file to list
+							break;
 						}
-					} else {
-						continue; // file has no extension
 					}
 
-					list.add(file); // add file to list
-				} else if (file.canRead() && file.isDirectory()) {
-					final Message msg = new Message();
-					String name = file.getName();
-					if (name.substring(0, 1).equals(".")) {
+				} else if (file.isDirectory()) {
+					if (name.charAt(0) == '.') {
 						continue; // skip hidden directories
 					}
 					if (name.length() > 16) {
 						name = name.substring(0, 14) + "...";
 					}
+					final Message msg = new Message();
 					msg.obj = name;
 					changeWaitDialogHandler.sendMessage(msg);
 
-					listDir(list, file); // go deeper
+					listDir(result, file); // go deeper
 				}
 			}
 		}
 
 		return;
+	}
+	
+	public FileList(final String extension) {
+		setExtensions(new String[] {extension});
+	}
+
+	public FileList(final String[] extensions) {
+		setExtensions(extensions);
+	}
+
+	private void setExtensions(String[] extensionsIn) {
+		for (String extension : extensionsIn) {
+			if (!extension.startsWith(".")) {
+				extension = "." + extension;
+			}
+		}
+		extensions = extensionsIn;
 	}
 }

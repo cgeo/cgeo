@@ -146,6 +146,7 @@ public class cgSettings {
     public String webDeviceCode = null;
     public boolean trackableAutovisit = false;
     public boolean signatureAutoinsert = false;
+    public boolean loadDirectionImg = true;
 
 	// usable values
 	public static final String tag = "c:geo";
