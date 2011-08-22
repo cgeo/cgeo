@@ -60,7 +60,7 @@
   <string name="log_tb_drop">déposé ici</string>
   <string name="log_tb_changeall">Tout modifier</string>
   <string name="log_save">Enregistrer</string>
-  <string name="log_saving">Enregistrement en cours...</string>
+  <string name="log_saving">Enregistrement en cours…</string>
   <string name="log_clear">Effacer</string>
   <string name="log_post">Envoyer</string>
   <string name="log_post_rate">Envoyer &amp; noter</string>
@@ -193,7 +193,7 @@
   <string name="auth_again">start again</string>
   <string name="auth_pin_hint">pin assigned by twitter</string>
   <string name="auth_finish">finish</string>
-  <string name="auth_dialog_wait">Waiting for Twitter...</string>
+  <string name="auth_dialog_wait">Waiting for Twitter…</string>
   <string name="auth_dialog_pin_title">pin code</string>
   <string name="auth_dialog_pin_message">Please write PIN code provided by Twitter website. It\'s mandatory to complete authorization.</string>
   <string name="auth_dialog_completed">c:geo is now authorized to post on your Twitter.</string>
@@ -223,14 +223,14 @@
   <string name="cache_waypoints_add">ajouter une étape</string>
   <string name="cache_hint">indice</string>
   <string name="cache_logs">carnet de bord</string>
-  <string name="cache_dialog_loading_details">chargement des détails...</string>
-  <string name="cache_dialog_loading_description">Chargement de la description...</string>
+  <string name="cache_dialog_loading_details">chargement des détails…</string>
+  <string name="cache_dialog_loading_description">Chargement de la description…</string>
   <string name="cache_dialog_offline_save_title">hors ligne</string>
-  <string name="cache_dialog_offline_save_message">Enregistrement pour une utilisation hors ligne...</string>
+  <string name="cache_dialog_offline_save_message">Enregistrement pour une utilisation hors ligne…</string>
   <string name="cache_dialog_offline_drop_title">hors ligne</string>
-  <string name="cache_dialog_offline_drop_message">Suppression des caches de la mémoire...</string>
+  <string name="cache_dialog_offline_drop_message">Suppression des caches de la mémoire…</string>
   <string name="cache_dialog_refresh_title">Recharger</string>
-  <string name="cache_dialog_refresh_message">Rechargement des détails...</string>
+  <string name="cache_dialog_refresh_message">Rechargement des détails…</string>
   <string name="cache_menu_navigate">navigation</string>
   <string name="cache_menu_compass">boussole</string>
   <string name="cache_menu_tbt">itinéraire</string>

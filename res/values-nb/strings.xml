@@ -64,7 +64,7 @@
   <string name="log_tb_drop">Legg igjen</string>
   <string name="log_tb_changeall">Endre alle</string>
   <string name="log_save">Lagre</string>
-  <string name="log_saving">Lagrer logg...</string>
+  <string name="log_saving">Lagrer logg…</string>
   <string name="log_clear">Slett</string>
   <string name="log_post">Last opp loggen</string>
   <string name="log_post_rate">Last opp loggen og rangér</string>
@@ -205,7 +205,7 @@
   <string name="caches_no_cache">ingen cacher</string>
   <string name="caches_more_caches">flere cacher</string>
   <string name="caches_more_caches_no">ingen flere cacher</string>
-  <string name="caches_downloading">Laster ned cacher...\nETA: </string>
+  <string name="caches_downloading">Laster ned cacher…\nETA: </string>
   <string name="caches_progress_loading_title">Laster cacher</string>
   <string name="caches_progress_loading_text">Cachene er lagret på enheten</string>
   <string name="caches_eta_ltm">Mindre enn ett minutt</string>
@@ -249,7 +249,7 @@
   <string name="init_passvote">Passord</string>
   <string name="init_login">Sjekk innloggings-opplysninger</string>
   <string name="init_login_popup">Logg inn</string>
-  <string name="init_login_popup_working">Logger inn på geocaching.com...</string>
+  <string name="init_login_popup_working">Logger inn på geocaching.com…</string>
   <string name="init_login_popup_ok">Innlogging fullført.</string>
   <string name="init_login_popup_failed">Innlogging mislyktes.</string>
   <string name="init_login_popup_failed_reason">Innlogging mislyktes p.g.a.</string>
@@ -280,7 +280,7 @@
   <string name="auth_again">Prøv igjen</string>
   <string name="auth_pin_hint">PIN-kode oppgitt av Twitter</string>
   <string name="auth_finish">Fullfør</string>
-  <string name="auth_dialog_wait">venter på Twitter...</string>
+  <string name="auth_dialog_wait">venter på Twitter…</string>
   <string name="auth_dialog_pin_title">PIN-kode</string>
   <string name="auth_dialog_pin_message">Vennligst tast inn PIN-koden oppgitt av Twitter. Det er obligatorisk at du fullfører autorisasjonen.</string>
   <string name="auth_dialog_completed">c:geo kan nå poste på Twitter.</string>
@@ -311,14 +311,14 @@
   <string name="cache_waypoints_add">Legg til veipunkter</string>
   <string name="cache_hint">Hint</string>
   <string name="cache_logs">Loggbok</string>
-  <string name="cache_dialog_loading_details">Laster cachens detaljer...</string>
-  <string name="cache_dialog_loading_description">Laster cachens fulle beskrivelse...</string>
+  <string name="cache_dialog_loading_details">Laster cachens detaljer…</string>
+  <string name="cache_dialog_loading_description">Laster cachens fulle beskrivelse…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
-  <string name="cache_dialog_offline_save_message">Lagrer cachen for offline-bruk...</string>
+  <string name="cache_dialog_offline_save_message">Lagrer cachen for offline-bruk…</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>
-  <string name="cache_dialog_offline_drop_message">Sletter cachen fra enheten...</string>
+  <string name="cache_dialog_offline_drop_message">Sletter cachen fra enheten…</string>
   <string name="cache_dialog_refresh_title">Oppdater</string>
-  <string name="cache_dialog_refresh_message">Laster cachens detaljer på nytt...</string>
+  <string name="cache_dialog_refresh_message">Laster cachens detaljer på nytt…</string>
   <string name="cache_menu_navigate">Navigér</string>
   <string name="cache_menu_compass">Kompass</string>
   <string name="cache_menu_tbt">Punktvis navigasjon</string>
