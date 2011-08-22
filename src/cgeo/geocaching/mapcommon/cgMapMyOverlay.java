@@ -7,9 +7,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Paint.Style;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Point;
+import android.graphics.Paint.Style;
 import android.location.Location;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgBase;
@@ -19,6 +19,7 @@ import cgeo.geocaching.mapinterfaces.MapFactory;
 import cgeo.geocaching.mapinterfaces.MapProjectionImpl;
 import cgeo.geocaching.mapinterfaces.MapViewImpl;
 import cgeo.geocaching.mapinterfaces.OverlayBase;
+import cgeo.geocaching.mapinterfaces.OverlayImpl;
 
 public class cgMapMyOverlay implements OverlayBase {
 	private cgSettings settings = null;
@@ -41,11 +42,13 @@ public class cgMapMyOverlay implements OverlayBase {
 	private Point historyPointP = new Point();
 	private Activity activity;
 	private MapFactory mapFactory = null;
+	private OverlayImpl ovlImpl = null;
 
-	public cgMapMyOverlay(cgSettings settingsIn, Activity activity) {
+	public cgMapMyOverlay(cgSettings settingsIn, Activity activity, OverlayImpl ovlImpl) {
 		settings = settingsIn;
 		this.activity = activity;
 		this.mapFactory = settings.getMapFactory();
+		this.ovlImpl = ovlImpl;
 	}
 
 	public void setCoordinates(Location coordinatesIn) {
@@ -201,5 +204,10 @@ public class cgMapMyOverlay implements OverlayBase {
 		canvas.setDrawFilter(remfil);
 
 		//super.draw(canvas, mapView, shadow);
+	}
+
+	@Override
+	public OverlayImpl getOverlayImpl() {
+		return this.ovlImpl;
 	}
 }

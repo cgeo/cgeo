@@ -8,4 +8,9 @@ package cgeo.geocaching.mapinterfaces;
  */
 public interface OverlayImpl {
 
+	public enum overlayType {
+		PositionOverlay,
+		ScaleOverlay
+	}
+	
 }

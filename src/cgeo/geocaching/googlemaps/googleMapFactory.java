@@ -7,8 +7,6 @@ import cgeo.geocaching.cgUser;
 import cgeo.geocaching.mapinterfaces.CacheOverlayItemImpl;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
 import cgeo.geocaching.mapinterfaces.MapFactory;
-import cgeo.geocaching.mapinterfaces.OverlayBase;
-import cgeo.geocaching.mapinterfaces.OverlayImpl;
 import cgeo.geocaching.mapinterfaces.UserOverlayItemImpl;
 
 import com.google.android.maps.MapActivity;
@@ -35,11 +33,11 @@ public class googleMapFactory implements MapFactory{
 		return new googleGeoPoint(latE6, lonE6);
 	}
 
-	@Override
-	public OverlayImpl getOverlayBaseWrapper(OverlayBase ovlIn) {
-		googleOverlay baseOvl = new googleOverlay(ovlIn);
-		return baseOvl;
-	}
+//	@Override
+//	public OverlayImpl getOverlayBaseWrapper(OverlayBase ovlIn) {
+//		googleOverlay baseOvl = new googleOverlay(ovlIn);
+//		return baseOvl;
+//	}
 
 	@Override
 	public CacheOverlayItemImpl getCacheOverlayItem(cgCoord coordinate, String type) {

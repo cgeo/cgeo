@@ -28,13 +28,13 @@ import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgDirection;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.cgUpdateDir;
 import cgeo.geocaching.cgUpdateLoc;
 import cgeo.geocaching.cgUser;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.mapinterfaces.ActivityImpl;
 import cgeo.geocaching.mapinterfaces.CacheOverlayItemImpl;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
@@ -270,8 +270,7 @@ public class cgeomap extends MapBase {
 		mapView.clearOverlays();
 
 		if (overlayMyLoc == null) {
-			overlayMyLoc = new cgMapMyOverlay(settings, activity);
-			mapView.addOverlay(mapFactory.getOverlayBaseWrapper(overlayMyLoc));
+			overlayMyLoc = mapView.createAddPositionOverlay(activity, settings);
 		}
 
 		if (settings.publicLoc > 0 && overlayUsers == null) {
@@ -283,8 +282,7 @@ public class cgeomap extends MapBase {
 		}
 
 		if (overlayScale == null && mapView.needsScaleOverlay()) {
-			overlayScale = new cgOverlayScale(activity, settings);
-			mapView.addOverlay(mapFactory.getOverlayBaseWrapper(overlayScale));
+			overlayScale = mapView.createAddScaleOverlay(activity, settings);
 		}
 
 		mapView.invalidate();
@@ -748,9 +746,10 @@ public class cgeomap extends MapBase {
 			}
 
 			try {
+				boolean repaintRequired = false;
+				
 				if (overlayMyLoc == null && mapView != null) {
-					overlayMyLoc = new cgMapMyOverlay(settings, activity);
-					mapView.addOverlay(settings.getMapFactory().getOverlayBaseWrapper(overlayMyLoc));
+					overlayMyLoc = mapView.createAddPositionOverlay(activity, settings);
 				}
 
 				if (overlayMyLoc != null && geo.location != null) {
@@ -761,8 +760,7 @@ public class cgeomap extends MapBase {
 					if (followMyLocation) {
 						myLocationInMiddle();
 					} else {
-						// move blue arrow
-						mapView.invalidate();
+						repaintRequired = true;
 					}
 				}
 
@@ -772,7 +770,13 @@ public class cgeomap extends MapBase {
 					} else {
 						overlayMyLoc.setHeading(Double.valueOf(0));
 					}
+					repaintRequired = true;
 				}
+				
+				if (repaintRequired) {
+					mapView.repaintRequired(overlayMyLoc);
+				}
+				
 			} catch (Exception e) {
 				Log.w(cgSettings.tag, "Failed to update location.");
 			}

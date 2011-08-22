@@ -7,19 +7,24 @@ import org.mapsforge.android.maps.MapViewMode;
 import org.mapsforge.android.maps.Overlay;
 import org.mapsforge.android.maps.Projection;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.mapcommon.cgMapMyOverlay;
 import cgeo.geocaching.mapcommon.cgMapOverlay;
+import cgeo.geocaching.mapcommon.cgOverlayScale;
 import cgeo.geocaching.mapcommon.cgUsersOverlay;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
 import cgeo.geocaching.mapinterfaces.MapControllerImpl;
 import cgeo.geocaching.mapinterfaces.MapProjectionImpl;
 import cgeo.geocaching.mapinterfaces.MapViewImpl;
+import cgeo.geocaching.mapinterfaces.OverlayBase;
 import cgeo.geocaching.mapinterfaces.OverlayImpl;
+import cgeo.geocaching.mapinterfaces.OverlayImpl.overlayType;
 
 public class mfMapView extends MapView implements MapViewImpl {
 
@@ -86,6 +91,22 @@ public class mfMapView extends MapView implements MapViewImpl {
 		getOverlays().add(ovl);
 		return ovl.getBase();
 	}
+
+	@Override
+	public cgMapMyOverlay createAddPositionOverlay(Activity activity,
+			cgSettings settingsIn) {
+		mfOverlay ovl = new mfOverlay(activity, settingsIn, overlayType.PositionOverlay);
+		getOverlays().add(ovl);
+		return (cgMapMyOverlay) ovl.getBase();
+	}
+
+	@Override
+	public cgOverlayScale createAddScaleOverlay(Activity activity,
+			cgSettings settingsIn) {
+		mfOverlay ovl = new mfOverlay(activity, settingsIn, overlayType.ScaleOverlay);
+		getOverlays().add(ovl);
+		return (cgOverlayScale) ovl.getBase();
+	}	
 
 	@Override
 	public int getLatitudeSpan() {
@@ -160,10 +181,28 @@ public class mfMapView extends MapView implements MapViewImpl {
 				if (MapDatabase.isValidMapFile(settings.getMapFile())) {
 					setMapViewMode(MapViewMode.CANVAS_RENDERER);
 					super.setMapFile(settings.getMapFile());
+				} else {
+					setMapViewMode(MapViewMode.MAPNIK_TILE_DOWNLOAD);
 				}
 				break;
 			default:
 				setMapViewMode(MapViewMode.MAPNIK_TILE_DOWNLOAD);
 		}
 	}
+
+	@Override
+	public void repaintRequired(OverlayBase overlay) {
+		
+		try {
+			mfOverlay ovl = (mfOverlay) overlay.getOverlayImpl();
+			
+			if (ovl != null) {
+				ovl.requestRedraw();
+			}
+			
+		} catch (Exception e) {
+			Log.e(cgSettings.tag, "mfMapView.repaintRequired: " + e.toString());
+		}
+	}
+
 }

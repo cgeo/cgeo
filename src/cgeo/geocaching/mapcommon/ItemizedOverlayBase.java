@@ -6,6 +6,8 @@ import android.graphics.drawable.Drawable;
 import cgeo.geocaching.mapinterfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.mapinterfaces.MapProjectionImpl;
 import cgeo.geocaching.mapinterfaces.MapViewImpl;
+import cgeo.geocaching.mapinterfaces.OverlayBase;
+import cgeo.geocaching.mapinterfaces.OverlayImpl;
 import cgeo.geocaching.mapinterfaces.OverlayItemImpl;
 
 /**
@@ -14,7 +16,7 @@ import cgeo.geocaching.mapinterfaces.OverlayItemImpl;
  * @author rsudev
  *
  */
-public abstract class ItemizedOverlayBase {
+public abstract class ItemizedOverlayBase implements OverlayBase {
 	
 	private ItemizedOverlayImpl ovlImpl;
 
@@ -49,6 +51,11 @@ public abstract class ItemizedOverlayBase {
 	public void drawOverlayBitmap(Canvas canvas, Point drawPosition,
 			MapProjectionImpl projection, byte drawZoomLevel) {
 		ovlImpl.superDrawOverlayBitmap(canvas, drawPosition, projection, drawZoomLevel);
+	}
+	
+	@Override
+	public OverlayImpl getOverlayImpl() {
+		return ovlImpl;
 	}
 
 	public abstract OverlayItemImpl createItem(int index);
