@@ -26,18 +26,18 @@ public class cgeocoords extends Dialog {
 	private cgSettings settings = null;
 	private cgGeo geo = null;
 	private Double latitude = 0.0, longitude = 0.0;
-	
+
 	private EditText eLat, eLon;
 	private Button bLat, bLon;
 	private EditText eLatDeg, eLatMin, eLatSec, eLatSub;
 	private EditText eLonDeg, eLonMin, eLonSec, eLonSub;
 	private TextView tLatSep1, tLatSep2, tLatSep3;
-	private TextView tLonSep1, tLonSep2, tLonSep3;	
-	
+	private TextView tLonSep1, tLonSep2, tLonSep3;
+
 	CoordinateUpdate cuListener;
-	
+
 	coordInputFormatEnum currentFormat;
-	
+
 	public cgeocoords(final AbstractActivity contextIn, cgSettings settingsIn, final cgWaypoint waypoint, final cgGeo geoIn) {
 		super(contextIn);
 		context = contextIn;
@@ -65,7 +65,7 @@ public class cgeocoords extends Dialog {
 		}
 
 		setContentView(R.layout.coords);
-		
+
 		Spinner s = (Spinner) findViewById(R.id.spinnerCoordinateFormats);
 		ArrayAdapter<CharSequence> adapter =
 				ArrayAdapter.createFromResource(context,
@@ -74,9 +74,9 @@ public class cgeocoords extends Dialog {
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		s.setAdapter(adapter);
 		s.setSelection(settings.getCoordInputFormat().ordinal());
-		
+
 		s.setOnItemSelectedListener(new CoordinateFormatListener());
-		
+
 		bLat = (Button) findViewById(R.id.ButtonLat);
 		eLat = (EditText) findViewById(R.id.latitude);
 		eLatDeg = (EditText) findViewById(R.id.EditTextLatDeg);
@@ -95,7 +95,7 @@ public class cgeocoords extends Dialog {
 		eLonSub = (EditText) findViewById(R.id.EditTextLonSecFrac);
 		tLonSep1 = (TextView) findViewById(R.id.LonSeparator1);
 		tLonSep2 = (TextView) findViewById(R.id.LonSeparator2);
-		tLonSep3 = (TextView) findViewById(R.id.LonSeparator3);		
+		tLonSep3 = (TextView) findViewById(R.id.LonSeparator3);
 
 		eLatDeg.addTextChangedListener(new textChangedListener(1));
 		eLatMin.addTextChangedListener(new textChangedListener(2));
@@ -109,13 +109,13 @@ public class cgeocoords extends Dialog {
 		eLon.addTextChangedListener(new textChangedListener(11));
 		bLat.setOnClickListener(new buttonClickListener());
 		bLon.setOnClickListener(new buttonClickListener());
-		
+
 		Button buttonCurrent = (Button) findViewById(R.id.current);
 		buttonCurrent.setOnClickListener(new CurrentListener());
 		Button buttonDone = (Button) findViewById(R.id.done);
-		buttonDone.setOnClickListener(new InputDoneListener());		
+		buttonDone.setOnClickListener(new InputDoneListener());
 	}
-	
+
 	private void updateGUI() {
 		Double lat = 0.0;
 		if (latitude != null) {
@@ -124,7 +124,7 @@ public class cgeocoords extends Dialog {
 			} else {
 				bLat.setText("N");
 			}
-			
+
 			lat = Math.abs(latitude);
 		}
 		Double lon = 0.0;
@@ -134,7 +134,7 @@ public class cgeocoords extends Dialog {
 			} else {
 				bLon.setText("E");
 			}
-			
+
 			lon = Math.abs(longitude);
 		}
 		int latDeg = (int) Math.floor(lat);
@@ -156,7 +156,7 @@ public class cgeocoords extends Dialog {
 		int lonSecFrac = (int) Math.round((((lon - lonDeg) * 60 - lonMin) * 60 - lonSec) * 1000);
 
 		switch (currentFormat) {
-			case Plain: 
+			case Plain:
 				findViewById(R.id.coordTable).setVisibility(View.GONE);
 				eLat.setVisibility(View.VISIBLE);
 				eLon.setVisibility(View.VISIBLE);
@@ -164,7 +164,7 @@ public class cgeocoords extends Dialog {
 					eLat.setText(cgBase.formatCoordinate(latitude, "lat", true));
 				}
 				if (longitude != null) {
-					eLon.setText(cgBase.formatCoordinate(longitude, "lon", true));				
+					eLon.setText(cgBase.formatCoordinate(longitude, "lon", true));
 				}
 				break;
 			case Deg: // DDD.DDDDD°
@@ -254,8 +254,8 @@ public class cgeocoords extends Dialog {
 				break;
 		}
 	}
-	
-	private String addZeros(int value, int len) {
+
+	private static String addZeros(int value, int len) {
 		String zeros = "";
 		if (value == 0) {
 			value = 1;
@@ -290,7 +290,7 @@ public class cgeocoords extends Dialog {
 			calc();
 		}
 	}
-		
+
 	private class textChangedListener implements TextWatcher {
 
 		private int	editTextId;
@@ -301,21 +301,21 @@ public class cgeocoords extends Dialog {
 
 		@Override
 		public void afterTextChanged(Editable s) {
-			
+
 			/*
 			 * Max lengths, depending on currentFormat
-			 * 
+			 *
 			 * formatPlain = disabled
 			 *           DEG MIN SEC SUB
 			 * formatDeg 2/3 5   -   -
 			 * formatMin 2/3 2   3   -
 			 * formatSec 2/3 2   2   3
 			 */
-			
+
 			if (currentFormat == coordInputFormatEnum.Plain) {
 				return;
 			}
-			
+
 			int maxLength = 2;
 			if (editTextId == 5 || editTextId == 4 || editTextId == 8) {
 				maxLength = 3;
@@ -326,7 +326,7 @@ public class cgeocoords extends Dialog {
 			if ((editTextId == 3 || editTextId == 7) && currentFormat == coordInputFormatEnum.Min) {
 				maxLength = 3;
 			}
-			
+
 			if (s.length() == maxLength) {
 				switch (editTextId) {
 					case 1:
@@ -380,12 +380,12 @@ public class cgeocoords extends Dialog {
 		@Override
 		public void onTextChanged(CharSequence s, int start, int before, int count) {}
 	}
-	
+
 	private void calc() {
 		if (currentFormat == coordInputFormatEnum.Plain) {
 			return;
 		}
-		
+
 		int latDeg = 0, latMin = 0, latSec = 0, latSub = 0;
 		int lonDeg = 0, lonMin = 0, lonSec = 0, lonSub = 0;
 		try {
@@ -422,7 +422,7 @@ public class cgeocoords extends Dialog {
 					lonMinFrac /= 10;
 				}
 				latitude = latDeg + latMin/60.0 + latMinFrac/60.0;
-				longitude = lonDeg + lonMin/60.0 + lonMinFrac/60.0; 
+				longitude = lonDeg + lonMin/60.0 + lonMinFrac/60.0;
 				break;
 			case Sec:
 				Double latSecFrac = latSub * 1.0;
@@ -440,14 +440,14 @@ public class cgeocoords extends Dialog {
 		latitude  *= (bLat.getText().toString() == "S" ? -1 : 1);
 		longitude *= (bLon.getText().toString() == "W" ? -1 : 1);
 	}
-	
+
 	private class CoordinateFormatListener implements OnItemSelectedListener {
 
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 			currentFormat = coordInputFormatEnum.fromInt(pos);
 			settings.setCoordInputFormat(currentFormat);
-			updateGUI();			
+			updateGUI();
 		}
 
 		@Override
@@ -463,13 +463,13 @@ public class cgeocoords extends Dialog {
 				context.showToast(context.getResources().getString(R.string.err_point_unknown_position));
 				return;
 			}
-			
+
 			latitude = geo.latitudeNow;
 			longitude = geo.longitudeNow;
 			updateGUI();
 		}
 	}
-	
+
 	private class InputDoneListener implements View.OnClickListener {
 
 		@Override
@@ -509,11 +509,11 @@ public class cgeocoords extends Dialog {
 			dismiss();
 		}
 	}
-	
+
 	public void setOnCoordinateUpdate(CoordinateUpdate cu) {
 		cuListener = cu;
 	}
-	
+
 	public interface CoordinateUpdate {
 		public void update(ArrayList<Double> coords);
 	}

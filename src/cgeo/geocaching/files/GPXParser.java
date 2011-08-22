@@ -57,7 +57,7 @@ public abstract class GPXParser extends FileParser {
 		nsGCList.add("http://www.groundspeak.com/cache/1/1"); // PQ 1.1
 		nsGCList.add("http://www.groundspeak.com/cache/1/0/1"); // PQ 1.0.1
 		nsGCList.add("http://www.groundspeak.com/cache/1/0"); // PQ 1.0
-		
+
 		namespace = namespaceIn;
 		version = versionIn;
 	}
@@ -546,7 +546,7 @@ public abstract class GPXParser extends FileParser {
 
 	protected abstract Element getCacheParent(Element waypoint);
 
-	protected String validate(String input) {
+	protected static String validate(String input) {
 		if ("nil".equalsIgnoreCase(input)) {
 			return "";
 		}
@@ -564,7 +564,7 @@ public abstract class GPXParser extends FileParser {
 			}
 		}
 	}
-	
+
 	public static Long parseGPX(cgeoapplication app, File file, int listId, Handler handler) {
 		cgSearch search = new cgSearch();
 		long searchId = 0l;
