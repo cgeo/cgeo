@@ -14,6 +14,8 @@ import android.net.Uri;
 import android.text.Spannable;
 import android.util.Log;
 import cgeo.geocaching.activity.IAbstractActivity;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 
 public class cgCache {
 
@@ -290,19 +292,19 @@ public class cgCache {
 
 		return true;
 	}
-	
+
 	public boolean logOffline(final IAbstractActivity fromActivity, final int logType) {
 		logOffline(fromActivity, "", Calendar.getInstance(), logType);
 		return true;
 	}
-	
+
 	void logOffline(final IAbstractActivity fromActivity, final String log, Calendar date, final int logType) {
 		if (logType <= 0) {
 			return;
 		}
 		cgeoapplication app = (cgeoapplication)((Activity)fromActivity).getApplication();
 		final boolean status = app.saveLogOffline(geocode, date.getTime(), logType, log);
-		
+
 		Resources res = ((Activity)fromActivity).getResources();
 		if (status) {
 			fromActivity.showToast(res.getString(R.string.info_log_saved));
@@ -311,7 +313,7 @@ public class cgCache {
 			fromActivity.showToast(res.getString(R.string.err_log_post_failed));
 		}
 	}
-	
+
 	public ArrayList<Integer> getPossibleLogTypes(cgSettings settings) {
 		boolean isOwner = owner != null && owner.equalsIgnoreCase(settings.getUsername());
 		ArrayList<Integer> types = new ArrayList<Integer>();
@@ -347,14 +349,31 @@ public class cgCache {
 	}
 
 	public void openInBrowser(Activity fromActivity) {
-		fromActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getCacheUrl() + geocode)));
+		fromActivity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getCacheUrl())));
 	}
 
 	private String getCacheUrl() {
-		if (geocode.startsWith("OC")) { // TODO refactor method into connectors, once available
-			return "http://www.opencaching.de/viewcache.php?wp=";
-		}
-		return "http://www.geocaching.com/seek/cache_details.aspx?wp=";
+		return getConnector().getCacheUrl(this);
+	}
+
+	private IConnector getConnector() {
+		return ConnectorFactory.getConnector(this);
+	}
+
+	public boolean canOpenInBrowser() {
+		return getCacheUrl() != null;
+	}
+
+	public boolean supportsRefresh() {
+		return getConnector().supportsRefreshCache(this);
+	}
+
+	public boolean supportsWatchList() {
+		return getConnector().supportsWatchList();
+	}
+
+	public boolean supportsLogging() {
+		return getConnector().supportsLogging();
 	}
 
 }
