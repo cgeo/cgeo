@@ -133,7 +133,7 @@ public class LogTemplateProvider {
 				}
 			}
 		} catch (Exception e) {
-			Log.w(cgSettings.tag, "cgBase.parseFindCount: " + e.toString());
+			Log.e(cgSettings.tag, "cgBase.parseFindCount: " + e.toString());
 		}
 
 		return findCount;

@@ -45,7 +45,7 @@ class GoogleMapsApp extends AbstractNavigationApp implements NavigationApp {
 			// nothing
 		}
 
-		Log.i(cgSettings.tag, "cgBase.runExternalMap: No maps application available.");
+		Log.d(cgSettings.tag, "cgBase.runExternalMap: No maps application available.");
 
 		if (res != null) {
 			ActivityMixin.showToast(activity, res.getString(R.string.err_application_no));

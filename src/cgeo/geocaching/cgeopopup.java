@@ -535,7 +535,7 @@ public class cgeopopup extends AbstractActivity {
 					cacheDistance.bringToFront();
 				}
 			} catch (Exception e) {
-				Log.w(cgSettings.tag, "Failed to update location.");
+				Log.e(cgSettings.tag, "Failed to update location: " + e.toString());
 			}
 		}
 	}

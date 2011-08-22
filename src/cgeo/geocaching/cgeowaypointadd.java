@@ -194,7 +194,7 @@ public class cgeowaypointadd extends AbstractActivity {
 				bLat.setHint(cgBase.formatCoordinate(geo.latitudeNow, "lat", false));
 				bLon.setHint(cgBase.formatCoordinate(geo.longitudeNow, "lon", false));
 			} catch (Exception e) {
-				Log.w(cgSettings.tag, "Failed to update location.");
+				Log.e(cgSettings.tag, "Failed to update location.");
 			}
 		}
 	}

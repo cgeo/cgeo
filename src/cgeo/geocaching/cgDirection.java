@@ -58,7 +58,7 @@ public class cgDirection {
 			 * See for example https://code.google.com/p/android/issues/detail?id=14792
 			 */
 
-			//Log.i(cgSettings.tag, "Compass' accuracy is low (" + accuracy + ")");
+			//Log.e(cgSettings.tag, "Compass' accuracy is low (" + accuracy + ")");
 		}
 
 		@Override

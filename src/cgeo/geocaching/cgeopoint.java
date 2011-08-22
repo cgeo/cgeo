@@ -455,7 +455,7 @@ public class cgeopoint extends AbstractActivity {
 				latEdit.setHint(cgBase.formatCoordinate(geo.latitudeNow, "lat", false));
 				lonEdit.setHint(cgBase.formatCoordinate(geo.longitudeNow, "lon", false));
 			} catch (Exception e) {
-				Log.w(cgSettings.tag, "Failed to update location.");
+				Log.e(cgSettings.tag, "Failed to update location: " + e.toString());
 			}
 		}
 	}

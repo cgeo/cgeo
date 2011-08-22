@@ -228,7 +228,7 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 		final cgCoord coordinate = item.getCoord();
 
 		if (coordinate == null) {
-			Log.e(cgSettings.tag, "cgMapOverlay:infoDialog: No coordinates given");
+			Log.d(cgSettings.tag, "cgMapOverlay:infoDialog: No coordinates given");
 			return;
 		}
 

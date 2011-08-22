@@ -299,9 +299,9 @@ public class cgeodetail extends AbstractActivity {
 			String uriQuery = uri.getQuery();
 
 			if (uriQuery != null) {
-				Log.i(cgSettings.tag, "Opening URI: " + uriHost + uriPath + "?" + uriQuery);
+				Log.d(cgSettings.tag, "Opening URI: " + uriHost + uriPath + "?" + uriQuery);
 			} else {
-				Log.i(cgSettings.tag, "Opening URI: " + uriHost + uriPath);
+				Log.d(cgSettings.tag, "Opening URI: " + uriHost + uriPath);
 			}
 
 			if (uriHost.contains("geocaching.com")) {
@@ -1337,7 +1337,7 @@ public class cgeodetail extends AbstractActivity {
 				Message message = handler.obtainMessage(0, image);
 				handler.sendMessage(message);
 			} catch (Exception e) {
-				Log.w(cgSettings.tag, "cgeodetail.loadMapPreview.run: " + e.toString());
+				Log.e(cgSettings.tag, "cgeodetail.loadMapPreview.run: " + e.toString());
 			}
 		}
 	}
@@ -1659,7 +1659,7 @@ public class cgeodetail extends AbstractActivity {
 				cacheDistance.setText(dist.toString());
 				cacheDistance.bringToFront();
 			} catch (Exception e) {
-				Log.w(cgSettings.tag, "Failed to update location.");
+				Log.e(cgSettings.tag, "Failed to update location: " + e.toString());
 			}
 		}
 	}

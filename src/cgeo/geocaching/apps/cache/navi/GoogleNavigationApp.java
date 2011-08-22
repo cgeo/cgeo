@@ -96,7 +96,7 @@ class GoogleNavigationApp extends AbstractNavigationApp implements
 			// nothing
 		}
 
-		Log.i(cgSettings.tag,
+		Log.d(cgSettings.tag,
 				"cgBase.runNavigation: No navigation application available.");
 		return false;
 	}

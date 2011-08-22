@@ -264,10 +264,10 @@ public class cgCache {
 		Pattern patternOk = Pattern.compile(guid, Pattern.CASE_INSENSITIVE);
 		Matcher matcherOk = patternOk.matcher(page);
 		if (matcherOk.find()) {
-			Log.i(cgSettings.tag, "cgCache.isGuidContainedInPage: guid '" + guid + "' found");
+			Log.d(cgSettings.tag, "cgCache.isGuidContainedInPage: guid '" + guid + "' found");
 			return true;
 		} else {
-			Log.i(cgSettings.tag, "cgCache.isGuidContainedInPage: guid '" + guid + "' not found");
+			Log.d(cgSettings.tag, "cgCache.isGuidContainedInPage: guid '" + guid + "' not found");
 			return false;
 		}
 	}

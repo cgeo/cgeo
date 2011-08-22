@@ -161,7 +161,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
 						listDir(list, Environment.getExternalStorageDirectory());
 					}
 				} else {
-					Log.w(cgSettings.tag, "No external media mounted.");
+					Log.d(cgSettings.tag, "No external media mounted.");
 				}
 			} catch (Exception e) {
 				Log.e(cgSettings.tag, "cgFileList.loadFiles.run: " + e.toString());

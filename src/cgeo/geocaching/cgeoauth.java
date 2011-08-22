@@ -176,7 +176,7 @@ public class cgeoauth extends AbstractActivity {
 					code = connection.getResponseCode();
 					retries++;
 
-					Log.i(cgSettings.tag, host + ": " + connection.getResponseCode() + " " + connection.getResponseMessage());
+					Log.d(cgSettings.tag, host + ": " + connection.getResponseCode() + " " + connection.getResponseMessage());
 
 					br.close();
 					in.close();
@@ -281,7 +281,7 @@ public class cgeoauth extends AbstractActivity {
 				code = connection.getResponseCode();
 				retries++;
 
-				Log.i(cgSettings.tag, host + ": " + connection.getResponseCode() + " " + connection.getResponseMessage());
+				Log.d(cgSettings.tag, host + ": " + connection.getResponseCode() + " " + connection.getResponseMessage());
 
 				br.close();
 				ins.close();

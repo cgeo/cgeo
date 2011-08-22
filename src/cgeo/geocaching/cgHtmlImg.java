@@ -154,7 +154,7 @@ public class cgHtmlImg implements Html.ImageGetter {
 					}
 				}
 			} catch (Exception e) {
-				Log.w(cgSettings.tag, "cgHtmlImg.getDrawable (reading cache): " + e.toString());
+				Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (reading cache): " + e.toString());
 			}
 		}
 
@@ -181,7 +181,7 @@ public class cgHtmlImg implements Html.ImageGetter {
 			if (uri != null) {
 				for (int i = 0; i < 2; i++) {
 					if (i > 0) {
-						Log.w(cgSettings.tag, "cgHtmlImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
+						Log.d(cgSettings.tag, "cgHtmlImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
 					}
 
 					try {
@@ -278,7 +278,7 @@ public class cgHtmlImg implements Html.ImageGetter {
 			try {
 				imagePre = Bitmap.createScaledBitmap(imagePre, width, height, true);
 			} catch (Exception e) {
-				Log.d(cgSettings.tag, "cgHtmlImg.getDrawable: Failed to scale image");
+				Log.e(cgSettings.tag, "cgHtmlImg.getDrawable: Failed to scale image - " + e.toString());
 				return null;
 			}
 		} else {

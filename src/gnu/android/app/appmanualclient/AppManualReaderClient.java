@@ -302,8 +302,8 @@ public class AppManualReaderClient {
 						| Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
 			}
 			try {
-				if ( Log.isLoggable(logTag, Log.INFO) ) {
-					Log.i(logTag,
+				if ( Log.isLoggable(logTag, Log.DEBUG) ) {
+					Log.d(logTag,
 							"Trying to activate manual: uri=" + uri.toString());
 				}
 				context.startActivity(intent);

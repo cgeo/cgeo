@@ -22,7 +22,7 @@ public class cgSearchThread extends Thread {
 		try {
 			wait();
 		} catch (InterruptedException e) {
-			Log.w(cgSettings.tag, "searchThread is not waiting for user...");
+			Log.e(cgSettings.tag, "searchThread is not waiting for user... : " + e.toString());
 		}
 	}
 
