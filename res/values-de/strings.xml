@@ -70,7 +70,7 @@
   <string name="log_tb_drop">Ablegen</string>
   <string name="log_tb_changeall">Alle ändern</string>
   <string name="log_save">Speichern</string>
-  <string name="log_saving">Log wird gespeichert...</string>
+  <string name="log_saving">Log wird gespeichert…</string>
   <string name="log_clear">Leeren</string>
   <string name="log_post">Loggen</string>
   <string name="log_post_rate">Loggen &amp; bewerten</string>
@@ -169,7 +169,7 @@
   <string name="err_point_unknown_position">c:geo konnte deinen Standort nicht bestimmen.</string>
   <string name="err_point_no_position_given_title">Info benötigt</string>
   <string name="err_point_no_position_given">Mindestens Längen- und Breitengrad oder Entfernung und Richtung angeben. Auch alle Angaben sind möglich.</string>
-  <string name="err_point_curr_position_unavailable">c:geo hat noch keine aktuelle Koordinaten. Bitte einen Moment warten...</string>
+  <string name="err_point_curr_position_unavailable">c:geo hat noch keine aktuelle Koordinaten. Bitte einen Moment warten…</string>
   <string name="err_point_bear_and_dist_title">Hilfe benötigt?</string>
   <string name="err_point_bear_and_dist">Angaben zu Richtung und Entfernung sind notwendig. Richtung: 0 bis 360 Grad</string>
   <string name="err_point_location_error">c:geo konnte den Ort des Wegpunkts nicht erkennen.</string>
@@ -243,15 +243,15 @@
   <string name="about_button">Über c:geo</string>
   <string name="settings_button">Einstellungen</string>
   <string name="type">Filter</string>
-  <string name="now_searching">Suche...</string>
+  <string name="now_searching">Suche…</string>
 
   <!-- caches -->
   <string name="caches_searching">Suche nach Caches</string>
   <string name="caches_no_cache">Kein Cache</string>
   <string name="caches_more_caches">Mehr Caches laden</string>
   <string name="caches_more_caches_no">Keine weiteren Caches</string>
-  <string name="caches_more_caches_loading">Lade Caches...</string>
-  <string name="caches_downloading">Lade Caches...\nGeschätzte Zeit: </string>
+  <string name="caches_more_caches_loading">Lade Caches…</string>
+  <string name="caches_downloading">Lade Caches…\nGeschätzte Zeit: </string>
   <string name="caches_progress_loading_title">Lade Caches</string>
   <string name="caches_progress_loading_text">Gespeicherte Caches</string>
   <string name="caches_eta_ltm">Weniger als eine Minute</string>
@@ -287,7 +287,7 @@
   <string name="caches_drop_all">Alle löschen</string>
   <string name="caches_drop_all_ask">Bist du sicher, dass alle Caches von dieser Liste gelöscht werden sollen?</string>
   <string name="caches_drop_stored">Gespeicherte löschen</string>
-  <string name="caches_drop_progress">Entferne Caches...</string>
+  <string name="caches_drop_progress">Entferne Caches…</string>
   <string name="caches_refresh_selected">Ausgewählte aktualisieren</string>
   <string name="caches_refresh_all">Alle aktualisieren</string>
   <string name="caches_move_selected">Ausgewählte verschieben</string>
@@ -328,8 +328,8 @@
   <string name="caches_filter_type_ape">Project APE cache</string>
   <string name="caches_filter_type_gchq">Groundspeak HQ</string>
   <string name="caches_filter_type_gps">GPS Cache exhibit</string>
-  <string name="caches_exporting_fieldnote">Exportiere als Field Notes...</string>
-  <string name="caches_removing_from_history">Lösche aus Verlauf...</string>
+  <string name="caches_exporting_fieldnote">Exportiere als Field Notes…</string>
+  <string name="caches_removing_from_history">Lösche aus Verlauf…</string>
 
   <!-- caches lists -->
   <string name="list_menu">Liste</string>
@@ -368,7 +368,7 @@
   <string name="init_passvote">Passwort</string>
   <string name="init_login">Anmeldedaten überprüfen</string>
   <string name="init_login_popup">Login</string>
-  <string name="init_login_popup_working">Bei geocaching.com anmelden...</string>
+  <string name="init_login_popup_working">Bei geocaching.com anmelden…</string>
   <string name="init_login_popup_ok">Login erfolgreich.</string>
   <string name="init_login_popup_failed">Login fehlgeschlagen.</string>
   <string name="init_login_popup_failed_reason">Login fehlgeschlagen wegen </string>
@@ -422,7 +422,7 @@
   <string name="init_mapsources">Kartenherkunft</string> <!-- since: 2.26 RC3 -->
   <string name="init_mapsources_description">Hier kannst du die Quelle für deine Karte wählen. Alternativ zu Google maps stehen verschiedene OpenStreetMap-Stile zur Verfügung und daneben auch Karten-Dateien für die Offline-Nutzung (siehe http://code.google.com/p/mapsforge/ für die Details).</string> <!-- since: 2.26 RC3 -->
   <string name="init_mapsource_select">Wähle eine Kartenquelle</string>
-  <string name="init_select_mapfile">...</string>
+  <string name="init_select_mapfile">…</string>
   <string name="init_trackautovisit">Trackables automatisch auf \"besuchen\" setzen</string>
   <string name="init_sigautoinsert">Signatur automatisch einfügen</string>
   <string name="init_loaddirectionimg">Richtungs-Grafik laden wenn nötig</string>
@@ -441,7 +441,7 @@
   <string name="init_sendToCgeo_name">Der Name deines Handys:</string>
   <string name="init_sendToCgeo_description">Send to c:geo erlaubt es mit einem speziellen Plugin für Firefox oder Chrome Caches direkt von der Geocachingseite zu empfangen. Bitte lesen Sie die Details vor einer Registrierung auf <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a> nach.</string>
   <string name="init_sendToCgeo_register">Registrierung anfordern</string>
-  <string name="init_sendToCgeo_registering">Regsitriere Ihr Handy für "Send to c:geo"...</string>
+  <string name="init_sendToCgeo_registering">Regsitriere Ihr Handy für "Send to c:geo"…</string>
   <string name="init_sendToCgeo_register_ok">Registrierung erfolgreic. Ihr PIN code ist ####. Benutzen Sie diesen auf der c:geo website um Ihr Handy im Browser hinzuzufügen.</string>
   <string name="init_sendToCgeo_register_fail">Registrierung fehlgeschlagen.</string>
 
@@ -452,7 +452,7 @@
   <string name="auth_again">Neustarten</string>
   <string name="auth_pin_hint">Twitter-PIN</string>
   <string name="auth_finish">Fertig</string>
-  <string name="auth_dialog_wait">Warten auf Twitter...</string>
+  <string name="auth_dialog_wait">Warten auf Twitter…</string>
   <string name="auth_dialog_pin_title">PIN Code</string>
   <string name="auth_dialog_pin_message">Bitte den Twitter-PIN-Code eingeben, dies ist notwendig um die Autorisierung abzuschließen.</string>
   <string name="auth_dialog_completed">c:geo ist nun autorisiert, Tweets bei Twitter zu erstellen.</string>
@@ -477,7 +477,7 @@
   <string name="cache_attributes">Attribute</string>
   <string name="cache_inventory">Inventar</string>
   <string name="cache_log_offline">Offline-Log</string>
-  <string name="cache_log_images_loading">Lade Logbild ...</string>
+  <string name="cache_log_images_loading">Lade Logbild …</string>
   <string name="cache_log_images_title">Logbild</string>
   <string name="cache_log_image_default_title">Bild</string>
   <string name="cache_personal_note">Persönliche Notiz</string>
@@ -492,18 +492,18 @@
   <string name="cache_waypoints_add">Wegpunkt hinzufügen</string>
   <string name="cache_hint">Hinweis</string>
   <string name="cache_logs">Logbuch</string>
-  <string name="cache_dialog_loading_details">Lade Cache-Details...</string>
-  <string name="cache_dialog_loading_description">Lade Cache-Beschreibung...</string>
+  <string name="cache_dialog_loading_details">Lade Cache-Details…</string>
+  <string name="cache_dialog_loading_description">Lade Cache-Beschreibung…</string>
   <string name="cache_dialog_offline_save_title">Offline-Verwendung</string>
-  <string name="cache_dialog_offline_save_message">Speichere Cache für Offline-Verwendung...</string>
+  <string name="cache_dialog_offline_save_message">Speichere Cache für Offline-Verwendung…</string>
   <string name="cache_dialog_offline_drop_title">Offline-Verwendung</string>
-  <string name="cache_dialog_offline_drop_message">Lösche Cache vom Gerät...</string>
+  <string name="cache_dialog_offline_drop_message">Lösche Cache vom Gerät…</string>
   <string name="cache_dialog_refresh_title">Aktualisieren</string>
-  <string name="cache_dialog_refresh_message">Aktualisieren der Cachedetails...</string>
+  <string name="cache_dialog_refresh_message">Aktualisieren der Cachedetails…</string>
   <string name="cache_dialog_watchlist_add_title">Watchlist</string>
-  <string name="cache_dialog_watchlist_add_message">Füge den Cache deiner Watchlist hinzu...</string>
+  <string name="cache_dialog_watchlist_add_message">Füge den Cache deiner Watchlist hinzu…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
-  <string name="cache_dialog_watchlist_remove_message">Entferne den Cache von deiner Watchlist...</string>
+  <string name="cache_dialog_watchlist_remove_message">Entferne den Cache von deiner Watchlist…</string>
   <string name="cache_menu_navigate">Navigieren</string>
   <string name="cache_menu_compass">Kompass</string>
   <string name="cache_menu_tbt">GoogleMaps Navigation</string>
@@ -549,7 +549,7 @@
   <string name="cache_elevation">Höhe</string>
   <string name="cache_calendars">Kalender auswählen</string>
   <string name="cache_spoiler_images_title">Spoilerbilder</string>
-  <string name="cache_spoiler_images_loading">Lade Spoilerbilder...</string>
+  <string name="cache_spoiler_images_loading">Lade Spoilerbilder…</string>
   <string name="cache_log_types">Logs</string>
   <string name="cache_coordinates_no">Dieser Cache hat keine Koordinaten.</string> <!-- since: 2.26 RC2 -->
   <string name="cache_export_fieldnote">Exportiere als Field Notes</string>
@@ -574,10 +574,10 @@
   <string name="map_file_select_title">Wähle eine Kartendatei</string>
 
   <!--  import -->
-  <string name="import_title">Importiere...</string>
+  <string name="import_title">Importiere…</string>
   <string name="web_import_title">Aus dem Internet importieren</string>
   <string name="web_import_server_problem">Beim Datenaustausch mit dem Server ist ein Problem aufgereten. Bitte registrieren Sie Ihr Handy erneut und versuchen Sie es dann noch einmal.</string>
-  <string name="web_import_waiting">Erwarte neue Caches aus dem Internet...</string>
+  <string name="web_import_waiting">Erwarte neue Caches aus dem Internet…</string>
   <string name="web_downloading">Lade herunter</string>
   <string name="web_downloaded">Heruntergeladen</string>
 
@@ -603,7 +603,7 @@
   <string name="waypoint_add_title">Wegpunkt hinzufügen</string>
   <string name="waypoint_note">Notiz</string>
   <string name="waypoint_save">Speichern</string>
-  <string name="waypoint_loading">Lade Wegpunkt...</string>
+  <string name="waypoint_loading">Lade Wegpunkt…</string>
   <string name="waypoint_unknown_coordinates">Unbekannte Koordinaten</string>
   <string name="search_history_empty">Keine Ziele bisher</string>
   <string name="search_remove_destination">Ziel gelöscht</string>
@@ -624,7 +624,7 @@
   <string name="map_live_enable">Live einschalten</string>
   <string name="map_live_disable">Live ausschalten</string>
   <string name="map_static_title">Statische Karte</string>
-  <string name="map_static_loading">Lade statische Karte...</string>
+  <string name="map_static_loading">Lade statische Karte…</string>
   <string name="map_token_err">c:geo konnte nur Teildaten herunterladen, die Koordinaten der Caches könnten verkehrt sein.</string> <!-- since: 2.26 RC3 -->
 
   <!-- search -->
@@ -663,7 +663,7 @@
   <!-- trackable -->
   <string name="trackable">Trackable</string>
   <string name="trackable_select_title">Trackables</string>
-  <string name="trackable_details_loading">Lade Details des Trackable...</string>
+  <string name="trackable_details_loading">Lade Details des Trackable…</string>
   <string name="trackable_log_touch">Logge Fund</string>
   <string name="trackable_browser_open">Öffne im Browser</string>
   <string name="trackable_goal">Derzeitiges Ziel</string>

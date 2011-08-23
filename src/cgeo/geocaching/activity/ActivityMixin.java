@@ -120,6 +120,9 @@ public final class ActivityMixin {
 	}
 
 	protected static void addVisitMenu(IAbstractActivity activity, Menu menu, cgCache cache) {
+		if (!cache.supportsLogging()) {
+			return;
+		}
 		cgSettings settings = activity.getSettings();
 		Resources res = ((Activity)activity).getResources();
 		if (settings.isLogin()) {

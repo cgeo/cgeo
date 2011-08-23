@@ -90,7 +90,7 @@ public class cgeodetail extends AbstractActivity {
 	private ViewGroup attributeDescriptionsLayout; // layout for attribute descriptions
 	private boolean attributesShowAsIcons = true; // default: show icons
 	private int attributeBoxMaxWidth;
-	
+
 	private Handler storeCacheHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
@@ -240,6 +240,12 @@ public class cgeodetail extends AbstractActivity {
 	 * shows/hides buttons, sets text in watchlist box
 	 */
 	private void updateWatchlistBox() {
+		LinearLayout layout = (LinearLayout)findViewById(R.id.watchlist_box);
+		boolean supportsWatchList = cache.supportsWatchList();
+		layout.setVisibility(supportsWatchList ? View.VISIBLE : View.GONE);
+		if (!supportsWatchList) {
+			return;
+		}
 		Button buttonAdd = (Button) findViewById(R.id.add_to_watchlist);
 		Button buttonRemove = (Button) findViewById(R.id.remove_from_watchlist);
 		TextView text = (TextView) findViewById(R.id.watchlist_text);
@@ -489,7 +495,9 @@ public class cgeodetail extends AbstractActivity {
 			menu.add(0, 10, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
 		}
 
-		menu.add(1, 7, 0, res.getString(R.string.cache_menu_browser)).setIcon(android.R.drawable.ic_menu_info_details); // browser
+		if (cache != null && cache.canOpenInBrowser()) {
+			menu.add(1, 7, 0, res.getString(R.string.cache_menu_browser)).setIcon(android.R.drawable.ic_menu_info_details); // browser
+		}
 		menu.add(0, 12, 0, res.getString(R.string.cache_menu_share)).setIcon(android.R.drawable.ic_menu_share); // share cache
 
 		return true;
@@ -532,7 +540,7 @@ public class cgeodetail extends AbstractActivity {
 		if (GeneralAppsFactory.onMenuItemSelected(item, this, cache)) {
 			return true;
 		}
-		
+
 		int logType = menuItem - MENU_LOG_VISIT_OFFLINE;
 		cache.logOffline(this, logType);
 		return true;
@@ -608,7 +616,7 @@ public class cgeodetail extends AbstractActivity {
             {
 			    geocode = cache.geocode;
             }
-			
+
 			if (null == guid && cache.guid.length() > 0)
             {
                 guid = cache.guid;
@@ -829,16 +837,16 @@ public class cgeodetail extends AbstractActivity {
 		        ViewParent child = attribBox;
 		        do {
 		        	if (child instanceof View)
-		        	attributeBoxMaxWidth = attributeBoxMaxWidth - ((View) child).getPaddingLeft() 
+		        	attributeBoxMaxWidth = attributeBoxMaxWidth - ((View) child).getPaddingLeft()
 		        			- ((View) child).getPaddingRight();
 		        	child = child.getParent();
 		        } while (child != null);
-		 
+
 				// delete views holding description / icons
 		        attributeDescriptionsLayout = null;
 		        attributeIconsLayout = null;
 
-				attribBox.setOnClickListener(new View.OnClickListener() {    
+				attribBox.setOnClickListener(new View.OnClickListener() {
 		                @Override
 		                public void onClick(View v) {
 		                	// toggle between attribute icons and descriptions
@@ -901,9 +909,6 @@ public class cgeodetail extends AbstractActivity {
 				}
 
 				offlineText.setText(res.getString(R.string.cache_offline_stored) + "\n" + ago);
-
-				offlineRefresh.setVisibility(View.VISIBLE);
-				offlineRefresh.setClickable(true);
 				offlineRefresh.setOnClickListener(new storeCache());
 
 				offlineStore.setText(res.getString(R.string.cache_offline_drop));
@@ -911,15 +916,14 @@ public class cgeodetail extends AbstractActivity {
 				offlineStore.setOnClickListener(new dropCache());
 			} else {
 				offlineText.setText(res.getString(R.string.cache_offline_not_ready));
-
-				offlineRefresh.setVisibility(View.VISIBLE);
-				offlineRefresh.setClickable(true);
 				offlineRefresh.setOnClickListener(new refreshCache());
 
 				offlineStore.setText(res.getString(R.string.cache_offline_store));
 				offlineStore.setClickable(true);
 				offlineStore.setOnClickListener(new storeCache());
 			}
+			offlineRefresh.setVisibility(cache.supportsRefresh() ? View.VISIBLE : View.GONE);
+			offlineRefresh.setClickable(true);
 
 			// cache personal note
 			if (cache.personalNote != null && cache.personalNote.length() > 0) {
@@ -1949,7 +1953,7 @@ public class cgeodetail extends AbstractActivity {
 		cgeonavigate.coordinates = getCoordinates();
 		startActivity(navigateIntent);
 	}
-	
+
 	/**
 	 * lazy-creates the layout holding the icons of the chaches attributes
 	 * and makes it visible
@@ -1973,7 +1977,7 @@ public class cgeodetail extends AbstractActivity {
 		attribBox.addView(attributeDescriptionsLayout);
 		attributesShowAsIcons = false;
 	}
-	
+
 	/**
 	 * toggle attribute descriptions and icons
 	 */
@@ -1991,7 +1995,7 @@ public class cgeodetail extends AbstractActivity {
 
     	LinearLayout attributeRow = newAttributeIconsRow();
         rows.addView(attributeRow);
-        
+
         for(String attributeName : cache.attributes) {
 			boolean strikethru = attributeName.endsWith("_no");
 			// cut off _yes / _no
@@ -2028,10 +2032,10 @@ public class cgeodetail extends AbstractActivity {
         	}
         	attributeRow.addView(fl);
         }
-        
+
         return rows;
     }
-    
+
     private LinearLayout newAttributeIconsRow() {
     	 LinearLayout rowLayout = new LinearLayout(this);
          rowLayout.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
@@ -2039,7 +2043,7 @@ public class cgeodetail extends AbstractActivity {
          rowLayout.setOrientation(LinearLayout.HORIZONTAL);
          return rowLayout;
     }
-    
+
     private ViewGroup createAttributeDescriptionsLayout() {
     	final LinearLayout descriptions = (LinearLayout) inflater.inflate(R.layout.attribute_descriptions, null);
     	TextView attribView = (TextView) descriptions.getChildAt(0);
@@ -2064,7 +2068,7 @@ public class cgeodetail extends AbstractActivity {
 		}
 
 		attribView.setText(buffer);
-        
+
         return descriptions;
     }
 }

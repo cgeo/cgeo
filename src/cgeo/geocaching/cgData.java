@@ -2072,7 +2072,7 @@ public class cgData {
 		return waypoints;
 	}
 
-	private cgWaypoint createWaypointFromDatabaseContent(Cursor cursor) {
+	private static cgWaypoint createWaypointFromDatabaseContent(Cursor cursor) {
 		cgWaypoint waypoint = new cgWaypoint();
 		waypoint.id = (int) cursor.getInt(cursor.getColumnIndex("_id"));
 		waypoint.geocode = (String) cursor.getString(cursor.getColumnIndex("geocode"));
