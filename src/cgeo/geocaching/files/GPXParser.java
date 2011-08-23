@@ -27,6 +27,7 @@ import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgTrackable;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.connector.ConnectorFactory;
 
 public abstract class GPXParser extends FileParser {
 
@@ -43,7 +44,7 @@ public abstract class GPXParser extends FileParser {
 	private String sym = null;
 	protected String namespace = null;
 	private ArrayList<String> nsGCList = new ArrayList<String>();
-	private static final Pattern patternGeocode = Pattern.compile("([A-Z]C[0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
+	private static final Pattern patternGeocode = Pattern.compile("([A-Z]{2}[0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
 	private String name = null;
 	private String cmt = null;
 	private String desc = null;
@@ -94,42 +95,9 @@ public abstract class GPXParser extends FileParser {
 			public void end() {
 				if (cache.geocode == null || cache.geocode.length() == 0) {
 					// try to find geocode somewhere else
-					String geocode = null;
-					Matcher matcherGeocode = null;
-
-					if (name != null && geocode == null) {
-						matcherGeocode = patternGeocode.matcher(name);
-						while (matcherGeocode.find()) {
-							if (matcherGeocode.groupCount() > 0) {
-								geocode = matcherGeocode.group(1);
-							}
-						}
-					}
-
-					if (desc != null && geocode == null) {
-						matcherGeocode = patternGeocode.matcher(desc);
-						while (matcherGeocode.find()) {
-							if (matcherGeocode.groupCount() > 0) {
-								geocode = matcherGeocode.group(1);
-							}
-						}
-					}
-
-					if (cmt != null && geocode == null) {
-						matcherGeocode = patternGeocode.matcher(cmt);
-						while (matcherGeocode.find()) {
-							if (matcherGeocode.groupCount() > 0) {
-								geocode = matcherGeocode.group(1);
-							}
-						}
-					}
-
-					if (geocode != null && geocode.length() > 0) {
-						cache.geocode = geocode;
-					}
-
-					geocode = null;
-					matcherGeocode = null;
+					findGeoCode(name);
+					findGeoCode(desc);
+					findGeoCode(cmt);
 				}
 
 				if (cache.geocode != null && cache.geocode.length() > 0
@@ -179,9 +147,9 @@ public abstract class GPXParser extends FileParser {
 
 				final String content = Html.fromHtml(body).toString().trim();
 				cache.name = content;
-				if (cache.name.length() > 2 && cache.name.substring(0, 2).equalsIgnoreCase("GC")) {
-					cache.geocode = cache.name.toUpperCase();
-				}
+
+				findGeoCode(cache.name);
+				findGeoCode(cache.description);
 			}
 		});
 
@@ -561,6 +529,21 @@ public abstract class GPXParser extends FileParser {
 		else {
 			if (cache.type == null || cache.type.length() == 0) {
 				cache.type = "mystery"; // default for not recognized types
+			}
+		}
+	}
+
+	private void findGeoCode(final String input) {
+		if (input == null || (cache.geocode != null && cache.geocode.length() != 0)) {
+			return;
+		}
+		Matcher matcherGeocode = patternGeocode.matcher(input);
+		if (matcherGeocode.find()) {
+			if (matcherGeocode.groupCount() > 0) {
+				String geocode = matcherGeocode.group(1);
+				if (ConnectorFactory.canHandle(geocode)) {
+					cache.geocode = geocode;
+				}
 			}
 		}
 	}

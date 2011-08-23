@@ -82,10 +82,23 @@
   <string name="log_rating">Betyg</string>
   <string name="log_no_rating">Inget betyg</string>
   <string name="log_stars_1">1 stjärna</string>
+  <string name="log_stars_15">1.5 stjärnor</string>
   <string name="log_stars_2">2 stjärnor</string>
+  <string name="log_stars_25">2.5 stjärnor</string>
   <string name="log_stars_3">3 stjärnor</string>
+  <string name="log_stars_35">3.5 stjärnor</string>
   <string name="log_stars_4">4 stjärnor</string>
+  <string name="log_stars_45">4.5 stjärnor</string>
   <string name="log_stars_5">5 stjärnor</string>
+  <string name="log_stars_1_description">dålig</string>
+  <string name="log_stars_15_description">halvdålig</string>
+  <string name="log_stars_2_description">under medel</string>
+  <string name="log_stars_25_description">inte så dålig</string>
+  <string name="log_stars_3_description">medel</string>
+  <string name="log_stars_35_description">inte alls dålig</string>
+  <string name="log_stars_4_description">bättre än medel</string>
+  <string name="log_stars_45_description">mycket bra</string>
+  <string name="log_stars_5_description">enastående</string>
   <string name="log_webcam">Foto taget med Webcam</string>
   <string name="log_new_log">Logga</string>
   <string name="log_new_log_text">Loggtext</string>
@@ -121,6 +134,8 @@
   <string name="err_detail_still_removing">Fortsätter att ta bort denna cache.</string>
   <string name="err_detail_still_saving">Fortsätter att spara denna cache.</string>
   <string name="err_detail_still_refreshing">Fortsätter att ladda om denna cache.</string>
+  <string name="err_watchlist_still_managing">Hanterar fortfarande din watchlist.</string>
+  <string name="err_watchlist_failed">Hanteringen av din watchlist misslyckades.</string>
   <string name="err_radar_title">Radar är inte installerat.</string>
   <string name="err_radar_message">Den här funktionen kräver programmet Radar. Vill du installera det?</string>
   <string name="err_radar_market">c:geo kan inte öppna Android Market för att leta efter programmet Radar.</string>
@@ -145,6 +160,7 @@
   <string name="err_manual_title">Manualen är inte installerad.</string>
   <string name="err_manual_message">Manualen för c:geo finns inte i din enhet. Vill du installera den?</string>
   <string name="err_manual_market">c:geo kan inte öppna Android Market för att söka efter Manualen till c:geo.</string>
+  <string name="err_missing_device_name">Vänligen ange ett namn för din enhet innan registering.</string>
 
   <string name="err_tb_display">"Tyvärr, c:geo kan inte visa den trackable du önskar. Är den verkligen trackable?</string>
   <string name="err_tb_details_open">Tyvärr, c:geo kan inte öppna detaljer för trackable.</string>
@@ -183,6 +199,8 @@
   <string name="err_parse_bear">Tyvärr, c:geo kan inte tolka riktning.</string>
   <string name="err_parse_dist">Tyvärr, c:geo kan inte tolka avstånd.</string>
 
+  <string name="err_fieldnotes_export_failed">Exportering av Field Notes misslyckades.</string>
+
   <string name="warn_save_nothing">Det finns inget att spara.</string>
   <string name="warn_no_cache_coord">Det finns inga koordinater för cachen.</string>
   <string name="warn_no_coordinates">Inga koordinater angivna.</string>
@@ -194,8 +212,9 @@
   <string name="warn_search_help_keyword">Ange ett ord som du tror finns i titeln på cachen du söker.</string>
   <string name="warn_search_help_user">Ange en användare på Geocaching.com.</string>
   <string name="warn_search_help_tb">Ange koden för en trackable. Tex \"TB29QMZ\".</string>
-
   <string name="warn_log_text_fill">Vänligen skriv någon text i loggen.</string>
+  <string name="warn_load_log_image">Tyvärr misslyckades c:geo att ladda loggbilder.</string>
+  <string name="warn_load_spoiler_image">Tyvärr misslyckades c:geo att ladda spoilerbilder.</string>
 
   <string name="info_altitude">Nuvarande höjd</string>
   <string name="info_distance">Rest sträcka</string>
@@ -206,6 +225,8 @@
   <string name="info_log_saved">c:geo har sparat din logg.</string>
   <string name="info_log_cleared">Loggen har rensats.</string>
   <string name="info_log_type_changed">Typen av logg har ändrats!</string>
+
+  <string name="info_fieldnotes_exported_to">Field Notes exporterade till</string>
 
   <!-- location service -->
   <string name="loc_last">Senast kända</string>
@@ -263,6 +284,7 @@
   <string name="caches_sort_rating">betyg (GC-vote)</string>
   <string name="caches_sort_vote">betyg (eget)</string>
   <string name="caches_sort_inventory">antal trackable</string>
+  <string name="caches_sort_date">datum</string>
   <string name="caches_select">Välj från lista</string>
   <string name="caches_select_mode">Markeringsläge</string>
   <string name="caches_select_mode_exit">Avsluta markeringsläge</string>
@@ -277,12 +299,46 @@
   <string name="caches_drop_progress">Tar bort cacher</string>
   <string name="caches_refresh_selected">Uppdatera valda</string>
   <string name="caches_refresh_all">Uppdatera alla</string>
+  <string name="caches_move_selected">Flytta valda</string>
+  <string name="caches_move_all">Flytta alla</string>
   <string name="caches_map_cgeo">c:geo</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Skriv texten som syns i bilden. Det krävs för att hämta koordinaterna för cacherna i listan. Det går att fortsätta ändå (men med sämre funktionalitet).</string>
   <string name="caches_recaptcha_hint">Text från bilden</string>
   <string name="caches_recaptcha_continue">Fortsätt</string>
+  <string name="caches_filter">Filter</string>
+  <string name="caches_filter_title">Filtrera efter</string>
+  <string name="caches_filter_size">storlek</string>
+  <string name="caches_filter_type">typ</string>
+  <string name="caches_filter_track">med trackables</string>
+  <string name="caches_filter_clear">rensa filter</string>
+  <string name="caches_filter_size_title">Välj storlek</string>
+  <string name="caches_filter_size_micro">micro</string>
+  <string name="caches_filter_size_small">small</string>
+  <string name="caches_filter_size_regular">regular</string>
+  <string name="caches_filter_size_large">large</string>
+  <string name="caches_filter_size_other">other</string>
+  <string name="caches_filter_size_virtual">virtual</string>
+  <string name="caches_filter_size_notchosen">ej vald</string>
+  <string name="caches_filter_type_title">Välj typ</string>
+  <string name="caches_filter_type_traditional">Traditionell cache</string>
+  <string name="caches_filter_type_multi">Multi-cache</string>
+  <string name="caches_filter_type_mystery">Mysterie cache</string>
+  <string name="caches_filter_type_letterbox">Letterbox Hybrid</string>
+  <string name="caches_filter_type_event">Event cache</string>
+  <string name="caches_filter_type_mega">Mega-event cache</string>
+  <string name="caches_filter_type_earth">Earth cache</string>
+  <string name="caches_filter_type_cito">Cache In Trash Out event</string>
+  <string name="caches_filter_type_webcam">Webcam cache</string>
+  <string name="caches_filter_type_virtual">Virtual cache</string>
+  <string name="caches_filter_type_wherigo">Wherigo cache</string>
+  <string name="caches_filter_type_lostfound">Lost &amp; Found</string>
+  <string name="caches_filter_type_ape">Project APE cache</string>
+  <string name="caches_filter_type_gchq">Groundspeak HQ</string>
+  <string name="caches_filter_type_gps">GPS Cache utställning</string>
+  <string name="caches_exporting_fieldnote">Exporterar som Field Notes…</string>
+  <string name="caches_removing_from_history">Tar bort från historik…</string>
 
   <!-- caches lists -->
   <string name="list_menu">Listor</string>
@@ -333,6 +389,11 @@
   <string name="init_signature_help_button">Hjälp</string>
   <string name="init_signature_help_title">Tips och tricks</string>
   <string name="init_signature_help_text">Skriv den signatur som du vill använda i dina loggtexter.\nDet finns några speciella texter som kan användas och som expanderas när signaturen läggs in: [DATE] , [TIME], [USER] &amp; [NUMBER].</string>
+  <string name="init_signature_template_button">Infoga makro</string>
+  <string name="init_signature_template_date">Datum</string>
+  <string name="init_signature_template_time">Tid</string>
+  <string name="init_signature_template_user">Namn</string>
+  <string name="init_signature_template_number">Nummer</string>
   <string name="init_languages">Översättning</string>
   <string name="init_languages_description">Vilka språk förstår du (och som därmed inte behöver översättas)? Ange språkkoder i form av två tecken.</string>
   <string name="init_languages_hint">en sv de fr es no da fi</string>
@@ -346,9 +407,11 @@
   <string name="init_exclude">Dölj egna och hittade cacher</string>
   <string name="init_disabled">Dölj inaktiva cacher</string>
   <string name="init_offline">Spara kartor för användning offline</string>
+  <string name="init_save_log_img">Spara bilder från loggar</string>
   <string name="init_units">Använd amerikanska enheter för avstånd</string>
   <string name="init_nav">Använd Google Navigering</string>
   <string name="init_autoload">Ladda full beskrivning automatiskt</string>
+  <string name="init_log_offline">Vid loggning: spara bara loggen lokalt (visa inte loggningfönster och skicka inte loggen till gc.com)</string>
   <string name="init_livelist">Visa riktning till cacher i listan</string>
   <string name="init_browser">Identifiera c:geo som normal webbläsare</string>
   <string name="init_altitude">Höjd justering</string>
@@ -365,6 +428,30 @@
   <string name="init_restore_failed">Återställningen misslyckades.</string>
   <string name="init_backup_last">Tillgänglig kopia från</string>
   <string name="init_backup_last_no">Det finns ingen säkerhetskopia.</string>
+  <string name="init_mapsources">Kartkällor</string>
+  <string name="init_mapsources_description">Här kan du vilken typ av kartor du vill använda. Som alternativ till Google Maps finns olika varianter av OpenStreetMap och till och med offline kartor (se <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> för detaljer).</string>
+  <string name="init_mapsource_select">Välj kartkälla</string>
+  <string name="init_select_mapfile">…</string>
+  <string name="init_trackautovisit">Sätt trackable automatiskt till \"besök\" vid loggning av en cache</string>
+  <string name="init_sigautoinsert">Infoga signatur automatiskt i loggar</string>
+
+  <!-- map sources -->
+  <string-array name="map_sources">
+    <item>Google: Map</item>
+    <item>Google: Satellit</item>
+    <item>OSM: Mapnik</item>
+    <item>OSM: Osmarender</item>
+    <item>OSM: Cyclemap</item>
+    <item>OSM: Offline</item>
+  </string-array>
+
+  <string name="init_sendToCgeo">Skicka till c:geo (Send2cgeo)</string>
+  <string name="init_sendToCgeo_name">Namnet på din enhet:</string>
+  <string name="init_sendToCgeo_description">Skicka till c:geo gör det möjligt att ta emot cacher direkt från geocaching hemsidan genom att använda en speciell plugin till Firefox eller Chrome. Innan registrering läs detta: <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Du behöver bara registrera om du kommer att använda send2cgeo. C:geo kommer också fungera utan registrering.</string>
+  <string name="init_sendToCgeo_register">Letar efter registrering</string>
+  <string name="init_sendToCgeo_registering">Registrerar din enhet för "send2cgeo"…</string>
+  <string name="init_sendToCgeo_register_ok">Registreringen lyckades. PIN koden är ####. Använd den på c:geos hemsida för att lägga till enheten i den webbläsare.</string>
+  <string name="init_sendToCgeo_register_fail">Registreringen misslyckades.</string>
 
   <!-- auth -->
   <string name="auth_twitter">Twitter</string>
@@ -398,8 +485,17 @@
   <string name="cache_attributes">Attribut</string>
   <string name="cache_inventory">Innehåll</string>
   <string name="cache_log_offline">Offline logg</string>
+  <string name="cache_log_images_loading">Laddar loggbilder…</string>
+  <string name="cache_log_images_title">Loggbild</string>
+  <string name="cache_log_image_default_title">Foto</string>
+  <string name="cache_personal_note">Personlig anteckning</string>
   <string name="cache_description">Beskrivning</string>
   <string name="cache_description_long">Lång beskrivning</string>
+  <string name="cache_watchlist">Watchlist</string>
+  <string name="cache_watchlist_on">Den här cachen finns i din watchlist.</string>
+  <string name="cache_watchlist_not_on">Den här cachen finns inte i din watchlist.</string>
+  <string name="cache_watchlist_add">Lägg till i watchlist</string>
+  <string name="cache_watchlist_remove">Ta bort från watchlist</string>
   <string name="cache_waypoints">Punkter</string>
   <string name="cache_waypoints_add">Lägg till punkt</string>
   <string name="cache_hint">Tips</string>
@@ -412,6 +508,10 @@
   <string name="cache_dialog_offline_drop_message">Tar bort cachen från enhetens minne…</string>
   <string name="cache_dialog_refresh_title">Uppdatera</string>
   <string name="cache_dialog_refresh_message">Uppdaterar detaljer om cachen…</string>
+  <string name="cache_dialog_watchlist_add_title">Watchlist</string>
+  <string name="cache_dialog_watchlist_add_message">Lägger till cachen till din watchlist…</string>
+  <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
+  <string name="cache_dialog_watchlist_remove_message">Tar bort cachen från din watchlist…</string>
   <string name="cache_menu_navigate">Navigera</string>
   <string name="cache_menu_compass">Kompass</string>
   <string name="cache_menu_tbt">Sväng-för-sväng</string>
@@ -425,12 +525,15 @@
   <string name="cache_menu_map_ext_short">Ext. karta</string>
   <string name="cache_menu_browser">Öppna i webbläsare</string>
   <string name="cache_menu_visit">Logga besök</string>
+  <string name="cache_menu_visit_offline">Logga besök offline</string>
   <string name="cache_menu_spoilers">Spoiler bilder</string>
   <string name="cache_menu_around">Cacher i närheten</string>
   <string name="cache_menu_event">Lägg till i kalender</string>
   <string name="cache_menu_details">Detaljer</string>
   <string name="cache_menu_share">Skicka länk</string>
   <string name="cache_menu_move_list">Flytta till annan lista</string>
+  <string name="cache_menu_gcc">GCC</string>
+  <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Sparad logg</string>
   <string name="cache_status_found">Hittad</string>
@@ -451,12 +554,21 @@
   <string name="cache_event">Datum</string>
   <string name="cache_location">Plats</string>
   <string name="cache_coordinates">Koordinater</string>
-  <string name="cache_coordinates_no">Cachen saknar koordinater.</string>
   <string name="cache_elevation">Höjd</string>
   <string name="cache_calendars">Välj kalender</string>
   <string name="cache_spoiler_images_title">Spoiler bilder</string>
   <string name="cache_spoiler_images_loading">Laddar spoiler bilder…</string>
   <string name="cache_log_types">Loggtyper</string> <!-- Since: 2.10 RC2 -->
+  <string name="cache_coordinates_no">Cachen saknar koordinater.</string>
+  <string name="cache_export_fieldnote">Exportera som Field Notes</string>
+  <string name="cache_clear_history">Rensa historik</string>
+  <string name="cache_remove_from_history">Ta bort från historik</string>
+
+  <!-- file list base -->
+  <string name="file_searching_in">Söker efter filer\ni</string>
+  <string name="file_list_no_files">Tyvärr, c:geo hittade inga lämpliga filer.</string>
+  <string name="file_searching">Söker efter matchande filer</string>
+  <string name="file_title_searching">Söker</string>
 
   <!-- gpx -->
   <string name="gpx_import_loading_stored">Laddar cacher från .gpx fil\nSparat:</string>
@@ -466,6 +578,17 @@
   <string name="gpx_import_title">Importera GPX</string>
   <string name="gpx_import_title_reading_file">Läser fil</string>
   <string name="gpx_import_title_caches_imported">Resultat</string>
+
+  <!-- map file select -->
+  <string name="map_file_select_title">Välj kartfil</string>
+
+  <!--  import -->
+  <string name="import_title">Importerar…</string>
+  <string name="web_import_title">Importerar från webben</string>
+  <string name="web_import_server_problem">Det uppstod problem under kommunikationen med servern. Vänligen försök att registrera din enhet igen.</string>
+  <string name="web_import_waiting">Väntar på nya cacher från webben…</string>
+  <string name="web_downloading">Laddar ner</string>
+  <string name="web_downloaded">Nerladdat</string>
 
   <!-- event -->
   <string name="event_success">Event tillagt i kalender</string>
@@ -491,6 +614,18 @@
   <string name="waypoint_save">Spara</string>
   <string name="waypoint_loading">Laddar punkt…</string>
   <string name="waypoint_unknown_coordinates">Koordinaterna ogiltiga</string>
+  <string name="search_history">Historik</string>
+  <string name="search_history_empty">Inga tidigare destinationer</string>
+  <string name="search_remove_destination">Destinationen borttagen</string>
+  <string name="search_clear_history">Rensa historik</string>
+  <string name="search_history_cleared">Historiken rensad</string>
+
+  <string-array name="waypoint_coordinate_formats">
+    <item>Standard</item>
+	<item>DDD.DDDDD°</item>
+	<item>DDD°MM.MMM\'</item>
+	<item>DDD°MM\'SS.SSS\"</item>
+  </string-array>
 
   <!-- visit -->
   <string name="visit_tweet">Skicka att du hittat till Twitter</string>
@@ -507,6 +642,7 @@
   <string name="map_live_disable">Inaktivera live</string>
   <string name="map_static_title">Sparade kartor</string>
   <string name="map_static_loading">Laddar sparade kartor…</string>
+  <string name="map_token_err">Eftersom c:geo bara kunde hämta en del av informationen så kan positionen för cacher vara felaktig.</string>
 
   <!-- search -->
   <string name="search_bar_hint">Sök cache/TB</string>
