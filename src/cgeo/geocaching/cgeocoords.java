@@ -213,12 +213,12 @@ public class cgeocoords extends Dialog {
 				if (latitude != null) {
 					eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
 					eLatMin.setText(addZeros(latMin, 2) + Integer.toString(latMin));
-					eLatSec.setText(Integer.toString(latMinFrac) + addZeros(latMinFrac, 3));
+					eLatSec.setText(addZeros(latMinFrac, 3) + Integer.toString(latMinFrac));
 				}
 				if (longitude != null) {
 					eLonDeg.setText(addZeros(lonDeg, 3) + Integer.toString(lonDeg));
 					eLonMin.setText(addZeros(lonMin, 2) + Integer.toString(lonMin));
-					eLonSec.setText(Integer.toString(lonMinFrac) + addZeros(lonMinFrac, 3));
+					eLonSec.setText(addZeros(lonMinFrac, 3) + Integer.toString(lonMinFrac));
 				}
 				break;
 			case Sec: // DDD° MM SS.SSS
@@ -414,13 +414,9 @@ public class cgeocoords extends Dialog {
 				break;
 			case Min:
 				Double latMinFrac = latSec * 1.0;
-				while (latMinFrac > 1) {
-					latMinFrac /= 10;
-				}
-				Double lonMinFrac = lonSec * 1.0;
-				while (lonMinFrac > 1) {
-					lonMinFrac /= 10;
-				}
+				latMinFrac /= 1000;				
+				Double lonMinFrac = lonSec * 1.0;			
+				lonMinFrac /= 1000;				
 				latitude = latDeg + latMin/60.0 + latMinFrac/60.0;
 				longitude = lonDeg + lonMin/60.0 + lonMinFrac/60.0;
 				break;

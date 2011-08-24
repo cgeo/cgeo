@@ -524,6 +524,7 @@
   <string name="cache_menu_map_ext">Show on ext. map</string>
   <string name="cache_menu_map_short">Maps</string>
   <string name="cache_menu_map_ext_short">Ext. map</string>
+  <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Open in browser</string>
   <string name="cache_menu_visit">Log visit</string>
   <string name="cache_menu_visit_offline">Log visit offline</string>
