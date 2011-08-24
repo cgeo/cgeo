@@ -24,8 +24,10 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 					new InternalMap(res), 
 					new StaticMapApp(res),
 					new LocusApp(res),
-					new RMapsApp(res), new GoogleMapsApp(res),
-					new GoogleNavigationApp(res) };
+					new RMapsApp(res),
+					new GoogleMapsApp(res),
+					new GoogleNavigationApp(res),
+					new StreetviewApp(res)};
 		}
 		return apps;
 	}
