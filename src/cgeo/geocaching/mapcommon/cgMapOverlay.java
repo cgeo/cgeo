@@ -23,6 +23,7 @@ import cgeo.geocaching.cgeodetail;
 import cgeo.geocaching.cgeonavigate;
 import cgeo.geocaching.cgeopopup;
 import cgeo.geocaching.cgeowaypoint;
+import cgeo.geocaching.googlemaps.googleOverlay;
 import cgeo.geocaching.mapinterfaces.CacheOverlayItemImpl;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
 import cgeo.geocaching.mapinterfaces.ItemizedOverlayImpl;
@@ -73,11 +74,12 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 		for (CacheOverlayItemImpl item : itemsPre) {
 			item.setMarker(boundCenterBottom(item.getMarker(0)));
 		}
-
+		
+		googleOverlay.lock();
 		items = new ArrayList<CacheOverlayItemImpl>(itemsPre);
-
 		setLastFocusedItemIndex(-1); // to reset tap during data change
 		populate();
+        googleOverlay.unlock();
 	}
 
 	public boolean getCircles() {
