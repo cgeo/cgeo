@@ -91,8 +91,8 @@ public class cgBase {
 	private final static Pattern patternPersonalNote = Pattern.compile("<p id=\"cache_note\"[^>]*>([^<]*)</p>", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternDescShort = Pattern.compile("<div class=\"UserSuppliedContent\">[^<]*<span id=\"ctl00_ContentBody_ShortDescription\"[^>]*>((?:(?!</span>[^\\w^<]*</div>).)*)</span>[^\\w^<]*</div>", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternDesc = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>" + "(.*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>", Pattern.CASE_INSENSITIVE);
-	private final static Pattern patternCountLogs = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p>(.*)<\\/p><\\/span>", Pattern.CASE_INSENSITIVE);
-	private final static Pattern patternCountLog = Pattern.compile(" src=\"\\/images\\/icons\\/([^\\.]*).gif\" alt=\"[^\"]*\" title=\"[^\"]*\" />([0-9]*)[^0-9]+", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+	private final static Pattern patternCountLogs = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p(.+?)<\\/p><\\/span>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern patternCountLog = Pattern.compile("src=\"\\/images\\/icons\\/(.+?).gif\"[^>]+> (\\d+)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	//private final static Pattern patternLogs = Pattern.compile("<table class=\"LogsTable\">(.*?)</table>\\s*<p", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	private final static Pattern patternLog = Pattern.compile("<tr><td class.+?<a href=\"/profile/\\?guid=.+?>(.+?)</a>.+?(?:logOwnerStats[^>]+><img[^>]+icon_smile.+?> ([,\\d]+).+?)?LogType.+?<img.+?/images/icons/([^\\.]+)\\..+?title=\"(.+?)\".+?LogDate.+?>(.+?)<.+?LogText.+?>(.*?)</p>(.*?)</div></div></div></td></tr>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	private final static Pattern patternLogImgs = Pattern.compile("href=\"(http://img.geocaching.com/cache/log/.+?)\".+?<span>([^<]*)", Pattern.CASE_INSENSITIVE);
@@ -1550,37 +1550,32 @@ public class cgBase {
 		}
 
 		// cache logs counts
-		try {
+		try
+		{
 			final Matcher matcherLogCounts = patternCountLogs.matcher(page);
-			while (matcherLogCounts.find()) {
-				if (matcherLogCounts.groupCount() > 0) {
-					final String[] logs = matcherLogCounts.group(1).split("<img");
-					final int logsCnt = logs.length;
+			
+			if (matcherLogCounts.find())
+			{
+				final Matcher matcherLog = patternCountLog.matcher(matcherLogCounts.group(1));
 
-					for (int k = 1; k < logsCnt; k++) {
-						Integer type = null;
-						Integer count = null;
-						final Matcher matcherLog = patternCountLog.matcher(logs[k]);
-
-						if (matcherLog.find()) {
-							String typeStr = matcherLog.group(1);
-							String countStr = matcherLog.group(2);
-							if (typeStr != null && typeStr.length() > 0) {
-								if (logTypes.containsKey(typeStr.toLowerCase())) {
-									type = logTypes.get(typeStr.toLowerCase());
-								}
-							}
-							if (countStr != null && countStr.length() > 0) {
-								count = Integer.parseInt(countStr);
-							}
-							if (type != null && count != null) {
-								cache.logCounts.put(type, count);
-							}
-						}
+				while (matcherLog.find())
+				{
+					String typeStr = matcherLog.group(1);
+					String countStr = matcherLog.group(2);
+					
+					if (typeStr != null
+					        && typeStr.length() > 0
+					        && logTypes.containsKey(typeStr.toLowerCase())
+					        && countStr != null
+					        && countStr.length() > 0)
+					{
+					    cache.logCounts.put(logTypes.get(typeStr.toLowerCase()), Integer.parseInt(countStr));
 					}
 				}
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			// failed to parse logs
 			Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache log count");
 		}
