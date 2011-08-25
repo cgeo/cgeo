@@ -12,5 +12,9 @@ public interface OverlayImpl {
 		PositionOverlay,
 		ScaleOverlay
 	}
+
+	void lock();
+
+	void unlock();
 	
 }

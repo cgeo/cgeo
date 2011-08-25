@@ -1,5 +1,8 @@
 package cgeo.geocaching.googlemaps;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 import android.app.Activity;
 import android.graphics.Canvas;
 import cgeo.geocaching.cgSettings;
@@ -15,6 +18,7 @@ import com.google.android.maps.Overlay;
 public class googleOverlay extends Overlay implements OverlayImpl {
 
 	private OverlayBase overlayBase = null;
+	private Lock lock = new ReentrantLock();
 	
 	public googleOverlay(Activity activityIn, cgSettings settingsIn, overlayType ovlType) {
 		switch (ovlType) {
@@ -37,5 +41,15 @@ public class googleOverlay extends Overlay implements OverlayImpl {
 
 	public OverlayBase getBase() {
 		return overlayBase;
+	}
+
+	@Override
+	public void lock() {
+		lock.lock();
+	}
+
+	@Override
+	public void unlock() {
+		lock.unlock();
 	}
 }

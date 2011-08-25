@@ -1,5 +1,8 @@
 package cgeo.geocaching.mapsforge;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 import org.mapsforge.android.maps.Overlay;
 import org.mapsforge.android.maps.Projection;
 
@@ -15,6 +18,7 @@ import cgeo.geocaching.mapinterfaces.OverlayImpl;
 public class mfOverlay extends Overlay implements OverlayImpl {
 
 	private OverlayBase overlayBase = null;
+	private Lock lock = new ReentrantLock();
 	
 	public mfOverlay(Activity activityIn, cgSettings settingsIn, OverlayImpl.overlayType ovlType) {
 		
@@ -38,5 +42,15 @@ public class mfOverlay extends Overlay implements OverlayImpl {
 
 	public OverlayBase getBase() {
 		return overlayBase;
+	}
+
+	@Override
+	public void lock() {
+		lock.lock();
+	}
+
+	@Override
+	public void unlock() {
+		lock.unlock();
 	}
 }

@@ -1,5 +1,8 @@
 package cgeo.geocaching.mapsforge;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 import org.mapsforge.android.maps.ItemizedOverlay;
 import org.mapsforge.android.maps.Projection;
 
@@ -15,6 +18,7 @@ import cgeo.geocaching.mapinterfaces.MapViewImpl;
 public class mfUsersOverlay extends ItemizedOverlay<mfUsersOverlayItem> implements ItemizedOverlayImpl {
 
 	private cgUsersOverlay base;
+	private Lock lock = new ReentrantLock();
 
 	public mfUsersOverlay(Context contextIn, Drawable markerIn) {
 		super(boundCenter(markerIn));
@@ -92,6 +96,16 @@ public class mfUsersOverlay extends ItemizedOverlay<mfUsersOverlayItem> implemen
 			MapProjectionImpl projection, byte drawZoomLevel) {
 
 		super.drawOverlayBitmap(canvas, drawPosition, (Projection) projection.getImpl(), drawZoomLevel);
+	}
+
+	@Override
+	public void lock() {
+		lock.lock();
+	}
+
+	@Override
+	public void unlock() {
+		lock.unlock();
 	}
 
 }

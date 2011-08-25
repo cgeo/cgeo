@@ -74,10 +74,16 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 			item.setMarker(boundCenterBottom(item.getMarker(0)));
 		}
 
-		items = new ArrayList<CacheOverlayItemImpl>(itemsPre);
-
-		setLastFocusedItemIndex(-1); // to reset tap during data change
-		populate();
+		// ensure no interference between the draw and content changing routines
+		getOverlayImpl().lock();
+		try {		
+			items = new ArrayList<CacheOverlayItemImpl>(itemsPre);
+	
+			setLastFocusedItemIndex(-1); // to reset tap during data change
+			populate();
+		} finally {
+			getOverlayImpl().unlock();
+		}
 	}
 
 	public boolean getCircles() {
@@ -107,51 +113,56 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 
 	private void drawInternal(Canvas canvas, MapProjectionImpl projection) {
 
-		if (displayCircles) {
-			if (blockedCircle == null) {
-				blockedCircle = new Paint();
-				blockedCircle.setAntiAlias(true);
-				blockedCircle.setStrokeWidth(1.0f);
-				blockedCircle.setARGB(127, 0, 0, 0);
-				blockedCircle.setPathEffect(new DashPathEffect(new float[] {3,2}, 0));
-			}
-
-			if (setfil == null) setfil = new PaintFlagsDrawFilter(0, Paint.FILTER_BITMAP_FLAG);
-			if (remfil == null) remfil = new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG, 0);
-
-			canvas.setDrawFilter(setfil);
-
-			for (CacheOverlayItemImpl item : items) {
-				final cgCoord itemCoord = item.getCoord();
-				float[] result = new float[1];
-
-				Location.distanceBetween(itemCoord.latitude, itemCoord.longitude, itemCoord.latitude, itemCoord.longitude + 1, result);
-				final float longitudeLineDistance = result[0];
-
-				GeoPointImpl itemGeo = mapFactory.getGeoPointBase((int)(itemCoord.latitude * 1e6), (int)(itemCoord.longitude * 1e6));
-				GeoPointImpl leftGeo = mapFactory.getGeoPointBase((int)(itemCoord.latitude * 1e6), (int)((itemCoord.longitude - 161 / longitudeLineDistance) * 1e6));
-
-				projection.toPixels(itemGeo, center);
-				projection.toPixels(leftGeo, left);
-				int radius = center.x - left.x;
-
-				final String type = item.getType();
-				if (type == null || "multi".equals(type) || "mystery".equals(type) || "virtual".equals(type)) {
-					blockedCircle.setColor(0x66000000);
-					blockedCircle.setStyle(Style.STROKE);
-					canvas.drawCircle(center.x, center.y, radius, blockedCircle);
-				} else {
-					blockedCircle.setColor(0x66BB0000);
-					blockedCircle.setStyle(Style.STROKE);
-					canvas.drawCircle(center.x, center.y, radius, blockedCircle);
-
-					blockedCircle.setColor(0x44BB0000);
-					blockedCircle.setStyle(Style.FILL);
-					canvas.drawCircle(center.x, center.y, radius, blockedCircle);
+		// prevent content changes
+		getOverlayImpl().lock();
+		try {
+			if (displayCircles) {
+				if (blockedCircle == null) {
+					blockedCircle = new Paint();
+					blockedCircle.setAntiAlias(true);
+					blockedCircle.setStrokeWidth(1.0f);
+					blockedCircle.setARGB(127, 0, 0, 0);
+					blockedCircle.setPathEffect(new DashPathEffect(new float[] {3,2}, 0));
 				}
+	
+				if (setfil == null) setfil = new PaintFlagsDrawFilter(0, Paint.FILTER_BITMAP_FLAG);
+				if (remfil == null) remfil = new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG, 0);
+	
+				canvas.setDrawFilter(setfil);
+	
+				for (CacheOverlayItemImpl item : items) {
+					final cgCoord itemCoord = item.getCoord();
+					float[] result = new float[1];
+	
+					Location.distanceBetween(itemCoord.latitude, itemCoord.longitude, itemCoord.latitude, itemCoord.longitude + 1, result);
+					final float longitudeLineDistance = result[0];
+	
+					GeoPointImpl itemGeo = mapFactory.getGeoPointBase((int)(itemCoord.latitude * 1e6), (int)(itemCoord.longitude * 1e6));
+					GeoPointImpl leftGeo = mapFactory.getGeoPointBase((int)(itemCoord.latitude * 1e6), (int)((itemCoord.longitude - 161 / longitudeLineDistance) * 1e6));
+	
+					projection.toPixels(itemGeo, center);
+					projection.toPixels(leftGeo, left);
+					int radius = center.x - left.x;
+	
+					final String type = item.getType();
+					if (type == null || "multi".equals(type) || "mystery".equals(type) || "virtual".equals(type)) {
+						blockedCircle.setColor(0x66000000);
+						blockedCircle.setStyle(Style.STROKE);
+						canvas.drawCircle(center.x, center.y, radius, blockedCircle);
+					} else {
+						blockedCircle.setColor(0x66BB0000);
+						blockedCircle.setStyle(Style.STROKE);
+						canvas.drawCircle(center.x, center.y, radius, blockedCircle);
+	
+						blockedCircle.setColor(0x44BB0000);
+						blockedCircle.setStyle(Style.FILL);
+						canvas.drawCircle(center.x, center.y, radius, blockedCircle);
+					}
+				}	
+				canvas.setDrawFilter(remfil);
 			}
-
-			canvas.setDrawFilter(remfil);
+		} finally {
+			getOverlayImpl().unlock();
 		}
 	}
 
@@ -170,7 +181,22 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 			}
 			waitDialog.show();
 
-			CacheOverlayItemImpl item = items.get(index);
+			CacheOverlayItemImpl item = null;
+			
+			// prevent concurrent changes
+			getOverlayImpl().lock();
+			try {				
+				 if (index < items.size()) {
+					 item = items.get(index);
+				 }
+			} finally {
+				getOverlayImpl().unlock();
+			}
+			
+			if (item == null) {
+				return false;
+			}
+			
 			cgCoord coordinate = item.getCoord();
 
 			if (coordinate.type != null && coordinate.type.equalsIgnoreCase("cache") && coordinate.geocode != null && coordinate.geocode.length() > 0) {
