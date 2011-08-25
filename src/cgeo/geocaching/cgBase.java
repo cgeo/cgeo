@@ -94,7 +94,7 @@ public class cgBase {
 	private final static Pattern patternCountLogs = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p>(.*)<\\/p><\\/span>", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternCountLog = Pattern.compile(" src=\"\\/images\\/icons\\/([^\\.]*).gif\" alt=\"[^\"]*\" title=\"[^\"]*\" />([0-9]*)[^0-9]+", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	//private final static Pattern patternLogs = Pattern.compile("<table class=\"LogsTable\">(.*?)</table>\\s*<p", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-	private final static Pattern patternLog = Pattern.compile("<tr><td class.+?<a href=\"/profile/\\?guid=.+?>(.+?)</a>.+?(?:logOwnerStats.+?guid.+?>(\\d+)</a>.+?)?LogType.+?<img.+?/images/icons/([^\\.]+)\\..+?title=\"(.+?)\".+?LogDate.+?>(.+?)<.+?LogText.+?>(.*?)</p>(.*?)</div></div></div></td></tr>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+	private final static Pattern patternLog = Pattern.compile("<tr><td class.+?<a href=\"/profile/\\?guid=.+?>(.+?)</a>.+?(?:logOwnerStats[^>]+><img[^>]+icon_smile.+?> ([,\\d]+).+?)?LogType.+?<img.+?/images/icons/([^\\.]+)\\..+?title=\"(.+?)\".+?LogDate.+?>(.+?)<.+?LogText.+?>(.*?)</p>(.*?)</div></div></div></td></tr>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	private final static Pattern patternLogImgs = Pattern.compile("href=\"(http://img.geocaching.com/cache/log/.+?)\".+?<span>([^<]*)", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternAttributes = Pattern.compile("<h3 class=\"WidgetHeader\">[^<]*<img[^>]+>\\W*Attributes[^<]*</h3>[^<]*<div class=\"WidgetBody\">(([^<]*<img src=\"[^\"]+\" alt=\"[^\"]+\"[^>]*>)+)[^<]*<p", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternAttributesInside = Pattern.compile("[^<]*<img src=\"([^\"]+)\" alt=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
@@ -116,15 +116,13 @@ public class cgBase {
 	public static HashMap<Integer, String> logTypesTrackable = new HashMap<Integer, String>();
 	public static HashMap<Integer, String> logTypesTrackableAction = new HashMap<Integer, String>();
 	public static HashMap<Integer, String> errorRetrieve = new HashMap<Integer, String>();
-	public final static SimpleDateFormat dateInBackslash = new SimpleDateFormat("MM/dd/yyyy");
+	public final static SimpleDateFormat dateInSlash = new SimpleDateFormat("MM/dd/yyyy");
 	public final static SimpleDateFormat dateInDash = new SimpleDateFormat("yyyy-MM-dd");
 	public final static SimpleDateFormat dateEvIn = new SimpleDateFormat("dd MMMMM yyyy", Locale.ENGLISH); // 28 March 2009
 	public final static SimpleDateFormat dateTbIn1 = new SimpleDateFormat("EEEEE, dd MMMMM yyyy", Locale.ENGLISH); // Saturday, 28 March 2009
 	public final static SimpleDateFormat dateTbIn2 = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
 	public final static SimpleDateFormat dateSqlIn = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 2010-07-25 14:44:01
 	public final static SimpleDateFormat dateGPXIn = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // 2010-04-20T07:00:00Z
-	public final static SimpleDateFormat dateLogs1 = new SimpleDateFormat("MMMMM dd, yyyy", Locale.ENGLISH);  // March 28, 2009
-	public final static SimpleDateFormat dateLogs2 = new SimpleDateFormat("MMMMM dd", Locale.ENGLISH);  // March 28
 	private Resources res = null;
 	private HashMap<String, String> cookies = new HashMap<String, String>();
 	private static final String passMatch = "[/\\?&]*[Pp]ass(word)?=[^&^#^$]+";
@@ -1599,7 +1597,7 @@ public class cgBase {
 		        2- Finds-count
                 3- Log type image name (e.g. "icon_smile")
                 4- Type string (e.g. "Found it")
-                5- Date string (e.g. "March 28, 2009")
+                5- Date string (e.g. "04/28/2010")
                 6- Log text
                 7- The rest (e.g. log-images, maybe faster)
 		        */
@@ -1620,30 +1618,18 @@ public class cgBase {
 
 					try
 					{
-					    if (matcherLog.group(5).indexOf(',') > 0)
-					    {
-					        logDone.date = dateLogs1.parse(matcherLog.group(5)).getTime(); // long format
-					    }
-					    else
-					    {
-					        // short format, with current year
-                            final Calendar cal = Calendar.getInstance();
-                            final int year     = cal.get(Calendar.YEAR);
-                            cal.setTime(dateLogs2.parse(matcherLog.group(5)));
-                            cal.set(Calendar.YEAR, year);
-                            logDone.date = cal.getTimeInMillis();
-					    }
+					    logDone.date = dateInSlash.parse(matcherLog.group(5)).getTime();
 					}
 					catch (ParseException e)
 					{
-				        Log.w(cgSettings.tag, "Failed to parse logs date: " + e.toString());
+				        Log.w(cgSettings.tag, "Failed to parse log date.");
 					}
 
 					logDone.author = Html.fromHtml(matcherLog.group(1)).toString();
 
 					if (null != matcherLog.group(2))
 					{
-					    logDone.found = Integer.parseInt(matcherLog.group(2));
+					    logDone.found = Integer.parseInt(matcherLog.group(2).replaceAll(",", ""));
 					}
 
 					logDone.log = matcherLog.group(6);
@@ -1672,7 +1658,7 @@ public class cgBase {
 		catch (Exception e)
 		{
 			// failed to parse logs
-			Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache logs");
+			Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache logs", e);
 		}
 
 		int wpBegin = 0;
@@ -1905,7 +1891,7 @@ public class cgBase {
 		try {
 			Date result;
 			if (input.indexOf('/') > 0) {
-				result = dateInBackslash.parse(input);
+				result = dateInSlash.parse(input);
 				if (result != null) {
 					return result;
 				}

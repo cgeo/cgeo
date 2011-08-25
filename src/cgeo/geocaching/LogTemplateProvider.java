@@ -75,7 +75,7 @@ public class LogTemplateProvider {
 				String getValue(final cgBase base) {
 					String findCount = "";
 					final HashMap<String, String> params = new HashMap<String, String>();
-					final String page = base.request(false, "www.geocaching.com", "/my/", "GET", params, false, false, false).getData();
+					final String page = base.request(false, "www.geocaching.com", "/email/", "GET", params, false, false, false).getData();
 					int current = parseFindCount(page);
 
 					if (current >= 0) {
@@ -117,7 +117,7 @@ public class LogTemplateProvider {
 		int findCount = -1;
 
 		try {
-			final Pattern findPattern = Pattern.compile("Finds\\s*</strong>\\s*<span class=\"statcount\">(\\d+)</span>", Pattern.CASE_INSENSITIVE);
+			final Pattern findPattern = Pattern.compile("<strong><img.+?icon_smile.+?title=\"Caches Found\" /> ([,\\d]+)</strong>", Pattern.CASE_INSENSITIVE);
 			final Matcher findMatcher = findPattern.matcher(page);
 			if (findMatcher.find()) {
 				if (findMatcher.groupCount() > 0) {
@@ -127,7 +127,7 @@ public class LogTemplateProvider {
 						if (count.length() == 0) {
 							findCount = 0;
 						} else {
-							findCount = Integer.parseInt(count);
+							findCount = Integer.parseInt(count.replaceAll(",", ""));
 						}
 					}
 				}
