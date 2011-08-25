@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Point;
@@ -32,8 +33,8 @@ public class cgMapMyOverlay implements OverlayBase {
 	private Point center = new Point();
 	private Point left = new Point();
 	private Bitmap arrow = null;
-	private int widthArrow = 0;
-	private int heightArrow = 0;
+	private int widthArrowHalf = 0;
+	private int heightArrowHalf = 0;
 	private PaintFlagsDrawFilter setfil = null;
 	private PaintFlagsDrawFilter remfil = null;
 	private Location historyRecent = null;
@@ -187,19 +188,21 @@ public class cgMapMyOverlay implements OverlayBase {
 
 		if (arrow == null) {
 			arrow = BitmapFactory.decodeResource(activity.getResources(), R.drawable.my_location_chevron);
-			widthArrow = arrow.getWidth();
-			heightArrow = arrow.getHeight();
+			widthArrowHalf = arrow.getWidth() / 2;
+			heightArrowHalf = arrow.getHeight() / 2;
 		}
 
 		int marginLeft;
 		int marginTop;
 
-		marginLeft = center.x - (widthArrow / 2);
-		marginTop = center.y - (heightArrow / 2);
+		marginLeft = center.x - widthArrowHalf;
+		marginTop = center.y - heightArrowHalf;
+		
+		Matrix matrix = new Matrix();
+		matrix.setRotate(heading.floatValue(), widthArrowHalf, heightArrowHalf);
+		matrix.postTranslate(marginLeft, marginTop);
 
-		canvas.rotate(heading.floatValue(), center.x, center.y);
-		canvas.drawBitmap(arrow, marginLeft, marginTop, null);
-		canvas.rotate(-(heading.floatValue()), center.x, center.y);
+		canvas.drawBitmap(arrow, matrix, null);
 
 		canvas.setDrawFilter(remfil);
 
