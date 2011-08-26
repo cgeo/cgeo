@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -17,6 +18,9 @@ import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 
+/**
+ * Internal c:geo representation of a "cache"
+ */
 public class cgCache {
 
 	public Long updated = null;
@@ -24,6 +28,9 @@ public class cgCache {
 	public Long visitedDate = null;
 	public Integer reason = 0;
 	public Boolean detailed = false;
+	/**
+     * Code of the cache like GCABCD
+     */
 	public String geocode = "";
 	public String cacheid = "";
 	public String guid = "";
