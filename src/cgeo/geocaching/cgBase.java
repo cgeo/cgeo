@@ -86,6 +86,7 @@ public class cgBase {
 	private final static Pattern patternFavourite = Pattern.compile("<a id=\"uxFavContainerLink\"[^>]*>[^<]*<div[^<]*<span class=\"favorite-value\">[^\\d]*([0-9]+)[^\\d^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 
 	private final static Pattern patternFound = Pattern.compile("<p>[^<]*<a id=\"ctl00_ContentBody_hlFoundItLog\"[^<]*<img src=\".*/images/stockholm/16x16/check\\.gif\"[^>]*>[^<]*</a>[^<]*</p>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern patternFoundAlternative = Pattern.compile("<div class=\"StatusInformationWidget FavoriteWidget\"", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternLatLon = Pattern.compile("<span id=\"ctl00_ContentBody_LatLon\"[^>]*>(<b>)?([^<]*)(<\\/b>)?<\\/span>", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternLocation = Pattern.compile("<span id=\"ctl00_ContentBody_Location\"[^>]*>In ([^<]*)", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternHint = Pattern.compile("<p>([^<]*<strong>)?\\W*Additional Hints([^<]*<\\/strong>)?[^\\(]*\\(<a[^>]+>Encrypt</a>\\)[^<]*<\\/p>[^<]*<div id=\"div_hint\"[^>]*>(.*)</div>[^<]*<div id=[\\'|\"]dk[\\'|\"]", Pattern.CASE_INSENSITIVE);
@@ -1313,14 +1314,17 @@ public class cgBase {
 		}
 
 		// cache found
-		try {
-			final Matcher matcherFound = patternFound.matcher(page);
-			if (matcherFound.find()) {
-				if (matcherFound.group() != null && matcherFound.group().length() > 0) {
-					cache.found = true;
-				}
+		try
+		{
+			final Matcher matcherFound            = patternFound.matcher(page);
+			final Matcher matcherFoundAlternative = patternFoundAlternative.matcher(page);
+			
+			if (matcherFound.find() || matcherFoundAlternative.find()) {
+			    cache.found = true;
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			// failed to parse found
 			Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse found");
 		}
