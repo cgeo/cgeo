@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-If the workspace directory name contains a space and leads to errors in DEX,
-then you need to set the property "basedir" in your local.properties to the 8.3 name
-of the directory where this script is located on your disk.
- -->
-
 <project name="cgeo">
 	<property file="local.properties" />
 
