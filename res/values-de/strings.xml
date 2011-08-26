@@ -177,7 +177,7 @@
 
   <string name="err_log_load_data">c:geo konnte die benötigten Daten nicht laden, um den Besuch zu loggen.</string>
   <string name="err_log_load_data_again">c:geo konnte die benötigten Daten nicht laden, um den Besuch zu loggen. Bitte erneut versuchen.</string>
-  <string name="err_log_load_data_still">c:geo läd gerade die benötigten Daten. Bitte kurz warten.</string>
+  <string name="err_log_load_data_still">c:geo lädt gerade die benötigten Daten. Bitte kurz warten.</string>
   <string name="err_log_failed_server">c:geo konnte Log nicht senden, weil der Server nicht antwortete.</string>
   <string name="err_log_post_failed">c:geo konnte Log nicht absenden.</string>
   <string name="err_log_post_failed_because">c:geo konnte Log nicht absenden, wegen </string>
@@ -625,7 +625,7 @@
   <string name="map_live_disable">Live ausschalten</string>
   <string name="map_static_title">Statische Karte</string>
   <string name="map_static_loading">Lade statische Karte…</string>
-  <string name="map_token_err">c:geo konnte nur Teildaten herunterladen, die Koordinaten der Caches könnten verkehrt sein.</string> <!-- since: 2.26 RC3 -->
+  <string name="map_token_err">c:geo konnte nur Teildaten herunterladen, die Koordinaten der Caches könnten ungenau sein.</string> <!-- since: 2.26 RC3 -->
 
   <!-- search -->
   <string name="search_bar_hint">Suche nach Caches</string>
