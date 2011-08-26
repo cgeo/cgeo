@@ -185,11 +185,11 @@ public class cgeocoords extends Dialog {
 
 				if (latitude != null) {
 					eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
-					eLatMin.setText(Integer.toString(latDegFrac) + addZeros(latDegFrac, 5));
+					eLatMin.setText(addZeros(latDegFrac, 5) + Integer.toString(latDegFrac));
 				}
 				if (longitude != null) {
 					eLonDeg.setText(addZeros(latDeg, 3) + Integer.toString(lonDeg));
-					eLonMin.setText(Integer.toString(lonDegFrac) + addZeros(lonDegFrac, 5));
+					eLonMin.setText(addZeros(lonDegFrac, 5) + Integer.toString(lonDegFrac));
 				}
 				break;
 			case Min: // DDD° MM.MMM
@@ -213,12 +213,12 @@ public class cgeocoords extends Dialog {
 				if (latitude != null) {
 					eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
 					eLatMin.setText(addZeros(latMin, 2) + Integer.toString(latMin));
-					eLatSec.setText(Integer.toString(latMinFrac) + addZeros(latMinFrac, 3));
+					eLatSec.setText(addZeros(latMinFrac, 3) + Integer.toString(latMinFrac));
 				}
 				if (longitude != null) {
 					eLonDeg.setText(addZeros(lonDeg, 3) + Integer.toString(lonDeg));
 					eLonMin.setText(addZeros(lonMin, 2) + Integer.toString(lonMin));
-					eLonSec.setText(Integer.toString(lonMinFrac) + addZeros(lonMinFrac, 3));
+					eLonSec.setText(addZeros(lonMinFrac, 3) + Integer.toString(lonMinFrac));
 				}
 				break;
 			case Sec: // DDD° MM SS.SSS
@@ -243,13 +243,13 @@ public class cgeocoords extends Dialog {
 					eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
 					eLatMin.setText(addZeros(latMin, 2) + Integer.toString(latMin));
 					eLatSec.setText(addZeros(latSec, 2) + Integer.toString(latSec));
-					eLatSub.setText(Integer.toString(latSecFrac) + addZeros(latSecFrac, 3));
+					eLatSub.setText(addZeros(latSecFrac, 3) + Integer.toString(latSecFrac));
 				}
 				if (longitude != null) {
 					eLonDeg.setText(addZeros(lonDeg, 3) + Integer.toString(lonDeg));
 					eLonMin.setText(addZeros(lonMin, 2) + Integer.toString(lonMin));
 					eLonSec.setText(addZeros(lonSec, 2) + Integer.toString(lonSec));
-					eLonSub.setText(Integer.toString(lonSecFrac) + addZeros(lonSecFrac, 3));
+					eLonSub.setText(addZeros(lonSecFrac, 3) + Integer.toString(lonSecFrac));
 				}
 				break;
 		}
@@ -386,53 +386,37 @@ public class cgeocoords extends Dialog {
 			return;
 		}
 
-		int latDeg = 0, latMin = 0, latSec = 0, latSub = 0;
-		int lonDeg = 0, lonMin = 0, lonSec = 0, lonSub = 0;
+		int latDeg = 0, latMin = 0, latSec = 0;
+		int lonDeg = 0, lonMin = 0, lonSec = 0;
+		Double latDegFrac = 0.0, latMinFrac = 0.0, latSecFrac = 0.0;
+		Double lonDegFrac = 0.0, lonMinFrac = 0.0, lonSecFrac = 0.0;
+
 		try {
 			latDeg = Integer.parseInt(eLatDeg.getText().toString());
 			lonDeg = Integer.parseInt(eLonDeg.getText().toString());
+			latDegFrac = Double.parseDouble("0."+eLatMin.getText().toString());
+			lonDegFrac = Double.parseDouble("0."+eLonMin.getText().toString());
 			latMin = Integer.parseInt(eLatMin.getText().toString());
 			lonMin = Integer.parseInt(eLonMin.getText().toString());
+			latMinFrac = Double.parseDouble("0."+eLatSec.getText().toString());
+			lonMinFrac = Double.parseDouble("0."+eLonSec.getText().toString());
 			latSec = Integer.parseInt(eLatSec.getText().toString());
 			lonSec = Integer.parseInt(eLonSec.getText().toString());
-			latSub = Integer.parseInt(eLatSub.getText().toString());
-			lonSub = Integer.parseInt(eLonSub.getText().toString());
+			latSecFrac = Double.parseDouble("0."+eLatSub.getText().toString());
+			lonSecFrac = Double.parseDouble("0."+eLonSub.getText().toString());
+
 		} catch (NumberFormatException e) {}
 
 		switch (currentFormat) {
 			case Deg:
-				Double latDegFrac = latMin * 1.0;
-				while (latDegFrac > 1) {
-					latDegFrac /= 10;
-				}
-				Double lonDegFrac = lonMin * 1.0;
-				while (lonDegFrac > 1) {
-					lonDegFrac /= 10;
-				}
 				latitude = latDeg + latDegFrac;
 				longitude = lonDeg + lonDegFrac;
 				break;
 			case Min:
-				Double latMinFrac = latSec * 1.0;
-				while (latMinFrac > 1) {
-					latMinFrac /= 10;
-				}
-				Double lonMinFrac = lonSec * 1.0;
-				while (lonMinFrac > 1) {
-					lonMinFrac /= 10;
-				}
 				latitude = latDeg + latMin/60.0 + latMinFrac/60.0;
 				longitude = lonDeg + lonMin/60.0 + lonMinFrac/60.0;
 				break;
 			case Sec:
-				Double latSecFrac = latSub * 1.0;
-				while (latSecFrac > 1) {
-					latSecFrac /= 10;
-				}
-				Double lonSecFrac = lonSub * 1.0;
-				while (lonSecFrac > 1) {
-					lonSecFrac /= 10;
-				}
 				latitude = latDeg + latMin/60.0 + latSec/60.0/60.0 + latSecFrac/60.0/60.0;
 				longitude = lonDeg + lonMin/60.0 + lonSec/60.0/60.0 + lonSecFrac/60.0/60.0;
 				break;
