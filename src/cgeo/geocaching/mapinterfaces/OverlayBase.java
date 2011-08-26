@@ -16,4 +16,5 @@ public interface OverlayBase {
 	void drawOverlayBitmap(Canvas canvas, Point drawPosition,
 			MapProjectionImpl projection, byte drawZoomLevel);
 
+	OverlayImpl getOverlayImpl();
 }

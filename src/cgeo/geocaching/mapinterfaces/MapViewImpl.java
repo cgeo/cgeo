@@ -1,10 +1,13 @@
 package cgeo.geocaching.mapinterfaces;
 
-import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.mapcommon.cgMapOverlay;
-import cgeo.geocaching.mapcommon.cgUsersOverlay;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.mapcommon.cgMapMyOverlay;
+import cgeo.geocaching.mapcommon.cgMapOverlay;
+import cgeo.geocaching.mapcommon.cgOverlayScale;
+import cgeo.geocaching.mapcommon.cgUsersOverlay;
 
 /**
  * Defines common functions of the provider-specific
@@ -50,11 +53,17 @@ public interface MapViewImpl {
 			Drawable drawable, boolean fromDetailIntent);
 
 	cgUsersOverlay createAddUsersOverlay(Context context, Drawable markerIn);
+	
+	cgOverlayScale createAddScaleOverlay(Activity activity, cgSettings settingsIn);
+
+	cgMapMyOverlay createAddPositionOverlay(Activity activity, cgSettings settingsIn);
 
 	boolean needsScaleOverlay();
 
 	void setBuiltinScale(boolean b);
 
 	void setMapSource(cgSettings settings);
+
+	void repaintRequired(OverlayBase overlay);
 
 }

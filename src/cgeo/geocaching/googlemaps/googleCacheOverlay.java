@@ -1,10 +1,12 @@
 package cgeo.geocaching.googlemaps;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
-
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.mapcommon.cgMapOverlay;
 import cgeo.geocaching.mapinterfaces.ItemizedOverlayImpl;
@@ -22,6 +24,7 @@ import com.google.android.maps.MapView;
 public class googleCacheOverlay extends ItemizedOverlay<googleCacheOverlayItem> implements ItemizedOverlayImpl {
 
 	private cgMapOverlay base;
+	private Lock lock = new ReentrantLock();
 
 	public googleCacheOverlay(cgSettings settingsIn, Context contextIn, Drawable markerIn, Boolean fromDetailIn) {
 		super(boundCenterBottom(markerIn));
@@ -96,6 +99,16 @@ public class googleCacheOverlay extends ItemizedOverlay<googleCacheOverlayItem> 
 	public void superDrawOverlayBitmap(Canvas canvas, Point drawPosition,
 			MapProjectionImpl projection, byte drawZoomLevel) {
 		// Nothing to do here...
+	}
+
+	@Override
+	public void lock() {
+		lock.lock();
+	}
+
+	@Override
+	public void unlock() {
+		lock.unlock();
 	}
 
 }

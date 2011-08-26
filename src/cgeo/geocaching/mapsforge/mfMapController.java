@@ -9,9 +9,11 @@ import cgeo.geocaching.mapinterfaces.MapControllerImpl;
 public class mfMapController implements MapControllerImpl {
 
 	private MapController mapController;
+	private int maxZoomLevel;
 	
-	public mfMapController(MapController mapControllerIn) {
+	public mfMapController(MapController mapControllerIn, int maxZoomLevelIn) {
 		mapController = mapControllerIn;
+		maxZoomLevel = maxZoomLevelIn;
 	}
 
 	@Override
@@ -26,7 +28,11 @@ public class mfMapController implements MapControllerImpl {
 
 	@Override
 	public void setZoom(int mapzoom) {
-		mapController.setZoom(mapzoom-1);
+		int mfzoom = mapzoom-1;
+		if (mfzoom > maxZoomLevel) {
+			mfzoom = maxZoomLevel;
+		}
+		mapController.setZoom(mfzoom);
 	}
 
 	@Override
