@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+If the workspace directory name contains a space and leads to errors in DEX,
+then you need to set the property "basedir" in your local.properties to the 8.3 name
+of the directory where this script is located on your disk.
+ -->
+
 <project name="cgeo">
-	<!-- If the workspace directory name contains a space in it adjust the basedir attribute like this -->
-	<!--project name="cgeo" basedir="C:\docume~1\username\workspace\cgeo"-->
-	
+	<property file="local.properties" />
+
 	<property name="cgeo.buildxml" value="./build_cgeo.xml"/>
 
 	<target name="help" description="Display available targets">
 		<ant antfile="${cgeo.buildxml}" target="help"/>
     </target>
-	
+
 	<target name="clean" description="Remove output files">
 		<ant antfile="${cgeo.buildxml}" target="clean"/>
     </target>
-	
+
 	<target name="compile" description="Compile project">
 		<ant antfile="${cgeo.buildxml}" target="compile"/>
     </target>
-	
+
 	<target name="debug" description="Build application">
 		<ant antfile="${cgeo.buildxml}" target="debug"/>
     </target>
@@ -24,13 +29,13 @@
 	<target name="release" description="Build application">
 		<ant antfile="${cgeo.buildxml}" target="release"/>
     </target>
-		
+
 	<target name="install" description="Install application">
 		<ant antfile="${cgeo.buildxml}" target="install"/>
     </target>
-	
+
 	<target name="uninstall" description="Uninstall application">
 		<ant antfile="${cgeo.buildxml}" target="uninstall"/>
     </target>
-	
+
 </project>
