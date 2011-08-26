@@ -926,6 +926,20 @@
 
   <!-- changelog -->
   <string name="changelog">\n
+    <b>26.08.2011</b>\n
+    · new: street view\n
+    · new: attribute icons\n
+    · new: experimental support for .gpx from opencaching.de\n
+    · fix: log-dates\n
+    · fix: coordinates input\n
+    · fix: nearby list preformance update\n
+    \n\n
+    <b>22.08.2011</b>\n
+    · fix: due to GC.com changes c:geo hangs in displaing cache detail\n
+    \n\n
+    <b>20.08.2011</b>\n
+    · fix: Additional adaption to GC.com changes\n
+    \n\n
     <b>19.08.2011</b>\n
     · new: Numeric entry for coordinates\n
     · fix: adaption to GC.com changes\n 
