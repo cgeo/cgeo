@@ -430,11 +430,11 @@
   <string name="init_backup_last_no">Nie ma plików z kopią zapasową.</string>
   <string name="init_mapsources">Źródła mapy</string>
   <string name="init_mapsources_description">Tutaj można wybrać źródło mapy. Jako alternatywę do Google maps, są dostępne różne style OpenStreetMap, a nawet pliki offline z mapą (szczegóły znajdziesz tutaj: <a href="http://code.google.com/p/mapsforge/"> http://code.google.com/p/mapsforge/</a>).</string>
-  <string name="init_mapsource_select">Select map source</string>
+  <string name="init_mapsource_select">Wybierz źródło mapy</string>
   <string name="init_select_mapfile">…</string>
-  <string name="init_trackautovisit">Set trackables automatically to \"visit\"</string>
-  <string name="init_sigautoinsert">Insert signature automatically</string>
-  <string name="init_loaddirectionimg">Load direction-image if necessary</string>
+  <string name="init_trackautovisit">Ustaw przedmioty podróżne automatycznie na \"wizytę\"</string>
+  <string name="init_sigautoinsert">Wstaw podpis automatycznie</string>
+  <string name="init_loaddirectionimg">Załaduj obrazek kierunku w razie potrzeby</string>
   
   <!-- map sources -->
   <string-array name="map_sources">
@@ -801,10 +801,10 @@
   <string name="attribute_frontyard_no">Nie prywatny teren</string>
   <string name="attribute_teamwork_yes">Praca zespołowa</string>
   <string name="attribute_teamwork_no">Bez pracy zespołowej</string>
-  <string name="attribute_landf_yes">Lost And Found Tour</string>
-  <string name="attribute_landf_no">No Lost And Found Tour</string>
-  <string name="attribute_partnership_yes">Partnership Cache</string>
-  <string name="attribute_partnership_no">No Partnership Cache</string>
+  <string name="attribute_landf_yes">Lost And Found tura</string>
+  <string name="attribute_landf_no">Żadna Lost And Found tura</string>
+  <string name="attribute_partnership_yes">Partnerska skrytka</string>
+  <string name="attribute_partnership_no">Żadna partnerska skrytka</string>
 
   <!--  attributes (equipment -> required, not required) -->
   <string name="attribute_fee_yes">Opłata za wejście lub parking</string>
