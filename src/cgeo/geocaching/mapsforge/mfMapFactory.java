@@ -32,12 +32,6 @@ public class mfMapFactory implements MapFactory{
 		return new mfGeoPoint(latE6, lonE6);
 	}
 
-//	@Override
-//	public OverlayImpl getOverlayBaseWrapper(OverlayBase ovlIn) {
-//		mfOverlay baseOvl = new mfOverlay(ovlIn);
-//		return baseOvl;
-//	}
-
 	@Override
 	public CacheOverlayItemImpl getCacheOverlayItem(cgCoord coordinate, String type) {
 		mfCacheOverlayItem baseItem = new mfCacheOverlayItem(coordinate, type);

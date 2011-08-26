@@ -33,12 +33,6 @@ public class googleMapFactory implements MapFactory{
 		return new googleGeoPoint(latE6, lonE6);
 	}
 
-//	@Override
-//	public OverlayImpl getOverlayBaseWrapper(OverlayBase ovlIn) {
-//		googleOverlay baseOvl = new googleOverlay(ovlIn);
-//		return baseOvl;
-//	}
-
 	@Override
 	public CacheOverlayItemImpl getCacheOverlayItem(cgCoord coordinate, String type) {
 		googleCacheOverlayItem baseItem = new googleCacheOverlayItem(coordinate, type);
