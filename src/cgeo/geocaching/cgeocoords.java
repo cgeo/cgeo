@@ -185,11 +185,11 @@ public class cgeocoords extends Dialog {
 
 				if (latitude != null) {
 					eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
-					eLatMin.setText(Integer.toString(latDegFrac) + addZeros(latDegFrac, 5));
+					eLatMin.setText(addZeros(latDegFrac, 5) + Integer.toString(latDegFrac));
 				}
 				if (longitude != null) {
 					eLonDeg.setText(addZeros(latDeg, 3) + Integer.toString(lonDeg));
-					eLonMin.setText(Integer.toString(lonDegFrac) + addZeros(lonDegFrac, 5));
+					eLonMin.setText(addZeros(lonDegFrac, 5) + Integer.toString(lonDegFrac));
 				}
 				break;
 			case Min: // DDD° MM.MMM
@@ -243,28 +243,29 @@ public class cgeocoords extends Dialog {
 					eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
 					eLatMin.setText(addZeros(latMin, 2) + Integer.toString(latMin));
 					eLatSec.setText(addZeros(latSec, 2) + Integer.toString(latSec));
-					eLatSub.setText(Integer.toString(latSecFrac) + addZeros(latSecFrac, 3));
+					eLatSub.setText(addZeros(latSecFrac, 3) + Integer.toString(latSecFrac));
 				}
 				if (longitude != null) {
 					eLonDeg.setText(addZeros(lonDeg, 3) + Integer.toString(lonDeg));
 					eLonMin.setText(addZeros(lonMin, 2) + Integer.toString(lonMin));
 					eLonSec.setText(addZeros(lonSec, 2) + Integer.toString(lonSec));
-					eLonSub.setText(Integer.toString(lonSecFrac) + addZeros(lonSecFrac, 3));
+					eLonSub.setText(addZeros(lonSecFrac, 3) + Integer.toString(lonSecFrac));
 				}
 				break;
 		}
 	}
 
 	private static String addZeros(int value, int len) {
-		String zeros = "";
+		StringBuilder zeros = new StringBuilder();
 		if (value == 0) {
 			value = 1;
 		}
-		while (value < Math.pow(10, len-1)) {
-			zeros += "0";
+		double wantedLength = Math.pow(10, len-1);
+		while (value < wantedLength) {
+			zeros.append('0');
 			value *= 10;
 		}
-		return zeros;
+		return zeros.toString();
 	}
 
 	private class buttonClickListener implements View.OnClickListener {
@@ -272,8 +273,11 @@ public class cgeocoords extends Dialog {
 		@Override
 		public void onClick(View v) {
 			Button e = (Button) v;
-			char[] c = e.getText().toString().toCharArray();
-			switch (c[0]) {
+			CharSequence text = e.getText();
+			if (text == null || text.length() == 0) {
+				return;
+			}
+			switch (text.charAt(0)) {
 				case 'N':
 					e.setText("S");
 					break;
@@ -386,55 +390,43 @@ public class cgeocoords extends Dialog {
 			return;
 		}
 
-		int latDeg = 0, latMin = 0, latSec = 0, latSub = 0;
-		int lonDeg = 0, lonMin = 0, lonSec = 0, lonSub = 0;
+		int latDeg = 0, latMin = 0, latSec = 0;
+		int lonDeg = 0, lonMin = 0, lonSec = 0;
+		Double latDegFrac = 0.0, latMinFrac = 0.0, latSecFrac = 0.0;
+		Double lonDegFrac = 0.0, lonMinFrac = 0.0, lonSecFrac = 0.0;
+
 		try {
 			latDeg = Integer.parseInt(eLatDeg.getText().toString());
 			lonDeg = Integer.parseInt(eLonDeg.getText().toString());
+			latDegFrac = Double.parseDouble("0."+eLatMin.getText().toString());
+			lonDegFrac = Double.parseDouble("0."+eLonMin.getText().toString());
 			latMin = Integer.parseInt(eLatMin.getText().toString());
 			lonMin = Integer.parseInt(eLonMin.getText().toString());
+			latMinFrac = Double.parseDouble("0."+eLatSec.getText().toString());
+			lonMinFrac = Double.parseDouble("0."+eLonSec.getText().toString());
 			latSec = Integer.parseInt(eLatSec.getText().toString());
 			lonSec = Integer.parseInt(eLonSec.getText().toString());
-			latSub = Integer.parseInt(eLatSub.getText().toString());
-			lonSub = Integer.parseInt(eLonSub.getText().toString());
+			latSecFrac = Double.parseDouble("0."+eLatSub.getText().toString());
+			lonSecFrac = Double.parseDouble("0."+eLonSub.getText().toString());
+
 		} catch (NumberFormatException e) {}
 
 		switch (currentFormat) {
 			case Deg:
-				Double latDegFrac = latMin * 1.0;
-				while (latDegFrac > 1) {
-					latDegFrac /= 10;
-				}
-				Double lonDegFrac = lonMin * 1.0;
-				while (lonDegFrac > 1) {
-					lonDegFrac /= 10;
-				}
 				latitude = latDeg + latDegFrac;
 				longitude = lonDeg + lonDegFrac;
 				break;
 			case Min:
-				Double latMinFrac = latSec * 1.0;
-				latMinFrac /= 1000;				
-				Double lonMinFrac = lonSec * 1.0;			
-				lonMinFrac /= 1000;				
 				latitude = latDeg + latMin/60.0 + latMinFrac/60.0;
 				longitude = lonDeg + lonMin/60.0 + lonMinFrac/60.0;
 				break;
 			case Sec:
-				Double latSecFrac = latSub * 1.0;
-				while (latSecFrac > 1) {
-					latSecFrac /= 10;
-				}
-				Double lonSecFrac = lonSub * 1.0;
-				while (lonSecFrac > 1) {
-					lonSecFrac /= 10;
-				}
 				latitude = latDeg + latMin/60.0 + latSec/60.0/60.0 + latSecFrac/60.0/60.0;
 				longitude = lonDeg + lonMin/60.0 + lonSec/60.0/60.0 + lonSecFrac/60.0/60.0;
 				break;
 		}
-		latitude  *= (bLat.getText().toString() == "S" ? -1 : 1);
-		longitude *= (bLon.getText().toString() == "W" ? -1 : 1);
+		latitude  *= (bLat.getText().toString().equalsIgnoreCase("S") ? -1 : 1);
+		longitude *= (bLon.getText().toString().equalsIgnoreCase("W") ? -1 : 1);
 	}
 
 	private class CoordinateFormatListener implements OnItemSelectedListener {

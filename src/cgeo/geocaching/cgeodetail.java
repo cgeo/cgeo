@@ -17,6 +17,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -175,29 +176,36 @@ public class cgeodetail extends AbstractActivity {
 		@Override
 		public void handleMessage(Message message) {
 			BitmapDrawable image = (BitmapDrawable) message.obj;
+			if (image == null) {
+				return;
+			}
 			ScrollView scroll = (ScrollView) findViewById(R.id.details_list_box);
 			final ImageView view = (ImageView) findViewById(R.id.map_preview);
-
-			if (image != null && view != null) {
-				view.setImageDrawable(image);
-
-				if (scroll.getScrollY() == 0) {
-					scroll.scrollTo(0, (int) (80 * pixelRatio));
-				}
-				view.setVisibility(View.VISIBLE);
-				view.setOnClickListener(new View.OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						try {
-							registerForContextMenu(view);
-							openContextMenu(view);
-						} catch (Exception e) {
-							// nothing
-						}
-					}
-				});
+			if (view == null) {
+				return;
 			}
+			Bitmap bitmap = image.getBitmap();
+			if (bitmap == null || bitmap.getWidth() <= 10) {
+				return;
+			}
+			view.setImageDrawable(image);
+
+			if (scroll.getScrollY() == 0) {
+				scroll.scrollTo(0, (int) (80 * pixelRatio));
+			}
+			view.setVisibility(View.VISIBLE);
+			view.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					try {
+						registerForContextMenu(view);
+						openContextMenu(view);
+					} catch (Exception e) {
+						// nothing
+					}
+				}
+			});
 		}
 	};
 

@@ -27,52 +27,37 @@ public class cgeohelpers extends AbstractActivity {
 		settings.load();
 	}
 
-	public void installManual(View view) {
-		final Locale loc = Locale.getDefault();
-		final String lng = loc.getLanguage();
-
+	private void installFromMarket(String marketId) {
 		try {
-			if (lng.equalsIgnoreCase("de")) {
-				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:gnu.android.app.cgeomanual.de")));
-			} else {
-				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:gnu.android.app.cgeomanual.en")));
-			}
+			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:" + marketId)));
 		} catch (Exception e) {
 			// market not available in standard emulator
 		}
 
-
 		finish();
+	}
+
+	public void installManual(View view) {
+		final Locale loc = Locale.getDefault();
+		final String language = loc.getLanguage();
+
+		if ("de".equalsIgnoreCase(language)) {
+			installFromMarket("gnu.android.app.cgeomanual.de");
+		}
+		else {
+			installFromMarket("gnu.android.app.cgeomanual.en");
+		}
 	}
 
 	public void installLocus(View view) {
-		try {
-			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:menion.android.locus")));
-		} catch (Exception e) {
-			// market not available in standard emulator
-		}
-
-
-		finish();
+		installFromMarket("menion.android.locus");
 	}
 
 	public void installGpsStatus(View view) {
-		try {
-			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:com.eclipsim.gpsstatus2")));
-		} catch (Exception e) {
-			// market not available in standard emulator
-		}
-
-		finish();
+		installFromMarket("com.eclipsim.gpsstatus2");
 	}
 
 	public void installBluetoothGps(View view) {
-		try {
-			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://search?q=pname:googoo.android.btgps")));
-		} catch (Exception e) {
-			// market not available in standard emulator
-		}
-
-		finish();
+		installFromMarket("googoo.android.btgps");
 	}
 }

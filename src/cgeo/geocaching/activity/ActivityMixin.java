@@ -120,6 +120,9 @@ public final class ActivityMixin {
 	}
 
 	protected static void addVisitMenu(IAbstractActivity activity, Menu menu, cgCache cache) {
+		if (cache == null) {
+			return;
+		}
 		if (!cache.supportsLogging()) {
 			return;
 		}
