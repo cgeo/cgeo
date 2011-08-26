@@ -451,7 +451,7 @@
   <string name="init_sendToCgeo_description">Send to c:geo allows you to recieve caches directly from the geocaching site using a special plugin for Firefox or Chrome. Before registration please read <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. You only need to register if you will use send2cgeo. C:geo will also work without registering your device.</string>
   <string name="init_sendToCgeo_register">Request registration</string>
   <string name="init_sendToCgeo_registering">Registering your device for "Send to c:geo"…</string>
-  <string name="init_sendToCgeo_register_ok">Registration succesful. PIN code is ####. Use it on c:geo website to add this device to your browser.</string>
+  <string name="init_sendToCgeo_register_ok">Registration successful. PIN code is ####. Use it on c:geo website to add this device to your browser.</string>
   <string name="init_sendToCgeo_register_fail">Registration failed.</string>
 
   <!-- auth -->
