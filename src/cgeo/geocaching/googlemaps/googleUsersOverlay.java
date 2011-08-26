@@ -1,5 +1,8 @@
 package cgeo.geocaching.googlemaps;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
@@ -15,6 +18,7 @@ import com.google.android.maps.MapView;
 public class googleUsersOverlay extends ItemizedOverlay<googleUsersOverlayItem> implements ItemizedOverlayImpl {
 
 	private cgUsersOverlay base;
+	private Lock lock = new ReentrantLock();	
 
 	public googleUsersOverlay(Context contextIn, Drawable markerIn) {
 		super(boundCenter(markerIn));
@@ -89,6 +93,16 @@ public class googleUsersOverlay extends ItemizedOverlay<googleUsersOverlayItem> 
 	public void superDrawOverlayBitmap(Canvas canvas, Point drawPosition,
 			MapProjectionImpl projection, byte drawZoomLevel) {
 		// Nothing to do here
+	}
+
+	@Override
+	public void lock() {
+		lock.lock();
+	}
+
+	@Override
+	public void unlock() {
+		lock.unlock();
 	}
 
 }
