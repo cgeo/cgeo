@@ -82,13 +82,27 @@
   <string name="log_rating">Ocena</string>
   <string name="log_no_rating">Bez oceny</string>
   <string name="log_stars_1">1 gwiazdka</string>
+  <string name="log_stars_15">1,5 gwiazdki</string>
   <string name="log_stars_2">2 gwiazdki</string>
+  <string name="log_stars_25">2,5 gwiazdki</string>
   <string name="log_stars_3">3 gwiazdki</string>
+  <string name="log_stars_35">3,5 gwiazdki</string>
   <string name="log_stars_4">4 gwiazdki</string>
-  <string name="log_stars_5">5 gwiazdki</string>
+  <string name="log_stars_45">4,5 gwiazdki</string>
+  <string name="log_stars_5">5 gwiazdek</string>
+  <string name="log_stars_1_description">bardzo słaba</string>
+  <string name="log_stars_15_description">słaba</string>
+  <string name="log_stars_2_description">raczej słaba</string>
+  <string name="log_stars_25_description">może być</string>
+  <string name="log_stars_3_description">średnia</string>
+  <string name="log_stars_35_description">prawie dobra</string>
+  <string name="log_stars_4_description">dobra</string>
+  <string name="log_stars_45_description">bardzo dobra</string>
+  <string name="log_stars_5_description">świetna</string>
   <string name="log_webcam">Zdjęcie Webcam zrobione</string>
   <string name="log_new_log">Dodaj wpis</string>
   <string name="log_new_log_text">Komentarz</string>
+  <string name="log_announcement">Ogłoszenie</string>
 
   <!-- errors, warnings, info toasts -->
   <string name="err_none">OK</string>
@@ -120,6 +134,8 @@
   <string name="err_detail_still_removing">Kasuje nadal skrzynkę.</string>
   <string name="err_detail_still_saving">Zapisuje nadal skrzynkę.</string>
   <string name="err_detail_still_refreshing">Nadal ładuje skrzynkę.</string>
+  <string name="err_watchlist_still_managing">Nadal pracuję nad listą obserwowanych.</string>
+  <string name="err_watchlist_failed">c:geo nie mógł zmienić listy obserwowanych.</string>
   <string name="err_radar_title">Radar nie jest zainstalowany.</string>
   <string name="err_radar_message">Ta funkcja potrzebuje aplikacje Radar. Chcesz ją teraz zainstalować?</string>
   <string name="err_radar_market">c:geo nie mógł wystartować Android Market aby poszukać aplikacje Radar.</string>
@@ -144,6 +160,7 @@
   <string name="err_manual_title">Instrukcja obsługi nie jest zainstalowana.</string>
   <string name="err_manual_message">Instrukcja obsługi c:geo nie znajduje się na twojej komórce. Chczesz ją zainstalować?</string>
   <string name="err_manual_market">c:geo nie może wystartować Android Market aby poszukać instrukcji obsługi.</string>
+  <string name="err_missing_device_name">Proszę podać nazwę urządzenia przed zarejestrowaniem.</string>
 
   <string name="err_tb_display">"Przepraszam, c:geo nie może pokazać przedmiotów podróżnych. Czy to rzeczywiście jest przedmiot podróżny?</string>
   <string name="err_tb_details_open">Przepraszam, c:geo nie może otworzyć szczegółów przedmiotu podróżnego.</string>
@@ -181,6 +198,8 @@
   <string name="err_parse_lon">Przepraszam, c:geo nie może obliczyć długości geograficznej.</string>
   <string name="err_parse_bear">Przepraszam, c:geo nie może obliczyć namiaru.</string>
   <string name="err_parse_dist">Przepraszam, c:geo nie może obliczyć odległości.</string>
+  
+  <string name="err_fieldnotes_export_failed">Eksportowanie notatek terenowych nieudane.</string>
 
   <string name="warn_save_nothing">Nie ma nic do zapisania.</string>
   <string name="warn_no_cache_coord">Nie ma skrzynek z współrzędnymi GPS.</string>
@@ -194,6 +213,8 @@
   <string name="warn_search_help_user">Wpisz nazwę użytkownika serwisu Geocaching.com.</string>
   <string name="warn_search_help_tb">Wpisz kod przedmiotu podróżnego. Na przykład \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Proszę wypełnić jakimś tekstem.</string>
+  <string name="warn_load_log_image">Przepraszam, c:geo nie mógł załadować zdjęcia.</string>
+  <string name="warn_load_spoiler_image">Przepraszam, c:geo nie mógł załadować zdjęcia z spoilerem.</string>
 
   <string name="info_altitude">Aktualna wysokość</string>
   <string name="info_distance">Przebyta odległość</string>
@@ -204,6 +225,8 @@
   <string name="info_log_saved">Wpis został zapisany.</string>
   <string name="info_log_cleared">Wpis został skasowany.</string>
   <string name="info_log_type_changed">Rodzaj wpisu w dzienniku został zmieniony!</string>
+  
+  <string name="info_fieldnotes_exported_to">Notatki terenowe eksportowane do</string>
 
   <!-- location service -->
   <string name="loc_last">Ostatnie stanowisko</string>
@@ -249,12 +272,19 @@
   <string name="caches_stored">Zapisane</string>
   <string name="caches_history">Historia</string>
   <string name="caches_on_map">Pokaż na mapie</string>
-  <string name="caches_sort">Sortuj</string> <!-- since: 2.10 RC2 -->
-  <string name="caches_sort_distance">według odległości</string> <!-- since: 2.10 RC2 -->
-  <string name="caches_sort_difficulty">według trudności</string> <!-- since: 2.10 RC2 -->
-  <string name="caches_sort_terrain">według terenu</string> <!-- since: 2.10 RC2 -->
-  <string name="caches_sort_size">według wielkości</string> <!-- since: 2.10 RC2 -->
-  <string name="caches_sort_favorites">według popularności</string> <!-- since: 2.10 RC2 -->
+  <string name="caches_sort">Sortuj</string>
+  <string name="caches_sort_title">Sortuj według</string>
+  <string name="caches_sort_distance">odległości</string>
+  <string name="caches_sort_difficulty">trudności</string>
+  <string name="caches_sort_terrain">terenu</string>
+  <string name="caches_sort_size">wielkości</string>
+  <string name="caches_sort_favorites">popularności</string>
+  <string name="caches_sort_name">nazwy</string> <!-- since: 2.10 RC3 -->
+  <string name="caches_sort_gccode">GC-kodu</string> <!-- since: 2.2 -->
+  <string name="caches_sort_rating">oceny</string>
+  <string name="caches_sort_vote">głosów (twoja ocena)</string>
+  <string name="caches_sort_inventory">ilości w inwentarzu</string>
+  <string name="caches_sort_date">daty</string>
   <string name="caches_select">Wybierz z listy</string>
   <string name="caches_select_mode">Tryb wyboru</string>
   <string name="caches_select_mode_exit">Wyjście z trybu wyboru</string>
@@ -269,18 +299,53 @@
   <string name="caches_drop_progress">Usuwanie skrzynek</string>
   <string name="caches_refresh_selected">Odśwież wybrane</string>
   <string name="caches_refresh_all">Odśwież wszystkie</string>
+  <string name="caches_move_selected">Przenieś zaznaczone</string>
+  <string name="caches_move_all">Przenieś wszystkie</string>
   <string name="caches_map_cgeo">c:geo</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Proszę, napisz tekst z obrazka. Ważne to jest, aby można było pobrać współrzędne do skrzynek. To jest opcjonalne i może być wyłączone w ustawieniach.</string>
   <string name="caches_recaptcha_hint">Tekst z obrazka</string>
   <string name="caches_recaptcha_continue">Kontynuuj</string>
+  <string name="caches_filter">Filter</string>
+  <string name="caches_filter_title">Filter według</string>
+  <string name="caches_filter_size">wielkości</string>
+  <string name="caches_filter_type">typu</string>
+  <string name="caches_filter_track">z przedmiotmi podróżnymi</string>
+  <string name="caches_filter_clear">wykasój filter</string>
+  <string name="caches_filter_size_title">Wybierz wielkość</string>
+  <string name="caches_filter_size_micro">mikro</string>
+  <string name="caches_filter_size_small">mała</string>
+  <string name="caches_filter_size_regular">normalna</string>
+  <string name="caches_filter_size_large">duża</string>
+  <string name="caches_filter_size_other">inna</string>
+  <string name="caches_filter_size_virtual">wirtualna</string>
+  <string name="caches_filter_size_notchosen">nie wybrana</string>
+  <string name="caches_filter_type_title">Wybierz typ</string>
+  <string name="caches_filter_type_traditional">tradycyjna</string>
+  <string name="caches_filter_type_multi">wieloetapowa</string>
+  <string name="caches_filter_type_mystery">zagadkowa</string>
+  <string name="caches_filter_type_letterbox">Letterbox Hybrydowa</string>
+  <string name="caches_filter_type_event">wydarzeniowa</string>
+  <string name="caches_filter_type_mega">Mega-wydarzeniowa</string>
+  <string name="caches_filter_type_earth">Earthcache</string>
+  <string name="caches_filter_type_cito">CITO</string>
+  <string name="caches_filter_type_webcam">webcam</string>
+  <string name="caches_filter_type_virtual">wirtualna</string>
+  <string name="caches_filter_type_wherigo">Wherigo</string>
+  <string name="caches_filter_type_lostfound">Lost &amp; Found</string>
+  <string name="caches_filter_type_ape">Project APE</string>
+  <string name="caches_filter_type_gchq">Groundspeak HQ</string>
+  <string name="caches_filter_type_gps">GPS Cache wystawa</string>
+  <string name="caches_exporting_fieldnote">Eksportuj jako notatki terenowe…</string>
+  <string name="caches_removing_from_history">Kasuję z historii…</string>
 
   <!-- caches lists -->
   <string name="list_menu">Lista</string>
   <string name="list_menu_create">Utwórz nową listę</string>
   <string name="list_menu_drop">Usuń aktualną listę</string>
   <string name="list_title">Wybierz listę</string>
+  <string name="list_menu_change">Zmień listę</string>
   <string name="list_inbox">Zapisane</string>
   <string name="list_wpt">Punkty nawigacyjne</string>
   <string name="list_dialog_create_title">Nowa lista</string>
@@ -324,6 +389,11 @@
   <string name="init_signature_help_button">Pomoc</string>
   <string name="init_signature_help_title">Sygnatura, porady i wskazówki</string>
   <string name="init_signature_help_text">Wprowadź swoją sygnaturę która będzie używana przy wpisie do dziennika.\nSpecjalne kody, które mogą być stosowane są: [DATE] , [TIME], [USER] &amp; [NUMBER].</string>
+  <string name="init_signature_template_button">Wstaw szablonę</string>
+  <string name="init_signature_template_date">Data</string>
+  <string name="init_signature_template_time">Czas</string>
+  <string name="init_signature_template_user">Użytkownki</string>
+  <string name="init_signature_template_number">Numer</string>
   <string name="init_languages">Przetłumaczenie</string>
   <string name="init_languages_description">Jakie języki rozumiesz? Proszę o podanie dwóch znaków kodów.</string>
   <string name="init_languages_hint">pl en de</string>
@@ -337,11 +407,15 @@
   <string name="init_exclude">Wyklucz własne lub już znalezione skrzynki</string>
   <string name="init_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
   <string name="init_offline">Zapisuj mampki do użytku offline</string>
+  <string name="init_save_log_img">Zapisz zdjęcia z wpisów</string>
   <string name="init_units">Używaj angielskich jednostek miary\n(mile)</string>
   <string name="init_nav">Używaj Google Navigation</string>
   <string name="init_autoload">Długie opisy automatycznie ładować</string>
+  <string name="init_log_offline">Podczas logowania, zawsze logój offline (nie pokazój ekranu logowania online, nie wysyłaj logu online)</string>
   <string name="init_livelist">Pokazuj na liście kierunek do skrzynek</string>
   <string name="init_browser">Ustaw c:geo jako standardową przeglądarkę</string>
+  <string name="init_altitude">Korekta wysokości</string>
+  <string name="init_altitude_description">Jeśli GPS podaje tobie złą wysokość, możesz skorygować z liczbą dodatnią lub ujemną. Korekta jest zawsze w metrach.</string>
   <string name="init_clear">Skasuj login</string>
   <string name="init_cleared">c:geo skasował dane logowania.</string>
   <string name="init_backup">Kopia zapasowa</string>
@@ -354,6 +428,31 @@
   <string name="init_restore_failed">Przywrócenie nie powiodło się.</string>
   <string name="init_backup_last">Kopia dostępna od</string>
   <string name="init_backup_last_no">Nie ma plików z kopią zapasową.</string>
+  <string name="init_mapsources">Źródła mapy</string>
+  <string name="init_mapsources_description">Tutaj można wybrać źródło mapy. Jako alternatywę do Google maps, są dostępne różne style OpenStreetMap, a nawet pliki offline z mapą (szczegóły znajdziesz tutaj: <a href="http://code.google.com/p/mapsforge/"> http://code.google.com/p/mapsforge/</a>).</string>
+  <string name="init_mapsource_select">Wybierz źródło mapy</string>
+  <string name="init_select_mapfile">…</string>
+  <string name="init_trackautovisit">Ustaw przedmioty podróżne automatycznie na \"wizytę\"</string>
+  <string name="init_sigautoinsert">Wstaw podpis automatycznie</string>
+  <string name="init_loaddirectionimg">Załaduj obrazek kierunku w razie potrzeby</string>
+  
+  <!-- map sources -->
+  <string-array name="map_sources">
+    <item>Google: Mapa</item>
+    <item>Google: Satelita</item>
+    <item>OSM: Mapnik</item>
+    <item>OSM: Osmarender</item>
+    <item>OSM: Cyclemap</item>
+    <item>OSM: Offline</item>
+  </string-array>
+  
+  <string name="init_sendToCgeo">Send to c:geo</string>
+  <string name="init_sendToCgeo_name">Nazwa urządzenia:</string>
+  <string name="init_sendToCgeo_description">Sent to c:geo pozwala tobie odbierać skrytki bezpośrednio ze strony geocaching za pomocą specjalnego plugin dla przeglądarki Firefox lub Chrome. Przed rejestracją prosimy o zapoznanie się z <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Rejestracja jest tylko potrzebna, jeśli będziesz używać send2cgeo. C:geo będzie również działać bez rejestracji urządzenia.</string>
+  <string name="init_sendToCgeo_register">wniosek o rejestrację</string>
+  <string name="init_sendToCgeo_registering">Rejestruję twoje urządzenie do \"Send to c:geo\"…</string>
+  <string name="init_sendToCgeo_register_ok">Rejestracja udana. Kod PIN jest ####. Użyj go na c:geo stronie, aby dodać urządzenie do przeglądarki.</string>
+  <string name="init_sendToCgeo_register_fail">Rejestracja nie powiodła się.</string>
 
   <!-- auth -->
   <string name="auth_twitter">Twitter</string>
@@ -387,8 +486,17 @@
   <string name="cache_attributes">Atrybuty</string>
   <string name="cache_inventory">Inwentarz</string>
   <string name="cache_log_offline">Wpis offline</string>
+  <string name="cache_log_images_loading">Trwa ładowanie zdjęcia z wpisu…</string>
+  <string name="cache_log_images_title">zdjęcie z wpisu</string>
+  <string name="cache_log_image_default_title">zdjęcie</string>
+  <string name="cache_personal_note">osobista notatka</string>
   <string name="cache_description">Opis</string>
   <string name="cache_description_long">Długi opis</string>
+  <string name="cache_watchlist">Lista obserwowanych</string>
+  <string name="cache_watchlist_on">Ta skrzynka jest na twojej liscie obserwowanych.</string>
+  <string name="cache_watchlist_not_on">Ta skrzynka nie jest na twojej liscie obserwowanych.</string>
+  <string name="cache_watchlist_add">Obserwuj</string>
+  <string name="cache_watchlist_remove">Usuń z listy</string>
   <string name="cache_waypoints">Punkty nawigacji</string>
   <string name="cache_waypoints_add">Dodaj punkt nawigacji</string>
   <string name="cache_hint">Wskazówka</string>
@@ -401,6 +509,10 @@
   <string name="cache_dialog_offline_drop_message">Kasuję skrzynkę z pamięci…</string>
   <string name="cache_dialog_refresh_title">Odśwież</string>
   <string name="cache_dialog_refresh_message">Aktualizuje szczegóły skrzynki…</string>
+  <string name="cache_dialog_watchlist_add_title">Lista obserwowanych</string>
+  <string name="cache_dialog_watchlist_add_message">Dodaję skrzynkę do listy obserwowanych…</string>
+  <string name="cache_dialog_watchlist_remove_title">Lista obserwowanych</string>
+  <string name="cache_dialog_watchlist_remove_message">Usuwam skrzynkę z listy obserwowanych…</string>
   <string name="cache_menu_navigate">Nawigować</string>
   <string name="cache_menu_compass">Kompas</string>
   <string name="cache_menu_tbt">Zakręt po zakręcie</string>
@@ -409,16 +521,21 @@
   <string name="cache_menu_map_static">Statyczna mapa</string>
   <string name="cache_menu_locus">Locus</string>
   <string name="cache_menu_rmaps">Rmaps</string>
-  <string name="cache_menu_map_ext">Pokaż na zewnętrznej mapie</string>
+  <string name="cache_menu_map_ext">Pokaż na zewn. mapie</string>
   <string name="cache_menu_map_short">Mapa</string>
   <string name="cache_menu_map_ext_short">Zewn. mapa</string>
+  <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Otwórz w przeglądarce</string>
   <string name="cache_menu_visit">Zaloguj wizytę</string>
+  <string name="cache_menu_visit_offline">Zaloguj wizytę offline</string>
   <string name="cache_menu_spoilers">Zdjęcie spoiler</string>
   <string name="cache_menu_around">Skrzynek w okręgu</string>
   <string name="cache_menu_event">Wpisz do kalendarza</string>
   <string name="cache_menu_details">Szczegóły</string>
   <string name="cache_menu_share">Podziel się skrzynką</string>
+  <string name="cache_menu_move_list">Przesuń do innej listy</string>
+  <string name="cache_menu_gcc">GCC</string>
+  <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Zapamiętany wpis</string>
   <string name="cache_status_found">Znalezione</string>
@@ -443,8 +560,18 @@
   <string name="cache_calendars">Wybierz kalendarz</string>
   <string name="cache_spoiler_images_title">Zdjęcie spoiler</string>
   <string name="cache_spoiler_images_loading">Ładuje zdjęcia spoiler…</string>
-  <string name="cache_log_types">Rodzaj logu</string> <!-- Since: 2.10 RC2 -->
+  <string name="cache_log_types">Rodzaj logu</string>
+  <string name="cache_coordinates_no">Ta skrzynka nie ma współrzędnych GPS.</string>
+  <string name="cache_export_fieldnote">Eksportuj jako notatka terenowa</string>
+  <string name="cache_clear_history">Wykasuj historię</string>
+  <string name="cache_remove_from_history">Usuń z historii</string>
 
+  <!-- file list base -->
+  <string name="file_searching_in">Szukam pliki\nw</string>
+  <string name="file_list_no_files">Przepraszam, c:geo nie znalazł odpowiednich plików.</string>
+  <string name="file_searching">Wyszukiwanie plików pasujących</string>
+  <string name="file_title_searching">Szukam</string>
+  
   <!-- gpx -->
   <string name="gpx_import_loading_stored">Ładuje skrzynki z pliku .gpx\nZapisane:</string>
   <string name="gpx_import_no_files">Przepraszam, c:geo nie znalazł plików .gpx</string>
@@ -453,6 +580,17 @@
   <string name="gpx_import_title">Import GPX</string>
   <string name="gpx_import_title_reading_file">Czytanie pliku</string>
   <string name="gpx_import_title_caches_imported">Wynik</string>
+  
+  <!-- map file select -->
+  <string name="map_file_select_title">Wybierz plik z mapą</string>
+  
+  <!--  import -->
+  <string name="import_title">Import…</string>
+  <string name="web_import_title">Import z internetu</string>
+  <string name="web_import_server_problem">Wystąpił problem podczas komunikacji z serwerem. Prosimy o ponowne zarejestrowanie komórki i spróbuj ponownie.</string>
+  <string name="web_import_waiting">Czekam na nowe skrzynki z internetu…</string>
+  <string name="web_downloading">Ściąganie</string>
+  <string name="web_downloaded">Ściągnięte</string>
 
   <!-- event -->
   <string name="event_success">Wydarzenie wpisane do kalendarza</string>
@@ -463,6 +601,7 @@
   <string name="popup_offline">Offline</string>
 
   <!-- waypoint -->
+  <string name="waypoint">Punkt nawigacji</string>
   <string name="waypoint_title">Punkt nawigacji</string>
   <string name="waypoint_custom">Zdefiniowane przez użytkownika</string>
   <string name="waypoint_my_coordinates">Moje współrzędne</string>
@@ -477,6 +616,18 @@
   <string name="waypoint_save">Zapisz</string>
   <string name="waypoint_loading">Ładuje punkt nawigacyjny…</string>
   <string name="waypoint_unknown_coordinates">Współrzędne nieznane</string>
+  <string name="search_history">Historia</string>
+  <string name="search_history_empty">Brak poprzednich celów</string>
+  <string name="search_remove_destination">Cel usunięty</string>
+  <string name="search_clear_history">Usuń historię</string>
+  <string name="search_history_cleared">Historia usunięta</string>
+  
+  <string-array name="waypoint_coordinate_formats">
+    <item>zwykłe</item>
+	<item>DDD.DDDDD°</item>
+	<item>DDD°MM.MMM\'</item>
+	<item>DDD°MM\'SS.SSS\"</item>
+  </string-array>
 
   <!-- visit -->
   <string name="visit_tweet">Wyślij ten wpis też do Twitter</string>
@@ -487,10 +638,13 @@
   <string name="map_view_map">Widok mapy</string>
   <string name="map_trail_show">Pokaż szlak</string>
   <string name="map_trail_hide">Ukryj szlak</string>
+  <string name="map_circles_show">Pokaż okręgi</string>
+  <string name="map_circles_hide">Ukryj okręki</string>
   <string name="map_live_enable">Włącz live</string>
   <string name="map_live_disable">Wyłącz live</string>
   <string name="map_static_title">Statyczna mapa</string>
   <string name="map_static_loading">Ładuje statyczną mapę…</string>
+  <string name="map_token_err">c:geo ma możliwość pobrania tylko częściowych danych, współrzędne GPS mogą być niedokładne.</string>
 
   <!-- search -->
   <string name="search_bar_hint">Szukaj skrzynki</string>
@@ -577,6 +731,146 @@
   <string name="helper_gpsstatus_description">Można wywołać radar bezpośrednio z aplikacji c:geo, oferuje on również wiele informacji związanych z GPS.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Umożliwia korzystanie z zewnętrznego odbiornika sygnału GPS, aby uzyskać lepszy odbiór, bardziej precyzyjnej lokalizacji i oszczędzać baterię komórki.</string>
+  
+  <!--  attributes (permissions -> allowed, not allowed) -->
+  <string name="attribute_dogs_yes">Psy dozwolone</string>
+  <string name="attribute_dogs_no">Psy nie dozwolone</string>
+  <string name="attribute_bicycles_yes">Rowery dozwolone</string>
+  <string name="attribute_bicycles_no">Rowery nie dozwolone</string>
+  <string name="attribute_motorcycles_yes">Motocykle dozwolone</string>
+  <string name="attribute_motorcycles_no">Motocykle nie dozwolone</string>
+  <string name="attribute_quads_yes">Quady dozwolone</string>
+  <string name="attribute_quads_no">Quady nie dozwolone</string>
+  <string name="attribute_jeeps_yes">Samochody terenowe dozwolone</string>
+  <string name="attribute_jeeps_no">Samochody terenowe nie dozwolone</string>
+  <string name="attribute_snowmobiles_yes">Skutery śnieżne dozwolone</string>
+  <string name="attribute_snowmobiles_no">Skutery śnieżne nie dozwolone</string>
+  <string name="attribute_horses_yes">Konie dozwolone</string>
+  <string name="attribute_horses_no">Konie nie dozwolone</string>
+  <string name="attribute_campfires_yes">Ogniska dozwolone</string>
+  <string name="attribute_campfires_no">Ogniska nie dozwolone</string>
+  <string name="attribute_rv_yes">Truck Driver/RV dozwolone</string>
+  <string name="attribute_rv_no">Truck Driver/RV nie dozwolone</string>
+
+  <!--  attributes (conditions -> yes, no) -->
+  <string name="attribute_kids_yes">Polecane dla dzieci</string>
+  <string name="attribute_kids_no">Nie polecane dla dzieci</string>
+  <string name="attribute_onehour_yes">Odnalezienie zajmuje mniej niż godzinę</string>
+  <string name="attribute_onehour_no">Odnalezienie zajmuje więcej niż godzinę</string>
+  <string name="attribute_scenic_yes">Piękne widoki</string>
+  <string name="attribute_scenic_no">Bez pięknych widoków</string>
+  <string name="attribute_hiking_yes">Nęcząca wędrówka</string>
+  <string name="attribute_hiking_no">Nie Męcząca wędrówka</string>
+  <string name="attribute_climbing_yes">Trudna wspinaczka</string>
+  <string name="attribute_climbing_no">Nie trudna wspinaczka</string>
+  <string name="attribute_wading_yes">Może wymagać brodzenia</string>
+  <string name="attribute_wading_no">Nie wymaga brodzenia</string>
+  <string name="attribute_swimming_yes">Może wymagać pływania</string>
+  <string name="attribute_swimming_no">Nie wymaga pływania</string>
+  <string name="attribute_available_yes">Dostępne przez cały czas</string>
+  <string name="attribute_available_no">Nie dostępne przez cały czas</string>
+  <string name="attribute_night_yes">Zalecane w nocy</string>
+  <string name="attribute_night_no">Nie zalecane w nocy</string>
+  <string name="attribute_winter_yes">Dostępne zimą</string>
+  <string name="attribute_winter_no">Nie dostępne zimą</string>
+  <string name="attribute_stealth_yes">Wymagana konspiracja</string>
+  <string name="attribute_stealth_no">Konspiracja nie wymagana</string>
+  <string name="attribute_firstaid_yes">Wymagany serwis skrytki</string>
+  <string name="attribute_firstaid_no">Nie wymagany serwis skrytki</string>
+  <string name="attribute_cow_yes">Uważaj na zwierzęta gospodarskie</string>
+  <string name="attribute_cow_no">Bez zwierzęt gospodarskich</string>
+  <string name="attribute_field_puzzle_yes">Field Puzzle</string>
+  <string name="attribute_field_puzzle_no">Bez Field Puzzle</string>
+  <string name="attribute_nightcache_yes">Nocna skrytka</string>
+  <string name="attribute_nightcache_no">Nie jest nocną skrytką</string>
+  <string name="attribute_parkngrab_yes">Drive-in</string>
+  <string name="attribute_parkngrab_no">Nie jest Drive-in</string>
+  <string name="attribute_abandonedbuilding_yes">Opuszczona budowla</string>
+  <string name="attribute_abandonedbuilding_no">Nie opuszczona budowla</string>
+  <string name="attribute_hike_short_yes">Krótki spacer (mniej niż 1 km)</string>
+  <string name="attribute_hike_short_no">Nie krótki spacer</string>
+  <string name="attribute_hike_med_yes">Średni spacer (1-10 km)</string>
+  <string name="attribute_hike_med_no">Nie średni spacer</string>
+  <string name="attribute_hike_long_yes">Długi spacer (więcej niż 10 km)</string>
+  <string name="attribute_hike_long_no">Nie długi spacer</string>
+  <string name="attribute_seasonal_yes">Dostęp sezonowy</string>
+  <string name="attribute_seasonal_no">Bez dostępu sezonowego</string>
+  <string name="attribute_touristok_yes">Przyjazna turystom</string>
+  <string name="attribute_touristok_no">Nie przyjazna turystom</string>
+  <string name="attribute_frontyard_yes">Prywatny teren</string>
+  <string name="attribute_frontyard_no">Nie prywatny teren</string>
+  <string name="attribute_teamwork_yes">Praca zespołowa</string>
+  <string name="attribute_teamwork_no">Bez pracy zespołowej</string>
+  <string name="attribute_landf_yes">Lost And Found tura</string>
+  <string name="attribute_landf_no">Żadna Lost And Found tura</string>
+  <string name="attribute_partnership_yes">Partnerska skrytka</string>
+  <string name="attribute_partnership_no">Żadna partnerska skrytka</string>
+
+  <!--  attributes (equipment -> required, not required) -->
+  <string name="attribute_fee_yes">Opłata za wejście lub parking</string>
+  <string name="attribute_fee_no">Bez opłaty za wejście lub parking</string>
+  <string name="attribute_rappelling_yes">Sprzęt wspinaczkowy</string>
+  <string name="attribute_rappelling_no">Sprzęt wspinaczkowy nie potrzebny</string>
+  <string name="attribute_boat_yes">Łódź</string>
+  <string name="attribute_boat_no">Łódź nie potrzebna</string>
+  <string name="attribute_scuba_yes">Sprzęt do nurkowania</string>
+  <string name="attribute_scuba_no">Sprzęt do nurkowania nie potrzebny</string>
+  <string name="attribute_flashlight_yes">Latarka</string>
+  <string name="attribute_flashlight_no">Latarka nie potrzebna</string>
+  <string name="attribute_uv_yes">Wymagane światło UV</string>
+  <string name="attribute_uv_no">Światło UV nie potrzebne</string>
+  <string name="attribute_snowshoes_yes">Rakiety śnieżne</string>
+  <string name="attribute_snowshoes_no">Rakiety śnieżne nie potrzebne</string>
+  <string name="attribute_skiis_yes">Narty biegowe</string>
+  <string name="attribute_skiis_no">Narty biegowe nie potrzebne</string>
+  <string name="attribute_s_tool_yes">Wymagane specjalne narzędzia</string>
+  <string name="attribute_s_tool_no">Specjalne narzędzia nie potrzebne</string>
+  <string name="attribute_wirelessbeacon_yes">Wireless Beacon</string>
+  <string name="attribute_wirelessbeacon_no">Bez Wireless Beacon</string>
+  <string name="attribute_treeclimbing_yes">Wspinaczka na drzewo</string>
+  <string name="attribute_treeclimbing_no">Bez wspinaczki na drzewo</string>
+
+  <!--  attributes (hazards -> present, not present) -->
+  <string name="attribute_poisonoak_yes">Trujące rośliny</string>
+  <string name="attribute_poisonoak_no">Nie trujące rośliny</string>
+  <string name="attribute_dangerousanimals_yes">Niebezpieczne zwierzęta</string>
+  <string name="attribute_dangerousanimals_no">Bez niebezpiecznych zwierzęt</string>
+  <string name="attribute_ticks_yes">Kleszcze</string>
+  <string name="attribute_ticks_no">Bez kleszczy</string>
+  <string name="attribute_mine_yes">Opuszczone kopalnie</string>
+  <string name="attribute_mine_no">Nie ma opuszczonych kopalń</string>
+  <string name="attribute_cliff_yes">Klif / spadające kamienie</string>
+  <string name="attribute_cliff_no">Nie ma Klif / bez spadających kamieni</string>
+  <string name="attribute_hunting_yes">Polowania</string>
+  <string name="attribute_hunting_no">Bez polowania</string>
+  <string name="attribute_danger_yes">Niebezpieczny obszar</string>
+  <string name="attribute_danger_no">Nie ma niebezpiecznego obszaru</string>
+  <string name="attribute_thorn_yes">Kolce</string>
+  <string name="attribute_thorn_no">Bez kolców</string>
+
+  <!--  attributes (facilities -> yes, no) -->
+  <string name="attribute_wheelchair_yes">Dostępne dla wózków inwalidzkich</string>
+  <string name="attribute_wheelchair_no">Niedostępne dla wózków inwalidzkich</string>
+  <string name="attribute_parking_yes">Dostępny parking</string>
+  <string name="attribute_parking_no">Niedostępny parking</string>
+  <string name="attribute_public_yes">Transport publiczny</string>
+  <string name="attribute_public_no">Bez transportu publicznego</string>
+  <string name="attribute_water_yes">Woda pitna w pobliżu</string>
+  <string name="attribute_water_no">Bez wody pitnej w pobliżu</string>
+  <string name="attribute_restrooms_yes">Toalety publiczne w pobliżu</string>
+  <string name="attribute_restrooms_no">Bez toalet publicznych w pobliżu</string>
+  <string name="attribute_phone_yes">Telefon w pobliżu</string>
+  <string name="attribute_phone_no">Nie ma telefonu w pobliżu</string>
+  <string name="attribute_picnic_yes">Stoły piknikowe w pobliżu</string>
+  <string name="attribute_picnic_no">Bez stołów piknikowych w pobliżu</string>
+  <string name="attribute_camping_yes">Możliwość biwakowania</string>
+  <string name="attribute_camping_no">Bez możliwości biwakowania</string>
+  <string name="attribute_stroller_yes">Dostępne dla wózków z dziećmi</string>
+  <string name="attribute_stroller_no">Niedostępne dla wózków z dziećmi</string>
+  <string name="attribute_fuel_yes">Stacja benzynowa w pobliżu</string>
+  <string name="attribute_fuel_no">Bez stacji benzynowej w pobliżu</string>
+  <string name="attribute_food_yes">Gastronomia w pobliżu</string>
+  <string name="attribute_food_no">Bez gastronomii w pobliżu</string>
 
   <!-- next things -->
   <string name="legal_note">Aby móc korzystać z usług serwisu geocaching.com <a href="http://www.geocaching.com/about/termsofuse.aspx">warunki korzystania Groundspeak</a> muszą być potwierdzone.</string>
