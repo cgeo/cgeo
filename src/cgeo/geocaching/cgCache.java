@@ -17,6 +17,9 @@ import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 
+/**
+ * Internal c:geo representation of a "cache"
+ */
 public class cgCache {
 
 	public Long updated = null;
