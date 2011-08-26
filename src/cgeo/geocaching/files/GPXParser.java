@@ -505,7 +505,9 @@ public abstract class GPXParser extends FileParser {
 			Log.e(cgSettings.tag, "Cannot parse .gpx file " + file.getAbsolutePath() + " as GPX " + version + ": could not parse XML - " + e.toString());
 		}
 		try {
-			fis.close();
+			if (fis != null) {
+				fis.close();
+			}
 		} catch (IOException e) {
 			Log.e(cgSettings.tag, "Error after parsing .gpx file " + file.getAbsolutePath() + " as GPX " + version + ": could not close file!");
 		}

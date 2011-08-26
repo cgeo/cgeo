@@ -1260,17 +1260,17 @@ public class cgeocaches extends AbstractListActivity {
 		// https://code.google.com/p/android/issues/detail?id=7139
 		lastMenuInfo = info;
 
-		// create a searchId for a single cache (as if in details view)
-		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("geocode", cache.geocode);
-		Long singleSearchId = base.searchByGeocode(params, 0, false);
-
-		if (NavigationAppFactory.onMenuItemSelected(item, geo, this,
-				res, cache, singleSearchId, null, null)) {
-			return true;
-		}
-		
 		if (cache != null) {
+			// create a searchId for a single cache (as if in details view)
+			HashMap<String, String> params = new HashMap<String, String>();
+			params.put("geocode", cache.geocode);
+			Long singleSearchId = base.searchByGeocode(params, 0, false);
+	
+			if (NavigationAppFactory.onMenuItemSelected(item, geo, this,
+					res, cache, singleSearchId, null, null)) {
+				return true;
+			}
+		
 			int logType = id - MENU_LOG_VISIT_OFFLINE;
 			cache.logOffline(this, logType);
 		}
