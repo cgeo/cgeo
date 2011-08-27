@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,6 +33,9 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 
 public abstract class GPXParser extends FileParser {
+
+	private static final SimpleDateFormat formatSimple = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // 2010-04-20T07:00:00Z
+	private static final SimpleDateFormat formatTimezone = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'.000'Z"); // 2010-04-20T01:01:03.000-04:00
 
 	private static final Pattern patternGeocode = Pattern.compile("([A-Z]{2}[0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
 	private static final String[] nsGCList = new String[] {
@@ -63,6 +69,15 @@ public abstract class GPXParser extends FileParser {
 		search = searchIn;
 		namespace = namespaceIn;
 		version = versionIn;
+	}
+
+	private static Date parseDate(String input) throws ParseException {
+		input = input.trim();
+		if (input.length() >= 3 && input.charAt(input.length() - 3) == ':') {
+			String removeColon = input.substring(0, input.length() - 3) + input.substring(input.length() - 2);
+			return formatTimezone.parse(removeColon);
+		}
+		return formatSimple.parse(input);
 	}
 
 	public long parse(File file, Handler handlerIn) {
@@ -137,7 +152,7 @@ public abstract class GPXParser extends FileParser {
 			@Override
 			public void end(String body) {
 				try {
-					cache.hidden = cgBase.dateGPXIn.parse(body.trim());
+					cache.hidden = parseDate(body);
 				} catch (Exception e) {
 					Log.w(cgSettings.tag, "Failed to parse cache date: " + e.toString());
 				}
@@ -478,7 +493,7 @@ public abstract class GPXParser extends FileParser {
 				@Override
 				public void end(String body) {
 					try {
-						log.date = cgBase.dateGPXIn.parse(body.trim()).getTime();
+						log.date = parseDate(body).getTime();
 					} catch (Exception e) {
 						Log.w(cgSettings.tag, "Failed to parse log date: " + e.toString());
 					}

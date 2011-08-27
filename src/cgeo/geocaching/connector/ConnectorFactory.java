@@ -4,7 +4,7 @@ import cgeo.geocaching.cgCache;
 
 public final class ConnectorFactory {
 	private static final GCConnector GC_CONNECTOR = new GCConnector();
-	private static final IConnector[] connectors = new IConnector[] {GC_CONNECTOR, new OCConnector()};
+	private static final IConnector[] connectors = new IConnector[] {GC_CONNECTOR, new OCConnector(), new OXConnector()};
 
 	public static IConnector[] getConnectors() {
 		return connectors;
