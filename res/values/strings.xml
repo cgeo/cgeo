@@ -935,7 +935,7 @@
     · fix: nearby list preformance update\n
     \n\n
     <b>22.08.2011</b>\n
-    · fix: due to GC.com changes c:geo hangs in displaing cache detail\n
+    · fix: due to GC.com changes c:geo hangs in displaying cache detail\n
     \n\n
     <b>20.08.2011</b>\n
     · fix: Additional adaption to GC.com changes\n
@@ -949,6 +949,6 @@
 	· new: Send to c:geo from web\n
     · new: Export field notes\n
     · new: Clear history\n
-	· fix: Alot of bugs\n
+	· fix: A lot of bugs\n
 	\n</string>
 </resources>
