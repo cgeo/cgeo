@@ -665,11 +665,12 @@ public class cgeodetail extends AbstractActivity {
 
 			itemName.setText(res.getString(R.string.cache_type));
 
-			String size = null;
+			String size = "";
 			if (cache.size != null && cache.size.length() > 0) {
-				size = " (" + cache.size + ")";
-			} else {
-				size = "";
+				// don't show "not chosen" for events, that should be the normal case
+				if (!(cache.isEventCache() && cache.size.equals("not chosen"))) {
+					size = " (" + cache.size + ")";
+				}
 			}
 
 			if (cgBase.cacheTypesInv.containsKey(cache.type)) { // cache icon
