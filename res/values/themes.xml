@@ -40,6 +40,7 @@
 		<item name="favourite_o">@drawable/favourite_background_orange_dark</item>
 		<item name="favourite_g">@drawable/favourite_background_green_dark</item>
 		<item name="close">@drawable/map_close_dark</item>
+        <item name="log_img_icon">@drawable/log_img_dark</item>
 
 		<!-- own values: other -->
 		<item name="compass">0</item>
@@ -71,6 +72,7 @@
 		<item name="favourite_o">@drawable/favourite_background_orange_light</item>
 		<item name="favourite_g">@drawable/favourite_background_green_light</item>
 		<item name="close">@drawable/map_close_light</item>
+        <item name="log_img_icon">@drawable/log_img_light</item>
 
 		<!-- own values: other -->
 		<item name="compass">1</item>
@@ -102,6 +104,7 @@
 		<item name="favourite_o">@drawable/favourite_background_orange_dark</item>
 		<item name="favourite_g">@drawable/favourite_background_green_dark</item>
 		<item name="close">@drawable/map_close_dark</item>
+        <item name="log_img_icon">@drawable/log_img_dark</item>
 
 		<!-- own values: other -->
 		<item name="compass">0</item>
