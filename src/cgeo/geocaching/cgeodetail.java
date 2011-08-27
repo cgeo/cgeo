@@ -212,9 +212,7 @@ public class cgeodetail extends AbstractActivity {
 	private Handler loadDescriptionHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			if (longDesc == null && cache != null && cache.description != null) {
-				longDesc = Html.fromHtml(cache.description.trim(), new cgHtmlImg(cgeodetail.this, geocode, true, cache.reason, false), null);
-			}
+			parseLongDescription();
 
 			if (longDesc != null) {
 				((LinearLayout) findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
@@ -955,9 +953,7 @@ public class cgeodetail extends AbstractActivity {
 
 			// cache long desc
 			if (longDescDisplayed) {
-				if (longDesc == null && cache != null && cache.description != null) {
-					longDesc = Html.fromHtml(cache.description.trim(), new cgHtmlImg(this, geocode, true, cache.reason, false), null);
-				}
+				parseLongDescription();
 
 				if (longDesc != null && longDesc.length() > 0) {
 					((LinearLayout) findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
@@ -1104,6 +1100,12 @@ public class cgeodetail extends AbstractActivity {
 		displayLogs();
 
 		if (geo != null) geoUpdate.updateLoc(geo);
+	}
+
+	private void parseLongDescription() {
+		if (longDesc == null && cache != null && cache.description != null) {
+			longDesc = Html.fromHtml(cache.description.trim(), new cgHtmlImg(this, geocode, true, cache.reason, false), new UnknownTagsHandler());
+		}
 	}
 
 	private RelativeLayout addStarRating(final LinearLayout detailsList, final String name, final float value) {
@@ -1376,8 +1378,7 @@ public class cgeodetail extends AbstractActivity {
 			if (cache == null || cache.description == null || handler == null) {
 				return;
 			}
-
-			longDesc = Html.fromHtml(cache.description.trim(), new cgHtmlImg(cgeodetail.this, geocode, true, cache.reason, false), null);
+			parseLongDescription();
 			handler.sendMessage(new Message());
 		}
 	}
