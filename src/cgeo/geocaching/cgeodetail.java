@@ -2081,4 +2081,10 @@ public class cgeodetail extends AbstractActivity {
 
         return descriptions;
     }
+
+	public static void startActivity(final Context context, final String geocode) {
+		final Intent detailIntent = new Intent(context, cgeodetail.class);
+		detailIntent.putExtra("geocode", geocode.toUpperCase());
+		context.startActivity(detailIntent);
+	}
 }

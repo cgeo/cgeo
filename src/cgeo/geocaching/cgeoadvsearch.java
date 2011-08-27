@@ -438,9 +438,7 @@ public class cgeoadvsearch extends AbstractActivity {
 			return;
 		}
 
-		final Intent cachesIntent = new Intent(this, cgeodetail.class);
-		cachesIntent.putExtra("geocode", geocodeText.toUpperCase());
-		startActivity(cachesIntent);
+		cgeodetail.startActivity(this, geocodeText);
 	}
 
 	private class findTrackableAction implements TextView.OnEditorActionListener {
