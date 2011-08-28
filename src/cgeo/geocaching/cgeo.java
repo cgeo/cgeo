@@ -38,8 +38,8 @@ public class cgeo extends AbstractActivity {
 	private static final int MENU_SETTINGS = 2;
 	private static final int MENU_HISTORY = 3;
 	private static final int MENU_SCAN = 4;
-
 	private static final int SCAN_REQUEST_CODE = 1;
+	private static final int MENU_OPEN_LIST = 100;
 
 	private Context context = null;
 	private Integer version = null;
@@ -307,6 +307,20 @@ public class cgeo extends AbstractActivity {
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
+
+		// context menu for offline button
+		if (v.getId() == R.id.search_offline) {
+			ArrayList<cgList> cacheLists = app.getLists();
+			int listCount = cacheLists.size();
+			menu.setHeaderTitle(res.getString(R.string.list_title));
+			for (int i = 0; i < listCount; i++) {
+				cgList list = cacheLists.get(i);
+				menu.add(Menu.NONE, MENU_OPEN_LIST + list.id, Menu.NONE, list.title);
+			}
+			return;
+		}
+
+		// standard context menu
 		menu.setHeaderTitle(res.getString(R.string.menu_filter));
 
 		//first add the most used types
@@ -355,6 +369,11 @@ public class cgeo extends AbstractActivity {
 			settings.setCacheType(null);
 			setFilterTitle();
 
+			return true;
+		} else if (id > MENU_OPEN_LIST) {
+			int listId = id - MENU_OPEN_LIST;
+			settings.saveLastList(listId);
+			cgeocaches.startActivityOffline(context);
 			return true;
 		} else if (id > 0) {
 			String itemTitle = item.getTitle().toString();
@@ -435,6 +454,7 @@ public class cgeo extends AbstractActivity {
 		final RelativeLayout findByOffline = (RelativeLayout) findViewById(R.id.search_offline);
 		findByOffline.setClickable(true);
 		findByOffline.setOnClickListener(new cgeoFindByOfflineListener());
+		registerForContextMenu(findByOffline);
 
 		(new countBubbleUpdate()).start();
 
