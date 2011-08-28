@@ -16,6 +16,7 @@ import java.util.Locale;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -61,6 +62,7 @@ import cgeo.geocaching.sorting.VoteComparator;
 
 public class cgeocaches extends AbstractListActivity {
 
+	private static final String EXTRAS_LIST_TYPE = "type";
 	private static final int MENU_COMPASS = 1;
 	private static final int MENU_REFRESH_STORED = 2;
 	private static final int MENU_CACHE_DETAILS = 4;
@@ -123,8 +125,7 @@ public class cgeocaches extends AbstractListActivity {
 
 	private static final int CONTEXT_MENU_MOVE_TO_LIST = 1000;
 	private static final int MENU_MOVE_SELECTED_OR_ALL_TO_LIST = 1200;
-	
-	
+
 	private String action = null;
 	private String type = null;
 	private Double latitude = null;
@@ -342,7 +343,7 @@ public class cgeocaches extends AbstractListActivity {
 
 					int secondsElapsed = (int)((System.currentTimeMillis() - detailProgressTime) / 1000);
 					int minutesRemaining = (int) ((detailTotal - detailProgress) * secondsElapsed / ((detailProgress > 0) ? detailProgress : 1) / 60);
-					
+
 					waitDialog.setProgress(detailProgress);
 					if (minutesRemaining < 1) {
 						waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
@@ -399,8 +400,8 @@ public class cgeocaches extends AbstractListActivity {
 			} else if (msg.what == 2) { //Cache downloaded
 				waitDialog.setMessage(res.getString(R.string.web_downloaded)+" "+(String)msg.obj+".");
 				//Once a cache is downloaded I used switchList to refresh it.
-				switchList(listId, -1);
-                        } else if (msg.what == -2) {
+				switchListById(listId);
+            } else if (msg.what == -2) {
 				if (waitDialog != null) {
 					waitDialog.dismiss();
 					waitDialog.setOnCancelListener(null);
@@ -445,7 +446,7 @@ public class cgeocaches extends AbstractListActivity {
 					adapter.setSelectMode(false, true);
 				}
 
-				switchList(listId, -1);
+				switchListById(listId);
 
 				cacheList.clear();
 
@@ -545,7 +546,7 @@ public class cgeocaches extends AbstractListActivity {
 		// get parameters
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
-			type = extras.getString("type");
+			type = extras.getString(EXTRAS_LIST_TYPE);
 			latitude = extras.getDouble("latitude");
 			longitude = extras.getDouble("longitude");
 			cachetype = extras.getString("cachetype");
@@ -1032,7 +1033,7 @@ public class cgeocaches extends AbstractListActivity {
 		if (adapter == null) {
 			return;
 		}
-		
+
 		if (contextMenuMoveToList) {
 			createFakeContextMenuMoveToList(menu);
 			return;
@@ -1225,7 +1226,7 @@ public class cgeocaches extends AbstractListActivity {
 			cgBase.dropCache(app, this, cache, new Handler() {
 				@Override
 				public void handleMessage(Message msg) {
-					switchList(listId, -1); // refresh
+					switchListById(listId); // refresh
 				}
 			});
 			return true;
@@ -1265,12 +1266,12 @@ public class cgeocaches extends AbstractListActivity {
 			HashMap<String, String> params = new HashMap<String, String>();
 			params.put("geocode", cache.geocode);
 			Long singleSearchId = base.searchByGeocode(params, 0, false);
-	
+
 			if (NavigationAppFactory.onMenuItemSelected(item, geo, this,
 					res, cache, singleSearchId, null, null)) {
 				return true;
 			}
-		
+
 			int logType = id - MENU_LOG_VISIT_OFFLINE;
 			cache.logOffline(this, logType);
 		}
@@ -2382,7 +2383,7 @@ public class cgeocaches extends AbstractListActivity {
 		builder.setTitle(res.getString(R.string.list_title));
 		builder.setItems(listsTitle.toArray(items), new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialogInterface, int item) {
-				switchListByOrder(item);
+				switchListById(lists.get(item).id);
 
 				return;
 			}
@@ -2390,30 +2391,11 @@ public class cgeocaches extends AbstractListActivity {
 		builder.create().show();
 	}
 
-	public void switchListByOrder(int order) {
-		switchList(-1, order);
-	}
-
 	public void switchListById(int id) {
-		switchList(id, -1);
-	}
-	
-	private class MoveHandler extends Handler {
-		@Override
-		public void handleMessage(Message msg) {
-			Thread threadPure = new geocachesLoadByOffline(loadCachesHandler, latitude, longitude, msg.what);
-			threadPure.start();
-		}
-	}
-
-	public void switchList(int id, int order) {
 		cgList list = null;
 
 		if (id >= 0) {
 			list = app.getList(id);
-		} else if (order >= 0) {
-			lists = app.getLists();
-			list = lists.get(order);
 		} else {
 			return;
 		}
@@ -2431,6 +2413,14 @@ public class cgeocaches extends AbstractListActivity {
 		setLoadingCaches();
 
 		(new moveCachesToList(listId, new MoveHandler())).start();
+	}
+
+	private class MoveHandler extends Handler {
+		@Override
+		public void handleMessage(Message msg) {
+			Thread threadPure = new geocachesLoadByOffline(loadCachesHandler, latitude, longitude, msg.what);
+			threadPure.start();
+		}
 	}
 
 	private class moveCachesToList extends Thread {
@@ -2541,5 +2531,11 @@ public class cgeocaches extends AbstractListActivity {
 		} else {
 			ActivityMixin.goManual(this, "c:geo-nearby");
 		}
+	}
+
+	public static void startActivityOffline(final Context context) {
+		final Intent cachesIntent = new Intent(context, cgeocaches.class);
+		cachesIntent.putExtra(EXTRAS_LIST_TYPE, "offline");
+		context.startActivity(cachesIntent);
 	}
 }

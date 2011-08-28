@@ -41,8 +41,8 @@ public class cgOverlayScale implements OverlayBase {
 	@Override
 	public void drawOverlayBitmap(Canvas canvas, Point drawPosition,
 			MapProjectionImpl projection, byte drawZoomLevel) {
-		// TODO Auto-generated method stub
-		
+		// Scale overlay is only necessary for google maps, so the mapsforge
+		// related draw method needs not to be filled.
 	}
 
 	@Override
@@ -144,6 +144,6 @@ public class cgOverlayScale implements OverlayBase {
 
 	@Override
 	public OverlayImpl getOverlayImpl() {
-		return getOverlayImpl();
+		return ovlImpl;
 	}
 }

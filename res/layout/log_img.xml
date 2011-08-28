@@ -10,7 +10,7 @@
     	android:layout_height="wrap_content"
     	android:layout_alignParentTop="true"
 		android:layout_gravity="left|top"
-        android:drawableLeft="@drawable/log_img"
+        android:drawableLeft="?log_img_icon"
         android:drawablePadding="3dip"
     	android:textSize="14dip"
 		android:textColor="?text_color"/>
