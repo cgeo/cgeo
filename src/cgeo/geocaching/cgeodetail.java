@@ -216,9 +216,7 @@ public class cgeodetail extends AbstractActivity {
 	private Handler loadDescriptionHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			if (longDesc == null && cache != null && cache.description != null) {
-				longDesc = Html.fromHtml(cache.description.trim(), new cgHtmlImg(cgeodetail.this, geocode, true, cache.reason, false), null);
-			}
+			parseLongDescription();
 
 			if (longDesc != null) {
 				((LinearLayout) findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
@@ -671,11 +669,12 @@ public class cgeodetail extends AbstractActivity {
 
 			itemName.setText(res.getString(R.string.cache_type));
 
-			String size = null;
+			String size = "";
 			if (cache.size != null && cache.size.length() > 0) {
-				size = " (" + cache.size + ")";
-			} else {
-				size = "";
+				// don't show "not chosen" for events, that should be the normal case
+				if (!(cache.isEventCache() && cache.size.equals("not chosen"))) {
+					size = " (" + cache.size + ")";
+				}
 			}
 
 			if (cgBase.cacheTypesInv.containsKey(cache.type)) { // cache icon
@@ -959,9 +958,7 @@ public class cgeodetail extends AbstractActivity {
 
 			// cache long desc
 			if (longDescDisplayed) {
-				if (longDesc == null && cache != null && cache.description != null) {
-					longDesc = Html.fromHtml(cache.description.trim(), new cgHtmlImg(this, geocode, true, cache.reason, false), null);
-				}
+				parseLongDescription();
 
 				if (longDesc != null && longDesc.length() > 0) {
 					((LinearLayout) findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
@@ -1108,6 +1105,12 @@ public class cgeodetail extends AbstractActivity {
 		displayLogs();
 
 		if (geo != null) geoUpdate.updateLoc(geo);
+	}
+
+	private void parseLongDescription() {
+		if (longDesc == null && cache != null && cache.description != null) {
+			longDesc = Html.fromHtml(cache.description.trim(), new cgHtmlImg(this, geocode, true, cache.reason, false), new UnknownTagsHandler());
+		}
 	}
 
 	private RelativeLayout addStarRating(final LinearLayout detailsList, final String name, final float value) {
@@ -1380,8 +1383,7 @@ public class cgeodetail extends AbstractActivity {
 			if (cache == null || cache.description == null || handler == null) {
 				return;
 			}
-
-			longDesc = Html.fromHtml(cache.description.trim(), new cgHtmlImg(cgeodetail.this, geocode, true, cache.reason, false), null);
+			parseLongDescription();
 			handler.sendMessage(new Message());
 		}
 	}
@@ -2083,4 +2085,10 @@ public class cgeodetail extends AbstractActivity {
 
         return descriptions;
     }
+
+	public static void startActivity(final Context context, final String geocode) {
+		final Intent detailIntent = new Intent(context, cgeodetail.class);
+		detailIntent.putExtra("geocode", geocode.toUpperCase());
+		context.startActivity(detailIntent);
+	}
 }

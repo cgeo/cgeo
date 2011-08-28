@@ -128,20 +128,19 @@ public class cgBase {
                 "MMM/dd/yyyy",
 	            "dd MMM yy"
 	        };
-	    
+
 	    HashMap<String, SimpleDateFormat> map = new HashMap<String, SimpleDateFormat>();
-	    
+
 	    for (String format : formats)
 	    {
 	        map.put(format, new SimpleDateFormat(format, Locale.ENGLISH));
 	    }
-	    
+
 	    gcCustomDateFormats = Collections.unmodifiableMap(map);
 	}
 	public final static SimpleDateFormat dateTbIn1 = new SimpleDateFormat("EEEEE, dd MMMMM yyyy", Locale.ENGLISH); // Saturday, 28 March 2009
 	public final static SimpleDateFormat dateTbIn2 = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
 	public final static SimpleDateFormat dateSqlIn = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 2010-07-25 14:44:01
-	public final static SimpleDateFormat dateGPXIn = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // 2010-04-20T07:00:00Z
 	private Resources res = null;
 	private HashMap<String, String> cookies = new HashMap<String, String>();
 	private static final String passMatch = "[/\\?&]*[Pp]ass(word)?=[^&^#^$]+";
@@ -1318,7 +1317,7 @@ public class cgBase {
 		{
 			final Matcher matcherFound            = patternFound.matcher(page);
 			final Matcher matcherFoundAlternative = patternFoundAlternative.matcher(page);
-			
+
 			if (matcherFound.find() || matcherFoundAlternative.find()) {
 			    cache.found = true;
 			}
@@ -1575,7 +1574,7 @@ public class cgBase {
 		try
 		{
 			final Matcher matcherLogCounts = patternCountLogs.matcher(page);
-			
+
 			if (matcherLogCounts.find())
 			{
 				final Matcher matcherLog = patternCountLog.matcher(matcherLogCounts.group(1));
@@ -1584,7 +1583,7 @@ public class cgBase {
 				{
 					String typeStr = matcherLog.group(1);
 					String countStr = matcherLog.group(2);
-					
+
 					if (typeStr != null
 					        && typeStr.length() > 0
 					        && logTypes.containsKey(typeStr.toLowerCase())
@@ -1907,9 +1906,9 @@ public class cgBase {
 		{
 		    throw new ParseException("Input is null", 0);
 		}
-		
+
 		input = input.trim();
-		
+
 		for (SimpleDateFormat format : gcCustomDateFormats.values())
 		{
 		    try
@@ -1918,7 +1917,7 @@ public class cgBase {
 		    }
 		    catch (ParseException e) {}
 		}
-		
+
 		throw new ParseException("No matching pattern", 0);
 	}
 
