@@ -272,9 +272,15 @@ public class cgCache {
 		return true;
 	}
 
-	public boolean logOffline(final IAbstractActivity fromActivity, final int logType) {
-		logOffline(fromActivity, "", Calendar.getInstance(), logType);
-		return true;
+	public boolean logOffline(final IAbstractActivity fromActivity, final int logType, final cgSettings settings, final cgBase base) {
+        String log = "";
+        if (settings.getSignature() != null
+                && settings.signatureAutoinsert
+                && settings.getSignature().length() > 0) {
+            log = LogTemplateProvider.applyTemplates(settings.getSignature(), base);
+        }
+        logOffline(fromActivity, log, Calendar.getInstance(), logType);
+        return true;
 	}
 
 	void logOffline(final IAbstractActivity fromActivity, final String log, Calendar date, final int logType) {
