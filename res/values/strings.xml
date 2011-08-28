@@ -287,6 +287,7 @@
   <string name="caches_sort_vote">vote (own rating)</string>
   <string name="caches_sort_inventory">count of inventory</string>
   <string name="caches_sort_date">date</string>
+  <string name="caches_sort_finds">finds</string>
   <string name="caches_select">Select from list</string>
   <string name="caches_select_mode">Select mode</string>
   <string name="caches_select_mode_exit">Exit select mode</string>
