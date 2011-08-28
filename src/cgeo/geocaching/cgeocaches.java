@@ -1273,7 +1273,7 @@ public class cgeocaches extends AbstractListActivity {
 			}
 
 			int logType = id - MENU_LOG_VISIT_OFFLINE;
-			cache.logOffline(this, logType);
+			cache.logOffline(this, logType, settings, base);
 		}
 		return true;
 	}
