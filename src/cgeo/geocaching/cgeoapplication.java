@@ -746,6 +746,10 @@ public class cgeoapplication extends Application {
 		return storage.loadInventory(geocode);
 	}
 
+	public HashMap<Integer,Integer> loadLogCounts(String geocode) {
+		return storage.loadLogCounts(geocode);
+	}
+
 	public ArrayList<cgImage> loadSpoilers(String geocode) {
 		return storage.loadSpoilers(geocode);
 	}
