@@ -125,7 +125,8 @@ public class cgBase {
 	            "yyyy/MM/dd",
 	            "dd/MMM/yyyy",
                 "MMM/dd/yyyy",
-	            "dd MMM yy"
+	            "dd MMM yy",
+	            "dd/MM/yyyy"
 	        };
 
 	    HashMap<String, SimpleDateFormat> map = new HashMap<String, SimpleDateFormat>();
@@ -1893,7 +1894,7 @@ public class cgBase {
 		// And BTW: You cannot even see that effect in the debugger, but must use a separate memory profiler!
 	}
 
-	private static Date parseGcCustomDate(String input)
+	public Date parseGcCustomDate(String input)
 	throws ParseException
 	{
 		if (input == null)
@@ -1902,6 +1903,17 @@ public class cgBase {
 		}
 
 		input = input.trim();
+		
+		if (null != settings
+		        //&& null != settings.getGcCustomDate()
+		        && gcCustomDateFormats.containsKey(settings.getGcCustomDate()))
+		{
+		    try
+            {
+		        return gcCustomDateFormats.get(settings.getGcCustomDate()).parse(input);
+            }
+            catch (ParseException e) {}
+		}
 
 		for (SimpleDateFormat format : gcCustomDateFormats.values())
 		{
@@ -1913,6 +1925,22 @@ public class cgBase {
 		}
 
 		throw new ParseException("No matching pattern", 0);
+	}
+	
+	public void detectGcCustomDate()
+	{
+	    final String host = "www.geocaching.com";
+        final String path = "/account/ManagePreferences.aspx";
+        
+        final String result = request(false, host, path, "GET", null, false, false, false).getData();
+        
+        final Pattern pattern = Pattern.compile("<option selected=\"selected\" value=\"([ /Mdy-]+)\">", Pattern.CASE_INSENSITIVE);
+        final Matcher matcher = pattern.matcher(result);
+        
+        if (matcher.find())
+        {
+            settings.setGcCustomDate(matcher.group(1));
+        }
 	}
 
 	public cgRating getRating(String guid, String geocode) {

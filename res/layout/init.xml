@@ -52,6 +52,9 @@
 					android:password="true" />
 			<Button style="@style/button"
 					android:id="@+id/log_me_in"
+                    android:lines="2"
+                    android:singleLine="false"
+                    android:scrollHorizontally="false"
 					android:text="@string/init_login" />
 <!-- ** -->
 			<RelativeLayout style="@style/separator_horizontal_layout" >
