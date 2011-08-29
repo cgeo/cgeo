@@ -17,6 +17,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -175,38 +176,43 @@ public class cgeodetail extends AbstractActivity {
 		@Override
 		public void handleMessage(Message message) {
 			BitmapDrawable image = (BitmapDrawable) message.obj;
+			if (image == null) {
+				return;
+			}
 			ScrollView scroll = (ScrollView) findViewById(R.id.details_list_box);
 			final ImageView view = (ImageView) findViewById(R.id.map_preview);
-
-			if (image != null && view != null) {
-				view.setImageDrawable(image);
-
-				if (scroll.getScrollY() == 0) {
-					scroll.scrollTo(0, (int) (80 * pixelRatio));
-				}
-				view.setVisibility(View.VISIBLE);
-				view.setOnClickListener(new View.OnClickListener() {
-
-					@Override
-					public void onClick(View v) {
-						try {
-							registerForContextMenu(view);
-							openContextMenu(view);
-						} catch (Exception e) {
-							// nothing
-						}
-					}
-				});
+			if (view == null) {
+				return;
 			}
+			Bitmap bitmap = image.getBitmap();
+			if (bitmap == null || bitmap.getWidth() <= 10) {
+				return;
+			}
+			view.setImageDrawable(image);
+
+			if (scroll.getScrollY() == 0) {
+				scroll.scrollTo(0, (int) (80 * pixelRatio));
+			}
+			view.setVisibility(View.VISIBLE);
+			view.setOnClickListener(new View.OnClickListener() {
+
+				@Override
+				public void onClick(View v) {
+					try {
+						registerForContextMenu(view);
+						openContextMenu(view);
+					} catch (Exception e) {
+						// nothing
+					}
+				}
+			});
 		}
 	};
 
 	private Handler loadDescriptionHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			if (longDesc == null && cache != null && cache.description != null) {
-				longDesc = Html.fromHtml(cache.description.trim(), new cgHtmlImg(cgeodetail.this, geocode, true, cache.reason, false), null);
-			}
+			parseLongDescription();
 
 			if (longDesc != null) {
 				((LinearLayout) findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
@@ -542,7 +548,7 @@ public class cgeodetail extends AbstractActivity {
 		}
 
 		int logType = menuItem - MENU_LOG_VISIT_OFFLINE;
-		cache.logOffline(this, logType);
+		cache.logOffline(this, logType, settings, base);
 		return true;
 	}
 
@@ -659,11 +665,12 @@ public class cgeodetail extends AbstractActivity {
 
 			itemName.setText(res.getString(R.string.cache_type));
 
-			String size = null;
+			String size = "";
 			if (cache.size != null && cache.size.length() > 0) {
-				size = " (" + cache.size + ")";
-			} else {
-				size = "";
+				// don't show "not chosen" for events, that should be the normal case
+				if (!(cache.isEventCache() && cache.size.equals("not chosen"))) {
+					size = " (" + cache.size + ")";
+				}
 			}
 
 			if (cgBase.cacheTypesInv.containsKey(cache.type)) { // cache icon
@@ -947,9 +954,7 @@ public class cgeodetail extends AbstractActivity {
 
 			// cache long desc
 			if (longDescDisplayed) {
-				if (longDesc == null && cache != null && cache.description != null) {
-					longDesc = Html.fromHtml(cache.description.trim(), new cgHtmlImg(this, geocode, true, cache.reason, false), null);
-				}
+				parseLongDescription();
 
 				if (longDesc != null && longDesc.length() > 0) {
 					((LinearLayout) findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
@@ -1096,6 +1101,12 @@ public class cgeodetail extends AbstractActivity {
 		displayLogs();
 
 		if (geo != null) geoUpdate.updateLoc(geo);
+	}
+
+	private void parseLongDescription() {
+		if (longDesc == null && cache != null && cache.description != null) {
+			longDesc = Html.fromHtml(cache.description.trim(), new cgHtmlImg(this, geocode, true, cache.reason, false), new UnknownTagsHandler());
+		}
 	}
 
 	private RelativeLayout addStarRating(final LinearLayout detailsList, final String name, final float value) {
@@ -1368,8 +1379,7 @@ public class cgeodetail extends AbstractActivity {
 			if (cache == null || cache.description == null || handler == null) {
 				return;
 			}
-
-			longDesc = Html.fromHtml(cache.description.trim(), new cgHtmlImg(cgeodetail.this, geocode, true, cache.reason, false), null);
+			parseLongDescription();
 			handler.sendMessage(new Message());
 		}
 	}
@@ -2071,4 +2081,10 @@ public class cgeodetail extends AbstractActivity {
 
         return descriptions;
     }
+
+	public static void startActivity(final Context context, final String geocode) {
+		final Intent detailIntent = new Intent(context, cgeodetail.class);
+		detailIntent.putExtra("geocode", geocode.toUpperCase());
+		context.startActivity(detailIntent);
+	}
 }

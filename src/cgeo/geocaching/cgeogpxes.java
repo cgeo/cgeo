@@ -3,21 +3,24 @@ package cgeo.geocaching;
 import java.io.File;
 import java.util.ArrayList;
 
-import cgeo.geocaching.files.FileList;
-import cgeo.geocaching.files.GPXParser;
-import cgeo.geocaching.files.LocParser;
-
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import cgeo.geocaching.files.FileList;
+import cgeo.geocaching.files.GPXParser;
+import cgeo.geocaching.files.LocParser;
 
 public class cgeogpxes extends FileList<cgGPXListAdapter> {
 
+	private static final String EXTRAS_LIST_ID = "list";
+
 	public cgeogpxes() {
 		super(new String[] {"gpx"
-			// TODO	, "loc" 
+			// TODO	, "loc"
 				});
 	}
 
@@ -70,14 +73,14 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
 
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
-			listId = extras.getInt("list");
+			listId = extras.getInt(EXTRAS_LIST_ID);
 		}
 		if (listId <= 0) {
 			listId = 1;
 		}
 
 	}
-	
+
 	@Override
 	protected void setTitle() {
 		setTitle(res.getString(R.string.gpx_import_title));
@@ -117,5 +120,11 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
 
 			loadCachesHandler.sendMessage(new Message());
 		}
+	}
+
+	public static void startSubActivity(Activity fromActivity, int listId) {
+		final Intent intent = new Intent(fromActivity, cgeogpxes.class);
+		intent.putExtra(EXTRAS_LIST_ID, listId);
+		fromActivity.startActivityForResult(intent, 0);
 	}
 }

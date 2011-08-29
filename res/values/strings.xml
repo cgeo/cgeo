@@ -242,6 +242,7 @@
   <string name="menu_settings">Settings</string>
   <string name="menu_history">History</string>
   <string name="menu_filter">Filter</string>
+  <string name="menu_scan">Scan QR code</string>
 
   <!-- main screen -->
   <string name="live_map_button">Live map</string>
@@ -253,6 +254,7 @@
   <string name="settings_button">Settings</string>
   <string name="type">Type</string>
   <string name="now_searching">Now searching</string>
+  <string name="unknown_scan">Didn\'t find geo code in scan result.</string>
 
   <!-- caches -->
   <string name="caches_searching">Searching for caches</string>
@@ -285,6 +287,7 @@
   <string name="caches_sort_vote">vote (own rating)</string>
   <string name="caches_sort_inventory">count of inventory</string>
   <string name="caches_sort_date">date</string>
+  <string name="caches_sort_finds">finds</string>
   <string name="caches_select">Select from list</string>
   <string name="caches_select_mode">Select mode</string>
   <string name="caches_select_mode_exit">Exit select mode</string>
@@ -375,7 +378,7 @@
   <string name="init_username">Username</string>
   <string name="init_password">Password</string>
   <string name="init_passvote">Password</string>
-  <string name="init_login">Check login</string>
+  <string name="init_login">Check login &amp; set date format</string>
   <string name="init_login_popup">Login</string>
   <string name="init_login_popup_working">Logging into geocaching.com…</string>
   <string name="init_login_popup_ok">Login ok.</string>
@@ -388,10 +391,11 @@
   <string name="init_signature">Signature</string>
   <string name="init_signature_help_button">Help</string>
   <string name="init_signature_help_title">Signature tips and tricks</string>
-  <string name="init_signature_help_text">Write your signature to use in log text.\nSpecial strings that can be used are: [DATE] , [TIME], [USER] &amp; [NUMBER].\nThese will be expanded when the signature is inserted.</string>
+  <string name="init_signature_help_text">Write your signature to use in log text.\nSpecial strings that can be used are: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nThese will be expanded when the signature is inserted.</string>
   <string name="init_signature_template_button">Insert template</string>
   <string name="init_signature_template_date">Date</string>
   <string name="init_signature_template_time">Time</string>
+  <string name="init_signature_template_datetime">Date &amp; Time</string>
   <string name="init_signature_template_user">User</string>
   <string name="init_signature_template_number">Number</string>
   <string name="init_languages">Translation</string>
@@ -903,16 +907,20 @@
     · Filipe C. (code)\n
     · <a href="http://iirojappinen.com/">Iiro Jäppinen</a> (graphic)\n
     · inkantis (localization PL)\n
-    · <a href="http://joachim-wilke.de/">JoWi24</a> (code)\n
     · <a href="http://www.jaytech.cz/">Jan Žatecký</a> (graphic)\n
+<<<<<<< HEAD:res/values/strings.xml
+=======
+    · <a href="http://joachim-wilke.de/">JoWi24</a> (code)\n
+    · <a href="http://github.com/koem">Köm</a> (code, artwork computation)\n
+>>>>>>> upstream/master:res/values/strings.xml
     · MichielK (code, loc. NL)\n
+    · ncorreia (code, localization PT)\n
     · Pascal (localization NL)\n
     · Peter (localization HU)\n
     · Rainer S. (code)\n
     · Ray (code, loc. JA)\n
-    · <a href="http://www.sammyshp.de/">SammysHP</a> (code, localization DE)\n
     · <a href="http://seromenho.com/">Ricardo Seromenho</a> (localization PT)\n
-    · ncorreia (code, localization PT)\n
+    · <a href="http://www.sammyshp.de/">SammysHP</a> (code, localization DE)\n
     · serenity (localization FR)\n
     · Shan, a.k.a. ShakurNO (localization NO)\n
     · thiasB (code, loc. DE EN)\n
@@ -932,23 +940,23 @@
     · new: experimental support for .gpx from opencaching.de\n
     · fix: log-dates\n
     · fix: coordinates input\n
-    · fix: nearby list preformance update\n
+    · fix: nearby list performance update\n
     \n\n
     <b>22.08.2011</b>\n
-    · fix: due to GC.com changes c:geo hangs in displaing cache detail\n
+    · fix: due to GC.com changes c:geo hangs in displaying cache detail\n
     \n\n
     <b>20.08.2011</b>\n
     · fix: Additional adaption to GC.com changes\n
     \n\n
     <b>19.08.2011</b>\n
     · new: Numeric entry for coordinates\n
-    · fix: adaption to GC.com changes\n 
+    · fix: adaption to GC.com changes\n
 	\n\n
     <b>15.08.2011</b>\n
-    · new: OpenStreetMap support\n 
+    · new: OpenStreetMap support\n
 	· new: Send to c:geo from web\n
     · new: Export field notes\n
     · new: Clear history\n
-	· fix: Alot of bugs\n
+	· fix: A lot of bugs\n
 	\n</string>
 </resources>

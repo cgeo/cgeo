@@ -2,6 +2,10 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.cgCache;
 
+/**
+ * connector for OpenCaching.de (and several other country domains)
+ *
+ */
 public class OCConnector extends AbstractConnector implements IConnector {
 	@Override
 	public boolean canHandle(String geocode) {
