@@ -69,6 +69,6 @@ public abstract class AbstractApp implements App {
 
 	protected static cgSettings getSettings(Activity activity) {
 		return new cgSettings(activity,
-				activity.getSharedPreferences(cgSettings.preferences, 0));
+				activity.getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE));
 	}
 }

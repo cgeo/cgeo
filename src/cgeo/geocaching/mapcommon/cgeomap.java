@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -232,9 +233,9 @@ public class cgeomap extends MapBase {
 		activity = this.getActivity();
 		app = (cgeoapplication) activity.getApplication();
 		app.setAction(null);
-		settings = new cgSettings(activity, activity.getSharedPreferences(cgSettings.preferences, 0));
-		base = new cgBase(app, settings, activity.getSharedPreferences(cgSettings.preferences, 0));
-		prefsEdit = activity.getSharedPreferences(cgSettings.preferences, 0).edit();
+		settings = new cgSettings(activity, activity.getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE));
+		base = new cgBase(app, settings, activity.getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE));
+		prefsEdit = activity.getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE).edit();
 		MapFactory mapFactory = settings.getMapFactory();
 
 		// reset status
@@ -718,7 +719,7 @@ public class cgeomap extends MapBase {
 		}
 
 		if (prefsEdit == null) {
-			prefsEdit = activity.getSharedPreferences(cgSettings.preferences, 0).edit();
+			prefsEdit = activity.getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE).edit();
 		}
 
 		prefsEdit.putInt("mapzoom", mapView.getMapZoomLevel());
