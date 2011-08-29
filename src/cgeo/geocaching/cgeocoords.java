@@ -256,15 +256,16 @@ public class cgeocoords extends Dialog {
 	}
 
 	private static String addZeros(int value, int len) {
-		String zeros = "";
+		StringBuilder zeros = new StringBuilder();
 		if (value == 0) {
 			value = 1;
 		}
-		while (value < Math.pow(10, len-1)) {
-			zeros += "0";
+		double wantedLength = Math.pow(10, len-1);
+		while (value < wantedLength) {
+			zeros.append('0');
 			value *= 10;
 		}
-		return zeros;
+		return zeros.toString();
 	}
 
 	private class buttonClickListener implements View.OnClickListener {
@@ -272,8 +273,11 @@ public class cgeocoords extends Dialog {
 		@Override
 		public void onClick(View v) {
 			Button e = (Button) v;
-			char[] c = e.getText().toString().toCharArray();
-			switch (c[0]) {
+			CharSequence text = e.getText();
+			if (text == null || text.length() == 0) {
+				return;
+			}
+			switch (text.charAt(0)) {
 				case 'N':
 					e.setText("S");
 					break;
@@ -421,8 +425,8 @@ public class cgeocoords extends Dialog {
 				longitude = lonDeg + lonMin/60.0 + lonSec/60.0/60.0 + lonSecFrac/60.0/60.0;
 				break;
 		}
-		latitude  *= (bLat.getText().toString() == "S" ? -1 : 1);
-		longitude *= (bLon.getText().toString() == "W" ? -1 : 1);
+		latitude  *= (bLat.getText().toString().equalsIgnoreCase("S") ? -1 : 1);
+		longitude *= (bLon.getText().toString().equalsIgnoreCase("W") ? -1 : 1);
 	}
 
 	private class CoordinateFormatListener implements OnItemSelectedListener {

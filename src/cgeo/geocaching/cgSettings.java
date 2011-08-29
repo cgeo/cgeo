@@ -17,6 +17,9 @@ import cgeo.geocaching.googlemaps.googleMapFactory;
 import cgeo.geocaching.mapinterfaces.MapFactory;
 import cgeo.geocaching.mapsforge.mfMapFactory;
 
+/**
+ * General c:geo preferences/settings set by the user
+ */
 public class cgSettings {
 
 	private static final String KEY_WEB_DEVICE_CODE = "webDeviceCode";
@@ -151,7 +154,7 @@ public class cgSettings {
 	// usable values
 	public static final String tag = "c:geo";
 
-	// preferences file
+	/** Name of the preferences file */
 	public static final String preferences = "cgeo.pref";
 
 	// private variables

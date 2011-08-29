@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
 import android.location.Address;
 import android.location.Geocoder;
@@ -30,6 +31,15 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 
 public class cgeo extends AbstractActivity {
+
+	private static final String SCAN_INTENT = "com.google.zxing.client.android.SCAN";
+	private static final int MENU_ABOUT = 0;
+	private static final int MENU_HELPERS = 1;
+	private static final int MENU_SETTINGS = 2;
+	private static final int MENU_HISTORY = 3;
+	private static final int MENU_SCAN = 4;
+	private static final int SCAN_REQUEST_CODE = 1;
+	private static final int MENU_OPEN_LIST = 100;
 
 	private Context context = null;
 	private Integer version = null;
@@ -217,43 +227,100 @@ public class cgeo extends AbstractActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		menu.add(0, 0, 0, res.getString(R.string.menu_about)).setIcon(android.R.drawable.ic_menu_help);
-		menu.add(0, 1, 0, res.getString(R.string.menu_helpers)).setIcon(android.R.drawable.ic_menu_add);
-		menu.add(0, 2, 0, res.getString(R.string.menu_settings)).setIcon(android.R.drawable.ic_menu_preferences);
-		menu.add(0, 3, 0, res.getString(R.string.menu_history)).setIcon(android.R.drawable.ic_menu_recent_history);
-
+		menu.add(0, MENU_SETTINGS, 0, res.getString(R.string.menu_settings)).setIcon(android.R.drawable.ic_menu_preferences);
+		menu.add(0, MENU_HISTORY, 0, res.getString(R.string.menu_history)).setIcon(android.R.drawable.ic_menu_recent_history);
+		menu.add(0, MENU_HELPERS, 0, res.getString(R.string.menu_helpers)).setIcon(android.R.drawable.ic_menu_add);
+		menu.add(0, MENU_SCAN, 0, res.getString(R.string.menu_scan)).setIcon(android.R.drawable.ic_menu_camera);
+		menu.add(0, MENU_ABOUT, 0, res.getString(R.string.menu_about)).setIcon(android.R.drawable.ic_menu_help);
 		return true;
+	}
+
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		super.onPrepareOptionsMenu(menu);
+		MenuItem item = menu.findItem(MENU_SCAN);
+		if (item != null) {
+			item.setEnabled(isIntentAvailable(this, SCAN_INTENT));
+		}
+		return true;
+	}
+
+	private static boolean isIntentAvailable(Context context, String intent) {
+		final PackageManager packageManager = context.getPackageManager();
+		final List<ResolveInfo> list = packageManager.queryIntentActivities(
+				new Intent(intent), PackageManager.MATCH_DEFAULT_ONLY);
+
+		return (list.size() > 0);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		final int id = item.getItemId();
-		if (id == 0) {
+		switch (id) {
+		case MENU_ABOUT:
 			showAbout(null);
-
 			return true;
-		} else if (id == 1) {
+		case MENU_HELPERS:
 			context.startActivity(new Intent(context, cgeohelpers.class));
-
 			return true;
-		} else if (id == 2) {
+		case MENU_SETTINGS:
 			context.startActivity(new Intent(context, cgeoinit.class));
-
 			return true;
-		} else if (id == 3) {
+		case MENU_HISTORY:
 			final Intent cachesIntent = new Intent(context, cgeocaches.class);
 			cachesIntent.putExtra("type", "history");
 			context.startActivity(cachesIntent);
-
 			return true;
+		case MENU_SCAN:
+			Intent intent = new Intent(SCAN_INTENT);
+			intent.putExtra("SCAN_MODE", "QR_CODE_MODE");
+			startActivityForResult(intent, SCAN_REQUEST_CODE);
+			return true;
+		default:
+			break;
 		}
 
 		return false;
 	}
 
+	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+	    if (requestCode == SCAN_REQUEST_CODE) {
+	        if (resultCode == RESULT_OK) {
+	            String scan = intent.getStringExtra("SCAN_RESULT");
+	            if (scan == null || scan.length() == 0) {
+	            	return;
+	            }
+	            String host = "http://coord.info/";
+				if (scan.toLowerCase().startsWith(host)) {
+					String geocode = scan.substring(host.length()).trim();
+	            	cgeodetail.startActivity(this, geocode);
+	            }
+				else {
+					showToast(res.getString(R.string.unknown_scan));
+				}
+	        } else if (resultCode == RESULT_CANCELED) {
+	            // do nothing
+	        }
+	    }
+	}
+
 	@Override
 	public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
 		super.onCreateContextMenu(menu, v, menuInfo);
+
+		// context menu for offline button
+		if (v.getId() == R.id.search_offline) {
+			ArrayList<cgList> cacheLists = app.getLists();
+			int listCount = cacheLists.size();
+			menu.setHeaderTitle(res.getString(R.string.list_title));
+			for (int i = 0; i < listCount; i++) {
+				cgList list = cacheLists.get(i);
+				menu.add(Menu.NONE, MENU_OPEN_LIST + list.id, Menu.NONE, list.title);
+			}
+			return;
+		}
+
+		// standard context menu
 		menu.setHeaderTitle(res.getString(R.string.menu_filter));
 
 		//first add the most used types
@@ -302,6 +369,11 @@ public class cgeo extends AbstractActivity {
 			settings.setCacheType(null);
 			setFilterTitle();
 
+			return true;
+		} else if (id > MENU_OPEN_LIST) {
+			int listId = id - MENU_OPEN_LIST;
+			settings.saveLastList(listId);
+			cgeocaches.startActivityOffline(context);
 			return true;
 		} else if (id > 0) {
 			String itemTitle = item.getTitle().toString();
@@ -382,6 +454,7 @@ public class cgeo extends AbstractActivity {
 		final RelativeLayout findByOffline = (RelativeLayout) findViewById(R.id.search_offline);
 		findByOffline.setClickable(true);
 		findByOffline.setOnClickListener(new cgeoFindByOfflineListener());
+		registerForContextMenu(findByOffline);
 
 		(new countBubbleUpdate()).start();
 

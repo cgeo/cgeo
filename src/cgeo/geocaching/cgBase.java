@@ -29,8 +29,8 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
+import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
@@ -86,6 +86,7 @@ public class cgBase {
 	private final static Pattern patternFavourite = Pattern.compile("<a id=\"uxFavContainerLink\"[^>]*>[^<]*<div[^<]*<span class=\"favorite-value\">[^\\d]*([0-9]+)[^\\d^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 
 	private final static Pattern patternFound = Pattern.compile("<p>[^<]*<a id=\"ctl00_ContentBody_hlFoundItLog\"[^<]*<img src=\".*/images/stockholm/16x16/check\\.gif\"[^>]*>[^<]*</a>[^<]*</p>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern patternFoundAlternative = Pattern.compile("<div class=\"StatusInformationWidget FavoriteWidget\"", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternLatLon = Pattern.compile("<span id=\"ctl00_ContentBody_LatLon\"[^>]*>(<b>)?([^<]*)(<\\/b>)?<\\/span>", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternLocation = Pattern.compile("<span id=\"ctl00_ContentBody_Location\"[^>]*>In ([^<]*)", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternHint = Pattern.compile("<p>([^<]*<strong>)?\\W*Additional Hints([^<]*<\\/strong>)?[^\\(]*\\(<a[^>]+>Encrypt</a>\\)[^<]*<\\/p>[^<]*<div id=\"div_hint\"[^>]*>(.*)</div>[^<]*<div id=[\\'|\"]dk[\\'|\"]", Pattern.CASE_INSENSITIVE);
@@ -127,20 +128,19 @@ public class cgBase {
                 "MMM/dd/yyyy",
 	            "dd MMM yy"
 	        };
-	    
+
 	    HashMap<String, SimpleDateFormat> map = new HashMap<String, SimpleDateFormat>();
-	    
+
 	    for (String format : formats)
 	    {
 	        map.put(format, new SimpleDateFormat(format, Locale.ENGLISH));
 	    }
-	    
+
 	    gcCustomDateFormats = Collections.unmodifiableMap(map);
 	}
 	public final static SimpleDateFormat dateTbIn1 = new SimpleDateFormat("EEEEE, dd MMMMM yyyy", Locale.ENGLISH); // Saturday, 28 March 2009
 	public final static SimpleDateFormat dateTbIn2 = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
 	public final static SimpleDateFormat dateSqlIn = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 2010-07-25 14:44:01
-	public final static SimpleDateFormat dateGPXIn = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // 2010-04-20T07:00:00Z
 	private Resources res = null;
 	private HashMap<String, String> cookies = new HashMap<String, String>();
 	private static final String passMatch = "[/\\?&]*[Pp]ass(word)?=[^&^#^$]+";
@@ -185,7 +185,6 @@ public class cgBase {
 	public static final int LOG_ANNOUNCEMENT = 74;
 
 	public cgBase(cgeoapplication appIn, cgSettings settingsIn, SharedPreferences prefsIn) {
-		context = appIn.getBaseContext();
 		res = appIn.getBaseContext().getResources();
 
 		// cache types
@@ -1313,14 +1312,17 @@ public class cgBase {
 		}
 
 		// cache found
-		try {
-			final Matcher matcherFound = patternFound.matcher(page);
-			if (matcherFound.find()) {
-				if (matcherFound.group() != null && matcherFound.group().length() > 0) {
-					cache.found = true;
-				}
+		try
+		{
+			final Matcher matcherFound            = patternFound.matcher(page);
+			final Matcher matcherFoundAlternative = patternFoundAlternative.matcher(page);
+
+			if (matcherFound.find() || matcherFoundAlternative.find()) {
+			    cache.found = true;
 			}
-		} catch (Exception e) {
+		}
+		catch (Exception e)
+		{
 			// failed to parse found
 			Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse found");
 		}
@@ -1571,7 +1573,7 @@ public class cgBase {
 		try
 		{
 			final Matcher matcherLogCounts = patternCountLogs.matcher(page);
-			
+
 			if (matcherLogCounts.find())
 			{
 				final Matcher matcherLog = patternCountLog.matcher(matcherLogCounts.group(1));
@@ -1580,7 +1582,7 @@ public class cgBase {
 				{
 					String typeStr = matcherLog.group(1);
 					String countStr = matcherLog.group(2);
-					
+
 					if (typeStr != null
 					        && typeStr.length() > 0
 					        && logTypes.containsKey(typeStr.toLowerCase())
@@ -1903,9 +1905,9 @@ public class cgBase {
 		{
 		    throw new ParseException("Input is null", 0);
 		}
-		
+
 		input = input.trim();
-		
+
 		for (SimpleDateFormat format : gcCustomDateFormats.values())
 		{
 		    try
@@ -1914,7 +1916,7 @@ public class cgBase {
 		    }
 		    catch (ParseException e) {}
 		}
-		
+
 		throw new ParseException("No matching pattern", 0);
 	}
 

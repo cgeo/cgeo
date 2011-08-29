@@ -242,6 +242,7 @@
   <string name="menu_settings">Settings</string>
   <string name="menu_history">History</string>
   <string name="menu_filter">Filter</string>
+  <string name="menu_scan">Scan QR code</string>
 
   <!-- main screen -->
   <string name="live_map_button">Live map</string>
@@ -253,6 +254,7 @@
   <string name="settings_button">Settings</string>
   <string name="type">Type</string>
   <string name="now_searching">Now searching</string>
+  <string name="unknown_scan">Didn\'t find geo code in scan result.</string>
 
   <!-- caches -->
   <string name="caches_searching">Searching for caches</string>
@@ -451,7 +453,7 @@
   <string name="init_sendToCgeo_description">Send to c:geo allows you to recieve caches directly from the geocaching site using a special plugin for Firefox or Chrome. Before registration please read <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. You only need to register if you will use send2cgeo. C:geo will also work without registering your device.</string>
   <string name="init_sendToCgeo_register">Request registration</string>
   <string name="init_sendToCgeo_registering">Registering your device for "Send to c:geo"…</string>
-  <string name="init_sendToCgeo_register_ok">Registration succesful. PIN code is ####. Use it on c:geo website to add this device to your browser.</string>
+  <string name="init_sendToCgeo_register_ok">Registration successful. PIN code is ####. Use it on c:geo website to add this device to your browser.</string>
   <string name="init_sendToCgeo_register_fail">Registration failed.</string>
 
   <!-- auth -->
@@ -903,17 +905,17 @@
     · Filipe C. (code)\n
     · <a href="http://iirojappinen.com/">Iiro Jäppinen</a> (graphic)\n
     · inkantis (localization PL)\n
-    · <a href="http://joachim-wilke.de/">JoWi24</a> (code)\n
     · <a href="http://www.jaytech.cz/">Jan Žatecký</a> (graphic)\n
+    · <a href="http://joachim-wilke.de/">JoWi24</a> (code)\n
     · <a href="http://github.com/koem">Köm</a> (code, artwork computation)\n
     · MichielK (code, loc. NL)\n
+    · ncorreia (code, localization PT)\n
     · Pascal (localization NL)\n
     · Peter (localization HU)\n
     · Rainer S. (code)\n
     · Ray (code, loc. JA)\n
-    · <a href="http://www.sammyshp.de/">SammysHP</a> (code, localization DE)\n
     · <a href="http://seromenho.com/">Ricardo Seromenho</a> (localization PT)\n
-    · ncorreia (code, localization PT)\n
+    · <a href="http://www.sammyshp.de/">SammysHP</a> (code, localization DE)\n
     · serenity (localization FR)\n
     · Shan, a.k.a. ShakurNO (localization NO)\n
     · thiasB (code, loc. DE EN)\n
@@ -932,23 +934,23 @@
     · new: experimental support for .gpx from opencaching.de\n
     · fix: log-dates\n
     · fix: coordinates input\n
-    · fix: nearby list preformance update\n
+    · fix: nearby list performance update\n
     \n\n
     <b>22.08.2011</b>\n
-    · fix: due to GC.com changes c:geo hangs in displaing cache detail\n
+    · fix: due to GC.com changes c:geo hangs in displaying cache detail\n
     \n\n
     <b>20.08.2011</b>\n
     · fix: Additional adaption to GC.com changes\n
     \n\n
     <b>19.08.2011</b>\n
     · new: Numeric entry for coordinates\n
-    · fix: adaption to GC.com changes\n 
+    · fix: adaption to GC.com changes\n
 	\n\n
     <b>15.08.2011</b>\n
-    · new: OpenStreetMap support\n 
+    · new: OpenStreetMap support\n
 	· new: Send to c:geo from web\n
     · new: Export field notes\n
     · new: Clear history\n
-	· fix: Alot of bugs\n
+	· fix: A lot of bugs\n
 	\n</string>
 </resources>

@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,13 +29,13 @@ import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgDirection;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.cgUpdateDir;
 import cgeo.geocaching.cgUpdateLoc;
 import cgeo.geocaching.cgUser;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.mapinterfaces.ActivityImpl;
 import cgeo.geocaching.mapinterfaces.CacheOverlayItemImpl;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
@@ -232,9 +233,9 @@ public class cgeomap extends MapBase {
 		activity = this.getActivity();
 		app = (cgeoapplication) activity.getApplication();
 		app.setAction(null);
-		settings = new cgSettings(activity, activity.getSharedPreferences(cgSettings.preferences, 0));
-		base = new cgBase(app, settings, activity.getSharedPreferences(cgSettings.preferences, 0));
-		prefsEdit = activity.getSharedPreferences(cgSettings.preferences, 0).edit();
+		settings = new cgSettings(activity, activity.getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE));
+		base = new cgBase(app, settings, activity.getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE));
+		prefsEdit = activity.getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE).edit();
 		MapFactory mapFactory = settings.getMapFactory();
 
 		// reset status
@@ -269,8 +270,7 @@ public class cgeomap extends MapBase {
 		mapView.clearOverlays();
 
 		if (overlayMyLoc == null) {
-			overlayMyLoc = new cgMapMyOverlay(settings, activity);
-			mapView.addOverlay(mapFactory.getOverlayBaseWrapper(overlayMyLoc));
+			overlayMyLoc = mapView.createAddPositionOverlay(activity, settings);
 		}
 
 		if (settings.publicLoc > 0 && overlayUsers == null) {
@@ -282,8 +282,7 @@ public class cgeomap extends MapBase {
 		}
 
 		if (overlayScale == null && mapView.needsScaleOverlay()) {
-			overlayScale = new cgOverlayScale(activity, settings);
-			mapView.addOverlay(mapFactory.getOverlayBaseWrapper(overlayScale));
+			overlayScale = mapView.createAddScaleOverlay(activity, settings);
 		}
 
 		mapView.invalidate();
@@ -718,7 +717,7 @@ public class cgeomap extends MapBase {
 		}
 
 		if (prefsEdit == null) {
-			prefsEdit = activity.getSharedPreferences(cgSettings.preferences, 0).edit();
+			prefsEdit = activity.getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE).edit();
 		}
 
 		prefsEdit.putInt("mapzoom", mapView.getMapZoomLevel());
@@ -747,9 +746,10 @@ public class cgeomap extends MapBase {
 			}
 
 			try {
+				boolean repaintRequired = false;
+				
 				if (overlayMyLoc == null && mapView != null) {
-					overlayMyLoc = new cgMapMyOverlay(settings, activity);
-					mapView.addOverlay(settings.getMapFactory().getOverlayBaseWrapper(overlayMyLoc));
+					overlayMyLoc = mapView.createAddPositionOverlay(activity, settings);
 				}
 
 				if (overlayMyLoc != null && geo.location != null) {
@@ -760,8 +760,7 @@ public class cgeomap extends MapBase {
 					if (followMyLocation) {
 						myLocationInMiddle();
 					} else {
-						// move blue arrow
-						mapView.invalidate();
+						repaintRequired = true;
 					}
 				}
 
@@ -771,7 +770,13 @@ public class cgeomap extends MapBase {
 					} else {
 						overlayMyLoc.setHeading(Double.valueOf(0));
 					}
+					repaintRequired = true;
 				}
+				
+				if (repaintRequired) {
+					mapView.repaintRequired(overlayMyLoc);
+				}
+				
 			} catch (Exception e) {
 				Log.w(cgSettings.tag, "Failed to update location.");
 			}

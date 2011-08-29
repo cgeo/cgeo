@@ -14,6 +14,7 @@ import cgeo.geocaching.mapinterfaces.GeoPointImpl;
 import cgeo.geocaching.mapinterfaces.MapProjectionImpl;
 import cgeo.geocaching.mapinterfaces.MapViewImpl;
 import cgeo.geocaching.mapinterfaces.OverlayBase;
+import cgeo.geocaching.mapinterfaces.OverlayImpl;
 
 public class cgOverlayScale implements OverlayBase {
 	private cgSettings settings = null;
@@ -26,9 +27,11 @@ public class cgOverlayScale implements OverlayBase {
 	private double distance = 0d;
 	private double distanceRound = 0d;
 	private String units = null;
+	private OverlayImpl ovlImpl=null;
 
-    public cgOverlayScale(Activity activity, cgSettings settingsIn) {
+    public cgOverlayScale(Activity activity, cgSettings settingsIn, OverlayImpl overlayImpl) {
 		settings = settingsIn;
+		this.ovlImpl = overlayImpl;
 
 		DisplayMetrics metrics = new DisplayMetrics();
 		activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -38,8 +41,8 @@ public class cgOverlayScale implements OverlayBase {
 	@Override
 	public void drawOverlayBitmap(Canvas canvas, Point drawPosition,
 			MapProjectionImpl projection, byte drawZoomLevel) {
-		// TODO Auto-generated method stub
-		
+		// Scale overlay is only necessary for google maps, so the mapsforge
+		// related draw method needs not to be filled.
 	}
 
 	@Override
@@ -138,4 +141,9 @@ public class cgOverlayScale implements OverlayBase {
 		canvas.drawLine(10, bottom, (int)(pixels + 10), bottom, scale);
 		canvas.drawText(String.format("%.0f", distanceRound) + " " + units, (float)(pixels - (10 * pixelDensity)), (bottom - (10 * pixelDensity)), scale);
     }
+
+	@Override
+	public OverlayImpl getOverlayImpl() {
+		return ovlImpl;
+	}
 }
