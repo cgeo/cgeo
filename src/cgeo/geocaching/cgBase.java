@@ -95,7 +95,6 @@ public class cgBase {
 	private final static Pattern patternDesc = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>" + "(.*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternCountLogs = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p(.+?)<\\/p><\\/span>", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternCountLog = Pattern.compile("src=\"\\/images\\/icons\\/(.+?).gif\"[^>]+> (\\d+)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-	//private final static Pattern patternLogs = Pattern.compile("<table class=\"LogsTable\">(.*?)</table>\\s*<p", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	private final static Pattern patternLog = Pattern.compile("<tr><td class.+?<a href=\"/profile/\\?guid=.+?>(.+?)</a>.+?(?:logOwnerStats[^>]+><img[^>]+icon_smile.+?> ([,\\d]+).+?)?LogType.+?<img.+?/images/icons/([^\\.]+)\\..+?title=\"(.+?)\".+?LogDate.+?>(.+?)<.+?LogText.+?>(.*?)</p>(.*?)</div></div></div></td></tr>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	private final static Pattern patternLogImgs = Pattern.compile("href=\"(http://img.geocaching.com/cache/log/.+?)\".+?<span>([^<]*)", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternAttributes = Pattern.compile("<h3 class=\"WidgetHeader\">[^<]*<img[^>]+>\\W*Attributes[^<]*</h3>[^<]*<div class=\"WidgetBody\">(([^<]*<img src=\"[^\"]+\" alt=\"[^\"]+\"[^>]*>)+)[^<]*<p", Pattern.CASE_INSENSITIVE);
@@ -1604,72 +1603,67 @@ public class cgBase {
 		// cache logs
 		try
 		{
-//			final Matcher matcherLogs = patternLogs.matcher(page);
-//
-//			if (matcherLogs.find())
-//			{
-		        /*
-		        1- Author
-		        2- Finds-count
-                3- Log type image name (e.g. "icon_smile")
-                4- Type string (e.g. "Found it")
-                5- Date string (e.g. "04/28/2010")
-                6- Log text
-                7- The rest (e.g. log-images, maybe faster)
-		        */
-			    final Matcher matcherLog = patternLog.matcher(page);//(matcherLogs.group(1));
+	        /*
+	        1- Author
+	        2- Finds-count
+            3- Log type image name (e.g. "icon_smile")
+            4- Type string (e.g. "Found it")
+            5- Date string (e.g. "04/28/2010")
+            6- Log text
+            7- The rest (e.g. log-images, maybe faster)
+	        */
+		    final Matcher matcherLog = patternLog.matcher(page);//(matcherLogs.group(1));
 
-				while (matcherLog.find())
+			while (matcherLog.find())
+			{
+				final cgLog logDone = new cgLog();
+
+				if (logTypes.containsKey(matcherLog.group(3).toLowerCase()))
 				{
-					final cgLog logDone = new cgLog();
-
-					if (logTypes.containsKey(matcherLog.group(3).toLowerCase()))
-					{
-						logDone.type = logTypes.get(matcherLog.group(3).toLowerCase());
-					}
-					else
-					{
-						logDone.type = logTypes.get("icon_note");
-					}
-
-					try
-					{
-					    logDone.date = parseGcCustomDate(matcherLog.group(5)).getTime();
-					}
-					catch (ParseException e)
-					{
-				        Log.w(cgSettings.tag, "Failed to parse log date.");
-					}
-
-					logDone.author = Html.fromHtml(matcherLog.group(1)).toString();
-
-					if (null != matcherLog.group(2))
-					{
-					    logDone.found = Integer.parseInt(matcherLog.group(2).replaceAll(",", ""));
-					}
-
-					logDone.log = matcherLog.group(6);
-
-					final Matcher matcherImg = patternLogImgs.matcher(matcherLog.group(7));
-					while (matcherImg.find())
-					{
-						final cgImage logImage = new cgImage();
-						logImage.url = matcherImg.group(1);
-						logImage.title = matcherImg.group(2);
-						if (logDone.logImages == null)
-						{
-							logDone.logImages = new ArrayList<cgImage>();
-						}
-						logDone.logImages.add(logImage);
-					}
-
-					if (null == cache.logs)
-					{
-						cache.logs = new ArrayList<cgLog>();
-					}
-					cache.logs.add(logDone);
+					logDone.type = logTypes.get(matcherLog.group(3).toLowerCase());
 				}
-//			}
+				else
+				{
+					logDone.type = logTypes.get("icon_note");
+				}
+
+				try
+				{
+				    logDone.date = parseGcCustomDate(matcherLog.group(5)).getTime();
+				}
+				catch (ParseException e)
+				{
+			        Log.w(cgSettings.tag, "Failed to parse log date.");
+				}
+
+				logDone.author = Html.fromHtml(matcherLog.group(1)).toString();
+
+				if (null != matcherLog.group(2))
+				{
+				    logDone.found = Integer.parseInt(matcherLog.group(2).replaceAll(",", ""));
+				}
+
+				logDone.log = matcherLog.group(6);
+
+				final Matcher matcherImg = patternLogImgs.matcher(matcherLog.group(7));
+				while (matcherImg.find())
+				{
+					final cgImage logImage = new cgImage();
+					logImage.url = matcherImg.group(1);
+					logImage.title = matcherImg.group(2);
+					if (logDone.logImages == null)
+					{
+						logDone.logImages = new ArrayList<cgImage>();
+					}
+					logDone.logImages.add(logImage);
+				}
+
+				if (null == cache.logs)
+				{
+					cache.logs = new ArrayList<cgLog>();
+				}
+				cache.logs.add(logDone);
+			}
 		}
 		catch (Exception e)
 		{
