@@ -552,7 +552,7 @@ public class cgeodetail extends AbstractActivity {
 		}
 
 		int logType = menuItem - MENU_LOG_VISIT_OFFLINE;
-		cache.logOffline(this, logType);
+		cache.logOffline(this, logType, settings, base);
 		return true;
 	}
 

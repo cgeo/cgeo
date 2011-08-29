@@ -287,6 +287,7 @@
   <string name="caches_sort_vote">vote (own rating)</string>
   <string name="caches_sort_inventory">count of inventory</string>
   <string name="caches_sort_date">date</string>
+  <string name="caches_sort_finds">finds</string>
   <string name="caches_select">Select from list</string>
   <string name="caches_select_mode">Select mode</string>
   <string name="caches_select_mode_exit">Exit select mode</string>
@@ -377,7 +378,7 @@
   <string name="init_username">Username</string>
   <string name="init_password">Password</string>
   <string name="init_passvote">Password</string>
-  <string name="init_login">Check login</string>
+  <string name="init_login">Check login &amp; set date format</string>
   <string name="init_login_popup">Login</string>
   <string name="init_login_popup_working">Logging into geocaching.com…</string>
   <string name="init_login_popup_ok">Login ok.</string>
@@ -390,10 +391,11 @@
   <string name="init_signature">Signature</string>
   <string name="init_signature_help_button">Help</string>
   <string name="init_signature_help_title">Signature tips and tricks</string>
-  <string name="init_signature_help_text">Write your signature to use in log text.\nSpecial strings that can be used are: [DATE] , [TIME], [USER] &amp; [NUMBER].\nThese will be expanded when the signature is inserted.</string>
+  <string name="init_signature_help_text">Write your signature to use in log text.\nSpecial strings that can be used are: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nThese will be expanded when the signature is inserted.</string>
   <string name="init_signature_template_button">Insert template</string>
   <string name="init_signature_template_date">Date</string>
   <string name="init_signature_template_time">Time</string>
+  <string name="init_signature_template_datetime">Date &amp; Time</string>
   <string name="init_signature_template_user">User</string>
   <string name="init_signature_template_number">Number</string>
   <string name="init_languages">Translation</string>

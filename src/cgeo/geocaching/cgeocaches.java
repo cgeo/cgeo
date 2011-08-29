@@ -51,6 +51,7 @@ import cgeo.geocaching.filter.cgFilterByType;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.DateComparator;
 import cgeo.geocaching.sorting.DifficultyComparator;
+import cgeo.geocaching.sorting.FindsComparator;
 import cgeo.geocaching.sorting.GeocodeComparator;
 import cgeo.geocaching.sorting.InventoryComparator;
 import cgeo.geocaching.sorting.NameComparator;
@@ -122,6 +123,7 @@ public class cgeocaches extends AbstractListActivity {
 	private static final int SUBMENU_IMPORT = 59;
 	private static final int SUBMENU_MANAGE_HISTORY = 60;
 	private static final int MENU_SORT_DATE = 61;
+	private static final int MENU_SORT_FINDS = 62;
 
 	private static final int CONTEXT_MENU_MOVE_TO_LIST = 1000;
 	private static final int MENU_MOVE_SELECTED_OR_ALL_TO_LIST = 1200;
@@ -399,8 +401,7 @@ public class cgeocaches extends AbstractListActivity {
 				waitDialog.setMessage(res.getString(R.string.web_downloading)+" "+(String)msg.obj+"...");
 			} else if (msg.what == 2) { //Cache downloaded
 				waitDialog.setMessage(res.getString(R.string.web_downloaded)+" "+(String)msg.obj+".");
-				//Once a cache is downloaded I used switchList to refresh it.
-				switchListById(listId);
+				refreshCurrentList();
             } else if (msg.what == -2) {
 				if (waitDialog != null) {
 					waitDialog.dismiss();
@@ -437,31 +438,25 @@ public class cgeocaches extends AbstractListActivity {
 
 		@Override
 		public void handleMessage(Message msg) {
-			setAdapter();
+			if (adapter != null) {
+				adapter.setSelectMode(false, true);
+			}
 
-			if (msg.what > -1) {
-				cacheList.get(msg.what).statusChecked = false;
-			} else {
-				if (adapter != null) {
-					adapter.setSelectMode(false, true);
-				}
+			refreshCurrentList();
 
-				switchListById(listId);
+			cacheList.clear();
 
-				cacheList.clear();
+			final ArrayList<cgCache> cacheListTmp = app.getCaches(searchId);
+			if (cacheListTmp != null && cacheListTmp.isEmpty() == false) {
+				cacheList.addAll(cacheListTmp);
+				cacheListTmp.clear();
 
-				final ArrayList<cgCache> cacheListTmp = app.getCaches(searchId);
-				if (cacheListTmp != null && cacheListTmp.isEmpty() == false) {
-					cacheList.addAll(cacheListTmp);
-					cacheListTmp.clear();
+				Collections.sort((List<cgCache>)cacheList, gcComparator);
+			}
 
-					Collections.sort((List<cgCache>)cacheList, gcComparator);
-				}
-
-				if (waitDialog != null) {
-					waitDialog.dismiss();
-					waitDialog.setOnCancelListener(null);
-				}
+			if (waitDialog != null) {
+				waitDialog.dismiss();
+				waitDialog.setOnCancelListener(null);
 			}
 		}
 	};
@@ -755,6 +750,7 @@ public class cgeocaches extends AbstractListActivity {
 		comparators.put(res.getString(R.string.caches_sort_vote), MENU_SORT_VOTE);
 		comparators.put(res.getString(R.string.caches_sort_inventory), MENU_SORT_INVENTORY);
 		comparators.put(res.getString(R.string.caches_sort_date), MENU_SORT_DATE);
+		comparators.put(res.getString(R.string.caches_sort_finds), MENU_SORT_FINDS);
 
 		ArrayList<String> sortedLabels = new ArrayList<String>(comparators.keySet());
 		Collections.sort(sortedLabels);
@@ -982,7 +978,10 @@ public class cgeocaches extends AbstractListActivity {
 				return false;
 			case MENU_SORT_DATE:
 				setComparator(item, new DateComparator());
-				return false;
+				return true;
+			case MENU_SORT_FINDS:
+				setComparator(item, new FindsComparator(app));
+				return true;
 			case SUBMENU_FILTER_TYPE:
 				selectedFilter = res.getString(R.string.caches_filter_type);
 				openContextMenu(getListView());
@@ -1226,7 +1225,7 @@ public class cgeocaches extends AbstractListActivity {
 			cgBase.dropCache(app, this, cache, new Handler() {
 				@Override
 				public void handleMessage(Message msg) {
-					switchListById(listId); // refresh
+					refreshCurrentList();
 				}
 			});
 			return true;
@@ -1237,8 +1236,7 @@ public class cgeocaches extends AbstractListActivity {
 			}
 			adapter.resetChecks();
 
-			// refresh list by switching to the current list
-			switchListById(listId);
+			refreshCurrentList();
 			return true;
 		} else if (id >= MENU_MOVE_SELECTED_OR_ALL_TO_LIST && id < MENU_MOVE_SELECTED_OR_ALL_TO_LIST + 100) {
 			int newListId = id - MENU_MOVE_SELECTED_OR_ALL_TO_LIST;
@@ -1251,8 +1249,7 @@ public class cgeocaches extends AbstractListActivity {
 			}
 			adapter.resetChecks();
 
-			// refresh list by switching to the current list
-			switchListById(listId);
+			refreshCurrentList();
 			return true;
 		}
 
@@ -1273,7 +1270,7 @@ public class cgeocaches extends AbstractListActivity {
 			}
 
 			int logType = id - MENU_LOG_VISIT_OFFLINE;
-			cache.logOffline(this, logType);
+			cache.logOffline(this, logType, settings, base);
 		}
 		return true;
 	}
@@ -1415,11 +1412,13 @@ public class cgeocaches extends AbstractListActivity {
 	}
 
 	private void importGpx() {
-		final Intent intent = new Intent(this, cgeogpxes.class);
-		intent.putExtra("list", listId);
-		startActivity(intent);
+		cgeogpxes.startSubActivity(this, listId);
+	}
 
-		finish();
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		refreshCurrentList();
 	}
 
 	public void refreshStored() {
@@ -2140,9 +2139,6 @@ public class cgeocaches extends AbstractListActivity {
 			final ArrayList<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
 			for (cgCache cache : cacheListTemp) {
 				if (checked > 0 && cache.statusChecked == false) {
-					handler.sendEmptyMessage(0);
-
-					yield();
 					continue;
 				}
 
@@ -2153,10 +2149,6 @@ public class cgeocaches extends AbstractListActivity {
 					}
 
 					app.markDropped(cache.geocode);
-
-					handler.sendEmptyMessage(cacheList.indexOf(cache));
-
-					yield();
 				} catch (Exception e) {
 					Log.e(cgSettings.tag, "cgeocaches.geocachesDropDetails: " + e.toString());
 				}
@@ -2483,21 +2475,33 @@ public class cgeocaches extends AbstractListActivity {
 		alert.show();
 	}
 
+	private void removeListInternal() {
+		boolean status = app.removeList(listId);
+
+		if (status) {
+			showToast(res.getString(R.string.list_dialog_remove_ok));
+			switchListById(1);
+		} else {
+			showToast(res.getString(R.string.list_dialog_remove_err));
+		}
+	}
+
 	private void removeList() {
+		// if there are no caches on this list, don't bother the user with questions.
+		// there is no harm in deleting the list, he could recreate it easily
+		if (cacheList != null && cacheList.isEmpty()) {
+			removeListInternal();
+			return;
+		}
+
+		// ask him, if there are caches on the list
 		final AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
 		alert.setTitle(R.string.list_dialog_remove_title);
 		alert.setMessage(R.string.list_dialog_remove_description);
 		alert.setPositiveButton(R.string.list_dialog_remove, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
-				boolean status = app.removeList(listId);
-
-				if (status) {
-					showToast(res.getString(R.string.list_dialog_remove_ok));
-					switchListById(1);
-				} else {
-					showToast(res.getString(R.string.list_dialog_remove_err));
-				}
+				removeListInternal();
 			}
 		});
 		alert.setNegativeButton(res.getString(R.string.list_dialog_cancel), new DialogInterface.OnClickListener() {
@@ -2531,6 +2535,10 @@ public class cgeocaches extends AbstractListActivity {
 		} else {
 			ActivityMixin.goManual(this, "c:geo-nearby");
 		}
+	}
+
+	private void refreshCurrentList() {
+		switchListById(listId);
 	}
 
 	public static void startActivityOffline(final Context context) {

@@ -59,6 +59,7 @@ public class cgSettings {
 	private static final String KEY_COORD_INPUT_FORMAT = "coordinputformat";
 	private static final String KEY_LOG_OFFLINE = "log_offline";
 	private static final String KEY_LOAD_DIRECTION_IMG = "loaddirectionimg";
+	private static final String KEY_GC_CUSTOM_DATE = "gccustomdate";
 
 	private interface PrefRunnable {
 		void edit(final Editor edit);
@@ -610,5 +611,19 @@ public class cgSettings {
     
     public boolean getLoadDirImg() {
         return prefs.getBoolean(KEY_LOAD_DIRECTION_IMG, true);
+    }
+    
+    void setGcCustomDate(final String format) {
+        editSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putString(KEY_GC_CUSTOM_DATE, format);
+            }
+        });
+    }
+    
+    public String getGcCustomDate() {
+        return prefs.getString(KEY_GC_CUSTOM_DATE, null);
     }
 }
