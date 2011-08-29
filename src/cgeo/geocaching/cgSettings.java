@@ -154,7 +154,7 @@ public class cgSettings {
 	// usable values
 	public static final String tag = "c:geo";
 
-	// preferences file
+	/** Name of the preferences file */
 	public static final String preferences = "cgeo.pref";
 
 	// private variables

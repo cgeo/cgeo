@@ -21,7 +21,7 @@ import cgeo.geocaching.connector.IConnector;
 /**
  * Internal c:geo representation of a "cache"
  */
-public class cgCache {
+public class cgCache implements ICache {
 
 	public Long updated = null;
 	public Long detailedUpdate = null;
@@ -381,6 +381,71 @@ public class cgCache {
 
 	public boolean supportsLogging() {
 		return getConnector().supportsLogging();
+	}
+
+	@Override
+	public String getData() {
+		return null;
+	}
+
+	@Override
+	public Float getDifficulty() {
+		return difficulty;
+	}
+
+	@Override
+	public String getGeocode() {
+		return geocode;
+	}
+
+	@Override
+	public String getLatitute() {
+		return latitudeString;
+	}
+
+	@Override
+	public String getLongitude() {
+		return longitudeString;
+	}
+
+	@Override
+	public String getOwner() {
+		return owner;
+	}
+
+	@Override
+	public String getSize() {
+		return size;
+	}
+
+	@Override
+	public Float getTerrain() {
+		return terrain;
+	}
+
+	@Override
+	public String getType() {
+		return type;
+	}
+
+	@Override
+	public boolean isArchived() {
+		return archived;
+	}
+
+	@Override
+	public boolean isDisabled() {
+		return disabled;
+	}
+
+	@Override
+	public boolean isMembersOnly() {
+		return members;
+	}
+
+	@Override
+	public boolean isOwn() {
+		return own;
 	}
 
 }

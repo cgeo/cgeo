@@ -152,7 +152,7 @@ public class GeopointFormatter
      *
      * @param gp the Geopoint to format
      * @param format one of the default formats
-     * @see cgeo.geocaching.GeopointFormatter.Format
+     * @see cgeo.geocaching.cgeoTestSuite.Format
      * @return the formatted coordinates
      */
     public static String format(final Format format, final Geopoint gp)
