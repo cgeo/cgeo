@@ -438,31 +438,25 @@ public class cgeocaches extends AbstractListActivity {
 
 		@Override
 		public void handleMessage(Message msg) {
-			setAdapter();
+			if (adapter != null) {
+				adapter.setSelectMode(false, true);
+			}
 
-			if (msg.what > -1) {
-				cacheList.get(msg.what).statusChecked = false;
-			} else {
-				if (adapter != null) {
-					adapter.setSelectMode(false, true);
-				}
+			refreshCurrentList();
 
-				refreshCurrentList();
+			cacheList.clear();
 
-				cacheList.clear();
+			final ArrayList<cgCache> cacheListTmp = app.getCaches(searchId);
+			if (cacheListTmp != null && cacheListTmp.isEmpty() == false) {
+				cacheList.addAll(cacheListTmp);
+				cacheListTmp.clear();
 
-				final ArrayList<cgCache> cacheListTmp = app.getCaches(searchId);
-				if (cacheListTmp != null && cacheListTmp.isEmpty() == false) {
-					cacheList.addAll(cacheListTmp);
-					cacheListTmp.clear();
+				Collections.sort((List<cgCache>)cacheList, gcComparator);
+			}
 
-					Collections.sort((List<cgCache>)cacheList, gcComparator);
-				}
-
-				if (waitDialog != null) {
-					waitDialog.dismiss();
-					waitDialog.setOnCancelListener(null);
-				}
+			if (waitDialog != null) {
+				waitDialog.dismiss();
+				waitDialog.setOnCancelListener(null);
 			}
 		}
 	};
@@ -2145,9 +2139,6 @@ public class cgeocaches extends AbstractListActivity {
 			final ArrayList<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
 			for (cgCache cache : cacheListTemp) {
 				if (checked > 0 && cache.statusChecked == false) {
-					handler.sendEmptyMessage(0);
-
-					yield();
 					continue;
 				}
 
@@ -2158,10 +2149,6 @@ public class cgeocaches extends AbstractListActivity {
 					}
 
 					app.markDropped(cache.geocode);
-
-					handler.sendEmptyMessage(cacheList.indexOf(cache));
-
-					yield();
 				} catch (Exception e) {
 					Log.e(cgSettings.tag, "cgeocaches.geocachesDropDetails: " + e.toString());
 				}
