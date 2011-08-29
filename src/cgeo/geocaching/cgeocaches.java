@@ -401,8 +401,7 @@ public class cgeocaches extends AbstractListActivity {
 				waitDialog.setMessage(res.getString(R.string.web_downloading)+" "+(String)msg.obj+"...");
 			} else if (msg.what == 2) { //Cache downloaded
 				waitDialog.setMessage(res.getString(R.string.web_downloaded)+" "+(String)msg.obj+".");
-				//Once a cache is downloaded I used switchList to refresh it.
-				switchListById(listId);
+				refreshCurrentList();
             } else if (msg.what == -2) {
 				if (waitDialog != null) {
 					waitDialog.dismiss();
@@ -448,7 +447,7 @@ public class cgeocaches extends AbstractListActivity {
 					adapter.setSelectMode(false, true);
 				}
 
-				switchListById(listId);
+				refreshCurrentList();
 
 				cacheList.clear();
 
@@ -1232,7 +1231,7 @@ public class cgeocaches extends AbstractListActivity {
 			cgBase.dropCache(app, this, cache, new Handler() {
 				@Override
 				public void handleMessage(Message msg) {
-					switchListById(listId); // refresh
+					refreshCurrentList();
 				}
 			});
 			return true;
@@ -1243,8 +1242,7 @@ public class cgeocaches extends AbstractListActivity {
 			}
 			adapter.resetChecks();
 
-			// refresh list by switching to the current list
-			switchListById(listId);
+			refreshCurrentList();
 			return true;
 		} else if (id >= MENU_MOVE_SELECTED_OR_ALL_TO_LIST && id < MENU_MOVE_SELECTED_OR_ALL_TO_LIST + 100) {
 			int newListId = id - MENU_MOVE_SELECTED_OR_ALL_TO_LIST;
@@ -1257,8 +1255,7 @@ public class cgeocaches extends AbstractListActivity {
 			}
 			adapter.resetChecks();
 
-			// refresh list by switching to the current list
-			switchListById(listId);
+			refreshCurrentList();
 			return true;
 		}
 
@@ -1421,11 +1418,13 @@ public class cgeocaches extends AbstractListActivity {
 	}
 
 	private void importGpx() {
-		final Intent intent = new Intent(this, cgeogpxes.class);
-		intent.putExtra("list", listId);
-		startActivity(intent);
+		cgeogpxes.startSubActivity(this, listId);
+	}
 
-		finish();
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		refreshCurrentList();
 	}
 
 	public void refreshStored() {
@@ -2537,6 +2536,10 @@ public class cgeocaches extends AbstractListActivity {
 		} else {
 			ActivityMixin.goManual(this, "c:geo-nearby");
 		}
+	}
+
+	private void refreshCurrentList() {
+		switchListById(listId);
 	}
 
 	public static void startActivityOffline(final Context context) {
