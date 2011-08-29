@@ -62,6 +62,14 @@ public class LogTemplateProvider {
 					return base.formatTime(System.currentTimeMillis());
 				}
 			},
+            new LogTemplate("DATETIME", R.string.init_signature_template_datetime) {
+
+                @Override
+                String getValue(final cgBase base) {
+                    final long currentTime = System.currentTimeMillis();
+                    return base.formatFullDate(currentTime) + " " + base.formatTime(currentTime);
+                }
+            },
 			new LogTemplate("USER", R.string.init_signature_template_user) {
 
 				@Override

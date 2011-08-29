@@ -385,6 +385,7 @@
   <string name="init_signature_template_button">Platzhalter einfügen</string>
   <string name="init_signature_template_date">Datum</string>
   <string name="init_signature_template_time">Zeit</string>
+  <string name="init_signature_template_datetime">Datum &amp; Zeit</string>
   <string name="init_signature_template_user">Benutzer</string>
   <string name="init_signature_template_number">Nummer</string>
   <string name="init_languages">Übersetzung</string>
