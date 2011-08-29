@@ -1,5 +1,18 @@
 package cgeo.geocaching;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.net.Uri;
+import android.text.Spannable;
+import android.util.Log;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
