@@ -21,8 +21,6 @@ public interface MapFactory {
 
 	public GeoPointImpl getGeoPointBase(int latE6, int lonE6);
 
-	public OverlayImpl getOverlayBaseWrapper(OverlayBase ovlIn);
-
 	CacheOverlayItemImpl getCacheOverlayItem(cgCoord coordinate, String type);
 
 	public UserOverlayItemImpl getUserOverlayItemBase(Context context,

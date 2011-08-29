@@ -27,6 +27,7 @@
   <attr name="favourite_o" format="integer" />
   <attr name="favourite_g" format="integer" />
   <attr name="close" format="integer" />
+  <attr name="log_img_icon" format="integer" />
 
   <!-- others -->
   <attr name="compass" format="integer" />

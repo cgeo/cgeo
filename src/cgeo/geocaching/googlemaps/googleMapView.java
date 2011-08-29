@@ -1,18 +1,23 @@
 package cgeo.geocaching.googlemaps;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.mapcommon.cgMapMyOverlay;
 import cgeo.geocaching.mapcommon.cgMapOverlay;
+import cgeo.geocaching.mapcommon.cgOverlayScale;
 import cgeo.geocaching.mapcommon.cgUsersOverlay;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
 import cgeo.geocaching.mapinterfaces.MapControllerImpl;
 import cgeo.geocaching.mapinterfaces.MapProjectionImpl;
 import cgeo.geocaching.mapinterfaces.MapViewImpl;
+import cgeo.geocaching.mapinterfaces.OverlayBase;
 import cgeo.geocaching.mapinterfaces.OverlayImpl;
+import cgeo.geocaching.mapinterfaces.OverlayImpl.overlayType;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
@@ -97,6 +102,24 @@ public class googleMapView extends MapView implements MapViewImpl{
 	}
 
 	@Override
+	public cgMapMyOverlay createAddPositionOverlay(Activity activity,
+			cgSettings settingsIn) {
+		
+		googleOverlay ovl = new googleOverlay(activity, settingsIn, overlayType.PositionOverlay);
+		getOverlays().add(ovl);
+		return (cgMapMyOverlay) ovl.getBase();
+	}
+
+	@Override
+	public cgOverlayScale createAddScaleOverlay(Activity activity,
+			cgSettings settingsIn) {
+
+		googleOverlay ovl = new googleOverlay(activity, settingsIn, overlayType.ScaleOverlay);
+		getOverlays().add(ovl);
+		return (cgOverlayScale) ovl.getBase();
+	}
+
+	@Override
 	public int getMapZoomLevel() {
 		return getZoomLevel();
 	}
@@ -105,14 +128,12 @@ public class googleMapView extends MapView implements MapViewImpl{
 	public void setMapSource(cgSettings settings) {
 
 		switch(settings.mapSource) {
-		case googleSat:
-			setSatellite(true);
-			break;
-		default:
-			setSatellite(false);
-	}
-
-
+			case googleSat:
+				setSatellite(true);
+				break;
+			default:
+				setSatellite(false);
+		}
 	}
 
 	@Override
@@ -123,5 +144,10 @@ public class googleMapView extends MapView implements MapViewImpl{
 	@Override
 	public void setBuiltinScale(boolean b) {
 		//Nothing to do for google maps...
+	}
+
+	@Override
+	public void repaintRequired(OverlayBase overlay) {
+		invalidate();
 	}
 }

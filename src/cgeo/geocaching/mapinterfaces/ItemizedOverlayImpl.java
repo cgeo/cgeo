@@ -1,9 +1,9 @@
 package cgeo.geocaching.mapinterfaces;
 
-import cgeo.geocaching.mapcommon.ItemizedOverlayBase;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
+import cgeo.geocaching.mapcommon.ItemizedOverlayBase;
 
 /**
  * Defines the common functions to access the provider-specific
@@ -11,7 +11,7 @@ import android.graphics.drawable.Drawable;
  * @author rsudev
  *
  */
-public interface ItemizedOverlayImpl {
+public interface ItemizedOverlayImpl extends OverlayImpl {
 
 	ItemizedOverlayBase getBase();
 

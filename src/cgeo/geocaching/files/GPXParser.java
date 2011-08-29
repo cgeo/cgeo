@@ -4,7 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,7 +21,6 @@ import android.sax.EndElementListener;
 import android.sax.EndTextElementListener;
 import android.sax.RootElement;
 import android.sax.StartElementListener;
-import android.text.Html;
 import android.util.Log;
 import android.util.Xml;
 import cgeo.geocaching.cgBase;
@@ -31,43 +34,52 @@ import cgeo.geocaching.connector.ConnectorFactory;
 
 public abstract class GPXParser extends FileParser {
 
-	private cgSearch search = null;
-	private Handler handler = null;
+	private static final SimpleDateFormat formatSimple = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // 2010-04-20T07:00:00Z
+	private static final SimpleDateFormat formatTimezone = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'.000'Z"); // 2010-04-20T01:01:03.000-04:00
+
+	private static final Pattern patternGeocode = Pattern.compile("([A-Z]{2}[0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
+	private static final String[] nsGCList = new String[] {
+		"http://www.groundspeak.com/cache/1/1", // PQ 1.1
+		"http://www.groundspeak.com/cache/1/0/1", // PQ 1.0.1
+		"http://www.groundspeak.com/cache/1/0", // PQ 1.0
+	};
+
 	private cgeoapplication app = null;
 	private int listId = 1;
+	private cgSearch search = null;
+	protected String namespace = null;
+	private String version;
+	private Handler handler = null;
+
 	private cgCache cache = new cgCache();
 	private cgTrackable trackable = new cgTrackable();
 	private cgLog log = new cgLog();
-	private boolean htmlShort = true;
-	private boolean htmlLong = true;
+
 	private String type = null;
 	private String sym = null;
-	protected String namespace = null;
-	private ArrayList<String> nsGCList = new ArrayList<String>();
-	private static final Pattern patternGeocode = Pattern.compile("([A-Z]{2}[0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
 	private String name = null;
 	private String cmt = null;
 	private String desc = null;
-	private String version;
 
 	public GPXParser(cgeoapplication appIn, int listIdIn, cgSearch searchIn, String namespaceIn, String versionIn) {
 		app = appIn;
 		listId = listIdIn;
 		search = searchIn;
-
-		nsGCList.add("http://www.groundspeak.com/cache/1/1"); // PQ 1.1
-		nsGCList.add("http://www.groundspeak.com/cache/1/0/1"); // PQ 1.0.1
-		nsGCList.add("http://www.groundspeak.com/cache/1/0"); // PQ 1.0
-
 		namespace = namespaceIn;
 		version = versionIn;
 	}
 
-	public long parse(File file, Handler handlerIn) {
-		handler = handlerIn;
-		if (file == null) {
-			return 0l;
+	private static Date parseDate(String input) throws ParseException {
+		input = input.trim();
+		if (input.length() >= 3 && input.charAt(input.length() - 3) == ':') {
+			String removeColon = input.substring(0, input.length() - 3) + input.substring(input.length() - 2);
+			return formatTimezone.parse(removeColon);
 		}
+		return formatSimple.parse(input);
+	}
+
+	public long parse(final InputStream stream, Handler handlerIn) {
+		handler = handlerIn;
 
 		final RootElement root = new RootElement(namespace, "gpx");
 		final Element waypoint = root.getChild(namespace, "wpt");
@@ -75,6 +87,7 @@ public abstract class GPXParser extends FileParser {
 		// waypoint - attributes
 		waypoint.setStartElementListener(new StartElementListener() {
 
+			@Override
 			public void start(Attributes attrs) {
 				try {
 					if (attrs.getIndex("lat") > -1) {
@@ -92,6 +105,7 @@ public abstract class GPXParser extends FileParser {
 		// waypoint
 		waypoint.setEndElementListener(new EndElementListener() {
 
+			@Override
 			public void end() {
 				if (cache.geocode == null || cache.geocode.length() == 0) {
 					// try to find geocode somewhere else
@@ -114,8 +128,6 @@ public abstract class GPXParser extends FileParser {
 
 				showFinishedMessage(handler, search);
 
-				htmlShort = true;
-				htmlLong = true;
 				type = null;
 				sym = null;
 				name = null;
@@ -130,9 +142,10 @@ public abstract class GPXParser extends FileParser {
 		// waypoint.time
 		waypoint.getChild(namespace, "time").setEndTextElementListener(new EndTextElementListener() {
 
+			@Override
 			public void end(String body) {
 				try {
-					cache.hidden = cgBase.dateGPXIn.parse(body.trim());
+					cache.hidden = parseDate(body);
 				} catch (Exception e) {
 					Log.w(cgSettings.tag, "Failed to parse cache date: " + e.toString());
 				}
@@ -142,10 +155,11 @@ public abstract class GPXParser extends FileParser {
 		// waypoint.name
 		waypoint.getChild(namespace, "name").setEndTextElementListener(new EndTextElementListener() {
 
+			@Override
 			public void end(String body) {
 				name = body;
 
-				final String content = Html.fromHtml(body).toString().trim();
+				final String content = body.trim();
 				cache.name = content;
 
 				findGeoCode(cache.name);
@@ -156,28 +170,29 @@ public abstract class GPXParser extends FileParser {
 		// waypoint.desc
 		waypoint.getChild(namespace, "desc").setEndTextElementListener(new EndTextElementListener() {
 
+			@Override
 			public void end(String body) {
 				desc = body;
 
-				final String content = Html.fromHtml(body).toString().trim();
-				cache.shortdesc = content;
+				cache.shortdesc = validate(body);
 			}
 		});
 
 		// waypoint.cmt
 		waypoint.getChild(namespace, "cmt").setEndTextElementListener(new EndTextElementListener() {
 
+			@Override
 			public void end(String body) {
 				cmt = body;
 
-				final String content = Html.fromHtml(body).toString().trim();
-				cache.description = content;
+				cache.description = validate(body);
 			}
 		});
 
 		// waypoint.type
 		waypoint.getChild(namespace, "type").setEndTextElementListener(new EndTextElementListener() {
 
+			@Override
 			public void end(String body) {
 				final String[] content = body.split("\\|");
 				if (content.length > 0) {
@@ -189,6 +204,7 @@ public abstract class GPXParser extends FileParser {
 		// waypoint.sym
 		waypoint.getChild(namespace, "sym").setEndTextElementListener(new EndTextElementListener() {
 
+			@Override
 			public void end(String body) {
 				body = body.toLowerCase();
 				sym = body;
@@ -208,6 +224,7 @@ public abstract class GPXParser extends FileParser {
 
 			gcCache.setStartElementListener(new StartElementListener() {
 
+				@Override
 				public void start(Attributes attrs) {
 					try {
 						if (attrs.getIndex("id") > -1) {
@@ -228,42 +245,43 @@ public abstract class GPXParser extends FileParser {
 			// waypoint.cache.name
 			gcCache.getChild(nsGC, "name").setEndTextElementListener(new EndTextElementListener() {
 
-				public void end(String body) {
-					final String content = Html.fromHtml(body).toString().trim();
-					cache.name = validate(content);
+				@Override
+				public void end(String cacheName) {
+					cache.name = validate(cacheName);
 				}
 			});
 
 			// waypoint.cache.owner
 			gcCache.getChild(nsGC, "owner").setEndTextElementListener(new EndTextElementListener() {
 
-				public void end(String body) {
-					final String content = Html.fromHtml(body).toString().trim();
-					cache.owner = validate(content);
+				@Override
+				public void end(String cacheOwner) {
+					cache.owner = validate(cacheOwner);
 				}
 			});
 
 			// waypoint.cache.type
 			gcCache.getChild(nsGC, "type").setEndTextElementListener(new EndTextElementListener() {
 
+				@Override
 				public void end(String body) {
-					String parsedString = validate(body.toLowerCase());
-					setType(parsedString);
+					setType(validate(body.toLowerCase()));
 				}
 			});
 
 			// waypoint.cache.container
 			gcCache.getChild(nsGC, "container").setEndTextElementListener(new EndTextElementListener() {
 
+				@Override
 				public void end(String body) {
-					final String content = body.toLowerCase();
-					cache.size = validate(content);
+					cache.size = validate(body.toLowerCase());
 				}
 			});
 
 			// waypoint.cache.difficulty
 			gcCache.getChild(nsGC, "difficulty").setEndTextElementListener(new EndTextElementListener() {
 
+				@Override
 				public void end(String body) {
 					try {
 						cache.difficulty = new Float(body);
@@ -276,6 +294,7 @@ public abstract class GPXParser extends FileParser {
 			// waypoint.cache.terrain
 			gcCache.getChild(nsGC, "terrain").setEndTextElementListener(new EndTextElementListener() {
 
+				@Override
 				public void end(String body) {
 					try {
 						cache.terrain = new Float(body);
@@ -288,11 +307,12 @@ public abstract class GPXParser extends FileParser {
 			// waypoint.cache.country
 			gcCache.getChild(nsGC, "country").setEndTextElementListener(new EndTextElementListener() {
 
-				public void end(String body) {
+				@Override
+				public void end(String country) {
 					if (cache.location == null || cache.location.length() == 0) {
-						cache.location = validate(body.trim());
+						cache.location = validate(country);
 					} else {
-						cache.location = cache.location + ", " + body.trim();
+						cache.location = cache.location + ", " + country.trim();
 					}
 				}
 			});
@@ -300,11 +320,12 @@ public abstract class GPXParser extends FileParser {
 			// waypoint.cache.state
 			gcCache.getChild(nsGC, "state").setEndTextElementListener(new EndTextElementListener() {
 
-				public void end(String body) {
+				@Override
+				public void end(String state) {
 					if (cache.location == null || cache.location.length() == 0) {
-						cache.location = validate(body.trim());
+						cache.location = validate(state);
 					} else {
-						cache.location = body.trim() + ", " + cache.location;
+						cache.location = state.trim() + ", " + cache.location;
 					}
 				}
 			});
@@ -312,63 +333,25 @@ public abstract class GPXParser extends FileParser {
 			// waypoint.cache.encoded_hints
 			gcCache.getChild(nsGC, "encoded_hints").setEndTextElementListener(new EndTextElementListener() {
 
-				public void end(String body) {
-					cache.hint = validate(body.trim());
-				}
-			});
-
-			// waypoint.cache.short_description
-			gcCache.getChild(nsGC, "short_description").setStartElementListener(new StartElementListener() {
-
-				public void start(Attributes attrs) {
-					try {
-						if (attrs.getIndex("html") > -1) {
-							final String at = attrs.getValue("html");
-							if (at.equalsIgnoreCase("false")) {
-								htmlShort = false;
-							}
-						}
-					} catch (Exception e) {
-						// nothing
-					}
+				@Override
+				public void end(String encoded) {
+					cache.hint = validate(encoded);
 				}
 			});
 
 			gcCache.getChild(nsGC, "short_description").setEndTextElementListener(new EndTextElementListener() {
 
-				public void end(String body) {
-					if (!htmlShort) {
-						cache.shortdesc = Html.fromHtml(body).toString();
-					} else {
-						cache.shortdesc = body;
-					}
-				}
-			});
-
-			// waypoint.cache.long_description
-			gcCache.getChild(nsGC, "long_description").setStartElementListener(new StartElementListener() {
-
-				public void start(Attributes attrs) {
-					try {
-						if (attrs.getIndex("html") > -1) {
-							if (attrs.getValue("html").equalsIgnoreCase("false")) {
-								htmlLong = false;
-							}
-						}
-					} catch (Exception e) {
-						// nothing
-					}
+				@Override
+				public void end(String shortDesc) {
+					cache.shortdesc = validate(shortDesc);
 				}
 			});
 
 			gcCache.getChild(nsGC, "long_description").setEndTextElementListener(new EndTextElementListener() {
 
-				public void end(String body) {
-					if (htmlLong == false) {
-						cache.description = Html.fromHtml(body).toString().trim();
-					} else {
-						cache.description = body;
-					}
+				@Override
+				public void end(String desc) {
+					cache.description = validate(desc);
 				}
 			});
 
@@ -378,6 +361,7 @@ public abstract class GPXParser extends FileParser {
 			// waypoint.cache.travelbugs.travelbug
 			gcTBs.getChild(nsGC, "travelbug").setStartElementListener(new StartElementListener() {
 
+				@Override
 				public void start(Attributes attrs) {
 					trackable = new cgTrackable();
 
@@ -396,10 +380,12 @@ public abstract class GPXParser extends FileParser {
 
 			gcTB.setEndElementListener(new EndElementListener() {
 
+				@Override
 				public void end() {
 					if (trackable.geocode != null && trackable.geocode.length() > 0 && trackable.name != null && trackable.name.length() > 0) {
-						if (cache.inventory == null)
+						if (cache.inventory == null) {
 							cache.inventory = new ArrayList<cgTrackable>();
+						}
 						cache.inventory.add(trackable);
 					}
 				}
@@ -408,9 +394,9 @@ public abstract class GPXParser extends FileParser {
 			// waypoint.cache.travelbugs.travelbug.name
 			gcTB.getChild(nsGC, "name").setEndTextElementListener(new EndTextElementListener() {
 
-				public void end(String body) {
-					String content = Html.fromHtml(body).toString();
-					trackable.name = content;
+				@Override
+				public void end(String tbName) {
+					trackable.name = validate(tbName);
 				}
 			});
 
@@ -422,6 +408,7 @@ public abstract class GPXParser extends FileParser {
 
 			gcLog.setStartElementListener(new StartElementListener() {
 
+				@Override
 				public void start(Attributes attrs) {
 					log = new cgLog();
 
@@ -437,10 +424,12 @@ public abstract class GPXParser extends FileParser {
 
 			gcLog.setEndElementListener(new EndElementListener() {
 
+				@Override
 				public void end() {
 					if (log.log != null && log.log.length() > 0) {
-						if (cache.logs == null)
+						if (cache.logs == null) {
 							cache.logs = new ArrayList<cgLog>();
+						}
 						cache.logs.add(log);
 					}
 				}
@@ -449,9 +438,10 @@ public abstract class GPXParser extends FileParser {
 			// waypoint.cache.logs.log.date
 			gcLog.getChild(nsGC, "date").setEndTextElementListener(new EndTextElementListener() {
 
+				@Override
 				public void end(String body) {
 					try {
-						log.date = cgBase.dateGPXIn.parse(body.trim()).getTime();
+						log.date = parseDate(body).getTime();
 					} catch (Exception e) {
 						Log.w(cgSettings.tag, "Failed to parse log date: " + e.toString());
 					}
@@ -461,12 +451,13 @@ public abstract class GPXParser extends FileParser {
 			// waypoint.cache.logs.log.type
 			gcLog.getChild(nsGC, "type").setEndTextElementListener(new EndTextElementListener() {
 
+				@Override
 				public void end(String body) {
-					final String content = body.trim().toLowerCase();
-					if (cgBase.logTypes0.containsKey(content)) {
-						log.type = cgBase.logTypes0.get(content);
+					final String logType = validate(body).toLowerCase();
+					if (cgBase.logTypes0.containsKey(logType)) {
+						log.type = cgBase.logTypes0.get(logType);
 					} else {
-						log.type = 4;
+						log.type = cgBase.LOG_NOTE;
 					}
 				}
 			});
@@ -474,42 +465,54 @@ public abstract class GPXParser extends FileParser {
 			// waypoint.cache.logs.log.finder
 			gcLog.getChild(nsGC, "finder").setEndTextElementListener(new EndTextElementListener() {
 
-				public void end(String body) {
-					String content = Html.fromHtml(body).toString();
-					log.author = content;
+				@Override
+				public void end(String finderName) {
+					log.author = validate(finderName);
 				}
 			});
 
-			// waypoint.cache.logs.log.finder
+			// waypoint.cache.logs.log.text
 			gcLog.getChild(nsGC, "text").setEndTextElementListener(new EndTextElementListener() {
 
-				public void end(String body) {
-					String content = Html.fromHtml(body).toString();
-					log.log = content;
+				@Override
+				public void end(String logText) {
+					log.log = validate(logText);
 				}
 			});
 		}
-		FileInputStream fis = null;
 		boolean parsed = false;
 		try {
+			Xml.parse(stream, Xml.Encoding.UTF_8, root.getContentHandler());
+			parsed = true;
+		} catch (IOException e) {
+			Log.e(cgSettings.tag, "Cannot parse .gpx file as GPX " + version + ": could not read file!");
+		} catch (SAXException e) {
+			Log.e(cgSettings.tag, "Cannot parse .gpx file as GPX " + version + ": could not parse XML - " + e.toString());
+		}
+		return parsed ? search.getCurrentId() : 0l;
+	}
+
+	private long parse(final File file, final Handler handlerIn) {
+		if (file == null) {
+			return 0l;
+		}
+
+		FileInputStream fis = null;
+		long result = 0l;
+		try {
 			fis = new FileInputStream(file);
+			result = parse(fis, handlerIn);
 		} catch (FileNotFoundException e) {
 			Log.e(cgSettings.tag, "Cannot parse .gpx file " + file.getAbsolutePath() + " as GPX " + version + ": file not found!");
 		}
 		try {
-			Xml.parse(fis, Xml.Encoding.UTF_8, root.getContentHandler());
-			parsed = true;
-		} catch (IOException e) {
-			Log.e(cgSettings.tag, "Cannot parse .gpx file " + file.getAbsolutePath() + " as GPX " + version + ": could not read file!");
-		} catch (SAXException e) {
-			Log.e(cgSettings.tag, "Cannot parse .gpx file " + file.getAbsolutePath() + " as GPX " + version + ": could not parse XML - " + e.toString());
-		}
-		try {
-			fis.close();
+			if (fis != null) {
+				fis.close();
+			}
 		} catch (IOException e) {
 			Log.e(cgSettings.tag, "Error after parsing .gpx file " + file.getAbsolutePath() + " as GPX " + version + ": could not close file!");
 		}
-		return parsed ? search.getCurrentId() : 0l;
+		return result;
 	}
 
 	protected abstract Element getCacheParent(Element waypoint);
@@ -518,7 +521,7 @@ public abstract class GPXParser extends FileParser {
 		if ("nil".equalsIgnoreCase(input)) {
 			return "";
 		}
-		return input;
+		return input.trim();
 	}
 
 	private void setType(String parsedString) {

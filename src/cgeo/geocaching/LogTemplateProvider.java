@@ -62,6 +62,14 @@ public class LogTemplateProvider {
 					return base.formatTime(System.currentTimeMillis());
 				}
 			},
+            new LogTemplate("DATETIME", R.string.init_signature_template_datetime) {
+
+                @Override
+                String getValue(final cgBase base) {
+                    final long currentTime = System.currentTimeMillis();
+                    return base.formatFullDate(currentTime) + " " + base.formatTime(currentTime);
+                }
+            },
 			new LogTemplate("USER", R.string.init_signature_template_user) {
 
 				@Override
@@ -117,7 +125,7 @@ public class LogTemplateProvider {
 		int findCount = -1;
 
 		try {
-			final Pattern findPattern = Pattern.compile("<strong><img.+?icon_smile.+?title=\"Caches Found\" /> ([,\\d]+)</strong>", Pattern.CASE_INSENSITIVE);
+			final Pattern findPattern = Pattern.compile("<strong><img.+?icon_smile.+?title=\"Caches Found\" /> ([,\\d]+)", Pattern.CASE_INSENSITIVE);
 			final Matcher findMatcher = findPattern.matcher(page);
 			if (findMatcher.find()) {
 				if (findMatcher.groupCount() > 0) {
