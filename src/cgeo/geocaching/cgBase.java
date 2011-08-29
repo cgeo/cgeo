@@ -2082,10 +2082,10 @@ public class cgBase {
 		final Pattern patternSpottedOwner = Pattern.compile("<dt>\\W*Recently Spotted:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugLocation\">In the hands of the owner[^<]*</a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
 		final Pattern patternGoal = Pattern.compile("<h3>\\W*Current GOAL[^<]*</h3>[^<]*<p[^>]*>(.*)</p>[^<]*<h3>\\W*About This Item[^<]*</h3>", Pattern.CASE_INSENSITIVE);
 		final Pattern patternDetailsImage = Pattern.compile("<h3>\\W*About This Item[^<]*</h3>([^<]*<p>([^<]*<img id=\"ctl00_ContentBody_BugDetails_BugImage\" class=\"[^\"]+\" src=\"([^\"]+)\"[^>]*>)?[^<]*</p>)?[^<]*<p[^>]*>(.*)</p>[^<]*<div id=\"ctl00_ContentBody_BugDetails_uxAbuseReport\">", Pattern.CASE_INSENSITIVE);
-		final Pattern patternLogs = Pattern.compile("<table class=\"TrackableItemLogTable Table\">(.*)<\\/table>[^<]*<ul", Pattern.CASE_INSENSITIVE);
 		final Pattern patternIcon = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
 		final Pattern patternType = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"[^\"]+\" alt=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
 		final Pattern patternDistance = Pattern.compile("<h4[^>]*\\W*Tracking History \\(([0-9\\.,]+(km|mi))[^\\)]*\\)", Pattern.CASE_INSENSITIVE);
+		final Pattern patternLog = Pattern.compile("<tr class=\"Data.+?src=\"/images/icons/([^\\.]+).gif[^>]+>&nbsp;([^<]+)</td>.+?guid.+?>([^<]+)</a>.+?guid=([^\"]+)\">([^<]+)</a>.+?<td colspan=\"4\">(.+?)(?:<ul.+?ul>)?\\s*</td>\\s*</tr>", Pattern.CASE_INSENSITIVE);
 
 		final cgTrackable trackable = new cgTrackable();
 
@@ -2292,90 +2292,47 @@ public class cgBase {
 		}
 
 		// trackable logs
-		try {
-			final Matcher matcherLogs = patternLogs.matcher(page);
-			while (matcherLogs.find()) {
-				if (matcherLogs.groupCount() > 0) {
-					final Pattern patternLog = Pattern.compile("[^>]*>" +
-							"[^<]*<td[^<]*<img src=[\"|'].*\\/icons\\/([^\\.]+)\\.[a-z]{2,5}[\"|'][^>]*>&nbsp;(\\d+).(\\d+).(\\d+)[^<]*</td>" +
-							"[^<]*<td>[^<]*<a href=[^>]+>([^<]+)<.a>([^<]*|[^<]*<a href=[\"|'].*guid=([^\"]*)\">([^<]*)</a>[^<]*)</td>" +
-							"[^<]*<td>[^<]*</td>" +
-							"[^<]*<td[^<]*<a href=[^>]+>[^<]+</a>[^<]*</td>[^<]*</tr>" +
-							"[^<]*<tr[^>]*>[^<]*<td[^>]*>(.*?)</td>[^<]*</tr>.*" +
-							"");
-					// 1 filename == type
-					// 2 month
-					// 3 date
-					// 4 year
-					// 5 user
-					// 6 action dependent
-					// 7 cache guid
-					// 8 cache name
-					// 9 text
-					final String[] logs = matcherLogs.group(1).split("<tr class=\"Data BorderTop");
-					final int logsCnt = logs.length;
+		try
+		{
+			final Matcher matcherLogs = patternLog.matcher(page);
+			/*
+    			1. Type (img)
+                2. Date
+                3. Author
+                4. Cache-GUID
+                5. Cache-name
+                6. Logtext
+			 */
+			while (matcherLogs.find())
+			{
+				final cgLog logDone = new cgLog();
+				
+                if (logTypes.containsKey(matcherLogs.group(1).toLowerCase()))
+                {
+                    logDone.type = logTypes.get(matcherLogs.group(1).toLowerCase());
+                }
+                else
+                {
+                    logDone.type = logTypes.get("icon_note");
+                }
 
-					for (int k = 1; k < logsCnt; k++) {
-						final Matcher matcherLog = patternLog.matcher(logs[k]);
-						if (matcherLog.find()) {
-							final cgLog logDone = new cgLog();
-
-							String logTmp = matcherLog.group(9);
-							logTmp = Pattern.compile("<p>").matcher(logTmp).replaceAll("\n");
-							logTmp = Pattern.compile("<br[^>]*>").matcher(logTmp).replaceAll("\n");
-							logTmp = Pattern.compile("<\\/p>").matcher(logTmp).replaceAll("");
-							logTmp = Pattern.compile("\r+").matcher(logTmp).replaceAll("\n");
-
-							int day = -1;
-							try {
-								day = Integer.parseInt(matcherLog.group(3));
-							} catch (Exception e) {
-								Log.w(cgSettings.tag, "Failed to parse logs date (day): " + e.toString());
-							}
-
-							int month = -1;
-							try {
-								month = Integer.parseInt(matcherLog.group(2));
-								month -= 1;
-							} catch (Exception e) {
-								Log.w(cgSettings.tag, "Failed to parse logs date (month): " + e.toString());
-							}
-
-							int year = -1;
-							try {
-								year = Integer.parseInt(matcherLog.group(4));
-							} catch (Exception e) {
-								Log.w(cgSettings.tag, "Failed to parse logs date (year): " + e.toString());
-							}
-
-							long logDate;
-							if (year > 0 && month >= 0 && day > 0) {
-								Calendar date = Calendar.getInstance();
-								date.set(year, month, day, 12, 0, 0);
-								logDate = date.getTimeInMillis();
-								logDate = (logDate / 1000L) * 1000L;
-							} else {
-								logDate = 0;
-							}
-
-							if (logTypes.containsKey(matcherLog.group(1).toLowerCase())) {
-								logDone.type = logTypes.get(matcherLog.group(1).toLowerCase());
-							} else {
-								logDone.type = logTypes.get("icon_note");
-							}
-
-							logDone.author = Html.fromHtml(matcherLog.group(5)).toString();
-							logDone.date = logDate;
-							logDone.log = logTmp;
-							if (matcherLog.group(7) != null && matcherLog.group(8) != null) {
-								logDone.cacheGuid = matcherLog.group(7);
-								logDone.cacheName = matcherLog.group(8);
-							}
-
-							trackable.logs.add(logDone);
-						}
-					}
+				logDone.author = Html.fromHtml(matcherLogs.group(3)).toString();
+				
+				try
+				{
+				    logDone.date = parseGcCustomDate(matcherLogs.group(2)).getTime();
 				}
+				catch (ParseException e) {}
+				
+				logDone.log = matcherLogs.group(6).trim();
+				
+				if (matcherLogs.group(4) != null && matcherLogs.group(5) != null)
+				{
+					logDone.cacheGuid = matcherLogs.group(4);
+					logDone.cacheName = matcherLogs.group(5);
+				}
+
+				trackable.logs.add(logDone);
 			}
 		} catch (Exception e) {
 			// failed to parse logs
