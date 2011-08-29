@@ -391,10 +391,11 @@
   <string name="init_signature">Signature</string>
   <string name="init_signature_help_button">Help</string>
   <string name="init_signature_help_title">Signature tips and tricks</string>
-  <string name="init_signature_help_text">Write your signature to use in log text.\nSpecial strings that can be used are: [DATE] , [TIME], [USER] &amp; [NUMBER].\nThese will be expanded when the signature is inserted.</string>
+  <string name="init_signature_help_text">Write your signature to use in log text.\nSpecial strings that can be used are: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nThese will be expanded when the signature is inserted.</string>
   <string name="init_signature_template_button">Insert template</string>
   <string name="init_signature_template_date">Date</string>
   <string name="init_signature_template_time">Time</string>
+  <string name="init_signature_template_datetime">Date &amp; Time</string>
   <string name="init_signature_template_user">User</string>
   <string name="init_signature_template_number">Number</string>
   <string name="init_languages">Translation</string>
