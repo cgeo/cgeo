@@ -420,24 +420,10 @@ public class cgeotrackable extends AbstractActivity {
 		final int id = item.getItemId();
 
 		if (id == 1) {
-			final Intent cachesIntent = new Intent(this, cgeocaches.class);
-
-			cachesIntent.putExtra("type", "owner");
-			cachesIntent.putExtra("username", contextMenuUser);
-			cachesIntent.putExtra("cachetype", settings.cacheType);
-
-			startActivity(cachesIntent);
-
+			cgeocaches.startActivityCacheOwner(this, contextMenuUser);
 			return true;
 		} else if (id == 2) {
-			final Intent cachesIntent = new Intent(this, cgeocaches.class);
-
-			cachesIntent.putExtra("type", "username");
-			cachesIntent.putExtra("username", contextMenuUser);
-			cachesIntent.putExtra("cachetype", settings.cacheType);
-
-			startActivity(cachesIntent);
-
+			cgeocaches.startActivityCacheUser(this, contextMenuUser);
 			return true;
 		} else if (id == 3) {
 			startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(contextMenuUser))));

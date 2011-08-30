@@ -55,7 +55,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 	private boolean sort = true;
 	private int checked = 0;
 	private boolean selectMode = false;
-	private HashMap<String, Drawable> gcIcons = new HashMap<String, Drawable>();
+	private static HashMap<String, Drawable> gcIconDrawables = new HashMap<String, Drawable>();
 	private ArrayList<cgCompassMini> compasses = new ArrayList<cgCompassMini>();
 	private ArrayList<cgDistanceView> distances = new ArrayList<cgDistanceView>();
 	private int[] ratingBcgs = new int[3];
@@ -81,21 +81,10 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		pixelDensity = metrics.density;
 
-		if (gcIcons == null || gcIcons.isEmpty()) {
-			gcIcons.put("ape", (Drawable) activity.getResources().getDrawable(R.drawable.type_ape));
-			gcIcons.put("cito", (Drawable) activity.getResources().getDrawable(R.drawable.type_cito));
-			gcIcons.put("earth", (Drawable) activity.getResources().getDrawable(R.drawable.type_earth));
-			gcIcons.put("event", (Drawable) activity.getResources().getDrawable(R.drawable.type_event));
-			gcIcons.put("letterbox", (Drawable) activity.getResources().getDrawable(R.drawable.type_letterbox));
-			gcIcons.put("locationless", (Drawable) activity.getResources().getDrawable(R.drawable.type_locationless));
-			gcIcons.put("mega", (Drawable) activity.getResources().getDrawable(R.drawable.type_mega));
-			gcIcons.put("multi", (Drawable) activity.getResources().getDrawable(R.drawable.type_multi));
-			gcIcons.put("traditional", (Drawable) activity.getResources().getDrawable(R.drawable.type_traditional));
-			gcIcons.put("virtual", (Drawable) activity.getResources().getDrawable(R.drawable.type_virtual));
-			gcIcons.put("webcam", (Drawable) activity.getResources().getDrawable(R.drawable.type_webcam));
-			gcIcons.put("wherigo", (Drawable) activity.getResources().getDrawable(R.drawable.type_wherigo));
-			gcIcons.put("mystery", (Drawable) activity.getResources().getDrawable(R.drawable.type_mystery));
-			gcIcons.put("gchq", (Drawable) activity.getResources().getDrawable(R.drawable.type_hq));
+		if (gcIconDrawables == null || gcIconDrawables.isEmpty()) {
+			for (String cacheType : cgBase.cacheTypesInv.keySet()) {
+				gcIconDrawables.put(cacheType, (Drawable) activity.getResources().getDrawable(cgBase.getCacheIcon(cacheType)));
+			}
 		}
 
 		if (settings.skin == 0) {
@@ -471,10 +460,10 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		}
 
 		holder.text.setText(cache.nameSp, TextView.BufferType.SPANNABLE);
-		if (gcIcons.containsKey(cache.type)) { // cache icon
-			holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIcons.get(cache.type), null, null, null);
+		if (gcIconDrawables.containsKey(cache.type)) { // cache icon
+			holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(cache.type), null, null, null);
 		} else { // unknown cache type, "mystery" icon
-			holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIcons.get("mystery"), null, null, null);
+			holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get("mystery"), null, null, null);
 		}
 
 		if (holder.inventory.getChildCount() > 0) {

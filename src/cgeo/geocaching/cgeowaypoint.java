@@ -257,15 +257,7 @@ public class cgeowaypoint extends AbstractActivity {
 			showToast(res.getString(R.string.err_location_unknown));
 		}
 
-		cgeocaches cachesActivity = new cgeocaches();
-
-		Intent cachesIntent = new Intent(this, cachesActivity.getClass());
-		cachesIntent.putExtra("type", "coordinate");
-		cachesIntent.putExtra("latitude", waypoint.latitude);
-		cachesIntent.putExtra("longitude", waypoint.longitude);
-		cachesIntent.putExtra("cachetype", settings.cacheType);
-
-		startActivity(cachesIntent);
+		cgeocaches.startActivityCachesAround(this, waypoint.latitude, waypoint.longitude);
 
 		finish();
 	}
