@@ -488,6 +488,7 @@
   <string name="cache_offline_time_days">days ago</string>
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Attributes</string>
+  <string name="cache_attributes_no_icons">(refresh cache to show attribute icons)</string>
   <string name="cache_inventory">Inventory</string>
   <string name="cache_log_offline">Offline log</string>
   <string name="cache_log_images_loading">Loading log Image …</string>
@@ -908,11 +909,7 @@
     · <a href="http://iirojappinen.com/">Iiro Jäppinen</a> (graphic)\n
     · inkantis (localization PL)\n
     · <a href="http://www.jaytech.cz/">Jan Žatecký</a> (graphic)\n
-<<<<<<< HEAD:res/values/strings.xml
-=======
     · <a href="http://joachim-wilke.de/">JoWi24</a> (code)\n
-    · <a href="http://github.com/koem">Köm</a> (code, artwork computation)\n
->>>>>>> upstream/master:res/values/strings.xml
     · MichielK (code, loc. NL)\n
     · ncorreia (code, localization PT)\n
     · Pascal (localization NL)\n

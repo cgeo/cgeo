@@ -87,9 +87,15 @@ public class cgeodetail extends AbstractActivity {
 	private ProgressDialog watchlistDialog = null; // progress dialog for watchlist add/remove
 	private Thread watchlistThread = null; // thread for watchlist add/remove
 	private HashMap<Integer, String> calendars = new HashMap<Integer, String>();
+
 	private ViewGroup attributeIconsLayout; // layout for attribute icons
 	private ViewGroup attributeDescriptionsLayout; // layout for attribute descriptions
 	private boolean attributesShowAsIcons = true; // default: show icons
+	/** <code>noAttributeImagesFound</code>
+	 * This will be the case if the cache was imported with an older version of c:geo.
+	 * These older versions parsed the attribute description from the tooltip in the web
+	 * page and put them into the DB. No icons can be matched for these. */
+	private boolean noAttributeIconsFound = false;
 	private int attributeBoxMaxWidth;
 
 	private Handler storeCacheHandler = new Handler() {
@@ -836,7 +842,8 @@ public class cgeodetail extends AbstractActivity {
 			// cache attributes
 			if (cache.attributes != null && cache.attributes.size() > 0) {
 
-				final LinearLayout attribBox = (LinearLayout) findViewById(R.id.attributes_innerbox);
+				final LinearLayout attribBox = (LinearLayout) findViewById(
+						R.id.attributes_innerbox);
 
 		    	// maximum width for attribute icons is screen width - paddings of parents
 		        attributeBoxMaxWidth = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
@@ -862,10 +869,18 @@ public class cgeodetail extends AbstractActivity {
 		            } );
 
 		        // icons or text?
-				if (attributesShowAsIcons)
+				//
+				// also show icons when noAttributeImagesFound == true. Explanation:
+				//  1. no icons could be found in the first invocation of this method
+				//  2. user refreshes cache from web
+				//  3. now this method is called again
+				//  4. attributeShowAsIcons is false but noAttributeImagesFound is true
+				//     => try to show them now
+				if (attributesShowAsIcons || noAttributeIconsFound) {
 					showAttributeIcons(attribBox, attributeBoxMaxWidth);
-				else
+				} else {
 					showAttributeDescriptions(attribBox);
+				}
 
 				findViewById(R.id.attributes_box).setVisibility(View.VISIBLE);
 			}
@@ -1969,8 +1984,14 @@ public class cgeodetail extends AbstractActivity {
 	 * and makes it visible
 	 */
 	private void showAttributeIcons(LinearLayout attribBox, int parentWidth) {
-		if (attributeIconsLayout == null)
+		if (attributeIconsLayout == null) {
 			attributeIconsLayout = createAttributeIconsLayout(parentWidth);
+			// no matching icons found? show text
+			if (noAttributeIconsFound) {
+				showAttributeDescriptions(attribBox);
+				return;
+			}
+		}
 		attribBox.removeAllViews();
 		attribBox.addView(attributeIconsLayout);
 		attributesShowAsIcons = true;
@@ -1981,8 +2002,9 @@ public class cgeodetail extends AbstractActivity {
 	 * and makes it visible
 	 */
 	private void showAttributeDescriptions(LinearLayout attribBox) {
-		if (attributeDescriptionsLayout == null)
+		if (attributeDescriptionsLayout == null) {
 			attributeDescriptionsLayout = createAttributeDescriptionsLayout();
+		}
 		attribBox.removeAllViews();
 		attribBox.addView(attributeDescriptionsLayout);
 		attributesShowAsIcons = false;
@@ -1992,10 +2014,17 @@ public class cgeodetail extends AbstractActivity {
 	 * toggle attribute descriptions and icons
 	 */
 	private void toggleAttributeDisplay(LinearLayout attribBox, int parentWidth) {
-		if (attributesShowAsIcons)
+		// Don't toggle when there are no icons to show.
+		if (noAttributeIconsFound) {
+			return;
+		}
+		
+		// toggle
+		if (attributesShowAsIcons) {
 			showAttributeDescriptions(attribBox);
-		else
+		} else {
 			showAttributeIcons(attribBox, parentWidth);
+		}
 	}
 
 	private ViewGroup createAttributeIconsLayout(int parentWidth) {
@@ -2006,11 +2035,14 @@ public class cgeodetail extends AbstractActivity {
     	LinearLayout attributeRow = newAttributeIconsRow();
         rows.addView(attributeRow);
 
+        noAttributeIconsFound = true;
+
         for(String attributeName : cache.attributes) {
 			boolean strikethru = attributeName.endsWith("_no");
 			// cut off _yes / _no
-			if (attributeName.endsWith("_no") || attributeName.endsWith("_yes"))
+			if (attributeName.endsWith("_no") || attributeName.endsWith("_yes")) {
 				attributeName = attributeName.substring(0, attributeName.lastIndexOf("_"));
+			}
 			// check if another attribute icon fits in this row
         	attributeRow.measure(0, 0);
         	int rowWidth = attributeRow.getMeasuredWidth();
@@ -2024,26 +2056,30 @@ public class cgeodetail extends AbstractActivity {
 
 			// dynamically search icon of the attribute
         	Drawable d = null;
-		    int id = res.getIdentifier("attribute_" + attributeName, "drawable", base.context.getPackageName());
-		    if (id > 0)
+		    int id = res.getIdentifier("attribute_" + attributeName, "drawable", 
+		    		base.context.getPackageName());
+		    if (id > 0) {
+		        noAttributeIconsFound = false;
 		    	d = res.getDrawable(id);
-		    else
+		        iv.setImageDrawable(d);
+		        // strike through?
+	        	if (strikethru) {
+	        		// generate strikethru image with same properties as attribute image
+	        		ImageView strikethruImage = new ImageView(this);
+	        		strikethruImage.setLayoutParams(iv.getLayoutParams());
+	        		d = res.getDrawable(R.drawable.attribute__strikethru);
+	    	        strikethruImage.setImageDrawable(d);
+	    	        fl.addView(strikethruImage);
+	        	}
+		    } else {
 		    	d = res.getDrawable(R.drawable.attribute_icon_not_found);
-	        iv.setImageDrawable(d);
+		        iv.setImageDrawable(d);
+		    }
 
-	        // strike through?
-        	if (strikethru) {
-        		// generate strikethru image with same properties as attribute image
-        		ImageView strikethruImage = new ImageView(this);
-        		strikethruImage.setLayoutParams(iv.getLayoutParams());
-        		d = res.getDrawable(R.drawable.attribute__strikethru);
-    	        strikethruImage.setImageDrawable(d);
-    	        fl.addView(strikethruImage);
-        	}
         	attributeRow.addView(fl);
         }
 
-        return rows;
+    	return rows;
     }
 
     private LinearLayout newAttributeIconsRow() {
@@ -2055,7 +2091,8 @@ public class cgeodetail extends AbstractActivity {
     }
 
     private ViewGroup createAttributeDescriptionsLayout() {
-    	final LinearLayout descriptions = (LinearLayout) inflater.inflate(R.layout.attribute_descriptions, null);
+    	final LinearLayout descriptions = (LinearLayout) inflater.inflate(
+    			R.layout.attribute_descriptions, null);
     	TextView attribView = (TextView) descriptions.getChildAt(0);
 
 		StringBuilder buffer = new StringBuilder();
@@ -2064,18 +2101,20 @@ public class cgeodetail extends AbstractActivity {
 			attribute = cache.attributes.get(i);
 
 			// dynamically search for a translation of the attribute
-		    int id = res.getIdentifier("attribute_" + attribute, "string", base.context.getPackageName());
+		    int id = res.getIdentifier("attribute_" + attribute, "string", 
+		    		base.context.getPackageName());
 		    if (id > 0) {
 		    	String translated = res.getString(id);
 		    	if (translated != null && translated.length() > 0) {
 		    		attribute = translated;
 		    	}
 		    }
-		    if (buffer.length() > 0) {
-		    	buffer.append('\n');
-		    }
+		    if (buffer.length() > 0) buffer.append('\n');
 		    buffer.append(attribute);
 		}
+		
+		if (noAttributeIconsFound)
+			buffer.append("\n\n").append(res.getString(R.string.cache_attributes_no_icons));
 
 		attribView.setText(buffer);
 
