@@ -40,6 +40,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
@@ -2544,6 +2545,38 @@ public class cgeocaches extends AbstractListActivity {
 	public static void startActivityOffline(final Context context) {
 		final Intent cachesIntent = new Intent(context, cgeocaches.class);
 		cachesIntent.putExtra(EXTRAS_LIST_TYPE, "offline");
+		context.startActivity(cachesIntent);
+	}
+	
+	public static void startActivityCachesAround(final AbstractActivity context, final Double latitude, final Double longitude) {
+		cgeocaches cachesActivity = new cgeocaches();
+
+		Intent cachesIntent = new Intent(context, cachesActivity.getClass());
+		cachesIntent.putExtra("type", "coordinate");
+		cachesIntent.putExtra("latitude", latitude);
+		cachesIntent.putExtra("longitude", longitude);
+		cachesIntent.putExtra("cachetype", context.getSettings().cacheType);
+
+		context.startActivity(cachesIntent);
+	}
+	
+	public static void startActivityCacheOwner(final AbstractActivity context, final String userName) {
+		final Intent cachesIntent = new Intent(context, cgeocaches.class);
+
+		cachesIntent.putExtra("type", "owner");
+		cachesIntent.putExtra("username", userName);
+		cachesIntent.putExtra("cachetype", context.getSettings().cacheType);
+
+		context.startActivity(cachesIntent);
+	}
+	
+	public static void startActivityCacheUser(final AbstractActivity context, final String userName) {
+		final Intent cachesIntent = new Intent(context, cgeocaches.class);
+
+		cachesIntent.putExtra("type", "username");
+		cachesIntent.putExtra("username", userName);
+		cachesIntent.putExtra("cachetype", context.getSettings().cacheType);
+
 		context.startActivity(cachesIntent);
 	}
 }

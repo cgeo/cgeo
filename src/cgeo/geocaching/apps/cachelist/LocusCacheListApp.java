@@ -44,7 +44,7 @@ class LocusCacheListApp extends AbstractLocusApp implements CacheListApp {
 
 			// cache waypoints
 			for (cgCache cache : cacheListCoord) {
-				final int wpIcon = cgBase.getIcon(true, cache.type, cache.own, cache.found, cache.disabled);
+				final int wpIcon = cgBase.getMarkerIcon(true, cache.type, cache.own, cache.found, cache.disabled);
 
 				if (wpIcon > 0) {
 					// load icon
