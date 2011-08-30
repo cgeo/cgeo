@@ -74,31 +74,7 @@ public class cgCache {
 	public boolean statusCheckedView = false;
 	public String directionImg = null;
 
-	public cgCache merge(cgData storage) {
-
-		boolean loadA = true;
-		boolean loadW = true;
-		boolean loadS = true;
-		boolean loadL = true;
-		boolean loadI = true;
-
-		if (attributes == null || attributes.isEmpty()) {
-			loadA = false;
-		}
-		if (waypoints == null || waypoints.isEmpty()) {
-			loadW = false;
-		}
-		if (spoilers == null || spoilers.isEmpty()) {
-			loadS = false;
-		}
-		if (logs == null || logs.isEmpty()) {
-			loadL = false;
-		}
-		if (inventory == null || inventory.isEmpty()) {
-			loadI = false;
-		}
-
-		final cgCache oldCache = storage.loadCache(geocode, guid, loadA, loadW, loadS, loadL, loadI, false);
+	public cgCache merge(cgData storage, cgCache oldCache) {
 
 		if (oldCache == null) {
 			return this;

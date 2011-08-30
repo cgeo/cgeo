@@ -691,11 +691,12 @@ public class cgeoapplication extends Application {
 
 				cache.reason = reason;
 
-				if (storage.isThere(geocode, guid, false, false)) {
-					cgCache mergedCache = cache.merge(storage);
+				cgCache oldCache = storage.loadCache(cache.geocode, cache.guid, false, true, true, true, true, true);
+				if (oldCache!=null) {
+					cgCache mergedCache = cache.merge(storage,oldCache);
 					storage.saveCache(mergedCache);
 				} else {
-					// cache is not saved, new data are for storing
+					// cache is not saved, new data is for storing
 					storage.saveCache(cache);
 				}
 			}
@@ -720,10 +721,11 @@ public class cgeoapplication extends Application {
 
 		boolean status = false;
 
-		if (storage.isThere(geocode, guid, false, false) == false || cache.reason >= 1) { // if for offline, do not merge
+		cgCache oldCache = null;
+		if (cache.reason >= 1 || (oldCache = storage.loadCache(cache.geocode, cache.guid, false, true, true, true, true, true)) !=null ) { // if for offline, do not merge
 			status = storage.saveCache(cache);
 		} else {
-			cgCache mergedCache = cache.merge(storage);
+			cgCache mergedCache = cache.merge(storage,oldCache);
 
 			status = storage.saveCache(mergedCache);
 		}

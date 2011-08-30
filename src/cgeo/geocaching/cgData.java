@@ -226,7 +226,7 @@ public class cgData {
 				if (dbHelper == null) {
 					dbHelper = new cgDbHelper(context);
 				}
-				databaseRO = dbHelper.getReadableDatabase();
+				databaseRO = dbHelper.getWritableDatabase();
 
 				if (databaseRO.needUpgrade(dbVersion)) {
 					databaseRO = null;
@@ -985,7 +985,9 @@ public class cgData {
 			return false;
 		}
 	}
-
+	
+	
+    @Deprecated
 	public boolean isReliableLatLon(String geocode, String guid) {
 		init();
 
@@ -1166,7 +1168,8 @@ public class cgData {
 		values.put("distance", cache.distance);
 		values.put("direction", cache.direction);
 		// save coordinates
-		final boolean rel = isReliableLatLon(cache.geocode, cache.guid);
+		//FIXME Why isn't it loaded before
+		final boolean rel = cache.reliableLatLon;//isReliableLatLon(cache.geocode, cache.guid);
 		if (cache.reliableLatLon) { // new cache has reliable coordinates, store
 			values.put("latitude", cache.latitude);
 			values.put("longitude", cache.longitude);
@@ -1721,23 +1724,29 @@ public class cgData {
 		ArrayList<cgCache> caches = new ArrayList<cgCache>();
 
 		try {
-			if (geocodes != null && geocodes.length > 0) {
-				StringBuilder all = new StringBuilder();
-				for (Object one : geocodes) {
-					if (all.length() > 0) {
-						all.append(", ");
+			if (geocodes != null) {
+				if (geocodes.length == 1 && false) {
+					where.append("geocode == \"");
+					where.append(geocodes[0]);
+					where.append("\"");
+				} else if (geocodes.length > 0) {
+					StringBuilder all = new StringBuilder();
+					for (Object one : geocodes) {
+						if (all.length() > 0) {
+							all.append(", ");
+						}
+						all.append("\"");
+						all.append((String) one);
+						all.append("\"");
 					}
-					all.append("\"");
-					all.append((String) one);
-					all.append("\"");
-				}
 
-				if (where.length() > 0) {
-					where.append(" and ");
+					if (where.length() > 0) {
+						where.append(" and ");
+					}
+					where.append("geocode in (");
+					where.append(all);
+					where.append(")");
 				}
-				where.append("geocode in (");
-				where.append(all);
-				where.append(")");
 			} else if (guids != null && guids.length > 0) {
 				StringBuilder all = new StringBuilder();
 				for (Object one : guids) {
@@ -1792,7 +1801,7 @@ public class cgData {
 				where.append(String.format((Locale) null, "%.6f", lonMax));
 				where.append(")");
 			}
-
+			long start = System.currentTimeMillis();
 			cursor = databaseRO.query(
 					dbTableCaches,
 					new String[]{
@@ -1807,6 +1816,11 @@ public class cgData {
 					null,
 					null,
 					null);
+			long end = System.currentTimeMillis();
+			if((end-start)> 100)
+			{
+				System.out.println(""  + (end-start) + where);
+			}
 
 			if (cursor != null) {
 				int index = 0;
@@ -1883,6 +1897,7 @@ public class cgData {
                         cache.favourite = cursor.getLong(cursor.getColumnIndex("favourite")) == 1l;
 						cache.inventoryItems = (Integer) cursor.getInt(cursor.getColumnIndex("inventoryunknown"));
 						cache.onWatchlist = cursor.getLong(cursor.getColumnIndex("onWatchlist")) == 1l;
+						cache.reliableLatLon = cursor.getInt(cursor.getColumnIndex("reliable_latlon"))>0;
 
 						if (loadA) {
 							ArrayList<String> attributes = loadAttributes(cache.geocode);
