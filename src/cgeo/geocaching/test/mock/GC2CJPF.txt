@@ -199,7 +199,7 @@
         var mapLatLng = null,
             cmapAdditionalWaypoints = [];
     </script>
-<meta name="og:site_name" content="Geocaching.com" property="og:site_name" /><meta name="og:type" content="article" property="og:type" /><meta name="fb:app_id" content="100167303362705" property="fb:app_id" /><meta name="og:url" content="http://coord.info/GC2CJPF" property="og:url" /><meta name="og:description" content="Von Nachwuchs-Cachern fÃ¼r Nachwuchs-Cacher." property="og:description" /><meta name="og:image" content="http://www.geocaching.com/images/facebook/wpttypes/3.png" property="og:image" /><meta name="og:title" content="Kinderwald KiC" property="og:title" /><meta name="description" content="Kinderwald KiC (GC2CJPF) was created by Tom03 on 07/31/2010. It&#39;s a Small size geocache, with difficulty of 2.5, terrain of 2. It&#39;s located in Niedersachsen, Germany. Von Nachwuchs-Cachern f&#252;r Nachwuchs-Cacher. Kleiner Multi &#252;ber 7 Stationen. L&#228;nge ca. 1 km + 1km f&#252;r den R&#252;ckweg. Die ZS befinden sich alle am KLEINEN BACH innerhalb des Kinderwaldes." /><link rel="alternate" href="../datastore/rss_galleryimages.ashx?guid=73246a5a-ebb9-4d4f-8db9-a951036f5376" type="application/rss+xml" title="[Gallery Images]" id="GalleryImages" /></head>
+<meta name="og:site_name" content="Geocaching.com" property="og:site_name" /><meta name="og:type" content="article" property="og:type" /><meta name="fb:app_id" content="100167303362705" property="fb:app_id" /><meta name="og:url" content="http://coord.info/GC2CJPF" property="og:url" /><meta name="og:description" content="Von Nachwuchs-Cachern für Nachwuchs-Cacher." property="og:description" /><meta name="og:image" content="http://www.geocaching.com/images/facebook/wpttypes/3.png" property="og:image" /><meta name="og:title" content="Kinderwald KiC" property="og:title" /><meta name="description" content="Kinderwald KiC (GC2CJPF) was created by Tom03 on 07/31/2010. It&#39;s a Small size geocache, with difficulty of 2.5, terrain of 2. It&#39;s located in Niedersachsen, Germany. Von Nachwuchs-Cachern f&#252;r Nachwuchs-Cacher. Kleiner Multi &#252;ber 7 Stationen. L&#228;nge ca. 1 km + 1km f&#252;r den R&#252;ckweg. Die ZS befinden sich alle am KLEINEN BACH innerhalb des Kinderwaldes." /><link rel="alternate" href="../datastore/rss_galleryimages.ashx?guid=73246a5a-ebb9-4d4f-8db9-a951036f5376" type="application/rss+xml" title="[Gallery Images]" id="GalleryImages" /></head>
 	<body background="http://www.blafoo.de/images/Kinderwald.jpg" class="CacheDetailsPage">
 		<form name="aspnetForm" method="post" action="cache_details.aspx?guid=73246a5a-ebb9-4d4f-8db9-a951036f5376" id="aspnetForm">
 <div>
@@ -297,7 +297,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$uxMainScriptManager', 'aspnet
 							</li>
 							
 							<li id="ctl00_liNavProfile">
-								<a id="ctl00_hlNavProfile" accesskey="2" title="Your Profile" title="[Your Profile â–¼]" href="../my/default.aspx">Your Profile &#9660;</a>
+								<a id="ctl00_hlNavProfile" accesskey="2" title="Your Profile" title="[Your Profile ▼]" href="../my/default.aspx">Your Profile &#9660;</a>
 								<ul class="SubMenu">
 									<li><a id="ctl00_hlSubNavQuickView" accesskey="p" title="Quick View" href="../my/default.aspx">Quick View</a></li>
 									<li><a id="ctl00_hlSubNavLists" accesskey="q" title="Lists" href="../my/lists.aspx">Lists</a></li>
@@ -447,7 +447,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$uxMainScriptManager', 'aspnet
         <div class="CacheInformationTable">
             <div class="LocationData">
                 <p class="NoBottomSpacing">
-                    <span id="ctl00_ContentBody_LatLon" style="font-weight:bold;">N 52Â° 25.504 E 009Â° 39.852</span>&nbsp;
+                    <span id="ctl00_ContentBody_LatLon" style="font-weight:bold;">N 52° 25.504 E 009° 39.852</span>&nbsp;
                     <small>
                         <a id="ctl00_ContentBody_lnkConversions" title="Other Conversions" href="/wpt/?lat=52.425067&amp;lon=9.6642&amp;detail=1" target="_blank">Other Conversions</a>
                     </small>
@@ -526,7 +526,7 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$uxMainScriptManager', 'aspnet
         
         <div class="UserSuppliedContent">
             
-            <span id="ctl00_ContentBody_ShortDescription">Von Nachwuchs-Cachern fÃ¼r Nachwuchs-Cacher.
+            <span id="ctl00_ContentBody_ShortDescription">Von Nachwuchs-Cachern für Nachwuchs-Cacher.
 </span>
             
         </div>
@@ -534,40 +534,40 @@ Sys.WebForms.PageRequestManager._initialize('ctl00$uxMainScriptManager', 'aspnet
         <br />
         <div class="UserSuppliedContent">
             
-            <span id="ctl00_ContentBody_LongDescription">Kleiner Multi Ã¼ber 7 Stationen. LÃ¤nge ca. 1 km + 1km fÃ¼r den
-RÃ¼ckweg. Die ZS befinden sich alle am KLEINEN BACH innerhalb des
-Kinderwaldes. Die Fragen mÃ¼ssen nicht in der aufgefÃ¼hrten
-Reihenfolge beantwortet werden, ihr kÃ¶nnt auch mit der letzten
+            <span id="ctl00_ContentBody_LongDescription">Kleiner Multi über 7 Stationen. Länge ca. 1 km + 1km für den
+Rückweg. Die ZS befinden sich alle am KLEINEN BACH innerhalb des
+Kinderwaldes. Die Fragen müssen nicht in der aufgeführten
+Reihenfolge beantwortet werden, ihr könnt auch mit der letzten
 Frage anfangen !
-<p>NÃ¤here Infos zum Kinderwald gibt es unter <a href=
+<p>Nähere Infos zum Kinderwald gibt es unter <a href=
 "http://www.kinderwald.de/" target="_blank" rel=
 "nofollow">www.kinderwald.de</a></p>
 <p><br />
 A. Am Start findet ihr einige Tiere. Wieviele blau-gelbe Punkte hat
-die grÃ¼ne Eidechse ?</p>
-<p>B. Folgt dem Weg in Richtung Norden und biegt hinter der BrÃ¼cke
-gleich links ab. Nach ein paar Metern kÃ¶nnt ihr auf der rechten
-Seite mehrere Tipis sehen. Wieviele Tipis zÃ¤hlt ihr ? Schaut genau
-hin ! Die VerbindungsgÃ¤nge zÃ¤hlen nicht dazu.</p>
-<p>C. Geht nun nach ein paar Metern links Ã¼ber die BrÃ¼cke auf die
-kleine Insel wo das Wasser gestaut wird. Auf der Insel kÃ¶nnt ihr
-beim groÃŸen Zelt einen "Marterpfahl" finden, dort seht ihr eine
-lachende Blume mit roten BlÃ¤ttern. Wieviele BlÃ¤tter hat die Blume
+die grüne Eidechse ?</p>
+<p>B. Folgt dem Weg in Richtung Norden und biegt hinter der Brücke
+gleich links ab. Nach ein paar Metern könnt ihr auf der rechten
+Seite mehrere Tipis sehen. Wieviele Tipis zählt ihr ? Schaut genau
+hin ! Die Verbindungsgänge zählen nicht dazu.</p>
+<p>C. Geht nun nach ein paar Metern links über die Brücke auf die
+kleine Insel wo das Wasser gestaut wird. Auf der Insel könnt ihr
+beim großen Zelt einen "Marterpfahl" finden, dort seht ihr eine
+lachende Blume mit roten Blättern. Wieviele Blätter hat die Blume
 ?</p>
-<p>D. Folgt dem Weg ein StÃ¼ck. Ihr kommt nach kurzer Zeit zur Villa
-Kunterbunt. Wieviele kleine, runde HolzstÃ¼cke sind aktuell an der
+<p>D. Folgt dem Weg ein Stück. Ihr kommt nach kurzer Zeit zur Villa
+Kunterbunt. Wieviele kleine, runde Holzstücke sind aktuell an der
 Wand befestigt ?</p>
-<p>E. Weiter geht es. Links findet ihr eine weitere (bunte) BrÃ¼cke.
+<p>E. Weiter geht es. Links findet ihr eine weitere (bunte) Brücke.
 Dort sind wieviele Kindergesichter zu finden ?</p>
-<p>F. Nach ca. 200 Metern kommt ihr zur SeilfÃ¤hre. An der SeilfÃ¤hre
+<p>F. Nach ca. 200 Metern kommt ihr zur Seilfähre. An der Seilfähre
 findet ihr die Antwort (GC= ?)</p>
 <p>G. Nach weiteren 250 Metern gelangt ihr zur Schafherde. Aus
 wievielen Mitgliedern besteht die Schafherde ?</p>
-<p>Das Final kÃ¶nnt ihr nun nach einem kleinem Spaziergang unter</p>
-<p>52Â° 25.(C-A+1)(B-2)(C-A) / 009Â° 39.(D-G)(F+1)(E+1) finden.</p>
-<p>Kontrolle: Die Quersumme von ABCDEFG betrÃ¤gt 48.</p>
-<p>Ãœber Fotos wÃ¼rde ich mich freuen !</p>
-<p>Viel SpaÃŸ !</p>
+<p>Das Final könnt ihr nun nach einem kleinem Spaziergang unter</p>
+<p>52° 25.(C-A+1)(B-2)(C-A) / 009° 39.(D-G)(F+1)(E+1) finden.</p>
+<p>Kontrolle: Die Quersumme von ABCDEFG beträgt 48.</p>
+<p>Über Fotos würde ich mich freuen !</p>
+<p>Viel Spaß !</p>
 <p>P.S. An warmen Tagen Badesachen und Handtuch mitnehmen.</p></span>
             
         </div>
@@ -880,7 +880,7 @@ wievielen Mitgliedern besteht die Schafherde ?</p>
                 <a href="http://www.geocaching.com/seek/wpt.aspx?WID=98cb1387-49ce-4f94-9b05-5cb079d332b1&RefID=73246a5a-ebb9-4d4f-8db9-a951036f5376&RefDS=1">GC2CJPF Parking</a> (Parking Area)
             </td>
             <td>
-                N 52Â° 25.384 E 009Â° 39.023&nbsp;
+                N 52° 25.384 E 009° 39.023&nbsp;
                 
             </td>
             <td>
@@ -898,7 +898,7 @@ wievielen Mitgliedern besteht die Schafherde ?</p>
                 Note:
             </td>
             <td colspan="6">
-                Kein "offizieller" Parkplatz, Parken trotzdem mÃ¶glich.
+                Kein "offizieller" Parkplatz, Parken trotzdem möglich.
             </td>
         </tr>
     
@@ -923,7 +923,7 @@ wievielen Mitgliedern besteht die Schafherde ?</p>
                 <a href="http://www.geocaching.com/seek/wpt.aspx?WID=04113bad-64ca-499a-9848-b5937e13da1b&RefID=73246a5a-ebb9-4d4f-8db9-a951036f5376&RefDS=1">GC2CJPF Start</a> (Question to Answer)
             </td>
             <td>
-                N 52Â° 25.504 E 009Â° 39.852&nbsp;
+                N 52° 25.504 E 009° 39.852&nbsp;
                 
             </td>
             <td>
@@ -966,7 +966,7 @@ wievielen Mitgliedern besteht die Schafherde ?</p>
                 <a href="http://www.geocaching.com/seek/wpt.aspx?WID=b28c5879-3181-4510-94fa-6ec5e30fd056&RefID=73246a5a-ebb9-4d4f-8db9-a951036f5376&RefDS=1">Aussichtspunkt</a> (Reference Point)
             </td>
             <td>
-                N 52Â° 25.488 E 009Â° 39.432&nbsp;
+                N 52° 25.488 E 009° 39.432&nbsp;
                 
             </td>
             <td>
@@ -1152,7 +1152,7 @@ wievielen Mitgliedern besteht die Schafherde ?</p>
                 </p>
                 
                     <h3 class="clear">
-                        66 Logged VisitsÂ Â·Â <a id="ctl00_ContentBody_uxGalleryImagesLink" DisplayFormatPlural="View the Image Gallery of {0:#,###} images" DisplayFormatSingular="View the Image Gallery" href="gallery.aspx?guid=73246a5a-ebb9-4d4f-8db9-a951036f5376">View the Image Gallery of 12 images</a>
+                        66 Logged Visits · <a id="ctl00_ContentBody_uxGalleryImagesLink" DisplayFormatPlural="View the Image Gallery of {0:#,###} images" DisplayFormatSingular="View the Image Gallery" href="gallery.aspx?guid=73246a5a-ebb9-4d4f-8db9-a951036f5376">View the Image Gallery of 12 images</a>
                     </h3>
                     <div class="InformationWidget">
                         <span id="ctl00_ContentBody_lblFindCounts"><p class="LogTotals"><img src="/images/icons/icon_smile.gif" alt="Found it" title="Found it" /> 52&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_note.gif" alt="Write note" title="Write note" /> 5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_disabled.gif" alt="Temporarily Disable Listing" title="Temporarily Disable Listing" /> 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_enabled.gif" alt="Enable Listing" title="Enable Listing" /> 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_greenlight.gif" alt="Publish Listing" title="Publish Listing" /> 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_needsmaint.gif" alt="Needs Maintenance" title="Needs Maintenance" /> 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/icons/icon_maint.gif" alt="Owner Maintenance" title="Owner Maintenance" /> 2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></span>
@@ -1160,7 +1160,7 @@ wievielen Mitgliedern besteht die Schafherde ?</p>
                             <span class="Warning">Warning!</span> <a href="/about/glossary.aspx#spoiler" title="Spoilers">Spoilers</a> may be included in the descriptions or links.</p>
                     </div>
                     
-                    <table class="LogsTable"><tr><td class="Nothing"><div class="FloatLeft LogDisplayLeft"><p class="logOwnerProfileName"><strong><a href="/profile/?guid=6723adb7-2aff-4d9b-836b-87df888a61d0" id="181250482">L8aube</a></strong></p><p class="logOwnerBadge"><img src='/images/icons/reg_user.gif' title='Member' /> Member</p><p class="logOwnerAvatar"><a href="/profile/?guid=6723adb7-2aff-4d9b-836b-87df888a61d0"><img src="/images/default_avatar.jpg" height='48' width='48' /></a></p><p class="logOwnerStats"><img src="/images/icons/icon_smile.png" align="absmiddle" /> 5</div><div class="FloatLeft LogDisplayRight"><div class="HalfLeft LogType"><strong><img src="http://www.geocaching.com/images/icons/icon_smile.gif" alt="Found it" title="Found it" />&nbsp;Found it</strong></div><div class="HalfRight AlignRight"><span class="minorDetails LogDate">08/21/2011</span></div><div class="Clear LogContent"><p class="LogText">hab ihn mit der familie und freundin gefunden...<br/>war echt toll...habe sogar einen kleinen tauchgang von der seilf&#xE4;hre runter gemacht <img src="/images/icons/icon_smile_big.gif" border="0" align="middle" ></img> <br/>DFDC !!!</p><table class="LogImagesTable" cellpadding="3" cellspacing="0"><tr><td><a href="http://img.geocaching.com/cache/log/9ac96f8f-6e63-4087-be94-48a96ffaba67.jpg" rel="tb_images[grp181250482]" title="&lt;span class=&quot;LogImgTitle&quot;&gt;seilf&#228;hre &nbsp;&lt;/span&gt;&lt;span class=&quot;LogImgLink&quot;&gt;&lt;a href=&quot;log.aspx?IID=9ac96f8f-6e63-4087-be94-48a96ffaba67&LID=181250482&quot;>View Log&lt;/a&gt; &lt;a href=&quot;javascript:pp(&apos;http://img.geocaching.com/cache/log/9ac96f8f-6e63-4087-be94-48a96ffaba67.jpg&#39;);&quot;>Print Picture&lt;/a&gt;&lt;/span&gt;<br /><p class=&quot;LogImgDescription&quot;>kurz vorm tauchgang xD</p>" class="tb_images lnk"><img src="/images/silk/photo.png" alt="Photo" title="Photo" /> <span>seilfÃ¤hre </span></a><br /></td></tr></table><div class="AlignRight"><small><a href="log.aspx?LUID=1b1a53e3-50df-4881-8700-1e9bbec50635" title="View Log">View Log</a></small> </div></div></div></td></tr><tr><td class="AlternatingRow"><div class="FloatLeft LogDisplayLeft"><p class="logOwnerProfileName"><strong><a href="/profile/?guid=66de7735-1888-479b-8dbd-ada710747374" id="181220910">Sir5al</a></strong></p><p class="logOwnerBadge"><img src='/images/icons/prem_user.gif' title='Premium Member' /> Premium Member</p><p class="logOwnerAvatar"><a href="/profile/?guid=66de7735-1888-479b-8dbd-ada710747374"><img src="http://img.geocaching.com/user/avatar/9da1d6ed-3a3f-47cb-aba3-f5550abe7d11.jpg" height='48' width='48' /></a></p><p class="logOwnerStats"><img src="/images/icons/icon_smile.png" align="absmiddle" /> 345</div><div class="FloatLeft LogDisplayRight"><div class="HalfLeft LogType"><strong><img src="http://www.geocaching.com/images/icons/icon_smile.gif" alt="Found it" title="Found it" />&nbsp;Found it</strong></div><div class="HalfRight AlignRight"><span class="minorDetails LogDate">08/21/2011</span></div><div class="Clear LogContent"><p class="LogText">den haben miss4tune und ich im team mit l8aube und gastcacher auf sch&#xF6;ner kleiner vormittagsrunde gefunden und geloggt ;-)<br/><br/>dfdc</p><table class="LogImagesTable" cellpadding="3" cellspacing="0"><tr><td><a href="http://img.geocaching.com/cache/log/bfda9eb7-a4ae-4b59-b4d3-7deb3e08cd79.jpg" rel="tb_images[grp181220910]" title="&lt;span class=&quot;LogImgTitle&quot;&gt;Upside Down&nbsp;&lt;/span&gt;&lt;span class=&quot;LogImgLink&quot;&gt;&lt;a href=&quot;log.aspx?IID=bfda9eb7-a4ae-4b59-b4d3-7deb3e08cd79&LID=181220910&quot;>View Log&lt;/a&gt; &lt;a href=&quot;javascript:pp(&apos;http://img.geocaching.com/cache/log/bfda9eb7-a4ae-4b59-b4d3-7deb3e08cd79.jpg&#39;);&quot;>Print Picture&lt;/a&gt;&lt;/span&gt;<br /><p class=&quot;LogImgDescription&quot;>kein Spoiler ;-)</p>" class="tb_images lnk"><img src="/images/silk/photo.png" alt="Photo" title="Photo" /> <span>Upside Down</span></a><br /></td></tr></table><div class="AlignRight"><small><a href="log.aspx?LUID=4b88db68-a5e8-4b37-9d5a-8cc406611457" title="View Log">View Log</a></small> </div></div></div></td></tr><tr><td class="Nothing"><div class="FloatLeft LogDisplayLeft"><p class="logOwnerProfileName"><strong><a href="/profile/?guid=9a28b2fb-bce9-481f-87bc-7c5f4bafe723" id="177793540">Tom03</a></strong></p><p class="logOwnerBadge"><img src='/images/icons/reg_user.gif' title='Member' /> Member</p><p class="logOwnerAvatar"><a href="/profile/?guid=9a28b2fb-bce9-481f-87bc-7c5f4bafe723"><img src="/images/default_avatar.jpg" height='48' width='48' /></a></p><p class="logOwnerStats"><img src="/images/icons/icon_smile.png" align="absmiddle" /> 120</div><div class="FloatLeft LogDisplayRight"><div class="HalfLeft LogType"><strong><img src="http://www.geocaching.com/images/icons/icon_maint.gif" alt="Owner Maintenance" title="Owner Maintenance" />&nbsp;Owner Maintenance</strong></div><div class="HalfRight AlignRight"><span class="minorDetails LogDate">08/06/2011</span></div><div class="Clear LogContent"><p class="LogText">So, das Final ist jetzt besser versteckt ! Keine Brennesseln mehr... Die Quersumme stimmt jetzt auch, danke f&#xFC;r den Hinweis. Das Original-Logbuch ist jetzt auch wieder in der Dose.... Und um den Spa&#xDF;-Faktor zu erh&#xF6;hen habe ich Station F. &#xFC;berarbeitet, hehehe.</p><div class="AlignRight"><small><a href="log.aspx?LUID=20b859cf-216f-48c2-a0b7-d63caadb8086" title="View Log">View Log</a></small> </div></div></div></td></tr><tr><td class="AlternatingRow"><div class="FloatLeft LogDisplayLeft"><p class="logOwnerProfileName"><strong><a href="/profile/?guid=2cb6a31e-1da7-4b90-b844-962c5b76023f" id="175386549">Sopranette</a></strong></p><p class="logOwnerBadge"><img src='/images/icons/prem_user.gif' title='Premium Member' /> Premium Member</p><p class="logOwnerAvatar"><a href="/profile/?guid=2cb6a31e-1da7-4b90-b844-962c5b76023f"><img src="http://img.geocaching.com/user/avatar/bd85f298-3276-4d19-a5f2-0cb8187a075c.jpg" height='48' width='48' /></a></p><p class="logOwnerStats"><img src="/images/icons/icon_smile.png" align="absmiddle" /> 1,080</div><div class="FloatLeft LogDisplayRight"><div class="HalfLeft LogType"><strong><img src="http://www.geocaching.com/images/icons/icon_smile.gif" alt="Found it" title="Found it" />&nbsp;Found it</strong></div><div class="HalfRight AlignRight"><span class="minorDetails LogDate">07/26/2011</span></div><div class="Clear LogContent"><p class="LogText">Kurzer Fahrradausflug mit Opa und den Kids (Schlenzer2000 und Sopranettchen). Wir haben gez&#xE4;hlt, sind ins Wasser gefallen, haben uns nicht beirren lassen und am Final gesucht - nix. Tourdaten nochmal abgefahren, nachgerechnet - stimmt alles. Suchradius ausgeweitet und dann tats&#xE4;chlich f&#xFC;ndig geworden. Leider dem Regenguss nicht entkommen.<br/>DFDC, Sopranette<br/>#1008</p><div class="AlignRight"><small><a href="log.aspx?LUID=673321ec-75e9-4b1f-89d3-1c568f2f1352" title="View Log">View Log</a></small> </div></div></div></td></tr><tr><td class="Nothing"><div class="FloatLeft LogDisplayLeft"><p class="logOwnerProfileName"><strong><a href="/profile/?guid=54b15127-29a6-4749-9a56-5a782a90954d" id="173168272">euroberlin</a></strong></p><p class="logOwnerBadge"><img src='/images/icons/reg_user.gif' title='Member' /> Member</p><p class="logOwnerAvatar"><a href="/profile/?guid=54b15127-29a6-4749-9a56-5a782a90954d"><img src="http://img.geocaching.com/user/avatar/d1ea7c15-cd92-417b-a33e-a6ba286ad04f.jpg" height='48' width='48' /></a></p><p class="logOwnerStats"><img src="/images/icons/icon_smile.png" align="absmiddle" /> 337</div><div class="FloatLeft LogDisplayRight"><div class="HalfLeft LogType"><strong><img src="http://www.geocaching.com/images/icons/icon_needsmaint.gif" alt="Needs Maintenance" title="Needs Maintenance" />&nbsp;Needs Maintenance</strong></div><div class="HalfRight AlignRight"><span class="minorDetails LogDate">07/16/2011</span></div><div class="Clear LogContent"><p class="LogText">Ja, stimmt...hatte ich in meinem Log vergessen zu notieren. Ich fand auch nur einen Notizzettel mit diversen Eintr&#xE4;gen. Kein Logbuch vorhanden. W&#xE4;re sch&#xF6;n, wenn das nachgeholt werdenk&#xF6;nnte bzw. ein m&#xF6;glicherweise abhanden gekommenes ersetzt w&#xFC;rde.<br/><br/>MfG</p><div class="AlignRight"><small><a href="log.aspx?LUID=a3ec8dfc-fee3-4ea7-939d-147558f68c14" title="View Log">View Log</a></small> </div></div></div></td></tr></table>
+                    <table class="LogsTable"><tr><td class="Nothing"><div class="FloatLeft LogDisplayLeft"><p class="logOwnerProfileName"><strong><a href="/profile/?guid=6723adb7-2aff-4d9b-836b-87df888a61d0" id="181250482">L8aube</a></strong></p><p class="logOwnerBadge"><img src='/images/icons/reg_user.gif' title='Member' /> Member</p><p class="logOwnerAvatar"><a href="/profile/?guid=6723adb7-2aff-4d9b-836b-87df888a61d0"><img src="/images/default_avatar.jpg" height='48' width='48' /></a></p><p class="logOwnerStats"><img src="/images/icons/icon_smile.png" align="absmiddle" /> 5</div><div class="FloatLeft LogDisplayRight"><div class="HalfLeft LogType"><strong><img src="http://www.geocaching.com/images/icons/icon_smile.gif" alt="Found it" title="Found it" />&nbsp;Found it</strong></div><div class="HalfRight AlignRight"><span class="minorDetails LogDate">08/21/2011</span></div><div class="Clear LogContent"><p class="LogText">hab ihn mit der familie und freundin gefunden...<br/>war echt toll...habe sogar einen kleinen tauchgang von der seilf&#xE4;hre runter gemacht <img src="/images/icons/icon_smile_big.gif" border="0" align="middle" ></img> <br/>DFDC !!!</p><table class="LogImagesTable" cellpadding="3" cellspacing="0"><tr><td><a href="http://img.geocaching.com/cache/log/9ac96f8f-6e63-4087-be94-48a96ffaba67.jpg" rel="tb_images[grp181250482]" title="&lt;span class=&quot;LogImgTitle&quot;&gt;seilf&#228;hre &nbsp;&lt;/span&gt;&lt;span class=&quot;LogImgLink&quot;&gt;&lt;a href=&quot;log.aspx?IID=9ac96f8f-6e63-4087-be94-48a96ffaba67&LID=181250482&quot;>View Log&lt;/a&gt; &lt;a href=&quot;javascript:pp(&apos;http://img.geocaching.com/cache/log/9ac96f8f-6e63-4087-be94-48a96ffaba67.jpg&#39;);&quot;>Print Picture&lt;/a&gt;&lt;/span&gt;<br /><p class=&quot;LogImgDescription&quot;>kurz vorm tauchgang xD</p>" class="tb_images lnk"><img src="/images/silk/photo.png" alt="Photo" title="Photo" /> <span>seilfähre </span></a><br /></td></tr></table><div class="AlignRight"><small><a href="log.aspx?LUID=1b1a53e3-50df-4881-8700-1e9bbec50635" title="View Log">View Log</a></small> </div></div></div></td></tr><tr><td class="AlternatingRow"><div class="FloatLeft LogDisplayLeft"><p class="logOwnerProfileName"><strong><a href="/profile/?guid=66de7735-1888-479b-8dbd-ada710747374" id="181220910">Sir5al</a></strong></p><p class="logOwnerBadge"><img src='/images/icons/prem_user.gif' title='Premium Member' /> Premium Member</p><p class="logOwnerAvatar"><a href="/profile/?guid=66de7735-1888-479b-8dbd-ada710747374"><img src="http://img.geocaching.com/user/avatar/9da1d6ed-3a3f-47cb-aba3-f5550abe7d11.jpg" height='48' width='48' /></a></p><p class="logOwnerStats"><img src="/images/icons/icon_smile.png" align="absmiddle" /> 345</div><div class="FloatLeft LogDisplayRight"><div class="HalfLeft LogType"><strong><img src="http://www.geocaching.com/images/icons/icon_smile.gif" alt="Found it" title="Found it" />&nbsp;Found it</strong></div><div class="HalfRight AlignRight"><span class="minorDetails LogDate">08/21/2011</span></div><div class="Clear LogContent"><p class="LogText">den haben miss4tune und ich im team mit l8aube und gastcacher auf sch&#xF6;ner kleiner vormittagsrunde gefunden und geloggt ;-)<br/><br/>dfdc</p><table class="LogImagesTable" cellpadding="3" cellspacing="0"><tr><td><a href="http://img.geocaching.com/cache/log/bfda9eb7-a4ae-4b59-b4d3-7deb3e08cd79.jpg" rel="tb_images[grp181220910]" title="&lt;span class=&quot;LogImgTitle&quot;&gt;Upside Down&nbsp;&lt;/span&gt;&lt;span class=&quot;LogImgLink&quot;&gt;&lt;a href=&quot;log.aspx?IID=bfda9eb7-a4ae-4b59-b4d3-7deb3e08cd79&LID=181220910&quot;>View Log&lt;/a&gt; &lt;a href=&quot;javascript:pp(&apos;http://img.geocaching.com/cache/log/bfda9eb7-a4ae-4b59-b4d3-7deb3e08cd79.jpg&#39;);&quot;>Print Picture&lt;/a&gt;&lt;/span&gt;<br /><p class=&quot;LogImgDescription&quot;>kein Spoiler ;-)</p>" class="tb_images lnk"><img src="/images/silk/photo.png" alt="Photo" title="Photo" /> <span>Upside Down</span></a><br /></td></tr></table><div class="AlignRight"><small><a href="log.aspx?LUID=4b88db68-a5e8-4b37-9d5a-8cc406611457" title="View Log">View Log</a></small> </div></div></div></td></tr><tr><td class="Nothing"><div class="FloatLeft LogDisplayLeft"><p class="logOwnerProfileName"><strong><a href="/profile/?guid=9a28b2fb-bce9-481f-87bc-7c5f4bafe723" id="177793540">Tom03</a></strong></p><p class="logOwnerBadge"><img src='/images/icons/reg_user.gif' title='Member' /> Member</p><p class="logOwnerAvatar"><a href="/profile/?guid=9a28b2fb-bce9-481f-87bc-7c5f4bafe723"><img src="/images/default_avatar.jpg" height='48' width='48' /></a></p><p class="logOwnerStats"><img src="/images/icons/icon_smile.png" align="absmiddle" /> 120</div><div class="FloatLeft LogDisplayRight"><div class="HalfLeft LogType"><strong><img src="http://www.geocaching.com/images/icons/icon_maint.gif" alt="Owner Maintenance" title="Owner Maintenance" />&nbsp;Owner Maintenance</strong></div><div class="HalfRight AlignRight"><span class="minorDetails LogDate">08/06/2011</span></div><div class="Clear LogContent"><p class="LogText">So, das Final ist jetzt besser versteckt ! Keine Brennesseln mehr... Die Quersumme stimmt jetzt auch, danke f&#xFC;r den Hinweis. Das Original-Logbuch ist jetzt auch wieder in der Dose.... Und um den Spa&#xDF;-Faktor zu erh&#xF6;hen habe ich Station F. &#xFC;berarbeitet, hehehe.</p><div class="AlignRight"><small><a href="log.aspx?LUID=20b859cf-216f-48c2-a0b7-d63caadb8086" title="View Log">View Log</a></small> </div></div></div></td></tr><tr><td class="AlternatingRow"><div class="FloatLeft LogDisplayLeft"><p class="logOwnerProfileName"><strong><a href="/profile/?guid=2cb6a31e-1da7-4b90-b844-962c5b76023f" id="175386549">Sopranette</a></strong></p><p class="logOwnerBadge"><img src='/images/icons/prem_user.gif' title='Premium Member' /> Premium Member</p><p class="logOwnerAvatar"><a href="/profile/?guid=2cb6a31e-1da7-4b90-b844-962c5b76023f"><img src="http://img.geocaching.com/user/avatar/bd85f298-3276-4d19-a5f2-0cb8187a075c.jpg" height='48' width='48' /></a></p><p class="logOwnerStats"><img src="/images/icons/icon_smile.png" align="absmiddle" /> 1,080</div><div class="FloatLeft LogDisplayRight"><div class="HalfLeft LogType"><strong><img src="http://www.geocaching.com/images/icons/icon_smile.gif" alt="Found it" title="Found it" />&nbsp;Found it</strong></div><div class="HalfRight AlignRight"><span class="minorDetails LogDate">07/26/2011</span></div><div class="Clear LogContent"><p class="LogText">Kurzer Fahrradausflug mit Opa und den Kids (Schlenzer2000 und Sopranettchen). Wir haben gez&#xE4;hlt, sind ins Wasser gefallen, haben uns nicht beirren lassen und am Final gesucht - nix. Tourdaten nochmal abgefahren, nachgerechnet - stimmt alles. Suchradius ausgeweitet und dann tats&#xE4;chlich f&#xFC;ndig geworden. Leider dem Regenguss nicht entkommen.<br/>DFDC, Sopranette<br/>#1008</p><div class="AlignRight"><small><a href="log.aspx?LUID=673321ec-75e9-4b1f-89d3-1c568f2f1352" title="View Log">View Log</a></small> </div></div></div></td></tr><tr><td class="Nothing"><div class="FloatLeft LogDisplayLeft"><p class="logOwnerProfileName"><strong><a href="/profile/?guid=54b15127-29a6-4749-9a56-5a782a90954d" id="173168272">euroberlin</a></strong></p><p class="logOwnerBadge"><img src='/images/icons/reg_user.gif' title='Member' /> Member</p><p class="logOwnerAvatar"><a href="/profile/?guid=54b15127-29a6-4749-9a56-5a782a90954d"><img src="http://img.geocaching.com/user/avatar/d1ea7c15-cd92-417b-a33e-a6ba286ad04f.jpg" height='48' width='48' /></a></p><p class="logOwnerStats"><img src="/images/icons/icon_smile.png" align="absmiddle" /> 337</div><div class="FloatLeft LogDisplayRight"><div class="HalfLeft LogType"><strong><img src="http://www.geocaching.com/images/icons/icon_needsmaint.gif" alt="Needs Maintenance" title="Needs Maintenance" />&nbsp;Needs Maintenance</strong></div><div class="HalfRight AlignRight"><span class="minorDetails LogDate">07/16/2011</span></div><div class="Clear LogContent"><p class="LogText">Ja, stimmt...hatte ich in meinem Log vergessen zu notieren. Ich fand auch nur einen Notizzettel mit diversen Eintr&#xE4;gen. Kein Logbuch vorhanden. W&#xE4;re sch&#xF6;n, wenn das nachgeholt werdenk&#xF6;nnte bzw. ein m&#xF6;glicherweise abhanden gekommenes ersetzt w&#xFC;rde.<br/><br/>MfG</p><div class="AlignRight"><small><a href="log.aspx?LUID=a3ec8dfc-fee3-4ea7-939d-147558f68c14" title="View Log">View Log</a></small> </div></div></div></td></tr></table>
                     
                     <p>
                         There are 61 additional logs. <a href="/seek/cache_details.aspx?guid=73246a5a-ebb9-4d4f-8db9-a951036f5376&log=y&decrypt=">View them all</a>
@@ -1505,27 +1505,27 @@ wievielen Mitgliedern besteht die Schafherde ?</p>
             
                 <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl01_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl01$uxLocaleItem&#39;,&#39;&#39;)">Deutsch</a></li>
             
-                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl02_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl02$uxLocaleItem&#39;,&#39;&#39;)">FranÃ§ais</a></li>
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl02_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl02$uxLocaleItem&#39;,&#39;&#39;)">Français</a></li>
             
-                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl03_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl03$uxLocaleItem&#39;,&#39;&#39;)">PortuguÃªs</a></li>
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl03_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl03$uxLocaleItem&#39;,&#39;&#39;)">Português</a></li>
             
-                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl04_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl04$uxLocaleItem&#39;,&#39;&#39;)">ÄŒeÅ¡tina</a></li>
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl04_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl04$uxLocaleItem&#39;,&#39;&#39;)">Čeština</a></li>
             
                 <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl05_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl05$uxLocaleItem&#39;,&#39;&#39;)">Svenska</a></li>
             
                 <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl06_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl06$uxLocaleItem&#39;,&#39;&#39;)">Nederlands</a></li>
             
-                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl07_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl07$uxLocaleItem&#39;,&#39;&#39;)">CatalÃ </a></li>
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl07_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl07$uxLocaleItem&#39;,&#39;&#39;)">Català</a></li>
             
                 <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl08_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl08$uxLocaleItem&#39;,&#39;&#39;)">Polski</a></li>
             
                 <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl09_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl09$uxLocaleItem&#39;,&#39;&#39;)">Eesti</a></li>
             
-                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl10_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl10$uxLocaleItem&#39;,&#39;&#39;)">Norsk, BokmÃ¥l</a></li>
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl10_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl10$uxLocaleItem&#39;,&#39;&#39;)">Norsk, Bokmål</a></li>
             
-                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl11_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl11$uxLocaleItem&#39;,&#39;&#39;)">í•œêµ­ì–´</a></li>
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl11_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl11$uxLocaleItem&#39;,&#39;&#39;)">한국어</a></li>
             
-                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl12_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl12$uxLocaleItem&#39;,&#39;&#39;)">EspaÃ±ol</a></li>
+                <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl12_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl12$uxLocaleItem&#39;,&#39;&#39;)">Español</a></li>
             
                 <li><a id="ctl00_uxLocaleList_uxLocaleList_ctl13_uxLocaleItem" href="javascript:__doPostBack(&#39;ctl00$uxLocaleList$uxLocaleList$ctl13$uxLocaleItem&#39;,&#39;&#39;)">Magyar</a></li>
             
