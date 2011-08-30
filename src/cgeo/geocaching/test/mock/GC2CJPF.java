@@ -71,6 +71,7 @@ public class GC2CJPF implements ICache {
 	@Override
 	public String getData() {
 		try {
+			// the file has been created with this URL: http://www.geocaching.com/seek/cache_details.aspx?log=y&wp=GC2CJPF&numlogs=35&decrypt=y
 			InputStream is = this.getClass().getResourceAsStream("/cgeo/geocaching/test/mock/"+getGeocode()+".txt");
 			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 
