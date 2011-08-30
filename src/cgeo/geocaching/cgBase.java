@@ -2107,7 +2107,7 @@ public class cgBase {
 		final Pattern patternIcon = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
 		final Pattern patternType = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"[^\"]+\" alt=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
 		final Pattern patternDistance = Pattern.compile("<h4[^>]*\\W*Tracking History \\(([0-9\\.,]+(km|mi))[^\\)]*\\)", Pattern.CASE_INSENSITIVE);
-		final Pattern patternLog = Pattern.compile("<tr class=\"Data.+?src=\"/images/icons/([^\\.]+).gif[^>]+>&nbsp;([^<]+)</td>.+?guid.+?>([^<]+)</a>.+?guid=([^\"]+)\">([^<]+)</a>.+?<td colspan=\"4\">(.+?)(?:<ul.+?ul>)?\\s*</td>\\s*</tr>", Pattern.CASE_INSENSITIVE);
+		final Pattern patternLog = Pattern.compile("<tr class=\"Data.+?src=\"/images/icons/([^\\.]+)\\.gif[^>]+>&nbsp;([^<]+)</td>.+?guid.+?>([^<]+)</a>.+?(?:guid=([^\"]+)\">([^<]+)</a>.+?)?<td colspan=\"4\">(.+?)(?:<ul.+?ul>)?\\s*</td>\\s*</tr>", Pattern.CASE_INSENSITIVE);
 
 		final cgTrackable trackable = new cgTrackable();
 
@@ -5022,9 +5022,85 @@ public class cgBase {
 		}
 		return out;
 	}
+	
+	public static int getCacheIcon(final String type) {
+		fillIconsMap();
+		Integer iconId = gcIcons.get("type_" + type);
+		if (iconId != null) {
+			return iconId;
+		}
+		// fallback to traditional if some icon type is not correct
+		return gcIcons.get("type_traditional");
+	}
 
-	public static int getIcon(boolean cache, String type, boolean own, boolean found, boolean disabled) {
+	public static int getMarkerIcon(final boolean cache, final String type, final boolean own, final boolean found, final boolean disabled) {
+		fillIconsMap();
+
+		if (wpIcons.isEmpty()) {
+			wpIcons.put("waypoint", R.drawable.marker_waypoint_waypoint);
+			wpIcons.put("flag", R.drawable.marker_waypoint_flag);
+			wpIcons.put("pkg", R.drawable.marker_waypoint_pkg);
+			wpIcons.put("puzzle", R.drawable.marker_waypoint_puzzle);
+			wpIcons.put("stage", R.drawable.marker_waypoint_stage);
+			wpIcons.put("trailhead", R.drawable.marker_waypoint_trailhead);
+		}
+
+		int icon = -1;
+		String iconTxt = null;
+
+		if (cache) {
+			if (type != null && type.length() > 0) {
+				if (own) {
+					iconTxt = type + "-own";
+				} else if (found) {
+					iconTxt = type + "-found";
+				} else if (disabled) {
+					iconTxt = type + "-disabled";
+				} else {
+					iconTxt = type;
+				}
+			} else {
+				iconTxt = "traditional";
+			}
+
+			if (gcIcons.containsKey(iconTxt)) {
+				icon = gcIcons.get(iconTxt);
+			} else {
+				icon = gcIcons.get("traditional");
+			}
+		} else {
+			if (type != null && type.length() > 0) {
+				iconTxt = type;
+			} else {
+				iconTxt = "waypoint";
+			}
+
+			if (wpIcons.containsKey(iconTxt)) {
+				icon = wpIcons.get(iconTxt);
+			} else {
+				icon = wpIcons.get("waypoint");
+			}
+		}
+
+		return icon;
+	}
+
+	private static void fillIconsMap() {
 		if (gcIcons.isEmpty()) {
+			gcIcons.put("type_ape", R.drawable.type_ape);
+			gcIcons.put("type_cito", R.drawable.type_cito);
+			gcIcons.put("type_earth", R.drawable.type_earth);
+			gcIcons.put("type_event", R.drawable.type_event);
+			gcIcons.put("type_letterbox", R.drawable.type_letterbox);
+			gcIcons.put("type_locationless", R.drawable.type_locationless);
+			gcIcons.put("type_mega", R.drawable.type_mega);
+			gcIcons.put("type_multi", R.drawable.type_multi);
+			gcIcons.put("type_traditional", R.drawable.type_traditional);
+			gcIcons.put("type_virtual", R.drawable.type_virtual);
+			gcIcons.put("type_webcam", R.drawable.type_webcam);
+			gcIcons.put("type_wherigo", R.drawable.type_wherigo);
+			gcIcons.put("type_mystery", R.drawable.type_mystery);
+			gcIcons.put("type_gchq", R.drawable.type_hq);
 			// default markers
 			gcIcons.put("ape", R.drawable.marker_cache_ape);
 			gcIcons.put("cito", R.drawable.marker_cache_cito);
@@ -5086,54 +5162,6 @@ public class cgBase {
 			gcIcons.put("mystery-disabled", R.drawable.marker_cache_mystery_disabled);
 			gcIcons.put("gchq-disabled", R.drawable.marker_cache_gchq_disabled);
 		}
-
-		if (wpIcons.isEmpty()) {
-			wpIcons.put("waypoint", R.drawable.marker_waypoint_waypoint);
-			wpIcons.put("flag", R.drawable.marker_waypoint_flag);
-			wpIcons.put("pkg", R.drawable.marker_waypoint_pkg);
-			wpIcons.put("puzzle", R.drawable.marker_waypoint_puzzle);
-			wpIcons.put("stage", R.drawable.marker_waypoint_stage);
-			wpIcons.put("trailhead", R.drawable.marker_waypoint_trailhead);
-		}
-
-		int icon = -1;
-		String iconTxt = null;
-
-		if (cache) {
-			if (type != null && type.length() > 0) {
-				if (own) {
-					iconTxt = type + "-own";
-				} else if (found) {
-					iconTxt = type + "-found";
-				} else if (disabled) {
-					iconTxt = type + "-disabled";
-				} else {
-					iconTxt = type;
-				}
-			} else {
-				iconTxt = "traditional";
-			}
-
-			if (gcIcons.containsKey(iconTxt)) {
-				icon = gcIcons.get(iconTxt);
-			} else {
-				icon = gcIcons.get("traditional");
-			}
-		} else {
-			if (type != null && type.length() > 0) {
-				iconTxt = type;
-			} else {
-				iconTxt = "waypoint";
-			}
-
-			if (wpIcons.containsKey(iconTxt)) {
-				icon = wpIcons.get(iconTxt);
-			} else {
-				icon = wpIcons.get("waypoint");
-			}
-		}
-
-		return icon;
 	}
 
 	public static boolean runNavigation(Activity activity, Resources res, cgSettings settings, Double latitude, Double longitude) {

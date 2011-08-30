@@ -80,7 +80,6 @@ public class cgeodetail extends AbstractActivity {
 	private loadLongDesc threadLongDesc = null;
 	private Thread storeThread = null;
 	private Thread refreshThread = null;
-	private HashMap<String, Integer> gcIcons = new HashMap<String, Integer>();
 	private ProgressDialog storeDialog = null;
 	private ProgressDialog refreshDialog = null;
 	private ProgressDialog dropDialog = null;
@@ -455,24 +454,10 @@ public class cgeodetail extends AbstractActivity {
 			final int id = item.getItemId();
 
 			if (id == 1) {
-				final Intent cachesIntent = new Intent(this, cgeocaches.class);
-
-				cachesIntent.putExtra("type", "owner");
-				cachesIntent.putExtra("username", contextMenuUser);
-				cachesIntent.putExtra("cachetype", settings.cacheType);
-
-				startActivity(cachesIntent);
-
+				cgeocaches.startActivityCacheOwner(this, contextMenuUser);
 				return true;
 			} else if (id == 2) {
-				final Intent cachesIntent = new Intent(this, cgeocaches.class);
-
-				cachesIntent.putExtra("type", "username");
-				cachesIntent.putExtra("username", contextMenuUser);
-				cachesIntent.putExtra("cachetype", settings.cacheType);
-
-				startActivity(cachesIntent);
-
+				cgeocaches.startActivityCacheUser(this, contextMenuUser);
 				return true;
 			} else if (id == 3) {
 				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(contextMenuUser))));
@@ -607,22 +592,6 @@ public class cgeodetail extends AbstractActivity {
 		}
 
 		try {
-			if (gcIcons == null || gcIcons.isEmpty()) {
-				gcIcons.put("ape", R.drawable.type_ape);
-				gcIcons.put("cito", R.drawable.type_cito);
-				gcIcons.put("earth", R.drawable.type_earth);
-				gcIcons.put("event", R.drawable.type_event);
-				gcIcons.put("letterbox", R.drawable.type_letterbox);
-				gcIcons.put("locationless", R.drawable.type_locationless);
-				gcIcons.put("mega", R.drawable.type_mega);
-				gcIcons.put("multi", R.drawable.type_multi);
-				gcIcons.put("traditional", R.drawable.type_traditional);
-				gcIcons.put("virtual", R.drawable.type_virtual);
-				gcIcons.put("webcam", R.drawable.type_webcam);
-				gcIcons.put("wherigo", R.drawable.type_wherigo);
-				gcIcons.put("gchq", R.drawable.type_hq);
-				gcIcons.put("mystery", R.drawable.type_mystery);
-			}
 
 			if (null == geocode && cache.geocode.length() > 0)
             {
@@ -645,11 +614,7 @@ public class cgeodetail extends AbstractActivity {
 			detailsList.removeAllViews();
 
 			// actionbar icon, default myster<
-			String typeId = "mystery";
-			if (cache.type != null && gcIcons.containsKey(cache.type)) { // cache icon
-				typeId = cache.type;
-			}
-			((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable) getResources().getDrawable(gcIcons.get(typeId)), null, null, null);
+			((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable) getResources().getDrawable(cgBase.getCacheIcon(cache.type)), null, null, null);
 
 			// cache name (full name)
 			itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
@@ -1441,15 +1406,7 @@ public class cgeodetail extends AbstractActivity {
 	}
 
 	private void cachesAround() {
-		cgeocaches cachesActivity = new cgeocaches();
-
-		Intent cachesIntent = new Intent(this, cachesActivity.getClass());
-		cachesIntent.putExtra("type", "coordinate");
-		cachesIntent.putExtra("latitude", cache.latitude);
-		cachesIntent.putExtra("longitude", cache.longitude);
-		cachesIntent.putExtra("cachetype", settings.cacheType);
-
-		startActivity(cachesIntent);
+		cgeocaches.startActivityCachesAround(this, cache.latitude, cache.longitude);
 
 		finish();
 	}

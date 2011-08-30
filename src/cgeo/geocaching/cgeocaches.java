@@ -40,6 +40,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
@@ -438,31 +439,25 @@ public class cgeocaches extends AbstractListActivity {
 
 		@Override
 		public void handleMessage(Message msg) {
-			setAdapter();
+			if (adapter != null) {
+				adapter.setSelectMode(false, true);
+			}
 
-			if (msg.what > -1) {
-				cacheList.get(msg.what).statusChecked = false;
-			} else {
-				if (adapter != null) {
-					adapter.setSelectMode(false, true);
-				}
+			refreshCurrentList();
 
-				refreshCurrentList();
+			cacheList.clear();
 
-				cacheList.clear();
+			final ArrayList<cgCache> cacheListTmp = app.getCaches(searchId);
+			if (cacheListTmp != null && cacheListTmp.isEmpty() == false) {
+				cacheList.addAll(cacheListTmp);
+				cacheListTmp.clear();
 
-				final ArrayList<cgCache> cacheListTmp = app.getCaches(searchId);
-				if (cacheListTmp != null && cacheListTmp.isEmpty() == false) {
-					cacheList.addAll(cacheListTmp);
-					cacheListTmp.clear();
+				Collections.sort((List<cgCache>)cacheList, gcComparator);
+			}
 
-					Collections.sort((List<cgCache>)cacheList, gcComparator);
-				}
-
-				if (waitDialog != null) {
-					waitDialog.dismiss();
-					waitDialog.setOnCancelListener(null);
-				}
+			if (waitDialog != null) {
+				waitDialog.dismiss();
+				waitDialog.setOnCancelListener(null);
 			}
 		}
 	};
@@ -2145,9 +2140,6 @@ public class cgeocaches extends AbstractListActivity {
 			final ArrayList<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
 			for (cgCache cache : cacheListTemp) {
 				if (checked > 0 && cache.statusChecked == false) {
-					handler.sendEmptyMessage(0);
-
-					yield();
 					continue;
 				}
 
@@ -2158,10 +2150,6 @@ public class cgeocaches extends AbstractListActivity {
 					}
 
 					app.markDropped(cache.geocode);
-
-					handler.sendEmptyMessage(cacheList.indexOf(cache));
-
-					yield();
 				} catch (Exception e) {
 					Log.e(cgSettings.tag, "cgeocaches.geocachesDropDetails: " + e.toString());
 				}
@@ -2488,21 +2476,33 @@ public class cgeocaches extends AbstractListActivity {
 		alert.show();
 	}
 
+	private void removeListInternal() {
+		boolean status = app.removeList(listId);
+
+		if (status) {
+			showToast(res.getString(R.string.list_dialog_remove_ok));
+			switchListById(1);
+		} else {
+			showToast(res.getString(R.string.list_dialog_remove_err));
+		}
+	}
+
 	private void removeList() {
+		// if there are no caches on this list, don't bother the user with questions.
+		// there is no harm in deleting the list, he could recreate it easily
+		if (cacheList != null && cacheList.isEmpty()) {
+			removeListInternal();
+			return;
+		}
+
+		// ask him, if there are caches on the list
 		final AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
 		alert.setTitle(R.string.list_dialog_remove_title);
 		alert.setMessage(R.string.list_dialog_remove_description);
 		alert.setPositiveButton(R.string.list_dialog_remove, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
-				boolean status = app.removeList(listId);
-
-				if (status) {
-					showToast(res.getString(R.string.list_dialog_remove_ok));
-					switchListById(1);
-				} else {
-					showToast(res.getString(R.string.list_dialog_remove_err));
-				}
+				removeListInternal();
 			}
 		});
 		alert.setNegativeButton(res.getString(R.string.list_dialog_cancel), new DialogInterface.OnClickListener() {
@@ -2545,6 +2545,38 @@ public class cgeocaches extends AbstractListActivity {
 	public static void startActivityOffline(final Context context) {
 		final Intent cachesIntent = new Intent(context, cgeocaches.class);
 		cachesIntent.putExtra(EXTRAS_LIST_TYPE, "offline");
+		context.startActivity(cachesIntent);
+	}
+	
+	public static void startActivityCachesAround(final AbstractActivity context, final Double latitude, final Double longitude) {
+		cgeocaches cachesActivity = new cgeocaches();
+
+		Intent cachesIntent = new Intent(context, cachesActivity.getClass());
+		cachesIntent.putExtra("type", "coordinate");
+		cachesIntent.putExtra("latitude", latitude);
+		cachesIntent.putExtra("longitude", longitude);
+		cachesIntent.putExtra("cachetype", context.getSettings().cacheType);
+
+		context.startActivity(cachesIntent);
+	}
+	
+	public static void startActivityCacheOwner(final AbstractActivity context, final String userName) {
+		final Intent cachesIntent = new Intent(context, cgeocaches.class);
+
+		cachesIntent.putExtra("type", "owner");
+		cachesIntent.putExtra("username", userName);
+		cachesIntent.putExtra("cachetype", context.getSettings().cacheType);
+
+		context.startActivity(cachesIntent);
+	}
+	
+	public static void startActivityCacheUser(final AbstractActivity context, final String userName) {
+		final Intent cachesIntent = new Intent(context, cgeocaches.class);
+
+		cachesIntent.putExtra("type", "username");
+		cachesIntent.putExtra("username", userName);
+		cachesIntent.putExtra("cachetype", context.getSettings().cacheType);
+
 		context.startActivity(cachesIntent);
 	}
 }
