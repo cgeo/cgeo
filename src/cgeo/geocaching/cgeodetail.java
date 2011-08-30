@@ -55,6 +55,10 @@ import cgeo.geocaching.apps.cache.GeneralAppsFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
 
+/**
+ * Activity to display all details of a cache like owner, difficulty, description etc. 
+ *
+ */
 public class cgeodetail extends AbstractActivity {
 
 	public cgeodetail() {
