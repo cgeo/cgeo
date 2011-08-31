@@ -250,7 +250,7 @@ public class cgeo extends AbstractActivity {
 		final List<ResolveInfo> list = packageManager.queryIntentActivities(
 				new Intent(intent), PackageManager.MATCH_DEFAULT_ONLY);
 
-		return (list.size() > 0);
+		return list.size() > 0;
 	}
 
 	@Override

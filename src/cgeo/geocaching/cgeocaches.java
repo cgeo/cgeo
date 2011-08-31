@@ -40,6 +40,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
@@ -58,6 +59,7 @@ import cgeo.geocaching.sorting.NameComparator;
 import cgeo.geocaching.sorting.PopularityComparator;
 import cgeo.geocaching.sorting.RatingComparator;
 import cgeo.geocaching.sorting.SizeComparator;
+import cgeo.geocaching.sorting.StateComparator;
 import cgeo.geocaching.sorting.TerrainComparator;
 import cgeo.geocaching.sorting.VoteComparator;
 
@@ -124,6 +126,7 @@ public class cgeocaches extends AbstractListActivity {
 	private static final int SUBMENU_MANAGE_HISTORY = 60;
 	private static final int MENU_SORT_DATE = 61;
 	private static final int MENU_SORT_FINDS = 62;
+	private static final int MENU_SORT_STATE = 63;
 
 	private static final int CONTEXT_MENU_MOVE_TO_LIST = 1000;
 	private static final int MENU_MOVE_SELECTED_OR_ALL_TO_LIST = 1200;
@@ -151,7 +154,7 @@ public class cgeocaches extends AbstractListActivity {
 	private String title = "";
 	private int detailTotal = 0;
 	private int detailProgress = 0;
-	private long detailProgressTime = 0l;
+	private long detailProgressTime = 0L;
 	private geocachesLoadDetails threadD = null;
 	private geocachesLoadFromWeb threadW = null;
 	private geocachesDropDetails threadR = null;
@@ -751,6 +754,7 @@ public class cgeocaches extends AbstractListActivity {
 		comparators.put(res.getString(R.string.caches_sort_inventory), MENU_SORT_INVENTORY);
 		comparators.put(res.getString(R.string.caches_sort_date), MENU_SORT_DATE);
 		comparators.put(res.getString(R.string.caches_sort_finds), MENU_SORT_FINDS);
+		comparators.put(res.getString(R.string.caches_sort_state), MENU_SORT_STATE);
 
 		ArrayList<String> sortedLabels = new ArrayList<String>(comparators.keySet());
 		Collections.sort(sortedLabels);
@@ -981,6 +985,9 @@ public class cgeocaches extends AbstractListActivity {
 				return true;
 			case MENU_SORT_FINDS:
 				setComparator(item, new FindsComparator(app));
+				return true;
+			case MENU_SORT_STATE:
+				setComparator(item, new StateComparator());
 				return true;
 			case SUBMENU_FILTER_TYPE:
 				selectedFilter = res.getString(R.string.caches_filter_type);
@@ -1936,7 +1943,7 @@ public class cgeocaches extends AbstractListActivity {
 		private int reason = 1;
 		private volatile boolean needToStop = false;
 		private int checked = 0;
-		private long last = 0l;
+		private long last = 0L;
 
 		public geocachesLoadDetails(Handler handlerIn, int reasonIn) {
 			setPriority(Thread.MIN_PRIORITY);
@@ -2273,9 +2280,9 @@ public class cgeocaches extends AbstractListActivity {
                         if (null != logTypes.get(log.type))
                         {
                             fieldNoteBuffer.append(cache.geocode)
-                                           .append(",")
+                                           .append(',')
                                            .append(fieldNoteDateFormat.format(new Date(log.date)))
-                                           .append(",")
+                                           .append(',')
                                            .append(logTypes.get(log.type))
                                            .append(",\"")
                                            .append(log.log.replaceAll("\"", "'"))
@@ -2544,6 +2551,38 @@ public class cgeocaches extends AbstractListActivity {
 	public static void startActivityOffline(final Context context) {
 		final Intent cachesIntent = new Intent(context, cgeocaches.class);
 		cachesIntent.putExtra(EXTRAS_LIST_TYPE, "offline");
+		context.startActivity(cachesIntent);
+	}
+
+	public static void startActivityCachesAround(final AbstractActivity context, final Double latitude, final Double longitude) {
+		cgeocaches cachesActivity = new cgeocaches();
+
+		Intent cachesIntent = new Intent(context, cachesActivity.getClass());
+		cachesIntent.putExtra("type", "coordinate");
+		cachesIntent.putExtra("latitude", latitude);
+		cachesIntent.putExtra("longitude", longitude);
+		cachesIntent.putExtra("cachetype", context.getSettings().cacheType);
+
+		context.startActivity(cachesIntent);
+	}
+
+	public static void startActivityCacheOwner(final AbstractActivity context, final String userName) {
+		final Intent cachesIntent = new Intent(context, cgeocaches.class);
+
+		cachesIntent.putExtra("type", "owner");
+		cachesIntent.putExtra("username", userName);
+		cachesIntent.putExtra("cachetype", context.getSettings().cacheType);
+
+		context.startActivity(cachesIntent);
+	}
+
+	public static void startActivityCacheUser(final AbstractActivity context, final String userName) {
+		final Intent cachesIntent = new Intent(context, cgeocaches.class);
+
+		cachesIntent.putExtra("type", "username");
+		cachesIntent.putExtra("username", userName);
+		cachesIntent.putExtra("cachetype", context.getSettings().cacheType);
+
 		context.startActivity(cachesIntent);
 	}
 }

@@ -281,7 +281,7 @@ public class cgCache implements ICache {
 	}
 
 	public boolean isEventCache() {
-		return ("event".equalsIgnoreCase(type) || "mega".equalsIgnoreCase(type) || "cito".equalsIgnoreCase(type));
+		return "event".equalsIgnoreCase(type) || "mega".equalsIgnoreCase(type) || "cito".equalsIgnoreCase(type);
 	}
 
 	public boolean logVisit(IAbstractActivity fromActivity) {

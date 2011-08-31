@@ -16,7 +16,7 @@ public class LogTemplateProvider {
 		private String template;
 		private int resourceId;
 
-		public LogTemplate(String template, int resourceId) {
+		protected LogTemplate(String template, int resourceId) {
 			this.template = template;
 			this.resourceId = resourceId;
 		}
