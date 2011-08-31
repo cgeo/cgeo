@@ -931,6 +931,18 @@
 
   <!-- changelog -->
   <string name="changelog">\n
+    <b>Next release</b>\n
+    · new: sort by state, sort by find count\n
+    · new: experimental support for .gpx from opencaching.com\n
+    · new: scan QR code to open cache description\n
+    · new: context menu on stored caches button (main screen)\n
+    · fix: performance of GPX import\n
+    · fix: performance of deleting caches from list\n
+    · fix: return to list after GPX import\n
+    · fix: fill signature when logging offline\n
+    · fix: show strikethrough in caches\n
+    · fix: no more empty map previews\n
+    \n\n
     <b>26.08.2011</b>\n
     · new: street view\n
     · new: attribute icons\n
