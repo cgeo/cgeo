@@ -30,32 +30,33 @@
 				android:layout_margin="4dip"
 				android:gravity="center_horizontal"
 				android:orientation="horizontal" >
-			<LinearLayout android:id="@+id/map"
+			<LinearLayout 
 					android:layout_width="74dip"
 					android:layout_height="wrap_content"
 					android:layout_margin="4dip"
 					android:orientation="vertical" >
 				<View
+						android:id="@+id/map"
 						style="@style/icon_mainscreen"
 						android:background="@drawable/main_live" />
 				<TextView
 						style="@style/icon_mainscreen_text"
 						android:text="@string/live_map_button" />
 			</LinearLayout>
-			<LinearLayout android:id="@+id/nearest"
+			<LinearLayout
 					android:layout_width="74dip"
 					android:layout_height="wrap_content"
 					android:layout_margin="4dip"
 					android:orientation="vertical" >
 				<View
+						android:id="@+id/nearest"
 						style="@style/icon_mainscreen"
-						android:id="@+id/view_nearest"
 						android:background="@drawable/main_nearby" />
 				<TextView
 						style="@style/icon_mainscreen_text"
 						android:text="@string/caches_nearby_button" />
 			</LinearLayout>
-			<RelativeLayout android:id="@+id/search_offline"
+			<RelativeLayout
 					android:layout_width="74dip"
 					android:layout_height="wrap_content"
 					android:layout_margin="4dip" >
@@ -67,6 +68,7 @@
 						android:orientation="vertical"
 						android:layout_alignParentTop="true" >
 					<View
+							android:id="@+id/search_offline"
 							style="@style/icon_mainscreen"
 							android:background="@drawable/main_stored" />
 					<TextView
@@ -81,36 +83,39 @@
 				android:layout_margin="4dip"
 				android:gravity="center_horizontal"
 				android:orientation="horizontal" >
-			<LinearLayout android:id="@+id/advanced_button"
+			<LinearLayout
 					android:layout_width="74dip"
 					android:layout_height="wrap_content"
 					android:layout_margin="4dip"
 					android:orientation="vertical" >
 				<View
+						android:id="@+id/advanced_button"
 						style="@style/icon_mainscreen"
 						android:background="@drawable/main_search" />
 				<TextView
 						style="@style/icon_mainscreen_text"
 						android:text="@string/advanced_search_button" />
 			</LinearLayout>
-			<LinearLayout android:id="@+id/any_button"
+			<LinearLayout
 					android:layout_width="74dip"
 					android:layout_height="wrap_content"
 					android:layout_margin="4dip"
 					android:orientation="vertical" >
 				<View
+						android:id="@+id/any_button"
 						style="@style/icon_mainscreen"
 						android:background="@drawable/main_any" />
 				<TextView
 						style="@style/icon_mainscreen_text"
 						android:text="@string/any_button" />
 			</LinearLayout>
-			<LinearLayout android:id="@+id/filter_button"
+			<LinearLayout
 					android:layout_width="74dip"
 					android:layout_height="wrap_content"
 					android:layout_margin="4dip"
 					android:orientation="vertical" >
 				<View
+						android:id="@+id/filter_button"
 						style="@style/icon_mainscreen"
 						android:background="@drawable/main_filter" />
 				<TextView android:id="@+id/filter_button_title"
