@@ -35,7 +35,7 @@ public class cgData {
 	private cgDbHelper dbHelper = null;
 	private SQLiteDatabase databaseRO = null;
 	private SQLiteDatabase databaseRW = null;
-	private static final int dbVersion = 55;
+	private static final int dbVersion = 56;
 	private static final String dbName = "data";
 	private static final String dbTableCaches = "cg_caches";
 	private static final String dbTableLists = "cg_lists";
@@ -776,6 +776,18 @@ public class cgData {
 						} catch (Exception e) {
 							Log.e(cgSettings.tag, "Failed to upgrade to ver. 55: " + e.toString());
 
+						}
+					}
+
+					// make all internal attribute names lowercase
+					// @see issue #299
+					if (oldVersion < 56) { // update to 56
+						try {
+							db.execSQL("update " + dbTableAttributes + " set attribute = " +
+									"lower(attribute) where attribute like \"%_yes\" " +
+									"or attribute like \"%_no\"");
+						} catch (Exception e) {
+							Log.e(cgSettings.tag, "Failed to upgrade to ver. 56: " + e.toString());
 						}
 					}
 				}

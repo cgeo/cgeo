@@ -487,6 +487,7 @@
   <string name="cache_offline_time_days">Tagen</string>
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Attribute</string>
+  <string name="cache_attributes_no_icons">(aktualisiere den Cache um die Attribut-Icons anzuzeigen)</string>
   <string name="cache_inventory">Inventar</string>
   <string name="cache_log_offline">Offline-Log</string>
   <string name="cache_log_images_loading">Lade Logbild …</string>
