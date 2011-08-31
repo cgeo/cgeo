@@ -557,6 +557,7 @@ public class cgeo extends AbstractActivity {
 
 					View findNearestView = (View)findNearest.findViewById(R.id.view_nearest);
 					findNearestView.setBackgroundResource(R.drawable.main_nearby_disabled);
+					findNearestView.setFocusable(false);
 
 					navType.setText(null);
 					navAccuracy.setText(null);
