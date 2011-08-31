@@ -22,11 +22,11 @@ public abstract class AbstractListActivity extends ListActivity implements
 	protected cgBase base = null;
 	protected SharedPreferences prefs = null;
 
-	public AbstractListActivity() {
+	protected AbstractListActivity() {
 		this(null);
 	}
 
-	public AbstractListActivity(final String helpTopic) {
+	protected AbstractListActivity(final String helpTopic) {
 		this.helpTopic = helpTopic;
 	}
 
@@ -73,7 +73,7 @@ public abstract class AbstractListActivity extends ListActivity implements
 	final public void setTitle(final String title) {
 		ActivityMixin.setTitle(this, title);
 	}
-	
+
 	final public cgSettings getSettings() {
 		return settings;
 	}

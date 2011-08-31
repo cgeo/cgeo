@@ -422,10 +422,10 @@ public class cgBase {
 		String[] viewstates = new String[count];
 
 		// Get the viewstates
+		int no;
 		final Matcher matcherViewstates = patternViewstates.matcher(page);
 		while (matcherViewstates.find()) {
 			String sno = matcherViewstates.group(1); // number of viewstate
-			int no;
 			if ("".equals(sno))
 				no = 0;
 			else
@@ -585,13 +585,13 @@ public class cgBase {
 
 		// on every page
 		final Matcher matcherLogged2In = patternLogged2In.matcher(page);
-		while (matcherLogged2In.find()) {
+		if (matcherLogged2In.find()) {
 			return true;
 		}
 
 		// after login
 		final Matcher matcherLoggedIn = patternLoggedIn.matcher(page);
-		while (matcherLoggedIn.find()) {
+		if (matcherLoggedIn.find()) {
 			return true;
 		}
 
@@ -914,9 +914,7 @@ public class cgBase {
 				final String host = "www.geocaching.com";
 				final String path = "/seek/nearest.aspx";
 				final StringBuilder params = new StringBuilder();
-				params.append("__EVENTTARGET=");
-				params.append("&");
-				params.append("__EVENTARGUMENT=");
+				params.append("__EVENTTARGET=&__EVENTARGUMENT=");
 				if (caches.viewstates != null  &&  caches.viewstates.length > 0) {
 					params.append("&__VIEWSTATE=");
 					params.append(urlencode_rfc3986(caches.viewstates[0]));
@@ -929,21 +927,17 @@ public class cgBase {
 					}
 				}
 				for (String cid : cids) {
-					params.append("&");
-					params.append("CID=");
+					params.append("&CID=");
 					params.append(urlencode_rfc3986(cid));
 				}
 
 				if (recaptchaChallenge != null && recaptchaText != null && recaptchaText.length() > 0) {
-					params.append("&");
-					params.append("recaptcha_challenge_field=");
+					params.append("&recaptcha_challenge_field=");
 					params.append(urlencode_rfc3986(recaptchaChallenge));
-					params.append("&");
-					params.append("recaptcha_response_field=");
+					params.append("&recaptcha_response_field=");
 					params.append(urlencode_rfc3986(recaptchaText));
 				}
-				params.append("&");
-				params.append("ctl00%24ContentBody%24uxDownloadLoc=Download+Waypoints");
+				params.append("&ctl00%24ContentBody%24uxDownloadLoc=Download+Waypoints");
 
 				final String coordinates = request(false, host, path, "POST", params.toString(), 0, true).getData();
 
@@ -1903,7 +1897,7 @@ public class cgBase {
 		}
 
 		input = input.trim();
-		
+
 		if (null != settings
 		        //&& null != settings.getGcCustomDate()
 		        && gcCustomDateFormats.containsKey(settings.getGcCustomDate()))
@@ -1926,17 +1920,17 @@ public class cgBase {
 
 		throw new ParseException("No matching pattern", 0);
 	}
-	
+
 	public void detectGcCustomDate()
 	{
 	    final String host = "www.geocaching.com";
         final String path = "/account/ManagePreferences.aspx";
-        
+
         final String result = request(false, host, path, "GET", null, false, false, false).getData();
-        
+
         final Pattern pattern = Pattern.compile("<option selected=\"selected\" value=\"([ /Mdy-]+)\">", Pattern.CASE_INSENSITIVE);
         final Matcher matcher = pattern.matcher(result);
-        
+
         if (matcher.find())
         {
             settings.setGcCustomDate(matcher.group(1));
@@ -2328,7 +2322,7 @@ public class cgBase {
 			while (matcherLogs.find())
 			{
 				final cgLog logDone = new cgLog();
-				
+
                 if (logTypes.containsKey(matcherLogs.group(1).toLowerCase()))
                 {
                     logDone.type = logTypes.get(matcherLogs.group(1).toLowerCase());
@@ -2339,15 +2333,15 @@ public class cgBase {
                 }
 
 				logDone.author = Html.fromHtml(matcherLogs.group(3)).toString();
-				
+
 				try
 				{
 				    logDone.date = parseGcCustomDate(matcherLogs.group(2)).getTime();
 				}
 				catch (ParseException e) {}
-				
+
 				logDone.log = matcherLogs.group(6).trim();
-				
+
 				if (matcherLogs.group(4) != null && matcherLogs.group(5) != null)
 				{
 					logDone.cacheGuid = matcherLogs.group(4);
@@ -3605,7 +3599,7 @@ public class cgBase {
 			if (c > 300) {
 				logUpdated.append("&#");
 				logUpdated.append(Integer.toString((int) c));
-				logUpdated.append(";");
+				logUpdated.append(';');
 			} else {
 				logUpdated.append(c);
 			}
@@ -3645,7 +3639,7 @@ public class cgBase {
 
 				if (tb.action > 0) {
 					hdnSelected.append(action);
-					hdnSelected.append(",");
+					hdnSelected.append(',');
 				}
 			}
 
@@ -3706,7 +3700,7 @@ public class cgBase {
 						params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$repTravelBugs$ctl" + ctl + "$ddlAction", action);
 						if (tb.action > 0) {
 							hdnSelected.append(action);
-							hdnSelected.append(",");
+							hdnSelected.append(',');
 						}
 					}
 
@@ -5022,7 +5016,7 @@ public class cgBase {
 		}
 		return out;
 	}
-	
+
 	public static int getCacheIcon(final String type) {
 		fillIconsMap();
 		Integer iconId = gcIcons.get("type_" + type);

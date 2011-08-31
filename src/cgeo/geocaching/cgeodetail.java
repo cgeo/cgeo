@@ -858,7 +858,7 @@ public class cgeodetail extends AbstractActivity {
 				StringBuilder inventoryString = new StringBuilder();
 				for (cgTrackable inventoryItem : cache.inventory) {
 					if (inventoryString.length() > 0) {
-						inventoryString.append("\n");
+						inventoryString.append('\n');
 					}
 					// avoid HTML parsing where possible
 					if (inventoryItem.name.indexOf('<') >= 0 || inventoryItem.name.indexOf('&') >= 0 ) {
@@ -1975,7 +1975,7 @@ public class cgeodetail extends AbstractActivity {
 		if (noAttributeIconsFound) {
 			return;
 		}
-		
+
 		// toggle
 		if (attributesShowAsIcons) {
 			showAttributeDescriptions(attribBox);
@@ -2013,7 +2013,7 @@ public class cgeodetail extends AbstractActivity {
 
 			// dynamically search icon of the attribute
         	Drawable d = null;
-		    int id = res.getIdentifier("attribute_" + attributeName, "drawable", 
+		    int id = res.getIdentifier("attribute_" + attributeName, "drawable",
 		    		base.context.getPackageName());
 		    if (id > 0) {
 		        noAttributeIconsFound = false;
@@ -2058,7 +2058,7 @@ public class cgeodetail extends AbstractActivity {
 			attribute = cache.attributes.get(i);
 
 			// dynamically search for a translation of the attribute
-		    int id = res.getIdentifier("attribute_" + attribute, "string", 
+		    int id = res.getIdentifier("attribute_" + attribute, "string",
 		    		base.context.getPackageName());
 		    if (id > 0) {
 		    	String translated = res.getString(id);
@@ -2069,7 +2069,7 @@ public class cgeodetail extends AbstractActivity {
 		    if (buffer.length() > 0) buffer.append('\n');
 		    buffer.append(attribute);
 		}
-		
+
 		if (noAttributeIconsFound)
 			buffer.append("\n\n").append(res.getString(R.string.cache_attributes_no_icons));
 

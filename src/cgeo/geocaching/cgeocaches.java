@@ -154,7 +154,7 @@ public class cgeocaches extends AbstractListActivity {
 	private String title = "";
 	private int detailTotal = 0;
 	private int detailProgress = 0;
-	private long detailProgressTime = 0l;
+	private long detailProgressTime = 0L;
 	private geocachesLoadDetails threadD = null;
 	private geocachesLoadFromWeb threadW = null;
 	private geocachesDropDetails threadR = null;
@@ -1943,7 +1943,7 @@ public class cgeocaches extends AbstractListActivity {
 		private int reason = 1;
 		private volatile boolean needToStop = false;
 		private int checked = 0;
-		private long last = 0l;
+		private long last = 0L;
 
 		public geocachesLoadDetails(Handler handlerIn, int reasonIn) {
 			setPriority(Thread.MIN_PRIORITY);
@@ -2280,9 +2280,9 @@ public class cgeocaches extends AbstractListActivity {
                         if (null != logTypes.get(log.type))
                         {
                             fieldNoteBuffer.append(cache.geocode)
-                                           .append(",")
+                                           .append(',')
                                            .append(fieldNoteDateFormat.format(new Date(log.date)))
-                                           .append(",")
+                                           .append(',')
                                            .append(logTypes.get(log.type))
                                            .append(",\"")
                                            .append(log.log.replaceAll("\"", "'"))

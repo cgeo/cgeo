@@ -62,7 +62,7 @@ public abstract class GPXParser extends FileParser {
 	private String name = null;
 	private String cmt = null;
 	private String desc = null;
-	
+
 	private class CacheAttribute {
 	    // List of cache attributes matching IDs used in GPX files.
 	    // The ID is represented by the position of the String in the array.
@@ -143,7 +143,7 @@ public abstract class GPXParser extends FileParser {
 
         private Boolean active = null; // for yes/no
 	    private String baseName; // "food", "parkngrab", ...
-	    
+
 	    public void setActive(boolean active) {
 	        this.active = active;
 	    }
@@ -179,7 +179,7 @@ public abstract class GPXParser extends FileParser {
 	    }
 	}
 
-	public GPXParser(cgeoapplication appIn, int listIdIn, cgSearch searchIn, String namespaceIn, String versionIn) {
+	protected GPXParser(cgeoapplication appIn, int listIdIn, cgSearch searchIn, String namespaceIn, String versionIn) {
 		app = appIn;
 		listId = listIdIn;
 		search = searchIn;
@@ -398,14 +398,14 @@ public abstract class GPXParser extends FileParser {
 
 			// waypoint.cache.attributes
 			// @see issue #299
-            
+
             // <groundspeak:attributes>
             //   <groundspeak:attribute id="32" inc="1">Bicycles</groundspeak:attribute>
             //   <groundspeak:attribute id="13" inc="1">Available at all times</groundspeak:attribute>
             // where inc = 0 => _no, inc = 1 => _yes
             // IDs see array CACHE_ATTRIBUTES
             final Element gcAttributes = gcCache.getChild(nsGC, "attributes");
-            
+
             // waypoint.cache.attribute
             final Element gcAttribute = gcAttributes.getChild(nsGC, "attribute");
 
@@ -651,16 +651,16 @@ public abstract class GPXParser extends FileParser {
 		} catch (SAXException e) {
 			Log.e(cgSettings.tag, "Cannot parse .gpx file as GPX " + version + ": could not parse XML - " + e.toString());
 		}
-		return parsed ? search.getCurrentId() : 0l;
+		return parsed ? search.getCurrentId() : 0L;
 	}
 
 	private long parse(final File file, final Handler handlerIn) {
 		if (file == null) {
-			return 0l;
+			return 0L;
 		}
 
 		FileInputStream fis = null;
-		long result = 0l;
+		long result = 0L;
 		try {
 			fis = new FileInputStream(file);
 			result = parse(fis, handlerIn);
@@ -715,12 +715,12 @@ public abstract class GPXParser extends FileParser {
 
 	public static Long parseGPX(cgeoapplication app, File file, int listId, Handler handler) {
 		cgSearch search = new cgSearch();
-		long searchId = 0l;
+		long searchId = 0L;
 
 		try {
 			GPXParser parser = new GPX10Parser(app, listId, search);
 			searchId = parser.parse(file, handler);
-			if (searchId == 0l) {
+			if (searchId == 0L) {
 				parser = new GPX11Parser(app, listId, search);
 				searchId = parser.parse(file, handler);
 			}
