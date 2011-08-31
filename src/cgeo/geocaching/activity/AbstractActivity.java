@@ -22,11 +22,11 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
 	protected cgBase base = null;
 	protected SharedPreferences prefs = null;
 
-	public AbstractActivity() {
+	protected AbstractActivity() {
 		this(null);
 	}
 
-	public AbstractActivity(final String helpTopic) {
+	protected AbstractActivity(final String helpTopic) {
 		this.helpTopic = helpTopic;
 	}
 
@@ -77,7 +77,7 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
 	final public cgSettings getSettings() {
 		return settings;
 	}
-	
+
 	public void addVisitMenu(Menu menu, cgCache cache) {
 		ActivityMixin.addVisitMenu(this, menu, cache);
 	}

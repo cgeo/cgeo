@@ -2,98 +2,97 @@
 # - internal name: used as 
 #   a) name of string, prefixed with "attribute_"
 #   b) name of icon, prefixed with "attribute_"
-# - yn: y = normal icon will be generated
-#       n = striked thru icon will be generated
+# - gsx: id used in groundspeak GPX files
 # - man: graphic is selfmade or overhauled
 # - license: type of license
 # - copyright holder: Name of person
 # - URL: icon is based on graphic downloadable here
 #
-# internal name   | yn | man | license | copyright holder | URL
+# internal name   | gsx | man | license | copyright holder | URL
 #
 # Permissions (allowed / not allowed)
 #
-dogs              | yn |     | CC      |                           | http://thenounproject.com/noun/dog/#icon-No364
-bicycles          | yn |  x  | PD      |                           | http://thenounproject.com/noun/bicycle/#icon-No536
-motorcycles       | yn |     | PD      |                           | http://thenounproject.com/noun/motorcycle/#icon-No53
-quads             | yn |     | PD      | USA National Park Service | http://thenounproject.com/noun/4-wheeler/#icon-No228
-jeeps             | yn |     | PD      | USA National Park Service | http://thenounproject.com/noun/jeep/#icon-No57
-snowmobiles       | yn |     | PD      | USA National Park Service | http://thenounproject.com/noun/snowmobile/#icon-No505
-horses            | yn |     | PD      | USA National Park Service | http://thenounproject.com/noun/horseback-trail/#icon-No329
-campfires         | yn |     | PD      | USA National Park Service | http://thenounproject.com/noun/campfire/#icon-No196
-rv                | yn |     | PD      | USA National Park Service | http://thenounproject.com/noun/camper/#icon-No86
+dogs              |   1 |     | CC      |                           | http://thenounproject.com/noun/dog/#icon-No364
+bicycles          |  32 |  x  | PD      |                           | http://thenounproject.com/noun/bicycle/#icon-No536
+motorcycles       |  33 |     | PD      |                           | http://thenounproject.com/noun/motorcycle/#icon-No53
+quads             |  34 |     | PD      | USA National Park Service | http://thenounproject.com/noun/4-wheeler/#icon-No228
+jeeps             |  35 |     | PD      | USA National Park Service | http://thenounproject.com/noun/jeep/#icon-No57
+snowmobiles       |  36 |     | PD      | USA National Park Service | http://thenounproject.com/noun/snowmobile/#icon-No505
+horses            |  37 |     | PD      | USA National Park Service | http://thenounproject.com/noun/horseback-trail/#icon-No329
+campfires         |  38 |     | PD      | USA National Park Service | http://thenounproject.com/noun/campfire/#icon-No196
+rv                |  46 |     | PD      | USA National Park Service | http://thenounproject.com/noun/camper/#icon-No86
 #
 # Conditions (yes / no)
 #
-kids              | yn |  x  | PD      | Jack Biesek, Gladys Brenner, Margaret Faye, Healther Merrifield, Kate Keating, Wendy Olmstead, Todd Pierce, Jamie Cowgill, Jim Bolek | http://thenounproject.com/noun/teddy-bear/#icon-No610
-onehour           | yn |  x  | CC      | The Noun Project          | http://thenounproject.com/noun/stopwatch/#icon-No282
-scenic            | yn |     | PD      | USA National Park Service | http://thenounproject.com/noun/binoculars/#icon-No112
-hiking            | yn |     | PD      | USA National Park Service | http://thenounproject.com/noun/hiker/#icon-No562
-climbing          | yn |     | PD      | USA National Park Service | http://thenounproject.com/noun/climbing/#icon-No526
-wading            | y  |  x  | PD      | USA National Park Service | http://thenounproject.com/noun/wading/#icon-No581
-swimming          | y  |     | PD      | USA National Park Service | http://thenounproject.com/noun/swimming/#icon-No226
-available         | yn |  x  | PD      | koem                      | 
-night             | yn |     | PD      |                           | http://thenounproject.com/noun/moon/#icon-No128
-winter            | yn |     | PD      | USA National Park Service | http://thenounproject.com/noun/snow/#icon-No64
-stealth           | yn |  x  | PD      | Celine                    | http://www.specialweb.com/original/icons4.html
-firstaid          | y  |     | PD      | Roger Cook, Dan Shanosky  | http://thenounproject.com/noun/first-aid/#icon-No535
-cow               | y  |     | PD      |                           | http://www.openclipart.org/people/Anonymous/mucca.svg
-field_puzzle      | yn |  x  | PD      | nicubunu                  | http://www.openclipart.org/detail/15169/red-jigsaw-piece-13-by-nicubunu
-nightcache        | yn |  x  | PD      |                           | http://thenounproject.com/noun/moon/#icon-No128
-parkngrab         | yn |  x  | PD      | Roger Cook, Don Shanosky  | http://thenounproject.com/noun/parking/#icon-No27
-abandonedbuilding | yn |  x  | CC      | The Noun Project          | http://thenounproject.com/noun/home/#icon-No293
-hike_short        | yn |  x  | PD      | koem                      | 
-hike_med          | yn |  x  | PD      | koem                      | 
-hike_long         | yn |  x  | PD      | koem                      | 
-seasonal          | yn |  x  | PD      | USA National Park Service | http://thenounproject.com/noun/sun/#icon-No76 http://thenounproject.com/noun/snow/#icon-No64
-touristok         | yn |     | PD      | Roger Cook, Don Shanosky  | http://thenounproject.com/noun/baggage/#icon-No12
-frontyard         | yn |  x  | PD      | koem                      |
-teamwork          | yn |     | CC      | The Noun Project          | http://thenounproject.com/noun/community/#icon-No288
+kids              |   6 |  x  | PD      | Jack Biesek, Gladys Brenner, Margaret Faye, Healther Merrifield, Kate Keating, Wendy Olmstead, Todd Pierce, Jamie Cowgill, Jim Bolek | http://thenounproject.com/noun/teddy-bear/#icon-No610
+onehour           |   7 |  x  | CC      | The Noun Project          | http://thenounproject.com/noun/stopwatch/#icon-No282
+scenic            |   8 |     | PD      | USA National Park Service | http://thenounproject.com/noun/binoculars/#icon-No112
+hiking            |   9 |     | PD      | USA National Park Service | http://thenounproject.com/noun/hiker/#icon-No562
+climbing          |  10 |     | PD      | USA National Park Service | http://thenounproject.com/noun/climbing/#icon-No526
+wading            |  11 |  x  | PD      | USA National Park Service | http://thenounproject.com/noun/wading/#icon-No581
+swimming          |  12 |     | PD      | USA National Park Service | http://thenounproject.com/noun/swimming/#icon-No226
+available         |  13 |  x  | PD      | koem                      | 
+night             |  14 |     | PD      |                           | http://thenounproject.com/noun/moon/#icon-No128
+winter            |  15 |     | PD      | USA National Park Service | http://thenounproject.com/noun/snow/#icon-No64
+stealth           |  40 |  x  | PD      | Celine                    | http://www.specialweb.com/original/icons4.html
+firstaid          |  42 |     | PD      | Roger Cook, Dan Shanosky  | http://thenounproject.com/noun/first-aid/#icon-No535
+cow               |  43 |     | PD      |                           | http://www.openclipart.org/people/Anonymous/mucca.svg
+field_puzzle      |  47 |  x  | PD      | nicubunu                  | http://www.openclipart.org/detail/15169/red-jigsaw-piece-13-by-nicubunu
+nightcache        |  52 |  x  | PD      |                           | http://thenounproject.com/noun/moon/#icon-No128
+parkngrab         |  53 |  x  | PD      | Roger Cook, Don Shanosky  | http://thenounproject.com/noun/parking/#icon-No27
+abandonedbuilding |  54 |  x  | CC      | The Noun Project          | http://thenounproject.com/noun/home/#icon-No293
+hike_short        |  55 |  x  | PD      | koem                      | 
+hike_med          |  56 |  x  | PD      | koem                      | 
+hike_long         |  57 |  x  | PD      | koem                      | 
+seasonal          |  62 |  x  | PD      | USA National Park Service | http://thenounproject.com/noun/sun/#icon-No76 http://thenounproject.com/noun/snow/#icon-No64
+touristok         |  63 |     | PD      | Roger Cook, Don Shanosky  | http://thenounproject.com/noun/baggage/#icon-No12
+frontyard         |  65 |  x  | PD      | koem                      |
+teamwork          |  66 |     | CC      | The Noun Project          | http://thenounproject.com/noun/community/#icon-No288
 #
 # other
 #
-landf             | y  |  x  | PD      | koem                      | 
-partnership       | y  |     | PD      | worker                    | http://www.openclipart.org/detail/152875/hand-shake-by-worker
+landf             |  45 |  x  | PD      | koem                      | 
+partnership       |  61 |     | PD      | worker                    | http://www.openclipart.org/detail/152875/hand-shake-by-worker
 #
 # Equipment (required / not required)
 #
-fee               | y  |  x  | PD      | koem                      | 
-rappelling        | y  |     | PD      | USA National Park Service | http://thenounproject.com/noun/rock-climbing/#icon-No529
-boat              | y  |     | PD      | USA National Park Service | http://thenounproject.com/noun/motorboat/#icon-No661
-scuba             | y  |     | PD      | USA National Park Service | http://thenounproject.com/noun/scuba-diving/#icon-No242
-flashlight        | y  |     | CC      | The Noun Project          | http://thenounproject.com/noun/flashlight/#icon-No516
-uv                | y  |  x  | PD      | koem                      | 
-snowshoes         | y  |     | PD      | USA National Park Service | http://thenounproject.com/noun/snow-shoeing/#icon-No388
-skiis             | y  |     | PD      | USA National Park Service | http://thenounproject.com/noun/cross-country-skiing/#icon-No510
-s_tool            | y  |     | CC      | The Noun Project          | http://thenounproject.com/noun/gears/#icon-No179
-wirelessbeacon    | y  |  x  | PD      |                           | http://thenounproject.com/noun/non-ionizing-radiation/#icon-No277
-treeclimbing      | yn |     | CC      | The Noun Project          | http://thenounproject.com/noun/tree/#icon-No173
+fee               |   2 |  x  | PD      | koem                      | 
+rappelling        |   3 |     | PD      | USA National Park Service | http://thenounproject.com/noun/rock-climbing/#icon-No529
+boat              |   4 |     | PD      | USA National Park Service | http://thenounproject.com/noun/motorboat/#icon-No661
+scuba             |   5 |     | PD      | USA National Park Service | http://thenounproject.com/noun/scuba-diving/#icon-No242
+flashlight        |  44 |     | CC      | The Noun Project          | http://thenounproject.com/noun/flashlight/#icon-No516
+uv                |  48 |  x  | PD      | koem                      | 
+snowshoes         |  49 |     | PD      | USA National Park Service | http://thenounproject.com/noun/snow-shoeing/#icon-No388
+skiis             |  50 |     | PD      | USA National Park Service | http://thenounproject.com/noun/cross-country-skiing/#icon-No510
+s_tool            |  51 |     | CC      | The Noun Project          | http://thenounproject.com/noun/gears/#icon-No179
+wirelessbeacon    |  60 |  x  | PD      |                           | http://thenounproject.com/noun/non-ionizing-radiation/#icon-No277
+treeclimbing      |  64 |     | CC      | The Noun Project          | http://thenounproject.com/noun/tree/#icon-No173
 #
 # Hazards (present / not present)
 #
-poisonoak         | yn |     | CC      | The Noun Project          | http://thenounproject.com/noun/mushroom/#icon-No309
-dangerousanimals  | y  |     | PD      | USA National Park Service | http://thenounproject.com/noun/snake/#icon-No201
-ticks             | y  |  x  | PD      | koem                      | 
-mine              | y  |     | PD      | USA National Park Service | http://thenounproject.com/noun/rock-collecting/#icon-No528
-cliff             | y  |     | PD      | USA National Park Service | http://thenounproject.com/noun/falling-rocks/#icon-No520
-hunting           | y  |     | CC      | The Noun Project          | http://thenounproject.com/noun/location/#icon-No418
-danger            | y  |  x  | PD      | ryanlerch                 | http://www.openclipart.org/detail/1448/skull-and-crossbones-by-ryanlerch
-thorn             | y  |     | PD      | emilie.rollandin          | http://www.openclipart.org/detail/68125/spine-by-emilie.rollandin
+poisonoak         |  17 |     | CC      | The Noun Project          | http://thenounproject.com/noun/mushroom/#icon-No309
+dangerousanimals  |  18 |     | PD      | USA National Park Service | http://thenounproject.com/noun/snake/#icon-No201
+ticks             |  19 |  x  | PD      | koem                      | 
+mine              |  20 |     | PD      | USA National Park Service | http://thenounproject.com/noun/rock-collecting/#icon-No528
+cliff             |  21 |     | PD      | USA National Park Service | http://thenounproject.com/noun/falling-rocks/#icon-No520
+hunting           |  22 |     | CC      | The Noun Project          | http://thenounproject.com/noun/location/#icon-No418
+danger            |  23 |  x  | PD      | ryanlerch                 | http://www.openclipart.org/detail/1448/skull-and-crossbones-by-ryanlerch
+thorn             |  39 |     | PD      | emilie.rollandin          | http://www.openclipart.org/detail/68125/spine-by-emilie.rollandin
 #
 # Facilities
 #
-wheelchair        | yn |     | PD      | USA National Park Service | http://thenounproject.com/noun/wheelchair-accessible/#icon-No354
-parking           | yn |     | PD      | Roger Cook, Don Shanosky  | http://thenounproject.com/noun/parking/#icon-No27
-public            | y  |     | PD      | Roger Cook, Don Shanosky  | http://thenounproject.com/noun/bus/#icon-No97
-water             | yn |     | PD      | USA National Park Service | http://thenounproject.com/noun/drinking-water/#icon-No214
-restrooms         | yn |     | PD      | Roger Cook, Don Shanosky  | http://thenounproject.com/noun/unisex/#icon-No50
-phone             | yn |     | PD      |                           | http://thenounproject.com/noun/telephone/#icon-No127
-picnic            | yn |     | PD      | USA National Park Service | http://thenounproject.com/noun/picnic-table/#icon-No208
-camping           | yn |     | PD      | USA National Park Service | http://thenounproject.com/noun/campground/#icon-No209
-stroller          | yn |     | PD      | USA National Park Service | http://thenounproject.com/noun/stroller/#icon-No161
-fuel              | yn |     | PD      |                           | http://thenounproject.com/noun/gas/#icon-No155
-food              | yn |     | PD      | Roger Cook, Don Shanosky  | http://thenounproject.com/noun/restaurant/#icon-No33
+wheelchair        |  24 |     | PD      | USA National Park Service | http://thenounproject.com/noun/wheelchair-accessible/#icon-No354
+parking           |  25 |     | PD      | Roger Cook, Don Shanosky  | http://thenounproject.com/noun/parking/#icon-No27
+public            |  26 |     | PD      | Roger Cook, Don Shanosky  | http://thenounproject.com/noun/bus/#icon-No97
+water             |  27 |     | PD      | USA National Park Service | http://thenounproject.com/noun/drinking-water/#icon-No214
+restrooms         |  28 |     | PD      | Roger Cook, Don Shanosky  | http://thenounproject.com/noun/unisex/#icon-No50
+phone             |  29 |     | PD      |                           | http://thenounproject.com/noun/telephone/#icon-No127
+picnic            |  30 |     | PD      | USA National Park Service | http://thenounproject.com/noun/picnic-table/#icon-No208
+camping           |  31 |     | PD      | USA National Park Service | http://thenounproject.com/noun/campground/#icon-No209
+stroller          |  41 |     | PD      | USA National Park Service | http://thenounproject.com/noun/stroller/#icon-No161
+fuel              |  58 |     | PD      |                           | http://thenounproject.com/noun/gas/#icon-No155
+food              |  59 |     | PD      | Roger Cook, Don Shanosky  | http://thenounproject.com/noun/restaurant/#icon-No33
 #
 # own
 #
-icon_not_found    | y  |  x  | PD      |                           | selfmade
+icon_not_found    |     |  x  | PD      | koem                      | selfmade

@@ -20,7 +20,7 @@ public abstract class ItemizedOverlayBase implements OverlayBase {
 	
 	private ItemizedOverlayImpl ovlImpl;
 
-	public ItemizedOverlayBase(ItemizedOverlayImpl ovlImplIn) {
+	protected ItemizedOverlayBase(ItemizedOverlayImpl ovlImplIn) {
 		ovlImpl = ovlImplIn;
 	}
 

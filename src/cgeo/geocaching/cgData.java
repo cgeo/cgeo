@@ -35,7 +35,7 @@ public class cgData {
 	private cgDbHelper dbHelper = null;
 	private SQLiteDatabase databaseRO = null;
 	private SQLiteDatabase databaseRW = null;
-	private static final int dbVersion = 55;
+	private static final int dbVersion = 56;
 	private static final String dbName = "data";
 	private static final String dbTableCaches = "cg_caches";
 	private static final String dbTableLists = "cg_lists";
@@ -778,6 +778,18 @@ public class cgData {
 
 						}
 					}
+
+					// make all internal attribute names lowercase
+					// @see issue #299
+					if (oldVersion < 56) { // update to 56
+						try {
+							db.execSQL("update " + dbTableAttributes + " set attribute = " +
+									"lower(attribute) where attribute like \"%_yes\" " +
+									"or attribute like \"%_no\"");
+						} catch (Exception e) {
+							Log.e(cgSettings.tag, "Failed to upgrade to ver. 56: " + e.toString());
+						}
+					}
 				}
 
 				db.setTransactionSuccessful();
@@ -1239,7 +1251,7 @@ public class cgData {
 
 		if (statusOk == false) {
 			cache.detailed = false;
-			cache.detailedUpdate = 0l;
+			cache.detailedUpdate = 0L;
 		}
 
 		init();
@@ -1592,7 +1604,7 @@ public class cgData {
 					if (oneTrackable.released != null) {
 						values.put("released", oneTrackable.released.getTime());
 					} else {
-						values.put("released", 0l);
+						values.put("released", 0L);
 					}
 					values.put("goal", oneTrackable.goal);
 					values.put("description", oneTrackable.details);
@@ -1626,9 +1638,9 @@ public class cgData {
 					if (all.length() > 0) {
 						all.append(", ");
 					}
-					all.append("\"");
+					all.append('"');
 					all.append((String) one);
-					all.append("\"");
+					all.append('"');
 				}
 
 				if (where.length() > 0) {
@@ -1636,7 +1648,7 @@ public class cgData {
 				}
 				where.append("geocode in (");
 				where.append(all);
-				where.append(")");
+				where.append(')');
 			}
 
 			cursor = databaseRO.query(
@@ -1727,9 +1739,9 @@ public class cgData {
 					if (all.length() > 0) {
 						all.append(", ");
 					}
-					all.append("\"");
+					all.append('"');
 					all.append((String) one);
-					all.append("\"");
+					all.append('"');
 				}
 
 				if (where.length() > 0) {
@@ -1737,16 +1749,16 @@ public class cgData {
 				}
 				where.append("geocode in (");
 				where.append(all);
-				where.append(")");
+				where.append(')');
 			} else if (guids != null && guids.length > 0) {
 				StringBuilder all = new StringBuilder();
 				for (Object one : guids) {
 					if (all.length() > 0) {
 						all.append(", ");
 					}
-					all.append("\"");
+					all.append('"');
 					all.append((String) one);
-					all.append("\"");
+					all.append('"');
 				}
 
 				if (where.length() > 0) {
@@ -1754,7 +1766,7 @@ public class cgData {
 				}
 				where.append("guid in (");
 				where.append(all);
-				where.append(")");
+				where.append(')');
 			} else {
 				return caches;
 			}
@@ -1781,8 +1793,7 @@ public class cgData {
 				if (where.length() > 0) {
 					where.append(" and ");
 				}
-				where.append("(");
-				where.append("latitude >= ");
+				where.append("(latitude >= ");
 				where.append(String.format((Locale) null, "%.6f", latMin));
 				where.append(" and latitude <= ");
 				where.append(String.format((Locale) null, "%.6f", latMax));
@@ -1790,7 +1801,7 @@ public class cgData {
 				where.append(String.format((Locale) null, "%.6f", lonMin));
 				where.append(" and longitude <= ");
 				where.append(String.format((Locale) null, "%.6f", lonMax));
-				where.append(")");
+				where.append(')');
 			}
 
 			cursor = databaseRO.query(
@@ -1876,13 +1887,13 @@ public class cgData {
 						cache.rating = (Float) cursor.getFloat(cursor.getColumnIndex("rating"));
 						cache.votes = (Integer) cursor.getInt(cursor.getColumnIndex("votes"));
 						cache.myVote = (Float) cursor.getFloat(cursor.getColumnIndex("myvote"));
-                        cache.disabled = cursor.getLong(cursor.getColumnIndex("disabled")) == 1l;
-                        cache.archived = cursor.getLong(cursor.getColumnIndex("archived")) == 1l;
-                        cache.members = cursor.getLong(cursor.getColumnIndex("members")) == 1l;
-                        cache.found = cursor.getLong(cursor.getColumnIndex("found")) == 1l;
-                        cache.favourite = cursor.getLong(cursor.getColumnIndex("favourite")) == 1l;
+                        cache.disabled = cursor.getLong(cursor.getColumnIndex("disabled")) == 1L;
+                        cache.archived = cursor.getLong(cursor.getColumnIndex("archived")) == 1L;
+                        cache.members = cursor.getLong(cursor.getColumnIndex("members")) == 1L;
+                        cache.found = cursor.getLong(cursor.getColumnIndex("found")) == 1L;
+                        cache.favourite = cursor.getLong(cursor.getColumnIndex("favourite")) == 1L;
 						cache.inventoryItems = (Integer) cursor.getInt(cursor.getColumnIndex("inventoryunknown"));
-						cache.onWatchlist = cursor.getLong(cursor.getColumnIndex("onWatchlist")) == 1l;
+						cache.onWatchlist = cursor.getLong(cursor.getColumnIndex("onWatchlist")) == 1L;
 
 						if (loadA) {
 							ArrayList<String> attributes = loadAttributes(cache.geocode);
@@ -2468,7 +2479,7 @@ public class cgData {
 		if (cachetype != null) {
 			specifySql.append(" and type = \"");
 			specifySql.append(cachetype);
-			specifySql.append("\"");
+			specifySql.append('"');
 		}
 
 		try {
@@ -2518,7 +2529,7 @@ public class cgData {
 		if (cachetype != null) {
 			specifySql.append(" and type = \"");
 			specifySql.append(cachetype);
-			specifySql.append("\"");
+			specifySql.append('"');
 		}
 
 		try {
@@ -2602,7 +2613,7 @@ public class cgData {
 		if (cachetype != null) {
 			where.append(" and type = \"");
 			where.append(cachetype);
-			where.append("\"");
+			where.append('"');
 		}
 
 		// offline caches only
@@ -2652,7 +2663,7 @@ public class cgData {
 		// cachetype limitation
 		if (cachetype != null) {
 			where.append(cachetype);
-			where.append("\"");
+			where.append('"');
 		}
 
 		// offline caches only

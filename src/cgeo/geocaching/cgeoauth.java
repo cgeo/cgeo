@@ -170,7 +170,7 @@ public class cgeoauth extends AbstractActivity {
 
 					while ((lineOne = br.readLine()) != null) {
 						sb.append(lineOne);
-						sb.append("\n");
+						sb.append('\n');
 					}
 
 					code = connection.getResponseCode();
@@ -275,7 +275,7 @@ public class cgeoauth extends AbstractActivity {
 
 				while ((lineOne = br.readLine()) != null) {
 					sb.append(lineOne);
-					sb.append("\n");
+					sb.append('\n');
 				}
 
 				code = connection.getResponseCode();

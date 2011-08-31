@@ -21,7 +21,7 @@ public class cgOverlayScale implements OverlayBase {
     private Paint scale = null;
     private Paint scaleShadow = null;
 	private BlurMaskFilter blur = null;
-	private float pixelDensity = 0l;
+	private float pixelDensity = 0L;
 	private double pixels = 0d;
 	private int bottom = 0;
 	private double distance = 0d;

@@ -421,10 +421,10 @@ public class cgBase {
 		String[] viewstates = new String[count];
 
 		// Get the viewstates
+		int no;
 		final Matcher matcherViewstates = patternViewstates.matcher(page);
 		while (matcherViewstates.find()) {
 			String sno = matcherViewstates.group(1); // number of viewstate
-			int no;
 			if ("".equals(sno))
 				no = 0;
 			else
@@ -584,13 +584,13 @@ public class cgBase {
 
 		// on every page
 		final Matcher matcherLogged2In = patternLogged2In.matcher(page);
-		while (matcherLogged2In.find()) {
+		if (matcherLogged2In.find()) {
 			return true;
 		}
 
 		// after login
 		final Matcher matcherLoggedIn = patternLoggedIn.matcher(page);
-		while (matcherLoggedIn.find()) {
+		if (matcherLoggedIn.find()) {
 			return true;
 		}
 
@@ -913,9 +913,7 @@ public class cgBase {
 				final String host = "www.geocaching.com";
 				final String path = "/seek/nearest.aspx";
 				final StringBuilder params = new StringBuilder();
-				params.append("__EVENTTARGET=");
-				params.append("&");
-				params.append("__EVENTARGUMENT=");
+				params.append("__EVENTTARGET=&__EVENTARGUMENT=");
 				if (caches.viewstates != null  &&  caches.viewstates.length > 0) {
 					params.append("&__VIEWSTATE=");
 					params.append(urlencode_rfc3986(caches.viewstates[0]));
@@ -928,21 +926,17 @@ public class cgBase {
 					}
 				}
 				for (String cid : cids) {
-					params.append("&");
-					params.append("CID=");
+					params.append("&CID=");
 					params.append(urlencode_rfc3986(cid));
 				}
 
 				if (recaptchaChallenge != null && recaptchaText != null && recaptchaText.length() > 0) {
-					params.append("&");
-					params.append("recaptcha_challenge_field=");
+					params.append("&recaptcha_challenge_field=");
 					params.append(urlencode_rfc3986(recaptchaChallenge));
-					params.append("&");
-					params.append("recaptcha_response_field=");
+					params.append("&recaptcha_response_field=");
 					params.append(urlencode_rfc3986(recaptchaText));
 				}
-				params.append("&");
-				params.append("ctl00%24ContentBody%24uxDownloadLoc=Download+Waypoints");
+				params.append("&ctl00%24ContentBody%24uxDownloadLoc=Download+Waypoints");
 
 				final String coordinates = request(false, host, path, "POST", params.toString(), 0, true).getData();
 
@@ -1902,7 +1896,7 @@ public class cgBase {
 		}
 
 		input = input.trim();
-		
+
 		if (null != settings
 		        //&& null != settings.getGcCustomDate()
 		        && gcCustomDateFormats.containsKey(settings.getGcCustomDate()))
@@ -1925,17 +1919,17 @@ public class cgBase {
 
 		throw new ParseException("No matching pattern", 0);
 	}
-	
+
 	public void detectGcCustomDate()
 	{
 	    final String host = "www.geocaching.com";
         final String path = "/account/ManagePreferences.aspx";
-        
+
         final String result = request(false, host, path, "GET", null, false, false, false).getData();
-        
+
         final Pattern pattern = Pattern.compile("<option selected=\"selected\" value=\"([ /Mdy-]+)\">", Pattern.CASE_INSENSITIVE);
         final Matcher matcher = pattern.matcher(result);
-        
+
         if (matcher.find())
         {
             settings.setGcCustomDate(matcher.group(1));
@@ -2106,7 +2100,7 @@ public class cgBase {
 		final Pattern patternIcon = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
 		final Pattern patternType = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"[^\"]+\" alt=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
 		final Pattern patternDistance = Pattern.compile("<h4[^>]*\\W*Tracking History \\(([0-9\\.,]+(km|mi))[^\\)]*\\)", Pattern.CASE_INSENSITIVE);
-		final Pattern patternLog = Pattern.compile("<tr class=\"Data.+?src=\"/images/icons/([^\\.]+).gif[^>]+>&nbsp;([^<]+)</td>.+?guid.+?>([^<]+)</a>.+?guid=([^\"]+)\">([^<]+)</a>.+?<td colspan=\"4\">(.+?)(?:<ul.+?ul>)?\\s*</td>\\s*</tr>", Pattern.CASE_INSENSITIVE);
+		final Pattern patternLog = Pattern.compile("<tr class=\"Data.+?src=\"/images/icons/([^\\.]+)\\.gif[^>]+>&nbsp;([^<]+)</td>.+?guid.+?>([^<]+)</a>.+?(?:guid=([^\"]+)\">([^<]+)</a>.+?)?<td colspan=\"4\">(.+?)(?:<ul.+?ul>)?\\s*</td>\\s*</tr>", Pattern.CASE_INSENSITIVE);
 
 		final cgTrackable trackable = new cgTrackable();
 
@@ -2327,7 +2321,7 @@ public class cgBase {
 			while (matcherLogs.find())
 			{
 				final cgLog logDone = new cgLog();
-				
+
                 if (logTypes.containsKey(matcherLogs.group(1).toLowerCase()))
                 {
                     logDone.type = logTypes.get(matcherLogs.group(1).toLowerCase());
@@ -2338,15 +2332,15 @@ public class cgBase {
                 }
 
 				logDone.author = Html.fromHtml(matcherLogs.group(3)).toString();
-				
+
 				try
 				{
 				    logDone.date = parseGcCustomDate(matcherLogs.group(2)).getTime();
 				}
 				catch (ParseException e) {}
-				
+
 				logDone.log = matcherLogs.group(6).trim();
-				
+
 				if (matcherLogs.group(4) != null && matcherLogs.group(5) != null)
 				{
 					logDone.cacheGuid = matcherLogs.group(4);
@@ -3604,7 +3598,7 @@ public class cgBase {
 			if (c > 300) {
 				logUpdated.append("&#");
 				logUpdated.append(Integer.toString((int) c));
-				logUpdated.append(";");
+				logUpdated.append(';');
 			} else {
 				logUpdated.append(c);
 			}
@@ -3644,7 +3638,7 @@ public class cgBase {
 
 				if (tb.action > 0) {
 					hdnSelected.append(action);
-					hdnSelected.append(",");
+					hdnSelected.append(',');
 				}
 			}
 
@@ -3705,7 +3699,7 @@ public class cgBase {
 						params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$repTravelBugs$ctl" + ctl + "$ddlAction", action);
 						if (tb.action > 0) {
 							hdnSelected.append(action);
-							hdnSelected.append(",");
+							hdnSelected.append(',');
 						}
 					}
 
@@ -5022,8 +5016,84 @@ public class cgBase {
 		return out;
 	}
 
-	public static int getIcon(boolean cache, String type, boolean own, boolean found, boolean disabled) {
+	public static int getCacheIcon(final String type) {
+		fillIconsMap();
+		Integer iconId = gcIcons.get("type_" + type);
+		if (iconId != null) {
+			return iconId;
+		}
+		// fallback to traditional if some icon type is not correct
+		return gcIcons.get("type_traditional");
+	}
+
+	public static int getMarkerIcon(final boolean cache, final String type, final boolean own, final boolean found, final boolean disabled) {
+		fillIconsMap();
+
+		if (wpIcons.isEmpty()) {
+			wpIcons.put("waypoint", R.drawable.marker_waypoint_waypoint);
+			wpIcons.put("flag", R.drawable.marker_waypoint_flag);
+			wpIcons.put("pkg", R.drawable.marker_waypoint_pkg);
+			wpIcons.put("puzzle", R.drawable.marker_waypoint_puzzle);
+			wpIcons.put("stage", R.drawable.marker_waypoint_stage);
+			wpIcons.put("trailhead", R.drawable.marker_waypoint_trailhead);
+		}
+
+		int icon = -1;
+		String iconTxt = null;
+
+		if (cache) {
+			if (type != null && type.length() > 0) {
+				if (own) {
+					iconTxt = type + "-own";
+				} else if (found) {
+					iconTxt = type + "-found";
+				} else if (disabled) {
+					iconTxt = type + "-disabled";
+				} else {
+					iconTxt = type;
+				}
+			} else {
+				iconTxt = "traditional";
+			}
+
+			if (gcIcons.containsKey(iconTxt)) {
+				icon = gcIcons.get(iconTxt);
+			} else {
+				icon = gcIcons.get("traditional");
+			}
+		} else {
+			if (type != null && type.length() > 0) {
+				iconTxt = type;
+			} else {
+				iconTxt = "waypoint";
+			}
+
+			if (wpIcons.containsKey(iconTxt)) {
+				icon = wpIcons.get(iconTxt);
+			} else {
+				icon = wpIcons.get("waypoint");
+			}
+		}
+
+		return icon;
+	}
+
+	private static void fillIconsMap() {
 		if (gcIcons.isEmpty()) {
+			gcIcons.put("type_ape", R.drawable.type_ape);
+			gcIcons.put("type_cito", R.drawable.type_cito);
+			gcIcons.put("type_earth", R.drawable.type_earth);
+			gcIcons.put("type_event", R.drawable.type_event);
+			gcIcons.put("type_letterbox", R.drawable.type_letterbox);
+			gcIcons.put("type_locationless", R.drawable.type_locationless);
+			gcIcons.put("type_mega", R.drawable.type_mega);
+			gcIcons.put("type_multi", R.drawable.type_multi);
+			gcIcons.put("type_traditional", R.drawable.type_traditional);
+			gcIcons.put("type_virtual", R.drawable.type_virtual);
+			gcIcons.put("type_webcam", R.drawable.type_webcam);
+			gcIcons.put("type_wherigo", R.drawable.type_wherigo);
+			gcIcons.put("type_mystery", R.drawable.type_mystery);
+			gcIcons.put("type_gchq", R.drawable.type_hq);
 			// default markers
 			gcIcons.put("ape", R.drawable.marker_cache_ape);
 			gcIcons.put("cito", R.drawable.marker_cache_cito);
@@ -5085,54 +5155,6 @@ public class cgBase {
 			gcIcons.put("mystery-disabled", R.drawable.marker_cache_mystery_disabled);
 			gcIcons.put("gchq-disabled", R.drawable.marker_cache_gchq_disabled);
 		}
-
-		if (wpIcons.isEmpty()) {
-			wpIcons.put("waypoint", R.drawable.marker_waypoint_waypoint);
-			wpIcons.put("flag", R.drawable.marker_waypoint_flag);
-			wpIcons.put("pkg", R.drawable.marker_waypoint_pkg);
-			wpIcons.put("puzzle", R.drawable.marker_waypoint_puzzle);
-			wpIcons.put("stage", R.drawable.marker_waypoint_stage);
-			wpIcons.put("trailhead", R.drawable.marker_waypoint_trailhead);
-		}
-
-		int icon = -1;
-		String iconTxt = null;
-
-		if (cache) {
-			if (type != null && type.length() > 0) {
-				if (own) {
-					iconTxt = type + "-own";
-				} else if (found) {
-					iconTxt = type + "-found";
-				} else if (disabled) {
-					iconTxt = type + "-disabled";
-				} else {
-					iconTxt = type;
-				}
-			} else {
-				iconTxt = "traditional";
-			}
-
-			if (gcIcons.containsKey(iconTxt)) {
-				icon = gcIcons.get(iconTxt);
-			} else {
-				icon = gcIcons.get("traditional");
-			}
-		} else {
-			if (type != null && type.length() > 0) {
-				iconTxt = type;
-			} else {
-				iconTxt = "waypoint";
-			}
-
-			if (wpIcons.containsKey(iconTxt)) {
-				icon = wpIcons.get(iconTxt);
-			} else {
-				icon = wpIcons.get("waypoint");
-			}
-		}
-
-		return icon;
 	}
 
 	public static boolean runNavigation(Activity activity, Resources res, cgSettings settings, Double latitude, Double longitude) {

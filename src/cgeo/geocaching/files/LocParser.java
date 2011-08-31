@@ -144,7 +144,7 @@ public final class LocParser extends FileParser {
 	public static long parseLoc(cgeoapplication app, File file, int listId,
 			Handler handler) {
 		cgSearch search = new cgSearch();
-		long searchId = 0l;
+		long searchId = 0L;
 
 		try {
 			HashMap<String, cgCoord> coords = parseCoordinates(readFile(file).toString());
