@@ -90,6 +90,15 @@
   <string name="log_stars_4">4 Sterne</string>
   <string name="log_stars_45">4,5 Sterne</string>
   <string name="log_stars_5">5 Sterne</string>
+  <string name="log_stars_1_description">schlecht</string>
+  <string name="log_stars_15_description">lohnt nicht</string>
+  <string name="log_stars_2_description">schwach</string>
+  <string name="log_stars_25_description">ok</string>
+  <string name="log_stars_3_description">durchschnittlich</string>
+  <string name="log_stars_35_description">besser</string>
+  <string name="log_stars_4_description">gut</string>
+  <string name="log_stars_45_description">fast perfekt</string>
+  <string name="log_stars_5_description">großartig</string>
   <string name="log_webcam">Webcam-Foto gemacht</string>
   <string name="log_new_log">Loggen</string>
   <string name="log_new_log_text">Log-Text</string>
