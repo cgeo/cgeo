@@ -287,6 +287,7 @@
   <string name="caches_sort_inventory">Inventaranzahl</string>
   <string name="caches_sort_date">Datum</string>
   <string name="caches_sort_finds">Funde</string>
+  <string name="caches_sort_state">Status</string>
   <string name="caches_select">Wähle von Liste</string>
   <string name="caches_select_mode">Auswahlmodus</string>
   <string name="caches_select_mode_exit">Auswahlmodus beenden</string>

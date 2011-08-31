@@ -59,6 +59,7 @@ import cgeo.geocaching.sorting.NameComparator;
 import cgeo.geocaching.sorting.PopularityComparator;
 import cgeo.geocaching.sorting.RatingComparator;
 import cgeo.geocaching.sorting.SizeComparator;
+import cgeo.geocaching.sorting.StateComparator;
 import cgeo.geocaching.sorting.TerrainComparator;
 import cgeo.geocaching.sorting.VoteComparator;
 
@@ -125,6 +126,7 @@ public class cgeocaches extends AbstractListActivity {
 	private static final int SUBMENU_MANAGE_HISTORY = 60;
 	private static final int MENU_SORT_DATE = 61;
 	private static final int MENU_SORT_FINDS = 62;
+	private static final int MENU_SORT_STATE = 63;
 
 	private static final int CONTEXT_MENU_MOVE_TO_LIST = 1000;
 	private static final int MENU_MOVE_SELECTED_OR_ALL_TO_LIST = 1200;
@@ -752,6 +754,7 @@ public class cgeocaches extends AbstractListActivity {
 		comparators.put(res.getString(R.string.caches_sort_inventory), MENU_SORT_INVENTORY);
 		comparators.put(res.getString(R.string.caches_sort_date), MENU_SORT_DATE);
 		comparators.put(res.getString(R.string.caches_sort_finds), MENU_SORT_FINDS);
+		comparators.put(res.getString(R.string.caches_sort_state), MENU_SORT_STATE);
 
 		ArrayList<String> sortedLabels = new ArrayList<String>(comparators.keySet());
 		Collections.sort(sortedLabels);
@@ -982,6 +985,9 @@ public class cgeocaches extends AbstractListActivity {
 				return true;
 			case MENU_SORT_FINDS:
 				setComparator(item, new FindsComparator(app));
+				return true;
+			case MENU_SORT_STATE:
+				setComparator(item, new StateComparator());
 				return true;
 			case SUBMENU_FILTER_TYPE:
 				selectedFilter = res.getString(R.string.caches_filter_type);
@@ -2547,7 +2553,7 @@ public class cgeocaches extends AbstractListActivity {
 		cachesIntent.putExtra(EXTRAS_LIST_TYPE, "offline");
 		context.startActivity(cachesIntent);
 	}
-	
+
 	public static void startActivityCachesAround(final AbstractActivity context, final Double latitude, final Double longitude) {
 		cgeocaches cachesActivity = new cgeocaches();
 
@@ -2559,7 +2565,7 @@ public class cgeocaches extends AbstractListActivity {
 
 		context.startActivity(cachesIntent);
 	}
-	
+
 	public static void startActivityCacheOwner(final AbstractActivity context, final String userName) {
 		final Intent cachesIntent = new Intent(context, cgeocaches.class);
 
@@ -2569,7 +2575,7 @@ public class cgeocaches extends AbstractListActivity {
 
 		context.startActivity(cachesIntent);
 	}
-	
+
 	public static void startActivityCacheUser(final AbstractActivity context, final String userName) {
 		final Intent cachesIntent = new Intent(context, cgeocaches.class);
 
