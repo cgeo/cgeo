@@ -47,7 +47,9 @@
 		<item name="android:padding">4dip</item>
 		<item name="android:gravity">center</item>
 		<item name="android:scaleType">center</item>
+		<item name="android:focusable">true</item>
 		<item name="android:src">@drawable/actionbar_cgeo</item>
+		<item name="android:background">@drawable/actionbar_button</item>
 	</style>
 
 	<style name="action_bar_action">
@@ -56,7 +58,9 @@
 		<item name="android:padding">2dip</item>
 		<item name="android:gravity">center</item>
 		<item name="android:scaleType">center</item>
+		<item name="android:focusable">true</item>
 		<item name="android:src">@drawable/actionbar_home</item>
+		<item name="android:background">@drawable/actionbar_button</item>
 	</style>
 
 	<style name="action_bar_separator">
