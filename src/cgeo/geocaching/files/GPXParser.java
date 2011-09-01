@@ -39,6 +39,7 @@ public abstract class GPXParser extends FileParser {
 	private static final SimpleDateFormat formatTimezone = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'.000'Z"); // 2010-04-20T01:01:03.000-04:00
 
 	private static final Pattern patternGeocode = Pattern.compile("([A-Z]{2}[0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
+	private static final Pattern patternGuid = Pattern.compile(".*" + Pattern.quote("guid=") + "([0-9a-z\\-]+)", Pattern.CASE_INSENSITIVE);
 	private static final String[] nsGCList = new String[] {
 		"http://www.groundspeak.com/cache/1/1", // PQ 1.1
 		"http://www.groundspeak.com/cache/1/0/1", // PQ 1.0.1
@@ -327,6 +328,21 @@ public abstract class GPXParser extends FileParser {
 				sym = body;
 				if (body.indexOf("geocache") != -1 && body.indexOf("found") != -1) {
 					cache.found = true;
+				}
+			}
+		});
+
+		// waypoint.url
+		waypoint.getChild(namespace, "url").setEndTextElementListener(new EndTextElementListener() {
+
+			@Override
+			public void end(String url) {
+				final Matcher matcher = patternGuid.matcher(url);
+				if (matcher.matches()) {
+					String guid = matcher.group(1);
+					if (guid.length() > 0) {
+						cache.guid = guid;
+					}
 				}
 			}
 		});
