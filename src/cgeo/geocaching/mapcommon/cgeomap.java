@@ -29,13 +29,13 @@ import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgDirection;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.cgUpdateDir;
 import cgeo.geocaching.cgUpdateLoc;
 import cgeo.geocaching.cgUser;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.mapinterfaces.ActivityImpl;
 import cgeo.geocaching.mapinterfaces.CacheOverlayItemImpl;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
@@ -329,11 +329,14 @@ public class cgeomap extends MapBase {
 			live = false;
 		}
 
-		// google analytics
-		if (live) {
-			followMyLocation = true;
+		if (null == mapStateIntent) {			
+			if (live) {
+				followMyLocation = true;
+			} else {
+				followMyLocation = false;
+			}
 		} else {
-			followMyLocation = false;
+			followMyLocation = 1 == mapStateIntent[3] ? true : false;
 		}
 		if (geocodeIntent != null || searchIdIntent != null || (latitudeIntent != null && longitudeIntent != null) || mapStateIntent != null) {
 			centerMap(geocodeIntent, searchIdIntent, latitudeIntent, longitudeIntent, mapStateIntent);
@@ -658,11 +661,12 @@ public class cgeomap extends MapBase {
 				mapIntent.putExtra("latitude", latitudeIntent);
 				mapIntent.putExtra("longitude", longitudeIntent);
 				mapIntent.putExtra("wpttype", waypointTypeIntent);
-				int[] mapState = new int[3];
+				int[] mapState = new int[4];
 				GeoPointImpl mapCenter = mapView.getMapViewCenter();
 				mapState[0] = mapCenter.getLatitudeE6();
 				mapState[1] = mapCenter.getLongitudeE6();
 				mapState[2] = mapView.getMapZoomLevel();
+				mapState[3] = followMyLocation ? 1 : 0;
 				mapIntent.putExtra("mapstate", mapState);
 
 				// start the new map
