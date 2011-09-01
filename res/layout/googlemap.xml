@@ -13,6 +13,10 @@
 				android:visibility="gone" />
 		<View style="@style/action_bar_separator" />
 		<ImageView style="@style/action_bar_action"
+				android:id="@+id/my_position"
+				android:src="@drawable/actionbar_mylocation_on" />
+		<View style="@style/action_bar_separator" />
+		<ImageView style="@style/action_bar_action"
 				android:src="@drawable/actionbar_manual"
 				android:onClick="goManual" />
 	</LinearLayout>
@@ -41,13 +45,5 @@
 				android:enabled="true"
 				android:clickable="true"
 				android:apiKey="@string/maps_api_key" />
-		<ImageView android:id="@+id/my_position"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignParentTop="true"
-				android:layout_alignParentRight="true"
-				android:layout_margin="5dip"
-				android:padding="5dip"
-				android:src="@drawable/my_location_off" />
 	</RelativeLayout>
 </LinearLayout>
