@@ -25,9 +25,13 @@ public interface ICache {
 	 */
 	public String getType();
 	/**
-	 * @return GC username of the owner
+	 * @return Displayed owner, might differ from the real owner
 	 */
 	public String getOwner();
+	/**
+	 * @return GC username of the owner
+	 */
+	public String getOwnerReal();
 	/**
 	 * @return Micro, small etc.
 	 */
@@ -64,5 +68,21 @@ public interface ICache {
 	 * @return true is the cache is a Premium Member cache only, false else
 	 */
 	public boolean isMembersOnly();
+	/**
+	 * @return Decrypted hint
+	 */
+	public String getHint();
+	/**
+	 * @return Descrition
+	 */
+	public String getDescription();
+	/**
+	 * @return Short Description
+	 */
+	public String getShortDescription();
+	/**
+	 * @return Name
+	 */
+	public String getName();
 
 }

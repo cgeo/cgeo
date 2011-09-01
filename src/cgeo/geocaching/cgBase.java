@@ -29,8 +29,8 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
@@ -4396,7 +4396,11 @@ public class cgBase {
 		return cookiesDone;
 	}
 
-	private static void replaceWhitespace(final StringBuffer buffer) {
+	/**
+	 * Replace the characters \n, \r and \t with a space
+	 * @param buffer The data
+	 */
+	public static void replaceWhitespace(final StringBuffer buffer) {
 		final int length = buffer.length();
 		final char[] chars = new char[length];
 		buffer.getChars(0, length, chars, 0);

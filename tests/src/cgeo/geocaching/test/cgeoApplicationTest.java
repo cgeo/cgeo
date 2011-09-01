@@ -1,6 +1,8 @@
 package cgeo.geocaching.test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import junit.framework.Assert;
 import android.content.Context;
@@ -14,6 +16,7 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCacheWrap;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.test.mock.GC1ZXX2;
 import cgeo.geocaching.test.mock.GC2CJPF;
 
 /**
@@ -73,20 +76,31 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
        */
       @MediumTest
       public void testParseCache() {
-    	  ICache cache = new GC2CJPF();
-    	  cgCacheWrap caches = base.parseCache(cache.getData(),0);
-    	  cgCache cacheParsed = caches.cacheList.get(0);
-    	  Assert.assertEquals(cacheParsed.geocode, cache.getGeocode());
-    	  Assert.assertEquals(cacheParsed.type, cache.getType());
-    	  Assert.assertEquals(cacheParsed.owner, cache.getOwner());
-    	  Assert.assertEquals(cacheParsed.difficulty, cache.getDifficulty());
-    	  Assert.assertEquals(cacheParsed.terrain, cache.getTerrain());
-    	  Assert.assertEquals(cacheParsed.latitudeString, cache.getLatitute());
-    	  Assert.assertEquals(cacheParsed.longitudeString, cache.getLongitude());
-    	  Assert.assertEquals(cacheParsed.disabled, cache.isDisabled());
-    	  Assert.assertEquals(cacheParsed.own, cache.isOwn());
-    	  Assert.assertEquals(cacheParsed.archived, cache.isArchived());
-    	  Assert.assertEquals(cacheParsed.members, cache.isMembersOnly());
+    	  List<ICache> cachesToTest = new ArrayList<ICache>();
+    	  cachesToTest.add(new GC2CJPF());
+    	  cachesToTest.add(new GC1ZXX2());
+
+    	  for (ICache cache : cachesToTest) {
+	    	  cgCacheWrap caches = base.parseCache(cache.getData(),0);
+	    	  cgCache cacheParsed = caches.cacheList.get(0);
+	    	  Assert.assertEquals(cacheParsed.getGeocode(), cache.getGeocode());
+	    	  Assert.assertEquals(cacheParsed.getType(), cache.getType());
+	    	  Assert.assertEquals(cacheParsed.getOwner(), cache.getOwner());
+	    	  Assert.assertEquals(cacheParsed.getDifficulty(), cache.getDifficulty());
+	    	  Assert.assertEquals(cacheParsed.getTerrain(), cache.getTerrain());
+	    	  Assert.assertEquals(cacheParsed.getLatitute(), cache.getLatitute());
+	    	  Assert.assertEquals(cacheParsed.getLongitude(), cache.getLongitude());
+	    	  Assert.assertEquals(cacheParsed.isDisabled(), cache.isDisabled());
+	    	  Assert.assertEquals(cacheParsed.isOwn(), cache.isOwn());
+	    	  Assert.assertEquals(cacheParsed.isArchived(), cache.isArchived());
+	    	  Assert.assertEquals(cacheParsed.isMembersOnly(), cache.isMembersOnly());
+	    	  Assert.assertEquals(cacheParsed.getOwnerReal(), cache.getOwnerReal());
+	    	  Assert.assertEquals(cacheParsed.getSize(), cache.getSize());
+	    	  Assert.assertEquals(cacheParsed.getHint(), cache.getHint());
+	    	  Assert.assertTrue(cacheParsed.getDescription().startsWith(cache.getDescription()));
+	    	  Assert.assertEquals(cacheParsed.getShortDescription(), cache.getShortDescription());
+	    	  Assert.assertEquals(cacheParsed.getName(), cache.getName());
+    	  }
       }
 
 }

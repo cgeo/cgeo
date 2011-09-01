@@ -1,50 +1,46 @@
 package cgeo.geocaching.test.mock;
 
 
-public class GC2CJPF extends GCBase {
+public class GC1ZXX2 extends GCBase {
 	
 	@Override
 	public Float getDifficulty() {
-		return 2.5f;
+		return 3.0f;
 	}
 
 	@Override
 	public String getGeocode() {
-		return "GC2CJPF";
+		return "GC1ZXX2";
 	}
 
 	@Override
 	public String getLatitute() {
-		return "N 52° 25.504";
+		return "N 52° 22.393";
 	}
 
 	@Override
 	public String getLongitude() {
-		return "E 009° 39.852";
+		return "E 009° 42.648";
 	}
 
 	@Override
 	public String getOwner() {
-		return "Tom03";
-	}
-	@Override
-	public String getOwnerReal() {
-		return getOwner();
+		return "Rich Uncle Pennybags ";
 	}
 
 	@Override
 	public String getSize() {
-		return "small";
+		return "other";
 	}
 
 	@Override
 	public Float getTerrain() {
-		return 2.0f;
+		return 1.5f;
 	}
 
 	@Override
 	public String getType() {
-		return "multi";
+		return "traditional";
 	}
 
 	@Override
@@ -54,7 +50,7 @@ public class GC2CJPF extends GCBase {
 
 	@Override
 	public boolean isDisabled() {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -67,25 +63,29 @@ public class GC2CJPF extends GCBase {
 		return false;
 	}
 
+	@Override
+	public String getOwnerReal() {
+		return "daniel354"; 
+	}
 
 	@Override
 	public String getHint() {
-		return "Das Final (unter Steinen) ist mit GC gekennzeichnet.";
+		return "";
 	}
 
 	@Override
 	public String getDescription() {
-		return "Kleiner Multi über 7 Stationen";
+		return "<center><img width=\"500\"";
 	}
 
 	@Override
 	public String getShortDescription() {
-		return "Von Nachwuchs-Cachern für Nachwuchs-Cacher. ";
+		return "";
 	}
 
 	@Override
 	public String getName() {
-		return "Kinderwald KiC";
+		return "Hannopoly: Eislisenstrasse ";
 	}
 
 }

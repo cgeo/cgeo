@@ -453,6 +453,31 @@ public class cgCache implements ICache {
 		return own;
 	}
 
+	@Override
+	public String getOwnerReal() {
+		return ownerReal;
+	}
+
+	@Override
+	public String getHint() {
+		return hint;
+	}
+
+	@Override
+	public String getDescription() {
+		return description;
+	}
+
+	@Override
+	public String getShortDescription() {
+		return shortdesc;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
 }
 
 
