@@ -24,7 +24,6 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import cgeo.geocaching.activity.AbstractActivity;
@@ -447,26 +446,26 @@ public class cgeo extends AbstractActivity {
 		navAccuracy = (TextView) findViewById(R.id.nav_accuracy);
 		navLocation = (TextView) findViewById(R.id.nav_location);
 
-		final LinearLayout findOnMap = (LinearLayout) findViewById(R.id.map);
+		final View findOnMap = findViewById(R.id.map);
 		findOnMap.setClickable(true);
 		findOnMap.setOnClickListener(new cgeoFindOnMapListener());
 
-		final RelativeLayout findByOffline = (RelativeLayout) findViewById(R.id.search_offline);
+		final View findByOffline = findViewById(R.id.search_offline);
 		findByOffline.setClickable(true);
 		findByOffline.setOnClickListener(new cgeoFindByOfflineListener());
 		registerForContextMenu(findByOffline);
 
 		(new countBubbleUpdate()).start();
 
-		final LinearLayout advanced = (LinearLayout) findViewById(R.id.advanced_button);
+		final View advanced = findViewById(R.id.advanced_button);
 		advanced.setClickable(true);
 		advanced.setOnClickListener(new cgeoSearchListener());
 
-		final LinearLayout any = (LinearLayout) findViewById(R.id.any_button);
+		final View any = findViewById(R.id.any_button);
 		any.setClickable(true);
 		any.setOnClickListener(new cgeoPointListener());
 
-		final LinearLayout filter = (LinearLayout) findViewById(R.id.filter_button);
+		final View filter = findViewById(R.id.filter_button);
 		registerForContextMenu(filter);
 		filter.setOnClickListener(new View.OnClickListener() {
 
@@ -496,11 +495,10 @@ public class cgeo extends AbstractActivity {
 				}
 
 				if (geo.latitudeNow != null && geo.longitudeNow != null) {
-					LinearLayout findNearest = (LinearLayout) findViewById(R.id.nearest);
+					View findNearest = findViewById(R.id.nearest);
 					findNearest.setClickable(true);
 					findNearest.setOnClickListener(new cgeoFindNearestListener());
-					View findNearestView = (View)findNearest.findViewById(R.id.view_nearest);
-					findNearestView.setBackgroundResource(R.drawable.main_nearby);
+					findNearest.setBackgroundResource(R.drawable.main_nearby);
 
 					String satellites = null;
 					if (geo.satellitesVisible != null && geo.satellitesFixed != null && geo.satellitesFixed > 0) {
@@ -551,12 +549,11 @@ public class cgeo extends AbstractActivity {
 						}
 					}
 				} else {
-					LinearLayout findNearest = (LinearLayout) findViewById(R.id.nearest);
+					View findNearest = findViewById(R.id.nearest);
+					findNearest.setFocusable(false);
 					findNearest.setClickable(false);
 					findNearest.setOnClickListener(null);
-
-					View findNearestView = (View)findNearest.findViewById(R.id.view_nearest);
-					findNearestView.setBackgroundResource(R.drawable.main_nearby_disabled);
+					findNearest.setBackgroundResource(R.drawable.main_nearby_disabled);
 
 					navType.setText(null);
 					navAccuracy.setText(null);
