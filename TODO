@@ -1,8 +1,10 @@
 
 
-- Debuggen beim Web-Zugriff
-- Trackable Support
-- Challenge Support	
+- Image Support
+- Challenge Support
+Bug
+   Description/Short Desc/Hint werden nicht geparst
+- RegEx beschleunigen	
 
 ================================================================================
 
