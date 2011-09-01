@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+	<item>
+		<bitmap android:src="@drawable/main_live_default" />
+	</item>
+	<item android:top="1dp"
+		android:bottom="3dp"
+		android:left="2dp"
+		android:right="2dp">
+		<inset android:drawable="@drawable/main_overlay_pressed" />
+	</item>
+</layer-list>
