@@ -32,8 +32,14 @@ public abstract class AbstractApp implements App {
 			return null;
 		}
 		PackageManager packageManager = context.getPackageManager();
-		Intent intent = packageManager.getLaunchIntentForPackage(packageName);
-		return intent;
+		try {
+			// This can throw an exception where the exception type is only defined on API Level > 3
+			// therefore surround with try-catch
+			Intent intent = packageManager.getLaunchIntentForPackage(packageName);
+			return intent;
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	public boolean isInstalled(final Context context) {

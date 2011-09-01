@@ -29,13 +29,13 @@ import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgDirection;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.cgUpdateDir;
 import cgeo.geocaching.cgUpdateLoc;
 import cgeo.geocaching.cgUser;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.mapinterfaces.ActivityImpl;
 import cgeo.geocaching.mapinterfaces.CacheOverlayItemImpl;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
@@ -1722,15 +1722,15 @@ public class cgeomap extends MapBase {
 
 		if (status == null) {
 			if (followMyLocation) {
-				myLocSwitch.setImageResource(R.drawable.my_location_on);
+				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_on);
 			} else {
-				myLocSwitch.setImageResource(R.drawable.my_location_off);
+				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_off);
 			}
 		} else {
 			if (status) {
-				myLocSwitch.setImageResource(R.drawable.my_location_on);
+				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_on);
 			} else {
-				myLocSwitch.setImageResource(R.drawable.my_location_off);
+				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_off);
 			}
 		}
 
@@ -1748,12 +1748,12 @@ public class cgeomap extends MapBase {
 			if (followMyLocation) {
 				followMyLocation = false;
 
-				myLocSwitch.setImageResource(R.drawable.my_location_off);
+				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_off);
 			} else {
 				followMyLocation = true;
 				myLocationInMiddle();
 
-				myLocSwitch.setImageResource(R.drawable.my_location_on);
+				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_on);
 			}
 		}
 	}
