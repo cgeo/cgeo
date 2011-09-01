@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-	<item android:state_enabled="true" android:drawable="@drawable/action_button_dark_default" />
-	<item android:state_pressed="true" android:drawable="@drawable/action_button_dark_pressed" />
-	<item android:state_focused="true" android:drawable="@drawable/action_button_dark_pressed" />
-	<item android:drawable="@drawable/action_button_dark_off" />
+	<item android:drawable="@drawable/action_button_dark_pressed"
+		android:state_focused="true" android:state_pressed="true" />
+	<item android:drawable="@drawable/action_button_dark_pressed"
+		android:state_focused="false" android:state_pressed="true" />
+	<item android:drawable="@drawable/action_button_dark_selected"
+		android:state_focused="true" />
+	<item android:drawable="@drawable/action_button_dark_default"
+		android:state_focused="false" android:state_pressed="false" />
+	<item android:drawable="@drawable/action_button_dark_off"
+		android:state_enabled="false" />
 </selector>
