@@ -43,14 +43,14 @@
   <string name="log_published">publiée</string>
   <string name="log_enabled">activée</string>
   <string name="log_disabled">désactivée</string>
-  <string name="log_attend">will attend</string>
-  <string name="log_attended">attended</string>
+  <string name="log_attend">va participer</string>
+  <string name="log_attended">a participé</string>
   <string name="log_retrieved">retrouvé</string>
   <string name="log_grabbed">pris ailleurs</string>
   <string name="log_maintained">maintenu</string>
   <string name="log_maintenance_needed">nécessite une maintenance</string>
   <string name="log_maintenance_owner">maitenance</string>
-  <string name="log_update">coordonnées mise-à-jours</string>
+  <string name="log_update">coordonnées mise à jour</string>
   <string name="log_archived">archivée</string>
   <string name="log_needs_archived">nécessite d\'être archivée</string>
   <string name="log_discovered">retrouvée</string>
@@ -84,22 +84,22 @@
 
   <!-- errors -->
   <string name="err_none">ok</string>
-  <string name="err_start">communication not started</string>
-  <string name="err_parse">failed login page parsing</string>
-  <string name="err_server">failed connection to geocaching.com (server or connection down?)</string>
-  <string name="err_login">no login information stored</string>
-  <string name="err_unknown">unknown error</string>
+  <string name="err_start">communication non démarré</string>
+  <string name="err_parse">echec login lecture page</string>
+  <string name="err_server">echec de la connection à geocaching.com (probléme de serveur ou de connection?)</string>
+  <string name="err_login">pas d\'utilisateur ou de mot de passe enregistré</string>
+  <string name="err_unknown">erreur inconnue</string>
   <string name="err_comm">unknown communication error</string>
-  <string name="err_wrong">wrong login informations</string>
-  <string name="err_license">user has not agreed to Geocaching.com license agreement</string>
-  <string name="err_store">Sorry, c:geo can\'t store cache.</string>
-  <string name="err_drop">Sorry, c:geo can\'t drop cache.</string>
+  <string name="err_wrong">nom d\'utilisateur inconnu ou mauvais mot de passe</string>
+  <string name="err_license">l\'utilisateur n\a pas accepté les conditions d\'utilisation de Geocaching.com </string>
+  <string name="err_store">Désolé, c:geo can\'t store cache.</string>
+  <string name="err_drop">Désolé, c:geo can\'t drop cache.</string>
   <string name="err_title_problem">problem</string>
-  <string name="err_detail_open">Sorry, c:geo can\'t open geocache details.</string>
-  <string name="err_detail_cache">Sorry, c:geo can\'t display geocache you want. Is it really geocache?</string>
-  <string name="err_detail_cache_find">Sorry, c:geo can\'t find geocache</string>
-  <string name="err_detail_cache_find_some">Sorry, c:geo can\'t find that geocache.</string>
-  <string name="err_detail_cache_forgot">Sorry, c:geo forgot which geocache you want.</string>
+  <string name="err_detail_open">Désolé, c:geo can\'t open geocache details.</string>
+  <string name="err_detail_cache">Désolé, c:geo can\'t display geocache you want. Is it really geocache?</string>
+  <string name="err_detail_cache_find">Désolé, c:geo can\'t find geocache</string>
+  <string name="err_detail_cache_find_some">Désolé, c:geo can\'t find that geocache.</string>
+  <string name="err_detail_cache_forgot">Désolé, c:geo forgot which geocache you want.</string>
   <string name="err_detail_cache_language">c:geo can\'t read some cache details. Please check if you have geocaching.com website set to English. Unfortunately, c:geo doesn\'t understand other localizations.</string>
   <string name="err_detail_no_spoiler">c:geo found no spoiler images for this cache.</string>
   <string name="err_detail_no_map_static">c:geo found no static maps for this cache.</string>
@@ -109,13 +109,13 @@
   <string name="err_radar_title">Radar isn\'t installed.</string>
   <string name="err_radar_message">This function requires Radar application. Would you install it?</string>
   <string name="err_radar_market">c:geo can\'t start Android Market to search for Radar application.</string>
-  <string name="err_radar_generic">Sorry, c:geo can\'t start Radar application. Is installed?</string>
+  <string name="err_radar_generic">Désolé, c:geo can\'t start Radar application. Is installed?</string>
   <string name="err_navigation_no">c:geo can\'t find any supported navigation.</string>
   <string name="err_application_no">c:geo can\'t find any suitable application.</string>
-  <string name="err_auth_initialize">Sorry, c:geo failed to initialize authorization process.</string>
+  <string name="err_auth_initialize">Désolé, c:geo failed to initialize authorization process.</string>
   <string name="err_auth_process">Authorization process failed.</string>
   <string name="err_cannot_log_visit">c:geo has not enough information to log visit. Please, do it from full cache details.</string>
-  <string name="err_init_cleared">Sorry, c:geo can\'t clear your login.</string>
+  <string name="err_init_cleared">Désolé, c:geo can\'t clear your login.</string>
 
   <!-- location service -->
   <string name="loc_last">dernière pos. connue</string>
@@ -176,23 +176,23 @@
   <string name="init_skin">aspect sobre (nécessite le redémarrage de c:geo)</string>
   <string name="init_transparent">accueil de c:geo transparent</string>
   <string name="init_address">afficher l\'adresse sur l\'accueil</string>
-  <string name="init_exclude">exclure les caches trouvée et les miennes</string>
-  <string name="init_disabled">exclure les caches sdésactivées</string>
+  <string name="init_exclude">exclure les caches trouvées et les miennes</string>
+  <string name="init_disabled">exclure les cachess désactivées</string>
   <string name="init_offline">enregistrer les cartes pour utilisation hors ligne</string>
   <string name="init_units">utiliser des unités de distance impériales</string>
   <string name="init_nav">utiliser Google Navigation</string>
-  <string name="init_autoload">chargement auto des descriptions longues</string>
+  <string name="init_autoload">chargement automatique des descriptions longues</string>
   <string name="init_livelist">afficher la direction des caches dans les listes</string>
   <string name="init_browser">identifier c:geo comme navigateur standard</string>
-  <string name="init_cleared">c:geo à effacé votre identifiant.</string>
+  <string name="init_cleared">c:geo a effacé votre identifiant.</string>
 
   <!-- auth -->
   <string name="auth_twitter">twitter</string>
   <string name="auth_authorize">autorisation de c:geo</string>
-  <string name="auth_start">start authorization</string>
-  <string name="auth_again">start again</string>
+  <string name="auth_start">début d\'autorisation</string>
+  <string name="auth_again">redémarre</string>
   <string name="auth_pin_hint">pin assigned by twitter</string>
-  <string name="auth_finish">finish</string>
+  <string name="auth_finish">terminé</string>
   <string name="auth_dialog_wait">Waiting for Twitter…</string>
   <string name="auth_dialog_pin_title">pin code</string>
   <string name="auth_dialog_pin_message">Please write PIN code provided by Twitter website. It\'s mandatory to complete authorization.</string>
@@ -245,7 +245,7 @@
   <string name="cache_menu_event">ajouter à l\'agenda</string>
   <string name="cache_menu_details">détails</string>
   <string name="cache_status">statut</string>
-  <string name="cache_status_offline_log">saved log</string>
+  <string name="cache_status_offline_log">logs sauvés</string>
   <string name="cache_status_found">trouvée</string>
   <string name="cache_status_archived">archivée</string>
   <string name="cache_status_disabled">désactivée</string>
