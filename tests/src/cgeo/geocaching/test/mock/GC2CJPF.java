@@ -1,12 +1,7 @@
 package cgeo.geocaching.test.mock;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
-import cgeo.geocaching.ICache;
-
-public class GC2CJPF implements ICache {
+public class GC2CJPF extends GCBase {
 	
 	@Override
 	public Float getDifficulty() {
@@ -31,6 +26,10 @@ public class GC2CJPF implements ICache {
 	@Override
 	public String getOwner() {
 		return "Tom03";
+	}
+	@Override
+	public String getOwnerReal() {
+		return getOwner();
 	}
 
 	@Override
@@ -68,27 +67,26 @@ public class GC2CJPF implements ICache {
 		return false;
 	}
 
+
 	@Override
-	public String getData() {
-		try {
-			InputStream is = this.getClass().getResourceAsStream("/cgeo/geocaching/test/mock/"+getGeocode()+".txt");
-			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-
-			int nRead;
-			byte[] data = new byte[16384];
-
-			while ((nRead = is.read(data, 0, data.length)) != -1) {
-				buffer.write(data, 0, nRead);
-			}
-
-			buffer.flush();
-			return buffer.toString();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return null;
-		
+	public String getHint() {
+		return "Das Final (unter Steinen) ist mit GC gekennzeichnet.";
 	}
+
+	@Override
+	public String getDescription() {
+		return "Kleiner Multi über 7 Stationen";
+	}
+
+	@Override
+	public String getShortDescription() {
+		return "Von Nachwuchs-Cachern für Nachwuchs-Cacher. ";
+	}
+
+	@Override
+	public String getName() {
+		return "Kinderwald KiC";
+	}
+
 }
 		

@@ -21,48 +21,68 @@ public interface ICache {
 	 */
 	public String getGeocode();
 	/**
-	 * @return
+	 * @return Tradi, multi etc.
 	 */
 	public String getType();
 	/**
-	 * @return
+	 * @return Displayed owner, might differ from the real owner
 	 */
 	public String getOwner();
 	/**
-	 * @return
+	 * @return GC username of the owner
+	 */
+	public String getOwnerReal();
+	/**
+	 * @return Micro, small etc.
 	 */
 	public String getSize();
 	/**
-	 * @return
+	 * @return Difficulty assessment
 	 */
 	public Float getDifficulty();
 	/**
-	 * @return
+	 * @return Terrain assessment
 	 */
 	public Float getTerrain();
 	/**
-	 * @return
+	 * @return Latitute, e.g. N 52° 12.345
 	 */
 	public String getLatitute();
 	/**
-	 * @return
+	 * @return Longitude, e.g. E 9° 34.567
 	 */
 	public String getLongitude();
 	/**
-	 * @return
+	 * @return true if the cache is disabled, false else
 	 */
 	public boolean isDisabled();
 	/**
-	 * @return
+	 * @return true if the user is the owner of the cache, false else
 	 */
 	public boolean isOwn();
 	/**
-	 * @return
+	 * @return true is the cache is archived, false else
 	 */
 	public boolean isArchived();
 	/**
-	 * @return
+	 * @return true is the cache is a Premium Member cache only, false else
 	 */
 	public boolean isMembersOnly();
+	/**
+	 * @return Decrypted hint
+	 */
+	public String getHint();
+	/**
+	 * @return Descrition
+	 */
+	public String getDescription();
+	/**
+	 * @return Short Description
+	 */
+	public String getShortDescription();
+	/**
+	 * @return Name
+	 */
+	public String getName();
 
 }
