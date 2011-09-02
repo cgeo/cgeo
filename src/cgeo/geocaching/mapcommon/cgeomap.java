@@ -28,13 +28,13 @@ import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgDirection;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.cgUpdateDir;
 import cgeo.geocaching.cgUpdateLoc;
 import cgeo.geocaching.cgUser;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.mapinterfaces.ActivityImpl;
 import cgeo.geocaching.mapinterfaces.CacheOverlayItemImpl;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
@@ -42,6 +42,7 @@ import cgeo.geocaching.mapinterfaces.MapControllerImpl;
 import cgeo.geocaching.mapinterfaces.MapFactory;
 import cgeo.geocaching.mapinterfaces.MapViewImpl;
 import cgeo.geocaching.mapinterfaces.UserOverlayItemImpl;
+import cgeo.geocaching.utils.CollectionUtils;
 
 public class cgeomap extends MapBase {
 
@@ -502,7 +503,7 @@ public class cgeomap extends MapBase {
 			}
 
 			item = menu.findItem(MENU_STORE_CACHES); // store loaded
-			if (live && !isLoading() && app.getNotOfflineCount(searchId) > 0 && caches != null && caches.size() > 0) {
+			if (live && !isLoading() && app.getNotOfflineCount(searchId) > 0 && CollectionUtils.isNotEmpty(caches)) {
 				item.setEnabled(true);
 			} else {
 				item.setEnabled(false);
@@ -559,7 +560,7 @@ public class cgeomap extends MapBase {
 
 				ArrayList<cgCache> cachesProtected = new ArrayList<cgCache>(caches);
 				try {
-					if (cachesProtected.size() > 0) {
+					if (CollectionUtils.isNotEmpty(cachesProtected)) {
 						final GeoPointImpl mapCenter = mapView.getMapViewCenter();
 						final int mapCenterLat = mapCenter.getLatitudeE6();
 						final int mapCenterLon = mapCenter.getLongitudeE6();

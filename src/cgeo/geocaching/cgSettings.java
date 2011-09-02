@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.android.maps.MapDatabase;
 
 import android.content.Context;
@@ -16,6 +17,7 @@ import android.util.Log;
 import cgeo.geocaching.googlemaps.googleMapFactory;
 import cgeo.geocaching.mapinterfaces.MapFactory;
 import cgeo.geocaching.mapsforge.mfMapFactory;
+import cgeo.geocaching.utils.CollectionUtils;
 
 public class cgSettings {
 
@@ -268,7 +270,7 @@ public class cgSettings {
 		final String preUsername = prefs.getString(KEY_USERNAME, null);
 		final String prePassword = prefs.getString(KEY_PASSWORD, null);
 
-		if (preUsername == null || prePassword == null || preUsername.length() == 0 || prePassword.length() == 0) {
+		if (StringUtils.isBlank(preUsername) || StringUtils.isBlank(prePassword)) {
 			return false;
 		} else {
 			return true;
@@ -325,7 +327,7 @@ public class cgSettings {
 
 			@Override
 			public void edit(Editor edit) {
-				if (username == null || username.length() == 0 || password == null || password.length() == 0) {
+				if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
 					// erase username and password
 					edit.remove(KEY_USERNAME);
 					edit.remove(KEY_PASSWORD);
@@ -342,7 +344,7 @@ public class cgSettings {
 		final String preUsername = prefs.getString(KEY_USERNAME, null);
 		final String prePassword = prefs.getString(KEY_GCVOTE_PASSWORD, null);
 
-		if (preUsername == null || prePassword == null || preUsername.length() == 0 || prePassword.length() == 0) {
+		if (StringUtils.isBlank(preUsername) || StringUtils.isBlank(prePassword)) {
 			return false;
 		} else {
 			return true;
@@ -354,7 +356,7 @@ public class cgSettings {
 
 			@Override
 			public void edit(Editor edit) {
-				if (password == null || password.length() == 0) {
+				if (StringUtils.isBlank(password)) {
 					// erase password
 					edit.remove(KEY_GCVOTE_PASSWORD);
 				} else {
@@ -393,7 +395,7 @@ public class cgSettings {
 
 			@Override
 			public void edit(Editor edit) {
-				if (signature == null || signature.length() == 0) {
+				if (StringUtils.isBlank(signature)) {
 					// erase signature
 					edit.remove(KEY_SIGNATURE);
 				} else {
@@ -427,7 +429,7 @@ public class cgSettings {
 				// delete cookies
 				Map<String, ?> prefsValues = prefs.getAll();
 
-				if (prefsValues != null && prefsValues.size() > 0) {
+				if (CollectionUtils.isNotEmpty(prefsValues)) {
 					Log.i(cgSettings.tag, "Removing cookies");
 
 					for (String key : prefsValues.keySet()) {

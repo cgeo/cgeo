@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Handler;
@@ -94,7 +96,7 @@ public class cgeowaypointadd extends AbstractActivity {
 			id = extras.getInt("waypoint");
 		}
 
-		if ((geocode == null || geocode.length() == 0) && id <= 0) {
+		if (StringUtils.isBlank(geocode) && id <= 0) {
 			showToast(res.getString(R.string.err_waypoint_cache_unknown));
 
 			finish();
@@ -245,13 +247,13 @@ public class cgeowaypointadd extends AbstractActivity {
 			final String latText = ((Button) findViewById(R.id.buttonLatitude)).getText().toString();
 			final String lonText = ((Button) findViewById(R.id.buttonLongitude)).getText().toString();
 
-			if ((bearingText == null || bearingText.length() == 0) && (distanceText == null || distanceText.length() == 0)
-							&& (latText == null || latText.length() == 0) && (lonText == null || lonText.length() == 0)) {
+			if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)
+							&& StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
 				helpDialog(res.getString(R.string.err_point_no_position_given_title), res.getString(R.string.err_point_no_position_given));
 				return;
 			}
 
-			if (latText != null && latText.length() > 0 && lonText != null && lonText.length() > 0) {
+			if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
 				// latitude & longitude
 				HashMap<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
 				HashMap<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lon");
@@ -278,7 +280,7 @@ public class cgeowaypointadd extends AbstractActivity {
 				longitude = geo.longitudeNow;
 			}
 
-			if (bearingText != null && bearingText.length() > 0 && distanceText != null && distanceText.length() > 0) {
+			if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
 				// bearing & distance
 				Double bearing = null;
 				try {

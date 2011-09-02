@@ -3,6 +3,8 @@ package cgeo.geocaching;
 import java.util.HashMap;
 import java.util.Locale;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -119,7 +121,7 @@ public class cgeopopup extends AbstractActivity {
 			geocode = extras.getString("geocode");
 		}
 
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			showToast(res.getString(R.string.err_detail_cache_find));
 
 			finish();
@@ -231,7 +233,7 @@ public class cgeopopup extends AbstractActivity {
 				gcIcons.put("gchq", R.drawable.type_hq);
 			}
 
-			if (cache.name != null && cache.name.length() > 0) {
+			if (StringUtils.isNotBlank(cache.name)) {
 				setTitle(cache.name);
 			} else {
 				setTitle(geocode.toUpperCase());
@@ -258,13 +260,13 @@ public class cgeopopup extends AbstractActivity {
 
 			itemName.setText(res.getString(R.string.cache_type));
 			if (cgBase.cacheTypesInv.containsKey(cache.type)) { // cache icon
-				if (cache.size != null && cache.size.length() > 0) {
+				if (StringUtils.isNotBlank(cache.size)) {
 					itemValue.setText(cgBase.cacheTypesInv.get(cache.type) + " (" + cache.size + ")");
 				} else {
 					itemValue.setText(cgBase.cacheTypesInv.get(cache.type));
 				}
 			} else {
-				if (cache.size != null && cache.size.length() > 0) {
+				if (StringUtils.isNotBlank(cache.size)) {
 					itemValue.setText(cgBase.cacheTypesInv.get("mystery") + " (" + cache.size + ")");
 				} else {
 					itemValue.setText(cgBase.cacheTypesInv.get("mystery"));

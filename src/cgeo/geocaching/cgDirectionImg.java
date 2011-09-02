@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -20,11 +21,11 @@ public class cgDirectionImg {
 		String dirName;
 		String fileName;
 
-		if (geocode == null || geocode.length() == 0 || code == null || code.length() == 0) {
+		if (StringUtils.isBlank(geocode) || code == null || code.length() == 0) {
 			return;
 		}
 
-		if (geocode != null && geocode.length() > 0) {
+		if (StringUtils.isNotBlank(geocode)) {
 			dirName = cgSettings.getStorage() + geocode + "/";
 			fileName = cgSettings.getStorage() + geocode + "/direction.png";
 		} else {

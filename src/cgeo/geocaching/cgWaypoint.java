@@ -2,6 +2,8 @@ package cgeo.geocaching;
 
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.widget.TextView;
@@ -38,16 +40,16 @@ public class cgWaypoint {
 		if (lookup == null || lookup.length() == 0) {
 			lookup = old.lookup;
 		}
-		if (name == null || name.length() == 0) {
+		if (StringUtils.isBlank(name)) {
 			name = old.name;
 		}
-		if (latlon == null || latlon.length() == 0) {
+		if (StringUtils.isBlank(latlon)) {
 			latlon = old.latlon;
 		}
-		if (latitudeString == null || latitudeString.length() == 0) {
+		if (StringUtils.isBlank(latitudeString)) {
 			latitudeString = old.latitudeString;
 		}
-		if (longitudeString == null || longitudeString.length() == 0) {
+		if (StringUtils.isBlank(longitudeString)) {
 			longitudeString = old.longitudeString;
 		}
 		if (latitude == null) {

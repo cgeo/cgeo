@@ -4,6 +4,8 @@ import gnu.android.app.appmanualclient.AppManualReaderClient;
 
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -35,7 +37,7 @@ public final class ActivityMixin {
 	}
 
 	public final static void goManual(final Context context, final String helpTopic) {
-		if (helpTopic == null || helpTopic.length() == 0) {
+		if (StringUtils.isBlank(helpTopic)) {
 			return;
 		}
 		try {
@@ -50,7 +52,7 @@ public final class ActivityMixin {
 	}
 
 	public final static void setTitle(final Activity activity, final String text) {
-		if (text == null) {
+		if (StringUtils.isBlank(text)) {
 			return;
 		}
 
@@ -83,7 +85,7 @@ public final class ActivityMixin {
 	}
 
 	public final static void showToast(final Activity activity, final String text) {
-		if (text.length() > 0) {
+		if (StringUtils.isNotBlank(text)) {
 			Toast toast = Toast.makeText(activity, text, Toast.LENGTH_LONG);
 
 			toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.BOTTOM, 0, 100);
@@ -92,7 +94,7 @@ public final class ActivityMixin {
 	}
 
 	public final static void showShortToast(final Activity activity, final String text) {
-		if (text.length() > 0) {
+		if (StringUtils.isNotBlank(text)) {
 			Toast toast = Toast.makeText(activity, text, Toast.LENGTH_SHORT);
 
 			toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.BOTTOM, 0, 100);
@@ -101,7 +103,7 @@ public final class ActivityMixin {
 	}
 
 	public static final void helpDialog(final Activity activity, final String title, final String message) {
-		if (message == null || message.length() == 0) {
+		if (StringUtils.isBlank(message)) {
 			return;
 		}
 

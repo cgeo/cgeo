@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -485,13 +487,13 @@ public class cgeopoint extends AbstractActivity {
 		String latText = ((EditText) findViewById(R.id.latitude)).getText().toString();
 		String lonText = ((EditText) findViewById(R.id.longitude)).getText().toString();
 
-		if ((bearingText == null || bearingText.length() == 0) && (distanceText == null || distanceText.length() == 0)
-				&& (latText == null || latText.length() == 0) && (lonText == null || lonText.length() == 0)) {
+		if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText)
+				&& StringUtils.isBlank(latText) && StringUtils.isBlank(lonText)) {
 			showToast(res.getString(R.string.err_point_no_position_given));
 			return null;
 		}
 
-		if (latText != null && latText.length() > 0 && lonText != null && lonText.length() > 0) {
+		if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
 			// latitude & longitude
 			HashMap<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
 			HashMap<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lon");
@@ -518,7 +520,7 @@ public class cgeopoint extends AbstractActivity {
 			longitude = geo.longitudeNow;
 		}
 
-		if (bearingText != null && bearingText.length() > 0 && distanceText != null && distanceText.length() > 0) {
+		if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
 			// bearing & distance
 			Double bearing = null;
 			try {

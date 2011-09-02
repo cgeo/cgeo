@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map.Entry;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -54,6 +56,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.GeneralAppsFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.utils.CollectionUtils;
 
 public class cgeodetail extends AbstractActivity {
 
@@ -320,10 +323,10 @@ public class cgeodetail extends AbstractActivity {
 				geocode = uri.getQueryParameter("wp");
 				guid = uri.getQueryParameter("guid");
 
-				if (geocode != null && geocode.length() > 0) {
+				if (StringUtils.isNotBlank(geocode)) {
 					geocode = geocode.toUpperCase();
 					guid = null;
-				} else if (guid != null && guid.length() > 0) {
+				} else if (StringUtils.isNotBlank(guid)) {
 					geocode = null;
 					guid = guid.toLowerCase();
 				} else {
@@ -352,9 +355,9 @@ public class cgeodetail extends AbstractActivity {
 		app.setAction(geocode);
 
 		try {
-			if (name != null && name.length() > 0) {
+			if (StringUtils.isNotBlank(name)) {
 				waitDialog = ProgressDialog.show(this, name, res.getString(R.string.cache_dialog_loading_details), true);
-			} else if (geocode != null && geocode.length() > 0) {
+			} else if (StringUtils.isNotBlank(geocode)) {
 				waitDialog = ProgressDialog.show(this, geocode.toUpperCase(), res.getString(R.string.cache_dialog_loading_details), true);
 			} else {
 				waitDialog = ProgressDialog.show(this, res.getString(R.string.cache), res.getString(R.string.cache_dialog_loading_details), true);
@@ -423,7 +426,7 @@ public class cgeodetail extends AbstractActivity {
 			if (viewId == R.id.author) { // Author of a log entry
 				contextMenuUser = ((TextView)view).getText().toString();
 			} else if (viewId == R.id.value) { // The owner of the cache
-				if (cache.ownerReal != null && cache.ownerReal.length() > 0) {
+				if (StringUtils.isNotBlank(cache.ownerReal)) {
 					contextMenuUser = cache.ownerReal;
 				} else {
 					contextMenuUser = cache.owner;
@@ -493,7 +496,7 @@ public class cgeodetail extends AbstractActivity {
 		}
 		addVisitMenu(menu, cache);
 
-		if (cache != null && cache.spoilers != null && cache.spoilers.size() > 0) {
+		if (cache != null && CollectionUtils.isNotEmpty(cache.spoilers)) {
 			menu.add(1, 5, 0, res.getString(R.string.cache_menu_spoilers)).setIcon(android.R.drawable.ic_menu_gallery); // spoiler images
 		}
 
@@ -570,7 +573,7 @@ public class cgeodetail extends AbstractActivity {
 			}
 		}
 
-		if (geocode != null && geocode.length() > 0) {
+		if (StringUtils.isNotBlank(geocode)) {
 			app.setAction(geocode);
 		}
 	}
@@ -589,7 +592,7 @@ public class cgeodetail extends AbstractActivity {
 		if (cache == null) {
 			if (waitDialog != null && waitDialog.isShowing()) waitDialog.dismiss();
 
-			if (geocode != null && geocode.length() > 0) {
+			if (StringUtils.isNotBlank(geocode)) {
 				showToast(res.getString(R.string.err_detail_cache_find) + " " + geocode + ".");
 			} else {
 				geocode = null;
@@ -618,13 +621,11 @@ public class cgeodetail extends AbstractActivity {
 				gcIcons.put("mystery", R.drawable.type_mystery);
 			}
 
-			if (null == geocode && cache.geocode.length() > 0)
-            {
+			if (StringUtils.isBlank(geocode)) {
 			    geocode = cache.geocode;
             }
 
-			if (null == guid && cache.guid.length() > 0)
-            {
+			if (StringUtils.isBlank(guid)) {
                 guid = cache.guid;
             }
 
@@ -666,7 +667,7 @@ public class cgeodetail extends AbstractActivity {
 			itemName.setText(res.getString(R.string.cache_type));
 
 			String size = "";
-			if (cache.size != null && cache.size.length() > 0) {
+			if (StringUtils.isNotBlank(cache.size)) {
 				// don't show "not chosen" for events, that should be the normal case
 				if (!(cache.isEventCache() && cache.size.equals("not chosen"))) {
 					size = " (" + cache.size + ")";
@@ -781,15 +782,15 @@ public class cgeodetail extends AbstractActivity {
 			}
 
 			// cache author
-			if ((cache.owner != null && cache.owner.length() > 0) || (cache.ownerReal != null && cache.ownerReal.length() > 0)) {
+			if (StringUtils.isNotBlank(cache.owner) || StringUtils.isNotBlank(cache.ownerReal)) {
 				itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
 				itemName = (TextView) itemLayout.findViewById(R.id.name);
 				itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
 				itemName.setText(res.getString(R.string.cache_owner));
-				if (cache.owner != null && cache.owner.length() > 0) {
+				if (StringUtils.isNotBlank(cache.owner)) {
 					itemValue.setText(Html.fromHtml(cache.owner), TextView.BufferType.SPANNABLE);
-				} else if (cache.ownerReal != null && cache.ownerReal.length() > 0) {
+				} else if (StringUtils.isNotBlank(cache.ownerReal)) {
 					itemValue.setText(Html.fromHtml(cache.ownerReal), TextView.BufferType.SPANNABLE);
 				}
 				itemValue.setOnClickListener(new userActions());
@@ -812,7 +813,7 @@ public class cgeodetail extends AbstractActivity {
 			}
 
 			// cache location
-			if (cache.location != null && cache.location.length() > 0) {
+			if (StringUtils.isNotBlank(cache.location)) {
 				itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
 				itemName = (TextView) itemLayout.findViewById(R.id.name);
 				itemValue = (TextView) itemLayout.findViewById(R.id.value);
@@ -834,7 +835,7 @@ public class cgeodetail extends AbstractActivity {
 			}
 
 			// cache attributes
-			if (cache.attributes != null && cache.attributes.size() > 0) {
+			if (CollectionUtils.isNotEmpty(cache.attributes)) {
 
 				final LinearLayout attribBox = (LinearLayout) findViewById(R.id.attributes_innerbox);
 
@@ -871,7 +872,7 @@ public class cgeodetail extends AbstractActivity {
 			}
 
 			// cache inventory
-			if (cache.inventory != null && cache.inventory.size() > 0) {
+			if (CollectionUtils.isNotEmpty(cache.inventory)) {
 				final LinearLayout inventBox = (LinearLayout) findViewById(R.id.inventory_box);
 				final TextView inventView = (TextView) findViewById(R.id.inventory);
 
@@ -933,7 +934,7 @@ public class cgeodetail extends AbstractActivity {
 			offlineRefresh.setClickable(true);
 
 			// cache personal note
-			if (cache.personalNote != null && cache.personalNote.length() > 0) {
+			if (StringUtils.isNotBlank(cache.personalNote)) {
 				((LinearLayout) findViewById(R.id.personalnote_box)).setVisibility(View.VISIBLE);
 
 				TextView personalNoteText = (TextView) findViewById(R.id.personalnote);
@@ -943,7 +944,7 @@ public class cgeodetail extends AbstractActivity {
 			}
 
 			// cache short desc
-			if (cache.shortdesc != null && cache.shortdesc.length() > 0) {
+			if (StringUtils.isNotBlank(cache.shortdesc)) {
 				((LinearLayout) findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
 
 				TextView descView = (TextView) findViewById(R.id.shortdesc);
@@ -956,7 +957,7 @@ public class cgeodetail extends AbstractActivity {
 			if (longDescDisplayed) {
 				parseLongDescription();
 
-				if (longDesc != null && longDesc.length() > 0) {
+				if (StringUtils.isNotBlank(longDesc)) {
 					((LinearLayout) findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
 
 					TextView descView = (TextView) findViewById(R.id.description);
@@ -969,7 +970,7 @@ public class cgeodetail extends AbstractActivity {
 					showDesc.setOnTouchListener(null);
 					showDesc.setOnClickListener(null);
 				}
-			} else if (longDescDisplayed == false && cache.description != null && cache.description.length() > 0) {
+			} else if (longDescDisplayed == false && StringUtils.isNotBlank(cache.description)) {
 				((LinearLayout) findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
 
 				Button showDesc = (Button) findViewById(R.id.show_description);
@@ -992,7 +993,7 @@ public class cgeodetail extends AbstractActivity {
 			LinearLayout waypoints = (LinearLayout) findViewById(R.id.waypoints);
 			waypoints.removeAllViews();
 
-			if (cache.waypoints != null && cache.waypoints.size() > 0) {
+			if (CollectionUtils.isNotEmpty(cache.waypoints)) {
 				LinearLayout waypointView;
 
 				// sort waypoints: PP, Sx, FI, OWN
@@ -1006,7 +1007,7 @@ public class cgeodetail extends AbstractActivity {
 					}
 
 					private int order(cgWaypoint waypoint) {
-						if (waypoint.prefix == null || waypoint.prefix.length() == 0) {
+						if (StringUtils.isEmpty(waypoint.prefix)) {
 							return 0;
 						}
 						// check only the first character. sometimes there are inconsistencies like FI or FN for the FINAL
@@ -1040,7 +1041,7 @@ public class cgeodetail extends AbstractActivity {
 					}
 
 					TextView nameView = (TextView) waypointView.findViewById(R.id.name);
-					if (wpt.name.trim().length() == 0) {
+					if (StringUtils.isBlank(wpt.name)) {
 						nameView.setText(cgBase.formatCoordinate(wpt.latitude, "lat", true) + " | " + cgBase.formatCoordinate(wpt.longitude, "lon", true));
 					} else {
 						// avoid HTML parsing
@@ -1072,7 +1073,7 @@ public class cgeodetail extends AbstractActivity {
 			addWaypoint.setOnClickListener(new addWaypoint());
 
 			// cache hint
-			if (cache.hint != null && cache.hint.length() > 0) {
+			if (StringUtils.isNotBlank(cache.hint)) {
 				((LinearLayout) findViewById(R.id.hint_box)).setVisibility(View.VISIBLE);
 				TextView hintView = ((TextView) findViewById(R.id.hint));
 				hintView.setText(cgBase.rot13(cache.hint.trim()));
@@ -1309,9 +1310,9 @@ public class cgeodetail extends AbstractActivity {
 		@Override
 		public void run() {
 			HashMap<String, String> params = new HashMap<String, String>();
-			if (geocode != null && geocode.length() > 0) {
+			if (StringUtils.isNotBlank(geocode)) {
 				params.put("geocode", geocode);
-			} else if (guid != null && guid.length() > 0) {
+			} else if (StringUtils.isNotBlank(guid)) {
 				params.put("guid", guid);
 			} else {
 				return;
@@ -1392,7 +1393,7 @@ public class cgeodetail extends AbstractActivity {
 			// cache
 			coords = new cgCoord();
 			coords.type = "cache";
-			if (name != null && name.length() > 0) {
+			if (StringUtils.isNotBlank(name)) {
 				coords.name = name;
 			} else {
 				coords.name = geocode.toUpperCase();
@@ -1506,11 +1507,11 @@ public class cgeodetail extends AbstractActivity {
 			description.append("http://coord.info/");
 			description.append(cache.geocode.toUpperCase());
 			description.append("\n\n");
-			if (cache.shortdesc != null && cache.shortdesc.length() > 0) {
+			if (StringUtils.isNotBlank(cache.shortdesc)) {
 				description.append(Html.fromHtml(cache.shortdesc).toString());
 			}
 
-			if (cache.personalNote != null && cache.personalNote.length() > 0) {
+			if (StringUtils.isNotBlank(cache.personalNote)) {
 				description.append("\n\n"+Html.fromHtml(cache.personalNote).toString());
 			}
 
@@ -1522,10 +1523,10 @@ public class cgeodetail extends AbstractActivity {
 			event.put("title", Html.fromHtml(cache.name).toString());
 			event.put("description", description.toString());
 			String location = "";
-			if (cache.latitudeString != null && cache.latitudeString.length() > 0 && cache.longitudeString != null && cache.longitudeString.length() > 0) {
+			if (StringUtils.isNotBlank(cache.latitudeString) && StringUtils.isNotBlank(cache.longitudeString)) {
 				location += cache.latitudeString + " " + cache.longitudeString;
 			}
-			if (cache.location != null && cache.location.length() > 0) {
+			if (StringUtils.isNotBlank(cache.location)) {
 				boolean addParenteses = false;
 				if (location.length() > 0) {
 					addParenteses = true;
@@ -1583,7 +1584,7 @@ public class cgeodetail extends AbstractActivity {
 
 		if (cache != null && cache.geocode != null) {
 			String subject = cache.geocode.toUpperCase();
-			if (cache.name != null && cache.name.length() > 0){
+			if (StringUtils.isNotBlank(cache.name)){
 				subject = subject + " - " + cache.name;
 			}
 			intent.putExtra(Intent.EXTRA_SUBJECT, "Geocache " + subject);
@@ -2067,7 +2068,7 @@ public class cgeodetail extends AbstractActivity {
 		    int id = res.getIdentifier("attribute_" + attribute, "string", base.context.getPackageName());
 		    if (id > 0) {
 		    	String translated = res.getString(id);
-		    	if (translated != null && translated.length() > 0) {
+		    	if (StringUtils.isNotBlank(translated)) {
 		    		attribute = translated;
 		    	}
 		    }

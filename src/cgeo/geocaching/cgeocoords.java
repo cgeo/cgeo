@@ -3,6 +3,8 @@ package cgeo.geocaching;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
@@ -274,7 +276,7 @@ public class cgeocoords extends Dialog {
 		public void onClick(View v) {
 			Button e = (Button) v;
 			CharSequence text = e.getText();
-			if (text == null || text.length() == 0) {
+			if (StringUtils.isBlank(text)) {
 				return;
 			}
 			switch (text.charAt(0)) {

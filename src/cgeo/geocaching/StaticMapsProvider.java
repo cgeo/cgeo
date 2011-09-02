@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -18,6 +19,7 @@ import android.content.Context;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
+import cgeo.geocaching.utils.CollectionUtils;
 
 public class StaticMapsProvider {
 	private static final String MARKERS_URL = "http://cgeo.carnero.cc/_markers/";
@@ -122,7 +124,7 @@ public class StaticMapsProvider {
 
 	public static void downloadMaps(cgCache cache, cgSettings settings, Activity activity) {
 		if (settings.storeOfflineMaps != 1 || cache.latitude == null
-				|| cache.longitude == null || cache.geocode == null || cache.geocode.length() == 0) {
+				|| cache.longitude == null || StringUtils.isNotBlank(cache.geocode)) {
 			return;
 		}
 		
@@ -138,7 +140,7 @@ public class StaticMapsProvider {
 		}
 
 		final StringBuilder waypoints = new StringBuilder();
-		if (cache.waypoints != null && cache.waypoints.size() > 0) {
+		if (CollectionUtils.isNotEmpty(cache.waypoints)) {
 			for (cgWaypoint waypoint : cache.waypoints) {
 				if (waypoint.latitude == null && waypoint.longitude == null) {
 					continue;

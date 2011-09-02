@@ -2,6 +2,8 @@ package cgeo.geocaching;
 
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -56,7 +58,7 @@ public class cgeowaypoint extends AbstractActivity {
 					final View headline = (View) findViewById(R.id.headline);
 					registerNavigationMenu(headline);
 
-					if (waypoint.name != null && waypoint.name.length() > 0) {
+					if (StringUtils.isNotBlank(waypoint.name)) {
 						setTitle(Html.fromHtml(waypoint.name.trim()).toString());
 					} else {
 						setTitle(res.getString(R.string.waypoint_title));
@@ -81,7 +83,7 @@ public class cgeowaypoint extends AbstractActivity {
 					}
 					registerNavigationMenu(coords);
 
-					if (waypoint.note != null && waypoint.note.length() > 0) {
+					if (StringUtils.isNotBlank(waypoint.note)) {
 						final TextView note = (TextView) findViewById(R.id.note);
 						note.setText(Html.fromHtml(waypoint.note.trim()), TextView.BufferType.SPANNABLE);
 						registerNavigationMenu(note);

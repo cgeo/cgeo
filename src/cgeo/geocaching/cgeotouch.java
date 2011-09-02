@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.res.Configuration;
@@ -46,7 +49,7 @@ public class cgeotouch extends cgLogForm {
 	private Handler loadDataHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			if (cgBase.isEmpty(viewstates) && attempts < 2) {
+			if (ArrayUtils.isEmpty(viewstates) && attempts < 2) {
 				showToast(res.getString(R.string.err_log_load_data_again));
 
 				loadData thread;
@@ -54,7 +57,7 @@ public class cgeotouch extends cgLogForm {
 				thread.start();
 
 				return;
-			} else if (cgBase.isEmpty(viewstates) && attempts >= 2) {
+			} else if (ArrayUtils.isEmpty(viewstates) && attempts >= 2) {
 				showToast(res.getString(R.string.err_log_load_data));
 				showProgress(false);
 
@@ -285,7 +288,7 @@ public class cgeotouch extends cgLogForm {
         tweetCheck.setChecked(true);
 
 		Button buttonPost = (Button)findViewById(R.id.post);
-		if (cgBase.isEmpty(viewstates)) {
+		if (ArrayUtils.isEmpty(viewstates)) {
 			buttonPost.setEnabled(false);
 			buttonPost.setOnTouchListener(null);
 			buttonPost.setOnClickListener(null);
@@ -365,7 +368,7 @@ public class cgeotouch extends cgLogForm {
 			attempts ++;
 
 			try {
-				if (guid != null && guid.length() > 0) {
+				if (StringUtils.isNotBlank(guid)) {
 					params.put("wid", guid);
 				} else {
 					loadDataHandler.sendEmptyMessage(0);

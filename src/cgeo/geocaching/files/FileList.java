@@ -3,6 +3,8 @@ package cgeo.geocaching.files;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -185,7 +187,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
 
 		final File[] files = directory.listFiles();
 
-		if (files != null && files.length > 0) {
+		if (ArrayUtils.isNotEmpty(files)) {
 			for (File file : files) {
 				if (endSearching) {
 					return;

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.utils.CollectionUtils;
 
 public abstract class AbstractApp implements App {
 
@@ -54,7 +55,7 @@ public abstract class AbstractApp implements App {
 		final List<ResolveInfo> list = packageManager.queryIntentActivities(
 				intent, PackageManager.MATCH_DEFAULT_ONLY);
 
-		return (list.size() > 0);
+		return (CollectionUtils.isNotEmpty(list));
 	}
 
 	@Override
