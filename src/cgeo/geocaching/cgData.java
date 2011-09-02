@@ -21,6 +21,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.database.DatabaseUtils.InsertHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
@@ -158,6 +159,14 @@ public class cgData {
 			+ "date long, "
 			+ "found integer not null default 0 "
 			+ "); ";
+	private final static int LOGS_GEOCODE = 2;
+	private final static int LOGS_UPDATED = 3;
+	private final static int LOGS_TYPE = 4;
+	private final static int LOGS_AUTHOR = 5;
+	private final static int LOGS_LOG = 6;
+	private final static int LOGS_DATE = 7;
+	private final static int LOGS_FOUND = 8;
+
 	private static final String dbCreateLogCount = ""
 			+ "create table " + dbTableLogCount + " ("
 			+ "_id integer primary key autoincrement, "
@@ -1208,47 +1217,40 @@ public class cgData {
 		values.put("inventoryunknown", cache.inventoryItems);
 		values.put("onWatchlist", cache.onWatchlist ? 1 : 0);
 
-		boolean status = false;
 		boolean statusOk = true;
 
 		if (cache.attributes != null) {
-			status = saveAttributes(cache.geocode, cache.attributes);
-			if (status == false) {
+			if (!saveAttributes(cache.geocode, cache.attributes)) {
 				statusOk = false;
 			}
 		}
 
 		if (cache.waypoints != null) {
-			status = saveWaypoints(cache.geocode, cache.waypoints, true);
-			if (status == false) {
+			if (!saveWaypoints(cache.geocode, cache.waypoints, true)) {
 				statusOk = false;
 			}
 		}
 
 		if (cache.spoilers != null) {
-			status = saveSpoilers(cache.geocode, cache.spoilers);
-			if (status == false) {
+			if (!saveSpoilers(cache.geocode, cache.spoilers)) {
 				statusOk = false;
 			}
 		}
 
 		if (cache.logs != null) {
-			status = saveLogs(cache.geocode, cache.logs);
-			if (status == false) {
+			if (!saveLogs(cache.geocode, cache.logs)) {
 				statusOk = false;
 			}
 		}
 
 		if (cache.logCounts != null && cache.logCounts.isEmpty() == false) {
-			status = saveLogCount(cache.geocode, cache.logCounts);
-			if (status == false) {
+			if (!saveLogCount(cache.geocode, cache.logCounts)) {
 				statusOk = false;
 			}
 		}
 
 		if (cache.inventory != null) {
-			status = saveInventory(cache.geocode, cache.inventory);
-			if (status == false) {
+			if (!saveInventory(cache.geocode, cache.inventory)) {
 				statusOk = false;
 			}
 		}
@@ -1511,21 +1513,23 @@ public class cgData {
 			}
 
 			if (!logs.isEmpty()) {
-				ContentValues values = new ContentValues();
-				for (cgLog oneLog : logs) {
-					values.clear();
-					values.put("geocode", geocode);
-					values.put("updated", System.currentTimeMillis());
-					values.put("type", oneLog.type);
-					values.put("author", oneLog.author);
-					values.put("log", oneLog.log);
-					values.put("date", oneLog.date);
-					values.put("found", oneLog.found);
+				InsertHelper helper = new InsertHelper(databaseRW, dbTableLogs);
+				for (cgLog log : logs) {
+					helper.prepareForInsert();
 
-					long log_id = databaseRW.insert(dbTableLogs, null, values);
+		            helper.bind(LOGS_GEOCODE, geocode);
+		            helper.bind(LOGS_UPDATED, System.currentTimeMillis());
+		            helper.bind(LOGS_TYPE, log.type);
+		            helper.bind(LOGS_AUTHOR, log.author);
+		            helper.bind(LOGS_LOG, log.log);
+		            helper.bind(LOGS_DATE, log.date);
+		            helper.bind(LOGS_FOUND, log.found);
 
-					if ((oneLog.logImages != null) && (oneLog.logImages.size() > 0)) {
-						for (cgImage img : oneLog.logImages) {
+		            long log_id = helper.execute();
+
+					if ((log.logImages != null) && (log.logImages.size() > 0)) {
+						ContentValues values = new ContentValues();
+						for (cgImage img : log.logImages) {
 							values.clear();
 							values.put("log_id", log_id);
 							values.put("title", img.title);
@@ -1534,6 +1538,7 @@ public class cgData {
 						}
 					}
 				}
+				helper.close();
 			}
 			databaseRW.setTransactionSuccessful();
 		} finally {
