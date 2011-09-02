@@ -103,7 +103,7 @@
   <string name="err_detail_cache_language">c:geo ne peut pas lire certains details de la cache. Merci de vérifier que le site Web geocaching.com est configuré en Anglais. Malheureusement, c:geo ne supporte pas les autres langues.</string>
   <string name="err_detail_no_spoiler">c:geo n\'a pas trouvé de photo solution pour cette cache.</string>
   <string name="err_detail_no_map_static">c:geo n\'a pas trouvé de cartes statiques pour cette cache.</string>
-  <string name="err_detail_still_removing">Cache toujours en cours d'effacement.</string>
+  <string name="err_detail_still_removing">Cache toujours en cours d\'effacement.</string>
   <string name="err_detail_still_saving">Cache toujours en cours de sauvegarde.</string>
   <string name="err_detail_still_refreshing">Cache toujours en cours de chargement.</string>
   <string name="err_radar_title">Le radar n\'est pas installé.</string>
