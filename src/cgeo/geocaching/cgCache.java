@@ -17,13 +17,19 @@ import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 
-public class cgCache {
+/**
+ * Internal c:geo representation of a "cache"
+ */
+public class cgCache implements ICache {
 
 	public Long updated = null;
 	public Long detailedUpdate = null;
 	public Long visitedDate = null;
 	public Integer reason = 0;
 	public Boolean detailed = false;
+	/**
+     * Code of the cache like GCABCD
+     */
 	public String geocode = "";
 	public String cacheid = "";
 	public String guid = "";
@@ -382,4 +388,96 @@ public class cgCache {
 		return getConnector().supportsLogging();
 	}
 
+	@Override
+	public String getData() {
+		return null;
+	}
+
+	@Override
+	public Float getDifficulty() {
+		return difficulty;
+	}
+
+	@Override
+	public String getGeocode() {
+		return geocode;
+	}
+
+	@Override
+	public String getLatitute() {
+		return latitudeString;
+	}
+
+	@Override
+	public String getLongitude() {
+		return longitudeString;
+	}
+
+	@Override
+	public String getOwner() {
+		return owner;
+	}
+
+	@Override
+	public String getSize() {
+		return size;
+	}
+
+	@Override
+	public Float getTerrain() {
+		return terrain;
+	}
+
+	@Override
+	public String getType() {
+		return type;
+	}
+
+	@Override
+	public boolean isArchived() {
+		return archived;
+	}
+
+	@Override
+	public boolean isDisabled() {
+		return disabled;
+	}
+
+	@Override
+	public boolean isMembersOnly() {
+		return members;
+	}
+
+	@Override
+	public boolean isOwn() {
+		return own;
+	}
+
+	@Override
+	public String getOwnerReal() {
+		return ownerReal;
+	}
+
+	@Override
+	public String getHint() {
+		return hint;
+	}
+
+	@Override
+	public String getDescription() {
+		return description;
+	}
+
+	@Override
+	public String getShortDescription() {
+		return shortdesc;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
 }
+
+

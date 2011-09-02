@@ -24,6 +24,7 @@
 			android:label="@string/app_name"
 			android:icon="@drawable/cgeo" >
 		<uses-library android:name="com.google.android.maps" />
+		<uses-library android:name="android.test.runner" />
 		<meta-data
 			android:name="android.app.default_searchable"
 			android:value=".cgeoadvsearch" />
@@ -289,4 +290,6 @@
 			</intent-filter>
 		</activity>
 	</application>
+	<instrumentation android:name="android.test.InstrumentationTestRunner"
+       android:label="Tests for c:geo open source" android:targetPackage="cgeo.geocaching"/>
 </manifest>
