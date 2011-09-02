@@ -202,7 +202,6 @@ public class cgBase {
 	public static final int LOG_ANNOUNCEMENT = 74;
 
 	public cgBase(cgeoapplication appIn, cgSettings settingsIn, SharedPreferences prefsIn) {
-		context = appIn.getBaseContext();
 		res = appIn.getBaseContext().getResources();
 
 		// cache types
@@ -4296,7 +4295,11 @@ public class cgBase {
 		return cookiesDone;
 	}
 
-	private static void replaceWhitespace(final StringBuffer buffer) {
+	/**
+	 * Replace the characters \n, \r and \t with a space
+	 * @param buffer The data
+	 */
+	public static void replaceWhitespace(final StringBuffer buffer) {
 		final int length = buffer.length();
 		final char[] chars = new char[length];
 		buffer.getChars(0, length, chars, 0);
