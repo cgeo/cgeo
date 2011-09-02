@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.geopoint.Geopoint;
 
 public class cgeowaypointadd extends AbstractActivity {
 
@@ -216,16 +217,19 @@ public class cgeowaypointadd extends AbstractActivity {
 	private class coordDialogListener implements View.OnClickListener {
 
 		public void onClick(View arg0) {
-			cgeocoords coordsDialog = new cgeocoords(cgeowaypointadd.this, settings, waypoint, geo);
+			Geopoint gp = null;
+			if (waypoint != null && waypoint.latitude != null && waypoint.longitude != null)
+				gp = new Geopoint(waypoint.latitude, waypoint.longitude);
+			cgeocoords coordsDialog = new cgeocoords(cgeowaypointadd.this, settings, gp, geo);
 			coordsDialog.setCancelable(true);
 			coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
 				@Override
-				public void update(ArrayList<Double> coords) {
-					((Button) findViewById(R.id.buttonLatitude)).setText(cgBase.formatCoordinate(coords.get(0), "lat", true));
-					((Button) findViewById(R.id.buttonLongitude)).setText(cgBase.formatCoordinate(coords.get(1), "lon", true));
+				public void update(Geopoint gp) {
+					((Button) findViewById(R.id.buttonLatitude)).setText(cgBase.formatCoordinate(gp.getLatitude(), "lat", true));
+					((Button) findViewById(R.id.buttonLongitude)).setText(cgBase.formatCoordinate(gp.getLongitude(), "lon", true));
 					if (waypoint != null) {
-						waypoint.latitude = coords.get(0);
-						waypoint.longitude = coords.get(1);
+						waypoint.latitude = gp.getLatitude();
+						waypoint.longitude = gp.getLongitude();
 					}
 				}
 			});
