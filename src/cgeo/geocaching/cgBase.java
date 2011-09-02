@@ -105,6 +105,23 @@ public class cgBase {
 	private final static Pattern patternInventoryInside = Pattern.compile("[^<]*<li>[^<]*<a href=\"[a-z0-9\\-\\_\\.\\?\\/\\:\\@]*\\/track\\/details\\.aspx\\?guid=([0-9a-z\\-]+)[^\"]*\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>([^<]+)<\\/span>[^<]*<\\/a>[^<]*<\\/li>", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternOnWatchlist = Pattern.compile("<img\\s*src=\"\\/images\\/stockholm\\/16x16\\/icon_stop_watchlist.gif\"", Pattern.CASE_INSENSITIVE);
 
+	private final static Pattern PATTERN_TRACKABLE_TrackableId = Pattern.compile("<a id=\"ctl00_ContentBody_LogLink\" title=\"[^\"]*\" href=\".*log\\.aspx\\?wid=([a-z0-9\\-]+)\"[^>]*>[^<]*</a>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_Geocode = Pattern.compile("<span id=\"ctl00_ContentBody_BugDetails_BugTBNum\" String=\"[^\"]*\">Use[^<]*<strong>(TB[0-9a-z]+)[^<]*</strong> to reference this item.[^<]*</span>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_Name = Pattern.compile("<h2>([^<]*<img[^>]*>)?[^<]*<span id=\"ctl00_ContentBody_lbHeading\">([^<]+)</span>[^<]*</h2>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_Owner = Pattern.compile("<dt>\\W*Owner:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugOwner\" title=\"[^\"]*\" href=\"[^\"]*/profile/\\?guid=([a-z0-9\\-]+)\">([^<]+)<\\/a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_Released = Pattern.compile("<dt>\\W*Released:[^<]*</dt>[^<]*<dd>[^<]*<span id=\"ctl00_ContentBody_BugDetails_BugReleaseDate\">([^<]+)<\\/span>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_Origin = Pattern.compile("<dt>\\W*Origin:[^<]*</dt>[^<]*<dd>[^<]*<span id=\"ctl00_ContentBody_BugDetails_BugOrigin\">([^<]+)<\\/span>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_SpottedCache = Pattern.compile("<dt>\\W*Recently Spotted:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" title=\"[^\"]*\" href=\"[^\"]*/seek/cache_details.aspx\\?guid=([a-z0-9\\-]+)\">In ([^<]+)</a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_SpottedUser = Pattern.compile("<dt>\\W*Recently Spotted:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" href=\"[^\"]*/profile/\\?guid=([a-z0-9\\-]+)\">In the hands of ([^<]+).</a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_SpottedUnknown = Pattern.compile("<dt>\\W*Recently Spotted:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugLocation\">Unknown Location[^<]*</a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_SpottedOwner = Pattern.compile("<dt>\\W*Recently Spotted:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugLocation\">In the hands of the owner[^<]*</a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_Goal = Pattern.compile("<h3>\\W*Current GOAL[^<]*</h3>[^<]*<p[^>]*>(.*)</p>[^<]*<h3>\\W*About This Item[^<]*</h3>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_DetailsImage = Pattern.compile("<h3>\\W*About This Item[^<]*</h3>([^<]*<p>([^<]*<img id=\"ctl00_ContentBody_BugDetails_BugImage\" class=\"[^\"]+\" src=\"([^\"]+)\"[^>]*>)?[^<]*</p>)?[^<]*<p[^>]*>(.*)</p>[^<]*<div id=\"ctl00_ContentBody_BugDetails_uxAbuseReport\">", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_Icon = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_Type = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"[^\"]+\" alt=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_Distance = Pattern.compile("<h4[^>]*\\W*Tracking History \\(([0-9\\.,]+(km|mi))[^\\)]*\\)", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_Log = Pattern.compile("<tr class=\"Data.+?src=\"/images/icons/([^\\.]+)\\.gif[^>]+>&nbsp;([^<]+)</td>.+?guid.+?>([^<]+)</a>.+?(?:guid=([^\"]+)\">([^<]+)</a>.+?)?<td colspan=\"4\">(.+?)(?:<ul.+?ul>)?\\s*</td>\\s*</tr>", Pattern.CASE_INSENSITIVE);
+
 	public static HashMap<String, String> cacheTypes = new HashMap<String, String>();
 	public static HashMap<String, String> cacheTypesInv = new HashMap<String, String>();
 	public static HashMap<String, String> cacheIDs = new HashMap<String, String>();
@@ -1130,10 +1147,8 @@ public class cgBase {
 		// cache geocode
 		try {
 			final Matcher matcherGeocode = patternGeocode.matcher(page);
-			if (matcherGeocode.find()) {
-				if (matcherGeocode.groupCount() > 0) {
-					cache.geocode = getMatch(matcherGeocode.group(1));
-				}
+			if (matcherGeocode.find() && matcherGeocode.groupCount() > 0) {
+				cache.geocode = getMatch(matcherGeocode.group(1));
 			}
 		} catch (Exception e) {
 			// failed to parse cache geocode
@@ -1143,10 +1158,8 @@ public class cgBase {
 		// cache id
 		try {
 			final Matcher matcherCacheId = patternCacheId.matcher(page);
-			if (matcherCacheId.find()) {
-				if (matcherCacheId.groupCount() > 0) {
-					cache.cacheid = getMatch(matcherCacheId.group(1));
-				}
+			if (matcherCacheId.find() && matcherCacheId.groupCount() > 0) {
+				cache.cacheid = getMatch(matcherCacheId.group(1));
 			}
 		} catch (Exception e) {
 			// failed to parse cache id
@@ -1156,10 +1169,8 @@ public class cgBase {
 		// cache guid
 		try {
 			final Matcher matcherCacheGuid = patternCacheGuid.matcher(page);
-			if (matcherCacheGuid.find()) {
-				if (matcherCacheGuid.groupCount() > 0) {
-					cache.guid = getMatch(matcherCacheGuid.group(1));
-				}
+			if (matcherCacheGuid.find() && matcherCacheGuid.groupCount() > 0) {
+				cache.guid = getMatch(matcherCacheGuid.group(1));
 			}
 		} catch (Exception e) {
 			// failed to parse cache guid
@@ -1169,10 +1180,8 @@ public class cgBase {
 		// name
 		try {
 			final Matcher matcherName = patternName.matcher(page);
-			if (matcherName.find()) {
-				if (matcherName.groupCount() > 0) {
-					cache.name = Html.fromHtml(matcherName.group(1)).toString();
-				}
+			if (matcherName.find() && matcherName.groupCount() > 0) {
+				cache.name = Html.fromHtml(matcherName.group(1)).toString();
 			}
 		} catch (Exception e) {
 			// failed to parse cache name
@@ -1182,10 +1191,8 @@ public class cgBase {
 		// owner real name
 		try {
 			final Matcher matcherOwnerReal = patternOwnerReal.matcher(page);
-			if (matcherOwnerReal.find()) {
-				if (matcherOwnerReal.groupCount() > 0) {
-					cache.ownerReal = URLDecoder.decode(matcherOwnerReal.group(1));
-				}
+			if (matcherOwnerReal.find() && matcherOwnerReal.groupCount() > 0) {
+				cache.ownerReal = URLDecoder.decode(matcherOwnerReal.group(1));
 			}
 		} catch (Exception e) {
 			// failed to parse owner real name
@@ -1220,10 +1227,8 @@ public class cgBase {
 			// cache terrain
 			try {
 				final Matcher matcherTerrain = patternTerrain.matcher(tableInside);
-				if (matcherTerrain.find()) {
-					if (matcherTerrain.groupCount() > 0) {
-						cache.terrain = new Float(Pattern.compile("_").matcher(matcherTerrain.group(1)).replaceAll("."));
-					}
+				if (matcherTerrain.find() && matcherTerrain.groupCount() > 0) {
+					cache.terrain = new Float(Pattern.compile("_").matcher(matcherTerrain.group(1)).replaceAll("."));
 				}
 			} catch (Exception e) {
 				// failed to parse terrain
@@ -1233,10 +1238,8 @@ public class cgBase {
 			// cache difficulty
 			try {
 				final Matcher matcherDifficulty = patternDifficulty.matcher(tableInside);
-				if (matcherDifficulty.find()) {
-					if (matcherDifficulty.groupCount() > 0) {
-						cache.difficulty = new Float(Pattern.compile("_").matcher(matcherDifficulty.group(1)).replaceAll("."));
-					}
+				if (matcherDifficulty.find() && matcherDifficulty.groupCount() > 0) {
+					cache.difficulty = new Float(Pattern.compile("_").matcher(matcherDifficulty.group(1)).replaceAll("."));
 				}
 			} catch (Exception e) {
 				// failed to parse difficulty
@@ -1246,10 +1249,8 @@ public class cgBase {
 			// owner
 			try {
 				final Matcher matcherOwner = patternOwner.matcher(tableInside);
-				if (matcherOwner.find()) {
-					if (matcherOwner.groupCount() > 0) {
-						cache.owner = Html.fromHtml(matcherOwner.group(2)).toString();
-					}
+				if (matcherOwner.find() && matcherOwner.groupCount() > 0) {
+					cache.owner = Html.fromHtml(matcherOwner.group(2)).toString();
 				}
 			} catch (Exception e) {
 				// failed to parse owner
@@ -1259,10 +1260,8 @@ public class cgBase {
 			// hidden
 			try {
 				final Matcher matcherHidden = patternHidden.matcher(tableInside);
-				if (matcherHidden.find()) {
-					if (matcherHidden.groupCount() > 0) {
-						cache.hidden = parseGcCustomDate(matcherHidden.group(1));
-					}
+				if (matcherHidden.find() && matcherHidden.groupCount() > 0) {
+					cache.hidden = parseGcCustomDate(matcherHidden.group(1));
 				}
 			} catch (ParseException e) {
 				// failed to parse cache hidden date
@@ -1273,10 +1272,8 @@ public class cgBase {
 				// event date
 				try {
 					final Matcher matcherHiddenEvent = patternHiddenEvent.matcher(tableInside);
-					if (matcherHiddenEvent.find()) {
-						if (matcherHiddenEvent.groupCount() > 0) {
-							cache.hidden = parseGcCustomDate(matcherHiddenEvent.group(1));
-						}
+					if (matcherHiddenEvent.find() && matcherHiddenEvent.groupCount() > 0) {
+						cache.hidden = parseGcCustomDate(matcherHiddenEvent.group(1));
 					}
 				} catch (ParseException e) {
 					// failed to parse cache event date
@@ -1287,10 +1284,8 @@ public class cgBase {
 			// favourite
 			try {
 				final Matcher matcherFavourite = patternFavourite.matcher(tableInside);
-				if (matcherFavourite.find()) {
-					if (matcherFavourite.groupCount() > 0) {
-						cache.favouriteCnt = Integer.parseInt(matcherFavourite.group(1));
-					}
+				if (matcherFavourite.find() && matcherFavourite.groupCount() > 0) {
+					cache.favouriteCnt = Integer.parseInt(matcherFavourite.group(1));
 				}
 			} catch (Exception e) {
 				// failed to parse favourite count
@@ -1300,10 +1295,8 @@ public class cgBase {
 			// cache size
 			try {
 				final Matcher matcherSize = patternSize.matcher(tableInside);
-				if (matcherSize.find()) {
-					if (matcherSize.groupCount() > 0) {
-						cache.size = getMatch(matcherSize.group(1)).toLowerCase();
-					}
+				if (matcherSize.find() && matcherSize.groupCount() > 0) {
+					cache.size = getMatch(matcherSize.group(1)).toLowerCase();
 				}
 			} catch (Exception e) {
 				// failed to parse size
@@ -1330,10 +1323,8 @@ public class cgBase {
 		// cache type
 		try {
 			final Matcher matcherType = patternType.matcher(page);
-			if (matcherType.find()) {
-				if (matcherType.groupCount() > 0) {
-					cache.type = cacheTypes.get(matcherType.group(1).toLowerCase());
-				}
+			if (matcherType.find() && matcherType.groupCount() > 0) {
+				cache.type = cacheTypes.get(matcherType.group(1).toLowerCase());
 			}
 		} catch (Exception e) {
 			// failed to parse type
@@ -1352,20 +1343,18 @@ public class cgBase {
 		// latitude and logitude
 		try {
 			final Matcher matcherLatLon = patternLatLon.matcher(page);
-			if (matcherLatLon.find()) {
-				if (matcherLatLon.groupCount() > 0) {
-					cache.latlon = getMatch(matcherLatLon.group(2)); // first is <b>
+			if (matcherLatLon.find() && matcherLatLon.groupCount() > 0) {
+				cache.latlon = getMatch(matcherLatLon.group(2)); // first is <b>
 
-					HashMap<String, Object> tmp = cgBase.parseLatlon(cache.latlon);
-					if (tmp.size() > 0) {
-						cache.latitude = (Double) tmp.get("latitude");
-						cache.longitude = (Double) tmp.get("longitude");
-						cache.latitudeString = (String) tmp.get("latitudeString");
-						cache.longitudeString = (String) tmp.get("longitudeString");
-						cache.reliableLatLon = true;
-					}
-					tmp = null;
+				HashMap<String, Object> tmp = cgBase.parseLatlon(cache.latlon);
+				if (tmp.size() > 0) {
+					cache.latitude = (Double) tmp.get("latitude");
+					cache.longitude = (Double) tmp.get("longitude");
+					cache.latitudeString = (String) tmp.get("latitudeString");
+					cache.longitudeString = (String) tmp.get("longitudeString");
+					cache.reliableLatLon = true;
 				}
+				tmp = null;
 			}
 		} catch (Exception e) {
 			// failed to parse latitude and/or longitude
@@ -1375,10 +1364,8 @@ public class cgBase {
 		// cache location
 		try {
 			final Matcher matcherLocation = patternLocation.matcher(page);
-			if (matcherLocation.find()) {
-				if (matcherLocation.groupCount() > 0) {
-					cache.location = getMatch(matcherLocation.group(1));
-				}
+			if (matcherLocation.find() && matcherLocation.groupCount() > 0) {
+				cache.location = getMatch(matcherLocation.group(1));
 			}
 		} catch (Exception e) {
 			// failed to parse location
@@ -1388,13 +1375,11 @@ public class cgBase {
 		// cache hint
 		try {
 			final Matcher matcherHint = patternHint.matcher(page);
-			if (matcherHint.find()) {
-				if (matcherHint.groupCount() > 2 && matcherHint.group(3) != null) {
-					// replace linebreak and paragraph tags
-					String hint = Pattern.compile("<(br|p)[^>]*>").matcher(matcherHint.group(3)).replaceAll("\n");
-					if (hint != null) {
-						cache.hint = hint.replaceAll(Pattern.quote("</p>"), "").trim();
-					}
+			if (matcherHint.find() && matcherHint.groupCount() > 2 && matcherHint.group(3) != null) {
+				// replace linebreak and paragraph tags
+				String hint = Pattern.compile("<(br|p)[^>]*>").matcher(matcherHint.group(3)).replaceAll("\n");
+				if (hint != null) {
+					cache.hint = hint.replaceAll(Pattern.quote("</p>"), "").trim();
 				}
 			}
 		} catch (Exception e) {
@@ -1431,10 +1416,8 @@ public class cgBase {
 		// cache personal note
 		try {
 			final Matcher matcherPersonalNote = patternPersonalNote.matcher(page);
-			if (matcherPersonalNote.find()) {
-				if (matcherPersonalNote.groupCount() > 0) {
-					cache.personalNote = getMatch(matcherPersonalNote.group(1).trim());
-				}
+			if (matcherPersonalNote.find() && matcherPersonalNote.groupCount() > 0) {
+				cache.personalNote = getMatch(matcherPersonalNote.group(1).trim());
 			}
 		} catch (Exception e) {
 			// failed to parse cache personal note
@@ -1444,10 +1427,8 @@ public class cgBase {
 		// cache short description
 		try {
 			final Matcher matcherDescShort = patternDescShort.matcher(page);
-			if (matcherDescShort.find()) {
-				if (matcherDescShort.groupCount() > 0) {
-					cache.shortdesc = getMatch(matcherDescShort.group(1));
-				}
+			if (matcherDescShort.find() && matcherDescShort.groupCount() > 0) {
+				cache.shortdesc = getMatch(matcherDescShort.group(1));
 			}
 		} catch (Exception e) {
 			// failed to parse short description
@@ -1457,10 +1438,8 @@ public class cgBase {
 		// cache description
 		try {
 			final Matcher matcherDesc = patternDesc.matcher(page);
-			if (matcherDesc.find()) {
-				if (matcherDesc.groupCount() > 0) {
-					cache.description = getMatch(matcherDesc.group(1));
-				}
+			if (matcherDesc.find() && matcherDesc.groupCount() > 0) {
+				cache.description = getMatch(matcherDesc.group(1));
 			}
 		} catch (Exception e) {
 			// failed to parse short description
@@ -1470,30 +1449,28 @@ public class cgBase {
 		// cache attributes
 		try {
 			final Matcher matcherAttributes = patternAttributes.matcher(page);
-			while (matcherAttributes.find()) {
-				if (matcherAttributes.groupCount() > 0) {
-					final String attributesPre = matcherAttributes.group(1);
-					final Matcher matcherAttributesInside = patternAttributesInside.matcher(attributesPre);
+			if (matcherAttributes.find() && matcherAttributes.groupCount() > 0) {
+				final String attributesPre = matcherAttributes.group(1);
+				final Matcher matcherAttributesInside = patternAttributesInside.matcher(attributesPre);
 
-					while (matcherAttributesInside.find()) {
-						if (matcherAttributesInside.groupCount() > 1 && matcherAttributesInside.group(2).equalsIgnoreCase("blank") != true) {
-							if (cache.attributes == null) {
-								cache.attributes = new ArrayList<String>();
-							}
-							// by default, use the tooltip of the attribute
-							String attribute = matcherAttributesInside.group(2).toLowerCase();
-
-							// if the image name can be recognized, use the image name as attribute
-							String imageName = matcherAttributesInside.group(1).trim();
-							if (imageName.length() > 0) {
-								int start = imageName.lastIndexOf('/');
-								int end = imageName.lastIndexOf('.');
-								if (start >= 0 && end>= 0) {
-									attribute = imageName.substring(start + 1, end).replace('-', '_').toLowerCase();
-								}
-							}
-							cache.attributes.add(attribute);
+				while (matcherAttributesInside.find()) {
+					if (matcherAttributesInside.groupCount() > 1 && matcherAttributesInside.group(2).equalsIgnoreCase("blank") != true) {
+						if (cache.attributes == null) {
+							cache.attributes = new ArrayList<String>();
 						}
+						// by default, use the tooltip of the attribute
+						String attribute = matcherAttributesInside.group(2).toLowerCase();
+
+						// if the image name can be recognized, use the image name as attribute
+						String imageName = matcherAttributesInside.group(1).trim();
+						if (imageName.length() > 0) {
+							int start = imageName.lastIndexOf('/');
+							int end = imageName.lastIndexOf('.');
+							if (start >= 0 && end>= 0) {
+								attribute = imageName.substring(start + 1, end).replace('-', '_').toLowerCase();
+							}
+						}
+						cache.attributes.add(attribute);
 					}
 				}
 			}
@@ -1505,28 +1482,26 @@ public class cgBase {
 		// cache spoilers
 		try {
 			final Matcher matcherSpoilers = patternSpoilers.matcher(page);
-			while (matcherSpoilers.find()) {
-				if (matcherSpoilers.groupCount() > 0) {
-					final String spoilersPre = matcherSpoilers.group(1);
-					final Matcher matcherSpoilersInside = patternSpoilersInside.matcher(spoilersPre);
+			if (matcherSpoilers.find() && matcherSpoilers.groupCount() > 0) {
+				final String spoilersPre = matcherSpoilers.group(1);
+				final Matcher matcherSpoilersInside = patternSpoilersInside.matcher(spoilersPre);
 
-					while (matcherSpoilersInside.find()) {
-						if (matcherSpoilersInside.groupCount() > 0) {
-							final cgImage spoiler = new cgImage();
-							spoiler.url = matcherSpoilersInside.group(1);
+				while (matcherSpoilersInside.find()) {
+					if (matcherSpoilersInside.groupCount() > 0) {
+						final cgImage spoiler = new cgImage();
+						spoiler.url = matcherSpoilersInside.group(1);
 
-							if (matcherSpoilersInside.group(2) != null) {
-								spoiler.title = matcherSpoilersInside.group(2);
-							}
-							if (matcherSpoilersInside.group(4) != null) {
-								spoiler.description = matcherSpoilersInside.group(4);
-							}
-
-							if (cache.spoilers == null) {
-								cache.spoilers = new ArrayList<cgImage>();
-							}
-							cache.spoilers.add(spoiler);
+						if (matcherSpoilersInside.group(2) != null) {
+							spoiler.title = matcherSpoilersInside.group(2);
 						}
+						if (matcherSpoilersInside.group(4) != null) {
+							spoiler.description = matcherSpoilersInside.group(4);
+						}
+
+						if (cache.spoilers == null) {
+							cache.spoilers = new ArrayList<cgImage>();
+						}
+						cache.spoilers.add(spoiler);
 					}
 				}
 			}
@@ -1540,7 +1515,7 @@ public class cgBase {
 			cache.inventoryItems = 0;
 
 			final Matcher matcherInventory = patternInventory.matcher(page);
-			while (matcherInventory.find()) {
+			if (matcherInventory.find()) {
 				if (cache.inventory == null) {
 					cache.inventory = new ArrayList<cgTrackable>();
 				}
@@ -1618,9 +1593,10 @@ public class cgBase {
 			{
 				final cgLog logDone = new cgLog();
 
-				if (logTypes.containsKey(matcherLog.group(3).toLowerCase()))
+				final String logIconName = matcherLog.group(3).toLowerCase();
+				if (logTypes.containsKey(logIconName))
 				{
-					logDone.type = logTypes.get(matcherLog.group(3).toLowerCase());
+					logDone.type = logTypes.get(logIconName);
 				}
 				else
 				{
@@ -1709,13 +1685,8 @@ public class cgBase {
 					// waypoint type
 					try {
 						final Matcher matcherWpType = patternWpType.matcher(wp[3]);
-						while (matcherWpType.find()) {
-							if (matcherWpType.groupCount() > 0) {
-								waypoint.type = matcherWpType.group(1);
-								if (waypoint.type != null) {
-									waypoint.type = waypoint.type.trim();
-								}
-							}
+						if (matcherWpType.find() && matcherWpType.groupCount() > 0) {
+							waypoint.type = matcherWpType.group(1).trim();
 						}
 					} catch (Exception e) {
 						// failed to parse type
@@ -1725,13 +1696,8 @@ public class cgBase {
 					// waypoint prefix
 					try {
 						final Matcher matcherWpPrefix = patternWpPrefixOrLookupOrLatlon.matcher(wp[4]);
-						while (matcherWpPrefix.find()) {
-							if (matcherWpPrefix.groupCount() > 1) {
-								waypoint.prefix = matcherWpPrefix.group(2);
-								if (waypoint.prefix != null) {
-									waypoint.prefix = waypoint.prefix.trim();
-								}
-							}
+						if (matcherWpPrefix.find() && matcherWpPrefix.groupCount() > 1) {
+							waypoint.prefix = matcherWpPrefix.group(2).trim();
 						}
 					} catch (Exception e) {
 						// failed to parse prefix
@@ -1741,13 +1707,8 @@ public class cgBase {
 					// waypoint lookup
 					try {
 						final Matcher matcherWpLookup = patternWpPrefixOrLookupOrLatlon.matcher(wp[5]);
-						while (matcherWpLookup.find()) {
-							if (matcherWpLookup.groupCount() > 1) {
-								waypoint.lookup = matcherWpLookup.group(2);
-								if (waypoint.lookup != null) {
-									waypoint.lookup = waypoint.lookup.trim();
-								}
-							}
+						if (matcherWpLookup.find() && matcherWpLookup.groupCount() > 1) {
+							waypoint.lookup = matcherWpLookup.group(2).trim();
 						}
 					} catch (Exception e) {
 						// failed to parse lookup
@@ -1757,13 +1718,8 @@ public class cgBase {
 					// waypoint name
 					try {
 						final Matcher matcherWpName = patternWpName.matcher(wp[6]);
-						while (matcherWpName.find()) {
-							if (matcherWpName.groupCount() > 0) {
-								waypoint.name = matcherWpName.group(1);
-								if (waypoint.name != null) {
-									waypoint.name = waypoint.name.trim();
-								}
-							}
+						if (matcherWpName.find() && matcherWpName.groupCount() > 0) {
+							waypoint.name = matcherWpName.group(1).trim();
 						}
 					} catch (Exception e) {
 						// failed to parse name
@@ -1773,17 +1729,15 @@ public class cgBase {
 					// waypoint latitude and logitude
 					try {
 						final Matcher matcherWpLatLon = patternWpPrefixOrLookupOrLatlon.matcher(wp[7]);
-						while (matcherWpLatLon.find()) {
-							if (matcherWpLatLon.groupCount() > 1) {
-								waypoint.latlon = Html.fromHtml(matcherWpLatLon.group(2)).toString();
+						if (matcherWpLatLon.find() && matcherWpLatLon.groupCount() > 1) {
+							waypoint.latlon = Html.fromHtml(matcherWpLatLon.group(2)).toString();
 
-								final HashMap<String, Object> tmp = cgBase.parseLatlon(waypoint.latlon);
-								if (tmp.size() > 0) {
-									waypoint.latitude = (Double) tmp.get("latitude");
-									waypoint.longitude = (Double) tmp.get("longitude");
-									waypoint.latitudeString = (String) tmp.get("latitudeString");
-									waypoint.longitudeString = (String) tmp.get("longitudeString");
-								}
+							final HashMap<String, Object> tmp = cgBase.parseLatlon(waypoint.latlon);
+							if (tmp.size() > 0) {
+								waypoint.latitude = (Double) tmp.get("latitude");
+								waypoint.longitude = (Double) tmp.get("longitude");
+								waypoint.latitudeString = (String) tmp.get("latitudeString");
+								waypoint.longitudeString = (String) tmp.get("longitudeString");
 							}
 						}
 					} catch (Exception e) {
@@ -1799,21 +1753,17 @@ public class cgBase {
 					// waypoint note
 					try {
 						final Matcher matcherWpNote = patternWpNote.matcher(wp[3]);
-						while (matcherWpNote.find()) {
-							if (matcherWpNote.groupCount() > 0) {
-								waypoint.note = matcherWpNote.group(1);
-								if (waypoint.note != null) {
-									waypoint.note = waypoint.note.trim();
-								}
-							}
+						if (matcherWpNote.find() && matcherWpNote.groupCount() > 0) {
+							waypoint.note = matcherWpNote.group(1).trim();
 						}
 					} catch (Exception e) {
 						// failed to parse note
 						Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse waypoint note");
 					}
 
-					if (cache.waypoints == null)
+					if (cache.waypoints == null) {
 						cache.waypoints = new ArrayList<cgWaypoint>();
+					}
 					cache.waypoints.add(waypoint);
 				}
 			}
@@ -2091,32 +2041,13 @@ public class cgBase {
 			return null;
 		}
 
-		final Pattern patternTrackableId = Pattern.compile("<a id=\"ctl00_ContentBody_LogLink\" title=\"[^\"]*\" href=\".*log\\.aspx\\?wid=([a-z0-9\\-]+)\"[^>]*>[^<]*</a>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternGeocode = Pattern.compile("<span id=\"ctl00_ContentBody_BugDetails_BugTBNum\" String=\"[^\"]*\">Use[^<]*<strong>(TB[0-9a-z]+)[^<]*</strong> to reference this item.[^<]*</span>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternName = Pattern.compile("<h2>([^<]*<img[^>]*>)?[^<]*<span id=\"ctl00_ContentBody_lbHeading\">([^<]+)</span>[^<]*</h2>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternOwner = Pattern.compile("<dt>\\W*Owner:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugOwner\" title=\"[^\"]*\" href=\"[^\"]*/profile/\\?guid=([a-z0-9\\-]+)\">([^<]+)<\\/a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternReleased = Pattern.compile("<dt>\\W*Released:[^<]*</dt>[^<]*<dd>[^<]*<span id=\"ctl00_ContentBody_BugDetails_BugReleaseDate\">([^<]+)<\\/span>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternOrigin = Pattern.compile("<dt>\\W*Origin:[^<]*</dt>[^<]*<dd>[^<]*<span id=\"ctl00_ContentBody_BugDetails_BugOrigin\">([^<]+)<\\/span>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternSpottedCache = Pattern.compile("<dt>\\W*Recently Spotted:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" title=\"[^\"]*\" href=\"[^\"]*/seek/cache_details.aspx\\?guid=([a-z0-9\\-]+)\">In ([^<]+)</a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternSpottedUser = Pattern.compile("<dt>\\W*Recently Spotted:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" href=\"[^\"]*/profile/\\?guid=([a-z0-9\\-]+)\">In the hands of ([^<]+).</a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternSpottedUnknown = Pattern.compile("<dt>\\W*Recently Spotted:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugLocation\">Unknown Location[^<]*</a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternSpottedOwner = Pattern.compile("<dt>\\W*Recently Spotted:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugLocation\">In the hands of the owner[^<]*</a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternGoal = Pattern.compile("<h3>\\W*Current GOAL[^<]*</h3>[^<]*<p[^>]*>(.*)</p>[^<]*<h3>\\W*About This Item[^<]*</h3>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternDetailsImage = Pattern.compile("<h3>\\W*About This Item[^<]*</h3>([^<]*<p>([^<]*<img id=\"ctl00_ContentBody_BugDetails_BugImage\" class=\"[^\"]+\" src=\"([^\"]+)\"[^>]*>)?[^<]*</p>)?[^<]*<p[^>]*>(.*)</p>[^<]*<div id=\"ctl00_ContentBody_BugDetails_uxAbuseReport\">", Pattern.CASE_INSENSITIVE);
-		final Pattern patternIcon = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternType = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"[^\"]+\" alt=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternDistance = Pattern.compile("<h4[^>]*\\W*Tracking History \\(([0-9\\.,]+(km|mi))[^\\)]*\\)", Pattern.CASE_INSENSITIVE);
-		final Pattern patternLog = Pattern.compile("<tr class=\"Data.+?src=\"/images/icons/([^\\.]+)\\.gif[^>]+>&nbsp;([^<]+)</td>.+?guid.+?>([^<]+)</a>.+?(?:guid=([^\"]+)\">([^<]+)</a>.+?)?<td colspan=\"4\">(.+?)(?:<ul.+?ul>)?\\s*</td>\\s*</tr>", Pattern.CASE_INSENSITIVE);
-
 		final cgTrackable trackable = new cgTrackable();
 
 		// trackable geocode
 		try {
-			final Matcher matcherGeocode = patternGeocode.matcher(page);
-			while (matcherGeocode.find()) {
-				if (matcherGeocode.groupCount() > 0) {
-					trackable.geocode = matcherGeocode.group(1).toUpperCase();
-				}
+			final Matcher matcherGeocode = PATTERN_TRACKABLE_Geocode.matcher(page);
+			if (matcherGeocode.find() && matcherGeocode.groupCount() > 0) {
+				trackable.geocode = matcherGeocode.group(1).toUpperCase();
 			}
 		} catch (Exception e) {
 			// failed to parse trackable geocode
@@ -2125,11 +2056,9 @@ public class cgBase {
 
 		// trackable id
 		try {
-			final Matcher matcherTrackableId = patternTrackableId.matcher(page);
-			while (matcherTrackableId.find()) {
-				if (matcherTrackableId.groupCount() > 0) {
-					trackable.guid = matcherTrackableId.group(1);
-				}
+			final Matcher matcherTrackableId = PATTERN_TRACKABLE_TrackableId.matcher(page);
+			if (matcherTrackableId.find() && matcherTrackableId.groupCount() > 0) {
+				trackable.guid = matcherTrackableId.group(1);
 			}
 		} catch (Exception e) {
 			// failed to parse trackable id
@@ -2138,11 +2067,9 @@ public class cgBase {
 
 		// trackable icon
 		try {
-			final Matcher matcherTrackableIcon = patternIcon.matcher(page);
-			while (matcherTrackableIcon.find()) {
-				if (matcherTrackableIcon.groupCount() > 0) {
-					trackable.iconUrl = matcherTrackableIcon.group(1);
-				}
+			final Matcher matcherTrackableIcon = PATTERN_TRACKABLE_Icon.matcher(page);
+			if (matcherTrackableIcon.find() && matcherTrackableIcon.groupCount() > 0) {
+				trackable.iconUrl = matcherTrackableIcon.group(1);
 			}
 		} catch (Exception e) {
 			// failed to parse trackable icon
@@ -2151,11 +2078,9 @@ public class cgBase {
 
 		// trackable name
 		try {
-			final Matcher matcherName = patternName.matcher(page);
-			while (matcherName.find()) {
-				if (matcherName.groupCount() > 1) {
-					trackable.name = matcherName.group(2);
-				}
+			final Matcher matcherName = PATTERN_TRACKABLE_Name.matcher(page);
+			if (matcherName.find() && matcherName.groupCount() > 1) {
+				trackable.name = matcherName.group(2);
 			}
 		} catch (Exception e) {
 			// failed to parse trackable name
@@ -2165,11 +2090,9 @@ public class cgBase {
 		// trackable type
 		if (trackable.name != null && trackable.name.length() > 0) {
 			try {
-				final Matcher matcherType = patternType.matcher(page);
-				while (matcherType.find()) {
-					if (matcherType.groupCount() > 0) {
-						trackable.type = matcherType.group(1);
-					}
+				final Matcher matcherType = PATTERN_TRACKABLE_Type.matcher(page);
+				if (matcherType.find() && matcherType.groupCount() > 0) {
+					trackable.type = matcherType.group(1);
 				}
 			} catch (Exception e) {
 				// failed to parse trackable type
@@ -2179,12 +2102,10 @@ public class cgBase {
 
 		// trackable owner name
 		try {
-			final Matcher matcherOwner = patternOwner.matcher(page);
-			while (matcherOwner.find()) {
-				if (matcherOwner.groupCount() > 0) {
-					trackable.ownerGuid = matcherOwner.group(1);
-					trackable.owner = matcherOwner.group(2);
-				}
+			final Matcher matcherOwner = PATTERN_TRACKABLE_Owner.matcher(page);
+			if (matcherOwner.find() && matcherOwner.groupCount() > 0) {
+				trackable.ownerGuid = matcherOwner.group(1);
+				trackable.owner = matcherOwner.group(2);
 			}
 		} catch (Exception e) {
 			// failed to parse trackable owner name
@@ -2193,11 +2114,9 @@ public class cgBase {
 
 		// trackable origin
 		try {
-			final Matcher matcherOrigin = patternOrigin.matcher(page);
-			while (matcherOrigin.find()) {
-				if (matcherOrigin.groupCount() > 0) {
-					trackable.origin = matcherOrigin.group(1);
-				}
+			final Matcher matcherOrigin = PATTERN_TRACKABLE_Origin.matcher(page);
+			if (matcherOrigin.find() && matcherOrigin.groupCount() > 0) {
+				trackable.origin = matcherOrigin.group(1);
 			}
 		} catch (Exception e) {
 			// failed to parse trackable origin
@@ -2206,30 +2125,26 @@ public class cgBase {
 
 		// trackable spotted
 		try {
-			final Matcher matcherSpottedCache = patternSpottedCache.matcher(page);
-			while (matcherSpottedCache.find()) {
-				if (matcherSpottedCache.groupCount() > 0) {
-					trackable.spottedGuid = matcherSpottedCache.group(1);
-					trackable.spottedName = matcherSpottedCache.group(2);
-					trackable.spottedType = cgTrackable.SPOTTED_CACHE;
-				}
+			final Matcher matcherSpottedCache = PATTERN_TRACKABLE_SpottedCache.matcher(page);
+			if (matcherSpottedCache.find() && matcherSpottedCache.groupCount() > 0) {
+				trackable.spottedGuid = matcherSpottedCache.group(1);
+				trackable.spottedName = matcherSpottedCache.group(2);
+				trackable.spottedType = cgTrackable.SPOTTED_CACHE;
 			}
 
-			final Matcher matcherSpottedUser = patternSpottedUser.matcher(page);
-			while (matcherSpottedUser.find()) {
-				if (matcherSpottedUser.groupCount() > 0) {
-					trackable.spottedGuid = matcherSpottedUser.group(1);
-					trackable.spottedName = matcherSpottedUser.group(2);
-					trackable.spottedType = cgTrackable.SPOTTED_USER;
-				}
+			final Matcher matcherSpottedUser = PATTERN_TRACKABLE_SpottedUser.matcher(page);
+			if (matcherSpottedUser.find() && matcherSpottedUser.groupCount() > 0) {
+				trackable.spottedGuid = matcherSpottedUser.group(1);
+				trackable.spottedName = matcherSpottedUser.group(2);
+				trackable.spottedType = cgTrackable.SPOTTED_USER;
 			}
 
-			final Matcher matcherSpottedUnknown = patternSpottedUnknown.matcher(page);
+			final Matcher matcherSpottedUnknown = PATTERN_TRACKABLE_SpottedUnknown.matcher(page);
 			if (matcherSpottedUnknown.find()) {
 				trackable.spottedType = cgTrackable.SPOTTED_UNKNOWN;
 			}
 
-			final Matcher matcherSpottedOwner = patternSpottedOwner.matcher(page);
+			final Matcher matcherSpottedOwner = PATTERN_TRACKABLE_SpottedOwner.matcher(page);
 			if (matcherSpottedOwner.find()) {
 				trackable.spottedType = cgTrackable.SPOTTED_OWNER;
 			}
@@ -2240,24 +2155,22 @@ public class cgBase {
 
 		// released
 		try {
-			final Matcher matcherReleased = patternReleased.matcher(page);
-			while (matcherReleased.find()) {
-				if (matcherReleased.groupCount() > 0 && matcherReleased.group(1) != null) {
-					try {
-						if (trackable.released == null) {
-							trackable.released = dateTbIn1.parse(matcherReleased.group(1));
-						}
-					} catch (Exception e) {
-						//
+			final Matcher matcherReleased = PATTERN_TRACKABLE_Released.matcher(page);
+			if (matcherReleased.find() && matcherReleased.groupCount() > 0 && matcherReleased.group(1) != null) {
+				try {
+					if (trackable.released == null) {
+						trackable.released = dateTbIn1.parse(matcherReleased.group(1));
 					}
+				} catch (Exception e) {
+					//
+				}
 
-					try {
-						if (trackable.released == null) {
-							trackable.released = dateTbIn2.parse(matcherReleased.group(1));
-						}
-					} catch (Exception e) {
-						//
+				try {
+					if (trackable.released == null) {
+						trackable.released = dateTbIn2.parse(matcherReleased.group(1));
 					}
+				} catch (Exception e) {
+					//
 				}
 			}
 		} catch (Exception e) {
@@ -2267,11 +2180,9 @@ public class cgBase {
 
 		// trackable distance
 		try {
-			final Matcher matcherDistance = patternDistance.matcher(page);
-			while (matcherDistance.find()) {
-				if (matcherDistance.groupCount() > 0) {
-					trackable.distance = parseDistance(matcherDistance.group(1));
-				}
+			final Matcher matcherDistance = PATTERN_TRACKABLE_Distance.matcher(page);
+			if (matcherDistance.find() && matcherDistance.groupCount() > 0) {
+				trackable.distance = parseDistance(matcherDistance.group(1));
 			}
 		} catch (Exception e) {
 			// failed to parse trackable distance
@@ -2280,11 +2191,9 @@ public class cgBase {
 
 		// trackable goal
 		try {
-			final Matcher matcherGoal = patternGoal.matcher(page);
-			while (matcherGoal.find()) {
-				if (matcherGoal.groupCount() > 0) {
-					trackable.goal = matcherGoal.group(1);
-				}
+			final Matcher matcherGoal = PATTERN_TRACKABLE_Goal.matcher(page);
+			if (matcherGoal.find() && matcherGoal.groupCount() > 0) {
+				trackable.goal = matcherGoal.group(1);
 			}
 		} catch (Exception e) {
 			// failed to parse trackable goal
@@ -2293,18 +2202,16 @@ public class cgBase {
 
 		// trackable details & image
 		try {
-			final Matcher matcherDetailsImage = patternDetailsImage.matcher(page);
-			while (matcherDetailsImage.find()) {
-				if (matcherDetailsImage.groupCount() > 0) {
-					final String image = matcherDetailsImage.group(3);
-					final String details = matcherDetailsImage.group(4);
+			final Matcher matcherDetailsImage = PATTERN_TRACKABLE_DetailsImage.matcher(page);
+			if (matcherDetailsImage.find() && matcherDetailsImage.groupCount() > 0) {
+				final String image = matcherDetailsImage.group(3);
+				final String details = matcherDetailsImage.group(4);
 
-					if (image != null) {
-						trackable.image = image;
-					}
-					if (details != null) {
-						trackable.details = details;
-					}
+				if (image != null) {
+					trackable.image = image;
+				}
+				if (details != null) {
+					trackable.details = details;
 				}
 			}
 		} catch (Exception e) {
@@ -2315,7 +2222,7 @@ public class cgBase {
 		// trackable logs
 		try
 		{
-			final Matcher matcherLogs = patternLog.matcher(page);
+			final Matcher matcherLogs = PATTERN_TRACKABLE_Log.matcher(page);
 			/*
     			1. Type (img)
                 2. Date
