@@ -202,6 +202,7 @@ public class cgBase {
 	public static final int LOG_ANNOUNCEMENT = 74;
 
 	public cgBase(cgeoapplication appIn, cgSettings settingsIn, SharedPreferences prefsIn) {
+		context = appIn.getBaseContext();
 		res = appIn.getBaseContext().getResources();
 
 		// cache types
