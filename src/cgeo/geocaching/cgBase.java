@@ -2717,46 +2717,38 @@ public class cgBase {
 		return result;
 	}
 
-	public static String formatCoordinate(Double coord, String latlon, boolean degrees) {
-		String formatted = "";
-
-		if (coord == null) {
-			return formatted;
+	private static String formatCoordinate(final Double coordIn, final boolean degrees, final String direction, final String digitsFormat) {
+		if (coordIn == null) {
+			return "";
 		}
+		StringBuilder formatted = new StringBuilder(direction);
 
-		String worldSide = "";
-		if (latlon.equalsIgnoreCase("lat")) {
-			if (coord >= 0) {
-				// have the blanks here at the direction to avoid one String concatenation
-				worldSide = "N ";
-			} else {
-				worldSide = "S ";
-			}
-		} else if (latlon.equalsIgnoreCase("lon")) {
-			if (coord >= 0) {
-				worldSide = "E ";
-			} else {
-				worldSide = "W ";
-			}
-		}
+		double coordAbs = Math.abs(coordIn);
+		Locale locale = Locale.getDefault();
+		double floor = Math.floor(coordAbs);
 
-		coord = Math.abs(coord);
+		formatted.append(String.format(locale, digitsFormat, floor));
 
-		if (latlon.equalsIgnoreCase("lat")) {
-			if (degrees) {
-				formatted = worldSide + String.format(Locale.getDefault(), "%02.0f", Math.floor(coord)) + "° " + String.format(Locale.getDefault(), "%06.3f", ((coord - Math.floor(coord)) * 60));
-			} else {
-				formatted = worldSide + String.format(Locale.getDefault(), "%02.0f", Math.floor(coord)) + " " + String.format(Locale.getDefault(), "%06.3f", ((coord - Math.floor(coord)) * 60));
-			}
+		if (degrees) {
+			formatted.append("° ");
 		} else {
-			if (degrees) {
-				formatted = worldSide + String.format(Locale.getDefault(), "%03.0f", Math.floor(coord)) + "° " + String.format(Locale.getDefault(), "%06.3f", ((coord - Math.floor(coord)) * 60));
-			} else {
-				formatted = worldSide + String.format(Locale.getDefault(), "%03.0f", Math.floor(coord)) + " " + String.format(Locale.getDefault(), "%06.3f", ((coord - Math.floor(coord)) * 60));
-			}
+			formatted.append(" ");
 		}
+		formatted.append(String.format(locale, "%06.3f", ((coordAbs - floor) * 60)));
 
-		return formatted;
+		return formatted.toString();
+	}
+
+	public static String formatLatitude(final Double coord, final boolean degrees) {
+		return formatCoordinate(coord, degrees, (coord >= 0) ? "N " : "S ", "%02.0f");
+	}
+
+	public static String formatLongitude(final Double coord, final boolean degrees) {
+		return formatCoordinate(coord, degrees, (coord >= 0) ? "E " : "W ", "%03.0f");
+	}
+
+	public static String formatCoords(final Double latitude, final Double longitude, final boolean degrees) {
+		return formatLatitude(latitude, degrees) + " | " + formatLongitude(longitude, degrees);
 	}
 
 	public static HashMap<String, Object> parseCoordinate(String coord, String latlon) {

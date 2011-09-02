@@ -7,12 +7,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Date;
 
+import android.os.Handler;
+import android.os.Message;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgSearch;
-
-import android.os.Handler;
-import android.os.Message;
 
 public abstract class FileParser {
 	protected static StringBuilder readFile(File file)
@@ -30,7 +29,7 @@ public abstract class FileParser {
 		}
 		return buffer;
 	}
-	
+
 	static void showFinishedMessage(Handler handler, cgSearch search) {
 		if (handler != null) {
 			final Message msg = new Message();
@@ -40,8 +39,8 @@ public abstract class FileParser {
 	}
 
 	protected static void fixCache(cgCache cache) {
-		cache.latitudeString = cgBase.formatCoordinate(cache.latitude, "lat", true);
-		cache.longitudeString = cgBase.formatCoordinate(cache.longitude, "lon", true);
+		cache.latitudeString = cgBase.formatLatitude(cache.latitude, true);
+		cache.longitudeString = cgBase.formatLongitude(cache.longitude, true);
 		if (cache.inventory != null) {
 			cache.inventoryItems = cache.inventory.size();
 		} else {

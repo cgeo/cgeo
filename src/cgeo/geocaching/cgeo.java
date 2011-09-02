@@ -545,9 +545,9 @@ public class cgeo extends AbstractActivity {
 							} else {
 								humanAlt = String.format("%.0f", geo.altitudeNow) + " m";
 							}
-							navLocation.setText(cgBase.formatCoordinate(geo.latitudeNow, "lat", true) + " | " + cgBase.formatCoordinate(geo.longitudeNow, "lon", true) + " | " + humanAlt);
+							navLocation.setText(cgBase.formatCoords(geo.latitudeNow, geo.longitudeNow, true) + " | " + humanAlt);
 						} else {
-							navLocation.setText(cgBase.formatCoordinate(geo.latitudeNow, "lat", true) + " | " + cgBase.formatCoordinate(geo.longitudeNow, "lon", true));
+							navLocation.setText(cgBase.formatCoords(geo.latitudeNow, geo.longitudeNow, true));
 						}
 					}
 				} else {

@@ -307,7 +307,7 @@ public class cgeonavigate extends AbstractActivity {
 			return;
 		}
 
-		((TextView) findViewById(R.id.destination)).setText(cgBase.formatCoordinate(dstLatitude, "lat", true) + " | " + cgBase.formatCoordinate(dstLongitude, "lon", true));
+		((TextView) findViewById(R.id.destination)).setText(cgBase.formatCoords(dstLatitude, dstLongitude, true));
 	}
 
 	public void setDest(Double lat, Double lon) {
@@ -402,9 +402,9 @@ public class cgeonavigate extends AbstractActivity {
 						} else {
 							humanAlt = String.format("%.0f", geo.altitudeNow) + " m";
 						}
-						navLocation.setText(cgBase.formatCoordinate(geo.latitudeNow, "lat", true) + " | " + cgBase.formatCoordinate(geo.longitudeNow, "lon", true) + " | " + humanAlt);
+						navLocation.setText(cgBase.formatCoords(geo.latitudeNow, geo.longitudeNow, true) + " | " + humanAlt);
 					} else {
-						navLocation.setText(cgBase.formatCoordinate(geo.latitudeNow, "lat", true) + " | " + cgBase.formatCoordinate(geo.longitudeNow, "lon", true));
+						navLocation.setText(cgBase.formatCoords(geo.latitudeNow, geo.longitudeNow, true));
 					}
 
 					updateDistanceInfo();

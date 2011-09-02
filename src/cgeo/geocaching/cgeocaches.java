@@ -598,7 +598,7 @@ public class cgeocaches extends AbstractListActivity {
 			thread.start();
 		} else if (type.equals("coordinate")) {
 			action = "planning";
-			title = cgBase.formatCoordinate(latitude, res.getString(R.string.search_lat), true) + " | " + cgBase.formatCoordinate(longitude, res.getString(R.string.search_lon), true);
+			title = cgBase.formatCoords(latitude, longitude, true);
 			setTitle(title);
 			showProgress(true);
 			setLoadingCaches();
@@ -623,7 +623,7 @@ public class cgeocaches extends AbstractListActivity {
 				showProgress(true);
 				setLoadingCaches();
 			} else {
-				title = cgBase.formatCoordinate(latitude, res.getString(R.string.search_lat), true) + " | " + cgBase.formatCoordinate(longitude, res.getString(R.string.search_lon), true);
+				title = cgBase.formatCoords(latitude, longitude, true);
 				setTitle(title);
 				showProgress(true);
 				setLoadingCaches();

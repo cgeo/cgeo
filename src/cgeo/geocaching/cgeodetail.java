@@ -1006,7 +1006,7 @@ public class cgeodetail extends AbstractActivity {
 
 					TextView nameView = (TextView) waypointView.findViewById(R.id.name);
 					if (wpt.name.trim().length() == 0) {
-						nameView.setText(cgBase.formatCoordinate(wpt.latitude, "lat", true) + " | " + cgBase.formatCoordinate(wpt.longitude, "lon", true));
+						nameView.setText(cgBase.formatCoords(wpt.latitude, wpt.longitude, true));
 					} else {
 						// avoid HTML parsing
 						if (wpt.name.indexOf('<') >= 0 || wpt.name.indexOf('&') >= 0) {
