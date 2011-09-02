@@ -33,14 +33,12 @@
 					<TextView style="@style/separator_horizontal_headline"
 							android:text="@string/search_coordinates" />
 				</RelativeLayout>
-				<EditText style="@style/edittext"
-						android:id="@+id/latitude"
-						android:hint="latitude"
-						android:imeOptions="actionGo" />
-				<EditText style="@style/edittext"
-						android:id="@+id/longitude"
-						android:hint="longitude"
-						android:imeOptions="actionGo" />
+				<Button style="@style/button" 
+					android:hint="Latitude"
+					android:id="@+id/buttonLatitude"/>
+				<Button style="@style/button" 
+					android:hint="Longitude"
+					android:id="@+id/buttonLongitude"/>
 				<Button style="@style/button"
 						android:id="@+id/search_coordinates"
 						android:text="@string/search_coordinates_button" />
