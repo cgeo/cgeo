@@ -214,7 +214,7 @@ public class cgeopopup extends AbstractActivity {
 			TextView itemValue;
 			LinearLayout itemStars;
 
-			if (cache.name != null && cache.name.length() > 0) {
+			if (StringUtils.isNotBlank(cache.name)) {
 				setTitle(cache.name);
 			} else {
 				setTitle(geocode.toUpperCase());

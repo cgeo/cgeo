@@ -584,7 +584,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 			cacheInfo.append("; ");
 			cacheInfo.append(base.formatDate(cache.visitedDate));
 		} else {
-			if (cache.geocode != null && cache.geocode.length() > 0) {
+			if (StringUtils.isNotBlank(cache.geocode)) {
 				cacheInfo.append(cache.geocode);
 			}
 			if (StringUtils.isNotBlank(cache.size)) {

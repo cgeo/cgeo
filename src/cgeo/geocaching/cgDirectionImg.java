@@ -21,7 +21,7 @@ public class cgDirectionImg {
 		String dirName;
 		String fileName;
 
-		if (StringUtils.isBlank(geocode) || code == null || code.length() == 0) {
+		if (StringUtils.isBlank(geocode) || StringUtils.isBlank(code)) {
 			return;
 		}
 

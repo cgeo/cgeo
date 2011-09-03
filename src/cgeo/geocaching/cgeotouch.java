@@ -128,7 +128,7 @@ public class cgeotouch extends cgLogForm {
 
 		trackable = app.getTrackableByGeocode("logging trackable");
 
-		if (trackable.name != null && trackable.name.length() > 0) {
+		if (StringUtils.isNotBlank(trackable.name)) {
 			setTitle(res.getString(R.string.trackable_touch) + trackable.name);
 		} else {
 			setTitle(res.getString(R.string.trackable_touch) + trackable.geocode.toUpperCase());
@@ -431,7 +431,7 @@ public class cgeotouch extends cgLogForm {
 
 			if (
 				status == 1 && settings.twitter == 1 &&
-				settings.tokenPublic != null && settings.tokenPublic.length() > 0 && settings.tokenSecret != null && settings.tokenSecret.length() > 0 &&
+				StringUtils.isNotBlank(settings.tokenPublic) && StringUtils.isNotBlank(settings.tokenSecret) &&
 				tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE
 			) {
 				cgBase.postTweetTrackable(app, settings, geocode);

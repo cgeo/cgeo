@@ -34,10 +34,10 @@ public class cgWaypoint {
 	}
 
 	public void merge(final cgWaypoint old) {
-		if (prefix == null || prefix.length() == 0) {
+		if (StringUtils.isBlank(prefix)) {
 			prefix = old.prefix;
 		}
-		if (lookup == null || lookup.length() == 0) {
+		if (StringUtils.isBlank(lookup)) {
 			lookup = old.lookup;
 		}
 		if (StringUtils.isBlank(name)) {
@@ -58,7 +58,7 @@ public class cgWaypoint {
 		if (longitude == null) {
 			longitude = old.longitude;
 		}
-		if (note == null || note.length() == 0) {
+		if (StringUtils.isBlank(note)) {
 			note = old.note;
 		}
 		if (note != null && old.note != null) {

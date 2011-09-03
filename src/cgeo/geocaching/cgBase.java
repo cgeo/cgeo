@@ -657,7 +657,7 @@ public class cgBase {
 				if (recaptchaJsParam != null) {
 					final String recaptchaJs = request(false, "www.google.com", "/recaptcha/api/challenge", "GET", "k=" + urlencode_rfc3986(recaptchaJsParam.trim()), 0, true).getData();
 
-					if (recaptchaJs != null && recaptchaJs.length() > 0) {
+					if (StringUtils.isNotBlank(recaptchaJs)) {
 						final Matcher matcherRecaptchaChallenge = patternRecaptchaChallenge.matcher(recaptchaJs);
 						while (matcherRecaptchaChallenge.find()) {
 							if (matcherRecaptchaChallenge.groupCount() > 0) {
@@ -671,7 +671,7 @@ public class cgBase {
 				Log.w(cgSettings.tag, "cgeoBase.parseSearch: Failed to parse recaptcha challenge");
 			}
 
-			if (thread != null && recaptchaChallenge != null && recaptchaChallenge.length() > 0) {
+			if (thread != null && StringUtils.isNotBlank(recaptchaChallenge)) {
 				thread.setChallenge(recaptchaChallenge);
 				thread.notifyNeed();
 			}
@@ -809,7 +809,7 @@ public class cgBase {
 				Log.w(cgSettings.tag, "cgeoBase.parseSearch: Failed to parse cache inventory (1)");
 			}
 
-			if (inventoryPre != null && inventoryPre.trim().length() > 0) {
+			if (StringUtils.isNotBlank(inventoryPre)) {
 				try {
 					final Matcher matcherTbsInside = patternTbsInside.matcher(inventoryPre);
 					while (matcherTbsInside.find()) {
@@ -920,7 +920,7 @@ public class cgBase {
 				final String path = "/seek/nearest.aspx";
 				final StringBuilder params = new StringBuilder();
 				params.append("__EVENTTARGET=&__EVENTARGUMENT=");
-				if (caches.viewstates != null  &&  caches.viewstates.length > 0) {
+				if (ArrayUtils.isNotEmpty(caches.viewstates)) {
 					params.append("&__VIEWSTATE=");
 					params.append(urlencode_rfc3986(caches.viewstates[0]));
 					if (caches.viewstates.length > 1) {
@@ -1012,7 +1012,7 @@ public class cgBase {
 			final JSONObject yoDawg = new JSONObject(data);
 			final String json = yoDawg.getString("d");
 
-			if (json == null || json.length() == 0) {
+			if (StringUtils.isBlank(json)) {
 				Log.e(cgSettings.tag, "cgeoBase.parseMapJSON: No JSON inside JSON");
 				return null;
 			}
@@ -1506,7 +1506,7 @@ public class cgBase {
 				if (matcherInventory.groupCount() > 1) {
 					final String inventoryPre = matcherInventory.group(2);
 
-					if (inventoryPre != null && inventoryPre.length() > 0) {
+					if (StringUtils.isNotBlank(inventoryPre)) {
 						final Matcher matcherInventoryInside = patternInventoryInside.matcher(inventoryPre);
 
 						while (matcherInventoryInside.find()) {
@@ -2406,28 +2406,6 @@ public class cgBase {
 		return text.trim();
 	}
 
-	public static String capitalizeSentence(String sentence) {
-		if (sentence == null) {
-			return "";
-		}
-
-		final String[] word = sentence.split(" ");
-
-		for (int i = 0; i < word.length; i++) {
-			word[i] = capitalizeWord(word[i]);
-		}
-
-		return implode(" ", word);
-	}
-
-	public static String capitalizeWord(String word) {
-		if (word.length() == 0) {
-			return word;
-		}
-
-		return (word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase());
-	}
-
 	public static Double parseDistance(String dst) {
 		Double distance = null;
 
@@ -2912,7 +2890,7 @@ public class cgBase {
 
 		final cgCacheWrap caches = parseCache(page, reason);
 		if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
-			if (caches != null && caches.error != null && caches.error.length() > 0) {
+			if (caches != null && StringUtils.isNotBlank(caches.error)) {
 				search.error = caches.error;
 			}
 			if (caches != null && StringUtils.isNotBlank(caches.url)) {
@@ -3822,7 +3800,7 @@ public class cgBase {
 		if (app == null) {
 			return;
 		}
-		if (settings == null || settings.tokenPublic == null || settings.tokenPublic.length() == 0 || settings.tokenSecret == null || settings.tokenSecret.length() == 0) {
+		if (settings == null || StringUtils.isBlank(settings.tokenPublic) || StringUtils.isNotBlank(settings.tokenSecret)) {
 			return;
 		}
 
@@ -4207,7 +4185,7 @@ public class cgBase {
 					response = request(secureRedir, newLocation.getHost(), newLocation.getPath(), "GET", new HashMap<String, String>(), requestId, false, false, false);
 				}
 			} else {
-				if (buffer != null && buffer.length() > 0) {
+				if (StringUtils.isNotBlank(buffer)) {
 					replaceWhitespace(buffer);
 					String data = buffer.toString();
 					buffer = null;
@@ -4555,7 +4533,7 @@ public class cgBase {
 				Log.e(cgSettings.tag, "cgeoBase.requestJSON: " + e.toString());
 			}
 
-			if (buffer != null && buffer.length() > 0) {
+			if (StringUtils.isNotBlank(buffer)) {
 				break;
 			}
 
@@ -4674,7 +4652,7 @@ public class cgBase {
 			// get cache details, they may not yet be complete
 			if (cache != null) {
 				// only reload the cache, if it was already stored or has not all details (by checking the description)
-				if (cache.reason > 0 || cache.description == null || cache.description.length() == 0) {
+				if (cache.reason > 0 || StringUtils.isBlank(cache.description)) {
 					final HashMap<String, String> params = new HashMap<String, String>();
 					params.put("geocode", cache.geocode);
 					final Long searchId = searchByGeocode(params, listId, false);
@@ -4703,7 +4681,7 @@ public class cgBase {
 			}
 
 			// store spoilers
-			if (cache.spoilers != null && cache.spoilers.isEmpty() == false) {
+			if (CollectionUtils.isNotEmpty(cache.spoilers)) {
 				for (cgImage oneSpoiler : cache.spoilers) {
 					imgGetter.getDrawable(oneSpoiler.url);
 				}
@@ -4712,7 +4690,7 @@ public class cgBase {
 			// store images from logs
 			if (settings.storelogimages) {
 				for (cgLog log : cache.logs) {
-					if (log.logImages != null && log.logImages.isEmpty() == false) {
+					if (CollectionUtils.isNotEmpty(log.logImages)) {
 						for (cgImage oneLogImg : log.logImages) {
 							imgGetter.getDrawable(oneLogImg.url);
 						}
@@ -4943,7 +4921,7 @@ public class cgBase {
 		String iconTxt = null;
 
 		if (cache) {
-			if (type != null && type.length() > 0) {
+			if (StringUtils.isNotBlank(type)) {
 				if (own) {
 					iconTxt = type + "-own";
 				} else if (found) {
@@ -4963,7 +4941,7 @@ public class cgBase {
 				icon = gcIcons.get("traditional");
 			}
 		} else {
-			if (type != null && type.length() > 0) {
+			if (StringUtils.isNotBlank(type)) {
 				iconTxt = type;
 			} else {
 				iconTxt = "waypoint";

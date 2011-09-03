@@ -341,7 +341,7 @@ public abstract class GPXParser extends FileParser {
 				final Matcher matcher = patternGuid.matcher(url);
 				if (matcher.matches()) {
 					String guid = matcher.group(1);
-					if (guid.length() > 0) {
+					if (StringUtils.isNotBlank(guid)) {
 						cache.guid = guid;
 					}
 				}
