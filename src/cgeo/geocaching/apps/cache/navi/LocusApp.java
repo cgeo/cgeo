@@ -3,6 +3,7 @@ package cgeo.geocaching.apps.cache.navi;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -35,7 +36,7 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 		}
 		try {
 			if (isInstalled(activity)) {
-				final ArrayList<cgWaypoint> waypoints = new ArrayList<cgWaypoint>();
+				final List<cgWaypoint> waypoints = new ArrayList<cgWaypoint>();
 				// get only waypoints with coordinates
 				if (cache != null && cache.waypoints != null
 						&& cache.waypoints.isEmpty() == false) {

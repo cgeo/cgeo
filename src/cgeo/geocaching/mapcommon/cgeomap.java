@@ -2,7 +2,9 @@ package cgeo.geocaching.mapcommon;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -113,10 +115,10 @@ public class cgeomap extends MapBase {
 	private cgMapMyOverlay overlayMyLoc = null;
 	// data for overlays
 	private int cachesCnt = 0;
-	private HashMap<Integer, Drawable> iconsCache = new HashMap<Integer, Drawable>();
-	private ArrayList<cgCache> caches = new ArrayList<cgCache>();
-	private ArrayList<cgUser> users = new ArrayList<cgUser>();
-	private ArrayList<cgCoord> coordinates = new ArrayList<cgCoord>();
+	private Map<Integer, Drawable> iconsCache = new HashMap<Integer, Drawable>();
+	private List<cgCache> caches = new ArrayList<cgCache>();
+	private List<cgUser> users = new ArrayList<cgUser>();
+	private List<cgCoord> coordinates = new ArrayList<cgCoord>();
 	// storing for offline
 	private ProgressDialog waitDialog = null;
 	private int detailTotal = 0;
@@ -559,9 +561,9 @@ public class cgeomap extends MapBase {
 			searchIdIntent = null;
 		} else if (id == MENU_STORE_CACHES) {
 			if (live && !isLoading() && caches != null && !caches.isEmpty()) {
-				final ArrayList<String> geocodes = new ArrayList<String>();
+				final List<String> geocodes = new ArrayList<String>();
 
-				ArrayList<cgCache> cachesProtected = new ArrayList<cgCache>(caches);
+				List<cgCache> cachesProtected = new ArrayList<cgCache>(caches);
 				try {
 					if (CollectionUtils.isNotEmpty(cachesProtected)) {
 						final GeoPointImpl mapCenter = mapView.getMapViewCenter();
@@ -1189,7 +1191,7 @@ public class cgeomap extends MapBase {
 					return;
 				}
 
-				HashMap<String, String> params = new HashMap<String, String>();
+				Map<String, String> params = new HashMap<String, String>();
 				params.put("usertoken", token);
 				params.put("latitude-min", String.format((Locale) null, "%.6f", latMin));
 				params.put("latitude-max", String.format((Locale) null, "%.6f", latMax));
@@ -1251,8 +1253,8 @@ public class cgeomap extends MapBase {
 				}
 
 				// display caches
-				final ArrayList<cgCache> cachesProtected = new ArrayList<cgCache>(caches);
-				final ArrayList<CacheOverlayItemImpl> items = new ArrayList<CacheOverlayItemImpl>();
+				final List<cgCache> cachesProtected = new ArrayList<cgCache>(caches);
+				final List<CacheOverlayItemImpl> items = new ArrayList<CacheOverlayItemImpl>();
 
 				if (cachesProtected != null && !cachesProtected.isEmpty()) {
 					int icon = 0;
@@ -1406,9 +1408,9 @@ public class cgeomap extends MapBase {
 	// display users of Go 4 Cache
 	private class DisplayUsersThread extends DoThread {
 
-		private ArrayList<cgUser> users = null;
+		private List<cgUser> users = null;
 
-		public DisplayUsersThread(ArrayList<cgUser> usersIn, long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
+		public DisplayUsersThread(List<cgUser> usersIn, long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
 			super(centerLatIn, centerLonIn, spanLatIn, spanLonIn);
 
 			users = usersIn;
@@ -1425,7 +1427,7 @@ public class cgeomap extends MapBase {
 				}
 
 				// display users
-				ArrayList<UserOverlayItemImpl> items = new ArrayList<UserOverlayItemImpl>();
+				List<UserOverlayItemImpl> items = new ArrayList<UserOverlayItemImpl>();
 
 				int counter = 0;
 				UserOverlayItemImpl item = null;
@@ -1543,11 +1545,11 @@ public class cgeomap extends MapBase {
 	private class LoadDetails extends Thread {
 
 		private Handler handler = null;
-		private ArrayList<String> geocodes = null;
+		private List<String> geocodes = null;
 		private volatile boolean stop = false;
 		private long last = 0L;
 
-		public LoadDetails(Handler handlerIn, ArrayList<String> geocodesIn) {
+		public LoadDetails(Handler handlerIn, List<String> geocodesIn) {
 			handler = handlerIn;
 			geocodes = geocodesIn;
 		}
@@ -1648,7 +1650,7 @@ public class cgeomap extends MapBase {
 			alreadyCentered = true;
 		} else if (!centered && (geocodeCenter != null || searchIdIntent != null)) {
 			try {
-				ArrayList<Object> viewport = null;
+				List<Object> viewport = null;
 
 				if (geocodeCenter != null) {
 					viewport = app.getBounds(geocodeCenter);

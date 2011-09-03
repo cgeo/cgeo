@@ -3,6 +3,8 @@ package cgeo.geocaching;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -27,7 +29,7 @@ import android.widget.TextView;
 
 public class cgeotouch extends cgLogForm {
 	private cgTrackable trackable = null;
-	private ArrayList<Integer> types = new ArrayList<Integer>();
+	private List<Integer> types = new ArrayList<Integer>();
 	private ProgressDialog waitDialog = null;
 	private String guid = null;
 	private String geocode = null;
@@ -361,7 +363,7 @@ public class cgeotouch extends cgLogForm {
 
 		@Override
 		public void run() {
-			final HashMap<String, String> params = new HashMap<String, String>();
+			final Map<String, String> params = new HashMap<String, String>();
 
 			showProgressHandler.sendEmptyMessage(0);
 			gettingViewstate = true;
@@ -379,7 +381,7 @@ public class cgeotouch extends cgLogForm {
 
 				viewstates = cgBase.getViewstates(page);
 
-				final ArrayList<Integer> typesPre = cgBase.parseTypes(page);
+				final List<Integer> typesPre = cgBase.parseTypes(page);
 				if (typesPre.size() > 0) {
 					types.clear();
 					types.addAll(typesPre);

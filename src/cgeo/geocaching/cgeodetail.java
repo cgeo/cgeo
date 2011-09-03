@@ -6,7 +6,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
@@ -92,7 +94,7 @@ public class cgeodetail extends AbstractActivity {
 	private ProgressDialog dropDialog = null;
 	private ProgressDialog watchlistDialog = null; // progress dialog for watchlist add/remove
 	private Thread watchlistThread = null; // thread for watchlist add/remove
-	private HashMap<Integer, String> calendars = new HashMap<Integer, String>();
+	private Map<Integer, String> calendars = new HashMap<Integer, String>();
 
 	private ViewGroup attributeIconsLayout; // layout for attribute icons
 	private ViewGroup attributeDescriptionsLayout; // layout for attribute descriptions
@@ -991,7 +993,7 @@ public class cgeodetail extends AbstractActivity {
 				LinearLayout waypointView;
 
 				// sort waypoints: PP, Sx, FI, OWN
-				ArrayList<cgWaypoint> sortedWaypoints = new ArrayList<cgWaypoint>(cache.waypoints);
+				List<cgWaypoint> sortedWaypoints = new ArrayList<cgWaypoint>(cache.waypoints);
 				Collections.sort(sortedWaypoints, new Comparator<cgWaypoint>() {
 
 					@Override
@@ -1137,7 +1139,7 @@ public class cgeodetail extends AbstractActivity {
 			buff.append(": ");
 
 			// sort the log counts by type id ascending. that way the FOUND, DNF log types are the first and most visible ones
-			ArrayList<Entry<Integer, Integer>> sortedLogCounts = new ArrayList<Entry<Integer,Integer>>();
+			List<Entry<Integer, Integer>> sortedLogCounts = new ArrayList<Entry<Integer,Integer>>();
 			sortedLogCounts.addAll(cache.logCounts.entrySet());
 			Collections.sort(sortedLogCounts, new Comparator<Entry<Integer, Integer>>() {
 
@@ -1303,7 +1305,7 @@ public class cgeodetail extends AbstractActivity {
 
 		@Override
 		public void run() {
-			HashMap<String, String> params = new HashMap<String, String>();
+			Map<String, String> params = new HashMap<String, String>();
 			if (StringUtils.isNotBlank(geocode)) {
 				params.put("geocode", geocode);
 			} else if (StringUtils.isNotBlank(guid)) {
@@ -1379,9 +1381,9 @@ public class cgeodetail extends AbstractActivity {
 		}
 	}
 
-	public ArrayList<cgCoord> getCoordinates() {
+	public List<cgCoord> getCoordinates() {
 		cgCoord coords = null;
-		ArrayList<cgCoord> coordinates = new ArrayList<cgCoord>();
+		List<cgCoord> coordinates = new ArrayList<cgCoord>();
 
 		try {
 			// cache
@@ -1749,7 +1751,7 @@ public class cgeodetail extends AbstractActivity {
 		public void run() {
 			app.removeCacheFromCache(geocode);
 
-			final HashMap<String, String> params = new HashMap<String, String>();
+			final Map<String, String> params = new HashMap<String, String>();
 			params.put("geocode", cache.geocode);
 			searchId = base.searchByGeocode(params, 0, true);
 
