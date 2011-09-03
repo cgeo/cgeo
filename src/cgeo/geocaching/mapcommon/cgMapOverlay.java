@@ -2,6 +2,8 @@ package cgeo.geocaching.mapcommon;
 
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -10,9 +12,9 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Point;
-import android.graphics.Paint.Style;
 import android.location.Location;
 import android.text.Html;
 import android.util.Log;
@@ -199,7 +201,7 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 			
 			cgCoord coordinate = item.getCoord();
 
-			if (coordinate.type != null && coordinate.type.equalsIgnoreCase("cache") && coordinate.geocode != null && coordinate.geocode.length() > 0) {
+			if (coordinate.type != null && coordinate.type.equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.geocode)) {
 				Intent popupIntent = new Intent(context, cgeopopup.class);
 
 				popupIntent.putExtra("fromdetail", fromDetail);

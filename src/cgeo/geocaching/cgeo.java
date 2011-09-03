@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -28,6 +30,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.utils.CollectionUtils;
 
 public class cgeo extends AbstractActivity {
 
@@ -83,7 +86,7 @@ public class cgeo extends AbstractActivity {
 		@Override
 		public void handleMessage(Message msg) {
 			try {
-				if (addresses != null && addresses.isEmpty() == false) {
+				if (CollectionUtils.isNotEmpty(addresses)) {
 					final Address address = addresses.get(0);
 					final StringBuilder addText = new StringBuilder();
 
@@ -286,7 +289,7 @@ public class cgeo extends AbstractActivity {
 	    if (requestCode == SCAN_REQUEST_CODE) {
 	        if (resultCode == RESULT_OK) {
 	            String scan = intent.getStringExtra("SCAN_RESULT");
-	            if (scan == null || scan.length() == 0) {
+	            if (StringUtils.isBlank(scan)) {
 	            	return;
 	            }
 	            String host = "http://coord.info/";

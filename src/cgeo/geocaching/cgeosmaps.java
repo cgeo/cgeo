@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.utils.CollectionUtils;
 
 public class cgeosmaps extends AbstractActivity {
 
@@ -27,7 +28,7 @@ public class cgeosmaps extends AbstractActivity {
 		@Override
 		public void handleMessage(Message msg) {
 			try {
-				if (maps == null || maps.isEmpty()) {
+				if (CollectionUtils.isEmpty(maps)) {
 					if (waitDialog != null) {
 						waitDialog.dismiss();
 					}
