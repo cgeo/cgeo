@@ -56,7 +56,7 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
 
 /**
- * Activity to display all details of a cache like owner, difficulty, description etc. 
+ * Activity to display all details of a cache like owner, difficulty, description etc.
  *
  */
 public class cgeodetail extends AbstractActivity {
@@ -1722,10 +1722,7 @@ public class cgeodetail extends AbstractActivity {
 
 		@Override
 		public void run() {
-			int reason = 1;
-			if (cache.reason > 1) {
-				reason = cache.reason;
-			}
+			int reason = (cache.reason > 1) ? cache.reason : 1;
 			base.storeCache(app, cgeodetail.this, cache, null, reason, handler);
 		}
 	}
