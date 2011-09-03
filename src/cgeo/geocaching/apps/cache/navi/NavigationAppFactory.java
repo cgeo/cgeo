@@ -2,6 +2,8 @@ package cgeo.geocaching.apps.cache.navi;
 
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import android.app.Activity;
 import android.content.res.Resources;
 import android.util.Log;
@@ -17,7 +19,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 	private static NavigationApp[] apps = new NavigationApp[] {};
 
 	private static NavigationApp[] getNavigationApps(Resources res) {
-		if (null == apps || 0 == apps.length) {
+		if (ArrayUtils.isEmpty(apps)) {
 			apps = new NavigationApp[] {
 					// compass
 					new RadarApp(res), 

@@ -1,5 +1,7 @@
 package cgeo.geocaching.apps.cache;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import android.app.Activity;
 import android.content.res.Resources;
 import android.util.Log;
@@ -13,7 +15,7 @@ public final class GeneralAppsFactory extends AbstractAppFactory {
 	private static GeneralApp[] apps = new GeneralApp[] {};
 
 	private static GeneralApp[] getGeneralApps(Resources res) {
-		if (null == apps || 0 == apps.length) {
+		if (ArrayUtils.isEmpty(apps)) {
 			apps = new GeneralApp[] { new GccApp(res),
 					new WhereYouGoApp(res) };
 		}

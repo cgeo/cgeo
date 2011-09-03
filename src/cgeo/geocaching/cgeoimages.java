@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap.CompressFormat;
@@ -92,7 +94,7 @@ public class cgeoimages extends AbstractActivity {
 
 						((TextView) rowView.findViewById(R.id.title)).setText(Html.fromHtml(img.title));
 
-						if (img.description != null && img.description.length() > 0) {
+						if (StringUtils.isNotBlank(img.description)) {
 							final TextView descView = (TextView) rowView.findViewById(R.id.description);
 							descView.setText(Html.fromHtml(img.description), TextView.BufferType.SPANNABLE);
 							descView.setVisibility(View.VISIBLE);

@@ -46,6 +46,8 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -67,6 +69,7 @@ import android.util.Log;
 import android.widget.EditText;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.files.LocParser;
+import cgeo.geocaching.utils.CollectionUtils;
 
 public class cgBase {
 
@@ -461,7 +464,7 @@ public class cgBase {
 	 * put viewstates into request parameters
 	 */
 	private static void setViewstates(String[] viewstates, HashMap<String, String> params) {
-		if (viewstates == null  ||  viewstates.length == 0)
+		if (ArrayUtils.isEmpty(viewstates))
 			return;
 		params.put("__VIEWSTATE", viewstates[0]);
 		if (viewstates.length > 1) {
@@ -479,21 +482,6 @@ public class cgBase {
 		setViewstates(getViewstates(page), params);
 	}
 
-	/**
-	 * checks if an Array of Strings is empty or not. Empty means:
-	 *  - Array is null
-	 *  - or all elements are null or empty strings
-	 */
-	public static boolean isEmpty(String[] a) {
-	    if (a == null)
-	        return  true;
-
-	    for (String s: a)
-	        if (s != null  &&  s.length() > 0)
-	            return  false;
-
-	    return  true;
-	}
 
 	public class loginThread extends Thread {
 
@@ -519,7 +507,7 @@ public class cgBase {
 
 		loginResponse = request(true, host, path, "GET", new HashMap<String, String>(), false, false, false);
 		loginData = loginResponse.getData();
-		if (loginData != null && loginData.length() > 0) {
+		if (StringUtils.isNotBlank(loginData)) {
 			if (checkLogin(loginData)) {
 				Log.i(cgSettings.tag, "Already logged in Geocaching.com as " + loginStart.get("username"));
 
@@ -530,7 +518,7 @@ public class cgBase {
 
 			viewstates = getViewstates(loginData);
 
-			if (isEmpty(viewstates)) {
+			if (ArrayUtils.isEmpty(viewstates)) {
 				Log.e(cgSettings.tag, "cgeoBase.login: Failed to find viewstates");
 				return -1; // no viewstates
 			}
@@ -542,7 +530,7 @@ public class cgBase {
 		final HashMap<String, String> login = settings.getLogin();
 		final HashMap<String, String> params = new HashMap<String, String>();
 
-		if (login == null || login.get("username") == null || login.get("username").length() == 0 || login.get("password") == null || login.get("password").length() == 0) {
+		if (login == null || StringUtils.isEmpty(login.get("username")) || StringUtils.isEmpty(login.get("password"))) {
 			Log.e(cgSettings.tag, "cgeoBase.login: No login information stored");
 			return -3;
 		}
@@ -560,7 +548,7 @@ public class cgBase {
 		loginResponse = request(true, host, path, "POST", params, false, false, false);
 		loginData = loginResponse.getData();
 
-		if (loginData != null && loginData.length() > 0) {
+		if (StringUtils.isNotBlank(loginData)) {
 			if (checkLogin(loginData)) {
 				Log.i(cgSettings.tag, "Successfully logged in Geocaching.com as " + login.get("username"));
 
@@ -595,7 +583,7 @@ public class cgBase {
 	}
 
 	public static Boolean checkLogin(String page) {
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.checkLogin: No page given");
 			return false;
 		}
@@ -628,7 +616,7 @@ public class cgBase {
 	}
 
 	public cgCacheWrap parseSearch(cgSearchThread thread, String url, String page, boolean showCaptcha) {
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.parseSearch: No page given");
 			return null;
 		}
@@ -669,7 +657,7 @@ public class cgBase {
 				if (recaptchaJsParam != null) {
 					final String recaptchaJs = request(false, "www.google.com", "/recaptcha/api/challenge", "GET", "k=" + urlencode_rfc3986(recaptchaJsParam.trim()), 0, true).getData();
 
-					if (recaptchaJs != null && recaptchaJs.length() > 0) {
+					if (StringUtils.isNotBlank(recaptchaJs)) {
 						final Matcher matcherRecaptchaChallenge = patternRecaptchaChallenge.matcher(recaptchaJs);
 						while (matcherRecaptchaChallenge.find()) {
 							if (matcherRecaptchaChallenge.groupCount() > 0) {
@@ -683,7 +671,7 @@ public class cgBase {
 				Log.w(cgSettings.tag, "cgeoBase.parseSearch: Failed to parse recaptcha challenge");
 			}
 
-			if (thread != null && recaptchaChallenge != null && recaptchaChallenge.length() > 0) {
+			if (thread != null && StringUtils.isNotBlank(recaptchaChallenge)) {
 				thread.setChallenge(recaptchaChallenge);
 				thread.notifyNeed();
 			}
@@ -821,7 +809,7 @@ public class cgBase {
 				Log.w(cgSettings.tag, "cgeoBase.parseSearch: Failed to parse cache inventory (1)");
 			}
 
-			if (inventoryPre != null && inventoryPre.trim().length() > 0) {
+			if (StringUtils.isNotBlank(inventoryPre)) {
 				try {
 					final Matcher matcherTbsInside = patternTbsInside.matcher(inventoryPre);
 					while (matcherTbsInside.find()) {
@@ -923,7 +911,7 @@ public class cgBase {
 			recaptchaText = thread.getText();
 		}
 
-		if (cids.size() > 0 && (recaptchaChallenge == null || (recaptchaChallenge != null && recaptchaText != null && recaptchaText.length() > 0))) {
+		if (cids.size() > 0 && (recaptchaChallenge == null || (recaptchaChallenge != null && StringUtils.isNotBlank(recaptchaText)))) {
 			Log.i(cgSettings.tag, "Trying to get .loc for " + cids.size() + " caches");
 
 			try {
@@ -932,7 +920,7 @@ public class cgBase {
 				final String path = "/seek/nearest.aspx";
 				final StringBuilder params = new StringBuilder();
 				params.append("__EVENTTARGET=&__EVENTARGUMENT=");
-				if (caches.viewstates != null  &&  caches.viewstates.length > 0) {
+				if (ArrayUtils.isNotEmpty(caches.viewstates)) {
 					params.append("&__VIEWSTATE=");
 					params.append(urlencode_rfc3986(caches.viewstates[0]));
 					if (caches.viewstates.length > 1) {
@@ -948,7 +936,7 @@ public class cgBase {
 					params.append(urlencode_rfc3986(cid));
 				}
 
-				if (recaptchaChallenge != null && recaptchaText != null && recaptchaText.length() > 0) {
+				if (recaptchaChallenge != null &&  StringUtils.isNotBlank(recaptchaText)) {
 					params.append("&recaptcha_challenge_field=");
 					params.append(urlencode_rfc3986(recaptchaChallenge));
 					params.append("&recaptcha_response_field=");
@@ -958,7 +946,7 @@ public class cgBase {
 
 				final String coordinates = request(false, host, path, "POST", params.toString(), 0, true).getData();
 
-				if (coordinates != null && coordinates.length() > 0) {
+				if ( StringUtils.isNotBlank(coordinates)) {
 					if (coordinates.indexOf("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com") > -1) {
 						Log.i(cgSettings.tag, "User has not agreed to the license agreement. Can\'t download .loc file.");
 
@@ -991,7 +979,7 @@ public class cgBase {
 			try {
 				final HashMap<String, cgRating> ratings = getRating(guids, null);
 
-				if (ratings != null) {
+				if (CollectionUtils.isNotEmpty(ratings)) {
 					// save found cache coordinates
 					for (cgCache oneCache : caches.cacheList) {
 						if (ratings.containsKey(oneCache.guid)) {
@@ -1012,7 +1000,7 @@ public class cgBase {
 	}
 
 	public static cgCacheWrap parseMapJSON(String url, String data) {
-		if (data == null || data.length() == 0) {
+		if (StringUtils.isEmpty(data)) {
 			Log.e(cgSettings.tag, "cgeoBase.parseMapJSON: No page given");
 			return null;
 		}
@@ -1024,14 +1012,14 @@ public class cgBase {
 			final JSONObject yoDawg = new JSONObject(data);
 			final String json = yoDawg.getString("d");
 
-			if (json == null || json.length() == 0) {
+			if (StringUtils.isBlank(json)) {
 				Log.e(cgSettings.tag, "cgeoBase.parseMapJSON: No JSON inside JSON");
 				return null;
 			}
 
 			final JSONObject dataJSON = new JSONObject(json);
 			final JSONObject extra = dataJSON.getJSONObject("cs");
-			if (extra != null && extra.length() > 0) {
+			if ( StringUtils.isNotBlank(data)) {
 				int count = extra.getInt("count");
 
 				if (count > 0 && extra.has("cc")) {
@@ -1096,7 +1084,7 @@ public class cgBase {
 	}
 
 	public cgCacheWrap parseCache(String page, int reason) {
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.parseCache: No page given");
 			return null;
 		}
@@ -1218,7 +1206,7 @@ public class cgBase {
 
 		tableInside = tableInside.substring(0, pos);
 
-		if (tableInside != null && tableInside.length() > 0) {
+		if (StringUtils.isNotBlank(tableInside)) {
 			// cache terrain
 			try {
 				final Matcher matcherTerrain = patternTerrain.matcher(tableInside);
@@ -1518,7 +1506,7 @@ public class cgBase {
 				if (matcherInventory.groupCount() > 1) {
 					final String inventoryPre = matcherInventory.group(2);
 
-					if (inventoryPre != null && inventoryPre.length() > 0) {
+					if (StringUtils.isNotBlank(inventoryPre)) {
 						final Matcher matcherInventoryInside = patternInventoryInside.matcher(inventoryPre);
 
 						while (matcherInventoryInside.find()) {
@@ -1553,11 +1541,9 @@ public class cgBase {
 					String typeStr = matcherLog.group(1);
 					String countStr = matcherLog.group(2);
 
-					if (typeStr != null
-					        && typeStr.length() > 0
+					if (StringUtils.isNotBlank(typeStr)
 					        && logTypes.containsKey(typeStr.toLowerCase())
-					        && countStr != null
-					        && countStr.length() > 0)
+					        && StringUtils.isNotBlank(countStr))
 					{
 					    cache.logCounts.put(logTypes.get(typeStr.toLowerCase()), Integer.parseInt(countStr));
 					}
@@ -1713,8 +1699,16 @@ public class cgBase {
 					// waypoint name
 					try {
 						final Matcher matcherWpName = patternWpName.matcher(wp[6]);
+						while (matcherWpName.find()) {
+							if (matcherWpName.groupCount() > 0) {
+								waypoint.name = matcherWpName.group(1);
+								if (StringUtils.isNotBlank(waypoint.name)) {
+									waypoint.name = waypoint.name.trim();
+								}
+							}
 						if (matcherWpName.find() && matcherWpName.groupCount() > 0) {
 							waypoint.name = matcherWpName.group(1).trim();
+							}
 						}
 					} catch (Exception e) {
 						// failed to parse name
@@ -1784,13 +1778,13 @@ public class cgBase {
 	}
 
 	private static void checkFields(cgCache cache) {
-		if (cache.geocode == null || cache.geocode.length() == 0) {
+	    if (StringUtils.isEmpty(cache.geocode)) {
 			Log.w(cgSettings.tag, "geo code not parsed correctly");
 		}
-		if (cache.name == null || cache.name.length() == 0) {
+	    if (StringUtils.isEmpty(cache.name)) {
 			Log.w(cgSettings.tag, "name not parsed correctly");
 		}
-		if (cache.guid == null || cache.guid.length() == 0) {
+	    if (StringUtils.isEmpty(cache.guid)) {
 			Log.w(cgSettings.tag, "guid not parsed correctly");
 		}
 		if (cache.terrain == null || cache.terrain == 0.0) {
@@ -1799,10 +1793,10 @@ public class cgBase {
 		if (cache.difficulty == null || cache.difficulty == 0.0) {
 			Log.w(cgSettings.tag, "difficulty not parsed correctly");
 		}
-		if (cache.owner == null || cache.owner.length() == 0) {
+		if (StringUtils.isEmpty(cache.owner)) {
 			Log.w(cgSettings.tag, "owner not parsed correctly");
 		}
-		if (cache.ownerReal == null || cache.ownerReal.length() == 0) {
+		if (StringUtils.isEmpty(cache.ownerReal)) {
 			Log.w(cgSettings.tag, "owner real not parsed correctly");
 		}
 		if (cache.hidden == null) {
@@ -1811,10 +1805,10 @@ public class cgBase {
 		if (cache.favouriteCnt == null) {
 			Log.w(cgSettings.tag, "favoriteCount not parsed correctly");
 		}
-		if (cache.size == null || cache.size.length() == 0) {
+		if (StringUtils.isEmpty(cache.size)) {
 			Log.w(cgSettings.tag, "size not parsed correctly");
 		}
-		if (cache.type == null || cache.type.length() == 0) {
+		if (StringUtils.isNotBlank(cache.type)) {
 			Log.w(cgSettings.tag, "type not parsed correctly");
 		}
 		if (cache.latitude == null) {
@@ -1823,7 +1817,7 @@ public class cgBase {
 		if (cache.longitude == null) {
 			Log.w(cgSettings.tag, "longitude not parsed correctly");
 		}
-		if (cache.location == null || cache.location.length() == 0) {
+		if (StringUtils.isEmpty(cache.location)) {
 			Log.w(cgSettings.tag, "location not parsed correctly");
 		}
 	}
@@ -1841,7 +1835,7 @@ public class cgBase {
 	public Date parseGcCustomDate(String input)
 	throws ParseException
 	{
-		if (input == null)
+		if (StringUtils.isBlank(input))
 		{
 		    throw new ParseException("Input is null", 0);
 		}
@@ -1891,10 +1885,10 @@ public class cgBase {
 		ArrayList<String> guids = null;
 		ArrayList<String> geocodes = null;
 
-		if (guid != null && guid.length() > 0) {
+		if (StringUtils.isNotBlank(guid)) {
 			guids = new ArrayList<String>();
 			guids.add(guid);
-		} else if (geocode != null && geocode.length() > 0) {
+		} else if (StringUtils.isNotBlank(geocode)) {
 			geocodes = new ArrayList<String>();
 			geocodes.add(geocode);
 		} else {
@@ -1927,7 +1921,7 @@ public class cgBase {
 					params.put("password", login.get("password"));
 				}
 			}
-			if (guids != null && guids.size() > 0) {
+			if (CollectionUtils.isNotEmpty(guids)) {
 				params.put("cacheIds", implode(",", guids.toArray()));
 			} else {
 				params.put("waypoints", implode(",", geocodes.toArray()));
@@ -2019,7 +2013,7 @@ public class cgBase {
 					}
 				}
 
-				if (guid != null) {
+				if (StringUtils.isNotBlank(guid)) {
 					ratings.put(guid, rating);
 				}
 			}
@@ -2031,7 +2025,7 @@ public class cgBase {
 	}
 
 	public cgTrackable parseTrackable(String page) {
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.parseTrackable: No page given");
 			return null;
 		}
@@ -2083,7 +2077,7 @@ public class cgBase {
 		}
 
 		// trackable type
-		if (trackable.name != null && trackable.name.length() > 0) {
+		if (StringUtils.isNotBlank(trackable.name)) {
 			try {
 				final Matcher matcherType = PATTERN_TRACKABLE_Type.matcher(page);
 				if (matcherType.find() && matcherType.groupCount() > 0) {
@@ -2268,7 +2262,7 @@ public class cgBase {
 	}
 
 	public static ArrayList<Integer> parseTypes(String page) {
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isEmpty(page)) {
 			return null;
 		}
 
@@ -2302,7 +2296,7 @@ public class cgBase {
 	}
 
 	public static ArrayList<cgTrackableLog> parseTrackableLog(String page) {
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isEmpty(page)) {
 			return null;
 		}
 
@@ -2384,7 +2378,7 @@ public class cgBase {
 	}
 
 	public static String stripParagraphs(String text) {
-		if (text == null) {
+		if (StringUtils.isBlank(text)) {
 			return "";
 		}
 
@@ -2400,7 +2394,7 @@ public class cgBase {
 	}
 
 	public static String stripTags(String text) {
-		if (text == null) {
+		if (StringUtils.isBlank(text)) {
 			return "";
 		}
 
@@ -2410,28 +2404,6 @@ public class cgBase {
 		matcherP.replaceAll(" ");
 
 		return text.trim();
-	}
-
-	public static String capitalizeSentence(String sentence) {
-		if (sentence == null) {
-			return "";
-		}
-
-		final String[] word = sentence.split(" ");
-
-		for (int i = 0; i < word.length; i++) {
-			word[i] = capitalizeWord(word[i]);
-		}
-
-		return implode(" ", word);
-	}
-
-	public static String capitalizeWord(String word) {
-		if (word.length() == 0) {
-			return word;
-		}
-
-		return (word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase());
 	}
 
 	public static Double parseDistance(String dst) {
@@ -2769,12 +2741,12 @@ public class cgBase {
 		cgCacheWrap caches = new cgCacheWrap();
 		String url = app.getUrl(searchId);
 
-		if (url == null || url.length() == 0) {
+		if (StringUtils.isBlank(url)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByNextPage: No url found");
 			return searchId;
 		}
 
-		if (isEmpty(viewstates)) {
+		if (ArrayUtils.isEmpty(viewstates)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByNextPage: No viewstate given");
 			return searchId;
 		}
@@ -2823,7 +2795,7 @@ public class cgBase {
 			}
 		}
 
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByNextPage: No data from server");
 			return searchId;
 		}
@@ -2854,13 +2826,13 @@ public class cgBase {
 		String geocode = parameters.get("geocode");
 		String guid = parameters.get("guid");
 
-		if ((geocode == null || geocode.length() == 0) && ((guid == null || guid.length() == 0))) {
+		if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByGeocode: No geocode nor guid given");
 			return null;
 		}
 
 		if (forceReload == false && reason == 0 && (app.isOffline(geocode, guid) || app.isThere(geocode, guid, true, true))) {
-			if ((geocode == null || geocode.length() == 0) && guid != null && guid.length() > 0) {
+			if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
 				geocode = app.getGeocode(guid);
 			}
 
@@ -2880,9 +2852,9 @@ public class cgBase {
 		final String path = "/seek/cache_details.aspx";
 		final String method = "GET";
 		final HashMap<String, String> params = new HashMap<String, String>();
-		if (geocode != null && geocode.length() > 0) {
+		if (StringUtils.isNotBlank(geocode)) {
 			params.put("wp", geocode);
-		} else if (guid != null && guid.length() > 0) {
+		} else if (StringUtils.isNotBlank(guid)) {
 			params.put("guid", guid);
 		}
 		params.put("decrypt", "y");
@@ -2891,9 +2863,9 @@ public class cgBase {
 
 		String page = requestLogged(false, host, path, method, params, false, false, false);
 
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isEmpty(page)) {
 			if (app.isThere(geocode, guid, true, false)) {
-				if ((geocode == null || geocode.length() == 0) && guid != null && guid.length() > 0) {
+				if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
 					Log.i(cgSettings.tag, "Loading old cache from cache.");
 
 					geocode = app.getGeocode(guid);
@@ -2918,10 +2890,10 @@ public class cgBase {
 
 		final cgCacheWrap caches = parseCache(page, reason);
 		if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
-			if (caches != null && caches.error != null && caches.error.length() > 0) {
+			if (caches != null && StringUtils.isNotBlank(caches.error)) {
 				search.error = caches.error;
 			}
-			if (caches != null && caches.url != null && caches.url.length() > 0) {
+			if (caches != null && StringUtils.isNotBlank(caches.url)) {
 				search.url = caches.url;
 			}
 
@@ -2938,10 +2910,10 @@ public class cgBase {
 
 		final ArrayList<cgCache> cacheList = new ArrayList<cgCache>();
 		if (caches != null) {
-			if (caches.error != null && caches.error.length() > 0) {
+			if (StringUtils.isNotBlank(caches.error)) {
 				search.error = caches.error;
 			}
-			if (caches.url != null && caches.url.length() > 0) {
+			if (StringUtils.isNotBlank(caches.url)) {
 				search.url = caches.url;
 			}
 			search.viewstates = caches.viewstates;
@@ -3016,17 +2988,17 @@ public class cgBase {
 		cgCacheWrap caches = new cgCacheWrap();
 		String cacheType = parameters.get("cachetype");
 
-		if (latitude == null || latitude.length() == 0) {
+		if (StringUtils.isBlank(latitude)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByCoords: No latitude given");
 			return null;
 		}
 
-		if (longitude == null || longitude.length() == 0) {
+		if (StringUtils.isBlank(longitude)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByCoords: No longitude given");
 			return null;
 		}
 
-		if (cacheType != null && cacheType.length() == 0) {
+		if (StringUtils.isBlank(latitude)) {
 			cacheType = null;
 		}
 
@@ -3045,7 +3017,7 @@ public class cgBase {
 		final String url = "http://" + host + path + "?" + prepareParameters(params, false, true);
 		String page = requestLogged(false, host, path, method, params, false, false, true);
 
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByCoords: No data from server");
 			return null;
 		}
@@ -3062,10 +3034,10 @@ public class cgBase {
 
 		final ArrayList<cgCache> cacheList = new ArrayList<cgCache>();
 		if (caches != null) {
-			if (caches.error != null && caches.error.length() > 0) {
+			if (StringUtils.isNotBlank(caches.error)) {
 				search.error = caches.error;
 			}
-			if (caches.url != null && caches.url.length() > 0) {
+			if (StringUtils.isNotBlank(caches.url)) {
 				search.url = caches.url;
 			}
 			search.viewstates = caches.viewstates;
@@ -3090,12 +3062,12 @@ public class cgBase {
 		cgCacheWrap caches = new cgCacheWrap();
 		String cacheType = parameters.get("cachetype");
 
-		if (keyword == null || keyword.length() == 0) {
+		if (StringUtils.isBlank(keyword)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByKeyword: No keyword given");
 			return null;
 		}
 
-		if (cacheType != null && cacheType.length() == 0) {
+		if (StringUtils.isBlank(cacheType)) {
 			cacheType = null;
 		}
 
@@ -3113,7 +3085,7 @@ public class cgBase {
 		final String url = "http://" + host + path + "?" + prepareParameters(params, false, true);
 		String page = requestLogged(false, host, path, method, params, false, false, true);
 
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByKeyword: No data from server");
 			return null;
 		}
@@ -3130,10 +3102,10 @@ public class cgBase {
 
 		final ArrayList<cgCache> cacheList = new ArrayList<cgCache>();
 		if (caches != null) {
-			if (caches.error != null && caches.error.length() > 0) {
+			if (StringUtils.isNotBlank(caches.error)) {
 				search.error = caches.error;
 			}
-			if (caches.url != null && caches.url.length() > 0) {
+			if (StringUtils.isNotBlank(caches.url)) {
 				search.url = caches.url;
 			}
 			search.viewstates = caches.viewstates;
@@ -3158,12 +3130,12 @@ public class cgBase {
 		cgCacheWrap caches = new cgCacheWrap();
 		String cacheType = parameters.get("cachetype");
 
-		if (userName == null || userName.length() == 0) {
+		if (StringUtils.isBlank(userName)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByUsername: No user name given");
 			return null;
 		}
 
-		if (cacheType != null && cacheType.length() == 0) {
+		if (StringUtils.isBlank(cacheType)) {
 			cacheType = null;
 		}
 
@@ -3187,7 +3159,7 @@ public class cgBase {
 		final String url = "http://" + host + path + "?" + prepareParameters(params, my, true);
 		String page = requestLogged(false, host, path, method, params, false, my, true);
 
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByUsername: No data from server");
 			return null;
 		}
@@ -3198,16 +3170,16 @@ public class cgBase {
 		}
 
 		if (app == null) {
-			Log.e(cgSettings.tag, "cgeoBase.searchByCoords: No application found");
+			Log.e(cgSettings.tag, "cgeoBase.searchByUsername: No application found");
 			return null;
 		}
 
 		final ArrayList<cgCache> cacheList = new ArrayList<cgCache>();
 		if (caches != null) {
-			if (caches.error != null && caches.error.length() > 0) {
+			if (StringUtils.isNotBlank(caches.error)) {
 				search.error = caches.error;
 			}
-			if (caches.url != null && caches.url.length() > 0) {
+			if (StringUtils.isNotBlank(caches.url)) {
 				search.url = caches.url;
 			}
 			search.viewstates = caches.viewstates;
@@ -3232,12 +3204,12 @@ public class cgBase {
 		cgCacheWrap caches = new cgCacheWrap();
 		String cacheType = parameters.get("cachetype");
 
-		if (userName == null || userName.length() == 0) {
+		if (StringUtils.isBlank(userName)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByOwner: No user name given");
 			return null;
 		}
 
-		if (cacheType != null && cacheType.length() == 0) {
+		if (StringUtils.isBlank(cacheType)) {
 			cacheType = null;
 		}
 
@@ -3255,7 +3227,7 @@ public class cgBase {
 		final String url = "http://" + host + path + "?" + prepareParameters(params, false, true);
 		String page = requestLogged(false, host, path, method, params, false, false, true);
 
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByOwner: No data from server");
 			return null;
 		}
@@ -3272,10 +3244,10 @@ public class cgBase {
 
 		final ArrayList<cgCache> cacheList = new ArrayList<cgCache>();
 		if (caches != null) {
-			if (caches.error != null && caches.error.length() > 0) {
+			if (StringUtils.isNotBlank(caches.error)) {
 				search.error = caches.error;
 			}
-			if (caches.url != null && caches.url.length() > 0) {
+			if (StringUtils.isNotBlank(caches.url)) {
 				search.url = caches.url;
 			}
 			search.viewstates = caches.viewstates;
@@ -3311,7 +3283,7 @@ public class cgBase {
 
 		String page = null;
 
-		if (latMin == null || latMin.length() == 0 || latMax == null || latMax.length() == 0 || lonMin == null || lonMin.length() == 0 || lonMax == null || lonMax.length() == 0) {
+		if (StringUtils.isBlank(latMin) || StringUtils.isBlank(latMax) || StringUtils.isBlank(lonMin) || StringUtils.isBlank(lonMax)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByViewport: Not enough parameters to recognize viewport");
 			return null;
 		}
@@ -3324,7 +3296,7 @@ public class cgBase {
 		final String url = "http://" + host + path + "?" + params;
 		page = requestJSONgc(host, path, params);
 
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByViewport: No data from server");
 			return null;
 		}
@@ -3341,16 +3313,16 @@ public class cgBase {
 
 		final ArrayList<cgCache> cacheList = new ArrayList<cgCache>();
 		if (caches != null) {
-			if (caches.error != null && caches.error.length() > 0) {
+			if (StringUtils.isNotBlank(caches.error)) {
 				search.error = caches.error;
 			}
-			if (caches.url != null && caches.url.length() > 0) {
+			if (StringUtils.isNotBlank(caches.url)) {
 				search.url = caches.url;
 			}
 			search.viewstates = caches.viewstates;
 			search.totalCnt = caches.totalCnt;
 
-			if (caches.cacheList != null && caches.cacheList.size() > 0) {
+			if (CollectionUtils.isNotEmpty(caches.cacheList)) {
 				for (cgCache cache : caches.cacheList) {
 					if ((settings.excludeDisabled == 0 || (settings.excludeDisabled == 1 && cache.disabled == false))
 							&& (settings.excludeMine == 0 || (settings.excludeMine == 1 && cache.own == false))
@@ -3391,7 +3363,7 @@ public class cgBase {
 
 		final String data = request(false, host, path, method, params, false, false, false).getData();
 
-		if (data == null || data.length() == 0) {
+		if (StringUtils.isBlank(data)) {
 			Log.e(cgSettings.tag, "cgeoBase.getGeocachersInViewport: No data from server");
 			return null;
 		}
@@ -3438,7 +3410,7 @@ public class cgBase {
 		final String id = parameters.get("id");
 		cgTrackable trackable = new cgTrackable();
 
-		if ((geocode == null || geocode.length() == 0) && (guid == null || guid.length() == 0) && (id == null || id.length() == 0)) {
+		if (StringUtils.isBlank(geocode) || StringUtils.isBlank(guid) || StringUtils.isBlank(id))  {
 			Log.e(cgSettings.tag, "cgeoBase.searchTrackable: No geocode nor guid nor id given");
 			return null;
 		}
@@ -3447,17 +3419,17 @@ public class cgBase {
 		final String path = "/track/details.aspx";
 		final String method = "GET";
 		final HashMap<String, String> params = new HashMap<String, String>();
-		if (geocode != null && geocode.length() > 0) {
+		if (StringUtils.isNotBlank(geocode)) {
 			params.put("tracker", geocode);
-		} else if (guid != null && guid.length() > 0) {
+		} else if (StringUtils.isNotBlank(guid)) {
 			params.put("guid", guid);
-		} else if (id != null && id.length() > 0) {
+		} else if (StringUtils.isNotBlank(id)) {
 			params.put("id", id);
 		}
 
 		String page = requestLogged(false, host, path, method, params, false, false, false);
 
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchTrackable: No data from server");
 			return trackable;
 		}
@@ -3473,7 +3445,7 @@ public class cgBase {
 
 	public int postLog(cgeoapplication app, String geocode, String cacheid, String[] viewstates,
 			int logType, int year, int month, int day, String log, ArrayList<cgTrackableLog> trackables) {
-		if (isEmpty(viewstates)) {
+		if (ArrayUtils.isEmpty(viewstates)) {
 			Log.e(cgSettings.tag, "cgeoBase.postLog: No viewstate given");
 			return 1000;
 		}
@@ -3483,7 +3455,7 @@ public class cgBase {
 			return 1000;
 		}
 
-		if (log == null || log.length() == 0) {
+		if (StringUtils.isBlank(log)) {
 			Log.e(cgSettings.tag, "cgeoBase.postLog: No log text given");
 			return 1001;
 		}
@@ -3557,7 +3529,7 @@ public class cgBase {
 			}
 		}
 
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.postLog: No data from server");
 			return 1002;
 		}
@@ -3570,7 +3542,7 @@ public class cgBase {
 			if (matcher.find() && matcher.groupCount() > 0) {
 				final String[] viewstatesConfirm = getViewstates(page);
 
-				if (isEmpty(viewstatesConfirm)) {
+				if (ArrayUtils.isEmpty(viewstatesConfirm)) {
 					Log.e(cgSettings.tag, "cgeoBase.postLog: No viewstate for confirm log");
 					return 1000;
 				}
@@ -3635,7 +3607,7 @@ public class cgBase {
 
 	public int postLogTrackable(String tbid, String trackingCode, String[] viewstates,
 			int logType, int year, int month, int day, String log) {
-		if (isEmpty(viewstates)) {
+		if (ArrayUtils.isEmpty(viewstates)) {
 			Log.e(cgSettings.tag, "cgeoBase.postLogTrackable: No viewstate given");
 			return 1000;
 		}
@@ -3645,7 +3617,7 @@ public class cgBase {
 			return 1000;
 		}
 
-		if (log == null || log.length() == 0) {
+		if (StringUtils.isBlank(log)) {
 			Log.e(cgSettings.tag, "cgeoBase.postLogTrackable: No log text given");
 			return 1001;
 		}
@@ -3689,7 +3661,7 @@ public class cgBase {
 			}
 		}
 
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.postLogTrackable: No data from server");
 			return 1002;
 		}
@@ -3719,7 +3691,7 @@ public class cgBase {
         String page = requestLogged(false, "www.geocaching.com", "/my/watchlist.aspx?w=" + cache.cacheid,
                 "POST", null, false, false, false);
 
-        if (page == null || page.length() == 0) {
+        if (StringUtils.isBlank(page)) {
             Log.e(cgSettings.tag, "cgBase.addToWatchlist: No data from server");
             return -1;  // error
         }
@@ -3747,7 +3719,7 @@ public class cgBase {
 
 	    String page = requestLogged(false, host, path, method, null, false, false, false);
 
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgBase.removeFromWatchlist: No data from server");
 			return -1; // error
 		}
@@ -3828,7 +3800,7 @@ public class cgBase {
 		if (app == null) {
 			return;
 		}
-		if (settings == null || settings.tokenPublic == null || settings.tokenPublic.length() == 0 || settings.tokenSecret == null || settings.tokenSecret.length() == 0) {
+		if (settings == null || StringUtils.isBlank(settings.tokenPublic) || StringUtils.isNotBlank(settings.tokenSecret)) {
 			return;
 		}
 
@@ -4213,7 +4185,7 @@ public class cgBase {
 					response = request(secureRedir, newLocation.getHost(), newLocation.getPath(), "GET", new HashMap<String, String>(), requestId, false, false, false);
 				}
 			} else {
-				if (buffer != null && buffer.length() > 0) {
+				if (StringUtils.isNotBlank(buffer)) {
 					replaceWhitespace(buffer);
 					String data = buffer.toString();
 					buffer = null;
@@ -4273,7 +4245,7 @@ public class cgBase {
 		if (cookiesDone == null) {
 			Map<String, ?> prefsValues = prefs.getAll();
 
-			if (prefsValues != null && prefsValues.size() > 0) {
+			if (CollectionUtils.isNotEmpty(prefsValues)) {
 				final Set<? extends Map.Entry<String, ?>> entrySet = prefsValues.entrySet();
 				final ArrayList<String> cookiesEncoded = new ArrayList<String>();
 
@@ -4561,7 +4533,7 @@ public class cgBase {
 				Log.e(cgSettings.tag, "cgeoBase.requestJSON: " + e.toString());
 			}
 
-			if (buffer != null && buffer.length() > 0) {
+			if (StringUtils.isNotBlank(buffer)) {
 				break;
 			}
 
@@ -4680,13 +4652,13 @@ public class cgBase {
 			// get cache details, they may not yet be complete
 			if (cache != null) {
 				// only reload the cache, if it was already stored or has not all details (by checking the description)
-				if (cache.reason > 0 || cache.description == null || cache.description.length() == 0) {
+				if (cache.reason > 0 || StringUtils.isBlank(cache.description)) {
 					final HashMap<String, String> params = new HashMap<String, String>();
 					params.put("geocode", cache.geocode);
 					final Long searchId = searchByGeocode(params, listId, false);
 					cache = app.getCache(searchId);
 				}
-			} else if (geocode != null) {
+			} else if (StringUtils.isNotBlank(geocode)) {
 				final HashMap<String, String> params = new HashMap<String, String>();
 				params.put("geocode", geocode);
 				final Long searchId = searchByGeocode(params, listId, false);
@@ -4704,12 +4676,12 @@ public class cgBase {
 			final cgHtmlImg imgGetter = new cgHtmlImg(activity, cache.geocode, false, listId, true);
 
 			// store images from description
-			if (cache.description != null) {
+			if (StringUtils.isNotBlank(cache.description)) {
 				Html.fromHtml(cache.description, imgGetter, null);
 			}
 
 			// store spoilers
-			if (cache.spoilers != null && cache.spoilers.isEmpty() == false) {
+			if (CollectionUtils.isNotEmpty(cache.spoilers)) {
 				for (cgImage oneSpoiler : cache.spoilers) {
 					imgGetter.getDrawable(oneSpoiler.url);
 				}
@@ -4718,7 +4690,7 @@ public class cgBase {
 			// store images from logs
 			if (settings.storelogimages) {
 				for (cgLog log : cache.logs) {
-					if (log.logImages != null && log.logImages.isEmpty() == false) {
+					if (CollectionUtils.isNotEmpty(log.logImages)) {
 						for (cgImage oneLogImg : log.logImages) {
 							imgGetter.getDrawable(oneLogImg.url);
 						}
@@ -4949,7 +4921,7 @@ public class cgBase {
 		String iconTxt = null;
 
 		if (cache) {
-			if (type != null && type.length() > 0) {
+			if (StringUtils.isNotBlank(type)) {
 				if (own) {
 					iconTxt = type + "-own";
 				} else if (found) {
@@ -4969,7 +4941,7 @@ public class cgBase {
 				icon = gcIcons.get("traditional");
 			}
 		} else {
-			if (type != null && type.length() > 0) {
+			if (StringUtils.isNotBlank(type)) {
 				iconTxt = type;
 			} else {
 				iconTxt = "waypoint";
@@ -5062,6 +5034,7 @@ public class cgBase {
 			gcIcons.put("mystery-disabled", R.drawable.marker_cache_mystery_disabled);
 			gcIcons.put("gchq-disabled", R.drawable.marker_cache_gchq_disabled);
 		}
+
 	}
 
 	public static boolean runNavigation(Activity activity, Resources res, cgSettings settings, Double latitude, Double longitude) {
@@ -5114,7 +5087,7 @@ public class cgBase {
 		final String data = response.getData();
 		String usertoken = null;
 
-		if (data != null && data.length() > 0) {
+		if (StringUtils.isNotBlank(data)) {
 			final Pattern pattern = Pattern.compile("var userToken[^=]*=[^']*'([^']+)';", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 
 			final Matcher matcher = pattern.matcher(data);
@@ -5125,7 +5098,7 @@ public class cgBase {
 			}
 		}
 
-		if (noTokenHandler != null && (usertoken == null || usertoken.length() == 0)) {
+		if (noTokenHandler != null && StringUtils.isBlank(usertoken)) {
 			noTokenHandler.sendEmptyMessage(0);
 		}
 
@@ -5142,7 +5115,7 @@ public class cgBase {
 
 			final String data = requestJSON(host, path, params);
 
-			if (data == null || data.length() == 0) {
+			if (StringUtils.isBlank(data)) {
 				return elv;
 			}
 
