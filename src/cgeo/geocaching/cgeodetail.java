@@ -59,7 +59,7 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.utils.CollectionUtils;
 
 /**
- * Activity to display all details of a cache like owner, difficulty, description etc. 
+ * Activity to display all details of a cache like owner, difficulty, description etc.
  *
  */
 public class cgeodetail extends AbstractActivity {
@@ -103,6 +103,11 @@ public class cgeodetail extends AbstractActivity {
 	 * page and put them into the DB. No icons can be matched for these. */
 	private boolean noAttributeIconsFound = false;
 	private int attributeBoxMaxWidth;
+	/**
+	 * differentiate between whether we are starting the activity for a cache or if we return to the activity from
+	 * another activity that we started in front
+	 */
+	private boolean disableResumeSetView = false;
 
 	private Handler storeCacheHandler = new Handler() {
 		@Override
@@ -295,6 +300,7 @@ public class cgeodetail extends AbstractActivity {
 			}
 		}
 	};
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -376,6 +382,7 @@ public class cgeodetail extends AbstractActivity {
 			// nothing, we lost the window
 		}
 
+		disableResumeSetView = true;
 		threadCache = new loadCache(loadCacheHandler);
 		threadCache.start();
 	}
@@ -396,7 +403,10 @@ public class cgeodetail extends AbstractActivity {
 		if (geo == null) {
 			geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
 		}
-		setView();
+		if (!disableResumeSetView) {
+			setView();
+		}
+		disableResumeSetView = false;
 	}
 
 	@Override
@@ -1723,10 +1733,7 @@ public class cgeodetail extends AbstractActivity {
 
 		@Override
 		public void run() {
-			int reason = 1;
-			if (cache.reason > 1) {
-				reason = cache.reason;
-			}
+			int reason = (cache.reason > 1) ? cache.reason : 1;
 			base.storeCache(app, cgeodetail.this, cache, null, reason, handler);
 		}
 	}

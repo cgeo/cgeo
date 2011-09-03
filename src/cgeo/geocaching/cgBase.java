@@ -4671,12 +4671,15 @@ public class cgBase {
 
 	public void storeCache(cgeoapplication app, Activity activity, cgCache cache, String geocode, int listId, Handler handler) {
 		try {
-			// cache details
+			// get cache details, they may not yet be complete
 			if (cache != null) {
-				final HashMap<String, String> params = new HashMap<String, String>();
-				params.put("geocode", cache.geocode);
-				final Long searchId = searchByGeocode(params, listId, false);
-				cache = app.getCache(searchId);
+				// only reload the cache, if it was already stored or has not all details (by checking the description)
+				if (cache.reason > 0 || cache.description == null || cache.description.length() == 0) {
+					final HashMap<String, String> params = new HashMap<String, String>();
+					params.put("geocode", cache.geocode);
+					final Long searchId = searchByGeocode(params, listId, false);
+					cache = app.getCache(searchId);
+				}
 			} else if (StringUtils.isNotBlank(geocode)) {
 				final HashMap<String, String> params = new HashMap<String, String>();
 				params.put("geocode", geocode);
