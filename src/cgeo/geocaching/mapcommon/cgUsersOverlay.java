@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -109,7 +111,7 @@ public class cgUsersOverlay extends ItemizedOverlayBase implements OverlayBase {
 			dialog.setTitle(user.username);
 			dialog.setMessage(action);
 			dialog.setCancelable(true);
-			if (geocode != null && geocode.length() > 0) {
+			if (StringUtils.isNotBlank(geocode)) {
 				dialog.setPositiveButton(geocode + "?", new cacheDetails(geocode));
 			}
 			dialog.setNeutralButton("Dismiss", new DialogInterface.OnClickListener() {

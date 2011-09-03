@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -225,14 +226,14 @@ public abstract class GPXParser extends FileParser {
 
 			@Override
 			public void end() {
-				if (cache.geocode == null || cache.geocode.length() == 0) {
+				if (StringUtils.isBlank(cache.geocode)) {
 					// try to find geocode somewhere else
 					findGeoCode(name);
 					findGeoCode(desc);
 					findGeoCode(cmt);
 				}
 
-				if (cache.geocode != null && cache.geocode.length() > 0
+				if (StringUtils.isNotBlank(cache.geocode)
 						&& cache.latitude != null && cache.longitude != null
 						&& ((type == null && sym == null)
 						|| (type != null && type.indexOf("geocache") > -1)
@@ -340,7 +341,7 @@ public abstract class GPXParser extends FileParser {
 				final Matcher matcher = patternGuid.matcher(url);
 				if (matcher.matches()) {
 					String guid = matcher.group(1);
-					if (guid.length() > 0) {
+					if (StringUtils.isNotBlank(guid)) {
 						cache.guid = guid;
 					}
 				}
@@ -476,7 +477,7 @@ public abstract class GPXParser extends FileParser {
 
 				@Override
 				public void end(String country) {
-					if (cache.location == null || cache.location.length() == 0) {
+					if (StringUtils.isBlank(cache.location)) {
 						cache.location = validate(country);
 					} else {
 						cache.location = cache.location + ", " + country.trim();
@@ -489,7 +490,7 @@ public abstract class GPXParser extends FileParser {
 
 				@Override
 				public void end(String state) {
-					if (cache.location == null || cache.location.length() == 0) {
+				if (StringUtils.isBlank(cache.location)) {
 						cache.location = validate(state);
 					} else {
 						cache.location = state.trim() + ", " + cache.location;
@@ -549,7 +550,7 @@ public abstract class GPXParser extends FileParser {
 
 				@Override
 				public void end() {
-					if (trackable.geocode != null && trackable.geocode.length() > 0 && trackable.name != null && trackable.name.length() > 0) {
+					if (StringUtils.isNotBlank(trackable.geocode) && StringUtils.isNotBlank(trackable.name)) {
 						if (cache.inventory == null) {
 							cache.inventory = new ArrayList<cgTrackable>();
 						}
@@ -593,7 +594,7 @@ public abstract class GPXParser extends FileParser {
 
 				@Override
 				public void end() {
-					if (log.log != null && log.log.length() > 0) {
+					if (StringUtils.isNotBlank(log.log)) {
 						if (cache.logs == null) {
 							cache.logs = new ArrayList<cgLog>();
 						}
@@ -697,14 +698,14 @@ public abstract class GPXParser extends FileParser {
 			cache.type = knownType;
 		}
 		else {
-			if (cache.type == null || cache.type.length() == 0) {
+			if (StringUtils.isBlank(cache.type)) {
 				cache.type = "mystery"; // default for not recognized types
 			}
 		}
 	}
 
 	private void findGeoCode(final String input) {
-		if (input == null || (cache.geocode != null && cache.geocode.length() != 0)) {
+		if (input == null || StringUtils.isNotBlank(cache.geocode)) {
 			return;
 		}
 		final Matcher matcherGeocode = patternGeocode.matcher(input);
