@@ -68,7 +68,7 @@ public class cgHtmlImg implements Html.ImageGetter {
 		String fileName = null;
 		String fileNameSec = null;
 
-		if (StringUtils.isNotBlank(url)) {
+		if (StringUtils.isBlank(url)) {
 			return null;
 		}
 
