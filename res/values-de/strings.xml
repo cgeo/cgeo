@@ -90,6 +90,15 @@
   <string name="log_stars_4">4 Sterne</string>
   <string name="log_stars_45">4,5 Sterne</string>
   <string name="log_stars_5">5 Sterne</string>
+  <string name="log_stars_1_description">schlecht</string>
+  <string name="log_stars_15_description">lohnt nicht</string>
+  <string name="log_stars_2_description">schwach</string>
+  <string name="log_stars_25_description">ok</string>
+  <string name="log_stars_3_description">durchschnittlich</string>
+  <string name="log_stars_35_description">besser</string>
+  <string name="log_stars_4_description">gut</string>
+  <string name="log_stars_45_description">fast perfekt</string>
+  <string name="log_stars_5_description">großartig</string>
   <string name="log_webcam">Webcam-Foto gemacht</string>
   <string name="log_new_log">Loggen</string>
   <string name="log_new_log_text">Log-Text</string>
@@ -277,6 +286,8 @@
   <string name="caches_sort_vote">Eigene Bewertung</string>
   <string name="caches_sort_inventory">Inventaranzahl</string>
   <string name="caches_sort_date">Datum</string>
+  <string name="caches_sort_finds">Funde</string>
+  <string name="caches_sort_state">Status</string>
   <string name="caches_select">Wähle von Liste</string>
   <string name="caches_select_mode">Auswahlmodus</string>
   <string name="caches_select_mode_exit">Auswahlmodus beenden</string>
@@ -367,7 +378,7 @@
   <string name="init_username">Benutzername</string>
   <string name="init_password">Passwort</string>
   <string name="init_passvote">Passwort</string>
-  <string name="init_login">Anmeldedaten überprüfen</string>
+  <string name="init_login">Anmeldedaten überprüfen &amp; Datumsformat setzen</string>
   <string name="init_login_popup">Login</string>
   <string name="init_login_popup_working">Bei geocaching.com anmelden…</string>
   <string name="init_login_popup_ok">Login erfolgreich.</string>
@@ -384,6 +395,7 @@
   <string name="init_signature_template_button">Platzhalter einfügen</string>
   <string name="init_signature_template_date">Datum</string>
   <string name="init_signature_template_time">Zeit</string>
+  <string name="init_signature_template_datetime">Datum &amp; Zeit</string>
   <string name="init_signature_template_user">Benutzer</string>
   <string name="init_signature_template_number">Nummer</string>
   <string name="init_languages">Übersetzung</string>
@@ -476,6 +488,7 @@
   <string name="cache_offline_time_days">Tagen</string>
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Attribute</string>
+  <string name="cache_attributes_no_icons">(aktualisiere den Cache um die Attribut-Icons anzuzeigen)</string>
   <string name="cache_inventory">Inventar</string>
   <string name="cache_log_offline">Offline-Log</string>
   <string name="cache_log_images_loading">Lade Logbild …</string>

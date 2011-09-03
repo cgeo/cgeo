@@ -76,7 +76,7 @@ public final class ActivityMixin {
 	}
 
 	public final static void setTheme(final Activity activity) {
-		cgSettings settings = new cgSettings(activity, activity.getSharedPreferences(cgSettings.preferences, 0));
+		cgSettings settings = new cgSettings(activity, activity.getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE));
 		if (settings.skin == 1) {
 			activity.setTheme(R.style.light);
 		} else {

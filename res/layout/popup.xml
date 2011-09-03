@@ -6,6 +6,7 @@
 		android:background="?background_color_transparent" >
 	<LinearLayout style="@style/action_bar">
 		<TextView style="@style/action_bar_title" />
+		<View style="@style/action_bar_separator" />
 		<ImageView style="@style/action_bar_action"
 				android:src="@drawable/actionbar_compass"
 				android:onClick="goCompass" />

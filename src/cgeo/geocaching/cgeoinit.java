@@ -1026,7 +1026,12 @@ public class cgeoinit extends AbstractActivity {
 
 				@Override
 				public void run() {
-					logInHandler.sendEmptyMessage(base.login());
+				    final int loginResult = base.login();
+				    if (1 == loginResult)
+				    {
+				        base.detectGcCustomDate();
+				    }
+					logInHandler.sendEmptyMessage(loginResult);
 				}
 			}).start();
 		}

@@ -73,7 +73,7 @@ public class cgeowaypoint extends AbstractActivity {
 					waypoint.setIcon(res, base, identification);
 
 					if (waypoint.latitude != null && waypoint.longitude != null) {
-						coords.setText(Html.fromHtml(cgBase.formatCoordinate(waypoint.latitude, "lat", true) + " | " + cgBase.formatCoordinate(waypoint.longitude, "lon", true)), TextView.BufferType.SPANNABLE);
+						coords.setText(Html.fromHtml(cgBase.formatCoords(waypoint.latitude, waypoint.longitude, true)), TextView.BufferType.SPANNABLE);
 						compass.setVisibility(View.VISIBLE);
 						separator.setVisibility(View.VISIBLE);
 					} else {
@@ -259,15 +259,7 @@ public class cgeowaypoint extends AbstractActivity {
 			showToast(res.getString(R.string.err_location_unknown));
 		}
 
-		cgeocaches cachesActivity = new cgeocaches();
-
-		Intent cachesIntent = new Intent(this, cachesActivity.getClass());
-		cachesIntent.putExtra("type", "coordinate");
-		cachesIntent.putExtra("latitude", waypoint.latitude);
-		cachesIntent.putExtra("longitude", waypoint.longitude);
-		cachesIntent.putExtra("cachetype", settings.cacheType);
-
-		startActivity(cachesIntent);
+		cgeocaches.startActivityCachesAround(this, waypoint.latitude, waypoint.longitude);
 
 		finish();
 	}

@@ -163,10 +163,10 @@ public class cgeocoords extends Dialog {
 				eLat.setVisibility(View.VISIBLE);
 				eLon.setVisibility(View.VISIBLE);
 				if (latitude != null) {
-					eLat.setText(cgBase.formatCoordinate(latitude, "lat", true));
+					eLat.setText(cgBase.formatLatitude(latitude, true));
 				}
 				if (longitude != null) {
-					eLon.setText(cgBase.formatCoordinate(longitude, "lon", true));
+					eLon.setText(cgBase.formatLongitude(longitude, true));
 				}
 				break;
 			case Deg: // DDD.DDDDD°

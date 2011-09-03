@@ -19,6 +19,9 @@ import cgeo.geocaching.mapinterfaces.MapFactory;
 import cgeo.geocaching.mapsforge.mfMapFactory;
 import cgeo.geocaching.utils.CollectionUtils;
 
+/**
+ * General c:geo preferences/settings set by the user
+ */
 public class cgSettings {
 
 	private static final String KEY_WEB_DEVICE_CODE = "webDeviceCode";
@@ -58,6 +61,7 @@ public class cgSettings {
 	private static final String KEY_COORD_INPUT_FORMAT = "coordinputformat";
 	private static final String KEY_LOG_OFFLINE = "log_offline";
 	private static final String KEY_LOAD_DIRECTION_IMG = "loaddirectionimg";
+	private static final String KEY_GC_CUSTOM_DATE = "gccustomdate";
 
 	private interface PrefRunnable {
 		void edit(final Editor edit);
@@ -153,7 +157,7 @@ public class cgSettings {
 	// usable values
 	public static final String tag = "c:geo";
 
-	// preferences file
+	/** Name of the preferences file */
 	public static final String preferences = "cgeo.pref";
 
 	// private variables
@@ -609,5 +613,19 @@ public class cgSettings {
     
     public boolean getLoadDirImg() {
         return prefs.getBoolean(KEY_LOAD_DIRECTION_IMG, true);
+    }
+    
+    void setGcCustomDate(final String format) {
+        editSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putString(KEY_GC_CUSTOM_DATE, format);
+            }
+        });
+    }
+    
+    public String getGcCustomDate() {
+        return prefs.getString(KEY_GC_CUSTOM_DATE, null);
     }
 }

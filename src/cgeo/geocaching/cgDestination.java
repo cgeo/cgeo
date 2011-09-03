@@ -1,13 +1,13 @@
 package cgeo.geocaching;
 
 public class cgDestination {
-	
+
 	private long id;
-	
+
 	private long date;
-	
+
 	private double latitude;
-	
+
 	private double longitude;
 
 	public cgDestination() {
@@ -63,8 +63,9 @@ public class cgDestination {
 			return true;
 		if (obj == null)
 			return false;
-		if (getClass() != obj.getClass())
+		if (!(obj instanceof cgDestination)) {
 			return false;
+		}
 		cgDestination other = (cgDestination) obj;
 		if (Double.doubleToLongBits(latitude) != Double
 				.doubleToLongBits(other.latitude))
@@ -83,5 +84,5 @@ public class cgDestination {
 		this.id = id;
 	}
 
-	
+
 }

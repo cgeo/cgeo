@@ -1,6 +1,7 @@
 package cgeo.geocaching.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -21,11 +22,11 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
 	protected cgBase base = null;
 	protected SharedPreferences prefs = null;
 
-	public AbstractActivity() {
+	protected AbstractActivity() {
 		this(null);
 	}
 
-	public AbstractActivity(final String helpTopic) {
+	protected AbstractActivity(final String helpTopic) {
 		this.helpTopic = helpTopic;
 	}
 
@@ -68,7 +69,7 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
 		// init
 		res = this.getResources();
 		app = (cgeoapplication) this.getApplication();
-		prefs = getSharedPreferences(cgSettings.preferences, 0);
+		prefs = getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE);
 		settings = new cgSettings(this, prefs);
 		base = new cgBase(app, settings, prefs);
 	}
@@ -76,7 +77,7 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
 	final public cgSettings getSettings() {
 		return settings;
 	}
-	
+
 	public void addVisitMenu(Menu menu, cgCache cache) {
 		ActivityMixin.addVisitMenu(this, menu, cache);
 	}

@@ -63,12 +63,12 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 
 				int icon = -1;
 				if (cache != null) {
-					icon = cgBase.getIcon(true, cache.type, cache.own, cache.found,
+					icon = cgBase.getMarkerIcon(true, cache.type, cache.own, cache.found,
 							cache.disabled || cache.archived);
 				} else if (waypoint != null) {
-					icon = cgBase.getIcon(false, waypoint.type, false, false, false);
+					icon = cgBase.getMarkerIcon(false, waypoint.type, false, false, false);
 				} else {
-					icon = cgBase.getIcon(false, "waypoint", false, false, false);
+					icon = cgBase.getMarkerIcon(false, "waypoint", false, false, false);
 				}
 
 				if (icon > 0) {
@@ -137,7 +137,7 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 							continue;
 						}
 
-						final int wpIcon = cgBase.getIcon(false, wp.type, false,
+						final int wpIcon = cgBase.getMarkerIcon(false, wp.type, false,
 								false, false);
 
 						if (wpIcon > 0) {

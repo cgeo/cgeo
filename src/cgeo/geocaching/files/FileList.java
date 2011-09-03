@@ -129,7 +129,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
 	 * @return The folder to start the recursive search in
 	 */
 	protected abstract String[] getBaseFolders();
-	
+
 	/**
 	 * Triggers the deriving class to set the title
 	 */
@@ -223,18 +223,18 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
 
 		return;
 	}
-	
-	public FileList(final String extension) {
+
+	protected FileList(final String extension) {
 		setExtensions(new String[] {extension});
 	}
 
-	public FileList(final String[] extensions) {
+	protected FileList(final String[] extensions) {
 		setExtensions(extensions);
 	}
 
 	private void setExtensions(String[] extensionsIn) {
 		for (String extension : extensionsIn) {
-			if (!extension.startsWith(".")) {
+			if (extension.length() == 0 || extension.charAt(0) != '.') {
 				extension = "." + extension;
 			}
 		}

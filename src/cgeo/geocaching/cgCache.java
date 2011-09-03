@@ -19,13 +19,19 @@ import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 
-public class cgCache {
+/**
+ * Internal c:geo representation of a "cache"
+ */
+public class cgCache implements ICache {
 
 	public Long updated = null;
 	public Long detailedUpdate = null;
 	public Long visitedDate = null;
 	public Integer reason = 0;
 	public Boolean detailed = false;
+	/**
+     * Code of the cache like GCABCD
+     */
 	public String geocode = "";
 	public String cacheid = "";
 	public String guid = "";
@@ -277,7 +283,7 @@ public class cgCache {
 	}
 
 	public boolean isEventCache() {
-		return ("event".equalsIgnoreCase(type) || "mega".equalsIgnoreCase(type) || "cito".equalsIgnoreCase(type));
+		return "event".equalsIgnoreCase(type) || "mega".equalsIgnoreCase(type) || "cito".equalsIgnoreCase(type);
 	}
 
 	public boolean logVisit(IAbstractActivity fromActivity) {
@@ -295,9 +301,15 @@ public class cgCache {
 		return true;
 	}
 
-	public boolean logOffline(final IAbstractActivity fromActivity, final int logType) {
-		logOffline(fromActivity, "", Calendar.getInstance(), logType);
-		return true;
+	public boolean logOffline(final IAbstractActivity fromActivity, final int logType, final cgSettings settings, final cgBase base) {
+        String log = "";
+        if (settings.getSignature() != null
+                && settings.signatureAutoinsert
+                && settings.getSignature().length() > 0) {
+            log = LogTemplateProvider.applyTemplates(settings.getSignature(), base);
+        }
+        logOffline(fromActivity, log, Calendar.getInstance(), logType);
+        return true;
 	}
 
 	void logOffline(final IAbstractActivity fromActivity, final String log, Calendar date, final int logType) {
@@ -378,4 +390,96 @@ public class cgCache {
 		return getConnector().supportsLogging();
 	}
 
+	@Override
+	public String getData() {
+		return null;
+	}
+
+	@Override
+	public Float getDifficulty() {
+		return difficulty;
+	}
+
+	@Override
+	public String getGeocode() {
+		return geocode;
+	}
+
+	@Override
+	public String getLatitute() {
+		return latitudeString;
+	}
+
+	@Override
+	public String getLongitude() {
+		return longitudeString;
+	}
+
+	@Override
+	public String getOwner() {
+		return owner;
+	}
+
+	@Override
+	public String getSize() {
+		return size;
+	}
+
+	@Override
+	public Float getTerrain() {
+		return terrain;
+	}
+
+	@Override
+	public String getType() {
+		return type;
+	}
+
+	@Override
+	public boolean isArchived() {
+		return archived;
+	}
+
+	@Override
+	public boolean isDisabled() {
+		return disabled;
+	}
+
+	@Override
+	public boolean isMembersOnly() {
+		return members;
+	}
+
+	@Override
+	public boolean isOwn() {
+		return own;
+	}
+
+	@Override
+	public String getOwnerReal() {
+		return ownerReal;
+	}
+
+	@Override
+	public String getHint() {
+		return hint;
+	}
+
+	@Override
+	public String getDescription() {
+		return description;
+	}
+
+	@Override
+	public String getShortDescription() {
+		return shortdesc;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
 }
+
+
