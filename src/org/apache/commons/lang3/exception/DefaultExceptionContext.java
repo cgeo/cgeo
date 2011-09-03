@@ -153,6 +153,6 @@ public class DefaultExceptionContext implements ExceptionContext, Serializable {
             buffer.append("---------------------------------");
         }
         return buffer.toString();
-    }
+   }
 
 }

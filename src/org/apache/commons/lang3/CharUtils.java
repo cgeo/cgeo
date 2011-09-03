@@ -67,27 +67,6 @@ public class CharUtils {
       super();
     }
 
-    //-----------------------------------------------------------------------
-    /**
-     * <p>Converts the character to a Character.</p>
-     * 
-     * <p>For ASCII 7 bit characters, this uses a cache that will return the
-     * same Character object each time.</p>
-     *
-     * <pre>
-     *   CharUtils.toCharacterObject(' ')  = ' '
-     *   CharUtils.toCharacterObject('A')  = 'A'
-     * </pre>
-     *
-     * @deprecated Java 5 introduced {@link Character#valueOf(char)} which caches chars 0 through 127.
-     * @param ch  the character to convert
-     * @return a Character of the specified character
-     */
-    @Deprecated
-    public static Character toCharacterObject(char ch) {
-        return Character.valueOf(ch);
-    }
-    
     /**
      * <p>Converts the String to a Character using the first character, returning
      * null for empty Strings.</p>
