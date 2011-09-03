@@ -71,7 +71,7 @@ public class cgeowaypoint extends AbstractActivity {
 					waypoint.setIcon(res, base, identification);
 
 					if (waypoint.latitude != null && waypoint.longitude != null) {
-						coords.setText(Html.fromHtml(cgBase.formatCoordinate(waypoint.latitude, "lat", true) + " | " + cgBase.formatCoordinate(waypoint.longitude, "lon", true)), TextView.BufferType.SPANNABLE);
+						coords.setText(Html.fromHtml(cgBase.formatCoords(waypoint.latitude, waypoint.longitude, true)), TextView.BufferType.SPANNABLE);
 						compass.setVisibility(View.VISIBLE);
 						separator.setVisibility(View.VISIBLE);
 					} else {
