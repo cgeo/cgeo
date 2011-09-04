@@ -366,8 +366,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 			holder.checkbox = (CheckBox) rowView.findViewById(R.id.checkbox);
 			holder.oneInfo = (RelativeLayout) rowView.findViewById(R.id.one_info);
 			holder.oneCheckbox = (RelativeLayout) rowView.findViewById(R.id.one_checkbox);
-			holder.foundMark = (ImageView) rowView.findViewById(R.id.found_mark);
-			holder.offlineMark = (ImageView) rowView.findViewById(R.id.offline_mark);
+			holder.logStatusMark = (ImageView) rowView.findViewById(R.id.log_status_mark);
 			holder.oneCache = (RelativeLayout) rowView.findViewById(R.id.one_cache);
 			holder.text = (TextView) rowView.findViewById(R.id.text);
 			holder.directionLayout = (RelativeLayout) rowView.findViewById(R.id.direction_layout);
@@ -441,15 +440,14 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		}
 		holder.direction.setContent(cache.latitude, cache.longitude);
 
-		if (cache.logOffline) {
-			holder.offlineMark.setVisibility(View.VISIBLE);
-			holder.foundMark.setVisibility(View.GONE);
+		if (cache.found && cache.logOffline) {
+		    holder.logStatusMark.setImageResource(R.drawable.mark_green_red);
 		} else if (cache.found) {
-			holder.offlineMark.setVisibility(View.GONE);
-			holder.foundMark.setVisibility(View.VISIBLE);
-		} else {
-			holder.offlineMark.setVisibility(View.GONE);
-			holder.foundMark.setVisibility(View.GONE);
+		    holder.logStatusMark.setImageResource(R.drawable.mark_green);
+		} else if (cache.logOffline) {
+            holder.logStatusMark.setImageResource(R.drawable.mark_red);
+        } else {
+		    holder.logStatusMark.setVisibility(View.GONE);
 		}
 
 		if (cache.nameSp == null) {
