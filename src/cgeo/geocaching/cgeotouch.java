@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Dialog;
@@ -49,7 +48,7 @@ public class cgeotouch extends cgLogForm {
 	private Handler loadDataHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			if (ArrayUtils.isEmpty(viewstates) && attempts < 2) {
+			if (cgBase.isEmpty(viewstates) && attempts < 2) {
 				showToast(res.getString(R.string.err_log_load_data_again));
 
 				loadData thread;
@@ -57,7 +56,7 @@ public class cgeotouch extends cgLogForm {
 				thread.start();
 
 				return;
-			} else if (ArrayUtils.isEmpty(viewstates) && attempts >= 2) {
+			} else if (cgBase.isEmpty(viewstates) && attempts >= 2) {
 				showToast(res.getString(R.string.err_log_load_data));
 				showProgress(false);
 
@@ -288,7 +287,7 @@ public class cgeotouch extends cgLogForm {
         tweetCheck.setChecked(true);
 
 		Button buttonPost = (Button)findViewById(R.id.post);
-		if (ArrayUtils.isEmpty(viewstates)) {
+		if (cgBase.isEmpty(viewstates)) {
 			buttonPost.setEnabled(false);
 			buttonPost.setOnTouchListener(null);
 			buttonPost.setOnClickListener(null);

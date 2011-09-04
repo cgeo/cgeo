@@ -124,7 +124,7 @@ public class StaticMapsProvider {
 
 	public static void downloadMaps(cgCache cache, cgSettings settings, Activity activity) {
 		if (settings.storeOfflineMaps != 1 || cache.latitude == null
-				|| cache.longitude == null || StringUtils.isNotBlank(cache.geocode)) {
+				|| cache.longitude == null || StringUtils.isBlank(cache.geocode)) {
 			return;
 		}
 
