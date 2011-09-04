@@ -115,6 +115,10 @@ public class cgData {
 			+ "updated long not null, " // date of save
 			+ "attribute text "
 			+ "); ";
+	private final static int ATTRIBUTES_GEOCODE = 2;
+	private final static int ATTRIBUTES_UPDATED = 3;
+	private final static int ATTRIBUTES_ATTRIBUTE = 4;
+
 	private static final String dbCreateWaypoints = ""
 			+ "create table " + dbTableWaypoints + " ("
 			+ "_id integer primary key autoincrement, "
@@ -1299,15 +1303,20 @@ public class cgData {
 			databaseRW.delete(dbTableAttributes, "geocode = ?", new String[] {geocode});
 
 			if (!attributes.isEmpty()) {
-				ContentValues values = new ContentValues();
-				for (String oneAttribute : attributes) {
-					values.clear();
-					values.put("geocode", geocode);
-					values.put("updated", System.currentTimeMillis());
-					values.put("attribute", oneAttribute);
 
-					databaseRW.insert(dbTableAttributes, null, values);
+				InsertHelper helper = new InsertHelper(databaseRW, dbTableAttributes);
+	            long timeStamp = System.currentTimeMillis();
+
+				for (String attribute : attributes) {
+					helper.prepareForInsert();
+
+		            helper.bind(ATTRIBUTES_GEOCODE, geocode);
+					helper.bind(ATTRIBUTES_UPDATED, timeStamp);
+		            helper.bind(ATTRIBUTES_ATTRIBUTE, attribute);
+
+		            helper.execute();
 				}
+				helper.close();
 			}
 			databaseRW.setTransactionSuccessful();
 		} finally {
@@ -1370,6 +1379,7 @@ public class cgData {
 
 			if (!waypoints.isEmpty()) {
 				ContentValues values = new ContentValues();
+				long timeStamp = System.currentTimeMillis();
 				for (cgWaypoint oneWaypoint : waypoints) {
 					if (oneWaypoint.isUserDefined()) {
 						continue;
@@ -1377,7 +1387,7 @@ public class cgData {
 
 					values.clear();
 					values.put("geocode", geocode);
-					values.put("updated", System.currentTimeMillis());
+					values.put("updated", timeStamp);
 					values.put("type", oneWaypoint.type);
 					values.put("prefix", oneWaypoint.prefix);
 					values.put("lookup", oneWaypoint.lookup);
@@ -1474,10 +1484,11 @@ public class cgData {
 
 			if (!spoilers.isEmpty()) {
 				ContentValues values = new ContentValues();
+				long timeStamp = System.currentTimeMillis();
 				for (cgImage oneSpoiler : spoilers) {
 					values.clear();
 					values.put("geocode", geocode);
-					values.put("updated", System.currentTimeMillis());
+					values.put("updated", timeStamp);
 					values.put("url", oneSpoiler.url);
 					values.put("title", oneSpoiler.title);
 					values.put("description", oneSpoiler.description);
@@ -1513,11 +1524,12 @@ public class cgData {
 
 			if (!logs.isEmpty()) {
 				InsertHelper helper = new InsertHelper(databaseRW, dbTableLogs);
+	            long timeStamp = System.currentTimeMillis();
 				for (cgLog log : logs) {
 					helper.prepareForInsert();
 
 		            helper.bind(LOGS_GEOCODE, geocode);
-		            helper.bind(LOGS_UPDATED, System.currentTimeMillis());
+					helper.bind(LOGS_UPDATED, timeStamp);
 		            helper.bind(LOGS_TYPE, log.type);
 		            helper.bind(LOGS_AUTHOR, log.author);
 		            helper.bind(LOGS_LOG, log.log);
@@ -1567,10 +1579,11 @@ public class cgData {
 			ContentValues values = new ContentValues();
 
 			Set<Entry<Integer, Integer>> logCountsItems = logCounts.entrySet();
+			long timeStamp = System.currentTimeMillis();
 			for (Entry<Integer, Integer> pair : logCountsItems) {
 				values.clear();
 				values.put("geocode", geocode);
-				values.put("updated", System.currentTimeMillis());
+				values.put("updated", timeStamp);
 				values.put("type", pair.getKey().intValue());
 				values.put("count", pair.getValue().intValue());
 
@@ -1599,12 +1612,13 @@ public class cgData {
 
 			if (!trackables.isEmpty()) {
 				ContentValues values = new ContentValues();
+				long timeStamp = System.currentTimeMillis();
 				for (cgTrackable oneTrackable : trackables) {
 					values.clear();
 					if (geocode != null) {
 						values.put("geocode", geocode);
 					}
-					values.put("updated", System.currentTimeMillis());
+					values.put("updated", timeStamp);
 					values.put("tbcode", oneTrackable.geocode);
 					values.put("guid", oneTrackable.guid);
 					values.put("title", oneTrackable.name);
