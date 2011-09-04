@@ -65,6 +65,7 @@ import cgeo.geocaching.sorting.VoteComparator;
 
 public class cgeocaches extends AbstractListActivity {
 
+	private static final int MAX_LIST_ITEMS = 1000;
 	private static final String EXTRAS_LIST_TYPE = "type";
 	private static final int MENU_COMPASS = 1;
 	private static final int MENU_REFRESH_STORED = 2;
@@ -193,7 +194,7 @@ public class cgeocaches extends AbstractListActivity {
 					final Integer count = app.getTotal(searchId);
 
 					if (count != null && count > 0) {
-						if (cacheList.size() < app.getTotal(searchId) && cacheList.size() < 1000) {
+						if (cacheList.size() < app.getTotal(searchId) && cacheList.size() < MAX_LIST_ITEMS) {
 							setMoreCaches(true);
 						} else {
 							setMoreCaches(false);
@@ -292,7 +293,7 @@ public class cgeocaches extends AbstractListActivity {
 				} else {
 					final Integer count = app.getTotal(searchId);
 					if (count != null && count > 0) {
-						if (cacheList.size() < app.getTotal(searchId) && cacheList.size() < 1000) {
+						if (cacheList.size() < app.getTotal(searchId) && cacheList.size() < MAX_LIST_ITEMS) {
 							setMoreCaches(true);
 						} else {
 							setMoreCaches(false);
@@ -1395,7 +1396,7 @@ public class cgeocaches extends AbstractListActivity {
 			final Integer count = app.getTotal(searchId);
 			if (count != null && count > 0) {
 				setTitle(title);
-				if (cacheList.size() < app.getTotal(searchId) && cacheList.size() < 1000) {
+				if (cacheList.size() < app.getTotal(searchId) && cacheList.size() < MAX_LIST_ITEMS) {
 					setMoreCaches(true);
 				} else {
 					setMoreCaches(false);
