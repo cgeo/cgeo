@@ -610,11 +610,11 @@ public class cgeodetail extends AbstractActivity {
 
 		try {
 
-			if (StringUtils.isBlank(geocode)) {
+			if (StringUtils.isNotBlank(geocode)) {
 			    geocode = cache.geocode;
             }
 
-			if (StringUtils.isBlank(guid)) {
+			if (StringUtils.isNotBlank(guid)) {
                 guid = cache.guid;
             }
 

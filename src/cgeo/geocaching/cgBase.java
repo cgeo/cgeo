@@ -464,7 +464,7 @@ public class cgBase {
 	 * put viewstates into request parameters
 	 */
 	private static void setViewstates(String[] viewstates, HashMap<String, String> params) {
-		if (ArrayUtils.isEmpty(viewstates))
+		if (isEmpty(viewstates))
 			return;
 		params.put("__VIEWSTATE", viewstates[0]);
 		if (viewstates.length > 1) {
@@ -474,6 +474,21 @@ public class cgBase {
 		}
 	}
 
+	/**
+	 * checks if an Array of Strings is empty or not. Empty means:
+	 *  - Array is null
+	 *  - or all elements are null or empty strings
+	*/
+	public static boolean isEmpty(String[] a) {
+	if (a == null)
+	         return  true;
+	 	
+		for (String s: a)
+			if (StringUtils.isNotEmpty(s))
+				return  false;
+	    return  true;
+	  }
+	
 	/**
 	 * transfers the viewstates variables from a page (response) to parameters
 	 * (next request)
@@ -518,7 +533,7 @@ public class cgBase {
 
 			viewstates = getViewstates(loginData);
 
-			if (ArrayUtils.isEmpty(viewstates)) {
+			if (isEmpty(viewstates)) {
 				Log.e(cgSettings.tag, "cgeoBase.login: Failed to find viewstates");
 				return -1; // no viewstates
 			}
@@ -2746,7 +2761,7 @@ public class cgBase {
 			return searchId;
 		}
 
-		if (ArrayUtils.isEmpty(viewstates)) {
+		if (isEmpty(viewstates)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByNextPage: No viewstate given");
 			return searchId;
 		}
@@ -2832,7 +2847,7 @@ public class cgBase {
 		}
 
 		if (forceReload == false && reason == 0 && (app.isOffline(geocode, guid) || app.isThere(geocode, guid, true, true))) {
-			if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
+			if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
 				geocode = app.getGeocode(guid);
 			}
 
@@ -2865,7 +2880,7 @@ public class cgBase {
 
 		if (StringUtils.isEmpty(page)) {
 			if (app.isThere(geocode, guid, true, false)) {
-				if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
+				if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
 					Log.i(cgSettings.tag, "Loading old cache from cache.");
 
 					geocode = app.getGeocode(guid);
@@ -3445,7 +3460,7 @@ public class cgBase {
 
 	public int postLog(cgeoapplication app, String geocode, String cacheid, String[] viewstates,
 			int logType, int year, int month, int day, String log, ArrayList<cgTrackableLog> trackables) {
-		if (ArrayUtils.isEmpty(viewstates)) {
+		if (isEmpty(viewstates)) {
 			Log.e(cgSettings.tag, "cgeoBase.postLog: No viewstate given");
 			return 1000;
 		}
@@ -3607,7 +3622,7 @@ public class cgBase {
 
 	public int postLogTrackable(String tbid, String trackingCode, String[] viewstates,
 			int logType, int year, int month, int day, String log) {
-		if (ArrayUtils.isEmpty(viewstates)) {
+		if (isEmpty(viewstates)) {
 			Log.e(cgSettings.tag, "cgeoBase.postLogTrackable: No viewstate given");
 			return 1000;
 		}
@@ -3800,7 +3815,7 @@ public class cgBase {
 		if (app == null) {
 			return;
 		}
-		if (settings == null || StringUtils.isBlank(settings.tokenPublic) || StringUtils.isNotBlank(settings.tokenSecret)) {
+		if (settings == null || StringUtils.isBlank(settings.tokenPublic) || StringUtils.isBlank(settings.tokenSecret)) {
 			return;
 		}
 
