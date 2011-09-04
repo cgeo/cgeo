@@ -6,9 +6,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
+import cgeo.geocaching.utils.CollectionUtils;
 
 public class cgeoapplication extends Application {
 
@@ -265,7 +269,7 @@ public class cgeoapplication extends Application {
 	}
 
 	public boolean setViewstates(Long searchId, String[] viewstates) {
-		if (cgBase.isEmpty(viewstates)) {
+		if (ArrayUtils.isEmpty(viewstates)) {
 			return false;
 		}
 		if (searchId == null || searches.containsKey(searchId) == false) {
@@ -316,7 +320,7 @@ public class cgeoapplication extends Application {
 	}
 
 	public cgCache getCacheByGeocode(String geocode, boolean loadA, boolean loadW, boolean loadS, boolean loadL, boolean loadI, boolean loadO) {
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			return null;
 		}
 
@@ -338,7 +342,7 @@ public class cgeoapplication extends Application {
 	}
 
 	public cgTrackable getTrackableByGeocode(String geocode) {
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			return null;
 		}
 
@@ -655,7 +659,7 @@ public class cgeoapplication extends Application {
 	}
 
 	public void addGeocode(Long searchId, String geocode) {
-		if (this.searches.containsKey(searchId) == false || geocode == null || geocode.length() == 0) {
+		if (this.searches.containsKey(searchId) == false || StringUtils.isBlank(geocode)) {
 			return;
 		}
 
@@ -673,7 +677,7 @@ public class cgeoapplication extends Application {
 	}
 
 	public Long addSearch(final cgSearch search, final ArrayList<cgCache> cacheList, final boolean newItem, final int reason) {
-		if (cacheList == null || cacheList.isEmpty()) {
+		if (CollectionUtils.isEmpty(cacheList)) {
 			return null;
 		}
 
@@ -770,7 +774,7 @@ public class cgeoapplication extends Application {
 	}
 
 	public boolean addLog(String geocode, cgLog log) {
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			return false;
 		}
 		if (log == null) {

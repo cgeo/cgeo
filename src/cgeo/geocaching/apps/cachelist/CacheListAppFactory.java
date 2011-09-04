@@ -3,6 +3,8 @@ package cgeo.geocaching.apps.cachelist;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import android.app.Activity;
 import android.content.res.Resources;
 import android.util.Log;
@@ -20,7 +22,7 @@ public final class CacheListAppFactory extends AbstractAppFactory {
 
 	private static CacheListApp[] getMultiPointNavigationApps(
 			Resources res) {
-		if (null == apps || 0 == apps.length) {
+		if (ArrayUtils.isEmpty(apps)) {
 			apps = new CacheListApp[] {
 					new InternalCacheListMap(res),
 					new LocusCacheListApp(res) };

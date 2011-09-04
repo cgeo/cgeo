@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -35,6 +37,7 @@ import cgeo.geocaching.filter.cgFilter;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.DistanceComparator;
 import cgeo.geocaching.sorting.VisitComparator;
+import cgeo.geocaching.utils.CollectionUtils;
 
 public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
@@ -286,13 +289,13 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 			lastSort = System.currentTimeMillis();
 		}
 
-		if (distances != null && distances.size() > 0) {
+		if (CollectionUtils.isNotEmpty(distances)) {
 			for (cgDistanceView distance : distances) {
 				distance.update(latitudeIn, longitudeIn);
 			}
 		}
 
-		if (compasses != null && compasses.size() > 0) {
+		if (CollectionUtils.isNotEmpty(compasses)) {
 			for (cgCompassMini compass : compasses) {
 				compass.updateCoords(latitudeIn, longitudeIn);
 			}
@@ -306,7 +309,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
 		azimuth = azimuthIn;
 
-		if (compasses != null && compasses.size() > 0) {
+		if (CollectionUtils.isNotEmpty(compasses)) {
 			for (cgCompassMini compass : compasses) {
 				compass.updateAzimuth(azimuth);
 			}
@@ -581,10 +584,10 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 			cacheInfo.append("; ");
 			cacheInfo.append(base.formatDate(cache.visitedDate));
 		} else {
-			if (cache.geocode != null && cache.geocode.length() > 0) {
+			if (StringUtils.isNotBlank(cache.geocode)) {
 				cacheInfo.append(cache.geocode);
 			}
-			if (cache.size != null && cache.size.length() > 0) {
+			if (StringUtils.isNotBlank(cache.size)) {
 				if (cacheInfo.length() > 0) {
 					cacheInfo.append(" | ");
 				}

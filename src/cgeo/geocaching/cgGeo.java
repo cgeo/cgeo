@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.GpsSatellite;
@@ -407,7 +409,7 @@ public class cgGeo {
 					}
 					final String res = base.request(false, host, path, method, params, false, false, false).getData();
 
-					if (res != null && res.length() > 0) {
+					if (StringUtils.isNotBlank(res)) {
 						lastGo4cacheLat = latitudeNow;
 						lastGo4cacheLon = longitudeNow;
 					}
