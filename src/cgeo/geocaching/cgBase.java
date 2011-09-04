@@ -483,9 +483,11 @@ public class cgBase {
 	if (a == null)
 	         return  true;
 	 	
-		for (String s: a)
-			if (StringUtils.isNotEmpty(s))
+		for (String s: a) {
+			if (StringUtils.isNotEmpty(s)) {
 				return  false;
+			}
+		}
 	    return  true;
 	  }
 	
