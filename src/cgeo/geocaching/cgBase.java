@@ -3410,7 +3410,7 @@ public class cgBase {
 		final String id = parameters.get("id");
 		cgTrackable trackable = new cgTrackable();
 
-		if (StringUtils.isBlank(geocode) || StringUtils.isBlank(guid) || StringUtils.isBlank(id))  {
+		if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid) && StringUtils.isBlank(id))  {
 			Log.e(cgSettings.tag, "cgeoBase.searchTrackable: No geocode nor guid nor id given");
 			return null;
 		}
