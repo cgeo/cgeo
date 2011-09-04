@@ -240,7 +240,7 @@ public class cgeovisit extends cgLogForm {
 		if ((StringUtils.isBlank(cacheid)) && StringUtils.isNotBlank(geocode)) {
 			cacheid = app.getCacheid(geocode);
 		}
-		if ((StringUtils.isBlank(geocode)) && StringUtils.isNotBlank(cacheid)) {
+		if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(cacheid)) {
 			geocode = app.getGeocode(cacheid);
 		}
 

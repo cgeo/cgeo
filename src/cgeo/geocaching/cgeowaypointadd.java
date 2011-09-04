@@ -247,8 +247,8 @@ public class cgeowaypointadd extends AbstractActivity {
 			final String latText = ((Button) findViewById(R.id.buttonLatitude)).getText().toString();
 			final String lonText = ((Button) findViewById(R.id.buttonLongitude)).getText().toString();
 
-			if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)
-							&& StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
+			if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText)
+							&& StringUtils.isBlank(latText) && StringUtils.isBlank(lonText)) {
 				helpDialog(res.getString(R.string.err_point_no_position_given_title), res.getString(R.string.err_point_no_position_given));
 				return;
 			}

@@ -464,7 +464,7 @@ public class cgBase {
 	 * put viewstates into request parameters
 	 */
 	private static void setViewstates(String[] viewstates, HashMap<String, String> params) {
-		if (isEmpty(viewstates))
+		if (ArrayUtils.isEmpty(viewstates))
 			return;
 		params.put("__VIEWSTATE", viewstates[0]);
 		if (viewstates.length > 1) {
@@ -472,6 +472,14 @@ public class cgBase {
 				params.put("__VIEWSTATE" + i, viewstates[i]);
 			params.put("__VIEWSTATEFIELDCOUNT", viewstates.length + "");
 		}
+	}
+
+	/**
+	 * transfers the viewstates variables from a page (response) to parameters
+	 * (next request)
+	 */
+	public static void transferViewstates(String page, HashMap<String, String> params) {
+		setViewstates(getViewstates(page), params);
 	}
 
 	/**
@@ -491,14 +499,6 @@ public class cgBase {
 	    return  true;
 	  }
 	
-	/**
-	 * transfers the viewstates variables from a page (response) to parameters
-	 * (next request)
-	 */
-	public static void transferViewstates(String page, HashMap<String, String> params) {
-		setViewstates(getViewstates(page), params);
-	}
-
 
 	public class loginThread extends Thread {
 
@@ -1036,7 +1036,7 @@ public class cgBase {
 
 			final JSONObject dataJSON = new JSONObject(json);
 			final JSONObject extra = dataJSON.getJSONObject("cs");
-			if ( StringUtils.isNotBlank(data)) {
+			if (extra != null && extra.length() > 0) {
 				int count = extra.getInt("count");
 
 				if (count > 0 && extra.has("cc")) {
@@ -3015,7 +3015,7 @@ public class cgBase {
 			return null;
 		}
 
-		if (StringUtils.isBlank(latitude)) {
+		if (StringUtils.isBlank(cacheType)) {
 			cacheType = null;
 		}
 
@@ -3559,7 +3559,7 @@ public class cgBase {
 			if (matcher.find() && matcher.groupCount() > 0) {
 				final String[] viewstatesConfirm = getViewstates(page);
 
-				if (ArrayUtils.isEmpty(viewstatesConfirm)) {
+				if (isEmpty(viewstatesConfirm)) {
 					Log.e(cgSettings.tag, "cgeoBase.postLog: No viewstate for confirm log");
 					return 1000;
 				}
@@ -4202,7 +4202,7 @@ public class cgBase {
 					response = request(secureRedir, newLocation.getHost(), newLocation.getPath(), "GET", new HashMap<String, String>(), requestId, false, false, false);
 				}
 			} else {
-				if (StringUtils.isNotBlank(buffer)) {
+				if (StringUtils.isNotEmpty(buffer)) {
 					replaceWhitespace(buffer);
 					String data = buffer.toString();
 					buffer = null;
@@ -5051,7 +5051,6 @@ public class cgBase {
 			gcIcons.put("mystery-disabled", R.drawable.marker_cache_mystery_disabled);
 			gcIcons.put("gchq-disabled", R.drawable.marker_cache_gchq_disabled);
 		}
-
 	}
 
 	public static boolean runNavigation(Activity activity, Resources res, cgSettings settings, Double latitude, Double longitude) {
