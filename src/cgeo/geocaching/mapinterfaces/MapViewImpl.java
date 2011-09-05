@@ -66,4 +66,5 @@ public interface MapViewImpl {
 
 	void repaintRequired(OverlayBase overlay);
 
+	void setOnDragListener(OnDragListener onDragListener);
 }
