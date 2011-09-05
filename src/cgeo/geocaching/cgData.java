@@ -2367,7 +2367,7 @@ public class cgData {
 				null,
 				null,
 				null,
-				null,
+				"title COLLATE NOCASE ASC",
 				"100");
 
 		if (cursor != null && cursor.getCount() > 0) {

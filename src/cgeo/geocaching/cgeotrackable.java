@@ -616,4 +616,13 @@ public class cgeotrackable extends AbstractActivity {
 			}
 		}
 	}
+
+	public static void startActivity(final AbstractActivity fromContext,
+			final String guid, final String geocode, final String name) {
+		Intent trackableIntent = new Intent(fromContext, cgeotrackable.class);
+		trackableIntent.putExtra("guid", guid);
+		trackableIntent.putExtra("geocode", geocode);
+		trackableIntent.putExtra("name", name);
+		fromContext.startActivity(trackableIntent);
+	}
 }
