@@ -1,10 +1,11 @@
 package cgeo.geocaching;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class cgSearch {
 	private Long id = null;
-	private ArrayList<String> geocodes = new ArrayList<String>();
+	private List<String> geocodes = new ArrayList<String>();
 
 	public int errorRetrieve = 0;
 	public String error = null;
@@ -20,7 +21,7 @@ public class cgSearch {
 		return id;
 	}
 
-	public ArrayList<String> getGeocodes() {
+	public List<String> getGeocodes() {
 		return geocodes;
 	}
 

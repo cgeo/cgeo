@@ -1,6 +1,6 @@
 package cgeo.geocaching.apps.cache.navi;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -46,7 +46,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 	public static boolean onMenuItemSelected(final MenuItem item,
 			final cgGeo geo, Activity activity, Resources res,
 			cgCache cache,
-			Long searchId, cgWaypoint waypoint, ArrayList<Double> destination) {
+			Long searchId, cgWaypoint waypoint, List<Double> destination) {
 		NavigationApp app = (NavigationApp) getAppFromMenuItem(item, apps);
 		if (app != null) {
 			Double latitude = null;

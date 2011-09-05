@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -70,12 +72,12 @@ public class cgCache implements ICache {
 	public Float myVote = null;
 	public int inventoryItems = 0;
 	public boolean onWatchlist = false;
-	public ArrayList<String> attributes = null;
-	public ArrayList<cgWaypoint> waypoints = null;
-	public ArrayList<cgImage> spoilers = null;
-	public ArrayList<cgLog> logs = null;
-	public ArrayList<cgTrackable> inventory = null;
-	public HashMap<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
+	public List<String> attributes = null;
+	public List<cgWaypoint> waypoints = null;
+	public List<cgImage> spoilers = null;
+	public List<cgLog> logs = null;
+	public List<cgTrackable> inventory = null;
+	public Map<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
 	public boolean logOffline = false;
 	// temporary values
 	public boolean statusChecked = false;
@@ -327,9 +329,9 @@ public class cgCache implements ICache {
 		}
 	}
 
-	public ArrayList<Integer> getPossibleLogTypes(cgSettings settings) {
+	public List<Integer> getPossibleLogTypes(cgSettings settings) {
 		boolean isOwner = owner != null && owner.equalsIgnoreCase(settings.getUsername());
-		ArrayList<Integer> types = new ArrayList<Integer>();
+		List<Integer> types = new ArrayList<Integer>();
 		if ("event".equals(type) || "mega".equals(type) || "cito".equals(type) || "lostfound".equals(type)) {
 			types.add(cgBase.LOG_WILL_ATTEND);
 			types.add(cgBase.LOG_NOTE);

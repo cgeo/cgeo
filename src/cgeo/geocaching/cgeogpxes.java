@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -57,7 +57,7 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
 	};
 
 	@Override
-	protected cgGPXListAdapter getAdapter(ArrayList<File> files) {
+	protected cgGPXListAdapter getAdapter(List<File> files) {
 		return new cgGPXListAdapter(this, getSettings(), files);
 	}
 
