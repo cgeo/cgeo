@@ -225,6 +225,14 @@ public class mfMapView extends MapView implements MapViewImpl {
 
 	private class GestureListener extends SimpleOnGestureListener {
 		@Override
+		public boolean onDoubleTap(MotionEvent e) {
+			if (onDragListener != null) {
+				onDragListener.onDrag();
+			}
+			return true;
+		}
+
+		@Override
 		public boolean onScroll(MotionEvent e1, MotionEvent e2,
 				float distanceX, float distanceY) {
 			if (onDragListener != null) {
