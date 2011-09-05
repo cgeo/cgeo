@@ -17,15 +17,19 @@ import java.util.Locale;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
+import android.database.DatabaseUtils.InsertHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Environment;
 import android.util.Log;
+import cgeo.geocaching.utils.CollectionUtils;
 
 public class cgData {
 
@@ -35,7 +39,7 @@ public class cgData {
 	private cgDbHelper dbHelper = null;
 	private SQLiteDatabase databaseRO = null;
 	private SQLiteDatabase databaseRW = null;
-	private static final int dbVersion = 55;
+	private static final int dbVersion = 56;
 	private static final String dbName = "data";
 	private static final String dbTableCaches = "cg_caches";
 	private static final String dbTableLists = "cg_lists";
@@ -111,6 +115,10 @@ public class cgData {
 			+ "updated long not null, " // date of save
 			+ "attribute text "
 			+ "); ";
+	private final static int ATTRIBUTES_GEOCODE = 2;
+	private final static int ATTRIBUTES_UPDATED = 3;
+	private final static int ATTRIBUTES_ATTRIBUTE = 4;
+
 	private static final String dbCreateWaypoints = ""
 			+ "create table " + dbTableWaypoints + " ("
 			+ "_id integer primary key autoincrement, "
@@ -147,6 +155,14 @@ public class cgData {
 			+ "date long, "
 			+ "found integer not null default 0 "
 			+ "); ";
+	private final static int LOGS_GEOCODE = 2;
+	private final static int LOGS_UPDATED = 3;
+	private final static int LOGS_TYPE = 4;
+	private final static int LOGS_AUTHOR = 5;
+	private final static int LOGS_LOG = 6;
+	private final static int LOGS_DATE = 7;
+	private final static int LOGS_FOUND = 8;
+
 	private static final String dbCreateLogCount = ""
 			+ "create table " + dbTableLogCount + " ("
 			+ "_id integer primary key autoincrement, "
@@ -778,6 +794,18 @@ public class cgData {
 
 						}
 					}
+
+					// make all internal attribute names lowercase
+					// @see issue #299
+					if (oldVersion < 56) { // update to 56
+						try {
+							db.execSQL("update " + dbTableAttributes + " set attribute = " +
+									"lower(attribute) where attribute like \"%_yes\" " +
+									"or attribute like \"%_no\"");
+						} catch (Exception e) {
+							Log.e(cgSettings.tag, "Failed to upgrade to ver. 56: " + e.toString());
+						}
+					}
 				}
 
 				db.setTransactionSuccessful();
@@ -860,7 +888,7 @@ public class cgData {
 		int dataDetailed = 0;
 
 		try {
-			if (geocode != null && geocode.length() > 0) {
+			if (StringUtils.isNotBlank(geocode)) {
 				cursor = databaseRO.query(
 						dbTableCaches,
 						new String[]{"_id", "detailed", "detailedupdate", "updated"},
@@ -870,7 +898,7 @@ public class cgData {
 						null,
 						null,
 						"1");
-			} else if (guid != null && guid.length() > 0) {
+			} else if (StringUtils.isNotBlank(guid)) {
 				cursor = databaseRO.query(
 						dbTableCaches,
 						new String[]{"_id", "detailed", "detailedupdate", "updated"},
@@ -938,7 +966,7 @@ public class cgData {
 		long reason = 0;
 
 		try {
-			if (geocode != null && geocode.length() > 0) {
+			if (StringUtils.isNotBlank(geocode)) {
 				cursor = databaseRO.query(
 						dbTableCaches,
 						new String[]{"reason"},
@@ -948,7 +976,7 @@ public class cgData {
 						null,
 						null,
 						"1");
-			} else if (guid != null && guid.length() > 0) {
+			} else if (StringUtils.isNotBlank(guid)) {
 				cursor = databaseRO.query(
 						dbTableCaches,
 						new String[]{"reason"},
@@ -993,7 +1021,7 @@ public class cgData {
 		int rel = 0;
 
 		try {
-			if (geocode != null && geocode.length() > 0) {
+			if (StringUtils.isNotBlank(geocode)) {
 				cursor = databaseRO.query(
 						dbTableCaches,
 						new String[]{"reliable_latlon"},
@@ -1003,7 +1031,7 @@ public class cgData {
 						null,
 						null,
 						"1");
-			} else if (guid != null && guid.length() > 0) {
+			} else if (StringUtils.isNotBlank(guid)) {
 				cursor = databaseRO.query(
 						dbTableCaches,
 						new String[]{"reliable_latlon"},
@@ -1042,7 +1070,7 @@ public class cgData {
 	}
 
 	public String getGeocodeForGuid(String guid) {
-		if (guid == null || guid.length() == 0) {
+		if (StringUtils.isBlank(guid)) {
 			return null;
 		}
 
@@ -1084,7 +1112,7 @@ public class cgData {
 	}
 
 	public String getCacheidForGeocode(String geocode) {
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			return null;
 		}
 
@@ -1192,54 +1220,47 @@ public class cgData {
 		values.put("inventoryunknown", cache.inventoryItems);
 		values.put("onWatchlist", cache.onWatchlist ? 1 : 0);
 
-		boolean status = false;
 		boolean statusOk = true;
 
 		if (cache.attributes != null) {
-			status = saveAttributes(cache.geocode, cache.attributes);
-			if (status == false) {
+			if (!saveAttributes(cache.geocode, cache.attributes)) {
 				statusOk = false;
 			}
 		}
 
 		if (cache.waypoints != null) {
-			status = saveWaypoints(cache.geocode, cache.waypoints, true);
-			if (status == false) {
+			if (!saveWaypoints(cache.geocode, cache.waypoints, true)) {
 				statusOk = false;
 			}
 		}
 
 		if (cache.spoilers != null) {
-			status = saveSpoilers(cache.geocode, cache.spoilers);
-			if (status == false) {
+			if (!saveSpoilers(cache.geocode, cache.spoilers)) {
 				statusOk = false;
 			}
 		}
 
 		if (cache.logs != null) {
-			status = saveLogs(cache.geocode, cache.logs);
-			if (status == false) {
+			if (!saveLogs(cache.geocode, cache.logs)) {
 				statusOk = false;
 			}
 		}
 
 		if (cache.logCounts != null && cache.logCounts.isEmpty() == false) {
-			status = saveLogCount(cache.geocode, cache.logCounts);
-			if (status == false) {
+			if (!saveLogCount(cache.geocode, cache.logCounts)) {
 				statusOk = false;
 			}
 		}
 
 		if (cache.inventory != null) {
-			status = saveInventory(cache.geocode, cache.inventory);
-			if (status == false) {
+			if (!saveInventory(cache.geocode, cache.inventory)) {
 				statusOk = false;
 			}
 		}
 
 		if (statusOk == false) {
 			cache.detailed = false;
-			cache.detailedUpdate = 0l;
+			cache.detailedUpdate = 0L;
 		}
 
 		init();
@@ -1273,7 +1294,7 @@ public class cgData {
 	public boolean saveAttributes(String geocode, ArrayList<String> attributes) {
 		init();
 
-		if (geocode == null || geocode.length() == 0 || attributes == null) {
+		if (StringUtils.isBlank(geocode) || attributes == null) {
 			return false;
 		}
 
@@ -1282,15 +1303,20 @@ public class cgData {
 			databaseRW.delete(dbTableAttributes, "geocode = ?", new String[] {geocode});
 
 			if (!attributes.isEmpty()) {
-				ContentValues values = new ContentValues();
-				for (String oneAttribute : attributes) {
-					values.clear();
-					values.put("geocode", geocode);
-					values.put("updated", System.currentTimeMillis());
-					values.put("attribute", oneAttribute);
 
-					databaseRW.insert(dbTableAttributes, null, values);
+				InsertHelper helper = new InsertHelper(databaseRW, dbTableAttributes);
+	            long timeStamp = System.currentTimeMillis();
+
+				for (String attribute : attributes) {
+					helper.prepareForInsert();
+
+		            helper.bind(ATTRIBUTES_GEOCODE, geocode);
+					helper.bind(ATTRIBUTES_UPDATED, timeStamp);
+		            helper.bind(ATTRIBUTES_ATTRIBUTE, attribute);
+
+		            helper.execute();
 				}
+				helper.close();
 			}
 			databaseRW.setTransactionSuccessful();
 		} finally {
@@ -1340,7 +1366,7 @@ public class cgData {
 	public boolean saveWaypoints(String geocode, ArrayList<cgWaypoint> waypoints, boolean drop) {
 		init();
 
-		if (geocode == null || geocode.length() == 0 || waypoints == null) {
+		if (StringUtils.isBlank(geocode) || waypoints == null) {
 			return false;
 		}
 
@@ -1353,6 +1379,7 @@ public class cgData {
 
 			if (!waypoints.isEmpty()) {
 				ContentValues values = new ContentValues();
+				long timeStamp = System.currentTimeMillis();
 				for (cgWaypoint oneWaypoint : waypoints) {
 					if (oneWaypoint.isUserDefined()) {
 						continue;
@@ -1360,7 +1387,7 @@ public class cgData {
 
 					values.clear();
 					values.put("geocode", geocode);
-					values.put("updated", System.currentTimeMillis());
+					values.put("updated", timeStamp);
 					values.put("type", oneWaypoint.type);
 					values.put("prefix", oneWaypoint.prefix);
 					values.put("lookup", oneWaypoint.lookup);
@@ -1388,7 +1415,7 @@ public class cgData {
 	public boolean saveOwnWaypoint(int id, String geocode, cgWaypoint waypoint) {
 		init();
 
-		if (((geocode == null || geocode.length() == 0) && id <= 0) || waypoint == null) {
+		if ((StringUtils.isBlank(geocode) && id <= 0) || waypoint == null) {
 			return false;
 		}
 
@@ -1447,7 +1474,7 @@ public class cgData {
 	public boolean saveSpoilers(String geocode, ArrayList<cgImage> spoilers) {
 		init();
 
-		if (geocode == null || geocode.length() == 0 || spoilers == null) {
+		if (StringUtils.isBlank(geocode) || spoilers == null) {
 			return false;
 		}
 
@@ -1457,10 +1484,11 @@ public class cgData {
 
 			if (!spoilers.isEmpty()) {
 				ContentValues values = new ContentValues();
+				long timeStamp = System.currentTimeMillis();
 				for (cgImage oneSpoiler : spoilers) {
 					values.clear();
 					values.put("geocode", geocode);
-					values.put("updated", System.currentTimeMillis());
+					values.put("updated", timeStamp);
 					values.put("url", oneSpoiler.url);
 					values.put("title", oneSpoiler.title);
 					values.put("description", oneSpoiler.description);
@@ -1483,7 +1511,7 @@ public class cgData {
 	public boolean saveLogs(String geocode, ArrayList<cgLog> logs, boolean drop) {
 		init();
 
-		if (geocode == null || geocode.length() == 0 || logs == null) {
+		if (StringUtils.isBlank(geocode) || logs == null) {
 			return false;
 		}
 
@@ -1495,21 +1523,24 @@ public class cgData {
 			}
 
 			if (!logs.isEmpty()) {
-				ContentValues values = new ContentValues();
-				for (cgLog oneLog : logs) {
-					values.clear();
-					values.put("geocode", geocode);
-					values.put("updated", System.currentTimeMillis());
-					values.put("type", oneLog.type);
-					values.put("author", oneLog.author);
-					values.put("log", oneLog.log);
-					values.put("date", oneLog.date);
-					values.put("found", oneLog.found);
+				InsertHelper helper = new InsertHelper(databaseRW, dbTableLogs);
+	            long timeStamp = System.currentTimeMillis();
+				for (cgLog log : logs) {
+					helper.prepareForInsert();
 
-					long log_id = databaseRW.insert(dbTableLogs, null, values);
+		            helper.bind(LOGS_GEOCODE, geocode);
+					helper.bind(LOGS_UPDATED, timeStamp);
+		            helper.bind(LOGS_TYPE, log.type);
+		            helper.bind(LOGS_AUTHOR, log.author);
+		            helper.bind(LOGS_LOG, log.log);
+		            helper.bind(LOGS_DATE, log.date);
+		            helper.bind(LOGS_FOUND, log.found);
 
-					if ((oneLog.logImages != null) && (oneLog.logImages.size() > 0)) {
-						for (cgImage img : oneLog.logImages) {
+		            long log_id = helper.execute();
+
+					if (CollectionUtils.isNotEmpty(log.logImages)) {
+						ContentValues values = new ContentValues();
+						for (cgImage img : log.logImages) {
 							values.clear();
 							values.put("log_id", log_id);
 							values.put("title", img.title);
@@ -1518,6 +1549,7 @@ public class cgData {
 						}
 					}
 				}
+				helper.close();
 			}
 			databaseRW.setTransactionSuccessful();
 		} finally {
@@ -1534,7 +1566,7 @@ public class cgData {
 	public boolean saveLogCount(String geocode, HashMap<Integer, Integer> logCounts, boolean drop) {
 		init();
 
-		if (geocode == null || geocode.length() == 0 || logCounts == null || logCounts.isEmpty()) {
+		if (StringUtils.isBlank(geocode) || CollectionUtils.isEmpty(logCounts)) {
 			return false;
 		}
 
@@ -1547,10 +1579,11 @@ public class cgData {
 			ContentValues values = new ContentValues();
 
 			Set<Entry<Integer, Integer>> logCountsItems = logCounts.entrySet();
+			long timeStamp = System.currentTimeMillis();
 			for (Entry<Integer, Integer> pair : logCountsItems) {
 				values.clear();
 				values.put("geocode", geocode);
-				values.put("updated", System.currentTimeMillis());
+				values.put("updated", timeStamp);
 				values.put("type", pair.getKey().intValue());
 				values.put("count", pair.getValue().intValue());
 
@@ -1579,12 +1612,13 @@ public class cgData {
 
 			if (!trackables.isEmpty()) {
 				ContentValues values = new ContentValues();
+				long timeStamp = System.currentTimeMillis();
 				for (cgTrackable oneTrackable : trackables) {
 					values.clear();
 					if (geocode != null) {
 						values.put("geocode", geocode);
 					}
-					values.put("updated", System.currentTimeMillis());
+					values.put("updated", timeStamp);
 					values.put("tbcode", oneTrackable.geocode);
 					values.put("guid", oneTrackable.guid);
 					values.put("title", oneTrackable.name);
@@ -1592,7 +1626,7 @@ public class cgData {
 					if (oneTrackable.released != null) {
 						values.put("released", oneTrackable.released.getTime());
 					} else {
-						values.put("released", 0l);
+						values.put("released", 0L);
 					}
 					values.put("goal", oneTrackable.goal);
 					values.put("description", oneTrackable.details);
@@ -1626,9 +1660,9 @@ public class cgData {
 					if (all.length() > 0) {
 						all.append(", ");
 					}
-					all.append("\"");
+					all.append('"');
 					all.append((String) one);
-					all.append("\"");
+					all.append('"');
 				}
 
 				if (where.length() > 0) {
@@ -1636,7 +1670,7 @@ public class cgData {
 				}
 				where.append("geocode in (");
 				where.append(all);
-				where.append(")");
+				where.append(')');
 			}
 
 			cursor = databaseRO.query(
@@ -1681,13 +1715,13 @@ public class cgData {
 		Object[] geocodes = new Object[1];
 		Object[] guids = new Object[1];
 
-		if (geocode != null && geocode.length() > 0) {
+		if (StringUtils.isNotBlank(geocode)) {
 			geocodes[0] = geocode;
 		} else {
 			geocodes = null;
 		}
 
-		if (guid != null && guid.length() > 0) {
+		if (StringUtils.isNotBlank(guid)) {
 			guids[0] = guid;
 		} else {
 			guids = null;
@@ -1727,9 +1761,9 @@ public class cgData {
 					if (all.length() > 0) {
 						all.append(", ");
 					}
-					all.append("\"");
+					all.append('"');
 					all.append((String) one);
-					all.append("\"");
+					all.append('"');
 				}
 
 				if (where.length() > 0) {
@@ -1737,16 +1771,16 @@ public class cgData {
 				}
 				where.append("geocode in (");
 				where.append(all);
-				where.append(")");
+				where.append(')');
 			} else if (guids != null && guids.length > 0) {
 				StringBuilder all = new StringBuilder();
 				for (Object one : guids) {
 					if (all.length() > 0) {
 						all.append(", ");
 					}
-					all.append("\"");
+					all.append('"');
 					all.append((String) one);
-					all.append("\"");
+					all.append('"');
 				}
 
 				if (where.length() > 0) {
@@ -1754,7 +1788,7 @@ public class cgData {
 				}
 				where.append("guid in (");
 				where.append(all);
-				where.append(")");
+				where.append(')');
 			} else {
 				return caches;
 			}
@@ -1781,8 +1815,7 @@ public class cgData {
 				if (where.length() > 0) {
 					where.append(" and ");
 				}
-				where.append("(");
-				where.append("latitude >= ");
+				where.append("(latitude >= ");
 				where.append(String.format((Locale) null, "%.6f", latMin));
 				where.append(" and latitude <= ");
 				where.append(String.format((Locale) null, "%.6f", latMax));
@@ -1790,7 +1823,7 @@ public class cgData {
 				where.append(String.format((Locale) null, "%.6f", lonMin));
 				where.append(" and longitude <= ");
 				where.append(String.format((Locale) null, "%.6f", lonMax));
-				where.append(")");
+				where.append(')');
 			}
 
 			cursor = databaseRO.query(
@@ -1876,13 +1909,13 @@ public class cgData {
 						cache.rating = (Float) cursor.getFloat(cursor.getColumnIndex("rating"));
 						cache.votes = (Integer) cursor.getInt(cursor.getColumnIndex("votes"));
 						cache.myVote = (Float) cursor.getFloat(cursor.getColumnIndex("myvote"));
-                        cache.disabled = cursor.getLong(cursor.getColumnIndex("disabled")) == 1l;
-                        cache.archived = cursor.getLong(cursor.getColumnIndex("archived")) == 1l;
-                        cache.members = cursor.getLong(cursor.getColumnIndex("members")) == 1l;
-                        cache.found = cursor.getLong(cursor.getColumnIndex("found")) == 1l;
-                        cache.favourite = cursor.getLong(cursor.getColumnIndex("favourite")) == 1l;
+                        cache.disabled = cursor.getLong(cursor.getColumnIndex("disabled")) == 1L;
+                        cache.archived = cursor.getLong(cursor.getColumnIndex("archived")) == 1L;
+                        cache.members = cursor.getLong(cursor.getColumnIndex("members")) == 1L;
+                        cache.found = cursor.getLong(cursor.getColumnIndex("found")) == 1L;
+                        cache.favourite = cursor.getLong(cursor.getColumnIndex("favourite")) == 1L;
 						cache.inventoryItems = (Integer) cursor.getInt(cursor.getColumnIndex("inventoryunknown"));
-						cache.onWatchlist = cursor.getLong(cursor.getColumnIndex("onWatchlist")) == 1l;
+						cache.onWatchlist = cursor.getLong(cursor.getColumnIndex("onWatchlist")) == 1L;
 
 						if (loadA) {
 							ArrayList<String> attributes = loadAttributes(cache.geocode);
@@ -1970,7 +2003,7 @@ public class cgData {
 	}
 
 	public ArrayList<String> loadAttributes(String geocode) {
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			return null;
 		}
 
@@ -2036,7 +2069,7 @@ public class cgData {
 	}
 
 	public ArrayList<cgWaypoint> loadWaypoints(String geocode) {
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			return null;
 		}
 
@@ -2101,7 +2134,7 @@ public class cgData {
 	}
 
 	public ArrayList<cgImage> loadSpoilers(String geocode) {
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			return null;
 		}
 
@@ -2196,7 +2229,7 @@ public class cgData {
 	}
 
 	public ArrayList<cgLog> loadLogs(String geocode) {
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			return null;
 		}
 
@@ -2239,7 +2272,7 @@ public class cgData {
 	}
 
 	public HashMap<Integer, Integer> loadLogCounts(String geocode) {
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			return null;
 		}
 
@@ -2309,7 +2342,7 @@ public class cgData {
 	}
 
 	public ArrayList<cgTrackable> loadInventory(String geocode) {
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			return null;
 		}
 
@@ -2345,7 +2378,7 @@ public class cgData {
 	}
 
 	public cgTrackable loadTrackable(String geocode) {
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			return null;
 		}
 
@@ -2468,7 +2501,7 @@ public class cgData {
 		if (cachetype != null) {
 			specifySql.append(" and type = \"");
 			specifySql.append(cachetype);
-			specifySql.append("\"");
+			specifySql.append('"');
 		}
 
 		try {
@@ -2518,7 +2551,7 @@ public class cgData {
 		if (cachetype != null) {
 			specifySql.append(" and type = \"");
 			specifySql.append(cachetype);
-			specifySql.append("\"");
+			specifySql.append('"');
 		}
 
 		try {
@@ -2602,7 +2635,7 @@ public class cgData {
 		if (cachetype != null) {
 			where.append(" and type = \"");
 			where.append(cachetype);
-			where.append("\"");
+			where.append('"');
 		}
 
 		// offline caches only
@@ -2652,7 +2685,7 @@ public class cgData {
 		// cachetype limitation
 		if (cachetype != null) {
 			where.append(cachetype);
-			where.append("\"");
+			where.append('"');
 		}
 
 		// offline caches only
@@ -2694,7 +2727,7 @@ public class cgData {
 	}
 
 	public void markStored(String geocode, int listId) {
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			return;
 		}
 
@@ -2710,7 +2743,7 @@ public class cgData {
 	}
 
 	public boolean markDropped(String geocode) {
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			return false;
 		}
 
@@ -2732,7 +2765,7 @@ public class cgData {
 	}
 
 	public boolean markFound(String geocode) {
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			return false;
 		}
 
@@ -2863,7 +2896,7 @@ public class cgData {
 				cursor.close();
 			}
 
-			if (geocodes.size() > 0) {
+			if (CollectionUtils.isNotEmpty(geocodes)) {
 				String geocodeList = cgBase.implode(", ", geocodes.toArray());
 				databaseRW.execSQL("delete from " + dbTableCaches + " where geocode in (" + geocodeList + ")");
 				databaseRW.execSQL("delete from " + dbTableAttributes + " where geocode in (" + geocodeList + ")");
@@ -2882,10 +2915,10 @@ public class cgData {
 	}
 
 	public boolean saveLogOffline(String geocode, Date date, int type, String log) {
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			return false;
 		}
-		if (type <= 0 && (log == null || log.length() == 0)) {
+		if (type <= 0 && StringUtils.isBlank(log)) {
 			return false;
 		}
 
@@ -2920,7 +2953,7 @@ public class cgData {
 	}
 
 	public cgLog loadLogOffline(String geocode) {
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			return null;
 		}
 
@@ -2956,7 +2989,7 @@ public class cgData {
 	}
 
 	public void clearLogOffline(String geocode) {
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			return;
 		}
 
@@ -2966,7 +2999,7 @@ public class cgData {
 	}
 
 	public boolean hasLogOffline(String geocode) {
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			return false;
 		}
 
@@ -2985,7 +3018,7 @@ public class cgData {
 	}
 
 	public void saveVisitDate(String geocode) {
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			return;
 		}
 
@@ -3000,7 +3033,7 @@ public class cgData {
 	}
 
 	public void clearVisitDate(String geocode) {
-        if (geocode == null || geocode.length() == 0) {
+        if (StringUtils.isBlank(geocode)) {
             return;
         }
 
@@ -3107,7 +3140,7 @@ public class cgData {
 
 	public int createList(String name) {
 		int id = -1;
-		if (name == null || name.length() == 0) {
+		if (StringUtils.isBlank(name)) {
 			return id;
 		}
 
@@ -3161,7 +3194,7 @@ public class cgData {
 	}
 
 	public void moveToList(String geocode, int listId) {
-		if (geocode == null || geocode.length() == 0 || listId <= 0) {
+		if (StringUtils.isBlank(geocode) || listId <= 0) {
 			return;
 		}
 
@@ -3187,7 +3220,7 @@ public class cgData {
 
 	public boolean removeSearchedDestination(cgDestination destination) {
 		boolean success = true;
-		if(destination == null){
+		if (destination == null){
 			success = false;
 		} else{
 			init();

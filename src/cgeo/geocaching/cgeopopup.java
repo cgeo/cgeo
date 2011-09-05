@@ -1,7 +1,8 @@
 package cgeo.geocaching;
 
-import java.util.HashMap;
 import java.util.Locale;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -38,7 +39,6 @@ public class cgeopopup extends AbstractActivity {
 	private ProgressDialog storeDialog = null;
 	private ProgressDialog dropDialog = null;
 	private TextView cacheDistance = null;
-	private HashMap<String, Integer> gcIcons = new HashMap<String, Integer>();
 	private Handler ratingHandler = new Handler() {
 
 		@Override
@@ -119,7 +119,7 @@ public class cgeopopup extends AbstractActivity {
 			geocode = extras.getString("geocode");
 		}
 
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			showToast(res.getString(R.string.err_detail_cache_find));
 
 			finish();
@@ -214,24 +214,7 @@ public class cgeopopup extends AbstractActivity {
 			TextView itemValue;
 			LinearLayout itemStars;
 
-			if (gcIcons == null || gcIcons.isEmpty()) {
-				gcIcons.put("ape", R.drawable.type_ape);
-				gcIcons.put("cito", R.drawable.type_cito);
-				gcIcons.put("earth", R.drawable.type_earth);
-				gcIcons.put("event", R.drawable.type_event);
-				gcIcons.put("letterbox", R.drawable.type_letterbox);
-				gcIcons.put("locationless", R.drawable.type_locationless);
-				gcIcons.put("mega", R.drawable.type_mega);
-				gcIcons.put("multi", R.drawable.type_multi);
-				gcIcons.put("traditional", R.drawable.type_traditional);
-				gcIcons.put("virtual", R.drawable.type_virtual);
-				gcIcons.put("webcam", R.drawable.type_webcam);
-				gcIcons.put("wherigo", R.drawable.type_wherigo);
-				gcIcons.put("mystery", R.drawable.type_mystery);
-				gcIcons.put("gchq", R.drawable.type_hq);
-			}
-
-			if (cache.name != null && cache.name.length() > 0) {
+			if (StringUtils.isNotBlank(cache.name)) {
 				setTitle(cache.name);
 			} else {
 				setTitle(geocode.toUpperCase());
@@ -245,11 +228,7 @@ public class cgeopopup extends AbstractActivity {
 			detailsList.removeAllViews();
 
 			// actionbar icon
-			if (cache.type != null && gcIcons.containsKey(cache.type)) { // cache icon
-				((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable) getResources().getDrawable(gcIcons.get(cache.type)), null, null, null);
-			} else { // unknown cache type, "mystery" icon
-				((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable) getResources().getDrawable(gcIcons.get("mystery")), null, null, null);
-			}
+			((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable) getResources().getDrawable(cgBase.getCacheIcon(cache.type)), null, null, null);
 
 			// cache type
 			itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
@@ -258,13 +237,13 @@ public class cgeopopup extends AbstractActivity {
 
 			itemName.setText(res.getString(R.string.cache_type));
 			if (cgBase.cacheTypesInv.containsKey(cache.type)) { // cache icon
-				if (cache.size != null && cache.size.length() > 0) {
+				if (StringUtils.isNotBlank(cache.size)) {
 					itemValue.setText(cgBase.cacheTypesInv.get(cache.type) + " (" + cache.size + ")");
 				} else {
 					itemValue.setText(cgBase.cacheTypesInv.get(cache.type));
 				}
 			} else {
-				if (cache.size != null && cache.size.length() > 0) {
+				if (StringUtils.isNotBlank(cache.size)) {
 					itemValue.setText(cgBase.cacheTypesInv.get("mystery") + " (" + cache.size + ")");
 				} else {
 					itemValue.setText(cgBase.cacheTypesInv.get("mystery"));
@@ -561,16 +540,7 @@ public class cgeopopup extends AbstractActivity {
 			showToast(res.getString(R.string.err_location_unknown));
 		}
 
-		cgeocaches cachesActivity = new cgeocaches();
-
-		Intent cachesIntent = new Intent(this, cachesActivity.getClass());
-
-		cachesIntent.putExtra("type", "coordinate");
-		cachesIntent.putExtra("latitude", cache.latitude);
-		cachesIntent.putExtra("longitude", cache.longitude);
-		cachesIntent.putExtra("cachetype", settings.cacheType);
-
-		startActivity(cachesIntent);
+		cgeocaches.startActivityCachesAround(this, cache.latitude, cache.longitude);
 
 		finish();
 	}

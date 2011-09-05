@@ -288,6 +288,7 @@
   <string name="caches_sort_inventory">count of inventory</string>
   <string name="caches_sort_date">date</string>
   <string name="caches_sort_finds">finds</string>
+  <string name="caches_sort_state">state</string>
   <string name="caches_select">Select from list</string>
   <string name="caches_select_mode">Select mode</string>
   <string name="caches_select_mode_exit">Exit select mode</string>
@@ -488,6 +489,7 @@
   <string name="cache_offline_time_days">days ago</string>
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Attributes</string>
+  <string name="cache_attributes_no_icons">(refresh cache to show attribute icons)</string>
   <string name="cache_inventory">Inventory</string>
   <string name="cache_log_offline">Offline log</string>
   <string name="cache_log_images_loading">Loading log Image …</string>
@@ -909,7 +911,6 @@
     · inkantis (localization PL)\n
     · <a href="http://www.jaytech.cz/">Jan Žatecký</a> (graphic)\n
     · <a href="http://joachim-wilke.de/">JoWi24</a> (code)\n
-    · <a href="http://github.com/koem">Köm</a> (code, artwork computation)\n
     · MichielK (code, loc. NL)\n
     · ncorreia (code, localization PT)\n
     · Pascal (localization NL)\n
@@ -923,13 +924,27 @@
     · thiasB (code, loc. DE EN)\n
     · YraFyra (code, loc. SV)\n
     · zenobios (code, loc. DE EN)\n
+    · <a href="http://github.com/koem">Karsten Priegnitz</a> (code, artwork computation)\n
+    · blafoo (code)\n
     \n
     · <a href="http://code.google.com/p/mapsforge/">Mapsforge</a> (OSM-rendering)\n
-    · <a href="http://thenounproject.com/">The Noun Project</a> (graphics)\n
+    · <a href="http://thenounproject.com/">The Noun Project</a> (basis for attribute icons)\n
   </string>
 
   <!-- changelog -->
   <string name="changelog">\n
+    <b>Next release</b>\n
+    · new: sort by state, sort by find count\n
+    · new: experimental support for .gpx from opencaching.com\n
+    · new: scan QR code to open cache description\n
+    · new: context menu on stored caches button (main screen)\n
+    · fix: performance of GPX import\n
+    · fix: performance of deleting caches from list\n
+    · fix: return to list after GPX import\n
+    · fix: fill signature when logging offline\n
+    · fix: show strikethrough in caches\n
+    · fix: no more empty map previews\n
+    \n\n
     <b>26.08.2011</b>\n
     · new: street view\n
     · new: attribute icons\n

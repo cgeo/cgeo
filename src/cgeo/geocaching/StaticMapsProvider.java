@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Locale;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -18,6 +19,7 @@ import android.content.Context;
 import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
+import cgeo.geocaching.utils.CollectionUtils;
 
 public class StaticMapsProvider {
 	private static final String MARKERS_URL = "http://cgeo.carnero.cc/_markers/";
@@ -28,7 +30,7 @@ public class StaticMapsProvider {
 
 	private static void downloadMapsInThread(final cgCache cache, String latlonMap, int edge, String waypoints) {
 		createStorageDirectory(cache);
-		
+
 		downloadMap(cache, 20, "satellite", 1, latlonMap, edge, waypoints);
 		downloadMap(cache, 18, "satellite", 2, latlonMap, edge, waypoints);
 		downloadMap(cache, 16, "roadmap", 3, latlonMap, edge, waypoints);
@@ -54,7 +56,7 @@ public class StaticMapsProvider {
 	private static void downloadMap(cgCache cache, int zoom, String mapType, int level, String latlonMap, int edge, String waypoints) {
 		String mapUrl = "http://maps.google.com/maps/api/staticmap?center=" + latlonMap;
 		String markerUrl = getMarkerUrl(cache);
-		
+
 		String url = mapUrl + "&zoom=" + zoom + "&size=" + edge + "x" + edge + "&maptype=" + mapType + "&markers=icon%3A" + markerUrl + "%7C" + latlonMap + waypoints + "&sensor=false";
 
 		final String fileName = getStaticMapsDirectory(cache) + "/map_" + level;
@@ -122,10 +124,10 @@ public class StaticMapsProvider {
 
 	public static void downloadMaps(cgCache cache, cgSettings settings, Activity activity) {
 		if (settings.storeOfflineMaps != 1 || cache.latitude == null
-				|| cache.longitude == null || cache.geocode == null || cache.geocode.length() == 0) {
+				|| cache.longitude == null || StringUtils.isNotBlank(cache.geocode)) {
 			return;
 		}
-		
+
 		final String latlonMap = String.format((Locale) null, "%.6f", cache.latitude) + "," + String.format((Locale) null, "%.6f", cache.longitude);
 		final Display display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 		final int maxWidth = display.getWidth() - 25;
@@ -138,17 +140,19 @@ public class StaticMapsProvider {
 		}
 
 		final StringBuilder waypoints = new StringBuilder();
-		if (cache.waypoints != null && cache.waypoints.size() > 0) {
+		if (CollectionUtils.isNotEmpty(cache.waypoints)) {
 			for (cgWaypoint waypoint : cache.waypoints) {
 				if (waypoint.latitude == null && waypoint.longitude == null) {
 					continue;
 				}
 
-				waypoints.append("&markers=icon%3A" + MARKERS_URL + "marker_waypoint_");
+				waypoints.append("&markers=icon%3A");
+				waypoints.append(MARKERS_URL);
+				waypoints.append("marker_waypoint_");
 				waypoints.append(waypoint.type);
 				waypoints.append(".png%7C");
 				waypoints.append(String.format((Locale) null, "%.6f", waypoint.latitude));
-				waypoints.append(",");
+				waypoints.append(',');
 				waypoints.append(String.format((Locale) null, "%.6f", waypoint.longitude));
 			}
 		}
@@ -156,7 +160,7 @@ public class StaticMapsProvider {
 		// download map images in separate background thread for higher performance
 		downloadMaps(cache, latlonMap, edge, waypoints.toString());
 	}
-	
+
 	private static void downloadMaps(final cgCache cache, final String latlonMap, final int edge,
 			final String waypoints) {
 		Thread staticMapsThread = new Thread("getting static map") {@Override

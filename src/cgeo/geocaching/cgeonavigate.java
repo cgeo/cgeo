@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -86,8 +88,8 @@ public class cgeonavigate extends AbstractActivity {
 			dstLatitude = extras.getDouble("latitude");
 			dstLongitude = extras.getDouble("longitude");
 
-			if (name != null && name.length() > 0) {
-				if (title != null && title.length() > 0) {
+			if (StringUtils.isNotBlank(name)) {
+				if (StringUtils.isNotBlank(title)) {
 					title = title + ": " + name;
 				} else {
 					title = name;
@@ -101,9 +103,9 @@ public class cgeonavigate extends AbstractActivity {
 			return;
 		}
 
-		if (title != null && title.length() > 0) {
+		if (StringUtils.isNotBlank(title)) {
 			app.setAction(title);
-		} else if (name != null && name.length() > 0) {
+		} else if (StringUtils.isNotBlank(name)) {
 			app.setAction(name);
 		}
 
@@ -132,9 +134,9 @@ public class cgeonavigate extends AbstractActivity {
 
 		settings.load();
 
-		if (title != null && title.length() > 0) {
+		if (StringUtils.isNotBlank(title)) {
 			app.setAction(title);
-		} else if (name != null && name.length() > 0) {
+		} else if (StringUtils.isNotBlank(name)) {
 			app.setAction(name);
 		}
 
@@ -295,7 +297,7 @@ public class cgeonavigate extends AbstractActivity {
 	}
 
 	private void setTitle() {
-		if (title != null && title.length() > 0) {
+		if (StringUtils.isNotBlank(title)) {
 			setTitle(title);
 		} else {
 			setTitle(res.getString(R.string.navigation));
@@ -307,7 +309,7 @@ public class cgeonavigate extends AbstractActivity {
 			return;
 		}
 
-		((TextView) findViewById(R.id.destination)).setText(cgBase.formatCoordinate(dstLatitude, "lat", true) + " | " + cgBase.formatCoordinate(dstLongitude, "lon", true));
+		((TextView) findViewById(R.id.destination)).setText(cgBase.formatCoords(dstLatitude, dstLongitude, true));
 	}
 
 	public void setDest(Double lat, Double lon) {
@@ -402,9 +404,9 @@ public class cgeonavigate extends AbstractActivity {
 						} else {
 							humanAlt = String.format("%.0f", geo.altitudeNow) + " m";
 						}
-						navLocation.setText(cgBase.formatCoordinate(geo.latitudeNow, "lat", true) + " | " + cgBase.formatCoordinate(geo.longitudeNow, "lon", true) + " | " + humanAlt);
+						navLocation.setText(cgBase.formatCoords(geo.latitudeNow, geo.longitudeNow, true) + " | " + humanAlt);
 					} else {
-						navLocation.setText(cgBase.formatCoordinate(geo.latitudeNow, "lat", true) + " | " + cgBase.formatCoordinate(geo.longitudeNow, "lon", true));
+						navLocation.setText(cgBase.formatCoords(geo.latitudeNow, geo.longitudeNow, true));
 					}
 
 					updateDistanceInfo();

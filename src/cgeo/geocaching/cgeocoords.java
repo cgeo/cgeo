@@ -3,6 +3,8 @@ package cgeo.geocaching;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
@@ -161,10 +163,10 @@ public class cgeocoords extends Dialog {
 				eLat.setVisibility(View.VISIBLE);
 				eLon.setVisibility(View.VISIBLE);
 				if (latitude != null) {
-					eLat.setText(cgBase.formatCoordinate(latitude, "lat", true));
+					eLat.setText(cgBase.formatLatitude(latitude, true));
 				}
 				if (longitude != null) {
-					eLon.setText(cgBase.formatCoordinate(longitude, "lon", true));
+					eLon.setText(cgBase.formatLongitude(longitude, true));
 				}
 				break;
 			case Deg: // DDD.DDDDD°
@@ -274,7 +276,7 @@ public class cgeocoords extends Dialog {
 		public void onClick(View v) {
 			Button e = (Button) v;
 			CharSequence text = e.getText();
-			if (text == null || text.length() == 0) {
+			if (StringUtils.isBlank(text)) {
 				return;
 			}
 			switch (text.charAt(0)) {

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.util.Log;
 
 
@@ -16,7 +18,7 @@ public class LogTemplateProvider {
 		private String template;
 		private int resourceId;
 
-		public LogTemplate(String template, int resourceId) {
+		protected LogTemplate(String template, int resourceId) {
 			this.template = template;
 			this.resourceId = resourceId;
 		}
@@ -118,7 +120,7 @@ public class LogTemplateProvider {
 	}
 	
 	private static int parseFindCount(String page) {
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			return -1;
 		}
 

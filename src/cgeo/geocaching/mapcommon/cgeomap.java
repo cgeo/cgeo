@@ -29,13 +29,13 @@ import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgDirection;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.cgUpdateDir;
 import cgeo.geocaching.cgUpdateLoc;
 import cgeo.geocaching.cgUser;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.mapinterfaces.ActivityImpl;
 import cgeo.geocaching.mapinterfaces.CacheOverlayItemImpl;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
@@ -43,6 +43,7 @@ import cgeo.geocaching.mapinterfaces.MapControllerImpl;
 import cgeo.geocaching.mapinterfaces.MapFactory;
 import cgeo.geocaching.mapinterfaces.MapViewImpl;
 import cgeo.geocaching.mapinterfaces.UserOverlayItemImpl;
+import cgeo.geocaching.utils.CollectionUtils;
 
 public class cgeomap extends MapBase {
 
@@ -102,8 +103,8 @@ public class cgeomap extends MapBase {
 	private UsersThread usersThread = null;
 	private DisplayUsersThread displayUsersThread = null;
 	private LoadDetails loadDetailsThread = null;
-	private volatile long loadThreadRun = 0l;
-	private volatile long usersThreadRun = 0l;
+	private volatile long loadThreadRun = 0L;
+	private volatile long usersThreadRun = 0L;
 	private volatile boolean downloaded = false;
 	// overlays
 	private cgMapOverlay overlayCaches = null;
@@ -120,7 +121,7 @@ public class cgeomap extends MapBase {
 	private ProgressDialog waitDialog = null;
 	private int detailTotal = 0;
 	private int detailProgress = 0;
-	private Long detailProgressTime = 0l;
+	private Long detailProgressTime = 0L;
 	// views
 	private ImageView myLocSwitch = null;
 	// other things
@@ -146,10 +147,9 @@ public class cgeomap extends MapBase {
 				}
 
 				if (caches != null && cachesCnt > 0) {
-					title.append(" ");
-					title.append("[");
+					title.append(" [");
 					title.append(caches.size());
-					title.append("]");
+					title.append(']');
 				}
 
 				ActivityMixin.setTitle(activity, title.toString());
@@ -309,7 +309,7 @@ public class cgeomap extends MapBase {
 			waypointTypeIntent = extras.getString("wpttype");
 			mapStateIntent = extras.getIntArray("mapstate");
 
-			if (searchIdIntent == 0l) {
+			if (searchIdIntent == 0L) {
 				searchIdIntent = null;
 			}
 			if (latitudeIntent == 0.0) {
@@ -327,11 +327,14 @@ public class cgeomap extends MapBase {
 			live = false;
 		}
 
-		// google analytics
-		if (live) {
-			followMyLocation = true;
+		if (null == mapStateIntent) {			
+			if (live) {
+				followMyLocation = true;
+			} else {
+				followMyLocation = false;
+			}
 		} else {
-			followMyLocation = false;
+			followMyLocation = 1 == mapStateIntent[3] ? true : false;
 		}
 		if (geocodeIntent != null || searchIdIntent != null || (latitudeIntent != null && longitudeIntent != null) || mapStateIntent != null) {
 			centerMap(geocodeIntent, searchIdIntent, latitudeIntent, longitudeIntent, mapStateIntent);
@@ -503,7 +506,7 @@ public class cgeomap extends MapBase {
 			}
 
 			item = menu.findItem(MENU_STORE_CACHES); // store loaded
-			if (live && !isLoading() && app.getNotOfflineCount(searchId) > 0 && caches != null && caches.size() > 0) {
+			if (live && !isLoading() && app.getNotOfflineCount(searchId) > 0 && CollectionUtils.isNotEmpty(caches)) {
 				item.setEnabled(true);
 			} else {
 				item.setEnabled(false);
@@ -560,7 +563,7 @@ public class cgeomap extends MapBase {
 
 				ArrayList<cgCache> cachesProtected = new ArrayList<cgCache>(caches);
 				try {
-					if (cachesProtected.size() > 0) {
+					if (CollectionUtils.isNotEmpty(cachesProtected)) {
 						final GeoPointImpl mapCenter = mapView.getMapViewCenter();
 						final int mapCenterLat = mapCenter.getLatitudeE6();
 						final int mapCenterLon = mapCenter.getLongitudeE6();
@@ -656,11 +659,12 @@ public class cgeomap extends MapBase {
 				mapIntent.putExtra("latitude", latitudeIntent);
 				mapIntent.putExtra("longitude", longitudeIntent);
 				mapIntent.putExtra("wpttype", waypointTypeIntent);
-				int[] mapState = new int[3];
+				int[] mapState = new int[4];
 				GeoPointImpl mapCenter = mapView.getMapViewCenter();
 				mapState[0] = mapCenter.getLatitudeE6();
 				mapState[1] = mapCenter.getLongitudeE6();
 				mapState[2] = mapView.getMapZoomLevel();
+				mapState[3] = followMyLocation ? 1 : 0;
 				mapIntent.putExtra("mapstate", mapState);
 
 				// start the new map
@@ -747,7 +751,7 @@ public class cgeomap extends MapBase {
 
 			try {
 				boolean repaintRequired = false;
-				
+
 				if (overlayMyLoc == null && mapView != null) {
 					overlayMyLoc = mapView.createAddPositionOverlay(activity, settings);
 				}
@@ -772,11 +776,11 @@ public class cgeomap extends MapBase {
 					}
 					repaintRequired = true;
 				}
-				
+
 				if (repaintRequired) {
 					mapView.repaintRequired(overlayMyLoc);
 				}
-				
+
 			} catch (Exception e) {
 				Log.w(cgSettings.tag, "Failed to update location.");
 			}
@@ -943,7 +947,7 @@ public class cgeomap extends MapBase {
 				} catch (Exception e) {
 					Log.w(cgSettings.tag, "cgeomap.LoadTimer.run: " + e.toString());
 				}
-			};
+			}
 		}
 	}
 
@@ -1025,7 +1029,7 @@ public class cgeomap extends MapBase {
 				} catch (Exception e) {
 					Log.w(cgSettings.tag, "cgeomap.LoadUsersTimer.run: " + e.toString());
 				}
-			};
+			}
 		}
 	}
 
@@ -1081,24 +1085,14 @@ public class cgeomap extends MapBase {
 
 				//if in live map and stored caches are found / disables are also shown.
 				if (live && settings.maplive >= 1) {
-					// I know code is crude, but temporary fix
-					int i = 0;
-					boolean excludeMine = settings.excludeMine > 0;
-					boolean excludeDisabled = settings.excludeDisabled > 0;
+					final boolean excludeMine = settings.excludeMine > 0;
+					final boolean excludeDisabled = settings.excludeDisabled > 0;
 
-					while (i < caches.size())
-					{
-						boolean remove = false;
-						if ((caches.get(i).found) && (excludeMine))
-							remove = true;
-						if ((caches.get(i).own) && (excludeMine))
-							remove = true;
-						if ((caches.get(i).disabled) && (excludeDisabled))
-							remove = true;
-						if (remove)
+					for (int i = caches.size() - 1; i >= 0; i--) {
+						cgCache cache = caches.get(i);
+						if ((cache.found && excludeMine) || (cache.own && excludeMine) || (cache.disabled && excludeDisabled)) {
 							caches.remove(i);
-						else
-							i++;
+						}
 					}
 
 				}
@@ -1281,7 +1275,7 @@ public class cgeomap extends MapBase {
 						coordinates.add(coord);
 
 						item = settings.getMapFactory().getCacheOverlayItem(coord, cacheOne.type);
-						icon = cgBase.getIcon(true, cacheOne.type, cacheOne.own, cacheOne.found, cacheOne.disabled || cacheOne.archived);
+						icon = cgBase.getMarkerIcon(true, cacheOne.type, cacheOne.own, cacheOne.found, cacheOne.disabled || cacheOne.archived);
 						pin = null;
 
 						if (iconsCache.containsKey(icon)) {
@@ -1325,7 +1319,7 @@ public class cgeomap extends MapBase {
 									coordinates.add(coord);
 									item = settings.getMapFactory().getCacheOverlayItem(coord, null);
 
-									icon = cgBase.getIcon(false, oneWaypoint.type, false, false, false);
+									icon = cgBase.getMarkerIcon(false, oneWaypoint.type, false, false, false);
 									if (iconsCache.containsKey(icon)) {
 										pin = iconsCache.get(icon);
 									} else {
@@ -1481,7 +1475,7 @@ public class cgeomap extends MapBase {
 				coordinates.add(coord);
 				CacheOverlayItemImpl item = settings.getMapFactory().getCacheOverlayItem(coord, null);
 
-				final int icon = cgBase.getIcon(false, waypointTypeIntent, false, false, false);
+				final int icon = cgBase.getMarkerIcon(false, waypointTypeIntent, false, false, false);
 				Drawable pin = null;
 				if (iconsCache.containsKey(icon)) {
 					pin = iconsCache.get(icon);
@@ -1509,10 +1503,10 @@ public class cgeomap extends MapBase {
 
 		protected boolean working = true;
 		protected boolean stop = false;
-		protected long centerLat = 0l;
-		protected long centerLon = 0l;
-		protected long spanLat = 0l;
-		protected long spanLon = 0l;
+		protected long centerLat = 0L;
+		protected long centerLon = 0L;
+		protected long spanLat = 0L;
+		protected long spanLon = 0L;
 
 		public DoThread(long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
 			centerLat = centerLatIn;
@@ -1551,7 +1545,7 @@ public class cgeomap extends MapBase {
 		private Handler handler = null;
 		private ArrayList<String> geocodes = null;
 		private volatile boolean stop = false;
-		private long last = 0l;
+		private long last = 0L;
 
 		public LoadDetails(Handler handlerIn, ArrayList<String> geocodesIn) {
 			handler = handlerIn;
@@ -1733,15 +1727,15 @@ public class cgeomap extends MapBase {
 
 		if (status == null) {
 			if (followMyLocation) {
-				myLocSwitch.setImageResource(R.drawable.my_location_on);
+				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_on);
 			} else {
-				myLocSwitch.setImageResource(R.drawable.my_location_off);
+				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_off);
 			}
 		} else {
 			if (status) {
-				myLocSwitch.setImageResource(R.drawable.my_location_on);
+				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_on);
 			} else {
-				myLocSwitch.setImageResource(R.drawable.my_location_off);
+				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_off);
 			}
 		}
 
@@ -1759,12 +1753,12 @@ public class cgeomap extends MapBase {
 			if (followMyLocation) {
 				followMyLocation = false;
 
-				myLocSwitch.setImageResource(R.drawable.my_location_off);
+				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_off);
 			} else {
 				followMyLocation = true;
 				myLocationInMiddle();
 
-				myLocSwitch.setImageResource(R.drawable.my_location_on);
+				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_on);
 			}
 		}
 	}

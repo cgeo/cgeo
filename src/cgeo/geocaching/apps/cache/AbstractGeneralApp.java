@@ -7,7 +7,7 @@ import cgeo.geocaching.apps.AbstractApp;
 
 abstract class AbstractGeneralApp extends AbstractApp implements GeneralApp {
 
-	AbstractGeneralApp(String name, String packageName) {
+	protected AbstractGeneralApp(String name, String packageName) {
 		super(name, null);
 		this.packageName = packageName;
 	}

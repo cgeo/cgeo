@@ -54,7 +54,7 @@ public class cgeoaddresses extends AbstractActivity {
 
 						while (address.getAddressLine(index) != null) {
 							if (allAdd.length() > 0) {
-								allAdd.append("\n");
+								allAdd.append('\n');
 							}
 							if (allAddLine.length() > 0) {
 								allAddLine.append("; ");

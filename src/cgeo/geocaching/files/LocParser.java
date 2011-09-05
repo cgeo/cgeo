@@ -6,6 +6,8 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.os.Handler;
 import android.util.Log;
 import cgeo.geocaching.cgBase;
@@ -53,7 +55,7 @@ public final class LocParser extends FileParser {
 		cache.terrain = coord.terrain;
 		cache.size = coord.size;
 		cache.geocode = coord.geocode.toUpperCase();
-		if (cache.name == null || cache.name.length() == 0) {
+		if (StringUtils.isBlank(cache.name)) {
 			cache.name = coord.name;
 		}
 	}
@@ -61,7 +63,7 @@ public final class LocParser extends FileParser {
 	private static HashMap<String, cgCoord> parseCoordinates(
 			final String fileContent) {
 		final HashMap<String, cgCoord> coords = new HashMap<String, cgCoord>();
-		if (fileContent == null || fileContent.length() <= 0) {
+		if (StringUtils.isBlank(fileContent)) {
 			return coords;
 		}
 		// >> premium only
@@ -131,7 +133,7 @@ public final class LocParser extends FileParser {
 				}
 			}
 
-			if (pointCoord.geocode != null && pointCoord.geocode.length() > 0) {
+			if (StringUtils.isNotBlank(pointCoord.geocode)) {
 				coords.put(pointCoord.geocode, pointCoord);
 			}
 		}
@@ -144,14 +146,14 @@ public final class LocParser extends FileParser {
 	public static long parseLoc(cgeoapplication app, File file, int listId,
 			Handler handler) {
 		cgSearch search = new cgSearch();
-		long searchId = 0l;
+		long searchId = 0L;
 
 		try {
 			HashMap<String, cgCoord> coords = parseCoordinates(readFile(file).toString());
 			final cgCacheWrap caches = new cgCacheWrap();
 			for (Entry<String, cgCoord> entry : coords.entrySet()) {
 				cgCoord coord = entry.getValue();
-				if (coord.geocode == null || coord.geocode.length() == 0 || coord.name == null || coord.name.length() == 0) {
+				if (StringUtils.isBlank(coord.geocode) || StringUtils.isBlank(coord.name)) {
 					continue;
 				}
 				cgCache cache = new cgCache();

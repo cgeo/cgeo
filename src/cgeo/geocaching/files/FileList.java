@@ -3,6 +3,8 @@ package cgeo.geocaching.files;
 import java.io.File;
 import java.util.ArrayList;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -127,7 +129,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
 	 * @return The folder to start the recursive search in
 	 */
 	protected abstract String[] getBaseFolders();
-	
+
 	/**
 	 * Triggers the deriving class to set the title
 	 */
@@ -185,7 +187,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
 
 		final File[] files = directory.listFiles();
 
-		if (files != null && files.length > 0) {
+		if (ArrayUtils.isNotEmpty(files)) {
 			for (File file : files) {
 				if (endSearching) {
 					return;
@@ -221,18 +223,18 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
 
 		return;
 	}
-	
-	public FileList(final String extension) {
+
+	protected FileList(final String extension) {
 		setExtensions(new String[] {extension});
 	}
 
-	public FileList(final String[] extensions) {
+	protected FileList(final String[] extensions) {
 		setExtensions(extensions);
 	}
 
 	private void setExtensions(String[] extensionsIn) {
 		for (String extension : extensionsIn) {
-			if (!extension.startsWith(".")) {
+			if (extension.length() == 0 || extension.charAt(0) != '.') {
 				extension = "." + extension;
 			}
 		}

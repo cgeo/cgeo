@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map.Entry;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -54,9 +56,10 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.GeneralAppsFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.utils.CollectionUtils;
 
 /**
- * Activity to display all details of a cache like owner, difficulty, description etc. 
+ * Activity to display all details of a cache like owner, difficulty, description etc.
  *
  */
 public class cgeodetail extends AbstractActivity {
@@ -84,17 +87,27 @@ public class cgeodetail extends AbstractActivity {
 	private loadLongDesc threadLongDesc = null;
 	private Thread storeThread = null;
 	private Thread refreshThread = null;
-	private HashMap<String, Integer> gcIcons = new HashMap<String, Integer>();
 	private ProgressDialog storeDialog = null;
 	private ProgressDialog refreshDialog = null;
 	private ProgressDialog dropDialog = null;
 	private ProgressDialog watchlistDialog = null; // progress dialog for watchlist add/remove
 	private Thread watchlistThread = null; // thread for watchlist add/remove
 	private HashMap<Integer, String> calendars = new HashMap<Integer, String>();
+
 	private ViewGroup attributeIconsLayout; // layout for attribute icons
 	private ViewGroup attributeDescriptionsLayout; // layout for attribute descriptions
 	private boolean attributesShowAsIcons = true; // default: show icons
+	/** <code>noAttributeImagesFound</code>
+	 * This will be the case if the cache was imported with an older version of c:geo.
+	 * These older versions parsed the attribute description from the tooltip in the web
+	 * page and put them into the DB. No icons can be matched for these. */
+	private boolean noAttributeIconsFound = false;
 	private int attributeBoxMaxWidth;
+	/**
+	 * differentiate between whether we are starting the activity for a cache or if we return to the activity from
+	 * another activity that we started in front
+	 */
+	private boolean disableResumeSetView = false;
 
 	private Handler storeCacheHandler = new Handler() {
 		@Override
@@ -287,6 +300,7 @@ public class cgeodetail extends AbstractActivity {
 			}
 		}
 	};
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -324,10 +338,10 @@ public class cgeodetail extends AbstractActivity {
 				geocode = uri.getQueryParameter("wp");
 				guid = uri.getQueryParameter("guid");
 
-				if (geocode != null && geocode.length() > 0) {
+				if (StringUtils.isNotBlank(geocode)) {
 					geocode = geocode.toUpperCase();
 					guid = null;
-				} else if (guid != null && guid.length() > 0) {
+				} else if (StringUtils.isNotBlank(guid)) {
 					geocode = null;
 					guid = guid.toLowerCase();
 				} else {
@@ -356,9 +370,9 @@ public class cgeodetail extends AbstractActivity {
 		app.setAction(geocode);
 
 		try {
-			if (name != null && name.length() > 0) {
+			if (StringUtils.isNotBlank(name)) {
 				waitDialog = ProgressDialog.show(this, name, res.getString(R.string.cache_dialog_loading_details), true);
-			} else if (geocode != null && geocode.length() > 0) {
+			} else if (StringUtils.isNotBlank(geocode)) {
 				waitDialog = ProgressDialog.show(this, geocode.toUpperCase(), res.getString(R.string.cache_dialog_loading_details), true);
 			} else {
 				waitDialog = ProgressDialog.show(this, res.getString(R.string.cache), res.getString(R.string.cache_dialog_loading_details), true);
@@ -368,6 +382,7 @@ public class cgeodetail extends AbstractActivity {
 			// nothing, we lost the window
 		}
 
+		disableResumeSetView = true;
 		threadCache = new loadCache(loadCacheHandler);
 		threadCache.start();
 	}
@@ -388,7 +403,10 @@ public class cgeodetail extends AbstractActivity {
 		if (geo == null) {
 			geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
 		}
-		setView();
+		if (!disableResumeSetView) {
+			setView();
+		}
+		disableResumeSetView = false;
 	}
 
 	@Override
@@ -427,7 +445,7 @@ public class cgeodetail extends AbstractActivity {
 			if (viewId == R.id.author) { // Author of a log entry
 				contextMenuUser = ((TextView)view).getText().toString();
 			} else if (viewId == R.id.value) { // The owner of the cache
-				if (cache.ownerReal != null && cache.ownerReal.length() > 0) {
+				if (StringUtils.isNotBlank(cache.ownerReal)) {
 					contextMenuUser = cache.ownerReal;
 				} else {
 					contextMenuUser = cache.owner;
@@ -453,24 +471,10 @@ public class cgeodetail extends AbstractActivity {
 			final int id = item.getItemId();
 
 			if (id == 1) {
-				final Intent cachesIntent = new Intent(this, cgeocaches.class);
-
-				cachesIntent.putExtra("type", "owner");
-				cachesIntent.putExtra("username", contextMenuUser);
-				cachesIntent.putExtra("cachetype", settings.cacheType);
-
-				startActivity(cachesIntent);
-
+				cgeocaches.startActivityCacheOwner(this, contextMenuUser);
 				return true;
 			} else if (id == 2) {
-				final Intent cachesIntent = new Intent(this, cgeocaches.class);
-
-				cachesIntent.putExtra("type", "username");
-				cachesIntent.putExtra("username", contextMenuUser);
-				cachesIntent.putExtra("cachetype", settings.cacheType);
-
-				startActivity(cachesIntent);
-
+				cgeocaches.startActivityCacheUser(this, contextMenuUser);
 				return true;
 			} else if (id == 3) {
 				startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(contextMenuUser))));
@@ -497,7 +501,7 @@ public class cgeodetail extends AbstractActivity {
 		}
 		addVisitMenu(menu, cache);
 
-		if (cache != null && cache.spoilers != null && cache.spoilers.size() > 0) {
+		if (cache != null && CollectionUtils.isNotEmpty(cache.spoilers)) {
 			menu.add(1, 5, 0, res.getString(R.string.cache_menu_spoilers)).setIcon(android.R.drawable.ic_menu_gallery); // spoiler images
 		}
 
@@ -574,7 +578,7 @@ public class cgeodetail extends AbstractActivity {
 			}
 		}
 
-		if (geocode != null && geocode.length() > 0) {
+		if (StringUtils.isNotBlank(geocode)) {
 			app.setAction(geocode);
 		}
 	}
@@ -593,7 +597,7 @@ public class cgeodetail extends AbstractActivity {
 		if (cache == null) {
 			if (waitDialog != null && waitDialog.isShowing()) waitDialog.dismiss();
 
-			if (geocode != null && geocode.length() > 0) {
+			if (StringUtils.isNotBlank(geocode)) {
 				showToast(res.getString(R.string.err_detail_cache_find) + " " + geocode + ".");
 			} else {
 				geocode = null;
@@ -605,30 +609,12 @@ public class cgeodetail extends AbstractActivity {
 		}
 
 		try {
-			if (gcIcons == null || gcIcons.isEmpty()) {
-				gcIcons.put("ape", R.drawable.type_ape);
-				gcIcons.put("cito", R.drawable.type_cito);
-				gcIcons.put("earth", R.drawable.type_earth);
-				gcIcons.put("event", R.drawable.type_event);
-				gcIcons.put("letterbox", R.drawable.type_letterbox);
-				gcIcons.put("locationless", R.drawable.type_locationless);
-				gcIcons.put("mega", R.drawable.type_mega);
-				gcIcons.put("multi", R.drawable.type_multi);
-				gcIcons.put("traditional", R.drawable.type_traditional);
-				gcIcons.put("virtual", R.drawable.type_virtual);
-				gcIcons.put("webcam", R.drawable.type_webcam);
-				gcIcons.put("wherigo", R.drawable.type_wherigo);
-				gcIcons.put("gchq", R.drawable.type_hq);
-				gcIcons.put("mystery", R.drawable.type_mystery);
-			}
 
-			if (null == geocode && cache.geocode.length() > 0)
-            {
+			if (StringUtils.isBlank(geocode)) {
 			    geocode = cache.geocode;
             }
 
-			if (null == guid && cache.guid.length() > 0)
-            {
+			if (StringUtils.isBlank(guid)) {
                 guid = cache.guid;
             }
 
@@ -643,11 +629,7 @@ public class cgeodetail extends AbstractActivity {
 			detailsList.removeAllViews();
 
 			// actionbar icon, default myster<
-			String typeId = "mystery";
-			if (cache.type != null && gcIcons.containsKey(cache.type)) { // cache icon
-				typeId = cache.type;
-			}
-			((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable) getResources().getDrawable(gcIcons.get(typeId)), null, null, null);
+			((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable) getResources().getDrawable(cgBase.getCacheIcon(cache.type)), null, null, null);
 
 			// cache name (full name)
 			itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
@@ -670,7 +652,7 @@ public class cgeodetail extends AbstractActivity {
 			itemName.setText(res.getString(R.string.cache_type));
 
 			String size = "";
-			if (cache.size != null && cache.size.length() > 0) {
+			if (StringUtils.isNotBlank(cache.size)) {
 				// don't show "not chosen" for events, that should be the normal case
 				if (!(cache.isEventCache() && cache.size.equals("not chosen"))) {
 					size = " (" + cache.size + ")";
@@ -785,15 +767,15 @@ public class cgeodetail extends AbstractActivity {
 			}
 
 			// cache author
-			if ((cache.owner != null && cache.owner.length() > 0) || (cache.ownerReal != null && cache.ownerReal.length() > 0)) {
+			if (StringUtils.isNotBlank(cache.owner) || StringUtils.isNotBlank(cache.ownerReal)) {
 				itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
 				itemName = (TextView) itemLayout.findViewById(R.id.name);
 				itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
 				itemName.setText(res.getString(R.string.cache_owner));
-				if (cache.owner != null && cache.owner.length() > 0) {
+				if (StringUtils.isNotBlank(cache.owner)) {
 					itemValue.setText(Html.fromHtml(cache.owner), TextView.BufferType.SPANNABLE);
-				} else if (cache.ownerReal != null && cache.ownerReal.length() > 0) {
+				} else if (StringUtils.isNotBlank(cache.ownerReal)) {
 					itemValue.setText(Html.fromHtml(cache.ownerReal), TextView.BufferType.SPANNABLE);
 				}
 				itemValue.setOnClickListener(new userActions());
@@ -816,7 +798,7 @@ public class cgeodetail extends AbstractActivity {
 			}
 
 			// cache location
-			if (cache.location != null && cache.location.length() > 0) {
+			if (StringUtils.isNotBlank(cache.location)) {
 				itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
 				itemName = (TextView) itemLayout.findViewById(R.id.name);
 				itemValue = (TextView) itemLayout.findViewById(R.id.value);
@@ -838,9 +820,10 @@ public class cgeodetail extends AbstractActivity {
 			}
 
 			// cache attributes
-			if (cache.attributes != null && cache.attributes.size() > 0) {
+			if (CollectionUtils.isNotEmpty(cache.attributes)) {
 
-				final LinearLayout attribBox = (LinearLayout) findViewById(R.id.attributes_innerbox);
+				final LinearLayout attribBox = (LinearLayout) findViewById(
+						R.id.attributes_innerbox);
 
 		    	// maximum width for attribute icons is screen width - paddings of parents
 		        attributeBoxMaxWidth = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
@@ -866,23 +849,31 @@ public class cgeodetail extends AbstractActivity {
 		            } );
 
 		        // icons or text?
-				if (attributesShowAsIcons)
+				//
+				// also show icons when noAttributeImagesFound == true. Explanation:
+				//  1. no icons could be found in the first invocation of this method
+				//  2. user refreshes cache from web
+				//  3. now this method is called again
+				//  4. attributeShowAsIcons is false but noAttributeImagesFound is true
+				//     => try to show them now
+				if (attributesShowAsIcons || noAttributeIconsFound) {
 					showAttributeIcons(attribBox, attributeBoxMaxWidth);
-				else
+				} else {
 					showAttributeDescriptions(attribBox);
+				}
 
 				findViewById(R.id.attributes_box).setVisibility(View.VISIBLE);
 			}
 
 			// cache inventory
-			if (cache.inventory != null && cache.inventory.size() > 0) {
+			if (CollectionUtils.isNotEmpty(cache.inventory)) {
 				final LinearLayout inventBox = (LinearLayout) findViewById(R.id.inventory_box);
 				final TextView inventView = (TextView) findViewById(R.id.inventory);
 
 				StringBuilder inventoryString = new StringBuilder();
 				for (cgTrackable inventoryItem : cache.inventory) {
 					if (inventoryString.length() > 0) {
-						inventoryString.append("\n");
+						inventoryString.append('\n');
 					}
 					// avoid HTML parsing where possible
 					if (inventoryItem.name.indexOf('<') >= 0 || inventoryItem.name.indexOf('&') >= 0 ) {
@@ -937,7 +928,7 @@ public class cgeodetail extends AbstractActivity {
 			offlineRefresh.setClickable(true);
 
 			// cache personal note
-			if (cache.personalNote != null && cache.personalNote.length() > 0) {
+			if (StringUtils.isNotBlank(cache.personalNote)) {
 				((LinearLayout) findViewById(R.id.personalnote_box)).setVisibility(View.VISIBLE);
 
 				TextView personalNoteText = (TextView) findViewById(R.id.personalnote);
@@ -947,7 +938,7 @@ public class cgeodetail extends AbstractActivity {
 			}
 
 			// cache short desc
-			if (cache.shortdesc != null && cache.shortdesc.length() > 0) {
+			if (StringUtils.isNotBlank(cache.shortdesc)) {
 				((LinearLayout) findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
 
 				TextView descView = (TextView) findViewById(R.id.shortdesc);
@@ -960,7 +951,7 @@ public class cgeodetail extends AbstractActivity {
 			if (longDescDisplayed) {
 				parseLongDescription();
 
-				if (longDesc != null && longDesc.length() > 0) {
+				if (StringUtils.isNotBlank(longDesc)) {
 					((LinearLayout) findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
 
 					TextView descView = (TextView) findViewById(R.id.description);
@@ -973,7 +964,7 @@ public class cgeodetail extends AbstractActivity {
 					showDesc.setOnTouchListener(null);
 					showDesc.setOnClickListener(null);
 				}
-			} else if (longDescDisplayed == false && cache.description != null && cache.description.length() > 0) {
+			} else if (longDescDisplayed == false && StringUtils.isNotBlank(cache.description)) {
 				((LinearLayout) findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
 
 				Button showDesc = (Button) findViewById(R.id.show_description);
@@ -996,7 +987,7 @@ public class cgeodetail extends AbstractActivity {
 			LinearLayout waypoints = (LinearLayout) findViewById(R.id.waypoints);
 			waypoints.removeAllViews();
 
-			if (cache.waypoints != null && cache.waypoints.size() > 0) {
+			if (CollectionUtils.isNotEmpty(cache.waypoints)) {
 				LinearLayout waypointView;
 
 				// sort waypoints: PP, Sx, FI, OWN
@@ -1010,7 +1001,7 @@ public class cgeodetail extends AbstractActivity {
 					}
 
 					private int order(cgWaypoint waypoint) {
-						if (waypoint.prefix == null || waypoint.prefix.length() == 0) {
+						if (StringUtils.isEmpty(waypoint.prefix)) {
 							return 0;
 						}
 						// check only the first character. sometimes there are inconsistencies like FI or FN for the FINAL
@@ -1044,8 +1035,8 @@ public class cgeodetail extends AbstractActivity {
 					}
 
 					TextView nameView = (TextView) waypointView.findViewById(R.id.name);
-					if (wpt.name.trim().length() == 0) {
-						nameView.setText(cgBase.formatCoordinate(wpt.latitude, "lat", true) + " | " + cgBase.formatCoordinate(wpt.longitude, "lon", true));
+					if (StringUtils.isBlank(wpt.name)) {
+						nameView.setText(cgBase.formatCoords(wpt.latitude, wpt.longitude, true));
 					} else {
 						// avoid HTML parsing
 						if (wpt.name.indexOf('<') >= 0 || wpt.name.indexOf('&') >= 0) {
@@ -1076,7 +1067,7 @@ public class cgeodetail extends AbstractActivity {
 			addWaypoint.setOnClickListener(new addWaypoint());
 
 			// cache hint
-			if (cache.hint != null && cache.hint.length() > 0) {
+			if (StringUtils.isNotBlank(cache.hint)) {
 				((LinearLayout) findViewById(R.id.hint_box)).setVisibility(View.VISIBLE);
 				TextView hintView = ((TextView) findViewById(R.id.hint));
 				hintView.setText(cgBase.rot13(cache.hint.trim()));
@@ -1313,9 +1304,9 @@ public class cgeodetail extends AbstractActivity {
 		@Override
 		public void run() {
 			HashMap<String, String> params = new HashMap<String, String>();
-			if (geocode != null && geocode.length() > 0) {
+			if (StringUtils.isNotBlank(geocode)) {
 				params.put("geocode", geocode);
-			} else if (guid != null && guid.length() > 0) {
+			} else if (StringUtils.isNotBlank(guid)) {
 				params.put("guid", guid);
 			} else {
 				return;
@@ -1396,7 +1387,7 @@ public class cgeodetail extends AbstractActivity {
 			// cache
 			coords = new cgCoord();
 			coords.type = "cache";
-			if (name != null && name.length() > 0) {
+			if (StringUtils.isNotBlank(name)) {
 				coords.name = name;
 			} else {
 				coords.name = geocode.toUpperCase();
@@ -1430,15 +1421,7 @@ public class cgeodetail extends AbstractActivity {
 	}
 
 	private void cachesAround() {
-		cgeocaches cachesActivity = new cgeocaches();
-
-		Intent cachesIntent = new Intent(this, cachesActivity.getClass());
-		cachesIntent.putExtra("type", "coordinate");
-		cachesIntent.putExtra("latitude", cache.latitude);
-		cachesIntent.putExtra("longitude", cache.longitude);
-		cachesIntent.putExtra("cachetype", settings.cacheType);
-
-		startActivity(cachesIntent);
+		cgeocaches.startActivityCachesAround(this, cache.latitude, cache.longitude);
 
 		finish();
 	}
@@ -1510,11 +1493,11 @@ public class cgeodetail extends AbstractActivity {
 			description.append("http://coord.info/");
 			description.append(cache.geocode.toUpperCase());
 			description.append("\n\n");
-			if (cache.shortdesc != null && cache.shortdesc.length() > 0) {
+			if (StringUtils.isNotBlank(cache.shortdesc)) {
 				description.append(Html.fromHtml(cache.shortdesc).toString());
 			}
 
-			if (cache.personalNote != null && cache.personalNote.length() > 0) {
+			if (StringUtils.isNotBlank(cache.personalNote)) {
 				description.append("\n\n"+Html.fromHtml(cache.personalNote).toString());
 			}
 
@@ -1526,10 +1509,10 @@ public class cgeodetail extends AbstractActivity {
 			event.put("title", Html.fromHtml(cache.name).toString());
 			event.put("description", description.toString());
 			String location = "";
-			if (cache.latitudeString != null && cache.latitudeString.length() > 0 && cache.longitudeString != null && cache.longitudeString.length() > 0) {
+			if (StringUtils.isNotBlank(cache.latitudeString) && StringUtils.isNotBlank(cache.longitudeString)) {
 				location += cache.latitudeString + " " + cache.longitudeString;
 			}
-			if (cache.location != null && cache.location.length() > 0) {
+			if (StringUtils.isNotBlank(cache.location)) {
 				boolean addParenteses = false;
 				if (location.length() > 0) {
 					addParenteses = true;
@@ -1587,7 +1570,7 @@ public class cgeodetail extends AbstractActivity {
 
 		if (cache != null && cache.geocode != null) {
 			String subject = cache.geocode.toUpperCase();
-			if (cache.name != null && cache.name.length() > 0){
+			if (StringUtils.isNotBlank(cache.name)){
 				subject = subject + " - " + cache.name;
 			}
 			intent.putExtra(Intent.EXTRA_SUBJECT, "Geocache " + subject);
@@ -1750,10 +1733,7 @@ public class cgeodetail extends AbstractActivity {
 
 		@Override
 		public void run() {
-			int reason = 1;
-			if (cache.reason > 1) {
-				reason = cache.reason;
-			}
+			int reason = (cache.reason > 1) ? cache.reason : 1;
 			base.storeCache(app, cgeodetail.this, cache, null, reason, handler);
 		}
 	}
@@ -1973,8 +1953,14 @@ public class cgeodetail extends AbstractActivity {
 	 * and makes it visible
 	 */
 	private void showAttributeIcons(LinearLayout attribBox, int parentWidth) {
-		if (attributeIconsLayout == null)
+		if (attributeIconsLayout == null) {
 			attributeIconsLayout = createAttributeIconsLayout(parentWidth);
+			// no matching icons found? show text
+			if (noAttributeIconsFound) {
+				showAttributeDescriptions(attribBox);
+				return;
+			}
+		}
 		attribBox.removeAllViews();
 		attribBox.addView(attributeIconsLayout);
 		attributesShowAsIcons = true;
@@ -1985,8 +1971,9 @@ public class cgeodetail extends AbstractActivity {
 	 * and makes it visible
 	 */
 	private void showAttributeDescriptions(LinearLayout attribBox) {
-		if (attributeDescriptionsLayout == null)
+		if (attributeDescriptionsLayout == null) {
 			attributeDescriptionsLayout = createAttributeDescriptionsLayout();
+		}
 		attribBox.removeAllViews();
 		attribBox.addView(attributeDescriptionsLayout);
 		attributesShowAsIcons = false;
@@ -1996,10 +1983,17 @@ public class cgeodetail extends AbstractActivity {
 	 * toggle attribute descriptions and icons
 	 */
 	private void toggleAttributeDisplay(LinearLayout attribBox, int parentWidth) {
-		if (attributesShowAsIcons)
+		// Don't toggle when there are no icons to show.
+		if (noAttributeIconsFound) {
+			return;
+		}
+
+		// toggle
+		if (attributesShowAsIcons) {
 			showAttributeDescriptions(attribBox);
-		else
+		} else {
 			showAttributeIcons(attribBox, parentWidth);
+		}
 	}
 
 	private ViewGroup createAttributeIconsLayout(int parentWidth) {
@@ -2010,11 +2004,14 @@ public class cgeodetail extends AbstractActivity {
     	LinearLayout attributeRow = newAttributeIconsRow();
         rows.addView(attributeRow);
 
+        noAttributeIconsFound = true;
+
         for(String attributeName : cache.attributes) {
 			boolean strikethru = attributeName.endsWith("_no");
 			// cut off _yes / _no
-			if (attributeName.endsWith("_no") || attributeName.endsWith("_yes"))
+			if (attributeName.endsWith("_no") || attributeName.endsWith("_yes")) {
 				attributeName = attributeName.substring(0, attributeName.lastIndexOf("_"));
+			}
 			// check if another attribute icon fits in this row
         	attributeRow.measure(0, 0);
         	int rowWidth = attributeRow.getMeasuredWidth();
@@ -2028,26 +2025,30 @@ public class cgeodetail extends AbstractActivity {
 
 			// dynamically search icon of the attribute
         	Drawable d = null;
-		    int id = res.getIdentifier("attribute_" + attributeName, "drawable", base.context.getPackageName());
-		    if (id > 0)
+		    int id = res.getIdentifier("attribute_" + attributeName, "drawable",
+		    		base.context.getPackageName());
+		    if (id > 0) {
+		        noAttributeIconsFound = false;
 		    	d = res.getDrawable(id);
-		    else
+		        iv.setImageDrawable(d);
+		        // strike through?
+	        	if (strikethru) {
+	        		// generate strikethru image with same properties as attribute image
+	        		ImageView strikethruImage = new ImageView(this);
+	        		strikethruImage.setLayoutParams(iv.getLayoutParams());
+	        		d = res.getDrawable(R.drawable.attribute__strikethru);
+	    	        strikethruImage.setImageDrawable(d);
+	    	        fl.addView(strikethruImage);
+	        	}
+		    } else {
 		    	d = res.getDrawable(R.drawable.attribute_icon_not_found);
-	        iv.setImageDrawable(d);
+		        iv.setImageDrawable(d);
+		    }
 
-	        // strike through?
-        	if (strikethru) {
-        		// generate strikethru image with same properties as attribute image
-        		ImageView strikethruImage = new ImageView(this);
-        		strikethruImage.setLayoutParams(iv.getLayoutParams());
-        		d = res.getDrawable(R.drawable.attribute__strikethru);
-    	        strikethruImage.setImageDrawable(d);
-    	        fl.addView(strikethruImage);
-        	}
         	attributeRow.addView(fl);
         }
 
-        return rows;
+    	return rows;
     }
 
     private LinearLayout newAttributeIconsRow() {
@@ -2059,7 +2060,8 @@ public class cgeodetail extends AbstractActivity {
     }
 
     private ViewGroup createAttributeDescriptionsLayout() {
-    	final LinearLayout descriptions = (LinearLayout) inflater.inflate(R.layout.attribute_descriptions, null);
+    	final LinearLayout descriptions = (LinearLayout) inflater.inflate(
+    			R.layout.attribute_descriptions, null);
     	TextView attribView = (TextView) descriptions.getChildAt(0);
 
 		StringBuilder buffer = new StringBuilder();
@@ -2068,18 +2070,20 @@ public class cgeodetail extends AbstractActivity {
 			attribute = cache.attributes.get(i);
 
 			// dynamically search for a translation of the attribute
-		    int id = res.getIdentifier("attribute_" + attribute, "string", base.context.getPackageName());
+		    int id = res.getIdentifier("attribute_" + attribute, "string",
+		    		base.context.getPackageName());
 		    if (id > 0) {
 		    	String translated = res.getString(id);
-		    	if (translated != null && translated.length() > 0) {
+		    	if (StringUtils.isNotBlank(translated)) {
 		    		attribute = translated;
 		    	}
 		    }
-		    if (buffer.length() > 0) {
-		    	buffer.append('\n');
-		    }
+		    if (buffer.length() > 0) buffer.append('\n');
 		    buffer.append(attribute);
 		}
+
+		if (noAttributeIconsFound)
+			buffer.append("\n\n").append(res.getString(R.string.cache_attributes_no_icons));
 
 		attribView.setText(buffer);
 

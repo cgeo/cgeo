@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -59,10 +61,8 @@ public class cgeopoint extends AbstractActivity {
 					.findViewById(R.id.simple_way_point_latitude);
 			TextView date = (TextView) convertView.findViewById(R.id.date);
 
-			String lonString = cgBase.formatCoordinate(loc.getLongitude(), "lon",
-					true);
-			String latString = cgBase.formatCoordinate(loc.getLatitude(), "lat",
-					true);
+			String lonString = cgBase.formatLongitude(loc.getLongitude(), true);
+			String latString = cgBase.formatLatitude(loc.getLatitude(), true);
 
 			longitude.setText(lonString);
 			latitude.setText(latString);
@@ -261,8 +261,8 @@ public class cgeopoint extends AbstractActivity {
 		});
 
 		if (prefs.contains("anylatitude") && prefs.contains("anylongitude")) {
-			latitudeEdit.setText(cgBase.formatCoordinate(Double.valueOf(prefs.getFloat("anylatitude", 0f)), "lat", true));
-			longitudeEdit.setText(cgBase.formatCoordinate(Double.valueOf(prefs.getFloat("anylongitude", 0f)), "lon", true));
+			latitudeEdit.setText(cgBase.formatLatitude(Double.valueOf(prefs.getFloat("anylatitude", 0f)), true));
+			longitudeEdit.setText(cgBase.formatLongitude(Double.valueOf(prefs.getFloat("anylongitude", 0f)), true));
 		}
 
 		Button buttonCurrent = (Button) findViewById(R.id.current);
@@ -452,8 +452,8 @@ public class cgeopoint extends AbstractActivity {
 					lonEdit = (EditText) findViewById(R.id.longitude);
 				}
 
-				latEdit.setHint(cgBase.formatCoordinate(geo.latitudeNow, "lat", false));
-				lonEdit.setHint(cgBase.formatCoordinate(geo.longitudeNow, "lon", false));
+				latEdit.setHint(cgBase.formatLatitude(geo.latitudeNow, false));
+				lonEdit.setHint(cgBase.formatLongitude(geo.longitudeNow, false));
 			} catch (Exception e) {
 				Log.w(cgSettings.tag, "Failed to update location.");
 			}
@@ -468,8 +468,8 @@ public class cgeopoint extends AbstractActivity {
 				return;
 			}
 
-			((EditText) findViewById(R.id.latitude)).setText(cgBase.formatCoordinate(geo.latitudeNow, "lat", true));
-			((EditText) findViewById(R.id.longitude)).setText(cgBase.formatCoordinate(geo.longitudeNow, "lon", true));
+			((EditText) findViewById(R.id.latitude)).setText(cgBase.formatLatitude(geo.latitudeNow, true));
+			((EditText) findViewById(R.id.longitude)).setText(cgBase.formatLongitude(geo.longitudeNow, true));
 
 			changed = false;
 		}
@@ -485,13 +485,13 @@ public class cgeopoint extends AbstractActivity {
 		String latText = ((EditText) findViewById(R.id.latitude)).getText().toString();
 		String lonText = ((EditText) findViewById(R.id.longitude)).getText().toString();
 
-		if ((bearingText == null || bearingText.length() == 0) && (distanceText == null || distanceText.length() == 0)
-				&& (latText == null || latText.length() == 0) && (lonText == null || lonText.length() == 0)) {
+		if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText)
+				&& StringUtils.isBlank(latText) && StringUtils.isBlank(lonText)) {
 			showToast(res.getString(R.string.err_point_no_position_given));
 			return null;
 		}
 
-		if (latText != null && latText.length() > 0 && lonText != null && lonText.length() > 0) {
+		if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
 			// latitude & longitude
 			HashMap<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
 			HashMap<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lon");
@@ -518,7 +518,7 @@ public class cgeopoint extends AbstractActivity {
 			longitude = geo.longitudeNow;
 		}
 
-		if (bearingText != null && bearingText.length() > 0 && distanceText != null && distanceText.length() > 0) {
+		if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
 			// bearing & distance
 			Double bearing = null;
 			try {

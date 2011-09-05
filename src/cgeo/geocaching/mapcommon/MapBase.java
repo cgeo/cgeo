@@ -18,7 +18,7 @@ public abstract class MapBase {
 
 	ActivityImpl mapActivity;
 	
-	public MapBase(ActivityImpl activity) {
+	protected MapBase(ActivityImpl activity) {
 		mapActivity = activity;
 	}
 	

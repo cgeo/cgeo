@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<style name="cgeo_main" parent="android:Theme.Wallpaper.NoTitleBar">
+		<!-- system elements -->
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:windowContentOverlay">@null</item>
+	</style>
+	
 	<style name="cgeo" parent="android:Theme.NoTitleBar">
 		<!-- system elements -->
 		<item name="android:buttonStyle">@style/button</item>
 		<item name="android:editTextStyle">@style/edittext</item>
+		<item name="android:windowContentOverlay">@null</item>
 	</style>
 
 	<style name="cgeo_transparent" parent="android:Theme.Dialog">

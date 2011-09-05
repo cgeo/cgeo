@@ -9,7 +9,7 @@ public class Geopoint
     public static final double deg2rad   = Math.PI / 180;
     public static final double rad2deg   = 180 / Math.PI;
     public static final float  erad      = 6371.0f;
-    
+
     private double latitude;
     private double longitude;
 
@@ -76,7 +76,7 @@ public class Geopoint
 
         return this;
     }
-    
+
     /**
      * Set latitude in microdegree.
      *
@@ -113,7 +113,7 @@ public class Geopoint
     {
         return latitude;
     }
-    
+
     /**
      * Get latitude in microdegree.
      *
@@ -144,7 +144,7 @@ public class Geopoint
 
         return this;
     }
-    
+
     /**
      * Set longitude in microdegree.
      *
@@ -181,7 +181,7 @@ public class Geopoint
     {
         return longitude;
     }
-    
+
     /**
      * Get longitude in microdegree.
      *
@@ -268,7 +268,7 @@ public class Geopoint
             double c = Math.acos(Math.sin(lat2) * Math.sin(lat1) + Math.cos(lat2) * Math.cos(lat1) * Math.cos(lon2 - lon1));
             double A = Math.asin(Math.cos(lat2) * Math.sin(lon2 - lon1) / Math.sin(c));
             double result = A * rad2deg;
-            
+
             if (ilat2 > ilat1 && ilon2 > ilon1)
             {
                 // result don't need change
@@ -285,7 +285,7 @@ public class Geopoint
             {
                 result += 360f;
             }
-            
+
             return result;
         }
     }
@@ -318,7 +318,7 @@ public class Geopoint
      */
     public boolean isEqualTo(Geopoint gp)
     {
-        return (null != gp && gp.getLatitude() == latitude && gp.getLongitude() == longitude);
+        return null != gp && gp.getLatitude() == latitude && gp.getLongitude() == longitude;
     }
 
     /**
@@ -330,7 +330,7 @@ public class Geopoint
      */
     public boolean isEqualTo(Geopoint gp, double tolerance)
     {
-        return (null != gp && distanceTo(gp) <= tolerance);
+        return null != gp && distanceTo(gp) <= tolerance;
     }
 
     /**

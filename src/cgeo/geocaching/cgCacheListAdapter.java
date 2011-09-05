@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -35,6 +37,7 @@ import cgeo.geocaching.filter.cgFilter;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.DistanceComparator;
 import cgeo.geocaching.sorting.VisitComparator;
+import cgeo.geocaching.utils.CollectionUtils;
 
 public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
@@ -51,11 +54,11 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 	private Double latitude = null;
 	private Double longitude = null;
 	private Double azimuth = Double.valueOf(0);
-	private long lastSort = 0l;
+	private long lastSort = 0L;
 	private boolean sort = true;
 	private int checked = 0;
 	private boolean selectMode = false;
-	private HashMap<String, Drawable> gcIcons = new HashMap<String, Drawable>();
+	private static HashMap<String, Drawable> gcIconDrawables = new HashMap<String, Drawable>();
 	private ArrayList<cgCompassMini> compasses = new ArrayList<cgCompassMini>();
 	private ArrayList<cgDistanceView> distances = new ArrayList<cgDistanceView>();
 	private int[] ratingBcgs = new int[3];
@@ -81,21 +84,10 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		pixelDensity = metrics.density;
 
-		if (gcIcons == null || gcIcons.isEmpty()) {
-			gcIcons.put("ape", (Drawable) activity.getResources().getDrawable(R.drawable.type_ape));
-			gcIcons.put("cito", (Drawable) activity.getResources().getDrawable(R.drawable.type_cito));
-			gcIcons.put("earth", (Drawable) activity.getResources().getDrawable(R.drawable.type_earth));
-			gcIcons.put("event", (Drawable) activity.getResources().getDrawable(R.drawable.type_event));
-			gcIcons.put("letterbox", (Drawable) activity.getResources().getDrawable(R.drawable.type_letterbox));
-			gcIcons.put("locationless", (Drawable) activity.getResources().getDrawable(R.drawable.type_locationless));
-			gcIcons.put("mega", (Drawable) activity.getResources().getDrawable(R.drawable.type_mega));
-			gcIcons.put("multi", (Drawable) activity.getResources().getDrawable(R.drawable.type_multi));
-			gcIcons.put("traditional", (Drawable) activity.getResources().getDrawable(R.drawable.type_traditional));
-			gcIcons.put("virtual", (Drawable) activity.getResources().getDrawable(R.drawable.type_virtual));
-			gcIcons.put("webcam", (Drawable) activity.getResources().getDrawable(R.drawable.type_webcam));
-			gcIcons.put("wherigo", (Drawable) activity.getResources().getDrawable(R.drawable.type_wherigo));
-			gcIcons.put("mystery", (Drawable) activity.getResources().getDrawable(R.drawable.type_mystery));
-			gcIcons.put("gchq", (Drawable) activity.getResources().getDrawable(R.drawable.type_hq));
+		if (gcIconDrawables == null || gcIconDrawables.isEmpty()) {
+			for (String cacheType : cgBase.cacheTypesInv.keySet()) {
+				gcIconDrawables.put(cacheType, (Drawable) activity.getResources().getDrawable(cgBase.getCacheIcon(cacheType)));
+			}
 		}
 
 		if (settings.skin == 0) {
@@ -297,13 +289,13 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 			lastSort = System.currentTimeMillis();
 		}
 
-		if (distances != null && distances.size() > 0) {
+		if (CollectionUtils.isNotEmpty(distances)) {
 			for (cgDistanceView distance : distances) {
 				distance.update(latitudeIn, longitudeIn);
 			}
 		}
 
-		if (compasses != null && compasses.size() > 0) {
+		if (CollectionUtils.isNotEmpty(compasses)) {
 			for (cgCompassMini compass : compasses) {
 				compass.updateCoords(latitudeIn, longitudeIn);
 			}
@@ -317,7 +309,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
 		azimuth = azimuthIn;
 
-		if (compasses != null && compasses.size() > 0) {
+		if (CollectionUtils.isNotEmpty(compasses)) {
 			for (cgCompassMini compass : compasses) {
 				compass.updateAzimuth(azimuth);
 			}
@@ -377,8 +369,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 			holder.checkbox = (CheckBox) rowView.findViewById(R.id.checkbox);
 			holder.oneInfo = (RelativeLayout) rowView.findViewById(R.id.one_info);
 			holder.oneCheckbox = (RelativeLayout) rowView.findViewById(R.id.one_checkbox);
-			holder.foundMark = (ImageView) rowView.findViewById(R.id.found_mark);
-			holder.offlineMark = (ImageView) rowView.findViewById(R.id.offline_mark);
+			holder.logStatusMark = (ImageView) rowView.findViewById(R.id.log_status_mark);
 			holder.oneCache = (RelativeLayout) rowView.findViewById(R.id.one_cache);
 			holder.text = (TextView) rowView.findViewById(R.id.text);
 			holder.directionLayout = (RelativeLayout) rowView.findViewById(R.id.direction_layout);
@@ -452,15 +443,14 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		}
 		holder.direction.setContent(cache.latitude, cache.longitude);
 
-		if (cache.logOffline) {
-			holder.offlineMark.setVisibility(View.VISIBLE);
-			holder.foundMark.setVisibility(View.GONE);
+		if (cache.found && cache.logOffline) {
+		    holder.logStatusMark.setImageResource(R.drawable.mark_green_red);
 		} else if (cache.found) {
-			holder.offlineMark.setVisibility(View.GONE);
-			holder.foundMark.setVisibility(View.VISIBLE);
-		} else {
-			holder.offlineMark.setVisibility(View.GONE);
-			holder.foundMark.setVisibility(View.GONE);
+		    holder.logStatusMark.setImageResource(R.drawable.mark_green);
+		} else if (cache.logOffline) {
+            holder.logStatusMark.setImageResource(R.drawable.mark_red);
+        } else {
+		    holder.logStatusMark.setVisibility(View.GONE);
 		}
 
 		if (cache.nameSp == null) {
@@ -471,10 +461,10 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		}
 
 		holder.text.setText(cache.nameSp, TextView.BufferType.SPANNABLE);
-		if (gcIcons.containsKey(cache.type)) { // cache icon
-			holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIcons.get(cache.type), null, null, null);
+		if (gcIconDrawables.containsKey(cache.type)) { // cache icon
+			holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(cache.type), null, null, null);
 		} else { // unknown cache type, "mystery" icon
-			holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIcons.get("mystery"), null, null, null);
+			holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get("mystery"), null, null, null);
 		}
 
 		if (holder.inventory.getChildCount() > 0) {
@@ -592,10 +582,10 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 			cacheInfo.append("; ");
 			cacheInfo.append(base.formatDate(cache.visitedDate));
 		} else {
-			if (cache.geocode != null && cache.geocode.length() > 0) {
+			if (StringUtils.isNotBlank(cache.geocode)) {
 				cacheInfo.append(cache.geocode);
 			}
-			if (cache.size != null && cache.size.length() > 0) {
+			if (StringUtils.isNotBlank(cache.size)) {
 				if (cacheInfo.length() > 0) {
 					cacheInfo.append(" | ");
 				}

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map.Entry;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -24,11 +26,11 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.utils.CollectionUtils;
 
 public class cgeo extends AbstractActivity {
 
@@ -84,7 +86,7 @@ public class cgeo extends AbstractActivity {
 		@Override
 		public void handleMessage(Message msg) {
 			try {
-				if (addresses != null && addresses.isEmpty() == false) {
+				if (CollectionUtils.isNotEmpty(addresses)) {
 					final Address address = addresses.get(0);
 					final StringBuilder addText = new StringBuilder();
 
@@ -250,7 +252,7 @@ public class cgeo extends AbstractActivity {
 		final List<ResolveInfo> list = packageManager.queryIntentActivities(
 				new Intent(intent), PackageManager.MATCH_DEFAULT_ONLY);
 
-		return (list.size() > 0);
+		return list.size() > 0;
 	}
 
 	@Override
@@ -287,7 +289,7 @@ public class cgeo extends AbstractActivity {
 	    if (requestCode == SCAN_REQUEST_CODE) {
 	        if (resultCode == RESULT_OK) {
 	            String scan = intent.getStringExtra("SCAN_RESULT");
-	            if (scan == null || scan.length() == 0) {
+	            if (StringUtils.isBlank(scan)) {
 	            	return;
 	            }
 	            String host = "http://coord.info/";
@@ -447,26 +449,26 @@ public class cgeo extends AbstractActivity {
 		navAccuracy = (TextView) findViewById(R.id.nav_accuracy);
 		navLocation = (TextView) findViewById(R.id.nav_location);
 
-		final LinearLayout findOnMap = (LinearLayout) findViewById(R.id.map);
+		final View findOnMap = findViewById(R.id.map);
 		findOnMap.setClickable(true);
 		findOnMap.setOnClickListener(new cgeoFindOnMapListener());
 
-		final RelativeLayout findByOffline = (RelativeLayout) findViewById(R.id.search_offline);
+		final View findByOffline = findViewById(R.id.search_offline);
 		findByOffline.setClickable(true);
 		findByOffline.setOnClickListener(new cgeoFindByOfflineListener());
 		registerForContextMenu(findByOffline);
 
 		(new countBubbleUpdate()).start();
 
-		final LinearLayout advanced = (LinearLayout) findViewById(R.id.advanced_button);
+		final View advanced = findViewById(R.id.advanced_button);
 		advanced.setClickable(true);
 		advanced.setOnClickListener(new cgeoSearchListener());
 
-		final LinearLayout any = (LinearLayout) findViewById(R.id.any_button);
+		final View any = findViewById(R.id.any_button);
 		any.setClickable(true);
 		any.setOnClickListener(new cgeoPointListener());
 
-		final LinearLayout filter = (LinearLayout) findViewById(R.id.filter_button);
+		final View filter = findViewById(R.id.filter_button);
 		registerForContextMenu(filter);
 		filter.setOnClickListener(new View.OnClickListener() {
 
@@ -496,11 +498,10 @@ public class cgeo extends AbstractActivity {
 				}
 
 				if (geo.latitudeNow != null && geo.longitudeNow != null) {
-					LinearLayout findNearest = (LinearLayout) findViewById(R.id.nearest);
+					View findNearest = findViewById(R.id.nearest);
 					findNearest.setClickable(true);
 					findNearest.setOnClickListener(new cgeoFindNearestListener());
-					View findNearestView = (View)findNearest.findViewById(R.id.view_nearest);
-					findNearestView.setBackgroundResource(R.drawable.main_nearby);
+					findNearest.setBackgroundResource(R.drawable.main_nearby);
 
 					String satellites = null;
 					if (geo.satellitesVisible != null && geo.satellitesFixed != null && geo.satellitesFixed > 0) {
@@ -545,18 +546,17 @@ public class cgeo extends AbstractActivity {
 							} else {
 								humanAlt = String.format("%.0f", geo.altitudeNow) + " m";
 							}
-							navLocation.setText(cgBase.formatCoordinate(geo.latitudeNow, "lat", true) + " | " + cgBase.formatCoordinate(geo.longitudeNow, "lon", true) + " | " + humanAlt);
+							navLocation.setText(cgBase.formatCoords(geo.latitudeNow, geo.longitudeNow, true) + " | " + humanAlt);
 						} else {
-							navLocation.setText(cgBase.formatCoordinate(geo.latitudeNow, "lat", true) + " | " + cgBase.formatCoordinate(geo.longitudeNow, "lon", true));
+							navLocation.setText(cgBase.formatCoords(geo.latitudeNow, geo.longitudeNow, true));
 						}
 					}
 				} else {
-					LinearLayout findNearest = (LinearLayout) findViewById(R.id.nearest);
+					View findNearest = findViewById(R.id.nearest);
+					findNearest.setFocusable(false);
 					findNearest.setClickable(false);
 					findNearest.setOnClickListener(null);
-
-					View findNearestView = (View)findNearest.findViewById(R.id.view_nearest);
-					findNearestView.setBackgroundResource(R.drawable.main_nearby_disabled);
+					findNearest.setBackgroundResource(R.drawable.main_nearby_disabled);
 
 					navType.setText(null);
 					navAccuracy.setText(null);

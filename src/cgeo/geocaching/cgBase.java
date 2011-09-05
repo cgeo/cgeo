@@ -29,8 +29,8 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
@@ -46,6 +46,8 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -67,6 +69,7 @@ import android.util.Log;
 import android.widget.EditText;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.files.LocParser;
+import cgeo.geocaching.utils.CollectionUtils;
 
 public class cgBase {
 
@@ -104,6 +107,23 @@ public class cgBase {
 	private final static Pattern patternInventory = Pattern.compile("<span id=\"ctl00_ContentBody_uxTravelBugList_uxInventoryLabel\">\\W*Inventory[^<]*</span>[^<]*</h3>[^<]*<div class=\"WidgetBody\">([^<]*<ul>(([^<]*<li>[^<]*<a href=\"[^\"]+\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>[^<]+<\\/span>[^<]*<\\/a>[^<]*<\\/li>)+)[^<]*<\\/ul>)?", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternInventoryInside = Pattern.compile("[^<]*<li>[^<]*<a href=\"[a-z0-9\\-\\_\\.\\?\\/\\:\\@]*\\/track\\/details\\.aspx\\?guid=([0-9a-z\\-]+)[^\"]*\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>([^<]+)<\\/span>[^<]*<\\/a>[^<]*<\\/li>", Pattern.CASE_INSENSITIVE);
 	private final static Pattern patternOnWatchlist = Pattern.compile("<img\\s*src=\"\\/images\\/stockholm\\/16x16\\/icon_stop_watchlist.gif\"", Pattern.CASE_INSENSITIVE);
+
+	private final static Pattern PATTERN_TRACKABLE_TrackableId = Pattern.compile("<a id=\"ctl00_ContentBody_LogLink\" title=\"[^\"]*\" href=\".*log\\.aspx\\?wid=([a-z0-9\\-]+)\"[^>]*>[^<]*</a>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_Geocode = Pattern.compile("<span id=\"ctl00_ContentBody_BugDetails_BugTBNum\" String=\"[^\"]*\">Use[^<]*<strong>(TB[0-9a-z]+)[^<]*</strong> to reference this item.[^<]*</span>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_Name = Pattern.compile("<h2>([^<]*<img[^>]*>)?[^<]*<span id=\"ctl00_ContentBody_lbHeading\">([^<]+)</span>[^<]*</h2>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_Owner = Pattern.compile("<dt>\\W*Owner:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugOwner\" title=\"[^\"]*\" href=\"[^\"]*/profile/\\?guid=([a-z0-9\\-]+)\">([^<]+)<\\/a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_Released = Pattern.compile("<dt>\\W*Released:[^<]*</dt>[^<]*<dd>[^<]*<span id=\"ctl00_ContentBody_BugDetails_BugReleaseDate\">([^<]+)<\\/span>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_Origin = Pattern.compile("<dt>\\W*Origin:[^<]*</dt>[^<]*<dd>[^<]*<span id=\"ctl00_ContentBody_BugDetails_BugOrigin\">([^<]+)<\\/span>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_SpottedCache = Pattern.compile("<dt>\\W*Recently Spotted:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" title=\"[^\"]*\" href=\"[^\"]*/seek/cache_details.aspx\\?guid=([a-z0-9\\-]+)\">In ([^<]+)</a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_SpottedUser = Pattern.compile("<dt>\\W*Recently Spotted:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" href=\"[^\"]*/profile/\\?guid=([a-z0-9\\-]+)\">In the hands of ([^<]+).</a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_SpottedUnknown = Pattern.compile("<dt>\\W*Recently Spotted:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugLocation\">Unknown Location[^<]*</a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_SpottedOwner = Pattern.compile("<dt>\\W*Recently Spotted:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugLocation\">In the hands of the owner[^<]*</a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_Goal = Pattern.compile("<h3>\\W*Current GOAL[^<]*</h3>[^<]*<p[^>]*>(.*)</p>[^<]*<h3>\\W*About This Item[^<]*</h3>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_DetailsImage = Pattern.compile("<h3>\\W*About This Item[^<]*</h3>([^<]*<p>([^<]*<img id=\"ctl00_ContentBody_BugDetails_BugImage\" class=\"[^\"]+\" src=\"([^\"]+)\"[^>]*>)?[^<]*</p>)?[^<]*<p[^>]*>(.*)</p>[^<]*<div id=\"ctl00_ContentBody_BugDetails_uxAbuseReport\">", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_Icon = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_Type = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"[^\"]+\" alt=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_Distance = Pattern.compile("<h4[^>]*\\W*Tracking History \\(([0-9\\.,]+(km|mi))[^\\)]*\\)", Pattern.CASE_INSENSITIVE);
+	private final static Pattern PATTERN_TRACKABLE_Log = Pattern.compile("<tr class=\"Data.+?src=\"/images/icons/([^\\.]+)\\.gif[^>]+>&nbsp;([^<]+)</td>.+?guid.+?>([^<]+)</a>.+?(?:guid=([^\"]+)\">([^<]+)</a>.+?)?<td colspan=\"4\">(.+?)(?:<ul.+?ul>)?\\s*</td>\\s*</tr>", Pattern.CASE_INSENSITIVE);
 
 	public static HashMap<String, String> cacheTypes = new HashMap<String, String>();
 	public static HashMap<String, String> cacheTypesInv = new HashMap<String, String>();
@@ -185,6 +205,7 @@ public class cgBase {
 	public static final int LOG_ANNOUNCEMENT = 74;
 
 	public cgBase(cgeoapplication appIn, cgSettings settingsIn, SharedPreferences prefsIn) {
+		context = appIn.getBaseContext();
 		res = appIn.getBaseContext().getResources();
 
 		// cache types
@@ -421,10 +442,10 @@ public class cgBase {
 		String[] viewstates = new String[count];
 
 		// Get the viewstates
+		int no;
 		final Matcher matcherViewstates = patternViewstates.matcher(page);
 		while (matcherViewstates.find()) {
 			String sno = matcherViewstates.group(1); // number of viewstate
-			int no;
 			if ("".equals(sno))
 				no = 0;
 			else
@@ -443,7 +464,7 @@ public class cgBase {
 	 * put viewstates into request parameters
 	 */
 	private static void setViewstates(String[] viewstates, HashMap<String, String> params) {
-		if (viewstates == null  ||  viewstates.length == 0)
+		if (ArrayUtils.isEmpty(viewstates))
 			return;
 		params.put("__VIEWSTATE", viewstates[0]);
 		if (viewstates.length > 1) {
@@ -461,21 +482,6 @@ public class cgBase {
 		setViewstates(getViewstates(page), params);
 	}
 
-	/**
-	 * checks if an Array of Strings is empty or not. Empty means:
-	 *  - Array is null
-	 *  - or all elements are null or empty strings
-	 */
-	public static boolean isEmpty(String[] a) {
-	    if (a == null)
-	        return  true;
-
-	    for (String s: a)
-	        if (s != null  &&  s.length() > 0)
-	            return  false;
-
-	    return  true;
-	}
 
 	public class loginThread extends Thread {
 
@@ -501,7 +507,7 @@ public class cgBase {
 
 		loginResponse = request(true, host, path, "GET", new HashMap<String, String>(), false, false, false);
 		loginData = loginResponse.getData();
-		if (loginData != null && loginData.length() > 0) {
+		if (StringUtils.isNotBlank(loginData)) {
 			if (checkLogin(loginData)) {
 				Log.i(cgSettings.tag, "Already logged in Geocaching.com as " + loginStart.get("username"));
 
@@ -512,7 +518,7 @@ public class cgBase {
 
 			viewstates = getViewstates(loginData);
 
-			if (isEmpty(viewstates)) {
+			if (ArrayUtils.isEmpty(viewstates)) {
 				Log.e(cgSettings.tag, "cgeoBase.login: Failed to find viewstates");
 				return -1; // no viewstates
 			}
@@ -524,7 +530,7 @@ public class cgBase {
 		final HashMap<String, String> login = settings.getLogin();
 		final HashMap<String, String> params = new HashMap<String, String>();
 
-		if (login == null || login.get("username") == null || login.get("username").length() == 0 || login.get("password") == null || login.get("password").length() == 0) {
+		if (login == null || StringUtils.isEmpty(login.get("username")) || StringUtils.isEmpty(login.get("password"))) {
 			Log.e(cgSettings.tag, "cgeoBase.login: No login information stored");
 			return -3;
 		}
@@ -542,7 +548,7 @@ public class cgBase {
 		loginResponse = request(true, host, path, "POST", params, false, false, false);
 		loginData = loginResponse.getData();
 
-		if (loginData != null && loginData.length() > 0) {
+		if (StringUtils.isNotBlank(loginData)) {
 			if (checkLogin(loginData)) {
 				Log.i(cgSettings.tag, "Successfully logged in Geocaching.com as " + login.get("username"));
 
@@ -577,20 +583,20 @@ public class cgBase {
 	}
 
 	public static Boolean checkLogin(String page) {
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.checkLogin: No page given");
 			return false;
 		}
 
 		// on every page
 		final Matcher matcherLogged2In = patternLogged2In.matcher(page);
-		while (matcherLogged2In.find()) {
+		if (matcherLogged2In.find()) {
 			return true;
 		}
 
 		// after login
 		final Matcher matcherLoggedIn = patternLoggedIn.matcher(page);
-		while (matcherLoggedIn.find()) {
+		if (matcherLoggedIn.find()) {
 			return true;
 		}
 
@@ -610,7 +616,7 @@ public class cgBase {
 	}
 
 	public cgCacheWrap parseSearch(cgSearchThread thread, String url, String page, boolean showCaptcha) {
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.parseSearch: No page given");
 			return null;
 		}
@@ -651,7 +657,7 @@ public class cgBase {
 				if (recaptchaJsParam != null) {
 					final String recaptchaJs = request(false, "www.google.com", "/recaptcha/api/challenge", "GET", "k=" + urlencode_rfc3986(recaptchaJsParam.trim()), 0, true).getData();
 
-					if (recaptchaJs != null && recaptchaJs.length() > 0) {
+					if (StringUtils.isNotBlank(recaptchaJs)) {
 						final Matcher matcherRecaptchaChallenge = patternRecaptchaChallenge.matcher(recaptchaJs);
 						while (matcherRecaptchaChallenge.find()) {
 							if (matcherRecaptchaChallenge.groupCount() > 0) {
@@ -665,7 +671,7 @@ public class cgBase {
 				Log.w(cgSettings.tag, "cgeoBase.parseSearch: Failed to parse recaptcha challenge");
 			}
 
-			if (thread != null && recaptchaChallenge != null && recaptchaChallenge.length() > 0) {
+			if (thread != null && StringUtils.isNotBlank(recaptchaChallenge)) {
 				thread.setChallenge(recaptchaChallenge);
 				thread.notifyNeed();
 			}
@@ -803,7 +809,7 @@ public class cgBase {
 				Log.w(cgSettings.tag, "cgeoBase.parseSearch: Failed to parse cache inventory (1)");
 			}
 
-			if (inventoryPre != null && inventoryPre.trim().length() > 0) {
+			if (StringUtils.isNotBlank(inventoryPre)) {
 				try {
 					final Matcher matcherTbsInside = patternTbsInside.matcher(inventoryPre);
 					while (matcherTbsInside.find()) {
@@ -905,7 +911,7 @@ public class cgBase {
 			recaptchaText = thread.getText();
 		}
 
-		if (cids.size() > 0 && (recaptchaChallenge == null || (recaptchaChallenge != null && recaptchaText != null && recaptchaText.length() > 0))) {
+		if (cids.size() > 0 && (recaptchaChallenge == null || (recaptchaChallenge != null && StringUtils.isNotBlank(recaptchaText)))) {
 			Log.i(cgSettings.tag, "Trying to get .loc for " + cids.size() + " caches");
 
 			try {
@@ -913,10 +919,8 @@ public class cgBase {
 				final String host = "www.geocaching.com";
 				final String path = "/seek/nearest.aspx";
 				final StringBuilder params = new StringBuilder();
-				params.append("__EVENTTARGET=");
-				params.append("&");
-				params.append("__EVENTARGUMENT=");
-				if (caches.viewstates != null  &&  caches.viewstates.length > 0) {
+				params.append("__EVENTTARGET=&__EVENTARGUMENT=");
+				if (ArrayUtils.isNotEmpty(caches.viewstates)) {
 					params.append("&__VIEWSTATE=");
 					params.append(urlencode_rfc3986(caches.viewstates[0]));
 					if (caches.viewstates.length > 1) {
@@ -928,25 +932,21 @@ public class cgBase {
 					}
 				}
 				for (String cid : cids) {
-					params.append("&");
-					params.append("CID=");
+					params.append("&CID=");
 					params.append(urlencode_rfc3986(cid));
 				}
 
-				if (recaptchaChallenge != null && recaptchaText != null && recaptchaText.length() > 0) {
-					params.append("&");
-					params.append("recaptcha_challenge_field=");
+				if (recaptchaChallenge != null &&  StringUtils.isNotBlank(recaptchaText)) {
+					params.append("&recaptcha_challenge_field=");
 					params.append(urlencode_rfc3986(recaptchaChallenge));
-					params.append("&");
-					params.append("recaptcha_response_field=");
+					params.append("&recaptcha_response_field=");
 					params.append(urlencode_rfc3986(recaptchaText));
 				}
-				params.append("&");
-				params.append("ctl00%24ContentBody%24uxDownloadLoc=Download+Waypoints");
+				params.append("&ctl00%24ContentBody%24uxDownloadLoc=Download+Waypoints");
 
 				final String coordinates = request(false, host, path, "POST", params.toString(), 0, true).getData();
 
-				if (coordinates != null && coordinates.length() > 0) {
+				if ( StringUtils.isNotBlank(coordinates)) {
 					if (coordinates.indexOf("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com") > -1) {
 						Log.i(cgSettings.tag, "User has not agreed to the license agreement. Can\'t download .loc file.");
 
@@ -979,7 +979,7 @@ public class cgBase {
 			try {
 				final HashMap<String, cgRating> ratings = getRating(guids, null);
 
-				if (ratings != null) {
+				if (CollectionUtils.isNotEmpty(ratings)) {
 					// save found cache coordinates
 					for (cgCache oneCache : caches.cacheList) {
 						if (ratings.containsKey(oneCache.guid)) {
@@ -1000,7 +1000,7 @@ public class cgBase {
 	}
 
 	public static cgCacheWrap parseMapJSON(String url, String data) {
-		if (data == null || data.length() == 0) {
+		if (StringUtils.isEmpty(data)) {
 			Log.e(cgSettings.tag, "cgeoBase.parseMapJSON: No page given");
 			return null;
 		}
@@ -1012,14 +1012,14 @@ public class cgBase {
 			final JSONObject yoDawg = new JSONObject(data);
 			final String json = yoDawg.getString("d");
 
-			if (json == null || json.length() == 0) {
+			if (StringUtils.isBlank(json)) {
 				Log.e(cgSettings.tag, "cgeoBase.parseMapJSON: No JSON inside JSON");
 				return null;
 			}
 
 			final JSONObject dataJSON = new JSONObject(json);
 			final JSONObject extra = dataJSON.getJSONObject("cs");
-			if (extra != null && extra.length() > 0) {
+			if ( StringUtils.isNotBlank(data)) {
 				int count = extra.getInt("count");
 
 				if (count > 0 && extra.has("cc")) {
@@ -1084,7 +1084,7 @@ public class cgBase {
 	}
 
 	public cgCacheWrap parseCache(String page, int reason) {
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.parseCache: No page given");
 			return null;
 		}
@@ -1130,10 +1130,8 @@ public class cgBase {
 		// cache geocode
 		try {
 			final Matcher matcherGeocode = patternGeocode.matcher(page);
-			if (matcherGeocode.find()) {
-				if (matcherGeocode.groupCount() > 0) {
-					cache.geocode = getMatch(matcherGeocode.group(1));
-				}
+			if (matcherGeocode.find() && matcherGeocode.groupCount() > 0) {
+				cache.geocode = getMatch(matcherGeocode.group(1));
 			}
 		} catch (Exception e) {
 			// failed to parse cache geocode
@@ -1143,10 +1141,8 @@ public class cgBase {
 		// cache id
 		try {
 			final Matcher matcherCacheId = patternCacheId.matcher(page);
-			if (matcherCacheId.find()) {
-				if (matcherCacheId.groupCount() > 0) {
-					cache.cacheid = getMatch(matcherCacheId.group(1));
-				}
+			if (matcherCacheId.find() && matcherCacheId.groupCount() > 0) {
+				cache.cacheid = getMatch(matcherCacheId.group(1));
 			}
 		} catch (Exception e) {
 			// failed to parse cache id
@@ -1156,10 +1152,8 @@ public class cgBase {
 		// cache guid
 		try {
 			final Matcher matcherCacheGuid = patternCacheGuid.matcher(page);
-			if (matcherCacheGuid.find()) {
-				if (matcherCacheGuid.groupCount() > 0) {
-					cache.guid = getMatch(matcherCacheGuid.group(1));
-				}
+			if (matcherCacheGuid.find() && matcherCacheGuid.groupCount() > 0) {
+				cache.guid = getMatch(matcherCacheGuid.group(1));
 			}
 		} catch (Exception e) {
 			// failed to parse cache guid
@@ -1169,10 +1163,8 @@ public class cgBase {
 		// name
 		try {
 			final Matcher matcherName = patternName.matcher(page);
-			if (matcherName.find()) {
-				if (matcherName.groupCount() > 0) {
-					cache.name = Html.fromHtml(matcherName.group(1)).toString();
-				}
+			if (matcherName.find() && matcherName.groupCount() > 0) {
+				cache.name = Html.fromHtml(matcherName.group(1)).toString();
 			}
 		} catch (Exception e) {
 			// failed to parse cache name
@@ -1182,10 +1174,8 @@ public class cgBase {
 		// owner real name
 		try {
 			final Matcher matcherOwnerReal = patternOwnerReal.matcher(page);
-			if (matcherOwnerReal.find()) {
-				if (matcherOwnerReal.groupCount() > 0) {
-					cache.ownerReal = URLDecoder.decode(matcherOwnerReal.group(1));
-				}
+			if (matcherOwnerReal.find() && matcherOwnerReal.groupCount() > 0) {
+				cache.ownerReal = URLDecoder.decode(matcherOwnerReal.group(1));
 			}
 		} catch (Exception e) {
 			// failed to parse owner real name
@@ -1216,14 +1206,12 @@ public class cgBase {
 
 		tableInside = tableInside.substring(0, pos);
 
-		if (tableInside != null && tableInside.length() > 0) {
+		if (StringUtils.isNotBlank(tableInside)) {
 			// cache terrain
 			try {
 				final Matcher matcherTerrain = patternTerrain.matcher(tableInside);
-				if (matcherTerrain.find()) {
-					if (matcherTerrain.groupCount() > 0) {
-						cache.terrain = new Float(Pattern.compile("_").matcher(matcherTerrain.group(1)).replaceAll("."));
-					}
+				if (matcherTerrain.find() && matcherTerrain.groupCount() > 0) {
+					cache.terrain = new Float(Pattern.compile("_").matcher(matcherTerrain.group(1)).replaceAll("."));
 				}
 			} catch (Exception e) {
 				// failed to parse terrain
@@ -1233,10 +1221,8 @@ public class cgBase {
 			// cache difficulty
 			try {
 				final Matcher matcherDifficulty = patternDifficulty.matcher(tableInside);
-				if (matcherDifficulty.find()) {
-					if (matcherDifficulty.groupCount() > 0) {
-						cache.difficulty = new Float(Pattern.compile("_").matcher(matcherDifficulty.group(1)).replaceAll("."));
-					}
+				if (matcherDifficulty.find() && matcherDifficulty.groupCount() > 0) {
+					cache.difficulty = new Float(Pattern.compile("_").matcher(matcherDifficulty.group(1)).replaceAll("."));
 				}
 			} catch (Exception e) {
 				// failed to parse difficulty
@@ -1246,10 +1232,8 @@ public class cgBase {
 			// owner
 			try {
 				final Matcher matcherOwner = patternOwner.matcher(tableInside);
-				if (matcherOwner.find()) {
-					if (matcherOwner.groupCount() > 0) {
-						cache.owner = Html.fromHtml(matcherOwner.group(2)).toString();
-					}
+				if (matcherOwner.find() && matcherOwner.groupCount() > 0) {
+					cache.owner = Html.fromHtml(matcherOwner.group(2)).toString();
 				}
 			} catch (Exception e) {
 				// failed to parse owner
@@ -1259,10 +1243,8 @@ public class cgBase {
 			// hidden
 			try {
 				final Matcher matcherHidden = patternHidden.matcher(tableInside);
-				if (matcherHidden.find()) {
-					if (matcherHidden.groupCount() > 0) {
-						cache.hidden = parseGcCustomDate(matcherHidden.group(1));
-					}
+				if (matcherHidden.find() && matcherHidden.groupCount() > 0) {
+					cache.hidden = parseGcCustomDate(matcherHidden.group(1));
 				}
 			} catch (ParseException e) {
 				// failed to parse cache hidden date
@@ -1273,10 +1255,8 @@ public class cgBase {
 				// event date
 				try {
 					final Matcher matcherHiddenEvent = patternHiddenEvent.matcher(tableInside);
-					if (matcherHiddenEvent.find()) {
-						if (matcherHiddenEvent.groupCount() > 0) {
-							cache.hidden = parseGcCustomDate(matcherHiddenEvent.group(1));
-						}
+					if (matcherHiddenEvent.find() && matcherHiddenEvent.groupCount() > 0) {
+						cache.hidden = parseGcCustomDate(matcherHiddenEvent.group(1));
 					}
 				} catch (ParseException e) {
 					// failed to parse cache event date
@@ -1287,10 +1267,8 @@ public class cgBase {
 			// favourite
 			try {
 				final Matcher matcherFavourite = patternFavourite.matcher(tableInside);
-				if (matcherFavourite.find()) {
-					if (matcherFavourite.groupCount() > 0) {
-						cache.favouriteCnt = Integer.parseInt(matcherFavourite.group(1));
-					}
+				if (matcherFavourite.find() && matcherFavourite.groupCount() > 0) {
+					cache.favouriteCnt = Integer.parseInt(matcherFavourite.group(1));
 				}
 			} catch (Exception e) {
 				// failed to parse favourite count
@@ -1300,10 +1278,8 @@ public class cgBase {
 			// cache size
 			try {
 				final Matcher matcherSize = patternSize.matcher(tableInside);
-				if (matcherSize.find()) {
-					if (matcherSize.groupCount() > 0) {
-						cache.size = getMatch(matcherSize.group(1)).toLowerCase();
-					}
+				if (matcherSize.find() && matcherSize.groupCount() > 0) {
+					cache.size = getMatch(matcherSize.group(1)).toLowerCase();
 				}
 			} catch (Exception e) {
 				// failed to parse size
@@ -1330,10 +1306,8 @@ public class cgBase {
 		// cache type
 		try {
 			final Matcher matcherType = patternType.matcher(page);
-			if (matcherType.find()) {
-				if (matcherType.groupCount() > 0) {
-					cache.type = cacheTypes.get(matcherType.group(1).toLowerCase());
-				}
+			if (matcherType.find() && matcherType.groupCount() > 0) {
+				cache.type = cacheTypes.get(matcherType.group(1).toLowerCase());
 			}
 		} catch (Exception e) {
 			// failed to parse type
@@ -1352,20 +1326,18 @@ public class cgBase {
 		// latitude and logitude
 		try {
 			final Matcher matcherLatLon = patternLatLon.matcher(page);
-			if (matcherLatLon.find()) {
-				if (matcherLatLon.groupCount() > 0) {
-					cache.latlon = getMatch(matcherLatLon.group(2)); // first is <b>
+			if (matcherLatLon.find() && matcherLatLon.groupCount() > 0) {
+				cache.latlon = getMatch(matcherLatLon.group(2)); // first is <b>
 
-					HashMap<String, Object> tmp = cgBase.parseLatlon(cache.latlon);
-					if (tmp.size() > 0) {
-						cache.latitude = (Double) tmp.get("latitude");
-						cache.longitude = (Double) tmp.get("longitude");
-						cache.latitudeString = (String) tmp.get("latitudeString");
-						cache.longitudeString = (String) tmp.get("longitudeString");
-						cache.reliableLatLon = true;
-					}
-					tmp = null;
+				HashMap<String, Object> tmp = cgBase.parseLatlon(cache.latlon);
+				if (tmp.size() > 0) {
+					cache.latitude = (Double) tmp.get("latitude");
+					cache.longitude = (Double) tmp.get("longitude");
+					cache.latitudeString = (String) tmp.get("latitudeString");
+					cache.longitudeString = (String) tmp.get("longitudeString");
+					cache.reliableLatLon = true;
 				}
+				tmp = null;
 			}
 		} catch (Exception e) {
 			// failed to parse latitude and/or longitude
@@ -1375,10 +1347,8 @@ public class cgBase {
 		// cache location
 		try {
 			final Matcher matcherLocation = patternLocation.matcher(page);
-			if (matcherLocation.find()) {
-				if (matcherLocation.groupCount() > 0) {
-					cache.location = getMatch(matcherLocation.group(1));
-				}
+			if (matcherLocation.find() && matcherLocation.groupCount() > 0) {
+				cache.location = getMatch(matcherLocation.group(1));
 			}
 		} catch (Exception e) {
 			// failed to parse location
@@ -1388,13 +1358,11 @@ public class cgBase {
 		// cache hint
 		try {
 			final Matcher matcherHint = patternHint.matcher(page);
-			if (matcherHint.find()) {
-				if (matcherHint.groupCount() > 2 && matcherHint.group(3) != null) {
-					// replace linebreak and paragraph tags
-					String hint = Pattern.compile("<(br|p)[^>]*>").matcher(matcherHint.group(3)).replaceAll("\n");
-					if (hint != null) {
-						cache.hint = hint.replaceAll(Pattern.quote("</p>"), "").trim();
-					}
+			if (matcherHint.find() && matcherHint.groupCount() > 2 && matcherHint.group(3) != null) {
+				// replace linebreak and paragraph tags
+				String hint = Pattern.compile("<(br|p)[^>]*>").matcher(matcherHint.group(3)).replaceAll("\n");
+				if (hint != null) {
+					cache.hint = hint.replaceAll(Pattern.quote("</p>"), "").trim();
 				}
 			}
 		} catch (Exception e) {
@@ -1431,10 +1399,8 @@ public class cgBase {
 		// cache personal note
 		try {
 			final Matcher matcherPersonalNote = patternPersonalNote.matcher(page);
-			if (matcherPersonalNote.find()) {
-				if (matcherPersonalNote.groupCount() > 0) {
-					cache.personalNote = getMatch(matcherPersonalNote.group(1).trim());
-				}
+			if (matcherPersonalNote.find() && matcherPersonalNote.groupCount() > 0) {
+				cache.personalNote = getMatch(matcherPersonalNote.group(1).trim());
 			}
 		} catch (Exception e) {
 			// failed to parse cache personal note
@@ -1444,10 +1410,8 @@ public class cgBase {
 		// cache short description
 		try {
 			final Matcher matcherDescShort = patternDescShort.matcher(page);
-			if (matcherDescShort.find()) {
-				if (matcherDescShort.groupCount() > 0) {
-					cache.shortdesc = getMatch(matcherDescShort.group(1));
-				}
+			if (matcherDescShort.find() && matcherDescShort.groupCount() > 0) {
+				cache.shortdesc = getMatch(matcherDescShort.group(1));
 			}
 		} catch (Exception e) {
 			// failed to parse short description
@@ -1457,10 +1421,8 @@ public class cgBase {
 		// cache description
 		try {
 			final Matcher matcherDesc = patternDesc.matcher(page);
-			if (matcherDesc.find()) {
-				if (matcherDesc.groupCount() > 0) {
-					cache.description = getMatch(matcherDesc.group(1));
-				}
+			if (matcherDesc.find() && matcherDesc.groupCount() > 0) {
+				cache.description = getMatch(matcherDesc.group(1));
 			}
 		} catch (Exception e) {
 			// failed to parse short description
@@ -1470,30 +1432,28 @@ public class cgBase {
 		// cache attributes
 		try {
 			final Matcher matcherAttributes = patternAttributes.matcher(page);
-			while (matcherAttributes.find()) {
-				if (matcherAttributes.groupCount() > 0) {
-					final String attributesPre = matcherAttributes.group(1);
-					final Matcher matcherAttributesInside = patternAttributesInside.matcher(attributesPre);
+			if (matcherAttributes.find() && matcherAttributes.groupCount() > 0) {
+				final String attributesPre = matcherAttributes.group(1);
+				final Matcher matcherAttributesInside = patternAttributesInside.matcher(attributesPre);
 
-					while (matcherAttributesInside.find()) {
-						if (matcherAttributesInside.groupCount() > 1 && matcherAttributesInside.group(2).equalsIgnoreCase("blank") != true) {
-							if (cache.attributes == null) {
-								cache.attributes = new ArrayList<String>();
-							}
-							// by default, use the tooltip of the attribute
-							String attribute = matcherAttributesInside.group(2).toLowerCase();
-
-							// if the image name can be recognized, use the image name as attribute
-							String imageName = matcherAttributesInside.group(1).trim();
-							if (imageName.length() > 0) {
-								int start = imageName.lastIndexOf('/');
-								int end = imageName.lastIndexOf('.');
-								if (start >= 0 && end>= 0) {
-									attribute = imageName.substring(start + 1, end).replace('-', '_').toLowerCase();
-								}
-							}
-							cache.attributes.add(attribute);
+				while (matcherAttributesInside.find()) {
+					if (matcherAttributesInside.groupCount() > 1 && matcherAttributesInside.group(2).equalsIgnoreCase("blank") != true) {
+						if (cache.attributes == null) {
+							cache.attributes = new ArrayList<String>();
 						}
+						// by default, use the tooltip of the attribute
+						String attribute = matcherAttributesInside.group(2).toLowerCase();
+
+						// if the image name can be recognized, use the image name as attribute
+						String imageName = matcherAttributesInside.group(1).trim();
+						if (imageName.length() > 0) {
+							int start = imageName.lastIndexOf('/');
+							int end = imageName.lastIndexOf('.');
+							if (start >= 0 && end>= 0) {
+								attribute = imageName.substring(start + 1, end).replace('-', '_').toLowerCase();
+							}
+						}
+						cache.attributes.add(attribute);
 					}
 				}
 			}
@@ -1505,28 +1465,26 @@ public class cgBase {
 		// cache spoilers
 		try {
 			final Matcher matcherSpoilers = patternSpoilers.matcher(page);
-			while (matcherSpoilers.find()) {
-				if (matcherSpoilers.groupCount() > 0) {
-					final String spoilersPre = matcherSpoilers.group(1);
-					final Matcher matcherSpoilersInside = patternSpoilersInside.matcher(spoilersPre);
+			if (matcherSpoilers.find() && matcherSpoilers.groupCount() > 0) {
+				final String spoilersPre = matcherSpoilers.group(1);
+				final Matcher matcherSpoilersInside = patternSpoilersInside.matcher(spoilersPre);
 
-					while (matcherSpoilersInside.find()) {
-						if (matcherSpoilersInside.groupCount() > 0) {
-							final cgImage spoiler = new cgImage();
-							spoiler.url = matcherSpoilersInside.group(1);
+				while (matcherSpoilersInside.find()) {
+					if (matcherSpoilersInside.groupCount() > 0) {
+						final cgImage spoiler = new cgImage();
+						spoiler.url = matcherSpoilersInside.group(1);
 
-							if (matcherSpoilersInside.group(2) != null) {
-								spoiler.title = matcherSpoilersInside.group(2);
-							}
-							if (matcherSpoilersInside.group(4) != null) {
-								spoiler.description = matcherSpoilersInside.group(4);
-							}
-
-							if (cache.spoilers == null) {
-								cache.spoilers = new ArrayList<cgImage>();
-							}
-							cache.spoilers.add(spoiler);
+						if (matcherSpoilersInside.group(2) != null) {
+							spoiler.title = matcherSpoilersInside.group(2);
 						}
+						if (matcherSpoilersInside.group(4) != null) {
+							spoiler.description = matcherSpoilersInside.group(4);
+						}
+
+						if (cache.spoilers == null) {
+							cache.spoilers = new ArrayList<cgImage>();
+						}
+						cache.spoilers.add(spoiler);
 					}
 				}
 			}
@@ -1540,7 +1498,7 @@ public class cgBase {
 			cache.inventoryItems = 0;
 
 			final Matcher matcherInventory = patternInventory.matcher(page);
-			while (matcherInventory.find()) {
+			if (matcherInventory.find()) {
 				if (cache.inventory == null) {
 					cache.inventory = new ArrayList<cgTrackable>();
 				}
@@ -1548,7 +1506,7 @@ public class cgBase {
 				if (matcherInventory.groupCount() > 1) {
 					final String inventoryPre = matcherInventory.group(2);
 
-					if (inventoryPre != null && inventoryPre.length() > 0) {
+					if (StringUtils.isNotBlank(inventoryPre)) {
 						final Matcher matcherInventoryInside = patternInventoryInside.matcher(inventoryPre);
 
 						while (matcherInventoryInside.find()) {
@@ -1583,11 +1541,9 @@ public class cgBase {
 					String typeStr = matcherLog.group(1);
 					String countStr = matcherLog.group(2);
 
-					if (typeStr != null
-					        && typeStr.length() > 0
+					if (StringUtils.isNotBlank(typeStr)
 					        && logTypes.containsKey(typeStr.toLowerCase())
-					        && countStr != null
-					        && countStr.length() > 0)
+					        && StringUtils.isNotBlank(countStr))
 					{
 					    cache.logCounts.put(logTypes.get(typeStr.toLowerCase()), Integer.parseInt(countStr));
 					}
@@ -1618,9 +1574,10 @@ public class cgBase {
 			{
 				final cgLog logDone = new cgLog();
 
-				if (logTypes.containsKey(matcherLog.group(3).toLowerCase()))
+				final String logIconName = matcherLog.group(3).toLowerCase();
+				if (logTypes.containsKey(logIconName))
 				{
-					logDone.type = logTypes.get(matcherLog.group(3).toLowerCase());
+					logDone.type = logTypes.get(logIconName);
 				}
 				else
 				{
@@ -1709,13 +1666,8 @@ public class cgBase {
 					// waypoint type
 					try {
 						final Matcher matcherWpType = patternWpType.matcher(wp[3]);
-						while (matcherWpType.find()) {
-							if (matcherWpType.groupCount() > 0) {
-								waypoint.type = matcherWpType.group(1);
-								if (waypoint.type != null) {
-									waypoint.type = waypoint.type.trim();
-								}
-							}
+						if (matcherWpType.find() && matcherWpType.groupCount() > 0) {
+							waypoint.type = matcherWpType.group(1).trim();
 						}
 					} catch (Exception e) {
 						// failed to parse type
@@ -1725,13 +1677,8 @@ public class cgBase {
 					// waypoint prefix
 					try {
 						final Matcher matcherWpPrefix = patternWpPrefixOrLookupOrLatlon.matcher(wp[4]);
-						while (matcherWpPrefix.find()) {
-							if (matcherWpPrefix.groupCount() > 1) {
-								waypoint.prefix = matcherWpPrefix.group(2);
-								if (waypoint.prefix != null) {
-									waypoint.prefix = waypoint.prefix.trim();
-								}
-							}
+						if (matcherWpPrefix.find() && matcherWpPrefix.groupCount() > 1) {
+							waypoint.prefix = matcherWpPrefix.group(2).trim();
 						}
 					} catch (Exception e) {
 						// failed to parse prefix
@@ -1741,13 +1688,8 @@ public class cgBase {
 					// waypoint lookup
 					try {
 						final Matcher matcherWpLookup = patternWpPrefixOrLookupOrLatlon.matcher(wp[5]);
-						while (matcherWpLookup.find()) {
-							if (matcherWpLookup.groupCount() > 1) {
-								waypoint.lookup = matcherWpLookup.group(2);
-								if (waypoint.lookup != null) {
-									waypoint.lookup = waypoint.lookup.trim();
-								}
-							}
+						if (matcherWpLookup.find() && matcherWpLookup.groupCount() > 1) {
+							waypoint.lookup = matcherWpLookup.group(2).trim();
 						}
 					} catch (Exception e) {
 						// failed to parse lookup
@@ -1760,9 +1702,12 @@ public class cgBase {
 						while (matcherWpName.find()) {
 							if (matcherWpName.groupCount() > 0) {
 								waypoint.name = matcherWpName.group(1);
-								if (waypoint.name != null) {
+								if (StringUtils.isNotBlank(waypoint.name)) {
 									waypoint.name = waypoint.name.trim();
 								}
+							}
+						if (matcherWpName.find() && matcherWpName.groupCount() > 0) {
+							waypoint.name = matcherWpName.group(1).trim();
 							}
 						}
 					} catch (Exception e) {
@@ -1773,17 +1718,15 @@ public class cgBase {
 					// waypoint latitude and logitude
 					try {
 						final Matcher matcherWpLatLon = patternWpPrefixOrLookupOrLatlon.matcher(wp[7]);
-						while (matcherWpLatLon.find()) {
-							if (matcherWpLatLon.groupCount() > 1) {
-								waypoint.latlon = Html.fromHtml(matcherWpLatLon.group(2)).toString();
+						if (matcherWpLatLon.find() && matcherWpLatLon.groupCount() > 1) {
+							waypoint.latlon = Html.fromHtml(matcherWpLatLon.group(2)).toString();
 
-								final HashMap<String, Object> tmp = cgBase.parseLatlon(waypoint.latlon);
-								if (tmp.size() > 0) {
-									waypoint.latitude = (Double) tmp.get("latitude");
-									waypoint.longitude = (Double) tmp.get("longitude");
-									waypoint.latitudeString = (String) tmp.get("latitudeString");
-									waypoint.longitudeString = (String) tmp.get("longitudeString");
-								}
+							final HashMap<String, Object> tmp = cgBase.parseLatlon(waypoint.latlon);
+							if (tmp.size() > 0) {
+								waypoint.latitude = (Double) tmp.get("latitude");
+								waypoint.longitude = (Double) tmp.get("longitude");
+								waypoint.latitudeString = (String) tmp.get("latitudeString");
+								waypoint.longitudeString = (String) tmp.get("longitudeString");
 							}
 						}
 					} catch (Exception e) {
@@ -1799,21 +1742,17 @@ public class cgBase {
 					// waypoint note
 					try {
 						final Matcher matcherWpNote = patternWpNote.matcher(wp[3]);
-						while (matcherWpNote.find()) {
-							if (matcherWpNote.groupCount() > 0) {
-								waypoint.note = matcherWpNote.group(1);
-								if (waypoint.note != null) {
-									waypoint.note = waypoint.note.trim();
-								}
-							}
+						if (matcherWpNote.find() && matcherWpNote.groupCount() > 0) {
+							waypoint.note = matcherWpNote.group(1).trim();
 						}
 					} catch (Exception e) {
 						// failed to parse note
 						Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse waypoint note");
 					}
 
-					if (cache.waypoints == null)
+					if (cache.waypoints == null) {
 						cache.waypoints = new ArrayList<cgWaypoint>();
+					}
 					cache.waypoints.add(waypoint);
 				}
 			}
@@ -1839,13 +1778,13 @@ public class cgBase {
 	}
 
 	private static void checkFields(cgCache cache) {
-		if (cache.geocode == null || cache.geocode.length() == 0) {
+	    if (StringUtils.isEmpty(cache.geocode)) {
 			Log.w(cgSettings.tag, "geo code not parsed correctly");
 		}
-		if (cache.name == null || cache.name.length() == 0) {
+	    if (StringUtils.isEmpty(cache.name)) {
 			Log.w(cgSettings.tag, "name not parsed correctly");
 		}
-		if (cache.guid == null || cache.guid.length() == 0) {
+	    if (StringUtils.isEmpty(cache.guid)) {
 			Log.w(cgSettings.tag, "guid not parsed correctly");
 		}
 		if (cache.terrain == null || cache.terrain == 0.0) {
@@ -1854,10 +1793,10 @@ public class cgBase {
 		if (cache.difficulty == null || cache.difficulty == 0.0) {
 			Log.w(cgSettings.tag, "difficulty not parsed correctly");
 		}
-		if (cache.owner == null || cache.owner.length() == 0) {
+		if (StringUtils.isEmpty(cache.owner)) {
 			Log.w(cgSettings.tag, "owner not parsed correctly");
 		}
-		if (cache.ownerReal == null || cache.ownerReal.length() == 0) {
+		if (StringUtils.isEmpty(cache.ownerReal)) {
 			Log.w(cgSettings.tag, "owner real not parsed correctly");
 		}
 		if (cache.hidden == null) {
@@ -1866,10 +1805,10 @@ public class cgBase {
 		if (cache.favouriteCnt == null) {
 			Log.w(cgSettings.tag, "favoriteCount not parsed correctly");
 		}
-		if (cache.size == null || cache.size.length() == 0) {
+		if (StringUtils.isEmpty(cache.size)) {
 			Log.w(cgSettings.tag, "size not parsed correctly");
 		}
-		if (cache.type == null || cache.type.length() == 0) {
+		if (StringUtils.isNotBlank(cache.type)) {
 			Log.w(cgSettings.tag, "type not parsed correctly");
 		}
 		if (cache.latitude == null) {
@@ -1878,7 +1817,7 @@ public class cgBase {
 		if (cache.longitude == null) {
 			Log.w(cgSettings.tag, "longitude not parsed correctly");
 		}
-		if (cache.location == null || cache.location.length() == 0) {
+		if (StringUtils.isEmpty(cache.location)) {
 			Log.w(cgSettings.tag, "location not parsed correctly");
 		}
 	}
@@ -1896,13 +1835,13 @@ public class cgBase {
 	public Date parseGcCustomDate(String input)
 	throws ParseException
 	{
-		if (input == null)
+		if (StringUtils.isBlank(input))
 		{
 		    throw new ParseException("Input is null", 0);
 		}
 
 		input = input.trim();
-		
+
 		if (null != settings
 		        //&& null != settings.getGcCustomDate()
 		        && gcCustomDateFormats.containsKey(settings.getGcCustomDate()))
@@ -1925,17 +1864,17 @@ public class cgBase {
 
 		throw new ParseException("No matching pattern", 0);
 	}
-	
+
 	public void detectGcCustomDate()
 	{
 	    final String host = "www.geocaching.com";
         final String path = "/account/ManagePreferences.aspx";
-        
+
         final String result = request(false, host, path, "GET", null, false, false, false).getData();
-        
+
         final Pattern pattern = Pattern.compile("<option selected=\"selected\" value=\"([ /Mdy-]+)\">", Pattern.CASE_INSENSITIVE);
         final Matcher matcher = pattern.matcher(result);
-        
+
         if (matcher.find())
         {
             settings.setGcCustomDate(matcher.group(1));
@@ -1946,10 +1885,10 @@ public class cgBase {
 		ArrayList<String> guids = null;
 		ArrayList<String> geocodes = null;
 
-		if (guid != null && guid.length() > 0) {
+		if (StringUtils.isNotBlank(guid)) {
 			guids = new ArrayList<String>();
 			guids.add(guid);
-		} else if (geocode != null && geocode.length() > 0) {
+		} else if (StringUtils.isNotBlank(geocode)) {
 			geocodes = new ArrayList<String>();
 			geocodes.add(geocode);
 		} else {
@@ -1982,7 +1921,7 @@ public class cgBase {
 					params.put("password", login.get("password"));
 				}
 			}
-			if (guids != null && guids.size() > 0) {
+			if (CollectionUtils.isNotEmpty(guids)) {
 				params.put("cacheIds", implode(",", guids.toArray()));
 			} else {
 				params.put("waypoints", implode(",", geocodes.toArray()));
@@ -2074,7 +2013,7 @@ public class cgBase {
 					}
 				}
 
-				if (guid != null) {
+				if (StringUtils.isNotBlank(guid)) {
 					ratings.put(guid, rating);
 				}
 			}
@@ -2086,37 +2025,18 @@ public class cgBase {
 	}
 
 	public cgTrackable parseTrackable(String page) {
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.parseTrackable: No page given");
 			return null;
 		}
-
-		final Pattern patternTrackableId = Pattern.compile("<a id=\"ctl00_ContentBody_LogLink\" title=\"[^\"]*\" href=\".*log\\.aspx\\?wid=([a-z0-9\\-]+)\"[^>]*>[^<]*</a>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternGeocode = Pattern.compile("<span id=\"ctl00_ContentBody_BugDetails_BugTBNum\" String=\"[^\"]*\">Use[^<]*<strong>(TB[0-9a-z]+)[^<]*</strong> to reference this item.[^<]*</span>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternName = Pattern.compile("<h2>([^<]*<img[^>]*>)?[^<]*<span id=\"ctl00_ContentBody_lbHeading\">([^<]+)</span>[^<]*</h2>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternOwner = Pattern.compile("<dt>\\W*Owner:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugOwner\" title=\"[^\"]*\" href=\"[^\"]*/profile/\\?guid=([a-z0-9\\-]+)\">([^<]+)<\\/a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternReleased = Pattern.compile("<dt>\\W*Released:[^<]*</dt>[^<]*<dd>[^<]*<span id=\"ctl00_ContentBody_BugDetails_BugReleaseDate\">([^<]+)<\\/span>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternOrigin = Pattern.compile("<dt>\\W*Origin:[^<]*</dt>[^<]*<dd>[^<]*<span id=\"ctl00_ContentBody_BugDetails_BugOrigin\">([^<]+)<\\/span>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternSpottedCache = Pattern.compile("<dt>\\W*Recently Spotted:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" title=\"[^\"]*\" href=\"[^\"]*/seek/cache_details.aspx\\?guid=([a-z0-9\\-]+)\">In ([^<]+)</a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternSpottedUser = Pattern.compile("<dt>\\W*Recently Spotted:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" href=\"[^\"]*/profile/\\?guid=([a-z0-9\\-]+)\">In the hands of ([^<]+).</a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternSpottedUnknown = Pattern.compile("<dt>\\W*Recently Spotted:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugLocation\">Unknown Location[^<]*</a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternSpottedOwner = Pattern.compile("<dt>\\W*Recently Spotted:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugLocation\">In the hands of the owner[^<]*</a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternGoal = Pattern.compile("<h3>\\W*Current GOAL[^<]*</h3>[^<]*<p[^>]*>(.*)</p>[^<]*<h3>\\W*About This Item[^<]*</h3>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternDetailsImage = Pattern.compile("<h3>\\W*About This Item[^<]*</h3>([^<]*<p>([^<]*<img id=\"ctl00_ContentBody_BugDetails_BugImage\" class=\"[^\"]+\" src=\"([^\"]+)\"[^>]*>)?[^<]*</p>)?[^<]*<p[^>]*>(.*)</p>[^<]*<div id=\"ctl00_ContentBody_BugDetails_uxAbuseReport\">", Pattern.CASE_INSENSITIVE);
-		final Pattern patternIcon = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternType = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"[^\"]+\" alt=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
-		final Pattern patternDistance = Pattern.compile("<h4[^>]*\\W*Tracking History \\(([0-9\\.,]+(km|mi))[^\\)]*\\)", Pattern.CASE_INSENSITIVE);
-		final Pattern patternLog = Pattern.compile("<tr class=\"Data.+?src=\"/images/icons/([^\\.]+)\\.gif[^>]+>&nbsp;([^<]+)</td>.+?guid.+?>([^<]+)</a>.+?(?:guid=([^\"]+)\">([^<]+)</a>.+?)?<td colspan=\"4\">(.+?)(?:<ul.+?ul>)?\\s*</td>\\s*</tr>", Pattern.CASE_INSENSITIVE);
 
 		final cgTrackable trackable = new cgTrackable();
 
 		// trackable geocode
 		try {
-			final Matcher matcherGeocode = patternGeocode.matcher(page);
-			while (matcherGeocode.find()) {
-				if (matcherGeocode.groupCount() > 0) {
-					trackable.geocode = matcherGeocode.group(1).toUpperCase();
-				}
+			final Matcher matcherGeocode = PATTERN_TRACKABLE_Geocode.matcher(page);
+			if (matcherGeocode.find() && matcherGeocode.groupCount() > 0) {
+				trackable.geocode = matcherGeocode.group(1).toUpperCase();
 			}
 		} catch (Exception e) {
 			// failed to parse trackable geocode
@@ -2125,11 +2045,9 @@ public class cgBase {
 
 		// trackable id
 		try {
-			final Matcher matcherTrackableId = patternTrackableId.matcher(page);
-			while (matcherTrackableId.find()) {
-				if (matcherTrackableId.groupCount() > 0) {
-					trackable.guid = matcherTrackableId.group(1);
-				}
+			final Matcher matcherTrackableId = PATTERN_TRACKABLE_TrackableId.matcher(page);
+			if (matcherTrackableId.find() && matcherTrackableId.groupCount() > 0) {
+				trackable.guid = matcherTrackableId.group(1);
 			}
 		} catch (Exception e) {
 			// failed to parse trackable id
@@ -2138,11 +2056,9 @@ public class cgBase {
 
 		// trackable icon
 		try {
-			final Matcher matcherTrackableIcon = patternIcon.matcher(page);
-			while (matcherTrackableIcon.find()) {
-				if (matcherTrackableIcon.groupCount() > 0) {
-					trackable.iconUrl = matcherTrackableIcon.group(1);
-				}
+			final Matcher matcherTrackableIcon = PATTERN_TRACKABLE_Icon.matcher(page);
+			if (matcherTrackableIcon.find() && matcherTrackableIcon.groupCount() > 0) {
+				trackable.iconUrl = matcherTrackableIcon.group(1);
 			}
 		} catch (Exception e) {
 			// failed to parse trackable icon
@@ -2151,11 +2067,9 @@ public class cgBase {
 
 		// trackable name
 		try {
-			final Matcher matcherName = patternName.matcher(page);
-			while (matcherName.find()) {
-				if (matcherName.groupCount() > 1) {
-					trackable.name = matcherName.group(2);
-				}
+			final Matcher matcherName = PATTERN_TRACKABLE_Name.matcher(page);
+			if (matcherName.find() && matcherName.groupCount() > 1) {
+				trackable.name = matcherName.group(2);
 			}
 		} catch (Exception e) {
 			// failed to parse trackable name
@@ -2163,13 +2077,11 @@ public class cgBase {
 		}
 
 		// trackable type
-		if (trackable.name != null && trackable.name.length() > 0) {
+		if (StringUtils.isNotBlank(trackable.name)) {
 			try {
-				final Matcher matcherType = patternType.matcher(page);
-				while (matcherType.find()) {
-					if (matcherType.groupCount() > 0) {
-						trackable.type = matcherType.group(1);
-					}
+				final Matcher matcherType = PATTERN_TRACKABLE_Type.matcher(page);
+				if (matcherType.find() && matcherType.groupCount() > 0) {
+					trackable.type = matcherType.group(1);
 				}
 			} catch (Exception e) {
 				// failed to parse trackable type
@@ -2179,12 +2091,10 @@ public class cgBase {
 
 		// trackable owner name
 		try {
-			final Matcher matcherOwner = patternOwner.matcher(page);
-			while (matcherOwner.find()) {
-				if (matcherOwner.groupCount() > 0) {
-					trackable.ownerGuid = matcherOwner.group(1);
-					trackable.owner = matcherOwner.group(2);
-				}
+			final Matcher matcherOwner = PATTERN_TRACKABLE_Owner.matcher(page);
+			if (matcherOwner.find() && matcherOwner.groupCount() > 0) {
+				trackable.ownerGuid = matcherOwner.group(1);
+				trackable.owner = matcherOwner.group(2);
 			}
 		} catch (Exception e) {
 			// failed to parse trackable owner name
@@ -2193,11 +2103,9 @@ public class cgBase {
 
 		// trackable origin
 		try {
-			final Matcher matcherOrigin = patternOrigin.matcher(page);
-			while (matcherOrigin.find()) {
-				if (matcherOrigin.groupCount() > 0) {
-					trackable.origin = matcherOrigin.group(1);
-				}
+			final Matcher matcherOrigin = PATTERN_TRACKABLE_Origin.matcher(page);
+			if (matcherOrigin.find() && matcherOrigin.groupCount() > 0) {
+				trackable.origin = matcherOrigin.group(1);
 			}
 		} catch (Exception e) {
 			// failed to parse trackable origin
@@ -2206,30 +2114,26 @@ public class cgBase {
 
 		// trackable spotted
 		try {
-			final Matcher matcherSpottedCache = patternSpottedCache.matcher(page);
-			while (matcherSpottedCache.find()) {
-				if (matcherSpottedCache.groupCount() > 0) {
-					trackable.spottedGuid = matcherSpottedCache.group(1);
-					trackable.spottedName = matcherSpottedCache.group(2);
-					trackable.spottedType = cgTrackable.SPOTTED_CACHE;
-				}
+			final Matcher matcherSpottedCache = PATTERN_TRACKABLE_SpottedCache.matcher(page);
+			if (matcherSpottedCache.find() && matcherSpottedCache.groupCount() > 0) {
+				trackable.spottedGuid = matcherSpottedCache.group(1);
+				trackable.spottedName = matcherSpottedCache.group(2);
+				trackable.spottedType = cgTrackable.SPOTTED_CACHE;
 			}
 
-			final Matcher matcherSpottedUser = patternSpottedUser.matcher(page);
-			while (matcherSpottedUser.find()) {
-				if (matcherSpottedUser.groupCount() > 0) {
-					trackable.spottedGuid = matcherSpottedUser.group(1);
-					trackable.spottedName = matcherSpottedUser.group(2);
-					trackable.spottedType = cgTrackable.SPOTTED_USER;
-				}
+			final Matcher matcherSpottedUser = PATTERN_TRACKABLE_SpottedUser.matcher(page);
+			if (matcherSpottedUser.find() && matcherSpottedUser.groupCount() > 0) {
+				trackable.spottedGuid = matcherSpottedUser.group(1);
+				trackable.spottedName = matcherSpottedUser.group(2);
+				trackable.spottedType = cgTrackable.SPOTTED_USER;
 			}
 
-			final Matcher matcherSpottedUnknown = patternSpottedUnknown.matcher(page);
+			final Matcher matcherSpottedUnknown = PATTERN_TRACKABLE_SpottedUnknown.matcher(page);
 			if (matcherSpottedUnknown.find()) {
 				trackable.spottedType = cgTrackable.SPOTTED_UNKNOWN;
 			}
 
-			final Matcher matcherSpottedOwner = patternSpottedOwner.matcher(page);
+			final Matcher matcherSpottedOwner = PATTERN_TRACKABLE_SpottedOwner.matcher(page);
 			if (matcherSpottedOwner.find()) {
 				trackable.spottedType = cgTrackable.SPOTTED_OWNER;
 			}
@@ -2240,24 +2144,22 @@ public class cgBase {
 
 		// released
 		try {
-			final Matcher matcherReleased = patternReleased.matcher(page);
-			while (matcherReleased.find()) {
-				if (matcherReleased.groupCount() > 0 && matcherReleased.group(1) != null) {
-					try {
-						if (trackable.released == null) {
-							trackable.released = dateTbIn1.parse(matcherReleased.group(1));
-						}
-					} catch (Exception e) {
-						//
+			final Matcher matcherReleased = PATTERN_TRACKABLE_Released.matcher(page);
+			if (matcherReleased.find() && matcherReleased.groupCount() > 0 && matcherReleased.group(1) != null) {
+				try {
+					if (trackable.released == null) {
+						trackable.released = dateTbIn1.parse(matcherReleased.group(1));
 					}
+				} catch (Exception e) {
+					//
+				}
 
-					try {
-						if (trackable.released == null) {
-							trackable.released = dateTbIn2.parse(matcherReleased.group(1));
-						}
-					} catch (Exception e) {
-						//
+				try {
+					if (trackable.released == null) {
+						trackable.released = dateTbIn2.parse(matcherReleased.group(1));
 					}
+				} catch (Exception e) {
+					//
 				}
 			}
 		} catch (Exception e) {
@@ -2267,11 +2169,9 @@ public class cgBase {
 
 		// trackable distance
 		try {
-			final Matcher matcherDistance = patternDistance.matcher(page);
-			while (matcherDistance.find()) {
-				if (matcherDistance.groupCount() > 0) {
-					trackable.distance = parseDistance(matcherDistance.group(1));
-				}
+			final Matcher matcherDistance = PATTERN_TRACKABLE_Distance.matcher(page);
+			if (matcherDistance.find() && matcherDistance.groupCount() > 0) {
+				trackable.distance = parseDistance(matcherDistance.group(1));
 			}
 		} catch (Exception e) {
 			// failed to parse trackable distance
@@ -2280,11 +2180,9 @@ public class cgBase {
 
 		// trackable goal
 		try {
-			final Matcher matcherGoal = patternGoal.matcher(page);
-			while (matcherGoal.find()) {
-				if (matcherGoal.groupCount() > 0) {
-					trackable.goal = matcherGoal.group(1);
-				}
+			final Matcher matcherGoal = PATTERN_TRACKABLE_Goal.matcher(page);
+			if (matcherGoal.find() && matcherGoal.groupCount() > 0) {
+				trackable.goal = matcherGoal.group(1);
 			}
 		} catch (Exception e) {
 			// failed to parse trackable goal
@@ -2293,18 +2191,16 @@ public class cgBase {
 
 		// trackable details & image
 		try {
-			final Matcher matcherDetailsImage = patternDetailsImage.matcher(page);
-			while (matcherDetailsImage.find()) {
-				if (matcherDetailsImage.groupCount() > 0) {
-					final String image = matcherDetailsImage.group(3);
-					final String details = matcherDetailsImage.group(4);
+			final Matcher matcherDetailsImage = PATTERN_TRACKABLE_DetailsImage.matcher(page);
+			if (matcherDetailsImage.find() && matcherDetailsImage.groupCount() > 0) {
+				final String image = matcherDetailsImage.group(3);
+				final String details = matcherDetailsImage.group(4);
 
-					if (image != null) {
-						trackable.image = image;
-					}
-					if (details != null) {
-						trackable.details = details;
-					}
+				if (image != null) {
+					trackable.image = image;
+				}
+				if (details != null) {
+					trackable.details = details;
 				}
 			}
 		} catch (Exception e) {
@@ -2315,7 +2211,7 @@ public class cgBase {
 		// trackable logs
 		try
 		{
-			final Matcher matcherLogs = patternLog.matcher(page);
+			final Matcher matcherLogs = PATTERN_TRACKABLE_Log.matcher(page);
 			/*
     			1. Type (img)
                 2. Date
@@ -2327,7 +2223,7 @@ public class cgBase {
 			while (matcherLogs.find())
 			{
 				final cgLog logDone = new cgLog();
-				
+
                 if (logTypes.containsKey(matcherLogs.group(1).toLowerCase()))
                 {
                     logDone.type = logTypes.get(matcherLogs.group(1).toLowerCase());
@@ -2338,15 +2234,15 @@ public class cgBase {
                 }
 
 				logDone.author = Html.fromHtml(matcherLogs.group(3)).toString();
-				
+
 				try
 				{
 				    logDone.date = parseGcCustomDate(matcherLogs.group(2)).getTime();
 				}
 				catch (ParseException e) {}
-				
+
 				logDone.log = matcherLogs.group(6).trim();
-				
+
 				if (matcherLogs.group(4) != null && matcherLogs.group(5) != null)
 				{
 					logDone.cacheGuid = matcherLogs.group(4);
@@ -2366,7 +2262,7 @@ public class cgBase {
 	}
 
 	public static ArrayList<Integer> parseTypes(String page) {
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isEmpty(page)) {
 			return null;
 		}
 
@@ -2400,7 +2296,7 @@ public class cgBase {
 	}
 
 	public static ArrayList<cgTrackableLog> parseTrackableLog(String page) {
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isEmpty(page)) {
 			return null;
 		}
 
@@ -2482,7 +2378,7 @@ public class cgBase {
 	}
 
 	public static String stripParagraphs(String text) {
-		if (text == null) {
+		if (StringUtils.isBlank(text)) {
 			return "";
 		}
 
@@ -2498,7 +2394,7 @@ public class cgBase {
 	}
 
 	public static String stripTags(String text) {
-		if (text == null) {
+		if (StringUtils.isBlank(text)) {
 			return "";
 		}
 
@@ -2508,28 +2404,6 @@ public class cgBase {
 		matcherP.replaceAll(" ");
 
 		return text.trim();
-	}
-
-	public static String capitalizeSentence(String sentence) {
-		if (sentence == null) {
-			return "";
-		}
-
-		final String[] word = sentence.split(" ");
-
-		for (int i = 0; i < word.length; i++) {
-			word[i] = capitalizeWord(word[i]);
-		}
-
-		return implode(" ", word);
-	}
-
-	public static String capitalizeWord(String word) {
-		if (word.length() == 0) {
-			return word;
-		}
-
-		return (word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase());
 	}
 
 	public static Double parseDistance(String dst) {
@@ -2717,46 +2591,38 @@ public class cgBase {
 		return result;
 	}
 
-	public static String formatCoordinate(Double coord, String latlon, boolean degrees) {
-		String formatted = "";
-
-		if (coord == null) {
-			return formatted;
+	private static String formatCoordinate(final Double coordIn, final boolean degrees, final String direction, final String digitsFormat) {
+		if (coordIn == null) {
+			return "";
 		}
+		StringBuilder formatted = new StringBuilder(direction);
 
-		String worldSide = "";
-		if (latlon.equalsIgnoreCase("lat")) {
-			if (coord >= 0) {
-				// have the blanks here at the direction to avoid one String concatenation
-				worldSide = "N ";
-			} else {
-				worldSide = "S ";
-			}
-		} else if (latlon.equalsIgnoreCase("lon")) {
-			if (coord >= 0) {
-				worldSide = "E ";
-			} else {
-				worldSide = "W ";
-			}
-		}
+		double coordAbs = Math.abs(coordIn);
+		Locale locale = Locale.getDefault();
+		double floor = Math.floor(coordAbs);
 
-		coord = Math.abs(coord);
+		formatted.append(String.format(locale, digitsFormat, floor));
 
-		if (latlon.equalsIgnoreCase("lat")) {
-			if (degrees) {
-				formatted = worldSide + String.format(Locale.getDefault(), "%02.0f", Math.floor(coord)) + "° " + String.format(Locale.getDefault(), "%06.3f", ((coord - Math.floor(coord)) * 60));
-			} else {
-				formatted = worldSide + String.format(Locale.getDefault(), "%02.0f", Math.floor(coord)) + " " + String.format(Locale.getDefault(), "%06.3f", ((coord - Math.floor(coord)) * 60));
-			}
+		if (degrees) {
+			formatted.append("° ");
 		} else {
-			if (degrees) {
-				formatted = worldSide + String.format(Locale.getDefault(), "%03.0f", Math.floor(coord)) + "° " + String.format(Locale.getDefault(), "%06.3f", ((coord - Math.floor(coord)) * 60));
-			} else {
-				formatted = worldSide + String.format(Locale.getDefault(), "%03.0f", Math.floor(coord)) + " " + String.format(Locale.getDefault(), "%06.3f", ((coord - Math.floor(coord)) * 60));
-			}
+			formatted.append(" ");
 		}
+		formatted.append(String.format(locale, "%06.3f", ((coordAbs - floor) * 60)));
 
-		return formatted;
+		return formatted.toString();
+	}
+
+	public static String formatLatitude(final Double coord, final boolean degrees) {
+		return formatCoordinate(coord, degrees, (coord >= 0) ? "N " : "S ", "%02.0f");
+	}
+
+	public static String formatLongitude(final Double coord, final boolean degrees) {
+		return formatCoordinate(coord, degrees, (coord >= 0) ? "E " : "W ", "%03.0f");
+	}
+
+	public static String formatCoords(final Double latitude, final Double longitude, final boolean degrees) {
+		return formatLatitude(latitude, degrees) + " | " + formatLongitude(longitude, degrees);
 	}
 
 	public static HashMap<String, Object> parseCoordinate(String coord, String latlon) {
@@ -2875,12 +2741,12 @@ public class cgBase {
 		cgCacheWrap caches = new cgCacheWrap();
 		String url = app.getUrl(searchId);
 
-		if (url == null || url.length() == 0) {
+		if (StringUtils.isBlank(url)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByNextPage: No url found");
 			return searchId;
 		}
 
-		if (isEmpty(viewstates)) {
+		if (ArrayUtils.isEmpty(viewstates)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByNextPage: No viewstate given");
 			return searchId;
 		}
@@ -2929,7 +2795,7 @@ public class cgBase {
 			}
 		}
 
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByNextPage: No data from server");
 			return searchId;
 		}
@@ -2960,13 +2826,13 @@ public class cgBase {
 		String geocode = parameters.get("geocode");
 		String guid = parameters.get("guid");
 
-		if ((geocode == null || geocode.length() == 0) && ((guid == null || guid.length() == 0))) {
+		if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByGeocode: No geocode nor guid given");
 			return null;
 		}
 
 		if (forceReload == false && reason == 0 && (app.isOffline(geocode, guid) || app.isThere(geocode, guid, true, true))) {
-			if ((geocode == null || geocode.length() == 0) && guid != null && guid.length() > 0) {
+			if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
 				geocode = app.getGeocode(guid);
 			}
 
@@ -2986,9 +2852,9 @@ public class cgBase {
 		final String path = "/seek/cache_details.aspx";
 		final String method = "GET";
 		final HashMap<String, String> params = new HashMap<String, String>();
-		if (geocode != null && geocode.length() > 0) {
+		if (StringUtils.isNotBlank(geocode)) {
 			params.put("wp", geocode);
-		} else if (guid != null && guid.length() > 0) {
+		} else if (StringUtils.isNotBlank(guid)) {
 			params.put("guid", guid);
 		}
 		params.put("decrypt", "y");
@@ -2997,9 +2863,9 @@ public class cgBase {
 
 		String page = requestLogged(false, host, path, method, params, false, false, false);
 
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isEmpty(page)) {
 			if (app.isThere(geocode, guid, true, false)) {
-				if ((geocode == null || geocode.length() == 0) && guid != null && guid.length() > 0) {
+				if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
 					Log.i(cgSettings.tag, "Loading old cache from cache.");
 
 					geocode = app.getGeocode(guid);
@@ -3024,10 +2890,10 @@ public class cgBase {
 
 		final cgCacheWrap caches = parseCache(page, reason);
 		if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
-			if (caches != null && caches.error != null && caches.error.length() > 0) {
+			if (caches != null && StringUtils.isNotBlank(caches.error)) {
 				search.error = caches.error;
 			}
-			if (caches != null && caches.url != null && caches.url.length() > 0) {
+			if (caches != null && StringUtils.isNotBlank(caches.url)) {
 				search.url = caches.url;
 			}
 
@@ -3044,10 +2910,10 @@ public class cgBase {
 
 		final ArrayList<cgCache> cacheList = new ArrayList<cgCache>();
 		if (caches != null) {
-			if (caches.error != null && caches.error.length() > 0) {
+			if (StringUtils.isNotBlank(caches.error)) {
 				search.error = caches.error;
 			}
-			if (caches.url != null && caches.url.length() > 0) {
+			if (StringUtils.isNotBlank(caches.url)) {
 				search.url = caches.url;
 			}
 			search.viewstates = caches.viewstates;
@@ -3122,17 +2988,17 @@ public class cgBase {
 		cgCacheWrap caches = new cgCacheWrap();
 		String cacheType = parameters.get("cachetype");
 
-		if (latitude == null || latitude.length() == 0) {
+		if (StringUtils.isBlank(latitude)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByCoords: No latitude given");
 			return null;
 		}
 
-		if (longitude == null || longitude.length() == 0) {
+		if (StringUtils.isBlank(longitude)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByCoords: No longitude given");
 			return null;
 		}
 
-		if (cacheType != null && cacheType.length() == 0) {
+		if (StringUtils.isBlank(latitude)) {
 			cacheType = null;
 		}
 
@@ -3151,7 +3017,7 @@ public class cgBase {
 		final String url = "http://" + host + path + "?" + prepareParameters(params, false, true);
 		String page = requestLogged(false, host, path, method, params, false, false, true);
 
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByCoords: No data from server");
 			return null;
 		}
@@ -3168,10 +3034,10 @@ public class cgBase {
 
 		final ArrayList<cgCache> cacheList = new ArrayList<cgCache>();
 		if (caches != null) {
-			if (caches.error != null && caches.error.length() > 0) {
+			if (StringUtils.isNotBlank(caches.error)) {
 				search.error = caches.error;
 			}
-			if (caches.url != null && caches.url.length() > 0) {
+			if (StringUtils.isNotBlank(caches.url)) {
 				search.url = caches.url;
 			}
 			search.viewstates = caches.viewstates;
@@ -3196,12 +3062,12 @@ public class cgBase {
 		cgCacheWrap caches = new cgCacheWrap();
 		String cacheType = parameters.get("cachetype");
 
-		if (keyword == null || keyword.length() == 0) {
+		if (StringUtils.isBlank(keyword)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByKeyword: No keyword given");
 			return null;
 		}
 
-		if (cacheType != null && cacheType.length() == 0) {
+		if (StringUtils.isBlank(cacheType)) {
 			cacheType = null;
 		}
 
@@ -3219,7 +3085,7 @@ public class cgBase {
 		final String url = "http://" + host + path + "?" + prepareParameters(params, false, true);
 		String page = requestLogged(false, host, path, method, params, false, false, true);
 
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByKeyword: No data from server");
 			return null;
 		}
@@ -3236,10 +3102,10 @@ public class cgBase {
 
 		final ArrayList<cgCache> cacheList = new ArrayList<cgCache>();
 		if (caches != null) {
-			if (caches.error != null && caches.error.length() > 0) {
+			if (StringUtils.isNotBlank(caches.error)) {
 				search.error = caches.error;
 			}
-			if (caches.url != null && caches.url.length() > 0) {
+			if (StringUtils.isNotBlank(caches.url)) {
 				search.url = caches.url;
 			}
 			search.viewstates = caches.viewstates;
@@ -3264,12 +3130,12 @@ public class cgBase {
 		cgCacheWrap caches = new cgCacheWrap();
 		String cacheType = parameters.get("cachetype");
 
-		if (userName == null || userName.length() == 0) {
+		if (StringUtils.isBlank(userName)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByUsername: No user name given");
 			return null;
 		}
 
-		if (cacheType != null && cacheType.length() == 0) {
+		if (StringUtils.isBlank(cacheType)) {
 			cacheType = null;
 		}
 
@@ -3293,7 +3159,7 @@ public class cgBase {
 		final String url = "http://" + host + path + "?" + prepareParameters(params, my, true);
 		String page = requestLogged(false, host, path, method, params, false, my, true);
 
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByUsername: No data from server");
 			return null;
 		}
@@ -3304,16 +3170,16 @@ public class cgBase {
 		}
 
 		if (app == null) {
-			Log.e(cgSettings.tag, "cgeoBase.searchByCoords: No application found");
+			Log.e(cgSettings.tag, "cgeoBase.searchByUsername: No application found");
 			return null;
 		}
 
 		final ArrayList<cgCache> cacheList = new ArrayList<cgCache>();
 		if (caches != null) {
-			if (caches.error != null && caches.error.length() > 0) {
+			if (StringUtils.isNotBlank(caches.error)) {
 				search.error = caches.error;
 			}
-			if (caches.url != null && caches.url.length() > 0) {
+			if (StringUtils.isNotBlank(caches.url)) {
 				search.url = caches.url;
 			}
 			search.viewstates = caches.viewstates;
@@ -3338,12 +3204,12 @@ public class cgBase {
 		cgCacheWrap caches = new cgCacheWrap();
 		String cacheType = parameters.get("cachetype");
 
-		if (userName == null || userName.length() == 0) {
+		if (StringUtils.isBlank(userName)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByOwner: No user name given");
 			return null;
 		}
 
-		if (cacheType != null && cacheType.length() == 0) {
+		if (StringUtils.isBlank(cacheType)) {
 			cacheType = null;
 		}
 
@@ -3361,7 +3227,7 @@ public class cgBase {
 		final String url = "http://" + host + path + "?" + prepareParameters(params, false, true);
 		String page = requestLogged(false, host, path, method, params, false, false, true);
 
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByOwner: No data from server");
 			return null;
 		}
@@ -3378,10 +3244,10 @@ public class cgBase {
 
 		final ArrayList<cgCache> cacheList = new ArrayList<cgCache>();
 		if (caches != null) {
-			if (caches.error != null && caches.error.length() > 0) {
+			if (StringUtils.isNotBlank(caches.error)) {
 				search.error = caches.error;
 			}
-			if (caches.url != null && caches.url.length() > 0) {
+			if (StringUtils.isNotBlank(caches.url)) {
 				search.url = caches.url;
 			}
 			search.viewstates = caches.viewstates;
@@ -3417,7 +3283,7 @@ public class cgBase {
 
 		String page = null;
 
-		if (latMin == null || latMin.length() == 0 || latMax == null || latMax.length() == 0 || lonMin == null || lonMin.length() == 0 || lonMax == null || lonMax.length() == 0) {
+		if (StringUtils.isBlank(latMin) || StringUtils.isBlank(latMax) || StringUtils.isBlank(lonMin) || StringUtils.isBlank(lonMax)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByViewport: Not enough parameters to recognize viewport");
 			return null;
 		}
@@ -3430,7 +3296,7 @@ public class cgBase {
 		final String url = "http://" + host + path + "?" + params;
 		page = requestJSONgc(host, path, params);
 
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByViewport: No data from server");
 			return null;
 		}
@@ -3447,16 +3313,16 @@ public class cgBase {
 
 		final ArrayList<cgCache> cacheList = new ArrayList<cgCache>();
 		if (caches != null) {
-			if (caches.error != null && caches.error.length() > 0) {
+			if (StringUtils.isNotBlank(caches.error)) {
 				search.error = caches.error;
 			}
-			if (caches.url != null && caches.url.length() > 0) {
+			if (StringUtils.isNotBlank(caches.url)) {
 				search.url = caches.url;
 			}
 			search.viewstates = caches.viewstates;
 			search.totalCnt = caches.totalCnt;
 
-			if (caches.cacheList != null && caches.cacheList.size() > 0) {
+			if (CollectionUtils.isNotEmpty(caches.cacheList)) {
 				for (cgCache cache : caches.cacheList) {
 					if ((settings.excludeDisabled == 0 || (settings.excludeDisabled == 1 && cache.disabled == false))
 							&& (settings.excludeMine == 0 || (settings.excludeMine == 1 && cache.own == false))
@@ -3497,7 +3363,7 @@ public class cgBase {
 
 		final String data = request(false, host, path, method, params, false, false, false).getData();
 
-		if (data == null || data.length() == 0) {
+		if (StringUtils.isBlank(data)) {
 			Log.e(cgSettings.tag, "cgeoBase.getGeocachersInViewport: No data from server");
 			return null;
 		}
@@ -3544,7 +3410,7 @@ public class cgBase {
 		final String id = parameters.get("id");
 		cgTrackable trackable = new cgTrackable();
 
-		if ((geocode == null || geocode.length() == 0) && (guid == null || guid.length() == 0) && (id == null || id.length() == 0)) {
+		if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid) && StringUtils.isBlank(id))  {
 			Log.e(cgSettings.tag, "cgeoBase.searchTrackable: No geocode nor guid nor id given");
 			return null;
 		}
@@ -3553,17 +3419,17 @@ public class cgBase {
 		final String path = "/track/details.aspx";
 		final String method = "GET";
 		final HashMap<String, String> params = new HashMap<String, String>();
-		if (geocode != null && geocode.length() > 0) {
+		if (StringUtils.isNotBlank(geocode)) {
 			params.put("tracker", geocode);
-		} else if (guid != null && guid.length() > 0) {
+		} else if (StringUtils.isNotBlank(guid)) {
 			params.put("guid", guid);
-		} else if (id != null && id.length() > 0) {
+		} else if (StringUtils.isNotBlank(id)) {
 			params.put("id", id);
 		}
 
 		String page = requestLogged(false, host, path, method, params, false, false, false);
 
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchTrackable: No data from server");
 			return trackable;
 		}
@@ -3579,7 +3445,7 @@ public class cgBase {
 
 	public int postLog(cgeoapplication app, String geocode, String cacheid, String[] viewstates,
 			int logType, int year, int month, int day, String log, ArrayList<cgTrackableLog> trackables) {
-		if (isEmpty(viewstates)) {
+		if (ArrayUtils.isEmpty(viewstates)) {
 			Log.e(cgSettings.tag, "cgeoBase.postLog: No viewstate given");
 			return 1000;
 		}
@@ -3589,7 +3455,7 @@ public class cgBase {
 			return 1000;
 		}
 
-		if (log == null || log.length() == 0) {
+		if (StringUtils.isBlank(log)) {
 			Log.e(cgSettings.tag, "cgeoBase.postLog: No log text given");
 			return 1001;
 		}
@@ -3604,7 +3470,7 @@ public class cgBase {
 			if (c > 300) {
 				logUpdated.append("&#");
 				logUpdated.append(Integer.toString((int) c));
-				logUpdated.append(";");
+				logUpdated.append(';');
 			} else {
 				logUpdated.append(c);
 			}
@@ -3644,7 +3510,7 @@ public class cgBase {
 
 				if (tb.action > 0) {
 					hdnSelected.append(action);
-					hdnSelected.append(",");
+					hdnSelected.append(',');
 				}
 			}
 
@@ -3663,7 +3529,7 @@ public class cgBase {
 			}
 		}
 
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.postLog: No data from server");
 			return 1002;
 		}
@@ -3676,7 +3542,7 @@ public class cgBase {
 			if (matcher.find() && matcher.groupCount() > 0) {
 				final String[] viewstatesConfirm = getViewstates(page);
 
-				if (isEmpty(viewstatesConfirm)) {
+				if (ArrayUtils.isEmpty(viewstatesConfirm)) {
 					Log.e(cgSettings.tag, "cgeoBase.postLog: No viewstate for confirm log");
 					return 1000;
 				}
@@ -3705,7 +3571,7 @@ public class cgBase {
 						params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$repTravelBugs$ctl" + ctl + "$ddlAction", action);
 						if (tb.action > 0) {
 							hdnSelected.append(action);
-							hdnSelected.append(",");
+							hdnSelected.append(',');
 						}
 					}
 
@@ -3741,7 +3607,7 @@ public class cgBase {
 
 	public int postLogTrackable(String tbid, String trackingCode, String[] viewstates,
 			int logType, int year, int month, int day, String log) {
-		if (isEmpty(viewstates)) {
+		if (ArrayUtils.isEmpty(viewstates)) {
 			Log.e(cgSettings.tag, "cgeoBase.postLogTrackable: No viewstate given");
 			return 1000;
 		}
@@ -3751,7 +3617,7 @@ public class cgBase {
 			return 1000;
 		}
 
-		if (log == null || log.length() == 0) {
+		if (StringUtils.isBlank(log)) {
 			Log.e(cgSettings.tag, "cgeoBase.postLogTrackable: No log text given");
 			return 1001;
 		}
@@ -3795,7 +3661,7 @@ public class cgBase {
 			}
 		}
 
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgeoBase.postLogTrackable: No data from server");
 			return 1002;
 		}
@@ -3825,7 +3691,7 @@ public class cgBase {
         String page = requestLogged(false, "www.geocaching.com", "/my/watchlist.aspx?w=" + cache.cacheid,
                 "POST", null, false, false, false);
 
-        if (page == null || page.length() == 0) {
+        if (StringUtils.isBlank(page)) {
             Log.e(cgSettings.tag, "cgBase.addToWatchlist: No data from server");
             return -1;  // error
         }
@@ -3853,7 +3719,7 @@ public class cgBase {
 
 	    String page = requestLogged(false, host, path, method, null, false, false, false);
 
-		if (page == null || page.length() == 0) {
+		if (StringUtils.isBlank(page)) {
 			Log.e(cgSettings.tag, "cgBase.removeFromWatchlist: No data from server");
 			return -1; // error
 		}
@@ -3934,7 +3800,7 @@ public class cgBase {
 		if (app == null) {
 			return;
 		}
-		if (settings == null || settings.tokenPublic == null || settings.tokenPublic.length() == 0 || settings.tokenSecret == null || settings.tokenSecret.length() == 0) {
+		if (settings == null || StringUtils.isBlank(settings.tokenPublic) || StringUtils.isNotBlank(settings.tokenSecret)) {
 			return;
 		}
 
@@ -4319,7 +4185,7 @@ public class cgBase {
 					response = request(secureRedir, newLocation.getHost(), newLocation.getPath(), "GET", new HashMap<String, String>(), requestId, false, false, false);
 				}
 			} else {
-				if (buffer != null && buffer.length() > 0) {
+				if (StringUtils.isNotBlank(buffer)) {
 					replaceWhitespace(buffer);
 					String data = buffer.toString();
 					buffer = null;
@@ -4379,7 +4245,7 @@ public class cgBase {
 		if (cookiesDone == null) {
 			Map<String, ?> prefsValues = prefs.getAll();
 
-			if (prefsValues != null && prefsValues.size() > 0) {
+			if (CollectionUtils.isNotEmpty(prefsValues)) {
 				final Set<? extends Map.Entry<String, ?>> entrySet = prefsValues.entrySet();
 				final ArrayList<String> cookiesEncoded = new ArrayList<String>();
 
@@ -4402,7 +4268,11 @@ public class cgBase {
 		return cookiesDone;
 	}
 
-	private static void replaceWhitespace(final StringBuffer buffer) {
+	/**
+	 * Replace the characters \n, \r and \t with a space
+	 * @param buffer The data
+	 */
+	public static void replaceWhitespace(final StringBuffer buffer) {
 		final int length = buffer.length();
 		final char[] chars = new char[length];
 		buffer.getChars(0, length, chars, 0);
@@ -4663,7 +4533,7 @@ public class cgBase {
 				Log.e(cgSettings.tag, "cgeoBase.requestJSON: " + e.toString());
 			}
 
-			if (buffer != null && buffer.length() > 0) {
+			if (StringUtils.isNotBlank(buffer)) {
 				break;
 			}
 
@@ -4779,13 +4649,16 @@ public class cgBase {
 
 	public void storeCache(cgeoapplication app, Activity activity, cgCache cache, String geocode, int listId, Handler handler) {
 		try {
-			// cache details
+			// get cache details, they may not yet be complete
 			if (cache != null) {
-				final HashMap<String, String> params = new HashMap<String, String>();
-				params.put("geocode", cache.geocode);
-				final Long searchId = searchByGeocode(params, listId, false);
-				cache = app.getCache(searchId);
-			} else if (geocode != null) {
+				// only reload the cache, if it was already stored or has not all details (by checking the description)
+				if (cache.reason > 0 || StringUtils.isBlank(cache.description)) {
+					final HashMap<String, String> params = new HashMap<String, String>();
+					params.put("geocode", cache.geocode);
+					final Long searchId = searchByGeocode(params, listId, false);
+					cache = app.getCache(searchId);
+				}
+			} else if (StringUtils.isNotBlank(geocode)) {
 				final HashMap<String, String> params = new HashMap<String, String>();
 				params.put("geocode", geocode);
 				final Long searchId = searchByGeocode(params, listId, false);
@@ -4803,12 +4676,12 @@ public class cgBase {
 			final cgHtmlImg imgGetter = new cgHtmlImg(activity, cache.geocode, false, listId, true);
 
 			// store images from description
-			if (cache.description != null) {
+			if (StringUtils.isNotBlank(cache.description)) {
 				Html.fromHtml(cache.description, imgGetter, null);
 			}
 
 			// store spoilers
-			if (cache.spoilers != null && cache.spoilers.isEmpty() == false) {
+			if (CollectionUtils.isNotEmpty(cache.spoilers)) {
 				for (cgImage oneSpoiler : cache.spoilers) {
 					imgGetter.getDrawable(oneSpoiler.url);
 				}
@@ -4817,7 +4690,7 @@ public class cgBase {
 			// store images from logs
 			if (settings.storelogimages) {
 				for (cgLog log : cache.logs) {
-					if (log.logImages != null && log.logImages.isEmpty() == false) {
+					if (CollectionUtils.isNotEmpty(log.logImages)) {
 						for (cgImage oneLogImg : log.logImages) {
 							imgGetter.getDrawable(oneLogImg.url);
 						}
@@ -5022,8 +4895,84 @@ public class cgBase {
 		return out;
 	}
 
-	public static int getIcon(boolean cache, String type, boolean own, boolean found, boolean disabled) {
+	public static int getCacheIcon(final String type) {
+		fillIconsMap();
+		Integer iconId = gcIcons.get("type_" + type);
+		if (iconId != null) {
+			return iconId;
+		}
+		// fallback to traditional if some icon type is not correct
+		return gcIcons.get("type_traditional");
+	}
+
+	public static int getMarkerIcon(final boolean cache, final String type, final boolean own, final boolean found, final boolean disabled) {
+		fillIconsMap();
+
+		if (wpIcons.isEmpty()) {
+			wpIcons.put("waypoint", R.drawable.marker_waypoint_waypoint);
+			wpIcons.put("flag", R.drawable.marker_waypoint_flag);
+			wpIcons.put("pkg", R.drawable.marker_waypoint_pkg);
+			wpIcons.put("puzzle", R.drawable.marker_waypoint_puzzle);
+			wpIcons.put("stage", R.drawable.marker_waypoint_stage);
+			wpIcons.put("trailhead", R.drawable.marker_waypoint_trailhead);
+		}
+
+		int icon = -1;
+		String iconTxt = null;
+
+		if (cache) {
+			if (StringUtils.isNotBlank(type)) {
+				if (own) {
+					iconTxt = type + "-own";
+				} else if (found) {
+					iconTxt = type + "-found";
+				} else if (disabled) {
+					iconTxt = type + "-disabled";
+				} else {
+					iconTxt = type;
+				}
+			} else {
+				iconTxt = "traditional";
+			}
+
+			if (gcIcons.containsKey(iconTxt)) {
+				icon = gcIcons.get(iconTxt);
+			} else {
+				icon = gcIcons.get("traditional");
+			}
+		} else {
+			if (StringUtils.isNotBlank(type)) {
+				iconTxt = type;
+			} else {
+				iconTxt = "waypoint";
+			}
+
+			if (wpIcons.containsKey(iconTxt)) {
+				icon = wpIcons.get(iconTxt);
+			} else {
+				icon = wpIcons.get("waypoint");
+			}
+		}
+
+		return icon;
+	}
+
+	private static void fillIconsMap() {
 		if (gcIcons.isEmpty()) {
+			gcIcons.put("type_ape", R.drawable.type_ape);
+			gcIcons.put("type_cito", R.drawable.type_cito);
+			gcIcons.put("type_earth", R.drawable.type_earth);
+			gcIcons.put("type_event", R.drawable.type_event);
+			gcIcons.put("type_letterbox", R.drawable.type_letterbox);
+			gcIcons.put("type_locationless", R.drawable.type_locationless);
+			gcIcons.put("type_mega", R.drawable.type_mega);
+			gcIcons.put("type_multi", R.drawable.type_multi);
+			gcIcons.put("type_traditional", R.drawable.type_traditional);
+			gcIcons.put("type_virtual", R.drawable.type_virtual);
+			gcIcons.put("type_webcam", R.drawable.type_webcam);
+			gcIcons.put("type_wherigo", R.drawable.type_wherigo);
+			gcIcons.put("type_mystery", R.drawable.type_mystery);
+			gcIcons.put("type_gchq", R.drawable.type_hq);
 			// default markers
 			gcIcons.put("ape", R.drawable.marker_cache_ape);
 			gcIcons.put("cito", R.drawable.marker_cache_cito);
@@ -5086,53 +5035,6 @@ public class cgBase {
 			gcIcons.put("gchq-disabled", R.drawable.marker_cache_gchq_disabled);
 		}
 
-		if (wpIcons.isEmpty()) {
-			wpIcons.put("waypoint", R.drawable.marker_waypoint_waypoint);
-			wpIcons.put("flag", R.drawable.marker_waypoint_flag);
-			wpIcons.put("pkg", R.drawable.marker_waypoint_pkg);
-			wpIcons.put("puzzle", R.drawable.marker_waypoint_puzzle);
-			wpIcons.put("stage", R.drawable.marker_waypoint_stage);
-			wpIcons.put("trailhead", R.drawable.marker_waypoint_trailhead);
-		}
-
-		int icon = -1;
-		String iconTxt = null;
-
-		if (cache) {
-			if (type != null && type.length() > 0) {
-				if (own) {
-					iconTxt = type + "-own";
-				} else if (found) {
-					iconTxt = type + "-found";
-				} else if (disabled) {
-					iconTxt = type + "-disabled";
-				} else {
-					iconTxt = type;
-				}
-			} else {
-				iconTxt = "traditional";
-			}
-
-			if (gcIcons.containsKey(iconTxt)) {
-				icon = gcIcons.get(iconTxt);
-			} else {
-				icon = gcIcons.get("traditional");
-			}
-		} else {
-			if (type != null && type.length() > 0) {
-				iconTxt = type;
-			} else {
-				iconTxt = "waypoint";
-			}
-
-			if (wpIcons.containsKey(iconTxt)) {
-				icon = wpIcons.get(iconTxt);
-			} else {
-				icon = wpIcons.get("waypoint");
-			}
-		}
-
-		return icon;
 	}
 
 	public static boolean runNavigation(Activity activity, Resources res, cgSettings settings, Double latitude, Double longitude) {
@@ -5185,7 +5087,7 @@ public class cgBase {
 		final String data = response.getData();
 		String usertoken = null;
 
-		if (data != null && data.length() > 0) {
+		if (StringUtils.isNotBlank(data)) {
 			final Pattern pattern = Pattern.compile("var userToken[^=]*=[^']*'([^']+)';", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 
 			final Matcher matcher = pattern.matcher(data);
@@ -5196,7 +5098,7 @@ public class cgBase {
 			}
 		}
 
-		if (noTokenHandler != null && (usertoken == null || usertoken.length() == 0)) {
+		if (noTokenHandler != null && StringUtils.isBlank(usertoken)) {
 			noTokenHandler.sendEmptyMessage(0);
 		}
 
@@ -5213,7 +5115,7 @@ public class cgBase {
 
 			final String data = requestJSON(host, path, params);
 
-			if (data == null || data.length() == 0) {
+			if (StringUtils.isBlank(data)) {
 				return elv;
 			}
 

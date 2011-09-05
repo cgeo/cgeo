@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -122,37 +124,37 @@ public class cgCache implements ICache {
 		if (reason == null || reason == 0) {
 			reason = oldCache.reason;
 		}
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			geocode = oldCache.geocode;
 		}
-		if (cacheid == null || cacheid.length() == 0) {
+		if (StringUtils.isBlank(cacheid)) {
 			cacheid = oldCache.cacheid;
 		}
-		if (guid == null || guid.length() == 0) {
+		if (StringUtils.isBlank(guid)) {
 			guid = oldCache.guid;
 		}
-		if (type == null || type.length() == 0) {
+		if (StringUtils.isBlank(type)) {
 			type = oldCache.type;
 		}
-		if (name == null || name.length() == 0) {
+		if (StringUtils.isBlank(name)) {
 			name = oldCache.name;
 		}
-		if (nameSp == null || nameSp.length() == 0) {
+		if (StringUtils.isBlank(nameSp)) {
 			nameSp = oldCache.nameSp;
 		}
-		if (owner == null || owner.length() == 0) {
+		if (StringUtils.isBlank(owner)) {
 			owner = oldCache.owner;
 		}
-		if (ownerReal == null || ownerReal.length() == 0) {
+		if (StringUtils.isBlank(ownerReal)) {
 			ownerReal = oldCache.ownerReal;
 		}
 		if (hidden == null) {
 			hidden = oldCache.hidden;
 		}
-		if (hint == null || hint.length() == 0) {
+		if (StringUtils.isBlank(hint)) {
 			hint = oldCache.hint;
 		}
-		if (size == null || size.length() == 0) {
+		if (StringUtils.isBlank(size)) {
 			size = oldCache.size;
 		}
 		if (difficulty == null || difficulty == 0) {
@@ -167,16 +169,16 @@ public class cgCache implements ICache {
 		if (distance == null) {
 			distance = oldCache.distance;
 		}
-		if (latlon == null || latlon.length() == 0) {
+		if (StringUtils.isBlank(latlon)) {
 			latlon = oldCache.latlon;
 		}
-		if (latitudeString == null || latitudeString.length() == 0) {
+		if (StringUtils.isBlank(latitudeString)) {
 			latitudeString = oldCache.latitudeString;
 		}
-		if (longitudeString == null || longitudeString.length() == 0) {
+		if (StringUtils.isBlank(longitudeString)) {
 			longitudeString = oldCache.longitudeString;
 		}
-		if (location == null || location.length() == 0) {
+		if (StringUtils.isBlank(location)) {
 			location = oldCache.location;
 		}
 		if (latitude == null) {
@@ -188,13 +190,13 @@ public class cgCache implements ICache {
 		if (elevation == null) {
 			elevation = oldCache.elevation;
 		}
-		if (personalNote == null || personalNote.length() == 0) {
+		if (StringUtils.isNotBlank(personalNote)) {
 			personalNote = oldCache.personalNote;
 		}
-		if (shortdesc == null || shortdesc.length() == 0) {
+		if (StringUtils.isBlank(shortdesc)) {
 			shortdesc = oldCache.shortdesc;
 		}
-		if (description == null || description.length() == 0) {
+		if (StringUtils.isBlank(description)) {
 			description = oldCache.description;
 		}
 		if (favouriteCnt == null) {
@@ -266,7 +268,7 @@ public class cgCache implements ICache {
 	 */
 	boolean isGuidContainedInPage(final String page) {
 		// check if the guid of the cache is anywhere in the page
-		if (guid == null  || guid.length() == 0) {
+		if (StringUtils.isBlank(guid)) {
 			return false;
 		}
 		Pattern patternOk = Pattern.compile(guid, Pattern.CASE_INSENSITIVE);
@@ -281,11 +283,11 @@ public class cgCache implements ICache {
 	}
 
 	public boolean isEventCache() {
-		return ("event".equalsIgnoreCase(type) || "mega".equalsIgnoreCase(type) || "cito".equalsIgnoreCase(type));
+		return "event".equalsIgnoreCase(type) || "mega".equalsIgnoreCase(type) || "cito".equalsIgnoreCase(type);
 	}
 
 	public boolean logVisit(IAbstractActivity fromActivity) {
-		if (cacheid == null || cacheid.length() == 0) {
+		if (StringUtils.isBlank(cacheid)) {
 			fromActivity.showToast(((Activity)fromActivity).getResources().getString(R.string.err_cannot_log_visit));
 			return true;
 		}
@@ -301,9 +303,8 @@ public class cgCache implements ICache {
 
 	public boolean logOffline(final IAbstractActivity fromActivity, final int logType, final cgSettings settings, final cgBase base) {
         String log = "";
-        if (settings.getSignature() != null
-                && settings.signatureAutoinsert
-                && settings.getSignature().length() > 0) {
+        if (StringUtils.isNotBlank(settings.getSignature())
+                && settings.signatureAutoinsert) {
             log = LogTemplateProvider.applyTemplates(settings.getSignature(), base);
         }
         logOffline(fromActivity, log, Calendar.getInstance(), logType);
@@ -451,6 +452,31 @@ public class cgCache implements ICache {
 	@Override
 	public boolean isOwn() {
 		return own;
+	}
+
+	@Override
+	public String getOwnerReal() {
+		return ownerReal;
+	}
+
+	@Override
+	public String getHint() {
+		return hint;
+	}
+
+	@Override
+	public String getDescription() {
+		return description;
+	}
+
+	@Override
+	public String getShortDescription() {
+		return shortdesc;
+	}
+
+	@Override
+	public String getName() {
+		return name;
 	}
 
 }

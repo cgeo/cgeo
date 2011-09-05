@@ -14,6 +14,8 @@ import java.util.regex.Pattern;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -119,7 +121,7 @@ public class cgeoauth extends AbstractActivity {
 		startButton.setEnabled(true);
 		startButton.setOnClickListener(new startListener());
 
-		if (OAtoken == null || OAtoken.length() == 0 || OAtokenSecret == null || OAtokenSecret.length() == 0) {
+		if (StringUtils.isNotBlank(OAtoken) && StringUtils.isNotBlank(OAtokenSecret)) {
 			// start authorization process
 			startButton.setText(res.getString(R.string.auth_start));
 		} else {
@@ -170,7 +172,7 @@ public class cgeoauth extends AbstractActivity {
 
 					while ((lineOne = br.readLine()) != null) {
 						sb.append(lineOne);
-						sb.append("\n");
+						sb.append('\n');
 					}
 
 					code = connection.getResponseCode();
@@ -185,7 +187,7 @@ public class cgeoauth extends AbstractActivity {
 
 				final String line = sb.toString();
 
-				if (line != null && line.length() > 0) {
+				if (StringUtils.isNotBlank(line)) {
 					final Matcher paramsMatcher1 = paramsPattern1.matcher(line);
 					if (paramsMatcher1.find() && paramsMatcher1.groupCount() > 0) {
 						OAtoken = paramsMatcher1.group(1);
@@ -195,7 +197,7 @@ public class cgeoauth extends AbstractActivity {
 						OAtokenSecret = paramsMatcher2.group(1);
 					}
 
-					if (OAtoken != null && OAtoken.length() > 0 && OAtokenSecret != null && OAtokenSecret.length() > 0) {
+					if (StringUtils.isNotBlank(OAtoken) && StringUtils.isNotBlank(OAtokenSecret)) {
 						final SharedPreferences.Editor prefsEdit = getSharedPreferences(cgSettings.preferences, 0).edit();
 						prefsEdit.putString("temp-token-public", OAtoken);
 						prefsEdit.putString("temp-token-secret", OAtokenSecret);
@@ -275,7 +277,7 @@ public class cgeoauth extends AbstractActivity {
 
 				while ((lineOne = br.readLine()) != null) {
 					sb.append(lineOne);
-					sb.append("\n");
+					sb.append('\n');
 				}
 
 				code = connection.getResponseCode();
@@ -303,7 +305,7 @@ public class cgeoauth extends AbstractActivity {
 				OAtokenSecret = paramsMatcher2.group(1);
 			}
 
-			if (OAtoken.length() == 0 || OAtokenSecret.length() == 0) {
+			if (StringUtils.isBlank(OAtoken) && StringUtils.isBlank(OAtokenSecret)) {
 				OAtoken = "";
 				OAtokenSecret = "";
 
