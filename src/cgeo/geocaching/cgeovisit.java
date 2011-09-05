@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -42,7 +44,7 @@ public class cgeovisit extends cgLogForm {
 	
 	private LayoutInflater inflater = null;
 	private cgCache cache = null;
-	private ArrayList<Integer> types = new ArrayList<Integer>();
+	private List<Integer> types = new ArrayList<Integer>();
 	private ProgressDialog waitDialog = null;
 	private String cacheid = null;
 	private String geocode = null;
@@ -50,7 +52,7 @@ public class cgeovisit extends cgLogForm {
 	private boolean alreadyFound = false;
 	private String[] viewstates = null;
 	private Boolean gettingViewstate = true;
-	private ArrayList<cgTrackableLog> trackables = null;
+	private List<cgTrackableLog> trackables = null;
 	private Calendar date = Calendar.getInstance();
 	private int typeSelected = 1;
 	private int attempts = 0;
@@ -366,12 +368,12 @@ public class cgeovisit extends cgLogForm {
 			return false;
 		}
 
-		final HashMap<String, String> login = settings.getGCvoteLogin();
+		final Map<String, String> login = settings.getGCvoteLogin();
 		if (login == null) {
 			return false;
 		}
 
-		final HashMap<String, String> params = new HashMap<String, String>();
+		final Map<String, String> params = new HashMap<String, String>();
 		params.put("userName", login.get("username"));
 		params.put("password", login.get("password"));
 		params.put("cacheId", guid);
@@ -701,7 +703,7 @@ public class cgeovisit extends cgLogForm {
 
 		@Override
 		public void run() {
-			final HashMap<String, String> params = new HashMap<String, String>();
+			final Map<String, String> params = new HashMap<String, String>();
 
 			showProgressHandler.sendEmptyMessage(0);
 			gettingViewstate = true;
@@ -720,7 +722,7 @@ public class cgeovisit extends cgLogForm {
 				viewstates = cgBase.getViewstates(page);
 				trackables = cgBase.parseTrackableLog(page);
 
-				final ArrayList<Integer> typesPre = cgBase.parseTypes(page);
+				final List<Integer> typesPre = cgBase.parseTypes(page);
 				if (CollectionUtils.isNotEmpty(typesPre)) {
 					types.clear();
 					types.addAll(typesPre);

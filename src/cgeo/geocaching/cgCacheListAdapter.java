@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -58,9 +59,9 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 	private boolean sort = true;
 	private int checked = 0;
 	private boolean selectMode = false;
-	private static HashMap<String, Drawable> gcIconDrawables = new HashMap<String, Drawable>();
-	private ArrayList<cgCompassMini> compasses = new ArrayList<cgCompassMini>();
-	private ArrayList<cgDistanceView> distances = new ArrayList<cgDistanceView>();
+	private static Map<String, Drawable> gcIconDrawables = new HashMap<String, Drawable>();
+	private List<cgCompassMini> compasses = new ArrayList<cgCompassMini>();
+	private List<cgDistanceView> distances = new ArrayList<cgDistanceView>();
 	private int[] ratingBcgs = new int[3];
 	private float pixelDensity = 1f;
 	private static final int SWIPE_MIN_DISTANCE = 60;

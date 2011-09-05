@@ -31,7 +31,7 @@ class LocusCacheListApp extends AbstractLocusApp implements CacheListApp {
 		}
 
 		try {
-			final ArrayList<cgCache> cacheListCoord = new ArrayList<cgCache>();
+			final List<cgCache> cacheListCoord = new ArrayList<cgCache>();
 			for (cgCache cache : cacheList) {
 				if (cache.latitude != null && cache.longitude != null) {
 					cacheListCoord.add(cache);

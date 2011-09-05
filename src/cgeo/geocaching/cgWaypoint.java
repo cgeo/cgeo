@@ -1,6 +1,6 @@
 package cgeo.geocaching;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -68,8 +68,8 @@ public class cgWaypoint {
 		}
 	}
 
-	public static void mergeWayPoints(ArrayList<cgWaypoint> newPoints,
-			ArrayList<cgWaypoint> oldPoints) {
+	public static void mergeWayPoints(List<cgWaypoint> newPoints,
+			List<cgWaypoint> oldPoints) {
 		// copy user modified details of the waypoints
 		if (newPoints != null && oldPoints != null) {
 			for (cgWaypoint old : oldPoints) {

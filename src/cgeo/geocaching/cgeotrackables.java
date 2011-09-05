@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -15,7 +16,7 @@ import android.widget.LinearLayout;
 import cgeo.geocaching.activity.AbstractActivity;
 
 public class cgeotrackables extends AbstractActivity {
-	private ArrayList<cgTrackable> trackables = new ArrayList<cgTrackable>();
+	private List<cgTrackable> trackables = new ArrayList<cgTrackable>();
 	private String geocode = null;
 	private LayoutInflater inflater = null;
 	private LinearLayout addList = null;

@@ -1,7 +1,8 @@
 package cgeo.geocaching;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -121,7 +122,7 @@ public class cgeowaypointadd extends AbstractActivity {
 		Button addWaypoint = (Button) findViewById(R.id.add_waypoint);
 		addWaypoint.setOnClickListener(new coordsListener());
 
-		ArrayList<String> wayPointNames = new ArrayList<String>(cgBase.waypointTypes.values());
+		List<String> wayPointNames = new ArrayList<String>(cgBase.waypointTypes.values());
 		AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.name);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, wayPointNames);
 		textView.setAdapter(adapter);
@@ -222,7 +223,7 @@ public class cgeowaypointadd extends AbstractActivity {
 			coordsDialog.setCancelable(true);
 			coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
 				@Override
-				public void update(ArrayList<Double> coords) {
+				public void update(List<Double> coords) {
 					((Button) findViewById(R.id.buttonLatitude)).setText(cgBase.formatLatitude(coords.get(0), true));
 					((Button) findViewById(R.id.buttonLongitude)).setText(cgBase.formatLongitude(coords.get(1), true));
 					if (waypoint != null) {
@@ -238,7 +239,7 @@ public class cgeowaypointadd extends AbstractActivity {
 	private class coordsListener implements View.OnClickListener {
 
 		public void onClick(View arg0) {
-			ArrayList<Double> coords = new ArrayList<Double>();
+			List<Double> coords = new ArrayList<Double>();
 			Double latitude = null;
 			Double longitude = null;
 
@@ -255,8 +256,8 @@ public class cgeowaypointadd extends AbstractActivity {
 
 			if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
 				// latitude & longitude
-				HashMap<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
-				HashMap<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lon");
+				Map<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
+				Map<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lon");
 
 				if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
 					showToast(res.getString(R.string.err_parse_lat));
@@ -337,7 +338,7 @@ public class cgeowaypointadd extends AbstractActivity {
 				Double latParsed = null;
 				Double lonParsed = null;
 
-				HashMap<String, Double> coordsDst = cgBase.getRadialDistance(latitude, longitude, bearing, distance);
+				Map<String, Double> coordsDst = cgBase.getRadialDistance(latitude, longitude, bearing, distance);
 
 				latParsed = coordsDst.get("latitude");
 				lonParsed = coordsDst.get("longitude");

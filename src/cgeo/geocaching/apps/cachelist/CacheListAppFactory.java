@@ -38,7 +38,7 @@ public final class CacheListAppFactory extends AbstractAppFactory {
 	 */
 	public static MenuItem addMenuItems(Menu menu,
 			Activity activity, Resources res) {
-		ArrayList<CacheListApp> activeApps = new ArrayList<CacheListApp>();
+		List<CacheListApp> activeApps = new ArrayList<CacheListApp>();
 		for (CacheListApp app : getMultiPointNavigationApps(res)) {
 			if (app.isInstalled(activity)) {
 				activeApps.add(app);

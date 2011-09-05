@@ -1,6 +1,7 @@
 package cgeo.geocaching.mapcommon;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -8,9 +9,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Point;
-import android.graphics.Paint.Style;
 import android.location.Location;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgBase;
@@ -38,7 +39,7 @@ public class cgMapMyOverlay implements OverlayBase {
 	private PaintFlagsDrawFilter setfil = null;
 	private PaintFlagsDrawFilter remfil = null;
 	private Location historyRecent = null;
-	private ArrayList<Location> history = new ArrayList<Location>();
+	private List<Location> history = new ArrayList<Location>();
 	private Point historyPointN = new Point();
 	private Point historyPointP = new Point();
 	private Activity activity;
