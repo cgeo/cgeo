@@ -1669,9 +1669,16 @@ public class cgeodetail extends AbstractActivity {
 		public void onClick(View arg0) {
 			// show list of trackables
 			try {
-				Intent trackablesIntent = new Intent(cgeodetail.this, cgeotrackables.class);
-				trackablesIntent.putExtra("geocode", geocode.toUpperCase());
-				startActivity(trackablesIntent);
+				// jump directly into details if there is only one trackable
+				if (cache != null && cache.inventory != null && cache.inventory.size() == 1) {
+					cgTrackable trackable = cache.inventory.get(0);
+					cgeotrackable.startActivity(cgeodetail.this, trackable.guid, trackable.geocode, trackable.name);
+				}
+				else {
+					Intent trackablesIntent = new Intent(cgeodetail.this, cgeotrackables.class);
+					trackablesIntent.putExtra("geocode", geocode.toUpperCase());
+					startActivity(trackablesIntent);
+				}
 			} catch (Exception e) {
 				Log.e(cgSettings.tag, "cgeodetail.selectTrackable: " + e.toString());
 			}
