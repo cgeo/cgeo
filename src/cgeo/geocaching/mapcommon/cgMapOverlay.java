@@ -201,7 +201,7 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 			
 			cgCoord coordinate = item.getCoord();
 
-			if (coordinate.type != null && coordinate.type.equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.geocode)) {
+			if (StringUtils.isNotBlank(coordinate.type) && coordinate.type.equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.geocode)) {
 				Intent popupIntent = new Intent(context, cgeopopup.class);
 
 				popupIntent.putExtra("fromdetail", fromDetail);

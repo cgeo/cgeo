@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Application;
@@ -269,7 +268,7 @@ public class cgeoapplication extends Application {
 	}
 
 	public boolean setViewstates(Long searchId, String[] viewstates) {
-		if (ArrayUtils.isEmpty(viewstates)) {
+		if (cgBase.isEmpty(viewstates)) {
 			return false;
 		}
 		if (searchId == null || searches.containsKey(searchId) == false) {

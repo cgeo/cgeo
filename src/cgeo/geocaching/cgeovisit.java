@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Dialog;
@@ -83,7 +82,7 @@ public class cgeovisit extends cgLogForm {
 				showToast(res.getString(R.string.info_log_type_changed));
 			}
 
-			if (ArrayUtils.isEmpty(viewstates) && attempts < 2) {
+			if (cgBase.isEmpty(viewstates) && attempts < 2) {
 				showToast(res.getString(R.string.err_log_load_data_again));
 
 				loadData thread;
@@ -91,7 +90,7 @@ public class cgeovisit extends cgLogForm {
 				thread.start();
 
 				return;
-			} else if (ArrayUtils.isEmpty(viewstates) && attempts >= 2) {
+			} else if (cgBase.isEmpty(viewstates) && attempts >= 2) {
 				showToast(res.getString(R.string.err_log_load_data));
 				showProgress(false);
 
@@ -241,7 +240,7 @@ public class cgeovisit extends cgLogForm {
 		if ((StringUtils.isBlank(cacheid)) && StringUtils.isNotBlank(geocode)) {
 			cacheid = app.getCacheid(geocode);
 		}
-		if ((StringUtils.isBlank(geocode)) && StringUtils.isNotBlank(cacheid)) {
+		if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(cacheid)) {
 			geocode = app.getGeocode(cacheid);
 		}
 
@@ -548,7 +547,7 @@ public class cgeovisit extends cgLogForm {
 		if (post == null) {
 			post = (Button) findViewById(R.id.post);
 		}
-		if (ArrayUtils.isEmpty(viewstates)) {
+		if (cgBase.isEmpty(viewstates)) {
 			post.setEnabled(false);
 			post.setOnTouchListener(null);
 			post.setOnClickListener(null);
