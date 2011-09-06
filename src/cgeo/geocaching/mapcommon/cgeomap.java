@@ -760,8 +760,10 @@ public class cgeomap extends MapBase {
 					if (followMyLocation) {
 						myLocationInMiddle();
 					} else {
-						// move blue arrow
-						mapView.invalidate();
+						if (mapView != null) {
+							// move blue arrow
+							mapView.invalidate();
+						}
 					}
 				}
 
