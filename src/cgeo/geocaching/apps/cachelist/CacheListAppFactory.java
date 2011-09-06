@@ -2,6 +2,7 @@ package cgeo.geocaching.apps.cachelist;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.commons.lang3.ArrayUtils;
 
@@ -38,7 +39,7 @@ public final class CacheListAppFactory extends AbstractAppFactory {
 	 */
 	public static MenuItem addMenuItems(Menu menu,
 			Activity activity, Resources res) {
-		ArrayList<CacheListApp> activeApps = new ArrayList<CacheListApp>();
+		List<CacheListApp> activeApps = new ArrayList<CacheListApp>();
 		for (CacheListApp app : getMultiPointNavigationApps(res)) {
 			if (app.isInstalled(activity)) {
 				activeApps.add(app);
@@ -62,7 +63,7 @@ public final class CacheListAppFactory extends AbstractAppFactory {
 
 	public static boolean onMenuItemSelected(final MenuItem item,
 			final cgGeo geo, final List<cgCache> caches, final Activity activity, final Resources res,
-			final Long searchId) {
+			final UUID searchId) {
 		CacheListApp app = (CacheListApp) getAppFromMenuItem(
 				item, apps);
 		if (app != null) {

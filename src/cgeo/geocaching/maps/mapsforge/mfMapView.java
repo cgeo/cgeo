@@ -13,6 +13,9 @@ import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.maps.CachesOverlay;
 import cgeo.geocaching.maps.OtherCachersOverlay;
@@ -23,13 +26,17 @@ import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapControllerImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
+import cgeo.geocaching.maps.interfaces.OnDragListener;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl.overlayType;
 
 public class mfMapView extends MapView implements MapViewImpl {
+	private GestureDetector gestureDetector;
+	private OnDragListener onDragListener;
 
 	public mfMapView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		gestureDetector = new GestureDetector(context, new GestureListener());
 	}
 
 	@Override
@@ -204,4 +211,33 @@ public class mfMapView extends MapView implements MapViewImpl {
 		return false;
 	}
 
+	@Override
+	public void setOnDragListener(OnDragListener onDragListener) {
+		this.onDragListener = onDragListener;
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent ev) {
+		gestureDetector.onTouchEvent(ev);
+		return super.onTouchEvent(ev);
+	}
+
+	private class GestureListener extends SimpleOnGestureListener {
+		@Override
+		public boolean onDoubleTap(MotionEvent e) {
+			if (onDragListener != null) {
+				onDragListener.onDrag();
+			}
+			return true;
+		}
+
+		@Override
+		public boolean onScroll(MotionEvent e1, MotionEvent e2,
+				float distanceX, float distanceY) {
+			if (onDragListener != null) {
+				onDragListener.onDrag();
+			}
+			return super.onScroll(e1, e2, distanceX, distanceY);
+		}
+	}
 }

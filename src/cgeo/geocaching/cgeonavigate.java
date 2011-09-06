@@ -2,7 +2,9 @@ package cgeo.geocaching;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -24,7 +26,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 
 public class cgeonavigate extends AbstractActivity {
 
-	public static ArrayList<cgCoord> coordinates = new ArrayList<cgCoord>();
+	public static List<cgCoord> coordinates = new ArrayList<cgCoord>();
 	private PowerManager pm = null;
 	private cgGeo geo = null;
 	private cgDirection dir = null;
@@ -326,8 +328,8 @@ public class cgeonavigate extends AbstractActivity {
 		updateDistanceInfo();
 	}
 
-	public HashMap<String, Double> getCoordinatesNow() {
-		HashMap<String, Double> coordsNow = new HashMap<String, Double>();
+	public Map<String, Double> getCoordinatesNow() {
+		Map<String, Double> coordsNow = new HashMap<String, Double>();
 		if (geo != null) {
 			coordsNow.put("latitude", geo.latitudeNow);
 			coordsNow.put("longitude", geo.longitudeNow);

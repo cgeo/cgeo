@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,7 +26,7 @@ import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
 
 public class OtherCachersOverlay extends AbtractItemizedOverlay implements GeneralOverlay {
 
-	private ArrayList<OtherCachersOverlayItemImpl> items = new ArrayList<OtherCachersOverlayItemImpl>();
+	private List<OtherCachersOverlayItemImpl> items = new ArrayList<OtherCachersOverlayItemImpl>();
 	private Context context = null;
 	private final Pattern patternGeocode = Pattern.compile("^(GC[A-Z0-9]+)(\\: ?(.+))?$", Pattern.CASE_INSENSITIVE);
 
@@ -37,13 +38,13 @@ public class OtherCachersOverlay extends AbtractItemizedOverlay implements Gener
 	}
 
 	protected void updateItems(OtherCachersOverlayItemImpl item) {
-		ArrayList<OtherCachersOverlayItemImpl> itemsPre = new ArrayList<OtherCachersOverlayItemImpl>();
+		List<OtherCachersOverlayItemImpl> itemsPre = new ArrayList<OtherCachersOverlayItemImpl>();
 		itemsPre.add(item);
 
 		updateItems(itemsPre);
 	}
 
-	public void updateItems(ArrayList<OtherCachersOverlayItemImpl> itemsPre) {
+	public void updateItems(List<OtherCachersOverlayItemImpl> itemsPre) {
 		if (itemsPre == null) {
 			return;
 		}

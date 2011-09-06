@@ -68,4 +68,5 @@ public interface MapViewImpl {
 
 	boolean needsDarkScale();
 
+	void setOnDragListener(OnDragListener onDragListener);
 }

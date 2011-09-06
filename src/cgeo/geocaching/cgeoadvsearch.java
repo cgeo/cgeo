@@ -1,6 +1,6 @@
 package cgeo.geocaching;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -251,8 +251,8 @@ public class cgeoadvsearch extends AbstractActivity {
 			latView.setText(cgBase.formatLatitude(geo.latitudeNow, true));
 			lonView.setText(cgBase.formatLongitude(geo.longitudeNow, true));
 		} else {
-			HashMap<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
-			HashMap<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lat");
+			Map<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
+			Map<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lat");
 
 			if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
 				showToast(res.getString(R.string.err_parse_lat));

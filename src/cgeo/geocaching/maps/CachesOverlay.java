@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -35,7 +36,7 @@ import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 
 public class CachesOverlay extends AbtractItemizedOverlay implements GeneralOverlay {
 
-	private ArrayList<CachesOverlayItemImpl> items = new ArrayList<CachesOverlayItemImpl>();
+	private List<CachesOverlayItemImpl> items = new ArrayList<CachesOverlayItemImpl>();
 	private Context context = null;
 	private Boolean fromDetail = false;
 	private boolean displayCircles = false;
@@ -61,13 +62,13 @@ public class CachesOverlay extends AbtractItemizedOverlay implements GeneralOver
 	}
 	
 	public void updateItems(CachesOverlayItemImpl item) {
-		ArrayList<CachesOverlayItemImpl> itemsPre = new ArrayList<CachesOverlayItemImpl>();
+		List<CachesOverlayItemImpl> itemsPre = new ArrayList<CachesOverlayItemImpl>();
 		itemsPre.add(item);
 
 		updateItems(itemsPre);
 	}
 
-	public void updateItems(ArrayList<CachesOverlayItemImpl> itemsPre) {
+	public void updateItems(List<CachesOverlayItemImpl> itemsPre) {
 		if (itemsPre == null) {
 			return;
 		}

@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
@@ -312,7 +313,7 @@ public class cgeo extends AbstractActivity {
 
 		// context menu for offline button
 		if (v.getId() == R.id.search_offline) {
-			ArrayList<cgList> cacheLists = app.getLists();
+			List<cgList> cacheLists = app.getLists();
 			int listCount = cacheLists.size();
 			menu.setHeaderTitle(res.getString(R.string.list_title));
 			for (int i = 0; i < listCount; i++) {
@@ -332,11 +333,11 @@ public class cgeo extends AbstractActivity {
 		menu.add(1, 3, 0, res.getString(R.string.mystery));
 
 		// then add all other cache types sorted alphabetically
-		HashMap<String, String> allTypes = new HashMap<String, String>(cgBase.cacheTypesInv);
+		Map<String, String> allTypes = new HashMap<String, String>(cgBase.cacheTypesInv);
 		allTypes.remove("traditional");
 		allTypes.remove("multi");
 		allTypes.remove("mystery");
-		ArrayList<String> sorted = new ArrayList<String>(allTypes.values());
+		List<String> sorted = new ArrayList<String>(allTypes.values());
 		Collections.sort(sorted);
 		for (String choice : sorted) {
 			menu.add(1, menu.size(), 0, choice);

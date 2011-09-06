@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -396,7 +397,7 @@ public class cgGeo {
 
 				final String username = settings.getUsername();
 				if (username != null) {
-					final HashMap<String, String> params = new HashMap<String, String>();
+					final Map<String, String> params = new HashMap<String, String>();
 					final String latStr = String.format((Locale) null, "%.6f", latitudeNow);
 					final String lonStr = String.format((Locale) null, "%.6f", longitudeNow);
 					params.put("u", username);

@@ -19,6 +19,7 @@ import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapControllerImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
+import cgeo.geocaching.maps.interfaces.OnDragListener;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl.overlayType;
 
@@ -26,8 +27,9 @@ import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 
-public class googleMapView extends MapView implements MapViewImpl{
+public class googleMapView extends MapView implements MapViewImpl {
 	private GestureDetector gestureDetector;
+	private OnDragListener onDragListener;
 
 	public googleMapView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -152,6 +154,11 @@ public class googleMapView extends MapView implements MapViewImpl{
 	}
 
 	@Override
+	public void setOnDragListener(OnDragListener onDragListener) {
+		this.onDragListener = onDragListener;
+	}
+
+	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
 		gestureDetector.onTouchEvent(ev);
 		return super.onTouchEvent(ev);
@@ -161,7 +168,19 @@ public class googleMapView extends MapView implements MapViewImpl{
 		@Override
 		public boolean onDoubleTap(MotionEvent e) {
 			getController().zoomInFixing((int) e.getX(), (int) e.getY());
+			if (onDragListener != null) {
+				onDragListener.onDrag();
+			}
 			return true;
+		}
+
+		@Override
+		public boolean onScroll(MotionEvent e1, MotionEvent e2,
+				float distanceX, float distanceY) {
+			if (onDragListener != null) {
+				onDragListener.onDrag();
+			}
+			return super.onScroll(e1, e2, distanceX, distanceY);
 		}
 	}
 

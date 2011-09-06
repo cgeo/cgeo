@@ -130,7 +130,7 @@ public class cgSettings {
     public boolean signatureAutoinsert = false;
 
 	// usable values
-	public static final String tag = "c:geo";
+	public static final String tag = "cgeo";
 
 	/** Name of the preferences file */
 	public static final String preferences = "cgeo.pref";
@@ -255,8 +255,8 @@ public class cgSettings {
 		}
 	}
 
-	public HashMap<String, String> getLogin() {
-		final HashMap<String, String> login = new HashMap<String, String>();
+	public Map<String, String> getLogin() {
+		final Map<String, String> login = new HashMap<String, String>();
 
 		if (username == null || password == null) {
 			final String preUsername = prefs.getString(KEY_USERNAME, null);
@@ -345,8 +345,8 @@ public class cgSettings {
 		});
 	}
 
-	public HashMap<String, String> getGCvoteLogin() {
-		final HashMap<String, String> login = new HashMap<String, String>();
+	public Map<String, String> getGCvoteLogin() {
+		final Map<String, String> login = new HashMap<String, String>();
 
 		if (username == null || password == null) {
 			final String preUsername = prefs.getString(KEY_USERNAME, null);

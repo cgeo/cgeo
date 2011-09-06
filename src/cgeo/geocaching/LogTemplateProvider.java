@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -84,7 +85,7 @@ public class LogTemplateProvider {
 				@Override
 				String getValue(final cgBase base) {
 					String findCount = "";
-					final HashMap<String, String> params = new HashMap<String, String>();
+					final Map<String, String> params = new HashMap<String, String>();
 					final String page = base.request(false, "www.geocaching.com", "/email/", "GET", params, false, false, false).getData();
 					int current = parseFindCount(page);
 

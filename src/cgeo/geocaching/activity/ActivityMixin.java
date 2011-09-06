@@ -2,7 +2,7 @@ package cgeo.geocaching.activity;
 
 import gnu.android.app.appmanualclient.AppManualReaderClient;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -133,7 +133,7 @@ public final class ActivityMixin {
 		if (settings.isLogin()) {
 			if (settings.getLogOffline()) {
 				SubMenu logMenu = menu.addSubMenu(1, IAbstractActivity.MENU_LOG_VISIT_OFFLINE, 0, res.getString(R.string.cache_menu_visit_offline)).setIcon(MENU_ICON_LOG_VISIT);
-				ArrayList<Integer> logTypes = cache.getPossibleLogTypes(settings);
+				List<Integer> logTypes = cache.getPossibleLogTypes(settings);
 				for (Integer logType : logTypes) {
 					String label = cgBase.logTypes2.get(logType);
 					logMenu.add(1, IAbstractActivity.MENU_LOG_VISIT_OFFLINE + logType, 0, label);
