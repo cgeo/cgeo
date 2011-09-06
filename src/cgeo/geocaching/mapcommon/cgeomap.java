@@ -24,7 +24,11 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
+import android.widget.ViewSwitcher.ViewFactory;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
@@ -32,13 +36,13 @@ import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgDirection;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.cgUpdateDir;
 import cgeo.geocaching.cgUpdateLoc;
 import cgeo.geocaching.cgUser;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.mapinterfaces.ActivityImpl;
 import cgeo.geocaching.mapinterfaces.CacheOverlayItemImpl;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
@@ -48,7 +52,7 @@ import cgeo.geocaching.mapinterfaces.MapViewImpl;
 import cgeo.geocaching.mapinterfaces.OnDragListener;
 import cgeo.geocaching.mapinterfaces.UserOverlayItemImpl;
 
-public class cgeomap extends MapBase implements OnDragListener {
+public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 
 	private static final int MENU_SELECT_MAPVIEW = 1;
 	private static final int MENU_MAP_LIVE = 2;
@@ -126,7 +130,7 @@ public class cgeomap extends MapBase implements OnDragListener {
 	private int detailProgress = 0;
 	private Long detailProgressTime = 0L;
 	// views
-	private ImageView myLocSwitch = null;
+	private ImageSwitcher myLocSwitch = null;
 	// other things
 	private boolean live = true; // live map (live, dead) or rest (displaying caches on map)
 	private boolean liveChanged = false; // previous state for loadTimer
@@ -344,8 +348,14 @@ public class cgeomap extends MapBase implements OnDragListener {
 			centerMap(geocodeIntent, searchIdIntent, latitudeIntent, longitudeIntent, mapStateIntent);
 		}
 
+		// prepare my location button
+		myLocSwitch = (ImageSwitcher) activity.findViewById(R.id.my_position);
+		myLocSwitch.setFactory(this);
+		myLocSwitch.setInAnimation(activity, android.R.anim.fade_in);
+		myLocSwitch.setOutAnimation(activity, android.R.anim.fade_out);
+		myLocSwitch.setOnClickListener(new MyLocationListener());
+		switchMyLocationButton();
 
-		setMyLoc(null);
 		startTimer();
 	}
 
@@ -1724,46 +1734,20 @@ public class cgeomap extends MapBase implements OnDragListener {
 	}
 
 	// switch My Location button image
-	private void setMyLoc(Boolean status) {
-		if (myLocSwitch == null) {
-			myLocSwitch = (ImageView) activity.findViewById(R.id.my_position);
-		}
-
-		if (status == null) {
-			if (followMyLocation) {
-				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_on);
-			} else {
-				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_off);
-			}
+	private void switchMyLocationButton() {
+		if (followMyLocation) {
+			myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_on);
+			myLocationInMiddle();
 		} else {
-			if (status) {
-				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_on);
-			} else {
-				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_off);
-			}
+			myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_off);
 		}
-
-		myLocSwitch.setOnClickListener(new MyLocationListener());
 	}
 
 	// set my location listener
 	private class MyLocationListener implements View.OnClickListener {
-
 		public void onClick(View view) {
-			if (myLocSwitch == null) {
-				myLocSwitch = (ImageView) activity.findViewById(R.id.my_position);
-			}
-
-			if (followMyLocation) {
-				followMyLocation = false;
-
-				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_off);
-			} else {
-				followMyLocation = true;
-				myLocationInMiddle();
-
-				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_on);
-			}
+			followMyLocation = !followMyLocation;
+			switchMyLocationButton();
 		}
 	}
 
@@ -1771,7 +1755,7 @@ public class cgeomap extends MapBase implements OnDragListener {
 	public void onDrag() {
 		if (followMyLocation) {
 			followMyLocation = false;
-			myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_off);
+			switchMyLocationButton();
 		}
 	}
 
@@ -1788,5 +1772,13 @@ public class cgeomap extends MapBase implements OnDragListener {
 	// open manual entry
 	public void goManual(View view) {
 		ActivityMixin.goManual(activity, "c:geo-live-map");
+	}
+
+	@Override
+	public View makeView() {
+		ImageView imageView = new ImageView(activity);
+		imageView.setScaleType(ScaleType.CENTER);
+		imageView.setLayoutParams(new ImageSwitcher.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+		return imageView;
 	}
 }
