@@ -16,7 +16,6 @@ public class cgCompass extends View {
 
 	private changeThread watchdog = null;
 	private boolean wantStop = false;
-	private boolean drawing = false;
 	private Context context = null;
 	private Bitmap compassUnderlay = null;
 	private Bitmap compassRose = null;
@@ -169,10 +168,6 @@ public class cgCompass extends View {
 			currentHeading = heading;
 		}
 
-		if (drawing) {
-			return;
-		}
-
 		double azimuthTemp = currentAzimuth;
 		double azimuthRelative = azimuthTemp - currentHeading;
 		if (azimuthRelative < 0) {
@@ -188,7 +183,6 @@ public class cgCompass extends View {
 		int marginLeftTemp = 0;
 		int marginTopTemp = 0;
 
-		drawing = true;
 		super.onDraw(canvas);
 
 		canvas.save();
@@ -220,8 +214,6 @@ public class cgCompass extends View {
 
 		canvas.setDrawFilter(remfil);
 		canvas.restore();
-
-		drawing = false;
 	}
 
 	@Override
