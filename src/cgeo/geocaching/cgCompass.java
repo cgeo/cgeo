@@ -16,7 +16,6 @@ public class cgCompass extends View {
 
 	private changeThread watchdog = null;
 	private boolean wantStop = false;
-	private boolean lock = false;
 	private boolean drawing = false;
 	private Context context = null;
 	private Bitmap compassUnderlay = null;
@@ -105,7 +104,7 @@ public class cgCompass extends View {
 		}
 	}
 
-	protected void updateNorth(double northHeadingIn, double cacheHeadingIn) {
+	protected synchronized void updateNorth(double northHeadingIn, double cacheHeadingIn) {
 		northHeading = northHeadingIn;
 		cacheHeading = cacheHeadingIn;
 	}
@@ -150,10 +149,10 @@ public class cgCompass extends View {
 					// nothing
 				}
 
-				lock = true;
-				azimuth = smoothUpdate(northHeading, azimuth);
-				heading = smoothUpdate(cacheHeading, heading);
-				lock = false;
+				synchronized(cgCompass.this) {
+					azimuth = smoothUpdate(northHeading, azimuth);
+					heading = smoothUpdate(cacheHeading, heading);
+				}
 
 				changeHandler.sendMessage(new Message());
 			}
@@ -162,15 +161,20 @@ public class cgCompass extends View {
 
 	@Override
 	protected void onDraw(Canvas canvas) {
-		if (lock) {
-			return;
+		double currentAzimuth;
+		double currentHeading;
+
+		synchronized(this) {
+			currentAzimuth = azimuth;
+			currentHeading = heading;
 		}
+
 		if (drawing) {
 			return;
 		}
 
-		double azimuthTemp = azimuth;
-		double azimuthRelative = azimuthTemp - heading;
+		double azimuthTemp = currentAzimuth;
+		double azimuthRelative = azimuthTemp - currentHeading;
 		if (azimuthRelative < 0) {
 			azimuthRelative = azimuthRelative + 360;
 		} else if (azimuthRelative >= 360) {
