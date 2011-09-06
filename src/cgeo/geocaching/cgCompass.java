@@ -15,7 +15,7 @@ import android.view.View;
 public class cgCompass extends View {
 
 	private changeThread watchdog = null;
-	private boolean wantStop = false;
+	private volatile boolean wantStop = false;
 	private Context context = null;
 	private Bitmap compassUnderlay = null;
 	private Bitmap compassRose = null;
