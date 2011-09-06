@@ -289,7 +289,9 @@
 				<action android:name="cgeo.geocaching.CGEOSELMAP"/>
 			</intent-filter>
 		</activity>
-	</application>
+        <provider android:name="cgeo.geocaching.apps.LocusDataStorageProvider" 
+            android:authorities="cgeo.geocaching.apps.locusdatastorageprovider" />
+    </application>
 	<instrumentation android:name="android.test.InstrumentationTestRunner"
        android:label="Tests for c:geo open source" android:targetPackage="cgeo.geocaching"/>
 </manifest>
