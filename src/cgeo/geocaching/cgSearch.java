@@ -2,9 +2,10 @@ package cgeo.geocaching;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class cgSearch {
-	private long id;
+	private UUID id;
 	private List<String> geocodes = new ArrayList<String>();
 
 	public String error = null;
@@ -13,10 +14,10 @@ public class cgSearch {
 	public int totalCnt = 0;
 
 	public cgSearch() {
-		id = System.currentTimeMillis(); // possible collisions here - not guaranteed to be unique 
+		id = UUID.randomUUID();
 	}
 
-	public long getCurrentId() {
+	public UUID getCurrentId() {
 		return id;
 	}
 

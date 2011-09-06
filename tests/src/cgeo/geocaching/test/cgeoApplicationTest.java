@@ -3,6 +3,7 @@ package cgeo.geocaching.test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 
 import junit.framework.Assert;
 import android.content.Context;
@@ -66,7 +67,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
     	  HashMap<String, String> params = new HashMap<String, String>();
     	  params.put("geocode", "GC1RMM2");
     	  
-    	  Long id = base.searchByGeocode(params, 0, true);
+    	  final UUID id = base.searchByGeocode(params, 0, true);
     	  Assert.assertNotNull(id);
       }
       

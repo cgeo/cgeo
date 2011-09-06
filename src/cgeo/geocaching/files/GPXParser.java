@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -197,7 +198,7 @@ public abstract class GPXParser extends FileParser {
 		return formatSimple.parse(input);
 	}
 
-	public long parse(final InputStream stream, Handler handlerIn) {
+	public UUID parse(final InputStream stream, Handler handlerIn) {
 		handler = handlerIn;
 
 		final RootElement root = new RootElement(namespace, "gpx");
@@ -657,16 +658,16 @@ public abstract class GPXParser extends FileParser {
 		} catch (SAXException e) {
 			Log.e(cgSettings.tag, "Cannot parse .gpx file as GPX " + version + ": could not parse XML - " + e.toString());
 		}
-		return parsed ? search.getCurrentId() : 0L;
+		return parsed ? search.getCurrentId() : null;
 	}
 
-	private long parse(final File file, final Handler handlerIn) {
+	private UUID parse(final File file, final Handler handlerIn) {
 		if (file == null) {
-			return 0L;
+			return null;
 		}
 
 		FileInputStream fis = null;
-		long result = 0L;
+		UUID result = null;
 		try {
 			fis = new FileInputStream(file);
 			result = parse(fis, handlerIn);
@@ -719,14 +720,14 @@ public abstract class GPXParser extends FileParser {
 		}
 	}
 
-	public static Long parseGPX(cgeoapplication app, File file, int listId, Handler handler) {
+	public static UUID parseGPX(cgeoapplication app, File file, int listId, Handler handler) {
 		final cgSearch search = new cgSearch();
-		long searchId = 0L;
+		UUID searchId = null;
 
 		try {
 			GPXParser parser = new GPX10Parser(app, listId, search);
 			searchId = parser.parse(file, handler);
-			if (searchId == 0L) {
+			if (searchId == null) {
 				parser = new GPX11Parser(app, listId, search);
 				searchId = parser.parse(file, handler);
 			}
