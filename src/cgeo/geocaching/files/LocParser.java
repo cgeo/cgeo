@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -144,10 +145,10 @@ public final class LocParser extends FileParser {
 		return coords;
 	}
 
-	public static long parseLoc(cgeoapplication app, File file, int listId,
+	public static UUID parseLoc(cgeoapplication app, File file, int listId,
 			Handler handler) {
 		cgSearch search = new cgSearch();
-		long searchId = 0L;
+		UUID searchId = null;
 
 		try {
 			Map<String, cgCoord> coords = parseCoordinates(readFile(file).toString());

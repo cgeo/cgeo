@@ -1,5 +1,7 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import java.util.UUID;
+
 import android.app.Activity;
 import android.content.res.Resources;
 import cgeo.geocaching.cgCache;
@@ -11,6 +13,6 @@ interface NavigationApp extends App {
 	public boolean invoke(final cgGeo geo, final Activity activity,
 			final Resources res,
 			final cgCache cache,
-			final Long searchId, final cgWaypoint waypoint,
+			final UUID searchId, final cgWaypoint waypoint,
 			final Double latitude, final Double longitude);
 }

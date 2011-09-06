@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -144,7 +145,7 @@ public class cgeocaches extends AbstractListActivity {
 	private String keyword = null;
 	private String address = null;
 	private String username = null;
-	private Long searchId = null;
+	private UUID searchId = null;
 	private List<cgCache> cacheList = new ArrayList<cgCache>();
 	private cgCacheListAdapter adapter = null;
 	private LayoutInflater inflater = null;
@@ -174,7 +175,7 @@ public class cgeocaches extends AbstractListActivity {
 		@Override
 		public void handleMessage(Message msg) {
 			try {
-				if (searchId != null && searchId > 0) {
+				if (searchId != null) {
 					setTitle(title + " [" + app.getCount(searchId) + "]");
 					cacheList.clear();
 
@@ -272,7 +273,7 @@ public class cgeocaches extends AbstractListActivity {
 		@Override
 		public void handleMessage(Message msg) {
 			try {
-				if (searchId != null && searchId > 0) {
+				if (searchId != null) {
 					setTitle(title + " [" + app.getCount(searchId) + "]");
 					cacheList.clear();
 
@@ -1274,7 +1275,7 @@ public class cgeocaches extends AbstractListActivity {
 			// create a searchId for a single cache (as if in details view)
 			Map<String, String> params = new HashMap<String, String>();
 			params.put("geocode", cache.geocode);
-			Long singleSearchId = base.searchByGeocode(params, 0, false);
+			final UUID singleSearchId = base.searchByGeocode(params, 0, false);
 
 			if (NavigationAppFactory.onMenuItemSelected(item, geo, this,
 					res, cache, singleSearchId, null, null)) {
@@ -2526,7 +2527,7 @@ public class cgeocaches extends AbstractListActivity {
 	}
 
 	public void goMap(View view) {
-		if (searchId == null || searchId == 0 || CollectionUtils.isEmpty(cacheList)) {
+		if (searchId == null || CollectionUtils.isEmpty(cacheList)) {
 			showToast(res.getString(R.string.warn_no_cache_coord));
 
 			return;
@@ -2534,7 +2535,7 @@ public class cgeocaches extends AbstractListActivity {
 
 		Intent mapIntent = new Intent(this, settings.getMapFactory().getMapClass());
 		mapIntent.putExtra("detail", false);
-		mapIntent.putExtra("searchid", searchId);
+		mapIntent.putExtra("searchid", searchId.toString());
 
 		startActivity(mapIntent);
 	}
