@@ -23,8 +23,8 @@ public class cgCompass extends View {
 	private Bitmap compassOverlay = null;
 	private double azimuth = 0.0;
 	private double heading = 0.0;
-	private volatile double cacheHeading = 0.0;
-	private volatile double northHeading = 0.0;
+	private double cacheHeading = 0.0;
+	private double northHeading = 0.0;
 	private PaintFlagsDrawFilter setfil = null;
 	private PaintFlagsDrawFilter remfil = null;
 	private int compassUnderlayWidth = 0;
