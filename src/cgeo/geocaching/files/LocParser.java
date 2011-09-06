@@ -2,9 +2,13 @@ package cgeo.geocaching.files;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.os.Handler;
 import android.util.Log;
@@ -34,7 +38,7 @@ public final class LocParser extends FileParser {
 
 	public static void parseLoc(final cgCacheWrap caches,
 			final String fileContent) {
-		final HashMap<String, cgCoord> cidCoords = parseCoordinates(fileContent);
+		final Map<String, cgCoord> cidCoords = parseCoordinates(fileContent);
 
 		// save found cache coordinates
 		for (cgCache cache : caches.cacheList) {
@@ -53,15 +57,15 @@ public final class LocParser extends FileParser {
 		cache.terrain = coord.terrain;
 		cache.size = coord.size;
 		cache.geocode = coord.geocode.toUpperCase();
-		if (cache.name == null || cache.name.length() == 0) {
+		if (StringUtils.isBlank(cache.name)) {
 			cache.name = coord.name;
 		}
 	}
 
-	private static HashMap<String, cgCoord> parseCoordinates(
+	private static Map<String, cgCoord> parseCoordinates(
 			final String fileContent) {
-		final HashMap<String, cgCoord> coords = new HashMap<String, cgCoord>();
-		if (fileContent == null || fileContent.length() <= 0) {
+		final Map<String, cgCoord> coords = new HashMap<String, cgCoord>();
+		if (StringUtils.isBlank(fileContent)) {
 			return coords;
 		}
 		// >> premium only
@@ -71,7 +75,7 @@ public final class LocParser extends FileParser {
 		// parse coordinates
 		for (String pointString : points) {
 			final cgCoord pointCoord = new cgCoord();
-			HashMap<String, Object> tmp = null;
+			Map<String, Object> tmp = null;
 
 			final Matcher matcherGeocode = patternGeocode.matcher(pointString);
 			if (matcherGeocode.find()) {
@@ -131,7 +135,7 @@ public final class LocParser extends FileParser {
 				}
 			}
 
-			if (pointCoord.geocode != null && pointCoord.geocode.length() > 0) {
+			if (StringUtils.isNotBlank(pointCoord.geocode)) {
 				coords.put(pointCoord.geocode, pointCoord);
 			}
 		}
@@ -141,17 +145,17 @@ public final class LocParser extends FileParser {
 		return coords;
 	}
 
-	public static long parseLoc(cgeoapplication app, File file, int listId,
+	public static UUID parseLoc(cgeoapplication app, File file, int listId,
 			Handler handler) {
 		cgSearch search = new cgSearch();
-		long searchId = 0L;
+		UUID searchId = null;
 
 		try {
-			HashMap<String, cgCoord> coords = parseCoordinates(readFile(file).toString());
+			Map<String, cgCoord> coords = parseCoordinates(readFile(file).toString());
 			final cgCacheWrap caches = new cgCacheWrap();
 			for (Entry<String, cgCoord> entry : coords.entrySet()) {
 				cgCoord coord = entry.getValue();
-				if (coord.geocode == null || coord.geocode.length() == 0 || coord.name == null || coord.name.length() == 0) {
+				if (StringUtils.isBlank(coord.geocode) || StringUtils.isBlank(coord.name)) {
 					continue;
 				}
 				cgCache cache = new cgCache();

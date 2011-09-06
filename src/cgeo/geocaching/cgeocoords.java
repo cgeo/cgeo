@@ -1,7 +1,10 @@
 package cgeo.geocaching;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -274,7 +277,7 @@ public class cgeocoords extends Dialog {
 		public void onClick(View v) {
 			Button e = (Button) v;
 			CharSequence text = e.getText();
-			if (text == null || text.length() == 0) {
+			if (StringUtils.isBlank(text)) {
 				return;
 			}
 			switch (text.charAt(0)) {
@@ -465,8 +468,8 @@ public class cgeocoords extends Dialog {
 			if (currentFormat == coordInputFormatEnum.Plain) {
 				if (eLat.length() > 0 && eLon.length() > 0) {
 					// latitude & longitude
-					HashMap<String, Object> latParsed = cgBase.parseCoordinate(eLat.getText().toString(), "lat");
-					HashMap<String, Object> lonParsed = cgBase.parseCoordinate(eLon.getText().toString(), "lon");
+					Map<String, Object> latParsed = cgBase.parseCoordinate(eLat.getText().toString(), "lat");
+					Map<String, Object> lonParsed = cgBase.parseCoordinate(eLon.getText().toString(), "lon");
 
 					if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
 						context.showToast(context.getResources().getString(R.string.err_parse_lat));
@@ -490,7 +493,7 @@ public class cgeocoords extends Dialog {
 					longitude = geo.longitudeNow;
 				}
 			}
-			ArrayList<Double> co = new ArrayList<Double>();
+			List<Double> co = new ArrayList<Double>();
 			co.add(latitude);
 			co.add(longitude);
 			cuListener.update(co);
@@ -503,7 +506,7 @@ public class cgeocoords extends Dialog {
 	}
 
 	public interface CoordinateUpdate {
-		public void update(ArrayList<Double> coords);
+		public void update(List<Double> coords);
 	}
 
 }

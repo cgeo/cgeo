@@ -1,5 +1,7 @@
 package cgeo.geocaching.connector;
 
+import org.apache.commons.lang3.StringUtils;
+
 import cgeo.geocaching.cgCache;
 
 /**
@@ -10,7 +12,7 @@ public class OXConnector extends AbstractConnector implements IConnector {
 
 	@Override
 	public boolean canHandle(String geocode) {
-		return geocode != null && geocode.toUpperCase().startsWith("OX");
+		return StringUtils.isNotBlank(geocode) && geocode.toUpperCase().startsWith("OX");
 	}
 
 	@Override

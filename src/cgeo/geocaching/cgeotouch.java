@@ -3,6 +3,11 @@ package cgeo.geocaching;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -24,7 +29,7 @@ import android.widget.TextView;
 
 public class cgeotouch extends cgLogForm {
 	private cgTrackable trackable = null;
-	private ArrayList<Integer> types = new ArrayList<Integer>();
+	private List<Integer> types = new ArrayList<Integer>();
 	private ProgressDialog waitDialog = null;
 	private String guid = null;
 	private String geocode = null;
@@ -46,7 +51,7 @@ public class cgeotouch extends cgLogForm {
 	private Handler loadDataHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			if (cgBase.isEmpty(viewstates) && attempts < 2) {
+			if (ArrayUtils.isEmpty(viewstates) && attempts < 2) {
 				showToast(res.getString(R.string.err_log_load_data_again));
 
 				loadData thread;
@@ -54,7 +59,7 @@ public class cgeotouch extends cgLogForm {
 				thread.start();
 
 				return;
-			} else if (cgBase.isEmpty(viewstates) && attempts >= 2) {
+			} else if (ArrayUtils.isEmpty(viewstates) && attempts >= 2) {
 				showToast(res.getString(R.string.err_log_load_data));
 				showProgress(false);
 
@@ -125,7 +130,7 @@ public class cgeotouch extends cgLogForm {
 
 		trackable = app.getTrackableByGeocode("logging trackable");
 
-		if (trackable.name != null && trackable.name.length() > 0) {
+		if (StringUtils.isNotBlank(trackable.name)) {
 			setTitle(res.getString(R.string.trackable_touch) + trackable.name);
 		} else {
 			setTitle(res.getString(R.string.trackable_touch) + trackable.geocode.toUpperCase());
@@ -285,7 +290,7 @@ public class cgeotouch extends cgLogForm {
         tweetCheck.setChecked(true);
 
 		Button buttonPost = (Button)findViewById(R.id.post);
-		if (cgBase.isEmpty(viewstates)) {
+		if (ArrayUtils.isEmpty(viewstates)) {
 			buttonPost.setEnabled(false);
 			buttonPost.setOnTouchListener(null);
 			buttonPost.setOnClickListener(null);
@@ -358,14 +363,14 @@ public class cgeotouch extends cgLogForm {
 
 		@Override
 		public void run() {
-			final HashMap<String, String> params = new HashMap<String, String>();
+			final Map<String, String> params = new HashMap<String, String>();
 
 			showProgressHandler.sendEmptyMessage(0);
 			gettingViewstate = true;
 			attempts ++;
 
 			try {
-				if (guid != null && guid.length() > 0) {
+				if (StringUtils.isNotBlank(guid)) {
 					params.put("wid", guid);
 				} else {
 					loadDataHandler.sendEmptyMessage(0);
@@ -376,7 +381,7 @@ public class cgeotouch extends cgLogForm {
 
 				viewstates = cgBase.getViewstates(page);
 
-				final ArrayList<Integer> typesPre = cgBase.parseTypes(page);
+				final List<Integer> typesPre = cgBase.parseTypes(page);
 				if (typesPre.size() > 0) {
 					types.clear();
 					types.addAll(typesPre);
@@ -428,7 +433,7 @@ public class cgeotouch extends cgLogForm {
 
 			if (
 				status == 1 && settings.twitter == 1 &&
-				settings.tokenPublic != null && settings.tokenPublic.length() > 0 && settings.tokenSecret != null && settings.tokenSecret.length() > 0 &&
+				StringUtils.isNotBlank(settings.tokenPublic) && StringUtils.isNotBlank(settings.tokenSecret) &&
 				tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE
 			) {
 				cgBase.postTweetTrackable(app, settings, geocode);

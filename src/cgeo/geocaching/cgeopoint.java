@@ -1,10 +1,12 @@
 package cgeo.geocaching;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -290,7 +292,7 @@ public class cgeopoint extends AbstractActivity {
 		super.onPrepareOptionsMenu(menu);
 
 		try {
-			ArrayList<Double> coords = getDestination();
+			List<Double> coords = getDestination();
 
 			if (coords != null && coords.get(0) != null && coords.get(1) != null) {
 				menu.findItem(0).setVisible(true);
@@ -314,7 +316,7 @@ public class cgeopoint extends AbstractActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		final int menuItem = item.getItemId();
 
-		ArrayList<Double> coords = getDestination();
+		List<Double> coords = getDestination();
 
 		if(coords != null && !coords.isEmpty())
 		{
@@ -336,7 +338,8 @@ public class cgeopoint extends AbstractActivity {
 		return NavigationAppFactory.onMenuItemSelected(item, geo, this, res, null, null, null, coords);
 	}
 
-	private void addToHistory(ArrayList<Double> coords) {
+	private void addToHistory(List
+			<Double> coords) {
 		// Add locations to history
 		cgDestination loc = new cgDestination();
 		loc.setLatitude(coords.get(0));
@@ -413,7 +416,7 @@ public class cgeopoint extends AbstractActivity {
 	}
 
 	private void cachesAround() {
-		ArrayList<Double> coords = getDestination();
+		List<Double> coords = getDestination();
 
 		if (coords == null || coords.get(0) == null || coords.get(1) == null) {
 			showToast(res.getString(R.string.err_location_unknown));
@@ -473,8 +476,8 @@ public class cgeopoint extends AbstractActivity {
 		}
 	}
 
-	private ArrayList<Double> getDestination() {
-		ArrayList<Double> coords = new ArrayList<Double>();
+	private List<Double> getDestination() {
+		List<Double> coords = new ArrayList<Double>();
 		Double latitude = null;
 		Double longitude = null;
 
@@ -483,16 +486,16 @@ public class cgeopoint extends AbstractActivity {
 		String latText = ((EditText) findViewById(R.id.latitude)).getText().toString();
 		String lonText = ((EditText) findViewById(R.id.longitude)).getText().toString();
 
-		if ((bearingText == null || bearingText.length() == 0) && (distanceText == null || distanceText.length() == 0)
-				&& (latText == null || latText.length() == 0) && (lonText == null || lonText.length() == 0)) {
+		if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText)
+				&& StringUtils.isBlank(latText) && StringUtils.isBlank(lonText)) {
 			showToast(res.getString(R.string.err_point_no_position_given));
 			return null;
 		}
 
-		if (latText != null && latText.length() > 0 && lonText != null && lonText.length() > 0) {
+		if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
 			// latitude & longitude
-			HashMap<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
-			HashMap<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lon");
+			Map<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
+			Map<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lon");
 
 			if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
 				showToast(res.getString(R.string.err_parse_lat));
@@ -516,7 +519,7 @@ public class cgeopoint extends AbstractActivity {
 			longitude = geo.longitudeNow;
 		}
 
-		if (bearingText != null && bearingText.length() > 0 && distanceText != null && distanceText.length() > 0) {
+		if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
 			// bearing & distance
 			Double bearing = null;
 			try {
@@ -573,7 +576,7 @@ public class cgeopoint extends AbstractActivity {
 			Double latParsed = null;
 			Double lonParsed = null;
 
-			HashMap<String, Double> coordsDst = cgBase.getRadialDistance(latitude, longitude, bearing, distance);
+			Map<String, Double> coordsDst = cgBase.getRadialDistance(latitude, longitude, bearing, distance);
 
 			latParsed = coordsDst.get("latitude");
 			lonParsed = coordsDst.get("longitude");

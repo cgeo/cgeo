@@ -2,7 +2,10 @@ package cgeo.geocaching.mapcommon;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.UUID;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -29,22 +32,23 @@ import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgDirection;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.cgUpdateDir;
 import cgeo.geocaching.cgUpdateLoc;
 import cgeo.geocaching.cgUser;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.mapinterfaces.ActivityImpl;
 import cgeo.geocaching.mapinterfaces.CacheOverlayItemImpl;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
 import cgeo.geocaching.mapinterfaces.MapControllerImpl;
 import cgeo.geocaching.mapinterfaces.MapFactory;
 import cgeo.geocaching.mapinterfaces.MapViewImpl;
+import cgeo.geocaching.mapinterfaces.OnDragListener;
 import cgeo.geocaching.mapinterfaces.UserOverlayItemImpl;
 
-public class cgeomap extends MapBase {
+public class cgeomap extends MapBase implements OnDragListener {
 
 	private static final int MENU_SELECT_MAPVIEW = 1;
 	private static final int MENU_MAP_LIVE = 2;
@@ -73,14 +77,14 @@ public class cgeomap extends MapBase {
 	private cgUpdateDir dirUpdate = new UpdateDir();
 	// from intent
 	private boolean fromDetailIntent = false;
-	private Long searchIdIntent = null;
+	private String searchIdIntent = null;
 	private String geocodeIntent = null;
 	private Double latitudeIntent = null;
 	private Double longitudeIntent = null;
 	private String waypointTypeIntent = null;
 	private int[] mapStateIntent = null;
 	// status data
-	private Long searchId = null;
+	private UUID searchId = null;
 	private String token = null;
 	private boolean noMapTokenShowed = false;
 	// map status data
@@ -112,10 +116,10 @@ public class cgeomap extends MapBase {
 	private cgMapMyOverlay overlayMyLoc = null;
 	// data for overlays
 	private int cachesCnt = 0;
-	private HashMap<Integer, Drawable> iconsCache = new HashMap<Integer, Drawable>();
-	private ArrayList<cgCache> caches = new ArrayList<cgCache>();
-	private ArrayList<cgUser> users = new ArrayList<cgUser>();
-	private ArrayList<cgCoord> coordinates = new ArrayList<cgCoord>();
+	private Map<Integer, Drawable> iconsCache = new HashMap<Integer, Drawable>();
+	private List<cgCache> caches = new ArrayList<cgCache>();
+	private List<cgUser> users = new ArrayList<cgUser>();
+	private List<cgCoord> coordinates = new ArrayList<cgCoord>();
 	// storing for offline
 	private ProgressDialog waitDialog = null;
 	private int detailTotal = 0;
@@ -264,6 +268,7 @@ public class cgeomap extends MapBase {
 		mapView.setBuiltInZoomControls(true);
 		mapView.displayZoomControls(true);
 		mapView.preLoad();
+		mapView.setOnDragListener(this);
 
 		// initialize overlays
 		mapView.clearOverlays();
@@ -301,14 +306,14 @@ public class cgeomap extends MapBase {
 		Bundle extras = activity.getIntent().getExtras();
 		if (extras != null) {
 			fromDetailIntent = extras.getBoolean("detail");
-			searchIdIntent = extras.getLong("searchid");
+			searchIdIntent = extras.getString("searchid");
 			geocodeIntent = extras.getString("geocode");
 			latitudeIntent = extras.getDouble("latitude");
 			longitudeIntent = extras.getDouble("longitude");
 			waypointTypeIntent = extras.getString("wpttype");
 			mapStateIntent = extras.getIntArray("mapstate");
 
-			if (searchIdIntent == 0L) {
+			if ("".equals(searchIdIntent)) {
 				searchIdIntent = null;
 			}
 			if (latitudeIntent == 0.0) {
@@ -558,9 +563,9 @@ public class cgeomap extends MapBase {
 			searchIdIntent = null;
 		} else if (id == MENU_STORE_CACHES) {
 			if (live && !isLoading() && caches != null && !caches.isEmpty()) {
-				final ArrayList<String> geocodes = new ArrayList<String>();
+				final List<String> geocodes = new ArrayList<String>();
 
-				ArrayList<cgCache> cachesProtected = new ArrayList<cgCache>(caches);
+				List<cgCache> cachesProtected = new ArrayList<cgCache>(caches);
 				try {
 					if (cachesProtected.size() > 0) {
 						final GeoPointImpl mapCenter = mapView.getMapViewCenter();
@@ -1060,7 +1065,7 @@ public class cgeomap extends MapBase {
 				// stage 1 - pull and render from the DB only
 
 				if (fromDetailIntent) {
-					searchId = searchIdIntent;
+					searchId = UUID.fromString(searchIdIntent);
 				} else {
 					if (!live || settings.maplive == 0) {
 						searchId = app.getStoredInViewport(centerLat, centerLon, spanLat, spanLon, settings.cacheType);
@@ -1188,7 +1193,7 @@ public class cgeomap extends MapBase {
 					return;
 				}
 
-				HashMap<String, String> params = new HashMap<String, String>();
+				Map<String, String> params = new HashMap<String, String>();
 				params.put("usertoken", token);
 				params.put("latitude-min", String.format((Locale) null, "%.6f", latMin));
 				params.put("latitude-max", String.format((Locale) null, "%.6f", latMax));
@@ -1250,8 +1255,8 @@ public class cgeomap extends MapBase {
 				}
 
 				// display caches
-				final ArrayList<cgCache> cachesProtected = new ArrayList<cgCache>(caches);
-				final ArrayList<CacheOverlayItemImpl> items = new ArrayList<CacheOverlayItemImpl>();
+				final List<cgCache> cachesProtected = new ArrayList<cgCache>(caches);
+				final List<CacheOverlayItemImpl> items = new ArrayList<CacheOverlayItemImpl>();
 
 				if (cachesProtected != null && !cachesProtected.isEmpty()) {
 					int icon = 0;
@@ -1405,9 +1410,9 @@ public class cgeomap extends MapBase {
 	// display users of Go 4 Cache
 	private class DisplayUsersThread extends DoThread {
 
-		private ArrayList<cgUser> users = null;
+		private List<cgUser> users = null;
 
-		public DisplayUsersThread(ArrayList<cgUser> usersIn, long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
+		public DisplayUsersThread(List<cgUser> usersIn, long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
 			super(centerLatIn, centerLonIn, spanLatIn, spanLonIn);
 
 			users = usersIn;
@@ -1424,7 +1429,7 @@ public class cgeomap extends MapBase {
 				}
 
 				// display users
-				ArrayList<UserOverlayItemImpl> items = new ArrayList<UserOverlayItemImpl>();
+				List<UserOverlayItemImpl> items = new ArrayList<UserOverlayItemImpl>();
 
 				int counter = 0;
 				UserOverlayItemImpl item = null;
@@ -1542,11 +1547,11 @@ public class cgeomap extends MapBase {
 	private class LoadDetails extends Thread {
 
 		private Handler handler = null;
-		private ArrayList<String> geocodes = null;
+		private List<String> geocodes = null;
 		private volatile boolean stop = false;
 		private long last = 0L;
 
-		public LoadDetails(Handler handlerIn, ArrayList<String> geocodesIn) {
+		public LoadDetails(Handler handlerIn, List<String> geocodesIn) {
 			handler = handlerIn;
 			geocodes = geocodesIn;
 		}
@@ -1633,7 +1638,7 @@ public class cgeomap extends MapBase {
 	}
 
 	// move map to view results of searchIdIntent
-	private void centerMap(String geocodeCenter, Long searchIdCenter, Double latitudeCenter, Double longitudeCenter, int[] mapState) {
+	private void centerMap(String geocodeCenter, String searchIdCenter, Double latitudeCenter, Double longitudeCenter, int[] mapState) {
 
 		if (!centered && mapState != null) {
 			try {
@@ -1647,7 +1652,7 @@ public class cgeomap extends MapBase {
 			alreadyCentered = true;
 		} else if (!centered && (geocodeCenter != null || searchIdIntent != null)) {
 			try {
-				ArrayList<Object> viewport = null;
+				List<Object> viewport = null;
 
 				if (geocodeCenter != null) {
 					viewport = app.getBounds(geocodeCenter);
@@ -1759,6 +1764,14 @@ public class cgeomap extends MapBase {
 
 				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_on);
 			}
+		}
+	}
+
+	@Override
+	public void onDrag() {
+		if (followMyLocation) {
+			followMyLocation = false;
+			myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_off);
 		}
 	}
 

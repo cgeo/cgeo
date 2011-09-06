@@ -1,6 +1,9 @@
 package cgeo.geocaching.apps.cachelist;
 
 import java.util.List;
+import java.util.UUID;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.content.res.Resources;
@@ -22,7 +25,7 @@ class LocusCacheListApp extends AbstractLocusApp implements CacheListApp {
 	 */
 	@Override
 	public boolean invoke(cgGeo geo, List<cgCache> cacheList, Activity activity, Resources res, 
-			final Long searchId) {
+			final UUID searchId) {
 		if (cacheList == null || cacheList.isEmpty()) return false;
 		
 		this.showInLocus((List<? extends Object>) cacheList, activity);

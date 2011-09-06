@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -68,12 +72,12 @@ public class cgCache implements ICache {
 	public Float myVote = null;
 	public int inventoryItems = 0;
 	public boolean onWatchlist = false;
-	public ArrayList<String> attributes = null;
-	public ArrayList<cgWaypoint> waypoints = null;
-	public ArrayList<cgImage> spoilers = null;
-	public ArrayList<cgLog> logs = null;
-	public ArrayList<cgTrackable> inventory = null;
-	public HashMap<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
+	public List<String> attributes = null;
+	public List<cgWaypoint> waypoints = null;
+	public List<cgImage> spoilers = null;
+	public List<cgLog> logs = null;
+	public List<cgTrackable> inventory = null;
+	public Map<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
 	public boolean logOffline = false;
 	// temporary values
 	public boolean statusChecked = false;
@@ -122,37 +126,37 @@ public class cgCache implements ICache {
 		if (reason == null || reason == 0) {
 			reason = oldCache.reason;
 		}
-		if (geocode == null || geocode.length() == 0) {
+		if (StringUtils.isBlank(geocode)) {
 			geocode = oldCache.geocode;
 		}
-		if (cacheid == null || cacheid.length() == 0) {
+		if (StringUtils.isBlank(cacheid)) {
 			cacheid = oldCache.cacheid;
 		}
-		if (guid == null || guid.length() == 0) {
+		if (StringUtils.isBlank(guid)) {
 			guid = oldCache.guid;
 		}
-		if (type == null || type.length() == 0) {
+		if (StringUtils.isBlank(type)) {
 			type = oldCache.type;
 		}
-		if (name == null || name.length() == 0) {
+		if (StringUtils.isBlank(name)) {
 			name = oldCache.name;
 		}
-		if (nameSp == null || nameSp.length() == 0) {
+		if (StringUtils.isBlank(nameSp)) {
 			nameSp = oldCache.nameSp;
 		}
-		if (owner == null || owner.length() == 0) {
+		if (StringUtils.isBlank(owner)) {
 			owner = oldCache.owner;
 		}
-		if (ownerReal == null || ownerReal.length() == 0) {
+		if (StringUtils.isBlank(ownerReal)) {
 			ownerReal = oldCache.ownerReal;
 		}
 		if (hidden == null) {
 			hidden = oldCache.hidden;
 		}
-		if (hint == null || hint.length() == 0) {
+		if (StringUtils.isBlank(hint)) {
 			hint = oldCache.hint;
 		}
-		if (size == null || size.length() == 0) {
+		if (StringUtils.isBlank(size)) {
 			size = oldCache.size;
 		}
 		if (difficulty == null || difficulty == 0) {
@@ -167,16 +171,16 @@ public class cgCache implements ICache {
 		if (distance == null) {
 			distance = oldCache.distance;
 		}
-		if (latlon == null || latlon.length() == 0) {
+		if (StringUtils.isBlank(latlon)) {
 			latlon = oldCache.latlon;
 		}
-		if (latitudeString == null || latitudeString.length() == 0) {
+		if (StringUtils.isBlank(latitudeString)) {
 			latitudeString = oldCache.latitudeString;
 		}
-		if (longitudeString == null || longitudeString.length() == 0) {
+		if (StringUtils.isBlank(longitudeString)) {
 			longitudeString = oldCache.longitudeString;
 		}
-		if (location == null || location.length() == 0) {
+		if (StringUtils.isBlank(location)) {
 			location = oldCache.location;
 		}
 		if (latitude == null) {
@@ -188,13 +192,13 @@ public class cgCache implements ICache {
 		if (elevation == null) {
 			elevation = oldCache.elevation;
 		}
-		if (personalNote == null || personalNote.length() == 0) {
+		if (StringUtils.isNotBlank(personalNote)) {
 			personalNote = oldCache.personalNote;
 		}
-		if (shortdesc == null || shortdesc.length() == 0) {
+		if (StringUtils.isBlank(shortdesc)) {
 			shortdesc = oldCache.shortdesc;
 		}
-		if (description == null || description.length() == 0) {
+		if (StringUtils.isBlank(description)) {
 			description = oldCache.description;
 		}
 		if (favouriteCnt == null) {
@@ -266,7 +270,7 @@ public class cgCache implements ICache {
 	 */
 	boolean isGuidContainedInPage(final String page) {
 		// check if the guid of the cache is anywhere in the page
-		if (guid == null  || guid.length() == 0) {
+		if (StringUtils.isBlank(guid)) {
 			return false;
 		}
 		Pattern patternOk = Pattern.compile(guid, Pattern.CASE_INSENSITIVE);
@@ -285,7 +289,7 @@ public class cgCache implements ICache {
 	}
 
 	public boolean logVisit(IAbstractActivity fromActivity) {
-		if (cacheid == null || cacheid.length() == 0) {
+		if (StringUtils.isBlank(cacheid)) {
 			fromActivity.showToast(((Activity)fromActivity).getResources().getString(R.string.err_cannot_log_visit));
 			return true;
 		}
@@ -301,9 +305,8 @@ public class cgCache implements ICache {
 
 	public boolean logOffline(final IAbstractActivity fromActivity, final int logType, final cgSettings settings, final cgBase base) {
         String log = "";
-        if (settings.getSignature() != null
-                && settings.signatureAutoinsert
-                && settings.getSignature().length() > 0) {
+        if (StringUtils.isNotBlank(settings.getSignature())
+                && settings.signatureAutoinsert) {
             log = LogTemplateProvider.applyTemplates(settings.getSignature(), base);
         }
         logOffline(fromActivity, log, Calendar.getInstance(), logType);
@@ -326,9 +329,9 @@ public class cgCache implements ICache {
 		}
 	}
 
-	public ArrayList<Integer> getPossibleLogTypes(cgSettings settings) {
+	public List<Integer> getPossibleLogTypes(cgSettings settings) {
 		boolean isOwner = owner != null && owner.equalsIgnoreCase(settings.getUsername());
-		ArrayList<Integer> types = new ArrayList<Integer>();
+		List<Integer> types = new ArrayList<Integer>();
 		if ("event".equals(type) || "mega".equals(type) || "cito".equals(type) || "lostfound".equals(type)) {
 			types.add(cgBase.LOG_WILL_ATTEND);
 			types.add(cgBase.LOG_NOTE);

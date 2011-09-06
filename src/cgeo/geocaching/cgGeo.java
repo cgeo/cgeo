@@ -3,6 +3,9 @@ package cgeo.geocaching;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -394,7 +397,7 @@ public class cgGeo {
 
 				final String username = settings.getUsername();
 				if (username != null) {
-					final HashMap<String, String> params = new HashMap<String, String>();
+					final Map<String, String> params = new HashMap<String, String>();
 					final String latStr = String.format((Locale) null, "%.6f", latitudeNow);
 					final String lonStr = String.format((Locale) null, "%.6f", longitudeNow);
 					params.put("u", username);
@@ -407,7 +410,7 @@ public class cgGeo {
 					}
 					final String res = base.request(false, host, path, method, params, false, false, false).getData();
 
-					if (res != null && res.length() > 0) {
+					if (StringUtils.isNotBlank(res)) {
 						lastGo4cacheLat = latitudeNow;
 						lastGo4cacheLon = longitudeNow;
 					}

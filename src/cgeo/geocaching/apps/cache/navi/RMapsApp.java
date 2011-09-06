@@ -2,6 +2,7 @@ package cgeo.geocaching.apps.cache.navi;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.UUID;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -22,7 +23,7 @@ class RMapsApp extends AbstractNavigationApp implements NavigationApp {
 	@Override
 	public boolean invoke(cgGeo geo, Activity activity, Resources res,
 			cgCache cache,
-			Long searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
+			final UUID searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
 		if (cache == null && waypoint == null && latitude == null
 				&& longitude == null) {
 			return false;

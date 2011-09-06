@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
@@ -13,10 +14,11 @@ import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.utils.CollectionUtils;
 
 public class cgeosmaps extends AbstractActivity {
 
-	private ArrayList<Bitmap> maps = new ArrayList<Bitmap>();
+	private List<Bitmap> maps = new ArrayList<Bitmap>();
 	private String geocode = null;
 	private LayoutInflater inflater = null;
 	private ProgressDialog waitDialog = null;
@@ -27,7 +29,7 @@ public class cgeosmaps extends AbstractActivity {
 		@Override
 		public void handleMessage(Message msg) {
 			try {
-				if (maps == null || maps.isEmpty()) {
+				if (CollectionUtils.isEmpty(maps)) {
 					if (waitDialog != null) {
 						waitDialog.dismiss();
 					}

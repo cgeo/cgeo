@@ -2,7 +2,9 @@ package cgeo.geocaching.activity;
 
 import gnu.android.app.appmanualclient.AppManualReaderClient;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -35,7 +37,7 @@ public final class ActivityMixin {
 	}
 
 	public final static void goManual(final Context context, final String helpTopic) {
-		if (helpTopic == null || helpTopic.length() == 0) {
+		if (StringUtils.isBlank(helpTopic)) {
 			return;
 		}
 		try {
@@ -50,7 +52,7 @@ public final class ActivityMixin {
 	}
 
 	public final static void setTitle(final Activity activity, final String text) {
-		if (text == null) {
+		if (StringUtils.isBlank(text)) {
 			return;
 		}
 
@@ -83,7 +85,7 @@ public final class ActivityMixin {
 	}
 
 	public final static void showToast(final Activity activity, final String text) {
-		if (text.length() > 0) {
+		if (StringUtils.isNotBlank(text)) {
 			Toast toast = Toast.makeText(activity, text, Toast.LENGTH_LONG);
 
 			toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.BOTTOM, 0, 100);
@@ -92,7 +94,7 @@ public final class ActivityMixin {
 	}
 
 	public final static void showShortToast(final Activity activity, final String text) {
-		if (text.length() > 0) {
+		if (StringUtils.isNotBlank(text)) {
 			Toast toast = Toast.makeText(activity, text, Toast.LENGTH_SHORT);
 
 			toast.setGravity(Gravity.CENTER_HORIZONTAL|Gravity.BOTTOM, 0, 100);
@@ -101,7 +103,7 @@ public final class ActivityMixin {
 	}
 
 	public static final void helpDialog(final Activity activity, final String title, final String message) {
-		if (message == null || message.length() == 0) {
+		if (StringUtils.isBlank(message)) {
 			return;
 		}
 
@@ -131,7 +133,7 @@ public final class ActivityMixin {
 		if (settings.isLogin()) {
 			if (settings.getLogOffline()) {
 				SubMenu logMenu = menu.addSubMenu(1, IAbstractActivity.MENU_LOG_VISIT_OFFLINE, 0, res.getString(R.string.cache_menu_visit_offline)).setIcon(MENU_ICON_LOG_VISIT);
-				ArrayList<Integer> logTypes = cache.getPossibleLogTypes(settings);
+				List<Integer> logTypes = cache.getPossibleLogTypes(settings);
 				for (Integer logType : logTypes) {
 					String label = cgBase.logTypes2.get(logType);
 					logMenu.add(1, IAbstractActivity.MENU_LOG_VISIT_OFFLINE + logType, 0, label);

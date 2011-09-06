@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -67,7 +68,7 @@ public class cgHtmlImg implements Html.ImageGetter {
 		String fileName = null;
 		String fileNameSec = null;
 
-		if (url == null || url.length() == 0) {
+		if (StringUtils.isBlank(url)) {
 			return null;
 		}
 
@@ -82,7 +83,7 @@ public class cgHtmlImg implements Html.ImageGetter {
 			urlExt = "";
 		}
 
-		if (geocode != null && geocode.length() > 0) {
+		if (StringUtils.isNotBlank(geocode)) {
 			dirName = cgSettings.getStorage() + geocode + "/";
 			fileName = cgSettings.getStorage() + geocode + "/" + cgBase.md5(url) + urlExt;
 			fileNameSec = cgSettings.getStorageSec() + geocode + "/" + cgBase.md5(url) + urlExt;

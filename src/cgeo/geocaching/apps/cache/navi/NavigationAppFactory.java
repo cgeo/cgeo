@@ -1,6 +1,9 @@
 package cgeo.geocaching.apps.cache.navi;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 import android.app.Activity;
 import android.content.res.Resources;
@@ -17,7 +20,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 	private static NavigationApp[] apps = new NavigationApp[] {};
 
 	private static NavigationApp[] getNavigationApps(Resources res) {
-		if (null == apps || 0 == apps.length) {
+		if (ArrayUtils.isEmpty(apps)) {
 			apps = new NavigationApp[] {
 					// compass
 					new RadarApp(res), 
@@ -44,7 +47,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 	public static boolean onMenuItemSelected(final MenuItem item,
 			final cgGeo geo, Activity activity, Resources res,
 			cgCache cache,
-			Long searchId, cgWaypoint waypoint, ArrayList<Double> destination) {
+			final UUID searchId, cgWaypoint waypoint, List<Double> destination) {
 		NavigationApp app = (NavigationApp) getAppFromMenuItem(item, apps);
 		if (app != null) {
 			Double latitude = null;

@@ -2,6 +2,8 @@ package cgeo.geocaching;
 
 import java.io.File;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -261,7 +263,7 @@ public class cgeoinit extends AbstractActivity {
 		});
 
 		CheckBox twitterButton = (CheckBox) findViewById(R.id.twitter_option);
-		if (prefs.getInt("twitter", 0) == 0 || settings.tokenPublic == null || settings.tokenPublic.length() == 0 || settings.tokenSecret == null || settings.tokenSecret.length() == 0) {
+		if (prefs.getInt("twitter", 0) == 0 || StringUtils.isBlank(settings.tokenPublic) || StringUtils.isBlank(settings.tokenSecret)) {
 			twitterButton.setChecked(false);
 		} else {
 			twitterButton.setChecked(true);
@@ -435,7 +437,7 @@ public class cgeoinit extends AbstractActivity {
 		//Send2cgeo settings
                 String webDeviceName = prefs.getString("webDeviceName", null);
 
-		if ((webDeviceName != null) &&(webDeviceName.length() > 0)) {
+		if (StringUtils.isNotBlank(webDeviceName)) {
 			((EditText) findViewById(R.id.webDeviceName)).setText(webDeviceName);
 		} else {
                     String s = android.os.Build.MODEL;
@@ -579,7 +581,7 @@ public class cgeoinit extends AbstractActivity {
 				}
 				edit.commit();
 
-				if (settings.twitter == 1 && (settings.tokenPublic == null || settings.tokenPublic.length() == 0 || settings.tokenSecret == null || settings.tokenSecret.length() == 0)) {
+				if (settings.twitter == 1 && (StringUtils.isBlank(settings.tokenPublic) || StringUtils.isBlank(settings.tokenSecret))) {
 					Intent authIntent = new Intent(cgeoinit.this, cgeoauth.class);
 					startActivity(authIntent);
 				}
@@ -1009,7 +1011,7 @@ public class cgeoinit extends AbstractActivity {
 			final String username = ((EditText) findViewById(R.id.username)).getText().toString();
 			final String password = ((EditText) findViewById(R.id.password)).getText().toString();
 
-			if (username == null || username.length() == 0 || password == null || password.length() == 0) {
+			if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
 				showToast(res.getString(R.string.err_missing_auth));
 				return;
 			}
@@ -1042,7 +1044,7 @@ public class cgeoinit extends AbstractActivity {
 			final String deviceCode = prefs.getString("webDeviceCode", null);
 
 
-			if (deviceName == null || deviceName.length() == 0) {
+			if (StringUtils.isBlank(deviceName)) {
 				showToast(res.getString(R.string.err_missing_device_name));
 				return;
 			}

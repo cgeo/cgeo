@@ -1,26 +1,27 @@
 package cgeo.geocaching;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 public class cgSearch {
-	private Long id = null;
-	private ArrayList<String> geocodes = new ArrayList<String>();
+	private UUID id;
+	private List<String> geocodes = new ArrayList<String>();
 
-	public int errorRetrieve = 0;
 	public String error = null;
 	public String url = "";
 	public String[] viewstates = null;
 	public int totalCnt = 0;
 
 	public cgSearch() {
-		id = System.currentTimeMillis(); // possible collisions here - not guaranteed to be unique 
+		id = UUID.randomUUID();
 	}
 
-	public Long getCurrentId() {
+	public UUID getCurrentId() {
 		return id;
 	}
 
-	public ArrayList<String> getGeocodes() {
+	public List<String> getGeocodes() {
 		return geocodes;
 	}
 

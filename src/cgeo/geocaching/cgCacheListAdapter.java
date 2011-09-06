@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -35,6 +38,7 @@ import cgeo.geocaching.filter.cgFilter;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.DistanceComparator;
 import cgeo.geocaching.sorting.VisitComparator;
+import cgeo.geocaching.utils.CollectionUtils;
 
 public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
@@ -55,9 +59,9 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 	private boolean sort = true;
 	private int checked = 0;
 	private boolean selectMode = false;
-	private static HashMap<String, Drawable> gcIconDrawables = new HashMap<String, Drawable>();
-	private ArrayList<cgCompassMini> compasses = new ArrayList<cgCompassMini>();
-	private ArrayList<cgDistanceView> distances = new ArrayList<cgDistanceView>();
+	private static Map<String, Drawable> gcIconDrawables = new HashMap<String, Drawable>();
+	private List<cgCompassMini> compasses = new ArrayList<cgCompassMini>();
+	private List<cgDistanceView> distances = new ArrayList<cgDistanceView>();
 	private int[] ratingBcgs = new int[3];
 	private float pixelDensity = 1f;
 	private static final int SWIPE_MIN_DISTANCE = 60;
@@ -286,13 +290,13 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 			lastSort = System.currentTimeMillis();
 		}
 
-		if (distances != null && distances.size() > 0) {
+		if (CollectionUtils.isNotEmpty(distances)) {
 			for (cgDistanceView distance : distances) {
 				distance.update(latitudeIn, longitudeIn);
 			}
 		}
 
-		if (compasses != null && compasses.size() > 0) {
+		if (CollectionUtils.isNotEmpty(compasses)) {
 			for (cgCompassMini compass : compasses) {
 				compass.updateCoords(latitudeIn, longitudeIn);
 			}
@@ -306,7 +310,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
 		azimuth = azimuthIn;
 
-		if (compasses != null && compasses.size() > 0) {
+		if (CollectionUtils.isNotEmpty(compasses)) {
 			for (cgCompassMini compass : compasses) {
 				compass.updateAzimuth(azimuth);
 			}
@@ -366,8 +370,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 			holder.checkbox = (CheckBox) rowView.findViewById(R.id.checkbox);
 			holder.oneInfo = (RelativeLayout) rowView.findViewById(R.id.one_info);
 			holder.oneCheckbox = (RelativeLayout) rowView.findViewById(R.id.one_checkbox);
-			holder.foundMark = (ImageView) rowView.findViewById(R.id.found_mark);
-			holder.offlineMark = (ImageView) rowView.findViewById(R.id.offline_mark);
+			holder.logStatusMark = (ImageView) rowView.findViewById(R.id.log_status_mark);
 			holder.oneCache = (RelativeLayout) rowView.findViewById(R.id.one_cache);
 			holder.text = (TextView) rowView.findViewById(R.id.text);
 			holder.directionLayout = (RelativeLayout) rowView.findViewById(R.id.direction_layout);
@@ -441,15 +444,14 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		}
 		holder.direction.setContent(cache.latitude, cache.longitude);
 
-		if (cache.logOffline) {
-			holder.offlineMark.setVisibility(View.VISIBLE);
-			holder.foundMark.setVisibility(View.GONE);
+		if (cache.found && cache.logOffline) {
+		    holder.logStatusMark.setImageResource(R.drawable.mark_green_red);
 		} else if (cache.found) {
-			holder.offlineMark.setVisibility(View.GONE);
-			holder.foundMark.setVisibility(View.VISIBLE);
-		} else {
-			holder.offlineMark.setVisibility(View.GONE);
-			holder.foundMark.setVisibility(View.GONE);
+		    holder.logStatusMark.setImageResource(R.drawable.mark_green);
+		} else if (cache.logOffline) {
+            holder.logStatusMark.setImageResource(R.drawable.mark_red);
+        } else {
+		    holder.logStatusMark.setVisibility(View.GONE);
 		}
 
 		if (cache.nameSp == null) {
@@ -581,10 +583,10 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 			cacheInfo.append("; ");
 			cacheInfo.append(base.formatDate(cache.visitedDate));
 		} else {
-			if (cache.geocode != null && cache.geocode.length() > 0) {
+			if (StringUtils.isNotBlank(cache.geocode)) {
 				cacheInfo.append(cache.geocode);
 			}
-			if (cache.size != null && cache.size.length() > 0) {
+			if (StringUtils.isNotBlank(cache.size)) {
 				if (cacheInfo.length() > 0) {
 					cacheInfo.append(" | ");
 				}

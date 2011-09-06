@@ -1,6 +1,10 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.content.res.Resources;
@@ -8,6 +12,7 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.apps.AbstractLocusApp;
+import cgeo.geocaching.utils.CollectionUtils;
 
 class LocusApp extends AbstractLocusApp implements NavigationApp {
 
@@ -24,7 +29,7 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 	 */
 	@Override
 	public boolean invoke(cgGeo geo, Activity activity, Resources res, cgCache cache,
-			Long searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
+			final UUID searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
 		
 		if (cache == null && waypoint == null && latitude == null && longitude == null) {
 			return false;
@@ -42,6 +47,7 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 				if (cache.longitude != null && cache.latitude != null) {
 					points.add(cache);
 				}
+
 				// use only waypoints with coordinates
 				if (cache.waypoints != null) {
 					for (cgWaypoint wp : cache.waypoints) {
