@@ -25,8 +25,8 @@ public class cgCompass extends View {
 	private Bitmap compassOverlay = null;
 	private double azimuth = 0.0;
 	private double heading = 0.0;
-	private double cacheHeading = 0.0;
-	private double northHeading = 0.0;
+	private volatile double cacheHeading = 0.0;
+	private volatile double northHeading = 0.0;
 	private PaintFlagsDrawFilter setfil = null;
 	private PaintFlagsDrawFilter remfil = null;
 	private int compassUnderlayWidth = 0;
@@ -110,6 +110,35 @@ public class cgCompass extends View {
 		cacheHeading = cacheHeadingIn;
 	}
 
+	/**
+	 * Compute the new value, moving by small increments.
+	 * @param goal the goal to reach
+	 * @param actual the actual value
+	 * @return the new value
+	 */
+	static protected double smoothUpdate(double goal, double actual) {
+		double diff = goal - actual;
+		final boolean largeDiff = Math.abs(diff) > 5;
+
+		double offset = 0.0;
+
+		if (diff < 0.0) {
+			diff = diff + 360.0;
+		} else if (diff >= 360.0) {
+			diff = diff - 360.0;
+		}
+
+		// If the difference is smaller than 1 degree, do nothing as it
+		// causes the arrow to vibrate.
+		if (diff > 1.0 && diff <= 180.0) {
+			offset = largeDiff ? 2.0 : 1.0;
+		} else if (diff > 180.0 && diff < 359.0) {
+			offset = largeDiff ? -2.0 : -1.0;
+		}
+
+		return actual + offset;
+	}
+
 	private class changeThread extends Thread {
 
 		@Override
@@ -121,91 +150,9 @@ public class cgCompass extends View {
 					// nothing
 				}
 
-				if (Math.abs(azimuth - northHeading) < 2 && Math.abs(heading - cacheHeading) < 2) {
-					continue;
-				}
-
 				lock = true;
-
-				double diff = 0.0;
-				double diffAbs = 0.0;
-				double tempAzimuth = 0.0;
-				double tempHeading = 0.0;
-
-				final double actualAzimuth = azimuth;
-				final double actualHeading = heading;
-
-				diff = northHeading - actualAzimuth;
-				diffAbs = Math.abs(northHeading - actualAzimuth);
-				if (diff < 0) {
-					diff = diff + 360;
-				} else if (diff >= 360) {
-					diff = diff - 360;
-				}
-
-				if (diff > 0 && diff <= 180) {
-					if (diffAbs > 5) {
-						tempAzimuth = actualAzimuth + 2;
-					} else if (diffAbs > 1) {
-						tempAzimuth = actualAzimuth + 1;
-					} else {
-						tempAzimuth = actualAzimuth;
-					}
-				} else if (diff > 180 && diff < 360) {
-					if (diffAbs > 5) {
-						tempAzimuth = actualAzimuth - 2;
-					} else if (diffAbs > 1) {
-						tempAzimuth = actualAzimuth - 1;
-					} else {
-						tempAzimuth = actualAzimuth;
-					}
-				} else {
-					tempAzimuth = actualAzimuth;
-				}
-
-				diff = cacheHeading - actualHeading;
-				diffAbs = Math.abs(cacheHeading - actualHeading);
-				if (diff < 0) {
-					diff = diff + 360;
-				} else if (diff >= 360) {
-					diff = diff - 360;
-				}
-
-				if (diff > 0 && diff <= 180) {
-					if (diffAbs > 5) {
-						tempHeading = actualHeading + 2;
-					} else if (diffAbs > 1) {
-						tempHeading = actualHeading + 1;
-					} else {
-						tempHeading = actualHeading;
-					}
-				} else if (diff > 180 && diff < 360) {
-					if (diffAbs > 5) {
-						tempHeading = actualHeading - 2;
-					} else if (diffAbs > 1) {
-						tempHeading = actualHeading - 1;
-					} else {
-						tempHeading = actualHeading;
-					}
-				} else {
-					tempHeading = actualHeading;
-				}
-
-				if (tempAzimuth >= 360) {
-					tempAzimuth = tempAzimuth - 360;
-				} else if (tempAzimuth < 0) {
-					tempAzimuth = tempAzimuth + 360;
-				}
-
-				if (tempHeading >= 360) {
-					tempHeading = tempHeading - 360;
-				} else if (tempHeading < 0) {
-					tempHeading = tempHeading + 360;
-				}
-
-				azimuth = tempAzimuth;
-				heading = tempHeading;
-
+				azimuth = smoothUpdate(northHeading, azimuth);
+				heading = smoothUpdate(cacheHeading, heading);
 				lock = false;
 
 				changeHandler.sendMessage(new Message());
