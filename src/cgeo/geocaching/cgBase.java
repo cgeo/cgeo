@@ -2876,7 +2876,6 @@ public class cgBase {
 				cacheList.add(app.getCacheByGeocode(geocode));
 				search.addGeocode(geocode);
 				search.error = null;
-				search.errorRetrieve = 0; // reset errors from previous failed request
 
 				app.addSearch(search, cacheList, false, reason);
 

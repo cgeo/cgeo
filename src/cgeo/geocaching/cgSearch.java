@@ -7,7 +7,6 @@ public class cgSearch {
 	private Long id = null;
 	private List<String> geocodes = new ArrayList<String>();
 
-	public int errorRetrieve = 0;
 	public String error = null;
 	public String url = "";
 	public String[] viewstates = null;
