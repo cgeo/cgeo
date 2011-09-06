@@ -1,5 +1,7 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import java.util.UUID;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -27,7 +29,7 @@ class RadarApp extends AbstractNavigationApp implements NavigationApp {
 	@Override
 	public boolean invoke(cgGeo geo, Activity activity, Resources res,
 			cgCache cache,
-			Long searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
+			final UUID searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
 		if (cache != null) {
 			if (cache.latitude != null && cache.longitude != null) {
 				navigateTo(activity, cache.latitude, cache.longitude);

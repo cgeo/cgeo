@@ -31,5 +31,10 @@
 	<target name="uninstall" description="Uninstall application">
 		<ant antfile="${cgeo.buildxml}" target="uninstall"/>
     </target>
-
+	
+	<target name="install_release" description="Install signed release application" depends="release">
+		<exec executable="${sdk.dir}/platform-tools/adb">
+			<arg line="install -r ./bin/cgeo-release.apk" />
+		</exec>
+	</target>
 </project>

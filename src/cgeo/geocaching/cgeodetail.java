@@ -6,8 +6,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Map.Entry;
+import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -68,7 +71,7 @@ public class cgeodetail extends AbstractActivity {
 		super("c:geo-cache-details");
 	}
 
-	public Long searchId = null;
+	public UUID searchId = null;
 	public cgCache cache = null;
 	public String geocode = null;
 	public String name = null;
@@ -92,7 +95,7 @@ public class cgeodetail extends AbstractActivity {
 	private ProgressDialog dropDialog = null;
 	private ProgressDialog watchlistDialog = null; // progress dialog for watchlist add/remove
 	private Thread watchlistThread = null; // thread for watchlist add/remove
-	private HashMap<Integer, String> calendars = new HashMap<Integer, String>();
+	private Map<Integer, String> calendars = new HashMap<Integer, String>();
 
 	private ViewGroup attributeIconsLayout; // layout for attribute icons
 	private ViewGroup attributeDescriptionsLayout; // layout for attribute descriptions
@@ -161,7 +164,7 @@ public class cgeodetail extends AbstractActivity {
 	private Handler loadCacheHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			if (searchId == null || searchId <= 0) {
+			if (searchId == null) {
 				showToast(res.getString(R.string.err_dwld_details_failed));
 
 				finish();
@@ -571,7 +574,7 @@ public class cgeodetail extends AbstractActivity {
 			geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
 		}
 
-		if (searchId != null && searchId > 0) {
+		if (searchId != null) {
 			cache = app.getCache(searchId);
 			if (cache != null && cache.geocode != null) {
 				geocode = cache.geocode;
@@ -991,7 +994,7 @@ public class cgeodetail extends AbstractActivity {
 				LinearLayout waypointView;
 
 				// sort waypoints: PP, Sx, FI, OWN
-				ArrayList<cgWaypoint> sortedWaypoints = new ArrayList<cgWaypoint>(cache.waypoints);
+				List<cgWaypoint> sortedWaypoints = new ArrayList<cgWaypoint>(cache.waypoints);
 				Collections.sort(sortedWaypoints, new Comparator<cgWaypoint>() {
 
 					@Override
@@ -1137,7 +1140,7 @@ public class cgeodetail extends AbstractActivity {
 			buff.append(": ");
 
 			// sort the log counts by type id ascending. that way the FOUND, DNF log types are the first and most visible ones
-			ArrayList<Entry<Integer, Integer>> sortedLogCounts = new ArrayList<Entry<Integer,Integer>>();
+			List<Entry<Integer, Integer>> sortedLogCounts = new ArrayList<Entry<Integer,Integer>>();
 			sortedLogCounts.addAll(cache.logCounts.entrySet());
 			Collections.sort(sortedLogCounts, new Comparator<Entry<Integer, Integer>>() {
 
@@ -1303,7 +1306,7 @@ public class cgeodetail extends AbstractActivity {
 
 		@Override
 		public void run() {
-			HashMap<String, String> params = new HashMap<String, String>();
+			Map<String, String> params = new HashMap<String, String>();
 			if (StringUtils.isNotBlank(geocode)) {
 				params.put("geocode", geocode);
 			} else if (StringUtils.isNotBlank(guid)) {
@@ -1379,9 +1382,9 @@ public class cgeodetail extends AbstractActivity {
 		}
 	}
 
-	public ArrayList<cgCoord> getCoordinates() {
+	public List<cgCoord> getCoordinates() {
 		cgCoord coords = null;
-		ArrayList<cgCoord> coordinates = new ArrayList<cgCoord>();
+		List<cgCoord> coordinates = new ArrayList<cgCoord>();
 
 		try {
 			// cache
@@ -1669,9 +1672,16 @@ public class cgeodetail extends AbstractActivity {
 		public void onClick(View arg0) {
 			// show list of trackables
 			try {
-				Intent trackablesIntent = new Intent(cgeodetail.this, cgeotrackables.class);
-				trackablesIntent.putExtra("geocode", geocode.toUpperCase());
-				startActivity(trackablesIntent);
+				// jump directly into details if there is only one trackable
+				if (cache != null && cache.inventory != null && cache.inventory.size() == 1) {
+					cgTrackable trackable = cache.inventory.get(0);
+					cgeotrackable.startActivity(cgeodetail.this, trackable.guid, trackable.geocode, trackable.name);
+				}
+				else {
+					Intent trackablesIntent = new Intent(cgeodetail.this, cgeotrackables.class);
+					trackablesIntent.putExtra("geocode", geocode.toUpperCase());
+					startActivity(trackablesIntent);
+				}
 			} catch (Exception e) {
 				Log.e(cgSettings.tag, "cgeodetail.selectTrackable: " + e.toString());
 			}
@@ -1749,7 +1759,7 @@ public class cgeodetail extends AbstractActivity {
 		public void run() {
 			app.removeCacheFromCache(geocode);
 
-			final HashMap<String, String> params = new HashMap<String, String>();
+			final Map<String, String> params = new HashMap<String, String>();
 			params.put("geocode", cache.geocode);
 			searchId = base.searchByGeocode(params, 0, true);
 

@@ -1,5 +1,7 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import java.util.UUID;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -26,7 +28,7 @@ class StaticMapApp extends AbstractNavigationApp implements
 	@Override
 	public boolean invoke(cgGeo geo, Activity activity, Resources res,
 			cgCache cache,
-			Long searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
+			final UUID searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
 
 		if (cache == null || cache.reason == 0) {
 			ActivityMixin.showToast(activity, res.getString(R.string.err_detail_no_map_static));

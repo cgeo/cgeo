@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -32,7 +33,7 @@ public class cgeoimages extends AbstractActivity {
 	public static final int SPOILER_IMAGE = 2;
 
 	private int img_type;
-	private ArrayList<cgImage> images = new ArrayList<cgImage>();
+	private List<cgImage> images = new ArrayList<cgImage>();
 	private String geocode = null;
 	private String title = null;
 	private String url = null;

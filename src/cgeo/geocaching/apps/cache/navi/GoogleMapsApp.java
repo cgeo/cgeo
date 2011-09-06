@@ -1,5 +1,7 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import java.util.UUID;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -26,7 +28,7 @@ class GoogleMapsApp extends AbstractNavigationApp implements NavigationApp {
 
 	public boolean invoke(cgGeo geo, Activity activity, Resources res,
 			cgCache cache,
-			Long searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
+			final UUID searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
 		if (cache == null && waypoint == null && latitude == null && longitude == null) {
 			return false;
 		}

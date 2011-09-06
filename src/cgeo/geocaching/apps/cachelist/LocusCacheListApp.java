@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -25,13 +26,13 @@ class LocusCacheListApp extends AbstractLocusApp implements CacheListApp {
 	}
 
 	@Override
-	public boolean invoke(cgGeo geo, List<cgCache> cacheList, Activity activity, Resources res, final Long searchId) {
+	public boolean invoke(cgGeo geo, List<cgCache> cacheList, Activity activity, Resources res, final UUID searchId) {
 		if (cacheList == null || cacheList.isEmpty()) {
 			return false;
 		}
 
 		try {
-			final ArrayList<cgCache> cacheListCoord = new ArrayList<cgCache>();
+			final List<cgCache> cacheListCoord = new ArrayList<cgCache>();
 			for (cgCache cache : cacheList) {
 				if (cache.latitude != null && cache.longitude != null) {
 					cacheListCoord.add(cache);

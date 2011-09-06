@@ -1,9 +1,9 @@
 package cgeo.geocaching;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import cgeo.geocaching.activity.AbstractActivity;
 
 public class cgeotrackables extends AbstractActivity {
-	private ArrayList<cgTrackable> trackables = new ArrayList<cgTrackable>();
+	private List<cgTrackable> trackables = new ArrayList<cgTrackable>();
 	private String geocode = null;
 	private LayoutInflater inflater = null;
 	private LinearLayout addList = null;
@@ -41,6 +41,11 @@ public class cgeotrackables extends AbstractActivity {
 
 					showToast("Sorry, c:geo failed to load cache inventory.");
 
+					finish();
+					return;
+				} else if (trackables.size() == 1){
+					cgTrackable trackable = trackables.get(0);
+					cgeotrackable.startActivity(cgeotrackables.this, trackable.guid, trackable.geocode, trackable.name);
 					finish();
 					return;
 				} else {
@@ -139,13 +144,7 @@ public class cgeotrackables extends AbstractActivity {
 		}
 
 		public void onClick(View arg0) {
-			Intent trackableIntent = new Intent(cgeotrackables.this, cgeotrackable.class);
-			trackableIntent.putExtra("guid", guid);
-			trackableIntent.putExtra("geocode", geocode);
-			trackableIntent.putExtra("name", name);
-			startActivity(trackableIntent);
-
-			finish();
+			cgeotrackable.startActivity(cgeotrackables.this, guid, geocode, name);
 			return;
 		}
 	}
