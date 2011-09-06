@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -70,7 +71,7 @@ public class cgeodetail extends AbstractActivity {
 		super("c:geo-cache-details");
 	}
 
-	public Long searchId = null;
+	public UUID searchId = null;
 	public cgCache cache = null;
 	public String geocode = null;
 	public String name = null;
@@ -163,7 +164,7 @@ public class cgeodetail extends AbstractActivity {
 	private Handler loadCacheHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			if (searchId == null || searchId <= 0) {
+			if (searchId == null) {
 				showToast(res.getString(R.string.err_dwld_details_failed));
 
 				finish();
@@ -573,7 +574,7 @@ public class cgeodetail extends AbstractActivity {
 			geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
 		}
 
-		if (searchId != null && searchId > 0) {
+		if (searchId != null) {
 			cache = app.getCache(searchId);
 			if (cache != null && cache.geocode != null) {
 				geocode = cache.geocode;

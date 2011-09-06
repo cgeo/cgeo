@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -31,13 +32,13 @@ import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgDirection;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.cgUpdateDir;
 import cgeo.geocaching.cgUpdateLoc;
 import cgeo.geocaching.cgUser;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.mapinterfaces.ActivityImpl;
 import cgeo.geocaching.mapinterfaces.CacheOverlayItemImpl;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
@@ -76,14 +77,14 @@ public class cgeomap extends MapBase implements OnDragListener {
 	private cgUpdateDir dirUpdate = new UpdateDir();
 	// from intent
 	private boolean fromDetailIntent = false;
-	private Long searchIdIntent = null;
+	private String searchIdIntent = null;
 	private String geocodeIntent = null;
 	private Double latitudeIntent = null;
 	private Double longitudeIntent = null;
 	private String waypointTypeIntent = null;
 	private int[] mapStateIntent = null;
 	// status data
-	private Long searchId = null;
+	private UUID searchId = null;
 	private String token = null;
 	private boolean noMapTokenShowed = false;
 	// map status data
@@ -305,14 +306,14 @@ public class cgeomap extends MapBase implements OnDragListener {
 		Bundle extras = activity.getIntent().getExtras();
 		if (extras != null) {
 			fromDetailIntent = extras.getBoolean("detail");
-			searchIdIntent = extras.getLong("searchid");
+			searchIdIntent = extras.getString("searchid");
 			geocodeIntent = extras.getString("geocode");
 			latitudeIntent = extras.getDouble("latitude");
 			longitudeIntent = extras.getDouble("longitude");
 			waypointTypeIntent = extras.getString("wpttype");
 			mapStateIntent = extras.getIntArray("mapstate");
 
-			if (searchIdIntent == 0L) {
+			if ("".equals(searchIdIntent)) {
 				searchIdIntent = null;
 			}
 			if (latitudeIntent == 0.0) {
@@ -1064,7 +1065,7 @@ public class cgeomap extends MapBase implements OnDragListener {
 				// stage 1 - pull and render from the DB only
 
 				if (fromDetailIntent) {
-					searchId = searchIdIntent;
+					searchId = UUID.fromString(searchIdIntent);
 				} else {
 					if (!live || settings.maplive == 0) {
 						searchId = app.getStoredInViewport(centerLat, centerLon, spanLat, spanLon, settings.cacheType);
@@ -1637,7 +1638,7 @@ public class cgeomap extends MapBase implements OnDragListener {
 	}
 
 	// move map to view results of searchIdIntent
-	private void centerMap(String geocodeCenter, Long searchIdCenter, Double latitudeCenter, Double longitudeCenter, int[] mapState) {
+	private void centerMap(String geocodeCenter, String searchIdCenter, Double latitudeCenter, Double longitudeCenter, int[] mapState) {
 
 		if (!centered && mapState != null) {
 			try {

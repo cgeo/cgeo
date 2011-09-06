@@ -32,6 +32,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
@@ -2737,7 +2738,7 @@ public class cgBase {
 		}
 	}
 
-	public Long searchByNextPage(cgSearchThread thread, Long searchId, int reason, boolean showCaptcha) {
+	public UUID searchByNextPage(cgSearchThread thread, final UUID searchId, int reason, boolean showCaptcha) {
 		final String[] viewstates = app.getViewstates(searchId);
 		cgCacheWrap caches = new cgCacheWrap();
 		String url = app.getUrl(searchId);
@@ -2822,7 +2823,7 @@ public class cgBase {
 		return searchId;
 	}
 
-	public Long searchByGeocode(Map<String, String> parameters, int reason, boolean forceReload) {
+	public UUID searchByGeocode(Map<String, String> parameters, int reason, boolean forceReload) {
 		final cgSearch search = new cgSearch();
 		String geocode = parameters.get("geocode");
 		String guid = parameters.get("guid");
@@ -2876,7 +2877,6 @@ public class cgBase {
 				cacheList.add(app.getCacheByGeocode(geocode));
 				search.addGeocode(geocode);
 				search.error = null;
-				search.errorRetrieve = 0; // reset errors from previous failed request
 
 				app.addSearch(search, cacheList, false, reason);
 
@@ -2919,7 +2919,7 @@ public class cgBase {
 		return search.getCurrentId();
 	}
 
-	public Long searchByOffline(Map<String, Object> parameters) {
+	public UUID searchByOffline(Map<String, Object> parameters) {
 		if (app == null) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByOffline: No application found");
 			return null;
@@ -2949,7 +2949,7 @@ public class cgBase {
 		return search.getCurrentId();
 	}
 
-	public Long searchByHistory(Map<String, Object> parameters) {
+	public UUID searchByHistory(Map<String, Object> parameters) {
 		if (app == null) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByHistory: No application found");
 			return null;
@@ -2967,7 +2967,7 @@ public class cgBase {
 		return search.getCurrentId();
 	}
 
-	public Long searchByCoords(cgSearchThread thread, Map<String, String> parameters, int reason, boolean showCaptcha) {
+	public UUID searchByCoords(cgSearchThread thread, Map<String, String> parameters, int reason, boolean showCaptcha) {
 		final cgSearch search = new cgSearch();
 		final String latitude = parameters.get("latitude");
 		final String longitude = parameters.get("longitude");
@@ -3025,7 +3025,7 @@ public class cgBase {
 		return search.getCurrentId();
 	}
 
-	public Long searchByKeyword(cgSearchThread thread, Map<String, String> parameters, int reason, boolean showCaptcha) {
+	public UUID searchByKeyword(cgSearchThread thread, Map<String, String> parameters, int reason, boolean showCaptcha) {
 		final cgSearch search = new cgSearch();
 		final String keyword = parameters.get("keyword");
 		cgCacheWrap caches = new cgCacheWrap();
@@ -3076,7 +3076,7 @@ public class cgBase {
 		return search.getCurrentId();
 	}
 
-	public Long searchByUsername(cgSearchThread thread, Map<String, String> parameters, int reason, boolean showCaptcha) {
+	public UUID searchByUsername(cgSearchThread thread, Map<String, String> parameters, int reason, boolean showCaptcha) {
 		final cgSearch search = new cgSearch();
 		final String userName = parameters.get("username");
 		cgCacheWrap caches = new cgCacheWrap();
@@ -3133,7 +3133,7 @@ public class cgBase {
 		return search.getCurrentId();
 	}
 
-	public Long searchByOwner(cgSearchThread thread, Map<String, String> parameters, int reason, boolean showCaptcha) {
+	public UUID searchByOwner(cgSearchThread thread, Map<String, String> parameters, int reason, boolean showCaptcha) {
 		final cgSearch search = new cgSearch();
 		final String userName = parameters.get("username");
 		cgCacheWrap caches = new cgCacheWrap();
@@ -3184,7 +3184,7 @@ public class cgBase {
 		return search.getCurrentId();
 	}
 
-	public Long searchByViewport(Map<String, String> parameters, int reason) {
+	public UUID searchByViewport(Map<String, String> parameters, int reason) {
 		final cgSearch search = new cgSearch();
 		final String latMin = parameters.get("latitude-min");
 		final String latMax = parameters.get("latitude-max");
@@ -4578,13 +4578,13 @@ public class cgBase {
 				if (cache.reason > 0 || StringUtils.isBlank(cache.description)) {
 					final Map<String, String> params = new HashMap<String, String>();
 					params.put("geocode", cache.geocode);
-					final Long searchId = searchByGeocode(params, listId, false);
+					final UUID searchId = searchByGeocode(params, listId, false);
 					cache = app.getCache(searchId);
 				}
 			} else if (StringUtils.isNotBlank(geocode)) {
 				final Map<String, String> params = new HashMap<String, String>();
 				params.put("geocode", geocode);
-				final Long searchId = searchByGeocode(params, listId, false);
+				final UUID searchId = searchByGeocode(params, listId, false);
 				cache = app.getCache(searchId);
 			}
 

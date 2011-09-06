@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -108,7 +109,7 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
 
 		@Override
 		public void run() {
-			final long searchId;
+			final UUID searchId;
 			String name = file.getName().toLowerCase();
 			if (name.endsWith("gpx")) {
 				searchId = GPXParser.parseGPX(app, file, listId, changeParseDialogHandler);

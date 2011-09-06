@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -25,7 +26,7 @@ public class cgeoapplication extends Application {
 	private boolean geoInUse = false;
 	private cgDirection dir = null;
 	private boolean dirInUse = false;
-	final private Map<Long, cgSearch> searches = new HashMap<Long, cgSearch>(); // information about searches
+	final private Map<UUID, cgSearch> searches = new HashMap<UUID, cgSearch>(); // information about searches
 	final private Map<String, cgCache> cachesCache = new HashMap<String, cgCache>(); // caching caches into memory
 	public boolean firstRun = true; // c:geo is just launched
 	public boolean warnedLanguage = false; // user was warned about different language settings on geocaching.com
@@ -225,7 +226,7 @@ public class cgeoapplication extends Application {
 		return storage.getCacheidForGeocode(geocode);
 	}
 
-	public String getError(Long searchId) {
+	public String getError(final UUID searchId) {
 		if (searchId == null || searches.containsKey(searchId) == false) {
 			return null;
 		}
@@ -233,7 +234,7 @@ public class cgeoapplication extends Application {
 		return searches.get(searchId).error;
 	}
 
-	public boolean setError(Long searchId, String error) {
+	public boolean setError(final UUID searchId, String error) {
 		if (searchId == null || searches.containsKey(searchId) == false) {
 			return false;
 		}
@@ -243,7 +244,7 @@ public class cgeoapplication extends Application {
 		return true;
 	}
 
-	public String getUrl(Long searchId) {
+	public String getUrl(final UUID searchId) {
 		if (searchId == null || searches.containsKey(searchId) == false) {
 			return null;
 		}
@@ -251,7 +252,7 @@ public class cgeoapplication extends Application {
 		return searches.get(searchId).url;
 	}
 
-	public boolean setUrl(Long searchId, String url) {
+	public boolean setUrl(final UUID searchId, String url) {
 		if (searchId == null || searches.containsKey(searchId) == false) {
 			return false;
 		}
@@ -261,7 +262,7 @@ public class cgeoapplication extends Application {
 		return true;
 	}
 
-	public String[] getViewstates(Long searchId) {
+	public String[] getViewstates(final UUID searchId) {
 		if (searchId == null || searches.containsKey(searchId) == false) {
 			return null;
 		}
@@ -269,7 +270,7 @@ public class cgeoapplication extends Application {
 		return searches.get(searchId).viewstates;
 	}
 
-	public boolean setViewstates(Long searchId, String[] viewstates) {
+	public boolean setViewstates(final UUID searchId, String[] viewstates) {
 		if (ArrayUtils.isEmpty(viewstates)) {
 			return false;
 		}
@@ -282,7 +283,7 @@ public class cgeoapplication extends Application {
 		return true;
 	}
 
-	public Integer getTotal(Long searchId) {
+	public Integer getTotal(final UUID searchId) {
 		if (searchId == null || searches.containsKey(searchId) == false) {
 			return null;
 		}
@@ -290,7 +291,7 @@ public class cgeoapplication extends Application {
 		return searches.get(searchId).totalCnt;
 	}
 
-	public Integer getCount(Long searchId) {
+	public Integer getCount(final UUID searchId) {
 		if (searchId == null || searches.containsKey(searchId) == false) {
 			return 0;
 		}
@@ -298,7 +299,7 @@ public class cgeoapplication extends Application {
 		return searches.get(searchId).getCount();
 	}
 
-	public Integer getNotOfflineCount(Long searchId) {
+	public Integer getNotOfflineCount(final UUID searchId) {
 		if (searchId == null || searches.containsKey(searchId) == false) {
 			return 0;
 		}
@@ -401,7 +402,7 @@ public class cgeoapplication extends Application {
 		return getBounds(geocodeList);
 	}
 
-	public List<Object> getBounds(Long searchId) {
+	public List<Object> getBounds(final UUID searchId) {
 		if (searchId == null || searches.containsKey(searchId) == false) {
 			return null;
 		}
@@ -428,7 +429,7 @@ public class cgeoapplication extends Application {
 		return storage.getBounds(geocodes.toArray());
 	}
 
-	public cgCache getCache(Long searchId) {
+	public cgCache getCache(final UUID searchId) {
 		if (searchId == null || searches.containsKey(searchId) == false) {
 			return null;
 		}
@@ -439,19 +440,19 @@ public class cgeoapplication extends Application {
 		return getCacheByGeocode(geocodeList.get(0), true, true, true, true, true, true);
 	}
 
-	public List<cgCache> getCaches(Long searchId) {
+	public List<cgCache> getCaches(final UUID searchId) {
 		return getCaches(searchId, null, null, null, null, false, true, false, false, false, true);
 	}
 
-	public List<cgCache> getCaches(Long searchId, boolean loadA, boolean loadW, boolean loadS, boolean loadL, boolean loadI, boolean loadO) {
+	public List<cgCache> getCaches(final UUID searchId, boolean loadA, boolean loadW, boolean loadS, boolean loadL, boolean loadI, boolean loadO) {
 		return getCaches(searchId, null, null, null, null, loadA, loadW, loadS, loadL, loadI, loadO);
 	}
 
-	public List<cgCache> getCaches(Long searchId, Long centerLat, Long centerLon, Long spanLat, Long spanLon) {
+	public List<cgCache> getCaches(final UUID searchId, Long centerLat, Long centerLon, Long spanLat, Long spanLon) {
 		return getCaches(searchId, centerLat, centerLon, spanLat, spanLon, false, true, false, false, false, true);
 	}
 
-	public List<cgCache> getCaches(Long searchId, Long centerLat, Long centerLon, Long spanLat, Long spanLon, boolean loadA, boolean loadW, boolean loadS, boolean loadL, boolean loadI, boolean loadO) {
+	public List<cgCache> getCaches(final UUID searchId, Long centerLat, Long centerLon, Long spanLat, Long spanLon, boolean loadA, boolean loadW, boolean loadS, boolean loadL, boolean loadI, boolean loadO) {
 		if (searchId == null || searches.containsKey(searchId) == false) {
 			List<cgCache> cachesOut = new ArrayList<cgCache>();
 
@@ -523,7 +524,7 @@ public class cgeoapplication extends Application {
 		return search;
 	}
 
-	public Long getCachedInViewport(Long centerLat, Long centerLon, Long spanLat, Long spanLon, String cachetype) {
+	public UUID getCachedInViewport(Long centerLat, Long centerLon, Long spanLat, Long spanLon, String cachetype) {
 		if (storage == null) {
 			storage = new cgData(this);
 		}
@@ -540,7 +541,7 @@ public class cgeoapplication extends Application {
 		return search.getCurrentId();
 	}
 
-	public Long getStoredInViewport(Long centerLat, Long centerLon, Long spanLat, Long spanLon, String cachetype) {
+	public UUID getStoredInViewport(Long centerLat, Long centerLon, Long spanLat, Long spanLon, String cachetype) {
 		if (storage == null) {
 			storage = new cgData(this);
 		}
@@ -557,7 +558,7 @@ public class cgeoapplication extends Application {
 		return search.getCurrentId();
 	}
 
-	public Long getOfflineAll(String cachetype) {
+	public UUID getOfflineAll(String cachetype) {
 		if (storage == null) {
 			storage = new cgData(this);
 		}
@@ -659,7 +660,7 @@ public class cgeoapplication extends Application {
 		return storage.saveInventory("---", list);
 	}
 
-	public void addGeocode(Long searchId, String geocode) {
+	public void addGeocode(final UUID searchId, String geocode) {
 		if (this.searches.containsKey(searchId) == false || StringUtils.isBlank(geocode)) {
 			return;
 		}
@@ -667,7 +668,7 @@ public class cgeoapplication extends Application {
 		this.searches.get(searchId).addGeocode(geocode);
 	}
 
-	public Long addSearch(Long searchId, List<cgCache> cacheList, Boolean newItem, int reason) {
+	public UUID addSearch(final UUID searchId, List<cgCache> cacheList, Boolean newItem, int reason) {
 		if (this.searches.containsKey(searchId) == false) {
 			return null;
 		}
@@ -677,12 +678,12 @@ public class cgeoapplication extends Application {
 		return addSearch(search, cacheList, newItem, reason);
 	}
 
-	public Long addSearch(final cgSearch search, final List<cgCache> cacheList, final boolean newItem, final int reason) {
+	public UUID addSearch(final cgSearch search, final List<cgCache> cacheList, final boolean newItem, final int reason) {
 		if (CollectionUtils.isEmpty(cacheList)) {
 			return null;
 		}
 
-		final long searchId = search.getCurrentId();
+		final UUID searchId = search.getCurrentId();
 		searches.put(searchId, search);
 
 		if (storage == null) {
@@ -714,7 +715,7 @@ public class cgeoapplication extends Application {
 			return false;
 		}
 
-		final long searchId = search.getCurrentId();
+		final UUID searchId = search.getCurrentId();
 
 		if (searches.containsKey(searchId) == false) {
 			searches.put(searchId, search);
