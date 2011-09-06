@@ -29,7 +29,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,11 +36,12 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -2530,7 +2530,7 @@ public class cgeocaches extends AbstractListActivity {
 			return;
 		}
 
-		Intent mapIntent = new Intent(this, settings.getMapFactory().getMapClass());
+		Intent mapIntent = new Intent(this, settings.getMapClass());
 		mapIntent.putExtra("detail", false);
 		mapIntent.putExtra("searchid", searchId);
 

@@ -21,7 +21,7 @@ class InternalMap extends AbstractInternalMap implements
 			cgCache cache,
 			Long searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
 		cgSettings settings = getSettings(activity);
-		Intent mapIntent = new Intent(activity, settings.getMapFactory().getMapClass());
+		Intent mapIntent = new Intent(activity, settings.getMapClass());
 		if (cache != null) {
 			mapIntent.putExtra("detail", false);
 			mapIntent.putExtra("geocode", cache.geocode);

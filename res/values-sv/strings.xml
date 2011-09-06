@@ -436,9 +436,11 @@
   <string name="init_sigautoinsert">Infoga signatur automatiskt i loggar</string>
 
   <!-- map sources -->
-  <string-array name="map_sources">
+  <string-array name="map_sources_google">
     <item>Google: Map</item>
     <item>Google: Satellit</item>
+  </string-array>
+  <string-array name="map_sources_mapsforge">
     <item>OSM: Mapnik</item>
     <item>OSM: Osmarender</item>
     <item>OSM: Cyclemap</item>

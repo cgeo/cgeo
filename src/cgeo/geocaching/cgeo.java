@@ -587,7 +587,7 @@ public class cgeo extends AbstractActivity {
 	private class cgeoFindOnMapListener implements View.OnClickListener {
 
 		public void onClick(View arg0) {
-			context.startActivity(new Intent(context, settings.getMapFactory().getMapClass()));
+			context.startActivity(new Intent(context, settings.getMapClass()));
 		}
 	}
 

@@ -24,8 +24,7 @@ class InternalCacheListMap extends AbstractApp implements CacheListApp {
 
 	@Override
 	public boolean invoke(cgGeo geo, List<cgCache> caches, Activity activity, Resources res, Long searchId) {
-		Intent mapIntent = new Intent(activity, getSettings(activity).getMapFactory()
-				.getMapClass());
+		Intent mapIntent = new Intent(activity, getSettings(activity).getMapClass());
 		mapIntent.putExtra("detail", false); // this is the main difference to the activity for a single point
 		mapIntent.putExtra("searchid", searchId);
 
