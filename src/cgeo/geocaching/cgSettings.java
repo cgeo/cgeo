@@ -155,7 +155,7 @@ public class cgSettings {
     public boolean signatureAutoinsert = false;
 
 	// usable values
-	public static final String tag = "c:geo";
+	public static final String tag = "cgeo";
 
 	/** Name of the preferences file */
 	public static final String preferences = "cgeo.pref";
