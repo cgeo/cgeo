@@ -175,6 +175,9 @@ public class googleMapView extends MapView implements MapViewImpl {
 		@Override
 		public boolean onDoubleTap(MotionEvent e) {
 			getController().zoomInFixing((int) e.getX(), (int) e.getY());
+			if (onDragListener != null) {
+				onDragListener.onDrag();
+			}
 			return true;
 		}
 
