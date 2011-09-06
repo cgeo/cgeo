@@ -23,10 +23,10 @@ public class cgCompass extends View {
 	private Bitmap compassRose = null;
 	private Bitmap compassArrow = null;
 	private Bitmap compassOverlay = null;
-	private Double azimuth = Double.valueOf(0);
-	private Double heading = Double.valueOf(0);
-	private Double cacheHeading = Double.valueOf(0);
-	private Double northHeading = Double.valueOf(0);
+	private double azimuth = 0.0;
+	private double heading = 0.0;
+	private double cacheHeading = 0.0;
+	private double northHeading = 0.0;
 	private PaintFlagsDrawFilter setfil = null;
 	private PaintFlagsDrawFilter remfil = null;
 	private int compassUnderlayWidth = 0;
@@ -105,7 +105,7 @@ public class cgCompass extends View {
 		}
 	}
 
-	protected void updateNorth(Double northHeadingIn, Double cacheHeadingIn) {
+	protected void updateNorth(double northHeadingIn, double cacheHeadingIn) {
 		northHeading = northHeadingIn;
 		cacheHeading = cacheHeadingIn;
 	}
@@ -127,13 +127,13 @@ public class cgCompass extends View {
 
 				lock = true;
 
-				Double diff = Double.valueOf(0);
-				Double diffAbs = Double.valueOf(0);
-				Double tempAzimuth = Double.valueOf(0);
-				Double tempHeading = Double.valueOf(0);
+				double diff = 0.0;
+				double diffAbs = 0.0;
+				double tempAzimuth = 0.0;
+				double tempHeading = 0.0;
 
-				Double actualAzimuth = azimuth;
-				Double actualHeading = heading;
+				final double actualAzimuth = azimuth;
+				final double actualHeading = heading;
 
 				diff = northHeading - actualAzimuth;
 				diffAbs = Math.abs(northHeading - actualAzimuth);
@@ -222,8 +222,8 @@ public class cgCompass extends View {
 			return;
 		}
 
-		Double azimuthTemp = azimuth;
-		Double azimuthRelative = azimuthTemp - heading;
+		double azimuthTemp = azimuth;
+		double azimuthRelative = azimuthTemp - heading;
 		if (azimuthRelative < 0) {
 			azimuthRelative = azimuthRelative + 360;
 		} else if (azimuthRelative >= 360) {
@@ -251,16 +251,16 @@ public class cgCompass extends View {
 		marginLeftTemp = (getWidth() - compassRoseWidth) / 2;
 		marginTopTemp = (getHeight() - compassRoseHeight) / 2;
 
-		canvas.rotate(-(azimuthTemp.floatValue()), canvasCenterX, canvasCenterY);
+		canvas.rotate((float) -azimuthTemp, canvasCenterX, canvasCenterY);
 		canvas.drawBitmap(compassRose, marginLeftTemp, marginTopTemp, null);
-		canvas.rotate(azimuthTemp.floatValue(), canvasCenterX, canvasCenterY);
+		canvas.rotate((float) azimuthTemp, canvasCenterX, canvasCenterY);
 
 		marginLeftTemp = (getWidth() - compassArrowWidth) / 2;
 		marginTopTemp = (getHeight() - compassArrowHeight) / 2;
 
-		canvas.rotate(-(azimuthRelative.floatValue()), canvasCenterX, canvasCenterY);
+		canvas.rotate((float) -azimuthRelative, canvasCenterX, canvasCenterY);
 		canvas.drawBitmap(compassArrow, marginLeftTemp, marginTopTemp, null);
-		canvas.rotate(azimuthRelative.floatValue(), canvasCenterX, canvasCenterY);
+		canvas.rotate((float) azimuthRelative, canvasCenterX, canvasCenterY);
 
 		marginLeftTemp = (getWidth() - compassOverlayWidth) / 2;
 		marginTopTemp = (getHeight() - compassOverlayHeight) / 2;
