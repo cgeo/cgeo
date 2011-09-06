@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class cgSearch {
-	private Long id = null;
+	private long id;
 	private List<String> geocodes = new ArrayList<String>();
 
 	public String error = null;
@@ -16,7 +16,7 @@ public class cgSearch {
 		id = System.currentTimeMillis(); // possible collisions here - not guaranteed to be unique 
 	}
 
-	public Long getCurrentId() {
+	public long getCurrentId() {
 		return id;
 	}
 
