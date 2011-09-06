@@ -12,9 +12,8 @@
 		<ProgressBar style="@style/action_bar_progress"
 				android:visibility="gone" />
 		<View style="@style/action_bar_separator" />
-		<ImageView style="@style/action_bar_action"
-				android:id="@+id/my_position"
-				android:src="@drawable/actionbar_mylocation_on" />
+		<ImageSwitcher style="@style/action_bar_action"
+				android:id="@+id/my_position" />
 		<View style="@style/action_bar_separator" />
 		<ImageView style="@style/action_bar_action"
 				android:src="@drawable/actionbar_manual"
