@@ -39,8 +39,8 @@ public abstract class FileParser {
 	}
 
 	protected static void fixCache(cgCache cache) {
-		cache.latitudeString = cgBase.formatLatitude(cache.latitude, true);
-		cache.longitudeString = cgBase.formatLongitude(cache.longitude, true);
+		cache.latitudeString = cgBase.formatLatitude(cache.coords.getLatitude(), true);
+		cache.longitudeString = cgBase.formatLongitude(cache.coords.getLongitude(), true);
 		if (cache.inventory != null) {
 			cache.inventoryItems = cache.inventory.size();
 		} else {

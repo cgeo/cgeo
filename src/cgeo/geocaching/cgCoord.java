@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.geopoint.Geopoint;
+
 public class cgCoord {
 
 	public Integer id = null;
@@ -9,8 +11,7 @@ public class cgCoord {
 	public String name = "";
 	public boolean found = false;
 	public boolean disabled = false;
-	public Double latitude = Double.valueOf(0);
-	public Double longitude = Double.valueOf(0);
+	public Geopoint coords = new Geopoint(0, 0);
 	public Float difficulty = null;
 	public Float terrain = null;
 	public String size = null;
@@ -22,8 +23,7 @@ public class cgCoord {
 		disabled = cache.disabled;
 		found = cache.found;
 		geocode = cache.geocode;
-		latitude = cache.latitude;
-		longitude = cache.longitude;
+		coords = cache.coords;
 		name = cache.name;
 		type = "cache";
 		typeSpec = cache.type;
@@ -37,8 +37,7 @@ public class cgCoord {
 		disabled = false;
 		found = false;
 		geocode = "";
-		latitude = waypoint.latitude;
-		longitude = waypoint.longitude;
+		coords = waypoint.coords;
 		name = waypoint.name;
 		type = "waypoint";
 		typeSpec = waypoint.type;

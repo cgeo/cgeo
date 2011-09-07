@@ -14,14 +14,14 @@ import org.apache.commons.lang3.StringUtils;
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.CollectionUtils;
 
 public class cgeoapplication extends Application {
 
 	private cgData storage = null;
 	private String action = null;
-	private Double lastLatitude = null;
-	private Double lastLongitude = null;
+	private Geopoint lastCoords = null;
 	private cgGeo geo = null;
 	private boolean geoInUse = false;
 	private cgDirection dir = null;
@@ -789,17 +789,12 @@ public class cgeoapplication extends Application {
 		return storage.saveLogs(geocode, list, false);
 	}
 
-	public void setLastLoc(Double lat, Double lon) {
-		lastLatitude = lat;
-		lastLongitude = lon;
+	public void setLastLoc(final Geopoint coords) {
+		lastCoords = coords;
 	}
 
-	public Double getLastLat() {
-		return lastLatitude;
-	}
-
-	public Double getLastLon() {
-		return lastLongitude;
+	public Geopoint getLastCoords() {
+		return lastCoords;
 	}
 
 	public boolean saveLogOffline(String geocode, Date date, int logtype, String log) {

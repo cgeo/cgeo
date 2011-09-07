@@ -31,6 +31,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.CollectionUtils;
 
 public class cgeo extends AbstractActivity {
@@ -56,8 +57,7 @@ public class cgeo extends AbstractActivity {
 	private TextView countBubble = null;
 	private boolean cleanupRunning = false;
 	private int countBubbleCnt = 0;
-	private Double addLat = null;
-	private Double addLon = null;
+	private Geopoint addCoords = null;
 	private List<Address> addresses = null;
 	private boolean addressObtaining = false;
 	private boolean initialized = false;
@@ -106,8 +106,7 @@ public class cgeo extends AbstractActivity {
 						addText.append(address.getAdminArea());
 					}
 
-					addLat = geo.latitudeNow;
-					addLon = geo.longitudeNow;
+					addCoords = geo.coordsNow;
 
 					if (navLocation == null) {
 						navLocation = (TextView) findViewById(R.id.nav_location);
@@ -498,7 +497,7 @@ public class cgeo extends AbstractActivity {
 					navLocation = (TextView) findViewById(R.id.nav_location);
 				}
 
-				if (geo.latitudeNow != null && geo.longitudeNow != null) {
+				if (geo.coordsNow != null) {
 					View findNearest = findViewById(R.id.nearest);
 					findNearest.setClickable(true);
 					findNearest.setOnClickListener(new cgeoFindNearestListener());
@@ -533,10 +532,10 @@ public class cgeo extends AbstractActivity {
 					}
 
 					if (settings.showAddress == 1) {
-						if (addLat == null || addLon == null) {
+						if (addCoords == null) {
 							navLocation.setText(res.getString(R.string.loc_no_addr));
 						}
-						if (addLat == null || addLon == null || (cgBase.getDistance(geo.latitudeNow, geo.longitudeNow, addLat, addLon) > 0.5 && addressObtaining == false)) {
+						if (addCoords == null || (cgBase.getDistance(geo.coordsNow, addCoords) > 0.5 && addressObtaining == false)) {
 							(new obtainAddress()).start();
 						}
 					} else {
@@ -547,9 +546,9 @@ public class cgeo extends AbstractActivity {
 							} else {
 								humanAlt = String.format("%.0f", geo.altitudeNow) + " m";
 							}
-							navLocation.setText(cgBase.formatCoords(geo.latitudeNow, geo.longitudeNow, true) + " | " + humanAlt);
+							navLocation.setText(cgBase.formatCoords(geo.coordsNow, true) + " | " + humanAlt);
 						} else {
-							navLocation.setText(cgBase.formatCoords(geo.latitudeNow, geo.longitudeNow, true));
+							navLocation.setText(cgBase.formatCoords(geo.coordsNow, true));
 						}
 					}
 				} else {
@@ -578,8 +577,8 @@ public class cgeo extends AbstractActivity {
 
 			final Intent cachesIntent = new Intent(context, cgeocaches.class);
 			cachesIntent.putExtra("type", "nearest");
-			cachesIntent.putExtra("latitude", geo.latitudeNow);
-			cachesIntent.putExtra("longitude", geo.longitudeNow);
+			cachesIntent.putExtra("latitude", geo.coordsNow.getLatitude());
+			cachesIntent.putExtra("longitude", geo.coordsNow.getLongitude());
 			cachesIntent.putExtra("cachetype", settings.cacheType);
 			context.startActivity(cachesIntent);
 		}
@@ -693,7 +692,7 @@ public class cgeo extends AbstractActivity {
 			try {
 				Geocoder geocoder = new Geocoder(context, Locale.getDefault());
 
-				addresses = geocoder.getFromLocation(geo.latitudeNow, geo.longitudeNow, 1);
+				addresses = geocoder.getFromLocation(geo.coordsNow.getLatitude(), geo.coordsNow.getLongitude(), 1);
 			} catch (Exception e) {
 				Log.i(cgSettings.tag, "Failed to obtain address");
 			}

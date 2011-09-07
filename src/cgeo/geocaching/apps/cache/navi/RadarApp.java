@@ -9,6 +9,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.geopoint.Geopoint;
 
 class RadarApp extends AbstractNavigationApp implements NavigationApp {
 
@@ -19,31 +20,31 @@ class RadarApp extends AbstractNavigationApp implements NavigationApp {
 		super(res.getString(R.string.cache_menu_radar), INTENT, PACKAGE_NAME);
 	}
 
-	private static void navigateTo(Activity activity, Double latitude, Double longitude) {
+	private static void navigateTo(Activity activity, final Geopoint coords) {
 		Intent radarIntent = new Intent(INTENT);
-		radarIntent.putExtra("latitude", Float.valueOf(latitude.floatValue()));
-		radarIntent.putExtra("longitude", Float.valueOf(longitude.floatValue()));
+		radarIntent.putExtra("latitude", (float) coords.getLatitude());
+		radarIntent.putExtra("longitude", (float) coords.getLongitude());
 		activity.startActivity(radarIntent);
 	}
 
 	@Override
 	public boolean invoke(cgGeo geo, Activity activity, Resources res,
 			cgCache cache,
-			final UUID searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
+			final UUID searchId, cgWaypoint waypoint, final Geopoint coords) {
 		if (cache != null) {
-			if (cache.latitude != null && cache.longitude != null) {
-				navigateTo(activity, cache.latitude, cache.longitude);
+			if (cache.coords != null) {
+				navigateTo(activity, cache.coords);
 				return true;
 			}
 		}
 		if (waypoint != null) {
-			if (waypoint.latitude != null && waypoint.longitude != null) {
-				navigateTo(activity, waypoint.latitude, waypoint.longitude);
+			if (waypoint.coords != null) {
+				navigateTo(activity, waypoint.coords);
 				return true;
 			}
 		}
-		if (latitude != null && longitude != null) {
-			navigateTo(activity, latitude, longitude);
+		if (coords != null) {
+			navigateTo(activity, coords);
 			return true;
 		}
 		return false;

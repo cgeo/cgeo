@@ -20,6 +20,7 @@ import android.util.Log;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.geopoint.Geopoint;
 
 /**
  * Internal c:geo representation of a "cache"
@@ -53,8 +54,7 @@ public class cgCache implements ICache {
 	public String latitudeString = "";
 	public String longitudeString = "";
 	public String location = "";
-	public Double latitude = null;
-	public Double longitude = null;
+	public Geopoint coords = null;
 	public boolean reliableLatLon = false;
 	public Double elevation = null;
 	public String personalNote = null;
@@ -183,11 +183,8 @@ public class cgCache implements ICache {
 		if (StringUtils.isBlank(location)) {
 			location = oldCache.location;
 		}
-		if (latitude == null) {
-			latitude = oldCache.latitude;
-		}
-		if (longitude == null) {
-			longitude = oldCache.longitude;
+		if (coords == null) {
+			coords = oldCache.coords;
 		}
 		if (elevation == null) {
 			elevation = oldCache.elevation;

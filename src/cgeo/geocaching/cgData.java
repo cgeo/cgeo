@@ -30,6 +30,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Environment;
 import android.util.Log;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.CollectionUtils;
 
 public class cgData {
@@ -1197,12 +1198,12 @@ public class cgData {
 		// save coordinates
 		final boolean rel = isReliableLatLon(cache.geocode, cache.guid);
 		if (cache.reliableLatLon) { // new cache has reliable coordinates, store
-			values.put("latitude", cache.latitude);
-			values.put("longitude", cache.longitude);
+			values.put("latitude", cache.coords.getLatitude());
+			values.put("longitude", cache.coords.getLongitude());
 			values.put("reliable_latlon", 1);
 		} else if (!rel) { // new cache neither stored cache is not reliable, just update
-			values.put("latitude", cache.latitude);
-			values.put("longitude", cache.longitude);
+			values.put("latitude", cache.coords.getLatitude());
+			values.put("longitude", cache.coords.getLongitude());
 			values.put("reliable_latlon", 0);
 		}
 		values.put("elevation", cache.elevation);
@@ -1347,8 +1348,8 @@ public class cgData {
 			try {
 				ContentValues values = new ContentValues();
 				values.put("date", destination.getDate());
-				values.put("latitude", destination.getLatitude());
-				values.put("longitude", destination.getLongitude());
+				values.put("latitude", destination.getCoords().getLatitude());
+				values.put("longitude", destination.getCoords().getLongitude());
 
 				long id = databaseRW.insert(dbTableSearchDestionationHistory, null, values);
 				destination.setId(id);
@@ -1396,8 +1397,8 @@ public class cgData {
 					values.put("latlon", oneWaypoint.latlon);
 					values.put("latitude_string", oneWaypoint.latitudeString);
 					values.put("longitude_string", oneWaypoint.longitudeString);
-					values.put("latitude", oneWaypoint.latitude);
-					values.put("longitude", oneWaypoint.longitude);
+					values.put("latitude", oneWaypoint.coords.getLatitude());
+					values.put("longitude", oneWaypoint.coords.getLongitude());
 					values.put("note", oneWaypoint.note);
 
 					databaseRW.insert(dbTableWaypoints, null, values);
@@ -1433,8 +1434,8 @@ public class cgData {
 			values.put("latlon", waypoint.latlon);
 			values.put("latitude_string", waypoint.latitudeString);
 			values.put("longitude_string", waypoint.longitudeString);
-			values.put("latitude", waypoint.latitude);
-			values.put("longitude", waypoint.longitude);
+			values.put("latitude", waypoint.coords.getLatitude());
+			values.put("longitude", waypoint.coords.getLongitude());
 			values.put("note", waypoint.note);
 
 			if (id <= 0) {
@@ -1885,18 +1886,15 @@ public class cgData {
 						cache.latitudeString = (String) cursor.getString(cursor.getColumnIndex("latitude_string"));
 						cache.longitudeString = (String) cursor.getString(cursor.getColumnIndex("longitude_string"));
 						cache.location = (String) cursor.getString(cursor.getColumnIndex("location"));
-						index = cursor.getColumnIndex("latitude");
-						if (cursor.isNull(index)) {
-							cache.latitude = null;
+
+						final int indexLat = cursor.getColumnIndex("latitude");
+						final int indexLon = cursor.getColumnIndex("longitude");
+						if (cursor.isNull(indexLat) || cursor.isNull(indexLon)) {
+							cache.coords = null;
 						} else {
-							cache.latitude = (Double) cursor.getDouble(index);
+							cache.coords = new Geopoint(cursor.getDouble(indexLat), cursor.getDouble(indexLon));;
 						}
-						index = cursor.getColumnIndex("longitude");
-						if (cursor.isNull(index)) {
-							cache.longitude = null;
-						} else {
-							cache.longitude = (Double) cursor.getDouble(index);
-						}
+
 						index = cursor.getColumnIndex("elevation");
 						if (cursor.isNull(index)) {
 							cache.elevation = null;
@@ -2117,17 +2115,12 @@ public class cgData {
 		waypoint.latlon = (String) cursor.getString(cursor.getColumnIndex("latlon"));
 		waypoint.latitudeString = (String) cursor.getString(cursor.getColumnIndex("latitude_string"));
 		waypoint.longitudeString = (String) cursor.getString(cursor.getColumnIndex("longitude_string"));
-		int index = cursor.getColumnIndex("latitude");
-		if (cursor.isNull(index)) {
-			waypoint.latitude = null;
+		final int indexLat = cursor.getColumnIndex("latitude");
+		final int indexLon = cursor.getColumnIndex("longitude");
+		if (cursor.isNull(indexLat) || cursor.isNull(indexLon)) {
+			waypoint.coords = null;
 		} else {
-			waypoint.latitude = (Double) cursor.getDouble(index);
-		}
-		index = cursor.getColumnIndex("longitude");
-		if (cursor.isNull(index)) {
-			waypoint.longitude = null;
-		} else {
-			waypoint.longitude = (Double) cursor.getDouble(index);
+			waypoint.coords = new Geopoint(cursor.getDouble(indexLat), cursor.getDouble(indexLon));
 		}
 		waypoint.note = (String) cursor.getString(cursor.getColumnIndex("note"));
 
@@ -2196,8 +2189,8 @@ public class cgData {
 
 				dest.setId((long) cursor.getLong(cursor.getColumnIndex("_id")));
 				dest.setDate((long) cursor.getLong(cursor.getColumnIndex("date")));
-				dest.setLatitude((double) cursor.getDouble(cursor.getColumnIndex("latitude")));
-				dest.setLongitude((double) cursor.getDouble(cursor.getColumnIndex("longitude")));
+				dest.setCoords(new Geopoint((double) cursor.getDouble(cursor.getColumnIndex("latitude")),
+							                (double) cursor.getDouble(cursor.getColumnIndex("longitude"))));
 
 				destinations.add(dest);
 			} while (cursor.moveToNext());

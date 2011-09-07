@@ -1,7 +1,5 @@
 package cgeo.geocaching;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
@@ -22,13 +20,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import cgeo.geocaching.cgSettings.coordInputFormatEnum;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.geopoint.Geopoint;
 
 public class cgeocoords extends Dialog {
 
 	private AbstractActivity context = null;
 	private cgSettings settings = null;
 	private cgGeo geo = null;
-	private Double latitude = 0.0, longitude = 0.0;
+	private Geopoint coords = new Geopoint(0, 0);
 
 	private EditText eLat, eLon;
 	private Button bLat, bLon;
@@ -48,11 +47,9 @@ public class cgeocoords extends Dialog {
 		geo = geoIn;
 
 		if (waypoint != null) {
-			latitude = waypoint.latitude;
-			longitude = waypoint.longitude;
-		} else if (geo != null && geo.latitudeNow != null && geo.longitudeNow != null) {
-			latitude = geo.latitudeNow;
-			longitude = geo.longitudeNow;
+			coords = waypoint.coords;
+		} else if (geo != null && geo.coordsNow != null) {
+			coords = geo.coordsNow;
 		}
 	}
 
@@ -120,8 +117,12 @@ public class cgeocoords extends Dialog {
 	}
 
 	private void updateGUI() {
-		Double lat = 0.0;
-		if (latitude != null) {
+		double latitude = 0.0;
+		double longitude = 0.0;
+		double lat = 0.0;
+		double lon = 0.0;
+		if (coords != null) {
+			latitude = coords.getLatitude();
 			if (latitude < 0) {
 				bLat.setText("S");
 			} else {
@@ -129,9 +130,8 @@ public class cgeocoords extends Dialog {
 			}
 
 			lat = Math.abs(latitude);
-		}
-		Double lon = 0.0;
-		if (longitude != null) {
+
+			longitude = coords.getLongitude();
 			if (longitude < 0) {
 				bLon.setText("W");
 			} else {
@@ -140,6 +140,7 @@ public class cgeocoords extends Dialog {
 
 			lon = Math.abs(longitude);
 		}
+
 		int latDeg = (int) Math.floor(lat);
 		int latDegFrac = (int) Math.round((lat - latDeg) * 100000);
 
@@ -163,10 +164,8 @@ public class cgeocoords extends Dialog {
 				findViewById(R.id.coordTable).setVisibility(View.GONE);
 				eLat.setVisibility(View.VISIBLE);
 				eLon.setVisibility(View.VISIBLE);
-				if (latitude != null) {
+				if (coords != null) {
 					eLat.setText(cgBase.formatLatitude(latitude, true));
-				}
-				if (longitude != null) {
 					eLon.setText(cgBase.formatLongitude(longitude, true));
 				}
 				break;
@@ -186,11 +185,9 @@ public class cgeocoords extends Dialog {
 				tLatSep2.setText("°");
 				tLonSep2.setText("°");
 
-				if (latitude != null) {
+				if (coords != null) {
 					eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
 					eLatMin.setText(addZeros(latDegFrac, 5) + Integer.toString(latDegFrac));
-				}
-				if (longitude != null) {
 					eLonDeg.setText(addZeros(latDeg, 3) + Integer.toString(lonDeg));
 					eLonMin.setText(addZeros(lonDegFrac, 5) + Integer.toString(lonDegFrac));
 				}
@@ -213,12 +210,10 @@ public class cgeocoords extends Dialog {
 				tLatSep3.setText("'");
 				tLonSep3.setText("'");
 
-				if (latitude != null) {
+				if (coords != null) {
 					eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
 					eLatMin.setText(addZeros(latMin, 2) + Integer.toString(latMin));
 					eLatSec.setText(addZeros(latMinFrac, 3) + Integer.toString(latMinFrac));
-				}
-				if (longitude != null) {
 					eLonDeg.setText(addZeros(lonDeg, 3) + Integer.toString(lonDeg));
 					eLonMin.setText(addZeros(lonMin, 2) + Integer.toString(lonMin));
 					eLonSec.setText(addZeros(lonMinFrac, 3) + Integer.toString(lonMinFrac));
@@ -242,13 +237,11 @@ public class cgeocoords extends Dialog {
 				tLatSep3.setText(".");
 				tLonSep3.setText(".");
 
-				if (latitude != null) {
+				if (coords != null) {
 					eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
 					eLatMin.setText(addZeros(latMin, 2) + Integer.toString(latMin));
 					eLatSec.setText(addZeros(latSec, 2) + Integer.toString(latSec));
 					eLatSub.setText(addZeros(latSecFrac, 3) + Integer.toString(latSecFrac));
-				}
-				if (longitude != null) {
 					eLonDeg.setText(addZeros(lonDeg, 3) + Integer.toString(lonDeg));
 					eLonMin.setText(addZeros(lonMin, 2) + Integer.toString(lonMin));
 					eLonSec.setText(addZeros(lonSec, 2) + Integer.toString(lonSec));
@@ -414,6 +407,8 @@ public class cgeocoords extends Dialog {
 
 		} catch (NumberFormatException e) {}
 
+		double latitude = 0.0;
+		double longitude = 0.0;
 		switch (currentFormat) {
 			case Deg:
 				latitude = latDeg + latDegFrac;
@@ -430,6 +425,8 @@ public class cgeocoords extends Dialog {
 		}
 		latitude  *= (bLat.getText().toString().equalsIgnoreCase("S") ? -1 : 1);
 		longitude *= (bLon.getText().toString().equalsIgnoreCase("W") ? -1 : 1);
+
+		coords = new Geopoint(latitude, longitude);
 	}
 
 	private class CoordinateFormatListener implements OnItemSelectedListener {
@@ -450,13 +447,12 @@ public class cgeocoords extends Dialog {
 
 		@Override
 		public void onClick(View v) {
-			if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null) {
+			if (geo == null || geo.coordsNow == null) {
 				context.showToast(context.getResources().getString(R.string.err_point_unknown_position));
 				return;
 			}
 
-			latitude = geo.latitudeNow;
-			longitude = geo.longitudeNow;
+			coords = geo.coordsNow;
 			updateGUI();
 		}
 	}
@@ -481,22 +477,17 @@ public class cgeocoords extends Dialog {
 						return;
 					}
 
-					latitude = (Double) latParsed.get("coordinate");
-					longitude = (Double) lonParsed.get("coordinate");
+					coords = new Geopoint((Double) latParsed.get("coordinate"), (Double) lonParsed.get("coordinate"));
 				} else {
-					if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null) {
+					if (geo == null || geo.coordsNow == null) {
 						context.showToast(context.getResources().getString(R.string.err_point_curr_position_unavailable));
 						return;
 					}
 
-					latitude = geo.latitudeNow;
-					longitude = geo.longitudeNow;
+					coords = geo.coordsNow;
 				}
 			}
-			List<Double> co = new ArrayList<Double>();
-			co.add(latitude);
-			co.add(longitude);
-			cuListener.update(co);
+			cuListener.update(coords);
 			dismiss();
 		}
 	}
@@ -506,7 +497,7 @@ public class cgeocoords extends Dialog {
 	}
 
 	public interface CoordinateUpdate {
-		public void update(List<Double> coords);
+		public void update(final Geopoint coords);
 	}
 
 }

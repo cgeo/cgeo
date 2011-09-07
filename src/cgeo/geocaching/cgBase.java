@@ -71,6 +71,7 @@ import android.util.Log;
 import android.widget.EditText;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.files.LocParser;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.CollectionUtils;
 
 public class cgBase {
@@ -967,8 +968,8 @@ public class cgBase {
 		// get direction images
 		if (settings.getLoadDirImg())
 		{
-    		for (cgCache oneCache : caches.cacheList) {
-    			if (oneCache.latitude == null && oneCache.longitude == null && oneCache.directionImg != null) {
+			for (cgCache oneCache : caches.cacheList) {
+				if (oneCache.coords == null && oneCache.directionImg != null) {
     				cgDirectionImg.getDrawable(oneCache.geocode, oneCache.directionImg);
     			}
     		}
@@ -1037,8 +1038,7 @@ public class cgBase {
 							final cgCache cacheToAdd = new cgCache();
 							cacheToAdd.reliableLatLon = false;
 							cacheToAdd.geocode = oneCache.getString("gc");
-							cacheToAdd.latitude = oneCache.getDouble("lat");
-							cacheToAdd.longitude = oneCache.getDouble("lon");
+							cacheToAdd.coords = new Geopoint(oneCache.getDouble("lat"), oneCache.getDouble("lon"));
 							cacheToAdd.name = oneCache.getString("nn");
 							cacheToAdd.found = oneCache.getBoolean("f");
 							cacheToAdd.own = oneCache.getBoolean("o");
@@ -1333,8 +1333,7 @@ public class cgBase {
 
 				Map<String, Object> tmp = cgBase.parseLatlon(cache.latlon);
 				if (tmp.size() > 0) {
-					cache.latitude = (Double) tmp.get("latitude");
-					cache.longitude = (Double) tmp.get("longitude");
+					cache.coords = new Geopoint((Double) tmp.get("latitude"), (Double) tmp.get("longitude"));
 					cache.latitudeString = (String) tmp.get("latitudeString");
 					cache.longitudeString = (String) tmp.get("longitudeString");
 					cache.reliableLatLon = true;
@@ -1725,8 +1724,7 @@ public class cgBase {
 
 							final Map<String, Object> tmp = cgBase.parseLatlon(waypoint.latlon);
 							if (tmp.size() > 0) {
-								waypoint.latitude = (Double) tmp.get("latitude");
-								waypoint.longitude = (Double) tmp.get("longitude");
+								waypoint.coords = new Geopoint((Double) tmp.get("latitude"), (Double) tmp.get("longitude"));
 								waypoint.latitudeString = (String) tmp.get("latitudeString");
 								waypoint.longitudeString = (String) tmp.get("longitudeString");
 							}
@@ -1760,8 +1758,8 @@ public class cgBase {
 			}
 		}
 
-		if (cache.latitude != null && cache.longitude != null) {
-			cache.elevation = getElevation(cache.latitude, cache.longitude);
+		if (cache.coords != null) {
+			cache.elevation = getElevation(cache.coords);
 		}
 
 		final cgRating rating = getRating(cache.guid, cache.geocode);
@@ -1813,11 +1811,8 @@ public class cgBase {
 		if (StringUtils.isNotBlank(cache.type)) {
 			Log.w(cgSettings.tag, "type not parsed correctly");
 		}
-		if (cache.latitude == null) {
-			Log.w(cgSettings.tag, "latitude not parsed correctly");
-		}
-		if (cache.longitude == null) {
-			Log.w(cgSettings.tag, "longitude not parsed correctly");
+		if (cache.coords == null) {
+			Log.w(cgSettings.tag, "coordinates not parsed correctly");
 		}
 		if (StringUtils.isEmpty(cache.location)) {
 			Log.w(cgSettings.tag, "location not parsed correctly");
@@ -2426,83 +2421,20 @@ public class cgBase {
 		return distance;
 	}
 
-	public static double getDistance(Double lat1, Double lon1, Double lat2, Double lon2) {
-		if (lat1 == null || lon1 == null || lat2 == null || lon2 == null) {
-			return 0d;
+	public static double getDistance(final Geopoint coords1, final Geopoint coords2) {
+		if (coords1 == null || coords2 == null) {
+			return 0;
 		}
 
-		lat1 *= deg2rad;
-		lon1 *= deg2rad;
-		lat2 *= deg2rad;
-		lon2 *= deg2rad;
-
-		final double d = Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon1 - lon2);
-		final double distance = erad * Math.acos(d); // distance in km
-
-		if (Double.isNaN(distance) == false && distance > 0) {
-			return distance;
-		} else {
-			return 0d;
-		}
+		return coords1.distanceTo(coords2);        // TODO Check callers for null and replace them
 	}
 
-	public static Double getHeading(Double lat1, Double lon1, Double lat2, Double lon2) {
-		Double result = Double.valueOf(0);
-
-		int ilat1 = (int) Math.round(0.5 + lat1 * 360000);
-		int ilon1 = (int) Math.round(0.5 + lon1 * 360000);
-		int ilat2 = (int) Math.round(0.5 + lat2 * 360000);
-		int ilon2 = (int) Math.round(0.5 + lon2 * 360000);
-
-		lat1 *= deg2rad;
-		lon1 *= deg2rad;
-		lat2 *= deg2rad;
-		lon2 *= deg2rad;
-
-		if (ilat1 == ilat2 && ilon1 == ilon2) {
-			return Double.valueOf(result);
-		} else if (ilat1 == ilat2) {
-			if (ilon1 > ilon2) {
-				result = Double.valueOf(270);
-			} else {
-				result = Double.valueOf(90);
-			}
-		} else if (ilon1 == ilon2) {
-			if (ilat1 > ilat2) {
-				result = Double.valueOf(180);
-			}
-		} else {
-			Double c = Math.acos(Math.sin(lat2) * Math.sin(lat1) + Math.cos(lat2) * Math.cos(lat1) * Math.cos(lon2 - lon1));
-			Double A = Math.asin(Math.cos(lat2) * Math.sin(lon2 - lon1) / Math.sin(c));
-			result = Double.valueOf(A * rad2deg);
-			if (ilat2 > ilat1 && ilon2 > ilon1) {
-				// result don't need change
-			} else if (ilat2 < ilat1 && ilon2 < ilon1) {
-				result = 180f - result;
-			} else if (ilat2 < ilat1 && ilon2 > ilon1) {
-				result = 180f - result;
-			} else if (ilat2 > ilat1 && ilon2 < ilon1) {
-				result += 360f;
-			}
-		}
-
-		return result;
+	public static double getHeading(final Geopoint coords1, final Geopoint coords2) {
+		return coords1.bearingTo(coords2);         // TODO Replace callers
 	}
 
-	public static Map<String, Double> getRadialDistance(Double latitude, Double longitude, Double bearing, Double distance) {
-		final Double rlat1 = latitude * deg2rad;
-		final Double rlon1 = longitude * deg2rad;
-		final Double rbearing = bearing * deg2rad;
-		final Double rdistance = distance / erad;
-
-		final Double rlat = Math.asin(Math.sin(rlat1) * Math.cos(rdistance) + Math.cos(rlat1) * Math.sin(rdistance) * Math.cos(rbearing));
-		final Double rlon = rlon1 + Math.atan2(Math.sin(rbearing) * Math.sin(rdistance) * Math.cos(rlat1), Math.cos(rdistance) - Math.sin(rlat1) * Math.sin(rlat));
-
-		Map<String, Double> result = new HashMap<String, Double>();
-		result.put("latitude", rlat * rad2deg);
-		result.put("longitude", rlon * rad2deg);
-
-		return result;
+	public static Geopoint getRadialDistance(final Geopoint coords, double bearing, double distance) {
+		return coords.project(bearing, distance);  // TODO Replace callers
 	}
 
 	public String getHumanDistance(Float distance) {
@@ -2623,10 +2555,11 @@ public class cgBase {
 		return formatCoordinate(coord, degrees, (coord >= 0) ? "E " : "W ", "%03.0f");
 	}
 
-	public static String formatCoords(final Double latitude, final Double longitude, final boolean degrees) {
-		return formatLatitude(latitude, degrees) + " | " + formatLongitude(longitude, degrees);
+	public static String formatCoords(final Geopoint coords, final boolean degrees) {
+		return formatLatitude(coords.getLatitude(), degrees) + " | " + formatLongitude(coords.getLongitude(), degrees);
 	}
 
+	// TODO Use android.util.Pair<Double, String> if needed rather than a Map here.
 	public static Map<String, Object> parseCoordinate(String coord, String latlon) {
 		final Map<String, Object> coords = new HashMap<String, Object>();
 
@@ -4679,8 +4612,8 @@ public class cgBase {
 		}
 	}
 
-	public static boolean isCacheInViewPort(int centerLat, int centerLon, int spanLat, int spanLon, Double cacheLat, Double cacheLon) {
-		if (cacheLat == null || cacheLon == null) {
+	public static boolean isCacheInViewPort(int centerLat, int centerLon, int spanLat, int spanLon, final Geopoint cacheCoords) {
+		if (cacheCoords == null) {
 			return false;
 		}
 
@@ -4689,8 +4622,8 @@ public class cgBase {
 		int maxLat = centerLat + (spanLat / 2) + (spanLat / 10);
 		int minLon = centerLon - (spanLon / 2) - (spanLon / 10);
 		int maxLon = centerLon + (spanLon / 2) + (spanLon / 10);
-		int cLat = (int) Math.round(cacheLat * 1e6);
-		int cLon = (int) Math.round(cacheLon * 1e6);
+		int cLat = (int) Math.round(cacheCoords.getLatitudeE6());
+		int cLon = (int) Math.round(cacheCoords.getLongitudeE6());
 		int mid = 0;
 
 		if (maxLat < minLat) {
@@ -5028,37 +4961,37 @@ public class cgBase {
 		return usertoken;
 	}
 
-	public static Double getElevation(Double latitude, Double longitude) {
-		Double elv = null;
-
+	public static Double getElevation(final Geopoint coords) {
 		try {
 			final String host = "maps.googleapis.com";
 			final String path = "/maps/api/elevation/json";
-			final String params = "sensor=false&locations=" + String.format((Locale) null, "%.6f", latitude) + "," + String.format((Locale) null, "%.6f", longitude);
+			final String params = "sensor=false&locations=" +
+					String.format((Locale) null, "%.6f", coords.getLatitude()) + "," +
+					String.format((Locale) null, "%.6f", coords.getLongitude());
 
 			final String data = requestJSON(host, path, params);
 
 			if (StringUtils.isBlank(data)) {
-				return elv;
+				return null;
 			}
 
 			JSONObject response = new JSONObject(data);
 			String status = response.getString("status");
 
 			if (status == null || status.equalsIgnoreCase("OK") == false) {
-				return elv;
+				return null;
 			}
 
 			if (response.has("results")) {
 				JSONArray results = response.getJSONArray("results");
 				JSONObject result = results.getJSONObject(0);
-				elv = result.getDouble("elevation");
+				return result.getDouble("elevation");
 			}
 		} catch (Exception e) {
 			Log.w(cgSettings.tag, "cgBase.getElevation: " + e.toString());
 		}
 
-		return elv;
+		return null;
 	}
 
 	/**

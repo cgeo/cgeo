@@ -1,6 +1,5 @@
 package cgeo.geocaching.apps.cache.navi;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -15,6 +14,7 @@ import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.apps.AbstractAppFactory;
+import cgeo.geocaching.geopoint.Geopoint;
 
 public final class NavigationAppFactory extends AbstractAppFactory {
 	private static NavigationApp[] apps = new NavigationApp[] {};
@@ -47,18 +47,12 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 	public static boolean onMenuItemSelected(final MenuItem item,
 			final cgGeo geo, Activity activity, Resources res,
 			cgCache cache,
-			final UUID searchId, cgWaypoint waypoint, List<Double> destination) {
+			final UUID searchId, cgWaypoint waypoint, final Geopoint destination) {
 		NavigationApp app = (NavigationApp) getAppFromMenuItem(item, apps);
 		if (app != null) {
-			Double latitude = null;
-			Double longitude = null;
-			if (destination != null && destination.size() >= 2) {
-				latitude = destination.get(0);
-				longitude = destination.get(1);
-			}
 			try {
 				return app.invoke(geo, activity, res, cache,
-						searchId, waypoint, latitude, longitude);
+						searchId, waypoint, destination);
 			} catch (Exception e) {
 				Log.e(cgSettings.tag, "NavigationAppFactory.onMenuItemSelected: " + e.toString());
 			}

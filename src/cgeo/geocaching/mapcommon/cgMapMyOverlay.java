@@ -16,6 +16,7 @@ import android.location.Location;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
 import cgeo.geocaching.mapinterfaces.MapFactory;
 import cgeo.geocaching.mapinterfaces.MapProjectionImpl;
@@ -55,7 +56,7 @@ public class cgMapMyOverlay implements OverlayBase {
 
 	public void setCoordinates(Location coordinatesIn) {
 		coordinates = coordinatesIn;
-		location = settings.getMapFactory().getGeoPointBase((int)(coordinatesIn.getLatitude() * 1e6), (int)(coordinatesIn.getLongitude() * 1e6));
+		location = settings.getMapFactory().getGeoPointBase(new Geopoint(coordinates));
 	}
 
 	public void setHeading(Double headingIn) {
@@ -113,7 +114,8 @@ public class cgMapMyOverlay implements OverlayBase {
 		Location.distanceBetween(latitude, longitude, latitude, longitude + 1, result);
 		float longitudeLineDistance = result[0];
 
-		GeoPointImpl leftGeo = mapFactory.getGeoPointBase((int)(latitude * 1e6), (int)((longitude - accuracy / longitudeLineDistance) * 1e6));
+		final Geopoint leftCoords = new Geopoint(latitude, longitude - accuracy / longitudeLineDistance);
+		GeoPointImpl leftGeo = mapFactory.getGeoPointBase(leftCoords);
 		projection.toPixels(leftGeo, left);
 		projection.toPixels(location, center);
 		int radius = center.x - left.x;
@@ -126,7 +128,7 @@ public class cgMapMyOverlay implements OverlayBase {
 		accuracyCircle.setStyle(Style.FILL);
 		canvas.drawCircle(center.x, center.y, radius, accuracyCircle);
 
-		if (coordinates.getAccuracy() < 50f && ((historyRecent != null && cgBase.getDistance(historyRecent.getLatitude(), historyRecent.getLongitude(), coordinates.getLatitude(), coordinates.getLongitude()) > 0.005) || historyRecent == null)) {
+		if (coordinates.getAccuracy() < 50f && ((historyRecent != null && cgBase.getDistance(new Geopoint(historyRecent), new Geopoint(coordinates)) > 0.005) || historyRecent == null)) {
 			if (historyRecent != null) history.add(historyRecent);
 			historyRecent = coordinates;
 
@@ -151,8 +153,8 @@ public class cgMapMyOverlay implements OverlayBase {
 					Location now = history.get(cnt);
 
 					if (prev != null && now != null) {
-						projection.toPixels(mapFactory.getGeoPointBase((int)(prev.getLatitude() * 1e6), (int)(prev.getLongitude() * 1e6)), historyPointP);
-						projection.toPixels(mapFactory.getGeoPointBase((int)(now.getLatitude() * 1e6), (int)(now.getLongitude() * 1e6)), historyPointN);
+						projection.toPixels(mapFactory.getGeoPointBase(new Geopoint(prev)), historyPointP);
+						projection.toPixels(mapFactory.getGeoPointBase(new Geopoint(now)), historyPointN);
 
 						if ((alphaCnt - cnt) > 0) {
 							alpha = 255 / (alphaCnt - cnt);
@@ -175,8 +177,8 @@ public class cgMapMyOverlay implements OverlayBase {
 				Location now = coordinates;
 
 				if (prev != null && now != null) {
-					projection.toPixels(mapFactory.getGeoPointBase((int)(prev.getLatitude() * 1e6), (int)(prev.getLongitude() * 1e6)), historyPointP);
-					projection.toPixels(mapFactory.getGeoPointBase((int)(now.getLatitude() * 1e6), (int)(now.getLongitude() * 1e6)), historyPointN);
+					projection.toPixels(mapFactory.getGeoPointBase(new Geopoint(prev)), historyPointP);
+					projection.toPixels(mapFactory.getGeoPointBase(new Geopoint(now)), historyPointN);
 
 					historyLineShadow.setAlpha(255);
 					historyLine.setAlpha(255);

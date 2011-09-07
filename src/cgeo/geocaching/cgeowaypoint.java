@@ -72,8 +72,8 @@ public class cgeowaypoint extends AbstractActivity {
 					registerNavigationMenu(identification);
 					waypoint.setIcon(res, base, identification);
 
-					if (waypoint.latitude != null && waypoint.longitude != null) {
-						coords.setText(Html.fromHtml(cgBase.formatCoords(waypoint.latitude, waypoint.longitude, true)), TextView.BufferType.SPANNABLE);
+					if (waypoint.coords != null) {
+						coords.setText(Html.fromHtml(cgBase.formatCoords(waypoint.coords, true)), TextView.BufferType.SPANNABLE);
 						compass.setVisibility(View.VISIBLE);
 						separator.setVisibility(View.VISIBLE);
 					} else {
@@ -229,7 +229,7 @@ public class cgeowaypoint extends AbstractActivity {
 		super.onPrepareOptionsMenu(menu);
 
 		try {
-			boolean visible = waypoint != null && waypoint.latitude != null && waypoint.longitude != null;
+			boolean visible = waypoint != null && waypoint.coords != null;
 			menu.findItem(MENU_ID_NAVIGATION).setVisible(visible);
 			menu.findItem(MENU_ID_COMPASS).setVisible(visible);
 			menu.findItem(MENU_ID_CACHES_AROUND).setVisible(visible);
@@ -255,11 +255,11 @@ public class cgeowaypoint extends AbstractActivity {
 	}
 
 	private void cachesAround() {
-		if (waypoint == null || waypoint.latitude == null || waypoint.longitude == null) {
+		if (waypoint == null || waypoint.coords == null) {
 			showToast(res.getString(R.string.err_location_unknown));
 		}
 
-		cgeocaches.startActivityCachesAround(this, waypoint.latitude, waypoint.longitude);
+		cgeocaches.startActivityCachesAround(this, waypoint.coords);
 
 		finish();
 	}
@@ -315,8 +315,8 @@ public class cgeowaypoint extends AbstractActivity {
 		}
 
 		Intent navigateIntent = new Intent(this, cgeonavigate.class);
-		navigateIntent.putExtra("latitude", waypoint.latitude);
-		navigateIntent.putExtra("longitude", waypoint.longitude);
+		navigateIntent.putExtra("latitude", waypoint.coords.getLatitude());
+		navigateIntent.putExtra("longitude", waypoint.coords.getLongitude());
 		navigateIntent.putExtra("geocode", waypoint.prefix.trim() + "/" + waypoint.lookup.trim());
 		navigateIntent.putExtra("name", waypoint.name);
 
@@ -326,7 +326,7 @@ public class cgeowaypoint extends AbstractActivity {
 	}
 
 	private boolean navigationPossible() {
-		if (waypoint == null || waypoint.latitude == null || waypoint.longitude == null) {
+		if (waypoint == null || waypoint.coords == null) {
 			showToast(res.getString(R.string.err_location_unknown));
 			return false;
 		}

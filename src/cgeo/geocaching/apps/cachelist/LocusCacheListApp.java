@@ -34,7 +34,7 @@ class LocusCacheListApp extends AbstractLocusApp implements CacheListApp {
 		try {
 			final List<cgCache> cacheListCoord = new ArrayList<cgCache>();
 			for (cgCache cache : cacheList) {
-				if (cache.latitude != null && cache.longitude != null) {
+				if (cache.coords != null) {
 					cacheListCoord.add(cache);
 				}
 			}
@@ -84,8 +84,8 @@ class LocusCacheListApp extends AbstractLocusApp implements CacheListApp {
 					dos.writeUTF("");
 				}
 
-				dos.writeDouble(cache.latitude); // latitude
-				dos.writeDouble(cache.longitude); // longitude
+				dos.writeDouble(cache.coords.getLatitude()); // latitude
+				dos.writeDouble(cache.coords.getLongitude()); // longitude
 			}
 
 			final Intent intent = new Intent();
