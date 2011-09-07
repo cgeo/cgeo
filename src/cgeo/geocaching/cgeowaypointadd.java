@@ -22,6 +22,7 @@ import android.widget.EditText;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.GeopointFormatter;
 
 public class cgeowaypointadd extends AbstractActivity {
 
@@ -228,8 +229,8 @@ public class cgeowaypointadd extends AbstractActivity {
 			coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
 				@Override
 				public void update(Geopoint gp) {
-					((Button) findViewById(R.id.buttonLatitude)).setText(cgBase.formatLatitude(gp.getLatitude(), true));
-					((Button) findViewById(R.id.buttonLongitude)).setText(cgBase.formatLongitude(gp.getLongitude(), true));
+					((Button) findViewById(R.id.buttonLatitude)).setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
+					((Button) findViewById(R.id.buttonLongitude)).setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
 					if (waypoint != null) {
 						waypoint.latitude = gp.getLatitude();
 						waypoint.longitude = gp.getLongitude();
