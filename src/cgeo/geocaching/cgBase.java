@@ -1290,20 +1290,7 @@ public class cgBase {
 		}
 
 		// cache found
-		try
-		{
-			final Matcher matcherFound            = patternFound.matcher(page);
-			final Matcher matcherFoundAlternative = patternFoundAlternative.matcher(page);
-
-			if (matcherFound.find() || matcherFoundAlternative.find()) {
-			    cache.found = true;
-			}
-		}
-		catch (Exception e)
-		{
-			// failed to parse found
-			Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse found");
-		}
+		cache.found = patternFound.matcher(page).find() || patternFoundAlternative.matcher(page).find();
 
 		// cache type
 		try {
