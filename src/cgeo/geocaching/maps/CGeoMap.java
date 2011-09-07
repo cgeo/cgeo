@@ -50,7 +50,6 @@ import cgeo.geocaching.maps.interfaces.MapFactory;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnDragListener;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
-import cgeo.geocaching.utils.CollectionUtils;
 
 public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory {
 

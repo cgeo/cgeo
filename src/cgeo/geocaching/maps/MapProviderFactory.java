@@ -91,7 +91,7 @@ public class MapProviderFactory {
 	public static void addMenuItems(Menu menu, Resources res, int selectedSourceId) {
 		for (MapProvider mapProvider : getMapProviders()) {
 			for (int sourceId : mapProvider.getSourceIds()) {
-				menu.add(0, sourceId, 0, mapProvider.getName(sourceId, res)).setCheckable(true).setChecked(selectedSourceId == sourceId);
+				menu.add(1, sourceId, 0, mapProvider.getName(sourceId, res)).setCheckable(true).setChecked(selectedSourceId == sourceId);
 			}
 		}
 		menu.setGroupCheckable(1, true, true);

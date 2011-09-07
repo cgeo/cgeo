@@ -511,6 +511,8 @@ public class cgSettings {
 			sourceId = MapProviderFactory.getDefaultMapSourceId();
 		}
 		
+		mapSource = sourceId;
+		
 		setMapSourceInternal(sourceId);
 		
 		mapProvider = MapProviderFactory.getMapProviderFromId(sourceId);		

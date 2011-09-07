@@ -60,7 +60,7 @@ public class mfMapProvider implements MapProvider {
 	}
 
 	public static MapViewMode getMapViewMode(int sourceId) {
-		switch(sourceId) {
+		switch(sourceId-baseId) {
 			case MF_MAP_OSMARENDER:
 				return MapViewMode.OSMARENDER_TILE_DOWNLOAD;
 			case MF_MAP_CYCLEMAP:
