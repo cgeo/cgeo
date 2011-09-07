@@ -1402,7 +1402,7 @@ public class cgBase {
 		try {
 			final Matcher matcherPersonalNote = patternPersonalNote.matcher(page);
 			if (matcherPersonalNote.find() && matcherPersonalNote.groupCount() > 0) {
-				cache.personalNote = getMatch(matcherPersonalNote.group(1).trim());
+				cache.personalNote = getMatch(matcherPersonalNote.group(1));
 			}
 		} catch (Exception e) {
 			// failed to parse cache personal note
@@ -1826,7 +1826,7 @@ public class cgBase {
 
 	private static String getMatch(String match) {
 		// creating a new String via String constructor is necessary here!!
-		return new String(match);
+		return new String(match.trim());
 		// Java copies the whole page String, when matching with regular expressions
 		// later this would block the garbage collector, as we only need tiny parts of the page
 		// see http://developer.android.com/reference/java/lang/String.html#backing_array
@@ -3311,7 +3311,7 @@ public class cgBase {
 		  			}
 		  			search.viewstates = caches.viewstates;
 		  			search.totalCnt = caches.totalCnt;
-		  
+
 		 			if (CollectionUtils.isNotEmpty(caches.cacheList)) {
 		  				for (cgCache cache : caches.cacheList) {
 		 					if ((excludeDisabled == 0 || (excludeDisabled == 1 && cache.disabled == false))
@@ -3326,7 +3326,7 @@ public class cgBase {
 		  		}
 		  		return cacheList;
 	 	}
-	
+
 	public cgTrackable searchTrackable(Map<String, String> parameters) {
 		final String geocode = parameters.get("geocode");
 		final String guid = parameters.get("guid");
