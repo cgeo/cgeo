@@ -2253,7 +2253,7 @@ public class cgData {
 
 		if (cursor != null && cursor.getCount() > 0) {
 			cgLog log = null;
-			while (cursor.moveToNext()) {
+			while (cursor.moveToNext() && logs.size() < 100) {
 				if (log == null || log.id != cursor.getInt(cursor.getColumnIndex("cg_logs_id"))) {
 					log = new cgLog();
 					log.id = (int) cursor.getInt(cursor.getColumnIndex("cg_logs_id"));
