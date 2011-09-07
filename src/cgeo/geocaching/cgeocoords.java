@@ -53,8 +53,6 @@ public class cgeocoords extends Dialog {
 			gp = gpIn;
 		} else if (geo != null && geo.latitudeNow != null && geo.longitudeNow != null) {
 			gp = new Geopoint(geo.latitudeNow, geo.longitudeNow);
-		} else {
-			gp = new Geopoint();
 		}
 	}
 
@@ -120,6 +118,8 @@ public class cgeocoords extends Dialog {
 	}
 
 	private void updateGUI() {
+		if (gp == null)
+			return;
 		Double lat = 0.0;
 		if (gp.getLatitude() < 0) {
 			bLat.setText("S");
@@ -363,8 +363,7 @@ public class cgeocoords extends Dialog {
 
 	private void calc() {
 		if (currentFormat == coordInputFormatEnum.Plain) {
-			gp.setLatitude(eLat.getText().toString());
-			gp.setLongitude(eLon.getText().toString());
+			gp = new Geopoint(eLat.getText().toString() + " " + eLon.getText().toString());
 			return;
 		}
 
@@ -407,8 +406,7 @@ public class cgeocoords extends Dialog {
 		}
 		latitude  *= (bLat.getText().toString().equalsIgnoreCase("S") ? -1 : 1);
 		longitude *= (bLon.getText().toString().equalsIgnoreCase("W") ? -1 : 1);
-		gp.setLatitude(latitude);
-		gp.setLongitude(longitude);
+		gp = new Geopoint(latitude, longitude);
 	}
 
 	private class CoordinateFormatListener implements OnItemSelectedListener {
@@ -443,9 +441,7 @@ public class cgeocoords extends Dialog {
 				context.showToast(context.getResources().getString(R.string.err_point_unknown_position));
 				return;
 			}
-
-			gp.setLatitude(geo.latitudeNow);
-			gp.setLongitude(geo.longitudeNow);
+			gp = new Geopoint(geo.latitudeNow, geo.longitudeNow);
 			updateGUI();
 		}
 	}
@@ -460,8 +456,8 @@ public class cgeocoords extends Dialog {
 				context.showToast(e.getMessage());
 				return;
 			}
-
-			cuListener.update(gp);
+			if (gp != null)
+				cuListener.update(gp);
 			dismiss();
 		}
 	}
