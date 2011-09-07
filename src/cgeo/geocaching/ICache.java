@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package cgeo.geocaching;
 
@@ -10,12 +10,7 @@ package cgeo.geocaching;
  *
  */
 public interface ICache {
-	
-	/**
-	 * @return The data returned by the HTTP-GET request for this cache. Only for testing purposes. 
-	 */
-	public String getData();
-	
+
 	/**
 	 * @return Geocode like GCxxxx
 	 */
