@@ -1744,16 +1744,16 @@ public class cgData {
 
 	public ArrayList<cgCache> loadCaches(Object[] geocodes, Object[] guids, Long centerLat, Long centerLon, Long spanLat, Long spanLon, boolean loadA, boolean loadW, boolean loadS, boolean loadL, boolean loadI, boolean loadO) {
 		init();
-
+// Using more than one of the parametersets results in overly comlex wheres
 		if (((geocodes != null && geocodes.length > 0) && (guids != null && guids.length > 0))) {
-			throw new IllegalArgumentException("Nur Entweder oder");
+			throw new IllegalArgumentException("Please use only one parameter");
 		}
 		if (((geocodes != null && geocodes.length > 0) || (guids != null && guids.length > 0))
 				&& centerLat != null
 				&& centerLon != null
 				&& spanLat != null
 				&& spanLon != null) {
-			throw new IllegalArgumentException("Nur Entweder oder");
+			throw new IllegalArgumentException("Please use only one parameter");
 		}
 		StringBuilder where = new StringBuilder();
 		Cursor cursor = null;
@@ -1844,13 +1844,12 @@ public class cgData {
 					null);
 
 			if (cursor != null) {
-				int index = 0;
-
 				if (cursor.getCount() > 0) {
 					cursor.moveToFirst();
 
 					do {
-						cgCache cache = mapCache(cursor);
+						//Extracted Method
+						cgCache cache = createCacheFromDatabaseContent(cursor);
 
 						if (loadA) {
 							ArrayList<String> attributes = loadAttributes(cache.geocode);
@@ -1936,8 +1935,14 @@ public class cgData {
 
 		return caches;
 	}
+	
+	/**
+	 * maps a Cache from the cursor. Doesn't next.
+	 * @param cursor
+	 * @return
+	 */
 
-	private cgCache mapCache(Cursor cursor) {
+	private cgCache createCacheFromDatabaseContent(Cursor cursor) {
 		int index;
 		cgCache cache = new cgCache();
 
