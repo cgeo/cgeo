@@ -1,7 +1,7 @@
 package cgeo.geocaching.test.mock;
 
 
-public class GC1ZXX2 extends GCBase {
+public class GC1ZXX2 extends MockedCache {
 	
 	@Override
 	public Float getDifficulty() {

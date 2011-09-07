@@ -11,7 +11,6 @@ import android.content.SharedPreferences;
 import android.test.ApplicationTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
-import cgeo.geocaching.ICache;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCacheWrap;
@@ -19,6 +18,7 @@ import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.test.mock.GC1ZXX2;
 import cgeo.geocaching.test.mock.GC2CJPF;
+import cgeo.geocaching.test.mock.MockedCache;
 
 /**
  * The c:geo application test. It can be used for tests that require an
@@ -61,7 +61,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
 
 	/**
 	 * Test {@link cgBase#searchByGeocode(HashMap, int, boolean)}
-	 * 
+	 *
 	 * @param base
 	 */
 	@MediumTest
@@ -79,11 +79,11 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
 */
 	@MediumTest
 	public void testParseCache() {
-		List<ICache> cachesToTest = new ArrayList<ICache>();
+		List<MockedCache> cachesToTest = new ArrayList<MockedCache>();
 		cachesToTest.add(new GC2CJPF());
 		cachesToTest.add(new GC1ZXX2());
 
-		for (ICache cache : cachesToTest) {
+		for (MockedCache cache : cachesToTest) {
 			cgCacheWrap caches = base.parseCache(cache.getData(), 0);
 			cgCache cacheParsed = caches.cacheList.get(0);
 			Assert.assertEquals(cacheParsed.getGeocode(), cache.getGeocode());

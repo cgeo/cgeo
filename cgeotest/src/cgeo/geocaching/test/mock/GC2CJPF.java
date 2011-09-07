@@ -1,8 +1,8 @@
 package cgeo.geocaching.test.mock;
 
 
-public class GC2CJPF extends GCBase {
-	
+public class GC2CJPF extends MockedCache {
+
 	@Override
 	public Float getDifficulty() {
 		return 2.5f;
@@ -80,7 +80,7 @@ public class GC2CJPF extends GCBase {
 
 	@Override
 	public String getShortDescription() {
-		return "Von Nachwuchs-Cachern für Nachwuchs-Cacher. ";
+		return "Von Nachwuchs-Cachern für Nachwuchs-Cacher.";
 	}
 
 	@Override
@@ -89,4 +89,3 @@ public class GC2CJPF extends GCBase {
 	}
 
 }
-		
