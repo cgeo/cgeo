@@ -9,9 +9,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
@@ -39,23 +41,23 @@ public abstract class GPXParser extends FileParser {
 	private static final SimpleDateFormat formatTimezone = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'.000'Z"); // 2010-04-20T01:01:03.000-04:00
 
 	private static final Pattern patternGeocode = Pattern.compile("([A-Z]{2}[0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
+	private static final Pattern patternGuid = Pattern.compile(".*" + Pattern.quote("guid=") + "([0-9a-z\\-]+)", Pattern.CASE_INSENSITIVE);
 	private static final String[] nsGCList = new String[] {
 		"http://www.groundspeak.com/cache/1/1", // PQ 1.1
 		"http://www.groundspeak.com/cache/1/0/1", // PQ 1.0.1
 		"http://www.groundspeak.com/cache/1/0", // PQ 1.0
 	};
 
-	private cgeoapplication app = null;
+	private static cgeoapplication app = null;
 	private int listId = 1;
 	private cgSearch search = null;
-	protected String namespace = null;
-	private String version;
+	final protected String namespace;
+	final private String version;
 	private Handler handler = null;
 
 	private cgCache cache = new cgCache();
 	private cgTrackable trackable = new cgTrackable();
 	private cgLog log = new cgLog();
-	private CacheAttribute cacheAttribute = null;
 
 	private String type = null;
 	private String sym = null;
@@ -63,12 +65,12 @@ public abstract class GPXParser extends FileParser {
 	private String cmt = null;
 	private String desc = null;
 
-	private class CacheAttribute {
+	private static final class CacheAttributeTranslator {
 	    // List of cache attributes matching IDs used in GPX files.
 	    // The ID is represented by the position of the String in the array.
 	    // Strings are not used as text but as resource IDs of strings, just to be aware of changes
 	    // made in strings.xml which then will lead to compile errors here and not to runtime errors.
-	    private final int[] CACHE_ATTRIBUTES = {
+	    private static final int[] CACHE_ATTRIBUTES = {
 	        -1, // 0
 	        R.string.attribute_dogs_yes, // 1
 	        R.string.attribute_fee_yes, // 2
@@ -139,42 +141,42 @@ public abstract class GPXParser extends FileParser {
 	    };
         private static final String YES = "_yes";
         private static final String NO = "_no";
-        private final Pattern BASENAME_PATTERN = Pattern.compile("^.*attribute_(.*)(_yes|_no)");
+        private static final Pattern BASENAME_PATTERN = Pattern.compile("^.*attribute_(.*)(_yes|_no)");
 
-        private Boolean active = null; // for yes/no
-	    private String baseName; // "food", "parkngrab", ...
-
-	    public void setActive(boolean active) {
-	        this.active = active;
-	    }
 	    // map GPX-Attribute-Id to baseName
-	    public void setBaseName(int id) {
-	        this.baseName = null;
+	    public static String getBaseName(final int id) {
 	        // get String out of array
-	        if (CACHE_ATTRIBUTES.length <= id)
-	            return;
-	        int stringId = CACHE_ATTRIBUTES[id];
-	        if (stringId == -1)
-	            return; // id not found
+	        if (CACHE_ATTRIBUTES.length <= id) {
+				return null;
+			}
+	        final int stringId = CACHE_ATTRIBUTES[id];
+	        if (stringId == -1) {
+				return null; // id not found
+			}
 	        // get text for string
 	        String stringName = null;
 	        try {
 	            stringName = app.getResources().getResourceName(stringId);
 	        } catch (NullPointerException e) {
-	            return;
-	        }
-	        if (stringName == null)
-	            return;
-	        // cut out baseName
-	        Matcher m = BASENAME_PATTERN.matcher(stringName);
-	        if (! m.matches())
-	        	return;
-	        this.baseName = m.group(1);
-	    }
-	    // @return  baseName + "_yes" or "_no" e.g. "food_no" or "uv_yes"
-	    public String getInternalId() {
-	        if (baseName == null || active == null)
 	            return null;
+	        }
+	        if (stringName == null) {
+				return null;
+			}
+	        // cut out baseName
+	        final Matcher m = BASENAME_PATTERN.matcher(stringName);
+	        if (! m.matches()) {
+				return null;
+			}
+	        return m.group(1);
+	    }
+
+	    // @return  baseName + "_yes" or "_no" e.g. "food_no" or "uv_yes"
+	    public static String getInternalId(final int attributeId, final boolean active) {
+	    	final String baseName = CacheAttributeTranslator.getBaseName(attributeId);
+	        if (baseName == null) {
+				return null;
+			}
 	        return baseName + (active ? YES : NO);
 	    }
 	}
@@ -187,16 +189,16 @@ public abstract class GPXParser extends FileParser {
 		version = versionIn;
 	}
 
-	private static Date parseDate(String input) throws ParseException {
-		input = input.trim();
+	private static Date parseDate(String inputUntrimmed) throws ParseException {
+		final String input = inputUntrimmed.trim();
 		if (input.length() >= 3 && input.charAt(input.length() - 3) == ':') {
-			String removeColon = input.substring(0, input.length() - 3) + input.substring(input.length() - 2);
+			final String removeColon = input.substring(0, input.length() - 3) + input.substring(input.length() - 2);
 			return formatTimezone.parse(removeColon);
 		}
 		return formatSimple.parse(input);
 	}
 
-	public long parse(final InputStream stream, Handler handlerIn) {
+	public UUID parse(final InputStream stream, Handler handlerIn) {
 		handler = handlerIn;
 
 		final RootElement root = new RootElement(namespace, "gpx");
@@ -225,14 +227,14 @@ public abstract class GPXParser extends FileParser {
 
 			@Override
 			public void end() {
-				if (cache.geocode == null || cache.geocode.length() == 0) {
+				if (StringUtils.isBlank(cache.geocode)) {
 					// try to find geocode somewhere else
 					findGeoCode(name);
 					findGeoCode(desc);
 					findGeoCode(cmt);
 				}
 
-				if (cache.geocode != null && cache.geocode.length() > 0
+				if (StringUtils.isNotBlank(cache.geocode)
 						&& cache.latitude != null && cache.longitude != null
 						&& ((type == null && sym == null)
 						|| (type != null && type.indexOf("geocache") > -1)
@@ -332,6 +334,21 @@ public abstract class GPXParser extends FileParser {
 			}
 		});
 
+		// waypoint.url
+		waypoint.getChild(namespace, "url").setEndTextElementListener(new EndTextElementListener() {
+
+			@Override
+			public void end(String url) {
+				final Matcher matcher = patternGuid.matcher(url);
+				if (matcher.matches()) {
+					String guid = matcher.group(1);
+					if (StringUtils.isNotBlank(guid)) {
+						cache.guid = guid;
+					}
+				}
+			}
+		});
+
 		// for GPX 1.0, cache info comes from waypoint node (so called private children,
 		// for GPX 1.1 from extensions node
 		final Element cacheParent = getCacheParent(waypoint);
@@ -412,30 +429,20 @@ public abstract class GPXParser extends FileParser {
             gcAttribute.setStartElementListener(new StartElementListener() {
                 @Override
                 public void start(Attributes attrs) {
-                    cacheAttribute = new CacheAttribute();
                     try {
-                        if (attrs.getIndex("id") > -1) {
-                            cacheAttribute.setBaseName(Integer.parseInt(attrs.getValue("id")));
+                        if (attrs.getIndex("id") > -1 && attrs.getIndex("inc") > -1) {
+                            int attributeId = Integer.parseInt(attrs.getValue("id"));
+                            boolean attributeActive = Integer.parseInt(attrs.getValue("inc")) != 0;
+                            String internalId = CacheAttributeTranslator.getInternalId(attributeId, attributeActive);
+                            if (internalId != null) {
+	                            if (cache.attributes == null) {
+									cache.attributes = new ArrayList<String>();
+								}
+	                            cache.attributes.add(internalId);
+                            }
                         }
-                        if (attrs.getIndex("inc") > -1) {
-                            cacheAttribute.setActive(Integer.parseInt(attrs.getValue("inc")) != 0);
-                        }
-                    } catch (Exception e) {
+                    } catch (NumberFormatException e) {
                         // nothing
-                    }
-                }
-            });
-
-            gcAttribute.setEndElementListener(new EndElementListener() {
-                @Override
-                public void end() {
-                    if (cacheAttribute != null) {
-                        String internalId = cacheAttribute.getInternalId();
-                        if (internalId != null) {
-                            if (cache.attributes == null)
-                                cache.attributes = new ArrayList<String>();
-                            cache.attributes.add(internalId);
-                        }
                     }
                 }
             });
@@ -471,7 +478,7 @@ public abstract class GPXParser extends FileParser {
 
 				@Override
 				public void end(String country) {
-					if (cache.location == null || cache.location.length() == 0) {
+					if (StringUtils.isBlank(cache.location)) {
 						cache.location = validate(country);
 					} else {
 						cache.location = cache.location + ", " + country.trim();
@@ -484,7 +491,7 @@ public abstract class GPXParser extends FileParser {
 
 				@Override
 				public void end(String state) {
-					if (cache.location == null || cache.location.length() == 0) {
+				if (StringUtils.isBlank(cache.location)) {
 						cache.location = validate(state);
 					} else {
 						cache.location = state.trim() + ", " + cache.location;
@@ -544,7 +551,7 @@ public abstract class GPXParser extends FileParser {
 
 				@Override
 				public void end() {
-					if (trackable.geocode != null && trackable.geocode.length() > 0 && trackable.name != null && trackable.name.length() > 0) {
+					if (StringUtils.isNotBlank(trackable.geocode) && StringUtils.isNotBlank(trackable.name)) {
 						if (cache.inventory == null) {
 							cache.inventory = new ArrayList<cgTrackable>();
 						}
@@ -588,7 +595,7 @@ public abstract class GPXParser extends FileParser {
 
 				@Override
 				public void end() {
-					if (log.log != null && log.log.length() > 0) {
+					if (StringUtils.isNotBlank(log.log)) {
 						if (cache.logs == null) {
 							cache.logs = new ArrayList<cgLog>();
 						}
@@ -651,16 +658,16 @@ public abstract class GPXParser extends FileParser {
 		} catch (SAXException e) {
 			Log.e(cgSettings.tag, "Cannot parse .gpx file as GPX " + version + ": could not parse XML - " + e.toString());
 		}
-		return parsed ? search.getCurrentId() : 0L;
+		return parsed ? search.getCurrentId() : null;
 	}
 
-	private long parse(final File file, final Handler handlerIn) {
+	private UUID parse(final File file, final Handler handlerIn) {
 		if (file == null) {
-			return 0L;
+			return null;
 		}
 
 		FileInputStream fis = null;
-		long result = 0L;
+		UUID result = null;
 		try {
 			fis = new FileInputStream(file);
 			result = parse(fis, handlerIn);
@@ -692,20 +699,20 @@ public abstract class GPXParser extends FileParser {
 			cache.type = knownType;
 		}
 		else {
-			if (cache.type == null || cache.type.length() == 0) {
+			if (StringUtils.isBlank(cache.type)) {
 				cache.type = "mystery"; // default for not recognized types
 			}
 		}
 	}
 
 	private void findGeoCode(final String input) {
-		if (input == null || (cache.geocode != null && cache.geocode.length() != 0)) {
+		if (input == null || StringUtils.isNotBlank(cache.geocode)) {
 			return;
 		}
-		Matcher matcherGeocode = patternGeocode.matcher(input);
+		final Matcher matcherGeocode = patternGeocode.matcher(input);
 		if (matcherGeocode.find()) {
 			if (matcherGeocode.groupCount() > 0) {
-				String geocode = matcherGeocode.group(1);
+				final String geocode = matcherGeocode.group(1);
 				if (ConnectorFactory.canHandle(geocode)) {
 					cache.geocode = geocode;
 				}
@@ -713,14 +720,14 @@ public abstract class GPXParser extends FileParser {
 		}
 	}
 
-	public static Long parseGPX(cgeoapplication app, File file, int listId, Handler handler) {
-		cgSearch search = new cgSearch();
-		long searchId = 0L;
+	public static UUID parseGPX(cgeoapplication app, File file, int listId, Handler handler) {
+		final cgSearch search = new cgSearch();
+		UUID searchId = null;
 
 		try {
 			GPXParser parser = new GPX10Parser(app, listId, search);
 			searchId = parser.parse(file, handler);
-			if (searchId == 0L) {
+			if (searchId == null) {
 				parser = new GPX11Parser(app, listId, search);
 				searchId = parser.parse(file, handler);
 			}

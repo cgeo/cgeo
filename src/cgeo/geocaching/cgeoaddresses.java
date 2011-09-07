@@ -19,7 +19,7 @@ import android.widget.LinearLayout;
 import cgeo.geocaching.activity.AbstractActivity;
 
 public class cgeoaddresses extends AbstractActivity {
-	private final ArrayList<Address> addresses = new ArrayList<Address>();
+	private final List<Address> addresses = new ArrayList<Address>();
 	private String keyword = null;
 	private LayoutInflater inflater = null;
 	private LinearLayout addList = null;

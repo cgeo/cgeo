@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -26,6 +31,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import cgeo.geocaching.LogTemplateProvider.LogTemplate;
+import cgeo.geocaching.utils.CollectionUtils;
 
 public class cgeovisit extends cgLogForm {
 	static final String EXTRAS_FOUND = "found";
@@ -38,7 +44,7 @@ public class cgeovisit extends cgLogForm {
 	
 	private LayoutInflater inflater = null;
 	private cgCache cache = null;
-	private ArrayList<Integer> types = new ArrayList<Integer>();
+	private List<Integer> types = new ArrayList<Integer>();
 	private ProgressDialog waitDialog = null;
 	private String cacheid = null;
 	private String geocode = null;
@@ -46,7 +52,7 @@ public class cgeovisit extends cgLogForm {
 	private boolean alreadyFound = false;
 	private String[] viewstates = null;
 	private Boolean gettingViewstate = true;
-	private ArrayList<cgTrackableLog> trackables = null;
+	private List<cgTrackableLog> trackables = null;
 	private Calendar date = Calendar.getInstance();
 	private int typeSelected = 1;
 	private int attempts = 0;
@@ -79,7 +85,7 @@ public class cgeovisit extends cgLogForm {
 				showToast(res.getString(R.string.info_log_type_changed));
 			}
 
-			if (cgBase.isEmpty(viewstates) && attempts < 2) {
+			if (ArrayUtils.isEmpty(viewstates) && attempts < 2) {
 				showToast(res.getString(R.string.err_log_load_data_again));
 
 				loadData thread;
@@ -87,7 +93,7 @@ public class cgeovisit extends cgLogForm {
 				thread.start();
 
 				return;
-			} else if (cgBase.isEmpty(viewstates) && attempts >= 2) {
+			} else if (ArrayUtils.isEmpty(viewstates) && attempts >= 2) {
 				showToast(res.getString(R.string.err_log_load_data));
 				showProgress(false);
 
@@ -103,7 +109,7 @@ public class cgeovisit extends cgLogForm {
 			post.setOnClickListener(new postListener());
 
 			// add trackables
-			if (trackables != null && trackables.isEmpty() == false) {
+			if (CollectionUtils.isNotEmpty(trackables)) {
 				if (inflater == null) {
 					inflater = getLayoutInflater();
 				}
@@ -234,16 +240,16 @@ public class cgeovisit extends cgLogForm {
 			alreadyFound = extras.getBoolean(EXTRAS_FOUND);
 		}
 
-		if ((cacheid == null || cacheid.length() == 0) && geocode != null && geocode.length() > 0) {
+		if ((StringUtils.isBlank(cacheid)) && StringUtils.isNotBlank(geocode)) {
 			cacheid = app.getCacheid(geocode);
 		}
-		if ((geocode == null || geocode.length() == 0) && cacheid != null && cacheid.length() > 0) {
+		if ((StringUtils.isBlank(geocode)) && StringUtils.isNotBlank(cacheid)) {
 			geocode = app.getGeocode(cacheid);
 		}
 
 		cache = app.getCacheByGeocode(geocode);
 
-		if (cache.name != null && cache.name.length() > 0) {
+		if (StringUtils.isNotBlank(cache.name)) {
 			setTitle(res.getString(R.string.log_new_log) + " " + cache.name);
 		} else {
 			setTitle(res.getString(R.string.log_new_log) + " " + cache.geocode.toUpperCase());
@@ -305,7 +311,7 @@ public class cgeovisit extends cgLogForm {
 		boolean signatureAvailable = settings.getSignature() != null;
 		menu.findItem(MENU_SIGNATURE).setVisible(signatureAvailable);
 
-		boolean voteAvailable = settings.isGCvoteLogin() && typeSelected == cgBase.LOG_FOUND_IT && cache.guid != null && cache.guid.length() > 0;
+		boolean voteAvailable = settings.isGCvoteLogin() && typeSelected == cgBase.LOG_FOUND_IT && StringUtils.isNotBlank(cache.guid);
 		menu.findItem(SUBMENU_VOTE).setVisible(voteAvailable);
 
 		return true;
@@ -318,7 +324,7 @@ public class cgeovisit extends cgLogForm {
 		if (id == MENU_SIGNATURE) {
 			EditText log = (EditText) findViewById(R.id.log);
 			String content = log.getText().toString();
-			if (content.length() > 0) {
+			if (StringUtils.isNotBlank(content)) {
 				insertIntoLog("\n");
 			}
 			insertIntoLog(LogTemplateProvider.applyTemplates(settings.getSignature(), base));
@@ -355,19 +361,19 @@ public class cgeovisit extends cgLogForm {
 	}
 
 	public boolean setRating(String guid, double vote) {
-		if (guid == null || guid.length() == 0) {
+		if (StringUtils.isBlank(guid)) {
 			return false;
 		}
 		if (vote < 0.0 || vote > 5.0) {
 			return false;
 		}
 
-		final HashMap<String, String> login = settings.getGCvoteLogin();
+		final Map<String, String> login = settings.getGCvoteLogin();
 		if (login == null) {
 			return false;
 		}
 
-		final HashMap<String, String> params = new HashMap<String, String>();
+		final Map<String, String> params = new HashMap<String, String>();
 		params.put("userName", login.get("username"));
 		params.put("password", login.get("password"));
 		params.put("cacheId", guid);
@@ -498,10 +504,9 @@ public class cgeovisit extends cgLogForm {
 				}
 				post.setText(res.getString(R.string.log_post_no_rate));
 			}
-		} else if (settings.getSignature() != null
+		} else if (StringUtils.isNotBlank(settings.getSignature())
 		        && settings.signatureAutoinsert
-		        && settings.getSignature().length() > 0
-		        && 0 == ((EditText) findViewById(R.id.log)).getText().length()) {
+		        && StringUtils.isBlank(((EditText) findViewById(R.id.log)).getText())) {
 			insertIntoLog(LogTemplateProvider.applyTemplates(settings.getSignature(), base));
 		}
 
@@ -529,7 +534,7 @@ public class cgeovisit extends cgLogForm {
 		dateButton.setOnClickListener(new cgeovisitDateListener());
 
 		EditText logView = (EditText) findViewById(R.id.log);
-		if (logView.getText().length() == 0 && text != null && text.length() > 0) {
+		if (StringUtils.isBlank(logView.getText()) && StringUtils.isNotBlank(text) ) {
 			logView.setText(text);
 		}
 
@@ -545,7 +550,7 @@ public class cgeovisit extends cgLogForm {
 		if (post == null) {
 			post = (Button) findViewById(R.id.post);
 		}
-		if (cgBase.isEmpty(viewstates)) {
+		if (ArrayUtils.isEmpty(viewstates)) {
 			post.setEnabled(false);
 			post.setOnTouchListener(null);
 			post.setOnClickListener(null);
@@ -670,7 +675,7 @@ public class cgeovisit extends cgLogForm {
 			dateButton.setOnClickListener(new cgeovisitDateListener());
 
 			EditText logView = (EditText) findViewById(R.id.log);
-			if (text != null && text.length() > 0) {
+			if (StringUtils.isNotBlank(text)) {
 				logView.setText(text);
 			} else {
 				logView.setText("");
@@ -698,14 +703,14 @@ public class cgeovisit extends cgLogForm {
 
 		@Override
 		public void run() {
-			final HashMap<String, String> params = new HashMap<String, String>();
+			final Map<String, String> params = new HashMap<String, String>();
 
 			showProgressHandler.sendEmptyMessage(0);
 			gettingViewstate = true;
 			attempts++;
 
 			try {
-				if (cacheid != null && cacheid.length() > 0) {
+				if (StringUtils.isNotBlank(cacheid)) {
 					params.put("ID", cacheid);
 				} else {
 					loadDataHandler.sendEmptyMessage(0);
@@ -717,8 +722,8 @@ public class cgeovisit extends cgLogForm {
 				viewstates = cgBase.getViewstates(page);
 				trackables = cgBase.parseTrackableLog(page);
 
-				final ArrayList<Integer> typesPre = cgBase.parseTypes(page);
-				if (typesPre.size() > 0) {
+				final List<Integer> typesPre = cgBase.parseTypes(page);
+				if (CollectionUtils.isNotEmpty(typesPre)) {
 					types.clear();
 					types.addAll(typesPre);
 					types.remove(Integer.valueOf(cgBase.LOG_UPDATE_COORDINATES));
@@ -799,8 +804,8 @@ public class cgeovisit extends cgLogForm {
 
 			if (
 					status == 1 && typeSelected == cgBase.LOG_FOUND_IT && settings.twitter == 1
-					&& settings.tokenPublic != null && settings.tokenPublic.length() > 0 && settings.tokenSecret != null
-					&& settings.tokenSecret.length() > 0 && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE
+					&& StringUtils.isNotBlank(settings.tokenPublic) && StringUtils.isNotBlank(settings.tokenSecret)
+				    && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE
 			) {
 				cgBase.postTweetCache(app, settings, geocode);
 			}

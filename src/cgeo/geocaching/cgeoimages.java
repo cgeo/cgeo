@@ -3,6 +3,9 @@ package cgeo.geocaching;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -30,7 +33,7 @@ public class cgeoimages extends AbstractActivity {
 	public static final int SPOILER_IMAGE = 2;
 
 	private int img_type;
-	private ArrayList<cgImage> images = new ArrayList<cgImage>();
+	private List<cgImage> images = new ArrayList<cgImage>();
 	private String geocode = null;
 	private String title = null;
 	private String url = null;
@@ -92,7 +95,7 @@ public class cgeoimages extends AbstractActivity {
 
 						((TextView) rowView.findViewById(R.id.title)).setText(Html.fromHtml(img.title));
 
-						if (img.description != null && img.description.length() > 0) {
+						if (StringUtils.isNotBlank(img.description)) {
 							final TextView descView = (TextView) rowView.findViewById(R.id.description);
 							descView.setText(Html.fromHtml(img.description), TextView.BufferType.SPANNABLE);
 							descView.setVisibility(View.VISIBLE);

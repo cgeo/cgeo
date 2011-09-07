@@ -1,5 +1,7 @@
 package cgeo.geocaching.sorting;
 
+import org.apache.commons.lang3.StringUtils;
+
 import cgeo.geocaching.cgCache;
 
 /**
@@ -10,8 +12,8 @@ public class GeocodeComparator extends AbstractCacheComparator {
 
 	@Override
 	protected boolean canCompare(cgCache cache1, cgCache cache2) {
-		return cache1.geocode != null && cache1.geocode.length() > 0
-				&& cache2.geocode != null && cache2.geocode.length() > 0;
+		return StringUtils.isNotBlank(cache1.geocode)
+				&& StringUtils.isNotBlank(cache2.geocode);
 	}
 
 	@Override

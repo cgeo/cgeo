@@ -1,6 +1,7 @@
 package cgeo.geocaching.activity;
 
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -65,7 +66,7 @@ public abstract class AbstractListActivity extends ListActivity implements
 		// init
 		res = this.getResources();
 		app = (cgeoapplication) this.getApplication();
-		prefs = getSharedPreferences(cgSettings.preferences, 0);
+		prefs = getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE);
 		settings = new cgSettings(this, prefs);
 		base = new cgBase(app, settings, prefs);
 	}

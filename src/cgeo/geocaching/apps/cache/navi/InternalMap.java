@@ -1,5 +1,7 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import java.util.UUID;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -19,7 +21,7 @@ class InternalMap extends AbstractInternalMap implements
 	@Override
 	public boolean invoke(cgGeo geo, Activity activity, Resources res,
 			cgCache cache,
-			Long searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
+			final UUID searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
 		cgSettings settings = getSettings(activity);
 		Intent mapIntent = new Intent(activity, settings.getMapFactory().getMapClass());
 		if (cache != null) {
@@ -28,7 +30,7 @@ class InternalMap extends AbstractInternalMap implements
 		}
 		if (searchId != null) {
 			mapIntent.putExtra("detail", true);
-			mapIntent.putExtra("searchid", searchId);
+			mapIntent.putExtra("searchid", searchId.toString());
 		}
 		if (waypoint != null) {
 			mapIntent.putExtra("latitude", waypoint.latitude);

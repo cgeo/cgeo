@@ -1,10 +1,12 @@
 package cgeo.geocaching;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.content.Context;
@@ -59,10 +61,8 @@ public class cgeopoint extends AbstractActivity {
 					.findViewById(R.id.simple_way_point_latitude);
 			TextView date = (TextView) convertView.findViewById(R.id.date);
 
-			String lonString = cgBase.formatCoordinate(loc.getLongitude(), "lon",
-					true);
-			String latString = cgBase.formatCoordinate(loc.getLatitude(), "lat",
-					true);
+			String lonString = cgBase.formatLongitude(loc.getLongitude(), true);
+			String latString = cgBase.formatLatitude(loc.getLatitude(), true);
 
 			longitude.setText(lonString);
 			latitude.setText(latString);
@@ -247,8 +247,8 @@ public class cgeopoint extends AbstractActivity {
 		lonButton.setOnClickListener(new coordDialogListener());
 
 		if (prefs.contains("anylatitude") && prefs.contains("anylongitude")) {
-			latButton.setText(cgBase.formatCoordinate(Double.valueOf(prefs.getFloat("anylatitude", 0f)), "lat", true));
-			lonButton.setText(cgBase.formatCoordinate(Double.valueOf(prefs.getFloat("anylongitude", 0f)), "lon", true));
+			latButton.setText(cgBase.formatLatitude(Double.valueOf(prefs.getFloat("anylatitude", 0f)), true));
+			lonButton.setText(cgBase.formatLongitude(Double.valueOf(prefs.getFloat("anylongitude", 0f)), true));
 		}
 
 		Button buttonCurrent = (Button) findViewById(R.id.current);
@@ -271,8 +271,8 @@ public class cgeopoint extends AbstractActivity {
 			coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
 				@Override
 				public void update(Geopoint gp) {
-					latButton.setText(cgBase.formatCoordinate(gp.getLatitude(), "lat", true));
-					lonButton.setText(cgBase.formatCoordinate(gp.getLongitude(), "lon", true));
+					latButton.setText(cgBase.formatLatitude(gp.getLatitude(), true));
+					lonButton.setText(cgBase.formatLongitude(gp.getLongitude(), true));
 					changed = true;
 				}
 			});
@@ -301,7 +301,7 @@ public class cgeopoint extends AbstractActivity {
 		super.onPrepareOptionsMenu(menu);
 
 		try {
-			ArrayList<Double> coords = getDestination();
+			List<Double> coords = getDestination();
 
 			if (coords != null && coords.get(0) != null && coords.get(1) != null) {
 				menu.findItem(0).setVisible(true);
@@ -325,7 +325,7 @@ public class cgeopoint extends AbstractActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		final int menuItem = item.getItemId();
 
-		ArrayList<Double> coords = getDestination();
+		List<Double> coords = getDestination();
 
 		if(coords != null && !coords.isEmpty())
 		{
@@ -347,7 +347,8 @@ public class cgeopoint extends AbstractActivity {
 		return NavigationAppFactory.onMenuItemSelected(item, geo, this, res, null, null, null, coords);
 	}
 
-	private void addToHistory(ArrayList<Double> coords) {
+	private void addToHistory(List
+			<Double> coords) {
 		// Add locations to history
 		cgDestination loc = new cgDestination();
 		loc.setLatitude(coords.get(0));
@@ -424,7 +425,7 @@ public class cgeopoint extends AbstractActivity {
 	}
 
 	private void cachesAround() {
-		ArrayList<Double> coords = getDestination();
+		List<Double> coords = getDestination();
 
 		if (coords == null || coords.get(0) == null || coords.get(1) == null) {
 			showToast(res.getString(R.string.err_location_unknown));
@@ -454,8 +455,8 @@ public class cgeopoint extends AbstractActivity {
 			}
 
 			try {
-				latButton.setHint(cgBase.formatCoordinate(geo.latitudeNow, "lat", false));
-				lonButton.setHint(cgBase.formatCoordinate(geo.longitudeNow, "lon", false));
+				latButton.setHint(cgBase.formatLatitude(geo.latitudeNow, false));
+				lonButton.setHint(cgBase.formatLongitude(geo.longitudeNow, false));
 			} catch (Exception e) {
 				Log.w(cgSettings.tag, "Failed to update location.");
 			}
@@ -470,15 +471,15 @@ public class cgeopoint extends AbstractActivity {
 				return;
 			}
 
-			latButton.setText(cgBase.formatCoordinate(geo.latitudeNow, "lat", true));
-			lonButton.setText(cgBase.formatCoordinate(geo.longitudeNow, "lon", true));
+			latButton.setText(cgBase.formatLatitude(geo.latitudeNow, true));
+			lonButton.setText(cgBase.formatLongitude(geo.longitudeNow, true));
 
 			changed = false;
 		}
 	}
 
-	private ArrayList<Double> getDestination() {
-		ArrayList<Double> coords = new ArrayList<Double>();
+	private List<Double> getDestination() {
+		List<Double> coords = new ArrayList<Double>();
 		Double latitude = null;
 		Double longitude = null;
 
@@ -487,16 +488,16 @@ public class cgeopoint extends AbstractActivity {
 		String latText = latButton.getText().toString();
 		String lonText = lonButton.getText().toString();
 
-		if ((bearingText == null || bearingText.length() == 0) && (distanceText == null || distanceText.length() == 0)
-				&& (latText == null || latText.length() == 0) && (lonText == null || lonText.length() == 0)) {
+		if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText)
+				&& StringUtils.isBlank(latText) && StringUtils.isBlank(lonText)) {
 			showToast(res.getString(R.string.err_point_no_position_given));
 			return null;
 		}
 
-		if (latText != null && latText.length() > 0 && lonText != null && lonText.length() > 0) {
+		if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
 			// latitude & longitude
-			HashMap<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
-			HashMap<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lon");
+			Map<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
+			Map<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lon");
 
 			if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
 				showToast(res.getString(R.string.err_parse_lat));
@@ -520,7 +521,7 @@ public class cgeopoint extends AbstractActivity {
 			longitude = geo.longitudeNow;
 		}
 
-		if (bearingText != null && bearingText.length() > 0 && distanceText != null && distanceText.length() > 0) {
+		if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
 			// bearing & distance
 			Double bearing = null;
 			try {
@@ -577,7 +578,7 @@ public class cgeopoint extends AbstractActivity {
 			Double latParsed = null;
 			Double lonParsed = null;
 
-			HashMap<String, Double> coordsDst = cgBase.getRadialDistance(latitude, longitude, bearing, distance);
+			Map<String, Double> coordsDst = cgBase.getRadialDistance(latitude, longitude, bearing, distance);
 
 			latParsed = coordsDst.get("latitude");
 			lonParsed = coordsDst.get("longitude");

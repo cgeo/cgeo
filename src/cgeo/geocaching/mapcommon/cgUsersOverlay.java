@@ -1,8 +1,11 @@
 package cgeo.geocaching.mapcommon;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -23,7 +26,7 @@ import cgeo.geocaching.mapinterfaces.UserOverlayItemImpl;
 
 public class cgUsersOverlay extends ItemizedOverlayBase implements OverlayBase {
 
-	private ArrayList<UserOverlayItemImpl> items = new ArrayList<UserOverlayItemImpl>();
+	private List<UserOverlayItemImpl> items = new ArrayList<UserOverlayItemImpl>();
 	private Context context = null;
 	private final Pattern patternGeocode = Pattern.compile("^(GC[A-Z0-9]+)(\\: ?(.+))?$", Pattern.CASE_INSENSITIVE);
 
@@ -35,13 +38,13 @@ public class cgUsersOverlay extends ItemizedOverlayBase implements OverlayBase {
 	}
 
 	protected void updateItems(UserOverlayItemImpl item) {
-		ArrayList<UserOverlayItemImpl> itemsPre = new ArrayList<UserOverlayItemImpl>();
+		List<UserOverlayItemImpl> itemsPre = new ArrayList<UserOverlayItemImpl>();
 		itemsPre.add(item);
 
 		updateItems(itemsPre);
 	}
 
-	public void updateItems(ArrayList<UserOverlayItemImpl> itemsPre) {
+	public void updateItems(List<UserOverlayItemImpl> itemsPre) {
 		if (itemsPre == null) {
 			return;
 		}
@@ -109,7 +112,7 @@ public class cgUsersOverlay extends ItemizedOverlayBase implements OverlayBase {
 			dialog.setTitle(user.username);
 			dialog.setMessage(action);
 			dialog.setCancelable(true);
-			if (geocode != null && geocode.length() > 0) {
+			if (StringUtils.isNotBlank(geocode)) {
 				dialog.setPositiveButton(geocode + "?", new cacheDetails(geocode));
 			}
 			dialog.setNeutralButton("Dismiss", new DialogInterface.OnClickListener() {

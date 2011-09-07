@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
   <string name="app_name">c:geo</string>
-  <string name="app_name_compass">c:geo compass</string>
+  <string name="app_name_compass">boussole c:geo</string>
 
   <!-- basics -->
   <string name="cache">cache</string>
@@ -15,7 +15,7 @@
   <string name="traditional">traditionnelles</string>
   <string name="multi">multiples</string>
   <string name="mystery">inconnues</string>
-  <string name="letterbox">boites-à-lettres hybrides</string>
+  <string name="letterbox">boîtes aux lettres hybrides</string>
   <string name="event">évènements</string>
   <string name="mega">méga-évènements</string>
   <string name="earth">earthcache</string>
@@ -43,14 +43,14 @@
   <string name="log_published">publiée</string>
   <string name="log_enabled">activée</string>
   <string name="log_disabled">désactivée</string>
-  <string name="log_attend">will attend</string>
-  <string name="log_attended">attended</string>
+  <string name="log_attend">va participer</string>
+  <string name="log_attended">a participé</string>
   <string name="log_retrieved">retrouvé</string>
   <string name="log_grabbed">pris ailleurs</string>
   <string name="log_maintained">maintenu</string>
   <string name="log_maintenance_needed">nécessite une maintenance</string>
-  <string name="log_maintenance_owner">maitenance</string>
-  <string name="log_update">coordonnées mise-à-jours</string>
+  <string name="log_maintenance_owner">maintenance</string>
+  <string name="log_update">coordonnées mises à jour</string>
   <string name="log_archived">archivée</string>
   <string name="log_needs_archived">nécessite d\'être archivée</string>
   <string name="log_discovered">retrouvée</string>
@@ -58,7 +58,7 @@
   <string name="log_tb_nothing">ne fait rien</string>
   <string name="log_tb_visit">visité</string>
   <string name="log_tb_drop">déposé ici</string>
-  <string name="log_tb_changeall">Tout modifier</string>
+  <string name="log_tb_changeall">tout modifié</string>
   <string name="log_save">Enregistrer</string>
   <string name="log_saving">Enregistrement en cours…</string>
   <string name="log_clear">Effacer</string>
@@ -84,38 +84,38 @@
 
   <!-- errors -->
   <string name="err_none">ok</string>
-  <string name="err_start">communication not started</string>
-  <string name="err_parse">failed login page parsing</string>
-  <string name="err_server">failed connection to geocaching.com (server or connection down?)</string>
-  <string name="err_login">no login information stored</string>
-  <string name="err_unknown">unknown error</string>
-  <string name="err_comm">unknown communication error</string>
-  <string name="err_wrong">wrong login informations</string>
-  <string name="err_license">user has not agreed to Geocaching.com license agreement</string>
-  <string name="err_store">Sorry, c:geo can\'t store cache.</string>
-  <string name="err_drop">Sorry, c:geo can\'t drop cache.</string>
-  <string name="err_title_problem">problem</string>
-  <string name="err_detail_open">Sorry, c:geo can\'t open geocache details.</string>
-  <string name="err_detail_cache">Sorry, c:geo can\'t display geocache you want. Is it really geocache?</string>
-  <string name="err_detail_cache_find">Sorry, c:geo can\'t find geocache</string>
-  <string name="err_detail_cache_find_some">Sorry, c:geo can\'t find that geocache.</string>
-  <string name="err_detail_cache_forgot">Sorry, c:geo forgot which geocache you want.</string>
-  <string name="err_detail_cache_language">c:geo can\'t read some cache details. Please check if you have geocaching.com website set to English. Unfortunately, c:geo doesn\'t understand other localizations.</string>
-  <string name="err_detail_no_spoiler">c:geo found no spoiler images for this cache.</string>
-  <string name="err_detail_no_map_static">c:geo found no static maps for this cache.</string>
-  <string name="err_detail_still_removing">Still removing this cache.</string>
-  <string name="err_detail_still_saving">Still saving this cache.</string>
-  <string name="err_detail_still_refreshing">Still reloading this cache.</string>
-  <string name="err_radar_title">Radar isn\'t installed.</string>
-  <string name="err_radar_message">This function requires Radar application. Would you install it?</string>
-  <string name="err_radar_market">c:geo can\'t start Android Market to search for Radar application.</string>
-  <string name="err_radar_generic">Sorry, c:geo can\'t start Radar application. Is installed?</string>
-  <string name="err_navigation_no">c:geo can\'t find any supported navigation.</string>
-  <string name="err_application_no">c:geo can\'t find any suitable application.</string>
-  <string name="err_auth_initialize">Sorry, c:geo failed to initialize authorization process.</string>
-  <string name="err_auth_process">Authorization process failed.</string>
-  <string name="err_cannot_log_visit">c:geo has not enough information to log visit. Please, do it from full cache details.</string>
-  <string name="err_init_cleared">Sorry, c:geo can\'t clear your login.</string>
+  <string name="err_start">communication non démarrée</string>
+  <string name="err_parse">échec login lecture page</string>
+  <string name="err_server">échec de la connexion à geocaching.com (probléme de serveur ou de connexion?)</string>
+  <string name="err_login">pas d\'utilisateur ou de mot de passe enregistré</string>
+  <string name="err_unknown">erreur inconnue</string>
+  <string name="err_comm">erreur inconnue de communication</string>
+  <string name="err_wrong">nom d\'utilisateur inconnu ou mauvais mot de passe</string>
+  <string name="err_license">l\'utilisateur n\'a pas accepté les termes et les conditions d\'utilisation de Geocaching.com</string>
+  <string name="err_store">Désolé, c:geo ne peut pas enregister la cache.</string>
+  <string name="err_drop">Désolé, c:geo ne peut pas effacer la cache.</string>
+  <string name="err_title_problem">problème</string>
+  <string name="err_detail_open">Désolé, c:geo ne peut pas ouvrir le détail de la cache.</string>
+  <string name="err_detail_cache">Désolé, c:geo ne peut pas afficher cette cache. Est-ce vraiment une geocache?</string>
+  <string name="err_detail_cache_find">Désolé, c:geo ne peut pas trouver de caches</string>
+  <string name="err_detail_cache_find_some">Désolé, c:geo ne peut pas trouver cette geocache.</string>
+  <string name="err_detail_cache_forgot">Désolé, c:geo a oublié la cache demandée.</string>
+  <string name="err_detail_cache_language">c:geo ne peut pas lire certains details de la cache. Merci de vérifier que le site Web geocaching.com est configuré en Anglais. Malheureusement, c:geo ne supporte pas les autres langues.</string>
+  <string name="err_detail_no_spoiler">c:geo n\'a pas trouvé de photo solution pour cette cache.</string>
+  <string name="err_detail_no_map_static">c:geo n\'a pas trouvé de cartes statiques pour cette cache.</string>
+  <string name="err_detail_still_removing">Cache toujours en cours d\'effacement.</string>
+  <string name="err_detail_still_saving">Cache toujours en cours de sauvegarde.</string>
+  <string name="err_detail_still_refreshing">Cache toujours en cours de chargement.</string>
+  <string name="err_radar_title">Le radar n\'est pas installé.</string>
+  <string name="err_radar_message">Cette fonction nécessite l\'application Radar. Voulez-vous l\'installer?</string>
+  <string name="err_radar_market">c:geo ne peux pas démarrer le Market Android pour rechercher l\'application Radar.</string>
+  <string name="err_radar_generic">Désolé, c:geo ne peux pas démarrer l\'application Radar. Est-elle installé?</string>
+  <string name="err_navigation_no">c:geo ne trouve pas de navigation supporté.</string>
+  <string name="err_application_no">c:geo ne trouve pas d\'application conforme.</string>
+  <string name="err_auth_initialize">Désolé, c:geo a échoué dans la demande d\'autorisation.</string>
+  <string name="err_auth_process">Echec de la demande d\'autorisation.</string>
+  <string name="err_cannot_log_visit">c:geo n\'a pas assez d\'information pour logger votre visite. Faites le depuis le détail de la cache, s\'il vous plait!</string>
+  <string name="err_init_cleared">Désolé, c:geo ne peux pas effacer votre nom d\'utilisateur.</string>
 
   <!-- location service -->
   <string name="loc_last">dernière pos. connue</string>
@@ -176,27 +176,27 @@
   <string name="init_skin">aspect sobre (nécessite le redémarrage de c:geo)</string>
   <string name="init_transparent">accueil de c:geo transparent</string>
   <string name="init_address">afficher l\'adresse sur l\'accueil</string>
-  <string name="init_exclude">exclure les caches trouvée et les miennes</string>
-  <string name="init_disabled">exclure les caches sdésactivées</string>
-  <string name="init_offline">enregistrer les cartes pour utilisation hors ligne</string>
+  <string name="init_exclude">exclure les caches trouvées et les miennes</string>
+  <string name="init_disabled">exclure les cachess désactivées</string>
+  <string name="init_offline">enregistrer les cartes pour une utilisation hors ligne</string>
   <string name="init_units">utiliser des unités de distance impériales</string>
   <string name="init_nav">utiliser Google Navigation</string>
-  <string name="init_autoload">chargement auto des descriptions longues</string>
+  <string name="init_autoload">chargement automatique des descriptions longues</string>
   <string name="init_livelist">afficher la direction des caches dans les listes</string>
   <string name="init_browser">identifier c:geo comme navigateur standard</string>
-  <string name="init_cleared">c:geo à effacé votre identifiant.</string>
+  <string name="init_cleared">c:geo a effacé votre identifiant.</string>
 
   <!-- auth -->
   <string name="auth_twitter">twitter</string>
   <string name="auth_authorize">autorisation de c:geo</string>
-  <string name="auth_start">start authorization</string>
-  <string name="auth_again">start again</string>
-  <string name="auth_pin_hint">pin assigned by twitter</string>
-  <string name="auth_finish">finish</string>
-  <string name="auth_dialog_wait">Waiting for Twitter…</string>
-  <string name="auth_dialog_pin_title">pin code</string>
-  <string name="auth_dialog_pin_message">Please write PIN code provided by Twitter website. It\'s mandatory to complete authorization.</string>
-  <string name="auth_dialog_completed">c:geo is now authorized to post on your Twitter.</string>
+  <string name="auth_start">début d\'autorisation</string>
+  <string name="auth_again">redémarre</string>
+  <string name="auth_pin_hint">code pin attribué par twitter</string>
+  <string name="auth_finish">terminé</string>
+  <string name="auth_dialog_wait">en attente de Twitter…</string>
+  <string name="auth_dialog_pin_title">code PIN</string>
+  <string name="auth_dialog_pin_message">Veuillez saisir votre code PIN fourni par Twitter. Il est obligatoire pour finaliser l\'autorisation.</string>
+  <string name="auth_dialog_completed">c:geo est maintenant autorisé à poster sur Twitter.</string>
 
   <!-- cache -->
   <string name="cache_count_no">aucune cache</string>
@@ -223,11 +223,11 @@
   <string name="cache_waypoints_add">ajouter une étape</string>
   <string name="cache_hint">indice</string>
   <string name="cache_logs">carnet de bord</string>
-  <string name="cache_dialog_loading_details">chargement des détails…</string>
+  <string name="cache_dialog_loading_details">Chargement des détails…</string>
   <string name="cache_dialog_loading_description">Chargement de la description…</string>
-  <string name="cache_dialog_offline_save_title">hors ligne</string>
+  <string name="cache_dialog_offline_save_title">Hors ligne</string>
   <string name="cache_dialog_offline_save_message">Enregistrement pour une utilisation hors ligne…</string>
-  <string name="cache_dialog_offline_drop_title">hors ligne</string>
+  <string name="cache_dialog_offline_drop_title">Hors ligne</string>
   <string name="cache_dialog_offline_drop_message">Suppression des caches de la mémoire…</string>
   <string name="cache_dialog_refresh_title">Recharger</string>
   <string name="cache_dialog_refresh_message">Rechargement des détails…</string>
@@ -245,7 +245,7 @@
   <string name="cache_menu_event">ajouter à l\'agenda</string>
   <string name="cache_menu_details">détails</string>
   <string name="cache_status">statut</string>
-  <string name="cache_status_offline_log">saved log</string>
+  <string name="cache_status_offline_log">logs sauvés</string>
   <string name="cache_status_found">trouvée</string>
   <string name="cache_status_archived">archivée</string>
   <string name="cache_status_disabled">désactivée</string>
@@ -288,8 +288,8 @@
   <string name="website">site: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">page c:geo</a></string>
   <string name="twitter">twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
-  <string name="about_go4cache">Le service <b>Go 4 cache</b> vous permet de voir en temps réel d\'autres géocacheurs sur une carte (dans <b>c:geo</b> ou dans le navigateur). Il peut afficher quelles caches ils recherchent. En vous connectant sur <b>Go 4 cache</b> vous permettez à <b>c:geo</b> de publier votre publication pendant (seulement si <b>c:geo</b> fonctionne).</string>
-  <string name="about_twitter">Do you want to publish new status on Twitter everytimes you log find through <b>c:geo</b>?</string>
-  <string name="about_auth_1">The following proccess allows <b>c:geo</b> to access your Twitter account - if you agree.</string>
-  <string name="about_auth_2">Click on \"authorize c:geo\" button will start process. This process will open web browser with Twitter page where you have to login and Accept <b>c:geo</b> to access your account. When you Accept, Twitter will show you numeric PIN code. Please copy this code, paste into <b>c:geo</b> and confirm. That\'s all.</string>
+  <string name="about_go4cache">Le service <b>Go 4 cache</b> vous permet de voir en temps réel d\'autres géocacheurs sur une carte (dans <b>c:geo</b> ou dans le navigateur). Il peut afficher les caches en cours de recherche. En vous connectant sur <b>Go 4 cache</b> vous permettez à <b>c:geo</b> de publier votre publication (seulement si <b>c:geo</b> fonctionne).</string>
+  <string name="about_twitter">Voulez-vous publier un nouveau statut sur Twitter à chaque nouvelle cache découverte sous <b>c:geo</b>?</string>
+  <string name="about_auth_1">Le processus suivant permet à <b>c:geo</b> d\'accéder à votre compte Twitter - si vous acceptez.</string>
+  <string name="about_auth_2">Cliquer sur le bouton \"autoriser c:geo\" pour démarrer. Une fenêtre de navigateur va s\'ouvrir pour vous connecter sur Twitter. Accepter pour que <b>c:geo</b> accéde à votre compte. Twitter vous affichera alors une code PIN composé de chiffres. Merci de coller ce code dans <b>c:geo</b> puis confirmer. C\'est tout!</string>
 </resources>

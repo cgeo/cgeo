@@ -1,6 +1,9 @@
 package cgeo.geocaching.mapcommon;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -10,9 +13,9 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Point;
-import android.graphics.Paint.Style;
 import android.location.Location;
 import android.text.Html;
 import android.util.Log;
@@ -33,7 +36,7 @@ import cgeo.geocaching.mapinterfaces.OverlayBase;
 
 public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 
-	private ArrayList<CacheOverlayItemImpl> items = new ArrayList<CacheOverlayItemImpl>();
+	private List<CacheOverlayItemImpl> items = new ArrayList<CacheOverlayItemImpl>();
 	private Context context = null;
 	private Boolean fromDetail = false;
 	private boolean displayCircles = false;
@@ -59,13 +62,13 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 	}
 	
 	public void updateItems(CacheOverlayItemImpl item) {
-		ArrayList<CacheOverlayItemImpl> itemsPre = new ArrayList<CacheOverlayItemImpl>();
+		List<CacheOverlayItemImpl> itemsPre = new ArrayList<CacheOverlayItemImpl>();
 		itemsPre.add(item);
 
 		updateItems(itemsPre);
 	}
 
-	public void updateItems(ArrayList<CacheOverlayItemImpl> itemsPre) {
+	public void updateItems(List<CacheOverlayItemImpl> itemsPre) {
 		if (itemsPre == null) {
 			return;
 		}
@@ -199,7 +202,7 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 			
 			cgCoord coordinate = item.getCoord();
 
-			if (coordinate.type != null && coordinate.type.equalsIgnoreCase("cache") && coordinate.geocode != null && coordinate.geocode.length() > 0) {
+			if (coordinate.type != null && coordinate.type.equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.geocode)) {
 				Intent popupIntent = new Intent(context, cgeopopup.class);
 
 				popupIntent.putExtra("fromdetail", fromDetail);

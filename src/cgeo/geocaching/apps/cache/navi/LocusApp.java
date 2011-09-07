@@ -3,6 +3,10 @@ package cgeo.geocaching.apps.cache.navi;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +19,7 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.apps.AbstractLocusApp;
+import cgeo.geocaching.utils.CollectionUtils;
 
 class LocusApp extends AbstractLocusApp implements NavigationApp {
 
@@ -25,14 +30,14 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 	@Override
 	public boolean invoke(cgGeo geo, Activity activity, Resources res,
 			cgCache cache,
-			Long searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
+			final UUID searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
 		if (cache == null && waypoint == null && latitude == null
 				&& longitude == null) {
 			return false;
 		}
 		try {
 			if (isInstalled(activity)) {
-				final ArrayList<cgWaypoint> waypoints = new ArrayList<cgWaypoint>();
+				final List<cgWaypoint> waypoints = new ArrayList<cgWaypoint>();
 				// get only waypoints with coordinates
 				if (cache != null && cache.waypoints != null
 						&& cache.waypoints.isEmpty() == false) {
@@ -83,22 +88,18 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 				}
 
 				// name
-				if (cache != null && cache.name != null
-						&& cache.name.length() > 0) {
+				if (cache != null && StringUtils.isNotBlank(cache.name)) {
 					dos.writeUTF(cache.name);
-				} else if (waypoint != null && waypoint.name != null
-						&& waypoint.name.length() > 0) {
+				} else if (waypoint != null && StringUtils.isNotBlank(waypoint.name)) {
 					dos.writeUTF(waypoint.name);
 				} else {
 					dos.writeUTF("");
 				}
 
 				// description
-				if (cache != null && cache.geocode != null
-						&& cache.geocode.length() > 0) {
+				if (cache != null && StringUtils.isNotBlank(cache.geocode)) {
 					dos.writeUTF(cache.geocode.toUpperCase());
-				} else if (waypoint != null && waypoint.lookup != null
-						&& waypoint.lookup.length() > 0) {
+				} else if (waypoint != null && StringUtils.isNotBlank(waypoint.lookup)) {
 					dos.writeUTF(waypoint.lookup.toUpperCase());
 				} else {
 					dos.writeUTF("");
@@ -106,8 +107,7 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 
 				// additional data :: keyword, button title, package, activity,
 				// data name, data content
-				if (cache != null && cache.geocode != null
-						&& cache.geocode.length() > 0) {
+				if (cache != null && StringUtils.isNotBlank(cache.geocode)) {
 					dos.writeUTF("intent;c:geo;cgeo.geocaching;cgeo.geocaching.cgeodetail;geocode;"
 							+ cache.geocode);
 				} else if (waypoint != null && waypoint.id != null
@@ -132,7 +132,7 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 				}
 
 				// cache waypoints
-				if (waypoints != null && waypoints.isEmpty() == false) {
+				if (CollectionUtils.isNotEmpty(waypoints)) {
 					for (cgWaypoint wp : waypoints) {
 						if (wp == null || wp.latitude == null
 								|| wp.longitude == null) {
@@ -159,14 +159,14 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 						}
 
 						// name
-						if (wp.lookup != null && wp.lookup.length() > 0) {
+						if (StringUtils.isNotBlank(wp.lookup)) {
 							dos.writeUTF(wp.lookup.toUpperCase());
 						} else {
 							dos.writeUTF("");
 						}
 
 						// description
-						if (wp.name != null && wp.name.length() > 0) {
+						if (StringUtils.isNotBlank(wp.name)) {
 							dos.writeUTF(wp.name);
 						} else {
 							dos.writeUTF("");

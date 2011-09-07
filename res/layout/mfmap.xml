@@ -11,6 +11,10 @@
 		<TextView style="@style/action_bar_title" />
 		<ProgressBar style="@style/action_bar_progress"
 				android:visibility="gone" />
+		<View style="@style/action_bar_separator" />
+		<ImageSwitcher style="@style/action_bar_action"
+				android:id="@+id/my_position" />
+		<View style="@style/action_bar_separator" />
 		<ImageView style="@style/action_bar_action"
 				android:src="@drawable/actionbar_manual"
 				android:onClick="goManual" />
@@ -39,13 +43,5 @@
 				android:keepScreenOn="true"
 				android:enabled="true"
 				android:clickable="true" />
-		<ImageView android:id="@+id/my_position"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_alignParentTop="true"
-				android:layout_alignParentRight="true"
-				android:layout_margin="5dip"
-				android:padding="5dip"
-				android:src="@drawable/my_location_off" />
 	</RelativeLayout>
 </LinearLayout>

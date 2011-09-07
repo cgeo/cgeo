@@ -1,8 +1,10 @@
 package cgeo.geocaching;
 
-import android.text.Spannable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import android.text.Spannable;
 
 public class cgTrackable {
 	static public int SPOTTED_UNSET = 0;
@@ -31,5 +33,5 @@ public class cgTrackable {
 	public String goal = null;
 	public String details = null;
 	public String image = null;
-	public ArrayList<cgLog> logs = new ArrayList<cgLog>();
+	public List<cgLog> logs = new ArrayList<cgLog>();
 }

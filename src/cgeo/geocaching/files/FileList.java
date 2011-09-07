@@ -2,6 +2,9 @@ package cgeo.geocaching.files;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.ArrayUtils;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -17,7 +20,7 @@ import cgeo.geocaching.activity.AbstractListActivity;
 
 public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractListActivity {
 
-	private ArrayList<File> files = new ArrayList<File>();
+	private List<File> files = new ArrayList<File>();
 	private T adapter = null;
 	private ProgressDialog waitDialog = null;
 	private loadFiles searchingThread = null;
@@ -113,7 +116,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
 		getSettings().load();
 	}
 
-	protected abstract T getAdapter(ArrayList<File> files);
+	protected abstract T getAdapter(List<File> files);
 
 	private void setAdapter() {
 		if (adapter == null) {
@@ -140,7 +143,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
 
 		@Override
 		public void run() {
-			ArrayList<File> list = new ArrayList<File>();
+			List<File> list = new ArrayList<File>();
 
 			try {
 				if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
@@ -178,14 +181,14 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
 		}
 	}
 
-	private void listDir(ArrayList<File> result, File directory) {
+	private void listDir(List<File> result, File directory) {
 		if (directory == null || !directory.isDirectory() || !directory.canRead()) {
 			return;
 		}
 
 		final File[] files = directory.listFiles();
 
-		if (files != null && files.length > 0) {
+		if (ArrayUtils.isNotEmpty(files)) {
 			for (File file : files) {
 				if (endSearching) {
 					return;
