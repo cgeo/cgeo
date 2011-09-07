@@ -2246,32 +2246,40 @@ public class cgData {
 
 		ArrayList<cgLog> logs = new ArrayList<cgLog>();
 
-		Cursor cursor = databaseRO.query(
-				dbTableLogs,
-				new String[]{"_id", "type", "author", "log", "date", "found"},
-				"geocode = \"" + geocode + "\"",
-				null,
-				null,
-				null,
-				"date desc, _id asc",
-				"100");
+		Cursor cursor = databaseRO.rawQuery(
+				"SELECT cg_logs._id as cg_logs_id, type, author, log, date, found, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url FROM "
+						+ dbTableLogs + " LEFT OUTER JOIN " + dbTableLogImages
+						+ " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date desc, cg_logs._id asc", new String[]{ geocode});
 
 		if (cursor != null && cursor.getCount() > 0) {
-			cursor.moveToFirst();
-
-			do {
-				cgLog log = new cgLog();
-				log.id = (int) cursor.getInt(cursor.getColumnIndex("_id"));
-				log.type = (int) cursor.getInt(cursor.getColumnIndex("type"));
-				log.author = (String) cursor.getString(cursor.getColumnIndex("author"));
-				log.log = (String) cursor.getString(cursor.getColumnIndex("log"));
-				log.date = (long) cursor.getLong(cursor.getColumnIndex("date"));
-				log.found = (int) cursor.getInt(cursor.getColumnIndex("found"));
-				//TODO load Log Images in-line with join (much faster)
-				log.logImages = loadLogImages(log.id);
-
-				logs.add(log);
-			} while (cursor.moveToNext());
+			cgLog log = null;
+			while (cursor.moveToNext()) {
+				if (log == null || log.id != cursor.getInt(cursor.getColumnIndex("cg_logs_id"))) {
+					log = new cgLog();
+					log.id = (int) cursor.getInt(cursor.getColumnIndex("cg_logs_id"));
+					log.type = (int) cursor.getInt(cursor.getColumnIndex("type"));
+					log.author = (String) cursor.getString(cursor.getColumnIndex("author"));
+					log.log = (String) cursor.getString(cursor.getColumnIndex("log"));
+					log.date = (long) cursor.getLong(cursor.getColumnIndex("date"));
+					log.found = (int) cursor.getInt(cursor.getColumnIndex("found"));
+					logs.add(log);
+				}
+				if (!cursor.isNull(cursor.getColumnIndex("cg_logImages_id"))) {
+					final cgImage log_img = new cgImage();
+					log_img.title = (String) cursor.getString(cursor.getColumnIndex("title"));
+					if (log_img.title == null) {
+						log_img.title = "";
+					}
+					log_img.url = (String) cursor.getString(cursor.getColumnIndex("url"));
+					if (log_img.url == null) {
+						log_img.url = "";
+					}
+					if (log.logImages == null) {
+						log.logImages = new ArrayList<cgImage>();
+					}
+					log.logImages.add(log_img);
+				}
+			}
 		}
 
 		if (cursor != null) {
@@ -2318,38 +2326,6 @@ public class cgData {
 		return logCounts;
 	}
 
-	public ArrayList<cgImage> loadLogImages(int log_id) {
-		init();
-
-		ArrayList<cgImage> logImgList = new ArrayList<cgImage>();
-
-		Cursor cursor = databaseRO.query(
-				dbTableLogImages,
-				new String[]{"_id", "log_id", "title", "url"},
-				"log_id = \"" + log_id + "\"",
-				null,
-				null,
-				null,
-				null,
-				"100");
-
-		if (cursor != null && cursor.getCount() > 0) {
-			cursor.moveToFirst();
-
-			do {
-				final cgImage log_img = new cgImage();
-				log_img.title = (String)cursor.getString(cursor.getColumnIndex("title"));
-				log_img.url = (String)cursor.getString(cursor.getColumnIndex("url"));
-				logImgList.add(log_img);
-			} while (cursor.moveToNext());
-		}
-
-		if (cursor != null) {
-			cursor.close();
-		}
-
-		return logImgList;
-	}
 
 	public ArrayList<cgTrackable> loadInventory(String geocode) {
 		if (geocode == null || geocode.length() == 0) {
