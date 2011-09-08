@@ -20,8 +20,9 @@ import android.widget.TextView;
 import cgeo.geocaching.cgSettings.coordInputFormatEnum;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.Geopoint.GeopointException;
+import cgeo.geocaching.geopoint.Geopoint.MalformedCoordinateException;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.geopoint.GeopointParser.ParseException;
 
 public class cgeocoords extends Dialog {
 
@@ -361,10 +362,18 @@ public class cgeocoords extends Dialog {
 
 	}
 
-	private void calc() {
+	private boolean calc() {
 		if (currentFormat == coordInputFormatEnum.Plain) {
-			gp = new Geopoint(eLat.getText().toString() + " " + eLon.getText().toString());
-			return;
+			try {
+				gp = new Geopoint(eLat.getText().toString() + " " + eLon.getText().toString());
+			} catch (ParseException e) {
+				context.showToast(context.getResources().getString(R.string.err_parse_lat_lon));
+				return false;
+			} catch (MalformedCoordinateException e) {
+				context.showToast(context.getResources().getString(R.string.err_invalid_lat_lon));
+				return false;
+			}
+			return true;
 		}
 
 		int latDeg = 0, latMin = 0, latSec = 0;
@@ -406,21 +415,25 @@ public class cgeocoords extends Dialog {
 		}
 		latitude  *= (bLat.getText().toString().equalsIgnoreCase("S") ? -1 : 1);
 		longitude *= (bLon.getText().toString().equalsIgnoreCase("W") ? -1 : 1);
-		gp = new Geopoint(latitude, longitude);
+		try {
+			gp = new Geopoint(latitude, longitude);
+		} catch (MalformedCoordinateException e) {
+			context.showToast(context.getResources().getString(R.string.err_invalid_lat_lon));
+			return false;
+		}
+		return true;
 	}
 
 	private class CoordinateFormatListener implements OnItemSelectedListener {
 
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-			try {
-				// Ignore first call, which comes from onCreate()
-				if (currentFormat != null)
-					calc();
-			} catch (GeopointException e) {
-				context.showToast(e.getMessage());
-				spinner.setSelection(currentFormat.ordinal());
-				return;
+			// Ignore first call, which comes from onCreate()
+			if (currentFormat != null) {
+				if (calc() == false) {
+					spinner.setSelection(currentFormat.ordinal());
+					return;
+				}
 			}
 
 			currentFormat = coordInputFormatEnum.fromInt(pos);
@@ -450,12 +463,8 @@ public class cgeocoords extends Dialog {
 
 		@Override
 		public void onClick(View v) {
-			try {
-				calc();
-			} catch (GeopointException e) {
-				context.showToast(e.getMessage());
+			if (calc() == false)
 				return;
-			}
 			if (gp != null)
 				cuListener.update(gp);
 			dismiss();
