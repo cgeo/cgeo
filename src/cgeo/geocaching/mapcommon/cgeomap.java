@@ -7,6 +7,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -1074,7 +1076,7 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 
 				// stage 1 - pull and render from the DB only
 
-				if (fromDetailIntent) {
+				if (fromDetailIntent || StringUtils.isNotEmpty(searchIdIntent)) {
 					searchId = UUID.fromString(searchIdIntent);
 				} else {
 					if (!live || settings.maplive == 0) {
@@ -1667,7 +1669,7 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 				if (geocodeCenter != null) {
 					viewport = app.getBounds(geocodeCenter);
 				} else {
-					viewport = app.getBounds(searchIdCenter);
+					viewport = app.getBounds(UUID.fromString(searchIdCenter));
 				}
 
 				if (viewport == null) return;
