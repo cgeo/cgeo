@@ -14,7 +14,7 @@ public class GC1ZXX2 extends MockedCache {
 	}
 
 	@Override
-	public String getLatitute() {
+	public String getLatitude() {
 		return "N 52° 22.393";
 	}
 

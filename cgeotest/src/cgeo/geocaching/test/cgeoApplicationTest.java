@@ -92,7 +92,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
 			Assert.assertEquals(cacheParsed.getDifficulty(), cache
 					.getDifficulty());
 			Assert.assertEquals(cacheParsed.getTerrain(), cache.getTerrain());
-			Assert.assertEquals(cacheParsed.getLatitute(), cache.getLatitute());
+			Assert.assertEquals(cacheParsed.getLatitude(), cache.getLatitude());
 			Assert.assertEquals(cacheParsed.getLongitude(), cache
 					.getLongitude());
 			Assert.assertEquals(cacheParsed.isDisabled(), cache.isDisabled());
