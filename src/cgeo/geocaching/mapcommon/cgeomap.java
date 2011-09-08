@@ -793,7 +793,7 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 					repaintRequired = true;
 				}
 
-				if (repaintRequired) {
+				if (repaintRequired && mapView != null) {
 					mapView.repaintRequired(overlayMyLoc);
 				}
 
