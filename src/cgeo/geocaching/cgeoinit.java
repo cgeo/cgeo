@@ -14,21 +14,21 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import cgeo.geocaching.LogTemplateProvider.LogTemplate;
-import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.maps.MapProviderFactory;
 
 public class cgeoinit extends AbstractActivity {
 
@@ -449,12 +449,12 @@ public class cgeoinit extends AbstractActivity {
 
 		// Map source settings
 		Spinner mapSourceSelector = (Spinner) findViewById(R.id.mapsource);
-	    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-	            this, R.array.map_sources, android.R.layout.simple_spinner_item);
+	    ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(
+	            this, android.R.layout.simple_spinner_item,
+	            MapProviderFactory.getNames(this.getResources()));
 	    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 	    mapSourceSelector.setAdapter(adapter);
-		int mapsource = prefs.getInt("mapsource", 0);
-		mapSourceSelector.setSelection(mapsource);
+		mapSourceSelector.setSelection(MapProviderFactory.getOrdinalFromId(settings.getMapSourceId()));
 		mapSourceSelector.setOnItemSelectedListener(new cgeoChangeMapSource());
 
 		initMapfileEdittext(false);
@@ -993,15 +993,13 @@ public class cgeoinit extends AbstractActivity {
 		@Override
 		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
 				long arg3) {
-			settings.mapSource = mapSourceEnum.fromInt(arg2);
-			SharedPreferences.Editor edit = prefs.edit();
-			edit.putInt("mapsource", arg2);
-			edit.commit();
+			settings.setMapSourceId(MapProviderFactory.getIdFromOrdinal(arg2));
 		}
 
 		@Override
 		public void onNothingSelected(AdapterView<?> arg0) {
-			arg0.setSelection(settings.mapSource.ordinal());
+			arg0.setSelection(MapProviderFactory.getOrdinalFromId(settings.getMapSourceId()));
+			
 		}
 	}
 

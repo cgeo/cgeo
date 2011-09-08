@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.android.maps.MapDatabase;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,9 +15,9 @@ import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.os.Environment;
 import android.util.Log;
-import cgeo.geocaching.googlemaps.googleMapFactory;
-import cgeo.geocaching.mapinterfaces.MapFactory;
-import cgeo.geocaching.mapsforge.mfMapFactory;
+import cgeo.geocaching.maps.MapProviderFactory;
+import cgeo.geocaching.maps.interfaces.MapFactory;
+import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.utils.CollectionUtils;
 
 /**
@@ -65,32 +66,6 @@ public class cgSettings {
 
 	private interface PrefRunnable {
 		void edit(final Editor edit);
-	}
-
-	public enum mapSourceEnum {
-		googleMap,
-		googleSat,
-		mapsforgeMapnik,
-		mapsforgeOsmarender,
-		mapsforgeCycle,
-		mapsforgeOffline;
-
-		static mapSourceEnum fromInt(int id) {
-			mapSourceEnum[] values = mapSourceEnum.values();
-			if (id >= 0 && id < values.length) {
-				return values[id];
-			} else {
-				return googleMap;
-			}
-		}
-
-		public boolean isGoogleMapSource() {
-			if (googleMap == this || googleSat == this) {
-				return true;
-			}
-
-			return false;
-		}
 	}
 
 	public enum coordInputFormatEnum {
@@ -168,9 +143,8 @@ public class cgSettings {
 	private coordInputFormatEnum coordInput = coordInputFormatEnum.Plain;
 
 	// maps
-	public MapFactory mapFactory = null;
-	public mapSourceEnum mapSourceUsed = mapSourceEnum.googleMap;
-	public mapSourceEnum mapSource = mapSourceEnum.googleMap;
+	public MapProvider mapProvider = null;
+	private int mapSource = 0;
 	private String mapFile = null;
 	private boolean mapFileValid = false;
 
@@ -213,7 +187,7 @@ public class cgSettings {
 		tokenSecret = prefs.getString(KEY_TWITTER_TOKEN_SECRET, null);
 		mapFile = prefs.getString(KEY_MAPFILE, null);
 		mapFileValid = checkMapfile(mapFile);
-		mapSource = mapSourceEnum.fromInt(prefs.getInt(KEY_MAP_SOURCE, 0));
+		setMapSourceId(prefs.getInt(KEY_MAP_SOURCE, 0));
 		webDeviceName = prefs.getString(KEY_WEBDEVICE_NAME, null);
 		webDeviceCode = prefs.getString(KEY_WEB_DEVICE_CODE, null);
 		trackableAutovisit = prefs.getBoolean(KEY_AUTO_VISIT_TRACKABLES, false);
@@ -514,20 +488,55 @@ public class cgSettings {
 		}
 	}
 
-	public MapFactory getMapFactory() {
-		if (mapSource.isGoogleMapSource()) {
-			if (!mapSourceUsed.isGoogleMapSource() || mapFactory == null) {
-				mapFactory = new googleMapFactory();
-				mapSourceUsed = mapSource;
-			}
-		} else if (!mapSource.isGoogleMapSource()) {
-			if (mapSourceUsed.isGoogleMapSource() || mapFactory == null) {
-				mapFactory = new mfMapFactory();
-				mapSourceUsed = mapSource;
-			}
-		}
+	/**
+	 * Gets the current map source id
+	 * @return
+	 */
+	public int getMapSourceId() {
 
-		return mapFactory;
+		return mapSource;
+	}
+
+	/**
+	 * Sets the new map source id internally and in preferences.
+	 * The associated MapProvider is set as well.
+	 * If there is no MapProvider for this Id, the default id
+	 * of the default provider is used instead. 
+	 * @param sourceId
+	 */
+	public void setMapSourceId(int sourceIdIn) {
+		
+		int sourceId = sourceIdIn;
+		if (!MapProviderFactory.isMapSourceId(sourceId)) {
+			sourceId = MapProviderFactory.getDefaultMapSourceId();
+		}
+		
+		mapSource = sourceId;
+		
+		setMapSourceInternal(sourceId);
+		
+		mapProvider = MapProviderFactory.getMapProviderFromId(sourceId);		
+	}
+	
+	private boolean setMapSourceInternal(final int sourceIdIn) {
+		
+		boolean commitResult = editSettings(new PrefRunnable() {
+
+			@Override
+			public void edit(Editor edit) {
+				edit.putInt(KEY_MAP_SOURCE, sourceIdIn);
+			}
+		});
+		
+		return commitResult;
+	}
+
+	public Class<?extends Activity> getMapClass() {
+		return null != mapProvider ? mapProvider.getMapClass() : null;
+	}
+
+	public MapFactory getMapFactory() {
+		return null != mapProvider ? mapProvider.getMapFactory() : null;
 	}
 
 	public String getMapFile() {
@@ -628,4 +637,5 @@ public class cgSettings {
     public String getGcCustomDate() {
         return prefs.getString(KEY_GC_CUSTOM_DATE, null);
     }
+
 }

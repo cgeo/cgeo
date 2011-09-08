@@ -247,7 +247,7 @@ public class cgeonavigate extends AbstractActivity {
 		int id = item.getItemId();
 
 		if (id == 0) {
-			Intent mapIntent = new Intent(this, settings.getMapFactory().getMapClass());
+			Intent mapIntent = new Intent(this, settings.getMapClass());
 			mapIntent.putExtra("detail", false);
 			mapIntent.putExtra("latitude", dstLatitude);
 			mapIntent.putExtra("longitude", dstLongitude);
