@@ -262,9 +262,7 @@ public class cgeopoint extends AbstractActivity {
 		public void onClick(View arg0) {
 			Geopoint gp = null;
 			if (latButton.getText().length() > 0 && lonButton.getText().length() > 0) {
-				gp = new Geopoint();
-				gp.setLatitude(latButton.getText().toString());
-				gp.setLongitude(lonButton.getText().toString());
+				gp = new Geopoint(latButton.getText().toString() + " " + lonButton.getText().toString());
 			}
 			cgeocoords coordsDialog = new cgeocoords(cgeopoint.this, settings, gp, geo);
 			coordsDialog.setCancelable(true);
