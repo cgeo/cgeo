@@ -14,7 +14,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -66,9 +65,7 @@ public class cgeopoint extends AbstractActivity {
 
 			longitude.setText(lonString);
 			latitude.setText(latString);
-			CharSequence dateString = DateFormat.format("dd/MM/yy kk:mm",
-					loc.getDate());
-			date.setText(dateString);
+			date.setText(cgBase.formatShortDateTime(getContext(), loc.getDate()));
 
 			return convertView;
 		}
