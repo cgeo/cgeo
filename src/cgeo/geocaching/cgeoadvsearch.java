@@ -253,7 +253,7 @@ public class cgeoadvsearch extends AbstractActivity {
 		final String latText = latView.getText().toString();
 		final String lonText = lonView.getText().toString();
 
-		if (latText == null || StringUtils.isEmpty(latText) || lonText == null || StringUtils.isEmpty(lonText)) { //TODO: now coordinates
+		if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) { //TODO: now coordinates
 			latView.setText(cgBase.formatLatitude(geo.latitudeNow, true));
 			lonView.setText(cgBase.formatLongitude(geo.longitudeNow, true));
 		} else {
