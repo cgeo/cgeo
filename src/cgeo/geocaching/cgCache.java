@@ -402,7 +402,7 @@ public class cgCache implements ICache {
 	}
 
 	@Override
-	public String getLatitute() {
+	public String getLatitude() {
 		return latitudeString;
 	}
 

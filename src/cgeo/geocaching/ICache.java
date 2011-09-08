@@ -40,9 +40,9 @@ public interface ICache {
 	 */
 	public Float getTerrain();
 	/**
-	 * @return Latitute, e.g. N 52° 12.345
+	 * @return Latitude, e.g. N 52° 12.345
 	 */
-	public String getLatitute();
+	public String getLatitude();
 	/**
 	 * @return Longitude, e.g. E 9° 34.567
 	 */
@@ -68,7 +68,7 @@ public interface ICache {
 	 */
 	public String getHint();
 	/**
-	 * @return Descrition
+	 * @return Description
 	 */
 	public String getDescription();
 	/**
