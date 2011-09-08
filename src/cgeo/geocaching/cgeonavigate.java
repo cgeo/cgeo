@@ -291,7 +291,7 @@ public class cgeonavigate extends AbstractActivity {
 			setDestCoords();
 			updateDistanceInfo();
 
-			Log.d(cgSettings.tag, "destination set: " + title + " (" + String.format(Locale.getDefault(), "%.8f", dstLatitude) + " | " + String.format(Locale.getDefault(), "%.8f", dstLatitude) + ")");
+			Log.d(cgSettings.tag, "destination set: " + title + " (" + String.format(Locale.getDefault(), "%.8f", dstLatitude) + " | " + String.format(Locale.getDefault(), "%.8f", dstLongitude) + ")");
 			return true;
 		}
 
