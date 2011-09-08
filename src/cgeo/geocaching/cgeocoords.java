@@ -429,11 +429,10 @@ public class cgeocoords extends Dialog {
 		@Override
 		public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 			// Ignore first call, which comes from onCreate()
-			if (currentFormat != null) {
-				if (calc() == false) {
-					spinner.setSelection(currentFormat.ordinal());
-					return;
-				}
+			if (currentFormat != null && !calc()) {
+				// An error occurred, reset spinner to current format
+				spinner.setSelection(currentFormat.ordinal());
+				return;
 			}
 
 			currentFormat = coordInputFormatEnum.fromInt(pos);
