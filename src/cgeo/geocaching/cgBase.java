@@ -5052,7 +5052,6 @@ public class cgBase {
 	 * Generate a time string according to system-wide settings (locale, 12/24 hour)
 	 * such as "13:24".
 	 *
-	 * @param context a context
 	 * @param date milliseconds since the epoch
 	 * @return the formatted string
 	 */
@@ -5064,7 +5063,6 @@ public class cgBase {
 	 * Generate a date string according to system-wide settings (locale, date format)
 	 * such as "20 December" or "20 December 2010". The year will only be included when necessary.
 	 *
-	 * @param context a context
 	 * @param date milliseconds since the epoch
 	 * @return the formatted string
 	 */
@@ -5077,7 +5075,6 @@ public class cgBase {
 	 * such as "20 December 2010". The year will always be included, making it suitable
 	 * to generate long-lived log entries.
 	 *
-	 * @param context a context
 	 * @param date milliseconds since the epoch
 	 * @return the formatted string
 	 */
@@ -5089,7 +5086,6 @@ public class cgBase {
 	 * Generate a numeric date string according to system-wide settings (locale, date format)
 	 * such as "10/20/2010".
 	 *
-	 * @param context a context
 	 * @param date milliseconds since the epoch
 	 * @return the formatted string
 	 */
