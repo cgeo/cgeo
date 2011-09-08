@@ -48,6 +48,8 @@ public abstract class GPXParser extends FileParser {
 		"http://www.groundspeak.com/cache/1/0", // PQ 1.0
 	};
 
+	private static final String GSAK_NS = "http://www.gsak.net/xmlv1/5";
+
 	private static cgeoapplication app = null;
 	private int listId = 1;
 	private cgSearch search = null;
@@ -64,6 +66,20 @@ public abstract class GPXParser extends FileParser {
 	private String name = null;
 	private String cmt = null;
 	private String desc = null;
+	protected String[] userData = new String[5]; // take 5 cells, that makes indexing 1..4 easier
+
+	private final class UserDataListener implements EndTextElementListener {
+		private int index;
+
+		public UserDataListener(int index) {
+			this.index = index;
+		}
+
+		@Override
+		public void end(String user) {
+			userData[index] = validate(user);
+		}
+	}
 
 	private static final class CacheAttributeTranslator {
 	    // List of cache attributes matching IDs used in GPX files.
@@ -243,19 +259,25 @@ public abstract class GPXParser extends FileParser {
 					cache.reason = listId;
 					cache.detailed = true;
 
+					if (StringUtils.isBlank(cache.personalNote)) {
+						StringBuilder buffer = new StringBuilder();
+						for (int i = 0; i < userData.length; i++) {
+							if (StringUtils.isNotBlank(userData[i])) {
+								buffer.append(' ').append(userData[i]);
+							}
+						}
+						String note = buffer.toString().trim();
+						if (StringUtils.isNotBlank(note)) {
+							cache.personalNote = note;
+						}
+					}
+
 					app.addCacheToSearch(search, cache);
 				}
 
 				showFinishedMessage(handler, search);
 
-				type = null;
-				sym = null;
-				name = null;
-				desc = null;
-				cmt = null;
-
-				cache = null;
-				cache = new cgCache();
+				resetCache();
 			}
 		});
 
@@ -353,6 +375,24 @@ public abstract class GPXParser extends FileParser {
 		// for GPX 1.1 from extensions node
 		final Element cacheParent = getCacheParent(waypoint);
 
+
+		// GSAK extensions
+		final Element gsak = cacheParent.getChild(GSAK_NS, "wptExtension");
+		gsak.getChild(GSAK_NS, "Watch").setEndTextElementListener(new EndTextElementListener() {
+
+			@Override
+			public void end(String watchList) {
+				cache.onWatchlist = Boolean.valueOf(watchList.trim());
+			}
+		});
+
+		gsak.getChild(GSAK_NS, "UserData").setEndTextElementListener(new UserDataListener(1));
+
+		for (int i = 2; i <= 4; i++) {
+			gsak.getChild(GSAK_NS, "User" + i).setEndTextElementListener(new UserDataListener(i));
+		}
+
+		// 3 different versions of the GC schema
 		for (String nsGC : nsGCList) {
 			// waypoints.cache
 			final Element gcCache = cacheParent.getChild(nsGC, "cache");
@@ -717,6 +757,19 @@ public abstract class GPXParser extends FileParser {
 					cache.geocode = geocode;
 				}
 			}
+		}
+	}
+
+	private void resetCache() {
+		type = null;
+		sym = null;
+		name = null;
+		desc = null;
+		cmt = null;
+
+		cache = new cgCache();
+		for (int i = 0; i < userData.length; i++) {
+			userData[i] = null;
 		}
 	}
 
