@@ -1,42 +1,37 @@
 package cgeo.geocaching.apps;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import menion.android.locus.addon.publiclib.DisplayData;
+import menion.android.locus.addon.publiclib.LocusUtils;
 import menion.android.locus.addon.publiclib.geoData.Point;
 import menion.android.locus.addon.publiclib.geoData.PointGeocachingData;
+import menion.android.locus.addon.publiclib.geoData.PointGeocachingDataWaypoint;
 import menion.android.locus.addon.publiclib.geoData.PointsData;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.location.Location;
-import android.net.Uri;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 
 public abstract class AbstractLocusApp extends AbstractApp {
 	private static final String INTENT = Intent.ACTION_VIEW;
-	private final Resources res;
 	
 	protected AbstractLocusApp(final Resources res) {
 		super(res.getString(R.string.caches_map_locus), INTENT);
-		this.res = res;
 	}
 
 	@Override
-	public boolean isInstalled(final Context context) {
-		final Intent intentTest = new Intent(INTENT);
-		intentTest.setData(Uri.parse("menion.points:x"));
-		return isIntentAvailable(context, intentTest);
+	public boolean isInstalled(Context context) {
+		return LocusUtils.isLocusAvailable(context);
 	}
 
 	/**
@@ -49,60 +44,34 @@ public abstract class AbstractLocusApp extends AbstractApp {
 	protected void showInLocus(List<? extends Object> objectsToShow, Activity activity) {
         if (objectsToShow == null || activity == null) return;
 
-        // An icon can only be set for a group of Locus-points. For grouping we use a Map.
-        // As a key we use an IconType object which holds all information to construct and
-        // distinguish between different icons.
-//        Map<IconType, PointsData> pointsGroups = new HashMap<IconType, PointsData>();
-
-//        int gc = 0; // counter for groups of points
         int pc = 0; // counter for points
-PointsData pd = new PointsData("c:geo");
+        PointsData pd = new PointsData("c:geo");
         for (Object o : objectsToShow) {
             // get icon and Point
-//            IconType it = null;
             Point p = null;
-PointGeocachingData pg = new PointGeocachingData();
             if (o instanceof cgCache) {
                 cgCache c = (cgCache) o;
-//                it = new IconType(true, c.type, c.own, c.found, c.disabled);
-                p = this.getPoint(c);
-pg.name=c.name;
-pg.available=!c.disabled;
-pg.cacheID=c.geocode;
-pg.type = (int) (Math.random() * 13);
-p.setGeocachingData(pg);
+                p = this.getPoint(c, activity);
             } else if (o instanceof cgWaypoint) {
                 cgWaypoint w = (cgWaypoint) o;
-//                it = new IconType(false, w.type, false, false, false);
-//                p = this.getPoint(w);
+                p = this.getPoint(w);
             } else {
                 continue; // no cache, no waypoint => ignore
             }
             if (p == null) continue;
 
-//            // get / create corresponding group of points 
-//            PointsData pd = pointsGroups.get(it);
-//            if (pd == null) {
-//                pd = new PointsData("c:geo objects " + ++gc); // every pd must have a unique name
-//                pd.setBitmap(getIcon(it));
-//                pointsGroups.put(it, pd);
-//            }
             pd.addPoint(p);
             ++pc;
         }
 
-        if (pc < 1000) {
-DisplayData.sendData(activity, pd, false);
-//            DisplayData.sendData(activity, new ArrayList<PointsData>(pointsGroups.values()), false);
+        if (pc <= 1000) {
+        	DisplayData.sendData(activity, pd, false);
         } else {
         	ArrayList<PointsData> data = new ArrayList<PointsData>();
         	data.add(pd);
-DisplayData.sendDataCursor(activity, data,
-        "content://" + LocusDataStorageProvider.class.getCanonicalName().toLowerCase(), 
-        false);
-//			DisplayData.sendDataCursor(activity, new ArrayList<PointsData>(pointsGroups.values()),
-//			        "content://" + LocusDataStorageProvider.class.getCanonicalName().toLowerCase(), 
-//			        false);
+			DisplayData.sendDataCursor(activity, data,
+			        "content://" + LocusDataStorageProvider.class.getCanonicalName().toLowerCase(), 
+			        false);
         }
 	}
 
@@ -113,7 +82,7 @@ DisplayData.sendDataCursor(activity, data,
 	 * @return  null, when the <code>Point</code> could not be constructed
 	 * @author koem
 	 */
-	private Point getPoint(cgCache cache) {
+	private Point getPoint(cgCache cache, Context context) {
 		if (cache == null) return null;
 
 		// create one simple point with location
@@ -122,13 +91,52 @@ DisplayData.sendDataCursor(activity, data,
 		loc.setLongitude(cache.longitude);
 
 		Point p = new Point(cache.name, loc);
-//		p.setDescription("<a href=\"http://coord.info/" +cache.geocode + "\">" 
-//					+ cache.geocode + "</a>");
-    	
+		PointGeocachingData pg = new PointGeocachingData();
+		p.setGeocachingData(pg);
+		
+		pg.cacheID = cache.geocode;
+		pg.available = ! cache.disabled;
+		pg.archived = cache.archived;
+		pg.premiumOnly = cache.members;
+		pg.name = cache.name;
+		pg.placedBy = cache.owner;
+		if (cache.hidden != null) pg.hidden = cgBase.formatFullDate(context, cache.hidden.getTime());
+		for (CacheType ct : CacheType.values()) {
+		    if (ct.cgeoId.equals(cache.type)) {
+		        if (ct.locusId != CacheType.NO_LOCUS_ID) pg.type = ct.locusId;
+		        break;
+		    }
+		}
+		for (CacheSize cs : CacheSize.values()) {
+		    if (cs.cgeoId.equals(cache.size)) {
+		        pg.container = cs.locusId;
+		        break;
+		    }
+		}
+		if (cache.difficulty != null) pg.difficulty = cache.difficulty;
+		if (cache.terrain != null) pg.terrain = cache.terrain;
+		pg.shortDescription = cache.shortdesc;
+		pg.longDescription = cache.description;
+		pg.encodedHints = cache.hint;
+		if (cache.waypoints != null) {
+			pg.waypoints = new ArrayList<PointGeocachingDataWaypoint>();
+			for (cgWaypoint waypoint : cache.waypoints) {
+				if (waypoint == null) continue;
+				PointGeocachingDataWaypoint w = new PointGeocachingDataWaypoint();
+				w.code = waypoint.geocode;
+				w.name = waypoint.name;
+				w.type = PointGeocachingData.CACHE_WAYPOINT_TYPE_STAGES;
+				w.lat = waypoint.latitude;
+				w.lon = waypoint.longitude;
+				pg.waypoints.add(w);
+			}
+		}
+		pg.found = cache.found;
+
     	return p;
 	}
 
-    /**
+	/**
      * This method constructs a <code>Point</code> for displaying in Locus
      * 
      * @param waypoint
@@ -149,55 +157,4 @@ DisplayData.sendDataCursor(activity, data,
 
         return p;
     }
-	
-	/**
-	 * caching mechanism for icons
-     * 
-     * @author koem
-	 */
-	private Bitmap getIcon(IconType it) {
-		Bitmap icon = iconCache.get(it);
-		if (icon != null) return icon;
-
-		synchronized(this) {
-			// load icon
-			final int iconId = cgBase.getMarkerIcon(it.isCache, it.type, it.own, it.found, 
-			        it.disabled);
-			if (iconId > 0) icon = BitmapFactory.decodeResource(res, iconId);
-			iconCache.put(it, icon);
-			return icon;
-		}
-	}
-	
-	private static Map<IconType, Bitmap> iconCache = new HashMap<IconType, Bitmap>();
-	
-	/**
-	 * class representing a key in the iconCache
-	 * 
-	 * @author koem
-	 */
-	private static class IconType {
-		private final boolean isCache;
-		private final String type;
-		private final boolean own, found, disabled;
-		private int hashCode = 0;
-		public IconType(boolean isCache, String type, boolean own, boolean found, 
-				boolean disabled) {
-			this.isCache = isCache;
-			this.type = type;
-			this.own = own;
-			this.found = found;
-			this.disabled = disabled;
-		}
-		@Override
-		public boolean equals(Object o) {
-			if (! (o instanceof IconType)) return false;
-			return this.hashCode() == ((IconType) o).hashCode();
-		}
-		@Override
-		public int hashCode() {
-			if (hashCode == 0) hashCode = (isCache + type + own + found + disabled).hashCode();
-			return hashCode;
-		}
-	}
 }

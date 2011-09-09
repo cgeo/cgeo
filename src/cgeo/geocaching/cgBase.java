@@ -30,9 +30,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
+import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
@@ -70,6 +70,7 @@ import android.text.style.StrikethroughSpan;
 import android.util.Log;
 import android.widget.EditText;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.files.LocParser;
 import cgeo.geocaching.utils.CollectionUtils;
 
@@ -210,75 +211,20 @@ public class cgBase {
 		context = appIn.getBaseContext();
 		res = appIn.getBaseContext().getResources();
 
-		// cache types
-		cacheTypes.put("traditional cache", "traditional");
-		cacheTypes.put("multi-cache", "multi");
-		cacheTypes.put("unknown cache", "mystery");
-		cacheTypes.put("letterbox hybrid", "letterbox");
-		cacheTypes.put("event cache", "event");
-		cacheTypes.put("mega-event cache", "mega");
-		cacheTypes.put("earthcache", "earth");
-		cacheTypes.put("cache in trash out event", "cito");
-		cacheTypes.put("webcam cache", "webcam");
-		cacheTypes.put("virtual cache", "virtual");
-		cacheTypes.put("wherigo cache", "wherigo");
-		cacheTypes.put("lost & found", "lostfound");
-		cacheTypes.put("project ape cache", "ape");
-		cacheTypes.put("groundspeak hq", "gchq");
-		cacheTypes.put("gps cache exhibit", "gps");
+	    // setup cache type mappings
 
-		// cache types inverted
-		cacheTypesInv.put("traditional", res.getString(R.string.traditional));
-		cacheTypesInv.put("multi", res.getString(R.string.multi));
-		cacheTypesInv.put("mystery", res.getString(R.string.mystery));
-		cacheTypesInv.put("letterbox", res.getString(R.string.letterbox));
-		cacheTypesInv.put("event", res.getString(R.string.event));
-		cacheTypesInv.put("mega", res.getString(R.string.mega));
-		cacheTypesInv.put("earth", res.getString(R.string.earth));
-		cacheTypesInv.put("cito", res.getString(R.string.cito));
-		cacheTypesInv.put("webcam", res.getString(R.string.webcam));
-		cacheTypesInv.put("virtual", res.getString(R.string.virtual));
-		cacheTypesInv.put("wherigo", res.getString(R.string.wherigo));
-		cacheTypesInv.put("lostfound", res.getString(R.string.lostfound));
-		cacheTypesInv.put("ape", res.getString(R.string.ape));
-		cacheTypesInv.put("gchq", res.getString(R.string.gchq));
-		cacheTypesInv.put("gps", res.getString(R.string.gps));
+		final String CACHETYPE_ALL_GUID = "9a79e6ce-3344-409c-bbe9-496530baf758";
 
-		// cache ids
-		cacheIDs.put("all", "9a79e6ce-3344-409c-bbe9-496530baf758"); // hard-coded also in cgSettings
-		cacheIDs.put("traditional", "32bc9333-5e52-4957-b0f6-5a2c8fc7b257");
-		cacheIDs.put("multi", "a5f6d0ad-d2f2-4011-8c14-940a9ebf3c74");
-		cacheIDs.put("mystery", "40861821-1835-4e11-b666-8d41064d03fe");
-		cacheIDs.put("letterbox", "4bdd8fb2-d7bc-453f-a9c5-968563b15d24");
-		cacheIDs.put("event", "69eb8534-b718-4b35-ae3c-a856a55b0874");
-		cacheIDs.put("mega-event", "69eb8535-b718-4b35-ae3c-a856a55b0874");
-		cacheIDs.put("earth", "c66f5cf3-9523-4549-b8dd-759cd2f18db8");
-		cacheIDs.put("cito", "57150806-bc1a-42d6-9cf0-538d171a2d22");
-		cacheIDs.put("webcam", "31d2ae3c-c358-4b5f-8dcd-2185bf472d3d");
-		cacheIDs.put("virtual", "294d4360-ac86-4c83-84dd-8113ef678d7e");
-		cacheIDs.put("wherigo", "0544fa55-772d-4e5c-96a9-36a51ebcf5c9");
-		cacheIDs.put("lostfound", "3ea6533d-bb52-42fe-b2d2-79a3424d4728");
-		cacheIDs.put("ape", "2555690d-b2bc-4b55-b5ac-0cb704c0b768");
-		cacheIDs.put("gchq", "416f2494-dc17-4b6a-9bab-1a29dd292d8c");
-		cacheIDs.put("gps", "72e69af2-7986-4990-afd9-bc16cbbb4ce3");
+        cacheIDs.put("all", CACHETYPE_ALL_GUID);
+        cacheIDsChoices.put(res.getString(R.string.all), CACHETYPE_ALL_GUID);
 
-		// cache choices
-		cacheIDsChoices.put(res.getString(R.string.all), cacheIDs.get("all"));
-		cacheIDsChoices.put(res.getString(R.string.traditional), cacheIDs.get("traditional"));
-		cacheIDsChoices.put(res.getString(R.string.multi), cacheIDs.get("multi"));
-		cacheIDsChoices.put(res.getString(R.string.mystery), cacheIDs.get("mystery"));
-		cacheIDsChoices.put(res.getString(R.string.letterbox), cacheIDs.get("letterbox"));
-		cacheIDsChoices.put(res.getString(R.string.event), cacheIDs.get("event"));
-		cacheIDsChoices.put(res.getString(R.string.mega), cacheIDs.get("mega"));
-		cacheIDsChoices.put(res.getString(R.string.earth), cacheIDs.get("earth"));
-		cacheIDsChoices.put(res.getString(R.string.cito), cacheIDs.get("cito"));
-		cacheIDsChoices.put(res.getString(R.string.webcam), cacheIDs.get("webcam"));
-		cacheIDsChoices.put(res.getString(R.string.virtual), cacheIDs.get("virtual"));
-		cacheIDsChoices.put(res.getString(R.string.wherigo), cacheIDs.get("whereigo"));
-		cacheIDsChoices.put(res.getString(R.string.lostfound), cacheIDs.get("lostfound"));
-		cacheIDsChoices.put(res.getString(R.string.ape), cacheIDs.get("ape"));
-		cacheIDsChoices.put(res.getString(R.string.gchq), cacheIDs.get("gchq"));
-		cacheIDsChoices.put(res.getString(R.string.gps), cacheIDs.get("gps"));
+        for (CacheType ct : CacheType.values()) {
+            String l10n = res.getString(ct.stringId);
+            cacheTypes.put(ct.pattern, ct.cgeoId);
+            cacheTypesInv.put(ct.cgeoId, l10n);
+            cacheIDs.put(ct.cgeoId, ct.guid);
+            cacheIDsChoices.put(l10n, ct.guid);
+        }
 
 		// waypoint types
 		waypointTypes.put("flag", res.getString(R.string.wp_final));
@@ -5090,12 +5036,25 @@ public class cgBase {
 	 * such as "20 December 2010". The year will always be included, making it suitable
 	 * to generate long-lived log entries.
 	 *
-	 * @param context a context
 	 * @param date milliseconds since the epoch
 	 * @return the formatted string
 	 */
 	public String formatFullDate(long date) {
-		return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR);
+	    return formatFullDate(context, date);
+	}
+
+	/**
+     * Generate a date string according to system-wide settings (locale, date format)
+     * such as "20 December 2010". The year will always be included, making it suitable
+     * to generate long-lived log entries.
+	 * 
+	 * @param context application context
+     * @param date milliseconds since the epoch
+     * @return the formatted string
+	 */
+	public static String formatFullDate(Context context, long date) {
+	    return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE 
+	            | DateUtils.FORMAT_SHOW_YEAR);
 	}
 
 	/**
@@ -5107,7 +5066,8 @@ public class cgBase {
 	 * @return the formatted string
 	 */
 	public String formatShortDate(long date) {
-		return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_NUMERIC_DATE);
+		return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE 
+		        | DateUtils.FORMAT_NUMERIC_DATE);
 	}
 
 	/**

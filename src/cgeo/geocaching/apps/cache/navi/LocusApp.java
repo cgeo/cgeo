@@ -1,10 +1,7 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
-
-import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.content.res.Resources;
@@ -12,7 +9,6 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.apps.AbstractLocusApp;
-import cgeo.geocaching.utils.CollectionUtils;
 
 class LocusApp extends AbstractLocusApp implements NavigationApp {
 
@@ -48,12 +44,12 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 					points.add(cache);
 				}
 
-				// use only waypoints with coordinates
-				if (cache.waypoints != null) {
-					for (cgWaypoint wp : cache.waypoints) {
-						if (wp.latitude != null && wp.longitude != null) points.add(wp);
-					}
-				}
+//				// use only waypoints with coordinates
+//				if (cache.waypoints != null) {
+//					for (cgWaypoint wp : cache.waypoints) {
+//						if (wp.latitude != null && wp.longitude != null) points.add(wp);
+//					}
+//				}
 			}
 
 			// add waypoint if present
