@@ -41,8 +41,6 @@ public class cgData {
 	private String path = null;
 	private cgDbHelper dbHelper = null;
 	// Used when Profiling and loggin SELECTS
-//	private SQLiteDatabasePerformanceLoggingWrapper databaseRO = null;
-//	private SQLiteDatabasePerformanceLoggingWrapper databaseRW = null;
 	private SQLiteDatabase databaseRW;
 	private SQLiteDatabase databaseRO;
 
@@ -216,7 +214,6 @@ public class cgData {
 				if (dbHelper == null) {
 					dbHelper = new cgDbHelper(context);
 				}
-//				databaseRW = new SQLiteDatabasePerformanceLoggingWrapper(dbHelper.getWritableDatabase());
 				databaseRW = dbHelper.getWritableDatabase();
 
 				if (databaseRW != null && databaseRW.isOpen()) {
@@ -238,7 +235,6 @@ public class cgData {
 				if (dbHelper == null) {
 					dbHelper = new cgDbHelper(context);
 				}
-//				databaseRO = new SQLiteDatabasePerformanceLoggingWrapper(dbHelper.getReadableDatabase());
 				databaseRO = dbHelper.getReadableDatabase();
 
 				if (databaseRO.needUpgrade(dbVersion)) {
