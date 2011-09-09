@@ -392,11 +392,6 @@ public class cgCache implements ICache {
 	}
 
 	@Override
-	public String getData() {
-		return null;
-	}
-
-	@Override
 	public Float getDifficulty() {
 		return difficulty;
 	}
@@ -407,7 +402,7 @@ public class cgCache implements ICache {
 	}
 
 	@Override
-	public String getLatitute() {
+	public String getLatitude() {
 		return latitudeString;
 	}
 

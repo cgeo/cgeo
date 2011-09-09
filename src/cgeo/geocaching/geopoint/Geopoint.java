@@ -14,15 +14,6 @@ public class Geopoint
     private double longitude;
 
     /**
-     * Creates new Geopoint with latitude and longitude set to 0.
-     */
-    public Geopoint()
-    {
-        setLatitude(0);
-        setLongitude(0);
-    }
-
-    /**
      * Creates new Geopoint with given latitude and longitude (both degree).
      *
      * @param lat latitude
@@ -32,6 +23,18 @@ public class Geopoint
     {
         setLatitude(lat);
         setLongitude(lon);
+    }
+    
+    /**
+     * Creates new Geopoint with given latitude and longitude (both microdegree).
+     *
+     * @param lat latitude
+     * @param lon longitude
+     */
+    public Geopoint(final int lat, final int lon)
+    {
+        setLatitude(lat * 1E-6);
+        setLongitude(lon * 1E-6);
     }
 
     /**
@@ -63,7 +66,7 @@ public class Geopoint
      * @return this
      * @throws MalformedCoordinateException if not -90 <= lat <= 90
      */
-    public Geopoint setLatitude(final double lat)
+    private void setLatitude(final double lat)
     {
         if (lat <= 90 && lat >= -90)
         {
@@ -73,35 +76,6 @@ public class Geopoint
         {
             throw new MalformedCoordinateException("malformed latitude: " + lat);
         }
-
-        return this;
-    }
-
-    /**
-     * Set latitude in microdegree.
-     *
-     * @param lat latitude
-     * @return this
-     * @see setLatitude(final double lat)
-     * @throws MalformedCoordinateException if not -90 <= (lat * 1E-6) <= 90
-     */
-    public Geopoint setLatitudeE6(final int lat)
-    {
-        return setLatitude(lat * 1E-6);
-    }
-
-    /**
-     * Set latitude by parsing string.
-     *
-     * @param lat latitude
-     * @return this
-     * @see setLatitude(final double lat)
-     * @throws ParseException if lat could not be parsed
-     * @throws MalformedCoordinateException if not -90 <= lat <= 90
-     */
-    public Geopoint setLatitude(final String lat)
-    {
-        return setLatitude(GeopointParser.parseLatitude(lat));
     }
 
     /**
@@ -131,7 +105,7 @@ public class Geopoint
      * @return this
      * @throws MalformedCoordinateException if not -180 <= lon <= 180
      */
-    public Geopoint setLongitude(final double lon)
+    private void setLongitude(final double lon)
     {
         if (lon <= 180 && lon >=-180)
         {
@@ -141,35 +115,6 @@ public class Geopoint
         {
             throw new MalformedCoordinateException("malformed longitude: " + lon);
         }
-
-        return this;
-    }
-
-    /**
-     * Set longitude in microdegree.
-     *
-     * @param lon longitude
-     * @return this
-     * @see setLongitude(final double lon)
-     * @throws MalformedCoordinateException if not -180 <= (lon * 1E-6) <= 180
-     */
-    public Geopoint setLongitudeE6(final int lon)
-    {
-        return setLongitude(lon * 1E-6);
-    }
-
-    /**
-     * Set longitude by parsing string.
-     *
-     * @param lon longitude
-     * @return this
-     * @see setLongitude(final double lon)
-     * @throws ParseException if lon could not be parsed
-     * @throws MalformedCoordinateException if not -180 <= lon <= 180
-     */
-    public Geopoint setLongitude(final String lon)
-    {
-        return setLongitude(GeopointParser.parseLongitude(lon));
     }
 
     /**
@@ -243,25 +188,11 @@ public class Geopoint
         }
         else if (ilat1 == ilat2)
         {
-            if (ilon1 > ilon2)
-            {
-                return 270;
-            }
-            else
-            {
-                return 90;
-            }
+            return (ilon1 > ilon2) ? 270 : 90;
         }
         else if (ilon1 == ilon2)
         {
-            if (ilat1 > ilat2)
-            {
-                return 180;
-            }
-            else
-            {
-                return 0;
-            }
+            return (ilat1 > ilat2) ? 180: 0;
         }
         else
         {
