@@ -1290,20 +1290,7 @@ public class cgBase {
 		}
 
 		// cache found
-		try
-		{
-			final Matcher matcherFound            = patternFound.matcher(page);
-			final Matcher matcherFoundAlternative = patternFoundAlternative.matcher(page);
-
-			if (matcherFound.find() || matcherFoundAlternative.find()) {
-			    cache.found = true;
-			}
-		}
-		catch (Exception e)
-		{
-			// failed to parse found
-			Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse found");
-		}
+		cache.found = patternFound.matcher(page).find() || patternFoundAlternative.matcher(page).find();
 
 		// cache type
 		try {
@@ -4998,7 +4985,6 @@ public class cgBase {
 	 * Generate a time string according to system-wide settings (locale, 12/24 hour)
 	 * such as "13:24".
 	 *
-	 * @param context a context
 	 * @param date milliseconds since the epoch
 	 * @return the formatted string
 	 */
@@ -5010,7 +4996,6 @@ public class cgBase {
 	 * Generate a date string according to system-wide settings (locale, date format)
 	 * such as "20 December" or "20 December 2010". The year will only be included when necessary.
 	 *
-	 * @param context a context
 	 * @param date milliseconds since the epoch
 	 * @return the formatted string
 	 */
@@ -5023,7 +5008,6 @@ public class cgBase {
 	 * such as "20 December 2010". The year will always be included, making it suitable
 	 * to generate long-lived log entries.
 	 *
-	 * @param context a context
 	 * @param date milliseconds since the epoch
 	 * @return the formatted string
 	 */
@@ -5035,12 +5019,23 @@ public class cgBase {
 	 * Generate a numeric date string according to system-wide settings (locale, date format)
 	 * such as "10/20/2010".
 	 *
-	 * @param context a context
 	 * @param date milliseconds since the epoch
 	 * @return the formatted string
 	 */
 	public String formatShortDate(long date) {
 		return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_NUMERIC_DATE);
+	}
+
+	/**
+	 * Generate a numeric date and time string according to system-wide settings (locale,
+	 * date format) such as "7 sept. à 12:35".
+	 *
+	 * @param context a Context
+	 * @param date milliseconds since the epoch
+	 * @return the formatted string
+	 */
+	public static String formatShortDateTime(Context context, long date) {
+		return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_ABBREV_ALL);
 	}
 
 	/**

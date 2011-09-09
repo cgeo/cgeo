@@ -474,7 +474,8 @@ public class cgeoapplication extends Application {
 			storage = new cgData(this);
 		}
 
-		final List<cgCache> cachesPre = storage.loadCaches(geocodeList.toArray(), null, centerLat, centerLon, spanLat, spanLon, loadA, loadW, loadS, loadL, loadI, loadO);
+		// The list of geocodes is sufficient. more parameters generate an overly complex select.
+		final List<cgCache> cachesPre = storage.loadCaches(geocodeList.toArray(), null, null, null, null, null, loadA, loadW, loadS, loadL, loadI, loadO);
 		if (cachesPre != null) {
 			cachesOut.addAll(cachesPre);
 		}
@@ -697,13 +698,7 @@ public class cgeoapplication extends Application {
 
 				cache.reason = reason;
 
-				if (storage.isThere(geocode, guid, false, false)) {
-					cgCache mergedCache = cache.merge(storage);
-					storage.saveCache(mergedCache);
-				} else {
-					// cache is not saved, new data are for storing
-					storage.saveCache(cache);
-				}
+				boolean status = storeWithMerge(cache, false);
 			}
 		}
 
@@ -726,18 +721,32 @@ public class cgeoapplication extends Application {
 
 		boolean status = false;
 
-		if (storage.isThere(geocode, guid, false, false) == false || cache.reason >= 1) { // if for offline, do not merge
-			status = storage.saveCache(cache);
-		} else {
-			cgCache mergedCache = cache.merge(storage);
-
-			status = storage.saveCache(mergedCache);
-		}
+		status = storeWithMerge(cache, cache.reason >= 1);
 
 		if (status) {
 			search.addGeocode(cache.geocode);
 		}
 
+		return status;
+	}
+
+	/**
+	 * Checks if Cache is already in Database and if so does a merge.
+	 * @param cache The cache to be saved
+	 * @param forceSave override the check and persist the new state.
+	 * @return
+	 */
+
+	private boolean storeWithMerge(cgCache cache, boolean forceSave) {
+		boolean status;
+		cgCache oldCache = null;
+		if (forceSave || (oldCache = storage.loadCache(cache.geocode, cache.guid, false, true, true, true, true, true)) !=null ) { // if for offline, do not merge
+			status = storage.saveCache(cache);
+		} else {
+			cgCache mergedCache = cache.merge(storage,oldCache);
+
+			status = storage.saveCache(mergedCache);
+		}
 		return status;
 	}
 
