@@ -693,12 +693,8 @@ public class cgeoapplication extends Application {
 		if (newItem) {
 			// save only newly downloaded data
 			for (cgCache cache : cacheList) {
-				String geocode = cache.geocode.toUpperCase();
-				String guid = cache.guid.toLowerCase();
-
 				cache.reason = reason;
-
-				boolean status = storeWithMerge(cache, false);
+				storeWithMerge(cache, false);
 			}
 		}
 
@@ -716,12 +712,7 @@ public class cgeoapplication extends Application {
 			searches.put(searchId, search);
 		}
 
-		String geocode = cache.geocode.toUpperCase();
-		String guid = cache.guid.toLowerCase();
-
-		boolean status = false;
-
-		status = storeWithMerge(cache, cache.reason >= 1);
+		final boolean status = storeWithMerge(cache, cache.reason >= 1);
 
 		if (status) {
 			search.addGeocode(cache.geocode);
