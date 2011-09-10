@@ -14,7 +14,7 @@ public class mfUsersOverlayItem extends OverlayItem implements UserOverlayItemIm
 	private cgUser user = null;
 
 	public mfUsersOverlayItem(Context contextIn, cgUser userIn) {
-		super(new GeoPoint((int)(userIn.latitude * 1e6), (int)(userIn.longitude * 1e6)), userIn.username, "");
+		super(new GeoPoint((int)(userIn.coords.getLatitudeE6()), userIn.coords.getLongitudeE6()), userIn.username, "");
 
 		context = contextIn;
 		user = userIn;

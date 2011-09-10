@@ -3083,8 +3083,8 @@ public class cgData {
 						list.id = ((int) cursor.getInt(cursor.getColumnIndex("_id"))) + 10;
 						list.title = (String) cursor.getString(cursor.getColumnIndex("title"));
 						list.updated = (Long) cursor.getLong(cursor.getColumnIndex("updated"));
-						list.latitude = (Double) cursor.getDouble(cursor.getColumnIndex("latitude"));
-						list.longitude = (Double) cursor.getDouble(cursor.getColumnIndex("longitude"));
+						list.coords = new Geopoint(cursor.getDouble(cursor.getColumnIndex("latitude")),
+												   cursor.getDouble(cursor.getColumnIndex("longitude")));
 
 						lists.add(list);
 					} while (cursor.moveToNext());
@@ -3130,8 +3130,8 @@ public class cgData {
 							list.id = ((int) cursor.getInt(cursor.getColumnIndex("_id"))) + 10;
 							list.title = (String) cursor.getString(cursor.getColumnIndex("title"));
 							list.updated = (Long) cursor.getLong(cursor.getColumnIndex("updated"));
-							list.latitude = (Double) cursor.getDouble(cursor.getColumnIndex("latitude"));
-							list.longitude = (Double) cursor.getDouble(cursor.getColumnIndex("longitude"));
+							list.coords = new Geopoint(cursor.getDouble(cursor.getColumnIndex("latitude")),
+													   cursor.getDouble(cursor.getColumnIndex("longitude")));
 						} while (cursor.moveToNext());
 					}
 

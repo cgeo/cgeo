@@ -1451,7 +1451,7 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 						return;
 					}
 
-					if (userOne.latitude == null && userOne.longitude == null) {
+					if (userOne.coords == null) {
 						continue;
 					}
 

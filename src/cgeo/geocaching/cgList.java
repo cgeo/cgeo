@@ -1,12 +1,13 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.geopoint.Geopoint;
+
 public class cgList {
 	public boolean def = false;
 	public int id = 0;
 	public String title = null;
 	public Long updated = null;
-	public Double latitude = null;
-	public Double longitude = null;
+	public Geopoint coords = null;
 	
 	public cgList(boolean defIn) {
 		def = defIn;
