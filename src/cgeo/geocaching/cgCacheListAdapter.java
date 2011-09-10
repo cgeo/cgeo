@@ -446,10 +446,13 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
 		if (cache.found && cache.logOffline) {
 		    holder.logStatusMark.setImageResource(R.drawable.mark_green_red);
+		    holder.logStatusMark.setVisibility(View.VISIBLE);
 		} else if (cache.found) {
 		    holder.logStatusMark.setImageResource(R.drawable.mark_green);
+		    holder.logStatusMark.setVisibility(View.VISIBLE);
 		} else if (cache.logOffline) {
             holder.logStatusMark.setImageResource(R.drawable.mark_red);
+		    holder.logStatusMark.setVisibility(View.VISIBLE);
         } else {
 		    holder.logStatusMark.setVisibility(View.GONE);
 		}
