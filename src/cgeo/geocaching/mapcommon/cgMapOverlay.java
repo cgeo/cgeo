@@ -298,7 +298,7 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 						public void onClick(DialogInterface dialog, int id) {
 							cgeonavigate navigateActivity = new cgeonavigate();
 
-							cgeonavigate.coordinates = new ArrayList<cgCoord>();
+							cgeonavigate.coordinates.clear();
 							cgeonavigate.coordinates.add(coordinate);
 
 							Intent navigateIntent = new Intent(context, navigateActivity.getClass());
@@ -326,7 +326,7 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 					public void onClick(DialogInterface dialog, int id) {
 						cgeonavigate navigateActivity = new cgeonavigate();
 
-						cgeonavigate.coordinates = new ArrayList<cgCoord>();
+						cgeonavigate.coordinates.clear();
 						cgeonavigate.coordinates.add(coordinate);
 
 						Intent navigateIntent = new Intent(context, navigateActivity.getClass());

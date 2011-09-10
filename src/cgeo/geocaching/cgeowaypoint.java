@@ -1,7 +1,5 @@
 package cgeo.geocaching;
 
-import java.util.ArrayList;
-
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.ProgressDialog;
@@ -320,7 +318,7 @@ public class cgeowaypoint extends AbstractActivity {
 		navigateIntent.putExtra("geocode", waypoint.prefix.trim() + "/" + waypoint.lookup.trim());
 		navigateIntent.putExtra("name", waypoint.name);
 
-		cgeonavigate.coordinates = new ArrayList<cgCoord>();
+		cgeonavigate.coordinates.clear();
 		cgeonavigate.coordinates.add(new cgCoord(waypoint));
 		startActivity(navigateIntent);
 	}
