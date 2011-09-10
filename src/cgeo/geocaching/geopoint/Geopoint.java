@@ -26,7 +26,7 @@ public class Geopoint
         setLatitude(lat);
         setLongitude(lon);
     }
-    
+
     /**
      * Creates new Geopoint with given latitude and longitude (both microdegree).
      *
@@ -165,7 +165,7 @@ public class Geopoint
         final double d = Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon1 - lon2);
         final double distance = erad * Math.acos(d); // distance in km
 
-        if (!Double.isNaN(distance) && distance > 0)
+        if (!Double.isNaN(distance) && distance >= 0)
         {
             return distance;
         }
