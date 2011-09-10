@@ -34,7 +34,8 @@
 					android:layout_width="74dip"
 					android:layout_height="wrap_content"
 					android:layout_margin="4dip"
-					android:orientation="vertical" >
+					android:orientation="vertical"
+					android:onClick="cgeoFindOnMap" >
 				<View
 						android:id="@+id/map"
 						style="@style/icon_mainscreen"
@@ -47,7 +48,8 @@
 					android:layout_width="74dip"
 					android:layout_height="wrap_content"
 					android:layout_margin="4dip"
-					android:orientation="vertical" >
+					android:orientation="vertical"
+					android:onClick="cgeoFindNearest" >
 				<View
 						android:id="@+id/nearest"
 						style="@style/icon_mainscreen"
@@ -59,7 +61,8 @@
 			<RelativeLayout
 					android:layout_width="74dip"
 					android:layout_height="wrap_content"
-					android:layout_margin="4dip" >
+					android:layout_margin="4dip"
+					android:onClick="cgeoFindByOffline" >
 				<TextView android:id="@+id/offline_count"
 						style="@style/icon_mainscreen_count" />
 				<LinearLayout
@@ -87,7 +90,8 @@
 					android:layout_width="74dip"
 					android:layout_height="wrap_content"
 					android:layout_margin="4dip"
-					android:orientation="vertical" >
+					android:orientation="vertical"
+					android:onClick="cgeoSearch" >
 				<View
 						android:id="@+id/advanced_button"
 						style="@style/icon_mainscreen"
@@ -100,7 +104,8 @@
 					android:layout_width="74dip"
 					android:layout_height="wrap_content"
 					android:layout_margin="4dip"
-					android:orientation="vertical" >
+					android:orientation="vertical"
+					android:onClick="cgeoPoint" >
 				<View
 						android:id="@+id/any_button"
 						style="@style/icon_mainscreen"
@@ -113,7 +118,8 @@
 					android:layout_width="74dip"
 					android:layout_height="wrap_content"
 					android:layout_margin="4dip"
-					android:orientation="vertical" >
+					android:orientation="vertical"
+					android:onClick="cgeoFilter" >
 				<View
 						android:id="@+id/filter_button"
 						style="@style/icon_mainscreen"
