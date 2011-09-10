@@ -198,6 +198,8 @@
   <string name="err_parse_lon">Sorry, c:geo can\'t parse longitude.</string>
   <string name="err_parse_bear">Sorry, c:geo can\'t parse bearing.</string>
   <string name="err_parse_dist">Sorry, c:geo can\'t parse distance.</string>
+  <string name="err_parse_lat_lon">Sorry, c:geo can\'t parse latitude or longitude.</string>
+  <string name="err_invalid_lat_lon">Sorry, invalid latitude or longitude.</string>
 
   <string name="err_fieldnotes_export_failed">Export of Field Notes failed.</string>
 

@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -20,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.geopoint.Geopoint;
 
 public class cgeoadvsearch extends AbstractActivity {
 
@@ -151,8 +153,8 @@ public class cgeoadvsearch extends AbstractActivity {
 			geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
 		}
 
-		((EditText) findViewById(R.id.latitude)).setOnEditorActionListener(new findByCoordsAction());
-		((EditText) findViewById(R.id.longitude)).setOnEditorActionListener(new findByCoordsAction());
+		((Button) findViewById(R.id.buttonLatitude)).setOnClickListener(new findByCoordsAction());
+		((Button) findViewById(R.id.buttonLongitude)).setOnClickListener(new findByCoordsAction());
 
 		final Button findByCoords = (Button) findViewById(R.id.search_coordinates);
 		findByCoords.setOnClickListener(new findByCoordsListener());
@@ -221,16 +223,20 @@ public class cgeoadvsearch extends AbstractActivity {
 		}
 	}
 
-	private class findByCoordsAction implements TextView.OnEditorActionListener {
+	private class findByCoordsAction implements OnClickListener {
 
 		@Override
-		public boolean onEditorAction(TextView view, int action, KeyEvent event) {
-			if (action == EditorInfo.IME_ACTION_GO) {
-				findByCoordsFn();
-				return true;
-			}
-
-			return false;
+		public void onClick(View arg0) {
+			cgeocoords coordsDialog = new cgeocoords(cgeoadvsearch.this, settings, null, geo);
+			coordsDialog.setCancelable(true);
+			coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
+				@Override
+				public void update(Geopoint gp) {
+					((Button) findViewById(R.id.buttonLatitude)).setText(cgBase.formatLatitude(gp.getLatitude(), true));
+					((Button) findViewById(R.id.buttonLongitude)).setText(cgBase.formatLongitude(gp.getLongitude(), true));
+				}
+			});
+			coordsDialog.show();
 		}
 	}
 
@@ -242,12 +248,12 @@ public class cgeoadvsearch extends AbstractActivity {
 	}
 
 	private void findByCoordsFn() {
-		final EditText latView = (EditText) findViewById(R.id.latitude);
-		final EditText lonView = (EditText) findViewById(R.id.longitude);
+		final Button latView = (Button) findViewById(R.id.buttonLatitude);
+		final Button lonView = (Button) findViewById(R.id.buttonLongitude);
 		final String latText = latView.getText().toString();
 		final String lonText = lonView.getText().toString();
 
-		if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) {
+		if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) { // TODO: now coordinates
 			latView.setText(cgBase.formatLatitude(geo.coordsNow.getLatitude(), true));
 			lonView.setText(cgBase.formatLongitude(geo.coordsNow.getLongitude(), true));
 		} else {
