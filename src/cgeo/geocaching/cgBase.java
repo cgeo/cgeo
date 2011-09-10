@@ -2677,7 +2677,7 @@ public class cgBase {
 
 	public UUID searchByNextPage(cgSearchThread thread, final UUID searchId, int reason, boolean showCaptcha) {
 		final String[] viewstates = app.getViewstates(searchId);
-		cgCacheWrap caches = new cgCacheWrap();
+
 		String url = app.getUrl(searchId);
 
 		if (StringUtils.isBlank(url)) {
@@ -2739,7 +2739,7 @@ public class cgBase {
 			return searchId;
 		}
 
-		caches = parseSearch(thread, url, page, showCaptcha);
+		final cgCacheWrap caches = parseSearch(thread, url, page, showCaptcha);
 		if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByNextPage: No cache parsed");
 			return searchId;
@@ -2908,7 +2908,6 @@ public class cgBase {
 		final cgSearch search = new cgSearch();
 		final String latitude = parameters.get("latitude");
 		final String longitude = parameters.get("longitude");
-		cgCacheWrap caches = new cgCacheWrap();
 		String cacheType = parameters.get("cachetype");
 
 		if (StringUtils.isBlank(latitude)) {
@@ -2945,7 +2944,7 @@ public class cgBase {
 			return null;
 		}
 
-		caches = parseSearch(thread, url, page, showCaptcha);
+		final cgCacheWrap caches = parseSearch(thread, url, page, showCaptcha);
 		if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByCoords: No cache parsed");
 		}
@@ -2965,7 +2964,6 @@ public class cgBase {
 	public UUID searchByKeyword(cgSearchThread thread, Map<String, String> parameters, int reason, boolean showCaptcha) {
 		final cgSearch search = new cgSearch();
 		final String keyword = parameters.get("keyword");
-		cgCacheWrap caches = new cgCacheWrap();
 		String cacheType = parameters.get("cachetype");
 
 		if (StringUtils.isBlank(keyword)) {
@@ -2996,7 +2994,7 @@ public class cgBase {
 			return null;
 		}
 
-		caches = parseSearch(thread, url, page, showCaptcha);
+		final cgCacheWrap caches = parseSearch(thread, url, page, showCaptcha);
 		if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByKeyword: No cache parsed");
 		}
@@ -3016,7 +3014,6 @@ public class cgBase {
 	public UUID searchByUsername(cgSearchThread thread, Map<String, String> parameters, int reason, boolean showCaptcha) {
 		final cgSearch search = new cgSearch();
 		final String userName = parameters.get("username");
-		cgCacheWrap caches = new cgCacheWrap();
 		String cacheType = parameters.get("cachetype");
 
 		if (StringUtils.isBlank(userName)) {
@@ -3053,7 +3050,7 @@ public class cgBase {
 			return null;
 		}
 
-		caches = parseSearch(thread, url, page, showCaptcha);
+		final cgCacheWrap caches = parseSearch(thread, url, page, showCaptcha);
 		if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByUsername: No cache parsed");
 		}
@@ -3073,7 +3070,6 @@ public class cgBase {
 	public UUID searchByOwner(cgSearchThread thread, Map<String, String> parameters, int reason, boolean showCaptcha) {
 		final cgSearch search = new cgSearch();
 		final String userName = parameters.get("username");
-		cgCacheWrap caches = new cgCacheWrap();
 		String cacheType = parameters.get("cachetype");
 
 		if (StringUtils.isBlank(userName)) {
@@ -3104,7 +3100,7 @@ public class cgBase {
 			return null;
 		}
 
-		caches = parseSearch(thread, url, page, showCaptcha);
+		final cgCacheWrap caches = parseSearch(thread, url, page, showCaptcha);
 		if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByOwner: No cache parsed");
 		}
@@ -3134,7 +3130,6 @@ public class cgBase {
 		} else {
 			usertoken = "";
 		}
-		cgCacheWrap caches = new cgCacheWrap();
 
 		String page = null;
 
@@ -3156,7 +3151,7 @@ public class cgBase {
 			return null;
 		}
 
-		caches = parseMapJSON(url, page);
+		final cgCacheWrap caches = parseMapJSON(url, page);
 		if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByViewport: No cache parsed");
 		}
