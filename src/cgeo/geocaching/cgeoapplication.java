@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Application;
@@ -271,7 +270,7 @@ public class cgeoapplication extends Application {
 	}
 
 	public boolean setViewstates(final UUID searchId, String[] viewstates) {
-		if (ArrayUtils.isEmpty(viewstates)) {
+		if (cgBase.isEmpty(viewstates)) {
 			return false;
 		}
 		if (searchId == null || searches.containsKey(searchId) == false) {
