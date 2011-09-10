@@ -2487,7 +2487,7 @@ public class cgData {
 		return count;
 	}
 
-	public List<String> loadBatchOfStoredGeocodes(boolean detailedOnly, Double latitude, Double longitude, String cachetype, int list) {
+	public List<String> loadBatchOfStoredGeocodes(boolean detailedOnly, final Geopoint coords, String cachetype, int list) {
 		init();
 
 		if (list < 1) {
@@ -2513,7 +2513,8 @@ public class cgData {
 		try {
 			Cursor cursor = databaseRO.query(
 					dbTableCaches,
-					new String[]{"_id", "geocode", "(abs(latitude-" + String.format((Locale) null, "%.6f", latitude) + ") + abs(longitude-" + String.format((Locale) null, "%.6f", longitude) + ")) as dif"},
+					new String[]{"_id", "geocode", "(abs(latitude-" + String.format((Locale) null, "%.6f", coords.getLatitude()) +
+									") + abs(longitude-" + String.format((Locale) null, "%.6f", coords.getLongitude()) + ")) as dif"},
 					specifySql.toString(),
 					null,
 					null,
@@ -3082,8 +3083,8 @@ public class cgData {
 						list.id = ((int) cursor.getInt(cursor.getColumnIndex("_id"))) + 10;
 						list.title = (String) cursor.getString(cursor.getColumnIndex("title"));
 						list.updated = (Long) cursor.getLong(cursor.getColumnIndex("updated"));
-						list.latitude = (Double) cursor.getDouble(cursor.getColumnIndex("latitude"));
-						list.longitude = (Double) cursor.getDouble(cursor.getColumnIndex("longitude"));
+						list.coords = new Geopoint(cursor.getDouble(cursor.getColumnIndex("latitude")),
+												   cursor.getDouble(cursor.getColumnIndex("longitude")));
 
 						lists.add(list);
 					} while (cursor.moveToNext());
@@ -3129,8 +3130,8 @@ public class cgData {
 							list.id = ((int) cursor.getInt(cursor.getColumnIndex("_id"))) + 10;
 							list.title = (String) cursor.getString(cursor.getColumnIndex("title"));
 							list.updated = (Long) cursor.getLong(cursor.getColumnIndex("updated"));
-							list.latitude = (Double) cursor.getDouble(cursor.getColumnIndex("latitude"));
-							list.longitude = (Double) cursor.getDouble(cursor.getColumnIndex("longitude"));
+							list.coords = new Geopoint(cursor.getDouble(cursor.getColumnIndex("latitude")),
+													   cursor.getDouble(cursor.getColumnIndex("longitude")));
 						} while (cursor.moveToNext());
 					}
 

@@ -25,7 +25,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 
 public class cgeonavigate extends AbstractActivity {
 
-	public static List<cgCoord> coordinates = new ArrayList<cgCoord>();
+	public final static List<cgCoord> coordinates = new ArrayList<cgCoord>();
 	private PowerManager pm = null;
 	private cgGeo geo = null;
 	private cgDirection dir = null;
@@ -207,7 +207,7 @@ public class cgeonavigate extends AbstractActivity {
 		}
 		menu.add(0, 0, 0, res.getString(R.string.caches_on_map)).setIcon(android.R.drawable.ic_menu_mapmode);
 		menu.add(0, 2, 0, res.getString(R.string.destination_set)).setIcon(android.R.drawable.ic_menu_edit);
-		if (coordinates != null && coordinates.size() > 1) {
+		if (coordinates.size() > 1) {
 			SubMenu subMenu = menu.addSubMenu(0, 3, 0, res.getString(R.string.destination_select)).setIcon(android.R.drawable.ic_menu_myplaces);
 
 			int cnt = 4;
@@ -278,7 +278,7 @@ public class cgeonavigate extends AbstractActivity {
 
 			finish();
 			return true;
-		} else if (id > 3 && coordinates != null && coordinates.get(id - 4) != null) {
+		} else if (id > 3 && coordinates.get(id - 4) != null) {
 			cgCoord coordinate = coordinates.get(id - 4);
 
 			title = coordinate.name;
