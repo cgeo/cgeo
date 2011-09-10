@@ -1182,7 +1182,7 @@ public class cgData {
 		values.put("detailedupdate", cache.detailedUpdate);
 		values.put("visiteddate", cache.visitedDate);
 		values.put("geocode", cache.geocode);
-		values.put("cacheid", cache.cacheid);
+		values.put("cacheid", cache.cacheId);
 		values.put("guid", cache.guid);
 		values.put("type", cache.type);
 		values.put("name", cache.name);
@@ -1978,7 +1978,7 @@ public class cgData {
 		cache.detailedUpdate = (Long) cursor.getLong(cursor.getColumnIndex("detailedupdate"));
 		cache.visitedDate = (Long) cursor.getLong(cursor.getColumnIndex("visiteddate"));
 		cache.geocode = (String) cursor.getString(cursor.getColumnIndex("geocode"));
-		cache.cacheid = (String) cursor.getString(cursor.getColumnIndex("cacheid"));
+		cache.cacheId = (String) cursor.getString(cursor.getColumnIndex("cacheid"));
 		cache.guid = (String) cursor.getString(cursor.getColumnIndex("guid"));
 		cache.type = (String) cursor.getString(cursor.getColumnIndex("type"));
 		cache.name = (String) cursor.getString(cursor.getColumnIndex("name"));
