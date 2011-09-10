@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -81,8 +80,8 @@ public class cgeopoint extends AbstractActivity {
 
 	private cgGeo geo = null;
 	private cgUpdateLoc geoUpdate = new update();
-	private EditText latEdit = null;
-	private EditText lonEdit = null;
+	private Button latButton = null;
+	private Button lonButton = null;
 	private boolean changed = false;
 	private List<cgDestination> historyOfSearchedLocations;
 	private DestinationHistoryAdapter destionationHistoryAdapter;
@@ -233,35 +232,42 @@ public class cgeopoint extends AbstractActivity {
 			geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
 		}
 
-		EditText latitudeEdit = (EditText) findViewById(R.id.latitude);
-		latitudeEdit.setOnKeyListener(new View.OnKeyListener() {
+		latButton = (Button) findViewById(R.id.buttonLatitude);
+		lonButton = (Button) findViewById(R.id.buttonLongitude);
 
-			public boolean onKey(View v, int i, KeyEvent k) {
-				changed = true;
-
-				return false;
-			}
-		});
-
-		EditText longitudeEdit = (EditText) findViewById(R.id.longitude);
-		longitudeEdit.setOnKeyListener(new View.OnKeyListener() {
-
-			public boolean onKey(View v, int i, KeyEvent k) {
-				changed = true;
-
-				return false;
-			}
-		});
+		latButton.setOnClickListener(new coordDialogListener());
+		lonButton.setOnClickListener(new coordDialogListener());
 
 		if (prefs.contains("anylatitude") && prefs.contains("anylongitude")) {
-			latitudeEdit.setText(cgBase.formatLatitude(Double.valueOf(prefs.getFloat("anylatitude", 0f)), true));
-			longitudeEdit.setText(cgBase.formatLongitude(Double.valueOf(prefs.getFloat("anylongitude", 0f)), true));
+			latButton.setText(cgBase.formatLatitude(Double.valueOf(prefs.getFloat("anylatitude", 0f)), true));
+			lonButton.setText(cgBase.formatLongitude(Double.valueOf(prefs.getFloat("anylongitude", 0f)), true));
 		}
 
 		Button buttonCurrent = (Button) findViewById(R.id.current);
 		buttonCurrent.setOnClickListener(new currentListener());
 
 		getDestionationHistoryAdapter().notifyDataSetChanged();
+	}
+	
+	private class coordDialogListener implements View.OnClickListener {
+
+		public void onClick(View arg0) {
+			Geopoint gp = null;
+			if (latButton.getText().length() > 0 && lonButton.getText().length() > 0) {
+				gp = new Geopoint(latButton.getText().toString() + " " + lonButton.getText().toString());
+			}
+			cgeocoords coordsDialog = new cgeocoords(cgeopoint.this, settings, gp, geo);
+			coordsDialog.setCancelable(true);
+			coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
+				@Override
+				public void update(Geopoint gp) {
+					latButton.setText(cgBase.formatLatitude(gp.getLatitude(), true));
+					lonButton.setText(cgBase.formatLongitude(gp.getLongitude(), true));
+					changed = true;
+				}
+			});
+			coordsDialog.show();
+		}
 	}
 
 	@Override
@@ -437,15 +443,8 @@ public class cgeopoint extends AbstractActivity {
 			}
 
 			try {
-				if (latEdit == null) {
-					latEdit = (EditText) findViewById(R.id.latitude);
-				}
-				if (lonEdit == null) {
-					lonEdit = (EditText) findViewById(R.id.longitude);
-				}
-
-				latEdit.setHint(cgBase.formatLatitude(geo.coordsNow.getLatitude(), false));
-				lonEdit.setHint(cgBase.formatLongitude(geo.coordsNow.getLongitude(), false));
+				latButton.setHint(cgBase.formatLatitude(geo.coordsNow.getLatitude(), false));
+				lonButton.setHint(cgBase.formatLongitude(geo.coordsNow.getLongitude(), false));
 			} catch (Exception e) {
 				Log.w(cgSettings.tag, "Failed to update location.");
 			}
@@ -460,8 +459,8 @@ public class cgeopoint extends AbstractActivity {
 				return;
 			}
 
-			((EditText) findViewById(R.id.latitude)).setText(cgBase.formatLatitude(geo.coordsNow.getLatitude(), true));
-			((EditText) findViewById(R.id.longitude)).setText(cgBase.formatLongitude(geo.coordsNow.getLongitude(), true));
+			latButton.setText(cgBase.formatLatitude(geo.coordsNow.getLatitude(), true));
+			lonButton.setText(cgBase.formatLongitude(geo.coordsNow.getLongitude(), true));
 
 			changed = false;
 		}
@@ -473,8 +472,8 @@ public class cgeopoint extends AbstractActivity {
 
 		String bearingText = ((EditText) findViewById(R.id.bearing)).getText().toString();
 		String distanceText = ((EditText) findViewById(R.id.distance)).getText().toString();
-		String latText = ((EditText) findViewById(R.id.latitude)).getText().toString();
-		String lonText = ((EditText) findViewById(R.id.longitude)).getText().toString();
+		String latText = latButton.getText().toString();
+		String lonText = lonButton.getText().toString();
 
 		if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText)
 				&& StringUtils.isBlank(latText) && StringUtils.isBlank(lonText)) {
