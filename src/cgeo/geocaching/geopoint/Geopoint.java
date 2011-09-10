@@ -5,7 +5,7 @@ import android.location.Location;
 /**
  * Abstraction of geographic point.
  */
-public class Geopoint
+public final class Geopoint
 {
 	public static final double kmInMiles = 1 / 1.609344;
 	public static final double deg2rad   = Math.PI / 180;
