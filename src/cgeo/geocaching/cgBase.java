@@ -876,8 +876,8 @@ public class cgBase {
 				final Matcher matcherId = patternId.matcher(row);
 				while (matcherId.find()) {
 					if (matcherId.groupCount() > 0) {
-						cache.cacheid = matcherId.group(1);
-						cids.add(cache.cacheid);
+						cache.cacheId = matcherId.group(1);
+						cids.add(cache.cacheId);
 					}
 				}
 			} catch (Exception e) {
@@ -1161,7 +1161,7 @@ public class cgBase {
 		try {
 			final Matcher matcherCacheId = patternCacheId.matcher(page);
 			if (matcherCacheId.find() && matcherCacheId.groupCount() > 0) {
-				cache.cacheid = getMatch(matcherCacheId.group(1));
+				cache.cacheId = getMatch(matcherCacheId.group(1));
 			}
 		} catch (Exception e) {
 			// failed to parse cache id
@@ -3540,7 +3540,7 @@ public class cgBase {
      * @return          -1: error occured
      */
 	public int addToWatchlist(cgCache cache) {
-        String page = requestLogged(false, "www.geocaching.com", "/my/watchlist.aspx?w=" + cache.cacheid,
+        String page = requestLogged(false, "www.geocaching.com", "/my/watchlist.aspx?w=" + cache.cacheId,
                 "POST", null, false, false, false);
 
         if (StringUtils.isBlank(page)) {
@@ -3566,7 +3566,7 @@ public class cgBase {
 	 */
 	public int removeFromWatchlist(cgCache cache) {
 	    String host = "www.geocaching.com";
-	    String path = "/my/watchlist.aspx?ds=1&action=rem&id=" + cache.cacheid;
+	    String path = "/my/watchlist.aspx?ds=1&action=rem&id=" + cache.cacheId;
 	    String method = "POST";
 
 	    String page = requestLogged(false, host, path, method, null, false, false, false);
@@ -4001,11 +4001,7 @@ public class cgBase {
 				httpLocation = uc.getHeaderField("Location");
 
 				final String paramsLog = params.replaceAll(passMatch, "password=***");
-				if (buffer != null && connection != null) {
-					Log.i(cgSettings.tag + "|" + requestId, "[" + method + " " + (int)(params.length() / 1024) +  "k | " + httpCode + " | " + (int)(buffer.length() / 1024) + "k] Downloaded " + scheme + host + path + "?" + paramsLog);
-				} else {
-					Log.i(cgSettings.tag + "|" + requestId, "[" + method + " | " + httpCode + "] Failed to download " + scheme + host + path + "?" + paramsLog);
-				}
+				Log.i(cgSettings.tag + "|" + requestId, "[" + method + " " + (int)(params.length() / 1024) +  "k | " + httpCode + " | " + (int)(buffer.length() / 1024) + "k] Downloaded " + scheme + host + path + "?" + paramsLog);
 
 				connection.disconnect();
 				br.close();
@@ -4017,7 +4013,7 @@ public class cgBase {
 				Log.e(cgSettings.tag, "cgeoBase.request: " + e.toString());
 			}
 
-			if (buffer != null && buffer.length() > 0) {
+			if (buffer.length() > 0) {
 				break;
 			}
 		}

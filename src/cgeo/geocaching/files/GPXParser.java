@@ -402,7 +402,7 @@ public abstract class GPXParser extends FileParser {
 				public void start(Attributes attrs) {
 					try {
 						if (attrs.getIndex("id") > -1) {
-							cache.cacheid = attrs.getValue("id");
+							cache.cacheId = attrs.getValue("id");
 						}
 						if (attrs.getIndex("archived") > -1) {
 							cache.archived = attrs.getValue("archived").equalsIgnoreCase("true");
