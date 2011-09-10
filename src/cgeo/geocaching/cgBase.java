@@ -485,6 +485,23 @@ public class cgBase {
 		setViewstates(getViewstates(page), params);
 	}
 
+	/**
+	 * checks if an Array of Strings is empty or not. Empty means:
+	 *  - Array is null
+	 *  - or all elements are null or empty strings
+	*/
+	public static boolean isEmpty(String[] a) {
+	if (a == null)
+	         return  true;
+
+		for (String s: a) {
+			if (StringUtils.isNotEmpty(s)) {
+				return  false;
+			}
+		}
+	    return  true;
+	  }
+
 
 	public class loginThread extends Thread {
 
@@ -521,7 +538,7 @@ public class cgBase {
 
 			viewstates = getViewstates(loginData);
 
-			if (ArrayUtils.isEmpty(viewstates)) {
+			if (isEmpty(viewstates)) {
 				Log.e(cgSettings.tag, "cgeoBase.login: Failed to find viewstates");
 				return -1; // no viewstates
 			}
@@ -1022,7 +1039,7 @@ public class cgBase {
 
 			final JSONObject dataJSON = new JSONObject(json);
 			final JSONObject extra = dataJSON.getJSONObject("cs");
-			if ( StringUtils.isNotBlank(data)) {
+			if (extra != null && extra.length() > 0) {
 				int count = extra.getInt("count");
 
 				if (count > 0 && extra.has("cc")) {
@@ -1765,13 +1782,13 @@ public class cgBase {
 	}
 
 	private static void checkFields(cgCache cache) {
-	    if (StringUtils.isEmpty(cache.geocode)) {
+	    if (StringUtils.isBlank(cache.geocode)) {
 			Log.w(cgSettings.tag, "geo code not parsed correctly");
 		}
-	    if (StringUtils.isEmpty(cache.name)) {
+	    if (StringUtils.isBlank(cache.name)) {
 			Log.w(cgSettings.tag, "name not parsed correctly");
 		}
-	    if (StringUtils.isEmpty(cache.guid)) {
+	    if (StringUtils.isBlank(cache.guid)) {
 			Log.w(cgSettings.tag, "guid not parsed correctly");
 		}
 		if (cache.terrain == null || cache.terrain == 0.0) {
@@ -1780,10 +1797,10 @@ public class cgBase {
 		if (cache.difficulty == null || cache.difficulty == 0.0) {
 			Log.w(cgSettings.tag, "difficulty not parsed correctly");
 		}
-		if (StringUtils.isEmpty(cache.owner)) {
+		if (StringUtils.isBlank(cache.owner)) {
 			Log.w(cgSettings.tag, "owner not parsed correctly");
 		}
-		if (StringUtils.isEmpty(cache.ownerReal)) {
+		if (StringUtils.isBlank(cache.ownerReal)) {
 			Log.w(cgSettings.tag, "owner real not parsed correctly");
 		}
 		if (cache.hidden == null) {
@@ -1792,16 +1809,16 @@ public class cgBase {
 		if (cache.favouriteCnt == null) {
 			Log.w(cgSettings.tag, "favoriteCount not parsed correctly");
 		}
-		if (StringUtils.isEmpty(cache.size)) {
+		if (StringUtils.isBlank(cache.size)) {
 			Log.w(cgSettings.tag, "size not parsed correctly");
 		}
-		if (StringUtils.isNotBlank(cache.type)) {
+		if (StringUtils.isBlank(cache.type)) {
 			Log.w(cgSettings.tag, "type not parsed correctly");
 		}
 		if (cache.coords == null) {
 			Log.w(cgSettings.tag, "coordinates not parsed correctly");
 		}
-		if (StringUtils.isEmpty(cache.location)) {
+		if (StringUtils.isBlank(cache.location)) {
 			Log.w(cgSettings.tag, "location not parsed correctly");
 		}
 	}
@@ -2668,7 +2685,7 @@ public class cgBase {
 			return searchId;
 		}
 
-		if (ArrayUtils.isEmpty(viewstates)) {
+		if (isEmpty(viewstates)) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByNextPage: No viewstate given");
 			return searchId;
 		}
@@ -2754,7 +2771,7 @@ public class cgBase {
 		}
 
 		if (forceReload == false && reason == 0 && (app.isOffline(geocode, guid) || app.isThere(geocode, guid, true, true))) {
-			if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
+			if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
 				geocode = app.getGeocode(guid);
 			}
 
@@ -2787,7 +2804,7 @@ public class cgBase {
 
 		if (StringUtils.isEmpty(page)) {
 			if (app.isThere(geocode, guid, true, false)) {
-				if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
+				if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
 					Log.i(cgSettings.tag, "Loading old cache from cache.");
 
 					geocode = app.getGeocode(guid);
@@ -2904,7 +2921,7 @@ public class cgBase {
 			return null;
 		}
 
-		if (StringUtils.isBlank(latitude)) {
+		if (StringUtils.isBlank(cacheType)) {
 			cacheType = null;
 		}
 
@@ -3288,7 +3305,7 @@ public class cgBase {
 
 	public int postLog(cgeoapplication app, String geocode, String cacheid, String[] viewstates,
 			int logType, int year, int month, int day, String log, List<cgTrackableLog> trackables) {
-		if (ArrayUtils.isEmpty(viewstates)) {
+		if (isEmpty(viewstates)) {
 			Log.e(cgSettings.tag, "cgeoBase.postLog: No viewstate given");
 			return 1000;
 		}
@@ -3385,7 +3402,7 @@ public class cgBase {
 			if (matcher.find() && matcher.groupCount() > 0) {
 				final String[] viewstatesConfirm = getViewstates(page);
 
-				if (ArrayUtils.isEmpty(viewstatesConfirm)) {
+				if (isEmpty(viewstatesConfirm)) {
 					Log.e(cgSettings.tag, "cgeoBase.postLog: No viewstate for confirm log");
 					return 1000;
 				}
@@ -3450,7 +3467,7 @@ public class cgBase {
 
 	public int postLogTrackable(String tbid, String trackingCode, String[] viewstates,
 			int logType, int year, int month, int day, String log) {
-		if (ArrayUtils.isEmpty(viewstates)) {
+		if (isEmpty(viewstates)) {
 			Log.e(cgSettings.tag, "cgeoBase.postLogTrackable: No viewstate given");
 			return 1000;
 		}
@@ -3643,7 +3660,7 @@ public class cgBase {
 		if (app == null) {
 			return;
 		}
-		if (settings == null || StringUtils.isBlank(settings.tokenPublic) || StringUtils.isNotBlank(settings.tokenSecret)) {
+		if (settings == null || StringUtils.isBlank(settings.tokenPublic) || StringUtils.isBlank(settings.tokenSecret)) {
 			return;
 		}
 
@@ -4028,7 +4045,7 @@ public class cgBase {
 					response = request(secureRedir, newLocation.getHost(), newLocation.getPath(), "GET", new HashMap<String, String>(), requestId, false, false, false);
 				}
 			} else {
-				if (StringUtils.isNotBlank(buffer)) {
+				if (StringUtils.isNotEmpty(buffer)) {
 					replaceWhitespace(buffer);
 					String data = buffer.toString();
 					buffer = null;
@@ -4877,7 +4894,6 @@ public class cgBase {
 			gcIcons.put("mystery-disabled", R.drawable.marker_cache_mystery_disabled);
 			gcIcons.put("gchq-disabled", R.drawable.marker_cache_gchq_disabled);
 		}
-
 	}
 
 	public static boolean runNavigation(Activity activity, Resources res, cgSettings settings, Double latitude, Double longitude) {

@@ -75,7 +75,6 @@ public final class LocParser extends FileParser {
 		// parse coordinates
 		for (String pointString : points) {
 			final cgCoord pointCoord = new cgCoord();
-			Map<String, Object> tmp = null;
 
 			final Matcher matcherGeocode = patternGeocode.matcher(pointString);
 			if (matcherGeocode.find()) {

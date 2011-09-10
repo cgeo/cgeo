@@ -122,7 +122,7 @@ public class cgeoauth extends AbstractActivity {
 		startButton.setEnabled(true);
 		startButton.setOnClickListener(new startListener());
 
-		if (StringUtils.isNotBlank(OAtoken) && StringUtils.isNotBlank(OAtokenSecret)) {
+		if (StringUtils.isBlank(OAtoken) && StringUtils.isBlank(OAtokenSecret)) {
 			// start authorization process
 			startButton.setText(res.getString(R.string.auth_start));
 		} else {
