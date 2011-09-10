@@ -4001,11 +4001,7 @@ public class cgBase {
 				httpLocation = uc.getHeaderField("Location");
 
 				final String paramsLog = params.replaceAll(passMatch, "password=***");
-				if (buffer != null && connection != null) {
-					Log.i(cgSettings.tag + "|" + requestId, "[" + method + " " + (int)(params.length() / 1024) +  "k | " + httpCode + " | " + (int)(buffer.length() / 1024) + "k] Downloaded " + scheme + host + path + "?" + paramsLog);
-				} else {
-					Log.i(cgSettings.tag + "|" + requestId, "[" + method + " | " + httpCode + "] Failed to download " + scheme + host + path + "?" + paramsLog);
-				}
+				Log.i(cgSettings.tag + "|" + requestId, "[" + method + " " + (int)(params.length() / 1024) +  "k | " + httpCode + " | " + (int)(buffer.length() / 1024) + "k] Downloaded " + scheme + host + path + "?" + paramsLog);
 
 				connection.disconnect();
 				br.close();
@@ -4017,7 +4013,7 @@ public class cgBase {
 				Log.e(cgSettings.tag, "cgeoBase.request: " + e.toString());
 			}
 
-			if (buffer != null && buffer.length() > 0) {
+			if (buffer.length() > 0) {
 				break;
 			}
 		}
