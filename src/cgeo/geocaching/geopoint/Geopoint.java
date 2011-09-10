@@ -149,30 +149,27 @@ public class Geopoint
     }
 
     /**
+     * Get distance and bearing from the current point to a target.
+     *
+     * @param target The target
+     * @return An array of floats: the distance in meters, then the bearing in degrees
+     */
+    private float[] pathTo(final Geopoint target) {
+        float[] results = new float[2];
+        android.location.Location.distanceBetween(getLatitude(), getLongitude(), target.getLatitude(), target.getLongitude(), results);
+        return results;
+    }
+
+    /**
      * Calculates distance to given Geopoint in km.
      *
      * @param gp target
      * @return distance in km
      * @throws GeopointException if there is an error in distance calculation
      */
-    public double distanceTo(final Geopoint gp)
+    public float distanceTo(final Geopoint gp)
     {
-        final double lat1 = deg2rad * latitude;
-        final double lon1 = deg2rad * longitude;
-        final double lat2 = deg2rad * gp.getLatitude();
-        final double lon2 = deg2rad * gp.getLongitude();
-
-        final double d = Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon1 - lon2);
-        final double distance = erad * Math.acos(d); // distance in km
-
-        if (!Double.isNaN(distance) && distance >= 0)
-        {
-            return distance;
-        }
-        else
-        {
-            throw new GeopointException("Error in distance calculation.");
-        }
+        return pathTo(gp)[0] / 1000;
     }
 
     /**
@@ -181,55 +178,9 @@ public class Geopoint
      * @param gp target
      * @return bearing in degree.
      */
-    public double bearingTo(final Geopoint gp)
+    public float bearingTo(final Geopoint gp)
     {
-        final int ilat1 = (int) Math.round(0.5 + latitude * 360000);
-        final int ilon1 = (int) Math.round(0.5 + longitude * 360000);
-        final int ilat2 = (int) Math.round(0.5 + gp.getLatitude() * 360000);
-        final int ilon2 = (int) Math.round(0.5 + gp.getLongitude() * 360000);
-
-        final double lat1 = deg2rad * latitude;
-        final double lon1 = deg2rad * longitude;
-        final double lat2 = deg2rad * gp.getLatitude();
-        final double lon2 = deg2rad * gp.getLongitude();
-
-        if (ilat1 == ilat2 && ilon1 == ilon2)
-        {
-            return 0;
-        }
-        else if (ilat1 == ilat2)
-        {
-            return (ilon1 > ilon2) ? 270 : 90;
-        }
-        else if (ilon1 == ilon2)
-        {
-            return (ilat1 > ilat2) ? 180: 0;
-        }
-        else
-        {
-            double c = Math.acos(Math.sin(lat2) * Math.sin(lat1) + Math.cos(lat2) * Math.cos(lat1) * Math.cos(lon2 - lon1));
-            double A = Math.asin(Math.cos(lat2) * Math.sin(lon2 - lon1) / Math.sin(c));
-            double result = A * rad2deg;
-
-            if (ilat2 > ilat1 && ilon2 > ilon1)
-            {
-                // result don't need change
-            }
-            else if (ilat2 < ilat1 && ilon2 < ilon1)
-            {
-                result = 180f - result;
-            }
-            else if (ilat2 < ilat1 && ilon2 > ilon1)
-            {
-                result = 180f - result;
-            }
-            else if (ilat2 > ilat1 && ilon2 < ilon1)
-            {
-                result += 360f;
-            }
-
-            return result;
-        }
+        return pathTo(gp)[1];
     }
 
     /**
