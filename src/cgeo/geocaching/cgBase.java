@@ -2862,14 +2862,12 @@ public class cgBase {
 			return null;
 		}
 
-		Double latitude = null;
-		Double longitude = null;
+		Geopoint coords = null;
 		String cachetype = null;
 		Integer list = 1;
 
 		if (parameters.containsKey("latitude") && parameters.containsKey("longitude")) {
-			latitude = (Double) parameters.get("latitude");
-			longitude = (Double) parameters.get("longitude");
+			coords = new Geopoint((Double) parameters.get("latitude"), (Double) parameters.get("longitude"));
 		}
 
 		if (parameters.containsKey("cachetype")) {
@@ -2880,7 +2878,7 @@ public class cgBase {
 			list = (Integer) parameters.get("list");
 		}
 
-		final cgSearch search = app.getBatchOfStoredCaches(true, latitude, longitude, cachetype, list);
+		final cgSearch search = app.getBatchOfStoredCaches(true, coords, cachetype, list);
 		search.totalCnt = app.getAllStoredCachesCount(true, cachetype, list);
 
 		return search.getCurrentId();

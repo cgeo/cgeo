@@ -2487,7 +2487,7 @@ public class cgData {
 		return count;
 	}
 
-	public List<String> loadBatchOfStoredGeocodes(boolean detailedOnly, Double latitude, Double longitude, String cachetype, int list) {
+	public List<String> loadBatchOfStoredGeocodes(boolean detailedOnly, final Geopoint coords, String cachetype, int list) {
 		init();
 
 		if (list < 1) {
@@ -2513,7 +2513,8 @@ public class cgData {
 		try {
 			Cursor cursor = databaseRO.query(
 					dbTableCaches,
-					new String[]{"_id", "geocode", "(abs(latitude-" + String.format((Locale) null, "%.6f", latitude) + ") + abs(longitude-" + String.format((Locale) null, "%.6f", longitude) + ")) as dif"},
+					new String[]{"_id", "geocode", "(abs(latitude-" + String.format((Locale) null, "%.6f", coords.getLatitude()) +
+									") + abs(longitude-" + String.format((Locale) null, "%.6f", coords.getLongitude()) + ")) as dif"},
 					specifySql.toString(),
 					null,
 					null,

@@ -482,13 +482,13 @@ public class cgeoapplication extends Application {
 		return cachesOut;
 	}
 
-	public cgSearch getBatchOfStoredCaches(boolean detailedOnly, Double latitude, Double longitude, String cachetype, int list) {
+	public cgSearch getBatchOfStoredCaches(boolean detailedOnly, final Geopoint coords, String cachetype, int list) {
 		if (storage == null) {
 			storage = new cgData(this);
 		}
 		cgSearch search = new cgSearch();
 
-		List<String> geocodes = storage.loadBatchOfStoredGeocodes(detailedOnly, latitude, longitude, cachetype, list);
+		List<String> geocodes = storage.loadBatchOfStoredGeocodes(detailedOnly, coords, cachetype, list);
 		if (geocodes != null && geocodes.isEmpty() == false) {
 			for (String gccode : geocodes) {
 				search.addGeocode(gccode);
