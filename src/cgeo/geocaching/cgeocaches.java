@@ -1339,10 +1339,10 @@ public class cgeocaches extends AbstractListActivity {
 		}
 		adapter.reFilter();
 
-		if (adapter != null && geo != null) {
+		if (geo != null) {
 			adapter.setActualCoordinates(geo.coordsNow);
 		}
-		if (adapter != null && dir != null) {
+		if (dir != null) {
 			adapter.setActualHeading(dir.directionNow);
 		}
 	}
