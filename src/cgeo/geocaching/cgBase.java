@@ -128,19 +128,19 @@ public class cgBase {
 	private final static Pattern PATTERN_TRACKABLE_Distance = Pattern.compile("<h4[^>]*\\W*Tracking History \\(([0-9\\.,]+(km|mi))[^\\)]*\\)", Pattern.CASE_INSENSITIVE);
 	private final static Pattern PATTERN_TRACKABLE_Log = Pattern.compile("<tr class=\"Data.+?src=\"/images/icons/([^\\.]+)\\.gif[^>]+>&nbsp;([^<]+)</td>.+?guid.+?>([^<]+)</a>.+?(?:guid=([^\"]+)\">([^<]+)</a>.+?)?<td colspan=\"4\">(.+?)(?:<ul.+?ul>)?\\s*</td>\\s*</tr>", Pattern.CASE_INSENSITIVE);
 
-	public static Map<String, String> cacheTypes = new HashMap<String, String>();
-	public static Map<String, String> cacheTypesInv = new HashMap<String, String>();
-	public static Map<String, String> cacheIDs = new HashMap<String, String>();
-	public static Map<String, String> cacheIDsChoices = new HashMap<String, String>();
-	public static Map<String, String> waypointTypes = new HashMap<String, String>();
-	public static Map<String, Integer> logTypes = new HashMap<String, Integer>();
-	public static Map<String, Integer> logTypes0 = new HashMap<String, Integer>();
-	public static Map<Integer, String> logTypes1 = new HashMap<Integer, String>();
-	public static Map<Integer, String> logTypes2 = new HashMap<Integer, String>();
-	public static Map<Integer, String> logTypesTrackable = new HashMap<Integer, String>();
-	public static Map<Integer, String> logTypesTrackableAction = new HashMap<Integer, String>();
-	public static Map<Integer, String> errorRetrieve = new HashMap<Integer, String>();
-	public static final Map<String, SimpleDateFormat> gcCustomDateFormats;
+	public final static Map<String, String> cacheTypes = new HashMap<String, String>();
+	public final static Map<String, String> cacheTypesInv = new HashMap<String, String>();
+	public final static Map<String, String> cacheIDs = new HashMap<String, String>();
+	public final static Map<String, String> cacheIDsChoices = new HashMap<String, String>();
+	public final static Map<String, String> waypointTypes = new HashMap<String, String>();
+	public final static Map<String, Integer> logTypes = new HashMap<String, Integer>();
+	public final static Map<String, Integer> logTypes0 = new HashMap<String, Integer>();
+	public final static Map<Integer, String> logTypes1 = new HashMap<Integer, String>();
+	public final static Map<Integer, String> logTypes2 = new HashMap<Integer, String>();
+	public final static Map<Integer, String> logTypesTrackable = new HashMap<Integer, String>();
+	public final static Map<Integer, String> logTypesTrackableAction = new HashMap<Integer, String>();
+	public final static Map<Integer, String> errorRetrieve = new HashMap<Integer, String>();
+	public final static Map<String, SimpleDateFormat> gcCustomDateFormats;
 	static {
 	    final String[] formats = new String[] {
 	            "MM/dd/yyyy",
