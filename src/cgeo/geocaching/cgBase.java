@@ -4626,8 +4626,8 @@ public class cgBase {
 		int maxLat = centerLat + (spanLat / 2) + (spanLat / 10);
 		int minLon = centerLon - (spanLon / 2) - (spanLon / 10);
 		int maxLon = centerLon + (spanLon / 2) + (spanLon / 10);
-		int cLat = (int) Math.round(cacheCoords.getLatitudeE6());
-		int cLon = (int) Math.round(cacheCoords.getLongitudeE6());
+		final int cLat = cacheCoords.getLatitudeE6();
+		final int cLon = cacheCoords.getLongitudeE6();
 		int mid = 0;
 
 		if (maxLat < minLat) {
