@@ -211,9 +211,9 @@ public class cgeoadvsearch extends AbstractActivity {
 					lonEdit = (EditText) findViewById(R.id.longitude);
 				}
 
-				if (geo.latitudeNow != null && geo.longitudeNow != null) {
-					latEdit.setHint(cgBase.formatLatitude(geo.latitudeNow, false));
-					lonEdit.setHint(cgBase.formatLongitude(geo.longitudeNow, false));
+				if (geo.coordsNow != null) {
+					latEdit.setHint(cgBase.formatLatitude(geo.coordsNow.getLatitude(), false));
+					lonEdit.setHint(cgBase.formatLongitude(geo.coordsNow.getLongitude(), false));
 				}
 			} catch (Exception e) {
 				Log.w(cgSettings.tag, "Failed to update location.");
@@ -248,8 +248,8 @@ public class cgeoadvsearch extends AbstractActivity {
 		final String lonText = lonView.getText().toString();
 
 		if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) {
-			latView.setText(cgBase.formatLatitude(geo.latitudeNow, true));
-			lonView.setText(cgBase.formatLongitude(geo.longitudeNow, true));
+			latView.setText(cgBase.formatLatitude(geo.coordsNow.getLatitude(), true));
+			lonView.setText(cgBase.formatLongitude(geo.coordsNow.getLongitude(), true));
 		} else {
 			Map<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
 			Map<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lat");

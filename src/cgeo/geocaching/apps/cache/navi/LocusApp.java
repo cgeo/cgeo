@@ -19,6 +19,7 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.apps.AbstractLocusApp;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.CollectionUtils;
 
 class LocusApp extends AbstractLocusApp implements NavigationApp {
@@ -30,9 +31,8 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 	@Override
 	public boolean invoke(cgGeo geo, Activity activity, Resources res,
 			cgCache cache,
-			final UUID searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
-		if (cache == null && waypoint == null && latitude == null
-				&& longitude == null) {
+			final UUID searchId, cgWaypoint waypoint, final Geopoint coords) {
+		if (cache == null && waypoint == null && coords == null) {
 			return false;
 		}
 		try {
@@ -42,7 +42,7 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 				if (cache != null && cache.waypoints != null
 						&& cache.waypoints.isEmpty() == false) {
 					for (cgWaypoint wp : cache.waypoints) {
-						if (wp.latitude != null && wp.longitude != null) {
+						if (wp.coords != null) {
 							waypoints.add(wp);
 						}
 					}
@@ -118,24 +118,21 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 					dos.writeUTF("");
 				}
 
-				if (cache != null && cache.latitude != null
-						&& cache.longitude != null) {
-					dos.writeDouble(cache.latitude); // latitude
-					dos.writeDouble(cache.longitude); // longitude
-				} else if (waypoint != null && waypoint.latitude != null
-						&& waypoint.longitude != null) {
-					dos.writeDouble(waypoint.latitude); // latitude
-					dos.writeDouble(waypoint.longitude); // longitude
+				if (cache != null && cache.coords != null) {
+					dos.writeDouble(cache.coords.getLatitude()); // latitude
+					dos.writeDouble(cache.coords.getLongitude()); // longitude
+				} else if (waypoint != null && waypoint.coords != null) {
+					dos.writeDouble(waypoint.coords.getLatitude()); // latitude
+					dos.writeDouble(waypoint.coords.getLongitude()); // longitude
 				} else {
-					dos.writeDouble(latitude); // latitude
-					dos.writeDouble(longitude); // longitude
+					dos.writeDouble(coords.getLatitude()); // latitude
+					dos.writeDouble(coords.getLongitude()); // longitude
 				}
 
 				// cache waypoints
 				if (CollectionUtils.isNotEmpty(waypoints)) {
 					for (cgWaypoint wp : waypoints) {
-						if (wp == null || wp.latitude == null
-								|| wp.longitude == null) {
+						if (wp == null || wp.coords == null) {
 							continue;
 						}
 
@@ -181,8 +178,8 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 							dos.writeUTF("");
 						}
 
-						dos.writeDouble(wp.latitude); // latitude
-						dos.writeDouble(wp.longitude); // longitude
+						dos.writeDouble(wp.coords.getLatitude()); // latitude
+						dos.writeDouble(wp.coords.getLongitude()); // longitude
 					}
 				}
 

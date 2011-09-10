@@ -9,12 +9,12 @@ import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.util.AttributeSet;
 import android.view.View;
+import cgeo.geocaching.geopoint.Geopoint;
 
 public class cgCompassMini extends View {
 	private int arrowSkin = R.drawable.compass_arrow_mini_white;
 	private Context context = null;
-	private Double cacheLat = null;
-	private Double cacheLon = null;
+	private Geopoint cacheCoords = null;
 	private Bitmap compassArrow = null;
 	private Double azimuth = Double.valueOf(0);
 	private Double heading = Double.valueOf(0);
@@ -52,9 +52,8 @@ public class cgCompassMini extends View {
 		}
 	}
 
-	public void setContent(Double cacheLatIn, Double cacheLonIn) {
-		cacheLat = cacheLatIn;
-		cacheLon = cacheLonIn;
+	public void setContent(final Geopoint cacheCoordsIn) {
+		cacheCoords = cacheCoordsIn;
 	}
 
 	protected void updateAzimuth(Double azimuthIn) {
@@ -69,12 +68,12 @@ public class cgCompassMini extends View {
 		updateDirection();
 	}
 
-	protected void updateCoords(Double latitudeIn, Double longitudeIn) {
-		if (latitudeIn == null || longitudeIn == null || cacheLat == null || cacheLon == null) {
+	protected void updateCoords(final Geopoint coordsIn) {
+		if (coordsIn == null || cacheCoords == null) {
 			return;
 		}
 
-		heading = cgBase.getHeading(latitudeIn, longitudeIn, cacheLat, cacheLon);
+		heading = cgBase.getHeading(coordsIn, cacheCoords);
 
 		updateDirection();
 	}

@@ -2,26 +2,25 @@ package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.geopoint.Geopoint;
 
 /**
  * sorts caches by distance to current position
  *
  */
 public class DistanceComparator extends AbstractCacheComparator {
-	private Double latitude = null;
-	private Double longitude = null;
+	private Geopoint coords = null;
 
 	public DistanceComparator() {
 		// nothing
 	}
 
-	public DistanceComparator(Double latitudeIn, Double longitudeIn) {
-		setCoords(latitudeIn, longitudeIn);
+	public DistanceComparator(final Geopoint coords) {
+		setCoords(coords);
 	}
 
-	public void setCoords(Double latitudeIn, Double longitudeIn) {
-		latitude = latitudeIn;
-		longitude = longitudeIn;
+	public void setCoords(final Geopoint coords) {
+		this.coords = coords;
 	}
 
 	@Override
@@ -31,8 +30,7 @@ public class DistanceComparator extends AbstractCacheComparator {
 
 	@Override
 	protected int compareCaches(final cgCache cache1, final cgCache cache2) {
-		if ((cache1.latitude == null || cache1.longitude == null
-				|| cache2.latitude == null || cache2.longitude == null)
+		if ((cache1.coords == null || cache2.coords == null)
 				&& cache1.distance != null && cache2.distance != null) {
 			if (cache1.distance < cache2.distance) {
 				return -1;
@@ -42,17 +40,15 @@ public class DistanceComparator extends AbstractCacheComparator {
 				return 0;
 			}
 		} else {
-			if (cache1.latitude == null || cache1.longitude == null) {
+			if (cache1.coords == null) {
 				return 1;
 			}
-			if (cache2.latitude == null || cache2.longitude == null) {
+			if (cache2.coords == null) {
 				return -1;
 			}
 
-			Double distance1 = cgBase.getDistance(latitude, longitude,
-					cache1.latitude, cache1.longitude);
-			Double distance2 = cgBase.getDistance(latitude, longitude,
-					cache2.latitude, cache2.longitude);
+			Double distance1 = cgBase.getDistance(coords, cache1.coords);
+			Double distance2 = cgBase.getDistance(coords, cache2.coords);
 
 			if (distance1 < distance2) {
 				return -1;

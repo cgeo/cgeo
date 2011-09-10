@@ -493,7 +493,7 @@ public class cgeodetail extends AbstractActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		if (cache != null && cache.latitude != null && cache.longitude != null) {
+		if (cache != null && cache.coords != null) {
 			menu.add(0, 2, 0, res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass); // compass
 			SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
 			addNavigationMenuItems(subMenu);
@@ -508,7 +508,7 @@ public class cgeodetail extends AbstractActivity {
 			menu.add(1, 5, 0, res.getString(R.string.cache_menu_spoilers)).setIcon(android.R.drawable.ic_menu_gallery); // spoiler images
 		}
 
-		if (cache != null && cache.latitude != null && cache.longitude != null) {
+		if (cache != null && cache.coords != null) {
 			menu.add(0, 10, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
 		}
 
@@ -812,7 +812,7 @@ public class cgeodetail extends AbstractActivity {
 			}
 
 			// cache coordinates
-			if (cache.latitude != null && cache.longitude != null) {
+			if (cache.coords != null) {
 				itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
 				itemName = (TextView) itemLayout.findViewById(R.id.name);
 				itemValue = (TextView) itemLayout.findViewById(R.id.value);
@@ -1039,7 +1039,7 @@ public class cgeodetail extends AbstractActivity {
 
 					TextView nameView = (TextView) waypointView.findViewById(R.id.name);
 					if (StringUtils.isBlank(wpt.name)) {
-						nameView.setText(cgBase.formatCoords(wpt.latitude, wpt.longitude, true));
+						nameView.setText(cgBase.formatCoords(wpt.coords, true));
 					} else {
 						// avoid HTML parsing
 						if (wpt.name.indexOf('<') >= 0 || wpt.name.indexOf('&') >= 0) {
@@ -1083,8 +1083,8 @@ public class cgeodetail extends AbstractActivity {
 				hintView.setOnClickListener(null);
 			}
 
-			if (geo != null && geo.latitudeNow != null && geo.longitudeNow != null && cache != null && cache.latitude != null && cache.longitude != null) {
-				cacheDistance.setText(base.getHumanDistance(cgBase.getDistance(geo.latitudeNow, geo.longitudeNow, cache.latitude, cache.longitude)));
+			if (geo != null && geo.coordsNow != null && cache != null && cache.coords != null) {
+				cacheDistance.setText(base.getHumanDistance(cgBase.getDistance(geo.coordsNow, cache.coords)));
 				cacheDistance.bringToFront();
 			}
 		} catch (Exception e) {
@@ -1330,14 +1330,15 @@ public class cgeodetail extends AbstractActivity {
 
 		@Override
 		public void run() {
-			if (cache == null || cache.latitude == null || cache.longitude == null) {
+			if (cache == null || cache.coords == null) {
 				return;
 			}
 
 			BitmapDrawable image = null;
 
 			try {
-				final String latlonMap = String.format((Locale) null, "%.6f", cache.latitude) + "," + String.format((Locale) null, "%.6f", cache.longitude);
+				final String latlonMap = String.format((Locale) null, "%.6f", cache.coords.getLatitude()) + "," +
+										 String.format((Locale) null, "%.6f", cache.coords.getLongitude());
 				final Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 
 				int width = display.getWidth();
@@ -1395,8 +1396,7 @@ public class cgeodetail extends AbstractActivity {
 			} else {
 				coords.name = geocode.toUpperCase();
 			}
-			coords.latitude = cache.latitude;
-			coords.longitude = cache.longitude;
+			coords.coords = cache.coords;
 			coordinates.add(coords);
 		} catch (Exception e) {
 			Log.e(cgSettings.tag, "cgeodetail.getCoordinates (cache): " + e.toString());
@@ -1405,15 +1405,14 @@ public class cgeodetail extends AbstractActivity {
 		try {
 			// waypoints
 			for (cgWaypoint waypoint : cache.waypoints) {
-				if (waypoint.latitude == null || waypoint.longitude == null) {
+				if (waypoint.coords == null) {
 					continue;
 				}
 
 				coords = new cgCoord();
 				coords.type = "waypoint";
 				coords.name = waypoint.name;
-				coords.latitude = waypoint.latitude;
-				coords.longitude = waypoint.longitude;
+				coords.coords = waypoint.coords;
 				coordinates.add(coords);
 			}
 		} catch (Exception e) {
@@ -1424,7 +1423,7 @@ public class cgeodetail extends AbstractActivity {
 	}
 
 	private void cachesAround() {
-		cgeocaches.startActivityCachesAround(this, cache.latitude, cache.longitude);
+		cgeocaches.startActivityCachesAround(this, cache.coords);
 
 		finish();
 	}
@@ -1544,15 +1543,15 @@ public class cgeodetail extends AbstractActivity {
 	}
 
 	private void navigateTo() {
-		if (cache == null || cache.latitude == null || cache.longitude == null) {
+		if (cache == null || cache.coords == null) {
 			showToast(res.getString(R.string.err_location_unknown));
 		}
 
 		cgeonavigate navigateActivity = new cgeonavigate();
 
 		Intent navigateIntent = new Intent(this, navigateActivity.getClass());
-		navigateIntent.putExtra("latitude", cache.latitude);
-		navigateIntent.putExtra("longitude", cache.longitude);
+		navigateIntent.putExtra("latitude", cache.coords.getLatitude());
+		navigateIntent.putExtra("longitude", cache.coords.getLongitude());
 		navigateIntent.putExtra("geocode", cache.geocode.toUpperCase());
 		navigateIntent.putExtra("name", cache.name);
 
@@ -1638,8 +1637,8 @@ public class cgeodetail extends AbstractActivity {
 			try {
 				StringBuilder dist = new StringBuilder();
 
-				if (geo.latitudeNow != null && geo.longitudeNow != null && cache != null && cache.latitude != null && cache.longitude != null) {
-					dist.append(base.getHumanDistance(cgBase.getDistance(geo.latitudeNow, geo.longitudeNow, cache.latitude, cache.longitude)));
+				if (geo.coordsNow != null && cache != null && cache.coords != null) {
+					dist.append(base.getHumanDistance(cgBase.getDistance(geo.coordsNow, cache.coords)));
 				}
 
 				if (cache != null && cache.elevation != null) {
@@ -1939,15 +1938,15 @@ public class cgeodetail extends AbstractActivity {
 	}
 
 	public void goCompass(View view) {
-		if (cache == null || cache.latitude == null || cache.longitude == null) {
+		if (cache == null || cache.coords == null) {
 			showToast(res.getString(R.string.cache_coordinates_no));
 
 			return;
 		}
 
 		Intent navigateIntent = new Intent(this, cgeonavigate.class);
-		navigateIntent.putExtra("latitude", cache.latitude);
-		navigateIntent.putExtra("longitude", cache.longitude);
+		navigateIntent.putExtra("latitude", cache.coords.getLatitude());
+		navigateIntent.putExtra("longitude", cache.coords.getLongitude());
 		navigateIntent.putExtra("geocode", cache.geocode.toUpperCase());
 		navigateIntent.putExtra("name", cache.name);
 

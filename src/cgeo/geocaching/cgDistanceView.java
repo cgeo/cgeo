@@ -3,11 +3,11 @@ package cgeo.geocaching;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TextView;
+import cgeo.geocaching.geopoint.Geopoint;
 
 public class cgDistanceView extends TextView {
 	private cgBase base = null;
-	private Double cacheLat = null;
-	private Double cacheLon = null;
+	private Geopoint cacheCoords = null;
 
 	public cgDistanceView(Context context) {
 		super(context);
@@ -21,18 +21,17 @@ public class cgDistanceView extends TextView {
 		super(context, attrs, defStyle);
 	}
 
-	public void setContent(cgBase baseIn, Double cacheLatIn, Double cacheLonIn) {
+	public void setContent(cgBase baseIn, final Geopoint cacheCoordsIn) {
 		base = baseIn;
-		cacheLat = cacheLatIn;
-		cacheLon = cacheLonIn;
+		cacheCoords = cacheCoordsIn;
 	}
 
-	public void update(Double latitude, Double longitude) {
-		if (cacheLat == null || cacheLon == null) return;
-		if (latitude == null || longitude == null) return;
+	public void update(final Geopoint coords) {
+		if (cacheCoords == null) return;
+		if (coords == null) return;
 		if (base == null) return;
 
-		setText(base.getHumanDistance(cgBase.getDistance(latitude, longitude, cacheLat, cacheLon)));
+		setText(base.getHumanDistance(cgBase.getDistance(coords, cacheCoords)));
 	}
 
 	public void setDistance(Double distance) {

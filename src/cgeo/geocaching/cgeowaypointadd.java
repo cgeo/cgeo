@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.geopoint.Geopoint;
 
 public class cgeowaypointadd extends AbstractActivity {
 
@@ -57,8 +58,8 @@ public class cgeowaypointadd extends AbstractActivity {
 
 					app.setAction(geocode);
 
-					((Button) findViewById(R.id.buttonLatitude)).setText(cgBase.formatLatitude(waypoint.latitude, true));
-					((Button) findViewById(R.id.buttonLongitude)).setText(cgBase.formatLongitude(waypoint.longitude, true));
+					((Button) findViewById(R.id.buttonLatitude)).setText(cgBase.formatLatitude(waypoint.coords.getLatitude(), true));
+					((Button) findViewById(R.id.buttonLongitude)).setText(cgBase.formatLongitude(waypoint.coords.getLongitude(), true));
 					((EditText) findViewById(R.id.name)).setText(Html.fromHtml(waypoint.name.trim()).toString());
 					((EditText) findViewById(R.id.note)).setText(Html.fromHtml(waypoint.note.trim()).toString());
 
@@ -187,15 +188,15 @@ public class cgeowaypointadd extends AbstractActivity {
 
 		@Override
 		public void updateLoc(cgGeo geo) {
-			if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null) {
+			if (geo == null || geo.coordsNow == null) {
 				return;
 			}
 
 			try {
 				Button bLat = (Button) findViewById(R.id.buttonLatitude);
 				Button bLon = (Button) findViewById(R.id.buttonLongitude);
-				bLat.setHint(cgBase.formatLatitude(geo.latitudeNow, false));
-				bLon.setHint(cgBase.formatLongitude(geo.longitudeNow, false));
+				bLat.setHint(cgBase.formatLatitude(geo.coordsNow.getLatitude(), false));
+				bLon.setHint(cgBase.formatLongitude(geo.coordsNow.getLongitude(), false));
 			} catch (Exception e) {
 				Log.w(cgSettings.tag, "Failed to update location.");
 			}
@@ -223,12 +224,11 @@ public class cgeowaypointadd extends AbstractActivity {
 			coordsDialog.setCancelable(true);
 			coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
 				@Override
-				public void update(List<Double> coords) {
-					((Button) findViewById(R.id.buttonLatitude)).setText(cgBase.formatLatitude(coords.get(0), true));
-					((Button) findViewById(R.id.buttonLongitude)).setText(cgBase.formatLongitude(coords.get(1), true));
+				public void update(final Geopoint coords) {
+					((Button) findViewById(R.id.buttonLatitude)).setText(cgBase.formatLatitude(coords.getLatitude(), true));
+					((Button) findViewById(R.id.buttonLongitude)).setText(cgBase.formatLongitude(coords.getLongitude(), true));
 					if (waypoint != null) {
-						waypoint.latitude = coords.get(0);
-						waypoint.longitude = coords.get(1);
+						waypoint.coords = coords;
 					}
 				}
 			});
@@ -272,13 +272,13 @@ public class cgeowaypointadd extends AbstractActivity {
 				latitude = (Double) latParsed.get("coordinate");
 				longitude = (Double) lonParsed.get("coordinate");
 			} else {
-				if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null) {
+				if (geo == null || geo.coordsNow == null) {
 					showToast(res.getString(R.string.err_point_curr_position_unavailable));
 					return;
 				}
 
-				latitude = geo.latitudeNow;
-				longitude = geo.longitudeNow;
+				latitude = geo.coordsNow.getLatitude();
+				longitude = geo.coordsNow.getLongitude();
 			}
 
 			if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
@@ -338,10 +338,10 @@ public class cgeowaypointadd extends AbstractActivity {
 				Double latParsed = null;
 				Double lonParsed = null;
 
-				Map<String, Double> coordsDst = cgBase.getRadialDistance(latitude, longitude, bearing, distance);
+				final Geopoint coordsDst = cgBase.getRadialDistance(new Geopoint(latitude, longitude), bearing, distance);
 
-				latParsed = coordsDst.get("latitude");
-				lonParsed = coordsDst.get("longitude");
+				latParsed = coordsDst.getLatitude();
+				lonParsed = coordsDst.getLongitude();
 
 				if (latParsed == null || lonParsed == null) {
 					showToast(res.getString(R.string.err_point_location_error));
@@ -371,8 +371,7 @@ public class cgeowaypointadd extends AbstractActivity {
 			waypoint.prefix = prefix;
 			waypoint.lookup = lookup;
 			waypoint.name = name;
-			waypoint.latitude = coords.get(0);
-			waypoint.longitude = coords.get(1);
+			waypoint.coords = new Geopoint(coords.get(0), coords.get(1));
 			waypoint.latitudeString = cgBase.formatLatitude(coords.get(0), true);
 			waypoint.longitudeString = cgBase.formatLongitude(coords.get(1), true);
 			waypoint.note = note;

@@ -4,6 +4,7 @@ import android.content.Context;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgUser;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.mapinterfaces.CacheOverlayItemImpl;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
 import cgeo.geocaching.mapinterfaces.MapFactory;
@@ -29,8 +30,8 @@ public class googleMapFactory implements MapFactory{
 	}
 
 	@Override
-	public GeoPointImpl getGeoPointBase(int latE6, int lonE6) {
-		return new googleGeoPoint(latE6, lonE6);
+	public GeoPointImpl getGeoPointBase(final Geopoint coords) {
+		return new googleGeoPoint(coords.getLatitudeE6(), coords.getLongitudeE6());
 	}
 
 	@Override

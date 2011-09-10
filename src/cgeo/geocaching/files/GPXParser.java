@@ -34,6 +34,7 @@ import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgTrackable;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.geopoint.Geopoint;
 
 public abstract class GPXParser extends FileParser {
 
@@ -226,11 +227,9 @@ public abstract class GPXParser extends FileParser {
 			@Override
 			public void start(Attributes attrs) {
 				try {
-					if (attrs.getIndex("lat") > -1) {
-						cache.latitude = new Double(attrs.getValue("lat"));
-					}
-					if (attrs.getIndex("lon") > -1) {
-						cache.longitude = new Double(attrs.getValue("lon"));
+					if (attrs.getIndex("lat") > -1 && attrs.getIndex("lon") > -1) {
+						cache.coords = new Geopoint(new Double(attrs.getValue("lat")),
+													new Double(attrs.getValue("lon")));
 					}
 				} catch (Exception e) {
 					Log.w(cgSettings.tag, "Failed to parse waypoint's latitude and/or longitude.");
@@ -251,7 +250,7 @@ public abstract class GPXParser extends FileParser {
 				}
 
 				if (StringUtils.isNotBlank(cache.geocode)
-						&& cache.latitude != null && cache.longitude != null
+						&& cache.coords != null
 						&& ((type == null && sym == null)
 						|| (type != null && type.indexOf("geocache") > -1)
 						|| (sym != null && sym.indexOf("geocache") > -1))) {
