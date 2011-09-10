@@ -266,10 +266,9 @@ public class cgeoimages extends AbstractActivity {
 
 					public void onClick(View arg0) {
 						final String directoryTarget = Environment.getExternalStorageDirectory() + "/" + cgSettings.cache + "/" + "temp.jpg";
-						File file = new File(directoryTarget);
-						FileOutputStream fos;
+						final File file = new File(directoryTarget);
 						try {
-							fos = new FileOutputStream(file);
+							final FileOutputStream fos = new FileOutputStream(file);
 							image.getBitmap().compress(CompressFormat.JPEG, 100, fos);
 							fos.close();
 						} catch (Exception e) {

@@ -1555,10 +1555,8 @@ public class cgeodetail extends AbstractActivity {
 		navigateIntent.putExtra("geocode", cache.geocode.toUpperCase());
 		navigateIntent.putExtra("name", cache.name);
 
-		if (cgeonavigate.coordinates != null) {
-			cgeonavigate.coordinates.clear();
-		}
-		cgeonavigate.coordinates = getCoordinates();
+		cgeonavigate.coordinates.clear();
+		cgeonavigate.coordinates.addAll(getCoordinates());
 		startActivity(navigateIntent);
 	}
 
@@ -1950,10 +1948,8 @@ public class cgeodetail extends AbstractActivity {
 		navigateIntent.putExtra("geocode", cache.geocode.toUpperCase());
 		navigateIntent.putExtra("name", cache.name);
 
-		if (cgeonavigate.coordinates != null) {
-			cgeonavigate.coordinates.clear();
-		}
-		cgeonavigate.coordinates = getCoordinates();
+		cgeonavigate.coordinates.clear();
+		cgeonavigate.coordinates.addAll(getCoordinates());
 		startActivity(navigateIntent);
 	}
 

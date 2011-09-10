@@ -14,7 +14,7 @@ public class googleUsersOverlayItem extends OverlayItem implements UserOverlayIt
 	private cgUser user = null;
 
 	public googleUsersOverlayItem(Context contextIn, cgUser userIn) {
-		super(new GeoPoint((int)(userIn.latitude * 1e6), (int)(userIn.longitude * 1e6)), userIn.username, "");
+		super(new GeoPoint(userIn.coords.getLatitudeE6(), userIn.coords.getLongitudeE6()), userIn.username, "");
 
 		context = contextIn;
 		user = userIn;
