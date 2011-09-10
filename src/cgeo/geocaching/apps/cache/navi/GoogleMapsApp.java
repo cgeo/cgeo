@@ -14,6 +14,7 @@ import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.geopoint.Geopoint;
 
 class GoogleMapsApp extends AbstractNavigationApp implements NavigationApp {
 
@@ -28,18 +29,16 @@ class GoogleMapsApp extends AbstractNavigationApp implements NavigationApp {
 
 	public boolean invoke(cgGeo geo, Activity activity, Resources res,
 			cgCache cache,
-			final UUID searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
-		if (cache == null && waypoint == null && latitude == null && longitude == null) {
+			final UUID searchId, cgWaypoint waypoint, final Geopoint coords) {
+		if (cache == null && waypoint == null && coords == null) {
 			return false;
 		}
 
 		try {
-			if (cache != null && cache.latitude != null && cache.longitude != null) {
-				activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("geo:" + cache.latitude + "," + cache.longitude)));
-				// INFO: q parameter works with Google Maps, but breaks cooperation with all other apps
-			} else if (waypoint != null && waypoint.latitude != null && waypoint.longitude != null) {
-				activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("geo:" + waypoint.latitude + "," + waypoint.longitude)));
-				// INFO: q parameter works with Google Maps, but breaks cooperation with all other apps
+			if (cache != null && cache.coords != null) {
+				startActivity(activity, cache.coords);
+			} else if (waypoint != null && waypoint.coords != null) {
+				startActivity(activity, waypoint.coords);
 			}
 
 			return true;
@@ -54,6 +53,12 @@ class GoogleMapsApp extends AbstractNavigationApp implements NavigationApp {
 		}
 
 		return false;
+	}
+
+	private void startActivity(Activity activity, final Geopoint coords) {
+		activity.startActivity(new Intent(Intent.ACTION_VIEW,
+				Uri.parse("geo:" + coords.getLatitude() + "," + coords.getLongitude())));
+		// INFO: q parameter works with Google Maps, but breaks cooperation with all other apps
 	}
 
 }

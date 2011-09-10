@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgUser;
+import cgeo.geocaching.geopoint.Geopoint;
 
 /**
  * Defines functions of a factory class to get implementation specific objects
@@ -19,7 +20,7 @@ public interface MapFactory {
 
 	public int getMapLayoutId();
 
-	public GeoPointImpl getGeoPointBase(int latE6, int lonE6);
+	public GeoPointImpl getGeoPointBase(final Geopoint coords);
 
 	CacheOverlayItemImpl getCacheOverlayItem(cgCoord coordinate, String type);
 

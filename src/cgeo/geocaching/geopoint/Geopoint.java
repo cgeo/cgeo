@@ -1,5 +1,7 @@
 package cgeo.geocaching.geopoint;
 
+import android.location.Location;
+
 /**
  * Abstraction of geographic point.
  */
@@ -60,6 +62,15 @@ public class Geopoint
     }
 
     /**
+     * Creates new Geopoint with given Location.
+     *
+     * @param gp the Location to clone
+     */
+    public Geopoint(final Location loc) {
+        this(loc.getLatitude(), loc.getLongitude());
+    }
+
+	/**
      * Set latitude in degree.
      *
      * @param lat latitude
