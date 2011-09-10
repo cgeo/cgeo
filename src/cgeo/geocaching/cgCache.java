@@ -36,7 +36,7 @@ public class cgCache implements ICache {
      * Code of the cache like GCABCD
      */
 	public String geocode = "";
-	public String cacheid = "";
+	public String cacheId = "";
 	public String guid = "";
 	public String type = "";
 	public String name = "";
@@ -105,8 +105,8 @@ public class cgCache implements ICache {
 		if (StringUtils.isBlank(geocode)) {
 			geocode = oldCache.geocode;
 		}
-		if (StringUtils.isBlank(cacheid)) {
-			cacheid = oldCache.cacheid;
+		if (StringUtils.isBlank(cacheId)) {
+			cacheId = oldCache.cacheId;
 		}
 		if (StringUtils.isBlank(guid)) {
 			guid = oldCache.guid;
@@ -262,12 +262,12 @@ public class cgCache implements ICache {
 	}
 
 	public boolean logVisit(IAbstractActivity fromActivity) {
-		if (StringUtils.isBlank(cacheid)) {
+		if (StringUtils.isBlank(cacheId)) {
 			fromActivity.showToast(((Activity)fromActivity).getResources().getString(R.string.err_cannot_log_visit));
 			return true;
 		}
 		Intent logVisitIntent = new Intent((Activity)fromActivity, cgeovisit.class);
-		logVisitIntent.putExtra(cgeovisit.EXTRAS_ID, cacheid);
+		logVisitIntent.putExtra(cgeovisit.EXTRAS_ID, cacheId);
 		logVisitIntent.putExtra(cgeovisit.EXTRAS_GEOCODE, geocode.toUpperCase());
 		logVisitIntent.putExtra(cgeovisit.EXTRAS_FOUND, found);
 
