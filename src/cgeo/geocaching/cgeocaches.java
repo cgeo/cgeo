@@ -2010,7 +2010,7 @@ public class cgeocaches extends AbstractListActivity {
 					}
 
 					detailProgress++;
-					base.storeCache(app, cgeocaches.this, cache, null, reason, handler);
+					base.storeCache(app, cgeocaches.this, cache, null, reason, null);
 
 					handler.sendEmptyMessage(cacheList.indexOf(cache));
 
