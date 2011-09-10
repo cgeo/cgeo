@@ -12,8 +12,8 @@ public final class Geopoint
 	public static final double rad2deg   = 180 / Math.PI;
 	public static final float  erad      = 6371.0f;
 
-	private double latitude;
-	private double longitude;
+	private final double latitude;
+	private final double longitude;
 
 	/**
 	 * Creates new Geopoint with given latitude and longitude (both degree).
@@ -23,8 +23,16 @@ public final class Geopoint
 	 */
 	public Geopoint(final double lat, final double lon)
 	{
-		setLatitude(lat);
-		setLongitude(lon);
+		if (lat <= 90 && lat >= -90) {
+			latitude  = lat;
+		} else {
+			throw new MalformedCoordinateException("malformed latitude: " + lat);
+		}
+		if (lon <= 180 && lon >=-180) {
+			longitude = lon;
+		} else {
+			throw new MalformedCoordinateException("malformed longitude: " + lon);
+		}
 	}
 
 	/**
@@ -35,8 +43,7 @@ public final class Geopoint
 	 */
 	public Geopoint(final int lat, final int lon)
 	{
-		setLatitude(lat * 1E-6);
-		setLongitude(lon * 1E-6);
+		this(lat / 1e6, lon / 1e6);
 	}
 
 	/**
@@ -47,18 +54,7 @@ public final class Geopoint
 	 */
 	public Geopoint(final String text)
 	{
-		setLatitude(GeopointParser.parseLatitude(text));
-		setLongitude(GeopointParser.parseLongitude(text));
-	}
-
-	/**
-	 * Creates new Geopoint with given Geopoint. This is similar to clone().
-	 *
-	 * @param gp the Geopoint to clone
-	 */
-	public Geopoint(final Geopoint gp)
-	{
-		this(gp.getLatitude(), gp.getLongitude());
+		this(GeopointParser.parseLatitude(text), GeopointParser.parseLongitude(text));
 	}
 
 	/**
@@ -68,25 +64,6 @@ public final class Geopoint
 	 */
 	public Geopoint(final Location loc) {
 		this(loc.getLatitude(), loc.getLongitude());
-	}
-
-	/**
-	 * Set latitude in degree.
-	 *
-	 * @param lat latitude
-	 * @return this
-	 * @throws MalformedCoordinateException if not -90 <= lat <= 90
-	 */
-	private void setLatitude(final double lat)
-	{
-		if (lat <= 90 && lat >= -90)
-		{
-			latitude  = lat;
-		}
-		else
-		{
-			throw new MalformedCoordinateException("malformed latitude: " + lat);
-		}
 	}
 
 	/**
@@ -107,25 +84,6 @@ public final class Geopoint
 	public int getLatitudeE6()
 	{
 		return (int) (latitude * 1E6);
-	}
-
-	/**
-	 * Set longitude in degree.
-	 *
-	 * @param lon longitude
-	 * @return this
-	 * @throws MalformedCoordinateException if not -180 <= lon <= 180
-	 */
-	private void setLongitude(final double lon)
-	{
-		if (lon <= 180 && lon >=-180)
-		{
-			longitude = lon;
-		}
-		else
-		{
-			throw new MalformedCoordinateException("malformed longitude: " + lon);
-		}
 	}
 
 	/**
