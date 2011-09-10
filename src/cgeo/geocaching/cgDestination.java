@@ -58,7 +58,7 @@ public class cgDestination {
 			return false;
 		}
 		cgDestination other = (cgDestination) obj;
-		return coords.equals(other.coords);
+		return coords.isEqualTo(other.coords);
 	}
 
 	public long getId() {
