@@ -417,7 +417,16 @@ public class cgeocaches extends AbstractListActivity {
 					waitDialog.setOnCancelListener(null);
 				}
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-                showToast(res.getString(R.string.gpx_import_no_files));
+                showToast(res.getString(R.string.sendToCgeo_download_fail));
+				finish();
+				return;
+            } else if (msg.what == -3) {
+				if (waitDialog != null) {
+					waitDialog.dismiss();
+					waitDialog.setOnCancelListener(null);
+				}
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                showToast(res.getString(R.string.sendToCgeo_no_registration));
 				finish();
 				return;
 			} else {
@@ -2066,33 +2075,40 @@ public class cgeocaches extends AbstractListActivity {
 				}
 				cgResponse responseFromWeb = base.request(false, "send2.cgeo.org", "/read.html", "GET", "code=" + cgBase.urlencode_rfc3986(deviceCode), 0, true);
 
-				if ((responseFromWeb.getStatusCode() == 200)
-						&& (responseFromWeb.getData().length() > 2)) {
+				if (responseFromWeb.getStatusCode() == 200) {
+					if (responseFromWeb.getData().length() > 2) {
 
-					String GCcode = responseFromWeb.getData();
+						String GCcode = responseFromWeb.getData();
 
-					delay = 1;
-					Message mes = new Message();
-					mes.what = 1;
-					mes.obj = GCcode;
-					handler.sendMessage(mes);
-					yield();
+						delay = 1;
+						Message mes = new Message();
+						mes.what = 1;
+						mes.obj = GCcode;
+						handler.sendMessage(mes);
+						yield();
 
-					base.storeCache(app, cgeocaches.this, null, GCcode, reason, null);
+						base.storeCache(app, cgeocaches.this, null, GCcode,
+								reason, null);
 
-					Message mes1 = new Message();
-					mes1.what = 2;
-					mes1.obj = GCcode;
-					handler.sendMessage(mes1);
-					yield();
-				} else {
-					delay = 0;
-					handler.sendEmptyMessage(0);
-					yield();
+						Message mes1 = new Message();
+						mes1.what = 2;
+						mes1.obj = GCcode;
+						handler.sendMessage(mes1);
+						yield();
+					} else if ("RG".equals(responseFromWeb.getData())) {
+						//Server returned RG (registration) and this device no longer registered.
+						settings.setWebNameCode(null, null);
+						needToStop = true;
+						handler.sendEmptyMessage(-3);
+						return;
+					} else {
+						delay = 0;
+						handler.sendEmptyMessage(0);
+						yield();
+					}
 				}
 				if (responseFromWeb.getStatusCode() != 200) {
 					needToStop = true;
-					settings.setWebNameCode(null, null);
 					handler.sendEmptyMessage(-2);
 					return;
 				}

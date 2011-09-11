@@ -460,6 +460,10 @@
   <string name="init_sendToCgeo_registering">Registering your device for "Send to c:geo"…</string>
   <string name="init_sendToCgeo_register_ok">Registration successful. PIN code is ####. Use it on c:geo website to add this device to your browser.</string>
   <string name="init_sendToCgeo_register_fail">Registration failed.</string>
+  
+  <string name="sendToCgeo_download_fail">c:geo failed to download caches. No internet connection or send2c:geo is down.</string>
+  <string name="sendToCgeo_no_registration">c:geo failed to download caches. Registration for send2c:geo expired. Please register in settings.</string>
+  
 
   <!-- auth -->
   <string name="auth_twitter">Twitter</string>
@@ -949,6 +953,7 @@
     · fix: fill signature when logging offline\n
     · fix: show strikethrough in caches\n
     · fix: no more empty map previews\n
+    · fix: send2c:geo\n
     \n\n
     <b>26.08.2011</b>\n
     · new: street view\n
