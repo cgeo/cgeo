@@ -1,5 +1,6 @@
 package cgeo.geocaching.apps;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.location.Location;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgWaypoint;
@@ -24,6 +24,7 @@ import cgeo.geocaching.enumerations.CacheType;
 
 public abstract class AbstractLocusApp extends AbstractApp {
 	private static final String INTENT = Intent.ACTION_VIEW;
+	private static final SimpleDateFormat ISO8601DATE = new SimpleDateFormat("yyyy-MM-dd'T'");
 	
 	protected AbstractLocusApp(final Resources res) {
 		super(res.getString(R.string.caches_map_locus), INTENT);
@@ -42,7 +43,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
 	 * @author koem
 	 */
 	protected void showInLocus(List<? extends Object> objectsToShow, Activity activity) {
-        if (objectsToShow == null || activity == null) return;
+        if (objectsToShow == null) return;
 
         int pc = 0; // counter for points
         PointsData pd = new PointsData("c:geo");
@@ -50,11 +51,9 @@ public abstract class AbstractLocusApp extends AbstractApp {
             // get icon and Point
             Point p = null;
             if (o instanceof cgCache) {
-                cgCache c = (cgCache) o;
-                p = this.getPoint(c, activity);
+                p = this.getPoint((cgCache) o);
             } else if (o instanceof cgWaypoint) {
-                cgWaypoint w = (cgWaypoint) o;
-                p = this.getPoint(w);
+                p = this.getPoint((cgWaypoint) o);
             } else {
                 continue; // no cache, no waypoint => ignore
             }
@@ -82,7 +81,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
 	 * @return  null, when the <code>Point</code> could not be constructed
 	 * @author koem
 	 */
-	private Point getPoint(cgCache cache, Context context) {
+	private Point getPoint(cgCache cache) {
 		if (cache == null) return null;
 
 		// create one simple point with location
@@ -93,14 +92,15 @@ public abstract class AbstractLocusApp extends AbstractApp {
 		Point p = new Point(cache.name, loc);
 		PointGeocachingData pg = new PointGeocachingData();
 		p.setGeocachingData(pg);
-		
+
+		// set data in Locus' cache
 		pg.cacheID = cache.geocode;
 		pg.available = ! cache.disabled;
 		pg.archived = cache.archived;
 		pg.premiumOnly = cache.members;
 		pg.name = cache.name;
 		pg.placedBy = cache.owner;
-		if (cache.hidden != null) pg.hidden = cgBase.formatFullDate(context, cache.hidden.getTime());
+		if (cache.hidden != null) pg.hidden = ISO8601DATE.format(cache.hidden.getTime());
 		for (CacheType ct : CacheType.values()) {
 		    if (ct.cgeoId.equals(cache.type)) {
 		        if (ct.locusId != CacheType.NO_LOCUS_ID) pg.type = ct.locusId;
@@ -121,7 +121,9 @@ public abstract class AbstractLocusApp extends AbstractApp {
 		if (cache.waypoints != null) {
 			pg.waypoints = new ArrayList<PointGeocachingDataWaypoint>();
 			for (cgWaypoint waypoint : cache.waypoints) {
-				if (waypoint == null) continue;
+				if (waypoint == null || waypoint.latitude == null || waypoint.longitude == null) { 
+					continue;
+				}
 				PointGeocachingDataWaypoint w = new PointGeocachingDataWaypoint();
 				w.code = waypoint.geocode;
 				w.name = waypoint.name;

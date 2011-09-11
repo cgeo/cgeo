@@ -30,9 +30,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
-import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
@@ -5025,19 +5025,6 @@ public class cgBase {
 	 * @return the formatted string
 	 */
 	public String formatFullDate(long date) {
-	    return formatFullDate(context, date);
-	}
-
-	/**
-     * Generate a date string according to system-wide settings (locale, date format)
-     * such as "20 December 2010". The year will always be included, making it suitable
-     * to generate long-lived log entries.
-	 * 
-	 * @param context application context
-     * @param date milliseconds since the epoch
-     * @return the formatted string
-	 */
-	public static String formatFullDate(Context context, long date) {
 	    return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE 
 	            | DateUtils.FORMAT_SHOW_YEAR);
 	}

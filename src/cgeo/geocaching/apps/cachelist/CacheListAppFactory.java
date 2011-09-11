@@ -64,8 +64,7 @@ public final class CacheListAppFactory extends AbstractAppFactory {
 	public static boolean onMenuItemSelected(final MenuItem item,
 			final cgGeo geo, final List<cgCache> caches, final Activity activity, final Resources res,
 			final UUID searchId) {
-		CacheListApp app = (CacheListApp) getAppFromMenuItem(
-				item, apps);
+		CacheListApp app = (CacheListApp) getAppFromMenuItem(item, apps);
 		if (app != null) {
 			try {
 				return app.invoke(geo, caches, activity, res, searchId);
