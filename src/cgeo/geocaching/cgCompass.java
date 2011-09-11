@@ -112,10 +112,9 @@ public class cgCompass extends View {
 			azimuth = northHeadingIn;
 			heading = cacheHeadingIn;
 			initialDisplay = false;
-		} else {
-			northHeading = northHeadingIn;
-			cacheHeading = cacheHeadingIn;
 		}
+		northHeading = northHeadingIn;
+		cacheHeading = cacheHeadingIn;
 	}
 
 	/**
