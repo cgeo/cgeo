@@ -3,8 +3,6 @@ package cgeo.geocaching;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -21,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 
@@ -298,43 +297,10 @@ public class cgeowaypointadd extends AbstractActivity {
 					return;
 				}
 
-				Double distance = null; // km
-
-				final Pattern patternA = Pattern.compile("^([0-9\\.\\,]+)[ ]*m$", Pattern.CASE_INSENSITIVE); // m
-				final Pattern patternB = Pattern.compile("^([0-9\\.\\,]+)[ ]*km$", Pattern.CASE_INSENSITIVE); // km
-				final Pattern patternC = Pattern.compile("^([0-9\\.\\,]+)[ ]*ft$", Pattern.CASE_INSENSITIVE); // ft - 0.3048m
-				final Pattern patternD = Pattern.compile("^([0-9\\.\\,]+)[ ]*yd$", Pattern.CASE_INSENSITIVE); // yd - 0.9144m
-				final Pattern patternE = Pattern.compile("^([0-9\\.\\,]+)[ ]*mi$", Pattern.CASE_INSENSITIVE); // mi - 1609.344m
-
-				Matcher matcherA = patternA.matcher(distanceText);
-				Matcher matcherB = patternB.matcher(distanceText);
-				Matcher matcherC = patternC.matcher(distanceText);
-				Matcher matcherD = patternD.matcher(distanceText);
-				Matcher matcherE = patternE.matcher(distanceText);
-
-				if (matcherA.find() && matcherA.groupCount() > 0) {
-					distance = (new Double(matcherA.group(1))) * 0.001;
-				} else if (matcherB.find() && matcherB.groupCount() > 0) {
-					distance = new Double(matcherB.group(1));
-				} else if (matcherC.find() && matcherC.groupCount() > 0) {
-					distance = (new Double(matcherC.group(1))) * 0.0003048;
-				} else if (matcherD.find() && matcherD.groupCount() > 0) {
-					distance = (new Double(matcherD.group(1))) * 0.0009144;
-				} else if (matcherE.find() && matcherE.groupCount() > 0) {
-					distance = (new Double(matcherE.group(1))) * 1.609344;
-				} else {
-					try {
-						if (settings.units == cgSettings.unitsImperial) {
-							distance = (new Double(distanceText)) * 1.609344; // considering it miles
-						} else {
-							distance = (new Double(distanceText)) * 0.001; // considering it meters
-						}
-					} catch (Exception e) {
-						// probably not a number
-					}
-				}
-
-				if (distance == null) {
+				double distance;
+				try {
+				    distance = DistanceParser.parseDistance(distanceText, settings.units);
+				} catch (NumberFormatException e) {
 					showToast(res.getString(R.string.err_parse_dist));
 					return;
 				}
