@@ -1024,63 +1024,6 @@ public class cgData {
 		}
 	}
 
-
-    @Deprecated
-	public boolean isReliableLatLon(String geocode, String guid) {
-		init();
-
-		Cursor cursor = null;
-		int rel = 0;
-
-		try {
-			if (StringUtils.isNotBlank(geocode)) {
-				cursor = databaseRO.query(
-						dbTableCaches,
-						new String[]{"reliable_latlon"},
-						"geocode = \"" + geocode + "\"",
-						null,
-						null,
-						null,
-						null,
-						"1");
-			} else if (StringUtils.isNotBlank(guid)) {
-				cursor = databaseRO.query(
-						dbTableCaches,
-						new String[]{"reliable_latlon"},
-						"guid = \"" + guid + "\"",
-						null,
-						null,
-						null,
-						null,
-						"1");
-			} else {
-				return false;
-			}
-
-			if (cursor != null) {
-				final int cnt = cursor.getCount();
-				int index = 0;
-
-				if (cnt > 0) {
-					cursor.moveToFirst();
-
-					index = cursor.getColumnIndex("reliable_latlon");
-					rel = (int) cursor.getInt(index);
-				}
-
-				cursor.close();
-			}
-		} catch (Exception e) {
-			Log.e(cgSettings.tag, "cgData.isOffline: " + e.toString());
-		}
-
-		if (rel >= 1) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	public String getGeocodeForGuid(String guid) {
 		if (StringUtils.isBlank(guid)) {
 			return null;
