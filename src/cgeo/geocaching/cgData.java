@@ -589,8 +589,9 @@ public class cgData {
 
 					if (oldVersion < 43) { // upgrade to 43
 						try {
+							final String dbTableCachesTemp = dbTableCaches + "_temp";
 							final String dbCreateCachesTemp = ""
-									+ "create temporary table " + dbTableCaches + "_temp ("
+									+ "create temporary table " + dbTableCachesTemp + " ("
 									+ "_id integer primary key autoincrement, "
 									+ "updated long not null, "
 									+ "detailed integer not null default 0, "
@@ -671,11 +672,11 @@ public class cgData {
 
 							db.beginTransaction();
 							db.execSQL(dbCreateCachesTemp);
-							db.execSQL("insert into " + dbTableCaches + "_temp select _id, updated, detailed, detailedupdate, geocode, reason, cacheid, guid, type, name, owner, hidden, hint, size, difficulty, terrain, latlon, latitude_string, longitude_string, location, distance, latitude, longitude, shortdesc, description, rating, votes, vote, disabled, archived, members, found, favourite, inventorycoins, inventorytags, inventoryunknown from " + dbTableCaches);
+							db.execSQL("insert into " + dbTableCachesTemp + " select _id, updated, detailed, detailedupdate, geocode, reason, cacheid, guid, type, name, owner, hidden, hint, size, difficulty, terrain, latlon, latitude_string, longitude_string, location, distance, latitude, longitude, shortdesc, description, rating, votes, vote, disabled, archived, members, found, favourite, inventorycoins, inventorytags, inventoryunknown from " + dbTableCaches);
 							db.execSQL("drop table " + dbTableCaches);
 							db.execSQL(dbCreateCachesNew);
-							db.execSQL("insert into " + dbTableCaches + " select _id, updated, detailed, detailedupdate, geocode, reason, cacheid, guid, type, name, owner, hidden, hint, size, difficulty, terrain, latlon, latitude_string, longitude_string, location, null, distance, latitude, longitude, shortdesc, description, rating, votes, vote, disabled, archived, members, found, favourite, inventorycoins, inventorytags, inventoryunknown from " + dbTableCaches + "_temp");
-							db.execSQL("drop table " + dbTableCaches + "_temp");
+							db.execSQL("insert into " + dbTableCaches + " select _id, updated, detailed, detailedupdate, geocode, reason, cacheid, guid, type, name, owner, hidden, hint, size, difficulty, terrain, latlon, latitude_string, longitude_string, location, null, distance, latitude, longitude, shortdesc, description, rating, votes, vote, disabled, archived, members, found, favourite, inventorycoins, inventorytags, inventoryunknown from " + dbTableCachesTemp);
+							db.execSQL("drop table " + dbTableCachesTemp);
 							db.setTransactionSuccessful();
 
 							Log.i(cgSettings.tag, "Changed direction column");
