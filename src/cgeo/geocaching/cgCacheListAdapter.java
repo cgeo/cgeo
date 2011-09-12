@@ -50,7 +50,6 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 	private LayoutInflater inflater = null;
 	private Activity activity = null;
 	private cgBase base = null;
-	private DistanceComparator dstComparator = null;
 	private CacheComparator statComparator = null;
 	private boolean historic = false;
 	private Geopoint coords = null;
@@ -79,7 +78,6 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		settings = settingsIn;
 		list = listIn;
 		base = baseIn;
-		dstComparator = new DistanceComparator();
 
 		DisplayMetrics metrics = new DisplayMetrics();
 		activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -257,7 +255,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 					return;
 				}
 
-				dstComparator.setCoords(coordsIn);
+				final DistanceComparator dstComparator = new DistanceComparator(coordsIn);
 				Collections.sort((List<cgCache>) list, dstComparator);
 			}
 			notifyDataSetChanged();
@@ -278,7 +276,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 				if (statComparator != null) {
 					Collections.sort((List<cgCache>) list, statComparator);
 				} else {
-					dstComparator.setCoords(coordsIn);
+					final DistanceComparator dstComparator = new DistanceComparator(coordsIn);
 					Collections.sort((List<cgCache>) list, dstComparator);
 				}
 				notifyDataSetChanged();

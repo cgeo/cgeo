@@ -1084,7 +1084,7 @@ public class cgeodetail extends AbstractActivity {
 			}
 
 			if (geo != null && geo.coordsNow != null && cache != null && cache.coords != null) {
-				cacheDistance.setText(base.getHumanDistance(cgBase.getDistance(geo.coordsNow, cache.coords)));
+				cacheDistance.setText(base.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
 				cacheDistance.bringToFront();
 			}
 		} catch (Exception e) {
@@ -1636,7 +1636,7 @@ public class cgeodetail extends AbstractActivity {
 				StringBuilder dist = new StringBuilder();
 
 				if (geo.coordsNow != null && cache != null && cache.coords != null) {
-					dist.append(base.getHumanDistance(cgBase.getDistance(geo.coordsNow, cache.coords)));
+					dist.append(base.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
 				}
 
 				if (cache != null && cache.elevation != null) {

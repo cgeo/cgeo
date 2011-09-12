@@ -342,7 +342,7 @@ public class cgeonavigate extends AbstractActivity {
 		}
 
 		cacheHeading = cgBase.getHeading(geo.coordsNow, dstCoords);
-		distanceView.setText(base.getHumanDistance(cgBase.getDistance(geo.coordsNow, dstCoords)));
+		distanceView.setText(base.getHumanDistance(geo.coordsNow.distanceTo(dstCoords)));
 		headingView.setText(String.format(Locale.getDefault(), "%.0f", cacheHeading) + "°");
 	}
 

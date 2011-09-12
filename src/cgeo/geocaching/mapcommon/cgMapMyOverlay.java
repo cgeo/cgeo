@@ -14,7 +14,6 @@ import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Point;
 import android.location.Location;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
@@ -128,7 +127,7 @@ public class cgMapMyOverlay implements OverlayBase {
 		accuracyCircle.setStyle(Style.FILL);
 		canvas.drawCircle(center.x, center.y, radius, accuracyCircle);
 
-		if (coordinates.getAccuracy() < 50f && ((historyRecent != null && cgBase.getDistance(new Geopoint(historyRecent), new Geopoint(coordinates)) > 0.005) || historyRecent == null)) {
+		if (coordinates.getAccuracy() < 50f && ((historyRecent != null && historyRecent.distanceTo(coordinates) > 5.0) || historyRecent == null)) {
 			if (historyRecent != null) history.add(historyRecent);
 			historyRecent = coordinates;
 

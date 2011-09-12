@@ -342,9 +342,9 @@ public class cgGeo {
 		if (gps == 1) {
 			// save travelled distance only when location is from GPS
 			if (coordsBefore != null && coordsNow != null) {
-				final double dst = cgBase.getDistance(coordsBefore, coordsNow);
+				final float dst = coordsBefore.distanceTo(coordsNow);
 
-				if (Double.isNaN(dst) == false && dst > 0.005) {
+				if (dst > 0.005) {
 					distanceNow += dst;
 
 					coordsBefore = coordsNow;
@@ -375,7 +375,7 @@ public class cgGeo {
 				return;
 			}
 
-			if (settings.publicLoc == 1 && (lastGo4cacheCoords == null || cgBase.getDistance(coordsNow, lastGo4cacheCoords) > 0.75)) {
+			if (settings.publicLoc == 1 && (lastGo4cacheCoords == null || coordsNow.distanceTo(lastGo4cacheCoords) > 0.75)) {
 				g4cRunning = true;
 
 				final String host = "api.go4cache.com";

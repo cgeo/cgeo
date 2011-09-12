@@ -2363,14 +2363,6 @@ public class cgBase {
 		return text.trim();
 	}
 
-	public static double getDistance(final Geopoint coords1, final Geopoint coords2) {
-		if (coords1 == null || coords2 == null) {
-			return 0;
-		}
-
-		return coords1.distanceTo(coords2);        // TODO Check callers for null and replace them
-	}
-
 	public static double getHeading(final Geopoint coords1, final Geopoint coords2) {
 		return coords1.bearingTo(coords2);         // TODO Replace callers
 	}

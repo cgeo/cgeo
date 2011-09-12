@@ -27,11 +27,10 @@ public class cgDistanceView extends TextView {
 	}
 
 	public void update(final Geopoint coords) {
-		if (cacheCoords == null) return;
-		if (coords == null) return;
-		if (base == null) return;
-
-		setText(base.getHumanDistance(cgBase.getDistance(coords, cacheCoords)));
+		if (cacheCoords == null || coords == null || base == null) {
+			return;
+		}
+		setText(base.getHumanDistance(coords.distanceTo(cacheCoords)));
 	}
 
 	public void setDistance(Double distance) {
