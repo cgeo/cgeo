@@ -187,7 +187,7 @@ public class cgeoinit extends AbstractActivity {
 			}
 		}
 	}
-	
+
 	@Override
 	public boolean onContextItemSelected(MenuItem item) {
 		LogTemplate template = LogTemplateProvider.getTemplate(item.getItemId());
@@ -196,7 +196,7 @@ public class cgeoinit extends AbstractActivity {
 		}
 		return super.onContextItemSelected(item);
 	}
-	
+
 	private boolean insertSignatureTemplate(final LogTemplate template) {
 		EditText sig = (EditText) findViewById(R.id.signature);
 		String insertText = "[" + template.getTemplateString() + "]";
@@ -318,11 +318,11 @@ public class cgeoinit extends AbstractActivity {
 			captchaButton.setChecked(true);
 		}
 		captchaButton.setOnClickListener(new cgeoChangeCaptcha());
-		
+
 		final CheckBox dirImgButton = (CheckBox) findViewById(R.id.loaddirectionimg);
 		dirImgButton.setChecked(settings.getLoadDirImg());
 		dirImgButton.setOnClickListener(new View.OnClickListener() {
-            
+
             @Override
             public void onClick(View v) {
                 settings.setLoadDirImg(!settings.getLoadDirImg());
@@ -414,7 +414,7 @@ public class cgeoinit extends AbstractActivity {
 		final CheckBox logOffline = (CheckBox) findViewById(R.id.log_offline);
 		logOffline.setChecked(settings.getLogOffline());
 		logOffline.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				settings.setLogOffline(!settings.getLogOffline());
@@ -519,35 +519,20 @@ public class cgeoinit extends AbstractActivity {
 	}
 
 	public boolean saveValues() {
-		String usernameNew = ((EditText) findViewById(R.id.username)).getText().toString();
-		String passwordNew = ((EditText) findViewById(R.id.password)).getText().toString();
-		String passvoteNew = ((EditText) findViewById(R.id.passvote)).getText().toString();
-		String signatureNew = ((EditText) findViewById(R.id.signature)).getText().toString();
-		String altitudeNew = ((EditText) findViewById(R.id.altitude)).getText().toString();
-		String mfmapFileNew = ((EditText) findViewById(R.id.mapfile)).getText().toString();
-
-		if (usernameNew == null) {
-			usernameNew = "";
-		}
-		if (passwordNew == null) {
-			passwordNew = "";
-		}
-		if (passvoteNew == null) {
-			passvoteNew = "";
-		}
-		if (signatureNew == null) {
-			signatureNew = "";
-		}
+		String usernameNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.username)).getText().toString());
+		String passwordNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.password)).getText().toString());
+		String passvoteNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.passvote)).getText().toString());
+		String signatureNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.signature)).getText().toString());
+		String altitudeNew = StringUtils.trimToNull(((EditText) findViewById(R.id.altitude)).getText().toString());
+		String mfmapFileNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.mapfile)).getText().toString());
 
 		int altitudeNewInt = 0;
-		if (altitudeNew == null) {
-			altitudeNewInt = 0;
-		} else {
-			altitudeNewInt = new Integer(altitudeNew);
-		}
-
-		if (mfmapFileNew == null) {
-			mfmapFileNew = "";
+		if (altitudeNew != null) {
+			try {
+				altitudeNewInt = Integer.parseInt(altitudeNew);
+			} catch (NumberFormatException e) {
+				altitudeNewInt = 0;
+			}
 		}
 
 		final boolean status1 = settings.setLogin(usernameNew, passwordNew);
@@ -556,11 +541,7 @@ public class cgeoinit extends AbstractActivity {
 		final boolean status4 = settings.setAltCorrection(altitudeNewInt);
 		final boolean status5 = settings.setMapFile(mfmapFileNew);
 
-		if (status1 && status2 && status3 && status4 && status5) {
-			return true;
-		}
-
-		return false;
+		return status1 && status2 && status3 && status4 && status5;
 	}
 
 	private class cgeoChangeTwitter implements View.OnClickListener {

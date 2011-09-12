@@ -8,7 +8,6 @@ import menion.android.locus.addon.publiclib.DisplayData;
 import menion.android.locus.addon.publiclib.LocusUtils;
 import menion.android.locus.addon.publiclib.geoData.Point;
 import menion.android.locus.addon.publiclib.geoData.PointGeocachingData;
-import menion.android.locus.addon.publiclib.geoData.PointGeocachingDataWaypoint;
 import menion.android.locus.addon.publiclib.geoData.PointsData;
 import android.app.Activity;
 import android.content.Context;
@@ -82,12 +81,12 @@ public abstract class AbstractLocusApp extends AbstractApp {
 	 * @author koem
 	 */
 	private Point getPoint(cgCache cache) {
-		if (cache == null) return null;
+		if (cache == null || cache.coords == null) return null;
 
 		// create one simple point with location
 		Location loc = new Location(cgSettings.tag);
-		loc.setLatitude(cache.latitude);
-		loc.setLongitude(cache.longitude);
+		loc.setLatitude(cache.coords.getLatitude());
+		loc.setLongitude(cache.coords.getLongitude());
 
 		Point p = new Point(cache.name, loc);
 		PointGeocachingData pg = new PointGeocachingData();
@@ -95,12 +94,12 @@ public abstract class AbstractLocusApp extends AbstractApp {
 
 		// set data in Locus' cache
 		pg.cacheID = cache.geocode;
-		pg.available = ! cache.disabled;
-		pg.archived = cache.archived;
-		pg.premiumOnly = cache.members;
+//		pg.available = ! cache.disabled;
+//		pg.archived = cache.archived;
+//		pg.premiumOnly = cache.members;
 		pg.name = cache.name;
-		pg.placedBy = cache.owner;
-		if (cache.hidden != null) pg.hidden = ISO8601DATE.format(cache.hidden.getTime());
+//		pg.placedBy = cache.owner;
+//		if (cache.hidden != null) pg.hidden = ISO8601DATE.format(cache.hidden.getTime());
 		for (CacheType ct : CacheType.values()) {
 		    if (ct.cgeoId.equals(cache.type)) {
 		        if (ct.locusId != CacheType.NO_LOCUS_ID) pg.type = ct.locusId;
@@ -113,26 +112,24 @@ public abstract class AbstractLocusApp extends AbstractApp {
 		        break;
 		    }
 		}
-		if (cache.difficulty != null) pg.difficulty = cache.difficulty;
-		if (cache.terrain != null) pg.terrain = cache.terrain;
-		pg.shortDescription = cache.shortdesc;
-		pg.longDescription = cache.description;
-		pg.encodedHints = cache.hint;
-		if (cache.waypoints != null) {
-			pg.waypoints = new ArrayList<PointGeocachingDataWaypoint>();
-			for (cgWaypoint waypoint : cache.waypoints) {
-				if (waypoint == null || waypoint.latitude == null || waypoint.longitude == null) { 
-					continue;
-				}
-				PointGeocachingDataWaypoint w = new PointGeocachingDataWaypoint();
-				w.code = waypoint.geocode;
-				w.name = waypoint.name;
-				w.type = PointGeocachingData.CACHE_WAYPOINT_TYPE_STAGES;
-				w.lat = waypoint.latitude;
-				w.lon = waypoint.longitude;
-				pg.waypoints.add(w);
-			}
-		}
+//		if (cache.difficulty != null) pg.difficulty = cache.difficulty;
+//		if (cache.terrain != null) pg.terrain = cache.terrain;
+//		pg.shortDescription = cache.shortdesc;
+//		pg.longDescription = cache.description;
+//		pg.encodedHints = cache.hint;
+//		if (cache.waypoints != null) {
+//			pg.waypoints = new ArrayList<PointGeocachingDataWaypoint>();
+//			for (cgWaypoint waypoint : cache.waypoints) {
+//				if (waypoint == null || waypoint.coords == null) continue;
+//				PointGeocachingDataWaypoint w = new PointGeocachingDataWaypoint();
+//				w.code = waypoint.geocode;
+//				w.name = waypoint.name;
+//				w.type = PointGeocachingData.CACHE_WAYPOINT_TYPE_STAGES;
+//				w.lat = waypoint.coords.getLatitude();
+//				w.lon = waypoint.coords.getLongitude();
+//				pg.waypoints.add(w);
+//			}
+//		}
 		pg.found = cache.found;
 
     	return p;
@@ -146,12 +143,12 @@ public abstract class AbstractLocusApp extends AbstractApp {
      * @author koem
      */
     private Point getPoint(cgWaypoint waypoint) {
-        if (waypoint == null) return null;
+        if (waypoint == null || waypoint.coords == null) return null;
 
         // create one simple point with location
         Location loc = new Location(cgSettings.tag);
-        loc.setLatitude(waypoint.latitude);
-        loc.setLongitude(waypoint.longitude);
+        loc.setLatitude(waypoint.coords.getLatitude());
+        loc.setLongitude(waypoint.coords.getLongitude());
 
         Point p = new Point(waypoint.name, loc);
         p.setDescription("<a href=\"http://coord.info/" + waypoint.geocode + "\">" 

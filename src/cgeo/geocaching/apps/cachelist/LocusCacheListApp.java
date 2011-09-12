@@ -3,8 +3,6 @@ package cgeo.geocaching.apps.cachelist;
 import java.util.List;
 import java.util.UUID;
 
-import org.apache.commons.lang3.StringUtils;
-
 import android.app.Activity;
 import android.content.res.Resources;
 import cgeo.geocaching.cgCache;

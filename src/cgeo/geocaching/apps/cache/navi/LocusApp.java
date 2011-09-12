@@ -9,6 +9,7 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.apps.AbstractLocusApp;
+import cgeo.geocaching.geopoint.Geopoint;
 
 class LocusApp extends AbstractLocusApp implements NavigationApp {
 
@@ -25,9 +26,9 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 	 */
 	@Override
 	public boolean invoke(cgGeo geo, Activity activity, Resources res, cgCache cache,
-			final UUID searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
+			final UUID searchId, cgWaypoint waypoint, final Geopoint coords) {
 		
-		if (cache == null && waypoint == null && latitude == null && longitude == null) {
+		if (cache == null && waypoint == null && coords == null) {
 			return false;
 		}
 
@@ -36,31 +37,14 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 
 			// add cache if present
 			if (cache != null) {
-				if (cache.longitude == null || cache.latitude == null) {
-					cache.longitude = longitude;
-					cache.latitude = latitude;
-				}
-				if (cache.longitude != null && cache.latitude != null) {
-					points.add(cache);
-				}
-
-//				// use only waypoints with coordinates
-//				if (cache.waypoints != null) {
-//					for (cgWaypoint wp : cache.waypoints) {
-//						if (wp.latitude != null && wp.longitude != null) points.add(wp);
-//					}
-//				}
+				if (cache.coords == null) cache.coords = coords;
+				if (cache.coords != null) points.add(cache);
 			}
 
 			// add waypoint if present
 			if (waypoint != null) {
-				if (waypoint.longitude == null || waypoint.latitude == null) {
-					waypoint.longitude = longitude;
-					waypoint.latitude = latitude;
-				}
-				if (waypoint.longitude != null && waypoint.latitude != null) {
-					points.add(waypoint);
-				}
+				if (waypoint.coords == null) waypoint.coords = coords;
+				if (waypoint.coords != null) points.add(waypoint);
 			}
 
 			this.showInLocus(points, activity);

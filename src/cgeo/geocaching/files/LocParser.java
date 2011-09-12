@@ -19,6 +19,7 @@ import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.geopoint.Geopoint;
 
 public final class LocParser extends FileParser {
 	private static final Pattern patternGeocode = Pattern
@@ -51,8 +52,7 @@ public final class LocParser extends FileParser {
 	}
 
 	private static void copyCoordToCache(final cgCoord coord, final cgCache cache) {
-		cache.latitude = coord.latitude;
-		cache.longitude = coord.longitude;
+		cache.coords = coord.coords;
 		cache.difficulty = coord.difficulty;
 		cache.terrain = coord.terrain;
 		cache.size = coord.size;
@@ -75,7 +75,6 @@ public final class LocParser extends FileParser {
 		// parse coordinates
 		for (String pointString : points) {
 			final cgCoord pointCoord = new cgCoord();
-			Map<String, Object> tmp = null;
 
 			final Matcher matcherGeocode = patternGeocode.matcher(pointString);
 			if (matcherGeocode.find()) {
@@ -93,14 +92,12 @@ public final class LocParser extends FileParser {
 				pointCoord.name = name;
 			}
 			final Matcher matcherLat = patternLat.matcher(pointString);
-			if (matcherLat.find()) {
-				tmp = cgBase.parseCoordinate(matcherLat.group(1).trim(), "lat");
-				pointCoord.latitude = (Double) tmp.get("coordinate");
-			}
 			final Matcher matcherLon = patternLon.matcher(pointString);
-			if (matcherLon.find()) {
-				tmp = cgBase.parseCoordinate(matcherLon.group(1).trim(), "lon");
-				pointCoord.longitude = (Double) tmp.get("coordinate");
+			if (matcherLat.find() && matcherLon.find()) {
+				final Map<String, Object>tmpLat = cgBase.parseCoordinate(matcherLat.group(1).trim(), "lat");
+				final Map<String, Object> tmpLon = cgBase.parseCoordinate(matcherLon.group(1).trim(), "lon");
+				pointCoord.coords = new Geopoint((Double) tmpLat.get("coordinate"),
+												 (Double) tmpLon.get("coordinate"));
 			}
 			final Matcher matcherDifficulty = patternDifficulty.matcher(pointString);
 			if (matcherDifficulty.find()) {

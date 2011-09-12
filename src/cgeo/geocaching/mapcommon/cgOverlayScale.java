@@ -10,6 +10,7 @@ import android.util.DisplayMetrics;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgSettings.mapSourceEnum;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
 import cgeo.geocaching.mapinterfaces.MapProjectionImpl;
 import cgeo.geocaching.mapinterfaces.MapViewImpl;
@@ -54,7 +55,11 @@ public class cgOverlayScale implements OverlayBase {
 
 		pixels = mapView.getWidth() / 2.0; // pixels related to following latitude span
 		bottom = mapView.getHeight() - 14; // pixels from bottom side of screen
-		distance = cgBase.getDistance((center.getLatitudeE6() / 1e6), ((center.getLongitudeE6() / 1e6) - (span /2)), (center.getLatitudeE6() / 1e6), ((center.getLongitudeE6() / 1e6) + (span /2)));
+
+		final Geopoint leftCoords = new Geopoint(center.getLatitudeE6() / 1e6, center.getLongitudeE6() / 1e6 - span /2);
+		final Geopoint rightCoords = new Geopoint(center.getLatitudeE6() / 1e6, center.getLongitudeE6() / 1e6 + span /2);
+
+		distance = cgBase.getDistance(leftCoords, rightCoords);
 		distance = distance / 2;
 		distanceRound = 0d;
 

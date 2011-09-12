@@ -14,6 +14,7 @@ import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.geopoint.Geopoint;
 
 class GoogleNavigationApp extends AbstractNavigationApp implements
 		NavigationApp {
@@ -30,20 +31,20 @@ class GoogleNavigationApp extends AbstractNavigationApp implements
 	@Override
 	public boolean invoke(final cgGeo geo, final Activity activity, final Resources res,
 			final cgCache cache,
-			final UUID searchId, final cgWaypoint waypoint, final Double latitude, final Double longitude) {
+			final UUID searchId, final cgWaypoint waypoint, final Geopoint coords) {
 		if (activity == null) {
 			return false;
 		}
 
 		boolean navigationResult = false;
-		if (latitude != null && longitude != null) {
-			navigationResult = navigateToCoordinates(geo, activity, latitude, longitude);
+		if (coords != null) {
+			navigationResult = navigateToCoordinates(geo, activity, coords);
 		}
 		else if (waypoint != null) {
-			navigationResult = navigateToCoordinates(geo, activity, waypoint.latitude, waypoint.longitude);
+			navigationResult = navigateToCoordinates(geo, activity, waypoint.coords);
 		}
 		else if (cache != null) {
-			navigationResult = navigateToCoordinates(geo, activity, cache.latitude, cache.longitude);
+			navigationResult = navigateToCoordinates(geo, activity, cache.coords);
 		}
 
 		if (!navigationResult) {
@@ -56,14 +57,8 @@ class GoogleNavigationApp extends AbstractNavigationApp implements
 		return true;
 	}
 
-	private static boolean navigateToCoordinates(cgGeo geo, Activity activity, Double latitude,
-			Double longitude) {
-		Double latitudeNow = null;
-		Double longitudeNow = null;
-		if (geo != null) {
-			latitudeNow = geo.latitudeNow;
-			longitudeNow = geo.longitudeNow;
-		}
+	private static boolean navigateToCoordinates(cgGeo geo, Activity activity, final Geopoint coords) {
+		final Geopoint coordsNow = geo == null ? null : geo.coordsNow;
 
 		cgSettings settings = getSettings(activity);
 
@@ -71,8 +66,8 @@ class GoogleNavigationApp extends AbstractNavigationApp implements
 		if (settings.useGNavigation == 1) {
 			try {
 				activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri
-						.parse("google.navigation:ll=" + latitude + ","
-								+ longitude)));
+						.parse("google.navigation:ll=" + coords.getLatitude() + ","
+								+ coords.getLongitude())));
 
 				return true;
 			} catch (Exception e) {
@@ -82,15 +77,15 @@ class GoogleNavigationApp extends AbstractNavigationApp implements
 
 		// Google Maps Directions
 		try {
-			if (latitudeNow != null && longitudeNow != null) {
+			if (coordsNow != null) {
 				activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri
 						.parse("http://maps.google.com/maps?f=d&saddr="
-								+ latitudeNow + "," + longitudeNow + "&daddr="
-								+ latitude + "," + longitude)));
+								+ coordsNow.getLatitude() + "," + coordsNow.getLongitude() + "&daddr="
+								+ coords.getLatitude() + "," + coords.getLongitude())));
 			} else {
 				activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri
 						.parse("http://maps.google.com/maps?f=d&daddr="
-								+ latitude + "," + longitude)));
+								+ coords.getLatitude() + "," + coords.getLongitude())));
 			}
 
 			return true;
