@@ -2,11 +2,8 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-    <classpathentry kind="src" path="tests/src" />
-    <classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry kind="src" path="tests/src" />
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry kind="lib" path="libs/mapsforge-map-0.2.4.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk6"/>
-	<classpathentry kind="lib" path="D:/Programme/android-sdk-windows/platforms/android-8/android.jar"/>
-	<classpathentry kind="lib" path="D:/Programme/android-sdk-windows/add-ons/addon_google_apis_google_inc_8/libs/maps.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
