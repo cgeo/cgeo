@@ -675,6 +675,7 @@
   <string name="search_caches_near">Caches in der Nähe</string>
   <string name="search_address_started">Suche nach Orten</string>
   <string name="search_address_result">Gefundene Orte</string>
+  <string name="search_own_caches">Meine Caches suchen</string>
 
   <!-- trackable -->
   <string name="trackable">Trackable</string>

@@ -700,10 +700,12 @@ public class cgBase {
 			}
 		}
 
-		int startPos = -1;
-		int endPos = -1;
-
-		startPos = page.indexOf("<div id=\"ctl00_ContentBody_ResultsPanel\"");
+		if (page.indexOf("SearchResultsTable") < 0) {
+			// there are no results. aborting here avoids a wrong error log in the next parsing step
+			return caches;
+		}
+		
+		int startPos = page.indexOf("<div id=\"ctl00_ContentBody_ResultsPanel\"");
 		if (startPos == -1) {
 			Log.e(cgSettings.tag, "cgeoBase.parseSearch: ID \"ctl00_ContentBody_dlResults\" not found on page");
 			return null;
@@ -712,7 +714,7 @@ public class cgBase {
 		page = page.substring(startPos); // cut on <table
 
 		startPos = page.indexOf(">");
-		endPos = page.indexOf("ctl00_ContentBody_UnitTxt");
+		int endPos = page.indexOf("ctl00_ContentBody_UnitTxt");
 		if (startPos == -1 || endPos == -1) {
 			Log.e(cgSettings.tag, "cgeoBase.parseSearch: ID \"ctl00_ContentBody_UnitTxt\" not found on page");
 			return null;
@@ -3089,7 +3091,7 @@ public class cgBase {
 		}
 
 		final cgCacheWrap caches = parseSearch(thread, url, page, showCaptcha);
-		if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
+		if (caches == null || caches.cacheList == null) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByOwner: No cache parsed");
 		}
 

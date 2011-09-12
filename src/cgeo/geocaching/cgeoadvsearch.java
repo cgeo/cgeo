@@ -12,6 +12,8 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
@@ -25,6 +27,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 
 public class cgeoadvsearch extends AbstractActivity {
 
+	private static final int MENU_SEARCH_OWN_CACHES = 1;
 	private cgGeo geo = null;
 	private cgUpdateLoc geoUpdate = new update();
 	private EditText latEdit = null;
@@ -188,7 +191,13 @@ public class cgeoadvsearch extends AbstractActivity {
 		((EditText) findViewById(R.id.owner)).setOnEditorActionListener(new findByOwnerAction());
 
 		final Button findByOwner = (Button) findViewById(R.id.search_owner);
-		findByOwner.setOnClickListener(new findByOwnerListener());
+		findByOwner.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				findByOwnerFn();
+			}
+		});
 
 		EditText trackable = (EditText) findViewById(R.id.trackable);
 		trackable.setOnEditorActionListener(new findTrackableAction());
@@ -395,16 +404,13 @@ public class cgeoadvsearch extends AbstractActivity {
 			return false;
 		}
 	}
-
-	private class findByOwnerListener implements View.OnClickListener {
-
-		public void onClick(View arg0) {
-			findByOwnerFn();
-		}
+	
+	private void findByOwnerFn() {
+		findByOwnerFn(((EditText) findViewById(R.id.owner)).getText().toString());
 	}
 
-	private void findByOwnerFn() {
-		final String usernameText = ((EditText) findViewById(R.id.owner)).getText().toString();
+	private void findByOwnerFn(String userName) {
+		final String usernameText = StringUtils.trimToEmpty(userName);
 
 		if (StringUtils.isBlank(usernameText)) {
 			helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_user));
@@ -480,5 +486,20 @@ public class cgeoadvsearch extends AbstractActivity {
 		final Intent trackablesIntent = new Intent(this, cgeotrackable.class);
 		trackablesIntent.putExtra("geocode", trackableText.toUpperCase());
 		startActivity(trackablesIntent);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add(0, MENU_SEARCH_OWN_CACHES, 0, res.getString(R.string.search_own_caches));
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == MENU_SEARCH_OWN_CACHES) {
+			findByOwnerFn(settings.getUsername());
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }
