@@ -72,6 +72,7 @@ import android.widget.EditText;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.files.LocParser;
+import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.CollectionUtils;
 
@@ -173,7 +174,9 @@ public class cgBase {
 	private static final Pattern patternViewstateFieldCount = Pattern.compile("id=\"__VIEWSTATEFIELDCOUNT\"[^(value)]+value=\"(\\d+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	private static final Pattern patternViewstates = Pattern.compile("id=\"__VIEWSTATE(\\d*)\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	private static final Pattern patternIsPremium = Pattern.compile("<span id=\"ctl00_litPMLevel\"", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-	public static final double kmInMiles = 1 / 1.609344;
+	public static final double miles2km = 1.609344;
+	public static final double feet2km = 0.0003048;
+	public static final double yards2km = 0.0009144;
 	public static final double deg2rad = Math.PI / 180;
 	public static final double rad2deg = 180 / Math.PI;
 	public static final float erad = 6371.0f;
@@ -2118,7 +2121,12 @@ public class cgBase {
 		try {
 			final Matcher matcherDistance = PATTERN_TRACKABLE_Distance.matcher(page);
 			if (matcherDistance.find() && matcherDistance.groupCount() > 0) {
-				trackable.distance = parseDistance(matcherDistance.group(1));
+			    try {
+			        trackable.distance = DistanceParser.parseDistance(matcherDistance.group(1), settings.units);
+			    } catch (NumberFormatException e) {
+			        trackable.distance = null;
+			        throw e;
+			    }
 			}
 		} catch (Exception e) {
 			// failed to parse trackable distance
@@ -2353,24 +2361,6 @@ public class cgBase {
 		return text.trim();
 	}
 
-	public static Double parseDistance(String dst) {
-		Double distance = null;
-
-		final Pattern pattern = Pattern.compile("([0-9\\.,]+)[ ]*(km|mi)", Pattern.CASE_INSENSITIVE);
-		final Matcher matcher = pattern.matcher(dst);
-		while (matcher.find()) {
-			if (matcher.groupCount() > 1) {
-				if (matcher.group(2).equalsIgnoreCase("km")) {
-					distance = Double.valueOf(matcher.group(1));
-				} else {
-					distance = Double.valueOf(matcher.group(1)) / kmInMiles;
-				}
-			}
-		}
-
-		return distance;
-	}
-
 	public static double getDistance(final Geopoint coords1, final Geopoint coords2) {
 		if (coords1 == null || coords2 == null) {
 			return 0;
@@ -2401,7 +2391,7 @@ public class cgBase {
 		}
 
 		if (settings.units == cgSettings.unitsImperial) {
-			distance *= kmInMiles;
+			distance /= miles2km;
 			if (distance > 100) {
 				return String.format(Locale.getDefault(), "%.0f", Double.valueOf(Math.round(distance))) + " mi";
 			} else if (distance > 0.5) {
@@ -2437,7 +2427,7 @@ public class cgBase {
 		String unit = "km/h";
 
 		if (this.settings.units == cgSettings.unitsImperial) {
-			kph *= kmInMiles;
+			kph /= miles2km;
 			unit = "mph";
 		}
 

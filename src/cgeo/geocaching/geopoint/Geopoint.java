@@ -7,7 +7,6 @@ import android.location.Location;
  */
 public final class Geopoint
 {
-	public static final double kmInMiles = 1 / 1.609344;
 	public static final double deg2rad   = Math.PI / 180;
 	public static final double rad2deg   = 180 / Math.PI;
 	public static final float  erad      = 6371.0f;
