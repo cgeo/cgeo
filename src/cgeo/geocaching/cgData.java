@@ -1211,6 +1211,7 @@ public class cgData {
 			values.put("longitude", cache.coords.getLongitude());
 			values.put("reliable_latlon", 1);
 		} else if (!rel) { // new cache neither stored cache is not reliable, just update
+			// FIXME: if the user is not logged in, coords may be null
 			values.put("latitude", cache.coords.getLatitude());
 			values.put("longitude", cache.coords.getLongitude());
 			values.put("reliable_latlon", 0);
