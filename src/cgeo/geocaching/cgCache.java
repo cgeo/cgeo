@@ -280,7 +280,7 @@ public class cgCache implements ICache {
         String log = "";
         if (StringUtils.isNotBlank(settings.getSignature())
                 && settings.signatureAutoinsert) {
-            log = LogTemplateProvider.applyTemplates(settings.getSignature(), base);
+            log = LogTemplateProvider.applyTemplates(settings.getSignature(), base, true);
         }
         logOffline(fromActivity, log, Calendar.getInstance(), logType);
         return true;
