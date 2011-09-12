@@ -24,6 +24,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 
 /**
+ * for the Locus API:
  * @see http://forum.asamm.cz/viewtopic.php?f=29&t=767
  */
 public abstract class AbstractLocusApp extends AbstractApp {
@@ -108,27 +109,27 @@ public abstract class AbstractLocusApp extends AbstractApp {
 		pg.name = cache.name;
 		pg.placedBy = cache.owner;
 		if (cache.hidden != null) pg.hidden = ISO8601DATE.format(cache.hidden.getTime());
-		CacheType ct = CacheType.findByCgeoId(cache.type);
-		if (ct != null && ct.locusId != CacheType.NO_LOCUS_ID) pg.type = ct.locusId;
-		CacheSize cs = CacheSize.findByCgeoId(cache.size);
-		if (cs != null) pg.container = cs.locusId;
+		int locusId = toLocusId(CacheType.FIND_BY_CGEOID.get(cache.type));
+		if (locusId != NO_LOCUS_ID) pg.type = locusId;
+		locusId = toLocusId(CacheSize.FIND_BY_CGEOID.get(cache.size));
+		if (locusId != NO_LOCUS_ID) pg.container = locusId;
 		if (cache.difficulty != null) pg.difficulty = cache.difficulty;
 		if (cache.terrain != null) pg.terrain = cache.terrain;
 		pg.found = cache.found;
 
-        if (withWaypoints && cache.waypoints != null) {
-          pg.waypoints = new ArrayList<PointGeocachingDataWaypoint>();
-          for (cgWaypoint waypoint : cache.waypoints) {
-              if (waypoint == null || waypoint.coords == null) continue;
-              PointGeocachingDataWaypoint wp = new PointGeocachingDataWaypoint();
-              wp.code = waypoint.geocode;
-              wp.name = waypoint.name;
-              WaypointType wt = WaypointType.findByCgeoId(waypoint.type);
-              if (wt != null) wp.type = wt.locusId;
-              wp.lat = waypoint.coords.getLatitude();
-              wp.lon = waypoint.coords.getLongitude();
-              pg.waypoints.add(wp);
-          }
+		if (withWaypoints && cache.waypoints != null) {
+        	pg.waypoints = new ArrayList<PointGeocachingDataWaypoint>();
+        	for (cgWaypoint waypoint : cache.waypoints) {
+        		if (waypoint == null || waypoint.coords == null) continue;
+        		PointGeocachingDataWaypoint wp = new PointGeocachingDataWaypoint();
+        		wp.code = waypoint.geocode;
+        		wp.name = waypoint.name;
+        		String locusWpId = toLocusId(WaypointType.FIND_BY_CGEOID.get(waypoint.type));
+		        if (locusWpId != null) wp.type = locusWpId;
+		        wp.lat = waypoint.coords.getLatitude();
+		        wp.lon = waypoint.coords.getLongitude();
+	  	      	pg.waypoints.add(wp);
+        	}
         }
 
 		// Other properties of caches, not used yet. When there are many caches to be displayed
@@ -164,4 +165,51 @@ public abstract class AbstractLocusApp extends AbstractApp {
 
         return p;
     }
+    
+    private static final int NO_LOCUS_ID = -1;
+
+    private static int toLocusId(final CacheType ct) {
+        switch (ct) {
+            case TRADITIONAL:   return PointGeocachingData.CACHE_TYPE_TRADITIONAL;
+            case MULTI:         return PointGeocachingData.CACHE_TYPE_MULTI;
+            case MYSTERY:       return PointGeocachingData.CACHE_TYPE_MYSTERY;
+            case LETTERBOX:     return PointGeocachingData.CACHE_TYPE_LETTERBOX;
+            case EVENT:         return PointGeocachingData.CACHE_TYPE_EVENT;
+            case MEGA_EVENT:    return PointGeocachingData.CACHE_TYPE_MEGA_EVENT;
+            case EARTH:         return PointGeocachingData.CACHE_TYPE_EARTH;
+            case CITO:          return PointGeocachingData.CACHE_TYPE_CACHE_IN_TRASH_OUT;
+            case WEBCAM:        return PointGeocachingData.CACHE_TYPE_WEBCAM;
+            case VIRTUAL:       return PointGeocachingData.CACHE_TYPE_VIRTUAL;
+            case WHERIGO:       return PointGeocachingData.CACHE_TYPE_WHERIGO;
+            case PROJECT_APE:   return PointGeocachingData.CACHE_TYPE_PROJECT_APE;
+            case GPS_EXHIBIT:   return PointGeocachingData.CACHE_TYPE_GPS_ADVENTURE;
+            default:            return NO_LOCUS_ID;
+        }
+    }
+
+    private static int toLocusId(final CacheSize cs) {
+        switch (cs) {
+            case MICRO:         return PointGeocachingData.CACHE_SIZE_MICRO;
+            case SMALL:         return PointGeocachingData.CACHE_SIZE_SMALL;
+            case REGULAR:       return PointGeocachingData.CACHE_SIZE_REGULAR;
+            case LARGE:         return PointGeocachingData.CACHE_SIZE_LARGE;
+            case NOT_CHOSEN:    return PointGeocachingData.CACHE_SIZE_NOT_CHOSEN;
+            case OTHER:         return PointGeocachingData.CACHE_SIZE_OTHER;
+            default:            return NO_LOCUS_ID;
+        }
+    }
+    
+    private static String toLocusId(final WaypointType wt) {
+        switch (wt) {
+            case FLAG:          return PointGeocachingData.CACHE_WAYPOINT_TYPE_FINAL;
+            case OWN:           return PointGeocachingData.CACHE_WAYPOINT_TYPE_STAGES;
+            case PKG:           return PointGeocachingData.CACHE_WAYPOINT_TYPE_PARKING;
+            case PUZZLE:        return PointGeocachingData.CACHE_WAYPOINT_TYPE_QUESTION;
+            case STAGE:         return PointGeocachingData.CACHE_WAYPOINT_TYPE_STAGES;
+            case TRAILHEAD:     return PointGeocachingData.CACHE_WAYPOINT_TYPE_TRAILHEAD;
+            case WAYPOINT:      return PointGeocachingData.CACHE_WAYPOINT_TYPE_STAGES;
+            default:            return null;
+        }
+    }
+
 }

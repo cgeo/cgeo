@@ -1,6 +1,8 @@
 package cgeo.geocaching.enumerations;
 
-import menion.android.locus.addon.publiclib.geoData.PointGeocachingData;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Enum listing waypoint types
@@ -8,28 +10,27 @@ import menion.android.locus.addon.publiclib.geoData.PointGeocachingData;
  * @author koem
  */
 public enum WaypointType {
-    FLAG      ("flag",      PointGeocachingData.CACHE_WAYPOINT_TYPE_FINAL),
-    OWN       ("own",       PointGeocachingData.CACHE_WAYPOINT_TYPE_STAGES),
-    PKG       ("pkg",       PointGeocachingData.CACHE_WAYPOINT_TYPE_PARKING),
-    PUZZLE    ("puzzle",    PointGeocachingData.CACHE_WAYPOINT_TYPE_QUESTION),
-    STAGE     ("stage",     PointGeocachingData.CACHE_WAYPOINT_TYPE_STAGES),
-    TRAILHEAD ("trailhead", PointGeocachingData.CACHE_WAYPOINT_TYPE_TRAILHEAD),
-    WAYPOINT  ("waypoint",  PointGeocachingData.CACHE_WAYPOINT_TYPE_STAGES);
-    
-    public final String cgeoId;
-    public final String locusId;
+    FLAG      ("flag"),
+    OWN       ("own"),
+    PKG       ("pkg"),
+    PUZZLE    ("puzzle"),
+    STAGE     ("stage"),
+    TRAILHEAD ("trailhead"),
+    WAYPOINT  ("waypoint");
 
-    private WaypointType(String cgeoId, String locusId) {
+    public final String cgeoId;
+
+    private WaypointType(String cgeoId) {
         this.cgeoId = cgeoId;
-        this.locusId = locusId;
     }
     
-    public static WaypointType findByCgeoId(String cgeoId) {
-        if (cgeoId == null) return null;
-        for (WaypointType wt : WaypointType.values()) {
-            if (wt.cgeoId.equals(cgeoId)) return wt;
+    public static final Map<String, WaypointType> FIND_BY_CGEOID;
+    static {
+        final HashMap<String, WaypointType> mapping = new HashMap<String, WaypointType>();
+        for (WaypointType wt : values()) {
+            mapping.put(wt.cgeoId, wt);
         }
-        return null;
+        FIND_BY_CGEOID = Collections.unmodifiableMap(mapping);
     }
 
 }

@@ -1,6 +1,8 @@
 package cgeo.geocaching.enumerations;
 
-import menion.android.locus.addon.publiclib.geoData.PointGeocachingData;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Enum listing cache sizes
@@ -8,29 +10,28 @@ import menion.android.locus.addon.publiclib.geoData.PointGeocachingData;
  * @author koem
  */
 public enum CacheSize {
-    MICRO      ("micro",      1, PointGeocachingData.CACHE_SIZE_MICRO),
-    SMALL      ("small",      2, PointGeocachingData.CACHE_SIZE_SMALL),
-    REGULAR    ("regular",    3, PointGeocachingData.CACHE_SIZE_REGULAR),
-    LARGE      ("large",      4, PointGeocachingData.CACHE_SIZE_LARGE),
-    NOT_CHOSEN ("not chosen", 0, PointGeocachingData.CACHE_SIZE_NOT_CHOSEN),
-    OTHER      ("other",      0, PointGeocachingData.CACHE_SIZE_OTHER);
-    
+    MICRO      ("micro",      1),
+    SMALL      ("small",      2),
+    REGULAR    ("regular",    3),
+    LARGE      ("large",      4),
+    NOT_CHOSEN ("not chosen", 0),
+    OTHER      ("other",      0);
+
     public final String cgeoId;
     public final int comparable;
-    public final int locusId;
 
-    private CacheSize(String cgeoId, int comparable, int locusId) {
+    private CacheSize(String cgeoId, int comparable) {
         this.cgeoId = cgeoId;
         this.comparable = comparable;
-        this.locusId = locusId;
     }
-    
-    public static CacheSize findByCgeoId(String cgeoId) {
-        if (cgeoId == null) return null;
-        for (CacheSize cs : CacheSize.values()) {
-            if (cs.cgeoId.equals(cgeoId)) return cs;
+
+    final public static Map<String, CacheSize> FIND_BY_CGEOID;
+    static {
+        final HashMap<String, CacheSize> mapping = new HashMap<String, CacheSize>();
+        for (CacheSize cs: values()) {
+            mapping.put(cs.cgeoId, cs);
         }
-        return null;
+        FIND_BY_CGEOID = Collections.unmodifiableMap(mapping);
     }
 
 }

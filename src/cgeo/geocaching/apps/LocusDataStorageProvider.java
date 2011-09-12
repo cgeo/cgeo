@@ -11,9 +11,11 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Parcel;
 
+/**
+ * code provided by menion - developer of Locus
+ */
 public class LocusDataStorageProvider extends ContentProvider {
 
-//	private final static String TAG = "DataStorageProvider";
 	
 	@Override
 	public Cursor query(Uri aUri, String[] aProjection, String aSelection,
