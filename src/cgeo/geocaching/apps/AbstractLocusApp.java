@@ -23,6 +23,9 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 
+/**
+ * @see http://forum.asamm.cz/viewtopic.php?f=29&t=767
+ */
 public abstract class AbstractLocusApp extends AbstractApp {
 	private static final String INTENT = Intent.ACTION_VIEW;
 	private static final SimpleDateFormat ISO8601DATE = new SimpleDateFormat("yyyy-MM-dd'T'");
@@ -105,18 +108,10 @@ public abstract class AbstractLocusApp extends AbstractApp {
 		pg.name = cache.name;
 		pg.placedBy = cache.owner;
 		if (cache.hidden != null) pg.hidden = ISO8601DATE.format(cache.hidden.getTime());
-		for (CacheType ct : CacheType.values()) {
-		    if (ct.cgeoId.equals(cache.type)) {
-		        if (ct.locusId != CacheType.NO_LOCUS_ID) pg.type = ct.locusId;
-		        break;
-		    }
-		}
-		for (CacheSize cs : CacheSize.values()) {
-		    if (cs.cgeoId.equals(cache.size)) {
-		        pg.container = cs.locusId;
-		        break;
-		    }
-		}
+		CacheType ct = CacheType.findByCgeoId(cache.type);
+		if (ct != null && ct.locusId != CacheType.NO_LOCUS_ID) pg.type = ct.locusId;
+		CacheSize cs = CacheSize.findByCgeoId(cache.size);
+		if (cs != null) pg.container = cs.locusId;
 		if (cache.difficulty != null) pg.difficulty = cache.difficulty;
 		if (cache.terrain != null) pg.terrain = cache.terrain;
 		pg.found = cache.found;
@@ -128,12 +123,8 @@ public abstract class AbstractLocusApp extends AbstractApp {
               PointGeocachingDataWaypoint wp = new PointGeocachingDataWaypoint();
               wp.code = waypoint.geocode;
               wp.name = waypoint.name;
-              for (WaypointType wt : WaypointType.values()) {
-                  if (wt.cgeoId.equals(waypoint.type)) {
-                      wp.type = wt.locusId;
-                      break;
-                  }
-              }
+              WaypointType wt = WaypointType.findByCgeoId(waypoint.type);
+              if (wt != null) wp.type = wt.locusId;
               wp.lat = waypoint.coords.getLatitude();
               wp.lon = waypoint.coords.getLongitude();
               pg.waypoints.add(wp);

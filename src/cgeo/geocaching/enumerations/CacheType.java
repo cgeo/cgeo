@@ -44,4 +44,13 @@ public enum CacheType {
         this.stringId = stringId;
         this.locusId = locusId;
     }
+    
+    public static CacheType findByCgeoId(String cgeoId) {
+        if (cgeoId == null) return null;
+        for (CacheType ct : CacheType.values()) {
+            if (ct.cgeoId.equals(cgeoId)) return ct;
+        }
+        return null;
+    }
+
 }

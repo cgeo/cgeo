@@ -24,4 +24,13 @@ public enum CacheSize {
         this.comparable = comparable;
         this.locusId = locusId;
     }
+    
+    public static CacheSize findByCgeoId(String cgeoId) {
+        if (cgeoId == null) return null;
+        for (CacheSize cs : CacheSize.values()) {
+            if (cs.cgeoId.equals(cgeoId)) return cs;
+        }
+        return null;
+    }
+
 }
