@@ -8,6 +8,7 @@ import menion.android.locus.addon.publiclib.DisplayData;
 import menion.android.locus.addon.publiclib.LocusUtils;
 import menion.android.locus.addon.publiclib.geoData.Point;
 import menion.android.locus.addon.publiclib.geoData.PointGeocachingData;
+import menion.android.locus.addon.publiclib.geoData.PointGeocachingDataWaypoint;
 import menion.android.locus.addon.publiclib.geoData.PointsData;
 import android.app.Activity;
 import android.content.Context;
@@ -20,6 +21,7 @@ import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.WaypointType;
 
 public abstract class AbstractLocusApp extends AbstractApp {
 	private static final String INTENT = Intent.ACTION_VIEW;
@@ -37,11 +39,13 @@ public abstract class AbstractLocusApp extends AbstractApp {
 	/**
 	 * Display a list of caches / waypoints in Locus
 	 * 
-	 * @param objectsToShow
+	 * @param objectsToShow which caches/waypoints to show
+     * @param withCacheWaypoints wether to give waypoints of caches to Locus or not
 	 * @param activity
 	 * @author koem
 	 */
-	protected void showInLocus(List<? extends Object> objectsToShow, Activity activity) {
+	protected void showInLocus(List<? extends Object> objectsToShow, boolean withCacheWaypoints, 
+	        Activity activity) {
         if (objectsToShow == null) return;
 
         int pc = 0; // counter for points
@@ -50,7 +54,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
             // get icon and Point
             Point p = null;
             if (o instanceof cgCache) {
-                p = this.getPoint((cgCache) o);
+                p = this.getPoint((cgCache) o, withCacheWaypoints);
             } else if (o instanceof cgWaypoint) {
                 p = this.getPoint((cgWaypoint) o);
             } else {
@@ -77,10 +81,11 @@ public abstract class AbstractLocusApp extends AbstractApp {
 	 * This method constructs a <code>Point</code> for displaying in Locus
 	 * 
 	 * @param cache
+	 * @param withWaypoints wether to give waypoints to Locus or not
 	 * @return  null, when the <code>Point</code> could not be constructed
 	 * @author koem
 	 */
-	private Point getPoint(cgCache cache) {
+	private Point getPoint(cgCache cache, boolean withWaypoints) {
 		if (cache == null || cache.coords == null) return null;
 
 		// create one simple point with location
@@ -94,12 +99,12 @@ public abstract class AbstractLocusApp extends AbstractApp {
 
 		// set data in Locus' cache
 		pg.cacheID = cache.geocode;
-//		pg.available = ! cache.disabled;
-//		pg.archived = cache.archived;
-//		pg.premiumOnly = cache.members;
+		pg.available = ! cache.disabled;
+		pg.archived = cache.archived;
+		pg.premiumOnly = cache.members;
 		pg.name = cache.name;
-//		pg.placedBy = cache.owner;
-//		if (cache.hidden != null) pg.hidden = ISO8601DATE.format(cache.hidden.getTime());
+		pg.placedBy = cache.owner;
+		if (cache.hidden != null) pg.hidden = ISO8601DATE.format(cache.hidden.getTime());
 		for (CacheType ct : CacheType.values()) {
 		    if (ct.cgeoId.equals(cache.type)) {
 		        if (ct.locusId != CacheType.NO_LOCUS_ID) pg.type = ct.locusId;
@@ -112,25 +117,37 @@ public abstract class AbstractLocusApp extends AbstractApp {
 		        break;
 		    }
 		}
-//		if (cache.difficulty != null) pg.difficulty = cache.difficulty;
-//		if (cache.terrain != null) pg.terrain = cache.terrain;
-//		pg.shortDescription = cache.shortdesc;
-//		pg.longDescription = cache.description;
-//		pg.encodedHints = cache.hint;
-//		if (cache.waypoints != null) {
-//			pg.waypoints = new ArrayList<PointGeocachingDataWaypoint>();
-//			for (cgWaypoint waypoint : cache.waypoints) {
-//				if (waypoint == null || waypoint.coords == null) continue;
-//				PointGeocachingDataWaypoint w = new PointGeocachingDataWaypoint();
-//				w.code = waypoint.geocode;
-//				w.name = waypoint.name;
-//				w.type = PointGeocachingData.CACHE_WAYPOINT_TYPE_STAGES;
-//				w.lat = waypoint.coords.getLatitude();
-//				w.lon = waypoint.coords.getLongitude();
-//				pg.waypoints.add(w);
-//			}
-//		}
+		if (cache.difficulty != null) pg.difficulty = cache.difficulty;
+		if (cache.terrain != null) pg.terrain = cache.terrain;
 		pg.found = cache.found;
+
+        if (withWaypoints && cache.waypoints != null) {
+          pg.waypoints = new ArrayList<PointGeocachingDataWaypoint>();
+          for (cgWaypoint waypoint : cache.waypoints) {
+              if (waypoint == null || waypoint.coords == null) continue;
+              PointGeocachingDataWaypoint wp = new PointGeocachingDataWaypoint();
+              wp.code = waypoint.geocode;
+              wp.name = waypoint.name;
+              for (WaypointType wt : WaypointType.values()) {
+                  if (wt.cgeoId.equals(waypoint.type)) {
+                      wp.type = wt.locusId;
+                      break;
+                  }
+              }
+              wp.lat = waypoint.coords.getLatitude();
+              wp.lon = waypoint.coords.getLongitude();
+              pg.waypoints.add(wp);
+          }
+        }
+
+		// Other properties of caches, not used yet. When there are many caches to be displayed
+		// in Locus, using these properties can lead to Exceptions in Locus.
+		// Examination necessary when to display and when not. E. g.: > 200 caches: don't display
+		// these properties.
+
+        //pg.shortDescription = cache.shortdesc;
+        //pg.longDescription = cache.description;
+        //pg.encodedHints = cache.hint;
 
     	return p;
 	}

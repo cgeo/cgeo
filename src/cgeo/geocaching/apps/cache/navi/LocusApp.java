@@ -47,7 +47,7 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 				if (waypoint.coords != null) points.add(waypoint);
 			}
 
-			this.showInLocus(points, activity);
+			this.showInLocus(points, true, activity);
 			
 			return true;
 		}
