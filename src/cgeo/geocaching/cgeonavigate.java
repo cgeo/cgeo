@@ -32,8 +32,8 @@ public class cgeonavigate extends AbstractActivity {
 	private cgUpdateLoc geoUpdate = new update();
 	private cgUpdateDir dirUpdate = new UpdateDirection();
 	private Geopoint dstCoords = null;
-	private Double cacheHeading = Double.valueOf(0);
-	private Double northHeading = Double.valueOf(0);
+	private float cacheHeading = 0;
+	private float northHeading = 0;
 	private String title = null;
 	private String name = null;
 	private TextView navType = null;
@@ -341,7 +341,7 @@ public class cgeonavigate extends AbstractActivity {
 			headingView = (TextView) findViewById(R.id.heading);
 		}
 
-		cacheHeading = cgBase.getHeading(geo.coordsNow, dstCoords);
+		cacheHeading = geo.coordsNow.bearingTo(dstCoords);
 		distanceView.setText(base.getHumanDistance(geo.coordsNow.distanceTo(dstCoords)));
 		headingView.setText(String.format(Locale.getDefault(), "%.0f", cacheHeading) + "°");
 	}
@@ -414,7 +414,7 @@ public class cgeonavigate extends AbstractActivity {
 					if (geo != null && geo.bearingNow != null) {
 						northHeading = geo.bearingNow;
 					} else {
-						northHeading = Double.valueOf(0);
+						northHeading = 0;
 					}
 				}
 			} catch (Exception e) {

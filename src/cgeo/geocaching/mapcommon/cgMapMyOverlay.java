@@ -27,7 +27,7 @@ public class cgMapMyOverlay implements OverlayBase {
 	private cgSettings settings = null;
 	private Location coordinates = null;
 	private GeoPointImpl location = null;
-	private Double heading = Double.valueOf(0);
+	private Float heading = 0f;
 	private Paint accuracyCircle = null;
 	private Paint historyLine = null;
 	private Paint historyLineShadow = null;
@@ -58,8 +58,8 @@ public class cgMapMyOverlay implements OverlayBase {
 		location = settings.getMapFactory().getGeoPointBase(new Geopoint(coordinates));
 	}
 
-	public void setHeading(Double headingIn) {
-		heading = headingIn;
+	public void setHeading(Float bearingNow) {
+		heading = bearingNow;
 	}
 
 	@Override

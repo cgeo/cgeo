@@ -42,7 +42,7 @@ public class cgGeo {
 	public Geopoint coordsNow = null;
 	public Geopoint coordsBefore = null;
 	public Double altitudeNow = null;
-	public Double bearingNow = null;
+	public Float bearingNow = null;
 	public Float speedNow = null;
 	public Float accuracyNow = null;
 	public Integer satellitesVisible = null;
@@ -289,7 +289,7 @@ public class cgGeo {
 		gps = -1;
 		coordsNow = coords;
 		altitudeNow = null;
-		bearingNow = Double.valueOf(0);
+		bearingNow = 0f;
 		speedNow = 0f;
 		accuracyNow = 999f;
 
@@ -324,9 +324,9 @@ public class cgGeo {
 			altitudeNow = null;
 		}
 		if (location.hasBearing() && gps != -1) {
-			bearingNow = Double.valueOf(location.getBearing());
+			bearingNow = location.getBearing();
 		} else {
-			bearingNow = Double.valueOf(0);
+			bearingNow = 0f;
 		}
 		if (location.hasSpeed() && gps != -1) {
 			speedNow = location.getSpeed();

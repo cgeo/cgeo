@@ -15,7 +15,7 @@ public class cgDirection {
 	private cgeoSensorListener sensorListener = null;
 	private cgUpdateDir dirUpdate = null;
 
-	public Double directionNow = null;
+	public Float directionNow = null;
 
 	public cgDirection(Context contextIn, cgUpdateDir dirUpdateIn) {
 		context = contextIn;
@@ -63,7 +63,7 @@ public class cgDirection {
 
 		@Override
 		public void onSensorChanged(SensorEvent event) {
-			directionNow = Compatibility.getDirectionNow(Double.valueOf(event.values[0]), (Activity)context);
+			directionNow = Compatibility.getDirectionNow(event.values[0], (Activity)context);
 
 			if (dirUpdate != null && directionNow != null) {
 				dirUpdate.updateDir(dir);

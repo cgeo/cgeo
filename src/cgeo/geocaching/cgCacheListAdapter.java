@@ -53,7 +53,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 	private CacheComparator statComparator = null;
 	private boolean historic = false;
 	private Geopoint coords = null;
-	private Double azimuth = Double.valueOf(0);
+	private float azimuth = 0;
 	private long lastSort = 0L;
 	private boolean sort = true;
 	private int checked = 0;
@@ -300,12 +300,12 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		}
 	}
 
-	public void setActualHeading(Double azimuthIn) {
-		if (azimuthIn == null) {
+	public void setActualHeading(Float directionNow) {
+		if (directionNow == null) {
 			return;
 		}
 
-		azimuth = azimuthIn;
+		azimuth = directionNow;
 
 		if (CollectionUtils.isNotEmpty(compasses)) {
 			for (cgCompassMini compass : compasses) {
