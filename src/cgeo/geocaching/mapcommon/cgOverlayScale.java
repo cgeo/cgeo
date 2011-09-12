@@ -64,7 +64,7 @@ public class cgOverlayScale implements OverlayBase {
 		distanceRound = 0d;
 
 		if(settings.units == cgSettings.unitsImperial) {
-			distance *= cgBase.kmInMiles;
+			distance /= cgBase.miles2km;
 
 			if (distance > 100) { // 100+ mi > 1xx mi
 				distanceRound = Math.floor(distance / 100) * 100;
