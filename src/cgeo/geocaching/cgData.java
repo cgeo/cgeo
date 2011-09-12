@@ -1205,18 +1205,10 @@ public class cgData {
 		values.put("location", cache.location);
 		values.put("distance", cache.distance);
 		values.put("direction", cache.direction);
-		// save coordinates
-		final boolean rel = cache.reliableLatLon;
-		if (cache.reliableLatLon) { // new cache has reliable coordinates, store
-			values.put("latitude", cache.coords.getLatitude());
-			values.put("longitude", cache.coords.getLongitude());
-			values.put("reliable_latlon", 1);
-		} else if (!rel) { // new cache neither stored cache is not reliable, just update
-			// FIXME: if the user is not logged in, coords may be null
-			values.put("latitude", cache.coords.getLatitude());
-			values.put("longitude", cache.coords.getLongitude());
-			values.put("reliable_latlon", 0);
-		}
+		// FIXME: if the user is not logged in, coords may be null
+		values.put("latitude", cache.coords.getLatitude());
+		values.put("longitude", cache.coords.getLongitude());
+		values.put("reliable_latlon", cache.reliableLatLon ? 1 : 0);
 		values.put("elevation", cache.elevation);
 		values.put("shortdesc", cache.shortdesc);
 		values.put("personal_note", cache.personalNote);
