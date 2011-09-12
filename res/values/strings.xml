@@ -460,6 +460,10 @@
   <string name="init_sendToCgeo_registering">Registering your device for "Send to c:geo"…</string>
   <string name="init_sendToCgeo_register_ok">Registration successful. PIN code is ####. Use it on c:geo website to add this device to your browser.</string>
   <string name="init_sendToCgeo_register_fail">Registration failed.</string>
+  
+  <string name="sendToCgeo_download_fail">c:geo failed to download caches. No internet connection or send2c:geo is down.</string>
+  <string name="sendToCgeo_no_registration">c:geo failed to download caches. Registration for send2c:geo expired. Please register in settings.</string>
+  
 
   <!-- auth -->
   <string name="auth_twitter">Twitter</string>
@@ -920,6 +924,7 @@
     · Rainer S. (code)\n
     · Ray (code, loc. JA)\n
     · <a href="http://seromenho.com/">Ricardo Seromenho</a> (localization PT)\n
+    · <a href="http://www.rfc1149.net/sam.html">Samuel Tardieu</a> (code, localization FR)\n
     · <a href="http://www.sammyshp.de/">SammysHP</a> (code, localization DE)\n
     · serenity (localization FR)\n
     · Shan, a.k.a. ShakurNO (localization NO)\n
@@ -931,6 +936,7 @@
     \n
     · <a href="http://code.google.com/p/mapsforge/">Mapsforge</a> (OSM-rendering)\n
     · <a href="http://thenounproject.com/">The Noun Project</a> (basis for attribute icons)\n
+    · <a href="http://commons.apache.org/">The Apache Commons Project</a>\n
   </string>
 
   <!-- changelog -->
@@ -940,12 +946,14 @@
     · new: experimental support for .gpx from opencaching.com\n
     · new: scan QR code to open cache description\n
     · new: context menu on stored caches button (main screen)\n
+    · new: compass immediately shows the right direction\n
     · fix: performance of GPX import\n
     · fix: performance of deleting caches from list\n
     · fix: return to list after GPX import\n
     · fix: fill signature when logging offline\n
     · fix: show strikethrough in caches\n
     · fix: no more empty map previews\n
+    · fix: send2c:geo\n
     \n\n
     <b>26.08.2011</b>\n
     · new: street view\n

@@ -35,6 +35,7 @@ public class cgCompass extends View {
 	private int compassArrowHeight = 0;
 	private int compassOverlayWidth = 0;
 	private int compassOverlayHeight = 0;
+	private boolean initialDisplay;
 	private Handler changeHandler = new Handler() {
 
 		@Override
@@ -76,6 +77,7 @@ public class cgCompass extends View {
 		setfil = new PaintFlagsDrawFilter(0, Paint.FILTER_BITMAP_FLAG);
 		remfil = new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG, 0);
 
+		initialDisplay = true;
 		wantStop = false;
 
 		watchdog = new changeThread();
@@ -104,6 +106,13 @@ public class cgCompass extends View {
 	}
 
 	protected synchronized void updateNorth(double northHeadingIn, double cacheHeadingIn) {
+		if (initialDisplay) {
+			// We will force the compass to move brutally if this is the first
+			// update since it is visible.
+			azimuth = northHeadingIn;
+			heading = cacheHeadingIn;
+			initialDisplay = false;
+		}
 		northHeading = northHeadingIn;
 		cacheHeading = cacheHeadingIn;
 	}
