@@ -49,7 +49,7 @@ public class cgCache implements ICache {
 	public Float difficulty = Float.valueOf(0);
 	public Float terrain = Float.valueOf(0);
 	public Float direction = null;
-	public Double distance = null;
+	public Float distance = null;
 	public String latlon = "";
 	public String latitudeString = "";
 	public String longitudeString = "";

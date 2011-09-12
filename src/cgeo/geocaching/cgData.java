@@ -1936,7 +1936,7 @@ public class cgData {
 		if (cursor.isNull(index)) {
 			cache.distance = null;
 		} else {
-			cache.distance = (Double) cursor.getDouble(index);
+			cache.distance = cursor.getFloat(index);
 		}
 		cache.terrain = (Float) cursor.getFloat(cursor.getColumnIndex("terrain"));
 		cache.latlon = (String) cursor.getString(cursor.getColumnIndex("latlon"));

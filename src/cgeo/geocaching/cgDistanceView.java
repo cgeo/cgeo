@@ -33,7 +33,7 @@ public class cgDistanceView extends TextView {
 		setText(base.getHumanDistance(coords.distanceTo(cacheCoords)));
 	}
 
-	public void setDistance(Double distance) {
+	public void setDistance(Float distance) {
 		setText("~" + base.getHumanDistance(distance));
 	}
 
