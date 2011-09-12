@@ -526,7 +526,7 @@ public class cgeopoint extends AbstractActivity {
 				return null;
 			}
 
-			final Geopoint coordsDst = cgBase.getRadialDistance(coords, bearing, distance);
+			final Geopoint coordsDst = coords.project(bearing, distance);
 
 			if (coordsDst == null) {
 				showToast(res.getString(R.string.err_point_location_error));

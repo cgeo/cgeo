@@ -2363,10 +2363,6 @@ public class cgBase {
 		return text.trim();
 	}
 
-	public static Geopoint getRadialDistance(final Geopoint coords, double bearing, double distance) {
-		return coords.project(bearing, distance);  // TODO Replace callers
-	}
-
 	public String getHumanDistance(Float distance) {
 		if (distance == null) {
 			return "?";
