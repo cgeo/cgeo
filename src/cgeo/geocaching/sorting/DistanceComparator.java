@@ -1,27 +1,17 @@
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.geopoint.Geopoint;
 
 /**
  * sorts caches by distance to current position
  *
  */
 public class DistanceComparator extends AbstractCacheComparator {
-	private Double latitude = null;
-	private Double longitude = null;
+	private final Geopoint coords;
 
-	public DistanceComparator() {
-		// nothing
-	}
-
-	public DistanceComparator(Double latitudeIn, Double longitudeIn) {
-		setCoords(latitudeIn, longitudeIn);
-	}
-
-	public void setCoords(Double latitudeIn, Double longitudeIn) {
-		latitude = latitudeIn;
-		longitude = longitudeIn;
+	public DistanceComparator(final Geopoint coords) {
+		this.coords = coords;
 	}
 
 	@Override
@@ -31,35 +21,20 @@ public class DistanceComparator extends AbstractCacheComparator {
 
 	@Override
 	protected int compareCaches(final cgCache cache1, final cgCache cache2) {
-		if ((cache1.latitude == null || cache1.longitude == null
-				|| cache2.latitude == null || cache2.longitude == null)
+		if ((cache1.coords == null || cache2.coords == null)
 				&& cache1.distance != null && cache2.distance != null) {
-			if (cache1.distance < cache2.distance) {
-				return -1;
-			} else if (cache1.distance > cache2.distance) {
-				return 1;
-			} else {
-				return 0;
-			}
+			return Double.compare(cache1.distance, cache2.distance);
 		} else {
-			if (cache1.latitude == null || cache1.longitude == null) {
+			if (cache1.coords == null) {
 				return 1;
 			}
-			if (cache2.latitude == null || cache2.longitude == null) {
+			if (cache2.coords == null) {
 				return -1;
 			}
 
-			Double distance1 = cgBase.getDistance(latitude, longitude,
-					cache1.latitude, cache1.longitude);
-			Double distance2 = cgBase.getDistance(latitude, longitude,
-					cache2.latitude, cache2.longitude);
-
-			if (distance1 < distance2) {
-				return -1;
-			} else if (distance1 > distance2) {
-				return 1;
-			}
+			return Float.compare(coords.distanceTo(cache1.coords),
+					             coords.distanceTo(cache2.coords));
 		}
-		return 0;
 	}
+	
 }

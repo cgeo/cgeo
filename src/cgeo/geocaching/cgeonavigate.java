@@ -1,7 +1,7 @@
 package cgeo.geocaching;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
@@ -20,20 +20,20 @@ import android.view.SubMenu;
 import android.view.WindowManager;
 import android.widget.TextView;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.geopoint.Geopoint;
 
 
 public class cgeonavigate extends AbstractActivity {
 
-	public static ArrayList<cgCoord> coordinates = new ArrayList<cgCoord>();
+	public final static List<cgCoord> coordinates = new ArrayList<cgCoord>();
 	private PowerManager pm = null;
 	private cgGeo geo = null;
 	private cgDirection dir = null;
 	private cgUpdateLoc geoUpdate = new update();
 	private cgUpdateDir dirUpdate = new UpdateDirection();
-	private Double dstLatitude = null;
-	private Double dstLongitude = null;
-	private Double cacheHeading = Double.valueOf(0);
-	private Double northHeading = Double.valueOf(0);
+	private Geopoint dstCoords = null;
+	private float cacheHeading = 0;
+	private float northHeading = 0;
 	private String title = null;
 	private String name = null;
 	private TextView navType = null;
@@ -85,8 +85,7 @@ public class cgeonavigate extends AbstractActivity {
 		if (extras != null) {
 			title = extras.getString("geocode");
 			name = extras.getString("name");
-			dstLatitude = extras.getDouble("latitude");
-			dstLongitude = extras.getDouble("longitude");
+			dstCoords = new Geopoint(extras.getDouble("latitude"), extras.getDouble("longitude"));
 
 			if (StringUtils.isNotBlank(name)) {
 				if (StringUtils.isNotBlank(title)) {
@@ -208,7 +207,7 @@ public class cgeonavigate extends AbstractActivity {
 		}
 		menu.add(0, 0, 0, res.getString(R.string.caches_on_map)).setIcon(android.R.drawable.ic_menu_mapmode);
 		menu.add(0, 2, 0, res.getString(R.string.destination_set)).setIcon(android.R.drawable.ic_menu_edit);
-		if (coordinates != null && coordinates.size() > 1) {
+		if (coordinates.size() > 1) {
 			SubMenu subMenu = menu.addSubMenu(0, 3, 0, res.getString(R.string.destination_select)).setIcon(android.R.drawable.ic_menu_myplaces);
 
 			int cnt = 4;
@@ -247,8 +246,8 @@ public class cgeonavigate extends AbstractActivity {
 		if (id == 0) {
 			Intent mapIntent = new Intent(this, settings.getMapFactory().getMapClass());
 			mapIntent.putExtra("detail", false);
-			mapIntent.putExtra("latitude", dstLatitude);
-			mapIntent.putExtra("longitude", dstLongitude);
+			mapIntent.putExtra("latitude", dstCoords.getLatitude());
+			mapIntent.putExtra("longitude", dstCoords.getLongitude());
 
 			startActivity(mapIntent);
 		} else if (id == 1) {
@@ -279,17 +278,18 @@ public class cgeonavigate extends AbstractActivity {
 
 			finish();
 			return true;
-		} else if (id > 3 && coordinates != null && coordinates.get(id - 4) != null) {
+		} else if (id > 3 && coordinates.get(id - 4) != null) {
 			cgCoord coordinate = coordinates.get(id - 4);
 
 			title = coordinate.name;
-			dstLatitude = coordinate.latitude;
-			dstLongitude = coordinate.longitude;
+			dstCoords = coordinate.coords;
 			setTitle();
 			setDestCoords();
 			updateDistanceInfo();
 
-			Log.d(cgSettings.tag, "destination set: " + title + " (" + String.format(Locale.getDefault(), "%.8f", dstLatitude) + " | " + String.format(Locale.getDefault(), "%.8f", dstLatitude) + ")");
+			Log.d(cgSettings.tag, "destination set: " + title + " (" +
+					String.format(Locale.getDefault(), "%.8f", dstCoords.getLatitude()) + " | " +
+					String.format(Locale.getDefault(), "%.8f", dstCoords.getLongitude()) + ")");
 			return true;
 		}
 
@@ -305,15 +305,15 @@ public class cgeonavigate extends AbstractActivity {
 	}
 
 	private void setDestCoords() {
-		if (dstLatitude == null || dstLatitude == null) {
+		if (dstCoords == null) {
 			return;
 		}
 
-		((TextView) findViewById(R.id.destination)).setText(cgBase.formatCoords(dstLatitude, dstLongitude, true));
+		((TextView) findViewById(R.id.destination)).setText(cgBase.formatCoords(dstCoords, true));
 	}
 
-	public void setDest(Double lat, Double lon) {
-		if (lat == null || lon == null) {
+	public void setDest(final Geopoint coords) {
+		if (coords == null) {
 			return;
 		}
 
@@ -321,22 +321,16 @@ public class cgeonavigate extends AbstractActivity {
 		setTitle();
 		setDestCoords();
 
-		dstLatitude = lat;
-		dstLongitude = lon;
+		dstCoords = coords;
 		updateDistanceInfo();
 	}
 
-	public HashMap<String, Double> getCoordinatesNow() {
-		HashMap<String, Double> coordsNow = new HashMap<String, Double>();
-		if (geo != null) {
-			coordsNow.put("latitude", geo.latitudeNow);
-			coordsNow.put("longitude", geo.longitudeNow);
-		}
-		return coordsNow;
+	public Geopoint getCoordinatesNow() {
+		return geo.coordsNow;
 	}
 
 	private void updateDistanceInfo() {
-		if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null || dstLatitude == null || dstLongitude == null) {
+		if (geo == null || geo.coordsNow == null || dstCoords == null) {
 			return;
 		}
 
@@ -347,8 +341,8 @@ public class cgeonavigate extends AbstractActivity {
 			headingView = (TextView) findViewById(R.id.heading);
 		}
 
-		cacheHeading = cgBase.getHeading(geo.latitudeNow, geo.longitudeNow, dstLatitude, dstLongitude);
-		distanceView.setText(base.getHumanDistance(cgBase.getDistance(geo.latitudeNow, geo.longitudeNow, dstLatitude, dstLongitude)));
+		cacheHeading = geo.coordsNow.bearingTo(dstCoords);
+		distanceView.setText(base.getHumanDistance(geo.coordsNow.distanceTo(dstCoords)));
 		headingView.setText(String.format(Locale.getDefault(), "%.0f", cacheHeading) + "°");
 	}
 
@@ -368,7 +362,7 @@ public class cgeonavigate extends AbstractActivity {
 					navLocation = (TextView) findViewById(R.id.nav_location);
 				}
 
-				if (geo.latitudeNow != null && geo.longitudeNow != null) {
+				if (geo.coordsNow != null) {
 					String satellites = null;
 					if (geo.satellitesVisible != null && geo.satellitesFixed != null && geo.satellitesFixed > 0) {
 						satellites = res.getString(R.string.loc_sat) + ": " + geo.satellitesFixed + "/" + geo.satellitesVisible;
@@ -404,9 +398,9 @@ public class cgeonavigate extends AbstractActivity {
 						} else {
 							humanAlt = String.format("%.0f", geo.altitudeNow) + " m";
 						}
-						navLocation.setText(cgBase.formatCoords(geo.latitudeNow, geo.longitudeNow, true) + " | " + humanAlt);
+						navLocation.setText(cgBase.formatCoords(geo.coordsNow, true) + " | " + humanAlt);
 					} else {
-						navLocation.setText(cgBase.formatCoords(geo.latitudeNow, geo.longitudeNow, true));
+						navLocation.setText(cgBase.formatCoords(geo.coordsNow, true));
 					}
 
 					updateDistanceInfo();
@@ -420,7 +414,7 @@ public class cgeonavigate extends AbstractActivity {
 					if (geo != null && geo.bearingNow != null) {
 						northHeading = geo.bearingNow;
 					} else {
-						northHeading = Double.valueOf(0);
+						northHeading = 0;
 					}
 				}
 			} catch (Exception e) {

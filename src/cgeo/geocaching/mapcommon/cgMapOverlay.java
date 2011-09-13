@@ -1,6 +1,7 @@
 package cgeo.geocaching.mapcommon;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -25,6 +26,7 @@ import cgeo.geocaching.cgeodetail;
 import cgeo.geocaching.cgeonavigate;
 import cgeo.geocaching.cgeopopup;
 import cgeo.geocaching.cgeowaypoint;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.mapinterfaces.CacheOverlayItemImpl;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
 import cgeo.geocaching.mapinterfaces.ItemizedOverlayImpl;
@@ -35,7 +37,7 @@ import cgeo.geocaching.mapinterfaces.OverlayBase;
 
 public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 
-	private ArrayList<CacheOverlayItemImpl> items = new ArrayList<CacheOverlayItemImpl>();
+	private List<CacheOverlayItemImpl> items = new ArrayList<CacheOverlayItemImpl>();
 	private Context context = null;
 	private Boolean fromDetail = false;
 	private boolean displayCircles = false;
@@ -61,13 +63,13 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 	}
 	
 	public void updateItems(CacheOverlayItemImpl item) {
-		ArrayList<CacheOverlayItemImpl> itemsPre = new ArrayList<CacheOverlayItemImpl>();
+		List<CacheOverlayItemImpl> itemsPre = new ArrayList<CacheOverlayItemImpl>();
 		itemsPre.add(item);
 
 		updateItems(itemsPre);
 	}
 
-	public void updateItems(ArrayList<CacheOverlayItemImpl> itemsPre) {
+	public void updateItems(List<CacheOverlayItemImpl> itemsPre) {
 		if (itemsPre == null) {
 			return;
 		}
@@ -136,11 +138,15 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 					final cgCoord itemCoord = item.getCoord();
 					float[] result = new float[1];
 	
-					Location.distanceBetween(itemCoord.latitude, itemCoord.longitude, itemCoord.latitude, itemCoord.longitude + 1, result);
+					Location.distanceBetween(itemCoord.coords.getLatitude(), itemCoord.coords.getLongitude(),
+											 itemCoord.coords.getLatitude(), itemCoord.coords.getLongitude() + 1, result);
 					final float longitudeLineDistance = result[0];
 	
-					GeoPointImpl itemGeo = mapFactory.getGeoPointBase((int)(itemCoord.latitude * 1e6), (int)(itemCoord.longitude * 1e6));
-					GeoPointImpl leftGeo = mapFactory.getGeoPointBase((int)(itemCoord.latitude * 1e6), (int)((itemCoord.longitude - 161 / longitudeLineDistance) * 1e6));
+					GeoPointImpl itemGeo = mapFactory.getGeoPointBase(itemCoord.coords);
+
+					final Geopoint leftCoords = new Geopoint(itemCoord.coords.getLatitude(),
+															 itemCoord.coords.getLongitude() - 161 / longitudeLineDistance);
+					GeoPointImpl leftGeo = mapFactory.getGeoPointBase(leftCoords);
 	
 					projection.toPixels(itemGeo, center);
 					projection.toPixels(leftGeo, left);
@@ -201,7 +207,7 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 			
 			cgCoord coordinate = item.getCoord();
 
-			if (coordinate.type != null && coordinate.type.equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.geocode)) {
+			if (StringUtils.isNotBlank(coordinate.type) && coordinate.type.equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.geocode)) {
 				Intent popupIntent = new Intent(context, cgeopopup.class);
 
 				popupIntent.putExtra("fromdetail", fromDetail);
@@ -292,12 +298,12 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 						public void onClick(DialogInterface dialog, int id) {
 							cgeonavigate navigateActivity = new cgeonavigate();
 
-							cgeonavigate.coordinates = new ArrayList<cgCoord>();
+							cgeonavigate.coordinates.clear();
 							cgeonavigate.coordinates.add(coordinate);
 
 							Intent navigateIntent = new Intent(context, navigateActivity.getClass());
-							navigateIntent.putExtra("latitude", coordinate.latitude);
-							navigateIntent.putExtra("longitude", coordinate.longitude);
+							navigateIntent.putExtra("latitude", coordinate.coords.getLatitude());
+							navigateIntent.putExtra("longitude", coordinate.coords.getLongitude());
 							navigateIntent.putExtra("geocode", coordinate.geocode.toUpperCase());
 							context.startActivity(navigateIntent);
 							dialog.cancel();
@@ -320,12 +326,12 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 					public void onClick(DialogInterface dialog, int id) {
 						cgeonavigate navigateActivity = new cgeonavigate();
 
-						cgeonavigate.coordinates = new ArrayList<cgCoord>();
+						cgeonavigate.coordinates.clear();
 						cgeonavigate.coordinates.add(coordinate);
 
 						Intent navigateIntent = new Intent(context, navigateActivity.getClass());
-						navigateIntent.putExtra("latitude", coordinate.latitude);
-						navigateIntent.putExtra("longitude", coordinate.longitude);
+						navigateIntent.putExtra("latitude", coordinate.coords.getLatitude());
+						navigateIntent.putExtra("longitude", coordinate.coords.getLongitude());
 						navigateIntent.putExtra("geocode", coordinate.name);
 
 						context.startActivity(navigateIntent);

@@ -1,6 +1,6 @@
 package cgeo.geocaching;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,7 +12,10 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -20,9 +23,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.geopoint.Geopoint;
 
 public class cgeoadvsearch extends AbstractActivity {
 
+	private static final int MENU_SEARCH_OWN_CACHES = 1;
 	private cgGeo geo = null;
 	private cgUpdateLoc geoUpdate = new update();
 	private EditText latEdit = null;
@@ -151,8 +156,8 @@ public class cgeoadvsearch extends AbstractActivity {
 			geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
 		}
 
-		((EditText) findViewById(R.id.latitude)).setOnEditorActionListener(new findByCoordsAction());
-		((EditText) findViewById(R.id.longitude)).setOnEditorActionListener(new findByCoordsAction());
+		((Button) findViewById(R.id.buttonLatitude)).setOnClickListener(new findByCoordsAction());
+		((Button) findViewById(R.id.buttonLongitude)).setOnClickListener(new findByCoordsAction());
 
 		final Button findByCoords = (Button) findViewById(R.id.search_coordinates);
 		findByCoords.setOnClickListener(new findByCoordsListener());
@@ -186,7 +191,13 @@ public class cgeoadvsearch extends AbstractActivity {
 		((EditText) findViewById(R.id.owner)).setOnEditorActionListener(new findByOwnerAction());
 
 		final Button findByOwner = (Button) findViewById(R.id.search_owner);
-		findByOwner.setOnClickListener(new findByOwnerListener());
+		findByOwner.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				findByOwnerFn();
+			}
+		});
 
 		EditText trackable = (EditText) findViewById(R.id.trackable);
 		trackable.setOnEditorActionListener(new findTrackableAction());
@@ -211,9 +222,9 @@ public class cgeoadvsearch extends AbstractActivity {
 					lonEdit = (EditText) findViewById(R.id.longitude);
 				}
 
-				if (geo.latitudeNow != null && geo.longitudeNow != null) {
-					latEdit.setHint(cgBase.formatLatitude(geo.latitudeNow, false));
-					lonEdit.setHint(cgBase.formatLongitude(geo.longitudeNow, false));
+				if (geo.coordsNow != null) {
+					latEdit.setHint(cgBase.formatLatitude(geo.coordsNow.getLatitude(), false));
+					lonEdit.setHint(cgBase.formatLongitude(geo.coordsNow.getLongitude(), false));
 				}
 			} catch (Exception e) {
 				Log.w(cgSettings.tag, "Failed to update location.");
@@ -221,16 +232,20 @@ public class cgeoadvsearch extends AbstractActivity {
 		}
 	}
 
-	private class findByCoordsAction implements TextView.OnEditorActionListener {
+	private class findByCoordsAction implements OnClickListener {
 
 		@Override
-		public boolean onEditorAction(TextView view, int action, KeyEvent event) {
-			if (action == EditorInfo.IME_ACTION_GO) {
-				findByCoordsFn();
-				return true;
-			}
-
-			return false;
+		public void onClick(View arg0) {
+			cgeocoords coordsDialog = new cgeocoords(cgeoadvsearch.this, settings, null, geo);
+			coordsDialog.setCancelable(true);
+			coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
+				@Override
+				public void update(Geopoint gp) {
+					((Button) findViewById(R.id.buttonLatitude)).setText(cgBase.formatLatitude(gp.getLatitude(), true));
+					((Button) findViewById(R.id.buttonLongitude)).setText(cgBase.formatLongitude(gp.getLongitude(), true));
+				}
+			});
+			coordsDialog.show();
 		}
 	}
 
@@ -242,17 +257,17 @@ public class cgeoadvsearch extends AbstractActivity {
 	}
 
 	private void findByCoordsFn() {
-		final EditText latView = (EditText) findViewById(R.id.latitude);
-		final EditText lonView = (EditText) findViewById(R.id.longitude);
+		final Button latView = (Button) findViewById(R.id.buttonLatitude);
+		final Button lonView = (Button) findViewById(R.id.buttonLongitude);
 		final String latText = latView.getText().toString();
 		final String lonText = lonView.getText().toString();
 
-		if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) {
-			latView.setText(cgBase.formatLatitude(geo.latitudeNow, true));
-			lonView.setText(cgBase.formatLongitude(geo.longitudeNow, true));
+		if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) { // TODO: now coordinates
+			latView.setText(cgBase.formatLatitude(geo.coordsNow.getLatitude(), true));
+			lonView.setText(cgBase.formatLongitude(geo.coordsNow.getLongitude(), true));
 		} else {
-			HashMap<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
-			HashMap<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lat");
+			Map<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
+			Map<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lat");
 
 			if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
 				showToast(res.getString(R.string.err_parse_lat));
@@ -389,16 +404,13 @@ public class cgeoadvsearch extends AbstractActivity {
 			return false;
 		}
 	}
-
-	private class findByOwnerListener implements View.OnClickListener {
-
-		public void onClick(View arg0) {
-			findByOwnerFn();
-		}
+	
+	private void findByOwnerFn() {
+		findByOwnerFn(((EditText) findViewById(R.id.owner)).getText().toString());
 	}
 
-	private void findByOwnerFn() {
-		final String usernameText = ((EditText) findViewById(R.id.owner)).getText().toString();
+	private void findByOwnerFn(String userName) {
+		final String usernameText = StringUtils.trimToEmpty(userName);
 
 		if (StringUtils.isBlank(usernameText)) {
 			helpDialog(res.getString(R.string.warn_search_help_title), res.getString(R.string.warn_search_help_user));
@@ -474,5 +486,20 @@ public class cgeoadvsearch extends AbstractActivity {
 		final Intent trackablesIntent = new Intent(this, cgeotrackable.class);
 		trackablesIntent.putExtra("geocode", trackableText.toUpperCase());
 		startActivity(trackablesIntent);
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add(0, MENU_SEARCH_OWN_CACHES, 0, res.getString(R.string.search_own_caches));
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (item.getItemId() == MENU_SEARCH_OWN_CACHES) {
+			findByOwnerFn(settings.getUsername());
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 }

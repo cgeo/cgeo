@@ -13,6 +13,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -29,7 +31,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,11 +38,12 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -51,6 +53,7 @@ import cgeo.geocaching.filter.cgFilter;
 import cgeo.geocaching.filter.cgFilterBySize;
 import cgeo.geocaching.filter.cgFilterByTrackables;
 import cgeo.geocaching.filter.cgFilterByType;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.DateComparator;
 import cgeo.geocaching.sorting.DifficultyComparator;
@@ -137,20 +140,19 @@ public class cgeocaches extends AbstractListActivity {
 
 	private String action = null;
 	private String type = null;
-	private Double latitude = null;
-	private Double longitude = null;
+	private Geopoint coords = null;
 	private String cachetype = null;
 	private String keyword = null;
 	private String address = null;
 	private String username = null;
-	private Long searchId = null;
-	private ArrayList<cgCache> cacheList = new ArrayList<cgCache>();
+	private UUID searchId = null;
+	private List<cgCache> cacheList = new ArrayList<cgCache>();
 	private cgCacheListAdapter adapter = null;
 	private LayoutInflater inflater = null;
 	private View listFooter = null;
 	private TextView listFooterText = null;
 	private ProgressDialog waitDialog = null;
-	private Double northHeading = Double.valueOf(0);
+	private Float northHeading = 0f;
 	private cgGeo geo = null;
 	private cgDirection dir = null;
 	private cgUpdateLoc geoUpdate = new update();
@@ -165,7 +167,7 @@ public class cgeocaches extends AbstractListActivity {
 	private geocachesExportFieldNotes threadF = null;
 	private geocachesRemoveFromHistory threadH = null;
 	private int listId = 0;
-	private ArrayList<cgList> lists = null;
+	private List<cgList> lists = null;
 	private String selectedFilter = null;
 	private GeocodeComparator gcComparator = new GeocodeComparator();
 	private Handler loadCachesHandler = new Handler() {
@@ -173,11 +175,11 @@ public class cgeocaches extends AbstractListActivity {
 		@Override
 		public void handleMessage(Message msg) {
 			try {
-				if (searchId != null && searchId > 0) {
+				if (searchId != null) {
 					setTitle(title + " [" + app.getCount(searchId) + "]");
 					cacheList.clear();
 
-					final ArrayList<cgCache> cacheListTmp = app.getCaches(searchId);
+					final List<cgCache> cacheListTmp = app.getCaches(searchId);
 					if (CollectionUtils.isNotEmpty(cacheListTmp)) {
 						cacheList.addAll(cacheListTmp);
 						cacheListTmp.clear();
@@ -239,8 +241,8 @@ public class cgeocaches extends AbstractListActivity {
 					return;
 				}
 
-				if (geo != null && geo.latitudeNow != null && geo.longitudeNow != null) {
-					adapter.setActualCoordinates(geo.latitudeNow, geo.longitudeNow);
+				if (geo != null && geo.coordsNow != null) {
+					adapter.setActualCoordinates(geo.coordsNow);
 					adapter.setActualHeading(northHeading);
 				}
 			} catch (Exception e) {
@@ -271,11 +273,11 @@ public class cgeocaches extends AbstractListActivity {
 		@Override
 		public void handleMessage(Message msg) {
 			try {
-				if (searchId != null && searchId > 0) {
+				if (searchId != null) {
 					setTitle(title + " [" + app.getCount(searchId) + "]");
 					cacheList.clear();
 
-					final ArrayList<cgCache> cacheListTmp = app.getCaches(searchId);
+					final List<cgCache> cacheListTmp = app.getCaches(searchId);
 					if (CollectionUtils.isNotEmpty(cacheListTmp)) {
 						cacheList.addAll(cacheListTmp);
 						cacheListTmp.clear();
@@ -317,8 +319,8 @@ public class cgeocaches extends AbstractListActivity {
 					return;
 				}
 
-				if (geo != null && geo.latitudeNow != null && geo.longitudeNow != null) {
-					adapter.setActualCoordinates(geo.latitudeNow, geo.longitudeNow);
+				if (geo != null && geo.coordsNow != null) {
+					adapter.setActualCoordinates(geo.coordsNow);
 					adapter.setActualHeading(northHeading);
 				}
 			} catch (Exception e) {
@@ -364,7 +366,7 @@ public class cgeocaches extends AbstractListActivity {
 				}
 			} else {
 				if (cacheList != null && searchId != null) {
-					final ArrayList<cgCache> cacheListTmp = app.getCaches(searchId);
+					final List<cgCache> cacheListTmp = app.getCaches(searchId);
 					if (CollectionUtils.isNotEmpty(cacheListTmp)) {
 						cacheList.clear();
 						cacheList.addAll(cacheListTmp);
@@ -373,8 +375,8 @@ public class cgeocaches extends AbstractListActivity {
 					}
 				}
 
-				if (geo != null && geo.latitudeNow != null && geo.longitudeNow != null) {
-					adapter.setActualCoordinates(geo.latitudeNow, geo.longitudeNow);
+				if (geo != null && geo.coordsNow != null) {
+					adapter.setActualCoordinates(geo.coordsNow);
 					adapter.setActualHeading(northHeading);
 				}
 
@@ -415,7 +417,16 @@ public class cgeocaches extends AbstractListActivity {
 					waitDialog.setOnCancelListener(null);
 				}
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-                showToast(res.getString(R.string.gpx_import_no_files));
+                showToast(res.getString(R.string.sendToCgeo_download_fail));
+				finish();
+				return;
+            } else if (msg.what == -3) {
+				if (waitDialog != null) {
+					waitDialog.dismiss();
+					waitDialog.setOnCancelListener(null);
+				}
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                showToast(res.getString(R.string.sendToCgeo_no_registration));
 				finish();
 				return;
 			} else {
@@ -425,7 +436,7 @@ public class cgeocaches extends AbstractListActivity {
 
 				cacheList.clear();
 
-				final ArrayList<cgCache> cacheListTmp = app.getCaches(searchId);
+				final List<cgCache> cacheListTmp = app.getCaches(searchId);
 				if (CollectionUtils.isNotEmpty(cacheListTmp)) {
 					cacheList.addAll(cacheListTmp);
 					cacheListTmp.clear();
@@ -453,7 +464,7 @@ public class cgeocaches extends AbstractListActivity {
 
 			cacheList.clear();
 
-			final ArrayList<cgCache> cacheListTmp = app.getCaches(searchId);
+			final List<cgCache> cacheListTmp = app.getCaches(searchId);
 			if (CollectionUtils.isNotEmpty(cacheListTmp)) {
 				cacheList.addAll(cacheListTmp);
 				cacheListTmp.clear();
@@ -549,8 +560,7 @@ public class cgeocaches extends AbstractListActivity {
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			type = extras.getString(EXTRAS_LIST_TYPE);
-			latitude = extras.getDouble("latitude");
-			longitude = extras.getDouble("longitude");
+			coords = new Geopoint(extras.getDouble("latitude"), extras.getDouble("longitude"));
 			cachetype = extras.getString("cachetype");
 			keyword = extras.getString("keyword");
 			address = extras.getString("address");
@@ -576,7 +586,7 @@ public class cgeocaches extends AbstractListActivity {
 			showProgress(true);
 			setLoadingCaches();
 
-			threadPure = new geocachesLoadByOffline(loadCachesHandler, latitude, longitude, listId);
+			threadPure = new geocachesLoadByOffline(loadCachesHandler, coords, listId);
 			threadPure.start();
 		} else if (type.equals("history")) {
 			if (adapter != null) {
@@ -597,17 +607,17 @@ public class cgeocaches extends AbstractListActivity {
 			showProgress(true);
 			setLoadingCaches();
 
-			thread = new geocachesLoadByCoords(loadCachesHandler, latitude, longitude, cachetype);
+			thread = new geocachesLoadByCoords(loadCachesHandler, coords, cachetype);
 			thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
 			thread.start();
 		} else if (type.equals("coordinate")) {
 			action = "planning";
-			title = cgBase.formatCoords(latitude, longitude, true);
+			title = cgBase.formatCoords(coords, true);
 			setTitle(title);
 			showProgress(true);
 			setLoadingCaches();
 
-			thread = new geocachesLoadByCoords(loadCachesHandler, latitude, longitude, cachetype);
+			thread = new geocachesLoadByCoords(loadCachesHandler, coords, cachetype);
 			thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
 			thread.start();
 		} else if (type.equals("keyword")) {
@@ -627,13 +637,13 @@ public class cgeocaches extends AbstractListActivity {
 				showProgress(true);
 				setLoadingCaches();
 			} else {
-				title = cgBase.formatCoords(latitude, longitude, true);
+				title = cgBase.formatCoords(coords, true);
 				setTitle(title);
 				showProgress(true);
 				setLoadingCaches();
 			}
 
-			thread = new geocachesLoadByCoords(loadCachesHandler, latitude, longitude, cachetype);
+			thread = new geocachesLoadByCoords(loadCachesHandler, coords, cachetype);
 			thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
 			thread.start();
 		} else if (type.equals("username")) {
@@ -675,15 +685,15 @@ public class cgeocaches extends AbstractListActivity {
 		settings.load();
 		init();
 
-		if (adapter != null && geo != null && geo.latitudeNow != null && geo.longitudeNow != null) {
-			adapter.setActualCoordinates(geo.latitudeNow, geo.longitudeNow);
+		if (adapter != null && geo != null && geo.coordsNow != null) {
+			adapter.setActualCoordinates(geo.coordsNow);
 			adapter.setActualHeading(northHeading);
 		}
 
 		if (adapter != null) {
 			adapter.setSelectMode(false, true);
-			if (geo != null && geo.latitudeNow != null && geo.longitudeNow != null) {
-				adapter.forceSort(geo.latitudeNow, geo.longitudeNow);
+			if (geo != null && geo.coordsNow != null) {
+				adapter.forceSort(geo.coordsNow);
 			}
 		}
 
@@ -745,7 +755,7 @@ public class cgeocaches extends AbstractListActivity {
 		subMenuSort.setHeaderTitle(res.getString(R.string.caches_sort_title));
 
 		// sort the context menu labels alphabetically for easier reading
-		HashMap<String, Integer> comparators = new HashMap<String, Integer>();
+		Map<String, Integer> comparators = new HashMap<String, Integer>();
 		comparators.put(res.getString(R.string.caches_sort_distance), MENU_SORT_DISTANCE);
 		comparators.put(res.getString(R.string.caches_sort_difficulty), MENU_SORT_DIFFICULTY);
 		comparators.put(res.getString(R.string.caches_sort_terrain), MENU_SORT_TERRAIN);
@@ -760,7 +770,7 @@ public class cgeocaches extends AbstractListActivity {
 		comparators.put(res.getString(R.string.caches_sort_finds), MENU_SORT_FINDS);
 		comparators.put(res.getString(R.string.caches_sort_state), MENU_SORT_STATE);
 
-		ArrayList<String> sortedLabels = new ArrayList<String>(comparators.keySet());
+		List<String> sortedLabels = new ArrayList<String>(comparators.keySet());
 		Collections.sort(sortedLabels);
 		for (String label : sortedLabels) {
 			Integer id = comparators.get(label);
@@ -1098,7 +1108,7 @@ public class cgeocaches extends AbstractListActivity {
 				menu.setHeaderTitle(cache.geocode);
 			}
 
-			if (cache.latitude != null && cache.longitude != null) {
+			if (cache.coords != null) {
 				menu.add(0, MENU_COMPASS, 0, res.getString(R.string.cache_menu_compass));
 				SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
 				NavigationAppFactory.addMenuItems(subMenu, this, res);
@@ -1109,7 +1119,7 @@ public class cgeocaches extends AbstractListActivity {
 			}
 			if (cache.reason >= 1) {
 				menu.add(0, MENU_DROP_CACHE, 0, res.getString(R.string.cache_offline_drop));
-				ArrayList<cgList> cacheLists = app.getLists();
+				List<cgList> cacheLists = app.getLists();
 				int listCount = cacheLists.size();
 				if (listCount > 1) {
 					SubMenu submenu = menu.addSubMenu(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
@@ -1123,7 +1133,7 @@ public class cgeocaches extends AbstractListActivity {
 	}
 
 	private void createFakeContextMenuMoveToList(ContextMenu menu) {
-		ArrayList<cgList> cacheLists = app.getLists();
+		List<cgList> cacheLists = app.getLists();
 		int listCount = cacheLists.size();
 		menu.setHeaderTitle(res.getString(R.string.cache_menu_move_list));
 		for (int i = 0; i < listCount; i++) {
@@ -1163,8 +1173,8 @@ public class cgeocaches extends AbstractListActivity {
 
 		if (id == MENU_COMPASS) {
 			Intent navigateIntent = new Intent(this, cgeonavigate.class);
-			navigateIntent.putExtra("latitude", cache.latitude);
-			navigateIntent.putExtra("longitude", cache.longitude);
+			navigateIntent.putExtra("latitude", cache.coords.getLatitude());
+			navigateIntent.putExtra("longitude", cache.coords.getLongitude());
 			navigateIntent.putExtra("geocode", cache.geocode.toUpperCase());
 			navigateIntent.putExtra("name", cache.name);
 
@@ -1252,7 +1262,7 @@ public class cgeocaches extends AbstractListActivity {
 		} else if (id >= MENU_MOVE_SELECTED_OR_ALL_TO_LIST && id < MENU_MOVE_SELECTED_OR_ALL_TO_LIST + 100) {
 			int newListId = id - MENU_MOVE_SELECTED_OR_ALL_TO_LIST;
 			boolean moveAll = adapter.getChecked() == 0;
-			final ArrayList<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
+			final List<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
 			for (cgCache c : cacheListTemp) {
 				if (moveAll || c.statusChecked) {
 					app.moveToList(c.geocode, newListId);
@@ -1271,9 +1281,9 @@ public class cgeocaches extends AbstractListActivity {
 
 		if (cache != null) {
 			// create a searchId for a single cache (as if in details view)
-			HashMap<String, String> params = new HashMap<String, String>();
+			Map<String, String> params = new HashMap<String, String>();
 			params.put("geocode", cache.geocode);
-			Long singleSearchId = base.searchByGeocode(params, 0, false);
+			final UUID singleSearchId = base.searchByGeocode(params, 0, false);
 
 			if (NavigationAppFactory.onMenuItemSelected(item, geo, this,
 					res, cache, singleSearchId, null, null)) {
@@ -1338,10 +1348,10 @@ public class cgeocaches extends AbstractListActivity {
 		}
 		adapter.reFilter();
 
-		if (adapter != null && geo != null) {
-			adapter.setActualCoordinates(geo.latitudeNow, geo.longitudeNow);
+		if (geo != null) {
+			adapter.setActualCoordinates(geo.coordsNow);
 		}
-		if (adapter != null && dir != null) {
+		if (dir != null) {
 			adapter.setActualHeading(dir.directionNow);
 		}
 	}
@@ -1699,8 +1709,8 @@ public class cgeocaches extends AbstractListActivity {
 			}
 
 			try {
-				if (cacheList != null && geo.latitudeNow != null && geo.longitudeNow != null) {
-					adapter.setActualCoordinates(geo.latitudeNow, geo.longitudeNow);
+				if (cacheList != null && geo.coordsNow != null) {
+					adapter.setActualCoordinates(geo.coordsNow);
 				}
 
 				if (settings.useCompass == 0 || (geo.speedNow != null && geo.speedNow > 5)) { // use GPS when speed is higher than 18 km/h
@@ -1708,7 +1718,7 @@ public class cgeocaches extends AbstractListActivity {
 						if (geo.bearingNow != null) {
 							adapter.setActualHeading(geo.bearingNow);
 						} else {
-							adapter.setActualHeading(Double.valueOf(0));
+							adapter.setActualHeading(0f);
 						}
 					}
 					if (northHeading != null) {
@@ -1742,23 +1752,21 @@ public class cgeocaches extends AbstractListActivity {
 	private class geocachesLoadByOffline extends Thread {
 
 		private Handler handler = null;
-		private Double latitude = null;
-		private Double longitude = null;
+		private Geopoint coords = null;
 		private int listId = 1;
 
-		public geocachesLoadByOffline(Handler handlerIn, Double latitudeIn, Double longitudeIn, int listIdIn) {
+		public geocachesLoadByOffline(Handler handlerIn, final Geopoint coordsIn, int listIdIn) {
 			handler = handlerIn;
-			latitude = latitudeIn;
-			longitude = longitudeIn;
+			coords = coordsIn;
 			listId = listIdIn;
 		}
 
 		@Override
 		public void run() {
-			HashMap<String, Object> params = new HashMap<String, Object>();
-			if (latitude != null && longitude != null) {
-				params.put("latitude", latitude);
-				params.put("longitude", longitude);
+			Map<String, Object> params = new HashMap<String, Object>();
+			if (coords != null) {
+				params.put("latitude", coords.getLatitude());
+				params.put("longitude", coords.getLongitude());
 				params.put("cachetype", settings.cacheType);
 				params.put("list", listId);
 			}
@@ -1779,8 +1787,8 @@ public class cgeocaches extends AbstractListActivity {
 
 		@Override
 		public void run() {
-			HashMap<String, Object> params = new HashMap<String, Object>();
-			if (latitude != null && longitude != null) {
+			Map<String, Object> params = new HashMap<String, Object>();
+			if (coords != null) {
 				params.put("cachetype", settings.cacheType);
 			}
 
@@ -1809,19 +1817,17 @@ public class cgeocaches extends AbstractListActivity {
 	private class geocachesLoadByCoords extends cgSearchThread {
 
 		private Handler handler = null;
-		private Double latitude = null;
-		private Double longitude = null;
+		private Geopoint coords = null;
 		private String cachetype = null;
 
-		public geocachesLoadByCoords(Handler handlerIn, Double latitudeIn, Double longitudeIn, String cachetypeIn) {
+		public geocachesLoadByCoords(Handler handlerIn, final Geopoint coordsIn, String cachetypeIn) {
 			setPriority(Thread.MIN_PRIORITY);
 
 			handler = handlerIn;
-			latitude = latitudeIn;
-			longitude = longitudeIn;
+			coords = coordsIn;
 			cachetype = cachetypeIn;
 
-			if (latitude == null || longitude == null) {
+			if (coords == null) {
 				showToast(res.getString(R.string.warn_no_coordinates));
 
 				finish();
@@ -1831,9 +1837,9 @@ public class cgeocaches extends AbstractListActivity {
 
 		@Override
 		public void run() {
-			HashMap<String, String> params = new HashMap<String, String>();
-			params.put("latitude", String.format((Locale) null, "%.6f", latitude));
-			params.put("longitude", String.format((Locale) null, "%.6f", longitude));
+			Map<String, String> params = new HashMap<String, String>();
+			params.put("latitude", String.format((Locale) null, "%.6f", coords.getLatitude()));
+			params.put("longitude", String.format((Locale) null, "%.6f", coords.getLongitude()));
 			params.put("cachetype", cachetype);
 
 			searchId = base.searchByCoords(this, params, 0, settings.showCaptcha);
@@ -1865,7 +1871,7 @@ public class cgeocaches extends AbstractListActivity {
 
 		@Override
 		public void run() {
-			HashMap<String, String> params = new HashMap<String, String>();
+			Map<String, String> params = new HashMap<String, String>();
 			params.put("keyword", keyword);
 			params.put("cachetype", cachetype);
 
@@ -1898,7 +1904,7 @@ public class cgeocaches extends AbstractListActivity {
 
 		@Override
 		public void run() {
-			HashMap<String, String> params = new HashMap<String, String>();
+			Map<String, String> params = new HashMap<String, String>();
 			params.put("username", username);
 			params.put("cachetype", cachetype);
 
@@ -1931,7 +1937,7 @@ public class cgeocaches extends AbstractListActivity {
 
 		@Override
 		public void run() {
-			HashMap<String, String> params = new HashMap<String, String>();
+			Map<String, String> params = new HashMap<String, String>();
 			params.put("username", username);
 			params.put("cachetype", cachetype);
 
@@ -1973,7 +1979,7 @@ public class cgeocaches extends AbstractListActivity {
 				geo = app.removeGeo();
 			}
 
-			final ArrayList<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
+			final List<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
 			for (cgCache cache : cacheListTemp) {
 				if (checked > 0 && cache.statusChecked == false) {
 					handler.sendEmptyMessage(0);
@@ -2008,7 +2014,7 @@ public class cgeocaches extends AbstractListActivity {
 					}
 
 					detailProgress++;
-					base.storeCache(app, cgeocaches.this, cache, null, reason, handler);
+					base.storeCache(app, cgeocaches.this, cache, null, reason, null);
 
 					handler.sendEmptyMessage(cacheList.indexOf(cache));
 
@@ -2069,33 +2075,40 @@ public class cgeocaches extends AbstractListActivity {
 				}
 				cgResponse responseFromWeb = base.request(false, "send2.cgeo.org", "/read.html", "GET", "code=" + cgBase.urlencode_rfc3986(deviceCode), 0, true);
 
-				if ((responseFromWeb.getStatusCode() == 200)
-						&& (responseFromWeb.getData().length() > 2)) {
+				if (responseFromWeb.getStatusCode() == 200) {
+					if (responseFromWeb.getData().length() > 2) {
 
-					String GCcode = responseFromWeb.getData();
+						String GCcode = responseFromWeb.getData();
 
-					delay = 1;
-					Message mes = new Message();
-					mes.what = 1;
-					mes.obj = GCcode;
-					handler.sendMessage(mes);
-					yield();
+						delay = 1;
+						Message mes = new Message();
+						mes.what = 1;
+						mes.obj = GCcode;
+						handler.sendMessage(mes);
+						yield();
 
-					base.storeCache(app, cgeocaches.this, null, GCcode, reason, null);
+						base.storeCache(app, cgeocaches.this, null, GCcode,
+								reason, null);
 
-					Message mes1 = new Message();
-					mes1.what = 2;
-					mes1.obj = GCcode;
-					handler.sendMessage(mes1);
-					yield();
-				} else {
-					delay = 0;
-					handler.sendEmptyMessage(0);
-					yield();
+						Message mes1 = new Message();
+						mes1.what = 2;
+						mes1.obj = GCcode;
+						handler.sendMessage(mes1);
+						yield();
+					} else if ("RG".equals(responseFromWeb.getData())) {
+						//Server returned RG (registration) and this device no longer registered.
+						settings.setWebNameCode(null, null);
+						needToStop = true;
+						handler.sendEmptyMessage(-3);
+						return;
+					} else {
+						delay = 0;
+						handler.sendEmptyMessage(0);
+						yield();
+					}
 				}
 				if (responseFromWeb.getStatusCode() != 200) {
 					needToStop = true;
-					settings.setWebNameCode(null, null);
 					handler.sendEmptyMessage(-2);
 					return;
 				}
@@ -2147,7 +2160,7 @@ public class cgeocaches extends AbstractListActivity {
 				geo = app.removeGeo();
 			}
 
-			final ArrayList<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
+			final List<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
 			for (cgCache cache : cacheListTemp) {
 				if (checked > 0 && cache.statusChecked == false) {
 					continue;
@@ -2252,7 +2265,7 @@ public class cgeocaches extends AbstractListActivity {
             // We need our own HashMap because cgBase.LogTypes1 will give us localized and maybe
             // different strings than gc.com expects in the field note
             // We only need such logtypes that are possible to log via c:geo
-            HashMap<Integer, String> logTypes = new HashMap<Integer, String>();
+            Map<Integer, String> logTypes = new HashMap<Integer, String>();
             logTypes.put(cgBase.LOG_FOUND_IT, "Found it");
             logTypes.put(cgBase.LOG_DIDNT_FIND_IT, "Didn't find it");
             logTypes.put(cgBase.LOG_NOTE, "Write Note");
@@ -2375,7 +2388,7 @@ public class cgeocaches extends AbstractListActivity {
 			return;
 		}
 
-		final ArrayList<CharSequence> listsTitle = new ArrayList<CharSequence>();
+		final List<CharSequence> listsTitle = new ArrayList<CharSequence>();
 		for (cgList list : lists) {
 			listsTitle.add(list.title);
 		}
@@ -2421,7 +2434,7 @@ public class cgeocaches extends AbstractListActivity {
 	private class MoveHandler extends Handler {
 		@Override
 		public void handleMessage(Message msg) {
-			Thread threadPure = new geocachesLoadByOffline(loadCachesHandler, latitude, longitude, msg.what);
+			Thread threadPure = new geocachesLoadByOffline(loadCachesHandler, coords, msg.what);
 			threadPure.start();
 		}
 	}
@@ -2439,7 +2452,7 @@ public class cgeocaches extends AbstractListActivity {
 		public void run() {
 			int checked = adapter.getChecked();
 			if (checked > 0) {
-				final ArrayList<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
+				final List<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
 				for (cgCache cache : cacheListTemp) {
 					if (cache.statusChecked) {
 						app.moveToList(cache.geocode, listId);
@@ -2525,7 +2538,7 @@ public class cgeocaches extends AbstractListActivity {
 	}
 
 	public void goMap(View view) {
-		if (searchId == null || searchId == 0 || CollectionUtils.isEmpty(cacheList)) {
+		if (searchId == null || CollectionUtils.isEmpty(cacheList)) {
 			showToast(res.getString(R.string.warn_no_cache_coord));
 
 			return;
@@ -2533,7 +2546,7 @@ public class cgeocaches extends AbstractListActivity {
 
 		Intent mapIntent = new Intent(this, settings.getMapFactory().getMapClass());
 		mapIntent.putExtra("detail", false);
-		mapIntent.putExtra("searchid", searchId);
+		mapIntent.putExtra("searchid", searchId.toString());
 
 		startActivity(mapIntent);
 	}
@@ -2558,13 +2571,13 @@ public class cgeocaches extends AbstractListActivity {
 		context.startActivity(cachesIntent);
 	}
 
-	public static void startActivityCachesAround(final AbstractActivity context, final Double latitude, final Double longitude) {
+	public static void startActivityCachesAround(final AbstractActivity context, final Geopoint coords) {
 		cgeocaches cachesActivity = new cgeocaches();
 
 		Intent cachesIntent = new Intent(context, cachesActivity.getClass());
 		cachesIntent.putExtra("type", "coordinate");
-		cachesIntent.putExtra("latitude", latitude);
-		cachesIntent.putExtra("longitude", longitude);
+		cachesIntent.putExtra("latitude", coords.getLatitude());
+		cachesIntent.putExtra("longitude", coords.getLongitude());
 		cachesIntent.putExtra("cachetype", context.getSettings().cacheType);
 
 		context.startActivity(cachesIntent);

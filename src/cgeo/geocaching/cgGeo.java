@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -15,6 +16,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import cgeo.geocaching.geopoint.Geopoint;
 
 public class cgGeo {
 
@@ -34,16 +36,13 @@ public class cgGeo {
 	private Location locNet = null;
 	private long locGpsLast = 0L;
 	private boolean g4cRunning = false;
-	private Double lastGo4cacheLat = null;
-	private Double lastGo4cacheLon = null;
+	private Geopoint lastGo4cacheCoords = null;
 	public Location location = null;
 	public int gps = -1;
-	public Double latitudeNow = null;
-	public Double longitudeNow = null;
-	public Double latitudeBefore = null;
-	public Double longitudeBefore = null;
+	public Geopoint coordsNow = null;
+	public Geopoint coordsBefore = null;
 	public Double altitudeNow = null;
-	public Double bearingNow = null;
+	public Float bearingNow = null;
 	public Float speedNow = null;
 	public Float accuracyNow = null;
 	public Integer satellitesVisible = null;
@@ -86,8 +85,7 @@ public class cgGeo {
 	public void initGeo() {
 		location = null;
 		gps = -1;
-		latitudeNow = null;
-		longitudeNow = null;
+		coordsNow = null;
 		altitudeNow = null;
 		bearingNow = null;
 		speedNow = null;
@@ -283,16 +281,15 @@ public class cgGeo {
 		assign(locNet); // nothing else, using NET
 	}
 
-	private void assign(Double lat, Double lon) {
-		if (lat == null || lon == null) {
+	private void assign(final Geopoint coords) {
+		if (coords == null) {
 			return;
 		}
 
 		gps = -1;
-		latitudeNow = lat;
-		longitudeNow = lon;
+		coordsNow = coords;
 		altitudeNow = null;
-		bearingNow = Double.valueOf(0);
+		bearingNow = 0f;
 		speedNow = 0f;
 		accuracyNow = 999f;
 
@@ -318,9 +315,8 @@ public class cgGeo {
 			gps = -1;
 		}
 
-		latitudeNow = location.getLatitude();
-		longitudeNow = location.getLongitude();
-		app.setLastLoc(latitudeNow, longitudeNow);
+		coordsNow = new Geopoint(location.getLatitude(), location.getLongitude());
+		app.setLastLoc(coordsNow);
 
 		if (location.hasAltitude() && gps != -1) {
 			altitudeNow = location.getAltitude() + settings.altCorrection;
@@ -328,9 +324,9 @@ public class cgGeo {
 			altitudeNow = null;
 		}
 		if (location.hasBearing() && gps != -1) {
-			bearingNow = Double.valueOf(location.getBearing());
+			bearingNow = location.getBearing();
 		} else {
-			bearingNow = Double.valueOf(0);
+			bearingNow = 0f;
 		}
 		if (location.hasSpeed() && gps != -1) {
 			speedNow = location.getSpeed();
@@ -345,18 +341,16 @@ public class cgGeo {
 
 		if (gps == 1) {
 			// save travelled distance only when location is from GPS
-			if (latitudeBefore != null && longitudeBefore != null && latitudeNow != null && longitudeNow != null) {
-				final double dst = cgBase.getDistance(latitudeBefore, longitudeBefore, latitudeNow, longitudeNow);
+			if (coordsBefore != null && coordsNow != null) {
+				final float dst = coordsBefore.distanceTo(coordsNow);
 
-				if (Double.isNaN(dst) == false && dst > 0.005) {
+				if (dst > 0.005) {
 					distanceNow += dst;
 
-					latitudeBefore = latitudeNow;
-					longitudeBefore = longitudeNow;
+					coordsBefore = coordsNow;
 				}
-			} else if (latitudeBefore == null || longitudeBefore == null) { // values aren't initialized
-				latitudeBefore = latitudeNow;
-				longitudeBefore = longitudeNow;
+			} else if (coordsBefore == null) { // values aren't initialized
+				coordsBefore = coordsNow;
 			}
 		}
 
@@ -381,7 +375,7 @@ public class cgGeo {
 				return;
 			}
 
-			if (settings.publicLoc == 1 && (lastGo4cacheLat == null || lastGo4cacheLon == null || cgBase.getDistance(latitudeNow, longitudeNow, lastGo4cacheLat, lastGo4cacheLon) > 0.75)) {
+			if (settings.publicLoc == 1 && (lastGo4cacheCoords == null || coordsNow.distanceTo(lastGo4cacheCoords) > 0.75)) {
 				g4cRunning = true;
 
 				final String host = "api.go4cache.com";
@@ -396,9 +390,9 @@ public class cgGeo {
 
 				final String username = settings.getUsername();
 				if (username != null) {
-					final HashMap<String, String> params = new HashMap<String, String>();
-					final String latStr = String.format((Locale) null, "%.6f", latitudeNow);
-					final String lonStr = String.format((Locale) null, "%.6f", longitudeNow);
+					final Map<String, String> params = new HashMap<String, String>();
+					final String latStr = String.format((Locale) null, "%.6f", coordsNow.getLatitude());
+					final String lonStr = String.format((Locale) null, "%.6f", coordsNow.getLongitude());
 					params.put("u", username);
 					params.put("lt", latStr);
 					params.put("ln", lonStr);
@@ -410,8 +404,7 @@ public class cgGeo {
 					final String res = base.request(false, host, path, method, params, false, false, false).getData();
 
 					if (StringUtils.isNotBlank(res)) {
-						lastGo4cacheLat = latitudeNow;
-						lastGo4cacheLon = longitudeNow;
+						lastGo4cacheCoords = coordsNow;
 					}
 				}
 			}
@@ -421,7 +414,7 @@ public class cgGeo {
 	}
 
 	public void lastLoc() {
-		assign(app.getLastLat(), app.getLastLon());
+		assign(app.getLastCoords());
 
 		Location lastGps = geoManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 

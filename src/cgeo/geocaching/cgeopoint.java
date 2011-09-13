@@ -1,10 +1,7 @@
 package cgeo.geocaching;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -14,11 +11,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -35,8 +30,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.geopoint.DistanceParser;
+import cgeo.geocaching.geopoint.Geopoint;
 
 public class cgeopoint extends AbstractActivity {
+	
+	public static final Pattern patternA = Pattern.compile("^([0-9\\.\\,]+)[ ]*m$", Pattern.CASE_INSENSITIVE); // m
+	public static final Pattern patternB = Pattern.compile("^([0-9\\.\\,]+)[ ]*km$", Pattern.CASE_INSENSITIVE); // km
+	public static final Pattern patternC = Pattern.compile("^([0-9\\.\\,]+)[ ]*ft$", Pattern.CASE_INSENSITIVE); // ft - 0.3048m
+	public static final Pattern patternD = Pattern.compile("^([0-9\\.\\,]+)[ ]*yd$", Pattern.CASE_INSENSITIVE); // yd - 0.9144m
+	public static final Pattern patternE = Pattern.compile("^([0-9\\.\\,]+)[ ]*mi$", Pattern.CASE_INSENSITIVE); // mi - 1609.344m
 
 	private static class DestinationHistoryAdapter extends ArrayAdapter<cgDestination> {
 		private LayoutInflater inflater = null;
@@ -61,14 +64,12 @@ public class cgeopoint extends AbstractActivity {
 					.findViewById(R.id.simple_way_point_latitude);
 			TextView date = (TextView) convertView.findViewById(R.id.date);
 
-			String lonString = cgBase.formatLongitude(loc.getLongitude(), true);
-			String latString = cgBase.formatLatitude(loc.getLatitude(), true);
+			String lonString = cgBase.formatLongitude(loc.getCoords().getLongitude(), true);
+			String latString = cgBase.formatLatitude(loc.getCoords().getLatitude(), true);
 
 			longitude.setText(lonString);
 			latitude.setText(latString);
-			CharSequence dateString = DateFormat.format("dd/MM/yy kk:mm",
-					loc.getDate());
-			date.setText(dateString);
+			date.setText(cgBase.formatShortDateTime(getContext(), loc.getDate()));
 
 			return convertView;
 		}
@@ -84,8 +85,8 @@ public class cgeopoint extends AbstractActivity {
 
 	private cgGeo geo = null;
 	private cgUpdateLoc geoUpdate = new update();
-	private EditText latEdit = null;
-	private EditText lonEdit = null;
+	private Button latButton = null;
+	private Button lonButton = null;
 	private boolean changed = false;
 	private List<cgDestination> historyOfSearchedLocations;
 	private DestinationHistoryAdapter destionationHistoryAdapter;
@@ -130,11 +131,7 @@ public class cgeopoint extends AbstractActivity {
 					long arg3) {
 				Object selection = arg0.getItemAtPosition(arg2);
 				if (selection instanceof cgDestination) {
-					List<Double> coords = new ArrayList<Double>(2);
-					coords.add(((cgDestination) selection).getLatitude());
-					coords.add(((cgDestination) selection).getLongitude());
-
-					navigateTo(coords);
+					navigateTo(((cgDestination) selection).getCoords());
 				}
 			}
 		});
@@ -240,35 +237,42 @@ public class cgeopoint extends AbstractActivity {
 			geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
 		}
 
-		EditText latitudeEdit = (EditText) findViewById(R.id.latitude);
-		latitudeEdit.setOnKeyListener(new View.OnKeyListener() {
+		latButton = (Button) findViewById(R.id.buttonLatitude);
+		lonButton = (Button) findViewById(R.id.buttonLongitude);
 
-			public boolean onKey(View v, int i, KeyEvent k) {
-				changed = true;
-
-				return false;
-			}
-		});
-
-		EditText longitudeEdit = (EditText) findViewById(R.id.longitude);
-		longitudeEdit.setOnKeyListener(new View.OnKeyListener() {
-
-			public boolean onKey(View v, int i, KeyEvent k) {
-				changed = true;
-
-				return false;
-			}
-		});
+		latButton.setOnClickListener(new coordDialogListener());
+		lonButton.setOnClickListener(new coordDialogListener());
 
 		if (prefs.contains("anylatitude") && prefs.contains("anylongitude")) {
-			latitudeEdit.setText(cgBase.formatLatitude(Double.valueOf(prefs.getFloat("anylatitude", 0f)), true));
-			longitudeEdit.setText(cgBase.formatLongitude(Double.valueOf(prefs.getFloat("anylongitude", 0f)), true));
+			latButton.setText(cgBase.formatLatitude(Double.valueOf(prefs.getFloat("anylatitude", 0f)), true));
+			lonButton.setText(cgBase.formatLongitude(Double.valueOf(prefs.getFloat("anylongitude", 0f)), true));
 		}
 
 		Button buttonCurrent = (Button) findViewById(R.id.current);
 		buttonCurrent.setOnClickListener(new currentListener());
 
 		getDestionationHistoryAdapter().notifyDataSetChanged();
+	}
+	
+	private class coordDialogListener implements View.OnClickListener {
+
+		public void onClick(View arg0) {
+			Geopoint gp = null;
+			if (latButton.getText().length() > 0 && lonButton.getText().length() > 0) {
+				gp = new Geopoint(latButton.getText().toString() + " " + lonButton.getText().toString());
+			}
+			cgeocoords coordsDialog = new cgeocoords(cgeopoint.this, settings, gp, geo);
+			coordsDialog.setCancelable(true);
+			coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
+				@Override
+				public void update(Geopoint gp) {
+					latButton.setText(cgBase.formatLatitude(gp.getLatitude(), true));
+					lonButton.setText(cgBase.formatLongitude(gp.getLongitude(), true));
+					changed = true;
+				}
+			});
+			coordsDialog.show();
+		}
 	}
 
 	@Override
@@ -292,9 +296,9 @@ public class cgeopoint extends AbstractActivity {
 		super.onPrepareOptionsMenu(menu);
 
 		try {
-			ArrayList<Double> coords = getDestination();
+			final Geopoint coords = getDestination();
 
-			if (coords != null && coords.get(0) != null && coords.get(1) != null) {
+			if (coords != null) {
 				menu.findItem(0).setVisible(true);
 				menu.findItem(2).setVisible(true);
 				menu.findItem(5).setVisible(true);
@@ -316,9 +320,9 @@ public class cgeopoint extends AbstractActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		final int menuItem = item.getItemId();
 
-		ArrayList<Double> coords = getDestination();
+		final Geopoint coords = getDestination();
 
-		if(coords != null && !coords.isEmpty())
+		if(coords != null)
 		{
 			addToHistory(coords);
 		}
@@ -338,11 +342,10 @@ public class cgeopoint extends AbstractActivity {
 		return NavigationAppFactory.onMenuItemSelected(item, geo, this, res, null, null, null, coords);
 	}
 
-	private void addToHistory(ArrayList<Double> coords) {
+	private void addToHistory(final Geopoint coords) {
 		// Add locations to history
 		cgDestination loc = new cgDestination();
-		loc.setLatitude(coords.get(0));
-		loc.setLongitude(coords.get(1));
+		loc.setCoords(coords);
 
 		if(!getHistoryOfSearchedLocations().contains(loc))
 		{
@@ -397,8 +400,8 @@ public class cgeopoint extends AbstractActivity {
 		navigateTo(getDestination());
 	}
 
-	private void navigateTo(List<Double> coords) {
-		if (coords == null || coords.get(0) == null || coords.get(1) == null) {
+	private void navigateTo(Geopoint geopoint) {
+		if (geopoint == null) {
 			showToast(res.getString(R.string.err_location_unknown));
 			return;
 		}
@@ -406,8 +409,8 @@ public class cgeopoint extends AbstractActivity {
 		cgeonavigate navigateActivity = new cgeonavigate();
 
 		Intent navigateIntent = new Intent(this, navigateActivity.getClass());
-		navigateIntent.putExtra("latitude", coords.get(0));
-		navigateIntent.putExtra("longitude", coords.get(1));
+		navigateIntent.putExtra("latitude", geopoint.getLatitude());
+		navigateIntent.putExtra("longitude", geopoint.getLongitude());
 		navigateIntent.putExtra("geocode", "");
 		navigateIntent.putExtra("name", "Some destination");
 
@@ -415,9 +418,9 @@ public class cgeopoint extends AbstractActivity {
 	}
 
 	private void cachesAround() {
-		ArrayList<Double> coords = getDestination();
+		final Geopoint coords = getDestination();
 
-		if (coords == null || coords.get(0) == null || coords.get(1) == null) {
+		if (coords == null) {
 			showToast(res.getString(R.string.err_location_unknown));
 			return;
 		}
@@ -427,8 +430,8 @@ public class cgeopoint extends AbstractActivity {
 		Intent cachesIntent = new Intent(this, cachesActivity.getClass());
 
 		cachesIntent.putExtra("type", "coordinate");
-		cachesIntent.putExtra("latitude", coords.get(0));
-		cachesIntent.putExtra("longitude", coords.get(1));
+		cachesIntent.putExtra("latitude", coords.getLatitude());
+		cachesIntent.putExtra("longitude", coords.getLongitude());
 		cachesIntent.putExtra("cachetype", settings.cacheType);
 
 		startActivity(cachesIntent);
@@ -445,15 +448,8 @@ public class cgeopoint extends AbstractActivity {
 			}
 
 			try {
-				if (latEdit == null) {
-					latEdit = (EditText) findViewById(R.id.latitude);
-				}
-				if (lonEdit == null) {
-					lonEdit = (EditText) findViewById(R.id.longitude);
-				}
-
-				latEdit.setHint(cgBase.formatLatitude(geo.latitudeNow, false));
-				lonEdit.setHint(cgBase.formatLongitude(geo.longitudeNow, false));
+				latButton.setHint(cgBase.formatLatitude(geo.coordsNow.getLatitude(), false));
+				lonButton.setHint(cgBase.formatLongitude(geo.coordsNow.getLongitude(), false));
 			} catch (Exception e) {
 				Log.w(cgSettings.tag, "Failed to update location.");
 			}
@@ -463,27 +459,26 @@ public class cgeopoint extends AbstractActivity {
 	private class currentListener implements View.OnClickListener {
 
 		public void onClick(View arg0) {
-			if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null) {
+			if (geo == null || geo.coordsNow == null) {
 				showToast(res.getString(R.string.err_point_unknown_position));
 				return;
 			}
 
-			((EditText) findViewById(R.id.latitude)).setText(cgBase.formatLatitude(geo.latitudeNow, true));
-			((EditText) findViewById(R.id.longitude)).setText(cgBase.formatLongitude(geo.longitudeNow, true));
+			latButton.setText(cgBase.formatLatitude(geo.coordsNow.getLatitude(), true));
+			lonButton.setText(cgBase.formatLongitude(geo.coordsNow.getLongitude(), true));
 
 			changed = false;
 		}
 	}
 
-	private ArrayList<Double> getDestination() {
-		ArrayList<Double> coords = new ArrayList<Double>();
-		Double latitude = null;
-		Double longitude = null;
+	private Geopoint getDestination() {
+		Geopoint result = null;
+		Geopoint coords = null;
 
 		String bearingText = ((EditText) findViewById(R.id.bearing)).getText().toString();
 		String distanceText = ((EditText) findViewById(R.id.distance)).getText().toString();
-		String latText = ((EditText) findViewById(R.id.latitude)).getText().toString();
-		String lonText = ((EditText) findViewById(R.id.longitude)).getText().toString();
+		String latText = latButton.getText().toString();
+		String lonText = lonButton.getText().toString();
 
 		if (StringUtils.isBlank(bearingText) && StringUtils.isBlank(distanceText)
 				&& StringUtils.isBlank(latText) && StringUtils.isBlank(lonText)) {
@@ -493,8 +488,8 @@ public class cgeopoint extends AbstractActivity {
 
 		if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
 			// latitude & longitude
-			HashMap<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
-			HashMap<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lon");
+			Map<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
+			Map<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lon");
 
 			if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
 				showToast(res.getString(R.string.err_parse_lat));
@@ -506,16 +501,14 @@ public class cgeopoint extends AbstractActivity {
 				return null;
 			}
 
-			latitude = (Double) latParsed.get("coordinate");
-			longitude = (Double) lonParsed.get("coordinate");
+			coords = new Geopoint((Double) latParsed.get("coordinate"), (Double) lonParsed.get("coordinate"));
 		} else {
-			if (geo == null || geo.latitudeNow == null || geo.longitudeNow == null) {
+			if (geo == null || geo.coordsNow == null) {
 				showToast(res.getString(R.string.err_point_curr_position_unavailable));
 				return null;
 			}
 
-			latitude = geo.latitudeNow;
-			longitude = geo.longitudeNow;
+			coords = geo.coordsNow;
 		}
 
 		if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
@@ -531,13 +524,8 @@ public class cgeopoint extends AbstractActivity {
 				return null;
 			}
 
+<<<<<<< HEAD
 			Double distance = null; // km
-
-			final Pattern patternA = Pattern.compile("^([0-9\\.\\,]+)[ ]*m$", Pattern.CASE_INSENSITIVE); // m
-			final Pattern patternB = Pattern.compile("^([0-9\\.\\,]+)[ ]*km$", Pattern.CASE_INSENSITIVE); // km
-			final Pattern patternC = Pattern.compile("^([0-9\\.\\,]+)[ ]*ft$", Pattern.CASE_INSENSITIVE); // ft - 0.3048m
-			final Pattern patternD = Pattern.compile("^([0-9\\.\\,]+)[ ]*yd$", Pattern.CASE_INSENSITIVE); // yd - 0.9144m
-			final Pattern patternE = Pattern.compile("^([0-9\\.\\,]+)[ ]*mi$", Pattern.CASE_INSENSITIVE); // mi - 1609.344m
 
 			Matcher matcherA = patternA.matcher(distanceText);
 			Matcher matcherB = patternB.matcher(distanceText);
@@ -568,43 +556,41 @@ public class cgeopoint extends AbstractActivity {
 			}
 
 			if (distance == null) {
+=======
+			double distance;
+			try {
+			    distance = DistanceParser.parseDistance(distanceText, settings.units);
+			} catch (NumberFormatException e) {
+>>>>>>> refs/remotes/upstream/master
 				showToast(res.getString(R.string.err_parse_dist));
 				return null;
 			}
 
-			Double latParsed = null;
-			Double lonParsed = null;
+			final Geopoint coordsDst = coords.project(bearing, distance);
 
-			HashMap<String, Double> coordsDst = cgBase.getRadialDistance(latitude, longitude, bearing, distance);
-
-			latParsed = coordsDst.get("latitude");
-			lonParsed = coordsDst.get("longitude");
-
-			if (latParsed == null || lonParsed == null) {
+			if (coordsDst == null) {
 				showToast(res.getString(R.string.err_point_location_error));
 				return null;
 			}
 
-			coords.add(0, (Double) latParsed);
-			coords.add(1, (Double) lonParsed);
-		} else if (latitude != null && longitude != null) {
-			coords.add(0, latitude);
-			coords.add(1, longitude);
+			result = coordsDst;
+		} else if (coords != null) {
+			result = coords;
 		} else {
 			return null;
 		}
 
-		saveCoords(coords.get(0), coords.get(1));
+		saveCoords(result);
 
-		return coords;
+		return result;
 	}
 
-	private void saveCoords(Double latitude, Double longitude) {
-		if (changed && latitude != null && longitude != null) {
+	private void saveCoords(final Geopoint coords) {
+		if (changed && coords != null) {
 			SharedPreferences.Editor edit = prefs.edit();
 
-			edit.putFloat("anylatitude", latitude.floatValue());
-			edit.putFloat("anylongitude", longitude.floatValue());
+			edit.putFloat("anylatitude", (float) coords.getLatitude());
+			edit.putFloat("anylongitude", (float) coords.getLongitude());
 
 			edit.commit();
 		} else {

@@ -3,10 +3,11 @@ package cgeo.geocaching;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class cgOAuth {
-	public static String signOAuth(String host, String path, String method, boolean https, HashMap<String, String> params, String token, String tokenSecret) {
+	public static String signOAuth(String host, String path, String method, boolean https, Map<String, String> params, String token, String tokenSecret) {
 		String paramsDone = "";
 		if (method.equalsIgnoreCase("GET") == false && method.equalsIgnoreCase("POST") == false) {
 			method = "POST";
@@ -32,7 +33,7 @@ public class cgOAuth {
 		params.keySet().toArray(keys);
 		Arrays.sort(keys);
 
-		ArrayList<String> paramsEncoded = new ArrayList<String>();
+		List<String> paramsEncoded = new ArrayList<String>();
 		for (String key : keys) {
 			String value = params.get(key);
 			paramsEncoded.add(key + "=" + cgBase.urlencode_rfc3986(value));

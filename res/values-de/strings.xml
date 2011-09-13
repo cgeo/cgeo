@@ -198,6 +198,8 @@
   <string name="err_parse_lon">c:geo konnte den Längengrad nicht verarbeiten.</string>
   <string name="err_parse_bear">c:geo konnte die Richtung nicht verarbeiten.</string>
   <string name="err_parse_dist">c:geo konnte die Entfernung nicht verarbeiten.</string>
+  <string name="err_parse_lat_lon">c:geo konnte den Breiten- oder Längengrad nicht verarbeiten.</string>
+  <string name="err_invalid_lat_lon">Ungültiger Breiten- oder Längengrad.</string>
 
   <string name="err_fieldnotes_export_failed">Exportieren der Field Notes fehlgeschlagen.</string>
 
@@ -673,6 +675,7 @@
   <string name="search_caches_near">Caches in der Nähe</string>
   <string name="search_address_started">Suche nach Orten</string>
   <string name="search_address_result">Gefundene Orte</string>
+  <string name="search_own_caches">Meine Caches suchen</string>
 
   <!-- trackable -->
   <string name="trackable">Trackable</string>

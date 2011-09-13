@@ -2,7 +2,12 @@ package cgeo.geocaching.mapcommon;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.UUID;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -20,8 +25,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
+import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.ImageView.ScaleType;
+import android.widget.ViewSwitcher.ViewFactory;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
@@ -36,16 +45,17 @@ import cgeo.geocaching.cgUser;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.mapinterfaces.ActivityImpl;
 import cgeo.geocaching.mapinterfaces.CacheOverlayItemImpl;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
 import cgeo.geocaching.mapinterfaces.MapControllerImpl;
 import cgeo.geocaching.mapinterfaces.MapFactory;
 import cgeo.geocaching.mapinterfaces.MapViewImpl;
+import cgeo.geocaching.mapinterfaces.OnDragListener;
 import cgeo.geocaching.mapinterfaces.UserOverlayItemImpl;
-import cgeo.geocaching.utils.CollectionUtils;
 
-public class cgeomap extends MapBase {
+public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 
 	private static final int MENU_SELECT_MAPVIEW = 1;
 	private static final int MENU_MAP_LIVE = 2;
@@ -74,14 +84,13 @@ public class cgeomap extends MapBase {
 	private cgUpdateDir dirUpdate = new UpdateDir();
 	// from intent
 	private boolean fromDetailIntent = false;
-	private Long searchIdIntent = null;
+	private String searchIdIntent = null;
 	private String geocodeIntent = null;
-	private Double latitudeIntent = null;
-	private Double longitudeIntent = null;
+	private Geopoint coordsIntent = null;
 	private String waypointTypeIntent = null;
 	private int[] mapStateIntent = null;
 	// status data
-	private Long searchId = null;
+	private UUID searchId = null;
 	private String token = null;
 	private boolean noMapTokenShowed = false;
 	// map status data
@@ -113,17 +122,17 @@ public class cgeomap extends MapBase {
 	private cgMapMyOverlay overlayMyLoc = null;
 	// data for overlays
 	private int cachesCnt = 0;
-	private HashMap<Integer, Drawable> iconsCache = new HashMap<Integer, Drawable>();
-	private ArrayList<cgCache> caches = new ArrayList<cgCache>();
-	private ArrayList<cgUser> users = new ArrayList<cgUser>();
-	private ArrayList<cgCoord> coordinates = new ArrayList<cgCoord>();
+	private Map<Integer, Drawable> iconsCache = new HashMap<Integer, Drawable>();
+	private List<cgCache> caches = new ArrayList<cgCache>();
+	private List<cgUser> users = new ArrayList<cgUser>();
+	private List<cgCoord> coordinates = new ArrayList<cgCoord>();
 	// storing for offline
 	private ProgressDialog waitDialog = null;
 	private int detailTotal = 0;
 	private int detailProgress = 0;
 	private Long detailProgressTime = 0L;
 	// views
-	private ImageView myLocSwitch = null;
+	private ImageSwitcher myLocSwitch = null;
 	// other things
 	private boolean live = true; // live map (live, dead) or rest (displaying caches on map)
 	private boolean liveChanged = false; // previous state for loadTimer
@@ -265,6 +274,7 @@ public class cgeomap extends MapBase {
 		mapView.setBuiltInZoomControls(true);
 		mapView.displayZoomControls(true);
 		mapView.preLoad();
+		mapView.setOnDragListener(this);
 
 		// initialize overlays
 		mapView.clearOverlays();
@@ -302,26 +312,24 @@ public class cgeomap extends MapBase {
 		Bundle extras = activity.getIntent().getExtras();
 		if (extras != null) {
 			fromDetailIntent = extras.getBoolean("detail");
-			searchIdIntent = extras.getLong("searchid");
+			searchIdIntent = extras.getString("searchid");
 			geocodeIntent = extras.getString("geocode");
-			latitudeIntent = extras.getDouble("latitude");
-			longitudeIntent = extras.getDouble("longitude");
+			final double latitudeIntent = extras.getDouble("latitude");
+			final double longitudeIntent = extras.getDouble("longitude");
+			coordsIntent = new Geopoint(latitudeIntent, longitudeIntent);
 			waypointTypeIntent = extras.getString("wpttype");
 			mapStateIntent = extras.getIntArray("mapstate");
 
-			if (searchIdIntent == 0L) {
+			if ("".equals(searchIdIntent)) {
 				searchIdIntent = null;
 			}
-			if (latitudeIntent == 0.0) {
-				latitudeIntent = null;
-			}
-			if (longitudeIntent == 0.0) {
-				longitudeIntent = null;
+			if (coordsIntent.getLatitude() == 0.0 || coordsIntent.getLongitude() == 0.0) {
+				coordsIntent = null;
 			}
 		}
 
 		// live or death
-		if (searchIdIntent == null && geocodeIntent == null && (latitudeIntent == null || longitudeIntent == null)) {
+		if (searchIdIntent == null && geocodeIntent == null && coordsIntent == null) {
 			live = true;
 		} else {
 			live = false;
@@ -336,12 +344,18 @@ public class cgeomap extends MapBase {
 		} else {
 			followMyLocation = 1 == mapStateIntent[3] ? true : false;
 		}
-		if (geocodeIntent != null || searchIdIntent != null || (latitudeIntent != null && longitudeIntent != null) || mapStateIntent != null) {
-			centerMap(geocodeIntent, searchIdIntent, latitudeIntent, longitudeIntent, mapStateIntent);
+		if (geocodeIntent != null || searchIdIntent != null || coordsIntent != null || mapStateIntent != null) {
+			centerMap(geocodeIntent, searchIdIntent, coordsIntent, mapStateIntent);
 		}
 
+		// prepare my location button
+		myLocSwitch = (ImageSwitcher) activity.findViewById(R.id.my_position);
+		myLocSwitch.setFactory(this);
+		myLocSwitch.setInAnimation(activity, android.R.anim.fade_in);
+		myLocSwitch.setOutAnimation(activity, android.R.anim.fade_out);
+		myLocSwitch.setOnClickListener(new MyLocationListener());
+		switchMyLocationButton();
 
-		setMyLoc(null);
 		startTimer();
 	}
 
@@ -506,7 +520,7 @@ public class cgeomap extends MapBase {
 			}
 
 			item = menu.findItem(MENU_STORE_CACHES); // store loaded
-			if (live && !isLoading() && app.getNotOfflineCount(searchId) > 0 && CollectionUtils.isNotEmpty(caches)) {
+			if (live && !isLoading() && app.getNotOfflineCount(searchId) > 0 && caches != null && caches.size() > 0) {
 				item.setEnabled(true);
 			} else {
 				item.setEnabled(false);
@@ -559,11 +573,11 @@ public class cgeomap extends MapBase {
 			searchIdIntent = null;
 		} else if (id == MENU_STORE_CACHES) {
 			if (live && !isLoading() && caches != null && !caches.isEmpty()) {
-				final ArrayList<String> geocodes = new ArrayList<String>();
+				final List<String> geocodes = new ArrayList<String>();
 
-				ArrayList<cgCache> cachesProtected = new ArrayList<cgCache>(caches);
+				List<cgCache> cachesProtected = new ArrayList<cgCache>(caches);
 				try {
-					if (CollectionUtils.isNotEmpty(cachesProtected)) {
+					if (cachesProtected.size() > 0) {
 						final GeoPointImpl mapCenter = mapView.getMapViewCenter();
 						final int mapCenterLat = mapCenter.getLatitudeE6();
 						final int mapCenterLon = mapCenter.getLongitudeE6();
@@ -571,8 +585,8 @@ public class cgeomap extends MapBase {
 						final int mapSpanLon = mapView.getLongitudeSpan();
 
 						for (cgCache oneCache : cachesProtected) {
-							if (oneCache != null && oneCache.latitude != null && oneCache.longitude != null) {
-								if (cgBase.isCacheInViewPort(mapCenterLat, mapCenterLon, mapSpanLat, mapSpanLon, oneCache.latitude, oneCache.longitude) && app.isOffline(oneCache.geocode, null) == false) {
+							if (oneCache != null && oneCache.coords != null) {
+								if (cgBase.isCacheInViewPort(mapCenterLat, mapCenterLon, mapSpanLat, mapSpanLon, oneCache.coords) && app.isOffline(oneCache.geocode, null) == false) {
 									geocodes.add(oneCache.geocode);
 								}
 							}
@@ -656,8 +670,10 @@ public class cgeomap extends MapBase {
 				mapIntent.putExtra("detail", fromDetailIntent);
 				mapIntent.putExtra("searchid", searchIdIntent);
 				mapIntent.putExtra("geocode", geocodeIntent);
-				mapIntent.putExtra("latitude", latitudeIntent);
-				mapIntent.putExtra("longitude", longitudeIntent);
+				if (coordsIntent != null) {
+					mapIntent.putExtra("latitude", coordsIntent.getLatitude());
+					mapIntent.putExtra("longitude", coordsIntent.getLongitude());
+				}
 				mapIntent.putExtra("wpttype", waypointTypeIntent);
 				int[] mapState = new int[4];
 				GeoPointImpl mapCenter = mapView.getMapViewCenter();
@@ -737,7 +753,7 @@ public class cgeomap extends MapBase {
 			return;
 		}
 
-		centerMap(geo.latitudeNow, geo.longitudeNow);
+		centerMap(geo.coordsNow);
 	}
 
 	// class: update location
@@ -760,7 +776,7 @@ public class cgeomap extends MapBase {
 					overlayMyLoc.setCoordinates(geo.location);
 				}
 
-				if (geo.latitudeNow != null && geo.longitudeNow != null) {
+				if (geo.coordsNow != null) {
 					if (followMyLocation) {
 						myLocationInMiddle();
 					} else {
@@ -772,12 +788,12 @@ public class cgeomap extends MapBase {
 					if (geo.bearingNow != null) {
 						overlayMyLoc.setHeading(geo.bearingNow);
 					} else {
-						overlayMyLoc.setHeading(Double.valueOf(0));
+						overlayMyLoc.setHeading(0f);
 					}
 					repaintRequired = true;
 				}
 
-				if (repaintRequired) {
+				if (repaintRequired && mapView != null) {
 					mapView.repaintRequired(overlayMyLoc);
 				}
 
@@ -804,7 +820,7 @@ public class cgeomap extends MapBase {
 	}
 
 	public void startTimer() {
-		if (latitudeIntent != null && longitudeIntent != null) {
+		if (coordsIntent != null) {
 			// display just one point
 			(new DisplayPointThread()).start();
 		} else {
@@ -1060,8 +1076,8 @@ public class cgeomap extends MapBase {
 
 				// stage 1 - pull and render from the DB only
 
-				if (fromDetailIntent) {
-					searchId = searchIdIntent;
+				if (fromDetailIntent || StringUtils.isNotEmpty(searchIdIntent)) {
+					searchId = UUID.fromString(searchIdIntent);
 				} else {
 					if (!live || settings.maplive == 0) {
 						searchId = app.getStoredInViewport(centerLat, centerLon, spanLat, spanLon, settings.cacheType);
@@ -1189,7 +1205,7 @@ public class cgeomap extends MapBase {
 					return;
 				}
 
-				HashMap<String, String> params = new HashMap<String, String>();
+				Map<String, String> params = new HashMap<String, String>();
 				params.put("usertoken", token);
 				params.put("latitude-min", String.format((Locale) null, "%.6f", latMin));
 				params.put("latitude-max", String.format((Locale) null, "%.6f", latMax));
@@ -1251,8 +1267,8 @@ public class cgeomap extends MapBase {
 				}
 
 				// display caches
-				final ArrayList<cgCache> cachesProtected = new ArrayList<cgCache>(caches);
-				final ArrayList<CacheOverlayItemImpl> items = new ArrayList<CacheOverlayItemImpl>();
+				final List<cgCache> cachesProtected = new ArrayList<cgCache>(caches);
+				final List<CacheOverlayItemImpl> items = new ArrayList<CacheOverlayItemImpl>();
 
 				if (cachesProtected != null && !cachesProtected.isEmpty()) {
 					int icon = 0;
@@ -1267,7 +1283,7 @@ public class cgeomap extends MapBase {
 							return;
 						}
 
-						if (cacheOne.latitude == null && cacheOne.longitude == null) {
+						if (cacheOne.coords == null) {
 							continue;
 						}
 
@@ -1310,7 +1326,7 @@ public class cgeomap extends MapBase {
 
 							if (oneCache != null && oneCache.waypoints != null && !oneCache.waypoints.isEmpty()) {
 								for (cgWaypoint oneWaypoint : oneCache.waypoints) {
-									if (oneWaypoint.latitude == null && oneWaypoint.longitude == null) {
+									if (oneWaypoint.coords == null) {
 										continue;
 									}
 
@@ -1406,9 +1422,9 @@ public class cgeomap extends MapBase {
 	// display users of Go 4 Cache
 	private class DisplayUsersThread extends DoThread {
 
-		private ArrayList<cgUser> users = null;
+		private List<cgUser> users = null;
 
-		public DisplayUsersThread(ArrayList<cgUser> usersIn, long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
+		public DisplayUsersThread(List<cgUser> usersIn, long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
 			super(centerLatIn, centerLonIn, spanLatIn, spanLonIn);
 
 			users = usersIn;
@@ -1425,7 +1441,7 @@ public class cgeomap extends MapBase {
 				}
 
 				// display users
-				ArrayList<UserOverlayItemImpl> items = new ArrayList<UserOverlayItemImpl>();
+				List<UserOverlayItemImpl> items = new ArrayList<UserOverlayItemImpl>();
 
 				int counter = 0;
 				UserOverlayItemImpl item = null;
@@ -1435,7 +1451,7 @@ public class cgeomap extends MapBase {
 						return;
 					}
 
-					if (userOne.latitude == null && userOne.longitude == null) {
+					if (userOne.coords == null) {
 						continue;
 					}
 
@@ -1465,11 +1481,10 @@ public class cgeomap extends MapBase {
 				return;
 			}
 
-			if (latitudeIntent != null && longitudeIntent != null) {
+			if (coordsIntent != null) {
 				cgCoord coord = new cgCoord();
 				coord.type = "waypoint";
-				coord.latitude = latitudeIntent;
-				coord.longitude = longitudeIntent;
+				coord.coords = coordsIntent;
 				coord.name = "some place";
 
 				coordinates.add(coord);
@@ -1543,11 +1558,11 @@ public class cgeomap extends MapBase {
 	private class LoadDetails extends Thread {
 
 		private Handler handler = null;
-		private ArrayList<String> geocodes = null;
+		private List<String> geocodes = null;
 		private volatile boolean stop = false;
 		private long last = 0L;
 
-		public LoadDetails(Handler handlerIn, ArrayList<String> geocodesIn) {
+		public LoadDetails(Handler handlerIn, List<String> geocodesIn) {
 			handler = handlerIn;
 			geocodes = geocodesIn;
 		}
@@ -1616,8 +1631,8 @@ public class cgeomap extends MapBase {
 	}
 
 	// center map to desired location
-	private void centerMap(Double latitude, Double longitude) {
-		if (latitude == null || longitude == null) {
+	private void centerMap(final Geopoint coords) {
+		if (coords == null) {
 			return;
 		}
 		if (mapView == null) {
@@ -1627,18 +1642,18 @@ public class cgeomap extends MapBase {
 		if (!alreadyCentered) {
 			alreadyCentered = true;
 
-			mapController.setCenter(makeGeoPoint(latitude, longitude));
+			mapController.setCenter(makeGeoPoint(coords));
 		} else {
-			mapController.animateTo(makeGeoPoint(latitude, longitude));
+			mapController.animateTo(makeGeoPoint(coords));
 		}
 	}
 
 	// move map to view results of searchIdIntent
-	private void centerMap(String geocodeCenter, Long searchIdCenter, Double latitudeCenter, Double longitudeCenter, int[] mapState) {
+	private void centerMap(String geocodeCenter, String searchIdCenter, final Geopoint coordsCenter, int[] mapState) {
 
 		if (!centered && mapState != null) {
 			try {
-				mapController.setCenter(settings.getMapFactory().getGeoPointBase(mapState[0], mapState[1]));
+				mapController.setCenter(settings.getMapFactory().getGeoPointBase(new Geopoint(mapState[0] / 1.0e6, mapState[1] / 1.0e6)));
 				mapController.setZoom(mapState[2]);
 			} catch (Exception e) {
 				// nothing at all
@@ -1648,12 +1663,12 @@ public class cgeomap extends MapBase {
 			alreadyCentered = true;
 		} else if (!centered && (geocodeCenter != null || searchIdIntent != null)) {
 			try {
-				ArrayList<Object> viewport = null;
+				List<Object> viewport = null;
 
 				if (geocodeCenter != null) {
 					viewport = app.getBounds(geocodeCenter);
 				} else {
-					viewport = app.getBounds(searchIdCenter);
+					viewport = app.getBounds(UUID.fromString(searchIdCenter));
 				}
 
 				if (viewport == null) return;
@@ -1696,7 +1711,7 @@ public class cgeomap extends MapBase {
 				}
 
 				if (cnt != null && cnt > 0) {
-					mapController.setCenter(settings.getMapFactory().getGeoPointBase(centerLat, centerLon));
+					mapController.setCenter(settings.getMapFactory().getGeoPointBase(new Geopoint(centerLat, centerLon)));
 					if (Math.abs(maxLat - minLat) != 0 && Math.abs(maxLon - minLon) != 0) {
 						mapController.zoomToSpan(Math.abs(maxLat - minLat), Math.abs(maxLon - minLon));
 					}
@@ -1707,9 +1722,9 @@ public class cgeomap extends MapBase {
 
 			centered = true;
 			alreadyCentered = true;
-		} else if (!centered && latitudeCenter != null && longitudeCenter != null) {
+		} else if (!centered && coordsCenter != null) {
 			try {
-				mapController.setCenter(makeGeoPoint(latitudeCenter, longitudeCenter));
+				mapController.setCenter(makeGeoPoint(coordsCenter));
 			} catch (Exception e) {
 				// nothing at all
 			}
@@ -1720,52 +1735,34 @@ public class cgeomap extends MapBase {
 	}
 
 	// switch My Location button image
-	private void setMyLoc(Boolean status) {
-		if (myLocSwitch == null) {
-			myLocSwitch = (ImageView) activity.findViewById(R.id.my_position);
-		}
-
-		if (status == null) {
-			if (followMyLocation) {
-				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_on);
-			} else {
-				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_off);
-			}
+	private void switchMyLocationButton() {
+		if (followMyLocation) {
+			myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_on);
+			myLocationInMiddle();
 		} else {
-			if (status) {
-				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_on);
-			} else {
-				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_off);
-			}
+			myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_off);
 		}
-
-		myLocSwitch.setOnClickListener(new MyLocationListener());
 	}
 
 	// set my location listener
 	private class MyLocationListener implements View.OnClickListener {
-
 		public void onClick(View view) {
-			if (myLocSwitch == null) {
-				myLocSwitch = (ImageView) activity.findViewById(R.id.my_position);
-			}
+			followMyLocation = !followMyLocation;
+			switchMyLocationButton();
+		}
+	}
 
-			if (followMyLocation) {
-				followMyLocation = false;
-
-				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_off);
-			} else {
-				followMyLocation = true;
-				myLocationInMiddle();
-
-				myLocSwitch.setImageResource(R.drawable.actionbar_mylocation_on);
-			}
+	@Override
+	public void onDrag() {
+		if (followMyLocation) {
+			followMyLocation = false;
+			switchMyLocationButton();
 		}
 	}
 
 	// make geopoint
-	private GeoPointImpl makeGeoPoint(Double latitude, Double longitude) {
-		return settings.getMapFactory().getGeoPointBase((int) (latitude * 1e6), (int) (longitude * 1e6));
+	private GeoPointImpl makeGeoPoint(final Geopoint coords) {
+		return settings.getMapFactory().getGeoPointBase(coords);
 	}
 
 	// close activity and open homescreen
@@ -1776,5 +1773,13 @@ public class cgeomap extends MapBase {
 	// open manual entry
 	public void goManual(View view) {
 		ActivityMixin.goManual(activity, "c:geo-live-map");
+	}
+
+	@Override
+	public View makeView() {
+		ImageView imageView = new ImageView(activity);
+		imageView.setScaleType(ScaleType.CENTER);
+		imageView.setLayoutParams(new ImageSwitcher.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
+		return imageView;
 	}
 }

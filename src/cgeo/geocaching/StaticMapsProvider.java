@@ -123,12 +123,12 @@ public class StaticMapsProvider {
 	}
 
 	public static void downloadMaps(cgCache cache, cgSettings settings, Activity activity) {
-		if (settings.storeOfflineMaps != 1 || cache.latitude == null
-				|| cache.longitude == null || StringUtils.isNotBlank(cache.geocode)) {
+		if (settings.storeOfflineMaps != 1 || cache.coords == null || StringUtils.isBlank(cache.geocode)) {
 			return;
 		}
 
-		final String latlonMap = String.format((Locale) null, "%.6f", cache.latitude) + "," + String.format((Locale) null, "%.6f", cache.longitude);
+		final String latlonMap = String.format((Locale) null, "%.6f", cache.coords.getLatitude()) + "," +
+								 String.format((Locale) null, "%.6f", cache.coords.getLongitude());
 		final Display display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 		final int maxWidth = display.getWidth() - 25;
 		final int maxHeight = display.getHeight() - 25;
@@ -142,7 +142,7 @@ public class StaticMapsProvider {
 		final StringBuilder waypoints = new StringBuilder();
 		if (CollectionUtils.isNotEmpty(cache.waypoints)) {
 			for (cgWaypoint waypoint : cache.waypoints) {
-				if (waypoint.latitude == null && waypoint.longitude == null) {
+				if (waypoint.coords == null) {
 					continue;
 				}
 
@@ -151,9 +151,9 @@ public class StaticMapsProvider {
 				waypoints.append("marker_waypoint_");
 				waypoints.append(waypoint.type);
 				waypoints.append(".png%7C");
-				waypoints.append(String.format((Locale) null, "%.6f", waypoint.latitude));
+				waypoints.append(String.format((Locale) null, "%.6f", waypoint.coords.getLatitude()));
 				waypoints.append(',');
-				waypoints.append(String.format((Locale) null, "%.6f", waypoint.longitude));
+				waypoints.append(String.format((Locale) null, "%.6f", waypoint.coords.getLongitude()));
 			}
 		}
 

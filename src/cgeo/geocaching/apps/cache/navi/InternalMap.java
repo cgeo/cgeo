@@ -1,5 +1,7 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import java.util.UUID;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -8,6 +10,7 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.geopoint.Geopoint;
 
 class InternalMap extends AbstractInternalMap implements
 		NavigationApp {
@@ -19,7 +22,7 @@ class InternalMap extends AbstractInternalMap implements
 	@Override
 	public boolean invoke(cgGeo geo, Activity activity, Resources res,
 			cgCache cache,
-			Long searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
+			final UUID searchId, cgWaypoint waypoint, final Geopoint coords) {
 		cgSettings settings = getSettings(activity);
 		Intent mapIntent = new Intent(activity, settings.getMapFactory().getMapClass());
 		if (cache != null) {
@@ -28,11 +31,11 @@ class InternalMap extends AbstractInternalMap implements
 		}
 		if (searchId != null) {
 			mapIntent.putExtra("detail", true);
-			mapIntent.putExtra("searchid", searchId);
+			mapIntent.putExtra("searchid", searchId.toString());
 		}
 		if (waypoint != null) {
-			mapIntent.putExtra("latitude", waypoint.latitude);
-			mapIntent.putExtra("longitude", waypoint.longitude);
+			mapIntent.putExtra("latitude", waypoint.coords.getLatitude());
+			mapIntent.putExtra("longitude", waypoint.coords.getLongitude());
 			mapIntent.putExtra("wpttype", waypoint.type);
 		}
 

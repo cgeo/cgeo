@@ -9,6 +9,7 @@ import java.io.OutputStreamWriter;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -121,7 +122,7 @@ public class cgeoauth extends AbstractActivity {
 		startButton.setEnabled(true);
 		startButton.setOnClickListener(new startListener());
 
-		if (StringUtils.isNotBlank(OAtoken) && StringUtils.isNotBlank(OAtokenSecret)) {
+		if (StringUtils.isBlank(OAtoken) && StringUtils.isBlank(OAtokenSecret)) {
 			// start authorization process
 			startButton.setText(res.getString(R.string.auth_start));
 		} else {
@@ -204,7 +205,7 @@ public class cgeoauth extends AbstractActivity {
 						prefsEdit.commit();
 
 						try {
-							final HashMap<String, String> paramsPre = new HashMap<String, String>();
+							final Map<String, String> paramsPre = new HashMap<String, String>();
 							paramsPre.put("oauth_callback", "oob");
 
 							final String paramsBrowser = cgOAuth.signOAuth(host, pathAuthorize, "GET", true, paramsPre, OAtoken, OAtokenSecret);
@@ -242,7 +243,7 @@ public class cgeoauth extends AbstractActivity {
 		String lineOne = null;
 
 		try {
-			final HashMap<String, String> paramsPre = new HashMap<String, String>();
+			final Map<String, String> paramsPre = new HashMap<String, String>();
 			paramsPre.put("oauth_verifier", pinEntry.getText().toString());
 
 			int code = -1;

@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -32,7 +33,7 @@ public class cgeoimages extends AbstractActivity {
 	public static final int SPOILER_IMAGE = 2;
 
 	private int img_type;
-	private ArrayList<cgImage> images = new ArrayList<cgImage>();
+	private List<cgImage> images = new ArrayList<cgImage>();
 	private String geocode = null;
 	private String title = null;
 	private String url = null;
@@ -265,10 +266,9 @@ public class cgeoimages extends AbstractActivity {
 
 					public void onClick(View arg0) {
 						final String directoryTarget = Environment.getExternalStorageDirectory() + "/" + cgSettings.cache + "/" + "temp.jpg";
-						File file = new File(directoryTarget);
-						FileOutputStream fos;
+						final File file = new File(directoryTarget);
 						try {
-							fos = new FileOutputStream(file);
+							final FileOutputStream fos = new FileOutputStream(file);
 							image.getBitmap().compress(CompressFormat.JPEG, 100, fos);
 							fos.close();
 						} catch (Exception e) {

@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -23,7 +24,7 @@ public class LogTemplateProvider {
 			this.resourceId = resourceId;
 		}
 
-		abstract String getValue(cgBase base);
+		abstract String getValue(cgBase base, boolean offline);
 
 		public int getResourceId() {
 			return resourceId;
@@ -37,9 +38,9 @@ public class LogTemplateProvider {
 			return template;
 		}
 
-		protected String apply(String input, cgBase base) {
+		protected String apply(String input, cgBase base, boolean offline) {
 			if (input.contains("[" + template + "]")) {
-				return input.replaceAll("\\[" + template + "\\]", getValue(base));
+				return input.replaceAll("\\[" + template + "\\]", getValue(base, offline));
 			}
 			return input;
 		}
@@ -53,21 +54,21 @@ public class LogTemplateProvider {
 					new LogTemplate("DATE", R.string.init_signature_template_date) {
 
 				@Override
-				String getValue(final cgBase base) {
+				String getValue(final cgBase base, final boolean offline) {
 					return base.formatFullDate(System.currentTimeMillis());
 				}
 			},
 			new LogTemplate("TIME", R.string.init_signature_template_time) {
 
 				@Override
-				String getValue(final cgBase base) {
+				String getValue(final cgBase base, final boolean offline) {
 					return base.formatTime(System.currentTimeMillis());
 				}
 			},
             new LogTemplate("DATETIME", R.string.init_signature_template_datetime) {
 
                 @Override
-                String getValue(final cgBase base) {
+                String getValue(final cgBase base, final boolean offline) {
                     final long currentTime = System.currentTimeMillis();
                     return base.formatFullDate(currentTime) + " " + base.formatTime(currentTime);
                 }
@@ -75,16 +76,19 @@ public class LogTemplateProvider {
 			new LogTemplate("USER", R.string.init_signature_template_user) {
 
 				@Override
-				String getValue(final cgBase base) {
+				String getValue(final cgBase base, final boolean offline) {
 					return base.getUserName();
 				}
 			},
 			new LogTemplate("NUMBER", R.string.init_signature_template_number) {
 
 				@Override
-				String getValue(final cgBase base) {
+				String getValue(final cgBase base, final boolean offline) {
+					if (offline) {
+						return "";
+					}
 					String findCount = "";
-					final HashMap<String, String> params = new HashMap<String, String>();
+					final Map<String, String> params = new HashMap<String, String>();
 					final String page = base.request(false, "www.geocaching.com", "/email/", "GET", params, false, false, false).getData();
 					int current = parseFindCount(page);
 
@@ -108,13 +112,13 @@ public class LogTemplateProvider {
 		return null;
 	}
 
-	public static String applyTemplates(String signature, cgBase base) {
+	public static String applyTemplates(String signature, cgBase base, boolean offline) {
 		if (signature == null) {
 			return "";
 		}
 		String result = signature;
 		for (LogTemplate template : getTemplates()) {
-			result = template.apply(result, base);
+			result = template.apply(result, base, offline);
 		}
 		return result;
 	}

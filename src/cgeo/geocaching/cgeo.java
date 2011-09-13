@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
@@ -26,10 +27,12 @@ import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.CollectionUtils;
 
 public class cgeo extends AbstractActivity {
@@ -55,8 +58,7 @@ public class cgeo extends AbstractActivity {
 	private TextView countBubble = null;
 	private boolean cleanupRunning = false;
 	private int countBubbleCnt = 0;
-	private Double addLat = null;
-	private Double addLon = null;
+	private Geopoint addCoords = null;
 	private List<Address> addresses = null;
 	private boolean addressObtaining = false;
 	private boolean initialized = false;
@@ -105,8 +107,7 @@ public class cgeo extends AbstractActivity {
 						addText.append(address.getAdminArea());
 					}
 
-					addLat = geo.latitudeNow;
-					addLon = geo.longitudeNow;
+					addCoords = geo.coordsNow;
 
 					if (navLocation == null) {
 						navLocation = (TextView) findViewById(R.id.nav_location);
@@ -312,7 +313,7 @@ public class cgeo extends AbstractActivity {
 
 		// context menu for offline button
 		if (v.getId() == R.id.search_offline) {
-			ArrayList<cgList> cacheLists = app.getLists();
+			List<cgList> cacheLists = app.getLists();
 			int listCount = cacheLists.size();
 			menu.setHeaderTitle(res.getString(R.string.list_title));
 			for (int i = 0; i < listCount; i++) {
@@ -332,11 +333,11 @@ public class cgeo extends AbstractActivity {
 		menu.add(1, 3, 0, res.getString(R.string.mystery));
 
 		// then add all other cache types sorted alphabetically
-		HashMap<String, String> allTypes = new HashMap<String, String>(cgBase.cacheTypesInv);
+		Map<String, String> allTypes = new HashMap<String, String>(cgBase.cacheTypesInv);
 		allTypes.remove("traditional");
 		allTypes.remove("multi");
 		allTypes.remove("mystery");
-		ArrayList<String> sorted = new ArrayList<String>(allTypes.values());
+		List<String> sorted = new ArrayList<String>(allTypes.values());
 		Collections.sort(sorted);
 		for (String choice : sorted) {
 			menu.add(1, menu.size(), 0, choice);
@@ -451,32 +452,47 @@ public class cgeo extends AbstractActivity {
 
 		final View findOnMap = findViewById(R.id.map);
 		findOnMap.setClickable(true);
-		findOnMap.setOnClickListener(new cgeoFindOnMapListener());
+		findOnMap.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				cgeoFindOnMap(v);
+			}
+		});
 
 		final View findByOffline = findViewById(R.id.search_offline);
 		findByOffline.setClickable(true);
-		findByOffline.setOnClickListener(new cgeoFindByOfflineListener());
+		findByOffline.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				cgeoFindByOffline(v);
+			}
+		});
 		registerForContextMenu(findByOffline);
 
 		(new countBubbleUpdate()).start();
 
 		final View advanced = findViewById(R.id.advanced_button);
 		advanced.setClickable(true);
-		advanced.setOnClickListener(new cgeoSearchListener());
+		advanced.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				cgeoSearch(v);
+			}
+		});
 
 		final View any = findViewById(R.id.any_button);
 		any.setClickable(true);
-		any.setOnClickListener(new cgeoPointListener());
-
-		final View filter = findViewById(R.id.filter_button);
-		registerForContextMenu(filter);
-		filter.setOnClickListener(new View.OnClickListener() {
-
-			public void onClick(View view) {
-				openContextMenu(view);
+		any.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				cgeoPoint(v);
 			}
 		});
+
+		final View filter = findViewById(R.id.filter_button);
 		filter.setClickable(true);
+		registerForContextMenu(filter);
+		filter.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				openContextMenu(v);
+			}
+		});
 
 		setFilterTitle();
 	}
@@ -497,10 +513,14 @@ public class cgeo extends AbstractActivity {
 					navLocation = (TextView) findViewById(R.id.nav_location);
 				}
 
-				if (geo.latitudeNow != null && geo.longitudeNow != null) {
+				if (geo.coordsNow != null) {
 					View findNearest = findViewById(R.id.nearest);
 					findNearest.setClickable(true);
-					findNearest.setOnClickListener(new cgeoFindNearestListener());
+					findNearest.setOnClickListener(new OnClickListener() {
+						public void onClick(View v) {
+							cgeoFindNearest(v);
+						}
+					});
 					findNearest.setBackgroundResource(R.drawable.main_nearby);
 
 					String satellites = null;
@@ -532,10 +552,10 @@ public class cgeo extends AbstractActivity {
 					}
 
 					if (settings.showAddress == 1) {
-						if (addLat == null || addLon == null) {
+						if (addCoords == null) {
 							navLocation.setText(res.getString(R.string.loc_no_addr));
 						}
-						if (addLat == null || addLon == null || (cgBase.getDistance(geo.latitudeNow, geo.longitudeNow, addLat, addLon) > 0.5 && addressObtaining == false)) {
+						if (addCoords == null || (geo.coordsNow.distanceTo(addCoords) > 0.5 && addressObtaining == false)) {
 							(new obtainAddress()).start();
 						}
 					} else {
@@ -546,9 +566,9 @@ public class cgeo extends AbstractActivity {
 							} else {
 								humanAlt = String.format("%.0f", geo.altitudeNow) + " m";
 							}
-							navLocation.setText(cgBase.formatCoords(geo.latitudeNow, geo.longitudeNow, true) + " | " + humanAlt);
+							navLocation.setText(cgBase.formatCoords(geo.coordsNow, true) + " | " + humanAlt);
 						} else {
-							navLocation.setText(cgBase.formatCoords(geo.latitudeNow, geo.longitudeNow, true));
+							navLocation.setText(cgBase.formatCoords(geo.coordsNow, true));
 						}
 					}
 				} else {
@@ -568,50 +588,45 @@ public class cgeo extends AbstractActivity {
 		}
 	}
 
-	private class cgeoFindNearestListener implements View.OnClickListener {
-
-		public void onClick(View arg0) {
-			if (geo == null) {
-				return;
-			}
-
-			final Intent cachesIntent = new Intent(context, cgeocaches.class);
-			cachesIntent.putExtra("type", "nearest");
-			cachesIntent.putExtra("latitude", geo.latitudeNow);
-			cachesIntent.putExtra("longitude", geo.longitudeNow);
-			cachesIntent.putExtra("cachetype", settings.cacheType);
-			context.startActivity(cachesIntent);
+	public void cgeoFindOnMap(View v) {
+		findViewById(R.id.map).setPressed(true);
+		context.startActivity(new Intent(context, settings.getMapFactory().getMapClass()));
+	}
+	
+	public void cgeoFindNearest(View v) {
+		if (geo == null) {
+			return;
 		}
+
+		findViewById(R.id.nearest).setPressed(true);
+		final Intent cachesIntent = new Intent(context, cgeocaches.class);
+		cachesIntent.putExtra("type", "nearest");
+		cachesIntent.putExtra("latitude", geo.coordsNow.getLatitude());
+		cachesIntent.putExtra("longitude", geo.coordsNow.getLongitude());
+		cachesIntent.putExtra("cachetype", settings.cacheType);
+		context.startActivity(cachesIntent);
 	}
 
-	private class cgeoFindOnMapListener implements View.OnClickListener {
-
-		public void onClick(View arg0) {
-			context.startActivity(new Intent(context, settings.getMapFactory().getMapClass()));
-		}
+	public void cgeoFindByOffline(View v) {
+		findViewById(R.id.search_offline).setPressed(true);
+		final Intent cachesIntent = new Intent(context, cgeocaches.class);
+		cachesIntent.putExtra("type", "offline");
+		context.startActivity(cachesIntent);
 	}
 
-	private class cgeoFindByOfflineListener implements View.OnClickListener {
-
-		public void onClick(View arg0) {
-			final Intent cachesIntent = new Intent(context, cgeocaches.class);
-			cachesIntent.putExtra("type", "offline");
-			context.startActivity(cachesIntent);
-		}
+	public void cgeoSearch(View v) {
+		findViewById(R.id.advanced_button).setPressed(true);
+		context.startActivity(new Intent(context, cgeoadvsearch.class));
 	}
 
-	private class cgeoSearchListener implements View.OnClickListener {
-
-		public void onClick(View arg0) {
-			context.startActivity(new Intent(context, cgeoadvsearch.class));
-		}
+	public void cgeoPoint(View v) {
+		findViewById(R.id.any_button).setPressed(true);
+		context.startActivity(new Intent(context, cgeopoint.class));
 	}
-
-	private class cgeoPointListener implements View.OnClickListener {
-
-		public void onClick(View arg0) {
-			context.startActivity(new Intent(context, cgeopoint.class));
-		}
+	
+	public void cgeoFilter(View v) {
+		findViewById(R.id.filter_button).setPressed(true);
+		findViewById(R.id.filter_button).performClick();
 	}
 
 	private class countBubbleUpdate extends Thread {
@@ -692,7 +707,7 @@ public class cgeo extends AbstractActivity {
 			try {
 				Geocoder geocoder = new Geocoder(context, Locale.getDefault());
 
-				addresses = geocoder.getFromLocation(geo.latitudeNow, geo.longitudeNow, 1);
+				addresses = geocoder.getFromLocation(geo.coordsNow.getLatitude(), geo.coordsNow.getLongitude(), 1);
 			} catch (Exception e) {
 				Log.i(cgSettings.tag, "Failed to obtain address");
 			}

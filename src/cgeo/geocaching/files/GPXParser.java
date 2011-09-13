@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,6 +34,7 @@ import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgTrackable;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.geopoint.Geopoint;
 
 public abstract class GPXParser extends FileParser {
 
@@ -46,6 +48,8 @@ public abstract class GPXParser extends FileParser {
 		"http://www.groundspeak.com/cache/1/0/1", // PQ 1.0.1
 		"http://www.groundspeak.com/cache/1/0", // PQ 1.0
 	};
+
+	private static final String GSAK_NS = "http://www.gsak.net/xmlv1/5";
 
 	private static cgeoapplication app = null;
 	private int listId = 1;
@@ -63,6 +67,20 @@ public abstract class GPXParser extends FileParser {
 	private String name = null;
 	private String cmt = null;
 	private String desc = null;
+	protected String[] userData = new String[5]; // take 5 cells, that makes indexing 1..4 easier
+
+	private final class UserDataListener implements EndTextElementListener {
+		private int index;
+
+		public UserDataListener(int index) {
+			this.index = index;
+		}
+
+		@Override
+		public void end(String user) {
+			userData[index] = validate(user);
+		}
+	}
 
 	private static final class CacheAttributeTranslator {
 	    // List of cache attributes matching IDs used in GPX files.
@@ -197,7 +215,7 @@ public abstract class GPXParser extends FileParser {
 		return formatSimple.parse(input);
 	}
 
-	public long parse(final InputStream stream, Handler handlerIn) {
+	public UUID parse(final InputStream stream, Handler handlerIn) {
 		handler = handlerIn;
 
 		final RootElement root = new RootElement(namespace, "gpx");
@@ -209,11 +227,9 @@ public abstract class GPXParser extends FileParser {
 			@Override
 			public void start(Attributes attrs) {
 				try {
-					if (attrs.getIndex("lat") > -1) {
-						cache.latitude = new Double(attrs.getValue("lat"));
-					}
-					if (attrs.getIndex("lon") > -1) {
-						cache.longitude = new Double(attrs.getValue("lon"));
+					if (attrs.getIndex("lat") > -1 && attrs.getIndex("lon") > -1) {
+						cache.coords = new Geopoint(new Double(attrs.getValue("lat")),
+													new Double(attrs.getValue("lon")));
 					}
 				} catch (Exception e) {
 					Log.w(cgSettings.tag, "Failed to parse waypoint's latitude and/or longitude.");
@@ -234,7 +250,7 @@ public abstract class GPXParser extends FileParser {
 				}
 
 				if (StringUtils.isNotBlank(cache.geocode)
-						&& cache.latitude != null && cache.longitude != null
+						&& cache.coords != null
 						&& ((type == null && sym == null)
 						|| (type != null && type.indexOf("geocache") > -1)
 						|| (sym != null && sym.indexOf("geocache") > -1))) {
@@ -242,19 +258,25 @@ public abstract class GPXParser extends FileParser {
 					cache.reason = listId;
 					cache.detailed = true;
 
+					if (StringUtils.isBlank(cache.personalNote)) {
+						StringBuilder buffer = new StringBuilder();
+						for (int i = 0; i < userData.length; i++) {
+							if (StringUtils.isNotBlank(userData[i])) {
+								buffer.append(' ').append(userData[i]);
+							}
+						}
+						String note = buffer.toString().trim();
+						if (StringUtils.isNotBlank(note)) {
+							cache.personalNote = note;
+						}
+					}
+
 					app.addCacheToSearch(search, cache);
 				}
 
 				showFinishedMessage(handler, search);
 
-				type = null;
-				sym = null;
-				name = null;
-				desc = null;
-				cmt = null;
-
-				cache = null;
-				cache = new cgCache();
+				resetCache();
 			}
 		});
 
@@ -352,6 +374,24 @@ public abstract class GPXParser extends FileParser {
 		// for GPX 1.1 from extensions node
 		final Element cacheParent = getCacheParent(waypoint);
 
+
+		// GSAK extensions
+		final Element gsak = cacheParent.getChild(GSAK_NS, "wptExtension");
+		gsak.getChild(GSAK_NS, "Watch").setEndTextElementListener(new EndTextElementListener() {
+
+			@Override
+			public void end(String watchList) {
+				cache.onWatchlist = Boolean.valueOf(watchList.trim());
+			}
+		});
+
+		gsak.getChild(GSAK_NS, "UserData").setEndTextElementListener(new UserDataListener(1));
+
+		for (int i = 2; i <= 4; i++) {
+			gsak.getChild(GSAK_NS, "User" + i).setEndTextElementListener(new UserDataListener(i));
+		}
+
+		// 3 different versions of the GC schema
 		for (String nsGC : nsGCList) {
 			// waypoints.cache
 			final Element gcCache = cacheParent.getChild(nsGC, "cache");
@@ -362,7 +402,7 @@ public abstract class GPXParser extends FileParser {
 				public void start(Attributes attrs) {
 					try {
 						if (attrs.getIndex("id") > -1) {
-							cache.cacheid = attrs.getValue("id");
+							cache.cacheId = attrs.getValue("id");
 						}
 						if (attrs.getIndex("archived") > -1) {
 							cache.archived = attrs.getValue("archived").equalsIgnoreCase("true");
@@ -657,16 +697,16 @@ public abstract class GPXParser extends FileParser {
 		} catch (SAXException e) {
 			Log.e(cgSettings.tag, "Cannot parse .gpx file as GPX " + version + ": could not parse XML - " + e.toString());
 		}
-		return parsed ? search.getCurrentId() : 0L;
+		return parsed ? search.getCurrentId() : null;
 	}
 
-	private long parse(final File file, final Handler handlerIn) {
+	private UUID parse(final File file, final Handler handlerIn) {
 		if (file == null) {
-			return 0L;
+			return null;
 		}
 
 		FileInputStream fis = null;
-		long result = 0L;
+		UUID result = null;
 		try {
 			fis = new FileInputStream(file);
 			result = parse(fis, handlerIn);
@@ -719,14 +759,27 @@ public abstract class GPXParser extends FileParser {
 		}
 	}
 
-	public static Long parseGPX(cgeoapplication app, File file, int listId, Handler handler) {
+	private void resetCache() {
+		type = null;
+		sym = null;
+		name = null;
+		desc = null;
+		cmt = null;
+
+		cache = new cgCache();
+		for (int i = 0; i < userData.length; i++) {
+			userData[i] = null;
+		}
+	}
+
+	public static UUID parseGPX(cgeoapplication app, File file, int listId, Handler handler) {
 		final cgSearch search = new cgSearch();
-		long searchId = 0L;
+		UUID searchId = null;
 
 		try {
 			GPXParser parser = new GPX10Parser(app, listId, search);
 			searchId = parser.parse(file, handler);
-			if (searchId == 0L) {
+			if (searchId == null) {
 				parser = new GPX11Parser(app, listId, search);
 				searchId = parser.parse(file, handler);
 			}

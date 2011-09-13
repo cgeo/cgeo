@@ -9,15 +9,15 @@ import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
 import android.util.AttributeSet;
 import android.view.View;
+import cgeo.geocaching.geopoint.Geopoint;
 
 public class cgCompassMini extends View {
 	private int arrowSkin = R.drawable.compass_arrow_mini_white;
 	private Context context = null;
-	private Double cacheLat = null;
-	private Double cacheLon = null;
+	private Geopoint cacheCoords = null;
 	private Bitmap compassArrow = null;
-	private Double azimuth = Double.valueOf(0);
-	private Double heading = Double.valueOf(0);
+	private float azimuth = 0;
+	private float heading = 0;
 	private PaintFlagsDrawFilter setfil = null;
 	private PaintFlagsDrawFilter remfil = null;
 
@@ -52,29 +52,28 @@ public class cgCompassMini extends View {
 		}
 	}
 
-	public void setContent(Double cacheLatIn, Double cacheLonIn) {
-		cacheLat = cacheLatIn;
-		cacheLon = cacheLonIn;
+	public void setContent(final Geopoint cacheCoordsIn) {
+		cacheCoords = cacheCoordsIn;
 	}
 
-	protected void updateAzimuth(Double azimuthIn) {
+	protected void updateAzimuth(float azimuthIn) {
 		azimuth = azimuthIn;
 
 		updateDirection();
 	}
 
-	protected void updateHeading(Double headingIn) {
+	protected void updateHeading(float headingIn) {
 		heading = headingIn;
 
 		updateDirection();
 	}
 
-	protected void updateCoords(Double latitudeIn, Double longitudeIn) {
-		if (latitudeIn == null || longitudeIn == null || cacheLat == null || cacheLon == null) {
+	protected void updateCoords(final Geopoint coordsIn) {
+		if (coordsIn == null || cacheCoords == null) {
 			return;
 		}
 
-		heading = cgBase.getHeading(latitudeIn, longitudeIn, cacheLat, cacheLon);
+		heading = coordsIn.bearingTo(cacheCoords);
 
 		updateDirection();
 	}
@@ -97,7 +96,7 @@ public class cgCompassMini extends View {
 	protected void onDraw(Canvas canvas){
 		super.onDraw(canvas);
 
-		Double azimuthRelative = azimuth - heading;
+		float azimuthRelative = azimuth - heading;
 		if (azimuthRelative < 0) {
 			azimuthRelative = azimuthRelative + 360;
 		} else if (azimuthRelative >= 360) {
@@ -119,9 +118,9 @@ public class cgCompassMini extends View {
 		marginLeft = (getWidth() - compassArrowWidth) / 2;
 		marginTop = (getHeight() - compassArrowHeight) / 2;
 
-		canvas.rotate(-(azimuthRelative.floatValue()), canvasCenterX, canvasCenterY);
+		canvas.rotate(-azimuthRelative, canvasCenterX, canvasCenterY);
 		canvas.drawBitmap(compassArrow, marginLeft, marginTop, null);
-		canvas.rotate(azimuthRelative.floatValue(), canvasCenterX, canvasCenterY);
+		canvas.rotate(azimuthRelative, canvasCenterX, canvasCenterY);
 
 		canvas.setDrawFilter(remfil);
 	}

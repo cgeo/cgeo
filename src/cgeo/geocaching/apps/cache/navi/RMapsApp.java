@@ -2,6 +2,7 @@ package cgeo.geocaching.apps.cache.navi;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.UUID;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.geopoint.Geopoint;
 
 class RMapsApp extends AbstractNavigationApp implements NavigationApp {
 
@@ -22,32 +24,29 @@ class RMapsApp extends AbstractNavigationApp implements NavigationApp {
 	@Override
 	public boolean invoke(cgGeo geo, Activity activity, Resources res,
 			cgCache cache,
-			Long searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
-		if (cache == null && waypoint == null && latitude == null
-				&& longitude == null) {
+			final UUID searchId, cgWaypoint waypoint, final Geopoint coords) {
+		if (cache == null && waypoint == null && coords == null) {
 			return false;
 		}
 
 		try {
 			if (isInstalled(activity)) {
 				final ArrayList<String> locations = new ArrayList<String>();
-				if (cache != null && cache.latitude != null
-						&& cache.longitude != null) {
+				if (cache != null && cache.coords != null) {
 					locations.add(String.format((Locale) null, "%.6f",
-							cache.latitude)
+							cache.coords.getLatitude())
 							+ ","
 							+ String.format((Locale) null, "%.6f",
-									cache.longitude)
+									cache.coords.getLongitude())
 							+ ";"
 							+ cache.geocode
 							+ ";" + cache.name);
-				} else if (waypoint != null && waypoint.latitude != null
-						&& waypoint.longitude != null) {
+				} else if (waypoint != null && waypoint.coords != null) {
 					locations.add(String.format((Locale) null, "%.6f",
-							waypoint.latitude)
+							waypoint.coords.getLatitude())
 							+ ","
 							+ String.format((Locale) null, "%.6f",
-									waypoint.longitude)
+									waypoint.coords.getLongitude())
 							+ ";"
 							+ waypoint.lookup
 							+ ";" + waypoint.name);

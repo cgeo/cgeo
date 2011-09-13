@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -486,7 +487,7 @@ public class cgeotrackable extends AbstractActivity {
 	}
 
 	public void loadTrackableFn(String geocode, String guid, String id) {
-		HashMap<String, String> params = new HashMap<String, String>();
+		Map<String, String> params = new HashMap<String, String>();
 		if (StringUtils.isNotBlank(geocode)) {
 			params.put("geocode", geocode);
 		} else if (StringUtils.isNotBlank(guid)) {
@@ -616,5 +617,14 @@ public class cgeotrackable extends AbstractActivity {
 				view.setCompoundDrawablesWithIntrinsicBounds((Drawable) image, null, null, null);
 			}
 		}
+	}
+
+	public static void startActivity(final AbstractActivity fromContext,
+			final String guid, final String geocode, final String name) {
+		Intent trackableIntent = new Intent(fromContext, cgeotrackable.class);
+		trackableIntent.putExtra("guid", guid);
+		trackableIntent.putExtra("geocode", geocode);
+		trackableIntent.putExtra("name", name);
+		fromContext.startActivity(trackableIntent);
 	}
 }

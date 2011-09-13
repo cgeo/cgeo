@@ -1,5 +1,7 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import java.util.UUID;
+
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -11,6 +13,7 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.geopoint.Geopoint;
 
 class StreetviewApp extends AbstractNavigationApp implements NavigationApp {
 
@@ -25,16 +28,16 @@ class StreetviewApp extends AbstractNavigationApp implements NavigationApp {
 
     public boolean invoke(cgGeo geo, Activity activity, Resources res,
             cgCache cache,
-            Long searchId, cgWaypoint waypoint, Double latitude, Double longitude) {
-        if (cache == null && waypoint == null && latitude == null && longitude == null) {
+            final UUID searchId, cgWaypoint waypoint, final Geopoint coords) {
+        if (cache == null && waypoint == null && coords == null) {
             return false;
         }
 
         try {
-            if (cache != null && cache.latitude != null && cache.longitude != null) {
-                activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("google.streetview:cbll=" + cache.latitude + "," + cache.longitude)));
-            } else if (waypoint != null && waypoint.latitude != null && waypoint.longitude != null) {
-                activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("google.streetview:cbll=" + waypoint.latitude + "," + waypoint.longitude)));
+            if (cache != null && cache.coords != null) {
+                startActivity(activity, cache.coords);
+            } else if (waypoint != null && waypoint.coords != null) {
+                startActivity(activity, waypoint.coords);
             }
 
             return true;
@@ -46,4 +49,9 @@ class StreetviewApp extends AbstractNavigationApp implements NavigationApp {
         
         return false;
     }
+
+	private void startActivity(Activity activity, final Geopoint coords) {
+		activity.startActivity(new Intent(Intent.ACTION_VIEW, 
+				Uri.parse("google.streetview:cbll=" + coords.getLatitude() + "," + coords.getLongitude())));
+	}
 }
