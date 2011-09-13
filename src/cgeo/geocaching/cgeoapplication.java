@@ -728,8 +728,9 @@ public class cgeoapplication extends Application {
 	 */
 
 	private boolean storeWithMerge(final cgCache cache, final boolean forceSave) {
-		if (forceSave)
+		if (forceSave) {
 			return storage.saveCache(cache);
+		}
 
 		final cgCache oldCache = storage.loadCache(cache.geocode, cache.guid,
 				                                   true, true, true, true, true, true);
