@@ -1176,9 +1176,8 @@ public class cgData {
 		values.put("location", cache.location);
 		values.put("distance", cache.distance);
 		values.put("direction", cache.direction);
-		// If we have no coordinates, store phony ones instead
-		values.put("latitude", cache.coords == null ? 0 : cache.coords.getLatitude());
-		values.put("longitude", cache.coords == null ? 0 : cache.coords.getLongitude());
+		values.put("latitude", cache.coords == null ? null : cache.coords.getLatitude());
+		values.put("longitude", cache.coords == null ? null : cache.coords.getLongitude());
 		values.put("reliable_latlon", cache.reliableLatLon ? 1 : 0);
 		values.put("elevation", cache.elevation);
 		values.put("shortdesc", cache.shortdesc);
