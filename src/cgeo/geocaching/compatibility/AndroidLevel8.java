@@ -22,6 +22,6 @@ public class AndroidLevel8 {
 	}
 
 	public int getRotation(Activity activity) {
-		return AndroidLevel8Internal.getRotation(activity);
+		return internal.getRotation(activity);
 	}
 }
