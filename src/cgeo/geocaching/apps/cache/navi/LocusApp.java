@@ -28,31 +28,25 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
 	public boolean invoke(cgGeo geo, Activity activity, Resources res, cgCache cache,
 			final UUID searchId, cgWaypoint waypoint, final Geopoint coords) {
 		
-		if (cache == null && waypoint == null && coords == null) {
-			return false;
+		if (cache == null && waypoint == null && coords == null) return false;
+
+		final ArrayList<Object> points = new ArrayList<Object>();
+
+		// add cache if present
+		if (cache != null) {
+			if (cache.coords == null) cache.coords = coords;
+			if (cache.coords != null) points.add(cache);
 		}
 
-		if (isInstalled(activity)) { // TODO: is this if-statement really necessary?
-			final ArrayList<Object> points = new ArrayList<Object>();
-
-			// add cache if present
-			if (cache != null) {
-				if (cache.coords == null) cache.coords = coords;
-				if (cache.coords != null) points.add(cache);
-			}
-
-			// add waypoint if present
-			if (waypoint != null) {
-				if (waypoint.coords == null) waypoint.coords = coords;
-				if (waypoint.coords != null) points.add(waypoint);
-			}
-
-			this.showInLocus(points, true, activity);
-			
-			return true;
+		// add waypoint if present
+		if (waypoint != null) {
+			if (waypoint.coords == null) waypoint.coords = coords;
+			if (waypoint.coords != null) points.add(waypoint);
 		}
 
-		return false;
+		this.showInLocus(points, true, activity);
+		
+		return true;
 	}
 
 }
