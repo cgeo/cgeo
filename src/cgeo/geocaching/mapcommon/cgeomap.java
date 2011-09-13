@@ -25,8 +25,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
@@ -38,13 +38,14 @@ import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgDirection;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.cgUpdateDir;
 import cgeo.geocaching.cgUpdateLoc;
 import cgeo.geocaching.cgUser;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.cgSettings.mapSourceEnum;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.mapinterfaces.ActivityImpl;
 import cgeo.geocaching.mapinterfaces.CacheOverlayItemImpl;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
@@ -85,8 +86,7 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 	private boolean fromDetailIntent = false;
 	private String searchIdIntent = null;
 	private String geocodeIntent = null;
-	private Double latitudeIntent = null;
-	private Double longitudeIntent = null;
+	private Geopoint coordsIntent = null;
 	private String waypointTypeIntent = null;
 	private int[] mapStateIntent = null;
 	// status data
@@ -314,24 +314,22 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 			fromDetailIntent = extras.getBoolean("detail");
 			searchIdIntent = extras.getString("searchid");
 			geocodeIntent = extras.getString("geocode");
-			latitudeIntent = extras.getDouble("latitude");
-			longitudeIntent = extras.getDouble("longitude");
+			final double latitudeIntent = extras.getDouble("latitude");
+			final double longitudeIntent = extras.getDouble("longitude");
+			coordsIntent = new Geopoint(latitudeIntent, longitudeIntent);
 			waypointTypeIntent = extras.getString("wpttype");
 			mapStateIntent = extras.getIntArray("mapstate");
 
 			if ("".equals(searchIdIntent)) {
 				searchIdIntent = null;
 			}
-			if (latitudeIntent == 0.0) {
-				latitudeIntent = null;
-			}
-			if (longitudeIntent == 0.0) {
-				longitudeIntent = null;
+			if (coordsIntent.getLatitude() == 0.0 || coordsIntent.getLongitude() == 0.0) {
+				coordsIntent = null;
 			}
 		}
 
 		// live or death
-		if (searchIdIntent == null && geocodeIntent == null && (latitudeIntent == null || longitudeIntent == null)) {
+		if (searchIdIntent == null && geocodeIntent == null && coordsIntent == null) {
 			live = true;
 		} else {
 			live = false;
@@ -346,8 +344,8 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 		} else {
 			followMyLocation = 1 == mapStateIntent[3] ? true : false;
 		}
-		if (geocodeIntent != null || searchIdIntent != null || (latitudeIntent != null && longitudeIntent != null) || mapStateIntent != null) {
-			centerMap(geocodeIntent, searchIdIntent, latitudeIntent, longitudeIntent, mapStateIntent);
+		if (geocodeIntent != null || searchIdIntent != null || coordsIntent != null || mapStateIntent != null) {
+			centerMap(geocodeIntent, searchIdIntent, coordsIntent, mapStateIntent);
 		}
 
 		// prepare my location button
@@ -587,8 +585,8 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 						final int mapSpanLon = mapView.getLongitudeSpan();
 
 						for (cgCache oneCache : cachesProtected) {
-							if (oneCache != null && oneCache.latitude != null && oneCache.longitude != null) {
-								if (cgBase.isCacheInViewPort(mapCenterLat, mapCenterLon, mapSpanLat, mapSpanLon, oneCache.latitude, oneCache.longitude) && app.isOffline(oneCache.geocode, null) == false) {
+							if (oneCache != null && oneCache.coords != null) {
+								if (cgBase.isCacheInViewPort(mapCenterLat, mapCenterLon, mapSpanLat, mapSpanLon, oneCache.coords) && app.isOffline(oneCache.geocode, null) == false) {
 									geocodes.add(oneCache.geocode);
 								}
 							}
@@ -672,8 +670,10 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 				mapIntent.putExtra("detail", fromDetailIntent);
 				mapIntent.putExtra("searchid", searchIdIntent);
 				mapIntent.putExtra("geocode", geocodeIntent);
-				mapIntent.putExtra("latitude", latitudeIntent);
-				mapIntent.putExtra("longitude", longitudeIntent);
+				if (coordsIntent != null) {
+					mapIntent.putExtra("latitude", coordsIntent.getLatitude());
+					mapIntent.putExtra("longitude", coordsIntent.getLongitude());
+				}
 				mapIntent.putExtra("wpttype", waypointTypeIntent);
 				int[] mapState = new int[4];
 				GeoPointImpl mapCenter = mapView.getMapViewCenter();
@@ -753,7 +753,7 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 			return;
 		}
 
-		centerMap(geo.latitudeNow, geo.longitudeNow);
+		centerMap(geo.coordsNow);
 	}
 
 	// class: update location
@@ -776,7 +776,7 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 					overlayMyLoc.setCoordinates(geo.location);
 				}
 
-				if (geo.latitudeNow != null && geo.longitudeNow != null) {
+				if (geo.coordsNow != null) {
 					if (followMyLocation) {
 						myLocationInMiddle();
 					} else {
@@ -788,12 +788,12 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 					if (geo.bearingNow != null) {
 						overlayMyLoc.setHeading(geo.bearingNow);
 					} else {
-						overlayMyLoc.setHeading(Double.valueOf(0));
+						overlayMyLoc.setHeading(0f);
 					}
 					repaintRequired = true;
 				}
 
-				if (repaintRequired) {
+				if (repaintRequired && mapView != null) {
 					mapView.repaintRequired(overlayMyLoc);
 				}
 
@@ -820,7 +820,7 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 	}
 
 	public void startTimer() {
-		if (latitudeIntent != null && longitudeIntent != null) {
+		if (coordsIntent != null) {
 			// display just one point
 			(new DisplayPointThread()).start();
 		} else {
@@ -1283,7 +1283,7 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 							return;
 						}
 
-						if (cacheOne.latitude == null && cacheOne.longitude == null) {
+						if (cacheOne.coords == null) {
 							continue;
 						}
 
@@ -1326,7 +1326,7 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 
 							if (oneCache != null && oneCache.waypoints != null && !oneCache.waypoints.isEmpty()) {
 								for (cgWaypoint oneWaypoint : oneCache.waypoints) {
-									if (oneWaypoint.latitude == null && oneWaypoint.longitude == null) {
+									if (oneWaypoint.coords == null) {
 										continue;
 									}
 
@@ -1451,7 +1451,7 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 						return;
 					}
 
-					if (userOne.latitude == null && userOne.longitude == null) {
+					if (userOne.coords == null) {
 						continue;
 					}
 
@@ -1481,11 +1481,10 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 				return;
 			}
 
-			if (latitudeIntent != null && longitudeIntent != null) {
+			if (coordsIntent != null) {
 				cgCoord coord = new cgCoord();
 				coord.type = "waypoint";
-				coord.latitude = latitudeIntent;
-				coord.longitude = longitudeIntent;
+				coord.coords = coordsIntent;
 				coord.name = "some place";
 
 				coordinates.add(coord);
@@ -1632,8 +1631,8 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 	}
 
 	// center map to desired location
-	private void centerMap(Double latitude, Double longitude) {
-		if (latitude == null || longitude == null) {
+	private void centerMap(final Geopoint coords) {
+		if (coords == null) {
 			return;
 		}
 		if (mapView == null) {
@@ -1643,18 +1642,18 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 		if (!alreadyCentered) {
 			alreadyCentered = true;
 
-			mapController.setCenter(makeGeoPoint(latitude, longitude));
+			mapController.setCenter(makeGeoPoint(coords));
 		} else {
-			mapController.animateTo(makeGeoPoint(latitude, longitude));
+			mapController.animateTo(makeGeoPoint(coords));
 		}
 	}
 
 	// move map to view results of searchIdIntent
-	private void centerMap(String geocodeCenter, String searchIdCenter, Double latitudeCenter, Double longitudeCenter, int[] mapState) {
+	private void centerMap(String geocodeCenter, String searchIdCenter, final Geopoint coordsCenter, int[] mapState) {
 
 		if (!centered && mapState != null) {
 			try {
-				mapController.setCenter(settings.getMapFactory().getGeoPointBase(mapState[0], mapState[1]));
+				mapController.setCenter(settings.getMapFactory().getGeoPointBase(new Geopoint(mapState[0] / 1.0e6, mapState[1] / 1.0e6)));
 				mapController.setZoom(mapState[2]);
 			} catch (Exception e) {
 				// nothing at all
@@ -1712,7 +1711,7 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 				}
 
 				if (cnt != null && cnt > 0) {
-					mapController.setCenter(settings.getMapFactory().getGeoPointBase(centerLat, centerLon));
+					mapController.setCenter(settings.getMapFactory().getGeoPointBase(new Geopoint(centerLat, centerLon)));
 					if (Math.abs(maxLat - minLat) != 0 && Math.abs(maxLon - minLon) != 0) {
 						mapController.zoomToSpan(Math.abs(maxLat - minLat), Math.abs(maxLon - minLon));
 					}
@@ -1723,9 +1722,9 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 
 			centered = true;
 			alreadyCentered = true;
-		} else if (!centered && latitudeCenter != null && longitudeCenter != null) {
+		} else if (!centered && coordsCenter != null) {
 			try {
-				mapController.setCenter(makeGeoPoint(latitudeCenter, longitudeCenter));
+				mapController.setCenter(makeGeoPoint(coordsCenter));
 			} catch (Exception e) {
 				// nothing at all
 			}
@@ -1762,8 +1761,8 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 	}
 
 	// make geopoint
-	private GeoPointImpl makeGeoPoint(Double latitude, Double longitude) {
-		return settings.getMapFactory().getGeoPointBase((int) (latitude * 1e6), (int) (longitude * 1e6));
+	private GeoPointImpl makeGeoPoint(final Geopoint coords) {
+		return settings.getMapFactory().getGeoPointBase(coords);
 	}
 
 	// close activity and open homescreen

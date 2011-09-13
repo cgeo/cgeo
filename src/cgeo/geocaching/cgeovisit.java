@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Dialog;
@@ -85,7 +84,7 @@ public class cgeovisit extends cgLogForm {
 				showToast(res.getString(R.string.info_log_type_changed));
 			}
 
-			if (ArrayUtils.isEmpty(viewstates) && attempts < 2) {
+			if (cgBase.isEmpty(viewstates) && attempts < 2) {
 				showToast(res.getString(R.string.err_log_load_data_again));
 
 				loadData thread;
@@ -93,7 +92,7 @@ public class cgeovisit extends cgLogForm {
 				thread.start();
 
 				return;
-			} else if (ArrayUtils.isEmpty(viewstates) && attempts >= 2) {
+			} else if (cgBase.isEmpty(viewstates) && attempts >= 2) {
 				showToast(res.getString(R.string.err_log_load_data));
 				showProgress(false);
 
@@ -243,7 +242,7 @@ public class cgeovisit extends cgLogForm {
 		if ((StringUtils.isBlank(cacheid)) && StringUtils.isNotBlank(geocode)) {
 			cacheid = app.getCacheid(geocode);
 		}
-		if ((StringUtils.isBlank(geocode)) && StringUtils.isNotBlank(cacheid)) {
+		if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(cacheid)) {
 			geocode = app.getGeocode(cacheid);
 		}
 
@@ -327,7 +326,7 @@ public class cgeovisit extends cgLogForm {
 			if (StringUtils.isNotBlank(content)) {
 				insertIntoLog("\n");
 			}
-			insertIntoLog(LogTemplateProvider.applyTemplates(settings.getSignature(), base));
+			insertIntoLog(LogTemplateProvider.applyTemplates(settings.getSignature(), base, false));
 			return true;
 		} else if (id >= 10 && id <= 19) {
 			rating = (id - 9) / 2.0;
@@ -344,7 +343,7 @@ public class cgeovisit extends cgLogForm {
 		}
 		LogTemplate template = LogTemplateProvider.getTemplate(id);
 		if (template != null) {
-			String newText = template.getValue(base);
+			String newText = template.getValue(base, false);
 			insertIntoLog(newText);
 			return true;
 		}
@@ -507,7 +506,7 @@ public class cgeovisit extends cgLogForm {
 		} else if (StringUtils.isNotBlank(settings.getSignature())
 		        && settings.signatureAutoinsert
 		        && StringUtils.isBlank(((EditText) findViewById(R.id.log)).getText())) {
-			insertIntoLog(LogTemplateProvider.applyTemplates(settings.getSignature(), base));
+			insertIntoLog(LogTemplateProvider.applyTemplates(settings.getSignature(), base, false));
 		}
 
 		if (types.contains(typeSelected) == false) {
@@ -550,7 +549,7 @@ public class cgeovisit extends cgLogForm {
 		if (post == null) {
 			post = (Button) findViewById(R.id.post);
 		}
-		if (ArrayUtils.isEmpty(viewstates)) {
+		if (cgBase.isEmpty(viewstates)) {
 			post.setEnabled(false);
 			post.setOnTouchListener(null);
 			post.setOnClickListener(null);

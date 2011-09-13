@@ -20,6 +20,7 @@ import android.util.Log;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.geopoint.Geopoint;
 
 /**
  * Internal c:geo representation of a "cache"
@@ -35,7 +36,7 @@ public class cgCache implements ICache {
      * Code of the cache like GCABCD
      */
 	public String geocode = "";
-	public String cacheid = "";
+	public String cacheId = "";
 	public String guid = "";
 	public String type = "";
 	public String name = "";
@@ -47,14 +48,13 @@ public class cgCache implements ICache {
 	public String size = "";
 	public Float difficulty = Float.valueOf(0);
 	public Float terrain = Float.valueOf(0);
-	public Double direction = null;
-	public Double distance = null;
+	public Float direction = null;
+	public Float distance = null;
 	public String latlon = "";
 	public String latitudeString = "";
 	public String longitudeString = "";
 	public String location = "";
-	public Double latitude = null;
-	public Double longitude = null;
+	public Geopoint coords = null;
 	public boolean reliableLatLon = false;
 	public Double elevation = null;
 	public String personalNote = null;
@@ -84,156 +84,133 @@ public class cgCache implements ICache {
 	public boolean statusCheckedView = false;
 	public String directionImg = null;
 
-	public cgCache merge(cgData storage) {
-
-		boolean loadA = true;
-		boolean loadW = true;
-		boolean loadS = true;
-		boolean loadL = true;
-		boolean loadI = true;
-
-		if (attributes == null || attributes.isEmpty()) {
-			loadA = false;
-		}
-		if (waypoints == null || waypoints.isEmpty()) {
-			loadW = false;
-		}
-		if (spoilers == null || spoilers.isEmpty()) {
-			loadS = false;
-		}
-		if (logs == null || logs.isEmpty()) {
-			loadL = false;
-		}
-		if (inventory == null || inventory.isEmpty()) {
-			loadI = false;
-		}
-
-		final cgCache oldCache = storage.loadCache(geocode, guid, loadA, loadW, loadS, loadL, loadI, false);
-
-		if (oldCache == null) {
-			return this;
+	/**
+	 * Gather missing information from another cache object.
+	 *
+	 * @param other the other version, or null if non-existent
+	 */
+	public void gatherMissingFrom(final cgCache other) {
+		if (other == null) {
+			return;
 		}
 
 		updated = System.currentTimeMillis();
-		if (detailed == false && oldCache.detailed) {
+		if (detailed == false && other.detailed) {
 			detailed = true;
-			detailedUpdate = System.currentTimeMillis();
+			detailedUpdate = updated;
 		}
 
 		if (visitedDate == null || visitedDate == 0) {
-			visitedDate = oldCache.visitedDate;
+			visitedDate = other.visitedDate;
 		}
 		if (reason == null || reason == 0) {
-			reason = oldCache.reason;
+			reason = other.reason;
 		}
 		if (StringUtils.isBlank(geocode)) {
-			geocode = oldCache.geocode;
+			geocode = other.geocode;
 		}
-		if (StringUtils.isBlank(cacheid)) {
-			cacheid = oldCache.cacheid;
+		if (StringUtils.isBlank(cacheId)) {
+			cacheId = other.cacheId;
 		}
 		if (StringUtils.isBlank(guid)) {
-			guid = oldCache.guid;
+			guid = other.guid;
 		}
 		if (StringUtils.isBlank(type)) {
-			type = oldCache.type;
+			type = other.type;
 		}
 		if (StringUtils.isBlank(name)) {
-			name = oldCache.name;
+			name = other.name;
 		}
 		if (StringUtils.isBlank(nameSp)) {
-			nameSp = oldCache.nameSp;
+			nameSp = other.nameSp;
 		}
 		if (StringUtils.isBlank(owner)) {
-			owner = oldCache.owner;
+			owner = other.owner;
 		}
 		if (StringUtils.isBlank(ownerReal)) {
-			ownerReal = oldCache.ownerReal;
+			ownerReal = other.ownerReal;
 		}
 		if (hidden == null) {
-			hidden = oldCache.hidden;
+			hidden = other.hidden;
 		}
 		if (StringUtils.isBlank(hint)) {
-			hint = oldCache.hint;
+			hint = other.hint;
 		}
 		if (StringUtils.isBlank(size)) {
-			size = oldCache.size;
+			size = other.size;
 		}
 		if (difficulty == null || difficulty == 0) {
-			difficulty = oldCache.difficulty;
+			difficulty = other.difficulty;
 		}
 		if (terrain == null || terrain == 0) {
-			terrain = oldCache.terrain;
+			terrain = other.terrain;
 		}
 		if (direction == null) {
-			direction = oldCache.direction;
+			direction = other.direction;
 		}
 		if (distance == null) {
-			distance = oldCache.distance;
+			distance = other.distance;
 		}
 		if (StringUtils.isBlank(latlon)) {
-			latlon = oldCache.latlon;
+			latlon = other.latlon;
 		}
 		if (StringUtils.isBlank(latitudeString)) {
-			latitudeString = oldCache.latitudeString;
+			latitudeString = other.latitudeString;
 		}
 		if (StringUtils.isBlank(longitudeString)) {
-			longitudeString = oldCache.longitudeString;
+			longitudeString = other.longitudeString;
 		}
 		if (StringUtils.isBlank(location)) {
-			location = oldCache.location;
+			location = other.location;
 		}
-		if (latitude == null) {
-			latitude = oldCache.latitude;
-		}
-		if (longitude == null) {
-			longitude = oldCache.longitude;
+		if (coords == null) {
+			coords = other.coords;
 		}
 		if (elevation == null) {
-			elevation = oldCache.elevation;
+			elevation = other.elevation;
 		}
 		if (StringUtils.isNotBlank(personalNote)) {
-			personalNote = oldCache.personalNote;
+			personalNote = other.personalNote;
 		}
 		if (StringUtils.isBlank(shortdesc)) {
-			shortdesc = oldCache.shortdesc;
+			shortdesc = other.shortdesc;
 		}
 		if (StringUtils.isBlank(description)) {
-			description = oldCache.description;
+			description = other.description;
 		}
 		if (favouriteCnt == null) {
-			favouriteCnt = oldCache.favouriteCnt;
+			favouriteCnt = other.favouriteCnt;
 		}
 		if (rating == null) {
-			rating = oldCache.rating;
+			rating = other.rating;
 		}
 		if (votes == null) {
-			votes = oldCache.votes;
+			votes = other.votes;
 		}
 		if (myVote == null) {
-			myVote = oldCache.myVote;
-		}
-		if (inventoryItems == 0) {
-			inventoryItems = oldCache.inventoryItems;
+			myVote = other.myVote;
 		}
 		if (attributes == null) {
-			attributes = oldCache.attributes;
+			attributes = other.attributes;
 		}
 		if (waypoints == null) {
-			waypoints = oldCache.waypoints;
+			waypoints = other.waypoints;
 		}
-		cgWaypoint.mergeWayPoints(waypoints, oldCache.waypoints);
+		cgWaypoint.mergeWayPoints(waypoints, other.waypoints);
 		if (spoilers == null) {
-			spoilers = oldCache.spoilers;
+			spoilers = other.spoilers;
 		}
 		if (inventory == null) {
-			inventory = oldCache.inventory;
+	        // If inventoryItems is 0, it can mean both
+	        // "don't know" or "0 items". Since we cannot distinguish
+	        // them here, only populate inventoryItems from
+	        // old data when we have to do it for inventory.
+			inventory = other.inventory;
+			inventoryItems = other.inventoryItems;
 		}
 		if (logs == null || logs.isEmpty()) { // keep last known logs if none
-			logs = oldCache.logs;
+			logs = other.logs;
 		}
-
-		return this;
 	}
 
 	public boolean hasTrackables(){
@@ -289,12 +266,12 @@ public class cgCache implements ICache {
 	}
 
 	public boolean logVisit(IAbstractActivity fromActivity) {
-		if (StringUtils.isBlank(cacheid)) {
+		if (StringUtils.isBlank(cacheId)) {
 			fromActivity.showToast(((Activity)fromActivity).getResources().getString(R.string.err_cannot_log_visit));
 			return true;
 		}
 		Intent logVisitIntent = new Intent((Activity)fromActivity, cgeovisit.class);
-		logVisitIntent.putExtra(cgeovisit.EXTRAS_ID, cacheid);
+		logVisitIntent.putExtra(cgeovisit.EXTRAS_ID, cacheId);
 		logVisitIntent.putExtra(cgeovisit.EXTRAS_GEOCODE, geocode.toUpperCase());
 		logVisitIntent.putExtra(cgeovisit.EXTRAS_FOUND, found);
 
@@ -307,7 +284,7 @@ public class cgCache implements ICache {
         String log = "";
         if (StringUtils.isNotBlank(settings.getSignature())
                 && settings.signatureAutoinsert) {
-            log = LogTemplateProvider.applyTemplates(settings.getSignature(), base);
+            log = LogTemplateProvider.applyTemplates(settings.getSignature(), base, true);
         }
         logOffline(fromActivity, log, Calendar.getInstance(), logType);
         return true;

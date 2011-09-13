@@ -1,24 +1,23 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.geopoint.Geopoint;
+
 public class cgDestination {
 
 	private long id;
 
 	private long date;
 
-	private double latitude;
-
-	private double longitude;
+	private Geopoint coords;
 
 	public cgDestination() {
 	}
 
-	public cgDestination(long id, long date, double latitude, double longitude) {
+	public cgDestination(long id, long date, final Geopoint coords) {
 		super();
 		this.id = id;
 		this.date = date;
-		this.latitude = latitude;
-		this.longitude = longitude;
+		this.coords = coords;
 	}
 
 	public long getDate() {
@@ -29,20 +28,12 @@ public class cgDestination {
 		this.date = date;
 	}
 
-	public double getLatitude() {
-		return latitude;
+	public Geopoint getCoords() {
+		return coords;
 	}
 
-	public void setLatitude(double latitude) {
-		this.latitude = latitude;
-	}
-
-	public double getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(double longitude) {
-		this.longitude = longitude;
+	public void setCoords(final Geopoint coords) {
+		this.coords = coords;
 	}
 
 	@Override
@@ -50,9 +41,9 @@ public class cgDestination {
 		final int prime = 31;
 		int result = 1;
 		long temp;
-		temp = Double.doubleToLongBits(latitude);
+		temp = Double.doubleToLongBits(coords.getLatitude());
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		temp = Double.doubleToLongBits(longitude);
+		temp = Double.doubleToLongBits(coords.getLongitude());
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
@@ -67,13 +58,7 @@ public class cgDestination {
 			return false;
 		}
 		cgDestination other = (cgDestination) obj;
-		if (Double.doubleToLongBits(latitude) != Double
-				.doubleToLongBits(other.latitude))
-			return false;
-		if (Double.doubleToLongBits(longitude) != Double
-				.doubleToLongBits(other.longitude))
-			return false;
-		return true;
+		return coords.isEqualTo(other.coords);
 	}
 
 	public long getId() {

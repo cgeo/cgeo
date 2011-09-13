@@ -7,11 +7,11 @@ import java.util.List;
 import android.text.Spannable;
 
 public class cgTrackable {
-	static public int SPOTTED_UNSET = 0;
-	static public int SPOTTED_CACHE = 1;
-	static public int SPOTTED_USER = 2;
-	static public int SPOTTED_UNKNOWN = 3;
-	static public int SPOTTED_OWNER = 4;
+	static final public int SPOTTED_UNSET = 0;
+	static final public int SPOTTED_CACHE = 1;
+	static final public int SPOTTED_USER = 2;
+	static final public int SPOTTED_UNKNOWN = 3;
+	static final public int SPOTTED_OWNER = 4;
 	
 	public int errorRetrieve = 0;
 	public String error = "";
@@ -23,7 +23,7 @@ public class cgTrackable {
 	public Spannable nameSp = null;
 	public String type = null;
 	public Date released = null;
-	public Double distance = null;
+	public Float distance = null;
 	public String origin = null;
 	public String owner = null;
 	public String ownerGuid = null;

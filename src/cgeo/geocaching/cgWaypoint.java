@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.widget.TextView;
+import cgeo.geocaching.geopoint.Geopoint;
 
 public class cgWaypoint {
     public Integer id = 0;
@@ -18,8 +19,7 @@ public class cgWaypoint {
 	public String latlon = "";
 	public String latitudeString = "";
 	public String longitudeString = "";
-	public Double latitude = null;
-	public Double longitude = null;
+	public Geopoint coords = null;
 	public String note = "";
 
 	public void setIcon(Resources res, cgBase base, TextView nameView) {
@@ -52,11 +52,8 @@ public class cgWaypoint {
 		if (StringUtils.isBlank(longitudeString)) {
 			longitudeString = old.longitudeString;
 		}
-		if (latitude == null) {
-			latitude = old.latitude;
-		}
-		if (longitude == null) {
-			longitude = old.longitude;
+		if (coords == null) {
+			coords = old.coords;
 		}
 		if (StringUtils.isBlank(note)) {
 			note = old.note;

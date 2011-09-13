@@ -242,6 +242,7 @@
   <string name="menu_settings">Inställningar</string>
   <string name="menu_history">Loggade cacher</string>
   <string name="menu_filter">Filter</string>
+  <string name="menu_scan">Scanna QR kod</string>
 
   <!-- main screen -->
   <string name="live_map_button">Live karta</string>
@@ -253,6 +254,7 @@
   <string name="settings_button">Inställningar</string>
   <string name="type">Typ</string>
   <string name="now_searching">Söker</string>
+  <string name="unknown_scan">Hittade inte någon geokod i scanningen.</string>
 
   <!-- caches -->
   <string name="caches_searching">Söker efter cacher</string>
@@ -285,6 +287,8 @@
   <string name="caches_sort_vote">betyg (eget)</string>
   <string name="caches_sort_inventory">antal trackable</string>
   <string name="caches_sort_date">datum</string>
+  <string name="caches_sort_finds">antal som hittat</string>
+  <string name="caches_sort_state">status</string>
   <string name="caches_select">Välj från lista</string>
   <string name="caches_select_mode">Markeringsläge</string>
   <string name="caches_select_mode_exit">Avsluta markeringsläge</string>
@@ -392,6 +396,7 @@
   <string name="init_signature_template_button">Infoga makro</string>
   <string name="init_signature_template_date">Datum</string>
   <string name="init_signature_template_time">Tid</string>
+  <string name="init_signature_template_datetime">Datum &amp; Tid</string>
   <string name="init_signature_template_user">Namn</string>
   <string name="init_signature_template_number">Nummer</string>
   <string name="init_languages">Översättning</string>
@@ -434,6 +439,7 @@
   <string name="init_select_mapfile">…</string>
   <string name="init_trackautovisit">Sätt trackable automatiskt till \"besök\" vid loggning av en cache</string>
   <string name="init_sigautoinsert">Infoga signatur automatiskt i loggar</string>
+  <string name="init_loaddirectionimg">Ladda rikningsbild om det behövs</string>
 
   <!-- map sources -->
   <string-array name="map_sources">
@@ -483,6 +489,7 @@
   <string name="cache_offline_time_days">dagar sedan</string>
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Attribut</string>
+  <string name="cache_attributes_no_icons">(uppdatera cachen för att visa bilder för attribut)</string>
   <string name="cache_inventory">Innehåll</string>
   <string name="cache_log_offline">Offline logg</string>
   <string name="cache_log_images_loading">Laddar loggbilder…</string>
@@ -523,6 +530,7 @@
   <string name="cache_menu_map_ext">Visa på extern karta</string>
   <string name="cache_menu_map_short">Kartor</string>
   <string name="cache_menu_map_ext_short">Ext. karta</string>
+  <string name="cache_menu_streetview">Gatuvy</string>
   <string name="cache_menu_browser">Öppna i webbläsare</string>
   <string name="cache_menu_visit">Logga besök</string>
   <string name="cache_menu_visit_offline">Logga besök offline</string>

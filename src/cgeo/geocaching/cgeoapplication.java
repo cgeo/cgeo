@@ -8,20 +8,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.CollectionUtils;
 
 public class cgeoapplication extends Application {
 
 	private cgData storage = null;
 	private String action = null;
-	private Double lastLatitude = null;
-	private Double lastLongitude = null;
+	private Geopoint lastCoords = null;
 	private cgGeo geo = null;
 	private boolean geoInUse = false;
 	private cgDirection dir = null;
@@ -271,7 +270,7 @@ public class cgeoapplication extends Application {
 	}
 
 	public boolean setViewstates(final UUID searchId, String[] viewstates) {
-		if (ArrayUtils.isEmpty(viewstates)) {
+		if (cgBase.isEmpty(viewstates)) {
 			return false;
 		}
 		if (searchId == null || searches.containsKey(searchId) == false) {
@@ -474,7 +473,8 @@ public class cgeoapplication extends Application {
 			storage = new cgData(this);
 		}
 
-		final List<cgCache> cachesPre = storage.loadCaches(geocodeList.toArray(), null, centerLat, centerLon, spanLat, spanLon, loadA, loadW, loadS, loadL, loadI, loadO);
+		// The list of geocodes is sufficient. more parameters generate an overly complex select.
+		final List<cgCache> cachesPre = storage.loadCaches(geocodeList.toArray(), null, null, null, null, null, loadA, loadW, loadS, loadL, loadI, loadO);
 		if (cachesPre != null) {
 			cachesOut.addAll(cachesPre);
 		}
@@ -482,13 +482,13 @@ public class cgeoapplication extends Application {
 		return cachesOut;
 	}
 
-	public cgSearch getBatchOfStoredCaches(boolean detailedOnly, Double latitude, Double longitude, String cachetype, int list) {
+	public cgSearch getBatchOfStoredCaches(boolean detailedOnly, final Geopoint coords, String cachetype, int list) {
 		if (storage == null) {
 			storage = new cgData(this);
 		}
 		cgSearch search = new cgSearch();
 
-		List<String> geocodes = storage.loadBatchOfStoredGeocodes(detailedOnly, latitude, longitude, cachetype, list);
+		List<String> geocodes = storage.loadBatchOfStoredGeocodes(detailedOnly, coords, cachetype, list);
 		if (geocodes != null && geocodes.isEmpty() == false) {
 			for (String gccode : geocodes) {
 				search.addGeocode(gccode);
@@ -692,18 +692,8 @@ public class cgeoapplication extends Application {
 		if (newItem) {
 			// save only newly downloaded data
 			for (cgCache cache : cacheList) {
-				String geocode = cache.geocode.toUpperCase();
-				String guid = cache.guid.toLowerCase();
-
 				cache.reason = reason;
-
-				if (storage.isThere(geocode, guid, false, false)) {
-					cgCache mergedCache = cache.merge(storage);
-					storage.saveCache(mergedCache);
-				} else {
-					// cache is not saved, new data are for storing
-					storage.saveCache(cache);
-				}
+				storeWithMerge(cache, false);
 			}
 		}
 
@@ -721,24 +711,29 @@ public class cgeoapplication extends Application {
 			searches.put(searchId, search);
 		}
 
-		String geocode = cache.geocode.toUpperCase();
-		String guid = cache.guid.toLowerCase();
-
-		boolean status = false;
-
-		if (storage.isThere(geocode, guid, false, false) == false || cache.reason >= 1) { // if for offline, do not merge
-			status = storage.saveCache(cache);
-		} else {
-			cgCache mergedCache = cache.merge(storage);
-
-			status = storage.saveCache(mergedCache);
-		}
+		final boolean status = storeWithMerge(cache, cache.reason >= 1);
 
 		if (status) {
 			search.addGeocode(cache.geocode);
 		}
 
 		return status;
+	}
+
+	/**
+	 * Checks if Cache is already in Database and if so does a merge.
+	 * @param cache the cache to be saved
+	 * @param override override the check and persist the new state.
+	 * @return true if the cache has been saved correctly
+	 */
+
+	private boolean storeWithMerge(final cgCache cache, final boolean override) {
+		if (!override) {
+			final cgCache oldCache = storage.loadCache(cache.geocode, cache.guid,
+					true, true, true, true, true, true);
+			cache.gatherMissingFrom(oldCache);
+		}
+		return storage.saveCache(cache);
 	}
 
 	public void dropStored(int listId) {
@@ -789,17 +784,12 @@ public class cgeoapplication extends Application {
 		return storage.saveLogs(geocode, list, false);
 	}
 
-	public void setLastLoc(Double lat, Double lon) {
-		lastLatitude = lat;
-		lastLongitude = lon;
+	public void setLastLoc(final Geopoint coords) {
+		lastCoords = coords;
 	}
 
-	public Double getLastLat() {
-		return lastLatitude;
-	}
-
-	public Double getLastLon() {
-		return lastLongitude;
+	public Geopoint getLastCoords() {
+		return lastCoords;
 	}
 
 	public boolean saveLogOffline(String geocode, Date date, int logtype, String log) {
