@@ -190,9 +190,6 @@ public class cgCache implements ICache {
 		if (myVote == null) {
 			myVote = other.myVote;
 		}
-		if (inventoryItems == 0) {
-			inventoryItems = other.inventoryItems;
-		}
 		if (attributes == null) {
 			attributes = other.attributes;
 		}
@@ -204,7 +201,12 @@ public class cgCache implements ICache {
 			spoilers = other.spoilers;
 		}
 		if (inventory == null) {
+	        // If inventoryItems is 0, it can mean both
+	        // "don't know" or "0 items". Since we cannot distinguish
+	        // them here, only populate inventoryItems from
+	        // old data when we have to do it for inventory.
 			inventory = other.inventory;
+			inventoryItems = other.inventoryItems;
 		}
 		if (logs == null || logs.isEmpty()) { // keep last known logs if none
 			logs = other.logs;
