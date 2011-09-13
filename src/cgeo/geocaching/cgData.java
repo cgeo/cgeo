@@ -1930,13 +1930,13 @@ public class cgData {
 		if (cursor.isNull(index)) {
 			cache.direction = null;
 		} else {
-			cache.direction = (Double) cursor.getDouble(index);
+			cache.direction = cursor.getFloat(index);
 		}
 		index = cursor.getColumnIndex("distance");
 		if (cursor.isNull(index)) {
 			cache.distance = null;
 		} else {
-			cache.distance = (Double) cursor.getDouble(index);
+			cache.distance = cursor.getFloat(index);
 		}
 		cache.terrain = (Float) cursor.getFloat(cursor.getColumnIndex("terrain"));
 		cache.latlon = (String) cursor.getString(cursor.getColumnIndex("latlon"));
