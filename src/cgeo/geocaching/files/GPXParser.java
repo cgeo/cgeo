@@ -34,6 +34,7 @@ import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgTrackable;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.geopoint.Geopoint;
 
 public abstract class GPXParser extends FileParser {
@@ -448,7 +449,7 @@ public abstract class GPXParser extends FileParser {
 
 				@Override
 				public void end(String body) {
-					cache.size = validate(body.toLowerCase());
+					cache.size = CacheSize.FIND_BY_ID.get(validate(body.toLowerCase()));
 				}
 			});
 

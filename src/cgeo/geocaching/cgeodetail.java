@@ -9,8 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
+import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -45,9 +45,9 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.ViewParent;
 import android.view.WindowManager;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -59,6 +59,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.GeneralAppsFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.utils.CollectionUtils;
 
 /**
@@ -655,10 +656,10 @@ public class cgeodetail extends AbstractActivity {
 			itemName.setText(res.getString(R.string.cache_type));
 
 			String size = "";
-			if (StringUtils.isNotBlank(cache.size)) {
+			if (cache.size != null) {
 				// don't show "not chosen" for events, that should be the normal case
-				if (!(cache.isEventCache() && cache.size.equals("not chosen"))) {
-					size = " (" + cache.size + ")";
+				if (!(cache.isEventCache() && cache.size == CacheSize.NOT_CHOSEN)) {
+					size = " (" + cache.size.id + ")";
 				}
 			}
 

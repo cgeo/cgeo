@@ -111,7 +111,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
 		if (cache.hidden != null) pg.hidden = ISO8601DATE.format(cache.hidden.getTime());
 		int locusId = toLocusId(CacheType.FIND_BY_CGEOID.get(cache.type));
 		if (locusId != NO_LOCUS_ID) pg.type = locusId;
-		locusId = toLocusId(CacheSize.FIND_BY_CGEOID.get(cache.size));
+		locusId = toLocusId(cache.size);
 		if (locusId != NO_LOCUS_ID) pg.container = locusId;
 		if (cache.difficulty != null) pg.difficulty = cache.difficulty;
 		if (cache.terrain != null) pg.terrain = cache.terrain;
@@ -193,6 +193,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
             case SMALL:         return PointGeocachingData.CACHE_SIZE_SMALL;
             case REGULAR:       return PointGeocachingData.CACHE_SIZE_REGULAR;
             case LARGE:         return PointGeocachingData.CACHE_SIZE_LARGE;
+            case VIRTUAL:       return PointGeocachingData.CACHE_SIZE_OTHER;
             case NOT_CHOSEN:    return PointGeocachingData.CACHE_SIZE_NOT_CHOSEN;
             case OTHER:         return PointGeocachingData.CACHE_SIZE_OTHER;
             default:            return NO_LOCUS_ID;
