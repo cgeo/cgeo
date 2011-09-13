@@ -90,6 +90,10 @@ public class cgCache implements ICache {
 	 * @param other the other version, or null if non-existent
 	 */
 	public void gatherMissingFrom(final cgCache other) {
+		if (other == null) {
+			return;
+		}
+
 		updated = System.currentTimeMillis();
 		if (detailed == false && other.detailed) {
 			detailed = true;
