@@ -722,19 +722,18 @@ public class cgeoapplication extends Application {
 
 	/**
 	 * Checks if Cache is already in Database and if so does a merge.
-	 * @param cache The cache to be saved
-	 * @param forceSave override the check and persist the new state.
-	 * @return
+	 * @param cache the cache to be saved
+	 * @param override override the check and persist the new state.
+	 * @return true if the cache has been saved correctly
 	 */
 
-	private boolean storeWithMerge(final cgCache cache, final boolean forceSave) {
-		if (forceSave) {
-			return storage.saveCache(cache);
+	private boolean storeWithMerge(final cgCache cache, final boolean override) {
+		if (!override) {
+			final cgCache oldCache = storage.loadCache(cache.geocode, cache.guid,
+					true, true, true, true, true, true);
+			cache.gatherMissingFrom(oldCache);
 		}
-
-		final cgCache oldCache = storage.loadCache(cache.geocode, cache.guid,
-				                                   true, true, true, true, true, true);
-		return storage.saveCache(cache.merge(storage, oldCache));
+		return storage.saveCache(cache);
 	}
 
 	public void dropStored(int listId) {

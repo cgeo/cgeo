@@ -84,129 +84,131 @@ public class cgCache implements ICache {
 	public boolean statusCheckedView = false;
 	public String directionImg = null;
 
-	public cgCache merge(cgData storage, cgCache oldCache) {
-
-		if (oldCache == null) {
-			return this;
+	/**
+	 * Gather missing information from another cache object.
+	 *
+	 * @param other the other version, or null if non-existent
+	 */
+	public void gatherMissingFrom(final cgCache other) {
+		if (other == null) {
+			return;
 		}
 
 		updated = System.currentTimeMillis();
-		if (detailed == false && oldCache.detailed) {
+		if (detailed == false && other.detailed) {
 			detailed = true;
-			detailedUpdate = System.currentTimeMillis();
+			detailedUpdate = updated;
 		}
 
 		if (visitedDate == null || visitedDate == 0) {
-			visitedDate = oldCache.visitedDate;
+			visitedDate = other.visitedDate;
 		}
 		if (reason == null || reason == 0) {
-			reason = oldCache.reason;
+			reason = other.reason;
 		}
 		if (StringUtils.isBlank(geocode)) {
-			geocode = oldCache.geocode;
+			geocode = other.geocode;
 		}
 		if (StringUtils.isBlank(cacheId)) {
-			cacheId = oldCache.cacheId;
+			cacheId = other.cacheId;
 		}
 		if (StringUtils.isBlank(guid)) {
-			guid = oldCache.guid;
+			guid = other.guid;
 		}
 		if (StringUtils.isBlank(type)) {
-			type = oldCache.type;
+			type = other.type;
 		}
 		if (StringUtils.isBlank(name)) {
-			name = oldCache.name;
+			name = other.name;
 		}
 		if (StringUtils.isBlank(nameSp)) {
-			nameSp = oldCache.nameSp;
+			nameSp = other.nameSp;
 		}
 		if (StringUtils.isBlank(owner)) {
-			owner = oldCache.owner;
+			owner = other.owner;
 		}
 		if (StringUtils.isBlank(ownerReal)) {
-			ownerReal = oldCache.ownerReal;
+			ownerReal = other.ownerReal;
 		}
 		if (hidden == null) {
-			hidden = oldCache.hidden;
+			hidden = other.hidden;
 		}
 		if (StringUtils.isBlank(hint)) {
-			hint = oldCache.hint;
+			hint = other.hint;
 		}
 		if (StringUtils.isBlank(size)) {
-			size = oldCache.size;
+			size = other.size;
 		}
 		if (difficulty == null || difficulty == 0) {
-			difficulty = oldCache.difficulty;
+			difficulty = other.difficulty;
 		}
 		if (terrain == null || terrain == 0) {
-			terrain = oldCache.terrain;
+			terrain = other.terrain;
 		}
 		if (direction == null) {
-			direction = oldCache.direction;
+			direction = other.direction;
 		}
 		if (distance == null) {
-			distance = oldCache.distance;
+			distance = other.distance;
 		}
 		if (StringUtils.isBlank(latlon)) {
-			latlon = oldCache.latlon;
+			latlon = other.latlon;
 		}
 		if (StringUtils.isBlank(latitudeString)) {
-			latitudeString = oldCache.latitudeString;
+			latitudeString = other.latitudeString;
 		}
 		if (StringUtils.isBlank(longitudeString)) {
-			longitudeString = oldCache.longitudeString;
+			longitudeString = other.longitudeString;
 		}
 		if (StringUtils.isBlank(location)) {
-			location = oldCache.location;
+			location = other.location;
 		}
 		if (coords == null) {
-			coords = oldCache.coords;
+			coords = other.coords;
 		}
 		if (elevation == null) {
-			elevation = oldCache.elevation;
+			elevation = other.elevation;
 		}
 		if (StringUtils.isNotBlank(personalNote)) {
-			personalNote = oldCache.personalNote;
+			personalNote = other.personalNote;
 		}
 		if (StringUtils.isBlank(shortdesc)) {
-			shortdesc = oldCache.shortdesc;
+			shortdesc = other.shortdesc;
 		}
 		if (StringUtils.isBlank(description)) {
-			description = oldCache.description;
+			description = other.description;
 		}
 		if (favouriteCnt == null) {
-			favouriteCnt = oldCache.favouriteCnt;
+			favouriteCnt = other.favouriteCnt;
 		}
 		if (rating == null) {
-			rating = oldCache.rating;
+			rating = other.rating;
 		}
 		if (votes == null) {
-			votes = oldCache.votes;
+			votes = other.votes;
 		}
 		if (myVote == null) {
-			myVote = oldCache.myVote;
+			myVote = other.myVote;
 		}
 		if (inventoryItems == 0) {
-			inventoryItems = oldCache.inventoryItems;
+			inventoryItems = other.inventoryItems;
 		}
 		if (attributes == null) {
-			attributes = oldCache.attributes;
+			attributes = other.attributes;
 		}
 		if (waypoints == null) {
-			waypoints = oldCache.waypoints;
+			waypoints = other.waypoints;
 		}
-		cgWaypoint.mergeWayPoints(waypoints, oldCache.waypoints);
+		cgWaypoint.mergeWayPoints(waypoints, other.waypoints);
 		if (spoilers == null) {
-			spoilers = oldCache.spoilers;
+			spoilers = other.spoilers;
 		}
 		if (inventory == null) {
-			inventory = oldCache.inventory;
+			inventory = other.inventory;
 		}
 		if (logs == null || logs.isEmpty()) { // keep last known logs if none
-			logs = oldCache.logs;
+			logs = other.logs;
 		}
-
-		return this;
 	}
 
 	public boolean hasTrackables(){
