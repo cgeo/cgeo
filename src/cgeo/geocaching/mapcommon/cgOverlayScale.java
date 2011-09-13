@@ -59,8 +59,7 @@ public class cgOverlayScale implements OverlayBase {
 		final Geopoint leftCoords = new Geopoint(center.getLatitudeE6() / 1e6, center.getLongitudeE6() / 1e6 - span /2);
 		final Geopoint rightCoords = new Geopoint(center.getLatitudeE6() / 1e6, center.getLongitudeE6() / 1e6 + span /2);
 
-		distance = cgBase.getDistance(leftCoords, rightCoords);
-		distance = distance / 2;
+		distance = leftCoords.distanceTo(rightCoords) / 2;
 		distanceRound = 0d;
 
 		if(settings.units == cgSettings.unitsImperial) {

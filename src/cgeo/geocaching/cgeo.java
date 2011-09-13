@@ -555,7 +555,7 @@ public class cgeo extends AbstractActivity {
 						if (addCoords == null) {
 							navLocation.setText(res.getString(R.string.loc_no_addr));
 						}
-						if (addCoords == null || (cgBase.getDistance(geo.coordsNow, addCoords) > 0.5 && addressObtaining == false)) {
+						if (addCoords == null || (geo.coordsNow.distanceTo(addCoords) > 0.5 && addressObtaining == false)) {
 							(new obtainAddress()).start();
 						}
 					} else {

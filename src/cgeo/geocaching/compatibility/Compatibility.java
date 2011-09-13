@@ -27,7 +27,7 @@ public final class Compatibility {
 		return level8;
 	}
 
-	public static Double getDirectionNow(final Double directionNowPre,
+	public static Float getDirectionNow(final Float directionNowPre,
 			final Activity activity) {
 		AndroidLevel8 level8 = getLevel8();
 

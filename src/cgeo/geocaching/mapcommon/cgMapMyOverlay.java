@@ -14,7 +14,6 @@ import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Point;
 import android.location.Location;
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.mapinterfaces.GeoPointImpl;
@@ -28,7 +27,7 @@ public class cgMapMyOverlay implements OverlayBase {
 	private cgSettings settings = null;
 	private Location coordinates = null;
 	private GeoPointImpl location = null;
-	private Double heading = Double.valueOf(0);
+	private Float heading = 0f;
 	private Paint accuracyCircle = null;
 	private Paint historyLine = null;
 	private Paint historyLineShadow = null;
@@ -59,8 +58,8 @@ public class cgMapMyOverlay implements OverlayBase {
 		location = settings.getMapFactory().getGeoPointBase(new Geopoint(coordinates));
 	}
 
-	public void setHeading(Double headingIn) {
-		heading = headingIn;
+	public void setHeading(Float bearingNow) {
+		heading = bearingNow;
 	}
 
 	@Override
@@ -128,7 +127,7 @@ public class cgMapMyOverlay implements OverlayBase {
 		accuracyCircle.setStyle(Style.FILL);
 		canvas.drawCircle(center.x, center.y, radius, accuracyCircle);
 
-		if (coordinates.getAccuracy() < 50f && ((historyRecent != null && cgBase.getDistance(new Geopoint(historyRecent), new Geopoint(coordinates)) > 0.005) || historyRecent == null)) {
+		if (coordinates.getAccuracy() < 50f && ((historyRecent != null && historyRecent.distanceTo(coordinates) > 5.0) || historyRecent == null)) {
 			if (historyRecent != null) history.add(historyRecent);
 			historyRecent = coordinates;
 

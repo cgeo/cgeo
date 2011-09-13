@@ -308,7 +308,7 @@ public class cgeowaypointadd extends AbstractActivity {
 				Double latParsed = null;
 				Double lonParsed = null;
 
-				final Geopoint coordsDst = cgBase.getRadialDistance(new Geopoint(latitude, longitude), bearing, distance);
+				final Geopoint coordsDst = new Geopoint(latitude, longitude).project(bearing, distance);
 
 				latParsed = coordsDst.getLatitude();
 				lonParsed = coordsDst.getLongitude();

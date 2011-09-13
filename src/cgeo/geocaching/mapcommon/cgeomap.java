@@ -788,7 +788,7 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 					if (geo.bearingNow != null) {
 						overlayMyLoc.setHeading(geo.bearingNow);
 					} else {
-						overlayMyLoc.setHeading(Double.valueOf(0));
+						overlayMyLoc.setHeading(0f);
 					}
 					repaintRequired = true;
 				}
