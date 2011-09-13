@@ -20,6 +20,7 @@ import android.util.Log;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.geopoint.Geopoint;
 
 /**
  * Internal c:geo representation of a "cache"
@@ -35,7 +36,7 @@ public class cgCache implements ICache {
      * Code of the cache like GCABCD
      */
 	public String geocode = "";
-	public String cacheid = "";
+	public String cacheId = "";
 	public String guid = "";
 	public String type = "";
 	public String name = "";
@@ -47,14 +48,13 @@ public class cgCache implements ICache {
 	public String size = "";
 	public Float difficulty = Float.valueOf(0);
 	public Float terrain = Float.valueOf(0);
-	public Double direction = null;
-	public Double distance = null;
+	public Float direction = null;
+	public Float distance = null;
 	public String latlon = "";
 	public String latitudeString = "";
 	public String longitudeString = "";
 	public String location = "";
-	public Double latitude = null;
-	public Double longitude = null;
+	public Geopoint coords = null;
 	public boolean reliableLatLon = false;
 	public Double elevation = null;
 	public String personalNote = null;
@@ -84,31 +84,7 @@ public class cgCache implements ICache {
 	public boolean statusCheckedView = false;
 	public String directionImg = null;
 
-	public cgCache merge(cgData storage) {
-
-		boolean loadA = true;
-		boolean loadW = true;
-		boolean loadS = true;
-		boolean loadL = true;
-		boolean loadI = true;
-
-		if (attributes == null || attributes.isEmpty()) {
-			loadA = false;
-		}
-		if (waypoints == null || waypoints.isEmpty()) {
-			loadW = false;
-		}
-		if (spoilers == null || spoilers.isEmpty()) {
-			loadS = false;
-		}
-		if (logs == null || logs.isEmpty()) {
-			loadL = false;
-		}
-		if (inventory == null || inventory.isEmpty()) {
-			loadI = false;
-		}
-
-		final cgCache oldCache = storage.loadCache(geocode, guid, loadA, loadW, loadS, loadL, loadI, false);
+	public cgCache merge(cgData storage, cgCache oldCache) {
 
 		if (oldCache == null) {
 			return this;
@@ -129,8 +105,8 @@ public class cgCache implements ICache {
 		if (StringUtils.isBlank(geocode)) {
 			geocode = oldCache.geocode;
 		}
-		if (StringUtils.isBlank(cacheid)) {
-			cacheid = oldCache.cacheid;
+		if (StringUtils.isBlank(cacheId)) {
+			cacheId = oldCache.cacheId;
 		}
 		if (StringUtils.isBlank(guid)) {
 			guid = oldCache.guid;
@@ -183,11 +159,8 @@ public class cgCache implements ICache {
 		if (StringUtils.isBlank(location)) {
 			location = oldCache.location;
 		}
-		if (latitude == null) {
-			latitude = oldCache.latitude;
-		}
-		if (longitude == null) {
-			longitude = oldCache.longitude;
+		if (coords == null) {
+			coords = oldCache.coords;
 		}
 		if (elevation == null) {
 			elevation = oldCache.elevation;
@@ -289,12 +262,12 @@ public class cgCache implements ICache {
 	}
 
 	public boolean logVisit(IAbstractActivity fromActivity) {
-		if (StringUtils.isBlank(cacheid)) {
+		if (StringUtils.isBlank(cacheId)) {
 			fromActivity.showToast(((Activity)fromActivity).getResources().getString(R.string.err_cannot_log_visit));
 			return true;
 		}
 		Intent logVisitIntent = new Intent((Activity)fromActivity, cgeovisit.class);
-		logVisitIntent.putExtra(cgeovisit.EXTRAS_ID, cacheid);
+		logVisitIntent.putExtra(cgeovisit.EXTRAS_ID, cacheId);
 		logVisitIntent.putExtra(cgeovisit.EXTRAS_GEOCODE, geocode.toUpperCase());
 		logVisitIntent.putExtra(cgeovisit.EXTRAS_FOUND, found);
 
@@ -307,7 +280,7 @@ public class cgCache implements ICache {
         String log = "";
         if (StringUtils.isNotBlank(settings.getSignature())
                 && settings.signatureAutoinsert) {
-            log = LogTemplateProvider.applyTemplates(settings.getSignature(), base);
+            log = LogTemplateProvider.applyTemplates(settings.getSignature(), base, true);
         }
         logOffline(fromActivity, log, Calendar.getInstance(), logType);
         return true;

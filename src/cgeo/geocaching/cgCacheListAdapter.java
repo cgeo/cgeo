@@ -35,6 +35,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import cgeo.geocaching.filter.cgFilter;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.DistanceComparator;
 import cgeo.geocaching.sorting.VisitComparator;
@@ -49,12 +50,10 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 	private LayoutInflater inflater = null;
 	private Activity activity = null;
 	private cgBase base = null;
-	private DistanceComparator dstComparator = null;
 	private CacheComparator statComparator = null;
 	private boolean historic = false;
-	private Double latitude = null;
-	private Double longitude = null;
-	private Double azimuth = Double.valueOf(0);
+	private Geopoint coords = null;
+	private float azimuth = 0;
 	private long lastSort = 0L;
 	private boolean sort = true;
 	private int checked = 0;
@@ -79,7 +78,6 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		settings = settingsIn;
 		list = listIn;
 		base = baseIn;
-		dstComparator = new DistanceComparator();
 
 		DisplayMetrics metrics = new DisplayMetrics();
 		activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -105,7 +103,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 	public void setComparator(CacheComparator comparator) {
 		statComparator = comparator;
 
-		forceSort(latitude, longitude);
+		forceSort(coords);
 	}
 
 	/**
@@ -241,7 +239,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		notifyDataSetChanged();
 	}
 
-	public void forceSort(Double latitudeIn, Double longitudeIn) {
+	public void forceSort(final Geopoint coordsIn) {
 		if (list == null || list.isEmpty()) {
 			return;
 		}
@@ -253,11 +251,11 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 			if (statComparator != null) {
 				Collections.sort((List<cgCache>) list, statComparator);
 			} else {
-				if (latitudeIn == null || longitudeIn == null) {
+				if (coordsIn == null) {
 					return;
 				}
 
-				dstComparator.setCoords(latitudeIn, longitudeIn);
+				final DistanceComparator dstComparator = new DistanceComparator(coordsIn);
 				Collections.sort((List<cgCache>) list, dstComparator);
 			}
 			notifyDataSetChanged();
@@ -266,20 +264,19 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		}
 	}
 
-	public void setActualCoordinates(Double latitudeIn, Double longitudeIn) {
-		if (latitudeIn == null || longitudeIn == null) {
+	public void setActualCoordinates(final Geopoint coordsIn) {
+		if (coordsIn == null) {
 			return;
 		}
 
-		latitude = latitudeIn;
-		longitude = longitudeIn;
+		coords = coordsIn;
 
 		if (list != null && list.isEmpty() == false && (System.currentTimeMillis() - lastSort) > 1000 && sort) {
 			try {
 				if (statComparator != null) {
 					Collections.sort((List<cgCache>) list, statComparator);
 				} else {
-					dstComparator.setCoords(latitudeIn, longitudeIn);
+					final DistanceComparator dstComparator = new DistanceComparator(coordsIn);
 					Collections.sort((List<cgCache>) list, dstComparator);
 				}
 				notifyDataSetChanged();
@@ -292,23 +289,23 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
 		if (CollectionUtils.isNotEmpty(distances)) {
 			for (cgDistanceView distance : distances) {
-				distance.update(latitudeIn, longitudeIn);
+				distance.update(coordsIn);
 			}
 		}
 
 		if (CollectionUtils.isNotEmpty(compasses)) {
 			for (cgCompassMini compass : compasses) {
-				compass.updateCoords(latitudeIn, longitudeIn);
+				compass.updateCoords(coordsIn);
 			}
 		}
 	}
 
-	public void setActualHeading(Double azimuthIn) {
-		if (azimuthIn == null) {
+	public void setActualHeading(Float directionNow) {
+		if (directionNow == null) {
 			return;
 		}
 
-		azimuth = azimuthIn;
+		azimuth = directionNow;
 
 		if (CollectionUtils.isNotEmpty(compasses)) {
 			for (cgCompassMini compass : compasses) {
@@ -438,18 +435,21 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		if (distances.contains(holder.distance) == false) {
 			distances.add(holder.distance);
 		}
-		holder.distance.setContent(base, cache.latitude, cache.longitude);
+		holder.distance.setContent(base, cache.coords);
 		if (compasses.contains(holder.direction) == false) {
 			compasses.add(holder.direction);
 		}
-		holder.direction.setContent(cache.latitude, cache.longitude);
+		holder.direction.setContent(cache.coords);
 
 		if (cache.found && cache.logOffline) {
 		    holder.logStatusMark.setImageResource(R.drawable.mark_green_red);
+		    holder.logStatusMark.setVisibility(View.VISIBLE);
 		} else if (cache.found) {
 		    holder.logStatusMark.setImageResource(R.drawable.mark_green);
+		    holder.logStatusMark.setVisibility(View.VISIBLE);
 		} else if (cache.logOffline) {
             holder.logStatusMark.setImageResource(R.drawable.mark_red);
+		    holder.logStatusMark.setVisibility(View.VISIBLE);
         } else {
 		    holder.logStatusMark.setVisibility(View.GONE);
 		}
@@ -484,12 +484,12 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		}
 
 		boolean setDiDi = false;
-		if (cache.latitude != null && cache.longitude != null) {
+		if (cache.coords != null) {
 			holder.direction.setVisibility(View.VISIBLE);
 			holder.direction.updateAzimuth(azimuth);
-			if (latitude != null && longitude != null) {
-				holder.distance.update(latitude, longitude);
-				holder.direction.updateCoords(latitude, longitude);
+			if (coords != null) {
+				holder.distance.update(coords);
+				holder.direction.updateCoords(coords);
 			}
 			setDiDi = true;
 		} else {
@@ -806,7 +806,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		}
 
 		if (sort) {
-			forceSort(latitude, longitude);
+			forceSort(coords);
 		}
 	}
 

@@ -8,11 +8,12 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.apps.App;
+import cgeo.geocaching.geopoint.Geopoint;
 
 interface NavigationApp extends App {
 	public boolean invoke(final cgGeo geo, final Activity activity,
 			final Resources res,
 			final cgCache cache,
 			final UUID searchId, final cgWaypoint waypoint,
-			final Double latitude, final Double longitude);
+			final Geopoint coords);
 }

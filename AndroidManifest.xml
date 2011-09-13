@@ -288,5 +288,7 @@
 				<action android:name="cgeo.geocaching.CGEOSELMAP"/>
 			</intent-filter>
 		</activity>
+        <provider android:name="cgeo.geocaching.apps.LocusDataStorageProvider" 
+            android:authorities="cgeo.geocaching.apps.locusdatastorageprovider" />
 	</application>
 </manifest>

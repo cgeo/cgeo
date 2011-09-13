@@ -145,7 +145,7 @@ public class cgeopopup extends AbstractActivity {
 		super.onPrepareOptionsMenu(menu);
 
 		try {
-			if (cache != null && cache.latitude != null && cache.longitude != null) {
+			if (cache != null && cache.coords != null) {
 				menu.findItem(0).setVisible(true);
 				menu.findItem(2).setVisible(true);
 				menu.findItem(5).setVisible(true);
@@ -509,8 +509,8 @@ public class cgeopopup extends AbstractActivity {
 			}
 
 			try {
-				if (geo.latitudeNow != null && geo.longitudeNow != null && cache != null && cache.latitude != null && cache.longitude != null) {
-					cacheDistance.setText(base.getHumanDistance(cgBase.getDistance(geo.latitudeNow, geo.longitudeNow, cache.latitude, cache.longitude)));
+				if (geo.coordsNow != null && cache != null && cache.coords != null) {
+					cacheDistance.setText(base.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
 					cacheDistance.bringToFront();
 				}
 			} catch (Exception e) {
@@ -520,15 +520,15 @@ public class cgeopopup extends AbstractActivity {
 	}
 
 	private void navigateTo() {
-		if (cache == null || cache.latitude == null || cache.longitude == null) {
+		if (cache == null || cache.coords == null) {
 			showToast(res.getString(R.string.err_location_unknown));
 		}
 
 		cgeonavigate navigateActivity = new cgeonavigate();
 
 		Intent navigateIntent = new Intent(this, navigateActivity.getClass());
-		navigateIntent.putExtra("latitude", cache.latitude);
-		navigateIntent.putExtra("longitude", cache.longitude);
+		navigateIntent.putExtra("latitude", cache.coords.getLatitude());
+		navigateIntent.putExtra("longitude", cache.coords.getLongitude());
 		navigateIntent.putExtra("geocode", "");
 		navigateIntent.putExtra("name", "Some destination");
 
@@ -536,11 +536,11 @@ public class cgeopopup extends AbstractActivity {
 	}
 
 	private void cachesAround() {
-		if (cache == null || cache.latitude == null || cache.longitude == null) {
+		if (cache == null || cache.coords == null) {
 			showToast(res.getString(R.string.err_location_unknown));
 		}
 
-		cgeocaches.startActivityCachesAround(this, cache.latitude, cache.longitude);
+		cgeocaches.startActivityCachesAround(this, cache.coords);
 
 		finish();
 	}
@@ -641,7 +641,7 @@ public class cgeopopup extends AbstractActivity {
 	}
 
 	public void goCompass(View view) {
-		if (cache == null || cache.latitude == null || cache.longitude == null) {
+		if (cache == null || cache.coords == null) {
 			showToast(res.getString(R.string.cache_coordinates_no));
 
 			return;
@@ -650,8 +650,8 @@ public class cgeopopup extends AbstractActivity {
 		cgeonavigate navigateActivity = new cgeonavigate();
 
 		Intent navigateIntent = new Intent(cgeopopup.this, navigateActivity.getClass());
-		navigateIntent.putExtra("latitude", cache.latitude);
-		navigateIntent.putExtra("longitude", cache.longitude);
+		navigateIntent.putExtra("latitude", cache.coords.getLatitude());
+		navigateIntent.putExtra("longitude", cache.coords.getLongitude());
 		navigateIntent.putExtra("geocode", cache.geocode.toUpperCase());
 		navigateIntent.putExtra("name", cache.name);
 
