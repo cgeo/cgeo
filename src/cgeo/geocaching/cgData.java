@@ -49,7 +49,7 @@ public class cgData {
 	private cgDbHelper dbHelper = null;
 	private SQLiteDatabase databaseRO = null;
 	private SQLiteDatabase databaseRW = null;
-	private static final int dbVersion = 56;
+	private static final int dbVersion = 57;
 	private static final String dbName = "data";
 	private static final String dbTableCaches = "cg_caches";
 	private static final String dbTableLists = "cg_lists";
@@ -466,20 +466,20 @@ public class cgData {
 			db.execSQL(dbCreateTrackables);
 			db.execSQL(dbCreateSearchDestinationHistory);
 
-			db.execSQL("create index if not exists in_a on " + dbTableCaches + " (geocode)");
-			db.execSQL("create index if not exists in_b on " + dbTableCaches + " (guid)");
-			db.execSQL("create index if not exists in_c on " + dbTableCaches + " (reason)");
-			db.execSQL("create index if not exists in_d on " + dbTableCaches + " (detailed)");
-			db.execSQL("create index if not exists in_e on " + dbTableCaches + " (type)");
-			db.execSQL("create index if not exists in_f on " + dbTableCaches + " (visiteddate, detailedupdate)");
-			db.execSQL("create index if not exists in_a on " + dbTableAttributes + " (geocode)");
-			db.execSQL("create index if not exists in_a on " + dbTableWaypoints + " (geocode)");
-			db.execSQL("create index if not exists in_b on " + dbTableWaypoints + " (geocode, type)");
-			db.execSQL("create index if not exists in_a on " + dbTableSpoilers + " (geocode)");
-			db.execSQL("create index if not exists in_a on " + dbTableLogs + " (geocode)");
-			db.execSQL("create index if not exists in_a on " + dbTableLogCount + " (geocode)");
-			db.execSQL("create index if not exists in_a on " + dbTableLogsOffline + " (geocode)");
-			db.execSQL("create index if not exists in_a on " + dbTableTrackables + " (geocode)");
+			db.execSQL("create index if not exists in_caches_geo on " + dbTableCaches + " (geocode)");
+			db.execSQL("create index if not exists in_caches_guid on " + dbTableCaches + " (guid)");
+			db.execSQL("create index if not exists in_caches_reason on " + dbTableCaches + " (reason)");
+			db.execSQL("create index if not exists in_caches_detailed on " + dbTableCaches + " (detailed)");
+			db.execSQL("create index if not exists in_caches_type on " + dbTableCaches + " (type)");
+			db.execSQL("create index if not exists in_caches_visit_detail on " + dbTableCaches + " (visiteddate, detailedupdate)");
+			db.execSQL("create index if not exists in_attr_geo on " + dbTableAttributes + " (geocode)");
+			db.execSQL("create index if not exists in_wpts_geo on " + dbTableWaypoints + " (geocode)");
+			db.execSQL("create index if not exists in_wpts_geo_type on " + dbTableWaypoints + " (geocode, type)");
+			db.execSQL("create index if not exists in_spoil_geo on " + dbTableSpoilers + " (geocode)");
+			db.execSQL("create index if not exists in_logs_geo on " + dbTableLogs + " (geocode)");
+			db.execSQL("create index if not exists in_logcount_geo on " + dbTableLogCount + " (geocode)");
+			db.execSQL("create index if not exists in_logsoff_geo on " + dbTableLogsOffline + " (geocode)");
+			db.execSQL("create index if not exists in_trck_geo on " + dbTableTrackables + " (geocode)");
 		}
 
 		@Override
@@ -817,6 +817,34 @@ public class cgData {
 							Log.e(cgSettings.tag, "Failed to upgrade to ver. 56: " + e.toString());
 						}
 					}
+
+					// Create missing indices. See issue #435
+					if (oldVersion < 57) { // update to 57
+					    try {
+					        db.execSQL("drop index in_a");
+					        db.execSQL("drop index in_b");
+					        db.execSQL("drop index in_c");
+					        db.execSQL("drop index in_d");
+					        db.execSQL("drop index in_e");
+					        db.execSQL("drop index in_f");
+					        db.execSQL("create index if not exists in_caches_geo on " + dbTableCaches + " (geocode)");
+					        db.execSQL("create index if not exists in_caches_guid on " + dbTableCaches + " (guid)");
+					        db.execSQL("create index if not exists in_caches_reason on " + dbTableCaches + " (reason)");
+					        db.execSQL("create index if not exists in_caches_detailed on " + dbTableCaches + " (detailed)");
+					        db.execSQL("create index if not exists in_caches_type on " + dbTableCaches + " (type)");
+					        db.execSQL("create index if not exists in_caches_visit_detail on " + dbTableCaches + " (visiteddate, detailedupdate)");
+					        db.execSQL("create index if not exists in_attr_geo on " + dbTableAttributes + " (geocode)");
+					        db.execSQL("create index if not exists in_wpts_geo on " + dbTableWaypoints + " (geocode)");
+					        db.execSQL("create index if not exists in_wpts_geo_type on " + dbTableWaypoints + " (geocode, type)");
+					        db.execSQL("create index if not exists in_spoil_geo on " + dbTableSpoilers + " (geocode)");
+					        db.execSQL("create index if not exists in_logs_geo on " + dbTableLogs + " (geocode)");
+					        db.execSQL("create index if not exists in_logcount_geo on " + dbTableLogCount + " (geocode)");
+					        db.execSQL("create index if not exists in_logsoff_geo on " + dbTableLogsOffline + " (geocode)");
+					        db.execSQL("create index if not exists in_trck_geo on " + dbTableTrackables + " (geocode)");
+					    } catch (Exception e) {
+					        Log.e(cgSettings.tag, "Failed to upgrade to ver. 57: " + e.toString());
+					    }
+					}
 				}
 
 				db.setTransactionSuccessful();
@@ -1149,9 +1177,9 @@ public class cgData {
 		values.put("location", cache.location);
 		values.put("distance", cache.distance);
 		values.put("direction", cache.direction);
-		// FIXME: if the user is not logged in, coords may be null
-		values.put("latitude", cache.coords.getLatitude());
-		values.put("longitude", cache.coords.getLongitude());
+		// If we have no coordinates, store phony ones instead
+		values.put("latitude", cache.coords == null ? 0 : cache.coords.getLatitude());
+		values.put("longitude", cache.coords == null ? 0 : cache.coords.getLongitude());
 		values.put("reliable_latlon", cache.reliableLatLon ? 1 : 0);
 		values.put("elevation", cache.elevation);
 		values.put("shortdesc", cache.shortdesc);
