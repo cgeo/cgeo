@@ -162,6 +162,10 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 		}
 	}
 
+	public String getFilterName() {
+	    return currentFilter.getFilterName();
+	}
+
 	public void setHistoric(boolean historicIn) {
 		historic = historicIn;
 
