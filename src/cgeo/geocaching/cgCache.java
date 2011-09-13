@@ -48,8 +48,8 @@ public class cgCache implements ICache {
 	public String size = "";
 	public Float difficulty = Float.valueOf(0);
 	public Float terrain = Float.valueOf(0);
-	public Double direction = null;
-	public Double distance = null;
+	public Float direction = null;
+	public Float distance = null;
 	public String latlon = "";
 	public String latitudeString = "";
 	public String longitudeString = "";
@@ -280,7 +280,7 @@ public class cgCache implements ICache {
         String log = "";
         if (StringUtils.isNotBlank(settings.getSignature())
                 && settings.signatureAutoinsert) {
-            log = LogTemplateProvider.applyTemplates(settings.getSignature(), base);
+            log = LogTemplateProvider.applyTemplates(settings.getSignature(), base, true);
         }
         logOffline(fromActivity, log, Calendar.getInstance(), logType);
         return true;

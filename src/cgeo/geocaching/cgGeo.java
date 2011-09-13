@@ -42,7 +42,7 @@ public class cgGeo {
 	public Geopoint coordsNow = null;
 	public Geopoint coordsBefore = null;
 	public Double altitudeNow = null;
-	public Double bearingNow = null;
+	public Float bearingNow = null;
 	public Float speedNow = null;
 	public Float accuracyNow = null;
 	public Integer satellitesVisible = null;
@@ -289,7 +289,7 @@ public class cgGeo {
 		gps = -1;
 		coordsNow = coords;
 		altitudeNow = null;
-		bearingNow = Double.valueOf(0);
+		bearingNow = 0f;
 		speedNow = 0f;
 		accuracyNow = 999f;
 
@@ -324,9 +324,9 @@ public class cgGeo {
 			altitudeNow = null;
 		}
 		if (location.hasBearing() && gps != -1) {
-			bearingNow = Double.valueOf(location.getBearing());
+			bearingNow = location.getBearing();
 		} else {
-			bearingNow = Double.valueOf(0);
+			bearingNow = 0f;
 		}
 		if (location.hasSpeed() && gps != -1) {
 			speedNow = location.getSpeed();
@@ -342,9 +342,9 @@ public class cgGeo {
 		if (gps == 1) {
 			// save travelled distance only when location is from GPS
 			if (coordsBefore != null && coordsNow != null) {
-				final double dst = cgBase.getDistance(coordsBefore, coordsNow);
+				final float dst = coordsBefore.distanceTo(coordsNow);
 
-				if (Double.isNaN(dst) == false && dst > 0.005) {
+				if (dst > 0.005) {
 					distanceNow += dst;
 
 					coordsBefore = coordsNow;
@@ -375,7 +375,7 @@ public class cgGeo {
 				return;
 			}
 
-			if (settings.publicLoc == 1 && (lastGo4cacheCoords == null || cgBase.getDistance(coordsNow, lastGo4cacheCoords) > 0.75)) {
+			if (settings.publicLoc == 1 && (lastGo4cacheCoords == null || coordsNow.distanceTo(lastGo4cacheCoords) > 0.75)) {
 				g4cRunning = true;
 
 				final String host = "api.go4cache.com";

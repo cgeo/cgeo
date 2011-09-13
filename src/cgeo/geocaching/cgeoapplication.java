@@ -727,17 +727,14 @@ public class cgeoapplication extends Application {
 	 * @return
 	 */
 
-	private boolean storeWithMerge(cgCache cache, boolean forceSave) {
-		boolean status;
-		cgCache oldCache = null;
-		if (forceSave || (oldCache = storage.loadCache(cache.geocode, cache.guid, false, true, true, true, true, true)) !=null ) { // if for offline, do not merge
-			status = storage.saveCache(cache);
-		} else {
-			cgCache mergedCache = cache.merge(storage,oldCache);
-
-			status = storage.saveCache(mergedCache);
+	private boolean storeWithMerge(final cgCache cache, final boolean forceSave) {
+		if (forceSave) {
+			return storage.saveCache(cache);
 		}
-		return status;
+
+		final cgCache oldCache = storage.loadCache(cache.geocode, cache.guid,
+				                                   true, true, true, true, true, true);
+		return storage.saveCache(cache.merge(storage, oldCache));
 	}
 
 	public void dropStored(int listId) {

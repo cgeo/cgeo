@@ -174,9 +174,9 @@ public class cgBase {
 	private static final Pattern patternViewstateFieldCount = Pattern.compile("id=\"__VIEWSTATEFIELDCOUNT\"[^(value)]+value=\"(\\d+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	private static final Pattern patternViewstates = Pattern.compile("id=\"__VIEWSTATE(\\d*)\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
 	private static final Pattern patternIsPremium = Pattern.compile("<span id=\"ctl00_litPMLevel\"", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-	public static final double miles2km = 1.609344;
-	public static final double feet2km = 0.0003048;
-	public static final double yards2km = 0.0009144;
+	public static final float miles2km = 1.609344f;
+	public static final float feet2km = 0.0003048f;
+	public static final float yards2km = 0.0009144f;
 	public static final double deg2rad = Math.PI / 180;
 	public static final double rad2deg = 180 / Math.PI;
 	public static final float erad = 6371.0f;
@@ -646,10 +646,12 @@ public class cgBase {
 			}
 		}
 
-		int startPos = -1;
-		int endPos = -1;
-
-		startPos = page.indexOf("<div id=\"ctl00_ContentBody_ResultsPanel\"");
+		if (page.indexOf("SearchResultsTable") < 0) {
+			// there are no results. aborting here avoids a wrong error log in the next parsing step
+			return caches;
+		}
+		
+		int startPos = page.indexOf("<div id=\"ctl00_ContentBody_ResultsPanel\"");
 		if (startPos == -1) {
 			Log.e(cgSettings.tag, "cgeoBase.parseSearch: ID \"ctl00_ContentBody_dlResults\" not found on page");
 			return null;
@@ -658,7 +660,7 @@ public class cgBase {
 		page = page.substring(startPos); // cut on <table
 
 		startPos = page.indexOf(">");
-		endPos = page.indexOf("ctl00_ContentBody_UnitTxt");
+		int endPos = page.indexOf("ctl00_ContentBody_UnitTxt");
 		if (startPos == -1 || endPos == -1) {
 			Log.e(cgSettings.tag, "cgeoBase.parseSearch: ID \"ctl00_ContentBody_UnitTxt\" not found on page");
 			return null;
@@ -2361,31 +2363,7 @@ public class cgBase {
 		return text.trim();
 	}
 
-	public static double getDistance(final Geopoint coords1, final Geopoint coords2) {
-		if (coords1 == null || coords2 == null) {
-			return 0;
-		}
-
-		return coords1.distanceTo(coords2);        // TODO Check callers for null and replace them
-	}
-
-	public static double getHeading(final Geopoint coords1, final Geopoint coords2) {
-		return coords1.bearingTo(coords2);         // TODO Replace callers
-	}
-
-	public static Geopoint getRadialDistance(final Geopoint coords, double bearing, double distance) {
-		return coords.project(bearing, distance);  // TODO Replace callers
-	}
-
 	public String getHumanDistance(Float distance) {
-		if (distance == null) {
-			return "?";
-		}
-
-		return getHumanDistance(Double.valueOf(distance));
-	}
-
-	public String getHumanDistance(Double distance) {
 		if (distance == null) {
 			return "?";
 		}
@@ -3035,7 +3013,7 @@ public class cgBase {
 		}
 
 		final cgCacheWrap caches = parseSearch(thread, url, page, showCaptcha);
-		if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
+		if (caches == null || caches.cacheList == null) {
 			Log.e(cgSettings.tag, "cgeoBase.searchByOwner: No cache parsed");
 		}
 

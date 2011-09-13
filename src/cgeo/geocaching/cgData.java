@@ -589,8 +589,9 @@ public class cgData {
 
 					if (oldVersion < 43) { // upgrade to 43
 						try {
+							final String dbTableCachesTemp = dbTableCaches + "_temp";
 							final String dbCreateCachesTemp = ""
-									+ "create temporary table " + dbTableCaches + "_temp ("
+									+ "create temporary table " + dbTableCachesTemp + " ("
 									+ "_id integer primary key autoincrement, "
 									+ "updated long not null, "
 									+ "detailed integer not null default 0, "
@@ -671,11 +672,11 @@ public class cgData {
 
 							db.beginTransaction();
 							db.execSQL(dbCreateCachesTemp);
-							db.execSQL("insert into " + dbTableCaches + "_temp select _id, updated, detailed, detailedupdate, geocode, reason, cacheid, guid, type, name, owner, hidden, hint, size, difficulty, terrain, latlon, latitude_string, longitude_string, location, distance, latitude, longitude, shortdesc, description, rating, votes, vote, disabled, archived, members, found, favourite, inventorycoins, inventorytags, inventoryunknown from " + dbTableCaches);
+							db.execSQL("insert into " + dbTableCachesTemp + " select _id, updated, detailed, detailedupdate, geocode, reason, cacheid, guid, type, name, owner, hidden, hint, size, difficulty, terrain, latlon, latitude_string, longitude_string, location, distance, latitude, longitude, shortdesc, description, rating, votes, vote, disabled, archived, members, found, favourite, inventorycoins, inventorytags, inventoryunknown from " + dbTableCaches);
 							db.execSQL("drop table " + dbTableCaches);
 							db.execSQL(dbCreateCachesNew);
-							db.execSQL("insert into " + dbTableCaches + " select _id, updated, detailed, detailedupdate, geocode, reason, cacheid, guid, type, name, owner, hidden, hint, size, difficulty, terrain, latlon, latitude_string, longitude_string, location, null, distance, latitude, longitude, shortdesc, description, rating, votes, vote, disabled, archived, members, found, favourite, inventorycoins, inventorytags, inventoryunknown from " + dbTableCaches + "_temp");
-							db.execSQL("drop table " + dbTableCaches + "_temp");
+							db.execSQL("insert into " + dbTableCaches + " select _id, updated, detailed, detailedupdate, geocode, reason, cacheid, guid, type, name, owner, hidden, hint, size, difficulty, terrain, latlon, latitude_string, longitude_string, location, null, distance, latitude, longitude, shortdesc, description, rating, votes, vote, disabled, archived, members, found, favourite, inventorycoins, inventorytags, inventoryunknown from " + dbTableCachesTemp);
+							db.execSQL("drop table " + dbTableCachesTemp);
 							db.setTransactionSuccessful();
 
 							Log.i(cgSettings.tag, "Changed direction column");
@@ -1023,63 +1024,6 @@ public class cgData {
 		}
 	}
 
-
-    @Deprecated
-	public boolean isReliableLatLon(String geocode, String guid) {
-		init();
-
-		Cursor cursor = null;
-		int rel = 0;
-
-		try {
-			if (StringUtils.isNotBlank(geocode)) {
-				cursor = databaseRO.query(
-						dbTableCaches,
-						new String[]{"reliable_latlon"},
-						"geocode = \"" + geocode + "\"",
-						null,
-						null,
-						null,
-						null,
-						"1");
-			} else if (StringUtils.isNotBlank(guid)) {
-				cursor = databaseRO.query(
-						dbTableCaches,
-						new String[]{"reliable_latlon"},
-						"guid = \"" + guid + "\"",
-						null,
-						null,
-						null,
-						null,
-						"1");
-			} else {
-				return false;
-			}
-
-			if (cursor != null) {
-				final int cnt = cursor.getCount();
-				int index = 0;
-
-				if (cnt > 0) {
-					cursor.moveToFirst();
-
-					index = cursor.getColumnIndex("reliable_latlon");
-					rel = (int) cursor.getInt(index);
-				}
-
-				cursor.close();
-			}
-		} catch (Exception e) {
-			Log.e(cgSettings.tag, "cgData.isOffline: " + e.toString());
-		}
-
-		if (rel >= 1) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	public String getGeocodeForGuid(String guid) {
 		if (StringUtils.isBlank(guid)) {
 			return null;
@@ -1204,18 +1148,10 @@ public class cgData {
 		values.put("location", cache.location);
 		values.put("distance", cache.distance);
 		values.put("direction", cache.direction);
-		// save coordinates
-		final boolean rel = cache.reliableLatLon;
-		if (cache.reliableLatLon) { // new cache has reliable coordinates, store
-			values.put("latitude", cache.coords.getLatitude());
-			values.put("longitude", cache.coords.getLongitude());
-			values.put("reliable_latlon", 1);
-		} else if (!rel) { // new cache neither stored cache is not reliable, just update
-			// FIXME: if the user is not logged in, coords may be null
-			values.put("latitude", cache.coords.getLatitude());
-			values.put("longitude", cache.coords.getLongitude());
-			values.put("reliable_latlon", 0);
-		}
+		// FIXME: if the user is not logged in, coords may be null
+		values.put("latitude", cache.coords.getLatitude());
+		values.put("longitude", cache.coords.getLongitude());
+		values.put("reliable_latlon", cache.reliableLatLon ? 1 : 0);
 		values.put("elevation", cache.elevation);
 		values.put("shortdesc", cache.shortdesc);
 		values.put("personal_note", cache.personalNote);
@@ -1994,13 +1930,13 @@ public class cgData {
 		if (cursor.isNull(index)) {
 			cache.direction = null;
 		} else {
-			cache.direction = (Double) cursor.getDouble(index);
+			cache.direction = cursor.getFloat(index);
 		}
 		index = cursor.getColumnIndex("distance");
 		if (cursor.isNull(index)) {
 			cache.distance = null;
 		} else {
-			cache.distance = (Double) cursor.getDouble(index);
+			cache.distance = cursor.getFloat(index);
 		}
 		cache.terrain = (Float) cursor.getFloat(cursor.getColumnIndex("terrain"));
 		cache.latlon = (String) cursor.getString(cursor.getColumnIndex("latlon"));

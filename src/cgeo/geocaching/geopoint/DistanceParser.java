@@ -19,14 +19,14 @@ public final class DistanceParser {
      *
      * @throws NumberFormatException if the given number is invalid
      */
-    public static double parseDistance(String distanceText, final int defaultUnit) {
+    public static float parseDistance(String distanceText, final int defaultUnit) {
         final Matcher matcher = pattern.matcher(distanceText);
 
         if (!matcher.find()) {
             throw new NumberFormatException(distanceText);
         }
 
-        final double value = Double.parseDouble(matcher.group(1));
+        final float value = Float.parseFloat(matcher.group(1));
         final String unit = matcher.group(2).toLowerCase();
 
         if (unit.equals("m") || (unit.length() == 0 && defaultUnit == cgSettings.unitsMetric)) {

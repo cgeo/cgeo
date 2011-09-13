@@ -690,6 +690,7 @@
   <string name="search_caches_near">Caches near</string>
   <string name="search_address_started">Searching for places</string>
   <string name="search_address_result">Found places</string>
+  <string name="search_own_caches">Search my caches</string>
 
   <!-- trackable -->
   <string name="trackable">Trackable</string>
@@ -924,8 +925,8 @@
     · Rainer S. (code)\n
     · Ray (code, loc. JA)\n
     · <a href="http://seromenho.com/">Ricardo Seromenho</a> (localization PT)\n
-    · <a href="http://www.rfc1149.net/sam.html">Samuel Tardieu</a> (code, localization FR)\n
     · <a href="http://www.sammyshp.de/">SammysHP</a> (code, localization DE)\n
+    · <a href="http://www.rfc1149.net/sam.html">Samuel Tardieu</a> (code, localization FR)\n
     · serenity (localization FR)\n
     · Shan, a.k.a. ShakurNO (localization NO)\n
     · thiasB (code, loc. DE EN)\n
