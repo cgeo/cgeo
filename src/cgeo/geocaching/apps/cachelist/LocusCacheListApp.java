@@ -18,7 +18,7 @@ class LocusCacheListApp extends AbstractLocusApp implements CacheListApp {
 
     /**
      * show caches in Locus
-     * 
+     *
      * @see AbstractLocusApp#showInLocus
      * @author koem
      */

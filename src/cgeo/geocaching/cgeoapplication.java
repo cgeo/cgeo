@@ -723,7 +723,7 @@ public class cgeoapplication extends Application {
 
     /**
      * Checks if Cache is already in Database and if so does a merge.
-     * 
+     *
      * @param cache
      *            the cache to be saved
      * @param override

@@ -381,7 +381,7 @@ public class cgBase {
 
     /**
      * read all viewstates from page
-     * 
+     *
      * @return String[] with all view states
      */
     public static String[] getViewstates(String page) {
@@ -3446,7 +3446,7 @@ public class cgBase {
 
     /**
      * Adds the cache to the watchlist of the user.
-     * 
+     *
      * @param cache
      *            the cache to add
      * @return -1: error occured
@@ -3472,7 +3472,7 @@ public class cgBase {
 
     /**
      * Removes the cache from the watchlist
-     * 
+     *
      * @param cache
      *            the cache to remove
      * @return -1: error occured
@@ -4031,7 +4031,7 @@ public class cgBase {
 
     /**
      * Replace the characters \n, \r and \t with a space
-     * 
+     *
      * @param buffer
      *            The data
      */
@@ -4908,7 +4908,7 @@ public class cgBase {
     /**
      * Generate a time string according to system-wide settings (locale, 12/24 hour)
      * such as "13:24".
-     * 
+     *
      * @param date
      *            milliseconds since the epoch
      * @return the formatted string
@@ -4920,7 +4920,7 @@ public class cgBase {
     /**
      * Generate a date string according to system-wide settings (locale, date format)
      * such as "20 December" or "20 December 2010". The year will only be included when necessary.
-     * 
+     *
      * @param date
      *            milliseconds since the epoch
      * @return the formatted string
@@ -4933,7 +4933,7 @@ public class cgBase {
      * Generate a date string according to system-wide settings (locale, date format)
      * such as "20 December 2010". The year will always be included, making it suitable
      * to generate long-lived log entries.
-     * 
+     *
      * @param date
      *            milliseconds since the epoch
      * @return the formatted string
@@ -4946,7 +4946,7 @@ public class cgBase {
     /**
      * Generate a numeric date string according to system-wide settings (locale, date format)
      * such as "10/20/2010".
-     * 
+     *
      * @param date
      *            milliseconds since the epoch
      * @return the formatted string
@@ -4959,7 +4959,7 @@ public class cgBase {
     /**
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 sept. à 12:35".
-     * 
+     *
      * @param context
      *            a Context
      * @param date
@@ -4972,7 +4972,7 @@ public class cgBase {
 
     /**
      * TODO This method is only needed until the settings are a singleton
-     * 
+     *
      * @return
      */
     public String getUserName() {
@@ -4981,7 +4981,7 @@ public class cgBase {
 
     /**
      * insert text into the EditText at the current cursor position
-     * 
+     *
      * @param editText
      * @param insertText
      * @param addSpace

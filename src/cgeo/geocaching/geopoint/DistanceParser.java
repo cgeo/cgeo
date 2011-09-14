@@ -13,11 +13,11 @@ public final class DistanceParser {
     /**
      * Parse a distance string composed by a number and an optional suffix
      * (such as "1.2km").
-     * 
+     *
      * @param distanceText
      *            the string to analyze
      * @return the distance in kilometers
-     * 
+     *
      * @throws NumberFormatException
      *             if the given number is invalid
      */

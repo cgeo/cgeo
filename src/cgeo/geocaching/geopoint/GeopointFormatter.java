@@ -43,7 +43,7 @@ public class GeopointFormatter
 
     /**
      * Creates a new formatter with given format-string.
-     * 
+     *
      * @param format
      *            the format-string
      * @see format()
@@ -56,7 +56,7 @@ public class GeopointFormatter
 
     /**
      * Creates a new formatter with given default-format.
-     * 
+     *
      * @param format
      *            one of the default formats
      * @see GeopointFormatter.Format
@@ -69,28 +69,28 @@ public class GeopointFormatter
 
     /**
      * Formats a Geopoint.
-     * 
+     *
      * Syntax:
      * %[dir][precision][value]
-     * 
+     *
      * [dir]
      * y = latitude
      * x = longitude
-     * 
+     *
      * [precision] (optional)
      * 0..9, number of digits after the decimal point
-     * 
+     *
      * [value]
      * n = direction
      * d = degree
      * m = minute
      * s = second
-     * 
+     *
      * Example:
      * "%yn %yd° %y3m" = "N 52° 36.123"
-     * 
+     *
      * All other characters are not interpreted and can be used.
-     * 
+     *
      * @param gp
      *            the Geopoint to format
      * @param format
@@ -153,7 +153,7 @@ public class GeopointFormatter
 
     /**
      * Formats a Geopoint.
-     * 
+     *
      * @param gp
      *            the Geopoint to format
      * @param format
@@ -190,7 +190,7 @@ public class GeopointFormatter
 
     /**
      * Formats a Geopoint with the format of this instance.
-     * 
+     *
      * @param gp
      *            the Geopoint to format
      * @return the formatted coordinates of the Geopoint
@@ -209,7 +209,7 @@ public class GeopointFormatter
 
     /**
      * Returns the format of this instance.
-     * 
+     *
      * @return the format of this instance.
      */
     public String toString()

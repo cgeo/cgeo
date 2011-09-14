@@ -12,9 +12,9 @@ import android.view.View;
 /**
  * Base class for the map activity. Delegates base class calls to the
  * provider-specific implementation.
- * 
+ *
  * @author rsudev
- * 
+ *
  */
 public abstract class MapBase {
 

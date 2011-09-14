@@ -87,7 +87,7 @@ public class cgCache implements ICache {
 
     /**
      * Gather missing information from another cache object.
-     * 
+     *
      * @param other
      *            the other version, or null if non-existent
      */
@@ -241,12 +241,12 @@ public class cgCache implements ICache {
 
     /**
      * checks if a page contains the guid of a cache
-     * 
+     *
      * @param cache
      *            the cache to look for
      * @param page
      *            the page to search in
-     * 
+     *
      * @return true: page contains guid of cache, false: otherwise
      */
     boolean isGuidContainedInPage(final String page) {

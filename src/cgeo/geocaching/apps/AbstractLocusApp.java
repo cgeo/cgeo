@@ -27,7 +27,7 @@ import java.util.List;
 
 /**
  * for the Locus API:
- * 
+ *
  * @see http://forum.asamm.cz/viewtopic.php?f=29&t=767
  */
 public abstract class AbstractLocusApp extends AbstractApp {
@@ -45,7 +45,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
 
     /**
      * Display a list of caches / waypoints in Locus
-     * 
+     *
      * @param objectsToShow
      *            which caches/waypoints to show
      * @param withCacheWaypoints
@@ -90,7 +90,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
 
     /**
      * This method constructs a <code>Point</code> for displaying in Locus
-     * 
+     *
      * @param cache
      * @param withWaypoints
      *            whether to give waypoints to Locus or not
@@ -162,7 +162,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
 
     /**
      * This method constructs a <code>Point</code> for displaying in Locus
-     * 
+     *
      * @param waypoint
      * @return null, when the <code>Point</code> could not be constructed
      * @author koem

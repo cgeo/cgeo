@@ -6,9 +6,9 @@ import java.util.Date;
 
 /**
  * compares caches by date
- * 
+ *
  * @author bananeweizen
- * 
+ *
  */
 public class DateComparator extends AbstractCacheComparator {
 

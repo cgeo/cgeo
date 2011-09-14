@@ -4,7 +4,7 @@ import cgeo.geocaching.cgCache;
 
 /**
  * sorts caches by gcvote.com rating
- * 
+ *
  */
 public class RatingComparator extends AbstractCacheComparator {
 

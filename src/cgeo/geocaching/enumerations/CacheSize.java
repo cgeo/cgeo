@@ -6,7 +6,7 @@ import java.util.Map;
 
 /**
  * Enum listing cache sizes
- * 
+ *
  * @author koem
  */
 public enum CacheSize {

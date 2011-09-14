@@ -1306,7 +1306,7 @@ public class cgData {
 
     /**
      * Persists the given <code>destination</code> into the database.
-     * 
+     *
      * @param destinations
      * @return <code>true</code> if the given destination was successfully
      *         persisted <code>false</code> otherwise.
@@ -1390,7 +1390,7 @@ public class cgData {
 
     /**
      * Save coordinates into a ContentValues
-     * 
+     *
      * @param values
      *            a ContentValues to save coordinates in
      * @param oneWaypoint
@@ -1403,7 +1403,7 @@ public class cgData {
 
     /**
      * Retrieve coordinates from a Cursor
-     * 
+     *
      * @param cursor
      *            a Cursor representing a row in the database
      * @return the coordinates, or null if latitude or longitude is null
@@ -1718,7 +1718,7 @@ public class cgData {
 
     /**
      * Loads a single Cache.
-     * 
+     *
      * @param geocode
      *            The Geocode GCXXXX
      * @param guid
@@ -1965,7 +1965,7 @@ public class cgData {
 
     /**
      * maps a Cache from the cursor. Doesn't next.
-     * 
+     *
      * @param cursor
      * @return
      */
@@ -2199,7 +2199,7 @@ public class cgData {
     /**
      * Loads the history of previously entered destinations from
      * the database. If no destinations exist, an {@link Collections#emptyList()} will be returned.
-     * 
+     *
      * @return A list of previously entered destinations or an empty list.
      */
     public List<cgDestination> loadHistoryOfSearchedLocations() {

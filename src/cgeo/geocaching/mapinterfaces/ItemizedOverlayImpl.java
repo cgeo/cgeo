@@ -9,9 +9,9 @@ import android.graphics.drawable.Drawable;
 /**
  * Defines the common functions to access the provider-specific
  * ItemizedOverlay implementation
- * 
+ *
  * @author rsudev
- * 
+ *
  */
 public interface ItemizedOverlayImpl extends OverlayImpl {
 

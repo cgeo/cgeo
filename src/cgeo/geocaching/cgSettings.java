@@ -579,7 +579,7 @@ public class cgSettings {
 
     /**
      * edit some settings without knowing how to get the settings editor or how to commit
-     * 
+     *
      * @param runnable
      * @return commit result
      */

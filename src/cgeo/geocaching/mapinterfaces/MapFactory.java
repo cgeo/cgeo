@@ -10,9 +10,9 @@ import android.content.Context;
 /**
  * Defines functions of a factory class to get implementation specific objects
  * (GeoPoints, OverlayItems, ...)
- * 
+ *
  * @author rsudev
- * 
+ *
  */
 public interface MapFactory {
 

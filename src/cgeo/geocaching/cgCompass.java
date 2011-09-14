@@ -119,7 +119,7 @@ public class cgCompass extends View {
 
     /**
      * Compute the new value, moving by small increments.
-     * 
+     *
      * @param goal
      *            the goal to reach
      * @param actual

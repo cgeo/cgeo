@@ -293,7 +293,7 @@ public class cgeocoords extends Dialog {
         public void afterTextChanged(Editable s) {
             /*
              * Max lengths, depending on currentFormat
-             * 
+             *
              * formatPlain = disabled
              * DEG MIN SEC SUB
              * formatDeg 2/3 5 - -

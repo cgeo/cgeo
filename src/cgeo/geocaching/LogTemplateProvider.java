@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 /**
  * provides all the available templates for logging
- * 
+ *
  */
 public class LogTemplateProvider {
     public static abstract class LogTemplate {

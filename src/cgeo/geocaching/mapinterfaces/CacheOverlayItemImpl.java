@@ -5,9 +5,9 @@ import cgeo.geocaching.cgCoord;
 /**
  * Covers the common functions of the provider-specific
  * CacheOverlayItem implementations
- * 
+ *
  * @author rsudev
- * 
+ *
  */
 public interface CacheOverlayItemImpl extends OverlayItemImpl {
 

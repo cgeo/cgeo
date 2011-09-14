@@ -21,7 +21,7 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
     /**
      * Show a single cache with waypoints or a single waypoint in Locus.
      * This method constructs a list of cache and waypoints only.
-     * 
+     *
      * @see AbstractLocusApp#showInLocus
      * @author koem
      */

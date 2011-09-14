@@ -19,9 +19,9 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Google specific implementation of the itemized cache overlay
- * 
+ *
  * @author rsudev
- * 
+ *
  */
 public class googleCacheOverlay extends ItemizedOverlay<googleCacheOverlayItem> implements ItemizedOverlayImpl {
 

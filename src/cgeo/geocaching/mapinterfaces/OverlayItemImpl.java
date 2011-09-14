@@ -5,9 +5,9 @@ import android.graphics.drawable.Drawable;
 /**
  * Common functions of the provider-specific
  * OverlayItem implementations
- * 
+ *
  * @author rsudev
- * 
+ *
  */
 public interface OverlayItemImpl {
 

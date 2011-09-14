@@ -5,7 +5,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 
 /**
  * sorts caches by distance to current position
- * 
+ *
  */
 public class DistanceComparator extends AbstractCacheComparator {
     private final Geopoint coords;

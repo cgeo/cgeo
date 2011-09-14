@@ -7,7 +7,7 @@ import android.util.Log;
 
 /**
  * abstract super implementation for all cache comparators
- * 
+ *
  */
 public abstract class AbstractCacheComparator implements CacheComparator {
 
@@ -27,7 +27,7 @@ public abstract class AbstractCacheComparator implements CacheComparator {
 
     /**
      * check necessary preconditions (like missing fields) before running the comparison itself
-     * 
+     *
      * @param cache1
      * @param cache2
      * @return
@@ -36,7 +36,7 @@ public abstract class AbstractCacheComparator implements CacheComparator {
 
     /**
      * compares two caches. Logging and exception handling is implemented outside this method already.
-     * 
+     *
      * @param cache1
      * @param cache2
      * @return an integer < 0 if cache1 is less than cache2, 0 if they are equal, and > 0 if cache1 is greater than

@@ -13,9 +13,9 @@ import android.graphics.drawable.Drawable;
 /**
  * Defines common functions of the provider-specific
  * MapView implementations
- * 
+ *
  * @author rsudev
- * 
+ *
  */
 public interface MapViewImpl {
 

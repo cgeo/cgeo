@@ -5,9 +5,9 @@
  * The ASF licenses this file to You under the Apache License, Version 2.0
  * (the "License"); you may not use this file except in compliance with
  * the License.  You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,8 +19,8 @@ package org.apache.commons.lang3.mutable;
 /**
  * A mutable <code>double</code> wrapper.
  * <p>
- * Note that as MutableDouble does not extend Double, it is not treated by String.format as a Double parameter. 
- * 
+ * Note that as MutableDouble does not extend Double, it is not treated by String.format as a Double parameter.
+ *
  * @see Double
  * @since 2.1
  * @version $Id: MutableDouble.java 1160571 2011-08-23 07:36:08Z bayard $
@@ -29,7 +29,7 @@ public class MutableDouble extends Number implements Comparable<MutableDouble>, 
 
     /**
      * Required for serialization support.
-     * 
+     *
      * @see java.io.Serializable
      */
     private static final long serialVersionUID = 1587163916L;
@@ -46,7 +46,7 @@ public class MutableDouble extends Number implements Comparable<MutableDouble>, 
 
     /**
      * Constructs a new MutableDouble with the specified value.
-     * 
+     *
      * @param value  the initial value to store
      */
     public MutableDouble(double value) {
@@ -56,7 +56,7 @@ public class MutableDouble extends Number implements Comparable<MutableDouble>, 
 
     /**
      * Constructs a new MutableDouble with the specified value.
-     * 
+     *
      * @param value  the initial value to store, not null
      * @throws NullPointerException if the object is null
      */
@@ -67,7 +67,7 @@ public class MutableDouble extends Number implements Comparable<MutableDouble>, 
 
     /**
      * Constructs a new MutableDouble parsing the given string.
-     * 
+     *
      * @param value  the string to parse, not null
      * @throws NumberFormatException if the string cannot be parsed into a double
      * @since 2.5
@@ -80,7 +80,7 @@ public class MutableDouble extends Number implements Comparable<MutableDouble>, 
     //-----------------------------------------------------------------------
     /**
      * Gets the value as a Double instance.
-     * 
+     *
      * @return the value as a Double, never null
      */
     public Double getValue() {
@@ -89,7 +89,7 @@ public class MutableDouble extends Number implements Comparable<MutableDouble>, 
 
     /**
      * Sets the value.
-     * 
+     *
      * @param value  the value to set
      */
     public void setValue(double value) {
@@ -98,7 +98,7 @@ public class MutableDouble extends Number implements Comparable<MutableDouble>, 
 
     /**
      * Sets the value from any Number instance.
-     * 
+     *
      * @param value  the value to set, not null
      * @throws NullPointerException if the object is null
      */
@@ -109,7 +109,7 @@ public class MutableDouble extends Number implements Comparable<MutableDouble>, 
     //-----------------------------------------------------------------------
     /**
      * Checks whether the double value is the special NaN value.
-     * 
+     *
      * @return true if NaN
      */
     public boolean isNaN() {
@@ -118,7 +118,7 @@ public class MutableDouble extends Number implements Comparable<MutableDouble>, 
 
     /**
      * Checks whether the double value is infinite.
-     * 
+     *
      * @return true if infinite
      */
     public boolean isInfinite() {
@@ -147,7 +147,7 @@ public class MutableDouble extends Number implements Comparable<MutableDouble>, 
     //-----------------------------------------------------------------------
     /**
      * Adds a value to the value of this instance.
-     * 
+     *
      * @param operand  the value to add
      * @since Commons Lang 2.2
      */
@@ -157,7 +157,7 @@ public class MutableDouble extends Number implements Comparable<MutableDouble>, 
 
     /**
      * Adds a value to the value of this instance.
-     * 
+     *
      * @param operand  the value to add, not null
      * @throws NullPointerException if the object is null
      * @since Commons Lang 2.2
@@ -168,7 +168,7 @@ public class MutableDouble extends Number implements Comparable<MutableDouble>, 
 
     /**
      * Subtracts a value from the value of this instance.
-     * 
+     *
      * @param operand  the value to subtract, not null
      * @since Commons Lang 2.2
      */
@@ -178,7 +178,7 @@ public class MutableDouble extends Number implements Comparable<MutableDouble>, 
 
     /**
      * Subtracts a value from the value of this instance.
-     * 
+     *
      * @param operand  the value to subtract, not null
      * @throws NullPointerException if the object is null
      * @since Commons Lang 2.2
@@ -249,11 +249,11 @@ public class MutableDouble extends Number implements Comparable<MutableDouble>, 
      * <p>
      * Note that in most cases, for two instances of class <code>Double</code>,<code>d1</code> and <code>d2</code>,
      * the value of <code>d1.equals(d2)</code> is <code>true</code> if and only if <blockquote>
-     * 
+     *
      * <pre>
      *   d1.doubleValue()&nbsp;== d2.doubleValue()
      * </pre>
-     * 
+     *
      * </blockquote>
      * <p>
      * also has the value <code>true</code>. However, there are two exceptions:
@@ -265,7 +265,7 @@ public class MutableDouble extends Number implements Comparable<MutableDouble>, 
      * or vice versa, the <code>equal</code> test has the value <code>false</code>, even though
      * <code>+0.0==-0.0</code> has the value <code>true</code>. This allows hashtables to operate properly.
      * </ul>
-     * 
+     *
      * @param obj  the object to compare with, null returns false
      * @return <code>true</code> if the objects are the same; <code>false</code> otherwise.
      */
@@ -277,7 +277,7 @@ public class MutableDouble extends Number implements Comparable<MutableDouble>, 
 
     /**
      * Returns a suitable hash code for this mutable.
-     * 
+     *
      * @return a suitable hash code
      */
     @Override
@@ -289,7 +289,7 @@ public class MutableDouble extends Number implements Comparable<MutableDouble>, 
     //-----------------------------------------------------------------------
     /**
      * Compares this mutable to another in ascending order.
-     * 
+     *
      * @param other  the other mutable to compare to, not null
      * @return negative if this is less, zero if equal, positive if greater
      */
@@ -301,7 +301,7 @@ public class MutableDouble extends Number implements Comparable<MutableDouble>, 
     //-----------------------------------------------------------------------
     /**
      * Returns the String value of this mutable.
-     * 
+     *
      * @return the mutable value as a string
      */
     @Override

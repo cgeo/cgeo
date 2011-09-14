@@ -64,7 +64,7 @@ import java.util.UUID;
 
 /**
  * Activity to display all details of a cache like owner, difficulty, description etc.
- * 
+ *
  */
 public class cgeodetail extends AbstractActivity {
 

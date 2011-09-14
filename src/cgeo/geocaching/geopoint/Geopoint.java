@@ -16,7 +16,7 @@ public final class Geopoint
 
     /**
      * Creates new Geopoint with given latitude and longitude (both degree).
-     * 
+     *
      * @param lat
      *            latitude
      * @param lon
@@ -38,7 +38,7 @@ public final class Geopoint
 
     /**
      * Creates new Geopoint with given latitude and longitude (both microdegree).
-     * 
+     *
      * @param lat
      *            latitude
      * @param lon
@@ -51,7 +51,7 @@ public final class Geopoint
 
     /**
      * Creates new Geopoint with latitude and longitude parsed from string.
-     * 
+     *
      * @param text
      *            string to parse
      * @see GeopointParser.parse()
@@ -63,7 +63,7 @@ public final class Geopoint
 
     /**
      * Creates new Geopoint with given Location.
-     * 
+     *
      * @param gp
      *            the Location to clone
      */
@@ -73,7 +73,7 @@ public final class Geopoint
 
     /**
      * Get latitude in degree.
-     * 
+     *
      * @return latitude
      */
     public double getLatitude()
@@ -83,7 +83,7 @@ public final class Geopoint
 
     /**
      * Get latitude in microdegree.
-     * 
+     *
      * @return latitude
      */
     public int getLatitudeE6()
@@ -93,7 +93,7 @@ public final class Geopoint
 
     /**
      * Get longitude in degree.
-     * 
+     *
      * @return longitude
      */
     public double getLongitude()
@@ -103,7 +103,7 @@ public final class Geopoint
 
     /**
      * Get longitude in microdegree.
-     * 
+     *
      * @return longitude
      */
     public int getLongitudeE6()
@@ -113,7 +113,7 @@ public final class Geopoint
 
     /**
      * Get distance and bearing from the current point to a target.
-     * 
+     *
      * @param target
      *            The target
      * @return An array of floats: the distance in meters, then the bearing in degrees
@@ -126,7 +126,7 @@ public final class Geopoint
 
     /**
      * Calculates distance to given Geopoint in km.
-     * 
+     *
      * @param gp
      *            target
      * @return distance in km
@@ -140,7 +140,7 @@ public final class Geopoint
 
     /**
      * Calculates bearing to given Geopoint in degree.
-     * 
+     *
      * @param gp
      *            target
      * @return bearing in degree, in the [0,360[ range
@@ -154,7 +154,7 @@ public final class Geopoint
 
     /**
      * Calculates geopoint from given bearing and distance.
-     * 
+     *
      * @param bearing
      *            bearing in degree
      * @param distance
@@ -176,7 +176,7 @@ public final class Geopoint
 
     /**
      * Checks if given Geopoint is identical with this Geopoint.
-     * 
+     *
      * @param gp
      *            Geopoint to check
      * @return true if identical, false otherwise
@@ -188,7 +188,7 @@ public final class Geopoint
 
     /**
      * Checks if given Geopoint is similar to this Geopoint with tolerance.
-     * 
+     *
      * @param gp
      *            Geopoint to check
      * @param tolerance
@@ -202,7 +202,7 @@ public final class Geopoint
 
     /**
      * Returns formatted coordinates.
-     * 
+     *
      * @param format
      *            the desired format
      * @see GeopointFormatter
@@ -215,7 +215,7 @@ public final class Geopoint
 
     /**
      * Returns formatted coordinates.
-     * 
+     *
      * @param format
      *            the desired format
      * @see GeopointFormatter
@@ -228,7 +228,7 @@ public final class Geopoint
 
     /**
      * Returns formatted coordinates.
-     * 
+     *
      * @param format
      *            the desired format
      * @see GeopointFormatter
@@ -242,7 +242,7 @@ public final class Geopoint
     /**
      * Returns formatted coordinates with default format.
      * Default format is decimalminutes, e.g. N 52° 36.123 E 010° 03.456
-     * 
+     *
      * @return formatted coordinates
      */
     public String toString()
