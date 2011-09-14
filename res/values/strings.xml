@@ -949,6 +949,7 @@
     · new: scan QR code to open cache description\n
     · new: context menu on stored caches button (main screen)\n
     · new: compass immediately shows the right direction\n
+    · new: active filters are shown in list mode\n
     · fix: performance of GPX import\n
     · fix: performance of deleting caches from list\n
     · fix: return to list after GPX import\n
