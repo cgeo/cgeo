@@ -522,7 +522,8 @@ public class cgeoinit extends AbstractActivity {
 		String usernameNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.username)).getText().toString());
 		String passwordNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.password)).getText().toString());
 		String passvoteNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.passvote)).getText().toString());
-		String signatureNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.signature)).getText().toString());
+		// don't trim signature, user may want to have whitespace at the beginning
+		String signatureNew = ((EditText) findViewById(R.id.signature)).getText().toString();
 		String altitudeNew = StringUtils.trimToNull(((EditText) findViewById(R.id.altitude)).getText().toString());
 		String mfmapFileNew = StringUtils.trimToEmpty(((EditText) findViewById(R.id.mapfile)).getText().toString());
 
