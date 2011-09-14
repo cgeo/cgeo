@@ -1,12 +1,5 @@
 package cgeo.geocaching.googlemaps;
 
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
-
-import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Point;
-import android.graphics.drawable.Drawable;
 import cgeo.geocaching.mapcommon.cgUsersOverlay;
 import cgeo.geocaching.mapinterfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.mapinterfaces.MapProjectionImpl;
@@ -15,94 +8,102 @@ import cgeo.geocaching.mapinterfaces.MapViewImpl;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapView;
 
+import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Point;
+import android.graphics.drawable.Drawable;
+
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class googleUsersOverlay extends ItemizedOverlay<googleUsersOverlayItem> implements ItemizedOverlayImpl {
 
-	private cgUsersOverlay base;
-	private Lock lock = new ReentrantLock();	
+    private cgUsersOverlay base;
+    private Lock lock = new ReentrantLock();
 
-	public googleUsersOverlay(Context contextIn, Drawable markerIn) {
-		super(boundCenter(markerIn));
-		base = new cgUsersOverlay(this, contextIn);
-	}
-	
-	@Override
-	public cgUsersOverlay getBase() {
-		return base;
-	}
+    public googleUsersOverlay(Context contextIn, Drawable markerIn) {
+        super(boundCenter(markerIn));
+        base = new cgUsersOverlay(this, contextIn);
+    }
 
-	@Override
-	protected googleUsersOverlayItem createItem(int i) {
-		if (base == null)
-			return null;
+    @Override
+    public cgUsersOverlay getBase() {
+        return base;
+    }
 
-		return (googleUsersOverlayItem) base.createItem(i);
-	}
+    @Override
+    protected googleUsersOverlayItem createItem(int i) {
+        if (base == null)
+            return null;
 
-	@Override
-	public int size() {
-		if (base == null)
-			return 0;
+        return (googleUsersOverlayItem) base.createItem(i);
+    }
 
-		return base.size();
-	}
+    @Override
+    public int size() {
+        if (base == null)
+            return 0;
 
-	@Override
-	protected boolean onTap(int arg0) {
-		if (base == null)
-			return false;
-		
-		return base.onTap(arg0);
-	}
+        return base.size();
+    }
 
-	@Override
-	public void draw(Canvas canvas, MapView mapView, boolean shadow) {
-		base.draw(canvas, (MapViewImpl) mapView, shadow);
-	}
+    @Override
+    protected boolean onTap(int arg0) {
+        if (base == null)
+            return false;
 
-	@Override
-	public void superPopulate() {
-		populate();
-	}
+        return base.onTap(arg0);
+    }
 
-	@Override
-	public Drawable superBoundCenter(Drawable markerIn) {
-		return super.boundCenter(markerIn);
-	}
+    @Override
+    public void draw(Canvas canvas, MapView mapView, boolean shadow) {
+        base.draw(canvas, (MapViewImpl) mapView, shadow);
+    }
 
-	@Override
-	public Drawable superBoundCenterBottom(Drawable marker) {
-		return super.boundCenterBottom(marker);
-	}
+    @Override
+    public void superPopulate() {
+        populate();
+    }
 
-	@Override
-	public void superSetLastFocusedItemIndex(int i) {
-		super.setLastFocusedIndex(i);
-	}
+    @Override
+    public Drawable superBoundCenter(Drawable markerIn) {
+        return super.boundCenter(markerIn);
+    }
 
-	@Override
-	public boolean superOnTap(int index) {
-		return super.onTap(index);
-	}
+    @Override
+    public Drawable superBoundCenterBottom(Drawable marker) {
+        return super.boundCenterBottom(marker);
+    }
 
-	@Override
-	public void superDraw(Canvas canvas, MapViewImpl mapView, boolean shadow) {
-		super.draw(canvas, (MapView) mapView, shadow);
-	}
+    @Override
+    public void superSetLastFocusedItemIndex(int i) {
+        super.setLastFocusedIndex(i);
+    }
 
-	@Override
-	public void superDrawOverlayBitmap(Canvas canvas, Point drawPosition,
-			MapProjectionImpl projection, byte drawZoomLevel) {
-		// Nothing to do here
-	}
+    @Override
+    public boolean superOnTap(int index) {
+        return super.onTap(index);
+    }
 
-	@Override
-	public void lock() {
-		lock.lock();
-	}
+    @Override
+    public void superDraw(Canvas canvas, MapViewImpl mapView, boolean shadow) {
+        super.draw(canvas, (MapView) mapView, shadow);
+    }
 
-	@Override
-	public void unlock() {
-		lock.unlock();
-	}
+    @Override
+    public void superDrawOverlayBitmap(Canvas canvas, Point drawPosition,
+            MapProjectionImpl projection, byte drawZoomLevel) {
+        // Nothing to do here
+    }
+
+    @Override
+    public void lock() {
+        lock.lock();
+    }
+
+    @Override
+    public void unlock() {
+        lock.unlock();
+    }
 
 }

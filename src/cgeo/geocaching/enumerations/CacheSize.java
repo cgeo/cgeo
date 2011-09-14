@@ -6,16 +6,16 @@ import java.util.Map;
 
 /**
  * Enum listing cache sizes
- *  
+ * 
  * @author koem
  */
 public enum CacheSize {
-    MICRO      ("micro",      1),
-    SMALL      ("small",      2),
-    REGULAR    ("regular",    3),
-    LARGE      ("large",      4),
-    NOT_CHOSEN ("not chosen", 0),
-    OTHER      ("other",      0);
+    MICRO("micro", 1),
+    SMALL("small", 2),
+    REGULAR("regular", 3),
+    LARGE("large", 4),
+    NOT_CHOSEN("not chosen", 0),
+    OTHER("other", 0);
 
     public final String cgeoId;
     public final int comparable;
@@ -28,7 +28,7 @@ public enum CacheSize {
     final public static Map<String, CacheSize> FIND_BY_CGEOID;
     static {
         final HashMap<String, CacheSize> mapping = new HashMap<String, CacheSize>();
-        for (CacheSize cs: values()) {
+        for (CacheSize cs : values()) {
             mapping.put(cs.cgeoId, cs);
         }
         FIND_BY_CGEOID = Collections.unmodifiableMap(mapping);

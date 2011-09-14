@@ -1,14 +1,14 @@
 package cgeo.geocaching.enumerations;
 
+import cgeo.geocaching.R;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import cgeo.geocaching.R;
-
 /**
  * Enum listing all cache types
- *  
+ * 
  * @author koem
  */
 public enum CacheType {
@@ -39,7 +39,7 @@ public enum CacheType {
         this.guid = guid;
         this.stringId = stringId;
     }
-    
+
     public final static Map<String, CacheType> FIND_BY_CGEOID;
     static {
         final HashMap<String, CacheType> mapping = new HashMap<String, CacheType>();

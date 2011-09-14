@@ -8,8 +8,8 @@ import java.util.List;
  */
 public class cgCacheWrap {
     public String error = null;
-	public String url = "";
-	public String[] viewstates = null;
-	public int totalCnt = 0;
-	public List<cgCache> cacheList = new ArrayList<cgCache>();
+    public String url = "";
+    public String[] viewstates = null;
+    public int totalCnt = 0;
+    public List<cgCache> cacheList = new ArrayList<cgCache>();
 }

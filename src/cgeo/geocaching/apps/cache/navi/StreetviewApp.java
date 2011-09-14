@@ -1,6 +1,11 @@
 package cgeo.geocaching.apps.cache.navi;
 
-import java.util.UUID;
+import cgeo.geocaching.R;
+import cgeo.geocaching.cgCache;
+import cgeo.geocaching.cgGeo;
+import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.geopoint.Geopoint;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -8,12 +13,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
-import cgeo.geocaching.R;
-import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.cgWaypoint;
-import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.geopoint.Geopoint;
+
+import java.util.UUID;
 
 class StreetviewApp extends AbstractNavigationApp implements NavigationApp {
 
@@ -46,12 +47,12 @@ class StreetviewApp extends AbstractNavigationApp implements NavigationApp {
                 ActivityMixin.showToast(activity, res.getString(R.string.err_application_no));
             }
         }
-        
+
         return false;
     }
 
-	private void startActivity(Activity activity, final Geopoint coords) {
-		activity.startActivity(new Intent(Intent.ACTION_VIEW, 
-				Uri.parse("google.streetview:cbll=" + coords.getLatitude() + "," + coords.getLongitude())));
-	}
+    private void startActivity(Activity activity, final Geopoint coords) {
+        activity.startActivity(new Intent(Intent.ACTION_VIEW,
+                Uri.parse("google.streetview:cbll=" + coords.getLatitude() + "," + coords.getLongitude())));
+    }
 }

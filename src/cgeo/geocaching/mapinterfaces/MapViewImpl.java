@@ -1,70 +1,72 @@
 package cgeo.geocaching.mapinterfaces;
 
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.drawable.Drawable;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.mapcommon.cgMapMyOverlay;
 import cgeo.geocaching.mapcommon.cgMapOverlay;
 import cgeo.geocaching.mapcommon.cgOverlayScale;
 import cgeo.geocaching.mapcommon.cgUsersOverlay;
 
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+
 /**
  * Defines common functions of the provider-specific
  * MapView implementations
+ * 
  * @author rsudev
- *
+ * 
  */
 public interface MapViewImpl {
 
-	void invalidate();
+    void invalidate();
 
-	void setBuiltInZoomControls(boolean b);
+    void setBuiltInZoomControls(boolean b);
 
-	void displayZoomControls(boolean b);
+    void displayZoomControls(boolean b);
 
-	void preLoad();
+    void preLoad();
 
-	void clearOverlays();
-	
-	void addOverlay(OverlayImpl ovl);
+    void clearOverlays();
 
-	MapControllerImpl getMapController();
+    void addOverlay(OverlayImpl ovl);
 
-	void destroyDrawingCache();
+    MapControllerImpl getMapController();
 
-	GeoPointImpl getMapViewCenter();
+    void destroyDrawingCache();
 
-	int getLatitudeSpan();
+    GeoPointImpl getMapViewCenter();
 
-	int getLongitudeSpan();
+    int getLatitudeSpan();
 
-	int getMapZoomLevel();
+    int getLongitudeSpan();
 
-	int getWidth();
+    int getMapZoomLevel();
 
-	int getHeight();
+    int getWidth();
 
-	MapProjectionImpl getMapProjection();
+    int getHeight();
 
-	Context getContext();
+    MapProjectionImpl getMapProjection();
 
-	cgMapOverlay createAddMapOverlay(cgSettings settings, Context context,
-			Drawable drawable, boolean fromDetailIntent);
+    Context getContext();
 
-	cgUsersOverlay createAddUsersOverlay(Context context, Drawable markerIn);
-	
-	cgOverlayScale createAddScaleOverlay(Activity activity, cgSettings settingsIn);
+    cgMapOverlay createAddMapOverlay(cgSettings settings, Context context,
+            Drawable drawable, boolean fromDetailIntent);
 
-	cgMapMyOverlay createAddPositionOverlay(Activity activity, cgSettings settingsIn);
+    cgUsersOverlay createAddUsersOverlay(Context context, Drawable markerIn);
 
-	boolean needsScaleOverlay();
+    cgOverlayScale createAddScaleOverlay(Activity activity, cgSettings settingsIn);
 
-	void setBuiltinScale(boolean b);
+    cgMapMyOverlay createAddPositionOverlay(Activity activity, cgSettings settingsIn);
 
-	void setMapSource(cgSettings settings);
+    boolean needsScaleOverlay();
 
-	void repaintRequired(OverlayBase overlay);
+    void setBuiltinScale(boolean b);
 
-	void setOnDragListener(OnDragListener onDragListener);
+    void setMapSource(cgSettings settings);
+
+    void repaintRequired(OverlayBase overlay);
+
+    void setOnDragListener(OnDragListener onDragListener);
 }
