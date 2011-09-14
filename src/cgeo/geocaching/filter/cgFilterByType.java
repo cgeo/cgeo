@@ -10,7 +10,7 @@ public class cgFilterByType extends cgFilter {
 
 	@Override
 	boolean applyFilter(cgCache cache) {
-		return name.equals(cache.name);
+		return name.equals(cache.type);
 	}
 	
 	@Override
