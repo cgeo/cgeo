@@ -25,10 +25,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.ImageView.ScaleType;
 import android.widget.ViewSwitcher.ViewFactory;
 import cgeo.geocaching.R;
@@ -38,13 +39,13 @@ import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgDirection;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.cgUpdateDir;
 import cgeo.geocaching.cgUpdateLoc;
 import cgeo.geocaching.cgUser;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.mapinterfaces.ActivityImpl;
 import cgeo.geocaching.mapinterfaces.CacheOverlayItemImpl;
@@ -357,6 +358,13 @@ public class cgeomap extends MapBase implements OnDragListener, ViewFactory {
 		switchMyLocationButton();
 
 		startTimer();
+		
+		// show the filter warning bar if the filter is set
+		if (settings.cacheType != null) {
+		    String cacheType = cgBase.cacheTypesInv.get(settings.cacheType);
+		    ((TextView)activity.findViewById(R.id.filter_text)).setText(cacheType);
+            activity.findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
+		}
 	}
 
 	@Override

@@ -277,4 +277,30 @@
 		<item name="android:textColor">?text_color_headline</item>
 		<item name="android:background">?background_color</item>
 	</style>
+	
+<!-- filter bar -->
+	<style name="filter_bar">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:orientation">horizontal</item>
+		<item name="android:background">@drawable/filter_bar_background</item>
+		<item name="android:gravity">center_vertical</item>
+	</style>
+	
+	<style name="filter_bar_image">
+		<item name="android:layout_width">30dp</item>
+		<item name="android:layout_height">30dp</item>
+		<item name="android:padding">6dp</item>
+		<item name="android:scaleType">fitCenter</item>
+	</style>
+	
+	<style name="filter_bar_text">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:singleLine">true</item>
+		<item name="android:scrollHorizontally">true</item>
+		<item name="android:ellipsize">marquee</item>
+		<item name="android:lines">1</item>
+		<item name="android:textColor">@android:color/white</item>
+	</style>
 </resources>

@@ -19,6 +19,7 @@
 				android:src="@drawable/actionbar_manual"
 				android:onClick="goManual" />
 	</LinearLayout>
+	<include layout="@layout/filter_bar"/>
 	<RelativeLayout
 			android:layout_width="fill_parent"
 			android:layout_height="fill_parent" >
