@@ -30,9 +30,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.UUID;
+import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.GZIPInputStream;
@@ -135,6 +135,7 @@ public class cgBase {
 	public final static Map<String, String> cacheTypesInv = new HashMap<String, String>();
 	public final static Map<String, String> cacheIDs = new HashMap<String, String>();
 	public final static Map<String, String> cacheIDsChoices = new HashMap<String, String>();
+    public final static Map<String, String> cacheSizeL10N = new HashMap<String, String>();
 	public final static Map<String, String> waypointTypes = new HashMap<String, String>();
 	public final static Map<String, Integer> logTypes = new HashMap<String, Integer>();
 	public final static Map<String, Integer> logTypes0 = new HashMap<String, Integer>();
@@ -229,6 +230,10 @@ public class cgBase {
             cacheTypesInv.put(ct.cgeoId, l10n);
             cacheIDs.put(ct.cgeoId, ct.guid);
             cacheIDsChoices.put(l10n, ct.guid);
+        }
+        
+        for (CacheSize cs : CacheSize.values()) {
+            cacheSizeL10N.put(cs.id, res.getString(cs.l10nId));
         }
 
 		// waypoint types
