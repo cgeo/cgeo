@@ -587,7 +587,9 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 				cacheInfo.append(cache.geocode);
 			}
 			if (cache.size != null) {
-				if (cacheInfo.length() > 0) cacheInfo.append(" | ");
+				if (cacheInfo.length() > 0) {
+				    cacheInfo.append(" | ");
+				}
 				cacheInfo.append(cache.size.id);
 			}
 			if ((cache.difficulty != null && cache.difficulty > 0f) || (cache.terrain != null && cache.terrain > 0f) || (cache.rating != null && cache.rating > 0f)) {
