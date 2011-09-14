@@ -669,6 +669,8 @@ public class cgeocaches extends AbstractListActivity {
 			setTitle(title);
 			Log.e(cgSettings.tag, "cgeocaches.onCreate: No action or unknown action specified");
 		}
+
+		prepareFilterBar();
 	}
 
 	@Override
@@ -746,7 +748,9 @@ public class cgeocaches extends AbstractListActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		SubMenu subMenuFilter = menu.addSubMenu(0, SUBMENU_FILTER, 0, res.getString(R.string.caches_filter)).setIcon(android.R.drawable.ic_menu_search);
 		subMenuFilter.setHeaderTitle(res.getString(R.string.caches_filter_title));
-		subMenuFilter.add(0, SUBMENU_FILTER_TYPE, 0, res.getString(R.string.caches_filter_type));
+		if (settings.cacheType == null) {
+		    subMenuFilter.add(0, SUBMENU_FILTER_TYPE, 0, res.getString(R.string.caches_filter_type));
+		}
 		subMenuFilter.add(0, SUBMENU_FILTER_SIZE, 0, res.getString(R.string.caches_filter_size));
 		subMenuFilter.add(0, MENU_FILTER_TRACKABLES, 0, res.getString(R.string.caches_filter_track));
 		subMenuFilter.add(0, MENU_FILTER_CLEAR, 0, res.getString(R.string.caches_filter_clear));
@@ -1012,11 +1016,11 @@ public class cgeocaches extends AbstractListActivity {
 				openContextMenu(getListView());
 				return false;
 			case MENU_FILTER_TRACKABLES:
-				adapter.setFilter(new cgFilterByTrackables());
+				setFilter(new cgFilterByTrackables(res.getString(R.string.caches_filter_track)));
 				return false;
 			case MENU_FILTER_CLEAR:
 				if (adapter != null) {
-					adapter.setFilter(null);
+					setFilter(null);
 				}
 				return false;
 			case MENU_IMPORT_WEB:
@@ -1299,6 +1303,7 @@ public class cgeocaches extends AbstractListActivity {
 	private boolean setFilter(cgFilter filter) {
 		if (adapter != null) {
 			adapter.setFilter(filter);
+			prepareFilterBar();
 			return true;
 		}
 		return false;
@@ -2602,4 +2607,29 @@ public class cgeocaches extends AbstractListActivity {
 
 		context.startActivity(cachesIntent);
 	}
+
+    private void prepareFilterBar() {
+        TextView filterTextView = (TextView) findViewById(R.id.filter_text);
+        View filterBar = findViewById(R.id.filter_bar);
+        String cacheType = "", filter = "";
+
+        if (settings.cacheType != null || adapter.isFilter()) {
+            if (settings.cacheType != null) {
+                cacheType = cgBase.cacheTypesInv.get(settings.cacheType);
+            }
+            if (adapter.isFilter()) {
+                filter = adapter.getFilterName();
+            }
+            
+            if (settings.cacheType != null && adapter.isFilter()) {
+                filter = ", " + filter;
+            }
+            
+            filterTextView.setText(cacheType + filter);
+            filterBar.setVisibility(View.VISIBLE);
+        }
+        else {
+            filterBar.setVisibility(View.GONE);
+        }
+    }
 }
