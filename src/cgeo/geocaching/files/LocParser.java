@@ -113,7 +113,7 @@ public final class LocParser extends FileParser {
 			if (matcherContainer.find()) {
 				final int size = Integer.parseInt(matcherContainer.group(1).trim());
 
-				switch (size) {
+                switch (size) {
                     case 1: pointCoord.size = CacheSize.NOT_CHOSEN; break;
                     case 2: pointCoord.size = CacheSize.MICRO; break;
                     case 3: pointCoord.size = CacheSize.REGULAR; break;
@@ -122,7 +122,7 @@ public final class LocParser extends FileParser {
                     case 6: pointCoord.size = CacheSize.OTHER; break;
                     case 8: pointCoord.size = CacheSize.SMALL; break;
                     default: pointCoord.size = null; break;
-				}
+                }
 			}
 
 			if (StringUtils.isNotBlank(pointCoord.geocode)) {

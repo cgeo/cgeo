@@ -13,24 +13,24 @@ import cgeo.geocaching.geopoint.Geopoint;
 
 class LocusApp extends AbstractLocusApp implements NavigationApp {
 
-    LocusApp(Resources res) {
-        super(res);
-    }
+	LocusApp(Resources res) {
+		super(res);
+	}
 
-    /**
-     * Show a single cache with waypoints or a single waypoint in Locus.
-     * This method constructs a list of cache and waypoints only. 
-     * 
-     * @see AbstractLocusApp#showInLocus
-     * @author koem
-     */
-    @Override
-    public boolean invoke(cgGeo geo, Activity activity, Resources res, cgCache cache,
-            final UUID searchId, cgWaypoint waypoint, final Geopoint coords) {
-        
-        if (cache == null && waypoint == null && coords == null) {
-            return false;
-        }
+	/**
+	 * Show a single cache with waypoints or a single waypoint in Locus.
+	 * This method constructs a list of cache and waypoints only. 
+	 * 
+	 * @see AbstractLocusApp#showInLocus
+	 * @author koem
+	 */
+	@Override
+	public boolean invoke(cgGeo geo, Activity activity, Resources res, cgCache cache,
+			final UUID searchId, cgWaypoint waypoint, final Geopoint coords) {
+		
+		if (cache == null && waypoint == null && coords == null) {
+			return false;
+		}
 
         final ArrayList<Object> points = new ArrayList<Object>();
 
@@ -49,6 +49,6 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
         this.showInLocus(points, true, activity);
         
         return true;
-    }
+	}
 
 }
