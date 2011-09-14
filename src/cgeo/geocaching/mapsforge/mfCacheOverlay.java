@@ -1,7 +1,10 @@
 package cgeo.geocaching.mapsforge;
 
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.mapcommon.cgMapOverlay;
+import cgeo.geocaching.mapinterfaces.ItemizedOverlayImpl;
+import cgeo.geocaching.mapinterfaces.MapProjectionImpl;
+import cgeo.geocaching.mapinterfaces.MapViewImpl;
 
 import org.mapsforge.android.maps.ItemizedOverlay;
 import org.mapsforge.android.maps.Projection;
@@ -10,103 +13,99 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
-import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.mapcommon.cgMapOverlay;
-import cgeo.geocaching.mapinterfaces.ItemizedOverlayImpl;
-import cgeo.geocaching.mapinterfaces.MapProjectionImpl;
-import cgeo.geocaching.mapinterfaces.MapViewImpl;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class mfCacheOverlay extends ItemizedOverlay<mfCacheOverlayItem> implements ItemizedOverlayImpl {
 
-	private cgMapOverlay base;
-	private Lock lock = new ReentrantLock();
+    private cgMapOverlay base;
+    private Lock lock = new ReentrantLock();
 
-	public mfCacheOverlay(cgSettings settingsIn, Context contextIn, Drawable markerIn, Boolean fromDetailIn) {
-		super(boundCenterBottom(markerIn));
-		base = new cgMapOverlay(settingsIn, this, contextIn, fromDetailIn);
-	}
+    public mfCacheOverlay(cgSettings settingsIn, Context contextIn, Drawable markerIn, Boolean fromDetailIn) {
+        super(boundCenterBottom(markerIn));
+        base = new cgMapOverlay(settingsIn, this, contextIn, fromDetailIn);
+    }
 
-	@Override
-	public cgMapOverlay getBase() {
-		return base;
-	}
+    @Override
+    public cgMapOverlay getBase() {
+        return base;
+    }
 
-	@Override
-	protected mfCacheOverlayItem createItem(int i) {
-		if (base == null)
-			return null;
+    @Override
+    protected mfCacheOverlayItem createItem(int i) {
+        if (base == null)
+            return null;
 
-		return (mfCacheOverlayItem) base.createItem(i);
-	}
+        return (mfCacheOverlayItem) base.createItem(i);
+    }
 
-	@Override
-	public int size() {
-		if (base == null)
-			return 0;
+    @Override
+    public int size() {
+        if (base == null)
+            return 0;
 
-		return base.size();
-	}
+        return base.size();
+    }
 
-	@Override
-	protected boolean onTap(int arg0) {
-		if (base == null)
-			return false;
+    @Override
+    protected boolean onTap(int arg0) {
+        if (base == null)
+            return false;
 
-		return base.onTap(arg0);
-	}
+        return base.onTap(arg0);
+    }
 
-	@Override
-	protected void drawOverlayBitmap(Canvas canvas, Point drawPosition,
-			Projection projection, byte drawZoomLevel) {
-		base.drawOverlayBitmap(canvas, drawPosition, new mfMapProjection(projection), drawZoomLevel);
-	}
+    @Override
+    protected void drawOverlayBitmap(Canvas canvas, Point drawPosition,
+            Projection projection, byte drawZoomLevel) {
+        base.drawOverlayBitmap(canvas, drawPosition, new mfMapProjection(projection), drawZoomLevel);
+    }
 
-	@Override
-	public void superPopulate() {
-		populate();
-	}
+    @Override
+    public void superPopulate() {
+        populate();
+    }
 
-	@Override
-	public Drawable superBoundCenter(Drawable markerIn) {
-		return super.boundCenter(markerIn);
-	}
+    @Override
+    public Drawable superBoundCenter(Drawable markerIn) {
+        return super.boundCenter(markerIn);
+    }
 
-	@Override
-	public Drawable superBoundCenterBottom(Drawable marker) {
-		return super.boundCenterBottom(marker);
-	}
+    @Override
+    public Drawable superBoundCenterBottom(Drawable marker) {
+        return super.boundCenterBottom(marker);
+    }
 
-	@Override
-	public void superSetLastFocusedItemIndex(int i) {
-		// nothing to do
-	}
+    @Override
+    public void superSetLastFocusedItemIndex(int i) {
+        // nothing to do
+    }
 
-	@Override
-	public boolean superOnTap(int index) {
-		return super.onTap(index);
-	}
+    @Override
+    public boolean superOnTap(int index) {
+        return super.onTap(index);
+    }
 
-	@Override
-	public void superDraw(Canvas canvas, MapViewImpl mapView, boolean shadow) {
-		// nothing to do here...
-	}
+    @Override
+    public void superDraw(Canvas canvas, MapViewImpl mapView, boolean shadow) {
+        // nothing to do here...
+    }
 
-	@Override
-	public void superDrawOverlayBitmap(Canvas canvas, Point drawPosition,
-			MapProjectionImpl projection, byte drawZoomLevel) {
-		super.drawOverlayBitmap(canvas, drawPosition, (Projection) projection.getImpl(), drawZoomLevel);
-	}
+    @Override
+    public void superDrawOverlayBitmap(Canvas canvas, Point drawPosition,
+            MapProjectionImpl projection, byte drawZoomLevel) {
+        super.drawOverlayBitmap(canvas, drawPosition, (Projection) projection.getImpl(), drawZoomLevel);
+    }
 
-	@Override
-	public void lock() {
-		lock.lock();
-	}
+    @Override
+    public void lock() {
+        lock.lock();
+    }
 
-	@Override
-	public void unlock() {
-		lock.unlock();
-	}
+    @Override
+    public void unlock() {
+        lock.unlock();
+    }
 
 }
-

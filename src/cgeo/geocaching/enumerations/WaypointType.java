@@ -6,7 +6,7 @@ import java.util.Map;
 
 /**
  * Enum listing waypoint types
- *  
+ * 
  * @author koem
  */
 public enum WaypointType {
@@ -23,7 +23,7 @@ public enum WaypointType {
     private WaypointType(String cgeoId) {
         this.cgeoId = cgeoId;
     }
-    
+
     public static final Map<String, WaypointType> FIND_BY_CGEOID;
     static {
         final HashMap<String, WaypointType> mapping = new HashMap<String, WaypointType>();

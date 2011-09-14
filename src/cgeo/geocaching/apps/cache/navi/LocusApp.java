@@ -1,58 +1,63 @@
 package cgeo.geocaching.apps.cache.navi;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
-import android.app.Activity;
-import android.content.res.Resources;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.apps.AbstractLocusApp;
 import cgeo.geocaching.geopoint.Geopoint;
 
+import android.app.Activity;
+import android.content.res.Resources;
+
+import java.util.ArrayList;
+import java.util.UUID;
+
 class LocusApp extends AbstractLocusApp implements NavigationApp {
 
-	LocusApp(Resources res) {
-		super(res);
-	}
+    LocusApp(Resources res) {
+        super(res);
+    }
 
-	/**
-	 * Show a single cache with waypoints or a single waypoint in Locus.
-	 * This method constructs a list of cache and waypoints only. 
-	 * 
-	 * @see AbstractLocusApp#showInLocus
-	 * @author koem
-	 */
-	@Override
-	public boolean invoke(cgGeo geo, Activity activity, Resources res, cgCache cache,
-			final UUID searchId, cgWaypoint waypoint, final Geopoint coords) {
-		
-		if (cache == null && waypoint == null && coords == null) {
-			return false;
-		}
+    /**
+     * Show a single cache with waypoints or a single waypoint in Locus.
+     * This method constructs a list of cache and waypoints only.
+     * 
+     * @see AbstractLocusApp#showInLocus
+     * @author koem
+     */
+    @Override
+    public boolean invoke(cgGeo geo, Activity activity, Resources res, cgCache cache,
+            final UUID searchId, cgWaypoint waypoint, final Geopoint coords) {
 
-		if (isInstalled(activity)) { // TODO: is this if-statement really necessary?
-			final ArrayList<Object> points = new ArrayList<Object>();
+        if (cache == null && waypoint == null && coords == null) {
+            return false;
+        }
 
-			// add cache if present
-			if (cache != null) {
-				if (cache.coords == null) cache.coords = coords;
-				if (cache.coords != null) points.add(cache);
-			}
+        if (isInstalled(activity)) { // TODO: is this if-statement really necessary?
+            final ArrayList<Object> points = new ArrayList<Object>();
 
-			// add waypoint if present
-			if (waypoint != null) {
-				if (waypoint.coords == null) waypoint.coords = coords;
-				if (waypoint.coords != null) points.add(waypoint);
-			}
+            // add cache if present
+            if (cache != null) {
+                if (cache.coords == null)
+                    cache.coords = coords;
+                if (cache.coords != null)
+                    points.add(cache);
+            }
 
-			this.showInLocus(points, true, activity);
-			
-			return true;
-		}
+            // add waypoint if present
+            if (waypoint != null) {
+                if (waypoint.coords == null)
+                    waypoint.coords = coords;
+                if (waypoint.coords != null)
+                    points.add(waypoint);
+            }
 
-		return false;
-	}
+            this.showInLocus(points, true, activity);
+
+            return true;
+        }
+
+        return false;
+    }
 
 }
