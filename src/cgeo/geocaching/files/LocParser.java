@@ -111,7 +111,7 @@ public final class LocParser extends FileParser {
 			}
 			final Matcher matcherContainer = patternContainer.matcher(pointString);
 			if (matcherContainer.find()) {
-				final int size = Integer.parseInt(matcherContainer.group(1).trim());
+                final int size = Integer.parseInt(matcherContainer.group(1).trim());
 
                 switch (size) {
                     case 1: pointCoord.size = CacheSize.NOT_CHOSEN; break;
