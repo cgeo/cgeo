@@ -22,6 +22,7 @@
 				android:src="@drawable/actionbar_manual"
 				android:onClick="goManual" />
 	</LinearLayout>
+	<include layout="@layout/filter_bar"/>
 	<ListView android:id="@android:id/list"
 		android:visibility="gone"
 		android:layout_above="@+id/counter"
