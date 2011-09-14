@@ -1398,6 +1398,22 @@ public class cgData {
         values.put("longitude", coords == null ? null : coords.getLongitude());
     }
 
+    /**
+     * Retrieve coordinates from a Cursor
+     *
+     * @param cursor a Cursor representing a row in the database
+     * @return the coordinates, or null if latitude or longitude is null
+     */
+    private static Geopoint getCoords(final Cursor cursor) {
+        final int indexLat = cursor.getColumnIndex("latitude");
+        final int indexLon = cursor.getColumnIndex("longitude");
+        if (cursor.isNull(indexLat) || cursor.isNull(indexLon)) {
+            return null;
+        } else {
+            return new Geopoint(cursor.getDouble(indexLat), cursor.getDouble(indexLon));
+        }
+    }
+
 	public boolean saveOwnWaypoint(int id, String geocode, cgWaypoint waypoint) {
 		init();
 
@@ -1985,13 +2001,7 @@ public class cgData {
 		cache.latitudeString = (String) cursor.getString(cursor.getColumnIndex("latitude_string"));
 		cache.longitudeString = (String) cursor.getString(cursor.getColumnIndex("longitude_string"));
 		cache.location = (String) cursor.getString(cursor.getColumnIndex("location"));
-		final int indexLat = cursor.getColumnIndex("latitude");
-		final int indexLon = cursor.getColumnIndex("longitude");
-		if (cursor.isNull(indexLat) || cursor.isNull(indexLon)) {
-			cache.coords = null;
-		} else {
-			cache.coords = new Geopoint(cursor.getDouble(indexLat), cursor.getDouble(indexLon));
-		}
+		cache.coords = getCoords(cursor);
 		index = cursor.getColumnIndex("elevation");
 		if (cursor.isNull(index)) {
 			cache.elevation = null;
@@ -2131,13 +2141,7 @@ public class cgData {
 		waypoint.latlon = (String) cursor.getString(cursor.getColumnIndex("latlon"));
 		waypoint.latitudeString = (String) cursor.getString(cursor.getColumnIndex("latitude_string"));
 		waypoint.longitudeString = (String) cursor.getString(cursor.getColumnIndex("longitude_string"));
-		final int indexLat = cursor.getColumnIndex("latitude");
-		final int indexLon = cursor.getColumnIndex("longitude");
-		if (cursor.isNull(indexLat) || cursor.isNull(indexLon)) {
-			waypoint.coords = null;
-		} else {
-			waypoint.coords = new Geopoint(cursor.getDouble(indexLat), cursor.getDouble(indexLon));
-		}
+		waypoint.coords = getCoords(cursor);
 		waypoint.note = (String) cursor.getString(cursor.getColumnIndex("note"));
 
 		return waypoint;
