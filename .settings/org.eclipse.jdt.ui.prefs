@@ -1,4 +1,4 @@
-#Tue Sep 13 09:06:34 CEST 2011
+#Wed Sep 14 19:28:38 CEST 2011
 eclipse.preferences.version=1
 editor_save_participant_org.eclipse.jdt.ui.postsavelistener.cleanup=true
 formatter_profile=_cgeo
@@ -18,7 +18,7 @@ sp_cleanup.always_use_this_for_non_static_field_access=false
 sp_cleanup.always_use_this_for_non_static_method_access=false
 sp_cleanup.convert_to_enhanced_for_loop=false
 sp_cleanup.correct_indentation=false
-sp_cleanup.format_source_code=false
+sp_cleanup.format_source_code=true
 sp_cleanup.format_source_code_changes_only=true
 sp_cleanup.make_local_variable_final=false
 sp_cleanup.make_parameters_final=false
@@ -28,7 +28,7 @@ sp_cleanup.make_variable_declarations_final=true
 sp_cleanup.never_use_blocks=false
 sp_cleanup.never_use_parentheses_in_expressions=true
 sp_cleanup.on_save_use_additional_actions=false
-sp_cleanup.organize_imports=true
+sp_cleanup.organize_imports=false
 sp_cleanup.qualify_static_field_accesses_with_declaring_class=false
 sp_cleanup.qualify_static_member_accesses_through_instances_with_declaring_class=true
 sp_cleanup.qualify_static_member_accesses_through_subtypes_with_declaring_class=true
