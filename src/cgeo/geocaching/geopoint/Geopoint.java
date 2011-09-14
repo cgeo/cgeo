@@ -133,11 +133,13 @@ public final class Geopoint
 	 * Calculates bearing to given Geopoint in degree.
 	 *
 	 * @param gp target
-	 * @return bearing in degree.
+	 * @return bearing in degree, in the [0,360[ range
 	 */
 	public float bearingTo(final Geopoint gp)
 	{
-		return pathTo(gp)[1];
+	    // Android library returns a bearing in the [-180;180] range
+	    final float bearing = pathTo(gp)[1];
+	    return bearing < 0 ? bearing + 360 : bearing;
 	}
 
 	/**
