@@ -19,6 +19,7 @@ import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.geopoint.Geopoint;
 
 public final class LocParser extends FileParser {
@@ -110,25 +111,17 @@ public final class LocParser extends FileParser {
 			}
 			final Matcher matcherContainer = patternContainer.matcher(pointString);
 			if (matcherContainer.find()) {
-				final int size = Integer.parseInt(matcherContainer.group(1)
-						.trim());
+				final int size = Integer.parseInt(matcherContainer.group(1).trim());
 
-				if (size == 1) {
-					pointCoord.size = "not chosen";
-				} else if (size == 2) {
-					pointCoord.size = "micro";
-				} else if (size == 3) {
-					pointCoord.size = "regular";
-				} else if (size == 4) {
-					pointCoord.size = "large";
-				} else if (size == 5) {
-					pointCoord.size = "virtual";
-				} else if (size == 6) {
-					pointCoord.size = "other";
-				} else if (size == 8) {
-					pointCoord.size = "small";
-				} else {
-					pointCoord.size = "unknown";
+				switch (size) {
+                    case 1: pointCoord.size = CacheSize.NOT_CHOSEN; break;
+                    case 2: pointCoord.size = CacheSize.MICRO; break;
+                    case 3: pointCoord.size = CacheSize.REGULAR; break;
+                    case 4: pointCoord.size = CacheSize.LARGE; break;
+                    case 5: pointCoord.size = CacheSize.VIRTUAL; break;
+                    case 6: pointCoord.size = CacheSize.OTHER; break;
+                    case 8: pointCoord.size = CacheSize.SMALL; break;
+                    default: pointCoord.size = null; break;
 				}
 			}
 

@@ -70,6 +70,7 @@ import android.text.style.StrikethroughSpan;
 import android.util.Log;
 import android.widget.EditText;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.files.LocParser;
 import cgeo.geocaching.geopoint.DistanceParser;
@@ -1249,7 +1250,8 @@ public class cgBase {
 			try {
 				final Matcher matcherSize = patternSize.matcher(tableInside);
 				if (matcherSize.find() && matcherSize.groupCount() > 0) {
-					cache.size = getMatch(matcherSize.group(1)).toLowerCase();
+					cache.size = CacheSize.FIND_BY_ID.get(
+					        getMatch(matcherSize.group(1)).toLowerCase());
 				}
 			} catch (Exception e) {
 				// failed to parse size
@@ -1760,7 +1762,7 @@ public class cgBase {
 		if (cache.favouriteCnt == null) {
 			Log.w(cgSettings.tag, "favoriteCount not parsed correctly");
 		}
-		if (StringUtils.isBlank(cache.size)) {
+		if (cache.size == null) {
 			Log.w(cgSettings.tag, "size not parsed correctly");
 		}
 		if (StringUtils.isBlank(cache.type)) {

@@ -30,6 +30,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Environment;
 import android.util.Log;
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.CollectionUtils;
 
@@ -1170,7 +1171,7 @@ public class cgData {
 			values.put("hidden", cache.hidden.getTime());
 		}
 		values.put("hint", cache.hint);
-		values.put("size", cache.size);
+		values.put("size", cache.size == null ? "" : cache.size.id);
 		values.put("difficulty", cache.difficulty);
 		values.put("terrain", cache.terrain);
 		values.put("latlon", cache.latlon);
@@ -1982,7 +1983,7 @@ public class cgData {
 		cache.ownerReal = (String) cursor.getString(cursor.getColumnIndex("owner_real"));
 		cache.hidden = new Date((long) cursor.getLong(cursor.getColumnIndex("hidden")));
 		cache.hint = (String) cursor.getString(cursor.getColumnIndex("hint"));
-		cache.size = (String) cursor.getString(cursor.getColumnIndex("size"));
+		cache.size = CacheSize.FIND_BY_ID.get(cursor.getString(cursor.getColumnIndex("size")));
 		cache.difficulty = (Float) cursor.getFloat(cursor.getColumnIndex("difficulty"));
 		index = cursor.getColumnIndex("direction");
 		if (cursor.isNull(index)) {

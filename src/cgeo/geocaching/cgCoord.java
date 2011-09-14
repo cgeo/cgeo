@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.geopoint.Geopoint;
 
 public class cgCoord {
@@ -14,7 +15,7 @@ public class cgCoord {
 	public Geopoint coords = new Geopoint(0, 0);
 	public Float difficulty = null;
 	public Float terrain = null;
-	public String size = null;
+	public CacheSize size = null;
 
 	public cgCoord() {
 	}

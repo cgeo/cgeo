@@ -31,6 +31,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -38,17 +39,17 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cachelist.CacheListAppFactory;
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.filter.cgFilter;
 import cgeo.geocaching.filter.cgFilterBySize;
 import cgeo.geocaching.filter.cgFilterByTrackables;
@@ -1038,8 +1039,7 @@ public class cgeocaches extends AbstractListActivity {
 		return CacheListAppFactory.onMenuItemSelected(item, geo, cacheList, this, res, searchId);
 	}
 
-	private void setComparator(MenuItem item,
-			CacheComparator comparator) {
+	private void setComparator(MenuItem item, CacheComparator comparator) {
 		if (adapter != null) {
 			adapter.setComparator(comparator);
 		}
@@ -1071,13 +1071,13 @@ public class cgeocaches extends AbstractListActivity {
 
 			if (selectedFilter.equals(res.getString(R.string.caches_filter_size))) {
 				menu.setHeaderTitle(res.getString(R.string.caches_filter_size_title));
-				menu.add(0, MENU_FILTER_SIZE_MICRO, 0, res.getString(R.string.caches_filter_size_micro));
-				menu.add(0, MENU_FILTER_SIZE_SMALL, 0, res.getString(R.string.caches_filter_size_small));
-				menu.add(0, MENU_FILTER_SIZE_REGULAR, 0, res.getString(R.string.caches_filter_size_regular));
-				menu.add(0, MENU_FILTER_SIZE_LARGE, 0, res.getString(R.string.caches_filter_size_large));
-				menu.add(0, MENU_FILTER_SIZE_OTHER, 0, res.getString(R.string.caches_filter_size_other));
-				menu.add(0, MENU_FILTER_SIZE_VIRTUAL, 0, res.getString(R.string.caches_filter_size_virtual));
-				menu.add(0, MENU_FILTER_SIZE_NOT_CHOSEN, 0, res.getString(R.string.caches_filter_size_notchosen));
+				menu.add(0, MENU_FILTER_SIZE_MICRO, 0, res.getString(CacheSize.MICRO.l10nId));
+				menu.add(0, MENU_FILTER_SIZE_SMALL, 0, res.getString(CacheSize.SMALL.l10nId));
+				menu.add(0, MENU_FILTER_SIZE_REGULAR, 0, res.getString(CacheSize.REGULAR.l10nId));
+				menu.add(0, MENU_FILTER_SIZE_LARGE, 0, res.getString(CacheSize.LARGE.l10nId));
+				menu.add(0, MENU_FILTER_SIZE_OTHER, 0, res.getString(CacheSize.OTHER.l10nId));
+				menu.add(0, MENU_FILTER_SIZE_VIRTUAL, 0, res.getString(CacheSize.VIRTUAL.l10nId));
+				menu.add(0, MENU_FILTER_SIZE_NOT_CHOSEN, 0, res.getString(CacheSize.NOT_CHOSEN.l10nId));
 			} else if (selectedFilter.equals(res.getString(R.string.caches_filter_type))) {
 				menu.setHeaderTitle(res.getString(R.string.caches_filter_type_title));
 				menu.add(0,  MENU_FILTER_TYPE_TRADITIONAL, 0, res.getString(R.string.caches_filter_type_traditional));
@@ -1192,26 +1192,19 @@ public class cgeocaches extends AbstractListActivity {
 			return true;
 		}
 		else if (id == MENU_FILTER_SIZE_MICRO) {
-			return setFilter(new cgFilterBySize(
-					res.getString(R.string.caches_filter_size_micro)));
+			return setFilter(new cgFilterBySize(CacheSize.MICRO));
 		} else if (id == MENU_FILTER_SIZE_SMALL) {
-			return setFilter(new cgFilterBySize(
-					res.getString(R.string.caches_filter_size_small)));
+			return setFilter(new cgFilterBySize(CacheSize.SMALL));
 		} else if (id == MENU_FILTER_SIZE_REGULAR) {
-			return setFilter(new cgFilterBySize(
-					res.getString(R.string.caches_filter_size_regular)));
+			return setFilter(new cgFilterBySize(CacheSize.REGULAR));
 		} else if (id == MENU_FILTER_SIZE_LARGE) {
-			return setFilter(new cgFilterBySize(
-					res.getString(R.string.caches_filter_size_large)));
+			return setFilter(new cgFilterBySize(CacheSize.LARGE));
 		} else if (id == MENU_FILTER_SIZE_OTHER) {
-			return setFilter(new cgFilterBySize(
-					res.getString(R.string.caches_filter_size_other)));
+			return setFilter(new cgFilterBySize(CacheSize.OTHER));
 		} else if (id == MENU_FILTER_SIZE_VIRTUAL) {
-			return setFilter(new cgFilterBySize(
-					res.getString(R.string.caches_filter_size_virtual)));
+			return setFilter(new cgFilterBySize(CacheSize.VIRTUAL));
 		} else if (id == MENU_FILTER_SIZE_NOT_CHOSEN) {
-			return setFilter(new cgFilterBySize(
-					res.getString(R.string.caches_filter_size_notchosen)));
+			return setFilter(new cgFilterBySize(CacheSize.NOT_CHOSEN));
 		} else if (id == MENU_FILTER_TYPE_TRADITIONAL) {
 			return setFilter(new cgFilterByType("traditional"));
 		} else if (id == MENU_FILTER_TYPE_MULTI) {

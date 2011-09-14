@@ -237,14 +237,16 @@ public class cgeopopup extends AbstractActivity {
 
 			itemName.setText(res.getString(R.string.cache_type));
 			if (cgBase.cacheTypesInv.containsKey(cache.type)) { // cache icon
-				if (StringUtils.isNotBlank(cache.size)) {
-					itemValue.setText(cgBase.cacheTypesInv.get(cache.type) + " (" + cache.size + ")");
+				if (cache.size != null) {
+					itemValue.setText(cgBase.cacheTypesInv.get(cache.type) 
+					        + " (" + cache.size.id + ")");
 				} else {
 					itemValue.setText(cgBase.cacheTypesInv.get(cache.type));
 				}
 			} else {
-				if (StringUtils.isNotBlank(cache.size)) {
-					itemValue.setText(cgBase.cacheTypesInv.get("mystery") + " (" + cache.size + ")");
+				if (cache.size != null) {
+					itemValue.setText(cgBase.cacheTypesInv.get("mystery") 
+					        + " (" + cache.size.id + ")");
 				} else {
 					itemValue.setText(cgBase.cacheTypesInv.get("mystery"));
 				}

@@ -59,6 +59,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.GeneralAppsFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.utils.CollectionUtils;
 
 /**
@@ -655,10 +656,10 @@ public class cgeodetail extends AbstractActivity {
 			itemName.setText(res.getString(R.string.cache_type));
 
 			String size = "";
-			if (StringUtils.isNotBlank(cache.size)) {
+			if (cache.size != null) {
 				// don't show "not chosen" for events, that should be the normal case
-				if (!(cache.isEventCache() && cache.size.equals("not chosen"))) {
-					size = " (" + cache.size + ")";
+				if (!(cache.isEventCache() && cache.size == CacheSize.NOT_CHOSEN)) {
+					size = " (" + cache.size.id + ")";
 				}
 			}
 
