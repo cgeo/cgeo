@@ -111,6 +111,7 @@
   <string name="err_server">Failed connection to geocaching.com (server or connection down?)</string>
   <string name="err_login">No login information stored</string>
   <string name="err_login_failed">Sorry, c:geo can\'t login.</string>
+  <string name="err_login_failed_toast">Sorry, c:geo can\'t login. c:geo works in offline mode. Check your login in settings or enable internet connection.</string>
   <string name="err_unknown">Unknown error</string>
   <string name="err_comm">Unknown communication error</string>
   <string name="err_missing_auth">No username and/or password set.</string>
