@@ -36,6 +36,15 @@
   <string name="gchq">Groundspeak HQ</string>
   <string name="gps">GPS cache utställning</string>
 
+  <!-- cache sizes -->
+  <string name="cache_size_micro">micro</string>
+  <string name="cache_size_small">small</string>
+  <string name="cache_size_regular">regular</string>
+  <string name="cache_size_large">large</string>
+  <string name="cache_size_other">other</string>
+  <string name="cache_size_virtual">virtual</string>
+  <string name="cache_size_notchosen">not chosen</string>
+  
   <!-- waypoints -->
   <string name="wp_final">Slutlig plats</string>
   <string name="wp_stage">Delsteg för multi-cache</string>
@@ -318,13 +327,6 @@
   <string name="caches_filter_track">med trackables</string>
   <string name="caches_filter_clear">rensa filter</string>
   <string name="caches_filter_size_title">Välj storlek</string>
-  <string name="caches_filter_size_micro">micro</string>
-  <string name="caches_filter_size_small">small</string>
-  <string name="caches_filter_size_regular">regular</string>
-  <string name="caches_filter_size_large">large</string>
-  <string name="caches_filter_size_other">other</string>
-  <string name="caches_filter_size_virtual">virtual</string>
-  <string name="caches_filter_size_notchosen">ej vald</string>
   <string name="caches_filter_type_title">Välj typ</string>
   <string name="caches_filter_type_traditional">Traditionell cache</string>
   <string name="caches_filter_type_multi">Multi-cache</string>

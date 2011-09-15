@@ -36,6 +36,15 @@
   <string name="gchq">Groundspeak hq</string>
   <string name="gps">GPS cache exhibit</string>
 
+  <!-- cache sizes -->
+  <string name="cache_size_micro">micro</string>
+  <string name="cache_size_small">small</string>
+  <string name="cache_size_regular">regular</string>
+  <string name="cache_size_large">large</string>
+  <string name="cache_size_other">other</string>
+  <string name="cache_size_virtual">virtual</string>
+  <string name="cache_size_notchosen">not chosen</string>
+
   <!-- waypoints -->
   <string name="wp_final">Final location</string>
   <string name="wp_stage">Stage of multi-cache</string>
@@ -321,13 +330,6 @@
   <string name="caches_filter_track">with trackables</string>
   <string name="caches_filter_clear">clear filters</string>
   <string name="caches_filter_size_title">Choose size</string>
-  <string name="caches_filter_size_micro">micro</string>
-  <string name="caches_filter_size_small">small</string>
-  <string name="caches_filter_size_regular">regular</string>
-  <string name="caches_filter_size_large">large</string>
-  <string name="caches_filter_size_other">other</string>
-  <string name="caches_filter_size_virtual">virtual</string>
-  <string name="caches_filter_size_notchosen">not chosen</string>
   <string name="caches_filter_type_title">Choose type</string>
   <string name="caches_filter_type_traditional">Traditional cache</string>
   <string name="caches_filter_type_multi">Multi-cache</string>

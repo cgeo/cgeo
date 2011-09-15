@@ -668,7 +668,7 @@ public class cgeodetail extends AbstractActivity {
             if (cache.size != null) {
                 // don't show "not chosen" for events, that should be the normal case
                 if (!(cache.isEventCache() && cache.size == CacheSize.NOT_CHOSEN)) {
-                    size = " (" + cache.size.id + ")";
+                    size = " (" + res.getString(cache.size.stringId) + ")";
                 }
             }
 

@@ -1077,13 +1077,13 @@ public class cgeocaches extends AbstractListActivity {
 
             if (selectedFilter.equals(res.getString(R.string.caches_filter_size))) {
                 menu.setHeaderTitle(res.getString(R.string.caches_filter_size_title));
-                menu.add(0, MENU_FILTER_SIZE_MICRO, 0, res.getString(R.string.caches_filter_size_micro));
-                menu.add(0, MENU_FILTER_SIZE_SMALL, 0, res.getString(R.string.caches_filter_size_small));
-                menu.add(0, MENU_FILTER_SIZE_REGULAR, 0, res.getString(R.string.caches_filter_size_regular));
-                menu.add(0, MENU_FILTER_SIZE_LARGE, 0, res.getString(R.string.caches_filter_size_large));
-                menu.add(0, MENU_FILTER_SIZE_OTHER, 0, res.getString(R.string.caches_filter_size_other));
-                menu.add(0, MENU_FILTER_SIZE_VIRTUAL, 0, res.getString(R.string.caches_filter_size_virtual));
-                menu.add(0, MENU_FILTER_SIZE_NOT_CHOSEN, 0, res.getString(R.string.caches_filter_size_notchosen));
+                menu.add(0, MENU_FILTER_SIZE_MICRO, 0, res.getString(CacheSize.MICRO.stringId));
+                menu.add(0, MENU_FILTER_SIZE_SMALL, 0, res.getString(CacheSize.SMALL.stringId));
+                menu.add(0, MENU_FILTER_SIZE_REGULAR, 0, res.getString(CacheSize.REGULAR.stringId));
+                menu.add(0, MENU_FILTER_SIZE_LARGE, 0, res.getString(CacheSize.LARGE.stringId));
+                menu.add(0, MENU_FILTER_SIZE_OTHER, 0, res.getString(CacheSize.OTHER.stringId));
+                menu.add(0, MENU_FILTER_SIZE_VIRTUAL, 0, res.getString(CacheSize.VIRTUAL.stringId));
+                menu.add(0, MENU_FILTER_SIZE_NOT_CHOSEN, 0, res.getString(CacheSize.NOT_CHOSEN.stringId));
             } else if (selectedFilter.equals(res.getString(R.string.caches_filter_type))) {
                 menu.setHeaderTitle(res.getString(R.string.caches_filter_type_title));
                 menu.add(0, MENU_FILTER_TYPE_TRADITIONAL, 0, res.getString(R.string.caches_filter_type_traditional));
