@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.Geopoint.MalformedCoordinateException;
 import cgeo.geocaching.utils.CollectionUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -2221,12 +2222,19 @@ public class cgData {
             do {
                 cgDestination dest = new cgDestination();
 
-                dest.setId((long) cursor.getLong(indexId));
-                dest.setDate((long) cursor.getLong(indexDate));
-                dest.setCoords(new Geopoint((double) cursor.getDouble(indexLatitude),
-                        (double) cursor.getDouble(indexLongitude)));
+                try {
+                    dest.setId((long) cursor.getLong(indexId));
+                    dest.setDate((long) cursor.getLong(indexDate));
+                    dest.setCoords(new Geopoint((double) cursor.getDouble(indexLatitude),
+                            (double) cursor.getDouble(indexLongitude)));
 
-                destinations.add(dest);
+                    destinations.add(dest);
+                } catch (MalformedCoordinateException e) {
+                    //If there is something wrong with coordinates in database
+                    //we don't add
+                    //TODO Might need to remove it from DB
+                }
+
             } while (cursor.moveToNext());
         }
 
