@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <resources>
   <string name="app_name">c:geo</string>
   <string name="app_name_compass">c:geo compass</string>
@@ -945,20 +945,21 @@
 
   <!-- changelog -->
   <string name="changelog">\n
-    <b>Next release</b>\n
+    <b>15.09.2011</b>\n
     · new: sort by state, sort by find count\n
     · new: experimental support for .gpx from opencaching.com\n
-    · new: scan QR code to open cache description\n
+    · new: scan QR code to open cache description (Barcode Scanner from Market)\n
     · new: context menu on stored caches button (main screen)\n
     · new: compass immediately shows the right direction\n
     · new: active filters are shown in list mode\n
     · fix: performance of GPX import\n
     · fix: performance of deleting caches from list\n
+    · fix: performance of web traffic\n
     · fix: return to list after GPX import\n
     · fix: fill signature when logging offline\n
     · fix: show strikethrough in caches\n
     · fix: no more empty map previews\n
-    · fix: send2c:geo\n
+    · fix: send2c:geo authorization\n
     \n\n
     <b>26.08.2011</b>\n
     · new: street view\n
