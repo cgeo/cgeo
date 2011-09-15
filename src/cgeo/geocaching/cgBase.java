@@ -1528,7 +1528,7 @@ public class cgBase {
             final HashMap<String, String> params = new HashMap<String, String>();
             params.put("tkn", userToken);
             params.put("idx", "1");
-            params.put("num", "10");
+            params.put("num", "35");
             params.put("sp", "0");
             params.put("sf", "0");
             params.put("decrypt", "1");
