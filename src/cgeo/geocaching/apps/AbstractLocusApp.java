@@ -123,11 +123,11 @@ public abstract class AbstractLocusApp extends AbstractApp {
         if (cache.hidden != null) {
             pg.hidden = ISO8601DATE.format(cache.hidden.getTime());
         }
-        int locusId = toLocusId(CacheType.FIND_BY_CGEOID.get(cache.type));
+        int locusId = toLocusId(CacheType.FIND_BY_ID.get(cache.type));
         if (locusId != NO_LOCUS_ID) {
             pg.type = locusId;
         }
-        locusId = toLocusId(CacheSize.FIND_BY_CGEOID.get(cache.size));
+        locusId = toLocusId(CacheSize.FIND_BY_ID.get(cache.size));
         if (locusId != NO_LOCUS_ID) {
             pg.container = locusId;
         }
@@ -148,7 +148,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
                 PointGeocachingDataWaypoint wp = new PointGeocachingDataWaypoint();
                 wp.code = waypoint.geocode;
                 wp.name = waypoint.name;
-                String locusWpId = toLocusId(WaypointType.FIND_BY_CGEOID.get(waypoint.type));
+                String locusWpId = toLocusId(WaypointType.FIND_BY_ID.get(waypoint.type));
                 if (locusWpId != null) {
                     wp.type = locusWpId;
                 }

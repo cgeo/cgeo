@@ -7,6 +7,7 @@ import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import org.apache.commons.lang3.StringUtils;
@@ -115,21 +116,21 @@ public final class LocParser extends FileParser {
                         .trim());
 
                 if (size == 1) {
-                    pointCoord.size = "not chosen";
+                    pointCoord.size = CacheSize.NOT_CHOSEN;
                 } else if (size == 2) {
-                    pointCoord.size = "micro";
+                    pointCoord.size = CacheSize.MICRO;
                 } else if (size == 3) {
-                    pointCoord.size = "regular";
+                    pointCoord.size = CacheSize.REGULAR;
                 } else if (size == 4) {
-                    pointCoord.size = "large";
+                    pointCoord.size = CacheSize.LARGE;
                 } else if (size == 5) {
-                    pointCoord.size = "virtual";
+                    pointCoord.size = CacheSize.VIRTUAL;
                 } else if (size == 6) {
-                    pointCoord.size = "other";
+                    pointCoord.size = CacheSize.OTHER;
                 } else if (size == 8) {
-                    pointCoord.size = "small";
+                    pointCoord.size = CacheSize.SMALL;
                 } else {
-                    pointCoord.size = "unknown";
+                    pointCoord.size = null;
                 }
             }
 
