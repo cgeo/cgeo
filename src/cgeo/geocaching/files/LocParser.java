@@ -1,6 +1,5 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCacheWrap;
 import cgeo.geocaching.cgCoord;
@@ -8,7 +7,7 @@ import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
-import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.GeopointParser;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -96,10 +95,8 @@ public final class LocParser extends FileParser {
             final Matcher matcherLat = patternLat.matcher(pointString);
             final Matcher matcherLon = patternLon.matcher(pointString);
             if (matcherLat.find() && matcherLon.find()) {
-                final Map<String, Object> tmpLat = cgBase.parseCoordinate(matcherLat.group(1).trim(), "lat");
-                final Map<String, Object> tmpLon = cgBase.parseCoordinate(matcherLon.group(1).trim(), "lon");
-                pointCoord.coords = new Geopoint((Double) tmpLat.get("coordinate"),
-                        (Double) tmpLon.get("coordinate"));
+                pointCoord.coords =
+                        GeopointParser.parse(matcherLat.group(1).trim(), matcherLon.group(1).trim());
             }
             final Matcher matcherDifficulty = patternDifficulty.matcher(pointString);
             if (matcherDifficulty.find()) {
