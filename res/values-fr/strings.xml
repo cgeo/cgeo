@@ -36,6 +36,15 @@
   <string name="gchq">groundspeak hq</string>
   <string name="gps">gps cache exhibit</string>
 
+  <!-- cache sizes -->
+  <string name="cache_size_micro">micro</string>
+  <string name="cache_size_small">petite</string>
+  <string name="cache_size_regular">normale</string>
+  <string name="cache_size_large">grande</string>
+  <string name="cache_size_other">autre</string>
+  <string name="cache_size_virtual">virtuelle</string>
+  <string name="cache_size_notchosen">non renseignée</string>
+
   <!-- waypoints -->
   <string name="wp_final">Étape finale</string>
   <string name="wp_stage">Étape</string>
@@ -228,13 +237,6 @@
   <string name="caches_filter_track">avec des trackables</string>
   <string name="caches_filter_clear">effacer les filtres</string>
   <string name="caches_filter_size_title">Choisir la taille</string>
-  <string name="caches_filter_size_micro">micro</string>
-  <string name="caches_filter_size_small">petite</string>
-  <string name="caches_filter_size_regular">normale</string>
-  <string name="caches_filter_size_large">grande</string>
-  <string name="caches_filter_size_other">autre</string>
-  <string name="caches_filter_size_virtual">virtuelle</string>
-  <string name="caches_filter_size_notchosen">non renseignée</string>
   <string name="caches_filter_type_title">Choisir le type</string>
   <string name="caches_filter_type_traditional">Traditionelle</string>
   <string name="caches_filter_type_multi">Multi-cache</string>
