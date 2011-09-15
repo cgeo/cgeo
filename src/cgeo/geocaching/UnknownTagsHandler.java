@@ -9,25 +9,25 @@ import android.text.style.StrikethroughSpan;
 
 public class UnknownTagsHandler implements TagHandler {
 
-	private static final int UNDEFINED_POSITION = -1;
-	int strikePos = UNDEFINED_POSITION;
+    private static final int UNDEFINED_POSITION = -1;
+    int strikePos = UNDEFINED_POSITION;
 
-	public void handleTag(boolean opening, String tag, Editable output,
+    public void handleTag(boolean opening, String tag, Editable output,
             XMLReader xmlReader) {
-        if(tag.equalsIgnoreCase("strike") || tag.equals("s")) {
+        if (tag.equalsIgnoreCase("strike") || tag.equals("s")) {
             handleStrike(opening, output);
         }
     }
 
-	private void handleStrike(boolean opening, Editable output) {
+    private void handleStrike(boolean opening, Editable output) {
         int length = output.length();
-        if(opening) {
-        	strikePos = length;
+        if (opening) {
+            strikePos = length;
         } else {
-        	if (strikePos > UNDEFINED_POSITION) {
-        		output.setSpan(new StrikethroughSpan(), strikePos, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-        		strikePos = UNDEFINED_POSITION;
-        	}
+            if (strikePos > UNDEFINED_POSITION) {
+                output.setSpan(new StrikethroughSpan(), strikePos, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                strikePos = UNDEFINED_POSITION;
+            }
         }
     }
 }

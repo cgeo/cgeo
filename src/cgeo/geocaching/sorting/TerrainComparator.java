@@ -8,18 +8,18 @@ import cgeo.geocaching.cgCache;
  */
 public class TerrainComparator extends AbstractCacheComparator {
 
-	@Override
-	protected boolean canCompare(cgCache cache1, cgCache cache2) {
-		return cache1.terrain != null && cache2.terrain != null;
-	}
+    @Override
+    protected boolean canCompare(cgCache cache1, cgCache cache2) {
+        return cache1.terrain != null && cache2.terrain != null;
+    }
 
-	@Override
-	protected int compareCaches(cgCache cache1, cgCache cache2) {
-		if (cache1.terrain > cache2.terrain) {
-			return 1;
-		} else if (cache2.terrain > cache1.terrain) {
-			return -1;
-		}
-		return 0;
-	}
+    @Override
+    protected int compareCaches(cgCache cache1, cgCache cache2) {
+        if (cache1.terrain > cache2.terrain) {
+            return 1;
+        } else if (cache2.terrain > cache1.terrain) {
+            return -1;
+        }
+        return 0;
+    }
 }

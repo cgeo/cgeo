@@ -1,33 +1,35 @@
 package cgeo.geocaching.mapinterfaces;
 
+import cgeo.geocaching.mapcommon.ItemizedOverlayBase;
+
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
-import cgeo.geocaching.mapcommon.ItemizedOverlayBase;
 
 /**
  * Defines the common functions to access the provider-specific
  * ItemizedOverlay implementation
+ *
  * @author rsudev
  *
  */
 public interface ItemizedOverlayImpl extends OverlayImpl {
 
-	ItemizedOverlayBase getBase();
+    ItemizedOverlayBase getBase();
 
-	void superPopulate();
+    void superPopulate();
 
-	void superSetLastFocusedItemIndex(int i);
+    void superSetLastFocusedItemIndex(int i);
 
-	Drawable superBoundCenter(Drawable markerIn);
+    Drawable superBoundCenter(Drawable markerIn);
 
-	Drawable superBoundCenterBottom(Drawable marker);
+    Drawable superBoundCenterBottom(Drawable marker);
 
-	boolean superOnTap(int index);
+    boolean superOnTap(int index);
 
-	void superDraw(Canvas canvas, MapViewImpl mapView, boolean shadow);
+    void superDraw(Canvas canvas, MapViewImpl mapView, boolean shadow);
 
-	void superDrawOverlayBitmap(Canvas canvas, Point drawPosition, MapProjectionImpl projection,
-			byte drawZoomLevel);
+    void superDrawOverlayBitmap(Canvas canvas, Point drawPosition, MapProjectionImpl projection,
+            byte drawZoomLevel);
 
 }

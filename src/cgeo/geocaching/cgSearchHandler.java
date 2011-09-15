@@ -13,92 +13,93 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class cgSearchHandler extends Handler {
-	private Activity activity = null;
-	private Resources res = null;
-	private cgSearchThread recaptchaThread = null;
-	private ImageView imageView = null;
-	private Bitmap img = null;
+    private Activity activity = null;
+    private Resources res = null;
+    private cgSearchThread recaptchaThread = null;
+    private ImageView imageView = null;
+    private Bitmap img = null;
 
-	private Handler imgHandler = new Handler() {
-		@Override
-		public void handleMessage(Message msg) {
-			try {
-				if (img != null && imageView != null) {
-					imageView.setImageBitmap(img);
-				}
-			} catch (Exception e) {
-				// nothing
-			}
-		}
-	};
+    private Handler imgHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            try {
+                if (img != null && imageView != null) {
+                    imageView.setImageBitmap(img);
+                }
+            } catch (Exception e) {
+                // nothing
+            }
+        }
+    };
 
-	public cgSearchHandler(Activity activityIn, Resources resIn, cgSearchThread recaptchaThreadIn) {
-		activity = activityIn;
-		res = resIn;
-		recaptchaThread = recaptchaThreadIn;
-	}
+    public cgSearchHandler(Activity activityIn, Resources resIn, cgSearchThread recaptchaThreadIn) {
+        activity = activityIn;
+        res = resIn;
+        recaptchaThread = recaptchaThreadIn;
+    }
 
-	@Override
-	public void handleMessage(Message msg) {
-		try {
-			if (msg.what == 1) {
-				final AlertDialog.Builder dlg = new AlertDialog.Builder(activity);
-				final LayoutInflater inflater = activity.getLayoutInflater();
-				final View view = inflater.inflate(R.layout.recaptcha_dialog, null);
+    @Override
+    public void handleMessage(Message msg) {
+        try {
+            if (msg.what == 1) {
+                final AlertDialog.Builder dlg = new AlertDialog.Builder(activity);
+                final LayoutInflater inflater = activity.getLayoutInflater();
+                final View view = inflater.inflate(R.layout.recaptcha_dialog, null);
 
-				imageView = (ImageView) view.findViewById(R.id.image);
+                imageView = (ImageView) view.findViewById(R.id.image);
 
-				(new getCaptcha(new URL("http://www.google.com/recaptcha/api/image?c=" + recaptchaThread.getChallenge()))).start();
+                (new getCaptcha(new URL("http://www.google.com/recaptcha/api/image?c=" + recaptchaThread.getChallenge()))).start();
 
-				dlg.setTitle(res.getString(R.string.caches_recaptcha_title));
-				dlg.setView(view);
-				dlg.setNeutralButton(res.getString(R.string.caches_recaptcha_continue), new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						final String text = ((EditText) view.findViewById(R.id.text)).getText().toString();
+                dlg.setTitle(res.getString(R.string.caches_recaptcha_title));
+                dlg.setView(view);
+                dlg.setNeutralButton(res.getString(R.string.caches_recaptcha_continue), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        final String text = ((EditText) view.findViewById(R.id.text)).getText().toString();
 
-						recaptchaThread.setText(text);
+                        recaptchaThread.setText(text);
 
-						dialog.cancel();
-					}
-				});
+                        dialog.cancel();
+                    }
+                });
 
-				dlg.create().show();
-			}
-		} catch (Exception e) {
-			// nothing
-		}
-	}
+                dlg.create().show();
+            }
+        } catch (Exception e) {
+            // nothing
+        }
+    }
 
-	private class getCaptcha extends Thread {
-		private URL uri = null;
+    private class getCaptcha extends Thread {
+        private URL uri = null;
 
-		public getCaptcha(URL uriIn) {
-			uri = uriIn;
-		}
+        public getCaptcha(URL uriIn) {
+            uri = uriIn;
+        }
 
-		@Override
-		public void run() {
-			try {
-				HttpURLConnection connection = (HttpURLConnection)uri.openConnection();
-				connection.setDoInput(true);
-				connection.connect();
+        @Override
+        public void run() {
+            try {
+                HttpURLConnection connection = (HttpURLConnection) uri.openConnection();
+                connection.setDoInput(true);
+                connection.connect();
 
-				InputStream is = connection.getInputStream();
+                InputStream is = connection.getInputStream();
 
-				img = BitmapFactory.decodeStream(is);
+                img = BitmapFactory.decodeStream(is);
 
-				is.close();
+                is.close();
 
-				imgHandler.sendEmptyMessage(0);
-			} catch (IOException e) {
-				Log.e(cgSettings.tag, "Failed to download reCAPTCHA image");
-			}
-		}
-	}
+                imgHandler.sendEmptyMessage(0);
+            } catch (IOException e) {
+                Log.e(cgSettings.tag, "Failed to download reCAPTCHA image");
+            }
+        }
+    }
 }

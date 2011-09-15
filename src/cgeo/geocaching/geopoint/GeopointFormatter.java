@@ -18,15 +18,15 @@ public class GeopointFormatter
      */
     public enum Format
     {
-        LAT_LON_DECDEGREE ("%y6d %x6d"),
-        LAT_LON_DECMINUTE ("%yn %yd° %y3m %xn %xd° %x3m"),
-        LAT_LON_DECSECOND ("%yn %yd° %ym' %ys\" %xn %xd° %xm' %xs\""),
-        LAT_DECDEGREE ("%y6d"),
-        LAT_DECMINUTE ("%yn %yd° %y3m"),
-        LAT_DECSECOND ("%yn %yd° %ym' %ys\""),
-        LON_DECDEGREE ("%x6d"),
-        LON_DECMINUTE ("%xn %xd° %x3m"),
-        LON_DECSECOND ("%xn %xd° %xm' %xs\"");
+        LAT_LON_DECDEGREE("%y6d %x6d"),
+        LAT_LON_DECMINUTE("%yn %yd° %y3m %xn %xd° %x3m"),
+        LAT_LON_DECSECOND("%yn %yd° %ym' %ys\" %xn %xd° %xm' %xs\""),
+        LAT_DECDEGREE("%y6d"),
+        LAT_DECMINUTE("%yn %yd° %y3m"),
+        LAT_DECSECOND("%yn %yd° %ym' %ys\""),
+        LON_DECDEGREE("%x6d"),
+        LON_DECMINUTE("%xn %xd° %x3m"),
+        LON_DECSECOND("%xn %xd° %xm' %xs\"");
 
         private final String format;
 
@@ -44,7 +44,8 @@ public class GeopointFormatter
     /**
      * Creates a new formatter with given format-string.
      *
-     * @param format the format-string
+     * @param format
+     *            the format-string
      * @see format()
      */
     public GeopointFormatter(final String format)
@@ -56,12 +57,13 @@ public class GeopointFormatter
     /**
      * Creates a new formatter with given default-format.
      *
-     * @param format one of the default formats
+     * @param format
+     *            one of the default formats
      * @see GeopointFormatter.Format
      */
     public GeopointFormatter(final Format format)
     {
-        enumFormat  = format;
+        enumFormat = format;
         this.format = format.toString();
     }
 
@@ -69,28 +71,30 @@ public class GeopointFormatter
      * Formats a Geopoint.
      *
      * Syntax:
-     *      %[dir][precision][value]
+     * %[dir][precision][value]
      *
-     *      [dir]
-     *          y = latitude
-     *          x = longitude
+     * [dir]
+     * y = latitude
+     * x = longitude
      *
-     *      [precision] (optional)
-     *          0..9, number of digits after the decimal point
-     *          
-     *      [value]
-     *          n = direction
-     *          d = degree
-     *          m = minute
-     *          s = second
+     * [precision] (optional)
+     * 0..9, number of digits after the decimal point
+     *
+     * [value]
+     * n = direction
+     * d = degree
+     * m = minute
+     * s = second
      *
      * Example:
-     *      "%yn %yd° %y3m" = "N 52° 36.123"
+     * "%yn %yd° %y3m" = "N 52° 36.123"
      *
      * All other characters are not interpreted and can be used.
      *
-     * @param gp the Geopoint to format
-     * @param format the format-string with syntax from above
+     * @param gp
+     *            the Geopoint to format
+     * @param format
+     *            the format-string with syntax from above
      * @return the formatted coordinates
      */
     public static String format(final String format, final Geopoint gp)
@@ -150,8 +154,10 @@ public class GeopointFormatter
     /**
      * Formats a Geopoint.
      *
-     * @param gp the Geopoint to format
-     * @param format one of the default formats
+     * @param gp
+     *            the Geopoint to format
+     * @param format
+     *            one of the default formats
      * @see cgeo.geocaching.GeopointFormatter.Format
      * @return the formatted coordinates
      */
@@ -159,23 +165,23 @@ public class GeopointFormatter
     {
         // Don't parse often used formats
 
-        switch(format)
+        switch (format)
         {
             case LAT_LON_DECDEGREE:
                 return String.format("%.6f %.6f", gp.getLatitude(), gp.getLongitude());
 
             case LAT_LON_DECMINUTE:
-                final double lat     = Math.abs(gp.getLatitude());
-                final double lon     = Math.abs(gp.getLongitude());
+                final double lat = Math.abs(gp.getLatitude());
+                final double lon = Math.abs(gp.getLongitude());
                 final boolean latPos = (gp.getLatitude() < 0);
                 final boolean lonPos = (gp.getLongitude() < 0);
 
                 return String.format("%s %02.0f° %.3f %s %03.0f° %.3f", (latPos) ? "S" : "N",
-                                                                        Math.floor(lat),
-                                                                        (lat - Math.floor(lat)) * 60,
-                                                                        (lonPos) ? "W" : "E",
-                                                                        Math.floor(lon),
-                                                                        (lon - Math.floor(lon)) * 60);
+                        Math.floor(lat),
+                        (lat - Math.floor(lat)) * 60,
+                        (lonPos) ? "W" : "E",
+                        Math.floor(lon),
+                        (lon - Math.floor(lon)) * 60);
 
             default:
                 return format(format.toString(), gp);
@@ -185,18 +191,19 @@ public class GeopointFormatter
     /**
      * Formats a Geopoint with the format of this instance.
      *
-     * @param gp the Geopoint to format
+     * @param gp
+     *            the Geopoint to format
      * @return the formatted coordinates of the Geopoint
      */
     public String format(final Geopoint gp)
     {
         if (null == enumFormat)
         {
-        return format(format, gp);
+            return format(format, gp);
         }
         else
         {
-            return format( enumFormat, gp);
+            return format(enumFormat, gp);
         }
     }
 
