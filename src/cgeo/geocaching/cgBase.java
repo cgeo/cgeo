@@ -104,8 +104,6 @@ public class cgBase {
     private final static Pattern patternDesc = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>" + "(.*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternCountLogs = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p(.+?)<\\/p><\\/span>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternCountLog = Pattern.compile("src=\"\\/images\\/icons\\/(.+?).gif\"[^>]+> (\\d+)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern patternLog = Pattern.compile("<tr><td class.+?<a href=\"/profile/\\?guid=.+?>(.+?)</a>.+?(?:logOwnerStats[^>]+><img[^>]+icon_smile.+?> ([,\\d]+).+?)?LogType.+?<img.+?/images/icons/([^\\.]+)\\..+?title=\"(.+?)\".+?LogDate.+?>(.+?)<.+?LogText.+?>(.*?)</p>(.*?)</div></div></div></td></tr>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern patternLogImgs = Pattern.compile("href=\"(http://img.geocaching.com/cache/log/.+?)\".+?<span>([^<]*)", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternAttributes = Pattern.compile("<h3 class=\"WidgetHeader\">[^<]*<img[^>]+>\\W*Attributes[^<]*</h3>[^<]*<div class=\"WidgetBody\">(([^<]*<img src=\"[^\"]+\" alt=\"[^\"]+\"[^>]*>)+)[^<]*<p", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternAttributesInside = Pattern.compile("[^<]*<img src=\"([^\"]+)\" alt=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternSpoilers = Pattern.compile("<span id=\"ctl00_ContentBody_Images\">((<a href=\"[^\"]+\"[^>]*>[^<]*<img[^>]+>[^<]*<span>[^>]+</span>[^<]*</a>[^<]*<br[^>]*>([^<]*(<br[^>]*>)+)?)+)[^<]*</span>", Pattern.CASE_INSENSITIVE);
@@ -174,6 +172,7 @@ public class cgBase {
     private static final Pattern patternViewstateFieldCount = Pattern.compile("id=\"__VIEWSTATEFIELDCOUNT\"[^(value)]+value=\"(\\d+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private static final Pattern patternViewstates = Pattern.compile("id=\"__VIEWSTATE(\\d*)\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private static final Pattern patternIsPremium = Pattern.compile("<span id=\"ctl00_litPMLevel\"", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+    private static final Pattern patternUserToken = Pattern.compile("userToken\\s*=\\s*'([^']+)'");
     public static final float miles2km = 1.609344f;
     public static final float feet2km = 0.0003048f;
     public static final float yards2km = 0.0009144f;
@@ -1513,63 +1512,69 @@ public class cgBase {
         // cache logs
         try
         {
-            /*
-             * 1- Author
-             * 2- Finds-count
-             * 3- Log type image name (e.g. "icon_smile")
-             * 4- Type string (e.g. "Found it")
-             * 5- Date string (e.g. "04/28/2010")
-             * 6- Log text
-             * 7- The rest (e.g. log-images, maybe faster)
-             */
-            final Matcher matcherLog = patternLog.matcher(page);//(matcherLogs.group(1));
+            final Matcher userTokenMatcher = patternUserToken.matcher(page);
+            if (!userTokenMatcher.find()) {
+                Log.e(cgSettings.tag, "cgeoBase.parseCache: unable to extract userToken");
+                throw new RuntimeException();
+            }
+            final String userToken = userTokenMatcher.group(1);
+            final HashMap<String, String> params = new HashMap<String, String>();
+            params.put("tkn", userToken);
+            params.put("idx", "1");
+            params.put("num", "10");
+            params.put("sp", "0");
+            params.put("sf", "0");
+            params.put("decrypt", "1");
+            final cgResponse response = request(false, "www.geocaching.com", "/seek/geocache.logbook", "GET",
+                    params, false, false, false);
+            if (response.getStatusCode() != 200) {
+                Log.e(cgSettings.tag, "cgeoBase.parseCache: error " + response.getStatusCode() + " when requesting log information");
+                throw new RuntimeException();
+            }
+            final JSONObject resp = new JSONObject(response.getData());
+            if (!resp.getString("status").equals("success")) {
+                Log.e(cgSettings.tag, "cgeoBase.parseCache: status is " + resp.getString("status"));
+                throw new RuntimeException();
+            }
 
-            while (matcherLog.find())
-            {
+            final JSONArray data = resp.getJSONArray("data");
+
+            for (int index = 0; index < data.length(); index++) {
+                final JSONObject entry = data.getJSONObject(index);
                 final cgLog logDone = new cgLog();
 
-                final String logIconName = matcherLog.group(3).toLowerCase();
-                if (logTypes.containsKey(logIconName))
-                {
+                // FIXME: use the "LogType" field instead of the "LogTypeImage" one.
+                final String logIconNameExt = entry.optString("LogTypeImage", ".gif");
+                final String logIconName = logIconNameExt.substring(0, logIconNameExt.length() - 4);
+                if (logTypes.containsKey(logIconName)) {
                     logDone.type = logTypes.get(logIconName);
-                }
-                else
-                {
+                } else {
                     logDone.type = logTypes.get("icon_note");
                 }
 
-                try
-                {
-                    logDone.date = parseGcCustomDate(matcherLog.group(5)).getTime();
-                } catch (ParseException e)
-                {
-                    Log.w(cgSettings.tag, "Failed to parse log date.");
+                try {
+                    logDone.date = parseGcCustomDate(entry.getString("Visited")).getTime();
+                } catch (ParseException e) {
+                    Log.e(cgSettings.tag, "Failed to parse log date.");
                 }
 
-                logDone.author = Html.fromHtml(matcherLog.group(1)).toString();
+                logDone.author = entry.getString("UserName");
+                logDone.found = entry.getInt("GeocacheFindCount");
+                logDone.log = entry.getString("LogText");
 
-                if (null != matcherLog.group(2))
-                {
-                    logDone.found = Integer.parseInt(matcherLog.group(2).replaceAll(",", ""));
-                }
-
-                logDone.log = matcherLog.group(6);
-
-                final Matcher matcherImg = patternLogImgs.matcher(matcherLog.group(7));
-                while (matcherImg.find())
-                {
+                final JSONArray images = entry.getJSONArray("Images");
+                for (int i = 0; i < images.length(); i++) {
+                    final JSONObject image = images.getJSONObject(i);
                     final cgImage logImage = new cgImage();
-                    logImage.url = matcherImg.group(1);
-                    logImage.title = matcherImg.group(2);
-                    if (logDone.logImages == null)
-                    {
+                    logImage.url = image.getString("FileName");
+                    logImage.title = image.getString("Name");
+                    if (logDone.logImages == null) {
                         logDone.logImages = new ArrayList<cgImage>();
                     }
                     logDone.logImages.add(logImage);
                 }
 
-                if (null == cache.logs)
-                {
+                if (null == cache.logs) {
                     cache.logs = new ArrayList<cgLog>();
                 }
                 cache.logs.add(logDone);
