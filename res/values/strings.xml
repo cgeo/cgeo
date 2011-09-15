@@ -630,6 +630,7 @@
   <string name="waypoint_save">Save</string>
   <string name="waypoint_loading">Loading waypoint…</string>
   <string name="waypoint_unknown_coordinates">Coordinates unknown</string>
+  <string name="waypoint_done">Done</string>
   <string name="search_history">History</string>
   <string name="search_history_empty">No previous destinations</string>
   <string name="search_remove_destination">Destination removed</string>

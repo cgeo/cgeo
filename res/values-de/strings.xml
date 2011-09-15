@@ -624,6 +624,7 @@
   <string name="waypoint_save">Speichern</string>
   <string name="waypoint_loading">Lade Wegpunkt…</string>
   <string name="waypoint_unknown_coordinates">Unbekannte Koordinaten</string>
+  <string name="waypoint_done">Fertig</string>
   <string name="search_history_empty">Keine Ziele bisher</string>
   <string name="search_remove_destination">Ziel gelöscht</string>
   <string name="search_clear_history">History löschen</string>
