@@ -3,6 +3,8 @@ package cgeo.geocaching.geopoint;
 import cgeo.geocaching.R;
 import cgeo.geocaching.geopoint.Geopoint.GeopointException;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,7 +15,6 @@ public class GeopointParser
 {
     private static final Pattern patternLat = Pattern.compile("([NS])\\s*(\\d+)°?(\\s*(\\d+)([\\.,](\\d+)|'?\\s*(\\d+)(''|\")?)?)?");
     private static final Pattern patternLon = Pattern.compile("([WE])\\s*(\\d+)°?(\\s*(\\d+)([\\.,](\\d+)|'?\\s*(\\d+)(''|\")?)?)?");
-    private static final Pattern patternDec = Pattern.compile("^(-?\\d+([\\.,]\\d+)?)\\s*(-?\\d+([\\.,]\\d+)?)?$");
 
     private enum LatLon
     {
@@ -130,18 +131,12 @@ public class GeopointParser
         }
         else // Nothing found with "N 52...", try to match string as decimaldegree
         {
-            matcher = patternDec.matcher(text);
-
-            if (matcher.find())
-            {
-                if (LatLon.LAT == latlon)
-                {
-                    return Double.parseDouble(matcher.group(1).replaceAll(",", "."));
-                }
-                else if (null != matcher.group(3))
-                {
-                    return Double.parseDouble(matcher.group(3).replaceAll(",", "."));
-                }
+            try {
+                final String[] items = StringUtils.split(text.trim());
+                final int index = latlon == LatLon.LON ? items.length - 1 : 0;
+                return Double.parseDouble(items[index]);
+            } catch (NumberFormatException e) {
+                // The right exception will be raised below.
             }
         }
 
