@@ -493,7 +493,7 @@ public class cgeoadvsearch extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, MENU_SEARCH_OWN_CACHES, 0, res.getString(R.string.search_own_caches));
+        menu.add(0, MENU_SEARCH_OWN_CACHES, 0, res.getString(R.string.search_own_caches)).setIcon(android.R.drawable.ic_menu_myplaces);
         return true;
     }
 
