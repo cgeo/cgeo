@@ -27,7 +27,7 @@ import gnu.android.app.appmanualclient.AppManualReaderClient;
 import java.util.List;
 
 public final class ActivityMixin {
-    private static final int MENU_ICON_LOG_VISIT = android.R.drawable.ic_menu_agenda;
+    private static final int MENU_ICON_LOG_VISIT = android.R.drawable.ic_menu_edit;
 
     public final static void goHome(final Activity fromActivity) {
         final Intent intent = new Intent(fromActivity, cgeo.class);

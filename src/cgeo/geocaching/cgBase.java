@@ -106,8 +106,6 @@ public class cgBase {
     private final static Pattern patternDesc = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>" + "(.*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternCountLogs = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p(.+?)<\\/p><\\/span>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternCountLog = Pattern.compile("src=\"\\/images\\/icons\\/(.+?).gif\"[^>]+> (\\d+)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern patternLog = Pattern.compile("<tr><td class.+?<a href=\"/profile/\\?guid=.+?>(.+?)</a>.+?(?:logOwnerStats[^>]+><img[^>]+icon_smile.+?> ([,\\d]+).+?)?LogType.+?<img.+?/images/icons/([^\\.]+)\\..+?title=\"(.+?)\".+?LogDate.+?>(.+?)<.+?LogText.+?>(.*?)</p>(.*?)</div></div></div></td></tr>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern patternLogImgs = Pattern.compile("href=\"(http://img.geocaching.com/cache/log/.+?)\".+?<span>([^<]*)", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternAttributes = Pattern.compile("<h3 class=\"WidgetHeader\">[^<]*<img[^>]+>\\W*Attributes[^<]*</h3>[^<]*<div class=\"WidgetBody\">(([^<]*<img src=\"[^\"]+\" alt=\"[^\"]+\"[^>]*>)+)[^<]*<p", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternAttributesInside = Pattern.compile("[^<]*<img src=\"([^\"]+)\" alt=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternSpoilers = Pattern.compile("<span id=\"ctl00_ContentBody_Images\">((<a href=\"[^\"]+\"[^>]*>[^<]*<img[^>]+>[^<]*<span>[^>]+</span>[^<]*</a>[^<]*<br[^>]*>([^<]*(<br[^>]*>)+)?)+)[^<]*</span>", Pattern.CASE_INSENSITIVE);
@@ -177,6 +175,7 @@ public class cgBase {
     private static final Pattern patternViewstateFieldCount = Pattern.compile("id=\"__VIEWSTATEFIELDCOUNT\"[^(value)]+value=\"(\\d+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private static final Pattern patternViewstates = Pattern.compile("id=\"__VIEWSTATE(\\d*)\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private static final Pattern patternIsPremium = Pattern.compile("<span id=\"ctl00_litPMLevel\"", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+    private static final Pattern patternUserToken = Pattern.compile("userToken\\s*=\\s*'([^']+)'");
     public static final float miles2km = 1.609344f;
     public static final float feet2km = 0.0003048f;
     public static final float yards2km = 0.0009144f;
@@ -1520,63 +1519,69 @@ public class cgBase {
         // cache logs
         try
         {
-            /*
-             * 1- Author
-             * 2- Finds-count
-             * 3- Log type image name (e.g. "icon_smile")
-             * 4- Type string (e.g. "Found it")
-             * 5- Date string (e.g. "04/28/2010")
-             * 6- Log text
-             * 7- The rest (e.g. log-images, maybe faster)
-             */
-            final Matcher matcherLog = patternLog.matcher(page);//(matcherLogs.group(1));
+            final Matcher userTokenMatcher = patternUserToken.matcher(page);
+            if (!userTokenMatcher.find()) {
+                Log.e(cgSettings.tag, "cgeoBase.parseCache: unable to extract userToken");
+                throw new RuntimeException();
+            }
+            final String userToken = userTokenMatcher.group(1);
+            final HashMap<String, String> params = new HashMap<String, String>();
+            params.put("tkn", userToken);
+            params.put("idx", "1");
+            params.put("num", "35");
+            params.put("sp", "0");
+            params.put("sf", "0");
+            params.put("decrypt", "1");
+            final cgResponse response = request(false, "www.geocaching.com", "/seek/geocache.logbook", "GET",
+                    params, false, false, false);
+            if (response.getStatusCode() != 200) {
+                Log.e(cgSettings.tag, "cgeoBase.parseCache: error " + response.getStatusCode() + " when requesting log information");
+                throw new RuntimeException();
+            }
+            final JSONObject resp = new JSONObject(response.getData());
+            if (!resp.getString("status").equals("success")) {
+                Log.e(cgSettings.tag, "cgeoBase.parseCache: status is " + resp.getString("status"));
+                throw new RuntimeException();
+            }
 
-            while (matcherLog.find())
-            {
+            final JSONArray data = resp.getJSONArray("data");
+
+            for (int index = 0; index < data.length(); index++) {
+                final JSONObject entry = data.getJSONObject(index);
                 final cgLog logDone = new cgLog();
 
-                final String logIconName = matcherLog.group(3).toLowerCase();
-                if (logTypes.containsKey(logIconName))
-                {
+                // FIXME: use the "LogType" field instead of the "LogTypeImage" one.
+                final String logIconNameExt = entry.optString("LogTypeImage", ".gif");
+                final String logIconName = logIconNameExt.substring(0, logIconNameExt.length() - 4);
+                if (logTypes.containsKey(logIconName)) {
                     logDone.type = logTypes.get(logIconName);
-                }
-                else
-                {
+                } else {
                     logDone.type = logTypes.get("icon_note");
                 }
 
-                try
-                {
-                    logDone.date = parseGcCustomDate(matcherLog.group(5)).getTime();
-                } catch (ParseException e)
-                {
-                    Log.w(cgSettings.tag, "Failed to parse log date.");
+                try {
+                    logDone.date = parseGcCustomDate(entry.getString("Visited")).getTime();
+                } catch (ParseException e) {
+                    Log.e(cgSettings.tag, "Failed to parse log date.");
                 }
 
-                logDone.author = Html.fromHtml(matcherLog.group(1)).toString();
+                logDone.author = entry.getString("UserName");
+                logDone.found = entry.getInt("GeocacheFindCount");
+                logDone.log = entry.getString("LogText");
 
-                if (null != matcherLog.group(2))
-                {
-                    logDone.found = Integer.parseInt(matcherLog.group(2).replaceAll(",", ""));
-                }
-
-                logDone.log = matcherLog.group(6);
-
-                final Matcher matcherImg = patternLogImgs.matcher(matcherLog.group(7));
-                while (matcherImg.find())
-                {
+                final JSONArray images = entry.getJSONArray("Images");
+                for (int i = 0; i < images.length(); i++) {
+                    final JSONObject image = images.getJSONObject(i);
                     final cgImage logImage = new cgImage();
-                    logImage.url = matcherImg.group(1);
-                    logImage.title = matcherImg.group(2);
-                    if (logDone.logImages == null)
-                    {
+                    logImage.url = "http://img.geocaching.com/cache/log/" + image.getString("FileName");
+                    logImage.title = image.getString("Name");
+                    if (logDone.logImages == null) {
                         logDone.logImages = new ArrayList<cgImage>();
                     }
                     logDone.logImages.add(logImage);
                 }
 
-                if (null == cache.logs)
-                {
+                if (null == cache.logs) {
                     cache.logs = new ArrayList<cgLog>();
                 }
                 cache.logs.add(logDone);
@@ -2478,118 +2483,6 @@ public class cgBase {
 
     public static String formatCoords(final Geopoint coords, final boolean degrees) {
         return formatLatitude(coords.getLatitude(), degrees) + " | " + formatLongitude(coords.getLongitude(), degrees);
-    }
-
-    // TODO Use android.util.Pair<Double, String> if needed rather than a Map here.
-    public static Map<String, Object> parseCoordinate(String coord, String latlon) {
-        final Map<String, Object> coords = new HashMap<String, Object>();
-
-        final Pattern patternA = Pattern.compile("^([NSWE])[^\\d]*(\\d+)°? +(\\d+)([\\.|,](\\d+))?$", Pattern.CASE_INSENSITIVE);
-        final Pattern patternB = Pattern.compile("^([NSWE])[^\\d]*(\\d+)([\\.|,](\\d+))?$", Pattern.CASE_INSENSITIVE);
-        final Pattern patternC = Pattern.compile("^(-?\\d+)([\\.|,](\\d+))?$", Pattern.CASE_INSENSITIVE);
-        final Pattern patternD = Pattern.compile("^([NSWE])[^\\d]*(\\d+)°?$", Pattern.CASE_INSENSITIVE);
-        final Pattern patternE = Pattern.compile("^(-?\\d+)°?$", Pattern.CASE_INSENSITIVE);
-        final Pattern patternF = Pattern.compile("^([NSWE])[^\\d]*(\\d+)$", Pattern.CASE_INSENSITIVE);
-        final Pattern pattern0 = Pattern.compile("^(-?\\d+)([\\.|,](\\d+))?$", Pattern.CASE_INSENSITIVE);
-
-        coord = coord.trim().toUpperCase();
-
-        final Matcher matcherA = patternA.matcher(coord);
-        final Matcher matcherB = patternB.matcher(coord);
-        final Matcher matcherC = patternC.matcher(coord);
-        final Matcher matcherD = patternD.matcher(coord);
-        final Matcher matcherE = patternE.matcher(coord);
-        final Matcher matcherF = patternF.matcher(coord);
-        final Matcher matcher0 = pattern0.matcher(coord);
-
-        int latlonNegative;
-        if (matcherA.find() && matcherA.groupCount() > 0) {
-            if (matcherA.group(1).equalsIgnoreCase("N") || matcherA.group(1).equalsIgnoreCase("E")) {
-                latlonNegative = 1;
-            } else {
-                latlonNegative = -1;
-            }
-
-            if (matcherA.groupCount() < 5 || matcherA.group(5) == null) {
-                coords.put("coordinate", Double.valueOf(latlonNegative * (Double.valueOf(matcherA.group(2)) + Double.valueOf(matcherA.group(3) + ".0") / 60)));
-                coords.put("string", matcherA.group(1) + " " + matcherA.group(2) + "° " + matcherA.group(3) + ".000");
-            } else {
-                coords.put("coordinate", Double.valueOf(latlonNegative * (Double.valueOf(matcherA.group(2)) + Double.valueOf(matcherA.group(3) + "." + matcherA.group(5)) / 60)));
-                coords.put("string", matcherA.group(1) + " " + matcherA.group(2) + "° " + matcherA.group(3) + "." + matcherA.group(5));
-            }
-
-            return coords;
-        } else if (matcherB.find() && matcherB.groupCount() > 0) {
-            if (matcherB.group(1).equalsIgnoreCase("N") || matcherB.group(1).equalsIgnoreCase("E")) {
-                latlonNegative = 1;
-            } else {
-                latlonNegative = -1;
-            }
-
-            if (matcherB.groupCount() < 4 || matcherB.group(4) == null) {
-                coords.put("coordinate", Double.valueOf(latlonNegative * (Double.valueOf(matcherB.group(2) + ".0"))));
-            } else {
-                coords.put("coordinate", Double.valueOf(latlonNegative * (Double.valueOf(matcherB.group(2) + "." + matcherB.group(4)))));
-            }
-        } else if (matcherC.find() && matcherC.groupCount() > 0) {
-            if (matcherC.groupCount() < 3 || matcherC.group(3) == null) {
-                coords.put("coordinate", Double.valueOf(new Float(matcherC.group(1) + ".0")));
-            } else {
-                coords.put("coordinate", Double.valueOf(new Float(matcherC.group(1) + "." + matcherC.group(3))));
-            }
-        } else if (matcherD.find() && matcherD.groupCount() > 0) {
-            if (matcherD.group(1).equalsIgnoreCase("N") || matcherD.group(1).equalsIgnoreCase("E")) {
-                latlonNegative = 1;
-            } else {
-                latlonNegative = -1;
-            }
-
-            coords.put("coordinate", Double.valueOf(latlonNegative * (Double.valueOf(matcherB.group(2)))));
-        } else if (matcherE.find() && matcherE.groupCount() > 0) {
-            coords.put("coordinate", Double.valueOf(matcherE.group(1)));
-        } else if (matcherF.find() && matcherF.groupCount() > 0) {
-            if (matcherF.group(1).equalsIgnoreCase("N") || matcherF.group(1).equalsIgnoreCase("E")) {
-                latlonNegative = 1;
-            } else {
-                latlonNegative = -1;
-            }
-
-            coords.put("coordinate", Double.valueOf(latlonNegative * (Double.valueOf(matcherB.group(2)))));
-        } else {
-            return null;
-        }
-
-        if (matcher0.find() && matcher0.groupCount() > 0) {
-            String tmpDir = null;
-            Float tmpCoord;
-            if (matcher0.groupCount() < 3 || matcher0.group(3) == null) {
-                tmpCoord = new Float("0.0");
-            } else {
-                tmpCoord = new Float("0." + matcher0.group(3));
-            }
-
-            if (latlon.equalsIgnoreCase("lat")) {
-                if (matcher0.group(1).equals("+")) {
-                    tmpDir = "N";
-                }
-                if (matcher0.group(1).equals("-")) {
-                    tmpDir = "S";
-                }
-            } else if (latlon.equalsIgnoreCase("lon")) {
-                if (matcher0.group(1).equals("+")) {
-                    tmpDir = "E";
-                }
-                if (matcher0.group(1).equals("-")) {
-                    tmpDir = "W";
-                }
-            }
-
-            coords.put("string", tmpDir + " " + matcher0.group(1) + "° " + (Math.round(tmpCoord / (1 / 60) * 1000) * 1000));
-
-            return coords;
-        } else {
-            return new HashMap<String, Object>();
-        }
     }
 
     public UUID searchByNextPage(cgSearchThread thread, final UUID searchId, int reason, boolean showCaptcha) {

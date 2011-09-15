@@ -36,6 +36,15 @@
   <string name="gchq">Groundspeak hq</string>
   <string name="gps">GPS cache exhibit</string>
 
+  <!-- cache sizes -->
+  <string name="cache_size_micro">micro</string>
+  <string name="cache_size_small">small</string>
+  <string name="cache_size_regular">regular</string>
+  <string name="cache_size_large">large</string>
+  <string name="cache_size_other">other</string>
+  <string name="cache_size_virtual">virtual</string>
+  <string name="cache_size_notchosen">not chosen</string>
+
   <!-- waypoints -->
   <string name="wp_final">Final location</string>
   <string name="wp_stage">Stage of multi-cache</string>
@@ -321,13 +330,6 @@
   <string name="caches_filter_track">with trackables</string>
   <string name="caches_filter_clear">clear filters</string>
   <string name="caches_filter_size_title">Choose size</string>
-  <string name="caches_filter_size_micro">micro</string>
-  <string name="caches_filter_size_small">small</string>
-  <string name="caches_filter_size_regular">regular</string>
-  <string name="caches_filter_size_large">large</string>
-  <string name="caches_filter_size_other">other</string>
-  <string name="caches_filter_size_virtual">virtual</string>
-  <string name="caches_filter_size_notchosen">not chosen</string>
   <string name="caches_filter_type_title">Choose type</string>
   <string name="caches_filter_type_traditional">Traditional cache</string>
   <string name="caches_filter_type_multi">Multi-cache</string>
@@ -630,6 +632,7 @@
   <string name="waypoint_save">Save</string>
   <string name="waypoint_loading">Loading waypoint…</string>
   <string name="waypoint_unknown_coordinates">Coordinates unknown</string>
+  <string name="waypoint_done">Done</string>
   <string name="search_history">History</string>
   <string name="search_history_empty">No previous destinations</string>
   <string name="search_remove_destination">Destination removed</string>
@@ -667,8 +670,8 @@
   <string name="search_coordinates_button">Search by coordinates</string>
   <string name="search_address">Address</string>
   <string name="search_address_button">Search by address</string>
-  <string name="search_gc">Geocode</string>
-  <string name="search_gc_button">Search by geocode</string>
+  <string name="search_gc">GC-code</string>
+  <string name="search_gc_button">Search by GC-code</string>
   <string name="search_kw">Keywords</string>
   <string name="search_kw_prefill">Keyword</string>
   <string name="search_kw_button">Search by keyword</string>
@@ -941,6 +944,7 @@
     · <a href="http://code.google.com/p/mapsforge/">Mapsforge</a> (OSM-rendering)\n
     · <a href="http://thenounproject.com/">The Noun Project</a> (basis for attribute icons)\n
     · <a href="http://commons.apache.org/">The Apache Commons Project</a>\n
+    · <a href="http://androidicons.com/">Android Icons</a>\n
   </string>
 
   <!-- changelog -->

@@ -250,9 +250,9 @@ public class cgeo extends AbstractActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, MENU_SETTINGS, 0, res.getString(R.string.menu_settings)).setIcon(android.R.drawable.ic_menu_preferences);
         menu.add(0, MENU_HISTORY, 0, res.getString(R.string.menu_history)).setIcon(android.R.drawable.ic_menu_recent_history);
-        menu.add(0, MENU_HELPERS, 0, res.getString(R.string.menu_helpers)).setIcon(android.R.drawable.ic_menu_add);
-        menu.add(0, MENU_SCAN, 0, res.getString(R.string.menu_scan)).setIcon(android.R.drawable.ic_menu_camera);
-        menu.add(0, MENU_ABOUT, 0, res.getString(R.string.menu_about)).setIcon(android.R.drawable.ic_menu_help);
+        menu.add(0, MENU_HELPERS, 0, res.getString(R.string.menu_helpers)).setIcon(R.drawable.ic_menu_shopping);
+        menu.add(0, MENU_SCAN, 0, res.getString(R.string.menu_scan)).setIcon(R.drawable.ic_menu_barcode);
+        menu.add(0, MENU_ABOUT, 0, res.getString(R.string.menu_about)).setIcon(android.R.drawable.ic_menu_info_details);
         return true;
     }
 

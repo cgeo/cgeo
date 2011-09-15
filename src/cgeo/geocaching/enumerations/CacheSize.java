@@ -12,13 +12,13 @@ import java.util.Map;
  * @author koem
  */
 public enum CacheSize {
-    MICRO("micro", 1, R.string.caches_filter_size_micro),
-    SMALL("small", 2, R.string.caches_filter_size_small),
-    REGULAR("regular", 3, R.string.caches_filter_size_regular),
-    LARGE("large", 4, R.string.caches_filter_size_large),
-    VIRTUAL("virtual", 0, R.string.caches_filter_size_virtual),
-    NOT_CHOSEN("not chosen", 0, R.string.caches_filter_size_notchosen),
-    OTHER("other", 0, R.string.caches_filter_size_other);
+    MICRO("micro", 1, R.string.cache_size_micro),
+    SMALL("small", 2, R.string.cache_size_small),
+    REGULAR("regular", 3, R.string.cache_size_regular),
+    LARGE("large", 4, R.string.cache_size_large),
+    VIRTUAL("virtual", 0, R.string.cache_size_virtual),
+    NOT_CHOSEN("not chosen", 0, R.string.cache_size_notchosen),
+    OTHER("other", 0, R.string.cache_size_other);
 
     public final String id;
     public final int comparable;

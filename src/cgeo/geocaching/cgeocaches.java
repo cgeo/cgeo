@@ -41,7 +41,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -49,11 +48,12 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -753,7 +753,7 @@ public class cgeocaches extends AbstractListActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        SubMenu subMenuFilter = menu.addSubMenu(0, SUBMENU_FILTER, 0, res.getString(R.string.caches_filter)).setIcon(android.R.drawable.ic_menu_search);
+        SubMenu subMenuFilter = menu.addSubMenu(0, SUBMENU_FILTER, 0, res.getString(R.string.caches_filter)).setIcon(R.drawable.ic_menu_filter);
         subMenuFilter.setHeaderTitle(res.getString(R.string.caches_filter_title));
         if (settings.cacheType == null) {
             subMenuFilter.add(0, SUBMENU_FILTER_TYPE, 0, res.getString(R.string.caches_filter_type));
@@ -791,7 +791,7 @@ public class cgeocaches extends AbstractListActivity {
         subMenuSort.setGroupCheckable(1, true, true);
 
         menu.add(0, MENU_SWITCH_SELECT_MODE, 0, res.getString(R.string.caches_select_mode)).setIcon(android.R.drawable.ic_menu_agenda);
-        menu.add(0, MENU_INVERT_SELECTION, 0, res.getString(R.string.caches_select_invert)).setIcon(android.R.drawable.ic_menu_agenda);
+        menu.add(0, MENU_INVERT_SELECTION, 0, res.getString(R.string.caches_select_invert)).setIcon(R.drawable.ic_menu_mark);
         if (type.equals("offline")) {
             SubMenu subMenu = menu.addSubMenu(0, SUBMENU_MANAGE_OFFLINE, 0, res.getString(R.string.caches_manage)).setIcon(android.R.drawable.ic_menu_save);
             subMenu.add(0, MENU_DROP_CACHES, 0, res.getString(R.string.caches_drop_all)); // delete saved caches
@@ -834,10 +834,12 @@ public class cgeocaches extends AbstractListActivity {
 
         try {
             if (adapter != null && adapter.getSelectMode()) {
-                menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode_exit));
+                menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode_exit))
+                        .setIcon(R.drawable.ic_menu_clear_playlist);
                 menu.findItem(MENU_INVERT_SELECTION).setVisible(true);
             } else {
-                menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode));
+                menu.findItem(MENU_SWITCH_SELECT_MODE).setTitle(res.getString(R.string.caches_select_mode))
+                        .setIcon(android.R.drawable.ic_menu_agenda);
                 menu.findItem(MENU_INVERT_SELECTION).setVisible(false);
             }
 
@@ -1086,13 +1088,13 @@ public class cgeocaches extends AbstractListActivity {
 
             if (selectedFilter.equals(res.getString(R.string.caches_filter_size))) {
                 menu.setHeaderTitle(res.getString(R.string.caches_filter_size_title));
-                menu.add(0, MENU_FILTER_SIZE_MICRO, 0, res.getString(R.string.caches_filter_size_micro));
-                menu.add(0, MENU_FILTER_SIZE_SMALL, 0, res.getString(R.string.caches_filter_size_small));
-                menu.add(0, MENU_FILTER_SIZE_REGULAR, 0, res.getString(R.string.caches_filter_size_regular));
-                menu.add(0, MENU_FILTER_SIZE_LARGE, 0, res.getString(R.string.caches_filter_size_large));
-                menu.add(0, MENU_FILTER_SIZE_OTHER, 0, res.getString(R.string.caches_filter_size_other));
-                menu.add(0, MENU_FILTER_SIZE_VIRTUAL, 0, res.getString(R.string.caches_filter_size_virtual));
-                menu.add(0, MENU_FILTER_SIZE_NOT_CHOSEN, 0, res.getString(R.string.caches_filter_size_notchosen));
+                menu.add(0, MENU_FILTER_SIZE_MICRO, 0, res.getString(CacheSize.MICRO.stringId));
+                menu.add(0, MENU_FILTER_SIZE_SMALL, 0, res.getString(CacheSize.SMALL.stringId));
+                menu.add(0, MENU_FILTER_SIZE_REGULAR, 0, res.getString(CacheSize.REGULAR.stringId));
+                menu.add(0, MENU_FILTER_SIZE_LARGE, 0, res.getString(CacheSize.LARGE.stringId));
+                menu.add(0, MENU_FILTER_SIZE_OTHER, 0, res.getString(CacheSize.OTHER.stringId));
+                menu.add(0, MENU_FILTER_SIZE_VIRTUAL, 0, res.getString(CacheSize.VIRTUAL.stringId));
+                menu.add(0, MENU_FILTER_SIZE_NOT_CHOSEN, 0, res.getString(CacheSize.NOT_CHOSEN.stringId));
             } else if (selectedFilter.equals(res.getString(R.string.caches_filter_type))) {
                 menu.setHeaderTitle(res.getString(R.string.caches_filter_type_title));
                 menu.add(0, MENU_FILTER_TYPE_TRADITIONAL, 0, res.getString(R.string.caches_filter_type_traditional));
