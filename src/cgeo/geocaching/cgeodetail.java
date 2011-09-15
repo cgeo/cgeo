@@ -532,6 +532,11 @@ public class cgeodetail extends AbstractActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         final int menuItem = item.getItemId();
 
+        // no menu selected, but a new sub menu shown
+        if (menuItem == 0) {
+            return false;
+        }
+
         if (menuItem == 2) {
             navigateTo();
             return true;
