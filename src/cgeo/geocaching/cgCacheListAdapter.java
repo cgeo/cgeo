@@ -596,7 +596,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
                 if (cacheInfo.length() > 0) {
                     cacheInfo.append(" | ");
                 }
-                cacheInfo.append(cache.size.id);
+                cacheInfo.append(res.getString(cache.size.stringId));
             }
             if ((cache.difficulty != null && cache.difficulty > 0f) || (cache.terrain != null && cache.terrain > 0f) || (cache.rating != null && cache.rating > 0f)) {
                 if (cacheInfo.length() > 0 && ((cache.difficulty != null && cache.difficulty > 0f) || (cache.terrain != null && cache.terrain > 0f))) {

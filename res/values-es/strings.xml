@@ -36,6 +36,15 @@
   <string name="gchq">Groundspeak HQ</string>
   <string name="gps">Exhibición de escondites GPS </string>
 
+  <!-- cache sizes -->
+  <string name="cache_size_micro">micro</string>
+  <string name="cache_size_small">pequeño</string>
+  <string name="cache_size_regular">normal</string>
+  <string name="cache_size_large">grande</string>
+  <string name="cache_size_other">otro</string>
+  <string name="cache_size_virtual">virtual</string>
+  <string name="cache_size_notchosen">no elegido</string>
+
   <!-- waypoints -->
   <string name="wp_final">Ubicación final</string>
   <string name="wp_stage">Etapa de multi escondite</string>
@@ -317,13 +326,6 @@
   <string name="caches_filter_track">con rastreables</string>
   <string name="caches_filter_clear">limpiar filtros</string>
   <string name="caches_filter_size_title">Indica tamaño</string>
-  <string name="caches_filter_size_micro">micro</string>
-  <string name="caches_filter_size_small">pequeño</string>
-  <string name="caches_filter_size_regular">normal</string>
-  <string name="caches_filter_size_large">grande</string>
-  <string name="caches_filter_size_other">otro</string>
-  <string name="caches_filter_size_virtual">virtual</string>
-  <string name="caches_filter_size_notchosen">no elegido</string>
   <string name="caches_filter_type_title">Indica tipo</string>
   <string name="caches_filter_type_traditional">Tradicional cache</string>
   <string name="caches_filter_type_multi">Multi</string>
