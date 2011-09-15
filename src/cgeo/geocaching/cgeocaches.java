@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.AbstractListActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cachelist.CacheListAppFactory;
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.filter.cgFilter;
 import cgeo.geocaching.filter.cgFilterBySize;
 import cgeo.geocaching.filter.cgFilterByTrackables;
@@ -546,6 +547,11 @@ public class cgeocaches extends AbstractListActivity {
      */
     private boolean contextMenuMoveToList = false;
 
+    /**
+     * flag indicating whether we shall show the filter context menu
+     */
+    private boolean contextMenuShowFilter = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -1010,11 +1016,15 @@ public class cgeocaches extends AbstractListActivity {
                 return true;
             case SUBMENU_FILTER_TYPE:
                 selectedFilter = res.getString(R.string.caches_filter_type);
+                contextMenuShowFilter = true;
                 openContextMenu(getListView());
+                contextMenuShowFilter = false;
                 return false;
             case SUBMENU_FILTER_SIZE:
                 selectedFilter = res.getString(R.string.caches_filter_size);
+                contextMenuShowFilter = true;
                 openContextMenu(getListView());
+                contextMenuShowFilter = false;
                 return false;
             case MENU_FILTER_TRACKABLES:
                 setFilter(new cgFilterByTrackables(res.getString(R.string.caches_filter_track)));
@@ -1071,7 +1081,7 @@ public class cgeocaches extends AbstractListActivity {
             Log.w(cgSettings.tag, "cgeocaches.onCreateContextMenu: " + e.toString());
         }
 
-        if ((adapterInfo == null || adapterInfo.position < 0) && selectedFilter != null) {
+        if ((adapterInfo == null || adapterInfo.position < 0 || contextMenuShowFilter) && selectedFilter != null) {
             // Context menu opened by selecting an option on the filter submenu
 
             if (selectedFilter.equals(res.getString(R.string.caches_filter_size))) {
@@ -1197,26 +1207,19 @@ public class cgeocaches extends AbstractListActivity {
             return true;
         }
         else if (id == MENU_FILTER_SIZE_MICRO) {
-            return setFilter(new cgFilterBySize(
-                    res.getString(R.string.caches_filter_size_micro)));
+            return setFilter(new cgFilterBySize(CacheSize.MICRO));
         } else if (id == MENU_FILTER_SIZE_SMALL) {
-            return setFilter(new cgFilterBySize(
-                    res.getString(R.string.caches_filter_size_small)));
+            return setFilter(new cgFilterBySize(CacheSize.SMALL));
         } else if (id == MENU_FILTER_SIZE_REGULAR) {
-            return setFilter(new cgFilterBySize(
-                    res.getString(R.string.caches_filter_size_regular)));
+            return setFilter(new cgFilterBySize(CacheSize.REGULAR));
         } else if (id == MENU_FILTER_SIZE_LARGE) {
-            return setFilter(new cgFilterBySize(
-                    res.getString(R.string.caches_filter_size_large)));
+            return setFilter(new cgFilterBySize(CacheSize.LARGE));
         } else if (id == MENU_FILTER_SIZE_OTHER) {
-            return setFilter(new cgFilterBySize(
-                    res.getString(R.string.caches_filter_size_other)));
+            return setFilter(new cgFilterBySize(CacheSize.OTHER));
         } else if (id == MENU_FILTER_SIZE_VIRTUAL) {
-            return setFilter(new cgFilterBySize(
-                    res.getString(R.string.caches_filter_size_virtual)));
+            return setFilter(new cgFilterBySize(CacheSize.VIRTUAL));
         } else if (id == MENU_FILTER_SIZE_NOT_CHOSEN) {
-            return setFilter(new cgFilterBySize(
-                    res.getString(R.string.caches_filter_size_notchosen)));
+            return setFilter(new cgFilterBySize(CacheSize.NOT_CHOSEN));
         } else if (id == MENU_FILTER_TYPE_TRADITIONAL) {
             return setFilter(new cgFilterByType("traditional"));
         } else if (id == MENU_FILTER_TYPE_MULTI) {

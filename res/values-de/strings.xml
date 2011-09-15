@@ -111,6 +111,7 @@
   <string name="err_server">Verbindung zu geocaching.com konnte nicht hergestellt werden (Server oder Verbindung inaktiv?)</string>
   <string name="err_login">Keine Anmeldedaten gespeichert.</string>
   <string name="err_login_failed">Login fehlgeschlagen.</string>
+  <string name="err_login_failed_toast">c:geo konnte sich nicht einloggen. c:geo arbeitet im offline mode. Überprüfe den Login in den Einstellungen oder stelle eine Internetverbindung her.</string>
   <string name="err_unknown">Unbekannter Fehler</string>
   <string name="err_comm">Unbekannter Kommunikationsfehler</string>
   <string name="err_missing_auth">Benutzername oder Passwort nicht gesetzt.</string>

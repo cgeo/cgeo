@@ -1,7 +1,9 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocParser;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -135,6 +137,7 @@ public class cgBase {
     public final static Map<String, String> cacheTypesInv = new HashMap<String, String>();
     public final static Map<String, String> cacheIDs = new HashMap<String, String>();
     public final static Map<String, String> cacheIDsChoices = new HashMap<String, String>();
+    public final static Map<CacheSize, String> cacheSizesInv = new HashMap<CacheSize, String>();
     public final static Map<String, String> waypointTypes = new HashMap<String, String>();
     public final static Map<String, Integer> logTypes = new HashMap<String, Integer>();
     public final static Map<String, Integer> logTypes0 = new HashMap<String, Integer>();
@@ -224,19 +227,23 @@ public class cgBase {
 
         for (CacheType ct : CacheType.values()) {
             String l10n = res.getString(ct.stringId);
-            cacheTypes.put(ct.pattern, ct.cgeoId);
-            cacheTypesInv.put(ct.cgeoId, l10n);
-            cacheIDs.put(ct.cgeoId, ct.guid);
+            cacheTypes.put(ct.pattern, ct.id);
+            cacheTypesInv.put(ct.id, l10n);
+            cacheIDs.put(ct.id, ct.guid);
             cacheIDsChoices.put(l10n, ct.guid);
         }
 
+        for (CacheSize cs : CacheSize.values()) {
+            cacheSizesInv.put(cs, res.getString(cs.stringId));
+        }
+
         // waypoint types
-        waypointTypes.put("flag", res.getString(R.string.wp_final));
-        waypointTypes.put("stage", res.getString(R.string.wp_stage));
-        waypointTypes.put("puzzle", res.getString(R.string.wp_puzzle));
-        waypointTypes.put("pkg", res.getString(R.string.wp_pkg));
-        waypointTypes.put("trailhead", res.getString(R.string.wp_trailhead));
-        waypointTypes.put("waypoint", res.getString(R.string.wp_waypoint));
+        waypointTypes.put("flag", res.getString(WaypointType.FLAG.stringId));
+        waypointTypes.put("stage", res.getString(WaypointType.STAGE.stringId));
+        waypointTypes.put("puzzle", res.getString(WaypointType.PUZZLE.stringId));
+        waypointTypes.put("pkg", res.getString(WaypointType.PKG.stringId));
+        waypointTypes.put("trailhead", res.getString(WaypointType.TRAILHEAD.stringId));
+        waypointTypes.put("waypoint", res.getString(WaypointType.WAYPOINT.stringId));
 
         // log types
         logTypes.put("icon_smile", LOG_FOUND_IT);
@@ -1248,7 +1255,7 @@ public class cgBase {
             try {
                 final Matcher matcherSize = patternSize.matcher(tableInside);
                 if (matcherSize.find() && matcherSize.groupCount() > 0) {
-                    cache.size = getMatch(matcherSize.group(1)).toLowerCase();
+                    cache.size = CacheSize.FIND_BY_ID.get(getMatch(matcherSize.group(1)).toLowerCase());
                 }
             } catch (Exception e) {
                 // failed to parse size
@@ -1756,7 +1763,7 @@ public class cgBase {
         if (cache.favouriteCnt == null) {
             Log.w(cgSettings.tag, "favoriteCount not parsed correctly");
         }
-        if (StringUtils.isBlank(cache.size)) {
+        if (cache.size == null) {
             Log.w(cgSettings.tag, "size not parsed correctly");
         }
         if (StringUtils.isBlank(cache.type)) {

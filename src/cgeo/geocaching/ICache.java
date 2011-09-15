@@ -3,6 +3,8 @@
  */
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.CacheSize;
+
 /**
  * Basic interface for caches
  *
@@ -34,7 +36,7 @@ public interface ICache {
     /**
      * @return Micro, small etc.
      */
-    public String getSize();
+    public CacheSize getSize();
 
     /**
      * @return Difficulty assessment

@@ -104,14 +104,17 @@
   <string name="log_new_log_text">Message</string>
   <string name="log_announcement">Annonce</string>
 
-  <!-- errors -->
+  <!-- errors, warnings, info toasts -->
   <string name="err_none">ok</string>
   <string name="err_start">communication non démarrée</string>
   <string name="err_parse">échec login lecture page</string>
   <string name="err_server">échec de la connexion à geocaching.com (probléme de serveur ou de connexion?)</string>
   <string name="err_login">pas d\'utilisateur ou de mot de passe enregistré</string>
+  <string name="err_login_failed">c:geo ne peut pas se connecter.</string>
+  <string name="err_login_failed_toast">Désolé, c:geo ne peut pas se connecter. c:geo est en mode hors-ligne. Vérifiez vos paramètres et activez votre connexion Internet.</string>
   <string name="err_unknown">erreur inconnue</string>
   <string name="err_comm">erreur inconnue de communication</string>
+  <string name="err_missing_auth">nom d\'utilisateur ou mot de passe manquant.</string>
   <string name="err_wrong">nom d\'utilisateur inconnu ou mauvais mot de passe</string>
   <string name="err_license">l\'utilisateur n\'a pas accepté les termes et les conditions d\'utilisation de Geocaching.com</string>
   <string name="err_store">Désolé, c:geo ne peut pas enregister la cache.</string>
@@ -285,9 +288,14 @@
   <string name="init_username">identifiant</string>
   <string name="init_password">mot de passe</string>
   <string name="init_passvote">mot de passe</string>
-  <string name="init_login">vérification de l\'identifiant</string>
+  <string name="init_login">vérification de l\'identifiant &amp; du format de date</string>
+  <string name="init_login_popup">Connexion</string>
+  <string name="init_login_popup_working">Connexion à geocaching.com…</string>
+  <string name="init_login_popup_ok">Identifiants corrects.</string>
+  <string name="init_login_popup_failed">Erreur de connexion.</string>
+  <string name="init_login_popup_failed_reason">Erreur de connexion: </string>
   <string name="init_legal">note légale</string>
-  <string name="init_go4cache_connect">connection à Go 4 Cache</string>
+  <string name="init_go4cache_connect">connexion à Go 4 Cache</string>
   <string name="init_twitter_authorize">autorisation de c:geo</string>
   <string name="init_twitter_publish">publication d\'une cache trouvée</string>
   <string name="init_signature">Signature</string>
