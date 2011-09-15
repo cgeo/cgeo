@@ -49,6 +49,36 @@ public class GeopointParser
         return new Geopoint(lat, lon);
     }
 
+    /**
+     * Parses a pair of coordinates (latitude and longitude) out of a String.
+     * Accepts following formats and combinations of it:
+     * X DD
+     * X DD°
+     * X DD° MM
+     * X DD° MM.MMM
+     * X DD° MM SS
+     *
+     * as well as:
+     * DD.DDDDDDD
+     *
+     * Both . and , are accepted, also variable count of spaces (also 0)
+     *
+     * @param latitude
+     *            the latitude string to parse
+     * @param longitude
+     *            the longitude string to parse
+     * @return an Geopoint with parsed latitude and longitude
+     * @throws ParseException
+     *             if lat or lon could not be parsed
+     */
+    public static Geopoint parse(final String latitude, final String longitude)
+    {
+        final double lat = parseLatitude(latitude);
+        final double lon = parseLongitude(longitude);
+
+        return new Geopoint(lat, lon);
+    }
+
     /*
      * (non JavaDoc)
      * Helper for coordinates-parsing.

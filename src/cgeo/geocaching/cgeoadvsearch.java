@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.GeopointParser;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -22,7 +23,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -263,29 +263,32 @@ public class cgeoadvsearch extends AbstractActivity {
         final String latText = latView.getText().toString();
         final String lonText = lonView.getText().toString();
 
-        if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) { // TODO: now coordinates
+        if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) {
             if (geo.coordsNow != null) {
                 latView.setText(cgBase.formatLatitude(geo.coordsNow.getLatitude(), true));
                 lonView.setText(cgBase.formatLongitude(geo.coordsNow.getLongitude(), true));
             }
         } else {
-            Map<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
-            Map<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lat");
-
-            if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
+            double latitude;
+            try {
+                latitude = GeopointParser.parseLatitude(latText);
+            } catch (GeopointParser.ParseException e) {
                 showToast(res.getString(R.string.err_parse_lat));
                 return;
             }
 
-            if (lonParsed == null || lonParsed.get("coordinate") == null || lonParsed.get("string") == null) {
+            double longitude;
+            try {
+                longitude = GeopointParser.parseLongitude(lonText);
+            } catch (GeopointParser.ParseException e) {
                 showToast(res.getString(R.string.err_parse_lon));
                 return;
             }
 
             final Intent cachesIntent = new Intent(this, cgeocaches.class);
             cachesIntent.putExtra("type", "coordinate");
-            cachesIntent.putExtra("latitude", (Double) latParsed.get("coordinate"));
-            cachesIntent.putExtra("longitude", (Double) lonParsed.get("coordinate"));
+            cachesIntent.putExtra("latitude", latitude);
+            cachesIntent.putExtra("longitude", longitude);
             cachesIntent.putExtra("cachetype", settings.cacheType);
             startActivity(cachesIntent);
         }
