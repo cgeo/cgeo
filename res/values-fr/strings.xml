@@ -104,14 +104,17 @@
   <string name="log_new_log_text">Message</string>
   <string name="log_announcement">Annonce</string>
 
-  <!-- errors -->
+  <!-- errors, warnings, info toasts -->
   <string name="err_none">ok</string>
   <string name="err_start">communication non démarrée</string>
   <string name="err_parse">échec login lecture page</string>
   <string name="err_server">échec de la connexion à geocaching.com (probléme de serveur ou de connexion?)</string>
   <string name="err_login">pas d\'utilisateur ou de mot de passe enregistré</string>
+  <string name="err_login_failed">c:geo ne peut pas se connecter.</string>
+  <string name="err_login_failed_toast">Désolé, c:geo ne peut pas se connecter. c:geo est en mode hors-ligne. Vérifiez vos paramètres et activez votre connexion Internet.</string>
   <string name="err_unknown">erreur inconnue</string>
   <string name="err_comm">erreur inconnue de communication</string>
+  <string name="err_missing_auth">nom d'utilisateur ou mot de passe manquant.</string>
   <string name="err_wrong">nom d\'utilisateur inconnu ou mauvais mot de passe</string>
   <string name="err_license">l\'utilisateur n\'a pas accepté les termes et les conditions d\'utilisation de Geocaching.com</string>
   <string name="err_store">Désolé, c:geo ne peut pas enregister la cache.</string>
