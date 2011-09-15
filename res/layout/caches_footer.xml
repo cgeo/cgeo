@@ -13,4 +13,4 @@
 		android:textSize="16dip"
 		android:textColor="@color/just_white"
 		android:text="@string/caches_no_cache"
-		android:background="@drawable/list_footer_background" />
+		android:background="@drawable/actionbar_background" />
