@@ -201,7 +201,7 @@ public class ObjectUtils {
 
     /**
      * <p>Gets the hash code for multiple objects.</p>
-     * 
+     *
      * <p>This allows a hash code to be rapidly calculated for a number of objects.
      * The hash code for a single object is the <em>not</em> same as {@link #hashCode(Object)}.
      * The hash code for multiple objects is the same as that calculated by an
@@ -462,7 +462,7 @@ public class ObjectUtils {
     //-----------------------------------------------------------------------
     /**
      * Find the most frequently occurring item.
-     * 
+     *
      * @param <T> type of values processed by this method
      * @param items to check
      * @return most populous T, {@code null} if non-unique or no items supplied

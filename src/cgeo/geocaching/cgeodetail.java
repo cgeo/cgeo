@@ -64,7 +64,7 @@ import java.util.UUID;
 
 /**
  * Activity to display all details of a cache like owner, difficulty, description etc.
- * 
+ *
  */
 public class cgeodetail extends AbstractActivity {
 
@@ -531,6 +531,11 @@ public class cgeodetail extends AbstractActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         final int menuItem = item.getItemId();
+
+        // no menu selected, but a new sub menu shown
+        if (menuItem == 0) {
+            return false;
+        }
 
         if (menuItem == 2) {
             navigateTo();

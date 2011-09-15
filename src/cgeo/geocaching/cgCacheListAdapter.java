@@ -321,7 +321,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
     /**
      * clear all check marks
-     * 
+     *
      * @return
      */
     public boolean resetChecks() {

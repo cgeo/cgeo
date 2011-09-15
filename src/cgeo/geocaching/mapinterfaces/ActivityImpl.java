@@ -10,9 +10,9 @@ import android.view.View;
 /**
  * Defines the common functions of the provider-specific
  * MapActivity implementations.
- * 
+ *
  * @author rsudev
- * 
+ *
  */
 public interface ActivityImpl {
 

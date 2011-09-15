@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.Geopoint.MalformedCoordinateException;
 import cgeo.geocaching.utils.CollectionUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -1306,7 +1307,7 @@ public class cgData {
 
     /**
      * Persists the given <code>destination</code> into the database.
-     * 
+     *
      * @param destinations
      * @return <code>true</code> if the given destination was successfully
      *         persisted <code>false</code> otherwise.
@@ -1390,7 +1391,7 @@ public class cgData {
 
     /**
      * Save coordinates into a ContentValues
-     * 
+     *
      * @param values
      *            a ContentValues to save coordinates in
      * @param oneWaypoint
@@ -1403,19 +1404,41 @@ public class cgData {
 
     /**
      * Retrieve coordinates from a Cursor
-     * 
+     *
      * @param cursor
      *            a Cursor representing a row in the database
-     * @return the coordinates, or null if latitude or longitude is null
+     * @param indexLat
+     *            index of the latitude column
+     * @param indexLon
+     *            index of the longitude column
+     * @return the coordinates, or null if latitude or longitude is null or the coordinates are invalid
+     */
+    private static Geopoint getCoords(final Cursor cursor, final int indexLat, final int indexLon) {
+        if (cursor.isNull(indexLat) || cursor.isNull(indexLon)) {
+            return null;
+        }
+
+        try {
+            return new Geopoint(cursor.getDouble(indexLat), cursor.getDouble(indexLon));
+        } catch (MalformedCoordinateException e) {
+            // TODO: check whether the exception should be returned to the caller instead,
+            // as it might want to remove an invalid geopoint from the database.
+            Log.e(cgSettings.tag, "cannot parse geopoint from database: " + e.getMessage());
+            return null;
+        }
+    }
+
+    /**
+     * Retrieve coordinates from a Cursor
+     *
+     * @param cursor
+     *            a Cursor representing a row in the database
+     * @return the coordinates, or null if latitude or longitude is null or the coordinates are invalid
      */
     private static Geopoint getCoords(final Cursor cursor) {
         final int indexLat = cursor.getColumnIndex("latitude");
         final int indexLon = cursor.getColumnIndex("longitude");
-        if (cursor.isNull(indexLat) || cursor.isNull(indexLon)) {
-            return null;
-        } else {
-            return new Geopoint(cursor.getDouble(indexLat), cursor.getDouble(indexLon));
-        }
+        return getCoords(cursor, indexLat, indexLon);
     }
 
     public boolean saveOwnWaypoint(int id, String geocode, cgWaypoint waypoint) {
@@ -1718,7 +1741,7 @@ public class cgData {
 
     /**
      * Loads a single Cache.
-     * 
+     *
      * @param geocode
      *            The Geocode GCXXXX
      * @param guid
@@ -1965,7 +1988,7 @@ public class cgData {
 
     /**
      * maps a Cache from the cursor. Doesn't next.
-     * 
+     *
      * @param cursor
      * @return
      */
@@ -2199,7 +2222,7 @@ public class cgData {
     /**
      * Loads the history of previously entered destinations from
      * the database. If no destinations exist, an {@link Collections#emptyList()} will be returned.
-     * 
+     *
      * @return A list of previously entered destinations or an empty list.
      */
     public List<cgDestination> loadHistoryOfSearchedLocations() {
@@ -2219,14 +2242,16 @@ public class cgData {
             int indexLongitude = cursor.getColumnIndex("longitude");
 
             do {
-                cgDestination dest = new cgDestination();
-
+                final cgDestination dest = new cgDestination();
                 dest.setId((long) cursor.getLong(indexId));
                 dest.setDate((long) cursor.getLong(indexDate));
-                dest.setCoords(new Geopoint((double) cursor.getDouble(indexLatitude),
-                        (double) cursor.getDouble(indexLongitude)));
+                dest.setCoords(getCoords(cursor, indexLatitude, indexLongitude));
 
-                destinations.add(dest);
+                // If coordinates are non-existent or invalid, do not consider
+                // this point.
+                if (dest.getCoords() != null) {
+                    destinations.add(dest);
+                }
             } while (cursor.moveToNext());
         }
 
@@ -3110,8 +3135,7 @@ public class cgData {
                         list.id = ((int) cursor.getInt(indexId)) + 10;
                         list.title = (String) cursor.getString(indexTitle);
                         list.updated = (Long) cursor.getLong(indexUpdated);
-                        list.coords = new Geopoint(cursor.getDouble(indexLatitude),
-                                cursor.getDouble(indexLongitude));
+                        list.coords = getCoords(cursor, indexLatitude, indexLongitude);
 
                         result.add(list);
                     } while (cursor.moveToNext());

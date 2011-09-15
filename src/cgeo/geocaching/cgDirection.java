@@ -56,7 +56,7 @@ public class cgDirection {
              * this event leads to the log being flooded with multiple entries _per second_,
              * which I experienced when running cgeo in a building (with GPS and network being
              * unreliable).
-             * 
+             *
              * See for example https://code.google.com/p/android/issues/detail?id=14792
              */
 

@@ -3,7 +3,6 @@ package cgeo.geocaching;
 import cgeo.geocaching.googlemaps.googleMapFactory;
 import cgeo.geocaching.mapinterfaces.MapFactory;
 import cgeo.geocaching.mapsforge.mfMapFactory;
-import cgeo.geocaching.utils.CollectionUtils;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.android.maps.MapDatabase;
@@ -14,7 +13,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.os.Environment;
-import android.util.Log;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -426,27 +424,6 @@ public class cgSettings {
         });
     }
 
-    public void deleteCookies() {
-        editSettings(new PrefRunnable() {
-
-            @Override
-            public void edit(Editor edit) {
-                // delete cookies
-                Map<String, ?> prefsValues = prefs.getAll();
-
-                if (CollectionUtils.isNotEmpty(prefsValues)) {
-                    Log.i(cgSettings.tag, "Removing cookies");
-
-                    for (String key : prefsValues.keySet()) {
-                        if (key.length() > 7 && key.substring(0, 7).equals("cookie_")) {
-                            edit.remove(key);
-                        }
-                    }
-                }
-            }
-        });
-    }
-
     public String setCacheType(final String cacheTypeIn) {
         editSettings(new PrefRunnable() {
             @Override
@@ -579,7 +556,7 @@ public class cgSettings {
 
     /**
      * edit some settings without knowing how to get the settings editor or how to commit
-     * 
+     *
      * @param runnable
      * @return commit result
      */

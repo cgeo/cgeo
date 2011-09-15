@@ -124,6 +124,22 @@ public class cgeo extends AbstractActivity {
         }
     };
 
+    private Handler firstLoginHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            try {
+                int reason = msg.what;
+
+                if (reason < 0) { //LoginFailed
+                    showToast(res.getString(R.string.err_login_failed_toast));
+                }
+            } catch (Exception e) {
+                Log.w(cgSettings.tag, "cgeo.fisrtLoginHander: " + e.toString());
+            }
+        }
+    };
+
     public cgeo() {
         super("c:geo-main-screen");
     }
@@ -199,6 +215,7 @@ public class cgeo extends AbstractActivity {
     @Override
     public void onDestroy() {
         initialized = false;
+        app.showLoginToast = true;
 
         if (geo != null) {
             geo = app.removeGeo();
@@ -423,17 +440,7 @@ public class cgeo extends AbstractActivity {
         settings.reloadCacheType();
 
         if (app.firstRun) {
-            new Thread() {
-
-                @Override
-                public void run() {
-                    int status = base.login();
-
-                    if (status == 1) {
-                        app.firstRun = false;
-                    }
-                }
-            }.start();
+            (new firstLogin()).start();
         }
 
         (new countBubbleUpdate()).start();
@@ -684,6 +691,33 @@ public class cgeo extends AbstractActivity {
                 SharedPreferences.Editor edit = prefs.edit();
                 edit.putInt("version", version);
                 edit.commit();
+            }
+        }
+    }
+
+    private class firstLogin extends Thread {
+
+        @Override
+        public void run() {
+            if (app == null) {
+                if (app.showLoginToast) {
+                    firstLoginHandler.sendEmptyMessage(-1);
+                } else {
+                    app.showLoginToast = false;
+                }
+                return;
+            }
+
+            int status = base.login();
+
+            if (status == 1) {
+                app.firstRun = false;
+            }
+
+            if (app.showLoginToast) {
+                firstLoginHandler.sendEmptyMessage(status);
+            } else {
+                app.showLoginToast = false;
             }
         }
     }

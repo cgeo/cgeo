@@ -21,7 +21,7 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
     /**
      * Show a single cache with waypoints or a single waypoint in Locus.
      * This method constructs a list of cache and waypoints only.
-     * 
+     *
      * @see AbstractLocusApp#showInLocus
      * @author koem
      */
@@ -37,19 +37,13 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
             final ArrayList<Object> points = new ArrayList<Object>();
 
             // add cache if present
-            if (cache != null) {
-                if (cache.coords == null)
-                    cache.coords = coords;
-                if (cache.coords != null)
-                    points.add(cache);
+            if (cache != null && cache.coords != null) {
+                points.add(cache);
             }
 
             // add waypoint if present
-            if (waypoint != null) {
-                if (waypoint.coords == null)
-                    waypoint.coords = coords;
-                if (waypoint.coords != null)
-                    points.add(waypoint);
+            if (waypoint != null && waypoint.coords != null) {
+                points.add(waypoint);
             }
 
             this.showInLocus(points, true, activity);

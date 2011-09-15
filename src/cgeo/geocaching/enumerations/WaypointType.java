@@ -6,7 +6,7 @@ import java.util.Map;
 
 /**
  * Enum listing waypoint types
- * 
+ *
  * @author koem
  */
 public enum WaypointType {

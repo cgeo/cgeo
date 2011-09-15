@@ -6,9 +6,9 @@ import android.graphics.Point;
 /**
  * Defines the base functions of the provider-independent
  * Overlay implementations
- * 
+ *
  * @author rsudev
- * 
+ *
  */
 public interface OverlayBase {
 

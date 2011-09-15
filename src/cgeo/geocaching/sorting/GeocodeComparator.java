@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * sorts caches by GC code, therefore effectively sorting by cache age
- * 
+ *
  */
 public class GeocodeComparator extends AbstractCacheComparator {
 

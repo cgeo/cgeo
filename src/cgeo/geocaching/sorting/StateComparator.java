@@ -4,7 +4,7 @@ import cgeo.geocaching.cgCache;
 
 /**
  * sort caches by state (normal, disabled, archived)
- * 
+ *
  */
 public class StateComparator extends AbstractCacheComparator implements
         CacheComparator {

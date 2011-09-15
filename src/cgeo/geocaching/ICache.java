@@ -5,9 +5,9 @@ package cgeo.geocaching;
 
 /**
  * Basic interface for caches
- * 
+ *
  * @author blafoo
- * 
+ *
  */
 public interface ICache {
 

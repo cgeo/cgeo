@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * connector for OpenCaching.com
- * 
+ *
  */
 public class OXConnector extends AbstractConnector implements IConnector {
 

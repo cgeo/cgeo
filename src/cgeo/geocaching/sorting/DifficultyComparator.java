@@ -4,7 +4,7 @@ import cgeo.geocaching.cgCache;
 
 /**
  * sorts caches by difficulty
- * 
+ *
  */
 public class DifficultyComparator extends AbstractCacheComparator {
 

@@ -14,9 +14,9 @@ import android.graphics.drawable.Drawable;
 /**
  * Base class for itemized overlays. Delegates calls from deriving classes to the contained
  * provider-specific implementation.
- * 
+ *
  * @author rsudev
- * 
+ *
  */
 public abstract class ItemizedOverlayBase implements OverlayBase {
 

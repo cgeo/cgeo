@@ -4,9 +4,9 @@ import cgeo.geocaching.cgCache;
 
 /**
  * sorts caches by the users own voting (if available at all)
- * 
+ *
  * @author bananeweizen
- * 
+ *
  */
 public class VoteComparator extends AbstractCacheComparator {
 

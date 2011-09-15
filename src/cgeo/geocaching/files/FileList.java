@@ -128,7 +128,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
 
     /**
      * Gets the base folder for file searches
-     * 
+     *
      * @return The folder to start the recursive search in
      */
     protected abstract String[] getBaseFolders();

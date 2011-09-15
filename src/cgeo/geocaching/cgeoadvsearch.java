@@ -264,8 +264,10 @@ public class cgeoadvsearch extends AbstractActivity {
         final String lonText = lonView.getText().toString();
 
         if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) { // TODO: now coordinates
-            latView.setText(cgBase.formatLatitude(geo.coordsNow.getLatitude(), true));
-            lonView.setText(cgBase.formatLongitude(geo.coordsNow.getLongitude(), true));
+            if (geo.coordsNow != null) {
+                latView.setText(cgBase.formatLatitude(geo.coordsNow.getLatitude(), true));
+                lonView.setText(cgBase.formatLongitude(geo.coordsNow.getLongitude(), true));
+            }
         } else {
             Map<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
             Map<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lat");

@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * connector for OpenCaching.de (and several other country domains)
- * 
+ *
  */
 public class OCConnector extends AbstractConnector implements IConnector {
     @Override

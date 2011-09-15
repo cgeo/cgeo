@@ -168,7 +168,6 @@ public class cgBase {
     public final static SimpleDateFormat dateTbIn2 = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
     public final static SimpleDateFormat dateSqlIn = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 2010-07-25 14:44:01
     private Resources res = null;
-    private Map<String, String> cookies = new HashMap<String, String>();
     private static final String passMatch = "[/\\?&]*[Pp]ass(word)?=[^&^#^$]+";
     private static final Pattern patternLoggedIn = Pattern.compile("<span class=\"Success\">You are logged in as[^<]*<strong[^>]*>([^<]+)</strong>[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private static final Pattern patternLogged2In = Pattern.compile("<strong>\\W*Hello,[^<]*<a[^>]+>([^<]+)</a>[^<]*</strong>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
@@ -381,7 +380,7 @@ public class cgBase {
 
     /**
      * read all viewstates from page
-     * 
+     *
      * @return String[] with all view states
      */
     public static String[] getViewstates(String page) {
@@ -504,7 +503,7 @@ public class cgBase {
             return -3;
         }
 
-        settings.deleteCookies();
+        CookieJar.deleteCookies(prefs);
 
         params.put("__EVENTTARGET", "");
         params.put("__EVENTARGUMENT", "");
@@ -3446,7 +3445,7 @@ public class cgBase {
 
     /**
      * Adds the cache to the watchlist of the user.
-     * 
+     *
      * @param cache
      *            the cache to add
      * @return -1: error occured
@@ -3472,7 +3471,7 @@ public class cgBase {
 
     /**
      * Removes the cache from the watchlist
-     * 
+     *
      * @param cache
      *            the cache to remove
      * @return -1: error occured
@@ -3801,7 +3800,7 @@ public class cgBase {
             scheme = "https://";
         }
 
-        String cookiesDone = getCookiesAsString();
+        String cookiesDone = CookieJar.getCookiesAsString(prefs);
 
         URLConnection uc = null;
         HttpURLConnection connection = null;
@@ -3879,29 +3878,7 @@ public class cgBase {
                     wr.close();
                 }
 
-                String headerName = null;
-                final SharedPreferences.Editor prefsEditor = prefs.edit();
-                for (int j = 1; (headerName = uc.getHeaderFieldKey(j)) != null; j++) {
-                    if (headerName != null && headerName.equalsIgnoreCase("Set-Cookie")) {
-                        int index;
-                        String cookie = uc.getHeaderField(j);
-
-                        index = cookie.indexOf(";");
-                        if (index > -1) {
-                            cookie = cookie.substring(0, cookie.indexOf(";"));
-                        }
-
-                        index = cookie.indexOf("=");
-                        if (index > -1 && cookie.length() > (index + 1)) {
-                            String name = cookie.substring(0, cookie.indexOf("="));
-                            String value = cookie.substring(cookie.indexOf("=") + 1, cookie.length());
-
-                            cookies.put(name, value);
-                            prefsEditor.putString("cookie_" + name, value);
-                        }
-                    }
-                }
-                prefsEditor.commit();
+                CookieJar.setCookies(prefs, uc);
 
                 InputStream ins = getInputstreamFromConnection(connection);
                 final InputStreamReader inr = new InputStreamReader(ins);
@@ -3968,70 +3945,9 @@ public class cgBase {
         return response;
     }
 
-    private String getCookiesAsString() {
-        // prepare cookies
-        String cookiesDone = null;
-        if (cookies == null || cookies.isEmpty()) {
-            if (cookies == null) {
-                cookies = new HashMap<String, String>();
-            }
-
-            final Map<String, ?> prefsAll = prefs.getAll();
-            final Set<? extends Map.Entry<String, ?>> entrySet = prefsAll.entrySet();
-
-            for (Map.Entry<String, ?> entry : entrySet) {
-                String key = entry.getKey();
-                if (key.matches("cookie_.+")) {
-                    final String cookieKey = key.substring(7);
-                    final String cookieValue = (String) entry.getValue();
-
-                    cookies.put(cookieKey, cookieValue);
-                }
-            }
-        }
-
-        if (cookies != null) {
-            final Set<Map.Entry<String, String>> entrySet = cookies.entrySet();
-            final List<String> cookiesEncoded = new ArrayList<String>();
-
-            for (Map.Entry<String, String> entry : entrySet) {
-                cookiesEncoded.add(entry.getKey() + "=" + entry.getValue());
-            }
-
-            if (cookiesEncoded.size() > 0) {
-                cookiesDone = implode("; ", cookiesEncoded.toArray());
-            }
-        }
-
-        if (cookiesDone == null) {
-            Map<String, ?> prefsValues = prefs.getAll();
-
-            if (CollectionUtils.isNotEmpty(prefsValues)) {
-                final Set<? extends Map.Entry<String, ?>> entrySet = prefsValues.entrySet();
-                final List<String> cookiesEncoded = new ArrayList<String>();
-
-                for (Map.Entry<String, ?> entry : entrySet) {
-                    String key = entry.getKey();
-                    if (key.length() > 7 && key.substring(0, 7).equals("cookie_")) {
-                        cookiesEncoded.add(key + "=" + entry.getValue());
-                    }
-                }
-
-                if (cookiesEncoded.size() > 0) {
-                    cookiesDone = implode("; ", cookiesEncoded.toArray());
-                }
-            }
-        }
-
-        if (cookiesDone == null) {
-            cookiesDone = "";
-        }
-        return cookiesDone;
-    }
-
     /**
      * Replace the characters \n, \r and \t with a space
-     * 
+     *
      * @param buffer
      *            The data
      */
@@ -4060,7 +3976,7 @@ public class cgBase {
         int httpCode = -1;
         String httpLocation = null;
 
-        String cookiesDone = getCookiesAsString();
+        final String cookiesDone = CookieJar.getCookiesAsString(prefs);
 
         URLConnection uc = null;
         HttpURLConnection connection = null;
@@ -4108,29 +4024,7 @@ public class cgBase {
                 wr.flush();
                 wr.close();
 
-                String headerName = null;
-                final SharedPreferences.Editor prefsEditor = prefs.edit();
-                for (int j = 1; (headerName = uc.getHeaderFieldKey(j)) != null; j++) {
-                    if (headerName != null && headerName.equalsIgnoreCase("Set-Cookie")) {
-                        int index;
-                        String cookie = uc.getHeaderField(j);
-
-                        index = cookie.indexOf(";");
-                        if (index > -1) {
-                            cookie = cookie.substring(0, cookie.indexOf(";"));
-                        }
-
-                        index = cookie.indexOf("=");
-                        if (index > -1 && cookie.length() > (index + 1)) {
-                            String name = cookie.substring(0, cookie.indexOf("="));
-                            String value = cookie.substring(cookie.indexOf("=") + 1, cookie.length());
-
-                            cookies.put(name, value);
-                            prefsEditor.putString("cookie_" + name, value);
-                        }
-                    }
-                }
-                prefsEditor.commit();
+                CookieJar.setCookies(prefs, uc);
 
                 InputStream ins = getInputstreamFromConnection(connection);
                 final InputStreamReader inr = new InputStreamReader(ins);
@@ -4908,7 +4802,7 @@ public class cgBase {
     /**
      * Generate a time string according to system-wide settings (locale, 12/24 hour)
      * such as "13:24".
-     * 
+     *
      * @param date
      *            milliseconds since the epoch
      * @return the formatted string
@@ -4920,7 +4814,7 @@ public class cgBase {
     /**
      * Generate a date string according to system-wide settings (locale, date format)
      * such as "20 December" or "20 December 2010". The year will only be included when necessary.
-     * 
+     *
      * @param date
      *            milliseconds since the epoch
      * @return the formatted string
@@ -4933,7 +4827,7 @@ public class cgBase {
      * Generate a date string according to system-wide settings (locale, date format)
      * such as "20 December 2010". The year will always be included, making it suitable
      * to generate long-lived log entries.
-     * 
+     *
      * @param date
      *            milliseconds since the epoch
      * @return the formatted string
@@ -4946,7 +4840,7 @@ public class cgBase {
     /**
      * Generate a numeric date string according to system-wide settings (locale, date format)
      * such as "10/20/2010".
-     * 
+     *
      * @param date
      *            milliseconds since the epoch
      * @return the formatted string
@@ -4959,7 +4853,7 @@ public class cgBase {
     /**
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 sept. à 12:35".
-     * 
+     *
      * @param context
      *            a Context
      * @param date
@@ -4972,7 +4866,7 @@ public class cgBase {
 
     /**
      * TODO This method is only needed until the settings are a singleton
-     * 
+     *
      * @return
      */
     public String getUserName() {
@@ -4981,7 +4875,7 @@ public class cgBase {
 
     /**
      * insert text into the EditText at the current cursor position
-     * 
+     *
      * @param editText
      * @param insertText
      * @param addSpace

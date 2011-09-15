@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * sorts caches by size
- * 
+ *
  */
 public class SizeComparator extends AbstractCacheComparator {
 
@@ -29,7 +29,7 @@ public class SizeComparator extends AbstractCacheComparator {
 
     /**
      * speed optimized comparison of size string
-     * 
+     *
      * @param cache
      * @return
      */

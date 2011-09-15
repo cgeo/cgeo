@@ -4,7 +4,7 @@ import cgeo.geocaching.cgCache;
 
 /**
  * sorts caches by last visited date
- * 
+ *
  */
 public class VisitComparator extends AbstractCacheComparator {
 

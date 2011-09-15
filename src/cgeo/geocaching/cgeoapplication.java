@@ -29,6 +29,7 @@ public class cgeoapplication extends Application {
     final private Map<UUID, cgSearch> searches = new HashMap<UUID, cgSearch>(); // information about searches
     final private Map<String, cgCache> cachesCache = new HashMap<String, cgCache>(); // caching caches into memory
     public boolean firstRun = true; // c:geo is just launched
+    public boolean showLoginToast = true; //login toast shown just once.
     public boolean warnedLanguage = false; // user was warned about different language settings on geocaching.com
     private boolean databaseCleaned = false; // database was cleaned
 
@@ -723,7 +724,7 @@ public class cgeoapplication extends Application {
 
     /**
      * Checks if Cache is already in Database and if so does a merge.
-     * 
+     *
      * @param cache
      *            the cache to be saved
      * @param override

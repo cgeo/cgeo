@@ -4,7 +4,7 @@ import cgeo.geocaching.cgCache;
 
 /**
  * sorts caches by terrain rating
- * 
+ *
  */
 public class TerrainComparator extends AbstractCacheComparator {
 

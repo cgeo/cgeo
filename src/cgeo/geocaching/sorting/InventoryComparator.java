@@ -4,9 +4,9 @@ import cgeo.geocaching.cgCache;
 
 /**
  * sorts caches by number of items in inventory
- * 
+ *
  * @author bananeweizen
- * 
+ *
  */
 public class InventoryComparator extends AbstractCacheComparator {
 

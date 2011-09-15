@@ -4,7 +4,7 @@ import cgeo.geocaching.cgCache;
 
 /**
  * sorts caches by popularity (favorite count)
- * 
+ *
  */
 public class PopularityComparator extends AbstractCacheComparator {
 
