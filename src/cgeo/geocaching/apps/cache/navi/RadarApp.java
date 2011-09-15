@@ -21,11 +21,15 @@ class RadarApp extends AbstractNavigationApp implements NavigationApp {
         super(res.getString(R.string.cache_menu_radar), INTENT, PACKAGE_NAME);
     }
 
-    private static void navigateTo(Activity activity, final Geopoint coords) {
+    private static boolean navigateTo(Activity activity, final Geopoint coords) {
+        if (coords == null) {
+            return false;
+        }
         Intent radarIntent = new Intent(INTENT);
         radarIntent.putExtra("latitude", (float) coords.getLatitude());
         radarIntent.putExtra("longitude", (float) coords.getLongitude());
         activity.startActivity(radarIntent);
+        return true;
     }
 
     @Override
@@ -33,21 +37,11 @@ class RadarApp extends AbstractNavigationApp implements NavigationApp {
             cgCache cache,
             final UUID searchId, cgWaypoint waypoint, final Geopoint coords) {
         if (cache != null) {
-            if (cache.coords != null) {
-                navigateTo(activity, cache.coords);
-                return true;
-            }
+            return navigateTo(activity, cache.coords);
         }
         if (waypoint != null) {
-            if (waypoint.coords != null) {
-                navigateTo(activity, waypoint.coords);
-                return true;
-            }
+            return navigateTo(activity, waypoint.coords);
         }
-        if (coords != null) {
-            navigateTo(activity, coords);
-            return true;
-        }
-        return false;
+        return navigateTo(activity, coords);
     }
 }

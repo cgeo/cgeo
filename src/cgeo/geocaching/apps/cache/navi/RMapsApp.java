@@ -53,11 +53,8 @@ class RMapsApp extends AbstractNavigationApp implements NavigationApp {
                             + ";" + waypoint.name);
                 }
 
-                final Intent intent = new Intent(
-                        "com.robert.maps.action.SHOW_POINTS");
-
+                final Intent intent = new Intent(INTENT);
                 intent.putStringArrayListExtra("locations", locations);
-
                 activity.startActivity(intent);
 
                 return true;

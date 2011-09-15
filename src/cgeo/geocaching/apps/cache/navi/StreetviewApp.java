@@ -39,6 +39,8 @@ class StreetviewApp extends AbstractNavigationApp implements NavigationApp {
                 startActivity(activity, cache.coords);
             } else if (waypoint != null && waypoint.coords != null) {
                 startActivity(activity, waypoint.coords);
+            } else if (coords != null) {
+                startActivity(activity, coords);
             }
 
             return true;
@@ -51,7 +53,7 @@ class StreetviewApp extends AbstractNavigationApp implements NavigationApp {
         return false;
     }
 
-    private void startActivity(Activity activity, final Geopoint coords) {
+    private static void startActivity(Activity activity, final Geopoint coords) {
         activity.startActivity(new Intent(Intent.ACTION_VIEW,
                 Uri.parse("google.streetview:cbll=" + coords.getLatitude() + "," + coords.getLongitude())));
     }

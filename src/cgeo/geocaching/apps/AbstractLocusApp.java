@@ -55,8 +55,9 @@ public abstract class AbstractLocusApp extends AbstractApp {
      */
     protected void showInLocus(List<? extends Object> objectsToShow, boolean withCacheWaypoints,
             Activity activity) {
-        if (objectsToShow == null)
+        if (objectsToShow == null) {
             return;
+        }
 
         int pc = 0; // counter for points
         PointsData pd = new PointsData("c:geo");
@@ -70,8 +71,9 @@ public abstract class AbstractLocusApp extends AbstractApp {
             } else {
                 continue; // no cache, no waypoint => ignore
             }
-            if (p == null)
+            if (p == null) {
                 continue;
+            }
 
             pd.addPoint(p);
             ++pc;
@@ -98,8 +100,9 @@ public abstract class AbstractLocusApp extends AbstractApp {
      * @author koem
      */
     private static Point getPoint(cgCache cache, boolean withWaypoints) {
-        if (cache == null || cache.coords == null)
+        if (cache == null || cache.coords == null) {
             return null;
+        }
 
         // create one simple point with location
         Location loc = new Location(cgSettings.tag);
@@ -117,31 +120,38 @@ public abstract class AbstractLocusApp extends AbstractApp {
         pg.premiumOnly = cache.members;
         pg.name = cache.name;
         pg.placedBy = cache.owner;
-        if (cache.hidden != null)
+        if (cache.hidden != null) {
             pg.hidden = ISO8601DATE.format(cache.hidden.getTime());
+        }
         int locusId = toLocusId(CacheType.FIND_BY_CGEOID.get(cache.type));
-        if (locusId != NO_LOCUS_ID)
+        if (locusId != NO_LOCUS_ID) {
             pg.type = locusId;
+        }
         locusId = toLocusId(CacheSize.FIND_BY_CGEOID.get(cache.size));
-        if (locusId != NO_LOCUS_ID)
+        if (locusId != NO_LOCUS_ID) {
             pg.container = locusId;
-        if (cache.difficulty != null)
+        }
+        if (cache.difficulty != null) {
             pg.difficulty = cache.difficulty;
-        if (cache.terrain != null)
+        }
+        if (cache.terrain != null) {
             pg.terrain = cache.terrain;
+        }
         pg.found = cache.found;
 
         if (withWaypoints && cache.waypoints != null) {
             pg.waypoints = new ArrayList<PointGeocachingDataWaypoint>();
             for (cgWaypoint waypoint : cache.waypoints) {
-                if (waypoint == null || waypoint.coords == null)
+                if (waypoint == null || waypoint.coords == null) {
                     continue;
+                }
                 PointGeocachingDataWaypoint wp = new PointGeocachingDataWaypoint();
                 wp.code = waypoint.geocode;
                 wp.name = waypoint.name;
                 String locusWpId = toLocusId(WaypointType.FIND_BY_CGEOID.get(waypoint.type));
-                if (locusWpId != null)
+                if (locusWpId != null) {
                     wp.type = locusWpId;
+                }
                 wp.lat = waypoint.coords.getLatitude();
                 wp.lon = waypoint.coords.getLongitude();
                 pg.waypoints.add(wp);
@@ -168,8 +178,9 @@ public abstract class AbstractLocusApp extends AbstractApp {
      * @author koem
      */
     private static Point getPoint(cgWaypoint waypoint) {
-        if (waypoint == null || waypoint.coords == null)
+        if (waypoint == null || waypoint.coords == null) {
             return null;
+        }
 
         // create one simple point with location
         Location loc = new Location(cgSettings.tag);

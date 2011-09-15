@@ -40,6 +40,8 @@ class GoogleMapsApp extends AbstractNavigationApp implements NavigationApp {
                 startActivity(activity, cache.coords);
             } else if (waypoint != null && waypoint.coords != null) {
                 startActivity(activity, waypoint.coords);
+            } else if (coords != null) {
+                startActivity(activity, coords);
             }
 
             return true;
@@ -56,7 +58,7 @@ class GoogleMapsApp extends AbstractNavigationApp implements NavigationApp {
         return false;
     }
 
-    private void startActivity(Activity activity, final Geopoint coords) {
+    private static void startActivity(Activity activity, final Geopoint coords) {
         activity.startActivity(new Intent(Intent.ACTION_VIEW,
                 Uri.parse("geo:" + coords.getLatitude() + "," + coords.getLongitude())));
         // INFO: q parameter works with Google Maps, but breaks cooperation with all other apps

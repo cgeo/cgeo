@@ -24,8 +24,9 @@ public class LocusDataStorageProvider extends ContentProvider {
         DataCursor cursor = new DataCursor(new String[] { "data" });
 
         ArrayList<PointsData> data = DataStorage.getData();
-        if (data == null || data.size() == 0)
+        if (data == null || data.size() == 0) {
             return cursor;
+        }
 
         for (int i = 0; i < data.size(); i++) {
             // get byte array
