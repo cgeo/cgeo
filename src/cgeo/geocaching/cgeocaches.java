@@ -218,14 +218,14 @@ public class cgeocaches extends AbstractListActivity {
                     dialog.setNegativeButton(res.getString(R.string.license_dismiss), new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int id) {
-                            settings.deleteCookies();
+                            CookieJar.deleteCookies(prefs);
                             dialog.cancel();
                         }
                     });
                     dialog.setPositiveButton(res.getString(R.string.license_show), new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int id) {
-                            settings.deleteCookies();
+                            CookieJar.deleteCookies(prefs);
                             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/software/agreement.aspx?ID=0")));
                         }
                     });

@@ -1002,7 +1002,7 @@ public class cgeoinit extends AbstractActivity {
             loginDialog.setCancelable(false);
 
             settings.setLogin(username, password);
-            settings.deleteCookies();
+            CookieJar.deleteCookies(prefs);
 
             (new Thread() {
 
