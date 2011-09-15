@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import org.apache.commons.lang3.StringUtils;
@@ -46,7 +47,7 @@ public class cgCache implements ICache {
     public String ownerReal = "";
     public Date hidden = null;
     public String hint = "";
-    public String size = "";
+    public CacheSize size = null;
     public Float difficulty = Float.valueOf(0);
     public Float terrain = Float.valueOf(0);
     public Float direction = null;
@@ -138,7 +139,7 @@ public class cgCache implements ICache {
         if (StringUtils.isBlank(hint)) {
             hint = other.hint;
         }
-        if (StringUtils.isBlank(size)) {
+        if (size == null) {
             size = other.size;
         }
         if (difficulty == null || difficulty == 0) {
@@ -398,7 +399,7 @@ public class cgCache implements ICache {
     }
 
     @Override
-    public String getSize() {
+    public CacheSize getSize() {
         return size;
     }
 
