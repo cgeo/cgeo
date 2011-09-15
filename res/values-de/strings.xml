@@ -127,7 +127,7 @@
   <string name="err_detail_cache_find_any">c:geo konnte keine Caches finden.</string>
   <string name="err_detail_cache_find_next">c:geo konnte die nächsten Caches nicht finden.</string>
   <string name="err_detail_cache_forgot">c:geo hat vergessen, welcher Cache aufgerufen werden sollte.</string>
-  <string name="err_detail_cache_forgot_visit">c:geo hat vergessen, welchen Cache Sie besucht haben.</string>
+  <string name="err_detail_cache_forgot_visit">c:geo hat vergessen, welchen Cache du besucht hast.</string>
   <string name="err_detail_cache_language">c:geo konnte manche Details des Caches nicht lesen. Bitte überprüfen, ob geocaching.com auf "English" gestellt wurde. Leider versteht c:geo keine andere Spracheinstellungen.</string>
   <string name="err_detail_no_spoiler">c:geo hat kein Hinweisbild für diesen Cache gefunden.</string>
   <string name="err_detail_no_map_static">c:geo hat keine statische Karte für diesen Cache gefunden.</string>
@@ -161,13 +161,13 @@
   <string name="err_manual_title">Anleitung ist nicht installiert.</string>
   <string name="err_manual_message">Bedienungsanleitung für c:geo ist auf dem Gerät nicht vorhanden. Jetzt installieren?</string>
   <string name="err_manual_market">c:geo konnte den Android Market nicht starten, um nach der Anleitung zu suchen.</string>
-  <string name="err_missing_device_name">Bitte legen Sie einen Namen für Ihr Handy fest, bevor Sie sich registrieren.</string>
+  <string name="err_missing_device_name">Bitte lege einen Namen für dein Handy fest, bevor du dich registrieren.</string>
 
   <string name="err_tb_display">"c:geo kann den gewünschten Trackable nicht anzeigen. Ist es wirklich einer?</string>
   <string name="err_tb_details_open">c:geo konnte Details des Trackables nicht öffnen.</string>
   <string name="err_tb_details_download">c:geo konnte Details des Trackables nicht laden, weil</string>
   <string name="err_tb_forgot">c:geo hat den gewünschten Trackable vergessen.</string>
-  <string name="err_tb_forgot_saw">c:geo hat vergessen, welchen Trackable Sie gesehen haben.</string>
+  <string name="err_tb_forgot_saw">c:geo hat vergessen, welchen Trackable du gesehen hast.</string>
   <string name="err_tb_find">c:geo findet den Trackable nicht</string>
   <string name="err_tb_find_that">c:geo konnte diesen Trackable nicht finden.</string>
 
@@ -211,7 +211,7 @@
   <string name="warn_no_username">Kein Benutzername angegeben.</string>
   <string name="warn_search_help_title">Hilfe benötigt?</string>
   <string name="warn_search_help_address">Adresse oder Ort eingeben, z.B. Straßenname und Ort \"Dorfstraße 333, Berlin, Deutschland\", Ort \"Berlin\" oder den Namen eines beliebigen Ortes wie z.B. \"Tiergarten\".</string>
-  <string name="warn_search_help_gccode">Geocode eingeben. z.B. \"GC1VCAZ\".</string>
+  <string name="warn_search_help_gccode">GC-Code eingeben. z.B. \"GC1VCAZ\".</string>
   <string name="warn_search_help_keyword">Stichwörter eingeben, die im Namen des zu suchenden Caches enthalten sind.</string>
   <string name="warn_search_help_user">Name eines Benutzers auf Geocaching.com eingeben.</string>
   <string name="warn_search_help_tb">Code des Trackables eingeben, z.B. \"TB29QMZ\".</string>
@@ -455,10 +455,10 @@
 
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Der Name deines Handys:</string>
-  <string name="init_sendToCgeo_description">Send to c:geo erlaubt es mit einem speziellen Plugin für Firefox oder Chrome Caches direkt von der Geocachingseite zu empfangen. Bitte lesen Sie die Details vor einer Registrierung auf <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a> nach.</string>
+  <string name="init_sendToCgeo_description">Send to c:geo erlaubt es mit einem speziellen Plugin für Firefox oder Chrome Caches direkt von der Geocachingseite zu empfangen. Bitte lies dir die Details vor einer Registrierung auf <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a> durch.</string>
   <string name="init_sendToCgeo_register">Registrierung anfordern</string>
-  <string name="init_sendToCgeo_registering">Registriere Ihr Handy für "Send to c:geo"…</string>
-  <string name="init_sendToCgeo_register_ok">Registrierung erfolgreich. Ihr PIN code ist ####. Benutzen Sie diesen auf der c:geo website um Ihr Handy im Browser hinzuzufügen.</string>
+  <string name="init_sendToCgeo_registering">Registriere dein Handy für "Send to c:geo"…</string>
+  <string name="init_sendToCgeo_register_ok">Registrierung erfolgreich. Dein PIN code ist ####. Benutze diesen auf der c:geo website um dein Handy im Browser hinzuzufügen.</string>
   <string name="init_sendToCgeo_register_fail">Registrierung fehlgeschlagen.</string>
   <string name="sendToCgeo_download_fail">c:geo konnte Caches nicht laden. Entweder besteht keine Internetverbindung oder send2c:geo funktioniert nicht.</string>
   <string name="sendToCgeo_no_registration">c:geo konnte Caches nicht laden. Registrierung für send2c:geo ungültig. Bitte in Einstellungen neu registrieren.</string>  
@@ -567,8 +567,8 @@
   <string name="cache_coordinates">Koordinaten</string>
   <string name="cache_elevation">Höhe</string>
   <string name="cache_calendars">Kalender auswählen</string>
-  <string name="cache_spoiler_images_title">Spoilerbilder</string>
-  <string name="cache_spoiler_images_loading">Lade Spoilerbilder…</string>
+  <string name="cache_spoiler_images_title">Hinweisbilder</string>
+  <string name="cache_spoiler_images_loading">Lade Hinweisbilder…</string>
   <string name="cache_log_types">Logs</string>
   <string name="cache_coordinates_no">Dieser Cache hat keine Koordinaten.</string> <!-- since: 2.26 RC2 -->
   <string name="cache_export_fieldnote">Exportiere als Field Notes</string>
@@ -595,7 +595,7 @@
   <!--  import -->
   <string name="import_title">Importiere…</string>
   <string name="web_import_title">Aus dem Internet importieren</string>
-  <string name="web_import_server_problem">Beim Datenaustausch mit dem Server ist ein Problem aufgereten. Bitte registrieren Sie Ihr Handy erneut und versuchen Sie es dann noch einmal.</string>
+  <string name="web_import_server_problem">Beim Datenaustausch mit dem Server ist ein Problem aufgereten. Bitte registriere dein Handy erneut und versuche es dann noch einmal.</string>
   <string name="web_import_waiting">Erwarte neue Caches aus dem Internet…</string>
   <string name="web_downloading">Lade herunter</string>
   <string name="web_downloaded">Heruntergeladen</string>
@@ -625,10 +625,11 @@
   <string name="waypoint_loading">Lade Wegpunkt…</string>
   <string name="waypoint_unknown_coordinates">Unbekannte Koordinaten</string>
   <string name="waypoint_done">Fertig</string>
+  <string name="search_history">Verlauf</string>
   <string name="search_history_empty">Keine Ziele bisher</string>
   <string name="search_remove_destination">Ziel gelöscht</string>
-  <string name="search_clear_history">History löschen</string>
-  <string name="search_history_cleared">History gelöscht</string>
+  <string name="search_clear_history">Verlauf löschen</string>
+  <string name="search_history_cleared">Verlauf gelöscht</string>
 
   <!-- visit -->
   <string name="visit_tweet">Diesen Eintrag auf Twitter veröffentlichen</string>
@@ -654,8 +655,8 @@
   <string name="search_coordinates_button">Suche mit Koordinaten</string>
   <string name="search_address">Adresse</string>
   <string name="search_address_button">Suche mit Adresse</string>
-  <string name="search_gc">Geocode</string>
-  <string name="search_gc_button">Suche mit Geocode</string>
+  <string name="search_gc">GC-Code</string>
+  <string name="search_gc_button">Suche mit GC-Code</string>
   <string name="search_kw">Stichworte</string>
   <string name="search_kw_prefill">Stichwörter</string>
   <string name="search_kw_button">Suche mit Stichwörtern</string>
@@ -694,7 +695,7 @@
   <string name="trackable_name">Name</string>
   <string name="trackable_type">Typ</string>
   <string name="trackable_owner">Eigentümer</string>
-  <string name="trackable_spotted">Zuletzt erspäht</string>
+  <string name="trackable_spotted">Zuletzt gesehen</string>
   <string name="trackable_spotted_in_cache">In</string>
   <string name="trackable_spotted_at_user">Bei</string>
   <string name="trackable_spotted_unknown_location">Unbekannter Ort</string>

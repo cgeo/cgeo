@@ -668,8 +668,8 @@
   <string name="search_coordinates_button">Search by coordinates</string>
   <string name="search_address">Address</string>
   <string name="search_address_button">Search by address</string>
-  <string name="search_gc">Geocode</string>
-  <string name="search_gc_button">Search by geocode</string>
+  <string name="search_gc">GC-code</string>
+  <string name="search_gc_button">Search by GC-code</string>
   <string name="search_kw">Keywords</string>
   <string name="search_kw_prefill">Keyword</string>
   <string name="search_kw_button">Search by keyword</string>
