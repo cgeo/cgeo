@@ -1,5 +1,7 @@
 package cgeo.geocaching.test.mock;
 
+import cgeo.geocaching.enumerations.CacheSize;
+
 
 public class GC1ZXX2 extends MockedCache {
 	
@@ -29,8 +31,8 @@ public class GC1ZXX2 extends MockedCache {
 	}
 
 	@Override
-	public String getSize() {
-		return "other";
+	public CacheSize getSize() {
+		return CacheSize.OTHER;
 	}
 
 	@Override
