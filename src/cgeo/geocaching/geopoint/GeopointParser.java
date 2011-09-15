@@ -1,5 +1,6 @@
 package cgeo.geocaching.geopoint;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.geopoint.Geopoint.GeopointException;
 
 import java.util.regex.Matcher;
@@ -144,7 +145,7 @@ public class GeopointParser
             }
         }
 
-        throw new ParseException("Could not parse coordinates as " + latlon + ": \"" + text + "\"");
+        throw new ParseException("Could not parse coordinates as " + latlon + ": \"" + text + "\"", latlon);
     }
 
     /**
@@ -181,10 +182,12 @@ public class GeopointParser
             extends GeopointException
     {
         private static final long serialVersionUID = 1L;
+        public final int resource;
 
-        public ParseException(String msg)
+        public ParseException(final String msg, final LatLon faulty)
         {
             super(msg);
+            resource = faulty == LatLon.LAT ? R.string.err_parse_lat : R.string.err_parse_lon;
         }
     }
 }

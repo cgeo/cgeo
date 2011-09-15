@@ -482,23 +482,12 @@ public class cgeopoint extends AbstractActivity {
         }
 
         if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
-            double latitude;
             try {
-                latitude = GeopointParser.parseLatitude(latText);
+                coords = GeopointParser.parse(latText, lonText);
             } catch (GeopointParser.ParseException e) {
-                showToast(res.getString(R.string.err_parse_lat));
+                showToast(res.getString(e.resource));
                 return null;
             }
-
-            double longitude;
-            try {
-                longitude = GeopointParser.parseLongitude(lonText);
-            } catch (GeopointParser.ParseException e) {
-                showToast(res.getString(R.string.err_parse_lon));
-                return null;
-            }
-
-            coords = new Geopoint(latitude, longitude);
         } else {
             if (geo == null || geo.coordsNow == null) {
                 showToast(res.getString(R.string.err_point_curr_position_unavailable));

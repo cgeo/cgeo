@@ -269,28 +269,16 @@ public class cgeoadvsearch extends AbstractActivity {
                 lonView.setText(cgBase.formatLongitude(geo.coordsNow.getLongitude(), true));
             }
         } else {
-            double latitude;
             try {
-                latitude = GeopointParser.parseLatitude(latText);
+                final Intent cachesIntent = new Intent(this, cgeocaches.class);
+                cachesIntent.putExtra("latitude", GeopointParser.parseLatitude(latText));
+                cachesIntent.putExtra("longitude", GeopointParser.parseLongitude(lonText));
+                cachesIntent.putExtra("type", "coordinate");
+                cachesIntent.putExtra("cachetype", settings.cacheType);
+                startActivity(cachesIntent);
             } catch (GeopointParser.ParseException e) {
-                showToast(res.getString(R.string.err_parse_lat));
-                return;
+                showToast(res.getString(e.resource));
             }
-
-            double longitude;
-            try {
-                longitude = GeopointParser.parseLongitude(lonText);
-            } catch (GeopointParser.ParseException e) {
-                showToast(res.getString(R.string.err_parse_lon));
-                return;
-            }
-
-            final Intent cachesIntent = new Intent(this, cgeocaches.class);
-            cachesIntent.putExtra("type", "coordinate");
-            cachesIntent.putExtra("latitude", latitude);
-            cachesIntent.putExtra("longitude", longitude);
-            cachesIntent.putExtra("cachetype", settings.cacheType);
-            startActivity(cachesIntent);
         }
     }
 

@@ -260,15 +260,9 @@ public class cgeowaypointadd extends AbstractActivity {
             if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
                 try {
                     latitude = GeopointParser.parseLatitude(latText);
-                } catch (GeopointParser.ParseException e) {
-                    showToast(res.getString(R.string.err_parse_lat));
-                    return;
-                }
-
-                try {
                     longitude = GeopointParser.parseLongitude(lonText);
                 } catch (GeopointParser.ParseException e) {
-                    showToast(res.getString(R.string.err_parse_lon));
+                    showToast(res.getString(e.resource));
                     return;
                 }
             } else {
