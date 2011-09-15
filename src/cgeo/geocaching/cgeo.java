@@ -700,11 +700,6 @@ public class cgeo extends AbstractActivity {
         @Override
         public void run() {
             if (app == null) {
-                if (app.showLoginToast) {
-                    firstLoginHandler.sendEmptyMessage(-1);
-                } else {
-                    app.showLoginToast = false;
-                }
                 return;
             }
 
@@ -716,7 +711,6 @@ public class cgeo extends AbstractActivity {
 
             if (app.showLoginToast) {
                 firstLoginHandler.sendEmptyMessage(status);
-            } else {
                 app.showLoginToast = false;
             }
         }

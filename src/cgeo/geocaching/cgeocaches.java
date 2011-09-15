@@ -547,6 +547,11 @@ public class cgeocaches extends AbstractListActivity {
      */
     private boolean contextMenuMoveToList = false;
 
+    /**
+     * flag indicating whether we shall show the filter context menu
+     */
+    private boolean contextMenuShowFilter = false;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -1011,11 +1016,15 @@ public class cgeocaches extends AbstractListActivity {
                 return true;
             case SUBMENU_FILTER_TYPE:
                 selectedFilter = res.getString(R.string.caches_filter_type);
+                contextMenuShowFilter = true;
                 openContextMenu(getListView());
+                contextMenuShowFilter = false;
                 return false;
             case SUBMENU_FILTER_SIZE:
                 selectedFilter = res.getString(R.string.caches_filter_size);
+                contextMenuShowFilter = true;
                 openContextMenu(getListView());
+                contextMenuShowFilter = false;
                 return false;
             case MENU_FILTER_TRACKABLES:
                 setFilter(new cgFilterByTrackables(res.getString(R.string.caches_filter_track)));
@@ -1072,7 +1081,7 @@ public class cgeocaches extends AbstractListActivity {
             Log.w(cgSettings.tag, "cgeocaches.onCreateContextMenu: " + e.toString());
         }
 
-        if ((adapterInfo == null || adapterInfo.position < 0) && selectedFilter != null) {
+        if ((adapterInfo == null || adapterInfo.position < 0 || contextMenuShowFilter) && selectedFilter != null) {
             // Context menu opened by selecting an option on the filter submenu
 
             if (selectedFilter.equals(res.getString(R.string.caches_filter_size))) {
