@@ -127,7 +127,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
         if (locusId != NO_LOCUS_ID) {
             pg.type = locusId;
         }
-        locusId = toLocusId(CacheSize.FIND_BY_ID.get(cache.size));
+        locusId = toLocusId(cache.size);
         if (locusId != NO_LOCUS_ID) {
             pg.container = locusId;
         }
