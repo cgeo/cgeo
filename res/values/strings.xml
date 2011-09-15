@@ -548,6 +548,7 @@
   <string name="cache_menu_move_list">Move to other list</string>
   <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
+  <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Saved log</string>
   <string name="cache_status_found">Found</string>
