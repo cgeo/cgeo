@@ -295,7 +295,7 @@
   <string name="init_login_popup_failed">Erreur de connexion.</string>
   <string name="init_login_popup_failed_reason">Erreur de connexion: </string>
   <string name="init_legal">note légale</string>
-  <string name="init_go4cache_connect">connection à Go 4 Cache</string>
+  <string name="init_go4cache_connect">connexion à Go 4 Cache</string>
   <string name="init_twitter_authorize">autorisation de c:geo</string>
   <string name="init_twitter_publish">publication d\'une cache trouvée</string>
   <string name="init_signature">Signature</string>
