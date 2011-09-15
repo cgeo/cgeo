@@ -114,7 +114,7 @@
   <string name="err_login_failed_toast">Désolé, c:geo ne peut pas se connecter. c:geo est en mode hors-ligne. Vérifiez vos paramètres et activez votre connexion Internet.</string>
   <string name="err_unknown">erreur inconnue</string>
   <string name="err_comm">erreur inconnue de communication</string>
-  <string name="err_missing_auth">nom d'utilisateur ou mot de passe manquant.</string>
+  <string name="err_missing_auth">nom d\'utilisateur ou mot de passe manquant.</string>
   <string name="err_wrong">nom d\'utilisateur inconnu ou mauvais mot de passe</string>
   <string name="err_license">l\'utilisateur n\'a pas accepté les termes et les conditions d\'utilisation de Geocaching.com</string>
   <string name="err_store">Désolé, c:geo ne peut pas enregister la cache.</string>
