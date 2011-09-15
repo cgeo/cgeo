@@ -40,9 +40,9 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.ViewParent;
 import android.view.WindowManager;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -60,8 +60,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
+import java.util.Map.Entry;
 
 /**
  * Activity to display all details of a cache like owner, difficulty, description etc.
@@ -499,7 +499,7 @@ public class cgeodetail extends AbstractActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         if (cache != null && cache.coords != null) {
             menu.add(0, 2, 0, res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass); // compass
-            SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
+            SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
             addNavigationMenuItems(subMenu);
         }
 
@@ -517,7 +517,7 @@ public class cgeodetail extends AbstractActivity {
         }
 
         if (cache != null && cache.canOpenInBrowser()) {
-            menu.add(1, 7, 0, res.getString(R.string.cache_menu_browser)).setIcon(android.R.drawable.ic_menu_info_details); // browser
+            menu.add(1, 7, 0, res.getString(R.string.cache_menu_browser)).setIcon(R.drawable.ic_menu_globe); // browser
         }
         menu.add(0, 12, 0, res.getString(R.string.cache_menu_share)).setIcon(android.R.drawable.ic_menu_share); // share cache
 
