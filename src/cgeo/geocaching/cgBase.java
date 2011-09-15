@@ -1566,7 +1566,7 @@ public class cgBase {
                 for (int i = 0; i < images.length(); i++) {
                     final JSONObject image = images.getJSONObject(i);
                     final cgImage logImage = new cgImage();
-                    logImage.url = image.getString("FileName");
+                    logImage.url = "http://img.geocaching.com/cache/log/" + image.getString("FileName");
                     logImage.title = image.getString("Name");
                     if (logDone.logImages == null) {
                         logDone.logImages = new ArrayList<cgImage>();
