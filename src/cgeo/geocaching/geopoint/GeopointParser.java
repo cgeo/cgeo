@@ -88,49 +88,31 @@ public class GeopointParser
     private static double parseHelper(final String text, final LatLon latlon)
     {
 
-        Matcher matcher;
+        final Pattern pattern = LatLon.LAT == latlon ? patternLat : patternLon;
+        final Matcher matcher = pattern.matcher(text);
 
-        if (LatLon.LAT == latlon)
-        {
-            matcher = patternLat.matcher(text);
-        }
-        else
-        {
-            matcher = patternLon.matcher(text);
-        }
+        if (matcher.find()) {
+            final int sign = matcher.group(1).equalsIgnoreCase("S") || matcher.group(1).equalsIgnoreCase("W") ? -1 : 1;
+            final int degree = Integer.parseInt(matcher.group(2));
 
-        if (matcher.find())
-        {
-            int sign = 1;
-            int degree = 0;
             int minutes = 0;
             int seconds = 0;
 
-            if (matcher.group(1).equalsIgnoreCase("S") || matcher.group(1).equalsIgnoreCase("W"))
-            {
-                sign = -1;
-            }
-
-            degree = Integer.parseInt(matcher.group(2));
-
-            if (null != matcher.group(4))
-            {
+            if (null != matcher.group(4)) {
                 minutes = Integer.parseInt(matcher.group(4));
 
-                if (null != matcher.group(6))
-                {
+                if (null != matcher.group(6)) {
                     seconds = Math.round(Float.parseFloat("0." + matcher.group(6)) * 60);
-                }
-                else if (null != matcher.group(7))
-                {
+                } else if (null != matcher.group(7)) {
                     seconds = Integer.parseInt(matcher.group(7));
                 }
             }
 
             return (double) sign * ((double) degree + (double) minutes / 60 + (double) seconds / 3600);
-        }
-        else // Nothing found with "N 52...", try to match string as decimaldegree
-        {
+
+        } else {
+
+            // Nothing found with "N 52...", try to match string as decimaldegree
             try {
                 final String[] items = StringUtils.split(text.trim());
                 if (items.length > 0) {
