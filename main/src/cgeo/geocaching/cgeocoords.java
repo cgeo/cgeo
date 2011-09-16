@@ -277,7 +277,7 @@ public class cgeocoords extends Dialog {
                     e.setText("E");
                     break;
             }
-            calc();
+            calc(true);
         }
     }
 
@@ -357,15 +357,19 @@ public class cgeocoords extends Dialog {
 
     }
 
-    private boolean calc() {
+    private boolean calc(final boolean signalError) {
         if (currentFormat == coordInputFormatEnum.Plain) {
             try {
                 gp = new Geopoint(eLat.getText().toString() + " " + eLon.getText().toString());
             } catch (ParseException e) {
-                context.showToast(context.getResources().getString(R.string.err_parse_lat_lon));
+                if (signalError) {
+                    context.showToast(context.getResources().getString(R.string.err_parse_lat_lon));
+                }
                 return false;
             } catch (MalformedCoordinateException e) {
-                context.showToast(context.getResources().getString(R.string.err_invalid_lat_lon));
+                if (signalError) {
+                    context.showToast(context.getResources().getString(R.string.err_invalid_lat_lon));
+                }
                 return false;
             }
             return true;
@@ -416,7 +420,9 @@ public class cgeocoords extends Dialog {
         try {
             gp = new Geopoint(latitude, longitude);
         } catch (MalformedCoordinateException e) {
-            context.showToast(context.getResources().getString(R.string.err_invalid_lat_lon));
+            if (signalError) {
+                context.showToast(context.getResources().getString(R.string.err_invalid_lat_lon));
+            }
             return false;
         }
         return true;
@@ -427,10 +433,17 @@ public class cgeocoords extends Dialog {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
             // Ignore first call, which comes from onCreate()
-            if (currentFormat != null && !calc()) {
-                // An error occurred, reset spinner to current format
-                spinner.setSelection(currentFormat.ordinal());
-                return;
+            if (currentFormat != null) {
+
+                // Start new format with an acceptable value: either the current one
+                // entered by the user, else our current coordinates, else (0,0).
+                if (!calc(false)) {
+                    if (geo != null && geo.coordsNow != null) {
+                        gp = geo.coordsNow;
+                    } else {
+                        gp = new Geopoint(0, 0);
+                    }
+                }
             }
 
             currentFormat = coordInputFormatEnum.fromInt(pos);
@@ -462,7 +475,7 @@ public class cgeocoords extends Dialog {
 
         @Override
         public void onClick(View v) {
-            if (calc() == false)
+            if (!calc(true))
                 return;
             if (gp != null)
                 cuListener.update(gp);

@@ -13,8 +13,9 @@ import java.util.regex.Pattern;
  */
 public class GeopointParser
 {
-    private static final Pattern patternLat = Pattern.compile("([NS])\\s*(\\d+)°?(\\s*(\\d+)([\\.,](\\d+)|'?\\s*(\\d+)(''|\")?)?)?");
-    private static final Pattern patternLon = Pattern.compile("([WE])\\s*(\\d+)°?(\\s*(\\d+)([\\.,](\\d+)|'?\\s*(\\d+)(''|\")?)?)?");
+    //                                                         ( 1  )    ( 2  )         ( 3  )         ( 4  )       (         5         )
+    private static final Pattern patternLat = Pattern.compile("([NS])\\s*(\\d+)°?(?:\\s*(\\d+)(?:[\\.,](\\d+)|'?\\s*(\\d+(?:[\\.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
+    private static final Pattern patternLon = Pattern.compile("([WE])\\s*(\\d+)°?(?:\\s*(\\d+)(?:[\\.,](\\d+)|'?\\s*(\\d+(?:[\\.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
 
     private enum LatLon
     {
@@ -88,53 +89,37 @@ public class GeopointParser
     private static double parseHelper(final String text, final LatLon latlon)
     {
 
-        Matcher matcher;
+        final Pattern pattern = LatLon.LAT == latlon ? patternLat : patternLon;
+        final Matcher matcher = pattern.matcher(text);
 
-        if (LatLon.LAT == latlon)
-        {
-            matcher = patternLat.matcher(text);
-        }
-        else
-        {
-            matcher = patternLon.matcher(text);
-        }
+        if (matcher.find()) {
+            final int sign = matcher.group(1).equalsIgnoreCase("S") || matcher.group(1).equalsIgnoreCase("W") ? -1 : 1;
+            final int degree = Integer.parseInt(matcher.group(2));
 
-        if (matcher.find())
-        {
-            int sign = 1;
-            int degree = 0;
             int minutes = 0;
-            int seconds = 0;
+            double seconds = 0;
 
-            if (matcher.group(1).equalsIgnoreCase("S") || matcher.group(1).equalsIgnoreCase("W"))
-            {
-                sign = -1;
-            }
+            if (null != matcher.group(3)) {
+                minutes = Integer.parseInt(matcher.group(3));
 
-            degree = Integer.parseInt(matcher.group(2));
-
-            if (null != matcher.group(4))
-            {
-                minutes = Integer.parseInt(matcher.group(4));
-
-                if (null != matcher.group(6))
-                {
-                    seconds = Math.round(Float.parseFloat("0." + matcher.group(6)) * 60);
-                }
-                else if (null != matcher.group(7))
-                {
-                    seconds = Integer.parseInt(matcher.group(7));
+                if (null != matcher.group(4)) {
+                    seconds = Double.parseDouble("0." + matcher.group(4)) * 60;
+                } else if (null != matcher.group(5)) {
+                    seconds = Double.parseDouble(matcher.group(5));
                 }
             }
 
-            return (double) sign * ((double) degree + (double) minutes / 60 + (double) seconds / 3600);
-        }
-        else // Nothing found with "N 52...", try to match string as decimaldegree
-        {
+            return (double) sign * ((double) degree + (double) minutes / 60 + seconds / 3600);
+
+        } else {
+
+            // Nothing found with "N 52...", try to match string as decimaldegree
             try {
                 final String[] items = StringUtils.split(text.trim());
-                final int index = latlon == LatLon.LON ? items.length - 1 : 0;
-                return Double.parseDouble(items[index]);
+                if (items.length > 0) {
+                    final int index = latlon == LatLon.LON ? items.length - 1 : 0;
+                    return Double.parseDouble(items[index]);
+                }
             } catch (NumberFormatException e) {
                 // The right exception will be raised below.
             }
