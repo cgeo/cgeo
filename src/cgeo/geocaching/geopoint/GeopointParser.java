@@ -96,13 +96,13 @@ public class GeopointParser
             final int degree = Integer.parseInt(matcher.group(2));
 
             int minutes = 0;
-            int seconds = 0;
+            double seconds = 0;
 
             if (null != matcher.group(4)) {
                 minutes = Integer.parseInt(matcher.group(4));
 
                 if (null != matcher.group(6)) {
-                    seconds = Math.round(Float.parseFloat("0." + matcher.group(6)) * 60);
+                    seconds = Float.parseFloat("0." + matcher.group(6)) * 60;
                 } else if (null != matcher.group(7)) {
                     seconds = Integer.parseInt(matcher.group(7));
                 }
