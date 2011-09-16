@@ -39,7 +39,7 @@ final public class CookieJar {
 
     static public synchronized void setCookie(final SharedPreferences prefs, final String name, final String value) {
         loadCookiesIfNeeded(prefs);
-        if (!cookies.containsKey(name) || cookies.get(name) != value) {
+        if (!cookies.containsKey(name) || !cookies.get(name).equals(value)) {
             final SharedPreferences.Editor editor = prefs.edit();
             cookies.put(name, value);
             editor.putString(name, value);
