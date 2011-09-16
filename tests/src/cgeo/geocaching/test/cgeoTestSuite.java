@@ -12,7 +12,7 @@ import android.test.suitebuilder.TestSuiteBuilder;
  */
 
 public class cgeoTestSuite extends TestSuite {
-	
+
     public static Test suite() {
         return new TestSuiteBuilder(cgeoTestSuite.class).includeAllPackagesUnderHere().build();
     }
