@@ -13,8 +13,8 @@ import java.util.regex.Pattern;
  */
 public class GeopointParser
 {
-    private static final Pattern patternLat = Pattern.compile("([NS])\\s*(\\d+)°?(\\s*(\\d+)([\\.,](\\d+)|'?\\s*(\\d+)(''|\")?)?)?");
-    private static final Pattern patternLon = Pattern.compile("([WE])\\s*(\\d+)°?(\\s*(\\d+)([\\.,](\\d+)|'?\\s*(\\d+)(''|\")?)?)?");
+    private static final Pattern patternLat = Pattern.compile("([NS])\\s*(\\d+)°?(\\s*(\\d+)([\\.,](\\d+)|'?\\s*(\\d+)(''|\")?)?)?", Pattern.CASE_INSENSITIVE);
+    private static final Pattern patternLon = Pattern.compile("([WE])\\s*(\\d+)°?(\\s*(\\d+)([\\.,](\\d+)|'?\\s*(\\d+)(''|\")?)?)?", Pattern.CASE_INSENSITIVE);
 
     private enum LatLon
     {
