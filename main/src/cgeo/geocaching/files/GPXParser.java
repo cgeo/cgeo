@@ -254,8 +254,8 @@ public abstract class GPXParser extends FileParser {
                 if (StringUtils.isNotBlank(cache.geocode)
                         && cache.coords != null
                         && ((type == null && sym == null)
-                                || (type != null && type.indexOf("geocache") > -1)
-                                || (sym != null && sym.indexOf("geocache") > -1))) {
+                                || StringUtils.contains(type, "geocache")
+                                || StringUtils.contains(sym, "geocache"))) {
                     fixCache(cache);
                     cache.reason = listId;
                     cache.detailed = true;
@@ -351,7 +351,7 @@ public abstract class GPXParser extends FileParser {
             public void end(String body) {
                 body = body.toLowerCase();
                 sym = body;
-                if (body.indexOf("geocache") != -1 && body.indexOf("found") != -1) {
+                if (body.contains("geocache") && body.contains("found")) {
                     cache.found = true;
                 }
             }
