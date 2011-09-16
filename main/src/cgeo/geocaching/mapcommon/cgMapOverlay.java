@@ -26,9 +26,9 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
-import android.graphics.Paint.Style;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Point;
+import android.graphics.Paint.Style;
 import android.location.Location;
 import android.text.Html;
 import android.util.Log;
@@ -102,78 +102,84 @@ public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
     @Override
     public void draw(Canvas canvas, MapViewImpl mapView, boolean shadow) {
 
-        drawInternal(canvas, mapView.getMapProjection());
+        // prevent content changes
+        getOverlayImpl().lock();
+        try {
+            drawInternal(canvas, mapView.getMapProjection());
 
-        super.draw(canvas, mapView, false);
+            super.draw(canvas, mapView, false);
+        } finally {
+            getOverlayImpl().unlock();
+        }
     }
 
     @Override
     public void drawOverlayBitmap(Canvas canvas, Point drawPosition,
             MapProjectionImpl projection, byte drawZoomLevel) {
 
-        drawInternal(canvas, projection);
+        // prevent content changes
+        getOverlayImpl().lock();
+        try {
+            drawInternal(canvas, projection);
 
-        super.drawOverlayBitmap(canvas, drawPosition, projection, drawZoomLevel);
+            super.drawOverlayBitmap(canvas, drawPosition, projection, drawZoomLevel);
+        } finally {
+            getOverlayImpl().unlock();
+        }
     }
 
     private void drawInternal(Canvas canvas, MapProjectionImpl projection) {
 
-        // prevent content changes
-        getOverlayImpl().lock();
-        try {
-            if (displayCircles) {
-                if (blockedCircle == null) {
-                    blockedCircle = new Paint();
-                    blockedCircle.setAntiAlias(true);
-                    blockedCircle.setStrokeWidth(1.0f);
-                    blockedCircle.setARGB(127, 0, 0, 0);
-                    blockedCircle.setPathEffect(new DashPathEffect(new float[] { 3, 2 }, 0));
-                }
-
-                if (setfil == null)
-                    setfil = new PaintFlagsDrawFilter(0, Paint.FILTER_BITMAP_FLAG);
-                if (remfil == null)
-                    remfil = new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG, 0);
-
-                canvas.setDrawFilter(setfil);
-
-                for (CacheOverlayItemImpl item : items) {
-                    final cgCoord itemCoord = item.getCoord();
-                    float[] result = new float[1];
-
-                    Location.distanceBetween(itemCoord.coords.getLatitude(), itemCoord.coords.getLongitude(),
-                            itemCoord.coords.getLatitude(), itemCoord.coords.getLongitude() + 1, result);
-                    final float longitudeLineDistance = result[0];
-
-                    GeoPointImpl itemGeo = mapFactory.getGeoPointBase(itemCoord.coords);
-
-                    final Geopoint leftCoords = new Geopoint(itemCoord.coords.getLatitude(),
-                            itemCoord.coords.getLongitude() - 161 / longitudeLineDistance);
-                    GeoPointImpl leftGeo = mapFactory.getGeoPointBase(leftCoords);
-
-                    projection.toPixels(itemGeo, center);
-                    projection.toPixels(leftGeo, left);
-                    int radius = center.x - left.x;
-
-                    final String type = item.getType();
-                    if (type == null || "multi".equals(type) || "mystery".equals(type) || "virtual".equals(type)) {
-                        blockedCircle.setColor(0x66000000);
-                        blockedCircle.setStyle(Style.STROKE);
-                        canvas.drawCircle(center.x, center.y, radius, blockedCircle);
-                    } else {
-                        blockedCircle.setColor(0x66BB0000);
-                        blockedCircle.setStyle(Style.STROKE);
-                        canvas.drawCircle(center.x, center.y, radius, blockedCircle);
-
-                        blockedCircle.setColor(0x44BB0000);
-                        blockedCircle.setStyle(Style.FILL);
-                        canvas.drawCircle(center.x, center.y, radius, blockedCircle);
-                    }
-                }
-                canvas.setDrawFilter(remfil);
+        if (displayCircles) {
+            if (blockedCircle == null) {
+                blockedCircle = new Paint();
+                blockedCircle.setAntiAlias(true);
+                blockedCircle.setStrokeWidth(1.0f);
+                blockedCircle.setARGB(127, 0, 0, 0);
+                blockedCircle.setPathEffect(new DashPathEffect(new float[] { 3, 2 }, 0));
             }
-        } finally {
-            getOverlayImpl().unlock();
+
+            if (setfil == null)
+                setfil = new PaintFlagsDrawFilter(0, Paint.FILTER_BITMAP_FLAG);
+            if (remfil == null)
+                remfil = new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG, 0);
+
+            canvas.setDrawFilter(setfil);
+
+            for (CacheOverlayItemImpl item : items) {
+                final cgCoord itemCoord = item.getCoord();
+                float[] result = new float[1];
+
+                Location.distanceBetween(itemCoord.coords.getLatitude(), itemCoord.coords.getLongitude(),
+                        itemCoord.coords.getLatitude(), itemCoord.coords.getLongitude() + 1, result);
+                final float longitudeLineDistance = result[0];
+
+                GeoPointImpl itemGeo = mapFactory.getGeoPointBase(itemCoord.coords);
+
+                final Geopoint leftCoords = new Geopoint(itemCoord.coords.getLatitude(),
+                        itemCoord.coords.getLongitude() - 161 / longitudeLineDistance);
+                GeoPointImpl leftGeo = mapFactory.getGeoPointBase(leftCoords);
+
+                projection.toPixels(itemGeo, center);
+                projection.toPixels(leftGeo, left);
+                int radius = center.x - left.x;
+
+                final String type = item.getType();
+                if (type == null || "multi".equals(type) || "mystery".equals(type) || "virtual".equals(type)) {
+                    blockedCircle.setColor(0x66000000);
+                    blockedCircle.setStyle(Style.STROKE);
+                    canvas.drawCircle(center.x, center.y, radius, blockedCircle);
+                } else {
+                    blockedCircle.setColor(0x66BB0000);
+                    blockedCircle.setStyle(Style.STROKE);
+                    canvas.drawCircle(center.x, center.y, radius, blockedCircle);
+
+                    blockedCircle.setColor(0x44BB0000);
+                    blockedCircle.setStyle(Style.FILL);
+                    canvas.drawCircle(center.x, center.y, radius, blockedCircle);
+                }
+            }
+            canvas.setDrawFilter(remfil);
         }
     }
 
