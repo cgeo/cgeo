@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class cgWaypoint {
+public class cgWaypoint implements Comparable<cgWaypoint> {
     public Integer id = 0;
     public String geocode = "geocode";
     public String type = "waypoint";
@@ -93,5 +93,36 @@ public class cgWaypoint {
 
     public boolean isUserDefined() {
         return type != null && type.equalsIgnoreCase("own");
+    }
+
+    private int order() {
+        if (StringUtils.isEmpty(prefix)) {
+            return 0;
+        }
+        // check only the first character. sometimes there are inconsistencies like FI or FN for the FINAL
+        char firstLetter = Character.toUpperCase(prefix.charAt(0));
+        switch (firstLetter) {
+            case 'P':
+                return -100; // parking
+            case 'S': { // stage N
+                try {
+                    Integer stageNumber = Integer.valueOf(prefix.substring(1));
+                    return stageNumber;
+                } catch (NumberFormatException e) {
+                    // nothing
+                }
+                return 0;
+            }
+            case 'F':
+                return 1000; // final
+            case 'O':
+                return 10000; // own
+        }
+        return 0;
+    }
+
+    @Override
+    public int compareTo(cgWaypoint other) {
+        return order() - other.order();
     }
 }
