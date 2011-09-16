@@ -54,7 +54,7 @@ public class cgeowaypointadd extends AbstractActivity {
                 } else {
                     geocode = waypoint.geocode;
                     type = waypoint.type;
-                    prefix = waypoint.prefix;
+                    prefix = waypoint.getPrefix();
                     lookup = waypoint.lookup;
 
                     app.setAction(geocode);
@@ -331,7 +331,7 @@ public class cgeowaypointadd extends AbstractActivity {
             final cgWaypoint waypoint = new cgWaypoint();
             waypoint.type = type;
             waypoint.geocode = geocode;
-            waypoint.prefix = prefix;
+            waypoint.setPrefix(prefix);
             waypoint.lookup = lookup;
             waypoint.name = name;
             waypoint.coords = new Geopoint(coords.get(0), coords.get(1));

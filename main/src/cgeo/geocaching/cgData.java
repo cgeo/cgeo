@@ -1368,7 +1368,7 @@ public class cgData {
                     values.put("geocode", geocode);
                     values.put("updated", timeStamp);
                     values.put("type", oneWaypoint.type);
-                    values.put("prefix", oneWaypoint.prefix);
+                    values.put("prefix", oneWaypoint.getPrefix());
                     values.put("lookup", oneWaypoint.lookup);
                     values.put("name", oneWaypoint.name);
                     values.put("latlon", oneWaypoint.latlon);
@@ -1456,7 +1456,7 @@ public class cgData {
             values.put("geocode", geocode);
             values.put("updated", System.currentTimeMillis());
             values.put("type", waypoint.type);
-            values.put("prefix", waypoint.prefix);
+            values.put("prefix", waypoint.getPrefix());
             values.put("lookup", waypoint.lookup);
             values.put("name", waypoint.name);
             values.put("latlon", waypoint.latlon);
@@ -2166,7 +2166,7 @@ public class cgData {
         waypoint.id = (int) cursor.getInt(cursor.getColumnIndex("_id"));
         waypoint.geocode = (String) cursor.getString(cursor.getColumnIndex("geocode"));
         waypoint.type = (String) cursor.getString(cursor.getColumnIndex("type"));
-        waypoint.prefix = (String) cursor.getString(cursor.getColumnIndex("prefix"));
+        waypoint.setPrefix((String) cursor.getString(cursor.getColumnIndex("prefix")));
         waypoint.lookup = (String) cursor.getString(cursor.getColumnIndex("lookup"));
         waypoint.name = (String) cursor.getString(cursor.getColumnIndex("name"));
         waypoint.latlon = (String) cursor.getString(cursor.getColumnIndex("latlon"));

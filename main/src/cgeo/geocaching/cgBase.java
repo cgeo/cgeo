@@ -1570,7 +1570,7 @@ public class cgBase {
                     try {
                         final Matcher matcherWpPrefix = patternWpPrefixOrLookupOrLatlon.matcher(wp[4]);
                         if (matcherWpPrefix.find() && matcherWpPrefix.groupCount() > 1) {
-                            waypoint.prefix = matcherWpPrefix.group(2).trim();
+                            waypoint.setPrefix(matcherWpPrefix.group(2).trim());
                         }
                     } catch (Exception e) {
                         // failed to parse prefix
