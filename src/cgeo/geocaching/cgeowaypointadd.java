@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.geopoint.GeopointParser;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -22,7 +23,6 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class cgeowaypointadd extends AbstractActivity {
 
@@ -258,22 +258,13 @@ public class cgeowaypointadd extends AbstractActivity {
             }
 
             if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
-                // latitude & longitude
-                Map<String, Object> latParsed = cgBase.parseCoordinate(latText, "lat");
-                Map<String, Object> lonParsed = cgBase.parseCoordinate(lonText, "lon");
-
-                if (latParsed == null || latParsed.get("coordinate") == null || latParsed.get("string") == null) {
-                    showToast(res.getString(R.string.err_parse_lat));
+                try {
+                    latitude = GeopointParser.parseLatitude(latText);
+                    longitude = GeopointParser.parseLongitude(lonText);
+                } catch (GeopointParser.ParseException e) {
+                    showToast(res.getString(e.resource));
                     return;
                 }
-
-                if (lonParsed == null || lonParsed.get("coordinate") == null || lonParsed.get("string") == null) {
-                    showToast(res.getString(R.string.err_parse_lon));
-                    return;
-                }
-
-                latitude = (Double) latParsed.get("coordinate");
-                longitude = (Double) lonParsed.get("coordinate");
             } else {
                 if (geo == null || geo.coordsNow == null) {
                     showToast(res.getString(R.string.err_point_curr_position_unavailable));
