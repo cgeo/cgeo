@@ -1679,7 +1679,7 @@ public class cgBase {
     private void loadLogsFromDetails(final String page, final cgCache cache) {
         final Matcher userTokenMatcher = patternUserToken.matcher(page);
         if (!userTokenMatcher.find()) {
-            Log.e(cgSettings.tag, "cgeoBase.parseCache: unable to extract userToken");
+            Log.e(cgSettings.tag, "cgBase.loadLogsFromDetails: unable to extract userToken");
             return;
         }
 
@@ -1694,14 +1694,14 @@ public class cgBase {
         final cgResponse response = request(false, "www.geocaching.com", "/seek/geocache.logbook", "GET",
                 params, false, false, false);
         if (response.getStatusCode() != 200) {
-            Log.e(cgSettings.tag, "cgeoBase.parseCache: error " + response.getStatusCode() + " when requesting log information");
+            Log.e(cgSettings.tag, "cgBase.loadLogsFromDetails: error " + response.getStatusCode() + " when requesting log information");
             return;
         }
 
         try {
             final JSONObject resp = new JSONObject(response.getData());
             if (!resp.getString("status").equals("success")) {
-                Log.e(cgSettings.tag, "cgeoBase.parseCache: status is " + resp.getString("status"));
+                Log.e(cgSettings.tag, "cgBase.loadLogsFromDetails: status is " + resp.getString("status"));
                 return;
             }
 
@@ -1723,7 +1723,7 @@ public class cgBase {
                 try {
                     logDone.date = parseGcCustomDate(entry.getString("Visited")).getTime();
                 } catch (ParseException e) {
-                    Log.e(cgSettings.tag, "Failed to parse log date.");
+                    Log.e(cgSettings.tag, "cgBase.loadLogsFromDetails: failed to parse log date.");
                 }
 
                 logDone.author = entry.getString("UserName");
@@ -1749,13 +1749,13 @@ public class cgBase {
             }
         } catch (JSONException e) {
             // failed to parse logs
-            Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache logs", e);
+            Log.w(cgSettings.tag, "cgBase.loadLogsFromDetails: Failed to parse cache logs", e);
         }
     }
 
     private static void checkFields(cgCache cache) {
         if (StringUtils.isBlank(cache.geocode)) {
-            Log.w(cgSettings.tag, "geo code not parsed correctly");
+            Log.w(cgSettings.tag, "cgBase.loadLogsFromDetails: geo code not parsed correctly");
         }
         if (StringUtils.isBlank(cache.name)) {
             Log.w(cgSettings.tag, "name not parsed correctly");
