@@ -12,6 +12,7 @@ import cgeo.geocaching.utils.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -1517,80 +1518,7 @@ public class cgBase {
         }
 
         // cache logs
-        try
-        {
-            final Matcher userTokenMatcher = patternUserToken.matcher(page);
-            if (!userTokenMatcher.find()) {
-                Log.e(cgSettings.tag, "cgeoBase.parseCache: unable to extract userToken");
-                throw new RuntimeException();
-            }
-            final String userToken = userTokenMatcher.group(1);
-            final HashMap<String, String> params = new HashMap<String, String>();
-            params.put("tkn", userToken);
-            params.put("idx", "1");
-            params.put("num", "35");
-            params.put("sp", "0");
-            params.put("sf", "0");
-            params.put("decrypt", "1");
-            final cgResponse response = request(false, "www.geocaching.com", "/seek/geocache.logbook", "GET",
-                    params, false, false, false);
-            if (response.getStatusCode() != 200) {
-                Log.e(cgSettings.tag, "cgeoBase.parseCache: error " + response.getStatusCode() + " when requesting log information");
-                throw new RuntimeException();
-            }
-            final JSONObject resp = new JSONObject(response.getData());
-            if (!resp.getString("status").equals("success")) {
-                Log.e(cgSettings.tag, "cgeoBase.parseCache: status is " + resp.getString("status"));
-                throw new RuntimeException();
-            }
-
-            final JSONArray data = resp.getJSONArray("data");
-
-            for (int index = 0; index < data.length(); index++) {
-                final JSONObject entry = data.getJSONObject(index);
-                final cgLog logDone = new cgLog();
-
-                // FIXME: use the "LogType" field instead of the "LogTypeImage" one.
-                final String logIconNameExt = entry.optString("LogTypeImage", ".gif");
-                final String logIconName = logIconNameExt.substring(0, logIconNameExt.length() - 4);
-                if (logTypes.containsKey(logIconName)) {
-                    logDone.type = logTypes.get(logIconName);
-                } else {
-                    logDone.type = logTypes.get("icon_note");
-                }
-
-                try {
-                    logDone.date = parseGcCustomDate(entry.getString("Visited")).getTime();
-                } catch (ParseException e) {
-                    Log.e(cgSettings.tag, "Failed to parse log date.");
-                }
-
-                logDone.author = entry.getString("UserName");
-                logDone.found = entry.getInt("GeocacheFindCount");
-                logDone.log = entry.getString("LogText");
-
-                final JSONArray images = entry.getJSONArray("Images");
-                for (int i = 0; i < images.length(); i++) {
-                    final JSONObject image = images.getJSONObject(i);
-                    final cgImage logImage = new cgImage();
-                    logImage.url = "http://img.geocaching.com/cache/log/" + image.getString("FileName");
-                    logImage.title = image.getString("Name");
-                    if (logDone.logImages == null) {
-                        logDone.logImages = new ArrayList<cgImage>();
-                    }
-                    logDone.logImages.add(logImage);
-                }
-
-                if (null == cache.logs) {
-                    cache.logs = new ArrayList<cgLog>();
-                }
-                cache.logs.add(logDone);
-            }
-        } catch (Exception e)
-        {
-            // failed to parse logs
-            Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache logs", e);
-        }
+        loadLogsFromDetails(page, cache);
 
         int wpBegin = 0;
         int wpEnd = 0;
@@ -1738,6 +1666,91 @@ public class cgBase {
         caches.cacheList.add(cache);
 
         return caches;
+    }
+
+    /**
+     * Load logs from a cache details page.
+     *
+     * @param page
+     *            the text of the details page
+     * @param cache
+     *            the cache object to put the logs in
+     */
+    private void loadLogsFromDetails(final String page, final cgCache cache) {
+        final Matcher userTokenMatcher = patternUserToken.matcher(page);
+        if (!userTokenMatcher.find()) {
+            Log.e(cgSettings.tag, "cgeoBase.parseCache: unable to extract userToken");
+            return;
+        }
+
+        final String userToken = userTokenMatcher.group(1);
+        final HashMap<String, String> params = new HashMap<String, String>();
+        params.put("tkn", userToken);
+        params.put("idx", "1");
+        params.put("num", "35");
+        params.put("sp", "0");
+        params.put("sf", "0");
+        params.put("decrypt", "1");
+        final cgResponse response = request(false, "www.geocaching.com", "/seek/geocache.logbook", "GET",
+                params, false, false, false);
+        if (response.getStatusCode() != 200) {
+            Log.e(cgSettings.tag, "cgeoBase.parseCache: error " + response.getStatusCode() + " when requesting log information");
+            return;
+        }
+
+        try {
+            final JSONObject resp = new JSONObject(response.getData());
+            if (!resp.getString("status").equals("success")) {
+                Log.e(cgSettings.tag, "cgeoBase.parseCache: status is " + resp.getString("status"));
+                return;
+            }
+
+            final JSONArray data = resp.getJSONArray("data");
+
+            for (int index = 0; index < data.length(); index++) {
+                final JSONObject entry = data.getJSONObject(index);
+                final cgLog logDone = new cgLog();
+
+                // FIXME: use the "LogType" field instead of the "LogTypeImage" one.
+                final String logIconNameExt = entry.optString("LogTypeImage", ".gif");
+                final String logIconName = logIconNameExt.substring(0, logIconNameExt.length() - 4);
+                if (logTypes.containsKey(logIconName)) {
+                    logDone.type = logTypes.get(logIconName);
+                } else {
+                    logDone.type = logTypes.get("icon_note");
+                }
+
+                try {
+                    logDone.date = parseGcCustomDate(entry.getString("Visited")).getTime();
+                } catch (ParseException e) {
+                    Log.e(cgSettings.tag, "Failed to parse log date.");
+                }
+
+                logDone.author = entry.getString("UserName");
+                logDone.found = entry.getInt("GeocacheFindCount");
+                logDone.log = entry.getString("LogText");
+
+                final JSONArray images = entry.getJSONArray("Images");
+                for (int i = 0; i < images.length(); i++) {
+                    final JSONObject image = images.getJSONObject(i);
+                    final cgImage logImage = new cgImage();
+                    logImage.url = "http://img.geocaching.com/cache/log/" + image.getString("FileName");
+                    logImage.title = image.getString("Name");
+                    if (logDone.logImages == null) {
+                        logDone.logImages = new ArrayList<cgImage>();
+                    }
+                    logDone.logImages.add(logImage);
+                }
+
+                if (null == cache.logs) {
+                    cache.logs = new ArrayList<cgLog>();
+                }
+                cache.logs.add(logDone);
+            }
+        } catch (JSONException e) {
+            // failed to parse logs
+            Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache logs", e);
+        }
     }
 
     private static void checkFields(cgCache cache) {
