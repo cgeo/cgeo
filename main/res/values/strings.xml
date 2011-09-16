@@ -949,6 +949,9 @@
 
   <!-- changelog -->
   <string name="changelog">\n
+    <b>16.09.2011</b>\n
+    · fix: many small fixed due to GC.com changes\n
+    \n\n
     <b>15.09.2011</b>\n
     · new: sort by state, sort by find count\n
     · new: experimental support for .gpx from opencaching.com\n
