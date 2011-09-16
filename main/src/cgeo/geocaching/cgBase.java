@@ -527,7 +527,7 @@ public class cgBase {
 
                 return 1; // logged in
             } else {
-                if (loginData.indexOf("Your username/password combination does not match.") != -1) {
+                if (loginData.contains("Your username/password combination does not match.")) {
                     Log.i(cgSettings.tag, "Failed to log in Geocaching.com as " + login.get("username") + " because of wrong username/password");
 
                     return -6; // wrong login
@@ -648,7 +648,7 @@ public class cgBase {
             }
         }
 
-        if (page.indexOf("SearchResultsTable") < 0) {
+        if (!page.contains("SearchResultsTable")) {
             // there are no results. aborting here avoids a wrong error log in the next parsing step
             return caches;
         }
@@ -678,7 +678,7 @@ public class cgBase {
             String row = rows[z];
 
             // check for cache type presence
-            if (row.indexOf("images/wpttypes") == -1) {
+            if (!row.contains("images/wpttypes")) {
                 continue;
             }
 
@@ -804,25 +804,13 @@ public class cgBase {
             }
 
             // premium cache
-            if (row.indexOf("/images/small_profile.gif") != -1) {
-                cache.members = true;
-            } else {
-                cache.members = false;
-            }
+            cache.members = row.contains("/images/small_profile.gif");
 
             // found it
-            if (row.indexOf("/images/icons/icon_smile") != -1) {
-                cache.found = true;
-            } else {
-                cache.found = false;
-            }
+            cache.found = row.contains("/images/icons/icon_smile");
 
             // own it
-            if (row.indexOf("/images/silk/star.png") != -1) {
-                cache.own = true;
-            } else {
-                cache.own = false;
-            }
+            cache.own = row.contains("/images/silk/star.png");
 
             // id
             try {
@@ -920,7 +908,7 @@ public class cgBase {
                 final String coordinates = request(false, host, path, "POST", params.toString(), 0, true).getData();
 
                 if (StringUtils.isNotBlank(coordinates)) {
-                    if (coordinates.indexOf("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com") > -1) {
+                    if (coordinates.contains("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
                         Log.i(cgSettings.tag, "User has not agreed to the license agreement. Can\'t download .loc file.");
 
                         caches.error = errorRetrieve.get(-7);
@@ -1064,38 +1052,26 @@ public class cgBase {
         final cgCacheWrap caches = new cgCacheWrap();
         final cgCache cache = new cgCache();
 
-        if (page.indexOf("Cache is Unpublished") > -1) {
+        if (page.contains("Cache is Unpublished")) {
             caches.error = "cache was unpublished";
             return caches;
         }
 
-        if (page.indexOf("Sorry, the owner of this listing has made it viewable to Premium Members only.") != -1) {
+        if (page.contains("Sorry, the owner of this listing has made it viewable to Premium Members only.")) {
             caches.error = "requested cache is for premium members only";
             return caches;
         }
 
-        if (page.indexOf("has chosen to make this cache listing visible to Premium Members only.") != -1) {
+        if (page.contains("has chosen to make this cache listing visible to Premium Members only.")) {
             caches.error = "requested cache is for premium members only";
             return caches;
         }
 
-        if (page.indexOf("<li>This cache is temporarily unavailable.") != -1) {
-            cache.disabled = true;
-        } else {
-            cache.disabled = false;
-        }
+        cache.disabled = page.contains("<li>This cache is temporarily unavailable.");
 
-        if (page.indexOf("<li>This cache has been archived,") != -1) {
-            cache.archived = true;
-        } else {
-            cache.archived = false;
-        }
+        cache.archived = page.contains("<li>This cache has been archived,");
 
-        if (page.indexOf("<p class=\"Warning\">This is a Premium Member Only cache.</p>") != -1) {
-            cache.members = true;
-        } else {
-            cache.members = false;
-        }
+        cache.members = page.contains("<p class=\"Warning\">This is a Premium Member Only cache.</p>");
 
         cache.reason = reason;
 
@@ -1533,7 +1509,7 @@ public class cgBase {
                 wpList = wpList.substring(0, wpEnd);
             }
 
-            if (wpList.indexOf("No additional waypoints to display.") == -1) {
+            if (!wpList.contains("No additional waypoints to display.")) {
                 wpEnd = wpList.indexOf("</table>");
                 wpList = wpList.substring(0, wpEnd);
 
@@ -2514,7 +2490,7 @@ public class cgBase {
         final String method = "POST";
 
         int dash = -1;
-        if (url.indexOf("http://") > -1) {
+        if (url.startsWith("http://")) {
             url = url.substring(7);
         }
 

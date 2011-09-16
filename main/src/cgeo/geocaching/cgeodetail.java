@@ -889,7 +889,7 @@ public class cgeodetail extends AbstractActivity {
                         inventoryString.append('\n');
                     }
                     // avoid HTML parsing where possible
-                    if (inventoryItem.name.indexOf('<') >= 0 || inventoryItem.name.indexOf('&') >= 0) {
+                    if (containsHtml(inventoryItem.name)) {
                         inventoryString.append(Html.fromHtml(inventoryItem.name).toString());
                     }
                     else {
@@ -1023,7 +1023,7 @@ public class cgeodetail extends AbstractActivity {
                         nameView.setText(cgBase.formatCoords(wpt.coords, true));
                     } else {
                         // avoid HTML parsing
-                        if (wpt.name.indexOf('<') >= 0 || wpt.name.indexOf('&') >= 0) {
+                        if (containsHtml(wpt.name)) {
                             nameView.setText(Html.fromHtml(wpt.name.trim()), TextView.BufferType.SPANNABLE);
                         }
                         else {
@@ -1033,7 +1033,7 @@ public class cgeodetail extends AbstractActivity {
                     wpt.setIcon(res, base, nameView);
 
                     // avoid HTML parsing
-                    if (wpt.note.indexOf('<') >= 0 || wpt.note.indexOf('&') >= 0) {
+                    if (containsHtml(wpt.note)) {
                         ((TextView) waypointView.findViewById(R.id.note)).setText(Html.fromHtml(wpt.note.trim()), TextView.BufferType.SPANNABLE);
                     }
                     else {
@@ -1085,6 +1085,10 @@ public class cgeodetail extends AbstractActivity {
 
         if (geo != null)
             geoUpdate.updateLoc(geo);
+    }
+
+    static private boolean containsHtml(final String str) {
+        return str.indexOf('<') != -1 || str.indexOf('&') != -1;
     }
 
     private void parseLongDescription() {
@@ -1182,7 +1186,7 @@ public class cgeodetail extends AbstractActivity {
                     ((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(4)); // note if type is unknown
                 }
                 // avoid parsing HTML if not necessary
-                if (log.author.indexOf('<') >= 0 || log.author.indexOf('&') >= 0) {
+                if (containsHtml(log.author)) {
                     ((TextView) rowView.findViewById(R.id.author)).setText(Html.fromHtml(log.author), TextView.BufferType.SPANNABLE);
                 }
                 else {
@@ -1199,7 +1203,7 @@ public class cgeodetail extends AbstractActivity {
                     ((TextView) rowView.findViewById(R.id.count)).setText(log.found + " " + res.getString(R.string.cache_count_more));
                 }
                 // avoid parsing HTML if not necessary
-                if (log.log.indexOf('<') >= 0 || log.log.indexOf('&') >= 0) {
+                if (containsHtml(log.log)) {
                     ((TextView) rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log, new cgHtmlImg(this, null, false, cache.reason, false), null), TextView.BufferType.SPANNABLE);
                 }
                 else {
