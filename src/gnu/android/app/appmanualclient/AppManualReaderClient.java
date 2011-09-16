@@ -19,25 +19,25 @@ import android.util.Log;
  * package. This package then provides the mechanism to open suitable installed
  * manuals. It does not include any manuals itself.
  * <p>
- * 
+ *
  * (c) 2011 Geocrasher (geocrasher@gmx.eu)
  * <p>
- * 
+ *
  * This program is free software: you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
  * Software Foundation, either version 3 of the License, or (at your option) any
  * later version.
  * <p>
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  * <p>
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see http://www.gnu.org/licenses/.
- * 
+ *
  * @author Geocrasher
  */
 public class AppManualReaderClient {
@@ -53,21 +53,21 @@ public class AppManualReaderClient {
 
 	/**
 	 * Standardized topic for opening a manual at its beginning.
-	 * 
+	 *
 	 * @see #openManual(String, String, Context)
 	 * @see #openManual(String, String, Context, String)
 	 */
 	public static final String TOPIC_HOME = "andtw-home";
 	/**
 	 * Standardized topic for opening the index of a manual.
-	 * 
+	 *
 	 * @see #openManual(String, String, Context)
 	 * @see #openManual(String, String, Context, String)
 	 */
 	public static final String TOPIC_INDEX = "andtw-index";
 	/**
 	 * Standardized topic for opening a manual's "about" topic.
-	 * 
+	 *
 	 * @see #openManual(String, String, Context)
 	 * @see #openManual(String, String, Context, String)
 	 */
@@ -77,7 +77,7 @@ public class AppManualReaderClient {
 	 * Convenience function to open a manual at a specific topic. See
 	 * {@link #openManual(String, String, Context, String)} for a detailed
 	 * description.
-	 * 
+	 *
 	 * @param manualIdentifier
 	 *            the identifier of the manual to open. This identifier must
 	 *            uniquely identify the manual as such, independent of the
@@ -96,11 +96,11 @@ public class AppManualReaderClient {
 	 *            be opened. In particular, this context is required to derive
 	 *            the proper current locale configuration in order to open
 	 *            appropriate localized manuals, if installed.
-	 * 
+	 *
 	 * @exception ActivityNotFoundException
 	 *                there is no suitable manual installed and all combinations
 	 *                of locale scope failed to activate any manual.
-	 * 
+	 *
 	 * @see #openManual(String, String, Context, String, Boolean)
 	 */
 	public static void openManual(String manualIdentifier, String topic,
@@ -112,7 +112,7 @@ public class AppManualReaderClient {
 	 * Convenience function to open a manual at a specific topic. See
 	 * {@link #openManual(String, String, Context, String)} for a detailed
 	 * description.
-	 * 
+	 *
 	 * @param manualIdentifier
 	 *            the identifier of the manual to open. This identifier must
 	 *            uniquely identify the manual as such, independent of the
@@ -131,14 +131,14 @@ public class AppManualReaderClient {
 	 *            be opened. In particular, this context is required to derive
 	 *            the proper current locale configuration in order to open
 	 *            appropriate localized manuals, if installed.
-	 * 
+	 *
 	 * @exception ActivityNotFoundException
 	 *                there is no suitable manual installed and all combinations
 	 *                of locale scope failed to activate any manual.
 	 * @param fallbackUri
 	 *            either <code>null</code> or a fallback URI to be used in case
 	 *            the user has not installed any suitable manual.
-	 * 
+	 *
 	 * @see #openManual(String, String, Context, String, Boolean)
 	 */
 	public static void openManual(String manualIdentifier, String topic,
@@ -151,7 +151,7 @@ public class AppManualReaderClient {
 	 * Opens a manual at a specific topic. At least it tries to open a manual.
 	 * As manuals are (usually) installed separately and we use late binding in
 	 * form of implicit intents, a lot of things can go wrong.
-	 * 
+	 *
 	 * We use late binding and the intent architecture in particular as follows:
 	 * first, we use our own URI scheme called "appmanual". Second, we use the
 	 * host field as a unique manual identifier (such as "c-geo" for the app
@@ -160,10 +160,10 @@ public class AppManualReaderClient {
 	 * element in form of (in this precedence) "/lang_country_variant",
 	 * "/lang__variant", "/lang_country", "/lang", or "/". Fourth, the topic to
 	 * open is encoded as the a fragment "#topic=mytopic".
-	 * 
+	 *
 	 * In order to support localization, manuals can register themselves with
 	 * different URIs.
-	 * 
+	 *
 	 * @param manualIdentifier
 	 *            the identifier of the manual to open. This identifier must
 	 *            uniquely identify the manual as such, independent of the
@@ -193,7 +193,7 @@ public class AppManualReaderClient {
 	 *            don't know what this means, then you probably don't need this
 	 *            very special capability and should specify <code>false</code>
 	 *            for this parameter.
-	 * 
+	 *
 	 * @exception ActivityNotFoundException
 	 *                there is no suitable manual installed and all combinations
 	 *                of locale scope failed to activate any manual and no

@@ -1,10 +1,10 @@
 package cgeo.geocaching.geopoint;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgSettings;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public final class DistanceParser {
 
@@ -14,10 +14,12 @@ public final class DistanceParser {
      * Parse a distance string composed by a number and an optional suffix
      * (such as "1.2km").
      *
-     * @param distanceText the string to analyze
+     * @param distanceText
+     *            the string to analyze
      * @return the distance in kilometers
      *
-     * @throws NumberFormatException if the given number is invalid
+     * @throws NumberFormatException
+     *             if the given number is invalid
      */
     public static float parseDistance(String distanceText, final int defaultUnit) {
         final Matcher matcher = pattern.matcher(distanceText);

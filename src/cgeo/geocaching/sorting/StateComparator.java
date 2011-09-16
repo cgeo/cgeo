@@ -7,26 +7,26 @@ import cgeo.geocaching.cgCache;
  *
  */
 public class StateComparator extends AbstractCacheComparator implements
-		CacheComparator {
+        CacheComparator {
 
-	@Override
-	protected boolean canCompare(final cgCache cache1, final cgCache cache2) {
-		return true;
-	}
+    @Override
+    protected boolean canCompare(final cgCache cache1, final cgCache cache2) {
+        return true;
+    }
 
-	@Override
-	protected int compareCaches(final cgCache cache1, final cgCache cache2) {
-		return getState(cache1) - getState(cache2);
-	}
+    @Override
+    protected int compareCaches(final cgCache cache1, final cgCache cache2) {
+        return getState(cache1) - getState(cache2);
+    }
 
-	private static int getState(final cgCache cache) {
-		if (cache.disabled) {
-			return 1;
-		}
-		if (cache.archived) {
-			return 2;
-		}
-		return 0;
-	}
+    private static int getState(final cgCache cache) {
+        if (cache.disabled) {
+            return 1;
+        }
+        if (cache.archived) {
+            return 2;
+        }
+        return 0;
+    }
 
 }

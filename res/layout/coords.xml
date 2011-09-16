@@ -1,56 +1,95 @@
-<LinearLayout android:id="@+id/linearLayout1"
-	android:layout_width="fill_parent" android:layout_height="wrap_content"
-	xmlns:android="http://schemas.android.com/apk/res/android"
-	android:orientation="vertical" android:background="?background_color">
-	<Spinner android:id="@+id/spinnerCoordinateFormats"
-		android:layout_width="fill_parent" android:layout_height="wrap_content"></Spinner>
-	<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:id="@+id/coordTable" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:stretchColumns="0,1,3,5"
-		android:layout_weight="1">
-		<TableRow android:id="@+id/tableRow1">
-			<Button style="@style/button" android:text="N" android:id="@+id/ButtonLat"></Button>
-			<EditText style="@style/edittext" android:id="@+id/EditTextLatDeg"
-				android:gravity="right" android:inputType="number"
-				android:selectAllOnFocus="true"></EditText>
-			<TextView android:text="°" android:id="@+id/LatSeparator1"></TextView>
-			<EditText style="@style/edittext" android:id="@+id/EditTextLatMin"
-				android:gravity="right" android:inputType="number"
-				android:selectAllOnFocus="true"></EditText>
-			<TextView android:text="," android:id="@+id/LatSeparator2"></TextView>
-			<EditText style="@style/edittext" android:id="@+id/EditTextLatSec"
-				android:inputType="number" android:selectAllOnFocus="true"></EditText>
-			<TextView android:text="," android:id="@+id/LatSeparator3"></TextView>
-			<EditText style="@style/edittext" android:id="@+id/EditTextLatSecFrac"
-				android:inputType="number" android:selectAllOnFocus="true"></EditText>
-		</TableRow>
-		<TableRow android:id="@+id/tableRow2">
-			<Button style="@style/button" android:text="E" android:id="@+id/ButtonLon"></Button>
-			<EditText style="@style/edittext" android:id="@+id/EditTextLonDeg"
-				android:gravity="right" android:inputType="number"
-				android:selectAllOnFocus="true"></EditText>
-			<TextView android:text="°" android:id="@+id/LonSeparator1"></TextView>
-			<EditText style="@style/edittext" android:id="@+id/EditTextLonMin"
-				android:gravity="right" android:inputType="number"
-				android:selectAllOnFocus="true"></EditText>
-			<TextView android:text="," android:id="@+id/LonSeparator2"></TextView>
-			<EditText style="@style/edittext" android:id="@+id/EditTextLonSec"
-				android:inputType="number" android:selectAllOnFocus="true"></EditText>
-			<TextView android:text="," android:id="@+id/LonSeparator3"></TextView>
-			<EditText style="@style/edittext" android:id="@+id/EditTextLonSecFrac"
-				android:inputType="number" android:selectAllOnFocus="true"></EditText>
-		</TableRow>
-	</TableLayout>
-	<EditText style="@style/edittext" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:id="@+id/latitude"
-		android:hint="latitude" />
-	<EditText style="@style/edittext" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:id="@+id/longitude"
-		android:hint="longitude" />
-	<Button style="@style/button" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:id="@+id/current"
-		android:text="@string/waypoint_my_coordinates" />
-	<Button style="@style/button" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:id="@+id/done"
-		android:text="@string/waypoint_save" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="?background_color">
+    <Spinner android:id="@+id/spinnerCoordinateFormats"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/coordTable"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="0,1,3,5"
+            android:layout_weight="1">
+        <TableRow android:id="@+id/tableRow1">
+            <Button android:id="@+id/ButtonLat"
+                    style="@style/button"
+                    android:text="N" />
+            <EditText style="@style/edittext"
+                    android:id="@+id/EditTextLatDeg"
+                    android:gravity="right"
+                    android:inputType="number"
+                    android:selectAllOnFocus="true" />
+            <TextView android:id="@+id/LatSeparator1"
+                    android:text="°" />
+            <EditText android:id="@+id/EditTextLatMin"
+                    style="@style/edittext"
+                    android:gravity="right"
+                    android:inputType="number"
+                    android:selectAllOnFocus="true" />
+            <TextView android:id="@+id/LatSeparator2"
+                    android:text="," />
+            <EditText android:id="@+id/EditTextLatSec"
+                    style="@style/edittext"
+                    android:inputType="number"
+                    android:selectAllOnFocus="true" />
+            <TextView android:id="@+id/LatSeparator3"
+                    android:text="," />
+            <EditText android:id="@+id/EditTextLatSecFrac"
+                    style="@style/edittext"
+                    android:inputType="number"
+                    android:selectAllOnFocus="true" />
+        </TableRow>
+        <TableRow android:id="@+id/tableRow2">
+            <Button android:id="@+id/ButtonLon"
+                    style="@style/button"
+                    android:text="E" />
+            <EditText android:id="@+id/EditTextLonDeg"
+                    style="@style/edittext"
+                    android:gravity="right"
+                    android:inputType="number"
+                    android:selectAllOnFocus="true" />
+            <TextView android:id="@+id/LonSeparator1"
+                    android:text="°" />
+            <EditText android:id="@+id/EditTextLonMin"
+                    style="@style/edittext"
+                    android:gravity="right"
+                    android:inputType="number"
+                    android:selectAllOnFocus="true" />
+            <TextView android:id="@+id/LonSeparator2"
+                    android:text="," />
+            <EditText android:id="@+id/EditTextLonSec"
+                    style="@style/edittext"
+                    android:inputType="number"
+                    android:selectAllOnFocus="true" />
+            <TextView android:id="@+id/LonSeparator3"
+                    android:text="," />
+            <EditText android:id="@+id/EditTextLonSecFrac"
+                    style="@style/edittext"
+                    android:inputType="number"
+                    android:selectAllOnFocus="true" />
+        </TableRow>
+    </TableLayout>
+    <EditText style="@style/edittext"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/latitude"
+            android:hint="latitude" />
+    <EditText style="@style/edittext"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/longitude"
+            android:hint="longitude" />
+    <Button style="@style/button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/current"
+            android:text="@string/waypoint_my_coordinates" />
+    <Button style="@style/button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/done"
+            android:text="@string/waypoint_done" />
 </LinearLayout>

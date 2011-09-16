@@ -10,33 +10,34 @@ import android.view.View;
 /**
  * Defines the common functions of the provider-specific
  * MapActivity implementations.
+ *
  * @author rsudev
  *
  */
 public interface ActivityImpl {
 
-	Resources getResources();
+    Resources getResources();
 
-	Activity getActivity();
+    Activity getActivity();
 
-	void superOnCreate(Bundle savedInstanceState);
+    void superOnCreate(Bundle savedInstanceState);
 
-	void superOnResume();
+    void superOnResume();
 
-	void superOnDestroy();
+    void superOnDestroy();
 
-	void superOnStop();
+    void superOnStop();
 
-	void superOnPause();
+    void superOnPause();
 
-	boolean superOnCreateOptionsMenu(Menu menu);
+    boolean superOnCreateOptionsMenu(Menu menu);
 
-	boolean superOnPrepareOptionsMenu(Menu menu);
+    boolean superOnPrepareOptionsMenu(Menu menu);
 
-	boolean superOnOptionsItemSelected(MenuItem item);
-	
-	public abstract void goHome(View view);
+    boolean superOnOptionsItemSelected(MenuItem item);
 
-	public abstract void goManual(View view);
+    public abstract void goHome(View view);
+
+    public abstract void goManual(View view);
 
 }

@@ -1,7 +1,20 @@
 package cgeo.geocaching.mapcommon;
 
-import java.util.ArrayList;
-import java.util.List;
+import cgeo.geocaching.cgBase;
+import cgeo.geocaching.cgCoord;
+import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.cgeodetail;
+import cgeo.geocaching.cgeonavigate;
+import cgeo.geocaching.cgeopopup;
+import cgeo.geocaching.cgeowaypoint;
+import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.mapinterfaces.CacheOverlayItemImpl;
+import cgeo.geocaching.mapinterfaces.GeoPointImpl;
+import cgeo.geocaching.mapinterfaces.ItemizedOverlayImpl;
+import cgeo.geocaching.mapinterfaces.MapFactory;
+import cgeo.geocaching.mapinterfaces.MapProjectionImpl;
+import cgeo.geocaching.mapinterfaces.MapViewImpl;
+import cgeo.geocaching.mapinterfaces.OverlayBase;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -19,338 +32,328 @@ import android.graphics.Point;
 import android.location.Location;
 import android.text.Html;
 import android.util.Log;
-import cgeo.geocaching.cgBase;
-import cgeo.geocaching.cgCoord;
-import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.cgeodetail;
-import cgeo.geocaching.cgeonavigate;
-import cgeo.geocaching.cgeopopup;
-import cgeo.geocaching.cgeowaypoint;
-import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.mapinterfaces.CacheOverlayItemImpl;
-import cgeo.geocaching.mapinterfaces.GeoPointImpl;
-import cgeo.geocaching.mapinterfaces.ItemizedOverlayImpl;
-import cgeo.geocaching.mapinterfaces.MapFactory;
-import cgeo.geocaching.mapinterfaces.MapProjectionImpl;
-import cgeo.geocaching.mapinterfaces.MapViewImpl;
-import cgeo.geocaching.mapinterfaces.OverlayBase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class cgMapOverlay extends ItemizedOverlayBase implements OverlayBase {
 
-	private List<CacheOverlayItemImpl> items = new ArrayList<CacheOverlayItemImpl>();
-	private Context context = null;
-	private Boolean fromDetail = false;
-	private boolean displayCircles = false;
-	private ProgressDialog waitDialog = null;
-	private Point center = new Point();
-	private Point left = new Point();
-	private Paint blockedCircle = null;
-	private PaintFlagsDrawFilter setfil = null;
-	private PaintFlagsDrawFilter remfil = null;
-	private cgSettings settings;
-	private MapFactory mapFactory = null;
+    private List<CacheOverlayItemImpl> items = new ArrayList<CacheOverlayItemImpl>();
+    private Context context = null;
+    private Boolean fromDetail = false;
+    private boolean displayCircles = false;
+    private ProgressDialog waitDialog = null;
+    private Point center = new Point();
+    private Point left = new Point();
+    private Paint blockedCircle = null;
+    private PaintFlagsDrawFilter setfil = null;
+    private PaintFlagsDrawFilter remfil = null;
+    private cgSettings settings;
+    private MapFactory mapFactory = null;
 
-	public cgMapOverlay(cgSettings settingsIn, ItemizedOverlayImpl ovlImpl, Context contextIn, Boolean fromDetailIn) {
-		super(ovlImpl);
+    public cgMapOverlay(cgSettings settingsIn, ItemizedOverlayImpl ovlImpl, Context contextIn, Boolean fromDetailIn) {
+        super(ovlImpl);
 
-		populate();
-		settings = settingsIn;
+        populate();
+        settings = settingsIn;
 
-		context = contextIn;
-		fromDetail = fromDetailIn;
-		
-		mapFactory = settings.getMapFactory();
-	}
-	
-	public void updateItems(CacheOverlayItemImpl item) {
-		List<CacheOverlayItemImpl> itemsPre = new ArrayList<CacheOverlayItemImpl>();
-		itemsPre.add(item);
+        context = contextIn;
+        fromDetail = fromDetailIn;
 
-		updateItems(itemsPre);
-	}
+        mapFactory = settings.getMapFactory();
+    }
 
-	public void updateItems(List<CacheOverlayItemImpl> itemsPre) {
-		if (itemsPre == null) {
-			return;
-		}
+    public void updateItems(CacheOverlayItemImpl item) {
+        List<CacheOverlayItemImpl> itemsPre = new ArrayList<CacheOverlayItemImpl>();
+        itemsPre.add(item);
 
-		for (CacheOverlayItemImpl item : itemsPre) {
-			item.setMarker(boundCenterBottom(item.getMarker(0)));
-		}
+        updateItems(itemsPre);
+    }
 
-		// ensure no interference between the draw and content changing routines
-		getOverlayImpl().lock();
-		try {		
-			items = new ArrayList<CacheOverlayItemImpl>(itemsPre);
-	
-			setLastFocusedItemIndex(-1); // to reset tap during data change
-			populate();
-		} finally {
-			getOverlayImpl().unlock();
-		}
-	}
+    public void updateItems(List<CacheOverlayItemImpl> itemsPre) {
+        if (itemsPre == null) {
+            return;
+        }
 
-	public boolean getCircles() {
-		return displayCircles;
-	}
+        for (CacheOverlayItemImpl item : itemsPre) {
+            item.setMarker(boundCenterBottom(item.getMarker(0)));
+        }
 
-	public void switchCircles() {
-		displayCircles = !displayCircles;
-	}
+        // ensure no interference between the draw and content changing routines
+        getOverlayImpl().lock();
+        try {
+            items = new ArrayList<CacheOverlayItemImpl>(itemsPre);
 
-	@Override
-	public void draw(Canvas canvas, MapViewImpl mapView, boolean shadow) {
+            setLastFocusedItemIndex(-1); // to reset tap during data change
+            populate();
+        } finally {
+            getOverlayImpl().unlock();
+        }
+    }
 
-		drawInternal(canvas, mapView.getMapProjection());
+    public boolean getCircles() {
+        return displayCircles;
+    }
 
-		super.draw(canvas, mapView, false);
-	}
+    public void switchCircles() {
+        displayCircles = !displayCircles;
+    }
 
-	@Override
-	public void drawOverlayBitmap(Canvas canvas, Point drawPosition,
-			MapProjectionImpl projection, byte drawZoomLevel) {
+    @Override
+    public void draw(Canvas canvas, MapViewImpl mapView, boolean shadow) {
 
-		drawInternal(canvas, projection);
+        drawInternal(canvas, mapView.getMapProjection());
 
-		super.drawOverlayBitmap(canvas, drawPosition, projection, drawZoomLevel);
-	}
+        super.draw(canvas, mapView, false);
+    }
 
-	private void drawInternal(Canvas canvas, MapProjectionImpl projection) {
+    @Override
+    public void drawOverlayBitmap(Canvas canvas, Point drawPosition,
+            MapProjectionImpl projection, byte drawZoomLevel) {
 
-		// prevent content changes
-		getOverlayImpl().lock();
-		try {
-			if (displayCircles) {
-				if (blockedCircle == null) {
-					blockedCircle = new Paint();
-					blockedCircle.setAntiAlias(true);
-					blockedCircle.setStrokeWidth(1.0f);
-					blockedCircle.setARGB(127, 0, 0, 0);
-					blockedCircle.setPathEffect(new DashPathEffect(new float[] {3,2}, 0));
-				}
-	
-				if (setfil == null) setfil = new PaintFlagsDrawFilter(0, Paint.FILTER_BITMAP_FLAG);
-				if (remfil == null) remfil = new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG, 0);
-	
-				canvas.setDrawFilter(setfil);
-	
-				for (CacheOverlayItemImpl item : items) {
-					final cgCoord itemCoord = item.getCoord();
-					float[] result = new float[1];
-	
-					Location.distanceBetween(itemCoord.coords.getLatitude(), itemCoord.coords.getLongitude(),
-											 itemCoord.coords.getLatitude(), itemCoord.coords.getLongitude() + 1, result);
-					final float longitudeLineDistance = result[0];
-	
-					GeoPointImpl itemGeo = mapFactory.getGeoPointBase(itemCoord.coords);
+        drawInternal(canvas, projection);
 
-					final Geopoint leftCoords = new Geopoint(itemCoord.coords.getLatitude(),
-															 itemCoord.coords.getLongitude() - 161 / longitudeLineDistance);
-					GeoPointImpl leftGeo = mapFactory.getGeoPointBase(leftCoords);
-	
-					projection.toPixels(itemGeo, center);
-					projection.toPixels(leftGeo, left);
-					int radius = center.x - left.x;
-	
-					final String type = item.getType();
-					if (type == null || "multi".equals(type) || "mystery".equals(type) || "virtual".equals(type)) {
-						blockedCircle.setColor(0x66000000);
-						blockedCircle.setStyle(Style.STROKE);
-						canvas.drawCircle(center.x, center.y, radius, blockedCircle);
-					} else {
-						blockedCircle.setColor(0x66BB0000);
-						blockedCircle.setStyle(Style.STROKE);
-						canvas.drawCircle(center.x, center.y, radius, blockedCircle);
-	
-						blockedCircle.setColor(0x44BB0000);
-						blockedCircle.setStyle(Style.FILL);
-						canvas.drawCircle(center.x, center.y, radius, blockedCircle);
-					}
-				}	
-				canvas.setDrawFilter(remfil);
-			}
-		} finally {
-			getOverlayImpl().unlock();
-		}
-	}
+        super.drawOverlayBitmap(canvas, drawPosition, projection, drawZoomLevel);
+    }
 
-	@Override
-	public boolean onTap(int index) {
+    private void drawInternal(Canvas canvas, MapProjectionImpl projection) {
 
-		try {
-			if (items.size() <= index) {
-				return false;
-			}
+        // prevent content changes
+        getOverlayImpl().lock();
+        try {
+            if (displayCircles) {
+                if (blockedCircle == null) {
+                    blockedCircle = new Paint();
+                    blockedCircle.setAntiAlias(true);
+                    blockedCircle.setStrokeWidth(1.0f);
+                    blockedCircle.setARGB(127, 0, 0, 0);
+                    blockedCircle.setPathEffect(new DashPathEffect(new float[] { 3, 2 }, 0));
+                }
 
-			if (waitDialog == null) {
-				waitDialog = new ProgressDialog(context);
-				waitDialog.setMessage("loading details...");
-				waitDialog.setCancelable(false);
-			}
-			waitDialog.show();
+                if (setfil == null)
+                    setfil = new PaintFlagsDrawFilter(0, Paint.FILTER_BITMAP_FLAG);
+                if (remfil == null)
+                    remfil = new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG, 0);
 
-			CacheOverlayItemImpl item = null;
-			
-			// prevent concurrent changes
-			getOverlayImpl().lock();
-			try {				
-				 if (index < items.size()) {
-					 item = items.get(index);
-				 }
-			} finally {
-				getOverlayImpl().unlock();
-			}
-			
-			if (item == null) {
-				return false;
-			}
-			
-			cgCoord coordinate = item.getCoord();
+                canvas.setDrawFilter(setfil);
 
-			if (StringUtils.isNotBlank(coordinate.type) && coordinate.type.equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.geocode)) {
-				Intent popupIntent = new Intent(context, cgeopopup.class);
+                for (CacheOverlayItemImpl item : items) {
+                    final cgCoord itemCoord = item.getCoord();
+                    float[] result = new float[1];
 
-				popupIntent.putExtra("fromdetail", fromDetail);
-				popupIntent.putExtra("geocode", coordinate.geocode);
+                    Location.distanceBetween(itemCoord.coords.getLatitude(), itemCoord.coords.getLongitude(),
+                            itemCoord.coords.getLatitude(), itemCoord.coords.getLongitude() + 1, result);
+                    final float longitudeLineDistance = result[0];
 
-				context.startActivity(popupIntent);
-			} else if (coordinate.type != null && coordinate.type.equalsIgnoreCase("waypoint") && coordinate.id != null && coordinate.id > 0) {
-				Intent popupIntent = new Intent(context, cgeowaypoint.class);
+                    GeoPointImpl itemGeo = mapFactory.getGeoPointBase(itemCoord.coords);
 
-				popupIntent.putExtra("waypoint", coordinate.id);
-				popupIntent.putExtra("geocode", coordinate.geocode);
+                    final Geopoint leftCoords = new Geopoint(itemCoord.coords.getLatitude(),
+                            itemCoord.coords.getLongitude() - 161 / longitudeLineDistance);
+                    GeoPointImpl leftGeo = mapFactory.getGeoPointBase(leftCoords);
 
-				context.startActivity(popupIntent);
-			} else {
-				waitDialog.dismiss();
-				return false;
-			}
+                    projection.toPixels(itemGeo, center);
+                    projection.toPixels(leftGeo, left);
+                    int radius = center.x - left.x;
 
-			waitDialog.dismiss();
-		} catch (Exception e) {
-			Log.e(cgSettings.tag, "cgMapOverlay.onTap: " + e.toString());
-		}
+                    final String type = item.getType();
+                    if (type == null || "multi".equals(type) || "mystery".equals(type) || "virtual".equals(type)) {
+                        blockedCircle.setColor(0x66000000);
+                        blockedCircle.setStyle(Style.STROKE);
+                        canvas.drawCircle(center.x, center.y, radius, blockedCircle);
+                    } else {
+                        blockedCircle.setColor(0x66BB0000);
+                        blockedCircle.setStyle(Style.STROKE);
+                        canvas.drawCircle(center.x, center.y, radius, blockedCircle);
 
-		return false;
-	}
+                        blockedCircle.setColor(0x44BB0000);
+                        blockedCircle.setStyle(Style.FILL);
+                        canvas.drawCircle(center.x, center.y, radius, blockedCircle);
+                    }
+                }
+                canvas.setDrawFilter(remfil);
+            }
+        } finally {
+            getOverlayImpl().unlock();
+        }
+    }
 
-	@Override
-	public CacheOverlayItemImpl createItem(int index) {
-		try {
-			return items.get(index);
-		} catch (Exception e) {
-			Log.e(cgSettings.tag, "cgMapOverlay.createItem: " + e.toString());
-		}
+    @Override
+    public boolean onTap(int index) {
 
-		return null;
-	}
+        try {
+            if (items.size() <= index) {
+                return false;
+            }
 
-	@Override
-	public int size() {
-		try {
-			return items.size();
-		} catch (Exception e) {
-			Log.e(cgSettings.tag, "cgMapOverlay.size: " + e.toString());
-		}
+            if (waitDialog == null) {
+                waitDialog = new ProgressDialog(context);
+                waitDialog.setMessage("loading details...");
+                waitDialog.setCancelable(false);
+            }
+            waitDialog.show();
 
-		return 0;
-	}
+            CacheOverlayItemImpl item = null;
 
-	public void infoDialog(int index) {
-		
-		final CacheOverlayItemImpl item = items.get(index);
-		final cgCoord coordinate = item.getCoord();
+            // prevent concurrent changes
+            getOverlayImpl().lock();
+            try {
+                if (index < items.size()) {
+                    item = items.get(index);
+                }
+            } finally {
+                getOverlayImpl().unlock();
+            }
 
-		if (coordinate == null) {
-			Log.e(cgSettings.tag, "cgMapOverlay:infoDialog: No coordinates given");
-			return;
-		}
+            if (item == null) {
+                return false;
+            }
 
-		try {
-			AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-			dialog.setCancelable(true);
+            cgCoord coordinate = item.getCoord();
 
-			if (coordinate.type.equalsIgnoreCase("cache")) {
-				dialog.setTitle("cache");
+            if (StringUtils.isNotBlank(coordinate.type) && coordinate.type.equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.geocode)) {
+                Intent popupIntent = new Intent(context, cgeopopup.class);
 
-				String cacheType;
-				if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec)) {
-					cacheType = cgBase.cacheTypesInv.get(coordinate.typeSpec);
-				} else {
-					cacheType = cgBase.cacheTypesInv.get("mystery");
-				}
+                popupIntent.putExtra("fromdetail", fromDetail);
+                popupIntent.putExtra("geocode", coordinate.geocode);
 
-				dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ngeocode: " + coordinate.geocode.toUpperCase() + "\ntype: " + cacheType);
-				if (fromDetail == false) {
-					dialog.setPositiveButton("detail", new DialogInterface.OnClickListener() {
+                context.startActivity(popupIntent);
+            } else if (coordinate.type != null && coordinate.type.equalsIgnoreCase("waypoint") && coordinate.id != null && coordinate.id > 0) {
+                Intent popupIntent = new Intent(context, cgeowaypoint.class);
 
-						public void onClick(DialogInterface dialog, int id) {
-							Intent cachesIntent = new Intent(context, cgeodetail.class);
-							cachesIntent.putExtra("geocode", coordinate.geocode.toUpperCase());
-							context.startActivity(cachesIntent);
+                popupIntent.putExtra("waypoint", coordinate.id);
+                popupIntent.putExtra("geocode", coordinate.geocode);
 
-							dialog.cancel();
-						}
-					});
-				} else {
-					dialog.setPositiveButton("navigate", new DialogInterface.OnClickListener() {
+                context.startActivity(popupIntent);
+            } else {
+                waitDialog.dismiss();
+                return false;
+            }
 
-						public void onClick(DialogInterface dialog, int id) {
-							cgeonavigate navigateActivity = new cgeonavigate();
+            waitDialog.dismiss();
+        } catch (Exception e) {
+            Log.e(cgSettings.tag, "cgMapOverlay.onTap: " + e.toString());
+        }
 
-							cgeonavigate.coordinates.clear();
-							cgeonavigate.coordinates.add(coordinate);
+        return false;
+    }
 
-							Intent navigateIntent = new Intent(context, navigateActivity.getClass());
-							navigateIntent.putExtra("latitude", coordinate.coords.getLatitude());
-							navigateIntent.putExtra("longitude", coordinate.coords.getLongitude());
-							navigateIntent.putExtra("geocode", coordinate.geocode.toUpperCase());
-							context.startActivity(navigateIntent);
-							dialog.cancel();
-						}
-					});
-				}
-			} else {
-				dialog.setTitle("waypoint");
+    @Override
+    public CacheOverlayItemImpl createItem(int index) {
+        try {
+            return items.get(index);
+        } catch (Exception e) {
+            Log.e(cgSettings.tag, "cgMapOverlay.createItem: " + e.toString());
+        }
 
-				String waypointType;
-				if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec)) {
-					waypointType = cgBase.waypointTypes.get(coordinate.typeSpec);
-				} else {
-					waypointType = cgBase.waypointTypes.get("waypoint");
-				}
+        return null;
+    }
 
-				dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ntype: " + waypointType);
-				dialog.setPositiveButton("navigate", new DialogInterface.OnClickListener() {
+    @Override
+    public int size() {
+        try {
+            return items.size();
+        } catch (Exception e) {
+            Log.e(cgSettings.tag, "cgMapOverlay.size: " + e.toString());
+        }
 
-					public void onClick(DialogInterface dialog, int id) {
-						cgeonavigate navigateActivity = new cgeonavigate();
+        return 0;
+    }
 
-						cgeonavigate.coordinates.clear();
-						cgeonavigate.coordinates.add(coordinate);
+    public void infoDialog(int index) {
 
-						Intent navigateIntent = new Intent(context, navigateActivity.getClass());
-						navigateIntent.putExtra("latitude", coordinate.coords.getLatitude());
-						navigateIntent.putExtra("longitude", coordinate.coords.getLongitude());
-						navigateIntent.putExtra("geocode", coordinate.name);
+        final CacheOverlayItemImpl item = items.get(index);
+        final cgCoord coordinate = item.getCoord();
 
-						context.startActivity(navigateIntent);
-						dialog.cancel();
-					}
-				});
-			}
+        if (coordinate == null) {
+            Log.e(cgSettings.tag, "cgMapOverlay:infoDialog: No coordinates given");
+            return;
+        }
 
-			dialog.setNegativeButton("dismiss", new DialogInterface.OnClickListener() {
+        try {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+            dialog.setCancelable(true);
 
-				public void onClick(DialogInterface dialog, int id) {
-					dialog.cancel();
-				}
-			});
+            if (coordinate.type.equalsIgnoreCase("cache")) {
+                dialog.setTitle("cache");
 
-			AlertDialog alert = dialog.create();
-			alert.show();
-		} catch (Exception e) {
-			Log.e(cgSettings.tag, "cgMapOverlay.infoDialog: " + e.toString());
-		}
-	}
+                String cacheType;
+                if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec)) {
+                    cacheType = cgBase.cacheTypesInv.get(coordinate.typeSpec);
+                } else {
+                    cacheType = cgBase.cacheTypesInv.get("mystery");
+                }
+
+                dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ngeocode: " + coordinate.geocode.toUpperCase() + "\ntype: " + cacheType);
+                if (fromDetail == false) {
+                    dialog.setPositiveButton("detail", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent cachesIntent = new Intent(context, cgeodetail.class);
+                            cachesIntent.putExtra("geocode", coordinate.geocode.toUpperCase());
+                            context.startActivity(cachesIntent);
+
+                            dialog.cancel();
+                        }
+                    });
+                } else {
+                    dialog.setPositiveButton("navigate", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int id) {
+                            cgeonavigate navigateActivity = new cgeonavigate();
+
+                            cgeonavigate.coordinates.clear();
+                            cgeonavigate.coordinates.add(coordinate);
+
+                            Intent navigateIntent = new Intent(context, navigateActivity.getClass());
+                            navigateIntent.putExtra("latitude", coordinate.coords.getLatitude());
+                            navigateIntent.putExtra("longitude", coordinate.coords.getLongitude());
+                            navigateIntent.putExtra("geocode", coordinate.geocode.toUpperCase());
+                            context.startActivity(navigateIntent);
+                            dialog.cancel();
+                        }
+                    });
+                }
+            } else {
+                dialog.setTitle("waypoint");
+
+                String waypointType;
+                if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec)) {
+                    waypointType = cgBase.waypointTypes.get(coordinate.typeSpec);
+                } else {
+                    waypointType = cgBase.waypointTypes.get("waypoint");
+                }
+
+                dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ntype: " + waypointType);
+                dialog.setPositiveButton("navigate", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int id) {
+                        cgeonavigate navigateActivity = new cgeonavigate();
+
+                        cgeonavigate.coordinates.clear();
+                        cgeonavigate.coordinates.add(coordinate);
+
+                        Intent navigateIntent = new Intent(context, navigateActivity.getClass());
+                        navigateIntent.putExtra("latitude", coordinate.coords.getLatitude());
+                        navigateIntent.putExtra("longitude", coordinate.coords.getLongitude());
+                        navigateIntent.putExtra("geocode", coordinate.name);
+
+                        context.startActivity(navigateIntent);
+                        dialog.cancel();
+                    }
+                });
+            }
+
+            dialog.setNegativeButton("dismiss", new DialogInterface.OnClickListener() {
+
+                public void onClick(DialogInterface dialog, int id) {
+                    dialog.cancel();
+                }
+            });
+
+            AlertDialog alert = dialog.create();
+            alert.show();
+        } catch (Exception e) {
+            Log.e(cgSettings.tag, "cgMapOverlay.infoDialog: " + e.toString());
+        }
+    }
 }

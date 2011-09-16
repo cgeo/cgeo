@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <resources>
   <string name="app_name">c:geo</string>
   <string name="app_name_compass">c:geo compass</string>
@@ -35,6 +35,15 @@
   <string name="ape">Project ape cache</string>
   <string name="gchq">Groundspeak hq</string>
   <string name="gps">GPS cache exhibit</string>
+
+  <!-- cache sizes -->
+  <string name="cache_size_micro">micro</string>
+  <string name="cache_size_small">small</string>
+  <string name="cache_size_regular">regular</string>
+  <string name="cache_size_large">large</string>
+  <string name="cache_size_other">other</string>
+  <string name="cache_size_virtual">virtual</string>
+  <string name="cache_size_notchosen">not chosen</string>
 
   <!-- waypoints -->
   <string name="wp_final">Final location</string>
@@ -111,6 +120,7 @@
   <string name="err_server">Failed connection to geocaching.com (server or connection down?)</string>
   <string name="err_login">No login information stored</string>
   <string name="err_login_failed">Sorry, c:geo can\'t login.</string>
+  <string name="err_login_failed_toast">Sorry, c:geo can\'t login. c:geo works in offline mode. Check your login in settings or enable internet connection.</string>
   <string name="err_unknown">Unknown error</string>
   <string name="err_comm">Unknown communication error</string>
   <string name="err_missing_auth">No username and/or password set.</string>
@@ -320,13 +330,6 @@
   <string name="caches_filter_track">with trackables</string>
   <string name="caches_filter_clear">clear filters</string>
   <string name="caches_filter_size_title">Choose size</string>
-  <string name="caches_filter_size_micro">micro</string>
-  <string name="caches_filter_size_small">small</string>
-  <string name="caches_filter_size_regular">regular</string>
-  <string name="caches_filter_size_large">large</string>
-  <string name="caches_filter_size_other">other</string>
-  <string name="caches_filter_size_virtual">virtual</string>
-  <string name="caches_filter_size_notchosen">not chosen</string>
   <string name="caches_filter_type_title">Choose type</string>
   <string name="caches_filter_type_traditional">Traditional cache</string>
   <string name="caches_filter_type_multi">Multi-cache</string>
@@ -548,6 +551,7 @@
   <string name="cache_menu_move_list">Move to other list</string>
   <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
+  <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Saved log</string>
   <string name="cache_status_found">Found</string>
@@ -628,6 +632,7 @@
   <string name="waypoint_save">Save</string>
   <string name="waypoint_loading">Loading waypoint…</string>
   <string name="waypoint_unknown_coordinates">Coordinates unknown</string>
+  <string name="waypoint_done">Done</string>
   <string name="search_history">History</string>
   <string name="search_history_empty">No previous destinations</string>
   <string name="search_remove_destination">Destination removed</string>
@@ -665,8 +670,8 @@
   <string name="search_coordinates_button">Search by coordinates</string>
   <string name="search_address">Address</string>
   <string name="search_address_button">Search by address</string>
-  <string name="search_gc">Geocode</string>
-  <string name="search_gc_button">Search by geocode</string>
+  <string name="search_gc">GC-code</string>
+  <string name="search_gc_button">Search by GC-code</string>
   <string name="search_kw">Keywords</string>
   <string name="search_kw_prefill">Keyword</string>
   <string name="search_kw_button">Search by keyword</string>
@@ -906,21 +911,22 @@
   <string name="contributors">\n
     · <a href="http://carnero.cc/">carnero</a> as the father of c:geo\n
     \n
-    · Eisbehr (code, open source project leader)\n
-    · mucek4 (code, open source project leader)\n
     · 0xErnie (localization DE)\n
     · Bananeweizen (code, loc. DE)\n
     · blafoo (code)\n
     · BudBundi (localization DE)\n
     · Charles (localization FR)\n
     · Denny (localization DA)\n
+    · Eisbehr (code, open source project leader)\n
     · F. Coello (localization ES)\n
     · Filipe C. (code)\n
     · <a href="http://iirojappinen.com/">Iiro Jäppinen</a> (graphic)\n
     · inkantis (localization PL)\n
     · <a href="http://www.jaytech.cz/">Jan Žatecký</a> (graphic)\n
     · <a href="http://joachim-wilke.de/">JoWi24</a> (code)\n
+    · <a href="http://github.com/koem">Karsten Priegnitz</a> (code, artwork computation)\n
     · MichielK (code, loc. NL)\n
+    · mucek4 (code, open source project leader)\n
     · ncorreia (code, localization PT)\n
     · Pascal (localization NL)\n
     · Peter (localization HU)\n
@@ -934,29 +940,30 @@
     · thiasB (code, loc. DE EN)\n
     · YraFyra (code, loc. SV)\n
     · zenobios (code, loc. DE EN)\n
-    · <a href="http://github.com/koem">Karsten Priegnitz</a> (code, artwork computation)\n
     \n
     · <a href="http://code.google.com/p/mapsforge/">Mapsforge</a> (OSM-rendering)\n
     · <a href="http://thenounproject.com/">The Noun Project</a> (basis for attribute icons)\n
     · <a href="http://commons.apache.org/">The Apache Commons Project</a>\n
+    · <a href="http://androidicons.com/">Android Icons</a>\n
   </string>
 
   <!-- changelog -->
   <string name="changelog">\n
-    <b>Next release</b>\n
+    <b>15.09.2011</b>\n
     · new: sort by state, sort by find count\n
     · new: experimental support for .gpx from opencaching.com\n
-    · new: scan QR code to open cache description\n
+    · new: scan QR code to open cache description (Barcode Scanner from Market)\n
     · new: context menu on stored caches button (main screen)\n
     · new: compass immediately shows the right direction\n
     · new: active filters are shown in list mode\n
     · fix: performance of GPX import\n
     · fix: performance of deleting caches from list\n
+    · fix: performance of web traffic\n
     · fix: return to list after GPX import\n
     · fix: fill signature when logging offline\n
     · fix: show strikethrough in caches\n
     · fix: no more empty map previews\n
-    · fix: send2c:geo\n
+    · fix: send2c:geo authorization\n
     \n\n
     <b>26.08.2011</b>\n
     · new: street view\n
