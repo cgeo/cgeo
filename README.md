@@ -16,6 +16,10 @@ Build
 - [Google USB Driver](http://developer.android.com/sdk/win-usb.html) to install the application on the smartphone
 - [Ant](http://ant.apache.org) 1.6.0+ for building c:geo on the command line (not necessary when using only Eclipse)
 
+### Structure ###
+
+c:geo sources and executables are located in the `main` directory. Tests are located in the `tests` directory.
+
 ### Known limitations ###
 
 If the workspace directory name contains a space and leads to errors in the -dex Ant target, then you need to set the property "basedir" in your `local.properties` to the 8.3 name of the directory where this script is located on your disk.

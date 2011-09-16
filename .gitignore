@@ -1,5 +1,5 @@
-/bin
-/gen
-/local.properties
-/private.properties
-/res/values/mapsapikey.xml
+/main/bin
+/main/gen
+/main/local.properties
+/main/private.properties
+/main/res/values/mapsapikey.xml
