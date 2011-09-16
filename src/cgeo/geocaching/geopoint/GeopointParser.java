@@ -133,8 +133,10 @@ public class GeopointParser
         {
             try {
                 final String[] items = StringUtils.split(text.trim());
-                final int index = latlon == LatLon.LON ? items.length - 1 : 0;
-                return Double.parseDouble(items[index]);
+                if (items.length > 0) {
+                    final int index = latlon == LatLon.LON ? items.length - 1 : 0;
+                    return Double.parseDouble(items[index]);
+                }
             } catch (NumberFormatException e) {
                 // The right exception will be raised below.
             }
