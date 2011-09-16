@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public final class DistanceParser {
 
-    private static final Pattern pattern = Pattern.compile("^([0-9\\.\\,]+)[ ]*(m|km|ft|yd|mi|)?$", Pattern.CASE_INSENSITIVE);
+    private static final Pattern pattern = Pattern.compile("^([0-9\\.,]+)[ ]*(m|km|ft|yd|mi|)?$", Pattern.CASE_INSENSITIVE);
 
     /**
      * Parse a distance string composed by a number and an optional suffix
@@ -28,7 +28,7 @@ public final class DistanceParser {
             throw new NumberFormatException(distanceText);
         }
 
-        final float value = Float.parseFloat(matcher.group(1));
+        final float value = Float.parseFloat(matcher.group(1).replace(',', '.'));
         final String unit = matcher.group(2).toLowerCase();
 
         if (unit.equals("m") || (unit.length() == 0 && defaultUnit == cgSettings.unitsMetric)) {
