@@ -2606,9 +2606,6 @@ public class cgBase {
         } else if (StringUtils.isNotBlank(guid)) {
             params.put("guid", guid);
         }
-        params.put("decrypt", "y");
-        params.put("log", "y"); // download logs (more than 5
-        params.put("numlogs", "35"); // 35 logs
 
         String page = requestLogged(false, host, path, method, params, false, false, false);
 
