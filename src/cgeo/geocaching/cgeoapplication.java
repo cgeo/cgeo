@@ -1,7 +1,6 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.utils.CollectionUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -681,7 +680,7 @@ public class cgeoapplication extends Application {
     }
 
     public UUID addSearch(final cgSearch search, final List<cgCache> cacheList, final boolean newItem, final int reason) {
-        if (CollectionUtils.isEmpty(cacheList)) {
+        if (cacheList == null || cacheList.size() == 0) {
             return null;
         }
 
@@ -693,7 +692,7 @@ public class cgeoapplication extends Application {
         }
         if (newItem) {
             // save only newly downloaded data
-            for (cgCache cache : cacheList) {
+            for (final cgCache cache : cacheList) {
                 cache.reason = reason;
                 storeWithMerge(cache, false);
             }
