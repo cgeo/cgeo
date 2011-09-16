@@ -59,10 +59,12 @@ public class cgeowaypointadd extends AbstractActivity {
 
                     app.setAction(geocode);
 
-                    ((Button) findViewById(R.id.buttonLatitude)).setText(cgBase.formatLatitude(waypoint.coords.getLatitude(), true));
-                    ((Button) findViewById(R.id.buttonLongitude)).setText(cgBase.formatLongitude(waypoint.coords.getLongitude(), true));
-                    ((EditText) findViewById(R.id.name)).setText(Html.fromHtml(waypoint.name.trim()).toString());
-                    ((EditText) findViewById(R.id.note)).setText(Html.fromHtml(waypoint.note.trim()).toString());
+                    if (waypoint.coords != null) {
+                        ((Button) findViewById(R.id.buttonLatitude)).setText(cgBase.formatLatitude(waypoint.coords.getLatitude(), true));
+                        ((Button) findViewById(R.id.buttonLongitude)).setText(cgBase.formatLongitude(waypoint.coords.getLongitude(), true));
+                    }
+                    ((EditText) findViewById(R.id.name)).setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.name)).toString());
+                    ((EditText) findViewById(R.id.note)).setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.note)).toString());
 
                     if (waitDialog != null) {
                         waitDialog.dismiss();
