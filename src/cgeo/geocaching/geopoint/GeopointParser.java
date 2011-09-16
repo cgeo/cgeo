@@ -13,8 +13,9 @@ import java.util.regex.Pattern;
  */
 public class GeopointParser
 {
-    private static final Pattern patternLat = Pattern.compile("([NS])\\s*(\\d+)°?(\\s*(\\d+)([\\.,](\\d+)|'?\\s*(\\d+)(''|\")?)?)?", Pattern.CASE_INSENSITIVE);
-    private static final Pattern patternLon = Pattern.compile("([WE])\\s*(\\d+)°?(\\s*(\\d+)([\\.,](\\d+)|'?\\s*(\\d+)(''|\")?)?)?", Pattern.CASE_INSENSITIVE);
+    //                                                         ( 1  )    ( 2  )         ( 3  )         ( 4  )       (         5         )
+    private static final Pattern patternLat = Pattern.compile("([NS])\\s*(\\d+)°?(?:\\s*(\\d+)(?:[\\.,](\\d+)|'?\\s*(\\d+(?:[\\.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
+    private static final Pattern patternLon = Pattern.compile("([WE])\\s*(\\d+)°?(?:\\s*(\\d+)(?:[\\.,](\\d+)|'?\\s*(\\d+(?:[\\.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
 
     private enum LatLon
     {
@@ -98,17 +99,17 @@ public class GeopointParser
             int minutes = 0;
             double seconds = 0;
 
-            if (null != matcher.group(4)) {
-                minutes = Integer.parseInt(matcher.group(4));
+            if (null != matcher.group(3)) {
+                minutes = Integer.parseInt(matcher.group(3));
 
-                if (null != matcher.group(6)) {
-                    seconds = Float.parseFloat("0." + matcher.group(6)) * 60;
-                } else if (null != matcher.group(7)) {
-                    seconds = Integer.parseInt(matcher.group(7));
+                if (null != matcher.group(4)) {
+                    seconds = Double.parseDouble("0." + matcher.group(4)) * 60;
+                } else if (null != matcher.group(5)) {
+                    seconds = Double.parseDouble(matcher.group(5));
                 }
             }
 
-            return (double) sign * ((double) degree + (double) minutes / 60 + (double) seconds / 3600);
+            return (double) sign * ((double) degree + (double) minutes / 60 + seconds / 3600);
 
         } else {
 
