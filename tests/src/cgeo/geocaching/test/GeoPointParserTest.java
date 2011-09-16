@@ -36,4 +36,10 @@ public class GeoPointParserTest extends AndroidTestCase {
 	public void testLowerCase() throws Throwable {
 		Assert.assertEquals(refLongitude, GeopointParser.parseLongitude("e 8° 38.564"), 1e-8);
 	}
+	
+	public void testVariousFormats() throws Throwable {
+		final Geopoint goal1 = GeopointParser.parse("N 49° 43' 57\" | E 2 12' 35");
+		final Geopoint goal2 = GeopointParser.parse("N 49 43.95 E2°12.5833333333");
+		Assert.assertTrue(goal1.isEqualTo(goal2, 1e-6));
+	}
 }
