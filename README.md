@@ -26,12 +26,12 @@ If the workspace directory name contains a space and leads to errors in the -dex
 
 ### Configuration ###
 
-1. copy `./templates/private.properties` to `./`
+1. copy `./main/templates/private.properties` to `./main/`
 2. edit `private.properties` (see comments in the file)
-3. copy `./templates/local.properties` to `./`
+3. copy `./main/templates/local.properties` to `./main/`
 4. edit `local.properties` (see comments in the file)
-5. copy `./templates/mapsapikey.xml` to `./res/values/`
-6. edit `./res/values/mapsapikey.xml` and insert your Maps API key (see comments in the file)
+5. copy `./main/templates/mapsapikey.xml` to `./main/res/values/`
+6. edit `./main/res/values/mapsapikey.xml` and insert your Maps API key (see comments in the file)
 
 ### Building with Ant ###
 
