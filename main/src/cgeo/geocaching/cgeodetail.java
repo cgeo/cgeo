@@ -6,6 +6,7 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.utils.CollectionUtils;
+import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -26,7 +27,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
 import android.text.Spannable;
-import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.StrikethroughSpan;
@@ -1054,7 +1054,7 @@ public class cgeodetail extends AbstractActivity {
             if (StringUtils.isNotBlank(cache.hint)) {
                 ((LinearLayout) findViewById(R.id.hint_box)).setVisibility(View.VISIBLE);
                 TextView hintView = ((TextView) findViewById(R.id.hint));
-                hintView.setText(cgBase.rot13(cache.hint.trim()));
+                hintView.setText(CryptUtils.rot13(cache.hint.trim()));
                 hintView.setClickable(true);
                 hintView.setOnClickListener(new codeHint());
             } else {
@@ -1604,8 +1604,7 @@ public class cgeodetail extends AbstractActivity {
         public void onClick(View arg0) {
             // code hint
             TextView hintView = ((TextView) findViewById(R.id.hint));
-            hintView.setText(cgBase.rot13(hintView.getText().toString()));
-
+            hintView.setText(CryptUtils.rot13(hintView.getText().toString()));
         }
     }
 
@@ -1880,30 +1879,15 @@ public class cgeodetail extends AbstractActivity {
 
             try {
                 final TextView logView = (TextView) view;
-                Spannable span = (Spannable) logView.getText();
-
-                // I needed to re-implement the base.rot13() encryption here because we must work on
-                // a SpannableStringBuilder instead of the pure text and we must replace each character inline.
-                // Otherwise we loose all the images, colors and so on...
-                SpannableStringBuilder buffer = new SpannableStringBuilder(span);
-                boolean plaintext = false;
-
-                int length = span.length();
-                for (int index = 0; index < length; index++) {
-                    int c = span.charAt(index);
-                    if (c == '[') {
-                        plaintext = true;
-                    } else if (c == ']') {
-                        plaintext = false;
-                    } else if (!plaintext) {
-                        int capitalized = c & 32;
-                        c &= ~capitalized;
-                        c = ((c >= 'A') && (c <= 'Z') ? ((c - 'A' + 13) % 26 + 'A') : c)
-                                | capitalized;
-                    }
-                    buffer.replace(index, index + 1, String.valueOf((char) c));
+                CharSequence text = logView.getText();
+                if (text instanceof Spannable) {
+                    Spannable span = (Spannable) text;
+                    logView.setText(CryptUtils.rot13(span));
                 }
-                logView.setText(buffer);
+                else {
+                    String string = (String) text;
+                    logView.setText(CryptUtils.rot13(string));
+                }
             } catch (Exception e) {
                 // nothing
             }

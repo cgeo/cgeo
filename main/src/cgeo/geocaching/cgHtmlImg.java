@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.utils.CryptUtils;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -85,12 +87,12 @@ public class cgHtmlImg implements Html.ImageGetter {
 
         if (StringUtils.isNotBlank(geocode)) {
             dirName = cgSettings.getStorage() + geocode + "/";
-            fileName = cgSettings.getStorage() + geocode + "/" + cgBase.md5(url) + urlExt;
-            fileNameSec = cgSettings.getStorageSec() + geocode + "/" + cgBase.md5(url) + urlExt;
+            fileName = cgSettings.getStorage() + geocode + "/" + CryptUtils.md5(url) + urlExt;
+            fileNameSec = cgSettings.getStorageSec() + geocode + "/" + CryptUtils.md5(url) + urlExt;
         } else {
             dirName = cgSettings.getStorage() + "_others/";
-            fileName = cgSettings.getStorage() + "_others/" + cgBase.md5(url) + urlExt;
-            fileNameSec = cgSettings.getStorageSec() + "_others/" + cgBase.md5(url) + urlExt;
+            fileName = cgSettings.getStorage() + "_others/" + CryptUtils.md5(url) + urlExt;
+            fileNameSec = cgSettings.getStorageSec() + "_others/" + CryptUtils.md5(url) + urlExt;
         }
 
         File dir = null;

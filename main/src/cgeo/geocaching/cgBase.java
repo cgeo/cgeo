@@ -39,7 +39,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -48,7 +47,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.security.MessageDigest;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.text.ParseException;
@@ -71,8 +69,6 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -2479,7 +2475,7 @@ public class cgBase {
         if (degrees) {
             formatted.append("° ");
         } else {
-            formatted.append(" ");
+            formatted.append(' ');
         }
         formatted.append(String.format(locale, "%06.3f", ((coordAbs - floor) * 60)));
 
@@ -4131,72 +4127,6 @@ public class cgBase {
         } else {
             return "";
         }
-    }
-
-    public static String rot13(String text) {
-        final StringBuilder result = new StringBuilder();
-        // plaintext flag (do not convert)
-        boolean plaintext = false;
-
-        int length = text.length();
-        for (int index = 0; index < length; index++) {
-            int c = text.charAt(index);
-            if (c == '[') {
-                plaintext = true;
-            } else if (c == ']') {
-                plaintext = false;
-            } else if (!plaintext) {
-                int capitalized = c & 32;
-                c &= ~capitalized;
-                c = ((c >= 'A') && (c <= 'Z') ? ((c - 'A' + 13) % 26 + 'A') : c)
-                        | capitalized;
-            }
-            result.append((char) c);
-        }
-        return result.toString();
-    }
-
-    public static String md5(String text) {
-        String hashed = "";
-
-        try {
-            MessageDigest digest = MessageDigest.getInstance("MD5");
-            digest.update(text.getBytes(), 0, text.length());
-            hashed = new BigInteger(1, digest.digest()).toString(16);
-        } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgBase.md5: " + e.toString());
-        }
-
-        return hashed;
-    }
-
-    public static String sha1(String text) {
-        String hashed = "";
-
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-1");
-            digest.update(text.getBytes(), 0, text.length());
-            hashed = new BigInteger(1, digest.digest()).toString(16);
-        } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgBase.sha1: " + e.toString());
-        }
-
-        return hashed;
-    }
-
-    public static byte[] hashHmac(String text, String salt) {
-        byte[] macBytes = {};
-
-        try {
-            SecretKeySpec secretKeySpec = new SecretKeySpec(salt.getBytes(), "HmacSHA1");
-            Mac mac = Mac.getInstance("HmacSHA1");
-            mac.init(secretKeySpec);
-            macBytes = mac.doFinal(text.getBytes());
-        } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgBase.hashHmac: " + e.toString());
-        }
-
-        return macBytes;
     }
 
     public static boolean deleteDirectory(File path) {
