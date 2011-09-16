@@ -63,8 +63,8 @@ public class cgeowaypoint extends AbstractActivity {
                         setTitle(res.getString(R.string.waypoint_title));
                     }
 
-                    if (waypoint.prefix.equalsIgnoreCase("OWN") == false) {
-                        identification.setText(waypoint.prefix.trim() + "/" + waypoint.lookup.trim());
+                    if (waypoint.getPrefix().equalsIgnoreCase("OWN") == false) {
+                        identification.setText(waypoint.getPrefix().trim() + "/" + waypoint.lookup.trim());
                     } else {
                         identification.setText(res.getString(R.string.waypoint_custom));
                     }
@@ -316,7 +316,7 @@ public class cgeowaypoint extends AbstractActivity {
         Intent navigateIntent = new Intent(this, cgeonavigate.class);
         navigateIntent.putExtra("latitude", waypoint.coords.getLatitude());
         navigateIntent.putExtra("longitude", waypoint.coords.getLongitude());
-        navigateIntent.putExtra("geocode", waypoint.prefix.trim() + "/" + waypoint.lookup.trim());
+        navigateIntent.putExtra("geocode", waypoint.getPrefix().trim() + "/" + waypoint.lookup.trim());
         navigateIntent.putExtra("name", waypoint.name);
 
         cgeonavigate.coordinates.clear();

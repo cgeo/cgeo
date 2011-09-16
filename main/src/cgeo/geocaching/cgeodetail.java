@@ -40,9 +40,9 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.ViewParent;
 import android.view.WindowManager;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -60,8 +60,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.UUID;
 import java.util.Map.Entry;
+import java.util.UUID;
 
 /**
  * Activity to display all details of a cache like owner, difficulty, description etc.
@@ -1005,48 +1005,15 @@ public class cgeodetail extends AbstractActivity {
 
                 // sort waypoints: PP, Sx, FI, OWN
                 List<cgWaypoint> sortedWaypoints = new ArrayList<cgWaypoint>(cache.waypoints);
-                Collections.sort(sortedWaypoints, new Comparator<cgWaypoint>() {
-
-                    @Override
-                    public int compare(cgWaypoint wayPoint1, cgWaypoint wayPoint2) {
-
-                        return order(wayPoint1) - order(wayPoint2);
-                    }
-
-                    private int order(cgWaypoint waypoint) {
-                        if (StringUtils.isEmpty(waypoint.prefix)) {
-                            return 0;
-                        }
-                        // check only the first character. sometimes there are inconsistencies like FI or FN for the FINAL
-                        char firstLetter = Character.toUpperCase(waypoint.prefix.charAt(0));
-                        switch (firstLetter) {
-                            case 'P':
-                                return -100; // parking
-                            case 'S': { // stage N
-                                try {
-                                    Integer stageNumber = Integer.valueOf(waypoint.prefix.substring(1));
-                                    return stageNumber;
-                                } catch (NumberFormatException e) {
-                                    // nothing
-                                }
-                                return 0;
-                            }
-                            case 'F':
-                                return 1000; // final
-                            case 'O':
-                                return 10000; // own
-                        }
-                        return 0;
-                    }
-                });
+                Collections.sort(sortedWaypoints);
 
                 for (cgWaypoint wpt : sortedWaypoints) {
                     waypointView = (LinearLayout) inflater.inflate(R.layout.waypoint_item, null);
                     final TextView identification = (TextView) waypointView.findViewById(R.id.identification);
 
                     ((TextView) waypointView.findViewById(R.id.type)).setText(cgBase.waypointTypes.get(wpt.type));
-                    if (wpt.prefix.equalsIgnoreCase("OWN") == false) {
-                        identification.setText(wpt.prefix.trim() + "/" + wpt.lookup.trim());
+                    if (wpt.getPrefix().equalsIgnoreCase("OWN") == false) {
+                        identification.setText(wpt.getPrefix().trim() + "/" + wpt.lookup.trim());
                     } else {
                         identification.setText(res.getString(R.string.waypoint_custom));
                     }

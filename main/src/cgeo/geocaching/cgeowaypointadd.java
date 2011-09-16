@@ -54,15 +54,17 @@ public class cgeowaypointadd extends AbstractActivity {
                 } else {
                     geocode = waypoint.geocode;
                     type = waypoint.type;
-                    prefix = waypoint.prefix;
+                    prefix = waypoint.getPrefix();
                     lookup = waypoint.lookup;
 
                     app.setAction(geocode);
 
-                    ((Button) findViewById(R.id.buttonLatitude)).setText(cgBase.formatLatitude(waypoint.coords.getLatitude(), true));
-                    ((Button) findViewById(R.id.buttonLongitude)).setText(cgBase.formatLongitude(waypoint.coords.getLongitude(), true));
-                    ((EditText) findViewById(R.id.name)).setText(Html.fromHtml(waypoint.name.trim()).toString());
-                    ((EditText) findViewById(R.id.note)).setText(Html.fromHtml(waypoint.note.trim()).toString());
+                    if (waypoint.coords != null) {
+                        ((Button) findViewById(R.id.buttonLatitude)).setText(cgBase.formatLatitude(waypoint.coords.getLatitude(), true));
+                        ((Button) findViewById(R.id.buttonLongitude)).setText(cgBase.formatLongitude(waypoint.coords.getLongitude(), true));
+                    }
+                    ((EditText) findViewById(R.id.name)).setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.name)).toString());
+                    ((EditText) findViewById(R.id.note)).setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.note)).toString());
 
                     if (waitDialog != null) {
                         waitDialog.dismiss();
@@ -329,7 +331,7 @@ public class cgeowaypointadd extends AbstractActivity {
             final cgWaypoint waypoint = new cgWaypoint();
             waypoint.type = type;
             waypoint.geocode = geocode;
-            waypoint.prefix = prefix;
+            waypoint.setPrefix(prefix);
             waypoint.lookup = lookup;
             waypoint.name = name;
             waypoint.coords = new Geopoint(coords.get(0), coords.get(1));
