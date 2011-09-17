@@ -4,7 +4,6 @@ import cgeo.geocaching.mapinterfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.mapinterfaces.MapProjectionImpl;
 import cgeo.geocaching.mapinterfaces.MapViewImpl;
 import cgeo.geocaching.mapinterfaces.OverlayBase;
-import cgeo.geocaching.mapinterfaces.OverlayImpl;
 import cgeo.geocaching.mapinterfaces.OverlayItemImpl;
 
 import android.graphics.Canvas;
@@ -56,7 +55,7 @@ public abstract class ItemizedOverlayBase implements OverlayBase {
     }
 
     @Override
-    public OverlayImpl getOverlayImpl() {
+    public ItemizedOverlayImpl getOverlayImpl() {
         return ovlImpl;
     }
 
