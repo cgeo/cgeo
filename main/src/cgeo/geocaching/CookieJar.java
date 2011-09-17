@@ -60,13 +60,19 @@ final public class CookieJar {
     }
 
     static public synchronized void setCookies(final SharedPreferences prefs, final URLConnection uc) {
-        final Map<String, List<String>> headers = uc.getHeaderFields();
-        for (final Map.Entry<String, List<String>> entry : headers.entrySet()) {
-            if (entry.getKey().equalsIgnoreCase("set-cookie")) {
-                for (final String field : entry.getValue()) {
-                    setCookie(prefs, field);
+        try {
+            final Map<String, List<String>> headers = uc.getHeaderFields();
+            for (final Map.Entry<String, List<String>> entry : headers.entrySet()) {
+                if (entry.getKey().equalsIgnoreCase("set-cookie")) {
+                    for (final String field : entry.getValue()) {
+                        setCookie(prefs, field);
+                    }
                 }
             }
+        }
+ catch (NullPointerException e)
+        {
+            Log.e(cgSettings.tag, "NPE in CookieJar.setCookies: " + e.toString());
         }
     }
 
