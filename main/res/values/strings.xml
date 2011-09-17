@@ -949,6 +949,9 @@
 
   <!-- changelog -->
   <string name="changelog">\n
+    <b>17.09.2011</b>\n
+    · fix: more small fixes\n
+    \n\n
     <b>16.09.2011</b>\n
     · fix: many small fixed due to GC.com changes\n
     \n\n
