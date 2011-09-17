@@ -105,8 +105,8 @@ public class cgBase {
     private final static Pattern patternCountLog = Pattern.compile("src=\"\\/images\\/icons\\/(.+?).gif\"[^>]+> (\\d*[,.]?\\d+)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private final static Pattern patternAttributes = Pattern.compile("<h3 class=\"WidgetHeader\">[^<]*<img[^>]+>\\W*Attributes[^<]*</h3>[^<]*<div class=\"WidgetBody\">(([^<]*<img src=\"[^\"]+\" alt=\"[^\"]+\"[^>]*>)+)[^<]*<p", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternAttributesInside = Pattern.compile("[^<]*<img src=\"([^\"]+)\" alt=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
-    private final static Pattern patternSpoilers = Pattern.compile("<p class=\"NoPrint\">\\s*((<a href=\"([^\"]+)\"[^>]*>\\s*<img[^>]+><span>([^<]+)</span></a><br\\s*/>)*)\\s*</p>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern patternSpoilersInside = Pattern.compile("[^<]*<a href=\"([^\"]+)\"[^>]*>[^<]*<img[^>]+>[^<]*<span>([^>]+)</span>[^<]*</a>[^<]*<br[^>]*>(([^<]*)(<br[^<]*>)+)?", Pattern.CASE_INSENSITIVE);
+    private final static Pattern patternSpoilers = Pattern.compile("<p class=\"NoPrint\">\\s+((?:<a href=\"http://img\\.geocaching\\.com/cache/[^.]+\\.jpg\"[^>]+><img class=\"StatusIcon\"[^>]+><span>[^<]+</span></a><br />(?:[^<]+<br /><br />)?)+)\\s+</p>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+    private final static Pattern patternSpoilersInside = Pattern.compile("<a href=\"(http://img\\.geocaching\\.com/cache/[^.]+\\.jpg)\"[^>]+><img class=\"StatusIcon\"[^>]+><span>([^<]+)</span></a><br />(?:([^<]+)<br /><br />)?", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternInventory = Pattern.compile("<span id=\"ctl00_ContentBody_uxTravelBugList_uxInventoryLabel\">\\W*Inventory[^<]*</span>[^<]*</h3>[^<]*<div class=\"WidgetBody\">([^<]*<ul>(([^<]*<li>[^<]*<a href=\"[^\"]+\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>[^<]+<\\/span>[^<]*<\\/a>[^<]*<\\/li>)+)[^<]*<\\/ul>)?", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternInventoryInside = Pattern.compile("[^<]*<li>[^<]*<a href=\"[a-z0-9\\-\\_\\.\\?\\/\\:\\@]*\\/track\\/details\\.aspx\\?guid=([0-9a-z\\-]+)[^\"]*\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>([^<]+)<\\/span>[^<]*<\\/a>[^<]*<\\/li>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternOnWatchlist = Pattern.compile("<img\\s*src=\"\\/images\\/stockholm\\/16x16\\/icon_stop_watchlist.gif\"", Pattern.CASE_INSENSITIVE);
@@ -1399,27 +1399,24 @@ public class cgBase {
         // cache spoilers
         try {
             final Matcher matcherSpoilers = patternSpoilers.matcher(page);
-            if (matcherSpoilers.find() && matcherSpoilers.groupCount() > 0) {
-                final String spoilersPre = matcherSpoilers.group(1);
-                final Matcher matcherSpoilersInside = patternSpoilersInside.matcher(spoilersPre);
+            if (matcherSpoilers.find()) {
+                final Matcher matcherSpoilersInside = patternSpoilersInside.matcher(matcherSpoilers.group(1));
 
                 while (matcherSpoilersInside.find()) {
-                    if (matcherSpoilersInside.groupCount() > 0) {
-                        final cgImage spoiler = new cgImage();
-                        spoiler.url = matcherSpoilersInside.group(1);
+                    final cgImage spoiler = new cgImage();
+                    spoiler.url = matcherSpoilersInside.group(1);
 
-                        if (matcherSpoilersInside.group(2) != null) {
-                            spoiler.title = matcherSpoilersInside.group(2);
-                        }
-                        if (matcherSpoilersInside.group(4) != null) {
-                            spoiler.description = matcherSpoilersInside.group(4);
-                        }
-
-                        if (cache.spoilers == null) {
-                            cache.spoilers = new ArrayList<cgImage>();
-                        }
-                        cache.spoilers.add(spoiler);
+                    if (matcherSpoilersInside.group(2) != null) {
+                        spoiler.title = matcherSpoilersInside.group(2);
                     }
+                    if (matcherSpoilersInside.group(3) != null) {
+                        spoiler.description = matcherSpoilersInside.group(3);
+                    }
+
+                    if (cache.spoilers == null) {
+                        cache.spoilers = new ArrayList<cgImage>();
+                    }
+                    cache.spoilers.add(spoiler);
                 }
             }
         } catch (Exception e) {
