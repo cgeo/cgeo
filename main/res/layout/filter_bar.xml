@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/filter_bar"
+	style="@style/filter_bar"
+	android:visibility="gone">
+	<ImageView style="@style/filter_bar_image"
+		android:src="@drawable/main_filter_default"></ImageView>
+	<TextView android:id="@+id/filter_text"
+		style="@style/filter_bar_text"/>
+</LinearLayout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/more_caches"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_gravity="center"
+		android:gravity="center"
+		android:padding="8dip"
+		android:lines="1"
+		android:singleLine="true"
+		android:scrollHorizontally="true"
+		android:ellipsize="marquee"
+		android:textSize="16dip"
+		android:textColor="@color/just_white"
+		android:text="@string/caches_no_cache"
+		android:background="@drawable/actionbar_background" />

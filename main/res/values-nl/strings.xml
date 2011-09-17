@@ -1,0 +1,887 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <string name="app_name">c:geo</string>
+  <string name="app_name_compass">c:geo compass</string>
+
+  <!-- basics -->
+  <string name="cache">Cache</string>
+  <string name="detail">Detail</string>
+  <string name="search">Zoeken</string>
+  <string name="settings">Instellingen</string>
+  <string name="helpers">Wat te installeren</string>
+  <string name="about">Over c:geo</string>  
+  <string name="helper">Wil je meer weten over <b>c:geo</b>?\nKijk dan in de (makkelijk te lezen) handleiding.</string>
+  <string name="database_error_title">Probleem met database</string>
+  <string name="database_error_message">c:geo kon geen verbinding maken met de interne database.\nProbeer het later nogmaals. Blijft dit probleem zich voordoen, ga dan naar Settings / Applications / c:geo en klik op de Clear Data knop of herinstalleer c:geo. Excuses voor het ongemak.</string>
+
+  <!-- actionbar -->
+  <string name="action_bar_share_title">Deel link naar cache</string>
+
+  <!-- caches -->
+  <string name="all">Alle caches</string>
+  <string name="all_types">Alle cache types</string>
+  <string name="traditional">Traditionele cache</string>
+  <string name="multi">Multi-cache</string>
+  <string name="mystery">Onbekende cache</string>
+  <string name="letterbox">Letterbox hybrid</string>
+  <string name="event">Event cache</string>
+  <string name="mega">Mega-event cache</string>
+  <string name="earth">Earthcache</string>
+  <string name="cito">Cache in trash out event</string>
+  <string name="webcam">Webcam cache</string>
+  <string name="virtual">Virtuele cache</string>
+  <string name="wherigo">Wherigo cache</string>
+  <string name="lostfound">Lost &amp; found</string>
+  <string name="ape">Project ape cache</string>
+  <string name="gchq">Groundspeak hq</string>
+  <string name="gps">Gps cache exhibit</string>
+
+  <!-- cache sizes -->
+  <string name="cache_size_micro">micro</string>
+  <string name="cache_size_small">small</string>
+  <string name="cache_size_regular">regular</string>
+  <string name="cache_size_large">large</string>
+  <string name="cache_size_other">other</string>
+  <string name="cache_size_virtual">virtual</string>
+  <string name="cache_size_notchosen">not chosen</string>
+
+  <!-- waypoints -->
+  <string name="wp_final">Eindbestemming</string>
+  <string name="wp_stage">Multi-cache punt</string>
+  <string name="wp_puzzle">Vraag voor antwoord</string>
+  <string name="wp_pkg">Parkeer gelegenheid</string>
+  <string name="wp_trailhead">Trailhead</string>
+  <string name="wp_waypoint">Referentie punt</string>
+
+  <!-- logs -->
+  <string name="log_found">Gevonden</string>
+  <string name="log_dnf">Niet gevonden</string>
+  <string name="log_note">Notitie</string>
+  <string name="log_published">Gepubliceerd</string>
+  <string name="log_enabled">Ingeschakeld</string>
+  <string name="log_disabled">Uitgeschakeld</string>
+  <string name="log_attend">Zal aanwezig zijn</string>
+  <string name="log_attended">Was aanwezig</string>
+  <string name="log_retrieved">Teruggevonden</string>
+  <string name="log_placed">Geplaatst</string>
+  <string name="log_grabbed">Gepakt</string>
+  <string name="log_maintained">Onderhoud uitgevoerd</string>
+  <string name="log_maintenance_needed">Onderhoud nodig</string>
+  <string name="log_maintenance_owner">Onderhoud</string>
+  <string name="log_update">Bijgewerkte coördinaten</string>
+  <string name="log_archived">Gearchiveerd</string>
+  <string name="log_needs_archived">Dient te worden gearchiveerd</string>
+  <string name="log_discovered">Ontdekt</string>
+  <string name="log_reviewed">Recensent notitie</string>
+  <string name="log_taken">Bezoek</string>
+  <string name="log_tb_nothing">Niets doen</string>
+  <string name="log_tb_visit">Bezoek</string>
+  <string name="log_tb_drop">Hier droppen</string>
+  <string name="log_tb_changeall">Wijzig alles</string>
+  <string name="log_save">opslaan</string>
+  <string name="log_saving">Log opslaan…</string>
+  <string name="log_clear">Wissen</string>
+  <string name="log_post">Post log</string>
+  <string name="log_post_rate">Post log &amp; beoordeel</string>
+  <string name="log_post_no_rate">Post log zonder beoordeling</string>
+  <string name="log_add">Toevoegen</string>
+  <string name="log_date">Datum</string>
+  <string name="log_time">Tijd</string>
+  <string name="log_date_time">Datum &amp; tijd</string>
+  <string name="log_rating">Beoordeling</string>
+  <string name="log_no_rating">Geen beoordeling</string>
+  <string name="log_stars_1">1 ster</string>
+  <string name="log_stars_15">1.5 ster</string>
+  <string name="log_stars_2">2 sterren</string>
+  <string name="log_stars_25">2.5 sterren</string>
+  <string name="log_stars_3">3 sterren</string>
+  <string name="log_stars_35">3.5 sterren</string>
+  <string name="log_stars_4">4 sterren</string>
+  <string name="log_stars_45">4.5 sterren</string>
+  <string name="log_stars_5">5 sterren</string>
+  <string name="log_stars_1_description">slecht</string>
+  <string name="log_stars_15_description">redelijk slecht</string>
+  <string name="log_stars_2_description">beneden gemiddeld</string>
+  <string name="log_stars_25_description">niet slecht</string>
+  <string name="log_stars_3_description">gemiddeld</string>
+  <string name="log_stars_35_description">goed</string>
+  <string name="log_stars_4_description">boven gemiddeld</string>
+  <string name="log_stars_45_description">zeer goed</string>
+  <string name="log_stars_5_description">geweldig</string>
+  <string name="log_webcam">Webcam foto gemaakt</string>
+  <string name="log_new_log">Log</string>
+  <string name="log_new_log_text">Log tekst</string>
+  <string name="log_announcement">Aankondiging</string>
+
+  <!-- errors, warnings, info toasts -->
+  <string name="err_none">Ok</string>
+  <string name="err_start">Communicatie niet gestart</string>
+  <string name="err_parse">Login pagina verwerken mislukt</string>
+  <string name="err_server">Verbinding met geocaching.com mislukt (geen verbinding of server niet bereikbaar)</string>
+  <string name="err_login">Geen login informatie opgeslagen</string>
+  <string name="err_login_failed">Sorry, c:geo kan niet inloggen.</string>
+  <string name="err_unknown">Onbekende fout</string>
+  <string name="err_comm">Onbekende communicatie fout</string>
+  <string name="err_missing_auth">Geen gebruikersnaam en/of wachtwoord ingesteld.</string>
+  <string name="err_wrong">Foutieve login informatie</string>
+  <string name="err_license">Gebruiker heeft de gebruikersvoorwaarden van Geocaching.com niet geaccepteerd</string>
+  <string name="err_store">Sorry, c:geo kan de cache niet opslaan.</string>
+  <string name="err_drop">Sorry, c:geo kan de cache niet wissen.</string>
+  <string name="err_title_problem">Probleem</string>
+  <string name="err_detail_open">Sorry, c:geo kan de geocache details niet openen.</string>
+  <string name="err_detail_cache">Sorry, c:geo kan de gezochte geocache niet weergeven.</string>
+  <string name="err_detail_cache_find">Sorry, c:geo kan de geocache niet vinden.</string>
+  <string name="err_detail_cache_find_some">Sorry, c:geo kan die geocache niet vinden.</string>
+  <string name="err_detail_cache_find_any">Sorry, c:geo kan geen enkele geocache vinden.</string>
+  <string name="err_detail_cache_find_next">Sorry, c:geo kan de volgende cache niet vinden.</string>
+  <string name="err_detail_cache_forgot">Sorry, c:geo is kwijt welke geocache je wilde openen.</string>
+  <string name="err_detail_cache_forgot_visit">Sorry, c:geo is vergeten welke cache je bezocht.</string>
+  <string name="err_detail_cache_language">c:geo Kan sommige cache details niet lezen. Controleer of de geocaching.com website is ingesteld op English. Helaas ondersteund c:geo geen localisaties.</string>
+  <string name="err_detail_no_spoiler">c:geo Heeft geen spoiler images gevonden voor deze cache.</string>
+  <string name="err_detail_no_map_static">c:geo Heeft geen statische kaarten gevonden voor deze cache.</string>
+  <string name="err_detail_not_load_map_static">Sorry, c:geo kon de statische kaart niet laden.</string>
+  <string name="err_detail_still_removing">Bezig met wissen van deze cache.</string>
+  <string name="err_detail_still_saving">Bezig met opslaan van deze cache.</string>
+  <string name="err_detail_still_refreshing">Bezig met opnieuw laden van deze cache.</string>
+  <string name="err_watchlist_still_managing">Bezig je watchlist te beheren.</string>
+  <string name="err_watchlist_failed">Het veranderen van watchlist lukt niet.</string>
+  <string name="err_radar_title">Radar is niet geinstalleerd.</string>
+  <string name="err_radar_message">Deze functie heeft de Radar applicatie nodig. Deze nu installeren?</string>
+  <string name="err_radar_market">c:geo Kan Android Market niet starten om te zoeken naar de Radar applicatie.</string>
+  <string name="err_radar_generic">Sorry, c:geo kan de Radar applicatie niet starten. Is deze geinstalleerd?</string>
+  <string name="err_navigation_no">c:geo Kan geen ondersteunde navigatie applicatie vinden.</string>
+  <string name="err_application_no">c:geo Kan geen geschikte applicatie vinden.</string>
+  <string name="err_auth_initialize">Sorry, het is c:geo niet gelukt het autorisatie proces te initialiseren.</string>
+  <string name="err_auth_process">Autorisatie proces mislukt.</string>
+  <string name="err_cannot_log_visit">c:geo Heeft onvoldoende informatie om bezoek te loggen. Probeer het vanuit de volledige cache details.</string>
+  <string name="err_init_cleared">Sorry, c:geo kan de login informatie niet wissen.</string>
+  <string name="err_no_chaches">Sorry, c:geo heeft cache(s) niet kunnen laden.</string>
+  <string name="err_download_fail">Sorry, c:geo heeft caches niet kunnen downloaden omdat </string>
+  <string name="err_update_fail">Bijwerken afgelegde afstand mislukt.</string>
+  <string name="err_list_load_fail">Sorry, c:geo heeft cache lijst niet kunnen laden.</string>
+  <string name="err_store_failed">Sorry, c:geo kan de geocache niet opslaan.</string>
+  <string name="err_refresh_failed">Sorry, c:geo kan de geocache niet verversen.</string>
+  <string name="err_drop_failed">Sorry, c:geo kan de geocache niet wissen.</string>
+  <string name="err_dwld_details_failed">Sorry, c:geo kon de cache details niet downloaden.</string>
+  <string name="err_dwld_details_failed_reason">Sorry, c:geo kon de cache details niet downloaden omdat</string>
+  <string name="err_load_descr_failed">Sorry, c:geo kan de omschrijving niet laden.</string>
+  <string name="err_location_unknown">c:geo kent de locatie van de cache niet.</string>
+  <string name="err_manual_title">De handleiding is niet geinstalleerd.</string>
+  <string name="err_manual_message">De handleiding voor c:geo is niet beschikbaar op dit apparaat. Moet de handleiding geinstalleerd worden?</string>
+  <string name="err_manual_market">c:geo kan de Android Market niet starten om te zoeken naar de handleiding van c:geo.</string>
+  <string name="err_missing_device_name">Voer een apparaatnaam in voor registratie.</string>
+
+  <string name="err_tb_display">"Sorry, c:geo kan de gezochte trackable niet weergeven. Is het echt een trackable?</string>
+  <string name="err_tb_details_open">Sorry, c:geo kan de trackable details niet laden.</string>
+  <string name="err_tb_details_download">Sorry, c:geo kon de trackable details niet downloaden omdat</string>
+  <string name="err_tb_forgot">Sorry, c:geo is vergeten welke trackable je wilde.</string>
+  <string name="err_tb_forgot_saw">Sorry, c:geo is vergeten welke trackable je gezien hebt.</string>
+  <string name="err_tb_find">Sorry, c:geo kan de trackable niet vinden</string>
+  <string name="err_tb_find_that">Sorry, c:geo kan die trackable niet vinden.</string>
+
+  <string name="err_waypoint_cache_unknown">Sorry, c:geo weet niet aan welke cache je een waypoint wil toevoegen.</string>
+  <string name="err_waypoint_unknown">Sorry, c:geo is vergeten welke waypoint je wil laten zien.</string>
+  <string name="err_waypoint_add_failed">Sorry, c:geo kon de waypoint niet toevoegen.</string>
+  <string name="err_waypoint_load_failed">Sorry, c:geo kon de waypoint niet laden.</string>
+  <string name="err_waypoint_delete_failed">Sorry, c:geo kan de waypoint niet wissen.</string>
+  <string name="err_point_unknown_position">Sorry, c:geo kan niet bepalen waar je bent.</string>
+  <string name="err_point_no_position_given_title">Info benodigd</string>
+  <string name="err_point_no_position_given">Geef op zijn minst lengte- en breedtegraad of afstand en richting. Of vul alle 4 de velden.</string>
+  <string name="err_point_curr_position_unavailable">c:geo heeft de huidige coördinaten nog niet. Even geduld a.u.b….</string>
+  <string name="err_point_bear_and_dist_title">Hulp nodig?</string>
+  <string name="err_point_bear_and_dist">Vul zowel richting als afstand. Richting is hoek van 0 to 360 graden t.o.v. het noorden. Afstand mag met of zonder eenheid.</string>
+  <string name="err_point_location_error">Sorry, c:geo kan locatie van de waypoint niet ophalen.</string>
+  <string name="err_navigation_not_found">c:geo kan geen ondersteunde navigatie vinden.</string>
+
+  <string name="err_log_load_data">Sorry, c:geo kan data om bezoek te loggen niet laden.</string>
+  <string name="err_log_load_data_again">Sorry, c:geo kan data om bezoek te loggen niet laden. Bezig nogmaals te proberen.</string>
+  <string name="err_log_load_data_still">c:geo is nog steeds bezig om data te laden om bezoek te loggen. Graag nog even geduld.</string>
+  <string name="err_log_failed_server">Sorry, c:geo kon bezoek niet loggen omdat de server niet reageert.</string>
+  <string name="err_log_post_failed">Sorry, het is c:geo niet gelukt het log te posten.</string>
+  <string name="err_log_post_failed_because">Sorry, c:geo kon log niet posten omdat </string>
+
+  <string name="err_search_address_no_match">Sorry, c:geo heeft geen gelijkende plaats gevonden.</string>
+  <string name="err_search_address_forgot">Sorry, c:geo is het adres dat je zoekt vergeten.</string>
+  <string name="err_search_address">Zoeken naar plaatsen</string>
+  <string name="err_parse_lat">Sorry, c:geo kan breedtegraad niet verwerken.</string>
+  <string name="err_parse_lon">Sorry, c:geo kan lengtegraad niet verwerken.</string>
+  <string name="err_parse_bear">Sorry, c:geo kan richting niet verwerken.</string>
+  <string name="err_parse_dist">Sorry, c:geo kan afstand niet verwerken.</string>
+
+  <string name="err_fieldnotes_export_failed">Exporeren van Field Notes niet gelukt.</string>
+
+  <string name="warn_save_nothing">Er is niets op te slaan.</string>
+  <string name="warn_no_cache_coord">Er is geen cache met deze coördinaten.</string>
+  <string name="warn_no_coordinates">Geen coördinaten opgegeven.</string>
+  <string name="warn_no_keyword">Geen sleutelwoord opgegeven.</string>
+  <string name="warn_no_username">Geem gebruikersnaam opgegeven.</string>
+  <string name="warn_search_help_title">Hulp nodig?</string>
+  <string name="warn_search_help_address">"Vul adres of locatienaam. Gebruik bijvoorbeeld adres \"Hoofdstraat 100, Amsterdam, Nederland\", plaatsnaam \"Utrecht\" of een naam \"Nationaal Park de Hoge Veluwe\".</string>
+  <string name="warn_search_help_gccode">Voer de cachecode in. Bijvoorbeeld \"GC1VCAZ\".</string>
+  <string name="warn_search_help_keyword">Voer een woord in dat een deel is van de cache naam die je zoekt.</string>
+  <string name="warn_search_help_user">Voer een gebruikersnaam in van een Geocaching.com gebruiker.</string>
+  <string name="warn_search_help_tb">Voer de trackable code in. Bijvoorbeeld \"TB29QMZ\".</string>
+  <string name="warn_log_text_fill">Voer s.v.p. een logtekst in.</string>
+  <string name="warn_load_log_image">Sorry, c:geo kon de logafbeelding niet laden.</string>
+  <string name="warn_load_spoiler_image">Sorry, c:geo kon de spoilerafbeelding niet laden.</string>
+
+  <string name="info_altitude">Huidige hoogte</string>
+  <string name="info_distance">Afgelegde afstand</string>
+  <string name="info_distance_cleared">Afgelegde afstand is gewist.</string>
+  <string name="info_since">\n(sinds </string>
+
+  <string name="info_log_posted">c:geo heeft log succesvol gepost.</string>
+  <string name="info_log_saved">c:geo heeft log succesvol opgeslagen.</string>
+  <string name="info_log_cleared">Log is gewist.</string>
+  <string name="info_log_type_changed">Type log is gewijzigd!</string>
+
+  <string name="info_fieldnotes_exported_to">Field Notes geexporteerd naar</string>
+
+  <!-- location service -->
+  <string name="loc_last">Laatst bekende</string>
+  <string name="loc_net">Netwerk</string>
+  <string name="loc_gps">Gps</string>
+  <string name="loc_sat">Sat</string>
+  <string name="loc_trying">Proberen te lokaliseren</string>
+  <string name="loc_no_addr">Adres onbekend</string>
+
+  <!-- standard menu -->
+  <string name="menu_about">Over c:geo</string>
+  <string name="menu_helpers">Hulpprogramma\'s</string>
+  <string name="menu_settings">Instellingen</string>
+  <string name="menu_history">Geschiedenis</string>
+  <string name="menu_filter">Filter</string>
+
+  <!-- main screen -->
+  <string name="live_map_button">Live map</string>
+  <string name="caches_nearby_button">Dichtbij</string>
+  <string name="advanced_search_button">Zoeken</string>
+  <string name="stored_caches_button">Opgeslagen</string>
+  <string name="any_button">Elke locatie</string>
+  <string name="about_button">Over</string>
+  <string name="settings_button">Instellingen</string>
+  <string name="type">Type</string>
+  <string name="now_searching">Bezig met zoeken</string>
+
+  <!-- caches -->
+  <string name="caches_searching">Zoeken naar caches</string>
+  <string name="caches_no_cache">Geen cache</string>
+  <string name="caches_more_caches">Meer caches</string>
+  <string name="caches_more_caches_no">Einde cachelijst</string>
+  <string name="caches_more_caches_loading">Caches laden…</string>
+  <string name="caches_downloading">Caches aan het downloaden…\nETE: </string>
+  <string name="caches_progress_loading_title">Caches laden</string>
+  <string name="caches_progress_loading_text">Opgeslagen caches in apparaat</string>
+  <string name="caches_eta_ltm">Minder dan een minuut</string>
+  <string name="caches_eta_mins"> minuten</string>
+  <string name="caches_eta_min"> minuut</string>
+  <string name="caches_no_caches"> (geen caches)</string>
+  <string name="caches_store_offline">Opslaan voor Offline gebruik</string>
+  <string name="caches_store_selected">Geselecteerden opslaan</string>
+  <string name="caches_stored">Opgeslagen</string>
+  <string name="caches_history">Geschiedenis</string>
+  <string name="caches_on_map">Toon op kaart</string>
+  <string name="caches_sort">Sorteer</string> <!-- since: 2.10 RC2 -->
+  <string name="caches_sort_title">Sorteer op</string> <!-- since: 2.10 RC3 -->
+  <string name="caches_sort_distance">afstand</string> <!-- since: 2.10 RC3 -->
+  <string name="caches_sort_difficulty">moeilijkheid</string> <!-- since: 2.10 RC3 -->
+  <string name="caches_sort_terrain">terrein</string> <!-- since: 2.10 RC3 -->
+  <string name="caches_sort_size">formaat</string> <!-- since: 2.10 RC3 -->
+  <string name="caches_sort_favorites">populariteit</string> <!-- since: 2.10 RC3 -->
+  <string name="caches_sort_name">naam</string> <!-- since: 2.10 RC3 -->
+  <string name="caches_sort_gccode">GC-code</string> <!-- since: 2.2 -->
+  <string name="caches_sort_rating">waardering</string>
+  <string name="caches_sort_vote">stemmen (eigen waardeering)</string>
+  <string name="caches_sort_inventory">aantal items</string>
+  <string name="caches_sort_date">datum</string>
+  <string name="caches_select">Selecteer uit lijst</string>
+  <string name="caches_select_mode">Selectie modus</string>
+  <string name="caches_select_mode_exit">Selectie modus beïndigen</string>
+  <string name="caches_select_invert">Inverteer selectie</string>
+  <string name="caches_nearby">Nabij</string>
+  <string name="caches_manage">Beheer</string>
+  <string name="caches_drop_selected">Drop geselecteerde</string>
+  <string name="caches_drop_selected_ask">Wil je de geselecteerde caches verwijderen van het apparaat?</string>
+  <string name="caches_drop_all">Alles droppen</string>
+  <string name="caches_drop_all_ask">Wil je alle caches van het apparaat verwijderen?</string>
+  <string name="caches_drop_stored">Drop opgeslagen</string>
+  <string name="caches_drop_progress">Caches worden verwijderd</string>
+  <string name="caches_refresh_selected">Ververs geselecteerden</string>
+  <string name="caches_refresh_all">Ververs alle</string>
+  <string name="caches_move_selected">Verplaats geselecteerden</string>
+  <string name="caches_move_all">Verplaats alle</string>
+  <string name="caches_map_cgeo">c:geo</string>
+  <string name="caches_map_locus">Locus</string>
+  <string name="caches_recaptcha_title">reCAPTCHA</string>
+  <string name="caches_recaptcha_explanation">Vul de tekst uit de afbeelding in. Dit is nodig voor het downloaden van de coördinaten van de caches. Dit is optioneel en kan in de instellingen uitgeschakeld worden.</string>
+  <string name="caches_recaptcha_hint">Tekst uit de afbeelding</string>
+  <string name="caches_recaptcha_continue">Doorgaan</string>
+  <string name="caches_filter">Filter</string>
+  <string name="caches_filter_title">Filter op</string>
+  <string name="caches_filter_size">grootte</string>
+  <string name="caches_filter_type">type</string>
+  <string name="caches_filter_track">met trackables</string>
+  <string name="caches_filter_clear">maak filters leeg</string>
+  <string name="caches_filter_size_title">Kies grootte</string>
+  <string name="caches_filter_type_title">Choose type</string>
+  <string name="caches_filter_type_traditional">Traditional cache</string>
+  <string name="caches_filter_type_multi">Multi-cache</string>
+  <string name="caches_filter_type_mystery">Unknown cache</string>
+  <string name="caches_filter_type_letterbox">Letterbox Hybrid</string>
+  <string name="caches_filter_type_event">Event cache</string>
+  <string name="caches_filter_type_mega">Mega-event cache</string>
+  <string name="caches_filter_type_earth">Earth cache</string>
+  <string name="caches_filter_type_cito">Cache In Trash Out event</string>
+  <string name="caches_filter_type_webcam">Webcam cache</string>
+  <string name="caches_filter_type_virtual">Virtual cache</string>
+  <string name="caches_filter_type_wherigo">Wherigo cache</string>
+  <string name="caches_filter_type_lostfound">Lost &amp; Found</string>
+  <string name="caches_filter_type_ape">Project APE cache</string>
+  <string name="caches_filter_type_gchq">Groundspeak HQ</string>
+  <string name="caches_filter_type_gps">GPS Cache exhibit</string>
+  <string name="caches_exporting_fieldnote">Exporteer als Field Notes…</string>
+  <string name="caches_removing_from_history">Verwijderen uit geschiedenis…</string>
+
+  <!-- caches lists -->
+  <string name="list_menu">Lijst</string>
+  <string name="list_menu_create">Maak nieuwe lijst</string>
+  <string name="list_menu_drop">Verwijder huidige lijst</string>
+  <string name="list_menu_change">Pas lijst aan</string> <!-- since: 2.2 -->
+  <string name="list_title">Selecteer een lijst</string>
+  <string name="list_inbox">Opgeslagen</string>
+  <string name="list_wpt">Waypoints</string>
+  <string name="list_dialog_create_title">Nieuwe lijst</string>
+  <string name="list_dialog_create">Maak</string>
+  <string name="list_dialog_cancel">Annuleer</string>
+  <string name="list_dialog_create_ok">Nieuwe lijst is aangemaakt</string>
+  <string name="list_dialog_create_err">c:geo kon geen nieuwe lijst aanmaken</string>
+  <string name="list_dialog_remove_title">Verwijder lijst</string>
+  <string name="list_dialog_remove_description">Wil je de huidige lijst van caches verwijderen? Alle overgebleven caches zullen worden verplaatst naar \"Stored\".</string>
+  <string name="list_dialog_remove">Verwijder</string>
+  <string name="list_dialog_remove_ok">Lijst is verwijderd</string>
+  <string name="list_dialog_remove_err">c:geo kon de huidige lijst niet verwijderen</string>
+
+  <!-- about -->
+  <string name="about_changelog">Changelog</string>
+  <string name="about_donate">Doneren</string>
+  <string name="about_detail">Details</string>
+  <string name="about_donation_less">Minder doneren</string>
+  <string name="about_donation_more">Doneren aan ontwikkeling</string>
+  <string name="about_contributors">Bijdragers</string>
+
+  <!-- init -->
+  <string name="init_geocaching">Geocaching.com</string>
+  <string name="init_gcvote">GCvote.com</string>
+  <string name="init_go4cache">Go 4 Cache</string>
+  <string name="init_twitter">Twitter</string>
+  <string name="init_username">Gebruikersnaam</string>
+  <string name="init_password">Wachtwoord</string>
+  <string name="init_passvote">Wachtwoord</string>
+  <string name="init_login">Login controleren</string>
+  <string name="init_login_popup">Inloggen</string>
+  <string name="init_login_popup_working">Inloggen op Geocaching.com…</string>
+  <string name="init_login_popup_ok">Ingelogd.</string>
+  <string name="init_login_popup_failed">Inloggen mislukt.</string>
+  <string name="init_login_popup_failed_reason">Inloggen mislukt omdat </string>
+  <string name="init_legal">Juridische info</string>
+  <string name="init_go4cache_connect">Verbinden met Go 4 Cache</string>
+  <string name="init_twitter_authorize">c:geo Autoriseren</string>
+  <string name="init_twitter_publish">Status publiceren bij gevonden cache</string>
+  <string name="init_signature">Handtekening</string>
+  <string name="init_signature_help_button">Help</string>
+  <string name="init_signature_help_title">Handtekening tips en truuks</string>
+  <string name="init_signature_help_text">Maak een handtekening om te gebruiken in logs.\nSpeciale teksten die gebruikt kunnen worden zijn: [DATE] , [TIME], [USER] &amp; [NUMBER].\nDeze worden ingevuld op het moment dat de handtekening ingevoegd word.</string>
+  <string name="init_signature_template_button">Voeg template toe</string>
+  <string name="init_signature_template_date">Datum</string>
+  <string name="init_signature_template_time">Tijd</string>
+  <string name="init_signature_template_user">Gebruiker</string>
+  <string name="init_signature_template_number">NUmmer</string>
+  <string name="init_languages">Vertaling</string>
+  <string name="init_languages_description">Welke talen hoeven niet vertaald te worden? Gebruik hier de twee karakters lange taalcode.</string>
+  <string name="init_languages_hint">en es de cs</string>
+  <string name="init_translate">Vertaal omschrijving &amp; hint</string>
+  <string name="init_other">Overige opties</string>
+  <string name="init_skin">Lichte skin (c:geo herstarten)</string>
+  <string name="init_transparent">Transparant c:geo hoofdscherm instellen</string>
+  <string name="init_address">Toon adres op hoofdscherm</string>
+  <string name="init_captcha">Laat CAPTCHA zien indien noodzakelijk</string>
+  <string name="init_useenglish">Use English inside c:geo\n(restart needed)</string>
+  <string name="init_exclude">Eigen en gevonden caches uitsluiten</string>
+  <string name="init_disabled">Uitgeschakelde caches uitsluiten</string>
+  <string name="init_offline">Kaarten opslaan voor gebruik zonder verbinding</string>
+  <string name="init_save_log_img">Sla afbeeldingen van logs op</string>
+  <string name="init_units">Gebruik imperiale stelsel voor afstanden</string>
+  <string name="init_nav">Gebruik Google Navigatie</string>
+  <string name="init_autoload">Automatisch lange omschrijving laden</string>
+  <string name="init_livelist">Toon afstand tot cache in lijst</string>
+  <string name="init_browser">c:geo Als standaard browser instellen</string>
+  <string name="init_altitude">Hoogte correctie</string>
+  <string name="init_altitude_description">Als de GPS een verkeerde hoogte aangeeft, kan dit gecorrigeerd worden met een positief of negatief nummer. De correctie is in meters.</string>
+  <string name="init_clear">Login wissen</string>
+  <string name="init_cleared">c:geo Heeft login informatie gewist.</string>
+  <string name="init_backup">Backup</string>
+  <string name="init_backup_backup">Backup</string>
+  <string name="init_backup_note">Let op: deze optie zal de database die de caches en de waypointsPlease note this option will backup/restore the database containing caches and waypoints, not settings. Your login information (passwords) will not leave this application.</string>
+  <string name="init_backup_restore">Herstel</string>
+  <string name="init_backup_success">De database van c:geo was succesvol gekopieerd naar het bestand</string>
+  <string name="init_backup_failed">Backup van c:geo database is niet gelukt.</string>
+  <string name="init_restore_success">Herstellen is gelukt.</string>
+  <string name="init_restore_failed">Herstellen is neit gelukt.</string>
+  <string name="init_backup_last">Backup beschikbaar van</string>
+  <string name="init_backup_last_no">Er is geen bestand met een backup.</string>
+  <string name="init_mapsources">Kaartbron</string> <!-- since: 2.26 RC3 -->
+  <string name="init_mapsources_description">Hier kan een kaartenbron geselecteerd worden. Als alternatief voor Google maps zijn verschillende OpenStreetMap varianten en ook offline kaarten-files beschikbaar (Zie <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> voor meer info).</string> <!-- since: 2.26 RC3 -->
+  <string name="init_mapsource_select">Selecteer kaartbron</string>
+  <string name="init_select_mapfile">…</string>
+  <string name="init_trackautovisit">Zet trackables automatisch op \'bezocht\'</string>
+  <string name="init_sigautoinsert">Voeg handtekening automatisch toe</string>
+
+  <!-- map sources -->
+  <string-array name="map_sources">
+    <item>Google: Map</item>
+    <item>Google: Satellite</item>
+    <item>OSM: Mapnik</item>
+    <item>OSM: Osmarender</item>
+    <item>OSM: Cyclemap</item>
+    <item>OSM: Offline</item>
+  </string-array>
+
+  <string name="init_sendToCgeo">Verstuur naar c:geo</string>
+  <string name="init_sendToCgeo_name">Jouw apparaatnaam:</string>
+  <string name="init_sendToCgeo_description">Verstuur naar c:geo zorgt ervoor dat je caches direct vanaf de geocaching website kan ontvangen door middel van een plugin in je webbrowser (Firefox of Chrome). Lees het volgende voordat je registreerd <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Registratie is alleen nodig als je send2cgeo wil gebruiken. C:geo werkt ook zonder het registreren van je apparaat.</string>
+  <string name="init_sendToCgeo_register">Verstuur registratieverzoek</string>
+  <string name="init_sendToCgeo_registering">Bezig met het registreren voor "Send to c:geo"…</string>
+  <string name="init_sendToCgeo_register_ok">Registratie gelukt. PIN code is ####. Gebruik dit op de c:geo website om dit apparaat aan je browser toe te voegen.</string>
+  <string name="init_sendToCgeo_register_fail">Registratie is niet gelukt.</string>
+
+  <!-- auth -->
+  <string name="auth_twitter">Twitter</string>
+  <string name="auth_authorize">c:geo Autoriseren</string>
+  <string name="auth_start">Start autorisatie</string>
+  <string name="auth_again">Nogmaals starten</string>
+  <string name="auth_pin_hint">Door Twitter toegekende pin</string>
+  <string name="auth_finish">Afronden</string>
+  <string name="auth_dialog_wait">Wachten op Twitter…</string>
+  <string name="auth_dialog_pin_title">Pin code</string>
+  <string name="auth_dialog_pin_message">Voer de door de Twitter website verstrekte PIN code in. Deze is verplicht om de autorisatie af te ronden.</string>
+  <string name="auth_dialog_completed">c:geo Is nu geauthoriseerd om naar Twitter te posten.</string>
+
+  <!-- cache -->
+  <string name="cache_count_no">Geen cache</string>
+  <string name="cache_count_one">Een cache</string>
+  <string name="cache_count_more">Caches</string>
+  <string name="cache_offline">Offline</string>
+  <string name="cache_offline_refresh">Verversen</string>
+  <string name="cache_offline_drop">Laten vervallen</string>
+  <string name="cache_offline_store">Opslaan</string>
+  <string name="cache_offline_stored">Opgeslagen in apparaat</string>
+  <string name="cache_offline_not_ready">Niet gereed voor\n offline gebruik</string>
+  <string name="cache_offline_time_about">over</string>
+  <string name="cache_offline_time_mins">minuten geleden</string>
+  <string name="cache_offline_time_mins_few">paar minuten geleden</string>
+  <string name="cache_offline_time_hour">een uur geleden</string>
+  <string name="cache_offline_time_hours">uren geleden</string>
+  <string name="cache_offline_time_days">dagen geleden</string>
+  <string name="cache_premium">Premium</string>
+  <string name="cache_attributes">Attributen</string>
+  <string name="cache_inventory">Inventaris</string>
+  <string name="cache_log_offline">Offline log</string>
+  <string name="cache_log_images_loading">Laden van logafbeeldingen…</string>
+  <string name="cache_log_images_title">Logafbeelding</string>
+  <string name="cache_log_image_default_title">Foto</string>
+  <string name="cache_personal_note">Persoonlijke aantekening</string>
+  <string name="cache_description">Omschrijving</string>
+  <string name="cache_description_long">Lange omschrijving</string>
+  <string name="cache_watchlist">Watchlist</string>
+  <string name="cache_watchlist_on">Deze cache komt voor op je watchlist.</string>
+  <string name="cache_watchlist_not_on">Deze cache komt niet voor op je watchlist.</string>
+  <string name="cache_watchlist_add">Voeg aan watchlist toe</string>
+  <string name="cache_watchlist_remove">Verwijder van watchlist</string>
+  <string name="cache_waypoints">Waypoints</string>
+  <string name="cache_waypoints_add">Waypoint toevoegen</string>
+  <string name="cache_hint">Hint</string>
+  <string name="cache_logs">Logboek</string>
+  <string name="cache_dialog_loading_details">Cache details laden…</string>
+  <string name="cache_dialog_loading_description">Cache omschrijving laden…</string>
+  <string name="cache_dialog_offline_save_title">Offline</string>
+  <string name="cache_dialog_offline_save_message">Cache opslaan voor offline gebruik…</string>
+  <string name="cache_dialog_offline_drop_title">Offline</string>
+  <string name="cache_dialog_offline_drop_message">Cache verwijderen van apparaat geheugen…</string>
+  <string name="cache_dialog_refresh_title">Verversen</string>
+  <string name="cache_dialog_refresh_message">Cache details opnieuw laden…</string>
+  <string name="cache_dialog_watchlist_add_title">Watchlist</string>
+  <string name="cache_dialog_watchlist_add_message">Voeg cache aan je watchlist toe…</string>
+  <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
+  <string name="cache_dialog_watchlist_remove_message">Verwijder cache van je watchlist…</string>
+  <string name="cache_menu_navigate">Navigeer</string>
+  <string name="cache_menu_compass">Kompas</string>
+  <string name="cache_menu_tbt">Turn-by-turn</string>
+  <string name="cache_menu_radar">Radar</string>
+  <string name="cache_menu_map">Toon op kaart</string>
+  <string name="cache_menu_map_static">Statische kaarten</string>
+  <string name="cache_menu_locus">Locus</string>
+  <string name="cache_menu_rmaps">Rmaps</string>
+  <string name="cache_menu_map_ext">Toon op ext. kaart</string>
+  <string name="cache_menu_map_short">Kaarten</string>
+  <string name="cache_menu_map_ext_short">Ext. kaart</string>
+  <string name="cache_menu_browser">Open in browser</string>
+  <string name="cache_menu_visit">Log bezoek</string>
+  <string name="cache_menu_spoilers">Spoiler afbeeldingen</string>
+  <string name="cache_menu_around">Caches rondom</string>
+  <string name="cache_menu_event">Toevoegen aan kalender</string>
+  <string name="cache_menu_details">Details</string>
+  <string name="cache_menu_share">Deel cache</string>
+  <string name="cache_menu_move_list">Verplaats naar andere lijst</string>
+  <string name="cache_menu_gcc">GCC</string>
+  <string name="cache_menu_whereyougo">WhereYouGo</string>
+  <string name="cache_status">Status</string>
+  <string name="cache_status_offline_log">Log opgeslagen</string>
+  <string name="cache_status_found">Gevonden</string>
+  <string name="cache_status_archived">Gearchiveerd</string>
+  <string name="cache_status_disabled">Uitgeschakeld</string>
+  <string name="cache_status_premium">Alleen voor premium leden</string>
+  <string name="cache_geocode">gc-code</string>
+  <string name="cache_name">Naam</string>
+  <string name="cache_type">Type</string>
+  <string name="cache_distance">Afstand</string>
+  <string name="cache_difficulty">Moeilijkheid</string>
+  <string name="cache_terrain">Terrein</string>
+  <string name="cache_rating">Waardering</string>
+  <string name="cache_rating_of">van</string>
+  <string name="cache_favourite">Favoriet</string>
+  <string name="cache_owner">Eigenaar</string>
+  <string name="cache_hidden">Verstopt</string>
+  <string name="cache_event">Datum</string>
+  <string name="cache_location">Locatie</string>
+  <string name="cache_coordinates">Coördinaten</string>
+  <string name="cache_elevation">Hoogte</string>
+  <string name="cache_calendars">Selecteer kalender</string>
+  <string name="cache_spoiler_images_title">Spoiler afbeeldingen</string>
+  <string name="cache_spoiler_images_loading">Spoiler afbeeldingen laden…</string>
+  <string name="cache_log_types">Log types</string> <!-- since: 2.10 RC2 -->
+  <string name="cache_coordinates_no">Deze cache heeft geen coördinaten.</string> <!-- since: 2.26 RC2 -->
+  <string name="cache_export_fieldnote">Exporteer als Field Notes</string>
+  <string name="cache_clear_history">Maak geschiedenis leeg</string>
+  <string name="cache_remove_from_history">Verwijder uit geschiedenis</string>
+
+  <!-- file list base -->
+  <string name="file_searching_in">Zoeken naar bestanden\nin</string>
+  <string name="file_list_no_files">Sorry, c:geo heeft geen bestanden gevonden.</string>
+  <string name="file_searching">Zoeken naar overeenkomende bestanden</string>
+  <string name="file_title_searching">Bezig met zoeken</string>
+
+  <!-- gpx -->
+  <string name="gpx_import_loading_stored">Caches laden van .gpx bestand\nstored:</string>
+  <string name="gpx_import_no_files">Sorry, c:geo heeft geen .gpx bestanden gevonden.</string>
+  <string name="gpx_import_caches_imported">Caches geïmporteerd</string>
+  <string name="gpx_import_loading">Caches laden uit .gpx bestand</string>
+  <string name="gpx_import_title">Importeer GPX</string>
+  <string name="gpx_import_title_reading_file">Bestand aan het lezen</string>
+  <string name="gpx_import_title_caches_imported">Resultaat</string>
+
+  <!-- map file select -->
+  <string name="map_file_select_title">Selecteer mapbestand</string>
+
+  <!--  import -->
+  <string name="import_title">Import…</string>
+  <string name="web_import_title">Importeer van web</string>
+  <string name="web_import_server_problem">Er is een probleem opgetreden tijdens communicatie met de server. Meld je telefoon opnieuw aan en probeer het nogmaals.</string>
+  <string name="web_import_waiting">Aan het wachten voor nieuwe caches van het web…</string>
+  <string name="web_downloading">Downloading</string>
+  <string name="web_downloaded">Gedownload</string>
+
+  <!-- event -->
+  <string name="event_success">Event cache toegevoegd aan kalender</string>
+  <string name="event_fail">Niet gelukt om event cache toe te voegen aan kalender</string>
+
+  <!-- popup -->
+  <string name="popup_more">Meer details</string>
+  <string name="popup_offline">Offline</string>
+
+  <!-- waypoint -->
+  <string name="waypoint">Waypoint</string>
+  <string name="waypoint_title">Waypoint</string>
+  <string name="waypoint_custom">Aangepast</string>
+  <string name="waypoint_my_coordinates">Mijn coördinaten</string>
+  <string name="waypoint_bearing">Richting</string>
+  <string name="waypoint_distance">Afstand</string>
+  <string name="waypoint_name">Naam</string>
+  <string name="waypoint_edit">Bewerken</string>
+  <string name="waypoint_delete">Verwijderen</string>
+  <string name="waypoint_edit_title">Waypoint bewerken</string>
+  <string name="waypoint_add_title">Waypoint toevoegen</string>
+  <string name="waypoint_note">Notitie</string>
+  <string name="waypoint_save">Opslaan</string>
+  <string name="waypoint_loading">Waypoint laden…</string>
+  <string name="waypoint_unknown_coordinates">coördinaten niet bekend</string>
+  <string name="search_history">Geschiedenis</string>
+  <string name="search_history_empty">Geen eerdere bestemmingen</string>
+  <string name="search_remove_destination">Bestemming verwijderd</string>
+  <string name="search_clear_history">Maak geschiedenis leeg</string>
+  <string name="search_history_cleared">Geschiedenis leeggemaakt</string>
+
+  <string-array name="waypoint_coordinate_formats">
+    <item>Plain</item>
+	<item>DDD.DDDDD°</item>
+	<item>DDD°MM.MMM\'</item>
+	<item>DDD°MM\'SS.SSS\"</item>
+  </string-array>
+
+  <!-- visit -->
+  <string name="visit_tweet">Post deze vondst naar Twitter</string>
+
+  <!-- map -->
+  <string name="map_map">Kaart</string>
+  <string name="map_live">Live kaart</string>
+  <string name="map_view_map">Kaart weergave</string>
+  <string name="map_trail_show">Toon spoor</string>
+  <string name="map_trail_hide">Verberg spoor</string>
+  <string name="map_circles_show">Laat circels zien</string> <!-- since: 2.23 RC3 -->
+  <string name="map_circles_hide">Verberg circles</string> <!-- since: 2.23 RC3 -->
+  <string name="map_live_enable">Live aanzetten</string>
+  <string name="map_live_disable">Live uitzetten</string>
+  <string name="map_static_title">Statische kaarten</string>
+  <string name="map_static_loading">Statische kaarten laden…</string>
+  <string name="map_token_err">Omdat c:geo alleen gedeeltelijke gegevens kan downloaden, kunnen de coördinaten inaccuraat zijn.</string> <!-- since: 2.26 RC3 -->
+
+  <!-- search -->
+  <string name="search_bar_hint">Zoek naar caches</string>
+  <string name="search_bar_desc">Caches (GC-code, trefwoord), Trackables (TB-code)</string>
+  <string name="search_coordinates">Coördinaten</string>
+  <string name="search_coordinates_button">Zoeken op coördinaten</string>
+  <string name="search_address">Adres</string>
+  <string name="search_address_button">Zoeken op adres</string>
+  <string name="search_gc">Geocode</string>
+  <string name="search_gc_button">Zoeken op geocode</string>
+  <string name="search_kw">Trefwoorden</string>
+  <string name="search_kw_prefill">Trefwoord</string>
+  <string name="search_kw_button">Zoeken op trefwoord</string>
+  <string name="search_kw_caches">Caches op trefwoord</string>
+  <string name="search_caches_found_by">Caches gevonden door</string>
+  <string name="search_caches_hidden_by">Caches verstopt door</string>
+  <string name="search_fbu">Gevonden door gebruiker</string>
+  <string name="search_fbu_prefill">Gebruikersnaam</string>
+  <string name="search_fbu_button">Zoeken op gebruikersnaam</string>
+  <string name="search_hbu">Verstopt door gebruikers</string>
+  <string name="search_hbu_prefill">Eigenaar</string>
+  <string name="search_hbu_button">Zoeken op eigenaar</string>
+  <string name="search_tb">Trackable</string>
+  <string name="search_tb_hint">Trackable identificatie</string>
+  <string name="search_tb_button">Zoeken naar trackable</string>
+  <string name="search_destination">Bestemming</string>
+  <string name="search_direction_rel">Vanaf deze positie</string>
+  <string name="search_lat">Lat</string>
+  <string name="search_lon">Lon</string>
+  <string name="search_caches">Zoeken naar caches</string>
+  <string name="search_caches_near">Caches nabij</string>
+  <string name="search_address_started">Zoeken naar plaatsen</string>
+  <string name="search_address_result">Gevonden plaatsen</string>
+
+  <!-- trackable -->
+  <string name="trackable">Trackable</string>
+  <string name="trackable_select_title">Trackables</string>
+  <string name="trackable_details_loading">Bezig met laden van trackable details…</string>
+  <string name="trackable_log_touch">Log aanraking</string>
+  <string name="trackable_browser_open">Openen in Browser</string>
+  <string name="trackable_goal">Doel</string>
+  <string name="trackable_details">Details</string>
+  <string name="trackable_image">Afbeelding</string>
+  <string name="trackable_code">TB-Code</string>
+  <string name="trackable_name">Naam</string>
+  <string name="trackable_type">Type</string>
+  <string name="trackable_owner">Eigenaar</string>
+  <string name="trackable_spotted">Gespot</string>
+  <string name="trackable_spotted_in_cache">In</string>
+  <string name="trackable_spotted_at_user">In de handen van</string>
+  <string name="trackable_spotted_unknown_location">Onbekende lokatie</string>
+  <string name="trackable_spotted_owner">In de handen van de eigenaar</string>
+  <string name="trackable_origin">Oorsprong</string>
+  <string name="trackable_unknown">Onbekend</string>
+  <string name="trackable_released">Uitgebracht</string>
+  <string name="trackable_distance">Afgelegd</string>
+  <string name="trackable_touch">Aanraking</string>
+
+  <!--  user -->
+  <string name="user_menu_title">Over</string>
+  <string name="user_menu_view_hidden">Caches verstopt</string>
+  <string name="user_menu_view_found">Caches gevonden</string>
+  <string name="user_menu_open_browser">Open profiel in browser</string>
+
+  <!-- navigation -->
+  <string name="navigation">Navigatie</string>
+  <string name="compass_title">Kompas</string>
+  <string name="use_gps">Gebruik GPS</string>
+  <string name="use_compass">Gebruik kompas</string>
+  <string name="destination_select">Selecteer bestemming</string>
+  <string name="destination_set">Zet bestemming</string>
+
+  <!-- license -->
+  <string name="license">Licentie</string>
+  <string name="license_show">Toon licentie</string>
+  <string name="license_dismiss">Afwijzen</string>
+
+  <!-- helpers -->
+  <string name="helper_manual_title">Handleiding</string>
+  <string name="helper_manual_description">Uitgebreide handleiding voor c:geo welke alle mogelijkheden van deze applicatie uitlegd (ook de verborgen mogelijkheden).</string>
+  <string name="helper_locus_title">Locus</string>
+  <string name="helper_locus_description">Simpele bruikbare applicatie om online kaarten weer te geven en deze voor offline gebruik te downloaden (alleen rasterkarten). Ook ondersteuning voor track recording, poi afhandeling en vele andere handige fucties.</string>
+  <string name="helper_gpsstatus_title">GPS Status</string>
+  <string name="helper_gpsstatus_description">De radar van deze applicatie kan gebruikt worden samen met c:geo. Het bied ook vele andere GPS gerelateerde informatie.</string>
+  <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
+  <string name="helper_bluetoothgps_description">Maakt het mogelijk om een externe GPS ontvanger te gebruiken voor betere ontvangst, betere lokatiebepaling en kan gebruik van de telefoonbatterij verminderen.</string>
+
+  <!--  attributes (permissions -> allowed, not allowed) -->
+  <string name="attribute_dogs_yes">Honden toegestaan</string>
+  <string name="attribute_dogs_no">Honden niet toegestaan</string>
+  <string name="attribute_bicycles_yes">Fietsen toegestaan</string>
+  <string name="attribute_bicycles_no">Fietsen niet toegestaan</string>
+  <string name="attribute_motorcycles_yes">Motoren toegestaan</string>
+  <string name="attribute_motorcycles_no">Motoren niet toegestaan</string>
+  <string name="attribute_quads_yes">Quads toegestaan</string>
+  <string name="attribute_quads_no">Quads niet toegestaan</string>
+  <string name="attribute_jeeps_yes">Off-road voertuigen toegestaan</string>
+  <string name="attribute_jeeps_no">Off-road voertuigen niet toegestaan</string>
+  <string name="attribute_snowmobiles_yes">Sneeuwscooters toegestaan</string>
+  <string name="attribute_snowmobiles_no">Sneeuwscooters niet toegestaan</string>
+  <string name="attribute_horses_yes">Paarden toegestaan</string>
+  <string name="attribute_horses_no">Paarden niet toegestaan</string>
+  <string name="attribute_campfires_yes">Kampvuren toegestaan</string>
+  <string name="attribute_campfires_no">Kampvuren niet toegestaan</string>
+  <string name="attribute_rv_yes">Truck driver/RV toegestaan</string>
+  <string name="attribute_rv_no">Truck driver/RV niet toegestaan</string>
+
+  <!--  attributes (conditions -> yes, no) -->
+  <string name="attribute_kids_yes">Aanbevolen voor kinderen</string>
+  <string name="attribute_kids_no">Niet aanbevolen voor kinderen</string>
+  <string name="attribute_onehour_yes">Duurt minder dan 1 uur</string>
+  <string name="attribute_onehour_no">Duurt meer dan 1 uur</string>
+  <string name="attribute_scenic_yes">Uitzicht(punt)</string>
+  <string name="attribute_scenic_no">Geen uitzicht(punt)</string>
+  <string name="attribute_hiking_yes">Significante wandeling</string>
+  <string name="attribute_hiking_no">Geen significante wandeling</string>
+  <string name="attribute_climbing_yes">Moeilijke beklimming</string>
+  <string name="attribute_climbing_no">Geen moeilijke beklimming</string>
+  <string name="attribute_wading_yes">Mogelijk lopen door water nodig</string>
+  <string name="attribute_wading_no">Lopen door water niet nodig</string>
+  <string name="attribute_swimming_yes">Mogelijk zwemmen nodig</string>
+  <string name="attribute_swimming_no">Zwemmen niet nodig</string>
+  <string name="attribute_available_yes">Altijd beschikbaar</string>
+  <string name="attribute_available_no">Niet altijd beschikbaar</string>
+  <string name="attribute_night_yes">\'s nachts aanbevolen</string>
+  <string name="attribute_night_no">Niet \'s nachts aanbevolen</string>
+  <string name="attribute_winter_yes">Beschikbaar in de winter</string>
+  <string name="attribute_winter_no">Niet beschikbaar in de winter</string>
+  <string name="attribute_stealth_yes">Stealth noodzakelijk</string>
+  <string name="attribute_stealth_no">Stealth niet noodzakelijk</string>
+  <string name="attribute_firstaid_yes">Heeft onderhoud nodig</string>
+  <string name="attribute_firstaid_no">Geen onderhoud nodig</string>
+  <string name="attribute_cow_yes">Pas op voor vee</string>
+  <string name="attribute_cow_no">Geen vee</string>
+  <string name="attribute_field_puzzle_yes">Veldpuzzel</string>
+  <string name="attribute_field_puzzle_no">Geen veldpuzzel</string>
+  <string name="attribute_nightcache_yes">Nachtcache</string>
+  <string name="attribute_nightcache_no">Geen nachtcache</string>
+  <string name="attribute_parkngrab_yes">Parkeer en log</string>
+  <string name="attribute_parkngrab_no">Geen parkeer en log</string>
+  <string name="attribute_abandonedbuilding_yes">Verlaten gebouw</string>
+  <string name="attribute_abandonedbuilding_no">Geen verlaten gebouw</string>
+  <string name="attribute_hike_short_yes">Korte wandeling (minder dan 1 km)</string>
+  <string name="attribute_hike_short_no">Geen korte wandeling</string>
+  <string name="attribute_hike_med_yes">Matige wandeling (1 km tot 10 km)</string>
+  <string name="attribute_hike_med_no">Geen matige wandeling</string>
+  <string name="attribute_hike_long_yes">Lange wandeling (meer dan 10 km)</string>
+  <string name="attribute_hike_long_no">Geen lange wandeling</string>
+  <string name="attribute_seasonal_yes">Seizoens toegang</string>
+  <string name="attribute_seasonal_no">Geen seizoens Toegang</string>
+  <string name="attribute_touristok_yes">Toerist-vriendelijk</string>
+  <string name="attribute_touristok_no">Niet toerist-vriendelijk</string>
+  <string name="attribute_frontyard_yes">Prive woonplaats</string>
+  <string name="attribute_frontyard_no">Geen prive woonplaats</string>
+  <string name="attribute_teamwork_yes">Teamsamenwerking noodzakelijk</string>
+  <string name="attribute_teamwork_no">Geen teamsamenwerking nodig</string>
+  <string name="attribute_landf_yes">Lost and found rondleiding</string>
+  <string name="attribute_landf_no">Geen lost and found rondleiding</string>
+  <string name="attribute_partnership_yes">Partnership cache</string>
+  <string name="attribute_partnership_no">Geen partnership cache</string>
+
+  <!--  attributes (equipment -> required, not required) -->
+  <string name="attribute_fee_yes">Toegang-of parkeerkosten van toepassing</string>
+  <string name="attribute_fee_no">Geen toegang-of parkeerkosten van toepassing</string>
+  <string name="attribute_rappelling_yes">Klimuitrusting benodigd</string>
+  <string name="attribute_rappelling_no">Geen klimuitrusing nodig</string>
+  <string name="attribute_boat_yes">Bood benodigd</string>
+  <string name="attribute_boat_no">Geen boot nodig</string>
+  <string name="attribute_scuba_yes">Duikuitrusting nodig</string>
+  <string name="attribute_scuba_no">Geen duikuitrusting nodig</string>
+  <string name="attribute_flashlight_yes">Zaklamp benodigd</string>
+  <string name="attribute_flashlight_no">Geen zaklamp nodig</string>
+  <string name="attribute_uv_yes">UV lamp benodigd</string>
+  <string name="attribute_uv_no">Geen UV lamp nodig</string>
+  <string name="attribute_snowshoes_yes">Sneeuwschoenen benodigd</string>
+  <string name="attribute_snowshoes_no">Geen sneeuwschoenen nodig</string>
+  <string name="attribute_skiis_yes">Langlaufski\'s nodig</string>
+  <string name="attribute_skiis_no">Langlaufski\'s niet nodig</string>
+  <string name="attribute_s_tool_yes">Speciate gereedschappen nodig</string>
+  <string name="attribute_s_tool_no">Geen speciale gereedschappen nodig</string>
+  <string name="attribute_wirelessbeacon_yes">Wireless beacon</string>
+  <string name="attribute_wirelessbeacon_no">No wireless beacon</string>
+  <string name="attribute_treeclimbing_yes">Boomklimmen noodzakelijk</string>
+  <string name="attribute_treeclimbing_no">Boomklimmen niet nodig</string>
+
+  <!--  attributes (hazards -> present, not present) -->
+  <string name="attribute_poisonoak_yes">Giftige planten</string>
+  <string name="attribute_poisonoak_no">Geen giftige planten</string>
+  <string name="attribute_dangerousanimals_yes">Gevaarlijke dieren</string>
+  <string name="attribute_dangerousanimals_no">Geen gevaarlijke dieren</string>
+  <string name="attribute_ticks_yes">Teken</string>
+  <string name="attribute_ticks_no">Geen teken</string>
+  <string name="attribute_mine_yes">Verlaten mijnen</string>
+  <string name="attribute_mine_no">Geen verlaten mijnen</string>
+  <string name="attribute_cliff_yes">Rotswand / vallende rotsen</string>
+  <string name="attribute_cliff_no">Geen rotswand / vallende rotsen</string>
+  <string name="attribute_hunting_yes">Jacht</string>
+  <string name="attribute_hunting_no">Geen jacht</string>
+  <string name="attribute_danger_yes">Gevaarlijk gebied</string>
+  <string name="attribute_danger_no">Geen gevaarlijk gebied</string>
+  <string name="attribute_thorn_yes">Doornen</string>
+  <string name="attribute_thorn_no">Geen doornen</string>
+
+  <!--  attributes (facilities -> yes, no) -->
+  <string name="attribute_wheelchair_yes">Rolstoel toegankelijk</string>
+  <string name="attribute_wheelchair_no">Niet rolstoel toegankelijk</string>
+  <string name="attribute_parking_yes">Parkeerplaats beschikbaar</string>
+  <string name="attribute_parking_no">Geen parkeergelegenheid</string>
+  <string name="attribute_public_yes">Openbaar vervoer</string>
+  <string name="attribute_public_no">Geen openbaar vervoer</string>
+  <string name="attribute_water_yes">Drinkwater in de buurt</string>
+  <string name="attribute_water_no">Geen drinkwater in de buurt</string>
+  <string name="attribute_restrooms_yes">Toilet beschikbaar in de buurt</string>
+  <string name="attribute_restrooms_no">Geen toilet beschikbaar in de buurt</string>
+  <string name="attribute_phone_yes">Telefoon in de buurt</string>
+  <string name="attribute_phone_no">Geen telefoon in de buurt</string>
+  <string name="attribute_picnic_yes">Picnicktafels in de buurt</string>
+  <string name="attribute_picnic_no">Geen picnicktafels in de buurt</string>
+  <string name="attribute_camping_yes">Camping beschikbaar</string>
+  <string name="attribute_camping_no">Geen camping beschikbaar</string>
+  <string name="attribute_stroller_yes">Wandelaar toegankelijk</string>
+  <string name="attribute_stroller_no">Niet wandelaar toegankelijk</string>
+  <string name="attribute_fuel_yes">Brandstof in de buurt</string>
+  <string name="attribute_fuel_no">Geen brandstof in de buurt</string>
+  <string name="attribute_food_yes">Eetgelegenheid in de buurt</string>
+  <string name="attribute_food_no">Geen eetgelegenheid in de buurt</string>
+
+  <!-- next things -->
+  <string name="legal_note">Voor het gebruik van de diensten van geocaching.com, dient akkoord te worden gegaan met de <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak voorwaarden</a>.</string>
+  <string name="quote">Om geocahing makkelijker te maken en gebruikers luier te maken.</string>
+  <string name="powered_by">carnero</string>
+  <string name="author">auteur: <a href="http://carnero.cc/">carnero</a></string>
+  <string name="support">support:<a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
+  <string name="website">website: <a href="http://cgeo.org/">cgeo.org</a></string>
+  <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
+  <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
+  <string name="nutshellmanual">Manual: <a href="http://manual.cgeo.org/">c:geo in een notendop</a></string>
+  <string name="about_go4cache">Service <b>Go 4 cache</b> toont andere geocachers op de kaart (in <b>c:geo</b> of in browser) in real time. Het toont bijvoorbeeld welke cache ze zoeken. Door te verbinden met <b>Go 4 cache</b> is <b>c:geo</b> toegestaan om je huidige locatie te publiceren (alleen tijdens het gebruik van <b>c:geo</b>).</string>
+  <string name="about_twitter">Moet <b>c:geo</b> elke cache vondst publiceren naar Twitter?</string>
+  <string name="about_auth_1">Het volgende proces staat <b>c:geo</b> toe om Twitter toegang te verkrijgen bij goedkeuring.</string>
+  <string name="about_auth_2">Klik op de \"autoriseer c:geo\" knop om het proces te starten. Dit proces zal een browser openen met een Twitter pagina. Login op deze pagina en sta <b>c:geo</b> toegang tot je account toe. Bij goedkeuring laat Twitter een numerieke PIN code zien. Deze PIN dien je te plakken en te bevestigen in <b>c:geo</b>.</string>
+</resources>

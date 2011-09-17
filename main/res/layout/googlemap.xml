@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:orientation="vertical"
+		android:background="?background_color" >
+	<LinearLayout style="@style/action_bar">
+		<ImageView style="@style/action_bar_action"
+				android:onClick="goHome" />
+		<View style="@style/action_bar_separator" />
+		<TextView style="@style/action_bar_title" />
+		<ProgressBar style="@style/action_bar_progress"
+				android:visibility="gone" />
+		<View style="@style/action_bar_separator" />
+		<ImageSwitcher style="@style/action_bar_action"
+				android:id="@+id/my_position" />
+		<View style="@style/action_bar_separator" />
+		<ImageView style="@style/action_bar_action"
+				android:src="@drawable/actionbar_manual"
+				android:onClick="goManual" />
+	</LinearLayout>
+	<include layout="@layout/filter_bar"/>
+	<RelativeLayout
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent" >
+		<TextView android:id="@+id/number"
+				android:visibility="gone"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_margin="5dip"
+				android:gravity="center_horizontal"
+				android:paddingLeft="5dip"
+				android:paddingRight="5dip"
+				android:lines="1"
+				android:singleLine="true"
+				android:scrollHorizontally="true"
+				android:ellipsize="marquee"
+				android:textSize="12dip"
+				android:textColor="@color/text_icon"
+				android:background="@drawable/icon_bcg" />
+		<view class="cgeo.geocaching.googlemaps.googleMapView" android:id="@+id/map"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:keepScreenOn="true"
+				android:enabled="true"
+				android:clickable="true"
+				android:apiKey="@string/maps_api_key" />
+	</RelativeLayout>
+</LinearLayout>
