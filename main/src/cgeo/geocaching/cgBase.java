@@ -102,7 +102,7 @@ public class cgBase {
     private final static Pattern patternDescShort = Pattern.compile("<div class=\"UserSuppliedContent\">[^<]*<span id=\"ctl00_ContentBody_ShortDescription\"[^>]*>((?:(?!</span>[^\\w^<]*</div>).)*)</span>[^\\w^<]*</div>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternDesc = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>" + "(.*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternCountLogs = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p(.+?)<\\/p><\\/span>", Pattern.CASE_INSENSITIVE);
-    private final static Pattern patternCountLog = Pattern.compile("src=\"\\/images\\/icons\\/(.+?).gif\"[^>]+> (\\d+)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+    private final static Pattern patternCountLog = Pattern.compile("src=\"\\/images\\/icons\\/(.+?).gif\"[^>]+> (\\d*[,.]?\\d+)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private final static Pattern patternAttributes = Pattern.compile("<h3 class=\"WidgetHeader\">[^<]*<img[^>]+>\\W*Attributes[^<]*</h3>[^<]*<div class=\"WidgetBody\">(([^<]*<img src=\"[^\"]+\" alt=\"[^\"]+\"[^>]*>)+)[^<]*<p", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternAttributesInside = Pattern.compile("[^<]*<img src=\"([^\"]+)\" alt=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternSpoilers = Pattern.compile("<p class=\"NoPrint\">\\s*((<a href=\"([^\"]+)\"[^>]*>\\s*<img[^>]+><span>([^<]+)</span></a><br\\s*/>)*)\\s*</p>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
@@ -1473,7 +1473,7 @@ public class cgBase {
                 while (matcherLog.find())
                 {
                     String typeStr = matcherLog.group(1);
-                    String countStr = matcherLog.group(2);
+                    String countStr = matcherLog.group(2).replaceAll("[.,]", "");
 
                     if (StringUtils.isNotBlank(typeStr)
                             && logTypes.containsKey(typeStr.toLowerCase())
@@ -4670,7 +4670,7 @@ public class cgBase {
     /**
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 sept. à 12:35".
-     * 
+     *
      * @param context
      *            a Context
      * @param date
