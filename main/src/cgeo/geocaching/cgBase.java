@@ -2591,6 +2591,7 @@ public class cgBase {
         } else if (StringUtils.isNotBlank(guid)) {
             params.put("guid", guid);
         }
+        params.put("decrypt", "y");
 
         String page = requestLogged(false, host, path, method, params, false, false, false);
 
@@ -4669,7 +4670,7 @@ public class cgBase {
     /**
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 sept. à 12:35".
-     *
+     * 
      * @param context
      *            a Context
      * @param date
