@@ -1,8 +1,8 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.googlemaps.googleMapFactory;
-import cgeo.geocaching.mapinterfaces.MapFactory;
-import cgeo.geocaching.mapsforge.mfMapFactory;
+import cgeo.geocaching.maps.google.googleMapFactory;
+import cgeo.geocaching.maps.interfaces.MapFactory;
+import cgeo.geocaching.maps.mapsforge.mfMapFactory;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.android.maps.MapDatabase;
