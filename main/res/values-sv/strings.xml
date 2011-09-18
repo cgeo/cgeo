@@ -120,8 +120,9 @@
   <string name="err_server">misslyckades att ansluta till geocaching.com (servern eller anslutningen nere?)</string>
   <string name="err_login">Inloggningsinformationen ej sparad</string>
   <string name="err_login_failed">Tyvärr, c:geo kan inte logga in.</string>
-  <string name="err_unknown">okänt fel</string>
-  <string name="err_comm">okänt kommunikationsfel</string>
+  <string name="err_login_failed_toast">Tyvärr, c:geo kan inte logga in. c:geo kommer att köra i offline läge. Kontrollera dina inloggningsuppgifter i inställningarna och aktivera din internetanslutning.</string>
+  <string name="err_unknown">Okänt fel</string>
+  <string name="err_comm">Okänt kommunikationsfel</string>
   <string name="err_missing_auth">Användarnamn och/eller lösenord saknas.</string>
   <string name="err_wrong">felaktiga inloggningsuppgifter</string>
   <string name="err_license">användaren inte har bekräftat licensavtalet med geocaching.com</string>
@@ -171,7 +172,7 @@
   <string name="err_manual_market">c:geo kan inte öppna Android Market för att söka efter Manualen till c:geo.</string>
   <string name="err_missing_device_name">Vänligen ange ett namn för din enhet innan registering.</string>
 
-  <string name="err_tb_display">"Tyvärr, c:geo kan inte visa den trackable du önskar. Är den verkligen trackable?</string>
+  <string name="err_tb_display">Tyvärr, c:geo kan inte visa den trackable du önskar. Är den verkligen trackable?</string>
   <string name="err_tb_details_open">Tyvärr, c:geo kan inte öppna detaljer för trackable.</string>
   <string name="err_tb_details_download">Tyvärr, c:geo misslyckades att ladda ner detaljer för trackable pga</string>
   <string name="err_tb_forgot">Tyvärr, c:geo glömde vilken trackable önskade.</string>
@@ -207,6 +208,8 @@
   <string name="err_parse_lon">Tyvärr, c:geo kan inte tolka longitud.</string>
   <string name="err_parse_bear">Tyvärr, c:geo kan inte tolka riktning.</string>
   <string name="err_parse_dist">Tyvärr, c:geo kan inte tolka avstånd.</string>
+  <string name="err_parse_lat_lon">Tyvärr, c:geo kan inte tolka latitud eller longitud.</string>
+  <string name="err_invalid_lat_lon">Tyvärr, felaktig latitud eller longitud.</string>
 
   <string name="err_fieldnotes_export_failed">Exportering av Field Notes misslyckades.</string>
 
@@ -216,7 +219,7 @@
   <string name="warn_no_keyword">Inget nyckelord angett.</string>
   <string name="warn_no_username">Inget användarnamn angett.</string>
   <string name="warn_search_help_title">Tips!</string>
-  <string name="warn_search_help_address">"Ange adress eller namn på en plats. Använd tex gatunamn \"Kungsgatan 10, Stockholm\", namn på ort \"Malmö\" eller annat sorts namn \"Avenyn\".</string>
+  <string name="warn_search_help_address">Ange adress eller namn på en plats. Använd tex gatunamn \"Kungsgatan 10, Stockholm\", namn på ort \"Malmö\" eller annat sorts namn \"Avenyn\".</string>
   <string name="warn_search_help_gccode">Ange geocachens kod. Tex \"GC1VCAZ\".</string>
   <string name="warn_search_help_keyword">Ange ett ord som du tror finns i titeln på cachen du söker.</string>
   <string name="warn_search_help_user">Ange en användare på Geocaching.com.</string>
@@ -455,11 +458,15 @@
 
   <string name="init_sendToCgeo">Skicka till c:geo (Send2cgeo)</string>
   <string name="init_sendToCgeo_name">Namnet på din enhet:</string>
-  <string name="init_sendToCgeo_description">Skicka till c:geo gör det möjligt att ta emot cacher direkt från geocaching hemsidan genom att använda en speciell plugin till Firefox eller Chrome. Innan registrering läs detta: <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Du behöver bara registrera om du kommer att använda send2cgeo. C:geo kommer också fungera utan registrering.</string>
-  <string name="init_sendToCgeo_register">Letar efter registrering</string>
+  <string name="init_sendToCgeo_description">Skicka till c:geo (send2cgeo) gör det möjligt att ta emot cacher direkt från geocaching hemsidan genom att använda en speciell plugin till Firefox eller Chrome. Läs detta innan registrering: <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Du behöver bara registrera din enhet om du kommer att använda send2cgeo. C:geo fungerar även utan registrering.</string>
+  <string name="init_sendToCgeo_register">Registrera din enhet</string>
   <string name="init_sendToCgeo_registering">Registrerar din enhet för "send2cgeo"…</string>
   <string name="init_sendToCgeo_register_ok">Registreringen lyckades. PIN koden är ####. Använd den på c:geos hemsida för att lägga till enheten i den webbläsare.</string>
   <string name="init_sendToCgeo_register_fail">Registreringen misslyckades.</string>
+
+  <string name="sendToCgeo_download_fail">c:geo misslyckades med att hämta cacher. Internetanslutning saknas eller send2c:geo är inte tillgänglig.</string>
+  <string name="sendToCgeo_no_registration">c:geo misslyckades med att hämta cacher. Registreringen för send2c:geo har gå. Vänligen registrera dig på nytt i inställningarna.</string>
+
 
   <!-- auth -->
   <string name="auth_twitter">Twitter</string>
@@ -544,6 +551,7 @@
   <string name="cache_menu_move_list">Flytta till annan lista</string>
   <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
+  <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_status">Status</string>
   <string name="cache_status_offline_log">Sparad logg</string>
   <string name="cache_status_found">Hittad</string>
@@ -624,6 +632,7 @@
   <string name="waypoint_save">Spara</string>
   <string name="waypoint_loading">Laddar punkt…</string>
   <string name="waypoint_unknown_coordinates">Koordinaterna ogiltiga</string>
+  <string name="waypoint_done">Klar</string>
   <string name="search_history">Historik</string>
   <string name="search_history_empty">Inga tidigare destinationer</string>
   <string name="search_remove_destination">Destinationen borttagen</string>
@@ -686,6 +695,7 @@
   <string name="search_caches_near">Cacher nära</string>
   <string name="search_address_started">Söker efter platser</string>
   <string name="search_address_result">Hittade platser</string>
+  <string name="search_own_caches">Sök egna cacher</string>
 
   <!-- trackable -->
   <string name="trackable">Trackable</string>

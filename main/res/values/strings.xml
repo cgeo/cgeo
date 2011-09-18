@@ -172,7 +172,7 @@
   <string name="err_manual_market">c:geo can\'t start Android Market to search for Manual of c:geo.</string>
   <string name="err_missing_device_name">Please enter a device name before registering.</string>
 
-  <string name="err_tb_display">"Sorry, c:geo can\'t display trackable you want. Is it really trackable?</string>
+  <string name="err_tb_display">Sorry, c:geo can\'t display trackable you want. Is it really trackable?</string>
   <string name="err_tb_details_open">Sorry, c:geo can\'t open trackable details.</string>
   <string name="err_tb_details_download">Sorry, c:geo failed to download trackable details because of</string>
   <string name="err_tb_forgot">Sorry, c:geo forgot which trackable you want.</string>
@@ -219,7 +219,7 @@
   <string name="warn_no_keyword">No keyword given.</string>
   <string name="warn_no_username">No username given.</string>
   <string name="warn_search_help_title">Need some help?</string>
-  <string name="warn_search_help_address">"Fill address or location name. For example use street address \"Radlicka 100, Prague, Czech Republic\", city name \"Berlin\" or just name of something like \"Yellowstone Park\".</string>
+  <string name="warn_search_help_address">Fill address or location name. For example use street address \"Radlicka 100, Prague, Czech Republic\", city name \"Berlin\" or just name of something like \"Yellowstone Park\".</string>
   <string name="warn_search_help_gccode">Fill code of geocache. For example \"GC1VCAZ\".</string>
   <string name="warn_search_help_keyword">Fill some word that is supposed to be somewhere in cache name you are trying to find.</string>
   <string name="warn_search_help_user">Fill name of user at Geocaching.com.</string>
@@ -949,6 +949,12 @@
 
   <!-- changelog -->
   <string name="changelog">\n
+    <b>17.09.2011</b>\n
+    · fix: more small fixes\n
+    \n\n
+    <b>16.09.2011</b>\n
+    · fix: many small fixed due to GC.com changes\n
+    \n\n
     <b>15.09.2011</b>\n
     · new: sort by state, sort by find count\n
     · new: experimental support for .gpx from opencaching.com\n

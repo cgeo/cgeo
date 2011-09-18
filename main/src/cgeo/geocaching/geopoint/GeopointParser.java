@@ -13,9 +13,9 @@ import java.util.regex.Pattern;
  */
 public class GeopointParser
 {
-    //                                                         ( 1  )    ( 2  )         ( 3  )         ( 4  )       (         5         )
-    private static final Pattern patternLat = Pattern.compile("([NS])\\s*(\\d+)°?(?:\\s*(\\d+)(?:[\\.,](\\d+)|'?\\s*(\\d+(?:[\\.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
-    private static final Pattern patternLon = Pattern.compile("([WE])\\s*(\\d+)°?(?:\\s*(\\d+)(?:[\\.,](\\d+)|'?\\s*(\\d+(?:[\\.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
+    //                                                         ( 1  )    ( 2  )         ( 3  )       ( 4  )       (        5        )
+    private static final Pattern patternLat = Pattern.compile("([NS])\\s*(\\d+)°?(?:\\s*(\\d+)(?:[.,](\\d+)|'?\\s*(\\d+(?:[.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
+    private static final Pattern patternLon = Pattern.compile("([WE])\\s*(\\d+)°?(?:\\s*(\\d+)(?:[.,](\\d+)|'?\\s*(\\d+(?:[.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
 
     private enum LatLon
     {

@@ -434,6 +434,14 @@ public class cgeo extends AbstractActivity {
             return;
         }
 
+        //TODO This is ugly fix for #486 bug should be reported to library
+        if (Thread.currentThread().getContextClassLoader() == null)
+        {
+            Thread.currentThread().setContextClassLoader(new ClassLoader() {
+            });
+            StringUtils.isNotBlank("haha");
+        }
+
         initialized = true;
 
         settings.getLogin();
@@ -707,6 +715,7 @@ public class cgeo extends AbstractActivity {
 
             if (status == 1) {
                 app.firstRun = false;
+                base.detectGcCustomDate();
             }
 
             if (app.showLoginToast) {
