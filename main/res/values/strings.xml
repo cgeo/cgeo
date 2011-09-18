@@ -949,6 +949,9 @@
 
   <!-- changelog -->
   <string name="changelog">\n
+    <b>18.09.2011</b>\n
+    · fix: Android 3+ compatibility\n
+    \n\n
     <b>17.09.2011</b>\n
     · fix: more small fixes\n
     \n\n
