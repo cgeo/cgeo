@@ -321,7 +321,7 @@ public class cgeopopup extends AbstractActivity {
                 itemStars = (LinearLayout) itemLayout.findViewById(R.id.stars);
 
                 itemName.setText(res.getString(R.string.cache_difficulty));
-                itemValue.setText(String.format(Locale.getDefault(), "%.1f", cache.difficulty) + " of 5");
+                itemValue.setText(String.format(Locale.getDefault(), "%.1f", cache.difficulty) + ' ' + res.getString(R.string.cache_difficulty_of) + " 5");
                 for (int i = 0; i <= 4; i++) {
                     ImageView star = (ImageView) inflater.inflate(R.layout.star, null);
                     if ((cache.difficulty - i) >= 1.0) {
@@ -344,7 +344,7 @@ public class cgeopopup extends AbstractActivity {
                 itemStars = (LinearLayout) itemLayout.findViewById(R.id.stars);
 
                 itemName.setText(res.getString(R.string.cache_terrain));
-                itemValue.setText(String.format(Locale.getDefault(), "%.1f", cache.terrain) + " of 5");
+                itemValue.setText(String.format(Locale.getDefault(), "%.1f", cache.terrain) + ' ' + res.getString(R.string.cache_terrain_of) + " 5");
                 for (int i = 0; i <= 4; i++) {
                     ImageView star = (ImageView) inflater.inflate(R.layout.star, null);
                     if ((cache.terrain - i) >= 1.0) {
@@ -623,7 +623,7 @@ public class cgeopopup extends AbstractActivity {
         itemStars = (LinearLayout) itemLayout.findViewById(R.id.stars);
 
         itemName.setText(res.getString(R.string.cache_rating));
-        itemValue.setText(String.format(Locale.getDefault(), "%.1f", rating) + " of 5");
+        itemValue.setText(String.format(Locale.getDefault(), "%.1f", rating) + ' ' + res.getString(R.string.cache_rating_of) + " 5");
         for (int i = 0; i <= 4; i++) {
             ImageView star = (ImageView) inflater.inflate(R.layout.star, null);
             if ((rating - i) >= 1.0) {

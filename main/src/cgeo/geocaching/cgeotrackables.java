@@ -40,7 +40,7 @@ public class cgeotrackables extends AbstractActivity {
                         waitDialog.dismiss();
                     }
 
-                    showToast("Sorry, c:geo failed to load cache inventory.");
+                    showToast(res.getString(R.string.err_cache_inventory_load_fail));
 
                     finish();
                     return;
@@ -89,7 +89,7 @@ public class cgeotrackables extends AbstractActivity {
 
         setTheme();
         setContentView(R.layout.trackables);
-        setTitle("Trackables");
+        setTitle(res.getString(R.string.trackable));
 
         // get parameters
         Bundle extras = getIntent().getExtras();
@@ -100,12 +100,12 @@ public class cgeotrackables extends AbstractActivity {
         }
 
         if (geocode == null) {
-            showToast("Sorry, c:geo forgot for what cache you want to load trackables.");
+            showToast(res.getString(R.string.err_tb_forgot));
             finish();
             return;
         }
 
-        waitDialog = ProgressDialog.show(this, null, "loading cache inventory...", true);
+        waitDialog = ProgressDialog.show(this, null, res.getString(R.string.cache_inventory_loading), true);
         waitDialog.setCancelable(true);
 
         (new loadInventory()).start();

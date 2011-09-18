@@ -179,6 +179,7 @@
   <string name="err_tb_forgot_saw">Sorry, c:geo forgot which trackable you saw.</string>
   <string name="err_tb_find">Sorry, c:geo can\'t find trackable</string>
   <string name="err_tb_find_that">Sorry, c:geo can\'t find that trackable.</string>
+  <string name="err_cache_inventory_load_fail">Sorry, c:geo failed to load cache inventory.</string>
 
   <string name="err_waypoint_cache_unknown">Sorry, c:geo doesn\'t know to which cache you want to add waypoint.</string>
   <string name="err_waypoint_unknown">Sorry, c:geo forgot what waypoint you want to display.</string>
@@ -500,6 +501,7 @@
   <string name="cache_attributes">Attributes</string>
   <string name="cache_attributes_no_icons">(refresh cache to show attribute icons)</string>
   <string name="cache_inventory">Inventory</string>
+  <string name="cache_inventory_loading">loading cache inventory…</string>
   <string name="cache_log_offline">Offline log</string>
   <string name="cache_log_images_loading">Loading log Image …</string>
   <string name="cache_log_images_title">Log image</string>
@@ -563,7 +565,9 @@
   <string name="cache_type">Type</string>
   <string name="cache_distance">Distance</string>
   <string name="cache_difficulty">Difficulty</string>
+  <string name="cache_difficulty_of">of</string>
   <string name="cache_terrain">Terrain</string>
+  <string name="cache_terrain_of">of</string>
   <string name="cache_rating">Rating</string>
   <string name="cache_rating_of">of</string>
   <string name="cache_favourite">Favorite</string>
@@ -620,6 +624,8 @@
   <string name="waypoint">Waypoint</string>
   <string name="waypoint_title">Waypoint</string>
   <string name="waypoint_custom">Custom</string>
+  <string name="waypoint_my_coordinates_latitude">Latitude</string>
+  <string name="waypoint_my_coordinates_longitude">Longitude</string>
   <string name="waypoint_my_coordinates">My coordinates</string>
   <string name="waypoint_bearing">Bearing</string>
   <string name="waypoint_distance">Distance</string>
@@ -667,6 +673,8 @@
   <string name="search_bar_hint">Search for caches</string>
   <string name="search_bar_desc">Caches (GC-code, keyword), Trackables (TB-code)</string>
   <string name="search_coordinates">Coordinates</string>
+  <string name="search_coordinates_latitude">Latitude</string>
+  <string name="search_coordinates_longitude">Longitude</string>
   <string name="search_coordinates_button">Search by coordinates</string>
   <string name="search_address">Address</string>
   <string name="search_address_button">Search by address</string>
@@ -940,6 +948,7 @@
     · thiasB (code, loc. DE EN)\n
     · YraFyra (code, loc. SV)\n
     · zenobios (code, loc. DE EN)\n
+    · Pavol Babinčák (code)\n
     \n
     · <a href="http://code.google.com/p/mapsforge/">Mapsforge</a> (OSM-rendering)\n
     · <a href="http://thenounproject.com/">The Noun Project</a> (basis for attribute icons)\n
