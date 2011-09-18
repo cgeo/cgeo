@@ -13,6 +13,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
+import android.view.MotionEvent;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -63,8 +65,27 @@ public class googleCacheOverlay extends ItemizedOverlay<googleCacheOverlayItem> 
     }
 
     @Override
+    public boolean onTouchEvent(MotionEvent event, MapView mapView) {
+
+        boolean result = false;
+        // prevent concurrent access
+        lock();
+        try {
+            result = super.onTouchEvent(event, mapView);
+        } catch (Exception e) {
+            Log.e(cgSettings.tag, "Exception during onTouchEvent", e);
+        } finally {
+            unlock();
+        }
+
+        return result;
+    }
+
+    @Override
     public void draw(Canvas canvas, MapView mapView, boolean shadow) {
-        base.draw(canvas, (MapViewImpl) mapView, shadow);
+        if (base != null) {
+            base.draw(canvas, (MapViewImpl) mapView, shadow);
+        }
     }
 
     @Override
