@@ -38,7 +38,7 @@
 				android:textSize="12dip"
 				android:textColor="@color/text_icon"
 				android:background="@drawable/icon_bcg" />
-		<view class="cgeo.geocaching.googlemaps.googleMapView" android:id="@+id/map"
+		<view class="cgeo.geocaching.maps.google.googleMapView" android:id="@+id/map"
 				android:layout_width="fill_parent"
 				android:layout_height="fill_parent"
 				android:keepScreenOn="true"
