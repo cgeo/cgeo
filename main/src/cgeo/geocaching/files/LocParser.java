@@ -86,11 +86,8 @@ public final class LocParser extends FileParser {
             final Matcher matcherName = patternName.matcher(pointString);
             if (matcherName.find()) {
                 String name = matcherName.group(1).trim();
-                int pos = name.indexOf(" by ");
-                if (pos > 0) {
-                    name = name.substring(0, pos).trim();
-                }
-                pointCoord.name = name;
+                pointCoord.name = StringUtils.substringBeforeLast(name, " by ").trim();
+                // owner = StringUtils.substringAfterLast(" by ").trim();
             }
             final Matcher matcherLat = patternLat.matcher(pointString);
             final Matcher matcherLon = patternLon.matcher(pointString);
@@ -158,8 +155,9 @@ public final class LocParser extends FileParser {
                 caches.cacheList.add(cache);
 
                 fixCache(cache);
+                cache.type = "traditional"; // type is not given in the LOC file
                 cache.reason = listId;
-                cache.detailed = false;
+                cache.detailed = true;
 
                 cgeoapplication.getInstance().addCacheToSearch(search, cache);
             }
