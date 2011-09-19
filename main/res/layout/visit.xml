@@ -51,7 +51,8 @@
 						android:hint="@string/log_new_log_text"
 						android:singleLine="false"
 						android:lines="5"
-						android:capitalize="sentences" />
+						android:capitalize="sentences"
+						android:scrollbars="vertical" />
 				<LinearLayout android:id="@+id/tweet_box"
 						android:layout_width="fill_parent"
 						android:layout_height="wrap_content"
