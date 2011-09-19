@@ -63,7 +63,7 @@ public final class LocParser extends FileParser {
         }
     }
 
-    private static Map<String, cgCoord> parseCoordinates(
+    public static Map<String, cgCoord> parseCoordinates(
             final String fileContent) {
         final Map<String, cgCoord> coords = new HashMap<String, cgCoord>();
         if (StringUtils.isBlank(fileContent)) {
@@ -141,13 +141,12 @@ public final class LocParser extends FileParser {
         return coords;
     }
 
-    public static UUID parseLoc(cgeoapplication app, File file, int listId,
+    public static UUID parseLoc(File file, int listId,
             Handler handler) {
-        cgSearch search = new cgSearch();
-        UUID searchId = null;
+        final cgSearch search = new cgSearch();
 
         try {
-            Map<String, cgCoord> coords = parseCoordinates(readFile(file).toString());
+            final Map<String, cgCoord> coords = parseCoordinates(readFile(file).toString());
             final cgCacheWrap caches = new cgCacheWrap();
             for (Entry<String, cgCoord> entry : coords.entrySet()) {
                 cgCoord coord = entry.getValue();
@@ -162,15 +161,14 @@ public final class LocParser extends FileParser {
                 cache.reason = listId;
                 cache.detailed = false;
 
-                app.addCacheToSearch(search, cache);
+                cgeoapplication.getInstance().addCacheToSearch(search, cache);
             }
             caches.totalCnt = caches.cacheList.size();
-            showFinishedMessage(handler, search);
+            showCountMessage(handler, search.getCount());
+            Log.i(cgSettings.tag, "Caches found in .gpx file: " + caches.totalCnt);
         } catch (Exception e) {
             Log.e(cgSettings.tag, "cgBase.parseGPX: " + e.toString());
         }
-
-        Log.i(cgSettings.tag, "Caches found in .gpx file: " + app.getCount(searchId));
 
         return search.getCurrentId();
     }

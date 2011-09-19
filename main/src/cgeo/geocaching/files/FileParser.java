@@ -2,7 +2,6 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgSearch;
 
 import android.os.Handler;
 import android.os.Message;
@@ -17,8 +16,8 @@ import java.util.Date;
 public abstract class FileParser {
     protected static StringBuilder readFile(File file)
             throws FileNotFoundException, IOException {
-        StringBuilder buffer = new StringBuilder();
-        BufferedReader input = new BufferedReader(new FileReader(file));
+        final StringBuilder buffer = new StringBuilder();
+        final BufferedReader input = new BufferedReader(new FileReader(file));
         try {
             String line = null;
             while ((line = input.readLine()) != null) {
@@ -30,10 +29,10 @@ public abstract class FileParser {
         return buffer;
     }
 
-    static void showFinishedMessage(Handler handler, cgSearch search) {
+    protected static void showCountMessage(final Handler handler, final int count) {
         if (handler != null) {
             final Message msg = new Message();
-            msg.obj = search.getCount();
+            msg.obj = count;
             handler.sendMessage(msg);
         }
     }

@@ -31,11 +31,17 @@ public class cgeoapplication extends Application {
     public boolean showLoginToast = true; //login toast shown just once.
     public boolean warnedLanguage = false; // user was warned about different language settings on geocaching.com
     private boolean databaseCleaned = false; // database was cleaned
+    private static cgeoapplication instance;
 
     public cgeoapplication() {
+        instance = this;
         if (storage == null) {
             storage = new cgData(this);
         }
+    }
+
+    public static cgeoapplication getInstance() {
+        return instance;
     }
 
     @Override

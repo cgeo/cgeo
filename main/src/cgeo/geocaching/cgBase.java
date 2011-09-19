@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.connector.opencaching.OkapiClient;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -129,8 +130,14 @@ public class cgBase {
     private final static Pattern PATTERN_TRACKABLE_Log = Pattern.compile("<tr class=\"Data.+?src=\"/images/icons/([^.]+)\\.gif[^>]+>&nbsp;([^<]+)</td>.+?guid.+?>([^<]+)</a>.+?(?:guid=([^\"]+)\">([^<]+)</a>.+?)?<td colspan=\"4\">(.+?)(?:<ul.+?ul>)?\\s*</td>\\s*</tr>", Pattern.CASE_INSENSITIVE);
 
     public final static Map<String, String> cacheTypes = new HashMap<String, String>();
-    public final static Map<String, String> cacheTypesInv = new HashMap<String, String>();
     public final static Map<String, String> cacheIDs = new HashMap<String, String>();
+    static {
+        for (CacheType ct : CacheType.values()) {
+            cacheTypes.put(ct.pattern, ct.id);
+            cacheIDs.put(ct.id, ct.guid);
+        }
+    }
+    public final static Map<String, String> cacheTypesInv = new HashMap<String, String>();
     public final static Map<String, String> cacheIDsChoices = new HashMap<String, String>();
     public final static Map<CacheSize, String> cacheSizesInv = new HashMap<CacheSize, String>();
     public final static Map<String, String> waypointTypes = new HashMap<String, String>();
@@ -223,9 +230,7 @@ public class cgBase {
 
         for (CacheType ct : CacheType.values()) {
             String l10n = res.getString(ct.stringId);
-            cacheTypes.put(ct.pattern, ct.id);
             cacheTypesInv.put(ct.id, l10n);
-            cacheIDs.put(ct.id, ct.guid);
             cacheIDsChoices.put(l10n, ct.guid);
         }
 
