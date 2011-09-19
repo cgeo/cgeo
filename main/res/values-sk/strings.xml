@@ -13,6 +13,8 @@
   <string name="helper">Chcete sa dozvedieť viac o <b>c:geo</b>?\nPozrite si manuál.</string>
   <string name="database_error_title">Problém s databázou.</string>
   <string name="database_error_message">c:geo sa nedokázalo spojiť s internou databázou.\nProsím, skúste spustiť c:geo trochu neskôr. Ak sa táto správa zobrazovala viac krát, otvorte Nastavenie/Aplikácie/Správa aplikácií/c:geo a stlačte tlačidlo „Vymazať údaje“. Alebo odinštalujte a znovu nainštalujte c:geo. Ospravedlňujeme sa za nepríjemnosti.</string>
+  <string name="latitude">Zemepisná šírka</string>
+  <string name="longitude">Zemepisná dĺžka</string>
 
   <!-- actionbar -->
   <string name="action_bar_share_title">Zdieľať odkaz ku skrýši</string>
@@ -624,8 +626,6 @@
   <string name="waypoint">Bod trasy</string>
   <string name="waypoint_title">Bod trasy</string>
   <string name="waypoint_custom">vlastný</string>
-  <string name="waypoint_my_coordinates_latitude">Zemepisná šírka</string>
-  <string name="waypoint_my_coordinates_longitude">Zemepisná dĺžka</string>
   <string name="waypoint_my_coordinates">Aktuálna poloha</string>
   <string name="waypoint_bearing">Smer</string>
   <string name="waypoint_distance">Vzdialenosť</string>
@@ -673,8 +673,6 @@
   <string name="search_bar_hint">Hľadanie skrýší</string>
   <string name="search_bar_desc">Skrýše (GC kód, kľúčové slovo), trasovateľné (TB-kód)</string>
   <string name="search_coordinates">Súradnice</string>
-  <string name="search_coordinates_latitude">Zemepisná šírka</string>
-  <string name="search_coordinates_longitude">Zemepisná dĺžka</string>
   <string name="search_coordinates_button">Hľadať podľa súradníc</string>
   <string name="search_address">Adresa</string>
   <string name="search_address_button">Hľadať podľa adresy</string>
