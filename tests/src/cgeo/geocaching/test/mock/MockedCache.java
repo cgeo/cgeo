@@ -1,7 +1,7 @@
 package cgeo.geocaching.test.mock;
 
 import cgeo.geocaching.ICache;
-import cgeo.geocaching.cgBase;
+import cgeo.geocaching.utils.BaseUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -27,9 +27,10 @@ public abstract class MockedCache implements ICache {
                 buffer.append(line).append("\n");
             }
 
+
             br.close();
 
-            cgBase.replaceWhitespace(buffer);
+            BaseUtils.replaceWhitespace(buffer);
             return buffer.toString();
 
         } catch (IOException e) {

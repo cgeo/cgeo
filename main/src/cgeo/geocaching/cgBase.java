@@ -8,6 +8,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocParser;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CollectionUtils;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -100,10 +101,8 @@ public class cgBase {
     private final static Pattern patternFoundAlternative = Pattern.compile("<div class=\"StatusInformationWidget FavoriteWidget\"", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternLatLon = Pattern.compile("<span id=\"ctl00_ContentBody_LatLon\"[^>]*>(<b>)?([^<]*)(<\\/b>)?<\\/span>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternLocation = Pattern.compile("<span id=\"ctl00_ContentBody_Location\"[^>]*>In ([^<]*)", Pattern.CASE_INSENSITIVE);
-    private final static Pattern patternHint = Pattern.compile("<div id=\"div_hint\"[^>]*>(.*?)</div>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternPersonalNote = Pattern.compile("<p id=\"cache_note\"[^>]*>([^<]*)</p>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternDescShort = Pattern.compile("<div class=\"UserSuppliedContent\">[^<]*<span id=\"ctl00_ContentBody_ShortDescription\"[^>]*>((?:(?!</span>[^\\w^<]*</div>).)*)</span>[^\\w^<]*</div>", Pattern.CASE_INSENSITIVE);
-    private final static Pattern patternDesc = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>" + "(.*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternCountLogs = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p(.+?)<\\/p><\\/span>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternCountLog = Pattern.compile("src=\"\\/images\\/icons\\/(.+?).gif\"[^>]+> (\\d*[,.]?\\d+)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private final static Pattern patternAttributes = Pattern.compile("<h3 class=\"WidgetHeader\">[^<]*<img[^>]+>\\W*Attributes[^<]*</h3>[^<]*<div class=\"WidgetBody\">(([^<]*<img src=\"[^\"]+\" alt=\"[^\"]+\"[^>]*>)+)[^<]*<p", Pattern.CASE_INSENSITIVE);
@@ -1091,7 +1090,7 @@ public class cgBase {
         try {
             final Matcher matcherGeocode = patternGeocode.matcher(page);
             if (matcherGeocode.find() && matcherGeocode.groupCount() > 0) {
-                cache.geocode = getMatch(matcherGeocode.group(1));
+                cache.geocode = BaseUtils.getMatch(matcherGeocode.group(1));
             }
         } catch (Exception e) {
             // failed to parse cache geocode
@@ -1102,7 +1101,7 @@ public class cgBase {
         try {
             final Matcher matcherCacheId = patternCacheId.matcher(page);
             if (matcherCacheId.find() && matcherCacheId.groupCount() > 0) {
-                cache.cacheId = getMatch(matcherCacheId.group(1));
+                cache.cacheId = BaseUtils.getMatch(matcherCacheId.group(1));
             }
         } catch (Exception e) {
             // failed to parse cache id
@@ -1113,7 +1112,7 @@ public class cgBase {
         try {
             final Matcher matcherCacheGuid = patternCacheGuid.matcher(page);
             if (matcherCacheGuid.find() && matcherCacheGuid.groupCount() > 0) {
-                cache.guid = getMatch(matcherCacheGuid.group(1));
+                cache.guid = BaseUtils.getMatch(matcherCacheGuid.group(1));
             }
         } catch (Exception e) {
             // failed to parse cache guid
@@ -1239,7 +1238,7 @@ public class cgBase {
             try {
                 final Matcher matcherSize = patternSize.matcher(tableInside);
                 if (matcherSize.find() && matcherSize.groupCount() > 0) {
-                    cache.size = CacheSize.FIND_BY_ID.get(getMatch(matcherSize.group(1)).toLowerCase());
+                    cache.size = CacheSize.FIND_BY_ID.get(BaseUtils.getMatch(matcherSize.group(1)).toLowerCase());
                 }
             } catch (Exception e) {
                 // failed to parse size
@@ -1274,7 +1273,7 @@ public class cgBase {
         try {
             final Matcher matcherLatLon = patternLatLon.matcher(page);
             if (matcherLatLon.find() && matcherLatLon.groupCount() > 0) {
-                cache.latlon = getMatch(matcherLatLon.group(2)); // first is <b>
+                cache.latlon = BaseUtils.getMatch(matcherLatLon.group(2)); // first is <b>
 
                 Map<String, Object> tmp = cgBase.parseLatlon(cache.latlon);
                 if (tmp.size() > 0) {
@@ -1294,7 +1293,7 @@ public class cgBase {
         try {
             final Matcher matcherLocation = patternLocation.matcher(page);
             if (matcherLocation.find() && matcherLocation.groupCount() > 0) {
-                cache.location = getMatch(matcherLocation.group(1));
+                cache.location = BaseUtils.getMatch(matcherLocation.group(1));
             }
         } catch (Exception e) {
             // failed to parse location
@@ -1303,7 +1302,7 @@ public class cgBase {
 
         // cache hint
         try {
-            final Matcher matcherHint = patternHint.matcher(page);
+            final Matcher matcherHint = Constants.PATTERN_HINT.matcher(page);
             if (matcherHint.find() && matcherHint.group(1) != null) {
                 // replace linebreak and paragraph tags
                 String hint = Pattern.compile("<(br|p)[^>]*>").matcher(matcherHint.group(1)).replaceAll("\n");
@@ -1346,7 +1345,7 @@ public class cgBase {
         try {
             final Matcher matcherPersonalNote = patternPersonalNote.matcher(page);
             if (matcherPersonalNote.find() && matcherPersonalNote.groupCount() > 0) {
-                cache.personalNote = getMatch(matcherPersonalNote.group(1));
+                cache.personalNote = BaseUtils.getMatch(matcherPersonalNote.group(1));
             }
         } catch (Exception e) {
             // failed to parse cache personal note
@@ -1357,7 +1356,7 @@ public class cgBase {
         try {
             final Matcher matcherDescShort = patternDescShort.matcher(page);
             if (matcherDescShort.find() && matcherDescShort.groupCount() > 0) {
-                cache.shortdesc = getMatch(matcherDescShort.group(1));
+                cache.shortdesc = BaseUtils.getMatch(matcherDescShort.group(1));
             }
         } catch (Exception e) {
             // failed to parse short description
@@ -1366,9 +1365,9 @@ public class cgBase {
 
         // cache description
         try {
-            final Matcher matcherDesc = patternDesc.matcher(page);
+            final Matcher matcherDesc = Constants.PATTERN_DESC.matcher(page);
             if (matcherDesc.find() && matcherDesc.groupCount() > 0) {
-                cache.description = getMatch(matcherDesc.group(1));
+                cache.description = BaseUtils.getMatch(matcherDesc.group(1));
             }
         } catch (Exception e) {
             // failed to parse short description
@@ -1773,16 +1772,6 @@ public class cgBase {
         if (StringUtils.isBlank(cache.location)) {
             Log.w(cgSettings.tag, "location not parsed correctly");
         }
-    }
-
-    private static String getMatch(String match) {
-        // creating a new String via String constructor is necessary here!!
-        return new String(match.trim());
-        // Java copies the whole page String, when matching with regular expressions
-        // later this would block the garbage collector, as we only need tiny parts of the page
-        // see http://developer.android.com/reference/java/lang/String.html#backing_array
-
-        // And BTW: You cannot even see that effect in the debugger, but must use a separate memory profiler!
     }
 
     public Date parseGcCustomDate(String input)
@@ -3745,7 +3734,7 @@ public class cgBase {
                         "GET", new HashMap<String, String>(), requestId, false, false, false);
             } else {
                 if (StringUtils.isNotEmpty(buffer)) {
-                    replaceWhitespace(buffer);
+                    BaseUtils.replaceWhitespace(buffer);
                     String data = buffer.toString();
                     buffer = null;
 
@@ -3766,32 +3755,6 @@ public class cgBase {
         return response;
     }
 
-    /**
-     * Replace the characters \n, \r and \t with a space
-     *
-     * @param buffer
-     *            The data
-     */
-    public static void replaceWhitespace(final StringBuffer buffer) {
-        final int length = buffer.length();
-        final char[] chars = new char[length];
-        buffer.getChars(0, length, chars, 0);
-        int resultSize = 0;
-        boolean lastWasWhitespace = false;
-        for (char c : chars) {
-            if (c == ' ' || c == '\n' || c == '\r' || c == '\t') {
-                if (!lastWasWhitespace) {
-                    chars[resultSize++] = ' ';
-                }
-                lastWasWhitespace = true;
-            } else {
-                chars[resultSize++] = c;
-                lastWasWhitespace = false;
-            }
-        }
-        buffer.setLength(0);
-        buffer.append(chars);
-    }
 
     public String requestJSONgc(final URI uri, String params) {
         int httpCode = -1;
@@ -3879,7 +3842,7 @@ public class cgBase {
             final URI newLocation = uri.resolve(httpLocation);
             page = requestJSONgc(newLocation, params);
         } else {
-            replaceWhitespace(buffer);
+            BaseUtils.replaceWhitespace(buffer);
             page = buffer.toString();
         }
 
@@ -4029,7 +3992,7 @@ public class cgBase {
          * }
          * } else {
          */
-        replaceWhitespace(buffer);
+        BaseUtils.replaceWhitespace(buffer);
         page = buffer.toString();
         //}
 
@@ -4604,7 +4567,7 @@ public class cgBase {
     /**
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 sept. à 12:35".
-     *
+     * 
      * @param context
      *            a Context
      * @param date
