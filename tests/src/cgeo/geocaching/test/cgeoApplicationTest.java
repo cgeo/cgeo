@@ -1,16 +1,5 @@
 package cgeo.geocaching.test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
-
-import junit.framework.Assert;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.test.ApplicationTestCase;
-import android.test.suitebuilder.annotation.MediumTest;
-import android.test.suitebuilder.annotation.SmallTest;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCacheWrap;
@@ -19,6 +8,19 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.test.mock.GC1ZXX2;
 import cgeo.geocaching.test.mock.GC2CJPF;
 import cgeo.geocaching.test.mock.MockedCache;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.test.ApplicationTestCase;
+import android.test.suitebuilder.annotation.MediumTest;
+import android.test.suitebuilder.annotation.SmallTest;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
+
+import junit.framework.Assert;
 
 /**
  * The c:geo application test. It can be used for tests that require an
@@ -86,29 +88,23 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
         for (MockedCache cache : cachesToTest) {
             cgCacheWrap caches = base.parseCache(cache.getData(), 0);
             cgCache cacheParsed = caches.cacheList.get(0);
-            Assert.assertEquals(cacheParsed.getGeocode(), cache.getGeocode());
-            Assert.assertEquals(cacheParsed.getType(), cache.getType());
-            Assert.assertEquals(cacheParsed.getOwner(), cache.getOwner());
-            Assert.assertEquals(cacheParsed.getDifficulty(), cache
-                    .getDifficulty());
-            Assert.assertEquals(cacheParsed.getTerrain(), cache.getTerrain());
-            Assert.assertEquals(cacheParsed.getLatitude(), cache.getLatitude());
-            Assert.assertEquals(cacheParsed.getLongitude(), cache
-                    .getLongitude());
-            Assert.assertEquals(cacheParsed.isDisabled(), cache.isDisabled());
-            Assert.assertEquals(cacheParsed.isOwn(), cache.isOwn());
-            Assert.assertEquals(cacheParsed.isArchived(), cache.isArchived());
-            Assert.assertEquals(cacheParsed.isMembersOnly(), cache
-                    .isMembersOnly());
-            Assert.assertEquals(cacheParsed.getOwnerReal(), cache
-                    .getOwnerReal());
-            Assert.assertEquals(cacheParsed.getSize(), cache.getSize());
-            Assert.assertEquals(cacheParsed.getHint(), cache.getHint());
-            Assert.assertTrue(cacheParsed.getDescription().startsWith(
-                    cache.getDescription()));
-            Assert.assertEquals(cacheParsed.getShortDescription(), cache
-                    .getShortDescription());
-            Assert.assertEquals(cacheParsed.getName(), cache.getName());
+            Assert.assertEquals(cache.getGeocode(), cacheParsed.getGeocode());
+            Assert.assertEquals(cache.getType(), cacheParsed.getType());
+            Assert.assertEquals(cache.getOwner(), cacheParsed.getOwner());
+            Assert.assertEquals(cache.getDifficulty(), cacheParsed.getDifficulty());
+            Assert.assertEquals(cache.getTerrain(), cacheParsed.getTerrain());
+            Assert.assertEquals(cache.getLatitude(), cacheParsed.getLatitude());
+            Assert.assertEquals(cache.getLongitude(), cacheParsed.getLongitude());
+            Assert.assertEquals(cache.isDisabled(), cacheParsed.isDisabled());
+            Assert.assertEquals(cache.isOwn(), cacheParsed.isOwn());
+            Assert.assertEquals(cache.isArchived(), cacheParsed.isArchived());
+            Assert.assertEquals(cache.isMembersOnly(), cacheParsed.isMembersOnly());
+            Assert.assertEquals(cache.getOwnerReal(), cacheParsed.getOwnerReal());
+            Assert.assertEquals(cache.getSize(), cacheParsed.getSize());
+            Assert.assertEquals(cache.getHint(), cacheParsed.getHint());
+            Assert.assertTrue(cacheParsed.getDescription().startsWith(cache.getDescription()));
+            Assert.assertEquals(cache.getShortDescription(), cacheParsed.getShortDescription());
+            Assert.assertEquals(cache.getName(), cacheParsed.getName());
         }
     }
 
