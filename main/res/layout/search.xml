@@ -35,10 +35,10 @@
 							android:text="@string/search_coordinates" />
 				</RelativeLayout>
 				<Button style="@style/button" 
-					android:hint="@string/search_coordinates_latitude"
+					android:hint="@string/latitude"
 					android:id="@+id/buttonLatitude"/>
 				<Button style="@style/button" 
-					android:hint="@string/search_coordinates_longitude"
+					android:hint="@string/longitude"
 					android:id="@+id/buttonLongitude"/>
 				<Button style="@style/button"
 						android:id="@+id/search_coordinates"

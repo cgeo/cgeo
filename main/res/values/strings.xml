@@ -13,6 +13,8 @@
   <string name="helper">Do you want to learn about <b>c:geo</b>?\nCheck our easy to read manual.</string>
   <string name="database_error_title">Problem with database</string>
   <string name="database_error_message">c:geo failed to connect to internal database.\nPlease try to start c:geo a bit later. If this message has been showed for many times, proceed to phone Settings / Applications / c:geo and hit the Clear Data button. Or uninstall and install c:geo again. Sorry for inconvenience.</string>
+  <string name="latitude">Latitude</string>
+  <string name="longitude">Longitude</string>
 
   <!-- actionbar -->
   <string name="action_bar_share_title">Share link to cache</string>
@@ -565,9 +567,7 @@
   <string name="cache_type">Type</string>
   <string name="cache_distance">Distance</string>
   <string name="cache_difficulty">Difficulty</string>
-  <string name="cache_difficulty_of">of</string>
   <string name="cache_terrain">Terrain</string>
-  <string name="cache_terrain_of">of</string>
   <string name="cache_rating">Rating</string>
   <string name="cache_rating_of">of</string>
   <string name="cache_favourite">Favorite</string>
@@ -624,8 +624,6 @@
   <string name="waypoint">Waypoint</string>
   <string name="waypoint_title">Waypoint</string>
   <string name="waypoint_custom">Custom</string>
-  <string name="waypoint_my_coordinates_latitude">Latitude</string>
-  <string name="waypoint_my_coordinates_longitude">Longitude</string>
   <string name="waypoint_my_coordinates">My coordinates</string>
   <string name="waypoint_bearing">Bearing</string>
   <string name="waypoint_distance">Distance</string>
@@ -673,8 +671,6 @@
   <string name="search_bar_hint">Search for caches</string>
   <string name="search_bar_desc">Caches (GC-code, keyword), Trackables (TB-code)</string>
   <string name="search_coordinates">Coordinates</string>
-  <string name="search_coordinates_latitude">Latitude</string>
-  <string name="search_coordinates_longitude">Longitude</string>
   <string name="search_coordinates_button">Search by coordinates</string>
   <string name="search_address">Address</string>
   <string name="search_address_button">Search by address</string>
