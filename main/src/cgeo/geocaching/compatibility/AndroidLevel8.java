@@ -11,17 +11,14 @@ public class AndroidLevel8 {
         }
     }
 
-    private AndroidLevel8Internal internal;
-
     public static void check() {
         // nothing
     }
 
     public AndroidLevel8() {
-        internal = new AndroidLevel8Internal();
     }
 
     public int getRotation(Activity activity) {
-        return internal.getRotation(activity);
+        return AndroidLevel8Internal.getRotation(activity);
     }
 }
