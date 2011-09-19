@@ -1,7 +1,6 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.connector.opencaching.OkapiClient;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
