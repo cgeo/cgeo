@@ -34,7 +34,7 @@
 	
 	<target name="install_release" description="Install signed release application" depends="release">
 		<exec executable="${sdk.dir}/platform-tools/adb">
-			<arg line="install -r ./bin/cgeo-release.apk" />
+			<arg line="install -r ./bin/${ant.project.name}-release.apk" />
 		</exec>
 	</target>
 </project>
