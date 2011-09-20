@@ -1,13 +1,15 @@
 package cgeo.geocaching.test;
 
-import junit.framework.Assert;
-import android.test.AndroidTestCase;
 import cgeo.geocaching.cgDestination;
 import cgeo.geocaching.geopoint.Geopoint;
 
+import android.test.AndroidTestCase;
+
+import junit.framework.Assert;
+
 public class cgDestinationTest extends AndroidTestCase {
 
-    cgDestination dest = null;
+    private cgDestination dest = null;
 
     @Override
     protected void setUp() throws Exception {
@@ -15,7 +17,7 @@ public class cgDestinationTest extends AndroidTestCase {
         dest = new cgDestination(1, 10000, new Geopoint(52.5, 9.33));
     }
 
-    public void testSomething() throws Throwable {
+    public void testSomething() {
         Assert.assertEquals(1, dest.getId());
         Assert.assertEquals(10000, dest.getDate());
         Assert.assertEquals(52.5, dest.getCoords().getLatitude());

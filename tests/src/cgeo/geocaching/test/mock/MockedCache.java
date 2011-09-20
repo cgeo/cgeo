@@ -1,11 +1,12 @@
 package cgeo.geocaching.test.mock;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.cgBase;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public abstract class MockedCache implements ICache {
 
@@ -16,20 +17,20 @@ public abstract class MockedCache implements ICache {
      */
     public String getData() {
         try {
-            InputStream is = this.getClass().getResourceAsStream("/cgeo/geocaching/test/mock/"+getGeocode()+".html");
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            final InputStream is = this.getClass().getResourceAsStream("/cgeo/geocaching/test/mock/"+getGeocode()+".html");
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-            int nRead;
-            byte[] data = new byte[16384];
+            final StringBuffer buffer = new StringBuffer();
+            String line = null;
 
-            while ((nRead = is.read(data, 0, data.length)) != -1) {
-                buffer.write(data, 0, nRead);
+            while ((line = br.readLine()) != null) {
+                buffer.append(line).append("\n");
             }
 
-            buffer.flush();
-            StringBuffer sb = new StringBuffer(buffer.toString());
-            cgBase.replaceWhitespace(sb);
-            return sb.toString();
+            br.close();
+
+            cgBase.replaceWhitespace(buffer);
+            return buffer.toString();
 
         } catch (IOException e) {
             e.printStackTrace();

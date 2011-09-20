@@ -18,6 +18,7 @@ import android.test.suitebuilder.annotation.SmallTest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import junit.framework.Assert;
@@ -42,8 +43,8 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
 
         // init environment
         createApplication();
-        Context context = this.getContext();
-        SharedPreferences prefs = context.getSharedPreferences(
+        final Context context = this.getContext();
+        final SharedPreferences prefs = context.getSharedPreferences(
                 cgSettings.preferences, Context.MODE_PRIVATE);
 
         // create required c:geo objects
@@ -68,7 +69,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
      */
     @MediumTest
     public void testSearchByGeocode() {
-        HashMap<String, String> params = new HashMap<String, String>();
+        final Map<String, String> params = new HashMap<String, String>();
         params.put("geocode", "GC1RMM2");
 
         final UUID id = base.searchByGeocode(params, 0, true);
@@ -81,7 +82,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
 */
     @MediumTest
     public void testParseCache() {
-        List<MockedCache> cachesToTest = new ArrayList<MockedCache>();
+        final List<MockedCache> cachesToTest = new ArrayList<MockedCache>();
         cachesToTest.add(new GC2CJPF());
         cachesToTest.add(new GC1ZXX2());
 
