@@ -114,7 +114,7 @@
   <string name="err_detail_cache_find_next">次のキャッシュ情報が見つかりません。</string>
   <string name="err_detail_cache_forgot">Sorry, c:geo forgot which geocache you want.</string>
   <string name="err_detail_cache_forgot_visit">Sorry, c:geo forgot which cache you visited.</string>
-  <string name="err_detail_cache_language">キャッシュの詳細の一部を読み込むことができません。 geocaching.comの言語設定が英語になっていることを確認してください。残念ながらc:geoは他の言語設定には対応しておりません。</string>
+  <string name="err_detail_cache_language">キャッシュの詳細の一部を読み込むことができません。 Geocaching.comの言語設定が英語になっていることを確認してください。残念ながらc:geoは他の言語設定には対応しておりません。</string>
   <string name="err_detail_no_spoiler">このキャッシュのスポイラー画像を見つけることができませんでした。</string>
   <string name="err_detail_no_map_static">このキャッシュのオフライン地図を見つけることができませんでした。</string>
   <string name="err_detail_not_load_map_static">オフライン地図のロードに失敗しました。</string>
@@ -172,7 +172,7 @@
   <string name="err_log_load_data_again">ログを書くのに必要なデータをロードすることができません。もう一度やってみてください。</string>
   <string name="err_log_load_data_still">ログを投稿するのに必要なデータをまだロード中です。もう少しお待ちください。</string>
   <string name="err_log_failed_server">サーバの反応がないのでログを投稿することができませんでした。</string>
-  <string name="err_log_post_failed">ログを投稿することができなかったようです。geocaching.comで確認してください。</string>
+  <string name="err_log_post_failed">ログを投稿することができなかったようです。Geocaching.comで確認してください。</string>
   <string name="err_log_post_failed_because">ログを投稿することができませんでした。原因: </string>
 
   <string name="err_search_address_no_match">該当する場所が見つかりません。</string>

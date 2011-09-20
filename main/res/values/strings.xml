@@ -119,7 +119,7 @@
   <string name="err_none">Ok</string>
   <string name="err_start">Communication not started</string>
   <string name="err_parse">Failed login page parsing</string>
-  <string name="err_server">Failed connection to geocaching.com (server or connection down?)</string>
+  <string name="err_server">Failed connection to Geocaching.com (server or connection down?)</string>
   <string name="err_login">No login information stored</string>
   <string name="err_login_failed">Sorry, c:geo can\'t login.</string>
   <string name="err_login_failed_toast">Sorry, c:geo can\'t login. c:geo works in offline mode. Check your login in settings or enable internet connection.</string>
@@ -139,7 +139,7 @@
   <string name="err_detail_cache_find_next">Sorry, c:geo can\'t find next geocaches.</string>
   <string name="err_detail_cache_forgot">Sorry, c:geo forgot which geocache you want.</string>
   <string name="err_detail_cache_forgot_visit">Sorry, c:geo forgot which cache you visited.</string>
-  <string name="err_detail_cache_language">c:geo can\'t read some cache details. Please check if the geocaching.com website is set to English. Unfortunately, c:geo doesn\'t understand other localisations.</string>
+  <string name="err_detail_cache_language">c:geo can\'t read some cache details. Please check if the Geocaching.com website is set to English. Unfortunately, c:geo doesn\'t understand other localisations.</string>
   <string name="err_detail_no_spoiler">c:geo found no spoiler images for this cache.</string>
   <string name="err_detail_no_map_static">c:geo found no static maps for this cache.</string>
   <string name="err_detail_not_load_map_static">Sorry, c:geo failed to load static maps.</string>
@@ -201,7 +201,7 @@
   <string name="err_log_load_data_again">Sorry, c:geo can\'t load data required to log visit. Trying again.</string>
   <string name="err_log_load_data_still">c:geo is still loading data required to post log. Please wait a little while longer.</string>
   <string name="err_log_failed_server">Sorry, c:geo failed to post log because server is not responding.</string>
-  <string name="err_log_post_failed">It seems that your log was not posted. Please check it on geocaching.com.</string>
+  <string name="err_log_post_failed">It seems that your log was not posted. Please check it on Geocaching.com.</string>
   <string name="err_log_post_failed_because">Sorry, c:geo failed to post log because of </string>
 
   <string name="err_search_address_no_match">Sorry, c:geo found no matching place.</string>
@@ -389,7 +389,7 @@
   <string name="init_passvote">Password</string>
   <string name="init_login">Check login &amp; set date format</string>
   <string name="init_login_popup">Login</string>
-  <string name="init_login_popup_working">Logging into geocaching.com…</string>
+  <string name="init_login_popup_working">Logging into Geocaching.com…</string>
   <string name="init_login_popup_ok">Login ok.</string>
   <string name="init_login_popup_failed">Login failed.</string>
   <string name="init_login_popup_failed_reason">Login failed because of </string>
@@ -895,7 +895,7 @@
   <string name="attribute_food_no">No food nearby</string>
 
   <!-- next things -->
-  <string name="legal_note">To use services of geocaching.com, terms and conditions of <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak disclaimer</a> have to be agreed.</string>
+  <string name="legal_note">To use services of Geocaching.com, terms and conditions of <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak disclaimer</a> have to be agreed.</string>
   <string name="quote">To make geocaching easier, to make users lazier.</string>
   <string name="powered_by">carnero</string>
   <string name="author">Author: <a href="http://carnero.cc/">carnero</a></string>

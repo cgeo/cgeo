@@ -87,7 +87,7 @@
   <string name="err_none">ok</string>
   <string name="err_start">komunikace nezačala</string>
   <string name="err_parse">selhalo čtení logovací stránky</string>
-  <string name="err_server">selhalo připojení k serveru geocaching.com (server umřel?)</string>
+  <string name="err_server">selhalo připojení k serveru Geocaching.com (server umřel?)</string>
   <string name="err_login">nejsou uložené žádné přihlašovací údaje</string>
   <string name="err_login_failed">promiňte, ale c:geo se nemůže přihlásit.</string>
   <string name="err_unknown">nastala neznámá chyba</string>
@@ -254,7 +254,7 @@
   <string name="about_contributors">přispěvatelé</string>
 
   <!-- init -->
-  <string name="init_geocaching">geocaching.com</string>
+  <string name="init_geocaching">Geocaching.com</string>
   <string name="init_gcvote">gcvote.com</string>
   <string name="init_go4cache">Go 4 Cache</string>
   <string name="init_twitter">twitter</string>
@@ -263,7 +263,7 @@
   <string name="init_passvote">heslo</string>
   <string name="init_login">zkontrolovat</string>
   <string name="init_login_popup">přihlášení</string>
-  <string name="init_login_popup_working">přihlašování na geocaching.com…</string>
+  <string name="init_login_popup_working">přihlašování na Geocaching.com…</string>
   <string name="init_login_popup_ok">přihlášení proběhlo</string>
   <string name="init_login_popup_failed">přihlášení neproběhlo</string>
   <string name="init_login_popup_failed_reason">přihlášení neproběhlo, protože</string>
@@ -480,7 +480,7 @@
   <string name="license_dismiss">zamítnutí</string>
 
   <!-- next things -->
-  <string name="legal_note">Před používáním služeb serveru geocaching.com je potřeba souhlasit s <a href="http://www.geocaching.com/about/disclaimer.aspx">licenčním ujednáním Groundspeaku</a>.</string>
+  <string name="legal_note">Před používáním služeb serveru Geocaching.com je potřeba souhlasit s <a href="http://www.geocaching.com/about/disclaimer.aspx">licenčním ujednáním Groundspeaku</a>.</string>
   <string name="author">autor: <a href="http://carnero.cc/">carnero</a></string>
   <string name="support">podpora: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">web: <a href="http://cgeo.org/">cgeo.org</a></string>

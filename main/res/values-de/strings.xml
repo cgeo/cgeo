@@ -117,7 +117,7 @@
   <string name="err_none">OK</string>
   <string name="err_start">Kommunikation nicht gestartet</string>
   <string name="err_parse">Parsing der Anmeldung gescheitert</string>
-  <string name="err_server">Verbindung zu geocaching.com konnte nicht hergestellt werden (Server oder Verbindung inaktiv?)</string>
+  <string name="err_server">Verbindung zu Geocaching.com konnte nicht hergestellt werden (Server oder Verbindung inaktiv?)</string>
   <string name="err_login">Keine Anmeldedaten gespeichert.</string>
   <string name="err_login_failed">Login fehlgeschlagen.</string>
   <string name="err_login_failed_toast">c:geo konnte sich nicht einloggen. c:geo arbeitet im offline mode. Überprüfe den Login in den Einstellungen oder stelle eine Internetverbindung her.</string>
@@ -137,7 +137,7 @@
   <string name="err_detail_cache_find_next">c:geo konnte die nächsten Caches nicht finden.</string>
   <string name="err_detail_cache_forgot">c:geo hat vergessen, welcher Cache aufgerufen werden sollte.</string>
   <string name="err_detail_cache_forgot_visit">c:geo hat vergessen, welchen Cache du besucht hast.</string>
-  <string name="err_detail_cache_language">c:geo konnte manche Details des Caches nicht lesen. Bitte überprüfen, ob geocaching.com auf "English" gestellt wurde. Leider versteht c:geo keine andere Spracheinstellungen.</string>
+  <string name="err_detail_cache_language">c:geo konnte manche Details des Caches nicht lesen. Bitte überprüfen, ob Geocaching.com auf "English" gestellt wurde. Leider versteht c:geo keine andere Spracheinstellungen.</string>
   <string name="err_detail_no_spoiler">c:geo hat kein Hinweisbild für diesen Cache gefunden.</string>
   <string name="err_detail_no_map_static">c:geo hat keine statische Karte für diesen Cache gefunden.</string>
   <string name="err_detail_not_load_map_static">c:geo konnte die statische Karte nicht laden.</string>
@@ -385,7 +385,7 @@
   <string name="init_passvote">Passwort</string>
   <string name="init_login">Anmeldedaten überprüfen &amp; Datumsformat setzen</string>
   <string name="init_login_popup">Login</string>
-  <string name="init_login_popup_working">Bei geocaching.com anmelden…</string>
+  <string name="init_login_popup_working">Bei Geocaching.com anmelden…</string>
   <string name="init_login_popup_ok">Login erfolgreich.</string>
   <string name="init_login_popup_failed">Login fehlgeschlagen.</string>
   <string name="init_login_popup_failed_reason">Login fehlgeschlagen wegen </string>
