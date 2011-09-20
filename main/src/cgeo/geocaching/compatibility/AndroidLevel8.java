@@ -10,5 +10,4 @@ public class AndroidLevel8 {
         return display.getRotation();
     }
 
-    }
 }
