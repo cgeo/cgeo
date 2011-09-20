@@ -257,13 +257,6 @@ public class cgeovisit extends cgLogForm {
 
         app.setAction(geocode);
 
-        if (cache == null) {
-            showToast(res.getString(R.string.err_detail_cache_forgot_visit));
-
-            finish();
-            return;
-        }
-
         init();
     }
 
