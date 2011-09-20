@@ -384,7 +384,7 @@
   <string name="init_username">Gebruikersnaam</string>
   <string name="init_password">Wachtwoord</string>
   <string name="init_passvote">Wachtwoord</string>
-  <string name="init_login">Login controleren</string>
+  <string name="init_login">Login controleren &amp; zet datum-format</string>
   <string name="init_login_popup">Inloggen</string>
   <string name="init_login_popup_working">Inloggen op Geocaching.com…</string>
   <string name="init_login_popup_ok">Ingelogd.</string>
