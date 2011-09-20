@@ -10,11 +10,11 @@ import com.google.android.maps.OverlayItem;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
-public class googleOtherCachersOverlayItem extends OverlayItem implements OtherCachersOverlayItemImpl {
+public class GoogleOtherCachersOverlayItem extends OverlayItem implements OtherCachersOverlayItemImpl {
     private Context context = null;
     private cgUser user = null;
 
-    public googleOtherCachersOverlayItem(Context contextIn, cgUser userIn) {
+    public GoogleOtherCachersOverlayItem(Context contextIn, cgUser userIn) {
         super(new GeoPoint(userIn.coords.getLatitudeE6(), userIn.coords.getLongitudeE6()), userIn.username, "");
 
         context = contextIn;

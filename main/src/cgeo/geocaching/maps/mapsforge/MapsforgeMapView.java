@@ -31,11 +31,11 @@ import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 
-public class mfMapView extends MapView implements MapViewImpl {
+public class MapsforgeMapView extends MapView implements MapViewImpl {
     private GestureDetector gestureDetector;
     private OnDragListener onDragListener;
 
-    public mfMapView(Context context, AttributeSet attrs) {
+    public MapsforgeMapView(Context context, AttributeSet attrs) {
         super(context, attrs);
         gestureDetector = new GestureDetector(context, new GestureListener());
     }
@@ -60,13 +60,13 @@ public class mfMapView extends MapView implements MapViewImpl {
 
     @Override
     public MapControllerImpl getMapController() {
-        return new mfMapController(getController(), getMaxZoomLevel());
+        return new MapsforgeMapController(getController(), getMaxZoomLevel());
     }
 
     @Override
     public GeoPointImpl getMapViewCenter() {
         GeoPoint point = getMapCenter();
-        return new mfGeoPoint(point.getLatitudeE6(), point.getLongitudeE6());
+        return new MapsforgeGeoPoint(point.getLatitudeE6(), point.getLongitudeE6());
     }
 
     @Override
@@ -81,21 +81,21 @@ public class mfMapView extends MapView implements MapViewImpl {
 
     @Override
     public MapProjectionImpl getMapProjection() {
-        return new mfMapProjection(getProjection());
+        return new MapsforgeMapProjection(getProjection());
     }
 
     @Override
     public CachesOverlay createAddMapOverlay(cgSettings settings,
             Context context, Drawable drawable, boolean fromDetailIntent) {
 
-        mfCacheOverlay ovl = new mfCacheOverlay(settings, context, drawable, fromDetailIntent);
+        MapsforgeCacheOverlay ovl = new MapsforgeCacheOverlay(settings, context, drawable, fromDetailIntent);
         getOverlays().add(ovl);
         return ovl.getBase();
     }
 
     @Override
     public OtherCachersOverlay createAddUsersOverlay(Context context, Drawable markerIn) {
-        mfOtherCachersOverlay ovl = new mfOtherCachersOverlay(context, markerIn);
+        MapsforgeOtherCachersOverlay ovl = new MapsforgeOtherCachersOverlay(context, markerIn);
         getOverlays().add(ovl);
         return ovl.getBase();
     }
@@ -103,7 +103,7 @@ public class mfMapView extends MapView implements MapViewImpl {
     @Override
     public PositionOverlay createAddPositionOverlay(Activity activity,
             cgSettings settingsIn) {
-        mfOverlay ovl = new mfOverlay(activity, settingsIn, overlayType.PositionOverlay);
+        MapsforgeOverlay ovl = new MapsforgeOverlay(activity, settingsIn, overlayType.PositionOverlay);
         getOverlays().add(ovl);
         return (PositionOverlay) ovl.getBase();
     }
@@ -111,7 +111,7 @@ public class mfMapView extends MapView implements MapViewImpl {
     @Override
     public ScaleOverlay createAddScaleOverlay(Activity activity,
             cgSettings settingsIn) {
-        mfOverlay ovl = new mfOverlay(activity, settingsIn, overlayType.ScaleOverlay);
+        MapsforgeOverlay ovl = new MapsforgeOverlay(activity, settingsIn, overlayType.ScaleOverlay);
         getOverlays().add(ovl);
         return (ScaleOverlay) ovl.getBase();
     }
@@ -202,7 +202,7 @@ public class mfMapView extends MapView implements MapViewImpl {
     public void repaintRequired(GeneralOverlay overlay) {
 
         try {
-            mfOverlay ovl = (mfOverlay) overlay.getOverlayImpl();
+            MapsforgeOverlay ovl = (MapsforgeOverlay) overlay.getOverlayImpl();
 
             if (ovl != null) {
                 ovl.requestRedraw();

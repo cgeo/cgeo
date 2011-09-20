@@ -1,12 +1,12 @@
-package cgeo.geocaching.maps.google;
+package cgeo.geocaching.maps.mapsforge;
 
 import cgeo.geocaching.maps.OtherCachersOverlay;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 
-import com.google.android.maps.ItemizedOverlay;
-import com.google.android.maps.MapView;
+import org.mapsforge.android.maps.ItemizedOverlay;
+import org.mapsforge.android.maps.Projection;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -16,12 +16,12 @@ import android.graphics.drawable.Drawable;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class googleOtherCachersOverlay extends ItemizedOverlay<googleOtherCachersOverlayItem> implements ItemizedOverlayImpl {
+public class MapsforgeOtherCachersOverlay extends ItemizedOverlay<MapsforgeOtherCachersOverlayItem> implements ItemizedOverlayImpl {
 
     private OtherCachersOverlay base;
     private Lock lock = new ReentrantLock();
 
-    public googleOtherCachersOverlay(Context contextIn, Drawable markerIn) {
+    public MapsforgeOtherCachersOverlay(Context contextIn, Drawable markerIn) {
         super(boundCenter(markerIn));
         base = new OtherCachersOverlay(this, contextIn);
     }
@@ -32,11 +32,11 @@ public class googleOtherCachersOverlay extends ItemizedOverlay<googleOtherCacher
     }
 
     @Override
-    protected googleOtherCachersOverlayItem createItem(int i) {
+    protected MapsforgeOtherCachersOverlayItem createItem(int i) {
         if (base == null)
             return null;
 
-        return (googleOtherCachersOverlayItem) base.createItem(i);
+        return (MapsforgeOtherCachersOverlayItem) base.createItem(i);
     }
 
     @Override
@@ -56,8 +56,10 @@ public class googleOtherCachersOverlay extends ItemizedOverlay<googleOtherCacher
     }
 
     @Override
-    public void draw(Canvas canvas, MapView mapView, boolean shadow) {
-        base.draw(canvas, (MapViewImpl) mapView, shadow);
+    protected void drawOverlayBitmap(Canvas canvas, Point drawPosition,
+            Projection projection, byte drawZoomLevel) {
+
+        base.drawOverlayBitmap(canvas, drawPosition, new MapsforgeMapProjection(projection), drawZoomLevel);
     }
 
     @Override
@@ -77,7 +79,7 @@ public class googleOtherCachersOverlay extends ItemizedOverlay<googleOtherCacher
 
     @Override
     public void superSetLastFocusedItemIndex(int i) {
-        super.setLastFocusedIndex(i);
+        // Nothing to do here
     }
 
     @Override
@@ -87,13 +89,14 @@ public class googleOtherCachersOverlay extends ItemizedOverlay<googleOtherCacher
 
     @Override
     public void superDraw(Canvas canvas, MapViewImpl mapView, boolean shadow) {
-        super.draw(canvas, (MapView) mapView, shadow);
+        // Nothing to do here
     }
 
     @Override
     public void superDrawOverlayBitmap(Canvas canvas, Point drawPosition,
             MapProjectionImpl projection, byte drawZoomLevel) {
-        // Nothing to do here
+
+        super.drawOverlayBitmap(canvas, drawPosition, (Projection) projection.getImpl(), drawZoomLevel);
     }
 
     @Override
