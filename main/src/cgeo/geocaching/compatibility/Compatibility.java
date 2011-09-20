@@ -43,4 +43,10 @@ public final class Compatibility {
         return Uri.parse(isLevel8 ? "content://com.android.calendar/events" : "content://calendar/events");
     }
 
+    public static void dataChanged(final String name) {
+        if (isLevel8) {
+            level8.dataChanged(name);
+        }
+    }
+
 }
