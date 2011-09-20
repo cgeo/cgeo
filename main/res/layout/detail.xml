@@ -279,6 +279,26 @@
 						android:orientation="vertical">
 				</LinearLayout>
 			</LinearLayout>
+			<LinearLayout android:id="@+id/license_box"
+					android:visibility="gone"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"  >
+				<RelativeLayout style="@style/separator_horizontal_layout" >
+					<View style="@style/separator_horizontal" />
+					<TextView style="@style/separator_horizontal_headline"
+							android:text="@string/cache_license" />
+				</RelativeLayout>
+				<TextView android:id="@+id/license"
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:layout_gravity="left"
+						android:padding="3dip"
+						android:textSize="14dip"
+						android:textColor="?text_color"
+						android:linksClickable="true"
+						android:textColorLink="?text_color_link" />
+			</LinearLayout>
 		</LinearLayout>
 	</ScrollView>
 </LinearLayout>

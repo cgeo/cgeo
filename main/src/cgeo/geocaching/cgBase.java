@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -2583,71 +2584,7 @@ public class cgBase {
             return search.getCurrentId();
         }
 
-        final String host = "www.geocaching.com";
-        final String path = "/seek/cache_details.aspx";
-        final String method = "GET";
-        final Map<String, String> params = new HashMap<String, String>();
-        if (StringUtils.isNotBlank(geocode)) {
-            params.put("wp", geocode);
-        } else if (StringUtils.isNotBlank(guid)) {
-            params.put("guid", guid);
-        }
-        params.put("decrypt", "y");
-
-        String page = requestLogged(false, host, path, method, params, false, false, false);
-
-        if (StringUtils.isEmpty(page)) {
-            if (app.isThere(geocode, guid, true, false)) {
-                if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
-                    Log.i(cgSettings.tag, "Loading old cache from cache.");
-
-                    geocode = app.getGeocode(guid);
-                }
-
-                final List<cgCache> cacheList = new ArrayList<cgCache>();
-                cacheList.add(app.getCacheByGeocode(geocode));
-                search.addGeocode(geocode);
-                search.error = null;
-
-                app.addSearch(search, cacheList, false, reason);
-
-                cacheList.clear();
-
-                return search.getCurrentId();
-            }
-
-            Log.e(cgSettings.tag, "cgeoBase.searchByGeocode: No data from server");
-            return null;
-        }
-
-        final cgCacheWrap caches = parseCache(page, reason);
-        if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
-            if (caches != null && StringUtils.isNotBlank(caches.error)) {
-                search.error = caches.error;
-            }
-            if (caches != null && StringUtils.isNotBlank(caches.url)) {
-                search.url = caches.url;
-            }
-
-            app.addSearch(search, null, true, reason);
-
-            Log.e(cgSettings.tag, "cgeoBase.searchByGeocode: No cache parsed");
-            return null;
-        }
-
-        if (app == null) {
-            Log.e(cgSettings.tag, "cgeoBase.searchByGeocode: No application found");
-            return null;
-        }
-
-        List<cgCache> cacheList = processSearchResults(search, caches, 0, 0, null);
-
-        app.addSearch(search, cacheList, true, reason);
-
-        page = null;
-        cacheList.clear();
-
-        return search.getCurrentId();
+        return ConnectorFactory.getConnector(geocode).searchByGeocode(this, geocode, guid, app, search, reason);
     }
 
     public UUID searchByOffline(Map<String, Object> parameters) {

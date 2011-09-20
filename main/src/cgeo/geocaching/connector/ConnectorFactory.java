@@ -1,10 +1,25 @@
 package cgeo.geocaching.connector;
 
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.connector.opencaching.ApiOpenCachingConnector;
+import cgeo.geocaching.connector.opencaching.OpenCachingConnector;
 
 public final class ConnectorFactory {
     private static final GCConnector GC_CONNECTOR = new GCConnector();
-    private static final IConnector[] connectors = new IConnector[] { GC_CONNECTOR, new OCConnector(), new OXConnector() };
+    private static final IConnector[] connectors = new IConnector[] {
+            GC_CONNECTOR,
+            new OpenCachingConnector("OpenCaching.DE", "www.opencaching.de", "OC"),
+            new OpenCachingConnector("OpenCaching.CZ", "www.opencaching.cz", "OZ"),
+            new ApiOpenCachingConnector("OpenCaching.CO.UK", "www.opencaching.org.uk", "OK", "arU4okouc4GEjMniE2fq"),
+            new OpenCachingConnector("OpenCaching.ES", "www.opencachingspain.es", "OC"),
+            new OpenCachingConnector("OpenCaching.IT", "www.opencaching.it", "OC"),
+            new OpenCachingConnector("OpenCaching.JP", "www.opencaching.jp", "OJ"),
+            new OpenCachingConnector("OpenCaching.NO/SE", "www.opencaching.no", "OS"),
+            new OpenCachingConnector("OpenCaching.NL", "www.opencaching.nl", "OB"),
+            new ApiOpenCachingConnector("OpenCaching.PL", "www.opencaching.pl", "OP", "GkxM47WkUkLQXXsZ9qSh"),
+            new ApiOpenCachingConnector("OpenCaching.US", "www.opencaching.us", "OU", "pTsYAYSXFcfcRQnYE6uA"),
+            new OXConnector()
+    };
 
     public static IConnector[] getConnectors() {
         return connectors;
@@ -20,8 +35,12 @@ public final class ConnectorFactory {
     }
 
     public static IConnector getConnector(cgCache cache) {
+        return getConnector(cache.geocode);
+    }
+
+    public static IConnector getConnector(String geocode) {
         for (IConnector connector : connectors) {
-            if (connector.canHandle(cache.geocode)) {
+            if (connector.canHandle(geocode)) {
                 return connector;
             }
         }

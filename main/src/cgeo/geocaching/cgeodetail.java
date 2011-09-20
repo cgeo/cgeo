@@ -4,6 +4,8 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.GeneralAppsFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.utils.CollectionUtils;
 import cgeo.geocaching.utils.CryptUtils;
@@ -50,6 +52,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.TextView.BufferType;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -512,7 +515,7 @@ public class cgeodetail extends AbstractActivity {
             menu.add(1, 5, 0, res.getString(R.string.cache_menu_spoilers)).setIcon(android.R.drawable.ic_menu_gallery); // spoiler images
         }
 
-        if (cache != null && cache.coords != null) {
+        if (cache != null && cache.coords != null && cache.supportsCachesAround()) {
             menu.add(0, 10, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
         }
 
@@ -1082,6 +1085,21 @@ public class cgeodetail extends AbstractActivity {
             refreshDialog.dismiss();
 
         displayLogs();
+
+        // data license
+        IConnector connector = ConnectorFactory.getConnector(cache);
+        if (connector != null) {
+            String license = connector.getLicenseText(cache);
+            if (StringUtils.isNotBlank(license)) {
+                ((LinearLayout) findViewById(R.id.license_box)).setVisibility(View.VISIBLE);
+                TextView licenseView = ((TextView) findViewById(R.id.license));
+                licenseView.setText(Html.fromHtml(license), BufferType.SPANNABLE);
+                licenseView.setClickable(true);
+                licenseView.setMovementMethod(LinkMovementMethod.getInstance());
+            } else {
+                ((LinearLayout) findViewById(R.id.license_box)).setVisibility(View.GONE);
+            }
+        }
 
         if (geo != null)
             geoUpdate.updateLoc(geo);
@@ -1902,6 +1920,9 @@ public class cgeodetail extends AbstractActivity {
 
         public void onClick(View view) {
             if (view == null) {
+                return;
+            }
+            if (!cache.supportsUserActions()) {
                 return;
             }
 

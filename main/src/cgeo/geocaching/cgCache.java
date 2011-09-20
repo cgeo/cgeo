@@ -458,4 +458,12 @@ public class cgCache implements ICache {
         return name;
     }
 
+    public boolean supportsUserActions() {
+        return getConnector().supportsUserActions();
+    }
+
+    public boolean supportsCachesAround() {
+        return getConnector().supportsCachesAround();
+    }
+
 }

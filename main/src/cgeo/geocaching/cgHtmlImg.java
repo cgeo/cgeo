@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -175,7 +177,8 @@ public class cgHtmlImg implements Html.ImageGetter {
                 uri = Uri.parse(url);
 
                 if (uri.isAbsolute() == false) {
-                    url = "http://www.geocaching.com" + url;
+                    IConnector connector = ConnectorFactory.getConnector(geocode);
+                    url = "http://" + connector.getHost() + url;
                 }
             } catch (Exception e) {
                 Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (parse URL): " + e.toString());

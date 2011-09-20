@@ -581,6 +581,7 @@
   <string name="cache_export_fieldnote">Export as Field Notes</string>
   <string name="cache_clear_history">Clear history</string>
   <string name="cache_remove_from_history">Remove from history</string>
+  <string name="cache_license">License</string>
 
   <!-- file list base -->
   <string name="file_searching_in">Searching for files\nin</string>
@@ -951,6 +952,7 @@
   <string name="changelog">\n
     <b>next version</b>\n
     · new: import of LOC files\n
+    · new: search for geo code supports OpenCaching.DE/.PL/.US\n
     \n\n
     <b>18.09.2011</b>\n
     · fix: Android 3+ compatibility\n
