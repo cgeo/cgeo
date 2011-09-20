@@ -4698,8 +4698,10 @@ public class cgBase {
      * @param insertText
      * @param addSpace
      *            add a space character, if there is no whitespace before the current cursor position
+     * @param moveCursor
+     *            place the cursor after the inserted text
      */
-    static void insertAtPosition(final EditText editText, String insertText, final boolean addSpace) {
+    static void insertAtPosition(final EditText editText, String insertText, final boolean addSpace, final boolean moveCursor) {
         int selectionStart = editText.getSelectionStart();
         int selectionEnd = editText.getSelectionEnd();
         int start = Math.min(selectionStart, selectionEnd);
@@ -4711,7 +4713,7 @@ public class cgBase {
         }
 
         editText.getText().replace(start, end, insertText);
-        int newCursor = start + insertText.length();
+        int newCursor = moveCursor ? start + insertText.length() : start;
         editText.setSelection(newCursor, newCursor);
     }
 }

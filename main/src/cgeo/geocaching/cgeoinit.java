@@ -201,7 +201,7 @@ public class cgeoinit extends AbstractActivity {
     private boolean insertSignatureTemplate(final LogTemplate template) {
         EditText sig = (EditText) findViewById(R.id.signature);
         String insertText = "[" + template.getTemplateString() + "]";
-        cgBase.insertAtPosition(sig, insertText, true);
+        cgBase.insertAtPosition(sig, insertText, true, true);
         return true;
     }
 

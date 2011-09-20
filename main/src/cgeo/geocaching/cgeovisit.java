@@ -326,9 +326,9 @@ public class cgeovisit extends cgLogForm {
             EditText log = (EditText) findViewById(R.id.log);
             String content = log.getText().toString();
             if (StringUtils.isNotBlank(content)) {
-                insertIntoLog("\n");
+                insertIntoLog("\n", false);
             }
-            insertIntoLog(LogTemplateProvider.applyTemplates(settings.getSignature(), base, false));
+            insertIntoLog(LogTemplateProvider.applyTemplates(settings.getSignature(), base, false), false);
             return true;
         } else if (id >= 10 && id <= 19) {
             rating = (id - 9) / 2.0;
@@ -346,15 +346,15 @@ public class cgeovisit extends cgLogForm {
         LogTemplate template = LogTemplateProvider.getTemplate(id);
         if (template != null) {
             String newText = template.getValue(base, false);
-            insertIntoLog(newText);
+            insertIntoLog(newText, true);
             return true;
         }
         return false;
     }
 
-    private void insertIntoLog(String newText) {
+    private void insertIntoLog(String newText, final boolean moveCursor) {
         EditText log = (EditText) findViewById(R.id.log);
-        cgBase.insertAtPosition(log, newText, true);
+        cgBase.insertAtPosition(log, newText, true, moveCursor);
     }
 
     private static String ratingTextValue(final double rating) {
@@ -508,7 +508,8 @@ public class cgeovisit extends cgLogForm {
         } else if (StringUtils.isNotBlank(settings.getSignature())
                 && settings.signatureAutoinsert
                 && StringUtils.isBlank(((EditText) findViewById(R.id.log)).getText())) {
-            insertIntoLog(LogTemplateProvider.applyTemplates(settings.getSignature(), base, false));
+            text = "\n" + LogTemplateProvider.applyTemplates(settings.getSignature(), base, false);
+            insertIntoLog(text, false);
         }
 
         if (types.contains(typeSelected) == false) {
