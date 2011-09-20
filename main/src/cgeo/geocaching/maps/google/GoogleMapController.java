@@ -6,11 +6,11 @@ import cgeo.geocaching.maps.interfaces.MapControllerImpl;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapController;
 
-public class googleMapController implements MapControllerImpl {
+public class GoogleMapController implements MapControllerImpl {
 
     private MapController mapController;
 
-    public googleMapController(MapController mapControllerIn) {
+    public GoogleMapController(MapController mapControllerIn) {
         mapController = mapControllerIn;
     }
 

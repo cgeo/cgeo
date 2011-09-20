@@ -8,11 +8,11 @@ import com.google.android.maps.Projection;
 
 import android.graphics.Point;
 
-public class googleMapProjection implements MapProjectionImpl {
+public class GoogleMapProjection implements MapProjectionImpl {
 
     private Projection projection;
 
-    public googleMapProjection(Projection projectionIn) {
+    public GoogleMapProjection(Projection projectionIn) {
         projection = projectionIn;
     }
 

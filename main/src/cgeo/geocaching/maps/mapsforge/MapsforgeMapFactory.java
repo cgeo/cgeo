@@ -1,4 +1,4 @@
-package cgeo.geocaching.maps.google;
+package cgeo.geocaching.maps.mapsforge;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCoord;
@@ -9,41 +9,40 @@ import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapFactory;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
 
-import com.google.android.maps.MapActivity;
-
+import android.app.Activity;
 import android.content.Context;
 
-public class googleMapFactory implements MapFactory {
+public class MapsforgeMapFactory implements MapFactory {
 
     @Override
-    public Class<? extends MapActivity> getMapClass() {
-        return googleMapActivity.class;
+    public Class<? extends Activity> getMapClass() {
+        return MapsforgeMapActivity.class;
     }
 
     @Override
     public int getMapViewId() {
-        return R.id.map;
+        return R.id.mfmap;
     }
 
     @Override
     public int getMapLayoutId() {
-        return R.layout.googlemap;
+        return R.layout.map_mapsforge;
     }
 
     @Override
     public GeoPointImpl getGeoPointBase(final Geopoint coords) {
-        return new googleGeoPoint(coords.getLatitudeE6(), coords.getLongitudeE6());
+        return new MapsforgeGeoPoint(coords.getLatitudeE6(), coords.getLongitudeE6());
     }
 
     @Override
     public CachesOverlayItemImpl getCachesOverlayItem(cgCoord coordinate, String type) {
-        googleCacheOverlayItem baseItem = new googleCacheOverlayItem(coordinate, type);
+        MapsforgeCacheOverlayItem baseItem = new MapsforgeCacheOverlayItem(coordinate, type);
         return baseItem;
     }
 
     @Override
     public OtherCachersOverlayItemImpl getOtherCachersOverlayItemBase(Context context, cgUser userOne) {
-        googleOtherCachersOverlayItem baseItem = new googleOtherCachersOverlayItem(context, userOne);
+        MapsforgeOtherCachersOverlayItem baseItem = new MapsforgeOtherCachersOverlayItem(context, userOne);
         return baseItem;
     }
 

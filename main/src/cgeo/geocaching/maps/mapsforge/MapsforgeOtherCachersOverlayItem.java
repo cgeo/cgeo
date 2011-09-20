@@ -10,11 +10,11 @@ import org.mapsforge.android.maps.OverlayItem;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
-public class mfOtherCachersOverlayItem extends OverlayItem implements OtherCachersOverlayItemImpl {
+public class MapsforgeOtherCachersOverlayItem extends OverlayItem implements OtherCachersOverlayItemImpl {
     private Context context = null;
     private cgUser user = null;
 
-    public mfOtherCachersOverlayItem(Context contextIn, cgUser userIn) {
+    public MapsforgeOtherCachersOverlayItem(Context contextIn, cgUser userIn) {
         super(new GeoPoint((int) (userIn.coords.getLatitudeE6()), userIn.coords.getLongitudeE6()), userIn.username, "");
 
         context = contextIn;

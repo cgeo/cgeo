@@ -6,12 +6,12 @@ import cgeo.geocaching.maps.interfaces.MapControllerImpl;
 import org.mapsforge.android.maps.GeoPoint;
 import org.mapsforge.android.maps.MapController;
 
-public class mfMapController implements MapControllerImpl {
+public class MapsforgeMapController implements MapControllerImpl {
 
     private MapController mapController;
     private int maxZoomLevel;
 
-    public mfMapController(MapController mapControllerIn, int maxZoomLevelIn) {
+    public MapsforgeMapController(MapController mapControllerIn, int maxZoomLevelIn) {
         mapController = mapControllerIn;
         maxZoomLevel = maxZoomLevelIn;
     }

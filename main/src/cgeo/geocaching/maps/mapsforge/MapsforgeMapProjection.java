@@ -8,11 +8,11 @@ import org.mapsforge.android.maps.Projection;
 
 import android.graphics.Point;
 
-public class mfMapProjection implements MapProjectionImpl {
+public class MapsforgeMapProjection implements MapProjectionImpl {
 
     private Projection projection;
 
-    public mfMapProjection(Projection projectionIn) {
+    public MapsforgeMapProjection(Projection projectionIn) {
         projection = projectionIn;
     }
 

@@ -12,11 +12,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class mfMapActivity extends MapActivity implements MapActivityImpl {
+public class MapsforgeMapActivity extends MapActivity implements MapActivityImpl {
 
     private AbstractMap mapBase;
 
-    public mfMapActivity() {
+    public MapsforgeMapActivity() {
         mapBase = new CGeoMap(this);
     }
 

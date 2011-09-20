@@ -1,7 +1,6 @@
 package cgeo.geocaching.maps.google;
 
-import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.maps.CachesOverlay;
+import cgeo.geocaching.maps.OtherCachersOverlay;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
@@ -17,33 +16,27 @@ import android.graphics.drawable.Drawable;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-/**
- * Google specific implementation of the itemized cache overlay
- *
- * @author rsudev
- *
- */
-public class googleCacheOverlay extends ItemizedOverlay<googleCacheOverlayItem> implements ItemizedOverlayImpl {
+public class GoogleOtherCachersOverlay extends ItemizedOverlay<GoogleOtherCachersOverlayItem> implements ItemizedOverlayImpl {
 
-    private CachesOverlay base;
+    private OtherCachersOverlay base;
     private Lock lock = new ReentrantLock();
 
-    public googleCacheOverlay(cgSettings settingsIn, Context contextIn, Drawable markerIn, Boolean fromDetailIn) {
-        super(boundCenterBottom(markerIn));
-        base = new CachesOverlay(settingsIn, this, contextIn, fromDetailIn);
+    public GoogleOtherCachersOverlay(Context contextIn, Drawable markerIn) {
+        super(boundCenter(markerIn));
+        base = new OtherCachersOverlay(this, contextIn);
     }
 
     @Override
-    public CachesOverlay getBase() {
+    public OtherCachersOverlay getBase() {
         return base;
     }
 
     @Override
-    protected googleCacheOverlayItem createItem(int i) {
+    protected GoogleOtherCachersOverlayItem createItem(int i) {
         if (base == null)
             return null;
 
-        return (googleCacheOverlayItem) base.createItem(i);
+        return (GoogleOtherCachersOverlayItem) base.createItem(i);
     }
 
     @Override
@@ -100,7 +93,7 @@ public class googleCacheOverlay extends ItemizedOverlay<googleCacheOverlayItem> 
     @Override
     public void superDrawOverlayBitmap(Canvas canvas, Point drawPosition,
             MapProjectionImpl projection, byte drawZoomLevel) {
-        // Nothing to do here...
+        // Nothing to do here
     }
 
     @Override

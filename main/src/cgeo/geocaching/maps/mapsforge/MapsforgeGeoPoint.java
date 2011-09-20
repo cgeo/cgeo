@@ -4,9 +4,9 @@ import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 
 import org.mapsforge.android.maps.GeoPoint;
 
-public class mfGeoPoint extends GeoPoint implements GeoPointImpl {
+public class MapsforgeGeoPoint extends GeoPoint implements GeoPointImpl {
 
-    public mfGeoPoint(int latitudeE6, int longitudeE6) {
+    public MapsforgeGeoPoint(int latitudeE6, int longitudeE6) {
         super(latitudeE6, longitudeE6);
     }
 }
