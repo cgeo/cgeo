@@ -186,6 +186,8 @@ public class cgeovisit extends cgLogForm {
                     waitDialog.dismiss();
                 }
 
+                // No need to save the log when quitting if it has been posted.
+                text = currentLogText();
                 finish();
                 return;
             } else if (msg.what == 2) {
@@ -265,6 +267,12 @@ public class cgeovisit extends cgLogForm {
         super.onResume();
 
         settings.load();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        saveLog(false);
     }
 
     @Override
@@ -562,8 +570,7 @@ public class cgeovisit extends cgLogForm {
 
             @Override
             public void onClick(View v) {
-                String log = ((EditText) findViewById(R.id.log)).getText().toString();
-                cache.logOffline(cgeovisit.this, log, date, typeSelected);
+                saveLog(true);
             }
         });
 
@@ -667,11 +674,7 @@ public class cgeovisit extends cgLogForm {
             dateButton.setOnClickListener(new cgeovisitDateListener());
 
             EditText logView = (EditText) findViewById(R.id.log);
-            if (StringUtils.isNotBlank(text)) {
-                logView.setText(text);
-            } else {
-                logView.setText("");
-            }
+            logView.setText("");
 
             if (clear == null) {
                 clear = (Button) findViewById(R.id.clear);
@@ -810,6 +813,22 @@ public class cgeovisit extends cgLogForm {
         }
 
         return 1000;
+    }
+
+    private void saveLog(final boolean force) {
+        final String log = currentLogText();
+
+        // Do not erase the saved log if the user has removed all the characters
+        // without using "Clear". This may be a manipulation mistake, and erasing
+        // again will be easy using "Clear" while retyping the text may not be.
+        if (force || (log.length() > 0 && !StringUtils.equals(log, text))) {
+            cache.logOffline(this, log, date, typeSelected);
+        }
+        text = log;
+    }
+
+    private String currentLogText() {
+        return ((EditText) findViewById(R.id.log)).getText().toString();
     }
 
 }
