@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.compatibility.Compatibility;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -139,6 +140,7 @@ public class cgeoinit extends AbstractActivity {
     @Override
     public void onStop() {
         saveValues();
+        Compatibility.dataChanged(getPackageName());
         super.onStop();
     }
 
