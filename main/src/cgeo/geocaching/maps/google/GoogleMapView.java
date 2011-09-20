@@ -28,21 +28,21 @@ import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 
-public class googleMapView extends MapView implements MapViewImpl {
+public class GoogleMapView extends MapView implements MapViewImpl {
     private GestureDetector gestureDetector;
     private OnDragListener onDragListener;
 
-    public googleMapView(Context context, AttributeSet attrs) {
+    public GoogleMapView(Context context, AttributeSet attrs) {
         super(context, attrs);
         gestureDetector = new GestureDetector(context, new GestureListener());
     }
 
-    public googleMapView(Context context, AttributeSet attrs, int defStyle) {
+    public GoogleMapView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         gestureDetector = new GestureDetector(context, new GestureListener());
     }
 
-    public googleMapView(Context context, String apiKey) {
+    public GoogleMapView(Context context, String apiKey) {
         super(context, apiKey);
         gestureDetector = new GestureDetector(context, new GestureListener());
     }
@@ -71,13 +71,13 @@ public class googleMapView extends MapView implements MapViewImpl {
 
     @Override
     public MapControllerImpl getMapController() {
-        return new googleMapController(getController());
+        return new GoogleMapController(getController());
     }
 
     @Override
     public GeoPointImpl getMapViewCenter() {
         GeoPoint point = getMapCenter();
-        return new googleGeoPoint(point.getLatitudeE6(), point.getLongitudeE6());
+        return new GoogleGeoPoint(point.getLatitudeE6(), point.getLongitudeE6());
     }
 
     @Override
@@ -92,21 +92,21 @@ public class googleMapView extends MapView implements MapViewImpl {
 
     @Override
     public MapProjectionImpl getMapProjection() {
-        return new googleMapProjection(getProjection());
+        return new GoogleMapProjection(getProjection());
     }
 
     @Override
     public CachesOverlay createAddMapOverlay(cgSettings settings,
             Context context, Drawable drawable, boolean fromDetailIntent) {
 
-        googleCacheOverlay ovl = new googleCacheOverlay(settings, context, drawable, fromDetailIntent);
+        GoogleCacheOverlay ovl = new GoogleCacheOverlay(settings, context, drawable, fromDetailIntent);
         getOverlays().add(ovl);
         return ovl.getBase();
     }
 
     @Override
     public OtherCachersOverlay createAddUsersOverlay(Context context, Drawable markerIn) {
-        googleOtherCachersOverlay ovl = new googleOtherCachersOverlay(context, markerIn);
+        GoogleOtherCachersOverlay ovl = new GoogleOtherCachersOverlay(context, markerIn);
         getOverlays().add(ovl);
         return ovl.getBase();
     }
@@ -115,7 +115,7 @@ public class googleMapView extends MapView implements MapViewImpl {
     public PositionOverlay createAddPositionOverlay(Activity activity,
             cgSettings settingsIn) {
 
-        googleOverlay ovl = new googleOverlay(activity, settingsIn, overlayType.PositionOverlay);
+        GoogleOverlay ovl = new GoogleOverlay(activity, settingsIn, overlayType.PositionOverlay);
         getOverlays().add(ovl);
         return (PositionOverlay) ovl.getBase();
     }
@@ -124,7 +124,7 @@ public class googleMapView extends MapView implements MapViewImpl {
     public ScaleOverlay createAddScaleOverlay(Activity activity,
             cgSettings settingsIn) {
 
-        googleOverlay ovl = new googleOverlay(activity, settingsIn, overlayType.ScaleOverlay);
+        GoogleOverlay ovl = new GoogleOverlay(activity, settingsIn, overlayType.ScaleOverlay);
         getOverlays().add(ovl);
         return (ScaleOverlay) ovl.getBase();
     }

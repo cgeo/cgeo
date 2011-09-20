@@ -16,12 +16,12 @@ import android.graphics.Canvas;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class googleOverlay extends Overlay implements OverlayImpl {
+public class GoogleOverlay extends Overlay implements OverlayImpl {
 
     private GeneralOverlay overlayBase = null;
     private Lock lock = new ReentrantLock();
 
-    public googleOverlay(Activity activityIn, cgSettings settingsIn, overlayType ovlType) {
+    public GoogleOverlay(Activity activityIn, cgSettings settingsIn, overlayType ovlType) {
         switch (ovlType) {
             case PositionOverlay:
                 overlayBase = new PositionOverlay(settingsIn, activityIn, this);

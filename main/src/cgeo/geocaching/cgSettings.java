@@ -1,8 +1,8 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.maps.google.googleMapFactory;
+import cgeo.geocaching.maps.google.GoogleMapFactory;
 import cgeo.geocaching.maps.interfaces.MapFactory;
-import cgeo.geocaching.maps.mapsforge.mfMapFactory;
+import cgeo.geocaching.maps.mapsforge.MapsforgeMapFactory;
 
 import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.android.maps.MapDatabase;
@@ -495,12 +495,12 @@ public class cgSettings {
     public MapFactory getMapFactory() {
         if (mapSource.isGoogleMapSource()) {
             if (!mapSourceUsed.isGoogleMapSource() || mapFactory == null) {
-                mapFactory = new googleMapFactory();
+                mapFactory = new GoogleMapFactory();
                 mapSourceUsed = mapSource;
             }
         } else if (!mapSource.isGoogleMapSource()) {
             if (mapSourceUsed.isGoogleMapSource() || mapFactory == null) {
-                mapFactory = new mfMapFactory();
+                mapFactory = new MapsforgeMapFactory();
                 mapSourceUsed = mapSource;
             }
         }

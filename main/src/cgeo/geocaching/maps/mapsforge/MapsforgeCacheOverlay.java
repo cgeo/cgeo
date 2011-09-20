@@ -17,12 +17,12 @@ import android.graphics.drawable.Drawable;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class mfCacheOverlay extends ItemizedOverlay<mfCacheOverlayItem> implements ItemizedOverlayImpl {
+public class MapsforgeCacheOverlay extends ItemizedOverlay<MapsforgeCacheOverlayItem> implements ItemizedOverlayImpl {
 
     private CachesOverlay base;
     private Lock lock = new ReentrantLock();
 
-    public mfCacheOverlay(cgSettings settingsIn, Context contextIn, Drawable markerIn, Boolean fromDetailIn) {
+    public MapsforgeCacheOverlay(cgSettings settingsIn, Context contextIn, Drawable markerIn, Boolean fromDetailIn) {
         super(boundCenterBottom(markerIn));
         base = new CachesOverlay(settingsIn, this, contextIn, fromDetailIn);
     }
@@ -33,11 +33,11 @@ public class mfCacheOverlay extends ItemizedOverlay<mfCacheOverlayItem> implemen
     }
 
     @Override
-    protected mfCacheOverlayItem createItem(int i) {
+    protected MapsforgeCacheOverlayItem createItem(int i) {
         if (base == null)
             return null;
 
-        return (mfCacheOverlayItem) base.createItem(i);
+        return (MapsforgeCacheOverlayItem) base.createItem(i);
     }
 
     @Override
@@ -59,7 +59,7 @@ public class mfCacheOverlay extends ItemizedOverlay<mfCacheOverlayItem> implemen
     @Override
     protected void drawOverlayBitmap(Canvas canvas, Point drawPosition,
             Projection projection, byte drawZoomLevel) {
-        base.drawOverlayBitmap(canvas, drawPosition, new mfMapProjection(projection), drawZoomLevel);
+        base.drawOverlayBitmap(canvas, drawPosition, new MapsforgeMapProjection(projection), drawZoomLevel);
     }
 
     @Override

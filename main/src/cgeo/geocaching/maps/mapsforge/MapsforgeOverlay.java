@@ -16,12 +16,12 @@ import android.graphics.Point;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class mfOverlay extends Overlay implements OverlayImpl {
+public class MapsforgeOverlay extends Overlay implements OverlayImpl {
 
     private GeneralOverlay overlayBase = null;
     private Lock lock = new ReentrantLock();
 
-    public mfOverlay(Activity activityIn, cgSettings settingsIn, OverlayImpl.overlayType ovlType) {
+    public MapsforgeOverlay(Activity activityIn, cgSettings settingsIn, OverlayImpl.overlayType ovlType) {
 
         switch (ovlType) {
             case PositionOverlay:
@@ -37,7 +37,7 @@ public class mfOverlay extends Overlay implements OverlayImpl {
             Projection projection, byte drawZoomLevel) {
 
         if (overlayBase != null) {
-            overlayBase.drawOverlayBitmap(canvas, drawPosition, new mfMapProjection(projection), drawZoomLevel);
+            overlayBase.drawOverlayBitmap(canvas, drawPosition, new MapsforgeMapProjection(projection), drawZoomLevel);
         }
     }
 
