@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.utils.CryptUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -25,7 +27,7 @@ public class cgOAuth {
         currentTime = (long) Math.floor(currentTime);
 
         params.put("oauth_consumer_key", cgSettings.keyConsumerPublic);
-        params.put("oauth_nonce", cgBase.md5(Long.toString(System.currentTimeMillis())));
+        params.put("oauth_nonce", CryptUtils.md5(Long.toString(System.currentTimeMillis())));
         params.put("oauth_signature_method", "HMAC-SHA1");
         params.put("oauth_timestamp", Long.toString(currentTime));
         params.put("oauth_token", token);
@@ -49,7 +51,7 @@ public class cgOAuth {
             requestPacked = method + "&" + cgBase.urlencode_rfc3986("https://" + host + path) + "&" + cgBase.urlencode_rfc3986(cgBase.implode("&", paramsEncoded.toArray()));
         else
             requestPacked = method + "&" + cgBase.urlencode_rfc3986("http://" + host + path) + "&" + cgBase.urlencode_rfc3986(cgBase.implode("&", paramsEncoded.toArray()));
-        paramsEncoded.add("oauth_signature=" + cgBase.urlencode_rfc3986(cgBase.base64Encode(cgBase.hashHmac(requestPacked, keysPacked))));
+        paramsEncoded.add("oauth_signature=" + cgBase.urlencode_rfc3986(cgBase.base64Encode(CryptUtils.hashHmac(requestPacked, keysPacked))));
 
         paramsDone = cgBase.implode("&", paramsEncoded.toArray());
 

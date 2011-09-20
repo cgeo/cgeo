@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -399,7 +400,7 @@ public class cgGeo {
                     params.put("lt", latStr);
                     params.put("ln", lonStr);
                     params.put("a", action);
-                    params.put("s", (cgBase.sha1(username + "|" + latStr + "|" + lonStr + "|" + action + "|" + cgBase.md5("carnero: developing your dreams"))).toLowerCase());
+                    params.put("s", (CryptUtils.sha1(username + "|" + latStr + "|" + lonStr + "|" + action + "|" + CryptUtils.md5("carnero: developing your dreams"))).toLowerCase());
                     if (base.version != null) {
                         params.put("v", base.version);
                     }

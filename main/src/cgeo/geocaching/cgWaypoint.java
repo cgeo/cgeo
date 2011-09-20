@@ -10,11 +10,11 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class cgWaypoint {
+public class cgWaypoint implements Comparable<cgWaypoint> {
     public Integer id = 0;
     public String geocode = "geocode";
     public String type = "waypoint";
-    public String prefix = "";
+    private String prefix = "";
     public String lookup = "";
     public String name = "";
     public String latlon = "";
@@ -22,6 +22,7 @@ public class cgWaypoint {
     public String longitudeString = "";
     public Geopoint coords = null;
     public String note = "";
+    private Integer cachedOrder = null;
 
     public void setIcon(Resources res, cgBase base, TextView nameView) {
         int iconId = R.drawable.waypoint_waypoint;
@@ -35,14 +36,14 @@ public class cgWaypoint {
     }
 
     public void merge(final cgWaypoint old) {
-        if (StringUtils.isBlank(prefix)) {
-            prefix = old.prefix;
+        if (StringUtils.isBlank(getPrefix())) {
+            setPrefix(old.getPrefix());
         }
         if (StringUtils.isBlank(lookup)) {
             lookup = old.lookup;
         }
         if (StringUtils.isBlank(name)) {
-            name = old.name;
+            this.name = old.name;
         }
         if (StringUtils.isBlank(latlon)) {
             latlon = old.latlon;
@@ -93,5 +94,52 @@ public class cgWaypoint {
 
     public boolean isUserDefined() {
         return type != null && type.equalsIgnoreCase("own");
+    }
+
+    private int computeOrder() {
+        if (StringUtils.isEmpty(getPrefix())) {
+            return 0;
+        }
+        // check only the first character. sometimes there are inconsistencies like FI or FN for the FINAL
+        char firstLetter = Character.toUpperCase(getPrefix().charAt(0));
+        switch (firstLetter) {
+            case 'P':
+                return -100; // parking
+            case 'S': { // stage N
+                try {
+                    Integer stageNumber = Integer.valueOf(getPrefix().substring(1));
+                    return stageNumber;
+                } catch (NumberFormatException e) {
+                    // nothing
+                }
+                return 0;
+            }
+            case 'F':
+                return 1000; // final
+            case 'O':
+                return 10000; // own
+        }
+        return 0;
+    }
+
+    private int order() {
+        if (cachedOrder == null) {
+            cachedOrder = computeOrder();
+        }
+        return cachedOrder;
+    }
+
+    @Override
+    public int compareTo(cgWaypoint other) {
+        return order() - other.order();
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+        cachedOrder = null;
     }
 }

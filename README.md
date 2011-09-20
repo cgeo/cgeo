@@ -7,6 +7,10 @@ Fork the project source code on [github](https://github.com/cgeo/c-geo-opensourc
 
 	git clone git://github.com/cgeo/c-geo-opensource.git
 
+Set up Eclipse
+--------------
+
+After forking the project you should import the two Eclipse projects in your workspace with File | Import | Projects from Git (requires the EGit Plugin)
 Build
 -----
 
@@ -26,12 +30,12 @@ If the workspace directory name contains a space and leads to errors in the -dex
 
 ### Configuration ###
 
-1. copy `./templates/private.properties` to `./`
+1. copy `./main/templates/private.properties` to `./main/`
 2. edit `private.properties` (see comments in the file)
-3. copy `./templates/local.properties` to `./`
+3. copy `./main/templates/local.properties` to `./main/`
 4. edit `local.properties` (see comments in the file)
-5. copy `./templates/mapsapikey.xml` to `./res/values/`
-6. edit `./res/values/mapsapikey.xml` and insert your Maps API key (see comments in the file)
+5. copy `./main/templates/mapsapikey.xml` to `./main/res/values/`
+6. edit `./main/res/values/mapsapikey.xml` and insert your Maps API key (see comments in the file)
 
 ### Building with Ant ###
 
@@ -48,6 +52,13 @@ or use the Ant view of Eclipse
 
 1. Add android:debuggable="true" in the application settings of `AndroidManifest.xml`
 2. In Eclipse, create a Debug Configuration for an Android Application using the menu Run->Debug Configurations
+
+### Testing ###
+
+The Test classes can be found in the package cgeo.geocaching.test (within the cgeo-os-test project)
+Every class can be "Run As" (or "Debug As") an "Android JUnit Test" from Eclipse.
+To run all tests use the test suite in cgeoTestSuite.
+Further information can be found at http://developer.android.com/guide/topics/testing/testing_android.html
 
 License
 -------

@@ -39,7 +39,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -48,7 +47,6 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.security.MessageDigest;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.text.ParseException;
@@ -71,8 +69,6 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
 
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -101,16 +97,16 @@ public class cgBase {
     private final static Pattern patternFoundAlternative = Pattern.compile("<div class=\"StatusInformationWidget FavoriteWidget\"", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternLatLon = Pattern.compile("<span id=\"ctl00_ContentBody_LatLon\"[^>]*>(<b>)?([^<]*)(<\\/b>)?<\\/span>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternLocation = Pattern.compile("<span id=\"ctl00_ContentBody_Location\"[^>]*>In ([^<]*)", Pattern.CASE_INSENSITIVE);
-    private final static Pattern patternHint = Pattern.compile("<p>([^<]*<strong>)?\\W*Additional Hints([^<]*<\\/strong>)?[^\\(]*\\(<a[^>]+>Encrypt</a>\\)[^<]*<\\/p>[^<]*<div id=\"div_hint\"[^>]*>(.*)</div>[^<]*<div id=[\\'|\"]dk[\\'|\"]", Pattern.CASE_INSENSITIVE);
+    private final static Pattern patternHint = Pattern.compile("<div id=\"div_hint\"[^>]*>(.*?)</div>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternPersonalNote = Pattern.compile("<p id=\"cache_note\"[^>]*>([^<]*)</p>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternDescShort = Pattern.compile("<div class=\"UserSuppliedContent\">[^<]*<span id=\"ctl00_ContentBody_ShortDescription\"[^>]*>((?:(?!</span>[^\\w^<]*</div>).)*)</span>[^\\w^<]*</div>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternDesc = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>" + "(.*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternCountLogs = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p(.+?)<\\/p><\\/span>", Pattern.CASE_INSENSITIVE);
-    private final static Pattern patternCountLog = Pattern.compile("src=\"\\/images\\/icons\\/(.+?).gif\"[^>]+> (\\d+)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+    private final static Pattern patternCountLog = Pattern.compile("src=\"\\/images\\/icons\\/(.+?).gif\"[^>]+> (\\d*[,.]?\\d+)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private final static Pattern patternAttributes = Pattern.compile("<h3 class=\"WidgetHeader\">[^<]*<img[^>]+>\\W*Attributes[^<]*</h3>[^<]*<div class=\"WidgetBody\">(([^<]*<img src=\"[^\"]+\" alt=\"[^\"]+\"[^>]*>)+)[^<]*<p", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternAttributesInside = Pattern.compile("[^<]*<img src=\"([^\"]+)\" alt=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
-    private final static Pattern patternSpoilers = Pattern.compile("<p class=\"NoPrint\">\\s*((<a href=\"([^\"]+)\"[^>]*>\\s*<img[^>]+><span>([^<]+)</span></a><br\\s*/>)*)\\s*</p>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern patternSpoilersInside = Pattern.compile("[^<]*<a href=\"([^\"]+)\"[^>]*>[^<]*<img[^>]+>[^<]*<span>([^>]+)</span>[^<]*</a>[^<]*<br[^>]*>(([^<]*)(<br[^<]*>)+)?", Pattern.CASE_INSENSITIVE);
+    private final static Pattern patternSpoilers = Pattern.compile("<p class=\"NoPrint\">\\s+((?:<a href=\"http://img\\.geocaching\\.com/cache/[^.]+\\.jpg\"[^>]+><img class=\"StatusIcon\"[^>]+><span>[^<]+</span></a><br />(?:[^<]+<br /><br />)?)+)\\s+</p>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+    private final static Pattern patternSpoilersInside = Pattern.compile("<a href=\"(http://img\\.geocaching\\.com/cache/[^.]+\\.jpg)\"[^>]+><img class=\"StatusIcon\"[^>]+><span>([^<]+)</span></a><br />(?:([^<]+)<br /><br />)?", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternInventory = Pattern.compile("<span id=\"ctl00_ContentBody_uxTravelBugList_uxInventoryLabel\">\\W*Inventory[^<]*</span>[^<]*</h3>[^<]*<div class=\"WidgetBody\">([^<]*<ul>(([^<]*<li>[^<]*<a href=\"[^\"]+\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>[^<]+<\\/span>[^<]*<\\/a>[^<]*<\\/li>)+)[^<]*<\\/ul>)?", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternInventoryInside = Pattern.compile("[^<]*<li>[^<]*<a href=\"[a-z0-9\\-\\_\\.\\?\\/\\:\\@]*\\/track\\/details\\.aspx\\?guid=([0-9a-z\\-]+)[^\"]*\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>([^<]+)<\\/span>[^<]*<\\/a>[^<]*<\\/li>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternOnWatchlist = Pattern.compile("<img\\s*src=\"\\/images\\/stockholm\\/16x16\\/icon_stop_watchlist.gif\"", Pattern.CASE_INSENSITIVE);
@@ -129,12 +125,18 @@ public class cgBase {
     private final static Pattern PATTERN_TRACKABLE_DetailsImage = Pattern.compile("<h3>\\W*About This Item[^<]*</h3>([^<]*<p>([^<]*<img id=\"ctl00_ContentBody_BugDetails_BugImage\" class=\"[^\"]+\" src=\"([^\"]+)\"[^>]*>)?[^<]*</p>)?[^<]*<p[^>]*>(.*)</p>[^<]*<div id=\"ctl00_ContentBody_BugDetails_uxAbuseReport\">", Pattern.CASE_INSENSITIVE);
     private final static Pattern PATTERN_TRACKABLE_Icon = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
     private final static Pattern PATTERN_TRACKABLE_Type = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"[^\"]+\" alt=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
-    private final static Pattern PATTERN_TRACKABLE_Distance = Pattern.compile("<h4[^>]*\\W*Tracking History \\(([0-9\\.,]+(km|mi))[^\\)]*\\)", Pattern.CASE_INSENSITIVE);
-    private final static Pattern PATTERN_TRACKABLE_Log = Pattern.compile("<tr class=\"Data.+?src=\"/images/icons/([^\\.]+)\\.gif[^>]+>&nbsp;([^<]+)</td>.+?guid.+?>([^<]+)</a>.+?(?:guid=([^\"]+)\">([^<]+)</a>.+?)?<td colspan=\"4\">(.+?)(?:<ul.+?ul>)?\\s*</td>\\s*</tr>", Pattern.CASE_INSENSITIVE);
+    private final static Pattern PATTERN_TRACKABLE_Distance = Pattern.compile("<h4[^>]*\\W*Tracking History \\(([0-9.,]+(km|mi))[^\\)]*\\)", Pattern.CASE_INSENSITIVE);
+    private final static Pattern PATTERN_TRACKABLE_Log = Pattern.compile("<tr class=\"Data.+?src=\"/images/icons/([^.]+)\\.gif[^>]+>&nbsp;([^<]+)</td>.+?guid.+?>([^<]+)</a>.+?(?:guid=([^\"]+)\">([^<]+)</a>.+?)?<td colspan=\"4\">(.+?)(?:<ul.+?ul>)?\\s*</td>\\s*</tr>", Pattern.CASE_INSENSITIVE);
 
     public final static Map<String, String> cacheTypes = new HashMap<String, String>();
-    public final static Map<String, String> cacheTypesInv = new HashMap<String, String>();
     public final static Map<String, String> cacheIDs = new HashMap<String, String>();
+    static {
+        for (CacheType ct : CacheType.values()) {
+            cacheTypes.put(ct.pattern, ct.id);
+            cacheIDs.put(ct.id, ct.guid);
+        }
+    }
+    public final static Map<String, String> cacheTypesInv = new HashMap<String, String>();
     public final static Map<String, String> cacheIDsChoices = new HashMap<String, String>();
     public final static Map<CacheSize, String> cacheSizesInv = new HashMap<CacheSize, String>();
     public final static Map<String, String> waypointTypes = new HashMap<String, String>();
@@ -227,9 +229,7 @@ public class cgBase {
 
         for (CacheType ct : CacheType.values()) {
             String l10n = res.getString(ct.stringId);
-            cacheTypes.put(ct.pattern, ct.id);
             cacheTypesInv.put(ct.id, l10n);
-            cacheIDs.put(ct.id, ct.guid);
             cacheIDsChoices.put(l10n, ct.guid);
         }
 
@@ -531,7 +531,7 @@ public class cgBase {
 
                 return 1; // logged in
             } else {
-                if (loginData.indexOf("Your username/password combination does not match.") != -1) {
+                if (loginData.contains("Your username/password combination does not match.")) {
                     Log.i(cgSettings.tag, "Failed to log in Geocaching.com as " + login.get("username") + " because of wrong username/password");
 
                     return -6; // wrong login
@@ -604,7 +604,7 @@ public class cgBase {
 
         caches.url = url;
 
-        final Pattern patternCacheType = Pattern.compile("<td class=\"Merge\">[^<]*<a href=\"[^\"]*/seek/cache_details\\.aspx\\?guid=[^\"]+\"[^>]+>[^<]*<img src=\"[^\"]*/images/wpttypes/[^\\.]+\\.gif\" alt=\"([^\"]+)\" title=\"[^\"]+\"[^>]*>[^<]*</a>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+        final Pattern patternCacheType = Pattern.compile("<td class=\"Merge\">[^<]*<a href=\"[^\"]*/seek/cache_details\\.aspx\\?guid=[^\"]+\"[^>]+>[^<]*<img src=\"[^\"]*/images/wpttypes/[^.]+\\.gif\" alt=\"([^\"]+)\" title=\"[^\"]+\"[^>]*>[^<]*</a>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
         final Pattern patternGuidAndDisabled = Pattern.compile("<img src=\"[^\"]*/images/wpttypes/[^>]*>[^<]*</a></td><td class=\"Merge\">[^<]*<a href=\"[^\"]*/seek/cache_details\\.aspx\\?guid=([a-z0-9\\-]+)\" class=\"lnk([^\"]*)\">([^<]*<span>)?([^<]*)(</span>[^<]*)?</a>[^<]+<br />([^<]*)<span[^>]+>([^<]*)</span>([^<]*<img[^>]+>)?[^<]*<br />[^<]*</td>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
         final Pattern patternTbs = Pattern.compile("<a id=\"ctl00_ContentBody_dlResults_ctl[0-9]+_uxTravelBugList\" class=\"tblist\" data-tbcount=\"([0-9]+)\" data-id=\"[^\"]*\"[^>]*>(.*)</a>", Pattern.CASE_INSENSITIVE);
         final Pattern patternTbsInside = Pattern.compile("(<img src=\"[^\"]+\" alt=\"([^\"]+)\" title=\"[^\"]*\" />[^<]*)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
@@ -652,7 +652,7 @@ public class cgBase {
             }
         }
 
-        if (page.indexOf("SearchResultsTable") < 0) {
+        if (!page.contains("SearchResultsTable")) {
             // there are no results. aborting here avoids a wrong error log in the next parsing step
             return caches;
         }
@@ -682,7 +682,7 @@ public class cgBase {
             String row = rows[z];
 
             // check for cache type presence
-            if (row.indexOf("images/wpttypes") == -1) {
+            if (!row.contains("images/wpttypes")) {
                 continue;
             }
 
@@ -808,25 +808,13 @@ public class cgBase {
             }
 
             // premium cache
-            if (row.indexOf("/images/small_profile.gif") != -1) {
-                cache.members = true;
-            } else {
-                cache.members = false;
-            }
+            cache.members = row.contains("/images/small_profile.gif");
 
             // found it
-            if (row.indexOf("/images/icons/icon_smile") != -1) {
-                cache.found = true;
-            } else {
-                cache.found = false;
-            }
+            cache.found = row.contains("/images/icons/icon_smile");
 
             // own it
-            if (row.indexOf("/images/silk/star.png") != -1) {
-                cache.own = true;
-            } else {
-                cache.own = false;
-            }
+            cache.own = row.contains("/images/silk/star.png");
 
             // id
             try {
@@ -924,7 +912,7 @@ public class cgBase {
                 final String coordinates = request(false, host, path, "POST", params.toString(), 0, true).getData();
 
                 if (StringUtils.isNotBlank(coordinates)) {
-                    if (coordinates.indexOf("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com") > -1) {
+                    if (coordinates.contains("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
                         Log.i(cgSettings.tag, "User has not agreed to the license agreement. Can\'t download .loc file.");
 
                         caches.error = errorRetrieve.get(-7);
@@ -1068,38 +1056,26 @@ public class cgBase {
         final cgCacheWrap caches = new cgCacheWrap();
         final cgCache cache = new cgCache();
 
-        if (page.indexOf("Cache is Unpublished") > -1) {
+        if (page.contains("Cache is Unpublished")) {
             caches.error = "cache was unpublished";
             return caches;
         }
 
-        if (page.indexOf("Sorry, the owner of this listing has made it viewable to Premium Members only.") != -1) {
+        if (page.contains("Sorry, the owner of this listing has made it viewable to Premium Members only.")) {
             caches.error = "requested cache is for premium members only";
             return caches;
         }
 
-        if (page.indexOf("has chosen to make this cache listing visible to Premium Members only.") != -1) {
+        if (page.contains("has chosen to make this cache listing visible to Premium Members only.")) {
             caches.error = "requested cache is for premium members only";
             return caches;
         }
 
-        if (page.indexOf("<li>This cache is temporarily unavailable.") != -1) {
-            cache.disabled = true;
-        } else {
-            cache.disabled = false;
-        }
+        cache.disabled = page.contains("<li>This cache is temporarily unavailable.");
 
-        if (page.indexOf("<li>This cache has been archived,") != -1) {
-            cache.archived = true;
-        } else {
-            cache.archived = false;
-        }
+        cache.archived = page.contains("<li>This cache has been archived,");
 
-        if (page.indexOf("<p class=\"Warning\">This is a Premium Member Only cache.</p>") != -1) {
-            cache.members = true;
-        } else {
-            cache.members = false;
-        }
+        cache.members = page.contains("<p class=\"Warning\">This is a Premium Member Only cache.</p>");
 
         cache.reason = reason;
 
@@ -1320,9 +1296,9 @@ public class cgBase {
         // cache hint
         try {
             final Matcher matcherHint = patternHint.matcher(page);
-            if (matcherHint.find() && matcherHint.groupCount() > 2 && matcherHint.group(3) != null) {
+            if (matcherHint.find() && matcherHint.group(1) != null) {
                 // replace linebreak and paragraph tags
-                String hint = Pattern.compile("<(br|p)[^>]*>").matcher(matcherHint.group(3)).replaceAll("\n");
+                String hint = Pattern.compile("<(br|p)[^>]*>").matcher(matcherHint.group(1)).replaceAll("\n");
                 if (hint != null) {
                     cache.hint = hint.replaceAll(Pattern.quote("</p>"), "").trim();
                 }
@@ -1427,27 +1403,24 @@ public class cgBase {
         // cache spoilers
         try {
             final Matcher matcherSpoilers = patternSpoilers.matcher(page);
-            if (matcherSpoilers.find() && matcherSpoilers.groupCount() > 0) {
-                final String spoilersPre = matcherSpoilers.group(1);
-                final Matcher matcherSpoilersInside = patternSpoilersInside.matcher(spoilersPre);
+            if (matcherSpoilers.find()) {
+                final Matcher matcherSpoilersInside = patternSpoilersInside.matcher(matcherSpoilers.group(1));
 
                 while (matcherSpoilersInside.find()) {
-                    if (matcherSpoilersInside.groupCount() > 0) {
-                        final cgImage spoiler = new cgImage();
-                        spoiler.url = matcherSpoilersInside.group(1);
+                    final cgImage spoiler = new cgImage();
+                    spoiler.url = matcherSpoilersInside.group(1);
 
-                        if (matcherSpoilersInside.group(2) != null) {
-                            spoiler.title = matcherSpoilersInside.group(2);
-                        }
-                        if (matcherSpoilersInside.group(4) != null) {
-                            spoiler.description = matcherSpoilersInside.group(4);
-                        }
-
-                        if (cache.spoilers == null) {
-                            cache.spoilers = new ArrayList<cgImage>();
-                        }
-                        cache.spoilers.add(spoiler);
+                    if (matcherSpoilersInside.group(2) != null) {
+                        spoiler.title = matcherSpoilersInside.group(2);
                     }
+                    if (matcherSpoilersInside.group(3) != null) {
+                        spoiler.description = matcherSpoilersInside.group(3);
+                    }
+
+                    if (cache.spoilers == null) {
+                        cache.spoilers = new ArrayList<cgImage>();
+                    }
+                    cache.spoilers.add(spoiler);
                 }
             }
         } catch (Exception e) {
@@ -1501,7 +1474,7 @@ public class cgBase {
                 while (matcherLog.find())
                 {
                     String typeStr = matcherLog.group(1);
-                    String countStr = matcherLog.group(2);
+                    String countStr = matcherLog.group(2).replaceAll("[.,]", "");
 
                     if (StringUtils.isNotBlank(typeStr)
                             && logTypes.containsKey(typeStr.toLowerCase())
@@ -1537,7 +1510,7 @@ public class cgBase {
                 wpList = wpList.substring(0, wpEnd);
             }
 
-            if (wpList.indexOf("No additional waypoints to display.") == -1) {
+            if (!wpList.contains("No additional waypoints to display.")) {
                 wpEnd = wpList.indexOf("</table>");
                 wpList = wpList.substring(0, wpEnd);
 
@@ -1570,7 +1543,7 @@ public class cgBase {
                     try {
                         final Matcher matcherWpPrefix = patternWpPrefixOrLookupOrLatlon.matcher(wp[4]);
                         if (matcherWpPrefix.find() && matcherWpPrefix.groupCount() > 1) {
-                            waypoint.prefix = matcherWpPrefix.group(2).trim();
+                            waypoint.setPrefix(matcherWpPrefix.group(2).trim());
                         }
                     } catch (Exception e) {
                         // failed to parse prefix
@@ -1907,9 +1880,9 @@ public class cgBase {
 
             final Pattern patternLogIn = Pattern.compile("loggedIn='([^']+)'", Pattern.CASE_INSENSITIVE);
             final Pattern patternGuid = Pattern.compile("cacheId='([^']+)'", Pattern.CASE_INSENSITIVE);
-            final Pattern patternRating = Pattern.compile("voteAvg='([0-9\\.]+)'", Pattern.CASE_INSENSITIVE);
+            final Pattern patternRating = Pattern.compile("voteAvg='([0-9.]+)'", Pattern.CASE_INSENSITIVE);
             final Pattern patternVotes = Pattern.compile("voteCnt='([0-9]+)'", Pattern.CASE_INSENSITIVE);
-            final Pattern patternVote = Pattern.compile("voteUser='([0-9\\.]+)'", Pattern.CASE_INSENSITIVE);
+            final Pattern patternVote = Pattern.compile("voteUser='([0-9.]+)'", Pattern.CASE_INSENSITIVE);
 
             String voteData = null;
             final Pattern patternVoteElement = Pattern.compile("<vote ([^>]+)>", Pattern.CASE_INSENSITIVE);
@@ -2479,7 +2452,7 @@ public class cgBase {
         if (degrees) {
             formatted.append("° ");
         } else {
-            formatted.append(" ");
+            formatted.append(' ');
         }
         formatted.append(String.format(locale, "%06.3f", ((coordAbs - floor) * 60)));
 
@@ -2518,7 +2491,7 @@ public class cgBase {
         final String method = "POST";
 
         int dash = -1;
-        if (url.indexOf("http://") > -1) {
+        if (url.startsWith("http://")) {
             url = url.substring(7);
         }
 
@@ -2619,6 +2592,7 @@ public class cgBase {
         } else if (StringUtils.isNotBlank(guid)) {
             params.put("guid", guid);
         }
+        params.put("decrypt", "y");
 
         String page = requestLogged(false, host, path, method, params, false, false, false);
 
@@ -4131,72 +4105,6 @@ public class cgBase {
         } else {
             return "";
         }
-    }
-
-    public static String rot13(String text) {
-        final StringBuilder result = new StringBuilder();
-        // plaintext flag (do not convert)
-        boolean plaintext = false;
-
-        int length = text.length();
-        for (int index = 0; index < length; index++) {
-            int c = text.charAt(index);
-            if (c == '[') {
-                plaintext = true;
-            } else if (c == ']') {
-                plaintext = false;
-            } else if (!plaintext) {
-                int capitalized = c & 32;
-                c &= ~capitalized;
-                c = ((c >= 'A') && (c <= 'Z') ? ((c - 'A' + 13) % 26 + 'A') : c)
-                        | capitalized;
-            }
-            result.append((char) c);
-        }
-        return result.toString();
-    }
-
-    public static String md5(String text) {
-        String hashed = "";
-
-        try {
-            MessageDigest digest = MessageDigest.getInstance("MD5");
-            digest.update(text.getBytes(), 0, text.length());
-            hashed = new BigInteger(1, digest.digest()).toString(16);
-        } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgBase.md5: " + e.toString());
-        }
-
-        return hashed;
-    }
-
-    public static String sha1(String text) {
-        String hashed = "";
-
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-1");
-            digest.update(text.getBytes(), 0, text.length());
-            hashed = new BigInteger(1, digest.digest()).toString(16);
-        } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgBase.sha1: " + e.toString());
-        }
-
-        return hashed;
-    }
-
-    public static byte[] hashHmac(String text, String salt) {
-        byte[] macBytes = {};
-
-        try {
-            SecretKeySpec secretKeySpec = new SecretKeySpec(salt.getBytes(), "HmacSHA1");
-            Mac mac = Mac.getInstance("HmacSHA1");
-            mac.init(secretKeySpec);
-            macBytes = mac.doFinal(text.getBytes());
-        } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgBase.hashHmac: " + e.toString());
-        }
-
-        return macBytes;
     }
 
     public static boolean deleteDirectory(File path) {

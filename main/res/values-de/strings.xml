@@ -463,7 +463,7 @@
   <string name="init_sendToCgeo_register_ok">Registrierung erfolgreich. Dein PIN code ist ####. Benutze diesen auf der c:geo website um dein Handy im Browser hinzuzufügen.</string>
   <string name="init_sendToCgeo_register_fail">Registrierung fehlgeschlagen.</string>
   <string name="sendToCgeo_download_fail">c:geo konnte Caches nicht laden. Entweder besteht keine Internetverbindung oder send2c:geo funktioniert nicht.</string>
-  <string name="sendToCgeo_no_registration">c:geo konnte Caches nicht laden. Registrierung für send2c:geo ungültig. Bitte in Einstellungen neu registrieren.</string>  
+  <string name="sendToCgeo_no_registration">c:geo konnte Caches nicht laden. Registrierung für send2c:geo ungültig. Bitte in Einstellungen neu registrieren.</string>
 
   <!-- auth -->
   <string name="auth_twitter">Twitter</string>
@@ -689,7 +689,7 @@
   <string name="trackable_select_title">Trackables</string>
   <string name="trackable_details_loading">Lade Details des Trackable…</string>
   <string name="trackable_log_touch">Logge Fund</string>
-  <string name="trackable_browser_open">Öffne im Browser</string>
+  <string name="trackable_browser_open">Im Browser öffnen</string>
   <string name="trackable_goal">Derzeitiges Ziel</string>
   <string name="trackable_details">Über diesen Trackable</string>
   <string name="trackable_image">Foto</string>

@@ -21,9 +21,7 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
     private static final String EXTRAS_LIST_ID = "list";
 
     public cgeogpxes() {
-        super(new String[] { "gpx"
-                // TODO	, "loc"
-        });
+        super(new String[] { "gpx", "loc" });
     }
 
     private ProgressDialog parseDialog = null;
@@ -65,7 +63,7 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
 
     @Override
     protected String[] getBaseFolders() {
-        String base = Environment.getExternalStorageDirectory().toString();
+        final String base = Environment.getExternalStorageDirectory().toString();
         return new String[] { base + "/gpx" };
     }
 
@@ -73,7 +71,7 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Bundle extras = getIntent().getExtras();
+        final Bundle extras = getIntent().getExtras();
         if (extras != null) {
             listId = extras.getInt(EXTRAS_LIST_ID);
         }
@@ -111,12 +109,12 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
         @Override
         public void run() {
             final UUID searchId;
-            String name = file.getName().toLowerCase();
+            final String name = file.getName().toLowerCase();
             if (name.endsWith("gpx")) {
-                searchId = GPXParser.parseGPX(app, file, listId, changeParseDialogHandler);
+                searchId = GPXParser.parseGPX(file, listId, changeParseDialogHandler);
             }
             else {
-                searchId = LocParser.parseLoc(app, file, listId, changeParseDialogHandler);
+                searchId = LocParser.parseLoc(file, listId, changeParseDialogHandler);
             }
             imported = app.getCount(searchId);
 

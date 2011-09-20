@@ -34,8 +34,8 @@ import javax.net.ssl.HttpsURLConnection;
 public class cgeoauth extends AbstractActivity {
     private String OAtoken = null;
     private String OAtokenSecret = null;
-    private final Pattern paramsPattern1 = Pattern.compile("oauth_token=([a-zA-Z0-9\\-\\_\\.]+)");
-    private final Pattern paramsPattern2 = Pattern.compile("oauth_token_secret=([a-zA-Z0-9\\-\\_\\.]+)");
+    private final Pattern paramsPattern1 = Pattern.compile("oauth_token=([a-zA-Z0-9\\-\\_.]+)");
+    private final Pattern paramsPattern2 = Pattern.compile("oauth_token_secret=([a-zA-Z0-9\\-\\_.]+)");
     private Button startButton = null;
     private EditText pinEntry = null;
     private Button pinEntryButton = null;

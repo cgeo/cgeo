@@ -39,7 +39,7 @@ final public class CookieJar {
 
     static public synchronized void setCookie(final SharedPreferences prefs, final String name, final String value) {
         loadCookiesIfNeeded(prefs);
-        if (!cookies.containsKey(name) || cookies.get(name) != value) {
+        if (!cookies.containsKey(name) || !cookies.get(name).equals(value)) {
             final SharedPreferences.Editor editor = prefs.edit();
             cookies.put(name, value);
             editor.putString(name, value);
@@ -62,7 +62,7 @@ final public class CookieJar {
     static public synchronized void setCookies(final SharedPreferences prefs, final URLConnection uc) {
         final Map<String, List<String>> headers = uc.getHeaderFields();
         for (final Map.Entry<String, List<String>> entry : headers.entrySet()) {
-            if (entry.getKey().equalsIgnoreCase("set-cookie")) {
+            if ("set-cookie".equalsIgnoreCase(entry.getKey())) {
                 for (final String field : entry.getValue()) {
                     setCookie(prefs, field);
                 }

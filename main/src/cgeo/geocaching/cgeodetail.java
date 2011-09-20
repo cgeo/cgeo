@@ -6,6 +6,7 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.utils.CollectionUtils;
+import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -26,7 +27,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
 import android.text.Spannable;
-import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.StrikethroughSpan;
@@ -40,9 +40,9 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.view.ViewParent;
 import android.view.WindowManager;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -60,8 +60,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.UUID;
 import java.util.Map.Entry;
+import java.util.UUID;
 
 /**
  * Activity to display all details of a cache like owner, difficulty, description etc.
@@ -889,7 +889,7 @@ public class cgeodetail extends AbstractActivity {
                         inventoryString.append('\n');
                     }
                     // avoid HTML parsing where possible
-                    if (inventoryItem.name.indexOf('<') >= 0 || inventoryItem.name.indexOf('&') >= 0) {
+                    if (containsHtml(inventoryItem.name)) {
                         inventoryString.append(Html.fromHtml(inventoryItem.name).toString());
                     }
                     else {
@@ -1005,48 +1005,15 @@ public class cgeodetail extends AbstractActivity {
 
                 // sort waypoints: PP, Sx, FI, OWN
                 List<cgWaypoint> sortedWaypoints = new ArrayList<cgWaypoint>(cache.waypoints);
-                Collections.sort(sortedWaypoints, new Comparator<cgWaypoint>() {
-
-                    @Override
-                    public int compare(cgWaypoint wayPoint1, cgWaypoint wayPoint2) {
-
-                        return order(wayPoint1) - order(wayPoint2);
-                    }
-
-                    private int order(cgWaypoint waypoint) {
-                        if (StringUtils.isEmpty(waypoint.prefix)) {
-                            return 0;
-                        }
-                        // check only the first character. sometimes there are inconsistencies like FI or FN for the FINAL
-                        char firstLetter = Character.toUpperCase(waypoint.prefix.charAt(0));
-                        switch (firstLetter) {
-                            case 'P':
-                                return -100; // parking
-                            case 'S': { // stage N
-                                try {
-                                    Integer stageNumber = Integer.valueOf(waypoint.prefix.substring(1));
-                                    return stageNumber;
-                                } catch (NumberFormatException e) {
-                                    // nothing
-                                }
-                                return 0;
-                            }
-                            case 'F':
-                                return 1000; // final
-                            case 'O':
-                                return 10000; // own
-                        }
-                        return 0;
-                    }
-                });
+                Collections.sort(sortedWaypoints);
 
                 for (cgWaypoint wpt : sortedWaypoints) {
                     waypointView = (LinearLayout) inflater.inflate(R.layout.waypoint_item, null);
                     final TextView identification = (TextView) waypointView.findViewById(R.id.identification);
 
                     ((TextView) waypointView.findViewById(R.id.type)).setText(cgBase.waypointTypes.get(wpt.type));
-                    if (wpt.prefix.equalsIgnoreCase("OWN") == false) {
-                        identification.setText(wpt.prefix.trim() + "/" + wpt.lookup.trim());
+                    if (wpt.getPrefix().equalsIgnoreCase("OWN") == false) {
+                        identification.setText(wpt.getPrefix().trim() + "/" + wpt.lookup.trim());
                     } else {
                         identification.setText(res.getString(R.string.waypoint_custom));
                     }
@@ -1056,7 +1023,7 @@ public class cgeodetail extends AbstractActivity {
                         nameView.setText(cgBase.formatCoords(wpt.coords, true));
                     } else {
                         // avoid HTML parsing
-                        if (wpt.name.indexOf('<') >= 0 || wpt.name.indexOf('&') >= 0) {
+                        if (containsHtml(wpt.name)) {
                             nameView.setText(Html.fromHtml(wpt.name.trim()), TextView.BufferType.SPANNABLE);
                         }
                         else {
@@ -1066,7 +1033,7 @@ public class cgeodetail extends AbstractActivity {
                     wpt.setIcon(res, base, nameView);
 
                     // avoid HTML parsing
-                    if (wpt.note.indexOf('<') >= 0 || wpt.note.indexOf('&') >= 0) {
+                    if (containsHtml(wpt.note)) {
                         ((TextView) waypointView.findViewById(R.id.note)).setText(Html.fromHtml(wpt.note.trim()), TextView.BufferType.SPANNABLE);
                     }
                     else {
@@ -1087,7 +1054,7 @@ public class cgeodetail extends AbstractActivity {
             if (StringUtils.isNotBlank(cache.hint)) {
                 ((LinearLayout) findViewById(R.id.hint_box)).setVisibility(View.VISIBLE);
                 TextView hintView = ((TextView) findViewById(R.id.hint));
-                hintView.setText(cgBase.rot13(cache.hint.trim()));
+                hintView.setText(CryptUtils.rot13(cache.hint.trim()));
                 hintView.setClickable(true);
                 hintView.setOnClickListener(new codeHint());
             } else {
@@ -1118,6 +1085,10 @@ public class cgeodetail extends AbstractActivity {
 
         if (geo != null)
             geoUpdate.updateLoc(geo);
+    }
+
+    static private boolean containsHtml(final String str) {
+        return str.indexOf('<') != -1 || str.indexOf('&') != -1;
     }
 
     private void parseLongDescription() {
@@ -1215,7 +1186,7 @@ public class cgeodetail extends AbstractActivity {
                     ((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(4)); // note if type is unknown
                 }
                 // avoid parsing HTML if not necessary
-                if (log.author.indexOf('<') >= 0 || log.author.indexOf('&') >= 0) {
+                if (containsHtml(log.author)) {
                     ((TextView) rowView.findViewById(R.id.author)).setText(Html.fromHtml(log.author), TextView.BufferType.SPANNABLE);
                 }
                 else {
@@ -1232,7 +1203,7 @@ public class cgeodetail extends AbstractActivity {
                     ((TextView) rowView.findViewById(R.id.count)).setText(log.found + " " + res.getString(R.string.cache_count_more));
                 }
                 // avoid parsing HTML if not necessary
-                if (log.log.indexOf('<') >= 0 || log.log.indexOf('&') >= 0) {
+                if (containsHtml(log.log)) {
                     ((TextView) rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log, new cgHtmlImg(this, null, false, cache.reason, false), null), TextView.BufferType.SPANNABLE);
                 }
                 else {
@@ -1637,8 +1608,7 @@ public class cgeodetail extends AbstractActivity {
         public void onClick(View arg0) {
             // code hint
             TextView hintView = ((TextView) findViewById(R.id.hint));
-            hintView.setText(cgBase.rot13(hintView.getText().toString()));
-
+            hintView.setText(CryptUtils.rot13(hintView.getText().toString()));
         }
     }
 
@@ -1913,30 +1883,15 @@ public class cgeodetail extends AbstractActivity {
 
             try {
                 final TextView logView = (TextView) view;
-                Spannable span = (Spannable) logView.getText();
-
-                // I needed to re-implement the base.rot13() encryption here because we must work on
-                // a SpannableStringBuilder instead of the pure text and we must replace each character inline.
-                // Otherwise we loose all the images, colors and so on...
-                SpannableStringBuilder buffer = new SpannableStringBuilder(span);
-                boolean plaintext = false;
-
-                int length = span.length();
-                for (int index = 0; index < length; index++) {
-                    int c = span.charAt(index);
-                    if (c == '[') {
-                        plaintext = true;
-                    } else if (c == ']') {
-                        plaintext = false;
-                    } else if (!plaintext) {
-                        int capitalized = c & 32;
-                        c &= ~capitalized;
-                        c = ((c >= 'A') && (c <= 'Z') ? ((c - 'A' + 13) % 26 + 'A') : c)
-                                | capitalized;
-                    }
-                    buffer.replace(index, index + 1, String.valueOf((char) c));
+                CharSequence text = logView.getText();
+                if (text instanceof Spannable) {
+                    Spannable span = (Spannable) text;
+                    logView.setText(CryptUtils.rot13(span));
                 }
-                logView.setText(buffer);
+                else {
+                    String string = (String) text;
+                    logView.setText(CryptUtils.rot13(string));
+                }
             } catch (Exception e) {
                 // nothing
             }

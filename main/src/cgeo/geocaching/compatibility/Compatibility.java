@@ -9,29 +9,13 @@ import android.view.Surface;
 
 public final class Compatibility {
 
-    private static AndroidLevel8 level8;
-    private static boolean initialized = false;
-
-    private static AndroidLevel8 getLevel8() {
-        if (!initialized) {
-            try {
-                final int sdk = Integer.valueOf(Build.VERSION.SDK).intValue();
-                if (sdk >= 8) {
-                    level8 = new AndroidLevel8();
-                }
-            } catch (Exception e) {
-                // nothing
-            }
-            initialized = true;
-        }
-        return level8;
-    }
+    private final static int sdkVersion = Integer.parseInt(Build.VERSION.SDK);
+    private final static boolean isLevel8 = sdkVersion >= 8;
+    private final static AndroidLevel8 level8 = isLevel8 ? new AndroidLevel8() : null;
 
     public static Float getDirectionNow(final Float directionNowPre,
             final Activity activity) {
-        AndroidLevel8 level8 = getLevel8();
-
-        if (level8 != null) {
+        if (isLevel8) {
             final int rotation = level8.getRotation(activity);
             if (rotation == Surface.ROTATION_90) {
                 return directionNowPre + 90;
@@ -52,21 +36,11 @@ public final class Compatibility {
     }
 
     public static Uri getCalendarProviderURI() {
-        final int sdk = Integer.valueOf(Build.VERSION.SDK).intValue();
-        if (sdk >= 8) {
-            return Uri.parse("content://com.android.calendar/calendars");
-        } else {
-            return Uri.parse("content://calendar/calendars");
-        }
+        return Uri.parse(isLevel8 ? "content://com.android.calendar/calendars" : "content://calendar/calendars");
     }
 
     public static Uri getCalenderEventsProviderURI() {
-        final int sdk = Integer.valueOf(Build.VERSION.SDK).intValue();
-        if (sdk >= 8) {
-            return Uri.parse("content://com.android.calendar/events");
-        } else {
-            return Uri.parse("content://calendar/events");
-        }
+        return Uri.parse(isLevel8 ? "content://com.android.calendar/events" : "content://calendar/events");
     }
 
 }
