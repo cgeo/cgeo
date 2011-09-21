@@ -44,6 +44,8 @@ import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
@@ -3738,16 +3740,10 @@ public class cgBase {
 
         try {
             if (httpCode == 302 && httpLocation != null) {
-                final Uri newLocation = Uri.parse(httpLocation);
-                if (newLocation.isRelative()) {
-                    response = request(secure, host, path, "GET", new HashMap<String, String>(), requestId, false, false, false);
-                } else {
-                    boolean secureRedir = false;
-                    if (newLocation.getScheme().equals("https")) {
-                        secureRedir = true;
-                    }
-                    response = request(secureRedir, newLocation.getHost(), newLocation.getPath(), "GET", new HashMap<String, String>(), requestId, false, false, false);
-                }
+                final URI newLocation = new URI(scheme, host, path, null).resolve(httpLocation);
+                response = request(newLocation.getScheme() == "https",
+                        newLocation.getHost(), newLocation.getPath(),
+                        "GET", new HashMap<String, String>(), requestId, false, false, false);
             } else {
                 if (StringUtils.isNotEmpty(buffer)) {
                     replaceWhitespace(buffer);
@@ -3765,7 +3761,7 @@ public class cgBase {
                 }
             }
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgeoBase.page: " + e.toString());
+            Log.e(cgSettings.tag, "cgeoBase.page", e);
         }
 
         return response;
@@ -3881,11 +3877,11 @@ public class cgBase {
 
         String page = null;
         if (httpCode == 302 && httpLocation != null) {
-            final Uri newLocation = Uri.parse(httpLocation);
-            if (newLocation.isRelative()) {
-                page = requestJSONgc(host, path, params);
-            } else {
+            try {
+                final URI newLocation = new URI("http", host, path, null).resolve(httpLocation);
                 page = requestJSONgc(newLocation.getHost(), newLocation.getPath(), params);
+            } catch (URISyntaxException e) {
+                Log.e(cgSettings.tag, "requestJSONgc", e);
             }
         } else {
             replaceWhitespace(buffer);
