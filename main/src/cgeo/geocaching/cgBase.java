@@ -1819,6 +1819,11 @@ public class cgBase {
 
         final String result = request(false, host, path, "GET", null, false, false, false).getData();
 
+        if (null == result) {
+            Log.w(cgSettings.tag, "cgeoBase.detectGcCustomDate: result is null");
+            return;
+        }
+
         final Pattern pattern = Pattern.compile("<option selected=\"selected\" value=\"([ /Mdy-]+)\">", Pattern.CASE_INSENSITIVE);
         final Matcher matcher = pattern.matcher(result);
 
