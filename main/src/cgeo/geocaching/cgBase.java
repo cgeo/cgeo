@@ -2880,7 +2880,11 @@ public class cgBase {
         String params = "{\"dto\":{\"data\":{\"c\":1,\"m\":\"\",\"d\":\"" + latMax + "|" + latMin + "|" + lonMax + "|" + lonMin + "\"},\"ut\":\"" + usertoken + "\"}}";
 
         final String url = "http://" + host + path + "?" + params;
-        page = requestJSONgc(host, path, params);
+        try {
+            page = requestJSONgc(new URI("http", host, path, null), params);
+        } catch (URISyntaxException e) {
+            Log.e(cgSettings.tag, "cgeoBase.searchByViewPort", e);
+        }
 
         if (StringUtils.isBlank(page)) {
             Log.e(cgSettings.tag, "cgeoBase.searchByViewport: No data from server");
@@ -3600,13 +3604,32 @@ public class cgBase {
     }
 
     public cgResponse request(boolean secure, String host, String path, String method, Map<String, String> params, int requestId, boolean xContentType, boolean my, boolean addF) {
-        // prepare parameters
-        final String paramsDone = prepareParameters(params, my, addF);
+        try {
+            return request(new URI(secure ? "https" : "http", host, path, null), method, params, requestId, xContentType, my, addF);
+        } catch (URISyntaxException e) {
+            Log.e(cgSettings.tag, "request", e);
+            return null;
+        }
+    }
 
-        return request(secure, host, path, method, paramsDone, requestId, xContentType);
+    public cgResponse request(final URI uri, String method, Map<String, String> params, int requestId, boolean xContentType, boolean my, boolean addF) {
+        final String paramsDone = prepareParameters(params, my, addF);
+        return request(uri, method, paramsDone, requestId, xContentType);
     }
 
     public cgResponse request(boolean secure, String host, String path, String method, String params, int requestId, Boolean xContentType) {
+        try {
+            final String pathComponents[] = StringUtils.split(path, "?", 2);
+            final URI uri = new URI(secure ? "https" : "http", host, pathComponents[0],
+                    pathComponents.length > 1 ? pathComponents[1] : null, null);
+            return request(uri, method, params, requestId, xContentType);
+        } catch (URISyntaxException e) {
+            Log.e(cgSettings.tag, "request", e);
+            return null;
+        }
+    }
+
+    public cgResponse request(final URI uri, String method, String params, int requestId, Boolean xContentType) {
         URL u = null;
         int httpCode = -1;
         String httpMessage = null;
@@ -3620,12 +3643,6 @@ public class cgBase {
             method = "POST";
         } else {
             method = method.toUpperCase();
-        }
-
-        // https
-        String scheme = "http://";
-        if (secure) {
-            scheme = "https://";
         }
 
         String cookiesDone = CookieJar.getCookiesAsString(prefs);
@@ -3646,10 +3663,10 @@ public class cgBase {
             try {
                 if (method.equals("GET")) {
                     // GET
-                    u = new URL(scheme + host + path + "?" + params);
+                    u = new URI(uri.getScheme(), uri.getAuthority(), uri.getPath(), params, null).toURL();
                     uc = u.openConnection();
 
-                    uc.setRequestProperty("Host", host);
+                    uc.setRequestProperty("Host", uri.getHost());
                     uc.setRequestProperty("Cookie", cookiesDone);
                     if (xContentType) {
                         uc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -3673,10 +3690,10 @@ public class cgBase {
                     connection.setDoOutput(false);
                 } else {
                     // POST
-                    u = new URL(scheme + host + path);
+                    u = uri.toURL();
                     uc = u.openConnection();
 
-                    uc.setRequestProperty("Host", host);
+                    uc.setRequestProperty("Host", uri.getHost());
                     uc.setRequestProperty("Cookie", cookiesDone);
                     if (xContentType) {
                         uc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -3719,16 +3736,16 @@ public class cgBase {
                 httpLocation = uc.getHeaderField("Location");
 
                 final String paramsLog = params.replaceAll(passMatch, "password=***");
-                Log.i(cgSettings.tag + "|" + requestId, "[" + method + " " + (int) (params.length() / 1024) + "k | " + httpCode + " | " + (int) (buffer.length() / 1024) + "k] Downloaded " + scheme + host + path + "?" + paramsLog);
+                Log.i(cgSettings.tag + "|" + requestId, "[" + method + " " + (int) (params.length() / 1024) + "k | " + httpCode + " | " + (int) (buffer.length() / 1024) + "k] Downloaded " + uri + "?" + paramsLog);
 
                 connection.disconnect();
                 br.close();
                 ins.close();
                 inr.close();
             } catch (IOException e) {
-                Log.e(cgSettings.tag, "cgeoBase.request.IOException: " + e.toString());
+                Log.e(cgSettings.tag, "cgeoBase.request.IOException", e);
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgeoBase.request: " + e.toString());
+                Log.e(cgSettings.tag, "cgeoBase.request", e);
             }
 
             if (buffer.length() > 0) {
@@ -3740,9 +3757,8 @@ public class cgBase {
 
         try {
             if (httpCode == 302 && httpLocation != null) {
-                final URI newLocation = new URI(scheme, host, path, null).resolve(httpLocation);
-                response = request(newLocation.getScheme() == "https",
-                        newLocation.getHost(), newLocation.getPath(),
+                final URI newLocation = uri.resolve(httpLocation);
+                response = request(newLocation,
                         "GET", new HashMap<String, String>(), requestId, false, false, false);
             } else {
                 if (StringUtils.isNotEmpty(buffer)) {
@@ -3794,7 +3810,7 @@ public class cgBase {
         buffer.append(chars);
     }
 
-    public String requestJSONgc(String host, String path, String params) {
+    public String requestJSONgc(final URI uri, String params) {
         int httpCode = -1;
         String httpLocation = null;
 
@@ -3815,15 +3831,15 @@ public class cgBase {
 
             try {
                 // POST
-                final URL u = new URL("http://" + host + path);
+                final URL u = uri.toURL();
                 uc = u.openConnection();
 
-                uc.setRequestProperty("Host", host);
+                uc.setRequestProperty("Host", uri.getHost());
                 uc.setRequestProperty("Cookie", cookiesDone);
                 uc.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
                 uc.setRequestProperty("X-Requested-With", "XMLHttpRequest");
                 uc.setRequestProperty("Accept", "application/json, text/javascript, */*; q=0.01");
-                uc.setRequestProperty("Referer", host + "/" + path);
+                uc.setRequestProperty("Referer", uri.getHost() + "/" + uri.getPath());
 
                 if (settings.asBrowser == 1) {
                     uc.setRequestProperty("Accept-Charset", "utf-8, iso-8859-1, utf-16, *;q=0.7");
@@ -3858,7 +3874,7 @@ public class cgBase {
                 httpLocation = uc.getHeaderField("Location");
 
                 final String paramsLog = params.replaceAll(passMatch, "password=***");
-                Log.i(cgSettings.tag + " | JSON", "[POST " + (int) (params.length() / 1024) + "k | " + httpCode + " | " + (int) (buffer.length() / 1024) + "k] Downloaded " + "http://" + host + path + "?" + paramsLog);
+                Log.i(cgSettings.tag + " | JSON", "[POST " + (int) (params.length() / 1024) + "k | " + httpCode + " | " + (int) (buffer.length() / 1024) + "k] Downloaded " + uri.toString() + "?" + paramsLog);
 
                 connection.disconnect();
                 br.close();
@@ -3877,12 +3893,8 @@ public class cgBase {
 
         String page = null;
         if (httpCode == 302 && httpLocation != null) {
-            try {
-                final URI newLocation = new URI("http", host, path, null).resolve(httpLocation);
-                page = requestJSONgc(newLocation.getHost(), newLocation.getPath(), params);
-            } catch (URISyntaxException e) {
-                Log.e(cgSettings.tag, "requestJSONgc", e);
-            }
+            final URI newLocation = uri.resolve(httpLocation);
+            page = requestJSONgc(newLocation, params);
         } else {
             replaceWhitespace(buffer);
             page = buffer.toString();
