@@ -5,6 +5,7 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCacheWrap;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.test.mock.GC1ZXX2;
 import cgeo.geocaching.test.mock.GC2CJPF;
 import cgeo.geocaching.test.mock.MockedCache;
@@ -108,4 +109,43 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
         }
     }
 
+    /**
+     * Test whether the parsing of the testcaches still give the same results for bearing and distance
+     */
+    @MediumTest
+    public void testParsedCachesDistanceAndBearing() {
+        Geopoint coordsGC2CJPF = getCoords(new GC2CJPF());
+        Geopoint coordsGC1ZXX2 = getCoords(new GC1ZXX2());
+
+        Float expectedDistance = Float.valueOf("6.5839443");
+        Float distanceGC2CJPFtoGC1ZXX2 = Float.valueOf(coordsGC2CJPF.distanceTo(coordsGC1ZXX2));
+        Float distanceGC1ZXX2toGC2CJPF = Float.valueOf(coordsGC1ZXX2.distanceTo(coordsGC2CJPF));
+
+        Float expectedBearingGC2CJPFtoGC1ZXX2 = Float.valueOf("151.18116760253906");
+        Float bearingGC2CJPFtoGC1ZXX2 = Float.valueOf(coordsGC2CJPF.bearingTo(coordsGC1ZXX2));
+
+        Float expectedBearingGC1ZXX2toGC2CJPF = Float.valueOf("331.21807861328125");
+        Float bearingGC1ZXX2toGC2CJPF = Float.valueOf(coordsGC1ZXX2.bearingTo(coordsGC2CJPF));
+
+        Assert.assertEquals(expectedDistance, distanceGC2CJPFtoGC1ZXX2);
+        Assert.assertEquals(expectedDistance, distanceGC1ZXX2toGC2CJPF);
+        Assert.assertEquals(expectedBearingGC2CJPFtoGC1ZXX2, bearingGC2CJPFtoGC1ZXX2);
+        Assert.assertEquals(expectedBearingGC1ZXX2toGC2CJPF, bearingGC1ZXX2toGC2CJPF);
+
+        // Distance both ways should give the same result (distance from a to b should be equal to the distance from b to a)
+        Assert.assertEquals(distanceGC2CJPFtoGC1ZXX2, distanceGC1ZXX2toGC2CJPF);
+
+        // bearing from a to b should be opposite of b to a (or: difference should be 180 degrees)
+        float expectedDifference = 180f;
+        float difference = bearingGC1ZXX2toGC2CJPF.floatValue() - bearingGC2CJPFtoGC1ZXX2.floatValue();
+
+        // floats are not exact, so round the results
+        Assert.assertEquals(Math.round(expectedDifference), Math.round(difference));
+    }
+
+    private Geopoint getCoords(MockedCache cache) {
+        cgCacheWrap caches = base.parseCache(cache.getData(), 0);
+        cgCache parsedCache = caches.cacheList.get(0);
+        return parsedCache.coords;
+    }
 }
