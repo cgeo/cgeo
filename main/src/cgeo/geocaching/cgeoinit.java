@@ -1048,7 +1048,7 @@ public class cgeoinit extends AbstractActivity {
 
                     String params = "name=" + cgBase.urlencode_rfc3986(nam) + "&code=" + cgBase.urlencode_rfc3986(cod);
 
-                    cgResponse response = base.request(URI_SEND2CGEO_AUTH, "GET", params, 0, true);
+                    cgResponse response = base.request(URI_SEND2CGEO_AUTH, "GET", params, true);
 
                     if (response.getStatusCode() == 200)
                     {
