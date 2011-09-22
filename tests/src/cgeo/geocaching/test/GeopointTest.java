@@ -76,7 +76,6 @@ public class GeopointTest extends AndroidTestCase {
 
         // Bearing in both directions cannot be added, as this is
         // the initial bearing of the path in both cases.
-        final float b12 = gp1.bearingTo(gp2);
         Assert.assertEquals(287.162, gp1.bearingTo(gp2), 1e-3);
         Assert.assertEquals(107.715, gp2.bearingTo(gp1), 1e-3);
     }
