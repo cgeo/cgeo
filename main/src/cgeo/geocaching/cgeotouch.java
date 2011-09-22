@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -386,7 +387,8 @@ public class cgeotouch extends cgLogForm {
                     return;
                 }
 
-                final String page = base.request(false, "www.geocaching.com", "/track/log.aspx", "GET", params, false, false, false).getData();
+                final URI uri = cgBase.buildURI(false, "www.geocaching.com", "/track/log.aspx");
+                final String page = base.request(uri, "GET", params, false, false, false).getData();
 
                 viewstates = cgBase.getViewstates(page);
 

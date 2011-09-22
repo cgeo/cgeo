@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import android.util.Log;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -66,8 +67,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
 
     @Override
     public UUID searchByGeocode(final cgBase base, String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason) {
-        final String host = "www.geocaching.com";
-        final String path = "/seek/cache_details.aspx";
+        final URI uri = cgBase.buildURI(false, "www.geocaching.com", "/seek/cache_details.aspx");
         final String method = "GET";
         final Map<String, String> params = new HashMap<String, String>();
         if (StringUtils.isNotBlank(geocode)) {
@@ -77,7 +77,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
         }
         params.put("decrypt", "y");
 
-        String page = base.requestLogged(false, host, path, method, params, false, false, false);
+        String page = base.requestLogged(uri, method, params, false, false, false);
 
         if (StringUtils.isEmpty(page)) {
             if (app.isThere(geocode, guid, true, false)) {

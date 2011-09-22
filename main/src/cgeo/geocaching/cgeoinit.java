@@ -31,6 +31,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.File;
+import java.net.URI;
 
 public class cgeoinit extends AbstractActivity {
 
@@ -1046,7 +1047,8 @@ public class cgeoinit extends AbstractActivity {
 
                     String params = "name=" + cgBase.urlencode_rfc3986(nam) + "&code=" + cgBase.urlencode_rfc3986(cod);
 
-                    cgResponse response = base.request(false, "send2.cgeo.org", "/auth.html", "GET", params, 0, true);
+                    final URI uri = cgBase.buildURI(false, "send2.cgeo.org", "/auth.html");
+                    cgResponse response = base.request(uri, "GET", params, 0, true);
 
                     if (response.getStatusCode() == 200)
                     {
