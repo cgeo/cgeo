@@ -139,11 +139,9 @@ public class cgeoaddresses extends AbstractActivity {
                 List<Address> knownLocations = geocoder.getFromLocationName(keyword, 20);
 
                 addresses.clear();
-                for (Address address : knownLocations) {
-                    addresses.add(address);
-                }
+                addresses.addAll(knownLocations);
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgeoaddresses.loadPlaces.run: " + e.toString());
+                Log.e(cgSettings.tag, "cgeoaddresses.loadPlaces.run", e);
             }
 
             loadPlacesHandler.sendMessage(new Message());
