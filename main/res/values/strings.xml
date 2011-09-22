@@ -953,6 +953,10 @@
     <b>next version</b>\n
     · new: import of LOC files\n
     · new: search for geo code supports OpenCaching.DE/.PL/.US\n
+    · new: restore settings after reinstallation (Android 2.3+)\n
+    · new: save the log locally when leaving the log activity\n
+    · new: insert signature after the cursor when logging\n
+    · fix: various bug fixes\n
     \n\n
     <b>18.09.2011</b>\n
     · fix: Android 3+ compatibility\n
