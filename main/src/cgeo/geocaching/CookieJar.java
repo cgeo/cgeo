@@ -61,6 +61,10 @@ final public class CookieJar {
 
     static public synchronized void setCookies(final SharedPreferences prefs, final URLConnection uc) {
         final Map<String, List<String>> headers = uc.getHeaderFields();
+        if (headers == null) {
+            // If a request failed, there might not be headers.
+            return;
+        }
         for (final Map.Entry<String, List<String>> entry : headers.entrySet()) {
             if ("set-cookie".equalsIgnoreCase(entry.getKey())) {
                 for (final String field : entry.getValue()) {
