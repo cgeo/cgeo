@@ -12,6 +12,10 @@ import cgeo.geocaching.utils.CollectionUtils;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -3467,16 +3471,11 @@ public class cgBase {
     }
 
     private static void readIntoBuffer(BufferedReader br, StringBuffer buffer) throws IOException {
-        int bufferSize = 1024 * 16;
-        char[] bytes = new char[bufferSize];
+        final int bufferSize = 1024 * 16;
+        final char[] bytes = new char[bufferSize];
         int bytesRead;
         while ((bytesRead = br.read(bytes)) > 0) {
-            if (bytesRead == bufferSize) {
-                buffer.append(bytes);
-            }
-            else {
-                buffer.append(bytes, 0, bytesRead);
-            }
+            buffer.append(bytes, 0, bytesRead);
         }
     }
 
@@ -3704,15 +3703,8 @@ public class cgBase {
 
         try {
             if (StringUtils.isNotEmpty(buffer)) {
-                replaceWhitespace(buffer);
-                String data = buffer.toString();
-                buffer = null;
-
-                if (data != null) {
-                    response.setData(data);
-                } else {
-                    response.setData("");
-                }
+                final String data = replaceWhitespace(buffer);
+                response.setData(data);
                 response.setStatusCode(httpCode);
                 response.setStatusMessage(httpMessage);
                 response.setUrl(u.toString());
@@ -3730,25 +3722,8 @@ public class cgBase {
      * @param buffer
      *            The data
      */
-    public static void replaceWhitespace(final StringBuffer buffer) {
-        final int length = buffer.length();
-        final char[] chars = new char[length];
-        buffer.getChars(0, length, chars, 0);
-        int resultSize = 0;
-        boolean lastWasWhitespace = false;
-        for (char c : chars) {
-            if (c == ' ' || c == '\n' || c == '\r' || c == '\t') {
-                if (!lastWasWhitespace) {
-                    chars[resultSize++] = ' ';
-                }
-                lastWasWhitespace = true;
-            } else {
-                chars[resultSize++] = c;
-                lastWasWhitespace = false;
-            }
-        }
-        buffer.setLength(0);
-        buffer.append(chars);
+    public static String replaceWhitespace(final StringBuffer buffer) {
+        return StringUtils.join(StringUtils.split(buffer.toString(), " \n\r\t"), " ");
     }
 
     public String requestJSONgc(final Uri uri, String params) {
@@ -3830,15 +3805,7 @@ public class cgBase {
             }
         }
 
-        String page = null;
-        replaceWhitespace(buffer);
-        page = buffer.toString();
-
-        if (page != null) {
-            return page;
-        } else {
-            return "";
-        }
+        return replaceWhitespace(buffer);
     }
 
     private static InputStream getInputstreamFromConnection(HttpURLConnection connection) throws IOException {
@@ -3856,69 +3823,35 @@ public class cgBase {
     }
 
     public static String requestJSON(String host, String path, String params) {
+        final HttpClient client = new DefaultHttpClient();
         final Uri uri = buildURI(false, host, path, params);
-
-        Integer timeout = 30000;
-        final StringBuffer buffer = new StringBuffer();
+        final HttpGet request = new HttpGet(uri.toString());
+        request.setHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+        request.setHeader("Content-Type", "application/json; charset=UTF-8");
+        request.setHeader("X-Requested-With", "XMLHttpRequest");
 
         for (int i = 0; i < 3; i++) {
-            if (i > 0) {
-                Log.w(cgSettings.tag, "Failed to download data, retrying. Attempt #" + (i + 1));
-            }
-
-            buffer.delete(0, buffer.length());
-            timeout = 30000 + (i * 15000);
-
             try {
-                try {
-                    final URL u = new URL(uri.toString());
-                    final URLConnection uc = (HttpURLConnection) u.openConnection();
-
-                    uc.setRequestProperty("Host", host);
-                    uc.setRequestProperty("Accept", "application/json, text/javascript, */*; q=0.01");
-                    uc.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-                    uc.setRequestProperty("X-Requested-With", "XMLHttpRequest");
-
-                    final HttpURLConnection connection = (HttpURLConnection) uc;
-                    connection.setReadTimeout(timeout);
-                    connection.setRequestMethod("GET");
-                    HttpURLConnection.setFollowRedirects(true);
-                    connection.setDoInput(true);
-                    connection.setDoOutput(false);
-
-                    InputStream ins = getInputstreamFromConnection(connection);
-                    final InputStreamReader inr = new InputStreamReader(ins);
-                    final BufferedReader br = new BufferedReader(inr, 1024);
-
-                    readIntoBuffer(br, buffer);
-
-                    final Integer httpCode = connection.getResponseCode();
-                    if (httpCode == 403) {
-                        // Forbidden, do not retry
-                        break;
-                    }
-
-                    final String paramsLog = params.replaceAll(passMatch, "password=***");
-                    Log.i(cgSettings.tag + " | JSON", "[POST " + (int) (params.length() / 1024) + "k | " + httpCode + " | " + (int) (buffer.length() / 1024) + "k] Downloaded " + "http://" + host + path + "?" + paramsLog);
-
-                    connection.disconnect();
-                    br.close();
-                    ins.close();
-                    inr.close();
-                } catch (IOException e) {
-                    Log.e(cgSettings.tag, "cgeoBase.requestJSON.IOException", e);
+                final HttpResponse response = client.execute(request);
+                final int statusCode = response.getStatusLine().getStatusCode();
+                if (statusCode == 403) {
+                    // Forbidden, do not retry
+                    break;
                 }
+                final StringBuffer buffer = new StringBuffer();
+                final BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+                readIntoBuffer(br, buffer);
+
+                final String paramsLog = params.replaceAll(passMatch, "password=***");
+                Log.i(cgSettings.tag + " | JSON", "[POST " + (int) (params.length() / 1024) + "k | " + statusCode + " | " + (int) (buffer.length() / 1024) + "k] Downloaded " + "http://" + host + path + "?" + paramsLog);
+
+                return replaceWhitespace(buffer);
             } catch (Exception e) {
                 Log.e(cgSettings.tag, "cgeoBase.requestJSON", e);
             }
-
-            if (StringUtils.isNotBlank(buffer)) {
-                break;
-            }
         }
 
-        replaceWhitespace(buffer);
-        return buffer.toString();
+        return "";
     }
 
     public static boolean deleteDirectory(File path) {
