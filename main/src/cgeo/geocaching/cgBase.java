@@ -3856,26 +3856,8 @@ public class cgBase {
     }
 
     public static String requestJSON(String host, String path, String params) {
-        return requestJSON("http://", host, path, "GET", params);
-    }
+        final Uri uri = buildURI(false, host, path, params);
 
-    public static String requestJSON(String scheme, String host, String path, String method, String params) {
-        int httpCode = -1;
-        //String httpLocation = null;
-
-        if (method == null) {
-            method = "GET";
-        } else {
-            method = method.toUpperCase();
-        }
-
-        boolean methodPost = false;
-        if (method.equalsIgnoreCase("POST")) {
-            methodPost = true;
-        }
-
-        URLConnection uc = null;
-        HttpURLConnection connection = null;
         Integer timeout = 30000;
         final StringBuffer buffer = new StringBuffer();
 
@@ -3889,49 +3871,20 @@ public class cgBase {
 
             try {
                 try {
-                    URL u = null;
-                    if (methodPost) {
-                        u = new URL(scheme + host + path);
-                    } else {
-                        u = new URL(scheme + host + path + "?" + params);
-                    }
-
-                    if (u.getProtocol().toLowerCase().equals("https")) {
-                        trustAllHosts();
-                        HttpsURLConnection https = (HttpsURLConnection) u.openConnection();
-                        https.setHostnameVerifier(doNotVerify);
-                        uc = https;
-                    } else {
-                        uc = (HttpURLConnection) u.openConnection();
-                    }
+                    final URL u = new URL(uri.toString());
+                    final URLConnection uc = (HttpURLConnection) u.openConnection();
 
                     uc.setRequestProperty("Host", host);
                     uc.setRequestProperty("Accept", "application/json, text/javascript, */*; q=0.01");
-                    if (methodPost) {
-                        uc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-                        uc.setRequestProperty("Content-Length", Integer.toString(params.length()));
-                        uc.setRequestProperty("X-HTTP-Method-Override", "GET");
-                    } else {
-                        uc.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-                    }
+                    uc.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
                     uc.setRequestProperty("X-Requested-With", "XMLHttpRequest");
 
-                    connection = (HttpURLConnection) uc;
+                    final HttpURLConnection connection = (HttpURLConnection) uc;
                     connection.setReadTimeout(timeout);
-                    connection.setRequestMethod(method);
+                    connection.setRequestMethod("GET");
                     HttpURLConnection.setFollowRedirects(true);
                     connection.setDoInput(true);
-                    if (methodPost) {
-                        connection.setDoOutput(true);
-
-                        final OutputStream out = connection.getOutputStream();
-                        final OutputStreamWriter wr = new OutputStreamWriter(out);
-                        wr.write(params);
-                        wr.flush();
-                        wr.close();
-                    } else {
-                        connection.setDoOutput(false);
-                    }
+                    connection.setDoOutput(false);
 
                     InputStream ins = getInputstreamFromConnection(connection);
                     final InputStreamReader inr = new InputStreamReader(ins);
@@ -3939,7 +3892,11 @@ public class cgBase {
 
                     readIntoBuffer(br, buffer);
 
-                    httpCode = connection.getResponseCode();
+                    final Integer httpCode = connection.getResponseCode();
+                    if (httpCode == 403) {
+                        // Forbidden, do not retry
+                        break;
+                    }
 
                     final String paramsLog = params.replaceAll(passMatch, "password=***");
                     Log.i(cgSettings.tag + " | JSON", "[POST " + (int) (params.length() / 1024) + "k | " + httpCode + " | " + (int) (buffer.length() / 1024) + "k] Downloaded " + "http://" + host + path + "?" + paramsLog);
@@ -3949,20 +3906,13 @@ public class cgBase {
                     ins.close();
                     inr.close();
                 } catch (IOException e) {
-                    httpCode = connection.getResponseCode();
-
-                    Log.e(cgSettings.tag, "cgeoBase.requestJSON.IOException: " + httpCode + ": " + connection.getResponseMessage() + " ~ " + e.toString());
+                    Log.e(cgSettings.tag, "cgeoBase.requestJSON.IOException", e);
                 }
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgeoBase.requestJSON: " + e.toString());
+                Log.e(cgSettings.tag, "cgeoBase.requestJSON", e);
             }
 
             if (StringUtils.isNotBlank(buffer)) {
-                break;
-            }
-
-            if (httpCode == 403) {
-                // we're not allowed to download content, so let's move
                 break;
             }
         }
