@@ -3822,7 +3822,7 @@ public class cgBase {
         return ins;
     }
 
-    public static String requestJSON(String host, String path, String params) {
+    public static JSONObject requestJSON(String host, String path, String params) {
         final HttpClient client = new DefaultHttpClient();
         final Uri uri = buildURI(false, host, path, params);
         final HttpGet request = new HttpGet(uri.toString());
@@ -3845,13 +3845,13 @@ public class cgBase {
                 final String paramsLog = params.replaceAll(passMatch, "password=***");
                 Log.i(cgSettings.tag + " | JSON", "[POST " + (int) (params.length() / 1024) + "k | " + statusCode + " | " + (int) (buffer.length() / 1024) + "k] Downloaded " + "http://" + host + path + "?" + paramsLog);
 
-                return replaceWhitespace(buffer);
+                return new JSONObject(buffer.toString());
             } catch (Exception e) {
                 Log.e(cgSettings.tag, "cgeoBase.requestJSON", e);
             }
         }
 
-        return "";
+        return null;
     }
 
     public static boolean deleteDirectory(File path) {
@@ -4339,13 +4339,12 @@ public class cgBase {
                     String.format((Locale) null, "%.6f", coords.getLatitude()) + "," +
                     String.format((Locale) null, "%.6f", coords.getLongitude());
 
-            final String data = requestJSON(host, path, params);
+            final JSONObject response = requestJSON(host, path, params);
 
-            if (StringUtils.isBlank(data)) {
+            if (response == null) {
                 return null;
             }
 
-            JSONObject response = new JSONObject(data);
             String status = response.getString("status");
 
             if (status == null || status.equalsIgnoreCase("OK") == false) {

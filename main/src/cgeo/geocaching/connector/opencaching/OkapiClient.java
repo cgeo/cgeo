@@ -59,9 +59,9 @@ final public class OkapiClient {
 
     public static cgCache getCache(final String geoCode) {
         final String params = "cache_code=" + geoCode + "&" + SERVICE_CACHE_FIELDS;
-        final String data = request(geoCode, SERVICE_CACHE, params, 1);
+        final JSONObject data = request(geoCode, SERVICE_CACHE, params, 1);
 
-        if (StringUtils.isBlank(data)) {
+        if (data == null) {
             return null;
         }
 
@@ -73,10 +73,9 @@ final public class OkapiClient {
         return cache;
     }
 
-    private static cgCache parseCache(final String data) {
+    private static cgCache parseCache(final JSONObject response) {
         final cgCache cache = new cgCache();
         try {
-            final JSONObject response = new JSONObject(data);
             cache.geocode = response.getString(CACHE_CODE);
             cache.name = response.getString(CACHE_NAME);
             // not used: names
@@ -246,7 +245,7 @@ final public class OkapiClient {
         return "other";
     }
 
-    private static String request(final String geoCode, final String service, final String params, final int level) {
+    private static JSONObject request(final String geoCode, final String service, final String params, final int level) {
         final IConnector connector = ConnectorFactory.getConnector(geoCode);
         if (connector == null) {
             return null;
