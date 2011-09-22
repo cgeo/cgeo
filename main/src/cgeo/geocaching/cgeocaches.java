@@ -41,6 +41,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -48,12 +49,11 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.WindowManager;
-import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -61,6 +61,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -139,6 +140,8 @@ public class cgeocaches extends AbstractListActivity {
 
     private static final int CONTEXT_MENU_MOVE_TO_LIST = 1000;
     private static final int MENU_MOVE_SELECTED_OR_ALL_TO_LIST = 1200;
+
+    private static final URI URI_SEND2CGEO_READ = cgBase.buildURI(false, "send2.cgeo.org", "/read.html");
 
     private String action = null;
     private String type = null;
@@ -2083,7 +2086,7 @@ public class cgeocaches extends AbstractListActivity {
                 if (deviceCode == null) {
                     deviceCode = "";
                 }
-                cgResponse responseFromWeb = base.request(false, "send2.cgeo.org", "/read.html", "GET", "code=" + cgBase.urlencode_rfc3986(deviceCode), 0, true);
+                cgResponse responseFromWeb = base.request(URI_SEND2CGEO_READ, "GET", "code=" + cgBase.urlencode_rfc3986(deviceCode), 0, true);
 
                 if (responseFromWeb.getStatusCode() == 200) {
                     if (responseFromWeb.getData().length() > 2) {

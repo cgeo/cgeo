@@ -31,10 +31,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.File;
+import java.net.URI;
 
 public class cgeoinit extends AbstractActivity {
 
     private final int SELECT_MAPFILE_REQUEST = 1;
+
+    private static final URI URI_SEND2CGEO_AUTH = cgBase.buildURI(false, "send2.cgeo.org", "/auth.html");
 
     private ProgressDialog loginDialog = null;
     private ProgressDialog webDialog = null;
@@ -1046,7 +1049,7 @@ public class cgeoinit extends AbstractActivity {
 
                     String params = "name=" + cgBase.urlencode_rfc3986(nam) + "&code=" + cgBase.urlencode_rfc3986(cod);
 
-                    cgResponse response = base.request(false, "send2.cgeo.org", "/auth.html", "GET", params, 0, true);
+                    cgResponse response = base.request(URI_SEND2CGEO_AUTH, "GET", params, 0, true);
 
                     if (response.getStatusCode() == 200)
                     {
