@@ -3652,7 +3652,7 @@ public class cgBase {
                     connection = (HttpURLConnection) uc;
                     connection.setReadTimeout(timeout);
                     connection.setRequestMethod(method);
-                    HttpURLConnection.setFollowRedirects(false);
+                    HttpURLConnection.setFollowRedirects(true);
                     connection.setDoInput(true);
                     connection.setDoOutput(false);
                 } else {
@@ -3679,7 +3679,7 @@ public class cgBase {
                     connection = (HttpURLConnection) uc;
                     connection.setReadTimeout(timeout);
                     connection.setRequestMethod(method);
-                    HttpURLConnection.setFollowRedirects(false);
+                    HttpURLConnection.setFollowRedirects(true);
                     connection.setDoInput(true);
                     connection.setDoOutput(true);
 
@@ -3723,25 +3723,19 @@ public class cgBase {
         cgResponse response = new cgResponse();
 
         try {
-            if (httpCode == 302 && httpLocation != null) {
-                final URI newLocation = uri.resolve(httpLocation);
-                response = request(newLocation,
-                        "GET", new HashMap<String, String>(), requestId, false, false, false);
-            } else {
-                if (StringUtils.isNotEmpty(buffer)) {
-                    replaceWhitespace(buffer);
-                    String data = buffer.toString();
-                    buffer = null;
+            if (StringUtils.isNotEmpty(buffer)) {
+                replaceWhitespace(buffer);
+                String data = buffer.toString();
+                buffer = null;
 
-                    if (data != null) {
-                        response.setData(data);
-                    } else {
-                        response.setData("");
-                    }
-                    response.setStatusCode(httpCode);
-                    response.setStatusMessage(httpMessage);
-                    response.setUrl(u.toString());
+                if (data != null) {
+                    response.setData(data);
+                } else {
+                    response.setData("");
                 }
+                response.setStatusCode(httpCode);
+                response.setStatusMessage(httpMessage);
+                response.setUrl(u.toString());
             }
         } catch (Exception e) {
             Log.e(cgSettings.tag, "cgeoBase.page", e);
@@ -3819,7 +3813,7 @@ public class cgBase {
                 connection = (HttpURLConnection) uc;
                 connection.setReadTimeout(timeout);
                 connection.setRequestMethod("POST");
-                HttpURLConnection.setFollowRedirects(false); // TODO: Fix these (FilCab)
+                HttpURLConnection.setFollowRedirects(true);
                 connection.setDoInput(true);
                 connection.setDoOutput(true);
 
@@ -3859,13 +3853,8 @@ public class cgBase {
         }
 
         String page = null;
-        if (httpCode == 302 && httpLocation != null) {
-            final URI newLocation = uri.resolve(httpLocation);
-            page = requestJSONgc(newLocation, params);
-        } else {
-            replaceWhitespace(buffer);
-            page = buffer.toString();
-        }
+        replaceWhitespace(buffer);
+        page = buffer.toString();
 
         if (page != null) {
             return page;
@@ -3952,7 +3941,7 @@ public class cgBase {
                     connection = (HttpURLConnection) uc;
                     connection.setReadTimeout(timeout);
                     connection.setRequestMethod(method);
-                    HttpURLConnection.setFollowRedirects(false); // TODO: Fix these (FilCab)
+                    HttpURLConnection.setFollowRedirects(true);
                     connection.setDoInput(true);
                     if (methodPost) {
                         connection.setDoOutput(true);
@@ -4000,28 +3989,8 @@ public class cgBase {
             }
         }
 
-        String page = null;
-        //This is reported as beeing deadCode (httpLocation is always null)
-        //2011-08-09 - 302 is redirect so something should probably be done
-        /*
-         * if (httpCode == 302 && httpLocation != null) {
-         * final Uri newLocation = Uri.parse(httpLocation);
-         * if (newLocation.isRelative()) {
-         * page = requestJSONgc(host, path, params);
-         * } else {
-         * page = requestJSONgc(newLocation.getHost(), newLocation.getPath(), params);
-         * }
-         * } else {
-         */
         replaceWhitespace(buffer);
-        page = buffer.toString();
-        //}
-
-        if (page != null) {
-            return page;
-        } else {
-            return "";
-        }
+        return buffer.toString();
     }
 
     public static boolean deleteDirectory(File path) {
