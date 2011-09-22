@@ -20,6 +20,8 @@ import java.util.UUID;
 
 public class GCConnector extends AbstractConnector implements IConnector {
 
+    private static final URI URI_GC_SEEK_CACHE_DETAILS = cgBase.buildURI(false, "www.geocaching.com", "/seek/cache_details.aspx");
+
     @Override
     public boolean canHandle(String geocode) {
         return StringUtils.isNotBlank(geocode) && StringUtils.startsWithIgnoreCase(geocode, "GC");
@@ -67,8 +69,6 @@ public class GCConnector extends AbstractConnector implements IConnector {
 
     @Override
     public UUID searchByGeocode(final cgBase base, String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason) {
-        final URI uri = cgBase.buildURI(false, "www.geocaching.com", "/seek/cache_details.aspx");
-        final String method = "GET";
         final Map<String, String> params = new HashMap<String, String>();
         if (StringUtils.isNotBlank(geocode)) {
             params.put("wp", geocode);
@@ -77,7 +77,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
         }
         params.put("decrypt", "y");
 
-        String page = base.requestLogged(uri, method, params, false, false, false);
+        String page = base.requestLogged(URI_GC_SEEK_CACHE_DETAILS, "GET", params, false, false, false);
 
         if (StringUtils.isEmpty(page)) {
             if (app.isThere(geocode, guid, true, false)) {

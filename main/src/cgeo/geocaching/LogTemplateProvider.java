@@ -15,6 +15,8 @@ import java.util.regex.Pattern;
  *
  */
 public class LogTemplateProvider {
+    private static final URI URI_GC_EMAIL = cgBase.buildURI(false, "www.geocaching.com", "/email/");
+
     public static abstract class LogTemplate {
         private String template;
         private int resourceId;
@@ -89,8 +91,7 @@ public class LogTemplateProvider {
                             }
                             String findCount = "";
                             final Map<String, String> params = new HashMap<String, String>();
-                            final URI uri = cgBase.buildURI(false, "www.geocaching.com", "/email/");
-                            final String page = base.request(uri, "GET", params, false, false, false).getData();
+                            final String page = base.request(URI_GC_EMAIL, "GET", params, false, false, false).getData();
                             int current = parseFindCount(page);
 
                             if (current >= 0) {

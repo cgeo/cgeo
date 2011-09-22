@@ -37,6 +37,8 @@ public class cgeoinit extends AbstractActivity {
 
     private final int SELECT_MAPFILE_REQUEST = 1;
 
+    private static final URI URI_SEND2CGEO_AUTH = cgBase.buildURI(false, "send2.cgeo.org", "/auth.html");
+
     private ProgressDialog loginDialog = null;
     private ProgressDialog webDialog = null;
     private Handler logInHandler = new Handler() {
@@ -1047,8 +1049,7 @@ public class cgeoinit extends AbstractActivity {
 
                     String params = "name=" + cgBase.urlencode_rfc3986(nam) + "&code=" + cgBase.urlencode_rfc3986(cod);
 
-                    final URI uri = cgBase.buildURI(false, "send2.cgeo.org", "/auth.html");
-                    cgResponse response = base.request(uri, "GET", params, 0, true);
+                    cgResponse response = base.request(URI_SEND2CGEO_AUTH, "GET", params, 0, true);
 
                     if (response.getStatusCode() == 200)
                     {

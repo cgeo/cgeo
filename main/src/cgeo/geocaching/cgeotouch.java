@@ -28,6 +28,8 @@ import java.util.List;
 import java.util.Map;
 
 public class cgeotouch extends cgLogForm {
+    private static final URI URI_GC_TRACK_LOG = cgBase.buildURI(false, "www.geocaching.com", "/track/log.aspx");
+
     private cgTrackable trackable = null;
     private List<Integer> types = new ArrayList<Integer>();
     private ProgressDialog waitDialog = null;
@@ -387,8 +389,7 @@ public class cgeotouch extends cgLogForm {
                     return;
                 }
 
-                final URI uri = cgBase.buildURI(false, "www.geocaching.com", "/track/log.aspx");
-                final String page = base.request(uri, "GET", params, false, false, false).getData();
+                final String page = base.request(URI_GC_TRACK_LOG, "GET", params, false, false, false).getData();
 
                 viewstates = cgBase.getViewstates(page);
 
