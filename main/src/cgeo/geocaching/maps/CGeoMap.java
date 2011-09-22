@@ -7,17 +7,17 @@ import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgDirection;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.cgUpdateDir;
 import cgeo.geocaching.cgUpdateLoc;
 import cgeo.geocaching.cgUser;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.cgSettings.mapSourceEnum;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
+import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 import cgeo.geocaching.maps.interfaces.MapControllerImpl;
 import cgeo.geocaching.maps.interfaces.MapFactory;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
@@ -42,12 +42,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.ViewGroup.LayoutParams;
+import android.view.WindowManager;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.ImageView.ScaleType;
+import android.widget.TextView;
 import android.widget.ViewSwitcher.ViewFactory;
 
 import java.util.ArrayList;
@@ -854,6 +854,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     // loading timer
     private class LoadTimer extends Thread {
 
+        public LoadTimer() {
+            super("Load Timer");
+        }
+
         private volatile boolean stop = false;
 
         public void stopIt() {
@@ -978,6 +982,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     // loading timer
     private class UsersTimer extends Thread {
 
+        public UsersTimer() {
+            super("Users Timer");
+        }
+
         private volatile boolean stop = false;
 
         public void stopIt() {
@@ -1062,6 +1070,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
         public LoadThread(long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
             super(centerLatIn, centerLonIn, spanLatIn, spanLonIn);
+            setName("Load Thread");
         }
 
         @Override
@@ -1254,11 +1263,15 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
     }
 
-    // display (down)loaded caches
+    /**
+     * Display (down)loaded caches
+     * TODO Stop spawning display threads.
+     */
     private class DisplayThread extends DoThread {
 
         public DisplayThread(long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
             super(centerLatIn, centerLonIn, spanLatIn, spanLonIn);
+            setName("Display Thread");
         }
 
         @Override
@@ -1313,6 +1326,31 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         item.setMarker(pin);
 
                         items.add(item);
+                        if (cacheOne != null && cacheOne.waypoints != null && !cacheOne.waypoints.isEmpty()) {
+                            for (cgWaypoint oneWaypoint : cacheOne.waypoints) {
+                                if (oneWaypoint.coords == null) {
+                                    continue;
+                                }
+
+                                cgCoord wpcoord = new cgCoord(oneWaypoint);
+
+                                coordinates.add(wpcoord);
+                                item = settings.getMapFactory().getCachesOverlayItem(coord, null);
+
+                                icon = cgBase.getMarkerIcon(false, oneWaypoint.type, false, false, false);
+                                if (iconsCache.containsKey(icon)) {
+                                    pin = iconsCache.get(icon);
+                                } else {
+                                    pin = getResources().getDrawable(icon);
+                                    pin.setBounds(0, 0, pin.getIntrinsicWidth(), pin.getIntrinsicHeight());
+                                    iconsCache.put(icon, pin);
+                                }
+                                item.setMarker(pin);
+
+                                items.add(item);
+                            }
+
+                        }
                     }
 
                     overlayCaches.updateItems(items);
@@ -1328,39 +1366,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     }
 
                     // display cache waypoints
-                    if (cachesCnt == 1 && (geocodeIntent != null || searchIdIntent != null) && !live) {
-                        if (cachesCnt == 1 && live == false) {
-                            cgCache oneCache = cachesProtected.get(0);
-
-                            if (oneCache != null && oneCache.waypoints != null && !oneCache.waypoints.isEmpty()) {
-                                for (cgWaypoint oneWaypoint : oneCache.waypoints) {
-                                    if (oneWaypoint.coords == null) {
-                                        continue;
-                                    }
-
-                                    cgCoord coord = new cgCoord(oneWaypoint);
-
-                                    coordinates.add(coord);
-                                    item = settings.getMapFactory().getCachesOverlayItem(coord, null);
-
-                                    icon = cgBase.getMarkerIcon(false, oneWaypoint.type, false, false, false);
-                                    if (iconsCache.containsKey(icon)) {
-                                        pin = iconsCache.get(icon);
-                                    } else {
-                                        pin = getResources().getDrawable(icon);
-                                        pin.setBounds(0, 0, pin.getIntrinsicWidth(), pin.getIntrinsicHeight());
-                                        iconsCache.put(icon, pin);
-                                    }
-                                    item.setMarker(pin);
-
-                                    items.add(item);
-                                }
-
-                                overlayCaches.updateItems(items);
-                                displayHandler.sendEmptyMessage(1);
-                            }
-                        }
-                    }
                 } else {
                     overlayCaches.updateItems(items);
                     displayHandler.sendEmptyMessage(1);
@@ -1380,6 +1385,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
         public UsersThread(long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
             super(centerLatIn, centerLonIn, spanLatIn, spanLonIn);
+            setName("UsersThread");
         }
 
         @Override
@@ -1434,7 +1440,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
         public DisplayUsersThread(List<cgUser> usersIn, long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
             super(centerLatIn, centerLonIn, spanLatIn, spanLonIn);
-
+            setName("DisplayUsersThread");
             users = usersIn;
         }
 
