@@ -1308,46 +1308,15 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                             continue;
                         }
 
-                        final cgCoord coord = new cgCoord(cacheOne);
-                        coordinates.add(coord);
-
-                        item = settings.getMapFactory().getCachesOverlayItem(coord, cacheOne.type);
-                        icon = cgBase.getMarkerIcon(true, cacheOne.type, cacheOne.own, cacheOne.found, cacheOne.disabled || cacheOne.archived);
-                        pin = null;
-
-                        if (iconsCache.containsKey(icon)) {
-                            pin = iconsCache.get(icon);
-                        } else {
-                            pin = getResources().getDrawable(icon);
-                            pin.setBounds(0, 0, pin.getIntrinsicWidth(), pin.getIntrinsicHeight());
-
-                            iconsCache.put(icon, pin);
-                        }
-                        item.setMarker(pin);
-
-                        items.add(item);
+                        items.add(getItem(new cgCoord(cacheOne), cacheOne.type));
+                        // display cache waypoints
                         if (cacheOne != null && cacheOne.waypoints != null && !cacheOne.waypoints.isEmpty()) {
                             for (cgWaypoint oneWaypoint : cacheOne.waypoints) {
                                 if (oneWaypoint.coords == null) {
                                     continue;
                                 }
 
-                                cgCoord wpcoord = new cgCoord(oneWaypoint);
-
-                                coordinates.add(wpcoord);
-                                item = settings.getMapFactory().getCachesOverlayItem(coord, null);
-
-                                icon = cgBase.getMarkerIcon(false, oneWaypoint.type, false, false, false);
-                                if (iconsCache.containsKey(icon)) {
-                                    pin = iconsCache.get(icon);
-                                } else {
-                                    pin = getResources().getDrawable(icon);
-                                    pin.setBounds(0, 0, pin.getIntrinsicWidth(), pin.getIntrinsicHeight());
-                                    iconsCache.put(icon, pin);
-                                }
-                                item.setMarker(pin);
-
-                                items.add(item);
+                                items.add(getItem(new cgCoord(oneWaypoint), oneWaypoint.type));
                             }
 
                         }
@@ -1365,7 +1334,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         return;
                     }
 
-                    // display cache waypoints
                 } else {
                     overlayCaches.updateItems(items);
                     displayHandler.sendEmptyMessage(1);
@@ -1377,6 +1345,25 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             } finally {
                 working = false;
             }
+        }
+
+        private CachesOverlayItemImpl getItem(cgCoord cgCoord, String type) {
+
+            coordinates.add(cgCoord);
+            CachesOverlayItemImpl item2 = settings.getMapFactory().getCachesOverlayItem(cgCoord, null);
+
+            int icon = cgBase.getMarkerIcon(false, cgCoord.type, false, false, false);
+            Drawable pin = null;
+            if (iconsCache.containsKey(icon)) {
+                pin = iconsCache.get(icon);
+            } else {
+                pin = getResources().getDrawable(icon);
+                pin.setBounds(0, 0, pin.getIntrinsicWidth(), pin.getIntrinsicHeight());
+                iconsCache.put(icon, pin);
+            }
+            item2.setMarker(pin);
+
+            return item2;
         }
     }
 
