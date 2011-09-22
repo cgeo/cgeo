@@ -638,7 +638,7 @@ public class cgBase {
                 }
 
                 if (recaptchaJsParam != null) {
-                    final String recaptchaJs = request(URI_GOOGLE_RECAPTCHA, "GET", "k=" + urlencode_rfc3986(recaptchaJsParam.trim()), 0, true).getData();
+                    final String recaptchaJs = request(URI_GOOGLE_RECAPTCHA, "GET", "k=" + urlencode_rfc3986(recaptchaJsParam.trim()), true).getData();
 
                     if (StringUtils.isNotBlank(recaptchaJs)) {
                         final Matcher matcherRecaptchaChallenge = patternRecaptchaChallenge.matcher(recaptchaJs);
@@ -915,7 +915,7 @@ public class cgBase {
                 }
                 params.append("&ctl00%24ContentBody%24uxDownloadLoc=Download+Waypoints");
 
-                final String coordinates = request(URI_GC_SEEK_NEAREST, "POST", params.toString(), 0, true).getData();
+                final String coordinates = request(URI_GC_SEEK_NEAREST, "POST", params.toString(), true).getData();
 
                 if (StringUtils.isNotBlank(coordinates)) {
                     if (coordinates.contains("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
@@ -3594,24 +3594,14 @@ public class cgBase {
     }
 
     public cgResponse request(final Uri uri, String method, Map<String, String> params, boolean xContentType, boolean my, boolean addF) {
-        // prepare parameters
         final String paramsDone = prepareParameters(params, my, addF);
-        return request(uri, method, paramsDone, 0, xContentType);
+        return request(uri, method, paramsDone, xContentType);
     }
 
-    public cgResponse request(final Uri uri, String method, Map<String, String> params, int requestId, boolean xContentType, boolean my, boolean addF) {
-        final String paramsDone = prepareParameters(params, my, addF);
-        return request(uri, method, paramsDone, requestId, xContentType);
-    }
-
-    public cgResponse request(final Uri uri, String method, String params, int requestId, Boolean xContentType) {
+    public cgResponse request(final Uri uri, String method, String params, Boolean xContentType) {
         URL u = null;
         int httpCode = -1;
         String httpMessage = null;
-
-        if (requestId == 0) {
-            requestId = (int) (Math.random() * 1000);
-        }
 
         if (method == null || (method.equalsIgnoreCase("GET") == false && method.equalsIgnoreCase("POST") == false)) {
             method = "POST";
@@ -3709,7 +3699,7 @@ public class cgBase {
                 httpMessage = connection.getResponseMessage();
 
                 final String paramsLog = params.replaceAll(passMatch, "password=***");
-                Log.i(cgSettings.tag + "|" + requestId, "[" + method + " " + (params.length() / 1024) + "k | " + httpCode + " | " + (buffer.length() / 1024) + "k] Downloaded " + uri + "?" + paramsLog);
+                Log.i(cgSettings.tag, "[" + method + " " + (params.length() / 1024) + "k | " + httpCode + " | " + (buffer.length() / 1024) + "k] Downloaded " + uri + "?" + paramsLog);
 
                 connection.disconnect();
                 br.close();
@@ -4452,7 +4442,7 @@ public class cgBase {
     }
 
     public String getMapUserToken(Handler noTokenHandler) {
-        final cgResponse response = request(URI_GC_MAP_DEFAULT, "GET", "", 0, false);
+        final cgResponse response = request(URI_GC_MAP_DEFAULT, "GET", "", false);
         final String data = response.getData();
         String usertoken = null;
 
