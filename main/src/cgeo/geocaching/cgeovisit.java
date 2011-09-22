@@ -9,6 +9,7 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -25,7 +26,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -43,7 +43,8 @@ public class cgeovisit extends cgLogForm {
     private static final int MENU_SIGNATURE = 1;
     private static final int SUBMENU_VOTE = 2;
 
-    private static final URI URI_GC_SEEK_LOG = cgBase.buildURI(false, "www.geocaching.com", "/seek/log.aspx");
+    private static final Uri URI_GC_SEEK_LOG = cgBase.buildURI(false, "www.geocaching.com", "/seek/log.aspx");
+    private static final Uri URI_GCVOTE_SETVOTE = cgBase.buildURI(false, "gcvote.com", "/setVote.php");
 
     private LayoutInflater inflater = null;
     private cgCache cache = null;
@@ -223,7 +224,6 @@ public class cgeovisit extends cgLogForm {
             }
         }
     };
-    private static final URI URI_GCVOTE_SETVOTE = cgBase.buildURI(false, "gcvote.com", "/setVote.php");
 
     public cgeovisit() {
         super("c:geo-log");

@@ -2,13 +2,12 @@ package cgeo.geocaching.test;
 
 import static cgeo.geocaching.cgBase.buildURI;
 
+import android.net.Uri;
 import android.test.AndroidTestCase;
-
-import java.net.URI;
 
 import junit.framework.Assert;
 
-public class URITest extends AndroidTestCase {
+public class UriTest extends AndroidTestCase {
 
     public void testBasicURI() {
         Assert.assertEquals("http://www.example.com/foo/bar",
@@ -26,7 +25,7 @@ public class URITest extends AndroidTestCase {
     }
 
     public void testWithSplitPath() {
-        final URI uri = buildURI(false, "www.example.com", "/foo/bar?a=b&c=d");
+        final Uri uri = buildURI(false, "www.example.com", "/foo/bar?a=b&c=d");
         Assert.assertEquals("http://www.example.com/foo/bar?a=b&c=d", uri.toString());
         Assert.assertEquals("a=b&c=d", uri.getQuery());
     }

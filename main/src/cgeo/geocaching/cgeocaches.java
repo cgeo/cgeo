@@ -61,7 +61,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -141,7 +140,7 @@ public class cgeocaches extends AbstractListActivity {
     private static final int CONTEXT_MENU_MOVE_TO_LIST = 1000;
     private static final int MENU_MOVE_SELECTED_OR_ALL_TO_LIST = 1200;
 
-    private static final URI URI_SEND2CGEO_READ = cgBase.buildURI(false, "send2.cgeo.org", "/read.html");
+    private static final Uri URI_SEND2CGEO_READ = cgBase.buildURI(false, "send2.cgeo.org", "/read.html");
 
     private String action = null;
     private String type = null;

@@ -2,9 +2,9 @@ package cgeo.geocaching;
 
 import org.apache.commons.lang3.StringUtils;
 
+import android.net.Uri;
 import android.util.Log;
 
-import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  *
  */
 public class LogTemplateProvider {
-    private static final URI URI_GC_EMAIL = cgBase.buildURI(false, "www.geocaching.com", "/email/");
+    private static final Uri URI_GC_EMAIL = cgBase.buildURI(false, "www.geocaching.com", "/email/");
 
     public static abstract class LogTemplate {
         private String template;

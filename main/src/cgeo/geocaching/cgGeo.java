@@ -12,10 +12,10 @@ import android.location.GpsStatus;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
-import java.net.URI;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
@@ -52,7 +52,7 @@ public class cgGeo {
     public Integer satellitesFixed = null;
     public double distanceNow = 0d;
 
-    private static final URI URI_GO4CACHE = cgBase.buildURI(false, "api.go4cache.com", "/");
+    private static final Uri URI_GO4CACHE = cgBase.buildURI(false, "api.go4cache.com", "/");
 
     public cgGeo(Context contextIn, cgeoapplication appIn, cgUpdateLoc geoUpdateIn, cgBase baseIn, cgSettings settingsIn, int timeIn, int distanceIn) {
         context = contextIn;
