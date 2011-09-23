@@ -5,7 +5,6 @@ import org.apache.commons.lang3.StringUtils;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.res.Configuration;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -28,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 public class cgeotouch extends cgLogForm {
-    private static final Uri URI_GC_TRACK_LOG = cgBase.buildURI(false, "www.geocaching.com", "/track/log.aspx");
+    private static final String URI_GC_TRACK_LOG = "http://www.geocaching.com/track/log.aspx";
 
     private cgTrackable trackable = null;
     private List<Integer> types = new ArrayList<Integer>();
@@ -389,7 +388,7 @@ public class cgeotouch extends cgLogForm {
                     return;
                 }
 
-                final String page = cgBase.getResponseData(base.request(URI_GC_TRACK_LOG, "GET", params, false, false, false));
+                final String page = cgBase.getResponseData(base.request(URI_GC_TRACK_LOG, params, false, false, false));
 
                 viewstates = cgBase.getViewstates(page);
 
