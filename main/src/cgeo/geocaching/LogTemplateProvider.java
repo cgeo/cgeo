@@ -91,7 +91,7 @@ public class LogTemplateProvider {
                             }
                             String findCount = "";
                             final Map<String, String> params = new HashMap<String, String>();
-                            final String page = base.request(URI_GC_EMAIL, "GET", params, false, false, false).getData();
+                            final String page = cgBase.getResponseData(base.request(URI_GC_EMAIL, "GET", params, false, false, false));
                             int current = parseFindCount(page);
 
                             if (current >= 0) {

@@ -389,7 +389,7 @@ public class cgeotouch extends cgLogForm {
                     return;
                 }
 
-                final String page = base.request(URI_GC_TRACK_LOG, "GET", params, false, false, false).getData();
+                final String page = cgBase.getResponseData(base.request(URI_GC_TRACK_LOG, "GET", params, false, false, false));
 
                 viewstates = cgBase.getViewstates(page);
 

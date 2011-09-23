@@ -6,6 +6,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.compatibility.Compatibility;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpResponse;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -1006,7 +1007,7 @@ public class cgeoinit extends AbstractActivity {
             loginDialog.setCancelable(false);
 
             settings.setLogin(username, password);
-            CookieJar.deleteCookies(prefs);
+            cgBase.clearCookies();
 
             (new Thread() {
 
@@ -1048,12 +1049,12 @@ public class cgeoinit extends AbstractActivity {
 
                     String params = "name=" + cgBase.urlencode_rfc3986(nam) + "&code=" + cgBase.urlencode_rfc3986(cod);
 
-                    cgResponse response = base.request(URI_SEND2CGEO_AUTH, "GET", params, true);
+                    HttpResponse response = base.request(URI_SEND2CGEO_AUTH, "GET", params, true);
 
-                    if (response.getStatusCode() == 200)
+                    if (response.getStatusLine().getStatusCode() == 200)
                     {
                         //response was OK
-                        String[] strings = response.getData().split(",");
+                        String[] strings = cgBase.getResponseData(response).split(",");
                         try {
                             pin = Integer.parseInt(strings[1].trim());
                         } catch (Exception e) {

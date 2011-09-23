@@ -13,9 +13,17 @@ import cgeo.geocaching.utils.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.cookie.Cookie;
+import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,7 +31,6 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
@@ -44,6 +51,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -133,8 +141,8 @@ public class cgBase {
     private final static Pattern PATTERN_TRACKABLE_Distance = Pattern.compile("<h4[^>]*\\W*Tracking History \\(([0-9.,]+(km|mi))[^\\)]*\\)", Pattern.CASE_INSENSITIVE);
     private final static Pattern PATTERN_TRACKABLE_Log = Pattern.compile("<tr class=\"Data.+?src=\"/images/icons/([^.]+)\\.gif[^>]+>&nbsp;([^<]+)</td>.+?guid.+?>([^<]+)</a>.+?(?:guid=([^\"]+)\">([^<]+)</a>.+?)?<td colspan=\"4\">(.+?)(?:<ul.+?ul>)?\\s*</td>\\s*</tr>", Pattern.CASE_INSENSITIVE);
 
-    private static final Uri URI_GC_LOGIN_DEFAULT = buildURI(true, "www.geocaching.com", "/login/default.aspx");
-    private static final Uri URI_GC_DEFAULT = buildURI(false, "www.geocaching.com", "/default.aspx");
+    private static final String URI_GC_LOGIN_DEFAULT = "https://www.geocaching.com/login/default.aspx";
+    private static final String URI_GC_DEFAULT = "http://www.geocaching.com/default.aspx";
     private static final Uri URI_GOOGLE_RECAPTCHA = buildURI(false, "www.google.com", "/recaptcha/api/challenge");
     private static final Uri URI_GC_MAP_DEFAULT = buildURI(false, "www.geocaching.com", "/map/default.aspx");
     private static final Uri URI_GC_SEEK_NEAREST = buildURI(false, "www.geocaching.com", "/seek/nearest.aspx");
@@ -203,7 +211,6 @@ public class cgBase {
     public static final float erad = 6371.0f;
     private cgeoapplication app = null;
     private cgSettings settings = null;
-    private SharedPreferences prefs = null;
     public String version = null;
     private String idBrowser = "Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Chrome/5.0.375.86 Safari/533.4";
     Context context = null;
@@ -232,7 +239,7 @@ public class cgBase {
     public static final int LOG_WEBCAM_PHOTO_TAKEN = 11;
     public static final int LOG_ANNOUNCEMENT = 74;
 
-    public cgBase(cgeoapplication appIn, cgSettings settingsIn, SharedPreferences prefsIn) {
+    public cgBase(cgeoapplication appIn, cgSettings settingsIn) {
         context = appIn.getBaseContext();
         res = appIn.getBaseContext().getResources();
 
@@ -369,7 +376,6 @@ public class cgBase {
         // init
         app = appIn;
         settings = settingsIn;
-        prefs = prefsIn;
 
         try {
             PackageManager manager = app.getPackageManager();
@@ -438,7 +444,7 @@ public class cgBase {
     /**
      * put viewstates into request parameters
      */
-    private static void setViewstates(String[] viewstates, Map<String, String> params) {
+    private static void setViewstates(final String[] viewstates, final Parameters params) {
         if (ArrayUtils.isEmpty(viewstates))
             return;
         params.put("__VIEWSTATE", viewstates[0]);
@@ -453,7 +459,7 @@ public class cgBase {
      * transfers the viewstates variables from a page (response) to parameters
      * (next request)
      */
-    public static void transferViewstates(String page, Map<String, String> params) {
+    public static void transferViewstates(final String page, final Parameters params) {
         setViewstates(getViewstates(page), params);
     }
 
@@ -483,7 +489,7 @@ public class cgBase {
     }
 
     public int login() {
-        cgResponse loginResponse = null;
+        HttpResponse loginResponse = null;
         String loginData = null;
 
         String[] viewstates = null;
@@ -494,8 +500,8 @@ public class cgBase {
             return -3; // no login information stored
         }
 
-        loginResponse = request(URI_GC_LOGIN_DEFAULT, "GET", new HashMap<String, String>(), false, false, false);
-        loginData = loginResponse.getData();
+        loginResponse = request(Uri.parse(URI_GC_LOGIN_DEFAULT), "GET", new HashMap<String, String>(), false, false, false);
+        loginData = getResponseData(loginResponse);
         if (StringUtils.isNotBlank(loginData)) {
             if (checkLogin(loginData)) {
                 Log.i(cgSettings.tag, "Already logged in Geocaching.com as " + loginStart.get("username"));
@@ -517,14 +523,15 @@ public class cgBase {
         }
 
         final Map<String, String> login = settings.getLogin();
-        final Map<String, String> params = new HashMap<String, String>();
 
         if (login == null || StringUtils.isEmpty(login.get("username")) || StringUtils.isEmpty(login.get("password"))) {
             Log.e(cgSettings.tag, "cgeoBase.login: No login information stored");
             return -3;
         }
 
-        CookieJar.deleteCookies(prefs);
+        clearCookies();
+
+        final Parameters params = new Parameters();
 
         params.put("__EVENTTARGET", "");
         params.put("__EVENTARGUMENT", "");
@@ -534,8 +541,8 @@ public class cgBase {
         params.put("ctl00$SiteContent$cbRememberMe", "on");
         params.put("ctl00$SiteContent$btnSignIn", "Login");
 
-        loginResponse = request(URI_GC_LOGIN_DEFAULT, "POST", params, false, false, false);
-        loginData = loginResponse.getData();
+        loginResponse = postRequest(URI_GC_LOGIN_DEFAULT, params);
+        loginData = getResponseData(loginResponse);
 
         if (StringUtils.isNotBlank(loginData)) {
             if (checkLogin(loginData)) {
@@ -593,13 +600,13 @@ public class cgBase {
     }
 
     public String switchToEnglish(String[] viewstates) {
-        final Map<String, String> params = new HashMap<String, String>();
+        final Parameters params = new Parameters();
 
         setViewstates(viewstates, params);
         params.put("__EVENTTARGET", "ctl00$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem"); // switch to english
         params.put("__EVENTARGUMENT", "");
 
-        return request(URI_GC_DEFAULT, "POST", params, false, false, false).getData();
+        return cgBase.getResponseData(postRequest(URI_GC_DEFAULT, params));
     }
 
     public cgCacheWrap parseSearch(cgSearchThread thread, String url, String page, boolean showCaptcha) {
@@ -642,7 +649,7 @@ public class cgBase {
                 }
 
                 if (recaptchaJsParam != null) {
-                    final String recaptchaJs = request(URI_GOOGLE_RECAPTCHA, "GET", "k=" + urlencode_rfc3986(recaptchaJsParam.trim()), true).getData();
+                    final String recaptchaJs = cgBase.getResponseData(request(URI_GOOGLE_RECAPTCHA, "GET", "k=" + urlencode_rfc3986(recaptchaJsParam.trim()), true));
 
                     if (StringUtils.isNotBlank(recaptchaJs)) {
                         final Matcher matcherRecaptchaChallenge = patternRecaptchaChallenge.matcher(recaptchaJs);
@@ -919,7 +926,7 @@ public class cgBase {
                 }
                 params.append("&ctl00%24ContentBody%24uxDownloadLoc=Download+Waypoints");
 
-                final String coordinates = request(URI_GC_SEEK_NEAREST, "POST", params.toString(), true).getData();
+                final String coordinates = getResponseData(request(URI_GC_SEEK_NEAREST, "POST", params.toString(), true));
 
                 if (StringUtils.isNotBlank(coordinates)) {
                     if (coordinates.contains("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
@@ -1671,17 +1678,16 @@ public class cgBase {
         params.put("tkn", userToken);
         params.put("idx", "1");
         params.put("num", "35");
-        params.put("sp", "0");
-        params.put("sf", "0");
-        params.put("decrypt", "1");
-        final cgResponse response = request(URI_GC_SEEK_LOGBOOK, "GET", params, false, false, false);
-        if (response.getStatusCode() != 200) {
-            Log.e(cgSettings.tag, "cgBase.loadLogsFromDetails: error " + response.getStatusCode() + " when requesting log information");
+        params.put("decrypt", "true");
+        final HttpResponse response = request(URI_GC_SEEK_LOGBOOK, "GET", params, false, false, false);
+        final int statusCode = response.getStatusLine().getStatusCode();
+        if (statusCode != 200) {
+            Log.e(cgSettings.tag, "cgBase.loadLogsFromDetails: error " + statusCode + " when requesting log information");
             return;
         }
 
         try {
-            final JSONObject resp = new JSONObject(response.getData());
+            final JSONObject resp = new JSONObject(cgBase.getResponseData(response));
             if (!resp.getString("status").equals("success")) {
                 Log.e(cgSettings.tag, "cgBase.loadLogsFromDetails: status is " + resp.getString("status"));
                 return;
@@ -1822,7 +1828,7 @@ public class cgBase {
 
     public void detectGcCustomDate()
     {
-        final String result = request(URI_GC_PREFERENCES, "GET", null, false, false, false).getData();
+        final String result = getResponseData(request(URI_GC_PREFERENCES, "GET", null, false, false, false));
 
         if (null == result) {
             Log.w(cgSettings.tag, "cgeoBase.detectGcCustomDate: result is null");
@@ -1884,7 +1890,7 @@ public class cgBase {
                 params.put("waypoints", StringUtils.join(geocodes.toArray(), ','));
             }
             params.put("version", "cgeo");
-            final String votes = request(URI_GCVOTE_GETVOTES, "GET", params, false, false, false).getData();
+            final String votes = getResponseData(request(URI_GCVOTE_GETVOTES, "GET", params, false, false, false));
             if (votes == null) {
                 return null;
             }
@@ -2485,7 +2491,7 @@ public class cgBase {
     public UUID searchByNextPage(cgSearchThread thread, final UUID searchId, int reason, boolean showCaptcha) {
         final String[] viewstates = app.getViewstates(searchId);
 
-        String url = app.getUrl(searchId);
+        final String url = app.getUrl(searchId);
 
         if (StringUtils.isBlank(url)) {
             Log.e(cgSettings.tag, "cgeoBase.searchByNextPage: No url found");
@@ -2497,42 +2503,19 @@ public class cgBase {
             return searchId;
         }
 
-        String host = "www.geocaching.com";
-        String path = "/";
-        final String method = "POST";
+        // As in the original code, remove the query string
+        final String uri = Uri.parse(url).buildUpon().query(null).build().toString();
 
-        int dash = -1;
-        if (url.startsWith("http://")) {
-            url = url.substring(7);
-        }
-
-        dash = url.indexOf("/");
-        if (dash > -1) {
-            host = url.substring(0, dash);
-            url = url.substring(dash);
-        } else {
-            host = url;
-            url = "";
-        }
-
-        dash = url.indexOf("?");
-        if (dash > -1) {
-            path = url.substring(0, dash);
-        } else {
-            path = url;
-        }
-
-        final Map<String, String> params = new HashMap<String, String>();
+        final Parameters params = new Parameters();
         setViewstates(viewstates, params);
         params.put("__EVENTTARGET", "ctl00$ContentBody$pgrBottom$ctl08");
         params.put("__EVENTARGUMENT", "");
 
-        final Uri uri = buildURI(false, host, path);
-        String page = request(uri, method, params, false, false, true).getData();
+        String page = getResponseData(postRequest(uri, params));
         if (checkLogin(page) == false) {
             int loginState = login();
             if (loginState == 1) {
-                page = request(uri, method, params, false, false, true).getData();
+                page = getResponseData(postRequest(uri, params));
             } else if (loginState == -3) {
                 Log.i(cgSettings.tag, "Working as guest.");
             } else {
@@ -2888,7 +2871,7 @@ public class cgBase {
         String params = "{\"dto\":{\"data\":{\"c\":1,\"m\":\"\",\"d\":\"" + latMax + "|" + latMin + "|" + lonMax + "|" + lonMin + "\"},\"ut\":\"" + usertoken + "\"}}";
 
         final Uri uri = buildURI(false, host, path);
-        page = requestJSONgc(uri, params);
+        page = getResponseData(requestJSONgc(uri, params));
 
         if (StringUtils.isBlank(page)) {
             Log.e(cgSettings.tag, "cgeoBase.searchByViewport: No data from server");
@@ -2930,7 +2913,7 @@ public class cgBase {
         params.put("lnm", String.format((Locale) null, "%.6f", lonMin));
         params.put("lnx", String.format((Locale) null, "%.6f", lonMax));
 
-        final String data = request(URI_GO4CACHE_GET, "POST", params, false, false, false).getData();
+        final String data = getResponseData(request(URI_GO4CACHE_GET, "POST", params, false, false, false));
 
         if (StringUtils.isBlank(data)) {
             Log.e(cgSettings.tag, "cgeoBase.getGeocachersInViewport: No data from server");
@@ -3077,7 +3060,7 @@ public class cgBase {
             Log.i(cgSettings.tag, "Trying to post log for cache #" + cacheid + " - action: " + logType + "; date: " + year + "." + month + "." + day + ", log: " + log + "; trackables: 0");
         }
 
-        final Map<String, String> params = new HashMap<String, String>();
+        final Parameters params = new Parameters();
 
         setViewstates(viewstates, params);
         params.put("__EVENTTARGET", "");
@@ -3107,12 +3090,12 @@ public class cgBase {
             params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnCurrentFilter", "");
         }
 
-        final Uri uri = buildURI(false, "www.geocaching.com", "/seek/log.aspx", "ID=" + cacheid);
-        String page = request(uri, "POST", params, false, false, false).getData();
-        if (checkLogin(page) == false) {
+        final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/log.aspx").encodedQuery("ID=" + cacheid).build().toString();
+        String page = getResponseData(postRequest(uri, params));
+        if (!checkLogin(page)) {
             int loginState = login();
             if (loginState == 1) {
-                page = request(uri, "POST", params, false, false, false).getData();
+                page = getResponseData(postRequest(uri, params));
             } else {
                 Log.e(cgSettings.tag, "cgeoBase.postLog: Can not log in geocaching (error: " + loginState + ")");
                 return loginState;
@@ -3169,7 +3152,7 @@ public class cgBase {
                     params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnCurrentFilter", "");
                 }
 
-                page = request(uri, "POST", params, false, false, false).getData();
+                page = getResponseData(postRequest(uri, params));
             }
         } catch (Exception e) {
             Log.e(cgSettings.tag, "cgeoBase.postLog.confim: " + e.toString());
@@ -3217,7 +3200,7 @@ public class cgBase {
         log = log.replace("\n", "\r\n"); // windows' eol
 
         final Calendar currentDate = Calendar.getInstance();
-        final Map<String, String> params = new HashMap<String, String>();
+        final Parameters params = new Parameters();
 
         setViewstates(viewstates, params);
         params.put("__EVENTTARGET", "");
@@ -3237,12 +3220,12 @@ public class cgBase {
         params.put("ctl00$ContentBody$LogBookPanel1$LogButton", "Submit Log Entry");
         params.put("ctl00$ContentBody$uxVistOtherListingGC", "");
 
-        final Uri uri = buildURI(false, "www.geocaching.com", "/track/log.aspx", "wid=" + tbid);
-        String page = request(uri, "POST", params, false, false, false).getData();
+        final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("wid=" + tbid).build().toString();
+        String page = getResponseData(postRequest(uri, params));
         if (checkLogin(page) == false) {
             int loginState = login();
             if (loginState == 1) {
-                page = request(uri, "POST", params, false, false, false).getData();
+                page = getResponseData(postRequest(uri, params));
             } else {
                 Log.e(cgSettings.tag, "cgeoBase.postLogTrackable: Can not log in geocaching (error: " + loginState + ")");
                 return loginState;
@@ -3304,8 +3287,8 @@ public class cgBase {
      * @return -1: error occured
      */
     public int removeFromWatchlist(cgCache cache) {
-        final Uri uri = buildURI(false, "www.geocaching.com", "/my/watchlist.aspx", "ds=1&action=rem&id=" + cache.cacheId);
-        String page = requestLogged(uri, "POST", null, false, false, false);
+        final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/my/watchlist.aspx").encodedQuery("ds=1&action=rem&id=" + cache.cacheId).build().toString();
+        String page = postRequestLogged(uri);
 
         if (StringUtils.isBlank(page)) {
             Log.e(cgSettings.tag, "cgBase.removeFromWatchlist: No data from server");
@@ -3313,13 +3296,13 @@ public class cgBase {
         }
 
         // removing cache from list needs approval by hitting "Yes" button
-        final Map<String, String> params = new HashMap<String, String>();
+        final Parameters params = new Parameters();
         transferViewstates(page, params);
         params.put("__EVENTTARGET", "");
         params.put("__EVENTARGUMENT", "");
         params.put("ctl00$ContentBody$btnYes", "Yes");
 
-        page = request(uri, "POST", params, false, false, false).getData();
+        page = getResponseData(postRequest(uri, params));
         boolean guidOnPage = cache.isGuidContainedInPage(page);
         if (!guidOnPage) {
             Log.i(cgSettings.tag, "cgBase.removeFromWatchlist: cache removed from watchlist");
@@ -3554,20 +3537,44 @@ public class cgBase {
     }
 
     public String[] requestViewstates(final Uri uri, String method, Map<String, String> params, boolean xContentType, boolean my) {
-        final cgResponse response = request(uri, method, params, xContentType, my, false);
+        final HttpResponse response = request(uri, method, params, xContentType, my, false);
 
-        return getViewstates(response.getData());
+        return getViewstates(getResponseData(response));
+    }
+
+    static public String getResponseData(final HttpResponse response) {
+        if (response == null) {
+            return null;
+        }
+        try {
+            return EntityUtils.toString(response.getEntity(), "utf-8");
+        } catch (Exception e) {
+            Log.e(cgSettings.tag, "getResponseData", e);
+            return null;
+        }
+    }
+
+    public String postRequestLogged(final String uri) {
+        final String data = getResponseData(postRequest(uri, null));
+        if (!checkLogin(data)) {
+            if (login() == 1) {
+                return getResponseData(postRequest(uri, null));
+            } else {
+                Log.i(cgSettings.tag, "Working as guest.");
+            }
+        }
+        return data;
     }
 
     public String requestLogged(final Uri uri, String method, Map<String, String> params, boolean xContentType, boolean my, boolean addF) {
-        cgResponse response = request(uri, method, params, xContentType, my, addF);
-        String data = response.getData();
+        HttpResponse response = request(uri, method, params, xContentType, my, addF);
+        String data = getResponseData(response);
 
         if (checkLogin(data) == false) {
             int loginState = login();
             if (loginState == 1) {
                 response = request(uri, method, params, xContentType, my, addF);
-                data = response.getData();
+                data = getResponseData(response);
             } else {
                 Log.i(cgSettings.tag, "Working as guest.");
             }
@@ -3576,144 +3583,101 @@ public class cgBase {
         return data;
     }
 
-    public cgResponse request(final Uri uri, String method, Map<String, String> params, boolean xContentType, boolean my, boolean addF) {
+    public HttpResponse request(final Uri uri, String method, Map<String, String> params, boolean xContentType, boolean my, boolean addF) {
         final String paramsDone = prepareParameters(params, my, addF);
         return request(uri, method, paramsDone, xContentType);
     }
 
-    public cgResponse request(final Uri uri, String method, String params, Boolean xContentType) {
-        URL u = null;
-        int httpCode = -1;
-        String httpMessage = null;
+    private static DefaultHttpClient httpClient;
 
-        if (method == null || (method.equalsIgnoreCase("GET") == false && method.equalsIgnoreCase("POST") == false)) {
-            method = "POST";
+    public static DefaultHttpClient getHttpClient() {
+        if (httpClient == null) {
+            synchronized (cgBase.class) {
+                if (httpClient == null) {
+                    httpClient = new DefaultHttpClient();
+                    // TODO: check redirect strategy
+                }
+            }
+        }
+        return httpClient;
+    }
+
+    public static void clearCookies() {
+        getHttpClient().getCookieStore().clear();
+    }
+
+    public HttpResponse postRequest(final String uri, final List<? extends NameValuePair> params) {
+        try {
+            HttpPost request = new HttpPost(uri);
+            if (params != null) {
+                request.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+            }
+            request.setHeader("X-Requested-With", "XMLHttpRequest");
+            if (settings.asBrowser == 1) {
+                request.setHeader("User-Agent", idBrowser);
+            }
+            Log.d(cgSettings.tag, "postRequest: POST to " + uri);
+            return getHttpClient().execute(request);
+        } catch (Exception e) {
+            // Can be UnsupportedEncodingException, ClientProtocolException or IOException
+            Log.e(cgSettings.tag, "postRequest", e);
+            return null;
+        }
+    }
+
+    public HttpResponse request(final Uri uri, final String method, final String params, final Boolean xContentType) {
+        HttpRequestBase request;
+        if (method.equals("GET")) {
+            request = new HttpGet(uri.buildUpon().encodedQuery(params).build().toString());
         } else {
-            method = method.toUpperCase();
+            request = new HttpPost(uri.toString());
+            try {
+                final ByteArrayEntity paramsEntity = new ByteArrayEntity(params.getBytes("utf-8"));
+                Log.d(cgSettings.tag, "Entity: " + paramsEntity);
+                ((HttpPost) request).setEntity(paramsEntity);
+            } catch (UnsupportedEncodingException e) {
+                Log.e(cgSettings.tag, "request", e);
+                return null;
+            }
         }
 
-        String cookiesDone = CookieJar.getCookiesAsString(prefs);
+        request.setHeader("X-Requested-With", "XMLHttpRequest");
 
-        URLConnection uc = null;
-        HttpURLConnection connection = null;
-        Integer timeout = 30000;
-        StringBuffer buffer = null;
+        if (xContentType) {
+            request.setHeader("Content-Type", "application/x-www-form-urlencoded");
+        }
+
+        if (settings.asBrowser == 1) {
+            request.setHeader("User-Agent", idBrowser);
+        }
+
+        final DefaultHttpClient client = getHttpClient();
 
         for (int i = 0; i < 5; i++) {
             if (i > 0) {
                 Log.w(cgSettings.tag, "Failed to download data, retrying. Attempt #" + (i + 1));
             }
 
-            buffer = new StringBuffer();
-            timeout = 30000 + (i * 10000);
+            Log.d(cgSettings.tag, "request: requesting " + request.getMethod() + " " + request.getURI() + " ‑ headers: " + request.getAllHeaders());
 
             try {
-                if (method.equals("GET")) {
-                    // GET
-                    u = new URL(uri.buildUpon().encodedQuery(params).build().toString());
-                    uc = u.openConnection();
-
-                    uc.setRequestProperty("Host", uri.getHost());
-                    uc.setRequestProperty("Cookie", cookiesDone);
-                    if (xContentType) {
-                        uc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-                    }
-
-                    if (settings.asBrowser == 1) {
-                        uc.setRequestProperty("Accept", "application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5");
-                        // uc.setRequestProperty("Accept-Encoding", "gzip"); // not supported via cellular network
-                        uc.setRequestProperty("Accept-Charset", "utf-8, iso-8859-1, utf-16, *;q=0.7");
-                        uc.setRequestProperty("Accept-Language", "en-US");
-                        uc.setRequestProperty("User-Agent", idBrowser);
-                        uc.setRequestProperty("Connection", "keep-alive");
-                        uc.setRequestProperty("Keep-Alive", "300");
-                    }
-
-                    connection = (HttpURLConnection) uc;
-                    connection.setReadTimeout(timeout);
-                    connection.setRequestMethod(method);
-                    HttpURLConnection.setFollowRedirects(true);
-                    connection.setDoInput(true);
-                    connection.setDoOutput(false);
-                } else {
-                    // POST
-                    u = new URL(uri.toString());
-                    uc = u.openConnection();
-
-                    uc.setRequestProperty("Host", uri.getHost());
-                    uc.setRequestProperty("Cookie", cookiesDone);
-                    if (xContentType) {
-                        uc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-                    }
-
-                    if (settings.asBrowser == 1) {
-                        uc.setRequestProperty("Accept", "application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5");
-                        // uc.setRequestProperty("Accept-Encoding", "gzip"); // not supported via cellular network
-                        uc.setRequestProperty("Accept-Charset", "utf-8, iso-8859-1, utf-16, *;q=0.7");
-                        uc.setRequestProperty("Accept-Language", "en-US");
-                        uc.setRequestProperty("User-Agent", idBrowser);
-                        uc.setRequestProperty("Connection", "keep-alive");
-                        uc.setRequestProperty("Keep-Alive", "300");
-                    }
-
-                    connection = (HttpURLConnection) uc;
-                    connection.setReadTimeout(timeout);
-                    connection.setRequestMethod(method);
-                    HttpURLConnection.setFollowRedirects(true);
-                    connection.setDoInput(true);
-                    connection.setDoOutput(true);
-
-                    final OutputStream out = connection.getOutputStream();
-                    final OutputStreamWriter wr = new OutputStreamWriter(out);
-                    wr.write(params);
-                    wr.flush();
-                    wr.close();
-                }
-
-                CookieJar.setCookies(prefs, uc);
-
-                InputStream ins = getInputstreamFromConnection(connection);
-                final InputStreamReader inr = new InputStreamReader(ins);
-                final BufferedReader br = new BufferedReader(inr, 16 * 1024);
-
-                readIntoBuffer(br, buffer);
-
-                httpCode = connection.getResponseCode();
-                httpMessage = connection.getResponseMessage();
-
-                final String paramsLog = params.replaceAll(passMatch, "password=***");
-                Log.i(cgSettings.tag, "[" + method + " " + (params.length() / 1024) + "k | " + httpCode + " | " + (buffer.length() / 1024) + "k] Downloaded " + uri + "?" + paramsLog);
-
-                connection.disconnect();
-                br.close();
-                ins.close();
-                inr.close();
-            } catch (IOException e) {
-                Log.e(cgSettings.tag, "cgeoBase.request.IOException", e);
+                dumpCookies("Cookies before request", client);
+                final HttpResponse response = client.execute(request);
+                dumpCookies("Cookies after request", client);
+                return response;
             } catch (Exception e) {
                 Log.e(cgSettings.tag, "cgeoBase.request", e);
             }
-
-            if (buffer.length() > 0) {
-                break;
-            }
         }
 
-        cgResponse response = new cgResponse();
+        return null;
+    }
 
-        try {
-            if (StringUtils.isNotEmpty(buffer)) {
-                final String data = replaceWhitespace(buffer);
-                response.setData(data);
-                response.setStatusCode(httpCode);
-                response.setStatusMessage(httpMessage);
-                response.setUrl(u.toString());
-            }
-        } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgeoBase.page", e);
+    private void dumpCookies(final String msg, final DefaultHttpClient client) {
+        Log.d(cgSettings.tag, msg);
+        for (Cookie cookie : client.getCookieStore().getCookies()) {
+            Log.d(cgSettings.tag, "  - " + cookie.getName() + ": " + cookie.getValue());
         }
-
-        return response;
     }
 
     /**
@@ -3726,100 +3690,8 @@ public class cgBase {
         return StringUtils.join(StringUtils.split(buffer.toString(), " \n\r\t"), " ");
     }
 
-    public String requestJSONgc(final Uri uri, String params) {
-        int httpCode = -1;
-
-        final String cookiesDone = CookieJar.getCookiesAsString(prefs);
-
-        URLConnection uc = null;
-        HttpURLConnection connection = null;
-        Integer timeout = 30000;
-        final StringBuffer buffer = new StringBuffer();
-
-        for (int i = 0; i < 3; i++) {
-            if (i > 0) {
-                Log.w(cgSettings.tag, "Failed to download data, retrying. Attempt #" + (i + 1));
-            }
-
-            buffer.delete(0, buffer.length());
-            timeout = 30000 + (i * 15000);
-
-            try {
-                // POST
-                final URL u = new URL(uri.toString());
-                uc = u.openConnection();
-
-                uc.setRequestProperty("Host", uri.getHost());
-                uc.setRequestProperty("Cookie", cookiesDone);
-                uc.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-                uc.setRequestProperty("X-Requested-With", "XMLHttpRequest");
-                uc.setRequestProperty("Accept", "application/json, text/javascript, */*; q=0.01");
-                uc.setRequestProperty("Referer", uri.getHost() + "/" + uri.getPath());
-
-                if (settings.asBrowser == 1) {
-                    uc.setRequestProperty("Accept-Charset", "utf-8, iso-8859-1, utf-16, *;q=0.7");
-                    uc.setRequestProperty("Accept-Language", "en-US");
-                    uc.setRequestProperty("User-Agent", idBrowser);
-                    uc.setRequestProperty("Connection", "keep-alive");
-                    uc.setRequestProperty("Keep-Alive", "300");
-                }
-
-                connection = (HttpURLConnection) uc;
-                connection.setReadTimeout(timeout);
-                connection.setRequestMethod("POST");
-                HttpURLConnection.setFollowRedirects(true);
-                connection.setDoInput(true);
-                connection.setDoOutput(true);
-
-                final OutputStream out = connection.getOutputStream();
-                final OutputStreamWriter wr = new OutputStreamWriter(out);
-                wr.write(params);
-                wr.flush();
-                wr.close();
-
-                CookieJar.setCookies(prefs, uc);
-
-                InputStream ins = getInputstreamFromConnection(connection);
-                final InputStreamReader inr = new InputStreamReader(ins);
-                final BufferedReader br = new BufferedReader(inr);
-
-                readIntoBuffer(br, buffer);
-
-                httpCode = connection.getResponseCode();
-
-                final String paramsLog = params.replaceAll(passMatch, "password=***");
-                Log.i(cgSettings.tag + " | JSON", "[POST " + (params.length() / 1024) + "k | " + httpCode + " | " + (buffer.length() / 1024) + "k] Downloaded " + uri.toString() + "?" + paramsLog);
-
-                connection.disconnect();
-                br.close();
-                ins.close();
-                inr.close();
-            } catch (IOException e) {
-                Log.e(cgSettings.tag, "cgeoBase.requestJSONgc.IOException: " + e.toString());
-            } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgeoBase.requestJSONgc: " + e.toString());
-            }
-
-            if (buffer != null && buffer.length() > 0) {
-                break;
-            }
-        }
-
-        return replaceWhitespace(buffer);
-    }
-
-    private static InputStream getInputstreamFromConnection(HttpURLConnection connection) throws IOException {
-        final String encoding = connection.getContentEncoding();
-        InputStream ins;
-
-        if (encoding != null && encoding.equalsIgnoreCase("gzip")) {
-            ins = new GZIPInputStream(connection.getInputStream());
-        } else if (encoding != null && encoding.equalsIgnoreCase("deflate")) {
-            ins = new InflaterInputStream(connection.getInputStream(), new Inflater(true));
-        } else {
-            ins = connection.getInputStream();
-        }
-        return ins;
+    public HttpResponse requestJSONgc(final Uri uri, String params) {
+        return request(uri, "GET", params, false);
     }
 
     public static JSONObject requestJSON(String host, String path, String params) {
@@ -4309,8 +4181,8 @@ public class cgBase {
     }
 
     public String getMapUserToken(Handler noTokenHandler) {
-        final cgResponse response = request(URI_GC_MAP_DEFAULT, "GET", "", false);
-        final String data = response.getData();
+        final HttpResponse response = request(URI_GC_MAP_DEFAULT, "GET", "", false);
+        final String data = getResponseData(response);
         String usertoken = null;
 
         if (StringUtils.isNotBlank(data)) {

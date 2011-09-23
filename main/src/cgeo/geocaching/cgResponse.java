@@ -1,33 +1,33 @@
 package cgeo.geocaching;
 
-public class cgResponse {
-    private String url;
-    private int statusCode;
-    private String statusMessage;
-    private String data;
+import org.apache.http.HttpResponse;
 
-    public void setUrl(String url) {
-        this.url = url;
+public class cgResponse {
+    private String data = null;
+
+    private HttpResponse response = null;
+
+    public cgResponse() {
     }
 
-    public String getUrl() {
-        return url;
+    public cgResponse(HttpResponse response) {
+        this.response = response;
     }
 
     public void setStatusCode(int code) {
-        statusCode = code;
+        response.setStatusCode(code);
     }
 
     public int getStatusCode() {
-        return statusCode;
+        return response.getStatusLine().getStatusCode();
     }
 
     public void setStatusMessage(String message) {
-        statusMessage = message;
+        response.setReasonPhrase(message);
     }
 
     public String getStatusMessage() {
-        return statusMessage;
+        return response.getStatusLine().getReasonPhrase();
     }
 
     public void setData(String data) {
@@ -35,6 +35,6 @@ public class cgResponse {
     }
 
     public String getData() {
-        return data;
+        return data == null ? cgBase.getResponseData(response) : data;
     }
 }

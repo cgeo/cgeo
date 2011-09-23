@@ -385,7 +385,7 @@ public class cgeovisit extends cgLogForm {
         params.put("voteUser", String.format("%.1f", rating).replace(',', '.'));
         params.put("version", "cgeo");
 
-        final String result = base.request(URI_GCVOTE_SETVOTE, "GET", params, false, false, false).getData();
+        final String result = cgBase.getResponseData(base.request(URI_GCVOTE_SETVOTE, "GET", params, false, false, false));
 
         return result.trim().equalsIgnoreCase("ok");
     }
@@ -717,7 +717,7 @@ public class cgeovisit extends cgLogForm {
                     return;
                 }
 
-                final String page = base.request(URI_GC_SEEK_LOG, "GET", params, false, false, false).getData();
+                final String page = cgBase.getResponseData(base.request(URI_GC_SEEK_LOG, "GET", params, false, false, false));
 
                 viewstates = cgBase.getViewstates(page);
                 trackables = cgBase.parseTrackableLog(page);
