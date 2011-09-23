@@ -851,7 +851,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
     }
 
-    // loading timer
+    /**
+     * loading timer Triggers every 250ms and checks for viewport change.
+     */
     private class LoadTimer extends Thread {
 
         public LoadTimer() {
@@ -903,6 +905,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         spanLongitudeNow = mapView.getLongitudeSpan();
 
                         // check if map moved or zoomed
+                        //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
                         moved = false;
                         force = false;
 
@@ -961,7 +964,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                                 showProgressHandler.sendEmptyMessage(1); // show progress
 
                                 loadThread = new LoadThread(centerLatitude, centerLongitude, spanLatitude, spanLongitude);
-                                loadThread.setName("loadThread");
                                 loadThread.start(); //loadThread will kick off downloadThread once it's done
                             }
                         }
@@ -1065,7 +1067,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
     }
 
-    // load caches from database
+    /**
+     * Worker thread that loads caches and waypoints from the database and then spawns the download thread.
+     */
+
     private class LoadThread extends DoThread {
 
         public LoadThread(long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
@@ -1170,7 +1175,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
     }
 
-    // load caches from internet
+    /**
+     * Worker thread downloading caches from the internet.
+     */
+
     private class DownloadThread extends DoThread {
 
         public DownloadThread(long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
@@ -1189,6 +1197,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
                     return;
                 }
+
+                //TODO use Math.min / max
 
                 double latMin = (centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
                 double latMax = (centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
@@ -1265,7 +1275,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
     /**
      * Display (down)loaded caches
-     * TODO Stop spawning display threads.
      */
     private class DisplayThread extends DoThread {
 
@@ -1292,10 +1301,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 final List<CachesOverlayItemImpl> items = new ArrayList<CachesOverlayItemImpl>();
 
                 if (cachesProtected != null && !cachesProtected.isEmpty()) {
-                    int icon = 0;
-                    Drawable pin = null;
-                    CachesOverlayItemImpl item = null;
-
                     for (cgCache cacheOne : cachesProtected) {
                         if (stop) {
                             displayHandler.sendEmptyMessage(0);
@@ -1514,8 +1519,11 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
     }
 
-    // parent for those above :)
-    private class DoThread extends Thread {
+    /**
+     * Abstract Base Class for the worker threads.
+     */
+
+    private abstract class DoThread extends Thread {
 
         protected boolean working = true;
         protected boolean stop = false;
