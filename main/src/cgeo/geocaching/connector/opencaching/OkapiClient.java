@@ -254,6 +254,7 @@ final public class OkapiClient {
             return null;
         }
 
-        return cgBase.requestJSON(connector.getHost(), service, params + ((ApiOpenCachingConnector) connector).getAuthentication(level));
+        final String uri = "http://" + connector.getHost() + service + "?" + ((ApiOpenCachingConnector) connector).getAuthentication(level);
+        return cgBase.requestJSON(uri);
     }
 }

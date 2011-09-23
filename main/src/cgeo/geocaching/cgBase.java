@@ -14,7 +14,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
@@ -194,7 +193,6 @@ public class cgBase {
     public final static SimpleDateFormat dateTbIn2 = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
     public final static SimpleDateFormat dateSqlIn = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 2010-07-25 14:44:01
     private Resources res = null;
-    private static final String passMatch = "[/\\?&]*[Pp]ass(word)?=[^&^#^$]+";
     private static final Pattern patternLoggedIn = Pattern.compile("<span class=\"Success\">You are logged in as[^<]*<strong[^>]*>([^<]+)</strong>[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private static final Pattern patternLogged2In = Pattern.compile("<strong>\\W*Hello,[^<]*<a[^>]+>([^<]+)</a>[^<]*</strong>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private static final Pattern patternViewstateFieldCount = Pattern.compile("id=\"__VIEWSTATEFIELDCOUNT\"[^(value)]+value=\"(\\d+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
@@ -3508,15 +3506,6 @@ public class cgBase {
         return paramsDone;
     }
 
-    public static Uri buildURI(final boolean secure, final String host, final String path, final String query) {
-        return new Uri.Builder().scheme(secure ? "https" : "http").authority(host).path(path).encodedQuery(query).build();
-    }
-
-    public static Uri buildURI(boolean secure, String host, String path) {
-        final String pathComponents[] = StringUtils.split(path, "?", 2);
-        return buildURI(secure, host, pathComponents[0], pathComponents.length > 1 ? pathComponents[1] : null);
-    }
-
     public String[] requestViewstates(final String uri, Map<String, String> params, boolean xContentType, boolean my) {
         final HttpResponse response = request(uri, params, xContentType, my, false);
 
@@ -3662,17 +3651,15 @@ public class cgBase {
         return request(uri, params, false);
     }
 
-    public static JSONObject requestJSON(String host, String path, String params) {
-        final HttpClient client = new DefaultHttpClient();
-        final Uri uri = buildURI(false, host, path, params);
-        final HttpGet request = new HttpGet(uri.toString());
+    public static JSONObject requestJSON(final String uri) {
+        final HttpGet request = new HttpGet(uri);
         request.setHeader("Accept", "application/json, text/javascript, */*; q=0.01");
         request.setHeader("Content-Type", "application/json; charset=UTF-8");
         request.setHeader("X-Requested-With", "XMLHttpRequest");
 
         for (int i = 0; i < 3; i++) {
             try {
-                final HttpResponse response = client.execute(request);
+                final HttpResponse response = getHttpClient().execute(request);
                 final int statusCode = response.getStatusLine().getStatusCode();
                 if (statusCode == 403) {
                     // Forbidden, do not retry
@@ -3682,8 +3669,7 @@ public class cgBase {
                 final BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
                 readIntoBuffer(br, buffer);
 
-                final String paramsLog = params.replaceAll(passMatch, "password=***");
-                Log.i(cgSettings.tag + " | JSON", "[POST " + (int) (params.length() / 1024) + "k | " + statusCode + " | " + (int) (buffer.length() / 1024) + "k] Downloaded " + "http://" + host + path + "?" + paramsLog);
+                Log.i(cgSettings.tag, "[POST " + statusCode + "] Downloaded " + uri);
 
                 return new JSONObject(buffer.toString());
             } catch (Exception e) {
@@ -4173,13 +4159,11 @@ public class cgBase {
 
     public static Double getElevation(final Geopoint coords) {
         try {
-            final String host = "maps.googleapis.com";
-            final String path = "/maps/api/elevation/json";
-            final String params = "sensor=false&locations=" +
+            final String uri = "http://maps.googleapis.com/maps/api/elevation/json?sensor=false&locations=" +
                     String.format((Locale) null, "%.6f", coords.getLatitude()) + "," +
                     String.format((Locale) null, "%.6f", coords.getLongitude());
 
-            final JSONObject response = requestJSON(host, path, params);
+            final JSONObject response = requestJSON(uri);
 
             if (response == null) {
                 return null;
