@@ -1308,8 +1308,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         }
 
                         items.add(getItem(new cgCoord(cacheOne), true, cacheOne.type, cacheOne.own, cacheOne.found, cacheOne.disabled));
-                        // display cache waypoints
-                        if (cacheOne != null && cacheOne.waypoints != null && !cacheOne.waypoints.isEmpty()) {
+                        // display cache waypoints only when less than 200 Caches shown
+                        if (cacheOne != null && cacheOne.waypoints != null && cachesProtected.size() < 200
+                                && !cacheOne.waypoints.isEmpty()) {
                             for (cgWaypoint oneWaypoint : cacheOne.waypoints) {
                                 if (oneWaypoint.coords == null) {
                                     continue;
@@ -1317,7 +1318,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
                                 items.add(getItem(new cgCoord(oneWaypoint), false, oneWaypoint.type, false, false, false));
                             }
-
                         }
                     }
 
@@ -1345,6 +1345,24 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 working = false;
             }
         }
+
+        /**
+         * Returns a OverlayItem representing the cache/waypoint
+         *
+         * @param cgCoord
+         *            The coords
+         * @param cache
+         *            true for caches
+         * @param type
+         *            String name
+         * @param own
+         *            true for own caches
+         * @param found
+         *            true for found
+         * @param disabled
+         *            true for disabled
+         * @return
+         */
 
         private CachesOverlayItemImpl getItem(cgCoord cgCoord, boolean cache, String type, boolean own, boolean found, boolean disabled) {
 
