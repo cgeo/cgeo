@@ -14,8 +14,6 @@ import java.util.regex.Pattern;
  *
  */
 public class LogTemplateProvider {
-    private static final String URI_GC_EMAIL = "http://www.geocaching.com/email/";
-
     public static abstract class LogTemplate {
         private String template;
         private int resourceId;
@@ -90,7 +88,7 @@ public class LogTemplateProvider {
                             }
                             String findCount = "";
                             final Map<String, String> params = new HashMap<String, String>();
-                            final String page = cgBase.getResponseData(base.request(URI_GC_EMAIL, params, false, false, false));
+                            final String page = cgBase.getResponseData(base.request("http://www.geocaching.com/email/", params, false, false, false));
                             int current = parseFindCount(page);
 
                             if (current >= 0) {

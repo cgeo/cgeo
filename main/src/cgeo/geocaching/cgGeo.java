@@ -49,8 +49,6 @@ public class cgGeo {
     public Integer satellitesFixed = null;
     public double distanceNow = 0d;
 
-    private static final String URI_GO4CACHE = "http://api.go4cache.com/";
-
     public cgGeo(Context contextIn, cgeoapplication appIn, cgUpdateLoc geoUpdateIn, cgBase baseIn, cgSettings settingsIn, int timeIn, int distanceIn) {
         context = contextIn;
         app = appIn;
@@ -401,7 +399,7 @@ public class cgGeo {
                     if (base.version != null) {
                         params.put("v", base.version);
                     }
-                    final String res = cgBase.getResponseData(base.postRequest(URI_GO4CACHE, params));
+                    final String res = cgBase.getResponseData(base.postRequest("http://api.go4cache.com/", params));
 
                     if (StringUtils.isNotBlank(res)) {
                         lastGo4cacheCoords = coordsNow;

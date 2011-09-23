@@ -141,8 +141,6 @@ public class cgeocaches extends AbstractListActivity {
     private static final int CONTEXT_MENU_MOVE_TO_LIST = 1000;
     private static final int MENU_MOVE_SELECTED_OR_ALL_TO_LIST = 1200;
 
-    private static final String URI_SEND2CGEO_READ = "http://send2.cgeo.org/read.html";
-
     private String action = null;
     private String type = null;
     private Geopoint coords = null;
@@ -2086,7 +2084,7 @@ public class cgeocaches extends AbstractListActivity {
                 if (deviceCode == null) {
                     deviceCode = "";
                 }
-                HttpResponse responseFromWeb = base.request(URI_SEND2CGEO_READ, "code=" + cgBase.urlencode_rfc3986(deviceCode), true);
+                HttpResponse responseFromWeb = base.request("http://send2.cgeo.org/read.html", "code=" + cgBase.urlencode_rfc3986(deviceCode), true);
 
                 if (responseFromWeb.getStatusLine().getStatusCode() == 200) {
                     final String response = cgBase.getResponseData(responseFromWeb);
