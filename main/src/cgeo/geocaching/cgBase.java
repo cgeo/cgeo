@@ -18,7 +18,6 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.cookie.Cookie;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
@@ -3586,7 +3585,7 @@ public class cgBase {
             if (settings.asBrowser == 1) {
                 request.setHeader("User-Agent", idBrowser);
             }
-            Log.d(cgSettings.tag, "postRequest: POST to " + uri);
+            Log.d(cgSettings.tag, "postRequest: POST " + uri);
             return getHttpClient().execute(request);
         } catch (Exception e) {
             // Can be UnsupportedEncodingException, ClientProtocolException or IOException
@@ -3615,26 +3614,16 @@ public class cgBase {
                 Log.w(cgSettings.tag, "Failed to download data, retrying. Attempt #" + (i + 1));
             }
 
-            Log.d(cgSettings.tag, "request: requesting " + request.getURI() + " ‑ headers: " + request.getAllHeaders());
+            Log.d(cgSettings.tag, "request: GET " + request.getURI());
 
             try {
-                dumpCookies("Cookies before request", client);
-                final HttpResponse response = client.execute(request);
-                dumpCookies("Cookies after request", client);
-                return response;
+                return client.execute(request);
             } catch (Exception e) {
                 Log.e(cgSettings.tag, "cgeoBase.request", e);
             }
         }
 
         return null;
-    }
-
-    private void dumpCookies(final String msg, final DefaultHttpClient client) {
-        Log.d(cgSettings.tag, msg);
-        for (Cookie cookie : client.getCookieStore().getCookies()) {
-            Log.d(cgSettings.tag, "  - " + cookie.getName() + ": " + cookie.getValue());
-        }
     }
 
     /**
