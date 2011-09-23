@@ -131,6 +131,17 @@ public class cgBase {
     private final static Pattern PATTERN_TRACKABLE_Distance = Pattern.compile("<h4[^>]*\\W*Tracking History \\(([0-9.,]+(km|mi))[^\\)]*\\)", Pattern.CASE_INSENSITIVE);
     private final static Pattern PATTERN_TRACKABLE_Log = Pattern.compile("<tr class=\"Data.+?src=\"/images/icons/([^.]+)\\.gif[^>]+>&nbsp;([^<]+)</td>.+?guid.+?>([^<]+)</a>.+?(?:guid=([^\"]+)\">([^<]+)</a>.+?)?<td colspan=\"4\">(.+?)(?:<ul.+?ul>)?\\s*</td>\\s*</tr>", Pattern.CASE_INSENSITIVE);
 
+    private static final URI URI_GC_LOGIN_DEFAULT = buildURI(true, "www.geocaching.com", "/login/default.aspx");
+    private static final URI URI_GC_DEFAULT = buildURI(false, "www.geocaching.com", "/default.aspx");
+    private static final URI URI_GOOGLE_RECAPTCHA = buildURI(false, "www.google.com", "/recaptcha/api/challenge");
+    private static final URI URI_GC_MAP_DEFAULT = buildURI(false, "www.geocaching.com", "/map/default.aspx");
+    private static final URI URI_GC_SEEK_NEAREST = buildURI(false, "www.geocaching.com", "/seek/nearest.aspx");
+    private static final URI URI_GC_SEEK_LOGBOOK = buildURI(false, "www.geocaching.com", "/seek/geocache.logbook");
+    private static final URI URI_GC_PREFERENCES = buildURI(false, "www.geocaching.com", "/account/ManagePreferences.aspx");
+    private static final URI URI_GCVOTE_GETVOTES = buildURI(false, "gcvote.com", "/getVotes.php");
+    private static final URI URI_GO4CACHE_GET = buildURI(false, "api.go4cache.com", "/get.php");
+    private static final URI URI_GC_TRACK_DETAILS = buildURI(false, "www.geocaching.com", "/track/details.aspx");
+
     public final static Map<String, String> cacheTypes = new HashMap<String, String>();
     public final static Map<String, String> cacheIDs = new HashMap<String, String>();
     static {
@@ -470,8 +481,6 @@ public class cgBase {
     }
 
     public int login() {
-        final String host = "www.geocaching.com";
-        final String path = "/login/default.aspx";
         cgResponse loginResponse = null;
         String loginData = null;
 
@@ -483,7 +492,7 @@ public class cgBase {
             return -3; // no login information stored
         }
 
-        loginResponse = request(true, host, path, "GET", new HashMap<String, String>(), false, false, false);
+        loginResponse = request(URI_GC_LOGIN_DEFAULT, "GET", new HashMap<String, String>(), false, false, false);
         loginData = loginResponse.getData();
         if (StringUtils.isNotBlank(loginData)) {
             if (checkLogin(loginData)) {
@@ -523,7 +532,7 @@ public class cgBase {
         params.put("ctl00$SiteContent$cbRememberMe", "on");
         params.put("ctl00$SiteContent$btnSignIn", "Login");
 
-        loginResponse = request(true, host, path, "POST", params, false, false, false);
+        loginResponse = request(URI_GC_LOGIN_DEFAULT, "POST", params, false, false, false);
         loginData = loginResponse.getData();
 
         if (StringUtils.isNotBlank(loginData)) {
@@ -582,15 +591,13 @@ public class cgBase {
     }
 
     public String switchToEnglish(String[] viewstates) {
-        final String host = "www.geocaching.com";
-        final String path = "/default.aspx";
         final Map<String, String> params = new HashMap<String, String>();
 
         setViewstates(viewstates, params);
         params.put("__EVENTTARGET", "ctl00$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem"); // switch to english
         params.put("__EVENTARGUMENT", "");
 
-        return request(false, host, path, "POST", params, false, false, false).getData();
+        return request(URI_GC_DEFAULT, "POST", params, false, false, false).getData();
     }
 
     public cgCacheWrap parseSearch(cgSearchThread thread, String url, String page, boolean showCaptcha) {
@@ -633,7 +640,7 @@ public class cgBase {
                 }
 
                 if (recaptchaJsParam != null) {
-                    final String recaptchaJs = request(false, "www.google.com", "/recaptcha/api/challenge", "GET", "k=" + urlencode_rfc3986(recaptchaJsParam.trim()), 0, true).getData();
+                    final String recaptchaJs = request(URI_GOOGLE_RECAPTCHA, "GET", "k=" + urlencode_rfc3986(recaptchaJsParam.trim()), 0, true).getData();
 
                     if (StringUtils.isNotBlank(recaptchaJs)) {
                         final Matcher matcherRecaptchaChallenge = patternRecaptchaChallenge.matcher(recaptchaJs);
@@ -884,8 +891,6 @@ public class cgBase {
 
             try {
                 // get coordinates for parsed caches
-                final String host = "www.geocaching.com";
-                final String path = "/seek/nearest.aspx";
                 final StringBuilder params = new StringBuilder();
                 params.append("__EVENTTARGET=&__EVENTARGUMENT=");
                 if (ArrayUtils.isNotEmpty(caches.viewstates)) {
@@ -912,7 +917,7 @@ public class cgBase {
                 }
                 params.append("&ctl00%24ContentBody%24uxDownloadLoc=Download+Waypoints");
 
-                final String coordinates = request(false, host, path, "POST", params.toString(), 0, true).getData();
+                final String coordinates = request(URI_GC_SEEK_NEAREST, "POST", params.toString(), 0, true).getData();
 
                 if (StringUtils.isNotBlank(coordinates)) {
                     if (coordinates.contains("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
@@ -967,14 +972,14 @@ public class cgBase {
         return caches;
     }
 
-    public static cgCacheWrap parseMapJSON(String url, String data) {
+    public static cgCacheWrap parseMapJSON(final URI uri, final String data) {
         if (StringUtils.isEmpty(data)) {
             Log.e(cgSettings.tag, "cgeoBase.parseMapJSON: No page given");
             return null;
         }
 
         final cgCacheWrap caches = new cgCacheWrap();
-        caches.url = url;
+        caches.url = uri.toString();
 
         try {
             final JSONObject yoDawg = new JSONObject(data);
@@ -1667,8 +1672,7 @@ public class cgBase {
         params.put("sp", "0");
         params.put("sf", "0");
         params.put("decrypt", "1");
-        final cgResponse response = request(false, "www.geocaching.com", "/seek/geocache.logbook", "GET",
-                params, false, false, false);
+        final cgResponse response = request(URI_GC_SEEK_LOGBOOK, "GET", params, false, false, false);
         if (response.getStatusCode() != 200) {
             Log.e(cgSettings.tag, "cgBase.loadLogsFromDetails: error " + response.getStatusCode() + " when requesting log information");
             return;
@@ -1816,10 +1820,7 @@ public class cgBase {
 
     public void detectGcCustomDate()
     {
-        final String host = "www.geocaching.com";
-        final String path = "/account/ManagePreferences.aspx";
-
-        final String result = request(false, host, path, "GET", null, false, false, false).getData();
+        final String result = request(URI_GC_PREFERENCES, "GET", null, false, false, false).getData();
 
         if (null == result) {
             Log.w(cgSettings.tag, "cgeoBase.detectGcCustomDate: result is null");
@@ -1881,7 +1882,7 @@ public class cgBase {
                 params.put("waypoints", implode(",", geocodes.toArray()));
             }
             params.put("version", "cgeo");
-            final String votes = request(false, "gcvote.com", "/getVotes.php", "GET", params, false, false, false).getData();
+            final String votes = request(URI_GCVOTE_GETVOTES, "GET", params, false, false, false).getData();
             if (votes == null) {
                 return null;
             }
@@ -2524,11 +2525,12 @@ public class cgBase {
         params.put("__EVENTTARGET", "ctl00$ContentBody$pgrBottom$ctl08");
         params.put("__EVENTARGUMENT", "");
 
-        String page = request(false, host, path, method, params, false, false, true).getData();
+        final URI uri = buildURI(false, host, path);
+        String page = request(uri, method, params, false, false, true).getData();
         if (checkLogin(page) == false) {
             int loginState = login();
             if (loginState == 1) {
-                page = request(false, host, path, method, params, false, false, true).getData();
+                page = request(uri, method, params, false, false, true).getData();
             } else if (loginState == -3) {
                 Log.i(cgSettings.tag, "Working as guest.");
             } else {
@@ -2673,7 +2675,8 @@ public class cgBase {
         params.put("lng", longitude);
 
         final String url = "http://" + host + path + "?" + prepareParameters(params, false, true);
-        String page = requestLogged(false, host, path, method, params, false, false, true);
+        final URI uri = buildURI(false, host, path);
+        String page = requestLogged(uri, method, params, false, false, true);
 
         if (StringUtils.isBlank(page)) {
             Log.e(cgSettings.tag, "cgeoBase.searchByCoords: No data from server");
@@ -2723,7 +2726,8 @@ public class cgBase {
         params.put("key", keyword);
 
         final String url = "http://" + host + path + "?" + prepareParameters(params, false, true);
-        String page = requestLogged(false, host, path, method, params, false, false, true);
+        final URI uri = cgBase.buildURI(false, host, path);
+        String page = requestLogged(uri, method, params, false, false, true);
 
         if (StringUtils.isBlank(page)) {
             Log.e(cgSettings.tag, "cgeoBase.searchByKeyword: No data from server");
@@ -2779,7 +2783,8 @@ public class cgBase {
         }
 
         final String url = "http://" + host + path + "?" + prepareParameters(params, my, true);
-        String page = requestLogged(false, host, path, method, params, false, my, true);
+        final URI uri = buildURI(false, host, path);
+        String page = requestLogged(uri, method, params, false, my, true);
 
         if (StringUtils.isBlank(page)) {
             Log.e(cgSettings.tag, "cgeoBase.searchByUsername: No data from server");
@@ -2829,7 +2834,8 @@ public class cgBase {
         params.put("u", userName);
 
         final String url = "http://" + host + path + "?" + prepareParameters(params, false, true);
-        String page = requestLogged(false, host, path, method, params, false, false, true);
+        final URI uri = buildURI(false, host, path);
+        String page = requestLogged(uri, method, params, false, false, true);
 
         if (StringUtils.isBlank(page)) {
             Log.e(cgSettings.tag, "cgeoBase.searchByOwner: No data from server");
@@ -2879,19 +2885,15 @@ public class cgBase {
 
         String params = "{\"dto\":{\"data\":{\"c\":1,\"m\":\"\",\"d\":\"" + latMax + "|" + latMin + "|" + lonMax + "|" + lonMin + "\"},\"ut\":\"" + usertoken + "\"}}";
 
-        final String url = "http://" + host + path + "?" + params;
-        try {
-            page = requestJSONgc(new URI("http", host, path, null), params);
-        } catch (URISyntaxException e) {
-            Log.e(cgSettings.tag, "cgeoBase.searchByViewPort", e);
-        }
+        final URI uri = buildURI(false, host, path);
+        page = requestJSONgc(uri, params);
 
         if (StringUtils.isBlank(page)) {
             Log.e(cgSettings.tag, "cgeoBase.searchByViewport: No data from server");
             return null;
         }
 
-        final cgCacheWrap caches = parseMapJSON(url, page);
+        final cgCacheWrap caches = parseMapJSON(buildURI(false, host, path, params), page);
         if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
             Log.e(cgSettings.tag, "cgeoBase.searchByViewport: No cache parsed");
         }
@@ -2918,9 +2920,6 @@ public class cgBase {
             return users;
         }
 
-        final String host = "api.go4cache.com";
-        final String path = "/get.php";
-        final String method = "POST";
         final Map<String, String> params = new HashMap<String, String>();
 
         params.put("u", username);
@@ -2929,7 +2928,7 @@ public class cgBase {
         params.put("lnm", String.format((Locale) null, "%.6f", lonMin));
         params.put("lnx", String.format((Locale) null, "%.6f", lonMax));
 
-        final String data = request(false, host, path, method, params, false, false, false).getData();
+        final String data = request(URI_GO4CACHE_GET, "POST", params, false, false, false).getData();
 
         if (StringUtils.isBlank(data)) {
             Log.e(cgSettings.tag, "cgeoBase.getGeocachersInViewport: No data from server");
@@ -3009,9 +3008,6 @@ public class cgBase {
             return null;
         }
 
-        final String host = "www.geocaching.com";
-        final String path = "/track/details.aspx";
-        final String method = "GET";
         final Map<String, String> params = new HashMap<String, String>();
         if (StringUtils.isNotBlank(geocode)) {
             params.put("tracker", geocode);
@@ -3021,7 +3017,7 @@ public class cgBase {
             params.put("id", id);
         }
 
-        String page = requestLogged(false, host, path, method, params, false, false, false);
+        String page = requestLogged(URI_GC_TRACK_DETAILS, "GET", params, false, false, false);
 
         if (StringUtils.isBlank(page)) {
             Log.e(cgSettings.tag, "cgeoBase.searchTrackable: No data from server");
@@ -3079,9 +3075,6 @@ public class cgBase {
             Log.i(cgSettings.tag, "Trying to post log for cache #" + cacheid + " - action: " + logType + "; date: " + year + "." + month + "." + day + ", log: " + log + "; trackables: 0");
         }
 
-        final String host = "www.geocaching.com";
-        final String path = "/seek/log.aspx?ID=" + cacheid;
-        final String method = "POST";
         final Map<String, String> params = new HashMap<String, String>();
 
         setViewstates(viewstates, params);
@@ -3112,11 +3105,12 @@ public class cgBase {
             params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnCurrentFilter", "");
         }
 
-        String page = request(false, host, path, method, params, false, false, false).getData();
+        final URI uri = buildURI(false, "www.geocaching.com", "/seek/log.aspx", "ID=" + cacheid);
+        String page = request(uri, "POST", params, false, false, false).getData();
         if (checkLogin(page) == false) {
             int loginState = login();
             if (loginState == 1) {
-                page = request(false, host, path, method, params, false, false, false).getData();
+                page = request(uri, "POST", params, false, false, false).getData();
             } else {
                 Log.e(cgSettings.tag, "cgeoBase.postLog: Can not log in geocaching (error: " + loginState + ")");
                 return loginState;
@@ -3173,7 +3167,7 @@ public class cgBase {
                     params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnCurrentFilter", "");
                 }
 
-                page = request(false, host, path, method, params, false, false, false).getData();
+                page = request(uri, "POST", params, false, false, false).getData();
             }
         } catch (Exception e) {
             Log.e(cgSettings.tag, "cgeoBase.postLog.confim: " + e.toString());
@@ -3221,9 +3215,6 @@ public class cgBase {
         log = log.replace("\n", "\r\n"); // windows' eol
 
         final Calendar currentDate = Calendar.getInstance();
-        final String host = "www.geocaching.com";
-        final String path = "/track/log.aspx?wid=" + tbid;
-        final String method = "POST";
         final Map<String, String> params = new HashMap<String, String>();
 
         setViewstates(viewstates, params);
@@ -3244,11 +3235,12 @@ public class cgBase {
         params.put("ctl00$ContentBody$LogBookPanel1$LogButton", "Submit Log Entry");
         params.put("ctl00$ContentBody$uxVistOtherListingGC", "");
 
-        String page = request(false, host, path, method, params, false, false, false).getData();
+        final URI uri = buildURI(false, "www.geocaching.com", "/track/log.aspx", "wid=" + tbid);
+        String page = request(uri, "POST", params, false, false, false).getData();
         if (checkLogin(page) == false) {
             int loginState = login();
             if (loginState == 1) {
-                page = request(false, host, path, method, params, false, false, false).getData();
+                page = request(uri, "POST", params, false, false, false).getData();
             } else {
                 Log.e(cgSettings.tag, "cgeoBase.postLogTrackable: Can not log in geocaching (error: " + loginState + ")");
                 return loginState;
@@ -3283,7 +3275,8 @@ public class cgBase {
      * @return -1: error occured
      */
     public int addToWatchlist(cgCache cache) {
-        String page = requestLogged(false, "www.geocaching.com", "/my/watchlist.aspx?w=" + cache.cacheId,
+        final URI uri = buildURI(false, "www.geocaching.com", "/my/watchlist.aspx", "w=" + cache.cacheId);
+        String page = requestLogged(uri,
                 "POST", null, false, false, false);
 
         if (StringUtils.isBlank(page)) {
@@ -3309,11 +3302,8 @@ public class cgBase {
      * @return -1: error occured
      */
     public int removeFromWatchlist(cgCache cache) {
-        String host = "www.geocaching.com";
-        String path = "/my/watchlist.aspx?ds=1&action=rem&id=" + cache.cacheId;
-        String method = "POST";
-
-        String page = requestLogged(false, host, path, method, null, false, false, false);
+        final URI uri = buildURI(false, "www.geocaching.com", "/my/watchlist.aspx", "ds=1&action=rem&id=" + cache.cacheId);
+        String page = requestLogged(uri, "POST", null, false, false, false);
 
         if (StringUtils.isBlank(page)) {
             Log.e(cgSettings.tag, "cgBase.removeFromWatchlist: No data from server");
@@ -3327,7 +3317,7 @@ public class cgBase {
         params.put("__EVENTARGUMENT", "");
         params.put("ctl00$ContentBody$btnYes", "Yes");
 
-        page = request(false, host, path, method, params, false, false, false).getData();
+        page = request(uri, "POST", params, false, false, false).getData();
         boolean guidOnPage = cache.isGuidContainedInPage(page);
         if (!guidOnPage) {
             Log.i(cgSettings.tag, "cgBase.removeFromWatchlist: cache removed from watchlist");
@@ -3573,20 +3563,35 @@ public class cgBase {
         return paramsDone;
     }
 
-    public String[] requestViewstates(boolean secure, String host, String path, String method, Map<String, String> params, boolean xContentType, boolean my) {
-        final cgResponse response = request(secure, host, path, method, params, xContentType, my, false);
+    public static URI buildURI(final boolean secure, final String host, final String path, final String query) {
+        try {
+            return new URI(secure ? "https" : "http", host, path, query, null);
+        } catch (URISyntaxException e) {
+            // This should never happen as we only use trusted URI components.
+            Log.e(cgSettings.tag, "buildURI", e);
+            return null;
+        }
+    }
+
+    public static URI buildURI(boolean secure, String host, String path) {
+        final String pathComponents[] = StringUtils.split(path, "?", 2);
+        return buildURI(secure, host, pathComponents[0], pathComponents.length > 1 ? pathComponents[1] : null);
+    }
+
+    public String[] requestViewstates(final URI uri, String method, Map<String, String> params, boolean xContentType, boolean my) {
+        final cgResponse response = request(uri, method, params, xContentType, my, false);
 
         return getViewstates(response.getData());
     }
 
-    public String requestLogged(boolean secure, String host, String path, String method, Map<String, String> params, boolean xContentType, boolean my, boolean addF) {
-        cgResponse response = request(secure, host, path, method, params, xContentType, my, addF);
+    public String requestLogged(final URI uri, String method, Map<String, String> params, boolean xContentType, boolean my, boolean addF) {
+        cgResponse response = request(uri, method, params, xContentType, my, addF);
         String data = response.getData();
 
         if (checkLogin(data) == false) {
             int loginState = login();
             if (loginState == 1) {
-                response = request(secure, host, path, method, params, xContentType, my, addF);
+                response = request(uri, method, params, xContentType, my, addF);
                 data = response.getData();
             } else {
                 Log.i(cgSettings.tag, "Working as guest.");
@@ -3596,37 +3601,15 @@ public class cgBase {
         return data;
     }
 
-    public cgResponse request(boolean secure, String host, String path, String method, Map<String, String> params, boolean xContentType, boolean my, boolean addF) {
+    public cgResponse request(final URI uri, String method, Map<String, String> params, boolean xContentType, boolean my, boolean addF) {
         // prepare parameters
         final String paramsDone = prepareParameters(params, my, addF);
-
-        return request(secure, host, path, method, paramsDone, 0, xContentType);
-    }
-
-    public cgResponse request(boolean secure, String host, String path, String method, Map<String, String> params, int requestId, boolean xContentType, boolean my, boolean addF) {
-        try {
-            return request(new URI(secure ? "https" : "http", host, path, null), method, params, requestId, xContentType, my, addF);
-        } catch (URISyntaxException e) {
-            Log.e(cgSettings.tag, "request", e);
-            return null;
-        }
+        return request(uri, method, paramsDone, 0, xContentType);
     }
 
     public cgResponse request(final URI uri, String method, Map<String, String> params, int requestId, boolean xContentType, boolean my, boolean addF) {
         final String paramsDone = prepareParameters(params, my, addF);
         return request(uri, method, paramsDone, requestId, xContentType);
-    }
-
-    public cgResponse request(boolean secure, String host, String path, String method, String params, int requestId, Boolean xContentType) {
-        try {
-            final String pathComponents[] = StringUtils.split(path, "?", 2);
-            final URI uri = new URI(secure ? "https" : "http", host, pathComponents[0],
-                    pathComponents.length > 1 ? pathComponents[1] : null, null);
-            return request(uri, method, params, requestId, xContentType);
-        } catch (URISyntaxException e) {
-            Log.e(cgSettings.tag, "request", e);
-            return null;
-        }
     }
 
     public cgResponse request(final URI uri, String method, String params, int requestId, Boolean xContentType) {
@@ -4512,7 +4495,7 @@ public class cgBase {
     }
 
     public String getMapUserToken(Handler noTokenHandler) {
-        final cgResponse response = request(false, "www.geocaching.com", "/map/default.aspx", "GET", "", 0, false);
+        final cgResponse response = request(URI_GC_MAP_DEFAULT, "GET", "", 0, false);
         final String data = response.getData();
         String usertoken = null;
 

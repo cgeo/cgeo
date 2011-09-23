@@ -30,7 +30,8 @@ public final class Geopoint
             throw new MalformedCoordinateException("malformed latitude: " + lat);
         }
         if (lon <= 180 && lon >= -180) {
-            longitude = lon;
+            // Prefer 180 degrees rather than the equivalent -180.
+            longitude = lon == -180 ? 180 : lon;
         } else {
             throw new MalformedCoordinateException("malformed longitude: " + lon);
         }

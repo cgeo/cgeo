@@ -15,6 +15,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
@@ -50,6 +51,8 @@ public class cgGeo {
     public Integer satellitesVisible = null;
     public Integer satellitesFixed = null;
     public double distanceNow = 0d;
+
+    private static final URI URI_GO4CACHE = cgBase.buildURI(false, "api.go4cache.com", "/");
 
     public cgGeo(Context contextIn, cgeoapplication appIn, cgUpdateLoc geoUpdateIn, cgBase baseIn, cgSettings settingsIn, int timeIn, int distanceIn) {
         context = contextIn;
@@ -381,9 +384,6 @@ public class cgGeo {
             if (settings.publicLoc == 1 && (lastGo4cacheCoords == null || coordsNow.distanceTo(lastGo4cacheCoords) > 0.75)) {
                 g4cRunning = true;
 
-                final String host = "api.go4cache.com";
-                final String path = "/";
-                final String method = "POST";
                 String action = null;
                 if (app != null) {
                     action = app.getAction();
@@ -404,7 +404,7 @@ public class cgGeo {
                     if (base.version != null) {
                         params.put("v", base.version);
                     }
-                    final String res = base.request(false, host, path, method, params, false, false, false).getData();
+                    final String res = base.request(URI_GO4CACHE, "POST", params, false, false, false).getData();
 
                     if (StringUtils.isNotBlank(res)) {
                         lastGo4cacheCoords = coordsNow;

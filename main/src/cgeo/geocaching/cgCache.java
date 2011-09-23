@@ -172,7 +172,7 @@ public class cgCache implements ICache {
         if (elevation == null) {
             elevation = other.elevation;
         }
-        if (StringUtils.isNotBlank(personalNote)) {
+        if (StringUtils.isBlank(personalNote)) {
             personalNote = other.personalNote;
         }
         if (StringUtils.isBlank(shortdesc)) {

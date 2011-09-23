@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -41,6 +42,8 @@ public class cgeovisit extends cgLogForm {
 
     private static final int MENU_SIGNATURE = 1;
     private static final int SUBMENU_VOTE = 2;
+
+    private static final URI URI_GC_SEEK_LOG = cgBase.buildURI(false, "www.geocaching.com", "/seek/log.aspx");
 
     private LayoutInflater inflater = null;
     private cgCache cache = null;
@@ -220,6 +223,7 @@ public class cgeovisit extends cgLogForm {
             }
         }
     };
+    private static final URI URI_GCVOTE_SETVOTE = cgBase.buildURI(false, "gcvote.com", "/setVote.php");
 
     public cgeovisit() {
         super("c:geo-log");
@@ -381,7 +385,7 @@ public class cgeovisit extends cgLogForm {
         params.put("voteUser", String.format("%.1f", rating).replace(',', '.'));
         params.put("version", "cgeo");
 
-        final String result = base.request(false, "gcvote.com", "/setVote.php", "GET", params, false, false, false).getData();
+        final String result = base.request(URI_GCVOTE_SETVOTE, "GET", params, false, false, false).getData();
 
         return result.trim().equalsIgnoreCase("ok");
     }
@@ -713,7 +717,7 @@ public class cgeovisit extends cgLogForm {
                     return;
                 }
 
-                final String page = base.request(false, "www.geocaching.com", "/seek/log.aspx", "GET", params, false, false, false).getData();
+                final String page = base.request(URI_GC_SEEK_LOG, "GET", params, false, false, false).getData();
 
                 viewstates = cgBase.getViewstates(page);
                 trackables = cgBase.parseTrackableLog(page);
