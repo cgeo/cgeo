@@ -1251,6 +1251,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
+                //TODO Portree Only overwrite if we got some. Otherwise maybe error icon
                 caches = app.getCaches(searchId, centerLat, centerLon, spanLat, spanLon);
 
                 if (stop) {
