@@ -1198,24 +1198,16 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                //TODO use Math.min / max
+                double lat1 = (centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
+                double lat2 = (centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
+                double lon1 = (centerLon / 1e6) - ((spanLon / 1e6) / 2) - ((spanLon / 1e6) / 4);
+                double lon2 = (centerLon / 1e6) + ((spanLon / 1e6) / 2) + ((spanLon / 1e6) / 4);
 
-                double latMin = (centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
-                double latMax = (centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
-                double lonMin = (centerLon / 1e6) - ((spanLon / 1e6) / 2) - ((spanLon / 1e6) / 4);
-                double lonMax = (centerLon / 1e6) + ((spanLon / 1e6) / 2) + ((spanLon / 1e6) / 4);
-                double llCache;
+                double latMin = Math.min(lat1, lat2);
+                double latMax = Math.max(lat1, lat2);
+                double lonMin = Math.min(lon1, lon2);
+                double lonMax = Math.max(lon1, lon2);
 
-                if (latMin > latMax) {
-                    llCache = latMax;
-                    latMax = latMin;
-                    latMin = llCache;
-                }
-                if (lonMin > lonMax) {
-                    llCache = lonMax;
-                    lonMax = lonMin;
-                    lonMin = llCache;
-                }
 
                 //*** this needs to be in it's own thread
                 // stage 2 - pull and render from geocaching.com
@@ -1232,6 +1224,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
+                //TODO Parameter Map is bad style
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("usertoken", token);
                 params.put("latitude-min", String.format((Locale) null, "%.6f", latMin));
@@ -1314,7 +1307,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                             continue;
                         }
 
-                        items.add(getItem(new cgCoord(cacheOne), cacheOne.type));
+                        items.add(getItem(new cgCoord(cacheOne), true, cacheOne.type, cacheOne.own, cacheOne.found, cacheOne.disabled));
                         // display cache waypoints
                         if (cacheOne != null && cacheOne.waypoints != null && !cacheOne.waypoints.isEmpty()) {
                             for (cgWaypoint oneWaypoint : cacheOne.waypoints) {
@@ -1322,7 +1315,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                                     continue;
                                 }
 
-                                items.add(getItem(new cgCoord(oneWaypoint), oneWaypoint.type));
+                                items.add(getItem(new cgCoord(oneWaypoint), false, oneWaypoint.type, false, false, false));
                             }
 
                         }
@@ -1353,12 +1346,12 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             }
         }
 
-        private CachesOverlayItemImpl getItem(cgCoord cgCoord, String type) {
+        private CachesOverlayItemImpl getItem(cgCoord cgCoord, boolean cache, String type, boolean own, boolean found, boolean disabled) {
 
             coordinates.add(cgCoord);
-            CachesOverlayItemImpl item2 = settings.getMapFactory().getCachesOverlayItem(cgCoord, null);
+            CachesOverlayItemImpl item = settings.getMapFactory().getCachesOverlayItem(cgCoord, null);
 
-            int icon = cgBase.getMarkerIcon(false, cgCoord.type, false, false, false);
+            int icon = cgBase.getMarkerIcon(cache, type, own, found, disabled);
             Drawable pin = null;
             if (iconsCache.containsKey(icon)) {
                 pin = iconsCache.get(icon);
@@ -1367,9 +1360,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 pin.setBounds(0, 0, pin.getIntrinsicWidth(), pin.getIntrinsicHeight());
                 iconsCache.put(icon, pin);
             }
-            item2.setMarker(pin);
+            item.setMarker(pin);
 
-            return item2;
+            return item;
         }
     }
 
