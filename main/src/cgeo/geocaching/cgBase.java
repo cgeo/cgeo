@@ -145,11 +145,11 @@ public class cgBase {
     private static final String URI_GC_DEFAULT = "http://www.geocaching.com/default.aspx";
     private static final Uri URI_GOOGLE_RECAPTCHA = buildURI(false, "www.google.com", "/recaptcha/api/challenge");
     private static final Uri URI_GC_MAP_DEFAULT = buildURI(false, "www.geocaching.com", "/map/default.aspx");
-    private static final Uri URI_GC_SEEK_NEAREST = buildURI(false, "www.geocaching.com", "/seek/nearest.aspx");
+    private static final String URI_GC_SEEK_NEAREST = "http://www.geocaching.com/seek/nearest.aspx";
     private static final Uri URI_GC_SEEK_LOGBOOK = buildURI(false, "www.geocaching.com", "/seek/geocache.logbook");
     private static final Uri URI_GC_PREFERENCES = buildURI(false, "www.geocaching.com", "/account/ManagePreferences.aspx");
     private static final Uri URI_GCVOTE_GETVOTES = buildURI(false, "gcvote.com", "/getVotes.php");
-    private static final Uri URI_GO4CACHE_GET = buildURI(false, "api.go4cache.com", "/get.php");
+    private static final String URI_GO4CACHE_GET = "http://api.go4cache.com/get.php";
     private static final Uri URI_GC_TRACK_DETAILS = buildURI(false, "www.geocaching.com", "/track/details.aspx");
 
     public final static Map<String, String> cacheTypes = new HashMap<String, String>();
@@ -900,33 +900,29 @@ public class cgBase {
 
             try {
                 // get coordinates for parsed caches
-                final StringBuilder params = new StringBuilder();
-                params.append("__EVENTTARGET=&__EVENTARGUMENT=");
+                final Parameters params = new Parameters();
+                params.put("__EVENTTARGET", "");
+                params.put("__EVENTARGUMENT", "");
                 if (ArrayUtils.isNotEmpty(caches.viewstates)) {
-                    params.append("&__VIEWSTATE=");
-                    params.append(urlencode_rfc3986(caches.viewstates[0]));
+                    params.put("__VIEWSTATE", caches.viewstates[0]);
                     if (caches.viewstates.length > 1) {
                         for (int i = 1; i < caches.viewstates.length; i++) {
-                            params.append("&__VIEWSTATE" + i + "=");
-                            params.append(urlencode_rfc3986(caches.viewstates[i]));
+                            params.put("__VIEWSTATE" + i, caches.viewstates[i]);
                         }
-                        params.append("&__VIEWSTATEFIELDCOUNT=" + caches.viewstates.length);
+                        params.put("__VIEWSTATEFIELDCOUNT", "" + caches.viewstates.length);
                     }
                 }
                 for (String cid : cids) {
-                    params.append("&CID=");
-                    params.append(urlencode_rfc3986(cid));
+                    params.put("CID", cid);
                 }
 
                 if (recaptchaChallenge != null && StringUtils.isNotBlank(recaptchaText)) {
-                    params.append("&recaptcha_challenge_field=");
-                    params.append(urlencode_rfc3986(recaptchaChallenge));
-                    params.append("&recaptcha_response_field=");
-                    params.append(urlencode_rfc3986(recaptchaText));
+                    params.put("recaptcha_challenge_field", recaptchaChallenge);
+                    params.put("recaptcha_response_field", recaptchaText);
                 }
-                params.append("&ctl00%24ContentBody%24uxDownloadLoc=Download+Waypoints");
+                params.put("ctl00$ContentBody$uxDownloadLoc", "Download Waypoints");
 
-                final String coordinates = getResponseData(request(URI_GC_SEEK_NEAREST, "POST", params.toString(), true));
+                final String coordinates = getResponseData(postRequest(URI_GC_SEEK_NEAREST, params));
 
                 if (StringUtils.isNotBlank(coordinates)) {
                     if (coordinates.contains("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
@@ -2905,7 +2901,7 @@ public class cgBase {
             return users;
         }
 
-        final Map<String, String> params = new HashMap<String, String>();
+        final Parameters params = new Parameters();
 
         params.put("u", username);
         params.put("ltm", String.format((Locale) null, "%.6f", latMin));
@@ -2913,7 +2909,7 @@ public class cgBase {
         params.put("lnm", String.format((Locale) null, "%.6f", lonMin));
         params.put("lnx", String.format((Locale) null, "%.6f", lonMax));
 
-        final String data = getResponseData(request(URI_GO4CACHE_GET, "POST", params, false, false, false));
+        final String data = getResponseData(postRequest(URI_GO4CACHE_GET, params));
 
         if (StringUtils.isBlank(data)) {
             Log.e(cgSettings.tag, "cgeoBase.getGeocachersInViewport: No data from server");
@@ -3260,9 +3256,8 @@ public class cgBase {
      * @return -1: error occured
      */
     public int addToWatchlist(cgCache cache) {
-        final Uri uri = buildURI(false, "www.geocaching.com", "/my/watchlist.aspx", "w=" + cache.cacheId);
-        String page = requestLogged(uri,
-                "POST", null, false, false, false);
+        final String uri = "http://www.geocaching.com/my/watchlist.aspx?w=" + cache.cacheId;
+        String page = postRequestLogged(uri);
 
         if (StringUtils.isBlank(page)) {
             Log.e(cgSettings.tag, "cgBase.addToWatchlist: No data from server");
@@ -3287,7 +3282,7 @@ public class cgBase {
      * @return -1: error occured
      */
     public int removeFromWatchlist(cgCache cache) {
-        final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/my/watchlist.aspx").encodedQuery("ds=1&action=rem&id=" + cache.cacheId).build().toString();
+        final String uri = "http://www.geocaching.com/my/watchlist.aspx?ds=1&action=rem&id=" + cache.cacheId;
         String page = postRequestLogged(uri);
 
         if (StringUtils.isBlank(page)) {
