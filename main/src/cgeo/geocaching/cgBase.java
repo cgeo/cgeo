@@ -3505,7 +3505,7 @@ public class cgBase {
             return null;
         }
         try {
-            return EntityUtils.toString(response.getEntity(), "utf-8");
+            return replaceWhitespace(EntityUtils.toString(response.getEntity(), HTTP.UTF_8));
         } catch (Exception e) {
             Log.e(cgSettings.tag, "getResponseData", e);
             return null;
@@ -3621,8 +3621,8 @@ public class cgBase {
      * @param buffer
      *            The data
      */
-    public static String replaceWhitespace(final StringBuffer buffer) {
-        return StringUtils.join(StringUtils.split(buffer.toString(), " \n\r\t"), " ");
+    public static String replaceWhitespace(final String data) {
+        return StringUtils.join(StringUtils.split(data, " \n\r\t"), ' ');
     }
 
     public HttpResponse requestJSONgc(final String uri, String params) {
