@@ -2838,18 +2838,7 @@ public class cgBase {
         final String params = "{\"dto\":{\"data\":{\"c\":1,\"m\":\"\",\"d\":\"" + latMax + "|" + latMin + "|" + lonMax + "|" + lonMin + "\"},\"ut\":\"" + usertoken + "\"}}";
 
         final String uri = "http://www.geocaching.com/map/default.aspx/MapAction";
-        final HttpPost request = new HttpPost("http://www.geocaching.com/map/default.aspx/MapAction");
-        try {
-            request.setEntity(new StringEntity(params, HTTP.UTF_8));
-        } catch (UnsupportedEncodingException e) {
-            Log.e(cgSettings.tag, "cgeoBase.searchByViewport", e);
-        }
-
-        request.addHeader("Content-Type", "application/json; charset=UTF-8");
-        request.addHeader("X-Requested-With", "XMLHttpRequest");
-        request.addHeader("Accept", "application/json, text/javascript, */*; q=0.01");
-        request.addHeader("Referer", uri);
-        page = getResponseData(request(request));
+        page = requestJSONgc(uri, params);
 
         if (StringUtils.isBlank(page)) {
             Log.e(cgSettings.tag, "cgeoBase.searchByViewport: No data from server");
@@ -2871,6 +2860,23 @@ public class cgBase {
         app.addSearch(search, cacheList, true, reason);
 
         return search.getCurrentId();
+    }
+
+    private String requestJSONgc(final String uri, final String params) {
+        String page;
+        final HttpPost request = new HttpPost("http://www.geocaching.com/map/default.aspx/MapAction");
+        try {
+            request.setEntity(new StringEntity(params, HTTP.UTF_8));
+        } catch (UnsupportedEncodingException e) {
+            Log.e(cgSettings.tag, "cgeoBase.searchByViewport", e);
+        }
+
+        request.addHeader("Content-Type", "application/json; charset=UTF-8");
+        request.addHeader("X-Requested-With", "XMLHttpRequest");
+        request.addHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+        request.addHeader("Referer", uri);
+        page = getResponseData(request(request));
+        return page;
     }
 
     public List<cgUser> getGeocachersInViewport(String username, Double latMin, Double latMax, Double lonMin, Double lonMax) {
