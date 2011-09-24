@@ -1,6 +1,5 @@
 package cgeo.geocaching.test;
 
-import cgeo.geocaching.Constants;
 import cgeo.geocaching.test.mock.GC1ZXX2;
 import cgeo.geocaching.test.mock.GC2CJPF;
 import cgeo.geocaching.test.mock.MockedCache;
@@ -8,7 +7,6 @@ import cgeo.geocaching.utils.BaseUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import junit.framework.TestCase;
@@ -28,77 +26,156 @@ public class RegExPerformanceTest extends TestCase {
     // "a(.*)a", it's much better to use "a([^a]*)a".
     // The rewritten expression "<img((?!src=).)*src=(\S*)/>" will handle a large, non-matching string almost a hundred times faster then the previous one!
 
-    private final static Pattern PATTERN_ACTUAL = Pattern.compile("<div id=\"div_hint\"[^>]*>(.*?)</div>", Pattern.CASE_INSENSITIVE);
+    /** Search until the start of the next tag. The tag can follow immediately */
+    public static final String NEXT_START_TAG = "[^<]*";
+    /** Search until the end of the actual tag. The closing tag can follow immediately */
+    public static final String NEXT_END_TAG = "[^>]*";
 
-    private static final Pattern PATTERN_IMPROVED = Pattern.compile(
-            "Additional Hints" + Constants.TAG_STRONG_END +
-                    "[^\\(]*\\(<a" + Constants.NEXT_END_TAG2 + ">Encrypt</a>\\)" + Constants.TAG_P_END +
-                    Constants.NEXT_START_TAG + "<div id=\"div_hint\"" + Constants.NEXT_END_TAG + ">(.*?)" + Constants.TAG_DIV_END + Constants.NEXT_START_TAG + "<div id='dk'");
+    /** Search until the start of the next tag. The tag must not follow immediately */
+    public static final String NEXT_START_TAG2 = "[^<]+";
+    /** Search until the end of the actual tag. The closing tag must not follow immediately */
+    public static final String NEXT_END_TAG2 = "[^>]+";
 
+    /** P tag */
+    public static final String TAG_P_START = "<p>";
+    /** Closing P tag **/
+    public static final String TAG_P_END = "</p>";
+    /** Search until the next &lt;p&gt; */
+    public static final String TAG_P_START_NEXT = NEXT_START_TAG + TAG_P_START;
+    /** Search until the next &lt;/p&gt; */
+    public static final String TAG_P_END_NEXT = NEXT_START_TAG + TAG_P_END;
 
-    private String parseHint(String data, Pattern p, int group) {
-        String result = "";
-        final Matcher matcherHint = p.matcher(data);
-        if (matcherHint.find() && matcherHint.groupCount() >= group && matcherHint.group(group) != null) {
-            // replace linebreak and paragraph tags
-            String hint = Pattern.compile("<(br|p)" + Constants.NEXT_END_TAG + ">").matcher(matcherHint.group(group)).replaceAll("\n");
-            if (hint != null) {
-                result = hint.replaceAll(Pattern.quote(Constants.TAG_P_END), "").trim();
-            }
-        }
-        return result;
-    }
+    /** strong tag */
+    public static final String TAG_STRONG_START = "<strong>";
+    /** Closing strong tag */
+    public static final String TAG_STRONG_END = "</strong>";
+    /** Search until the next &lt;strong&gt; */
+    public static final String TAG_STRONG_START_NEXT = NEXT_START_TAG + TAG_STRONG_START;
+    /** Search until the next &lt;/strong&gt; */
+    public static final String TAG_STRONG_END_NEXT = NEXT_START_TAG + TAG_STRONG_END;
 
-    private String parseDescription(String data, Pattern p, int group) {
-        String result = null;
-        final Matcher matcher = p.matcher(data);
-        if (matcher.find() && matcher.groupCount() >= group) {
-            result = BaseUtils.getMatch(matcher.group(group));
-        }
-        return result;
-    }
+    /** div tag */
+    public static final String TAG_DIV_START = "<div>";
+    /** closing div tag */
+    public static final String TAG_DIV_END = "</div>";
+    /** Search until the next &lt;div&gt; */
+    public static final String TAG_DIV_START_NEXT = NEXT_START_TAG + TAG_DIV_START;
+    /** Search until the next &lt;/div&gt; */
+    public static final String TAG_DIV_END_NEXT = NEXT_START_TAG + TAG_DIV_END;
+
+    public final static Pattern PATTERN_DESCRIPTION_OLD = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>" + "(.*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>", Pattern.CASE_INSENSITIVE);
+    public final static Pattern PATTERN_DESCRIPTION_NEW = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\">(.*?)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>");
+
+    public final static Pattern PATTERN_HINT_OLD = Pattern.compile("<div id=\"div_hint\"[^>]*>(.*?)</div>", Pattern.CASE_INSENSITIVE);
+    public final static Pattern PATTERN_HINT_NEW = Pattern.compile("<div id=\"div_hint\"[^>]*>(.*?)</div>");
+
+    public final static Pattern PATTERN_SHORTDESC_OLD = Pattern.compile("<div class=\"UserSuppliedContent\">[^<]*<span id=\"ctl00_ContentBody_ShortDescription\"[^>]*>((?:(?!</span>[^\\w^<]*</div>).)*)</span>[^\\w^<]*</div>", Pattern.CASE_INSENSITIVE);
+    public final static Pattern PATTERN_SHORTDESC_NEW = Pattern.compile("<span id=\"ctl00_ContentBody_ShortDescription\">(.*?)</span>[^\\w^<]*</div>");
+
+    private final static Pattern PATTERN_GEOCODE_OLD = Pattern.compile("<meta name=\"og:url\" content=\"[^\"]+/(GC[0-9A-Z]+)\"[^>]*>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+    private final static Pattern PATTERN_GEOCODE_NEW = Pattern.compile("<meta name=\"og:url\" content=\"[^\"]+/(GC[0-9A-Z]+)\"");
+
+    private final static Pattern PATTERN_CACHEID_OLD = Pattern.compile("/seek/log\\.aspx\\?ID=(\\d+)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+    private final static Pattern PATTERN_CACHEID_NEW = Pattern.compile("/seek/log\\.aspx\\?ID=(\\d+)");
+
+    private final static Pattern PATTERN_GUID_OLD = Pattern.compile(Pattern.quote("&wid=") + "([0-9a-z\\-]+)" + Pattern.quote("&"), Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+    private final static Pattern PATTERN_GUID_NEW = Pattern.compile(Pattern.quote("&wid=") + "([0-9a-z\\-]+)" + Pattern.quote("&"));
+
+    private final static Pattern PATTERN_SIZE_OLD = Pattern.compile("<div class=\"CacheSize[^\"]*\">[^<]*<p[^>]*>[^S]*Size[^:]*:[^<]*<span[^>]*>[^<]*<img src=\"[^\"]*/icons/container/[a-z_]+\\.gif\" alt=\"Size: ([^\"]+)\"[^>]*>[^<]*<small>[^<]*</small>[^<]*</span>[^<]*</p>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+    private final static Pattern PATTERN_SIZE_NEW = Pattern.compile("<div class=\"CacheSize[^\"]*\">[^<]*<p[^>]*>[^S]*Size[^:]*:[^<]*<span[^>]*>[^<]*<img src=\"[^\"]*/icons/container/[a-z_]+\\.gif\" alt=\"Size: ([^\"]+)\"[^>]*>[^<]*<small>[^<]*</small>[^<]*</span>[^<]*</p>");
+
+    private final static Pattern PATTERN_LATLON_OLD = Pattern.compile("<span id=\"ctl00_ContentBody_LatLon\"[^>]*>([^<]*)<\\/span>", Pattern.CASE_INSENSITIVE);
+    private final static Pattern PATTERN_LATLON_NEW = Pattern.compile("<span id=\"ctl00_ContentBody_LatLon\"[^>]*>(.*?)</span>");
+
+    private final static Pattern PATTERN_LOCATION_OLD = Pattern.compile("<span id=\"ctl00_ContentBody_Location\"[^>]*>In ([^<]*)", Pattern.CASE_INSENSITIVE);
+    private final static Pattern PATTERN_LOCATION_NEW = Pattern.compile("<span id=\"ctl00_ContentBody_Location\">In (.*?)</span>");
+
+    private final static Pattern PATTERN_PERSONALNOTE_OLD = Pattern.compile("<p id=\"cache_note\"[^>]*>([^<]*)</p>", Pattern.CASE_INSENSITIVE);
+    private final static Pattern PATTERN_PERSONALNOTE_NEW = Pattern.compile("<p id=\"cache_note\"[^>]*>(.*?)</p>");
 
 
     public void testRegEx() {
+        List<String> output = doTheTests();
+
+        for (String s : output) {
+            System.out.println(s);
+        }
+    }
+
+    public static List<String> doTheTests() {
+
+        int iterations = 1; // set the value to 1000 for real performance measurements
+
+        List<String> output = new ArrayList<String>();
+
+        output.add("Testing pattern for hint...");
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_HINT_OLD, PATTERN_HINT_NEW));
+        output.add("Testing pattern for description...");
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_DESCRIPTION_OLD, PATTERN_DESCRIPTION_NEW));
+        output.add("Testing pattern for short description...");
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_SHORTDESC_OLD, PATTERN_SHORTDESC_NEW));
+        output.add("Testing pattern for geocode...");
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_GEOCODE_OLD, PATTERN_GEOCODE_NEW));
+        output.add("Testing pattern for cache id...");
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_CACHEID_OLD, PATTERN_CACHEID_NEW));
+        output.add("Testing pattern for cache guid...");
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_GUID_OLD, PATTERN_GUID_NEW));
+        output.add("Testing pattern for size...");
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_SIZE_OLD, PATTERN_SIZE_NEW));
+        output.add("Testing pattern for latlon...");
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_LATLON_OLD, PATTERN_LATLON_NEW));
+        output.add("Testing pattern for location...");
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_LOCATION_OLD, PATTERN_LOCATION_NEW));
+        output.add("Testing pattern for personal note...");
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_PERSONALNOTE_OLD, PATTERN_PERSONALNOTE_NEW));
+
+        return output;
+    }
+
+    private static List<String> measure(int iterations, Pattern p1, Pattern p2) {
+
+        List<String> output = new ArrayList<String>();
 
         List<MockedCache> cachesForParsing = new ArrayList<MockedCache>();
         cachesForParsing.add(new GC2CJPF());
         cachesForParsing.add(new GC1ZXX2());
 
-        int ITERATIONS = 250; // 250 for an fast evaluation, 10000 else
-
         for (MockedCache cache : cachesForParsing) {
             String page = cache.getData();
-            String resultOld = parseHint(page, PATTERN_ACTUAL, 1);
-            String resultNew = parseHint(page, PATTERN_IMPROVED, 1);
-            assertEquals(resultOld, resultNew);
+            String result1 = BaseUtils.getMatch(page, p1, 1, "");
+            String result2 = BaseUtils.getMatch(page, p2, 1, "");
+            assertEquals(result1, result2);
 
-            long diffOld, diffNew;
+            long diff1, diff2;
 
-            System.out.println("Parsing " + cache.getGeocode() + " " + cache.getName());
+            output.add("Parsing " + cache.getGeocode() + " " + cache.getName());
             {
-                System.out.println(("Result actual pattern:\t<<" + resultOld + ">>"));
-
-                long start = System.currentTimeMillis();
-                for (int j = 0; j < ITERATIONS; j++) {
-                    parseHint(page, PATTERN_ACTUAL, 1);
-                }
-                diffOld = (System.currentTimeMillis() - start);
-                System.out.println("Time actual pattern:\t" + diffOld + " ms");
+                output.add("Result pattern #1:\t<<" + result1 + ">>");
+                diff1 = parse(page, p1, iterations);
+                output.add("Time pattern #1:\t" + diff1 + " ms");
             }
 
             {
-                System.out.println(("Result new pattern:\t<<" + resultNew + ">>"));
-                long start = System.currentTimeMillis();
-                for (int j = 0; j < ITERATIONS; j++) {
-                    parseHint(page, PATTERN_IMPROVED, 1);
-                }
-                diffNew = (System.currentTimeMillis() - start);
-                System.out.println("Time new pattern:\t" + diffNew + " ms");
+                output.add("Result pattern #2:\t<<" + result2 + ">>");
+                diff2 = parse(page, p2, iterations);
+                output.add("Time pattern #2:\t" + diff2 + " ms");
             }
-            Float reduction = new Float((float) diffNew * 100 / (float) diffOld);
-            System.out.println("Reduction to x percent:\t" + reduction.toString() + "\n");
+            Float reduction = new Float((float) diff2 * 100 / (float) diff1);
+            output.add("Reduction to x percent:\t" + reduction.toString() + "\n");
         }
 
+        return output;
+
     }
+
+    private static long parse(String page, Pattern pattern, int iterations)
+    {
+        long start = System.currentTimeMillis();
+        for (int j = 0; j < iterations; j++) {
+            BaseUtils.getMatch(page, pattern, 1, "");
+        }
+        return (System.currentTimeMillis() - start);
+
+    }
+
 }

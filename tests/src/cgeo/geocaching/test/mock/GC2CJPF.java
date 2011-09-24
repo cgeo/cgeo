@@ -90,4 +90,24 @@ public class GC2CJPF extends MockedCache {
         return "Kinderwald KiC";
     }
 
+    @Override
+    public String getCacheId() {
+        return "1811409";
+    }
+
+    @Override
+    public String getGuid() {
+        return "73246a5a-ebb9-4d4f-8db9-a951036f5376";
+    }
+
+    @Override
+    public String getLocation() {
+        return "Niedersachsen, Germany";
+    }
+
+    @Override
+    public String getPersonalNote() {
+        return "";
+    }
+
 }

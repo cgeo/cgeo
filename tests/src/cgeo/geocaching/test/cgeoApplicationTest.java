@@ -106,6 +106,10 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
             Assert.assertTrue(cacheParsed.getDescription().startsWith(cache.getDescription()));
             Assert.assertEquals(cache.getShortDescription(), cacheParsed.getShortDescription());
             Assert.assertEquals(cache.getName(), cacheParsed.getName());
+            Assert.assertEquals(cache.getCacheId(), cacheParsed.getCacheId());
+            Assert.assertEquals(cache.getGuid(), cacheParsed.getGuid());
+            Assert.assertEquals(cache.getLocation(), cacheParsed.getLocation());
+            Assert.assertEquals(cache.getPersonalNote(), cacheParsed.getPersonalNote());
         }
     }
 
