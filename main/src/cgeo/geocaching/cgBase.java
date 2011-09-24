@@ -18,6 +18,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
@@ -48,6 +49,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -1038,7 +1040,7 @@ public class cgBase {
                 caches.totalCnt = caches.cacheList.size();
             }
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgBase.parseMapJSON: " + e.toString());
+            Log.e(cgSettings.tag, "cgBase.parseMapJSON", e);
         }
 
         return caches;
@@ -2833,20 +2835,28 @@ public class cgBase {
             return null;
         }
 
-        final String host = "www.geocaching.com";
-        final String path = "/map/default.aspx/MapAction";
+        final String params = "{\"dto\":{\"data\":{\"c\":1,\"m\":\"\",\"d\":\"" + latMax + "|" + latMin + "|" + lonMax + "|" + lonMin + "\"},\"ut\":\"" + usertoken + "\"}}";
 
-        String params = "{\"dto\":{\"data\":{\"c\":1,\"m\":\"\",\"d\":\"" + latMax + "|" + latMin + "|" + lonMax + "|" + lonMin + "\"},\"ut\":\"" + usertoken + "\"}}";
+        final String uri = "http://www.geocaching.com/map/default.aspx/MapAction";
+        final HttpPost request = new HttpPost("http://www.geocaching.com/map/default.aspx/MapAction");
+        try {
+            request.setEntity(new StringEntity(params, HTTP.UTF_8));
+        } catch (UnsupportedEncodingException e) {
+            Log.e(cgSettings.tag, "cgeoBase.searchByViewport", e);
+        }
 
-        final String uri = "http://" + host + path;
-        page = getResponseData(requestJSONgc(uri, params));
+        request.addHeader("Content-Type", "application/json; charset=UTF-8");
+        request.addHeader("X-Requested-With", "XMLHttpRequest");
+        request.addHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+        request.addHeader("Referer", uri);
+        page = getResponseData(request(request));
 
         if (StringUtils.isBlank(page)) {
             Log.e(cgSettings.tag, "cgeoBase.searchByViewport: No data from server");
             return null;
         }
 
-        final cgCacheWrap caches = parseMapJSON(Uri.parse(uri).buildUpon().query(params).build().toString(), page);
+        final cgCacheWrap caches = parseMapJSON(Uri.parse(uri).buildUpon().encodedQuery(params).build().toString(), page);
         if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
             Log.e(cgSettings.tag, "cgeoBase.searchByViewport: No cache parsed");
         }
@@ -3592,18 +3602,24 @@ public class cgBase {
             request.setHeader("Content-Type", "application/x-www-form-urlencoded");
         }
 
+        return request(request);
+    }
+
+    private HttpResponse request(final HttpRequestBase request) {
+        final DefaultHttpClient client = getHttpClient();
+
         if (settings.asBrowser == 1) {
+            request.setHeader("Accept-Charset", "utf-8, iso-8859-1, utf-16, *;q=0.7");
+            request.setHeader("Accept-Language", "en-US");
             request.setHeader("User-Agent", idBrowser);
         }
-
-        final DefaultHttpClient client = getHttpClient();
 
         for (int i = 0; i < 5; i++) {
             if (i > 0) {
                 Log.w(cgSettings.tag, "Failed to download data, retrying. Attempt #" + (i + 1));
             }
 
-            Log.d(cgSettings.tag, "request: GET " + request.getURI());
+            Log.d(cgSettings.tag, "request: " + request.getMethod() + " " + request.getURI());
 
             try {
                 return client.execute(request);
@@ -3623,10 +3639,6 @@ public class cgBase {
      */
     public static String replaceWhitespace(final String data) {
         return StringUtils.join(StringUtils.split(data, " \n\r\t"), ' ');
-    }
-
-    public HttpResponse requestJSONgc(final String uri, String params) {
-        return request(uri, params, false);
     }
 
     public static JSONObject requestJSON(final String uri) {
