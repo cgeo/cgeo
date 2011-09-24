@@ -950,9 +950,9 @@
 
   <!-- changelog -->
   <string name="changelog">\n
-    <b>next version</b>\n
+    <b>24.09.2011</b>\n
     · new: import of LOC files\n
-    · new: search for geo code supports OpenCaching.DE/.PL/.US\n
+    · new: search for geo code supports OpenCaching.ORG.UK/.PL/.US\n
     · new: restore settings after reinstallation (Android 2.3+)\n
     · new: save the log locally when leaving the log activity\n
     · new: insert signature after the cursor when logging\n
