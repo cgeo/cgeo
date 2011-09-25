@@ -11,6 +11,7 @@ import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import org.apache.commons.lang3.StringUtils;
@@ -289,7 +290,7 @@ public abstract class GPXParser extends FileParser {
                     if (cacheForWaypoint != null) {
                         final cgWaypoint waypoint = new cgWaypoint();
                         waypoint.id = -1;
-                        waypoint.type = sym;
+                        waypoint.type = convertWaypointSym2Type(sym).id;
                         waypoint.geocode = cacheGeocodeForWaypoint;
                         waypoint.setPrefix(cache.name.substring(0, 2));
                         waypoint.lookup = "---";
@@ -314,7 +315,7 @@ public abstract class GPXParser extends FileParser {
 
             /**
              * Retrieves cache data from result or from DB.
-             * 
+             *
              * @param geocode
              * @return cache or <code>null</code> if cache doesn't exist
              */
@@ -797,6 +798,22 @@ public abstract class GPXParser extends FileParser {
                 cache.type = "mystery"; // default for not recognized types
             }
         }
+    }
+
+    // TODO: public so that it can be unit tested, could be package private when tests in same package as productive code
+    public static WaypointType convertWaypointSym2Type(final String sym) {
+        if ("parking area".equals(sym))
+            return WaypointType.PKG;
+        else if ("stages of a multicache".equals(sym))
+            return WaypointType.STAGE;
+        else if ("question to answer".equals(sym))
+            return WaypointType.PUZZLE;
+        else if ("trailhead".equals(sym))
+            return WaypointType.TRAILHEAD;
+        else if ("final location".equals(sym))
+            return WaypointType.FLAG;
+        else
+            return WaypointType.WAYPOINT;
     }
 
     private void findGeoCode(final String input) {

@@ -6,7 +6,9 @@ import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.GPX10Parser;
+import cgeo.geocaching.files.GPXParser;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import android.content.res.Resources;
@@ -112,6 +114,17 @@ public class GPXParserTest extends InstrumentationTestCase {
         assertEquals(0, caches.size());
     }
 
+    public void testConvertWaypointSym2Type() {
+        assertEquals(WaypointType.WAYPOINT, GPXParser.convertWaypointSym2Type("unknown sym"));
+
+        assertEquals(WaypointType.PKG, GPXParser.convertWaypointSym2Type("parking area"));
+        assertEquals(WaypointType.STAGE, GPXParser.convertWaypointSym2Type("stages of a multicache"));
+        assertEquals(WaypointType.PUZZLE, GPXParser.convertWaypointSym2Type("question to answer"));
+        assertEquals(WaypointType.TRAILHEAD, GPXParser.convertWaypointSym2Type("trailhead"));
+        assertEquals(WaypointType.FLAG, GPXParser.convertWaypointSym2Type("final location"));
+        assertEquals(WaypointType.WAYPOINT, GPXParser.convertWaypointSym2Type("reference point"));
+    }
+
     private void assertGc31j2h(final cgCache cache) throws ParseException {
         assertEquals("GC31J2H", cache.getGeocode());
         assertEquals("Hockenheimer City-Brunnen", cache.getName());
@@ -153,7 +166,7 @@ public class GPXParserTest extends InstrumentationTestCase {
         assertEquals("---", wp.lookup);
         assertEquals("Parkplatz", wp.name);
         assertEquals("Kostenfreies Parken (je nach Parkreihe Parkscheibe erforderlich)", wp.note);
-        assertEquals("parking area", wp.type);
+        assertEquals(WaypointType.PKG.id, wp.type);
         assertEquals(49.317517, wp.coords.getLatitude(), 0.000001);
         assertEquals(8.545083, wp.coords.getLongitude(), 0.000001);
         assertEquals("N 49° 19.051", wp.latitudeString);
@@ -165,7 +178,7 @@ public class GPXParserTest extends InstrumentationTestCase {
         assertEquals("---", wp.lookup);
         assertEquals("Station 1", wp.name);
         assertEquals("Ein zweiter Wegpunkt, der nicht wirklich existiert sondern nur zum Testen gedacht ist.", wp.note);
-        assertEquals("stages of a multicache", wp.type);
+        assertEquals(WaypointType.STAGE.id, wp.type);
         assertEquals(49.317500, wp.coords.getLatitude(), 0.000001);
         assertEquals(8.545100, wp.coords.getLongitude(), 0.000001);
     }
