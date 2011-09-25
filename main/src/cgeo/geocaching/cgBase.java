@@ -139,6 +139,8 @@ public class cgBase {
     private final static Pattern PATTERN_TRACKABLE_Distance = Pattern.compile("<h4[^>]*\\W*Tracking History \\(([0-9.,]+(km|mi))[^\\)]*\\)", Pattern.CASE_INSENSITIVE);
     private final static Pattern PATTERN_TRACKABLE_Log = Pattern.compile("<tr class=\"Data.+?src=\"/images/icons/([^.]+)\\.gif[^>]+>&nbsp;([^<]+)</td>.+?guid.+?>([^<]+)</a>.+?(?:guid=([^\"]+)\">([^<]+)</a>.+?)?<td colspan=\"4\">(.+?)(?:<ul.+?ul>)?\\s*</td>\\s*</tr>", Pattern.CASE_INSENSITIVE);
 
+    private static final String passMatch = "(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+";
+
     public final static Map<String, String> cacheTypes = new HashMap<String, String>();
     public final static Map<String, String> cacheIDs = new HashMap<String, String>();
     static {
@@ -391,6 +393,10 @@ public class cgBase {
                 idBrowser = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-US) AppleWebKit/532.9 (KHTML, like Gecko) Chrome/5.0.307.11 Safari/532.9";
             }
         }
+    }
+
+    public static String hidePassword(final String message) {
+        return message.replaceAll(passMatch, "password=***");
     }
 
     /**
@@ -3621,7 +3627,7 @@ public class cgBase {
                 Log.w(cgSettings.tag, "Failed to download data, retrying. Attempt #" + (i + 1));
             }
 
-            Log.d(cgSettings.tag, "request: " + request.getMethod() + " " + request.getURI());
+            Log.d(cgSettings.tag, "request: " + request.getMethod() + " " + hidePassword(request.getURI().toString()));
 
             try {
                 return client.execute(request);
