@@ -35,9 +35,11 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -223,9 +225,10 @@ public abstract class GPXParser extends FileParser {
         return formatSimple.parse(input);
     }
 
-    public List<cgCache> parse(final InputStream stream, Handler handlerIn) {
+    public Collection<cgCache> parse(final InputStream stream, Handler handlerIn) {
         handler = handlerIn;
-        final List<cgCache> result = new ArrayList<cgCache>();
+        // geocode -> cache
+        final Map<String, cgCache> result = new HashMap<String, cgCache>(500);
 
         final RootElement root = new RootElement(namespace, "gpx");
         final Element waypoint = root.getChild(namespace, "wpt");
@@ -269,7 +272,7 @@ public abstract class GPXParser extends FileParser {
 
                     createNoteFromGSAKUserdata();
 
-                    result.add(cache);
+                    result.put(cache.geocode, cache);
                     showCountMessage(handler, result.size());
                 } else if (StringUtils.isNotBlank(cache.name)
                         && cache.coords != null
@@ -307,7 +310,7 @@ public abstract class GPXParser extends FileParser {
                         cgWaypoint.mergeWayPoints(cacheForWaypoint.waypoints, Collections.singletonList(waypoint));
                         // need to remove from cache because id changes on store
                         cgeoapplication.getInstance().removeCacheFromCache(cacheForWaypoint.geocode);
-                        result.add(cacheForWaypoint);
+                        result.put(cacheGeocodeForWaypoint, cacheForWaypoint);
                         showCountMessage(handler, result.size());
                     }
                 }
@@ -320,11 +323,11 @@ public abstract class GPXParser extends FileParser {
              * @return cache or <code>null</code> if cache doesn't exist
              */
             private cgCache getCacheFromResultOrDb(String geocode) {
-                for (cgCache cache : result) {
-                    if (geocode.equals(cache.geocode))
-                        return cache;
-                }
-                return cgeoapplication.getInstance().getCacheByGeocode(geocode, true, true, true, true, true, true);
+                cgCache cache = result.get(geocode);
+                if (cache != null)
+                    return cache;
+                else
+                    return cgeoapplication.getInstance().getCacheByGeocode(geocode, true, true, true, true, true, true);
             }
         });
 
@@ -745,16 +748,16 @@ public abstract class GPXParser extends FileParser {
             Log.e(cgSettings.tag, "Cannot parse .gpx file as GPX " + version + ": could not parse XML - " + e.toString());
         }
 
-        return parsed ? result : null;
+        return parsed ? result.values() : null;
     }
 
-    private List<cgCache> parse(final File file, final Handler handlerIn) {
+    private Collection<cgCache> parse(final File file, final Handler handlerIn) {
         if (file == null) {
             return null;
         }
 
         FileInputStream fis = null;
-        List<cgCache> result = null;
+        Collection<cgCache> result = null;
         try {
             fis = new FileInputStream(file);
             result = parse(fis, handlerIn);
@@ -866,7 +869,7 @@ public abstract class GPXParser extends FileParser {
     public static UUID parseGPX(File file, int listId, Handler handler) {
         try {
             GPXParser parser = new GPX10Parser(listId);
-            List<cgCache> caches = parser.parse(file, handler);
+            Collection<cgCache> caches = parser.parse(file, handler);
             if (caches == null) {
                 parser = new GPX11Parser(listId);
                 caches = parser.parse(file, handler);

@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class GPXParserTest extends InstrumentationTestCase {
@@ -92,14 +94,14 @@ public class GPXParserTest extends InstrumentationTestCase {
         cgeoapplication.getInstance().addCacheToSearch(new cgSearch(), cache);
 
         caches = readGPX(R.raw.gc31j2h_wpts);
-        assertEquals(2, caches.size());
+        assertEquals(1, caches.size()); // one cache was updated with 2 waypoints
         cache = caches.get(0);
         assertGc31j2h(cache);
         assertGc31j2hWaypoints(cache);
 
         // re-importing waypoints should not lead to double waypoints
         caches = readGPX(R.raw.gc31j2h_wpts);
-        assertEquals(2, caches.size());
+        assertEquals(1, caches.size());
         cache = caches.get(0);
         assertGc31j2h(cache);
         assertGc31j2hWaypoints(cache);
@@ -184,7 +186,7 @@ public class GPXParserTest extends InstrumentationTestCase {
     }
 
     private List<cgCache> readGPX(final int resourceId) throws IOException {
-        List<cgCache> caches = null;
+        Collection<cgCache> caches = null;
         final Resources res = getInstrumentation().getContext().getResources();
         final InputStream instream = res.openRawResource(resourceId);
         try {
@@ -194,7 +196,9 @@ public class GPXParserTest extends InstrumentationTestCase {
             instream.close();
         }
         assertNotNull(caches);
-        return caches;
+        List<cgCache> cacheList = new ArrayList<cgCache>(caches);
+        // TODO: may need to sort by geocode when a test imports more than one cache
+        return cacheList;
     }
 
 }
