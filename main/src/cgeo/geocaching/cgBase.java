@@ -49,6 +49,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -1082,8 +1083,8 @@ public class cgBase {
         cache.name = Html.fromHtml(BaseUtils.getMatch(page, Constants.PATTERN_NAME, 1, cache.name)).toString();
 
         // owner real name
-        // TODO URLDecoder.decode ??
-        cache.ownerReal = BaseUtils.getMatch(page, Constants.PATTERN_OWNERREAL, 1, cache.ownerReal);
+        // URLDecoder.decode() neccessary here ?
+        cache.ownerReal = URLDecoder.decode(BaseUtils.getMatch(page, Constants.PATTERN_OWNERREAL, 1, cache.ownerReal));
 
         final String username = settings.getUsername();
         if (cache.ownerReal != null && username != null && cache.ownerReal.equalsIgnoreCase(username)) {
@@ -4454,7 +4455,7 @@ public class cgBase {
     /**
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 sept. à 12:35".
-     * 
+     *
      * @param context
      *            a Context
      * @param date
