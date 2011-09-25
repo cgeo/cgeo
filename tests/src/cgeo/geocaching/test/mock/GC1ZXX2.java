@@ -87,7 +87,27 @@ public class GC1ZXX2 extends MockedCache {
 
     @Override
     public String getName() {
-        return "Hannopoly: Eislisenstrasse ";
+        return "Hannopoly: Eislisenstrasse";
+    }
+
+    @Override
+    public String getCacheId() {
+        return "1433909";
+    }
+
+    @Override
+    public String getGuid() {
+        return "36d45871-b99d-46d6-95fc-ff86ab564c98";
+    }
+
+    @Override
+    public String getLocation() {
+        return "Niedersachsen, Germany";
+    }
+
+    @Override
+    public String getPersonalNote() {
+        return "";
     }
 
 }
