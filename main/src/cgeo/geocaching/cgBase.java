@@ -3587,11 +3587,7 @@ public class cgBase {
                 request.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
             }
             request.setHeader("X-Requested-With", "XMLHttpRequest");
-            if (settings.asBrowser == 1) {
-                request.setHeader("User-Agent", idBrowser);
-            }
-            Log.d(cgSettings.tag, "postRequest: POST " + uri);
-            return getHttpClient().execute(request);
+            return request(request);
         } catch (Exception e) {
             // Can be UnsupportedEncodingException, ClientProtocolException or IOException
             Log.e(cgSettings.tag, "postRequest", e);
