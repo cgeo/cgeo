@@ -61,6 +61,7 @@ public class cgSettings {
     private static final String KEY_LOG_OFFLINE = "log_offline";
     private static final String KEY_LOAD_DIRECTION_IMG = "loaddirectionimg";
     private static final String KEY_GC_CUSTOM_DATE = "gccustomdate";
+    private static final String KEY_SHOW_WAYPOINTS = "gcshowwaypoints";
 
     private interface PrefRunnable {
         void edit(final Editor edit);
@@ -136,6 +137,7 @@ public class cgSettings {
     public boolean showCaptcha = false;
     public int excludeMine = 0;
     public int excludeDisabled = 0;
+    public boolean showWaypoints = false;
     public int storeOfflineMaps = 0;
     public boolean storelogimages = false;
     public int asBrowser = 1;
@@ -218,6 +220,7 @@ public class cgSettings {
         trackableAutovisit = prefs.getBoolean(KEY_AUTO_VISIT_TRACKABLES, false);
         signatureAutoinsert = prefs.getBoolean(KEY_AUTO_INSERT_SIGNATURE, false);
         coordInput = coordInputFormatEnum.fromInt(prefs.getInt(KEY_COORD_INPUT_FORMAT, 0));
+        showWaypoints = prefs.getBoolean(KEY_SHOW_WAYPOINTS, false);
 
         setLanguage(useEnglish);
     }
@@ -607,4 +610,19 @@ public class cgSettings {
     public String getGcCustomDate() {
         return prefs.getString(KEY_GC_CUSTOM_DATE, null);
     }
+
+    public boolean isShowWaypoints() {
+        return prefs.getBoolean(KEY_SHOW_WAYPOINTS, true);
+    }
+
+    void setShowWaypoints(final boolean showwaypoints) {
+        editSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putBoolean(KEY_SHOW_WAYPOINTS, showwaypoints);
+            }
+        });
+    }
+
 }

@@ -360,6 +360,10 @@ public class cgeoinit extends AbstractActivity {
         }
         disabledButton.setOnClickListener(new cgeoChangeDisabled());
 
+        CheckBox showWaypoints = (CheckBox) findViewById(R.id.showwaypoints);
+        showWaypoints.setChecked(prefs.getBoolean("gcshowwaypoints", false));
+        showWaypoints.setOnClickListener(new cgeoShowWaypoints());
+
         CheckBox autovisitButton = (CheckBox) findViewById(R.id.trackautovisit);
         if (prefs.getBoolean("trackautovisit", false)) {
             autovisitButton.setChecked(true);
@@ -803,6 +807,20 @@ public class cgeoinit extends AbstractActivity {
                 disabledButton.setChecked(true);
             }
 
+            return;
+        }
+    }
+
+    private class cgeoShowWaypoints implements View.OnClickListener {
+
+        public void onClick(View arg0) {
+            CheckBox disabledButton = (CheckBox) findViewById(R.id.showwaypoints);
+            SharedPreferences.Editor edit = prefs.edit();
+            edit.putBoolean("gcshowwaypoints", disabledButton.isChecked());
+            settings.showWaypoints = disabledButton.isChecked();
+            edit.commit();
+
+            disabledButton.setChecked(prefs.getBoolean("gcshowwaypoints", false));
             return;
         }
     }

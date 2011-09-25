@@ -1310,6 +1310,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         items.add(getItem(new cgCoord(cacheOne), true, cacheOne.type, cacheOne.own, cacheOne.found, cacheOne.disabled));
                         // display cache waypoints only when less than 200 Caches shown
                         if (cacheOne != null && cacheOne.waypoints != null && cachesProtected.size() < 200
+                                // Only show waypoints for single view or setting
+                                && (cachesProtected.size() == 1 || settings.showWaypoints)
                                 && !cacheOne.waypoints.isEmpty()) {
                             for (cgWaypoint oneWaypoint : cacheOne.waypoints) {
                                 if (oneWaypoint.coords == null) {
