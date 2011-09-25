@@ -13,6 +13,8 @@
   <string name="helper">Do you want to learn about <b>c:geo</b>?\nCheck our easy to read manual.</string>
   <string name="database_error_title">Problem with database</string>
   <string name="database_error_message">c:geo failed to connect to internal database.\nPlease try to start c:geo a bit later. If this message has been showed for many times, proceed to phone Settings / Applications / c:geo and hit the Clear Data button. Or uninstall and install c:geo again. Sorry for inconvenience.</string>
+  <string name="latitude">Latitude</string>
+  <string name="longitude">Longitude</string>
 
   <!-- actionbar -->
   <string name="action_bar_share_title">Share link to cache</string>
@@ -117,7 +119,7 @@
   <string name="err_none">Ok</string>
   <string name="err_start">Communication not started</string>
   <string name="err_parse">Failed login page parsing</string>
-  <string name="err_server">Failed connection to geocaching.com (server or connection down?)</string>
+  <string name="err_server">Failed connection to Geocaching.com (server or connection down?)</string>
   <string name="err_login">No login information stored</string>
   <string name="err_login_failed">Sorry, c:geo can\'t login.</string>
   <string name="err_login_failed_toast">Sorry, c:geo can\'t login. c:geo works in offline mode. Check your login in settings or enable internet connection.</string>
@@ -137,7 +139,7 @@
   <string name="err_detail_cache_find_next">Sorry, c:geo can\'t find next geocaches.</string>
   <string name="err_detail_cache_forgot">Sorry, c:geo forgot which geocache you want.</string>
   <string name="err_detail_cache_forgot_visit">Sorry, c:geo forgot which cache you visited.</string>
-  <string name="err_detail_cache_language">c:geo can\'t read some cache details. Please check if the geocaching.com website is set to English. Unfortunately, c:geo doesn\'t understand other localisations.</string>
+  <string name="err_detail_cache_language">c:geo can\'t read some cache details. Please check if the Geocaching.com website is set to English. Unfortunately, c:geo doesn\'t understand other localisations.</string>
   <string name="err_detail_no_spoiler">c:geo found no spoiler images for this cache.</string>
   <string name="err_detail_no_map_static">c:geo found no static maps for this cache.</string>
   <string name="err_detail_not_load_map_static">Sorry, c:geo failed to load static maps.</string>
@@ -179,6 +181,7 @@
   <string name="err_tb_forgot_saw">Sorry, c:geo forgot which trackable you saw.</string>
   <string name="err_tb_find">Sorry, c:geo can\'t find trackable</string>
   <string name="err_tb_find_that">Sorry, c:geo can\'t find that trackable.</string>
+  <string name="err_cache_inventory_load_fail">Sorry, c:geo failed to load cache inventory.</string>
 
   <string name="err_waypoint_cache_unknown">Sorry, c:geo doesn\'t know to which cache you want to add waypoint.</string>
   <string name="err_waypoint_unknown">Sorry, c:geo forgot what waypoint you want to display.</string>
@@ -198,7 +201,7 @@
   <string name="err_log_load_data_again">Sorry, c:geo can\'t load data required to log visit. Trying again.</string>
   <string name="err_log_load_data_still">c:geo is still loading data required to post log. Please wait a little while longer.</string>
   <string name="err_log_failed_server">Sorry, c:geo failed to post log because server is not responding.</string>
-  <string name="err_log_post_failed">It seems that your log was not posted. Please check it on geocaching.com.</string>
+  <string name="err_log_post_failed">It seems that your log was not posted. Please check it on Geocaching.com.</string>
   <string name="err_log_post_failed_because">Sorry, c:geo failed to post log because of </string>
 
   <string name="err_search_address_no_match">Sorry, c:geo found no matching place.</string>
@@ -386,7 +389,7 @@
   <string name="init_passvote">Password</string>
   <string name="init_login">Check login &amp; set date format</string>
   <string name="init_login_popup">Login</string>
-  <string name="init_login_popup_working">Logging into geocaching.com…</string>
+  <string name="init_login_popup_working">Logging into Geocaching.com…</string>
   <string name="init_login_popup_ok">Login ok.</string>
   <string name="init_login_popup_failed">Login failed.</string>
   <string name="init_login_popup_failed_reason">Login failed because of </string>
@@ -501,6 +504,7 @@
   <string name="cache_attributes">Attributes</string>
   <string name="cache_attributes_no_icons">(refresh cache to show attribute icons)</string>
   <string name="cache_inventory">Inventory</string>
+  <string name="cache_inventory_loading">loading cache inventory…</string>
   <string name="cache_log_offline">Offline log</string>
   <string name="cache_log_images_loading">Loading log Image …</string>
   <string name="cache_log_images_title">Log image</string>
@@ -893,7 +897,7 @@
   <string name="attribute_food_no">No food nearby</string>
 
   <!-- next things -->
-  <string name="legal_note">To use services of geocaching.com, terms and conditions of <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak disclaimer</a> have to be agreed.</string>
+  <string name="legal_note">To use services of Geocaching.com, terms and conditions of <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak disclaimer</a> have to be agreed.</string>
   <string name="quote">To make geocaching easier, to make users lazier.</string>
   <string name="powered_by">carnero</string>
   <string name="author">Author: <a href="http://carnero.cc/">carnero</a></string>
@@ -931,6 +935,7 @@
     · mucek4 (code, open source project leader)\n
     · ncorreia (code, localization PT)\n
     · Pascal (localization NL)\n
+    · Pavol Babinčák (code, loc. SK)\n
     · Peter (localization HU)\n
     · Rainer S. (code)\n
     · Ray (code, loc. JA)\n

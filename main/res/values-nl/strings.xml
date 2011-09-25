@@ -117,7 +117,7 @@
   <string name="err_none">Ok</string>
   <string name="err_start">Communicatie niet gestart</string>
   <string name="err_parse">Login pagina verwerken mislukt</string>
-  <string name="err_server">Verbinding met geocaching.com mislukt (geen verbinding of server niet bereikbaar)</string>
+  <string name="err_server">Verbinding met Geocaching.com mislukt (geen verbinding of server niet bereikbaar)</string>
   <string name="err_login">Geen login informatie opgeslagen</string>
   <string name="err_login_failed">Sorry, c:geo kan niet inloggen.</string>
   <string name="err_login_failed_toast">Sorry, c:geo kan niet inloggen. c:geo werkt in offline modus. Controleer je gebruikersnaam en wachtwoord en/of zet de internetverbinding aan.</string>
@@ -137,7 +137,7 @@
   <string name="err_detail_cache_find_next">Sorry, c:geo kan de volgende cache niet vinden.</string>
   <string name="err_detail_cache_forgot">Sorry, c:geo is kwijt welke geocache je wilde openen.</string>
   <string name="err_detail_cache_forgot_visit">Sorry, c:geo is vergeten welke cache je bezocht.</string>
-  <string name="err_detail_cache_language">c:geo Kan sommige cache details niet lezen. Controleer of de geocaching.com website is ingesteld op English. Helaas ondersteund c:geo geen localisaties.</string>
+  <string name="err_detail_cache_language">c:geo Kan sommige cache details niet lezen. Controleer of de Geocaching.com website is ingesteld op English. Helaas ondersteund c:geo geen localisaties.</string>
   <string name="err_detail_no_spoiler">c:geo Heeft geen spoiler images gevonden voor deze cache.</string>
   <string name="err_detail_no_map_static">c:geo Heeft geen statische kaarten gevonden voor deze cache.</string>
   <string name="err_detail_not_load_map_static">Sorry, c:geo kon de statische kaart niet laden.</string>
@@ -891,7 +891,7 @@
   <string name="attribute_food_no">Geen eetgelegenheid in de buurt</string>
 
   <!-- next things -->
-  <string name="legal_note">Voor het gebruik van de diensten van geocaching.com, dient akkoord te worden gegaan met de <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak voorwaarden</a>.</string>
+  <string name="legal_note">Voor het gebruik van de diensten van Geocaching.com, dient akkoord te worden gegaan met de <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak voorwaarden</a>.</string>
   <string name="quote">Om geocahing makkelijker te maken en gebruikers luier te maken.</string>
   <string name="powered_by">carnero</string>
   <string name="author">auteur: <a href="http://carnero.cc/">carnero</a></string>

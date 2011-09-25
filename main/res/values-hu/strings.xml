@@ -69,7 +69,7 @@
   <string name="err_none">Ok</string>
   <string name="err_start">A kommunikáció nem indult el</string>
   <string name="err_parse">Belépő oldal értelmezési hiba</string>
-  <string name="err_server">geocaching.com csatlakozási hiba (a szerver vagy a kapcsolat leállt?)</string>
+  <string name="err_server">Geocaching.com csatlakozási hiba (a szerver vagy a kapcsolat leállt?)</string>
   <string name="err_login">Nincs bejelentkezési adat tárolva</string>
   <string name="err_unknown">Ismeretlen hiba</string>
   <string name="err_comm">Ismeretlen kommunikációs hiba</string>
@@ -83,7 +83,7 @@
   <string name="err_detail_cache_find">Bocs, a c:geo nem talált cache-t</string>
   <string name="err_detail_cache_find_some">Bocs, a c:geo nem találja a cache-t.</string>
   <string name="err_detail_cache_forgot">Bocs, a c:geo elfelejtette, melyik cache-t szeretnéd.</string>
-  <string name="err_detail_cache_language">A c:geo nem tudja olvasni a cache bizonyos részeit. Ellenőrizd, hogy a geocaching.com oldal angolra van állítva. Sajnos a c:geo nem támogat egyéb nyelvi változatokat.</string>
+  <string name="err_detail_cache_language">A c:geo nem tudja olvasni a cache bizonyos részeit. Ellenőrizd, hogy a Geocaching.com oldal angolra van állítva. Sajnos a c:geo nem támogat egyéb nyelvi változatokat.</string>
   <string name="err_detail_no_spoiler">A c:geo nem talált spoiler képet a cache-hez.</string>
   <string name="err_detail_no_map_static">A c:geo nem talált statikus térképet a cache-hez.</string>
   <string name="err_detail_still_removing">Cache eltávolítása.</string>
@@ -317,7 +317,7 @@
   <string name="navigation">Navigáció</string>
 
   <!-- next things -->
-  <string name="legal_note">A geocaching.com szolgáltatásainak használatához, a <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak disclaimer</a> feltételeinek elfogadása szükséges.</string>
+  <string name="legal_note">A Geocaching.com szolgáltatásainak használatához, a <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak disclaimer</a> feltételeinek elfogadása szükséges.</string>
   <string name="author">Szerző: <a href="http://carnero.cc/">carnero</a></string>
   <string name="support">Támogatás: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">Weboldal: <a href="http://cgeo.org/">cgeo.org</a></string>
