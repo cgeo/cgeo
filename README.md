@@ -10,7 +10,11 @@ Fork the project source code on [github](https://github.com/cgeo/c-geo-opensourc
 Set up Eclipse
 --------------
 
-After forking the project you should import the two Eclipse projects in your workspace with File | Import | Projects from Git (requires the EGit Plugin)
+- Install an Eclipse distribution for your OS from http://eclipse.org/downloads/ (you may choose the Java developers distribution).
+- Start Eclipse, choose any directory as workspace. Close the welcome screen, if it appears.
+- After the workbench has started, select File | Import | Install | Install Software Items From File and select a locally downloaded copy of https://github.com/cgeo/c-geo-opensource/tree/master/main/project/eclipse%20installation/cgeo%20eclipse%20components.p2f. This way you can easily install all necessary plugins.
+- After forking the project you should import the two Eclipse projects in your workspace with File | Import | Projects from Git.
+
 Build
 -----
 
