@@ -69,7 +69,7 @@
   <string name="err_none">Ok</string>
   <string name="err_start">Forbindelse ikke oprettet</string>
   <string name="err_parse">Login-side kan ikke indlæses</string>
-  <string name="err_server">Kan ikke forbinde til geocaching.com (server eller forbindelsesfejl?)</string>
+  <string name="err_server">Kan ikke forbinde til Geocaching.com (server eller forbindelsesfejl?)</string>
   <string name="err_login">Ingen login gemt</string>
   <string name="err_unknown">Ukendt fejl</string>
   <string name="err_comm">Ukendt forbindelsesfejl</string>
@@ -83,7 +83,7 @@
   <string name="err_detail_cache_find">Beklager, c:geo kan ikke vise denne cache</string>
   <string name="err_detail_cache_find_some">Beklager, c:geo kan ikke vise denne cache.</string>
   <string name="err_detail_cache_forgot">Beklager, c:geo husker ikke hvilken cache du ønskede.</string>
-  <string name="err_detail_cache_language">c:geo kan ikke læse alle cachedetaljer. Tjek om geocaching.com er sat til engelsk. Desværre kan c:geo ikke forstå andre sprog.</string>
+  <string name="err_detail_cache_language">c:geo kan ikke læse alle cachedetaljer. Tjek om Geocaching.com er sat til engelsk. Desværre kan c:geo ikke forstå andre sprog.</string>
   <string name="err_detail_no_spoiler">c:geo fandt ingen spoilerbilleder til denne cache.</string>
   <string name="err_detail_no_map_static">c:geo fandt ingen statiske kort til denne cache.</string>
   <string name="err_detail_still_removing">Fjerner stadig cachen.</string>
@@ -317,7 +317,7 @@
   <string name="navigation">Navigation</string>
 
   <!-- next things -->
-  <string name="legal_note">For at benytte geocaching.com, skal betingelserne i <a href="http://www.geocaching.com/about/termsofuse.aspx">"Groundspeak disclaimer"</a> accepteres.</string>
+  <string name="legal_note">For at benytte Geocaching.com, skal betingelserne i <a href="http://www.geocaching.com/about/termsofuse.aspx">"Groundspeak disclaimer"</a> accepteres.</string>
   <string name="author">Udviklet af: <a href="http://carnero.cc/">carnero</a></string>
   <string name="support">Support: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">Hjemmeside: <a href="http://cgeo.org/">cgeo.org</a></string>

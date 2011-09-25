@@ -88,7 +88,7 @@
   <string name="err_none">Ok</string>
   <string name="err_start">Klarte ikke å koble til</string>
   <string name="err_parse">Klarte ikke å lese innloggings-siden</string>
-  <string name="err_server">Klarte ikke å koble til geocaching.com (server eller tilkobling nede?)</string>
+  <string name="err_server">Klarte ikke å koble til Geocaching.com (server eller tilkobling nede?)</string>
   <string name="err_login">Ingen innloggings-opplysninger lagret</string>
   <string name="err_login_failed">Beklager, c:geo kan ikke logge inn.</string>
   <string name="err_unknown">Ukjent feil</string>
@@ -107,7 +107,7 @@
   <string name="err_detail_cache_find_next">Beklager, c:geo klarte ikke å finne den neste geocachen.</string>
   <string name="err_detail_cache_forgot">Beklager, c:geo glemte hvilken cache du ønsket.</string>
   <string name="err_detail_cache_forgot_visit">Beklager, c:geo glemte hvilken cache du fant.</string>
-  <string name="err_detail_cache_language">c:geo klarte ikke å finne cache-detaljene. Vennligst sjekk om geocaching.com sitt språk er satt til engelsk. Desverre, forstår ikke c:geo andre språk.</string>
+  <string name="err_detail_cache_language">c:geo klarte ikke å finne cache-detaljene. Vennligst sjekk om Geocaching.com sitt språk er satt til engelsk. Desverre, forstår ikke c:geo andre språk.</string>
   <string name="err_detail_no_spoiler">c:geo fant ingen bilder for denne cachen.</string>
   <string name="err_detail_no_map_static">c:geo fant ingen statiske kart for denne cachen.</string>
   <string name="err_detail_still_removing">c:geo holder fortsatt på med å slette denne cachen.</string>
@@ -249,7 +249,7 @@
   <string name="init_passvote">Passord</string>
   <string name="init_login">Sjekk innloggings-opplysninger</string>
   <string name="init_login_popup">Logg inn</string>
-  <string name="init_login_popup_working">Logger inn på geocaching.com…</string>
+  <string name="init_login_popup_working">Logger inn på Geocaching.com…</string>
   <string name="init_login_popup_ok">Innlogging fullført.</string>
   <string name="init_login_popup_failed">Innlogging mislyktes.</string>
   <string name="init_login_popup_failed_reason">Innlogging mislyktes p.g.a.</string>
@@ -457,7 +457,7 @@
   <string name="license_dismiss">Dismiss</string>
 
   <!-- next things -->
-  <string name="legal_note">For å bruke tjenestene til geocaching.com, må brukeren samtykke i vilkårene og betingelsene til <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak\'s ansvarsfraskrivelse</a></string>
+  <string name="legal_note">For å bruke tjenestene til Geocaching.com, må brukeren samtykke i vilkårene og betingelsene til <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak\'s ansvarsfraskrivelse</a></string>
   <string name="author">utvikler: <a href="http://carnero.cc/">carnero</a></string>
   <string name="support">e-post adresse: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">web-side: <a href="http://cgeo.org/">cgeo.org</a></string>

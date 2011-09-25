@@ -117,7 +117,7 @@
   <string name="err_none">OK</string>
   <string name="err_start">Komunikacja nie wystartowana</string>
   <string name="err_parse">Nieudana analiza strony logowania.</string>
-  <string name="err_server">Nieudane połączenie z geocaching.com (server albo połączenie nieaktywne?)</string>
+  <string name="err_server">Nieudane połączenie z Geocaching.com (server albo połączenie nieaktywne?)</string>
   <string name="err_login">Brakuje danych do logowania.</string>
   <string name="err_login_failed">Przepraszam, c:geo nie może się zalogować.</string>
   <string name="err_unknown">Nieznany błąd</string>
@@ -136,7 +136,7 @@
   <string name="err_detail_cache_find_next">Przepraszam, c:geo nie mógł znaleść następnej skrzynki.</string>
   <string name="err_detail_cache_forgot">Przepraszam, c:geo zapomniał którą skrzynkę chciałeś obejrzeć.</string>
   <string name="err_detail_cache_forgot_visit">Przepraszam, c:geo zapomniał którą skrzynkę chciałeś odwiedzić.</string>
-  <string name="err_detail_cache_language">c:geo nie mógł wczytać niektórych szczegółów. Proszę ustaw stronę geocaching.com na język angielski. Niestety, c:geo nie rozumie innych języków.</string>
+  <string name="err_detail_cache_language">c:geo nie mógł wczytać niektórych szczegółów. Proszę ustaw stronę Geocaching.com na język angielski. Niestety, c:geo nie rozumie innych języków.</string>
   <string name="err_detail_no_spoiler">c:geo nie znalazł zdjęcia spoilera dla tej skrzynki.</string>
   <string name="err_detail_no_map_static">c:geo nie znalazł mapki statycznej dla tej skrzynki.</string>
   <string name="err_detail_not_load_map_static">Przepraszam, c:geo nie mógł załadować statycznej mapki.</string>
@@ -379,7 +379,7 @@
   <string name="init_passvote">Hasło</string>
   <string name="init_login">Sprawdź Logowanie</string>
   <string name="init_login_popup">Logowanie</string>
-  <string name="init_login_popup_working">Logowanie w geocaching.com…</string>
+  <string name="init_login_popup_working">Logowanie w Geocaching.com…</string>
   <string name="init_login_popup_ok">Login ok.</string>
   <string name="init_login_popup_failed">Logowanie nie powiodło się.</string>
   <string name="init_login_popup_failed_reason">Logowanie nie powiodło się, ponieważ </string>
@@ -875,7 +875,7 @@
   <string name="attribute_food_no">Bez gastronomii w pobliżu</string>
 
   <!-- next things -->
-  <string name="legal_note">Aby móc korzystać z usług serwisu geocaching.com <a href="http://www.geocaching.com/about/termsofuse.aspx">warunki korzystania Groundspeak</a> muszą być potwierdzone.</string>
+  <string name="legal_note">Aby móc korzystać z usług serwisu Geocaching.com <a href="http://www.geocaching.com/about/termsofuse.aspx">warunki korzystania Groundspeak</a> muszą być potwierdzone.</string>
   <string name="author">Autor: <a href="http://carnero.cc/">carnero</a></string>
   <string name="support">Support: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">Website: <a href="http://cgeo.org/">cgeo.org</a></string>

@@ -117,7 +117,7 @@
   <string name="err_none">ok</string>
   <string name="err_start">communication non démarrée</string>
   <string name="err_parse">échec login lecture page</string>
-  <string name="err_server">échec de la connexion à geocaching.com (probléme de serveur ou de connexion?)</string>
+  <string name="err_server">échec de la connexion à Geocaching.com (probléme de serveur ou de connexion?)</string>
   <string name="err_login">pas d\'utilisateur ou de mot de passe enregistré</string>
   <string name="err_login_failed">c:geo ne peut pas se connecter.</string>
   <string name="err_login_failed_toast">Désolé, c:geo ne peut pas se connecter. c:geo est en mode hors-ligne. Vérifiez vos paramètres et activez votre connexion Internet.</string>
@@ -134,7 +134,7 @@
   <string name="err_detail_cache_find">Désolé, c:geo ne peut pas trouver de caches</string>
   <string name="err_detail_cache_find_some">Désolé, c:geo ne peut pas trouver cette geocache.</string>
   <string name="err_detail_cache_forgot">Désolé, c:geo a oublié la cache demandée.</string>
-  <string name="err_detail_cache_language">c:geo ne peut pas lire certains details de la cache. Merci de vérifier que le site Web geocaching.com est configuré en Anglais. Malheureusement, c:geo ne supporte pas les autres langues.</string>
+  <string name="err_detail_cache_language">c:geo ne peut pas lire certains details de la cache. Merci de vérifier que le site Web Geocaching.com est configuré en Anglais. Malheureusement, c:geo ne supporte pas les autres langues.</string>
   <string name="err_detail_no_spoiler">c:geo n\'a pas trouvé de photo solution pour cette cache.</string>
   <string name="err_detail_no_map_static">c:geo n\'a pas trouvé de cartes statiques pour cette cache.</string>
   <string name="err_detail_still_removing">Cache toujours en cours d\'effacement.</string>
@@ -283,7 +283,7 @@
   <string name="about_donation_more">don\ndéveloppement</string>
 
   <!-- init -->
-  <string name="init_geocaching">geocaching.com</string>
+  <string name="init_geocaching">Geocaching.com</string>
   <string name="init_gcvote">gcvote.com</string>
   <string name="init_go4cache">Go 4 Cache</string>
   <string name="init_twitter">twitter</string>
@@ -292,7 +292,7 @@
   <string name="init_passvote">mot de passe</string>
   <string name="init_login">vérification de l\'identifiant &amp; du format de date</string>
   <string name="init_login_popup">Connexion</string>
-  <string name="init_login_popup_working">Connexion à geocaching.com…</string>
+  <string name="init_login_popup_working">Connexion à Geocaching.com…</string>
   <string name="init_login_popup_ok">Identifiants corrects.</string>
   <string name="init_login_popup_failed">Erreur de connexion.</string>
   <string name="init_login_popup_failed_reason">Erreur de connexion: </string>
@@ -418,7 +418,7 @@
   <string name="navigation">navigation</string>
 
   <!-- next things -->
-  <string name="legal_note">Pour utiliser les services de geocaching.com, vous devez accepter les termes et conditions de la <a href="http://www.geocaching.com/about/termsofuse.aspx">mise en garde de Groundspeak</a>.</string>
+  <string name="legal_note">Pour utiliser les services de Geocaching.com, vous devez accepter les termes et conditions de la <a href="http://www.geocaching.com/about/termsofuse.aspx">mise en garde de Groundspeak</a>.</string>
   <string name="author">auteur: <a href="http://carnero.cc/">carnero</a></string>
   <string name="support">support: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">site: <a href="http://cgeo.org/">cgeo.org</a></string>
