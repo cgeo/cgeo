@@ -7,6 +7,7 @@ import cgeo.geocaching.cgLog;
 import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgTrackable;
+import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -33,6 +34,7 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -268,9 +270,60 @@ public abstract class GPXParser extends FileParser {
 
                     result.add(cache);
                     showCountMessage(handler, result.size());
+                } else if (StringUtils.isNotBlank(cache.name)
+                        && cache.coords != null
+                        && StringUtils.contains(type, "waypoint")) {
+                    addWaypointToCache();
                 }
 
                 resetCache();
+            }
+
+            private void addWaypointToCache() {
+                fixCache(cache);
+
+                if (cache.name.length() > 2) {
+                    String cacheGeocodeForWaypoint = "GC" + cache.name.substring(2);
+
+                    cgCache cacheForWaypoint = getCacheFromResultOrDb(cacheGeocodeForWaypoint);
+                    if (cacheForWaypoint != null) {
+                        final cgWaypoint waypoint = new cgWaypoint();
+                        waypoint.id = -1;
+                        waypoint.type = sym;
+                        waypoint.geocode = cacheGeocodeForWaypoint;
+                        waypoint.setPrefix(cache.name.substring(0, 2));
+                        waypoint.lookup = "---";
+                        // there is no lookup code in gpx file
+                        waypoint.name = cache.shortdesc;
+                        waypoint.coords = cache.coords;
+                        waypoint.latitudeString = cache.latitudeString;
+                        waypoint.longitudeString = cache.longitudeString;
+                        waypoint.note = cache.description;
+
+                        if (cacheForWaypoint.waypoints == null) {
+                            cacheForWaypoint.waypoints = new ArrayList<cgWaypoint>();
+                        }
+                        cgWaypoint.mergeWayPoints(cacheForWaypoint.waypoints, Collections.singletonList(waypoint));
+                        // need to remove from cache because id changes on store
+                        cgeoapplication.getInstance().removeCacheFromCache(cacheForWaypoint.geocode);
+                        result.add(cacheForWaypoint);
+                        showCountMessage(handler, result.size());
+                    }
+                }
+            }
+
+            /**
+             * Retrieves cache data from result or from DB.
+             * 
+             * @param geocode
+             * @return cache or <code>null</code> if cache doesn't exist
+             */
+            private cgCache getCacheFromResultOrDb(String geocode) {
+                for (cgCache cache : result) {
+                    if (geocode.equals(cache.geocode))
+                        return cache;
+                }
+                return cgeoapplication.getInstance().getCacheByGeocode(geocode, true, true, true, true, true, true);
             }
         });
 
@@ -720,7 +773,7 @@ public abstract class GPXParser extends FileParser {
     /**
      * GPX 1.0 and 1.1 use different XML elements to put the cache into, therefore needs to be overwritten in the
      * version specific subclasses
-     * 
+     *
      * @param waypoint
      * @return
      */
