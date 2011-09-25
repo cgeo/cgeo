@@ -1668,6 +1668,10 @@ public class cgBase {
         params.put("num", "35");
         params.put("decrypt", "true");
         final HttpResponse response = request("http://www.geocaching.com/seek/geocache.logbook", params, false, false, false);
+        if (response == null) {
+            Log.e(cgSettings.tag, "cgBase.loadLogsFromDetails: cannot log logs, response is null");
+            return;
+        }
         final int statusCode = response.getStatusLine().getStatusCode();
         if (statusCode != 200) {
             Log.e(cgSettings.tag, "cgBase.loadLogsFromDetails: error " + statusCode + " when requesting log information");
