@@ -64,34 +64,46 @@ public class RegExPerformanceTest extends TestCase {
     public static final String TAG_DIV_END_NEXT = NEXT_START_TAG + TAG_DIV_END;
 
     public final static Pattern PATTERN_DESCRIPTION_OLD = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>" + "(.*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>", Pattern.CASE_INSENSITIVE);
-    public final static Pattern PATTERN_DESCRIPTION_NEW = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\">(.*?)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>");
+    public final static Pattern PATTERN_DESCRIPTION = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\">(.*?)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>");
 
     public final static Pattern PATTERN_HINT_OLD = Pattern.compile("<div id=\"div_hint\"[^>]*>(.*?)</div>", Pattern.CASE_INSENSITIVE);
-    public final static Pattern PATTERN_HINT_NEW = Pattern.compile("<div id=\"div_hint\"[^>]*>(.*?)</div>");
+    public final static Pattern PATTERN_HINT = Pattern.compile("<div id=\"div_hint\"[^>]*>(.*?)</div>");
 
     public final static Pattern PATTERN_SHORTDESC_OLD = Pattern.compile("<div class=\"UserSuppliedContent\">[^<]*<span id=\"ctl00_ContentBody_ShortDescription\"[^>]*>((?:(?!</span>[^\\w^<]*</div>).)*)</span>[^\\w^<]*</div>", Pattern.CASE_INSENSITIVE);
-    public final static Pattern PATTERN_SHORTDESC_NEW = Pattern.compile("<span id=\"ctl00_ContentBody_ShortDescription\">(.*?)</span>[^\\w^<]*</div>");
+    public final static Pattern PATTERN_SHORTDESC = Pattern.compile("<span id=\"ctl00_ContentBody_ShortDescription\">(.*?)</span>[^\\w^<]*</div>");
 
     private final static Pattern PATTERN_GEOCODE_OLD = Pattern.compile("<meta name=\"og:url\" content=\"[^\"]+/(GC[0-9A-Z]+)\"[^>]*>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern PATTERN_GEOCODE_NEW = Pattern.compile("<meta name=\"og:url\" content=\"[^\"]+/(GC[0-9A-Z]+)\"");
+    private final static Pattern PATTERN_GEOCODE = Pattern.compile("<meta name=\"og:url\" content=\"[^\"]+/(GC[0-9A-Z]+)\"");
 
     private final static Pattern PATTERN_CACHEID_OLD = Pattern.compile("/seek/log\\.aspx\\?ID=(\\d+)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern PATTERN_CACHEID_NEW = Pattern.compile("/seek/log\\.aspx\\?ID=(\\d+)");
+    private final static Pattern PATTERN_CACHEID = Pattern.compile("/seek/log\\.aspx\\?ID=(\\d+)");
 
     private final static Pattern PATTERN_GUID_OLD = Pattern.compile(Pattern.quote("&wid=") + "([0-9a-z\\-]+)" + Pattern.quote("&"), Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern PATTERN_GUID_NEW = Pattern.compile(Pattern.quote("&wid=") + "([0-9a-z\\-]+)" + Pattern.quote("&"));
+    private final static Pattern PATTERN_GUID = Pattern.compile(Pattern.quote("&wid=") + "([0-9a-z\\-]+)" + Pattern.quote("&"));
 
     private final static Pattern PATTERN_SIZE_OLD = Pattern.compile("<div class=\"CacheSize[^\"]*\">[^<]*<p[^>]*>[^S]*Size[^:]*:[^<]*<span[^>]*>[^<]*<img src=\"[^\"]*/icons/container/[a-z_]+\\.gif\" alt=\"Size: ([^\"]+)\"[^>]*>[^<]*<small>[^<]*</small>[^<]*</span>[^<]*</p>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern PATTERN_SIZE_NEW = Pattern.compile("<div class=\"CacheSize[^\"]*\">[^<]*<p[^>]*>[^S]*Size[^:]*:[^<]*<span[^>]*>[^<]*<img src=\"[^\"]*/icons/container/[a-z_]+\\.gif\" alt=\"Size: ([^\"]+)\"[^>]*>[^<]*<small>[^<]*</small>[^<]*</span>[^<]*</p>");
+    private final static Pattern PATTERN_SIZE = Pattern.compile("<div class=\"CacheSize[^\"]*\">[^<]*<p[^>]*>[^S]*Size[^:]*:[^<]*<span[^>]*>[^<]*<img src=\"[^\"]*/icons/container/[a-z_]+\\.gif\" alt=\"Size: ([^\"]+)\"[^>]*>[^<]*<small>[^<]*</small>[^<]*</span>[^<]*</p>");
 
     private final static Pattern PATTERN_LATLON_OLD = Pattern.compile("<span id=\"ctl00_ContentBody_LatLon\"[^>]*>([^<]*)<\\/span>", Pattern.CASE_INSENSITIVE);
-    private final static Pattern PATTERN_LATLON_NEW = Pattern.compile("<span id=\"ctl00_ContentBody_LatLon\"[^>]*>(.*?)</span>");
+    private final static Pattern PATTERN_LATLON = Pattern.compile("<span id=\"ctl00_ContentBody_LatLon\"[^>]*>(.*?)</span>");
 
     private final static Pattern PATTERN_LOCATION_OLD = Pattern.compile("<span id=\"ctl00_ContentBody_Location\"[^>]*>In ([^<]*)", Pattern.CASE_INSENSITIVE);
-    private final static Pattern PATTERN_LOCATION_NEW = Pattern.compile("<span id=\"ctl00_ContentBody_Location\">In (.*?)</span>");
+    private final static Pattern PATTERN_LOCATION = Pattern.compile("<span id=\"ctl00_ContentBody_Location\">In (.*?)</span>");
 
     private final static Pattern PATTERN_PERSONALNOTE_OLD = Pattern.compile("<p id=\"cache_note\"[^>]*>([^<]*)</p>", Pattern.CASE_INSENSITIVE);
-    private final static Pattern PATTERN_PERSONALNOTE_NEW = Pattern.compile("<p id=\"cache_note\"[^>]*>(.*?)</p>");
+    private final static Pattern PATTERN_PERSONALNOTE = Pattern.compile("<p id=\"cache_note\"[^>]*>(.*?)</p>");
+
+    private final static Pattern PATTERN_NAME_OLD = Pattern.compile("<h2[^>]*>[^<]*<span id=\"ctl00_ContentBody_CacheName\">([^<]+)<\\/span>[^<]*<\\/h2>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+    private final static Pattern PATTERN_NAME = Pattern.compile("<span id=\"ctl00_ContentBody_CacheName\">(.*?)</span>");
+
+    private final static Pattern PATTERN_DIFFICULTY_OLD = Pattern.compile("<span id=\"ctl00_ContentBody_uxLegendScale\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\" alt=\"[^\"]+\"[^>]*>[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+    private final static Pattern PATTERN_DIFFICULTY = Pattern.compile("<span id=\"ctl00_ContentBody_uxLegendScale\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\" alt=\"");
+
+    private final static Pattern PATTERN_TERRAIN_OLD = Pattern.compile("<span id=\"ctl00_ContentBody_Localize6\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\" alt=\"[^\"]+\"[^>]*>[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+    private final static Pattern PATTERN_TERRAIN = Pattern.compile("<span id=\"ctl00_ContentBody_Localize6\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\" alt=\"");
+
+    private final static Pattern PATTERN_OWNERREAL_OLD = Pattern.compile("<a id=\"ctl00_ContentBody_uxFindLinksHiddenByThisUser\" href=\"[^\"]*/seek/nearest\\.aspx\\?u=*([^\"]+)\">[^<]+</a>", Pattern.CASE_INSENSITIVE);
+    private final static Pattern PATTERN_OWNERREAL = Pattern.compile("<a id=\"ctl00_ContentBody_uxFindLinksHiddenByThisUser\" href=\"[^\"]*/seek/nearest\\.aspx\\?u=(.*?)\"");
 
 
     public void testRegEx() {
@@ -104,30 +116,38 @@ public class RegExPerformanceTest extends TestCase {
 
     public static List<String> doTheTests() {
 
-        int iterations = 1; // set the value to 1000 for real performance measurements
+        int iterations = 250; // set the value to 1000 for real performance measurements
 
         List<String> output = new ArrayList<String>();
 
         output.add("Testing pattern for hint...");
-        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_HINT_OLD, PATTERN_HINT_NEW));
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_HINT_OLD, PATTERN_HINT));
         output.add("Testing pattern for description...");
-        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_DESCRIPTION_OLD, PATTERN_DESCRIPTION_NEW));
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_DESCRIPTION_OLD, PATTERN_DESCRIPTION));
         output.add("Testing pattern for short description...");
-        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_SHORTDESC_OLD, PATTERN_SHORTDESC_NEW));
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_SHORTDESC_OLD, PATTERN_SHORTDESC));
         output.add("Testing pattern for geocode...");
-        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_GEOCODE_OLD, PATTERN_GEOCODE_NEW));
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_GEOCODE_OLD, PATTERN_GEOCODE));
         output.add("Testing pattern for cache id...");
-        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_CACHEID_OLD, PATTERN_CACHEID_NEW));
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_CACHEID_OLD, PATTERN_CACHEID));
         output.add("Testing pattern for cache guid...");
-        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_GUID_OLD, PATTERN_GUID_NEW));
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_GUID_OLD, PATTERN_GUID));
         output.add("Testing pattern for size...");
-        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_SIZE_OLD, PATTERN_SIZE_NEW));
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_SIZE_OLD, PATTERN_SIZE));
         output.add("Testing pattern for latlon...");
-        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_LATLON_OLD, PATTERN_LATLON_NEW));
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_LATLON_OLD, PATTERN_LATLON));
         output.add("Testing pattern for location...");
-        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_LOCATION_OLD, PATTERN_LOCATION_NEW));
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_LOCATION_OLD, PATTERN_LOCATION));
         output.add("Testing pattern for personal note...");
-        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_PERSONALNOTE_OLD, PATTERN_PERSONALNOTE_NEW));
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_PERSONALNOTE_OLD, PATTERN_PERSONALNOTE));
+        output.add("Testing pattern for name...");
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_NAME_OLD, PATTERN_NAME));
+        output.add("Testing pattern for difficulty...");
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_DIFFICULTY_OLD, PATTERN_DIFFICULTY));
+        output.add("Testing pattern for terrain...");
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_TERRAIN_OLD, PATTERN_TERRAIN));
+        output.add("Testing pattern for owner real...");
+        output.addAll(RegExPerformanceTest.measure(iterations, PATTERN_OWNERREAL_OLD, PATTERN_OWNERREAL));
 
         return output;
     }

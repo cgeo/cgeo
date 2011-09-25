@@ -87,7 +87,7 @@ public class GC1ZXX2 extends MockedCache {
 
     @Override
     public String getName() {
-        return "Hannopoly: Eislisenstrasse ";
+        return "Hannopoly: Eislisenstrasse";
     }
 
     @Override

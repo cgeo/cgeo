@@ -22,16 +22,23 @@ public final class BaseUtils {
      * @return
      */
     public static String getMatch(final String data, final Pattern p, final int group, final String defaultValue) {
-        String result = defaultValue;
         final Matcher matcher = p.matcher(data);
         if (matcher.find() && matcher.groupCount() >= group) {
-            result = BaseUtils.makeCopy(matcher.group(group));
+            // creating a new String via String constructor is necessary here!!
+            return new String(matcher.group(group).trim());
+            // Java copies the whole page String, when matching with regular expressions
+            // later this would block the garbage collector, as we only need tiny parts of the page
+            // see http://developer.android.com/reference/java/lang/String.html#backing_array
+
+            // And BTW: You cannot even see that effect in the debugger, but must use a separate memory profiler!
         }
-        return result;
+        return defaultValue;
     }
 
     /**
      * Replace the characters \n, \r and \t with a space
+     * The result is a very long single "line".
+     * Don't change this behavior - the patterns for parsing rely on this matter of fact !
      *
      * @param buffer
      *            The data
@@ -55,16 +62,6 @@ public final class BaseUtils {
         }
         buffer.setLength(0);
         buffer.append(chars);
-    }
-
-    public static String makeCopy(final String match) {
-        // creating a new String via String constructor is necessary here!!
-        return new String(match.trim());
-        // Java copies the whole page String, when matching with regular expressions
-        // later this would block the garbage collector, as we only need tiny parts of the page
-        // see http://developer.android.com/reference/java/lang/String.html#backing_array
-
-        // And BTW: You cannot even see that effect in the debugger, but must use a separate memory profiler!
     }
 
 }

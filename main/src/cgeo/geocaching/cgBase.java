@@ -49,7 +49,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -83,19 +82,10 @@ import javax.net.ssl.X509TrustManager;
 public class cgBase {
 
     private final static Pattern patternType = Pattern.compile("<img src=\"[^\"]*/WptTypes/\\d+\\.gif\" alt=\"([^\"]+)\" (title=\"[^\"]*\" )?width=\"32\" height=\"32\"[^>]*>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-
-    private final static Pattern patternName = Pattern.compile("<h2[^>]*>[^<]*<span id=\"ctl00_ContentBody_CacheName\">([^<]+)<\\/span>[^<]*<\\/h2>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern patternDifficulty = Pattern.compile("<span id=\"ctl00_ContentBody_uxLegendScale\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\" alt=\"[^\"]+\"[^>]*>[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern patternTerrain = Pattern.compile("<span id=\"ctl00_ContentBody_Localize6\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\" alt=\"[^\"]+\"[^>]*>[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private final static Pattern patternOwner = Pattern.compile("<span class=\"minorCacheDetails\">\\W*An?(\\W*Event)?\\W*cache\\W*by[^<]*<a href=\"[^\"]+\">([^<]+)</a>[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern patternOwnerReal = Pattern.compile("<a id=\"ctl00_ContentBody_uxFindLinksHiddenByThisUser\" href=\"[^\"]*/seek/nearest\\.aspx\\?u=*([^\"]+)\">[^<]+</a>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternHidden = Pattern.compile("<span[^>]*>\\W*Hidden[\\s:]*([^<]+)</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private final static Pattern patternHiddenEvent = Pattern.compile("<span[^>]*>\\W*Event\\W*Date[^:]*:([^<]*)</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private final static Pattern patternFavourite = Pattern.compile("<a id=\"uxFavContainerLink\"[^>]*>[^<]*<div[^<]*<span class=\"favorite-value\">[^\\d]*([0-9]+)[^\\d^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-
-    private final static Pattern patternFound = Pattern.compile("<p>[^<]*<a id=\"ctl00_ContentBody_hlFoundItLog\"[^<]*<img src=\".*/images/stockholm/16x16/check\\.gif\"[^>]*>[^<]*</a>[^<]*</p>", Pattern.CASE_INSENSITIVE);
-    private final static Pattern patternFoundAlternative = Pattern.compile("<div class=\"StatusInformationWidget FavoriteWidget\"", Pattern.CASE_INSENSITIVE);
-
     private final static Pattern patternCountLogs = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p(.+?)<\\/p><\\/span>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternCountLog = Pattern.compile("src=\"\\/images\\/icons\\/(.+?).gif\"[^>]+> (\\d*[,.]?\\d+)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private final static Pattern patternAttributes = Pattern.compile("<h3 class=\"WidgetHeader\">[^<]*<img[^>]+>\\W*Attributes[^<]*</h3>[^<]*<div class=\"WidgetBody\">(([^<]*<img src=\"[^\"]+\" alt=\"[^\"]+\"[^>]*>)+)[^<]*<p", Pattern.CASE_INSENSITIVE);
@@ -1089,26 +1079,11 @@ public class cgBase {
         cache.guid = BaseUtils.getMatch(page, Constants.PATTERN_GUID, 1, cache.guid);
 
         // name
-        try {
-            final Matcher matcherName = patternName.matcher(page);
-            if (matcherName.find() && matcherName.groupCount() > 0) {
-                cache.name = Html.fromHtml(matcherName.group(1)).toString();
-            }
-        } catch (Exception e) {
-            // failed to parse cache name
-            Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache name");
-        }
+        cache.name = Html.fromHtml(BaseUtils.getMatch(page, Constants.PATTERN_NAME, 1, cache.name)).toString();
 
         // owner real name
-        try {
-            final Matcher matcherOwnerReal = patternOwnerReal.matcher(page);
-            if (matcherOwnerReal.find() && matcherOwnerReal.groupCount() > 0) {
-                cache.ownerReal = URLDecoder.decode(matcherOwnerReal.group(1));
-            }
-        } catch (Exception e) {
-            // failed to parse owner real name
-            Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache owner real name");
-        }
+        // TODO URLDecoder.decode ??
+        cache.ownerReal = BaseUtils.getMatch(page, Constants.PATTERN_OWNERREAL, 1, cache.ownerReal);
 
         final String username = settings.getUsername();
         if (cache.ownerReal != null && username != null && cache.ownerReal.equalsIgnoreCase(username)) {
@@ -1136,25 +1111,15 @@ public class cgBase {
 
         if (StringUtils.isNotBlank(tableInside)) {
             // cache terrain
-            try {
-                final Matcher matcherTerrain = patternTerrain.matcher(tableInside);
-                if (matcherTerrain.find() && matcherTerrain.groupCount() > 0) {
-                    cache.terrain = new Float(Pattern.compile("_").matcher(matcherTerrain.group(1)).replaceAll("."));
-                }
-            } catch (Exception e) {
-                // failed to parse terrain
-                Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache terrain");
+            String result = BaseUtils.getMatch(tableInside, Constants.PATTERN_TERRAIN, 1, null);
+            if (result != null) {
+                cache.terrain = new Float(Pattern.compile("_").matcher(result).replaceAll("."));
             }
 
             // cache difficulty
-            try {
-                final Matcher matcherDifficulty = patternDifficulty.matcher(tableInside);
-                if (matcherDifficulty.find() && matcherDifficulty.groupCount() > 0) {
-                    cache.difficulty = new Float(Pattern.compile("_").matcher(matcherDifficulty.group(1)).replaceAll("."));
-                }
-            } catch (Exception e) {
-                // failed to parse difficulty
-                Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache difficulty");
+            result = BaseUtils.getMatch(tableInside, Constants.PATTERN_DIFFICULTY, 1, null);
+            if (result != null) {
+                cache.difficulty = new Float(Pattern.compile("_").matcher(result).replaceAll("."));
             }
 
             // owner
@@ -1208,7 +1173,7 @@ public class cgBase {
         }
 
         // cache found
-        cache.found = patternFound.matcher(page).find() || patternFoundAlternative.matcher(page).find();
+        cache.found = Constants.PATTERN_FOUND.matcher(page).find() || Constants.PATTERN_FOUND_ALTERNATIVE.matcher(page).find();
 
         // cache type
         try {
