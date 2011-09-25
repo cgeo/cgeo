@@ -9,9 +9,9 @@ import cgeo.geocaching.cgeoapplication;
 
 import org.apache.commons.lang3.StringUtils;
 
+import android.net.Uri;
 import android.util.Log;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.UUID;
 
 public class GCConnector extends AbstractConnector implements IConnector {
 
-    private static final URI URI_GC_SEEK_CACHE_DETAILS = cgBase.buildURI(false, "www.geocaching.com", "/seek/cache_details.aspx");
+    private static final Uri URI_GC_SEEK_CACHE_DETAILS = cgBase.buildURI(false, "www.geocaching.com", "/seek/cache_details.aspx");
 
     @Override
     public boolean canHandle(String geocode) {
