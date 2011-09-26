@@ -1,3 +1,4 @@
+// $codepro.audit.disable logExceptions
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.ActivityMixin;
@@ -3808,47 +3809,26 @@ public class cgBase {
         }
     }
 
-    public static boolean isCacheInViewPort(int centerLat, int centerLon, int spanLat, int spanLon, final Geopoint cacheCoords) {
-        if (cacheCoords == null) {
-            return false;
-        }
-
-        // viewport is defined by center, span and some (10%) reserve on every side
-        int minLat = centerLat - (spanLat / 2) - (spanLat / 10);
-        int maxLat = centerLat + (spanLat / 2) + (spanLat / 10);
-        int minLon = centerLon - (spanLon / 2) - (spanLon / 10);
-        int maxLon = centerLon + (spanLon / 2) + (spanLon / 10);
-        final int cLat = cacheCoords.getLatitudeE6();
-        final int cLon = cacheCoords.getLongitudeE6();
-        int mid = 0;
-
-        if (maxLat < minLat) {
-            mid = minLat;
-            minLat = maxLat;
-            maxLat = mid;
-        }
-
-        if (maxLon < minLon) {
-            mid = minLon;
-            minLon = maxLon;
-            maxLon = mid;
-        }
-
-        boolean latOk = false;
-        boolean lonOk = false;
-
-        if (cLat >= minLat && cLat <= maxLat) {
-            latOk = true;
-        }
-        if (cLon >= minLon && cLon <= maxLon) {
-            lonOk = true;
-        }
-
-        if (latOk && lonOk) {
-            return true;
-        } else {
-            return false;
-        }
+    // viewport is defined by center, span and some (10%) reserve on every side
+    /**
+     * Check if coordinates are located in a viewport (defined by its center and span
+     * in each direction). The viewport also includes a 10% extension on each side.
+     *
+     * @param centerLat
+     *            the viewport center latitude
+     * @param centerLon
+     *            the viewport center longitude
+     * @param spanLat
+     *            the latitude span
+     * @param spanLon
+     *            the longitude span
+     * @param coords
+     *            the coordinates to check
+     * @return true if the coordinates are in the viewport
+     */
+    public static boolean isCacheInViewPort(int centerLat, int centerLon, int spanLat, int spanLon, final Geopoint coords) {
+        return Math.abs(coords.getLatitudeE6() - centerLat) <= Math.abs(spanLat) * 0.6 &&
+                Math.abs(coords.getLongitudeE6() - centerLon) <= Math.abs(spanLon) * 0.6;
     }
 
     private static char[] base64map1 = new char[64];
