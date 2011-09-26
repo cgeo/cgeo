@@ -1877,9 +1877,9 @@ public class cgBase {
                 }
             }
             if (CollectionUtils.isNotEmpty(guids)) {
-                params.put("cacheIds", implode(",", guids.toArray()));
+                params.put("cacheIds", StringUtils.join(guids.toArray(), ','));
             } else {
-                params.put("waypoints", implode(",", geocodes.toArray()));
+                params.put("waypoints", StringUtils.join(geocodes.toArray(), ','));
             }
             params.put("version", "cgeo");
             final String votes = request(URI_GCVOTE_GETVOTES, "GET", params, false, false, false).getData();
@@ -3500,22 +3500,6 @@ public class cgBase {
         return null;
     }
 
-    public static String implode(String delim, Object[] array) {
-        StringBuilder out = new StringBuilder();
-
-        try {
-            for (int i = 0; i < array.length; i++) {
-                if (i != 0) {
-                    out.append(delim);
-                }
-                out.append(array[i].toString());
-            }
-        } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgeoBase.implode: " + e.toString());
-        }
-        return out.toString();
-    }
-
     public static String urlencode_rfc3986(String text) {
         final String encoded = URLEncoder.encode(text).replace("+", "%20").replaceAll("%7E", "~");
 
@@ -3555,7 +3539,7 @@ public class cgBase {
                 paramsEncoded.add(key + "=" + urlencode_rfc3986(value));
             }
 
-            paramsDone = implode("&", paramsEncoded.toArray());
+            paramsDone = StringUtils.join(paramsEncoded.toArray(), '&');
         } else {
             paramsDone = "";
         }

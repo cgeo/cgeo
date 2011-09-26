@@ -2,6 +2,8 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.utils.CryptUtils;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -48,12 +50,12 @@ public class cgOAuth {
 
         keysPacked = cgSettings.keyConsumerSecret + "&" + tokenSecret; // both even if empty some of them!
         if (https)
-            requestPacked = method + "&" + cgBase.urlencode_rfc3986("https://" + host + path) + "&" + cgBase.urlencode_rfc3986(cgBase.implode("&", paramsEncoded.toArray()));
+            requestPacked = method + "&" + cgBase.urlencode_rfc3986("https://" + host + path) + "&" + cgBase.urlencode_rfc3986(StringUtils.join(paramsEncoded.toArray(), '&'));
         else
-            requestPacked = method + "&" + cgBase.urlencode_rfc3986("http://" + host + path) + "&" + cgBase.urlencode_rfc3986(cgBase.implode("&", paramsEncoded.toArray()));
+            requestPacked = method + "&" + cgBase.urlencode_rfc3986("http://" + host + path) + "&" + cgBase.urlencode_rfc3986(StringUtils.join(paramsEncoded.toArray(), '&'));
         paramsEncoded.add("oauth_signature=" + cgBase.urlencode_rfc3986(cgBase.base64Encode(CryptUtils.hashHmac(requestPacked, keysPacked))));
 
-        paramsDone = cgBase.implode("&", paramsEncoded.toArray());
+        paramsDone = StringUtils.join(paramsEncoded.toArray(), '&');
 
         return paramsDone;
     }
