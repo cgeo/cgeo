@@ -32,70 +32,43 @@ import java.util.List;
 
 public class cgeoimages extends AbstractActivity {
 
+    private static final int UNKNOWN_TYPE = 0;
     public static final int LOG_IMAGE = 1;
     public static final int SPOILER_IMAGE = 2;
 
-    private int img_type;
     private String geocode = null;
-    private String title = null;
-    private String url = null;
     private LayoutInflater inflater = null;
     private ProgressDialog progressDialog = null;
-    private ProgressDialog waitDialog = null;
     private LinearLayout imagesView = null;
-    private int offline = 0;
-    private boolean save = true;
     private int count = 0;
     private int countDone = 0;
-    private String load_process_string;
 
     static private Collection<Bitmap> bitmaps = Collections.synchronizedCollection(new ArrayList<Bitmap>());
 
-    private void loadImages(final List<cgImage> images) {
-        if (waitDialog != null) {
-            waitDialog.dismiss();
-        }
+    private void loadImages(final List<cgImage> images, final int progressMessage, final boolean save, final boolean offline) {
 
-        if (images.isEmpty()) {
-            switch (img_type) {
-                case LOG_IMAGE:
-                    showToast(res.getString(R.string.warn_load_log_image));
-                    break;
-                case SPOILER_IMAGE:
-                    showToast(res.getString(R.string.warn_load_spoiler_image));
-                    break;
+        count = images.size();
+        progressDialog = new ProgressDialog(cgeoimages.this);
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        progressDialog.setMessage(res.getString(progressMessage));
+        progressDialog.setCancelable(true);
+        progressDialog.setMax(count);
+        progressDialog.show();
+
+        LinearLayout rowView = null;
+        for (final cgImage img : images) {
+            rowView = (LinearLayout) inflater.inflate(R.layout.cache_image_item, null);
+
+            ((TextView) rowView.findViewById(R.id.title)).setText(Html.fromHtml(img.title));
+
+            if (StringUtils.isNotBlank(img.description)) {
+                final TextView descView = (TextView) rowView.findViewById(R.id.description);
+                descView.setText(Html.fromHtml(img.description), TextView.BufferType.SPANNABLE);
+                descView.setVisibility(View.VISIBLE);
             }
-            finish();
-        } else {
-            if (app.isOffline(geocode, null)) {
-                offline = (img_type == LOG_IMAGE) && !settings.storelogimages ? 0 : 1;
-            } else {
-                offline = 0;
-            }
 
-            count = images.size();
-            progressDialog = new ProgressDialog(cgeoimages.this);
-            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            progressDialog.setMessage(load_process_string);
-            progressDialog.setCancelable(true);
-            progressDialog.setMax(count);
-            progressDialog.show();
-
-            LinearLayout rowView = null;
-            for (final cgImage img : images) {
-                rowView = (LinearLayout) inflater.inflate(R.layout.cache_image_item, null);
-
-                ((TextView) rowView.findViewById(R.id.title)).setText(Html.fromHtml(img.title));
-
-                if (StringUtils.isNotBlank(img.description)) {
-                    final TextView descView = (TextView) rowView.findViewById(R.id.description);
-                    descView.setText(Html.fromHtml(img.description), TextView.BufferType.SPANNABLE);
-                    descView.setVisibility(View.VISIBLE);
-                }
-
-                new AsyncImgLoader(rowView, img).execute();
-                imagesView.addView(rowView);
-            }
+            new AsyncImgLoader(rowView, img, save, offline).execute();
+            imagesView.addView(rowView);
         }
     }
 
@@ -103,15 +76,19 @@ public class cgeoimages extends AbstractActivity {
 
         final private LinearLayout view;
         final private cgImage img;
+        final private boolean save;
+        final boolean offline;
 
-        public AsyncImgLoader(final LinearLayout view, cgImage img) {
+        public AsyncImgLoader(final LinearLayout view, final cgImage img, final boolean save, final boolean offline) {
             this.view = view;
             this.img = img;
+            this.save = save;
+            this.offline = offline;
         }
 
         @Override
         protected BitmapDrawable doInBackground(Void... params) {
-            final cgHtmlImg imgGetter = new cgHtmlImg(cgeoimages.this, geocode, true, offline, false, save);
+            final cgHtmlImg imgGetter = new cgHtmlImg(cgeoimages.this, geocode, true, offline ? 1 : 0, false, save);
             return imgGetter.getDrawable(img.url);
         }
 
@@ -169,82 +146,59 @@ public class cgeoimages extends AbstractActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // init
-        setTheme();
-        setContentView(R.layout.spoilers);
-
         // get parameters
         Bundle extras = getIntent().getExtras();
 
         // try to get data from extras
+        int img_type = UNKNOWN_TYPE;
         if (extras != null) {
             geocode = extras.getString("geocode");
             img_type = extras.getInt("type", 0);
         }
 
-        // google analytics
-        if (img_type == SPOILER_IMAGE)
-        {
-            setTitle(res.getString(R.string.cache_spoiler_images_title));
-        } else if (img_type == LOG_IMAGE) {
-            setTitle(res.getString(R.string.cache_log_images_title));
-        }
-
-        if (geocode == null) {
+        if (extras == null || geocode == null) {
             showToast("Sorry, c:geo forgot for what cache you want to load spoiler images.");
             finish();
             return;
         }
-        switch (img_type) {
-            case LOG_IMAGE:
-                title = extras.getString("title");
-                url = extras.getString("url");
-                if ((title == null) || (url == null)) {
-                    showToast("Sorry, c:geo forgot which logimage you wanted to load.");
-                    finish();
-                    return;
-                }
-                break;
+
+        if (img_type != SPOILER_IMAGE && img_type != LOG_IMAGE) {
+            showToast("Sorry, can't load unknown image type.");
+            finish();
+            return;
         }
+
+        // init
+        setTheme();
+        setContentView(R.layout.spoilers);
+        setTitle(res.getString(img_type == SPOILER_IMAGE ? R.string.cache_spoiler_images_title : R.string.cache_log_images_title));
 
         inflater = getLayoutInflater();
         if (imagesView == null) {
             imagesView = (LinearLayout) findViewById(R.id.spoiler_list);
         }
 
-        switch (img_type) {
-            case SPOILER_IMAGE:
-                load_process_string = res.getString(R.string.cache_spoiler_images_loading);
-                save = true;
-                break;
-            case LOG_IMAGE:
-                load_process_string = res.getString(R.string.cache_log_images_loading);
-                if (settings.storelogimages) {
-                    save = true;
-                } else {
-                    save = false;
-                }
-                break;
-            default:
-                load_process_string = "Loading...";
-        }
-        waitDialog = ProgressDialog.show(this, null, load_process_string, true);
-        waitDialog.setCancelable(true);
+        final boolean offline = app.isOffline(geocode, null) && (img_type == SPOILER_IMAGE | settings.storelogimages);
 
-        switch (img_type) {
-            case LOG_IMAGE:
-                cgImage logimage = new cgImage();
-                logimage.title = title;
-                logimage.url = url;
-                logimage.description = "";
-                loadImages(Collections.singletonList(logimage));
-                break;
-            case SPOILER_IMAGE:
-                loadImages(app.loadSpoilers(geocode));
-                break;
-            default:
-                showToast("Sorry, can't load unknown image type.");
+        if (img_type == LOG_IMAGE) {
+            cgImage logimage = new cgImage();
+            logimage.title = extras.getString("title");
+            logimage.url = extras.getString("url");
+            if (logimage.title == null || logimage.url == null) {
+                showToast("Sorry, c:geo forgot which logimage you wanted to load.");
                 finish();
+                return;
+            }
+            logimage.description = "";
+            loadImages(Collections.singletonList(logimage), R.string.cache_log_images_loading, settings.storelogimages, offline);
+        } else {
+            final List<cgImage> images = app.loadSpoilers(geocode);
+            if (images.isEmpty()) {
+                showToast(res.getString(R.string.warn_load_spoiler_image));
+                finish();
+                return;
+            }
+            loadImages(app.loadSpoilers(geocode), R.string.cache_spoiler_images_loading, true, offline);
         }
 
     }
