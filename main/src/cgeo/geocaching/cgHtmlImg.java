@@ -42,9 +42,6 @@ public class cgHtmlImg implements Html.ImageGetter {
     final private Display display;
     final private int maxWidth;
     final private int maxHeight;
-    private double ratio = 1.0d;
-    private int width = 0;
-    private int height = 0;
 
     public cgHtmlImg(Activity activityIn, String geocodeIn, boolean placementIn, int reasonIn, boolean onlySaveIn) {
         this(activityIn, geocodeIn, placementIn, reasonIn, onlySaveIn, true);
@@ -271,7 +268,11 @@ public class cgHtmlImg implements Html.ImageGetter {
         final int imgWidth = imagePre.getWidth();
         final int imgHeight = imagePre.getHeight();
 
+        int width;
+        int height;
+
         if (imgWidth > maxWidth || imgHeight > maxHeight) {
+            double ratio;
             if ((maxWidth / imgWidth) > (maxHeight / imgHeight)) {
                 ratio = (double) maxHeight / (double) imgHeight;
             } else {
