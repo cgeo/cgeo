@@ -180,7 +180,7 @@ public class cgeoimages extends AbstractActivity {
 
         final ArrayList<cgImage> images = extras.getParcelableArrayList("images");
         if (images == null || images.isEmpty()) {
-            showToast(res.getString(R.string.warn_load_spoiler_image));
+            showToast(res.getString(R.string.warn_load_images));
             finish();
             return;
         }

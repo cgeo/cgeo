@@ -225,8 +225,6 @@
   <string name="warn_search_help_user">Ange en användare på Geocaching.com.</string>
   <string name="warn_search_help_tb">Ange koden för en trackable. Tex \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Vänligen skriv någon text i loggen.</string>
-  <string name="warn_load_log_image">Tyvärr misslyckades c:geo att ladda loggbilder.</string>
-  <string name="warn_load_spoiler_image">Tyvärr misslyckades c:geo att ladda spoilerbilder.</string>
 
   <string name="info_altitude">Nuvarande höjd</string>
   <string name="info_distance">Rest sträcka</string>

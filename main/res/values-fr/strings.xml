@@ -150,6 +150,7 @@
   <string name="err_auth_process">Echec de la demande d\'autorisation.</string>
   <string name="err_cannot_log_visit">c:geo n\'a pas assez d\'information pour logger votre visite. Faites le depuis le détail de la cache, s\'il vous plait!</string>
   <string name="err_init_cleared">Désolé, c:geo ne peux pas effacer votre nom d\'utilisateur.</string>
+  <string name="warn_load_images">Désolé, c:geo n\'a pas pu charger les images.</string>
 
   <!-- location service -->
   <string name="loc_last">dernière pos. connue</string>
@@ -351,6 +352,8 @@
   <string name="cache_attributes">attributs</string>
   <string name="cache_inventory">inventaire</string>
   <string name="cache_log_offline">enregistrement hors ligne</string>
+  <string name="cache_log_images_loading">Chargement des images du carnet…</string>
+  <string name="cache_log_images_title">Images du carnet</string>
   <string name="cache_description">description</string>
   <string name="cache_description_long">description longue</string>
   <string name="cache_waypoints">étapes</string>

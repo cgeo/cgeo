@@ -225,8 +225,6 @@
   <string name="warn_search_help_user">Name eines Benutzers auf Geocaching.com eingeben.</string>
   <string name="warn_search_help_tb">Code des Trackables eingeben, z.B. \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Bitte Text einfügen.</string>
-  <string name="warn_load_log_image">c:geo konnte das Log-Bild nicht laden.</string>
-  <string name="warn_load_spoiler_image">c:geo konnte das Spoiler-Bild nicht laden.</string>
 
   <string name="info_altitude">Momentane Höhe</string>
   <string name="info_distance">Gereiste Strecke</string>
