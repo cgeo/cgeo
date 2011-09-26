@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
@@ -47,6 +48,8 @@ public class cgeoimages extends AbstractActivity {
     private int count = 0;
     private int countDone = 0;
     private String load_process_string;
+
+    static private ArrayList<Bitmap> bitmaps = new ArrayList<Bitmap>();
 
     private final static int IMG_LOAD_SUCCESS = 0;
     private final static int IMG_LOAD_FAILURE = 1;
@@ -227,6 +230,16 @@ public class cgeoimages extends AbstractActivity {
     }
 
     @Override
+    public void onDestroy() {
+        // Reclaim native memory faster than the finalizers would
+        for (Bitmap b : bitmaps) {
+            b.recycle();
+        }
+        bitmaps.clear();
+        super.onDestroy();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
 
@@ -259,6 +272,7 @@ public class cgeoimages extends AbstractActivity {
         public void handleMessage(Message message) {
             if (message.what == IMG_LOAD_SUCCESS) {
                 final BitmapDrawable image = (BitmapDrawable) message.obj;
+                bitmaps.add(image.getBitmap());
                 final ImageView image_view = (ImageView) inflater.inflate(R.layout.image_item, null);
 
                 final Rect bounds = image.getBounds();
