@@ -224,6 +224,7 @@
   <string name="warn_search_help_user">Escribe el nombre de usuario de Geocaching.com.</string>
   <string name="warn_search_help_tb">Escribe el código del rastreable. Por ejemplo \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Escribe algún texto de registro.</string>
+  <string name="warn_load_images">Error al cargar las imágenes.</string>
   
   <string name="info_altitude">Altitud actual</string>
   <string name="info_distance">Distancia recorrida</string>
