@@ -1621,7 +1621,8 @@ public class cgeodetail extends AbstractActivity {
 
         Intent spoilersIntent = new Intent(this, cgeoimages.class);
         spoilersIntent.putExtra("geocode", geocode.toUpperCase());
-        spoilersIntent.putExtra("type", cgeoimages.SPOILER_IMAGE);
+        spoilersIntent.putExtra("type", cgeoimages.SPOILER_IMAGES);
+        spoilersIntent.putParcelableArrayListExtra("images", cache.spoilers);
         startActivity(spoilersIntent);
     }
 
