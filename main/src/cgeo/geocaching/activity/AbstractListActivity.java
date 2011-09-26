@@ -69,7 +69,7 @@ public abstract class AbstractListActivity extends ListActivity implements
         app = (cgeoapplication) this.getApplication();
         prefs = getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE);
         settings = new cgSettings(this, prefs);
-        base = new cgBase(app, settings, prefs);
+        base = new cgBase(app, settings);
     }
 
     final public void setTitle(final String title) {
