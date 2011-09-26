@@ -228,8 +228,6 @@
   <string name="warn_search_help_user">Zadajte meno používateľa z Geocaching.com.</string>
   <string name="warn_search_help_tb">Zadajte kód trasovateľného objektu. Napríklad „TB29QMZ“.</string>
   <string name="warn_log_text_fill">Prosím, vyplňte nejaký text do logu.</string>
-  <string name="warn_load_log_image">Prepáčte, c:geo sa nepodarilo načítať obrázok záznamu.</string>
-  <string name="warn_load_spoiler_image">Prepáčte, c:geo sa nepodarilo načítať spoilerový obrázok.</string>
 
   <string name="info_altitude">Súčasná nadmorská výška</string>
   <string name="info_distance">Precestovaná vzdialenosť</string>

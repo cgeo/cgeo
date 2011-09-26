@@ -76,7 +76,7 @@ public class cgCache implements ICache {
     public boolean onWatchlist = false;
     public List<String> attributes = null;
     public List<cgWaypoint> waypoints = null;
-    public List<cgImage> spoilers = null;
+    public ArrayList<cgImage> spoilers = null;
     public List<cgLog> logs = null;
     public List<cgTrackable> inventory = null;
     public Map<Integer, Integer> logCounts = new HashMap<Integer, Integer>();

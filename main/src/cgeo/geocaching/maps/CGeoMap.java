@@ -245,7 +245,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         app = (cgeoapplication) activity.getApplication();
         app.setAction(null);
         settings = new cgSettings(activity, activity.getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE));
-        base = new cgBase(app, settings, activity.getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE));
+        base = new cgBase(app, settings);
         prefsEdit = activity.getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE).edit();
         MapFactory mapFactory = settings.getMapFactory();
 

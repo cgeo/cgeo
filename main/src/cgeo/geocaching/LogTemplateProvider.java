@@ -4,7 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import android.util.Log;
 
-import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -15,8 +14,6 @@ import java.util.regex.Pattern;
  *
  */
 public class LogTemplateProvider {
-    private static final URI URI_GC_EMAIL = cgBase.buildURI(false, "www.geocaching.com", "/email/");
-
     public static abstract class LogTemplate {
         private String template;
         private int resourceId;
@@ -91,7 +88,7 @@ public class LogTemplateProvider {
                             }
                             String findCount = "";
                             final Map<String, String> params = new HashMap<String, String>();
-                            final String page = base.request(URI_GC_EMAIL, "GET", params, false, false, false).getData();
+                            final String page = cgBase.getResponseData(base.request("http://www.geocaching.com/email/", params, false, false, false));
                             int current = parseFindCount(page);
 
                             if (current >= 0) {

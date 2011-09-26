@@ -7,10 +7,8 @@ import cgeo.geocaching.utils.CryptUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.entity.BufferedHttpEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.Activity;
 import android.content.Context;
@@ -32,19 +30,16 @@ import java.util.Date;
 
 public class cgHtmlImg implements Html.ImageGetter {
 
-    private Activity activity = null;
-    private String geocode = null;
-    private boolean placement = true;
-    private int reason = 0;
-    private boolean onlySave = false;
-    private boolean save = true;
-    private BitmapFactory.Options bfOptions = new BitmapFactory.Options();
-    private Display display = null;
-    private int maxWidth = 0;
-    private int maxHeight = 0;
-    private double ratio = 1.0d;
-    private int width = 0;
-    private int height = 0;
+    final private Activity activity;
+    final private String geocode;
+    final private boolean placement;
+    final private int reason;
+    final private boolean onlySave;
+    final private boolean save;
+    final private BitmapFactory.Options bfOptions;
+    final private Display display;
+    final private int maxWidth;
+    final private int maxHeight;
 
     public cgHtmlImg(Activity activityIn, String geocodeIn, boolean placementIn, int reasonIn, boolean onlySaveIn) {
         this(activityIn, geocodeIn, placementIn, reasonIn, onlySaveIn, true);
@@ -58,6 +53,7 @@ public class cgHtmlImg implements Html.ImageGetter {
         onlySave = onlySaveIn;
         save = saveIn;
 
+        bfOptions = new BitmapFactory.Options();
         bfOptions.inTempStorage = new byte[16 * 1024];
 
         display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
@@ -166,7 +162,6 @@ public class cgHtmlImg implements Html.ImageGetter {
         // download image and save it to the cache
         if ((imagePre == null && reason == 0) || onlySave) {
             Uri uri = null;
-            HttpClient client = null;
             HttpGet getMethod = null;
             HttpResponse httpResponse = null;
             HttpEntity entity = null;
@@ -191,9 +186,8 @@ public class cgHtmlImg implements Html.ImageGetter {
                     }
 
                     try {
-                        client = new DefaultHttpClient();
                         getMethod = new HttpGet(url);
-                        httpResponse = client.execute(getMethod);
+                        httpResponse = cgBase.doRequest(getMethod);
                         entity = httpResponse.getEntity();
                         bufferedEntity = new BufferedHttpEntity(entity);
 
@@ -271,7 +265,11 @@ public class cgHtmlImg implements Html.ImageGetter {
         final int imgWidth = imagePre.getWidth();
         final int imgHeight = imagePre.getHeight();
 
+        int width;
+        int height;
+
         if (imgWidth > maxWidth || imgHeight > maxHeight) {
+            double ratio;
             if ((maxWidth / imgWidth) > (maxHeight / imgHeight)) {
                 ratio = (double) maxHeight / (double) imgHeight;
             } else {

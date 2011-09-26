@@ -72,7 +72,7 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
         app = (cgeoapplication) this.getApplication();
         prefs = getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE);
         settings = new cgSettings(this, prefs);
-        base = new cgBase(app, settings, prefs);
+        base = new cgBase(app, settings);
     }
 
     final public cgSettings getSettings() {

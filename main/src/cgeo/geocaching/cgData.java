@@ -2884,7 +2884,7 @@ public class cgData {
             if (size > 0) {
                 Log.d(cgSettings.tag, "Database clean: removing " + size + " geocaches");
 
-                String geocodeList = cgBase.implode(", ", geocodes.toArray());
+                String geocodeList = StringUtils.join(geocodes.toArray(), ", ");
                 databaseRW.execSQL("delete from " + dbTableCaches + " where geocode in (" + geocodeList + ")");
                 databaseRW.execSQL("delete from " + dbTableAttributes + " where geocode in (" + geocodeList + ")");
                 databaseRW.execSQL("delete from " + dbTableSpoilers + " where geocode in (" + geocodeList + ")");
@@ -2945,7 +2945,7 @@ public class cgData {
             }
 
             if (CollectionUtils.isNotEmpty(geocodes)) {
-                String geocodeList = cgBase.implode(", ", geocodes.toArray());
+                String geocodeList = StringUtils.join(geocodes.toArray(), ", ");
                 databaseRW.execSQL("delete from " + dbTableCaches + " where geocode in (" + geocodeList + ")");
                 databaseRW.execSQL("delete from " + dbTableAttributes + " where geocode in (" + geocodeList + ")");
                 databaseRW.execSQL("delete from " + dbTableSpoilers + " where geocode in (" + geocodeList + ")");

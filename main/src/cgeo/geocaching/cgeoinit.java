@@ -6,6 +6,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.compatibility.Compatibility;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpResponse;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -31,13 +32,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.File;
-import java.net.URI;
 
 public class cgeoinit extends AbstractActivity {
 
     private final int SELECT_MAPFILE_REQUEST = 1;
-
-    private static final URI URI_SEND2CGEO_AUTH = cgBase.buildURI(false, "send2.cgeo.org", "/auth.html");
 
     private ProgressDialog loginDialog = null;
     private ProgressDialog webDialog = null;
@@ -1030,7 +1028,7 @@ public class cgeoinit extends AbstractActivity {
             loginDialog.setCancelable(false);
 
             settings.setLogin(username, password);
-            CookieJar.deleteCookies(prefs);
+            cgBase.clearCookies();
 
             (new Thread() {
 
@@ -1072,12 +1070,12 @@ public class cgeoinit extends AbstractActivity {
 
                     String params = "name=" + cgBase.urlencode_rfc3986(nam) + "&code=" + cgBase.urlencode_rfc3986(cod);
 
-                    cgResponse response = base.request(URI_SEND2CGEO_AUTH, "GET", params, 0, true);
+                    HttpResponse response = base.request("http://send2.cgeo.org/auth.html", params, true);
 
-                    if (response.getStatusCode() == 200)
+                    if (response.getStatusLine().getStatusCode() == 200)
                     {
                         //response was OK
-                        String[] strings = response.getData().split(",");
+                        String[] strings = cgBase.getResponseData(response).split(",");
                         try {
                             pin = Integer.parseInt(strings[1].trim());
                         } catch (Exception e) {

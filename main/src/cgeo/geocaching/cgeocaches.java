@@ -27,6 +27,7 @@ import cgeo.geocaching.sorting.VoteComparator;
 import cgeo.geocaching.utils.CollectionUtils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpResponse;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -61,7 +62,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -140,8 +140,6 @@ public class cgeocaches extends AbstractListActivity {
 
     private static final int CONTEXT_MENU_MOVE_TO_LIST = 1000;
     private static final int MENU_MOVE_SELECTED_OR_ALL_TO_LIST = 1200;
-
-    private static final URI URI_SEND2CGEO_READ = cgBase.buildURI(false, "send2.cgeo.org", "/read.html");
 
     private String action = null;
     private String type = null;
@@ -222,14 +220,14 @@ public class cgeocaches extends AbstractListActivity {
                     dialog.setNegativeButton(res.getString(R.string.license_dismiss), new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int id) {
-                            CookieJar.deleteCookies(prefs);
+                            cgBase.clearCookies();
                             dialog.cancel();
                         }
                     });
                     dialog.setPositiveButton(res.getString(R.string.license_show), new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int id) {
-                            CookieJar.deleteCookies(prefs);
+                            cgBase.clearCookies();
                             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/software/agreement.aspx?ID=0")));
                         }
                     });
@@ -2086,12 +2084,13 @@ public class cgeocaches extends AbstractListActivity {
                 if (deviceCode == null) {
                     deviceCode = "";
                 }
-                cgResponse responseFromWeb = base.request(URI_SEND2CGEO_READ, "GET", "code=" + cgBase.urlencode_rfc3986(deviceCode), 0, true);
+                HttpResponse responseFromWeb = base.request("http://send2.cgeo.org/read.html", "code=" + cgBase.urlencode_rfc3986(deviceCode), true);
 
-                if (responseFromWeb.getStatusCode() == 200) {
-                    if (responseFromWeb.getData().length() > 2) {
+                if (responseFromWeb.getStatusLine().getStatusCode() == 200) {
+                    final String response = cgBase.getResponseData(responseFromWeb);
+                    if (response.length() > 2) {
 
-                        String GCcode = responseFromWeb.getData();
+                        String GCcode = response;
 
                         delay = 1;
                         Message mes = new Message();
@@ -2108,7 +2107,7 @@ public class cgeocaches extends AbstractListActivity {
                         mes1.obj = GCcode;
                         handler.sendMessage(mes1);
                         yield();
-                    } else if ("RG".equals(responseFromWeb.getData())) {
+                    } else if ("RG".equals(cgBase.getResponseData(responseFromWeb))) {
                         //Server returned RG (registration) and this device no longer registered.
                         settings.setWebNameCode(null, null);
                         needToStop = true;
@@ -2120,7 +2119,7 @@ public class cgeocaches extends AbstractListActivity {
                         yield();
                     }
                 }
-                if (responseFromWeb.getStatusCode() != 200) {
+                if (responseFromWeb.getStatusLine().getStatusCode() != 200) {
                     needToStop = true;
                     handler.sendEmptyMessage(-2);
                     return;
