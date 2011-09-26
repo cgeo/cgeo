@@ -14,13 +14,26 @@ import cgeo.geocaching.utils.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
+import org.apache.http.client.CookieStore;
+import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.conn.ClientConnectionManager;
+import org.apache.http.conn.scheme.PlainSocketFactory;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.scheme.SchemeRegistry;
+import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpParams;
+import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
@@ -3576,22 +3589,35 @@ public class cgBase {
         return request(uri, paramsDone, xContentType);
     }
 
-    private static DefaultHttpClient httpClient;
+    private static ClientConnectionManager clientConnectionManager;
+    private static HttpParams clientParams;
+    private static CookieStore cookieStore;
 
-    public static DefaultHttpClient getHttpClient() {
-        if (httpClient == null) {
+    public static HttpClient getHttpClient() {
+        if (clientConnectionManager == null) {
             synchronized (cgBase.class) {
-                if (httpClient == null) {
-                    httpClient = new DefaultHttpClient();
-                    // TODO: check redirect strategy
+                if (clientConnectionManager == null) {
+                    clientParams = new BasicHttpParams();
+                    HttpProtocolParams.setVersion(clientParams, HttpVersion.HTTP_1_1);
+                    final SchemeRegistry registry = new SchemeRegistry();
+                    registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
+                    registry.register(new Scheme("https", SSLSocketFactory.getSocketFactory(), 443));
+                    cookieStore = new BasicCookieStore();
+                    clientConnectionManager = new ThreadSafeClientConnManager(clientParams, registry);
                 }
             }
         }
-        return httpClient;
+        final DefaultHttpClient client = new DefaultHttpClient(clientConnectionManager, clientParams);
+        client.setCookieStore(cookieStore);
+        return client;
     }
 
     public static void clearCookies() {
-        getHttpClient().getCookieStore().clear();
+        if (cookieStore == null) {
+            // If cookie store has not been created yet, force its creation
+            getHttpClient();
+        }
+        cookieStore.clear();
     }
 
     public HttpResponse postRequest(final String uri, final List<? extends NameValuePair> params) {
@@ -3633,7 +3659,7 @@ public class cgBase {
     static private HttpResponse doRequest(final HttpRequestBase request) {
         Log.d(cgSettings.tag, "request: " + request.getMethod() + " " + hidePassword(request.getURI().toString()));
 
-        final DefaultHttpClient client = getHttpClient();
+        final HttpClient client = getHttpClient();
         for (int i = 0; i <= NB_DOWNLOAD_RETRIES; i++) {
             try {
                 return client.execute(request);
