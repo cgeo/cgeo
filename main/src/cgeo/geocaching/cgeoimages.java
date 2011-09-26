@@ -48,6 +48,9 @@ public class cgeoimages extends AbstractActivity {
     private int countDone = 0;
     private String load_process_string;
 
+    private final static int IMG_LOAD_SUCCESS = 0;
+    private final static int IMG_LOAD_FAILURE = 1;
+
     private Handler loadImagesHandler = new Handler() {
 
         @Override
@@ -108,15 +111,15 @@ public class cgeoimages extends AbstractActivity {
 
                             @Override
                             public void run() {
-                                BitmapDrawable image = null;
                                 try {
                                     cgHtmlImg imgGetter = new cgHtmlImg(cgeoimages.this, geocode, true, offline, false, save);
 
-                                    image = imgGetter.getDrawable(img.url);
-                                    Message message = handler.obtainMessage(0, image);
+                                    final BitmapDrawable image = imgGetter.getDrawable(img.url);
+                                    Message message = handler.obtainMessage(IMG_LOAD_SUCCESS, image);
                                     handler.sendMessage(message);
                                 } catch (Exception e) {
                                     Log.e(cgSettings.tag, "cgeoimages.onCreate.onClick.run: " + e.toString());
+                                    handler.sendMessage(handler.obtainMessage(IMG_LOAD_FAILURE));
                                 }
 
                             }
@@ -254,12 +257,11 @@ public class cgeoimages extends AbstractActivity {
 
         @Override
         public void handleMessage(Message message) {
-            final BitmapDrawable image = (BitmapDrawable) message.obj;
-            if (image != null) {
-                ImageView image_view = null;
-                image_view = (ImageView) inflater.inflate(R.layout.image_item, null);
+            if (message.what == IMG_LOAD_SUCCESS) {
+                final BitmapDrawable image = (BitmapDrawable) message.obj;
+                final ImageView image_view = (ImageView) inflater.inflate(R.layout.image_item, null);
 
-                Rect bounds = image.getBounds();
+                final Rect bounds = image.getBounds();
 
                 image_view.setImageResource(R.drawable.image_not_loaded);
                 image_view.setClickable(true);
