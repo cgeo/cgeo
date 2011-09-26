@@ -14,8 +14,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Message;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -38,7 +36,6 @@ public class cgeoimages extends AbstractActivity {
     public static final int SPOILER_IMAGE = 2;
 
     private int img_type;
-    private List<cgImage> images = new ArrayList<cgImage>();
     private String geocode = null;
     private String title = null;
     private String url = null;
@@ -54,72 +51,53 @@ public class cgeoimages extends AbstractActivity {
 
     static private Collection<Bitmap> bitmaps = Collections.synchronizedCollection(new ArrayList<Bitmap>());
 
-    private Handler loadImagesHandler = new Handler() {
+    private void loadImages(final List<cgImage> images) {
+        if (waitDialog != null) {
+            waitDialog.dismiss();
+        }
 
-        @Override
-        public void handleMessage(Message msg) {
-            try {
-                if (images.isEmpty()) {
-                    if (waitDialog != null) {
-                        waitDialog.dismiss();
-                    }
-                    switch (img_type) {
-                        case LOG_IMAGE:
-                            showToast(res.getString(R.string.warn_load_log_image));
-                            break;
-                        case SPOILER_IMAGE:
-                            showToast(res.getString(R.string.warn_load_spoiler_image));
-                            break;
-                    }
+        if (images.isEmpty()) {
+            switch (img_type) {
+                case LOG_IMAGE:
+                    showToast(res.getString(R.string.warn_load_log_image));
+                    break;
+                case SPOILER_IMAGE:
+                    showToast(res.getString(R.string.warn_load_spoiler_image));
+                    break;
+            }
+            finish();
+        } else {
+            if (app.isOffline(geocode, null)) {
+                offline = (img_type == LOG_IMAGE) && !settings.storelogimages ? 0 : 1;
+            } else {
+                offline = 0;
+            }
 
-                    finish();
-                    return;
-                } else {
-                    if (waitDialog != null) {
-                        waitDialog.dismiss();
-                    }
+            count = images.size();
+            progressDialog = new ProgressDialog(cgeoimages.this);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            progressDialog.setMessage(load_process_string);
+            progressDialog.setCancelable(true);
+            progressDialog.setMax(count);
+            progressDialog.show();
 
-                    if (app.isOffline(geocode, null)) {
-                        offline = 1;
-                        if ((img_type == LOG_IMAGE) && (settings.storelogimages == false)) {
-                            offline = 0;
-                        }
-                    } else {
-                        offline = 0;
-                    }
+            LinearLayout rowView = null;
+            for (final cgImage img : images) {
+                rowView = (LinearLayout) inflater.inflate(R.layout.cache_image_item, null);
 
-                    count = images.size();
-                    progressDialog = new ProgressDialog(cgeoimages.this);
-                    progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                    progressDialog.setMessage(load_process_string);
-                    progressDialog.setCancelable(true);
-                    progressDialog.setMax(count);
-                    progressDialog.show();
+                ((TextView) rowView.findViewById(R.id.title)).setText(Html.fromHtml(img.title));
 
-                    LinearLayout rowView = null;
-                    for (final cgImage img : images) {
-                        rowView = (LinearLayout) inflater.inflate(R.layout.cache_image_item, null);
-
-                        ((TextView) rowView.findViewById(R.id.title)).setText(Html.fromHtml(img.title));
-
-                        if (StringUtils.isNotBlank(img.description)) {
-                            final TextView descView = (TextView) rowView.findViewById(R.id.description);
-                            descView.setText(Html.fromHtml(img.description), TextView.BufferType.SPANNABLE);
-                            descView.setVisibility(View.VISIBLE);
-                        }
-
-                        new AsyncImgLoader(rowView, img).execute();
-                        imagesView.addView(rowView);
-                    }
+                if (StringUtils.isNotBlank(img.description)) {
+                    final TextView descView = (TextView) rowView.findViewById(R.id.description);
+                    descView.setText(Html.fromHtml(img.description), TextView.BufferType.SPANNABLE);
+                    descView.setVisibility(View.VISIBLE);
                 }
-            } catch (Exception e) {
-                if (waitDialog != null) {
-                    waitDialog.dismiss();
-                }
-                Log.e(cgSettings.tag, "cgeoimages.loadImagesHandler: " + e.toString());
+
+                new AsyncImgLoader(rowView, img).execute();
+                imagesView.addView(rowView);
             }
         }
-    };
+    }
 
     private class AsyncImgLoader extends AsyncTask<Void, Void, BitmapDrawable> {
 
@@ -259,15 +237,10 @@ public class cgeoimages extends AbstractActivity {
                 logimage.title = title;
                 logimage.url = url;
                 logimage.description = "";
-                images.add(logimage);
-                try {
-                    loadImagesHandler.sendMessage(new Message());
-                } catch (Exception e) {
-                    Log.e(cgSettings.tag, "cgeoimages.loadImagesHandler.sendMessage: " + e.toString());
-                }
+                loadImages(Collections.singletonList(logimage));
                 break;
             case SPOILER_IMAGE:
-                (new loadSpoilers()).start();
+                loadImages(app.loadSpoilers(geocode));
                 break;
             default:
                 showToast("Sorry, can't load unknown image type.");
@@ -293,17 +266,4 @@ public class cgeoimages extends AbstractActivity {
         settings.load();
     }
 
-    private class loadSpoilers extends Thread {
-
-        @Override
-        public void run() {
-            try {
-                images = app.loadSpoilers(geocode);
-
-                loadImagesHandler.sendMessage(new Message());
-            } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgeoimages.loadSpoilers.run: " + e.toString());
-            }
-        }
-    }
 }
