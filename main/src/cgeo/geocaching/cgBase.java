@@ -228,6 +228,8 @@ public class cgBase {
     public static final int LOG_WEBCAM_PHOTO_TAKEN = 11;
     public static final int LOG_ANNOUNCEMENT = 74;
 
+    private static final int NB_DOWNLOAD_RETRIES = 4;
+
     public cgBase(cgeoapplication appIn, cgSettings settingsIn) {
         context = appIn.getBaseContext();
         res = appIn.getBaseContext().getResources();
@@ -3629,19 +3631,18 @@ public class cgBase {
     }
 
     static private HttpResponse doRequest(final HttpRequestBase request) {
+        Log.d(cgSettings.tag, "request: " + request.getMethod() + " " + hidePassword(request.getURI().toString()));
+
         final DefaultHttpClient client = getHttpClient();
-
-        for (int i = 0; i < 5; i++) {
-            if (i > 0) {
-                Log.w(cgSettings.tag, "Failed to download data, retrying. Attempt #" + (i + 1));
-            }
-
-            Log.d(cgSettings.tag, "request: " + request.getMethod() + " " + hidePassword(request.getURI().toString()));
-
+        for (int i = 0; i <= NB_DOWNLOAD_RETRIES; i++) {
             try {
                 return client.execute(request);
-            } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgeoBase.request", e);
+            } catch (IOException e) {
+                if (i == NB_DOWNLOAD_RETRIES) {
+                    Log.e(cgSettings.tag, "cgeoBase.request", e);
+                } else {
+                    Log.e(cgSettings.tag, "cgeoBase.request: failed to download data (" + e.getMessage() + "), retrying");
+                }
             }
         }
 
