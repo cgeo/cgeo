@@ -3620,13 +3620,16 @@ public class cgBase {
     }
 
     private HttpResponse request(final HttpRequestBase request) {
-        final DefaultHttpClient client = getHttpClient();
-
         if (settings.asBrowser == 1) {
             request.setHeader("Accept-Charset", "utf-8, iso-8859-1, utf-16, *;q=0.7");
             request.setHeader("Accept-Language", "en-US");
             request.setHeader("User-Agent", idBrowser);
         }
+        return doRequest(request);
+    }
+
+    static private HttpResponse doRequest(final HttpRequestBase request) {
+        final DefaultHttpClient client = getHttpClient();
 
         for (int i = 0; i < 5; i++) {
             if (i > 0) {
@@ -3661,22 +3664,11 @@ public class cgBase {
         request.setHeader("Content-Type", "application/json; charset=UTF-8");
         request.setHeader("X-Requested-With", "XMLHttpRequest");
 
-        for (int i = 0; i < 3; i++) {
+        final HttpResponse response = doRequest(request);
+        if (response != null && response.getStatusLine().getStatusCode() == 200) {
             try {
-                final HttpResponse response = getHttpClient().execute(request);
-                final int statusCode = response.getStatusLine().getStatusCode();
-                if (statusCode == 403) {
-                    // Forbidden, do not retry
-                    break;
-                }
-                final StringBuffer buffer = new StringBuffer();
-                final BufferedReader br = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-                readIntoBuffer(br, buffer);
-
-                Log.i(cgSettings.tag, "[POST " + statusCode + "] Downloaded " + uri);
-
-                return new JSONObject(buffer.toString());
-            } catch (Exception e) {
+                return new JSONObject(getResponseData(response));
+            } catch (JSONException e) {
                 Log.e(cgSettings.tag, "cgeoBase.requestJSON", e);
             }
         }
