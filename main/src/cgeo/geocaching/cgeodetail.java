@@ -1231,27 +1231,30 @@ public class cgeodetail extends AbstractActivity {
                 LinearLayout logLayout = (LinearLayout) rowView.findViewById(R.id.log_layout);
 
                 if ((log.logImages != null) && (!log.logImages.isEmpty())) {
+
+                    final ArrayList<cgImage> logImages = new ArrayList<cgImage>(log.logImages);
+
+                    final View.OnClickListener listener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent logImgIntent = new Intent(cgeodetail.this, cgeoimages.class);
+                            logImgIntent.putExtra("geocode", geocode.toUpperCase());
+                            logImgIntent.putExtra("type", cgeoimages.LOG_IMAGES);
+                            logImgIntent.putParcelableArrayListExtra("images", logImages);
+                            startActivity(logImgIntent);
+                        }
+                    };
+
                     for (int i_img_cnt = 0; i_img_cnt < log.logImages.size(); i_img_cnt++) {
                         String img_title = log.logImages.get(i_img_cnt).title;
                         if (img_title.equals("")) {
                             img_title = res.getString(R.string.cache_log_image_default_title);
                         }
                         final String title = img_title;
-                        final String url = log.logImages.get(i_img_cnt).url;
                         LinearLayout log_imgView = (LinearLayout) inflater.inflate(R.layout.log_img, null);
                         TextView log_img_title = (TextView) log_imgView.findViewById(R.id.title);
                         log_img_title.setText(title);
-                        log_img_title.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent logImgIntent = new Intent(cgeodetail.this, cgeoimages.class);
-                                logImgIntent.putExtra("geocode", geocode.toUpperCase());
-                                logImgIntent.putExtra("type", cgeoimages.LOG_IMAGE);
-                                logImgIntent.putExtra("title", title);
-                                logImgIntent.putExtra("url", url);
-                                startActivity(logImgIntent);
-                            }
-                        });
+                        log_img_title.setOnClickListener(listener);
                         logLayout.addView(log_imgView);
                     }
                 }

@@ -33,7 +33,7 @@ import java.util.List;
 public class cgeoimages extends AbstractActivity {
 
     private static final int UNKNOWN_TYPE = 0;
-    public static final int LOG_IMAGE = 1;
+    public static final int LOG_IMAGES = 1;
     public static final int SPOILER_IMAGE = 2;
 
     private String geocode = null;
@@ -162,7 +162,7 @@ public class cgeoimages extends AbstractActivity {
             return;
         }
 
-        if (img_type != SPOILER_IMAGE && img_type != LOG_IMAGE) {
+        if (img_type != SPOILER_IMAGE && img_type != LOG_IMAGES) {
             showToast("Sorry, can't load unknown image type.");
             finish();
             return;
@@ -180,17 +180,8 @@ public class cgeoimages extends AbstractActivity {
 
         final boolean offline = app.isOffline(geocode, null) && (img_type == SPOILER_IMAGE | settings.storelogimages);
 
-        if (img_type == LOG_IMAGE) {
-            cgImage logimage = new cgImage();
-            logimage.title = extras.getString("title");
-            logimage.url = extras.getString("url");
-            if (logimage.title == null || logimage.url == null) {
-                showToast("Sorry, c:geo forgot which logimage you wanted to load.");
-                finish();
-                return;
-            }
-            logimage.description = "";
-            loadImages(Collections.singletonList(logimage), R.string.cache_log_images_loading, settings.storelogimages, offline);
+        if (img_type == LOG_IMAGES) {
+            loadImages(extras.<cgImage>getParcelableArrayList("images"), R.string.cache_log_images_loading, settings.storelogimages, offline);
         } else {
             final List<cgImage> images = app.loadSpoilers(geocode);
             if (images.isEmpty()) {
