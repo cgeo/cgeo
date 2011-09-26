@@ -1307,7 +1307,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                             continue;
                         }
 
-                        items.add(getItem(new cgCoord(cacheOne), true, cacheOne.type, cacheOne.own, cacheOne.found, cacheOne.disabled));
                         // display cache waypoints
                         if (cacheOne != null && cacheOne.waypoints != null
                                 // Only show waypoints for single view or setting
@@ -1322,6 +1321,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                                 items.add(getItem(new cgCoord(oneWaypoint), false, oneWaypoint.type, false, false, false));
                             }
                         }
+                        items.add(getItem(new cgCoord(cacheOne), true, cacheOne.type, cacheOne.own, cacheOne.found, cacheOne.disabled));
                     }
 
                     overlayCaches.updateItems(items);
