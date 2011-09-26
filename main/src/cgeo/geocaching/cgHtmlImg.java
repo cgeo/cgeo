@@ -7,10 +7,8 @@ import cgeo.geocaching.utils.CryptUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.entity.BufferedHttpEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.Activity;
 import android.content.Context;
@@ -163,7 +161,6 @@ public class cgHtmlImg implements Html.ImageGetter {
         // download image and save it to the cache
         if ((imagePre == null && reason == 0) || onlySave) {
             Uri uri = null;
-            HttpClient client = null;
             HttpGet getMethod = null;
             HttpResponse httpResponse = null;
             HttpEntity entity = null;
@@ -188,9 +185,8 @@ public class cgHtmlImg implements Html.ImageGetter {
                     }
 
                     try {
-                        client = new DefaultHttpClient();
                         getMethod = new HttpGet(url);
-                        httpResponse = client.execute(getMethod);
+                        httpResponse = cgBase.doRequest(getMethod);
                         entity = httpResponse.getEntity();
                         bufferedEntity = new BufferedHttpEntity(entity);
 

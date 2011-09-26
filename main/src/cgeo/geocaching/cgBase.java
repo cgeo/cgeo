@@ -3656,7 +3656,7 @@ public class cgBase {
         return doRequest(request);
     }
 
-    static private HttpResponse doRequest(final HttpRequestBase request) {
+    static public HttpResponse doRequest(final HttpRequestBase request) {
         Log.d(cgSettings.tag, "request: " + request.getMethod() + " " + hidePassword(request.getURI().toString()));
 
         final HttpClient client = getHttpClient();
