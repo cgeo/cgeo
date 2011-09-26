@@ -122,7 +122,7 @@ public class cgeoimages extends AbstractActivity {
                                     handler.sendMessage(message);
                                 } catch (Exception e) {
                                     Log.e(cgSettings.tag, "cgeoimages.onCreate.onClick.run: " + e.toString());
-                                    handler.sendMessage(handler.obtainMessage(IMG_LOAD_FAILURE));
+                                    handler.sendEmptyMessage(IMG_LOAD_FAILURE);
                                 }
 
                             }
