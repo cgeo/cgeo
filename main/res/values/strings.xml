@@ -228,8 +228,7 @@
   <string name="warn_search_help_user">Fill name of user at Geocaching.com.</string>
   <string name="warn_search_help_tb">Fill code of trackable. For example \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Please, fill some log text.</string>
-  <string name="warn_load_log_image">Sorry, c:geo failed to load log image.</string>
-  <string name="warn_load_spoiler_image">Sorry, c:geo failed to load spoiler image.</string>
+  <string name="warn_load_images">Sorry, c:geo failed to load images.</string>
 
   <string name="info_altitude">Current altitude</string>
   <string name="info_distance">Distance traveled</string>
@@ -505,8 +504,8 @@
   <string name="cache_inventory">Inventory</string>
   <string name="cache_inventory_loading">loading cache inventory…</string>
   <string name="cache_log_offline">Offline log</string>
-  <string name="cache_log_images_loading">Loading log Image …</string>
-  <string name="cache_log_images_title">Log image</string>
+  <string name="cache_log_images_loading">Loading log images …</string>
+  <string name="cache_log_images_title">Log images</string>
   <string name="cache_log_image_default_title">Photo</string>
   <string name="cache_personal_note">Personal note</string>
   <string name="cache_description">Description</string>

@@ -222,8 +222,6 @@
   <string name="warn_search_help_user">Wpisz nazwę użytkownika serwisu Geocaching.com.</string>
   <string name="warn_search_help_tb">Wpisz kod przedmiotu podróżnego. Na przykład \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Proszę wypełnić jakimś tekstem.</string>
-  <string name="warn_load_log_image">Przepraszam, c:geo nie mógł załadować zdjęcia.</string>
-  <string name="warn_load_spoiler_image">Przepraszam, c:geo nie mógł załadować zdjęcia z spoilerem.</string>
 
   <string name="info_altitude">Aktualna wysokość</string>
   <string name="info_distance">Przebyta odległość</string>
