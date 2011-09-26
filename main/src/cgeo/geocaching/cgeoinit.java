@@ -364,6 +364,9 @@ public class cgeoinit extends AbstractActivity {
         showWaypoints.setChecked(prefs.getBoolean("gcshowwaypoints", false));
         showWaypoints.setOnClickListener(new cgeoShowWaypoints());
 
+        TextView showWaypointsThreshold = (TextView) findViewById(R.id.showwaypointsthreshold);
+        showWaypointsThreshold.setText("" + prefs.getInt("gcshowwaypointsthreshold", 0));
+
         CheckBox autovisitButton = (CheckBox) findViewById(R.id.trackautovisit);
         if (prefs.getBoolean("trackautovisit", false)) {
             autovisitButton.setChecked(true);
@@ -550,6 +553,8 @@ public class cgeoinit extends AbstractActivity {
         final boolean status3 = settings.setSignature(signatureNew);
         final boolean status4 = settings.setAltCorrection(altitudeNewInt);
         final boolean status5 = settings.setMapFile(mfmapFileNew);
+        TextView field = (TextView) findViewById(R.id.showwaypointsthreshold);
+        settings.setShowWaypointsThreshold(Integer.parseInt(field.getText().toString()));
 
         return status1 && status2 && status3 && status4 && status5;
     }
