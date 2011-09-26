@@ -28,10 +28,7 @@ public abstract class MockedCache implements ICache {
             }
 
             br.close();
-
-            cgBase.replaceWhitespace(buffer);
-            return buffer.toString();
-
+            return cgBase.replaceWhitespace(buffer.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
