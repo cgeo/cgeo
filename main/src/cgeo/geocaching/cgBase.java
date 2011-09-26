@@ -366,11 +366,12 @@ public class cgBase {
         settings = settingsIn;
 
         try {
-            PackageManager manager = app.getPackageManager();
-            PackageInfo info = manager.getPackageInfo(app.getPackageName(), 0);
+            final PackageManager manager = app.getPackageManager();
+            final PackageInfo info = manager.getPackageInfo(app.getPackageName(), 0);
             version = info.versionName;
-        } catch (Exception e) {
-            // nothing
+        } catch (PackageManager.NameNotFoundException e) {
+            Log.e(cgSettings.tag, "unable to get version information", e);
+            version = null;
         }
 
         if (settings.asBrowser == 1) {
