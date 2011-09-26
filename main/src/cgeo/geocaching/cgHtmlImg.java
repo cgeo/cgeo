@@ -36,7 +36,7 @@ public class cgHtmlImg implements Html.ImageGetter {
     final private int reason;
     final private boolean onlySave;
     final private boolean save;
-    final private BitmapFactory.Options bfOptions = new BitmapFactory.Options();
+    final private BitmapFactory.Options bfOptions;
     final private Display display;
     final private int maxWidth;
     final private int maxHeight;
@@ -53,6 +53,7 @@ public class cgHtmlImg implements Html.ImageGetter {
         onlySave = onlySaveIn;
         save = saveIn;
 
+        bfOptions = new BitmapFactory.Options();
         bfOptions.inTempStorage = new byte[16 * 1024];
 
         display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
