@@ -32,16 +32,16 @@ import java.util.Date;
 
 public class cgHtmlImg implements Html.ImageGetter {
 
-    private Activity activity = null;
-    private String geocode = null;
-    private boolean placement = true;
-    private int reason = 0;
-    private boolean onlySave = false;
-    private boolean save = true;
-    private BitmapFactory.Options bfOptions = new BitmapFactory.Options();
-    private Display display = null;
-    private int maxWidth = 0;
-    private int maxHeight = 0;
+    final private Activity activity;
+    final private String geocode;
+    final private boolean placement;
+    final private int reason;
+    final private boolean onlySave;
+    final private boolean save;
+    final private BitmapFactory.Options bfOptions = new BitmapFactory.Options();
+    final private Display display;
+    final private int maxWidth;
+    final private int maxHeight;
     private double ratio = 1.0d;
     private int width = 0;
     private int height = 0;
