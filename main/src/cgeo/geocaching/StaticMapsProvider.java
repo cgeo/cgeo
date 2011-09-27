@@ -65,7 +65,6 @@ public class StaticMapsProvider {
         HttpGet getMethod = null;
         HttpResponse httpResponse = null;
         HttpEntity entity = null;
-        BufferedHttpEntity bufferedEntity = null;
 
         boolean ok = false;
 
@@ -85,34 +84,30 @@ public class StaticMapsProvider {
                     break;
                 }
 
-                bufferedEntity = new BufferedHttpEntity(entity);
-                if (bufferedEntity != null) {
-                    InputStream is = (InputStream) bufferedEntity.getContent();
-                    FileOutputStream fos = new FileOutputStream(fileName);
+                final BufferedHttpEntity bufferedEntity = new BufferedHttpEntity(entity);
+                InputStream is = (InputStream) bufferedEntity.getContent();
+                FileOutputStream fos = new FileOutputStream(fileName);
 
-                    int fileSize = 0;
-                    try {
-                        byte[] buffer = new byte[4096];
-                        int bytesRead;
-                        while ((bytesRead = is.read(buffer)) != -1) {
-                            fos.write(buffer, 0, bytesRead);
-                            fileSize += bytesRead;
-                        }
-                        fos.flush();
-                        ok = true;
-                    } catch (IOException e) {
-                        Log.e(cgSettings.tag, "cgMapImg.getDrawable (saving to cache): " + e.toString());
-                    } finally {
-                        is.close();
-                        fos.close();
+                int fileSize = 0;
+                try {
+                    byte[] buffer = new byte[4096];
+                    int bytesRead;
+                    while ((bytesRead = is.read(buffer)) != -1) {
+                        fos.write(buffer, 0, bytesRead);
+                        fileSize += bytesRead;
                     }
+                    fos.flush();
+                    ok = true;
+                } catch (IOException e) {
+                    Log.e(cgSettings.tag, "cgMapImg.getDrawable (saving to cache): " + e.toString());
+                } finally {
+                    is.close();
+                    fos.close();
+                }
 
-                    bufferedEntity = null;
-
-                    // delete image if it has no contents
-                    if (ok && fileSize < MIN_MAP_IMAGE_BYTES) {
-                        (new File(fileName)).delete();
-                    }
+                // delete image if it has no contents
+                if (ok && fileSize < MIN_MAP_IMAGE_BYTES) {
+                    (new File(fileName)).delete();
                 }
 
                 if (ok) {

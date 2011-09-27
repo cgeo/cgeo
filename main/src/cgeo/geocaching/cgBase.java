@@ -893,7 +893,7 @@ public class cgBase {
             recaptchaText = thread.getText();
         }
 
-        if (cids.size() > 0 && (recaptchaChallenge == null || (recaptchaChallenge != null && StringUtils.isNotBlank(recaptchaText)))) {
+        if (cids.size() > 0 && (recaptchaChallenge == null || StringUtils.isNotBlank(recaptchaText))) {
             Log.i(cgSettings.tag, "Trying to get .loc for " + cids.size() + " caches");
 
             try {

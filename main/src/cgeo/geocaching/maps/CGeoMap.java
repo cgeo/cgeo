@@ -1278,7 +1278,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 final List<cgCache> cachesProtected = new ArrayList<cgCache>(caches);
                 final List<CachesOverlayItemImpl> items = new ArrayList<CachesOverlayItemImpl>();
 
-                if (cachesProtected != null && !cachesProtected.isEmpty()) {
+                if (!cachesProtected.isEmpty()) {
                     int icon = 0;
                     Drawable pin = null;
                     CachesOverlayItemImpl item = null;
@@ -1719,7 +1719,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     centerLon = maxLon;
                 }
 
-                if (cnt != null && cnt > 0) {
+                if (cnt > 0) {
                     mapController.setCenter(settings.getMapFactory().getGeoPointBase(new Geopoint(centerLat, centerLon)));
                     if (Math.abs(maxLat - minLat) != 0 && Math.abs(maxLon - minLon) != 0) {
                         mapController.zoomToSpan(Math.abs(maxLat - minLat), Math.abs(maxLon - minLon));

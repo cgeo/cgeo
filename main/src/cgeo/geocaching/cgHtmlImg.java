@@ -206,9 +206,8 @@ public class cgHtmlImg implements Html.ImageGetter {
                             bfOptions.inSampleSize = 2;
                         }
 
-                        if (bufferedEntity != null) {
-                            imagePre = BitmapFactory.decodeStream(bufferedEntity.getContent(), null, bfOptions);
-                        }
+                        imagePre = BitmapFactory.decodeStream(bufferedEntity.getContent(), null, bfOptions);
+
                         if (imagePre != null) {
                             break;
                         }
