@@ -360,7 +360,7 @@ public class cgeocoords extends Dialog {
     private boolean calc(final boolean signalError) {
         if (currentFormat == coordInputFormatEnum.Plain) {
             try {
-                gp = new Geopoint(eLat.getText().toString() + " " + eLon.getText().toString());
+                gp = new Geopoint(eLat.getText().toString(), eLon.getText().toString());
             } catch (ParseException e) {
                 if (signalError) {
                     context.showToast(context.getResources().getString(R.string.err_parse_lat_lon));
