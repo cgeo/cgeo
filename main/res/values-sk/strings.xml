@@ -228,6 +228,7 @@
   <string name="warn_search_help_user">Zadajte meno používateľa z Geocaching.com.</string>
   <string name="warn_search_help_tb">Zadajte kód trasovateľného objektu. Napríklad „TB29QMZ“.</string>
   <string name="warn_log_text_fill">Prosím, vyplňte nejaký text do logu.</string>
+  <string name="warn_load_images">Prepáčte, c:geo sa nepodarilo načítať obrázky.</string>
 
   <string name="info_altitude">Súčasná nadmorská výška</string>
   <string name="info_distance">Precestovaná vzdialenosť</string>
@@ -565,9 +566,7 @@
   <string name="cache_type">Typ</string>
   <string name="cache_distance">Vzdialenosť</string>
   <string name="cache_difficulty">Náročnosť</string>
-  <string name="cache_difficulty_of">z</string>
   <string name="cache_terrain">Terén</string>
-  <string name="cache_terrain_of">z</string>
   <string name="cache_rating">Hodnotenie</string>
   <string name="cache_rating_of">z</string>
   <string name="cache_favourite">Obľúbené</string>
@@ -585,6 +584,7 @@
   <string name="cache_export_fieldnote">Exportovať ako poznámky</string>
   <string name="cache_clear_history">Vymazať históriu</string>
   <string name="cache_remove_from_history">Odstrániť z histórie</string>
+  <string name="cache_license">Licencia</string>
 
   <!-- file list base -->
   <string name="file_searching_in">Vyhľadávanie súborov\nv</string>
