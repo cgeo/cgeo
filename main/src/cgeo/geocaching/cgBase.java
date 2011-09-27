@@ -79,7 +79,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -499,7 +498,7 @@ public class cgBase {
             return -3; // no login information stored
         }
 
-        loginResponse = request("https://www.geocaching.com/login/default.aspx", new HashMap<String, String>(), false, false, false);
+        loginResponse = request("https://www.geocaching.com/login/default.aspx", null, false, false, false);
         loginData = getResponseData(loginResponse);
         if (StringUtils.isNotBlank(loginData)) {
             if (checkLogin(loginData)) {
@@ -1669,7 +1668,7 @@ public class cgBase {
         }
 
         final String userToken = userTokenMatcher.group(1);
-        final HashMap<String, String> params = new HashMap<String, String>();
+        final Parameters params = new Parameters();
         params.put("tkn", userToken);
         params.put("idx", "1");
         params.put("num", "35");
@@ -1875,7 +1874,7 @@ public class cgBase {
         final Map<String, cgRating> ratings = new HashMap<String, cgRating>();
 
         try {
-            final Map<String, String> params = new HashMap<String, String>();
+            final Parameters params = new Parameters();
             if (settings.isLogin()) {
                 final Map<String, String> login = settings.getGCvoteLogin();
                 if (login != null) {
@@ -2646,7 +2645,7 @@ public class cgBase {
             cacheType = null;
         }
 
-        final Map<String, String> params = new HashMap<String, String>();
+        final Parameters params = new Parameters();
         if (cacheType != null && cacheIDs.containsKey(cacheType)) {
             params.put("tx", cacheIDs.get(cacheType));
         } else {
@@ -2695,7 +2694,7 @@ public class cgBase {
             cacheType = null;
         }
 
-        final Map<String, String> params = new HashMap<String, String>();
+        final Parameters params = new Parameters();
         if (cacheType != null && cacheIDs.containsKey(cacheType)) {
             params.put("tx", cacheIDs.get(cacheType));
         } else {
@@ -2743,7 +2742,7 @@ public class cgBase {
             cacheType = null;
         }
 
-        final Map<String, String> params = new HashMap<String, String>();
+        final Parameters params = new Parameters();
         if (cacheType != null && cacheIDs.containsKey(cacheType)) {
             params.put("tx", cacheIDs.get(cacheType));
         } else {
@@ -2797,7 +2796,7 @@ public class cgBase {
             cacheType = null;
         }
 
-        final Map<String, String> params = new HashMap<String, String>();
+        final Parameters params = new Parameters();
         if (cacheType != null && cacheIDs.containsKey(cacheType)) {
             params.put("tx", cacheIDs.get(cacheType));
         } else {
@@ -2994,7 +2993,7 @@ public class cgBase {
             return null;
         }
 
-        final Map<String, String> params = new HashMap<String, String>();
+        final Parameters params = new Parameters();
         if (StringUtils.isNotBlank(geocode)) {
             params.put("tracker", geocode);
         } else if (StringUtils.isNotBlank(guid)) {
@@ -3402,48 +3401,33 @@ public class cgBase {
         return encoded;
     }
 
-    public String prepareParameters(Map<String, String> params, boolean my, boolean addF) {
-        String paramsDone = null;
-
-        if (my != true && settings.excludeMine > 0) {
+    public String prepareParameters(final Parameters params, final boolean my, final boolean addF) {
+        if (my != true && settings.excludeMine > 0 && addF) {
             if (params == null) {
-                params = new HashMap<String, String>();
+                return "f=1";
             }
-            if (addF) {
-                params.put("f", "1");
-            }
-
+            params.put("f", "1");
             Log.i(cgSettings.tag, "Skipping caches found or hidden by user.");
         }
 
         if (params != null) {
-            Set<Map.Entry<String, String>> entrySet = params.entrySet();
-            List<String> paramsEncoded = new ArrayList<String>();
+            final List<String> paramsEncoded = new ArrayList<String>(params.size());
 
-            for (Map.Entry<String, String> entry : entrySet)
-            {
-                String key = entry.getKey();
-                String value = entry.getValue();
+            for (final NameValuePair nameValue : params) {
+                final String key = nameValue.getName();
+                final String value = StringUtils.defaultString(nameValue.getValue());
 
-                if (key.charAt(0) == '^') {
-                    key = "";
-                }
-                if (value == null) {
-                    value = "";
-                }
-
-                paramsEncoded.add(key + "=" + urlencode_rfc3986(value));
+                // TODO: Document the justification of the legacy test below
+                paramsEncoded.add((key.charAt(0) != '^' ? key : "") + "=" + urlencode_rfc3986(value));
             }
 
-            paramsDone = StringUtils.join(paramsEncoded.toArray(), '&');
+            return StringUtils.join(paramsEncoded.toArray(), '&');
         } else {
-            paramsDone = "";
+            return "";
         }
-
-        return paramsDone;
     }
 
-    public String[] requestViewstates(final String uri, Map<String, String> params, boolean xContentType, boolean my) {
+    public String[] requestViewstates(final String uri, final Parameters params, boolean xContentType, boolean my) {
         final HttpResponse response = request(uri, params, xContentType, my, false);
 
         return getViewstates(getResponseData(response));
@@ -3473,7 +3457,7 @@ public class cgBase {
         return data;
     }
 
-    public String requestLogged(final String uri, Map<String, String> params, boolean xContentType, boolean my, boolean addF) {
+    public String requestLogged(final String uri, final Parameters params, boolean xContentType, boolean my, boolean addF) {
         HttpResponse response = request(uri, params, xContentType, my, addF);
         String data = getResponseData(response);
 
@@ -3490,7 +3474,7 @@ public class cgBase {
         return data;
     }
 
-    public HttpResponse request(final String uri, Map<String, String> params, boolean xContentType, boolean my, boolean addF) {
+    public HttpResponse request(final String uri, final Parameters params, boolean xContentType, boolean my, boolean addF) {
         final String paramsDone = prepareParameters(params, my, addF);
         return request(uri, paramsDone, xContentType);
     }

@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector;
 
+import cgeo.geocaching.Parameters;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCacheWrap;
@@ -12,9 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 public class GCConnector extends AbstractConnector implements IConnector {
@@ -67,7 +66,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
 
     @Override
     public UUID searchByGeocode(final cgBase base, String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason) {
-        final Map<String, String> params = new HashMap<String, String>();
+        final Parameters params = new Parameters();
         if (StringUtils.isNotBlank(geocode)) {
             params.put("wp", geocode);
         } else if (StringUtils.isNotBlank(guid)) {

@@ -22,9 +22,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class cgeotouch extends cgLogForm {
     private cgTrackable trackable = null;
@@ -372,7 +370,7 @@ public class cgeotouch extends cgLogForm {
 
         @Override
         public void run() {
-            final Map<String, String> params = new HashMap<String, String>();
+            final Parameters params = new Parameters();
 
             showProgressHandler.sendEmptyMessage(0);
             gettingViewstate = true;
