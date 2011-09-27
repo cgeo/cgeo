@@ -13,6 +13,7 @@ import cgeo.geocaching.utils.CollectionUtils;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
@@ -503,7 +504,7 @@ public class cgBase {
 
         String[] viewstates = null;
 
-        final Map<String, String> loginStart = settings.getLogin();
+        final ImmutablePair<String, String> loginStart = settings.getLogin();
 
         if (loginStart == null) {
             return -3; // no login information stored
@@ -513,7 +514,7 @@ public class cgBase {
         loginData = getResponseData(loginResponse);
         if (StringUtils.isNotBlank(loginData)) {
             if (checkLogin(loginData)) {
-                Log.i(cgSettings.tag, "Already logged in Geocaching.com as " + loginStart.get("username"));
+                Log.i(cgSettings.tag, "Already logged in Geocaching.com as " + loginStart.left);
 
                 switchToEnglish(viewstates);
 
@@ -531,9 +532,9 @@ public class cgBase {
             return -2; // no loginpage
         }
 
-        final Map<String, String> login = settings.getLogin();
+        final ImmutablePair<String, String> login = settings.getLogin();
 
-        if (login == null || StringUtils.isEmpty(login.get("username")) || StringUtils.isEmpty(login.get("password"))) {
+        if (login == null || StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
             Log.e(cgSettings.tag, "cgeoBase.login: No login information stored");
             return -3;
         }
@@ -545,8 +546,8 @@ public class cgBase {
         params.put("__EVENTTARGET", "");
         params.put("__EVENTARGUMENT", "");
         setViewstates(viewstates, params);
-        params.put("ctl00$SiteContent$tbUsername", login.get("username"));
-        params.put("ctl00$SiteContent$tbPassword", login.get("password"));
+        params.put("ctl00$SiteContent$tbUsername", login.left);
+        params.put("ctl00$SiteContent$tbPassword", login.right);
         params.put("ctl00$SiteContent$cbRememberMe", "on");
         params.put("ctl00$SiteContent$btnSignIn", "Login");
 
@@ -555,18 +556,18 @@ public class cgBase {
 
         if (StringUtils.isNotBlank(loginData)) {
             if (checkLogin(loginData)) {
-                Log.i(cgSettings.tag, "Successfully logged in Geocaching.com as " + login.get("username"));
+                Log.i(cgSettings.tag, "Successfully logged in Geocaching.com as " + login.left);
 
                 switchToEnglish(getViewstates(loginData));
 
                 return 1; // logged in
             } else {
                 if (loginData.contains("Your username/password combination does not match.")) {
-                    Log.i(cgSettings.tag, "Failed to log in Geocaching.com as " + login.get("username") + " because of wrong username/password");
+                    Log.i(cgSettings.tag, "Failed to log in Geocaching.com as " + login.left + " because of wrong username/password");
 
                     return -6; // wrong login
                 } else {
-                    Log.i(cgSettings.tag, "Failed to log in Geocaching.com as " + login.get("username") + " for some unknown reason");
+                    Log.i(cgSettings.tag, "Failed to log in Geocaching.com as " + login.left + " for some unknown reason");
 
                     return -4; // can't login
                 }
@@ -2762,7 +2763,7 @@ public class cgBase {
         params.put("ul", userName);
 
         boolean my = false;
-        if (userName.equalsIgnoreCase(settings.getLogin().get("username"))) {
+        if (userName.equalsIgnoreCase(settings.getLogin().left)) {
             my = true;
             Log.i(cgSettings.tag, "cgBase.searchByUsername: Overriding users choice, downloading all caches.");
         }
