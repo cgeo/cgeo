@@ -16,7 +16,8 @@ finddiffs () {
         grep "<string" ../../res/values-$1/strings.xml | grep "name=\"$s\""
     done >> $1.missing
     rm tmp.str
-    [ `cat $1.missing | wc -l` -lt 4 ] && rm $1.missing
+    # 5 lines means 3 comments + contributors + changelog
+    [ `cat $1.missing | wc -l` -lt 6 ] && rm $1.missing
 }
 
 cd `dirname "$0"`
@@ -30,4 +31,5 @@ for l in `find ../../res/values-* -name "strings.xml" | sed "s/^.*values-\(..\).
 done
 rm *.str
 echo "missing translations:"
-wc -l *.missing | sed "s/\.missing//"
+# Do not count 3 comments + contributors + changelog
+wc -l *.missing | sed "s/\.missing//" | awk '{print $1-5" "$2}'
