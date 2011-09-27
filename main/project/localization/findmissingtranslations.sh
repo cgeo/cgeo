@@ -19,6 +19,8 @@ finddiffs () {
     [ `cat $1.missing | wc -l` -lt 4 ] && rm $1.missing
 }
 
+cd `dirname "$0"`
+
 echo processing en...
 getnames ../../res/values/strings.xml > en.str
 for l in `find ../../res/values-* -name "strings.xml" | sed "s/^.*values-\(..\).*$/\1/"`; do

@@ -5,3 +5,4 @@
 /main/res/values/mapsapikey.xml
 /tests/bin/
 /tests/gen/
+/main/project/localization/*.missing
