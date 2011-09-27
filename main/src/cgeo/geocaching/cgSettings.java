@@ -5,6 +5,7 @@ import cgeo.geocaching.maps.interfaces.MapFactory;
 import cgeo.geocaching.maps.mapsforge.MapsforgeMapFactory;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.mapsforge.android.maps.MapDatabase;
 
 import android.content.Context;
@@ -286,9 +287,12 @@ public class cgSettings {
         }
     }
 
-    public Map<String, String> getLogin() {
-        final Map<String, String> login = new HashMap<String, String>();
-
+    /**
+     * Get login and password information.
+     *
+     * @return a pair (login, password) or null if no valid information is stored
+     */
+    public ImmutablePair<String, String> getLogin() {
         if (username == null || password == null) {
             final String preUsername = prefs.getString(KEY_USERNAME, null);
             final String prePassword = prefs.getString(KEY_PASSWORD, null);
@@ -308,17 +312,10 @@ public class cgSettings {
                 return null;
             }
 
-            login.put(KEY_USERNAME, preUsername);
-            login.put(KEY_PASSWORD, prePassword);
-
             username = preUsername;
             password = prePassword;
-        } else {
-            login.put(KEY_USERNAME, username);
-            login.put(KEY_PASSWORD, password);
         }
-
-        return login;
+        return new ImmutablePair<String, String>(username, password);
     }
 
     public String getUsername() {
