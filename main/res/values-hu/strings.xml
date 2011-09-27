@@ -4,155 +4,377 @@
   <string name="app_name_compass">c:geo iránytű</string>
 
   <!-- basics -->
-  <string name="cache">Cache</string>
+  <string name="cache">Láda</string>
   <string name="detail">Részletek</string>
   <string name="search">Keresés</string>
   <string name="settings">Beállítások</string>
-  <string name="about">c:geo-ról</string>
+  <string name="helpers">Hasznos segédprogramok</string>
+  <string name="about">A c:geo-ról</string>
+  <string name="helper">Szeretnél többet megtudni a <b>c:geo</b>-ról?\nNézd meg a kézikönyvünket.</string>
+  <string name="database_error_title">Adatbázis hiba</string>
+  <string name="database_error_message">A c:geo nem tudott csatlakozni a belső adatbázishoz.\nKérlek próbáld meg egy kicsit később elindítani a c:geo-t. Ha sokszor látod ezt az üzenetet, menj a telefonon a Beállítások / Alkalmazások / c:geo menüponthoz, és nyomd meg az Adatok Törlése gombot. Ha ez nem segít távolítsd el és telepítsd újra a c:geo-t. Elnézést kérünk a kellemetlenségért.</string>
 
   <!-- actionbar -->
-  <string name="action_bar_share_title">A cache linkjének megosztása</string>
+  <string name="action_bar_share_title">A láda linkjének megosztása</string>
 
   <!-- caches -->
-  <string name="all">Minden caches</string>
-  <string name="traditional">Hagyományos cache</string>
-  <string name="multi">Multi-cache</string>
-  <string name="mystery">Ismeretlen cache</string>
-  <string name="letterbox">Postaláda hybrid</string>
-  <string name="event">Esemény cache</string>
-  <string name="mega">Mega-esemény cache</string>
+  <string name="all">Összes</string>
+  <string name="all_types">Minden láda típus</string>
+  <string name="traditional">Hagyományos láda</string>
+  <string name="multi">Multi-láda</string>
+  <string name="mystery">Rejtvény láda</string>
+  <string name="letterbox">Postaláda hibrid</string>
+  <string name="event">Esemény láda</string>
+  <string name="mega">Mega-esemény láda</string>
   <string name="earth">Earthcache</string>
   <string name="cito">CITO esemény</string>
-  <string name="webcam">Webcam cache</string>
-  <string name="virtual">Virtuális cache</string>
-  <string name="wherigo">Wherigo cache</string>
-  <string name="lostfound">Lost &amp; found</string>
-  <string name="ape">Project ape cache</string>
-  <string name="gchq">Groundspeak hq</string>
-  <string name="gps">GPS cache kiállítás</string>
+  <string name="webcam">Webkamera láda</string>
+  <string name="virtual">Virtuális láda</string>
+  <string name="wherigo">Wherigo láda</string>
+  <string name="lostfound">Elveszett &amp; megtalált</string>
+  <string name="ape">Project ape láda</string>
+  <string name="gchq">Groundspeak központ</string>
+  <string name="gps">GPS láda kiállítás</string>
+
+  <!-- cache sizes -->
+  <string name="cache_size_micro">mikro</string>
+  <string name="cache_size_small">kicsi</string>
+  <string name="cache_size_regular">szokásos</string>
+  <string name="cache_size_large">nagy</string>
+  <string name="cache_size_other">egyéb</string>
+  <string name="cache_size_virtual">virtuális</string>
+  <string name="cache_size_notchosen">nincs megadva</string>
 
   <!-- waypoints -->
-  <string name="wp_final">Célpont</string>
-  <string name="wp_stage">Multi-cache állomása</string>
-  <string name="wp_puzzle">Kérdésre választ</string>
+  <string name="wp_final">Végső helyszín</string>
+  <string name="wp_stage">Multi-láda állomása</string>
+  <string name="wp_puzzle">Megválaszolandó kérdés</string>
   <string name="wp_pkg">Parkoló</string>
-  <string name="wp_trailhead">Ösvény</string>
+  <string name="wp_trailhead">Ösvény kezdete</string>
   <string name="wp_waypoint">Referencia pont</string>
 
   <!-- logs -->
-  <string name="log_found">Megtalálva</string>
-  <string name="log_dnf">Nincs megtalálva</string>
-  <string name="log_note">Feljegyzés</string>
+  <string name="log_found">Megtaláltam</string>
+  <string name="log_dnf">Nem találtam meg</string>
+  <string name="log_note">Megjegyzés</string>
   <string name="log_published">Publikálva</string>
-  <string name="log_enabled">Bekapcsolva</string>
+  <string name="log_enabled">Engedélyezve</string>
   <string name="log_disabled">Letiltva</string>
-  <string name="log_attend">Részt vennék</string>
-  <string name="log_attended">Résztvevő</string>
-  <string name="log_retrieved">Fogadva</string>
-  <string name="log_grabbed">Máshonnan megszerezve</string>
-  <string name="log_maintained">Karbantartás</string>
-  <string name="log_maintenance_needed">Karbantartást igényel</string>
-  <string name="log_maintenance_owner">Karbantartás</string>
-  <string name="log_update">Megváltozott koordináták</string>
-  <string name="log_archived">Archiválva</string>
-  <string name="log_needs_archived">Archiválása szükséges</string>
+  <string name="log_attend">Részt veszek</string>
+  <string name="log_attended">Részt vettem</string>
+  <string name="log_retrieved">Ládából kivéve</string>
+  <string name="log_placed">Ládába helyezve</string>
+  <string name="log_grabbed">Mástól átvéve</string>
+  <string name="log_maintained">Karbantartás történt</string>
+  <string name="log_maintenance_needed">Karbantartás szükséges</string>
+  <string name="log_maintenance_owner">Tulajdonosi karbantartás</string>
+  <string name="log_update">Frissített koordináták</string>
+  <string name="log_archived">Arhiválva</string>
+  <string name="log_needs_archived">Arhiválás szükséges</string>
   <string name="log_discovered">Felfedezve</string>
-  <string name="log_reviewed">Véleményező megjegyzés</string>
+  <string name="log_reviewed">Moderátor jegyzet</string>
+  <string name="log_taken">Látogatás</string>
   <string name="log_tb_nothing">Ne csinálj semmit</string>
-  <string name="log_tb_visit">Látogasd meg</string>
-  <string name="log_tb_drop">Rakd ide</string>
+  <string name="log_tb_visit">Látogatás</string>
+  <string name="log_tb_drop">Ládába helyezés</string>
+  <string name="log_tb_changeall">Az összes megváltoztatása</string>
   <string name="log_save">Mentés</string>
+  <string name="log_saving">Log mentése…</string>
   <string name="log_clear">Törlés</string>
-  <string name="log_webcam">Webkamera fotó rögzítve</string>
+  <string name="log_post">Log beküldése</string>
+  <string name="log_post_rate">Log beküldése &amp; értékelés</string>
+  <string name="log_post_no_rate">Log beküldése &amp; nincs értékelés</string>
+  <string name="log_add">Hozzáadás</string>
+  <string name="log_date">Dátum</string>
+  <string name="log_time">Idő</string>
+  <string name="log_date_time">Dátum &amp; idő</string>
+  <string name="log_rating">Értékelés</string>
+  <string name="log_no_rating">Nincs értékelés</string>
+  <string name="log_stars_1">1 csillag</string>
+  <string name="log_stars_15">1.5 csillag</string>
+  <string name="log_stars_2">2 csillag</string>
+  <string name="log_stars_25">2.5 csillag</string>
+  <string name="log_stars_3">3 csillag</string>
+  <string name="log_stars_35">3.5 csillag</string>
+  <string name="log_stars_4">4 csillag</string>
+  <string name="log_stars_45">4.5 csillag</string>
+  <string name="log_stars_5">5 csillag</string>
+  <string name="log_stars_1_description">nagyon rossz</string>
+  <string name="log_stars_15_description">elég rossz</string>
+  <string name="log_stars_2_description">átlagon aluli</string>
+  <string name="log_stars_25_description">nem olyan rosz</string>
+  <string name="log_stars_3_description">átlagos</string>
+  <string name="log_stars_35_description">egyáltalán nem rosz</string>
+  <string name="log_stars_4_description">jobb mint az átlag</string>
+  <string name="log_stars_45_description">nagyon jó</string>
+  <string name="log_stars_5_description">kitűnő</string>
+  <string name="log_webcam">Webkamera fotó elkészült</string>
+  <string name="log_new_log">Bejegyzés</string>
+  <string name="log_new_log_text">Bejegyzés szövege</string>
+  <string name="log_announcement">Bejelentés</string>
 
   <!-- errors, warnings, info toasts -->
   <string name="err_none">Ok</string>
   <string name="err_start">A kommunikáció nem indult el</string>
-  <string name="err_parse">Belépő oldal értelmezési hiba</string>
-  <string name="err_server">Geocaching.com csatlakozási hiba (a szerver vagy a kapcsolat leállt?)</string>
-  <string name="err_login">Nincs bejelentkezési adat tárolva</string>
+  <string name="err_parse">Hiba a belépőoldalon</string>
+  <string name="err_server">Hiba a kapcsolatban a geocaching.com-mal (a szerver vagy a kapcsolat nem működik?)</string>
+  <string name="err_login">Nincs mentett belépési adat</string>
+  <string name="err_login_failed">Sajnos a c:geo nem tud belépni.</string>
+  <string name="err_login_failed_toast"> Sajnos a c:geo nem tud belépni. A c:geo hálózat nélküli módban van. Ellenőrizd a belépési adataid a bállításoknál vagy engedélyezd az internet kapcsolatot.</string>
   <string name="err_unknown">Ismeretlen hiba</string>
   <string name="err_comm">Ismeretlen kommunikációs hiba</string>
-  <string name="err_wrong">Hibás bejelentkezési adatok</string>
-  <string name="err_license">A felhasználó nem foggadta el a Geocaching.com licensz szerződését</string>
-  <string name="err_store">Bocs, a c:geo Nem tudja tárolni a cache-t.</string>
-  <string name="err_drop">Bocs, a c:geo nem tudja eldobni a cache-t.</string>
+  <string name="err_missing_auth">Nincs megadva belépési név és/vagy jelszó.</string>
+  <string name="err_wrong">Rossz belépési adatok</string>
+  <string name="err_license">A felhasználó nem fogadta el a geocaching.com licenszmegállapodását, így a c:geo nem tudja betölteni a ládák koordinátáit.</string>
+  <string name="err_store">Sajnáljuk, a c:geo nem tudja menteni a ládát.</string>
+  <string name="err_drop">Sajnáljuk, a c:geo nem tudja elvetni a ládát.</string>
   <string name="err_title_problem">Probléma</string>
-  <string name="err_detail_open">Bocs, a c:geo nem tudja megnyitni a cache részleteit.</string>
-  <string name="err_detail_cache">Bocs, a c:geo Nem tudja megmutatni a kívánt cache-t. Ez biztosan geocache?</string>
-  <string name="err_detail_cache_find">Bocs, a c:geo nem talált cache-t</string>
-  <string name="err_detail_cache_find_some">Bocs, a c:geo nem találja a cache-t.</string>
-  <string name="err_detail_cache_forgot">Bocs, a c:geo elfelejtette, melyik cache-t szeretnéd.</string>
-  <string name="err_detail_cache_language">A c:geo nem tudja olvasni a cache bizonyos részeit. Ellenőrizd, hogy a Geocaching.com oldal angolra van állítva. Sajnos a c:geo nem támogat egyéb nyelvi változatokat.</string>
-  <string name="err_detail_no_spoiler">A c:geo nem talált spoiler képet a cache-hez.</string>
-  <string name="err_detail_no_map_static">A c:geo nem talált statikus térképet a cache-hez.</string>
-  <string name="err_detail_still_removing">Cache eltávolítása.</string>
-  <string name="err_detail_still_saving">Cache mentése.</string>
-  <string name="err_detail_still_refreshing">Cache újratöltése.</string>
-  <string name="err_radar_title">Radar nincs telepítve.</string>
-  <string name="err_radar_message">A funkció Radar alkalmazást igényel. Telepítetted?</string>
-  <string name="err_radar_market">A c:geo can\'t nem tudja elindítani az Android Marketet a Radar alkalmazás kereséséhez.</string>
-  <string name="err_radar_generic">Bocs, a c:geo nem tudja elindítani a Radar alkalmazást. Telepítve van?</string>
-  <string name="err_navigation_no">A c:geo nem talál támogatott navigációt.</string>
+  <string name="err_detail_open">Sajnáljuk, a c:geo nem tudja megnyitni a geoláda részletes adatait.</string>
+  <string name="err_detail_cache">Sajnáljuk, a c:geo nem tudja megmutatni a geoládát amit szeretnél. Biztos hogy ez egy geoláda?</string>
+  <string name="err_detail_cache_find">Sajnáljuk, a c:geo nem találja a geoládát.</string>
+  <string name="err_detail_cache_find_some">Sajnáljuk, a c:geo nem találja azt a geoládát.</string>
+  <string name="err_detail_cache_find_any">Sajnáljuk, a c:geo nem talál geoládákat.</string>
+  <string name="err_detail_cache_find_next">Sajnáljuk, a c:geo nem találja a következő geoládákat.</string>
+  <string name="err_detail_cache_forgot">Sajnáljuk, a c:geo elfelejtette melyik geoládát szeretnéd.</string>
+  <string name="err_detail_cache_forgot_visit">Sajnáljuk, a c:geo elfelejtette melyik geoládát látogattad meg.</string>
+  <string name="err_detail_cache_language">A c:geo nem tud beolvasni néhány részletet a láda leírásából. Kérlek ellenőrizd, hogy a geocaching.com weboldal angolra van állítva. Sajnálatos, de a c:geo nem érti meg a többi fordítást.</string>
+  <string name="err_detail_no_spoiler">A c:geo nem talált spoiler képeket ehhez a ládához.</string>
+  <string name="err_detail_no_map_static">A c:geo nem talált statikus térképeket ehhez a ládához.</string>
+  <string name="err_detail_not_load_map_static">Sajnáljuk, a c:geo nem tudott betölteni statikus térképeket.</string>
+  <string name="err_detail_still_removing">A láda még eltávolítás alatt áll.</string>
+  <string name="err_detail_still_saving">A láda még mentés alatt áll.</string>
+  <string name="err_detail_still_refreshing">A láda még újratöltés alatt áll.</string>
+  <string name="err_watchlist_still_managing">Még folyik a figyelőlista kezelése.</string>
+  <string name="err_watchlist_failed">A figyelőlita megváltoztatása nem sikerült.</string>
+  <string name="err_radar_title">A Radar nincs telepítve.</string>
+  <string name="err_radar_message">Ehhez a funkcióhoz szükség van a Radar alkalmazásra. Szeretnéd telepíteni?</string>
+  <string name="err_radar_market">A c:geo nem tudja elindítani az Android Market-et hogy a Radar alkalmazást megkeresse.</string>
+  <string name="err_radar_generic">Sajnáljuk, a c:geo nem tudja elindítani a Radar alkalmazást. Biztos, hogy telepítve van?</string>
+  <string name="err_navigation_no">A c:geo nem talál semilyen támogatott navigációt.</string>
   <string name="err_application_no">A c:geo nem talál megfelelő alkalmazást.</string>
-  <string name="err_auth_initialize">Bocs, a c:geo nem tudja előkészíteni az azonosítási folyamatot.</string>
-  <string name="err_auth_process">Azonosítási folyamat sikertelen.</string>
-  <string name="err_cannot_log_visit">A c:geo nem rendelkezdik elég információval a logoláshoz. A cache részletektől hajtsd végre!</string>
-  <string name="err_init_cleared">Bocs, a c:geo nem tudja törölni a bejelentkezési információkat.</string>
-  <string name="err_no_chaches">Bocs, a c:geo nem tudja betölteni a cache-t vagy cache-eket.</string>
-  <string name="err_download_fail">Bocs, a c:geo nem tudja letölteni a cacheket, mivel </string>
-  <string name="err_update_fail">Hiba a megtett távolság frissítésénél.</string>
+  <string name="err_auth_initialize">Sajnáljuk, a c:geo nem tudta elindítani az engedélyezési eljárást.</string>
+  <string name="err_auth_process">Az engedélyezési eljárás sikertelen.</string>
+  <string name="err_cannot_log_visit">A c:geo-nak nincs elég információja a láda logolásához. Kérlek logold a ládát a teljes láda leírásnál.</string>
+  <string name="err_init_cleared">Sajnáljuk, a c:geo nem tudja törölni a belépési adatokat.</string>
+  <string name="err_no_chaches">Sajnáljuk, a c:geo nem tudja betölteni a ládát/ládákat.</string>
+  <string name="err_download_fail">Sajnáljuk, a c:geo nem tudja letölteni a ládákat, mert </string>
+  <string name="err_update_fail">Nem sikerült a megtett távolság frissítése.</string>
+  <string name="err_list_load_fail">Sajnáljuk, a c:geo nem tudja betölteni a ládalistát.</string>
+  <string name="err_store_failed">Sajnáljuk, a c:geo nem tudja elmenteni a geoládát.</string>
+  <string name="err_refresh_failed">Sajnáljuk, a c:geo nem tudjarefresh geocache.</string>
+  <string name="err_drop_failed">Sajnáljuk, a c:geo nem tudja elvetni a geoládát.</string>
+  <string name="err_dwld_details_failed">Sajnáljuk, a c:geo nem tudja letölteni a láda adatait.</string>
+  <string name="err_dwld_details_failed_reason">Sajnáljuk, a c:geo nem tudja letölteni a láda adatait, mert</string>
+  <string name="err_load_descr_failed">Sajnáljuk, a c:geo nem tudja betölteni a leírást.</string>
+  <string name="err_location_unknown">a c:geo nem ismeri a láda helyzetét.</string>
+  <string name="err_manual_title">A kézikönyv nincs telepítve.</string>
+  <string name="err_manual_message">A c:geo kézikönyve nem található meg az eszközödön. Szeretnéd telepíteni?</string>
+  <string name="err_manual_market">A c:geo nemtudja elindítani az Android Market-et, hogy megkeresse a c:geo kézikönyvet.</string>
+  <string name="err_missing_device_name">Kérlek regisztráció előtt írd be az eszköz nevét.</string>
 
-  <string name="warn_save_nothing">Nincs semmi elmenthető.</string>
-  <string name="warn_no_cache_coord">Nincs cache a koordinátákkal.</string>
+  <string name="err_tb_display">Sajnáljuk, a c:geo nem tudja megjeleníteni a nyomonkövethető tárgyat. Biztos, hogy ez egy nyomonkövethető tárgy?</string>
+  <string name="err_tb_details_open">Sajnáljuk, a c:geo nem tudja megnyitni a nyomonkövethető tárgy részleteit.</string>
+  <string name="err_tb_details_download">Sajnáljuk, a c:geo nem tudta letölteni a nyomonkövethető tárgy részleteit, mert</string>
+  <string name="err_tb_forgot">Sajnáljuk, a c:geo elfelejtette melyik nyomonkövethető tárgyat szeretnéd.</string>
+  <string name="err_tb_forgot_saw">Sajnáljuk, a c:geo elfelejtette melyik nyomonkövethető tárgyat láttad.</string>
+  <string name="err_tb_find">Sajnáljuk, a c:geo nem találja a nyomonkövethető tárgyat.</string>
+  <string name="err_tb_find_that">Sajnáljuk, a c:geo nem találja azt a követhető tárgyat.</string>
+
+  <string name="err_waypoint_cache_unknown">Sajnáljuk, a c:geo nem tudja melyik ládához szeretnéd hozzáadni az útpontot.</string>
+  <string name="err_waypoint_unknown">Sajnáljuk, a c:geo elfelejtette melyik útpontot szeretnéd megjeleníteni.</string>
+  <string name="err_waypoint_add_failed">Sajnáljuk, a c:geo nem tudta hozzáadni az útpontodat.</string>
+  <string name="err_waypoint_load_failed">Sajnáljuk, a c:geo nem tudta betölteni az útpontot.</string>
+  <string name="err_waypoint_delete_failed">Sajnáljuk, a c:geo nem tudja törölni az útpontot.</string>
+  <string name="err_point_unknown_position">Sajnáljuk, a c:geo nem tudja felismerni hol vagy.</string>
+  <string name="err_point_no_position_given_title">Információ szükséges</string>
+  <string name="err_point_no_position_given">Írd be legalább a szélességi, hosszúsági, távolsági vagy irány értéket. Megadhatod mind a négyet is.</string>
+  <string name="err_point_curr_position_unavailable">A c:geo továbbra sem ismeri a jelenlegi koordinátákat. Kérlek várj egy ideig.</string>
+  <string name="err_point_bear_and_dist_title">Segítségre van szükséged?</string>
+  <string name="err_point_bear_and_dist">Tölsd ki az irányt és a távolságot is. Az irány az északkal bezárt szög 0 és 360 fok között. A távolság mértékegységgel és mértékegység nélkül is állhat.</string>
+  <string name="err_point_location_error">Sajnáljuk, a c:geo nem tudja megszerezni az útpont helyzetét.</string>
+  <string name="err_navigation_not_found">A c:geo nem talál támogatott navigációt.</string>
+
+  <string name="err_log_load_data">Sajnáljuk, a c:geo nem tudja betölteni az adatokat amik a megtalálás bejelentéséhez szükségesek.</string>
+  <string name="err_log_load_data_again">Sajnáljuk, a c:geo nem tudja betölteni az adatokat amik a megtalálás bejelentéséhez szükségesek. Újrapróbálkozás.</string>
+  <string name="err_log_load_data_still">A c:geo még tölti az adatokat amik a megtalálás bejelentéséhez szükségesek. Kérlek várj egy kicsit tovább.</string>
+  <string name="err_log_failed_server">Sajnáljuk, a c:geo-nak nem sikerült hozzáadni a logot mert a szerver nem válaszol.</string>
+  <string name="err_log_post_failed">Úgy tűnik a logot nem került hozzáadásra. Kérlek ellenőrizd a geocaching.com-on.</string>
+  <string name="err_log_post_failed_because">Sajnáljuk, a c:geo nem tudta hozzáadni a log-ot, mert </string>
+
+  <string name="err_search_address_no_match">Sajnáljuk, a c:geo nem talált eggyező helyet.</string>
+  <string name="err_search_address_forgot">Sajnáljuk, a c:geo elfelejtette a címet amit kerestél.</string>
+  <string name="err_search_address">Helyek keresése</string>
+  <string name="err_parse_lat">Sajnáljuk, a c:geo nem tudja értelmezni a szélességet.</string>
+  <string name="err_parse_lon">Sajnáljuk, a c:geo nem tudja értelmezni a hosszúságot.</string>
+  <string name="err_parse_bear">Sajnáljuk, a c:geo nem tudja értelmezni az irányt.</string>
+  <string name="err_parse_dist">Sajnáljuk, a c:geo nem tudja értelmezni a távolságot.</string>
+  <string name="err_parse_lat_lon">Sajnáljuk, a c:geo nem tudja értelmezni a szélességet vagy a hosszúságot.</string>
+  <string name="err_invalid_lat_lon">Sajnáljuk, érvénytelen szélesség vagz hosszúság.</string>
+
+  <string name="err_fieldnotes_export_failed">A terepjegyzetek exportálása sikertelen.</string>
+
+  <string name="warn_save_nothing">Nincs semmi amit menteni lehetne.</string>
+  <string name="warn_no_cache_coord">Nincsenek a láda koordináták megadva.</string>
+  <string name="warn_no_coordinates">Nincsenek koordináták.</string>
+  <string name="warn_no_keyword">Nincs kulcsszó.</string>
+  <string name="warn_no_username">Nincs felhasználónév.</string>
+  <string name="warn_search_help_title">Segítségre van szükséged?</string>
+  <string name="warn_search_help_address">Írd be a címet vagy a helyszín nevét. Például használj utcacímet \"Radlicka 100, Prague, Czech Republic\", Városnevet \"Berlin\" vagy csak valamit mint például \"Yellowstone Park\".</string>
+  <string name="warn_search_help_gccode">Írd be a geoláda kódját. Például \"GC1VCAZ\".</string>
+  <string name="warn_search_help_keyword">Írj be néhány szót ami a keresett láda nevében szerepel.</string>
+  <string name="warn_search_help_user">Írd be a felhasználó nevét a geocaching.com oldalon.</string>
+  <string name="warn_search_help_tb">Írd be a nyomonkövethető tárgy kódját. Például \"TB29QMZ\".</string>
+  <string name="warn_log_text_fill">Kérlek, írj szöveget a bejegyzéshez.</string>
+  <string name="warn_load_log_image">Sajnáljuk, a c:geo nem tudta betölteni a bejegyzéshez tartozó képet.</string>
+  <string name="warn_load_spoiler_image">Sajnáljuk, a c:geo nem tudta betölteni a spoiler képet.</string>
 
   <string name="info_altitude">Jelenlegi magasság</string>
   <string name="info_distance">Megtett távolság</string>
-  <string name="info_distance_cleared">Megtett távolság törölve.</string>
-  <string name="info_since">\n(óta </string>
+  <string name="info_distance_cleared">A megtett távolság törölve.</string>
+  <string name="info_since">\n(ezóta </string>
+
+  <string name="info_log_posted">a c:geo sikeresen elküldte a bejegyzést.</string>
+  <string name="info_log_saved">a c:geo sikeresen elmentette a bejegyzést.</string>
+  <string name="info_log_cleared">A bejegyzés törölve.</string>
+  <string name="info_log_type_changed">A bejegyzés típusa megváltoztatva!</string>
+
+  <string name="info_fieldnotes_exported_to">A terepfeljegyzések exportálva lettek ide:</string>
 
   <!-- location service -->
   <string name="loc_last">Utolsó ismert</string>
   <string name="loc_net">Hálózat</string>
   <string name="loc_gps">GPS</string>
-  <string name="loc_sat">Sat</string>
-  <string name="loc_trying">Pozíció keresése</string>
+  <string name="loc_sat">Műhold</string>
+  <string name="loc_trying">Keresés folyamatban</string>
   <string name="loc_no_addr">Ismeretlen cím</string>
 
   <!-- standard menu -->
-  <string name="menu_about">c:geo-ról</string>
+  <string name="menu_about">A c:geo-ról</string>
+  <string name="menu_helpers">Segédprogramok</string>
   <string name="menu_settings">Beállítások</string>
+  <string name="menu_history">Előzmények</string>
   <string name="menu_filter">Szűrő</string>
+  <string name="menu_scan">Vonalkód beolvasása</string>
 
   <!-- main screen -->
-  <string name="live_map_button">Éő térkép</string>
-  <string name="caches_nearby_button">Közeli</string>
+  <string name="live_map_button">Élő térkép</string>
+  <string name="caches_nearby_button">A közelben</string>
   <string name="advanced_search_button">Keresés</string>
-  <string name="stored_caches_button">Tárolt</string>
-  <string name="any_button">Bárhol</string>
-  <string name="about_button">Rólunk</string>
+  <string name="stored_caches_button">Mentett</string>
+  <string name="any_button">Szabad cél</string>
+  <string name="about_button">A c:geo-ról</string>
   <string name="settings_button">Beállítások</string>
   <string name="type">Típus</string>
-  <string name="now_searching">Keresés folyamatban</string>
+  <string name="now_searching">Most keres</string>
+  <string name="unknown_scan">Nem található geokód a scannelés eredményében.</string>
 
   <!-- caches -->
-  <string name="caches_no_cache">Nincs cache</string>
-  <string name="caches_more_caches">Több cache</string>
-  <string name="caches_more_caches_no">Nincs több cache</string>
-  <string name="caches_downloading">Cache letöltés…\nHátralévő idő: </string>
-  <string name="caches_eta_ltm">Kevesebb, mint egy perc</string>
+  <string name="caches_searching">Ládák keresése</string>
+  <string name="caches_no_cache">Nem található láda</string>
+  <string name="caches_more_caches">Nem elég? Keress több ládát!</string>
+  <string name="caches_more_caches_no">Ez az összes. Nincs több láda.</string>
+  <string name="caches_more_caches_loading">Ládák betöltése…</string>
+  <string name="caches_downloading">Ládák letöltése…\nETA: </string>
+  <string name="caches_progress_loading_title">Ládák betöltése</string>
+  <string name="caches_progress_loading_text">Az eszközön tárolt ládák</string>
+  <string name="caches_eta_ltm">Kevesebb mint egy perc</string>
   <string name="caches_eta_mins"> perc</string>
-  <string name="caches_no_caches"> (nincs cache)</string>
-  <string name="caches_store_offline">Tárolás</string>
-  <string name="caches_on_map">Megjelenítés térképen</string>
-  <string name="caches_select">Válassz a listából</string>
+  <string name="caches_eta_min"> perc</string>
+  <string name="caches_no_caches"> (nincs láda)</string>
+  <string name="caches_store_offline">Offlineba mentés</string>
+  <string name="caches_store_selected">Kijelöltek mentése</string>
+  <string name="caches_stored">Mentett</string>
+  <string name="caches_history">Előzmények</string>
+  <string name="caches_on_map">Mutasd meg térképen</string>
+  <string name="caches_sort">Rendezés</string> <!-- since: 2.10 RC2 -->
+  <string name="caches_sort_title">Rendezés eszerint</string> <!-- since: 2.10 RC3 -->
+  <string name="caches_sort_distance">távolság</string> <!-- since: 2.10 RC3 -->
+  <string name="caches_sort_difficulty">nehézség</string> <!-- since: 2.10 RC3 -->
+  <string name="caches_sort_terrain">terep</string> <!-- since: 2.10 RC3 -->
+  <string name="caches_sort_size">méret</string> <!-- since: 2.10 RC3 -->
+  <string name="caches_sort_favorites">sikeresség</string> <!-- since: 2.10 RC3 -->
+  <string name="caches_sort_name">név</string> <!-- since: 2.10 RC3 -->
+  <string name="caches_sort_gccode">GC-kód</string> <!-- since: 2.2 -->
+  <string name="caches_sort_rating">osztályzat</string>
+  <string name="caches_sort_vote">szavazat (saját osztályzat)</string>
+  <string name="caches_sort_inventory">tárgyak száma</string>
+  <string name="caches_sort_date">dátum</string>
+  <string name="caches_sort_finds">megtalálások</string>
+  <string name="caches_sort_state">állapot</string>
+  <string name="caches_select">Kiválasztás listából</string>
+  <string name="caches_select_mode">Kiválsztó mód</string>
+  <string name="caches_select_mode_exit">Kilépés a kiválasztó módbólól</string>
+  <string name="caches_select_invert">Kijelölés invertálása</string>
+  <string name="caches_nearby">Közeli</string>
+  <string name="caches_manage">Kezelés</string>
+  <string name="caches_drop_selected">Kiválasztott törlése</string>
+  <string name="caches_drop_selected_ask">El szeretnéd távolítani a kiválasztott ládákat az eszközről?</string>
+  <string name="caches_drop_all">Az összes törlése</string>
+  <string name="caches_drop_all_ask">Szeretnél eltávolítani minden ládát a jelenlegi listáról?</string>
+  <string name="caches_drop_stored">Tároltak elvetése</string>
+  <string name="caches_drop_progress">Ládák eltávolítása</string>
+  <string name="caches_refresh_selected">Kijelöltek frissítése</string>
+  <string name="caches_refresh_all">Mind frissítése</string>
+  <string name="caches_move_selected">Kijelöltek mozgatása</string>
+  <string name="caches_move_all">Mind mozgatása</string>
+  <string name="caches_map_cgeo">c:geo</string>
+  <string name="caches_map_locus">Locus</string>
+  <string name="caches_recaptcha_title">reCAPTCHA</string>
+  <string name="caches_recaptcha_explanation">Kérlek, írd be a szöveget a képről. Ez szükséges a ládák koordinátáinak letöltéséhez. Ez kikapcsolható a beállításoknál.</string>
+  <string name="caches_recaptcha_hint">Szöveg a képről</string>
+  <string name="caches_recaptcha_continue">Folytatás</string>
+  <string name="caches_filter">Szűrő</string>
+  <string name="caches_filter_title">Szűrés eszerint</string>
+  <string name="caches_filter_size">méret</string>
+  <string name="caches_filter_type">típu</string>
+  <string name="caches_filter_track">nyomonkövethető tárgyak</string>
+  <string name="caches_filter_clear">szűrők törlése</string>
+  <string name="caches_filter_size_title">Válassz méretet</string>
+  <string name="caches_filter_type_title">Válassz típust</string>
+  <string name="caches_filter_type_traditional">Hagyományos láda</string>
+  <string name="caches_filter_type_multi">Multi-láda</string>
+  <string name="caches_filter_type_mystery">Rejtvény láda</string>
+  <string name="caches_filter_type_letterbox">Postaláda hibrid</string>
+  <string name="caches_filter_type_event">Esemény láda</string>
+  <string name="caches_filter_type_mega">Mega-esemény láda</string>
+  <string name="caches_filter_type_earth">Earth cache</string>
+  <string name="caches_filter_type_cito">CITO esemény</string>
+  <string name="caches_filter_type_webcam">Webkamera láda</string>
+  <string name="caches_filter_type_virtual">Virtuális láda</string>
+  <string name="caches_filter_type_wherigo">Wherigo láda</string>
+  <string name="caches_filter_type_lostfound">Elveszett &amp; Megtalált</string>
+  <string name="caches_filter_type_ape">Project APE láda</string>
+  <string name="caches_filter_type_gchq">Groundspeak székház</string>
+  <string name="caches_filter_type_gps">GPS láda kiállítás</string>
+  <string name="caches_exporting_fieldnote">Exportálás terepjegyzetként…</string>
+  <string name="caches_removing_from_history">Eltávolítás a Előzményekből…</string>
+
+  <!-- caches lists -->
+  <string name="list_menu">Lista</string>
+  <string name="list_menu_create">Új lista létrehozása</string>
+  <string name="list_menu_drop">Jelenlegi lista elvetése</string>
+  <string name="list_menu_change">Lista megváltoztatása</string> <!-- since: 2.2 -->
+  <string name="list_title">Válassz listát</string>
+  <string name="list_inbox">Mentett</string>
+  <string name="list_wpt">Útpontok</string>
+  <string name="list_dialog_create_title">Új lista</string>
+  <string name="list_dialog_create">Létrehozás</string>
+  <string name="list_dialog_cancel">Mégsem</string>
+  <string name="list_dialog_create_ok">Az új lista létrejött</string>
+  <string name="list_dialog_create_err">a c:geo-nak nem sikerült az új lista létrehozása</string>
+  <string name="list_dialog_remove_title">Lista eltávolítása</string>
+  <string name="list_dialog_remove_description">Szeretnéd eltávolítani a jelenlegi ládalistát? Minden listán maradó láda az elmentettek közé fog kerülni.</string>
+  <string name="list_dialog_remove">Eltávolítás</string>
+  <string name="list_dialog_remove_ok">A lista el lett távolítva</string>
+  <string name="list_dialog_remove_err">a c:geo-nak nem sikerült a jelenlegi lista eltávolítása</string>
 
   <!-- about -->
   <string name="about_changelog">Változások</string>
-  <string name="about_donate">Támogatás</string>
+  <string name="about_donate">Adományozás</string>
   <string name="about_detail">Részletek</string>
-  <string name="about_donation_less">Kisebb\ntámogatás</string>
-  <string name="about_donation_more">Fejlesztői\ntámogatás</string>
+  <string name="about_donation_less">Adományozás\nkevesebb</string>
+  <string name="about_donation_more">Adomány\na fejlesztéshez</string>
+  <string name="about_contributors">Hozzájárulók</string>
 
   <!-- init -->
   <string name="init_geocaching">Geocaching.com</string>
@@ -162,169 +384,526 @@
   <string name="init_username">Felhasználónév</string>
   <string name="init_password">Jelszó</string>
   <string name="init_passvote">Jelszó</string>
-  <string name="init_login">Bejelentkezés ellenőrzése</string>
-  <string name="init_legal">Jogi megjegyzés</string>
-  <string name="init_go4cache_connect">Go 4 Cache csatlakozás</string>
-  <string name="init_twitter_authorize">c:geo engedélyezés</string>
-  <string name="init_twitter_publish">Állapot közzététel, ha megtalálsz egy cache-t</string>
+  <string name="init_login">Belépés &amp; dátumformátum beállítása</string>
+  <string name="init_login_popup">Belépés</string>
+  <string name="init_login_popup_working">Belépés a geocaching.com-ra…</string>
+  <string name="init_login_popup_ok">Belépés ok.</string>
+  <string name="init_login_popup_failed">Belépés sikertelen.</string>
+  <string name="init_login_popup_failed_reason">Belépés sikertelen, mert </string>
+  <string name="init_legal">Jogi nyilatkozat</string>
+  <string name="init_go4cache_connect">Csatlakozás a Go 4 Cache-hez</string>
+  <string name="init_twitter_authorize">Engedélyezés</string>
+  <string name="init_twitter_publish">Állapot bejelentése láda megtalálásakor</string>
   <string name="init_signature">Aláírás</string>
-  <string name="init_other">További beállítások</string>
-  <string name="init_skin">Világos skin (c:geo újraindítás szükséges)</string>
-  <string name="init_transparent">Átlátszó c:geo főképernyő</string>
-  <string name="init_address">Mutasd a címet a főképernyőn</string>
-  <string name="init_exclude">Saját és megtalált cache-k elrejtése</string>
-  <string name="init_disabled">Letiltott cache-k elrejtése</string>
-  <string name="init_offline">Térkép tárolása offline használathoz</string>
-  <string name="init_units">Angolszász mértékegységek használata</string>
+  <string name="init_signature_help_button">Súgó</string>
+  <string name="init_signature_help_title">Aláírás tippek és trükkök</string>
+  <string name="init_signature_help_text">Add meg az aláírásod amit a bejegyzés szövegében szeretnél használni.\nHasználható speciális címkék: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nEzek az aláírás beillesztése után válnak láthatóvá.</string>
+  <string name="init_signature_template_button">Sablon beillesztése</string>
+  <string name="init_signature_template_date">Dátum</string>
+  <string name="init_signature_template_time">Idő</string>
+  <string name="init_signature_template_datetime">Dátum &amp; Idő</string>
+  <string name="init_signature_template_user">Felhasználó</string>
+  <string name="init_signature_template_number">Szám</string>
+  <string name="init_languages">Fordítás</string>
+  <string name="init_languages_description">Melyik nyelveket nem kéred fordítani? Kérlek használj két karakteres nyelvkódokat.</string>
+  <string name="init_languages_hint">en es de cs</string>
+  <string name="init_translate">Leírás &amp; segítség fordítása</string>
+  <string name="init_other">Egyéb beállítások</string>
+  <string name="init_skin">Világos felület\n(a c:geo újraindítását igényli)</string>
+  <string name="init_transparent">Átlátszó c:geo főablak használata</string>
+  <string name="init_address">Cím mutatása a főablakban</string>
+  <string name="init_captcha">CAPTCHA megjelenítése ha szükséges</string>
+  <string name="init_useenglish">Angol nyelv használata a c:geo-ban\n(újraindítás szükséges)</string>
+  <string name="init_exclude">Saját és megtalált ládák kihagyása</string>
+  <string name="init_disabled">Letiltott ládák kihagyása</string>
+  <string name="init_offline">Statikus térképek tárolása offline használathoz</string>
+  <string name="init_save_log_img">Logokban található képek mentése</string>
+  <string name="init_units">Mérföld/láb használata\n(angolszász mértékegységek)</string>
   <string name="init_nav">Google Navigáció használata</string>
-  <string name="init_autoload">Hosszú leírás automatikus betöltése</string>
-  <string name="init_livelist">Cache irányának megjelenítése a listában</string>
-  <string name="init_browser">A c:geo alapértelmezett böngészőként való beállítása</string>
-  <string name="init_cleared">A c:geo törölte a bejelentkezési információkat.</string>
+  <string name="init_autoload">Hosszú leírás autómata betöltése</string>
+  <string name="init_log_offline">Offline logolás használata mindig (ne mutassa az online log ablakot logoláskor, ne küldje el a logot online)</string>
+  <string name="init_livelist">Mutassa a ládák irányát a listában</string>
+  <string name="init_browser">Azonosítsa a c:geo-t általános böngészőként</string>
+  <string name="init_altitude">Magasság korrekció</string>
+  <string name="init_altitude_description">Ha a GPS rossz magasságot mutat, módosíthatod pozitív vagy negatív irányban. A korrekció mindig méterben van.</string>
+  <string name="init_clear">Belépési adatok törlése</string>
+  <string name="init_cleared">a c:geo törölte a belépési adatokat.</string>
+  <string name="init_backup">Biztonsági mentés</string>
+  <string name="init_backup_backup">Biztonsági mentés</string>
+  <string name="init_backup_note">Ez a lehetőség elmenti/visszaállítja a ládákat és útpontokat tartalmazó adatbázist de nem vonatkozik a beállításokra. A belépési adataid nem kerülnek mentésre.</string>
+  <string name="init_backup_restore">Visszaállítás</string>
+  <string name="init_backup_success">A c:geo adatbázisa sikeresen kimásolásra került ebbe a fájlba</string>
+  <string name="init_backup_failed">A c:geo biztonsági mentése sikertelen.</string>
+  <string name="init_restore_success">Visszaállítás kész.</string>
+  <string name="init_restore_failed">A visszaállítás sikertelen.</string>
+  <string name="init_backup_last">Elérhető biztonsági mentés</string>
+  <string name="init_backup_last_no">Nem találató fájl biztonsági mentéssel.</string>
+  <string name="init_mapsources">Térkép források</string> <!-- since: 2.26 RC3 -->
+  <string name="init_mapsources_description">Itt választhatod ki a térképeid forrását. A Google térképek alternatívájaként több OpenStreetMap stílus is hozzáférhető és offline térkép fájlokat is használhatsz. (További információ <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a>).</string> <!-- since: 2.26 RC3 -->
+  <string name="init_mapsource_select">Válassz térkép forrást</string>
+  <string name="init_select_mapfile">…</string>
+  <string name="init_trackautovisit">A nyomonkövethető tárgyak automatikus \"látogatott\" logolása</string>
+  <string name="init_sigautoinsert">Aláírás automatikus beillesztése</string>
+  <string name="init_loaddirectionimg">Irány-kép betöltése ha szükséges</string>
+
+  <!-- map sources -->
+  <string-array name="map_sources">
+    <item>Google: Térkép</item>
+    <item>Google: Műholdkép</item>
+    <item>OSM: Mapnik</item>
+    <item>OSM: Osmarender</item>
+    <item>OSM: Biciklis térkép</item>
+    <item>OSM: Offline</item>
+  </string-array>
+
+  <string name="init_sendToCgeo">Küldés a c:geo-hoz</string>
+  <string name="init_sendToCgeo_name">Az eszközöd neve:</string>
+  <string name="init_sendToCgeo_description">A c:geo-hoz küldés segítségével közvetlenül a geocaching weboldalról tölthetsz le ládákat egy Firefox vagy Chrome modul segítségével. Regisztráció előtt olvasd el a leírást <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Csak akkor kell regisztrálnod, ha a c:geo-hoz küldést használni akarod. A C:geo a regisztráció nélkül is működik.</string>
+  <string name="init_sendToCgeo_register">Regisztráció igénylése</string>
+  <string name="init_sendToCgeo_registering">Az eszközöd regisztrációja a c:geo-hoz küldéshez…</string>
+  <string name="init_sendToCgeo_register_ok">A regisztráció sikeres.A PIN kód ####. Használd ezt a kódot a c:geo weboldalán, hogy hozzáadd ezt az eszközt a böngészőhöz.</string>
+  <string name="init_sendToCgeo_register_fail">Regisztráció sikertelen.</string>
+
+  <string name="sendToCgeo_download_fail">A c:geo nem tudta letölteni a ládákat. Nincs internetkapcsolat vagz a c:geo-hoz küldés nem működik.</string>
+  <string name="sendToCgeo_no_registration"> A c:geo nem tudta letölteni a ládákat. A c:geo-hoz küldés regisztrációd lejárt. Kérlek regisztrálj a beállításoknál.</string>
+
 
   <!-- auth -->
   <string name="auth_twitter">Twitter</string>
-  <string name="auth_authorize">c:geo engedélyezése</string>
+  <string name="auth_authorize">Hozzáférés engedélyezése a c:geo-nak</string>
   <string name="auth_start">Engedélyezés indítása</string>
-  <string name="auth_again">Újrakezdés</string>
-  <string name="auth_pin_hint">Twitter PIN kódja</string>
-  <string name="auth_finish">Kész</string>
-  <string name="auth_dialog_wait">Várakozás a Twitter-re…</string>
+  <string name="auth_again">Engedélyezés indítása újra</string>
+  <string name="auth_pin_hint">PIN hozzárendelve a Twitter által</string>
+  <string name="auth_finish">Befejezés</string>
+  <string name="auth_dialog_wait">Várakozás a Twitterre…</string>
   <string name="auth_dialog_pin_title">PIN kód</string>
-  <string name="auth_dialog_pin_message">Add meg a Twitter oldalán kapott PIN kódot. Ez kötelező az engedélyezés befejezéséhez.</string>
-  <string name="auth_dialog_completed">A c:geo engedélyt kapott Twitter üzenetek létrehozásához.</string>
+  <string name="auth_dialog_pin_message">Kérlek írd be a PIN kódot amit a Twittertől kaptál. Ez szükséges lépés az engedélyezés befejezéséhez.</string>
+  <string name="auth_dialog_completed">A c:geo engedélyt kapott, hogy bejegyzéseket küldjön a Twitterre.</string>
 
   <!-- cache -->
-  <string name="cache_count_no">Nincs cache</string>
-  <string name="cache_count_one">Egy cache</string>
-  <string name="cache_count_more">Cache-ek</string>
+  <string name="cache_count_no">Nincs megtalálás</string>
+  <string name="cache_count_one">Megtalálás</string>
+  <string name="cache_count_more">Megtalálások
+</string>
   <string name="cache_offline">Offline</string>
   <string name="cache_offline_refresh">Frissítés</string>
-  <string name="cache_offline_drop">Eldobás</string>
+  <string name="cache_offline_drop">Törlés</string>
   <string name="cache_offline_store">Tárolás</string>
-  <string name="cache_offline_stored">Készléken tárolva</string>
-  <string name="cache_offline_not_ready">Nincs beállítva\nofflienh használatra</string>
-  <string name="cache_offline_time_about">Rólunk</string>
-  <string name="cache_offline_time_mins">perce</string>
-  <string name="cache_offline_time_mins_few">néhány perce</string>
-  <string name="cache_offline_time_hour">egy órája</string>
-  <string name="cache_offline_time_hours">órája</string>
-  <string name="cache_offline_time_days">napja</string>
-  <string name="cache_attributes">Jellemzők</string>
-  <string name="cache_inventory">Leltár</string>
-  <string name="cache_log_offline">Offline log</string>
+  <string name="cache_offline_stored">Tárolva az eszközön</string>
+  <string name="cache_offline_not_ready">Nincs kész\noffline használathoz</string>
+  <string name="cache_offline_time_about">Információ</string>
+  <string name="cache_offline_time_mins">perccel ezelőtt</string>
+  <string name="cache_offline_time_mins_few">néhány perccel ezelőtt</string>
+  <string name="cache_offline_time_hour">egy órával ezelőtt</string>
+  <string name="cache_offline_time_hours">órákkal ezelőtt</string>
+  <string name="cache_offline_time_days">napokkal ezelőtt</string>
+  <string name="cache_premium">Prémium</string>
+  <string name="cache_attributes">Tulajdonságok</string>
+  <string name="cache_attributes_no_icons">(frissítsd a ládát, hogy lásd a tulajdonság ikonokat)</string>
+  <string name="cache_inventory">Tárgyak</string>
+  <string name="cache_log_offline">Offline bejegyzés</string>
+  <string name="cache_log_images_loading">Bejegyzés kép betöltése …</string>
+  <string name="cache_log_images_title">Bejegyzés kép</string>
+  <string name="cache_log_image_default_title">Fotó</string>
+  <string name="cache_personal_note">Személyes megjegyzés</string>
   <string name="cache_description">Leírás</string>
   <string name="cache_description_long">Hosszú leírás</string>
+  <string name="cache_watchlist">Figyelőlista</string>
+  <string name="cache_watchlist_on">Ez a láda a figyelőlistádon van.</string>
+  <string name="cache_watchlist_not_on">Ez a láda nincs a figyelőlistádon.</string>
+  <string name="cache_watchlist_add">Figyelőlistához adás</string>
+  <string name="cache_watchlist_remove">Eltávolítás a figyelőlistáról</string>
   <string name="cache_waypoints">Útpontok</string>
   <string name="cache_waypoints_add">Útpont hozzáadása</string>
   <string name="cache_hint">Segítség</string>
-  <string name="cache_logs">Logbook</string>
-  <string name="cache_dialog_loading_details">Cache részletek betöltése…</string>
-  <string name="cache_dialog_loading_description">Cache leírás betöltése…</string>
+  <string name="cache_logs">Láda napló</string>
+  <string name="cache_dialog_loading_details">Láda adatainak betöltése…</string>
+  <string name="cache_dialog_loading_description">Láda leírásának betöltése…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
-  <string name="cache_dialog_offline_save_message">Cache mentése offline használathoz…</string>
+  <string name="cache_dialog_offline_save_message">Láda mentése offline használathoz…</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>
-  <string name="cache_dialog_offline_drop_message">Cache eltávolítása a memóriából…</string>
+  <string name="cache_dialog_offline_drop_message">Láda eltávolítása a memóriából…</string>
   <string name="cache_dialog_refresh_title">Frissítés</string>
-  <string name="cache_dialog_refresh_message">Cache részleteinek frissítése…</string>
+  <string name="cache_dialog_refresh_message">Láda adatainak újratöltése…</string>
+  <string name="cache_dialog_watchlist_add_title">Figyelőlista</string>
+  <string name="cache_dialog_watchlist_add_message">Láda hozzáadása a figyelőlistádhoz…</string>
+  <string name="cache_dialog_watchlist_remove_title">Figyelőlista</string>
+  <string name="cache_dialog_watchlist_remove_message">Láda eltávolítása a figyelőlistádról…</string>
   <string name="cache_menu_navigate">Navigáció</string>
   <string name="cache_menu_compass">Iránytű</string>
-  <string name="cache_menu_tbt">Utakon</string>
+  <string name="cache_menu_tbt">Lépésről lépésre</string>
   <string name="cache_menu_radar">Radar</string>
-  <string name="cache_menu_map">Mutasd a térképen</string>
-  <string name="cache_menu_map_ext">Mutasd külső térképen</string>
+  <string name="cache_menu_map">Térkép</string>
   <string name="cache_menu_map_static">Statikus térképek</string>
+  <string name="cache_menu_locus">Locus</string>
+  <string name="cache_menu_rmaps">Rmaps</string>
+  <string name="cache_menu_map_ext">Mutassa kit. térképen</string>
+  <string name="cache_menu_map_short">Térképek</string>
+  <string name="cache_menu_map_ext_short">Kit. térkép</string>
+  <string name="cache_menu_streetview">Utcanézet</string>
   <string name="cache_menu_browser">Megnyitás böngészőben</string>
   <string name="cache_menu_visit">Megtalálás bejelentése</string>
+  <string name="cache_menu_visit_offline">Megtalálás bejelentése offline</string>
   <string name="cache_menu_spoilers">Spoiler képek</string>
-  <string name="cache_menu_around">Cache-k a krnyéken</string>
-  <string name="cache_menu_event">Add a naptárhoz</string>
+  <string name="cache_menu_around">Közeli ládák</string>
+  <string name="cache_menu_event">Hozzáadás a naptárhoz</string>
   <string name="cache_menu_details">Részletek</string>
+  <string name="cache_menu_share">Láda megosztása</string>
+  <string name="cache_menu_move_list">Mozgatás másik listára</string>
+  <string name="cache_menu_gcc">GCC</string>
+  <string name="cache_menu_whereyougo">WhereYouGo</string>
+  <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_status">Állapot</string>
-  <string name="cache_status_offline_log">Tárolt log</string>
-  <string name="cache_status_found">Megtalálva</string>
-  <string name="cache_status_archived">Archiválva</string>
-  <string name="cache_status_disabled">Letiltva</string>
-  <string name="cache_status_premium">Csak premium tagoknak</string>
+  <string name="cache_status_offline_log">Mentett bejegyzés</string>
+  <string name="cache_status_found">Megtalált</string>
+  <string name="cache_status_archived">Arhivált</string>
+  <string name="cache_status_disabled">Letiltott</string>
+  <string name="cache_status_premium">Csak prémium tagoknak</string>
   <string name="cache_geocode">GC-kód</string>
+  <string name="cache_name">Név</string>
   <string name="cache_type">Típus</string>
   <string name="cache_distance">Távolság</string>
   <string name="cache_difficulty">Nehézség</string>
   <string name="cache_terrain">Terep</string>
-  <string name="cache_rating">Értékelés</string>
+  <string name="cache_rating">Osztályzat</string>
+  <string name="cache_rating_of">/</string>
+  <string name="cache_favourite">Kedvenc</string>
   <string name="cache_owner">Tulajdonos</string>
-  <string name="cache_hidden">Rejtve</string>
+  <string name="cache_hidden">Elrejtve</string>
   <string name="cache_event">Dátum</string>
-  <string name="cache_location">Hely</string>
+  <string name="cache_location">Helyszín</string>
   <string name="cache_coordinates">Koordináták</string>
+  <string name="cache_elevation">Magasság</string>
   <string name="cache_calendars">Naptár kiválasztása</string>
+  <string name="cache_spoiler_images_title">Spoiler képek</string>
+  <string name="cache_spoiler_images_loading">Spoiler képek betöltése…</string>
+  <string name="cache_log_types">Bejegyzés típusok</string> <!-- since: 2.10 RC2 -->
+  <string name="cache_coordinates_no">Ennek a ládának nincsenek koordinátái.</string> <!-- since: 2.26 RC2 -->
+  <string name="cache_export_fieldnote">Exportálás terepjegyzetként</string>
+  <string name="cache_clear_history">Előzmények törlése</string>
+  <string name="cache_remove_from_history">Eltávolítás az előzményekből</string>
+  <string name="cache_license">Licensz</string>
+
+  <!-- file list base -->
+  <string name="file_searching_in">Fájlok keresése\nitt</string>
+  <string name="file_list_no_files">Sajnáljuk, a c:geo nem talált megfelelő fájlokat.</string>
+  <string name="file_searching">Megfelelő fájlok keresése</string>
+  <string name="file_title_searching">Keresés</string>
+
+  <!-- gpx -->
+  <string name="gpx_import_loading_stored">Ládák betöltése .gpx fájlból \nHely:</string>
+  <string name="gpx_import_no_files">Sajnáljuk, a c:geo nem talált .gpx fájlokat.</string>
+  <string name="gpx_import_caches_imported">ládák importálva</string>
+  <string name="gpx_import_loading">Ládák betöltése .gpx fájlból</string>
+  <string name="gpx_import_title">GPX importálása</string>
+  <string name="gpx_import_title_reading_file">Fájl olvasása</string>
+  <string name="gpx_import_title_caches_imported">Eredmény</string>
+
+  <!-- map file select -->
+  <string name="map_file_select_title">Térkép fájl kiválasztása</string>
+
+  <!--  import -->
+  <string name="import_title">Importálás…</string>
+  <string name="web_import_title">Importálás webről</string>
+  <string name="web_import_server_problem">Probléma volt a szerverrel való kommunikáció közben. Kérlek regisztráld újra a telefonod és próbáld újra.</string>
+  <string name="web_import_waiting">Várakozás új ládákra webről…</string>
+  <string name="web_downloading">Letöltés</string>
+  <string name="web_downloaded">Letöltve</string>
 
   <!-- event -->
-  <string name="event_success">Esemény cache rögzítve a naptárban</string>
-  <string name="event_fail">Esemény cache naptár-rögzítési hiba</string>
+  <string name="event_success">Eseményláda hozzáadva a naptárhoz</string>
+  <string name="event_fail">Eseményláda hozzáadása a naptárhoz sikertelen.</string>
 
   <!-- popup -->
-  <string name="popup_more">További részletek</string>
+  <string name="popup_more">Több részlet</string>
+  <string name="popup_offline">Offline</string>
 
   <!-- waypoint -->
+  <string name="waypoint">Útpont</string>
+  <string name="waypoint_title">Útpont neve</string>
   <string name="waypoint_custom">Egyedi</string>
-  <string name="waypoint_my_coordinates">Saját koordináták</string>
-  <string name="waypoint_bearing">Bearing</string>
+  <string name="waypoint_my_coordinates">Az én koordinátáim</string>
+  <string name="waypoint_bearing">Irány</string>
   <string name="waypoint_distance">Távolság</string>
   <string name="waypoint_name">Név</string>
-  <string name="waypoint_edit">Módosít</string>
-  <string name="waypoint_delete">Töröl</string>
-  <string name="waypoint_edit_title">Útpont módosítás</string>
-  <string name="waypoint_add_title">Útpont hozzáadás</string>
+  <string name="waypoint_edit">Szerkesztés</string>
+  <string name="waypoint_delete">Törlés</string>
+  <string name="waypoint_edit_title">Útpont szerkesztése</string>
+  <string name="waypoint_add_title">Útpont hozzáadása</string>
   <string name="waypoint_note">Jegyzet</string>
   <string name="waypoint_save">Mentés</string>
+  <string name="waypoint_loading">Útpont betöltése…</string>
+  <string name="waypoint_unknown_coordinates">Ismeretlen koordináták</string>
+  <string name="waypoint_done">Kész</string>
+  <string name="search_history">Előzmény</string>
+  <string name="search_history_empty">Nincsenek előző célpontok</string>
+  <string name="search_remove_destination">Célpont eltávolítva</string>
+  <string name="search_clear_history">Előzmények törlése</string>
+  <string name="search_history_cleared">Előzmények törölve</string>
+
+  <string-array name="waypoint_coordinate_formats">
+    <item>Egyszerű</item>
+	<item>DDD.DDDDD°</item>
+	<item>DDD°MM.MMM\'</item>
+	<item>DDD°MM\'SS.SSS\"</item>
+  </string-array>
 
   <!-- visit -->
-  <string name="visit_tweet">Találat megjelenítése Twitteren</string>
+  <string name="visit_tweet">Twitteld ki ezt a megtalálást</string>
 
   <!-- map -->
   <string name="map_map">Térkép</string>
   <string name="map_live">Élő térkép</string>
   <string name="map_view_map">Térkép nézet</string>
-  <string name="map_trail_show">Nyomvonal mutatása</string>
-  <string name="map_trail_hide">Nyomvonal elrejtése</string>
-  <string name="map_live_enable">Élő bekapcsolás</string>
-  <string name="map_live_disable">Élő kikapcsoltás</string>
+  <string name="map_trail_show">Ösvény mutatása</string>
+  <string name="map_trail_hide">Ösvény elrejtése</string>
+  <string name="map_circles_show">Körök mutatása</string> <!-- since: 2.23 RC3 -->
+  <string name="map_circles_hide">Körök elrejtése</string> <!-- since: 2.23 RC3 -->
+  <string name="map_live_enable">Élő mód engedélyezése</string>
+  <string name="map_live_disable">Élő mód tiltása</string>
+  <string name="map_static_title">Statikus térképek</string>
+  <string name="map_static_loading">Statikus térképek betöltése…</string>
+  <string name="map_token_err">Mivel a c:geo csak részleges adatokat tud letölteni, a ládák koordinátái pontatlanok lehetnek.</string> <!-- since: 2.26 RC3 -->
 
   <!-- search -->
+  <string name="search_bar_hint">Ládák keresése</string>
+  <string name="search_bar_desc">Ládák (GC-kód, kulcsszó), Nyomonkövethető tárgyak (TB-kód)</string>
   <string name="search_coordinates">Koordináták</string>
   <string name="search_coordinates_button">Keresés koordinátákkal</string>
   <string name="search_address">Cím</string>
-  <string name="search_address_button">Keresés cím alapján</string>
-  <string name="search_gc">Geocode</string>
-  <string name="search_gc_button">Keresés geocode alapján</string>
+  <string name="search_address_button">Keresés címmel</string>
+  <string name="search_gc">GC-kód</string>
+  <string name="search_gc_button">Keresés GC-kóddal</string>
   <string name="search_kw">Kulcsszavak</string>
   <string name="search_kw_prefill">Kulcsszó</string>
-  <string name="search_kw_button">Keresés kulcsszó alapján</string>
-  <string name="search_fbu">Felhasználói megtalálás</string>
+  <string name="search_kw_button">Keresés kulcsszóval</string>
+  <string name="search_kw_caches">Ládák kulcsszavak szerint</string>
+  <string name="search_caches_found_by">Megtalált ládák</string>
+  <string name="search_caches_hidden_by">Rejtett ládák</string>
+  <string name="search_fbu">Felhasználó által megtalált</string>
   <string name="search_fbu_prefill">Felhasználónév</string>
-  <string name="search_fbu_button">Keresés felhasználónév lapján</string>
-  <string name="search_hbu">Felhasználói rejtés</string>
-  <string name="search_hbu_prefill">Rejtő</string>
-  <string name="search_hbu_button">Keresés rejtő neve alapján</string>
-  <string name="search_tb">TB</string>
-  <string name="search_tb_hint">TB azonosítás</string>
-  <string name="search_tb_button">Keresés TB alapján</string>
+  <string name="search_fbu_button">Keresés felhasználónév szerint</string>
+  <string name="search_hbu">Tulajdonos</string>
+  <string name="search_hbu_prefill">Tulajdonos</string>
+  <string name="search_hbu_button">Keresés tulajdonos neve alapján</string>
+  <string name="search_tb">Nyomonkövethető tárgy</string>
+  <string name="search_tb_hint">Nyomonkövethető azonosító</string>
+  <string name="search_tb_button">Nyomonkövetető tárgy keresése</string>
   <string name="search_destination">Cél</string>
-  <string name="search_direction_rel">Ettől a pozíciótól</string>
+  <string name="search_direction_rel">Innen</string>
+  <string name="search_lat">Szél</string>
+  <string name="search_lon">Hossz</string>
+  <string name="search_caches">Ládák keresése</string>
+  <string name="search_caches_near">Közeli ládák</string>
+  <string name="search_address_started">Helyek keresése</string>
+  <string name="search_address_result">Megtalált helyek</string>
+  <string name="search_own_caches">Saját ládák keresése</string>
+
+  <!-- trackable -->
+  <string name="trackable">Nyomonkövethető tárgy</string>
+  <string name="trackable_select_title"> Nyomonkövethető tárgyak</string>
+  <string name="trackable_details_loading">Tárgy adatainak betöltése…</string>
+  <string name="trackable_log_touch">Érintés bejelentése</string>
+  <string name="trackable_browser_open">Megnyitás böngészőben</string>
+  <string name="trackable_goal">Cél</string>
+  <string name="trackable_details">Részletek</string>
+  <string name="trackable_image">Kép</string>
+  <string name="trackable_code">TB-kód</string>
+  <string name="trackable_name">Név</string>
+  <string name="trackable_type">Típus</string>
+  <string name="trackable_owner">Tulajdonos</string>
+  <string name="trackable_spotted">Látta</string>
+  <string name="trackable_spotted_in_cache">Ban</string>
+  <string name="trackable_spotted_at_user">Nála</string>
+  <string name="trackable_spotted_unknown_location">Ismeretlen hely</string>
+  <string name="trackable_spotted_owner">A tulajdonosnál</string>
+  <string name="trackable_origin">Eredet</string>
+  <string name="trackable_unknown">Ismeretlen</string>
+  <string name="trackable_released">Felszabadítás</string>
+  <string name="trackable_distance">Megtett táv</string>
+  <string name="trackable_touch">Érintés</string>
+
+  <!--  user -->
+  <string name="user_menu_title">Információ</string>
+  <string name="user_menu_view_hidden">Ládák száma</string>
+  <string name="user_menu_view_found">Megtalálások száma</string>
+  <string name="user_menu_open_browser">Profil megnyitása a böngészőben</string>
 
   <!-- navigation -->
   <string name="navigation">Navigáció</string>
+  <string name="compass_title">Iránytű</string>
+  <string name="use_gps">GPS használata</string>
+  <string name="use_compass">Iránytű használata</string>
+  <string name="destination_select">Cél kiválasztása</string>
+  <string name="destination_set">Cél beállítása</string>
+
+  <!-- license -->
+  <string name="license">Licensz</string>
+  <string name="license_show">Licensz mutatása</string>
+  <string name="license_dismiss">Elutasítás</string>
+
+  <!-- helpers -->
+  <string name="helper_manual_title">Kézikönyv</string>
+  <string name="helper_manual_description">Részletes kézikönyv a c:geo-hoz amiben az összes lehetőség leírása szerepel. (még a rejtettek is).</string>
+  <string name="helper_locus_title">Locus</string>
+  <string name="helper_locus_description">Egyszerűen kezelhető alkalmazás ami megmutatja az online térképeket amiket le is tud tölteni az offline módban való használatra (csak raszteres térképekel működik). Támogatja a nyomvonalrögzítést, útpont kezelés és sok egyéb hasznos funkciót.</string>
+  <string name="helper_gpsstatus_title">GPS Status</string>
+  <string name="helper_gpsstatus_description">Ebben a programban található egy radar amit a c:geo-hoz is használhatsz. Sok egyéb GPS-el kapcsolatos információt is megmutat.</string>
+  <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
+  <string name="helper_bluetoothgps_description">Ez a program külső GPS vevők használatatát teszi lehetővé, amelyek segítségével jobb vételt és pontosabb koordinátákat kaphatsz. Külső GPS használatával a telefonod akkumulátora is tovább tart.</string>
+
+  <!--  attributes (permissions -> allowed, not allowed) -->
+  <string name="attribute_dogs_yes">Kutyák engedélyezettek</string>
+  <string name="attribute_dogs_no">Kutyát nem engedélyezettek</string>
+  <string name="attribute_bicycles_yes">Bicikli engedélyezett</string>
+  <string name="attribute_bicycles_no">Bicikli nem engedélyezett</string>
+  <string name="attribute_motorcycles_yes">Motor engedélyezett</string>
+  <string name="attribute_motorcycles_no">Motor nem engedélyezett</string>
+  <string name="attribute_quads_yes">Quads engedélyezett</string>
+  <string name="attribute_quads_no">Quads nem engedélyezett</string>
+  <string name="attribute_jeeps_yes">Off-road jármű engedélyezett</string>
+  <string name="attribute_jeeps_no">Off-road jármű nem engedélyezett</string>
+  <string name="attribute_snowmobiles_yes">Motoros szán engedélyezett</string>
+  <string name="attribute_snowmobiles_no">Motoros szán nem engedélyezett</string>
+  <string name="attribute_horses_yes">Lovak engedélyezettek</string>
+  <string name="attribute_horses_no">Lovak nem engedélyezettek</string>
+  <string name="attribute_campfires_yes">Tábortűz engedélyezett</string>
+  <string name="attribute_campfires_no">Tábortűz nem engedélyezett</string>
+  <string name="attribute_rv_yes">Kamion engedélyezett</string>
+  <string name="attribute_rv_no">Kamion nem engedélyezett</string>
+
+  <!--  attributes (conditions -> yes, no) -->
+  <string name="attribute_kids_yes">Gyerekeknek ajánlott</string>
+  <string name="attribute_kids_no">Gyerekeknek nem ajánlott</string>
+  <string name="attribute_onehour_yes">Kevesebb mint egy órát igényel</string>
+  <string name="attribute_onehour_no">Több mint egy órát igényel</string>
+  <string name="attribute_scenic_yes">Szép kilátás</string>
+  <string name="attribute_scenic_no">Nincs szép kilátás</string>
+  <string name="attribute_hiking_yes">Jelentős szintemelkedés</string>
+  <string name="attribute_hiking_no">Nincs jelentős szintemelkedés</string>
+  <string name="attribute_climbing_yes">Nehéz mászás</string>
+  <string name="attribute_climbing_no">Nincs nehéz mászás</string>
+  <string name="attribute_wading_yes">Vízbe kell lépni</string>
+  <string name="attribute_wading_no">Nem kell vízbe lépni</string>
+  <string name="attribute_swimming_yes">Úszás szükséges</string>
+  <string name="attribute_swimming_no">Úszás nem szükséges</string>
+  <string name="attribute_available_yes">Mindig hozzáférhető</string>
+  <string name="attribute_available_no">Nem férhető mindig hozzá</string>
+  <string name="attribute_night_yes">Éjszaka ajánlott</string>
+  <string name="attribute_night_no">Éjszaka nem ajánlott</string>
+  <string name="attribute_winter_yes">Télen is hozzáférhető</string>
+  <string name="attribute_winter_no">Télen nem hozzáférhető</string>
+  <string name="attribute_stealth_yes">Rejtőzködés szükséges</string>
+  <string name="attribute_stealth_no">Rejtőzködés nem szükséges</string>
+  <string name="attribute_firstaid_yes">Karbantartás szükséges</string>
+  <string name="attribute_firstaid_no">Karbantartás nem szükséges</string>
+  <string name="attribute_cow_yes">Figyelni kell a haszonállatokra</string>
+  <string name="attribute_cow_no">Nincs haszonállat</string>
+  <string name="attribute_field_puzzle_yes">Terep rejtvény</string>
+  <string name="attribute_field_puzzle_no">Nem terep rejtvény</string>
+  <string name="attribute_nightcache_yes">Éjszakai láda</string>
+  <string name="attribute_nightcache_no">Nem éjszakai láda</string>
+  <string name="attribute_parkngrab_yes">Drive-in láda</string>
+  <string name="attribute_parkngrab_no">Nem drive-in láda</string>
+  <string name="attribute_abandonedbuilding_yes">Elhagyott épület</string>
+  <string name="attribute_abandonedbuilding_no">Nem elhagyott épület</string>
+  <string name="attribute_hike_short_yes">Rövid túra (kevesebb mint 1 km)</string>
+  <string name="attribute_hike_short_no">Nem rövid túra</string>
+  <string name="attribute_hike_med_yes">Közepes túra (1 km és 10 km között)</string>
+  <string name="attribute_hike_med_no">Nem közepes túra</string>
+  <string name="attribute_hike_long_yes">Hosszú túra (több mint 10 km)</string>
+  <string name="attribute_hike_long_no">Nem hosszú túra</string>
+  <string name="attribute_seasonal_yes">Időszakos hozzáférés</string>
+  <string name="attribute_seasonal_no">Nem időszakos hozzáférés</string>
+  <string name="attribute_touristok_yes">Túristabarát</string>
+  <string name="attribute_touristok_no">Nem túristabarát</string>
+  <string name="attribute_frontyard_yes">Magánterület</string>
+  <string name="attribute_frontyard_no">Nem magánterület</string>
+  <string name="attribute_teamwork_yes">Csapatmunka szükséges</string>
+  <string name="attribute_teamwork_no">Nem szükséges csapatmunka</string>
+  <string name="attribute_landf_yes">Elveszett és megtalált túra</string>
+  <string name="attribute_landf_no">Nem Elveszett és megtalált túra</string>
+  <string name="attribute_partnership_yes">Társasági láda</string>
+  <string name="attribute_partnership_no">Nem társasági láda</string>
+
+  <!--  attributes (equipment -> required, not required) -->
+  <string name="attribute_fee_yes">Belépő vagy parkolódíj szükséges</string>
+  <string name="attribute_fee_no">Belépő vagy parkolódíj nem szükséges</string>
+  <string name="attribute_rappelling_yes">Mászófelszerelés szükséges</string>
+  <string name="attribute_rappelling_no">Mászófelszerelés nem szükséges</string>
+  <string name="attribute_boat_yes">Hajó szükséges</string>
+  <string name="attribute_boat_no">Hajó nem szükséges</string>
+  <string name="attribute_scuba_yes">Búvárfelszerelés szükséges</string>
+  <string name="attribute_scuba_no">Búvárfelszerelés nem szükséges</string>
+  <string name="attribute_flashlight_yes">Zseblámpa szükséges</string>
+  <string name="attribute_flashlight_no">Zseblámpa nem szükséges</string>
+  <string name="attribute_uv_yes">UV lámpa szükséges</string>
+  <string name="attribute_uv_no">UV lámpa nem szükséges</string>
+  <string name="attribute_snowshoes_yes">Hótaposó szükséges</string>
+  <string name="attribute_snowshoes_no">Hótaposó nem szükséges</string>
+  <string name="attribute_skiis_yes">Vadonjáró képesség szükséges</string>
+  <string name="attribute_skiis_no">Vadonjáró képesség nem szükséges</string>
+  <string name="attribute_s_tool_yes">Speciális szerszám szükséges</string>
+  <string name="attribute_s_tool_no">Speciális szerszám nem szükséges</string>
+  <string name="attribute_wirelessbeacon_yes">Vezetéknélküli jeladó</string>
+  <string name="attribute_wirelessbeacon_no">Nincs vezetéknélküli jeladó</string>
+  <string name="attribute_treeclimbing_yes">Fáramászás szükséges</string>
+  <string name="attribute_treeclimbing_no">Fáramászás nem szükséges</string>
+
+  <!--  attributes (hazards -> present, not present) -->
+  <string name="attribute_poisonoak_yes">Mérgező növények</string>
+  <string name="attribute_poisonoak_no">Nincsenek mérgező növények</string>
+  <string name="attribute_dangerousanimals_yes">Veszélyes állatok</string>
+  <string name="attribute_dangerousanimals_no">Nincsenek veszélyes állatok</string>
+  <string name="attribute_ticks_yes">Kullancsok</string>
+  <string name="attribute_ticks_no">Nincs kullancs</string>
+  <string name="attribute_mine_yes">Elhagyott bányák</string>
+  <string name="attribute_mine_no">Nincs elhagyott bánya</string>
+  <string name="attribute_cliff_yes">Szakadék / leeső sziklák</string>
+  <string name="attribute_cliff_no">Nincs szakadék / leeső szikla</string>
+  <string name="attribute_hunting_yes">Vadászat</string>
+  <string name="attribute_hunting_no">Nincs vadászat</string>
+  <string name="attribute_danger_yes">Veszélyes terület</string>
+  <string name="attribute_danger_no">Nem veszélyes terület</string>
+  <string name="attribute_thorn_yes">Tüskék</string>
+  <string name="attribute_thorn_no">Nincsenek tüskék</string>
+
+  <!--  attributes (facilities -> yes, no) -->
+  <string name="attribute_wheelchair_yes">Kerekesszékkel hozzáférhető</string>
+  <string name="attribute_wheelchair_no">Kerekesszékkel nem hozzáférhető</string>
+  <string name="attribute_parking_yes">Van parkolóhely</string>
+  <string name="attribute_parking_no">Nincs parkolóhely</string>
+  <string name="attribute_public_yes">Tömegközlekedéssel hozzáférhető</string>
+  <string name="attribute_public_no">Tömegközlekedéssel nem hozzáférhető</string>
+  <string name="attribute_water_yes">Ivóvíz a közelben</string>
+  <string name="attribute_water_no">Nincs ivóvíz a közelben</string>
+  <string name="attribute_restrooms_yes">Nyilvános pihenőhely a közelben</string>
+  <string name="attribute_restrooms_no">Nincs nyilvános pihenőhely a közelben</string>
+  <string name="attribute_phone_yes">Telefon a közelben</string>
+  <string name="attribute_phone_no">Nincs telefon a közelben</string>
+  <string name="attribute_picnic_yes">Piknikasztal a közelben</string>
+  <string name="attribute_picnic_no">Nincs piknkasztal a közelben</string>
+  <string name="attribute_camping_yes">Kemping a közelben</string>
+  <string name="attribute_camping_no">Nincs kemping a közelben</string>
+  <string name="attribute_stroller_yes">Babakocsival hozzáférhető</string>
+  <string name="attribute_stroller_no">Babakocsival nem hozzáférhető</string>
+  <string name="attribute_fuel_yes">Üzemanyag a közelben</string>
+  <string name="attribute_fuel_no">Nincs üzemanyag a közelben</string>
+  <string name="attribute_food_yes">Étel a közelben</string>
+  <string name="attribute_food_no">Nincs étel a közelben</string>
 
   <!-- next things -->
-  <string name="legal_note">A Geocaching.com szolgáltatásainak használatához, a <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak disclaimer</a> feltételeinek elfogadása szükséges.</string>
-  <string name="author">Szerző: <a href="http://carnero.cc/">carnero</a></string>
+  <string name="legal_note">A geocaching.com szolgáltatásainak használatához, el kell fogadnod ezeket a feltételeket:<a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak disclaimer</a> </string>
+  <string name="quote">Hogy a geocaching könyebb legyen a felhasználók pedig lustábbak.</string>
+  <string name="powered_by">carnero</string>
+  <string name="author">Készítő: <a href="http://carnero.cc/">carnero</a></string>
   <string name="support">Támogatás: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">Weboldal: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">Facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">c:geo page</a></string>
   <string name="twitter">Twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
-  <string name="about_go4cache">A <b>Go 4 Cache</b> más geocacherek valós idejű pozícióját mutatja (<b>c:geo</b>-ban vagy böngészőben). Például megtekinthető, hogy mely rejtést keresik éppen. A <b>Go 4 Cache</b> csatlokzással a <b>c:geo</b> publikája az aktuális pozíciódat játék közben (csak ha fut a <b>c:geo</b>).</string>
-  <string name="about_twitter">Publikája a <b>c:geo</b> Twitter üzenetként a megtalálásaidat?</string>
-  <string name="about_auth_1">A következő folyamattal a <b>c:geo</b> hozzáfér a Twitter fiókodhoz - ha elfogadod.</string>
-  <string name="about_auth_2">Kattints a \"c:geo engedélyezés\" gombra a folyamat indításához. Ekkor megnyílik egy böngészőablak a Twitter oldalával. jelentkezz be és engedélyezd a <b>c:geo</b> számára a hozzáférést. Ha sikeres, a Twitter egy PIN kódot generál neked. Ezt a kódot kell a <b>c:geo</b>-ban megadni. Ennyi az egész.</string>
+  <string name="nutshellmanual">Kézikönyv: <a href="http://manual.cgeo.org/">A c:geo dióhéjban</a></string>
+  <string name="about_go4cache">A <b>Go 4 Cache</b> szolgáltatás más cachereket mutat a térképen (a <b>c:geo</b>-ban vagy a böngészőben) valós időben. Megmutathatja például melyik ládát keresik. Ha csatlakozol a <b>Go 4 Cache</b> szolgáltatáshoz, azzal engedélyezed a <b>c:geo</b>-nak, hogy megjelenítse a jelenlegi helyzeted miközben ládát keresel.(csak ha a <b>c:geo</b> fut).</string>
+  <string name="about_twitter">Akarod, hogy <b>c:geo</b> új bejegyzést írjon Twitterre mindig mikor egy ládát megtalálsz?</string>
+  <string name="about_auth_1">A következő folyamat engedélyezi a <b>c:geo</b>-nak, hogy hozzáférjen a Twitterhez – ha jóváhagyod.</string>
+  <string name="about_auth_2">Kattints a \"c:geo engedélyezése\" gombra, hogy elindítsd a folyamatot. Ez a folyamat meg fog nyitni egy böngészőt a Twitter weboldallal. Lépj be ezen az oldalon és hagyd jóvá, hogy a <b>c:geo</b> hozzáférjen a felhasználói fiókodhoz. Ha elfogadod, a Twitter mutatni fog egy számokból álló PIN kódot. Ezt a PIN kódot kell a  <b>c:geo</b>-ban beillesztened és jóváhagynod. Ilyen egyszerű.</string>
 </resources>
