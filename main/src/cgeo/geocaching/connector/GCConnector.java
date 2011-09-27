@@ -31,7 +31,8 @@ public class GCConnector extends AbstractConnector implements IConnector {
 
     @Override
     public String getCacheUrl(cgCache cache) {
-        return "http://www.geocaching.com/seek/cache_details.aspx?wp=" + cache.geocode;
+        // it would also be possible to use "http://www.geocaching.com/seek/cache_details.aspx?wp=" + cache.geocode;
+        return "http://coord.info/" + cache.geocode;
     }
 
     @Override

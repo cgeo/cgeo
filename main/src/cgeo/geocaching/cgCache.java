@@ -466,4 +466,27 @@ public class cgCache implements ICache {
         return getConnector().supportsCachesAround();
     }
 
+    public void shareCache(Activity fromActivity, Resources res) {
+        if (geocode == null) {
+            return;
+        }
+
+        StringBuilder subject = new StringBuilder("Geocache ");
+        subject.append(geocode.toUpperCase());
+        if (StringUtils.isNotBlank(name)) {
+            subject.append(" - ").append(name);
+        }
+
+        final Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject.toString());
+        intent.putExtra(Intent.EXTRA_TEXT, getUrl());
+
+        fromActivity.startActivity(Intent.createChooser(intent, res.getText(R.string.action_bar_share_title)));
+    }
+
+    public String getUrl() {
+        return getConnector().getCacheUrl(this);
+    }
+
 }

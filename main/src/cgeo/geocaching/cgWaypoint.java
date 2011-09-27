@@ -142,4 +142,8 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
         this.prefix = prefix;
         cachedOrder = null;
     }
+
+    public String getUrl() {
+        return "http://coord.info/" + geocode.toUpperCase();
+    }
 }

@@ -560,8 +560,11 @@ public class cgeodetail extends AbstractActivity {
             addToCalendar();
             return true;
         } else if (menuItem == 12) {
-            shareCache();
-            return true;
+            if (cache != null) {
+                cache.shareCache(this, res);
+                return true;
+            }
+            return false;
         }
         if (NavigationAppFactory.onMenuItemSelected(item, geo, this, res, cache, searchId, null, null)) {
             return true;
@@ -1504,8 +1507,7 @@ public class cgeodetail extends AbstractActivity {
             eventDate.setSeconds(0);
 
             StringBuilder description = new StringBuilder();
-            description.append("http://coord.info/");
-            description.append(cache.geocode.toUpperCase());
+            description.append(cache.getUrl());
             description.append("\n\n");
             if (StringUtils.isNotBlank(cache.shortdesc)) {
                 description.append(Html.fromHtml(cache.shortdesc).toString());
@@ -1570,29 +1572,6 @@ public class cgeodetail extends AbstractActivity {
         cgeonavigate.coordinates.clear();
         cgeonavigate.coordinates.addAll(getCoordinates());
         startActivity(navigateIntent);
-    }
-
-    public void shareCache() {
-        if (geocode == null && cache == null) {
-            return;
-        }
-
-        final Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-
-        if (cache != null && cache.geocode != null) {
-            String subject = cache.geocode.toUpperCase();
-            if (StringUtils.isNotBlank(cache.name)) {
-                subject = subject + " - " + cache.name;
-            }
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Geocache " + subject);
-            intent.putExtra(Intent.EXTRA_TEXT, "http://coord.info/" + cache.geocode.toUpperCase());
-        } else if (geocode != null) {
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Geocache " + geocode.toUpperCase());
-            intent.putExtra(Intent.EXTRA_TEXT, "http://coord.info/" + geocode.toUpperCase());
-        }
-
-        startActivity(Intent.createChooser(intent, res.getText(R.string.action_bar_share_title)));
     }
 
     private class waypointInfo implements View.OnClickListener {
