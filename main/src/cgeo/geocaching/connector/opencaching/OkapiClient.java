@@ -243,6 +243,7 @@ final public class OkapiClient {
         return "other";
     }
 
+    // FIXME: document use of params and level, or remove them
     private static JSONObject request(final String geoCode, final String service, final String params, final int level) {
         final IConnector connector = ConnectorFactory.getConnector(geoCode);
         if (connector == null) {
