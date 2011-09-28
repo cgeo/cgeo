@@ -1278,13 +1278,8 @@ public class cgBase {
             final Matcher matcherLatLon = patternLatLon.matcher(page);
             if (matcherLatLon.find() && matcherLatLon.groupCount() > 0) {
                 cache.latlon = getMatch(matcherLatLon.group(2)); // first is <b>
-
-                Map<String, Object> tmp = cgBase.parseLatlon(cache.latlon);
-                if (tmp.size() > 0) {
-                    cache.coords = new Geopoint((Double) tmp.get("latitude"), (Double) tmp.get("longitude"));
-                    cache.reliableLatLon = true;
-                }
-                tmp = null;
+                cache.coords = new Geopoint(cache.latlon);
+                cache.reliableLatLon = true;
             }
         } catch (Exception e) {
             // failed to parse latitude and/or longitude
@@ -1596,10 +1591,7 @@ public class cgBase {
                             String latlon = Html.fromHtml(matcherWpLatLon.group(2)).toString().trim();
                             if (!StringUtils.containsOnly(latlon, '?')) {
                                 waypoint.latlon = latlon;
-                                final Map<String, Object> tmp = cgBase.parseLatlon(waypoint.latlon);
-                                if (tmp.size() > 0) {
-                                    waypoint.coords = new Geopoint((Double) tmp.get("latitude"), (Double) tmp.get("longitude"));
-                                }
+                                waypoint.coords = new Geopoint(latlon);
                             }
                         }
                     } catch (Exception e) {
@@ -2421,33 +2413,6 @@ public class cgBase {
         } else {
             return String.format(Locale.getDefault(), "%.0f", Double.valueOf(Math.round(kph))) + " " + unit;
         }
-    }
-
-    public static Map<String, Object> parseLatlon(String latlon) {
-        final Map<String, Object> result = new HashMap<String, Object>();
-        final Pattern patternLatlon = Pattern.compile("([NS])[^\\d]*(\\d+)[^°]*° (\\d+)\\.(\\d+) ([WE])[^\\d]*(\\d+)[^°]*° (\\d+)\\.(\\d+)", Pattern.CASE_INSENSITIVE);
-        final Matcher matcherLatlon = patternLatlon.matcher(latlon);
-
-        while (matcherLatlon.find()) {
-            if (matcherLatlon.groupCount() > 0) {
-                result.put("latitudeString", (String) (matcherLatlon.group(1) + " " + matcherLatlon.group(2) + "° " + matcherLatlon.group(3) + "." + matcherLatlon.group(4)));
-                result.put("longitudeString", (String) (matcherLatlon.group(5) + " " + matcherLatlon.group(6) + "° " + matcherLatlon.group(7) + "." + matcherLatlon.group(8)));
-                int latNegative = -1;
-                int lonNegative = -1;
-                if (matcherLatlon.group(1).equalsIgnoreCase("N")) {
-                    latNegative = 1;
-                }
-                if (matcherLatlon.group(5).equalsIgnoreCase("E")) {
-                    lonNegative = 1;
-                }
-                result.put("latitude", Double.valueOf(latNegative * (Float.valueOf(matcherLatlon.group(2)) + Float.valueOf(matcherLatlon.group(3) + "." + matcherLatlon.group(4)) / 60)));
-                result.put("longitude", Double.valueOf(lonNegative * (Float.valueOf(matcherLatlon.group(6)) + Float.valueOf(matcherLatlon.group(7) + "." + matcherLatlon.group(8)) / 60)));
-            } else {
-                Log.w(cgSettings.tag, "cgBase.parseLatlon: Failed to parse coordinates.");
-            }
-        }
-
-        return result;
     }
 
     private static String formatCoordinate(final Double coordIn, final boolean degrees, final String direction, final String digitsFormat) {
