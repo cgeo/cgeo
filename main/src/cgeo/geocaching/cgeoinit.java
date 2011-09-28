@@ -358,10 +358,6 @@ public class cgeoinit extends AbstractActivity {
         }
         disabledButton.setOnClickListener(new cgeoChangeDisabled());
 
-        CheckBox showWaypoints = (CheckBox) findViewById(R.id.showwaypoints);
-        showWaypoints.setChecked(prefs.getBoolean("gcshowwaypoints", false));
-        showWaypoints.setOnClickListener(new cgeoShowWaypoints());
-
         TextView showWaypointsThreshold = (TextView) findViewById(R.id.showwaypointsthreshold);
         showWaypointsThreshold.setText("" + prefs.getInt("gcshowwaypointsthreshold", 0));
 
@@ -552,9 +548,25 @@ public class cgeoinit extends AbstractActivity {
         final boolean status4 = settings.setAltCorrection(altitudeNewInt);
         final boolean status5 = settings.setMapFile(mfmapFileNew);
         TextView field = (TextView) findViewById(R.id.showwaypointsthreshold);
-        settings.setShowWaypointsThreshold(Integer.parseInt(field.getText().toString()));
+        settings.setShowWaypointsThreshold(safeParse(field, 5));
 
         return status1 && status2 && status3 && status4 && status5;
+    }
+
+    /**
+     * Returns the Int Value in the Field
+     *
+     * @param field
+     * @param def
+     * @return
+     */
+
+    private int safeParse(TextView field, int def) {
+        try {
+            return Integer.parseInt(field.getText().toString());
+        } catch (NumberFormatException e) {
+            return def;
+        }
     }
 
     private class cgeoChangeTwitter implements View.OnClickListener {
@@ -810,20 +822,6 @@ public class cgeoinit extends AbstractActivity {
                 disabledButton.setChecked(true);
             }
 
-            return;
-        }
-    }
-
-    private class cgeoShowWaypoints implements View.OnClickListener {
-
-        public void onClick(View arg0) {
-            CheckBox disabledButton = (CheckBox) findViewById(R.id.showwaypoints);
-            SharedPreferences.Editor edit = prefs.edit();
-            edit.putBoolean("gcshowwaypoints", disabledButton.isChecked());
-            settings.showWaypoints = disabledButton.isChecked();
-            edit.commit();
-
-            disabledButton.setChecked(prefs.getBoolean("gcshowwaypoints", false));
             return;
         }
     }
