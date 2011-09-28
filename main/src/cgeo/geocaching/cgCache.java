@@ -199,7 +199,9 @@ public class cgCache implements ICache {
         if (waypoints == null) {
             waypoints = other.waypoints;
         }
-        cgWaypoint.mergeWayPoints(waypoints, other.waypoints);
+        else {
+            cgWaypoint.mergeWayPoints(waypoints, other.waypoints);
+        }
         if (spoilers == null) {
             spoilers = other.spoilers;
         }
