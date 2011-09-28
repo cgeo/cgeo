@@ -2918,7 +2918,7 @@ public class cgBase {
         return users;
     }
 
-    public List<cgCache> processSearchResults(cgSearch search, cgCacheWrap caches, int excludeDisabled, int excludeMine, String cacheType) {
+    public static List<cgCache> processSearchResults(final cgSearch search, final cgCacheWrap caches, final int excludeDisabled, final int excludeMine, final String cacheType) {
         List<cgCache> cacheList = new ArrayList<cgCache>();
         if (caches != null) {
             if (StringUtils.isNotBlank(caches.error)) {

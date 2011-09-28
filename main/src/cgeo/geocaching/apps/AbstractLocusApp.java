@@ -53,8 +53,8 @@ public abstract class AbstractLocusApp extends AbstractApp {
      * @param activity
      * @author koem
      */
-    protected void showInLocus(List<? extends Object> objectsToShow, boolean withCacheWaypoints,
-            Activity activity) {
+    protected static void showInLocus(final List<? extends Object> objectsToShow, final boolean withCacheWaypoints,
+            final Activity activity) {
         if (objectsToShow == null) {
             return;
         }

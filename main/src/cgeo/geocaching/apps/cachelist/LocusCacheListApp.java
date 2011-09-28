@@ -28,7 +28,7 @@ class LocusCacheListApp extends AbstractLocusApp implements CacheListApp {
         if (cacheList == null || cacheList.isEmpty())
             return false;
 
-        this.showInLocus((List<? extends Object>) cacheList, false, activity);
+        showInLocus((List<? extends Object>) cacheList, false, activity);
 
         return true;
     }

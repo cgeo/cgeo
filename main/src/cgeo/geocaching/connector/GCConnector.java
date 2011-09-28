@@ -120,7 +120,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
             return null;
         }
 
-        List<cgCache> cacheList = base.processSearchResults(search, caches, 0, 0, null);
+        List<cgCache> cacheList = cgBase.processSearchResults(search, caches, 0, 0, null);
         app.addSearch(search, cacheList, true, reason);
 
         return search.getCurrentId();
