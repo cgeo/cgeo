@@ -927,7 +927,7 @@ public class cgData {
 
                             Log.i(cgSettings.tag, "Removed latitude_string and longitude_string columns");
                         } catch (Exception e) {
-                            Log.e(cgSettings.tag, "Failed to upgrade to ver. 58: " + e.toString());
+                            Log.e(cgSettings.tag, "Failed to upgrade to ver. 58", e);
                         } finally {
                             db.endTransaction();
                         }
