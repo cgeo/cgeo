@@ -468,7 +468,7 @@
   <string name="init_sendToCgeo_register_ok">Enregistrement réussi. Le code PIN est ####. Utiliser le sur le site de c:geo pour ajouter votre appareil dans votre navigateur.</string>
   <string name="init_sendToCgeo_register_fail">Échec de l\'enregistrement.</string>
   <string name="sendToCgeo_download_fail">c:geo n\'a pas pu charger les caches. Pas de connexion Internet ou problème avec le site send2c:geo.</string>
-  <string name="sendToCgeo_no_registration">c:geo n\'a pas pu charger les caches. L'abonnement à send2c:geo a expiré. Merci de vous réenregistrer dans les Paramètres.</string>
+  <string name="sendToCgeo_no_registration">c:geo n\'a pas pu charger les caches. L\'abonnement à send2c:geo a expiré. Merci de vous réenregistrer dans les Paramètres.</string>
 
   <!-- auth -->
   <string name="auth_twitter">twitter</string>
