@@ -13,6 +13,8 @@
   <string name="helper">Voulez-vous en savoir plus au sujet de <b>c:geo</b> ?\nLisez notre manuel (en anglais).</string>
   <string name="database_error_title">Problème avec la base de données</string>
   <string name="database_error_message">c:geo n\'a pas pu se connecter à la base de données interne.\nEssayez de relancer c:geo plus tard. Si le problème persiste, allez dans le menu <i>Paramètres</i> / <i>Applications</i> / <i>Gérer les applications</i> / <i>c:geo</i> du téléphone et pressez le bouton <i>Effacer les données</i>. Vous pouvez aussi désinstaller et réinstaller c:geo. Désolé.</string>
+  <string name="latitude">Latitude</string>
+  <string name="longitude">Longitude</string>
 
   <!-- actionbar -->
   <string name="action_bar_share_title">Partager le lien vers la cache</string>
@@ -179,6 +181,7 @@
   <string name="err_tb_forgot_saw">Désolé, c:geo a oublié quel objet voyageur vous avez vu.</string>
   <string name="err_tb_find">Désolé, c:geo ne peut pas trouver d\'objet voyageur.</string>
   <string name="err_tb_find_that">Désolé, c:geo ne peut pas trouver cet objet voyageur.</string>
+  <string name="err_cache_inventory_load_fail">Désolé, c:geo n\'a pas pu charger l\'inventaire.</string>
 
   <string name="err_waypoint_cache_unknown">Désolé, c:geo ne sait pas à quel cache vous voulez ajouter une étape.</string>
   <string name="err_waypoint_unknown">Désolé, c:geo a oublié quel étape vous vouliez afficher.</string>
@@ -208,6 +211,8 @@
   <string name="err_parse_lon">Désolé, c:geo n\'arrive pas à lire la longitude.</string>
   <string name="err_parse_bear">Désolé, c:geo n\'arrive pas à lire le relèvement.</string>
   <string name="err_parse_dist">Désolé, c:geo n\'arrive pas à lire la distance.</string>
+  <string name="err_parse_lat_lon">Désolé, c:geo n\'arrive pas à lire la latitude ou la longitude.</string>
+  <string name="err_invalid_lat_lon">Désolé, latitude ou longitude invalide.</string>
 
   <string name="err_fieldnotes_export_failed">L\'export du champ Notes a échoué.</string>
 
@@ -223,8 +228,7 @@
   <string name="warn_search_help_user">Veuillez remplir le nom d\'utilisateur utilisé sur Geocaching.com.</string>
   <string name="warn_search_help_tb">Veuillez remplir le code de l\'objet voyageur. Par exemple \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Merci de saisir un texte pour votre visite.</string>
-  <string name="warn_load_log_image">Désolé, c:geo ne peux pas charger l\'image de la visite.</string>
-  <string name="warn_load_spoiler_image">Désolé, c:geo ne peux pas charger l\'image indice.</string>
+  <string name="warn_load_images">Désolé, c:geo n\'a pas pu charger les images.</string>
 
   <string name="info_altitude">Altitude actuelle</string>
   <string name="info_distance">Distance du voyage</string>
@@ -328,13 +332,6 @@
   <string name="caches_filter_track">avec des trackables</string>
   <string name="caches_filter_clear">effacer les filtres</string>
   <string name="caches_filter_size_title">Choisir la taille</string>
-  <string name="caches_filter_size_micro">micro</string>
-  <string name="caches_filter_size_small">petite</string>
-  <string name="caches_filter_size_regular">normale</string>
-  <string name="caches_filter_size_large">grande</string>
-  <string name="caches_filter_size_other">autre</string>
-  <string name="caches_filter_size_virtual">virtuelle</string>
-  <string name="caches_filter_size_notchosen">indéfini</string>
   <string name="caches_filter_type_title">Choisir le type</string>
   <string name="caches_filter_type_traditional">Traditionelle</string>
   <string name="caches_filter_type_multi">Multi-cache</string>
@@ -420,6 +417,8 @@
   <string name="init_captcha">Afficher le CAPTCHA si nécessaire</string>
   <string name="init_useenglish">Utiliser l\'anglais dans c:geo\n(redémarrage nécessaire)</string>
   <string name="init_exclude">Exclure mes caches et les caches trouvées</string>
+  <string name="init_showwaypoints">Monter les points intermédiaires sur la carte active</string>
+  <string name="init_showwaypointsthreshold">Maximum de caches pour les afficher</string>
   <string name="init_disabled">Exclure les caches désactivées</string>
   <string name="init_offline">Enregistrer les cartes pour une utilisation hors ligne</string>
   <string name="init_save_log_img">Sauver les images des visites</string>
@@ -468,6 +467,8 @@
   <string name="init_sendToCgeo_registering">Enregistrer votre appareil pour "Send to c:geo"…</string>
   <string name="init_sendToCgeo_register_ok">Enregistrement réussi. Le code PIN est ####. Utiliser le sur le site de c:geo pour ajouter votre appareil dans votre navigateur.</string>
   <string name="init_sendToCgeo_register_fail">Échec de l\'enregistrement.</string>
+  <string name="sendToCgeo_download_fail">c:geo n\'a pas pu charger les caches. Pas de connexion Internet ou problème avec le site send2c:geo.</string>
+  <string name="sendToCgeo_no_registration">c:geo n\'a pas pu charger les caches. L'abonnement à send2c:geo a expiré. Merci de vous réenregistrer dans les Paramètres.</string>
 
   <!-- auth -->
   <string name="auth_twitter">twitter</string>
@@ -501,6 +502,7 @@
   <string name="cache_attributes">Attributs</string>
   <string name="cache_attributes_no_icons">(recharger la cache pour voir les icônes des attributs)</string>
   <string name="cache_inventory">Inventaire</string>
+  <string name="cache_inventory_loading">Chargement de l\'inventaire…</string>
   <string name="cache_log_offline">Visite hors-ligne</string>
   <string name="cache_log_images_loading">Chargement de l\'image de la visite…</string>
   <string name="cache_log_images_title">Image de la visite</string>
@@ -552,6 +554,7 @@
   <string name="cache_menu_move_list">Déplacer dans une autre liste</string>
   <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
+  <string name="cache_menu_oruxmaps">OruxMaps</string>
   <string name="cache_status">Statut</string>
   <string name="cache_status_offline_log">Visite sauvée hors-ligne</string>
   <string name="cache_status_found">Trouvée</string>
@@ -581,6 +584,7 @@
   <string name="cache_export_fieldnote">Export en tant que champ Notes</string>
   <string name="cache_clear_history">Effacer l\'historique</string>
   <string name="cache_remove_from_history">Effacer de l\'historique</string>
+  <string name="cache_license">Licence</string>
 
   <!-- file list base -->
   <string name="file_searching_in">Recherche de fichiers\nin</string>
@@ -632,6 +636,7 @@
   <string name="waypoint_save">Sauver</string>
   <string name="waypoint_loading">Chargement d\'une étape…</string>
   <string name="waypoint_unknown_coordinates">Coordonnées inconnues</string>
+  <string name="waypoint_done">Fait</string>
   <string name="search_history">Historique</string>
   <string name="search_history_empty">Aucune destination précédente</string>
   <string name="search_remove_destination">Destination effacée</string>
@@ -694,6 +699,7 @@
   <string name="search_caches_near">Lieux près de</string>
   <string name="search_address_started">Recherche par lieu</string>
   <string name="search_address_result">Lieux trouvés</string>
+  <string name="search_own_caches">Chercher mes caches</string>
 
   <!-- trackable -->
   <string name="trackable">Objet voyageur</string>
@@ -891,6 +897,7 @@
   <!-- next things -->
   <string name="legal_note">Pour utiliser les services de geocaching.com, vous devez accepter les termes et conditions de la <a href="http://www.geocaching.com/about/termsofuse.aspx">mise en garde de Groundspeak</a>.</string>
   <string name="quote">Pour faciliter le géocaching.</string>
+  <string name="powered_by">carnero</string>
   <string name="author">auteur: <a href="http://carnero.cc/">carnero</a></string>
   <string name="support">support: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">site: <a href="http://cgeo.org/">cgeo.org</a></string>
