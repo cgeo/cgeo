@@ -7,6 +7,7 @@ import android.test.AndroidTestCase;
 
 import junit.framework.Assert;
 
+@SuppressWarnings("static-method")
 public class GeoPointParserTest extends AndroidTestCase {
 
     private static final double refLongitude = 8.0 + 38.564 / 60.0;

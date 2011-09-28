@@ -1,10 +1,13 @@
 package cgeo.geocaching.test;
 
-import junit.framework.Assert;
-import android.test.AndroidTestCase;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.geopoint.DistanceParser;
 
+import android.test.AndroidTestCase;
+
+import junit.framework.Assert;
+
+@SuppressWarnings("static-method")
 public class DistanceParserTest extends AndroidTestCase {
 
 	static private final double MM = 1e-6;  // 1mm, in kilometers

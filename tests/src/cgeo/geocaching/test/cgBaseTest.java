@@ -6,6 +6,7 @@ import android.test.AndroidTestCase;
 
 import junit.framework.Assert;
 
+@SuppressWarnings("static-method")
 public class cgBaseTest extends AndroidTestCase {
 
     public void testReplaceWhitespaces() {

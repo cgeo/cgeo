@@ -7,6 +7,7 @@ import android.test.AndroidTestCase;
 
 import junit.framework.Assert;
 
+@SuppressWarnings("static-method")
 public class GeopointTest extends AndroidTestCase {
 
     public void testCreation() {
