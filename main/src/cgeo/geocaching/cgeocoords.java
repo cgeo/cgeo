@@ -181,10 +181,10 @@ public class cgeocoords extends Dialog {
                 tLatSep2.setText("°");
                 tLonSep2.setText("°");
 
-                eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
-                eLatMin.setText(addZeros(latDegFrac, 5) + Integer.toString(latDegFrac));
-                eLonDeg.setText(addZeros(latDeg, 3) + Integer.toString(lonDeg));
-                eLonMin.setText(addZeros(lonDegFrac, 5) + Integer.toString(lonDegFrac));
+                eLatDeg.setText(addZeros(latDeg, 2));
+                eLatMin.setText(addZeros(latDegFrac, 5));
+                eLonDeg.setText(addZeros(latDeg, 3));
+                eLonMin.setText(addZeros(lonDegFrac, 5));
                 break;
             case Min: // DDD° MM.MMM
                 findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
@@ -204,12 +204,12 @@ public class cgeocoords extends Dialog {
                 tLatSep3.setText("'");
                 tLonSep3.setText("'");
 
-                eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
-                eLatMin.setText(addZeros(latMin, 2) + Integer.toString(latMin));
-                eLatSec.setText(addZeros(latMinFrac, 3) + Integer.toString(latMinFrac));
-                eLonDeg.setText(addZeros(lonDeg, 3) + Integer.toString(lonDeg));
-                eLonMin.setText(addZeros(lonMin, 2) + Integer.toString(lonMin));
-                eLonSec.setText(addZeros(lonMinFrac, 3) + Integer.toString(lonMinFrac));
+                eLatDeg.setText(addZeros(latDeg, 2));
+                eLatMin.setText(addZeros(latMin, 2));
+                eLatSec.setText(addZeros(latMinFrac, 3));
+                eLonDeg.setText(addZeros(lonDeg, 3));
+                eLonMin.setText(addZeros(lonMin, 2));
+                eLonSec.setText(addZeros(lonMinFrac, 3));
                 break;
             case Sec: // DDD° MM SS.SSS
                 findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
@@ -229,29 +229,21 @@ public class cgeocoords extends Dialog {
                 tLatSep3.setText(".");
                 tLonSep3.setText(".");
 
-                eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
-                eLatMin.setText(addZeros(latMin, 2) + Integer.toString(latMin));
-                eLatSec.setText(addZeros(latSec, 2) + Integer.toString(latSec));
-                eLatSub.setText(addZeros(latSecFrac, 3) + Integer.toString(latSecFrac));
-                eLonDeg.setText(addZeros(lonDeg, 3) + Integer.toString(lonDeg));
-                eLonMin.setText(addZeros(lonMin, 2) + Integer.toString(lonMin));
-                eLonSec.setText(addZeros(lonSec, 2) + Integer.toString(lonSec));
-                eLonSub.setText(addZeros(lonSecFrac, 3) + Integer.toString(lonSecFrac));
+                eLatDeg.setText(addZeros(latDeg, 2));
+                eLatMin.setText(addZeros(latMin, 2));
+                eLatSec.setText(addZeros(latSec, 2));
+                eLatSub.setText(addZeros(latSecFrac, 3));
+                eLonDeg.setText(addZeros(lonDeg, 3));
+                eLonMin.setText(addZeros(lonMin, 2));
+                eLonSec.setText(addZeros(lonSec, 2));
+                eLonSub.setText(addZeros(lonSecFrac, 3));
                 break;
         }
     }
 
-    private static String addZeros(int value, int len) {
-        StringBuilder zeros = new StringBuilder();
-        if (value == 0) {
-            value = 1;
-        }
-        double wantedLength = Math.pow(10, len - 1);
-        while (value < wantedLength) {
-            zeros.append('0');
-            value *= 10;
-        }
-        return zeros.toString();
+    private static String addZeros(final int value, final int len) {
+        final String n = Integer.toString(value);
+        return StringUtils.repeat('0', Math.max(0, len - n.length())) + n;
     }
 
     private class ButtonClickListener implements View.OnClickListener {
