@@ -1577,7 +1577,7 @@ public class cgBase {
                         final Matcher matcherWpName = patternWpName.matcher(wp[6]);
                         while (matcherWpName.find()) {
                             if (matcherWpName.groupCount() > 0) {
-                                waypoint.name = matcherWpName.group(1);
+                                waypoint.name = matcherWpName.group(1).trim();
                                 if (StringUtils.isNotBlank(waypoint.name)) {
                                     waypoint.name = waypoint.name.trim();
                                 }
@@ -1595,13 +1595,15 @@ public class cgBase {
                     try {
                         final Matcher matcherWpLatLon = patternWpPrefixOrLookupOrLatlon.matcher(wp[7]);
                         if (matcherWpLatLon.find() && matcherWpLatLon.groupCount() > 1) {
-                            waypoint.latlon = Html.fromHtml(matcherWpLatLon.group(2)).toString();
-
-                            final Map<String, Object> tmp = cgBase.parseLatlon(waypoint.latlon);
-                            if (tmp.size() > 0) {
-                                waypoint.coords = new Geopoint((Double) tmp.get("latitude"), (Double) tmp.get("longitude"));
-                                waypoint.latitudeString = (String) tmp.get("latitudeString");
-                                waypoint.longitudeString = (String) tmp.get("longitudeString");
+                            String latlon = Html.fromHtml(matcherWpLatLon.group(2)).toString().trim();
+                            if (!StringUtils.containsOnly(latlon, '?')) {
+                                waypoint.latlon = latlon;
+                                final Map<String, Object> tmp = cgBase.parseLatlon(waypoint.latlon);
+                                if (tmp.size() > 0) {
+                                    waypoint.coords = new Geopoint((Double) tmp.get("latitude"), (Double) tmp.get("longitude"));
+                                    waypoint.latitudeString = (String) tmp.get("latitudeString");
+                                    waypoint.longitudeString = (String) tmp.get("longitudeString");
+                                }
                             }
                         }
                     } catch (Exception e) {
@@ -4133,7 +4135,7 @@ public class cgBase {
     /**
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 sept. à 12:35".
-     *
+     * 
      * @param context
      *            a Context
      * @param date
