@@ -62,6 +62,8 @@ public class cgSettings {
     private static final String KEY_LOG_OFFLINE = "log_offline";
     private static final String KEY_LOAD_DIRECTION_IMG = "loaddirectionimg";
     private static final String KEY_GC_CUSTOM_DATE = "gccustomdate";
+    private static final String KEY_SHOW_WAYPOINTS = "gcshowwaypoints";
+    private static final String KEY_SHOW_WAYPOINTS_THRESHOLD = "gcshowwaypointsthreshold";
 
     private interface PrefRunnable {
         void edit(final Editor edit);
@@ -137,6 +139,7 @@ public class cgSettings {
     public boolean showCaptcha = false;
     public int excludeMine = 0;
     public int excludeDisabled = 0;
+    public boolean showWaypoints = false;
     public int storeOfflineMaps = 0;
     public boolean storelogimages = false;
     public int asBrowser = 1;
@@ -173,6 +176,7 @@ public class cgSettings {
     public mapSourceEnum mapSource = mapSourceEnum.googleMap;
     private String mapFile = null;
     private boolean mapFileValid = false;
+    public int showWaypointsthreshold = 0;
 
     public cgSettings(Context contextIn, SharedPreferences prefsIn) {
         context = contextIn;
@@ -219,6 +223,8 @@ public class cgSettings {
         trackableAutovisit = prefs.getBoolean(KEY_AUTO_VISIT_TRACKABLES, false);
         signatureAutoinsert = prefs.getBoolean(KEY_AUTO_INSERT_SIGNATURE, false);
         coordInput = coordInputFormatEnum.fromInt(prefs.getInt(KEY_COORD_INPUT_FORMAT, 0));
+        showWaypoints = prefs.getBoolean(KEY_SHOW_WAYPOINTS, false);
+        showWaypointsthreshold = prefs.getInt(KEY_SHOW_WAYPOINTS_THRESHOLD, 0);
 
         setLanguage(useEnglish);
     }
@@ -604,4 +610,30 @@ public class cgSettings {
     public String getGcCustomDate() {
         return prefs.getString(KEY_GC_CUSTOM_DATE, null);
     }
+
+    public boolean isShowWaypoints() {
+        return prefs.getBoolean(KEY_SHOW_WAYPOINTS, true);
+    }
+
+    void setShowWaypoints(final boolean showwaypoints) {
+        editSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putBoolean(KEY_SHOW_WAYPOINTS, showwaypoints);
+            }
+        });
+    }
+
+    public void setShowWaypointsThreshold(int parseInt) {
+        showWaypointsthreshold = parseInt;
+        editSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putInt(KEY_SHOW_WAYPOINTS_THRESHOLD, showWaypointsthreshold);
+            }
+        });
+    }
+
 }
