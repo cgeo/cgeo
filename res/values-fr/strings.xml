@@ -24,7 +24,7 @@
   <string name="multi">Multiples</string>
   <string name="mystery">Mystères</string>
   <string name="letterbox">Boîtes aux lettres hybrides</string>
-  <string name="event">Evènements</string>
+  <string name="event">Évènements</string>
   <string name="mega">Méga-évènements</string>
   <string name="earth">Earthcache</string>
   <string name="cito">Cache in trash out</string>
@@ -37,9 +37,9 @@
   <string name="gps">Gps cache exhibit</string>
 
   <!-- waypoints -->
-  <string name="wp_final">Etape finale</string>
-  <string name="wp_stage">Etape</string>
-  <string name="wp_puzzle">Enigme</string>
+  <string name="wp_final">Étape finale</string>
+  <string name="wp_stage">Étape</string>
+  <string name="wp_puzzle">Énigme</string>
   <string name="wp_pkg">Parking</string>
   <string name="wp_trailhead">Départ du sentier</string>
   <string name="wp_waypoint">Point de repère</string>
@@ -107,8 +107,8 @@
   <!-- errors, warnings, info toasts -->
   <string name="err_none">ok</string>
   <string name="err_start">Communication non démarrée</string>
-  <string name="err_parse">Echec login lecture page</string>
-  <string name="err_server">Echec de la connexion à geocaching.com (probléme de serveur ou de connexion?)</string>
+  <string name="err_parse">Échec login lecture page</string>
+  <string name="err_server">Échec de la connexion à geocaching.com (probléme de serveur ou de connexion?)</string>
   <string name="err_login">Pas d\'utilisateur ou de mot de passe enregistré</string>
   <string name="err_login_failed">Impossible de se connecter.</string>
   <string name="err_unknown">Erreur inconnue</string>
@@ -135,7 +135,7 @@
   <string name="err_detail_still_saving">Cache toujours en cours de sauvegarde.</string>
   <string name="err_detail_still_refreshing">Cache toujours en cours de chargement.</string>
   <string name="err_watchlist_still_managing">Liste de suivi toujours en traitement.</string>
-  <string name="err_watchlist_failed">Echec lors du changement de votre liste de suivi.</string>
+  <string name="err_watchlist_failed">Échec lors du changement de votre liste de suivi.</string>
   <string name="err_radar_title">Le radar n\'est pas installé.</string>
   <string name="err_radar_message">Cette fonction nécessite l\'application Radar. Voulez-vous l\'installer?</string>
   <string name="err_radar_market">c:geo ne peux pas démarrer le Market Android pour rechercher l\'application Radar.</string>
@@ -143,12 +143,12 @@
   <string name="err_navigation_no">c:geo ne trouve pas de navigation supportée.</string>
   <string name="err_application_no">c:geo ne trouve pas d\'application conforme.</string>
   <string name="err_auth_initialize">Désolé, c:geo a échoué dans la demande d\'autorisation.</string>
-  <string name="err_auth_process">Echec de la demande d\'autorisation.</string>
+  <string name="err_auth_process">Échec de la demande d\'autorisation.</string>
   <string name="err_cannot_log_visit">c:geo n\'a pas assez d\'information pour logger votre visite. Faites le depuis le détail de la cache, s\'il vous plait!</string>
   <string name="err_init_cleared">Désolé, c:geo ne peux pas effacer votre nom d\'utilisateur.</string>
   <string name="err_no_chaches">Désolé, c:geo n\'a pas réussi à charger les caches.</string>
   <string name="err_download_fail">Désolé, c:geo n\'a pas réussi à télécharger les caches car </string>
-  <string name="err_update_fail">Echec de la mise à jour de la distance du voyage.</string>
+  <string name="err_update_fail">Échec de la mise à jour de la distance du voyage.</string>
   <string name="err_list_load_fail">Désolé, c:geo n\'a pas réussi à charger la liste des caches.</string>
   <string name="err_store_failed">Désolé, c:geo ne peut pas enregistrer la cache.</string>
   <string name="err_refresh_failed">Désolé, c:geo ne peut pas rafraîchir la cache.</string>
@@ -207,7 +207,7 @@
   <string name="warn_no_keyword">Pas de mot clé.</string>
   <string name="warn_no_username">Pas de nom d\'utilisateur.</string>
   <string name="warn_search_help_title">Besoin d\'aide?</string>
-  <string name="warn_search_help_address">"Veuillez remplir l\'adresse ou le lieu. Par exemple l\'adresse \"100 Avenue Montainge, Paris, France\", nom de la ville \"Berlin\" ou simplement \"Parc Yellowstone\".</string>
+  <string name="warn_search_help_address">Veuillez remplir l\'adresse ou le lieu. Par exemple l\'adresse \"100 Avenue Montainge, Paris, France\", nom de la ville \"Berlin\" ou simplement \"Parc Yellowstone\".</string>
   <string name="warn_search_help_gccode">Veuillez remplir le code de la cache. Par exemple \"GC1VCAZ\".</string>
   <string name="warn_search_help_keyword">Veuillez saisir un mot censé se trouver dans le nom de la cache recherchée.</string>
   <string name="warn_search_help_user">Veuillez remplir le nom d\'utilisateur utilisé sur Geocaching.com.</string>
@@ -250,7 +250,7 @@
   <string name="advanced_search_button">Recherche</string>
   <string name="stored_caches_button">Enregistrées</string>
   <string name="any_button">N\'importe où</string>
-  <string name="about_button">A propos</string>
+  <string name="about_button">À propos</string>
   <string name="settings_button">Paramètres</string>
   <string name="type">Type</string>
   <string name="now_searching">Recherche en cours…</string>
@@ -330,7 +330,7 @@
   <string name="caches_filter_type_multi">Multiple</string>
   <string name="caches_filter_type_mystery">Mystère</string>
   <string name="caches_filter_type_letterbox">Boîte aux lettres hybride</string>
-  <string name="caches_filter_type_event">Evènement</string>
+  <string name="caches_filter_type_event">Évènement</string>
   <string name="caches_filter_type_mega">Mega-évènement</string>
   <string name="caches_filter_type_earth">Earth cache</string>
   <string name="caches_filter_type_cito">Cache In Trash Out event</string>
@@ -351,7 +351,7 @@
   <string name="list_menu_change">Changer la liste</string> <!-- since: 2.2 -->
   <string name="list_title">Choisir une liste</string>
   <string name="list_inbox">Enregistrées</string>
-  <string name="list_wpt">Etapes</string>
+  <string name="list_wpt">Étapes</string>
   <string name="list_dialog_create_title">Nouvelle liste</string>
   <string name="list_dialog_create">Créer</string>
   <string name="list_dialog_cancel">Annuler</string>
@@ -383,8 +383,8 @@
   <string name="init_login_popup">Identifiant</string>
   <string name="init_login_popup_working">Identification auprès de geocaching.com…</string>
   <string name="init_login_popup_ok">Identification réussie.</string>
-  <string name="init_login_popup_failed">Echec de l\'identification.</string>
-  <string name="init_login_popup_failed_reason">Echec de l\'identification car </string>
+  <string name="init_login_popup_failed">Échec de l\'identification.</string>
+  <string name="init_login_popup_failed_reason">Échec de l\'identification car </string>
   <string name="init_legal">Note légale</string>
   <string name="init_go4cache_connect">Connection à Go 4 Cache</string>
   <string name="init_twitter_authorize">Autorisation de c:geo</string>
@@ -430,7 +430,7 @@
   <string name="init_backup_success">La base de données de c:geo a été sauvegardée dans un fichier</string>
   <string name="init_backup_failed">La sauvegarde de la base de données de c:geo a échouée.</string>
   <string name="init_restore_success">Restauration terminée.</string>
-  <string name="init_restore_failed">Echec de la restauration.</string>
+  <string name="init_restore_failed">Échec de la restauration.</string>
   <string name="init_backup_last">Sauvegarde disponible depuis</string>
   <string name="init_backup_last_no">Il n\'y a pas de fichier avec une sauvegarde.</string>
   <string name="init_mapsources">Source des cartes</string> <!-- since: 2.26 RC3 -->
@@ -457,7 +457,7 @@
   <string name="init_sendToCgeo_register">Demande d\'enregistrement</string>
   <string name="init_sendToCgeo_registering">Enregistrer votre appareil pour "Send to c:geo"…</string>
   <string name="init_sendToCgeo_register_ok">Enregistrement réussi. Le code PIN est ####. Utiliser le sur le site de c:geo pour ajouter votre appareil dans votre navigateur.</string>
-  <string name="init_sendToCgeo_register_fail">Echec de l\'enregistrement.</string>
+  <string name="init_sendToCgeo_register_fail">Échec de l\'enregistrement.</string>
 
   <!-- auth -->
   <string name="auth_twitter">twitter</string>
@@ -503,7 +503,7 @@
   <string name="cache_watchlist_not_on">Cette cache n\'est pas dans votre liste de suivi.</string>
   <string name="cache_watchlist_add">Ajouter à votre liste de suivi</string>
   <string name="cache_watchlist_remove">Retirer de votre liste de suivi</string>
-  <string name="cache_waypoints">Etapes</string>
+  <string name="cache_waypoints">Étapes</string>
   <string name="cache_waypoints_add">Ajouter une étape</string>
   <string name="cache_hint">Indice</string>
   <string name="cache_logs">Carnet de bord</string>
@@ -600,21 +600,21 @@
   
   <!-- event -->
   <string name="event_success">Cache évènement ajoutée à l\'agenda</string>
-  <string name="event_fail">Echec d\'ajout de la cache évènement à l\'agenda</string>
+  <string name="event_fail">Échec d\'ajout de la cache évènement à l\'agenda</string>
 
   <!-- popup -->
   <string name="popup_more">Plus de détails</string>
   <string name="popup_offline">Hors ligne</string>
   
   <!-- waypoint -->
-  <string name="waypoint">Etape</string>
-  <string name="waypoint_title">Etape</string>
+  <string name="waypoint">Étape</string>
+  <string name="waypoint_title">Étape</string>
   <string name="waypoint_custom">Personnalisé</string>
   <string name="waypoint_my_coordinates">Ma position</string>
   <string name="waypoint_bearing">Relèvement</string>
   <string name="waypoint_distance">Distance</string>
   <string name="waypoint_name">Nom</string>
-  <string name="waypoint_edit">Editer</string>
+  <string name="waypoint_edit">Éditer</string>
   <string name="waypoint_delete">Effacer</string>
   <string name="waypoint_edit_title">Editer une étape</string>
   <string name="waypoint_add_title">Ajouter une étape</string>
@@ -851,7 +851,7 @@
   <string name="attribute_hunting_no">Pas de chasse</string>
   <string name="attribute_danger_yes">Zone dangereuse</string>
   <string name="attribute_danger_no">Pas de zone dangereuse</string>
-  <string name="attribute_thorn_yes">Epines</string>
+  <string name="attribute_thorn_yes">Épines</string>
   <string name="attribute_thorn_no">Pas d\'épine</string>
 
   <!--  attributes (facilities -> yes, no) -->
