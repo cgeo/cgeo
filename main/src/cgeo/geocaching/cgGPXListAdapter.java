@@ -16,7 +16,7 @@ public class cgGPXListAdapter extends ArrayAdapter<File> {
     private cgeogpxes parent = null;
     private LayoutInflater inflater = null;
 
-    public cgGPXListAdapter(cgeogpxes parentIn, cgSettings settingsIn, List<File> listIn) {
+    public cgGPXListAdapter(cgeogpxes parentIn, List<File> listIn) {
         super(parentIn, 0, listIn);
 
         parent = parentIn;

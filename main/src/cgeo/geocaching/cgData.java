@@ -2569,7 +2569,7 @@ public class cgData {
         return count;
     }
 
-    public int getAllHistoricCachesCount(boolean detailedOnly, String cachetype) {
+    public int getAllHistoricCachesCount() {
         init();
 
         int count = 0;

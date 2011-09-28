@@ -997,7 +997,7 @@ public class cgeocaches extends AbstractListActivity {
                 setComparator(item, new GeocodeComparator());
                 return false;
             case MENU_SWITCH_LIST:
-                selectList(null);
+                selectList();
                 return false;
             case MENU_SORT_RATING:
                 setComparator(item, new RatingComparator());
@@ -1254,7 +1254,7 @@ public class cgeocaches extends AbstractListActivity {
         } else if (id == MENU_FILTER_TYPE_GPS) {
             return setFilter(new cgFilterByType("gps"));
         } else if (id == MENU_DROP_CACHE) {
-            cgBase.dropCache(app, this, cache, new Handler() {
+            cgBase.dropCache(app, cache, new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     refreshCurrentList();
@@ -2391,7 +2391,7 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
-    public void selectList(View view) {
+    public void selectList() {
         if (type.equals("offline") == false) {
             return;
         }
@@ -2551,7 +2551,7 @@ public class cgeocaches extends AbstractListActivity {
         alert.show();
     }
 
-    public void goMap(View view) {
+    public void goMap() {
         if (searchId == null || CollectionUtils.isEmpty(cacheList)) {
             showToast(res.getString(R.string.warn_no_cache_coord));
 
@@ -2565,7 +2565,7 @@ public class cgeocaches extends AbstractListActivity {
         startActivity(mapIntent);
     }
 
-    public void goManual(View view) {
+    public void goManual() {
         if (type != null && type.equals("offline")) {
             ActivityMixin.goManual(this, "c:geo-stored");
         } else if (type != null && type.equals("history")) {

@@ -487,7 +487,7 @@ public class cgeoinit extends AbstractActivity {
         }
     }
 
-    public void backup(View view) {
+    public void backup() {
         // avoid overwriting an existing backup with an empty database (can happen directly after reinstalling the app)
         if (app.getAllStoredCachesCount(true, null, null) == 0) {
             return;
@@ -514,7 +514,7 @@ public class cgeoinit extends AbstractActivity {
         }
     }
 
-    public void restore(View view) {
+    public void restore() {
         final boolean status = app.restoreDatabase();
 
         if (status) {
@@ -557,15 +557,17 @@ public class cgeoinit extends AbstractActivity {
      * Returns the Int Value in the Field
      *
      * @param field
-     * @param def
-     * @return
+     *            the field to retrieve the integer value from
+     * @param defaultValue
+     *            the default value
+     * @return either the field content or the default value
      */
 
-    private int safeParse(TextView field, int def) {
+    static private int safeParse(final TextView field, int defaultValue) {
         try {
             return Integer.parseInt(field.getText().toString());
         } catch (NumberFormatException e) {
-            return def;
+            return defaultValue;
         }
     }
 

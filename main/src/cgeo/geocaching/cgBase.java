@@ -2583,7 +2583,7 @@ public class cgBase {
         }
 
         final cgSearch search = app.getHistoryOfCaches(true, cachetype);
-        search.totalCnt = app.getAllHistoricCachesCount(true, cachetype);
+        search.totalCnt = app.getAllHistoricCachesCount();
 
         return search.getCurrentId();
     }
@@ -3637,7 +3637,7 @@ public class cgBase {
         }
     }
 
-    public static void dropCache(cgeoapplication app, Activity activity, cgCache cache, Handler handler) {
+    public static void dropCache(final cgeoapplication app, final cgCache cache, final Handler handler) {
         try {
             app.markDropped(cache.geocode);
             app.removeCacheFromCache(cache.geocode);
@@ -4096,7 +4096,7 @@ public class cgBase {
     /**
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 sept. à 12:35".
-     * 
+     *
      * @param context
      *            a Context
      * @param date

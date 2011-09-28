@@ -279,7 +279,7 @@ public class cgeo extends AbstractActivity {
         final int id = item.getItemId();
         switch (id) {
             case MENU_ABOUT:
-                showAbout(null);
+                showAbout();
                 return true;
             case MENU_HELPERS:
                 context.startActivity(new Intent(context, cgeohelpers.class));
@@ -470,7 +470,7 @@ public class cgeo extends AbstractActivity {
         findOnMap.setClickable(true);
         findOnMap.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                cgeoFindOnMap(v);
+                cgeoFindOnMap();
             }
         });
 
@@ -478,7 +478,7 @@ public class cgeo extends AbstractActivity {
         findByOffline.setClickable(true);
         findByOffline.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                cgeoFindByOffline(v);
+                cgeoFindByOffline();
             }
         });
         registerForContextMenu(findByOffline);
@@ -489,7 +489,7 @@ public class cgeo extends AbstractActivity {
         advanced.setClickable(true);
         advanced.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                cgeoSearch(v);
+                cgeoSearch();
             }
         });
 
@@ -497,7 +497,7 @@ public class cgeo extends AbstractActivity {
         any.setClickable(true);
         any.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                cgeoPoint(v);
+                cgeoPoint();
             }
         });
 
@@ -534,7 +534,7 @@ public class cgeo extends AbstractActivity {
                     findNearest.setClickable(true);
                     findNearest.setOnClickListener(new OnClickListener() {
                         public void onClick(View v) {
-                            cgeoFindNearest(v);
+                            cgeoFindNearest();
                         }
                     });
                     findNearest.setBackgroundResource(R.drawable.main_nearby);
@@ -604,12 +604,12 @@ public class cgeo extends AbstractActivity {
         }
     }
 
-    public void cgeoFindOnMap(View v) {
+    public void cgeoFindOnMap() {
         findViewById(R.id.map).setPressed(true);
         context.startActivity(new Intent(context, settings.getMapFactory().getMapClass()));
     }
 
-    public void cgeoFindNearest(View v) {
+    public void cgeoFindNearest() {
         if (geo == null) {
             return;
         }
@@ -623,24 +623,24 @@ public class cgeo extends AbstractActivity {
         context.startActivity(cachesIntent);
     }
 
-    public void cgeoFindByOffline(View v) {
+    public void cgeoFindByOffline() {
         findViewById(R.id.search_offline).setPressed(true);
         final Intent cachesIntent = new Intent(context, cgeocaches.class);
         cachesIntent.putExtra("type", "offline");
         context.startActivity(cachesIntent);
     }
 
-    public void cgeoSearch(View v) {
+    public void cgeoSearch() {
         findViewById(R.id.advanced_button).setPressed(true);
         context.startActivity(new Intent(context, cgeoadvsearch.class));
     }
 
-    public void cgeoPoint(View v) {
+    public void cgeoPoint() {
         findViewById(R.id.any_button).setPressed(true);
         context.startActivity(new Intent(context, cgeopoint.class));
     }
 
-    public void cgeoFilter(View v) {
+    public void cgeoFilter() {
         findViewById(R.id.filter_button).setPressed(true);
         findViewById(R.id.filter_button).performClick();
     }
@@ -755,11 +755,11 @@ public class cgeo extends AbstractActivity {
         }
     }
 
-    public void showAbout(View view) {
+    public void showAbout() {
         context.startActivity(new Intent(context, cgeoabout.class));
     }
 
-    public void goSearch(View view) {
+    public void goSearch() {
         onSearchRequested();
     }
 }

@@ -251,14 +251,14 @@ public class cgSettings {
     }
 
     public static String getStorage() {
-        return getStorageSpecific(null)[0];
+        return getStorageSpecific()[0];
     }
 
     public static String getStorageSec() {
-        return getStorageSpecific(null)[1];
+        return getStorageSpecific()[1];
     }
 
-    public static String[] getStorageSpecific(Boolean hidden) {
+    public static String[] getStorageSpecific() {
         String external = Environment.getExternalStorageDirectory() + "/" + cache + "/";
         String data = Environment.getDataDirectory() + "/data/cgeo.geocaching/" + cache + "/";
 

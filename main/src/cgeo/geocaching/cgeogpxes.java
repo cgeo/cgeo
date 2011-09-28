@@ -58,7 +58,7 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
 
     @Override
     protected cgGPXListAdapter getAdapter(List<File> files) {
-        return new cgGPXListAdapter(this, getSettings(), files);
+        return new cgGPXListAdapter(this, files);
     }
 
     @Override

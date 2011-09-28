@@ -590,12 +590,12 @@ public class cgeoapplication extends Application {
         return storage.getAllStoredCachesCount(detailedOnly, cachetype, list);
     }
 
-    public int getAllHistoricCachesCount(boolean detailedOnly, String cachetype) {
+    public int getAllHistoricCachesCount() {
         if (storage == null) {
             storage = new cgData(this);
         }
 
-        return storage.getAllHistoricCachesCount(detailedOnly, cachetype);
+        return storage.getAllHistoricCachesCount();
     }
 
     public void markStored(String geocode, int listId) {

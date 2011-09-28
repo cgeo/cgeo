@@ -1783,7 +1783,7 @@ public class cgeodetail extends AbstractActivity {
 
         @Override
         public void run() {
-            cgBase.dropCache(app, cgeodetail.this, cache, handler);
+            cgBase.dropCache(app, cache, handler);
         }
     }
 
@@ -1918,7 +1918,7 @@ public class cgeodetail extends AbstractActivity {
         }
     }
 
-    public void goCompass(View view) {
+    public void goCompass() {
         if (cache == null || cache.coords == null) {
             showToast(res.getString(R.string.cache_coordinates_no));
 

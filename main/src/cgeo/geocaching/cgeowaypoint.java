@@ -243,7 +243,7 @@ public class cgeowaypoint extends AbstractActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         final int menuItem = item.getItemId();
         if (menuItem == MENU_ID_COMPASS) {
-            goCompass(null);
+            goCompass();
             return true;
         } else if (menuItem == MENU_ID_CACHES_AROUND) {
             cachesAround();
@@ -308,7 +308,7 @@ public class cgeowaypoint extends AbstractActivity {
         }
     }
 
-    public void goCompass(View view) {
+    public void goCompass() {
         if (!navigationPossible()) {
             return;
         }
