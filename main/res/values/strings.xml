@@ -417,6 +417,8 @@
   <string name="init_captcha">Show CAPTCHA if necessary</string>
   <string name="init_useenglish">Use English inside c:geo\n(restart needed)</string>
   <string name="init_exclude">Exclude own and found caches</string>
+  <string name="init_showwaypoints">Show waypoints in live map</string>
+  <string name="init_showwaypointsthreshold">Show waypoints threshold</string>
   <string name="init_disabled">Exclude disabled caches</string>
   <string name="init_offline">Store static maps for offline use</string>
   <string name="init_save_log_img">Save Images from Logs</string>
@@ -916,6 +918,7 @@
     · <a href="http://carnero.cc/">carnero</a> as the father of c:geo\n
     \n
     · 0xErnie (localization DE)\n
+    · <a href="mailto:bazsy@freemail.hu">Balazs Szabo (Bazsy1983)</a> (loc. HU)\n
     · Bananeweizen (code, loc. DE)\n
     · blafoo (code)\n
     · BudBundi (localization DE)\n

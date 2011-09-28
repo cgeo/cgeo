@@ -413,6 +413,7 @@
   <string name="init_captcha">Zeige CAPTCHA wenn notwendig</string>
   <string name="init_useenglish">c:geo auf Englisch nutzen (Neustart erforderlich)</string>
   <string name="init_exclude">Eigene und gefundene Caches ausblenden</string>
+  <string name="init_showwaypoints">Wegpunkte zeigen</string>
   <string name="init_disabled">Deaktivierte Caches ausblenden</string>
   <string name="init_offline">Statische Karten für Offline-Verwendung speichern</string>
   <string name="init_save_log_img">Logbilder abspeichern</string>

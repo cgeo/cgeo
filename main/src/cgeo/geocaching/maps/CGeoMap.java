@@ -851,8 +851,14 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
     }
 
-    // loading timer
+    /**
+     * loading timer Triggers every 250ms and checks for viewport change.
+     */
     private class LoadTimer extends Thread {
+
+        public LoadTimer() {
+            super("Load Timer");
+        }
 
         private volatile boolean stop = false;
 
@@ -899,6 +905,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         spanLongitudeNow = mapView.getLongitudeSpan();
 
                         // check if map moved or zoomed
+                        //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
                         moved = false;
                         force = false;
 
@@ -957,7 +964,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                                 showProgressHandler.sendEmptyMessage(1); // show progress
 
                                 loadThread = new LoadThread(centerLatitude, centerLongitude, spanLatitude, spanLongitude);
-                                loadThread.setName("loadThread");
                                 loadThread.start(); //loadThread will kick off downloadThread once it's done
                             }
                         }
@@ -977,6 +983,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
     // loading timer
     private class UsersTimer extends Thread {
+
+        public UsersTimer() {
+            super("Users Timer");
+        }
 
         private volatile boolean stop = false;
 
@@ -1057,11 +1067,15 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
     }
 
-    // load caches from database
+    /**
+     * Worker thread that loads caches and waypoints from the database and then spawns the download thread.
+     */
+
     private class LoadThread extends DoThread {
 
         public LoadThread(long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
             super(centerLatIn, centerLonIn, spanLatIn, spanLonIn);
+            setName("Load Thread");
         }
 
         @Override
@@ -1161,7 +1175,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
     }
 
-    // load caches from internet
+    /**
+     * Worker thread downloading caches from the internet.
+     */
+
     private class DownloadThread extends DoThread {
 
         public DownloadThread(long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
@@ -1181,22 +1198,16 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                double latMin = (centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
-                double latMax = (centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
-                double lonMin = (centerLon / 1e6) - ((spanLon / 1e6) / 2) - ((spanLon / 1e6) / 4);
-                double lonMax = (centerLon / 1e6) + ((spanLon / 1e6) / 2) + ((spanLon / 1e6) / 4);
-                double llCache;
+                double lat1 = (centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
+                double lat2 = (centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
+                double lon1 = (centerLon / 1e6) - ((spanLon / 1e6) / 2) - ((spanLon / 1e6) / 4);
+                double lon2 = (centerLon / 1e6) + ((spanLon / 1e6) / 2) + ((spanLon / 1e6) / 4);
 
-                if (latMin > latMax) {
-                    llCache = latMax;
-                    latMax = latMin;
-                    latMin = llCache;
-                }
-                if (lonMin > lonMax) {
-                    llCache = lonMax;
-                    lonMax = lonMin;
-                    lonMin = llCache;
-                }
+                double latMin = Math.min(lat1, lat2);
+                double latMax = Math.max(lat1, lat2);
+                double lonMin = Math.min(lon1, lon2);
+                double lonMax = Math.max(lon1, lon2);
+
 
                 //*** this needs to be in it's own thread
                 // stage 2 - pull and render from geocaching.com
@@ -1213,6 +1224,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
+                //TODO Parameter Map is bad style
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("usertoken", token);
                 params.put("latitude-min", String.format((Locale) null, "%.6f", latMin));
@@ -1232,6 +1244,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
+                //TODO Portree Only overwrite if we got some. Otherwise maybe error icon
                 caches = app.getCaches(searchId, centerLat, centerLon, spanLat, spanLon);
 
                 if (stop) {
@@ -1254,11 +1267,14 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
     }
 
-    // display (down)loaded caches
+    /**
+     * Display (down)loaded caches
+     */
     private class DisplayThread extends DoThread {
 
         public DisplayThread(long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
             super(centerLatIn, centerLonIn, spanLatIn, spanLonIn);
+            setName("Display Thread");
         }
 
         @Override
@@ -1279,10 +1295,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 final List<CachesOverlayItemImpl> items = new ArrayList<CachesOverlayItemImpl>();
 
                 if (!cachesProtected.isEmpty()) {
-                    int icon = 0;
-                    Drawable pin = null;
-                    CachesOverlayItemImpl item = null;
-
                     for (cgCache cacheOne : cachesProtected) {
                         if (stop) {
                             displayHandler.sendEmptyMessage(0);
@@ -1295,24 +1307,21 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                             continue;
                         }
 
-                        final cgCoord coord = new cgCoord(cacheOne);
-                        coordinates.add(coord);
+                        // display cache waypoints
+                        if (cacheOne != null && cacheOne.waypoints != null
+                                // Only show waypoints for single view or setting
+                                // when less than showWaypointsthreshold Caches shown
+                                && (cachesProtected.size() == 1 || (settings.showWaypoints && cachesProtected.size() < settings.showWaypointsthreshold))
+                                && !cacheOne.waypoints.isEmpty()) {
+                            for (cgWaypoint oneWaypoint : cacheOne.waypoints) {
+                                if (oneWaypoint.coords == null) {
+                                    continue;
+                                }
 
-                        item = settings.getMapFactory().getCachesOverlayItem(coord, cacheOne.type);
-                        icon = cgBase.getMarkerIcon(true, cacheOne.type, cacheOne.own, cacheOne.found, cacheOne.disabled || cacheOne.archived);
-                        pin = null;
-
-                        if (iconsCache.containsKey(icon)) {
-                            pin = iconsCache.get(icon);
-                        } else {
-                            pin = getResources().getDrawable(icon);
-                            pin.setBounds(0, 0, pin.getIntrinsicWidth(), pin.getIntrinsicHeight());
-
-                            iconsCache.put(icon, pin);
+                                items.add(getItem(new cgCoord(oneWaypoint), false, oneWaypoint.type, false, false, false));
+                            }
                         }
-                        item.setMarker(pin);
-
-                        items.add(item);
+                        items.add(getItem(new cgCoord(cacheOne), true, cacheOne.type, cacheOne.own, cacheOne.found, cacheOne.disabled));
                     }
 
                     overlayCaches.updateItems(items);
@@ -1327,40 +1336,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         return;
                     }
 
-                    // display cache waypoints
-                    if (cachesCnt == 1 && (geocodeIntent != null || searchIdIntent != null) && !live) {
-                        if (cachesCnt == 1 && live == false) {
-                            cgCache oneCache = cachesProtected.get(0);
-
-                            if (oneCache != null && oneCache.waypoints != null && !oneCache.waypoints.isEmpty()) {
-                                for (cgWaypoint oneWaypoint : oneCache.waypoints) {
-                                    if (oneWaypoint.coords == null) {
-                                        continue;
-                                    }
-
-                                    cgCoord coord = new cgCoord(oneWaypoint);
-
-                                    coordinates.add(coord);
-                                    item = settings.getMapFactory().getCachesOverlayItem(coord, null);
-
-                                    icon = cgBase.getMarkerIcon(false, oneWaypoint.type, false, false, false);
-                                    if (iconsCache.containsKey(icon)) {
-                                        pin = iconsCache.get(icon);
-                                    } else {
-                                        pin = getResources().getDrawable(icon);
-                                        pin.setBounds(0, 0, pin.getIntrinsicWidth(), pin.getIntrinsicHeight());
-                                        iconsCache.put(icon, pin);
-                                    }
-                                    item.setMarker(pin);
-
-                                    items.add(item);
-                                }
-
-                                overlayCaches.updateItems(items);
-                                displayHandler.sendEmptyMessage(1);
-                            }
-                        }
-                    }
                 } else {
                     overlayCaches.updateItems(items);
                     displayHandler.sendEmptyMessage(1);
@@ -1373,6 +1348,43 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 working = false;
             }
         }
+
+        /**
+         * Returns a OverlayItem representing the cache/waypoint
+         *
+         * @param cgCoord
+         *            The coords
+         * @param cache
+         *            true for caches
+         * @param type
+         *            String name
+         * @param own
+         *            true for own caches
+         * @param found
+         *            true for found
+         * @param disabled
+         *            true for disabled
+         * @return
+         */
+
+        private CachesOverlayItemImpl getItem(cgCoord cgCoord, boolean cache, String type, boolean own, boolean found, boolean disabled) {
+
+            coordinates.add(cgCoord);
+            CachesOverlayItemImpl item = settings.getMapFactory().getCachesOverlayItem(cgCoord, null);
+
+            int icon = cgBase.getMarkerIcon(cache, type, own, found, disabled);
+            Drawable pin = null;
+            if (iconsCache.containsKey(icon)) {
+                pin = iconsCache.get(icon);
+            } else {
+                pin = getResources().getDrawable(icon);
+                pin.setBounds(0, 0, pin.getIntrinsicWidth(), pin.getIntrinsicHeight());
+                iconsCache.put(icon, pin);
+            }
+            item.setMarker(pin);
+
+            return item;
+        }
     }
 
     // load users from Go 4 Cache
@@ -1380,6 +1392,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
         public UsersThread(long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
             super(centerLatIn, centerLonIn, spanLatIn, spanLonIn);
+            setName("UsersThread");
         }
 
         @Override
@@ -1434,7 +1447,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
         public DisplayUsersThread(List<cgUser> usersIn, long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
             super(centerLatIn, centerLonIn, spanLatIn, spanLonIn);
-
+            setName("DisplayUsersThread");
             users = usersIn;
         }
 
@@ -1521,8 +1534,11 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
     }
 
-    // parent for those above :)
-    private class DoThread extends Thread {
+    /**
+     * Abstract Base Class for the worker threads.
+     */
+
+    private abstract class DoThread extends Thread {
 
         protected boolean working = true;
         protected boolean stop = false;
