@@ -340,10 +340,9 @@ public abstract class GPXParser extends FileParser {
         waypoint.getChild(namespace, "sym").setEndTextElementListener(new EndTextElementListener() {
 
             @Override
-            public void end(String body) {
-                body = body.toLowerCase();
-                sym = body;
-                if (body.contains("geocache") && body.contains("found")) {
+            public void end(final String body) {
+                sym = body.toLowerCase();
+                if (sym.contains("geocache") && sym.contains("found")) {
                     cache.found = true;
                 }
             }
@@ -720,7 +719,7 @@ public abstract class GPXParser extends FileParser {
     /**
      * GPX 1.0 and 1.1 use different XML elements to put the cache into, therefore needs to be overwritten in the
      * version specific subclasses
-     * 
+     *
      * @param waypoint
      * @return
      */

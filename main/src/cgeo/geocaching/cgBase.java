@@ -1782,7 +1782,7 @@ public class cgBase {
         // And BTW: You cannot even see that effect in the debugger, but must use a separate memory profiler!
     }
 
-    public Date parseGcCustomDate(String input)
+    public Date parseGcCustomDate(final String input)
             throws ParseException
     {
         if (StringUtils.isBlank(input))
@@ -1790,7 +1790,7 @@ public class cgBase {
             throw new ParseException("Input is null", 0);
         }
 
-        input = input.trim();
+        final String trimmed = input.trim();
 
         if (null != settings
                 //&& null != settings.getGcCustomDate()
@@ -1798,7 +1798,7 @@ public class cgBase {
         {
             try
             {
-                return gcCustomDateFormats.get(settings.getGcCustomDate()).parse(input);
+                return gcCustomDateFormats.get(settings.getGcCustomDate()).parse(trimmed);
             } catch (ParseException e) {
             }
         }
@@ -1807,7 +1807,7 @@ public class cgBase {
         {
             try
             {
-                return format.parse(input);
+                return format.parse(trimmed);
             } catch (ParseException e) {
             }
         }
@@ -2363,25 +2363,25 @@ public class cgBase {
         return text.trim();
     }
 
-    public String getHumanDistance(Float distance) {
+    public String getHumanDistance(final Float distance) {
         if (distance == null) {
             return "?";
         }
 
         if (settings.units == cgSettings.unitsImperial) {
-            distance /= miles2km;
+            final Float miles = distance / miles2km;
             if (distance > 100) {
-                return String.format(Locale.getDefault(), "%.0f", Double.valueOf(Math.round(distance))) + " mi";
+                return String.format(Locale.getDefault(), "%.0f", Double.valueOf(Math.round(miles))) + " mi";
             } else if (distance > 0.5) {
-                return String.format(Locale.getDefault(), "%.1f", Double.valueOf(Math.round(distance * 10.0) / 10.0)) + " mi";
+                return String.format(Locale.getDefault(), "%.1f", Double.valueOf(Math.round(miles * 10.0) / 10.0)) + " mi";
             } else if (distance > 0.1) {
-                return String.format(Locale.getDefault(), "%.2f", Double.valueOf(Math.round(distance * 100.0) / 100.0)) + " mi";
+                return String.format(Locale.getDefault(), "%.2f", Double.valueOf(Math.round(miles * 100.0) / 100.0)) + " mi";
             } else if (distance > 0.05) {
-                return String.format(Locale.getDefault(), "%.0f", Double.valueOf(Math.round(distance * 5280.0))) + " ft";
+                return String.format(Locale.getDefault(), "%.0f", Double.valueOf(Math.round(miles * 5280.0))) + " ft";
             } else if (distance > 0.01) {
-                return String.format(Locale.getDefault(), "%.1f", Double.valueOf(Math.round(distance * 5280 * 10.0) / 10.0)) + " ft";
+                return String.format(Locale.getDefault(), "%.1f", Double.valueOf(Math.round(miles * 5280 * 10.0) / 10.0)) + " ft";
             } else {
-                return String.format(Locale.getDefault(), "%.2f", Double.valueOf(Math.round(distance * 5280 * 100.0) / 100.0)) + " ft";
+                return String.format(Locale.getDefault(), "%.2f", Double.valueOf(Math.round(miles * 5280 * 100.0) / 100.0)) + " ft";
             }
         } else {
             if (distance > 100) {
