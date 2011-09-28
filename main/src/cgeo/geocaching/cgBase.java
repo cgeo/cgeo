@@ -2982,8 +2982,9 @@ public class cgBase {
         return trackable;
     }
 
-    public int postLog(cgeoapplication app, String geocode, String cacheid, String[] viewstates,
-            int logType, int year, int month, int day, String log, List<cgTrackableLog> trackables) {
+    public int postLog(final cgeoapplication app, final String geocode, final String cacheid, final String[] viewstates,
+            final int logType, final int year, final int month, final int day,
+            final String log, final List<cgTrackableLog> trackables) {
         if (isEmpty(viewstates)) {
             Log.e(cgSettings.tag, "cgeoBase.postLog: No viewstate given");
             return 1000;
@@ -3014,14 +3015,13 @@ public class cgBase {
                 logUpdated.append(c);
             }
         }
-        log = logUpdated.toString();
 
-        log = log.replace("\n", "\r\n"); // windows' eol
+        final String logInfo = logUpdated.toString().replace("\n", "\r\n"); // windows' eol
 
         if (trackables != null) {
-            Log.i(cgSettings.tag, "Trying to post log for cache #" + cacheid + " - action: " + logType + "; date: " + year + "." + month + "." + day + ", log: " + log + "; trackables: " + trackables.size());
+            Log.i(cgSettings.tag, "Trying to post log for cache #" + cacheid + " - action: " + logType + "; date: " + year + "." + month + "." + day + ", log: " + logInfo + "; trackables: " + trackables.size());
         } else {
-            Log.i(cgSettings.tag, "Trying to post log for cache #" + cacheid + " - action: " + logType + "; date: " + year + "." + month + "." + day + ", log: " + log + "; trackables: 0");
+            Log.i(cgSettings.tag, "Trying to post log for cache #" + cacheid + " - action: " + logType + "; date: " + year + "." + month + "." + day + ", log: " + logInfo + "; trackables: 0");
         }
 
         final Parameters params = new Parameters();
@@ -3035,7 +3035,7 @@ public class cgBase {
         params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Month", Integer.toString(month));
         params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day", Integer.toString(day));
         params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Year", Integer.toString(year));
-        params.put("ctl00$ContentBody$LogBookPanel1$uxLogInfo", log);
+        params.put("ctl00$ContentBody$LogBookPanel1$uxLogInfo", logInfo);
         params.put("ctl00$ContentBody$LogBookPanel1$LogButton", "Submit Log Entry");
         params.put("ctl00$ContentBody$uxVistOtherListingGC", "");
         if (trackables != null && trackables.isEmpty() == false) { //  we have some trackables to proceed
@@ -3090,7 +3090,7 @@ public class cgBase {
                 params.put("__EVENTARGUMENT", "");
                 params.put("__LASTFOCUS", "");
                 params.put("ctl00$ContentBody$LogBookPanel1$btnConfirm", "Yes");
-                params.put("ctl00$ContentBody$LogBookPanel1$uxLogInfo", log);
+                params.put("ctl00$ContentBody$LogBookPanel1$uxLogInfo", logInfo);
                 params.put("ctl00$ContentBody$uxVistOtherListingGC", "");
                 if (trackables != null && trackables.isEmpty() == false) { //  we have some trackables to proceed
                     final StringBuilder hdnSelected = new StringBuilder();
@@ -3142,8 +3142,8 @@ public class cgBase {
         return 1000;
     }
 
-    public int postLogTrackable(String tbid, String trackingCode, String[] viewstates,
-            int logType, int year, int month, int day, String log) {
+    public int postLogTrackable(final String tbid, final String trackingCode, final String[] viewstates,
+            final int logType, final int year, final int month, final int day, final String log) {
         if (isEmpty(viewstates)) {
             Log.e(cgSettings.tag, "cgeoBase.postLogTrackable: No viewstate given");
             return 1000;
@@ -3161,7 +3161,7 @@ public class cgBase {
 
         Log.i(cgSettings.tag, "Trying to post log for trackable #" + trackingCode + " - action: " + logType + "; date: " + year + "." + month + "." + day + ", log: " + log);
 
-        log = log.replace("\n", "\r\n"); // windows' eol
+        final String logInfo = log.replace("\n", "\r\n"); // windows' eol
 
         final Calendar currentDate = Calendar.getInstance();
         final Parameters params = new Parameters();
@@ -3180,7 +3180,7 @@ public class cgBase {
         params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day", Integer.toString(day));
         params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Month", Integer.toString(month));
         params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Year", Integer.toString(year));
-        params.put("ctl00$ContentBody$LogBookPanel1$uxLogInfo", log);
+        params.put("ctl00$ContentBody$LogBookPanel1$uxLogInfo", logInfo);
         params.put("ctl00$ContentBody$LogBookPanel1$LogButton", "Submit Log Entry");
         params.put("ctl00$ContentBody$uxVistOtherListingGC", "");
 

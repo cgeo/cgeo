@@ -2585,19 +2585,15 @@ public class cgData {
         return count;
     }
 
-    public List<String> loadBatchOfStoredGeocodes(boolean detailedOnly, final Geopoint coords, String cachetype, int list) {
+    public List<String> loadBatchOfStoredGeocodes(final boolean detailedOnly, final Geopoint coords, final String cachetype, final int list) {
         init();
-
-        if (list < 1) {
-            list = 1;
-        }
 
         List<String> geocodes = new ArrayList<String>();
 
         StringBuilder specifySql = new StringBuilder();
 
         specifySql.append("reason = ");
-        specifySql.append(list);
+        specifySql.append(Math.max(list, 1));
 
         if (detailedOnly) {
             specifySql.append(" and detailed = 1 ");
@@ -2836,19 +2832,15 @@ public class cgData {
         return geocodes;
     }
 
-    public void markStored(String geocode, int listId) {
+    public void markStored(final String geocode, final int listId) {
         if (StringUtils.isBlank(geocode)) {
             return;
         }
 
         init();
 
-        if (listId <= 0) {
-            listId = 1;
-        }
-
         ContentValues values = new ContentValues();
-        values.put("reason", listId);
+        values.put("reason", Math.max(listId, 1));
         databaseRW.update(dbTableCaches, values, "geocode = ? and reason < 1", new String[] { geocode });
     }
 
