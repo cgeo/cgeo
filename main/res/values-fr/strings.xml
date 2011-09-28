@@ -417,8 +417,8 @@
   <string name="init_captcha">Afficher le CAPTCHA si nécessaire</string>
   <string name="init_useenglish">Utiliser l\'anglais dans c:geo\n(redémarrage nécessaire)</string>
   <string name="init_exclude">Exclure mes caches et les caches trouvées</string>
-  <string name="init_showwaypoints">Afficher les points intermédiaires sur la carte active</string>
-  <string name="init_showwaypoint_description">Nombre de caches en-dessous duquel les points intermédiaires sont affichés.</string>
+  <string name="init_showwaypoints">Points intermédiaires</string>
+  <string name="init_showwaypoint_description">Nombre de caches en-dessous duquel les points intermédiaires sont affichés sur la carte active.</string>
   <string name="init_disabled">Exclure les caches désactivées</string>
   <string name="init_offline">Enregistrer les cartes pour une utilisation hors ligne</string>
   <string name="init_save_log_img">Sauver les images des visites</string>
