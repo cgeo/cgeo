@@ -41,7 +41,7 @@ public class cgData {
     /** The list of fields needed for mapping. */
     private static final String[] CACHE_COLUMNS = new String[] {
             "_id", "updated", "reason", "detailed", "detailedupdate", "visiteddate", "geocode", "cacheid", "guid", "type", "name", "own", "owner", "owner_real", "hidden", "hint", "size",
-            "difficulty", "distance", "direction", "terrain", "latlon", "latitude_string", "longitude_string", "location", "latitude", "longitude", "elevation", "shortdesc",
+            "difficulty", "distance", "direction", "terrain", "latlon", "location", "latitude", "longitude", "elevation", "shortdesc",
             "description", "favourite_cnt", "rating", "votes", "myvote", "disabled", "archived", "members", "found", "favourite", "inventorycoins", "inventorytags",
             "inventoryunknown", "onWatchlist", "personal_note", "reliable_latlon"
     };
@@ -51,7 +51,7 @@ public class cgData {
     private cgDbHelper dbHelper = null;
     private SQLiteDatabase databaseRO = null;
     private SQLiteDatabase databaseRW = null;
-    private static final int dbVersion = 57;
+    private static final int dbVersion = 58;
     private static final String dbName = "data";
     private static final String dbTableCaches = "cg_caches";
     private static final String dbTableLists = "cg_lists";
@@ -86,8 +86,6 @@ public class cgData {
             + "difficulty float, "
             + "terrain float, "
             + "latlon text, "
-            + "latitude_string text, "
-            + "longitude_string text, "
             + "location text, "
             + "direction double, "
             + "distance double, "
@@ -141,8 +139,6 @@ public class cgData {
             + "lookup text, "
             + "name text, "
             + "latlon text, "
-            + "latitude_string text, "
-            + "longitude_string text, "
             + "latitude double, "
             + "longitude double, "
             + "note text "
@@ -474,6 +470,10 @@ public class cgData {
             db.execSQL(dbCreateTrackables);
             db.execSQL(dbCreateSearchDestinationHistory);
 
+            createIndices(db);
+        }
+
+        static private void createIndices(final SQLiteDatabase db) {
             db.execSQL("create index if not exists in_caches_geo on " + dbTableCaches + " (geocode)");
             db.execSQL("create index if not exists in_caches_guid on " + dbTableCaches + " (guid)");
             db.execSQL("create index if not exists in_caches_reason on " + dbTableCaches + " (reason)");
@@ -835,24 +835,104 @@ public class cgData {
                             db.execSQL("drop index in_d");
                             db.execSQL("drop index in_e");
                             db.execSQL("drop index in_f");
-                            db.execSQL("create index if not exists in_caches_geo on " + dbTableCaches + " (geocode)");
-                            db.execSQL("create index if not exists in_caches_guid on " + dbTableCaches + " (guid)");
-                            db.execSQL("create index if not exists in_caches_reason on " + dbTableCaches + " (reason)");
-                            db.execSQL("create index if not exists in_caches_detailed on " + dbTableCaches + " (detailed)");
-                            db.execSQL("create index if not exists in_caches_type on " + dbTableCaches + " (type)");
-                            db.execSQL("create index if not exists in_caches_visit_detail on " + dbTableCaches + " (visiteddate, detailedupdate)");
-                            db.execSQL("create index if not exists in_attr_geo on " + dbTableAttributes + " (geocode)");
-                            db.execSQL("create index if not exists in_wpts_geo on " + dbTableWaypoints + " (geocode)");
-                            db.execSQL("create index if not exists in_wpts_geo_type on " + dbTableWaypoints + " (geocode, type)");
-                            db.execSQL("create index if not exists in_spoil_geo on " + dbTableSpoilers + " (geocode)");
-                            db.execSQL("create index if not exists in_logs_geo on " + dbTableLogs + " (geocode)");
-                            db.execSQL("create index if not exists in_logcount_geo on " + dbTableLogCount + " (geocode)");
-                            db.execSQL("create index if not exists in_logsoff_geo on " + dbTableLogsOffline + " (geocode)");
-                            db.execSQL("create index if not exists in_trck_geo on " + dbTableTrackables + " (geocode)");
+                            createIndices(db);
                         } catch (Exception e) {
                             Log.e(cgSettings.tag, "Failed to upgrade to ver. 57: " + e.toString());
                         }
                     }
+
+                    if (oldVersion < 58) { // upgrade to 58
+                        try {
+                            db.beginTransaction();
+
+                            final String dbTableCachesTemp = dbTableCaches + "_temp";
+                            final String dbCreateCachesTemp = ""
+                                    + "create table " + dbTableCachesTemp + " ("
+                                    + "_id integer primary key autoincrement, "
+                                    + "updated long not null, "
+                                    + "detailed integer not null default 0, "
+                                    + "detailedupdate long, "
+                                    + "visiteddate long, "
+                                    + "geocode text unique not null, "
+                                    + "reason integer not null default 0, "
+                                    + "cacheid text, "
+                                    + "guid text, "
+                                    + "type text, "
+                                    + "name text, "
+                                    + "own integer not null default 0, "
+                                    + "owner text, "
+                                    + "owner_real text, "
+                                    + "hidden long, "
+                                    + "hint text, "
+                                    + "size text, "
+                                    + "difficulty float, "
+                                    + "terrain float, "
+                                    + "latlon text, "
+                                    + "location text, "
+                                    + "direction double, "
+                                    + "distance double, "
+                                    + "latitude double, "
+                                    + "longitude double, "
+                                    + "reliable_latlon integer, "
+                                    + "elevation double, "
+                                    + "personal_note text, "
+                                    + "shortdesc text, "
+                                    + "description text, "
+                                    + "favourite_cnt integer, "
+                                    + "rating float, "
+                                    + "votes integer, "
+                                    + "myvote float, "
+                                    + "disabled integer not null default 0, "
+                                    + "archived integer not null default 0, "
+                                    + "members integer not null default 0, "
+                                    + "found integer not null default 0, "
+                                    + "favourite integer not null default 0, "
+                                    + "inventorycoins integer default 0, "
+                                    + "inventorytags integer default 0, "
+                                    + "inventoryunknown integer default 0, "
+                                    + "onWatchlist integer default 0 "
+                                    + "); ";
+
+                            db.execSQL(dbCreateCachesTemp);
+                            db.execSQL("insert into " + dbTableCachesTemp + " select _id,updated,detailed,detailedupdate,visiteddate,geocode,reason,cacheid,guid,type,name,own,owner,owner_real," +
+                                    "hidden,hint,size,difficulty,terrain,latlon,location,direction,distance,latitude,longitude,reliable_latlon,elevation," +
+                                    "personal_note,shortdesc,description,favourite_cnt,rating,votes,myvote,disabled,archived,members,found,favourite,inventorycoins," +
+                                    "inventorytags,inventoryunknown,onWatchlist from " + dbTableCaches);
+                            db.execSQL("drop table " + dbTableCaches);
+                            db.execSQL("alter table " + dbTableCachesTemp + " rename to " + dbTableCaches);
+
+                            final String dbTableWaypointsTemp = dbTableWaypoints + "_temp";
+                            final String dbCreateWaypointsTemp = ""
+                                    + "create table " + dbTableWaypointsTemp + " ("
+                                    + "_id integer primary key autoincrement, "
+                                    + "geocode text not null, "
+                                    + "updated long not null, " // date of save
+                                    + "type text not null default 'waypoint', "
+                                    + "prefix text, "
+                                    + "lookup text, "
+                                    + "name text, "
+                                    + "latlon text, "
+                                    + "latitude double, "
+                                    + "longitude double, "
+                                    + "note text "
+                                    + "); ";
+                            db.execSQL(dbCreateWaypointsTemp);
+                            db.execSQL("insert into " + dbTableWaypointsTemp + " select _id, geocode, updated, type, prefix, lookup, name, latlon, latitude, longitude, note from " + dbTableWaypoints);
+                            db.execSQL("drop table " + dbTableWaypoints);
+                            db.execSQL("alter table " + dbTableWaypointsTemp + " rename to " + dbTableWaypoints);
+
+                            createIndices(db);
+
+                            db.setTransactionSuccessful();
+
+                            Log.i(cgSettings.tag, "Removed latitude_string and longitude_string columns");
+                        } catch (Exception e) {
+                            Log.e(cgSettings.tag, "Failed to upgrade to ver. 58", e);
+                        } finally {
+                            db.endTransaction();
+                        }
+                    }
+
                 }
 
                 db.setTransactionSuccessful();
@@ -1174,8 +1254,6 @@ public class cgData {
         values.put("difficulty", cache.difficulty);
         values.put("terrain", cache.terrain);
         values.put("latlon", cache.latlon);
-        values.put("latitude_string", cache.latitudeString);
-        values.put("longitude_string", cache.longitudeString);
         values.put("location", cache.location);
         values.put("distance", cache.distance);
         values.put("direction", cache.direction);
@@ -1369,8 +1447,6 @@ public class cgData {
                     values.put("lookup", oneWaypoint.lookup);
                     values.put("name", oneWaypoint.name);
                     values.put("latlon", oneWaypoint.latlon);
-                    values.put("latitude_string", oneWaypoint.latitudeString);
-                    values.put("longitude_string", oneWaypoint.longitudeString);
                     putCoords(values, oneWaypoint.coords);
                     values.put("note", oneWaypoint.note);
 
@@ -1457,8 +1533,6 @@ public class cgData {
             values.put("lookup", waypoint.lookup);
             values.put("name", waypoint.name);
             values.put("latlon", waypoint.latlon);
-            values.put("latitude_string", waypoint.latitudeString);
-            values.put("longitude_string", waypoint.longitudeString);
             putCoords(values, waypoint.coords);
             values.put("note", waypoint.note);
 
@@ -2023,8 +2097,6 @@ public class cgData {
         }
         cache.terrain = (Float) cursor.getFloat(cursor.getColumnIndex("terrain"));
         cache.latlon = (String) cursor.getString(cursor.getColumnIndex("latlon"));
-        cache.latitudeString = (String) cursor.getString(cursor.getColumnIndex("latitude_string"));
-        cache.longitudeString = (String) cursor.getString(cursor.getColumnIndex("longitude_string"));
         cache.location = (String) cursor.getString(cursor.getColumnIndex("location"));
         cache.coords = getCoords(cursor);
         index = cursor.getColumnIndex("elevation");
@@ -2097,7 +2169,7 @@ public class cgData {
 
         Cursor cursor = databaseRO.query(
                 dbTableWaypoints,
-                new String[] { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latlon", "latitude_string", "longitude_string", "latitude", "longitude", "note" },
+                new String[] { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latlon", "latitude", "longitude", "note" },
                 "_id = " + id,
                 null,
                 null,
@@ -2129,7 +2201,7 @@ public class cgData {
 
         Cursor cursor = databaseRO.query(
                 dbTableWaypoints,
-                new String[] { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latlon", "latitude_string", "longitude_string", "latitude", "longitude", "note" },
+                new String[] { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latlon", "latitude", "longitude", "note" },
                 "geocode = \"" + geocode + "\"",
                 null,
                 null,
@@ -2164,8 +2236,6 @@ public class cgData {
         waypoint.lookup = (String) cursor.getString(cursor.getColumnIndex("lookup"));
         waypoint.name = (String) cursor.getString(cursor.getColumnIndex("name"));
         waypoint.latlon = (String) cursor.getString(cursor.getColumnIndex("latlon"));
-        waypoint.latitudeString = (String) cursor.getString(cursor.getColumnIndex("latitude_string"));
-        waypoint.longitudeString = (String) cursor.getString(cursor.getColumnIndex("longitude_string"));
         waypoint.coords = getCoords(cursor);
         waypoint.note = (String) cursor.getString(cursor.getColumnIndex("note"));
 

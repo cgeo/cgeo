@@ -335,8 +335,6 @@ public class cgeowaypointadd extends AbstractActivity {
             waypoint.lookup = lookup;
             waypoint.name = name;
             waypoint.coords = new Geopoint(coords.get(0), coords.get(1));
-            waypoint.latitudeString = cgBase.formatLatitude(coords.get(0), true);
-            waypoint.longitudeString = cgBase.formatLongitude(coords.get(1), true);
             waypoint.note = note;
 
             if (app.saveOwnWaypoint(id, geocode, waypoint)) {
