@@ -65,6 +65,8 @@ public abstract class GPXParser extends FileParser {
      */
     private static final String GSAK_NS = "http://www.gsak.net/xmlv1/5";
 
+    private static final String GPX_FILE_EXTENSION = ".gpx";
+
     private int listId = 1;
     final protected String namespace;
     final private String version;
@@ -899,10 +901,9 @@ public abstract class GPXParser extends FileParser {
 
     // 1234567.gpx -> 1234567-wpts.gpx
     public static File getWaypointsFileForGpx(File file) {
-        String name = file.getName();
-        int idx = name.lastIndexOf('.');
-        if (idx > 0) {
-            String wptsName = name.substring(0, idx) + "-wpts" + name.substring(idx);
+        final String name = file.getName();
+        if (StringUtils.endsWithIgnoreCase(name, GPX_FILE_EXTENSION) && (StringUtils.length(name) > GPX_FILE_EXTENSION.length())) {
+            String wptsName = StringUtils.substringBeforeLast(name, ".") + "-wpts" + StringUtils.right(name, GPX_FILE_EXTENSION.length());
             return new File(file.getParentFile(), wptsName);
         } else {
             return null;
