@@ -13,6 +13,8 @@
   <string name="helper">Szeretnél többet megtudni a <b>c:geo</b>-ról?\nNézd meg a kézikönyvünket.</string>
   <string name="database_error_title">Adatbázis hiba</string>
   <string name="database_error_message">A c:geo nem tudott csatlakozni a belső adatbázishoz.\nKérlek próbáld meg egy kicsit később elindítani a c:geo-t. Ha sokszor látod ezt az üzenetet, menj a telefonon a Beállítások / Alkalmazások / c:geo menüponthoz, és nyomd meg az Adatok Törlése gombot. Ha ez nem segít távolítsd el és telepítsd újra a c:geo-t. Elnézést kérünk a kellemetlenségért.</string>
+  <string name="latitude">Szélesség</string>
+  <string name="longitude">Hosszúság</string>
 
   <!-- actionbar -->
   <string name="action_bar_share_title">A láda linkjének megosztása</string>
@@ -63,7 +65,7 @@
   <string name="log_attend">Részt veszek</string>
   <string name="log_attended">Részt vettem</string>
   <string name="log_retrieved">Ládából kivéve</string>
-  <string name="log_placed">Ládába helyezve</string>
+  <string name="log_placed">Ládába téve</string>
   <string name="log_grabbed">Mástól átvéve</string>
   <string name="log_maintained">Karbantartás történt</string>
   <string name="log_maintenance_needed">Karbantartás szükséges</string>
@@ -179,6 +181,7 @@
   <string name="err_tb_forgot_saw">Sajnáljuk, a c:geo elfelejtette melyik nyomonkövethető tárgyat láttad.</string>
   <string name="err_tb_find">Sajnáljuk, a c:geo nem találja a nyomonkövethető tárgyat.</string>
   <string name="err_tb_find_that">Sajnáljuk, a c:geo nem találja azt a követhető tárgyat.</string>
+  <string name="err_cache_inventory_load_fail">Sajnáljuk, a c:geo nem tudta betölteni a ládában található tárgyakat.</string>
 
   <string name="err_waypoint_cache_unknown">Sajnáljuk, a c:geo nem tudja melyik ládához szeretnéd hozzáadni az útpontot.</string>
   <string name="err_waypoint_unknown">Sajnáljuk, a c:geo elfelejtette melyik útpontot szeretnéd megjeleníteni.</string>
@@ -225,9 +228,8 @@
   <string name="warn_search_help_user">Írd be a felhasználó nevét a geocaching.com oldalon.</string>
   <string name="warn_search_help_tb">Írd be a nyomonkövethető tárgy kódját. Például \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Kérlek, írj szöveget a bejegyzéshez.</string>
-  <string name="warn_load_log_image">Sajnáljuk, a c:geo nem tudta betölteni a bejegyzéshez tartozó képet.</string>
-  <string name="warn_load_spoiler_image">Sajnáljuk, a c:geo nem tudta betölteni a spoiler képet.</string>
-
+  <string name="warn_load_images">Sajnáljuk, a c:geo nem tudta betölteni a képeket.</string>
+  
   <string name="info_altitude">Jelenlegi magasság</string>
   <string name="info_distance">Megtett távolság</string>
   <string name="info_distance_cleared">A megtett távolság törölve.</string>
@@ -491,16 +493,17 @@
   <string name="cache_offline_store">Tárolás</string>
   <string name="cache_offline_stored">Tárolva az eszközön</string>
   <string name="cache_offline_not_ready">Nincs kész\noffline használathoz</string>
-  <string name="cache_offline_time_about">Információ</string>
+  <string name="cache_offline_time_about">Információ mentve</string>
   <string name="cache_offline_time_mins">perccel ezelőtt</string>
   <string name="cache_offline_time_mins_few">néhány perccel ezelőtt</string>
   <string name="cache_offline_time_hour">egy órával ezelőtt</string>
-  <string name="cache_offline_time_hours">órákkal ezelőtt</string>
-  <string name="cache_offline_time_days">napokkal ezelőtt</string>
+  <string name="cache_offline_time_hours">órával ezelőtt</string>
+  <string name="cache_offline_time_days">nappal ezelőtt</string>
   <string name="cache_premium">Prémium</string>
   <string name="cache_attributes">Tulajdonságok</string>
   <string name="cache_attributes_no_icons">(frissítsd a ládát, hogy lásd a tulajdonság ikonokat)</string>
   <string name="cache_inventory">Tárgyak</string>
+  <string name="cache_inventory_loading">A ládában található tárgyak betöltése…</string>
   <string name="cache_log_offline">Offline bejegyzés</string>
   <string name="cache_log_images_loading">Bejegyzés kép betöltése …</string>
   <string name="cache_log_images_title">Bejegyzés kép</string>
@@ -703,7 +706,7 @@
   <string name="trackable">Nyomonkövethető tárgy</string>
   <string name="trackable_select_title"> Nyomonkövethető tárgyak</string>
   <string name="trackable_details_loading">Tárgy adatainak betöltése…</string>
-  <string name="trackable_log_touch">Érintés bejelentése</string>
+  <string name="trackable_log_touch">Felfedezés bejelentése</string>
   <string name="trackable_browser_open">Megnyitás böngészőben</string>
   <string name="trackable_goal">Cél</string>
   <string name="trackable_details">Részletek</string>
@@ -712,14 +715,14 @@
   <string name="trackable_name">Név</string>
   <string name="trackable_type">Típus</string>
   <string name="trackable_owner">Tulajdonos</string>
-  <string name="trackable_spotted">Látta</string>
+  <string name="trackable_spotted">Itt található</string>
   <string name="trackable_spotted_in_cache">Ban</string>
   <string name="trackable_spotted_at_user">Nála</string>
   <string name="trackable_spotted_unknown_location">Ismeretlen hely</string>
   <string name="trackable_spotted_owner">A tulajdonosnál</string>
-  <string name="trackable_origin">Eredet</string>
+  <string name="trackable_origin">Származás</string>
   <string name="trackable_unknown">Ismeretlen</string>
-  <string name="trackable_released">Felszabadítás</string>
+  <string name="trackable_released">Indult</string>
   <string name="trackable_distance">Megtett táv</string>
   <string name="trackable_touch">Érintés</string>
 
@@ -907,3 +910,4 @@
   <string name="about_auth_1">A következő folyamat engedélyezi a <b>c:geo</b>-nak, hogy hozzáférjen a Twitterhez – ha jóváhagyod.</string>
   <string name="about_auth_2">Kattints a \"c:geo engedélyezése\" gombra, hogy elindítsd a folyamatot. Ez a folyamat meg fog nyitni egy böngészőt a Twitter weboldallal. Lépj be ezen az oldalon és hagyd jóvá, hogy a <b>c:geo</b> hozzáférjen a felhasználói fiókodhoz. Ha elfogadod, a Twitter mutatni fog egy számokból álló PIN kódot. Ezt a PIN kódot kell a  <b>c:geo</b>-ban beillesztened és jóváhagynod. Ilyen egyszerű.</string>
 </resources>
+
