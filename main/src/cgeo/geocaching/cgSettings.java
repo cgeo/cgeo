@@ -226,12 +226,8 @@ public class cgSettings {
         setLanguage(useEnglish);
     }
 
-    public void setSkin(int skinIn) {
-        if (skin == 1) {
-            skin = 1;
-        } else {
-            skin = 0;
-        }
+    public void setSkin(final int skin) {
+        this.skin = skin;
     }
 
     public void setLanguage(boolean useEnglish) {
