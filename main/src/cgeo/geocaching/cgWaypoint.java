@@ -17,8 +17,6 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
     public String lookup = "";
     public String name = "";
     public String latlon = "";
-    public String latitudeString = "";
-    public String longitudeString = "";
     public Geopoint coords = null;
     public String note = "";
     private Integer cachedOrder = null;
@@ -46,12 +44,6 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
         }
         if (StringUtils.isBlank(latlon) || latlon.startsWith("?")) { // there are waypoints containing "???"
             latlon = old.latlon;
-        }
-        if (StringUtils.isBlank(latitudeString)) {
-            latitudeString = old.latitudeString;
-        }
-        if (StringUtils.isBlank(longitudeString)) {
-            longitudeString = old.longitudeString;
         }
         if (coords == null) {
             coords = old.coords;

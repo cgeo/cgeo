@@ -201,10 +201,8 @@ final public class OkapiClient {
     private static void setLocation(final cgCache cache, final String location) {
         final String latitude = StringUtils.substringBefore(location, "|");
         final String longitude = StringUtils.substringAfter(location, "|");
-        // FIXME: the next lines should be a setter at cgCache
+        // FIXME: the next line should be a setter at cgCache
         cache.coords = GeopointParser.parse(latitude, longitude);
-        cache.latitudeString = cgBase.formatLatitude(cache.coords.getLatitude(), true);
-        cache.longitudeString = cgBase.formatLongitude(cache.coords.getLongitude(), true);
     }
 
     private static CacheSize getCacheSize(final JSONObject response) {

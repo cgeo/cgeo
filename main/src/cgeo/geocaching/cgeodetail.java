@@ -834,7 +834,7 @@ public class cgeodetail extends AbstractActivity {
                 itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
                 itemName.setText(res.getString(R.string.cache_coordinates));
-                itemValue.setText(cache.latitudeString + " | " + cache.longitudeString);
+                itemValue.setText(cache.getLatitude() + " | " + cache.getLongitude());
                 detailsList.addView(itemLayout);
             }
 
@@ -1525,8 +1525,8 @@ public class cgeodetail extends AbstractActivity {
             event.put("title", Html.fromHtml(cache.name).toString());
             event.put("description", description.toString());
             String location = "";
-            if (StringUtils.isNotBlank(cache.latitudeString) && StringUtils.isNotBlank(cache.longitudeString)) {
-                location += cache.latitudeString + " " + cache.longitudeString;
+            if (cache.coords != null) {
+                location += cache.getLatitude() + " " + cache.getLongitude();
             }
             if (StringUtils.isNotBlank(cache.location)) {
                 boolean addParenteses = false;

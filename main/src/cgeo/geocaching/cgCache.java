@@ -53,8 +53,6 @@ public class cgCache implements ICache {
     public Float direction = null;
     public Float distance = null;
     public String latlon = "";
-    public String latitudeString = "";
-    public String longitudeString = "";
     public String location = "";
     public Geopoint coords = null;
     public boolean reliableLatLon = false;
@@ -156,12 +154,6 @@ public class cgCache implements ICache {
         }
         if (StringUtils.isBlank(latlon)) {
             latlon = other.latlon;
-        }
-        if (StringUtils.isBlank(latitudeString)) {
-            latitudeString = other.latitudeString;
-        }
-        if (StringUtils.isBlank(longitudeString)) {
-            longitudeString = other.longitudeString;
         }
         if (StringUtils.isBlank(location)) {
             location = other.location;
@@ -387,12 +379,12 @@ public class cgCache implements ICache {
 
     @Override
     public String getLatitude() {
-        return latitudeString;
+        return coords != null ? cgBase.formatLatitude(coords.getLatitude(), true) : null;
     }
 
     @Override
     public String getLongitude() {
-        return longitudeString;
+        return coords != null ? cgBase.formatLongitude(coords.getLongitude(), true) : null;
     }
 
     @Override

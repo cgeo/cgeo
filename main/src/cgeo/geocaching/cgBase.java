@@ -1282,8 +1282,6 @@ public class cgBase {
                 Map<String, Object> tmp = cgBase.parseLatlon(cache.latlon);
                 if (tmp.size() > 0) {
                     cache.coords = new Geopoint((Double) tmp.get("latitude"), (Double) tmp.get("longitude"));
-                    cache.latitudeString = (String) tmp.get("latitudeString");
-                    cache.longitudeString = (String) tmp.get("longitudeString");
                     cache.reliableLatLon = true;
                 }
                 tmp = null;
@@ -1601,8 +1599,6 @@ public class cgBase {
                                 final Map<String, Object> tmp = cgBase.parseLatlon(waypoint.latlon);
                                 if (tmp.size() > 0) {
                                     waypoint.coords = new Geopoint((Double) tmp.get("latitude"), (Double) tmp.get("longitude"));
-                                    waypoint.latitudeString = (String) tmp.get("latitudeString");
-                                    waypoint.longitudeString = (String) tmp.get("longitudeString");
                                 }
                             }
                         }
