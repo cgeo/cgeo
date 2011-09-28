@@ -15,8 +15,6 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.Inflater;
 import java.util.zip.InflaterInputStream;
@@ -33,7 +31,7 @@ public final class Twitter {
         }
 
         try {
-            Map<String, String> parameters = new HashMap<String, String>();
+            Parameters parameters = new Parameters();
 
             parameters.put("status", status);
             if (coords != null) {

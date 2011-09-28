@@ -3,26 +3,15 @@ package cgeo.geocaching;
 import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.NameValuePair;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 public class cgOAuth {
-    public static String signOAuth(String host, String path, String method, boolean https, Map<String, String> params, String token, String tokenSecret) {
+    public static String signOAuth(String host, String path, String method, boolean https, Parameters params, String token, String tokenSecret) {
         String paramsDone = "";
-        if (method.equalsIgnoreCase("GET") == false && method.equalsIgnoreCase("POST") == false) {
-            method = "POST";
-        } else {
-            method = method.toUpperCase();
-        }
-
-        if (token == null)
-            token = "";
-        if (tokenSecret == null)
-            tokenSecret = "";
 
         long currentTime = new Date().getTime(); // miliseconds
         currentTime = currentTime / 1000; // seconds
@@ -32,27 +21,18 @@ public class cgOAuth {
         params.put("oauth_nonce", CryptUtils.md5(Long.toString(System.currentTimeMillis())));
         params.put("oauth_signature_method", "HMAC-SHA1");
         params.put("oauth_timestamp", Long.toString(currentTime));
-        params.put("oauth_token", token);
+        params.put("oauth_token", StringUtils.defaultString(token));
         params.put("oauth_version", "1.0");
 
-        String[] keys = new String[params.keySet().size()];
-        params.keySet().toArray(keys);
-        Arrays.sort(keys);
+        params.sort();
 
         List<String> paramsEncoded = new ArrayList<String>();
-        for (String key : keys) {
-            String value = params.get(key);
-            paramsEncoded.add(key + "=" + cgBase.urlencode_rfc3986(value));
+        for (final NameValuePair nameValue : params) {
+            paramsEncoded.add(nameValue.getName() + "=" + cgBase.urlencode_rfc3986(nameValue.getValue()));
         }
 
-        String keysPacked;
-        String requestPacked;
-
-        keysPacked = cgSettings.keyConsumerSecret + "&" + tokenSecret; // both even if empty some of them!
-        if (https)
-            requestPacked = method + "&" + cgBase.urlencode_rfc3986("https://" + host + path) + "&" + cgBase.urlencode_rfc3986(StringUtils.join(paramsEncoded.toArray(), '&'));
-        else
-            requestPacked = method + "&" + cgBase.urlencode_rfc3986("http://" + host + path) + "&" + cgBase.urlencode_rfc3986(StringUtils.join(paramsEncoded.toArray(), '&'));
+        final String keysPacked = cgSettings.keyConsumerSecret + "&" + StringUtils.defaultString(tokenSecret); // both even if empty some of them!
+        final String requestPacked = method + "&" + cgBase.urlencode_rfc3986((https ? "https" : "http") + "://" + host + path) + "&" + cgBase.urlencode_rfc3986(StringUtils.join(paramsEncoded.toArray(), '&'));
         paramsEncoded.add("oauth_signature=" + cgBase.urlencode_rfc3986(cgBase.base64Encode(CryptUtils.hashHmac(requestPacked, keysPacked))));
 
         paramsDone = StringUtils.join(paramsEncoded.toArray(), '&');
