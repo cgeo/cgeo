@@ -34,4 +34,8 @@ public class cgTrackable {
     public String details = null;
     public String image = null;
     public List<cgLog> logs = new ArrayList<cgLog>();
+
+    public String getUrl() {
+        return "http://coord.info/" + geocode.toUpperCase();
+    }
 }

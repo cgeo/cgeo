@@ -903,10 +903,7 @@ public class cgData {
                         list.add((String) cursor.getString(index));
                     } while (cursor.moveToNext());
                 } else {
-                    if (cursor != null) {
-                        cursor.close();
-                    }
-
+                    cursor.close();
                     return null;
                 }
             }
@@ -1969,10 +1966,7 @@ public class cgData {
                         caches.add(cache);
                     } while (cursor.moveToNext());
                 } else {
-                    if (cursor != null) {
-                        cursor.close();
-                    }
-
+                    cursor.close();
                     return null;
                 }
             }

@@ -28,7 +28,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -374,7 +373,7 @@ public class cgeovisit extends cgLogForm {
             return false;
         }
 
-        final Map<String, String> params = new HashMap<String, String>();
+        final Parameters params = new Parameters();
         params.put("userName", login.get("username"));
         params.put("password", login.get("password"));
         params.put("cacheId", guid);
@@ -699,7 +698,7 @@ public class cgeovisit extends cgLogForm {
 
         @Override
         public void run() {
-            final Map<String, String> params = new HashMap<String, String>();
+            final Parameters params = new Parameters();
 
             showProgressHandler.sendEmptyMessage(0);
             gettingViewstate = true;

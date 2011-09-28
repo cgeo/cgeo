@@ -5,6 +5,7 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import android.app.Activity;
@@ -38,6 +39,10 @@ class InternalMap extends AbstractInternalMap implements
             mapIntent.putExtra("latitude", waypoint.coords.getLatitude());
             mapIntent.putExtra("longitude", waypoint.coords.getLongitude());
             mapIntent.putExtra("wpttype", waypoint.type);
+        } else if (coords != null) {
+            mapIntent.putExtra("latitude", coords.getLatitude());
+            mapIntent.putExtra("longitude", coords.getLongitude());
+            mapIntent.putExtra("wpttype", WaypointType.WAYPOINT.id);
         }
 
         activity.startActivity(mapIntent);

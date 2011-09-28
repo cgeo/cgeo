@@ -4,8 +4,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import android.util.Log;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -87,8 +85,7 @@ public class LogTemplateProvider {
                                 return "";
                             }
                             String findCount = "";
-                            final Map<String, String> params = new HashMap<String, String>();
-                            final String page = cgBase.getResponseData(base.request("http://www.geocaching.com/email/", params, false, false, false));
+                            final String page = cgBase.getResponseData(base.request("http://www.geocaching.com/email/", null, false, false, false));
                             int current = parseFindCount(page);
 
                             if (current >= 0) {

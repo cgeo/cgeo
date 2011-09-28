@@ -57,20 +57,12 @@ import android.text.style.StrikethroughSpan;
 import android.util.Log;
 import android.widget.EditText;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
-import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.cert.CertificateException;
@@ -87,13 +79,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.Inflater;
-import java.util.zip.InflaterInputStream;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -510,7 +498,7 @@ public class cgBase {
             return -3; // no login information stored
         }
 
-        loginResponse = request("https://www.geocaching.com/login/default.aspx", new HashMap<String, String>(), false, false, false);
+        loginResponse = request("https://www.geocaching.com/login/default.aspx", null, false, false, false);
         loginData = getResponseData(loginResponse);
         if (StringUtils.isNotBlank(loginData)) {
             if (checkLogin(loginData)) {
@@ -905,7 +893,7 @@ public class cgBase {
             recaptchaText = thread.getText();
         }
 
-        if (cids.size() > 0 && (recaptchaChallenge == null || (recaptchaChallenge != null && StringUtils.isNotBlank(recaptchaText)))) {
+        if (cids.size() > 0 && (recaptchaChallenge == null || StringUtils.isNotBlank(recaptchaText))) {
             Log.i(cgSettings.tag, "Trying to get .loc for " + cids.size() + " caches");
 
             try {
@@ -1680,7 +1668,7 @@ public class cgBase {
         }
 
         final String userToken = userTokenMatcher.group(1);
-        final HashMap<String, String> params = new HashMap<String, String>();
+        final Parameters params = new Parameters();
         params.put("tkn", userToken);
         params.put("idx", "1");
         params.put("num", "35");
@@ -1886,7 +1874,7 @@ public class cgBase {
         final Map<String, cgRating> ratings = new HashMap<String, cgRating>();
 
         try {
-            final Map<String, String> params = new HashMap<String, String>();
+            final Parameters params = new Parameters();
             if (settings.isLogin()) {
                 final Map<String, String> login = settings.getGCvoteLogin();
                 if (login != null) {
@@ -2657,7 +2645,7 @@ public class cgBase {
             cacheType = null;
         }
 
-        final Map<String, String> params = new HashMap<String, String>();
+        final Parameters params = new Parameters();
         if (cacheType != null && cacheIDs.containsKey(cacheType)) {
             params.put("tx", cacheIDs.get(cacheType));
         } else {
@@ -2706,7 +2694,7 @@ public class cgBase {
             cacheType = null;
         }
 
-        final Map<String, String> params = new HashMap<String, String>();
+        final Parameters params = new Parameters();
         if (cacheType != null && cacheIDs.containsKey(cacheType)) {
             params.put("tx", cacheIDs.get(cacheType));
         } else {
@@ -2754,7 +2742,7 @@ public class cgBase {
             cacheType = null;
         }
 
-        final Map<String, String> params = new HashMap<String, String>();
+        final Parameters params = new Parameters();
         if (cacheType != null && cacheIDs.containsKey(cacheType)) {
             params.put("tx", cacheIDs.get(cacheType));
         } else {
@@ -2808,7 +2796,7 @@ public class cgBase {
             cacheType = null;
         }
 
-        final Map<String, String> params = new HashMap<String, String>();
+        final Parameters params = new Parameters();
         if (cacheType != null && cacheIDs.containsKey(cacheType)) {
             params.put("tx", cacheIDs.get(cacheType));
         } else {
@@ -3005,7 +2993,7 @@ public class cgBase {
             return null;
         }
 
-        final Map<String, String> params = new HashMap<String, String>();
+        final Parameters params = new Parameters();
         if (StringUtils.isNotBlank(geocode)) {
             params.put("tracker", geocode);
         } else if (StringUtils.isNotBlank(guid)) {
@@ -3358,13 +3346,23 @@ public class cgBase {
 
     public static void postTweetCache(cgeoapplication app, cgSettings settings, String geocode) {
         final cgCache cache = app.getCacheByGeocode(geocode);
-        String name = cache.name;
-        if (name.length() > 84) {
-            name = name.substring(0, 81) + "...";
+        String status;
+        final String url = cache.getUrl();
+        if (url.length() >= 100) {
+            status = "I found " + url;
         }
-        final String status = "I found " + name + " (http://coord.info/" + cache.geocode.toUpperCase() + ")! #cgeo #geocaching"; // 56 chars + cache name
+        else {
+            String name = cache.name;
+            status = "I found " + name + " (" + url + ")";
+            if (status.length() > Twitter.MAX_TWEET_SIZE) {
+                name = name.substring(0, name.length() - (status.length() - Twitter.MAX_TWEET_SIZE) - 3) + "...";
+            }
+            status = "I found " + name + " (" + url + ")";
+            status = Twitter.appendHashTag(status, "cgeo");
+            status = Twitter.appendHashTag(status, "geocaching");
+        }
 
-        postTweet(app, settings, status, null);
+        Twitter.postTweet(app, settings, status, null);
     }
 
     public static void postTweetTrackable(cgeoapplication app, cgSettings settings, String geocode) {
@@ -3373,104 +3371,10 @@ public class cgBase {
         if (name.length() > 82) {
             name = name.substring(0, 79) + "...";
         }
-        final String status = "I touched " + name + " (http://coord.info/" + trackable.geocode.toUpperCase() + ")! #cgeo #geocaching"; // 58 chars + trackable name
-
-        postTweet(app, settings, status, null);
-    }
-
-    public static void postTweet(cgeoapplication app, cgSettings settings, String status, final Geopoint coords) {
-        if (app == null) {
-            return;
-        }
-        if (settings == null || StringUtils.isBlank(settings.tokenPublic) || StringUtils.isBlank(settings.tokenSecret)) {
-            return;
-        }
-
-        try {
-            Map<String, String> parameters = new HashMap<String, String>();
-
-            parameters.put("status", status);
-            if (coords != null) {
-                parameters.put("lat", String.format("%.6f", coords.getLatitude()));
-                parameters.put("long", String.format("%.6f", coords.getLongitude()));
-                parameters.put("display_coordinates", "true");
-            }
-
-            final String paramsDone = cgOAuth.signOAuth("api.twitter.com", "/1/statuses/update.json", "POST", false, parameters, settings.tokenPublic, settings.tokenSecret);
-
-            HttpURLConnection connection = null;
-            try {
-                final StringBuffer buffer = new StringBuffer();
-                final URL u = new URL("http://api.twitter.com/1/statuses/update.json");
-                final URLConnection uc = u.openConnection();
-
-                uc.setRequestProperty("Host", "api.twitter.com");
-
-                connection = (HttpURLConnection) uc;
-                connection.setReadTimeout(30000);
-                connection.setRequestMethod("POST");
-                HttpURLConnection.setFollowRedirects(true);
-                connection.setDoInput(true);
-                connection.setDoOutput(true);
-
-                final OutputStream out = connection.getOutputStream();
-                final OutputStreamWriter wr = new OutputStreamWriter(out);
-                wr.write(paramsDone);
-                wr.flush();
-                wr.close();
-
-                Log.i(cgSettings.tag, "Twitter.com: " + connection.getResponseCode() + " " + connection.getResponseMessage());
-
-                InputStream ins;
-                final String encoding = connection.getContentEncoding();
-
-                if (encoding != null && encoding.equalsIgnoreCase("gzip")) {
-                    ins = new GZIPInputStream(connection.getInputStream());
-                } else if (encoding != null && encoding.equalsIgnoreCase("deflate")) {
-                    ins = new InflaterInputStream(connection.getInputStream(), new Inflater(true));
-                } else {
-                    ins = connection.getInputStream();
-                }
-
-                final InputStreamReader inr = new InputStreamReader(ins);
-                final BufferedReader br = new BufferedReader(inr);
-
-                readIntoBuffer(br, buffer);
-
-                br.close();
-                ins.close();
-                inr.close();
-                connection.disconnect();
-            } catch (IOException e) {
-                Log.e(cgSettings.tag, "cgBase.postTweet.IO: " + connection.getResponseCode() + ": " + connection.getResponseMessage() + " ~ " + e.toString());
-
-                final InputStream ins = connection.getErrorStream();
-                final StringBuffer buffer = new StringBuffer();
-                final InputStreamReader inr = new InputStreamReader(ins);
-                final BufferedReader br = new BufferedReader(inr);
-
-                readIntoBuffer(br, buffer);
-
-                br.close();
-                ins.close();
-                inr.close();
-            } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgBase.postTweet.inner: " + e.toString());
-            }
-
-            connection.disconnect();
-        } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgBase.postTweet: " + e.toString());
-        }
-    }
-
-    private static void readIntoBuffer(BufferedReader br, StringBuffer buffer) throws IOException {
-        final int bufferSize = 1024 * 16;
-        final char[] bytes = new char[bufferSize];
-        int bytesRead;
-        while ((bytesRead = br.read(bytes)) > 0) {
-            buffer.append(bytes, 0, bytesRead);
-        }
+        String status = "I touched " + name + " (" + trackable.getUrl() + ")!";
+        status = Twitter.appendHashTag(status, "cgeo");
+        status = Twitter.appendHashTag(status, "geocaching");
+        Twitter.postTweet(app, settings, status, null);
     }
 
     public static String getLocalIpAddress() {
@@ -3497,48 +3401,33 @@ public class cgBase {
         return encoded;
     }
 
-    public String prepareParameters(Map<String, String> params, boolean my, boolean addF) {
-        String paramsDone = null;
-
-        if (my != true && settings.excludeMine > 0) {
+    public String prepareParameters(final Parameters params, final boolean my, final boolean addF) {
+        if (my != true && settings.excludeMine > 0 && addF) {
             if (params == null) {
-                params = new HashMap<String, String>();
+                return "f=1";
             }
-            if (addF) {
-                params.put("f", "1");
-            }
-
+            params.put("f", "1");
             Log.i(cgSettings.tag, "Skipping caches found or hidden by user.");
         }
 
         if (params != null) {
-            Set<Map.Entry<String, String>> entrySet = params.entrySet();
-            List<String> paramsEncoded = new ArrayList<String>();
+            final List<String> paramsEncoded = new ArrayList<String>(params.size());
 
-            for (Map.Entry<String, String> entry : entrySet)
-            {
-                String key = entry.getKey();
-                String value = entry.getValue();
+            for (final NameValuePair nameValue : params) {
+                final String key = nameValue.getName();
+                final String value = StringUtils.defaultString(nameValue.getValue());
 
-                if (key.charAt(0) == '^') {
-                    key = "";
-                }
-                if (value == null) {
-                    value = "";
-                }
-
-                paramsEncoded.add(key + "=" + urlencode_rfc3986(value));
+                // TODO: Document the justification of the legacy test below
+                paramsEncoded.add((key.charAt(0) != '^' ? key : "") + "=" + urlencode_rfc3986(value));
             }
 
-            paramsDone = StringUtils.join(paramsEncoded.toArray(), '&');
+            return StringUtils.join(paramsEncoded.toArray(), '&');
         } else {
-            paramsDone = "";
+            return "";
         }
-
-        return paramsDone;
     }
 
-    public String[] requestViewstates(final String uri, Map<String, String> params, boolean xContentType, boolean my) {
+    public String[] requestViewstates(final String uri, final Parameters params, boolean xContentType, boolean my) {
         final HttpResponse response = request(uri, params, xContentType, my, false);
 
         return getViewstates(getResponseData(response));
@@ -3568,7 +3457,7 @@ public class cgBase {
         return data;
     }
 
-    public String requestLogged(final String uri, Map<String, String> params, boolean xContentType, boolean my, boolean addF) {
+    public String requestLogged(final String uri, final Parameters params, boolean xContentType, boolean my, boolean addF) {
         HttpResponse response = request(uri, params, xContentType, my, addF);
         String data = getResponseData(response);
 
@@ -3585,7 +3474,7 @@ public class cgBase {
         return data;
     }
 
-    public HttpResponse request(final String uri, Map<String, String> params, boolean xContentType, boolean my, boolean addF) {
+    public HttpResponse request(final String uri, final Parameters params, boolean xContentType, boolean my, boolean addF) {
         final String paramsDone = prepareParameters(params, my, addF);
         return request(uri, paramsDone, xContentType);
     }

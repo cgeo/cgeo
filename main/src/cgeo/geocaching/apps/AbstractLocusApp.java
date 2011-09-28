@@ -188,7 +188,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
         loc.setLongitude(waypoint.coords.getLongitude());
 
         Point p = new Point(waypoint.name, loc);
-        p.setDescription("<a href=\"http://coord.info/" + waypoint.geocode + "\">"
+        p.setDescription("<a href=\"" + waypoint.getUrl() + "\">"
                 + waypoint.geocode + "</a>");
 
         return p;

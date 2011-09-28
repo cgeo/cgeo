@@ -360,7 +360,7 @@ public class cgeocoords extends Dialog {
     private boolean calc(final boolean signalError) {
         if (currentFormat == coordInputFormatEnum.Plain) {
             try {
-                gp = new Geopoint(eLat.getText().toString() + " " + eLon.getText().toString());
+                gp = new Geopoint(eLat.getText().toString(), eLon.getText().toString());
             } catch (ParseException e) {
                 if (signalError) {
                     context.showToast(context.getResources().getString(R.string.err_parse_lat_lon));
@@ -413,6 +413,8 @@ public class cgeocoords extends Dialog {
                 latitude = latDeg + latMin / 60.0 + latSec / 60.0 / 60.0 + latSecFrac / 60.0 / 60.0;
                 longitude = lonDeg + lonMin / 60.0 + lonSec / 60.0 / 60.0 + lonSecFrac / 60.0 / 60.0;
                 break;
+            case Plain:
+                // This case has been handled above
         }
         latitude *= (bLat.getText().toString().equalsIgnoreCase("S") ? -1 : 1);
         longitude *= (bLon.getText().toString().equalsIgnoreCase("W") ? -1 : 1);

@@ -411,7 +411,7 @@ public class cgeonavigate extends AbstractActivity {
                 }
 
                 if (settings.useCompass == 0 || (geo.speedNow != null && geo.speedNow > 5)) { // use GPS when speed is higher than 18 km/h
-                    if (geo != null && geo.bearingNow != null) {
+                    if (geo.bearingNow != null) {
                         northHeading = geo.bearingNow;
                     } else {
                         northHeading = 0;
