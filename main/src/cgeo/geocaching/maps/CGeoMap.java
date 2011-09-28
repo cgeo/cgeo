@@ -1308,7 +1308,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         }
 
                         // display cache waypoints
-                        if (cacheOne != null && cacheOne.waypoints != null
+                        if (cacheOne.waypoints != null
                                 // Only show waypoints for single view or setting
                                 // when less than showWaypointsthreshold Caches shown
                                 && (cachesProtected.size() == 1 || (cachesProtected.size() < settings.showWaypointsthreshold))
