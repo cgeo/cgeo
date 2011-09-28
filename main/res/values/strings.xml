@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <resources>
   <string name="app_name">c:geo</string>
   <string name="app_name_compass">c:geo compass</string>
@@ -932,6 +932,7 @@
     · <a href="http://www.jaytech.cz/">Jan Žatecký</a> (graphic)\n
     · <a href="http://joachim-wilke.de/">JoWi24</a> (code)\n
     · <a href="http://github.com/koem">Karsten Priegnitz</a> (code, artwork computation)\n
+    · ludoo0d0a (localization FR)\n
     · MichielK (code, loc. NL)\n
     · mucek4 (code, open source project leader)\n
     · ncorreia (code, localization PT)\n
