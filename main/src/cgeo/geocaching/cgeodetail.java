@@ -658,7 +658,7 @@ public class cgeodetail extends AbstractActivity {
             itemName.setText(res.getString(R.string.cache_name));
             Spannable span = (new Spannable.Factory()).newSpannable(Html.fromHtml(cache.name).toString());
             if (cache.disabled || cache.archived) { // strike
-                span.setSpan(new StrikethroughSpan(), 0, span.toString().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new StrikethroughSpan(), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
             itemValue.setText(span);
             detailsList.addView(itemLayout);

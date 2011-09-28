@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.HashMap;
@@ -164,7 +165,7 @@ public class cgeoauth extends AbstractActivity {
                     // connection.setHostnameVerifier(base.doNotVerify);
                     connection.setReadTimeout(30000);
                     connection.setRequestMethod(method);
-                    HttpsURLConnection.setFollowRedirects(true);
+                    HttpURLConnection.setFollowRedirects(true);
                     connection.setDoInput(true);
                     connection.setDoOutput(false);
 
@@ -261,7 +262,7 @@ public class cgeoauth extends AbstractActivity {
                 // connection.setHostnameVerifier(base.doNotVerify);
                 connection.setReadTimeout(30000);
                 connection.setRequestMethod(method);
-                HttpsURLConnection.setFollowRedirects(true);
+                HttpURLConnection.setFollowRedirects(true);
                 connection.setDoOutput(true);
                 connection.setDoInput(true);
 

@@ -52,6 +52,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Html;
 import android.text.Spannable;
+import android.text.Spanned;
 import android.text.format.DateUtils;
 import android.text.style.StrikethroughSpan;
 import android.util.Log;
@@ -863,7 +864,7 @@ public class cgBase {
             if (cache.nameSp == null) {
                 cache.nameSp = (new Spannable.Factory()).newSpannable(cache.name);
                 if (cache.disabled || cache.archived) { // strike
-                    cache.nameSp.setSpan(new StrikethroughSpan(), 0, cache.nameSp.toString().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    cache.nameSp.setSpan(new StrikethroughSpan(), 0, cache.nameSp.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 }
             }
 

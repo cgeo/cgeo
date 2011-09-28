@@ -16,6 +16,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
+import android.text.Spanned;
 import android.text.style.StrikethroughSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -463,7 +464,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         if (cache.nameSp == null) {
             cache.nameSp = (new Spannable.Factory()).newSpannable(cache.name);
             if (cache.disabled || cache.archived) { // strike
-                cache.nameSp.setSpan(new StrikethroughSpan(), 0, cache.nameSp.toString().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                cache.nameSp.setSpan(new StrikethroughSpan(), 0, cache.nameSp.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
 
