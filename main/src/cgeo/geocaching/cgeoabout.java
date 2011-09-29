@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 public class cgeoabout extends AbstractActivity {
@@ -51,35 +52,35 @@ public class cgeoabout extends AbstractActivity {
         }
     }
 
-    public void donateMore() {
+    public void donateMore(View view) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FMLNN8GXZKJEE")));
     }
 
-    public void donateLess() {
+    public void donateLess(View view) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FMLNN8GXZKJEE")));
     }
 
-    public void author() {
+    public void author(View view) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://carnero.cc/")));
     }
 
-    public void support() {
+    public void support(View view) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:support@cgeo.org")));
     }
 
-    public void website() {
+    public void website(View view) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.cgeo.org/")));
     }
 
-    public void facebook() {
+    public void facebook(View view) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com/pages/cgeo/297269860090")));
     }
 
-    public void twitter() {
+    public void twitter(View view) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://twitter.com/android_gc")));
     }
 
-    public void nutshellmanual() {
+    public void nutshellmanual(View view) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.cgeo.org/")));
     }
 }
