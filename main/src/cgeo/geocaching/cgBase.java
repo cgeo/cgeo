@@ -2549,19 +2549,13 @@ public class cgBase {
         return search.getCurrentId();
     }
 
-    public UUID searchByHistory(Map<String, Object> parameters) {
+    public UUID searchByHistory(final String cacheType) {
         if (app == null) {
             Log.e(cgSettings.tag, "cgeoBase.searchByHistory: No application found");
             return null;
         }
 
-        String cachetype = null;
-
-        if (parameters.containsKey("cachetype")) {
-            cachetype = (String) parameters.get("cachetype");
-        }
-
-        final cgSearch search = app.getHistoryOfCaches(true, cachetype);
+        final cgSearch search = app.getHistoryOfCaches(true, cacheType);
         search.totalCnt = app.getAllHistoricCachesCount();
 
         return search.getCurrentId();

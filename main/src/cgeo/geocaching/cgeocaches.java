@@ -1791,13 +1791,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            Map<String, Object> params = new HashMap<String, Object>();
-            if (coords != null) {
-                params.put("cachetype", settings.cacheType);
-            }
-
-            searchId = base.searchByHistory(params);
-
+            searchId = base.searchByHistory(coords != null ? settings.cacheType : null);
             handler.sendMessage(new Message());
         }
     }
