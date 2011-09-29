@@ -7,9 +7,11 @@ import cgeo.geocaching.cgLog;
 import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgTrackable;
+import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import org.apache.commons.lang3.StringUtils;
@@ -33,8 +35,11 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -60,6 +65,8 @@ public abstract class GPXParser extends FileParser {
      */
     private static final String GSAK_NS = "http://www.gsak.net/xmlv1/5";
 
+    private static final String GPX_FILE_EXTENSION = ".gpx";
+
     private int listId = 1;
     final protected String namespace;
     final private String version;
@@ -75,6 +82,11 @@ public abstract class GPXParser extends FileParser {
     private String cmt = null;
     private String desc = null;
     protected final String[] userData = new String[5]; // take 5 cells, that makes indexing 1..4 easier
+
+    /**
+     * Parser result. Maps geocode to cache.
+     */
+    private final Map<String, cgCache> result = new HashMap<String, cgCache>(500);
 
     private final class UserDataListener implements EndTextElementListener {
         private final int index;
@@ -220,9 +232,9 @@ public abstract class GPXParser extends FileParser {
         return formatSimple.parse(input);
     }
 
-    public List<cgCache> parse(final InputStream stream, Handler handlerIn) {
+    // TODO: is not API, only public because of testing
+    public boolean parse(final InputStream stream, Handler handlerIn) {
         handler = handlerIn;
-        final List<cgCache> result = new ArrayList<cgCache>();
 
         final RootElement root = new RootElement(namespace, "gpx");
         final Element waypoint = root.getChild(namespace, "wpt");
@@ -266,11 +278,47 @@ public abstract class GPXParser extends FileParser {
 
                     createNoteFromGSAKUserdata();
 
-                    result.add(cache);
+                    result.put(cache.geocode, cache);
                     showCountMessage(handler, result.size());
+                } else if (StringUtils.isNotBlank(cache.name)
+                        && cache.coords != null
+                        && StringUtils.contains(type, "waypoint")) {
+                    addWaypointToCache();
                 }
 
                 resetCache();
+            }
+
+            private void addWaypointToCache() {
+                fixCache(cache);
+
+                if (cache.name.length() > 2) {
+                    String cacheGeocodeForWaypoint = "GC" + cache.name.substring(2);
+
+                    // lookup cache for waypoint in already parsed caches
+                    cgCache cacheForWaypoint = result.get(cacheGeocodeForWaypoint);
+                    if (cacheForWaypoint != null) {
+                        final cgWaypoint waypoint = new cgWaypoint();
+                        waypoint.id = -1;
+                        waypoint.type = convertWaypointSym2Type(sym).id;
+                        waypoint.geocode = cacheGeocodeForWaypoint;
+                        waypoint.setPrefix(cache.name.substring(0, 2));
+                        waypoint.lookup = "---";
+                        // there is no lookup code in gpx file
+                        waypoint.name = cache.shortdesc;
+                        waypoint.coords = cache.coords;
+                        waypoint.latitudeString = cache.latitudeString;
+                        waypoint.longitudeString = cache.longitudeString;
+                        waypoint.note = cache.description;
+
+                        if (cacheForWaypoint.waypoints == null) {
+                            cacheForWaypoint.waypoints = new ArrayList<cgWaypoint>();
+                        }
+                        cgWaypoint.mergeWayPoints(cacheForWaypoint.waypoints, Collections.singletonList(waypoint));
+                        result.put(cacheGeocodeForWaypoint, cacheForWaypoint);
+                        showCountMessage(handler, result.size());
+                    }
+                }
             }
         });
 
@@ -680,40 +728,44 @@ public abstract class GPXParser extends FileParser {
                 }
             });
         }
-        boolean parsed = false;
+
         try {
             Xml.parse(stream, Xml.Encoding.UTF_8, root.getContentHandler());
-            parsed = true;
+            return true;
         } catch (IOException e) {
             Log.e(cgSettings.tag, "Cannot parse .gpx file as GPX " + version + ": could not read file!");
         } catch (SAXException e) {
             Log.e(cgSettings.tag, "Cannot parse .gpx file as GPX " + version + ": could not parse XML - " + e.toString());
         }
-
-        return parsed ? result : null;
+        return false;
     }
 
-    private List<cgCache> parse(final File file, final Handler handlerIn) {
+    private boolean parse(final File file, final Handler handlerIn) {
         if (file == null) {
-            return null;
+            return false;
         }
 
         FileInputStream fis = null;
-        List<cgCache> result = null;
+        boolean parsed = false;
         try {
             fis = new FileInputStream(file);
-            result = parse(fis, handlerIn);
+            parsed = parse(fis, handlerIn);
         } catch (FileNotFoundException e) {
             Log.e(cgSettings.tag, "Cannot parse .gpx file " + file.getAbsolutePath() + " as GPX " + version + ": file not found!");
-        }
-        try {
-            if (fis != null) {
-                fis.close();
+        } finally {
+            try {
+                if (fis != null) {
+                    fis.close();
+                }
+            } catch (IOException e) {
+                Log.e(cgSettings.tag, "Error after parsing .gpx file " + file.getAbsolutePath() + " as GPX " + version + ": could not close file!");
             }
-        } catch (IOException e) {
-            Log.e(cgSettings.tag, "Error after parsing .gpx file " + file.getAbsolutePath() + " as GPX " + version + ": could not close file!");
         }
-        return result;
+        return parsed;
+    }
+
+    public Collection<cgCache> getParsedCaches() {
+        return result.values();
     }
 
     /**
@@ -742,6 +794,23 @@ public abstract class GPXParser extends FileParser {
             if (StringUtils.isBlank(cache.type)) {
                 cache.type = "mystery"; // default for not recognized types
             }
+        }
+    }
+
+    // TODO: public so that it can be unit tested, could be package private when tests in same package as productive code
+    public static WaypointType convertWaypointSym2Type(final String sym) {
+        if ("parking area".equalsIgnoreCase(sym)) {
+            return WaypointType.PKG;
+        } else if ("stages of a multicache".equalsIgnoreCase(sym)) {
+            return WaypointType.STAGE;
+        } else if ("question to answer".equalsIgnoreCase(sym)) {
+            return WaypointType.PUZZLE;
+        } else if ("trailhead".equalsIgnoreCase(sym)) {
+            return WaypointType.TRAILHEAD;
+        } else if ("final location".equalsIgnoreCase(sym)) {
+            return WaypointType.FLAG;
+        } else {
+            return WaypointType.WAYPOINT;
         }
     }
 
@@ -794,20 +863,31 @@ public abstract class GPXParser extends FileParser {
 
     public static UUID parseGPX(File file, int listId, Handler handler) {
         try {
+            // parse cache file
             GPXParser parser = new GPX10Parser(listId);
-            List<cgCache> caches = parser.parse(file, handler);
-            if (caches == null) {
+            boolean parsed = parser.parse(file, handler);
+            if (!parsed) {
                 parser = new GPX11Parser(listId);
-                caches = parser.parse(file, handler);
+                parsed = parser.parse(file, handler);
             }
 
-            if (caches != null) {
+            // parse waypoint file if exists
+            if (parsed) {
+                final File wptsFile = getWaypointsFileForGpx(file);
+                if (wptsFile != null && wptsFile.canRead()) {
+                    parser.parse(wptsFile, handler);
+                }
+            }
+
+            if (parsed) {
                 final cgSearch search = new cgSearch();
                 final cgeoapplication app = cgeoapplication.getInstance();
-                for (cgCache cache : caches) {
+                for (cgCache cache : parser.getParsedCaches()) {
+                    // remove from cache, cache can be re-imported
+                    app.removeCacheFromCache(cache.geocode);
                     app.addCacheToSearch(search, cache);
                 }
-                Log.i(cgSettings.tag, "Caches found in .gpx file: " + caches.size());
+                Log.i(cgSettings.tag, "Caches found in .gpx file: " + parser.getParsedCaches().size());
                 return search.getCurrentId();
             }
 
@@ -816,5 +896,16 @@ public abstract class GPXParser extends FileParser {
         }
 
         return null;
+    }
+
+    // 1234567.gpx -> 1234567-wpts.gpx
+    public static File getWaypointsFileForGpx(File file) {
+        final String name = file.getName();
+        if (StringUtils.endsWithIgnoreCase(name, GPX_FILE_EXTENSION) && (StringUtils.length(name) > GPX_FILE_EXTENSION.length())) {
+            String wptsName = StringUtils.substringBeforeLast(name, ".") + "-wpts" + StringUtils.right(name, GPX_FILE_EXTENSION.length());
+            return new File(file.getParentFile(), wptsName);
+        } else {
+            return null;
+        }
     }
 }
