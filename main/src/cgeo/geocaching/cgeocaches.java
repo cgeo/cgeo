@@ -1764,7 +1764,7 @@ public class cgeocaches extends AbstractListActivity {
         private Geopoint coords = null;
         private int listId = 1;
 
-        public geocachesLoadByOffline(Handler handlerIn, final Geopoint coordsIn, int listIdIn) {
+        public geocachesLoadByOffline(final Handler handlerIn, final Geopoint coordsIn, int listIdIn) {
             handler = handlerIn;
             coords = coordsIn;
             listId = listIdIn;
@@ -1772,16 +1772,11 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            Map<String, Object> params = new HashMap<String, Object>();
             if (coords != null) {
-                params.put("latitude", coords.getLatitude());
-                params.put("longitude", coords.getLongitude());
-                params.put("cachetype", settings.cacheType);
-                params.put("list", listId);
+                searchId = base.searchByOffline(coords, settings.cacheType, listId);
+            } else {
+                searchId = base.searchByOffline(null, null, 1);
             }
-
-            searchId = base.searchByOffline(params);
-
             handler.sendMessage(new Message());
         }
     }

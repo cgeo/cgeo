@@ -2539,31 +2539,13 @@ public class cgBase {
         return ConnectorFactory.getConnector(geocode).searchByGeocode(this, geocode, guid, app, search, reason);
     }
 
-    public UUID searchByOffline(Map<String, Object> parameters) {
+    public UUID searchByOffline(final Geopoint coords, final String cacheType, final int list) {
         if (app == null) {
             Log.e(cgSettings.tag, "cgeoBase.searchByOffline: No application found");
             return null;
         }
-
-        Geopoint coords = null;
-        String cachetype = null;
-        Integer list = 1;
-
-        if (parameters.containsKey("latitude") && parameters.containsKey("longitude")) {
-            coords = new Geopoint((Double) parameters.get("latitude"), (Double) parameters.get("longitude"));
-        }
-
-        if (parameters.containsKey("cachetype")) {
-            cachetype = (String) parameters.get("cachetype");
-        }
-
-        if (parameters.containsKey("list")) {
-            list = (Integer) parameters.get("list");
-        }
-
-        final cgSearch search = app.getBatchOfStoredCaches(true, coords, cachetype, list);
-        search.totalCnt = app.getAllStoredCachesCount(true, cachetype, list);
-
+        final cgSearch search = app.getBatchOfStoredCaches(true, coords, cacheType, list);
+        search.totalCnt = app.getAllStoredCachesCount(true, cacheType, list);
         return search.getCurrentId();
     }
 
