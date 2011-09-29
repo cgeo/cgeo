@@ -37,7 +37,7 @@ elif [ "$1" != "all" -a ! -f ../../res/values-$1/strings.xml ]; then
     usage
 fi
 
-if [ "$1" == "all" ]; then
+if [ "$1" = "all" ]; then
     langs=$alllangs
 else
     langs=$1
