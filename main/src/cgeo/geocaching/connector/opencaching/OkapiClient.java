@@ -55,7 +55,7 @@ final public class OkapiClient {
     private static final String USER_USERNAME = "username";
 
     private static final String SERVICE_CACHE = "/okapi/services/caches/geocache";
-    private static final String SERVICE_CACHE_FIELDS = "fields=code|name|location|type|status|owner|founds|notfounds|size|difficulty|terrain|rating|rating_votes|recommendations|description|hint|images|latest_logs|date_hidden";
+    private static final String SERVICE_CACHE_FIELDS = "fields=" + cgBase.urlencode_rfc3986("code|name|location|type|status|owner|founds|notfounds|size|difficulty|terrain|rating|rating_votes|recommendations|description|hint|images|latest_logs|date_hidden");
 
     public static cgCache getCache(final String geoCode) {
         final String params = "cache_code=" + geoCode + "&" + SERVICE_CACHE_FIELDS;
@@ -252,7 +252,7 @@ final public class OkapiClient {
             return null;
         }
 
-        final String uri = "http://" + connector.getHost() + service + "?" + ((ApiOpenCachingConnector) connector).getAuthentication(level);
+        final String uri = "http://" + connector.getHost() + service + "?" + params + ((ApiOpenCachingConnector) connector).getAuthentication(level);
         return cgBase.requestJSON(uri);
     }
 }
