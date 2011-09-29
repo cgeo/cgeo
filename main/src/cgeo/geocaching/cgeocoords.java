@@ -183,7 +183,7 @@ public class cgeocoords extends Dialog {
 
                 eLatDeg.setText(addZeros(latDeg, 2));
                 eLatMin.setText(addZeros(latDegFrac, 5));
-                eLonDeg.setText(addZeros(latDeg, 3));
+                eLonDeg.setText(addZeros(lonDeg, 3));
                 eLonMin.setText(addZeros(lonDegFrac, 5));
                 break;
             case Min: // DDD° MM.MMM
