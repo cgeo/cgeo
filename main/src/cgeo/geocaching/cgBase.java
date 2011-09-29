@@ -2641,22 +2641,15 @@ public class cgBase {
         return search.getCurrentId();
     }
 
-    public UUID searchByUsername(cgSearchThread thread, Map<String, String> parameters, int reason, boolean showCaptcha) {
+    public UUID searchByUsername(final cgSearchThread thread, final String userName, final String cacheType, final int reason, final boolean showCaptcha) {
         final cgSearch search = new cgSearch();
-        final String userName = parameters.get("username");
-        String cacheType = parameters.get("cachetype");
-
         if (StringUtils.isBlank(userName)) {
             Log.e(cgSettings.tag, "cgeoBase.searchByUsername: No user name given");
             return null;
         }
 
-        if (StringUtils.isBlank(cacheType)) {
-            cacheType = null;
-        }
-
         final Parameters params = new Parameters();
-        if (cacheType != null && cacheIDs.containsKey(cacheType)) {
+        if (StringUtils.isNotBlank(cacheType) && cacheIDs.containsKey(cacheType)) {
             params.put("tx", cacheIDs.get(cacheType));
         } else {
             params.put("tx", cacheIDs.get("all"));
