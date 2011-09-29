@@ -28,8 +28,6 @@ import android.widget.TextView;
 
 import java.net.URLEncoder;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class cgeotrackable extends AbstractActivity {
     public cgTrackable trackable = null;
@@ -481,24 +479,9 @@ public class cgeotrackable extends AbstractActivity {
 
         @Override
         public void run() {
-            loadTrackableFn(geocode, guid, id);
+            trackable = base.searchTrackable(geocode, guid, id);
             handler.sendMessage(new Message());
         }
-    }
-
-    public void loadTrackableFn(String geocode, String guid, String id) {
-        Map<String, String> params = new HashMap<String, String>();
-        if (StringUtils.isNotBlank(geocode)) {
-            params.put("geocode", geocode);
-        } else if (StringUtils.isNotBlank(guid)) {
-            params.put("guid", guid);
-        } else if (StringUtils.isNotBlank(id)) {
-            params.put("id", id);
-        } else {
-            return;
-        }
-
-        trackable = base.searchTrackable(params);
     }
 
     private void displayLogs() {

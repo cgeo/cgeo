@@ -2865,14 +2865,11 @@ public class cgBase {
         return cacheList;
     }
 
-    public cgTrackable searchTrackable(Map<String, String> parameters) {
-        final String geocode = parameters.get("geocode");
-        final String guid = parameters.get("guid");
-        final String id = parameters.get("id");
+    public cgTrackable searchTrackable(final String geocode, final String guid, final String id) {
         cgTrackable trackable = new cgTrackable();
 
         if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid) && StringUtils.isBlank(id)) {
-            Log.e(cgSettings.tag, "cgeoBase.searchTrackable: No geocode nor guid nor id given");
+            Log.w(cgSettings.tag, "cgeoBase.searchTrackable: No geocode nor guid nor id given");
             return null;
         }
 
