@@ -2422,18 +2422,12 @@ public class cgBase {
         }
         StringBuilder formatted = new StringBuilder(direction);
 
-        double coordAbs = Math.abs(coordIn);
-        Locale locale = Locale.getDefault();
-        double floor = Math.floor(coordAbs);
+        final double coordAbs = Math.abs(coordIn);
+        final double floor = Math.floor(coordAbs);
 
-        formatted.append(String.format(locale, digitsFormat, floor));
-
-        if (degrees) {
-            formatted.append("° ");
-        } else {
-            formatted.append(' ');
-        }
-        formatted.append(String.format(locale, "%06.3f", ((coordAbs - floor) * 60)));
+        formatted.append(String.format((Locale) null, digitsFormat, floor));
+        formatted.append(degrees ? "° " : " ");
+        formatted.append(String.format((Locale) null, "%06.3f", ((coordAbs - floor) * 60)));
 
         return formatted.toString();
     }
