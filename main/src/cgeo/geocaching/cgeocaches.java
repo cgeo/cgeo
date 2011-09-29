@@ -1863,12 +1863,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("keyword", keyword);
-            params.put("cachetype", cachetype);
-
-            searchId = base.searchByKeyword(this, params, 0, settings.showCaptcha);
-
+            searchId = base.searchByKeyword(this, keyword, cachetype, 0, settings.showCaptcha);
             handler.sendMessage(new Message());
         }
     }

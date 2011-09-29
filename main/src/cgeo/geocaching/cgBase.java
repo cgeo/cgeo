@@ -2599,22 +2599,16 @@ public class cgBase {
         return search.getCurrentId();
     }
 
-    public UUID searchByKeyword(cgSearchThread thread, Map<String, String> parameters, int reason, boolean showCaptcha) {
+    public UUID searchByKeyword(final cgSearchThread thread, final String keyword, final String cacheType, final int reason, final boolean showCaptcha) {
         final cgSearch search = new cgSearch();
-        final String keyword = parameters.get("keyword");
-        String cacheType = parameters.get("cachetype");
 
         if (StringUtils.isBlank(keyword)) {
             Log.e(cgSettings.tag, "cgeoBase.searchByKeyword: No keyword given");
             return null;
         }
 
-        if (StringUtils.isBlank(cacheType)) {
-            cacheType = null;
-        }
-
         final Parameters params = new Parameters();
-        if (cacheType != null && cacheIDs.containsKey(cacheType)) {
+        if (StringUtils.isNotBlank(cacheType) && cacheIDs.containsKey(cacheType)) {
             params.put("tx", cacheIDs.get(cacheType));
         } else {
             params.put("tx", cacheIDs.get("all"));
