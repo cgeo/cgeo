@@ -417,6 +417,8 @@
   <string name="init_captcha">Zobraziť CAPTCHA, ak je to potrebné</string>
   <string name="init_useenglish">Používať angličtinu v c:geo\n(vyžaduje reštart)</string>
   <string name="init_exclude">Nezobrazovať vlastné a nájdené skrýše</string>
+  <string name="init_showwaypoints">Body trasy na aktívnej mape</string>
+  <string name="init_showwaypoint_description">Úroveň, od ktorej zobraziť body trasy na aktívnej mape.</string>
   <string name="init_disabled">Nezobrazovať zrušené skrýše</string>
   <string name="init_offline">Ukladať mapy pre použitie offline</string>
   <string name="init_save_log_img">Uložiť obrázky zo záznamov</string>
