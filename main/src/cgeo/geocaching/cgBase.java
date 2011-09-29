@@ -2450,6 +2450,22 @@ public class cgBase {
         return formatLatitude(coords.getLatitude(), degrees) + " | " + formatLongitude(coords.getLongitude(), degrees);
     }
 
+    /**
+     * Insert the right cache type restriction in parameters
+     * 
+     * @param params
+     *            the parameters to insert the restriction into
+     * @param cacheType
+     *            the type of cache, or "all" if null or not recognized
+     */
+    static private void insertCacheType(final Parameters params, final String cacheType) {
+        if (StringUtils.isNotBlank(cacheType) && cacheIDs.containsKey(cacheType)) {
+            params.put("tx", cacheIDs.get(cacheType));
+        } else {
+            params.put("tx", cacheIDs.get("all"));
+        }
+    }
+
     public UUID searchByNextPage(cgSearchThread thread, final UUID searchId, int reason, boolean showCaptcha) {
         final String[] viewstates = app.getViewstates(searchId);
 
@@ -2565,11 +2581,7 @@ public class cgBase {
         final cgSearch search = new cgSearch();
 
         final Parameters params = new Parameters();
-        if (StringUtils.isNotBlank(cacheType) && cacheIDs.containsKey(cacheType)) {
-            params.put("tx", cacheIDs.get(cacheType));
-        } else {
-            params.put("tx", cacheIDs.get("all"));
-        }
+        insertCacheType(params, cacheType);
         params.put("lat", Double.toString(coords.getLatitude()));
         params.put("lng", Double.toString(coords.getLongitude()));
 
@@ -2608,11 +2620,7 @@ public class cgBase {
         }
 
         final Parameters params = new Parameters();
-        if (StringUtils.isNotBlank(cacheType) && cacheIDs.containsKey(cacheType)) {
-            params.put("tx", cacheIDs.get(cacheType));
-        } else {
-            params.put("tx", cacheIDs.get("all"));
-        }
+        insertCacheType(params, cacheType);
         params.put("key", keyword);
 
         final String uri = "http://www.geocaching.com/seek/nearest.aspx";
@@ -2649,11 +2657,7 @@ public class cgBase {
         }
 
         final Parameters params = new Parameters();
-        if (StringUtils.isNotBlank(cacheType) && cacheIDs.containsKey(cacheType)) {
-            params.put("tx", cacheIDs.get(cacheType));
-        } else {
-            params.put("tx", cacheIDs.get("all"));
-        }
+        insertCacheType(params, cacheType);
         params.put("ul", userName);
 
         boolean my = false;
