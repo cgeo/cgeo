@@ -1923,7 +1923,7 @@ public class cgeocaches extends AbstractListActivity {
             params.put("username", username);
             params.put("cachetype", cachetype);
 
-            searchId = base.searchByOwner(this, params, 0, settings.showCaptcha);
+            searchId = base.searchByOwner(this, username, cachetype, 0, settings.showCaptcha);
 
             handler.sendMessage(new Message());
         }
