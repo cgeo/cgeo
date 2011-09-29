@@ -1248,18 +1248,22 @@ public class cgeodetail extends AbstractActivity {
                         }
                     };
 
+                    ArrayList<String> titles = new ArrayList<String>();
                     for (int i_img_cnt = 0; i_img_cnt < log.logImages.size(); i_img_cnt++) {
                         String img_title = log.logImages.get(i_img_cnt).title;
-                        if (img_title.equals("")) {
-                            img_title = res.getString(R.string.cache_log_image_default_title);
+                        if (!StringUtils.isBlank(img_title)) {
+                            titles.add(img_title);
                         }
-                        final String title = img_title;
-                        LinearLayout log_imgView = (LinearLayout) inflater.inflate(R.layout.log_img, null);
-                        TextView log_img_title = (TextView) log_imgView.findViewById(R.id.title);
-                        log_img_title.setText(title);
-                        log_img_title.setOnClickListener(listener);
-                        logLayout.addView(log_imgView);
                     }
+                    if (titles.isEmpty()) {
+                        titles.add(res.getString(R.string.cache_log_image_default_title));
+                    }
+
+                    LinearLayout log_imgView = (LinearLayout) inflater.inflate(R.layout.log_img, null);
+                    TextView log_img_title = (TextView) log_imgView.findViewById(R.id.title);
+                    log_img_title.setText(StringUtils.join(titles.toArray(new String[titles.size()]), ", "));
+                    log_img_title.setOnClickListener(listener);
+                    logLayout.addView(log_imgView);
                 }
 
                 // Add colored mark
