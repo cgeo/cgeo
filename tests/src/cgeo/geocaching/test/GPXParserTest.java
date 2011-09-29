@@ -1,5 +1,6 @@
 package cgeo.geocaching.test;
 
+import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgLog;
 import cgeo.geocaching.cgWaypoint;
@@ -117,8 +118,9 @@ public class GPXParserTest extends InstrumentationTestCase {
         assertTrue(cache.hasTrackables());
         assertEquals(2.0f, cache.getDifficulty().floatValue(), 0.01f);
         assertEquals(1.0f, cache.getTerrain().floatValue(), 0.01f);
-        assertEquals("N 49° 19.122", cache.getLatitude());
-        assertEquals("E 008° 32.739", cache.getLongitude());
+        final Geopoint refCoordinates = new Geopoint("N 49° 19.122", "E 008° 32.739");
+        assertEquals(cgBase.formatLatitude(refCoordinates.getLatitude(), true), cache.getLatitude());
+        assertEquals(cgBase.formatLongitude(refCoordinates.getLongitude(), true), cache.getLongitude());
         assertEquals("vptsz", cache.getOwner());
         assertEquals(CacheSize.SMALL, cache.getSize());
         assertEquals("multi", cache.getType());
