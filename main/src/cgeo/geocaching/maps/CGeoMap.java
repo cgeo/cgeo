@@ -1224,15 +1224,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                //TODO Parameter Map is bad style
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("usertoken", token);
-                params.put("latitude-min", String.format((Locale) null, "%.6f", latMin));
-                params.put("latitude-max", String.format((Locale) null, "%.6f", latMax));
-                params.put("longitude-min", String.format((Locale) null, "%.6f", lonMin));
-                params.put("longitude-max", String.format((Locale) null, "%.6f", lonMax));
-
-                searchId = base.searchByViewport(params, 0);
+                searchId = base.searchByViewport(token, latMin, latMax, lonMin, lonMax, 0);
                 if (searchId != null) {
                     downloaded = true;
                 }

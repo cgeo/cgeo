@@ -2729,28 +2729,12 @@ public class cgBase {
         return search.getCurrentId();
     }
 
-    public UUID searchByViewport(Map<String, String> parameters, int reason) {
+    public UUID searchByViewport(final String userToken, final double latMin, final double latMax, final double lonMin, final double lonMax, int reason) {
         final cgSearch search = new cgSearch();
-        final String latMin = parameters.get("latitude-min");
-        final String latMax = parameters.get("latitude-max");
-        final String lonMin = parameters.get("longitude-min");
-        final String lonMax = parameters.get("longitude-max");
-
-        String usertoken = null;
-        if (parameters.get("usertoken") != null) {
-            usertoken = parameters.get("usertoken");
-        } else {
-            usertoken = "";
-        }
 
         String page = null;
 
-        if (StringUtils.isBlank(latMin) || StringUtils.isBlank(latMax) || StringUtils.isBlank(lonMin) || StringUtils.isBlank(lonMax)) {
-            Log.e(cgSettings.tag, "cgeoBase.searchByViewport: Not enough parameters to recognize viewport");
-            return null;
-        }
-
-        final String params = "{\"dto\":{\"data\":{\"c\":1,\"m\":\"\",\"d\":\"" + latMax + "|" + latMin + "|" + lonMax + "|" + lonMin + "\"},\"ut\":\"" + usertoken + "\"}}";
+        final String params = "{\"dto\":{\"data\":{\"c\":1,\"m\":\"\",\"d\":\"" + latMax + "|" + latMin + "|" + lonMax + "|" + lonMin + "\"},\"ut\":\"" + StringUtils.defaultString(userToken) + "\"}}";
 
         final String uri = "http://www.geocaching.com/map/default.aspx/MapAction";
         page = requestJSONgc(uri, params);
