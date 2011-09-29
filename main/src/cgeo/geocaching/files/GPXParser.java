@@ -307,8 +307,6 @@ public abstract class GPXParser extends FileParser {
                         // there is no lookup code in gpx file
                         waypoint.name = cache.shortdesc;
                         waypoint.coords = cache.coords;
-                        waypoint.latitudeString = cache.latitudeString;
-                        waypoint.longitudeString = cache.longitudeString;
                         waypoint.note = cache.description;
 
                         if (cacheForWaypoint.waypoints == null) {

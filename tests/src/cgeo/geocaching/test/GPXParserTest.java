@@ -161,8 +161,6 @@ public class GPXParserTest extends InstrumentationTestCase {
         assertEquals(WaypointType.PKG.id, wp.type);
         assertEquals(49.317517, wp.coords.getLatitude(), 0.000001);
         assertEquals(8.545083, wp.coords.getLongitude(), 0.000001);
-        assertEquals("N 49° 19.051", wp.latitudeString);
-        assertEquals("E 008° 32.705", wp.longitudeString);
 
         wp = cache.waypoints.get(1);
         assertEquals("GC31J2H", wp.geocode);
