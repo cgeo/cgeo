@@ -18,7 +18,6 @@ import android.test.suitebuilder.annotation.SmallTest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 import junit.framework.Assert;
@@ -69,10 +68,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
      */
     @MediumTest
     public void testSearchByGeocode() {
-        final Map<String, String> params = new HashMap<String, String>();
-        params.put("geocode", "GC1RMM2");
-
-        final UUID id = base.searchByGeocode(params, 0, true);
+        final UUID id = base.searchByGeocode("GC1RMM2", null, 0, true);
         Assert.assertNotNull(id);
     }
 

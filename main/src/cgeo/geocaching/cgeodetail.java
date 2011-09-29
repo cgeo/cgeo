@@ -1321,17 +1321,10 @@ public class cgeodetail extends AbstractActivity {
 
         @Override
         public void run() {
-            Map<String, String> params = new HashMap<String, String>();
-            if (StringUtils.isNotBlank(geocode)) {
-                params.put("geocode", geocode);
-            } else if (StringUtils.isNotBlank(guid)) {
-                params.put("guid", guid);
-            } else {
+            if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
                 return;
             }
-
-            searchId = base.searchByGeocode(params, 0, false);
-
+            searchId = base.searchByGeocode(geocode, StringUtils.isBlank(geocode) ? guid : null, 0, false);
             handler.sendMessage(new Message());
         }
     }
@@ -1746,10 +1739,7 @@ public class cgeodetail extends AbstractActivity {
         @Override
         public void run() {
             app.removeCacheFromCache(geocode);
-
-            final Map<String, String> params = new HashMap<String, String>();
-            params.put("geocode", cache.geocode);
-            searchId = base.searchByGeocode(params, 0, true);
+            searchId = base.searchByGeocode(cache.geocode, null, 0, true);
 
             handler.sendEmptyMessage(0);
         }

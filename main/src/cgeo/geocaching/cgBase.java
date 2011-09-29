@@ -2513,10 +2513,8 @@ public class cgBase {
         return searchId;
     }
 
-    public UUID searchByGeocode(Map<String, String> parameters, int reason, boolean forceReload) {
+    public UUID searchByGeocode(final String geocode, final String guid, final int reason, final boolean forceReload) {
         final cgSearch search = new cgSearch();
-        String geocode = parameters.get("geocode");
-        String guid = parameters.get("guid");
 
         if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
             Log.e(cgSettings.tag, "cgeoBase.searchByGeocode: No geocode nor guid given");
@@ -2524,13 +2522,11 @@ public class cgBase {
         }
 
         if (forceReload == false && reason == 0 && (app.isOffline(geocode, guid) || app.isThere(geocode, guid, true, true))) {
-            if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
-                geocode = app.getGeocode(guid);
-            }
+            final String realGeocode = StringUtils.isNotBlank(geocode) ? geocode : app.getGeocode(guid);
 
             List<cgCache> cacheList = new ArrayList<cgCache>();
-            cacheList.add(app.getCacheByGeocode(geocode, true, true, true, true, true, true));
-            search.addGeocode(geocode);
+            cacheList.add(app.getCacheByGeocode(realGeocode, true, true, true, true, true, true));
+            search.addGeocode(realGeocode);
 
             app.addSearch(search, cacheList, false, reason);
 
@@ -3586,15 +3582,11 @@ public class cgBase {
             if (cache != null) {
                 // only reload the cache, if it was already stored or has not all details (by checking the description)
                 if (cache.reason > 0 || StringUtils.isBlank(cache.description)) {
-                    final Map<String, String> params = new HashMap<String, String>();
-                    params.put("geocode", cache.geocode);
-                    final UUID searchId = searchByGeocode(params, listId, false);
+                    final UUID searchId = searchByGeocode(cache.geocode, null, listId, false);
                     cache = app.getCache(searchId);
                 }
             } else if (StringUtils.isNotBlank(geocode)) {
-                final Map<String, String> params = new HashMap<String, String>();
-                params.put("geocode", geocode);
-                final UUID searchId = searchByGeocode(params, listId, false);
+                final UUID searchId = searchByGeocode(geocode, null, listId, false);
                 cache = app.getCache(searchId);
             }
 
