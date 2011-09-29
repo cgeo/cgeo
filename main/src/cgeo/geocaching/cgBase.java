@@ -2561,34 +2561,17 @@ public class cgBase {
         return search.getCurrentId();
     }
 
-    public UUID searchByCoords(cgSearchThread thread, Map<String, String> parameters, int reason, boolean showCaptcha) {
+    public UUID searchByCoords(final cgSearchThread thread, final Geopoint coords, final String cacheType, final int reason, final boolean showCaptcha) {
         final cgSearch search = new cgSearch();
-        final String latitude = parameters.get("latitude");
-        final String longitude = parameters.get("longitude");
-        String cacheType = parameters.get("cachetype");
-
-        if (StringUtils.isBlank(latitude)) {
-            Log.e(cgSettings.tag, "cgeoBase.searchByCoords: No latitude given");
-            return null;
-        }
-
-        if (StringUtils.isBlank(longitude)) {
-            Log.e(cgSettings.tag, "cgeoBase.searchByCoords: No longitude given");
-            return null;
-        }
-
-        if (StringUtils.isBlank(cacheType)) {
-            cacheType = null;
-        }
 
         final Parameters params = new Parameters();
-        if (cacheType != null && cacheIDs.containsKey(cacheType)) {
+        if (StringUtils.isNotBlank(cacheType) && cacheIDs.containsKey(cacheType)) {
             params.put("tx", cacheIDs.get(cacheType));
         } else {
             params.put("tx", cacheIDs.get("all"));
         }
-        params.put("lat", latitude);
-        params.put("lng", longitude);
+        params.put("lat", Double.toString(coords.getLatitude()));
+        params.put("lng", Double.toString(coords.getLongitude()));
 
         final String uri = "http://www.geocaching.com/seek/nearest.aspx";
         final String fullUri = uri + "?" + prepareParameters(params, false, true);

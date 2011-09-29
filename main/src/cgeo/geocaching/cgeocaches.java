@@ -68,7 +68,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
@@ -1835,12 +1834,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            Map<String, String> params = new HashMap<String, String>();
-            params.put("latitude", String.format((Locale) null, "%.6f", coords.getLatitude()));
-            params.put("longitude", String.format((Locale) null, "%.6f", coords.getLongitude()));
-            params.put("cachetype", cachetype);
-
-            searchId = base.searchByCoords(this, params, 0, settings.showCaptcha);
+            searchId = base.searchByCoords(this, coords, cachetype, 0, settings.showCaptcha);
 
             handler.sendMessage(new Message());
         }
