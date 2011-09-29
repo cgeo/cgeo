@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.opencaching;
 
+import cgeo.geocaching.Parameters;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgImage;
@@ -55,11 +56,13 @@ final public class OkapiClient {
     private static final String USER_USERNAME = "username";
 
     private static final String SERVICE_CACHE = "/okapi/services/caches/geocache";
-    private static final String SERVICE_CACHE_FIELDS = "fields=" + cgBase.urlencode_rfc3986("code|name|location|type|status|owner|founds|notfounds|size|difficulty|terrain|rating|rating_votes|recommendations|description|hint|images|latest_logs|date_hidden");
+    private static final String SERVICE_CACHE_FIELDS = "code|name|location|type|status|owner|founds|notfounds|size|difficulty|terrain|rating|rating_votes|recommendations|description|hint|images|latest_logs|date_hidden";
 
     public static cgCache getCache(final String geoCode) {
-        final String params = "cache_code=" + geoCode + "&" + SERVICE_CACHE_FIELDS;
-        final JSONObject data = request(geoCode, SERVICE_CACHE, params, 1);
+        final Parameters params = new Parameters();
+        params.put("cache_code", geoCode);
+        params.put("fields", SERVICE_CACHE_FIELDS);
+        final JSONObject data = request(geoCode, SERVICE_CACHE, params);
 
         if (data == null) {
             return null;
@@ -243,8 +246,7 @@ final public class OkapiClient {
         return "other";
     }
 
-    // FIXME: document use of params and level, or remove them
-    private static JSONObject request(final String geoCode, final String service, final String params, final int level) {
+    private static JSONObject request(final String geoCode, final String service, final Parameters params) {
         final IConnector connector = ConnectorFactory.getConnector(geoCode);
         if (connector == null) {
             return null;
@@ -253,7 +255,8 @@ final public class OkapiClient {
             return null;
         }
 
-        final String uri = "http://" + connector.getHost() + service + "?" + params + ((ApiOpenCachingConnector) connector).getAuthentication(level);
-        return cgBase.requestJSON(uri);
+        final String uri = "http://" + connector.getHost() + service;
+        ((ApiOpenCachingConnector) connector).addAuthentication(params);
+        return cgBase.requestJSON(uri, params);
     }
 }

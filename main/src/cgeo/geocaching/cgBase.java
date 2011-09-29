@@ -3374,21 +3374,28 @@ public class cgBase {
             Log.i(cgSettings.tag, "Skipping caches found or hidden by user.");
         }
 
-        if (params != null) {
-            final List<String> paramsEncoded = new ArrayList<String>(params.size());
+        return prepareParameters(params);
+    }
 
-            for (final NameValuePair nameValue : params) {
-                final String key = nameValue.getName();
-                final String value = StringUtils.defaultString(nameValue.getValue());
-
-                // TODO: Document the justification of the legacy test below
-                paramsEncoded.add((key.charAt(0) != '^' ? key : "") + "=" + urlencode_rfc3986(value));
-            }
-
-            return StringUtils.join(paramsEncoded.toArray(), '&');
-        } else {
+    static private String prepareParameters(final Parameters params) {
+        if (params == null)
             return "";
+
+        final List<String> paramsEncoded = new ArrayList<String>(params.size());
+
+        for (final NameValuePair nameValue : params) {
+            final String key = nameValue.getName();
+            final String value = StringUtils.defaultString(nameValue.getValue());
+
+            // TODO: Document the justification of the legacy test below
+            paramsEncoded.add((key.charAt(0) != '^' ? key : "") + "=" + urlencode_rfc3986(value));
         }
+
+        return StringUtils.join(paramsEncoded.toArray(), '&');
+    }
+
+    static private String prepareParameters(final String baseUri, final Parameters params) {
+        return CollectionUtils.isNotEmpty(params) ? baseUri + "?" + prepareParameters(params) : baseUri;
     }
 
     public String[] requestViewstates(final String uri, final Parameters params, boolean xContentType, boolean my) {
@@ -3539,8 +3546,8 @@ public class cgBase {
         return StringUtils.join(StringUtils.split(data, " \n\r\t"), ' ');
     }
 
-    public static JSONObject requestJSON(final String uri) {
-        final HttpGet request = new HttpGet(uri);
+    public static JSONObject requestJSON(final String uri, final Parameters params) {
+        final HttpGet request = new HttpGet(prepareParameters(uri, params));
         request.setHeader("Accept", "application/json, text/javascript, */*; q=0.01");
         request.setHeader("Content-Type", "application/json; charset=UTF-8");
         request.setHeader("X-Requested-With", "XMLHttpRequest");
@@ -4015,11 +4022,12 @@ public class cgBase {
 
     public static Double getElevation(final Geopoint coords) {
         try {
-            final String uri = "http://maps.googleapis.com/maps/api/elevation/json?sensor=false&locations=" +
-                    String.format((Locale) null, "%.6f", coords.getLatitude()) + "," +
-                    String.format((Locale) null, "%.6f", coords.getLongitude());
-
-            final JSONObject response = requestJSON(uri);
+            final String uri = "http://maps.googleapis.com/maps/api/elevation/";
+            final Parameters params = new Parameters();
+            params.put("sensor", "false");
+            params.put("locations", String.format((Locale) null, "%.6f", coords.getLatitude()) + "," +
+                    String.format((Locale) null, "%.6f", coords.getLongitude()));
+            final JSONObject response = requestJSON(uri, params);
 
             if (response == null) {
                 return null;

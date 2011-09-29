@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.opencaching;
 
+import cgeo.geocaching.Parameters;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCacheWrap;
@@ -20,8 +21,8 @@ public class ApiOpenCachingConnector extends OpenCachingConnector implements ICo
         this.cK = cK;
     }
 
-    public String getAuthentication(int level) {
-        return CryptUtils.rot13("&pbafhzre_xrl=" + cK);
+    public void addAuthentication(final Parameters params) {
+        params.put(CryptUtils.rot13("pbafhzre_xrl"), CryptUtils.rot13(cK));
     }
 
     @Override
