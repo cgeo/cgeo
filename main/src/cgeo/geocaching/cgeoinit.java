@@ -487,7 +487,7 @@ public class cgeoinit extends AbstractActivity {
         }
     }
 
-    public void backup() {
+    public void backup(View view) {
         // avoid overwriting an existing backup with an empty database (can happen directly after reinstalling the app)
         if (app.getAllStoredCachesCount(true, null, null) == 0) {
             return;
@@ -514,7 +514,7 @@ public class cgeoinit extends AbstractActivity {
         }
     }
 
-    public void restore() {
+    public void restore(View view) {
         final boolean status = app.restoreDatabase();
 
         if (status) {

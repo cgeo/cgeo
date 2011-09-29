@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 
 import java.util.Locale;
 
@@ -37,7 +38,7 @@ public class cgeohelpers extends AbstractActivity {
         finish();
     }
 
-    public void installManual() {
+    public void installManual(View view) {
         final Locale loc = Locale.getDefault();
         final String language = loc.getLanguage();
 
@@ -49,15 +50,15 @@ public class cgeohelpers extends AbstractActivity {
         }
     }
 
-    public void installLocus() {
+    public void installLocus(View view) {
         installFromMarket("menion.android.locus");
     }
 
-    public void installGpsStatus() {
+    public void installGpsStatus(View view) {
         installFromMarket("com.eclipsim.gpsstatus2");
     }
 
-    public void installBluetoothGps() {
+    public void installBluetoothGps(View view) {
         installFromMarket("googoo.android.btgps");
     }
 }

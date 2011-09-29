@@ -996,7 +996,7 @@ public class cgeocaches extends AbstractListActivity {
                 setComparator(item, new GeocodeComparator());
                 return false;
             case MENU_SWITCH_LIST:
-                selectList();
+                selectList(null);
                 return false;
             case MENU_SORT_RATING:
                 setComparator(item, new RatingComparator());
@@ -2362,7 +2362,7 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
-    public void selectList() {
+    public void selectList(View view) {
         if (type.equals("offline") == false) {
             return;
         }
@@ -2522,7 +2522,7 @@ public class cgeocaches extends AbstractListActivity {
         alert.show();
     }
 
-    public void goMap() {
+    public void goMap(View view) {
         if (searchId == null || CollectionUtils.isEmpty(cacheList)) {
             showToast(res.getString(R.string.warn_no_cache_coord));
 
@@ -2536,7 +2536,7 @@ public class cgeocaches extends AbstractListActivity {
         startActivity(mapIntent);
     }
 
-    public void goManual() {
+    public void goManual(View view) {
         if (type != null && type.equals("offline")) {
             ActivityMixin.goManual(this, "c:geo-stored");
         } else if (type != null && type.equals("history")) {

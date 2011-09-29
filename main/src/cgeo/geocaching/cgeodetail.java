@@ -1912,7 +1912,7 @@ public class cgeodetail extends AbstractActivity {
         }
     }
 
-    public void goCompass() {
+    public void goCompass(View view) {
         if (cache == null || cache.coords == null) {
             showToast(res.getString(R.string.cache_coordinates_no));
 
