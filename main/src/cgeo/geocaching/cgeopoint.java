@@ -45,19 +45,21 @@ public class cgeopoint extends AbstractActivity {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, final View convertView, final ViewGroup parent) {
 
             cgDestination loc = getItem(position);
 
-            if (convertView == null) {
-                convertView = getInflater().inflate(R.layout.simple_way_point,
+            View v = convertView;
+
+            if (v == null) {
+                v = getInflater().inflate(R.layout.simple_way_point,
                         null);
             }
-            TextView longitude = (TextView) convertView
+            TextView longitude = (TextView) v
                     .findViewById(R.id.simple_way_point_longitude);
-            TextView latitude = (TextView) convertView
+            TextView latitude = (TextView) v
                     .findViewById(R.id.simple_way_point_latitude);
-            TextView date = (TextView) convertView.findViewById(R.id.date);
+            TextView date = (TextView) v.findViewById(R.id.date);
 
             String lonString = cgBase.formatLongitude(loc.getCoords().getLongitude(), true);
             String latString = cgBase.formatLatitude(loc.getCoords().getLatitude(), true);
@@ -66,7 +68,7 @@ public class cgeopoint extends AbstractActivity {
             latitude.setText(latString);
             date.setText(cgBase.formatShortDateTime(getContext(), loc.getDate()));
 
-            return convertView;
+            return v;
         }
 
         private LayoutInflater getInflater() {

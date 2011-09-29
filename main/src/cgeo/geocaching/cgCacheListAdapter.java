@@ -354,7 +354,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
     }
 
     @Override
-    public View getView(int position, View rowView, ViewGroup parent) {
+    public View getView(final int position, final View rowView, final ViewGroup parent) {
         if (inflater == null) {
             inflater = ((Activity) getContext()).getLayoutInflater();
         }
@@ -366,29 +366,31 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
         cgCache cache = getItem(position);
 
-        if (rowView == null) {
-            rowView = (View) inflater.inflate(R.layout.cache, null);
+        View v = rowView;
+
+        if (v == null) {
+            v = (View) inflater.inflate(R.layout.cache, null);
 
             holder = new cgCacheView();
-            holder.oneCache = (RelativeLayout) rowView.findViewById(R.id.one_cache);
-            holder.checkbox = (CheckBox) rowView.findViewById(R.id.checkbox);
-            holder.oneInfo = (RelativeLayout) rowView.findViewById(R.id.one_info);
-            holder.oneCheckbox = (RelativeLayout) rowView.findViewById(R.id.one_checkbox);
-            holder.logStatusMark = (ImageView) rowView.findViewById(R.id.log_status_mark);
-            holder.oneCache = (RelativeLayout) rowView.findViewById(R.id.one_cache);
-            holder.text = (TextView) rowView.findViewById(R.id.text);
-            holder.directionLayout = (RelativeLayout) rowView.findViewById(R.id.direction_layout);
-            holder.distance = (cgDistanceView) rowView.findViewById(R.id.distance);
-            holder.direction = (cgCompassMini) rowView.findViewById(R.id.direction);
-            holder.dirImgLayout = (RelativeLayout) rowView.findViewById(R.id.dirimg_layout);
-            holder.dirImg = (ImageView) rowView.findViewById(R.id.dirimg);
-            holder.inventory = (RelativeLayout) rowView.findViewById(R.id.inventory);
-            holder.favourite = (TextView) rowView.findViewById(R.id.favourite);
-            holder.info = (TextView) rowView.findViewById(R.id.info);
+            holder.oneCache = (RelativeLayout) v.findViewById(R.id.one_cache);
+            holder.checkbox = (CheckBox) v.findViewById(R.id.checkbox);
+            holder.oneInfo = (RelativeLayout) v.findViewById(R.id.one_info);
+            holder.oneCheckbox = (RelativeLayout) v.findViewById(R.id.one_checkbox);
+            holder.logStatusMark = (ImageView) v.findViewById(R.id.log_status_mark);
+            holder.oneCache = (RelativeLayout) v.findViewById(R.id.one_cache);
+            holder.text = (TextView) v.findViewById(R.id.text);
+            holder.directionLayout = (RelativeLayout) v.findViewById(R.id.direction_layout);
+            holder.distance = (cgDistanceView) v.findViewById(R.id.distance);
+            holder.direction = (cgCompassMini) v.findViewById(R.id.direction);
+            holder.dirImgLayout = (RelativeLayout) v.findViewById(R.id.dirimg_layout);
+            holder.dirImg = (ImageView) v.findViewById(R.id.dirimg);
+            holder.inventory = (RelativeLayout) v.findViewById(R.id.inventory);
+            holder.favourite = (TextView) v.findViewById(R.id.favourite);
+            holder.info = (TextView) v.findViewById(R.id.info);
 
-            rowView.setTag(holder);
+            v.setTag(holder);
         } else {
-            holder = (cgCacheView) rowView.getTag();
+            holder = (cgCacheView) v.getTag();
         }
 
         if (cache.own) {
@@ -410,10 +412,10 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         }
 
         final touchListener touchLst = new touchListener(cache.geocode, cache.name, cache);
-        rowView.setOnClickListener(touchLst);
-        rowView.setOnLongClickListener(touchLst);
-        rowView.setOnTouchListener(touchLst);
-        rowView.setLongClickable(true);
+        v.setOnClickListener(touchLst);
+        v.setOnLongClickListener(touchLst);
+        v.setOnTouchListener(touchLst);
+        v.setLongClickable(true);
 
         if (selectMode) {
             if (cache.statusCheckedView) {
@@ -628,7 +630,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         }
         holder.info.setText(cacheInfo.toString());
 
-        return rowView;
+        return v;
     }
 
     @Override

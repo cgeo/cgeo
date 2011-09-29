@@ -23,7 +23,7 @@ public class cgGPXListAdapter extends ArrayAdapter<File> {
     }
 
     @Override
-    public View getView(int position, View rowView, ViewGroup parent) {
+    public View getView(final int position, final View rowView, final ViewGroup parent) {
         if (inflater == null)
             inflater = ((Activity) getContext()).getLayoutInflater();
 
@@ -34,25 +34,27 @@ public class cgGPXListAdapter extends ArrayAdapter<File> {
 
         File file = getItem(position);
 
-        if (rowView == null) {
-            rowView = (View) inflater.inflate(R.layout.gpx_item, null);
+        View v = rowView;
+
+        if (v == null) {
+            v = (View) inflater.inflate(R.layout.gpx_item, null);
 
             holder = new cgGPXView();
-            holder.filepath = (TextView) rowView.findViewById(R.id.filepath);
-            holder.filename = (TextView) rowView.findViewById(R.id.filename);
+            holder.filepath = (TextView) v.findViewById(R.id.filepath);
+            holder.filename = (TextView) v.findViewById(R.id.filename);
 
-            rowView.setTag(holder);
+            v.setTag(holder);
         } else {
-            holder = (cgGPXView) rowView.getTag();
+            holder = (cgGPXView) v.getTag();
         }
 
         final touchListener touchLst = new touchListener(file);
-        rowView.setOnClickListener(touchLst);
+        v.setOnClickListener(touchLst);
 
         holder.filepath.setText(file.getParent());
         holder.filename.setText(file.getName());
 
-        return rowView;
+        return v;
     }
 
     @Override
