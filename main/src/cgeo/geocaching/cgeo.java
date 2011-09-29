@@ -604,11 +604,19 @@ public class cgeo extends AbstractActivity {
         }
     }
 
+    /**
+     * @param v
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void cgeoFindOnMap(View v) {
         findViewById(R.id.map).setPressed(true);
         context.startActivity(new Intent(context, settings.getMapFactory().getMapClass()));
     }
 
+    /**
+     * @param v
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void cgeoFindNearest(View v) {
         if (geo == null) {
             return;
@@ -623,6 +631,10 @@ public class cgeo extends AbstractActivity {
         context.startActivity(cachesIntent);
     }
 
+    /**
+     * @param v
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void cgeoFindByOffline(View v) {
         findViewById(R.id.search_offline).setPressed(true);
         final Intent cachesIntent = new Intent(context, cgeocaches.class);
@@ -630,16 +642,28 @@ public class cgeo extends AbstractActivity {
         context.startActivity(cachesIntent);
     }
 
+    /**
+     * @param v
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void cgeoSearch(View v) {
         findViewById(R.id.advanced_button).setPressed(true);
         context.startActivity(new Intent(context, cgeoadvsearch.class));
     }
 
+    /**
+     * @param v
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void cgeoPoint(View v) {
         findViewById(R.id.any_button).setPressed(true);
         context.startActivity(new Intent(context, cgeopoint.class));
     }
 
+    /**
+     * @param v
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void cgeoFilter(View v) {
         findViewById(R.id.filter_button).setPressed(true);
         findViewById(R.id.filter_button).performClick();
@@ -755,10 +779,18 @@ public class cgeo extends AbstractActivity {
         }
     }
 
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void showAbout(View view) {
         context.startActivity(new Intent(context, cgeoabout.class));
     }
 
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void goSearch(View view) {
         onSearchRequested();
     }

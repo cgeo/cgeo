@@ -1912,6 +1912,10 @@ public class cgeodetail extends AbstractActivity {
         }
     }
 
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void goCompass(View view) {
         if (cache == null || cache.coords == null) {
             showToast(res.getString(R.string.cache_coordinates_no));

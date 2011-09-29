@@ -2362,6 +2362,10 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void selectList(View view) {
         if (type.equals("offline") == false) {
             return;
@@ -2522,6 +2526,10 @@ public class cgeocaches extends AbstractListActivity {
         alert.show();
     }
 
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void goMap(View view) {
         if (searchId == null || CollectionUtils.isEmpty(cacheList)) {
             showToast(res.getString(R.string.warn_no_cache_coord));
