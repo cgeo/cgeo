@@ -3408,13 +3408,32 @@ public class cgBase {
     }
 
     /**
-     * Replace the characters \n, \r and \t with a space
-     *
+     * Replace the characters \n, \r and \t with a space. The input are complete HTML pages.
+     * This method must be fast, but may not lead to the shortest replacement String.
+     * 
      * @param buffer
      *            The data
      */
     public static String replaceWhitespace(final String data) {
-        return StringUtils.join(StringUtils.split(data, " \n\r\t"), ' ');
+        // YOU ARE ONLY ALLOWED TO CHANGE THIS CODE IF YOU CAN PROVE IT BECAME FASTER ON A DEVICE
+        // see WhitespaceTest in the test project
+        final int length = data.length();
+        final char[] chars = new char[length];
+        data.getChars(0, length, chars, 0);
+        int resultSize = 0;
+        boolean lastWasWhitespace = true;
+        for (char c : chars) {
+            if (c == ' ' || c == '\n' || c == '\r' || c == '\t') {
+                if (!lastWasWhitespace) {
+                    chars[resultSize++] = ' ';
+                }
+                lastWasWhitespace = true;
+            } else {
+                chars[resultSize++] = c;
+                lastWasWhitespace = false;
+            }
+        }
+        return String.valueOf(chars, 0, resultSize);
     }
 
     public static JSONObject requestJSON(final String uri, final Parameters params) {
@@ -3972,7 +3991,7 @@ public class cgBase {
     /**
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 sept. à 12:35".
-     *
+     * 
      * @param context
      *            a Context
      * @param date

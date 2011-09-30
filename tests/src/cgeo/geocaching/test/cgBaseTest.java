@@ -10,7 +10,7 @@ import junit.framework.Assert;
 public class cgBaseTest extends AndroidTestCase {
 
     public void testReplaceWhitespaces() {
-        Assert.assertEquals("foo bar baz", cgBase.replaceWhitespace(new String("  foo\n\tbar   \r   baz  ")));
+        Assert.assertEquals("foo bar baz ", cgBase.replaceWhitespace(new String("  foo\n\tbar   \r   baz  ")));
     }
 
 }

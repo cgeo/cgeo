@@ -13,7 +13,7 @@ public abstract class MockedCache implements ICache {
 
     final protected Geopoint coords;
 
-    public MockedCache(final Geopoint coords) {
+    protected MockedCache(final Geopoint coords) {
         this.coords = coords;
     }
 
@@ -25,13 +25,13 @@ public abstract class MockedCache implements ICache {
     public String getData() {
         try {
             final InputStream is = this.getClass().getResourceAsStream("/cgeo/geocaching/test/mock/"+getGeocode()+".html");
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            final BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
             final StringBuffer buffer = new StringBuffer();
             String line = null;
 
             while ((line = br.readLine()) != null) {
-                buffer.append(line).append("\n");
+                buffer.append(line).append('\n');
             }
 
             br.close();
