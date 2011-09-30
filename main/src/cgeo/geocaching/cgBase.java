@@ -2334,35 +2334,6 @@ public class cgBase {
         return trackables;
     }
 
-    public static String stripParagraphs(String text) {
-        if (StringUtils.isBlank(text)) {
-            return "";
-        }
-
-        final Pattern patternP = Pattern.compile("(<p>|</p>|<br \\/>|<br>)", Pattern.CASE_INSENSITIVE);
-        final Pattern patternP2 = Pattern.compile("([ ]+)", Pattern.CASE_INSENSITIVE);
-        final Matcher matcherP = patternP.matcher(text);
-        final Matcher matcherP2 = patternP2.matcher(text);
-
-        matcherP.replaceAll(" ");
-        matcherP2.replaceAll(" ");
-
-        return text.trim();
-    }
-
-    public static String stripTags(String text) {
-        if (StringUtils.isBlank(text)) {
-            return "";
-        }
-
-        final Pattern patternP = Pattern.compile("(<[^>]+>)", Pattern.CASE_INSENSITIVE);
-        final Matcher matcherP = patternP.matcher(text);
-
-        matcherP.replaceAll(" ");
-
-        return text.trim();
-    }
-
     public String getHumanDistance(final Float distance) {
         if (distance == null) {
             return "?";
@@ -2397,22 +2368,6 @@ public class cgBase {
             } else {
                 return String.format(Locale.getDefault(), "%.2f", Double.valueOf(Math.round(distance * 1000.0 * 100.0) / 100.0)) + " m";
             }
-        }
-    }
-
-    public String getHumanSpeed(float speed) {
-        double kph = speed * 3.6;
-        String unit = "km/h";
-
-        if (this.settings.units == cgSettings.unitsImperial) {
-            kph /= miles2km;
-            unit = "mph";
-        }
-
-        if (kph < 10.0) {
-            return String.format(Locale.getDefault(), "%.1f", Double.valueOf((Math.round(kph * 10.0) / 10.0))) + " " + unit;
-        } else {
-            return String.format(Locale.getDefault(), "%.0f", Double.valueOf(Math.round(kph))) + " " + unit;
         }
     }
 
