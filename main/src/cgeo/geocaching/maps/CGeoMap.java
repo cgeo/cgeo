@@ -111,16 +111,20 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     // threads
     private LoadTimer loadTimer = null;
     private UsersTimer usersTimer = null;
-    //FIXME should be members of LoadTimer
+    //FIXME should be members of LoadTimer since started by it.
     private LoadThread loadThread = null;
     private DownloadThread downloadThread = null;
     private DisplayThread displayThread = null;
-    //FIXME should be members of UsersTimer
+    //FIXME should be members of UsersTimer since started by it.
     private UsersThread usersThread = null;
     private DisplayUsersThread displayUsersThread = null;
+    //FIXME move to OnOptionsItemSelected
     private LoadDetails loadDetailsThread = null;
+    /** Time of last {@link LoadThread} run */
     private volatile long loadThreadRun = 0L;
+    /** Time of last {@link UsersThread} run */
     private volatile long usersThreadRun = 0L;
+    //Interthread communication flag
     private volatile boolean downloaded = false;
     // overlays
     private CachesOverlay overlayCaches = null;
@@ -130,7 +134,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     // data for overlays
     private int cachesCnt = 0;
     private Map<Integer, Drawable> iconsCache = new HashMap<Integer, Drawable>();
+    /** List of caches in the viewport */
     private List<cgCache> caches = new ArrayList<cgCache>();
+    /** List of users in the viewport */
     private List<cgUser> users = new ArrayList<cgUser>();
     private List<cgCoord> coordinates = new ArrayList<cgCoord>();
     // storing for offline
@@ -338,6 +344,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
 
         // live or death
+        //FIXME What?
         if (searchIdIntent == null && geocodeIntent == null && coordsIntent == null) {
             live = true;
         } else {
