@@ -6,3 +6,5 @@
 /tests/bin/
 /tests/gen/
 /main/project/localization/*.missing
+/main/project/attributes/drawable/*
+/main/project/attributes/iconlist1res.html
