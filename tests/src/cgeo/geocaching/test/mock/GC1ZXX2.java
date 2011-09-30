@@ -1,9 +1,14 @@
 package cgeo.geocaching.test.mock;
 
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.geopoint.Geopoint;
 
 
 public class GC1ZXX2 extends MockedCache {
+
+    public GC1ZXX2() {
+        super(new Geopoint(52373217, 9710800));
+    }
 
     @Override
     public Float getDifficulty() {
@@ -13,16 +18,6 @@ public class GC1ZXX2 extends MockedCache {
     @Override
     public String getGeocode() {
         return "GC1ZXX2";
-    }
-
-    @Override
-    public String getLatitude() {
-        return "N 52° 22.393";
-    }
-
-    @Override
-    public String getLongitude() {
-        return "E 009° 42.648";
     }
 
     @Override
