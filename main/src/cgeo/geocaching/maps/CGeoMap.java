@@ -57,6 +57,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * Class representing the Map in c:geo
+ */
 public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory {
 
     private static final int MENU_SELECT_MAPVIEW = 1;
@@ -105,7 +108,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private Integer centerLongitudeUsers = null;
     private Integer spanLatitudeUsers = null;
     private Integer spanLongitudeUsers = null;
-    // thread
+    // threads
     private LoadTimer loadTimer = null;
     private UsersTimer usersTimer = null;
     private LoadThread loadThread = null;
@@ -981,7 +984,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
     }
 
-    // loading timer
+    /**
+     * Timer triggering every 250 ms to start the loader threads for displaying user.
+     */
     private class UsersTimer extends Thread {
 
         public UsersTimer() {
@@ -1069,6 +1074,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
     /**
      * Worker thread that loads caches and waypoints from the database and then spawns the download thread.
+     * started by LoadTimer
+     *
+     * @see LoadTimer
+     * @see DownloadThread
      */
 
     private class LoadThread extends DoThread {
@@ -1177,6 +1186,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
     /**
      * Worker thread downloading caches from the internet.
+     * Started by {@link LoadThread}
      */
 
     private class DownloadThread extends DoThread {
@@ -1260,7 +1270,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     }
 
     /**
-     * Display (down)loaded caches
+     * Thread to Display (down)loaded caches. Started by {@link LoadThread} and {@link DownloadThread}
      */
     private class DisplayThread extends DoThread {
 
@@ -1379,7 +1389,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
     }
 
-    // load users from Go 4 Cache
+    /**
+     * Thread to load users from Go 4 Cache
+     */
+
     private class UsersThread extends DoThread {
 
         public UsersThread(long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
@@ -1432,7 +1445,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
     }
 
-    // display users of Go 4 Cache
+    /**
+     * Thread to display users of Go 4 Cache started from loadUserThread
+     */
     private class DisplayUsersThread extends DoThread {
 
         private List<cgUser> users = null;
@@ -1485,7 +1500,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
     }
 
-    // display one point
+    /**
+     * Thread to display one point. Started on opening if in single mode.
+     */
     private class DisplayPointThread extends Thread {
 
         @Override
@@ -1570,7 +1587,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         return loading;
     }
 
-    // store caches
+    /**
+     * Thread to store caches. Started by Activity.
+     */
+
     private class LoadDetails extends Thread {
 
         private Handler handler = null;
