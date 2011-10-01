@@ -32,8 +32,8 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
 
         @Override
         public void handleMessage(Message msg) {
-            if (msg.obj != null && parseDialog != null) {
-                parseDialog.setMessage(res.getString(R.string.gpx_import_loading_stored) + " " + (Integer) msg.obj);
+            if (parseDialog != null) {
+                parseDialog.setMessage(res.getString(msg.arg1) + " " + msg.arg2);
             }
         }
     };

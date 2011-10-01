@@ -595,6 +595,9 @@
   <string name="file_title_searching">Searching</string>
 
   <!-- gpx -->
+  <string name="gpx_import_loading_caches">Loading caches from .gpx file\nRead:</string>
+  <string name="gpx_import_loading_waypoints">Loading waypoints from .gpx file\nRead:</string>
+  <string name="gpx_import_storing">Writing caches to database\nStored:</string>
   <string name="gpx_import_loading_stored">Loading caches from .gpx file\nStored:</string>
   <string name="gpx_import_no_files">Sorry, c:geo did not find any .gpx files.</string>
   <string name="gpx_import_caches_imported">caches imported</string>
