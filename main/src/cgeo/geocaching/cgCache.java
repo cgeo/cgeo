@@ -452,6 +452,26 @@ public class cgCache implements ICache {
         return name;
     }
 
+    @Override
+    public String getCacheId() {
+        return cacheId;
+    }
+
+    @Override
+    public String getGuid() {
+        return guid;
+    }
+
+    @Override
+    public String getLocation() {
+        return location;
+    }
+
+    @Override
+    public String getPersonalNote() {
+        return personalNote;
+    }
+
     public boolean supportsUserActions() {
         return getConnector().supportsUserActions();
     }

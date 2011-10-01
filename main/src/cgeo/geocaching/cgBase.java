@@ -9,6 +9,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocParser;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CollectionUtils;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -93,29 +94,11 @@ import javax.net.ssl.X509TrustManager;
 
 public class cgBase {
 
-    private final static Pattern patternGeocode = Pattern.compile("<meta name=\"og:url\" content=\"[^\"]+/(GC[0-9A-Z]+)\"[^>]*>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern patternCacheId = Pattern.compile("/seek/log\\.aspx\\?ID=(\\d+)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern patternCacheGuid = Pattern.compile(Pattern.quote("&wid=") + "([0-9a-z\\-]+)" + Pattern.quote("&"), Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private final static Pattern patternType = Pattern.compile("<img src=\"[^\"]*/WptTypes/\\d+\\.gif\" alt=\"([^\"]+)\" (title=\"[^\"]*\" )?width=\"32\" height=\"32\"[^>]*>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-
-    private final static Pattern patternName = Pattern.compile("<h2[^>]*>[^<]*<span id=\"ctl00_ContentBody_CacheName\">([^<]+)<\\/span>[^<]*<\\/h2>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern patternSize = Pattern.compile("<div class=\"CacheSize[^\"]*\">[^<]*<p[^>]*>[^S]*Size[^:]*:[^<]*<span[^>]*>[^<]*<img src=\"[^\"]*/icons/container/[a-z_]+\\.gif\" alt=\"Size: ([^\"]+)\"[^>]*>[^<]*<small>[^<]*</small>[^<]*</span>[^<]*</p>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern patternDifficulty = Pattern.compile("<span id=\"ctl00_ContentBody_uxLegendScale\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\" alt=\"[^\"]+\"[^>]*>[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern patternTerrain = Pattern.compile("<span id=\"ctl00_ContentBody_Localize6\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\" alt=\"[^\"]+\"[^>]*>[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private final static Pattern patternOwner = Pattern.compile("<span class=\"minorCacheDetails\">\\W*An?(\\W*Event)?\\W*cache\\W*by[^<]*<a href=\"[^\"]+\">([^<]+)</a>[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern patternOwnerReal = Pattern.compile("<a id=\"ctl00_ContentBody_uxFindLinksHiddenByThisUser\" href=\"[^\"]*/seek/nearest\\.aspx\\?u=*([^\"]+)\">[^<]+</a>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternHidden = Pattern.compile("<span[^>]*>\\W*Hidden[\\s:]*([^<]+)</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private final static Pattern patternHiddenEvent = Pattern.compile("<span[^>]*>\\W*Event\\W*Date[^:]*:([^<]*)</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private final static Pattern patternFavourite = Pattern.compile("<a id=\"uxFavContainerLink\"[^>]*>[^<]*<div[^<]*<span class=\"favorite-value\">[^\\d]*([0-9]+)[^\\d^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-
-    private final static Pattern patternFound = Pattern.compile("<p>[^<]*<a id=\"ctl00_ContentBody_hlFoundItLog\"[^<]*<img src=\".*/images/stockholm/16x16/check\\.gif\"[^>]*>[^<]*</a>[^<]*</p>", Pattern.CASE_INSENSITIVE);
-    private final static Pattern patternFoundAlternative = Pattern.compile("<div class=\"StatusInformationWidget FavoriteWidget\"", Pattern.CASE_INSENSITIVE);
-    private final static Pattern patternLatLon = Pattern.compile("<span id=\"ctl00_ContentBody_LatLon\"[^>]*>(<b>)?([^<]*)(<\\/b>)?<\\/span>", Pattern.CASE_INSENSITIVE);
-    private final static Pattern patternLocation = Pattern.compile("<span id=\"ctl00_ContentBody_Location\"[^>]*>In ([^<]*)", Pattern.CASE_INSENSITIVE);
-    private final static Pattern patternHint = Pattern.compile("<div id=\"div_hint\"[^>]*>(.*?)</div>", Pattern.CASE_INSENSITIVE);
-    private final static Pattern patternPersonalNote = Pattern.compile("<p id=\"cache_note\"[^>]*>([^<]*)</p>", Pattern.CASE_INSENSITIVE);
-    private final static Pattern patternDescShort = Pattern.compile("<div class=\"UserSuppliedContent\">[^<]*<span id=\"ctl00_ContentBody_ShortDescription\"[^>]*>((?:(?!</span>[^\\w^<]*</div>).)*)</span>[^\\w^<]*</div>", Pattern.CASE_INSENSITIVE);
-    private final static Pattern patternDesc = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>" + "(.*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternCountLogs = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p(.+?)<\\/p><\\/span>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternCountLog = Pattern.compile("src=\"\\/images\\/icons\\/(.+?).gif\"[^>]+> (\\d*[,.]?\\d+)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private final static Pattern patternAttributes = Pattern.compile("<h3 class=\"WidgetHeader\">[^<]*<img[^>]+>\\W*Attributes[^<]*</h3>[^<]*<div class=\"WidgetBody\">(([^<]*<img src=\"[^\"]+\" alt=\"[^\"]+\"[^>]*>)+)[^<]*<p", Pattern.CASE_INSENSITIVE);
@@ -1092,59 +1075,20 @@ public class cgBase {
         cache.reason = reason;
 
         // cache geocode
-        try {
-            final Matcher matcherGeocode = patternGeocode.matcher(page);
-            if (matcherGeocode.find() && matcherGeocode.groupCount() > 0) {
-                cache.geocode = getMatch(matcherGeocode.group(1));
-            }
-        } catch (Exception e) {
-            // failed to parse cache geocode
-            Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache geocode");
-        }
+        cache.geocode = BaseUtils.getMatch(page, Constants.PATTERN_GEOCODE, 1, cache.geocode);
 
         // cache id
-        try {
-            final Matcher matcherCacheId = patternCacheId.matcher(page);
-            if (matcherCacheId.find() && matcherCacheId.groupCount() > 0) {
-                cache.cacheId = getMatch(matcherCacheId.group(1));
-            }
-        } catch (Exception e) {
-            // failed to parse cache id
-            Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache id");
-        }
+        cache.cacheId = BaseUtils.getMatch(page, Constants.PATTERN_CACHEID, 1, cache.cacheId);
 
         // cache guid
-        try {
-            final Matcher matcherCacheGuid = patternCacheGuid.matcher(page);
-            if (matcherCacheGuid.find() && matcherCacheGuid.groupCount() > 0) {
-                cache.guid = getMatch(matcherCacheGuid.group(1));
-            }
-        } catch (Exception e) {
-            // failed to parse cache guid
-            Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache guid");
-        }
+        cache.guid = BaseUtils.getMatch(page, Constants.PATTERN_GUID, 1, cache.guid);
 
         // name
-        try {
-            final Matcher matcherName = patternName.matcher(page);
-            if (matcherName.find() && matcherName.groupCount() > 0) {
-                cache.name = Html.fromHtml(matcherName.group(1)).toString();
-            }
-        } catch (Exception e) {
-            // failed to parse cache name
-            Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache name");
-        }
+        cache.name = Html.fromHtml(BaseUtils.getMatch(page, Constants.PATTERN_NAME, 1, cache.name)).toString();
 
         // owner real name
-        try {
-            final Matcher matcherOwnerReal = patternOwnerReal.matcher(page);
-            if (matcherOwnerReal.find() && matcherOwnerReal.groupCount() > 0) {
-                cache.ownerReal = URLDecoder.decode(matcherOwnerReal.group(1));
-            }
-        } catch (Exception e) {
-            // failed to parse owner real name
-            Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache owner real name");
-        }
+        // URLDecoder.decode() neccessary here ?
+        cache.ownerReal = URLDecoder.decode(BaseUtils.getMatch(page, Constants.PATTERN_OWNERREAL, 1, cache.ownerReal));
 
         final String username = settings.getUsername();
         if (cache.ownerReal != null && username != null && cache.ownerReal.equalsIgnoreCase(username)) {
@@ -1172,25 +1116,15 @@ public class cgBase {
 
         if (StringUtils.isNotBlank(tableInside)) {
             // cache terrain
-            try {
-                final Matcher matcherTerrain = patternTerrain.matcher(tableInside);
-                if (matcherTerrain.find() && matcherTerrain.groupCount() > 0) {
-                    cache.terrain = new Float(Pattern.compile("_").matcher(matcherTerrain.group(1)).replaceAll("."));
-                }
-            } catch (Exception e) {
-                // failed to parse terrain
-                Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache terrain");
+            String result = BaseUtils.getMatch(tableInside, Constants.PATTERN_TERRAIN, 1, null);
+            if (result != null) {
+                cache.terrain = new Float(Pattern.compile("_").matcher(result).replaceAll("."));
             }
 
             // cache difficulty
-            try {
-                final Matcher matcherDifficulty = patternDifficulty.matcher(tableInside);
-                if (matcherDifficulty.find() && matcherDifficulty.groupCount() > 0) {
-                    cache.difficulty = new Float(Pattern.compile("_").matcher(matcherDifficulty.group(1)).replaceAll("."));
-                }
-            } catch (Exception e) {
-                // failed to parse difficulty
-                Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache difficulty");
+            result = BaseUtils.getMatch(tableInside, Constants.PATTERN_DIFFICULTY, 1, null);
+            if (result != null) {
+                cache.difficulty = new Float(Pattern.compile("_").matcher(result).replaceAll("."));
             }
 
             // owner
@@ -1240,19 +1174,11 @@ public class cgBase {
             }
 
             // cache size
-            try {
-                final Matcher matcherSize = patternSize.matcher(tableInside);
-                if (matcherSize.find() && matcherSize.groupCount() > 0) {
-                    cache.size = CacheSize.FIND_BY_ID.get(getMatch(matcherSize.group(1)).toLowerCase());
-                }
-            } catch (Exception e) {
-                // failed to parse size
-                Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache size");
-            }
+            cache.size = CacheSize.FIND_BY_ID.get(BaseUtils.getMatch(tableInside, Constants.PATTERN_SIZE, 1, CacheSize.NOT_CHOSEN.id).toLowerCase());
         }
 
         // cache found
-        cache.found = patternFound.matcher(page).find() || patternFoundAlternative.matcher(page).find();
+        cache.found = Constants.PATTERN_FOUND.matcher(page).find() || Constants.PATTERN_FOUND_ALTERNATIVE.matcher(page).find();
 
         // cache type
         try {
@@ -1275,32 +1201,18 @@ public class cgBase {
         }
 
         // latitude and logitude
-        try {
-            final Matcher matcherLatLon = patternLatLon.matcher(page);
-            if (matcherLatLon.find() && matcherLatLon.groupCount() > 0) {
-                cache.latlon = getMatch(matcherLatLon.group(2)); // first is <b>
-                cache.coords = new Geopoint(cache.latlon);
-                cache.reliableLatLon = true;
-            }
-        } catch (Exception e) {
-            // failed to parse latitude and/or longitude
-            Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache coordinates");
+        cache.latlon = BaseUtils.getMatch(page, Constants.PATTERN_LATLON, 1, cache.latlon);
+        if (StringUtils.isNotEmpty(cache.latlon)) {
+            cache.coords = new Geopoint(cache.latlon);
+            cache.reliableLatLon = true;
         }
 
         // cache location
-        try {
-            final Matcher matcherLocation = patternLocation.matcher(page);
-            if (matcherLocation.find() && matcherLocation.groupCount() > 0) {
-                cache.location = getMatch(matcherLocation.group(1));
-            }
-        } catch (Exception e) {
-            // failed to parse location
-            Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache location");
-        }
+        cache.location = BaseUtils.getMatch(page, Constants.PATTERN_LOCATION, 1, cache.location);
 
         // cache hint
         try {
-            final Matcher matcherHint = patternHint.matcher(page);
+            final Matcher matcherHint = Constants.PATTERN_HINT.matcher(page);
             if (matcherHint.find() && matcherHint.group(1) != null) {
                 // replace linebreak and paragraph tags
                 String hint = Pattern.compile("<(br|p)[^>]*>").matcher(matcherHint.group(1)).replaceAll("\n");
@@ -1340,37 +1252,13 @@ public class cgBase {
          */
 
         // cache personal note
-        try {
-            final Matcher matcherPersonalNote = patternPersonalNote.matcher(page);
-            if (matcherPersonalNote.find() && matcherPersonalNote.groupCount() > 0) {
-                cache.personalNote = getMatch(matcherPersonalNote.group(1));
-            }
-        } catch (Exception e) {
-            // failed to parse cache personal note
-            Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache personal note");
-        }
+        cache.personalNote = BaseUtils.getMatch(page, Constants.PATTERN_PERSONALNOTE, 1, cache.personalNote);
 
         // cache short description
-        try {
-            final Matcher matcherDescShort = patternDescShort.matcher(page);
-            if (matcherDescShort.find() && matcherDescShort.groupCount() > 0) {
-                cache.shortdesc = getMatch(matcherDescShort.group(1));
-            }
-        } catch (Exception e) {
-            // failed to parse short description
-            Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache short description");
-        }
+        cache.shortdesc = BaseUtils.getMatch(page, Constants.PATTERN_SHORTDESC, 1, cache.shortdesc);
 
         // cache description
-        try {
-            final Matcher matcherDesc = patternDesc.matcher(page);
-            if (matcherDesc.find() && matcherDesc.groupCount() > 0) {
-                cache.description = getMatch(matcherDesc.group(1));
-            }
-        } catch (Exception e) {
-            // failed to parse short description
-            Log.w(cgSettings.tag, "cgeoBase.parseCache: Failed to parse cache description");
-        }
+        cache.description = BaseUtils.getMatch(page, Constants.PATTERN_DESC, 1, cache.description);
 
         // cache attributes
         try {
@@ -1770,16 +1658,6 @@ public class cgBase {
         if (StringUtils.isBlank(cache.location)) {
             Log.w(cgSettings.tag, "location not parsed correctly");
         }
-    }
-
-    private static String getMatch(String match) {
-        // creating a new String via String constructor is necessary here!!
-        return new String(match.trim());
-        // Java copies the whole page String, when matching with regular expressions
-        // later this would block the garbage collector, as we only need tiny parts of the page
-        // see http://developer.android.com/reference/java/lang/String.html#backing_array
-
-        // And BTW: You cannot even see that effect in the debugger, but must use a separate memory profiler!
     }
 
     public Date parseGcCustomDate(final String input)
@@ -3410,12 +3288,12 @@ public class cgBase {
     /**
      * Replace the characters \n, \r and \t with a space. The input are complete HTML pages.
      * This method must be fast, but may not lead to the shortest replacement String.
-     * 
+     *
      * @param buffer
      *            The data
      */
     public static String replaceWhitespace(final String data) {
-        // YOU ARE ONLY ALLOWED TO CHANGE THIS CODE IF YOU CAN PROVE IT BECAME FASTER ON A DEVICE
+        // You are only allowed to change this code if you can prove it became faster on a device.
         // see WhitespaceTest in the test project
         final int length = data.length();
         final char[] chars = new char[length];

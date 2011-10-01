@@ -34,6 +34,7 @@ public abstract class MockedCache implements ICache {
                 buffer.append(line).append('\n');
             }
 
+
             br.close();
             return cgBase.replaceWhitespace(buffer.toString());
         } catch (IOException e) {

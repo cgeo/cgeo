@@ -98,4 +98,24 @@ public interface ICache {
      */
     public String getName();
 
+    /**
+     * @return Id
+     */
+    public String getCacheId();
+
+    /**
+     * @return Guid
+     */
+    public String getGuid();
+
+    /**
+     * @return Location
+     */
+    public String getLocation();
+
+    /**
+     * @return Personal note
+     */
+    public String getPersonalNote();
+
 }
