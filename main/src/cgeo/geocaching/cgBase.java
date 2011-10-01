@@ -3786,7 +3786,7 @@ public class cgBase {
 
     public static Double getElevation(final Geopoint coords) {
         try {
-            final String uri = "http://maps.googleapis.com/maps/api/elevation/";
+            final String uri = "http://maps.googleapis.com/maps/api/elevation/json";
             final Parameters params = new Parameters();
             params.put("sensor", "false");
             params.put("locations", String.format((Locale) null, "%.6f", coords.getLatitude()) + "," +
