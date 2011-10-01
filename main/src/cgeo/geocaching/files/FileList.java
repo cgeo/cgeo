@@ -5,6 +5,7 @@ import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.activity.AbstractListActivity;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -200,14 +201,9 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
                 }
                 String name = file.getName();
                 if (file.isFile()) {
-                    for (String ext : extensions) {
-                        int extLength = ext.length();
-                        if (name.length() > extLength && name.substring(name.length() - extLength, name.length()).equalsIgnoreCase(ext)) {
-                            result.add(file); // add file to list
-                            break;
-                        }
+                    if (filenameBelongsToList(name)) {
+                        result.add(file); // add file to list
                     }
-
                 } else if (file.isDirectory()) {
                     if (name.charAt(0) == '.') {
                         continue; // skip hidden directories
@@ -227,6 +223,16 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
         return;
     }
 
+    // TODO: public because of testing
+    public boolean filenameBelongsToList(final String filename) {
+        for (String ext : extensions) {
+            if (StringUtils.endsWithIgnoreCase(filename, ext)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     protected FileList(final String extension) {
         setExtensions(new String[] { extension });
     }
@@ -236,9 +242,10 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
     }
 
     private void setExtensions(String[] extensionsIn) {
-        for (String extension : extensionsIn) {
+        for (int i = 0; i < extensionsIn.length; i++) {
+            String extension = extensionsIn[i];
             if (extension.length() == 0 || extension.charAt(0) != '.') {
-                extension = "." + extension;
+                extensionsIn[i] = "." + extension;
             }
         }
         extensions = extensionsIn;

@@ -4,6 +4,8 @@ import cgeo.geocaching.files.FileList;
 import cgeo.geocaching.files.GPXParser;
 import cgeo.geocaching.files.LocParser;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -126,5 +128,15 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
         final Intent intent = new Intent(fromActivity, cgeogpxes.class);
         intent.putExtra(EXTRAS_LIST_ID, listId);
         fromActivity.startActivityForResult(intent, 0);
+    }
+
+    @Override
+    public boolean filenameBelongsToList(final String filename) {
+        if (super.filenameBelongsToList(filename)) {
+            // filter out wapoint files
+            return !StringUtils.endsWithIgnoreCase(filename, "-wpts.gpx");
+        } else {
+            return false;
+        }
     }
 }
