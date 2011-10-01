@@ -18,7 +18,7 @@
    viewBox="0 0 100 99.989"
    enable-background="new 0 0 100 99.989"
    xml:space="preserve"
-   inkscape:version="0.47 r22583"
+   inkscape:version="0.48.0 r9654"
    sodipodi:docname="firstaid.svg"><metadata
    id="metadata2909"><rdf:RDF><cc:Work
        rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
@@ -38,8 +38,8 @@
    guidetolerance="10"
    inkscape:pageopacity="1"
    inkscape:pageshadow="2"
-   inkscape:window-width="640"
-   inkscape:window-height="504"
+   inkscape:window-width="852"
+   inkscape:window-height="825"
    id="namedview2905"
    showgrid="false"
    inkscape:zoom="2.3602597"
@@ -50,7 +50,8 @@
    inkscape:window-maximized="0"
    inkscape:current-layer="Layer_1" />
 <polygon
-   points="32.569,0 67.298,0 67.298,32.713 100,32.713 100,67.333 67.562,67.333 67.562,99.989 32.702,99.989 32.702,67.333   0,67.333 0,32.713 32.569,32.713 "
+   points="67.298,0 67.298,32.713 100,32.713 100,67.333 67.562,67.333 67.562,99.989 32.702,99.989 32.702,67.333 0,67.333 0,32.713 32.569,32.713 32.569,0 "
    id="polygon2903"
-   style="fill:#ff0000" />
+   style="fill:#ff0000"
+   transform="matrix(0.79661017,0,0,0.79661017,10.169491,10.168373)" />
 </svg>
