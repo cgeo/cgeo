@@ -162,9 +162,6 @@ public class cgHtmlImg implements Html.ImageGetter {
         // download image and save it to the cache
         if ((imagePre == null && reason == 0) || onlySave) {
             Uri uri = null;
-            HttpGet getMethod = null;
-            HttpResponse httpResponse = null;
-            HttpEntity entity = null;
             BufferedHttpEntity bufferedEntity = null;
 
             try {
@@ -186,33 +183,40 @@ public class cgHtmlImg implements Html.ImageGetter {
                     }
 
                     try {
-                        getMethod = new HttpGet(url);
-                        httpResponse = cgBase.doRequest(getMethod);
-                        entity = httpResponse.getEntity();
-                        bufferedEntity = new BufferedHttpEntity(entity);
+                        final HttpGet getMethod = new HttpGet(url);
+                        final HttpResponse httpResponse = cgBase.doRequest(getMethod);
+                        if (httpResponse != null) {
+                            final HttpEntity entity = httpResponse.getEntity();
+                            bufferedEntity = new BufferedHttpEntity(entity);
 
-                        final long imageSize = bufferedEntity.getContentLength();
+                            final long imageSize = bufferedEntity.getContentLength();
 
-                        // large images will be downscaled on input to save memory
-                        if (imageSize > (6 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 48;
-                        } else if (imageSize > (4 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 16;
-                        } else if (imageSize > (2 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 10;
-                        } else if (imageSize > (1 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 6;
-                        } else if (imageSize > (0.5 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 2;
+                            // large images will be downscaled on input to save memory
+                            if (imageSize > (6 * 1024 * 1024)) {
+                                bfOptions.inSampleSize = 48;
+                            } else if (imageSize > (4 * 1024 * 1024)) {
+                                bfOptions.inSampleSize = 16;
+                            } else if (imageSize > (2 * 1024 * 1024)) {
+                                bfOptions.inSampleSize = 10;
+                            } else if (imageSize > (1 * 1024 * 1024)) {
+                                bfOptions.inSampleSize = 6;
+                            } else if (imageSize > (0.5 * 1024 * 1024)) {
+                                bfOptions.inSampleSize = 2;
+                            }
+
+                            final InputStream is = bufferedEntity.getContent();
+                            try {
+                                imagePre = BitmapFactory.decodeStream(is, null, bfOptions);
+                            } finally {
+                                is.close();
+                            }
                         }
-
-                        imagePre = BitmapFactory.decodeStream(bufferedEntity.getContent(), null, bfOptions);
 
                         if (imagePre != null) {
                             break;
                         }
                     } catch (Exception e) {
-                        Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (downloading from web): " + e.toString());
+                        Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (downloading from web)", e);
                     }
                 }
             }
@@ -221,29 +225,27 @@ public class cgHtmlImg implements Html.ImageGetter {
                 try {
                     // save to memory/SD cache
                     if (bufferedEntity != null) {
-                        final InputStream is = (InputStream) bufferedEntity.getContent();
-                        final FileOutputStream fos = new FileOutputStream(fileName);
+                        final InputStream is = bufferedEntity.getContent();
                         try {
-                            final byte[] buffer = new byte[4096];
-                            int l;
-                            while ((l = is.read(buffer)) != -1) {
-                                fos.write(buffer, 0, l);
+                            final FileOutputStream fos = new FileOutputStream(fileName);
+                            try {
+                                final byte[] buffer = new byte[4096];
+                                int l;
+                                while ((l = is.read(buffer)) != -1) {
+                                    fos.write(buffer, 0, l);
+                                }
+                                fos.flush();
+                            } finally {
+                                fos.close();
                             }
-                            fos.flush();
-                        } catch (IOException e) {
-                            Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (saving to cache): " + e.toString());
                         } finally {
                             is.close();
-                            fos.close();
                         }
                     }
-                } catch (Exception e) {
-                    Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (saving to cache): " + e.toString());
+                } catch (IOException e) {
+                    Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (saving to cache)", e);
                 }
             }
-
-            entity = null;
-            bufferedEntity = null;
         }
 
         if (onlySave) {
