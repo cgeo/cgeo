@@ -24,6 +24,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
@@ -3130,17 +3131,7 @@ public class cgBase {
         if (params == null)
             return "";
 
-        final List<String> paramsEncoded = new ArrayList<String>(params.size());
-
-        for (final NameValuePair nameValue : params) {
-            final String key = nameValue.getName();
-            final String value = StringUtils.defaultString(nameValue.getValue());
-
-            // TODO: Document the justification of the legacy test below
-            paramsEncoded.add((key.charAt(0) != '^' ? key : "") + "=" + urlencode_rfc3986(value));
-        }
-
-        return StringUtils.join(paramsEncoded.toArray(), '&');
+        return URLEncodedUtils.format(params, HTTP.UTF_8);
     }
 
     static private String prepareParameters(final String baseUri, final Parameters params) {
