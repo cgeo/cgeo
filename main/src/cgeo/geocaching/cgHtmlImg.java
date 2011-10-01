@@ -188,31 +188,33 @@ public class cgHtmlImg implements Html.ImageGetter {
                     try {
                         getMethod = new HttpGet(url);
                         httpResponse = cgBase.doRequest(getMethod);
-                        entity = httpResponse.getEntity();
-                        bufferedEntity = new BufferedHttpEntity(entity);
+                        if (httpResponse != null) {
+                            entity = httpResponse.getEntity();
+                            bufferedEntity = new BufferedHttpEntity(entity);
 
-                        final long imageSize = bufferedEntity.getContentLength();
+                            final long imageSize = bufferedEntity.getContentLength();
 
-                        // large images will be downscaled on input to save memory
-                        if (imageSize > (6 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 48;
-                        } else if (imageSize > (4 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 16;
-                        } else if (imageSize > (2 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 10;
-                        } else if (imageSize > (1 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 6;
-                        } else if (imageSize > (0.5 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 2;
+                            // large images will be downscaled on input to save memory
+                            if (imageSize > (6 * 1024 * 1024)) {
+                                bfOptions.inSampleSize = 48;
+                            } else if (imageSize > (4 * 1024 * 1024)) {
+                                bfOptions.inSampleSize = 16;
+                            } else if (imageSize > (2 * 1024 * 1024)) {
+                                bfOptions.inSampleSize = 10;
+                            } else if (imageSize > (1 * 1024 * 1024)) {
+                                bfOptions.inSampleSize = 6;
+                            } else if (imageSize > (0.5 * 1024 * 1024)) {
+                                bfOptions.inSampleSize = 2;
+                            }
+
+                            imagePre = BitmapFactory.decodeStream(bufferedEntity.getContent(), null, bfOptions);
                         }
-
-                        imagePre = BitmapFactory.decodeStream(bufferedEntity.getContent(), null, bfOptions);
 
                         if (imagePre != null) {
                             break;
                         }
                     } catch (Exception e) {
-                        Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (downloading from web): " + e.toString());
+                        Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (downloading from web)", e);
                     }
                 }
             }
