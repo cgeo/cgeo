@@ -16,7 +16,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.http.HttpResponse;
-import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
@@ -35,8 +34,9 @@ import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.CoreConnectionPNames;
+import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.params.HttpParams;
-import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
@@ -3199,7 +3199,9 @@ public class cgBase {
             synchronized (cgBase.class) {
                 if (clientConnectionManager == null) {
                     clientParams = new BasicHttpParams();
-                    HttpProtocolParams.setVersion(clientParams, HttpVersion.HTTP_1_1);
+                    clientParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, HTTP.UTF_8);
+                    clientParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
+                    clientParams.setParameter(CoreConnectionPNames.SO_TIMEOUT, 30000);
                     final SchemeRegistry registry = new SchemeRegistry();
                     registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
                     registry.register(new Scheme("https", SSLSocketFactory.getSocketFactory(), 443));
@@ -3252,7 +3254,7 @@ public class cgBase {
         if (settings.asBrowser == 1) {
             request.setHeader("Accept-Charset", "utf-8, iso-8859-1, utf-16, *;q=0.7");
             request.setHeader("Accept-Language", "en-US");
-            request.setHeader("User-Agent", idBrowser);
+            request.getParams().setParameter(CoreProtocolPNames.USER_AGENT, idBrowser);
         }
         return doRequest(request);
     }
