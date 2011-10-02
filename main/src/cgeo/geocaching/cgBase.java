@@ -16,7 +16,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.http.HttpResponse;
-import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
@@ -24,6 +23,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
@@ -34,8 +34,9 @@ import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.CoreConnectionPNames;
+import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.params.HttpParams;
-import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
@@ -3130,17 +3131,7 @@ public class cgBase {
         if (params == null)
             return "";
 
-        final List<String> paramsEncoded = new ArrayList<String>(params.size());
-
-        for (final NameValuePair nameValue : params) {
-            final String key = nameValue.getName();
-            final String value = StringUtils.defaultString(nameValue.getValue());
-
-            // TODO: Document the justification of the legacy test below
-            paramsEncoded.add((key.charAt(0) != '^' ? key : "") + "=" + urlencode_rfc3986(value));
-        }
-
-        return StringUtils.join(paramsEncoded.toArray(), '&');
+        return URLEncodedUtils.format(params, HTTP.UTF_8);
     }
 
     static private String prepareParameters(final String baseUri, final Parameters params) {
@@ -3208,7 +3199,9 @@ public class cgBase {
             synchronized (cgBase.class) {
                 if (clientConnectionManager == null) {
                     clientParams = new BasicHttpParams();
-                    HttpProtocolParams.setVersion(clientParams, HttpVersion.HTTP_1_1);
+                    clientParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, HTTP.UTF_8);
+                    clientParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
+                    clientParams.setParameter(CoreConnectionPNames.SO_TIMEOUT, 30000);
                     final SchemeRegistry registry = new SchemeRegistry();
                     registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
                     registry.register(new Scheme("https", SSLSocketFactory.getSocketFactory(), 443));
@@ -3261,23 +3254,32 @@ public class cgBase {
         if (settings.asBrowser == 1) {
             request.setHeader("Accept-Charset", "utf-8, iso-8859-1, utf-16, *;q=0.7");
             request.setHeader("Accept-Language", "en-US");
-            request.setHeader("User-Agent", idBrowser);
+            request.getParams().setParameter(CoreProtocolPNames.USER_AGENT, idBrowser);
         }
         return doRequest(request);
     }
 
+    static private String formatTimeSpan(final long before) {
+        return String.format(" (%d ms)", System.currentTimeMillis() - before);
+    }
+
     static public HttpResponse doRequest(final HttpRequestBase request) {
-        Log.d(cgSettings.tag, "request: " + request.getMethod() + " " + hidePassword(request.getURI().toString()));
+        final String method = request.getMethod();
+        Log.d(cgSettings.tag, method + " " + hidePassword(request.getURI().toString()));
 
         final HttpClient client = getHttpClient();
         for (int i = 0; i <= NB_DOWNLOAD_RETRIES; i++) {
+            final long before = System.currentTimeMillis();
             try {
-                return client.execute(request);
+                final HttpResponse response = client.execute(request);
+                Log.d(cgSettings.tag, method + " request returned " + response.getStatusLine().getStatusCode() + formatTimeSpan(before));
+                return response;
             } catch (IOException e) {
+                final String timeSpan = formatTimeSpan(before);
                 if (i == NB_DOWNLOAD_RETRIES) {
-                    Log.e(cgSettings.tag, "cgeoBase.request", e);
+                    Log.e(cgSettings.tag, "cgeoBase.doRequest: failure" + timeSpan, e);
                 } else {
-                    Log.e(cgSettings.tag, "cgeoBase.request: failed to download data (" + e.getMessage() + "), retrying");
+                    Log.e(cgSettings.tag, "cgeoBase.doRequest: failed to download data (" + e.getMessage() + "), retrying" + timeSpan);
                 }
             }
         }
