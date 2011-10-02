@@ -3151,26 +3151,27 @@ public class cgBase {
     }
 
     static private String formatTimeSpan(final long before) {
-        return String.format(" (%d ms)", System.currentTimeMillis() - before);
+        return String.format(" (%d ms) ", System.currentTimeMillis() - before);
     }
 
     static public HttpResponse doRequest(final HttpRequestBase request) {
-        final String method = request.getMethod();
-        Log.d(cgSettings.tag, method + " " + hidePassword(request.getURI().toString()));
+        final String reqLogStr = request.getMethod() + " " + hidePassword(request.getURI().toString());
+        Log.d(cgSettings.tag, reqLogStr);
 
         final HttpClient client = getHttpClient();
         for (int i = 0; i <= NB_DOWNLOAD_RETRIES; i++) {
             final long before = System.currentTimeMillis();
             try {
                 final HttpResponse response = client.execute(request);
-                Log.d(cgSettings.tag, method + " request returned " + response.getStatusLine().getStatusCode() + formatTimeSpan(before));
+                Log.d(cgSettings.tag, response.getStatusLine().getStatusCode() + formatTimeSpan(before) + reqLogStr);
                 return response;
             } catch (IOException e) {
                 final String timeSpan = formatTimeSpan(before);
+                final String tries = (i + 1) + "/" + (NB_DOWNLOAD_RETRIES + 1);
                 if (i == NB_DOWNLOAD_RETRIES) {
-                    Log.e(cgSettings.tag, "cgeoBase.doRequest: failure" + timeSpan, e);
+                    Log.e(cgSettings.tag, "Failure " + tries + timeSpan + reqLogStr, e);
                 } else {
-                    Log.e(cgSettings.tag, "cgeoBase.doRequest: failed to download data (" + e.getMessage() + "), retrying" + timeSpan);
+                    Log.e(cgSettings.tag, "Failure " + tries + " (" + e.toString() + ")" + timeSpan + "- retrying " + reqLogStr);
                 }
             }
         }
