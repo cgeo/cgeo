@@ -109,4 +109,9 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
         }
     }
 
+    public void testParseLocationWithLink() {
+        cgCacheWrap caches = base.parseCache(MockedCache.readCachePage("GCV2R9"), 0);
+        cgCache cache = caches.cacheList.get(0);
+        Assert.assertEquals("California, United States", cache.getLocation());
+    }
 }
