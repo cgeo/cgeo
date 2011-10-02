@@ -38,17 +38,19 @@ public final class BaseUtils {
     /**
      * Replace the characters \n, \r and \t with a space
      * The result is a very long single "line".
-     * Don't change this behavior - the patterns for parsing rely on this matter of fact !
+     *
+     * This is a copy of cgBase.replaceWhitespace(). It is a copy to run the pattern tests
+     * as a plain JUnit test
      *
      * @param buffer
      *            The data
      */
-    public static void replaceWhitespace(final StringBuffer buffer) {
-        final int length = buffer.length();
+    public static String replaceWhitespace(final String data) {
+        final int length = data.length();
         final char[] chars = new char[length];
-        buffer.getChars(0, length, chars, 0);
+        data.getChars(0, length, chars, 0);
         int resultSize = 0;
-        boolean lastWasWhitespace = false;
+        boolean lastWasWhitespace = true;
         for (char c : chars) {
             if (c == ' ' || c == '\n' || c == '\r' || c == '\t') {
                 if (!lastWasWhitespace) {
@@ -60,8 +62,7 @@ public final class BaseUtils {
                 lastWasWhitespace = false;
             }
         }
-        buffer.setLength(0);
-        buffer.append(chars);
+        return String.valueOf(chars, 0, resultSize);
     }
 
 }

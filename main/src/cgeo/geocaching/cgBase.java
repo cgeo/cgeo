@@ -3286,15 +3286,18 @@ public class cgBase {
     }
 
     /**
-     * Replace the characters \n, \r and \t with a space. The input are complete HTML pages.
+     * Replace the characters \n, \r and \t with a space (resulting is a very long single "line").
+     * The input are complete HTML pages.
+     *
      * This method must be fast, but may not lead to the shortest replacement String.
+     *
+     * You are only allowed to change this code if you can prove it became faster on a device.
+     * see cgeo.geocaching.test.WhiteSpaceTest#replaceWhitespaceManually in the test project
      *
      * @param buffer
      *            The data
      */
     public static String replaceWhitespace(final String data) {
-        // You are only allowed to change this code if you can prove it became faster on a device.
-        // see WhitespaceTest in the test project
         final int length = data.length();
         final char[] chars = new char[length];
         data.getChars(0, length, chars, 0);
