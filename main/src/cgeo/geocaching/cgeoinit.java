@@ -342,13 +342,19 @@ public class cgeoinit extends AbstractActivity {
         }
         useEnglishButton.setOnClickListener(new cgeoChangeUseEnglish());
 
-        CheckBox excludeButton = (CheckBox) findViewById(R.id.exclude);
+        final CheckBox excludeButton = (CheckBox) findViewById(R.id.exclude);
         if (prefs.getInt("excludemine", 0) == 0) {
             excludeButton.setChecked(false);
         } else {
             excludeButton.setChecked(true);
         }
-        excludeButton.setOnClickListener(new cgeoChangeExclude());
+        excludeButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                cgSettings.setExcludeMine(excludeButton.isChecked());
+            }
+        });
 
         CheckBox disabledButton = (CheckBox) findViewById(R.id.disabled);
         if (prefs.getInt("excludedisabled", 0) == 0) {
@@ -428,13 +434,19 @@ public class cgeoinit extends AbstractActivity {
             }
         });
 
-        CheckBox browserButton = (CheckBox) findViewById(R.id.browser);
+        final CheckBox browserButton = (CheckBox) findViewById(R.id.browser);
         if (prefs.getInt("asbrowser", 1) == 0) {
             browserButton.setChecked(false);
         } else {
             browserButton.setChecked(true);
         }
-        browserButton.setOnClickListener(new cgeoChangeBrowser());
+        browserButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                cgSettings.setAsBrowser(browserButton.isChecked());
+            }
+        });
 
         // Altitude settings
         EditText altitudeEdit = (EditText) findViewById(R.id.altitude);
@@ -740,30 +752,6 @@ public class cgeoinit extends AbstractActivity {
         }
     }
 
-    private class cgeoChangeExclude implements View.OnClickListener {
-
-        public void onClick(View arg0) {
-            SharedPreferences.Editor edit = prefs.edit();
-            if (prefs.getInt("excludemine", 0) == 0) {
-                edit.putInt("excludemine", 1);
-                settings.excludeMine = 1;
-            } else {
-                edit.putInt("excludemine", 0);
-                settings.excludeMine = 0;
-            }
-            edit.commit();
-
-            CheckBox excludeButton = (CheckBox) findViewById(R.id.exclude);
-            if (prefs.getInt("excludemine", 0) == 0) {
-                excludeButton.setChecked(false);
-            } else {
-                excludeButton.setChecked(true);
-            }
-
-            return;
-        }
-    }
-
     private class cgeoChangeAutovisit implements View.OnClickListener {
 
         public void onClick(View arg0) {
@@ -980,30 +968,6 @@ public class cgeoinit extends AbstractActivity {
         }
     }
 
-    private class cgeoChangeBrowser implements View.OnClickListener {
-
-        public void onClick(View arg0) {
-            SharedPreferences.Editor edit = prefs.edit();
-            if (prefs.getInt("asbrowser", 1) == 0) {
-                edit.putInt("asbrowser", 1);
-                settings.asBrowser = 1;
-            } else {
-                edit.putInt("asbrowser", 0);
-                settings.asBrowser = 0;
-            }
-            edit.commit();
-
-            CheckBox browserButton = (CheckBox) findViewById(R.id.browser);
-            if (prefs.getInt("asbrowser", 1) == 0) {
-                browserButton.setChecked(false);
-            } else {
-                browserButton.setChecked(true);
-            }
-
-            return;
-        }
-    }
-
     private class cgeoChangeMapSource implements OnItemSelectedListener {
 
         @Override
@@ -1078,7 +1042,7 @@ public class cgeoinit extends AbstractActivity {
 
                     String params = "name=" + cgBase.urlencode_rfc3986(nam) + "&code=" + cgBase.urlencode_rfc3986(cod);
 
-                    HttpResponse response = base.request("http://send2.cgeo.org/auth.html", params, true);
+                    HttpResponse response = cgBase.request("http://send2.cgeo.org/auth.html", params, true);
 
                     if (response.getStatusLine().getStatusCode() == 200)
                     {

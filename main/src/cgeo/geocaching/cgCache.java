@@ -503,4 +503,8 @@ public class cgCache implements ICache {
         return getConnector().getCacheUrl(this);
     }
 
+    public boolean supportsGCVote() {
+        return StringUtils.startsWithIgnoreCase(geocode, "GC");
+    }
+
 }

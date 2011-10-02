@@ -136,11 +136,11 @@ public class cgSettings {
     public int maptrail = 1;
     public boolean useEnglish = false;
     public boolean showCaptcha = false;
-    public int excludeMine = 0;
+    //    public int excludeMine = 0;
     public int excludeDisabled = 0;
     public int storeOfflineMaps = 0;
     public boolean storelogimages = false;
-    public int asBrowser = 1;
+    //    public int asBrowser = 1;
     public int useCompass = 1;
     public int useGNavigation = 1;
     public int showAddress = 1;
@@ -164,6 +164,12 @@ public class cgSettings {
     // private variables
     private Context context = null;
     private SharedPreferences prefs = null;
+    /**
+     * FIXME: this static instance of the preferences is only needed as long as the cgSettings class has
+     * not yet been reworked to a singleton. It makes it possible to gradually rework all preference access methods
+     * to be static.
+     */
+    private static SharedPreferences sharedPrefs = null;
     private String username = null;
     private String password = null;
     private coordInputFormatEnum coordInput = coordInputFormatEnum.Plain;
@@ -179,6 +185,7 @@ public class cgSettings {
     public cgSettings(Context contextIn, SharedPreferences prefsIn) {
         context = contextIn;
         prefs = prefsIn;
+        sharedPrefs = prefsIn;
 
         load();
     }
@@ -199,11 +206,9 @@ public class cgSettings {
         maptrail = prefs.getInt(KEY_MAP_TRAIL, 1);
         useEnglish = prefs.getBoolean(KEY_USE_ENGLISH, false);
         showCaptcha = prefs.getBoolean(KEY_SHOW_CAPTCHA, false);
-        excludeMine = prefs.getInt(KEY_EXCLUDE_OWN, 0);
         excludeDisabled = prefs.getInt(KEY_EXCLUDE_DISABLED, 0);
         storeOfflineMaps = prefs.getInt("offlinemaps", 1);
         storelogimages = prefs.getBoolean(KEY_STORE_LOG_IMAGES, false);
-        asBrowser = prefs.getInt(KEY_AS_BROWSER, 1);
         useCompass = prefs.getInt(KEY_USE_COMPASS, 1);
         useGNavigation = prefs.getInt(KEY_USE_GOOGLE_NAVIGATION, 1);
         showAddress = prefs.getInt(KEY_SHOW_ADDRESS, 1);
@@ -269,15 +274,11 @@ public class cgSettings {
         }
     }
 
-    public boolean isLogin() {
-        final String preUsername = prefs.getString(KEY_USERNAME, null);
-        final String prePassword = prefs.getString(KEY_PASSWORD, null);
+    public static boolean isLogin() {
+        final String preUsername = sharedPrefs.getString(KEY_USERNAME, null);
+        final String prePassword = sharedPrefs.getString(KEY_PASSWORD, null);
 
-        if (StringUtils.isBlank(preUsername) || StringUtils.isBlank(prePassword)) {
-            return false;
-        } else {
-            return true;
-        }
+        return (!StringUtils.isBlank(preUsername) && !StringUtils.isBlank(prePassword));
     }
 
     /**
@@ -366,25 +367,17 @@ public class cgSettings {
         });
     }
 
-    public Map<String, String> getGCvoteLogin() {
+    public static Map<String, String> getGCvoteLogin() {
+        final String preUsername = sharedPrefs.getString(KEY_USERNAME, null);
+        final String prePassword = sharedPrefs.getString(KEY_GCVOTE_PASSWORD, null);
+
+        if (StringUtils.isBlank(preUsername) || StringUtils.isBlank(prePassword)) {
+            return null;
+        }
         final Map<String, String> login = new HashMap<String, String>();
 
-        if (username == null || password == null) {
-            final String preUsername = prefs.getString(KEY_USERNAME, null);
-            final String prePassword = prefs.getString(KEY_GCVOTE_PASSWORD, null);
-
-            if (preUsername == null || prePassword == null) {
-                return null;
-            }
-
-            login.put(KEY_USERNAME, preUsername);
-            login.put(KEY_PASSWORD, prePassword);
-
-            username = preUsername;
-        } else {
-            login.put(KEY_USERNAME, username);
-            login.put(KEY_PASSWORD, password);
-        }
+        login.put(KEY_USERNAME, preUsername);
+        login.put(KEY_PASSWORD, prePassword);
 
         return login;
     }
@@ -615,4 +608,37 @@ public class cgSettings {
         });
     }
 
+    public static boolean asBrowser() {
+        return sharedPrefs.getInt(KEY_AS_BROWSER, 1) == 1;
+    }
+
+    public static boolean getExcludeMine() {
+        return sharedPrefs.getInt(KEY_EXCLUDE_OWN, 0) == 1;
+    }
+
+    private static boolean editSharedSettings(final PrefRunnable runnable) {
+        final SharedPreferences.Editor prefsEdit = sharedPrefs.edit();
+        runnable.edit(prefsEdit);
+        return prefsEdit.commit();
+    }
+
+    public static void setExcludeMine(final boolean exclude) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putInt(KEY_EXCLUDE_OWN, exclude ? 1 : 0);
+            }
+        });
+    }
+
+    public static void setAsBrowser(final boolean asBrowser) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putInt(KEY_AS_BROWSER, asBrowser ? 1 : 0);
+            }
+        });
+    }
 }

@@ -131,7 +131,7 @@ public final class ActivityMixin {
         }
         cgSettings settings = activity.getSettings();
         Resources res = ((Activity) activity).getResources();
-        if (settings.isLogin()) {
+        if (cgSettings.isLogin()) {
             if (settings.getLogOffline()) {
                 SubMenu logMenu = menu.addSubMenu(1, IAbstractActivity.MENU_LOG_VISIT_OFFLINE, 0, res.getString(R.string.cache_menu_visit_offline)).setIcon(MENU_ICON_LOG_VISIT);
                 List<Integer> logTypes = cache.getPossibleLogTypes(settings);

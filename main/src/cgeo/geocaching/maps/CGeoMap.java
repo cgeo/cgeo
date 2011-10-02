@@ -1145,7 +1145,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
                 //if in live map and stored caches are found / disables are also shown.
                 if (live && settings.maplive >= 1) {
-                    final boolean excludeMine = settings.excludeMine > 0;
+                    final boolean excludeMine = cgSettings.getExcludeMine();
                     final boolean excludeDisabled = settings.excludeDisabled > 0;
 
                     for (int i = caches.size() - 1; i >= 0; i--) {
