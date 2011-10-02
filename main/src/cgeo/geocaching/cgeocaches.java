@@ -2055,7 +2055,7 @@ public class cgeocaches extends AbstractListActivity {
                 if (deviceCode == null) {
                     deviceCode = "";
                 }
-                HttpResponse responseFromWeb = base.request("http://send2.cgeo.org/read.html", "code=" + cgBase.urlencode_rfc3986(deviceCode), true);
+                HttpResponse responseFromWeb = cgBase.request("http://send2.cgeo.org/read.html", "code=" + cgBase.urlencode_rfc3986(deviceCode), true);
 
                 if (responseFromWeb.getStatusLine().getStatusCode() == 200) {
                     final String response = cgBase.getResponseData(responseFromWeb);

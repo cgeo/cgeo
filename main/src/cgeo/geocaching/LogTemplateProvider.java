@@ -85,7 +85,7 @@ public class LogTemplateProvider {
                                 return "";
                             }
                             String findCount = "";
-                            final String page = cgBase.getResponseData(base.request("http://www.geocaching.com/email/", null, false, false, false));
+                            final String page = cgBase.getResponseData(cgBase.request("http://www.geocaching.com/email/", null, false, false, false));
                             int current = parseFindCount(page);
 
                             if (current >= 0) {

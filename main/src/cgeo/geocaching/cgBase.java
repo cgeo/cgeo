@@ -16,7 +16,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.http.HttpResponse;
-import org.apache.http.HttpVersion;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
@@ -24,6 +23,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.conn.ClientConnectionManager;
 import org.apache.http.conn.scheme.PlainSocketFactory;
 import org.apache.http.conn.scheme.Scheme;
@@ -34,8 +34,9 @@ import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.CoreConnectionPNames;
+import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.params.HttpParams;
-import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
@@ -80,7 +81,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -92,6 +92,10 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+/**
+ * @author bananeweizen
+ * 
+ */
 public class cgBase {
 
     private final static Pattern patternType = Pattern.compile("<img src=\"[^\"]*/WptTypes/\\d+\\.gif\" alt=\"([^\"]+)\" (title=\"[^\"]*\" )?width=\"32\" height=\"32\"[^>]*>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
@@ -187,7 +191,12 @@ public class cgBase {
     private cgeoapplication app = null;
     private cgSettings settings = null;
     public String version = null;
-    private String idBrowser = "Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Chrome/5.0.375.86 Safari/533.4";
+
+    /**
+     * FIXME: browser id should become part of settings (where it can be created more easily depending on the current
+     * settings)
+     */
+    private static String idBrowser = "Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Chrome/5.0.375.86 Safari/533.4";
     Context context = null;
     final private static Map<String, Integer> gcIcons = new HashMap<String, Integer>();
     final private static Map<String, Integer> wpIcons = new HashMap<String, Integer>();
@@ -363,24 +372,33 @@ public class cgBase {
             version = null;
         }
 
-        if (settings.asBrowser == 1) {
+        if (cgSettings.asBrowser()) {
             final long rndBrowser = Math.round(Math.random() * 6);
-            if (rndBrowser == 0) {
-                idBrowser = "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/533.1 (KHTML, like Gecko) Chrome/5.0.322.2 Safari/533.1";
-            } else if (rndBrowser == 1) {
-                idBrowser = "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; MDDC)";
-            } else if (rndBrowser == 2) {
-                idBrowser = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3";
-            } else if (rndBrowser == 3) {
-                idBrowser = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-us) AppleWebKit/531.21.8 (KHTML, like Gecko) Version/4.0.4 Safari/531.21.10";
-            } else if (rndBrowser == 4) {
-                idBrowser = "Mozilla/5.0 (iPod; U; CPU iPhone OS 2_2_1 like Mac OS X; en-us) AppleWebKit/525.18.1 (KHTML, like Gecko) Version/3.1.1 Mobile/5H11a Safari/525.20";
-            } else if (rndBrowser == 5) {
-                idBrowser = "Mozilla/5.0 (Linux; U; Android 1.1; en-gb; dream) AppleWebKit/525.10+ (KHTML, like Gecko) Version/3.0.4 Mobile Safari/523.12.2";
-            } else if (rndBrowser == 6) {
-                idBrowser = "Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Chrome/5.0.375.86 Safari/533.4";
-            } else {
-                idBrowser = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-US) AppleWebKit/532.9 (KHTML, like Gecko) Chrome/5.0.307.11 Safari/532.9";
+            switch ((int) rndBrowser) {
+                case 0:
+                    idBrowser = "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/533.1 (KHTML, like Gecko) Chrome/5.0.322.2 Safari/533.1";
+                    break;
+                case 1:
+                    idBrowser = "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; MDDC)";
+                    break;
+                case 2:
+                    idBrowser = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3";
+                    break;
+                case 3:
+                    idBrowser = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-us) AppleWebKit/531.21.8 (KHTML, like Gecko) Version/4.0.4 Safari/531.21.10";
+                    break;
+                case 4:
+                    idBrowser = "Mozilla/5.0 (iPod; U; CPU iPhone OS 2_2_1 like Mac OS X; en-us) AppleWebKit/525.18.1 (KHTML, like Gecko) Version/3.1.1 Mobile/5H11a Safari/525.20";
+                    break;
+                case 5:
+                    idBrowser = "Mozilla/5.0 (Linux; U; Android 1.1; en-gb; dream) AppleWebKit/525.10+ (KHTML, like Gecko) Version/3.0.4 Mobile Safari/523.12.2";
+                    break;
+                case 6:
+                    idBrowser = "Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Chrome/5.0.375.86 Safari/533.4";
+                    break;
+                default:
+                    idBrowser = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-US) AppleWebKit/532.9 (KHTML, like Gecko) Chrome/5.0.307.11 Safari/532.9";
+                    break;
             }
         }
     }
@@ -399,8 +417,9 @@ public class cgBase {
         // If there is only one viewstate, __VIEWSTATEFIELDCOUNT is not present
         int count = 1;
         final Matcher matcherViewstateCount = patternViewstateFieldCount.matcher(page);
-        if (matcherViewstateCount.find())
+        if (matcherViewstateCount.find()) {
             count = Integer.parseInt(matcherViewstateCount.group(1));
+        }
 
         String[] viewstates = new String[count];
 
@@ -409,30 +428,34 @@ public class cgBase {
         final Matcher matcherViewstates = patternViewstates.matcher(page);
         while (matcherViewstates.find()) {
             String sno = matcherViewstates.group(1); // number of viewstate
-            if ("".equals(sno))
+            if ("".equals(sno)) {
                 no = 0;
-            else
+            }
+            else {
                 no = Integer.parseInt(sno);
+            }
             viewstates[no] = matcherViewstates.group(2);
         }
 
-        if (viewstates.length == 1 && viewstates[0] == null)
-            // no viewstates were present
-            return null;
-        else
+        if (viewstates.length != 1 || viewstates[0] != null) {
             return viewstates;
+        }
+        // no viewstates were present
+        return null;
     }
 
     /**
      * put viewstates into request parameters
      */
     private static void setViewstates(final String[] viewstates, final Parameters params) {
-        if (ArrayUtils.isEmpty(viewstates))
+        if (ArrayUtils.isEmpty(viewstates)) {
             return;
+        }
         params.put("__VIEWSTATE", viewstates[0]);
         if (viewstates.length > 1) {
-            for (int i = 1; i < viewstates.length; i++)
+            for (int i = 1; i < viewstates.length; i++) {
                 params.put("__VIEWSTATE" + i, viewstates[i]);
+            }
             params.put("__VIEWSTATEFIELDCOUNT", viewstates.length + "");
         }
     }
@@ -451,8 +474,9 @@ public class cgBase {
      * - or all elements are null or empty strings
      */
     public static boolean isEmpty(String[] a) {
-        if (a == null)
+        if (a == null) {
             return true;
+        }
 
         for (String s : a) {
             if (StringUtils.isNotEmpty(s)) {
@@ -551,16 +575,16 @@ public class cgBase {
         }
     }
 
-    public static Boolean isPremium(String page)
+    public static boolean isPremium(String page)
     {
         if (checkLogin(page)) {
             final Matcher matcherIsPremium = patternIsPremium.matcher(page);
             return matcherIsPremium.find();
-        } else
-            return false;
+        }
+        return false;
     }
 
-    public static Boolean checkLogin(String page) {
+    public static boolean checkLogin(String page) {
         if (StringUtils.isBlank(page)) {
             Log.e(cgSettings.tag, "cgeoBase.checkLogin: No page given");
             return false;
@@ -937,7 +961,7 @@ public class cgBase {
             Log.i(cgSettings.tag, "Trying to get ratings for " + cids.size() + " caches");
 
             try {
-                final Map<String, cgRating> ratings = getRating(guids, null);
+                final Map<String, cgRating> ratings = GCVote.getRating(guids, null);
 
                 if (CollectionUtils.isNotEmpty(ratings)) {
                     // save found cache coordinates
@@ -1118,13 +1142,13 @@ public class cgBase {
             // cache terrain
             String result = BaseUtils.getMatch(tableInside, Constants.PATTERN_TERRAIN, 1, null);
             if (result != null) {
-                cache.terrain = new Float(Pattern.compile("_").matcher(result).replaceAll("."));
+                cache.terrain = new Float(StringUtils.replaceChars(result, '_', '.'));
             }
 
             // cache difficulty
             result = BaseUtils.getMatch(tableInside, Constants.PATTERN_DIFFICULTY, 1, null);
             if (result != null) {
-                cache.difficulty = new Float(Pattern.compile("_").matcher(result).replaceAll("."));
+                cache.difficulty = new Float(StringUtils.replaceChars(result, '_', '.'));
             }
 
             // owner
@@ -1268,7 +1292,7 @@ public class cgBase {
                 final Matcher matcherAttributesInside = patternAttributesInside.matcher(attributesPre);
 
                 while (matcherAttributesInside.find()) {
-                    if (matcherAttributesInside.groupCount() > 1 && matcherAttributesInside.group(2).equalsIgnoreCase("blank") != true) {
+                    if (matcherAttributesInside.groupCount() > 1 && !matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
                         if (cache.attributes == null) {
                             cache.attributes = new ArrayList<String>();
                         }
@@ -1516,7 +1540,7 @@ public class cgBase {
             cache.elevation = getElevation(cache.coords);
         }
 
-        final cgRating rating = getRating(cache.guid, cache.geocode);
+        final cgRating rating = GCVote.getRating(cache.guid, cache.geocode);
         if (rating != null) {
             cache.rating = rating.rating;
             cache.votes = rating.votes;
@@ -1709,149 +1733,6 @@ public class cgBase {
         {
             settings.setGcCustomDate(matcher.group(1));
         }
-    }
-
-    public cgRating getRating(String guid, String geocode) {
-        List<String> guids = null;
-        List<String> geocodes = null;
-
-        if (StringUtils.isNotBlank(guid)) {
-            guids = new ArrayList<String>();
-            guids.add(guid);
-        } else if (StringUtils.isNotBlank(geocode)) {
-            geocodes = new ArrayList<String>();
-            geocodes.add(geocode);
-        } else {
-            return null;
-        }
-
-        final Map<String, cgRating> ratings = getRating(guids, geocodes);
-        if (ratings != null) {
-            for (Entry<String, cgRating> entry : ratings.entrySet()) {
-                return entry.getValue();
-            }
-        }
-
-        return null;
-    }
-
-    public Map<String, cgRating> getRating(List<String> guids, List<String> geocodes) {
-        if (guids == null && geocodes == null) {
-            return null;
-        }
-
-        final Map<String, cgRating> ratings = new HashMap<String, cgRating>();
-
-        try {
-            final Parameters params = new Parameters();
-            if (settings.isLogin()) {
-                final Map<String, String> login = settings.getGCvoteLogin();
-                if (login != null) {
-                    params.put("userName", login.get("username"));
-                    params.put("password", login.get("password"));
-                }
-            }
-            if (CollectionUtils.isNotEmpty(guids)) {
-                params.put("cacheIds", StringUtils.join(guids.toArray(), ','));
-            } else {
-                params.put("waypoints", StringUtils.join(geocodes.toArray(), ','));
-            }
-            params.put("version", "cgeo");
-            final String votes = getResponseData(request("http://gcvote.com/getVotes.php", params, false, false, false));
-            if (votes == null) {
-                return null;
-            }
-
-            final Pattern patternLogIn = Pattern.compile("loggedIn='([^']+)'", Pattern.CASE_INSENSITIVE);
-            final Pattern patternGuid = Pattern.compile("cacheId='([^']+)'", Pattern.CASE_INSENSITIVE);
-            final Pattern patternRating = Pattern.compile("voteAvg='([0-9.]+)'", Pattern.CASE_INSENSITIVE);
-            final Pattern patternVotes = Pattern.compile("voteCnt='([0-9]+)'", Pattern.CASE_INSENSITIVE);
-            final Pattern patternVote = Pattern.compile("voteUser='([0-9.]+)'", Pattern.CASE_INSENSITIVE);
-
-            String voteData = null;
-            final Pattern patternVoteElement = Pattern.compile("<vote ([^>]+)>", Pattern.CASE_INSENSITIVE);
-            final Matcher matcherVoteElement = patternVoteElement.matcher(votes);
-            while (matcherVoteElement.find()) {
-                if (matcherVoteElement.groupCount() > 0) {
-                    voteData = matcherVoteElement.group(1);
-                }
-
-                if (voteData == null) {
-                    continue;
-                }
-
-                String guid = null;
-                cgRating rating = new cgRating();
-                boolean loggedIn = false;
-
-                try {
-                    final Matcher matcherGuid = patternGuid.matcher(voteData);
-                    if (matcherGuid.find()) {
-                        if (matcherGuid.groupCount() > 0) {
-                            guid = (String) matcherGuid.group(1);
-                        }
-                    }
-                } catch (Exception e) {
-                    Log.w(cgSettings.tag, "cgBase.getRating: Failed to parse guid");
-                }
-
-                try {
-                    final Matcher matcherLoggedIn = patternLogIn.matcher(votes);
-                    if (matcherLoggedIn.find()) {
-                        if (matcherLoggedIn.groupCount() > 0) {
-                            if (matcherLoggedIn.group(1).equalsIgnoreCase("true")) {
-                                loggedIn = true;
-                            }
-                        }
-                    }
-                } catch (Exception e) {
-                    Log.w(cgSettings.tag, "cgBase.getRating: Failed to parse loggedIn");
-                }
-
-                try {
-                    final Matcher matcherRating = patternRating.matcher(voteData);
-                    if (matcherRating.find()) {
-                        if (matcherRating.groupCount() > 0) {
-                            rating.rating = Float.parseFloat(matcherRating.group(1));
-                        }
-                    }
-                } catch (Exception e) {
-                    Log.w(cgSettings.tag, "cgBase.getRating: Failed to parse rating");
-                }
-
-                try {
-                    final Matcher matcherVotes = patternVotes.matcher(voteData);
-                    if (matcherVotes.find()) {
-                        if (matcherVotes.groupCount() > 0) {
-                            rating.votes = Integer.parseInt(matcherVotes.group(1));
-                        }
-                    }
-                } catch (Exception e) {
-                    Log.w(cgSettings.tag, "cgBase.getRating: Failed to parse vote count");
-                }
-
-                if (loggedIn) {
-                    try {
-                        final Matcher matcherVote = patternVote.matcher(voteData);
-                        if (matcherVote.find()) {
-                            if (matcherVote.groupCount() > 0) {
-                                rating.myVote = Float.parseFloat(matcherVote.group(1));
-                            }
-                        }
-                    } catch (Exception e) {
-                        Log.w(cgSettings.tag, "cgBase.getRating: Failed to parse user's vote");
-                    }
-                }
-
-                if (StringUtils.isNotBlank(guid)) {
-                    ratings.put(guid, rating);
-                }
-            }
-        } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgBase.getRating: " + e.toString());
-        }
-
-        return ratings;
     }
 
     public cgTrackable parseTrackable(String page) {
@@ -2587,14 +2468,14 @@ public class cgBase {
             return null;
         }
 
-        List<cgCache> cacheList = processSearchResults(search, caches, settings.excludeDisabled, settings.excludeMine, settings.cacheType);
+        List<cgCache> cacheList = processSearchResults(search, caches, settings.excludeDisabled, cgSettings.getExcludeMine() ? 1 : 0, settings.cacheType);
 
         app.addSearch(search, cacheList, true, reason);
 
         return search.getCurrentId();
     }
 
-    private String requestJSONgc(final String uri, final String params) {
+    private static String requestJSONgc(final String uri, final String params) {
         String page;
         final HttpPost request = new HttpPost("http://www.geocaching.com/map/default.aspx/MapAction");
         try {
@@ -2671,6 +2552,16 @@ public class cgBase {
         return users;
     }
 
+    /**
+     * FIXME: excludeDisabled, excludeMine should be boolean after settings rework
+     * 
+     * @param search
+     * @param caches
+     * @param excludeDisabled
+     * @param excludeMine
+     * @param cacheType
+     * @return
+     */
     public static List<cgCache> processSearchResults(final cgSearch search, final cgCacheWrap caches, final int excludeDisabled, final int excludeMine, final String cacheType) {
         List<cgCache> cacheList = new ArrayList<cgCache>();
         if (caches != null) {
@@ -3114,8 +3005,8 @@ public class cgBase {
         return encoded;
     }
 
-    public String prepareParameters(final Parameters params, final boolean my, final boolean addF) {
-        if (my != true && settings.excludeMine > 0 && addF) {
+    public static String prepareParameters(final Parameters params, final boolean my, final boolean addF) {
+        if (!my && cgSettings.getExcludeMine() && addF) {
             if (params == null) {
                 return "f=1";
             }
@@ -3127,20 +3018,11 @@ public class cgBase {
     }
 
     static private String prepareParameters(final Parameters params) {
-        if (params == null)
+        if (params == null) {
             return "";
-
-        final List<String> paramsEncoded = new ArrayList<String>(params.size());
-
-        for (final NameValuePair nameValue : params) {
-            final String key = nameValue.getName();
-            final String value = StringUtils.defaultString(nameValue.getValue());
-
-            // TODO: Document the justification of the legacy test below
-            paramsEncoded.add((key.charAt(0) != '^' ? key : "") + "=" + urlencode_rfc3986(value));
         }
 
-        return StringUtils.join(paramsEncoded.toArray(), '&');
+        return URLEncodedUtils.format(params, HTTP.UTF_8);
     }
 
     static private String prepareParameters(final String baseUri, final Parameters params) {
@@ -3194,7 +3076,7 @@ public class cgBase {
         return data;
     }
 
-    public HttpResponse request(final String uri, final Parameters params, boolean xContentType, boolean my, boolean addF) {
+    public static HttpResponse request(final String uri, final Parameters params, boolean xContentType, boolean my, boolean addF) {
         final String paramsDone = prepareParameters(params, my, addF);
         return request(uri, paramsDone, xContentType);
     }
@@ -3208,7 +3090,9 @@ public class cgBase {
             synchronized (cgBase.class) {
                 if (clientConnectionManager == null) {
                     clientParams = new BasicHttpParams();
-                    HttpProtocolParams.setVersion(clientParams, HttpVersion.HTTP_1_1);
+                    clientParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, HTTP.UTF_8);
+                    clientParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
+                    clientParams.setParameter(CoreConnectionPNames.SO_TIMEOUT, 30000);
                     final SchemeRegistry registry = new SchemeRegistry();
                     registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
                     registry.register(new Scheme("https", SSLSocketFactory.getSocketFactory(), 443));
@@ -3245,7 +3129,7 @@ public class cgBase {
         }
     }
 
-    public HttpResponse request(final String uri, final String params, final Boolean xContentType) {
+    public static HttpResponse request(final String uri, final String params, final Boolean xContentType) {
         final HttpRequestBase request = new HttpGet(Uri.parse(uri).buildUpon().encodedQuery(params).build().toString());
 
         request.setHeader("X-Requested-With", "XMLHttpRequest");
@@ -3257,27 +3141,36 @@ public class cgBase {
         return request(request);
     }
 
-    private HttpResponse request(final HttpRequestBase request) {
-        if (settings.asBrowser == 1) {
+    private static HttpResponse request(final HttpRequestBase request) {
+        if (cgSettings.asBrowser()) {
             request.setHeader("Accept-Charset", "utf-8, iso-8859-1, utf-16, *;q=0.7");
             request.setHeader("Accept-Language", "en-US");
-            request.setHeader("User-Agent", idBrowser);
+            request.getParams().setParameter(CoreProtocolPNames.USER_AGENT, idBrowser);
         }
         return doRequest(request);
     }
 
+    static private String formatTimeSpan(final long before) {
+        return String.format(" (%d ms)", System.currentTimeMillis() - before);
+    }
+
     static public HttpResponse doRequest(final HttpRequestBase request) {
-        Log.d(cgSettings.tag, "request: " + request.getMethod() + " " + hidePassword(request.getURI().toString()));
+        final String method = request.getMethod();
+        Log.d(cgSettings.tag, method + " " + hidePassword(request.getURI().toString()));
 
         final HttpClient client = getHttpClient();
         for (int i = 0; i <= NB_DOWNLOAD_RETRIES; i++) {
+            final long before = System.currentTimeMillis();
             try {
-                return client.execute(request);
+                final HttpResponse response = client.execute(request);
+                Log.d(cgSettings.tag, method + " request returned " + response.getStatusLine().getStatusCode() + formatTimeSpan(before));
+                return response;
             } catch (IOException e) {
+                final String timeSpan = formatTimeSpan(before);
                 if (i == NB_DOWNLOAD_RETRIES) {
-                    Log.e(cgSettings.tag, "cgeoBase.request", e);
+                    Log.e(cgSettings.tag, "cgeoBase.doRequest: failure" + timeSpan, e);
                 } else {
-                    Log.e(cgSettings.tag, "cgeoBase.request: failed to download data (" + e.getMessage() + "), retrying");
+                    Log.e(cgSettings.tag, "cgeoBase.doRequest: failed to download data (" + e.getMessage() + "), retrying" + timeSpan);
                 }
             }
         }
@@ -3869,7 +3762,7 @@ public class cgBase {
     /**
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 sept. à 12:35".
-     * 
+     *
      * @param context
      *            a Context
      * @param date

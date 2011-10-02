@@ -30,7 +30,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 public class cgeovisit extends cgLogForm {
     static final String EXTRAS_FOUND = "found";
@@ -360,31 +359,6 @@ public class cgeovisit extends cgLogForm {
         return String.format(Locale.getDefault(), "%.1f", rating);
     }
 
-    public boolean setRating(String guid, double vote) {
-        if (StringUtils.isBlank(guid)) {
-            return false;
-        }
-        if (vote < 0.0 || vote > 5.0) {
-            return false;
-        }
-
-        final Map<String, String> login = settings.getGCvoteLogin();
-        if (login == null) {
-            return false;
-        }
-
-        final Parameters params = new Parameters();
-        params.put("userName", login.get("username"));
-        params.put("password", login.get("password"));
-        params.put("cacheId", guid);
-        params.put("voteUser", String.format("%.1f", rating).replace(',', '.'));
-        params.put("version", "cgeo");
-
-        final String result = cgBase.getResponseData(base.request("http://gcvote.com/setVote.php", params, false, false, false));
-
-        return result.trim().equalsIgnoreCase("ok");
-    }
-
     @Override
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo info) {
         super.onCreateContextMenu(menu, view, info);
@@ -712,7 +686,7 @@ public class cgeovisit extends cgLogForm {
                     return;
                 }
 
-                final String page = cgBase.getResponseData(base.request("http://www.geocaching.com/seek/log.aspx", params, false, false, false));
+                final String page = cgBase.getResponseData(cgBase.request("http://www.geocaching.com/seek/log.aspx", params, false, false, false));
 
                 viewstates = cgBase.getViewstates(page);
                 trackables = cgBase.parseTrackableLog(page);
@@ -804,7 +778,7 @@ public class cgeovisit extends cgLogForm {
             }
 
             if (status == 1 && typeSelected == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin()) {
-                setRating(cache.guid, rating);
+                GCVote.setRating(cache, rating);
             }
 
             return status;

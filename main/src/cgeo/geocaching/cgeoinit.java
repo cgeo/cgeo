@@ -32,6 +32,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.File;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class cgeoinit extends AbstractActivity {
 
@@ -342,13 +344,19 @@ public class cgeoinit extends AbstractActivity {
         }
         useEnglishButton.setOnClickListener(new cgeoChangeUseEnglish());
 
-        CheckBox excludeButton = (CheckBox) findViewById(R.id.exclude);
+        final CheckBox excludeButton = (CheckBox) findViewById(R.id.exclude);
         if (prefs.getInt("excludemine", 0) == 0) {
             excludeButton.setChecked(false);
         } else {
             excludeButton.setChecked(true);
         }
-        excludeButton.setOnClickListener(new cgeoChangeExclude());
+        excludeButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                cgSettings.setExcludeMine(excludeButton.isChecked());
+            }
+        });
 
         CheckBox disabledButton = (CheckBox) findViewById(R.id.disabled);
         if (prefs.getInt("excludedisabled", 0) == 0) {
@@ -428,13 +436,19 @@ public class cgeoinit extends AbstractActivity {
             }
         });
 
-        CheckBox browserButton = (CheckBox) findViewById(R.id.browser);
+        final CheckBox browserButton = (CheckBox) findViewById(R.id.browser);
         if (prefs.getInt("asbrowser", 1) == 0) {
             browserButton.setChecked(false);
         } else {
             browserButton.setChecked(true);
         }
-        browserButton.setOnClickListener(new cgeoChangeBrowser());
+        browserButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                cgSettings.setAsBrowser(browserButton.isChecked());
+            }
+        });
 
         // Altitude settings
         EditText altitudeEdit = (EditText) findViewById(R.id.altitude);
@@ -475,7 +489,7 @@ public class cgeoinit extends AbstractActivity {
             }
         });
 
-        showBackupDate();
+        refreshBackupLabel();
 
     }
 
@@ -494,21 +508,36 @@ public class cgeoinit extends AbstractActivity {
     public void backup(View view) {
         // avoid overwriting an existing backup with an empty database (can happen directly after reinstalling the app)
         if (app.getAllStoredCachesCount(true, null, null) == 0) {
+            helpDialog(res.getString(R.string.init_backup), res.getString(R.string.init_backup_unnecessary));
             return;
         }
 
-        final String file = app.backupDatabase();
+        final AtomicReference<String> fileRef = new AtomicReference<String>(null);
+        final ProgressDialog dialog = ProgressDialog.show(this, res.getString(R.string.init_backup), res.getString(R.string.init_backup_running), true, false);
+        Thread backupThread = new Thread() {
+            final Handler handler = new Handler() {
+                public void handleMessage(Message msg) {
+                    dialog.dismiss();
+                    final String file = fileRef.get();
+                    if (file != null) {
+                        helpDialog(res.getString(R.string.init_backup_backup), res.getString(R.string.init_backup_success) + "\n" + file);
+                    } else {
+                        helpDialog(res.getString(R.string.init_backup_backup), res.getString(R.string.init_backup_failed));
+                    }
+                    refreshBackupLabel();
+                }
+            };
 
-        if (file != null) {
-            helpDialog(res.getString(R.string.init_backup_backup), res.getString(R.string.init_backup_success) + "\n" + file);
-        } else {
-            helpDialog(res.getString(R.string.init_backup_backup), res.getString(R.string.init_backup_failed));
-        }
-
-        showBackupDate();
+            @Override
+            public void run() {
+                fileRef.set(app.backupDatabase());
+                handler.sendMessage(handler.obtainMessage());
+            }
+        };
+        backupThread.start();
     }
 
-    private void showBackupDate() {
+    private void refreshBackupLabel() {
         TextView lastBackup = (TextView) findViewById(R.id.backup_last);
         File lastBackupFile = cgeoapplication.isRestoreFile();
         if (lastBackupFile != null) {
@@ -523,13 +552,28 @@ public class cgeoinit extends AbstractActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void restore(View view) {
-        final boolean status = app.restoreDatabase();
+        final ProgressDialog dialog = ProgressDialog.show(this, res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_running), true, false);
+        final AtomicBoolean atomic = new AtomicBoolean(false);
+        Thread restoreThread = new Thread() {
+            final Handler handler = new Handler() {
+                public void handleMessage(Message msg) {
+                    dialog.dismiss();
+                    boolean restored = atomic.get();
+                    if (restored) {
+                        helpDialog(res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_success));
+                    } else {
+                        helpDialog(res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_failed));
+                    }
+                }
+            };
 
-        if (status) {
-            helpDialog(res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_success));
-        } else {
-            helpDialog(res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_failed));
-        }
+            @Override
+            public void run() {
+                atomic.set(app.restoreDatabase());
+                handler.sendMessage(handler.obtainMessage());
+            }
+        };
+        restoreThread.start();
     }
 
     public boolean saveValues() {
@@ -734,30 +778,6 @@ public class cgeoinit extends AbstractActivity {
                 useEnglishButton.setChecked(false);
             } else {
                 useEnglishButton.setChecked(true);
-            }
-
-            return;
-        }
-    }
-
-    private class cgeoChangeExclude implements View.OnClickListener {
-
-        public void onClick(View arg0) {
-            SharedPreferences.Editor edit = prefs.edit();
-            if (prefs.getInt("excludemine", 0) == 0) {
-                edit.putInt("excludemine", 1);
-                settings.excludeMine = 1;
-            } else {
-                edit.putInt("excludemine", 0);
-                settings.excludeMine = 0;
-            }
-            edit.commit();
-
-            CheckBox excludeButton = (CheckBox) findViewById(R.id.exclude);
-            if (prefs.getInt("excludemine", 0) == 0) {
-                excludeButton.setChecked(false);
-            } else {
-                excludeButton.setChecked(true);
             }
 
             return;
@@ -980,30 +1000,6 @@ public class cgeoinit extends AbstractActivity {
         }
     }
 
-    private class cgeoChangeBrowser implements View.OnClickListener {
-
-        public void onClick(View arg0) {
-            SharedPreferences.Editor edit = prefs.edit();
-            if (prefs.getInt("asbrowser", 1) == 0) {
-                edit.putInt("asbrowser", 1);
-                settings.asBrowser = 1;
-            } else {
-                edit.putInt("asbrowser", 0);
-                settings.asBrowser = 0;
-            }
-            edit.commit();
-
-            CheckBox browserButton = (CheckBox) findViewById(R.id.browser);
-            if (prefs.getInt("asbrowser", 1) == 0) {
-                browserButton.setChecked(false);
-            } else {
-                browserButton.setChecked(true);
-            }
-
-            return;
-        }
-    }
-
     private class cgeoChangeMapSource implements OnItemSelectedListener {
 
         @Override
@@ -1078,7 +1074,7 @@ public class cgeoinit extends AbstractActivity {
 
                     String params = "name=" + cgBase.urlencode_rfc3986(nam) + "&code=" + cgBase.urlencode_rfc3986(cod);
 
-                    HttpResponse response = base.request("http://send2.cgeo.org/auth.html", params, true);
+                    HttpResponse response = cgBase.request("http://send2.cgeo.org/auth.html", params, true);
 
                     if (response.getStatusLine().getStatusCode() == 200)
                     {

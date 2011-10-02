@@ -156,7 +156,7 @@ public class cgeopopup extends AbstractActivity {
                 menu.findItem(5).setVisible(false);
             }
 
-            boolean visitPossible = fromDetail == false && settings.isLogin();
+            boolean visitPossible = fromDetail == false && cgSettings.isLogin();
             menu.findItem(MENU_LOG_VISIT).setEnabled(visitPossible);
         } catch (Exception e) {
             // nothing
@@ -363,25 +363,27 @@ public class cgeopopup extends AbstractActivity {
             if (cache.rating != null && cache.rating > 0) {
                 setRating(cache.rating, cache.votes);
             } else {
-                (new Thread() {
+                if (cache.supportsGCVote()) {
+                    (new Thread() {
 
-                    public void run() {
-                        cgRating rating = base.getRating(cache.guid, geocode);
+                        public void run() {
+                            cgRating rating = GCVote.getRating(cache.guid, geocode);
 
-                        Message msg = new Message();
-                        Bundle bundle = new Bundle();
+                            Message msg = new Message();
+                            Bundle bundle = new Bundle();
 
-                        if (rating == null || rating.rating == null) {
-                            return;
+                            if (rating == null || rating.rating == null) {
+                                return;
+                            }
+
+                            bundle.putFloat("rating", rating.rating);
+                            bundle.putInt("votes", rating.votes);
+                            msg.setData(bundle);
+
+                            ratingHandler.sendMessage(msg);
                         }
-
-                        bundle.putFloat("rating", rating.rating);
-                        bundle.putInt("votes", rating.votes);
-                        msg.setData(bundle);
-
-                        ratingHandler.sendMessage(msg);
-                    }
-                }).start();
+                    }).start();
+                }
             }
 
             // more details
