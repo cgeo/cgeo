@@ -32,6 +32,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.File;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class cgeoinit extends AbstractActivity {
 
@@ -487,7 +489,7 @@ public class cgeoinit extends AbstractActivity {
             }
         });
 
-        showBackupDate();
+        refreshBackupLabel();
 
     }
 
@@ -506,21 +508,36 @@ public class cgeoinit extends AbstractActivity {
     public void backup(View view) {
         // avoid overwriting an existing backup with an empty database (can happen directly after reinstalling the app)
         if (app.getAllStoredCachesCount(true, null, null) == 0) {
+            helpDialog(res.getString(R.string.init_backup), res.getString(R.string.init_backup_unnecessary));
             return;
         }
 
-        final String file = app.backupDatabase();
+        final AtomicReference<String> fileRef = new AtomicReference<String>(null);
+        final ProgressDialog dialog = ProgressDialog.show(this, res.getString(R.string.init_backup), res.getString(R.string.init_backup_running), true, false);
+        Thread backupThread = new Thread() {
+            final Handler handler = new Handler() {
+                public void handleMessage(Message msg) {
+                    dialog.dismiss();
+                    final String file = fileRef.get();
+                    if (file != null) {
+                        helpDialog(res.getString(R.string.init_backup_backup), res.getString(R.string.init_backup_success) + "\n" + file);
+                    } else {
+                        helpDialog(res.getString(R.string.init_backup_backup), res.getString(R.string.init_backup_failed));
+                    }
+                    refreshBackupLabel();
+                }
+            };
 
-        if (file != null) {
-            helpDialog(res.getString(R.string.init_backup_backup), res.getString(R.string.init_backup_success) + "\n" + file);
-        } else {
-            helpDialog(res.getString(R.string.init_backup_backup), res.getString(R.string.init_backup_failed));
-        }
-
-        showBackupDate();
+            @Override
+            public void run() {
+                fileRef.set(app.backupDatabase());
+                handler.sendMessage(handler.obtainMessage());
+            }
+        };
+        backupThread.start();
     }
 
-    private void showBackupDate() {
+    private void refreshBackupLabel() {
         TextView lastBackup = (TextView) findViewById(R.id.backup_last);
         File lastBackupFile = cgeoapplication.isRestoreFile();
         if (lastBackupFile != null) {
@@ -535,13 +552,28 @@ public class cgeoinit extends AbstractActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void restore(View view) {
-        final boolean status = app.restoreDatabase();
+        final ProgressDialog dialog = ProgressDialog.show(this, res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_running), true, false);
+        final AtomicBoolean atomic = new AtomicBoolean(false);
+        Thread restoreThread = new Thread() {
+            final Handler handler = new Handler() {
+                public void handleMessage(Message msg) {
+                    dialog.dismiss();
+                    boolean restored = atomic.get();
+                    if (restored) {
+                        helpDialog(res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_success));
+                    } else {
+                        helpDialog(res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_failed));
+                    }
+                }
+            };
 
-        if (status) {
-            helpDialog(res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_success));
-        } else {
-            helpDialog(res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_failed));
-        }
+            @Override
+            public void run() {
+                atomic.set(app.restoreDatabase());
+                handler.sendMessage(handler.obtainMessage());
+            }
+        };
+        restoreThread.start();
     }
 
     public boolean saveValues() {
