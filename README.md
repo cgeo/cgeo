@@ -59,9 +59,10 @@ or use the Ant view of Eclipse
 
 ### Testing ###
 
-The Test classes can be found in the package cgeo.geocaching.test (within the cgeo-os-test project)
+The Test classes can be found in the project cgeo-os-test. Test classes should be located in the same package as
+the class under test.
 Every class can be "Run As" (or "Debug As") an "Android JUnit Test" from Eclipse.
-To run all tests use the test suite in cgeoTestSuite.
+To run all tests use the test suite in CgeoTestSuite in package cgeo.geocaching.test.
 Further information can be found at http://developer.android.com/guide/topics/testing/testing_android.html
 
 License
