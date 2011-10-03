@@ -1,11 +1,11 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgLog;
 import cgeo.geocaching.cgSearch;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgTrackable;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
@@ -233,8 +233,7 @@ public abstract class GPXParser extends FileParser {
         return formatSimple.parse(input);
     }
 
-    // TODO: is not API, only public because of testing
-    public boolean parse(final InputStream stream, Handler handlerIn) {
+    boolean parse(final InputStream stream, Handler handlerIn) {
         importedRecords = 0;
         handler = handlerIn;
 
@@ -797,8 +796,7 @@ public abstract class GPXParser extends FileParser {
         }
     }
 
-    // TODO: public so that it can be unit tested, could be package private when tests in same package as productive code
-    public static WaypointType convertWaypointSym2Type(final String sym) {
+    static WaypointType convertWaypointSym2Type(final String sym) {
         if ("parking area".equalsIgnoreCase(sym)) {
             return WaypointType.PKG;
         } else if ("stages of a multicache".equalsIgnoreCase(sym)) {
@@ -887,7 +885,7 @@ public abstract class GPXParser extends FileParser {
                     // remove from cache, cache can be re-imported
                     app.removeCacheFromCache(cache.geocode);
                     app.addCacheToSearch(search, cache);
-                    showCountMessage(handler, R.string.gpx_import_storing, ++storedCaches);                    
+                    showCountMessage(handler, R.string.gpx_import_storing, ++storedCaches);
                 }
                 Log.i(Settings.tag, "Caches found in .gpx file: " + parser.getParsedCaches().size());
                 return search.getCurrentId();
@@ -901,7 +899,7 @@ public abstract class GPXParser extends FileParser {
     }
 
     // 1234567.gpx -> 1234567-wpts.gpx
-    public static File getWaypointsFileForGpx(File file) {
+    static File getWaypointsFileForGpx(File file) {
         final String name = file.getName();
         if (StringUtils.endsWithIgnoreCase(name, GPX_FILE_EXTENSION) && (StringUtils.length(name) > GPX_FILE_EXTENSION.length())) {
             String wptsName = StringUtils.substringBeforeLast(name, ".") + "-wpts" + StringUtils.right(name, GPX_FILE_EXTENSION.length());

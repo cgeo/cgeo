@@ -123,7 +123,7 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
     }
 
     @Override
-    public boolean filenameBelongsToList(final String filename) {
+    protected boolean filenameBelongsToList(final String filename) {
         if (super.filenameBelongsToList(filename)) {
             // filter out waypoint files
             return !StringUtils.endsWithIgnoreCase(filename, "-wpts.gpx");

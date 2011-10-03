@@ -222,8 +222,14 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
         return;
     }
 
-    // TODO: public because of testing
-    public boolean filenameBelongsToList(final String filename) {
+    /**
+     * Check if a filename belongs to the FileList. This implementation checks for file extensions.
+     * Subclasses may override this method to filter out specific files.
+     *
+     * @param filename
+     * @return <code>true</code> if the filename belongs to the list
+     */
+    protected boolean filenameBelongsToList(final String filename) {
         for (String ext : extensions) {
             if (StringUtils.endsWithIgnoreCase(filename, ext)) {
                 return true;

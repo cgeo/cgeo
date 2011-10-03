@@ -6,11 +6,8 @@ import cgeo.geocaching.cgLog;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.files.GPX10Parser;
-import cgeo.geocaching.files.GPXParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.test.R;
-import cgeo.geocaching.test.R.raw;
 
 import android.content.res.Resources;
 import android.os.Handler;
