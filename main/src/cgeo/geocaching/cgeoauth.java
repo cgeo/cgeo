@@ -242,8 +242,7 @@ public class cgeoauth extends AbstractActivity {
         String lineOne = null;
 
         try {
-            final Parameters paramsPre = new Parameters();
-            paramsPre.put("oauth_verifier", pinEntry.getText().toString());
+            final Parameters paramsPre = new Parameters("oauth_verifier", pinEntry.getText().toString());
 
             int code = -1;
             int retries = 0;

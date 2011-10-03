@@ -719,11 +719,10 @@ public class cgeoinit extends AbstractActivity {
                 public void run() {
                     int pin = 0;
 
-                    String nam = deviceName == null ? "" : deviceName;
-                    String cod = deviceCode == null ? "" : deviceCode;
+                    final String nam = StringUtils.defaultString(deviceName);
+                    final String cod = StringUtils.defaultString(deviceCode);
 
-                    String params = "name=" + cgBase.urlencode_rfc3986(nam) + "&code=" + cgBase.urlencode_rfc3986(cod);
-
+                    final Parameters params = new Parameters("name", nam, "code", cod);
                     HttpResponse response = cgBase.request("http://send2.cgeo.org/auth.html", params, true);
 
                     if (response.getStatusLine().getStatusCode() == 200)

@@ -386,14 +386,14 @@ public class cgGeo {
 
                 final String username = Settings.getUsername();
                 if (username != null) {
-                    final Parameters params = new Parameters();
                     final String latStr = String.format((Locale) null, "%.6f", coordsNow.getLatitude());
                     final String lonStr = String.format((Locale) null, "%.6f", coordsNow.getLongitude());
-                    params.put("u", username);
-                    params.put("lt", latStr);
-                    params.put("ln", lonStr);
-                    params.put("a", action);
-                    params.put("s", (CryptUtils.sha1(username + "|" + latStr + "|" + lonStr + "|" + action + "|" + CryptUtils.md5("carnero: developing your dreams"))).toLowerCase());
+                    final Parameters params = new Parameters(
+                            "u", username,
+                            "lt", latStr,
+                            "ln", lonStr,
+                            "a", action,
+                            "s", (CryptUtils.sha1(username + "|" + latStr + "|" + lonStr + "|" + action + "|" + CryptUtils.md5("carnero: developing your dreams"))).toLowerCase());
                     if (base.version != null) {
                         params.put("v", base.version);
                     }
