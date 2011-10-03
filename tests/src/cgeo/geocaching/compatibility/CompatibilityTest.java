@@ -1,4 +1,4 @@
-package cgeo.geocaching.test;
+package cgeo.geocaching.compatibility;
 
 import cgeo.geocaching.cgeo;
 import cgeo.geocaching.compatibility.Compatibility;

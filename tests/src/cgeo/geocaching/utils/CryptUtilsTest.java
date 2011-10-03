@@ -1,4 +1,4 @@
-package cgeo.geocaching.test;
+package cgeo.geocaching.utils;
 
 import cgeo.geocaching.utils.CryptUtils;
 
