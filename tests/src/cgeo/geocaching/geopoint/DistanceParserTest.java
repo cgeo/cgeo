@@ -1,4 +1,4 @@
-package cgeo.geocaching.test;
+package cgeo.geocaching.geopoint;
 
 import cgeo.geocaching.geopoint.DistanceParser;
 

@@ -1,4 +1,4 @@
-package cgeo.geocaching.test;
+package cgeo.geocaching.files;
 
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
@@ -9,6 +9,8 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.GPX10Parser;
 import cgeo.geocaching.files.GPXParser;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.test.R;
+import cgeo.geocaching.test.R.raw;
 
 import android.content.res.Resources;
 import android.os.Handler;

@@ -1,8 +1,9 @@
 package cgeo.geocaching.test;
 
+import android.test.suitebuilder.TestSuiteBuilder;
+
 import junit.framework.Test;
 import junit.framework.TestSuite;
-import android.test.suitebuilder.TestSuiteBuilder;
 
 /**
  * The c:geo unit test suite. Based on http://marakana.com/tutorials/android/junit-test-example.html
@@ -11,9 +12,9 @@ import android.test.suitebuilder.TestSuiteBuilder;
  * For further informations have a look at http://developer.android.com/guide/topics/testing/testing_android.html
  */
 
-public class cgeoTestSuite extends TestSuite {
+public class CgeoTestSuite extends TestSuite {
 
     public static Test suite() {
-        return new TestSuiteBuilder(cgeoTestSuite.class).includeAllPackagesUnderHere().build();
+        return new TestSuiteBuilder(CgeoTestSuite.class).includePackages("cgeo.geocaching").build();
     }
 }
