@@ -11,6 +11,11 @@ public class Parameters extends ArrayList<NameValuePair> {
 
     private static final long serialVersionUID = 1L;
 
+    public Parameters(final String... keyValues) {
+        super();
+        put(keyValues);
+    }
+
     private static final Comparator<NameValuePair> comparator = new Comparator<NameValuePair>() {
         @Override
         public int compare(final NameValuePair nv1, final NameValuePair nv2) {
@@ -19,8 +24,10 @@ public class Parameters extends ArrayList<NameValuePair> {
         }
     };
 
-    public void put(final String name, final String value) {
-        add(new BasicNameValuePair(name, value));
+    public void put(final String... keyValues) {
+        for (int i = 0; i < keyValues.length; i += 2) {
+            add(new BasicNameValuePair(keyValues[i], keyValues[i + 1]));
+        }
     }
 
     public void sort() {
