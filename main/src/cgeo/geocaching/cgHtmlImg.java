@@ -30,6 +30,10 @@ import java.util.Date;
 
 public class cgHtmlImg implements Html.ImageGetter {
 
+    private static final String[] BLOCKED = new String[] {
+            "gccounter.de",
+            "gccounter.com"
+    };
     final private Activity activity;
     final private String geocode;
     final private boolean placement;
@@ -63,25 +67,24 @@ public class cgHtmlImg implements Html.ImageGetter {
 
     @Override
     public BitmapDrawable getDrawable(String url) {
-        Bitmap imagePre = null;
-        String dirName = null;
-        String fileName = null;
-        String fileNameSec = null;
-
         if (StringUtils.isBlank(url)) {
             return null;
         }
+        if (isCounter(url)) {
+            return null;
+        }
 
-        final String[] urlParts = url.split("\\.");
-        String urlExt = null;
-        if (urlParts.length > 1) {
-            urlExt = "." + urlParts[(urlParts.length - 1)];
-            if (urlExt.length() > 5) {
-                urlExt = "";
-            }
-        } else {
+        String urlExt = StringUtils.substringAfterLast(url, ".");
+        if (urlExt.length() > 0) {
+            urlExt = "." + urlExt;
+        }
+        if (urlExt.length() > 5) {
             urlExt = "";
         }
+
+        String dirName;
+        String fileName;
+        String fileNameSec;
 
         if (StringUtils.isNotBlank(geocode)) {
             dirName = Settings.getStorage() + geocode + "/";
@@ -95,64 +98,22 @@ public class cgHtmlImg implements Html.ImageGetter {
 
         File dir = null;
         dir = new File(Settings.getStorage());
-        if (dir.exists() == false) {
+        if (!dir.exists()) {
             dir.mkdirs();
         }
         dir = new File(dirName);
-        if (dir.exists() == false) {
+        if (!dir.exists()) {
             dir.mkdirs();
         }
         dir = null;
 
+        Bitmap imagePre = null;
         // load image from cache
-        if (onlySave == false) {
+        if (!onlySave) {
             try {
-                final Date now = new Date();
-
-                final File file = new File(fileName);
-                if (file.exists()) {
-                    final long imageSize = file.length();
-
-                    // large images will be downscaled on input to save memory
-                    if (imageSize > (6 * 1024 * 1024)) {
-                        bfOptions.inSampleSize = 48;
-                    } else if (imageSize > (4 * 1024 * 1024)) {
-                        bfOptions.inSampleSize = 16;
-                    } else if (imageSize > (2 * 1024 * 1024)) {
-                        bfOptions.inSampleSize = 10;
-                    } else if (imageSize > (1 * 1024 * 1024)) {
-                        bfOptions.inSampleSize = 6;
-                    } else if (imageSize > (0.5 * 1024 * 1024)) {
-                        bfOptions.inSampleSize = 2;
-                    }
-
-                    if (reason > 0 || file.lastModified() > (now.getTime() - (24 * 60 * 60 * 1000))) {
-                        imagePre = BitmapFactory.decodeFile(fileName, bfOptions);
-                    }
-                }
-
-                if (imagePre == null) {
-                    final File fileSec = new File(fileNameSec);
-                    if (fileSec.exists()) {
-                        final long imageSize = fileSec.length();
-
-                        // large images will be downscaled on input to save memory
-                        if (imageSize > (6 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 48;
-                        } else if (imageSize > (4 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 16;
-                        } else if (imageSize > (2 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 10;
-                        } else if (imageSize > (1 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 6;
-                        } else if (imageSize > (0.5 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 2;
-                        }
-
-                        if (reason > 0 || file.lastModified() > (now.getTime() - (24 * 60 * 60 * 1000))) {
-                            imagePre = BitmapFactory.decodeFile(fileNameSec, bfOptions);
-                        }
-                    }
+                imagePre = loadCachedImage(fileName);
+                if (null == imagePre) {
+                    imagePre = loadCachedImage(fileNameSec);
                 }
             } catch (Exception e) {
                 Log.w(Settings.tag, "cgHtmlImg.getDrawable (reading cache): " + e.toString());
@@ -160,7 +121,7 @@ public class cgHtmlImg implements Html.ImageGetter {
         }
 
         // download image and save it to the cache
-        if ((imagePre == null && reason == 0) || onlySave) {
+        if ((null == imagePre && 0 == reason) || onlySave) {
             Uri uri = null;
             BufferedHttpEntity bufferedEntity = null;
 
@@ -168,15 +129,15 @@ public class cgHtmlImg implements Html.ImageGetter {
                 // check if uri is absolute or not, if not attach geocaching.com hostname and scheme
                 uri = Uri.parse(url);
 
-                if (uri.isAbsolute() == false) {
-                    IConnector connector = ConnectorFactory.getConnector(geocode);
+                if (!uri.isAbsolute()) {
+                    final IConnector connector = ConnectorFactory.getConnector(geocode);
                     url = "http://" + connector.getHost() + url;
                 }
             } catch (Exception e) {
                 Log.e(Settings.tag, "cgHtmlImg.getDrawable (parse URL): " + e.toString());
             }
 
-            if (uri != null) {
+            if (null != uri) {
                 for (int i = 0; i < 2; i++) {
                     if (i > 0) {
                         Log.w(Settings.tag, "cgHtmlImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
@@ -185,24 +146,11 @@ public class cgHtmlImg implements Html.ImageGetter {
                     try {
                         final HttpGet getMethod = new HttpGet(url);
                         final HttpResponse httpResponse = cgBase.doRequest(getMethod);
-                        if (httpResponse != null) {
+                        if (null != httpResponse) {
                             final HttpEntity entity = httpResponse.getEntity();
                             bufferedEntity = new BufferedHttpEntity(entity);
 
-                            final long imageSize = bufferedEntity.getContentLength();
-
-                            // large images will be downscaled on input to save memory
-                            if (imageSize > (6 * 1024 * 1024)) {
-                                bfOptions.inSampleSize = 48;
-                            } else if (imageSize > (4 * 1024 * 1024)) {
-                                bfOptions.inSampleSize = 16;
-                            } else if (imageSize > (2 * 1024 * 1024)) {
-                                bfOptions.inSampleSize = 10;
-                            } else if (imageSize > (1 * 1024 * 1024)) {
-                                bfOptions.inSampleSize = 6;
-                            } else if (imageSize > (0.5 * 1024 * 1024)) {
-                                bfOptions.inSampleSize = 2;
-                            }
+                            setSampleSize(bufferedEntity.getContentLength());
 
                             final InputStream is = bufferedEntity.getContent();
                             try {
@@ -212,7 +160,7 @@ public class cgHtmlImg implements Html.ImageGetter {
                             }
                         }
 
-                        if (imagePre != null) {
+                        if (null != imagePre) {
                             break;
                         }
                     } catch (Exception e) {
@@ -224,7 +172,7 @@ public class cgHtmlImg implements Html.ImageGetter {
             if (save) {
                 try {
                     // save to memory/SD cache
-                    if (bufferedEntity != null) {
+                    if (null != bufferedEntity) {
                         final InputStream is = bufferedEntity.getContent();
                         try {
                             final FileOutputStream fos = new FileOutputStream(fileName);
@@ -253,13 +201,13 @@ public class cgHtmlImg implements Html.ImageGetter {
         }
 
         // get image and return
-        if (imagePre == null) {
+        if (null == imagePre) {
             Log.d(Settings.tag, "cgHtmlImg.getDrawable: Failed to obtain image");
 
-            if (placement == false) {
-                imagePre = BitmapFactory.decodeResource(activity.getResources(), R.drawable.image_no_placement);
-            } else {
+            if (placement) {
                 imagePre = BitmapFactory.decodeResource(activity.getResources(), R.drawable.image_not_loaded);
+            } else {
+                imagePre = BitmapFactory.decodeResource(activity.getResources(), R.drawable.image_no_placement);
             }
         }
 
@@ -295,5 +243,40 @@ public class cgHtmlImg implements Html.ImageGetter {
         image.setBounds(new Rect(0, 0, width, height));
 
         return image;
+    }
+
+    private Bitmap loadCachedImage(final String fileName) {
+        final File file = new File(fileName);
+        if (file.exists()) {
+            if (reason > 0 || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000))) {
+                setSampleSize(file.length());
+                return BitmapFactory.decodeFile(fileName, bfOptions);
+            }
+        }
+        return null;
+    }
+
+    private void setSampleSize(final long imageSize) {
+        // large images will be downscaled on input to save memory
+        if (imageSize > (6 * 1024 * 1024)) {
+            bfOptions.inSampleSize = 48;
+        } else if (imageSize > (4 * 1024 * 1024)) {
+            bfOptions.inSampleSize = 16;
+        } else if (imageSize > (2 * 1024 * 1024)) {
+            bfOptions.inSampleSize = 10;
+        } else if (imageSize > (1 * 1024 * 1024)) {
+            bfOptions.inSampleSize = 6;
+        } else if (imageSize > (0.5 * 1024 * 1024)) {
+            bfOptions.inSampleSize = 2;
+        }
+    }
+
+    private static boolean isCounter(final String url) {
+        for (String entry : BLOCKED) {
+            if (StringUtils.containsIgnoreCase(url, entry)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
