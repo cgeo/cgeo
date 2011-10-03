@@ -66,13 +66,12 @@ public class GCConnector extends AbstractConnector implements IConnector {
 
     @Override
     public UUID searchByGeocode(final cgBase base, String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason) {
-        final Parameters params = new Parameters();
+        final Parameters params = new Parameters("decrypt", "y");
         if (StringUtils.isNotBlank(geocode)) {
             params.put("wp", geocode);
         } else if (StringUtils.isNotBlank(guid)) {
             params.put("guid", guid);
         }
-        params.put("decrypt", "y");
 
         String page = base.requestLogged("http://www.geocaching.com/seek/cache_details.aspx", params, false, false, false);
 

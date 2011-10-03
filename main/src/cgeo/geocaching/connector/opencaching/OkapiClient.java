@@ -59,9 +59,7 @@ final public class OkapiClient {
     private static final String SERVICE_CACHE_FIELDS = "code|name|location|type|status|owner|founds|notfounds|size|difficulty|terrain|rating|rating_votes|recommendations|description|hint|images|latest_logs|date_hidden";
 
     public static cgCache getCache(final String geoCode) {
-        final Parameters params = new Parameters();
-        params.put("cache_code", geoCode);
-        params.put("fields", SERVICE_CACHE_FIELDS);
+        final Parameters params = new Parameters("cache_code", geoCode, "fields", SERVICE_CACHE_FIELDS);
         final JSONObject data = request(geoCode, SERVICE_CACHE, params);
 
         if (data == null) {
