@@ -23,15 +23,9 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.conn.ClientConnectionManager;
-import org.apache.http.conn.scheme.PlainSocketFactory;
-import org.apache.http.conn.scheme.Scheme;
-import org.apache.http.conn.scheme.SchemeRegistry;
-import org.apache.http.conn.ssl.SSLSocketFactory;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.params.CoreProtocolPNames;
@@ -2969,28 +2963,24 @@ public class cgBase {
         return request(uri, addFToParams(params, my, addF), xContentType);
     }
 
-    private static ClientConnectionManager clientConnectionManager;
     private static HttpParams clientParams;
     private static CookieStore cookieStore;
 
     public static HttpClient getHttpClient() {
-        if (clientConnectionManager == null) {
+        if (cookieStore == null) {
             synchronized (cgBase.class) {
-                if (clientConnectionManager == null) {
+                if (cookieStore == null) {
                     clientParams = new BasicHttpParams();
                     clientParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, HTTP.UTF_8);
                     clientParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
                     clientParams.setParameter(CoreConnectionPNames.SO_TIMEOUT, 30000);
-                    final SchemeRegistry registry = new SchemeRegistry();
-                    registry.register(new Scheme("http", PlainSocketFactory.getSocketFactory(), 80));
-                    registry.register(new Scheme("https", SSLSocketFactory.getSocketFactory(), 443));
                     cookieStore = new BasicCookieStore();
-                    clientConnectionManager = new ThreadSafeClientConnManager(clientParams, registry);
                 }
             }
         }
-        final DefaultHttpClient client = new DefaultHttpClient(clientConnectionManager, clientParams);
+        final DefaultHttpClient client = new DefaultHttpClient();
         client.setCookieStore(cookieStore);
+        client.setParams(clientParams);
         return client;
     }
 
