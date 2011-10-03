@@ -1,7 +1,7 @@
 package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.Settings;
 
 import android.util.Log;
 
@@ -20,7 +20,7 @@ public abstract class AbstractCacheComparator implements CacheComparator {
             }
             return compareCaches(cache1, cache2);
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "AbstractCacheComparator.compare: " + e.toString());
+            Log.e(Settings.tag, "AbstractCacheComparator.compare: " + e.toString());
         }
         return 0;
     }

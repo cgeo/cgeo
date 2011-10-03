@@ -46,14 +46,14 @@ public class cgeoapplication extends Application {
 
     @Override
     public void onLowMemory() {
-        Log.i(cgSettings.tag, "Cleaning applications cache.");
+        Log.i(Settings.tag, "Cleaning applications cache.");
 
         cachesCache.clear();
     }
 
     @Override
     public void onTerminate() {
-        Log.d(cgSettings.tag, "Terminating c:geo...");
+        Log.d(Settings.tag, "Terminating c:geo...");
 
         if (geo != null) {
             geo.closeGeo();
@@ -104,12 +104,12 @@ public class cgeoapplication extends Application {
         return storage.status();
     }
 
-    public cgGeo startGeo(Context context, cgUpdateLoc geoUpdate, cgBase base, cgSettings settings, int time, int distance) {
+    public cgGeo startGeo(Context context, cgUpdateLoc geoUpdate, cgBase base, int time, int distance) {
         if (geo == null) {
-            geo = new cgGeo(context, this, geoUpdate, base, settings, time, distance);
+            geo = new cgGeo(context, this, geoUpdate, base, time, distance);
             geo.initGeo();
 
-            Log.i(cgSettings.tag, "Location service started");
+            Log.i(Settings.tag, "Location service started");
         }
 
         geo.replaceUpdate(geoUpdate);
@@ -143,7 +143,7 @@ public class cgeoapplication extends Application {
                 geo.closeGeo();
                 geo = null;
 
-                Log.i(cgSettings.tag, "Location service stopped");
+                Log.i(Settings.tag, "Location service stopped");
             }
         }
     }
@@ -153,7 +153,7 @@ public class cgeoapplication extends Application {
             dir = new cgDirection(context, dirUpdate);
             dir.initDir();
 
-            Log.i(cgSettings.tag, "Direction service started");
+            Log.i(Settings.tag, "Direction service started");
         }
 
         dir.replaceUpdate(dirUpdate);
@@ -187,7 +187,7 @@ public class cgeoapplication extends Application {
                 dir.closeDir();
                 dir = null;
 
-                Log.i(cgSettings.tag, "Direction service stopped");
+                Log.i(Settings.tag, "Direction service stopped");
             }
         }
     }

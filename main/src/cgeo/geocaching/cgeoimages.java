@@ -105,14 +105,14 @@ public class cgeoimages extends AbstractActivity {
                 image_view.setOnClickListener(new View.OnClickListener() {
 
                     public void onClick(View arg0) {
-                        final String directoryTarget = Environment.getExternalStorageDirectory() + "/" + cgSettings.cache + "/" + "temp.jpg";
+                        final String directoryTarget = Environment.getExternalStorageDirectory() + "/" + Settings.cache + "/" + "temp.jpg";
                         final File file = new File(directoryTarget);
                         try {
                             final FileOutputStream fos = new FileOutputStream(file);
                             image.getBitmap().compress(CompressFormat.JPEG, 100, fos);
                             fos.close();
                         } catch (Exception e) {
-                            Log.e(cgSettings.tag, "cgeoimages.handleMessage.onClick: " + e.toString());
+                            Log.e(Settings.tag, "cgeoimages.handleMessage.onClick: " + e.toString());
                             return;
                         }
 
@@ -186,8 +186,8 @@ public class cgeoimages extends AbstractActivity {
         }
 
         final int message = img_type == SPOILER_IMAGES ? R.string.cache_spoiler_images_loading : R.string.cache_log_images_loading;
-        final boolean offline = app.isOffline(geocode, null) && (img_type == SPOILER_IMAGES || settings.storelogimages);
-        final boolean save = img_type == SPOILER_IMAGES ? true : settings.storelogimages;
+        final boolean offline = app.isOffline(geocode, null) && (img_type == SPOILER_IMAGES || Settings.isStoreLogImages());
+        final boolean save = img_type == SPOILER_IMAGES ? true : Settings.isStoreLogImages();
 
         loadImages(images, message, save, offline);
     }
@@ -206,7 +206,6 @@ public class cgeoimages extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        settings.load();
     }
 
 }

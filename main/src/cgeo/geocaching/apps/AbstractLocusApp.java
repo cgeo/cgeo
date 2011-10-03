@@ -2,7 +2,7 @@ package cgeo.geocaching.apps;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -105,7 +105,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
         }
 
         // create one simple point with location
-        Location loc = new Location(cgSettings.tag);
+        Location loc = new Location(Settings.tag);
         loc.setLatitude(cache.coords.getLatitude());
         loc.setLongitude(cache.coords.getLongitude());
 
@@ -183,7 +183,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
         }
 
         // create one simple point with location
-        Location loc = new Location(cgSettings.tag);
+        Location loc = new Location(Settings.tag);
         loc.setLatitude(waypoint.coords.getLatitude());
         loc.setLongitude(waypoint.coords.getLongitude());
 

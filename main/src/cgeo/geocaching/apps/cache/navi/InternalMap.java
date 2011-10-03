@@ -3,7 +3,7 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -25,8 +25,7 @@ class InternalMap extends AbstractInternalMap implements
     public boolean invoke(cgGeo geo, Activity activity, Resources res,
             cgCache cache,
             final UUID searchId, cgWaypoint waypoint, final Geopoint coords) {
-        cgSettings settings = getSettings(activity);
-        Intent mapIntent = new Intent(activity, settings.getMapFactory().getMapClass());
+        Intent mapIntent = new Intent(activity, Settings.getMapFactory().getMapClass());
         if (cache != null) {
             mapIntent.putExtra("detail", false);
             mapIntent.putExtra("geocode", cache.geocode);

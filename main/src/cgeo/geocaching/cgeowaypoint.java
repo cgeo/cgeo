@@ -107,7 +107,7 @@ public class cgeowaypoint extends AbstractActivity {
                     waitDialog.dismiss();
                     waitDialog = null;
                 }
-                Log.e(cgSettings.tag, "cgeowaypoint.loadWaypointHandler: " + e.toString());
+                Log.e(Settings.tag, "cgeowaypoint.loadWaypointHandler: " + e.toString());
             }
         }
 
@@ -153,7 +153,7 @@ public class cgeowaypoint extends AbstractActivity {
         }
 
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
+            geo = app.startGeo(this, geoUpdate, base, 0, 0);
         }
 
         waitDialog = ProgressDialog.show(this, null, res.getString(R.string.waypoint_loading), true);
@@ -166,10 +166,9 @@ public class cgeowaypoint extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        settings.load();
 
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
+            geo = app.startGeo(this, geoUpdate, base, 0, 0);
         }
 
         if (waitDialog == null) {
@@ -272,7 +271,7 @@ public class cgeowaypoint extends AbstractActivity {
 
                 loadWaypointHandler.sendMessage(new Message());
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgeowaypoint.loadWaypoint.run: " + e.toString());
+                Log.e(Settings.tag, "cgeowaypoint.loadWaypoint.run: " + e.toString());
             }
         }
     }

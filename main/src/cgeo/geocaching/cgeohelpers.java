@@ -25,7 +25,6 @@ public class cgeohelpers extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        settings.load();
     }
 
     private void installFromMarket(String marketId) {

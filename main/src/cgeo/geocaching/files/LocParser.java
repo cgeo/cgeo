@@ -4,7 +4,7 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCacheWrap;
 import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgSearch;
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.geopoint.GeopointParser;
@@ -133,7 +133,7 @@ public final class LocParser extends FileParser {
             }
         }
 
-        Log.i(cgSettings.tag,
+        Log.i(Settings.tag,
                 "Coordinates found in .loc file: " + coords.size());
         return coords;
     }
@@ -163,9 +163,9 @@ public final class LocParser extends FileParser {
             }
             caches.totalCnt = caches.cacheList.size();
             showCountMessage(handler, search.getCount());
-            Log.i(cgSettings.tag, "Caches found in .gpx file: " + caches.totalCnt);
+            Log.i(Settings.tag, "Caches found in .gpx file: " + caches.totalCnt);
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgBase.parseGPX: " + e.toString());
+            Log.e(Settings.tag, "cgBase.parseGPX: " + e.toString());
         }
 
         return search.getCurrentId();

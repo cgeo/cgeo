@@ -84,17 +84,17 @@ public class cgHtmlImg implements Html.ImageGetter {
         }
 
         if (StringUtils.isNotBlank(geocode)) {
-            dirName = cgSettings.getStorage() + geocode + "/";
-            fileName = cgSettings.getStorage() + geocode + "/" + CryptUtils.md5(url) + urlExt;
-            fileNameSec = cgSettings.getStorageSec() + geocode + "/" + CryptUtils.md5(url) + urlExt;
+            dirName = Settings.getStorage() + geocode + "/";
+            fileName = Settings.getStorage() + geocode + "/" + CryptUtils.md5(url) + urlExt;
+            fileNameSec = Settings.getStorageSec() + geocode + "/" + CryptUtils.md5(url) + urlExt;
         } else {
-            dirName = cgSettings.getStorage() + "_others/";
-            fileName = cgSettings.getStorage() + "_others/" + CryptUtils.md5(url) + urlExt;
-            fileNameSec = cgSettings.getStorageSec() + "_others/" + CryptUtils.md5(url) + urlExt;
+            dirName = Settings.getStorage() + "_others/";
+            fileName = Settings.getStorage() + "_others/" + CryptUtils.md5(url) + urlExt;
+            fileNameSec = Settings.getStorageSec() + "_others/" + CryptUtils.md5(url) + urlExt;
         }
 
         File dir = null;
-        dir = new File(cgSettings.getStorage());
+        dir = new File(Settings.getStorage());
         if (dir.exists() == false) {
             dir.mkdirs();
         }
@@ -155,7 +155,7 @@ public class cgHtmlImg implements Html.ImageGetter {
                     }
                 }
             } catch (Exception e) {
-                Log.w(cgSettings.tag, "cgHtmlImg.getDrawable (reading cache): " + e.toString());
+                Log.w(Settings.tag, "cgHtmlImg.getDrawable (reading cache): " + e.toString());
             }
         }
 
@@ -173,13 +173,13 @@ public class cgHtmlImg implements Html.ImageGetter {
                     url = "http://" + connector.getHost() + url;
                 }
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (parse URL): " + e.toString());
+                Log.e(Settings.tag, "cgHtmlImg.getDrawable (parse URL): " + e.toString());
             }
 
             if (uri != null) {
                 for (int i = 0; i < 2; i++) {
                     if (i > 0) {
-                        Log.w(cgSettings.tag, "cgHtmlImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
+                        Log.w(Settings.tag, "cgHtmlImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
                     }
 
                     try {
@@ -216,7 +216,7 @@ public class cgHtmlImg implements Html.ImageGetter {
                             break;
                         }
                     } catch (Exception e) {
-                        Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (downloading from web)", e);
+                        Log.e(Settings.tag, "cgHtmlImg.getDrawable (downloading from web)", e);
                     }
                 }
             }
@@ -243,7 +243,7 @@ public class cgHtmlImg implements Html.ImageGetter {
                         }
                     }
                 } catch (IOException e) {
-                    Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (saving to cache)", e);
+                    Log.e(Settings.tag, "cgHtmlImg.getDrawable (saving to cache)", e);
                 }
             }
         }
@@ -254,7 +254,7 @@ public class cgHtmlImg implements Html.ImageGetter {
 
         // get image and return
         if (imagePre == null) {
-            Log.d(cgSettings.tag, "cgHtmlImg.getDrawable: Failed to obtain image");
+            Log.d(Settings.tag, "cgHtmlImg.getDrawable: Failed to obtain image");
 
             if (placement == false) {
                 imagePre = BitmapFactory.decodeResource(activity.getResources(), R.drawable.image_no_placement);
@@ -283,7 +283,7 @@ public class cgHtmlImg implements Html.ImageGetter {
             try {
                 imagePre = Bitmap.createScaledBitmap(imagePre, width, height, true);
             } catch (Exception e) {
-                Log.d(cgSettings.tag, "cgHtmlImg.getDrawable: Failed to scale image");
+                Log.d(Settings.tag, "cgHtmlImg.getDrawable: Failed to scale image");
                 return null;
             }
         } else {

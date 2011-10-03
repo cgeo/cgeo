@@ -5,7 +5,7 @@ import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCacheWrap;
 import cgeo.geocaching.cgSearch;
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
 
 import org.apache.commons.lang3.StringUtils;
@@ -79,7 +79,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
         if (StringUtils.isEmpty(page)) {
             if (app.isThere(geocode, guid, true, false)) {
                 if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
-                    Log.i(cgSettings.tag, "Loading old cache from cache.");
+                    Log.i(Settings.tag, "Loading old cache from cache.");
 
                     geocode = app.getGeocode(guid);
                 }
@@ -96,7 +96,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
                 return search.getCurrentId();
             }
 
-            Log.e(cgSettings.tag, "cgeoBase.searchByGeocode: No data from server");
+            Log.e(Settings.tag, "cgeoBase.searchByGeocode: No data from server");
             return null;
         }
 
@@ -111,16 +111,16 @@ public class GCConnector extends AbstractConnector implements IConnector {
 
             app.addSearch(search, null, true, reason);
 
-            Log.e(cgSettings.tag, "cgeoBase.searchByGeocode: No cache parsed");
+            Log.e(Settings.tag, "cgeoBase.searchByGeocode: No cache parsed");
             return null;
         }
 
         if (app == null) {
-            Log.e(cgSettings.tag, "cgeoBase.searchByGeocode: No application found");
+            Log.e(Settings.tag, "cgeoBase.searchByGeocode: No application found");
             return null;
         }
 
-        List<cgCache> cacheList = cgBase.processSearchResults(search, caches, 0, 0, null);
+        List<cgCache> cacheList = cgBase.processSearchResults(search, caches, false, false, null);
         app.addSearch(search, cacheList, true, reason);
 
         return search.getCurrentId();

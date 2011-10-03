@@ -1,6 +1,5 @@
 package cgeo.geocaching.maps.mapsforge;
 
-import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.maps.PositionOverlay;
 import cgeo.geocaching.maps.ScaleOverlay;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
@@ -21,14 +20,14 @@ public class MapsforgeOverlay extends Overlay implements OverlayImpl {
     private GeneralOverlay overlayBase = null;
     private Lock lock = new ReentrantLock();
 
-    public MapsforgeOverlay(Activity activityIn, cgSettings settingsIn, OverlayImpl.overlayType ovlType) {
+    public MapsforgeOverlay(Activity activityIn, OverlayImpl.overlayType ovlType) {
 
         switch (ovlType) {
             case PositionOverlay:
-                overlayBase = new PositionOverlay(settingsIn, activityIn, this);
+                overlayBase = new PositionOverlay(activityIn, this);
                 break;
             case ScaleOverlay:
-                overlayBase = new ScaleOverlay(activityIn, settingsIn, this);
+                overlayBase = new ScaleOverlay(activityIn, this);
         }
     }
 

@@ -3,7 +3,7 @@ package cgeo.geocaching.activity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeo;
 
 import org.apache.commons.lang3.StringUtils;
@@ -77,8 +77,7 @@ public final class ActivityMixin {
     }
 
     public final static void setTheme(final Activity activity) {
-        cgSettings settings = new cgSettings(activity, activity.getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE));
-        if (settings.skin == 1) {
+        if (Settings.isLightSkin()) {
             activity.setTheme(R.style.light);
         } else {
             activity.setTheme(R.style.dark);
@@ -129,12 +128,11 @@ public final class ActivityMixin {
         if (!cache.supportsLogging()) {
             return;
         }
-        cgSettings settings = activity.getSettings();
         Resources res = ((Activity) activity).getResources();
-        if (cgSettings.isLogin()) {
-            if (settings.getLogOffline()) {
+        if (Settings.isLogin()) {
+            if (Settings.getLogOffline()) {
                 SubMenu logMenu = menu.addSubMenu(1, IAbstractActivity.MENU_LOG_VISIT_OFFLINE, 0, res.getString(R.string.cache_menu_visit_offline)).setIcon(MENU_ICON_LOG_VISIT);
-                List<Integer> logTypes = cache.getPossibleLogTypes(settings);
+                List<Integer> logTypes = cache.getPossibleLogTypes();
                 for (Integer logType : logTypes) {
                     String label = cgBase.logTypes2.get(logType);
                     logMenu.add(1, IAbstractActivity.MENU_LOG_VISIT_OFFLINE + logType, 0, label);

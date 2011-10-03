@@ -3,14 +3,11 @@ package cgeo.geocaching.test;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCacheWrap;
-import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.test.mock.GC1ZXX2;
 import cgeo.geocaching.test.mock.GC2CJPF;
 import cgeo.geocaching.test.mock.MockedCache;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.test.ApplicationTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
@@ -29,7 +26,6 @@ import junit.framework.Assert;
 
 public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
 
-    private cgSettings settings = null;
     private cgBase base = null;
 
     public cgeoApplicationTest() {
@@ -42,13 +38,9 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
 
         // init environment
         createApplication();
-        final Context context = this.getContext();
-        final SharedPreferences prefs = context.getSharedPreferences(
-                cgSettings.preferences, Context.MODE_PRIVATE);
 
         // create required c:geo objects
-        settings = new cgSettings(context, prefs);
-        base = new cgBase(this.getApplication(), settings);
+        base = new cgBase(this.getApplication());
     }
 
     /**

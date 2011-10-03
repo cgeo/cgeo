@@ -1,7 +1,7 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.activity.AbstractListActivity;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -63,7 +63,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
                 if (waitDialog != null) {
                     waitDialog.dismiss();
                 }
-                Log.e(cgSettings.tag, "cgFileList.loadFilesHandler: " + e.toString());
+                Log.e(Settings.tag, "cgFileList.loadFilesHandler: " + e.toString());
             }
         }
     };
@@ -114,7 +114,6 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
     public void onResume() {
         super.onResume();
 
-        getSettings().load();
     }
 
     protected abstract T getAdapter(List<File> files);
@@ -166,10 +165,10 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
                         listDir(list, Environment.getExternalStorageDirectory());
                     }
                 } else {
-                    Log.w(cgSettings.tag, "No external media mounted.");
+                    Log.w(Settings.tag, "No external media mounted.");
                 }
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgFileList.loadFiles.run: " + e.toString());
+                Log.e(Settings.tag, "cgFileList.loadFiles.run: " + e.toString());
             }
 
             final Message msg = new Message();

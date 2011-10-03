@@ -252,10 +252,10 @@ public class cgCache implements ICache {
         Pattern patternOk = Pattern.compile(guid, Pattern.CASE_INSENSITIVE);
         Matcher matcherOk = patternOk.matcher(page);
         if (matcherOk.find()) {
-            Log.i(cgSettings.tag, "cgCache.isGuidContainedInPage: guid '" + guid + "' found");
+            Log.i(Settings.tag, "cgCache.isGuidContainedInPage: guid '" + guid + "' found");
             return true;
         } else {
-            Log.i(cgSettings.tag, "cgCache.isGuidContainedInPage: guid '" + guid + "' not found");
+            Log.i(Settings.tag, "cgCache.isGuidContainedInPage: guid '" + guid + "' not found");
             return false;
         }
     }
@@ -279,11 +279,11 @@ public class cgCache implements ICache {
         return true;
     }
 
-    public boolean logOffline(final IAbstractActivity fromActivity, final int logType, final cgSettings settings, final cgBase base) {
+    public boolean logOffline(final IAbstractActivity fromActivity, final int logType, final cgBase base) {
         String log = "";
-        if (StringUtils.isNotBlank(settings.getSignature())
-                && settings.signatureAutoinsert) {
-            log = LogTemplateProvider.applyTemplates(settings.getSignature(), base, true);
+        if (StringUtils.isNotBlank(Settings.getSignature())
+                && Settings.isAutoInsertSignature()) {
+            log = LogTemplateProvider.applyTemplates(Settings.getSignature(), base, true);
         }
         logOffline(fromActivity, log, Calendar.getInstance(), logType);
         return true;
@@ -305,8 +305,8 @@ public class cgCache implements ICache {
         }
     }
 
-    public List<Integer> getPossibleLogTypes(cgSettings settings) {
-        boolean isOwner = owner != null && owner.equalsIgnoreCase(settings.getUsername());
+    public List<Integer> getPossibleLogTypes() {
+        boolean isOwner = owner != null && owner.equalsIgnoreCase(Settings.getUsername());
         List<Integer> types = new ArrayList<Integer>();
         if ("event".equals(type) || "mega".equals(type) || "cito".equals(type) || "lostfound".equals(type)) {
             types.add(cgBase.LOG_WILL_ATTEND);

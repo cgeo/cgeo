@@ -3,7 +3,7 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -49,7 +49,7 @@ class GoogleMapsApp extends AbstractNavigationApp implements NavigationApp {
             // nothing
         }
 
-        Log.i(cgSettings.tag, "cgBase.runExternalMap: No maps application available.");
+        Log.i(Settings.tag, "cgBase.runExternalMap: No maps application available.");
 
         if (res != null) {
             ActivityMixin.showToast(activity, res.getString(R.string.err_application_no));

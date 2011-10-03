@@ -149,7 +149,6 @@ public class cgeotouch extends cgLogForm {
     public void onResume() {
         super.onResume();
 
-        settings.load();
     }
 
     @Override
@@ -174,7 +173,7 @@ public class cgeotouch extends cgLogForm {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        if (settings.getSignature() == null) {
+        if (Settings.getSignature() == null) {
             menu.findItem(0x1).setVisible(false);
             menu.findItem(0x7).setVisible(false);
         } else {
@@ -212,14 +211,14 @@ public class cgeotouch extends cgLogForm {
             if ((id & 0x2) == 0x2) {
                 addText += timeString;
             }
-            if ((id & 0x1) == 0x1 && settings.getSignature() != null) {
+            if ((id & 0x1) == 0x1 && Settings.getSignature() != null) {
                 if (addText.length() > 0) {
                     addText += "\n";
                 }
-                addText += settings.getSignature()
+                addText += Settings.getSignature()
                         .replaceAll("\\[DATE\\]", dateString)
                         .replaceAll("\\[TIME\\]", timeString)
-                        .replaceAll("\\[USER\\]", settings.getUsername())
+                        .replaceAll("\\[USER\\]", Settings.getUsername())
                         .replaceAll("\\[NUMBER\\]", "");
             }
             if (textContent.length() > 0 && addText.length() > 0) {
@@ -239,8 +238,9 @@ public class cgeotouch extends cgLogForm {
         final int viewId = view.getId();
 
         if (viewId == R.id.type) {
-            for (final int typeOne : types)
+            for (final int typeOne : types) {
                 menu.add(viewId, typeOne, 0, cgBase.logTypes2.get(typeOne));
+            }
         }
     }
 
@@ -259,8 +259,9 @@ public class cgeotouch extends cgLogForm {
     }
 
     public void init() {
-        if (geocode != null)
+        if (geocode != null) {
             app.setAction("logging trackable");
+        }
 
         types.clear();
         types.add(cgBase.LOG_RETRIEVED_IT);
@@ -268,8 +269,9 @@ public class cgeotouch extends cgLogForm {
         types.add(cgBase.LOG_NOTE);
         types.add(cgBase.LOG_DISCOVERED_IT);
 
-        if (typeSelected < 0 && cgBase.logTypes2.get(typeSelected) == null)
+        if (typeSelected < 0 && cgBase.logTypes2.get(typeSelected) == null) {
             typeSelected = types.get(2);
+        }
         setType(typeSelected);
 
         Button typeButton = (Button) findViewById(R.id.type);
@@ -285,10 +287,12 @@ public class cgeotouch extends cgLogForm {
         dateButton.setText(base.formatShortDate(date.getTime().getTime()));
         dateButton.setOnClickListener(new cgeotouchDateListener());
 
-        if (tweetBox == null)
+        if (tweetBox == null) {
             tweetBox = (LinearLayout) findViewById(R.id.tweet_box);
-        if (tweetCheck == null)
+        }
+        if (tweetCheck == null) {
             tweetCheck = (CheckBox) findViewById(R.id.tweet);
+        }
         tweetCheck.setChecked(true);
 
         Button buttonPost = (Button) findViewById(R.id.post);
@@ -316,18 +320,22 @@ public class cgeotouch extends cgLogForm {
     public void setType(int type) {
         final Button typeButton = (Button) findViewById(R.id.type);
 
-        if (cgBase.logTypes2.get(type) != null)
+        if (cgBase.logTypes2.get(type) != null) {
             typeSelected = type;
-        if (cgBase.logTypes2.get(typeSelected) == null)
+        }
+        if (cgBase.logTypes2.get(typeSelected) == null) {
             typeSelected = 0;
+        }
         typeButton.setText(cgBase.logTypes2.get(typeSelected));
 
-        if (tweetBox == null)
+        if (tweetBox == null) {
             tweetBox = (LinearLayout) findViewById(R.id.tweet_box);
-        if (settings.twitter == 1)
+        }
+        if (Settings.isUseTwitter()) {
             tweetBox.setVisibility(View.VISIBLE);
-        else
+        } else {
             tweetBox.setVisibility(View.GONE);
+        }
     }
 
     private class cgeotouchDateListener implements View.OnClickListener {
@@ -401,7 +409,7 @@ public class cgeotouch extends cgLogForm {
                     showToast(res.getString(R.string.info_log_type_changed));
                 }
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgeotouch.loadData.run: " + e.toString());
+                Log.e(Settings.tag, "cgeotouch.loadData.run: " + e.toString());
             }
 
             loadDataHandler.sendEmptyMessage(0);
@@ -433,22 +441,24 @@ public class cgeotouch extends cgLogForm {
         int status = -1;
 
         try {
-            if (tweetBox == null)
+            if (tweetBox == null) {
                 tweetBox = (LinearLayout) findViewById(R.id.tweet_box);
-            if (tweetCheck == null)
+            }
+            if (tweetCheck == null) {
                 tweetCheck = (CheckBox) findViewById(R.id.tweet);
+            }
 
             status = base.postLogTrackable(guid, tracking, viewstates, typeSelected, date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE), log);
 
-            if (status == 1 && settings.twitter == 1 &&
-                    StringUtils.isNotBlank(settings.tokenPublic) && StringUtils.isNotBlank(settings.tokenSecret) &&
+            if (status == 1 && Settings.isUseTwitter() &&
+                    Settings.isTwitterLoginValid() &&
                     tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
-                cgBase.postTweetTrackable(app, settings, geocode);
+                cgBase.postTweetTrackable(app, geocode);
             }
 
             return status;
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgeotouch.postLogFn: " + e.toString());
+            Log.e(Settings.tag, "cgeotouch.postLogFn: " + e.toString());
         }
 
         return 1000;

@@ -20,8 +20,7 @@ public class cgSelectMapfile extends FileList<cgMapfileListAdapter> {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mapFile = getSettings().getMapFile();
+        mapFile = Settings.getMapFile();
     }
 
     public void close() {

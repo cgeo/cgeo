@@ -47,7 +47,6 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
     private Resources res = null;
     private List<cgCache> list = null;
-    private cgSettings settings = null;
     private cgCacheView holder = null;
     private LayoutInflater inflater = null;
     private Activity activity = null;
@@ -72,12 +71,11 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
     private cgFilter currentFilter = null;
     private List<cgCache> originalList = null;
 
-    public cgCacheListAdapter(Activity activityIn, cgSettings settingsIn, List<cgCache> listIn, cgBase baseIn) {
+    public cgCacheListAdapter(Activity activityIn, List<cgCache> listIn, cgBase baseIn) {
         super(activityIn, 0, listIn);
 
         res = activityIn.getResources();
         activity = activityIn;
-        settings = settingsIn;
         list = listIn;
         base = baseIn;
 
@@ -91,14 +89,14 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             }
         }
 
-        if (settings.skin == 0) {
-            ratingBcgs[0] = R.drawable.favourite_background_red_dark;
-            ratingBcgs[1] = R.drawable.favourite_background_orange_dark;
-            ratingBcgs[2] = R.drawable.favourite_background_green_dark;
-        } else {
+        if (Settings.isLightSkin()) {
             ratingBcgs[0] = R.drawable.favourite_background_red_light;
             ratingBcgs[1] = R.drawable.favourite_background_orange_light;
             ratingBcgs[2] = R.drawable.favourite_background_green_light;
+        } else {
+            ratingBcgs[0] = R.drawable.favourite_background_red_dark;
+            ratingBcgs[1] = R.drawable.favourite_background_orange_dark;
+            ratingBcgs[2] = R.drawable.favourite_background_green_dark;
         }
     }
 
@@ -266,7 +264,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             }
             notifyDataSetChanged();
         } catch (Exception e) {
-            Log.w(cgSettings.tag, "cgCacheListAdapter.setActualCoordinates: failed to sort caches in list");
+            Log.w(Settings.tag, "cgCacheListAdapter.setActualCoordinates: failed to sort caches in list");
         }
     }
 
@@ -287,7 +285,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
                 }
                 notifyDataSetChanged();
             } catch (Exception e) {
-                Log.w(cgSettings.tag, "cgCacheListAdapter.setActualCoordinates: failed to sort caches in list");
+                Log.w(Settings.tag, "cgCacheListAdapter.setActualCoordinates: failed to sort caches in list");
             }
 
             lastSort = System.currentTimeMillis();
@@ -360,7 +358,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         }
 
         if (position > getCount()) {
-            Log.w(cgSettings.tag, "cgCacheListAdapter.getView: Attempt to access missing item #" + position);
+            Log.w(Settings.tag, "cgCacheListAdapter.getView: Attempt to access missing item #" + position);
             return null;
         }
 
@@ -394,7 +392,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         }
 
         if (cache.own) {
-            if (settings.skin == 1) {
+            if (Settings.isLightSkin()) {
                 holder.oneInfo.setBackgroundResource(R.color.owncache_background_light);
                 holder.oneCheckbox.setBackgroundResource(R.color.owncache_background_light);
             } else {
@@ -402,7 +400,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
                 holder.oneCheckbox.setBackgroundResource(R.color.owncache_background_dark);
             }
         } else {
-            if (settings.skin == 1) {
+            if (Settings.isLightSkin()) {
                 holder.oneInfo.setBackgroundResource(R.color.background_light);
                 holder.oneCheckbox.setBackgroundResource(R.color.background_light);
             } else {
@@ -524,7 +522,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             Bitmap dirImgPre = null;
             Bitmap dirImg = null;
             try {
-                dirImgPre = BitmapFactory.decodeFile(cgSettings.getStorage() + cache.geocode + "/direction.png");
+                dirImgPre = BitmapFactory.decodeFile(Settings.getStorage() + cache.geocode + "/direction.png");
                 dirImg = dirImgPre.copy(Bitmap.Config.ARGB_8888, true);
 
                 dirImgPre.recycle();
@@ -534,7 +532,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             }
 
             if (dirImg != null) {
-                if (settings.skin == 0) {
+                if (!Settings.isLightSkin()) {
                     int length = dirImg.getWidth() * dirImg.getHeight();
                     int[] pixels = new int[length];
                     dirImg.getPixels(pixels, 0, dirImg.getWidth(), 0, 0, dirImg.getWidth(), dirImg.getHeight());
@@ -562,7 +560,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
         int favoriteBack;
         // set default background, neither vote nor rating may be available
-        if (settings.skin == 1) {
+        if (Settings.isLightSkin()) {
             favoriteBack = R.drawable.favourite_background_light;
         } else {
             favoriteBack = R.drawable.favourite_background_dark;
@@ -783,7 +781,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
                     return true;
                 }
             } catch (Exception e) {
-                Log.w(cgSettings.tag, "cgCacheListAdapter.detectGesture.onFling: " + e.toString());
+                Log.w(Settings.tag, "cgCacheListAdapter.detectGesture.onFling: " + e.toString());
             }
 
             return false;

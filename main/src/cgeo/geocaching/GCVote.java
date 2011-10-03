@@ -55,8 +55,8 @@ public final class GCVote {
 
         try {
             final Parameters params = new Parameters();
-            if (cgSettings.isLogin()) {
-                final Map<String, String> login = cgSettings.getGCvoteLogin();
+            if (Settings.isLogin()) {
+                final Map<String, String> login = Settings.getGCvoteLogin();
                 if (login != null) {
                     params.put("userName", login.get("username"));
                     params.put("password", login.get("password"));
@@ -96,7 +96,7 @@ public final class GCVote {
                         }
                     }
                 } catch (Exception e) {
-                    Log.w(cgSettings.tag, "cgBase.getRating: Failed to parse guid");
+                    Log.w(Settings.tag, "cgBase.getRating: Failed to parse guid");
                 }
 
                 try {
@@ -109,7 +109,7 @@ public final class GCVote {
                         }
                     }
                 } catch (Exception e) {
-                    Log.w(cgSettings.tag, "cgBase.getRating: Failed to parse loggedIn");
+                    Log.w(Settings.tag, "cgBase.getRating: Failed to parse loggedIn");
                 }
 
                 try {
@@ -120,7 +120,7 @@ public final class GCVote {
                         }
                     }
                 } catch (Exception e) {
-                    Log.w(cgSettings.tag, "cgBase.getRating: Failed to parse rating");
+                    Log.w(Settings.tag, "cgBase.getRating: Failed to parse rating");
                 }
 
                 try {
@@ -131,7 +131,7 @@ public final class GCVote {
                         }
                     }
                 } catch (Exception e) {
-                    Log.w(cgSettings.tag, "cgBase.getRating: Failed to parse vote count");
+                    Log.w(Settings.tag, "cgBase.getRating: Failed to parse vote count");
                 }
 
                 if (loggedIn) {
@@ -143,7 +143,7 @@ public final class GCVote {
                             }
                         }
                     } catch (Exception e) {
-                        Log.w(cgSettings.tag, "cgBase.getRating: Failed to parse user's vote");
+                        Log.w(Settings.tag, "cgBase.getRating: Failed to parse user's vote");
                     }
                 }
 
@@ -152,7 +152,7 @@ public final class GCVote {
                 }
             }
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgBase.getRating: " + e.toString());
+            Log.e(Settings.tag, "cgBase.getRating: " + e.toString());
         }
 
         return ratings;
@@ -170,7 +170,7 @@ public final class GCVote {
             return false;
         }
 
-        final Map<String, String> login = cgSettings.getGCvoteLogin();
+        final Map<String, String> login = Settings.getGCvoteLogin();
         if (login == null) {
             return false;
         }

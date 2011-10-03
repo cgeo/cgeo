@@ -1,6 +1,6 @@
 package cgeo.geocaching.compatibility;
 
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.Settings;
 
 import android.app.Activity;
 import android.app.backup.BackupManager;
@@ -15,7 +15,7 @@ public class AndroidLevel8 {
     }
 
     static public void dataChanged(final String name) {
-        Log.i(cgSettings.tag, "Requesting settings backup with settings manager");
+        Log.i(Settings.tag, "Requesting settings backup with settings manager");
         BackupManager.dataChanged(name);
     }
 }

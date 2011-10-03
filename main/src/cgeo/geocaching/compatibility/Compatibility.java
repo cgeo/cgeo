@@ -1,6 +1,6 @@
 package cgeo.geocaching.compatibility;
 
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.Settings;
 
 import android.app.Activity;
 import android.content.res.Configuration;
@@ -28,7 +28,7 @@ public final class Compatibility {
                 getRotationMethod = cl.getDeclaredMethod("getRotation", Activity.class);
             } catch (final Exception e) {
                 // Exception can be ClassNotFoundException, SecurityException or NoSuchMethodException
-                Log.e(cgSettings.tag, "Cannot load AndroidLevel8 class", e);
+                Log.e(Settings.tag, "Cannot load AndroidLevel8 class", e);
             }
         }
     }
@@ -47,7 +47,7 @@ public final class Compatibility {
                 }
             } catch (final Exception e) {
                 // This should never happen: IllegalArgumentException, IllegalAccessException or InvocationTargetException
-                Log.e(cgSettings.tag, "Cannot call getRotation()", e);
+                Log.e(Settings.tag, "Cannot call getRotation()", e);
             }
         } else {
             final Display display = activity.getWindowManager()
@@ -74,7 +74,7 @@ public final class Compatibility {
                 dataChangedMethod.invoke(null, name);
             } catch (final Exception e) {
                 // This should never happen: IllegalArgumentException, IllegalAccessException or InvocationTargetException
-                Log.e(cgSettings.tag, "Cannot call dataChanged()", e);
+                Log.e(Settings.tag, "Cannot call dataChanged()", e);
             }
         }
     }

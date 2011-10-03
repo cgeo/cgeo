@@ -129,7 +129,7 @@ public class cgeodetail extends AbstractActivity {
             } catch (Exception e) {
                 showToast(res.getString(R.string.err_store_failed));
 
-                Log.e(cgSettings.tag, "cgeodetail.storeCacheHandler: " + e.toString());
+                Log.e(Settings.tag, "cgeodetail.storeCacheHandler: " + e.toString());
             }
 
             setView();
@@ -146,7 +146,7 @@ public class cgeodetail extends AbstractActivity {
             } catch (Exception e) {
                 showToast(res.getString(R.string.err_refresh_failed));
 
-                Log.e(cgSettings.tag, "cgeodetail.refreshCacheHandler: " + e.toString());
+                Log.e(Settings.tag, "cgeodetail.refreshCacheHandler: " + e.toString());
             }
 
             setView();
@@ -161,7 +161,7 @@ public class cgeodetail extends AbstractActivity {
             } catch (Exception e) {
                 showToast(res.getString(R.string.err_drop_failed));
 
-                Log.e(cgSettings.tag, "cgeodetail.dropCacheHandler: " + e.toString());
+                Log.e(Settings.tag, "cgeodetail.dropCacheHandler: " + e.toString());
             }
 
             setView();
@@ -187,7 +187,7 @@ public class cgeodetail extends AbstractActivity {
 
             setView();
 
-            if (settings.autoLoadDesc == 1) {
+            if (Settings.isAutoLoadDescription()) {
                 try {
                     loadLongDesc();
                 } catch (Exception e) {
@@ -339,9 +339,9 @@ public class cgeodetail extends AbstractActivity {
             String uriQuery = uri.getQuery();
 
             if (uriQuery != null) {
-                Log.i(cgSettings.tag, "Opening URI: " + uriHost + uriPath + "?" + uriQuery);
+                Log.i(Settings.tag, "Opening URI: " + uriHost + uriPath + "?" + uriQuery);
             } else {
-                Log.i(cgSettings.tag, "Opening URI: " + uriHost + uriPath);
+                Log.i(Settings.tag, "Opening URI: " + uriHost + uriPath);
             }
 
             if (uriHost.contains("geocaching.com")) {
@@ -408,10 +408,9 @@ public class cgeodetail extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        settings.load();
 
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
+            geo = app.startGeo(this, geoUpdate, base, 0, 0);
         }
         if (!disableResumeSetView) {
             setView();
@@ -574,7 +573,7 @@ public class cgeodetail extends AbstractActivity {
         }
 
         int logType = menuItem - MENU_LOG_VISIT_OFFLINE;
-        cache.logOffline(this, logType, settings, base);
+        cache.logOffline(this, logType, base);
         return true;
     }
 
@@ -586,7 +585,7 @@ public class cgeodetail extends AbstractActivity {
             inflater = getLayoutInflater();
         }
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
+            geo = app.startGeo(this, geoUpdate, base, 0, 0);
         }
 
         if (searchId != null) {
@@ -1075,7 +1074,7 @@ public class cgeodetail extends AbstractActivity {
                 cacheDistance.bringToFront();
             }
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgeodetail.setView: " + e.toString());
+            Log.e(Settings.tag, "cgeodetail.setView: " + e.toString());
         }
 
         if (waitDialog != null && waitDialog.isShowing())
@@ -1363,7 +1362,7 @@ public class cgeodetail extends AbstractActivity {
                 Message message = handler.obtainMessage(0, image);
                 handler.sendMessage(message);
             } catch (Exception e) {
-                Log.w(cgSettings.tag, "cgeodetail.loadMapPreview.run: " + e.toString());
+                Log.w(Settings.tag, "cgeodetail.loadMapPreview.run: " + e.toString());
             }
         }
     }
@@ -1411,7 +1410,7 @@ public class cgeodetail extends AbstractActivity {
             coords.coords = cache.coords;
             coordinates.add(coords);
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgeodetail.getCoordinates (cache): " + e.toString());
+            Log.e(Settings.tag, "cgeodetail.getCoordinates (cache): " + e.toString());
         }
 
         try {
@@ -1428,7 +1427,7 @@ public class cgeodetail extends AbstractActivity {
                 coordinates.add(coords);
             }
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgeodetail.getCoordinates (waypoint): " + e.toString());
+            Log.e(Settings.tag, "cgeodetail.getCoordinates (waypoint): " + e.toString());
         }
 
         return coordinates;
@@ -1549,7 +1548,7 @@ public class cgeodetail extends AbstractActivity {
         } catch (Exception e) {
             showToast(res.getString(R.string.event_fail));
 
-            Log.e(cgSettings.tag, "cgeodetail.addToCalendarFn: " + e.toString());
+            Log.e(Settings.tag, "cgeodetail.addToCalendarFn: " + e.toString());
         }
     }
 
@@ -1635,12 +1634,12 @@ public class cgeodetail extends AbstractActivity {
                         } else if (diff < 0) {
                             dist.append(" ↘");
                         }
-                        if (settings.units == cgSettings.unitsImperial) {
-                            dist.append(String.format(Locale.getDefault(), "%.0f", (Math.abs(diff) * 3.2808399)));
-                            dist.append(" ft");
-                        } else {
+                        if (Settings.isUseMetricUnits()) {
                             dist.append(String.format(Locale.getDefault(), "%.0f", (Math.abs(diff))));
                             dist.append(" m");
+                        } else {
+                            dist.append(String.format(Locale.getDefault(), "%.0f", (Math.abs(diff) * 3.2808399)));
+                            dist.append(" ft");
                         }
                     }
                 }
@@ -1648,7 +1647,7 @@ public class cgeodetail extends AbstractActivity {
                 cacheDistance.setText(dist.toString());
                 cacheDistance.bringToFront();
             } catch (Exception e) {
-                Log.w(cgSettings.tag, "Failed to update location.");
+                Log.w(Settings.tag, "Failed to update location.");
             }
         }
     }
@@ -1668,7 +1667,7 @@ public class cgeodetail extends AbstractActivity {
                     startActivity(trackablesIntent);
                 }
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgeodetail.selectTrackable: " + e.toString());
+                Log.e(Settings.tag, "cgeodetail.selectTrackable: " + e.toString());
             }
         }
     }

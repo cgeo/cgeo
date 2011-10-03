@@ -1,13 +1,13 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.cgBase;
-import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.cgSettings.mapSourceEnum;
+import cgeo.geocaching.Settings;
+import cgeo.geocaching.Settings.mapSourceEnum;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
-import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 
 import android.app.Activity;
@@ -19,7 +19,6 @@ import android.graphics.Typeface;
 import android.util.DisplayMetrics;
 
 public class ScaleOverlay implements GeneralOverlay {
-    private cgSettings settings = null;
     private Paint scale = null;
     private Paint scaleShadow = null;
     private BlurMaskFilter blur = null;
@@ -31,8 +30,7 @@ public class ScaleOverlay implements GeneralOverlay {
     private String units = null;
     private OverlayImpl ovlImpl = null;
 
-    public ScaleOverlay(Activity activity, cgSettings settingsIn, OverlayImpl overlayImpl) {
-        settings = settingsIn;
+    public ScaleOverlay(Activity activity, OverlayImpl overlayImpl) {
         this.ovlImpl = overlayImpl;
 
         DisplayMetrics metrics = new DisplayMetrics();
@@ -63,7 +61,26 @@ public class ScaleOverlay implements GeneralOverlay {
         distance = leftCoords.distanceTo(rightCoords) / 2;
         distanceRound = 0d;
 
-        if (settings.units == cgSettings.unitsImperial) {
+        if (Settings.isUseMetricUnits()) {
+            if (distance > 100) { // 100+ km > 1xx km
+                distanceRound = Math.floor(distance / 100) * 100;
+                units = "km";
+            } else if (distance > 10) { // 10 - 100 km > 1x km
+                distanceRound = Math.floor(distance / 10) * 10;
+                units = "km";
+            } else if (distance > 1) { // 1 - 10 km > 1.x km
+                distanceRound = Math.floor(distance);
+                units = "km";
+            } else if (distance > 0.1) { // 100 m - 1 km > 1xx m
+                distance *= 1000;
+                distanceRound = Math.floor(distance / 100) * 100;
+                units = "m";
+            } else { // 1 - 100 m > 1x m
+                distance *= 1000;
+                distanceRound = Math.round(distance / 10) * 10;
+                units = "m";
+            }
+        } else {
             distance /= cgBase.miles2km;
 
             if (distance > 100) { // 100+ mi > 1xx mi
@@ -83,25 +100,6 @@ public class ScaleOverlay implements GeneralOverlay {
                 distance *= 5280;
                 distanceRound = Math.round(distance / 10) * 10;
                 units = "ft";
-            }
-        } else {
-            if (distance > 100) { // 100+ km > 1xx km
-                distanceRound = Math.floor(distance / 100) * 100;
-                units = "km";
-            } else if (distance > 10) { // 10 - 100 km > 1x km
-                distanceRound = Math.floor(distance / 10) * 10;
-                units = "km";
-            } else if (distance > 1) { // 1 - 10 km > 1.x km
-                distanceRound = Math.floor(distance);
-                units = "km";
-            } else if (distance > 0.1) { // 100 m - 1 km > 1xx m
-                distance *= 1000;
-                distanceRound = Math.floor(distance / 100) * 100;
-                units = "m";
-            } else { // 1 - 100 m > 1x m
-                distance *= 1000;
-                distanceRound = Math.round(distance / 10) * 10;
-                units = "m";
             }
         }
 
@@ -128,7 +126,7 @@ public class ScaleOverlay implements GeneralOverlay {
             scale.setTypeface(Typeface.DEFAULT_BOLD);
         }
 
-        if (mapSourceEnum.googleSat == settings.mapSource) {
+        if (mapSourceEnum.googleSat == Settings.getMapSource()) {
             scaleShadow.setColor(0xFF000000);
             scale.setColor(0xFFFFFFFF);
         } else {

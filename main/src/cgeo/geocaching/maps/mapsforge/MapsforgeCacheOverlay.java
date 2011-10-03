@@ -1,6 +1,5 @@
 package cgeo.geocaching.maps.mapsforge;
 
-import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.maps.CachesOverlay;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
@@ -22,9 +21,9 @@ public class MapsforgeCacheOverlay extends ItemizedOverlay<MapsforgeCacheOverlay
     private CachesOverlay base;
     private Lock lock = new ReentrantLock();
 
-    public MapsforgeCacheOverlay(cgSettings settingsIn, Context contextIn, Drawable markerIn, Boolean fromDetailIn) {
+    public MapsforgeCacheOverlay(Context contextIn, Drawable markerIn, Boolean fromDetailIn) {
         super(boundCenterBottom(markerIn));
-        base = new CachesOverlay(settingsIn, this, contextIn, fromDetailIn);
+        base = new CachesOverlay(this, contextIn, fromDetailIn);
     }
 
     @Override

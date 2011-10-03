@@ -45,7 +45,7 @@ public class ApiOpenCachingConnector extends OpenCachingConnector implements ICo
         final cgCacheWrap caches = new cgCacheWrap();
         caches.cacheList.add(cache);
 
-        final List<cgCache> cacheList = cgBase.processSearchResults(search, caches, 0, 0, null);
+        final List<cgCache> cacheList = cgBase.processSearchResults(search, caches, false, false, null);
         app.addSearch(search, cacheList, true, reason);
 
         return search.getCurrentId();
