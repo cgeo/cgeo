@@ -4,6 +4,8 @@ import cgeo.geocaching.files.FileList;
 import cgeo.geocaching.files.GPXParser;
 import cgeo.geocaching.files.LocParser;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -26,33 +28,26 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
 
     private ProgressDialog parseDialog = null;
     private int listId = 1;
-    private int imported = 0;
 
     final private Handler changeParseDialogHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
-            if (msg.obj != null && parseDialog != null) {
-                parseDialog.setMessage(res.getString(R.string.gpx_import_loading_stored) + " " + (Integer) msg.obj);
+            if (parseDialog != null) {
+                parseDialog.setMessage(res.getString(msg.arg1) + " " + msg.arg2);
             }
         }
     };
+
     final private Handler loadCachesHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
-            try {
-                if (parseDialog != null) {
-                    parseDialog.dismiss();
-                }
-
-                helpDialog(res.getString(R.string.gpx_import_title_caches_imported), imported + " " + res.getString(R.string.gpx_import_caches_imported));
-                imported = 0;
-            } catch (Exception e) {
-                if (parseDialog != null) {
-                    parseDialog.dismiss();
-                }
+            if (parseDialog != null) {
+                parseDialog.dismiss();
             }
+
+            helpDialog(res.getString(R.string.gpx_import_title_caches_imported), msg.arg1 + " " + res.getString(R.string.gpx_import_caches_imported));
         }
     };
 
@@ -116,9 +111,8 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
             else {
                 searchId = LocParser.parseLoc(file, listId, changeParseDialogHandler);
             }
-            imported = app.getCount(searchId);
 
-            loadCachesHandler.sendMessage(new Message());
+            loadCachesHandler.sendMessage(loadCachesHandler.obtainMessage(0, app.getCount(searchId), 0));
         }
     }
 
@@ -126,5 +120,15 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
         final Intent intent = new Intent(fromActivity, cgeogpxes.class);
         intent.putExtra(EXTRAS_LIST_ID, listId);
         fromActivity.startActivityForResult(intent, 0);
+    }
+
+    @Override
+    public boolean filenameBelongsToList(final String filename) {
+        if (super.filenameBelongsToList(filename)) {
+            // filter out waypoint files
+            return !StringUtils.endsWithIgnoreCase(filename, "-wpts.gpx");
+        } else {
+            return false;
+        }
     }
 }

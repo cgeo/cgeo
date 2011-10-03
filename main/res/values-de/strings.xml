@@ -584,7 +584,11 @@
   <string name="file_title_searching">Suche</string>
 
   <!-- gpx -->
+  <string name="gpx_import_loading_caches">Lade Caches aus GPX-Datei\nGelesen:</string>
+  <string name="gpx_import_loading_waypoints">Lade Wegpunkte aus GPX-Datei\nGelesen:</string>
+  <string name="gpx_import_storing">Schreibe Caches in Datenbank\nGespeichert:</string>
   <string name="gpx_import_loading_stored">Lade Caches aus GPX-Datei\nGespeichert:</string>
+  <string name="gpx_import_no_files">c:geo konnte keine GPX-Dateien finden.</string>
   <string name="gpx_import_caches_imported">Caches importiert.</string>
   <string name="gpx_import_loading">Lade Caches aus GPX-Datei</string>
   <string name="gpx_import_title">Importiere GPX-Datei</string>

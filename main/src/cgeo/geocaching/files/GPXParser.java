@@ -71,6 +71,7 @@ public abstract class GPXParser extends FileParser {
     final protected String namespace;
     final private String version;
     private Handler handler = null;
+    private int importedRecords;
 
     private cgCache cache = new cgCache();
     private cgTrackable trackable = new cgTrackable();
@@ -234,6 +235,7 @@ public abstract class GPXParser extends FileParser {
 
     // TODO: is not API, only public because of testing
     public boolean parse(final InputStream stream, Handler handlerIn) {
+        importedRecords = 0;
         handler = handlerIn;
 
         final RootElement root = new RootElement(namespace, "gpx");
@@ -279,7 +281,7 @@ public abstract class GPXParser extends FileParser {
                     createNoteFromGSAKUserdata();
 
                     result.put(cache.geocode, cache);
-                    showCountMessage(handler, result.size());
+                    showCountMessage(handler, R.string.gpx_import_loading_caches, ++importedRecords);
                 } else if (StringUtils.isNotBlank(cache.name)
                         && cache.coords != null
                         && StringUtils.contains(type, "waypoint")) {
@@ -314,7 +316,7 @@ public abstract class GPXParser extends FileParser {
                         }
                         cgWaypoint.mergeWayPoints(cacheForWaypoint.waypoints, Collections.singletonList(waypoint));
                         result.put(cacheGeocodeForWaypoint, cacheForWaypoint);
-                        showCountMessage(handler, result.size());
+                        showCountMessage(handler, R.string.gpx_import_loading_waypoints, ++importedRecords);
                     }
                 }
             }
@@ -880,10 +882,12 @@ public abstract class GPXParser extends FileParser {
             if (parsed) {
                 final cgSearch search = new cgSearch();
                 final cgeoapplication app = cgeoapplication.getInstance();
+                int storedCaches = 0;
                 for (cgCache cache : parser.getParsedCaches()) {
                     // remove from cache, cache can be re-imported
                     app.removeCacheFromCache(cache.geocode);
                     app.addCacheToSearch(search, cache);
+                    showCountMessage(handler, R.string.gpx_import_storing, ++storedCaches);                    
                 }
                 Log.i(Settings.tag, "Caches found in .gpx file: " + parser.getParsedCaches().size());
                 return search.getCurrentId();
