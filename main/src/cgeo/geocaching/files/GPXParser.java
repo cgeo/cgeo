@@ -882,12 +882,12 @@ public abstract class GPXParser extends FileParser {
             if (parsed) {
                 final cgSearch search = new cgSearch();
                 final cgeoapplication app = cgeoapplication.getInstance();
-                int i = 0;
+                int storedCaches = 0;
                 for (cgCache cache : parser.getParsedCaches()) {
                     // remove from cache, cache can be re-imported
                     app.removeCacheFromCache(cache.geocode);
                     app.addCacheToSearch(search, cache);
-                    showCountMessage(handler, R.string.gpx_import_storing, ++i);
+                    showCountMessage(handler, R.string.gpx_import_storing, ++storedCaches);
                 }
                 Log.i(cgSettings.tag, "Caches found in .gpx file: " + parser.getParsedCaches().size());
                 return search.getCurrentId();

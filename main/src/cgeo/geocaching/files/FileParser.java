@@ -3,7 +3,6 @@ package cgeo.geocaching.files;
 import cgeo.geocaching.cgCache;
 
 import android.os.Handler;
-import android.os.Message;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -30,10 +29,7 @@ public abstract class FileParser {
 
     protected static void showCountMessage(final Handler handler, final int msgId, final int count) {
         if (handler != null && (count <= 1 || count % 10 == 0)) {
-            final Message msg = new Message();
-            msg.arg1 = msgId;
-            msg.arg2 = count;
-            handler.sendMessage(msg);
+            handler.sendMessage(handler.obtainMessage(0, msgId, count));
         }
     }
 
