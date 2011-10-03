@@ -218,6 +218,8 @@ public class cgData {
             + "); ";
 
     public boolean initialized = false;
+    private SQLiteStatement statementDescription;
+    private SQLiteStatement statementLogCount;
 
     public cgData(Context contextIn) {
         context = contextIn;
@@ -274,6 +276,8 @@ public class cgData {
     }
 
     public void closeDb() {
+        closePreparedStatements();
+
         if (databaseRO != null) {
             path = databaseRO.getPath();
 
@@ -305,6 +309,15 @@ public class cgData {
         if (dbHelper != null) {
             dbHelper.close();
             dbHelper = null;
+        }
+    }
+
+    private void closePreparedStatements() {
+        if (statementDescription != null) {
+            statementDescription.close();
+        }
+        if (statementLogCount != null) {
+            statementLogCount.close();
         }
     }
 
@@ -962,11 +975,12 @@ public class cgData {
         List<String> list = new ArrayList<String>();
 
         try {
+            long timestamp = System.currentTimeMillis() - (3 * 24 * 60 * 60 * 1000);
             cursor = databaseRO.query(
                     dbTableCaches,
-                    new String[] { "_id", "geocode" },
-                    "(detailed = 1 and detailedupdate > " + (System.currentTimeMillis() - (3 * 24 * 60 * 60 * 1000)) + ") or reason > 0",
-                    null,
+                    new String[] { "geocode" },
+                    "(detailed = 1 and detailedupdate > ?) or reason > 0",
+                    new String[] { Long.toString(timestamp) },
                     null,
                     null,
                     "detailedupdate desc",
@@ -1012,9 +1026,9 @@ public class cgData {
             if (StringUtils.isNotBlank(geocode)) {
                 cursor = databaseRO.query(
                         dbTableCaches,
-                        new String[] { "_id", "detailed", "detailedupdate", "updated" },
-                        "geocode = \"" + geocode + "\"",
-                        null,
+                        new String[] { "detailed", "detailedupdate", "updated" },
+                        "geocode = ?",
+                        new String[] { geocode },
                         null,
                         null,
                         null,
@@ -1022,9 +1036,9 @@ public class cgData {
             } else if (StringUtils.isNotBlank(guid)) {
                 cursor = databaseRO.query(
                         dbTableCaches,
-                        new String[] { "_id", "detailed", "detailedupdate", "updated" },
-                        "guid = \"" + guid + "\"",
-                        null,
+                        new String[] { "detailed", "detailedupdate", "updated" },
+                        "guid = ?",
+                        new String[] { guid },
                         null,
                         null,
                         null,
@@ -1091,8 +1105,8 @@ public class cgData {
                 cursor = databaseRO.query(
                         dbTableCaches,
                         new String[] { "reason" },
-                        "geocode = \"" + geocode + "\"",
-                        null,
+                        "geocode = ?",
+                        new String[] { geocode },
                         null,
                         null,
                         null,
@@ -1101,8 +1115,8 @@ public class cgData {
                 cursor = databaseRO.query(
                         dbTableCaches,
                         new String[] { "reason" },
-                        "guid = \"" + guid + "\"",
-                        null,
+                        "guid = ? ",
+                        new String[] { guid },
                         null,
                         null,
                         null,
@@ -1148,9 +1162,9 @@ public class cgData {
         try {
             cursor = databaseRO.query(
                     dbTableCaches,
-                    new String[] { "_id", "geocode" },
-                    "guid = \"" + guid + "\"",
-                    null,
+                    new String[] { "geocode" },
+                    "guid = ?",
+                    new String[] { guid },
                     null,
                     null,
                     null,
@@ -1190,9 +1204,9 @@ public class cgData {
         try {
             cursor = databaseRO.query(
                     dbTableCaches,
-                    new String[] { "_id", "cacheid" },
-                    "geocode = \"" + geocode + "\"",
-                    null,
+                    new String[] { "cacheid" },
+                    "geocode = ?",
+                    new String[] { geocode },
                     null,
                     null,
                     null,
@@ -2134,9 +2148,9 @@ public class cgData {
 
         Cursor cursor = databaseRO.query(
                 dbTableAttributes,
-                new String[] { "_id", "attribute" },
-                "geocode = \"" + geocode + "\"",
-                null,
+                new String[] { "attribute" },
+                "geocode = ?",
+                new String[] { geocode },
                 null,
                 null,
                 null,
@@ -2170,8 +2184,8 @@ public class cgData {
         Cursor cursor = databaseRO.query(
                 dbTableWaypoints,
                 new String[] { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latlon", "latitude", "longitude", "note" },
-                "_id = " + id,
-                null,
+                "_id = ?",
+                new String[] { Integer.toString(id) },
                 null,
                 null,
                 null,
@@ -2190,7 +2204,7 @@ public class cgData {
         return waypoint;
     }
 
-    public List<cgWaypoint> loadWaypoints(String geocode) {
+    public List<cgWaypoint> loadWaypoints(final String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return null;
         }
@@ -2202,8 +2216,8 @@ public class cgData {
         Cursor cursor = databaseRO.query(
                 dbTableWaypoints,
                 new String[] { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latlon", "latitude", "longitude", "note" },
-                "geocode = \"" + geocode + "\"",
-                null,
+                "geocode = ?",
+                new String[] { geocode },
                 null,
                 null,
                 null,
@@ -2253,9 +2267,9 @@ public class cgData {
 
         Cursor cursor = databaseRO.query(
                 dbTableSpoilers,
-                new String[] { "_id", "url", "title", "description" },
-                "geocode = \"" + geocode + "\"",
-                null,
+                new String[] { "url", "title", "description" },
+                "geocode = ?",
+                new String[] { geocode },
                 null,
                 null,
                 null,
@@ -2294,8 +2308,13 @@ public class cgData {
         init();
 
         Cursor cursor = databaseRO.query(dbTableSearchDestionationHistory,
-                new String[] { "_id", "date", "latitude", "longitude" }, null,
-                null, null, null, "date desc", "100");
+                new String[] { "_id", "date", "latitude", "longitude" },
+                null,
+                null,
+                null,
+                null,
+                "date desc",
+                "100");
 
         final List<cgDestination> destinations = new LinkedList<cgDestination>();
 
@@ -2417,9 +2436,9 @@ public class cgData {
 
         Cursor cursor = databaseRO.query(
                 dbTableLogCount,
-                new String[] { "_id", "type", "count" },
-                "geocode = \"" + geocode + "\"",
-                null,
+                new String[] { "type", "count" },
+                "geocode = ?",
+                new String[] { geocode },
                 null,
                 null,
                 null,
@@ -2457,8 +2476,8 @@ public class cgData {
         Cursor cursor = databaseRO.query(
                 dbTableTrackables,
                 new String[] { "_id", "updated", "tbcode", "guid", "title", "owner", "released", "goal", "description" },
-                "geocode = \"" + geocode + "\"",
-                null,
+                "geocode = ?",
+                new String[] { geocode },
                 null,
                 null,
                 "title COLLATE NOCASE ASC",
@@ -2492,9 +2511,9 @@ public class cgData {
 
         Cursor cursor = databaseRO.query(
                 dbTableTrackables,
-                new String[] { "_id", "updated", "tbcode", "guid", "title", "owner", "released", "goal", "description" },
-                "tbcode = \"" + geocode + "\"",
-                null,
+                new String[] { "updated", "tbcode", "guid", "title", "owner", "released", "goal", "description" },
+                "tbcode = ?",
+                new String[] { geocode },
                 null,
                 null,
                 null,
@@ -2608,7 +2627,7 @@ public class cgData {
         try {
             Cursor cursor = databaseRO.query(
                     dbTableCaches,
-                    new String[] { "_id", "geocode", "(abs(latitude-" + String.format((Locale) null, "%.6f", coords.getLatitude()) +
+                    new String[] { "geocode", "(abs(latitude-" + String.format((Locale) null, "%.6f", coords.getLatitude()) +
                             ") + abs(longitude-" + String.format((Locale) null, "%.6f", coords.getLongitude()) + ")) as dif" },
                     specifySql.toString(),
                     null,
@@ -2660,7 +2679,7 @@ public class cgData {
         try {
             Cursor cursor = databaseRO.query(
                     dbTableCaches,
-                    new String[] { "_id", "geocode" },
+                    new String[] { "geocode" },
                     specifySql.toString(),
                     null,
                     null,
@@ -2750,7 +2769,7 @@ public class cgData {
         try {
             Cursor cursor = databaseRO.query(
                     dbTableCaches,
-                    new String[] { "_id", "geocode" },
+                    new String[] { "geocode" },
                     where.toString(),
                     null,
                     null,
@@ -2802,7 +2821,7 @@ public class cgData {
         try {
             Cursor cursor = databaseRO.query(
                     dbTableCaches,
-                    new String[] { "_id", "geocode" },
+                    new String[] { "geocode" },
                     where.toString(),
                     null,
                     null,
@@ -2904,7 +2923,7 @@ public class cgData {
             if (more) {
                 cursor = databaseRO.query(
                         dbTableCaches,
-                        new String[] { "_id", "geocode" },
+                        new String[] { "geocode" },
                         "reason = 0",
                         null,
                         null,
@@ -2912,11 +2931,13 @@ public class cgData {
                         null,
                         null);
             } else {
+                long timestamp = System.currentTimeMillis() - (3 * 24 * 60 * 60 * 1000);
+                String timestampString = Long.toString(timestamp);
                 cursor = databaseRO.query(
                         dbTableCaches,
-                        new String[] { "_id", "geocode" },
-                        "reason = 0 and detailed < " + (System.currentTimeMillis() - (3 * 24 * 60 * 60 * 1000)) + " and detailedupdate < " + (System.currentTimeMillis() - (3 * 24 * 60 * 60 * 1000)) + " and visiteddate < " + (System.currentTimeMillis() - (3 * 24 * 60 * 60 * 1000)),
-                        null,
+                        new String[] { "geocode" },
+                        "reason = 0 and detailed < ? and detailedupdate < ? and visiteddate < ?",
+                        new String[] { timestampString, timestampString, timestampString },
                         null,
                         null,
                         null,
@@ -2976,9 +2997,9 @@ public class cgData {
         try {
             Cursor cursor = databaseRO.query(
                     dbTableCaches,
-                    new String[] { "_id", "geocode" },
-                    "reason = " + listId,
-                    null,
+                    new String[] { "geocode" },
+                    "reason = ?",
+                    new String[] { Integer.toString(listId) },
                     null,
                     null,
                     null,
@@ -3068,8 +3089,8 @@ public class cgData {
         Cursor cursor = databaseRO.query(
                 dbTableLogsOffline,
                 new String[] { "_id", "type", "log", "date" },
-                "geocode = \"" + geocode + "\"",
-                null,
+                "geocode = ?",
+                new String[] { geocode },
                 null,
                 null,
                 "_id desc",
@@ -3102,23 +3123,23 @@ public class cgData {
         databaseRW.delete(dbTableLogsOffline, "geocode = ?", new String[] { geocode });
     }
 
-    public boolean hasLogOffline(String geocode) {
+    public boolean hasLogOffline(final String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return false;
         }
 
-        int count = 0;
         init();
         try {
-            final SQLiteStatement countSql = databaseRO.compileStatement("select count(_id) from " + dbTableLogsOffline + " where geocode = \"" + geocode.toUpperCase() + "\"");
-            count = (int) countSql.simpleQueryForLong();
-
-            countSql.close();
+            if (statementLogCount == null) {
+                statementLogCount = databaseRO.compileStatement("SELECT count(_id) FROM " + dbTableLogsOffline + " WHERE geocode = ?");
+            }
+            statementLogCount.bindString(1, geocode.toUpperCase());
+            return statementLogCount.simpleQueryForLong() > 0;
         } catch (Exception e) {
             Log.e(Settings.tag, "cgData.hasLogOffline: " + e.toString());
         }
 
-        return count > 0;
+        return false;
     }
 
     public void saveVisitDate(String geocode) {
@@ -3333,11 +3354,11 @@ public class cgData {
         init();
 
         try {
-            SQLiteStatement sql = databaseRO.compileStatement("SELECT description FROM " + dbTableCaches + " WHERE geocode = ?");
-            sql.bindString(1, geocode);
-            String description = sql.simpleQueryForString();
-            sql.close();
-            return description;
+            if (statementDescription == null) {
+                statementDescription = databaseRO.compileStatement("SELECT description FROM " + dbTableCaches + " WHERE geocode = ?");
+            }
+            statementDescription.bindString(1, geocode);
+            return statementDescription.simpleQueryForString();
         } catch (Exception e) {
             Log.e(Settings.tag, "cgData.getCacheDescription: " + e.toString());
         }
