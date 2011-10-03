@@ -535,15 +535,14 @@ public class cgBase {
 
         clearCookies();
 
-        final Parameters params = new Parameters();
-
-        params.put("__EVENTTARGET", "");
-        params.put("__EVENTARGUMENT", "");
+        final Parameters params = new Parameters(
+                "__EVENTTARGET", "",
+                "__EVENTARGUMENT", "",
+                "ctl00$SiteContent$tbUsername", login.left,
+                "ctl00$SiteContent$tbPassword", login.right,
+                "ctl00$SiteContent$cbRememberMe", "on",
+                "ctl00$SiteContent$btnSignIn", "Login");
         setViewstates(viewstates, params);
-        params.put("ctl00$SiteContent$tbUsername", login.left);
-        params.put("ctl00$SiteContent$tbPassword", login.right);
-        params.put("ctl00$SiteContent$cbRememberMe", "on");
-        params.put("ctl00$SiteContent$btnSignIn", "Login");
 
         loginResponse = postRequest("https://www.geocaching.com/login/default.aspx", params);
         loginData = getResponseData(loginResponse);
@@ -603,12 +602,11 @@ public class cgBase {
         return false;
     }
 
-    public String switchToEnglish(String[] viewstates) {
-        final Parameters params = new Parameters();
-
+    public String switchToEnglish(final String[] viewstates) {
+        final Parameters params = new Parameters(
+                "__EVENTTARGET", "ctl00$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem", // switch to english
+                "__EVENTARGUMENT", "");
         setViewstates(viewstates, params);
-        params.put("__EVENTTARGET", "ctl00$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem"); // switch to english
-        params.put("__EVENTARGUMENT", "");
 
         return cgBase.getResponseData(postRequest("http://www.geocaching.com/default.aspx", params));
     }
@@ -653,7 +651,8 @@ public class cgBase {
                 }
 
                 if (recaptchaJsParam != null) {
-                    final String recaptchaJs = cgBase.getResponseData(request("http://www.google.com/recaptcha/api/challenge", "k=" + urlencode_rfc3986(recaptchaJsParam.trim()), true));
+                    final Parameters params = new Parameters("k", recaptchaJsParam.trim());
+                    final String recaptchaJs = cgBase.getResponseData(request("http://www.google.com/recaptcha/api/challenge", params, true));
 
                     if (StringUtils.isNotBlank(recaptchaJs)) {
                         final Matcher matcherRecaptchaChallenge = patternRecaptchaChallenge.matcher(recaptchaJs);
@@ -904,9 +903,9 @@ public class cgBase {
 
             try {
                 // get coordinates for parsed caches
-                final Parameters params = new Parameters();
-                params.put("__EVENTTARGET", "");
-                params.put("__EVENTARGUMENT", "");
+                final Parameters params = new Parameters(
+                        "__EVENTTARGET", "",
+                        "__EVENTARGUMENT", "");
                 if (ArrayUtils.isNotEmpty(caches.viewstates)) {
                     params.put("__VIEWSTATE", caches.viewstates[0]);
                     if (caches.viewstates.length > 1) {
@@ -1545,11 +1544,11 @@ public class cgBase {
         }
 
         final String userToken = userTokenMatcher.group(1);
-        final Parameters params = new Parameters();
-        params.put("tkn", userToken);
-        params.put("idx", "1");
-        params.put("num", "35");
-        params.put("decrypt", "true");
+        final Parameters params = new Parameters(
+                "tkn", userToken,
+                "idx", "1",
+                "num", "35",
+                "decrypt", "true");
         final HttpResponse response = request("http://www.geocaching.com/seek/geocache.logbook", params, false, false, false);
         if (response == null) {
             Log.e(Settings.tag, "cgBase.loadLogsFromDetails: cannot log logs, response is null");
@@ -2170,10 +2169,10 @@ public class cgBase {
         // As in the original code, remove the query string
         final String uri = Uri.parse(url).buildUpon().query(null).build().toString();
 
-        final Parameters params = new Parameters();
+        final Parameters params = new Parameters(
+                "__EVENTTARGET", "ctl00$ContentBody$pgrBottom$ctl08",
+                "__EVENTARGUMENT", "");
         setViewstates(viewstates, params);
-        params.put("__EVENTTARGET", "ctl00$ContentBody$pgrBottom$ctl08");
-        params.put("__EVENTARGUMENT", "");
 
         String page = getResponseData(postRequest(uri, params));
         if (checkLogin(page) == false) {
@@ -2266,13 +2265,11 @@ public class cgBase {
     public UUID searchByCoords(final cgSearchThread thread, final Geopoint coords, final String cacheType, final int reason, final boolean showCaptcha) {
         final cgSearch search = new cgSearch();
 
-        final Parameters params = new Parameters();
+        final Parameters params = new Parameters("lat", Double.toString(coords.getLatitude()), "lng", Double.toString(coords.getLongitude()));
         insertCacheType(params, cacheType);
-        params.put("lat", Double.toString(coords.getLatitude()));
-        params.put("lng", Double.toString(coords.getLongitude()));
 
         final String uri = "http://www.geocaching.com/seek/nearest.aspx";
-        final String fullUri = uri + "?" + prepareParameters(params, false, true);
+        final String fullUri = uri + "?" + addFToParams(params, false, true);
         String page = requestLogged(uri, params, false, false, true);
 
         if (StringUtils.isBlank(page)) {
@@ -2305,12 +2302,11 @@ public class cgBase {
             return null;
         }
 
-        final Parameters params = new Parameters();
+        final Parameters params = new Parameters("key", keyword);
         insertCacheType(params, cacheType);
-        params.put("key", keyword);
 
         final String uri = "http://www.geocaching.com/seek/nearest.aspx";
-        final String fullUri = uri + "?" + prepareParameters(params, false, true);
+        final String fullUri = uri + "?" + addFToParams(params, false, true);
         String page = requestLogged(uri, params, false, false, true);
 
         if (StringUtils.isBlank(page)) {
@@ -2342,9 +2338,8 @@ public class cgBase {
             return null;
         }
 
-        final Parameters params = new Parameters();
+        final Parameters params = new Parameters("ul", userName);
         insertCacheType(params, cacheType);
-        params.put("ul", userName);
 
         boolean my = false;
         if (userName.equalsIgnoreCase(Settings.getLogin().left)) {
@@ -2353,7 +2348,7 @@ public class cgBase {
         }
 
         final String uri = "http://www.geocaching.com/seek/nearest.aspx";
-        final String fullUri = uri + "?" + prepareParameters(params, my, true);
+        final String fullUri = uri + "?" + addFToParams(params, my, true);
         String page = requestLogged(uri, params, false, my, true);
 
         if (StringUtils.isBlank(page)) {
@@ -2385,12 +2380,11 @@ public class cgBase {
             return null;
         }
 
-        final Parameters params = new Parameters();
+        final Parameters params = new Parameters("u", userName);
         insertCacheType(params, cacheType);
-        params.put("u", userName);
 
         final String uri = "http://www.geocaching.com/seek/nearest.aspx";
-        final String fullUri = uri + "?" + prepareParameters(params, false, true);
+        final String fullUri = uri + "?" + addFToParams(params, false, true);
         String page = requestLogged(uri, params, false, false, true);
 
         if (StringUtils.isBlank(page)) {
@@ -2474,13 +2468,12 @@ public class cgBase {
             return users;
         }
 
-        final Parameters params = new Parameters();
-
-        params.put("u", username);
-        params.put("ltm", String.format((Locale) null, "%.6f", latMin));
-        params.put("ltx", String.format((Locale) null, "%.6f", latMax));
-        params.put("lnm", String.format((Locale) null, "%.6f", lonMin));
-        params.put("lnx", String.format((Locale) null, "%.6f", lonMax));
+        final Parameters params = new Parameters(
+                "u", username,
+                "ltm", String.format((Locale) null, "%.6f", latMin),
+                "ltx", String.format((Locale) null, "%.6f", latMax),
+                "lnm", String.format((Locale) null, "%.6f", lonMin),
+                "lnx", String.format((Locale) null, "%.6f", lonMax));
 
         final String data = getResponseData(postRequest("http://api.go4cache.com/get.php", params));
 
@@ -2626,20 +2619,19 @@ public class cgBase {
             Log.i(Settings.tag, "Trying to post log for cache #" + cacheid + " - action: " + logType + "; date: " + year + "." + month + "." + day + ", log: " + logInfo + "; trackables: 0");
         }
 
-        final Parameters params = new Parameters();
-
+        final Parameters params = new Parameters(
+                "__EVENTTARGET", "",
+                "__EVENTARGUMENT", "",
+                "__LASTFOCUS", "",
+                "ctl00$ContentBody$LogBookPanel1$ddLogType", Integer.toString(logType),
+                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged", String.format("%02d", month) + "/" + String.format("%02d", day) + "/" + String.format("%04d", year),
+                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Month", Integer.toString(month),
+                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day", Integer.toString(day),
+                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Year", Integer.toString(year),
+                "ctl00$ContentBody$LogBookPanel1$uxLogInfo", logInfo,
+                "ctl00$ContentBody$LogBookPanel1$LogButton", "Submit Log Entry",
+                "ctl00$ContentBody$uxVistOtherListingGC", "");
         setViewstates(viewstates, params);
-        params.put("__EVENTTARGET", "");
-        params.put("__EVENTARGUMENT", "");
-        params.put("__LASTFOCUS", "");
-        params.put("ctl00$ContentBody$LogBookPanel1$ddLogType", Integer.toString(logType));
-        params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged", String.format("%02d", month) + "/" + String.format("%02d", day) + "/" + String.format("%04d", year));
-        params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Month", Integer.toString(month));
-        params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day", Integer.toString(day));
-        params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Year", Integer.toString(year));
-        params.put("ctl00$ContentBody$LogBookPanel1$uxLogInfo", logInfo);
-        params.put("ctl00$ContentBody$LogBookPanel1$LogButton", "Submit Log Entry");
-        params.put("ctl00$ContentBody$uxVistOtherListingGC", "");
         if (trackables != null && trackables.isEmpty() == false) { //  we have some trackables to proceed
             final StringBuilder hdnSelected = new StringBuilder();
 
@@ -2652,8 +2644,8 @@ public class cgBase {
                 }
             }
 
-            params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnSelectedActions", hdnSelected.toString()); // selected trackables
-            params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnCurrentFilter", "");
+            params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnSelectedActions", hdnSelected.toString(), // selected trackables
+                    "ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnCurrentFilter", "");
         }
 
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/log.aspx").encodedQuery("ID=" + cacheid).build().toString();
@@ -2766,25 +2758,25 @@ public class cgBase {
         final String logInfo = log.replace("\n", "\r\n"); // windows' eol
 
         final Calendar currentDate = Calendar.getInstance();
-        final Parameters params = new Parameters();
-
+        final Parameters params = new Parameters(
+                "__EVENTTARGET", "",
+                "__EVENTARGUMENT", "",
+                "__LASTFOCUS", "",
+                "ctl00$ContentBody$LogBookPanel1$ddLogType", Integer.toString(logType),
+                "ctl00$ContentBody$LogBookPanel1$tbCode", trackingCode);
         setViewstates(viewstates, params);
-        params.put("__EVENTTARGET", "");
-        params.put("__EVENTARGUMENT", "");
-        params.put("__LASTFOCUS", "");
-        params.put("ctl00$ContentBody$LogBookPanel1$ddLogType", Integer.toString(logType));
-        params.put("ctl00$ContentBody$LogBookPanel1$tbCode", trackingCode);
         if (currentDate.get(Calendar.YEAR) == year && (currentDate.get(Calendar.MONTH) + 1) == month && currentDate.get(Calendar.DATE) == day) {
             params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged", "");
         } else {
             params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged", Integer.toString(month) + "/" + Integer.toString(day) + "/" + Integer.toString(year));
         }
-        params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day", Integer.toString(day));
-        params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Month", Integer.toString(month));
-        params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Year", Integer.toString(year));
-        params.put("ctl00$ContentBody$LogBookPanel1$uxLogInfo", logInfo);
-        params.put("ctl00$ContentBody$LogBookPanel1$LogButton", "Submit Log Entry");
-        params.put("ctl00$ContentBody$uxVistOtherListingGC", "");
+        params.put(
+                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day", Integer.toString(day),
+                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Month", Integer.toString(month),
+                "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Year", Integer.toString(year),
+                "ctl00$ContentBody$LogBookPanel1$uxLogInfo", logInfo,
+                "ctl00$ContentBody$LogBookPanel1$LogButton", "Submit Log Entry",
+                "ctl00$ContentBody$uxVistOtherListingGC", "");
 
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("wid=" + tbid).build().toString();
         String page = getResponseData(postRequest(uri, params));
@@ -2861,11 +2853,11 @@ public class cgBase {
         }
 
         // removing cache from list needs approval by hitting "Yes" button
-        final Parameters params = new Parameters();
+        final Parameters params = new Parameters(
+                "__EVENTTARGET", "",
+                "__EVENTARGUMENT", "",
+                "ctl00$ContentBody$btnYes", "Yes");
         transferViewstates(page, params);
-        params.put("__EVENTTARGET", "");
-        params.put("__EVENTARGUMENT", "");
-        params.put("ctl00$ContentBody$btnYes", "Yes");
 
         page = getResponseData(postRequest(uri, params));
         boolean guidOnPage = cache.isGuidContainedInPage(page);
@@ -2967,31 +2959,32 @@ public class cgBase {
         return encoded;
     }
 
-    public static String prepareParameters(final Parameters params, final boolean my, final boolean addF) {
+    /**
+     * Possibly hide caches found or hidden by user. This mutates its params argument when possible.
+     *
+     * @param params
+     *            the parameters to mutate, or null to create a new Parameters if needed
+     * @param my
+     * @param addF
+     * @return the original params if not null, maybe augmented with f=1, or a new Parameters with f=1 or null otherwise
+     */
+    public static Parameters addFToParams(final Parameters params, final boolean my, final boolean addF) {
         if (!my && Settings.isExcludeMyCaches() && addF) {
             if (params == null) {
-                return "f=1";
+                return new Parameters("f", "1");
             }
             params.put("f", "1");
             Log.i(Settings.tag, "Skipping caches found or hidden by user.");
         }
 
-        return prepareParameters(params);
-    }
-
-    static private String prepareParameters(final Parameters params) {
-        if (params == null) {
-            return "";
-        }
-
-        return URLEncodedUtils.format(params, HTTP.UTF_8);
+        return params;
     }
 
     static private String prepareParameters(final String baseUri, final Parameters params) {
-        return CollectionUtils.isNotEmpty(params) ? baseUri + "?" + prepareParameters(params) : baseUri;
+        return CollectionUtils.isNotEmpty(params) ? baseUri + "?" + params.toString() : baseUri;
     }
 
-    public String[] requestViewstates(final String uri, final Parameters params, boolean xContentType, boolean my) {
+    static public String[] requestViewstates(final String uri, final Parameters params, boolean xContentType, boolean my) {
         final HttpResponse response = request(uri, params, xContentType, my, false);
 
         return getViewstates(getResponseData(response));
@@ -3039,8 +3032,7 @@ public class cgBase {
     }
 
     public static HttpResponse request(final String uri, final Parameters params, boolean xContentType, boolean my, boolean addF) {
-        final String paramsDone = prepareParameters(params, my, addF);
-        return request(uri, paramsDone, xContentType);
+        return request(uri, addFToParams(params, my, addF), xContentType);
     }
 
     private static ClientConnectionManager clientConnectionManager;
@@ -3091,8 +3083,9 @@ public class cgBase {
         }
     }
 
-    public static HttpResponse request(final String uri, final String params, final Boolean xContentType) {
-        final HttpRequestBase request = new HttpGet(Uri.parse(uri).buildUpon().encodedQuery(params).build().toString());
+    public static HttpResponse request(final String uri, final Parameters params, final Boolean xContentType) {
+        final String fullUri = params == null ? uri : Uri.parse(uri).buildUpon().encodedQuery(params.toString()).build().toString();
+        final HttpRequestBase request = new HttpGet(fullUri);
 
         request.setHeader("X-Requested-With", "XMLHttpRequest");
 
@@ -3618,7 +3611,7 @@ public class cgBase {
     }
 
     public String getMapUserToken(Handler noTokenHandler) {
-        final HttpResponse response = request("http://www.geocaching.com/map/default.aspx", "", false);
+        final HttpResponse response = request("http://www.geocaching.com/map/default.aspx", null, false);
         final String data = getResponseData(response);
         String usertoken = null;
 
@@ -3643,10 +3636,10 @@ public class cgBase {
     public static Double getElevation(final Geopoint coords) {
         try {
             final String uri = "http://maps.googleapis.com/maps/api/elevation/json";
-            final Parameters params = new Parameters();
-            params.put("sensor", "false");
-            params.put("locations", String.format((Locale) null, "%.6f", coords.getLatitude()) + "," +
-                    String.format((Locale) null, "%.6f", coords.getLongitude()));
+            final Parameters params = new Parameters(
+                    "sensor", "false",
+                    "locations", String.format((Locale) null, "%.6f", coords.getLatitude()) + "," +
+                            String.format((Locale) null, "%.6f", coords.getLongitude()));
             final JSONObject response = requestJSON(uri, params);
 
             if (response == null) {

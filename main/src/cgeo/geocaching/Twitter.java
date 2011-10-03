@@ -29,13 +29,12 @@ public final class Twitter {
         }
 
         try {
-            Parameters parameters = new Parameters();
-
-            parameters.put("status", status);
+            Parameters parameters = new Parameters("status", status);
             if (coords != null) {
-                parameters.put("lat", String.format("%.6f", coords.getLatitude()));
-                parameters.put("long", String.format("%.6f", coords.getLongitude()));
-                parameters.put("display_coordinates", "true");
+                parameters.put(
+                        "lat", String.format("%.6f", coords.getLatitude()),
+                        "long", String.format("%.6f", coords.getLongitude()),
+                        "display_coordinates", "true");
             }
 
             final String paramsDone = cgOAuth.signOAuth("api.twitter.com", "/1/statuses/update.json", "POST", false, parameters, Settings.getTokenPublic(), Settings.getTokenSecret());

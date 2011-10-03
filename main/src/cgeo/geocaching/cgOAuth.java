@@ -17,12 +17,13 @@ public class cgOAuth {
         currentTime = currentTime / 1000; // seconds
         currentTime = (long) Math.floor(currentTime);
 
-        params.put("oauth_consumer_key", Settings.getKeyConsumerPublic());
-        params.put("oauth_nonce", CryptUtils.md5(Long.toString(System.currentTimeMillis())));
-        params.put("oauth_signature_method", "HMAC-SHA1");
-        params.put("oauth_timestamp", Long.toString(currentTime));
-        params.put("oauth_token", StringUtils.defaultString(token));
-        params.put("oauth_version", "1.0");
+        params.put(
+                "oauth_consumer_key", Settings.getKeyConsumerPublic(),
+                "oauth_nonce", CryptUtils.md5(Long.toString(System.currentTimeMillis())),
+                "oauth_signature_method", "HMAC-SHA1",
+                "oauth_timestamp", Long.toString(currentTime),
+                "oauth_token", StringUtils.defaultString(token),
+                "oauth_version", "1.0");
 
         params.sort();
 

@@ -58,8 +58,7 @@ public final class GCVote {
             if (Settings.isLogin()) {
                 final Map<String, String> login = Settings.getGCvoteLogin();
                 if (login != null) {
-                    params.put("userName", login.get("username"));
-                    params.put("password", login.get("password"));
+                    params.put("userName", login.get("username"), "password", login.get("password"));
                 }
             }
             if (CollectionUtils.isNotEmpty(guids)) {
@@ -175,12 +174,12 @@ public final class GCVote {
             return false;
         }
 
-        final Parameters params = new Parameters();
-        params.put("userName", login.get("username"));
-        params.put("password", login.get("password"));
-        params.put("cacheId", guid);
-        params.put("voteUser", String.format("%.1f", vote).replace(',', '.'));
-        params.put("version", "cgeo");
+        final Parameters params = new Parameters(
+                "userName", login.get("username"),
+                "password", login.get("password"),
+                "cacheId", guid,
+                "voteUser", String.format("%.1f", vote).replace(',', '.'),
+                "version", "cgeo");
 
         final String result = cgBase.getResponseData(cgBase.request("http://gcvote.com/setVote.php", params, false, false, false));
 
