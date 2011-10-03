@@ -2262,28 +2262,36 @@ public class cgBase {
         return search.getCurrentId();
     }
 
-    public UUID searchByCoords(final cgSearchThread thread, final Geopoint coords, final String cacheType, final int reason, final boolean showCaptcha) {
+    /**
+     * @param thread
+     *            thread to run the captcha if needed
+     * @param cacheType
+     * @param reason
+     * @param showCaptcha
+     * @param params
+     *            the parameters to add to the request URI
+     * @return
+     */
+    private UUID searchByAny(final cgSearchThread thread, final String cacheType, final boolean my, final int reason, final boolean showCaptcha, final Parameters params) {
         final cgSearch search = new cgSearch();
-
-        final Parameters params = new Parameters("lat", Double.toString(coords.getLatitude()), "lng", Double.toString(coords.getLongitude()));
         insertCacheType(params, cacheType);
 
         final String uri = "http://www.geocaching.com/seek/nearest.aspx";
         final String fullUri = uri + "?" + addFToParams(params, false, true);
-        String page = requestLogged(uri, params, false, false, true);
+        String page = requestLogged(uri, params, false, my, true);
 
         if (StringUtils.isBlank(page)) {
-            Log.e(Settings.tag, "cgeoBase.searchByCoords: No data from server");
+            Log.e(Settings.tag, "cgeoBase.searchByAny: No data from server");
             return null;
         }
 
         final cgCacheWrap caches = parseSearch(thread, fullUri, page, showCaptcha);
         if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
-            Log.e(Settings.tag, "cgeoBase.searchByCoords: No cache parsed");
+            Log.e(Settings.tag, "cgeoBase.searchByAny: No cache parsed");
         }
 
         if (app == null) {
-            Log.e(Settings.tag, "cgeoBase.searchByCoords: No application found");
+            Log.e(Settings.tag, "cgeoBase.searchByAny: No application found");
             return null;
         }
 
@@ -2294,52 +2302,28 @@ public class cgBase {
         return search.getCurrentId();
     }
 
-    public UUID searchByKeyword(final cgSearchThread thread, final String keyword, final String cacheType, final int reason, final boolean showCaptcha) {
-        final cgSearch search = new cgSearch();
+    public UUID searchByCoords(final cgSearchThread thread, final Geopoint coords, final String cacheType, final int reason, final boolean showCaptcha) {
+        final Parameters params = new Parameters("lat", Double.toString(coords.getLatitude()), "lng", Double.toString(coords.getLongitude()));
+        return searchByAny(thread, cacheType, false, reason, showCaptcha, params);
+    }
 
+    public UUID searchByKeyword(final cgSearchThread thread, final String keyword, final String cacheType, final int reason, final boolean showCaptcha) {
         if (StringUtils.isBlank(keyword)) {
             Log.e(Settings.tag, "cgeoBase.searchByKeyword: No keyword given");
             return null;
         }
 
         final Parameters params = new Parameters("key", keyword);
-        insertCacheType(params, cacheType);
-
-        final String uri = "http://www.geocaching.com/seek/nearest.aspx";
-        final String fullUri = uri + "?" + addFToParams(params, false, true);
-        String page = requestLogged(uri, params, false, false, true);
-
-        if (StringUtils.isBlank(page)) {
-            Log.e(Settings.tag, "cgeoBase.searchByKeyword: No data from server");
-            return null;
-        }
-
-        final cgCacheWrap caches = parseSearch(thread, fullUri, page, showCaptcha);
-        if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
-            Log.e(Settings.tag, "cgeoBase.searchByKeyword: No cache parsed");
-        }
-
-        if (app == null) {
-            Log.e(Settings.tag, "cgeoBase.searchByCoords: No application found");
-            return null;
-        }
-
-        List<cgCache> cacheList = processSearchResults(search, caches, Settings.isExcludeDisabledCaches(), false, null);
-
-        app.addSearch(search, cacheList, true, reason);
-
-        return search.getCurrentId();
+        return searchByAny(thread, cacheType, false, reason, showCaptcha, params);
     }
 
     public UUID searchByUsername(final cgSearchThread thread, final String userName, final String cacheType, final int reason, final boolean showCaptcha) {
-        final cgSearch search = new cgSearch();
         if (StringUtils.isBlank(userName)) {
             Log.e(Settings.tag, "cgeoBase.searchByUsername: No user name given");
             return null;
         }
 
         final Parameters params = new Parameters("ul", userName);
-        insertCacheType(params, cacheType);
 
         boolean my = false;
         if (userName.equalsIgnoreCase(Settings.getLogin().left)) {
@@ -2347,66 +2331,17 @@ public class cgBase {
             Log.i(Settings.tag, "cgBase.searchByUsername: Overriding users choice, downloading all caches.");
         }
 
-        final String uri = "http://www.geocaching.com/seek/nearest.aspx";
-        final String fullUri = uri + "?" + addFToParams(params, my, true);
-        String page = requestLogged(uri, params, false, my, true);
-
-        if (StringUtils.isBlank(page)) {
-            Log.e(Settings.tag, "cgeoBase.searchByUsername: No data from server");
-            return null;
-        }
-
-        final cgCacheWrap caches = parseSearch(thread, fullUri, page, showCaptcha);
-        if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
-            Log.e(Settings.tag, "cgeoBase.searchByUsername: No cache parsed");
-        }
-
-        if (app == null) {
-            Log.e(Settings.tag, "cgeoBase.searchByUsername: No application found");
-            return null;
-        }
-
-        List<cgCache> cacheList = processSearchResults(search, caches, Settings.isExcludeDisabledCaches(), false, null);
-
-        app.addSearch(search, cacheList, true, reason);
-
-        return search.getCurrentId();
+        return searchByAny(thread, cacheType, my, reason, showCaptcha, params);
     }
 
     public UUID searchByOwner(final cgSearchThread thread, final String userName, final String cacheType, final int reason, final boolean showCaptcha) {
-        final cgSearch search = new cgSearch();
         if (StringUtils.isBlank(userName)) {
             Log.e(Settings.tag, "cgeoBase.searchByOwner: No user name given");
             return null;
         }
 
         final Parameters params = new Parameters("u", userName);
-        insertCacheType(params, cacheType);
-
-        final String uri = "http://www.geocaching.com/seek/nearest.aspx";
-        final String fullUri = uri + "?" + addFToParams(params, false, true);
-        String page = requestLogged(uri, params, false, false, true);
-
-        if (StringUtils.isBlank(page)) {
-            Log.e(Settings.tag, "cgeoBase.searchByOwner: No data from server");
-            return null;
-        }
-
-        final cgCacheWrap caches = parseSearch(thread, fullUri, page, showCaptcha);
-        if (caches == null || caches.cacheList == null) {
-            Log.e(Settings.tag, "cgeoBase.searchByOwner: No cache parsed");
-        }
-
-        if (app == null) {
-            Log.e(Settings.tag, "cgeoBase.searchByCoords: No application found");
-            return null;
-        }
-
-        List<cgCache> cacheList = processSearchResults(search, caches, Settings.isExcludeDisabledCaches(), Settings.isExcludeMyCaches(), null);
-
-        app.addSearch(search, cacheList, true, 0);
-
-        return search.getCurrentId();
+        return searchByAny(thread, cacheType, false, reason, showCaptcha, params);
     }
 
     public UUID searchByViewport(final String userToken, final double latMin, final double latMax, final double lonMin, final double lonMax, int reason) {
