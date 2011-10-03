@@ -308,7 +308,7 @@ public abstract class GPXParser extends FileParser {
                         // there is no lookup code in gpx file
                         waypoint.name = cache.shortdesc;
                         waypoint.coords = cache.coords;
-                        waypoint.note = cache.description;
+                        waypoint.note = cache.getDescription();
 
                         if (cacheForWaypoint.waypoints == null) {
                             cacheForWaypoint.waypoints = new ArrayList<cgWaypoint>();
@@ -345,7 +345,6 @@ public abstract class GPXParser extends FileParser {
                 cache.name = content;
 
                 findGeoCode(cache.name);
-                findGeoCode(cache.description);
             }
         });
 
@@ -367,7 +366,7 @@ public abstract class GPXParser extends FileParser {
             public void end(String body) {
                 cmt = body;
 
-                cache.description = validate(body);
+                cache.setDescription(validate(body));
             }
         });
 
@@ -598,7 +597,7 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void end(String desc) {
-                    cache.description = validate(desc);
+                    cache.setDescription(validate(desc));
                 }
             });
 

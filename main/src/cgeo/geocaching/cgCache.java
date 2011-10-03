@@ -59,7 +59,7 @@ public class cgCache implements ICache {
     public Double elevation = null;
     public String personalNote = null;
     public String shortdesc = "";
-    public String description = "";
+    private String description = null;
     public boolean disabled = false;
     public boolean archived = false;
     public boolean members = false;
@@ -439,6 +439,9 @@ public class cgCache implements ICache {
 
     @Override
     public String getDescription() {
+        if (description == null) {
+            description = StringUtils.defaultString(cgeoapplication.getInstance().getCacheDescription(geocode));
+        }
         return description;
     }
 
@@ -505,6 +508,10 @@ public class cgCache implements ICache {
 
     public boolean supportsGCVote() {
         return StringUtils.startsWithIgnoreCase(geocode, "GC");
+    }
+
+    public void setDescription(final String description) {
+        this.description = description;
     }
 
 }

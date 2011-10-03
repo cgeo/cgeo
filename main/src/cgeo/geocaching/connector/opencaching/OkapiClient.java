@@ -103,7 +103,7 @@ final public class OkapiClient {
 
             cache.favouriteCnt = response.getInt(CACHE_RECOMMENDATIONS);
             // not used: req_password
-            cache.description = response.getString(CACHE_DESCRIPTION);
+            cache.setDescription(response.getString(CACHE_DESCRIPTION));
             cache.hint = Html.fromHtml(response.getString(CACHE_HINT)).toString();
             // not used: hints
 

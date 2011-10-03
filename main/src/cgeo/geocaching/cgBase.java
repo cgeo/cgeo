@@ -1248,7 +1248,7 @@ public class cgBase {
         cache.shortdesc = BaseUtils.getMatch(page, Constants.PATTERN_SHORTDESC, 1, cache.shortdesc);
 
         // cache description
-        cache.description = BaseUtils.getMatch(page, Constants.PATTERN_DESC, 1, cache.description);
+        cache.setDescription(BaseUtils.getMatch(page, Constants.PATTERN_DESC, 1, ""));
 
         // cache attributes
         try {
@@ -3126,7 +3126,7 @@ public class cgBase {
             // get cache details, they may not yet be complete
             if (cache != null) {
                 // only reload the cache, if it was already stored or has not all details (by checking the description)
-                if (cache.reason > 0 || StringUtils.isBlank(cache.description)) {
+                if (cache.reason > 0 || StringUtils.isBlank(cache.getDescription())) {
                     final UUID searchId = searchByGeocode(cache.geocode, null, listId, false);
                     cache = app.getCache(searchId);
                 }
@@ -3146,8 +3146,8 @@ public class cgBase {
             final cgHtmlImg imgGetter = new cgHtmlImg(activity, cache.geocode, false, listId, true);
 
             // store images from description
-            if (StringUtils.isNotBlank(cache.description)) {
-                Html.fromHtml(cache.description, imgGetter, null);
+            if (StringUtils.isNotBlank(cache.getDescription())) {
+                Html.fromHtml(cache.getDescription(), imgGetter, null);
             }
 
             // store spoilers

@@ -42,7 +42,7 @@ public class cgData {
     private static final String[] CACHE_COLUMNS = new String[] {
             "_id", "updated", "reason", "detailed", "detailedupdate", "visiteddate", "geocode", "cacheid", "guid", "type", "name", "own", "owner", "owner_real", "hidden", "hint", "size",
             "difficulty", "distance", "direction", "terrain", "latlon", "location", "latitude", "longitude", "elevation", "shortdesc",
-            "description", "favourite_cnt", "rating", "votes", "myvote", "disabled", "archived", "members", "found", "favourite", "inventorycoins", "inventorytags",
+            "favourite_cnt", "rating", "votes", "myvote", "disabled", "archived", "members", "found", "favourite", "inventorycoins", "inventorytags",
             "inventoryunknown", "onWatchlist", "personal_note", "reliable_latlon"
     };
     public cgCacheWrap caches;
@@ -1262,7 +1262,7 @@ public class cgData {
         values.put("elevation", cache.elevation);
         values.put("shortdesc", cache.shortdesc);
         values.put("personal_note", cache.personalNote);
-        values.put("description", cache.description);
+        values.put("description", cache.getDescription());
         values.put("favourite_cnt", cache.favouriteCnt);
         values.put("rating", cache.rating);
         values.put("votes", cache.votes);
@@ -2107,7 +2107,7 @@ public class cgData {
         }
         cache.personalNote = (String) cursor.getString(cursor.getColumnIndex("personal_note"));
         cache.shortdesc = (String) cursor.getString(cursor.getColumnIndex("shortdesc"));
-        cache.description = (String) cursor.getString(cursor.getColumnIndex("description"));
+        // do not set cache.description !
         cache.favouriteCnt = (Integer) cursor.getInt(cursor.getColumnIndex("favourite_cnt"));
         cache.rating = (Float) cursor.getFloat(cursor.getColumnIndex("rating"));
         cache.votes = (Integer) cursor.getInt(cursor.getColumnIndex("votes"));
@@ -3324,5 +3324,24 @@ public class cgData {
         }
 
         return success;
+    }
+
+    public String getCacheDescription(String geocode) {
+        if (geocode == null) {
+            return null;
+        }
+        init();
+
+        try {
+            SQLiteStatement sql = databaseRO.compileStatement("SELECT description FROM " + dbTableCaches + " WHERE geocode = ?");
+            sql.bindString(1, geocode);
+            String description = sql.simpleQueryForString();
+            sql.close();
+            return description;
+        } catch (Exception e) {
+            Log.e(Settings.tag, "cgData.getCacheDescription: " + e.toString());
+        }
+
+        return null;
     }
 }

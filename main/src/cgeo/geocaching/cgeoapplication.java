@@ -845,4 +845,8 @@ public class cgeoapplication extends Application {
     public void moveToList(String geocode, int listId) {
         storage.moveToList(geocode, listId);
     }
+
+    public String getCacheDescription(String geocode) {
+        return storage.getCacheDescription(geocode);
+    }
 }

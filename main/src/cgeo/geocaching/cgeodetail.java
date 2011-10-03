@@ -244,7 +244,7 @@ public class cgeodetail extends AbstractActivity {
             if (longDesc != null) {
                 ((LinearLayout) findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
                 TextView descView = (TextView) findViewById(R.id.description);
-                if (cache.description.length() > 0) {
+                if (StringUtils.isNotBlank(cache.getDescription())) {
                     descView.setVisibility(View.VISIBLE);
                     descView.setText(longDesc, TextView.BufferType.SPANNABLE);
                     descView.setMovementMethod(LinkMovementMethod.getInstance());
@@ -982,7 +982,7 @@ public class cgeodetail extends AbstractActivity {
                     showDesc.setOnTouchListener(null);
                     showDesc.setOnClickListener(null);
                 }
-            } else if (longDescDisplayed == false && StringUtils.isNotBlank(cache.description)) {
+            } else if (longDescDisplayed == false && StringUtils.isNotBlank(cache.getDescription())) {
                 ((LinearLayout) findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
 
                 Button showDesc = (Button) findViewById(R.id.show_description);
@@ -1112,8 +1112,8 @@ public class cgeodetail extends AbstractActivity {
     }
 
     private void parseLongDescription() {
-        if (longDesc == null && cache != null && cache.description != null) {
-            longDesc = Html.fromHtml(cache.description.trim(), new cgHtmlImg(this, geocode, true, cache.reason, false), new UnknownTagsHandler());
+        if (longDesc == null && cache != null && cache.getDescription() != null) {
+            longDesc = Html.fromHtml(cache.getDescription().trim(), new cgHtmlImg(this, geocode, true, cache.reason, false), new UnknownTagsHandler());
         }
     }
 
@@ -1386,7 +1386,7 @@ public class cgeodetail extends AbstractActivity {
 
         @Override
         public void run() {
-            if (cache == null || cache.description == null || handler == null) {
+            if (cache == null || cache.getDescription() == null || handler == null) {
                 return;
             }
             parseLongDescription();
