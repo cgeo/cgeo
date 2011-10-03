@@ -1,5 +1,6 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCacheWrap;
 import cgeo.geocaching.cgCoord;
@@ -162,7 +163,7 @@ public final class LocParser extends FileParser {
                 cgeoapplication.getInstance().addCacheToSearch(search, cache);
             }
             caches.totalCnt = caches.cacheList.size();
-            showCountMessage(handler, search.getCount());
+            showCountMessage(handler, R.string.gpx_import_loading_stored, search.getCount());
             Log.i(cgSettings.tag, "Caches found in .gpx file: " + caches.totalCnt);
         } catch (Exception e) {
             Log.e(cgSettings.tag, "cgBase.parseGPX: " + e.toString());
