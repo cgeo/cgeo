@@ -32,7 +32,9 @@ public class cgHtmlImg implements Html.ImageGetter {
 
     private static final String[] BLOCKED = new String[] {
             "gccounter.de",
-            "gccounter.com"
+            "gccounter.com",
+            "cachercounter/?",
+            "gccounter/imgcount.php"
     };
     final private Activity activity;
     final private String geocode;
