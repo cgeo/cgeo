@@ -37,7 +37,7 @@ public class cgHtmlImg implements Html.ImageGetter {
             "gccounter/imgcount.php",
             "flagcounter.com"
     };
-    final private Activity activity;
+    final private Context context;
     final private String geocode;
     final private boolean placement;
     final private int reason;
@@ -52,8 +52,8 @@ public class cgHtmlImg implements Html.ImageGetter {
         this(activityIn, geocodeIn, placementIn, reasonIn, onlySaveIn, true);
     }
 
-    public cgHtmlImg(Activity activityIn, String geocodeIn, boolean placementIn, int reasonIn, boolean onlySaveIn, boolean saveIn) {
-        activity = activityIn;
+    public cgHtmlImg(Context contextIn, String geocodeIn, boolean placementIn, int reasonIn, boolean onlySaveIn, boolean saveIn) {
+        context = contextIn;
         geocode = geocodeIn;
         placement = placementIn;
         reason = reasonIn;
@@ -63,7 +63,7 @@ public class cgHtmlImg implements Html.ImageGetter {
         bfOptions = new BitmapFactory.Options();
         bfOptions.inTempStorage = new byte[16 * 1024];
 
-        display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         maxWidth = display.getWidth() - 25;
         maxHeight = display.getHeight() - 25;
     }
@@ -208,9 +208,9 @@ public class cgHtmlImg implements Html.ImageGetter {
             Log.d(Settings.tag, "cgHtmlImg.getDrawable: Failed to obtain image");
 
             if (placement) {
-                imagePre = BitmapFactory.decodeResource(activity.getResources(), R.drawable.image_not_loaded);
+                imagePre = BitmapFactory.decodeResource(context.getResources(), R.drawable.image_not_loaded);
             } else {
-                imagePre = BitmapFactory.decodeResource(activity.getResources(), R.drawable.image_no_placement);
+                imagePre = BitmapFactory.decodeResource(context.getResources(), R.drawable.image_no_placement);
             }
         }
 
