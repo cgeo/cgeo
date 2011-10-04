@@ -525,6 +525,13 @@
   <string name="cache_hint">Hint</string>
   <string name="cache_logs">Logbook</string>
   <string name="cache_dialog_loading_details">Loading cache details…</string>
+  <string name="cache_dialog_loading_details_status_loadpage">Loading page</string>
+  <string name="cache_dialog_loading_details_status_details">Processing details</string>
+  <string name="cache_dialog_loading_details_status_spoilers">Loading spoiler images</string>
+  <string name="cache_dialog_loading_details_status_logs">Loading logs</string>
+  <string name="cache_dialog_loading_details_status_waypoints">Processing waypoints</string>
+  <string name="cache_dialog_loading_details_status_gcvote">Loading GCVote</string>
+  <string name="cache_dialog_loading_details_status_render">Render view</string>
   <string name="cache_dialog_loading_description">Loading cache description…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">Saving cache for offline use…</string>

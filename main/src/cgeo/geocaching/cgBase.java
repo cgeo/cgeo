@@ -217,6 +217,8 @@ public class cgBase {
 
     private static final int NB_DOWNLOAD_RETRIES = 4;
 
+    public static final int UPDATE_LOAD_PROGRESS_DETAIL = 42186;
+
     public cgBase(cgeoapplication appIn) {
         context = appIn.getBaseContext();
         res = appIn.getBaseContext().getResources();
@@ -1056,7 +1058,11 @@ public class cgBase {
         return caches;
     }
 
-    public cgCacheWrap parseCache(String page, int reason) {
+    public cgCacheWrap parseCache(final String page, final int reason, final Handler handler) {
+        if (null != handler) {
+            handler.obtainMessage(cgBase.UPDATE_LOAD_PROGRESS_DETAIL, res.getString(R.string.cache_dialog_loading_details_status_details)).sendToTarget();
+        }
+
         if (StringUtils.isBlank(page)) {
             Log.e(Settings.tag, "cgeoBase.parseCache: No page given");
             return null;
@@ -1287,6 +1293,10 @@ public class cgBase {
         try {
             final Matcher matcherSpoilers = patternSpoilers.matcher(page);
             if (matcherSpoilers.find()) {
+                if (null != handler) {
+                    handler.obtainMessage(cgBase.UPDATE_LOAD_PROGRESS_DETAIL, res.getString(R.string.cache_dialog_loading_details_status_spoilers)).sendToTarget();
+                }
+
                 final Matcher matcherSpoilersInside = patternSpoilersInside.matcher(matcherSpoilers.group(1));
 
                 while (matcherSpoilersInside.find()) {
@@ -1374,6 +1384,9 @@ public class cgBase {
         }
 
         // cache logs
+        if (null != handler) {
+            handler.obtainMessage(cgBase.UPDATE_LOAD_PROGRESS_DETAIL, res.getString(R.string.cache_dialog_loading_details_status_logs)).sendToTarget();
+        }
         loadLogsFromDetails(page, cache);
 
         int wpBegin = 0;
@@ -1381,6 +1394,10 @@ public class cgBase {
 
         wpBegin = page.indexOf("<table class=\"Table\" id=\"ctl00_ContentBody_Waypoints\">");
         if (wpBegin != -1) { // parse waypoints
+            if (null != handler) {
+                handler.obtainMessage(cgBase.UPDATE_LOAD_PROGRESS_DETAIL, res.getString(R.string.cache_dialog_loading_details_status_waypoints)).sendToTarget();
+            }
+
             final Pattern patternWpType = Pattern.compile("\\/wpttypes\\/sm\\/(.+)\\.jpg", Pattern.CASE_INSENSITIVE);
             final Pattern patternWpPrefixOrLookupOrLatlon = Pattern.compile(">([^<]*<[^>]+>)?([^<]+)(<[^>]+>[^<]*)?<\\/td>", Pattern.CASE_INSENSITIVE);
             final Pattern patternWpName = Pattern.compile(">[^<]*<a[^>]+>([^<]*)<\\/a>", Pattern.CASE_INSENSITIVE);
@@ -1504,6 +1521,10 @@ public class cgBase {
 
         if (cache.coords != null) {
             cache.elevation = getElevation(cache.coords);
+        }
+
+        if (null != handler) {
+            handler.obtainMessage(cgBase.UPDATE_LOAD_PROGRESS_DETAIL, res.getString(R.string.cache_dialog_loading_details_status_gcvote)).sendToTarget();
         }
 
         final cgRating rating = GCVote.getRating(cache.guid, cache.geocode);
@@ -2207,7 +2228,7 @@ public class cgBase {
         return searchId;
     }
 
-    public UUID searchByGeocode(final String geocode, final String guid, final int reason, final boolean forceReload) {
+    public UUID searchByGeocode(final String geocode, final String guid, final int reason, final boolean forceReload, final Handler handler) {
         final cgSearch search = new cgSearch();
 
         if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
@@ -2230,7 +2251,7 @@ public class cgBase {
             return search.getCurrentId();
         }
 
-        return ConnectorFactory.getConnector(geocode).searchByGeocode(this, geocode, guid, app, search, reason);
+        return ConnectorFactory.getConnector(geocode).searchByGeocode(this, geocode, guid, app, search, reason, handler);
     }
 
     public UUID searchByOffline(final Geopoint coords, final String cacheType, final int list) {
@@ -3127,11 +3148,11 @@ public class cgBase {
             if (cache != null) {
                 // only reload the cache, if it was already stored or has not all details (by checking the description)
                 if (cache.reason > 0 || StringUtils.isBlank(cache.getDescription())) {
-                    final UUID searchId = searchByGeocode(cache.geocode, null, listId, false);
+                    final UUID searchId = searchByGeocode(cache.geocode, null, listId, false, null);
                     cache = app.getCache(searchId);
                 }
             } else if (StringUtils.isNotBlank(geocode)) {
-                final UUID searchId = searchByGeocode(geocode, null, listId, false);
+                final UUID searchId = searchByGeocode(geocode, null, listId, false, null);
                 cache = app.getCache(searchId);
             }
 
