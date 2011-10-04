@@ -740,6 +740,13 @@ public class cgeo extends AbstractActivity {
             if (app.showLoginToast) {
                 firstLoginHandler.sendEmptyMessage(status);
                 app.showLoginToast = false;
+
+                // invoke settings activity to insert login details
+                if (status == -3) {
+                    final Context context = cgeo.this;
+                    final Intent initIntent = new Intent(context, cgeoinit.class);
+                    context.startActivity(initIntent);
+                }
             }
         }
     }

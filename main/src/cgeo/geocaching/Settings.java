@@ -10,7 +10,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.mapsforge.android.maps.MapDatabase;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
@@ -45,7 +44,6 @@ public final class Settings {
     private static final String KEY_SKIN = "skin";
     private static final String KEY_LAST_USED_LIST = "lastlist";
     private static final String KEY_CACHE_TYPE = "cachetype";
-    private static final String KEY_INITIALIZED = "initialized";
     private static final String KEY_TWITTER_TOKEN_SECRET = "tokensecret";
     private static final String KEY_TWITTER_TOKEN_PUBLIC = "tokenpublic";
     private static final String KEY_VERSION = "version";
@@ -191,14 +189,7 @@ public final class Settings {
             final String preUsername = sharedPrefs.getString(KEY_USERNAME, null);
             final String prePassword = sharedPrefs.getString(KEY_PASSWORD, null);
 
-            if (!isInitialized() && (preUsername == null || prePassword == null)) {
-                final Context context = cgeoapplication.getInstance().getApplicationContext();
-                final Intent initIntent = new Intent(context, cgeoinit.class);
-                context.startActivity(initIntent);
-
-                setInitialized();
-                return null;
-            } else if (isInitialized() && (preUsername == null || prePassword == null)) {
+            if (preUsername == null || prePassword == null) {
                 return null;
             }
 
@@ -735,20 +726,6 @@ public final class Settings {
             @Override
             public void edit(Editor edit) {
                 edit.putInt(KEY_USE_COMPASS, useCompass ? 1 : 0);
-            }
-        });
-    }
-
-    private static boolean isInitialized() {
-        return 0 != sharedPrefs.getInt(KEY_INITIALIZED, 0);
-    }
-
-    private static void setInitialized() {
-        editSharedSettings(new PrefRunnable() {
-
-            @Override
-            public void edit(Editor edit) {
-                edit.putInt(KEY_INITIALIZED, 1);
             }
         });
     }
