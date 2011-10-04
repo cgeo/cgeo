@@ -11,7 +11,6 @@ import cgeo.geocaching.cgeoapplication;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.content.res.Resources;
 import android.os.Handler;
 import android.util.Log;
 
@@ -81,11 +80,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
             return null;
         }
 
-        final Resources res = app.getResources();
-
-        if (null != handler) {
-            handler.obtainMessage(cgBase.UPDATE_LOAD_PROGRESS_DETAIL, res.getString(R.string.cache_dialog_loading_details_status_loadpage)).sendToTarget();
-        }
+        base.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
 
         String page = base.requestLogged("http://www.geocaching.com/seek/cache_details.aspx", params, false, false, false);
 

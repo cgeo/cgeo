@@ -400,6 +400,12 @@ public class cgBase {
         return message.replaceAll(passMatch, "password=***");
     }
 
+    public void sendLoadProgressDetail(final Handler handler, final int str) {
+        if (null != handler) {
+            handler.obtainMessage(UPDATE_LOAD_PROGRESS_DETAIL, res.getString(str)).sendToTarget();
+        }
+    }
+
     /**
      * read all viewstates from page
      *
@@ -1059,9 +1065,7 @@ public class cgBase {
     }
 
     public cgCacheWrap parseCache(final String page, final int reason, final Handler handler) {
-        if (null != handler) {
-            handler.obtainMessage(cgBase.UPDATE_LOAD_PROGRESS_DETAIL, res.getString(R.string.cache_dialog_loading_details_status_details)).sendToTarget();
-        }
+        sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_details);
 
         if (StringUtils.isBlank(page)) {
             Log.e(Settings.tag, "cgeoBase.parseCache: No page given");
@@ -1293,9 +1297,7 @@ public class cgBase {
         try {
             final Matcher matcherSpoilers = patternSpoilers.matcher(page);
             if (matcherSpoilers.find()) {
-                if (null != handler) {
-                    handler.obtainMessage(cgBase.UPDATE_LOAD_PROGRESS_DETAIL, res.getString(R.string.cache_dialog_loading_details_status_spoilers)).sendToTarget();
-                }
+                sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_spoilers);
 
                 final Matcher matcherSpoilersInside = patternSpoilersInside.matcher(matcherSpoilers.group(1));
 
@@ -1384,9 +1386,8 @@ public class cgBase {
         }
 
         // cache logs
-        if (null != handler) {
-            handler.obtainMessage(cgBase.UPDATE_LOAD_PROGRESS_DETAIL, res.getString(R.string.cache_dialog_loading_details_status_logs)).sendToTarget();
-        }
+        sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
+
         loadLogsFromDetails(page, cache);
 
         int wpBegin = 0;
@@ -1394,9 +1395,7 @@ public class cgBase {
 
         wpBegin = page.indexOf("<table class=\"Table\" id=\"ctl00_ContentBody_Waypoints\">");
         if (wpBegin != -1) { // parse waypoints
-            if (null != handler) {
-                handler.obtainMessage(cgBase.UPDATE_LOAD_PROGRESS_DETAIL, res.getString(R.string.cache_dialog_loading_details_status_waypoints)).sendToTarget();
-            }
+            sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_waypoints);
 
             final Pattern patternWpType = Pattern.compile("\\/wpttypes\\/sm\\/(.+)\\.jpg", Pattern.CASE_INSENSITIVE);
             final Pattern patternWpPrefixOrLookupOrLatlon = Pattern.compile(">([^<]*<[^>]+>)?([^<]+)(<[^>]+>[^<]*)?<\\/td>", Pattern.CASE_INSENSITIVE);
@@ -1523,9 +1522,7 @@ public class cgBase {
             cache.elevation = getElevation(cache.coords);
         }
 
-        if (null != handler) {
-            handler.obtainMessage(cgBase.UPDATE_LOAD_PROGRESS_DETAIL, res.getString(R.string.cache_dialog_loading_details_status_gcvote)).sendToTarget();
-        }
+        sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_gcvote);
 
         final cgRating rating = GCVote.getRating(cache.guid, cache.geocode);
         if (rating != null) {
