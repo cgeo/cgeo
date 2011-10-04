@@ -34,7 +34,8 @@ public class cgHtmlImg implements Html.ImageGetter {
             "gccounter.de",
             "gccounter.com",
             "cachercounter/?",
-            "gccounter/imgcount.php"
+            "gccounter/imgcount.php",
+            "flagcounter.com"
     };
     final private Activity activity;
     final private String geocode;
