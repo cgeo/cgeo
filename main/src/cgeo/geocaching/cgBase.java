@@ -43,6 +43,7 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
@@ -100,6 +101,8 @@ public class cgBase {
     private final static Pattern patternInventory = Pattern.compile("<span id=\"ctl00_ContentBody_uxTravelBugList_uxInventoryLabel\">\\W*Inventory[^<]*</span>[^<]*</h3>[^<]*<div class=\"WidgetBody\">([^<]*<ul>(([^<]*<li>[^<]*<a href=\"[^\"]+\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>[^<]+<\\/span>[^<]*<\\/a>[^<]*<\\/li>)+)[^<]*<\\/ul>)?", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternInventoryInside = Pattern.compile("[^<]*<li>[^<]*<a href=\"[a-z0-9\\-\\_\\.\\?\\/\\:\\@]*\\/track\\/details\\.aspx\\?guid=([0-9a-z\\-]+)[^\"]*\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>([^<]+)<\\/span>[^<]*<\\/a>[^<]*<\\/li>", Pattern.CASE_INSENSITIVE);
     private final static Pattern patternOnWatchlist = Pattern.compile("<img\\s*src=\"\\/images\\/stockholm\\/16x16\\/icon_stop_watchlist.gif\"", Pattern.CASE_INSENSITIVE);
+
+    private static final Pattern patternAvatarImg = Pattern.compile("<img src=\"(http://img.geocaching.com/user/avatar/[0-9a-f-]+\\.jpg)\"[^>]*\\salt=\"Avatar\"");
 
     private final static Pattern PATTERN_TRACKABLE_TrackableId = Pattern.compile("<a id=\"ctl00_ContentBody_LogLink\" title=\"[^\"]*\" href=\".*log\\.aspx\\?wid=([a-z0-9\\-]+)\"[^>]*>[^<]*</a>", Pattern.CASE_INSENSITIVE);
     private final static Pattern PATTERN_TRACKABLE_Geocode = Pattern.compile("<span id=\"ctl00_ContentBody_BugDetails_BugTBNum\" String=\"[^\"]*\">Use[^<]*<strong>(TB[0-9a-z]+)[^<]*</strong> to reference this item.[^<]*</span>", Pattern.CASE_INSENSITIVE);
@@ -1680,6 +1683,23 @@ public class cgBase {
         {
             Settings.setGcCustomDate(matcher.group(1));
         }
+    }
+
+    public static BitmapDrawable downloadAvatar(final Context context) {
+        try {
+            final String profile = replaceWhitespace(getResponseData(request("http://www.geocaching.com/my/", null, false)));
+            final Matcher matcher = patternAvatarImg.matcher(profile);
+            if (matcher.find()) {
+                final String avatarURL = matcher.group(1);
+                final cgHtmlImg imgGetter = new cgHtmlImg(context, "", false, 0, false, false);
+                return imgGetter.getDrawable(avatarURL);
+            }
+            // No match? There may be no avatar set by user.
+            Log.d(Settings.tag, "No avatar set for user");
+        } catch (Exception e) {
+            Log.w(Settings.tag, "Error when retrieving user avatar", e);
+        }
+        return null;
     }
 
     public cgTrackable parseTrackable(String page) {

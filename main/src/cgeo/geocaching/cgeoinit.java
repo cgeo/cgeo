@@ -12,6 +12,7 @@ import org.apache.http.HttpResponse;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -50,12 +51,13 @@ public class cgeoinit extends AbstractActivity {
                     loginDialog.dismiss();
                 }
 
-                final StatusCode error = (StatusCode) msg.obj;
-                if (error == null || error == StatusCode.NO_ERROR) {
-                    helpDialog(res.getString(R.string.init_login_popup), res.getString(R.string.init_login_popup_ok));
+                if (msg.obj == null || (msg.obj instanceof Drawable)) {
+                    helpDialog(res.getString(R.string.init_login_popup), res.getString(R.string.init_login_popup_ok),
+                            (Drawable) msg.obj);
                 } else {
                     helpDialog(res.getString(R.string.init_login_popup),
-                            res.getString(R.string.init_login_popup_failed_reason) + " " + error.getErrorString(res) + ".");
+                            res.getString(R.string.init_login_popup_failed_reason) + " " +
+                                    ((StatusCode) msg.obj).getErrorString(res) + ".");
                 }
             } catch (Exception e) {
                 showToast(res.getString(R.string.err_login_failed));
@@ -687,11 +689,10 @@ public class cgeoinit extends AbstractActivity {
                 @Override
                 public void run() {
                     final StatusCode loginResult = cgBase.login();
-                    if (loginResult == StatusCode.NO_ERROR)
-                    {
+                    if (loginResult == StatusCode.NO_ERROR) {
                         cgBase.detectGcCustomDate();
                     }
-                    logInHandler.sendMessage(logInHandler.obtainMessage(0, loginResult));
+                    logInHandler.obtainMessage(0, cgBase.downloadAvatar(cgeoinit.this)).sendToTarget();
                 }
             }).start();
         }
