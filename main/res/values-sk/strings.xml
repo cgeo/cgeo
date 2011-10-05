@@ -119,7 +119,7 @@
   <string name="err_none">Ok</string>
   <string name="err_start">Komunikácia nezačala.</string>
   <string name="err_parse">Zlyhalo čítanie prihlasovacej stránky.</string>
-  <string name="err_server">Zlyhalo pripojenie k serveru Geocaching.com (pripojenie alebo server nefunkčný?)</string>
+  <string name="err_server">Zlyhalo pripojenie k serveru Geocaching.com (pripojenie, alebo server nefunkčný?)</string>
   <string name="err_login">Nie sú uložené žiadne prihlasovacie údaje.</string>
   <string name="err_login_failed">prepáčte, ale c:geo sa nemôže prihlásiť.</string>
   <string name="err_login_failed_toast">Prepáčte, c:geo sa nepodarilo prihlásiť. c:geo funguje v offline režime. Skontrolujte vaše prihlasovacie údaje v nastaveniach, alebo povoľte pripojenie k Internetu.</string>
@@ -148,7 +148,7 @@
   <string name="err_detail_still_removing">Ešte odstraňujem skrýšu.</string>
   <string name="err_detail_still_saving">Ešte ukladám skrýšu.</string>
   <string name="err_detail_still_refreshing">Ešte aktualizujem skrýšu.</string>
-  <string name="err_watchlist_still_managing">Stále spravovaný váš zoznam sledovaných.</string>
+  <string name="err_watchlist_still_managing">Stále prebieha správa vášho zoznamu sledovaných.</string>
   <string name="err_watchlist_failed">Zlyhala zmena sledovaných.</string>
   <string name="err_radar_title">Radar nie je nainštalovaný.</string>
   <string name="err_radar_message">Táto funkcia vyžaduje aplikáciu Radar. Chcete ju nainštalovať?</string>
@@ -177,12 +177,12 @@
   <string name="err_missing_device_name">Pred registráciou zadajte prosím názov zariadenia.</string>
 
   <string name="err_tb_display">Prepáčte, c:geo nemôže zobraziť trasovateľný predmet. Je to naozaj trasovateľný?</string>
-  <string name="err_tb_details_open">Prepáčte, c:geo nemôže otvoriť podrobnosti k trasovateľnému objektu.</string>
-  <string name="err_tb_details_download">Prepáčte, c:geo nemôže stiahnuť podrobnosti k trasovateľnému objektu, pretože</string>
-  <string name="err_tb_forgot">c:geo zabudlo, ktorý trasovateľný objekt ste chceli.</string>
-  <string name="err_tb_forgot_saw">c:geo zabudlo, ktorý trasovateľný objekt ste pozerali.</string>
-  <string name="err_tb_find">c:geo nemôže nájsť trasovateľný objekt.</string>
-  <string name="err_tb_find_that">c:geo nemôže nájsť tento trasovateľný objekt.</string>
+  <string name="err_tb_details_open">Prepáčte, c:geo nemôže otvoriť podrobnosti k trasovateľnému predmetu.</string>
+  <string name="err_tb_details_download">Prepáčte, c:geo nemôže stiahnuť podrobnosti k trasovateľnému predmetu, pretože</string>
+  <string name="err_tb_forgot">c:geo zabudlo, ktorý trasovateľný predmet ste chceli.</string>
+  <string name="err_tb_forgot_saw">c:geo zabudlo, ktorý trasovateľný predmet ste pozerali.</string>
+  <string name="err_tb_find">c:geo nemôže nájsť trasovateľný predmet.</string>
+  <string name="err_tb_find_that">c:geo nemôže nájsť tento trasovateľný predmet.</string>
   <string name="err_cache_inventory_load_fail">c:geo sa nepodarilo načítať obsah skrýše.</string>
 
   <string name="err_waypoint_cache_unknown">c:geo nevie, ku ktorej skrýši chcete pridať bod trasy.</string>
@@ -228,7 +228,7 @@
   <string name="warn_search_help_gccode">Zadajte kód skrýše. Napríklad „GC1VCAZ“.</string>
   <string name="warn_search_help_keyword">Zadajte slovo, ktoré je použité v názve skrýše, ktorú sa pokúšate nájsť.</string>
   <string name="warn_search_help_user">Zadajte meno používateľa z Geocaching.com.</string>
-  <string name="warn_search_help_tb">Zadajte kód trasovateľného objektu. Napríklad „TB29QMZ“.</string>
+  <string name="warn_search_help_tb">Zadajte kód trasovateľného predmet. Napríklad „TB29QMZ“.</string>
   <string name="warn_log_text_fill">Prosím, vyplňte nejaký text do logu.</string>
   <string name="warn_load_images">Prepáčte, c:geo sa nepodarilo načítať obrázky.</string>
 
@@ -301,7 +301,7 @@
   <string name="caches_sort_gccode">GC kódu</string> <!-- since: 2.2 -->
   <string name="caches_sort_rating">hodnotenia</string>
   <string name="caches_sort_vote">hlasovania (vlastného hodn.)</string>
-  <string name="caches_sort_inventory">položiek v skrýši</string>
+  <string name="caches_sort_inventory">počtu položiek v skrýši</string>
   <string name="caches_sort_date">dátumu</string>
   <string name="caches_sort_finds">nájdení</string>
   <string name="caches_sort_state">stavu</string>
@@ -310,7 +310,7 @@
   <string name="caches_select_mode_exit">Opustiť mód výberu</string>
   <string name="caches_select_invert">Inverzný výber</string>
   <string name="caches_nearby">V okolí</string>
-  <string name="caches_manage">Spravovať</string>
+  <string name="caches_manage">Správa</string>
   <string name="caches_drop_selected">Zmazať vybrané</string>
   <string name="caches_drop_selected_ask">Naozaj chcete zmazať vybraté skrýše zo zariadenia?</string>
   <string name="caches_drop_all">Zmazať všetky</string>
@@ -331,7 +331,7 @@
   <string name="caches_filter_title">Filtrovať</string>
   <string name="caches_filter_size">podľa veľkosti</string>
   <string name="caches_filter_type">podľa typu</string>
-  <string name="caches_filter_track">s trasovateľnými objektami</string>
+  <string name="caches_filter_track">s trasovateľnými predmetmi</string>
   <string name="caches_filter_clear">vymazať filtre</string>
   <string name="caches_filter_size_title">Výber veľkosti</string>
   <string name="caches_filter_type_title">Výber typu</string>
@@ -451,7 +451,7 @@
   <string name="init_mapsources_description">Tu môžete vybrať zdroje pre vaše mapy. Je to alternatíva ku Google mapám rôznych OpenStreetMap styles sú dostupné a dokonca offline mapové súbory (podrobnosti nájdete na <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a>).</string> <!-- since: 2.26 RC3 -->
   <string name="init_mapsource_select">Vyberte zdroj máp</string>
   <string name="init_select_mapfile">…</string>
-  <string name="init_trackautovisit">Nastaviť trasovateľné automaticky na „navštívené“</string>
+  <string name="init_trackautovisit">Nastaviť trasovateľné predmety automaticky na „navštívené“</string>
   <string name="init_sigautoinsert">Automaticky vložiť podpis</string>
   <string name="init_loaddirectionimg">Ak je to potrebné načítať obrázok zo smerom</string>
 
@@ -507,7 +507,7 @@
   <string name="cache_offline_time_days">pred dňami</string>
   <string name="cache_premium">platený účet</string>
   <string name="cache_attributes">Atribúty</string>
-  <string name="cache_attributes_no_icons">(obnoví skrýšu pre zobrazenie ikôn atribútov)</string>
+  <string name="cache_attributes_no_icons">(obnoví skrýšu pre zobrazenie ikon atribútov)</string>
   <string name="cache_inventory">Obsah</string>
   <string name="cache_inventory_loading">Načítanie obsahu skrýše…</string>
   <string name="cache_log_offline">Offline log</string>
@@ -679,7 +679,7 @@
 
   <!-- search -->
   <string name="search_bar_hint">Hľadanie skrýší</string>
-  <string name="search_bar_desc">Skrýše (GC kód, kľúčové slovo), trasovateľné (TB-kód)</string>
+  <string name="search_bar_desc">Skrýše (GC kód, kľúčové slovo), trasovateľné predmety (TB-kód)</string>
   <string name="search_coordinates">Súradnice</string>
   <string name="search_coordinates_button">Hľadať podľa súradníc</string>
   <string name="search_address">Adresa</string>
@@ -693,14 +693,14 @@
   <string name="search_caches_found_by">skrýše nájdené</string>
   <string name="search_caches_hidden_by">skrýše skryté</string>
   <string name="search_fbu">Nájdené používateľom</string>
-  <string name="search_fbu_prefill">používateľské meno</string>
+  <string name="search_fbu_prefill">Používateľské meno</string>
   <string name="search_fbu_button">Hľadať podľa použív. mena</string>
   <string name="search_hbu">Skryté používateľom</string>
   <string name="search_hbu_prefill">Vlastník</string>
   <string name="search_hbu_button">Hľadať podľa vlastníka</string>
-  <string name="search_tb">Trasovateľné</string>
-  <string name="search_tb_hint">Identifikácia trasovateľnej</string>
-  <string name="search_tb_button">Hľadať trasovateľné</string>
+  <string name="search_tb">Trasovateľné predmety</string>
+  <string name="search_tb_hint">Identifikácia trasovateľného predmetu</string>
+  <string name="search_tb_button">Hľadať trasov. predmety</string>
   <string name="search_destination">Cieľ</string>
   <string name="search_some_destination">Nejaký cieľ</string>
   <string name="search_direction_rel">Od tejto polohy</string>
@@ -713,9 +713,9 @@
   <string name="search_own_caches">Hľadať v mojich skrýšach</string>
 
   <!-- trackable -->
-  <string name="trackable">Trasovateľné</string>
-  <string name="trackable_select_title">Trasovateľné</string>
-  <string name="trackable_details_loading">Načítanie detailov trasovateľných objektov…</string>
+  <string name="trackable">Trasovateľné predmety</string>
+  <string name="trackable_select_title">Trasovateľné predmety</string>
+  <string name="trackable_details_loading">Načítanie detailov trasovateľných predmetov…</string>
   <string name="trackable_log_touch">Hlásenie zhliadnutia</string>
   <string name="trackable_browser_open">Otvoriť v prehliadači</string>
   <string name="trackable_goal">Cieľ</string>
@@ -872,8 +872,8 @@
   <string name="attribute_ticks_no">Bez kliešťov</string>
   <string name="attribute_mine_yes">Opustené míny</string>
   <string name="attribute_mine_no">Bez opustených mín</string>
-  <string name="attribute_cliff_yes">Útes / padajúce skaly</string>
-  <string name="attribute_cliff_no">Bez útesu / padajúcich skál</string>
+  <string name="attribute_cliff_yes">Útes/padajúce skaly</string>
+  <string name="attribute_cliff_no">Bez útesu/padajúcich skál</string>
   <string name="attribute_hunting_yes">Oblasť pre lov</string>
   <string name="attribute_hunting_no">Nie je oblasťou pre lov</string>
   <string name="attribute_danger_yes">Nebezpečné územie</string>
