@@ -434,12 +434,15 @@
   <string name="init_cleared">c:geo a effacé votre identifiant.</string>
   <string name="init_backup">Sauvegarde</string>
   <string name="init_backup_backup">Sauvegarde</string>
+  <string name="init_backup_running">Création de la copie de sauvegarde…</string>
   <string name="init_backup_note">Noter que cette option va sauvegarder/restaurer la base de données contenant les caches et les étapes, pas les paramètres. vos informations d\'utilisateur (mots de passe) ne quitteront pas l\'application.</string>
   <string name="init_backup_restore">Restauration</string>
   <string name="init_backup_success">La base de données de c:geo a été sauvegardée dans un fichier</string>
   <string name="init_backup_failed">La sauvegarde de la base de données de c:geo a échouée.</string>
+  <string name="init_backup_unnecessary">La base de données est vide, sauvegarde non nécessaire.</string>
   <string name="init_restore_success">Restauration terminée.</string>
   <string name="init_restore_failed">Échec de la restauration.</string>
+  <string name="init_restore_running">Restauration de la base de données des caches…</string>
   <string name="init_backup_last">Sauvegarde disponible depuis</string>
   <string name="init_backup_last_no">Il n\'y a pas de fichier avec une sauvegarde.</string>
   <string name="init_mapsources">Source des cartes</string> <!-- since: 2.26 RC3 -->
@@ -593,7 +596,10 @@
   <string name="file_title_searching">Recherche en cours</string>
 
   <!-- gpx -->
-  <string name="gpx_import_loading_stored">Chargement des caches depuis les fichiers .gpx \nEnregistré:</string>
+  <string name="gpx_import_loading_caches">Chargement des caches depuis le fichier .gpx\nLus:</string>
+  <string name="gpx_import_loading_waypoints">Chargement des points intermédiaires depuis le fichier .gpx\nLus:</string>
+  <string name="gpx_import_storing">Écriture des caches dans la base de données\nEnregistrés:</string>
+  <string name="gpx_import_loading_stored">Chargement des caches depuis les fichiers .gpx\nEnregistrés:</string>
   <string name="gpx_import_no_files">Désolé, c:geo n\'a trouvé aucun fichier .gpx.</string>
   <string name="gpx_import_caches_imported">caches importées</string>
   <string name="gpx_import_loading">Chargement des caches depuis le fichier .gpx</string>
@@ -636,7 +642,7 @@
   <string name="waypoint_save">Sauver</string>
   <string name="waypoint_loading">Chargement d\'une étape…</string>
   <string name="waypoint_unknown_coordinates">Coordonnées inconnues</string>
-  <string name="waypoint_done">Fait</string>
+  <string name="waypoint_done">Ok</string>
   <string name="search_history">Historique</string>
   <string name="search_history_empty">Aucune destination précédente</string>
   <string name="search_remove_destination">Destination effacée</string>
