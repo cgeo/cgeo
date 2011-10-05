@@ -688,10 +688,10 @@ public class cgeoinit extends AbstractActivity {
 
                 @Override
                 public void run() {
-                    final int loginResult = base.login();
+                    final int loginResult = cgBase.login();
                     if (1 == loginResult)
                     {
-                        base.detectGcCustomDate();
+                        cgBase.detectGcCustomDate();
                     }
                     logInHandler.sendEmptyMessage(loginResult);
                 }

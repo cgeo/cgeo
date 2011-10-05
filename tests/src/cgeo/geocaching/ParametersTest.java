@@ -8,10 +8,9 @@ import java.security.InvalidParameterException;
 
 import junit.framework.Assert;
 
-@SuppressWarnings("static-method")
 public class ParametersTest extends AndroidTestCase {
 
-    public void testException() {
+    public static void testException() {
         try {
             @SuppressWarnings("unused")
             final Parameters params = new Parameters("aaa", "AAA", "bbb");
@@ -28,13 +27,13 @@ public class ParametersTest extends AndroidTestCase {
         }
     }
 
-    public void testMultipleValues() {
+    public static void testMultipleValues() {
         final Parameters params = new Parameters("aaa", "AAA", "bbb", "BBB");
         params.put("ccc", "CCC", "ddd", "DDD");
         Assert.assertEquals("aaa=AAA&bbb=BBB&ccc=CCC&ddd=DDD", params.toString());
     }
 
-    public void testSort() {
+    public static void testSort() {
         final Parameters params = new Parameters();
         params.put("aaa", "AAA");
         params.put("ccc", "CCC");
@@ -44,7 +43,7 @@ public class ParametersTest extends AndroidTestCase {
         Assert.assertEquals("aaa=AAA&bbb=BBB&ccc=CCC", params.toString());
     }
 
-    public void testToString() {
+    public static void testToString() {
         final Parameters params = new Parameters();
         params.put("name", "foo&bar");
         params.put("type", "moving");

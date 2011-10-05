@@ -1,11 +1,11 @@
 package cgeo.geocaching.connector;
 
 import cgeo.geocaching.Parameters;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCacheWrap;
 import cgeo.geocaching.cgSearch;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
 
 import org.apache.commons.lang3.StringUtils;
@@ -73,7 +73,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
             params.put("guid", guid);
         }
 
-        String page = base.requestLogged("http://www.geocaching.com/seek/cache_details.aspx", params, false, false, false);
+        String page = cgBase.requestLogged("http://www.geocaching.com/seek/cache_details.aspx", params, false, false, false);
 
         if (StringUtils.isEmpty(page)) {
             if (app.isThere(geocode, guid, true, false)) {
@@ -99,7 +99,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
             return null;
         }
 
-        final cgCacheWrap caches = base.parseCache(page, reason);
+        final cgCacheWrap caches = cgBase.parseCache(page, reason);
         if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
             if (caches != null && StringUtils.isNotBlank(caches.error)) {
                 search.error = caches.error;

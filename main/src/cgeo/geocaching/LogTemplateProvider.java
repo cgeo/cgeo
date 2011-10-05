@@ -74,7 +74,7 @@ public class LogTemplateProvider {
 
                         @Override
                         String getValue(final cgBase base, final boolean offline) {
-                            return base.getUserName();
+                            return Settings.getUsername();
                         }
                     },
                     new LogTemplate("NUMBER", R.string.init_signature_template_number) {

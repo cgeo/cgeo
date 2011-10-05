@@ -106,7 +106,7 @@ public class RegExPerformanceTest extends TestCase {
     private final static Pattern PATTERN_OWNERREAL = Pattern.compile("<a id=\"ctl00_ContentBody_uxFindLinksHiddenByThisUser\" href=\"[^\"]*/seek/nearest\\.aspx\\?u=(.*?)\"");
 
 
-    public void testRegEx() {
+    public static void testRegEx() {
         List<String> output = doTheTests(10);
 
         for (String s : output) {

@@ -397,7 +397,7 @@ public class cgGeo {
                     if (base.version != null) {
                         params.put("v", base.version);
                     }
-                    final String res = cgBase.getResponseData(base.postRequest("http://api.go4cache.com/", params));
+                    final String res = cgBase.getResponseData(cgBase.postRequest("http://api.go4cache.com/", params));
 
                     if (StringUtils.isNotBlank(res)) {
                         lastGo4cacheCoords = coordsNow;

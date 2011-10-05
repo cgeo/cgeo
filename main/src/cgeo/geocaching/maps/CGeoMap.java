@@ -1,13 +1,13 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.Settings;
+import cgeo.geocaching.Settings.mapSourceEnum;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgDirection;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.Settings;
-import cgeo.geocaching.Settings.mapSourceEnum;
 import cgeo.geocaching.cgUpdateDir;
 import cgeo.geocaching.cgUpdateLoc;
 import cgeo.geocaching.cgUser;
@@ -1208,7 +1208,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 //this should just fetch and insert into the db _and_ be cancel-able if the viewport changes
 
                 if (token == null) {
-                    token = base.getMapUserToken(noMapTokenHandler);
+                    token = cgBase.getMapUserToken(noMapTokenHandler);
                 }
 
                 if (stop) {
@@ -1414,7 +1414,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     lonMin = llCache;
                 }
 
-                users = base.getGeocachersInViewport(Settings.getUsername(), latMin, latMax, lonMin, lonMax);
+                users = cgBase.getGeocachersInViewport(Settings.getUsername(), latMin, latMax, lonMin, lonMax);
 
                 if (stop) {
                     return;

@@ -69,13 +69,13 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
 * @param base
 */
     @MediumTest
-    public void testParseCache() {
+    public static void testParseCache() {
         final List<MockedCache> cachesToTest = new ArrayList<MockedCache>();
         cachesToTest.add(new GC2CJPF());
         cachesToTest.add(new GC1ZXX2());
 
         for (MockedCache cache : cachesToTest) {
-            cgCacheWrap caches = base.parseCache(cache.getData(), 0);
+            cgCacheWrap caches = cgBase.parseCache(cache.getData(), 0);
             cgCache cacheParsed = caches.cacheList.get(0);
             Assert.assertEquals(cache.getGeocode(), cacheParsed.getGeocode());
             Assert.assertEquals(cache.getType(), cacheParsed.getType());
@@ -101,8 +101,8 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
         }
     }
 
-    public void testParseLocationWithLink() {
-        cgCacheWrap caches = base.parseCache(MockedCache.readCachePage("GCV2R9"), 0);
+    public static void testParseLocationWithLink() {
+        cgCacheWrap caches = cgBase.parseCache(MockedCache.readCachePage("GCV2R9"), 0);
         cgCache cache = caches.cacheList.get(0);
         Assert.assertEquals("California, United States", cache.getLocation());
     }

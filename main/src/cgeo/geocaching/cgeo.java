@@ -730,11 +730,11 @@ public class cgeo extends AbstractActivity {
                 return;
             }
 
-            int status = base.login();
+            final int status = cgBase.login();
 
             if (status == 1) {
                 app.firstRun = false;
-                base.detectGcCustomDate();
+                cgBase.detectGcCustomDate();
             }
 
             if (app.showLoginToast) {

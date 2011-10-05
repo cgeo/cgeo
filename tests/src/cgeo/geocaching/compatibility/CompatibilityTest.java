@@ -7,7 +7,6 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import junit.framework.Assert;
 
-@SuppressWarnings("static-method")
 public class CompatibilityTest extends ActivityInstrumentationTestCase2<cgeo> {
 
     private cgeo activity;
@@ -22,7 +21,7 @@ public class CompatibilityTest extends ActivityInstrumentationTestCase2<cgeo> {
         activity = getActivity();
     }
 
-    public void testDataChanged() {
+    public static void testDataChanged() {
         // This should not raise an exception in any Android version
         Compatibility.dataChanged("cgeo.geocaching");
     }

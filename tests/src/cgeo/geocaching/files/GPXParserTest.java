@@ -98,7 +98,7 @@ public class GPXParserTest extends InstrumentationTestCase {
         assertEquals(0, caches.size());
     }
 
-    public void testConvertWaypointSym2Type() {
+    public static void testConvertWaypointSym2Type() {
         assertEquals(WaypointType.WAYPOINT, GPXParser.convertWaypointSym2Type("unknown sym"));
 
         assertEquals(WaypointType.PKG, GPXParser.convertWaypointSym2Type("Parking area"));
@@ -109,7 +109,7 @@ public class GPXParserTest extends InstrumentationTestCase {
         assertEquals(WaypointType.WAYPOINT, GPXParser.convertWaypointSym2Type("Reference point"));
     }
 
-    private void assertGc31j2h(final cgCache cache) {
+    private static void assertGc31j2h(final cgCache cache) {
         assertEquals("GC31J2H", cache.getGeocode());
         assertEquals("Hockenheimer City-Brunnen", cache.getName());
         assertTrue("Hockenheimer City-Brunnen by vptsz, Multi-cache (2/1)", cache.getShortDescription().startsWith("Kurzer informativer Multi entlang der Brunnen"));
@@ -142,7 +142,7 @@ public class GPXParserTest extends InstrumentationTestCase {
         assertNull(cache.attributes);
     }
 
-    private long parseTime(String time) {
+    private static long parseTime(final String time) {
         try {
             return LOG_DATE_FORMAT.parse(time).getTime();
         } catch (ParseException e) {
@@ -150,7 +150,7 @@ public class GPXParserTest extends InstrumentationTestCase {
         }
     }
 
-    private void assertGc31j2hWaypoints(final cgCache cache) {
+    private static void assertGc31j2hWaypoints(final cgCache cache) {
         assertNotNull(cache.waypoints);
         assertEquals(2, cache.waypoints.size());
         cgWaypoint wp = cache.waypoints.get(0);
@@ -174,7 +174,7 @@ public class GPXParserTest extends InstrumentationTestCase {
         assertEquals(8.545100, wp.coords.getLongitude(), 0.000001);
     }
 
-    public void testGetWaypointsFileForGpx() {
+    public static void testGetWaypointsFileForGpx() {
         assertEquals(new File("1234567-wpts.gpx"), GPXParser.getWaypointsFileForGpx(new File("1234567.gpx")));
         assertEquals(new File("/mnt/sdcard/1234567-wpts.gpx"), GPXParser.getWaypointsFileForGpx(new File("/mnt/sdcard/1234567.gpx")));
         assertEquals(new File("/mnt/sdcard/1-wpts.gpx"), GPXParser.getWaypointsFileForGpx(new File("/mnt/sdcard/1.gpx")));

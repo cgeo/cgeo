@@ -448,7 +448,7 @@ public class cgeotouch extends cgLogForm {
                 tweetCheck = (CheckBox) findViewById(R.id.tweet);
             }
 
-            status = base.postLogTrackable(guid, tracking, viewstates, typeSelected, date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE), log);
+            status = cgBase.postLogTrackable(guid, tracking, viewstates, typeSelected, date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE), log);
 
             if (status == 1 && Settings.isUseTwitter() &&
                     Settings.isTwitterLoginValid() &&

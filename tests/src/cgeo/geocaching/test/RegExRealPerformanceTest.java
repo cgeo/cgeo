@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class RegExRealPerformanceTest extends AndroidTestCase {
 
-    public void testRegEx() {
+    public static void testRegEx() {
 
         List<String> output = RegExPerformanceTest.doTheTests(10);
 

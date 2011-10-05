@@ -746,7 +746,7 @@ public class cgeodetail extends AbstractActivity {
 
             itemName.setText(res.getString(R.string.cache_distance));
             if (cache.distance != null) {
-                itemValue.setText("~" + base.getHumanDistance(cache.distance));
+                itemValue.setText("~" + cgBase.getHumanDistance(cache.distance));
             } else {
                 itemValue.setText("--");
             }
@@ -1070,7 +1070,7 @@ public class cgeodetail extends AbstractActivity {
             }
 
             if (geo != null && geo.coordsNow != null && cache != null && cache.coords != null) {
-                cacheDistance.setText(base.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
+                cacheDistance.setText(cgBase.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
                 cacheDistance.bringToFront();
             }
         } catch (Exception e) {
@@ -1623,7 +1623,7 @@ public class cgeodetail extends AbstractActivity {
                 StringBuilder dist = new StringBuilder();
 
                 if (geo.coordsNow != null && cache != null && cache.coords != null) {
-                    dist.append(base.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
+                    dist.append(cgBase.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
                 }
 
                 if (cache != null && cache.elevation != null) {
@@ -1834,7 +1834,7 @@ public class cgeodetail extends AbstractActivity {
 
         @Override
         public void run() {
-            handler.sendEmptyMessage(base.addToWatchlist(cache));
+            handler.sendEmptyMessage(cgBase.addToWatchlist(cache));
         }
     }
 
@@ -1848,7 +1848,7 @@ public class cgeodetail extends AbstractActivity {
 
         @Override
         public void run() {
-            handler.sendEmptyMessage(base.removeFromWatchlist(cache));
+            handler.sendEmptyMessage(cgBase.removeFromWatchlist(cache));
         }
     }
 

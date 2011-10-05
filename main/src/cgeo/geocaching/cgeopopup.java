@@ -514,7 +514,7 @@ public class cgeopopup extends AbstractActivity {
 
             try {
                 if (geo.coordsNow != null && cache != null && cache.coords != null) {
-                    cacheDistance.setText(base.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
+                    cacheDistance.setText(cgBase.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
                     cacheDistance.bringToFront();
                 }
             } catch (Exception e) {

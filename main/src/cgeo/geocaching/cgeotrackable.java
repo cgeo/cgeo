@@ -218,7 +218,7 @@ public class cgeotrackable extends AbstractActivity {
                     itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
                     itemName.setText(res.getString(R.string.trackable_distance));
-                    itemValue.setText(base.getHumanDistance(trackable.distance));
+                    itemValue.setText(cgBase.getHumanDistance(trackable.distance));
                     detailsList.addView(itemLayout);
                 }
 

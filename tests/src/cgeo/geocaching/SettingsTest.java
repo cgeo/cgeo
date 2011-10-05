@@ -20,7 +20,7 @@ public class SettingsTest extends ActivityInstrumentationTestCase2<cgeo> {
      * access settings.
      * this should work fine without an exception (once there was an exception because of the empty map file string)
      */
-    public void testSettingsException() {
+    public static void testSettingsException() {
         // asserts A OR NOT A, because we don't know what the settings are on any device or emulator
         assertTrue(Settings.isValidMapFile() || !Settings.isValidMapFile());
     }

@@ -479,7 +479,7 @@ public class cgBase {
         }
     }
 
-    public int login() {
+    public static int login() {
         HttpResponse loginResponse = null;
         String loginData = null;
 
@@ -589,7 +589,7 @@ public class cgBase {
         return false;
     }
 
-    public String switchToEnglish(final String[] viewstates) {
+    public static String switchToEnglish(final String[] viewstates) {
         final Parameters params = new Parameters(
                 "__EVENTTARGET", "ctl00$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem", // switch to english
                 "__EVENTARGUMENT", "");
@@ -598,7 +598,7 @@ public class cgBase {
         return cgBase.getResponseData(postRequest("http://www.geocaching.com/default.aspx", params));
     }
 
-    public cgCacheWrap parseSearch(cgSearchThread thread, String url, String page, boolean showCaptcha) {
+    public static cgCacheWrap parseSearch(final cgSearchThread thread, final String url, String page, final boolean showCaptcha) {
         if (StringUtils.isBlank(page)) {
             Log.e(Settings.tag, "cgeoBase.parseSearch: No page given");
             return null;
@@ -1050,7 +1050,7 @@ public class cgBase {
         return caches;
     }
 
-    public cgCacheWrap parseCache(String page, int reason) {
+    public static cgCacheWrap parseCache(final String page, final int reason) {
         if (StringUtils.isBlank(page)) {
             Log.e(Settings.tag, "cgeoBase.parseCache: No page given");
             return null;
@@ -1523,7 +1523,7 @@ public class cgBase {
      * @param cache
      *            the cache object to put the logs in
      */
-    private void loadLogsFromDetails(final String page, final cgCache cache) {
+    private static void loadLogsFromDetails(final String page, final cgCache cache) {
         final Matcher userTokenMatcher = patternUserToken.matcher(page);
         if (!userTokenMatcher.find()) {
             Log.e(Settings.tag, "cgBase.loadLogsFromDetails: unable to extract userToken");
@@ -1644,7 +1644,7 @@ public class cgBase {
         }
     }
 
-    public Date parseGcCustomDate(final String input)
+    public static Date parseGcCustomDate(final String input)
             throws ParseException
     {
         if (StringUtils.isBlank(input))
@@ -1675,7 +1675,7 @@ public class cgBase {
         throw new ParseException("No matching pattern", 0);
     }
 
-    public void detectGcCustomDate()
+    public static void detectGcCustomDate()
     {
         final String result = getResponseData(request("http://www.geocaching.com/account/ManagePreferences.aspx", null, false, false, false));
 
@@ -2051,7 +2051,7 @@ public class cgBase {
         return trackables;
     }
 
-    public String getHumanDistance(final Float distance) {
+    public static String getHumanDistance(final Float distance) {
         if (distance == null) {
             return "?";
         }
@@ -2380,7 +2380,7 @@ public class cgBase {
         return page;
     }
 
-    public List<cgUser> getGeocachersInViewport(String username, Double latMin, Double latMax, Double lonMin, Double lonMax) {
+    public static List<cgUser> getGeocachersInViewport(final String username, final Double latMin, final Double latMax, final Double lonMin, final Double lonMax) {
         final List<cgUser> users = new ArrayList<cgUser>();
 
         if (username == null) {
@@ -2499,7 +2499,7 @@ public class cgBase {
         return trackable;
     }
 
-    public int postLog(final cgeoapplication app, final String geocode, final String cacheid, final String[] viewstates,
+    public static int postLog(final cgeoapplication app, final String geocode, final String cacheid, final String[] viewstates,
             final int logType, final int year, final int month, final int day,
             final String log, final List<cgTrackableLog> trackables) {
         if (isEmpty(viewstates)) {
@@ -2658,7 +2658,7 @@ public class cgBase {
         return 1000;
     }
 
-    public int postLogTrackable(final String tbid, final String trackingCode, final String[] viewstates,
+    public static int postLogTrackable(final String tbid, final String trackingCode, final String[] viewstates,
             final int logType, final int year, final int month, final int day, final String log) {
         if (isEmpty(viewstates)) {
             Log.e(Settings.tag, "cgeoBase.postLogTrackable: No viewstate given");
@@ -2739,7 +2739,7 @@ public class cgBase {
      *            the cache to add
      * @return -1: error occured
      */
-    public int addToWatchlist(cgCache cache) {
+    public static int addToWatchlist(final cgCache cache) {
         final String uri = "http://www.geocaching.com/my/watchlist.aspx?w=" + cache.cacheId;
         String page = postRequestLogged(uri);
 
@@ -2765,7 +2765,7 @@ public class cgBase {
      *            the cache to remove
      * @return -1: error occured
      */
-    public int removeFromWatchlist(cgCache cache) {
+    public static int removeFromWatchlist(final cgCache cache) {
         final String uri = "http://www.geocaching.com/my/watchlist.aspx?ds=1&action=rem&id=" + cache.cacheId;
         String page = postRequestLogged(uri);
 
@@ -2899,7 +2899,7 @@ public class cgBase {
         }
     }
 
-    public String postRequestLogged(final String uri) {
+    public static String postRequestLogged(final String uri) {
         final String data = getResponseData(postRequest(uri, null));
         if (!checkLogin(data)) {
             if (login() == 1) {
@@ -2911,7 +2911,7 @@ public class cgBase {
         return data;
     }
 
-    public String requestLogged(final String uri, final Parameters params, boolean xContentType, boolean my, boolean addF) {
+    public static String requestLogged(final String uri, final Parameters params, boolean xContentType, boolean my, boolean addF) {
         HttpResponse response = request(uri, params, xContentType, my, addF);
         String data = getResponseData(response);
 
@@ -2961,7 +2961,7 @@ public class cgBase {
         cookieStore.clear();
     }
 
-    public HttpResponse postRequest(final String uri, final List<? extends NameValuePair> params) {
+    public static HttpResponse postRequest(final String uri, final List<? extends NameValuePair> params) {
         try {
             HttpPost request = new HttpPost(uri);
             if (params != null) {
@@ -3503,7 +3503,7 @@ public class cgBase {
         return false;
     }
 
-    public String getMapUserToken(Handler noTokenHandler) {
+    public static String getMapUserToken(final Handler noTokenHandler) {
         final HttpResponse response = request("http://www.geocaching.com/map/default.aspx", null, false);
         final String data = getResponseData(response);
         String usertoken = null;
@@ -3620,15 +3620,6 @@ public class cgBase {
      */
     public static String formatShortDateTime(Context context, long date) {
         return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_TIME | DateUtils.FORMAT_ABBREV_ALL);
-    }
-
-    /**
-     * TODO This method is only needed until the settings are a singleton
-     *
-     * @return
-     */
-    public String getUserName() {
-        return Settings.getUsername();
     }
 
     /**
