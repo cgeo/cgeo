@@ -52,7 +52,7 @@ public class cgData {
     private cgDbHelper dbHelper = null;
     private SQLiteDatabase databaseRO = null;
     private SQLiteDatabase databaseRW = null;
-    private static final int dbVersion = 58;
+    private static final int dbVersion = 59;
     private static final String dbName = "data";
     private static final String dbTableCaches = "cg_caches";
     private static final String dbTableLists = "cg_lists";
@@ -490,6 +490,8 @@ public class cgData {
         static private void createIndices(final SQLiteDatabase db) {
             db.execSQL("create index if not exists in_caches_geo on " + dbTableCaches + " (geocode)");
             db.execSQL("create index if not exists in_caches_guid on " + dbTableCaches + " (guid)");
+            db.execSQL("create index if not exists in_caches_lat on " + dbTableCaches + " (latitude)");
+            db.execSQL("create index if not exists in_caches_lon on " + dbTableCaches + " (longitude)");
             db.execSQL("create index if not exists in_caches_reason on " + dbTableCaches + " (reason)");
             db.execSQL("create index if not exists in_caches_detailed on " + dbTableCaches + " (detailed)");
             db.execSQL("create index if not exists in_caches_type on " + dbTableCaches + " (type)");
@@ -944,6 +946,41 @@ public class cgData {
                             Log.e(Settings.tag, "Failed to upgrade to ver. 58", e);
                         } finally {
                             db.endTransaction();
+                        }
+                    }
+
+                    if (oldVersion < 59) {
+                        try {
+                            // Add new indices
+                            createIndices(db);
+
+                            // Remove cache files corresponding to unknown caches
+                            final SQLiteStatement select = db.compileStatement("select count(*) from " + dbTableCaches + " where geocode = ?");
+                            final File[] files = new File(Settings.getStorage()).listFiles();
+                            final ArrayList<File> toRemove = new ArrayList<File>(files.length);
+                            for (final File file : files) {
+                                if (file.isDirectory()) {
+                                    final String geocode = file.getName();
+                                    if (geocode.equals("_others")) {
+                                        continue;
+                                    }
+                                    select.bindString(1, geocode);
+                                    if (select.simpleQueryForLong() == 0) {
+                                        toRemove.add(file);
+                                    }
+                                }
+                            }
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    for (final File dir : toRemove) {
+                                        Log.i(Settings.tag, "Removing obsolete cache directory for " + dir.getName());
+                                        cgBase.deleteDirectory(dir);
+                                    }
+                                }
+                            }).start();
+                        } catch (Exception e) {
+                            Log.e(Settings.tag, "Failed to upgrade to ver. 59", e);
                         }
                     }
 
@@ -2948,10 +2985,10 @@ public class cgData {
             if (cursor != null) {
                 if (cursor.getCount() > 0) {
                     cursor.moveToFirst();
-                    int index = cursor.getColumnIndex("geocode");
+                    final int index = cursor.getColumnIndex("geocode");
 
                     do {
-                        geocodes.add("\"" + (String) cursor.getString(index) + "\"");
+                        geocodes.add(cursor.getString(index));
                     } while (cursor.moveToNext());
                 }
 
@@ -2962,17 +2999,7 @@ public class cgData {
             if (size > 0) {
                 Log.d(Settings.tag, "Database clean: removing " + size + " geocaches");
 
-                String geocodeList = StringUtils.join(geocodes.toArray(), ", ");
-                databaseRW.execSQL("delete from " + dbTableCaches + " where geocode in (" + geocodeList + ")");
-                databaseRW.execSQL("delete from " + dbTableAttributes + " where geocode in (" + geocodeList + ")");
-                databaseRW.execSQL("delete from " + dbTableSpoilers + " where geocode in (" + geocodeList + ")");
-                databaseRW.execSQL("delete from " + dbTableLogs + " where geocode in (" + geocodeList + ")");
-                databaseRW.execSQL("delete from " + dbTableLogCount + " where geocode in (" + geocodeList + ")");
-                databaseRW.execSQL("delete from " + dbTableLogsOffline + " where geocode in (" + geocodeList + ")");
-                databaseRW.execSQL("delete from " + dbTableWaypoints + " where geocode in (" + geocodeList + ") and type <> \"own\"");
-                databaseRW.execSQL("delete from " + dbTableTrackables + " where geocode in (" + geocodeList + ")");
-
-                geocodes.clear();
+                dropCaches(geocodes);
             }
 
             databaseRW.execSQL("delete from " + dbTableCaches + " where geocode = \"\"");
@@ -2990,53 +3017,49 @@ public class cgData {
         Log.d(Settings.tag, "Database clean: finished");
     }
 
+    /**
+     * Drop stored list by putting the caches in automatic mode (reason = 0)
+     *
+     * @param listId
+     *            the list id to remove the caches from
+     */
     public void dropStored(int listId) {
         init();
-
-        List<String> geocodes = new ArrayList<String>();
-
         try {
-            Cursor cursor = databaseRO.query(
-                    dbTableCaches,
-                    new String[] { "geocode" },
-                    "reason = ?",
-                    new String[] { Integer.toString(listId) },
-                    null,
-                    null,
-                    null,
-                    null);
-
-            if (cursor != null) {
-                if (cursor.getCount() > 0) {
-                    cursor.moveToFirst();
-                    int index = cursor.getColumnIndex("geocode");
-
-                    do {
-                        geocodes.add("\"" + (String) cursor.getString(index) + "\"");
-                    } while (cursor.moveToNext());
-                } else {
-                    cursor.close();
-                    return;
-                }
-
-                cursor.close();
-            }
-
-            if (CollectionUtils.isNotEmpty(geocodes)) {
-                String geocodeList = StringUtils.join(geocodes.toArray(), ", ");
-                databaseRW.execSQL("delete from " + dbTableCaches + " where geocode in (" + geocodeList + ")");
-                databaseRW.execSQL("delete from " + dbTableAttributes + " where geocode in (" + geocodeList + ")");
-                databaseRW.execSQL("delete from " + dbTableSpoilers + " where geocode in (" + geocodeList + ")");
-                databaseRW.execSQL("delete from " + dbTableLogs + " where geocode in (" + geocodeList + ")");
-                databaseRW.execSQL("delete from " + dbTableLogCount + " where geocode in (" + geocodeList + ")");
-                databaseRW.execSQL("delete from " + dbTableLogsOffline + " where geocode in (" + geocodeList + ")");
-                databaseRW.execSQL("delete from " + dbTableWaypoints + " where geocode in (" + geocodeList + ") and type <> \"own\"");
-                databaseRW.execSQL("delete from " + dbTableTrackables + " where geocode in (" + geocodeList + ")");
-
-                geocodes.clear();
-            }
+            final ContentValues values = new ContentValues();
+            values.put("reason", 0);
+            databaseRW.update(dbTableCaches, values, "reason = ?", new String[] { Integer.toString(listId) });
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.dropStored: " + e.toString());
+            Log.e(Settings.tag, "cgData.dropStored: error when updating reason", e);
+        }
+    }
+
+    /**
+     * Drop caches from the tables they are stored into, as well as the cache files
+     *
+     * @param geocodes
+     *            list of geocodes to drop from cache
+     */
+    private void dropCaches(final List<String> geocodes) {
+        // Drop caches from the database
+        final ArrayList<String> quotedGeocodes = new ArrayList<String>(geocodes.size());
+        for (final String geocode : geocodes) {
+            quotedGeocodes.add('"' + geocode + '"'); // FIXME: there ought to be a better way of doing this
+        }
+        final String geocodeList = StringUtils.join(quotedGeocodes.toArray(), ',');
+        final String baseWhereClause = "geocode in (" + geocodeList + ")";
+        databaseRW.delete(dbTableCaches, baseWhereClause, null);
+        databaseRW.delete(dbTableAttributes, baseWhereClause, null);
+        databaseRW.delete(dbTableSpoilers, baseWhereClause, null);
+        databaseRW.delete(dbTableLogs, baseWhereClause, null);
+        databaseRW.delete(dbTableLogCount, baseWhereClause, null);
+        databaseRW.delete(dbTableLogsOffline, baseWhereClause, null);
+        databaseRW.delete(dbTableWaypoints, baseWhereClause + " and type <> \"own\"", null);
+        databaseRW.delete(dbTableTrackables, baseWhereClause, null);
+
+        // Delete cache directories
+        for (final String geocode : geocodes) {
+            cgBase.deleteDirectory(new File(Settings.getStorage() + geocode));
         }
     }
 
