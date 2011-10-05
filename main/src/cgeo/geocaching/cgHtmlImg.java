@@ -30,7 +30,14 @@ import java.util.Date;
 
 public class cgHtmlImg implements Html.ImageGetter {
 
-    final private Activity activity;
+    private static final String[] BLOCKED = new String[] {
+            "gccounter.de",
+            "gccounter.com",
+            "cachercounter/?",
+            "gccounter/imgcount.php",
+            "flagcounter.com"
+    };
+    final private Context context;
     final private String geocode;
     final private boolean placement;
     final private int reason;
@@ -45,8 +52,8 @@ public class cgHtmlImg implements Html.ImageGetter {
         this(activityIn, geocodeIn, placementIn, reasonIn, onlySaveIn, true);
     }
 
-    public cgHtmlImg(Activity activityIn, String geocodeIn, boolean placementIn, int reasonIn, boolean onlySaveIn, boolean saveIn) {
-        activity = activityIn;
+    public cgHtmlImg(Context contextIn, String geocodeIn, boolean placementIn, int reasonIn, boolean onlySaveIn, boolean saveIn) {
+        context = contextIn;
         geocode = geocodeIn;
         placement = placementIn;
         reason = reasonIn;
@@ -56,163 +63,111 @@ public class cgHtmlImg implements Html.ImageGetter {
         bfOptions = new BitmapFactory.Options();
         bfOptions.inTempStorage = new byte[16 * 1024];
 
-        display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        display = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         maxWidth = display.getWidth() - 25;
         maxHeight = display.getHeight() - 25;
     }
 
     @Override
     public BitmapDrawable getDrawable(String url) {
-        Bitmap imagePre = null;
-        String dirName = null;
-        String fileName = null;
-        String fileNameSec = null;
-
         if (StringUtils.isBlank(url)) {
             return null;
         }
+        if (isCounter(url)) {
+            return null;
+        }
 
-        final String[] urlParts = url.split("\\.");
-        String urlExt = null;
-        if (urlParts.length > 1) {
-            urlExt = "." + urlParts[(urlParts.length - 1)];
-            if (urlExt.length() > 5) {
-                urlExt = "";
-            }
-        } else {
+        String urlExt = StringUtils.substringAfterLast(url, ".");
+        if (urlExt.length() > 0) {
+            urlExt = "." + urlExt;
+        }
+        if (urlExt.length() > 5) {
             urlExt = "";
         }
 
+        String dirName;
+        String fileName;
+        String fileNameSec;
+
         if (StringUtils.isNotBlank(geocode)) {
-            dirName = cgSettings.getStorage() + geocode + "/";
-            fileName = cgSettings.getStorage() + geocode + "/" + CryptUtils.md5(url) + urlExt;
-            fileNameSec = cgSettings.getStorageSec() + geocode + "/" + CryptUtils.md5(url) + urlExt;
+            dirName = Settings.getStorage() + geocode + "/";
+            fileName = Settings.getStorage() + geocode + "/" + CryptUtils.md5(url) + urlExt;
+            fileNameSec = Settings.getStorageSec() + geocode + "/" + CryptUtils.md5(url) + urlExt;
         } else {
-            dirName = cgSettings.getStorage() + "_others/";
-            fileName = cgSettings.getStorage() + "_others/" + CryptUtils.md5(url) + urlExt;
-            fileNameSec = cgSettings.getStorageSec() + "_others/" + CryptUtils.md5(url) + urlExt;
+            dirName = Settings.getStorage() + "_others/";
+            fileName = Settings.getStorage() + "_others/" + CryptUtils.md5(url) + urlExt;
+            fileNameSec = Settings.getStorageSec() + "_others/" + CryptUtils.md5(url) + urlExt;
         }
 
         File dir = null;
-        dir = new File(cgSettings.getStorage());
-        if (dir.exists() == false) {
+        dir = new File(Settings.getStorage());
+        if (!dir.exists()) {
             dir.mkdirs();
         }
         dir = new File(dirName);
-        if (dir.exists() == false) {
+        if (!dir.exists()) {
             dir.mkdirs();
         }
         dir = null;
 
+        Bitmap imagePre = null;
         // load image from cache
-        if (onlySave == false) {
+        if (!onlySave) {
             try {
-                final Date now = new Date();
-
-                final File file = new File(fileName);
-                if (file.exists()) {
-                    final long imageSize = file.length();
-
-                    // large images will be downscaled on input to save memory
-                    if (imageSize > (6 * 1024 * 1024)) {
-                        bfOptions.inSampleSize = 48;
-                    } else if (imageSize > (4 * 1024 * 1024)) {
-                        bfOptions.inSampleSize = 16;
-                    } else if (imageSize > (2 * 1024 * 1024)) {
-                        bfOptions.inSampleSize = 10;
-                    } else if (imageSize > (1 * 1024 * 1024)) {
-                        bfOptions.inSampleSize = 6;
-                    } else if (imageSize > (0.5 * 1024 * 1024)) {
-                        bfOptions.inSampleSize = 2;
-                    }
-
-                    if (reason > 0 || file.lastModified() > (now.getTime() - (24 * 60 * 60 * 1000))) {
-                        imagePre = BitmapFactory.decodeFile(fileName, bfOptions);
-                    }
-                }
-
-                if (imagePre == null) {
-                    final File fileSec = new File(fileNameSec);
-                    if (fileSec.exists()) {
-                        final long imageSize = fileSec.length();
-
-                        // large images will be downscaled on input to save memory
-                        if (imageSize > (6 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 48;
-                        } else if (imageSize > (4 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 16;
-                        } else if (imageSize > (2 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 10;
-                        } else if (imageSize > (1 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 6;
-                        } else if (imageSize > (0.5 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 2;
-                        }
-
-                        if (reason > 0 || file.lastModified() > (now.getTime() - (24 * 60 * 60 * 1000))) {
-                            imagePre = BitmapFactory.decodeFile(fileNameSec, bfOptions);
-                        }
-                    }
+                imagePre = loadCachedImage(fileName);
+                if (null == imagePre) {
+                    imagePre = loadCachedImage(fileNameSec);
                 }
             } catch (Exception e) {
-                Log.w(cgSettings.tag, "cgHtmlImg.getDrawable (reading cache): " + e.toString());
+                Log.w(Settings.tag, "cgHtmlImg.getDrawable (reading cache): " + e.toString());
             }
         }
 
         // download image and save it to the cache
-        if ((imagePre == null && reason == 0) || onlySave) {
+        if ((null == imagePre && 0 == reason) || onlySave) {
             Uri uri = null;
-            HttpGet getMethod = null;
-            HttpResponse httpResponse = null;
-            HttpEntity entity = null;
             BufferedHttpEntity bufferedEntity = null;
 
             try {
                 // check if uri is absolute or not, if not attach geocaching.com hostname and scheme
                 uri = Uri.parse(url);
 
-                if (uri.isAbsolute() == false) {
-                    IConnector connector = ConnectorFactory.getConnector(geocode);
+                if (!uri.isAbsolute()) {
+                    final IConnector connector = ConnectorFactory.getConnector(geocode);
                     url = "http://" + connector.getHost() + url;
                 }
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (parse URL): " + e.toString());
+                Log.e(Settings.tag, "cgHtmlImg.getDrawable (parse URL): " + e.toString());
             }
 
-            if (uri != null) {
+            if (null != uri) {
                 for (int i = 0; i < 2; i++) {
                     if (i > 0) {
-                        Log.w(cgSettings.tag, "cgHtmlImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
+                        Log.w(Settings.tag, "cgHtmlImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
                     }
 
                     try {
-                        getMethod = new HttpGet(url);
-                        httpResponse = cgBase.doRequest(getMethod);
-                        entity = httpResponse.getEntity();
-                        bufferedEntity = new BufferedHttpEntity(entity);
+                        final HttpGet getMethod = new HttpGet(url);
+                        final HttpResponse httpResponse = cgBase.doRequest(getMethod);
+                        if (null != httpResponse) {
+                            final HttpEntity entity = httpResponse.getEntity();
+                            bufferedEntity = new BufferedHttpEntity(entity);
 
-                        final long imageSize = bufferedEntity.getContentLength();
+                            setSampleSize(bufferedEntity.getContentLength());
 
-                        // large images will be downscaled on input to save memory
-                        if (imageSize > (6 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 48;
-                        } else if (imageSize > (4 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 16;
-                        } else if (imageSize > (2 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 10;
-                        } else if (imageSize > (1 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 6;
-                        } else if (imageSize > (0.5 * 1024 * 1024)) {
-                            bfOptions.inSampleSize = 2;
+                            final InputStream is = bufferedEntity.getContent();
+                            try {
+                                imagePre = BitmapFactory.decodeStream(is, null, bfOptions);
+                            } finally {
+                                is.close();
+                            }
                         }
 
-                        imagePre = BitmapFactory.decodeStream(bufferedEntity.getContent(), null, bfOptions);
-
-                        if (imagePre != null) {
+                        if (null != imagePre) {
                             break;
                         }
                     } catch (Exception e) {
-                        Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (downloading from web): " + e.toString());
+                        Log.e(Settings.tag, "cgHtmlImg.getDrawable (downloading from web)", e);
                     }
                 }
             }
@@ -220,30 +175,28 @@ public class cgHtmlImg implements Html.ImageGetter {
             if (save) {
                 try {
                     // save to memory/SD cache
-                    if (bufferedEntity != null) {
-                        final InputStream is = (InputStream) bufferedEntity.getContent();
-                        final FileOutputStream fos = new FileOutputStream(fileName);
+                    if (null != bufferedEntity) {
+                        final InputStream is = bufferedEntity.getContent();
                         try {
-                            final byte[] buffer = new byte[4096];
-                            int l;
-                            while ((l = is.read(buffer)) != -1) {
-                                fos.write(buffer, 0, l);
+                            final FileOutputStream fos = new FileOutputStream(fileName);
+                            try {
+                                final byte[] buffer = new byte[4096];
+                                int l;
+                                while ((l = is.read(buffer)) != -1) {
+                                    fos.write(buffer, 0, l);
+                                }
+                                fos.flush();
+                            } finally {
+                                fos.close();
                             }
-                            fos.flush();
-                        } catch (IOException e) {
-                            Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (saving to cache): " + e.toString());
                         } finally {
                             is.close();
-                            fos.close();
                         }
                     }
-                } catch (Exception e) {
-                    Log.e(cgSettings.tag, "cgHtmlImg.getDrawable (saving to cache): " + e.toString());
+                } catch (IOException e) {
+                    Log.e(Settings.tag, "cgHtmlImg.getDrawable (saving to cache)", e);
                 }
             }
-
-            entity = null;
-            bufferedEntity = null;
         }
 
         if (onlySave) {
@@ -251,13 +204,13 @@ public class cgHtmlImg implements Html.ImageGetter {
         }
 
         // get image and return
-        if (imagePre == null) {
-            Log.d(cgSettings.tag, "cgHtmlImg.getDrawable: Failed to obtain image");
+        if (null == imagePre) {
+            Log.d(Settings.tag, "cgHtmlImg.getDrawable: Failed to obtain image");
 
-            if (placement == false) {
-                imagePre = BitmapFactory.decodeResource(activity.getResources(), R.drawable.image_no_placement);
+            if (placement) {
+                imagePre = BitmapFactory.decodeResource(context.getResources(), R.drawable.image_not_loaded);
             } else {
-                imagePre = BitmapFactory.decodeResource(activity.getResources(), R.drawable.image_not_loaded);
+                imagePre = BitmapFactory.decodeResource(context.getResources(), R.drawable.image_no_placement);
             }
         }
 
@@ -281,7 +234,7 @@ public class cgHtmlImg implements Html.ImageGetter {
             try {
                 imagePre = Bitmap.createScaledBitmap(imagePre, width, height, true);
             } catch (Exception e) {
-                Log.d(cgSettings.tag, "cgHtmlImg.getDrawable: Failed to scale image");
+                Log.d(Settings.tag, "cgHtmlImg.getDrawable: Failed to scale image");
                 return null;
             }
         } else {
@@ -293,5 +246,40 @@ public class cgHtmlImg implements Html.ImageGetter {
         image.setBounds(new Rect(0, 0, width, height));
 
         return image;
+    }
+
+    private Bitmap loadCachedImage(final String fileName) {
+        final File file = new File(fileName);
+        if (file.exists()) {
+            if (reason > 0 || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000))) {
+                setSampleSize(file.length());
+                return BitmapFactory.decodeFile(fileName, bfOptions);
+            }
+        }
+        return null;
+    }
+
+    private void setSampleSize(final long imageSize) {
+        // large images will be downscaled on input to save memory
+        if (imageSize > (6 * 1024 * 1024)) {
+            bfOptions.inSampleSize = 48;
+        } else if (imageSize > (4 * 1024 * 1024)) {
+            bfOptions.inSampleSize = 16;
+        } else if (imageSize > (2 * 1024 * 1024)) {
+            bfOptions.inSampleSize = 10;
+        } else if (imageSize > (1 * 1024 * 1024)) {
+            bfOptions.inSampleSize = 6;
+        } else if (imageSize > (0.5 * 1024 * 1024)) {
+            bfOptions.inSampleSize = 2;
+        }
+    }
+
+    private static boolean isCounter(final String url) {
+        for (String entry : BLOCKED) {
+            if (StringUtils.containsIgnoreCase(url, entry)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

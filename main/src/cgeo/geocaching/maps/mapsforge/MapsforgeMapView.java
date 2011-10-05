@@ -1,16 +1,16 @@
 package cgeo.geocaching.maps.mapsforge;
 
-import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.maps.PositionOverlay;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.maps.CachesOverlay;
-import cgeo.geocaching.maps.ScaleOverlay;
 import cgeo.geocaching.maps.OtherCachersOverlay;
+import cgeo.geocaching.maps.PositionOverlay;
+import cgeo.geocaching.maps.ScaleOverlay;
+import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapControllerImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnDragListener;
-import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl.overlayType;
 
@@ -49,7 +49,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
 
             super.draw(canvas);
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgMapView.draw: " + e.toString());
+            Log.e(Settings.tag, "cgMapView.draw: " + e.toString());
         }
     }
 
@@ -85,10 +85,9 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public CachesOverlay createAddMapOverlay(cgSettings settings,
-            Context context, Drawable drawable, boolean fromDetailIntent) {
+    public CachesOverlay createAddMapOverlay(Context context, Drawable drawable, boolean fromDetailIntent) {
 
-        MapsforgeCacheOverlay ovl = new MapsforgeCacheOverlay(settings, context, drawable, fromDetailIntent);
+        MapsforgeCacheOverlay ovl = new MapsforgeCacheOverlay(context, drawable, fromDetailIntent);
         getOverlays().add(ovl);
         return ovl.getBase();
     }
@@ -101,17 +100,15 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public PositionOverlay createAddPositionOverlay(Activity activity,
-            cgSettings settingsIn) {
-        MapsforgeOverlay ovl = new MapsforgeOverlay(activity, settingsIn, overlayType.PositionOverlay);
+    public PositionOverlay createAddPositionOverlay(Activity activity) {
+        MapsforgeOverlay ovl = new MapsforgeOverlay(activity, overlayType.PositionOverlay);
         getOverlays().add(ovl);
         return (PositionOverlay) ovl.getBase();
     }
 
     @Override
-    public ScaleOverlay createAddScaleOverlay(Activity activity,
-            cgSettings settingsIn) {
-        MapsforgeOverlay ovl = new MapsforgeOverlay(activity, settingsIn, overlayType.ScaleOverlay);
+    public ScaleOverlay createAddScaleOverlay(Activity activity) {
+        MapsforgeOverlay ovl = new MapsforgeOverlay(activity, overlayType.ScaleOverlay);
         getOverlays().add(ovl);
         return (ScaleOverlay) ovl.getBase();
     }
@@ -176,9 +173,9 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public void setMapSource(cgSettings settings) {
+    public void setMapSource() {
 
-        switch (settings.mapSource) {
+        switch (Settings.getMapSource()) {
             case mapsforgeOsmarender:
                 setMapViewMode(MapViewMode.OSMARENDER_TILE_DOWNLOAD);
                 break;
@@ -186,9 +183,9 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
                 setMapViewMode(MapViewMode.OPENCYCLEMAP_TILE_DOWNLOAD);
                 break;
             case mapsforgeOffline:
-                if (MapDatabase.isValidMapFile(settings.getMapFile())) {
+                if (MapDatabase.isValidMapFile(Settings.getMapFile())) {
                     setMapViewMode(MapViewMode.CANVAS_RENDERER);
-                    super.setMapFile(settings.getMapFile());
+                    super.setMapFile(Settings.getMapFile());
                 } else {
                     setMapViewMode(MapViewMode.MAPNIK_TILE_DOWNLOAD);
                 }
@@ -209,7 +206,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
             }
 
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "mfMapView.repaintRequired: " + e.toString());
+            Log.e(Settings.tag, "mfMapView.repaintRequired: " + e.toString());
         }
     }
 

@@ -25,7 +25,6 @@ public class cgGeo {
     private LocationManager geoManager = null;
     private cgUpdateLoc geoUpdate = null;
     private cgBase base = null;
-    private cgSettings settings = null;
     private SharedPreferences prefs = null;
     private cgeoGeoListener geoNetListener = null;
     private cgeoGeoListener geoGpsListener = null;
@@ -49,24 +48,23 @@ public class cgGeo {
     public Integer satellitesFixed = null;
     public double distanceNow = 0d;
 
-    public cgGeo(Context contextIn, cgeoapplication appIn, cgUpdateLoc geoUpdateIn, cgBase baseIn, cgSettings settingsIn, int timeIn, int distanceIn) {
+    public cgGeo(Context contextIn, cgeoapplication appIn, cgUpdateLoc geoUpdateIn, cgBase baseIn, int timeIn, int distanceIn) {
         context = contextIn;
         app = appIn;
         geoUpdate = geoUpdateIn;
         base = baseIn;
-        settings = settingsIn;
         time = timeIn;
         distance = distanceIn;
 
         if (prefs == null) {
-            prefs = context.getSharedPreferences(cgSettings.preferences, 0);
+            prefs = context.getSharedPreferences(Settings.preferences, 0);
         }
         distanceNow = prefs.getFloat("dst", 0f);
         if (Double.isNaN(distanceNow)) {
             distanceNow = 0d;
         }
         if (distanceNow == 0f) {
-            final SharedPreferences.Editor prefsEdit = context.getSharedPreferences(cgSettings.preferences, 0).edit();
+            final SharedPreferences.Editor prefsEdit = context.getSharedPreferences(Settings.preferences, 0).edit();
             if (prefsEdit != null) {
                 prefsEdit.putLong("dst-since", System.currentTimeMillis());
                 prefsEdit.commit();
@@ -106,13 +104,13 @@ public class cgGeo {
         try {
             geoManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, time, distance, geoNetListener);
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "There is no NETWORK location provider");
+            Log.e(Settings.tag, "There is no NETWORK location provider");
         }
 
         try {
             geoManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, time, distance, geoGpsListener);
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "There is no GPS location provider");
+            Log.e(Settings.tag, "There is no GPS location provider");
         }
     }
 
@@ -127,7 +125,7 @@ public class cgGeo {
             geoManager.removeGpsStatusListener(geoGpsStatusListener);
         }
 
-        final SharedPreferences.Editor prefsEdit = context.getSharedPreferences(cgSettings.preferences, 0).edit();
+        final SharedPreferences.Editor prefsEdit = context.getSharedPreferences(Settings.preferences, 0).edit();
         if (prefsEdit != null && Double.isNaN(distanceNow) == false) {
             prefsEdit.putFloat("dst", (float) distanceNow);
             prefsEdit.commit();
@@ -229,9 +227,9 @@ public class cgGeo {
                     /*
                      * satellite signal strength
                      * if (sat.usedInFix()) {
-                     * Log.d(cgSettings.tag, "Sat #" + satellites + ": " + sat.getSnr() + " FIX");
+                     * Log.d(Settings.tag, "Sat #" + satellites + ": " + sat.getSnr() + " FIX");
                      * } else {
-                     * Log.d(cgSettings.tag, "Sat #" + satellites + ": " + sat.getSnr());
+                     * Log.d(Settings.tag, "Sat #" + satellites + ": " + sat.getSnr());
                      * }
                      */
                 }
@@ -320,7 +318,7 @@ public class cgGeo {
         app.setLastLoc(coordsNow);
 
         if (location.hasAltitude() && gps != -1) {
-            altitudeNow = location.getAltitude() + settings.altCorrection;
+            altitudeNow = location.getAltitude() + Settings.getAltCorrection();
         } else {
             altitudeNow = null;
         }
@@ -376,7 +374,7 @@ public class cgGeo {
                 return;
             }
 
-            if (settings.publicLoc == 1 && (lastGo4cacheCoords == null || coordsNow.distanceTo(lastGo4cacheCoords) > 0.75)) {
+            if (Settings.isPublicLoc() && (lastGo4cacheCoords == null || coordsNow.distanceTo(lastGo4cacheCoords) > 0.75)) {
                 g4cRunning = true;
 
                 String action = null;
@@ -386,20 +384,20 @@ public class cgGeo {
                     action = "";
                 }
 
-                final String username = settings.getUsername();
+                final String username = Settings.getUsername();
                 if (username != null) {
-                    final Parameters params = new Parameters();
                     final String latStr = String.format((Locale) null, "%.6f", coordsNow.getLatitude());
                     final String lonStr = String.format((Locale) null, "%.6f", coordsNow.getLongitude());
-                    params.put("u", username);
-                    params.put("lt", latStr);
-                    params.put("ln", lonStr);
-                    params.put("a", action);
-                    params.put("s", (CryptUtils.sha1(username + "|" + latStr + "|" + lonStr + "|" + action + "|" + CryptUtils.md5("carnero: developing your dreams"))).toLowerCase());
+                    final Parameters params = new Parameters(
+                            "u", username,
+                            "lt", latStr,
+                            "ln", lonStr,
+                            "a", action,
+                            "s", (CryptUtils.sha1(username + "|" + latStr + "|" + lonStr + "|" + action + "|" + CryptUtils.md5("carnero: developing your dreams"))).toLowerCase());
                     if (base.version != null) {
                         params.put("v", base.version);
                     }
-                    final String res = cgBase.getResponseData(base.postRequest("http://api.go4cache.com/", params));
+                    final String res = cgBase.getResponseData(cgBase.postRequest("http://api.go4cache.com/", params));
 
                     if (StringUtils.isNotBlank(res)) {
                         lastGo4cacheCoords = coordsNow;
@@ -420,7 +418,7 @@ public class cgGeo {
             lastGps.setProvider("last");
             assign(lastGps);
 
-            Log.i(cgSettings.tag, "Using last location from GPS");
+            Log.i(Settings.tag, "Using last location from GPS");
             return;
         }
 
@@ -430,7 +428,7 @@ public class cgGeo {
             lastGsm.setProvider("last");
             assign(lastGsm);
 
-            Log.i(cgSettings.tag, "Using last location from NETWORK");
+            Log.i(Settings.tag, "Using last location from NETWORK");
             return;
         }
     }

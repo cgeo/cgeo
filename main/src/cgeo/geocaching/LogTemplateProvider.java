@@ -74,7 +74,7 @@ public class LogTemplateProvider {
 
                         @Override
                         String getValue(final cgBase base, final boolean offline) {
-                            return base.getUserName();
+                            return Settings.getUsername();
                         }
                     },
                     new LogTemplate("NUMBER", R.string.init_signature_template_number) {
@@ -85,7 +85,7 @@ public class LogTemplateProvider {
                                 return "";
                             }
                             String findCount = "";
-                            final String page = cgBase.getResponseData(base.request("http://www.geocaching.com/email/", null, false, false, false));
+                            final String page = cgBase.getResponseData(cgBase.request("http://www.geocaching.com/email/", null, false, false, false));
                             int current = parseFindCount(page);
 
                             if (current >= 0) {
@@ -143,7 +143,7 @@ public class LogTemplateProvider {
                 }
             }
         } catch (Exception e) {
-            Log.w(cgSettings.tag, "cgBase.parseFindCount: " + e.toString());
+            Log.w(Settings.tag, "cgBase.parseFindCount: " + e.toString());
         }
 
         return findCount;

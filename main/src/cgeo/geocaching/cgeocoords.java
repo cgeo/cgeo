@@ -1,6 +1,6 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.cgSettings.coordInputFormatEnum;
+import cgeo.geocaching.Settings.coordInputFormatEnum;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Geopoint.MalformedCoordinateException;
@@ -27,7 +27,6 @@ import android.widget.TextView;
 public class cgeocoords extends Dialog {
 
     private AbstractActivity context = null;
-    private cgSettings settings = null;
     private cgGeo geo = null;
     private Geopoint gp = null;
 
@@ -44,10 +43,9 @@ public class cgeocoords extends Dialog {
 
     coordInputFormatEnum currentFormat = null;
 
-    public cgeocoords(final AbstractActivity contextIn, cgSettings settingsIn, final Geopoint gpIn, final cgGeo geoIn) {
+    public cgeocoords(final AbstractActivity contextIn, final Geopoint gpIn, final cgGeo geoIn) {
         super(contextIn);
         context = contextIn;
-        settings = settingsIn;
         geo = geoIn;
 
         if (gpIn != null) {
@@ -77,7 +75,7 @@ public class cgeocoords extends Dialog {
                         android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        spinner.setSelection(settings.getCoordInputFormat().ordinal());
+        spinner.setSelection(Settings.getCoordInputFormat().ordinal());
         spinner.setOnItemSelectedListener(new CoordinateFormatListener());
 
         bLat = (Button) findViewById(R.id.ButtonLat);
@@ -441,7 +439,7 @@ public class cgeocoords extends Dialog {
             }
 
             currentFormat = coordInputFormatEnum.fromInt(pos);
-            settings.setCoordInputFormat(currentFormat);
+            Settings.setCoordInputFormat(currentFormat);
             updateGUI();
         }
 

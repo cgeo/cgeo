@@ -2,8 +2,6 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.geopoint.Geopoint;
 
-import org.apache.commons.lang3.StringUtils;
-
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -22,25 +20,24 @@ import java.util.zip.InflaterInputStream;
 public final class Twitter {
     public static final int MAX_TWEET_SIZE = 140;
 
-    public static void postTweet(cgeoapplication app, cgSettings settings, String status, final Geopoint coords) {
+    public static void postTweet(cgeoapplication app, String status, final Geopoint coords) {
         if (app == null) {
             return;
         }
-        if (settings == null || StringUtils.isBlank(settings.tokenPublic) || StringUtils.isBlank(settings.tokenSecret)) {
+        if (!Settings.isTwitterLoginValid()) {
             return;
         }
 
         try {
-            Parameters parameters = new Parameters();
-
-            parameters.put("status", status);
+            Parameters parameters = new Parameters("status", status);
             if (coords != null) {
-                parameters.put("lat", String.format("%.6f", coords.getLatitude()));
-                parameters.put("long", String.format("%.6f", coords.getLongitude()));
-                parameters.put("display_coordinates", "true");
+                parameters.put(
+                        "lat", String.format("%.6f", coords.getLatitude()),
+                        "long", String.format("%.6f", coords.getLongitude()),
+                        "display_coordinates", "true");
             }
 
-            final String paramsDone = cgOAuth.signOAuth("api.twitter.com", "/1/statuses/update.json", "POST", false, parameters, settings.tokenPublic, settings.tokenSecret);
+            final String paramsDone = cgOAuth.signOAuth("api.twitter.com", "/1/statuses/update.json", "POST", false, parameters, Settings.getTokenPublic(), Settings.getTokenSecret());
 
             HttpURLConnection connection = null;
             try {
@@ -63,7 +60,7 @@ public final class Twitter {
                 wr.flush();
                 wr.close();
 
-                Log.i(cgSettings.tag, "Twitter.com: " + connection.getResponseCode() + " " + connection.getResponseMessage());
+                Log.i(Settings.tag, "Twitter.com: " + connection.getResponseCode() + " " + connection.getResponseMessage());
 
                 InputStream ins;
                 final String encoding = connection.getContentEncoding();
@@ -86,7 +83,7 @@ public final class Twitter {
                 inr.close();
                 connection.disconnect();
             } catch (IOException e) {
-                Log.e(cgSettings.tag, "cgBase.postTweet.IO: " + connection.getResponseCode() + ": " + connection.getResponseMessage() + " ~ " + e.toString());
+                Log.e(Settings.tag, "cgBase.postTweet.IO: " + connection.getResponseCode() + ": " + connection.getResponseMessage() + " ~ " + e.toString());
 
                 final InputStream ins = connection.getErrorStream();
                 final StringBuffer buffer = new StringBuffer();
@@ -99,12 +96,12 @@ public final class Twitter {
                 ins.close();
                 inr.close();
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgBase.postTweet.inner: " + e.toString());
+                Log.e(Settings.tag, "cgBase.postTweet.inner: " + e.toString());
             }
 
             connection.disconnect();
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgBase.postTweet: " + e.toString());
+            Log.e(Settings.tag, "cgBase.postTweet: " + e.toString());
         }
     }
 

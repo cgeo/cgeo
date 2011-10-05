@@ -11,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
@@ -198,7 +197,6 @@ public class cgeopoint extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        settings.load();
         init();
     }
 
@@ -231,7 +229,7 @@ public class cgeopoint extends AbstractActivity {
 
     private void init() {
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
+            geo = app.startGeo(this, geoUpdate, base, 0, 0);
         }
 
         latButton = (Button) findViewById(R.id.buttonLatitude);
@@ -258,7 +256,7 @@ public class cgeopoint extends AbstractActivity {
             if (latButton.getText().length() > 0 && lonButton.getText().length() > 0) {
                 gp = new Geopoint(latButton.getText().toString() + " " + lonButton.getText().toString());
             }
-            cgeocoords coordsDialog = new cgeocoords(cgeopoint.this, settings, gp, geo);
+            cgeocoords coordsDialog = new cgeocoords(cgeopoint.this, gp, geo);
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
                 @Override
@@ -429,7 +427,7 @@ public class cgeopoint extends AbstractActivity {
         cachesIntent.putExtra("type", "coordinate");
         cachesIntent.putExtra("latitude", coords.getLatitude());
         cachesIntent.putExtra("longitude", coords.getLongitude());
-        cachesIntent.putExtra("cachetype", settings.cacheType);
+        cachesIntent.putExtra("cachetype", Settings.getCacheType());
 
         startActivity(cachesIntent);
 
@@ -448,7 +446,7 @@ public class cgeopoint extends AbstractActivity {
                 latButton.setHint(cgBase.formatLatitude(geo.coordsNow.getLatitude(), false));
                 lonButton.setHint(cgBase.formatLongitude(geo.coordsNow.getLongitude(), false));
             } catch (Exception e) {
-                Log.w(cgSettings.tag, "Failed to update location.");
+                Log.w(Settings.tag, "Failed to update location.");
             }
         }
     }
@@ -514,7 +512,7 @@ public class cgeopoint extends AbstractActivity {
 
             double distance;
             try {
-                distance = DistanceParser.parseDistance(distanceText, settings.units);
+                distance = DistanceParser.parseDistance(distanceText, Settings.isUseMetricUnits());
             } catch (NumberFormatException e) {
                 showToast(res.getString(R.string.err_parse_dist));
                 return null;
@@ -540,20 +538,9 @@ public class cgeopoint extends AbstractActivity {
     }
 
     private void saveCoords(final Geopoint coords) {
-        if (changed && coords != null) {
-            SharedPreferences.Editor edit = prefs.edit();
-
-            edit.putFloat("anylatitude", (float) coords.getLatitude());
-            edit.putFloat("anylongitude", (float) coords.getLongitude());
-
-            edit.commit();
-        } else {
-            SharedPreferences.Editor edit = prefs.edit();
-
-            edit.remove("anylatitude");
-            edit.remove("anylongitude");
-
-            edit.commit();
+        if (!changed) {
+            return;
         }
+        Settings.setAnyCoordinates(coords);
     }
 }

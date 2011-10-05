@@ -24,8 +24,12 @@ public abstract class MockedCache implements ICache {
      * into a browser and saving the file
      */
     public String getData() {
+        return readCachePage(getGeocode());
+    }
+
+    public static String readCachePage(final String geocode) {
         try {
-            final InputStream is = this.getClass().getResourceAsStream("/cgeo/geocaching/test/mock/"+getGeocode()+".html");
+            final InputStream is = MockedCache.class.getResourceAsStream("/cgeo/geocaching/test/mock/" + geocode + ".html");
             final BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
             final StringBuffer buffer = new StringBuffer();
@@ -35,14 +39,12 @@ public abstract class MockedCache implements ICache {
                 buffer.append(line).append('\n');
             }
 
-
             br.close();
             return BaseUtils.replaceWhitespace(buffer.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
-
     }
 
     @Override

@@ -40,7 +40,7 @@ public class StaticMapsProvider {
     }
 
     private static void createStorageDirectory(final cgCache cache) {
-        File dir = new File(cgSettings.getStorage());
+        File dir = new File(Settings.getStorage());
         if (dir.exists() == false) {
             dir.mkdirs();
         }
@@ -51,7 +51,7 @@ public class StaticMapsProvider {
     }
 
     private static String getStaticMapsDirectory(final cgCache cache) {
-        return cgSettings.getStorage() + cache.geocode;
+        return Settings.getStorage() + cache.geocode;
     }
 
     private static void downloadMap(cgCache cache, int zoom, String mapType, int level, String latlonMap, int edge, String waypoints) {
@@ -70,7 +70,7 @@ public class StaticMapsProvider {
 
         for (int i = 0; i < 3; i++) {
             if (i > 0)
-                Log.w(cgSettings.tag, "cgMapImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
+                Log.w(Settings.tag, "cgMapImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
 
             try {
                 client = new DefaultHttpClient();
@@ -99,7 +99,7 @@ public class StaticMapsProvider {
                     fos.flush();
                     ok = true;
                 } catch (IOException e) {
-                    Log.e(cgSettings.tag, "cgMapImg.getDrawable (saving to cache): " + e.toString());
+                    Log.e(Settings.tag, "cgMapImg.getDrawable (saving to cache): " + e.toString());
                 } finally {
                     is.close();
                     fos.close();
@@ -114,13 +114,13 @@ public class StaticMapsProvider {
                     break;
                 }
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgMapImg.getDrawable (downloading from web): " + e.toString());
+                Log.e(Settings.tag, "cgMapImg.getDrawable (downloading from web): " + e.toString());
             }
         }
     }
 
-    public static void downloadMaps(cgCache cache, cgSettings settings, Activity activity) {
-        if (settings.storeOfflineMaps != 1 || cache.coords == null || StringUtils.isBlank(cache.geocode)) {
+    public static void downloadMaps(cgCache cache, Activity activity) {
+        if (!Settings.isStoreOfflineMaps() || cache.coords == null || StringUtils.isBlank(cache.geocode)) {
             return;
         }
 

@@ -1,16 +1,16 @@
 package cgeo.geocaching.maps.google;
 
-import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.maps.PositionOverlay;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.maps.CachesOverlay;
-import cgeo.geocaching.maps.ScaleOverlay;
 import cgeo.geocaching.maps.OtherCachersOverlay;
+import cgeo.geocaching.maps.PositionOverlay;
+import cgeo.geocaching.maps.ScaleOverlay;
+import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapControllerImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnDragListener;
-import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl.overlayType;
 
@@ -56,7 +56,7 @@ public class GoogleMapView extends MapView implements MapViewImpl {
 
             super.draw(canvas);
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgMapView.draw: " + e.toString());
+            Log.e(Settings.tag, "cgMapView.draw: " + e.toString());
         }
     }
 
@@ -65,7 +65,7 @@ public class GoogleMapView extends MapView implements MapViewImpl {
         try {
             super.displayZoomControls(takeFocus);
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgMapView.displayZoomControls: " + e.toString());
+            Log.e(Settings.tag, "cgMapView.displayZoomControls: " + e.toString());
         }
     }
 
@@ -96,10 +96,9 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public CachesOverlay createAddMapOverlay(cgSettings settings,
-            Context context, Drawable drawable, boolean fromDetailIntent) {
+    public CachesOverlay createAddMapOverlay(Context context, Drawable drawable, boolean fromDetailIntent) {
 
-        GoogleCacheOverlay ovl = new GoogleCacheOverlay(settings, context, drawable, fromDetailIntent);
+        GoogleCacheOverlay ovl = new GoogleCacheOverlay(context, drawable, fromDetailIntent);
         getOverlays().add(ovl);
         return ovl.getBase();
     }
@@ -112,19 +111,17 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public PositionOverlay createAddPositionOverlay(Activity activity,
-            cgSettings settingsIn) {
+    public PositionOverlay createAddPositionOverlay(Activity activity) {
 
-        GoogleOverlay ovl = new GoogleOverlay(activity, settingsIn, overlayType.PositionOverlay);
+        GoogleOverlay ovl = new GoogleOverlay(activity, overlayType.PositionOverlay);
         getOverlays().add(ovl);
         return (PositionOverlay) ovl.getBase();
     }
 
     @Override
-    public ScaleOverlay createAddScaleOverlay(Activity activity,
-            cgSettings settingsIn) {
+    public ScaleOverlay createAddScaleOverlay(Activity activity) {
 
-        GoogleOverlay ovl = new GoogleOverlay(activity, settingsIn, overlayType.ScaleOverlay);
+        GoogleOverlay ovl = new GoogleOverlay(activity, overlayType.ScaleOverlay);
         getOverlays().add(ovl);
         return (ScaleOverlay) ovl.getBase();
     }
@@ -135,9 +132,9 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public void setMapSource(cgSettings settings) {
+    public void setMapSource() {
 
-        switch (settings.mapSource) {
+        switch (Settings.getMapSource()) {
             case googleSat:
                 setSatellite(true);
                 break;

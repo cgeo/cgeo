@@ -1,6 +1,6 @@
 package cgeo.geocaching.test;
 
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.Settings;
 
 import android.test.AndroidTestCase;
 import android.util.Log;
@@ -15,12 +15,12 @@ import java.util.List;
  */
 public class RegExRealPerformanceTest extends AndroidTestCase {
 
-    public void testRegEx() {
+    public static void testRegEx() {
 
         List<String> output = RegExPerformanceTest.doTheTests(10);
 
         for (String s : output) {
-            Log.w(cgSettings.tag, s);
+            Log.w(Settings.tag, s);
         }
 
     }

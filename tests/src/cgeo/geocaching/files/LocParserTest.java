@@ -1,9 +1,9 @@
-package cgeo.geocaching.test;
+package cgeo.geocaching.files;
 
 import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.enumerations.CacheSize;
-import cgeo.geocaching.files.LocParser;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.test.R;
 
 import android.content.res.Resources;
 import android.test.InstrumentationTestCase;

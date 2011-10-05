@@ -1,10 +1,9 @@
 package cgeo.geocaching.maps.interfaces;
 
-import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.maps.PositionOverlay;
 import cgeo.geocaching.maps.CachesOverlay;
-import cgeo.geocaching.maps.ScaleOverlay;
 import cgeo.geocaching.maps.OtherCachersOverlay;
+import cgeo.geocaching.maps.PositionOverlay;
+import cgeo.geocaching.maps.ScaleOverlay;
 
 import android.app.Activity;
 import android.content.Context;
@@ -51,20 +50,20 @@ public interface MapViewImpl {
 
     Context getContext();
 
-    CachesOverlay createAddMapOverlay(cgSettings settings, Context context,
+    CachesOverlay createAddMapOverlay(Context context,
             Drawable drawable, boolean fromDetailIntent);
 
     OtherCachersOverlay createAddUsersOverlay(Context context, Drawable markerIn);
 
-    ScaleOverlay createAddScaleOverlay(Activity activity, cgSettings settingsIn);
+    ScaleOverlay createAddScaleOverlay(Activity activity);
 
-    PositionOverlay createAddPositionOverlay(Activity activity, cgSettings settingsIn);
+    PositionOverlay createAddPositionOverlay(Activity activity);
 
     boolean needsScaleOverlay();
 
     void setBuiltinScale(boolean b);
 
-    void setMapSource(cgSettings settings);
+    void setMapSource();
 
     void repaintRequired(GeneralOverlay overlay);
 

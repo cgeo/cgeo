@@ -1,7 +1,8 @@
 package cgeo.geocaching.test;
 
+
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
-import cgeo.geocaching.cgSettings;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -40,7 +41,7 @@ public class WhitespaceTest extends AndroidTestCase {
     /**
      * The place for the implementation to prove that the new version of replaceWhitespace is faster than
      * cgBase.replaceWhitespace()
-     * 
+     *
      * @param data
      * @return
      */
@@ -74,7 +75,7 @@ public class WhitespaceTest extends AndroidTestCase {
         result = cgBase.replaceWhitespace(data);
         final long end = System.currentTimeMillis();
         assertEquals(84028, result.length());
-        Log.w(cgSettings.tag, (end - start) + " ms manually");
+        Log.w(Settings.tag, (end - start) + " ms manually");
     }
 
     public void testManually() {
@@ -83,7 +84,7 @@ public class WhitespaceTest extends AndroidTestCase {
         result = replaceWhitespaceManually(data);
         final long end = System.currentTimeMillis();
         assertEquals(84028, result.length());
-        Log.w(cgSettings.tag, (end - start) + " ms manually");
+        Log.w(Settings.tag, (end - start) + " ms manually");
     }
 
     public void testStringUtils() {
@@ -92,6 +93,6 @@ public class WhitespaceTest extends AndroidTestCase {
         result = replaceWhitespaceStringUtils(data);
         final long end = System.currentTimeMillis();
         assertEquals(84026, result.length());
-        Log.w(cgSettings.tag, (end - start) + " ms StringUtils");
+        Log.w(Settings.tag, (end - start) + " ms StringUtils");
     }
 }

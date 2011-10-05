@@ -1,16 +1,9 @@
-package cgeo.geocaching.test;
+package cgeo.geocaching;
 
-import cgeo.geocaching.cgBase;
-import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgCacheWrap;
-import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.test.mock.GC1ZXX2;
 import cgeo.geocaching.test.mock.GC2CJPF;
 import cgeo.geocaching.test.mock.MockedCache;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.test.ApplicationTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
@@ -29,7 +22,6 @@ import junit.framework.Assert;
 
 public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
 
-    private cgSettings settings = null;
     private cgBase base = null;
 
     public cgeoApplicationTest() {
@@ -42,13 +34,9 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
 
         // init environment
         createApplication();
-        final Context context = this.getContext();
-        final SharedPreferences prefs = context.getSharedPreferences(
-                cgSettings.preferences, Context.MODE_PRIVATE);
 
         // create required c:geo objects
-        settings = new cgSettings(context, prefs);
-        base = new cgBase(this.getApplication(), settings);
+        base = new cgBase(this.getApplication());
     }
 
     /**
@@ -68,7 +56,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
      */
     @MediumTest
     public void testSearchByGeocode() {
-        final UUID id = base.searchByGeocode("GC1RMM2", null, 0, true);
+        final UUID id = base.searchByGeocode("GC1RMM2", null, 0, true, null);
         Assert.assertNotNull(id);
     }
 
@@ -83,7 +71,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
         cachesToTest.add(new GC1ZXX2());
 
         for (MockedCache cache : cachesToTest) {
-            cgCacheWrap caches = base.parseCache(cache.getData(), 0);
+            cgCacheWrap caches = base.parseCache(cache.getData(), 0, null);
             cgCache cacheParsed = caches.cacheList.get(0);
             Assert.assertEquals(cache.getGeocode(), cacheParsed.getGeocode());
             Assert.assertEquals(cache.getType(), cacheParsed.getType());
@@ -109,4 +97,9 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
         }
     }
 
+    public void testParseLocationWithLink() {
+        cgCacheWrap caches = base.parseCache(MockedCache.readCachePage("GCV2R9"), 0, null);
+        cgCache cache = caches.cacheList.get(0);
+        Assert.assertEquals("California, United States", cache.getLocation());
+    }
 }

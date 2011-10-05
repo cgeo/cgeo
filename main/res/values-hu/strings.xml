@@ -418,7 +418,7 @@
   <string name="init_useenglish">Angol nyelv használata a c:geo-ban\n(újraindítás szükséges)</string>
   <string name="init_exclude">Saját és megtalált ládák kihagyása</string>
   <string name="init_showwaypoints">Útpontok mutatása élő térképen</string>
-  <string name="init_showwaypointsthreshold">Maximum ennyi útpontot mutasson</string>
+  <string name="init_showwaypoint_description">Maximum ennyi útpontot mutasson</string>
   <string name="init_disabled">Letiltott ládák kihagyása</string>
   <string name="init_offline">Statikus térképek tárolása offline használathoz</string>
   <string name="init_save_log_img">Logokban található képek mentése</string>

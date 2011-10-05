@@ -26,14 +26,14 @@ public class cgDirectionImg {
         }
 
         if (StringUtils.isNotBlank(geocode)) {
-            dirName = cgSettings.getStorage() + geocode + "/";
-            fileName = cgSettings.getStorage() + geocode + "/direction.png";
+            dirName = Settings.getStorage() + geocode + "/";
+            fileName = Settings.getStorage() + geocode + "/direction.png";
         } else {
             return;
         }
 
         File dir = null;
-        dir = new File(cgSettings.getStorage());
+        dir = new File(Settings.getStorage());
         if (dir.exists() == false) {
             dir.mkdirs();
         }
@@ -52,7 +52,7 @@ public class cgDirectionImg {
 
         for (int i = 0; i < 3; i++) {
             if (i > 0)
-                Log.w(cgSettings.tag, "cgDirectionImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
+                Log.w(Settings.tag, "cgDirectionImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
 
             try {
                 client = new DefaultHttpClient();
@@ -61,7 +61,7 @@ public class cgDirectionImg {
                 entity = httpResponse.getEntity();
                 final BufferedHttpEntity bufferedEntity = new BufferedHttpEntity(entity);
 
-                Log.i(cgSettings.tag, "[" + entity.getContentLength() + "B] Downloading direction image " + code);
+                Log.i(Settings.tag, "[" + entity.getContentLength() + "B] Downloading direction image " + code);
 
                 InputStream is = (InputStream) bufferedEntity.getContent();
                 FileOutputStream fos = new FileOutputStream(fileName);
@@ -75,7 +75,7 @@ public class cgDirectionImg {
                     ok = true;
                     fos.flush();
                 } catch (IOException e) {
-                    Log.e(cgSettings.tag, "cgDirectionImg.getDrawable (saving to cache): " + e.toString());
+                    Log.e(Settings.tag, "cgDirectionImg.getDrawable (saving to cache): " + e.toString());
                 } finally {
                     is.close();
                     fos.close();
@@ -85,7 +85,7 @@ public class cgDirectionImg {
                     break;
                 }
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgDirectionImg.getDrawable (downloading from web): " + e.toString());
+                Log.e(Settings.tag, "cgDirectionImg.getDrawable (downloading from web): " + e.toString());
             }
         }
     }
