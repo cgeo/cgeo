@@ -407,7 +407,7 @@ public class cgeopoint extends AbstractActivity {
         navigateIntent.putExtra("latitude", geopoint.getLatitude());
         navigateIntent.putExtra("longitude", geopoint.getLongitude());
         navigateIntent.putExtra("geocode", "");
-        navigateIntent.putExtra("name", R.string.search_some_destination);
+        navigateIntent.putExtra("name", res.getString(R.string.search_some_destination));
 
         startActivity(navigateIntent);
     }
