@@ -1290,7 +1290,7 @@ public class cgeocaches extends AbstractListActivity {
 
         if (cache != null) {
             // create a searchId for a single cache (as if in details view)
-            final UUID singleSearchId = base.searchByGeocode(cache.geocode, null, 0, false);
+            final UUID singleSearchId = base.searchByGeocode(cache.geocode, null, 0, false, null);
 
             if (NavigationAppFactory.onMenuItemSelected(item, geo, this,
                     res, cache, singleSearchId, null, null)) {

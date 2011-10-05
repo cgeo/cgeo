@@ -171,31 +171,43 @@ public class cgeodetail extends AbstractActivity {
     private Handler loadCacheHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if (searchId == null) {
-                showToast(res.getString(R.string.err_dwld_details_failed));
-
-                finish();
-                return;
-            }
-
-            if (app.getError(searchId) != null) {
-                showToast(res.getString(R.string.err_dwld_details_failed_reason) + " " + app.getError(searchId) + ".");
-
-                finish();
-                return;
-            }
-
-            setView();
-
-            if (Settings.isAutoLoadDescription()) {
-                try {
-                    loadLongDesc();
-                } catch (Exception e) {
-                    // activity is not visible
+            if (cgBase.UPDATE_LOAD_PROGRESS_DETAIL == msg.what) {
+                if (waitDialog != null
+                        && waitDialog.isShowing()
+                        && msg.obj instanceof String) {
+                    waitDialog.setMessage(res.getString(R.string.cache_dialog_loading_details)
+                            + "\n\n"
+                            + (String) msg.obj);
                 }
-            }
+            } else {
+                if (searchId == null) {
+                    showToast(res.getString(R.string.err_dwld_details_failed));
 
-            (new loadMapPreview(loadMapPreviewHandler)).start();
+                    finish();
+                    return;
+                }
+
+                if (app.getError(searchId) != null) {
+                    showToast(res.getString(R.string.err_dwld_details_failed_reason) + " " + app.getError(searchId) + ".");
+
+                    finish();
+                    return;
+                }
+
+                this.obtainMessage(cgBase.UPDATE_LOAD_PROGRESS_DETAIL, res.getString(R.string.cache_dialog_loading_details_status_render)).sendToTarget();
+
+                setView();
+
+                if (Settings.isAutoLoadDescription()) {
+                    try {
+                        loadLongDesc();
+                    } catch (Exception e) {
+                        // activity is not visible
+                    }
+                }
+
+                (new loadMapPreview(loadMapPreviewHandler)).start();
+            }
         }
     };
 
@@ -381,13 +393,12 @@ public class cgeodetail extends AbstractActivity {
 
         try {
             if (StringUtils.isNotBlank(name)) {
-                waitDialog = ProgressDialog.show(this, name, res.getString(R.string.cache_dialog_loading_details), true);
+                waitDialog = ProgressDialog.show(this, name, res.getString(R.string.cache_dialog_loading_details), true, true);
             } else if (StringUtils.isNotBlank(geocode)) {
-                waitDialog = ProgressDialog.show(this, geocode.toUpperCase(), res.getString(R.string.cache_dialog_loading_details), true);
+                waitDialog = ProgressDialog.show(this, geocode.toUpperCase(), res.getString(R.string.cache_dialog_loading_details), true, true);
             } else {
-                waitDialog = ProgressDialog.show(this, res.getString(R.string.cache), res.getString(R.string.cache_dialog_loading_details), true);
+                waitDialog = ProgressDialog.show(this, res.getString(R.string.cache), res.getString(R.string.cache_dialog_loading_details), true, true);
             }
-            waitDialog.setCancelable(true);
         } catch (Exception e) {
             // nothing, we lost the window
         }
@@ -612,8 +623,9 @@ public class cgeodetail extends AbstractActivity {
         cache = app.getCache(searchId);
 
         if (cache == null) {
-            if (waitDialog != null && waitDialog.isShowing())
+            if (waitDialog != null && waitDialog.isShowing()) {
                 waitDialog.dismiss();
+            }
 
             if (StringUtils.isNotBlank(geocode)) {
                 showToast(res.getString(R.string.err_detail_cache_find) + " " + geocode + ".");
@@ -1327,7 +1339,7 @@ public class cgeodetail extends AbstractActivity {
             if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
                 return;
             }
-            searchId = base.searchByGeocode(geocode, StringUtils.isBlank(geocode) ? guid : null, 0, false);
+            searchId = base.searchByGeocode(geocode, StringUtils.isBlank(geocode) ? guid : null, 0, false, handler);
             handler.sendMessage(new Message());
         }
     }
@@ -1742,7 +1754,7 @@ public class cgeodetail extends AbstractActivity {
         @Override
         public void run() {
             app.removeCacheFromCache(geocode);
-            searchId = base.searchByGeocode(cache.geocode, null, 0, true);
+            searchId = base.searchByGeocode(cache.geocode, null, 0, true, null);
 
             handler.sendEmptyMessage(0);
         }
