@@ -3070,7 +3070,7 @@ public class cgBase {
         final char[] chars = new char[length];
         data.getChars(0, length, chars, 0);
         int resultSize = 0;
-        boolean lastWasWhitespace = true;
+        boolean lastWasWhitespace = false;
         for (char c : chars) {
             if (c == ' ' || c == '\n' || c == '\r' || c == '\t') {
                 if (!lastWasWhitespace) {
@@ -3640,7 +3640,7 @@ public class cgBase {
     /**
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 sept. à 12:35".
-     *
+     * 
      * @param context
      *            a Context
      * @param date
