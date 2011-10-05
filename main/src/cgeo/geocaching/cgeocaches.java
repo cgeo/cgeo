@@ -6,6 +6,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cachelist.CacheListAppFactory;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.filter.cgFilter;
 import cgeo.geocaching.filter.cgFilterBySize;
 import cgeo.geocaching.filter.cgFilterByTrackables;
@@ -211,7 +212,7 @@ public class cgeocaches extends AbstractListActivity {
                     }
                 }
 
-                if (cacheList != null && app.getError(searchId) != null && app.getError(searchId).equalsIgnoreCase(cgBase.errorRetrieve.get(-7))) {
+                if (cacheList != null && app.getError(searchId) == StatusCode.UNAPPROVED_LICENSE) {
                     AlertDialog.Builder dialog = new AlertDialog.Builder(cgeocaches.this);
                     dialog.setTitle(res.getString(R.string.license));
                     dialog.setMessage(res.getString(R.string.err_license));
@@ -233,8 +234,8 @@ public class cgeocaches extends AbstractListActivity {
 
                     AlertDialog alert = dialog.create();
                     alert.show();
-                } else if (app != null && StringUtils.isNotBlank(app.getError(searchId))) {
-                    showToast(res.getString(R.string.err_download_fail) + app.getError(searchId) + ".");
+                } else if (app != null && app.getError(searchId) != null) {
+                    showToast(res.getString(R.string.err_download_fail) + app.getError(searchId).getErrorString(res) + ".");
 
                     hideLoading();
                     showProgress(false);
@@ -310,8 +311,8 @@ public class cgeocaches extends AbstractListActivity {
                     }
                 }
 
-                if (StringUtils.isNotBlank(app.getError(searchId))) {
-                    showToast(res.getString(R.string.err_download_fail) + app.getError(searchId) + ".");
+                if (app.getError(searchId) != null) {
+                    showToast(res.getString(R.string.err_download_fail) + app.getError(searchId).getErrorString(res) + ".");
 
                     listFooter.setOnClickListener(new moreCachesListener());
                     hideLoading();

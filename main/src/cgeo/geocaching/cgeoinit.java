@@ -4,6 +4,7 @@ import cgeo.geocaching.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.Settings.mapSourceEnum;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.enumerations.StatusCode;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
@@ -49,15 +50,12 @@ public class cgeoinit extends AbstractActivity {
                     loginDialog.dismiss();
                 }
 
-                if (msg.what == 1) {
+                final StatusCode error = (StatusCode) msg.obj;
+                if (error == null || error == StatusCode.NO_ERROR) {
                     helpDialog(res.getString(R.string.init_login_popup), res.getString(R.string.init_login_popup_ok));
                 } else {
-                    if (cgBase.errorRetrieve.containsKey(msg.what)) {
-                        helpDialog(res.getString(R.string.init_login_popup),
-                                res.getString(R.string.init_login_popup_failed_reason) + " " + cgBase.errorRetrieve.get(msg.what) + ".");
-                    } else {
-                        helpDialog(res.getString(R.string.init_login_popup), res.getString(R.string.init_login_popup_failed));
-                    }
+                    helpDialog(res.getString(R.string.init_login_popup),
+                            res.getString(R.string.init_login_popup_failed_reason) + " " + error.getErrorString(res) + ".");
                 }
             } catch (Exception e) {
                 showToast(res.getString(R.string.err_login_failed));
@@ -688,12 +686,12 @@ public class cgeoinit extends AbstractActivity {
 
                 @Override
                 public void run() {
-                    final int loginResult = cgBase.login();
-                    if (1 == loginResult)
+                    final StatusCode loginResult = cgBase.login();
+                    if (loginResult == StatusCode.NO_ERROR)
                     {
                         cgBase.detectGcCustomDate();
                     }
-                    logInHandler.sendEmptyMessage(loginResult);
+                    logInHandler.sendMessage(logInHandler.obtainMessage(0, loginResult));
                 }
             }).start();
         }

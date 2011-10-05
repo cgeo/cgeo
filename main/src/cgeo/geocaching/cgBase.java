@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocParser;
 import cgeo.geocaching.geopoint.DistanceParser;
@@ -137,7 +138,6 @@ public class cgBase {
     public final static Map<Integer, String> logTypes2 = new HashMap<Integer, String>();
     public final static Map<Integer, String> logTypesTrackable = new HashMap<Integer, String>();
     public final static Map<Integer, String> logTypesTrackableAction = new HashMap<Integer, String>();
-    public final static Map<Integer, String> errorRetrieve = new HashMap<Integer, String>();
     public final static Map<String, SimpleDateFormat> gcCustomDateFormats;
     static {
         final String[] formats = new String[] {
@@ -334,17 +334,6 @@ public class cgBase {
         logTypesTrackableAction.put(1, "_Visited"); // visit cache
         logTypesTrackableAction.put(2, "_DroppedOff"); // drop here
 
-        // retrieving errors (because of ____ )
-        errorRetrieve.put(1, res.getString(R.string.err_none));
-        errorRetrieve.put(0, res.getString(R.string.err_start));
-        errorRetrieve.put(-1, res.getString(R.string.err_parse));
-        errorRetrieve.put(-2, res.getString(R.string.err_server));
-        errorRetrieve.put(-3, res.getString(R.string.err_login));
-        errorRetrieve.put(-4, res.getString(R.string.err_unknown));
-        errorRetrieve.put(-5, res.getString(R.string.err_comm));
-        errorRetrieve.put(-6, res.getString(R.string.err_wrong));
-        errorRetrieve.put(-7, res.getString(R.string.err_license));
-
         // init
         app = appIn;
 
@@ -479,7 +468,7 @@ public class cgBase {
         }
     }
 
-    public static int login() {
+    public static StatusCode login() {
         HttpResponse loginResponse = null;
         String loginData = null;
 
@@ -488,7 +477,7 @@ public class cgBase {
         final ImmutablePair<String, String> loginStart = Settings.getLogin();
 
         if (loginStart == null) {
-            return -3; // no login information stored
+            return StatusCode.NO_LOGIN_INFO_STORED; // no login information stored
         }
 
         loginResponse = request("https://www.geocaching.com/login/default.aspx", null, false, false, false);
@@ -499,25 +488,25 @@ public class cgBase {
 
                 switchToEnglish(viewstates);
 
-                return 1; // logged in
+                return StatusCode.NO_ERROR; // logged in
             }
 
             viewstates = getViewstates(loginData);
 
             if (isEmpty(viewstates)) {
                 Log.e(Settings.tag, "cgeoBase.login: Failed to find viewstates");
-                return -1; // no viewstates
+                return StatusCode.LOGIN_PARSE_ERROR; // no viewstates
             }
         } else {
             Log.e(Settings.tag, "cgeoBase.login: Failed to retrieve login page (1st)");
-            return -2; // no loginpage
+            return StatusCode.CONNECTION_FAILED; // no loginpage
         }
 
         final ImmutablePair<String, String> login = Settings.getLogin();
 
         if (login == null || StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
             Log.e(Settings.tag, "cgeoBase.login: No login information stored");
-            return -3;
+            return StatusCode.NO_LOGIN_INFO_STORED;
         }
 
         clearCookies();
@@ -540,22 +529,22 @@ public class cgBase {
 
                 switchToEnglish(getViewstates(loginData));
 
-                return 1; // logged in
+                return StatusCode.NO_ERROR; // logged in
             } else {
                 if (loginData.contains("Your username/password combination does not match.")) {
                     Log.i(Settings.tag, "Failed to log in Geocaching.com as " + login.left + " because of wrong username/password");
 
-                    return -6; // wrong login
+                    return StatusCode.WRONG_LOGIN_DATA; // wrong login
                 } else {
                     Log.i(Settings.tag, "Failed to log in Geocaching.com as " + login.left + " for some unknown reason");
 
-                    return -4; // can't login
+                    return StatusCode.UNKNOWN_ERROR; // can't login
                 }
             }
         } else {
             Log.e(Settings.tag, "cgeoBase.login: Failed to retrieve login page (2nd)");
 
-            return -5; // no login page
+            return StatusCode.COMMUNICATION_ERROR; // no login page
         }
     }
 
@@ -918,7 +907,7 @@ public class cgBase {
                     if (coordinates.contains("You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
                         Log.i(Settings.tag, "User has not agreed to the license agreement. Can\'t download .loc file.");
 
-                        caches.error = errorRetrieve.get(-7);
+                        caches.error = StatusCode.UNAPPROVED_LICENSE;
 
                         return caches;
                     }
@@ -1060,17 +1049,17 @@ public class cgBase {
         final cgCache cache = new cgCache();
 
         if (page.contains("Cache is Unpublished")) {
-            caches.error = "cache was unpublished";
+            caches.error = StatusCode.UNPUBLISHED_CACHE;
             return caches;
         }
 
         if (page.contains("Sorry, the owner of this listing has made it viewable to Premium Members only.")) {
-            caches.error = "requested cache is for premium members only";
+            caches.error = StatusCode.PREMIUM_ONLY;
             return caches;
         }
 
         if (page.contains("has chosen to make this cache listing visible to Premium Members only.")) {
-            caches.error = "requested cache is for premium members only";
+            caches.error = StatusCode.PREMIUM_ONLY;
             return caches;
         }
 
@@ -2163,13 +2152,13 @@ public class cgBase {
 
         String page = getResponseData(postRequest(uri, params));
         if (checkLogin(page) == false) {
-            int loginState = login();
-            if (loginState == 1) {
+            final StatusCode loginState = login();
+            if (loginState == StatusCode.NO_ERROR) {
                 page = getResponseData(postRequest(uri, params));
-            } else if (loginState == -3) {
+            } else if (loginState == StatusCode.NO_LOGIN_INFO_STORED) {
                 Log.i(Settings.tag, "Working as guest.");
             } else {
-                app.setError(searchId, errorRetrieve.get(loginState));
+                app.setError(searchId, loginState);
                 Log.e(Settings.tag, "cgeoBase.searchByNextPage: Can not log in geocaching");
                 return searchId;
             }
@@ -2442,7 +2431,7 @@ public class cgBase {
     public static List<cgCache> processSearchResults(final cgSearch search, final cgCacheWrap caches, final boolean excludeDisabled, final boolean excludeMine, final String cacheType) {
         List<cgCache> cacheList = new ArrayList<cgCache>();
         if (caches != null) {
-            if (StringUtils.isNotBlank(caches.error)) {
+            if (caches.error != null) {
                 search.error = caches.error;
             }
             if (StringUtils.isNotBlank(caches.url)) {
@@ -2499,22 +2488,22 @@ public class cgBase {
         return trackable;
     }
 
-    public static int postLog(final cgeoapplication app, final String geocode, final String cacheid, final String[] viewstates,
+    public static StatusCode postLog(final cgeoapplication app, final String geocode, final String cacheid, final String[] viewstates,
             final int logType, final int year, final int month, final int day,
             final String log, final List<cgTrackableLog> trackables) {
         if (isEmpty(viewstates)) {
             Log.e(Settings.tag, "cgeoBase.postLog: No viewstate given");
-            return 1000;
+            return StatusCode.LOG_POST_ERROR;
         }
 
         if (logTypes2.containsKey(logType) == false) {
             Log.e(Settings.tag, "cgeoBase.postLog: Unknown logtype");
-            return 1000;
+            return StatusCode.LOG_POST_ERROR;
         }
 
         if (StringUtils.isBlank(log)) {
             Log.e(Settings.tag, "cgeoBase.postLog: No log text given");
-            return 1001;
+            return StatusCode.NO_LOG_TEXT;
         }
 
         // fix log (non-Latin characters converted to HTML entities)
@@ -2573,8 +2562,8 @@ public class cgBase {
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/log.aspx").encodedQuery("ID=" + cacheid).build().toString();
         String page = getResponseData(postRequest(uri, params));
         if (!checkLogin(page)) {
-            int loginState = login();
-            if (loginState == 1) {
+            final StatusCode loginState = login();
+            if (loginState == StatusCode.NO_ERROR) {
                 page = getResponseData(postRequest(uri, params));
             } else {
                 Log.e(Settings.tag, "cgeoBase.postLog: Can not log in geocaching (error: " + loginState + ")");
@@ -2584,7 +2573,7 @@ public class cgBase {
 
         if (StringUtils.isBlank(page)) {
             Log.e(Settings.tag, "cgeoBase.postLog: No data from server");
-            return 1002;
+            return StatusCode.NO_DATA_FROM_SERVER;
         }
 
         // maintenance, archived needs to be confirmed
@@ -2597,7 +2586,7 @@ public class cgBase {
 
                 if (isEmpty(viewstatesConfirm)) {
                     Log.e(Settings.tag, "cgeoBase.postLog: No viewstate for confirm log");
-                    return 1000;
+                    return StatusCode.LOG_POST_ERROR;
                 }
 
                 params.clear();
@@ -2648,31 +2637,31 @@ public class cgBase {
                     app.saveVisitDate(geocode);
                 }
 
-                return 1;
+                return StatusCode.NO_ERROR;
             }
         } catch (Exception e) {
             Log.e(Settings.tag, "cgeoBase.postLog.check: " + e.toString());
         }
 
         Log.e(Settings.tag, "cgeoBase.postLog: Failed to post log because of unknown error");
-        return 1000;
+        return StatusCode.LOG_POST_ERROR;
     }
 
-    public static int postLogTrackable(final String tbid, final String trackingCode, final String[] viewstates,
+    public static StatusCode postLogTrackable(final String tbid, final String trackingCode, final String[] viewstates,
             final int logType, final int year, final int month, final int day, final String log) {
         if (isEmpty(viewstates)) {
             Log.e(Settings.tag, "cgeoBase.postLogTrackable: No viewstate given");
-            return 1000;
+            return StatusCode.LOG_POST_ERROR;
         }
 
         if (logTypes2.containsKey(logType) == false) {
             Log.e(Settings.tag, "cgeoBase.postLogTrackable: Unknown logtype");
-            return 1000;
+            return StatusCode.LOG_POST_ERROR;
         }
 
         if (StringUtils.isBlank(log)) {
             Log.e(Settings.tag, "cgeoBase.postLogTrackable: No log text given");
-            return 1001;
+            return StatusCode.NO_LOG_TEXT;
         }
 
         Log.i(Settings.tag, "Trying to post log for trackable #" + trackingCode + " - action: " + logType + "; date: " + year + "." + month + "." + day + ", log: " + log);
@@ -2703,8 +2692,8 @@ public class cgBase {
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("wid=" + tbid).build().toString();
         String page = getResponseData(postRequest(uri, params));
         if (checkLogin(page) == false) {
-            int loginState = login();
-            if (loginState == 1) {
+            final StatusCode loginState = login();
+            if (loginState == StatusCode.NO_ERROR) {
                 page = getResponseData(postRequest(uri, params));
             } else {
                 Log.e(Settings.tag, "cgeoBase.postLogTrackable: Can not log in geocaching (error: " + loginState + ")");
@@ -2714,7 +2703,7 @@ public class cgBase {
 
         if (StringUtils.isBlank(page)) {
             Log.e(Settings.tag, "cgeoBase.postLogTrackable: No data from server");
-            return 1002;
+            return StatusCode.NO_DATA_FROM_SERVER;
         }
 
         try {
@@ -2722,14 +2711,14 @@ public class cgBase {
             final Matcher matcherOk = patternOk.matcher(page);
             if (matcherOk.find()) {
                 Log.i(Settings.tag, "Log successfully posted to trackable #" + trackingCode);
-                return 1;
+                return StatusCode.NO_ERROR;
             }
         } catch (Exception e) {
             Log.e(Settings.tag, "cgeoBase.postLogTrackable.check: " + e.toString());
         }
 
         Log.e(Settings.tag, "cgeoBase.postLogTrackable: Failed to post log because of unknown error");
-        return 1000;
+        return StatusCode.LOG_POST_ERROR;
     }
 
     /**
@@ -2902,7 +2891,7 @@ public class cgBase {
     public static String postRequestLogged(final String uri) {
         final String data = getResponseData(postRequest(uri, null));
         if (!checkLogin(data)) {
-            if (login() == 1) {
+            if (login() == StatusCode.NO_ERROR) {
                 return getResponseData(postRequest(uri, null));
             } else {
                 Log.i(Settings.tag, "Working as guest.");
@@ -2916,8 +2905,7 @@ public class cgBase {
         String data = getResponseData(response);
 
         if (checkLogin(data) == false) {
-            int loginState = login();
-            if (loginState == 1) {
+            if (login() == StatusCode.NO_ERROR) {
                 response = request(uri, params, xContentType, my, addF);
                 data = getResponseData(response);
             } else {

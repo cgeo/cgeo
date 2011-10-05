@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.LogTemplateProvider.LogTemplate;
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.utils.CollectionUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -176,19 +177,18 @@ public class cgeovisit extends cgLogForm {
     private Handler postLogHandler = new Handler() {
 
         @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == 1) {
+        public void handleMessage(final Message msg) {
+            if (waitDialog != null) {
+                waitDialog.dismiss();
+            }
+
+            final StatusCode error = (StatusCode) msg.obj;
+            if (error == StatusCode.NO_ERROR) {
                 showToast(res.getString(R.string.info_log_posted));
-
-                if (waitDialog != null) {
-                    waitDialog.dismiss();
-                }
-
                 // No need to save the log when quitting if it has been posted.
                 text = currentLogText();
                 finish();
-                return;
-            } else if (msg.what == 2) {
+            } else if (error == StatusCode.LOG_SAVED) {
                 showToast(res.getString(R.string.info_log_saved));
 
                 if (waitDialog != null) {
@@ -196,25 +196,8 @@ public class cgeovisit extends cgLogForm {
                 }
 
                 finish();
-                return;
-            } else if (msg.what >= 1000) {
-                if (msg.what == 1001) {
-                    showToast(res.getString(R.string.warn_log_text_fill));
-                } else if (msg.what == 1002) {
-                    showToast(res.getString(R.string.err_log_failed_server));
-                } else {
-                    showToast(res.getString(R.string.err_log_post_failed));
-                }
             } else {
-                if (cgBase.errorRetrieve.get(msg.what) != null) {
-                    showToast(res.getString(R.string.err_log_post_failed_because) + " " + cgBase.errorRetrieve.get(msg.what) + ".");
-                } else {
-                    showToast(res.getString(R.string.err_log_post_failed));
-                }
-            }
-
-            if (waitDialog != null) {
-                waitDialog.dismiss();
+                showToast(error.getErrorString(res));
             }
         }
     };
@@ -717,17 +700,12 @@ public class cgeovisit extends cgLogForm {
 
         @Override
         public void run() {
-            int ret = -1;
-
-            ret = postLogFn(log);
-
-            handler.sendEmptyMessage(ret);
+            final StatusCode status = postLogFn(log);
+            handler.sendMessage(handler.obtainMessage(0, status));
         }
     }
 
-    public int postLogFn(String log) {
-        int status = -1;
-
+    public StatusCode postLogFn(String log) {
         try {
             if (tweetBox == null) {
                 tweetBox = (LinearLayout) findViewById(R.id.tweet_box);
@@ -736,11 +714,11 @@ public class cgeovisit extends cgLogForm {
                 tweetCheck = (CheckBox) findViewById(R.id.tweet);
             }
 
-            status = cgBase.postLog(app, geocode, cacheid, viewstates, typeSelected,
+            final StatusCode status = cgBase.postLog(app, geocode, cacheid, viewstates, typeSelected,
                     date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE),
                     log, trackables);
 
-            if (status == 1) {
+            if (status == StatusCode.NO_ERROR) {
                 cgLog logNow = new cgLog();
                 logNow.author = Settings.getUsername();
                 logNow.date = date.getTimeInMillis();
@@ -766,17 +744,17 @@ public class cgeovisit extends cgLogForm {
                 }
             }
 
-            if (status == 1) {
+            if (status == StatusCode.NO_ERROR) {
                 app.clearLogOffline(geocode);
             }
 
-            if (status == 1 && typeSelected == cgBase.LOG_FOUND_IT && Settings.isUseTwitter()
+            if (status == StatusCode.NO_ERROR && typeSelected == cgBase.LOG_FOUND_IT && Settings.isUseTwitter()
                     && Settings.isTwitterLoginValid()
                     && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
                 cgBase.postTweetCache(app, geocode);
             }
 
-            if (status == 1 && typeSelected == cgBase.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
+            if (status == StatusCode.NO_ERROR && typeSelected == cgBase.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
                 GCVote.setRating(cache, rating);
             }
 
@@ -785,7 +763,7 @@ public class cgeovisit extends cgLogForm {
             Log.e(Settings.tag, "cgeovisit.postLogFn: " + e.toString());
         }
 
-        return 1000;
+        return StatusCode.LOG_POST_ERROR;
     }
 
     private void saveLog(final boolean force) {

@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.StatusCode;
+
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Dialog;
@@ -76,32 +78,16 @@ public class cgeotouch extends cgLogForm {
     private Handler postLogHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if (msg.what == 1) {
-                showToast(res.getString(R.string.info_log_posted));
-
-                if (waitDialog != null) {
-                    waitDialog.dismiss();
-                }
-                finish();
-                return;
-            } else if (msg.what >= 1000) {
-                if (msg.what == 1001) {
-                    showToast(res.getString(R.string.warn_log_text_fill));
-                } else if (msg.what == 1002) {
-                    showToast(res.getString(R.string.err_log_failed_server));
-                } else {
-                    showToast(res.getString(R.string.err_log_post_failed));
-                }
-            } else {
-                if (cgBase.errorRetrieve.get(msg.what) != null) {
-                    showToast(res.getString(R.string.err_log_post_failed_because) + cgBase.errorRetrieve.get(msg.what) + ".");
-                } else {
-                    showToast(res.getString(R.string.err_log_post_failed));
-                }
-            }
-
             if (waitDialog != null) {
                 waitDialog.dismiss();
+            }
+
+            final StatusCode error = (StatusCode) msg.obj;
+            if (error == StatusCode.NO_ERROR) {
+                showToast(res.getString(R.string.info_log_posted));
+                finish();
+            } else {
+                showToast(error.getErrorString(res));
             }
         }
     };
@@ -417,29 +403,24 @@ public class cgeotouch extends cgLogForm {
     }
 
     private class postLog extends Thread {
-        Handler handler = null;
-        String tracking = null;
-        String log = null;
+        final private Handler handler;
+        final private String tracking;
+        final private String log;
 
-        public postLog(Handler handlerIn, String trackingIn, String logIn) {
-            handler = handlerIn;
-            tracking = trackingIn;
-            log = logIn;
+        public postLog(final Handler handler, final String tracking, final String log) {
+            this.handler = handler;
+            this.tracking = tracking;
+            this.log = log;
         }
 
         @Override
         public void run() {
-            int ret = -1;
-
-            ret = postLogFn(tracking, log);
-
-            handler.sendEmptyMessage(ret);
+            final StatusCode error = postLogFn(tracking, log);
+            handler.sendMessage(handler.obtainMessage(0, error));
         }
     }
 
-    public int postLogFn(String tracking, String log) {
-        int status = -1;
-
+    public StatusCode postLogFn(String tracking, String log) {
         try {
             if (tweetBox == null) {
                 tweetBox = (LinearLayout) findViewById(R.id.tweet_box);
@@ -448,9 +429,9 @@ public class cgeotouch extends cgLogForm {
                 tweetCheck = (CheckBox) findViewById(R.id.tweet);
             }
 
-            status = cgBase.postLogTrackable(guid, tracking, viewstates, typeSelected, date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE), log);
+            final StatusCode status = cgBase.postLogTrackable(guid, tracking, viewstates, typeSelected, date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE), log);
 
-            if (status == 1 && Settings.isUseTwitter() &&
+            if (status == StatusCode.NO_ERROR && Settings.isUseTwitter() &&
                     Settings.isTwitterLoginValid() &&
                     tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
                 cgBase.postTweetTrackable(app, geocode);
@@ -461,6 +442,6 @@ public class cgeotouch extends cgLogForm {
             Log.e(Settings.tag, "cgeotouch.postLogFn: " + e.toString());
         }
 
-        return 1000;
+        return StatusCode.LOG_POST_ERROR;
     }
 }
