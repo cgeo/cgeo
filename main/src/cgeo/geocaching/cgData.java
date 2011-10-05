@@ -13,6 +13,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.DatabaseUtils.InsertHelper;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDoneException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Environment;
@@ -3123,6 +3124,17 @@ public class cgData {
         databaseRW.delete(dbTableLogsOffline, "geocode = ?", new String[] { geocode });
     }
 
+    private SQLiteStatement getStatementLogCount() {
+        if (statementLogCount == null) {
+            synchronized (this) {
+                if (statementLogCount == null) {
+                    statementLogCount = databaseRO.compileStatement("SELECT count(_id) FROM " + dbTableLogsOffline + " WHERE geocode = ?");
+                }
+            }
+        }
+        return statementLogCount;
+    }
+
     public boolean hasLogOffline(final String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return false;
@@ -3130,13 +3142,13 @@ public class cgData {
 
         init();
         try {
-            if (statementLogCount == null) {
-                statementLogCount = databaseRO.compileStatement("SELECT count(_id) FROM " + dbTableLogsOffline + " WHERE geocode = ?");
+            final SQLiteStatement logCount = getStatementLogCount();
+            synchronized (logCount) {
+                statementLogCount.bindString(1, geocode.toUpperCase());
+                return statementLogCount.simpleQueryForLong() > 0;
             }
-            statementLogCount.bindString(1, geocode.toUpperCase());
-            return statementLogCount.simpleQueryForLong() > 0;
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.hasLogOffline: " + e.toString());
+            Log.e(Settings.tag, "cgData.hasLogOffline", e);
         }
 
         return false;
@@ -3347,6 +3359,17 @@ public class cgData {
         return success;
     }
 
+    private SQLiteStatement getStatementDescription() {
+        if (statementDescription == null) {
+            synchronized (this) {
+                if (statementDescription == null) {
+                    statementDescription = databaseRO.compileStatement("SELECT description FROM " + dbTableCaches + " WHERE geocode = ?");
+                }
+            }
+        }
+        return statementDescription;
+    }
+
     public String getCacheDescription(String geocode) {
         if (geocode == null) {
             return null;
@@ -3354,13 +3377,15 @@ public class cgData {
         init();
 
         try {
-            if (statementDescription == null) {
-                statementDescription = databaseRO.compileStatement("SELECT description FROM " + dbTableCaches + " WHERE geocode = ?");
+            final SQLiteStatement description = getStatementDescription();
+            synchronized (description) {
+                description.bindString(1, geocode);
+                return description.simpleQueryForString();
             }
-            statementDescription.bindString(1, geocode);
-            return statementDescription.simpleQueryForString();
+        } catch (SQLiteDoneException e) {
+            // Do nothing, it only means we have no information on the cache
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.getCacheDescription: " + e.toString());
+            Log.e(Settings.tag, "cgData.getCacheDescription", e);
         }
 
         return null;
