@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import org.apache.commons.lang3.StringUtils;
@@ -215,7 +216,7 @@ public class cgeoapplication extends Application {
         return getStorage().getCacheidForGeocode(geocode);
     }
 
-    public String getError(final UUID searchId) {
+    public StatusCode getError(final UUID searchId) {
         if (searchId == null || searches.containsKey(searchId) == false) {
             return null;
         }
@@ -223,7 +224,7 @@ public class cgeoapplication extends Application {
         return searches.get(searchId).error;
     }
 
-    public boolean setError(final UUID searchId, String error) {
+    public boolean setError(final UUID searchId, final StatusCode error) {
         if (searchId == null || searches.containsKey(searchId) == false) {
             return false;
         }

@@ -101,7 +101,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
 
         final cgCacheWrap caches = cgBase.parseCache(page, reason);
         if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
-            if (caches != null && StringUtils.isNotBlank(caches.error)) {
+            if (caches != null && caches.error != null) {
                 search.error = caches.error;
             }
             if (caches != null && StringUtils.isNotBlank(caches.url)) {

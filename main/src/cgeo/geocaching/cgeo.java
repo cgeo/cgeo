@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.CollectionUtils;
 
@@ -129,9 +130,9 @@ public class cgeo extends AbstractActivity {
         @Override
         public void handleMessage(Message msg) {
             try {
-                int reason = msg.what;
+                final StatusCode reason = (StatusCode) msg.obj;
 
-                if (reason < 0) { //LoginFailed
+                if (reason != null && reason != StatusCode.NO_ERROR) { //LoginFailed
                     showToast(res.getString(R.string.err_login_failed_toast));
                 }
             } catch (Exception e) {
@@ -730,19 +731,19 @@ public class cgeo extends AbstractActivity {
                 return;
             }
 
-            final int status = cgBase.login();
+            final StatusCode status = cgBase.login();
 
-            if (status == 1) {
+            if (status == StatusCode.NO_ERROR) {
                 app.firstRun = false;
                 cgBase.detectGcCustomDate();
             }
 
             if (app.showLoginToast) {
-                firstLoginHandler.sendEmptyMessage(status);
+                firstLoginHandler.sendMessage(firstLoginHandler.obtainMessage(0, status));
                 app.showLoginToast = false;
 
                 // invoke settings activity to insert login details
-                if (status == -3) {
+                if (status == StatusCode.NO_LOGIN_INFO_STORED) {
                     final Context context = cgeo.this;
                     final Intent initIntent = new Intent(context, cgeoinit.class);
                     context.startActivity(initIntent);
