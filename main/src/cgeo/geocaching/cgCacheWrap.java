@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.StatusCode;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,7 +9,7 @@ import java.util.List;
  * List of caches
  */
 public class cgCacheWrap {
-    public String error = null;
+    public StatusCode error = null;
     public String url = "";
     public String[] viewstates = null;
     public int totalCnt = 0;

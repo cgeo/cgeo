@@ -128,6 +128,8 @@
   <string name="err_missing_auth">nom d\'utilisateur ou mot de passe manquant.</string>
   <string name="err_wrong">nom d\'utilisateur inconnu ou mauvais mot de passe</string>
   <string name="err_license">l\'utilisateur n\'a pas accepté les termes et les conditions d\'utilisation de Geocaching.com</string>
+  <string name="err_unpublished">la cache a été retirée de la publication</string>
+  <string name="err_premium_only">la cache est réservée aux membres Premium de Geocaching.com</string>
   <string name="err_store">Désolé, c:geo ne peut pas enregister la cache.</string>
   <string name="err_drop">Désolé, c:geo ne peut pas effacer la cache.</string>
   <string name="err_title_problem">Problème</string>

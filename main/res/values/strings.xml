@@ -128,6 +128,8 @@
   <string name="err_missing_auth">No username and/or password set.</string>
   <string name="err_wrong">Wrong login informations</string>
   <string name="err_license">User has not agreed to Geocaching.com license agreement, so c:geo can\'t load caches coordinates.</string>
+  <string name="err_unpublished">The requested cache was unpublished</string>
+  <string name="err_premium_only">Cache is only available to Geocaching.com premium members</string>
   <string name="err_store">Sorry, c:geo can\'t store cache.</string>
   <string name="err_drop">Sorry, c:geo can\'t drop cache.</string>
   <string name="err_title_problem">Problem</string>
