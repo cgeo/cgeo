@@ -2560,7 +2560,7 @@ public class cgBase {
             }
         }
 
-        final String logInfo = logUpdated.toString().replace("\n", "\r\n"); // windows' eol
+        final String logInfo = logUpdated.toString().replace("\n", "\r\n").trim(); // windows' eol and remove leading and trailing whitespaces
 
         if (trackables != null) {
             Log.i(Settings.tag, "Trying to post log for cache #" + cacheid + " - action: " + logType + "; date: " + year + "." + month + "." + day + ", log: " + logInfo + "; trackables: " + trackables.size());
