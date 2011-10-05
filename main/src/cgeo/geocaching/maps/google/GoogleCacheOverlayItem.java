@@ -17,10 +17,12 @@ public class GoogleCacheOverlayItem extends OverlayItem implements CachesOverlay
         this.coord = coordinate;
     }
 
+    @Override
     public cgCoord getCoord() {
         return coord;
     }
 
+    @Override
     public String getType() {
         return cacheType;
     }

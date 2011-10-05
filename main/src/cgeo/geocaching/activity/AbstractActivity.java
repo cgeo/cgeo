@@ -31,34 +31,42 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
         this.helpTopic = helpTopic;
     }
 
+    @Override
     final public void goHome(final View view) {
         ActivityMixin.goHome(this);
     }
 
+    @Override
     public void goManual(final View view) {
         ActivityMixin.goManual(this, helpTopic);
     }
 
+    @Override
     final public void setTitle(final String title) {
         ActivityMixin.setTitle(this, title);
     }
 
+    @Override
     final public void showProgress(final boolean show) {
         ActivityMixin.showProgress(this, show);
     }
 
+    @Override
     final public void setTheme() {
         ActivityMixin.setTheme(this);
     }
 
+    @Override
     public final void showToast(String text) {
         ActivityMixin.showToast(this, text);
     }
 
+    @Override
     public final void showShortToast(String text) {
         ActivityMixin.showShortToast(this, text);
     }
 
+    @Override
     public final void helpDialog(final String title, final String message) {
         ActivityMixin.helpDialog(this, title, message, null);
     }
@@ -78,6 +86,7 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
         base = new cgBase(app);
     }
 
+    @Override
     public void addVisitMenu(Menu menu, cgCache cache) {
         ActivityMixin.addVisitMenu(this, menu, cache);
     }

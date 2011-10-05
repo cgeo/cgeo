@@ -15,7 +15,7 @@ public class MapsforgeOtherCachersOverlayItem extends OverlayItem implements Oth
     private cgUser user = null;
 
     public MapsforgeOtherCachersOverlayItem(Context contextIn, cgUser userIn) {
-        super(new GeoPoint((int) (userIn.coords.getLatitudeE6()), userIn.coords.getLongitudeE6()), userIn.username, "");
+        super(new GeoPoint((userIn.coords.getLatitudeE6()), userIn.coords.getLongitudeE6()), userIn.username, "");
 
         context = contextIn;
         user = userIn;
@@ -38,6 +38,7 @@ public class MapsforgeOtherCachersOverlayItem extends OverlayItem implements Oth
         return marker;
     }
 
+    @Override
     public cgUser getUser() {
         return user;
     }

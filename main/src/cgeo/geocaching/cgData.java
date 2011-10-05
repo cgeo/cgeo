@@ -995,7 +995,7 @@ public class cgData {
                     index = cursor.getColumnIndex("geocode");
 
                     do {
-                        list.add((String) cursor.getString(index));
+                        list.add(cursor.getString(index));
                     } while (cursor.moveToNext());
                 } else {
                     cursor.close();
@@ -1056,11 +1056,11 @@ public class cgData {
                     cursor.moveToFirst();
 
                     index = cursor.getColumnIndex("updated");
-                    dataUpdated = (long) cursor.getLong(index);
+                    dataUpdated = cursor.getLong(index);
                     index = cursor.getColumnIndex("detailedupdate");
-                    dataDetailedUpdate = (long) cursor.getLong(index);
+                    dataDetailedUpdate = cursor.getLong(index);
                     index = cursor.getColumnIndex("detailed");
-                    dataDetailed = (int) cursor.getInt(index);
+                    dataDetailed = cursor.getInt(index);
                 }
             }
         } catch (Exception e) {
@@ -1134,7 +1134,7 @@ public class cgData {
                     cursor.moveToFirst();
 
                     index = cursor.getColumnIndex("reason");
-                    reason = (long) cursor.getLong(index);
+                    reason = cursor.getLong(index);
                 }
 
                 cursor.close();
@@ -1178,7 +1178,7 @@ public class cgData {
                     cursor.moveToFirst();
 
                     index = cursor.getColumnIndex("geocode");
-                    geocode = (String) cursor.getString(index);
+                    geocode = cursor.getString(index);
                 }
             }
         } catch (Exception e) {
@@ -1220,7 +1220,7 @@ public class cgData {
                     cursor.moveToFirst();
 
                     index = cursor.getColumnIndex("cacheid");
-                    cacheid = (String) cursor.getString(index);
+                    cacheid = cursor.getString(index);
                 }
             }
         } catch (Exception e) {
@@ -1804,11 +1804,11 @@ public class cgData {
                 if (cnt > 0) {
                     cursor.moveToFirst();
 
-                    viewport.add((Integer) cursor.getInt(cursor.getColumnIndex("cnt")));
-                    viewport.add((Double) cursor.getDouble(cursor.getColumnIndex("latMin")));
-                    viewport.add((Double) cursor.getDouble(cursor.getColumnIndex("latMax")));
-                    viewport.add((Double) cursor.getDouble(cursor.getColumnIndex("lonMin")));
-                    viewport.add((Double) cursor.getDouble(cursor.getColumnIndex("lonMax")));
+                    viewport.add(cursor.getInt(cursor.getColumnIndex("cnt")));
+                    viewport.add(cursor.getDouble(cursor.getColumnIndex("latMin")));
+                    viewport.add(cursor.getDouble(cursor.getColumnIndex("latMax")));
+                    viewport.add(cursor.getDouble(cursor.getColumnIndex("lonMin")));
+                    viewport.add(cursor.getDouble(cursor.getColumnIndex("lonMax")));
                 }
             }
         } catch (Exception e) {
@@ -2084,20 +2084,20 @@ public class cgData {
         cache.updated = (long) cursor.getLong(cursor.getColumnIndex("updated"));
         cache.reason = (int) cursor.getInt(cursor.getColumnIndex("reason"));
         cache.detailed = cursor.getInt(cursor.getColumnIndex("detailed")) == 1;
-        cache.detailedUpdate = (Long) cursor.getLong(cursor.getColumnIndex("detailedupdate"));
-        cache.visitedDate = (Long) cursor.getLong(cursor.getColumnIndex("visiteddate"));
-        cache.geocode = (String) cursor.getString(cursor.getColumnIndex("geocode"));
-        cache.cacheId = (String) cursor.getString(cursor.getColumnIndex("cacheid"));
-        cache.guid = (String) cursor.getString(cursor.getColumnIndex("guid"));
-        cache.type = (String) cursor.getString(cursor.getColumnIndex("type"));
-        cache.name = (String) cursor.getString(cursor.getColumnIndex("name"));
+        cache.detailedUpdate = cursor.getLong(cursor.getColumnIndex("detailedupdate"));
+        cache.visitedDate = cursor.getLong(cursor.getColumnIndex("visiteddate"));
+        cache.geocode = cursor.getString(cursor.getColumnIndex("geocode"));
+        cache.cacheId = cursor.getString(cursor.getColumnIndex("cacheid"));
+        cache.guid = cursor.getString(cursor.getColumnIndex("guid"));
+        cache.type = cursor.getString(cursor.getColumnIndex("type"));
+        cache.name = cursor.getString(cursor.getColumnIndex("name"));
         cache.own = cursor.getInt(cursor.getColumnIndex("own")) == 1;
-        cache.owner = (String) cursor.getString(cursor.getColumnIndex("owner"));
-        cache.ownerReal = (String) cursor.getString(cursor.getColumnIndex("owner_real"));
-        cache.hidden = new Date((long) cursor.getLong(cursor.getColumnIndex("hidden")));
-        cache.hint = (String) cursor.getString(cursor.getColumnIndex("hint"));
-        cache.size = CacheSize.FIND_BY_ID.get((String) cursor.getString(cursor.getColumnIndex("size")));
-        cache.difficulty = (Float) cursor.getFloat(cursor.getColumnIndex("difficulty"));
+        cache.owner = cursor.getString(cursor.getColumnIndex("owner"));
+        cache.ownerReal = cursor.getString(cursor.getColumnIndex("owner_real"));
+        cache.hidden = new Date(cursor.getLong(cursor.getColumnIndex("hidden")));
+        cache.hint = cursor.getString(cursor.getColumnIndex("hint"));
+        cache.size = CacheSize.FIND_BY_ID.get(cursor.getString(cursor.getColumnIndex("size")));
+        cache.difficulty = cursor.getFloat(cursor.getColumnIndex("difficulty"));
         index = cursor.getColumnIndex("direction");
         if (cursor.isNull(index)) {
             cache.direction = null;
@@ -2110,29 +2110,29 @@ public class cgData {
         } else {
             cache.distance = cursor.getFloat(index);
         }
-        cache.terrain = (Float) cursor.getFloat(cursor.getColumnIndex("terrain"));
-        cache.latlon = (String) cursor.getString(cursor.getColumnIndex("latlon"));
-        cache.location = (String) cursor.getString(cursor.getColumnIndex("location"));
+        cache.terrain = cursor.getFloat(cursor.getColumnIndex("terrain"));
+        cache.latlon = cursor.getString(cursor.getColumnIndex("latlon"));
+        cache.location = cursor.getString(cursor.getColumnIndex("location"));
         cache.coords = getCoords(cursor);
         index = cursor.getColumnIndex("elevation");
         if (cursor.isNull(index)) {
             cache.elevation = null;
         } else {
-            cache.elevation = (Double) cursor.getDouble(index);
+            cache.elevation = cursor.getDouble(index);
         }
-        cache.personalNote = (String) cursor.getString(cursor.getColumnIndex("personal_note"));
-        cache.shortdesc = (String) cursor.getString(cursor.getColumnIndex("shortdesc"));
+        cache.personalNote = cursor.getString(cursor.getColumnIndex("personal_note"));
+        cache.shortdesc = cursor.getString(cursor.getColumnIndex("shortdesc"));
         // do not set cache.description !
-        cache.favouriteCnt = (Integer) cursor.getInt(cursor.getColumnIndex("favourite_cnt"));
-        cache.rating = (Float) cursor.getFloat(cursor.getColumnIndex("rating"));
-        cache.votes = (Integer) cursor.getInt(cursor.getColumnIndex("votes"));
-        cache.myVote = (Float) cursor.getFloat(cursor.getColumnIndex("myvote"));
+        cache.favouriteCnt = cursor.getInt(cursor.getColumnIndex("favourite_cnt"));
+        cache.rating = cursor.getFloat(cursor.getColumnIndex("rating"));
+        cache.votes = cursor.getInt(cursor.getColumnIndex("votes"));
+        cache.myVote = cursor.getFloat(cursor.getColumnIndex("myvote"));
         cache.disabled = cursor.getLong(cursor.getColumnIndex("disabled")) == 1l;
         cache.archived = cursor.getLong(cursor.getColumnIndex("archived")) == 1l;
         cache.members = cursor.getLong(cursor.getColumnIndex("members")) == 1l;
         cache.found = cursor.getLong(cursor.getColumnIndex("found")) == 1l;
         cache.favourite = cursor.getLong(cursor.getColumnIndex("favourite")) == 1l;
-        cache.inventoryItems = (Integer) cursor.getInt(cursor.getColumnIndex("inventoryunknown"));
+        cache.inventoryItems = cursor.getInt(cursor.getColumnIndex("inventoryunknown"));
         cache.onWatchlist = cursor.getLong(cursor.getColumnIndex("onWatchlist")) == 1l;
         cache.reliableLatLon = cursor.getInt(cursor.getColumnIndex("reliable_latlon")) > 0;
         return cache;
@@ -2162,7 +2162,7 @@ public class cgData {
             int index = cursor.getColumnIndex("attribute");
 
             do {
-                attributes.add((String) cursor.getString(index));
+                attributes.add(cursor.getString(index));
             } while (cursor.moveToNext());
         }
 
@@ -2245,14 +2245,14 @@ public class cgData {
     private static cgWaypoint createWaypointFromDatabaseContent(Cursor cursor) {
         cgWaypoint waypoint = new cgWaypoint();
         waypoint.id = (int) cursor.getInt(cursor.getColumnIndex("_id"));
-        waypoint.geocode = (String) cursor.getString(cursor.getColumnIndex("geocode"));
-        waypoint.type = (String) cursor.getString(cursor.getColumnIndex("type"));
-        waypoint.setPrefix((String) cursor.getString(cursor.getColumnIndex("prefix")));
-        waypoint.lookup = (String) cursor.getString(cursor.getColumnIndex("lookup"));
-        waypoint.name = (String) cursor.getString(cursor.getColumnIndex("name"));
-        waypoint.latlon = (String) cursor.getString(cursor.getColumnIndex("latlon"));
+        waypoint.geocode = cursor.getString(cursor.getColumnIndex("geocode"));
+        waypoint.type = cursor.getString(cursor.getColumnIndex("type"));
+        waypoint.setPrefix(cursor.getString(cursor.getColumnIndex("prefix")));
+        waypoint.lookup = cursor.getString(cursor.getColumnIndex("lookup"));
+        waypoint.name = cursor.getString(cursor.getColumnIndex("name"));
+        waypoint.latlon = cursor.getString(cursor.getColumnIndex("latlon"));
         waypoint.coords = getCoords(cursor);
-        waypoint.note = (String) cursor.getString(cursor.getColumnIndex("note"));
+        waypoint.note = cursor.getString(cursor.getColumnIndex("note"));
 
         return waypoint;
     }
@@ -2284,9 +2284,9 @@ public class cgData {
 
             do {
                 cgImage spoiler = new cgImage();
-                spoiler.url = (String) cursor.getString(indexUrl);
-                spoiler.title = (String) cursor.getString(indexTitle);
-                spoiler.description = (String) cursor.getString(indexDescription);
+                spoiler.url = cursor.getString(indexUrl);
+                spoiler.title = cursor.getString(indexTitle);
+                spoiler.description = cursor.getString(indexDescription);
 
                 spoilers.add(spoiler);
             } while (cursor.moveToNext());
@@ -2328,8 +2328,8 @@ public class cgData {
 
             do {
                 final cgDestination dest = new cgDestination();
-                dest.setId((long) cursor.getLong(indexId));
-                dest.setDate((long) cursor.getLong(indexDate));
+                dest.setId(cursor.getLong(indexId));
+                dest.setDate(cursor.getLong(indexDate));
                 dest.setCoords(getCoords(cursor, indexLatitude, indexLongitude));
 
                 // If coordinates are non-existent or invalid, do not consider
@@ -2393,21 +2393,21 @@ public class cgData {
             while (cursor.moveToNext() && logs.size() < 100) {
                 if (log == null || log.id != cursor.getInt(indexLogsId)) {
                     log = new cgLog();
-                    log.id = (int) cursor.getInt(indexLogsId);
-                    log.type = (int) cursor.getInt(indexType);
-                    log.author = (String) cursor.getString(indexAuthor);
-                    log.log = (String) cursor.getString(indexLog);
-                    log.date = (long) cursor.getLong(indexDate);
-                    log.found = (int) cursor.getInt(indexFound);
+                    log.id = cursor.getInt(indexLogsId);
+                    log.type = cursor.getInt(indexType);
+                    log.author = cursor.getString(indexAuthor);
+                    log.log = cursor.getString(indexLog);
+                    log.date = cursor.getLong(indexDate);
+                    log.found = cursor.getInt(indexFound);
                     logs.add(log);
                 }
                 if (!cursor.isNull(indexLogImagesId)) {
                     final cgImage log_img = new cgImage();
-                    log_img.title = (String) cursor.getString(indexTitle);
+                    log_img.title = cursor.getString(indexTitle);
                     if (log_img.title == null) {
                         log_img.title = "";
                     }
-                    log_img.url = (String) cursor.getString(indexUrl);
+                    log_img.url = cursor.getString(indexUrl);
                     if (log_img.url == null) {
                         log_img.url = "";
                     }
@@ -2534,18 +2534,18 @@ public class cgData {
 
     private cgTrackable createTrackableFromDatabaseContent(Cursor cursor) {
         cgTrackable trackable = new cgTrackable();
-        trackable.geocode = (String) cursor.getString(cursor.getColumnIndex("tbcode"));
-        trackable.guid = (String) cursor.getString(cursor.getColumnIndex("guid"));
-        trackable.name = (String) cursor.getString(cursor.getColumnIndex("title"));
-        trackable.owner = (String) cursor.getString(cursor.getColumnIndex("owner"));
+        trackable.geocode = cursor.getString(cursor.getColumnIndex("tbcode"));
+        trackable.guid = cursor.getString(cursor.getColumnIndex("guid"));
+        trackable.name = cursor.getString(cursor.getColumnIndex("title"));
+        trackable.owner = cursor.getString(cursor.getColumnIndex("owner"));
         String releasedPre = cursor.getString(cursor.getColumnIndex("released"));
         if (releasedPre != null && Long.getLong(releasedPre) != null) {
             trackable.released = new Date(Long.getLong(releasedPre));
         } else {
             trackable.released = null;
         }
-        trackable.goal = (String) cursor.getString(cursor.getColumnIndex("goal"));
-        trackable.details = (String) cursor.getString(cursor.getColumnIndex("description"));
+        trackable.goal = cursor.getString(cursor.getColumnIndex("goal"));
+        trackable.details = cursor.getString(cursor.getColumnIndex("description"));
         trackable.logs = loadLogs(trackable.geocode);
         return trackable;
     }
@@ -2643,7 +2643,7 @@ public class cgData {
                     int index = cursor.getColumnIndex("geocode");
 
                     do {
-                        geocodes.add((String) cursor.getString(index));
+                        geocodes.add(cursor.getString(index));
                     } while (cursor.moveToNext());
                 } else {
                     cursor.close();
@@ -2694,7 +2694,7 @@ public class cgData {
                     int index = cursor.getColumnIndex("geocode");
 
                     do {
-                        geocodes.add((String) cursor.getString(index));
+                        geocodes.add(cursor.getString(index));
                     } while (cursor.moveToNext());
                 } else {
                     cursor.close();
@@ -2784,7 +2784,7 @@ public class cgData {
                     int index = cursor.getColumnIndex("geocode");
 
                     do {
-                        geocodes.add((String) cursor.getString(index));
+                        geocodes.add(cursor.getString(index));
                     } while (cursor.moveToNext());
                 } else {
                     cursor.close();
@@ -2836,7 +2836,7 @@ public class cgData {
                     int index = cursor.getColumnIndex("geocode");
 
                     do {
-                        geocodes.add((String) cursor.getString(index));
+                        geocodes.add(cursor.getString(index));
                     } while (cursor.moveToNext());
                 } else {
                     cursor.close();
@@ -2951,7 +2951,7 @@ public class cgData {
                     int index = cursor.getColumnIndex("geocode");
 
                     do {
-                        geocodes.add("\"" + (String) cursor.getString(index) + "\"");
+                        geocodes.add("\"" + cursor.getString(index) + "\"");
                     } while (cursor.moveToNext());
                 }
 
@@ -3012,7 +3012,7 @@ public class cgData {
                     int index = cursor.getColumnIndex("geocode");
 
                     do {
-                        geocodes.add("\"" + (String) cursor.getString(index) + "\"");
+                        geocodes.add("\"" + cursor.getString(index) + "\"");
                     } while (cursor.moveToNext());
                 } else {
                     cursor.close();
@@ -3101,10 +3101,10 @@ public class cgData {
             cursor.moveToFirst();
 
             log = new cgLog();
-            log.id = (int) cursor.getInt(cursor.getColumnIndex("_id"));
-            log.type = (int) cursor.getInt(cursor.getColumnIndex("type"));
-            log.log = (String) cursor.getString(cursor.getColumnIndex("log"));
-            log.date = (long) cursor.getLong(cursor.getColumnIndex("date"));
+            log.id = cursor.getInt(cursor.getColumnIndex("_id"));
+            log.type = cursor.getInt(cursor.getColumnIndex("type"));
+            log.log = cursor.getString(cursor.getColumnIndex("log"));
+            log.date = cursor.getLong(cursor.getColumnIndex("date"));
         }
 
         if (cursor != null) {
@@ -3222,9 +3222,9 @@ public class cgData {
                     do {
                         cgList list = new cgList(false);
 
-                        list.id = ((int) cursor.getInt(indexId)) + 10;
-                        list.title = (String) cursor.getString(indexTitle);
-                        list.updated = (Long) cursor.getLong(indexUpdated);
+                        list.id = (cursor.getInt(indexId)) + 10;
+                        list.title = cursor.getString(indexTitle);
+                        list.updated = cursor.getLong(indexUpdated);
                         list.coords = getCoords(cursor, indexLatitude, indexLongitude);
 
                         result.add(list);

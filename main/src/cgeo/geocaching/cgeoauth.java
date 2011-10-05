@@ -333,6 +333,7 @@ public class cgeoauth extends AbstractActivity {
 
     private class startListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             if (requestTokenDialog == null) {
                 requestTokenDialog = new ProgressDialog(cgeoauth.this);
@@ -361,6 +362,7 @@ public class cgeoauth extends AbstractActivity {
 
     private class confirmPINListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             if (((EditText) findViewById(R.id.pin)).getText().toString().length() == 0) {
                 helpDialog(res.getString(R.string.auth_dialog_pin_title), res.getString(R.string.auth_dialog_pin_message));

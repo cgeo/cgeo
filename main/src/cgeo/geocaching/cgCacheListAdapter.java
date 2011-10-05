@@ -85,7 +85,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
         if (gcIconDrawables == null || gcIconDrawables.isEmpty()) {
             for (String cacheType : cgBase.cacheTypesInv.keySet()) {
-                gcIconDrawables.put(cacheType, (Drawable) activity.getResources().getDrawable(cgBase.getCacheIcon(cacheType)));
+                gcIconDrawables.put(cacheType, activity.getResources().getDrawable(cgBase.getCacheIcon(cacheType)));
             }
         }
 
@@ -253,14 +253,14 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
         try {
             if (statComparator != null) {
-                Collections.sort((List<cgCache>) list, statComparator);
+                Collections.sort(list, statComparator);
             } else {
                 if (coordsIn == null) {
                     return;
                 }
 
                 final DistanceComparator dstComparator = new DistanceComparator(coordsIn);
-                Collections.sort((List<cgCache>) list, dstComparator);
+                Collections.sort(list, dstComparator);
             }
             notifyDataSetChanged();
         } catch (Exception e) {
@@ -278,10 +278,10 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         if (list != null && list.isEmpty() == false && (System.currentTimeMillis() - lastSort) > 1000 && sort) {
             try {
                 if (statComparator != null) {
-                    Collections.sort((List<cgCache>) list, statComparator);
+                    Collections.sort(list, statComparator);
                 } else {
                     final DistanceComparator dstComparator = new DistanceComparator(coordsIn);
-                    Collections.sort((List<cgCache>) list, dstComparator);
+                    Collections.sort(list, dstComparator);
                 }
                 notifyDataSetChanged();
             } catch (Exception e) {
@@ -367,7 +367,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         View v = rowView;
 
         if (v == null) {
-            v = (View) inflater.inflate(R.layout.cache, null);
+            v = inflater.inflate(R.layout.cache, null);
 
             holder = new cgCacheView();
             holder.oneCache = (RelativeLayout) v.findViewById(R.id.one_cache);
@@ -654,6 +654,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             cache = cacheIn;
         }
 
+        @Override
         public void onClick(View view) {
             final boolean checkNow = ((CheckBox) view).isChecked();
 
@@ -685,6 +686,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         }
 
         // tap on item
+        @Override
         public void onClick(View view) {
             if (touch == false) {
                 touch = true;
@@ -704,6 +706,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         }
 
         // long tap on item
+        @Override
         public boolean onLongClick(View view) {
             if (touch == false) {
                 touch = true;
@@ -715,6 +718,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         }
 
         // swipe on item
+        @Override
         public boolean onTouch(View view, MotionEvent event) {
             if (gestureDetector.onTouchEvent(event)) {
                 touch = false;

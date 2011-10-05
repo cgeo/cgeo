@@ -251,6 +251,7 @@ public class cgeopoint extends AbstractActivity {
 
     private class coordDialogListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             Geopoint gp = null;
             if (latButton.getText().length() > 0 && lonButton.getText().length() > 0) {
@@ -453,6 +454,7 @@ public class cgeopoint extends AbstractActivity {
 
     private class currentListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             if (geo == null || geo.coordsNow == null) {
                 showToast(res.getString(R.string.err_point_unknown_position));

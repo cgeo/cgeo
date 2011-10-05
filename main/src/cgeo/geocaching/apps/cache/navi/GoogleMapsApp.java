@@ -1,9 +1,9 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -28,6 +28,7 @@ class GoogleMapsApp extends AbstractNavigationApp implements NavigationApp {
         return true;
     }
 
+    @Override
     public boolean invoke(cgGeo geo, Activity activity, Resources res,
             cgCache cache,
             final UUID searchId, cgWaypoint waypoint, final Geopoint coords) {

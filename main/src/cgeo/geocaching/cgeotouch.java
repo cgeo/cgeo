@@ -264,6 +264,7 @@ public class cgeotouch extends cgLogForm {
         registerForContextMenu(typeButton);
         typeButton.setText(cgBase.logTypes2.get(typeSelected));
         typeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 openContextMenu(view);
             }
@@ -296,6 +297,7 @@ public class cgeotouch extends cgLogForm {
         }
     }
 
+    @Override
     public void setDate(Calendar dateIn) {
         date = dateIn;
 
@@ -325,6 +327,7 @@ public class cgeotouch extends cgLogForm {
     }
 
     private class cgeotouchDateListener implements View.OnClickListener {
+        @Override
         public void onClick(View arg0) {
             Dialog dateDialog = new cgeodate(cgeotouch.this, cgeotouch.this, date);
             dateDialog.setCancelable(true);
@@ -333,6 +336,7 @@ public class cgeotouch extends cgLogForm {
     }
 
     private class postListener implements View.OnClickListener {
+        @Override
         public void onClick(View arg0) {
             if (gettingViewstate == false) {
                 waitDialog = ProgressDialog.show(cgeotouch.this, null, res.getString(R.string.log_saving), true);

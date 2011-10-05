@@ -227,6 +227,7 @@ public class cgeoinit extends AbstractActivity {
         legalNote.setClickable(true);
         legalNote.setOnClickListener(new View.OnClickListener() {
 
+            @Override
             public void onClick(View arg0) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/about/termsofuse.aspx")));
             }
@@ -243,6 +244,7 @@ public class cgeoinit extends AbstractActivity {
         go4cache.setClickable(true);
         go4cache.setOnClickListener(new View.OnClickListener() {
 
+            @Override
             public void onClick(View arg0) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://go4cache.com/")));
             }
@@ -262,6 +264,7 @@ public class cgeoinit extends AbstractActivity {
         Button authorizeTwitter = (Button) findViewById(R.id.authorize_twitter);
         authorizeTwitter.setOnClickListener(new View.OnClickListener() {
 
+            @Override
             public void onClick(View arg0) {
                 Intent authIntent = new Intent(cgeoinit.this, cgeoauth.class);
                 startActivity(authIntent);
@@ -291,6 +294,7 @@ public class cgeoinit extends AbstractActivity {
         }
         Button sigBtn = (Button) findViewById(R.id.signature_help);
         sigBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 helpDialog(res.getString(R.string.init_signature_help_title), res.getString(R.string.init_signature_help_text));
             }
@@ -298,6 +302,7 @@ public class cgeoinit extends AbstractActivity {
         Button templates = (Button) findViewById(R.id.signature_template);
         registerForContextMenu(templates);
         templates.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
                 enableTemplatesMenu = true;
                 openContextMenu(v);
@@ -546,6 +551,7 @@ public class cgeoinit extends AbstractActivity {
         final ProgressDialog dialog = ProgressDialog.show(this, res.getString(R.string.init_backup), res.getString(R.string.init_backup_running), true, false);
         Thread backupThread = new Thread() {
             final Handler handler = new Handler() {
+                @Override
                 public void handleMessage(Message msg) {
                     dialog.dismiss();
                     final String file = fileRef.get();
@@ -586,6 +592,7 @@ public class cgeoinit extends AbstractActivity {
         final AtomicBoolean atomic = new AtomicBoolean(false);
         Thread restoreThread = new Thread() {
             final Handler handler = new Handler() {
+                @Override
                 public void handleMessage(Message msg) {
                     dialog.dismiss();
                     boolean restored = atomic.get();
@@ -669,6 +676,7 @@ public class cgeoinit extends AbstractActivity {
 
     private class logIn implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             final String username = ((EditText) findViewById(R.id.username)).getText().toString();
             final String password = ((EditText) findViewById(R.id.password)).getText().toString();
@@ -700,6 +708,7 @@ public class cgeoinit extends AbstractActivity {
 
     private class webAuth implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             final String deviceName = ((EditText) findViewById(R.id.webDeviceName)).getText().toString();
             final String deviceCode = prefs.getString("webDeviceCode", null);

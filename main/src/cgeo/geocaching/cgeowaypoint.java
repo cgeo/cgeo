@@ -286,6 +286,7 @@ public class cgeowaypoint extends AbstractActivity {
 
     private class editWaypointListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             Intent editIntent = new Intent(cgeowaypoint.this, cgeowaypointadd.class);
             editIntent.putExtra("waypoint", id);
@@ -295,6 +296,7 @@ public class cgeowaypoint extends AbstractActivity {
 
     private class deleteWaypointListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             if (app.deleteWaypoint(id)) {
                 app.removeCacheFromCache(geocode);

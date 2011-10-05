@@ -659,7 +659,7 @@ public class cgeodetail extends AbstractActivity {
             detailsList.removeAllViews();
 
             // actionbar icon, default myster<
-            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable) getResources().getDrawable(cgBase.getCacheIcon(cache.type)), null, null, null);
+            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.type)), null, null, null);
 
             // cache name (full name)
             itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
@@ -1000,6 +1000,7 @@ public class cgeodetail extends AbstractActivity {
                 Button showDesc = (Button) findViewById(R.id.show_description);
                 showDesc.setVisibility(View.VISIBLE);
                 showDesc.setOnClickListener(new View.OnClickListener() {
+                    @Override
                     public void onClick(View arg0) {
                         loadLongDesc();
                     }
@@ -1490,6 +1491,7 @@ public class cgeodetail extends AbstractActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.cache_calendars);
         builder.setItems(items, new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int item) {
                 addToCalendarFn(item);
             }
@@ -1589,6 +1591,7 @@ public class cgeodetail extends AbstractActivity {
             id = idIn;
         }
 
+        @Override
         public void onClick(View arg0) {
             Intent waypointIntent = new Intent(cgeodetail.this, cgeowaypoint.class);
             waypointIntent.putExtra("waypoint", id);
@@ -1614,6 +1617,7 @@ public class cgeodetail extends AbstractActivity {
     }
 
     public class codeHint implements View.OnClickListener {
+        @Override
         public void onClick(View arg0) {
             // code hint
             TextView hintView = ((TextView) findViewById(R.id.hint));
@@ -1665,6 +1669,7 @@ public class cgeodetail extends AbstractActivity {
     }
 
     private class selectTrackable implements View.OnClickListener {
+        @Override
         public void onClick(View arg0) {
             // show list of trackables
             try {
@@ -1685,6 +1690,7 @@ public class cgeodetail extends AbstractActivity {
     }
 
     private class storeCache implements View.OnClickListener {
+        @Override
         public void onClick(View arg0) {
             if (dropDialog != null && dropDialog.isShowing()) {
                 showToast(res.getString(R.string.err_detail_still_removing));
@@ -1708,6 +1714,7 @@ public class cgeodetail extends AbstractActivity {
     }
 
     private class refreshCache implements View.OnClickListener {
+        @Override
         public void onClick(View arg0) {
             if (dropDialog != null && dropDialog.isShowing()) {
                 showToast(res.getString(R.string.err_detail_still_removing));
@@ -1761,6 +1768,7 @@ public class cgeodetail extends AbstractActivity {
     }
 
     private class dropCache implements View.OnClickListener {
+        @Override
         public void onClick(View arg0) {
             if (storeDialog != null && storeDialog.isShowing()) {
                 showToast(res.getString(R.string.err_detail_still_saving));
@@ -1818,6 +1826,7 @@ public class cgeodetail extends AbstractActivity {
      * Listener for "add to watchlist" button
      */
     private class AddToWatchlistClickListener extends AbstractWatchlistClickListener {
+        @Override
         public void onClick(View arg0) {
             doExecute(R.string.cache_dialog_watchlist_add_title,
                     R.string.cache_dialog_watchlist_add_message,
@@ -1829,6 +1838,7 @@ public class cgeodetail extends AbstractActivity {
      * Listener for "remove from watchlist" button
      */
     private class RemoveFromWatchlistClickListener extends AbstractWatchlistClickListener {
+        @Override
         public void onClick(View arg0) {
             doExecute(R.string.cache_dialog_watchlist_remove_title,
                     R.string.cache_dialog_watchlist_remove_message,
@@ -1866,6 +1876,7 @@ public class cgeodetail extends AbstractActivity {
 
     private class addWaypoint implements View.OnClickListener {
 
+        @Override
         public void onClick(View view) {
             Intent addWptIntent = new Intent(cgeodetail.this, cgeowaypointadd.class);
 
@@ -1882,6 +1893,7 @@ public class cgeodetail extends AbstractActivity {
 
     private static class decryptLog implements View.OnClickListener {
 
+        @Override
         public void onClick(View view) {
             if (view == null) {
                 return;
@@ -1906,6 +1918,7 @@ public class cgeodetail extends AbstractActivity {
 
     private class userActions implements View.OnClickListener {
 
+        @Override
         public void onClick(View view) {
             if (view == null) {
                 return;

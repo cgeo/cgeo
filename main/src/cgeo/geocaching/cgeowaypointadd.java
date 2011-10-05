@@ -220,6 +220,7 @@ public class cgeowaypointadd extends AbstractActivity {
 
     private class coordDialogListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             Geopoint gp = null;
             if (waypoint != null && waypoint.coords != null)
@@ -242,6 +243,7 @@ public class cgeowaypointadd extends AbstractActivity {
 
     private class coordsListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             List<Double> coords = new ArrayList<Double>();
             Double latitude = null;
@@ -310,8 +312,8 @@ public class cgeowaypointadd extends AbstractActivity {
                     return;
                 }
 
-                coords.add(0, (Double) latParsed);
-                coords.add(1, (Double) lonParsed);
+                coords.add(0, latParsed);
+                coords.add(1, lonParsed);
             } else if (latitude != null && longitude != null) {
                 coords.add(0, latitude);
                 coords.add(1, longitude);
@@ -347,6 +349,7 @@ public class cgeowaypointadd extends AbstractActivity {
         }
     }
 
+    @Override
     public void goManual(View view) {
         if (id >= 0) {
             ActivityMixin.goManual(this, "c:geo-waypoint-edit");

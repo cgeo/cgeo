@@ -35,6 +35,7 @@ public class GeopointFormatter
             this.format = format;
         }
 
+        @Override
         public String toString()
         {
             return format;
@@ -69,28 +70,28 @@ public class GeopointFormatter
 
     /**
      * Formats a Geopoint.
-     *
+     * 
      * Syntax:
      * %[dir][precision][value]
-     *
+     * 
      * [dir]
      * y = latitude
      * x = longitude
-     *
+     * 
      * [precision] (optional)
      * 0..9, number of digits after the decimal point
-     *
+     * 
      * [value]
      * n = direction
      * d = degree
      * m = minute
      * s = second
-     *
+     * 
      * Example:
      * "%yn %yd° %y3m" = "N 52° 36.123"
-     *
+     * 
      * All other characters are not interpreted and can be used.
-     *
+     * 
      * @param gp
      *            the Geopoint to format
      * @param format
@@ -212,6 +213,7 @@ public class GeopointFormatter
      *
      * @return the format of this instance.
      */
+    @Override
     public String toString()
     {
         return format;

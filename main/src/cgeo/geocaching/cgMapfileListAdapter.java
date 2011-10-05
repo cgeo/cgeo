@@ -39,7 +39,7 @@ public class cgMapfileListAdapter extends ArrayAdapter<File> {
         View v = rowView;
 
         if (v == null) {
-            v = (View) inflater.inflate(R.layout.mapfile_item, null);
+            v = inflater.inflate(R.layout.mapfile_item, null);
 
             holder = new MapfileView();
             holder.filepath = (TextView) v.findViewById(R.id.mapfilepath);
@@ -80,6 +80,7 @@ public class cgMapfileListAdapter extends ArrayAdapter<File> {
         }
 
         // tap on item
+        @Override
         public void onClick(View view) {
             parentView.setMapfile(file.toString());
             parentView.close();

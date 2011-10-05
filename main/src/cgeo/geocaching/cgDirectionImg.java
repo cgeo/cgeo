@@ -63,7 +63,7 @@ public class cgDirectionImg {
 
                 Log.i(Settings.tag, "[" + entity.getContentLength() + "B] Downloading direction image " + code);
 
-                InputStream is = (InputStream) bufferedEntity.getContent();
+                InputStream is = bufferedEntity.getContent();
                 FileOutputStream fos = new FileOutputStream(fileName);
 
                 try {

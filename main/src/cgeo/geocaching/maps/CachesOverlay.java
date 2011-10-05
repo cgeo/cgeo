@@ -1,8 +1,8 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCoord;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeodetail;
 import cgeo.geocaching.cgeonavigate;
 import cgeo.geocaching.cgeopopup;
@@ -285,6 +285,7 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
                 if (fromDetail == false) {
                     dialog.setPositiveButton("detail", new DialogInterface.OnClickListener() {
 
+                        @Override
                         public void onClick(DialogInterface dialog, int id) {
                             Intent cachesIntent = new Intent(context, cgeodetail.class);
                             cachesIntent.putExtra("geocode", coordinate.geocode.toUpperCase());
@@ -296,6 +297,7 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
                 } else {
                     dialog.setPositiveButton("navigate", new DialogInterface.OnClickListener() {
 
+                        @Override
                         public void onClick(DialogInterface dialog, int id) {
                             cgeonavigate navigateActivity = new cgeonavigate();
 
@@ -324,6 +326,7 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
                 dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ntype: " + waypointType);
                 dialog.setPositiveButton("navigate", new DialogInterface.OnClickListener() {
 
+                    @Override
                     public void onClick(DialogInterface dialog, int id) {
                         cgeonavigate navigateActivity = new cgeonavigate();
 
@@ -343,6 +346,7 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
 
             dialog.setNegativeButton("dismiss", new DialogInterface.OnClickListener() {
 
+                @Override
                 public void onClick(DialogInterface dialog, int id) {
                     dialog.cancel();
                 }
