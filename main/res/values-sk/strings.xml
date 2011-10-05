@@ -128,6 +128,8 @@
   <string name="err_missing_auth">Nevyplnené používateľské meno a/alebo heslo.</string>
   <string name="err_wrong">Prihlasovacie údaje sú nesprávne</string>
   <string name="err_license">Používateľ nepotvrdil súhlas s licenčnou dohodou serveru Geocaching.com, takže c:geo nemôže načítať koordináty skrýše.</string>
+  <string name="err_unpublished">Požadovaná skrýša nebola publikovaná</string>
+  <string name="err_premium_only">Skrýša je dostupná iba pre platiacich používateľov Geocaching.com</string>
   <string name="err_store">Prepáčte, c:geo nemôže uložiť skrýšu.</string>
   <string name="err_drop">Prepáčte, c:geo nemôže zmazať skrýšu.</string>
   <string name="err_title_problem">Problém</string>
@@ -434,12 +436,15 @@
   <string name="init_cleared">Prihlasovacie údaje zmazané.</string>
   <string name="init_backup">Záloha</string>
   <string name="init_backup_backup">Zálohovať</string>
+  <string name="init_backup_running">Vytváranie zálohy databázy skrýš…</string>
   <string name="init_backup_note">Táto voľba zálohuje/obnoví databázu zo skrýšami a trasami, bez nastavení. Vaše údaje pre prihlásenie (heslá) neopustia túto aplikáciu.</string>
   <string name="init_backup_restore">Obnoviť</string>
   <string name="init_backup_success">Databáza c:geo bola úspešne skopírovaná do súboru</string>
   <string name="init_backup_failed">Záloha databázy c:geo zlyhala.</string>
+  <string name="init_backup_unnecessary">Databáza je prázdna, záloha nie je potrebná.</string>
   <string name="init_restore_success">Úspešne obnovené.</string>
   <string name="init_restore_failed">Obnova zlyhala.</string>
+  <string name="init_restore_running">Obnovovanie databázy skrýš…</string>
   <string name="init_backup_last">Posledná dostupná záloha</string>
   <string name="init_backup_last_no">Neexistuje súbor zo zálohou.</string>
   <string name="init_mapsources">Mapové zdroje</string> <!-- since: 2.26 RC3 -->
@@ -595,7 +600,10 @@
   <string name="file_title_searching">Vyhľadávanie</string>
 
   <!-- gpx -->
-  <string name="gpx_import_loading_stored">nahrávanie skrýš z .gpx súboru\nuložených:</string>
+  <string name="gpx_import_loading_caches">Načítanie skrýš z .gpx súboru\nNačítané:</string>
+  <string name="gpx_import_loading_waypoints">Načítanie bodov trasy z .gpx súboru\nNačítané:</string>
+  <string name="gpx_import_storing">Zapisovanie skrýš do databázy\nZapísané:</string>
+  <string name="gpx_import_loading_stored">Nahrávanie skrýš z .gpx súboru\nUložených:</string>
   <string name="gpx_import_no_files">c:geo nenašlo žiaden .gpx súbor</string>
   <string name="gpx_import_caches_imported">skrýše importované</string>
   <string name="gpx_import_loading">Načítanie skrýš z .gpx súboru</string>
@@ -694,6 +702,7 @@
   <string name="search_tb_hint">Identifikácia trasovateľnej</string>
   <string name="search_tb_button">Hľadať trasovateľné</string>
   <string name="search_destination">Cieľ</string>
+  <string name="search_some_destination">Nejaký cieľ</string>
   <string name="search_direction_rel">Od tejto polohy</string>
   <string name="search_lat">šírka</string>
   <string name="search_lon">dĺžka</string>
@@ -739,7 +748,7 @@
   <string name="use_gps">Použiť GPS</string>
   <string name="use_compass">Použiť kompas</string>
   <string name="destination_select">Vyberte cieľ</string>
-  <string name="destination_set">Cieľ nastavený</string>
+  <string name="destination_set">Nastaviť cieľ</string>
 
   <!-- license -->
   <string name="license">Licencia</string>
