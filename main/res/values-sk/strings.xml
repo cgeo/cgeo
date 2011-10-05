@@ -249,7 +249,7 @@
   <string name="loc_net">sieť</string>
   <string name="loc_gps">GPS</string>
   <string name="loc_sat">sat</string>
-  <string name="loc_trying">zisťujem pozíciu</string>
+  <string name="loc_trying">zisťovanie pozície</string>
   <string name="loc_no_addr">neznáma adresa</string>
 
   <!-- standard menu -->
@@ -279,7 +279,7 @@
   <string name="caches_more_caches_no">Žiadne ďalšie skrýše</string>
   <string name="caches_more_caches_loading">Načítanie skrýš…</string>
   <string name="caches_downloading">Sťahovanie skrýš…\nOdhad:</string>
-  <string name="caches_progress_loading_title">Načítavanie skrýš</string>
+  <string name="caches_progress_loading_title">Načítanie skrýš</string>
   <string name="caches_progress_loading_text">Skrýš uložená v zariadení</string>
   <string name="caches_eta_ltm">menej než minúta</string>
   <string name="caches_eta_mins"> minúty</string>
@@ -288,7 +288,7 @@
   <string name="caches_store_offline">Uložiť offline</string>
   <string name="caches_store_selected">Uložiť vybraté</string>
   <string name="caches_stored">Uložené</string>
-  <string name="caches_history">história</string>
+  <string name="caches_history">História</string>
   <string name="caches_on_map">Zobraziť na mape</string>
   <string name="caches_sort">Zoradiť</string> <!-- since: 2.10 RC2 -->
   <string name="caches_sort_title">Zoradiť podľa</string> <!-- since: 2.10 RC3 -->
@@ -316,7 +316,7 @@
   <string name="caches_drop_all">Zmazať všetky</string>
   <string name="caches_drop_all_ask">Naozaj chcete zmazať všetky skrýše zo zariadenia?</string>
   <string name="caches_drop_stored">Zmazať uložené</string>
-  <string name="caches_drop_progress">Odstraňovanie skrýší</string>
+  <string name="caches_drop_progress">Odstraňovanie skrýš</string>
   <string name="caches_refresh_selected">Obnoviť vybraté</string>
   <string name="caches_refresh_all">Obnoviť všetky</string>
   <string name="caches_move_selected">Presunúť vybrané</string>
@@ -527,6 +527,13 @@
   <string name="cache_hint">Nápoveda</string>
   <string name="cache_logs">Logbook</string>
   <string name="cache_dialog_loading_details">Načítanie detailov skrýše…</string>
+  <string name="cache_dialog_loading_details_status_loadpage">Načítanie stránky</string>
+  <string name="cache_dialog_loading_details_status_details">Spracovanie detailov</string>
+  <string name="cache_dialog_loading_details_status_spoilers">Načítanie spoilerových obrázkov</string>
+  <string name="cache_dialog_loading_details_status_logs">Načítanie logov</string>
+  <string name="cache_dialog_loading_details_status_waypoints">Spracovanie bodov trasy</string>
+  <string name="cache_dialog_loading_details_status_gcvote">Načítanie GCVote</string>
+  <string name="cache_dialog_loading_details_status_render">Vykreslovanie pohľadu</string>
   <string name="cache_dialog_loading_description">Načítanie popisu skrýše…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">Ukladanie skrýše pre použitie offline…</string>
@@ -678,7 +685,7 @@
   <string name="map_token_err">Pretože c:geo bola schopná stiahnuť iba čiastočné údaje, súradnice skrýš môžu byť nepresné.</string> <!-- since: 2.26 RC3 -->
 
   <!-- search -->
-  <string name="search_bar_hint">Hľadanie skrýší</string>
+  <string name="search_bar_hint">Hľadanie skrýš</string>
   <string name="search_bar_desc">Skrýše (GC kód, kľúčové slovo), trasovateľné predmety (TB-kód)</string>
   <string name="search_coordinates">Súradnice</string>
   <string name="search_coordinates_button">Hľadať podľa súradníc</string>
