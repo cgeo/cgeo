@@ -2,7 +2,7 @@ package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -56,7 +56,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
                 return app.invoke(geo, activity, res, cache,
                         searchId, waypoint, destination);
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "NavigationAppFactory.onMenuItemSelected: " + e.toString());
+                Log.e(Settings.tag, "NavigationAppFactory.onMenuItemSelected: " + e.toString());
             }
         }
         return false;

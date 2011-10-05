@@ -129,7 +129,7 @@ public class cgeodetail extends AbstractActivity {
             } catch (Exception e) {
                 showToast(res.getString(R.string.err_store_failed));
 
-                Log.e(cgSettings.tag, "cgeodetail.storeCacheHandler: " + e.toString());
+                Log.e(Settings.tag, "cgeodetail.storeCacheHandler: " + e.toString());
             }
 
             setView();
@@ -146,7 +146,7 @@ public class cgeodetail extends AbstractActivity {
             } catch (Exception e) {
                 showToast(res.getString(R.string.err_refresh_failed));
 
-                Log.e(cgSettings.tag, "cgeodetail.refreshCacheHandler: " + e.toString());
+                Log.e(Settings.tag, "cgeodetail.refreshCacheHandler: " + e.toString());
             }
 
             setView();
@@ -161,7 +161,7 @@ public class cgeodetail extends AbstractActivity {
             } catch (Exception e) {
                 showToast(res.getString(R.string.err_drop_failed));
 
-                Log.e(cgSettings.tag, "cgeodetail.dropCacheHandler: " + e.toString());
+                Log.e(Settings.tag, "cgeodetail.dropCacheHandler: " + e.toString());
             }
 
             setView();
@@ -171,31 +171,43 @@ public class cgeodetail extends AbstractActivity {
     private Handler loadCacheHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if (searchId == null) {
-                showToast(res.getString(R.string.err_dwld_details_failed));
-
-                finish();
-                return;
-            }
-
-            if (app.getError(searchId) != null) {
-                showToast(res.getString(R.string.err_dwld_details_failed_reason) + " " + app.getError(searchId) + ".");
-
-                finish();
-                return;
-            }
-
-            setView();
-
-            if (settings.autoLoadDesc == 1) {
-                try {
-                    loadLongDesc();
-                } catch (Exception e) {
-                    // activity is not visible
+            if (cgBase.UPDATE_LOAD_PROGRESS_DETAIL == msg.what) {
+                if (waitDialog != null
+                        && waitDialog.isShowing()
+                        && msg.obj instanceof String) {
+                    waitDialog.setMessage(res.getString(R.string.cache_dialog_loading_details)
+                            + "\n\n"
+                            + (String) msg.obj);
                 }
-            }
+            } else {
+                if (searchId == null) {
+                    showToast(res.getString(R.string.err_dwld_details_failed));
 
-            (new loadMapPreview(loadMapPreviewHandler)).start();
+                    finish();
+                    return;
+                }
+
+                if (app.getError(searchId) != null) {
+                    showToast(res.getString(R.string.err_dwld_details_failed_reason) + " " + app.getError(searchId) + ".");
+
+                    finish();
+                    return;
+                }
+
+                this.obtainMessage(cgBase.UPDATE_LOAD_PROGRESS_DETAIL, res.getString(R.string.cache_dialog_loading_details_status_render)).sendToTarget();
+
+                setView();
+
+                if (Settings.isAutoLoadDescription()) {
+                    try {
+                        loadLongDesc();
+                    } catch (Exception e) {
+                        // activity is not visible
+                    }
+                }
+
+                (new loadMapPreview(loadMapPreviewHandler)).start();
+            }
         }
     };
 
@@ -244,7 +256,7 @@ public class cgeodetail extends AbstractActivity {
             if (longDesc != null) {
                 ((LinearLayout) findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
                 TextView descView = (TextView) findViewById(R.id.description);
-                if (cache.description.length() > 0) {
+                if (StringUtils.isNotBlank(cache.getDescription())) {
                     descView.setVisibility(View.VISIBLE);
                     descView.setText(longDesc, TextView.BufferType.SPANNABLE);
                     descView.setMovementMethod(LinkMovementMethod.getInstance());
@@ -339,9 +351,9 @@ public class cgeodetail extends AbstractActivity {
             String uriQuery = uri.getQuery();
 
             if (uriQuery != null) {
-                Log.i(cgSettings.tag, "Opening URI: " + uriHost + uriPath + "?" + uriQuery);
+                Log.i(Settings.tag, "Opening URI: " + uriHost + uriPath + "?" + uriQuery);
             } else {
-                Log.i(cgSettings.tag, "Opening URI: " + uriHost + uriPath);
+                Log.i(Settings.tag, "Opening URI: " + uriHost + uriPath);
             }
 
             if (uriHost.contains("geocaching.com")) {
@@ -381,13 +393,12 @@ public class cgeodetail extends AbstractActivity {
 
         try {
             if (StringUtils.isNotBlank(name)) {
-                waitDialog = ProgressDialog.show(this, name, res.getString(R.string.cache_dialog_loading_details), true);
+                waitDialog = ProgressDialog.show(this, name, res.getString(R.string.cache_dialog_loading_details), true, true);
             } else if (StringUtils.isNotBlank(geocode)) {
-                waitDialog = ProgressDialog.show(this, geocode.toUpperCase(), res.getString(R.string.cache_dialog_loading_details), true);
+                waitDialog = ProgressDialog.show(this, geocode.toUpperCase(), res.getString(R.string.cache_dialog_loading_details), true, true);
             } else {
-                waitDialog = ProgressDialog.show(this, res.getString(R.string.cache), res.getString(R.string.cache_dialog_loading_details), true);
+                waitDialog = ProgressDialog.show(this, res.getString(R.string.cache), res.getString(R.string.cache_dialog_loading_details), true, true);
             }
-            waitDialog.setCancelable(true);
         } catch (Exception e) {
             // nothing, we lost the window
         }
@@ -408,10 +419,9 @@ public class cgeodetail extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        settings.load();
 
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
+            geo = app.startGeo(this, geoUpdate, base, 0, 0);
         }
         if (!disableResumeSetView) {
             setView();
@@ -560,8 +570,11 @@ public class cgeodetail extends AbstractActivity {
             addToCalendar();
             return true;
         } else if (menuItem == 12) {
-            shareCache();
-            return true;
+            if (cache != null) {
+                cache.shareCache(this, res);
+                return true;
+            }
+            return false;
         }
         if (NavigationAppFactory.onMenuItemSelected(item, geo, this, res, cache, searchId, null, null)) {
             return true;
@@ -571,7 +584,7 @@ public class cgeodetail extends AbstractActivity {
         }
 
         int logType = menuItem - MENU_LOG_VISIT_OFFLINE;
-        cache.logOffline(this, logType, settings, base);
+        cache.logOffline(this, logType, base);
         return true;
     }
 
@@ -583,7 +596,7 @@ public class cgeodetail extends AbstractActivity {
             inflater = getLayoutInflater();
         }
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
+            geo = app.startGeo(this, geoUpdate, base, 0, 0);
         }
 
         if (searchId != null) {
@@ -610,8 +623,9 @@ public class cgeodetail extends AbstractActivity {
         cache = app.getCache(searchId);
 
         if (cache == null) {
-            if (waitDialog != null && waitDialog.isShowing())
+            if (waitDialog != null && waitDialog.isShowing()) {
                 waitDialog.dismiss();
+            }
 
             if (StringUtils.isNotBlank(geocode)) {
                 showToast(res.getString(R.string.err_detail_cache_find) + " " + geocode + ".");
@@ -655,7 +669,7 @@ public class cgeodetail extends AbstractActivity {
             itemName.setText(res.getString(R.string.cache_name));
             Spannable span = (new Spannable.Factory()).newSpannable(Html.fromHtml(cache.name).toString());
             if (cache.disabled || cache.archived) { // strike
-                span.setSpan(new StrikethroughSpan(), 0, span.toString().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                span.setSpan(new StrikethroughSpan(), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
             itemValue.setText(span);
             detailsList.addView(itemLayout);
@@ -744,7 +758,7 @@ public class cgeodetail extends AbstractActivity {
 
             itemName.setText(res.getString(R.string.cache_distance));
             if (cache.distance != null) {
-                itemValue.setText("~" + base.getHumanDistance(cache.distance));
+                itemValue.setText("~" + cgBase.getHumanDistance(cache.distance));
             } else {
                 itemValue.setText("--");
             }
@@ -831,7 +845,7 @@ public class cgeodetail extends AbstractActivity {
                 itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
                 itemName.setText(res.getString(R.string.cache_coordinates));
-                itemValue.setText(cache.latitudeString + " | " + cache.longitudeString);
+                itemValue.setText(cache.getLatitude() + " | " + cache.getLongitude());
                 detailsList.addView(itemLayout);
             }
 
@@ -980,7 +994,7 @@ public class cgeodetail extends AbstractActivity {
                     showDesc.setOnTouchListener(null);
                     showDesc.setOnClickListener(null);
                 }
-            } else if (longDescDisplayed == false && StringUtils.isNotBlank(cache.description)) {
+            } else if (longDescDisplayed == false && StringUtils.isNotBlank(cache.getDescription())) {
                 ((LinearLayout) findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
 
                 Button showDesc = (Button) findViewById(R.id.show_description);
@@ -1068,11 +1082,11 @@ public class cgeodetail extends AbstractActivity {
             }
 
             if (geo != null && geo.coordsNow != null && cache != null && cache.coords != null) {
-                cacheDistance.setText(base.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
+                cacheDistance.setText(cgBase.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
                 cacheDistance.bringToFront();
             }
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgeodetail.setView: " + e.toString());
+            Log.e(Settings.tag, "cgeodetail.setView: " + e.toString());
         }
 
         if (waitDialog != null && waitDialog.isShowing())
@@ -1110,8 +1124,8 @@ public class cgeodetail extends AbstractActivity {
     }
 
     private void parseLongDescription() {
-        if (longDesc == null && cache != null && cache.description != null) {
-            longDesc = Html.fromHtml(cache.description.trim(), new cgHtmlImg(this, geocode, true, cache.reason, false), new UnknownTagsHandler());
+        if (longDesc == null && cache != null && cache.getDescription() != null) {
+            longDesc = Html.fromHtml(cache.getDescription().trim(), new cgHtmlImg(this, geocode, true, cache.reason, false), new UnknownTagsHandler());
         }
     }
 
@@ -1231,29 +1245,36 @@ public class cgeodetail extends AbstractActivity {
                 LinearLayout logLayout = (LinearLayout) rowView.findViewById(R.id.log_layout);
 
                 if ((log.logImages != null) && (!log.logImages.isEmpty())) {
+
+                    final ArrayList<cgImage> logImages = new ArrayList<cgImage>(log.logImages);
+
+                    final View.OnClickListener listener = new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent logImgIntent = new Intent(cgeodetail.this, cgeoimages.class);
+                            logImgIntent.putExtra("geocode", geocode.toUpperCase());
+                            logImgIntent.putExtra("type", cgeoimages.LOG_IMAGES);
+                            logImgIntent.putParcelableArrayListExtra("images", logImages);
+                            startActivity(logImgIntent);
+                        }
+                    };
+
+                    ArrayList<String> titles = new ArrayList<String>();
                     for (int i_img_cnt = 0; i_img_cnt < log.logImages.size(); i_img_cnt++) {
                         String img_title = log.logImages.get(i_img_cnt).title;
-                        if (img_title.equals("")) {
-                            img_title = res.getString(R.string.cache_log_image_default_title);
+                        if (!StringUtils.isBlank(img_title)) {
+                            titles.add(img_title);
                         }
-                        final String title = img_title;
-                        final String url = log.logImages.get(i_img_cnt).url;
-                        LinearLayout log_imgView = (LinearLayout) inflater.inflate(R.layout.log_img, null);
-                        TextView log_img_title = (TextView) log_imgView.findViewById(R.id.title);
-                        log_img_title.setText(title);
-                        log_img_title.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent logImgIntent = new Intent(cgeodetail.this, cgeoimages.class);
-                                logImgIntent.putExtra("geocode", geocode.toUpperCase());
-                                logImgIntent.putExtra("type", cgeoimages.LOG_IMAGE);
-                                logImgIntent.putExtra("title", title);
-                                logImgIntent.putExtra("url", url);
-                                startActivity(logImgIntent);
-                            }
-                        });
-                        logLayout.addView(log_imgView);
                     }
+                    if (titles.isEmpty()) {
+                        titles.add(res.getString(R.string.cache_log_image_default_title));
+                    }
+
+                    LinearLayout log_imgView = (LinearLayout) inflater.inflate(R.layout.log_img, null);
+                    TextView log_img_title = (TextView) log_imgView.findViewById(R.id.title);
+                    log_img_title.setText(StringUtils.join(titles.toArray(new String[titles.size()]), ", "));
+                    log_img_title.setOnClickListener(listener);
+                    logLayout.addView(log_imgView);
                 }
 
                 // Add colored mark
@@ -1315,17 +1336,10 @@ public class cgeodetail extends AbstractActivity {
 
         @Override
         public void run() {
-            Map<String, String> params = new HashMap<String, String>();
-            if (StringUtils.isNotBlank(geocode)) {
-                params.put("geocode", geocode);
-            } else if (StringUtils.isNotBlank(guid)) {
-                params.put("guid", guid);
-            } else {
+            if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
                 return;
             }
-
-            searchId = base.searchByGeocode(params, 0, false);
-
+            searchId = base.searchByGeocode(geocode, StringUtils.isBlank(geocode) ? guid : null, 0, false, handler);
             handler.sendMessage(new Message());
         }
     }
@@ -1360,7 +1374,7 @@ public class cgeodetail extends AbstractActivity {
                 Message message = handler.obtainMessage(0, image);
                 handler.sendMessage(message);
             } catch (Exception e) {
-                Log.w(cgSettings.tag, "cgeodetail.loadMapPreview.run: " + e.toString());
+                Log.w(Settings.tag, "cgeodetail.loadMapPreview.run: " + e.toString());
             }
         }
     }
@@ -1384,7 +1398,7 @@ public class cgeodetail extends AbstractActivity {
 
         @Override
         public void run() {
-            if (cache == null || cache.description == null || handler == null) {
+            if (cache == null || cache.getDescription() == null || handler == null) {
                 return;
             }
             parseLongDescription();
@@ -1408,7 +1422,7 @@ public class cgeodetail extends AbstractActivity {
             coords.coords = cache.coords;
             coordinates.add(coords);
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgeodetail.getCoordinates (cache): " + e.toString());
+            Log.e(Settings.tag, "cgeodetail.getCoordinates (cache): " + e.toString());
         }
 
         try {
@@ -1425,7 +1439,7 @@ public class cgeodetail extends AbstractActivity {
                 coordinates.add(coords);
             }
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgeodetail.getCoordinates (waypoint): " + e.toString());
+            Log.e(Settings.tag, "cgeodetail.getCoordinates (waypoint): " + e.toString());
         }
 
         return coordinates;
@@ -1501,8 +1515,7 @@ public class cgeodetail extends AbstractActivity {
             eventDate.setSeconds(0);
 
             StringBuilder description = new StringBuilder();
-            description.append("http://coord.info/");
-            description.append(cache.geocode.toUpperCase());
+            description.append(cache.getUrl());
             description.append("\n\n");
             if (StringUtils.isNotBlank(cache.shortdesc)) {
                 description.append(Html.fromHtml(cache.shortdesc).toString());
@@ -1520,8 +1533,8 @@ public class cgeodetail extends AbstractActivity {
             event.put("title", Html.fromHtml(cache.name).toString());
             event.put("description", description.toString());
             String location = "";
-            if (StringUtils.isNotBlank(cache.latitudeString) && StringUtils.isNotBlank(cache.longitudeString)) {
-                location += cache.latitudeString + " " + cache.longitudeString;
+            if (cache.coords != null) {
+                location += cache.getLatitude() + " " + cache.getLongitude();
             }
             if (StringUtils.isNotBlank(cache.location)) {
                 boolean addParenteses = false;
@@ -1547,7 +1560,7 @@ public class cgeodetail extends AbstractActivity {
         } catch (Exception e) {
             showToast(res.getString(R.string.event_fail));
 
-            Log.e(cgSettings.tag, "cgeodetail.addToCalendarFn: " + e.toString());
+            Log.e(Settings.tag, "cgeodetail.addToCalendarFn: " + e.toString());
         }
     }
 
@@ -1567,29 +1580,6 @@ public class cgeodetail extends AbstractActivity {
         cgeonavigate.coordinates.clear();
         cgeonavigate.coordinates.addAll(getCoordinates());
         startActivity(navigateIntent);
-    }
-
-    public void shareCache() {
-        if (geocode == null && cache == null) {
-            return;
-        }
-
-        final Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-
-        if (cache != null && cache.geocode != null) {
-            String subject = cache.geocode.toUpperCase();
-            if (StringUtils.isNotBlank(cache.name)) {
-                subject = subject + " - " + cache.name;
-            }
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Geocache " + subject);
-            intent.putExtra(Intent.EXTRA_TEXT, "http://coord.info/" + cache.geocode.toUpperCase());
-        } else if (geocode != null) {
-            intent.putExtra(Intent.EXTRA_SUBJECT, "Geocache " + geocode.toUpperCase());
-            intent.putExtra(Intent.EXTRA_TEXT, "http://coord.info/" + geocode.toUpperCase());
-        }
-
-        startActivity(Intent.createChooser(intent, res.getText(R.string.action_bar_share_title)));
     }
 
     private class waypointInfo implements View.OnClickListener {
@@ -1618,7 +1608,8 @@ public class cgeodetail extends AbstractActivity {
 
         Intent spoilersIntent = new Intent(this, cgeoimages.class);
         spoilersIntent.putExtra("geocode", geocode.toUpperCase());
-        spoilersIntent.putExtra("type", cgeoimages.SPOILER_IMAGE);
+        spoilersIntent.putExtra("type", cgeoimages.SPOILER_IMAGES);
+        spoilersIntent.putParcelableArrayListExtra("images", cache.spoilers);
         startActivity(spoilersIntent);
     }
 
@@ -1644,7 +1635,7 @@ public class cgeodetail extends AbstractActivity {
                 StringBuilder dist = new StringBuilder();
 
                 if (geo.coordsNow != null && cache != null && cache.coords != null) {
-                    dist.append(base.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
+                    dist.append(cgBase.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
                 }
 
                 if (cache != null && cache.elevation != null) {
@@ -1655,12 +1646,12 @@ public class cgeodetail extends AbstractActivity {
                         } else if (diff < 0) {
                             dist.append(" ↘");
                         }
-                        if (settings.units == cgSettings.unitsImperial) {
-                            dist.append(String.format(Locale.getDefault(), "%.0f", (Math.abs(diff) * 3.2808399)));
-                            dist.append(" ft");
-                        } else {
+                        if (Settings.isUseMetricUnits()) {
                             dist.append(String.format(Locale.getDefault(), "%.0f", (Math.abs(diff))));
                             dist.append(" m");
+                        } else {
+                            dist.append(String.format(Locale.getDefault(), "%.0f", (Math.abs(diff) * 3.2808399)));
+                            dist.append(" ft");
                         }
                     }
                 }
@@ -1668,7 +1659,7 @@ public class cgeodetail extends AbstractActivity {
                 cacheDistance.setText(dist.toString());
                 cacheDistance.bringToFront();
             } catch (Exception e) {
-                Log.w(cgSettings.tag, "Failed to update location.");
+                Log.w(Settings.tag, "Failed to update location.");
             }
         }
     }
@@ -1688,7 +1679,7 @@ public class cgeodetail extends AbstractActivity {
                     startActivity(trackablesIntent);
                 }
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgeodetail.selectTrackable: " + e.toString());
+                Log.e(Settings.tag, "cgeodetail.selectTrackable: " + e.toString());
             }
         }
     }
@@ -1763,10 +1754,7 @@ public class cgeodetail extends AbstractActivity {
         @Override
         public void run() {
             app.removeCacheFromCache(geocode);
-
-            final Map<String, String> params = new HashMap<String, String>();
-            params.put("geocode", cache.geocode);
-            searchId = base.searchByGeocode(params, 0, true);
+            searchId = base.searchByGeocode(cache.geocode, null, 0, true, null);
 
             handler.sendEmptyMessage(0);
         }
@@ -1800,7 +1788,7 @@ public class cgeodetail extends AbstractActivity {
 
         @Override
         public void run() {
-            cgBase.dropCache(app, cgeodetail.this, cache, handler);
+            cgBase.dropCache(app, cache, handler);
         }
     }
 
@@ -1858,7 +1846,7 @@ public class cgeodetail extends AbstractActivity {
 
         @Override
         public void run() {
-            handler.sendEmptyMessage(base.addToWatchlist(cache));
+            handler.sendEmptyMessage(cgBase.addToWatchlist(cache));
         }
     }
 
@@ -1872,7 +1860,7 @@ public class cgeodetail extends AbstractActivity {
 
         @Override
         public void run() {
-            handler.sendEmptyMessage(base.removeFromWatchlist(cache));
+            handler.sendEmptyMessage(cgBase.removeFromWatchlist(cache));
         }
     }
 
@@ -1935,6 +1923,10 @@ public class cgeodetail extends AbstractActivity {
         }
     }
 
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void goCompass(View view) {
         if (cache == null || cache.coords == null) {
             showToast(res.getString(R.string.cache_coordinates_no));

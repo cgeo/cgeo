@@ -1,12 +1,14 @@
-package cgeo.geocaching.test;
+package cgeo.geocaching;
+
+import cgeo.geocaching.cgWaypoint;
+
+import android.test.AndroidTestCase;
 
 import junit.framework.Assert;
-import android.test.AndroidTestCase;
-import cgeo.geocaching.cgWaypoint;
 
 public class cgWaypointTest extends AndroidTestCase {
 
-	public void testOrder() {
+    public static void testOrder() {
 		final cgWaypoint wp1 = new cgWaypoint();
 		final cgWaypoint wp2 = new cgWaypoint();
 

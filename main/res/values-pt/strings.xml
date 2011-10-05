@@ -117,7 +117,7 @@
   <string name="err_none">Ok</string>
   <string name="err_start">Comunicação não iniciada</string>
   <string name="err_parse">Falha na análise da página de login</string>
-  <string name="err_server">Falha na ligação a geocaching.com (servidor ou ligação em baixo?)</string>
+  <string name="err_server">Falha na ligação a Geocaching.com (servidor ou ligação em baixo?)</string>
   <string name="err_login">Informação de login não gravada</string>
   <string name="err_login_failed">Desculpe, o c:geo não consegue fazer login.</string>
   <string name="err_unknown">Erro desconhecido</string>
@@ -136,7 +136,7 @@
   <string name="err_detail_cache_find_next">Desculpe, o c:geo não encontra as próximas geocaches.</string>
   <string name="err_detail_cache_forgot">Desculpe, o c:geo esqueceu a geocache pretendida.</string>
   <string name="err_detail_cache_forgot_visit">Desculpe, o c:geo esqueceu a cache que visitou.</string>
-  <string name="err_detail_cache_language">O c:geo não consegue ler alguns detalhes da cache. Verifique que o site geocaching.com está parameterizado para inglês. Infelizmente c:geo não percebe outros idiomas.</string>
+  <string name="err_detail_cache_language">O c:geo não consegue ler alguns detalhes da cache. Verifique que o site Geocaching.com está parameterizado para inglês. Infelizmente c:geo não percebe outros idiomas.</string>
   <string name="err_detail_no_spoiler">O c:geo não encontrou images spoiler para esta cache.</string>
   <string name="err_detail_no_map_static">O c:geo não encontrou mapas estáticos para esta cache.</string>
   <string name="err_detail_not_load_map_static">Desculpe, o c:geo falhou o carregamento de mapas estáticos.</string>
@@ -222,8 +222,6 @@
   <string name="warn_search_help_user">Preencha o nome de utilizador em Geocaching.com.</string>
   <string name="warn_search_help_tb">Preencha o código do trackable. Por exemplo \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Por favor, preencha algum texto para o registo.</string>
-  <string name="warn_load_log_image">Desculpe, o c:geo falhou o carregamento da imagem do log.</string>
-  <string name="warn_load_spoiler_image">Desculpe, o c:geo falhou o carregamento da imagem spoiler.</string>
 
   <string name="info_altitude">Altitude corrente</string>
   <string name="info_distance">Distância percorrida</string>
@@ -379,7 +377,7 @@
   <string name="init_passvote">Password</string>
   <string name="init_login">Verificar login</string>
   <string name="init_login_popup">Login</string>
-  <string name="init_login_popup_working">Logging to geocaching.com…</string>
+  <string name="init_login_popup_working">Logging to Geocaching.com…</string>
   <string name="init_login_popup_ok">Login ok.</string>
   <string name="init_login_popup_failed">Login falhado.</string>
   <string name="init_login_popup_failed_reason">Login falhado porque </string>
@@ -864,7 +862,7 @@
   <string name="attribute_food_no">Sem comida por perto</string>
   
   <!-- next things -->
-  <string name="legal_note">Para utilizar os serviços de geocaching.com, tem de concordar com os termos e condições da <a href="http://www.geocaching.com/about/termsofuse.aspx">declaração Groundspeak</a>.</string>
+  <string name="legal_note">Para utilizar os serviços de Geocaching.com, tem de concordar com os termos e condições da <a href="http://www.geocaching.com/about/termsofuse.aspx">declaração Groundspeak</a>.</string>
   <string name="author">Autor: <a href="http://carnero.cc/">carnero</a></string>
   <string name="support">Suporte: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">Site na internet: <a href="http://cgeo.org/">cgeo.org</a></string>

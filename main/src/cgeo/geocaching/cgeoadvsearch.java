@@ -77,7 +77,6 @@ public class cgeoadvsearch extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        settings.load();
         init();
     }
 
@@ -133,28 +132,27 @@ public class cgeoadvsearch extends AbstractActivity {
                 final Intent cachesIntent = new Intent(this, cgeocaches.class);
                 cachesIntent.putExtra("type", "keyword");
                 cachesIntent.putExtra("keyword", query);
-                cachesIntent.putExtra("cachetype", settings.cacheType);
+                cachesIntent.putExtra("cachetype", Settings.getCacheType());
                 startActivity(cachesIntent);
 
                 found = true;
             }
         } catch (Exception e) {
-            Log.w(cgSettings.tag, "cgeoadvsearch.instantSearch: " + e.toString());
+            Log.w(Settings.tag, "cgeoadvsearch.instantSearch: " + e.toString());
         }
 
         return found;
     }
 
     private void init() {
-        settings.getLogin();
-        settings.reloadCacheType();
+        Settings.getLogin();
 
-        if (settings.cacheType != null && cgBase.cacheTypesInv.containsKey(settings.cacheType) == false) {
-            settings.setCacheType(null);
+        if (Settings.getCacheType() != null && cgBase.cacheTypesInv.containsKey(Settings.getCacheType()) == false) {
+            Settings.setCacheType(null);
         }
 
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
+            geo = app.startGeo(this, geoUpdate, base, 0, 0);
         }
 
         ((Button) findViewById(R.id.buttonLatitude)).setOnClickListener(new findByCoordsAction());
@@ -228,7 +226,7 @@ public class cgeoadvsearch extends AbstractActivity {
                     lonEdit.setHint(cgBase.formatLongitude(geo.coordsNow.getLongitude(), false));
                 }
             } catch (Exception e) {
-                Log.w(cgSettings.tag, "Failed to update location.");
+                Log.w(Settings.tag, "Failed to update location.");
             }
         }
     }
@@ -237,7 +235,7 @@ public class cgeoadvsearch extends AbstractActivity {
 
         @Override
         public void onClick(View arg0) {
-            cgeocoords coordsDialog = new cgeocoords(cgeoadvsearch.this, settings, null, geo);
+            cgeocoords coordsDialog = new cgeocoords(cgeoadvsearch.this, null, geo);
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
                 @Override
@@ -274,7 +272,7 @@ public class cgeoadvsearch extends AbstractActivity {
                 cachesIntent.putExtra("latitude", GeopointParser.parseLatitude(latText));
                 cachesIntent.putExtra("longitude", GeopointParser.parseLongitude(lonText));
                 cachesIntent.putExtra("type", "coordinate");
-                cachesIntent.putExtra("cachetype", settings.cacheType);
+                cachesIntent.putExtra("cachetype", Settings.getCacheType());
                 startActivity(cachesIntent);
             } catch (GeopointParser.ParseException e) {
                 showToast(res.getString(e.resource));
@@ -314,7 +312,7 @@ public class cgeoadvsearch extends AbstractActivity {
         final Intent cachesIntent = new Intent(this, cgeocaches.class);
         cachesIntent.putExtra("type", "keyword");
         cachesIntent.putExtra("keyword", keyText);
-        cachesIntent.putExtra("cachetype", settings.cacheType);
+        cachesIntent.putExtra("cachetype", Settings.getCacheType());
         startActivity(cachesIntent);
     }
 
@@ -382,7 +380,7 @@ public class cgeoadvsearch extends AbstractActivity {
         final Intent cachesIntent = new Intent(this, cgeocaches.class);
         cachesIntent.putExtra("type", "username");
         cachesIntent.putExtra("username", usernameText);
-        cachesIntent.putExtra("cachetype", settings.cacheType);
+        cachesIntent.putExtra("cachetype", Settings.getCacheType());
         startActivity(cachesIntent);
     }
 
@@ -414,7 +412,7 @@ public class cgeoadvsearch extends AbstractActivity {
         final Intent cachesIntent = new Intent(this, cgeocaches.class);
         cachesIntent.putExtra("type", "owner");
         cachesIntent.putExtra("username", usernameText);
-        cachesIntent.putExtra("cachetype", settings.cacheType);
+        cachesIntent.putExtra("cachetype", Settings.getCacheType());
         startActivity(cachesIntent);
     }
 
@@ -491,7 +489,7 @@ public class cgeoadvsearch extends AbstractActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == MENU_SEARCH_OWN_CACHES) {
-            findByOwnerFn(settings.getUsername());
+            findByOwnerFn(Settings.getUsername());
             return true;
         }
         return super.onOptionsItemSelected(item);

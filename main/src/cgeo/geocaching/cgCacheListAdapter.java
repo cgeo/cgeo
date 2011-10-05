@@ -16,6 +16,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.text.Spannable;
+import android.text.Spanned;
 import android.text.style.StrikethroughSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -46,7 +47,6 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
     private Resources res = null;
     private List<cgCache> list = null;
-    private cgSettings settings = null;
     private cgCacheView holder = null;
     private LayoutInflater inflater = null;
     private Activity activity = null;
@@ -71,12 +71,11 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
     private cgFilter currentFilter = null;
     private List<cgCache> originalList = null;
 
-    public cgCacheListAdapter(Activity activityIn, cgSettings settingsIn, List<cgCache> listIn, cgBase baseIn) {
+    public cgCacheListAdapter(Activity activityIn, List<cgCache> listIn, cgBase baseIn) {
         super(activityIn, 0, listIn);
 
         res = activityIn.getResources();
         activity = activityIn;
-        settings = settingsIn;
         list = listIn;
         base = baseIn;
 
@@ -90,14 +89,14 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             }
         }
 
-        if (settings.skin == 0) {
-            ratingBcgs[0] = R.drawable.favourite_background_red_dark;
-            ratingBcgs[1] = R.drawable.favourite_background_orange_dark;
-            ratingBcgs[2] = R.drawable.favourite_background_green_dark;
-        } else {
+        if (Settings.isLightSkin()) {
             ratingBcgs[0] = R.drawable.favourite_background_red_light;
             ratingBcgs[1] = R.drawable.favourite_background_orange_light;
             ratingBcgs[2] = R.drawable.favourite_background_green_light;
+        } else {
+            ratingBcgs[0] = R.drawable.favourite_background_red_dark;
+            ratingBcgs[1] = R.drawable.favourite_background_orange_dark;
+            ratingBcgs[2] = R.drawable.favourite_background_green_dark;
         }
     }
 
@@ -265,7 +264,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             }
             notifyDataSetChanged();
         } catch (Exception e) {
-            Log.w(cgSettings.tag, "cgCacheListAdapter.setActualCoordinates: failed to sort caches in list");
+            Log.w(Settings.tag, "cgCacheListAdapter.setActualCoordinates: failed to sort caches in list");
         }
     }
 
@@ -286,7 +285,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
                 }
                 notifyDataSetChanged();
             } catch (Exception e) {
-                Log.w(cgSettings.tag, "cgCacheListAdapter.setActualCoordinates: failed to sort caches in list");
+                Log.w(Settings.tag, "cgCacheListAdapter.setActualCoordinates: failed to sort caches in list");
             }
 
             lastSort = System.currentTimeMillis();
@@ -353,45 +352,47 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
     }
 
     @Override
-    public View getView(int position, View rowView, ViewGroup parent) {
+    public View getView(final int position, final View rowView, final ViewGroup parent) {
         if (inflater == null) {
             inflater = ((Activity) getContext()).getLayoutInflater();
         }
 
         if (position > getCount()) {
-            Log.w(cgSettings.tag, "cgCacheListAdapter.getView: Attempt to access missing item #" + position);
+            Log.w(Settings.tag, "cgCacheListAdapter.getView: Attempt to access missing item #" + position);
             return null;
         }
 
         cgCache cache = getItem(position);
 
-        if (rowView == null) {
-            rowView = (View) inflater.inflate(R.layout.cache, null);
+        View v = rowView;
+
+        if (v == null) {
+            v = (View) inflater.inflate(R.layout.cache, null);
 
             holder = new cgCacheView();
-            holder.oneCache = (RelativeLayout) rowView.findViewById(R.id.one_cache);
-            holder.checkbox = (CheckBox) rowView.findViewById(R.id.checkbox);
-            holder.oneInfo = (RelativeLayout) rowView.findViewById(R.id.one_info);
-            holder.oneCheckbox = (RelativeLayout) rowView.findViewById(R.id.one_checkbox);
-            holder.logStatusMark = (ImageView) rowView.findViewById(R.id.log_status_mark);
-            holder.oneCache = (RelativeLayout) rowView.findViewById(R.id.one_cache);
-            holder.text = (TextView) rowView.findViewById(R.id.text);
-            holder.directionLayout = (RelativeLayout) rowView.findViewById(R.id.direction_layout);
-            holder.distance = (cgDistanceView) rowView.findViewById(R.id.distance);
-            holder.direction = (cgCompassMini) rowView.findViewById(R.id.direction);
-            holder.dirImgLayout = (RelativeLayout) rowView.findViewById(R.id.dirimg_layout);
-            holder.dirImg = (ImageView) rowView.findViewById(R.id.dirimg);
-            holder.inventory = (RelativeLayout) rowView.findViewById(R.id.inventory);
-            holder.favourite = (TextView) rowView.findViewById(R.id.favourite);
-            holder.info = (TextView) rowView.findViewById(R.id.info);
+            holder.oneCache = (RelativeLayout) v.findViewById(R.id.one_cache);
+            holder.checkbox = (CheckBox) v.findViewById(R.id.checkbox);
+            holder.oneInfo = (RelativeLayout) v.findViewById(R.id.one_info);
+            holder.oneCheckbox = (RelativeLayout) v.findViewById(R.id.one_checkbox);
+            holder.logStatusMark = (ImageView) v.findViewById(R.id.log_status_mark);
+            holder.oneCache = (RelativeLayout) v.findViewById(R.id.one_cache);
+            holder.text = (TextView) v.findViewById(R.id.text);
+            holder.directionLayout = (RelativeLayout) v.findViewById(R.id.direction_layout);
+            holder.distance = (cgDistanceView) v.findViewById(R.id.distance);
+            holder.direction = (cgCompassMini) v.findViewById(R.id.direction);
+            holder.dirImgLayout = (RelativeLayout) v.findViewById(R.id.dirimg_layout);
+            holder.dirImg = (ImageView) v.findViewById(R.id.dirimg);
+            holder.inventory = (RelativeLayout) v.findViewById(R.id.inventory);
+            holder.favourite = (TextView) v.findViewById(R.id.favourite);
+            holder.info = (TextView) v.findViewById(R.id.info);
 
-            rowView.setTag(holder);
+            v.setTag(holder);
         } else {
-            holder = (cgCacheView) rowView.getTag();
+            holder = (cgCacheView) v.getTag();
         }
 
         if (cache.own) {
-            if (settings.skin == 1) {
+            if (Settings.isLightSkin()) {
                 holder.oneInfo.setBackgroundResource(R.color.owncache_background_light);
                 holder.oneCheckbox.setBackgroundResource(R.color.owncache_background_light);
             } else {
@@ -399,7 +400,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
                 holder.oneCheckbox.setBackgroundResource(R.color.owncache_background_dark);
             }
         } else {
-            if (settings.skin == 1) {
+            if (Settings.isLightSkin()) {
                 holder.oneInfo.setBackgroundResource(R.color.background_light);
                 holder.oneCheckbox.setBackgroundResource(R.color.background_light);
             } else {
@@ -409,10 +410,10 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         }
 
         final touchListener touchLst = new touchListener(cache.geocode, cache.name, cache);
-        rowView.setOnClickListener(touchLst);
-        rowView.setOnLongClickListener(touchLst);
-        rowView.setOnTouchListener(touchLst);
-        rowView.setLongClickable(true);
+        v.setOnClickListener(touchLst);
+        v.setOnLongClickListener(touchLst);
+        v.setOnTouchListener(touchLst);
+        v.setLongClickable(true);
 
         if (selectMode) {
             if (cache.statusCheckedView) {
@@ -448,13 +449,13 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         holder.direction.setContent(cache.coords);
 
         if (cache.found && cache.logOffline) {
-            holder.logStatusMark.setImageResource(R.drawable.mark_green_red);
+            holder.logStatusMark.setImageResource(R.drawable.mark_green_orange);
             holder.logStatusMark.setVisibility(View.VISIBLE);
         } else if (cache.found) {
-            holder.logStatusMark.setImageResource(R.drawable.mark_green);
+            holder.logStatusMark.setImageResource(R.drawable.mark_green_more);
             holder.logStatusMark.setVisibility(View.VISIBLE);
         } else if (cache.logOffline) {
-            holder.logStatusMark.setImageResource(R.drawable.mark_red);
+            holder.logStatusMark.setImageResource(R.drawable.mark_orange);
             holder.logStatusMark.setVisibility(View.VISIBLE);
         } else {
             holder.logStatusMark.setVisibility(View.GONE);
@@ -463,7 +464,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         if (cache.nameSp == null) {
             cache.nameSp = (new Spannable.Factory()).newSpannable(cache.name);
             if (cache.disabled || cache.archived) { // strike
-                cache.nameSp.setSpan(new StrikethroughSpan(), 0, cache.nameSp.toString().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                cache.nameSp.setSpan(new StrikethroughSpan(), 0, cache.nameSp.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
         }
 
@@ -521,7 +522,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             Bitmap dirImgPre = null;
             Bitmap dirImg = null;
             try {
-                dirImgPre = BitmapFactory.decodeFile(cgSettings.getStorage() + cache.geocode + "/direction.png");
+                dirImgPre = BitmapFactory.decodeFile(Settings.getStorage() + cache.geocode + "/direction.png");
                 dirImg = dirImgPre.copy(Bitmap.Config.ARGB_8888, true);
 
                 dirImgPre.recycle();
@@ -531,7 +532,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             }
 
             if (dirImg != null) {
-                if (settings.skin == 0) {
+                if (!Settings.isLightSkin()) {
                     int length = dirImg.getWidth() * dirImg.getHeight();
                     int[] pixels = new int[length];
                     dirImg.getPixels(pixels, 0, dirImg.getWidth(), 0, 0, dirImg.getWidth(), dirImg.getHeight());
@@ -559,7 +560,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
         int favoriteBack;
         // set default background, neither vote nor rating may be available
-        if (settings.skin == 1) {
+        if (Settings.isLightSkin()) {
             favoriteBack = R.drawable.favourite_background_light;
         } else {
             favoriteBack = R.drawable.favourite_background_dark;
@@ -627,7 +628,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         }
         holder.info.setText(cacheInfo.toString());
 
-        return rowView;
+        return v;
     }
 
     @Override
@@ -780,7 +781,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
                     return true;
                 }
             } catch (Exception e) {
-                Log.w(cgSettings.tag, "cgCacheListAdapter.detectGesture.onFling: " + e.toString());
+                Log.w(Settings.tag, "cgCacheListAdapter.detectGesture.onFling: " + e.toString());
             }
 
             return false;

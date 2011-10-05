@@ -31,11 +31,11 @@ public class cgDistanceView extends TextView {
         if (cacheCoords == null || coords == null || base == null) {
             return;
         }
-        setText(base.getHumanDistance(coords.distanceTo(cacheCoords)));
+        setText(cgBase.getHumanDistance(coords.distanceTo(cacheCoords)));
     }
 
     public void setDistance(Float distance) {
-        setText("~" + base.getHumanDistance(distance));
+        setText("~" + cgBase.getHumanDistance(distance));
     }
 
     public void clear() {

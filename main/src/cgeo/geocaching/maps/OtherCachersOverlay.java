@@ -1,7 +1,7 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgUser;
 import cgeo.geocaching.cgeodetail;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
@@ -128,7 +128,7 @@ public class OtherCachersOverlay extends AbstractItemizedOverlay implements Gene
 
             return true;
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgUsersOverlay.onTap: " + e.toString());
+            Log.e(Settings.tag, "cgUsersOverlay.onTap: " + e.toString());
         }
 
         return false;
@@ -150,7 +150,7 @@ public class OtherCachersOverlay extends AbstractItemizedOverlay implements Gene
         try {
             return items.get(index);
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgUsersOverlay.createItem: " + e.toString());
+            Log.e(Settings.tag, "cgUsersOverlay.createItem: " + e.toString());
         }
 
         return null;
@@ -161,7 +161,7 @@ public class OtherCachersOverlay extends AbstractItemizedOverlay implements Gene
         try {
             return items.size();
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgUsersOverlay.size: " + e.toString());
+            Log.e(Settings.tag, "cgUsersOverlay.size: " + e.toString());
         }
 
         return 0;

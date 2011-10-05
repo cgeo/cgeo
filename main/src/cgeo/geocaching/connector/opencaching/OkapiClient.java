@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.opencaching;
 
+import cgeo.geocaching.Parameters;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgImage;
@@ -55,13 +56,13 @@ final public class OkapiClient {
     private static final String USER_USERNAME = "username";
 
     private static final String SERVICE_CACHE = "/okapi/services/caches/geocache";
-    private static final String SERVICE_CACHE_FIELDS = "fields=code|name|location|type|status|owner|founds|notfounds|size|difficulty|terrain|rating|rating_votes|recommendations|description|hint|images|latest_logs|date_hidden";
+    private static final String SERVICE_CACHE_FIELDS = "code|name|location|type|status|owner|founds|notfounds|size|difficulty|terrain|rating|rating_votes|recommendations|description|hint|images|latest_logs|date_hidden";
 
     public static cgCache getCache(final String geoCode) {
-        final String params = "cache_code=" + geoCode + "&" + SERVICE_CACHE_FIELDS;
-        final String data = request(geoCode, SERVICE_CACHE, params, 1);
+        final Parameters params = new Parameters("cache_code", geoCode, "fields", SERVICE_CACHE_FIELDS);
+        final JSONObject data = request(geoCode, SERVICE_CACHE, params);
 
-        if (StringUtils.isBlank(data)) {
+        if (data == null) {
             return null;
         }
 
@@ -73,10 +74,9 @@ final public class OkapiClient {
         return cache;
     }
 
-    private static cgCache parseCache(final String data) {
+    private static cgCache parseCache(final JSONObject response) {
         final cgCache cache = new cgCache();
         try {
-            final JSONObject response = new JSONObject(data);
             cache.geocode = response.getString(CACHE_CODE);
             cache.name = response.getString(CACHE_NAME);
             // not used: names
@@ -103,7 +103,7 @@ final public class OkapiClient {
 
             cache.favouriteCnt = response.getInt(CACHE_RECOMMENDATIONS);
             // not used: req_password
-            cache.description = response.getString(CACHE_DESCRIPTION);
+            cache.setDescription(response.getString(CACHE_DESCRIPTION));
             cache.hint = Html.fromHtml(response.getString(CACHE_HINT)).toString();
             // not used: hints
 
@@ -202,10 +202,8 @@ final public class OkapiClient {
     private static void setLocation(final cgCache cache, final String location) {
         final String latitude = StringUtils.substringBefore(location, "|");
         final String longitude = StringUtils.substringAfter(location, "|");
-        // FIXME: the next lines should be a setter at cgCache
+        // FIXME: the next line should be a setter at cgCache
         cache.coords = GeopointParser.parse(latitude, longitude);
-        cache.latitudeString = cgBase.formatLatitude(cache.coords.getLatitude(), true);
-        cache.longitudeString = cgBase.formatLongitude(cache.coords.getLongitude(), true);
     }
 
     private static CacheSize getCacheSize(final JSONObject response) {
@@ -246,7 +244,7 @@ final public class OkapiClient {
         return "other";
     }
 
-    private static String request(final String geoCode, final String service, final String params, final int level) {
+    private static JSONObject request(final String geoCode, final String service, final Parameters params) {
         final IConnector connector = ConnectorFactory.getConnector(geoCode);
         if (connector == null) {
             return null;
@@ -255,6 +253,8 @@ final public class OkapiClient {
             return null;
         }
 
-        return cgBase.requestJSON(connector.getHost(), service, params + ((ApiOpenCachingConnector) connector).getAuthentication(level));
+        final String uri = "http://" + connector.getHost() + service;
+        ((ApiOpenCachingConnector) connector).addAuthentication(params);
+        return cgBase.requestJSON(uri, params);
     }
 }

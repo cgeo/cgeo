@@ -22,10 +22,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -109,7 +108,6 @@ public class cgeoauth extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        settings.load();
     }
 
     private void init() {
@@ -149,14 +147,14 @@ public class cgeoauth extends AbstractActivity {
 
             try {
                 final StringBuilder sb = new StringBuilder();
-                final String params = cgOAuth.signOAuth(host, pathRequest, method, true, new HashMap<String, String>(), null, null);
+                final String params = cgOAuth.signOAuth(host, pathRequest, method, true, new Parameters(), null, null);
 
                 int code = -1;
                 int retries = 0;
 
                 do {
                     // base.trustAllHosts();
-                    Log.d(cgSettings.tag, "https://" + host + pathRequest + "?" + params);
+                    Log.d(Settings.tag, "https://" + host + pathRequest + "?" + params);
                     final URL u = new URL("https://" + host + pathRequest + "?" + params);
                     final URLConnection uc = u.openConnection();
                     connection = (HttpsURLConnection) uc;
@@ -164,7 +162,7 @@ public class cgeoauth extends AbstractActivity {
                     // connection.setHostnameVerifier(base.doNotVerify);
                     connection.setReadTimeout(30000);
                     connection.setRequestMethod(method);
-                    HttpsURLConnection.setFollowRedirects(true);
+                    HttpURLConnection.setFollowRedirects(true);
                     connection.setDoInput(true);
                     connection.setDoOutput(false);
 
@@ -180,7 +178,7 @@ public class cgeoauth extends AbstractActivity {
                     code = connection.getResponseCode();
                     retries++;
 
-                    Log.i(cgSettings.tag, host + ": " + connection.getResponseCode() + " " + connection.getResponseMessage());
+                    Log.i(Settings.tag, host + ": " + connection.getResponseCode() + " " + connection.getResponseMessage());
 
                     br.close();
                     in.close();
@@ -200,13 +198,13 @@ public class cgeoauth extends AbstractActivity {
                     }
 
                     if (StringUtils.isNotBlank(OAtoken) && StringUtils.isNotBlank(OAtokenSecret)) {
-                        final SharedPreferences.Editor prefsEdit = getSharedPreferences(cgSettings.preferences, 0).edit();
+                        final SharedPreferences.Editor prefsEdit = getSharedPreferences(Settings.preferences, 0).edit();
                         prefsEdit.putString("temp-token-public", OAtoken);
                         prefsEdit.putString("temp-token-secret", OAtokenSecret);
                         prefsEdit.commit();
 
                         try {
-                            final Map<String, String> paramsPre = new HashMap<String, String>();
+                            final Parameters paramsPre = new Parameters();
                             paramsPre.put("oauth_callback", "oob");
 
                             final String paramsBrowser = cgOAuth.signOAuth(host, pathAuthorize, "GET", true, paramsPre, OAtoken, OAtokenSecret);
@@ -215,21 +213,21 @@ public class cgeoauth extends AbstractActivity {
 
                             status = 1;
                         } catch (Exception e) {
-                            Log.e(cgSettings.tag, "cgeoauth.requestToken(2): " + e.toString());
+                            Log.e(Settings.tag, "cgeoauth.requestToken(2): " + e.toString());
                         }
                     }
                 }
             } catch (IOException eio) {
-                Log.e(cgSettings.tag, "cgeoauth.requestToken(IO): " + eio.toString() + " ~ " + connection.getResponseCode() + ": " + connection.getResponseMessage());
+                Log.e(Settings.tag, "cgeoauth.requestToken(IO): " + eio.toString() + " ~ " + connection.getResponseCode() + ": " + connection.getResponseMessage());
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgeoauth.requestToken(1): " + e.toString());
+                Log.e(Settings.tag, "cgeoauth.requestToken(1): " + e.toString());
             } finally {
                 if (connection != null) {
                     connection.disconnect();
                 }
             }
         } catch (Exception e2) {
-            Log.e(cgSettings.tag, "cgeoauth.requestToken(3): " + e2.toString());
+            Log.e(Settings.tag, "cgeoauth.requestToken(3): " + e2.toString());
         }
 
         requestTokenHandler.sendEmptyMessage(status);
@@ -244,8 +242,7 @@ public class cgeoauth extends AbstractActivity {
         String lineOne = null;
 
         try {
-            final Map<String, String> paramsPre = new HashMap<String, String>();
-            paramsPre.put("oauth_verifier", pinEntry.getText().toString());
+            final Parameters paramsPre = new Parameters("oauth_verifier", pinEntry.getText().toString());
 
             int code = -1;
             int retries = 0;
@@ -261,7 +258,7 @@ public class cgeoauth extends AbstractActivity {
                 // connection.setHostnameVerifier(base.doNotVerify);
                 connection.setReadTimeout(30000);
                 connection.setRequestMethod(method);
-                HttpsURLConnection.setFollowRedirects(true);
+                HttpURLConnection.setFollowRedirects(true);
                 connection.setDoOutput(true);
                 connection.setDoInput(true);
 
@@ -285,7 +282,7 @@ public class cgeoauth extends AbstractActivity {
                 code = connection.getResponseCode();
                 retries++;
 
-                Log.i(cgSettings.tag, host + ": " + connection.getResponseCode() + " " + connection.getResponseMessage());
+                Log.i(Settings.tag, host + ": " + connection.getResponseCode() + " " + connection.getResponseMessage());
 
                 br.close();
                 ins.close();
@@ -311,13 +308,13 @@ public class cgeoauth extends AbstractActivity {
                 OAtoken = "";
                 OAtokenSecret = "";
 
-                final SharedPreferences.Editor prefs = getSharedPreferences(cgSettings.preferences, 0).edit();
+                final SharedPreferences.Editor prefs = getSharedPreferences(Settings.preferences, 0).edit();
                 prefs.putString("tokenpublic", null);
                 prefs.putString("tokensecret", null);
                 prefs.putInt("twitter", 0);
                 prefs.commit();
             } else {
-                final SharedPreferences.Editor prefs = getSharedPreferences(cgSettings.preferences, 0).edit();
+                final SharedPreferences.Editor prefs = getSharedPreferences(Settings.preferences, 0).edit();
                 prefs.remove("temp-token-public");
                 prefs.remove("temp-token-secret");
                 prefs.putString("tokenpublic", OAtoken);
@@ -328,7 +325,7 @@ public class cgeoauth extends AbstractActivity {
                 status = 1;
             }
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgeoauth.changeToken: " + e.toString());
+            Log.e(Settings.tag, "cgeoauth.changeToken: " + e.toString());
         }
 
         changeTokensHandler.sendEmptyMessage(status);
@@ -347,7 +344,7 @@ public class cgeoauth extends AbstractActivity {
             startButton.setOnTouchListener(null);
             startButton.setOnClickListener(null);
 
-            final SharedPreferences.Editor prefs = getSharedPreferences(cgSettings.preferences, 0).edit();
+            final SharedPreferences.Editor prefs = getSharedPreferences(Settings.preferences, 0).edit();
             prefs.putString("temp-token-public", null);
             prefs.putString("temp-token-secret", null);
             prefs.commit();

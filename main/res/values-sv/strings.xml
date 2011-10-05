@@ -117,7 +117,7 @@
   <string name="err_none">Ok</string>
   <string name="err_start">Kommunikationen har inte påbörjats</string>
   <string name="err_parse">misslyckades analysera inloggningssidan</string>
-  <string name="err_server">misslyckades att ansluta till geocaching.com (servern eller anslutningen nere?)</string>
+  <string name="err_server">misslyckades att ansluta till Geocaching.com (servern eller anslutningen nere?)</string>
   <string name="err_login">Inloggningsinformationen ej sparad</string>
   <string name="err_login_failed">Tyvärr, c:geo kan inte logga in.</string>
   <string name="err_login_failed_toast">Tyvärr, c:geo kan inte logga in. c:geo kommer att köra i offline läge. Kontrollera dina inloggningsuppgifter i inställningarna och aktivera din internetanslutning.</string>
@@ -125,7 +125,7 @@
   <string name="err_comm">Okänt kommunikationsfel</string>
   <string name="err_missing_auth">Användarnamn och/eller lösenord saknas.</string>
   <string name="err_wrong">felaktiga inloggningsuppgifter</string>
-  <string name="err_license">användaren inte har bekräftat licensavtalet med geocaching.com</string>
+  <string name="err_license">användaren inte har bekräftat licensavtalet med Geocaching.com</string>
   <string name="err_store">Tyvärr, c:geo kan inte spara cachen.</string>
   <string name="err_drop">Tyvärr, c:geo kan inte ta bort cachen.</string>
   <string name="err_title_problem">Problem</string>
@@ -137,7 +137,7 @@
   <string name="err_detail_cache_find_next">Tyvärr, c:geo kan inte hitta nästa geocache.</string>
   <string name="err_detail_cache_forgot">Tyvärr, c:geo glömde vilken geocache du ville se.</string>
   <string name="err_detail_cache_forgot_visit">Tyvärr, c:geo glömde vilken cache tittade på.</string>
-  <string name="err_detail_cache_language">c:geo kan inte läsa vissa detaljer om cachen. Vänligen kontrollera att geocaching.com hemsidan är inställd för att visas på Engelska. Tyvärr kan inte c:geo förstå andra språk.</string>
+  <string name="err_detail_cache_language">c:geo kan inte läsa vissa detaljer om cachen. Vänligen kontrollera att Geocaching.com hemsidan är inställd för att visas på Engelska. Tyvärr kan inte c:geo förstå andra språk.</string>
   <string name="err_detail_no_spoiler">c:geo hittade inga spoiler bilder för den här cachen.</string>
   <string name="err_detail_no_map_static">c:geo hittade inga sparade kartor för denna cache.</string>
   <string name="err_detail_not_load_map_static">Tyvärr, c:geo misslyckades att ladda sparade kartor.</string>
@@ -225,8 +225,6 @@
   <string name="warn_search_help_user">Ange en användare på Geocaching.com.</string>
   <string name="warn_search_help_tb">Ange koden för en trackable. Tex \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Vänligen skriv någon text i loggen.</string>
-  <string name="warn_load_log_image">Tyvärr misslyckades c:geo att ladda loggbilder.</string>
-  <string name="warn_load_spoiler_image">Tyvärr misslyckades c:geo att ladda spoilerbilder.</string>
 
   <string name="info_altitude">Nuvarande höjd</string>
   <string name="info_distance">Rest sträcka</string>
@@ -386,7 +384,7 @@
   <string name="init_passvote">Lösenord</string>
   <string name="init_login">Testa inloggning</string>
   <string name="init_login_popup">Inloggning</string>
-  <string name="init_login_popup_working">Testar inloggning mot geocaching.com…</string>
+  <string name="init_login_popup_working">Testar inloggning mot Geocaching.com…</string>
   <string name="init_login_popup_ok">Inloggning ok.</string>
   <string name="init_login_popup_failed">Inloggning misslyckades.</string>
   <string name="init_login_popup_failed_reason">Inloggning misslyckades pga </string>
@@ -751,7 +749,7 @@
   <string name="helper_bluetoothgps_description">Gör det möjligt att använda en extern GPS enhet för att få bättre mottagning, mer exakt position och kan även spara på batteriet i telefonen.</string>
 
   <!-- next things -->
-  <string name="legal_note">För att använda tjänster hos geocaching.com, måste regler och villkor i <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeaks avtal</a> godkännas.</string>
+  <string name="legal_note">För att använda tjänster hos Geocaching.com, måste regler och villkor i <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeaks avtal</a> godkännas.</string>
   <string name="author">Upphovsman: <a href="http://carnero.cc/">carnero</a></string>
   <string name="support">Support: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">Hemsida: <a href="http://cgeo.org/">cgeo.org</a></string>

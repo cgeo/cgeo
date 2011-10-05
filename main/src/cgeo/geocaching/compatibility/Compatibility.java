@@ -1,28 +1,53 @@
 package cgeo.geocaching.compatibility;
 
+import cgeo.geocaching.Settings;
+
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 import android.view.Display;
 import android.view.Surface;
+
+import java.lang.reflect.Method;
 
 public final class Compatibility {
 
     private final static int sdkVersion = Integer.parseInt(Build.VERSION.SDK);
     private final static boolean isLevel8 = sdkVersion >= 8;
-    private final static AndroidLevel8 level8 = isLevel8 ? new AndroidLevel8() : null;
+
+    private static Method dataChangedMethod = null;
+    private static Method getRotationMethod = null;
+
+    static {
+        if (isLevel8) {
+            try {
+                final Class<?> cl = Class.forName("cgeo.geocaching.compatibility.AndroidLevel8");
+                dataChangedMethod = cl.getDeclaredMethod("dataChanged", String.class);
+                getRotationMethod = cl.getDeclaredMethod("getRotation", Activity.class);
+            } catch (final Exception e) {
+                // Exception can be ClassNotFoundException, SecurityException or NoSuchMethodException
+                Log.e(Settings.tag, "Cannot load AndroidLevel8 class", e);
+            }
+        }
+    }
 
     public static Float getDirectionNow(final Float directionNowPre,
             final Activity activity) {
         if (isLevel8) {
-            final int rotation = level8.getRotation(activity);
-            if (rotation == Surface.ROTATION_90) {
-                return directionNowPre + 90;
-            } else if (rotation == Surface.ROTATION_180) {
-                return directionNowPre + 180;
-            } else if (rotation == Surface.ROTATION_270) {
-                return directionNowPre + 270;
+            try {
+                final int rotation = (Integer) getRotationMethod.invoke(null, activity);
+                if (rotation == Surface.ROTATION_90) {
+                    return directionNowPre + 90;
+                } else if (rotation == Surface.ROTATION_180) {
+                    return directionNowPre + 180;
+                } else if (rotation == Surface.ROTATION_270) {
+                    return directionNowPre + 270;
+                }
+            } catch (final Exception e) {
+                // This should never happen: IllegalArgumentException, IllegalAccessException or InvocationTargetException
+                Log.e(Settings.tag, "Cannot call getRotation()", e);
             }
         } else {
             final Display display = activity.getWindowManager()
@@ -45,7 +70,12 @@ public final class Compatibility {
 
     public static void dataChanged(final String name) {
         if (isLevel8) {
-            level8.dataChanged(name);
+            try {
+                dataChangedMethod.invoke(null, name);
+            } catch (final Exception e) {
+                // This should never happen: IllegalArgumentException, IllegalAccessException or InvocationTargetException
+                Log.e(Settings.tag, "Cannot call dataChanged()", e);
+            }
         }
     }
 

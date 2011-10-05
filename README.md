@@ -10,15 +10,19 @@ Fork the project source code on [github](https://github.com/cgeo/c-geo-opensourc
 Set up Eclipse
 --------------
 
-After forking the project you should import the two Eclipse projects in your workspace with File | Import | Projects from Git (requires the EGit Plugin)
+- Install an Eclipse distribution for your OS from http://eclipse.org/downloads/ (you may choose the Java developers distribution).
+- Start Eclipse, choose any directory as workspace. Close the welcome screen, if it appears.
+- After the workbench has started, select File | Import | Install | Install Software Items From File and select a locally downloaded copy of https://github.com/cgeo/c-geo-opensource/tree/master/main/project/eclipse%20installation/cgeo%20eclipse%20components.p2f. This way you can easily install all necessary plugins.
+- After forking the project you should import the two Eclipse projects in your workspace with File | Import | Projects from Git.
+
 Build
 -----
 
 ### Prerequisites ###
 
 - [Android SDK](http://developer.android.com/sdk) 2.2 including Google APIs V8
-- [Google USB Driver](http://developer.android.com/sdk/win-usb.html) to install the application on the smartphone
 - [Ant](http://ant.apache.org) 1.6.0+ for building c:geo on the command line (not necessary when using only Eclipse)
+- If you use Microsoft Windows, [Google USB Driver](http://developer.android.com/sdk/win-usb.html) to install the application on the smartphone
 
 ### Structure ###
 
@@ -55,9 +59,10 @@ or use the Ant view of Eclipse
 
 ### Testing ###
 
-The Test classes can be found in the package cgeo.geocaching.test (within the cgeo-os-test project)
+The Test classes can be found in the project cgeo-os-test. Test classes should be located in the same package as
+the class under test.
 Every class can be "Run As" (or "Debug As") an "Android JUnit Test" from Eclipse.
-To run all tests use the test suite in cgeoTestSuite.
+To run all tests use the test suite in CgeoTestSuite in package cgeo.geocaching.test.
 Further information can be found at http://developer.android.com/guide/topics/testing/testing_android.html
 
 License

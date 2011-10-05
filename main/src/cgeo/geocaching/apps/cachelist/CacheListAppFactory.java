@@ -3,7 +3,7 @@ package cgeo.geocaching.apps.cachelist;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.apps.AbstractAppFactory;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -70,7 +70,7 @@ public final class CacheListAppFactory extends AbstractAppFactory {
             try {
                 return app.invoke(geo, caches, activity, res, searchId);
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "CacheListAppFactory.onMenuItemSelected: " + e.toString());
+                Log.e(Settings.tag, "CacheListAppFactory.onMenuItemSelected: " + e.toString());
             }
         }
         return false;

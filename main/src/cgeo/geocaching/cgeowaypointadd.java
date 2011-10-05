@@ -76,7 +76,7 @@ public class cgeowaypointadd extends AbstractActivity {
                     waitDialog.dismiss();
                     waitDialog = null;
                 }
-                Log.e(cgSettings.tag, "cgeowaypointadd.loadWaypointHandler: " + e.toString());
+                Log.e(Settings.tag, "cgeowaypointadd.loadWaypointHandler: " + e.toString());
             }
         }
     };
@@ -90,7 +90,7 @@ public class cgeowaypointadd extends AbstractActivity {
         setTitle("waypoint");
 
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
+            geo = app.startGeo(this, geoUpdate, base, 0, 0);
         }
 
         // get parameters
@@ -143,10 +143,9 @@ public class cgeowaypointadd extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        settings.load();
 
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
+            geo = app.startGeo(this, geoUpdate, base, 0, 0);
         }
 
         if (id > 0) {
@@ -200,7 +199,7 @@ public class cgeowaypointadd extends AbstractActivity {
                 bLat.setHint(cgBase.formatLatitude(geo.coordsNow.getLatitude(), false));
                 bLon.setHint(cgBase.formatLongitude(geo.coordsNow.getLongitude(), false));
             } catch (Exception e) {
-                Log.w(cgSettings.tag, "Failed to update location.");
+                Log.w(Settings.tag, "Failed to update location.");
             }
         }
     }
@@ -214,7 +213,7 @@ public class cgeowaypointadd extends AbstractActivity {
 
                 loadWaypointHandler.sendMessage(new Message());
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgeowaypoint.loadWaypoint.run: " + e.toString());
+                Log.e(Settings.tag, "cgeowaypoint.loadWaypoint.run: " + e.toString());
             }
         }
     }
@@ -225,7 +224,7 @@ public class cgeowaypointadd extends AbstractActivity {
             Geopoint gp = null;
             if (waypoint != null && waypoint.coords != null)
                 gp = waypoint.coords;
-            cgeocoords coordsDialog = new cgeocoords(cgeowaypointadd.this, settings, gp, geo);
+            cgeocoords coordsDialog = new cgeocoords(cgeowaypointadd.this, gp, geo);
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
                 @Override
@@ -292,7 +291,7 @@ public class cgeowaypointadd extends AbstractActivity {
 
                 double distance;
                 try {
-                    distance = DistanceParser.parseDistance(distanceText, settings.units);
+                    distance = DistanceParser.parseDistance(distanceText, Settings.isUseMetricUnits());
                 } catch (NumberFormatException e) {
                     showToast(res.getString(R.string.err_parse_dist));
                     return;
@@ -335,8 +334,6 @@ public class cgeowaypointadd extends AbstractActivity {
             waypoint.lookup = lookup;
             waypoint.name = name;
             waypoint.coords = new Geopoint(coords.get(0), coords.get(1));
-            waypoint.latitudeString = cgBase.formatLatitude(coords.get(0), true);
-            waypoint.longitudeString = cgBase.formatLongitude(coords.get(1), true);
             waypoint.note = note;
 
             if (app.saveOwnWaypoint(id, geocode, waypoint)) {

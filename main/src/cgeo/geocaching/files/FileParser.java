@@ -1,10 +1,8 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 
 import android.os.Handler;
-import android.os.Message;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -29,17 +27,13 @@ public abstract class FileParser {
         return buffer;
     }
 
-    protected static void showCountMessage(final Handler handler, final int count) {
-        if (handler != null) {
-            final Message msg = new Message();
-            msg.obj = count;
-            handler.sendMessage(msg);
+    protected static void showCountMessage(final Handler handler, final int msgId, final int count) {
+        if (handler != null && (count <= 1 || count % 10 == 0)) {
+            handler.sendMessage(handler.obtainMessage(0, msgId, count));
         }
     }
 
     protected static void fixCache(cgCache cache) {
-        cache.latitudeString = cgBase.formatLatitude(cache.coords.getLatitude(), true);
-        cache.longitudeString = cgBase.formatLongitude(cache.coords.getLongitude(), true);
         if (cache.inventory != null) {
             cache.inventoryItems = cache.inventory.size();
         } else {

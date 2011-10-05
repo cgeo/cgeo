@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.StatusCode;
+
 import android.text.Spannable;
 
 import java.util.ArrayList;
@@ -13,7 +15,7 @@ public class cgTrackable {
     static final public int SPOTTED_UNKNOWN = 3;
     static final public int SPOTTED_OWNER = 4;
 
-    public int errorRetrieve = 0;
+    public StatusCode errorRetrieve = null;
     public String error = "";
     public String guid = "";
     public String geocode = "";
@@ -34,4 +36,8 @@ public class cgTrackable {
     public String details = null;
     public String image = null;
     public List<cgLog> logs = new ArrayList<cgLog>();
+
+    public String getUrl() {
+        return "http://coord.info/" + geocode.toUpperCase();
+    }
 }

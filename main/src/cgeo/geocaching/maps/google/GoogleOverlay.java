@@ -1,10 +1,9 @@
 package cgeo.geocaching.maps.google;
 
-import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.maps.PositionOverlay;
 import cgeo.geocaching.maps.ScaleOverlay;
-import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
+import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 
 import com.google.android.maps.MapView;
@@ -21,13 +20,13 @@ public class GoogleOverlay extends Overlay implements OverlayImpl {
     private GeneralOverlay overlayBase = null;
     private Lock lock = new ReentrantLock();
 
-    public GoogleOverlay(Activity activityIn, cgSettings settingsIn, overlayType ovlType) {
+    public GoogleOverlay(Activity activityIn, overlayType ovlType) {
         switch (ovlType) {
             case PositionOverlay:
-                overlayBase = new PositionOverlay(settingsIn, activityIn, this);
+                overlayBase = new PositionOverlay(activityIn, this);
                 break;
             case ScaleOverlay:
-                overlayBase = new ScaleOverlay(activityIn, settingsIn, this);
+                overlayBase = new ScaleOverlay(activityIn, this);
         }
     }
 

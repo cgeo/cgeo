@@ -28,8 +28,6 @@ import android.widget.TextView;
 
 import java.net.URLEncoder;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class cgeotrackable extends AbstractActivity {
     public cgTrackable trackable = null;
@@ -48,8 +46,8 @@ public class cgeotrackable extends AbstractActivity {
             TextView itemName;
             TextView itemValue;
 
-            if (trackable != null && trackable.errorRetrieve != 0) {
-                showToast(res.getString(R.string.err_tb_details_download) + " " + cgBase.errorRetrieve.get(trackable.errorRetrieve) + ".");
+            if (trackable != null && trackable.errorRetrieve != null) {
+                showToast(res.getString(R.string.err_tb_details_download) + " " + trackable.errorRetrieve.getErrorString(res) + ".");
 
                 finish();
                 return;
@@ -220,7 +218,7 @@ public class cgeotrackable extends AbstractActivity {
                     itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
                     itemName.setText(res.getString(R.string.trackable_distance));
-                    itemValue.setText(base.getHumanDistance(trackable.distance));
+                    itemValue.setText(cgBase.getHumanDistance(trackable.distance));
                     detailsList.addView(itemLayout);
                 }
 
@@ -282,7 +280,7 @@ public class cgeotrackable extends AbstractActivity {
                                 Message message = handler.obtainMessage(0, image);
                                 handler.sendMessage(message);
                             } catch (Exception e) {
-                                Log.e(cgSettings.tag, "cgeospoilers.onCreate.onClick.run: " + e.toString());
+                                Log.e(Settings.tag, "cgeospoilers.onCreate.onClick.run: " + e.toString());
                             }
                         }
                     }.start();
@@ -290,7 +288,7 @@ public class cgeotrackable extends AbstractActivity {
                     imgView.addView(trackableImage);
                 }
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgeotrackable.loadTrackableHandler: " + e.toString() + Arrays.toString(e.getStackTrace()));
+                Log.e(Settings.tag, "cgeotrackable.loadTrackableHandler: " + e.toString() + Arrays.toString(e.getStackTrace()));
             }
 
             displayLogs();
@@ -389,7 +387,6 @@ public class cgeotrackable extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        settings.load();
     }
 
     @Override
@@ -481,24 +478,9 @@ public class cgeotrackable extends AbstractActivity {
 
         @Override
         public void run() {
-            loadTrackableFn(geocode, guid, id);
+            trackable = base.searchTrackable(geocode, guid, id);
             handler.sendMessage(new Message());
         }
-    }
-
-    public void loadTrackableFn(String geocode, String guid, String id) {
-        Map<String, String> params = new HashMap<String, String>();
-        if (StringUtils.isNotBlank(geocode)) {
-            params.put("geocode", geocode);
-        } else if (StringUtils.isNotBlank(guid)) {
-            params.put("guid", guid);
-        } else if (StringUtils.isNotBlank(id)) {
-            params.put("id", id);
-        } else {
-            return;
-        }
-
-        trackable = base.searchTrackable(params);
     }
 
     private void displayLogs() {
@@ -597,7 +579,7 @@ public class cgeotrackable extends AbstractActivity {
                 Message message = handler.obtainMessage(0, image);
                 handler.sendMessage(message);
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgeotrackable.tbIconThread.run: " + e.toString());
+                Log.e(Settings.tag, "cgeotrackable.tbIconThread.run: " + e.toString());
             }
         }
     }

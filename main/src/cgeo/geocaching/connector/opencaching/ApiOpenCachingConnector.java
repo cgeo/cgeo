@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.opencaching;
 
+import cgeo.geocaching.Parameters;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCacheWrap;
@@ -7,6 +8,8 @@ import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.utils.CryptUtils;
+
+import android.os.Handler;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,8 +23,8 @@ public class ApiOpenCachingConnector extends OpenCachingConnector implements ICo
         this.cK = cK;
     }
 
-    public String getAuthentication(int level) {
-        return CryptUtils.rot13("&pbafhzre_xrl=" + cK);
+    public void addAuthentication(final Parameters params) {
+        params.put(CryptUtils.rot13("pbafhzre_xrl"), CryptUtils.rot13(cK));
     }
 
     @Override
@@ -36,7 +39,7 @@ public class ApiOpenCachingConnector extends OpenCachingConnector implements ICo
     }
 
     @Override
-    public UUID searchByGeocode(final cgBase base, final String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason) {
+    public UUID searchByGeocode(final cgBase base, final String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final Handler handler) {
         final cgCache cache = OkapiClient.getCache(geocode);
         if (cache == null) {
             return null;
@@ -44,7 +47,7 @@ public class ApiOpenCachingConnector extends OpenCachingConnector implements ICo
         final cgCacheWrap caches = new cgCacheWrap();
         caches.cacheList.add(cache);
 
-        final List<cgCache> cacheList = base.processSearchResults(search, caches, 0, 0, null);
+        final List<cgCache> cacheList = cgBase.processSearchResults(search, caches, false, false, null);
         app.addSearch(search, cacheList, true, reason);
 
         return search.getCurrentId();

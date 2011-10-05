@@ -5,7 +5,6 @@ import cgeo.geocaching.geopoint.Geopoint;
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.widget.TextView;
 
 import java.util.List;
@@ -18,8 +17,6 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
     public String lookup = "";
     public String name = "";
     public String latlon = "";
-    public String latitudeString = "";
-    public String longitudeString = "";
     public Geopoint coords = null;
     public String note = "";
     private Integer cachedOrder = null;
@@ -32,7 +29,7 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
                 iconId = specialId;
             }
         }
-        nameView.setCompoundDrawablesWithIntrinsicBounds((Drawable) res.getDrawable(iconId), null, null, null);
+        nameView.setCompoundDrawablesWithIntrinsicBounds(res.getDrawable(iconId), null, null, null);
     }
 
     public void merge(final cgWaypoint old) {
@@ -45,14 +42,8 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
         if (StringUtils.isBlank(name)) {
             this.name = old.name;
         }
-        if (StringUtils.isBlank(latlon)) {
+        if (StringUtils.isBlank(latlon) || latlon.startsWith("?")) { // there are waypoints containing "???"
             latlon = old.latlon;
-        }
-        if (StringUtils.isBlank(latitudeString)) {
-            latitudeString = old.latitudeString;
-        }
-        if (StringUtils.isBlank(longitudeString)) {
-            longitudeString = old.longitudeString;
         }
         if (coords == null) {
             coords = old.coords;
@@ -101,13 +92,13 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
             return 0;
         }
         // check only the first character. sometimes there are inconsistencies like FI or FN for the FINAL
-        char firstLetter = Character.toUpperCase(getPrefix().charAt(0));
+        final char firstLetter = Character.toUpperCase(getPrefix().charAt(0));
         switch (firstLetter) {
             case 'P':
                 return -100; // parking
             case 'S': { // stage N
                 try {
-                    Integer stageNumber = Integer.valueOf(getPrefix().substring(1));
+                    final Integer stageNumber = Integer.valueOf(getPrefix().substring(1));
                     return stageNumber;
                 } catch (NumberFormatException e) {
                     // nothing
@@ -118,8 +109,9 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
                 return 1000; // final
             case 'O':
                 return 10000; // own
+            default:
+                return 0;
         }
-        return 0;
     }
 
     private int order() {
@@ -141,5 +133,9 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
     public void setPrefix(String prefix) {
         this.prefix = prefix;
         cachedOrder = null;
+    }
+
+    public String getUrl() {
+        return "http://coord.info/" + geocode.toUpperCase();
     }
 }

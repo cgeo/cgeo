@@ -117,7 +117,7 @@
   <string name="err_none">Aceptar</string>
   <string name="err_start">Comunicación no iniciada</string>
   <string name="err_parse">Error procesando la página de acceso</string>
-  <string name="err_server">Error conectando a geocaching.com (¿servidor o conexión caidos?)</string>
+  <string name="err_server">Error conectando a Geocaching.com (¿servidor o conexión caidos?)</string>
   <string name="err_login">No hay información de acceso guardada</string>
   <string name="err_login_failed">Lo siento, c:geo no puede conectarse.</string>
   <string name="err_unknown">Error desconocido</string>
@@ -136,7 +136,7 @@
   <string name="err_detail_cache_find_next">Lo siento, c:geo no puede encontrar los siguientes escondites.</string>
   <string name="err_detail_cache_forgot">Lo siento, c:geo ha olvidado el escondite que quieres.</string>
   <string name="err_detail_cache_forgot_visit">Lo siento, c:geo ha olvidado que escondite has visitado.</string>
-  <string name="err_detail_cache_language">c:geo no puede leer algunos detalles del escondite. Verifica que la web geocaching.com website esté configurada en inglés. por desgracia, c:geo no entiende otras localizaciones.</string>
+  <string name="err_detail_cache_language">c:geo no puede leer algunos detalles del escondite. Verifica que la web Geocaching.com website esté configurada en inglés. por desgracia, c:geo no entiende otras localizaciones.</string>
   <string name="err_detail_no_spoiler">c:geo no ha encontrado imágenes/pista para este escondite.</string>
   <string name="err_detail_no_map_static">c:geo no ha encontrado mapas estáticos para este escondite.</string>
   <string name="err_detail_not_load_map_static">Lo siento, c:geo no ha podido cargar mapas estáticos.</string>
@@ -224,8 +224,7 @@
   <string name="warn_search_help_user">Escribe el nombre de usuario de Geocaching.com.</string>
   <string name="warn_search_help_tb">Escribe el código del rastreable. Por ejemplo \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Escribe algún texto de registro.</string>
-  <string name="warn_load_log_image">Error al cargar la imagen del registro.</string>
-  <string name="warn_load_spoiler_image">Error al cargar la imagen reveladora.</string>
+  <string name="warn_load_images">Error al cargar las imágenes.</string>
   
   <string name="info_altitude">Altitud actual</string>
   <string name="info_distance">Distancia recorrida</string>
@@ -382,7 +381,7 @@
   <string name="init_passvote">Contraseña</string>
   <string name="init_login">Acceder</string>
   <string name="init_login_popup">Acceso</string>
-  <string name="init_login_popup_working">Accediendo a geocaching.com…</string>
+  <string name="init_login_popup_working">Accediendo a Geocaching.com…</string>
   <string name="init_login_popup_ok">Acceso conseguido.</string>
   <string name="init_login_popup_failed">Error en el acceso.</string>
   <string name="init_login_popup_failed_reason">El acceso ha fallado debido a </string>
@@ -877,7 +876,7 @@
   <string name="attribute_food_no">No hay comida cerca</string>
 
   <!-- next things -->
-  <string name="legal_note">Para utilizar los servicios de geocaching.com, debes aceptar las <a href="http://www.geocaching.com/about/termsofuse.aspx">condiciones de Groundspeak</a>.</string>
+  <string name="legal_note">Para utilizar los servicios de Geocaching.com, debes aceptar las <a href="http://www.geocaching.com/about/termsofuse.aspx">condiciones de Groundspeak</a>.</string>
   <string name="quote">Para hacer el geocaching más sencillo, para hacer a los usuarios más vagos.</string>
 
   <string name="author">Autor: <a href="http://carnero.cc/">carnero</a></string>

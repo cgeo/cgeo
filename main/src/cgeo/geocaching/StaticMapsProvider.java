@@ -40,7 +40,7 @@ public class StaticMapsProvider {
     }
 
     private static void createStorageDirectory(final cgCache cache) {
-        File dir = new File(cgSettings.getStorage());
+        File dir = new File(Settings.getStorage());
         if (dir.exists() == false) {
             dir.mkdirs();
         }
@@ -51,7 +51,7 @@ public class StaticMapsProvider {
     }
 
     private static String getStaticMapsDirectory(final cgCache cache) {
-        return cgSettings.getStorage() + cache.geocode;
+        return Settings.getStorage() + cache.geocode;
     }
 
     private static void downloadMap(cgCache cache, int zoom, String mapType, int level, String latlonMap, int edge, String waypoints) {
@@ -65,13 +65,12 @@ public class StaticMapsProvider {
         HttpGet getMethod = null;
         HttpResponse httpResponse = null;
         HttpEntity entity = null;
-        BufferedHttpEntity bufferedEntity = null;
 
         boolean ok = false;
 
         for (int i = 0; i < 3; i++) {
             if (i > 0)
-                Log.w(cgSettings.tag, "cgMapImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
+                Log.w(Settings.tag, "cgMapImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
 
             try {
                 client = new DefaultHttpClient();
@@ -85,47 +84,43 @@ public class StaticMapsProvider {
                     break;
                 }
 
-                bufferedEntity = new BufferedHttpEntity(entity);
-                if (bufferedEntity != null) {
-                    InputStream is = (InputStream) bufferedEntity.getContent();
-                    FileOutputStream fos = new FileOutputStream(fileName);
+                final BufferedHttpEntity bufferedEntity = new BufferedHttpEntity(entity);
+                InputStream is = (InputStream) bufferedEntity.getContent();
+                FileOutputStream fos = new FileOutputStream(fileName);
 
-                    int fileSize = 0;
-                    try {
-                        byte[] buffer = new byte[4096];
-                        int bytesRead;
-                        while ((bytesRead = is.read(buffer)) != -1) {
-                            fos.write(buffer, 0, bytesRead);
-                            fileSize += bytesRead;
-                        }
-                        fos.flush();
-                        ok = true;
-                    } catch (IOException e) {
-                        Log.e(cgSettings.tag, "cgMapImg.getDrawable (saving to cache): " + e.toString());
-                    } finally {
-                        is.close();
-                        fos.close();
+                int fileSize = 0;
+                try {
+                    byte[] buffer = new byte[4096];
+                    int bytesRead;
+                    while ((bytesRead = is.read(buffer)) != -1) {
+                        fos.write(buffer, 0, bytesRead);
+                        fileSize += bytesRead;
                     }
+                    fos.flush();
+                    ok = true;
+                } catch (IOException e) {
+                    Log.e(Settings.tag, "cgMapImg.getDrawable (saving to cache): " + e.toString());
+                } finally {
+                    is.close();
+                    fos.close();
+                }
 
-                    bufferedEntity = null;
-
-                    // delete image if it has no contents
-                    if (ok && fileSize < MIN_MAP_IMAGE_BYTES) {
-                        (new File(fileName)).delete();
-                    }
+                // delete image if it has no contents
+                if (ok && fileSize < MIN_MAP_IMAGE_BYTES) {
+                    (new File(fileName)).delete();
                 }
 
                 if (ok) {
                     break;
                 }
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgMapImg.getDrawable (downloading from web): " + e.toString());
+                Log.e(Settings.tag, "cgMapImg.getDrawable (downloading from web): " + e.toString());
             }
         }
     }
 
-    public static void downloadMaps(cgCache cache, cgSettings settings, Activity activity) {
-        if (settings.storeOfflineMaps != 1 || cache.coords == null || StringUtils.isBlank(cache.geocode)) {
+    public static void downloadMaps(cgCache cache, Activity activity) {
+        if (!Settings.isStoreOfflineMaps() || cache.coords == null || StringUtils.isBlank(cache.geocode)) {
             return;
         }
 

@@ -3,7 +3,7 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -61,10 +61,8 @@ class GoogleNavigationApp extends AbstractNavigationApp implements
     private static boolean navigateToCoordinates(cgGeo geo, Activity activity, final Geopoint coords) {
         final Geopoint coordsNow = geo == null ? null : geo.coordsNow;
 
-        cgSettings settings = getSettings(activity);
-
         // Google Navigation
-        if (settings.useGNavigation == 1) {
+        if (Settings.isUseGoogleNavigation()) {
             try {
                 activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri
                         .parse("google.navigation:ll=" + coords.getLatitude() + ","
@@ -94,7 +92,7 @@ class GoogleNavigationApp extends AbstractNavigationApp implements
             // nothing
         }
 
-        Log.i(cgSettings.tag,
+        Log.i(Settings.tag,
                 "cgBase.runNavigation: No navigation application available.");
         return false;
     }

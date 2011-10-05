@@ -57,9 +57,21 @@ public final class Geopoint
      *            string to parse
      * @see GeopointParser.parse()
      */
-    public Geopoint(final String text)
-    {
+    public Geopoint(final String text) {
         this(GeopointParser.parseLatitude(text), GeopointParser.parseLongitude(text));
+    }
+
+    /**
+     * Creates new Geopoint with latitude and longitude parsed from string.
+     *
+     * @param latText
+     *            latitude string to parse
+     * @param lonText
+     *            longitude string to parse
+     * @see GeopointParser.parse()
+     */
+    public Geopoint(final String latText, final String lonText) {
+        this(GeopointParser.parseLatitude(latText), GeopointParser.parseLongitude(lonText));
     }
 
     /**

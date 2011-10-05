@@ -3,6 +3,7 @@ package cgeo.geocaching.apps.cachelist;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.apps.AbstractApp;
 
 import android.app.Activity;
@@ -26,7 +27,7 @@ class InternalCacheListMap extends AbstractApp implements CacheListApp {
 
     @Override
     public boolean invoke(cgGeo geo, List<cgCache> caches, Activity activity, Resources res, final UUID searchId) {
-        Intent mapIntent = new Intent(activity, getSettings(activity).getMapFactory()
+        Intent mapIntent = new Intent(activity, Settings.getMapFactory()
                 .getMapClass());
         mapIntent.putExtra("detail", false); // this is the main difference to the activity for a single point
         mapIntent.putExtra("searchid", searchId.toString());
