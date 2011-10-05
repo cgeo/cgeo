@@ -124,7 +124,7 @@ public class cgHtmlImg implements Html.ImageGetter {
         }
 
         // download image and save it to the cache
-        if ((null == imagePre && 0 == reason) || onlySave) {
+        if (imagePre == null || onlySave) {
             Uri uri = null;
             BufferedHttpEntity bufferedEntity = null;
 
