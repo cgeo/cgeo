@@ -1,9 +1,9 @@
 package cgeo.geocaching.activity;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeo;
 
 import org.apache.commons.lang3.StringUtils;
@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.SubMenu;
@@ -102,20 +103,20 @@ public final class ActivityMixin {
         }
     }
 
-    public static final void helpDialog(final Activity activity, final String title, final String message) {
+    public static final void helpDialog(final Activity activity, final String title, final String message, final Drawable icon) {
         if (StringUtils.isBlank(message)) {
             return;
         }
 
-        AlertDialog.Builder dialog = new AlertDialog.Builder(activity);
-        dialog.setTitle(title);
-        dialog.setMessage(message);
-        dialog.setCancelable(true);
+        AlertDialog.Builder dialog = new AlertDialog.Builder(activity).setTitle(title).setMessage(message).setCancelable(true);
         dialog.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
         });
+        if (icon != null) {
+            dialog.setIcon(icon);
+        }
 
         AlertDialog alert = dialog.create();
         alert.show();
