@@ -303,12 +303,7 @@ public class cgeovisit extends cgLogForm {
         int id = item.getItemId();
 
         if (id == MENU_SIGNATURE) {
-            EditText log = (EditText) findViewById(R.id.log);
-            String content = log.getText().toString();
-            if (StringUtils.isNotBlank(content)) {
-                insertIntoLog("\n", false);
-            }
-            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), base, false), false);
+            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), base, false), true);
             return true;
         } else if (id >= 10 && id <= 19) {
             rating = (id - 9) / 2.0;
@@ -463,8 +458,7 @@ public class cgeovisit extends cgLogForm {
         } else if (StringUtils.isNotBlank(Settings.getSignature())
                 && Settings.isAutoInsertSignature()
                 && StringUtils.isBlank(((EditText) findViewById(R.id.log)).getText())) {
-            text = "\n" + LogTemplateProvider.applyTemplates(Settings.getSignature(), base, false);
-            insertIntoLog(text, false);
+            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), base, false), false);
         }
 
         if (types.contains(typeSelected) == false) {
