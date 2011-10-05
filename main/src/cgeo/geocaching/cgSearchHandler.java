@@ -60,6 +60,7 @@ public class cgSearchHandler extends Handler {
                 dlg.setTitle(res.getString(R.string.caches_recaptcha_title));
                 dlg.setView(view);
                 dlg.setNeutralButton(res.getString(R.string.caches_recaptcha_continue), new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int id) {
                         final String text = ((EditText) view.findViewById(R.id.text)).getText().toString();
 

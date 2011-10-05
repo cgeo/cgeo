@@ -31,12 +31,12 @@ public class GeopointParser
      * X DD° MM
      * X DD° MM.MMM
      * X DD° MM SS
-     *
+     * 
      * as well as:
      * DD.DDDDDDD
-     *
+     * 
      * Both . and , are accepted, also variable count of spaces (also 0)
-     *
+     * 
      * @param text
      *            the string to parse
      * @return an Geopoint with parsed latitude and longitude
@@ -60,12 +60,12 @@ public class GeopointParser
      * X DD° MM
      * X DD° MM.MMM
      * X DD° MM SS
-     *
+     * 
      * as well as:
      * DD.DDDDDDD
-     *
+     * 
      * Both . and , are accepted, also variable count of spaces (also 0)
-     *
+     * 
      * @param latitude
      *            the latitude string to parse
      * @param longitude
@@ -109,7 +109,7 @@ public class GeopointParser
                 }
             }
 
-            return (double) sign * ((double) degree + (double) minutes / 60 + seconds / 3600);
+            return sign * (degree + (double) minutes / 60 + seconds / 3600);
 
         } else {
 

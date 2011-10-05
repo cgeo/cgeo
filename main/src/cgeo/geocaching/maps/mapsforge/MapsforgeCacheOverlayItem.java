@@ -19,10 +19,12 @@ public class MapsforgeCacheOverlayItem extends OverlayItem implements CachesOver
         this.coord = coordinate;
     }
 
+    @Override
     public cgCoord getCoord() {
         return coord;
     }
 
+    @Override
     public String getType() {
         return cacheType;
     }

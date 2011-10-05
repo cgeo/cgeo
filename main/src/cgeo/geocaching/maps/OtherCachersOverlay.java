@@ -4,10 +4,10 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgUser;
 import cgeo.geocaching.cgeodetail;
+import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
-import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
 
 import org.apache.commons.lang3.StringUtils;
@@ -118,6 +118,7 @@ public class OtherCachersOverlay extends AbstractItemizedOverlay implements Gene
             }
             dialog.setNeutralButton("Dismiss", new DialogInterface.OnClickListener() {
 
+                @Override
                 public void onClick(DialogInterface dialog, int id) {
                     dialog.cancel();
                 }
@@ -175,6 +176,7 @@ public class OtherCachersOverlay extends AbstractItemizedOverlay implements Gene
             geocode = geocodeIn;
         }
 
+        @Override
         public void onClick(DialogInterface dialog, int id) {
             if (geocode != null) {
                 Intent detailIntent = new Intent(context, cgeodetail.class);

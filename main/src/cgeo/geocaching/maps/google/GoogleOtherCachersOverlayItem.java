@@ -38,6 +38,7 @@ public class GoogleOtherCachersOverlayItem extends OverlayItem implements OtherC
         return marker;
     }
 
+    @Override
     public cgUser getUser() {
         return user;
     }

@@ -27,6 +27,7 @@ class StreetviewApp extends AbstractNavigationApp implements NavigationApp {
         return true;
     }
 
+    @Override
     public boolean invoke(cgGeo geo, Activity activity, Resources res,
             cgCache cache,
             final UUID searchId, cgWaypoint waypoint, final Geopoint coords) {

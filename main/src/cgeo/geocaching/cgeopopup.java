@@ -8,7 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -229,7 +228,7 @@ public class cgeopopup extends AbstractActivity {
             detailsList.removeAllViews();
 
             // actionbar icon
-            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable) getResources().getDrawable(cgBase.getCacheIcon(cache.type)), null, null, null);
+            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.type)), null, null, null);
 
             // cache type
             itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
@@ -366,6 +365,7 @@ public class cgeopopup extends AbstractActivity {
                 if (cache.supportsGCVote()) {
                     (new Thread() {
 
+                        @Override
                         public void run() {
                             cgRating rating = GCVote.getRating(cache.guid, geocode);
 
@@ -393,6 +393,7 @@ public class cgeopopup extends AbstractActivity {
                 Button buttonMore = (Button) findViewById(R.id.more_details);
                 buttonMore.setOnClickListener(new OnClickListener() {
 
+                    @Override
                     public void onClick(View arg0) {
                         Intent cachesIntent = new Intent(cgeopopup.this, cgeodetail.class);
                         cachesIntent.putExtra("geocode", geocode.toUpperCase());
@@ -551,6 +552,7 @@ public class cgeopopup extends AbstractActivity {
 
     private class storeCache implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             if (dropDialog != null && dropDialog.isShowing()) {
                 showToast("Still removing this cache.");
@@ -580,6 +582,7 @@ public class cgeopopup extends AbstractActivity {
 
     private class dropCache implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             if (storeDialog != null && storeDialog.isShowing()) {
                 showToast("Still saving this cache.");
@@ -668,6 +671,7 @@ public class cgeopopup extends AbstractActivity {
         finish();
     }
 
+    @Override
     public void goManual(View view) {
         super.goManual(view);
         finish();

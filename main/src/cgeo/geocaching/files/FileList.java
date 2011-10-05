@@ -95,6 +95,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
                 true,
                 true,
                 new DialogInterface.OnCancelListener() {
+                    @Override
                     public void onCancel(DialogInterface arg0) {
                         if (searchingThread != null && searchingThread.isAlive()) {
                             searchingThread.notifyEnd();

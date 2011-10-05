@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.util.Map;
 
 public class LocParserTest extends InstrumentationTestCase {
+    @SuppressWarnings("null")
     private Map<String, cgCoord> readLoc(int resourceId) {
         Map<String, cgCoord> caches = null;
         final Resources res = getInstrumentation().getContext().getResources();

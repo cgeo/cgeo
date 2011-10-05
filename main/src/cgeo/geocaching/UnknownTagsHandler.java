@@ -12,6 +12,7 @@ public class UnknownTagsHandler implements TagHandler {
     private static final int UNDEFINED_POSITION = -1;
     int strikePos = UNDEFINED_POSITION;
 
+    @Override
     public void handleTag(boolean opening, String tag, Editable output,
             XMLReader xmlReader) {
         if (tag.equalsIgnoreCase("strike") || tag.equals("s")) {

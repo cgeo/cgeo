@@ -85,7 +85,7 @@ public class StaticMapsProvider {
                 }
 
                 final BufferedHttpEntity bufferedEntity = new BufferedHttpEntity(entity);
-                InputStream is = (InputStream) bufferedEntity.getContent();
+                InputStream is = bufferedEntity.getContent();
                 FileOutputStream fos = new FileOutputStream(fileName);
 
                 int fileSize = 0;

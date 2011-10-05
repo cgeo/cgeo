@@ -611,6 +611,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 waitDialog.setMax(detailTotal);
                 waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
+                    @Override
                     public void onCancel(DialogInterface arg0) {
                         try {
                             if (loadDetailsThread != null) {
@@ -1773,6 +1774,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
     // set my location listener
     private class MyLocationListener implements View.OnClickListener {
+        @Override
         public void onClick(View view) {
             followMyLocation = !followMyLocation;
             switchMyLocationButton();
@@ -1793,11 +1795,13 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     }
 
     // close activity and open homescreen
+    @Override
     public void goHome(View view) {
         ActivityMixin.goHome(activity);
     }
 
     // open manual entry
+    @Override
     public void goManual(View view) {
         ActivityMixin.goManual(activity, "c:geo-live-map");
     }

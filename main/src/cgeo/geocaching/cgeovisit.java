@@ -129,6 +129,7 @@ public class cgeovisit extends cgLogForm {
                     registerForContextMenu(inventoryItem);
                     inventoryItem.findViewById(R.id.info).setOnClickListener(new View.OnClickListener() {
 
+                        @Override
                         public void onClick(View view) {
                             final Intent trackablesIntent = new Intent(cgeovisit.this, cgeotrackable.class);
                             trackablesIntent.putExtra(EXTRAS_GEOCODE, tbCode);
@@ -137,6 +138,7 @@ public class cgeovisit extends cgLogForm {
                     });
                     inventoryItem.findViewById(R.id.action).setOnClickListener(new View.OnClickListener() {
 
+                        @Override
                         public void onClick(View view) {
                             openContextMenu(view);
                         }
@@ -161,6 +163,7 @@ public class cgeovisit extends cgLogForm {
                     registerForContextMenu(changeButton);
                     changeButton.setOnClickListener(new View.OnClickListener() {
 
+                        @Override
                         public void onClick(View view) {
                             openContextMenu(view);
                         }
@@ -475,6 +478,7 @@ public class cgeovisit extends cgLogForm {
         typeButton.setText(cgBase.logTypes2.get(typeSelected));
         typeButton.setOnClickListener(new View.OnClickListener() {
 
+            @Override
             public void onClick(View view) {
                 openContextMenu(view);
             }
@@ -530,6 +534,7 @@ public class cgeovisit extends cgLogForm {
         clear.setOnClickListener(new clearListener());
     }
 
+    @Override
     public void setDate(Calendar dateIn) {
         date = dateIn;
 
@@ -581,6 +586,7 @@ public class cgeovisit extends cgLogForm {
 
     private class cgeovisitDateListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             Dialog dateDialog = new cgeodate(cgeovisit.this, cgeovisit.this, date);
             dateDialog.setCancelable(true);
@@ -590,6 +596,7 @@ public class cgeovisit extends cgLogForm {
 
     private class postListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             if (gettingViewstate == false) {
                 waitDialog = ProgressDialog.show(cgeovisit.this, null, res.getString(R.string.log_saving), true);
@@ -606,6 +613,7 @@ public class cgeovisit extends cgLogForm {
 
     private class clearListener implements View.OnClickListener {
 
+        @Override
         public void onClick(View arg0) {
             app.clearLogOffline(geocode);
 

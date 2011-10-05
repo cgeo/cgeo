@@ -1,9 +1,9 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
-import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 import cgeo.geocaching.maps.interfaces.OverlayItemImpl;
 
@@ -46,10 +46,12 @@ public abstract class AbstractItemizedOverlay implements GeneralOverlay {
         ovlImpl.superSetLastFocusedItemIndex(index);
     }
 
+    @Override
     public void draw(Canvas canvas, MapViewImpl mapView, boolean shadow) {
         ovlImpl.superDraw(canvas, mapView, shadow);
     }
 
+    @Override
     public void drawOverlayBitmap(Canvas canvas, Point drawPosition,
             MapProjectionImpl projection, byte drawZoomLevel) {
         ovlImpl.superDrawOverlayBitmap(canvas, drawPosition, projection, drawZoomLevel);

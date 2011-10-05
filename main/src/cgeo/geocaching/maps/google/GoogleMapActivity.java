@@ -111,11 +111,13 @@ public class GoogleMapActivity extends MapActivity implements MapActivityImpl {
     }
 
     // close activity and open homescreen
+    @Override
     public void goHome(View view) {
         mapBase.goHome(view);
     }
 
     // open manual entry
+    @Override
     public void goManual(View view) {
         mapBase.goManual(view);
     }

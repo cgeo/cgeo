@@ -187,7 +187,7 @@ public class cgeocaches extends AbstractListActivity {
                         cacheList.addAll(cacheListTmp);
                         cacheListTmp.clear();
 
-                        Collections.sort((List<cgCache>) cacheList, gcComparator);
+                        Collections.sort(cacheList, gcComparator);
                     }
                 } else {
                     setTitle(title);
@@ -219,6 +219,7 @@ public class cgeocaches extends AbstractListActivity {
                     dialog.setCancelable(true);
                     dialog.setNegativeButton(res.getString(R.string.license_dismiss), new DialogInterface.OnClickListener() {
 
+                        @Override
                         public void onClick(DialogInterface dialog, int id) {
                             cgBase.clearCookies();
                             dialog.cancel();
@@ -226,6 +227,7 @@ public class cgeocaches extends AbstractListActivity {
                     });
                     dialog.setPositiveButton(res.getString(R.string.license_show), new DialogInterface.OnClickListener() {
 
+                        @Override
                         public void onClick(DialogInterface dialog, int id) {
                             cgBase.clearCookies();
                             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/software/agreement.aspx?ID=0")));
@@ -284,7 +286,7 @@ public class cgeocaches extends AbstractListActivity {
                     if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                         cacheList.addAll(cacheListTmp);
                         cacheListTmp.clear();
-                        Collections.sort((List<cgCache>) cacheList, gcComparator);
+                        Collections.sort(cacheList, gcComparator);
                     }
                     if (adapter != null) {
                         adapter.reFilter();
@@ -356,7 +358,7 @@ public class cgeocaches extends AbstractListActivity {
                     }
 
                     int secondsElapsed = (int) ((System.currentTimeMillis() - detailProgressTime) / 1000);
-                    int minutesRemaining = (int) ((detailTotal - detailProgress) * secondsElapsed / ((detailProgress > 0) ? detailProgress : 1) / 60);
+                    int minutesRemaining = ((detailTotal - detailProgress) * secondsElapsed / ((detailProgress > 0) ? detailProgress : 1) / 60);
 
                     waitDialog.setProgress(detailProgress);
                     if (minutesRemaining < 1) {
@@ -374,7 +376,7 @@ public class cgeocaches extends AbstractListActivity {
                         cacheList.clear();
                         cacheList.addAll(cacheListTmp);
                         cacheListTmp.clear();
-                        Collections.sort((List<cgCache>) cacheList, gcComparator);
+                        Collections.sort(cacheList, gcComparator);
                     }
                 }
 
@@ -444,7 +446,7 @@ public class cgeocaches extends AbstractListActivity {
                     cacheList.addAll(cacheListTmp);
                     cacheListTmp.clear();
 
-                    Collections.sort((List<cgCache>) cacheList, gcComparator);
+                    Collections.sort(cacheList, gcComparator);
                 }
 
                 if (waitDialog != null) {
@@ -472,7 +474,7 @@ public class cgeocaches extends AbstractListActivity {
                 cacheList.addAll(cacheListTmp);
                 cacheListTmp.clear();
 
-                Collections.sort((List<cgCache>) cacheList, gcComparator);
+                Collections.sort(cacheList, gcComparator);
             }
 
             if (waitDialog != null) {
@@ -1464,6 +1466,7 @@ public class cgeocaches extends AbstractListActivity {
         waitDialog = new ProgressDialog(this);
         waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
+            @Override
             public void onCancel(DialogInterface arg0) {
                 try {
                     if (threadD != null) {
@@ -1483,7 +1486,7 @@ public class cgeocaches extends AbstractListActivity {
         });
 
         waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        int etaTime = (int) ((detailTotal * 25) / 60);
+        int etaTime = (detailTotal * 25) / 60;
         if (etaTime < 1) {
             waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
         } else if (etaTime == 1) {
@@ -1509,12 +1512,14 @@ public class cgeocaches extends AbstractListActivity {
         dialog.setMessage((adapter != null && adapter.getChecked() > 0) ? res.getString(R.string.cache_remove_from_history)
                 : res.getString(R.string.cache_clear_history));
         dialog.setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int id) {
                 removeFromHistory();
                 dialog.cancel();
             }
         });
         dialog.setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
@@ -1542,6 +1547,7 @@ public class cgeocaches extends AbstractListActivity {
         waitDialog = new ProgressDialog(this);
         waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
+            @Override
             public void onCancel(DialogInterface arg0)
             {
                 try
@@ -1586,6 +1592,7 @@ public class cgeocaches extends AbstractListActivity {
         waitDialog = new ProgressDialog(this);
         waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
+            @Override
             public void onCancel(DialogInterface arg0)
             {
                 try
@@ -1620,6 +1627,7 @@ public class cgeocaches extends AbstractListActivity {
         waitDialog = new ProgressDialog(this);
         waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
+            @Override
             public void onCancel(DialogInterface arg0) {
                 try {
                     if (threadW != null) {
@@ -1656,6 +1664,7 @@ public class cgeocaches extends AbstractListActivity {
             dialog.setMessage(res.getString(R.string.caches_drop_selected_ask));
             dialog.setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
 
+                @Override
                 public void onClick(DialogInterface dialog, int id) {
                     dropSelected();
                     dialog.cancel();
@@ -1665,6 +1674,7 @@ public class cgeocaches extends AbstractListActivity {
             dialog.setMessage(res.getString(R.string.caches_drop_all_ask));
             dialog.setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
 
+                @Override
                 public void onClick(DialogInterface dialog, int id) {
                     dropSelected();
                     dialog.cancel();
@@ -1673,6 +1683,7 @@ public class cgeocaches extends AbstractListActivity {
         }
         dialog.setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
 
+            @Override
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
@@ -1687,6 +1698,7 @@ public class cgeocaches extends AbstractListActivity {
         waitDialog.setMessage(res.getString(R.string.caches_drop_progress));
         waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
+            @Override
             public void onCancel(DialogInterface arg0) {
                 try {
                     if (threadR != null) {
@@ -2388,6 +2400,7 @@ public class cgeocaches extends AbstractListActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(res.getString(R.string.list_title));
         builder.setItems(listsTitle.toArray(items), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialogInterface, int item) {
                 switchListById(lists.get(item).id);
 
@@ -2462,6 +2475,7 @@ public class cgeocaches extends AbstractListActivity {
         alert.setTitle(R.string.list_dialog_create_title);
         alert.setView(view);
         alert.setPositiveButton(R.string.list_dialog_create, new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int whichButton) {
                 String value = input.getText().toString();
                 // remove whitespaces added by autocompletion of Android keyboard
@@ -2481,6 +2495,7 @@ public class cgeocaches extends AbstractListActivity {
             }
         });
         alert.setNegativeButton(res.getString(R.string.list_dialog_cancel), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int whichButton) {
                 dialog.dismiss();
             }
@@ -2514,11 +2529,13 @@ public class cgeocaches extends AbstractListActivity {
         alert.setTitle(R.string.list_dialog_remove_title);
         alert.setMessage(R.string.list_dialog_remove_description);
         alert.setPositiveButton(R.string.list_dialog_remove, new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int whichButton) {
                 removeListInternal();
             }
         });
         alert.setNegativeButton(res.getString(R.string.list_dialog_cancel), new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int whichButton) {
                 dialog.dismiss();
             }
@@ -2545,6 +2562,7 @@ public class cgeocaches extends AbstractListActivity {
         startActivity(mapIntent);
     }
 
+    @Override
     public void goManual(View view) {
         if (type != null && type.equals("offline")) {
             ActivityMixin.goManual(this, "c:geo-stored");

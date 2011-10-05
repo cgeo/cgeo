@@ -91,7 +91,7 @@ public final class GCVote {
                     final Matcher matcherGuid = patternGuid.matcher(voteData);
                     if (matcherGuid.find()) {
                         if (matcherGuid.groupCount() > 0) {
-                            guid = (String) matcherGuid.group(1);
+                            guid = matcherGuid.group(1);
                         }
                     }
                 } catch (Exception e) {

@@ -37,7 +37,7 @@ public class cgGPXListAdapter extends ArrayAdapter<File> {
         View v = rowView;
 
         if (v == null) {
-            v = (View) inflater.inflate(R.layout.gpx_item, null);
+            v = inflater.inflate(R.layout.gpx_item, null);
 
             holder = new cgGPXView();
             holder.filepath = (TextView) v.findViewById(R.id.filepath);
@@ -70,6 +70,7 @@ public class cgGPXListAdapter extends ArrayAdapter<File> {
         }
 
         // tap on item
+        @Override
         public void onClick(View view) {
             parent.loadGPX(file);
         }

@@ -143,6 +143,7 @@ public class cgeotrackables extends AbstractActivity {
             name = nameIn;
         }
 
+        @Override
         public void onClick(View arg0) {
             cgeotrackable.startActivity(cgeotrackables.this, guid, geocode, name);
             return;
