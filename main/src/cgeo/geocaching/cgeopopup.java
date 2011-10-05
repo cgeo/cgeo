@@ -534,7 +534,7 @@ public class cgeopopup extends AbstractActivity {
         navigateIntent.putExtra("latitude", cache.coords.getLatitude());
         navigateIntent.putExtra("longitude", cache.coords.getLongitude());
         navigateIntent.putExtra("geocode", "");
-        navigateIntent.putExtra("name", "Some destination");
+        navigateIntent.putExtra("name", R.string.search_some_destination);
 
         startActivity(navigateIntent);
     }

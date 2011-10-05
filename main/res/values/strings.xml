@@ -702,6 +702,7 @@
   <string name="search_tb_hint">Trackable identification</string>
   <string name="search_tb_button">Search for trackable</string>
   <string name="search_destination">Destination</string>
+  <string name="search_some_destination">Some destination</string>
   <string name="search_direction_rel">From this position</string>
   <string name="search_lat">Lat</string>
   <string name="search_lon">Lon</string>
