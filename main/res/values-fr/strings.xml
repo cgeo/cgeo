@@ -142,7 +142,7 @@
   <string name="err_detail_cache_forgot">Désolé, c:geo a oublié la cache demandée.</string>
   <string name="err_detail_cache_forgot_visit">Désolé, c:geo a oublié la cache que vous avez visité.</string>
   <string name="err_detail_cache_language">c:geo ne peut pas lire certains details de la cache. Merci de vérifier que le site Web geocaching.com est configuré en Anglais. Malheureusement, c:geo ne supporte pas les autres langues.</string>
-  <string name="err_detail_no_spoiler">c:geo n\'a pas trouvé de photo solution pour cette cache.</string>
+  <string name="err_detail_no_spoiler">c:geo n\'a pas trouvé d\'image indice pour cette cache.</string>
   <string name="err_detail_no_map_static">c:geo n\'a pas trouvé de cartes statiques pour cette cache.</string>
   <string name="err_detail_not_load_map_static">Désolé, c:geo n\'a pas réussi à charger les cartes statiques.</string>
   <string name="err_detail_still_removing">Cache toujours en cours d\'effacement.</string>
@@ -525,6 +525,13 @@
   <string name="cache_hint">Indice</string>
   <string name="cache_logs">Carnet de bord</string>
   <string name="cache_dialog_loading_details">Chargement des détails…</string>
+  <string name="cache_dialog_loading_details_status_loadpage">Chargement de la page</string>
+  <string name="cache_dialog_loading_details_status_details">Traitement des informations</string>
+  <string name="cache_dialog_loading_details_status_spoilers">Chargement des images indice</string>
+  <string name="cache_dialog_loading_details_status_logs">Chargement des entrées de carnets</string>
+  <string name="cache_dialog_loading_details_status_waypoints">Traitement des points intermédiaires</string>
+  <string name="cache_dialog_loading_details_status_gcvote">Chargement des votes</string>
+  <string name="cache_dialog_loading_details_status_render">Render view</string>
   <string name="cache_dialog_loading_description">Chargement de la description…</string>
   <string name="cache_dialog_offline_save_title">Hors ligne</string>
   <string name="cache_dialog_offline_save_message">Enregistrement pour une utilisation hors ligne…</string>
@@ -551,7 +558,7 @@
   <string name="cache_menu_browser">Navigateur</string>
   <string name="cache_menu_visit">Carnet</string>
   <string name="cache_menu_visit_offline">Enregistrer la visite hors-ligne</string>
-  <string name="cache_menu_spoilers">Photos solutions</string>
+  <string name="cache_menu_spoilers">Images indices</string>
   <string name="cache_menu_around">Alentours</string>
   <string name="cache_menu_event">Ajouter à l\'agenda</string>
   <string name="cache_menu_details">Détails</string>
