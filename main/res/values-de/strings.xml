@@ -414,6 +414,7 @@
   <string name="init_useenglish">c:geo auf Englisch nutzen (Neustart erforderlich)</string>
   <string name="init_exclude">Eigene und gefundene Caches ausblenden</string>
   <string name="init_showwaypoints">Wegpunkte zeigen</string>
+  <string name="init_showwaypoint_description">Grenze unter der Wegpunkte in der Karte angezeigt werden.</string>
   <string name="init_disabled">Deaktivierte Caches ausblenden</string>
   <string name="init_offline">Statische Karten für Offline-Verwendung speichern</string>
   <string name="init_save_log_img">Logbilder abspeichern</string>
@@ -686,6 +687,7 @@
   <string name="search_tb_hint">Trackingnummer</string>
   <string name="search_tb_button">Suche nach Trackable</string>
   <string name="search_destination">Ziel</string>
+  <string name="search_some_destination">Ein Zielort</string>
   <string name="search_direction_rel">Vom aktuellen Standort</string>
   <string name="search_lat">Lat</string>
   <string name="search_lon">Lon</string>
