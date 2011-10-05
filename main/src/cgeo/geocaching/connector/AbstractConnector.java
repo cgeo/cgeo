@@ -5,6 +5,8 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgeoapplication;
 
+import android.os.Handler;
+
 import java.util.UUID;
 
 public abstract class AbstractConnector implements IConnector {
@@ -45,7 +47,7 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
-    public UUID searchByGeocode(cgBase base, String geocode, String guid, cgeoapplication app, cgSearch search, int reason) {
+    public UUID searchByGeocode(cgBase base, String geocode, String guid, cgeoapplication app, cgSearch search, int reason, Handler handler) {
         return null;
     }
 }
