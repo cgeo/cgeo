@@ -965,7 +965,7 @@
 
   <!-- changelog -->
   <string name="changelog">\n
-    <b>New release</b>\n
+    <b>06.10.2011</b>\n
     · new: import waypoint files from pocket query\n
     · new: automatically filter out counter images from cache description\n
     · new: show all the images belonging to a log entry at once\n
