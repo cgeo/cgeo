@@ -522,7 +522,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             Bitmap dirImgPre = null;
             Bitmap dirImg = null;
             try {
-                dirImgPre = BitmapFactory.decodeFile(Settings.getStorage() + cache.geocode + "/direction.png");
+                dirImgPre = BitmapFactory.decodeFile(cgDirectionImg.getDirectionFile(cache.geocode).getPath());
                 dirImg = dirImgPre.copy(Bitmap.Config.ARGB_8888, true);
 
                 dirImgPre.recycle();

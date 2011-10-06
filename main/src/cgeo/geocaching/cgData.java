@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Geopoint.MalformedCoordinateException;
 import cgeo.geocaching.utils.CollectionUtils;
@@ -20,12 +21,6 @@ import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -323,74 +318,32 @@ public class cgData {
         }
     }
 
+    private static File backupFile() {
+        return new File(LocalStorage.getStorage(), "cgeo.sqlite");
+    }
+
     public String backupDatabase() {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) == false) {
             Log.w(Settings.tag, "Database wasn't backed up: no external memory");
-
             return null;
         }
 
+        final File target = backupFile();
         closeDb();
-
-        boolean backupDone = false;
-        final String directoryImg = Settings.cache;
-        final String directoryTarget = Environment.getExternalStorageDirectory() + "/" + directoryImg + "/";
-        final String fileTarget = directoryTarget + "cgeo.sqlite";
-        final String fileSource = path;
-
-        File directoryTargetFile = new File(directoryTarget);
-        if (directoryTargetFile.exists() == false) {
-            directoryTargetFile.mkdir();
-        }
-
-        InputStream input = null;
-        OutputStream output = null;
-        try {
-            input = new FileInputStream(fileSource);
-            output = new FileOutputStream(fileTarget);
-        } catch (FileNotFoundException e) {
-            Log.e(Settings.tag, "Database wasn't backed up, could not open file: " + e.toString());
-        }
-
-        byte[] buffer = new byte[1024];
-        int length;
-        if ((input != null) && (output != null)) {
-            try {
-                while ((length = input.read(buffer)) > 0) {
-                    output.write(buffer, 0, length);
-                }
-                output.flush();
-                backupDone = true;
-            } catch (IOException e) {
-                Log.e(Settings.tag, "Database wasn't backed up, could not read/write file: " + e.toString());
-            }
-        }
-
-        try {
-            if (output != null) {
-                output.close();
-            }
-            if (input != null) {
-                input.close();
-            }
-        } catch (IOException e) {
-            Log.e(Settings.tag, "Database wasn't backed up, could not close file: " + e.toString());
-        }
-
-        if (backupDone) {
-            Log.i(Settings.tag, "Database was copied to " + fileTarget);
-        }
-
+        final boolean backupDone = LocalStorage.copy(new File(path), target);
         init();
 
-        return backupDone ? fileTarget : null;
+        if (backupDone) {
+            Log.i(Settings.tag, "Database was copied to " + target);
+            return target.getPath();
+        } else {
+            Log.e(Settings.tag, "Database could not be copied to " + target);
+            return null;
+        }
     }
 
     public static File isRestoreFile() {
-        final String directoryImg = Settings.cache;
-        final String fileSource = Environment.getExternalStorageDirectory() + "/" + directoryImg + "/cgeo.sqlite";
-
-        File fileSourceFile = new File(fileSource);
+        final File fileSourceFile = backupFile();
         if (fileSourceFile.exists()) {
             return fileSourceFile;
         } else {
@@ -401,66 +354,19 @@ public class cgData {
     public boolean restoreDatabase() {
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) == false) {
             Log.w(Settings.tag, "Database wasn't restored: no external memory");
-
             return false;
         }
 
+        final File sourceFile = backupFile();
         closeDb();
-
-        boolean restoreDone = false;
-
-        final String directoryImg = Settings.cache;
-        final String fileSource = Environment.getExternalStorageDirectory() + "/" + directoryImg + "/cgeo.sqlite";
-        final String fileTarget = path;
-
-        File fileSourceFile = new File(fileSource);
-        if (fileSourceFile.exists() == false) {
-            Log.w(Settings.tag, "Database backup was not found");
-
-            init();
-
-            return restoreDone;
-        }
-
-        InputStream input = null;
-        OutputStream output = null;
-        try {
-            input = new FileInputStream(fileSource);
-            output = new FileOutputStream(fileTarget);
-        } catch (FileNotFoundException e) {
-            Log.e(Settings.tag, "Database wasn't restored, could not open file: " + e.toString());
-        }
-
-        byte[] buffer = new byte[1024];
-        int length;
-        if ((input != null) && (output != null)) {
-            try {
-                while ((length = input.read(buffer)) > 0) {
-                    output.write(buffer, 0, length);
-                }
-                output.flush();
-                restoreDone = true;
-            } catch (IOException e) {
-                Log.e(Settings.tag, "Database wasn't restored, could not read/write file: " + e.toString());
-            }
-        }
-
-        try {
-            if (output != null) {
-                output.close();
-            }
-            if (input != null) {
-                input.close();
-            }
-        } catch (IOException e) {
-            Log.e(Settings.tag, "Database wasn't restored, could not close file: " + e.toString());
-        }
+        final boolean restoreDone = LocalStorage.copy(sourceFile, new File(path));
+        init();
 
         if (restoreDone) {
-            Log.i(Settings.tag, "Database was restored");
+            Log.i(Settings.tag, "Database succesfully restored from " + sourceFile.getPath());
+        } else {
+            Log.e(Settings.tag, "Could not restore database from " + sourceFile.getPath());
         }
-
-        init();
 
         return restoreDone;
     }
@@ -980,7 +886,7 @@ public class cgData {
     private static void removeObsoleteCacheDirectories(final SQLiteDatabase db) {
         final Pattern oldFilePattern = Pattern.compile("^[GC|TB|O][A-Z0-9]{4,7}$");
         final SQLiteStatement select = db.compileStatement("select count(*) from " + dbTableCaches + " where geocode = ?");
-        final File[] files = new File(Settings.getStorage()).listFiles();
+        final File[] files = LocalStorage.getStorage().listFiles();
         final ArrayList<File> toRemove = new ArrayList<File>(files.length);
         for (final File file : files) {
             if (file.isDirectory()) {
@@ -3071,7 +2977,7 @@ public class cgData {
 
         // Delete cache directories
         for (final String geocode : geocodes) {
-            cgBase.deleteDirectory(new File(Settings.getStorage() + geocode));
+            cgBase.deleteDirectory(LocalStorage.getStorageDir(geocode));
         }
     }
 
