@@ -29,7 +29,6 @@ public class cgeoabout extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        settings.load();
     }
 
     @Override
@@ -48,7 +47,7 @@ public class cgeoabout extends AbstractActivity {
 
             ((TextView) findViewById(R.id.contributors)).setMovementMethod(LinkMovementMethod.getInstance());
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgeoabout.init: Failed to obtain package version.");
+            Log.e(Settings.tag, "cgeoabout.init: Failed to obtain package version.");
         }
     }
 

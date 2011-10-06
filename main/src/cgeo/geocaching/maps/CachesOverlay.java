@@ -2,19 +2,19 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCoord;
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeodetail;
 import cgeo.geocaching.cgeonavigate;
 import cgeo.geocaching.cgeopopup;
 import cgeo.geocaching.cgeowaypoint;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
+import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.maps.interfaces.MapFactory;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
-import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -48,19 +48,17 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
     private Paint blockedCircle = null;
     private PaintFlagsDrawFilter setfil = null;
     private PaintFlagsDrawFilter remfil = null;
-    private cgSettings settings;
     private MapFactory mapFactory = null;
 
-    public CachesOverlay(cgSettings settingsIn, ItemizedOverlayImpl ovlImpl, Context contextIn, Boolean fromDetailIn) {
+    public CachesOverlay(ItemizedOverlayImpl ovlImpl, Context contextIn, Boolean fromDetailIn) {
         super(ovlImpl);
 
         populate();
-        settings = settingsIn;
 
         context = contextIn;
         fromDetail = fromDetailIn;
 
-        mapFactory = settings.getMapFactory();
+        mapFactory = Settings.getMapFactory();
     }
 
     public void updateItems(CachesOverlayItemImpl item) {
@@ -231,7 +229,7 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
 
             waitDialog.dismiss();
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgMapOverlay.onTap: " + e.toString());
+            Log.e(Settings.tag, "cgMapOverlay.onTap: " + e.toString());
         }
 
         return false;
@@ -242,7 +240,7 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
         try {
             return items.get(index);
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgMapOverlay.createItem: " + e.toString());
+            Log.e(Settings.tag, "cgMapOverlay.createItem: " + e.toString());
         }
 
         return null;
@@ -253,7 +251,7 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
         try {
             return items.size();
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgMapOverlay.size: " + e.toString());
+            Log.e(Settings.tag, "cgMapOverlay.size: " + e.toString());
         }
 
         return 0;
@@ -265,7 +263,7 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
         final cgCoord coordinate = item.getCoord();
 
         if (coordinate == null) {
-            Log.e(cgSettings.tag, "cgMapOverlay:infoDialog: No coordinates given");
+            Log.e(Settings.tag, "cgMapOverlay:infoDialog: No coordinates given");
             return;
         }
 
@@ -353,7 +351,7 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
             AlertDialog alert = dialog.create();
             alert.show();
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgMapOverlay.infoDialog: " + e.toString());
+            Log.e(Settings.tag, "cgMapOverlay.infoDialog: " + e.toString());
         }
     }
 }

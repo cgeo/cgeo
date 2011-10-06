@@ -21,8 +21,8 @@ Build
 ### Prerequisites ###
 
 - [Android SDK](http://developer.android.com/sdk) 2.2 including Google APIs V8
-- [Google USB Driver](http://developer.android.com/sdk/win-usb.html) to install the application on the smartphone
 - [Ant](http://ant.apache.org) 1.6.0+ for building c:geo on the command line (not necessary when using only Eclipse)
+- If you use Microsoft Windows, [Google USB Driver](http://developer.android.com/sdk/win-usb.html) to install the application on the smartphone
 
 ### Structure ###
 
@@ -59,9 +59,10 @@ or use the Ant view of Eclipse
 
 ### Testing ###
 
-The Test classes can be found in the package cgeo.geocaching.test (within the cgeo-os-test project)
+The Test classes can be found in the project cgeo-os-test. Test classes should be located in the same package as
+the class under test.
 Every class can be "Run As" (or "Debug As") an "Android JUnit Test" from Eclipse.
-To run all tests use the test suite in cgeoTestSuite.
+To run all tests use the test suite in CgeoTestSuite in package cgeo.geocaching.test.
 Further information can be found at http://developer.android.com/guide/topics/testing/testing_android.html
 
 License

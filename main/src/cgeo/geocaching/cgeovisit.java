@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.LogTemplateProvider.LogTemplate;
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.utils.CollectionUtils;
 
 import org.apache.commons.lang3.StringUtils;
@@ -120,7 +121,7 @@ public class cgeovisit extends cgLogForm {
 
                     ((TextView) inventoryItem.findViewById(R.id.trackcode)).setText(tb.trackCode);
                     ((TextView) inventoryItem.findViewById(R.id.name)).setText(tb.name);
-                    ((TextView) inventoryItem.findViewById(R.id.action)).setText(cgBase.logTypesTrackable.get(settings.trackableAutovisit ? 1 : 0));
+                    ((TextView) inventoryItem.findViewById(R.id.action)).setText(cgBase.logTypesTrackable.get(Settings.isTrackableAutoVisit() ? 1 : 0));
 
                     inventoryItem.setId(tb.id);
                     final String tbCode = tb.trackCode;
@@ -143,7 +144,7 @@ public class cgeovisit extends cgLogForm {
 
                     inventoryView.addView(inventoryItem);
 
-                    if (settings.trackableAutovisit)
+                    if (Settings.isTrackableAutoVisit())
                     {
                         tb.action = 1;
                         tbChanged = true;
@@ -176,19 +177,18 @@ public class cgeovisit extends cgLogForm {
     private Handler postLogHandler = new Handler() {
 
         @Override
-        public void handleMessage(Message msg) {
-            if (msg.what == 1) {
+        public void handleMessage(final Message msg) {
+            if (waitDialog != null) {
+                waitDialog.dismiss();
+            }
+
+            final StatusCode error = (StatusCode) msg.obj;
+            if (error == StatusCode.NO_ERROR) {
                 showToast(res.getString(R.string.info_log_posted));
-
-                if (waitDialog != null) {
-                    waitDialog.dismiss();
-                }
-
                 // No need to save the log when quitting if it has been posted.
                 text = currentLogText();
                 finish();
-                return;
-            } else if (msg.what == 2) {
+            } else if (error == StatusCode.LOG_SAVED) {
                 showToast(res.getString(R.string.info_log_saved));
 
                 if (waitDialog != null) {
@@ -196,25 +196,8 @@ public class cgeovisit extends cgLogForm {
                 }
 
                 finish();
-                return;
-            } else if (msg.what >= 1000) {
-                if (msg.what == 1001) {
-                    showToast(res.getString(R.string.warn_log_text_fill));
-                } else if (msg.what == 1002) {
-                    showToast(res.getString(R.string.err_log_failed_server));
-                } else {
-                    showToast(res.getString(R.string.err_log_post_failed));
-                }
             } else {
-                if (cgBase.errorRetrieve.get(msg.what) != null) {
-                    showToast(res.getString(R.string.err_log_post_failed_because) + " " + cgBase.errorRetrieve.get(msg.what) + ".");
-                } else {
-                    showToast(res.getString(R.string.err_log_post_failed));
-                }
-            }
-
-            if (waitDialog != null) {
-                waitDialog.dismiss();
+                showToast(error.getErrorString(res));
             }
         }
     };
@@ -264,7 +247,6 @@ public class cgeovisit extends cgLogForm {
     public void onResume() {
         super.onResume();
 
-        settings.load();
     }
 
     @Override
@@ -307,10 +289,10 @@ public class cgeovisit extends cgLogForm {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        boolean signatureAvailable = settings.getSignature() != null;
+        boolean signatureAvailable = Settings.getSignature() != null;
         menu.findItem(MENU_SIGNATURE).setVisible(signatureAvailable);
 
-        boolean voteAvailable = settings.isGCvoteLogin() && typeSelected == cgBase.LOG_FOUND_IT && StringUtils.isNotBlank(cache.guid);
+        boolean voteAvailable = Settings.isGCvoteLogin() && typeSelected == cgBase.LOG_FOUND_IT && StringUtils.isNotBlank(cache.guid);
         menu.findItem(SUBMENU_VOTE).setVisible(voteAvailable);
 
         return true;
@@ -321,12 +303,7 @@ public class cgeovisit extends cgLogForm {
         int id = item.getItemId();
 
         if (id == MENU_SIGNATURE) {
-            EditText log = (EditText) findViewById(R.id.log);
-            String content = log.getText().toString();
-            if (StringUtils.isNotBlank(content)) {
-                insertIntoLog("\n", false);
-            }
-            insertIntoLog(LogTemplateProvider.applyTemplates(settings.getSignature(), base, false), false);
+            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), base, false), true);
             return true;
         } else if (id >= 10 && id <= 19) {
             rating = (id - 9) / 2.0;
@@ -367,7 +344,7 @@ public class cgeovisit extends cgLogForm {
         if (viewId == R.id.type) {
             for (final int typeOne : types) {
                 menu.add(viewId, typeOne, 0, cgBase.logTypes2.get(typeOne));
-                Log.w(cgSettings.tag, "Adding " + typeOne + " " + cgBase.logTypes2.get(typeOne));
+                Log.w(Settings.tag, "Adding " + typeOne + " " + cgBase.logTypes2.get(typeOne));
             }
         } else if (viewId == R.id.changebutton) {
             final int textId = ((TextView) findViewById(viewId)).getId();
@@ -423,7 +400,7 @@ public class cgeovisit extends cgLogForm {
                     return true;
                 }
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgeovisit.onContextItemSelected: " + e.toString());
+                Log.e(Settings.tag, "cgeovisit.onContextItemSelected: " + e.toString());
             }
         } else {
             try {
@@ -446,14 +423,14 @@ public class cgeovisit extends cgLogForm {
                             tb.action = id;
                             tbText.setText(logTbAction);
 
-                            Log.i(cgSettings.tag, "Trackable " + tb.trackCode + " (" + tb.name + ") has new action: #" + id);
+                            Log.i(Settings.tag, "Trackable " + tb.trackCode + " (" + tb.name + ") has new action: #" + id);
                         }
                     }
 
                     return true;
                 }
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgeovisit.onContextItemSelected: " + e.toString());
+                Log.e(Settings.tag, "cgeovisit.onContextItemSelected: " + e.toString());
             }
         }
 
@@ -465,24 +442,23 @@ public class cgeovisit extends cgLogForm {
             app.setAction(geocode);
         }
 
-        types = cache.getPossibleLogTypes(settings);
+        types = cache.getPossibleLogTypes();
 
         final cgLog log = app.loadLogOffline(geocode);
         if (log != null) {
             typeSelected = log.type;
             date.setTime(new Date(log.date));
             text = log.log;
-            if (typeSelected == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin()) {
+            if (typeSelected == cgBase.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
                 if (post == null) {
                     post = (Button) findViewById(R.id.post);
                 }
                 post.setText(res.getString(R.string.log_post_no_rate));
             }
-        } else if (StringUtils.isNotBlank(settings.getSignature())
-                && settings.signatureAutoinsert
+        } else if (StringUtils.isNotBlank(Settings.getSignature())
+                && Settings.isAutoInsertSignature()
                 && StringUtils.isBlank(((EditText) findViewById(R.id.log)).getText())) {
-            text = "\n" + LogTemplateProvider.applyTemplates(settings.getSignature(), base, false);
-            insertIntoLog(text, false);
+            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), base, false), false);
         }
 
         if (types.contains(typeSelected) == false) {
@@ -582,7 +558,7 @@ public class cgeovisit extends cgLogForm {
             // TODO: change action
         }
 
-        if (type == cgBase.LOG_FOUND_IT && settings.twitter == 1) {
+        if (type == cgBase.LOG_FOUND_IT && Settings.isUseTwitter()) {
             tweetBox.setVisibility(View.VISIBLE);
         } else {
             tweetBox.setVisibility(View.GONE);
@@ -592,7 +568,7 @@ public class cgeovisit extends cgLogForm {
             post = (Button) findViewById(R.id.post);
         }
 
-        if (type == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin()) {
+        if (type == cgBase.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
             if (rating == 0) {
                 post.setText(res.getString(R.string.log_post_no_rate));
             } else {
@@ -699,7 +675,7 @@ public class cgeovisit extends cgLogForm {
                 }
                 typesPre.clear();
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgeovisit.loadData.run: " + e.toString());
+                Log.e(Settings.tag, "cgeovisit.loadData.run: " + e.toString());
             }
 
             loadDataHandler.sendEmptyMessage(0);
@@ -718,17 +694,12 @@ public class cgeovisit extends cgLogForm {
 
         @Override
         public void run() {
-            int ret = -1;
-
-            ret = postLogFn(log);
-
-            handler.sendEmptyMessage(ret);
+            final StatusCode status = postLogFn(log);
+            handler.sendMessage(handler.obtainMessage(0, status));
         }
     }
 
-    public int postLogFn(String log) {
-        int status = -1;
-
+    public StatusCode postLogFn(String log) {
         try {
             if (tweetBox == null) {
                 tweetBox = (LinearLayout) findViewById(R.id.tweet_box);
@@ -737,13 +708,13 @@ public class cgeovisit extends cgLogForm {
                 tweetCheck = (CheckBox) findViewById(R.id.tweet);
             }
 
-            status = base.postLog(app, geocode, cacheid, viewstates, typeSelected,
+            final StatusCode status = cgBase.postLog(app, geocode, cacheid, viewstates, typeSelected,
                     date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE),
                     log, trackables);
 
-            if (status == 1) {
+            if (status == StatusCode.NO_ERROR) {
                 cgLog logNow = new cgLog();
-                logNow.author = settings.getUsername();
+                logNow.author = Settings.getUsername();
                 logNow.date = date.getTimeInMillis();
                 logNow.type = typeSelected;
                 logNow.log = log;
@@ -767,26 +738,26 @@ public class cgeovisit extends cgLogForm {
                 }
             }
 
-            if (status == 1) {
+            if (status == StatusCode.NO_ERROR) {
                 app.clearLogOffline(geocode);
             }
 
-            if (status == 1 && typeSelected == cgBase.LOG_FOUND_IT && settings.twitter == 1
-                    && StringUtils.isNotBlank(settings.tokenPublic) && StringUtils.isNotBlank(settings.tokenSecret)
+            if (status == StatusCode.NO_ERROR && typeSelected == cgBase.LOG_FOUND_IT && Settings.isUseTwitter()
+                    && Settings.isTwitterLoginValid()
                     && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
-                cgBase.postTweetCache(app, settings, geocode);
+                cgBase.postTweetCache(app, geocode);
             }
 
-            if (status == 1 && typeSelected == cgBase.LOG_FOUND_IT && settings.isGCvoteLogin()) {
+            if (status == StatusCode.NO_ERROR && typeSelected == cgBase.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
                 GCVote.setRating(cache, rating);
             }
 
             return status;
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgeovisit.postLogFn: " + e.toString());
+            Log.e(Settings.tag, "cgeovisit.postLogFn: " + e.toString());
         }
 
-        return 1000;
+        return StatusCode.LOG_POST_ERROR;
     }
 
     private void saveLog(final boolean force) {

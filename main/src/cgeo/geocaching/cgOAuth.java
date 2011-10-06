@@ -17,12 +17,13 @@ public class cgOAuth {
         currentTime = currentTime / 1000; // seconds
         currentTime = (long) Math.floor(currentTime);
 
-        params.put("oauth_consumer_key", cgSettings.keyConsumerPublic);
-        params.put("oauth_nonce", CryptUtils.md5(Long.toString(System.currentTimeMillis())));
-        params.put("oauth_signature_method", "HMAC-SHA1");
-        params.put("oauth_timestamp", Long.toString(currentTime));
-        params.put("oauth_token", StringUtils.defaultString(token));
-        params.put("oauth_version", "1.0");
+        params.put(
+                "oauth_consumer_key", Settings.getKeyConsumerPublic(),
+                "oauth_nonce", CryptUtils.md5(Long.toString(System.currentTimeMillis())),
+                "oauth_signature_method", "HMAC-SHA1",
+                "oauth_timestamp", Long.toString(currentTime),
+                "oauth_token", StringUtils.defaultString(token),
+                "oauth_version", "1.0");
 
         params.sort();
 
@@ -31,7 +32,7 @@ public class cgOAuth {
             paramsEncoded.add(nameValue.getName() + "=" + cgBase.urlencode_rfc3986(nameValue.getValue()));
         }
 
-        final String keysPacked = cgSettings.keyConsumerSecret + "&" + StringUtils.defaultString(tokenSecret); // both even if empty some of them!
+        final String keysPacked = Settings.getKeyConsumerSecret() + "&" + StringUtils.defaultString(tokenSecret); // both even if empty some of them!
         final String requestPacked = method + "&" + cgBase.urlencode_rfc3986((https ? "https" : "http") + "://" + host + path) + "&" + cgBase.urlencode_rfc3986(StringUtils.join(paramsEncoded.toArray(), '&'));
         paramsEncoded.add("oauth_signature=" + cgBase.urlencode_rfc3986(cgBase.base64Encode(CryptUtils.hashHmac(requestPacked, keysPacked))));
 

@@ -1,15 +1,17 @@
 package cgeo.geocaching.connector;
 
 import cgeo.geocaching.Parameters;
+import cgeo.geocaching.R;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCacheWrap;
 import cgeo.geocaching.cgSearch;
-import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgeoapplication;
 
 import org.apache.commons.lang3.StringUtils;
 
+import android.os.Handler;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -65,21 +67,27 @@ public class GCConnector extends AbstractConnector implements IConnector {
     }
 
     @Override
-    public UUID searchByGeocode(final cgBase base, String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason) {
-        final Parameters params = new Parameters();
+    public UUID searchByGeocode(final cgBase base, String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final Handler handler) {
+        final Parameters params = new Parameters("decrypt", "y");
         if (StringUtils.isNotBlank(geocode)) {
             params.put("wp", geocode);
         } else if (StringUtils.isNotBlank(guid)) {
             params.put("guid", guid);
         }
-        params.put("decrypt", "y");
 
-        String page = base.requestLogged("http://www.geocaching.com/seek/cache_details.aspx", params, false, false, false);
+        if (app == null) {
+            Log.e(Settings.tag, "cgeoBase.searchByGeocode: No application found");
+            return null;
+        }
+
+        base.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
+
+        String page = cgBase.requestLogged("http://www.geocaching.com/seek/cache_details.aspx", params, false, false, false);
 
         if (StringUtils.isEmpty(page)) {
             if (app.isThere(geocode, guid, true, false)) {
                 if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
-                    Log.i(cgSettings.tag, "Loading old cache from cache.");
+                    Log.i(Settings.tag, "Loading old cache from cache.");
 
                     geocode = app.getGeocode(guid);
                 }
@@ -96,13 +104,14 @@ public class GCConnector extends AbstractConnector implements IConnector {
                 return search.getCurrentId();
             }
 
-            Log.e(cgSettings.tag, "cgeoBase.searchByGeocode: No data from server");
+            Log.e(Settings.tag, "cgeoBase.searchByGeocode: No data from server");
             return null;
         }
 
-        final cgCacheWrap caches = base.parseCache(page, reason);
+        final cgCacheWrap caches = base.parseCache(page, reason, handler);
+
         if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
-            if (caches != null && StringUtils.isNotBlank(caches.error)) {
+            if (caches != null && caches.error != null) {
                 search.error = caches.error;
             }
             if (caches != null && StringUtils.isNotBlank(caches.url)) {
@@ -111,16 +120,11 @@ public class GCConnector extends AbstractConnector implements IConnector {
 
             app.addSearch(search, null, true, reason);
 
-            Log.e(cgSettings.tag, "cgeoBase.searchByGeocode: No cache parsed");
+            Log.e(Settings.tag, "cgeoBase.searchByGeocode: No cache parsed");
             return null;
         }
 
-        if (app == null) {
-            Log.e(cgSettings.tag, "cgeoBase.searchByGeocode: No application found");
-            return null;
-        }
-
-        List<cgCache> cacheList = cgBase.processSearchResults(search, caches, 0, 0, null);
+        List<cgCache> cacheList = cgBase.processSearchResults(search, caches, false, false, null);
         app.addSearch(search, cacheList, true, reason);
 
         return search.getCurrentId();

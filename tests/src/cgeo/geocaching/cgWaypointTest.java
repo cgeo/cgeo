@@ -1,4 +1,4 @@
-package cgeo.geocaching.test;
+package cgeo.geocaching;
 
 import cgeo.geocaching.cgWaypoint;
 
@@ -8,8 +8,7 @@ import junit.framework.Assert;
 
 public class cgWaypointTest extends AndroidTestCase {
 
-    @SuppressWarnings("static-method")
-	public void testOrder() {
+    public static void testOrder() {
 		final cgWaypoint wp1 = new cgWaypoint();
 		final cgWaypoint wp2 = new cgWaypoint();
 

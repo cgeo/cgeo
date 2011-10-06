@@ -414,6 +414,7 @@
   <string name="init_useenglish">c:geo auf Englisch nutzen (Neustart erforderlich)</string>
   <string name="init_exclude">Eigene und gefundene Caches ausblenden</string>
   <string name="init_showwaypoints">Wegpunkte zeigen</string>
+  <string name="init_showwaypoint_description">Grenze unter der Wegpunkte in der Karte angezeigt werden.</string>
   <string name="init_disabled">Deaktivierte Caches ausblenden</string>
   <string name="init_offline">Statische Karten für Offline-Verwendung speichern</string>
   <string name="init_save_log_img">Logbilder abspeichern</string>
@@ -514,6 +515,13 @@
   <string name="cache_hint">Hinweis</string>
   <string name="cache_logs">Logbuch</string>
   <string name="cache_dialog_loading_details">Lade Cache-Details…</string>
+  <string name="cache_dialog_loading_details_status_loadpage">Lade Seite</string>
+  <string name="cache_dialog_loading_details_status_details">Verarbeite Details</string>
+  <string name="cache_dialog_loading_details_status_spoilers">Lade Hinweisbilder</string>
+  <string name="cache_dialog_loading_details_status_logs">Lade Logs</string>
+  <string name="cache_dialog_loading_details_status_waypoints">Verarbeite Wegpunkte</string>
+  <string name="cache_dialog_loading_details_status_gcvote">Lade GCVote</string>
+  <string name="cache_dialog_loading_details_status_render">Generiere Ansicht</string>
   <string name="cache_dialog_loading_description">Lade Cache-Beschreibung…</string>
   <string name="cache_dialog_offline_save_title">Offline-Verwendung</string>
   <string name="cache_dialog_offline_save_message">Speichere Cache für Offline-Verwendung…</string>
@@ -584,7 +592,11 @@
   <string name="file_title_searching">Suche</string>
 
   <!-- gpx -->
+  <string name="gpx_import_loading_caches">Lade Caches aus GPX-Datei\nGelesen:</string>
+  <string name="gpx_import_loading_waypoints">Lade Wegpunkte aus GPX-Datei\nGelesen:</string>
+  <string name="gpx_import_storing">Schreibe Caches in Datenbank\nGespeichert:</string>
   <string name="gpx_import_loading_stored">Lade Caches aus GPX-Datei\nGespeichert:</string>
+  <string name="gpx_import_no_files">c:geo konnte keine GPX-Dateien finden.</string>
   <string name="gpx_import_caches_imported">Caches importiert.</string>
   <string name="gpx_import_loading">Lade Caches aus GPX-Datei</string>
   <string name="gpx_import_title">Importiere GPX-Datei</string>
@@ -675,6 +687,7 @@
   <string name="search_tb_hint">Trackingnummer</string>
   <string name="search_tb_button">Suche nach Trackable</string>
   <string name="search_destination">Ziel</string>
+  <string name="search_some_destination">Ein Zielort</string>
   <string name="search_direction_rel">Vom aktuellen Standort</string>
   <string name="search_lat">Lat</string>
   <string name="search_lon">Lon</string>

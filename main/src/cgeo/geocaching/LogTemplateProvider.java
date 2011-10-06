@@ -74,7 +74,7 @@ public class LogTemplateProvider {
 
                         @Override
                         String getValue(final cgBase base, final boolean offline) {
-                            return base.getUserName();
+                            return Settings.getUsername();
                         }
                     },
                     new LogTemplate("NUMBER", R.string.init_signature_template_number) {
@@ -143,7 +143,7 @@ public class LogTemplateProvider {
                 }
             }
         } catch (Exception e) {
-            Log.w(cgSettings.tag, "cgBase.parseFindCount: " + e.toString());
+            Log.w(Settings.tag, "cgBase.parseFindCount: " + e.toString());
         }
 
         return findCount;

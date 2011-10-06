@@ -74,7 +74,7 @@ public class cgeotrackables extends AbstractActivity {
                 if (waitDialog != null) {
                     waitDialog.dismiss();
                 }
-                Log.e(cgSettings.tag, "cgeotrackables.loadInventoryHandler: " + e.toString());
+                Log.e(Settings.tag, "cgeotrackables.loadInventoryHandler: " + e.toString());
             }
         }
     };
@@ -115,7 +115,6 @@ public class cgeotrackables extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        settings.load();
     }
 
     private class loadInventory extends Thread {
@@ -127,7 +126,7 @@ public class cgeotrackables extends AbstractActivity {
 
                 loadInventoryHandler.sendMessage(new Message());
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgeotrackables.loadInventory.run: " + e.toString());
+                Log.e(Settings.tag, "cgeotrackables.loadInventory.run: " + e.toString());
             }
         }
     }

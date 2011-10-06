@@ -59,7 +59,7 @@ public class cgeoaddresses extends AbstractActivity {
                 try {
                     return geocoder.getFromLocationName(keyword, 20);
                 } catch (Exception e) {
-                    Log.e(cgSettings.tag, "cgeoaddresses.doInBackground", e);
+                    Log.e(Settings.tag, "cgeoaddresses.doInBackground", e);
                     return null;
                 }
             }
@@ -108,7 +108,7 @@ public class cgeoaddresses extends AbstractActivity {
                         }
                     }
                 } catch (Exception e) {
-                    Log.e(cgSettings.tag, "cgeoaddresses.onPostExecute", e);
+                    Log.e(Settings.tag, "cgeoaddresses.onPostExecute", e);
                 }
             }
 
@@ -119,7 +119,6 @@ public class cgeoaddresses extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        settings.load();
     }
 
     private class buttonListener implements View.OnClickListener {
@@ -140,7 +139,7 @@ public class cgeoaddresses extends AbstractActivity {
             addressIntent.putExtra("latitude", (Double) latitude);
             addressIntent.putExtra("longitude", (Double) longitude);
             addressIntent.putExtra("address", (String) address);
-            addressIntent.putExtra("cachetype", settings.cacheType);
+            addressIntent.putExtra("cachetype", Settings.getCacheType());
             startActivity(addressIntent);
 
             finish();

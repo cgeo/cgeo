@@ -1,13 +1,13 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapFactory;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
-import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 
 import android.app.Activity;
@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PositionOverlay implements GeneralOverlay {
-    private cgSettings settings = null;
     private Location coordinates = null;
     private GeoPointImpl location = null;
     private Float heading = 0f;
@@ -47,16 +46,15 @@ public class PositionOverlay implements GeneralOverlay {
     private MapFactory mapFactory = null;
     private OverlayImpl ovlImpl = null;
 
-    public PositionOverlay(cgSettings settingsIn, Activity activity, OverlayImpl ovlImpl) {
-        settings = settingsIn;
+    public PositionOverlay(Activity activity, OverlayImpl ovlImpl) {
         this.activity = activity;
-        this.mapFactory = settings.getMapFactory();
+        this.mapFactory = Settings.getMapFactory();
         this.ovlImpl = ovlImpl;
     }
 
     public void setCoordinates(Location coordinatesIn) {
         coordinates = coordinatesIn;
-        location = settings.getMapFactory().getGeoPointBase(new Geopoint(coordinates));
+        location = Settings.getMapFactory().getGeoPointBase(new Geopoint(coordinates));
     }
 
     public void setHeading(Float bearingNow) {
@@ -145,7 +143,7 @@ public class PositionOverlay implements GeneralOverlay {
             }
         }
 
-        if (settings.maptrail == 1) {
+        if (Settings.isMapTrail()) {
             int size = history.size();
             if (size > 1) {
                 int alpha = 0;
