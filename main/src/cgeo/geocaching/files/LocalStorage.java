@@ -151,13 +151,7 @@ public class LocalStorage {
             try {
                 final FileOutputStream fos = new FileOutputStream(targetFile);
                 try {
-                    final byte[] buffer = new byte[4096];
-                    int l;
-                    while ((l = is.read(buffer)) != -1) {
-                        fos.write(buffer, 0, l);
-                    }
-                    fos.flush(); // FIXME: is this really necessary?
-                    return true;
+                    return copy(is, fos);
                 } finally {
                     fos.close();
                 }
@@ -192,6 +186,20 @@ public class LocalStorage {
             return false;
         }
 
+        boolean copyDone = copy(input, output);
+
+        try {
+            input.close();
+            output.close();
+        } catch (IOException e) {
+            Log.e(Settings.tag, "LocalStorage.copy: could not close file", e);
+            return false;
+        }
+
+        return copyDone;
+    }
+
+    private static boolean copy(final InputStream input, final OutputStream output) {
         byte[] buffer = new byte[4096];
         int length;
         try {
@@ -200,15 +208,7 @@ public class LocalStorage {
             }
             output.flush(); // FIXME: is that necessary?
         } catch (IOException e) {
-            Log.e(Settings.tag, "LocalStorage.copy: error when copying file", e);
-            return false;
-        }
-
-        try {
-            input.close();
-            output.close();
-        } catch (IOException e) {
-            Log.e(Settings.tag, "LocalStorage.copy: could not close file", e);
+            Log.e(Settings.tag, "LocalStorage.copy: error when copying data", e);
             return false;
         }
 
