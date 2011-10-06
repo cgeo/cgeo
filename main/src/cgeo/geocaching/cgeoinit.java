@@ -689,10 +689,12 @@ public class cgeoinit extends AbstractActivity {
                 @Override
                 public void run() {
                     final StatusCode loginResult = cgBase.login();
+                    Object payload = loginResult;
                     if (loginResult == StatusCode.NO_ERROR) {
                         cgBase.detectGcCustomDate();
+                        payload = cgBase.downloadAvatar(cgeoinit.this);
                     }
-                    logInHandler.obtainMessage(0, cgBase.downloadAvatar(cgeoinit.this)).sendToTarget();
+                    logInHandler.obtainMessage(0, payload).sendToTarget();
                 }
             }).start();
         }
