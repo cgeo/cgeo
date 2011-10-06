@@ -3102,9 +3102,7 @@ public class cgBase {
 
     public static boolean deleteDirectory(File path) {
         if (path.exists()) {
-            File[] files = path.listFiles();
-
-            for (File file : files) {
+            for (final File file : path.listFiles()) {
                 if (file.isDirectory()) {
                     deleteDirectory(file);
                 } else {
@@ -3113,7 +3111,7 @@ public class cgBase {
             }
         }
 
-        return (path.delete());
+        return path.delete();
     }
 
     public void storeCache(cgeoapplication app, Activity activity, cgCache cache, String geocode, int listId, Handler handler) {
