@@ -36,6 +36,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 public class cgData {
 
@@ -955,18 +956,18 @@ public class cgData {
                             createIndices(db);
 
                             // Remove cache files corresponding to unknown caches
+                            final Pattern oldFilePattern = Pattern.compile("^[GC|TB|O][A-Z0-9]{4,7}$");
                             final SQLiteStatement select = db.compileStatement("select count(*) from " + dbTableCaches + " where geocode = ?");
                             final File[] files = new File(Settings.getStorage()).listFiles();
                             final ArrayList<File> toRemove = new ArrayList<File>(files.length);
                             for (final File file : files) {
                                 if (file.isDirectory()) {
                                     final String geocode = file.getName();
-                                    if (geocode.equals("_others")) {
-                                        continue;
-                                    }
-                                    select.bindString(1, geocode);
-                                    if (select.simpleQueryForLong() == 0) {
-                                        toRemove.add(file);
+                                    if (oldFilePattern.matcher(geocode).find()) {
+                                        select.bindString(1, geocode);
+                                        if (select.simpleQueryForLong() == 0) {
+                                            toRemove.add(file);
+                                        }
                                     }
                                 }
                             }
