@@ -952,34 +952,9 @@ public class cgData {
 
                     if (oldVersion < 59) {
                         try {
-                            // Add new indices
+                            // Add new indices and remove obsolete cache files
                             createIndices(db);
-
-                            // Remove cache files corresponding to unknown caches
-                            final Pattern oldFilePattern = Pattern.compile("^[GC|TB|O][A-Z0-9]{4,7}$");
-                            final SQLiteStatement select = db.compileStatement("select count(*) from " + dbTableCaches + " where geocode = ?");
-                            final File[] files = new File(Settings.getStorage()).listFiles();
-                            final ArrayList<File> toRemove = new ArrayList<File>(files.length);
-                            for (final File file : files) {
-                                if (file.isDirectory()) {
-                                    final String geocode = file.getName();
-                                    if (oldFilePattern.matcher(geocode).find()) {
-                                        select.bindString(1, geocode);
-                                        if (select.simpleQueryForLong() == 0) {
-                                            toRemove.add(file);
-                                        }
-                                    }
-                                }
-                            }
-                            new Thread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    for (final File dir : toRemove) {
-                                        Log.i(Settings.tag, "Removing obsolete cache directory for " + dir.getName());
-                                        cgBase.deleteDirectory(dir);
-                                    }
-                                }
-                            }).start();
+                            removeObsoleteCacheDirectories(db);
                         } catch (Exception e) {
                             Log.e(Settings.tag, "Failed to upgrade to ver. 59", e);
                         }
@@ -994,6 +969,42 @@ public class cgData {
 
             Log.i(Settings.tag, "Upgrade database from ver. " + oldVersion + " to ver. " + newVersion + ": completed");
         }
+    }
+
+    /**
+     * Remove obsolete cache directories in c:geo private storage.
+     *
+     * @param db
+     *            the read-write database to use
+     */
+    private static void removeObsoleteCacheDirectories(final SQLiteDatabase db) {
+        final Pattern oldFilePattern = Pattern.compile("^[GC|TB|O][A-Z0-9]{4,7}$");
+        final SQLiteStatement select = db.compileStatement("select count(*) from " + dbTableCaches + " where geocode = ?");
+        final File[] files = new File(Settings.getStorage()).listFiles();
+        final ArrayList<File> toRemove = new ArrayList<File>(files.length);
+        for (final File file : files) {
+            if (file.isDirectory()) {
+                final String geocode = file.getName();
+                if (oldFilePattern.matcher(geocode).find()) {
+                    select.bindString(1, geocode);
+                    if (select.simpleQueryForLong() == 0) {
+                        toRemove.add(file);
+                    }
+                }
+            }
+        }
+
+        // Use a background thread for the real removal to avoid keeping the database locked
+        // if we are called from within a transaction.
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (final File dir : toRemove) {
+                    Log.i(Settings.tag, "Removing obsolete cache directory for " + dir.getName());
+                    cgBase.deleteDirectory(dir);
+                }
+            }
+        }).start();
     }
 
     private static void dropDatabase(SQLiteDatabase db) {
