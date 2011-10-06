@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.files.LocalStorage;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -13,7 +14,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -105,8 +105,7 @@ public class cgeoimages extends AbstractActivity {
                 image_view.setOnClickListener(new View.OnClickListener() {
 
                     public void onClick(View arg0) {
-                        final String directoryTarget = Environment.getExternalStorageDirectory() + "/" + Settings.cache + "/" + "temp.jpg";
-                        final File file = new File(directoryTarget);
+                        final File file = LocalStorage.getStorageFile(null, "temp.jpg", false);
                         try {
                             final FileOutputStream fos = new FileOutputStream(file);
                             image.getBitmap().compress(CompressFormat.JPEG, 100, fos);
