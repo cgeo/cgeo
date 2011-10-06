@@ -42,12 +42,12 @@ public class GC1ZXX2 extends MockedCache {
 
     @Override
     public boolean isArchived() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isDisabled() {
-        return true;
+        return false;
     }
 
     @Override

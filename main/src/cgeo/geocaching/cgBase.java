@@ -1705,7 +1705,7 @@ public class cgBase {
 
     public static BitmapDrawable downloadAvatar(final Context context) {
         try {
-            final String profile = replaceWhitespace(getResponseData(request("http://www.geocaching.com/my/", null, false)));
+            final String profile = BaseUtils.replaceWhitespace(getResponseData(request("http://www.geocaching.com/my/", null, false)));
             final Matcher matcher = patternAvatarImg.matcher(profile);
             if (matcher.find()) {
                 final String avatarURL = matcher.group(1);
@@ -2919,7 +2919,7 @@ public class cgBase {
             return null;
         }
         try {
-            return replaceWhitespace(EntityUtils.toString(response.getEntity(), HTTP.UTF_8));
+            return BaseUtils.replaceWhitespace(EntityUtils.toString(response.getEntity(), HTTP.UTF_8));
         } catch (Exception e) {
             Log.e(Settings.tag, "getResponseData", e);
             return null;
@@ -3051,35 +3051,6 @@ public class cgBase {
         }
 
         return null;
-    }
-
-    /**
-     * Replace the characters \n, \r and \t with a space. The input are complete HTML pages.
-     * This method must be fast, but may not lead to the shortest replacement String.
-     *
-     * @param buffer
-     *            The data
-     */
-    public static String replaceWhitespace(final String data) {
-        // You are only allowed to change this code if you can prove it became faster on a device.
-        // see WhitespaceTest in the test project
-        final int length = data.length();
-        final char[] chars = new char[length];
-        data.getChars(0, length, chars, 0);
-        int resultSize = 0;
-        boolean lastWasWhitespace = true;
-        for (char c : chars) {
-            if (c == ' ' || c == '\n' || c == '\r' || c == '\t') {
-                if (!lastWasWhitespace) {
-                    chars[resultSize++] = ' ';
-                }
-                lastWasWhitespace = true;
-            } else {
-                chars[resultSize++] = c;
-                lastWasWhitespace = false;
-            }
-        }
-        return String.valueOf(chars, 0, resultSize);
     }
 
     public static JSONObject requestJSON(final String uri, final Parameters params) {
