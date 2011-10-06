@@ -36,14 +36,17 @@ public final class BaseUtils {
     }
 
     /**
-     * Replace the characters \n, \r and \t with a space
-     * The result is a very long single "line".
-     *
-     * This is a copy of cgBase.replaceWhitespace(). It is a copy to run the pattern tests
-     * as a plain JUnit test
-     *
-     * @param buffer
-     *            The data
+     * Replaces every \n, \r and \t with a single space. Afterwards multiples spaces
+     * are merged into a single space. Finally leading spaces are deleted.
+     * 
+     * This method must be fast, but may not lead to the shortest replacement String.
+     * 
+     * You are only allowed to change this code if you can prove it became faster on a device.
+     * see cgeo.geocaching.test.WhiteSpaceTest#replaceWhitespaceManually in the test project
+     * 
+     * @param data
+     *            complete HTML page
+     * @return the HTML page as a very long single "line"
      */
     public static String replaceWhitespace(final String data) {
         final int length = data.length();

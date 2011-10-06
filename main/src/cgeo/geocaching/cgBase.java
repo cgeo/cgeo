@@ -1705,7 +1705,7 @@ public class cgBase {
 
     public static BitmapDrawable downloadAvatar(final Context context) {
         try {
-            final String profile = replaceWhitespace(getResponseData(request("http://www.geocaching.com/my/", null, false)));
+            final String profile = BaseUtils.replaceWhitespace(getResponseData(request("http://www.geocaching.com/my/", null, false)));
             final Matcher matcher = patternAvatarImg.matcher(profile);
             if (matcher.find()) {
                 final String avatarURL = matcher.group(1);
@@ -2919,7 +2919,7 @@ public class cgBase {
             return null;
         }
         try {
-            return replaceWhitespace(EntityUtils.toString(response.getEntity(), HTTP.UTF_8));
+            return BaseUtils.replaceWhitespace(EntityUtils.toString(response.getEntity(), HTTP.UTF_8));
         } catch (Exception e) {
             Log.e(Settings.tag, "getResponseData", e);
             return null;
@@ -3051,38 +3051,6 @@ public class cgBase {
         }
 
         return null;
-    }
-
-    /**
-     * Replace the characters \n, \r and \t with a space (resulting is a very long single "line").
-     * The input are complete HTML pages.
-     *
-     * This method must be fast, but may not lead to the shortest replacement String.
-     *
-     * You are only allowed to change this code if you can prove it became faster on a device.
-     * see cgeo.geocaching.test.WhiteSpaceTest#replaceWhitespaceManually in the test project
-     *
-     * @param buffer
-     *            The data
-     */
-    public static String replaceWhitespace(final String data) {
-        final int length = data.length();
-        final char[] chars = new char[length];
-        data.getChars(0, length, chars, 0);
-        int resultSize = 0;
-        boolean lastWasWhitespace = false;
-        for (char c : chars) {
-            if (c == ' ' || c == '\n' || c == '\r' || c == '\t') {
-                if (!lastWasWhitespace) {
-                    chars[resultSize++] = ' ';
-                }
-                lastWasWhitespace = true;
-            } else {
-                chars[resultSize++] = c;
-                lastWasWhitespace = false;
-            }
-        }
-        return String.valueOf(chars, 0, resultSize);
     }
 
     public static JSONObject requestJSON(final String uri, final Parameters params) {
@@ -3640,7 +3608,7 @@ public class cgBase {
     /**
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 sept. à 12:35".
-     * 
+     *
      * @param context
      *            a Context
      * @param date
