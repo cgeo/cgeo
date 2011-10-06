@@ -525,10 +525,10 @@ public class cgBase {
         final Parameters params = new Parameters(
                 "__EVENTTARGET", "",
                 "__EVENTARGUMENT", "",
-                "ctl00$SiteContent$tbUsername", login.left,
-                "ctl00$SiteContent$tbPassword", login.right,
-                "ctl00$SiteContent$cbRememberMe", "on",
-                "ctl00$SiteContent$btnSignIn", "Login");
+                "ctl00$ContentBody$tbUsername", login.left,
+                "ctl00$ContentBody$tbPassword", login.right,
+                "ctl00$ContentBody$cbRememberMe", "on",
+                "ctl00$ContentBody$btnSignIn", "Login");
         setViewstates(viewstates, params);
 
         loginResponse = postRequest("https://www.geocaching.com/login/default.aspx", params);
