@@ -345,7 +345,7 @@ public final class Settings {
         return checkMapfile(getMapFile());
     }
 
-    private static boolean checkMapfile(String mapFileIn) {
+    private static boolean checkMapfile(final String mapFileIn) {
         if (null == mapFileIn) {
             return false;
         }

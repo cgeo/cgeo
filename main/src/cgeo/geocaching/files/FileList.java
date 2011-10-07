@@ -131,7 +131,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
      *
      * @return The folder to start the recursive search in
      */
-    protected abstract String[] getBaseFolders();
+    protected abstract File[] getBaseFolders();
 
     /**
      * Triggers the deriving class to set the title
@@ -150,10 +150,8 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
             try {
                 if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                     boolean loaded = false;
-                    for (String baseFolder : getBaseFolders())
+                    for (final File dir : getBaseFolders())
                     {
-                        final File dir = new File(baseFolder);
-
                         if (dir.exists() && dir.isDirectory()) {
                             listDir(list, dir);
                             if (list.size() > 0) {

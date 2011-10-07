@@ -57,9 +57,8 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
     }
 
     @Override
-    protected String[] getBaseFolders() {
-        final String base = Environment.getExternalStorageDirectory().toString();
-        return new String[] { base + "/gpx" };
+    protected File[] getBaseFolders() {
+        return new File[] { new File(Environment.getExternalStorageDirectory(), "gpx") };
     }
 
     @Override
