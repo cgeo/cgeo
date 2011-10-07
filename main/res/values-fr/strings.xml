@@ -357,7 +357,8 @@
   <string name="list_menu">Listes</string>
   <string name="list_menu_create">Nouvelle liste</string>
   <string name="list_menu_drop">Effacer la liste courante</string>
-  <string name="list_menu_change">Changer de liste</string> <!-- since: 2.2 -->
+  <string name="list_menu_change">Changer de liste</string>
+  <string name="list_menu_rename">Renommer la liste courante</string>
   <string name="list_title">Choisir une liste</string>
   <string name="list_inbox">Enregistrées</string>
   <string name="list_wpt">Étapes</string>
@@ -371,6 +372,8 @@
   <string name="list_dialog_remove">Effacer</string>
   <string name="list_dialog_remove_ok">Liste supprimée</string>
   <string name="list_dialog_remove_err">c:geo n\'a pas réussi à supprimer la liste courante</string>
+  <string name="list_dialog_rename_title">Renommer la liste</string>
+  <string name="list_dialog_rename">Renommer</string>
 
   <!-- about -->
   <string name="about_changelog">Versions</string>
