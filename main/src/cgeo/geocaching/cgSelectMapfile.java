@@ -41,7 +41,7 @@ public class cgSelectMapfile extends FileList<cgMapfileListAdapter> {
     @Override
     protected String[] getBaseFolders() {
         String base = Environment.getExternalStorageDirectory().toString();
-        return new String[] { base + "/mfmaps", base + "/Locus/mapsVector" };
+        return new String[] { base + "/mfmaps", base + "/Locus/mapsVector", base + "/.cgeo" };
     }
 
     @Override
