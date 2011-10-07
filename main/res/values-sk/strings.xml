@@ -456,14 +456,12 @@
   <string name="init_loaddirectionimg">Ak je to potrebné načítať obrázok zo smerom</string>
 
   <!-- map sources -->
-  <string-array name="map_sources">
-    <item>Google: Mapa</item>
-    <item>Google: Satelit</item>
-    <item>OSM: Mapnik</item>
-    <item>OSM: Osmarender</item>
-    <item>OSM: Cyklomapa</item>
-    <item>OSM: Offline</item>
-  </string-array>
+  <string name="map_source_google_map">Google: Mapa</string>
+  <string name="map_source_google_satellite">Google: Satelit</string>
+  <string name="map_source_osm_mapnik">OSM: Mapnik</string>
+  <string name="map_source_osm_osmarender">OSM: Osmarender</string>
+  <string name="map_source_osm_cyclemap">OSM: Cyklomapa</string>
+  <string name="map_source_osm_offline">OSM: Offline</string>
 
   <string name="init_sendToCgeo">Poslať do c:geo</string>
   <string name="init_sendToCgeo_name">Názov vášho zariadenia:</string>

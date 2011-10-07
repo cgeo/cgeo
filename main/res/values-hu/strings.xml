@@ -451,14 +451,12 @@
   <string name="init_loaddirectionimg">Irány-kép betöltése ha szükséges</string>
 
   <!-- map sources -->
-  <string-array name="map_sources">
-    <item>Google: Térkép</item>
-    <item>Google: Műholdkép</item>
-    <item>OSM: Mapnik</item>
-    <item>OSM: Osmarender</item>
-    <item>OSM: Biciklis térkép</item>
-    <item>OSM: Offline</item>
-  </string-array>
+  <string name="map_source_google_map">Google: Térkép</string>
+  <string name="map_source_google_satellite">Google: Műholdkép</string>
+  <string name="map_source_osm_mapnik">OSM: Mapnik</string>
+  <string name="map_source_osm_osmarender">OSM: Osmarender</string>
+  <string name="map_source_osm_cyclemap">OSM: Biciklis térkép</string>
+  <string name="map_source_osm_offline">OSM: Offline</string>
 
   <string name="init_sendToCgeo">Küldés a c:geo-hoz</string>
   <string name="init_sendToCgeo_name">Az eszközöd neve:</string>

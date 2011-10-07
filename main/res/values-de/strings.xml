@@ -447,14 +447,12 @@
   <string name="init_loaddirectionimg">Richtungs-Grafik laden wenn nötig</string>
 
   <!-- map sources -->
-  <string-array name="map_sources">
-    <item>Google: Map</item>
-    <item>Google: Satellit</item>
-    <item>OSM: Mapnik</item>
-    <item>OSM: Osmarender</item>
-    <item>OSM: Cyclemap</item>
-    <item>OSM: Offline</item>
-  </string-array>
+  <string name="map_source_google_map">Google: Map</string>
+  <string name="map_source_google_satellite">Google: Satellit</string>
+  <string name="map_source_osm_mapnik">OSM: Mapnik</string>
+  <string name="map_source_osm_osmarender">OSM: Osmarender</string>
+  <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
+  <string name="map_source_osm_offline">OSM: Offline</string>
 
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Der Name deines Handys:</string>

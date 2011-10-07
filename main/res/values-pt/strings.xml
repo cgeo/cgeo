@@ -435,14 +435,12 @@
   <string name="init_sigautoinsert">Inserir assinatura automaticamente</string>
 
   <!-- map sources -->
-  <string-array name="map_sources">
-    <item>Google: Mapa</item>
-    <item>Google: Satélite</item>
-    <item>OSM: Mapnik</item>
-    <item>OSM: Osmarender</item>
-    <item>OSM: Cyclemap</item>
-    <item>OSM: Offline</item>
-  </string-array>
+  <string name="map_source_google_map">Google: Mapa</string>
+  <string name="map_source_google_satellite">Google: Satélite</string>
+  <string name="map_source_osm_mapnik">OSM: Mapnik</string>
+  <string name="map_source_osm_osmarender">OSM: Osmarender</string>
+  <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
+  <string name="map_source_osm_offline">OSM: Offline</string>
 
   <string name="init_sendToCgeo">Enviar para o c:geo</string>
   <string name="init_sendToCgeo_name">Nome do seu dispositivo:</string>
