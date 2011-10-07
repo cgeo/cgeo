@@ -357,7 +357,8 @@
   <string name="list_menu">List</string>
   <string name="list_menu_create">Create new list</string>
   <string name="list_menu_drop">Drop current list</string>
-  <string name="list_menu_change">Change list</string> <!-- since: 2.2 -->
+  <string name="list_menu_change">Change list</string>
+  <string name="list_menu_rename">Rename current list</string>
   <string name="list_title">Pick a list</string>
   <string name="list_inbox">Stored</string>
   <string name="list_wpt">Waypoints</string>
@@ -371,6 +372,8 @@
   <string name="list_dialog_remove">Remove</string>
   <string name="list_dialog_remove_ok">List was removed</string>
   <string name="list_dialog_remove_err">c:geo failed to remove current list</string>
+  <string name="list_dialog_rename_title">Rename list</string>
+  <string name="list_dialog_rename">Rename</string>
 
   <!-- about -->
   <string name="about_changelog">Changelog</string>

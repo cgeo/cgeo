@@ -137,6 +137,7 @@ public class cgeocaches extends AbstractListActivity {
     private static final int MENU_SORT_DATE = 61;
     private static final int MENU_SORT_FINDS = 62;
     private static final int MENU_SORT_STATE = 63;
+    private static final int MENU_RENAME_LIST = 64;
 
     private static final int CONTEXT_MENU_MOVE_TO_LIST = 1000;
     private static final int MENU_MOVE_SELECTED_OR_ALL_TO_LIST = 1200;
@@ -822,6 +823,7 @@ public class cgeocaches extends AbstractListActivity {
             SubMenu subMenu = menu.addSubMenu(0, SUBMENU_MANAGE_LISTS, 0, res.getString(R.string.list_menu)).setIcon(android.R.drawable.ic_menu_more);
             subMenu.add(0, MENU_CREATE_LIST, 0, res.getString(R.string.list_menu_create));
             subMenu.add(0, MENU_DROP_LIST, 0, res.getString(R.string.list_menu_drop));
+            subMenu.add(0, MENU_RENAME_LIST, 0, res.getString(R.string.list_menu_rename));
             subMenu.add(0, MENU_SWITCH_LIST, 0, res.getString(R.string.list_menu_change));
         }
 
@@ -892,9 +894,14 @@ public class cgeocaches extends AbstractListActivity {
                 navigationMenu.setEnabled(menuEnabled);
             }
 
+            boolean isNonDefaultList = listId != 1;
             MenuItem item = menu.findItem(MENU_DROP_LIST);
             if (item != null) {
-                item.setVisible(listId != 1);
+                item.setVisible(isNonDefaultList);
+            }
+            item = menu.findItem(MENU_RENAME_LIST);
+            if (item != null) {
+                item.setVisible(isNonDefaultList);
             }
 
             boolean multipleLists = app.getLists().size() >= 2;
@@ -968,6 +975,9 @@ public class cgeocaches extends AbstractListActivity {
                 return false;
             case MENU_DROP_LIST:
                 removeList();
+                return false;
+            case MENU_RENAME_LIST:
+                renameList();
                 return false;
             case MENU_INVERT_SELECTION:
                 if (adapter != null) {
@@ -2454,29 +2464,29 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
-    private void createList() {
+    private abstract class RunnableWithInput implements Runnable {
+        String input;
+
+        public void setInput(final String input) {
+            this.input = input;
+        }
+    }
+
+    private void handleListNameInput(final String defaultValue, int dialogTitle, int buttonTitle, final RunnableWithInput runnable) {
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
         final View view = inflater.inflate(R.layout.list_create_dialog, null);
         final EditText input = (EditText) view.findViewById(R.id.text);
+        input.setText(defaultValue);
 
-        alert.setTitle(R.string.list_dialog_create_title);
+        alert.setTitle(dialogTitle);
         alert.setView(view);
-        alert.setPositiveButton(R.string.list_dialog_create, new DialogInterface.OnClickListener() {
+        alert.setPositiveButton(buttonTitle, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                String value = input.getText().toString();
                 // remove whitespaces added by autocompletion of Android keyboard
-                if (value != null) {
-                    value = value.trim();
-                }
-
+                String value = StringUtils.trim(input.getText().toString());
                 if (StringUtils.isNotBlank(value)) {
-                    int newId = app.createList(value);
-
-                    if (newId >= 10) {
-                        showToast(res.getString(R.string.list_dialog_create_ok));
-                    } else {
-                        showToast(res.getString(R.string.list_dialog_create_err));
-                    }
+                    runnable.setInput(value);
+                    runnable.run();
                 }
             }
         });
@@ -2487,6 +2497,34 @@ public class cgeocaches extends AbstractListActivity {
         });
 
         alert.show();
+    }
+
+    private void createList() {
+        handleListNameInput("", R.string.list_dialog_create_title, R.string.list_dialog_create, new RunnableWithInput() {
+
+            @Override
+            public void run() {
+                int newId = app.createList(input);
+
+                if (newId >= 10) {
+                    showToast(res.getString(R.string.list_dialog_create_ok));
+                } else {
+                    showToast(res.getString(R.string.list_dialog_create_err));
+                }
+            }
+        });
+    }
+
+    private void renameList() {
+        final cgList list = app.getList(listId);
+        handleListNameInput(list.title, R.string.list_dialog_rename_title, R.string.list_dialog_rename, new RunnableWithInput() {
+
+            @Override
+            public void run() {
+                app.renameList(listId, input);
+                refreshCurrentList();
+            }
+        });
     }
 
     private void removeListInternal() {
