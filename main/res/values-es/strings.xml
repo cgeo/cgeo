@@ -627,8 +627,8 @@
   <string-array name="waypoint_coordinate_formats">
     <item>Plain</item>
   <item>GGG.GGGGGº</item>
-	<item>GGGºMM.MMM\'</item>
-	<item>GGGºMM\'SS.SSS\"</item>
+    <item>GGGºMM.MMM\'</item>
+    <item>GGGºMM\'SS.SSS\"</item>
   </string-array>  
   
   <!-- visit -->

@@ -662,9 +662,9 @@
 
   <string-array name="waypoint_coordinate_formats">
     <item>Plain</item>
-	<item>DDD.DDDDD°</item>
-	<item>DDD°MM.MMM\'</item>
-	<item>DDD°MM\'SS.SSS\"</item>
+    <item>DDD.DDDDD°</item>
+    <item>DDD°MM.MMM\'</item>
+    <item>DDD°MM\'SS.SSS\"</item>
   </string-array>
 
   <!-- visit -->
@@ -1051,12 +1051,12 @@
     <b>19.08.2011</b>\n
     · new: Numeric entry for coordinates\n
     · fix: adaption to GC.com changes\n
-	\n\n
+    \n\n
     <b>15.08.2011</b>\n
     · new: OpenStreetMap support\n
-	· new: Send to c:geo from web\n
+    · new: Send to c:geo from web\n
     · new: Export field notes\n
     · new: Clear history\n
-	· fix: A lot of bugs\n
-	\n</string>
+    · fix: A lot of bugs\n
+    \n</string>
 </resources>

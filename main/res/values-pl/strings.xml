@@ -624,9 +624,9 @@
   
   <string-array name="waypoint_coordinate_formats">
     <item>zwykłe</item>
-	<item>DDD.DDDDD°</item>
-	<item>DDD°MM.MMM\'</item>
-	<item>DDD°MM\'SS.SSS\"</item>
+    <item>DDD.DDDDD°</item>
+    <item>DDD°MM.MMM\'</item>
+    <item>DDD°MM\'SS.SSS\"</item>
   </string-array>
 
   <!-- visit -->
