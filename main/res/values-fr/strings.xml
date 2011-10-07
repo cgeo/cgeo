@@ -527,7 +527,7 @@
   <string name="cache_dialog_loading_details">Chargement des détails…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Chargement de la page</string>
   <string name="cache_dialog_loading_details_status_details">Traitement des informations</string>
-  <string name="cache_dialog_loading_details_status_spoilers">Chargement des images indice</string>
+  <string name="cache_dialog_loading_details_status_spoilers">Chargement des images indices</string>
   <string name="cache_dialog_loading_details_status_logs">Chargement des entrées de carnets</string>
   <string name="cache_dialog_loading_details_status_waypoints">Traitement des points intermédiaires</string>
   <string name="cache_dialog_loading_details_status_gcvote">Chargement des votes</string>
@@ -589,8 +589,8 @@
   <string name="cache_coordinates">Coordonnées</string>
   <string name="cache_elevation">Altitude</string>
   <string name="cache_calendars">Choisir un agenda</string>
-  <string name="cache_spoiler_images_title">Images indice</string>
-  <string name="cache_spoiler_images_loading">Chargement des images indice…</string>
+  <string name="cache_spoiler_images_title">Images indices</string>
+  <string name="cache_spoiler_images_loading">Chargement des images indices…</string>
   <string name="cache_log_types">Types de visites</string> <!-- since: 2.10 RC2 -->
   <string name="cache_coordinates_no">Cette cache n\'a pas de coordonnées.</string> <!-- since: 2.26 RC2 -->
   <string name="cache_export_fieldnote">Export en tant que champ Notes</string>
@@ -702,6 +702,7 @@
   <string name="search_tb_hint">Identification de l\'objet voyageur</string>
   <string name="search_tb_button">Recherche par objet voyageur</string>
   <string name="search_destination">Destination</string>
+  <string name="search_some_destination">Destination arbitraire</string>
   <string name="search_direction_rel">De cette position</string>
   <string name="search_lat">Lat</string>
   <string name="search_lon">Lon</string>
