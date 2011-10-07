@@ -1,7 +1,7 @@
 #!/bin/sh
 
 getnames () {
-    grep "<string" "$1" | grep "name=" | sed "s/^.*<string\(-array\)*\s*name\s*=\s*\"\([^\"]*\)\".*$/\2/"
+    sed -ne 's/^.*<string\s*name\s*=\s*"\([^\"]*\)".*$/\1/p' $1
 }
 
 finddiffs () {
