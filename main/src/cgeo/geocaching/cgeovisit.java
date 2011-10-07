@@ -329,7 +329,7 @@ public class cgeovisit extends cgLogForm {
 
     private void insertIntoLog(String newText, final boolean moveCursor) {
         EditText log = (EditText) findViewById(R.id.log);
-        cgBase.insertAtPosition(log, newText, true, moveCursor);
+        cgBase.insertAtPosition(log, newText, moveCursor);
     }
 
     private static String ratingTextValue(final double rating) {
