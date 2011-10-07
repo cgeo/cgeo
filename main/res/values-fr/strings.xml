@@ -456,12 +456,12 @@
   <string name="init_loaddirectionimg">Charge la direction de l\'image si nécessaire</string>
 
   <!-- map sources -->
-  <string name="map_source_google_map">Google: Map</string>
-  <string name="map_source_google_satellite">Google: Satellite</string>
-  <string name="map_source_osm_mapnik">OSM: Mapnik</string>
-  <string name="map_source_osm_osmarender">OSM: Osmarender</string>
-  <string name="map_source_osm_cyclemap">OSM: Pistes cyclables</string>
-  <string name="map_source_osm_offline">OSM: Hors-ligne</string>
+  <string name="map_source_google_map">Google Maps : plan</string>
+  <string name="map_source_google_satellite">Google Maps : satellite</string>
+  <string name="map_source_osm_mapnik">OSM : rendu Mapnik</string>
+  <string name="map_source_osm_osmarender">OSM : rendu Osmarender</string>
+  <string name="map_source_osm_cyclemap">OSM : pistes cyclables</string>
+  <string name="map_source_osm_offline">OSM : hors-ligne</string>
 
   <string name="init_sendToCgeo">Envoyers vers c:geo</string>
   <string name="init_sendToCgeo_name">Votre nom d\'appareil:</string>
