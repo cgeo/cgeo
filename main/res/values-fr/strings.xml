@@ -20,23 +20,23 @@
   <string name="action_bar_share_title">Partager le lien vers la cache</string>
 
   <!-- caches -->
-  <string name="all">toutes</string>
-  <string name="all_types">tous les genres</string>
-  <string name="traditional">traditionnelles</string>
-  <string name="multi">multiples</string>
-  <string name="mystery">inconnues</string>
-  <string name="letterbox">boîtes aux lettres hybrides</string>
-  <string name="event">événements</string>
-  <string name="mega">méga-événements</string>
-  <string name="earth">earthcache</string>
-  <string name="cito">cache in trash out</string>
-  <string name="webcam">webcams</string>
-  <string name="virtual">virtuelles</string>
-  <string name="wherigo">wherigo</string>
-  <string name="lostfound">perdues &amp; trouvées</string>
-  <string name="ape">project ape cache</string>
-  <string name="gchq">groundspeak hq</string>
-  <string name="gps">gps cache exhibit</string>
+  <string name="all">Toutes</string>
+  <string name="all_types">Tous les genres</string>
+  <string name="traditional">Traditionnelles</string>
+  <string name="multi">Multiples</string>
+  <string name="mystery">Inconnues</string>
+  <string name="letterbox">Boîtes aux lettres hybrides</string>
+  <string name="event">Événements</string>
+  <string name="mega">Méga-événements</string>
+  <string name="earth">Earthcache</string>
+  <string name="cito">Cache in trash out</string>
+  <string name="webcam">Webcams</string>
+  <string name="virtual">Virtuelles</string>
+  <string name="wherigo">Wherigo</string>
+  <string name="lostfound">Perdues &amp; trouvées</string>
+  <string name="ape">Project ape cache</string>
+  <string name="gchq">Groundspeak hq</string>
+  <string name="gps">GPS cache exhibit</string>
 
   <!-- cache sizes -->
   <string name="cache_size_micro">micro</string>
@@ -261,11 +261,11 @@
   <string name="menu_scan">QR code</string>
 
   <!-- main screen -->
-  <string name="live_map_button">Carte active</string>
+  <string name="live_map_button">Carte</string>
   <string name="caches_nearby_button">Proches</string>
   <string name="advanced_search_button">Recherche</string>
-  <string name="stored_caches_button">Enregistrées</string>
-  <string name="any_button">N\'importe où</string>
+  <string name="stored_caches_button">Stockées</string>
+  <string name="any_button">N\'importe</string>
   <string name="about_button">À propos</string>
   <string name="settings_button">Paramètres</string>
   <string name="type">Type</string>
@@ -663,7 +663,7 @@
 
   <!-- map -->
   <string name="map_map">Carte</string>
-  <string name="map_live">Carte Temps réel</string>
+  <string name="map_live">Carte active</string>
   <string name="map_view_map">Voir carte</string>
   <string name="map_trail_show">Afficher le sentier</string>
   <string name="map_trail_hide">Cacher le sentier</string>
