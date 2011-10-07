@@ -68,7 +68,7 @@ public class WhitespaceTest extends AndroidTestCase {
     }
 
     public static String replaceWhitespaceStringUtils(final String data) {
-        return StringUtils.trim(StringUtils.join(StringUtils.split(data, " \n\r\t"), " "));
+        return StringUtils.join(StringUtils.split(data, " \n\r\t"), " ");
     }
 
     public void testRegex() {
