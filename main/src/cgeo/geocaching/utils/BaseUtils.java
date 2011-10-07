@@ -36,19 +36,24 @@ public final class BaseUtils {
     }
 
     /**
-     * Replace the characters \n, \r and \t with a space
-     * The result is a very long single "line".
-     * Don't change this behavior - the patterns for parsing rely on this matter of fact !
-     *
-     * @param buffer
-     *            The data
+     * Replaces every \n, \r and \t with a single space. Afterwards multiples spaces
+     * are merged into a single space. Finally leading spaces are deleted.
+     * 
+     * This method must be fast, but may not lead to the shortest replacement String.
+     * 
+     * You are only allowed to change this code if you can prove it became faster on a device.
+     * see cgeo.geocaching.test.WhiteSpaceTest#replaceWhitespaceManually in the test project
+     * 
+     * @param data
+     *            complete HTML page
+     * @return the HTML page as a very long single "line"
      */
-    public static void replaceWhitespace(final StringBuffer buffer) {
-        final int length = buffer.length();
+    public static String replaceWhitespace(final String data) {
+        final int length = data.length();
         final char[] chars = new char[length];
-        buffer.getChars(0, length, chars, 0);
+        data.getChars(0, length, chars, 0);
         int resultSize = 0;
-        boolean lastWasWhitespace = false;
+        boolean lastWasWhitespace = true;
         for (char c : chars) {
             if (c == ' ' || c == '\n' || c == '\r' || c == '\t') {
                 if (!lastWasWhitespace) {
@@ -60,8 +65,7 @@ public final class BaseUtils {
                 lastWasWhitespace = false;
             }
         }
-        buffer.setLength(0);
-        buffer.append(chars);
+        return String.valueOf(chars, 0, resultSize);
     }
 
 }

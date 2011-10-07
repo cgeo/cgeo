@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.utils.BaseUtils;
 
 import android.test.AndroidTestCase;
 
@@ -9,7 +10,7 @@ import junit.framework.Assert;
 public class cgBaseTest extends AndroidTestCase {
 
     public static void testReplaceWhitespaces() {
-        Assert.assertEquals("foo bar baz ", cgBase.replaceWhitespace(new String("  foo\n\tbar   \r   baz  ")));
+        Assert.assertEquals("foo bar baz ", BaseUtils.replaceWhitespace(new String("  foo\n\tbar   \r   baz  ")));
     }
 
     public static void testElevation() {
