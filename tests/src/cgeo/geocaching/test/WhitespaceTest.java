@@ -65,7 +65,7 @@ public class WhitespaceTest extends AndroidTestCase {
         final long start = System.currentTimeMillis();
         result = replaceWhitespaceManually(data);
         final long end = System.currentTimeMillis();
-        assertEquals(84028, result.length());
+        assertEquals(111958, result.length());
         Log.w(Settings.tag, (end - start) + " ms manually");
     }
 
@@ -74,7 +74,7 @@ public class WhitespaceTest extends AndroidTestCase {
         final long start = System.currentTimeMillis();
         result = replaceWhitespaceStringUtils(data);
         final long end = System.currentTimeMillis();
-        assertEquals(84026, result.length());
+        assertEquals(111956, result.length());
         Log.w(Settings.tag, (end - start) + " ms StringUtils");
     }
 }
