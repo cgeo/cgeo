@@ -661,11 +661,12 @@
   <string name="search_history_cleared">History cleared</string>
 
   <string-array name="waypoint_coordinate_formats">
-    <item>Plain</item>
+    <item>@string/waypoint_coordinate_formats_plain</item>
     <item>DDD.DDDDD°</item>
     <item>DDD°MM.MMM\'</item>
     <item>DDD°MM\'SS.SSS\"</item>
   </string-array>
+  <string name="waypoint_coordinate_formats_plain">Plain</string>
 
   <!-- visit -->
   <string name="visit_tweet">Post this find to Twitter</string>

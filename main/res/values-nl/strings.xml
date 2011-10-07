@@ -637,13 +637,6 @@
   <string name="search_clear_history">Maak geschiedenis leeg</string>
   <string name="search_history_cleared">Geschiedenis leeggemaakt</string>
 
-  <string-array name="waypoint_coordinate_formats">
-    <item>Plain</item>
-    <item>DDD.DDDDD°</item>
-    <item>DDD°MM.MMM\'</item>
-    <item>DDD°MM\'SS.SSS\"</item>
-  </string-array>
-
   <!-- visit -->
   <string name="visit_tweet">Post deze vondst naar Twitter</string>
 

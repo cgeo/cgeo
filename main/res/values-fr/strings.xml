@@ -657,13 +657,8 @@
   <string name="search_remove_destination">Destination effacée</string>
   <string name="search_clear_history">Effacer l\'historique</string>
   <string name="search_history_cleared">Historique effacé</string>
-
-  <string-array name="waypoint_coordinate_formats">
-    <item>Texte</item>
-  <item>DDD.DDDDD°</item>
-    <item>DDD°MM.MMM\'</item>
-    <item>DDD°MM\'SS.SSS\"</item>
-  </string-array>
+  
+  <string name="waypoint_coordinate_formats_plain">Texte</string>
 
   <!-- visit -->
   <string name="visit_tweet">Publier votre découverte sur Twitter</string>

@@ -636,13 +636,8 @@
   <string name="search_remove_destination">Destinationen borttagen</string>
   <string name="search_clear_history">Rensa historik</string>
   <string name="search_history_cleared">Historiken rensad</string>
-
-  <string-array name="waypoint_coordinate_formats">
-    <item>Standard</item>
-    <item>DDD.DDDDD°</item>
-    <item>DDD°MM.MMM\'</item>
-    <item>DDD°MM\'SS.SSS\"</item>
-  </string-array>
+  
+  <string name="waypoint_coordinate_formats_plain">Standard</string>
 
   <!-- visit -->
   <string name="visit_tweet">Skicka att du hittat till Twitter</string>

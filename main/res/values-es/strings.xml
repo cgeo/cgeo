@@ -622,14 +622,7 @@
   <string name="search_history_empty">No hay destinos anteriores</string>
   <string name="search_remove_destination">Destino borrado</string>
   <string name="search_clear_history">Borrar historial</string>
-  <string name="search_history_cleared">Historial borrado</string>  
-
-  <string-array name="waypoint_coordinate_formats">
-    <item>Plain</item>
-  <item>GGG.GGGGGº</item>
-    <item>GGGºMM.MMM\'</item>
-    <item>GGGºMM\'SS.SSS\"</item>
-  </string-array>  
+  <string name="search_history_cleared">Historial borrado</string>
   
   <!-- visit -->
   <string name="visit_tweet">Publicar en Twitter</string>

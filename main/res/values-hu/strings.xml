@@ -645,13 +645,8 @@
   <string name="search_remove_destination">Célpont eltávolítva</string>
   <string name="search_clear_history">Előzmények törlése</string>
   <string name="search_history_cleared">Előzmények törölve</string>
-
-  <string-array name="waypoint_coordinate_formats">
-    <item>Egyszerű</item>
-    <item>DDD.DDDDD°</item>
-    <item>DDD°MM.MMM\'</item>
-    <item>DDD°MM\'SS.SSS\"</item>
-  </string-array>
+  
+  <string name="waypoint_coordinate_formats_plain">Egyszerű</string>
 
   <!-- visit -->
   <string name="visit_tweet">Twitteld ki ezt a megtalálást</string>

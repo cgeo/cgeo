@@ -644,6 +644,8 @@
   <string name="search_remove_destination">Ziel gelöscht</string>
   <string name="search_clear_history">Verlauf löschen</string>
   <string name="search_history_cleared">Verlauf gelöscht</string>
+  
+  <string name="waypoint_coordinate_formats_plain">Schlicht</string>
 
   <!-- visit -->
   <string name="visit_tweet">Diesen Eintrag auf Twitter veröffentlichen</string>
