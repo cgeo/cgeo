@@ -747,6 +747,10 @@ public class cgeoapplication extends Application {
         return storage.createList(title);
     }
 
+    public int renameList(final int listId, final String title) {
+        return storage.renameList(listId, title);
+    }
+
     public boolean removeList(int id) {
         return storage.removeList(id);
     }

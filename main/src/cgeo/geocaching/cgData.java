@@ -3224,6 +3224,29 @@ public class cgData {
         }
     }
 
+    public int renameList(final int listId, final String name) {
+        if (StringUtils.isBlank(name)) {
+            return 0;
+        }
+
+        init();
+
+        int count = 0;
+        databaseRW.beginTransaction();
+        try {
+            ContentValues values = new ContentValues();
+            values.put("title", name);
+            values.put("updated", System.currentTimeMillis());
+
+            count = (int) databaseRW.update(dbTableLists, values, "_id = " + (listId - 10), null);
+            databaseRW.setTransactionSuccessful();
+        } finally {
+            databaseRW.endTransaction();
+        }
+
+        return count;
+    }
+
     public boolean removeList(int id) {
         boolean status = false;
         if (id < 10) {
