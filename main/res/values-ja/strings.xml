@@ -11,8 +11,6 @@
   <string name="helpers">役に立つアプリ</string>
   <string name="about">c:geoについて</string>
   <string name="helper"><b>c:geo</b>についてもっと知りたい?\nマニュアル(英語)を読んでね。</string>
-  <string name="database_error_title">データベースエラー</string>
-  <string name="database_error_message">データベースに接続することができませんでした。\n少し後でc:geoを再起動してみてください。もしこのメッセージが何度も表示されるならアンドロイド端末の設定/アプリケーション/アプリケーションの管理/c:geo に進み、「キャッシュを消去」ボタンを押してください。または、c:geoのアンインストールと再インストールをしてください。面倒かけてごめんなさい。</string>
 
   <!-- actionbar -->
   <string name="action_bar_share_title">キャッシュのリンクを共有</string>
@@ -58,7 +56,6 @@
   <string name="log_grabbed">捕まえた</string>
   <string name="log_maintained">メンテナンスした</string>
   <string name="log_maintenance_needed">メンテナンスが必要</string>
-  <string name="log_maintenance_owner">メンテナンス</string>
   <string name="log_update">座標を更新</string>
   <string name="log_archived">アーカイブされた</string>
   <string name="log_needs_archived">アーカイブされるべき</string>
@@ -105,7 +102,6 @@
   <string name="err_license">Geocaching.comのライセンス契約に同意しなかったのでキャッシュの座標を見ることはできません。</string>
   <string name="err_store">キャッシュ情報を保存することができません。</string>
   <string name="err_drop">キャッシュ情報を破棄することができません。</string>
-  <string name="err_title_problem">問題</string>
   <string name="err_detail_open">キャッシュの詳細を開くことができません。</string>
   <string name="err_detail_cache">キャッシュ情報を表示することができません。これは本当にジオキャッシュですか?</string>
   <string name="err_detail_cache_find">キャッシュ情報が見つかりません。</string>
@@ -114,26 +110,19 @@
   <string name="err_detail_cache_find_next">次のキャッシュ情報が見つかりません。</string>
   <string name="err_detail_cache_forgot">Sorry, c:geo forgot which geocache you want.</string>
   <string name="err_detail_cache_forgot_visit">Sorry, c:geo forgot which cache you visited.</string>
-  <string name="err_detail_cache_language">キャッシュの詳細の一部を読み込むことができません。 Geocaching.comの言語設定が英語になっていることを確認してください。残念ながらc:geoは他の言語設定には対応しておりません。</string>
   <string name="err_detail_no_spoiler">このキャッシュのスポイラー画像を見つけることができませんでした。</string>
   <string name="err_detail_no_map_static">このキャッシュのオフライン地図を見つけることができませんでした。</string>
   <string name="err_detail_not_load_map_static">オフライン地図のロードに失敗しました。</string>
   <string name="err_detail_still_removing">このキャッシュはまだ削除中です。</string>
   <string name="err_detail_still_saving">このキャッシュはまだ保存中です。</string>
   <string name="err_detail_still_refreshing">このキャッシュはまだ更新中です。</string>
-  <string name="err_radar_title">レーダーがインストールされていません。</string>
-  <string name="err_radar_message">この機能にはレーダーアプリが必要です。インストールしますか?</string>
-  <string name="err_radar_market">レーダーアプリを検索しようとしましたがAndroid Marketを実行することができませんでした。</string>
-  <string name="err_radar_generic">レーダーアプリを実行することができませんでした。インストールされてますか?</string>
   <string name="err_navigation_no">使用できるナビゲーションが見つかりません。</string>
   <string name="err_application_no">適切なアプリケーションが見つかりません。</string>
   <string name="err_auth_initialize">認証プロセスの初期化に失敗しました。</string>
   <string name="err_auth_process">認証プロセスに失敗しました。</string>
   <string name="err_cannot_log_visit">ログを保存するのに十分な情報がありません。キャッシュの詳細を全て入力してください。</string>
   <string name="err_init_cleared">ログイン情報を消去することができません。</string>
-  <string name="err_no_chaches">キャッシュ情報のロードに失敗しました。</string>
   <string name="err_download_fail">キャッシュ情報のダウンロードに失敗しました。原因: </string>
-  <string name="err_update_fail">移動距離の更新に失敗しました。</string>
   <string name="err_list_load_fail">キャッシュリストのロードに失敗しました。</string>
   <string name="err_store_failed">キャッシュ情報を保存することができません。</string>
   <string name="err_refresh_failed">キャッシュ情報を更新することができません。</string>
@@ -142,9 +131,6 @@
   <string name="err_dwld_details_failed_reason">キャッシュ情報の詳細をダウンロードすることができません。原因: </string>
   <string name="err_load_descr_failed">キャッシュの説明をロードすることができません。</string>
   <string name="err_location_unknown">キャッシュの場所が分かりません。</string>
-  <string name="err_manual_title">マニュアルがインストールされていません。</string>
-  <string name="err_manual_message">Manual for c:geo(c:geoマニュアルアプリ,英語)がデバイスに存在しません。インストールされてますか?</string>
-  <string name="err_manual_market">Manual for c:geo(c:geoマニュアルアプリ,英語)を検索しようとしましたがAndroid Marketを実行することができませんでした。</string>
 
   <string name="err_tb_display">トラッカブルアイテムを表示することができません。本当にトラッカブルアイテムですか?</string>
   <string name="err_tb_details_open">トラッカブルアイテムの詳細を開くことができません。</string>
@@ -166,21 +152,18 @@
   <string name="err_point_bear_and_dist_title">ヘルプが必要?</string>
   <string name="err_point_bear_and_dist">距離と方位を半角英数字で入力してください。方位は北を基準として時計回りに0～360度で表し単位は付けないでください。距離は単位を付けなければメートルとして扱われ、他にkmなどの単位を付けることができます。</string>
   <string name="err_point_location_error">ウェイポイントの場所が得られません。</string>
-  <string name="err_navigation_not_found">サポートしているナビゲーションが見つかりません。</string>
 
   <string name="err_log_load_data">ログを書くのに必要なデータをロードすることができません。.</string>
   <string name="err_log_load_data_again">ログを書くのに必要なデータをロードすることができません。もう一度やってみてください。</string>
   <string name="err_log_load_data_still">ログを投稿するのに必要なデータをまだロード中です。もう少しお待ちください。</string>
   <string name="err_log_failed_server">サーバの反応がないのでログを投稿することができませんでした。</string>
   <string name="err_log_post_failed">ログを投稿することができなかったようです。Geocaching.comで確認してください。</string>
-  <string name="err_log_post_failed_because">ログを投稿することができませんでした。原因: </string>
 
   <string name="err_search_address_no_match">該当する場所が見つかりません。</string>
   <string name="err_search_address_forgot">Sorry, c:geo forgot address you try to find.</string>
   <string name="err_search_address">場所を検索中</string>
   <string name="err_parse_lat">緯度の解析ができません。</string>
   <string name="err_parse_lon">経度の解析ができません。</string>
-  <string name="err_parse_bear">方位の解析ができません。</string>
   <string name="err_parse_dist">距離の解析ができません。</string>
 
   <string name="warn_save_nothing">保存すべきものがありません。</string>
@@ -196,10 +179,6 @@
   <string name="warn_search_help_tb">トラッカブルアイテムのコード(多くはTBかTCで始まります)を入力してください。例:「TB29QMZ」。</string>
   <string name="warn_log_text_fill">ログの本文を半角英数字記号で書いてください。(日本語は数値文字参照に変換する必要があります)</string>
 
-  <string name="info_altitude">現在地の標高</string>
-  <string name="info_distance">移動距離</string>
-  <string name="info_distance_cleared">移動距離がリセットされました。</string>
-  <string name="info_since">\n(since </string>
 
   <string name="info_log_posted">ログを投稿しました。</string>
   <string name="info_log_saved">ログを保存しました。</string>
@@ -227,24 +206,16 @@
   <string name="advanced_search_button">検索</string>
   <string name="stored_caches_button">保存済み</string>
   <string name="any_button">目的地</string>
-  <string name="about_button">About</string>
-  <string name="settings_button">設定</string>
-  <string name="type">タイプ</string>
-  <string name="now_searching">検索中</string>
 
   <!-- caches -->
-  <string name="caches_searching">キャッシュを検索中</string>
   <string name="caches_no_cache">キャッシュはありません</string>
   <string name="caches_more_caches">次のキャッシュ</string>
   <string name="caches_more_caches_no">キャッシュは以上です</string>
   <string name="caches_more_caches_loading">キャッシュ情報をロード中…</string>
   <string name="caches_downloading">キャッシュ情報をダウンロード中…\n残り時間: </string>
-  <string name="caches_progress_loading_title">キャッシュ情報をロード中</string>
-  <string name="caches_progress_loading_text">デバイスに保存されたキャッシュ</string>
   <string name="caches_eta_ltm">1分以内</string>
   <string name="caches_eta_mins"> 分</string>
   <string name="caches_eta_min"> 分</string>
-  <string name="caches_no_caches"> (no caches)</string>
   <string name="caches_store_offline">オフライン用に保存</string>
   <string name="caches_store_selected">選択したキャッシュを保存</string>
   <string name="caches_stored">保存済み</string>
@@ -276,7 +247,6 @@
   <string name="caches_drop_progress">キャッシュを削除中</string>
   <string name="caches_refresh_selected">選択したキャッシュを更新</string>
   <string name="caches_refresh_all">全てのキャッシュを更新</string>
-  <string name="caches_map_cgeo">c:geo</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">画像の文字を半角英数字で入力してください。キャッシュの座標を得るのには重要ですが必須ではありません。設定(メイン画面のメニューボタンから)で、このダイアログを表示しないようにできます。</string>
@@ -324,7 +294,6 @@
   <string name="init_login_popup_ok">ログインに成功しました。</string>
   <string name="init_login_popup_failed">ログインに失敗しました。</string>
   <string name="init_login_popup_failed_reason">ログインに失敗しました。原因: </string>
-  <string name="init_legal">法律に関する文章</string>
   <string name="init_go4cache_connect">Go 4 Cacheに接続する</string>
   <string name="init_twitter_authorize">c:geoを認証する</string>
   <string name="init_twitter_publish">キャッシュが見つかったら状況をツイートする</string>
@@ -332,13 +301,8 @@
   <string name="init_signature_help_button">ヘルプ</string>
   <string name="init_signature_help_title">署名のヒント</string>
   <string name="init_signature_help_text">ログ本文で使う署名を半角英数字記号で書いてください。(日本語は数値文字参照に変換する必要があります)\n特別な文字として[DATE]、[TIME]、[USER]や[NUMBER]があります。\nこれらは署名の挿入時に日付、時間、ユーザ名や見つけたキャッシュ数+1に変換されます。</string>
-  <string name="init_languages">Translation</string>
-  <string name="init_languages_description">Which languages you don\'t need to translate? Please provide two-character language codes.</string>
-  <string name="init_languages_hint">en es de cs</string>
-  <string name="init_translate">Translate description &amp; hint</string>
   <string name="init_other">その他のオプション</string>
   <string name="init_skin">明るい色のスキン\n(c:geoの再起動が必要)</string>
-  <string name="init_transparent">c:geoのメイン画面を透明化する</string>
   <string name="init_address">メイン画面での現在地を地名で表示する</string>
   <string name="init_captcha">必要ならCAPTCHA(画像認識)を表示する</string>
   <string name="init_useenglish">c:geoを英語表示にする\n(c:geoの再起動が必要)</string>
@@ -417,11 +381,8 @@
   <string name="cache_menu_radar">レーダー</string>
   <string name="cache_menu_map">地図で表示</string>
   <string name="cache_menu_map_static">オフライン地図</string>
-  <string name="cache_menu_locus">Locus</string>
   <string name="cache_menu_rmaps">Rmaps</string>
   <string name="cache_menu_map_ext">外部地図で表示</string>
-  <string name="cache_menu_map_short">Maps</string>
-  <string name="cache_menu_map_ext_short">外部地図</string>
   <string name="cache_menu_browser">ブラウザで開く</string>
   <string name="cache_menu_visit">ログを書く</string>
   <string name="cache_menu_spoilers">スポイラー画像</string>
@@ -449,7 +410,6 @@
   <string name="cache_event">日時</string>
   <string name="cache_location">場所</string>
   <string name="cache_coordinates">座標</string>
-  <string name="cache_elevation">高度</string>
   <string name="cache_calendars">カレンダーを選択</string>
   <string name="cache_spoiler_images_title">スポイラー画像</string>
   <string name="cache_spoiler_images_loading">スポイラー画像をロード中…</string>
@@ -457,7 +417,6 @@
 
   <!-- gpx -->
   <string name="gpx_import_loading_stored">GPXファイルをロード中\n保存済み:</string>
-  <string name="gpx_import_no_files">GPXファイルが見つかりません。</string>
   <string name="gpx_import_caches_imported">個のキャッシュを読み込みました</string>
   <string name="gpx_import_loading">GPXファイルをロード中</string>
   <string name="gpx_import_title">GPXファイルの読み込み</string>
@@ -470,7 +429,6 @@
 
   <!-- popup -->
   <string name="popup_more">詳細を見る</string>
-  <string name="popup_offline">オフライン</string>
 
   <!-- waypoint -->
   <string name="waypoint">ウェイポイント</string>
@@ -517,9 +475,6 @@
   <string name="search_kw">キーワード</string>
   <string name="search_kw_prefill">キーワード</string>
   <string name="search_kw_button">キーワードで検索</string>
-  <string name="search_kw_caches">キーワード</string>
-  <string name="search_caches_found_by">見つけたユーザ</string>
-  <string name="search_caches_hidden_by">隠したユーザ</string>
   <string name="search_fbu">ユーザが見つけたキャッシュ</string>
   <string name="search_fbu_prefill">ユーザ名</string>
   <string name="search_fbu_button">ユーザ名で検索</string>
@@ -531,16 +486,11 @@
   <string name="search_tb_button">トラッカブルアイテムを検索</string>
   <string name="search_destination">目的地</string>
   <string name="search_direction_rel">この地点から</string>
-  <string name="search_lat">緯度</string>
-  <string name="search_lon">経度</string>
-  <string name="search_caches">キャッシュの検索</string>
-  <string name="search_caches_near">近くのキャッシュ</string>
   <string name="search_address_started">場所を検索中</string>
   <string name="search_address_result">検索結果:場所</string>
 
   <!-- trackable -->
   <string name="trackable">トラッカブルアイテム</string>
-  <string name="trackable_select_title">トラッカブルアイテム</string>
   <string name="trackable_details_loading">トラッカブルアイテムの詳細をロード中…</string>
   <string name="trackable_log_touch">Log touch</string>
   <string name="trackable_browser_open">ブラウザで開く</string>
@@ -593,133 +543,73 @@
 
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">犬の同伴可</string>
-  <string name="attribute_dogs_no">犬の同伴不可</string>
   <string name="attribute_bicycles_yes">自転車侵入可</string>
-  <string name="attribute_bicycles_no">自転車侵入不可</string>
   <string name="attribute_motorcycles_yes">バイク侵入可</string>
-  <string name="attribute_motorcycles_no">バイク侵入不可</string>
   <string name="attribute_quads_yes">4輪バギー侵入可</string>
-  <string name="attribute_quads_no">4輪バギー侵入不可</string>
   <string name="attribute_jeeps_yes">オフロード車侵入可</string>
-  <string name="attribute_jeeps_no">オフロード車侵入不可</string>
   <string name="attribute_snowmobiles_yes">スノーモービル侵入可</string>
-  <string name="attribute_snowmobiles_no">スノーモービル侵入不可</string>
   <string name="attribute_horses_yes">馬侵入可</string>
-  <string name="attribute_horses_no">馬侵入不可</string>
   <string name="attribute_campfires_yes">焚き火可</string>
-  <string name="attribute_campfires_no">焚き火不可</string>
   <string name="attribute_rv_yes">トラック/RV車侵入可</string>
-  <string name="attribute_rv_no">トラック/RV車侵入不可</string>
 
   <!--  attributes (conditions -> yes, no) -->
   <string name="attribute_kids_yes">子供にお薦め</string>
-  <string name="attribute_kids_no">子供にお薦めしない</string>
   <string name="attribute_onehour_yes">1時間以内</string>
-  <string name="attribute_onehour_no">1時間以上</string>
   <string name="attribute_scenic_yes">美景</string>
-  <string name="attribute_scenic_no">美景なし</string>
   <string name="attribute_hiking_yes">長距離の歩行</string>
-  <string name="attribute_hiking_no">長距離の歩行なし</string>
   <string name="attribute_climbing_yes">難しい登山</string>
-  <string name="attribute_climbing_no">難しい登山なし</string>
   <string name="attribute_wading_yes">渡渉(水中を歩いて渡る)箇所あり</string>
-  <string name="attribute_wading_no">渡渉水中を歩いて渡る)箇所なし</string>
   <string name="attribute_swimming_yes">泳いで渡る箇所あり</string>
-  <string name="attribute_swimming_no">泳いで渡る箇所なし</string>
   <string name="attribute_available_yes">24時間有効</string>
-  <string name="attribute_available_no">24時間有効ではない</string>
   <string name="attribute_night_yes">夜がお薦め</string>
-  <string name="attribute_night_no">夜はお薦めしない</string>
   <string name="attribute_winter_yes">冬季に有効</string>
-  <string name="attribute_winter_no">冬季は有効ではない</string>
   <string name="attribute_stealth_yes">人目を忍ぶ必要あり</string>
-  <string name="attribute_stealth_no">人目を忍ぶ必要なし</string>
   <string name="attribute_firstaid_yes">メンテナンスが必要</string>
-  <string name="attribute_firstaid_no">メンテナンスが必要ではない</string>
   <string name="attribute_cow_yes">家畜に注意</string>
-  <string name="attribute_cow_no">家畜はいません</string>
   <string name="attribute_field_puzzle_yes">Field puzzle</string>
-  <string name="attribute_field_puzzle_no">No field puzzle</string>
   <string name="attribute_nightcache_yes">ナイトキャッシュ</string>
-  <string name="attribute_nightcache_no">ナイトキャッシュではない</string>
   <string name="attribute_parkngrab_yes">Park and grab</string>
-  <string name="attribute_parkngrab_no">No park and grab</string>
   <string name="attribute_abandonedbuilding_yes">廃墟</string>
-  <string name="attribute_abandonedbuilding_no">廃墟ではない</string>
   <string name="attribute_hike_short_yes">短距離の歩行(1km以下)</string>
-  <string name="attribute_hike_short_no">短距離の歩行ではない</string>
   <string name="attribute_hike_med_yes">中距離の歩行(1kmから10km)</string>
-  <string name="attribute_hike_med_no">中距離の歩行ではない</string>
   <string name="attribute_hike_long_yes">長距離の歩行(10km以上)</string>
-  <string name="attribute_hike_long_no">長距離の歩行ではない</string>
   <string name="attribute_landf_yes">Lost and found tour</string>
-  <string name="attribute_landf_no">No lost and found tour</string>
   <string name="attribute_partnership_yes">Sponsored cache</string>
-  <string name="attribute_partnership_no">Non sponsored cache</string>
 
   <!--  attributes (equipment -> required, not required) -->
   <string name="attribute_fee_yes">交通料金や駐車料金が必要</string>
-  <string name="attribute_fee_no">交通料金や駐車料金は不要</string>
   <string name="attribute_rappelling_yes">登山道具が必要</string>
-  <string name="attribute_rappelling_no">登山道具は不要</string>
   <string name="attribute_boat_yes">船が必要</string>
-  <string name="attribute_boat_no">船は不要</string>
   <string name="attribute_scuba_yes">スキューバダイビング用具が必要</string>
-  <string name="attribute_scuba_no">スキューバダイビング用具は不要</string>
   <string name="attribute_flashlight_yes">懐中電燈が必要</string>
-  <string name="attribute_flashlight_no">懐中電燈は不要</string>
   <string name="attribute_uv_yes">UVライトが必要</string>
-  <string name="attribute_uv_no">UVライトは不要</string>
   <string name="attribute_snowshoes_yes">スノーシューが必要</string>
-  <string name="attribute_snowshoes_no">スノーシューは不要</string>
   <string name="attribute_skiis_yes">クロスカントリースキーが必要</string>
-  <string name="attribute_skiis_no">クロスカントリースキーは不要</string>
   <string name="attribute_s_tool_yes">特別な道具が必要</string>
-  <string name="attribute_s_tool_no">特別な道具は不要</string>
   <string name="attribute_wirelessbeacon_yes">無線ビーコンあり</string>
-  <string name="attribute_wirelessbeacon_no">無線ビーコンなし</string>
 
   <!--  attributes (hazards -> present, not present) -->
   <string name="attribute_poisonoak_yes">有毒植物あり</string>
-  <string name="attribute_poisonoak_no">有毒植物なし</string>
   <string name="attribute_dangerousanimals_yes">有害動物がいる</string>
-  <string name="attribute_dangerousanimals_no">有害動物はいない</string>
   <string name="attribute_ticks_yes">ダニがいる</string>
-  <string name="attribute_ticks_no">ダニはいない</string>
   <string name="attribute_mine_yes">廃坑あり</string>
-  <string name="attribute_mine_no">廃坑なし</string>
   <string name="attribute_cliff_yes">崖/落石あり</string>
-  <string name="attribute_cliff_no">崖/落石なし</string>
   <string name="attribute_hunting_yes">ハンターがいる</string>
-  <string name="attribute_hunting_no">ハンターはいない</string>
   <string name="attribute_danger_yes">危険区域</string>
-  <string name="attribute_danger_no">危険区域ではない</string>
   <string name="attribute_thorn_yes">棘のある植物あり</string>
-  <string name="attribute_thorn_no">棘のある植物なし</string>
 
   <!--  attributes (facilities -> yes, no) -->
   <string name="attribute_wheelchair_yes">車いす可</string>
-  <string name="attribute_wheelchair_no">車いす不可</string>
   <string name="attribute_parking_yes">駐車場あり</string>
-  <string name="attribute_parking_no">駐車場なし</string>
   <string name="attribute_public_yes">公共交通機関あり</string>
-  <string name="attribute_public_no">公共交通機関なし</string>
   <string name="attribute_water_yes">近くに飲料水あり</string>
-  <string name="attribute_water_no">近くに飲料水なし</string>
   <string name="attribute_restrooms_yes">近くに公共トイレあり</string>
-  <string name="attribute_restrooms_no">近くに公共トイレなし</string>
   <string name="attribute_phone_yes">近くに公衆電話あり</string>
-  <string name="attribute_phone_no">近くに公衆電話なし</string>
   <string name="attribute_picnic_yes">近くにピクニックテーブルあり</string>
-  <string name="attribute_picnic_no">近くにピクニックテーブルなし</string>
   <string name="attribute_camping_yes">キャンプ可</string>
-  <string name="attribute_camping_no">キャンプ不可</string>
   <string name="attribute_stroller_yes">ベビーカー可</string>
-  <string name="attribute_stroller_no">ベビーカー不可</string>
   <string name="attribute_fuel_yes">近くにガソリンスタンドあり</string>
-  <string name="attribute_fuel_no">近くにガソリンスタンドなし</string>
   <string name="attribute_food_yes">近くに飲食店あり</string>
-  <string name="attribute_food_no">近くに飲食店なし</string>
 
   <!-- next things -->
   <string name="legal_note">Geocaching.comを使うには<a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak 利用規約(英語)</a>に同意している必要があります。</string>
