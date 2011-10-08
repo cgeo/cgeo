@@ -33,7 +33,7 @@ else
     var d         = document.getElementById('Download');
     var m         = d.children;
     var last      = m.item(m.length-1);
-    var GCElement = document.getElementById('ctl00_ContentBody_uxWaypointName');
+    var GCElement = document.getElementById('ctl00_ContentBody_CoordInfoLinkControl1_uxCoordInfoCode');
     var GCCode    = GCElement.innerHTML;
     
     var html = '| <input type="button" '
