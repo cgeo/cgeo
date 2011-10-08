@@ -1,6 +1,6 @@
 package cgeo.geocaching.apps;
 
-import cgeo.geocaching.utils.CollectionUtils;
+import org.apache.commons.collections.CollectionUtils;
 
 import android.content.Context;
 import android.content.Intent;
