@@ -113,10 +113,10 @@ public class cgeotouch extends cgLogForm {
 
         trackable = app.getTrackableByGeocode("logging trackable");
 
-        if (StringUtils.isNotBlank(trackable.name)) {
-            setTitle(res.getString(R.string.trackable_touch) + trackable.name);
+        if (StringUtils.isNotBlank(trackable.getName())) {
+            setTitle(res.getString(R.string.trackable_touch) + trackable.getName());
         } else {
-            setTitle(res.getString(R.string.trackable_touch) + trackable.geocode.toUpperCase());
+            setTitle(res.getString(R.string.trackable_touch) + trackable.getGeocode().toUpperCase());
         }
 
         app.setAction("logging trackable");

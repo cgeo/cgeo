@@ -906,11 +906,11 @@ public class cgeodetail extends AbstractActivity {
                         inventoryString.append('\n');
                     }
                     // avoid HTML parsing where possible
-                    if (containsHtml(inventoryItem.name)) {
-                        inventoryString.append(Html.fromHtml(inventoryItem.name).toString());
+                    if (containsHtml(inventoryItem.getName())) {
+                        inventoryString.append(Html.fromHtml(inventoryItem.getName()).toString());
                     }
                     else {
-                        inventoryString.append(inventoryItem.name);
+                        inventoryString.append(inventoryItem.getName());
                     }
                 }
                 inventView.setText(inventoryString);
@@ -1671,7 +1671,7 @@ public class cgeodetail extends AbstractActivity {
                 // jump directly into details if there is only one trackable
                 if (cache != null && cache.inventory != null && cache.inventory.size() == 1) {
                     cgTrackable trackable = cache.inventory.get(0);
-                    cgeotrackable.startActivity(cgeodetail.this, trackable.guid, trackable.geocode, trackable.name);
+                    cgeotrackable.startActivity(cgeodetail.this, trackable.getGuid(), trackable.getGeocode(), trackable.getName());
                 }
                 else {
                     Intent trackablesIntent = new Intent(cgeodetail.this, cgeotrackables.class);

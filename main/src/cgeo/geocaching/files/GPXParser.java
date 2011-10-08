@@ -617,7 +617,7 @@ public abstract class GPXParser extends FileParser {
 
                     try {
                         if (attrs.getIndex("ref") > -1) {
-                            trackable.geocode = attrs.getValue("ref").toUpperCase();
+                            trackable.setGeocode(attrs.getValue("ref").toUpperCase());
                         }
                     } catch (Exception e) {
                         // nothing
@@ -632,7 +632,7 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void end() {
-                    if (StringUtils.isNotBlank(trackable.geocode) && StringUtils.isNotBlank(trackable.name)) {
+                    if (StringUtils.isNotBlank(trackable.getGeocode()) && StringUtils.isNotBlank(trackable.getName())) {
                         if (cache.inventory == null) {
                             cache.inventory = new ArrayList<cgTrackable>();
                         }
@@ -646,7 +646,7 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void end(String tbName) {
-                    trackable.name = validate(tbName);
+                    trackable.setName(validate(tbName));
                 }
             });
 
