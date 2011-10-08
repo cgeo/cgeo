@@ -1996,48 +1996,27 @@ public class cgBase {
         return types;
     }
 
-    public static List<cgTrackableLog> parseTrackableLog(String page) {
+    public static List<cgTrackableLog> parseTrackableLog(final String page) {
         if (StringUtils.isEmpty(page)) {
             return null;
         }
 
         final List<cgTrackableLog> trackables = new ArrayList<cgTrackableLog>();
 
-        int startPos = -1;
-        int endPos = -1;
+        String table = StringUtils.substringBetween(page, "<table id=\"tblTravelBugs\"", "</table>");
 
-        startPos = page.indexOf("<table id=\"tblTravelBugs\"");
-        if (startPos == -1) {
-            Log.e(Settings.tag, "cgeoBase.parseTrackableLog: ID \"tblTravelBugs\" not found on page");
-            return null;
+        // if no trackables are currently in the account, the table is not available, so return an empty list instead of null
+        if (StringUtils.isBlank(table)) {
+            return trackables;
         }
 
-        page = page.substring(startPos); // cut on <table
-
-        endPos = page.indexOf("</table>");
-        if (endPos == -1) {
-            Log.e(Settings.tag, "cgeoBase.parseTrackableLog: end of ID \"tblTravelBugs\" not found on page");
-            return null;
-        }
-
-        page = page.substring(0, endPos); // cut on </table>
-
-        startPos = page.indexOf("<tbody>");
-        if (startPos == -1) {
+        table = StringUtils.substringBetween(table, "<tbody>", "</tbody>");
+        if (StringUtils.isBlank(table)) {
             Log.e(Settings.tag, "cgeoBase.parseTrackableLog: tbody not found on page");
             return null;
         }
 
-        page = page.substring(startPos); // cut on <tbody>
-
-        endPos = page.indexOf("</tbody>");
-        if (endPos == -1) {
-            Log.e(Settings.tag, "cgeoBase.parseTrackableLog: end of tbody not found on page");
-            return null;
-        }
-
-        page = page.substring(0, endPos); // cut on </tbody>
-
+        // FIXME: pattern is over specified
         final Pattern trackablePattern = Pattern.compile("<tr id=\"ctl00_ContentBody_LogBookPanel1_uxTrackables_repTravelBugs_ctl[0-9]+_row\"[^>]*>"
                 + "[^<]*<td>[^<]*<a href=\"[^\"]+\">([A-Z0-9]+)</a>[^<]*</td>[^<]*<td>([^<]+)</td>[^<]*<td>"
                 + "[^<]*<select name=\"ctl00\\$ContentBody\\$LogBookPanel1\\$uxTrackables\\$repTravelBugs\\$ctl([0-9]+)\\$ddlAction\"[^>]*>"
