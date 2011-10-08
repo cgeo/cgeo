@@ -114,8 +114,9 @@ public class cgBase {
     private final static Pattern PATTERN_TRACKABLE_SpottedUser = Pattern.compile("<dt>\\W*Recently Spotted:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" href=\"[^\"]*/profile/\\?guid=([a-z0-9\\-]+)\">In the hands of ([^<]+).</a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
     private final static Pattern PATTERN_TRACKABLE_SpottedUnknown = Pattern.compile("<dt>\\W*Recently Spotted:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugLocation\">Unknown Location[^<]*</a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
     private final static Pattern PATTERN_TRACKABLE_SpottedOwner = Pattern.compile("<dt>\\W*Recently Spotted:[^<]*</dt>[^<]*<dd>[^<]*<a id=\"ctl00_ContentBody_BugDetails_BugLocation\">In the hands of the owner[^<]*</a>[^<]*</dd>", Pattern.CASE_INSENSITIVE);
-    private final static Pattern PATTERN_TRACKABLE_Goal = Pattern.compile("<h3>\\W*Current GOAL[^<]*</h3>[^<]*<p[^>]*>(.*)</p>[^<]*<h3>\\W*About This Item[^<]*</h3>", Pattern.CASE_INSENSITIVE);
-    private final static Pattern PATTERN_TRACKABLE_DetailsImage = Pattern.compile("<h3>\\W*About This Item[^<]*</h3>([^<]*<p>([^<]*<img id=\"ctl00_ContentBody_BugDetails_BugImage\" class=\"[^\"]+\" src=\"([^\"]+)\"[^>]*>)?[^<]*</p>)?[^<]*<p[^>]*>(.*)</p>[^<]*<div id=\"ctl00_ContentBody_BugDetails_uxAbuseReport\">", Pattern.CASE_INSENSITIVE);
+    private final static Pattern PATTERN_TRACKABLE_GOAL = Pattern.compile("<h3>\\W*Current GOAL[^<]*</h3>[^<]*<div id=\"TrackableGoal\">[^<]*<p>(.*?)</p>[^<]*</div>[^<]*<h3>");
+    private final static Pattern PATTERN_TRACKABLE_DETAILSIMAGE = Pattern.compile("<h3>\\W*About This Item[^<]*</h3>[^<]*<div id=\"TrackableDetails\">([^<]*<p>([^<]*<img id=\"ctl00_ContentBody_BugDetails_BugImage\" class=\"[^\"]+\" src=\"([^\"]+)\"[^>]*>)?[^<]*</p>)?[^<]*<p[^>]*>(.*)</p>[^<]*</div>");
+
     private final static Pattern PATTERN_TRACKABLE_Icon = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
     private final static Pattern PATTERN_TRACKABLE_Type = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"[^\"]+\" alt=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
     private final static Pattern PATTERN_TRACKABLE_Distance = Pattern.compile("<h4[^>]*\\W*Tracking History \\(([0-9.,]+(km|mi))[^\\)]*\\)", Pattern.CASE_INSENSITIVE);
@@ -1328,8 +1329,8 @@ public class cgBase {
                         while (matcherInventoryInside.find()) {
                             if (matcherInventoryInside.groupCount() > 0) {
                                 final cgTrackable inventoryItem = new cgTrackable();
-                                inventoryItem.guid = matcherInventoryInside.group(1);
-                                inventoryItem.name = matcherInventoryInside.group(2);
+                                inventoryItem.setGuid(matcherInventoryInside.group(1));
+                                inventoryItem.setName(matcherInventoryInside.group(2));
 
                                 cache.inventory.add(inventoryItem);
                                 cache.inventoryItems++;
@@ -1732,7 +1733,7 @@ public class cgBase {
         try {
             final Matcher matcherGeocode = PATTERN_TRACKABLE_Geocode.matcher(page);
             if (matcherGeocode.find() && matcherGeocode.groupCount() > 0) {
-                trackable.geocode = matcherGeocode.group(1).toUpperCase();
+                trackable.setGeocode(matcherGeocode.group(1).toUpperCase());
             }
         } catch (Exception e) {
             // failed to parse trackable geocode
@@ -1743,7 +1744,7 @@ public class cgBase {
         try {
             final Matcher matcherTrackableId = PATTERN_TRACKABLE_TrackableId.matcher(page);
             if (matcherTrackableId.find() && matcherTrackableId.groupCount() > 0) {
-                trackable.guid = matcherTrackableId.group(1);
+                trackable.setGuid(matcherTrackableId.group(1));
             }
         } catch (Exception e) {
             // failed to parse trackable id
@@ -1754,7 +1755,7 @@ public class cgBase {
         try {
             final Matcher matcherTrackableIcon = PATTERN_TRACKABLE_Icon.matcher(page);
             if (matcherTrackableIcon.find() && matcherTrackableIcon.groupCount() > 0) {
-                trackable.iconUrl = matcherTrackableIcon.group(1);
+                trackable.setIconUrl(matcherTrackableIcon.group(1));
             }
         } catch (Exception e) {
             // failed to parse trackable icon
@@ -1765,7 +1766,7 @@ public class cgBase {
         try {
             final Matcher matcherName = PATTERN_TRACKABLE_Name.matcher(page);
             if (matcherName.find() && matcherName.groupCount() > 1) {
-                trackable.name = matcherName.group(2);
+                trackable.setName(matcherName.group(2));
             }
         } catch (Exception e) {
             // failed to parse trackable name
@@ -1773,11 +1774,11 @@ public class cgBase {
         }
 
         // trackable type
-        if (StringUtils.isNotBlank(trackable.name)) {
+        if (StringUtils.isNotBlank(trackable.getName())) {
             try {
                 final Matcher matcherType = PATTERN_TRACKABLE_Type.matcher(page);
                 if (matcherType.find() && matcherType.groupCount() > 0) {
-                    trackable.type = matcherType.group(1);
+                    trackable.setType(matcherType.group(1));
                 }
             } catch (Exception e) {
                 // failed to parse trackable type
@@ -1789,8 +1790,8 @@ public class cgBase {
         try {
             final Matcher matcherOwner = PATTERN_TRACKABLE_Owner.matcher(page);
             if (matcherOwner.find() && matcherOwner.groupCount() > 0) {
-                trackable.ownerGuid = matcherOwner.group(1);
-                trackable.owner = matcherOwner.group(2);
+                trackable.setOwnerGuid(matcherOwner.group(1));
+                trackable.setOwner(matcherOwner.group(2));
             }
         } catch (Exception e) {
             // failed to parse trackable owner name
@@ -1801,7 +1802,7 @@ public class cgBase {
         try {
             final Matcher matcherOrigin = PATTERN_TRACKABLE_Origin.matcher(page);
             if (matcherOrigin.find() && matcherOrigin.groupCount() > 0) {
-                trackable.origin = matcherOrigin.group(1);
+                trackable.setOrigin(matcherOrigin.group(1));
             }
         } catch (Exception e) {
             // failed to parse trackable origin
@@ -1812,26 +1813,26 @@ public class cgBase {
         try {
             final Matcher matcherSpottedCache = PATTERN_TRACKABLE_SpottedCache.matcher(page);
             if (matcherSpottedCache.find() && matcherSpottedCache.groupCount() > 0) {
-                trackable.spottedGuid = matcherSpottedCache.group(1);
-                trackable.spottedName = matcherSpottedCache.group(2);
-                trackable.spottedType = cgTrackable.SPOTTED_CACHE;
+                trackable.setSpottedGuid(matcherSpottedCache.group(1));
+                trackable.setSpottedName(matcherSpottedCache.group(2));
+                trackable.setSpottedType(cgTrackable.SPOTTED_CACHE);
             }
 
             final Matcher matcherSpottedUser = PATTERN_TRACKABLE_SpottedUser.matcher(page);
             if (matcherSpottedUser.find() && matcherSpottedUser.groupCount() > 0) {
-                trackable.spottedGuid = matcherSpottedUser.group(1);
-                trackable.spottedName = matcherSpottedUser.group(2);
-                trackable.spottedType = cgTrackable.SPOTTED_USER;
+                trackable.setSpottedGuid(matcherSpottedUser.group(1));
+                trackable.setSpottedName(matcherSpottedUser.group(2));
+                trackable.setSpottedType(cgTrackable.SPOTTED_USER);
             }
 
             final Matcher matcherSpottedUnknown = PATTERN_TRACKABLE_SpottedUnknown.matcher(page);
             if (matcherSpottedUnknown.find()) {
-                trackable.spottedType = cgTrackable.SPOTTED_UNKNOWN;
+                trackable.setSpottedType(cgTrackable.SPOTTED_UNKNOWN);
             }
 
             final Matcher matcherSpottedOwner = PATTERN_TRACKABLE_SpottedOwner.matcher(page);
             if (matcherSpottedOwner.find()) {
-                trackable.spottedType = cgTrackable.SPOTTED_OWNER;
+                trackable.setSpottedType(cgTrackable.SPOTTED_OWNER);
             }
         } catch (Exception e) {
             // failed to parse trackable last known place
@@ -1843,16 +1844,16 @@ public class cgBase {
             final Matcher matcherReleased = PATTERN_TRACKABLE_Released.matcher(page);
             if (matcherReleased.find() && matcherReleased.groupCount() > 0 && matcherReleased.group(1) != null) {
                 try {
-                    if (trackable.released == null) {
-                        trackable.released = dateTbIn1.parse(matcherReleased.group(1));
+                    if (trackable.getReleased() == null) {
+                        trackable.setReleased(dateTbIn1.parse(matcherReleased.group(1)));
                     }
                 } catch (Exception e) {
                     //
                 }
 
                 try {
-                    if (trackable.released == null) {
-                        trackable.released = dateTbIn2.parse(matcherReleased.group(1));
+                    if (trackable.getReleased() == null) {
+                        trackable.setReleased(dateTbIn2.parse(matcherReleased.group(1)));
                     }
                 } catch (Exception e) {
                     //
@@ -1868,9 +1869,9 @@ public class cgBase {
             final Matcher matcherDistance = PATTERN_TRACKABLE_Distance.matcher(page);
             if (matcherDistance.find() && matcherDistance.groupCount() > 0) {
                 try {
-                    trackable.distance = DistanceParser.parseDistance(matcherDistance.group(1), Settings.isUseMetricUnits());
+                    trackable.setDistance(DistanceParser.parseDistance(matcherDistance.group(1), Settings.isUseMetricUnits()));
                 } catch (NumberFormatException e) {
-                    trackable.distance = null;
+                    trackable.setDistance(null);
                     throw e;
                 }
             }
@@ -1881,9 +1882,9 @@ public class cgBase {
 
         // trackable goal
         try {
-            final Matcher matcherGoal = PATTERN_TRACKABLE_Goal.matcher(page);
+            final Matcher matcherGoal = PATTERN_TRACKABLE_GOAL.matcher(page);
             if (matcherGoal.find() && matcherGoal.groupCount() > 0) {
-                trackable.goal = matcherGoal.group(1);
+                trackable.setGoal(matcherGoal.group(1));
             }
         } catch (Exception e) {
             // failed to parse trackable goal
@@ -1892,16 +1893,16 @@ public class cgBase {
 
         // trackable details & image
         try {
-            final Matcher matcherDetailsImage = PATTERN_TRACKABLE_DetailsImage.matcher(page);
+            final Matcher matcherDetailsImage = PATTERN_TRACKABLE_DETAILSIMAGE.matcher(page);
             if (matcherDetailsImage.find() && matcherDetailsImage.groupCount() > 0) {
                 final String image = matcherDetailsImage.group(3);
                 final String details = matcherDetailsImage.group(4);
 
                 if (image != null) {
-                    trackable.image = image;
+                    trackable.setImage(image);
                 }
                 if (details != null) {
-                    trackable.details = details;
+                    trackable.setDetails(details);
                 }
             }
         } catch (Exception e) {
@@ -1950,7 +1951,7 @@ public class cgBase {
                     logDone.cacheName = matcherLogs.group(5);
                 }
 
-                trackable.logs.add(logDone);
+                trackable.getLogs().add(logDone);
             }
         } catch (Exception e) {
             // failed to parse logs
@@ -2025,32 +2026,32 @@ public class cgBase {
         final Matcher trackableMatcher = trackablePattern.matcher(page);
         while (trackableMatcher.find()) {
             if (trackableMatcher.groupCount() > 0) {
-                final cgTrackableLog trackable = new cgTrackableLog();
+                final cgTrackableLog trackableLog = new cgTrackableLog();
 
                 if (trackableMatcher.group(1) != null) {
-                    trackable.trackCode = trackableMatcher.group(1);
+                    trackableLog.trackCode = trackableMatcher.group(1);
                 } else {
                     continue;
                 }
                 if (trackableMatcher.group(2) != null) {
-                    trackable.name = Html.fromHtml(trackableMatcher.group(2)).toString();
+                    trackableLog.name = Html.fromHtml(trackableMatcher.group(2)).toString();
                 } else {
                     continue;
                 }
                 if (trackableMatcher.group(3) != null) {
-                    trackable.ctl = Integer.valueOf(trackableMatcher.group(3));
+                    trackableLog.ctl = Integer.valueOf(trackableMatcher.group(3));
                 } else {
                     continue;
                 }
                 if (trackableMatcher.group(5) != null) {
-                    trackable.id = Integer.valueOf(trackableMatcher.group(5));
+                    trackableLog.id = Integer.valueOf(trackableMatcher.group(5));
                 } else {
                     continue;
                 }
 
-                Log.i(Settings.tag, "Trackable in inventory (#" + trackable.ctl + "/" + trackable.id + "): " + trackable.trackCode + " - " + trackable.name);
+                Log.i(Settings.tag, "Trackable in inventory (#" + trackableLog.ctl + "/" + trackableLog.id + "): " + trackableLog.trackCode + " - " + trackableLog.name);
 
-                trackables.add(trackable);
+                trackables.add(trackableLog);
             }
         }
 
@@ -2828,7 +2829,7 @@ public class cgBase {
 
     public static void postTweetTrackable(cgeoapplication app, String geocode) {
         final cgTrackable trackable = app.getTrackableByGeocode(geocode);
-        String name = trackable.name;
+        String name = trackable.getName();
         if (name.length() > 82) {
             name = name.substring(0, 79) + "...";
         }
@@ -3585,7 +3586,7 @@ public class cgBase {
     /**
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 sept. à 12:35".
-     *
+     * 
      * @param context
      *            a Context
      * @param date
