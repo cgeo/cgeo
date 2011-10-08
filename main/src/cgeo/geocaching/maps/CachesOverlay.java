@@ -1,12 +1,13 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCoord;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeodetail;
 import cgeo.geocaching.cgeonavigate;
 import cgeo.geocaching.cgeopopup;
 import cgeo.geocaching.cgeowaypoint;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
@@ -314,14 +315,12 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
             } else {
                 dialog.setTitle("waypoint");
 
-                String waypointType;
-                if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec)) {
-                    waypointType = cgBase.waypointTypes.get(coordinate.typeSpec);
-                } else {
-                    waypointType = cgBase.waypointTypes.get("waypoint");
+                String waypointL10N = cgBase.waypointTypees.get(coordinate.typeSpec);
+                if (waypointL10N == null) {
+                    waypointL10N = cgBase.waypointTypees.get(WaypointType.WAYPOINT);
                 }
 
-                dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ntype: " + waypointType);
+                dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ntype: " + waypointL10N);
                 dialog.setPositiveButton("navigate", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int id) {

@@ -1,8 +1,8 @@
 package cgeo.geocaching.apps;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgCache;
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -148,7 +148,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
                 PointGeocachingDataWaypoint wp = new PointGeocachingDataWaypoint();
                 wp.code = waypoint.geocode;
                 wp.name = waypoint.name;
-                String locusWpId = toLocusId(WaypointType.FIND_BY_ID.get(waypoint.type));
+                String locusWpId = toLocusId(waypoint.typee);
                 if (locusWpId != null) {
                     wp.type = locusWpId;
                 }

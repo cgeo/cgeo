@@ -1028,7 +1028,7 @@ public class cgeodetail extends AbstractActivity {
                     waypointView = (LinearLayout) inflater.inflate(R.layout.waypoint_item, null);
                     final TextView identification = (TextView) waypointView.findViewById(R.id.identification);
 
-                    ((TextView) waypointView.findViewById(R.id.type)).setText(cgBase.waypointTypes.get(wpt.type));
+                    ((TextView) waypointView.findViewById(R.id.type)).setText(cgBase.waypointTypees.get(wpt.typee));
                     if (wpt.getPrefix().equalsIgnoreCase("OWN") == false) {
                         identification.setText(wpt.getPrefix().trim() + "/" + wpt.lookup.trim());
                     } else {

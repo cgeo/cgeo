@@ -80,7 +80,7 @@ public class StaticMapsProvider {
                 waypoints.append("&markers=icon%3A");
                 waypoints.append(MARKERS_URL);
                 waypoints.append("marker_waypoint_");
-                waypoints.append(waypoint.type);
+                waypoints.append(waypoint.typee != null ? waypoint.typee.id : null);
                 waypoints.append(".png%7C");
                 waypoints.append(String.format((Locale) null, "%.6f", waypoint.coords.getLatitude()));
                 waypoints.append(',');

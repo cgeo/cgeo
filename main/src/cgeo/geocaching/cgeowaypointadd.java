@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
@@ -32,7 +33,7 @@ public class cgeowaypointadd extends AbstractActivity {
     private cgUpdateLoc geoUpdate = new update();
     private ProgressDialog waitDialog = null;
     private cgWaypoint waypoint = null;
-    private String type = "own";
+    private WaypointType type = WaypointType.OWN;
     private String prefix = "OWN";
     private String lookup = "---";
     /**
@@ -53,7 +54,7 @@ public class cgeowaypointadd extends AbstractActivity {
                     id = -1;
                 } else {
                     geocode = waypoint.geocode;
-                    type = waypoint.type;
+                    type = waypoint.typee;
                     prefix = waypoint.getPrefix();
                     lookup = waypoint.lookup;
 
@@ -126,7 +127,7 @@ public class cgeowaypointadd extends AbstractActivity {
         Button addWaypoint = (Button) findViewById(R.id.add_waypoint);
         addWaypoint.setOnClickListener(new coordsListener());
 
-        List<String> wayPointNames = new ArrayList<String>(cgBase.waypointTypes.values());
+        List<String> wayPointNames = new ArrayList<String>(cgBase.waypointTypees.values());
         AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.name);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, wayPointNames);
         textView.setAdapter(adapter);
@@ -328,7 +329,7 @@ public class cgeowaypointadd extends AbstractActivity {
             final String note = ((EditText) findViewById(R.id.note)).getText().toString().trim();
 
             final cgWaypoint waypoint = new cgWaypoint();
-            waypoint.type = type;
+            waypoint.typee = type;
             waypoint.geocode = geocode;
             waypoint.setPrefix(prefix);
             waypoint.lookup = lookup;

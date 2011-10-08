@@ -1,9 +1,9 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -37,7 +37,7 @@ class InternalMap extends AbstractInternalMap implements
         if (waypoint != null) {
             mapIntent.putExtra("latitude", waypoint.coords.getLatitude());
             mapIntent.putExtra("longitude", waypoint.coords.getLongitude());
-            mapIntent.putExtra("wpttype", waypoint.type);
+            mapIntent.putExtra("wpttype", waypoint.typee.id);
         } else if (coords != null) {
             mapIntent.putExtra("latitude", coords.getLatitude());
             mapIntent.putExtra("longitude", coords.getLongitude());
