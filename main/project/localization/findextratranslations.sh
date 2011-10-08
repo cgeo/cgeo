@@ -20,7 +20,10 @@ else
 fi
 
 checkpresent() {
-    (cd $sourcedir && grep -m 1 R.string.$1 $sourcefiles > /dev/null) || \
+    # Attributes are a special case, where in fact only the _yes is
+    # referenced in the source while the _no should be kept as well
+    res=`echo $1 | sed -e 's/^\(attribute_.*_\)no/\1yes/'`
+    (cd $sourcedir && grep -m 1 R.string.$res $sourcefiles > /dev/null) || \
       grep -m 1 @string/$1 $xmlfiles > /dev/null
 }
 

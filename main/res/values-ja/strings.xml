@@ -543,73 +543,133 @@
 
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">犬の同伴可</string>
+  <string name="attribute_dogs_no">犬の同伴不可</string>
   <string name="attribute_bicycles_yes">自転車侵入可</string>
+  <string name="attribute_bicycles_no">自転車侵入不可</string>
   <string name="attribute_motorcycles_yes">バイク侵入可</string>
+  <string name="attribute_motorcycles_no">バイク侵入不可</string>
   <string name="attribute_quads_yes">4輪バギー侵入可</string>
+  <string name="attribute_quads_no">4輪バギー侵入不可</string>
   <string name="attribute_jeeps_yes">オフロード車侵入可</string>
+  <string name="attribute_jeeps_no">オフロード車侵入不可</string>
   <string name="attribute_snowmobiles_yes">スノーモービル侵入可</string>
+  <string name="attribute_snowmobiles_no">スノーモービル侵入不可</string>
   <string name="attribute_horses_yes">馬侵入可</string>
+  <string name="attribute_horses_no">馬侵入不可</string>
   <string name="attribute_campfires_yes">焚き火可</string>
+  <string name="attribute_campfires_no">焚き火不可</string>
   <string name="attribute_rv_yes">トラック/RV車侵入可</string>
+  <string name="attribute_rv_no">トラック/RV車侵入不可</string>
 
   <!--  attributes (conditions -> yes, no) -->
   <string name="attribute_kids_yes">子供にお薦め</string>
+  <string name="attribute_kids_no">子供にお薦めしない</string>
   <string name="attribute_onehour_yes">1時間以内</string>
+  <string name="attribute_onehour_no">1時間以上</string>
   <string name="attribute_scenic_yes">美景</string>
+  <string name="attribute_scenic_no">美景なし</string>
   <string name="attribute_hiking_yes">長距離の歩行</string>
+  <string name="attribute_hiking_no">長距離の歩行なし</string>
   <string name="attribute_climbing_yes">難しい登山</string>
+  <string name="attribute_climbing_no">難しい登山なし</string>
   <string name="attribute_wading_yes">渡渉(水中を歩いて渡る)箇所あり</string>
+  <string name="attribute_wading_no">渡渉水中を歩いて渡る)箇所なし</string>
   <string name="attribute_swimming_yes">泳いで渡る箇所あり</string>
+  <string name="attribute_swimming_no">泳いで渡る箇所なし</string>
   <string name="attribute_available_yes">24時間有効</string>
+  <string name="attribute_available_no">24時間有効ではない</string>
   <string name="attribute_night_yes">夜がお薦め</string>
+  <string name="attribute_night_no">夜はお薦めしない</string>
   <string name="attribute_winter_yes">冬季に有効</string>
+  <string name="attribute_winter_no">冬季は有効ではない</string>
   <string name="attribute_stealth_yes">人目を忍ぶ必要あり</string>
+  <string name="attribute_stealth_no">人目を忍ぶ必要なし</string>
   <string name="attribute_firstaid_yes">メンテナンスが必要</string>
+  <string name="attribute_firstaid_no">メンテナンスが必要ではない</string>
   <string name="attribute_cow_yes">家畜に注意</string>
+  <string name="attribute_cow_no">家畜はいません</string>
   <string name="attribute_field_puzzle_yes">Field puzzle</string>
+  <string name="attribute_field_puzzle_no">No field puzzle</string>
   <string name="attribute_nightcache_yes">ナイトキャッシュ</string>
+  <string name="attribute_nightcache_no">ナイトキャッシュではない</string>
   <string name="attribute_parkngrab_yes">Park and grab</string>
+  <string name="attribute_parkngrab_no">No park and grab</string>
   <string name="attribute_abandonedbuilding_yes">廃墟</string>
+  <string name="attribute_abandonedbuilding_no">廃墟ではない</string>
   <string name="attribute_hike_short_yes">短距離の歩行(1km以下)</string>
+  <string name="attribute_hike_short_no">短距離の歩行ではない</string>
   <string name="attribute_hike_med_yes">中距離の歩行(1kmから10km)</string>
+  <string name="attribute_hike_med_no">中距離の歩行ではない</string>
   <string name="attribute_hike_long_yes">長距離の歩行(10km以上)</string>
+  <string name="attribute_hike_long_no">長距離の歩行ではない</string>
   <string name="attribute_landf_yes">Lost and found tour</string>
+  <string name="attribute_landf_no">No lost and found tour</string>
   <string name="attribute_partnership_yes">Sponsored cache</string>
+  <string name="attribute_partnership_no">Non sponsored cache</string>
 
   <!--  attributes (equipment -> required, not required) -->
   <string name="attribute_fee_yes">交通料金や駐車料金が必要</string>
+  <string name="attribute_fee_no">交通料金や駐車料金は不要</string>
   <string name="attribute_rappelling_yes">登山道具が必要</string>
+  <string name="attribute_rappelling_no">登山道具は不要</string>
   <string name="attribute_boat_yes">船が必要</string>
+  <string name="attribute_boat_no">船は不要</string>
   <string name="attribute_scuba_yes">スキューバダイビング用具が必要</string>
+  <string name="attribute_scuba_no">スキューバダイビング用具は不要</string>
   <string name="attribute_flashlight_yes">懐中電燈が必要</string>
+  <string name="attribute_flashlight_no">懐中電燈は不要</string>
   <string name="attribute_uv_yes">UVライトが必要</string>
+  <string name="attribute_uv_no">UVライトは不要</string>
   <string name="attribute_snowshoes_yes">スノーシューが必要</string>
+  <string name="attribute_snowshoes_no">スノーシューは不要</string>
   <string name="attribute_skiis_yes">クロスカントリースキーが必要</string>
+  <string name="attribute_skiis_no">クロスカントリースキーは不要</string>
   <string name="attribute_s_tool_yes">特別な道具が必要</string>
+  <string name="attribute_s_tool_no">特別な道具は不要</string>
   <string name="attribute_wirelessbeacon_yes">無線ビーコンあり</string>
+  <string name="attribute_wirelessbeacon_no">無線ビーコンなし</string>
 
   <!--  attributes (hazards -> present, not present) -->
   <string name="attribute_poisonoak_yes">有毒植物あり</string>
+  <string name="attribute_poisonoak_no">有毒植物なし</string>
   <string name="attribute_dangerousanimals_yes">有害動物がいる</string>
+  <string name="attribute_dangerousanimals_no">有害動物はいない</string>
   <string name="attribute_ticks_yes">ダニがいる</string>
+  <string name="attribute_ticks_no">ダニはいない</string>
   <string name="attribute_mine_yes">廃坑あり</string>
+  <string name="attribute_mine_no">廃坑なし</string>
   <string name="attribute_cliff_yes">崖/落石あり</string>
+  <string name="attribute_cliff_no">崖/落石なし</string>
   <string name="attribute_hunting_yes">ハンターがいる</string>
+  <string name="attribute_hunting_no">ハンターはいない</string>
   <string name="attribute_danger_yes">危険区域</string>
+  <string name="attribute_danger_no">危険区域ではない</string>
   <string name="attribute_thorn_yes">棘のある植物あり</string>
+  <string name="attribute_thorn_no">棘のある植物なし</string>
 
   <!--  attributes (facilities -> yes, no) -->
   <string name="attribute_wheelchair_yes">車いす可</string>
+  <string name="attribute_wheelchair_no">車いす不可</string>
   <string name="attribute_parking_yes">駐車場あり</string>
+  <string name="attribute_parking_no">駐車場なし</string>
   <string name="attribute_public_yes">公共交通機関あり</string>
+  <string name="attribute_public_no">公共交通機関なし</string>
   <string name="attribute_water_yes">近くに飲料水あり</string>
+  <string name="attribute_water_no">近くに飲料水なし</string>
   <string name="attribute_restrooms_yes">近くに公共トイレあり</string>
+  <string name="attribute_restrooms_no">近くに公共トイレなし</string>
   <string name="attribute_phone_yes">近くに公衆電話あり</string>
+  <string name="attribute_phone_no">近くに公衆電話なし</string>
   <string name="attribute_picnic_yes">近くにピクニックテーブルあり</string>
+  <string name="attribute_picnic_no">近くにピクニックテーブルなし</string>
   <string name="attribute_camping_yes">キャンプ可</string>
+  <string name="attribute_camping_no">キャンプ不可</string>
   <string name="attribute_stroller_yes">ベビーカー可</string>
+  <string name="attribute_stroller_no">ベビーカー不可</string>
   <string name="attribute_fuel_yes">近くにガソリンスタンドあり</string>
+  <string name="attribute_fuel_no">近くにガソリンスタンドなし</string>
   <string name="attribute_food_yes">近くに飲食店あり</string>
+  <string name="attribute_food_no">近くに飲食店なし</string>
 
   <!-- next things -->
   <string name="legal_note">Geocaching.comを使うには<a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak 利用規約(英語)</a>に同意している必要があります。</string>

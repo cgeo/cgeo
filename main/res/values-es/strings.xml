@@ -677,78 +677,143 @@
 
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Perros permitidos</string>
+  <string name="attribute_dogs_no">Perros no permitidos</string>
   <string name="attribute_bicycles_yes">Bicicletas permitidas</string>
+  <string name="attribute_bicycles_no">Bicicletas no permitidas</string>
   <string name="attribute_motorcycles_yes">Motos  permitidas</string>
+  <string name="attribute_motorcycles_no">Motos no permitidas</string>
   <string name="attribute_quads_yes">Quads  permitidos</string>
+  <string name="attribute_quads_no">Quads no permitidos</string>
   <string name="attribute_jeeps_yes">Vehículos Off-road permitidos</string>
+  <string name="attribute_jeeps_no">Vehículos Off-road no permitidos</string>
   <string name="attribute_snowmobiles_yes">Motos de nieve permitidas</string>
+  <string name="attribute_snowmobiles_no">Motos de nieve no permitidas</string>
   <string name="attribute_horses_yes">Caballos permitidos</string>
+  <string name="attribute_horses_no">Caballos no permitidos</string>
   <string name="attribute_campfires_yes">Hogueras permitidas</string>
+  <string name="attribute_campfires_no">Hogueras no permitidas</string>
   <string name="attribute_rv_yes">Camión/remolque permitido</string>
+  <string name="attribute_rv_no">camión/remolque no permitido</string>
 
   <!--  attributes (conditions -> yes, no) -->
   <string name="attribute_kids_yes">Recomendado para niños</string>
+  <string name="attribute_kids_no">No recomendado para niños</string>
   <string name="attribute_onehour_yes">Se hace en menos de una hora</string>
+  <string name="attribute_onehour_no">Se hace en más de una hora</string>
   <string name="attribute_scenic_yes">Vista panorámica</string>
+  <string name="attribute_scenic_no">No tiene vistas panorámicas</string>
   <string name="attribute_hiking_yes">Caminata importante</string>
+  <string name="attribute_hiking_no">No es una gran caminata</string>
   <string name="attribute_climbing_yes">Ascensión difícil</string>
+  <string name="attribute_climbing_no">No es una ascensión difícil</string>
   <string name="attribute_wading_yes">Puede requerir vadear</string>
+  <string name="attribute_wading_no">No requiere vadear</string>
   <string name="attribute_swimming_yes">Puede requerir nadar</string>
+  <string name="attribute_swimming_no">No requiere nadar</string>
   <string name="attribute_available_yes">Siempre disponible</string>
+  <string name="attribute_available_no">No siempre disponible</string>
   <string name="attribute_night_yes">Recomendado por la noche</string>
+  <string name="attribute_night_no">No recomendado por la noche</string>
   <string name="attribute_winter_yes">Disponible en invierno</string>
+  <string name="attribute_winter_no">No disponible en invierno</string>
   <string name="attribute_stealth_yes">Es necesario ser sigiloso</string>
+  <string name="attribute_stealth_no">No es necesario ser sigiloso</string>
   <string name="attribute_firstaid_yes">Necesita mantenimiento</string>
+  <string name="attribute_firstaid_no">No necesita mantenimiento</string>
   <string name="attribute_cow_yes">Hay que tener cuidado con el ganado</string>
+  <string name="attribute_cow_no">No hay que tener cuidado con el ganado</string>
   <string name="attribute_field_puzzle_yes">Terreno enrevesado</string>
+  <string name="attribute_field_puzzle_no">Terreno no enrevesado</string>
   <string name="attribute_nightcache_yes">Caché nocturno</string>
+  <string name="attribute_nightcache_no">Caché no nocturno</string>
   <string name="attribute_parkngrab_yes">Se puede aparcar justo al lado</string>
+  <string name="attribute_parkngrab_no">No se puede aparcar justo al lado</string>
   <string name="attribute_abandonedbuilding_yes">Estructura abandonada</string>
+  <string name="attribute_abandonedbuilding_no">Estructura no abandonada</string>
   <string name="attribute_hike_short_yes">Paseo corto (menos de 1 km)</string>
+  <string name="attribute_hike_short_no">No es un paseo corto</string>
   <string name="attribute_hike_med_yes">Paseo mediano (de 1 km a 10 km)</string>
+  <string name="attribute_hike_med_no">No es un paseo mediano</string>
   <string name="attribute_hike_long_yes">Paseo largo (más de 10 km)</string>
+  <string name="attribute_hike_long_no">No es un paseo largo</string>
   <string name="attribute_seasonal_yes">Acceso estacional</string>
+  <string name="attribute_seasonal_no">Acceso no estacional</string>
   <string name="attribute_touristok_yes">Amistoso con los turistas</string>
+  <string name="attribute_touristok_no">No amistoso con los turistas</string>
   <string name="attribute_frontyard_yes">Residencia privada</string>
+  <string name="attribute_frontyard_no">No es una residencia privada</string>
   <string name="attribute_teamwork_yes">Es necesario trabajo en equipo</string>
+  <string name="attribute_teamwork_no">No es necesario trabajo en equipo</string>
   <string name="attribute_landf_yes">Viaje perdidos y encontrados</string>
+  <string name="attribute_landf_no">No viaje perdidos y encontrados</string>
   <string name="attribute_partnership_yes">Escondite asociado</string>
+  <string name="attribute_partnership_no">Escondite no asociado</string>
 
   <!--  attributes (equipment -> required, not required) -->
   <string name="attribute_fee_yes">Cuota de aparcamiento o acceso requerida</string>
+  <string name="attribute_fee_no">Cuota de aparcamiento o acceso no requerida</string>
   <string name="attribute_rappelling_yes">Material de escalada necesario</string>
+  <string name="attribute_rappelling_no">Material de escalada no necesario</string>
   <string name="attribute_boat_yes">Embarcación requerida</string>
+  <string name="attribute_boat_no">Embarcación no requerida</string>
   <string name="attribute_scuba_yes">Equipo de buceo requerido</string>
+  <string name="attribute_scuba_no">Equipo de buceo no requerido</string>
   <string name="attribute_flashlight_yes">Linterna requerida</string>
+  <string name="attribute_flashlight_no">Linterna no requerida</string>
   <string name="attribute_uv_yes">Luz ultavioleta requerida</string>
+  <string name="attribute_uv_no">Luz ultavioleta no requerida</string>
   <string name="attribute_snowshoes_yes">Raquetas de nieve necesarias</string>
+  <string name="attribute_snowshoes_no">Raquetas de nieve no necesarias</string>
   <string name="attribute_skiis_yes">Skís necesarios</string>
+  <string name="attribute_skiis_no">Skís no necesarios</string>
   <string name="attribute_s_tool_yes">Herramientas especiales requeridas</string>
+  <string name="attribute_s_tool_no">Herramientas especiales no requeridas</string>
   <string name="attribute_wirelessbeacon_yes">Baliza inalámbrica requerida</string>
+  <string name="attribute_wirelessbeacon_no">Baliza inalámbrica no requerida</string>
   <string name="attribute_treeclimbing_yes">Es necesario trepar árboles</string>
+  <string name="attribute_treeclimbing_no">No es necesario trepar árboles</string>
 
   <!--  attributes (hazards -> present, not present) -->
   <string name="attribute_poisonoak_yes">Plantas venenosas</string>
+  <string name="attribute_poisonoak_no">No hay plantas venenosas</string>
   <string name="attribute_dangerousanimals_yes">Animales peligrosos</string>
+  <string name="attribute_dangerousanimals_no">No hay animales peligrosos</string>
   <string name="attribute_ticks_yes">Garrapatas</string>
+  <string name="attribute_ticks_no">No hay garrapatas</string>
   <string name="attribute_mine_yes">Minas abandonadas</string>
+  <string name="attribute_mine_no">No hay minas abandonadas</string>
   <string name="attribute_cliff_yes">Precipicio /Caida de rocas</string>
+  <string name="attribute_cliff_no">No hay peligro de precipicio o caida de rocas</string>
   <string name="attribute_hunting_yes">Cacería</string>
+  <string name="attribute_hunting_no">No hay cacerías</string>
   <string name="attribute_danger_yes">Zona peligrosa</string>
+  <string name="attribute_danger_no">Zona no peligrosa</string>
   <string name="attribute_thorn_yes">Espinas</string>
+  <string name="attribute_thorn_no">No hay espinas</string>
 
   <!--  attributes (facilities -> yes, no) -->
   <string name="attribute_wheelchair_yes">Accesible en silla de ruedas</string>
+  <string name="attribute_wheelchair_no">No accesible en silla de ruedas</string>
   <string name="attribute_parking_yes">Aparcamiento disponible</string>
+  <string name="attribute_parking_no">Aparcamiento no disponible</string>
   <string name="attribute_public_yes">Trasporte público</string>
+  <string name="attribute_public_no">No hay trasporte público</string>
   <string name="attribute_water_yes">Agua potable cerca</string>
+  <string name="attribute_water_no">No hay agua potable cerca</string>
   <string name="attribute_restrooms_yes">Aseos públicos cerca</string>
+  <string name="attribute_restrooms_no">No hay aseos públicos cerca</string>
   <string name="attribute_phone_yes">Teléfno cerca</string>
+  <string name="attribute_phone_no">No hay teléfono cerca</string>
   <string name="attribute_picnic_yes">Merendero cerca</string>
+  <string name="attribute_picnic_no">No hay merenderos cerca</string>
   <string name="attribute_camping_yes">Permitido acampar</string>
+  <string name="attribute_camping_no">No está permitido acampar</string>
   <string name="attribute_stroller_yes">Accesible a cochecitos de bebé</string>
+  <string name="attribute_stroller_no">No accesible a cochecitos de bebé</string>
   <string name="attribute_fuel_yes">Gasolinera cercana</string>
+  <string name="attribute_fuel_no">No hay gasolinera cerca</string>
   <string name="attribute_food_yes">Comida cerca</string>
+  <string name="attribute_food_no">No hay comida cerca</string>
 
   <!-- next things -->
   <string name="legal_note">Para utilizar los servicios de Geocaching.com, debes aceptar las <a href="http://www.geocaching.com/about/termsofuse.aspx">condiciones de Groundspeak</a>.</string>

@@ -716,78 +716,143 @@
 
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Psi povolené</string>
+  <string name="attribute_dogs_no">Psi nepovolené</string>
   <string name="attribute_bicycles_yes">Bicykle povolené</string>
+  <string name="attribute_bicycles_no">Bicykle nepovolené</string>
   <string name="attribute_motorcycles_yes">Motorky povolené</string>
+  <string name="attribute_motorcycles_no">Motorky nepovolené</string>
   <string name="attribute_quads_yes">Štvorkolky povolené</string>
+  <string name="attribute_quads_no">Štvorkolky nepovolené</string>
   <string name="attribute_jeeps_yes">Terénne automobily povolené</string>
+  <string name="attribute_jeeps_no">Terénne automobily nepovolené</string>
   <string name="attribute_snowmobiles_yes">Snežné skútre povolené</string>
+  <string name="attribute_snowmobiles_no">Snežné skútre nepovolené</string>
   <string name="attribute_horses_yes">Kone povolené</string>
+  <string name="attribute_horses_no">Kone nepovolené</string>
   <string name="attribute_campfires_yes">Zakladanie ohniska povolené</string>
+  <string name="attribute_campfires_no">Zakladanie ohniska nepovolené</string>
   <string name="attribute_rv_yes">Nákladné autá povolené</string>
+  <string name="attribute_rv_no">Nákladné autá nepovolené</string>
 
   <!--  attributes (conditions -> yes, no) -->
   <string name="attribute_kids_yes">Odporúčané pre deti</string>
+  <string name="attribute_kids_no">Neodporúčané pre deti</string>
   <string name="attribute_onehour_yes">Trvá menej ako hodinu</string>
+  <string name="attribute_onehour_no">Trvá viac ako hodinu</string>
   <string name="attribute_scenic_yes">Výhľad do krajiny</string>
+  <string name="attribute_scenic_no">Bez výhľadu do krajiny</string>
   <string name="attribute_hiking_yes">Významný podiel pešej chôdze</string>
+  <string name="attribute_hiking_no">Nevýznamný podiel pešej chôdze</string>
   <string name="attribute_climbing_yes">Náročný výstup</string>
+  <string name="attribute_climbing_no">Nenáročný výstup</string>
   <string name="attribute_wading_yes">Môže vyžadovať brodenie</string>
+  <string name="attribute_wading_no">Nemusí vyžadovať brodenie</string>
   <string name="attribute_swimming_yes">Môže vyžadovať plávanie</string>
+  <string name="attribute_swimming_no">Nemusí vyžadovať plávanie</string>
   <string name="attribute_available_yes">Dostupné kedykoľvek</string>
+  <string name="attribute_available_no">Nie je dostupné kedykoľvek</string>
   <string name="attribute_night_yes">Odporúčané v noci</string>
+  <string name="attribute_night_no">Nie je odporúčané v noci</string>
   <string name="attribute_winter_yes">Dostupné cez zimu</string>
+  <string name="attribute_winter_no">Nie je dostupné cez zimu</string>
   <string name="attribute_stealth_yes">Vyžadované nenápadné hľadanie</string>
+  <string name="attribute_stealth_no">Nie je vyžadované nenápadné hľadanie</string>
   <string name="attribute_firstaid_yes">Potrebuje údržbu</string>
+  <string name="attribute_firstaid_no">Nepotrebuje údržbu</string>
   <string name="attribute_cow_yes">Pozor na dobytok</string>
+  <string name="attribute_cow_no">Bez dobytku</string>
   <string name="attribute_field_puzzle_yes">Puzzle na mieste</string>
+  <string name="attribute_field_puzzle_no">Bez puzzle na mieste</string>
   <string name="attribute_nightcache_yes">Nočná skrýša</string>
+  <string name="attribute_nightcache_no">Nie je nočná skrýša</string>
   <string name="attribute_parkngrab_yes">Zaparkuj a hľadaj</string>
+  <string name="attribute_parkngrab_no">Nie je zaparkuj a hľadaj</string>
   <string name="attribute_abandonedbuilding_yes">Opustená budova</string>
+  <string name="attribute_abandonedbuilding_no">Nie je opustená budova</string>
   <string name="attribute_hike_short_yes">Krátka chôdza (menej ako 1 km)</string>
+  <string name="attribute_hike_short_no">Bez krátkej chôdze</string>
   <string name="attribute_hike_med_yes">Stredná chôdza (1 km až 10 km)</string>
+  <string name="attribute_hike_med_no">Bez strednej chôdze</string>
   <string name="attribute_hike_long_yes">Dlhá chôdza (viac ako 10 km)</string>
+  <string name="attribute_hike_long_no">Bez dlhej chôdze</string>
   <string name="attribute_seasonal_yes">Sezónny prístup</string>
+  <string name="attribute_seasonal_no">Bez sezónneho prístupu</string>
   <string name="attribute_touristok_yes">Dostupné turistom</string>
+  <string name="attribute_touristok_no">Nie je dostupné pre turistov</string>
   <string name="attribute_frontyard_yes">Súkromný pozemok</string>
+  <string name="attribute_frontyard_no">Nie je súkromný pozemok</string>
   <string name="attribute_teamwork_yes">Vyžaduje tímovú spoluprácu</string>
+  <string name="attribute_teamwork_no">Bez tímovej spolupráce</string>
   <string name="attribute_landf_yes">Túra straty a nálezy</string>
+  <string name="attribute_landf_no">Nie je túra straty a nálezy</string>
   <string name="attribute_partnership_yes">Partnerská skrýša</string>
+  <string name="attribute_partnership_no">Nie je partnerská skrýša</string>
 
   <!--  attributes (equipment -> required, not required) -->
   <string name="attribute_fee_yes">Prístup alebo vyžadovaný poplatok za parkovanie</string>
+  <string name="attribute_fee_no">Bez prístupu alebo vyžadovaného poplatku za parkovanie</string>
   <string name="attribute_rappelling_yes">Vyžadované lezecké vybavenie</string>
+  <string name="attribute_rappelling_no">Nie je vyžadované lezecké vybavenie</string>
   <string name="attribute_boat_yes">Vyžadovaná loď</string>
+  <string name="attribute_boat_no">Nie je vyžadovaná loď</string>
   <string name="attribute_scuba_yes">Vyžadované potápačské vybavenie</string>
+  <string name="attribute_scuba_no">Nie je vyžadované potápačské vybavenie</string>
   <string name="attribute_flashlight_yes">Vyžadovaná baterka</string>
+  <string name="attribute_flashlight_no">Nie je vyžadovaná baterka</string>
   <string name="attribute_uv_yes">Vyžadovaná UV lampa </string>
+  <string name="attribute_uv_no">Nie je vyžadovaná UV lampa</string>
   <string name="attribute_snowshoes_yes">Vyžadované snežnice</string>
+  <string name="attribute_snowshoes_no">Nie sú vyžadované snežnice</string>
   <string name="attribute_skiis_yes">Vyžadované bežecké lyže</string>
+  <string name="attribute_skiis_no">Nie sú vyžadované bežecké lyže</string>
   <string name="attribute_s_tool_yes">Vyžadované špeciálne nástroje</string>
+  <string name="attribute_s_tool_no">Nie sú vyžadované špeciálne nástroje</string>
   <string name="attribute_wirelessbeacon_yes">Bezdrôtový maják</string>
+  <string name="attribute_wirelessbeacon_no">Bez bezdrôtového majáku</string>
   <string name="attribute_treeclimbing_yes">Vyžadované šplhanie na strom</string>
+  <string name="attribute_treeclimbing_no">Nie je vyžadované šplhanie na strom</string>
 
   <!--  attributes (hazards -> present, not present) -->
   <string name="attribute_poisonoak_yes">Jedovaté rastliny</string>
+  <string name="attribute_poisonoak_no">Bez jedovatých rastlín</string>
   <string name="attribute_dangerousanimals_yes">Nebezpečné zvieratá</string>
+  <string name="attribute_dangerousanimals_no">Bez nebezpečných zvierat</string>
   <string name="attribute_ticks_yes">Kliešte</string>
+  <string name="attribute_ticks_no">Bez kliešťov</string>
   <string name="attribute_mine_yes">Opustené míny</string>
+  <string name="attribute_mine_no">Bez opustených mín</string>
   <string name="attribute_cliff_yes">Útes/padajúce skaly</string>
+  <string name="attribute_cliff_no">Bez útesu/padajúcich skál</string>
   <string name="attribute_hunting_yes">Oblasť pre lov</string>
+  <string name="attribute_hunting_no">Nie je oblasťou pre lov</string>
   <string name="attribute_danger_yes">Nebezpečné územie</string>
+  <string name="attribute_danger_no">Nie je nebezpečné územie</string>
   <string name="attribute_thorn_yes">Tŕne</string>
+  <string name="attribute_thorn_no">Bez tŕňov</string>
 
   <!--  attributes (facilities -> yes, no) -->
   <string name="attribute_wheelchair_yes">Prístupné pre vozíčkarov</string>
+  <string name="attribute_wheelchair_no">Neprístupné pre vozíčkarov</string>
   <string name="attribute_parking_yes">Dostupné parkovanie</string>
+  <string name="attribute_parking_no">Bez dostupného parkovania</string>
   <string name="attribute_public_yes">Verejná doprava</string>
+  <string name="attribute_public_no">Bez verejnej dopravy</string>
   <string name="attribute_water_yes">Neďaleko dostupná pitná voda</string>
+  <string name="attribute_water_no">Bez pitnej vody</string>
   <string name="attribute_restrooms_yes">Neďaleko dostupné verejné záchody</string>
+  <string name="attribute_restrooms_no">Bez verejných záchodov</string>
   <string name="attribute_phone_yes">Neďaleko dostupný telefón</string>
+  <string name="attribute_phone_no">Bez telefónu neďaleko dostupného</string>
   <string name="attribute_picnic_yes">Neďaleko dostupné piknikové stoly</string>
+  <string name="attribute_picnic_no">Nie sú dostupné piknikové stoly</string>
   <string name="attribute_camping_yes">Možnosť táborenia</string>
+  <string name="attribute_camping_no">Bez možnosti táborenia</string>
   <string name="attribute_stroller_yes">Prístupné pre kočiariky</string>
+  <string name="attribute_stroller_no">Nie je prístupné pre kočiariky</string>
   <string name="attribute_fuel_yes">Neďaleko čerpacia stanica</string>
+  <string name="attribute_fuel_no">Bez čerpacej stanice</string>
   <string name="attribute_food_yes">Neďaleko občerstvenie</string>
+  <string name="attribute_food_no">Bez občerstvenia neďaleko</string>
 
   <!-- next things -->
   <string name="legal_note">Pred používaním služieb serveru Geocaching.com je potrebné súhlasiť s <a href="http://www.geocaching.com/about/disclaimer.aspx">licenčnou dohodou Groundspeaku</a>.</string>

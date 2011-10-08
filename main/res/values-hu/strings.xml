@@ -701,78 +701,143 @@
 
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Kutyák engedélyezettek</string>
+  <string name="attribute_dogs_no">Kutyát nem engedélyezettek</string>
   <string name="attribute_bicycles_yes">Bicikli engedélyezett</string>
+  <string name="attribute_bicycles_no">Bicikli nem engedélyezett</string>
   <string name="attribute_motorcycles_yes">Motor engedélyezett</string>
+  <string name="attribute_motorcycles_no">Motor nem engedélyezett</string>
   <string name="attribute_quads_yes">Quads engedélyezett</string>
+  <string name="attribute_quads_no">Quads nem engedélyezett</string>
   <string name="attribute_jeeps_yes">Off-road jármű engedélyezett</string>
+  <string name="attribute_jeeps_no">Off-road jármű nem engedélyezett</string>
   <string name="attribute_snowmobiles_yes">Motoros szán engedélyezett</string>
+  <string name="attribute_snowmobiles_no">Motoros szán nem engedélyezett</string>
   <string name="attribute_horses_yes">Lovak engedélyezettek</string>
+  <string name="attribute_horses_no">Lovak nem engedélyezettek</string>
   <string name="attribute_campfires_yes">Tábortűz engedélyezett</string>
+  <string name="attribute_campfires_no">Tábortűz nem engedélyezett</string>
   <string name="attribute_rv_yes">Kamion engedélyezett</string>
+  <string name="attribute_rv_no">Kamion nem engedélyezett</string>
 
   <!--  attributes (conditions -> yes, no) -->
   <string name="attribute_kids_yes">Gyerekeknek ajánlott</string>
+  <string name="attribute_kids_no">Gyerekeknek nem ajánlott</string>
   <string name="attribute_onehour_yes">Kevesebb mint egy órát igényel</string>
+  <string name="attribute_onehour_no">Több mint egy órát igényel</string>
   <string name="attribute_scenic_yes">Szép kilátás</string>
+  <string name="attribute_scenic_no">Nincs szép kilátás</string>
   <string name="attribute_hiking_yes">Jelentős szintemelkedés</string>
+  <string name="attribute_hiking_no">Nincs jelentős szintemelkedés</string>
   <string name="attribute_climbing_yes">Nehéz mászás</string>
+  <string name="attribute_climbing_no">Nincs nehéz mászás</string>
   <string name="attribute_wading_yes">Vízbe kell lépni</string>
+  <string name="attribute_wading_no">Nem kell vízbe lépni</string>
   <string name="attribute_swimming_yes">Úszás szükséges</string>
+  <string name="attribute_swimming_no">Úszás nem szükséges</string>
   <string name="attribute_available_yes">Mindig hozzáférhető</string>
+  <string name="attribute_available_no">Nem férhető mindig hozzá</string>
   <string name="attribute_night_yes">Éjszaka ajánlott</string>
+  <string name="attribute_night_no">Éjszaka nem ajánlott</string>
   <string name="attribute_winter_yes">Télen is hozzáférhető</string>
+  <string name="attribute_winter_no">Télen nem hozzáférhető</string>
   <string name="attribute_stealth_yes">Rejtőzködés szükséges</string>
+  <string name="attribute_stealth_no">Rejtőzködés nem szükséges</string>
   <string name="attribute_firstaid_yes">Karbantartás szükséges</string>
+  <string name="attribute_firstaid_no">Karbantartás nem szükséges</string>
   <string name="attribute_cow_yes">Figyelni kell a haszonállatokra</string>
+  <string name="attribute_cow_no">Nincs haszonállat</string>
   <string name="attribute_field_puzzle_yes">Terep rejtvény</string>
+  <string name="attribute_field_puzzle_no">Nem terep rejtvény</string>
   <string name="attribute_nightcache_yes">Éjszakai láda</string>
+  <string name="attribute_nightcache_no">Nem éjszakai láda</string>
   <string name="attribute_parkngrab_yes">Drive-in láda</string>
+  <string name="attribute_parkngrab_no">Nem drive-in láda</string>
   <string name="attribute_abandonedbuilding_yes">Elhagyott épület</string>
+  <string name="attribute_abandonedbuilding_no">Nem elhagyott épület</string>
   <string name="attribute_hike_short_yes">Rövid túra (kevesebb mint 1 km)</string>
+  <string name="attribute_hike_short_no">Nem rövid túra</string>
   <string name="attribute_hike_med_yes">Közepes túra (1 km és 10 km között)</string>
+  <string name="attribute_hike_med_no">Nem közepes túra</string>
   <string name="attribute_hike_long_yes">Hosszú túra (több mint 10 km)</string>
+  <string name="attribute_hike_long_no">Nem hosszú túra</string>
   <string name="attribute_seasonal_yes">Időszakos hozzáférés</string>
+  <string name="attribute_seasonal_no">Nem időszakos hozzáférés</string>
   <string name="attribute_touristok_yes">Túristabarát</string>
+  <string name="attribute_touristok_no">Nem túristabarát</string>
   <string name="attribute_frontyard_yes">Magánterület</string>
+  <string name="attribute_frontyard_no">Nem magánterület</string>
   <string name="attribute_teamwork_yes">Csapatmunka szükséges</string>
+  <string name="attribute_teamwork_no">Nem szükséges csapatmunka</string>
   <string name="attribute_landf_yes">Elveszett és megtalált túra</string>
+  <string name="attribute_landf_no">Nem Elveszett és megtalált túra</string>
   <string name="attribute_partnership_yes">Társasági láda</string>
+  <string name="attribute_partnership_no">Nem társasági láda</string>
 
   <!--  attributes (equipment -> required, not required) -->
   <string name="attribute_fee_yes">Belépő vagy parkolódíj szükséges</string>
+  <string name="attribute_fee_no">Belépő vagy parkolódíj nem szükséges</string>
   <string name="attribute_rappelling_yes">Mászófelszerelés szükséges</string>
+  <string name="attribute_rappelling_no">Mászófelszerelés nem szükséges</string>
   <string name="attribute_boat_yes">Hajó szükséges</string>
+  <string name="attribute_boat_no">Hajó nem szükséges</string>
   <string name="attribute_scuba_yes">Búvárfelszerelés szükséges</string>
+  <string name="attribute_scuba_no">Búvárfelszerelés nem szükséges</string>
   <string name="attribute_flashlight_yes">Zseblámpa szükséges</string>
+  <string name="attribute_flashlight_no">Zseblámpa nem szükséges</string>
   <string name="attribute_uv_yes">UV lámpa szükséges</string>
+  <string name="attribute_uv_no">UV lámpa nem szükséges</string>
   <string name="attribute_snowshoes_yes">Hótaposó szükséges</string>
+  <string name="attribute_snowshoes_no">Hótaposó nem szükséges</string>
   <string name="attribute_skiis_yes">Vadonjáró képesség szükséges</string>
+  <string name="attribute_skiis_no">Vadonjáró képesség nem szükséges</string>
   <string name="attribute_s_tool_yes">Speciális szerszám szükséges</string>
+  <string name="attribute_s_tool_no">Speciális szerszám nem szükséges</string>
   <string name="attribute_wirelessbeacon_yes">Vezetéknélküli jeladó</string>
+  <string name="attribute_wirelessbeacon_no">Nincs vezetéknélküli jeladó</string>
   <string name="attribute_treeclimbing_yes">Fáramászás szükséges</string>
+  <string name="attribute_treeclimbing_no">Fáramászás nem szükséges</string>
 
   <!--  attributes (hazards -> present, not present) -->
   <string name="attribute_poisonoak_yes">Mérgező növények</string>
+  <string name="attribute_poisonoak_no">Nincsenek mérgező növények</string>
   <string name="attribute_dangerousanimals_yes">Veszélyes állatok</string>
+  <string name="attribute_dangerousanimals_no">Nincsenek veszélyes állatok</string>
   <string name="attribute_ticks_yes">Kullancsok</string>
+  <string name="attribute_ticks_no">Nincs kullancs</string>
   <string name="attribute_mine_yes">Elhagyott bányák</string>
+  <string name="attribute_mine_no">Nincs elhagyott bánya</string>
   <string name="attribute_cliff_yes">Szakadék / leeső sziklák</string>
+  <string name="attribute_cliff_no">Nincs szakadék / leeső szikla</string>
   <string name="attribute_hunting_yes">Vadászat</string>
+  <string name="attribute_hunting_no">Nincs vadászat</string>
   <string name="attribute_danger_yes">Veszélyes terület</string>
+  <string name="attribute_danger_no">Nem veszélyes terület</string>
   <string name="attribute_thorn_yes">Tüskék</string>
+  <string name="attribute_thorn_no">Nincsenek tüskék</string>
 
   <!--  attributes (facilities -> yes, no) -->
   <string name="attribute_wheelchair_yes">Kerekesszékkel hozzáférhető</string>
+  <string name="attribute_wheelchair_no">Kerekesszékkel nem hozzáférhető</string>
   <string name="attribute_parking_yes">Van parkolóhely</string>
+  <string name="attribute_parking_no">Nincs parkolóhely</string>
   <string name="attribute_public_yes">Tömegközlekedéssel hozzáférhető</string>
+  <string name="attribute_public_no">Tömegközlekedéssel nem hozzáférhető</string>
   <string name="attribute_water_yes">Ivóvíz a közelben</string>
+  <string name="attribute_water_no">Nincs ivóvíz a közelben</string>
   <string name="attribute_restrooms_yes">Nyilvános pihenőhely a közelben</string>
+  <string name="attribute_restrooms_no">Nincs nyilvános pihenőhely a közelben</string>
   <string name="attribute_phone_yes">Telefon a közelben</string>
+  <string name="attribute_phone_no">Nincs telefon a közelben</string>
   <string name="attribute_picnic_yes">Piknikasztal a közelben</string>
+  <string name="attribute_picnic_no">Nincs piknkasztal a közelben</string>
   <string name="attribute_camping_yes">Kemping a közelben</string>
+  <string name="attribute_camping_no">Nincs kemping a közelben</string>
   <string name="attribute_stroller_yes">Babakocsival hozzáférhető</string>
+  <string name="attribute_stroller_no">Babakocsival nem hozzáférhető</string>
   <string name="attribute_fuel_yes">Üzemanyag a közelben</string>
+  <string name="attribute_fuel_no">Nincs üzemanyag a közelben</string>
   <string name="attribute_food_yes">Étel a közelben</string>
+  <string name="attribute_food_no">Nincs étel a közelben</string>
 
   <!-- next things -->
   <string name="legal_note">A geocaching.com szolgáltatásainak használatához, el kell fogadnod ezeket a feltételeket:<a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak disclaimer</a> </string>
