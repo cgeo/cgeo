@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.files.FileList;
+import cgeo.geocaching.files.LocalStorage;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -44,7 +45,7 @@ public class cgSelectMapfile extends FileList<cgMapfileListAdapter> {
         return new File[] {
                 new File(base, "mfmaps"),
                 new File(new File(base, "Locus"), "mapsVector"),
-                new File(base, ".cgeo")
+                new File(base, LocalStorage.cache)
         };
     }
 

@@ -121,9 +121,6 @@ public final class Settings {
         }
     }
 
-    // constants
-    public final static String cache = ".cgeo";
-
     // usable values
     public static final String tag = "cgeo";
 

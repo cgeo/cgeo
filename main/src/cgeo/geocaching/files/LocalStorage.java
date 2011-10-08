@@ -23,6 +23,9 @@ import java.io.OutputStream;
  */
 public class LocalStorage {
 
+    /** Name of the local private directory to use to hold cached information */
+    public final static String cache = ".cgeo";
+
     /**
      * Return the primary storage cache root (external media if mounted, phone otherwise).
      *
@@ -43,8 +46,8 @@ public class LocalStorage {
 
     private static File getStorageSpecific(boolean secondary) {
         return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) ^ secondary ?
-                new File(Environment.getExternalStorageDirectory(), Settings.cache) :
-                new File(new File(new File(Environment.getDataDirectory(), "data"), "cgeo.geocaching"), Settings.cache);
+                new File(Environment.getExternalStorageDirectory(), LocalStorage.cache) :
+                new File(new File(new File(Environment.getDataDirectory(), "data"), "cgeo.geocaching"), LocalStorage.cache);
     }
 
     /**
@@ -214,4 +217,5 @@ public class LocalStorage {
 
         return true;
     }
+
 }
