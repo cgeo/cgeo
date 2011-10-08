@@ -188,7 +188,7 @@ public class cgeocaches extends AbstractListActivity {
                         cacheList.addAll(cacheListTmp);
                         cacheListTmp.clear();
 
-                        Collections.sort((List<cgCache>) cacheList, gcComparator);
+                        Collections.sort(cacheList, gcComparator);
                     }
                 } else {
                     setTitle(title);
@@ -285,7 +285,7 @@ public class cgeocaches extends AbstractListActivity {
                     if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                         cacheList.addAll(cacheListTmp);
                         cacheListTmp.clear();
-                        Collections.sort((List<cgCache>) cacheList, gcComparator);
+                        Collections.sort(cacheList, gcComparator);
                     }
                     if (adapter != null) {
                         adapter.reFilter();
@@ -357,7 +357,7 @@ public class cgeocaches extends AbstractListActivity {
                     }
 
                     int secondsElapsed = (int) ((System.currentTimeMillis() - detailProgressTime) / 1000);
-                    int minutesRemaining = (int) ((detailTotal - detailProgress) * secondsElapsed / ((detailProgress > 0) ? detailProgress : 1) / 60);
+                    int minutesRemaining = ((detailTotal - detailProgress) * secondsElapsed / ((detailProgress > 0) ? detailProgress : 1) / 60);
 
                     waitDialog.setProgress(detailProgress);
                     if (minutesRemaining < 1) {
@@ -375,7 +375,7 @@ public class cgeocaches extends AbstractListActivity {
                         cacheList.clear();
                         cacheList.addAll(cacheListTmp);
                         cacheListTmp.clear();
-                        Collections.sort((List<cgCache>) cacheList, gcComparator);
+                        Collections.sort(cacheList, gcComparator);
                     }
                 }
 
@@ -445,7 +445,7 @@ public class cgeocaches extends AbstractListActivity {
                     cacheList.addAll(cacheListTmp);
                     cacheListTmp.clear();
 
-                    Collections.sort((List<cgCache>) cacheList, gcComparator);
+                    Collections.sort(cacheList, gcComparator);
                 }
 
                 if (waitDialog != null) {
@@ -473,7 +473,7 @@ public class cgeocaches extends AbstractListActivity {
                 cacheList.addAll(cacheListTmp);
                 cacheListTmp.clear();
 
-                Collections.sort((List<cgCache>) cacheList, gcComparator);
+                Collections.sort(cacheList, gcComparator);
             }
 
             if (waitDialog != null) {
@@ -1493,7 +1493,7 @@ public class cgeocaches extends AbstractListActivity {
         });
 
         waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-        int etaTime = (int) ((detailTotal * 25) / 60);
+        int etaTime = ((detailTotal * 25) / 60);
         if (etaTime < 1) {
             waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
         } else if (etaTime == 1) {

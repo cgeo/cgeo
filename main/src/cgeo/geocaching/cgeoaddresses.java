@@ -136,9 +136,9 @@ public class cgeoaddresses extends AbstractActivity {
         public void onClick(View arg0) {
             Intent addressIntent = new Intent(cgeoaddresses.this, cgeocaches.class);
             addressIntent.putExtra("type", "address");
-            addressIntent.putExtra("latitude", (Double) latitude);
-            addressIntent.putExtra("longitude", (Double) longitude);
-            addressIntent.putExtra("address", (String) address);
+            addressIntent.putExtra("latitude", latitude);
+            addressIntent.putExtra("longitude", longitude);
+            addressIntent.putExtra("address", address);
             addressIntent.putExtra("cachetype", Settings.getCacheType());
             startActivity(addressIntent);
 

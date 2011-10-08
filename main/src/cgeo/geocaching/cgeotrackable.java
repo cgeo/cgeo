@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -176,8 +175,8 @@ public class cgeotrackable extends AbstractActivity {
                         itemLayout.setOnClickListener(new View.OnClickListener() {
                             public void onClick(View arg0) {
                                 Intent cacheIntent = new Intent(cgeotrackable.this, cgeodetail.class);
-                                cacheIntent.putExtra("guid", (String) trackable.spottedGuid);
-                                cacheIntent.putExtra("name", (String) trackable.spottedName);
+                                cacheIntent.putExtra("guid", trackable.spottedGuid);
+                                cacheIntent.putExtra("name", trackable.spottedName);
                                 startActivity(cacheIntent);
                             }
                         });
@@ -514,8 +513,8 @@ public class cgeotrackable extends AbstractActivity {
                     ((TextView) rowView.findViewById(R.id.location)).setOnClickListener(new View.OnClickListener() {
                         public void onClick(View arg0) {
                             Intent cacheIntent = new Intent(cgeotrackable.this, cgeodetail.class);
-                            cacheIntent.putExtra("guid", (String) cacheGuid);
-                            cacheIntent.putExtra("name", (String) Html.fromHtml(cacheName).toString());
+                            cacheIntent.putExtra("guid", cacheGuid);
+                            cacheIntent.putExtra("name", Html.fromHtml(cacheName).toString());
                             startActivity(cacheIntent);
                         }
                     });
@@ -595,7 +594,7 @@ public class cgeotrackable extends AbstractActivity {
         public void handleMessage(Message message) {
             BitmapDrawable image = (BitmapDrawable) message.obj;
             if (image != null && view != null) {
-                view.setCompoundDrawablesWithIntrinsicBounds((Drawable) image, null, null, null);
+                view.setCompoundDrawablesWithIntrinsicBounds(image, null, null, null);
             }
         }
     }
