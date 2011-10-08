@@ -52,7 +52,6 @@
   <string name="log_grabbed">Taget fra andet sted</string>
   <string name="log_maintained">Vedligeholdt</string>
   <string name="log_maintenance_needed">Mangler vedligeholdelse</string>
-  <string name="log_maintenance_owner">Vedligeholdelse</string>
   <string name="log_update">Nye koordinater</string>
   <string name="log_archived">Arkiveret</string>
   <string name="log_needs_archived">Mangler arkiveret</string>
@@ -77,39 +76,27 @@
   <string name="err_license">Bruger accepterer betingelser på Geocaching.com</string>
   <string name="err_store">Beklager, c:geo kan ikke gemme cachen.</string>
   <string name="err_drop">Beklager, c:geo kan ikke slette cachen.</string>
-  <string name="err_title_problem">Problem</string>
   <string name="err_detail_open">Beklager, c:geo kan ikke indlæse cachedetaljer.</string>
   <string name="err_detail_cache">Beklager, c:geo kan ikke vise denne cache.</string>
   <string name="err_detail_cache_find">Beklager, c:geo kan ikke vise denne cache</string>
   <string name="err_detail_cache_find_some">Beklager, c:geo kan ikke vise denne cache.</string>
   <string name="err_detail_cache_forgot">Beklager, c:geo husker ikke hvilken cache du ønskede.</string>
-  <string name="err_detail_cache_language">c:geo kan ikke læse alle cachedetaljer. Tjek om Geocaching.com er sat til engelsk. Desværre kan c:geo ikke forstå andre sprog.</string>
   <string name="err_detail_no_spoiler">c:geo fandt ingen spoilerbilleder til denne cache.</string>
   <string name="err_detail_no_map_static">c:geo fandt ingen statiske kort til denne cache.</string>
   <string name="err_detail_still_removing">Fjerner stadig cachen.</string>
   <string name="err_detail_still_saving">Gemmer stadig cachen.</string>
   <string name="err_detail_still_refreshing">Indlæser stadig cachen.</string>
-  <string name="err_radar_title">Radar er ikke installeret.</string>
-  <string name="err_radar_message">Denne funktion kræver Radar. Ønsker du at installere Radar?</string>
-  <string name="err_radar_market">c:geo kan ikke åbne Android Marked for at søge efter Radar.</string>
-  <string name="err_radar_generic">Beklager, c:geo kan ikke starte Radar. Er den installeret?</string>
   <string name="err_navigation_no">c:geo kan ikke finde understøttet navigation.</string>
   <string name="err_application_no">c:geo kan ikke finde en passende applikation.</string>
   <string name="err_auth_initialize">Beklager, c:geo kan ikke gennemføre godkendelsen.</string>
   <string name="err_auth_process">Godkendelse fejlede.</string>
   <string name="err_cannot_log_visit">c:geo har ikke nok informationer til at logge besøg. Log fra "Alle detaljer".</string>
   <string name="err_init_cleared">Beklager, c:geo kan ikke slette login.</string>
-  <string name="err_no_chaches">Beklager, c:geo kan ikke indlæse cachen.</string>
   <string name="err_download_fail">Beklager, c:geo kan ikke hente cachen pga. </string>
-  <string name="err_update_fail">Kan ikke opdatere rejsedistance.</string>
 
   <string name="warn_save_nothing">Der er ikke noget at gemme.</string>
   <string name="warn_no_cache_coord">Der er ingen cache med disse koordinater.</string>
 
-  <string name="info_altitude">Nuværende højde</string>
-  <string name="info_distance">Rejsedistance</string>
-  <string name="info_distance_cleared">Rejsedistance er slettet.</string>
-  <string name="info_since">\n(Siden </string>
 
   <!-- location service -->
   <string name="loc_last">Sidst kendte</string>
@@ -130,10 +117,6 @@
   <string name="advanced_search_button">Søg</string>
   <string name="stored_caches_button">Gemte</string>
   <string name="any_button">Alle destinationer</string>
-  <string name="about_button">Om</string>
-  <string name="settings_button">Indstillinger</string>
-  <string name="type">Type</string>
-  <string name="now_searching">Søger</string>
 
   <!-- caches -->
   <string name="caches_no_cache">Ingen cache</string>
@@ -142,7 +125,6 @@
   <string name="caches_downloading">Henter cacher…\nETA: </string>
   <string name="caches_eta_ltm">Under et minut</string>
   <string name="caches_eta_mins"> minutter</string>
-  <string name="caches_no_caches"> (ingen cacher)</string>
   <string name="caches_store_offline">Gem Offline</string>
   <string name="caches_on_map">Vis på kort</string>
   <string name="caches_select">Vælg fra liste</string>
@@ -163,14 +145,12 @@
   <string name="init_password">Password</string>
   <string name="init_passvote">Password</string>
   <string name="init_login">Check login</string>
-  <string name="init_legal">Juridisk note</string>
   <string name="init_go4cache_connect">Forbind til Go 4 Cache</string>
   <string name="init_twitter_authorize">Godkend c:geo</string>
   <string name="init_twitter_publish">Offentliggør status når cache er fundet</string>
   <string name="init_signature">Signatur</string>
   <string name="init_other">Andre indstillinger</string>
   <string name="init_skin">Light skin (genstart af c:geo nødvendig)</string>
-  <string name="init_transparent">Transparent c:geo hovedskærm</string>
   <string name="init_address">Vis adresse på hovedskærm</string>
   <string name="init_exclude">Udelad egne og fundne cacher</string>
   <string name="init_disabled">Udelad deaktiverede cacher</string>

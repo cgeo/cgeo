@@ -11,8 +11,6 @@
   <string name="helpers">Pomocné aplikácie</string>
   <string name="about">O aplikácii</string>
   <string name="helper">Chcete sa dozvedieť viac o <b>c:geo</b>?\nPozrite si manuál.</string>
-  <string name="database_error_title">Problém s databázou.</string>
-  <string name="database_error_message">c:geo sa nedokázalo spojiť s internou databázou.\nProsím, skúste spustiť c:geo trochu neskôr. Ak sa táto správa zobrazovala viac krát, otvorte Nastavenie/Aplikácie/Správa aplikácií/c:geo a stlačte tlačidlo „Vymazať údaje“. Alebo odinštalujte a znovu nainštalujte c:geo. Ospravedlňujeme sa za nepríjemnosti.</string>
   <string name="latitude">Zemepisná šírka</string>
   <string name="longitude">Zemepisná dĺžka</string>
 
@@ -69,7 +67,6 @@
   <string name="log_grabbed">Prevzatý</string>
   <string name="log_maintained">Údržba</string>
   <string name="log_maintenance_needed">Vyžaduje údržbu</string>
-  <string name="log_maintenance_owner">Údržba</string>
   <string name="log_update">Zmena súradníc</string>
   <string name="log_archived">Archivácia</string>
   <string name="log_needs_archived">Vyžaduje archiváciu</string>
@@ -132,7 +129,6 @@
   <string name="err_premium_only">Skrýša je dostupná iba pre platiacich používateľov Geocaching.com</string>
   <string name="err_store">Prepáčte, c:geo nemôže uložiť skrýšu.</string>
   <string name="err_drop">Prepáčte, c:geo nemôže zmazať skrýšu.</string>
-  <string name="err_title_problem">Problém</string>
   <string name="err_detail_open">Prepáčte, c:geo nedokáže načítať detaily skrýše.</string>
   <string name="err_detail_cache">Prepáčte, c:geo nedokáže načítať detaily skrýše. Je to naozaj skrýša?</string>
   <string name="err_detail_cache_find">Prepáčte, c:geo nemôže nájsť skrýšu</string>
@@ -141,7 +137,6 @@
   <string name="err_detail_cache_find_next">Prepáčte, c:geo nemôže nájsť ďalšiu skrýšu.</string>
   <string name="err_detail_cache_forgot">Prepáčte, c:geo zabudlo, akú skrýšu chcete zobraziť.</string>
   <string name="err_detail_cache_forgot_visit">Prepáčte, c:geo zabudlo, akú skrýšu ste prezerali.</string>
-  <string name="err_detail_cache_language">c:geo nemôže prečítať niektoré detaily. Prosím skontrolujte, či máte web Geocaching.com nastavený na anglický jazyk. c:geo zatiaľ bohužiaľ nedokáže prečítať iné jazyky.</string>
   <string name="err_detail_no_spoiler">c:geo nenašla pre túto skrýšu žiaden spoilerový obrázok.</string>
   <string name="err_detail_no_map_static">c:geo nenašla žiadnu statickú mapu pre túto skrýšu.</string>
   <string name="err_detail_not_load_map_static">Prepáčte, c:geo sa nepodarilo načítať statické mapy.</string>
@@ -150,19 +145,13 @@
   <string name="err_detail_still_refreshing">Ešte aktualizujem skrýšu.</string>
   <string name="err_watchlist_still_managing">Stále prebieha správa vášho zoznamu sledovaných.</string>
   <string name="err_watchlist_failed">Zlyhala zmena sledovaných.</string>
-  <string name="err_radar_title">Radar nie je nainštalovaný.</string>
-  <string name="err_radar_message">Táto funkcia vyžaduje aplikáciu Radar. Chcete ju nainštalovať?</string>
-  <string name="err_radar_market">Prepáčte, c:geo nedokáže spustiť Android Market a vyhľadať aplikáciu Radar.</string>
-  <string name="err_radar_generic">Prepáčte, c:geo nedokáže spustiť aplikáciu Radar. Je nainštalovaná?</string>
   <string name="err_navigation_no">Prepáčte, c:geo nemôže nájsť žiadnu podporovanú navigáciu.</string>
   <string name="err_application_no">Prepáčte, c:geo nemôže násjť žiadnu použiteľnú aplikáciu.</string>
   <string name="err_auth_initialize">Prepáčte, c:geo nedokázalo zahájiť autorizáciu.</string>
   <string name="err_auth_process">Autorizácia zlyhala.</string>
   <string name="err_cannot_log_visit">c:geo nemá dostatok informácií pre zapísanie návštevy. Prosím urobte to z kompletného detailu skrýše.</string>
   <string name="err_init_cleared">Prepáčte, c:geo nedokázalo zmazať prihlasovacie údaje.</string>
-  <string name="err_no_chaches">Prepáčte, c:geo nedokázalo načítať skrýšu alebo skrýše.</string>
   <string name="err_download_fail">Prepáčte, c:geo nemôže načítať skrýšu, pretože</string>
-  <string name="err_update_fail">Nepodarilo sa aktualizovať precestovanú vzdialenosť.</string>
   <string name="err_list_load_fail">c:geo nemôže načítať zoznam skrýš.</string>
   <string name="err_store_failed">c:geo nemôže uložiť skrýšu.</string>
   <string name="err_refresh_failed">c:geo nemôže obnoviť skrýšu.</string>
@@ -171,9 +160,6 @@
   <string name="err_dwld_details_failed_reason">c:geo nemôže načítať podrobnosti o skrýši, pretože</string>
   <string name="err_load_descr_failed">c:geo nemôže stiahnuť popis skrýše.</string>
   <string name="err_location_unknown">c:geo nepozná súradnice skrýše</string>
-  <string name="err_manual_title">Manuál nie je nainštalovaný.</string>
-  <string name="err_manual_message">Manuál c:geo sa nenachádza vo vašom zariadení. Nainštalovať ho?</string>
-  <string name="err_manual_market">c:geo sa nepodarilo spustiť vyhľadávanie manuálu c:geo cez Android Market.</string>
   <string name="err_missing_device_name">Pred registráciou zadajte prosím názov zariadenia.</string>
 
   <string name="err_tb_display">Prepáčte, c:geo nemôže zobraziť trasovateľný predmet. Je to naozaj trasovateľný?</string>
@@ -197,21 +183,18 @@
   <string name="err_point_bear_and_dist_title">Potrebujete poradiť?</string>
   <string name="err_point_bear_and_dist">Vyplňte smer a vzdialenosť. Uhol je uhol 0 - 360 stupňov vzhľadom k severu. Vzdialenosť môže byť s, alebo bez jednotiek.</string>
   <string name="err_point_location_error">c:geo nemôže získať polohu bodov cesty.</string>
-  <string name="err_navigation_not_found">c:geo nemôže nájsť žiadnu podporovanú navigáciu.</string>
 
   <string name="err_log_load_data">c:geo nemôže načítať dáta potrebné pre zalogovanie návštevy.</string>
   <string name="err_log_load_data_again">c:geo nemôže načítať dáta potrebné pre zalogovanie návštevy. Skúša to znovu.</string>
   <string name="err_log_load_data_still">c:geo stále načítava dáta potrebné pre zalogovanie návštevy. Prosím, počkajte chvíľu.</string>
   <string name="err_log_failed_server">c:geo nemohlo odoslať log, pretože server neodpovedá.</string>
   <string name="err_log_post_failed">c:geo nemohlo odoslať log.</string>
-  <string name="err_log_post_failed_because">c:geo nemohlo odoslať log z dôvodu</string>
 
   <string name="err_search_address_no_match">c:geo nenašlo žiadne zodpovedajúce miesto</string>
   <string name="err_search_address_forgot">c:geo zabudlo adresu, ktorú sa pokúšate nájsť.</string>
   <string name="err_search_address">Vyhľadávanie miest</string>
   <string name="err_parse_lat">c:geo nemôže dopočítať šírku.</string>
   <string name="err_parse_lon">c:geo nemôže dopočítať dĺžku.</string>
-  <string name="err_parse_bear">c:geo nemôže dopočítať smer.</string>
   <string name="err_parse_dist">c:geo nemôže dopočítať vzdialenosť.</string>
   <string name="err_parse_lat_lon">c:geo nemôže zistiť šírku a dĺžku.</string>
   <string name="err_invalid_lat_lon">Nesprávna šírka a dĺžka.</string>
@@ -232,10 +215,6 @@
   <string name="warn_log_text_fill">Prosím, vyplňte nejaký text do logu.</string>
   <string name="warn_load_images">Prepáčte, c:geo sa nepodarilo načítať obrázky.</string>
 
-  <string name="info_altitude">Súčasná nadmorská výška</string>
-  <string name="info_distance">Precestovaná vzdialenosť</string>
-  <string name="info_distance_cleared">Precestovaná vzdialenosť bola zmazaná</string>
-  <string name="info_since">\n(od </string>
 
   <string name="info_log_posted">c:geo úspešne zaslalo log.</string>
   <string name="info_log_saved">c:geo úspešne uložilo log.</string>
@@ -266,25 +245,17 @@
   <string name="advanced_search_button">Hľadanie</string>
   <string name="stored_caches_button">Uložené</string>
   <string name="any_button">Všetky ciele</string>
-  <string name="about_button">O aplikácii</string>
-  <string name="settings_button">Nastavenia</string>
-  <string name="type">Typ</string>
-  <string name="now_searching">vyhľadávam</string>
   <string name="unknown_scan">Nepodarilo sa nájsť zemepisný kód v načítanom výsledku.</string>
 
   <!-- caches -->
-  <string name="caches_searching">vyhľadávanie skrýš</string>
   <string name="caches_no_cache">Žiadne ďalšie skrýše</string>
   <string name="caches_more_caches">Ďalšie skrýše</string>
   <string name="caches_more_caches_no">Žiadne ďalšie skrýše</string>
   <string name="caches_more_caches_loading">Načítanie skrýš…</string>
   <string name="caches_downloading">Sťahovanie skrýš…\nOdhad:</string>
-  <string name="caches_progress_loading_title">Načítanie skrýš</string>
-  <string name="caches_progress_loading_text">Skrýš uložená v zariadení</string>
   <string name="caches_eta_ltm">menej než minúta</string>
   <string name="caches_eta_mins"> minúty</string>
   <string name="caches_eta_min"> minúta</string>
-  <string name="caches_no_caches"> (žiadne skrýše)</string>
   <string name="caches_store_offline">Uložiť offline</string>
   <string name="caches_store_selected">Uložiť vybraté</string>
   <string name="caches_stored">Uložené</string>
@@ -321,7 +292,6 @@
   <string name="caches_refresh_all">Obnoviť všetky</string>
   <string name="caches_move_selected">Presunúť vybrané</string>
   <string name="caches_move_all">Presunúť všetky</string>
-  <string name="caches_map_cgeo">c:geo</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Opíšte text z obrázku. Je to dôležité pre stiahnutie súradníc skrýš. Túto vlastnosť je možné vypnúť v Nastaveniach.</string>
@@ -394,7 +364,6 @@
   <string name="init_login_popup_ok">Prihlásenie úspešné</string>
   <string name="init_login_popup_failed">Prihlásenie neúspešné</string>
   <string name="init_login_popup_failed_reason">Prihlásenie neúspešné: </string>
-  <string name="init_legal">Právne informácie</string>
   <string name="init_go4cache_connect">Pripojiť ku Go 4 Cache</string>
   <string name="init_twitter_authorize">Autorizovať c:geo</string>
   <string name="init_twitter_publish">Nový status pri nájdení skrýše</string>
@@ -408,13 +377,8 @@
   <string name="init_signature_template_datetime">Dátum a čas</string>
   <string name="init_signature_template_user">Používateľ</string>
   <string name="init_signature_template_number">Číslo</string>
-  <string name="init_languages">Preklad</string>
-  <string name="init_languages_description">Ktoré jazyky nepotrebujete prekladať? Zadajte dvojznakové kódy jazykov.</string>
-  <string name="init_languages_hint">en es de cs sk</string>
-  <string name="init_translate">Popis prekladu a tip</string>
   <string name="init_other">Ďalšie možnosti</string>
   <string name="init_skin">Svetlý vzhľad\n(vyžaduje reštart c:geo)</string>
-  <string name="init_transparent">Priehľadná hlavná obrazovka</string>
   <string name="init_address">Adresa na úvodnej obrazovke</string>
   <string name="init_captcha">Zobraziť CAPTCHA, ak je to potrebné</string>
   <string name="init_useenglish">Používať angličtinu v c:geo\n(vyžaduje reštart)</string>
@@ -549,11 +513,8 @@
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Mapa</string>
   <string name="cache_menu_map_static">Statická mapa</string>
-  <string name="cache_menu_locus">Locus</string>
   <string name="cache_menu_rmaps">Rmaps</string>
   <string name="cache_menu_map_ext">Zobraziť na externej mape</string>
-  <string name="cache_menu_map_short">Mapa</string>
-  <string name="cache_menu_map_ext_short">Ext. mapa</string>
   <string name="cache_menu_streetview">Zobrazenie ulíc</string>
   <string name="cache_menu_browser">Otvoriť v prehliadači</string>
   <string name="cache_menu_visit">Zapísať návštevu</string>
@@ -587,7 +548,6 @@
   <string name="cache_event">Dátum</string>
   <string name="cache_location">Miesto</string>
   <string name="cache_coordinates">Súradnice</string>
-  <string name="cache_elevation">Stúpanie</string>
   <string name="cache_calendars">vyberte kalendár</string>
   <string name="cache_spoiler_images_title">Spoilerové obrázky</string>
   <string name="cache_spoiler_images_loading">Načítanie spoilerových obrázkov…</string>
@@ -609,7 +569,6 @@
   <string name="gpx_import_loading_waypoints">Načítanie bodov trasy z .gpx súboru\nNačítané:</string>
   <string name="gpx_import_storing">Zapisovanie skrýš do databázy\nZapísané:</string>
   <string name="gpx_import_loading_stored">Nahrávanie skrýš z .gpx súboru\nUložených:</string>
-  <string name="gpx_import_no_files">c:geo nenašlo žiaden .gpx súbor</string>
   <string name="gpx_import_caches_imported">skrýše importované</string>
   <string name="gpx_import_loading">Načítanie skrýš z .gpx súboru</string>
   <string name="gpx_import_title">Import GPX</string>
@@ -622,7 +581,6 @@
   <!--  import -->
   <string name="import_title">Import…</string>
   <string name="web_import_title">Import z webu</string>
-  <string name="web_import_server_problem">Vyskytol sa problém počas komunikácie so serverom. Znovu si zaregistrujte telefón a skúste to znovu.</string>
   <string name="web_import_waiting">Čakanie na nové skrýše z webu…</string>
   <string name="web_downloading">Preberanie</string>
   <string name="web_downloaded">Prebrané</string>
@@ -633,7 +591,6 @@
 
   <!-- popup -->
   <string name="popup_more">Viac detailov</string>
-  <string name="popup_offline">Offline</string>
 
   <!-- waypoint -->
   <string name="waypoint">Bod trasy</string>
@@ -689,9 +646,6 @@
   <string name="search_kw">Kľúčové slová</string>
   <string name="search_kw_prefill">Kľúčové slová</string>
   <string name="search_kw_button">Hľadať podľa kľúčových slov</string>
-  <string name="search_kw_caches">Skrýše podľa kľúčového slova</string>
-  <string name="search_caches_found_by">skrýše nájdené</string>
-  <string name="search_caches_hidden_by">skrýše skryté</string>
   <string name="search_fbu">Nájdené používateľom</string>
   <string name="search_fbu_prefill">Používateľské meno</string>
   <string name="search_fbu_button">Hľadať podľa použív. mena</string>
@@ -704,17 +658,12 @@
   <string name="search_destination">Cieľ</string>
   <string name="search_some_destination">Nejaký cieľ</string>
   <string name="search_direction_rel">Od tejto polohy</string>
-  <string name="search_lat">šírka</string>
-  <string name="search_lon">dĺžka</string>
-  <string name="search_caches">Hľadať skrýše</string>
-  <string name="search_caches_near">Skrýše v okolí</string>
   <string name="search_address_started">Vyhľadávanie miest</string>
   <string name="search_address_result">Nájdené miesta</string>
   <string name="search_own_caches">Hľadať v mojich skrýšach</string>
 
   <!-- trackable -->
   <string name="trackable">Trasovateľné predmety</string>
-  <string name="trackable_select_title">Trasovateľné predmety</string>
   <string name="trackable_details_loading">Načítanie detailov trasovateľných predmetov…</string>
   <string name="trackable_log_touch">Hlásenie zhliadnutia</string>
   <string name="trackable_browser_open">Otvoriť v prehliadači</string>
@@ -767,143 +716,78 @@
 
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Psi povolené</string>
-  <string name="attribute_dogs_no">Psi nepovolené</string>
   <string name="attribute_bicycles_yes">Bicykle povolené</string>
-  <string name="attribute_bicycles_no">Bicykle nepovolené</string>
   <string name="attribute_motorcycles_yes">Motorky povolené</string>
-  <string name="attribute_motorcycles_no">Motorky nepovolené</string>
   <string name="attribute_quads_yes">Štvorkolky povolené</string>
-  <string name="attribute_quads_no">Štvorkolky nepovolené</string>
   <string name="attribute_jeeps_yes">Terénne automobily povolené</string>
-  <string name="attribute_jeeps_no">Terénne automobily nepovolené</string>
   <string name="attribute_snowmobiles_yes">Snežné skútre povolené</string>
-  <string name="attribute_snowmobiles_no">Snežné skútre nepovolené</string>
   <string name="attribute_horses_yes">Kone povolené</string>
-  <string name="attribute_horses_no">Kone nepovolené</string>
   <string name="attribute_campfires_yes">Zakladanie ohniska povolené</string>
-  <string name="attribute_campfires_no">Zakladanie ohniska nepovolené</string>
   <string name="attribute_rv_yes">Nákladné autá povolené</string>
-  <string name="attribute_rv_no">Nákladné autá nepovolené</string>
 
   <!--  attributes (conditions -> yes, no) -->
   <string name="attribute_kids_yes">Odporúčané pre deti</string>
-  <string name="attribute_kids_no">Neodporúčané pre deti</string>
   <string name="attribute_onehour_yes">Trvá menej ako hodinu</string>
-  <string name="attribute_onehour_no">Trvá viac ako hodinu</string>
   <string name="attribute_scenic_yes">Výhľad do krajiny</string>
-  <string name="attribute_scenic_no">Bez výhľadu do krajiny</string>
   <string name="attribute_hiking_yes">Významný podiel pešej chôdze</string>
-  <string name="attribute_hiking_no">Nevýznamný podiel pešej chôdze</string>
   <string name="attribute_climbing_yes">Náročný výstup</string>
-  <string name="attribute_climbing_no">Nenáročný výstup</string>
   <string name="attribute_wading_yes">Môže vyžadovať brodenie</string>
-  <string name="attribute_wading_no">Nemusí vyžadovať brodenie</string>
   <string name="attribute_swimming_yes">Môže vyžadovať plávanie</string>
-  <string name="attribute_swimming_no">Nemusí vyžadovať plávanie</string>
   <string name="attribute_available_yes">Dostupné kedykoľvek</string>
-  <string name="attribute_available_no">Nie je dostupné kedykoľvek</string>
   <string name="attribute_night_yes">Odporúčané v noci</string>
-  <string name="attribute_night_no">Nie je odporúčané v noci</string>
   <string name="attribute_winter_yes">Dostupné cez zimu</string>
-  <string name="attribute_winter_no">Nie je dostupné cez zimu</string>
   <string name="attribute_stealth_yes">Vyžadované nenápadné hľadanie</string>
-  <string name="attribute_stealth_no">Nie je vyžadované nenápadné hľadanie</string>
   <string name="attribute_firstaid_yes">Potrebuje údržbu</string>
-  <string name="attribute_firstaid_no">Nepotrebuje údržbu</string>
   <string name="attribute_cow_yes">Pozor na dobytok</string>
-  <string name="attribute_cow_no">Bez dobytku</string>
   <string name="attribute_field_puzzle_yes">Puzzle na mieste</string>
-  <string name="attribute_field_puzzle_no">Bez puzzle na mieste</string>
   <string name="attribute_nightcache_yes">Nočná skrýša</string>
-  <string name="attribute_nightcache_no">Nie je nočná skrýša</string>
   <string name="attribute_parkngrab_yes">Zaparkuj a hľadaj</string>
-  <string name="attribute_parkngrab_no">Nie je zaparkuj a hľadaj</string>
   <string name="attribute_abandonedbuilding_yes">Opustená budova</string>
-  <string name="attribute_abandonedbuilding_no">Nie je opustená budova</string>
   <string name="attribute_hike_short_yes">Krátka chôdza (menej ako 1 km)</string>
-  <string name="attribute_hike_short_no">Bez krátkej chôdze</string>
   <string name="attribute_hike_med_yes">Stredná chôdza (1 km až 10 km)</string>
-  <string name="attribute_hike_med_no">Bez strednej chôdze</string>
   <string name="attribute_hike_long_yes">Dlhá chôdza (viac ako 10 km)</string>
-  <string name="attribute_hike_long_no">Bez dlhej chôdze</string>
   <string name="attribute_seasonal_yes">Sezónny prístup</string>
-  <string name="attribute_seasonal_no">Bez sezónneho prístupu</string>
   <string name="attribute_touristok_yes">Dostupné turistom</string>
-  <string name="attribute_touristok_no">Nie je dostupné pre turistov</string>
   <string name="attribute_frontyard_yes">Súkromný pozemok</string>
-  <string name="attribute_frontyard_no">Nie je súkromný pozemok</string>
   <string name="attribute_teamwork_yes">Vyžaduje tímovú spoluprácu</string>
-  <string name="attribute_teamwork_no">Bez tímovej spolupráce</string>
   <string name="attribute_landf_yes">Túra straty a nálezy</string>
-  <string name="attribute_landf_no">Nie je túra straty a nálezy</string>
   <string name="attribute_partnership_yes">Partnerská skrýša</string>
-  <string name="attribute_partnership_no">Nie je partnerská skrýša</string>
 
   <!--  attributes (equipment -> required, not required) -->
   <string name="attribute_fee_yes">Prístup alebo vyžadovaný poplatok za parkovanie</string>
-  <string name="attribute_fee_no">Bez prístupu alebo vyžadovaného poplatku za parkovanie</string>
   <string name="attribute_rappelling_yes">Vyžadované lezecké vybavenie</string>
-  <string name="attribute_rappelling_no">Nie je vyžadované lezecké vybavenie</string>
   <string name="attribute_boat_yes">Vyžadovaná loď</string>
-  <string name="attribute_boat_no">Nie je vyžadovaná loď</string>
   <string name="attribute_scuba_yes">Vyžadované potápačské vybavenie</string>
-  <string name="attribute_scuba_no">Nie je vyžadované potápačské vybavenie</string>
   <string name="attribute_flashlight_yes">Vyžadovaná baterka</string>
-  <string name="attribute_flashlight_no">Nie je vyžadovaná baterka</string>
   <string name="attribute_uv_yes">Vyžadovaná UV lampa </string>
-  <string name="attribute_uv_no">Nie je vyžadovaná UV lampa</string>
   <string name="attribute_snowshoes_yes">Vyžadované snežnice</string>
-  <string name="attribute_snowshoes_no">Nie sú vyžadované snežnice</string>
   <string name="attribute_skiis_yes">Vyžadované bežecké lyže</string>
-  <string name="attribute_skiis_no">Nie sú vyžadované bežecké lyže</string>
   <string name="attribute_s_tool_yes">Vyžadované špeciálne nástroje</string>
-  <string name="attribute_s_tool_no">Nie sú vyžadované špeciálne nástroje</string>
   <string name="attribute_wirelessbeacon_yes">Bezdrôtový maják</string>
-  <string name="attribute_wirelessbeacon_no">Bez bezdrôtového majáku</string>
   <string name="attribute_treeclimbing_yes">Vyžadované šplhanie na strom</string>
-  <string name="attribute_treeclimbing_no">Nie je vyžadované šplhanie na strom</string>
 
   <!--  attributes (hazards -> present, not present) -->
   <string name="attribute_poisonoak_yes">Jedovaté rastliny</string>
-  <string name="attribute_poisonoak_no">Bez jedovatých rastlín</string>
   <string name="attribute_dangerousanimals_yes">Nebezpečné zvieratá</string>
-  <string name="attribute_dangerousanimals_no">Bez nebezpečných zvierat</string>
   <string name="attribute_ticks_yes">Kliešte</string>
-  <string name="attribute_ticks_no">Bez kliešťov</string>
   <string name="attribute_mine_yes">Opustené míny</string>
-  <string name="attribute_mine_no">Bez opustených mín</string>
   <string name="attribute_cliff_yes">Útes/padajúce skaly</string>
-  <string name="attribute_cliff_no">Bez útesu/padajúcich skál</string>
   <string name="attribute_hunting_yes">Oblasť pre lov</string>
-  <string name="attribute_hunting_no">Nie je oblasťou pre lov</string>
   <string name="attribute_danger_yes">Nebezpečné územie</string>
-  <string name="attribute_danger_no">Nie je nebezpečné územie</string>
   <string name="attribute_thorn_yes">Tŕne</string>
-  <string name="attribute_thorn_no">Bez tŕňov</string>
 
   <!--  attributes (facilities -> yes, no) -->
   <string name="attribute_wheelchair_yes">Prístupné pre vozíčkarov</string>
-  <string name="attribute_wheelchair_no">Neprístupné pre vozíčkarov</string>
   <string name="attribute_parking_yes">Dostupné parkovanie</string>
-  <string name="attribute_parking_no">Bez dostupného parkovania</string>
   <string name="attribute_public_yes">Verejná doprava</string>
-  <string name="attribute_public_no">Bez verejnej dopravy</string>
   <string name="attribute_water_yes">Neďaleko dostupná pitná voda</string>
-  <string name="attribute_water_no">Bez pitnej vody</string>
   <string name="attribute_restrooms_yes">Neďaleko dostupné verejné záchody</string>
-  <string name="attribute_restrooms_no">Bez verejných záchodov</string>
   <string name="attribute_phone_yes">Neďaleko dostupný telefón</string>
-  <string name="attribute_phone_no">Bez telefónu neďaleko dostupného</string>
   <string name="attribute_picnic_yes">Neďaleko dostupné piknikové stoly</string>
-  <string name="attribute_picnic_no">Nie sú dostupné piknikové stoly</string>
   <string name="attribute_camping_yes">Možnosť táborenia</string>
-  <string name="attribute_camping_no">Bez možnosti táborenia</string>
   <string name="attribute_stroller_yes">Prístupné pre kočiariky</string>
-  <string name="attribute_stroller_no">Nie je prístupné pre kočiariky</string>
   <string name="attribute_fuel_yes">Neďaleko čerpacia stanica</string>
-  <string name="attribute_fuel_no">Bez čerpacej stanice</string>
   <string name="attribute_food_yes">Neďaleko občerstvenie</string>
-  <string name="attribute_food_no">Bez občerstvenia neďaleko</string>
 
   <!-- next things -->
   <string name="legal_note">Pred používaním služieb serveru Geocaching.com je potrebné súhlasiť s <a href="http://www.geocaching.com/about/disclaimer.aspx">licenčnou dohodou Groundspeaku</a>.</string>

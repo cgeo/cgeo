@@ -11,8 +11,6 @@
   <string name="helpers">What to install</string>
   <string name="about">About c:geo</string>
   <string name="helper">Do you want to learn about <b>c:geo</b>?\nCheck our easy to read manual.</string>
-  <string name="database_error_title">Problem with database</string>
-  <string name="database_error_message">c:geo failed to connect to internal database.\nPlease try to start c:geo a bit later. If this message has been showed for many times, proceed to phone Settings / Applications / c:geo and hit the Clear Data button. Or uninstall and install c:geo again. Sorry for inconvenience.</string>
   <string name="latitude">Latitude</string>
   <string name="longitude">Longitude</string>
 
@@ -69,7 +67,6 @@
   <string name="log_grabbed">Grabbed somewhere</string>
   <string name="log_maintained">Maintenance performed</string>
   <string name="log_maintenance_needed">Needs maintenance</string>
-  <string name="log_maintenance_owner">Maintenance</string>
   <string name="log_update">Updated coordinates</string>
   <string name="log_archived">Archived</string>
   <string name="log_needs_archived">Needs archived</string>
@@ -132,7 +129,6 @@
   <string name="err_premium_only">Cache is only available to Geocaching.com premium members</string>
   <string name="err_store">Sorry, c:geo can\'t store cache.</string>
   <string name="err_drop">Sorry, c:geo can\'t drop cache.</string>
-  <string name="err_title_problem">Problem</string>
   <string name="err_detail_open">Sorry, c:geo can\'t open geocache details.</string>
   <string name="err_detail_cache">Sorry, c:geo can\'t display geocache you want. Is it really geocache?</string>
   <string name="err_detail_cache_find">Sorry, c:geo can\'t find geocache</string>
@@ -141,7 +137,6 @@
   <string name="err_detail_cache_find_next">Sorry, c:geo can\'t find next geocaches.</string>
   <string name="err_detail_cache_forgot">Sorry, c:geo forgot which geocache you want.</string>
   <string name="err_detail_cache_forgot_visit">Sorry, c:geo forgot which cache you visited.</string>
-  <string name="err_detail_cache_language">c:geo can\'t read some cache details. Please check if the Geocaching.com website is set to English. Unfortunately, c:geo doesn\'t understand other localisations.</string>
   <string name="err_detail_no_spoiler">c:geo found no spoiler images for this cache.</string>
   <string name="err_detail_no_map_static">c:geo found no static maps for this cache.</string>
   <string name="err_detail_not_load_map_static">Sorry, c:geo failed to load static maps.</string>
@@ -150,19 +145,13 @@
   <string name="err_detail_still_refreshing">Still reloading this cache.</string>
   <string name="err_watchlist_still_managing">Still managing your watchlist.</string>
   <string name="err_watchlist_failed">Changing your watchlist failed.</string>
-  <string name="err_radar_title">Radar isn\'t installed.</string>
-  <string name="err_radar_message">This function requires Radar application. Should it be installed?</string>
-  <string name="err_radar_market">c:geo can\'t start Android Market to search for Radar application.</string>
-  <string name="err_radar_generic">Sorry, c:geo can\'t start Radar application. Is it installed?</string>
   <string name="err_navigation_no">c:geo can\'t find any supported navigation.</string>
   <string name="err_application_no">c:geo can\'t find any suitable application.</string>
   <string name="err_auth_initialize">Sorry, c:geo failed to initialize authorization process.</string>
   <string name="err_auth_process">Authorization process failed.</string>
   <string name="err_cannot_log_visit">c:geo has not enough information to log visit. Please, do it from full cache details.</string>
   <string name="err_init_cleared">Sorry, c:geo can\'t clear login information.</string>
-  <string name="err_no_chaches">Sorry, c:geo failed to load cache or caches.</string>
   <string name="err_download_fail">Sorry, c:geo failed to download caches because of </string>
-  <string name="err_update_fail">Failed to update traveled distance.</string>
   <string name="err_list_load_fail">Sorry, c:geo failed to load cache list.</string>
   <string name="err_store_failed">Sorry, c:geo can\'t store geocache.</string>
   <string name="err_refresh_failed">Sorry, c:geo can\'t refresh geocache.</string>
@@ -171,9 +160,6 @@
   <string name="err_dwld_details_failed_reason">Sorry, c:geo failed to download cache details because of</string>
   <string name="err_load_descr_failed">Sorry, c:geo can\'t load description.</string>
   <string name="err_location_unknown">c:geo doesn\'t know location of cache.</string>
-  <string name="err_manual_title">Manual isn\'t installed.</string>
-  <string name="err_manual_message">Manual for c:geo is not present in your device. Should it be installed?</string>
-  <string name="err_manual_market">c:geo can\'t start Android Market to search for Manual of c:geo.</string>
   <string name="err_missing_device_name">Please enter a device name before registering.</string>
 
   <string name="err_tb_display">Sorry, c:geo can\'t display trackable you want. Is it really trackable?</string>
@@ -197,21 +183,18 @@
   <string name="err_point_bear_and_dist_title">Need some help?</string>
   <string name="err_point_bear_and_dist">Fill both bearing and distance. Bearing is angle 0 to 360 degrees relative to north. Distance with or without units.</string>
   <string name="err_point_location_error">Sorry, c:geo can\'t get location of waypoint.</string>
-  <string name="err_navigation_not_found">c:geo can\'t find any supported navigation.</string>
 
   <string name="err_log_load_data">Sorry, c:geo can\'t load data required to log visit.</string>
   <string name="err_log_load_data_again">Sorry, c:geo can\'t load data required to log visit. Trying again.</string>
   <string name="err_log_load_data_still">c:geo is still loading data required to post log. Please wait a little while longer.</string>
   <string name="err_log_failed_server">Sorry, c:geo failed to post log because server is not responding.</string>
   <string name="err_log_post_failed">It seems that your log was not posted. Please check it on Geocaching.com.</string>
-  <string name="err_log_post_failed_because">Sorry, c:geo failed to post log because of </string>
 
   <string name="err_search_address_no_match">Sorry, c:geo found no matching place.</string>
   <string name="err_search_address_forgot">Sorry, c:geo forgot address you try to find.</string>
   <string name="err_search_address">Searching for places</string>
   <string name="err_parse_lat">Sorry, c:geo can\'t parse latitude.</string>
   <string name="err_parse_lon">Sorry, c:geo can\'t parse longitude.</string>
-  <string name="err_parse_bear">Sorry, c:geo can\'t parse bearing.</string>
   <string name="err_parse_dist">Sorry, c:geo can\'t parse distance.</string>
   <string name="err_parse_lat_lon">Sorry, c:geo can\'t parse latitude or longitude.</string>
   <string name="err_invalid_lat_lon">Sorry, invalid latitude or longitude.</string>
@@ -232,10 +215,6 @@
   <string name="warn_log_text_fill">Please, fill some log text.</string>
   <string name="warn_load_images">Sorry, c:geo failed to load images.</string>
 
-  <string name="info_altitude">Current altitude</string>
-  <string name="info_distance">Distance traveled</string>
-  <string name="info_distance_cleared">Traveled distance was cleared.</string>
-  <string name="info_since">\n(since </string>
 
   <string name="info_log_posted">c:geo successfully posted log.</string>
   <string name="info_log_saved">c:geo successfully saved log.</string>
@@ -266,25 +245,17 @@
   <string name="advanced_search_button">Search</string>
   <string name="stored_caches_button">Stored</string>
   <string name="any_button">Any destination</string>
-  <string name="about_button">About</string>
-  <string name="settings_button">Settings</string>
-  <string name="type">Type</string>
-  <string name="now_searching">Now searching</string>
   <string name="unknown_scan">Didn\'t find geo code in scan result.</string>
 
   <!-- caches -->
-  <string name="caches_searching">Searching for caches</string>
   <string name="caches_no_cache">There is no cache</string>
   <string name="caches_more_caches">Not enough? Get more caches!</string>
   <string name="caches_more_caches_no">That\'s all. No more caches.</string>
   <string name="caches_more_caches_loading">Loading caches…</string>
   <string name="caches_downloading">Downloading caches…\nETA: </string>
-  <string name="caches_progress_loading_title">Loading caches</string>
-  <string name="caches_progress_loading_text">Caches stored in device</string>
   <string name="caches_eta_ltm">Less than a minute</string>
   <string name="caches_eta_mins"> minutes</string>
   <string name="caches_eta_min"> minute</string>
-  <string name="caches_no_caches"> (no caches)</string>
   <string name="caches_store_offline">Store for Offline</string>
   <string name="caches_store_selected">Store selected</string>
   <string name="caches_stored">Stored</string>
@@ -321,7 +292,6 @@
   <string name="caches_refresh_all">Refresh all</string>
   <string name="caches_move_selected">Move selected</string>
   <string name="caches_move_all">Move all</string>
-  <string name="caches_map_cgeo">c:geo</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Please, write text from image. It\'s important to download coordinates of caches. It\'s optional and can be switched off in Settings.</string>
@@ -397,7 +367,6 @@
   <string name="init_login_popup_ok">Login ok.</string>
   <string name="init_login_popup_failed">Login failed.</string>
   <string name="init_login_popup_failed_reason">Login failed because of </string>
-  <string name="init_legal">Legal note</string>
   <string name="init_go4cache_connect">Connect to Go 4 Cache</string>
   <string name="init_twitter_authorize">Authorize c:geo</string>
   <string name="init_twitter_publish">Publish status when cache found</string>
@@ -411,13 +380,8 @@
   <string name="init_signature_template_datetime">Date &amp; Time</string>
   <string name="init_signature_template_user">User</string>
   <string name="init_signature_template_number">Number</string>
-  <string name="init_languages">Translation</string>
-  <string name="init_languages_description">Which languages you don\'t need to translate? Please provide two-character language codes.</string>
-  <string name="init_languages_hint">en es de cs</string>
-  <string name="init_translate">Translate description &amp; hint</string>
   <string name="init_other">Other options</string>
   <string name="init_skin">Light skin\n(needs restart of c:geo)</string>
-  <string name="init_transparent">Use transparent c:geo mainscreen</string>
   <string name="init_address">Show address on mainscreen</string>
   <string name="init_captcha">Show CAPTCHA if necessary</string>
   <string name="init_useenglish">Use English inside c:geo\n(restart needed)</string>
@@ -560,11 +524,8 @@
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Map</string>
   <string name="cache_menu_map_static">Static maps</string>
-  <string name="cache_menu_locus">Locus</string>
   <string name="cache_menu_rmaps">Rmaps</string>
   <string name="cache_menu_map_ext">Show on ext. map</string>
-  <string name="cache_menu_map_short">Maps</string>
-  <string name="cache_menu_map_ext_short">Ext. map</string>
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Open in browser</string>
   <string name="cache_menu_visit">Log visit</string>
@@ -598,7 +559,6 @@
   <string name="cache_event">Date</string>
   <string name="cache_location">Location</string>
   <string name="cache_coordinates">Coordinates</string>
-  <string name="cache_elevation">Elevation</string>
   <string name="cache_calendars">Select calendar</string>
   <string name="cache_spoiler_images_title">Spoiler images</string>
   <string name="cache_spoiler_images_loading">Loading spoiler images…</string>
@@ -620,7 +580,6 @@
   <string name="gpx_import_loading_waypoints">Loading waypoints from .gpx file\nRead:</string>
   <string name="gpx_import_storing">Writing caches to database\nStored:</string>
   <string name="gpx_import_loading_stored">Loading caches from .gpx file\nStored:</string>
-  <string name="gpx_import_no_files">Sorry, c:geo did not find any .gpx files.</string>
   <string name="gpx_import_caches_imported">caches imported</string>
   <string name="gpx_import_loading">Loading caches from .gpx file</string>
   <string name="gpx_import_title">Import GPX</string>
@@ -633,7 +592,6 @@
   <!--  import -->
   <string name="import_title">Import…</string>
   <string name="web_import_title">Import from web</string>
-  <string name="web_import_server_problem">There was a problem while communicating with server. Please re-register your phone and try again.</string>
   <string name="web_import_waiting">Waiting for new caches from web…</string>
   <string name="web_downloading">Downloading</string>
   <string name="web_downloaded">Downloaded</string>
@@ -644,7 +602,6 @@
 
   <!-- popup -->
   <string name="popup_more">More details</string>
-  <string name="popup_offline">Offline</string>
 
   <!-- waypoint -->
   <string name="waypoint">Waypoint</string>
@@ -706,9 +663,6 @@
   <string name="search_kw">Keywords</string>
   <string name="search_kw_prefill">Keyword</string>
   <string name="search_kw_button">Search by keyword</string>
-  <string name="search_kw_caches">Caches by keyword</string>
-  <string name="search_caches_found_by">Caches found by</string>
-  <string name="search_caches_hidden_by">Caches hidden by</string>
   <string name="search_fbu">Found by user</string>
   <string name="search_fbu_prefill">User name</string>
   <string name="search_fbu_button">Search by user name</string>
@@ -721,17 +675,12 @@
   <string name="search_destination">Destination</string>
   <string name="search_some_destination">Some destination</string>
   <string name="search_direction_rel">From this position</string>
-  <string name="search_lat">Lat</string>
-  <string name="search_lon">Lon</string>
-  <string name="search_caches">Search for caches</string>
-  <string name="search_caches_near">Caches near</string>
   <string name="search_address_started">Searching for places</string>
   <string name="search_address_result">Found places</string>
   <string name="search_own_caches">Search my caches</string>
 
   <!-- trackable -->
   <string name="trackable">Trackable</string>
-  <string name="trackable_select_title">Trackables</string>
   <string name="trackable_details_loading">Loading trackable details…</string>
   <string name="trackable_log_touch">Log touch</string>
   <string name="trackable_browser_open">Open in Browser</string>
@@ -784,143 +733,78 @@
 
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Dogs allowed</string>
-  <string name="attribute_dogs_no">Dogs not allowed</string>
   <string name="attribute_bicycles_yes">Bicycles allowed</string>
-  <string name="attribute_bicycles_no">Bicycles not allowed</string>
   <string name="attribute_motorcycles_yes">Motorcycles allowed</string>
-  <string name="attribute_motorcycles_no">Motorcycles not allowed</string>
   <string name="attribute_quads_yes">Quads allowed</string>
-  <string name="attribute_quads_no">Quads not allowed</string>
   <string name="attribute_jeeps_yes">Off-road vehicles allowed</string>
-  <string name="attribute_jeeps_no">Off-road vehicles not allowed</string>
   <string name="attribute_snowmobiles_yes">Snowmobiles allowed</string>
-  <string name="attribute_snowmobiles_no">Snowmobiles not allowed</string>
   <string name="attribute_horses_yes">Horses allowed</string>
-  <string name="attribute_horses_no">Horses not allowed</string>
   <string name="attribute_campfires_yes">Campfires allowed</string>
-  <string name="attribute_campfires_no">Campfires not allowed</string>
   <string name="attribute_rv_yes">Truck driver/RV allowed</string>
-  <string name="attribute_rv_no">Truck driver/RV not allowed</string>
 
   <!--  attributes (conditions -> yes, no) -->
   <string name="attribute_kids_yes">Recommended for kids</string>
-  <string name="attribute_kids_no">Not recommended for kids</string>
   <string name="attribute_onehour_yes">Takes less than an hour</string>
-  <string name="attribute_onehour_no">Takes more than an hour</string>
   <string name="attribute_scenic_yes">Scenic view</string>
-  <string name="attribute_scenic_no">No scenic view</string>
   <string name="attribute_hiking_yes">Significant hike</string>
-  <string name="attribute_hiking_no">No significant hike</string>
   <string name="attribute_climbing_yes">Difficult climbing</string>
-  <string name="attribute_climbing_no">No difficult climbing</string>
   <string name="attribute_wading_yes">May require wading</string>
-  <string name="attribute_wading_no">May not require wading</string>
   <string name="attribute_swimming_yes">May require swimming</string>
-  <string name="attribute_swimming_no">May not require swimming</string>
   <string name="attribute_available_yes">Available at all times</string>
-  <string name="attribute_available_no">Not available at all times</string>
   <string name="attribute_night_yes">Recommended at night</string>
-  <string name="attribute_night_no">Not recommended at night</string>
   <string name="attribute_winter_yes">Available during winter</string>
-  <string name="attribute_winter_no">Not available during winter</string>
   <string name="attribute_stealth_yes">Stealth required</string>
-  <string name="attribute_stealth_no">Stealth not required</string>
   <string name="attribute_firstaid_yes">Needs maintenance</string>
-  <string name="attribute_firstaid_no">Needs no maintenance</string>
   <string name="attribute_cow_yes">Watch for livestock</string>
-  <string name="attribute_cow_no">No livestock</string>
   <string name="attribute_field_puzzle_yes">Field puzzle</string>
-  <string name="attribute_field_puzzle_no">No field puzzle</string>
   <string name="attribute_nightcache_yes">Night cache</string>
-  <string name="attribute_nightcache_no">No night cache</string>
   <string name="attribute_parkngrab_yes">Park and grab</string>
-  <string name="attribute_parkngrab_no">No park and grab</string>
   <string name="attribute_abandonedbuilding_yes">Abandoned structure</string>
-  <string name="attribute_abandonedbuilding_no">No abandoned structure</string>
   <string name="attribute_hike_short_yes">Short hike (less than 1 km)</string>
-  <string name="attribute_hike_short_no">No short hike</string>
   <string name="attribute_hike_med_yes">Medium hike (1 km to 10 km)</string>
-  <string name="attribute_hike_med_no">No medium hike</string>
   <string name="attribute_hike_long_yes">Long hike (more than 10 km)</string>
-  <string name="attribute_hike_long_no">No long hike</string>
   <string name="attribute_seasonal_yes">Seasonal access</string>
-  <string name="attribute_seasonal_no">No seasonal access</string>
   <string name="attribute_touristok_yes">Tourist friendly</string>
-  <string name="attribute_touristok_no">Not tourist friendly</string>
   <string name="attribute_frontyard_yes">Private residence</string>
-  <string name="attribute_frontyard_no">No private residence</string>
   <string name="attribute_teamwork_yes">Teamwork required</string>
-  <string name="attribute_teamwork_no">No teamwork required</string>
   <string name="attribute_landf_yes">Lost and found tour</string>
-  <string name="attribute_landf_no">No lost and found tour</string>
   <string name="attribute_partnership_yes">Partnership cache</string>
-  <string name="attribute_partnership_no">No partnership cache</string>
 
   <!--  attributes (equipment -> required, not required) -->
   <string name="attribute_fee_yes">Access or parking fee required</string>
-  <string name="attribute_fee_no">Access or parking fee not required</string>
   <string name="attribute_rappelling_yes">Climbing gear required</string>
-  <string name="attribute_rappelling_no">Climbing gear not required</string>
   <string name="attribute_boat_yes">Boat required</string>
-  <string name="attribute_boat_no">Boat not required</string>
   <string name="attribute_scuba_yes">Scuba gear required</string>
-  <string name="attribute_scuba_no">Scuba gear not required</string>
   <string name="attribute_flashlight_yes">Flashlight required</string>
-  <string name="attribute_flashlight_no">Flashlight not required</string>
   <string name="attribute_uv_yes">UV light required</string>
-  <string name="attribute_uv_no">UV light not required</string>
   <string name="attribute_snowshoes_yes">Snowshoes required</string>
-  <string name="attribute_snowshoes_no">Snowshoes not required</string>
   <string name="attribute_skiis_yes">Cross country skis required</string>
-  <string name="attribute_skiis_no">Cross country skis not required</string>
   <string name="attribute_s_tool_yes">Special tools required</string>
-  <string name="attribute_s_tool_no">Special tools not required</string>
   <string name="attribute_wirelessbeacon_yes">Wireless beacon</string>
-  <string name="attribute_wirelessbeacon_no">No wireless beacon</string>
   <string name="attribute_treeclimbing_yes">Tree climbing required</string>
-  <string name="attribute_treeclimbing_no">Tree climbing not required</string>
 
   <!--  attributes (hazards -> present, not present) -->
   <string name="attribute_poisonoak_yes">Poisonous plants</string>
-  <string name="attribute_poisonoak_no">No poisonous plants</string>
   <string name="attribute_dangerousanimals_yes">Dangerous animals</string>
-  <string name="attribute_dangerousanimals_no">No dangerous animals</string>
   <string name="attribute_ticks_yes">Ticks</string>
-  <string name="attribute_ticks_no">No ticks</string>
   <string name="attribute_mine_yes">Abandoned mines</string>
-  <string name="attribute_mine_no">No abandoned mines</string>
   <string name="attribute_cliff_yes">Cliff / falling rocks</string>
-  <string name="attribute_cliff_no">No cliff / falling rocks</string>
   <string name="attribute_hunting_yes">Hunting</string>
-  <string name="attribute_hunting_no">No hunting</string>
   <string name="attribute_danger_yes">Dangerous area</string>
-  <string name="attribute_danger_no">No dangerous area</string>
   <string name="attribute_thorn_yes">Thorns</string>
-  <string name="attribute_thorn_no">No thorns</string>
 
   <!--  attributes (facilities -> yes, no) -->
   <string name="attribute_wheelchair_yes">Wheelchair accessible</string>
-  <string name="attribute_wheelchair_no">Not wheelchair accessible</string>
   <string name="attribute_parking_yes">Parking available</string>
-  <string name="attribute_parking_no">No parking available</string>
   <string name="attribute_public_yes">Public transportation</string>
-  <string name="attribute_public_no">No public transportation</string>
   <string name="attribute_water_yes">Drinking water nearby</string>
-  <string name="attribute_water_no">No drinking water nearby</string>
   <string name="attribute_restrooms_yes">Public restrooms nearby</string>
-  <string name="attribute_restrooms_no">No public restrooms nearby</string>
   <string name="attribute_phone_yes">Telephone nearby</string>
-  <string name="attribute_phone_no">No telephone nearby</string>
   <string name="attribute_picnic_yes">Picnic tables nearby</string>
-  <string name="attribute_picnic_no">No picnic tables nearby</string>
   <string name="attribute_camping_yes">Camping available</string>
-  <string name="attribute_camping_no">No camping available</string>
   <string name="attribute_stroller_yes">Stroller accessible</string>
-  <string name="attribute_stroller_no">Not stroller accessible</string>
   <string name="attribute_fuel_yes">Fuel nearby</string>
-  <string name="attribute_fuel_no">No fuel nearby</string>
   <string name="attribute_food_yes">Food nearby</string>
-  <string name="attribute_food_no">No food nearby</string>
 
   <!-- next things -->
   <string name="legal_note">To use services of Geocaching.com, terms and conditions of <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak disclaimer</a> have to be agreed.</string>
