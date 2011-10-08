@@ -4,8 +4,9 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Geopoint.MalformedCoordinateException;
-import cgeo.geocaching.utils.CollectionUtils;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.ContentValues;
@@ -1632,7 +1633,7 @@ public class cgData {
     public boolean saveLogCount(String geocode, Map<Integer, Integer> logCounts, boolean drop) {
         init();
 
-        if (StringUtils.isBlank(geocode) || CollectionUtils.isEmpty(logCounts)) {
+        if (StringUtils.isBlank(geocode) || MapUtils.isEmpty(logCounts)) {
             return false;
         }
 
