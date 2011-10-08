@@ -4,7 +4,7 @@
 // @description    Add Send to c:geo button to geocaching.com
 // @include        http://www.geocaching.com/seek/cache_details*
 // @include        http://www.geocaching.com/map/beta*
-// @version 	   0.23
+// @version 	   0.24
 // ==/UserScript==
 
 // Inserts javascript that will be called by the s2cgeo button
