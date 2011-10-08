@@ -85,7 +85,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
         if (gcIconDrawables == null || gcIconDrawables.isEmpty()) {
             for (String cacheType : cgBase.cacheTypesInv.keySet()) {
-                gcIconDrawables.put(cacheType, (Drawable) activity.getResources().getDrawable(cgBase.getCacheIcon(cacheType)));
+                gcIconDrawables.put(cacheType, activity.getResources().getDrawable(cgBase.getCacheIcon(cacheType)));
             }
         }
 
@@ -155,11 +155,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
     }
 
     public boolean isFilter() {
-        if (currentFilter != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return currentFilter != null;
     }
 
     public String getFilterName() {
@@ -253,14 +249,14 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
         try {
             if (statComparator != null) {
-                Collections.sort((List<cgCache>) list, statComparator);
+                Collections.sort(list, statComparator);
             } else {
                 if (coordsIn == null) {
                     return;
                 }
 
                 final DistanceComparator dstComparator = new DistanceComparator(coordsIn);
-                Collections.sort((List<cgCache>) list, dstComparator);
+                Collections.sort(list, dstComparator);
             }
             notifyDataSetChanged();
         } catch (Exception e) {
@@ -278,10 +274,10 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         if (list != null && list.isEmpty() == false && (System.currentTimeMillis() - lastSort) > 1000 && sort) {
             try {
                 if (statComparator != null) {
-                    Collections.sort((List<cgCache>) list, statComparator);
+                    Collections.sort(list, statComparator);
                 } else {
                     final DistanceComparator dstComparator = new DistanceComparator(coordsIn);
-                    Collections.sort((List<cgCache>) list, dstComparator);
+                    Collections.sort(list, dstComparator);
                 }
                 notifyDataSetChanged();
             } catch (Exception e) {
@@ -344,11 +340,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         setSelectMode(false, false);
         notifyDataSetChanged();
 
-        if (cleared > 0 || status) {
-            return true;
-        } else {
-            return false;
-        }
+        return cleared > 0 || status;
     }
 
     @Override
@@ -367,7 +359,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         View v = rowView;
 
         if (v == null) {
-            v = (View) inflater.inflate(R.layout.cache, null);
+            v = inflater.inflate(R.layout.cache, null);
 
             holder = new cgCacheView();
             holder.oneCache = (RelativeLayout) v.findViewById(R.id.one_cache);

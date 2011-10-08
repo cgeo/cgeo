@@ -659,7 +659,7 @@ public class cgeodetail extends AbstractActivity {
             detailsList.removeAllViews();
 
             // actionbar icon, default myster<
-            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable) getResources().getDrawable(cgBase.getCacheIcon(cache.type)), null, null, null);
+            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.type)), null, null, null);
 
             // cache name (full name)
             itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
