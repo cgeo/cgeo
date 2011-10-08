@@ -27,7 +27,6 @@ import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -96,14 +95,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private boolean noMapTokenShowed = false;
     // map status data
     private boolean followMyLocation = false;
-    private Integer centerLatitude = null;
-    private Integer centerLongitude = null;
-    private Integer spanLatitude = null;
-    private Integer spanLongitude = null;
-    private Integer centerLatitudeUsers = null;
-    private Integer centerLongitudeUsers = null;
-    private Integer spanLatitudeUsers = null;
-    private Integer spanLongitudeUsers = null;
     // threads
     private LoadTimer loadTimer = null;
     private UsersTimer usersTimer = null;
@@ -114,8 +105,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     //FIXME should be members of UsersTimer since started by it.
     private UsersThread usersThread = null;
     private DisplayUsersThread displayUsersThread = null;
-    //FIXME move to OnOptionsItemSelected
-    private LoadDetails loadDetailsThread = null;
     //Interthread communication flag
     private volatile boolean downloaded = false;
     // overlays
@@ -133,7 +122,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     /** Unused? */
     private List<cgCoord> coordinates = new ArrayList<cgCoord>();
     // storing for offline
-    private ProgressDialog waitDialog = null;
+    private ProgressDialogWithThread waitDialog = null;
     private int detailTotal = 0;
     private int detailProgress = 0;
     private Long detailProgressTime = 0L;
@@ -188,6 +177,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             }
         }
     };
+
+    /** The Handler for the Loading */
     final private Handler loadDetailsHandler = new Handler() {
 
         @Override
@@ -560,6 +551,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        StoppableThread loadDetailsThread = null;
         final int id = item.getItemId();
 
         if (id == MENU_TRAIL_MODE) {
@@ -602,18 +594,13 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return true;
                 }
 
-                waitDialog = new ProgressDialog(activity);
-                waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                waitDialog.setCancelable(true);
+                waitDialog = new ProgressDialogWithThread(activity, loadDetailsThread);
                 waitDialog.setMax(detailTotal);
                 waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
                     public void onCancel(DialogInterface arg0) {
                         try {
-                            if (loadDetailsThread != null) {
-                                loadDetailsThread.stopIt();
-                            }
-
+                            waitDialog.stopIt();
                             if (geo == null) {
                                 geo = app.startGeo(activity, geoUpdate, base, 0, 0);
                             }
@@ -840,16 +827,18 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     /**
      * loading timer Triggers every 250ms and checks for viewport change and starts a {@link LoadThread}.
      */
-    private class LoadTimer extends Thread {
+    private class LoadTimer extends StoppableThread {
+        private Integer centerLatitude = null;
+        private Integer centerLongitude = null;
+        private Integer spanLatitude = null;
+        private Integer spanLongitude = null;
 
         public LoadTimer() {
             super("Load Timer");
         }
 
-        private boolean stop = false;
-
         public void stopIt() {
-            stop = true;
+            super.stopIt();
 
             if (loadThread != null) {
                 loadThread.stopIt();
@@ -869,6 +858,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
         @Override
         public void run() {
+
             /** Time of last {@link LoadThread} run */
             long loadThreadRun = 0L;
 
@@ -881,7 +871,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             boolean force = false;
             long currentTime = 0;
 
-            while (!stop) {
+            while (!isStopped()) {
                 try {
                     sleep(250);
 
@@ -975,16 +965,18 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
      * Timer triggering every 250 ms to start the {@link UsersThread} for displaying user.
      */
 
-    private class UsersTimer extends Thread {
+    private class UsersTimer extends StoppableThread {
+        private Integer centerLatitudeUsers = null;
+        private Integer centerLongitudeUsers = null;
+        private Integer spanLatitudeUsers = null;
+        private Integer spanLongitudeUsers = null;
 
         public UsersTimer() {
             super("Users Timer");
         }
 
-        private boolean stop = false;
-
         public void stopIt() {
-            stop = true;
+            super.stopIt();
 
             if (usersThread != null) {
                 usersThread.stopIt();
@@ -1000,7 +992,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         @Override
         public void run() {
             /** Time of last {@link UsersThread} run */
-            long usersThreadRun = 0L;
+            long usersThreadRunTime = 0L;
             GeoPointImpl mapCenterNow;
             int centerLatitudeNow;
             int centerLongitudeNow;
@@ -1009,7 +1001,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             boolean moved = false;
             long currentTime = 0;
 
-            while (!stop) {
+            while (!isStopped()) {
                 try {
                     sleep(250);
 
@@ -1026,7 +1018,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
                         currentTime = System.currentTimeMillis();
 
-                        if (60000 < (currentTime - usersThreadRun)) {
+                        if (60000 < (currentTime - usersThreadRunTime)) {
                             moved = true;
                         } else if (centerLatitudeUsers == null || centerLongitudeUsers == null) {
                             moved = true;
@@ -1039,7 +1031,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         }
 
                         // save new values
-                        if (moved && (1000 < (currentTime - usersThreadRun))) {
+                        if (moved && (1000 < (currentTime - usersThreadRunTime))) {
                             if (usersThread != null && usersThread.isWorking()) {
                                 continue;
                             }
@@ -1049,8 +1041,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                             spanLatitudeUsers = spanLatitudeNow;
                             spanLongitudeUsers = spanLongitudeNow;
 
-                            usersThread = new UsersThread(centerLatitude, centerLongitude, spanLatitude, spanLongitude);
-                            usersThreadRun = System.currentTimeMillis();
+                            usersThread = new UsersThread(centerLatitudeUsers, centerLongitudeUsers, spanLatitudeUsers, spanLongitudeUsers);
+                            usersThreadRunTime = System.currentTimeMillis();
                             usersThread.start();
                         }
                     }
@@ -1078,10 +1070,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         @Override
         public void run() {
             try {
-                stop = false;
                 working = true;
 
-                if (stop) {
+                if (isStopped()) {
                     displayHandler.sendEmptyMessage(0);
                     working = false;
 
@@ -1108,7 +1099,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     downloaded = true;
                 }
 
-                if (stop) {
+                if (isStopped()) {
                     displayHandler.sendEmptyMessage(0);
                     working = false;
 
@@ -1131,7 +1122,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
                 }
 
-                if (stop) {
+                if (isStopped()) {
                     displayHandler.sendEmptyMessage(0);
                     working = false;
 
@@ -1145,7 +1136,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 displayThread = new DisplayThread(centerLat, centerLon, spanLat, spanLon);
                 displayThread.start();
 
-                if (stop) {
+                if (isStopped()) {
                     displayThread.stopIt();
                     displayHandler.sendEmptyMessage(0);
                     working = false;
@@ -1185,10 +1176,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         @Override
         public void run() { //first time we enter we have crappy long/lat....
             try {
-                stop = false;
                 working = true;
 
-                if (stop) {
+                if (isStopped()) {
                     displayHandler.sendEmptyMessage(0);
                     working = false;
 
@@ -1214,7 +1204,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     token = cgBase.getMapUserToken(noMapTokenHandler);
                 }
 
-                if (stop) {
+                if (isStopped()) {
                     displayHandler.sendEmptyMessage(0);
                     working = false;
 
@@ -1226,7 +1216,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     downloaded = true;
                 }
 
-                if (stop) {
+                if (isStopped()) {
                     displayHandler.sendEmptyMessage(0);
                     working = false;
 
@@ -1237,7 +1227,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 //TODO Merge not to show locally found caches
                 caches = app.getCaches(searchId, centerLat, centerLon, spanLat, spanLon);
 
-                if (stop) {
+                if (isStopped()) {
                     displayHandler.sendEmptyMessage(0);
                     working = false;
 
@@ -1270,7 +1260,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         @Override
         public void run() {
             try {
-                stop = false;
                 working = true;
 
                 if (mapView == null || caches == null) {
@@ -1286,7 +1275,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
                 if (!cachesProtected.isEmpty()) {
                     for (cgCache cacheOne : cachesProtected) {
-                        if (stop) {
+                        if (isStopped()) {
                             displayHandler.sendEmptyMessage(0);
                             working = false;
 
@@ -1319,7 +1308,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
                     cachesCnt = cachesProtected.size();
 
-                    if (stop) {
+                    if (isStopped()) {
                         displayHandler.sendEmptyMessage(0);
                         working = false;
 
@@ -1392,10 +1381,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         @Override
         public void run() {
             try {
-                stop = false;
                 working = true;
 
-                if (stop) {
+                if (isStopped()) {
                     return;
                 }
 
@@ -1418,7 +1406,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
                 users = cgBase.getGeocachersInViewport(Settings.getUsername(), latMin, latMax, lonMin, lonMax);
 
-                if (stop) {
+                if (isStopped()) {
                     return;
                 }
 
@@ -1449,7 +1437,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         @Override
         public void run() {
             try {
-                stop = false;
                 working = true;
 
                 if (mapView == null || users == null || users.isEmpty()) {
@@ -1463,7 +1450,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 OtherCachersOverlayItemImpl item = null;
 
                 for (cgUser userOne : users) {
-                    if (stop) {
+                    if (isStopped()) {
                         return;
                     }
 
@@ -1535,10 +1522,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
      * Abstract Base Class for the worker threads.
      */
 
-    private abstract class DoThread extends Thread {
+    private abstract class DoThread extends StoppableThread {
 
         protected boolean working = true;
-        protected boolean stop = false;
         protected long centerLat = 0L;
         protected long centerLon = 0L;
         protected long spanLat = 0L;
@@ -1553,10 +1539,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
         public synchronized boolean isWorking() {
             return working;
-        }
-
-        public synchronized void stopIt() {
-            stop = true;
         }
     }
 
@@ -1583,20 +1565,15 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
      * Thread to store the caches in the viewport. Started by Activity.
      */
 
-    private class LoadDetails extends Thread {
+    private class LoadDetails extends StoppableThread {
 
         private Handler handler = null;
         private List<String> geocodes = null;
-        private boolean stop = false;
         private long last = 0L;
 
-        public LoadDetails(Handler handlerIn, List<String> geocodesIn) {
+        public LoadDetails(Handler handlerIn, List<String> geocodes) {
             handler = handlerIn;
-            geocodes = geocodesIn;
-        }
-
-        public void stopIt() {
-            stop = true;
+            this.geocodes = geocodes;
         }
 
         @Override
@@ -1614,7 +1591,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
             for (String geocode : geocodes) {
                 try {
-                    if (stop) {
+                    if (isStopped()) {
                         break;
                     }
 
@@ -1632,7 +1609,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                             }
                         }
 
-                        if (stop) {
+                        if (isStopped()) {
                             Log.i(Settings.tag, "Stopped storing process.");
 
                             break;
@@ -1658,7 +1635,12 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
     }
 
-    // center map to desired location
+    /**
+     * center map to desired location
+     *
+     * @param coords
+     *            the new center
+     */
     private void centerMap(final Geopoint coords) {
         if (coords == null) {
             return;
