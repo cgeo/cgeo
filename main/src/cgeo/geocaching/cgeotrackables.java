@@ -46,7 +46,7 @@ public class cgeotrackables extends AbstractActivity {
                     return;
                 } else if (trackables.size() == 1) {
                     cgTrackable trackable = trackables.get(0);
-                    cgeotrackable.startActivity(cgeotrackables.this, trackable.guid, trackable.geocode, trackable.name);
+                    cgeotrackable.startActivity(cgeotrackables.this, trackable.getGuid(), trackable.getGeocode(), trackable.getName());
                     finish();
                     return;
                 } else {
@@ -56,13 +56,13 @@ public class cgeotrackables extends AbstractActivity {
 
                         Button oneTb = (Button) oneTbPre.findViewById(R.id.button);
 
-                        if (trackable.name != null) {
-                            oneTb.setText(Html.fromHtml(trackable.name).toString());
+                        if (trackable.getName() != null) {
+                            oneTb.setText(Html.fromHtml(trackable.getName()).toString());
                         } else {
                             oneTb.setText("some trackable");
                         }
                         oneTb.setClickable(true);
-                        oneTb.setOnClickListener(new buttonListener(trackable.guid, trackable.geocode, trackable.name));
+                        oneTb.setOnClickListener(new buttonListener(trackable.getGuid(), trackable.getGeocode(), trackable.getName()));
                         addList.addView(oneTbPre);
                     }
                 }
