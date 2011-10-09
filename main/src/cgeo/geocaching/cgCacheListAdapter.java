@@ -83,8 +83,8 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         pixelDensity = metrics.density;
 
-        if (gcIconDrawables == null || gcIconDrawables.isEmpty()) {
-            for (String cacheType : cgBase.cacheTypesInv.keySet()) {
+        if (gcIconDrawables.isEmpty()) {
+            for (final String cacheType : cgBase.cacheTypesInv.keySet()) {
                 gcIconDrawables.put(cacheType, activity.getResources().getDrawable(cgBase.getCacheIcon(cacheType)));
             }
         }
