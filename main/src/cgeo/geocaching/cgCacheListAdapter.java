@@ -782,27 +782,8 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
     private void checkChecked(int cnt) {
         // check how many caches are selected, if any block sorting of list
-        boolean statusChecked = false;
-        boolean statusSort = false;
         checked += cnt;
-
-        if (checked > 0) {
-            statusChecked = false;
-        } else {
-            statusChecked = true;
-        }
-
-        if (getSelectMode()) {
-            statusSort = false;
-        } else {
-            statusSort = true;
-        }
-
-        if (statusChecked == false || statusSort == false) {
-            sort = false;
-        } else {
-            sort = true;
-        }
+        sort = !(checked > 0 || getSelectMode());
 
         if (sort) {
             forceSort(coords);
