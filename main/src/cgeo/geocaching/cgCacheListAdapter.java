@@ -240,7 +240,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
     }
 
     public void forceSort(final Geopoint coordsIn) {
-        if (list == null || list.isEmpty() || !sort) {
+        if (CollectionUtils.isEmpty(list) || !sort) {
             return;
         }
 
@@ -268,7 +268,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
         coords = coordsIn;
 
-        if (list != null && !list.isEmpty() && (System.currentTimeMillis() - lastSort) > 1000 && sort) {
+        if (CollectionUtils.isNotEmpty(list) && (System.currentTimeMillis() - lastSort) > 1000 && sort) {
             try {
                 if (statComparator != null) {
                     Collections.sort(list, statComparator);

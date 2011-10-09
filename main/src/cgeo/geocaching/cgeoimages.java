@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.files.LocalStorage;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.ProgressDialog;
@@ -178,7 +179,7 @@ public class cgeoimages extends AbstractActivity {
         }
 
         final ArrayList<cgImage> images = extras.getParcelableArrayList("images");
-        if (images == null || images.isEmpty()) {
+        if (CollectionUtils.isEmpty(images)) {
             showToast(res.getString(R.string.warn_load_images));
             finish();
             return;

@@ -1267,7 +1267,7 @@ public class cgData {
             }
         }
 
-        if (cache.logCounts != null && !cache.logCounts.isEmpty()) {
+        if (MapUtils.isNotEmpty(cache.logCounts)) {
             if (!saveLogCount(cache.geocode, cache.logCounts)) {
                 statusOk = false;
             }
@@ -1809,7 +1809,7 @@ public class cgData {
         }
 
         List<cgCache> caches = loadCaches(geocodes, null, null, null, null, null, loadA, loadW, loadS, loadL, loadI, loadO);
-        if (caches != null && !caches.isEmpty()) {
+        if (CollectionUtils.isNotEmpty(caches)) {
             return caches.get(0);
         }
 
@@ -1934,9 +1934,13 @@ public class cgData {
                         //Extracted Method
                         cgCache cache = createCacheFromDatabaseContent(cursor);
 
+                        // FIXME: in the following code (and similar blocks below), the
+                        // cache.attributes entity probably does not need to be preserved,
+                        // and the resolution of the "if" statement could be simply
+                        // cache.attributes = attributes
                         if (loadA) {
-                            List<String> attributes = loadAttributes(cache.geocode);
-                            if (attributes != null && !attributes.isEmpty()) {
+                            final List<String> attributes = loadAttributes(cache.geocode);
+                            if (CollectionUtils.isNotEmpty(attributes)) {
                                 if (cache.attributes == null) {
                                     cache.attributes = new ArrayList<String>();
                                 } else {
@@ -1947,8 +1951,8 @@ public class cgData {
                         }
 
                         if (loadW) {
-                            List<cgWaypoint> waypoints = loadWaypoints(cache.geocode);
-                            if (waypoints != null && !waypoints.isEmpty()) {
+                            final List<cgWaypoint> waypoints = loadWaypoints(cache.geocode);
+                            if (CollectionUtils.isNotEmpty(waypoints)) {
                                 if (cache.waypoints == null) {
                                     cache.waypoints = new ArrayList<cgWaypoint>();
                                 } else {
@@ -1959,8 +1963,8 @@ public class cgData {
                         }
 
                         if (loadS) {
-                            List<cgImage> spoilers = loadSpoilers(cache.geocode);
-                            if (spoilers != null && !spoilers.isEmpty()) {
+                            final List<cgImage> spoilers = loadSpoilers(cache.geocode);
+                            if (CollectionUtils.isNotEmpty(spoilers)) {
                                 if (cache.spoilers == null) {
                                     cache.spoilers = new ArrayList<cgImage>();
                                 } else {
@@ -1971,8 +1975,8 @@ public class cgData {
                         }
 
                         if (loadL) {
-                            List<cgLog> logs = loadLogs(cache.geocode);
-                            if (logs != null && !logs.isEmpty()) {
+                            final List<cgLog> logs = loadLogs(cache.geocode);
+                            if (CollectionUtils.isNotEmpty(logs)) {
                                 if (cache.logs == null) {
                                     cache.logs = new ArrayList<cgLog>();
                                 } else {
@@ -1980,16 +1984,16 @@ public class cgData {
                                 }
                                 cache.logs.addAll(logs);
                             }
-                            Map<Integer, Integer> logCounts = loadLogCounts(cache.geocode);
-                            if (logCounts != null && !logCounts.isEmpty()) {
+                            final Map<Integer, Integer> logCounts = loadLogCounts(cache.geocode);
+                            if (MapUtils.isNotEmpty(logCounts)) {
                                 cache.logCounts.clear();
                                 cache.logCounts.putAll(logCounts);
                             }
                         }
 
                         if (loadI) {
-                            List<cgTrackable> inventory = loadInventory(cache.geocode);
-                            if (inventory != null && !inventory.isEmpty()) {
+                            final List<cgTrackable> inventory = loadInventory(cache.geocode);
+                            if (CollectionUtils.isNotEmpty(inventory)) {
                                 if (cache.inventory == null) {
                                     cache.inventory = new ArrayList<cgTrackable>();
                                 } else {

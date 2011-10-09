@@ -10,6 +10,7 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.AlertDialog;
@@ -1246,7 +1247,7 @@ public class cgeodetail extends AbstractActivity {
                 // add LogImages
                 LinearLayout logLayout = (LinearLayout) rowView.findViewById(R.id.log_layout);
 
-                if ((log.logImages != null) && (!log.logImages.isEmpty())) {
+                if (CollectionUtils.isNotEmpty(log.logImages)) {
 
                     final ArrayList<cgImage> logImages = new ArrayList<cgImage>(log.logImages);
 
@@ -1501,7 +1502,7 @@ public class cgeodetail extends AbstractActivity {
     }
 
     private void addToCalendarFn(int index) {
-        if (calendars == null || calendars.isEmpty()) {
+        if (MapUtils.isEmpty(calendars)) {
             return;
         }
 
@@ -1604,7 +1605,7 @@ public class cgeodetail extends AbstractActivity {
     }
 
     private void showSpoilers() {
-        if (cache == null || cache.spoilers == null || cache.spoilers.isEmpty()) {
+        if (cache == null || CollectionUtils.isEmpty(cache.spoilers)) {
             showToast(res.getString(R.string.err_detail_no_spoiler));
         }
 

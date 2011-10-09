@@ -2552,7 +2552,7 @@ public class cgeocaches extends AbstractListActivity {
     private void removeList() {
         // if there are no caches on this list, don't bother the user with questions.
         // there is no harm in deleting the list, he could recreate it easily
-        if (cacheList != null && cacheList.isEmpty()) {
+        if (CollectionUtils.isEmpty(cacheList)) {
             removeListInternal();
             return;
         }

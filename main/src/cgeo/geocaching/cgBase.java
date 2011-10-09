@@ -2189,7 +2189,7 @@ public class cgBase {
         }
 
         final cgCacheWrap caches = parseSearch(thread, url, page, showCaptcha);
-        if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
+        if (caches == null || CollectionUtils.isEmpty(caches.cacheList)) {
             Log.e(Settings.tag, "cgeoBase.searchByNextPage: No cache parsed");
             return searchId;
         }
@@ -2281,7 +2281,7 @@ public class cgBase {
         }
 
         final cgCacheWrap caches = parseSearch(thread, fullUri, page, showCaptcha);
-        if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
+        if (caches == null || CollectionUtils.isEmpty(caches.cacheList)) {
             Log.e(Settings.tag, "cgeoBase.searchByAny: No cache parsed");
         }
 
@@ -2355,7 +2355,7 @@ public class cgBase {
         }
 
         final cgCacheWrap caches = parseMapJSON(Uri.parse(uri).buildUpon().encodedQuery(params).build().toString(), page);
-        if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
+        if (caches == null || CollectionUtils.isEmpty(caches.cacheList)) {
             Log.e(Settings.tag, "cgeoBase.searchByViewport: No cache parsed");
         }
 
@@ -2563,7 +2563,7 @@ public class cgBase {
                 "ctl00$ContentBody$LogBookPanel1$LogButton", "Submit Log Entry",
                 "ctl00$ContentBody$uxVistOtherListingGC", "");
         setViewstates(viewstates, params);
-        if (trackables != null && !trackables.isEmpty()) { //  we have some trackables to proceed
+        if (CollectionUtils.isNotEmpty(trackables)) { //  we have some trackables to proceed
             final StringBuilder hdnSelected = new StringBuilder();
 
             for (cgTrackableLog tb : trackables) {
@@ -2617,7 +2617,7 @@ public class cgBase {
                 params.put("ctl00$ContentBody$LogBookPanel1$btnConfirm", "Yes");
                 params.put("ctl00$ContentBody$LogBookPanel1$uxLogInfo", logInfo);
                 params.put("ctl00$ContentBody$uxVistOtherListingGC", "");
-                if (trackables != null && !trackables.isEmpty()) { //  we have some trackables to proceed
+                if (CollectionUtils.isNotEmpty(trackables)) { //  we have some trackables to proceed
                     final StringBuilder hdnSelected = new StringBuilder();
 
                     for (cgTrackableLog tb : trackables) {

@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.activity.AbstractListActivity;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -42,7 +43,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
         @Override
         public void handleMessage(Message msg) {
             try {
-                if (files == null || files.isEmpty()) {
+                if (CollectionUtils.isEmpty(files)) {
                     if (waitDialog != null) {
                         waitDialog.dismiss();
                     }
