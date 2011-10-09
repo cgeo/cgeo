@@ -515,4 +515,49 @@ public class cgCache implements ICache {
         this.description = description;
     }
 
+    @Override
+    public boolean isFound() {
+        return found;
+    }
+
+    @Override
+    public boolean isFavorite() {
+        return favourite;
+    }
+
+    @Override
+    public boolean isWatchlist() {
+        return onWatchlist;
+    }
+
+    @Override
+    public Date getHiddenDate() {
+        return hidden;
+    }
+
+    @Override
+    public List<String> getAttributes() {
+        return attributes;
+    }
+
+    @Override
+    public List<cgTrackable> getInventory() {
+        return inventory;
+    }
+
+    @Override
+    public List<cgImage> getSpoilers() {
+        return spoilers;
+    }
+
+    @Override
+    public Map<Integer, Integer> getLogCounts() {
+        return logCounts;
+    }
+
+    @Override
+    public Integer getFavoritePoints() {
+        return favouriteCnt;
+    }
+
 }
