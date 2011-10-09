@@ -683,6 +683,7 @@ public class cgeocaches extends AbstractListActivity {
                 thread = new geocachesLoadByOwner(loadCachesHandler, username, cachetype);
                 thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
                 thread.start();
+                break;
             default:
                 title = "caches";
                 setTitle(title);
