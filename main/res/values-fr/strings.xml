@@ -695,7 +695,7 @@
   <string name="search_hbu_prefill">Propriétaire</string>
   <string name="search_hbu_button">Recherche par propriétaire</string>
   <string name="search_tb">Objet voyageur</string>
-  <string name="search_tb_hint">Identification de l\'objet voyageur</string>
+  <string name="search_tb_hint">Identifiant de l\'objet</string>
   <string name="search_tb_button">Recherche par objet voyageur</string>
   <string name="search_destination">Destination</string>
   <string name="search_direction_rel">De cette position</string>
