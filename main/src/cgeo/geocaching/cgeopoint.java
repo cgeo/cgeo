@@ -420,16 +420,7 @@ public class cgeopoint extends AbstractActivity {
             return;
         }
 
-        cgeocaches cachesActivity = new cgeocaches();
-
-        Intent cachesIntent = new Intent(this, cachesActivity.getClass());
-
-        cachesIntent.putExtra("type", "coordinate");
-        cachesIntent.putExtra("latitude", coords.getLatitude());
-        cachesIntent.putExtra("longitude", coords.getLongitude());
-        cachesIntent.putExtra("cachetype", Settings.getCacheType());
-
-        startActivity(cachesIntent);
+        cgeocaches.startActivityCoordinates(this, coords.getLatitude(), coords.getLongitude());
 
         finish();
     }

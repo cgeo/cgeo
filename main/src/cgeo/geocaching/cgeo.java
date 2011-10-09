@@ -285,9 +285,7 @@ public class cgeo extends AbstractActivity {
                 context.startActivity(new Intent(context, cgeoinit.class));
                 return true;
             case MENU_HISTORY:
-                final Intent cachesIntent = new Intent(context, cgeocaches.class);
-                cachesIntent.putExtra("type", "history");
-                context.startActivity(cachesIntent);
+                cgeocaches.startActivityHistory(context);
                 return true;
             case MENU_SCAN:
                 Intent intent = new Intent(SCAN_INTENT);
@@ -619,12 +617,7 @@ public class cgeo extends AbstractActivity {
         }
 
         findViewById(R.id.nearest).setPressed(true);
-        final Intent cachesIntent = new Intent(context, cgeocaches.class);
-        cachesIntent.putExtra("type", "nearest");
-        cachesIntent.putExtra("latitude", geo.coordsNow.getLatitude());
-        cachesIntent.putExtra("longitude", geo.coordsNow.getLongitude());
-        cachesIntent.putExtra("cachetype", Settings.getCacheType());
-        context.startActivity(cachesIntent);
+        cgeocaches.startActivityNearest(context, geo.coordsNow);
     }
 
     /**
@@ -633,9 +626,7 @@ public class cgeo extends AbstractActivity {
      */
     public void cgeoFindByOffline(View v) {
         findViewById(R.id.search_offline).setPressed(true);
-        final Intent cachesIntent = new Intent(context, cgeocaches.class);
-        cachesIntent.putExtra("type", "offline");
-        context.startActivity(cachesIntent);
+        cgeocaches.startActivityOffline(context);
     }
 
     /**

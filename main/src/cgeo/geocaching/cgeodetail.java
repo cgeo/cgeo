@@ -491,10 +491,10 @@ public class cgeodetail extends AbstractActivity {
             final int id = item.getItemId();
 
             if (id == 1) {
-                cgeocaches.startActivityCacheOwner(this, contextMenuUser);
+                cgeocaches.startActivityOwner(this, contextMenuUser);
                 return true;
             } else if (id == 2) {
-                cgeocaches.startActivityCacheUser(this, contextMenuUser);
+                cgeocaches.startActivityUserName(this, contextMenuUser);
                 return true;
             } else if (id == 3) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(contextMenuUser))));
