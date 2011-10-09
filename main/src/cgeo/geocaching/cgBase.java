@@ -2170,7 +2170,7 @@ public class cgBase {
         setViewstates(viewstates, params);
 
         String page = getResponseData(postRequest(uri, params));
-        if (checkLogin(page) == false) {
+        if (!checkLogin(page)) {
             final StatusCode loginState = login();
             if (loginState == StatusCode.NO_ERROR) {
                 page = getResponseData(postRequest(uri, params));
@@ -2217,7 +2217,7 @@ public class cgBase {
             return null;
         }
 
-        if (forceReload == false && reason == 0 && (app.isOffline(geocode, guid) || app.isThere(geocode, guid, true, true))) {
+        if (!forceReload && reason == 0 && (app.isOffline(geocode, guid) || app.isThere(geocode, guid, true, true))) {
             final String realGeocode = StringUtils.isNotBlank(geocode) ? geocode : app.getGeocode(guid);
 
             List<cgCache> cacheList = new ArrayList<cgCache>();
@@ -2516,7 +2516,7 @@ public class cgBase {
             return StatusCode.LOG_POST_ERROR;
         }
 
-        if (logTypes2.containsKey(logType) == false) {
+        if (!logTypes2.containsKey(logType)) {
             Log.e(Settings.tag, "cgeoBase.postLog: Unknown logtype");
             return StatusCode.LOG_POST_ERROR;
         }
@@ -2563,7 +2563,7 @@ public class cgBase {
                 "ctl00$ContentBody$LogBookPanel1$LogButton", "Submit Log Entry",
                 "ctl00$ContentBody$uxVistOtherListingGC", "");
         setViewstates(viewstates, params);
-        if (trackables != null && trackables.isEmpty() == false) { //  we have some trackables to proceed
+        if (trackables != null && !trackables.isEmpty()) { //  we have some trackables to proceed
             final StringBuilder hdnSelected = new StringBuilder();
 
             for (cgTrackableLog tb : trackables) {
@@ -2617,7 +2617,7 @@ public class cgBase {
                 params.put("ctl00$ContentBody$LogBookPanel1$btnConfirm", "Yes");
                 params.put("ctl00$ContentBody$LogBookPanel1$uxLogInfo", logInfo);
                 params.put("ctl00$ContentBody$uxVistOtherListingGC", "");
-                if (trackables != null && trackables.isEmpty() == false) { //  we have some trackables to proceed
+                if (trackables != null && !trackables.isEmpty()) { //  we have some trackables to proceed
                     final StringBuilder hdnSelected = new StringBuilder();
 
                     for (cgTrackableLog tb : trackables) {
@@ -2674,7 +2674,7 @@ public class cgBase {
             return StatusCode.LOG_POST_ERROR;
         }
 
-        if (logTypes2.containsKey(logType) == false) {
+        if (!logTypes2.containsKey(logType)) {
             Log.e(Settings.tag, "cgeoBase.postLogTrackable: Unknown logtype");
             return StatusCode.LOG_POST_ERROR;
         }
@@ -2711,7 +2711,7 @@ public class cgBase {
 
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("wid=" + tbid).build().toString();
         String page = getResponseData(postRequest(uri, params));
-        if (checkLogin(page) == false) {
+        if (!checkLogin(page)) {
             final StatusCode loginState = login();
             if (loginState == StatusCode.NO_ERROR) {
                 page = getResponseData(postRequest(uri, params));
@@ -2924,7 +2924,7 @@ public class cgBase {
         HttpResponse response = request(uri, params, xContentType, my, addF);
         String data = getResponseData(response);
 
-        if (checkLogin(data) == false) {
+        if (!checkLogin(data)) {
             if (login() == StatusCode.NO_ERROR) {
                 response = request(uri, params, xContentType, my, addF);
                 data = getResponseData(response);
@@ -3516,9 +3516,7 @@ public class cgBase {
                 return null;
             }
 
-            String status = response.getString("status");
-
-            if (status == null || status.equalsIgnoreCase("OK") == false) {
+            if (!StringUtils.equalsIgnoreCase(response.getString("status"), "OK")) {
                 return null;
             }
 

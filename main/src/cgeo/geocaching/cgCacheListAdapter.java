@@ -176,17 +176,17 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         return checked;
     }
 
-    public boolean setSelectMode(boolean status, boolean clear) {
+    public boolean setSelectMode(final boolean status, final boolean clear) {
         selectMode = status;
 
-        if (selectMode == false && clear) {
-            for (cgCache cache : list) {
+        if (!selectMode && clear) {
+            for (final cgCache cache : list) {
                 cache.statusChecked = false;
                 cache.statusCheckedView = false;
             }
             checked = 0;
         } else if (selectMode) {
-            for (cgCache cache : list) {
+            for (final cgCache cache : list) {
                 cache.statusCheckedView = false;
             }
         }
@@ -204,14 +204,14 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
     public void switchSelectMode() {
         selectMode = !selectMode;
 
-        if (selectMode == false) {
-            for (cgCache cache : list) {
+        if (!selectMode) {
+            for (final cgCache cache : list) {
                 cache.statusChecked = false;
                 cache.statusCheckedView = false;
             }
             checked = 0;
-        } else if (selectMode) {
-            for (cgCache cache : list) {
+        } else {
+            for (final cgCache cache : list) {
                 cache.statusCheckedView = false;
             }
         }
@@ -240,10 +240,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
     }
 
     public void forceSort(final Geopoint coordsIn) {
-        if (list == null || list.isEmpty()) {
-            return;
-        }
-        if (sort == false) {
+        if (list == null || list.isEmpty() || !sort) {
             return;
         }
 
@@ -271,7 +268,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
         coords = coordsIn;
 
-        if (list != null && list.isEmpty() == false && (System.currentTimeMillis() - lastSort) > 1000 && sort) {
+        if (list != null && !list.isEmpty() && (System.currentTimeMillis() - lastSort) > 1000 && sort) {
             try {
                 if (statComparator != null) {
                     Collections.sort(list, statComparator);
@@ -422,20 +419,20 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             }
         } else {
             holder.checkbox.setChecked(false);
-            if (cache.statusCheckedView == false) {
-                holder.oneInfo.clearAnimation();
-            } else {
+            if (cache.statusCheckedView) {
                 moveLeft(holder, cache, false);
+            } else {
+                holder.oneInfo.clearAnimation();
             }
         }
 
         holder.checkbox.setOnClickListener(new checkBoxListener(cache));
 
-        if (distances.contains(holder.distance) == false) {
+        if (!distances.contains(holder.distance)) {
             distances.add(holder.distance);
         }
         holder.distance.setContent(base, cache.coords);
-        if (compasses.contains(holder.direction) == false) {
+        if (!compasses.contains(holder.direction)) {
             compasses.add(holder.direction);
         }
         holder.direction.setContent(cache.coords);
@@ -678,9 +675,8 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
         // tap on item
         public void onClick(View view) {
-            if (touch == false) {
+            if (!touch) {
                 touch = true;
-
                 return;
             }
 
@@ -697,9 +693,8 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
         // long tap on item
         public boolean onLongClick(View view) {
-            if (touch == false) {
+            if (!touch) {
                 touch = true;
-
                 return true;
             }
 
@@ -710,7 +705,6 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         public boolean onTouch(View view, MotionEvent event) {
             if (gestureDetector.onTouchEvent(event)) {
                 touch = false;
-
                 return true;
             }
 
@@ -755,7 +749,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
                     return true;
                 } else if ((e1.getX() - e2.getX()) > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > Math.abs(velocityY)) {
                     // right to left swipe
-                    if (cache.statusChecked == false) {
+                    if (!cache.statusChecked) {
                         return true;
                     }
 

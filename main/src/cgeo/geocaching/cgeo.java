@@ -448,7 +448,7 @@ public class cgeo extends AbstractActivity {
         (new countBubbleUpdate()).start();
         (new cleanDatabase()).start();
 
-        if (Settings.getCacheType() != null && cgBase.cacheTypesInv.containsKey(Settings.getCacheType()) == false) {
+        if (Settings.getCacheType() != null && !cgBase.cacheTypesInv.containsKey(Settings.getCacheType())) {
             Settings.setCacheType(null);
         }
 
@@ -565,7 +565,7 @@ public class cgeo extends AbstractActivity {
                         if (addCoords == null) {
                             navLocation.setText(res.getString(R.string.loc_no_addr));
                         }
-                        if (addCoords == null || (geo.coordsNow.distanceTo(addCoords) > 0.5 && addressObtaining == false)) {
+                        if (addCoords == null || (geo.coordsNow.distanceTo(addCoords) > 0.5 && !addressObtaining)) {
                             (new obtainAddress()).start();
                         }
                     } else {
@@ -665,7 +665,7 @@ public class cgeo extends AbstractActivity {
             }
 
             int checks = 0;
-            while (app.storageStatus() == false) {
+            while (!app.storageStatus()) {
                 try {
                     wait(500);
                     checks++;

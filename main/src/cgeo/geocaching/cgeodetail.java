@@ -996,7 +996,7 @@ public class cgeodetail extends AbstractActivity {
                     showDesc.setOnTouchListener(null);
                     showDesc.setOnClickListener(null);
                 }
-            } else if (longDescDisplayed == false && StringUtils.isNotBlank(cache.getDescription())) {
+            } else if (!longDescDisplayed && StringUtils.isNotBlank(cache.getDescription())) {
                 ((LinearLayout) findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
 
                 Button showDesc = (Button) findViewById(R.id.show_description);
@@ -1031,7 +1031,7 @@ public class cgeodetail extends AbstractActivity {
                     final TextView identification = (TextView) waypointView.findViewById(R.id.identification);
 
                     ((TextView) waypointView.findViewById(R.id.type)).setText(cgBase.waypointTypes.get(wpt.type));
-                    if (wpt.getPrefix().equalsIgnoreCase("OWN") == false) {
+                    if (!wpt.getPrefix().equalsIgnoreCase("OWN")) {
                         identification.setText(wpt.getPrefix().trim() + "/" + wpt.lookup.trim());
                     } else {
                         identification.setText(res.getString(R.string.waypoint_custom));
@@ -1382,7 +1382,7 @@ public class cgeodetail extends AbstractActivity {
     }
 
     public void loadLongDesc() {
-        if (waitDialog == null || waitDialog.isShowing() == false) {
+        if (waitDialog == null || !waitDialog.isShowing()) {
             descDialog = ProgressDialog.show(this, null, res.getString(R.string.cache_dialog_loading_description), true);
             descDialog.setCancelable(true);
         }

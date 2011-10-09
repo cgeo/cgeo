@@ -18,7 +18,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDoneException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
-import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
@@ -224,7 +223,7 @@ public class cgData {
     }
 
     public synchronized void init() {
-        if (databaseRW == null || databaseRW.isOpen() == false) {
+        if (databaseRW == null || !databaseRW.isOpen()) {
             try {
                 if (dbHelper == null) {
                     dbHelper = new cgDbHelper(context);
@@ -324,7 +323,7 @@ public class cgData {
     }
 
     public String backupDatabase() {
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) == false) {
+        if (!LocalStorage.isExternalStorageAvailable()) {
             Log.w(Settings.tag, "Database wasn't backed up: no external memory");
             return null;
         }
@@ -353,7 +352,7 @@ public class cgData {
     }
 
     public boolean restoreDatabase() {
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) == false) {
+        if (!LocalStorage.isExternalStorageAvailable()) {
             Log.w(Settings.tag, "Database wasn't restored: no external memory");
             return false;
         }
@@ -1038,7 +1037,7 @@ public class cgData {
                 return false;
             }
 
-            if (checkTime && detailed == false && dataUpdated < (System.currentTimeMillis() - (3 * 24 * 60 * 60 * 1000))) {
+            if (checkTime && !detailed && dataUpdated < (System.currentTimeMillis() - (3 * 24 * 60 * 60 * 1000))) {
                 // we want to check time for short cache, but data are older than 3 hours
                 return false;
             }
@@ -1268,7 +1267,7 @@ public class cgData {
             }
         }
 
-        if (cache.logCounts != null && cache.logCounts.isEmpty() == false) {
+        if (cache.logCounts != null && !cache.logCounts.isEmpty()) {
             if (!saveLogCount(cache.geocode, cache.logCounts)) {
                 statusOk = false;
             }
@@ -1280,7 +1279,7 @@ public class cgData {
             }
         }
 
-        if (statusOk == false) {
+        if (!statusOk) {
             cache.detailed = false;
             cache.detailedUpdate = 0L;
         }
@@ -1810,7 +1809,7 @@ public class cgData {
         }
 
         List<cgCache> caches = loadCaches(geocodes, null, null, null, null, null, loadA, loadW, loadS, loadL, loadI, loadO);
-        if (caches != null && caches.isEmpty() == false) {
+        if (caches != null && !caches.isEmpty()) {
             return caches.get(0);
         }
 
@@ -1937,7 +1936,7 @@ public class cgData {
 
                         if (loadA) {
                             List<String> attributes = loadAttributes(cache.geocode);
-                            if (attributes != null && attributes.isEmpty() == false) {
+                            if (attributes != null && !attributes.isEmpty()) {
                                 if (cache.attributes == null) {
                                     cache.attributes = new ArrayList<String>();
                                 } else {
@@ -1949,7 +1948,7 @@ public class cgData {
 
                         if (loadW) {
                             List<cgWaypoint> waypoints = loadWaypoints(cache.geocode);
-                            if (waypoints != null && waypoints.isEmpty() == false) {
+                            if (waypoints != null && !waypoints.isEmpty()) {
                                 if (cache.waypoints == null) {
                                     cache.waypoints = new ArrayList<cgWaypoint>();
                                 } else {
@@ -1961,7 +1960,7 @@ public class cgData {
 
                         if (loadS) {
                             List<cgImage> spoilers = loadSpoilers(cache.geocode);
-                            if (spoilers != null && spoilers.isEmpty() == false) {
+                            if (spoilers != null && !spoilers.isEmpty()) {
                                 if (cache.spoilers == null) {
                                     cache.spoilers = new ArrayList<cgImage>();
                                 } else {
@@ -1973,7 +1972,7 @@ public class cgData {
 
                         if (loadL) {
                             List<cgLog> logs = loadLogs(cache.geocode);
-                            if (logs != null && logs.isEmpty() == false) {
+                            if (logs != null && !logs.isEmpty()) {
                                 if (cache.logs == null) {
                                     cache.logs = new ArrayList<cgLog>();
                                 } else {
@@ -1982,7 +1981,7 @@ public class cgData {
                                 cache.logs.addAll(logs);
                             }
                             Map<Integer, Integer> logCounts = loadLogCounts(cache.geocode);
-                            if (logCounts != null && logCounts.isEmpty() == false) {
+                            if (logCounts != null && !logCounts.isEmpty()) {
                                 cache.logCounts.clear();
                                 cache.logCounts.putAll(logCounts);
                             }
@@ -1990,7 +1989,7 @@ public class cgData {
 
                         if (loadI) {
                             List<cgTrackable> inventory = loadInventory(cache.geocode);
-                            if (inventory != null && inventory.isEmpty() == false) {
+                            if (inventory != null && !inventory.isEmpty()) {
                                 if (cache.inventory == null) {
                                     cache.inventory = new ArrayList<cgTrackable>();
                                 } else {
@@ -2518,7 +2517,7 @@ public class cgData {
         int count = 0;
         try {
             String sql = "select count(_id) from " + dbTableCaches; // this default is not used, but we like to have variables initialized
-            if (detailedOnly == false) {
+            if (!detailedOnly) {
                 if (cachetype == null) {
                     sql = "select count(_id) from " + dbTableCaches + listSql;
                 } else {
@@ -3290,7 +3289,7 @@ public class cgData {
     }
 
     public synchronized boolean status() {
-        if (databaseRO == null || databaseRW == null || initialized == false) {
+        if (databaseRO == null || databaseRW == null || !initialized) {
             return false;
         }
 

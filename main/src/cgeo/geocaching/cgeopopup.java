@@ -155,7 +155,7 @@ public class cgeopopup extends AbstractActivity {
                 menu.findItem(5).setVisible(false);
             }
 
-            boolean visitPossible = fromDetail == false && Settings.isLogin();
+            boolean visitPossible = !fromDetail && Settings.isLogin();
             menu.findItem(MENU_LOG_VISIT).setEnabled(visitPossible);
         } catch (Exception e) {
             // nothing
@@ -386,7 +386,7 @@ public class cgeopopup extends AbstractActivity {
             }
 
             // more details
-            if (fromDetail == false) {
+            if (!fromDetail) {
                 ((LinearLayout) findViewById(R.id.more_details_box)).setVisibility(View.VISIBLE);
 
                 Button buttonMore = (Button) findViewById(R.id.more_details);
@@ -405,7 +405,7 @@ public class cgeopopup extends AbstractActivity {
                 ((LinearLayout) findViewById(R.id.more_details_box)).setVisibility(View.GONE);
             }
 
-            if (fromDetail == false) {
+            if (!fromDetail) {
                 ((LinearLayout) findViewById(R.id.offline_box)).setVisibility(View.VISIBLE);
 
                 // offline use
