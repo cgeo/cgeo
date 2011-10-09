@@ -47,12 +47,11 @@ import java.util.Set;
 
 public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
-    private Resources res = null;
-    private List<cgCache> list = null;
+    final private Resources res;
+    final private List<cgCache> list;
     private cgCacheView holder = null;
     private LayoutInflater inflater = null;
-    private Activity activity = null;
-    private cgBase base = null;
+    final private cgBase base;
     private CacheComparator statComparator = null;
     private boolean historic = false;
     private Geopoint coords = null;
@@ -61,11 +60,11 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
     private boolean sort = true;
     private int checked = 0;
     private boolean selectMode = false;
-    private static Map<String, Drawable> gcIconDrawables = new HashMap<String, Drawable>();
-    private Set<cgCompassMini> compasses = new LinkedHashSet<cgCompassMini>();
-    private Set<cgDistanceView> distances = new LinkedHashSet<cgDistanceView>();
-    private int[] ratingBcgs = new int[3];
-    private float pixelDensity = 1f;
+    final private static Map<String, Drawable> gcIconDrawables = new HashMap<String, Drawable>();
+    final private Set<cgCompassMini> compasses = new LinkedHashSet<cgCompassMini>();
+    final private Set<cgDistanceView> distances = new LinkedHashSet<cgDistanceView>();
+    final private int[] ratingBcgs = new int[3];
+    final private float pixelDensity;
     private static final int SWIPE_MIN_DISTANCE = 60;
     private static final int SWIPE_MAX_OFF_PATH = 100;
     private static final int SWIPE_DISTANCE = 80;
@@ -73,22 +72,19 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
     private cgFilter currentFilter = null;
     private List<cgCache> originalList = null;
 
-    public cgCacheListAdapter(Activity activityIn, List<cgCache> listIn, cgBase baseIn) {
-        super(activityIn, 0, listIn);
+    public cgCacheListAdapter(final Activity activity, final List<cgCache> list, final cgBase base) {
+        super(activity, 0, list);
 
-        res = activityIn.getResources();
-        activity = activityIn;
-        list = listIn;
-        base = baseIn;
+        this.res = activity.getResources();
+        this.list = list;
+        this.base = base;
 
-        DisplayMetrics metrics = new DisplayMetrics();
+        final DisplayMetrics metrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         pixelDensity = metrics.density;
 
-        if (gcIconDrawables.isEmpty()) {
-            for (final String cacheType : cgBase.cacheTypesInv.keySet()) {
-                gcIconDrawables.put(cacheType, activity.getResources().getDrawable(cgBase.getCacheIcon(cacheType)));
-            }
+        for (final String cacheType : cgBase.cacheTypesInv.keySet()) {
+            gcIconDrawables.put(cacheType, activity.getResources().getDrawable(cgBase.getCacheIcon(cacheType)));
         }
 
         if (Settings.isLightSkin()) {
@@ -246,21 +242,17 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             return;
         }
 
-        try {
-            if (statComparator != null) {
-                Collections.sort(list, statComparator);
-            } else {
-                if (coordsIn == null) {
-                    return;
-                }
-
-                final DistanceComparator dstComparator = new DistanceComparator(coordsIn);
-                Collections.sort(list, dstComparator);
+        if (statComparator != null) {
+            Collections.sort(list, statComparator);
+        } else {
+            if (coordsIn == null) {
+                return;
             }
-            notifyDataSetChanged();
-        } catch (Exception e) {
-            Log.w(Settings.tag, "cgCacheListAdapter.setActualCoordinates: failed to sort caches in list");
+
+            final DistanceComparator dstComparator = new DistanceComparator(coordsIn);
+            Collections.sort(list, dstComparator);
         }
+        notifyDataSetChanged();
     }
 
     public void setActualCoordinates(final Geopoint coordsIn) {
@@ -271,18 +263,8 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         coords = coordsIn;
 
         if (CollectionUtils.isNotEmpty(list) && (System.currentTimeMillis() - lastSort) > 1000 && sort) {
-            try {
-                if (statComparator != null) {
-                    Collections.sort(list, statComparator);
-                } else {
-                    final DistanceComparator dstComparator = new DistanceComparator(coordsIn);
-                    Collections.sort(list, dstComparator);
-                }
-                notifyDataSetChanged();
-            } catch (Exception e) {
-                Log.w(Settings.tag, "cgCacheListAdapter.setActualCoordinates: failed to sort caches in list");
-            }
-
+            Collections.sort(list, statComparator != null ? statComparator : new DistanceComparator(coordsIn));
+            notifyDataSetChanged();
             lastSort = System.currentTimeMillis();
         }
 
@@ -502,17 +484,9 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             holder.directionLayout.setVisibility(View.GONE);
             holder.distance.clear();
 
-            Bitmap dirImgPre = null;
-            Bitmap dirImg = null;
-            try {
-                dirImgPre = BitmapFactory.decodeFile(cgDirectionImg.getDirectionFile(cache.geocode).getPath());
-                dirImg = dirImgPre.copy(Bitmap.Config.ARGB_8888, true);
-
-                dirImgPre.recycle();
-                dirImgPre = null;
-            } catch (Exception e) {
-                // nothing
-            }
+            final Bitmap dirImgPre = BitmapFactory.decodeFile(cgDirectionImg.getDirectionFile(cache.geocode).getPath());
+            final Bitmap dirImg = dirImgPre.copy(Bitmap.Config.ARGB_8888, true);
+            dirImgPre.recycle();
 
             if (dirImg != null) {
                 if (!Settings.isLightSkin()) {
@@ -783,46 +757,34 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             return;
         }
 
-        try {
-            holder.checkbox.setChecked(cache.statusChecked);
+        holder.checkbox.setChecked(cache.statusChecked);
 
-            // slide cache info
-            Animation showCheckbox = new TranslateAnimation(0, (int) (SWIPE_DISTANCE * pixelDensity), 0, 0);
-            showCheckbox.setRepeatCount(0);
-            if (force) {
-                showCheckbox.setDuration(0);
-            } else {
-                showCheckbox.setDuration(400);
-            }
-            showCheckbox.setFillEnabled(true);
-            showCheckbox.setFillAfter(true);
-            showCheckbox.setInterpolator(new AccelerateDecelerateInterpolator());
+        // slide cache info
+        final Animation showCheckbox = new TranslateAnimation(0, (int) (SWIPE_DISTANCE * pixelDensity), 0, 0);
+        showCheckbox.setRepeatCount(0);
+        showCheckbox.setDuration(force ? 0 : 400);
+        showCheckbox.setFillEnabled(true);
+        showCheckbox.setFillAfter(true);
+        showCheckbox.setInterpolator(new AccelerateDecelerateInterpolator());
 
-            // dim cache info
-            Animation dimInfo = new AlphaAnimation(1.0f, SWIPE_OPACITY);
-            dimInfo.setRepeatCount(0);
-            if (force) {
-                dimInfo.setDuration(0);
-            } else {
-                dimInfo.setDuration(400);
-            }
-            dimInfo.setFillEnabled(true);
-            dimInfo.setFillAfter(true);
-            dimInfo.setInterpolator(new AccelerateDecelerateInterpolator());
+        // dim cache info
+        final Animation dimInfo = new AlphaAnimation(1.0f, SWIPE_OPACITY);
+        dimInfo.setRepeatCount(0);
+        dimInfo.setDuration(force ? 0 : 400);
+        dimInfo.setFillEnabled(true);
+        dimInfo.setFillAfter(true);
+        dimInfo.setInterpolator(new AccelerateDecelerateInterpolator());
 
-            // animation set (container)
-            AnimationSet selectAnimation = new AnimationSet(true);
-            selectAnimation.setFillEnabled(true);
-            selectAnimation.setFillAfter(true);
+        // animation set (container)
+        final AnimationSet selectAnimation = new AnimationSet(true);
+        selectAnimation.setFillEnabled(true);
+        selectAnimation.setFillAfter(true);
 
-            selectAnimation.addAnimation(showCheckbox);
-            selectAnimation.addAnimation(dimInfo);
+        selectAnimation.addAnimation(showCheckbox);
+        selectAnimation.addAnimation(dimInfo);
 
-            holder.oneInfo.startAnimation(selectAnimation);
-            cache.statusCheckedView = true;
-        } catch (Exception e) {
-            // nothing
-        }
+        holder.oneInfo.startAnimation(selectAnimation);
+        cache.statusCheckedView = true;
     }
 
     private void moveLeft(cgCacheView holder, cgCache cache, boolean force) {
@@ -830,45 +792,33 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             return;
         }
 
-        try {
-            holder.checkbox.setChecked(cache.statusChecked);
+        holder.checkbox.setChecked(cache.statusChecked);
 
-            // slide cache info
-            Animation hideCheckbox = new TranslateAnimation((int) (SWIPE_DISTANCE * pixelDensity), 0, 0, 0);
-            hideCheckbox.setRepeatCount(0);
-            if (force) {
-                hideCheckbox.setDuration(0);
-            } else {
-                hideCheckbox.setDuration(400);
-            }
-            hideCheckbox.setFillEnabled(true);
-            hideCheckbox.setFillAfter(true);
-            hideCheckbox.setInterpolator(new AccelerateDecelerateInterpolator());
+        // slide cache info
+        final Animation hideCheckbox = new TranslateAnimation((int) (SWIPE_DISTANCE * pixelDensity), 0, 0, 0);
+        hideCheckbox.setRepeatCount(0);
+        hideCheckbox.setDuration(force ? 0 : 400);
+        hideCheckbox.setFillEnabled(true);
+        hideCheckbox.setFillAfter(true);
+        hideCheckbox.setInterpolator(new AccelerateDecelerateInterpolator());
 
-            // brighten cache info
-            Animation brightenInfo = new AlphaAnimation(SWIPE_OPACITY, 1.0f);
-            brightenInfo.setRepeatCount(0);
-            if (force) {
-                brightenInfo.setDuration(0);
-            } else {
-                brightenInfo.setDuration(400);
-            }
-            brightenInfo.setFillEnabled(true);
-            brightenInfo.setFillAfter(true);
-            brightenInfo.setInterpolator(new AccelerateDecelerateInterpolator());
+        // brighten cache info
+        final Animation brightenInfo = new AlphaAnimation(SWIPE_OPACITY, 1.0f);
+        brightenInfo.setRepeatCount(0);
+        brightenInfo.setDuration(force ? 0 : 400);
+        brightenInfo.setFillEnabled(true);
+        brightenInfo.setFillAfter(true);
+        brightenInfo.setInterpolator(new AccelerateDecelerateInterpolator());
 
-            // animation set (container)
-            AnimationSet selectAnimation = new AnimationSet(true);
-            selectAnimation.setFillEnabled(true);
-            selectAnimation.setFillAfter(true);
+        // animation set (container)
+        final AnimationSet selectAnimation = new AnimationSet(true);
+        selectAnimation.setFillEnabled(true);
+        selectAnimation.setFillAfter(true);
 
-            selectAnimation.addAnimation(hideCheckbox);
-            selectAnimation.addAnimation(brightenInfo);
+        selectAnimation.addAnimation(hideCheckbox);
+        selectAnimation.addAnimation(brightenInfo);
 
-            holder.oneInfo.startAnimation(selectAnimation);
-            cache.statusCheckedView = false;
-        } catch (Exception e) {
-            // nothing
-        }
+        holder.oneInfo.startAnimation(selectAnimation);
+        cache.statusCheckedView = false;
     }
 }
