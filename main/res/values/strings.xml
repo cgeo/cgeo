@@ -938,6 +938,9 @@
     · new: cleanup the cgeo private cache directory when caches are removed from database\n
     · new: display user avatar when checking login/password from geocaching.com\n
     \n\n
+    <b>09.10.2011</b>\n
+    · fix: small bugs due to GC.com change\n
+    \n\n
     <b>06.10.2011</b>\n
     · new: import waypoint files from pocket query\n
     · new: automatically filter out counter images from cache description\n
