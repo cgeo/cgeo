@@ -1733,7 +1733,7 @@ public class cgBase {
         try {
             final Matcher matcherGeocode = PATTERN_TRACKABLE_Geocode.matcher(page);
             if (matcherGeocode.find() && matcherGeocode.groupCount() > 0) {
-                trackable.setGeocode(matcherGeocode.group(1).toUpperCase());
+                trackable.setGeocode(matcherGeocode.group(1).trim().toUpperCase());
             }
         } catch (Exception e) {
             // failed to parse trackable geocode
@@ -1744,7 +1744,7 @@ public class cgBase {
         try {
             final Matcher matcherTrackableId = PATTERN_TRACKABLE_TrackableId.matcher(page);
             if (matcherTrackableId.find() && matcherTrackableId.groupCount() > 0) {
-                trackable.setGuid(matcherTrackableId.group(1));
+                trackable.setGuid(matcherTrackableId.group(1).trim());
             }
         } catch (Exception e) {
             // failed to parse trackable id
@@ -1755,7 +1755,7 @@ public class cgBase {
         try {
             final Matcher matcherTrackableIcon = PATTERN_TRACKABLE_Icon.matcher(page);
             if (matcherTrackableIcon.find() && matcherTrackableIcon.groupCount() > 0) {
-                trackable.setIconUrl(matcherTrackableIcon.group(1));
+                trackable.setIconUrl(matcherTrackableIcon.group(1).trim());
             }
         } catch (Exception e) {
             // failed to parse trackable icon
@@ -1766,7 +1766,7 @@ public class cgBase {
         try {
             final Matcher matcherName = PATTERN_TRACKABLE_Name.matcher(page);
             if (matcherName.find() && matcherName.groupCount() > 1) {
-                trackable.setName(matcherName.group(2));
+                trackable.setName(matcherName.group(2).trim());
             }
         } catch (Exception e) {
             // failed to parse trackable name
@@ -1778,7 +1778,7 @@ public class cgBase {
             try {
                 final Matcher matcherType = PATTERN_TRACKABLE_Type.matcher(page);
                 if (matcherType.find() && matcherType.groupCount() > 0) {
-                    trackable.setType(matcherType.group(1));
+                    trackable.setType(matcherType.group(1).trim());
                 }
             } catch (Exception e) {
                 // failed to parse trackable type
@@ -1791,7 +1791,7 @@ public class cgBase {
             final Matcher matcherOwner = PATTERN_TRACKABLE_Owner.matcher(page);
             if (matcherOwner.find() && matcherOwner.groupCount() > 0) {
                 trackable.setOwnerGuid(matcherOwner.group(1));
-                trackable.setOwner(matcherOwner.group(2));
+                trackable.setOwner(matcherOwner.group(2).trim());
             }
         } catch (Exception e) {
             // failed to parse trackable owner name
@@ -1802,7 +1802,7 @@ public class cgBase {
         try {
             final Matcher matcherOrigin = PATTERN_TRACKABLE_Origin.matcher(page);
             if (matcherOrigin.find() && matcherOrigin.groupCount() > 0) {
-                trackable.setOrigin(matcherOrigin.group(1));
+                trackable.setOrigin(matcherOrigin.group(1).trim());
             }
         } catch (Exception e) {
             // failed to parse trackable origin
@@ -1814,14 +1814,14 @@ public class cgBase {
             final Matcher matcherSpottedCache = PATTERN_TRACKABLE_SpottedCache.matcher(page);
             if (matcherSpottedCache.find() && matcherSpottedCache.groupCount() > 0) {
                 trackable.setSpottedGuid(matcherSpottedCache.group(1));
-                trackable.setSpottedName(matcherSpottedCache.group(2));
+                trackable.setSpottedName(matcherSpottedCache.group(2).trim());
                 trackable.setSpottedType(cgTrackable.SPOTTED_CACHE);
             }
 
             final Matcher matcherSpottedUser = PATTERN_TRACKABLE_SpottedUser.matcher(page);
             if (matcherSpottedUser.find() && matcherSpottedUser.groupCount() > 0) {
                 trackable.setSpottedGuid(matcherSpottedUser.group(1));
-                trackable.setSpottedName(matcherSpottedUser.group(2));
+                trackable.setSpottedName(matcherSpottedUser.group(2).trim());
                 trackable.setSpottedType(cgTrackable.SPOTTED_USER);
             }
 
@@ -1884,7 +1884,7 @@ public class cgBase {
         try {
             final Matcher matcherGoal = PATTERN_TRACKABLE_GOAL.matcher(page);
             if (matcherGoal.find() && matcherGoal.groupCount() > 0) {
-                trackable.setGoal(matcherGoal.group(1));
+                trackable.setGoal(matcherGoal.group(1).trim());
             }
         } catch (Exception e) {
             // failed to parse trackable goal
@@ -1895,8 +1895,8 @@ public class cgBase {
         try {
             final Matcher matcherDetailsImage = PATTERN_TRACKABLE_DETAILSIMAGE.matcher(page);
             if (matcherDetailsImage.find() && matcherDetailsImage.groupCount() > 0) {
-                final String image = matcherDetailsImage.group(3);
-                final String details = matcherDetailsImage.group(4);
+                final String image = matcherDetailsImage.group(3).trim();
+                final String details = matcherDetailsImage.group(4).trim();
 
                 if (image != null) {
                     trackable.setImage(image);
@@ -1928,14 +1928,14 @@ public class cgBase {
 
                 if (logTypes.containsKey(matcherLogs.group(1).toLowerCase()))
                 {
-                    logDone.type = logTypes.get(matcherLogs.group(1).toLowerCase());
+                    logDone.type = logTypes.get(matcherLogs.group(1).toLowerCase().trim());
                 }
                 else
                 {
                     logDone.type = logTypes.get("icon_note");
                 }
 
-                logDone.author = Html.fromHtml(matcherLogs.group(3)).toString();
+                logDone.author = Html.fromHtml(matcherLogs.group(3)).toString().trim();
 
                 try
                 {
@@ -3586,7 +3586,7 @@ public class cgBase {
     /**
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 sept. à 12:35".
-     * 
+     *
      * @param context
      *            a Context
      * @param date

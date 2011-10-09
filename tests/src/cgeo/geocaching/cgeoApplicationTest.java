@@ -119,8 +119,8 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
         Assert.assertEquals("Nice place for a break cache", tb.getSpottedName());
         Assert.assertEquals(cgTrackable.SPOTTED_CACHE, tb.getSpottedType());
         Assert.assertEquals("faa2d47d-19ea-422f-bec8-318fc82c8063", tb.getSpottedGuid());
-        Assert.assertEquals(" Kinder erfreuen.<br/><br/>Make children happy. ", tb.getGoal());
-        Assert.assertTrue(tb.getDetails().startsWith(" Auf der CD sind"));
+        Assert.assertEquals("Kinder erfreuen.<br/><br/>Make children happy.", tb.getGoal());
+        Assert.assertTrue(tb.getDetails().startsWith("Auf der CD sind"));
         Assert.assertEquals("http://img.geocaching.com/track/display/38382780-87a7-4393-8393-78841678ee8c.jpg", tb.getImage());
         Assert.assertEquals(10, tb.getLogs().size());
     }
