@@ -1876,7 +1876,6 @@ public class cgBase {
                 if (details != null) {
                     trackable.details = details.equals("No additional details available.") ? null : details;
                 }
-                Log.d(Settings.tag, "Details: " + details);
             }
         } catch (Exception e) {
             // failed to parse trackable details & image
