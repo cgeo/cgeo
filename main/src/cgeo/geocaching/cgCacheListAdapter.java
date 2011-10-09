@@ -39,9 +39,11 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
@@ -60,8 +62,8 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
     private int checked = 0;
     private boolean selectMode = false;
     private static Map<String, Drawable> gcIconDrawables = new HashMap<String, Drawable>();
-    private List<cgCompassMini> compasses = new ArrayList<cgCompassMini>();
-    private List<cgDistanceView> distances = new ArrayList<cgDistanceView>();
+    private Set<cgCompassMini> compasses = new LinkedHashSet<cgCompassMini>();
+    private Set<cgDistanceView> distances = new LinkedHashSet<cgDistanceView>();
     private int[] ratingBcgs = new int[3];
     private float pixelDensity = 1f;
     private static final int SWIPE_MIN_DISTANCE = 60;
@@ -284,16 +286,12 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             lastSort = System.currentTimeMillis();
         }
 
-        if (CollectionUtils.isNotEmpty(distances)) {
-            for (cgDistanceView distance : distances) {
-                distance.update(coordsIn);
-            }
+        for (final cgDistanceView distance : distances) {
+            distance.update(coordsIn);
         }
 
-        if (CollectionUtils.isNotEmpty(compasses)) {
-            for (cgCompassMini compass : compasses) {
-                compass.updateCoords(coordsIn);
-            }
+        for (final cgCompassMini compass : compasses) {
+            compass.updateCoords(coordsIn);
         }
     }
 
@@ -428,13 +426,9 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
         holder.checkbox.setOnClickListener(new checkBoxListener(cache));
 
-        if (!distances.contains(holder.distance)) {
-            distances.add(holder.distance);
-        }
+        distances.add(holder.distance);
         holder.distance.setContent(base, cache.coords);
-        if (!compasses.contains(holder.direction)) {
-            compasses.add(holder.direction);
-        }
+        compasses.add(holder.direction);
         holder.direction.setContent(cache.coords);
 
         if (cache.found && cache.logOffline) {
