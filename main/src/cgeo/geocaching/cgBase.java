@@ -1212,11 +1212,15 @@ public class cgBase {
             Log.w(Settings.tag, "cgeoBase.parseCache: Failed to parse watchlist state");
         }
 
-        // latitude and logitude
+        // latitude and longitude
         cache.latlon = BaseUtils.getMatch(page, Constants.PATTERN_LATLON, 1, cache.latlon);
         if (StringUtils.isNotEmpty(cache.latlon)) {
-            cache.coords = new Geopoint(cache.latlon);
-            cache.reliableLatLon = true;
+            try {
+                cache.coords = new Geopoint(cache.latlon);
+                cache.reliableLatLon = true;
+            } catch (Geopoint.GeopointException e) {
+                Log.w(Settings.tag, "cgeoBase.parseCache: Failed to parse cache coordinates: " + e.toString());
+            }
         }
 
         // cache location
