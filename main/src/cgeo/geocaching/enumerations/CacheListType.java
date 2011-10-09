@@ -9,13 +9,4 @@ public enum CacheListType {
     ADDRESS,
     USERNAME,
     OWNER;
-
-    public static CacheListType fromOrdinal(int ordinal) {
-        for (CacheListType cacheListType : CacheListType.values()) {
-            if (cacheListType.ordinal() == ordinal) {
-                return cacheListType;
-            }
-        }
-        return null;
-    }
 }

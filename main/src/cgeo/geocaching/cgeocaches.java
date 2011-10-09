@@ -569,7 +569,8 @@ public class cgeocaches extends AbstractListActivity {
         // get parameters
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            type = CacheListType.fromOrdinal(extras.getInt(EXTRAS_LIST_TYPE));
+            Object typeObject = extras.get(EXTRAS_LIST_TYPE);
+            type = (typeObject instanceof CacheListType) ? (CacheListType) typeObject : CacheListType.OFFLINE;
             coords = new Geopoint(extras.getDouble("latitude"), extras.getDouble("longitude"));
             cachetype = Settings.getCacheType();
             keyword = extras.getString("keyword");
@@ -2614,7 +2615,7 @@ public class cgeocaches extends AbstractListActivity {
 
     public static void startActivityOffline(final Context context) {
         final Intent cachesIntent = new Intent(context, cgeocaches.class);
-        cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.OFFLINE.ordinal());
+        cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.OFFLINE);
         context.startActivity(cachesIntent);
     }
 
@@ -2622,7 +2623,7 @@ public class cgeocaches extends AbstractListActivity {
         cgeocaches cachesActivity = new cgeocaches();
 
         Intent cachesIntent = new Intent(context, cachesActivity.getClass());
-        cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.COORDINATE.ordinal());
+        cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.COORDINATE);
         cachesIntent.putExtra("latitude", coords.getLatitude());
         cachesIntent.putExtra("longitude", coords.getLongitude());
 
@@ -2632,7 +2633,7 @@ public class cgeocaches extends AbstractListActivity {
     public static void startActivityOwner(final AbstractActivity context, final String userName) {
         final Intent cachesIntent = new Intent(context, cgeocaches.class);
 
-        cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.OWNER.ordinal());
+        cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.OWNER);
         cachesIntent.putExtra("username", userName);
 
         context.startActivity(cachesIntent);
@@ -2641,7 +2642,7 @@ public class cgeocaches extends AbstractListActivity {
     public static void startActivityUserName(final AbstractActivity context, final String userName) {
         final Intent cachesIntent = new Intent(context, cgeocaches.class);
 
-        cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.USERNAME.ordinal());
+        cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.USERNAME);
         cachesIntent.putExtra("username", userName);
 
         context.startActivity(cachesIntent);
@@ -2674,7 +2675,7 @@ public class cgeocaches extends AbstractListActivity {
 
     public static void startActivityNearest(final Context context, final Geopoint coordsNow) {
         final Intent cachesIntent = new Intent(context, cgeocaches.class);
-        cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.NEAREST.ordinal());
+        cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.NEAREST);
         cachesIntent.putExtra("latitude", coordsNow.getLatitude());
         cachesIntent.putExtra("longitude", coordsNow.getLongitude());
         context.startActivity(cachesIntent);
@@ -2682,13 +2683,13 @@ public class cgeocaches extends AbstractListActivity {
 
     public static void startActivityHistory(Context context) {
         final Intent cachesIntent = new Intent(context, cgeocaches.class);
-        cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.HISTORY.ordinal());
+        cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.HISTORY);
         context.startActivity(cachesIntent);
     }
 
     public static void startActivityAddress(Context context, Double latitude, Double longitude, String address) {
         Intent addressIntent = new Intent(context, cgeocaches.class);
-        addressIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.ADDRESS.ordinal());
+        addressIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.ADDRESS);
         addressIntent.putExtra("latitude", latitude);
         addressIntent.putExtra("longitude", longitude);
         addressIntent.putExtra("address", address);
