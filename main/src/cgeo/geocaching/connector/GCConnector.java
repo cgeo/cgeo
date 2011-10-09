@@ -9,6 +9,7 @@ import cgeo.geocaching.cgCacheWrap;
 import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgeoapplication;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.os.Handler;
@@ -110,7 +111,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
 
         final cgCacheWrap caches = base.parseCache(page, reason, handler);
 
-        if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
+        if (caches == null || CollectionUtils.isEmpty(caches.cacheList)) {
             if (caches != null && caches.error != null) {
                 search.error = caches.error;
             }
@@ -124,7 +125,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
             return null;
         }
 
-        List<cgCache> cacheList = cgBase.processSearchResults(search, caches, false, false, null);
+        List<cgCache> cacheList = cgBase.filterSearchResults(search, caches, false, false, null);
         app.addSearch(search, cacheList, true, reason);
 
         return search.getCurrentId();

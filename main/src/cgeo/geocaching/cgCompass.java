@@ -153,7 +153,7 @@ public class cgCompass extends View {
 
         @Override
         public void run() {
-            while (wantStop == false) {
+            while (!wantStop) {
                 try {
                     sleep(50);
                 } catch (Exception e) {

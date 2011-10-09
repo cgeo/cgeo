@@ -10,6 +10,7 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.AlertDialog;
@@ -996,7 +997,7 @@ public class cgeodetail extends AbstractActivity {
                     showDesc.setOnTouchListener(null);
                     showDesc.setOnClickListener(null);
                 }
-            } else if (longDescDisplayed == false && StringUtils.isNotBlank(cache.getDescription())) {
+            } else if (!longDescDisplayed && StringUtils.isNotBlank(cache.getDescription())) {
                 ((LinearLayout) findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
 
                 Button showDesc = (Button) findViewById(R.id.show_description);
@@ -1031,7 +1032,7 @@ public class cgeodetail extends AbstractActivity {
                     final TextView identification = (TextView) waypointView.findViewById(R.id.identification);
 
                     ((TextView) waypointView.findViewById(R.id.type)).setText(cgBase.waypointTypes.get(wpt.type));
-                    if (wpt.getPrefix().equalsIgnoreCase("OWN") == false) {
+                    if (!wpt.getPrefix().equalsIgnoreCase("OWN")) {
                         identification.setText(wpt.getPrefix().trim() + "/" + wpt.lookup.trim());
                     } else {
                         identification.setText(res.getString(R.string.waypoint_custom));
@@ -1246,7 +1247,7 @@ public class cgeodetail extends AbstractActivity {
                 // add LogImages
                 LinearLayout logLayout = (LinearLayout) rowView.findViewById(R.id.log_layout);
 
-                if ((log.logImages != null) && (!log.logImages.isEmpty())) {
+                if (CollectionUtils.isNotEmpty(log.logImages)) {
 
                     final ArrayList<cgImage> logImages = new ArrayList<cgImage>(log.logImages);
 
@@ -1382,7 +1383,7 @@ public class cgeodetail extends AbstractActivity {
     }
 
     public void loadLongDesc() {
-        if (waitDialog == null || waitDialog.isShowing() == false) {
+        if (waitDialog == null || !waitDialog.isShowing()) {
             descDialog = ProgressDialog.show(this, null, res.getString(R.string.cache_dialog_loading_description), true);
             descDialog.setCancelable(true);
         }
@@ -1501,7 +1502,7 @@ public class cgeodetail extends AbstractActivity {
     }
 
     private void addToCalendarFn(int index) {
-        if (calendars == null || calendars.isEmpty()) {
+        if (MapUtils.isEmpty(calendars)) {
             return;
         }
 
@@ -1604,7 +1605,7 @@ public class cgeodetail extends AbstractActivity {
     }
 
     private void showSpoilers() {
-        if (cache == null || cache.spoilers == null || cache.spoilers.isEmpty()) {
+        if (cache == null || CollectionUtils.isEmpty(cache.spoilers)) {
             showToast(res.getString(R.string.err_detail_no_spoiler));
         }
 

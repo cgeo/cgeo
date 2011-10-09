@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.geopoint.Geopoint;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
@@ -96,7 +97,7 @@ public class cgCache implements ICache {
         }
 
         updated = System.currentTimeMillis();
-        if (detailed == false && other.detailed) {
+        if (!detailed && other.detailed) {
             detailed = true;
             detailedUpdate = updated;
         }
@@ -205,7 +206,7 @@ public class cgCache implements ICache {
             inventory = other.inventory;
             inventoryItems = other.inventoryItems;
         }
-        if (logs == null || logs.isEmpty()) { // keep last known logs if none
+        if (CollectionUtils.isEmpty(logs)) { // keep last known logs if none
             logs = other.logs;
         }
     }

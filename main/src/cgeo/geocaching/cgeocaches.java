@@ -1407,7 +1407,7 @@ public class cgeocaches extends AbstractListActivity {
             return;
         }
 
-        if (more == false) {
+        if (!more) {
             if (CollectionUtils.isEmpty(cacheList)) {
                 listFooterText.setText(res.getString(R.string.caches_no_cache));
             } else {
@@ -1985,7 +1985,7 @@ public class cgeocaches extends AbstractListActivity {
 
             final List<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
             for (cgCache cache : cacheListTemp) {
-                if (checked > 0 && cache.statusChecked == false) {
+                if (checked > 0 && !cache.statusChecked) {
                     handler.sendEmptyMessage(0);
 
                     yield();
@@ -2168,7 +2168,7 @@ public class cgeocaches extends AbstractListActivity {
 
             final List<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
             for (cgCache cache : cacheListTemp) {
-                if (checked > 0 && cache.statusChecked == false) {
+                if (checked > 0 && !cache.statusChecked) {
                     continue;
                 }
 
@@ -2212,7 +2212,7 @@ public class cgeocaches extends AbstractListActivity {
         @Override
         public void run() {
             for (cgCache cache : cacheList) {
-                if (checked > 0 && cache.statusChecked == false) {
+                if (checked > 0 && !cache.statusChecked) {
                     handler.sendEmptyMessage(0);
 
                     yield();
@@ -2282,7 +2282,7 @@ public class cgeocaches extends AbstractListActivity {
             logTypes.put(cgBase.LOG_WEBCAM_PHOTO_TAKEN, "Webcam Photo Taken");
 
             for (cgCache cache : cacheList) {
-                if (checked > 0 && cache.statusChecked == false) {
+                if (checked > 0 && !cache.statusChecked) {
                     handler.sendEmptyMessage(0);
 
                     yield();
@@ -2553,7 +2553,7 @@ public class cgeocaches extends AbstractListActivity {
     private void removeList() {
         // if there are no caches on this list, don't bother the user with questions.
         // there is no harm in deleting the list, he could recreate it easily
-        if (cacheList != null && cacheList.isEmpty()) {
+        if (CollectionUtils.isEmpty(cacheList)) {
             removeListInternal();
             return;
         }

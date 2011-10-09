@@ -24,6 +24,7 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnDragListener;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
@@ -573,7 +574,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             searchId = null;
             searchIdIntent = null;
         } else if (id == MENU_STORE_CACHES) {
-            if (live && !isLoading() && caches != null && !caches.isEmpty()) {
+            if (live && !isLoading() && CollectionUtils.isNotEmpty(caches)) {
                 final List<String> geocodes = new ArrayList<String>();
 
                 List<cgCache> cachesProtected = new ArrayList<cgCache>(caches);
@@ -909,7 +910,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                             moved = true;
                         } else if (((Math.abs(spanLatitudeNow - spanLatitude) > 50) || (Math.abs(spanLongitudeNow - spanLongitude) > 50) || // changed zoom
                                 (Math.abs(centerLatitudeNow - centerLatitude) > (spanLatitudeNow / 4)) || (Math.abs(centerLongitudeNow - centerLongitude) > (spanLongitudeNow / 4)) // map moved
-                        ) && (cachesCnt <= 0 || caches == null || caches.isEmpty()
+                        ) && (cachesCnt <= 0 || CollectionUtils.isEmpty(caches)
                                 || !cgBase.isInViewPort(centerLatitude, centerLongitude, centerLatitudeNow, centerLongitudeNow, spanLatitude, spanLongitude, spanLatitudeNow, spanLongitudeNow))) {
                             moved = true;
                         }
@@ -1450,7 +1451,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 stop = false;
                 working = true;
 
-                if (mapView == null || users == null || users.isEmpty()) {
+                if (mapView == null || CollectionUtils.isEmpty(users)) {
                     return;
                 }
 
@@ -1599,7 +1600,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
         @Override
         public void run() {
-            if (geocodes == null || geocodes.isEmpty()) {
+            if (CollectionUtils.isEmpty(geocodes)) {
                 return;
             }
 

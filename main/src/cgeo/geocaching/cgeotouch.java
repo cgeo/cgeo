@@ -334,7 +334,7 @@ public class cgeotouch extends cgLogForm {
 
     private class postListener implements View.OnClickListener {
         public void onClick(View arg0) {
-            if (gettingViewstate == false) {
+            if (!gettingViewstate) {
                 waitDialog = ProgressDialog.show(cgeotouch.this, null, res.getString(R.string.log_saving), true);
                 waitDialog.setCancelable(true);
 
@@ -389,7 +389,7 @@ public class cgeotouch extends cgLogForm {
                 }
                 typesPre.clear();
 
-                if (types.contains(typeSelected) == false) {
+                if (!types.contains(typeSelected)) {
                     typeSelected = types.get(0);
                     setType(typeSelected);
                     showToast(res.getString(R.string.info_log_type_changed));

@@ -2,6 +2,8 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 
+import org.apache.commons.collections.CollectionUtils;
+
 import android.app.ProgressDialog;
 import android.location.Address;
 import android.location.Geocoder;
@@ -71,7 +73,7 @@ public class cgeoaddresses extends AbstractActivity {
                         addList = (LinearLayout) findViewById(R.id.address_list);
                     }
 
-                    if (addresses == null || addresses.isEmpty()) {
+                    if (CollectionUtils.isEmpty(addresses)) {
                         showToast(res.getString(R.string.err_search_address_no_match));
                         finish();
                         return;

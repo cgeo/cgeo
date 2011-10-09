@@ -2170,7 +2170,7 @@ public class cgBase {
         setViewstates(viewstates, params);
 
         String page = getResponseData(postRequest(uri, params));
-        if (checkLogin(page) == false) {
+        if (!checkLogin(page)) {
             final StatusCode loginState = login();
             if (loginState == StatusCode.NO_ERROR) {
                 page = getResponseData(postRequest(uri, params));
@@ -2189,7 +2189,7 @@ public class cgBase {
         }
 
         final cgCacheWrap caches = parseSearch(thread, url, page, showCaptcha);
-        if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
+        if (caches == null || CollectionUtils.isEmpty(caches.cacheList)) {
             Log.e(Settings.tag, "cgeoBase.searchByNextPage: No cache parsed");
             return searchId;
         }
@@ -2217,7 +2217,7 @@ public class cgBase {
             return null;
         }
 
-        if (forceReload == false && reason == 0 && (app.isOffline(geocode, guid) || app.isThere(geocode, guid, true, true))) {
+        if (!forceReload && reason == 0 && (app.isOffline(geocode, guid) || app.isThere(geocode, guid, true, true))) {
             final String realGeocode = StringUtils.isNotBlank(geocode) ? geocode : app.getGeocode(guid);
 
             List<cgCache> cacheList = new ArrayList<cgCache>();
@@ -2281,7 +2281,7 @@ public class cgBase {
         }
 
         final cgCacheWrap caches = parseSearch(thread, fullUri, page, showCaptcha);
-        if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
+        if (caches == null || CollectionUtils.isEmpty(caches.cacheList)) {
             Log.e(Settings.tag, "cgeoBase.searchByAny: No cache parsed");
         }
 
@@ -2290,7 +2290,7 @@ public class cgBase {
             return null;
         }
 
-        List<cgCache> cacheList = processSearchResults(search, caches, Settings.isExcludeDisabledCaches(), false, null);
+        List<cgCache> cacheList = filterSearchResults(search, caches, Settings.isExcludeDisabledCaches(), false, null);
 
         app.addSearch(search, cacheList, true, reason);
 
@@ -2355,7 +2355,7 @@ public class cgBase {
         }
 
         final cgCacheWrap caches = parseMapJSON(Uri.parse(uri).buildUpon().encodedQuery(params).build().toString(), page);
-        if (caches == null || caches.cacheList == null || caches.cacheList.isEmpty()) {
+        if (caches == null || CollectionUtils.isEmpty(caches.cacheList)) {
             Log.e(Settings.tag, "cgeoBase.searchByViewport: No cache parsed");
         }
 
@@ -2364,7 +2364,7 @@ public class cgBase {
             return null;
         }
 
-        List<cgCache> cacheList = processSearchResults(search, caches, Settings.isExcludeDisabledCaches(), Settings.isExcludeMyCaches(), Settings.getCacheType());
+        List<cgCache> cacheList = filterSearchResults(search, caches, Settings.isExcludeDisabledCaches(), Settings.isExcludeMyCaches(), Settings.getCacheType());
 
         app.addSearch(search, cacheList, true, reason);
 
@@ -2447,7 +2447,7 @@ public class cgBase {
         return users;
     }
 
-    public static List<cgCache> processSearchResults(final cgSearch search, final cgCacheWrap caches, final boolean excludeDisabled, final boolean excludeMine, final String cacheType) {
+    public static List<cgCache> filterSearchResults(final cgSearch search, final cgCacheWrap caches, final boolean excludeDisabled, final boolean excludeMine, final String cacheType) {
         List<cgCache> cacheList = new ArrayList<cgCache>();
         if (caches != null) {
             if (caches.error != null) {
@@ -2460,11 +2460,12 @@ public class cgBase {
             search.totalCnt = caches.totalCnt;
 
             if (CollectionUtils.isNotEmpty(caches.cacheList)) {
-                for (cgCache cache : caches.cacheList) {
-                    if ((!excludeDisabled || (excludeDisabled && cache.disabled == false))
-                            && (!excludeMine || (excludeMine && cache.own == false))
-                            && (!excludeMine || (excludeMine && cache.found == false))
-                            && (cacheType == null || (cacheType.equals(cache.type)))) {
+                for (final cgCache cache : caches.cacheList) {
+                    // Is there any reason to exclude the cache from the list?
+                    final boolean excludeCache = (excludeDisabled && cache.disabled) ||
+                            (excludeMine && (cache.own || cache.found)) ||
+                            (cacheType != null && !cacheType.equals(cache.type));
+                    if (!excludeCache) {
                         search.addGeocode(cache.geocode);
                         cacheList.add(cache);
                     }
@@ -2515,7 +2516,7 @@ public class cgBase {
             return StatusCode.LOG_POST_ERROR;
         }
 
-        if (logTypes2.containsKey(logType) == false) {
+        if (!logTypes2.containsKey(logType)) {
             Log.e(Settings.tag, "cgeoBase.postLog: Unknown logtype");
             return StatusCode.LOG_POST_ERROR;
         }
@@ -2562,7 +2563,7 @@ public class cgBase {
                 "ctl00$ContentBody$LogBookPanel1$LogButton", "Submit Log Entry",
                 "ctl00$ContentBody$uxVistOtherListingGC", "");
         setViewstates(viewstates, params);
-        if (trackables != null && trackables.isEmpty() == false) { //  we have some trackables to proceed
+        if (CollectionUtils.isNotEmpty(trackables)) { //  we have some trackables to proceed
             final StringBuilder hdnSelected = new StringBuilder();
 
             for (cgTrackableLog tb : trackables) {
@@ -2616,7 +2617,7 @@ public class cgBase {
                 params.put("ctl00$ContentBody$LogBookPanel1$btnConfirm", "Yes");
                 params.put("ctl00$ContentBody$LogBookPanel1$uxLogInfo", logInfo);
                 params.put("ctl00$ContentBody$uxVistOtherListingGC", "");
-                if (trackables != null && trackables.isEmpty() == false) { //  we have some trackables to proceed
+                if (CollectionUtils.isNotEmpty(trackables)) { //  we have some trackables to proceed
                     final StringBuilder hdnSelected = new StringBuilder();
 
                     for (cgTrackableLog tb : trackables) {
@@ -2673,7 +2674,7 @@ public class cgBase {
             return StatusCode.LOG_POST_ERROR;
         }
 
-        if (logTypes2.containsKey(logType) == false) {
+        if (!logTypes2.containsKey(logType)) {
             Log.e(Settings.tag, "cgeoBase.postLogTrackable: Unknown logtype");
             return StatusCode.LOG_POST_ERROR;
         }
@@ -2710,7 +2711,7 @@ public class cgBase {
 
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("wid=" + tbid).build().toString();
         String page = getResponseData(postRequest(uri, params));
-        if (checkLogin(page) == false) {
+        if (!checkLogin(page)) {
             final StatusCode loginState = login();
             if (loginState == StatusCode.NO_ERROR) {
                 page = getResponseData(postRequest(uri, params));
@@ -2923,7 +2924,7 @@ public class cgBase {
         HttpResponse response = request(uri, params, xContentType, my, addF);
         String data = getResponseData(response);
 
-        if (checkLogin(data) == false) {
+        if (!checkLogin(data)) {
             if (login() == StatusCode.NO_ERROR) {
                 response = request(uri, params, xContentType, my, addF);
                 data = getResponseData(response);
@@ -3515,9 +3516,7 @@ public class cgBase {
                 return null;
             }
 
-            String status = response.getString("status");
-
-            if (status == null || status.equalsIgnoreCase("OK") == false) {
+            if (!StringUtils.equalsIgnoreCase(response.getString("status"), "OK")) {
                 return null;
             }
 

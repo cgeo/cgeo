@@ -77,7 +77,7 @@ public class cgeovisit extends cgLogForm {
 
         @Override
         public void handleMessage(Message msg) {
-            if (types.contains(typeSelected) == false) {
+            if (!types.contains(typeSelected)) {
                 typeSelected = types.get(0);
                 setType(typeSelected);
 
@@ -461,7 +461,7 @@ public class cgeovisit extends cgLogForm {
             insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), base, false), false);
         }
 
-        if (types.contains(typeSelected) == false) {
+        if (!types.contains(typeSelected)) {
             if (alreadyFound) {
                 typeSelected = cgBase.LOG_NOTE;
             } else {
@@ -552,9 +552,9 @@ public class cgeovisit extends cgLogForm {
             tweetBox = (LinearLayout) findViewById(R.id.tweet_box);
         }
 
-        if (type == 2 && tbChanged == false) {
+        if (type == 2 && !tbChanged) {
             // TODO: change action
-        } else if (type != 2 && tbChanged == false) {
+        } else if (type != 2 && !tbChanged) {
             // TODO: change action
         }
 
@@ -591,7 +591,7 @@ public class cgeovisit extends cgLogForm {
     private class postListener implements View.OnClickListener {
 
         public void onClick(View arg0) {
-            if (gettingViewstate == false) {
+            if (!gettingViewstate) {
                 waitDialog = ProgressDialog.show(cgeovisit.this, null, res.getString(R.string.log_saving), true);
                 waitDialog.setCancelable(true);
 
