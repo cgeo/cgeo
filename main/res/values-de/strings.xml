@@ -11,6 +11,8 @@
   <string name="helpers">Nützliche Apps</string>
   <string name="about">Über c:geo</string>
   <string name="helper">Du willst mehr über <b>c:geo</b> erfahren?\nSchaue in die Bedienungsanleitung.</string>
+  <string name="latitude">Breitengrad</string>
+  <string name="longitude">Längengrad</string>
 
   <!-- actionbar -->
   <string name="action_bar_share_title">Link versenden</string>
@@ -123,6 +125,8 @@
   <string name="err_missing_auth">Benutzername oder Passwort nicht gesetzt.</string>
   <string name="err_wrong">Falsche Anmeldedaten</string>
   <string name="err_license">Die Geocaching.com Nutzungsbedingungen wurden nicht akzeptiert. c:geo kann deshalb keine Koordinaten laden.</string>
+  <string name="err_unpublished">Der aufgerufene Cache ist noch nicht veröffentlicht</string>
+  <string name="err_premium_only">Der Cache ist nur für Premium Mitglieder von Geocaching.com verfügbar</string>
   <string name="err_store">c:geo konnte den Cache nicht speichern.</string>
   <string name="err_drop">c:geo konnte den Cache nicht löschen.</string>
   <string name="err_detail_open">c:geo konnte die Cache-Details nicht öffnen.</string>
@@ -165,6 +169,7 @@
   <string name="err_tb_forgot_saw">c:geo hat vergessen, welchen Trackable du gesehen hast.</string>
   <string name="err_tb_find">c:geo findet den Trackable nicht</string>
   <string name="err_tb_find_that">c:geo konnte diesen Trackable nicht finden.</string>
+  <string name="err_cache_inventory_load_fail">c:geo konnte das Inventar nicht laden.</string>
 
   <string name="err_waypoint_cache_unknown">c:geo weiß nicht, zu welchem Cache der Wegpunkt hinzugefügt werden soll.</string>
   <string name="err_waypoint_unknown">c:geo hat vergessen, welchen Wegpunkt du ansehen wolltest.</string>
@@ -240,6 +245,7 @@
   <string name="advanced_search_button">Suche</string>
   <string name="stored_caches_button">Gespeichert</string>
   <string name="any_button">Überall</string>
+  <string name="unknown_scan">Konnte keinen GC-Code im Scan finden.</string>
 
   <!-- caches -->
   <string name="caches_no_cache">Kein Cache</string>
@@ -336,6 +342,8 @@
   <string name="list_dialog_remove">Entfernen</string>
   <string name="list_dialog_remove_ok">Liste wurde gelöscht</string>
   <string name="list_dialog_remove_err">c:geo konnte die Liste nicht löschen</string>
+  <string name="list_dialog_rename_title">Liste umbenennen</string>
+  <string name="list_dialog_rename">Umbenennen</string>
 
   <!-- about -->
   <string name="about_changelog">Änderungen</string>
@@ -395,12 +403,15 @@
   <string name="init_cleared">c:geo hat die Anmeldedaten gelöscht.</string>
   <string name="init_backup">Sicherung</string>
   <string name="init_backup_backup">Sicherung</string>
+  <string name="init_backup_running">Erzeuge Sicherung der Cache-Datenbank…</string>
   <string name="init_backup_note">Hinweis: Diese Option sichert die Datenbank von c:geo. Nur Caches und Wegpunkte werden gesichert, keine Einstellungen. Login-Daten und Passwörter werden die App nicht verlassen.</string>
   <string name="init_backup_restore">Wiederherstellung</string>
   <string name="init_backup_success">Datenbank von c:geo wurde erfolgreich in Datei geschrieben</string>
   <string name="init_backup_failed">Sicherung der Datenbank fehlgeschlagen.</string>
+  <string name="init_backup_unnecessary">Datenbank ist leer, keine Sicherung notwendig.</string>
   <string name="init_restore_success">Wiederherstellung beendet.</string>
   <string name="init_restore_failed">Wiederherstellung fehlgeschlagen.</string>
+  <string name="init_restore_running">Wiederherstellung der Cache-Datenbank…</string>
   <string name="init_backup_last">Backup verfügbar von</string>
   <string name="init_backup_last_no">Keine Datei mit Datenbanksicherung gefunden.</string>
   <string name="init_mapsources">Kartenherkunft</string> <!-- since: 2.26 RC3 -->
@@ -458,6 +469,7 @@
   <string name="cache_attributes">Attribute</string>
   <string name="cache_attributes_no_icons">(aktualisiere den Cache um die Attribut-Icons anzuzeigen)</string>
   <string name="cache_inventory">Inventar</string>
+  <string name="cache_inventory_loading">Lade Inventar…</string>
   <string name="cache_log_offline">Offline-Log</string>
   <string name="cache_log_images_loading">Lade Logbild …</string>
   <string name="cache_log_images_title">Logbild</string>
@@ -481,7 +493,7 @@
   <string name="cache_dialog_loading_details_status_logs">Lade Logs</string>
   <string name="cache_dialog_loading_details_status_waypoints">Verarbeite Wegpunkte</string>
   <string name="cache_dialog_loading_details_status_gcvote">Lade GCVote</string>
-  <string name="cache_dialog_loading_details_status_render">Generiere Ansicht</string>
+  <string name="cache_dialog_loading_details_status_render">Erzeuge Darstellung</string>
   <string name="cache_dialog_loading_description">Lade Cache-Beschreibung…</string>
   <string name="cache_dialog_offline_save_title">Offline-Verwendung</string>
   <string name="cache_dialog_offline_save_message">Speichere Cache für Offline-Verwendung…</string>
@@ -540,6 +552,7 @@
   <string name="cache_export_fieldnote">Exportiere als Field-Notes</string>
   <string name="cache_clear_history">Verlauf leeren</string>
   <string name="cache_remove_from_history">Aus Verlauf löschen</string>
+  <string name="cache_license">Lizenz</string>
 
   <!-- file list base -->
   <string name="file_searching_in">Suche nach Dateien\nin</string>

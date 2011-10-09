@@ -11,8 +11,9 @@ import cgeo.geocaching.files.LocParser;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.BaseUtils;
-import cgeo.geocaching.utils.CollectionUtils;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -948,7 +949,7 @@ public class cgBase {
             try {
                 final Map<String, cgRating> ratings = GCVote.getRating(guids, null);
 
-                if (CollectionUtils.isNotEmpty(ratings)) {
+                if (MapUtils.isNotEmpty(ratings)) {
                     // save found cache coordinates
                     for (cgCache oneCache : caches.cacheList) {
                         if (ratings.containsKey(oneCache.guid)) {

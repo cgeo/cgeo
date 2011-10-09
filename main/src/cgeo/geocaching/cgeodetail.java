@@ -7,9 +7,9 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
-import cgeo.geocaching.utils.CollectionUtils;
 import cgeo.geocaching.utils.CryptUtils;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.AlertDialog;
@@ -171,14 +171,8 @@ public class cgeodetail extends AbstractActivity {
     private Handler loadCacheHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if (cgBase.UPDATE_LOAD_PROGRESS_DETAIL == msg.what) {
-                if (waitDialog != null
-                        && waitDialog.isShowing()
-                        && msg.obj instanceof String) {
-                    waitDialog.setMessage(res.getString(R.string.cache_dialog_loading_details)
-                            + "\n\n"
-                            + (String) msg.obj);
-                }
+            if (cgBase.UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
+                updateStatusMsg((String) msg.obj);
             } else {
                 if (searchId == null) {
                     showToast(res.getString(R.string.err_dwld_details_failed));
@@ -194,7 +188,7 @@ public class cgeodetail extends AbstractActivity {
                     return;
                 }
 
-                this.obtainMessage(cgBase.UPDATE_LOAD_PROGRESS_DETAIL, res.getString(R.string.cache_dialog_loading_details_status_render)).sendToTarget();
+                updateStatusMsg(res.getString(R.string.cache_dialog_loading_details_status_render));
 
                 setView();
 
@@ -207,6 +201,14 @@ public class cgeodetail extends AbstractActivity {
                 }
 
                 (new loadMapPreview(loadMapPreviewHandler)).start();
+            }
+        }
+
+        private void updateStatusMsg(final String msg) {
+            if (waitDialog != null && waitDialog.isShowing()) {
+                waitDialog.setMessage(res.getString(R.string.cache_dialog_loading_details)
+                        + "\n\n"
+                        + msg);
             }
         }
     };

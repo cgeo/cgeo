@@ -26,8 +26,8 @@ import cgeo.geocaching.sorting.SizeComparator;
 import cgeo.geocaching.sorting.StateComparator;
 import cgeo.geocaching.sorting.TerrainComparator;
 import cgeo.geocaching.sorting.VoteComparator;
-import cgeo.geocaching.utils.CollectionUtils;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 
