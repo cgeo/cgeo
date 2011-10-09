@@ -969,6 +969,9 @@ public class cgeodetail extends AbstractActivity {
                 personalNoteText.setText(cache.personalNote, TextView.BufferType.SPANNABLE);
                 personalNoteText.setMovementMethod(LinkMovementMethod.getInstance());
             }
+            else {
+                ((LinearLayout) findViewById(R.id.personalnote_box)).setVisibility(View.GONE);
+            }
 
             // cache short desc
             if (StringUtils.isNotBlank(cache.shortdesc)) {

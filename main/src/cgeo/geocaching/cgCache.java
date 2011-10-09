@@ -165,7 +165,7 @@ public class cgCache implements ICache {
         if (elevation == null) {
             elevation = other.elevation;
         }
-        if (StringUtils.isBlank(personalNote)) {
+        if (personalNote == null) { // don't use StringUtils.isBlank. Otherwise we cannot recognize a note which was deleted on GC
             personalNote = other.personalNote;
         }
         if (StringUtils.isBlank(shortdesc)) {
