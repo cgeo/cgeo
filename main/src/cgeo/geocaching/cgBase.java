@@ -2290,7 +2290,7 @@ public class cgBase {
             return null;
         }
 
-        List<cgCache> cacheList = processSearchResults(search, caches, Settings.isExcludeDisabledCaches(), false, null);
+        List<cgCache> cacheList = filterSearchResults(search, caches, Settings.isExcludeDisabledCaches(), false, null);
 
         app.addSearch(search, cacheList, true, reason);
 
@@ -2364,7 +2364,7 @@ public class cgBase {
             return null;
         }
 
-        List<cgCache> cacheList = processSearchResults(search, caches, Settings.isExcludeDisabledCaches(), Settings.isExcludeMyCaches(), Settings.getCacheType());
+        List<cgCache> cacheList = filterSearchResults(search, caches, Settings.isExcludeDisabledCaches(), Settings.isExcludeMyCaches(), Settings.getCacheType());
 
         app.addSearch(search, cacheList, true, reason);
 
@@ -2447,7 +2447,7 @@ public class cgBase {
         return users;
     }
 
-    public static List<cgCache> processSearchResults(final cgSearch search, final cgCacheWrap caches, final boolean excludeDisabled, final boolean excludeMine, final String cacheType) {
+    public static List<cgCache> filterSearchResults(final cgSearch search, final cgCacheWrap caches, final boolean excludeDisabled, final boolean excludeMine, final String cacheType) {
         List<cgCache> cacheList = new ArrayList<cgCache>();
         if (caches != null) {
             if (caches.error != null) {
@@ -2460,11 +2460,12 @@ public class cgBase {
             search.totalCnt = caches.totalCnt;
 
             if (CollectionUtils.isNotEmpty(caches.cacheList)) {
-                for (cgCache cache : caches.cacheList) {
-                    if ((!excludeDisabled || (excludeDisabled && cache.disabled == false))
-                            && (!excludeMine || (excludeMine && cache.own == false))
-                            && (!excludeMine || (excludeMine && cache.found == false))
-                            && (cacheType == null || (cacheType.equals(cache.type)))) {
+                for (final cgCache cache : caches.cacheList) {
+                    // Is there any reason to exclude the cache from the list?
+                    final boolean excludeCache = (excludeDisabled && cache.disabled) ||
+                            (excludeMine && (cache.own || cache.found)) ||
+                            (cacheType != null && !cacheType.equals(cache.type));
+                    if (!excludeCache) {
                         search.addGeocode(cache.geocode);
                         cacheList.add(cache);
                     }
