@@ -1,7 +1,8 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.utils.CollectionUtils;
+
+import org.apache.commons.collections.CollectionUtils;
 
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;

@@ -126,7 +126,7 @@ public class cgGeo {
         }
 
         final SharedPreferences.Editor prefsEdit = context.getSharedPreferences(Settings.preferences, 0).edit();
-        if (prefsEdit != null && Double.isNaN(distanceNow) == false) {
+        if (prefsEdit != null && !Double.isNaN(distanceNow)) {
             prefsEdit.putFloat("dst", (float) distanceNow);
             prefsEdit.commit();
         }

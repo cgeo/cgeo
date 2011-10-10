@@ -140,9 +140,7 @@
   <string name="err_detail_no_spoiler">c:geo found no spoiler images for this cache.</string>
   <string name="err_detail_no_map_static">c:geo found no static maps for this cache.</string>
   <string name="err_detail_not_load_map_static">Sorry, c:geo failed to load static maps.</string>
-  <string name="err_detail_still_removing">Still removing this cache.</string>
-  <string name="err_detail_still_saving">Still saving this cache.</string>
-  <string name="err_detail_still_refreshing">Still reloading this cache.</string>
+  <string name="err_detail_still_working">Still working on another task.</string>
   <string name="err_watchlist_still_managing">Still managing your watchlist.</string>
   <string name="err_watchlist_failed">Changing your watchlist failed.</string>
   <string name="err_navigation_no">c:geo can\'t find any supported navigation.</string>
@@ -937,6 +935,9 @@
     <b>New release</b>\n
     · new: cleanup the cgeo private cache directory when caches are removed from database\n
     · new: display user avatar when checking login/password from geocaching.com\n
+    \n\n
+    <b>09.10.2011</b>\n
+    · fix: small bugs due to GC.com change\n
     \n\n
     <b>06.10.2011</b>\n
     · new: import waypoint files from pocket query\n

@@ -2,8 +2,9 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 
+import org.apache.commons.collections.CollectionUtils;
+
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.AsyncTask;
@@ -72,7 +73,7 @@ public class cgeoaddresses extends AbstractActivity {
                         addList = (LinearLayout) findViewById(R.id.address_list);
                     }
 
-                    if (addresses == null || addresses.isEmpty()) {
+                    if (CollectionUtils.isEmpty(addresses)) {
                         showToast(res.getString(R.string.err_search_address_no_match));
                         finish();
                         return;
@@ -134,14 +135,7 @@ public class cgeoaddresses extends AbstractActivity {
         }
 
         public void onClick(View arg0) {
-            Intent addressIntent = new Intent(cgeoaddresses.this, cgeocaches.class);
-            addressIntent.putExtra("type", "address");
-            addressIntent.putExtra("latitude", (Double) latitude);
-            addressIntent.putExtra("longitude", (Double) longitude);
-            addressIntent.putExtra("address", (String) address);
-            addressIntent.putExtra("cachetype", Settings.getCacheType());
-            startActivity(addressIntent);
-
+            cgeocaches.startActivityAddress(cgeoaddresses.this, latitude, longitude, address);
             finish();
             return;
         }

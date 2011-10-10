@@ -39,7 +39,7 @@ public class cgMapfileListAdapter extends ArrayAdapter<File> {
         View v = rowView;
 
         if (v == null) {
-            v = (View) inflater.inflate(R.layout.mapfile_item, null);
+            v = inflater.inflate(R.layout.mapfile_item, null);
 
             holder = new MapfileView();
             holder.filepath = (TextView) v.findViewById(R.id.mapfilepath);
@@ -65,11 +65,6 @@ public class cgMapfileListAdapter extends ArrayAdapter<File> {
         holder.filename.setText(file.getName());
 
         return v;
-    }
-
-    @Override
-    public void notifyDataSetChanged() {
-        super.notifyDataSetChanged();
     }
 
     private class touchListener implements View.OnClickListener {

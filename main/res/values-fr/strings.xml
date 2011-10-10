@@ -445,7 +445,7 @@
   <string name="auth_authorize">autorisation de c:geo</string>
   <string name="auth_start">début d\'autorisation</string>
   <string name="auth_again">redémarre</string>
-  <string name="auth_pin_hint">code pin attribué par twitter</string>
+  <string name="auth_pin_hint">code donné par Twitter</string>
   <string name="auth_finish">terminé</string>
   <string name="auth_dialog_wait">en attente de Twitter…</string>
   <string name="auth_dialog_pin_title">code PIN</string>
@@ -654,7 +654,7 @@
   <string name="search_hbu_prefill">Propriétaire</string>
   <string name="search_hbu_button">Recherche par propriétaire</string>
   <string name="search_tb">Objet voyageur</string>
-  <string name="search_tb_hint">Identification de l\'objet voyageur</string>
+  <string name="search_tb_hint">Identifiant de l\'objet</string>
   <string name="search_tb_button">Recherche par objet voyageur</string>
   <string name="search_destination">Destination</string>
   <string name="search_some_destination">Destination arbitraire</string>
@@ -868,5 +868,5 @@
   <string name="about_go4cache">Le service <b>Go 4 cache</b> vous permet de voir en temps réel d\'autres géocacheurs sur une carte (dans <b>c:geo</b> ou dans le navigateur). Il peut afficher les caches en cours de recherche. En vous connectant sur <b>Go 4 cache</b> vous permettez à <b>c:geo</b> de publier votre publication (seulement si <b>c:geo</b> fonctionne).</string>
   <string name="about_twitter">Voulez-vous publier un nouveau statut sur Twitter à chaque nouvelle cache découverte sous <b>c:geo</b>?</string>
   <string name="about_auth_1">Le processus suivant permet à <b>c:geo</b> d\'accéder à votre compte Twitter - si vous acceptez.</string>
-  <string name="about_auth_2">Cliquer sur le bouton \"autoriser c:geo\" pour démarrer. Une fenêtre de navigateur va s\'ouvrir pour vous connecter sur Twitter. Accepter pour que <b>c:geo</b> accéde à votre compte. Twitter vous affichera alors une code PIN composé de chiffres. Merci de coller ce code dans <b>c:geo</b> puis confirmer. C\'est tout!</string>
+  <string name="about_auth_2">Cliquer sur le bouton \"début d\'autorisation\" pour démarrer. Une fenêtre de navigateur va s\'ouvrir pour vous connecter sur Twitter. Accepter pour que <b>c:geo</b> accéde à votre compte. Twitter vous affichera alors une code PIN composé de chiffres. Merci de coller ce code dans <b>c:geo</b> puis confirmer. C\'est tout!</string>
 </resources>

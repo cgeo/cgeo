@@ -5,8 +5,9 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Geopoint.MalformedCoordinateException;
-import cgeo.geocaching.utils.CollectionUtils;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.ContentValues;
@@ -18,7 +19,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDoneException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
-import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
@@ -224,7 +224,7 @@ public class cgData {
     }
 
     public synchronized void init() {
-        if (databaseRW == null || databaseRW.isOpen() == false) {
+        if (databaseRW == null || !databaseRW.isOpen()) {
             try {
                 if (dbHelper == null) {
                     dbHelper = new cgDbHelper(context);
@@ -324,7 +324,7 @@ public class cgData {
     }
 
     public String backupDatabase() {
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) == false) {
+        if (!LocalStorage.isExternalStorageAvailable()) {
             Log.w(Settings.tag, "Database wasn't backed up: no external memory");
             return null;
         }
@@ -353,7 +353,7 @@ public class cgData {
     }
 
     public boolean restoreDatabase() {
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED) == false) {
+        if (!LocalStorage.isExternalStorageAvailable()) {
             Log.w(Settings.tag, "Database wasn't restored: no external memory");
             return false;
         }
@@ -951,7 +951,7 @@ public class cgData {
                     index = cursor.getColumnIndex("geocode");
 
                     do {
-                        list.add((String) cursor.getString(index));
+                        list.add(cursor.getString(index));
                     } while (cursor.moveToNext());
                 } else {
                     cursor.close();
@@ -1012,11 +1012,11 @@ public class cgData {
                     cursor.moveToFirst();
 
                     index = cursor.getColumnIndex("updated");
-                    dataUpdated = (long) cursor.getLong(index);
+                    dataUpdated = cursor.getLong(index);
                     index = cursor.getColumnIndex("detailedupdate");
-                    dataDetailedUpdate = (long) cursor.getLong(index);
+                    dataDetailedUpdate = cursor.getLong(index);
                     index = cursor.getColumnIndex("detailed");
-                    dataDetailed = (int) cursor.getInt(index);
+                    dataDetailed = cursor.getInt(index);
                 }
             }
         } catch (Exception e) {
@@ -1038,7 +1038,7 @@ public class cgData {
                 return false;
             }
 
-            if (checkTime && detailed == false && dataUpdated < (System.currentTimeMillis() - (3 * 24 * 60 * 60 * 1000))) {
+            if (checkTime && !detailed && dataUpdated < (System.currentTimeMillis() - (3 * 24 * 60 * 60 * 1000))) {
                 // we want to check time for short cache, but data are older than 3 hours
                 return false;
             }
@@ -1090,7 +1090,7 @@ public class cgData {
                     cursor.moveToFirst();
 
                     index = cursor.getColumnIndex("reason");
-                    reason = (long) cursor.getLong(index);
+                    reason = cursor.getLong(index);
                 }
 
                 cursor.close();
@@ -1099,11 +1099,7 @@ public class cgData {
             Log.e(Settings.tag, "cgData.isOffline: " + e.toString());
         }
 
-        if (reason >= 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return reason >= 1;
     }
 
     public String getGeocodeForGuid(String guid) {
@@ -1134,7 +1130,7 @@ public class cgData {
                     cursor.moveToFirst();
 
                     index = cursor.getColumnIndex("geocode");
-                    geocode = (String) cursor.getString(index);
+                    geocode = cursor.getString(index);
                 }
             }
         } catch (Exception e) {
@@ -1176,7 +1172,7 @@ public class cgData {
                     cursor.moveToFirst();
 
                     index = cursor.getColumnIndex("cacheid");
-                    cacheid = (String) cursor.getString(index);
+                    cacheid = cursor.getString(index);
                 }
             }
         } catch (Exception e) {
@@ -1272,7 +1268,7 @@ public class cgData {
             }
         }
 
-        if (cache.logCounts != null && cache.logCounts.isEmpty() == false) {
+        if (MapUtils.isNotEmpty(cache.logCounts)) {
             if (!saveLogCount(cache.geocode, cache.logCounts)) {
                 statusOk = false;
             }
@@ -1284,7 +1280,7 @@ public class cgData {
             }
         }
 
-        if (statusOk == false) {
+        if (!statusOk) {
             cache.detailed = false;
             cache.detailedUpdate = 0L;
         }
@@ -1637,7 +1633,7 @@ public class cgData {
     public boolean saveLogCount(String geocode, Map<Integer, Integer> logCounts, boolean drop) {
         init();
 
-        if (StringUtils.isBlank(geocode) || CollectionUtils.isEmpty(logCounts)) {
+        if (StringUtils.isBlank(geocode) || MapUtils.isEmpty(logCounts)) {
             return false;
         }
 
@@ -1690,21 +1686,21 @@ public class cgData {
                         values.put("geocode", geocode);
                     }
                     values.put("updated", timeStamp);
-                    values.put("tbcode", oneTrackable.geocode);
-                    values.put("guid", oneTrackable.guid);
-                    values.put("title", oneTrackable.name);
-                    values.put("owner", oneTrackable.owner);
-                    if (oneTrackable.released != null) {
-                        values.put("released", oneTrackable.released.getTime());
+                    values.put("tbcode", oneTrackable.getGeocode());
+                    values.put("guid", oneTrackable.getGuid());
+                    values.put("title", oneTrackable.getName());
+                    values.put("owner", oneTrackable.getOwner());
+                    if (oneTrackable.getReleased() != null) {
+                        values.put("released", oneTrackable.getReleased().getTime());
                     } else {
                         values.put("released", 0L);
                     }
-                    values.put("goal", oneTrackable.goal);
-                    values.put("description", oneTrackable.details);
+                    values.put("goal", oneTrackable.getGoal());
+                    values.put("description", oneTrackable.getDetails());
 
                     databaseRW.insert(dbTableTrackables, null, values);
 
-                    saveLogs(oneTrackable.geocode, oneTrackable.logs);
+                    saveLogs(oneTrackable.getGeocode(), oneTrackable.getLogs());
                 }
             }
             databaseRW.setTransactionSuccessful();
@@ -1814,7 +1810,7 @@ public class cgData {
         }
 
         List<cgCache> caches = loadCaches(geocodes, null, null, null, null, null, loadA, loadW, loadS, loadL, loadI, loadO);
-        if (caches != null && caches.isEmpty() == false) {
+        if (CollectionUtils.isNotEmpty(caches)) {
             return caches.get(0);
         }
 
@@ -1939,9 +1935,13 @@ public class cgData {
                         //Extracted Method
                         cgCache cache = createCacheFromDatabaseContent(cursor);
 
+                        // FIXME: in the following code (and similar blocks below), the
+                        // cache.attributes entity probably does not need to be preserved,
+                        // and the resolution of the "if" statement could be simply
+                        // cache.attributes = attributes
                         if (loadA) {
-                            List<String> attributes = loadAttributes(cache.geocode);
-                            if (attributes != null && attributes.isEmpty() == false) {
+                            final List<String> attributes = loadAttributes(cache.geocode);
+                            if (CollectionUtils.isNotEmpty(attributes)) {
                                 if (cache.attributes == null) {
                                     cache.attributes = new ArrayList<String>();
                                 } else {
@@ -1952,8 +1952,8 @@ public class cgData {
                         }
 
                         if (loadW) {
-                            List<cgWaypoint> waypoints = loadWaypoints(cache.geocode);
-                            if (waypoints != null && waypoints.isEmpty() == false) {
+                            final List<cgWaypoint> waypoints = loadWaypoints(cache.geocode);
+                            if (CollectionUtils.isNotEmpty(waypoints)) {
                                 if (cache.waypoints == null) {
                                     cache.waypoints = new ArrayList<cgWaypoint>();
                                 } else {
@@ -1964,8 +1964,8 @@ public class cgData {
                         }
 
                         if (loadS) {
-                            List<cgImage> spoilers = loadSpoilers(cache.geocode);
-                            if (spoilers != null && spoilers.isEmpty() == false) {
+                            final List<cgImage> spoilers = loadSpoilers(cache.geocode);
+                            if (CollectionUtils.isNotEmpty(spoilers)) {
                                 if (cache.spoilers == null) {
                                     cache.spoilers = new ArrayList<cgImage>();
                                 } else {
@@ -1976,8 +1976,8 @@ public class cgData {
                         }
 
                         if (loadL) {
-                            List<cgLog> logs = loadLogs(cache.geocode);
-                            if (logs != null && logs.isEmpty() == false) {
+                            final List<cgLog> logs = loadLogs(cache.geocode);
+                            if (CollectionUtils.isNotEmpty(logs)) {
                                 if (cache.logs == null) {
                                     cache.logs = new ArrayList<cgLog>();
                                 } else {
@@ -1985,16 +1985,16 @@ public class cgData {
                                 }
                                 cache.logs.addAll(logs);
                             }
-                            Map<Integer, Integer> logCounts = loadLogCounts(cache.geocode);
-                            if (logCounts != null && logCounts.isEmpty() == false) {
+                            final Map<Integer, Integer> logCounts = loadLogCounts(cache.geocode);
+                            if (MapUtils.isNotEmpty(logCounts)) {
                                 cache.logCounts.clear();
                                 cache.logCounts.putAll(logCounts);
                             }
                         }
 
                         if (loadI) {
-                            List<cgTrackable> inventory = loadInventory(cache.geocode);
-                            if (inventory != null && inventory.isEmpty() == false) {
+                            final List<cgTrackable> inventory = loadInventory(cache.geocode);
+                            if (CollectionUtils.isNotEmpty(inventory)) {
                                 if (cache.inventory == null) {
                                     cache.inventory = new ArrayList<cgTrackable>();
                                 } else {
@@ -2037,22 +2037,22 @@ public class cgData {
         int index;
         cgCache cache = new cgCache();
 
-        cache.updated = (long) cursor.getLong(cursor.getColumnIndex("updated"));
-        cache.reason = (int) cursor.getInt(cursor.getColumnIndex("reason"));
+        cache.updated = cursor.getLong(cursor.getColumnIndex("updated"));
+        cache.reason = cursor.getInt(cursor.getColumnIndex("reason"));
         cache.detailed = cursor.getInt(cursor.getColumnIndex("detailed")) == 1;
         cache.detailedUpdate = (Long) cursor.getLong(cursor.getColumnIndex("detailedupdate"));
         cache.visitedDate = (Long) cursor.getLong(cursor.getColumnIndex("visiteddate"));
-        cache.geocode = (String) cursor.getString(cursor.getColumnIndex("geocode"));
-        cache.cacheId = (String) cursor.getString(cursor.getColumnIndex("cacheid"));
-        cache.guid = (String) cursor.getString(cursor.getColumnIndex("guid"));
-        cache.type = (String) cursor.getString(cursor.getColumnIndex("type"));
-        cache.name = (String) cursor.getString(cursor.getColumnIndex("name"));
+        cache.geocode = cursor.getString(cursor.getColumnIndex("geocode"));
+        cache.cacheId = cursor.getString(cursor.getColumnIndex("cacheid"));
+        cache.guid = cursor.getString(cursor.getColumnIndex("guid"));
+        cache.type = cursor.getString(cursor.getColumnIndex("type"));
+        cache.name = cursor.getString(cursor.getColumnIndex("name"));
         cache.own = cursor.getInt(cursor.getColumnIndex("own")) == 1;
-        cache.owner = (String) cursor.getString(cursor.getColumnIndex("owner"));
-        cache.ownerReal = (String) cursor.getString(cursor.getColumnIndex("owner_real"));
-        cache.hidden = new Date((long) cursor.getLong(cursor.getColumnIndex("hidden")));
-        cache.hint = (String) cursor.getString(cursor.getColumnIndex("hint"));
-        cache.size = CacheSize.FIND_BY_ID.get((String) cursor.getString(cursor.getColumnIndex("size")));
+        cache.owner = cursor.getString(cursor.getColumnIndex("owner"));
+        cache.ownerReal = cursor.getString(cursor.getColumnIndex("owner_real"));
+        cache.hidden = new Date(cursor.getLong(cursor.getColumnIndex("hidden")));
+        cache.hint = cursor.getString(cursor.getColumnIndex("hint"));
+        cache.size = CacheSize.FIND_BY_ID.get(cursor.getString(cursor.getColumnIndex("size")));
         cache.difficulty = (Float) cursor.getFloat(cursor.getColumnIndex("difficulty"));
         index = cursor.getColumnIndex("direction");
         if (cursor.isNull(index)) {
@@ -2067,8 +2067,8 @@ public class cgData {
             cache.distance = cursor.getFloat(index);
         }
         cache.terrain = (Float) cursor.getFloat(cursor.getColumnIndex("terrain"));
-        cache.latlon = (String) cursor.getString(cursor.getColumnIndex("latlon"));
-        cache.location = (String) cursor.getString(cursor.getColumnIndex("location"));
+        cache.latlon = cursor.getString(cursor.getColumnIndex("latlon"));
+        cache.location = cursor.getString(cursor.getColumnIndex("location"));
         cache.coords = getCoords(cursor);
         index = cursor.getColumnIndex("elevation");
         if (cursor.isNull(index)) {
@@ -2076,8 +2076,8 @@ public class cgData {
         } else {
             cache.elevation = (Double) cursor.getDouble(index);
         }
-        cache.personalNote = (String) cursor.getString(cursor.getColumnIndex("personal_note"));
-        cache.shortdesc = (String) cursor.getString(cursor.getColumnIndex("shortdesc"));
+        cache.personalNote = cursor.getString(cursor.getColumnIndex("personal_note"));
+        cache.shortdesc = cursor.getString(cursor.getColumnIndex("shortdesc"));
         // do not set cache.description !
         cache.favouriteCnt = (Integer) cursor.getInt(cursor.getColumnIndex("favourite_cnt"));
         cache.rating = (Float) cursor.getFloat(cursor.getColumnIndex("rating"));
@@ -2118,7 +2118,7 @@ public class cgData {
             int index = cursor.getColumnIndex("attribute");
 
             do {
-                attributes.add((String) cursor.getString(index));
+                attributes.add(cursor.getString(index));
             } while (cursor.moveToNext());
         }
 
@@ -2200,15 +2200,16 @@ public class cgData {
 
     private static cgWaypoint createWaypointFromDatabaseContent(Cursor cursor) {
         cgWaypoint waypoint = new cgWaypoint();
-        waypoint.id = (int) cursor.getInt(cursor.getColumnIndex("_id"));
-        waypoint.geocode = (String) cursor.getString(cursor.getColumnIndex("geocode"));
-        waypoint.typee = WaypointType.FIND_BY_ID.get((String) cursor.getString(cursor.getColumnIndex("type")));
-        waypoint.setPrefix((String) cursor.getString(cursor.getColumnIndex("prefix")));
-        waypoint.lookup = (String) cursor.getString(cursor.getColumnIndex("lookup"));
-        waypoint.name = (String) cursor.getString(cursor.getColumnIndex("name"));
-        waypoint.latlon = (String) cursor.getString(cursor.getColumnIndex("latlon"));
+
+        waypoint.id = cursor.getInt(cursor.getColumnIndex("_id"));
+        waypoint.geocode = cursor.getString(cursor.getColumnIndex("geocode"));
+        waypoint.typee = WaypointType.FIND_BY_ID.get(cursor.getString(cursor.getColumnIndex("type")));
+        waypoint.setPrefix(cursor.getString(cursor.getColumnIndex("prefix")));
+        waypoint.lookup = cursor.getString(cursor.getColumnIndex("lookup"));
+        waypoint.name = cursor.getString(cursor.getColumnIndex("name"));
+        waypoint.latlon = cursor.getString(cursor.getColumnIndex("latlon"));
         waypoint.coords = getCoords(cursor);
-        waypoint.note = (String) cursor.getString(cursor.getColumnIndex("note"));
+        waypoint.note = cursor.getString(cursor.getColumnIndex("note"));
 
         return waypoint;
     }
@@ -2240,9 +2241,9 @@ public class cgData {
 
             do {
                 cgImage spoiler = new cgImage();
-                spoiler.url = (String) cursor.getString(indexUrl);
-                spoiler.title = (String) cursor.getString(indexTitle);
-                spoiler.description = (String) cursor.getString(indexDescription);
+                spoiler.url = cursor.getString(indexUrl);
+                spoiler.title = cursor.getString(indexTitle);
+                spoiler.description = cursor.getString(indexDescription);
 
                 spoilers.add(spoiler);
             } while (cursor.moveToNext());
@@ -2284,8 +2285,8 @@ public class cgData {
 
             do {
                 final cgDestination dest = new cgDestination();
-                dest.setId((long) cursor.getLong(indexId));
-                dest.setDate((long) cursor.getLong(indexDate));
+                dest.setId(cursor.getLong(indexId));
+                dest.setDate(cursor.getLong(indexDate));
                 dest.setCoords(getCoords(cursor, indexLatitude, indexLongitude));
 
                 // If coordinates are non-existent or invalid, do not consider
@@ -2349,21 +2350,21 @@ public class cgData {
             while (cursor.moveToNext() && logs.size() < 100) {
                 if (log == null || log.id != cursor.getInt(indexLogsId)) {
                     log = new cgLog();
-                    log.id = (int) cursor.getInt(indexLogsId);
-                    log.type = (int) cursor.getInt(indexType);
-                    log.author = (String) cursor.getString(indexAuthor);
-                    log.log = (String) cursor.getString(indexLog);
-                    log.date = (long) cursor.getLong(indexDate);
-                    log.found = (int) cursor.getInt(indexFound);
+                    log.id = cursor.getInt(indexLogsId);
+                    log.type = cursor.getInt(indexType);
+                    log.author = cursor.getString(indexAuthor);
+                    log.log = cursor.getString(indexLog);
+                    log.date = cursor.getLong(indexDate);
+                    log.found = cursor.getInt(indexFound);
                     logs.add(log);
                 }
                 if (!cursor.isNull(indexLogImagesId)) {
                     final cgImage log_img = new cgImage();
-                    log_img.title = (String) cursor.getString(indexTitle);
+                    log_img.title = cursor.getString(indexTitle);
                     if (log_img.title == null) {
                         log_img.title = "";
                     }
-                    log_img.url = (String) cursor.getString(indexUrl);
+                    log_img.url = cursor.getString(indexUrl);
                     if (log_img.url == null) {
                         log_img.url = "";
                     }
@@ -2490,19 +2491,19 @@ public class cgData {
 
     private cgTrackable createTrackableFromDatabaseContent(Cursor cursor) {
         cgTrackable trackable = new cgTrackable();
-        trackable.geocode = (String) cursor.getString(cursor.getColumnIndex("tbcode"));
-        trackable.guid = (String) cursor.getString(cursor.getColumnIndex("guid"));
-        trackable.name = (String) cursor.getString(cursor.getColumnIndex("title"));
-        trackable.owner = (String) cursor.getString(cursor.getColumnIndex("owner"));
+        trackable.setGeocode(cursor.getString(cursor.getColumnIndex("tbcode")));
+        trackable.setGuid(cursor.getString(cursor.getColumnIndex("guid")));
+        trackable.setName(cursor.getString(cursor.getColumnIndex("title")));
+        trackable.setOwner(cursor.getString(cursor.getColumnIndex("owner")));
         String releasedPre = cursor.getString(cursor.getColumnIndex("released"));
         if (releasedPre != null && Long.getLong(releasedPre) != null) {
-            trackable.released = new Date(Long.getLong(releasedPre));
+            trackable.setReleased(new Date(Long.getLong(releasedPre)));
         } else {
-            trackable.released = null;
+            trackable.setReleased(null);
         }
-        trackable.goal = (String) cursor.getString(cursor.getColumnIndex("goal"));
-        trackable.details = (String) cursor.getString(cursor.getColumnIndex("description"));
-        trackable.logs = loadLogs(trackable.geocode);
+        trackable.setGoal(cursor.getString(cursor.getColumnIndex("goal")));
+        trackable.setDetails(cursor.getString(cursor.getColumnIndex("description")));
+        trackable.setLogs(loadLogs(trackable.getGeocode()));
         return trackable;
     }
 
@@ -2522,7 +2523,7 @@ public class cgData {
         int count = 0;
         try {
             String sql = "select count(_id) from " + dbTableCaches; // this default is not used, but we like to have variables initialized
-            if (detailedOnly == false) {
+            if (!detailedOnly) {
                 if (cachetype == null) {
                     sql = "select count(_id) from " + dbTableCaches + listSql;
                 } else {
@@ -2599,7 +2600,7 @@ public class cgData {
                     int index = cursor.getColumnIndex("geocode");
 
                     do {
-                        geocodes.add((String) cursor.getString(index));
+                        geocodes.add(cursor.getString(index));
                     } while (cursor.moveToNext());
                 } else {
                     cursor.close();
@@ -2650,7 +2651,7 @@ public class cgData {
                     int index = cursor.getColumnIndex("geocode");
 
                     do {
-                        geocodes.add((String) cursor.getString(index));
+                        geocodes.add(cursor.getString(index));
                     } while (cursor.moveToNext());
                 } else {
                     cursor.close();
@@ -2740,7 +2741,7 @@ public class cgData {
                     int index = cursor.getColumnIndex("geocode");
 
                     do {
-                        geocodes.add((String) cursor.getString(index));
+                        geocodes.add(cursor.getString(index));
                     } while (cursor.moveToNext());
                 } else {
                     cursor.close();
@@ -2792,7 +2793,7 @@ public class cgData {
                     int index = cursor.getColumnIndex("geocode");
 
                     do {
-                        geocodes.add((String) cursor.getString(index));
+                        geocodes.add(cursor.getString(index));
                     } while (cursor.moveToNext());
                 } else {
                     cursor.close();
@@ -3043,10 +3044,10 @@ public class cgData {
             cursor.moveToFirst();
 
             log = new cgLog();
-            log.id = (int) cursor.getInt(cursor.getColumnIndex("_id"));
-            log.type = (int) cursor.getInt(cursor.getColumnIndex("type"));
-            log.log = (String) cursor.getString(cursor.getColumnIndex("log"));
-            log.date = (long) cursor.getLong(cursor.getColumnIndex("date"));
+            log.id = cursor.getInt(cursor.getColumnIndex("_id"));
+            log.type = cursor.getInt(cursor.getColumnIndex("type"));
+            log.log = cursor.getString(cursor.getColumnIndex("log"));
+            log.date = cursor.getLong(cursor.getColumnIndex("date"));
         }
 
         if (cursor != null) {
@@ -3164,8 +3165,8 @@ public class cgData {
                     do {
                         cgList list = new cgList(false);
 
-                        list.id = ((int) cursor.getInt(indexId)) + 10;
-                        list.title = (String) cursor.getString(indexTitle);
+                        list.id = (cursor.getInt(indexId)) + 10;
+                        list.title = cursor.getString(indexTitle);
                         list.updated = (Long) cursor.getLong(indexUpdated);
                         list.coords = getCoords(cursor, indexLatitude, indexLongitude);
 
@@ -3239,7 +3240,7 @@ public class cgData {
             values.put("title", name);
             values.put("updated", System.currentTimeMillis());
 
-            count = (int) databaseRW.update(dbTableLists, values, "_id = " + (listId - 10), null);
+            count = databaseRW.update(dbTableLists, values, "_id = " + (listId - 10), null);
             databaseRW.setTransactionSuccessful();
         } finally {
             databaseRW.endTransaction();
@@ -3294,7 +3295,7 @@ public class cgData {
     }
 
     public synchronized boolean status() {
-        if (databaseRO == null || databaseRW == null || initialized == false) {
+        if (databaseRO == null || databaseRW == null || !initialized) {
             return false;
         }
 

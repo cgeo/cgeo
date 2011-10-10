@@ -8,9 +8,9 @@ sourcedir=../../src/cgeo/geocaching
 sourcefiles=`cd $sourcedir && find . -name '*.java'`
 xmlfiles=`echo ../../res/*/*.xml ../../AndroidManifest.xml`
 first=true
-if [ x$1 == x-f ]; then
+if [ x$1 = x-f ]; then
     remove=true
-elif [ x$1 == x-n ]; then
+elif [ x$1 = x-n ]; then
     remove=false
 else
     echo "Usage: findextratranslations.sh [ -n | -f]" >&2

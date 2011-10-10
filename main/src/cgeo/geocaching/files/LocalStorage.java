@@ -218,4 +218,13 @@ public class LocalStorage {
         return true;
     }
 
+    /**
+     * Check if an external media (SD card) is available for use.
+     *
+     * @return true if the external media is properly mounted
+     */
+    public static boolean isExternalStorageAvailable() {
+        return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+    }
+
 }

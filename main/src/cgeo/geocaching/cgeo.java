@@ -4,8 +4,8 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.utils.CollectionUtils;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.Context;
@@ -285,9 +285,7 @@ public class cgeo extends AbstractActivity {
                 context.startActivity(new Intent(context, cgeoinit.class));
                 return true;
             case MENU_HISTORY:
-                final Intent cachesIntent = new Intent(context, cgeocaches.class);
-                cachesIntent.putExtra("type", "history");
-                context.startActivity(cachesIntent);
+                cgeocaches.startActivityHistory(context);
                 return true;
             case MENU_SCAN:
                 Intent intent = new Intent(SCAN_INTENT);
@@ -450,7 +448,7 @@ public class cgeo extends AbstractActivity {
         (new countBubbleUpdate()).start();
         (new cleanDatabase()).start();
 
-        if (Settings.getCacheType() != null && cgBase.cacheTypesInv.containsKey(Settings.getCacheType()) == false) {
+        if (Settings.getCacheType() != null && !cgBase.cacheTypesInv.containsKey(Settings.getCacheType())) {
             Settings.setCacheType(null);
         }
 
@@ -567,7 +565,7 @@ public class cgeo extends AbstractActivity {
                         if (addCoords == null) {
                             navLocation.setText(res.getString(R.string.loc_no_addr));
                         }
-                        if (addCoords == null || (geo.coordsNow.distanceTo(addCoords) > 0.5 && addressObtaining == false)) {
+                        if (addCoords == null || (geo.coordsNow.distanceTo(addCoords) > 0.5 && !addressObtaining)) {
                             (new obtainAddress()).start();
                         }
                     } else {
@@ -619,12 +617,7 @@ public class cgeo extends AbstractActivity {
         }
 
         findViewById(R.id.nearest).setPressed(true);
-        final Intent cachesIntent = new Intent(context, cgeocaches.class);
-        cachesIntent.putExtra("type", "nearest");
-        cachesIntent.putExtra("latitude", geo.coordsNow.getLatitude());
-        cachesIntent.putExtra("longitude", geo.coordsNow.getLongitude());
-        cachesIntent.putExtra("cachetype", Settings.getCacheType());
-        context.startActivity(cachesIntent);
+        cgeocaches.startActivityNearest(context, geo.coordsNow);
     }
 
     /**
@@ -633,9 +626,7 @@ public class cgeo extends AbstractActivity {
      */
     public void cgeoFindByOffline(View v) {
         findViewById(R.id.search_offline).setPressed(true);
-        final Intent cachesIntent = new Intent(context, cgeocaches.class);
-        cachesIntent.putExtra("type", "offline");
-        context.startActivity(cachesIntent);
+        cgeocaches.startActivityOffline(context);
     }
 
     /**
@@ -674,7 +665,7 @@ public class cgeo extends AbstractActivity {
             }
 
             int checks = 0;
-            while (app.storageStatus() == false) {
+            while (!app.storageStatus()) {
                 try {
                     wait(500);
                     checks++;

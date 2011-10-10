@@ -1,7 +1,6 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.utils.CollectionUtils;
-
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.util.Log;
@@ -91,7 +90,7 @@ public final class GCVote {
                     final Matcher matcherGuid = patternGuid.matcher(voteData);
                     if (matcherGuid.find()) {
                         if (matcherGuid.groupCount() > 0) {
-                            guid = (String) matcherGuid.group(1);
+                            guid = matcherGuid.group(1);
                         }
                     }
                 } catch (Exception e) {
