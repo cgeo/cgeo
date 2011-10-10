@@ -276,8 +276,8 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
                 dialog.setTitle("cache");
 
                 String cacheType;
-                if (cgBase.cacheTypesInv.containsKey(coordinate.typeeSpec)) {
-                    cacheType = cgBase.cacheTypesInv.get(coordinate.typeeSpec);
+                if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec)) {
+                    cacheType = cgBase.cacheTypesInv.get(coordinate.typeSpec);
                 } else {
                     cacheType = cgBase.cacheTypesInv.get("mystery");
                 }
@@ -315,9 +315,9 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
             } else {
                 dialog.setTitle("waypoint");
 
-                String waypointL10N = cgBase.waypointTypees.get(coordinate.typeeSpec);
+                String waypointL10N = cgBase.waypointTypes.get(WaypointType.FIND_BY_ID.get(coordinate.typeSpec));
                 if (waypointL10N == null) {
-                    waypointL10N = cgBase.waypointTypees.get(WaypointType.WAYPOINT);
+                    waypointL10N = cgBase.waypointTypes.get(WaypointType.WAYPOINT);
                 }
 
                 dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ntype: " + waypointL10N);

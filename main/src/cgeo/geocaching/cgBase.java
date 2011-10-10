@@ -135,7 +135,7 @@ public class cgBase {
     public final static Map<String, String> cacheTypesInv = new HashMap<String, String>();
     public final static Map<String, String> cacheIDsChoices = new HashMap<String, String>();
     public final static Map<CacheSize, String> cacheSizesInv = new HashMap<CacheSize, String>();
-    public final static Map<WaypointType, String> waypointTypees = new HashMap<WaypointType, String>();
+    public final static Map<WaypointType, String> waypointTypes = new HashMap<WaypointType, String>();
     public final static Map<String, Integer> logTypes = new HashMap<String, Integer>();
     public final static Map<String, Integer> logTypes0 = new HashMap<String, Integer>();
     public final static Map<Integer, String> logTypes1 = new HashMap<Integer, String>();
@@ -240,7 +240,7 @@ public class cgBase {
         // waypoint types
         for (WaypointType wt : WaypointType.values()) {
             if (wt != WaypointType.OWN) {
-                waypointTypees.put(wt, res.getString(wt.stringId));
+                waypointTypes.put(wt, res.getString(wt.stringId));
             }
         }
 
@@ -1420,7 +1420,7 @@ public class cgBase {
                     try {
                         final Matcher matcherWpType = patternWpType.matcher(wp[3]);
                         if (matcherWpType.find() && matcherWpType.groupCount() > 0) {
-                            waypoint.typee = WaypointType.FIND_BY_ID.get(matcherWpType.group(1).trim());
+                            waypoint.type = WaypointType.FIND_BY_ID.get(matcherWpType.group(1).trim());
                         }
                     } catch (Exception e) {
                         // failed to parse type

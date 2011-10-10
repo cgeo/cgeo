@@ -8,7 +8,7 @@ public class cgCoord {
     public Integer id = null;
     public String geocode = "";
     public String type = "cache";
-    public String typeeSpec = "traditional";
+    public String typeSpec = "traditional";
     public String name = "";
     public boolean found = false;
     public boolean disabled = false;
@@ -27,7 +27,7 @@ public class cgCoord {
         coords = cache.coords;
         name = cache.name;
         type = "cache";
-        typeeSpec = cache.type;
+        typeSpec = cache.type;
         difficulty = cache.difficulty;
         terrain = cache.terrain;
         size = cache.size;
@@ -41,6 +41,6 @@ public class cgCoord {
         coords = waypoint.coords;
         name = waypoint.name;
         type = "waypoint";
-        typeeSpec = waypoint.typee.id;
+        typeSpec = waypoint.type != null ? waypoint.type.id : null;
     }
 }

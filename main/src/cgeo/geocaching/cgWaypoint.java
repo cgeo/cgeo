@@ -13,7 +13,7 @@ import java.util.List;
 public class cgWaypoint implements Comparable<cgWaypoint> {
     public Integer id = 0;
     public String geocode = "geocode";
-    public WaypointType typee = WaypointType.WAYPOINT;
+    public WaypointType type = WaypointType.WAYPOINT;
     private String prefix = "";
     public String lookup = "";
     public String name = "";
@@ -23,7 +23,7 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
     private Integer cachedOrder = null;
 
     public void setIcon(Resources res, cgBase base, TextView nameView) {
-        nameView.setCompoundDrawablesWithIntrinsicBounds(res.getDrawable(typee.drawableId), null, null, null);
+        nameView.setCompoundDrawablesWithIntrinsicBounds(res.getDrawable(type.drawableId), null, null, null);
     }
 
     public void merge(final cgWaypoint old) {
@@ -78,7 +78,7 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
     }
 
     public boolean isUserDefined() {
-        return typee == WaypointType.OWN;
+        return type == WaypointType.OWN;
     }
 
     private int computeOrder() {

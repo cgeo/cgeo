@@ -148,7 +148,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
                 PointGeocachingDataWaypoint wp = new PointGeocachingDataWaypoint();
                 wp.code = waypoint.geocode;
                 wp.name = waypoint.name;
-                String locusWpId = toLocusId(waypoint.typee);
+                String locusWpId = toLocusId(waypoint.type);
                 if (locusWpId != null) {
                     wp.type = locusWpId;
                 }

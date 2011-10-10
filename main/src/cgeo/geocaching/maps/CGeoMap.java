@@ -90,7 +90,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private String searchIdIntent = null;
     private String geocodeIntent = null;
     private Geopoint coordsIntent = null;
-    private WaypointType waypointTypeeIntent = null;
+    private WaypointType waypointTypeIntent = null;
     private int[] mapStateIntent = null;
     // status data
     private UUID searchId = null;
@@ -328,7 +328,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             final double latitudeIntent = extras.getDouble("latitude");
             final double longitudeIntent = extras.getDouble("longitude");
             coordsIntent = new Geopoint(latitudeIntent, longitudeIntent);
-            waypointTypeeIntent = WaypointType.FIND_BY_ID.get(extras.getString("wpttype"));
+            waypointTypeIntent = WaypointType.FIND_BY_ID.get(extras.getString("wpttype"));
             mapStateIntent = extras.getIntArray("mapstate");
 
             if ("".equals(searchIdIntent)) {
@@ -677,7 +677,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     mapIntent.putExtra("latitude", coordsIntent.getLatitude());
                     mapIntent.putExtra("longitude", coordsIntent.getLongitude());
                 }
-                mapIntent.putExtra("wpttype", waypointTypeeIntent.id);
+                mapIntent.putExtra("wpttype", waypointTypeIntent != null ? waypointTypeIntent.id : null);
                 int[] mapState = new int[4];
                 GeoPointImpl mapCenter = mapView.getMapViewCenter();
                 mapState[0] = mapCenter.getLatitudeE6();
@@ -1307,7 +1307,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                                     continue;
                                 }
 
-                                items.add(getWaypointItem(new cgCoord(oneWaypoint), oneWaypoint.typee));
+                                items.add(getWaypointItem(new cgCoord(oneWaypoint), oneWaypoint.type));
                             }
                         }
                         items.add(getCacheItem(new cgCoord(cacheOne), cacheOne.type, cacheOne.own, cacheOne.found, cacheOne.disabled));
@@ -1529,7 +1529,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 coordinates.add(coord);
                 CachesOverlayItemImpl item = Settings.getMapFactory().getCachesOverlayItem(coord, null);
 
-                final int icon = waypointTypeeIntent.markerId;
+                final int icon = waypointTypeIntent != null ? waypointTypeIntent.markerId : null;
                 Drawable pin = null;
                 if (iconsCache.containsKey(icon)) {
                     pin = iconsCache.get(icon);

@@ -37,7 +37,7 @@ class InternalMap extends AbstractInternalMap implements
         if (waypoint != null) {
             mapIntent.putExtra("latitude", waypoint.coords.getLatitude());
             mapIntent.putExtra("longitude", waypoint.coords.getLongitude());
-            mapIntent.putExtra("wpttype", waypoint.typee.id);
+            mapIntent.putExtra("wpttype", waypoint.type != null ? waypoint.type.id : null);
         } else if (coords != null) {
             mapIntent.putExtra("latitude", coords.getLatitude());
             mapIntent.putExtra("longitude", coords.getLongitude());

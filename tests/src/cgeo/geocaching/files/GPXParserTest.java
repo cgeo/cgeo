@@ -159,7 +159,7 @@ public class GPXParserTest extends InstrumentationTestCase {
         assertEquals("---", wp.lookup);
         assertEquals("Parkplatz", wp.name);
         assertEquals("Kostenfreies Parken (je nach Parkreihe Parkscheibe erforderlich)", wp.note);
-        assertEquals(WaypointType.PKG, wp.typee);
+        assertEquals(WaypointType.PKG, wp.type);
         assertEquals(49.317517, wp.coords.getLatitude(), 0.000001);
         assertEquals(8.545083, wp.coords.getLongitude(), 0.000001);
 
@@ -169,7 +169,7 @@ public class GPXParserTest extends InstrumentationTestCase {
         assertEquals("---", wp.lookup);
         assertEquals("Station 1", wp.name);
         assertEquals("Ein zweiter Wegpunkt, der nicht wirklich existiert sondern nur zum Testen gedacht ist.", wp.note);
-        assertEquals(WaypointType.STAGE, wp.typee);
+        assertEquals(WaypointType.STAGE, wp.type);
         assertEquals(49.317500, wp.coords.getLatitude(), 0.000001);
         assertEquals(8.545100, wp.coords.getLongitude(), 0.000001);
     }

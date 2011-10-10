@@ -54,7 +54,7 @@ public class cgeowaypointadd extends AbstractActivity {
                     id = -1;
                 } else {
                     geocode = waypoint.geocode;
-                    type = waypoint.typee;
+                    type = waypoint.type;
                     prefix = waypoint.getPrefix();
                     lookup = waypoint.lookup;
 
@@ -127,7 +127,7 @@ public class cgeowaypointadd extends AbstractActivity {
         Button addWaypoint = (Button) findViewById(R.id.add_waypoint);
         addWaypoint.setOnClickListener(new coordsListener());
 
-        List<String> wayPointNames = new ArrayList<String>(cgBase.waypointTypees.values());
+        List<String> wayPointNames = new ArrayList<String>(cgBase.waypointTypes.values());
         AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.name);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, wayPointNames);
         textView.setAdapter(adapter);
@@ -329,7 +329,7 @@ public class cgeowaypointadd extends AbstractActivity {
             final String note = ((EditText) findViewById(R.id.note)).getText().toString().trim();
 
             final cgWaypoint waypoint = new cgWaypoint();
-            waypoint.typee = type;
+            waypoint.type = type;
             waypoint.geocode = geocode;
             waypoint.setPrefix(prefix);
             waypoint.lookup = lookup;
