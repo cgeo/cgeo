@@ -13,7 +13,7 @@ public final class BaseUtils {
 
     /**
      * Searches for the pattern p in the data. If the pattern is not found defaultValue is returned
-     * 
+     *
      * @param data
      *            Data to search in
      * @param p
@@ -39,7 +39,7 @@ public final class BaseUtils {
 
     /**
      * Searches for the pattern p in the data. If the pattern is not found defaultValue is returned
-     * 
+     *
      * @param data
      *            Data to search in
      * @param p
@@ -54,7 +54,7 @@ public final class BaseUtils {
         final Matcher matcher = p.matcher(data);
         if (matcher.find() && matcher.groupCount() >= 1) {
             if (trim) {
-                return matcher.group(1).trim();
+                return new String(matcher.group(1).trim());
             }
             return new String(matcher.group(1));
             // Java copies the whole page String, when matching with regular expressions
