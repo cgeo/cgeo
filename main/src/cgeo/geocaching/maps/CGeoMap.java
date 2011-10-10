@@ -60,10 +60,12 @@ import java.util.UUID;
 public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory {
 
     /** Handler Messages */
+    private static final int HIDE_PROGRESS = 0;
+    private static final int SHOW_PROGRESS = 1;
     private static final int UPDATE_TITLE = 0;
     private static final int MAP_INVALIDATE = 1;
     private static final int UPDATE_PROGRESS = 0;
-    private static final int FINISHED = 1;
+    private static final int FINISHED_LOADING_DETAILS = 1;
 
     private static final int MENU_SELECT_MAPVIEW = 1;
     private static final int MENU_MAP_LIVE = 2;
@@ -112,6 +114,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private UsersThread usersThread = null;
     private DisplayUsersThread displayUsersThread = null;
     //Interthread communication flag
+    //But what does it do?
     private volatile boolean downloaded = false;
     // overlays
     private CachesOverlay overlayCaches = null;
@@ -120,7 +123,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private PositionOverlay overlayPosition = null;
     // data for overlays
     private int cachesCnt = 0;
-    private Map<Integer, Drawable> iconsCache = new HashMap<Integer, Drawable>();
+    private final Map<Integer, Drawable> iconsCache = new HashMap<Integer, Drawable>();
     /** List of caches in the viewport */
     private List<cgCache> caches = new ArrayList<cgCache>();
     /** List of users in the viewport */
@@ -186,9 +189,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         public void handleMessage(Message msg) {
             final int what = msg.what;
 
-            if (what == 0) {
+            if (what == SHOW_PROGRESS) {
                 ActivityMixin.showProgress(activity, false);
-            } else if (what == 1) {
+            } else if (what == HIDE_PROGRESS) {
                 ActivityMixin.showProgress(activity, true);
             }
         }
@@ -217,7 +220,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format(Locale.getDefault(), "%d", (secondsRemaining / 60)) + " " + res.getString(R.string.caches_eta_mins));
                     }
                 }
-            } else {
+            } else if (msg.what == FINISHED_LOADING_DETAILS) {
                 if (waitDialog != null) {
                     waitDialog.dismiss();
                     waitDialog.setOnCancelListener(null);
@@ -232,13 +235,14 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             }
         }
     };
+
+    /** Shows Error */
     final private Handler noMapTokenHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
             if (!noMapTokenShowed) {
                 ActivityMixin.showToast(activity, res.getString(R.string.map_token_err));
-
                 noMapTokenShowed = true;
             }
         }
@@ -404,62 +408,26 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
     @Override
     public void onStop() {
-        if (loadTimer != null) {
-            loadTimer.stopIt();
-            loadTimer = null;
-        }
-
-        if (usersTimer != null) {
-            usersTimer.stopIt();
-            usersTimer = null;
-        }
-
-        if (dir != null) {
-            dir = app.removeDir();
-        }
-        if (geo != null) {
-            geo = app.removeGeo();
-        }
-
-        savePrefs();
-
-        if (mapView != null) {
-            mapView.destroyDrawingCache();
-        }
+        shutdown();
 
         super.onStop();
     }
 
     @Override
     public void onPause() {
-        if (loadTimer != null) {
-            loadTimer.stopIt();
-            loadTimer = null;
-        }
-
-        if (usersTimer != null) {
-            usersTimer.stopIt();
-            usersTimer = null;
-        }
-
-        if (dir != null) {
-            dir = app.removeDir();
-        }
-        if (geo != null) {
-            geo = app.removeGeo();
-        }
-
-        savePrefs();
-
-        if (mapView != null) {
-            mapView.destroyDrawingCache();
-        }
+        shutdown();
 
         super.onPause();
     }
 
     @Override
     public void onDestroy() {
+        shutdown();
+
+        super.onDestroy();
+    }
+
+    private void shutdown() {
         if (loadTimer != null) {
             loadTimer.stopIt();
             loadTimer = null;
@@ -482,8 +450,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         if (mapView != null) {
             mapView.destroyDrawingCache();
         }
-
-        super.onDestroy();
     }
 
     @Override
@@ -962,7 +928,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                                 spanLatitude = spanLatitudeNow;
                                 spanLongitude = spanLongitudeNow;
 
-                                showProgressHandler.sendEmptyMessage(1); // show progress
+                                showProgressHandler.sendEmptyMessage(SHOW_PROGRESS); // show progress
 
                                 loadThread = new LoadThread(centerLatitude, centerLongitude, spanLatitude, spanLongitude);
                                 loadThreadRun = System.currentTimeMillis();
@@ -972,7 +938,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     }
 
                     if (!isLoading()) {
-                        showProgressHandler.sendEmptyMessage(0); // hide progress
+                        showProgressHandler.sendEmptyMessage(HIDE_PROGRESS); // hide progress
                     }
 
                     yield();
@@ -1653,7 +1619,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             }
 
             // we're done
-            handler.sendEmptyMessage(FINISHED);
+            handler.sendEmptyMessage(FINISHED_LOADING_DETAILS);
         }
     }
 
