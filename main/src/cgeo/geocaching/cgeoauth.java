@@ -1,8 +1,11 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.network.OAuth;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.util.EntityUtils;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -16,19 +19,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.net.ssl.HttpsURLConnection;
 
 public class cgeoauth extends AbstractActivity {
     private String OAtoken = null;
@@ -142,92 +134,41 @@ public class cgeoauth extends AbstractActivity {
 
         int status = 0;
         try {
-            String lineOne = null;
-            HttpsURLConnection connection = null;
+            final Parameters params = new Parameters();
+            OAuth.signOAuth(host, pathRequest, method, true, params, null, null);
+            final String line = cgBase.getResponseData(cgBase.request("https://" + host + pathRequest, params, false));
 
-            try {
-                final StringBuilder sb = new StringBuilder();
-                final String params = cgOAuth.signOAuth(host, pathRequest, method, true, new Parameters(), null, null);
 
-                int code = -1;
-                int retries = 0;
-
-                do {
-                    // base.trustAllHosts();
-                    Log.d(Settings.tag, "https://" + host + pathRequest + "?" + params);
-                    final URL u = new URL("https://" + host + pathRequest + "?" + params);
-                    final URLConnection uc = u.openConnection();
-                    connection = (HttpsURLConnection) uc;
-
-                    // connection.setHostnameVerifier(base.doNotVerify);
-                    connection.setReadTimeout(30000);
-                    connection.setRequestMethod(method);
-                    HttpURLConnection.setFollowRedirects(true);
-                    connection.setDoInput(true);
-                    connection.setDoOutput(false);
-
-                    final InputStream in = connection.getInputStream();
-                    final InputStreamReader ins = new InputStreamReader(in);
-                    final BufferedReader br = new BufferedReader(ins, 16 * 1024);
-
-                    while ((lineOne = br.readLine()) != null) {
-                        sb.append(lineOne);
-                        sb.append('\n');
-                    }
-
-                    code = connection.getResponseCode();
-                    retries++;
-
-                    Log.i(Settings.tag, host + ": " + connection.getResponseCode() + " " + connection.getResponseMessage());
-
-                    br.close();
-                    in.close();
-                    ins.close();
-                } while (code == -1 && retries < 5);
-
-                final String line = sb.toString();
-
-                if (StringUtils.isNotBlank(line)) {
-                    final Matcher paramsMatcher1 = paramsPattern1.matcher(line);
-                    if (paramsMatcher1.find() && paramsMatcher1.groupCount() > 0) {
-                        OAtoken = paramsMatcher1.group(1);
-                    }
-                    final Matcher paramsMatcher2 = paramsPattern2.matcher(line);
-                    if (paramsMatcher2.find() && paramsMatcher2.groupCount() > 0) {
-                        OAtokenSecret = paramsMatcher2.group(1);
-                    }
-
-                    if (StringUtils.isNotBlank(OAtoken) && StringUtils.isNotBlank(OAtokenSecret)) {
-                        final SharedPreferences.Editor prefsEdit = getSharedPreferences(Settings.preferences, 0).edit();
-                        prefsEdit.putString("temp-token-public", OAtoken);
-                        prefsEdit.putString("temp-token-secret", OAtokenSecret);
-                        prefsEdit.commit();
-
-                        try {
-                            final Parameters paramsPre = new Parameters();
-                            paramsPre.put("oauth_callback", "oob");
-
-                            final String paramsBrowser = cgOAuth.signOAuth(host, pathAuthorize, "GET", true, paramsPre, OAtoken, OAtokenSecret);
-
-                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://" + host + pathAuthorize + "?" + paramsBrowser)));
-
-                            status = 1;
-                        } catch (Exception e) {
-                            Log.e(Settings.tag, "cgeoauth.requestToken(2): " + e.toString());
-                        }
-                    }
+            if (StringUtils.isNotBlank(line)) {
+                final Matcher paramsMatcher1 = paramsPattern1.matcher(line);
+                if (paramsMatcher1.find()) {
+                    OAtoken = paramsMatcher1.group(1);
                 }
-            } catch (IOException eio) {
-                Log.e(Settings.tag, "cgeoauth.requestToken(IO): " + eio.toString() + " ~ " + connection.getResponseCode() + ": " + connection.getResponseMessage());
-            } catch (Exception e) {
-                Log.e(Settings.tag, "cgeoauth.requestToken(1): " + e.toString());
-            } finally {
-                if (connection != null) {
-                    connection.disconnect();
+                final Matcher paramsMatcher2 = paramsPattern2.matcher(line);
+                if (paramsMatcher2.find()) {
+                    OAtokenSecret = paramsMatcher2.group(1);
+                }
+
+                if (StringUtils.isNotBlank(OAtoken) && StringUtils.isNotBlank(OAtokenSecret)) {
+                    final SharedPreferences.Editor prefsEdit = getSharedPreferences(Settings.preferences, 0).edit();
+                    prefsEdit.putString("temp-token-public", OAtoken);
+                    prefsEdit.putString("temp-token-secret", OAtokenSecret);
+                    prefsEdit.commit();
+
+                    try {
+                        final Parameters paramsBrowser = new Parameters();
+                        paramsBrowser.put("oauth_callback", "oob");
+                        OAuth.signOAuth(host, pathAuthorize, "GET", true, paramsBrowser, OAtoken, OAtokenSecret);
+                        final String encodedParams = EntityUtils.toString(new UrlEncodedFormEntity(paramsBrowser));
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://" + host + pathAuthorize + "?" + encodedParams)));
+                        status = 1;
+                    } catch (Exception e) {
+                        Log.e(Settings.tag, "cgeoauth.requestToken(2): " + e.toString());
+                    }
                 }
             }
-        } catch (Exception e2) {
-            Log.e(Settings.tag, "cgeoauth.requestToken(3): " + e2.toString());
+        } catch (Exception e) {
+            Log.e(Settings.tag, "cgeoauth.requestToken(1): " + e.toString());
         }
 
         requestTokenHandler.sendEmptyMessage(status);
@@ -239,64 +180,18 @@ public class cgeoauth extends AbstractActivity {
         final String method = "POST";
 
         int status = 0;
-        String lineOne = null;
 
         try {
-            final Parameters paramsPre = new Parameters("oauth_verifier", pinEntry.getText().toString());
+            final Parameters params = new Parameters("oauth_verifier", pinEntry.getText().toString());
 
-            int code = -1;
-            int retries = 0;
-
-            final String params = cgOAuth.signOAuth(host, path, method, true, paramsPre, OAtoken, OAtokenSecret);
-            final StringBuilder sb = new StringBuilder();
-            do {
-                // base.trustAllHosts();
-                final URL u = new URL("https://" + host + path);
-                final URLConnection uc = u.openConnection();
-                final HttpsURLConnection connection = (HttpsURLConnection) uc;
-
-                // connection.setHostnameVerifier(base.doNotVerify);
-                connection.setReadTimeout(30000);
-                connection.setRequestMethod(method);
-                HttpURLConnection.setFollowRedirects(true);
-                connection.setDoOutput(true);
-                connection.setDoInput(true);
-
-                final OutputStream out = connection.getOutputStream();
-                final OutputStreamWriter wr = new OutputStreamWriter(out);
-
-                wr.write(params);
-                wr.flush();
-                wr.close();
-                out.close();
-
-                final InputStream in = connection.getInputStream();
-                final InputStreamReader ins = new InputStreamReader(in);
-                final BufferedReader br = new BufferedReader(ins, 16 * 1024);
-
-                while ((lineOne = br.readLine()) != null) {
-                    sb.append(lineOne);
-                    sb.append('\n');
-                }
-
-                code = connection.getResponseCode();
-                retries++;
-
-                Log.i(Settings.tag, host + ": " + connection.getResponseCode() + " " + connection.getResponseMessage());
-
-                br.close();
-                ins.close();
-                in.close();
-                connection.disconnect();
-            } while (code == -1 && retries < 5);
-
-            final String line = sb.toString();
+            OAuth.signOAuth(host, path, method, true, params, OAtoken, OAtokenSecret);
+            final String line = StringUtils.defaultString(cgBase.getResponseData(cgBase.postRequest("https://" + host + path, params)));
 
             OAtoken = "";
             OAtokenSecret = "";
 
             final Matcher paramsMatcher1 = paramsPattern1.matcher(line);
-            if (paramsMatcher1.find() && paramsMatcher1.groupCount() > 0) {
+            if (paramsMatcher1.find()) {
                 OAtoken = paramsMatcher1.group(1);
             }
             final Matcher paramsMatcher2 = paramsPattern2.matcher(line);
