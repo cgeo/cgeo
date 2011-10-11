@@ -140,9 +140,7 @@
   <string name="err_detail_no_spoiler">c:geo n\'a pas trouvé d\'image indice pour cette cache.</string>
   <string name="err_detail_no_map_static">c:geo n\'a pas trouvé de cartes statiques pour cette cache.</string>
   <string name="err_detail_not_load_map_static">Désolé, c:geo n\'a pas réussi à charger les cartes statiques.</string>
-  <string name="err_detail_still_removing">Cache toujours en cours d\'effacement.</string>
-  <string name="err_detail_still_saving">Cache toujours en cours de sauvegarde.</string>
-  <string name="err_detail_still_refreshing">Cache toujours en cours de chargement.</string>
+  <string name="err_detail_still_working">Autre tâche déjà en cours.</string>
   <string name="err_watchlist_still_managing">Liste de suivi toujours en traitement.</string>
   <string name="err_watchlist_failed">Échec lors du changement de votre liste de suivi.</string>
   <string name="err_navigation_no">c:geo ne trouve pas de navigation supportée.</string>
@@ -496,7 +494,7 @@
   <string name="cache_dialog_loading_details_status_logs">Chargement des entrées de carnets</string>
   <string name="cache_dialog_loading_details_status_waypoints">Traitement des points intermédiaires</string>
   <string name="cache_dialog_loading_details_status_gcvote">Chargement des votes</string>
-  <string name="cache_dialog_loading_details_status_render">Render view</string>
+  <string name="cache_dialog_loading_details_status_render">Préparation de la page</string>
   <string name="cache_dialog_loading_description">Chargement de la description…</string>
   <string name="cache_dialog_offline_save_title">Hors ligne</string>
   <string name="cache_dialog_offline_save_message">Enregistrement pour une utilisation hors ligne…</string>
