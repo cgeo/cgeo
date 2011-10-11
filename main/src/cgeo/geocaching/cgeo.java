@@ -612,7 +612,7 @@ public class cgeo extends AbstractActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void cgeoFindNearest(View v) {
-        if (geo == null) {
+        if (geo == null || geo.coordsNow == null) {
             return;
         }
 
