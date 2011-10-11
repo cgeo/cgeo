@@ -67,12 +67,14 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private static final int UPDATE_PROGRESS = 0;
     private static final int FINISHED_LOADING_DETAILS = 1;
 
+    //Menu
     private static final int MENU_SELECT_MAPVIEW = 1;
     private static final int MENU_MAP_LIVE = 2;
     private static final int MENU_STORE_CACHES = 3;
     private static final int MENU_TRAIL_MODE = 4;
     private static final int MENU_CIRCLE_MODE = 5;
 
+    //Submenu
     private static final int SUBMENU_VIEW_GOOGLE_MAP = 10;
     private static final int SUBMENU_VIEW_GOOGLE_SAT = 11;
     private static final int SUBMENU_VIEW_MF_MAPNIK = 13;
@@ -98,7 +100,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private String waypointTypeIntent = null;
     private int[] mapStateIntent = null;
     // status data
+    //FIXME Horrible! multiple Downloadthreads could use this
     private UUID searchId = null;
+
     private String token = null;
     private boolean noMapTokenShowed = false;
     // map status data
@@ -113,8 +117,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     //FIXME should be members of UsersTimer since started by it.
     private UsersThread usersThread = null;
     private DisplayUsersThread displayUsersThread = null;
-    //Interthread communication flag
-    //But what does it do?
+    //Interthread communication flag But what does it do?
     private volatile boolean downloaded = false;
     // overlays
     private CachesOverlay overlayCaches = null;
@@ -190,9 +193,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             final int what = msg.what;
 
             if (what == SHOW_PROGRESS) {
-                ActivityMixin.showProgress(activity, false);
-            } else if (what == HIDE_PROGRESS) {
                 ActivityMixin.showProgress(activity, true);
+            } else if (what == HIDE_PROGRESS) {
+                ActivityMixin.showProgress(activity, false);
             }
         }
     };
@@ -1213,12 +1216,22 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
                 //TODO Portree Only overwrite if we got some. Otherwise maybe error icon
                 //TODO Merge not to show locally found caches
-                caches = app.getCaches(searchId, centerLat, centerLon, spanLat, spanLon);
+                List<cgCache> downloadedCaches = app.getCaches(searchId, centerLat, centerLon, spanLat, spanLon);
+                if (downloadedCaches != null && downloadedCaches.size() > 0)
+                {
+                    caches = downloadedCaches;
+                }
+                else
+                {
+                    // No painting needed.
+                    working = false;
+                    displayHandler.sendEmptyMessage(UPDATE_TITLE);
+                    return;
+                }
 
                 if (isStopped()) {
-                    displayHandler.sendEmptyMessage(UPDATE_TITLE);
                     working = false;
-
+                    displayHandler.sendEmptyMessage(UPDATE_TITLE);
                     return;
                 }
 
@@ -1228,7 +1241,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 }
                 displayThread = new DisplayThread(centerLat, centerLon, spanLat, spanLon);
                 displayThread.start();
-
             } finally {
                 working = false;
             }
