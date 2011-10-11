@@ -1,8 +1,8 @@
 #!/bin/sh
 
-getnames () {
-    grep "<string" "$1" | grep "name=" | sed "s/^.*<string\(-array\)*\s*name\s*=\s*\"\([^\"]*\)\".*$/\2/"
-}
+cd `dirname "$0"`
+
+. ./funcs.sh
 
 finddiffs () {
     echo "translations missing or not in the right place for language '$1':" > $1.missing
@@ -24,8 +24,6 @@ usage() {
     echo "$alllangs"
     exit 1
 }
-
-cd `dirname "$0"`
 
 alllangs=`find ../../res/values-* -name "strings.xml" | sed "s/^.*values-\(..\).*$/    \1/"`
 

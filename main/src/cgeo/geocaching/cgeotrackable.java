@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -46,15 +45,15 @@ public class cgeotrackable extends AbstractActivity {
             TextView itemName;
             TextView itemValue;
 
-            if (trackable != null && trackable.errorRetrieve != null) {
-                showToast(res.getString(R.string.err_tb_details_download) + " " + trackable.errorRetrieve.getErrorString(res) + ".");
+            if (trackable != null && trackable.getErrorRetrieve() != null) {
+                showToast(res.getString(R.string.err_tb_details_download) + " " + trackable.getErrorRetrieve().getErrorString(res) + ".");
 
                 finish();
                 return;
             }
 
-            if (trackable != null && StringUtils.isNotBlank(trackable.error)) {
-                showToast(res.getString(R.string.err_tb_details_download) + " " + trackable.error + ".");
+            if (trackable != null && StringUtils.isNotBlank(trackable.getError())) {
+                showToast(res.getString(R.string.err_tb_details_download) + " " + trackable.getError() + ".");
 
                 finish();
                 return;
@@ -77,21 +76,21 @@ public class cgeotrackable extends AbstractActivity {
 
             try {
                 inflater = getLayoutInflater();
-                geocode = trackable.geocode.toUpperCase();
+                geocode = trackable.getGeocode().toUpperCase();
 
-                if (StringUtils.isNotBlank(trackable.name)) {
-                    setTitle(Html.fromHtml(trackable.name).toString());
+                if (StringUtils.isNotBlank(trackable.getName())) {
+                    setTitle(Html.fromHtml(trackable.getName()).toString());
                 } else {
-                    setTitle(trackable.name.toUpperCase());
+                    setTitle(trackable.getName().toUpperCase());
                 }
 
                 ((ScrollView) findViewById(R.id.details_list_box)).setVisibility(View.VISIBLE);
                 LinearLayout detailsList = (LinearLayout) findViewById(R.id.details_list);
 
                 // actiobar icon
-                if (StringUtils.isNotBlank(trackable.iconUrl)) {
+                if (StringUtils.isNotBlank(trackable.getIconUrl())) {
                     final tbIconHandler iconHandler = new tbIconHandler(((TextView) findViewById(R.id.actionbar_title)));
-                    final tbIconThread iconThread = new tbIconThread(trackable.iconUrl, iconHandler);
+                    final tbIconThread iconThread = new tbIconThread(trackable.getIconUrl(), iconHandler);
                     iconThread.start();
                 }
 
@@ -101,8 +100,8 @@ public class cgeotrackable extends AbstractActivity {
                 itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
                 itemName.setText(res.getString(R.string.trackable_name));
-                if (StringUtils.isNotBlank(trackable.name)) {
-                    itemValue.setText(Html.fromHtml(trackable.name).toString());
+                if (StringUtils.isNotBlank(trackable.getName())) {
+                    itemValue.setText(Html.fromHtml(trackable.getName()).toString());
                 } else {
                     itemValue.setText(res.getString(R.string.trackable_unknown));
                 }
@@ -114,8 +113,8 @@ public class cgeotrackable extends AbstractActivity {
                 itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
                 String tbType = null;
-                if (StringUtils.isNotBlank(trackable.type)) {
-                    tbType = Html.fromHtml(trackable.type).toString();
+                if (StringUtils.isNotBlank(trackable.getType())) {
+                    tbType = Html.fromHtml(trackable.getType()).toString();
                 } else {
                     tbType = res.getString(R.string.trackable_unknown);
                 }
@@ -129,7 +128,7 @@ public class cgeotrackable extends AbstractActivity {
                 itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
                 itemName.setText(res.getString(R.string.trackable_code));
-                itemValue.setText(trackable.geocode.toUpperCase());
+                itemValue.setText(trackable.getGeocode().toUpperCase());
                 detailsList.addView(itemLayout);
 
                 // trackable owner
@@ -138,8 +137,8 @@ public class cgeotrackable extends AbstractActivity {
                 itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
                 itemName.setText(res.getString(R.string.trackable_owner));
-                if (StringUtils.isNotBlank(trackable.owner)) {
-                    itemValue.setText(Html.fromHtml(trackable.owner), TextView.BufferType.SPANNABLE);
+                if (StringUtils.isNotBlank(trackable.getOwner())) {
+                    itemValue.setText(Html.fromHtml(trackable.getOwner()), TextView.BufferType.SPANNABLE);
                     itemLayout.setOnClickListener(new userActions());
                 } else {
                     itemValue.setText(res.getString(R.string.trackable_unknown));
@@ -147,9 +146,9 @@ public class cgeotrackable extends AbstractActivity {
                 detailsList.addView(itemLayout);
 
                 // trackable spotted
-                if (StringUtils.isNotBlank(trackable.spottedName) ||
-                        trackable.spottedType == cgTrackable.SPOTTED_UNKNOWN ||
-                        trackable.spottedType == cgTrackable.SPOTTED_OWNER
+                if (StringUtils.isNotBlank(trackable.getSpottedName()) ||
+                        trackable.getSpottedType() == cgTrackable.SPOTTED_UNKNOWN ||
+                        trackable.getSpottedType() == cgTrackable.SPOTTED_OWNER
                 ) {
                     itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
                     itemName = (TextView) itemLayout.findViewById(R.id.name);
@@ -158,13 +157,13 @@ public class cgeotrackable extends AbstractActivity {
                     itemName.setText(res.getString(R.string.trackable_spotted));
                     String text = null;
 
-                    if (trackable.spottedType == cgTrackable.SPOTTED_CACHE) {
-                        text = res.getString(R.string.trackable_spotted_in_cache) + " " + Html.fromHtml(trackable.spottedName).toString();
-                    } else if (trackable.spottedType == cgTrackable.SPOTTED_USER) {
-                        text = res.getString(R.string.trackable_spotted_at_user) + " " + Html.fromHtml(trackable.spottedName).toString();
-                    } else if (trackable.spottedType == cgTrackable.SPOTTED_UNKNOWN) {
+                    if (trackable.getSpottedType() == cgTrackable.SPOTTED_CACHE) {
+                        text = res.getString(R.string.trackable_spotted_in_cache) + " " + Html.fromHtml(trackable.getSpottedName()).toString();
+                    } else if (trackable.getSpottedType() == cgTrackable.SPOTTED_USER) {
+                        text = res.getString(R.string.trackable_spotted_at_user) + " " + Html.fromHtml(trackable.getSpottedName()).toString();
+                    } else if (trackable.getSpottedType() == cgTrackable.SPOTTED_UNKNOWN) {
                         text = res.getString(R.string.trackable_spotted_unknown_location);
-                    } else if (trackable.spottedType == cgTrackable.SPOTTED_OWNER) {
+                    } else if (trackable.getSpottedType() == cgTrackable.SPOTTED_OWNER) {
                         text = res.getString(R.string.trackable_spotted_owner);
                     } else {
                         text = "N/A";
@@ -172,16 +171,16 @@ public class cgeotrackable extends AbstractActivity {
 
                     itemValue.setText(text);
                     itemLayout.setClickable(true);
-                    if (cgTrackable.SPOTTED_CACHE == trackable.spottedType) {
+                    if (cgTrackable.SPOTTED_CACHE == trackable.getSpottedType()) {
                         itemLayout.setOnClickListener(new View.OnClickListener() {
                             public void onClick(View arg0) {
                                 Intent cacheIntent = new Intent(cgeotrackable.this, cgeodetail.class);
-                                cacheIntent.putExtra("guid", (String) trackable.spottedGuid);
-                                cacheIntent.putExtra("name", (String) trackable.spottedName);
+                                cacheIntent.putExtra("guid", trackable.getSpottedGuid());
+                                cacheIntent.putExtra("name", trackable.getSpottedName());
                                 startActivity(cacheIntent);
                             }
                         });
-                    } else if (cgTrackable.SPOTTED_USER == trackable.spottedType) {
+                    } else if (cgTrackable.SPOTTED_USER == trackable.getSpottedType()) {
                         itemLayout.setOnClickListener(new userActions());
                         //activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?guid=" + trackable.spottedGuid)));
                     }
@@ -190,58 +189,58 @@ public class cgeotrackable extends AbstractActivity {
                 }
 
                 // trackable origin
-                if (StringUtils.isNotBlank(trackable.origin)) {
+                if (StringUtils.isNotBlank(trackable.getOrigin())) {
                     itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
                     itemName = (TextView) itemLayout.findViewById(R.id.name);
                     itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
                     itemName.setText(res.getString(R.string.trackable_origin));
-                    itemValue.setText(Html.fromHtml(trackable.origin), TextView.BufferType.SPANNABLE);
+                    itemValue.setText(Html.fromHtml(trackable.getOrigin()), TextView.BufferType.SPANNABLE);
                     detailsList.addView(itemLayout);
                 }
 
                 // trackable released
-                if (trackable.released != null) {
+                if (trackable.getReleased() != null) {
                     itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
                     itemName = (TextView) itemLayout.findViewById(R.id.name);
                     itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
                     itemName.setText(res.getString(R.string.trackable_released));
-                    itemValue.setText(base.formatDate(trackable.released.getTime()));
+                    itemValue.setText(base.formatDate(trackable.getReleased().getTime()));
                     detailsList.addView(itemLayout);
                 }
 
                 // trackable distance
-                if (trackable.distance != null) {
+                if (trackable.getDistance() != null) {
                     itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
                     itemName = (TextView) itemLayout.findViewById(R.id.name);
                     itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
                     itemName.setText(res.getString(R.string.trackable_distance));
-                    itemValue.setText(cgBase.getHumanDistance(trackable.distance));
+                    itemValue.setText(cgBase.getHumanDistance(trackable.getDistance()));
                     detailsList.addView(itemLayout);
                 }
 
                 // trackable goal
-                if (StringUtils.isNotBlank(trackable.goal)) {
+                if (StringUtils.isNotBlank(trackable.getGoal())) {
                     ((LinearLayout) findViewById(R.id.goal_box)).setVisibility(View.VISIBLE);
                     TextView descView = (TextView) findViewById(R.id.goal);
                     descView.setVisibility(View.VISIBLE);
-                    descView.setText(Html.fromHtml(trackable.goal, new cgHtmlImg(cgeotrackable.this, geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
+                    descView.setText(Html.fromHtml(trackable.getGoal(), new cgHtmlImg(cgeotrackable.this, geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
                     descView.setMovementMethod(LinkMovementMethod.getInstance());
                 }
 
                 // trackable details
-                if (StringUtils.isNotBlank(trackable.details)) {
+                if (StringUtils.isNotBlank(trackable.getDetails())) {
                     ((LinearLayout) findViewById(R.id.details_box)).setVisibility(View.VISIBLE);
                     TextView descView = (TextView) findViewById(R.id.details);
                     descView.setVisibility(View.VISIBLE);
-                    descView.setText(Html.fromHtml(trackable.details, new cgHtmlImg(cgeotrackable.this, geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
+                    descView.setText(Html.fromHtml(trackable.getDetails(), new cgHtmlImg(cgeotrackable.this, geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
                     descView.setMovementMethod(LinkMovementMethod.getInstance());
                 }
 
                 // trackable image
-                if (StringUtils.isNotBlank(trackable.image)) {
+                if (StringUtils.isNotBlank(trackable.getImage())) {
                     ((LinearLayout) findViewById(R.id.image_box)).setVisibility(View.VISIBLE);
                     LinearLayout imgView = (LinearLayout) findViewById(R.id.image);
 
@@ -252,7 +251,7 @@ public class cgeotrackable extends AbstractActivity {
                     trackableImage.setOnClickListener(new View.OnClickListener() {
 
                         public void onClick(View arg0) {
-                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.image)));
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(trackable.getImage())));
                         }
                     });
 
@@ -276,7 +275,7 @@ public class cgeotrackable extends AbstractActivity {
                             try {
                                 cgHtmlImg imgGetter = new cgHtmlImg(cgeotrackable.this, geocode, true, 0, false);
 
-                                image = imgGetter.getDrawable(trackable.image);
+                                image = imgGetter.getDrawable(trackable.getImage());
                                 Message message = handler.obtainMessage(0, image);
                                 handler.sendMessage(message);
                             } catch (Exception e) {
@@ -402,9 +401,9 @@ public class cgeotrackable extends AbstractActivity {
 
             String selectedName = itemName.getText().toString();
             if (selectedName.equals(res.getString(R.string.trackable_owner))) {
-                contextMenuUser = trackable.owner;
+                contextMenuUser = trackable.getOwner();
             } else if (selectedName.equals(res.getString(R.string.trackable_spotted))) {
-                contextMenuUser = trackable.spottedName;
+                contextMenuUser = trackable.getSpottedName();
             }
         }
 
@@ -419,10 +418,10 @@ public class cgeotrackable extends AbstractActivity {
         final int id = item.getItemId();
 
         if (id == 1) {
-            cgeocaches.startActivityCacheOwner(this, contextMenuUser);
+            cgeocaches.startActivityOwner(this, contextMenuUser);
             return true;
         } else if (id == 2) {
-            cgeocaches.startActivityCacheUser(this, contextMenuUser);
+            cgeocaches.startActivityUserName(this, contextMenuUser);
             return true;
         } else if (id == 3) {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(contextMenuUser))));
@@ -447,7 +446,7 @@ public class cgeotrackable extends AbstractActivity {
                 logTouch();
                 return true;
             case 2:
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/track/details.aspx?tracker=" + trackable.geocode)));
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/track/details.aspx?tracker=" + trackable.getGeocode())));
                 return true;
         }
 
@@ -490,8 +489,8 @@ public class cgeotrackable extends AbstractActivity {
 
         RelativeLayout rowView;
 
-        if (trackable != null && trackable.logs != null) {
-            for (cgLog log : trackable.logs) {
+        if (trackable != null && trackable.getLogs() != null) {
+            for (cgLog log : trackable.getLogs()) {
                 rowView = (RelativeLayout) inflater.inflate(R.layout.trackable_logitem, null);
 
                 if (log.date > 0) {
@@ -514,8 +513,8 @@ public class cgeotrackable extends AbstractActivity {
                     ((TextView) rowView.findViewById(R.id.location)).setOnClickListener(new View.OnClickListener() {
                         public void onClick(View arg0) {
                             Intent cacheIntent = new Intent(cgeotrackable.this, cgeodetail.class);
-                            cacheIntent.putExtra("guid", (String) cacheGuid);
-                            cacheIntent.putExtra("name", (String) Html.fromHtml(cacheName).toString());
+                            cacheIntent.putExtra("guid", cacheGuid);
+                            cacheIntent.putExtra("name", Html.fromHtml(cacheName).toString());
                             startActivity(cacheIntent);
                         }
                     });
@@ -527,7 +526,7 @@ public class cgeotrackable extends AbstractActivity {
                 listView.addView(rowView);
             }
 
-            if (trackable.logs.size() > 0) {
+            if (trackable.getLogs().size() > 0) {
                 ((LinearLayout) findViewById(R.id.log_box)).setVisibility(View.VISIBLE);
             }
         }
@@ -551,8 +550,8 @@ public class cgeotrackable extends AbstractActivity {
 
     private void logTouch() {
         Intent logTouchIntent = new Intent(this, cgeotouch.class);
-        logTouchIntent.putExtra("geocode", trackable.geocode.toUpperCase());
-        logTouchIntent.putExtra("guid", trackable.guid);
+        logTouchIntent.putExtra("geocode", trackable.getGeocode().toUpperCase());
+        logTouchIntent.putExtra("guid", trackable.getGuid());
         startActivity(logTouchIntent);
     }
 
@@ -573,7 +572,7 @@ public class cgeotrackable extends AbstractActivity {
 
             BitmapDrawable image = null;
             try {
-                cgHtmlImg imgGetter = new cgHtmlImg(cgeotrackable.this, trackable.geocode, false, 0, false);
+                cgHtmlImg imgGetter = new cgHtmlImg(cgeotrackable.this, trackable.getGeocode(), false, 0, false);
 
                 image = imgGetter.getDrawable(url);
                 Message message = handler.obtainMessage(0, image);
@@ -595,7 +594,7 @@ public class cgeotrackable extends AbstractActivity {
         public void handleMessage(Message message) {
             BitmapDrawable image = (BitmapDrawable) message.obj;
             if (image != null && view != null) {
-                view.setCompoundDrawablesWithIntrinsicBounds((Drawable) image, null, null, null);
+                view.setCompoundDrawablesWithIntrinsicBounds(image, null, null, null);
             }
         }
     }

@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.activity.AbstractListActivity;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -42,7 +43,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
         @Override
         public void handleMessage(Message msg) {
             try {
-                if (files == null || files.isEmpty()) {
+                if (CollectionUtils.isEmpty(files)) {
                     if (waitDialog != null) {
                         waitDialog.dismiss();
                     }
@@ -131,7 +132,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
      *
      * @return The folder to start the recursive search in
      */
-    protected abstract String[] getBaseFolders();
+    protected abstract File[] getBaseFolders();
 
     /**
      * Triggers the deriving class to set the title
@@ -150,10 +151,8 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
             try {
                 if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                     boolean loaded = false;
-                    for (String baseFolder : getBaseFolders())
+                    for (final File dir : getBaseFolders())
                     {
-                        final File dir = new File(baseFolder);
-
                         if (dir.exists() && dir.isDirectory()) {
                             listDir(list, dir);
                             if (list.size() > 0) {

@@ -14,7 +14,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.os.Environment;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -122,9 +121,6 @@ public final class Settings {
         }
     }
 
-    // constants
-    public final static String cache = ".cgeo";
-
     // usable values
     public static final String tag = "cgeo";
 
@@ -151,25 +147,6 @@ public final class Settings {
         config.locale = locale;
         final Resources resources = cgeoapplication.getInstance().getResources();
         resources.updateConfiguration(config, resources.getDisplayMetrics());
-    }
-
-    public static String getStorage() {
-        return getStorageSpecific()[0];
-    }
-
-    public static String getStorageSec() {
-        return getStorageSpecific()[1];
-    }
-
-    public static String[] getStorageSpecific() {
-        final String external = Environment.getExternalStorageDirectory() + "/" + cache + "/";
-        final String data = Environment.getDataDirectory() + "/data/cgeo.geocaching/" + cache + "/";
-
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
-            return new String[] { external, data };
-        } else {
-            return new String[] { data, external };
-        }
     }
 
     public static boolean isLogin() {
@@ -365,7 +342,7 @@ public final class Settings {
         return checkMapfile(getMapFile());
     }
 
-    private static boolean checkMapfile(String mapFileIn) {
+    private static boolean checkMapfile(final String mapFileIn) {
         if (null == mapFileIn) {
             return false;
         }

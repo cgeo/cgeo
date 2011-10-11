@@ -37,7 +37,7 @@ public class cgGPXListAdapter extends ArrayAdapter<File> {
         View v = rowView;
 
         if (v == null) {
-            v = (View) inflater.inflate(R.layout.gpx_item, null);
+            v = inflater.inflate(R.layout.gpx_item, null);
 
             holder = new cgGPXView();
             holder.filepath = (TextView) v.findViewById(R.id.filepath);
@@ -55,11 +55,6 @@ public class cgGPXListAdapter extends ArrayAdapter<File> {
         holder.filename.setText(file.getName());
 
         return v;
-    }
-
-    @Override
-    public void notifyDataSetChanged() {
-        super.notifyDataSetChanged();
     }
 
     private class touchListener implements View.OnClickListener {

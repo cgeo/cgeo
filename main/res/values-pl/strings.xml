@@ -11,8 +11,6 @@
   <string name="helpers">Przydatne aplikacje</string>
   <string name="about">O c:geo</string>
   <string name="helper">Chcesz dowiedzieć się więcej o <b>c:geo</b>?\nZajrzyj do instrukcji opsługi programu.</string>
-  <string name="database_error_title">Problem z bazą danych</string>
-  <string name="database_error_message">c:geo nie może połączyć się z wewnętrzną bazą danych.\nProszę spróbować uruchomić c:geo nieco później. Jeżeli ten błąd pokazał się wielokrotnie, usuń dane w Ustawienia / Aplikacje / Zarządzaj aplikacjami / c:geo i naciśnij przycisk Wyczyść dane albo zainstaluj c:geo ponownie. Przepraszam za kłopoty.</string>
 
   <!-- actionbar -->
   <string name="action_bar_share_title">Podziel się linkiem do skrzynki</string>
@@ -67,7 +65,6 @@
   <string name="log_grabbed">Znalazłem gdzieś indziej</string>
   <string name="log_maintained">Przegląd przeprowadzony</string>
   <string name="log_maintenance_needed">Przegląd potrzebny</string>
-  <string name="log_maintenance_owner">Przegląd</string>
   <string name="log_update">Zmienione współrzędne</string>
   <string name="log_archived">Zarchiwizowane</string>
   <string name="log_needs_archived">Powinno zostać zarchiwizowane</string>
@@ -127,7 +124,6 @@
   <string name="err_license">Użytkownik nie zgodził się jeszcze z regulaminem serwisu Geocaching.com, c:geo nie jest w stanie załadować współrzędnych.</string>
   <string name="err_store">Przepraszam, c:geo nie mógł zapisać skrzynki.</string>
   <string name="err_drop">Przepraszam, c:geo nie mógł skasować skrzynki.</string>
-  <string name="err_title_problem">Problem</string>
   <string name="err_detail_open">Przepraszam, c:geo nie mógł otworzyć szczegółów skrzynki.</string>
   <string name="err_detail_cache">Przepraszam, c:geo nie mógł pokazać tobie skrzynki. Czy to jest naprawdę skrzynka?</string>
   <string name="err_detail_cache_find">Przepraszam, c:geo nie mógł znaleść skrzynki.</string>
@@ -136,7 +132,6 @@
   <string name="err_detail_cache_find_next">Przepraszam, c:geo nie mógł znaleść następnej skrzynki.</string>
   <string name="err_detail_cache_forgot">Przepraszam, c:geo zapomniał którą skrzynkę chciałeś obejrzeć.</string>
   <string name="err_detail_cache_forgot_visit">Przepraszam, c:geo zapomniał którą skrzynkę chciałeś odwiedzić.</string>
-  <string name="err_detail_cache_language">c:geo nie mógł wczytać niektórych szczegółów. Proszę ustaw stronę Geocaching.com na język angielski. Niestety, c:geo nie rozumie innych języków.</string>
   <string name="err_detail_no_spoiler">c:geo nie znalazł zdjęcia spoilera dla tej skrzynki.</string>
   <string name="err_detail_no_map_static">c:geo nie znalazł mapki statycznej dla tej skrzynki.</string>
   <string name="err_detail_not_load_map_static">Przepraszam, c:geo nie mógł załadować statycznej mapki.</string>
@@ -145,19 +140,13 @@
   <string name="err_detail_still_refreshing">Nadal ładuje skrzynkę.</string>
   <string name="err_watchlist_still_managing">Nadal pracuję nad listą obserwowanych.</string>
   <string name="err_watchlist_failed">c:geo nie mógł zmienić listy obserwowanych.</string>
-  <string name="err_radar_title">Radar nie jest zainstalowany.</string>
-  <string name="err_radar_message">Ta funkcja potrzebuje aplikacje Radar. Chcesz ją teraz zainstalować?</string>
-  <string name="err_radar_market">c:geo nie mógł wystartować Android Market aby poszukać aplikacje Radar.</string>
-  <string name="err_radar_generic">Przepraszam, c:geo nie mógł wystartować aplikacje Radar. Jest ona zainstalowana?</string>
   <string name="err_navigation_no">c:geo nie znalazł żadnych wsparć do nawigacji.</string>
   <string name="err_application_no">c:geo nie znalazł żadnych odpowiednich aplikacji.</string>
   <string name="err_auth_initialize">Przepraszam, c:geo nie może zainicjować procesu autoryzacji.</string>
   <string name="err_auth_process">Proces autoryzacji nie udany.</string>
   <string name="err_cannot_log_visit">c:geo brakuje informacji aby dodać wpis wizyty. Proszę spróbuj przez szczegóły skrzynki.</string>
   <string name="err_init_cleared">Przepraszam, c:geo nie może skasować danych logowania.</string>
-  <string name="err_no_chaches">Przepraszam, c:geo nie może załadować skrzynki lób skrzynek.</string>
   <string name="err_download_fail">Przepraszam, c:geo nie może załadować skrzynki, ponieważ </string>
-  <string name="err_update_fail">Nie udało się zaktualizować przebytej odległości.</string>
   <string name="err_list_load_fail">Przepraszam, c:geo nie może załadować listy skrzynek.</string>
   <string name="err_store_failed">Przepraszam, c:geo nie może zapisać skrzynki.</string>
   <string name="err_refresh_failed">Przepraszam, c:geo nie może zaktualizować skrzynki.</string>
@@ -166,9 +155,6 @@
   <string name="err_dwld_details_failed_reason">Przepraszam, c:geo nie może załadować szczegółów skrzynki, ponieważ</string>
   <string name="err_load_descr_failed">Przepraszam, c:geo nie może załadować opisu.</string>
   <string name="err_location_unknown">c:geo nie zna lokalizacji skrzynki.</string>
-  <string name="err_manual_title">Instrukcja obsługi nie jest zainstalowana.</string>
-  <string name="err_manual_message">Instrukcja obsługi c:geo nie znajduje się na twojej komórce. Chczesz ją zainstalować?</string>
-  <string name="err_manual_market">c:geo nie może wystartować Android Market aby poszukać instrukcji obsługi.</string>
   <string name="err_missing_device_name">Proszę podać nazwę urządzenia przed zarejestrowaniem.</string>
 
   <string name="err_tb_display">"Przepraszam, c:geo nie może pokazać przedmiotów podróżnych. Czy to rzeczywiście jest przedmiot podróżny?</string>
@@ -191,21 +177,18 @@
   <string name="err_point_bear_and_dist_title">Potrzebujesz pomocy?</string>
   <string name="err_point_bear_and_dist">Wypełnij zarówno namiar i odległość. Biorąc kąt od 0 do 360 stopni w stosunku do północy. Odległość z lub bez jednostki.</string>
   <string name="err_point_location_error">Przepraszam, c:geo nie może rozpoznać lokalizacji punktu nawigacyjnego.</string>
-  <string name="err_navigation_not_found">c:geo nie może znaleźć żadnej nawigacji.</string>
 
   <string name="err_log_load_data">Przepraszam, c:geo nie może załadować dane wymagane do zalogowania wizyty.</string>
   <string name="err_log_load_data_again">Przepraszam, c:geo nie może załadować dane wymagane do zalogowania wizyty. Próbuję ponownie.</string>
   <string name="err_log_load_data_still">Nadal trwa ładowanie danych wymaganych do wpisu w dzienniku. Proszę czekać trochę dłużej.</string>
   <string name="err_log_failed_server">Przepraszam, c:geo nie może wysłać wpisu ponieważ serwer nie odpowiada.</string>
   <string name="err_log_post_failed">Przepraszam, c:geo nie mógł dodać wpisu do dziennika.</string>
-  <string name="err_log_post_failed_because">Przepraszam, c:geo nie mógł dodać wpisu do dziennika, ponieważ </string>
 
   <string name="err_search_address_no_match">Przepraszam, c:geo nie znalazł pasującego miejsca.</string>
   <string name="err_search_address_forgot">Przepraszam, c:geo zapomiał jaki adres szukałeś.</string>
   <string name="err_search_address">Wyszukiwanie miejsc</string>
   <string name="err_parse_lat">Przepraszam, c:geo nie może obliczyć szerokości geograficznej.</string>
   <string name="err_parse_lon">Przepraszam, c:geo nie może obliczyć długości geograficznej.</string>
-  <string name="err_parse_bear">Przepraszam, c:geo nie może obliczyć namiaru.</string>
   <string name="err_parse_dist">Przepraszam, c:geo nie może obliczyć odległości.</string>
   
   <string name="err_fieldnotes_export_failed">Eksportowanie notatek terenowych nieudane.</string>
@@ -223,10 +206,6 @@
   <string name="warn_search_help_tb">Wpisz kod przedmiotu podróżnego. Na przykład \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Proszę wypełnić jakimś tekstem.</string>
 
-  <string name="info_altitude">Aktualna wysokość</string>
-  <string name="info_distance">Przebyta odległość</string>
-  <string name="info_distance_cleared">Przebyta odległość została skasowana.</string>
-  <string name="info_since">\n(od </string>
 
   <string name="info_log_posted">Wpis został dodany.</string>
   <string name="info_log_saved">Wpis został zapisany.</string>
@@ -256,24 +235,16 @@
   <string name="advanced_search_button">Szukaj</string>
   <string name="stored_caches_button">Zapisane</string>
   <string name="any_button">Wszędzie</string>
-  <string name="about_button">O c:geo</string>
-  <string name="settings_button">Ustawienia</string>
-  <string name="type">Filter</string>
-  <string name="now_searching">Szukam…</string>
 
   <!-- caches -->
-  <string name="caches_searching">Szukam skrzynki</string>
   <string name="caches_no_cache">Nie ma skrzynki</string>
   <string name="caches_more_caches">Więcej skrzynek</string>
   <string name="caches_more_caches_no">Nie ma więcej skrzynek</string>
   <string name="caches_more_caches_loading">Ładuję skrzynki…</string>
   <string name="caches_downloading">Ładuję skrzynki…\nSzacowany czas: </string>
-  <string name="caches_progress_loading_title">Ładuję skrzynki</string>
-  <string name="caches_progress_loading_text">Zapisane skrzynki</string>
   <string name="caches_eta_ltm">Mniej niż minutę</string>
   <string name="caches_eta_mins"> minut</string>
   <string name="caches_eta_min"> minuta</string>
-  <string name="caches_no_caches"> (nie ma skrzynek)</string>
   <string name="caches_store_offline">Zapisz offline</string>
   <string name="caches_store_selected">Zapisz wybrane</string>
   <string name="caches_stored">Zapisane</string>
@@ -308,7 +279,6 @@
   <string name="caches_refresh_all">Odśwież wszystkie</string>
   <string name="caches_move_selected">Przenieś zaznaczone</string>
   <string name="caches_move_all">Przenieś wszystkie</string>
-  <string name="caches_map_cgeo">c:geo</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Proszę, napisz tekst z obrazka. Ważne to jest, aby można było pobrać współrzędne do skrzynek. To jest opcjonalne i może być wyłączone w ustawieniach.</string>
@@ -381,7 +351,6 @@
   <string name="init_login_popup_ok">Login ok.</string>
   <string name="init_login_popup_failed">Logowanie nie powiodło się.</string>
   <string name="init_login_popup_failed_reason">Logowanie nie powiodło się, ponieważ </string>
-  <string name="init_legal">Nota prawna</string>
   <string name="init_go4cache_connect">Połącz się z Go 4 Cache</string>
   <string name="init_twitter_authorize">Autoryzacja c:geo</string>
   <string name="init_twitter_publish">Publikowanie stanu, gdy znaleziono skrzynkę</string>
@@ -394,13 +363,8 @@
   <string name="init_signature_template_time">Czas</string>
   <string name="init_signature_template_user">Użytkownki</string>
   <string name="init_signature_template_number">Numer</string>
-  <string name="init_languages">Przetłumaczenie</string>
-  <string name="init_languages_description">Jakie języki rozumiesz? Proszę o podanie dwóch znaków kodów.</string>
-  <string name="init_languages_hint">pl en de</string>
-  <string name="init_translate">Przetłumacz opis &amp; wskazówkę</string>
   <string name="init_other">Inne opcje</string>
   <string name="init_skin">Light skin\n(wymaga restartu)</string>
-  <string name="init_transparent">Użyj przejrzysty Panel w c:geo</string>
   <string name="init_address">Pokaż adres na ekranie głównym</string>
   <string name="init_captcha">Pokaż CAPTCHA w razie potrzeby</string>
   <string name="init_useenglish">Użyj języka angielskiego wewnątrz c:geo\n(wymaga restartu)</string>
@@ -437,14 +401,12 @@
   <string name="init_loaddirectionimg">Załaduj obrazek kierunku w razie potrzeby</string>
   
   <!-- map sources -->
-  <string-array name="map_sources">
-    <item>Google: Mapa</item>
-    <item>Google: Satelita</item>
-    <item>OSM: Mapnik</item>
-    <item>OSM: Osmarender</item>
-    <item>OSM: Cyclemap</item>
-    <item>OSM: Offline</item>
-  </string-array>
+  <string name="map_source_google_map">Google: Mapa</string>
+  <string name="map_source_google_satellite">Google: Satelita</string>
+  <string name="map_source_osm_mapnik">OSM: Mapnik</string>
+  <string name="map_source_osm_osmarender">OSM: Osmarender</string>
+  <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
+  <string name="map_source_osm_offline">OSM: Offline</string>
   
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Nazwa urządzenia:</string>
@@ -519,11 +481,8 @@
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Pokaż na mapie</string>
   <string name="cache_menu_map_static">Statyczna mapa</string>
-  <string name="cache_menu_locus">Locus</string>
   <string name="cache_menu_rmaps">Rmaps</string>
   <string name="cache_menu_map_ext">Pokaż na zewn. mapie</string>
-  <string name="cache_menu_map_short">Mapa</string>
-  <string name="cache_menu_map_ext_short">Zewn. mapa</string>
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Otwórz w przeglądarce</string>
   <string name="cache_menu_visit">Zaloguj wizytę</string>
@@ -556,7 +515,6 @@
   <string name="cache_event">Data</string>
   <string name="cache_location">Lokacja</string>
   <string name="cache_coordinates">Współrzędne</string>
-  <string name="cache_elevation">Wzniesienie</string>
   <string name="cache_calendars">Wybierz kalendarz</string>
   <string name="cache_spoiler_images_title">Zdjęcie spoiler</string>
   <string name="cache_spoiler_images_loading">Ładuje zdjęcia spoiler…</string>
@@ -574,7 +532,6 @@
   
   <!-- gpx -->
   <string name="gpx_import_loading_stored">Ładuje skrzynki z pliku .gpx\nZapisane:</string>
-  <string name="gpx_import_no_files">Przepraszam, c:geo nie znalazł plików .gpx</string>
   <string name="gpx_import_caches_imported">skrzynek importowanych</string>
   <string name="gpx_import_loading">Ładuje skrzynki z pliku .gpx</string>
   <string name="gpx_import_title">Import GPX</string>
@@ -587,7 +544,6 @@
   <!--  import -->
   <string name="import_title">Import…</string>
   <string name="web_import_title">Import z internetu</string>
-  <string name="web_import_server_problem">Wystąpił problem podczas komunikacji z serwerem. Prosimy o ponowne zarejestrowanie komórki i spróbuj ponownie.</string>
   <string name="web_import_waiting">Czekam na nowe skrzynki z internetu…</string>
   <string name="web_downloading">Ściąganie</string>
   <string name="web_downloaded">Ściągnięte</string>
@@ -598,7 +554,6 @@
 
   <!-- popup -->
   <string name="popup_more">Więcej szczegółów</string>
-  <string name="popup_offline">Offline</string>
 
   <!-- waypoint -->
   <string name="waypoint">Punkt nawigacji</string>
@@ -622,12 +577,7 @@
   <string name="search_clear_history">Usuń historię</string>
   <string name="search_history_cleared">Historia usunięta</string>
   
-  <string-array name="waypoint_coordinate_formats">
-    <item>zwykłe</item>
-	<item>DDD.DDDDD°</item>
-	<item>DDD°MM.MMM\'</item>
-	<item>DDD°MM\'SS.SSS\"</item>
-  </string-array>
+  <string name="waypoint_coordinate_formats_plain">zwykłe</string>
 
   <!-- visit -->
   <string name="visit_tweet">Wyślij ten wpis też do Twitter</string>
@@ -658,9 +608,6 @@
   <string name="search_kw">Słowa kluczowe</string>
   <string name="search_kw_prefill">Słowo kluczowe</string>
   <string name="search_kw_button">Szukaj z słowem kluczowym</string>
-  <string name="search_kw_caches">Skrzynki z słowem kluczowym</string>
-  <string name="search_caches_found_by">Skrzynki znalezione przez</string>
-  <string name="search_caches_hidden_by">Skrzynki schowane przez</string>
   <string name="search_fbu">Znalezione przez użytkownika</string>
   <string name="search_fbu_prefill">Nazwa użytkownika</string>
   <string name="search_fbu_button">Szukaj według nazwy użytkownika</string>
@@ -672,16 +619,11 @@
   <string name="search_tb_button">Szukaj przedmiotów podróżnych</string>
   <string name="search_destination">Cel</string>
   <string name="search_direction_rel">Z tej pozycji</string>
-  <string name="search_lat">Lat</string>
-  <string name="search_lon">Lon</string>
-  <string name="search_caches">Szukaj skrzynki</string>
-  <string name="search_caches_near">Skrzynki w pobliżu</string>
   <string name="search_address_started">Wyszukiwanie miejsc</string>
   <string name="search_address_result">Znalezione miejsca</string>
 
   <!-- trackable -->
   <string name="trackable">Przedmiot podróżny</string>
-  <string name="trackable_select_title">Przedmioty podróżne</string>
   <string name="trackable_details_loading">Ładuje szczegóły przedmiotu podróżnego…</string>
   <string name="trackable_log_touch">Wpisz odkrycie</string>
   <string name="trackable_browser_open">Otwórz w przeglądarce</string>

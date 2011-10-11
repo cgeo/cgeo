@@ -1,6 +1,8 @@
 package cgeo.geocaching.test;
 
+
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.utils.BaseUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -10,6 +12,8 @@ import android.util.Log;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * This test is meant for performance measurements of different whitespace replacement implementations.
@@ -36,12 +40,19 @@ public class WhitespaceTest extends AndroidTestCase {
         br.close();
     }
 
+    /**
+     * The place for the implementation to prove that the new version of replaceWhitespace is faster than
+     * BaseUtils.replaceWhitespace()
+     *
+     * @param data
+     * @return
+     */
     public static String replaceWhitespaceManually(final String data) {
         final int length = data.length();
         final char[] chars = new char[length];
         data.getChars(0, length, chars, 0);
         int resultSize = 0;
-        boolean lastWasWhitespace = false;
+        boolean lastWasWhitespace = true;
         for (char c : chars) {
             if (c == ' ' || c == '\n' || c == '\r' || c == '\t') {
                 if (!lastWasWhitespace) {
@@ -60,12 +71,39 @@ public class WhitespaceTest extends AndroidTestCase {
         return StringUtils.join(StringUtils.split(data, " \n\r\t"), " ");
     }
 
+    public void testRegex() {
+        Pattern pattern = Pattern.compile("\\s+");
+        final long start = System.currentTimeMillis();
+        Matcher matcher = pattern.matcher(data);
+        String result = matcher.replaceAll(" ").trim();
+        final long end = System.currentTimeMillis();
+        assertEquals(111956, result.length());
+        Log.w(Settings.tag, (end - start) + " ms regex");
+    }
+
+    public void testReplaceAll() {
+        final long start = System.currentTimeMillis();
+        String result = data.replaceAll("\\s+", " ");
+        final long end = System.currentTimeMillis();
+        assertEquals(111958, result.length());
+        Log.w(Settings.tag, (end - start) + " ms replaceAll");
+    }
+
+    public void testActualImplementation() {
+        String result;
+        final long start = System.currentTimeMillis();
+        result = BaseUtils.replaceWhitespace(data);
+        final long end = System.currentTimeMillis();
+        assertEquals(111957, result.length());
+        Log.w(Settings.tag, (end - start) + " ms actual implementation");
+    }
+
     public void testManually() {
         String result;
         final long start = System.currentTimeMillis();
         result = replaceWhitespaceManually(data);
         final long end = System.currentTimeMillis();
-        assertEquals(111958, result.length());
+        assertEquals(111957, result.length());
         Log.w(Settings.tag, (end - start) + " ms manually");
     }
 

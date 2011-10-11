@@ -1,13 +1,10 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.files.LocalStorage;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpGet;
 import org.apache.http.entity.BufferedHttpEntity;
 
 import android.app.Activity;
@@ -23,8 +20,6 @@ import android.view.Display;
 import android.view.WindowManager;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 
@@ -69,133 +64,54 @@ public class cgHtmlImg implements Html.ImageGetter {
     }
 
     @Override
-    public BitmapDrawable getDrawable(String url) {
-        if (StringUtils.isBlank(url)) {
+    public BitmapDrawable getDrawable(final String url) {
+        // Reject empty and counter images URL
+        if (StringUtils.isBlank(url) || isCounter(url)) {
             return null;
         }
-        if (isCounter(url)) {
-            return null;
-        }
 
-        String urlExt = StringUtils.substringAfterLast(url, ".");
-        if (urlExt.length() > 0) {
-            urlExt = "." + urlExt;
-        }
-        if (urlExt.length() > 5) {
-            urlExt = "";
-        }
-
-        String dirName;
-        String fileName;
-        String fileNameSec;
-
-        if (StringUtils.isNotBlank(geocode)) {
-            dirName = Settings.getStorage() + geocode + "/";
-            fileName = Settings.getStorage() + geocode + "/" + CryptUtils.md5(url) + urlExt;
-            fileNameSec = Settings.getStorageSec() + geocode + "/" + CryptUtils.md5(url) + urlExt;
-        } else {
-            dirName = Settings.getStorage() + "_others/";
-            fileName = Settings.getStorage() + "_others/" + CryptUtils.md5(url) + urlExt;
-            fileNameSec = Settings.getStorageSec() + "_others/" + CryptUtils.md5(url) + urlExt;
-        }
-
-        File dir = null;
-        dir = new File(Settings.getStorage());
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
-        dir = new File(dirName);
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
-        dir = null;
+        final File file = LocalStorage.getStorageFile(geocode, url, true);
+        final File fileSec = LocalStorage.getStorageSecFile(geocode, url, true);
 
         Bitmap imagePre = null;
-        // load image from cache
+
+        // Load image from cache
         if (!onlySave) {
             try {
-                imagePre = loadCachedImage(fileName);
-                if (null == imagePre) {
-                    imagePre = loadCachedImage(fileNameSec);
+                imagePre = loadCachedImage(file);
+                if (imagePre == null) {
+                    imagePre = loadCachedImage(fileSec);
                 }
             } catch (Exception e) {
                 Log.w(Settings.tag, "cgHtmlImg.getDrawable (reading cache): " + e.toString());
             }
         }
 
-        // download image and save it to the cache
+        // Download image and save it to the cache
         if (imagePre == null || onlySave) {
-            Uri uri = null;
+            final String absoluteURL = makeAbsoluteURL(url);
             BufferedHttpEntity bufferedEntity = null;
 
-            try {
-                // check if uri is absolute or not, if not attach geocaching.com hostname and scheme
-                uri = Uri.parse(url);
-
-                if (!uri.isAbsolute()) {
-                    final IConnector connector = ConnectorFactory.getConnector(geocode);
-                    url = "http://" + connector.getHost() + url;
-                }
-            } catch (Exception e) {
-                Log.e(Settings.tag, "cgHtmlImg.getDrawable (parse URL): " + e.toString());
-            }
-
-            if (null != uri) {
-                for (int i = 0; i < 2; i++) {
-                    if (i > 0) {
-                        Log.w(Settings.tag, "cgHtmlImg.getDrawable: Failed to download data, retrying. Attempt #" + (i + 1));
-                    }
-
-                    try {
-                        final HttpGet getMethod = new HttpGet(url);
-                        final HttpResponse httpResponse = cgBase.doRequest(getMethod);
-                        if (null != httpResponse) {
-                            final HttpEntity entity = httpResponse.getEntity();
-                            bufferedEntity = new BufferedHttpEntity(entity);
-
-                            setSampleSize(bufferedEntity.getContentLength());
-
-                            final InputStream is = bufferedEntity.getContent();
-                            try {
-                                imagePre = BitmapFactory.decodeStream(is, null, bfOptions);
-                            } finally {
-                                is.close();
-                            }
-                        }
-
-                        if (null != imagePre) {
-                            break;
-                        }
-                    } catch (Exception e) {
-                        Log.e(Settings.tag, "cgHtmlImg.getDrawable (downloading from web)", e);
-                    }
-                }
-            }
-
-            if (save) {
+            if (absoluteURL != null) {
                 try {
-                    // save to memory/SD cache
-                    if (null != bufferedEntity) {
+                    final HttpResponse httpResponse = cgBase.request(absoluteURL, null, false);
+                    if (httpResponse != null) {
+                        bufferedEntity = new BufferedHttpEntity(httpResponse.getEntity());
+                        setSampleSize(bufferedEntity.getContentLength());
                         final InputStream is = bufferedEntity.getContent();
                         try {
-                            final FileOutputStream fos = new FileOutputStream(fileName);
-                            try {
-                                final byte[] buffer = new byte[4096];
-                                int l;
-                                while ((l = is.read(buffer)) != -1) {
-                                    fos.write(buffer, 0, l);
-                                }
-                                fos.flush();
-                            } finally {
-                                fos.close();
-                            }
+                            imagePre = BitmapFactory.decodeStream(is, null, bfOptions);
                         } finally {
                             is.close();
                         }
                     }
-                } catch (IOException e) {
-                    Log.e(Settings.tag, "cgHtmlImg.getDrawable (saving to cache)", e);
+                } catch (Exception e) {
+                    Log.e(Settings.tag, "cgHtmlImg.getDrawable (downloading from web)", e);
                 }
+            }
+
+            if (save) {
+                LocalStorage.saveEntityToFile(bufferedEntity, file);
             }
         }
 
@@ -204,7 +120,7 @@ public class cgHtmlImg implements Html.ImageGetter {
         }
 
         // get image and return
-        if (null == imagePre) {
+        if (imagePre == null) {
             Log.d(Settings.tag, "cgHtmlImg.getDrawable: Failed to obtain image");
 
             if (placement) {
@@ -248,12 +164,26 @@ public class cgHtmlImg implements Html.ImageGetter {
         return image;
     }
 
-    private Bitmap loadCachedImage(final String fileName) {
-        final File file = new File(fileName);
+    private final String makeAbsoluteURL(final String url) {
+        try {
+            // Check if uri is absolute or not, if not attach the connector hostname
+            // FIXME: that should also include the scheme
+            if (Uri.parse(url).isAbsolute()) {
+                return url;
+            } else {
+                return "http://" + ConnectorFactory.getConnector(geocode).getHost() + url;
+            }
+        } catch (Exception e) {
+            Log.e(Settings.tag, "cgHtmlImg.makeAbsoluteURL (parse URL)", e);
+            return null;
+        }
+    }
+
+    private Bitmap loadCachedImage(final File file) {
         if (file.exists()) {
             if (reason > 0 || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000))) {
                 setSampleSize(file.length());
-                return BitmapFactory.decodeFile(fileName, bfOptions);
+                return BitmapFactory.decodeFile(file.getPath(), bfOptions);
             }
         }
         return null;

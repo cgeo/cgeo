@@ -1,7 +1,8 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.utils.CollectionUtils;
+
+import org.apache.commons.collections.CollectionUtils;
 
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
@@ -115,7 +116,7 @@ public class cgeosmaps extends AbstractActivity {
 
                 for (int level = 1; level <= 5; level++) {
                     try {
-                        Bitmap image = BitmapFactory.decodeFile(Settings.getStorage() + geocode + "/map_" + level);
+                        final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, level).getPath());
                         if (image != null) {
                             maps.add(image);
                         }
@@ -127,7 +128,7 @@ public class cgeosmaps extends AbstractActivity {
                 if (maps.isEmpty()) {
                     for (int level = 1; level <= 5; level++) {
                         try {
-                            Bitmap image = BitmapFactory.decodeFile(Settings.getStorageSec() + geocode + "/map_" + level);
+                            final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, level).getPath());
                             if (image != null) {
                                 maps.add(image);
                             }

@@ -1,19 +1,20 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.GeneralAppsFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
-import cgeo.geocaching.utils.CollectionUtils;
 import cgeo.geocaching.utils.CryptUtils;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -87,18 +88,12 @@ public class cgeodetail extends AbstractActivity {
     private float pixelRatio = 1;
     private TextView cacheDistance = null;
     private String contextMenuUser = null;
-    private ProgressDialog waitDialog = null;
-    private ProgressDialog descDialog = null;
     private Spanned longDesc = null;
     private Boolean longDescDisplayed = false;
     private loadCache threadCache = null;
     private loadLongDesc threadLongDesc = null;
     private Thread storeThread = null;
     private Thread refreshThread = null;
-    private ProgressDialog storeDialog = null;
-    private ProgressDialog refreshDialog = null;
-    private ProgressDialog dropDialog = null;
-    private ProgressDialog watchlistDialog = null; // progress dialog for watchlist add/remove
     private Thread watchlistThread = null; // thread for watchlist add/remove
     private Map<Integer, String> calendars = new HashMap<Integer, String>();
 
@@ -171,14 +166,8 @@ public class cgeodetail extends AbstractActivity {
     private Handler loadCacheHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if (cgBase.UPDATE_LOAD_PROGRESS_DETAIL == msg.what) {
-                if (waitDialog != null
-                        && waitDialog.isShowing()
-                        && msg.obj instanceof String) {
-                    waitDialog.setMessage(res.getString(R.string.cache_dialog_loading_details)
-                            + "\n\n"
-                            + (String) msg.obj);
-                }
+            if (cgBase.UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
+                updateStatusMsg((String) msg.obj);
             } else {
                 if (searchId == null) {
                     showToast(res.getString(R.string.err_dwld_details_failed));
@@ -194,7 +183,7 @@ public class cgeodetail extends AbstractActivity {
                     return;
                 }
 
-                this.obtainMessage(cgBase.UPDATE_LOAD_PROGRESS_DETAIL, res.getString(R.string.cache_dialog_loading_details_status_render)).sendToTarget();
+                updateStatusMsg(res.getString(R.string.cache_dialog_loading_details_status_render));
 
                 setView();
 
@@ -208,6 +197,12 @@ public class cgeodetail extends AbstractActivity {
 
                 (new loadMapPreview(loadMapPreviewHandler)).start();
             }
+        }
+
+        private void updateStatusMsg(final String msg) {
+            Progress.setMessage(res.getString(R.string.cache_dialog_loading_details)
+                    + "\n\n"
+                    + msg);
         }
     };
 
@@ -273,9 +268,7 @@ public class cgeodetail extends AbstractActivity {
                 showToast(res.getString(R.string.err_load_descr_failed));
             }
 
-            if (descDialog != null && descDialog.isShowing()) {
-                descDialog.dismiss();
-            }
+            Progress.dismiss();
 
             longDescDisplayed = true;
         }
@@ -313,8 +306,7 @@ public class cgeodetail extends AbstractActivity {
         @Override
         public void handleMessage(Message msg) {
             watchlistThread = null;
-            if (watchlistDialog != null)
-                watchlistDialog.dismiss();
+            Progress.dismiss();
             if (msg.what == -1) {
                 showToast(res.getString(R.string.err_watchlist_failed));
             } else {
@@ -392,13 +384,13 @@ public class cgeodetail extends AbstractActivity {
         app.setAction(geocode);
 
         try {
+            String title = res.getString(R.string.cache);
             if (StringUtils.isNotBlank(name)) {
-                waitDialog = ProgressDialog.show(this, name, res.getString(R.string.cache_dialog_loading_details), true, true);
+                title = name;
             } else if (StringUtils.isNotBlank(geocode)) {
-                waitDialog = ProgressDialog.show(this, geocode.toUpperCase(), res.getString(R.string.cache_dialog_loading_details), true, true);
-            } else {
-                waitDialog = ProgressDialog.show(this, res.getString(R.string.cache), res.getString(R.string.cache_dialog_loading_details), true, true);
+                title = geocode.toUpperCase();
             }
+            Progress.show(this, title, res.getString(R.string.cache_dialog_loading_details), true, true);
         } catch (Exception e) {
             // nothing, we lost the window
         }
@@ -491,10 +483,10 @@ public class cgeodetail extends AbstractActivity {
             final int id = item.getItemId();
 
             if (id == 1) {
-                cgeocaches.startActivityCacheOwner(this, contextMenuUser);
+                cgeocaches.startActivityOwner(this, contextMenuUser);
                 return true;
             } else if (id == 2) {
-                cgeocaches.startActivityCacheUser(this, contextMenuUser);
+                cgeocaches.startActivityUserName(this, contextMenuUser);
                 return true;
             } else if (id == 3) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(contextMenuUser))));
@@ -623,9 +615,7 @@ public class cgeodetail extends AbstractActivity {
         cache = app.getCache(searchId);
 
         if (cache == null) {
-            if (waitDialog != null && waitDialog.isShowing()) {
-                waitDialog.dismiss();
-            }
+            Progress.dismiss();
 
             if (StringUtils.isNotBlank(geocode)) {
                 showToast(res.getString(R.string.err_detail_cache_find) + " " + geocode + ".");
@@ -659,7 +649,7 @@ public class cgeodetail extends AbstractActivity {
             detailsList.removeAllViews();
 
             // actionbar icon, default myster<
-            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds((Drawable) getResources().getDrawable(cgBase.getCacheIcon(cache.type)), null, null, null);
+            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.type)), null, null, null);
 
             // cache name (full name)
             itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
@@ -906,11 +896,11 @@ public class cgeodetail extends AbstractActivity {
                         inventoryString.append('\n');
                     }
                     // avoid HTML parsing where possible
-                    if (containsHtml(inventoryItem.name)) {
-                        inventoryString.append(Html.fromHtml(inventoryItem.name).toString());
+                    if (containsHtml(inventoryItem.getName())) {
+                        inventoryString.append(Html.fromHtml(inventoryItem.getName()).toString());
                     }
                     else {
-                        inventoryString.append(inventoryItem.name);
+                        inventoryString.append(inventoryItem.getName());
                     }
                 }
                 inventView.setText(inventoryString);
@@ -966,6 +956,9 @@ public class cgeodetail extends AbstractActivity {
                 personalNoteText.setText(cache.personalNote, TextView.BufferType.SPANNABLE);
                 personalNoteText.setMovementMethod(LinkMovementMethod.getInstance());
             }
+            else {
+                ((LinearLayout) findViewById(R.id.personalnote_box)).setVisibility(View.GONE);
+            }
 
             // cache short desc
             if (StringUtils.isNotBlank(cache.shortdesc)) {
@@ -994,7 +987,7 @@ public class cgeodetail extends AbstractActivity {
                     showDesc.setOnTouchListener(null);
                     showDesc.setOnClickListener(null);
                 }
-            } else if (longDescDisplayed == false && StringUtils.isNotBlank(cache.getDescription())) {
+            } else if (!longDescDisplayed && StringUtils.isNotBlank(cache.getDescription())) {
                 ((LinearLayout) findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
 
                 Button showDesc = (Button) findViewById(R.id.show_description);
@@ -1029,7 +1022,7 @@ public class cgeodetail extends AbstractActivity {
                     final TextView identification = (TextView) waypointView.findViewById(R.id.identification);
 
                     ((TextView) waypointView.findViewById(R.id.type)).setText(cgBase.waypointTypes.get(wpt.type));
-                    if (wpt.getPrefix().equalsIgnoreCase("OWN") == false) {
+                    if (!wpt.getPrefix().equalsIgnoreCase("OWN")) {
                         identification.setText(wpt.getPrefix().trim() + "/" + wpt.lookup.trim());
                     } else {
                         identification.setText(res.getString(R.string.waypoint_custom));
@@ -1089,14 +1082,7 @@ public class cgeodetail extends AbstractActivity {
             Log.e(Settings.tag, "cgeodetail.setView: " + e.toString());
         }
 
-        if (waitDialog != null && waitDialog.isShowing())
-            waitDialog.dismiss();
-        if (storeDialog != null && storeDialog.isShowing())
-            storeDialog.dismiss();
-        if (dropDialog != null && dropDialog.isShowing())
-            dropDialog.dismiss();
-        if (refreshDialog != null && refreshDialog.isShowing())
-            refreshDialog.dismiss();
+        Progress.dismiss();
 
         displayLogs();
 
@@ -1244,7 +1230,7 @@ public class cgeodetail extends AbstractActivity {
                 // add LogImages
                 LinearLayout logLayout = (LinearLayout) rowView.findViewById(R.id.log_layout);
 
-                if ((log.logImages != null) && (!log.logImages.isEmpty())) {
+                if (CollectionUtils.isNotEmpty(log.logImages)) {
 
                     final ArrayList<cgImage> logImages = new ArrayList<cgImage>(log.logImages);
 
@@ -1380,10 +1366,7 @@ public class cgeodetail extends AbstractActivity {
     }
 
     public void loadLongDesc() {
-        if (waitDialog == null || waitDialog.isShowing() == false) {
-            descDialog = ProgressDialog.show(this, null, res.getString(R.string.cache_dialog_loading_description), true);
-            descDialog.setCancelable(true);
-        }
+        Progress.show(this, null, res.getString(R.string.cache_dialog_loading_description), true, true);
 
         threadLongDesc = new loadLongDesc(loadDescriptionHandler);
         threadLongDesc.start();
@@ -1499,7 +1482,7 @@ public class cgeodetail extends AbstractActivity {
     }
 
     private void addToCalendarFn(int index) {
-        if (calendars == null || calendars.isEmpty()) {
+        if (MapUtils.isEmpty(calendars)) {
             return;
         }
 
@@ -1602,7 +1585,7 @@ public class cgeodetail extends AbstractActivity {
     }
 
     private void showSpoilers() {
-        if (cache == null || cache.spoilers == null || cache.spoilers.isEmpty()) {
+        if (cache == null || CollectionUtils.isEmpty(cache.spoilers)) {
             showToast(res.getString(R.string.err_detail_no_spoiler));
         }
 
@@ -1671,7 +1654,7 @@ public class cgeodetail extends AbstractActivity {
                 // jump directly into details if there is only one trackable
                 if (cache != null && cache.inventory != null && cache.inventory.size() == 1) {
                     cgTrackable trackable = cache.inventory.get(0);
-                    cgeotrackable.startActivity(cgeodetail.this, trackable.guid, trackable.geocode, trackable.name);
+                    cgeotrackable.startActivity(cgeodetail.this, trackable.getGuid(), trackable.getGeocode(), trackable.getName());
                 }
                 else {
                     Intent trackablesIntent = new Intent(cgeodetail.this, cgeotrackables.class);
@@ -1686,17 +1669,12 @@ public class cgeodetail extends AbstractActivity {
 
     private class storeCache implements View.OnClickListener {
         public void onClick(View arg0) {
-            if (dropDialog != null && dropDialog.isShowing()) {
-                showToast(res.getString(R.string.err_detail_still_removing));
-                return;
-            }
-            if (refreshDialog != null && refreshDialog.isShowing()) {
-                showToast(res.getString(R.string.err_detail_still_refreshing));
+            if (Progress.isShowing()) {
+                showToast(res.getString(R.string.err_detail_still_working));
                 return;
             }
 
-            storeDialog = ProgressDialog.show(cgeodetail.this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true);
-            storeDialog.setCancelable(true);
+            Progress.show(cgeodetail.this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, true);
 
             if (storeThread != null) {
                 storeThread.interrupt();
@@ -1709,17 +1687,12 @@ public class cgeodetail extends AbstractActivity {
 
     private class refreshCache implements View.OnClickListener {
         public void onClick(View arg0) {
-            if (dropDialog != null && dropDialog.isShowing()) {
-                showToast(res.getString(R.string.err_detail_still_removing));
-                return;
-            }
-            if (storeDialog != null && storeDialog.isShowing()) {
-                showToast(res.getString(R.string.err_detail_still_saving));
+            if (Progress.isShowing()) {
+                showToast(res.getString(R.string.err_detail_still_working));
                 return;
             }
 
-            refreshDialog = ProgressDialog.show(cgeodetail.this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true);
-            refreshDialog.setCancelable(true);
+            Progress.show(cgeodetail.this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, true);
 
             if (refreshThread != null) {
                 refreshThread.interrupt();
@@ -1762,17 +1735,12 @@ public class cgeodetail extends AbstractActivity {
 
     private class dropCache implements View.OnClickListener {
         public void onClick(View arg0) {
-            if (storeDialog != null && storeDialog.isShowing()) {
-                showToast(res.getString(R.string.err_detail_still_saving));
-                return;
-            }
-            if (refreshDialog != null && refreshDialog.isShowing()) {
-                showToast(res.getString(R.string.err_detail_still_refreshing));
+            if (Progress.isShowing()) {
+                showToast(res.getString(R.string.err_detail_still_working));
                 return;
             }
 
-            dropDialog = ProgressDialog.show(cgeodetail.this, res.getString(R.string.cache_dialog_offline_drop_title), res.getString(R.string.cache_dialog_offline_drop_message), true);
-            dropDialog.setCancelable(false);
+            Progress.show(cgeodetail.this, res.getString(R.string.cache_dialog_offline_drop_title), res.getString(R.string.cache_dialog_offline_drop_message), true, false);
             Thread thread = new dropCacheThread(dropCacheHandler);
             thread.start();
         }
@@ -1797,13 +1765,11 @@ public class cgeodetail extends AbstractActivity {
      */
     private abstract class AbstractWatchlistClickListener implements View.OnClickListener {
         public void doExecute(int titleId, int messageId, Thread thread) {
-            if (watchlistDialog != null && watchlistDialog.isShowing()) {
+            if (Progress.isShowing()) {
                 showToast(res.getString(R.string.err_watchlist_still_managing));
                 return;
             }
-            watchlistDialog = ProgressDialog.show(cgeodetail.this,
-                    res.getString(titleId), res.getString(messageId), true);
-            watchlistDialog.setCancelable(true);
+            Progress.show(cgeodetail.this, res.getString(titleId), res.getString(messageId), true, true);
 
             if (watchlistThread != null) {
                 watchlistThread.interrupt();

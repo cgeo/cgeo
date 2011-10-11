@@ -11,8 +11,6 @@
   <string name="helpers">O que instalar</string>
   <string name="about">Sobre c:geo</string>
   <string name="helper">Quer aprender acerca do <b>c:geo</b>?\nVeja o nosso prático manual.</string>
-  <string name="database_error_title">Problema com a base de dados</string>
-  <string name="database_error_message">O c:geo falhou a ligação à base de dados interna.\nPor favor, tente iniciar o c:geo mais tarde. Se esta mensagem tiver sido mostrada muitas vezes, vá a Definições / Aplicações / Gerir aplicações / c:geo e prima o botão Eliminar dados. Ou desinstale o c:geo e instale de novo. Desculpe o incómodo.</string>
   
   <!-- actionbar -->
   <string name="action_bar_share_title">Partilhar ligação para a cache</string>
@@ -67,7 +65,6 @@
   <string name="log_grabbed">Agarrado</string>
   <string name="log_maintained">Manutenção efectuada</string>
   <string name="log_maintenance_needed">Precisa manutenção</string>
-  <string name="log_maintenance_owner">Manutenção</string>
   <string name="log_update">Coordenadas actualizadas</string>
   <string name="log_archived">Arquivada</string>
   <string name="log_needs_archived">Precisa arquivos</string>
@@ -127,7 +124,6 @@
   <string name="err_license">O utilizador não concordou com a licença de utilização de Geocaching.com, por isso c:geo não pode carregar as coordenadas da cache.</string>
   <string name="err_store">Desculpe, o c:geo não pode arquivar a cache.</string>
   <string name="err_drop">Desculpe, o c:geo não pode apagar a cache.</string>
-  <string name="err_title_problem">Problema</string>
   <string name="err_detail_open">Desculpe, o c:geo não pode abrir os detalhes da geocache.</string>
   <string name="err_detail_cache">Desculpe, o c:geo não pode mostrar a cache pretendida. É mesmo uma geocache?</string>
   <string name="err_detail_cache_find">Desculpe, o c:geo não encontra a geocache</string>
@@ -136,7 +132,6 @@
   <string name="err_detail_cache_find_next">Desculpe, o c:geo não encontra as próximas geocaches.</string>
   <string name="err_detail_cache_forgot">Desculpe, o c:geo esqueceu a geocache pretendida.</string>
   <string name="err_detail_cache_forgot_visit">Desculpe, o c:geo esqueceu a cache que visitou.</string>
-  <string name="err_detail_cache_language">O c:geo não consegue ler alguns detalhes da cache. Verifique que o site Geocaching.com está parameterizado para inglês. Infelizmente c:geo não percebe outros idiomas.</string>
   <string name="err_detail_no_spoiler">O c:geo não encontrou images spoiler para esta cache.</string>
   <string name="err_detail_no_map_static">O c:geo não encontrou mapas estáticos para esta cache.</string>
   <string name="err_detail_not_load_map_static">Desculpe, o c:geo falhou o carregamento de mapas estáticos.</string>
@@ -145,19 +140,13 @@
   <string name="err_detail_still_refreshing">A recarregar a cache.</string>
   <string name="err_watchlist_still_managing">Ainda a gerir a sua watchlist.</string>
   <string name="err_watchlist_failed">A gestão da sua watchlist falhou.</string>
-  <string name="err_radar_title">Radar não está instalado.</string>
-  <string name="err_radar_message">Esta função requer a aplicação Radar. Pretende instalá-la?</string>
-  <string name="err_radar_market">O c:geo não consegue iniciar o Android Market para pesquisar pela aplicação Radar.</string>
-  <string name="err_radar_generic">Desculpe, o c:geo não consegue iniciar a aplicação Radar. Está instalada?</string>
   <string name="err_navigation_no">O c:geo não encontra nenhuma navegação suportada.</string>
   <string name="err_application_no">O c:geo não encontra a aplicação correcta.</string>
   <string name="err_auth_initialize">Desculpe, o c:geo falhou a iniciar o processo de autorização.</string>
   <string name="err_auth_process">Processo de autorização falhou.</string>
   <string name="err_cannot_log_visit">O c:geo não tem informação suficiente para registar a visita. Por favor, faça-o a partir dos detalhes completos da cache.</string>
   <string name="err_init_cleared">Desculpe, o c:geo não consegue limpar os dados de login.</string>
-  <string name="err_no_chaches">Desculpe, o c:geo falhou a carregar a cache ou caches.</string>
   <string name="err_download_fail">Desculpe, o c:geo falhou o download das caches porque </string>
-  <string name="err_update_fail">Falha ao actualizar a distância percorrida.</string>
   <string name="err_list_load_fail">Desculpe, o c:geo falhou a carregar a lista das caches.</string>
   <string name="err_store_failed">Desculpe, o c:geo não pode arquivar a geocache.</string>
   <string name="err_refresh_failed">Desculpe, o c:geo não consegue actualizar a geocache.</string>
@@ -166,9 +155,6 @@
   <string name="err_dwld_details_failed_reason">Desculpe, o c:geo falhou o download dos detalhes da cache porque</string>
   <string name="err_load_descr_failed">Desculpe, o c:geo não consegue carregar a descrição.</string>
   <string name="err_location_unknown">O c:geo não sabe a localização da cache.</string>
-  <string name="err_manual_title">O Manual não está instalado.</string>
-  <string name="err_manual_message">O Manual do c:geo não está presente no seu dispositivo. Prentende instalá-lo?</string>
-  <string name="err_manual_market">O c:geo não conseguiu iniciar o Android Market para procurar o seu Manual.</string>
   <string name="err_missing_device_name">Por favor insira um nome para este dispositivo antes de registar.</string>
 
   <string name="err_tb_display">"Desculpe, o c:geo não consegue mostrar o trackable pretendido. É mesmo um trackable?</string>
@@ -191,21 +177,18 @@
   <string name="err_point_bear_and_dist_title">Precisa de ajuda?</string>
   <string name="err_point_bear_and_dist">Preencha a direcção e a distância. A direcção é o ângulo de 0 a 360 graus relativo ao norte. A distância pode ser introduzida com ou sem unidades.</string>
   <string name="err_point_location_error">Desculpe, o c:geo não conseguiu obter a localização do ponto de referência.</string>
-  <string name="err_navigation_not_found">O c:geo não conseguiu encontrar nenhuma navegação suportada.</string>
 
   <string name="err_log_load_data">Desculpe, o c:geo não consegue carregar os dados necessários para registar a sua visita.</string>
   <string name="err_log_load_data_again">Desculpe, o c:geo não consegue carregar os dados necessários para registar a sua visita. A tentar de novo.</string>
   <string name="err_log_load_data_still">O c:geo ainda está a carregar dados necessários para publicar o registo. Por favor espere mais um pouco.</string>
   <string name="err_log_failed_server">Desculpe, o c:geo falhou a publicação do registo porque o servidor não responde.</string>
   <string name="err_log_post_failed">Desculpe, o c:geo falhou a publicação do registo.</string>
-  <string name="err_log_post_failed_because">Desculpe, o c:geo falhou a publicação do registo porque </string>
 
   <string name="err_search_address_no_match">Desculpe, o c:geo não encontrou um local que corresponda.</string>
   <string name="err_search_address_forgot">Desculpe, o c:geo esqueceu o endereço que procura.</string>
   <string name="err_search_address">À procura de locais</string>
   <string name="err_parse_lat">Desculpe, o c:geo não pode analisar a latitue.</string>
   <string name="err_parse_lon">Desculpe, o c:geo não pode analisar a logitude.</string>
-  <string name="err_parse_bear">Desculpe, o c:geo não pode analisar a direcção.</string>
   <string name="err_parse_dist">Desculpe, o c:geo não pode analisar a distância.</string>
 
   <string name="err_fieldnotes_export_failed">A exportação das Notas de Campo falhou.</string>
@@ -223,10 +206,6 @@
   <string name="warn_search_help_tb">Preencha o código do trackable. Por exemplo \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Por favor, preencha algum texto para o registo.</string>
 
-  <string name="info_altitude">Altitude corrente</string>
-  <string name="info_distance">Distância percorrida</string>
-  <string name="info_distance_cleared">A distância percorrida foi apagada.</string>
-  <string name="info_since">\n(desde </string>
 
   <string name="info_log_posted">O c:geo publicou o registo com sucesso.</string>
   <string name="info_log_saved">O c:geo gravou o registo com sucesso.</string>
@@ -256,24 +235,16 @@
   <string name="advanced_search_button">Pesquisar</string>
   <string name="stored_caches_button">Arquivo</string>
   <string name="any_button">Destino</string>
-  <string name="about_button">Sobre</string>
-  <string name="settings_button">Definições</string>
-  <string name="type">Tipo</string>
-  <string name="now_searching">A pesquisar agora</string>
 
   <!-- caches -->
-  <string name="caches_searching">Pesquisar por caches</string>
   <string name="caches_no_cache">Nenhuma cache</string>
   <string name="caches_more_caches">Mais caches</string>
   <string name="caches_more_caches_no">Mais nenhuma cache</string>
   <string name="caches_more_caches_loading">A carregar caches…</string>
   <string name="caches_downloading">Downloading caches…\nETE: </string>
-  <string name="caches_progress_loading_title">A carregar caches</string>
-  <string name="caches_progress_loading_text">Caches arquivadas no dispositivo</string>
   <string name="caches_eta_ltm">Menos de um minuto</string>
   <string name="caches_eta_mins"> minutos</string>
   <string name="caches_eta_min"> minuto</string>
-  <string name="caches_no_caches"> (nenhuma cache)</string>
   <string name="caches_store_offline">Arquivar para uso offline</string>
   <string name="caches_store_selected">Arquivar selecionadas</string>
   <string name="caches_stored">Arquivadas</string>
@@ -308,7 +279,6 @@
   <string name="caches_refresh_all">Actualizar todas</string>
   <string name="caches_move_selected">Mover seleccionadas</string>
   <string name="caches_move_all">Mover todas</string>
-  <string name="caches_map_cgeo">c:geo</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Por favor, escreva o texto da imagem. É importante para fazer o download das coordenadas das caches. É opcional e pode ser desactivado nas Definições.</string>
@@ -381,7 +351,6 @@
   <string name="init_login_popup_ok">Login ok.</string>
   <string name="init_login_popup_failed">Login falhado.</string>
   <string name="init_login_popup_failed_reason">Login falhado porque </string>
-  <string name="init_legal">Nota legal</string>
   <string name="init_go4cache_connect">Ligar a Go 4 Cache</string>
   <string name="init_twitter_authorize">Autorize o c:geo</string>
   <string name="init_twitter_publish">Publicar estado quando encontrar cache</string>
@@ -394,13 +363,8 @@
   <string name="init_signature_template_time">Hora</string>
   <string name="init_signature_template_user">Utilizador</string>
   <string name="init_signature_template_number">Número</string>
-  <string name="init_languages">Tradução</string>
-  <string name="init_languages_description">Que linguagens não necessita que sejam traduzidas? Por favor forneça os códigos de língua de dois caracteres.</string>
-  <string name="init_languages_hint">en es de pt</string>
-  <string name="init_translate">Traduzir descrição &amp; pista</string>
   <string name="init_other">Outras opções</string>
   <string name="init_skin">Tema leve (precisa reiniciar o c:geo)</string>
-  <string name="init_transparent">Utilizar ecrã principal do c:geo transparente</string>
   <string name="init_address">Mostrar endereços no ecrã principal</string>
   <string name="init_captcha">Mostrar CAPTCHA se necessário</string>
   <string name="init_useenglish">Utilizar inglês no c:geo\n(necessário reiniciar)</string>
@@ -435,14 +399,12 @@
   <string name="init_sigautoinsert">Inserir assinatura automaticamente</string>
 
   <!-- map sources -->
-  <string-array name="map_sources">
-    <item>Google: Mapa</item>
-    <item>Google: Satélite</item>
-    <item>OSM: Mapnik</item>
-    <item>OSM: Osmarender</item>
-    <item>OSM: Cyclemap</item>
-    <item>OSM: Offline</item>
-  </string-array>
+  <string name="map_source_google_map">Google: Mapa</string>
+  <string name="map_source_google_satellite">Google: Satélite</string>
+  <string name="map_source_osm_mapnik">OSM: Mapnik</string>
+  <string name="map_source_osm_osmarender">OSM: Osmarender</string>
+  <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
+  <string name="map_source_osm_offline">OSM: Offline</string>
 
   <string name="init_sendToCgeo">Enviar para o c:geo</string>
   <string name="init_sendToCgeo_name">Nome do seu dispositivo:</string>
@@ -517,11 +479,8 @@
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Mostrar no mapa</string>
   <string name="cache_menu_map_static">Mapas estáticos</string>
-  <string name="cache_menu_locus">Locus</string>
   <string name="cache_menu_rmaps">Rmaps</string>
   <string name="cache_menu_map_ext">Mostrar no mapa ext.</string>
-  <string name="cache_menu_map_short">Mapas</string>
-  <string name="cache_menu_map_ext_short">Mapa ext.</string>
   <string name="cache_menu_browser">Abrir no browser</string>
   <string name="cache_menu_visit">Registar visita</string>
   <string name="cache_menu_spoilers">Imagens spoiler</string>
@@ -552,7 +511,6 @@
   <string name="cache_event">Data</string>
   <string name="cache_location">Localização</string>
   <string name="cache_coordinates">Coordenadas</string>
-  <string name="cache_elevation">Elevação</string>
   <string name="cache_calendars">Selecionar calendário</string>
   <string name="cache_spoiler_images_title">Imagens spoiler</string>
   <string name="cache_spoiler_images_loading">A carregar imagens spoiler…</string>
@@ -570,7 +528,6 @@
 
   <!-- gpx -->
   <string name="gpx_import_loading_stored">a carregar caches do ficheiro .gpx\narmazenado:</string>
-  <string name="gpx_import_no_files">Desculpe, o c:geo não encontrou ficheiros .gpx.</string>
   <string name="gpx_import_caches_imported">Caches importadas</string>
   <string name="gpx_import_loading">A carregar caches do ficheiro .gpx</string>
   <string name="gpx_import_title">Importar GPX</string>
@@ -583,7 +540,6 @@
   <!--  import -->
   <string name="import_title">Importar…</string>
   <string name="web_import_title">Importar da web</string>
-  <string name="web_import_server_problem">Houve um problema ao comunicar com o servidor. Por favor registe novamente o seu dispositivo e tente outra vez.</string>
   <string name="web_import_waiting">À espera de novas caches da web…</string>
   <string name="web_downloading">A transferir</string>
   <string name="web_downloaded">Transferido</string>
@@ -594,7 +550,6 @@
 
   <!-- popup -->
   <string name="popup_more">Mais detalhes</string>
-  <string name="popup_offline">Offline</string>
 
   <!-- waypoint -->
   <string name="waypoint">Ponto de referência</string>
@@ -647,9 +602,6 @@
   <string name="search_kw">Palavras-chave</string>
   <string name="search_kw_prefill">Palavra-chave</string>
   <string name="search_kw_button">Pesquisar por palavra-chave</string>
-  <string name="search_kw_caches">Caches por palavra-chave</string>
-  <string name="search_caches_found_by">Caches encontradas por</string>
-  <string name="search_caches_hidden_by">Caches escondidas por</string>
   <string name="search_fbu">Encontradas pelo utilizador</string>
   <string name="search_fbu_prefill">Nome de utilizador</string>
   <string name="search_fbu_button">Pesquisar por utilizador</string>
@@ -661,16 +613,11 @@
   <string name="search_tb_button">Pesquisar por trackable</string>
   <string name="search_destination">Destino</string>
   <string name="search_direction_rel">A partir desta posição</string>
-  <string name="search_lat">Lat</string>
-  <string name="search_lon">Lon</string>
-  <string name="search_caches">Pesquisar por caches</string>
-  <string name="search_caches_near">Caches perto</string>
   <string name="search_address_started">Pesquisar por lugares</string>
   <string name="search_address_result">Encontrar lugares</string>
 
   <!-- trackable -->
   <string name="trackable">Trackable</string>
-  <string name="trackable_select_title">Trackables</string>
   <string name="trackable_details_loading">A carregar os detalhes trackable…</string>
   <string name="trackable_log_touch">Registar toque</string>
   <string name="trackable_browser_open">Abrir no browser</string>

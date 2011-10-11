@@ -129,12 +129,7 @@ public class cgeoadvsearch extends AbstractActivity {
 
                 found = true;
             } else { // keyword (fallback)
-                final Intent cachesIntent = new Intent(this, cgeocaches.class);
-                cachesIntent.putExtra("type", "keyword");
-                cachesIntent.putExtra("keyword", query);
-                cachesIntent.putExtra("cachetype", Settings.getCacheType());
-                startActivity(cachesIntent);
-
+                cgeocaches.startActivityKeyword(this, query);
                 found = true;
             }
         } catch (Exception e) {
@@ -147,7 +142,7 @@ public class cgeoadvsearch extends AbstractActivity {
     private void init() {
         Settings.getLogin();
 
-        if (Settings.getCacheType() != null && cgBase.cacheTypesInv.containsKey(Settings.getCacheType()) == false) {
+        if (Settings.getCacheType() != null && !cgBase.cacheTypesInv.containsKey(Settings.getCacheType())) {
             Settings.setCacheType(null);
         }
 
@@ -268,12 +263,7 @@ public class cgeoadvsearch extends AbstractActivity {
             }
         } else {
             try {
-                final Intent cachesIntent = new Intent(this, cgeocaches.class);
-                cachesIntent.putExtra("latitude", GeopointParser.parseLatitude(latText));
-                cachesIntent.putExtra("longitude", GeopointParser.parseLongitude(lonText));
-                cachesIntent.putExtra("type", "coordinate");
-                cachesIntent.putExtra("cachetype", Settings.getCacheType());
-                startActivity(cachesIntent);
+                cgeocaches.startActivityCoordinates(this, GeopointParser.parseLatitude(latText), GeopointParser.parseLongitude(lonText));
             } catch (GeopointParser.ParseException e) {
                 showToast(res.getString(e.resource));
             }
@@ -309,11 +299,7 @@ public class cgeoadvsearch extends AbstractActivity {
             return;
         }
 
-        final Intent cachesIntent = new Intent(this, cgeocaches.class);
-        cachesIntent.putExtra("type", "keyword");
-        cachesIntent.putExtra("keyword", keyText);
-        cachesIntent.putExtra("cachetype", Settings.getCacheType());
-        startActivity(cachesIntent);
+        cgeocaches.startActivityKeyword(this, keyText);
     }
 
     private class findByAddressAction implements TextView.OnEditorActionListener {
@@ -377,11 +363,7 @@ public class cgeoadvsearch extends AbstractActivity {
             return;
         }
 
-        final Intent cachesIntent = new Intent(this, cgeocaches.class);
-        cachesIntent.putExtra("type", "username");
-        cachesIntent.putExtra("username", usernameText);
-        cachesIntent.putExtra("cachetype", Settings.getCacheType());
-        startActivity(cachesIntent);
+        cgeocaches.startActivityUserName(this, usernameText);
     }
 
     private class findByOwnerAction implements TextView.OnEditorActionListener {
@@ -409,11 +391,7 @@ public class cgeoadvsearch extends AbstractActivity {
             return;
         }
 
-        final Intent cachesIntent = new Intent(this, cgeocaches.class);
-        cachesIntent.putExtra("type", "owner");
-        cachesIntent.putExtra("username", usernameText);
-        cachesIntent.putExtra("cachetype", Settings.getCacheType());
-        startActivity(cachesIntent);
+        cgeocaches.startActivityOwner(this, usernameText);
     }
 
     private class findByGeocodeAction implements TextView.OnEditorActionListener {

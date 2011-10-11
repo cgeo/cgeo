@@ -206,4 +206,14 @@ public class GPXParserTest extends InstrumentationTestCase {
         return cacheList;
     }
 
+    public static void testParseDateWithFractionalSeconds() {
+        // was experienced in GSAK file
+        String dateString = "2011-08-13T02:52:18.103Z";
+        try {
+            GPXParser.parseDate(dateString);
+        } catch (ParseException e) {
+            fail();
+            e.printStackTrace();
+        }
+    }
 }

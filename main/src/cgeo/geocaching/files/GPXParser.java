@@ -47,7 +47,8 @@ import java.util.regex.Pattern;
 public abstract class GPXParser extends FileParser {
 
     private static final SimpleDateFormat formatSimple = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // 2010-04-20T07:00:00Z
-    private static final SimpleDateFormat formatTimezone = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'.000'Z"); // 2010-04-20T01:01:03.000-04:00
+    private static final SimpleDateFormat formatSimpleMilliSeconds = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S'Z'"); // 2010-04-20T07:00:00.000Z
+    private static final SimpleDateFormat formatTimezone = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SZ"); // 2010-04-20T01:01:03.000-04:00
 
     private static final Pattern patternGeocode = Pattern.compile("([A-Z]{2}[0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
     private static final Pattern patternGuid = Pattern.compile(".*" + Pattern.quote("guid=") + "([0-9a-z\\-]+)", Pattern.CASE_INSENSITIVE);
@@ -224,11 +225,14 @@ public abstract class GPXParser extends FileParser {
         version = versionIn;
     }
 
-    private static Date parseDate(String inputUntrimmed) throws ParseException {
+    static Date parseDate(String inputUntrimmed) throws ParseException {
         final String input = inputUntrimmed.trim();
         if (input.length() >= 3 && input.charAt(input.length() - 3) == ':') {
             final String removeColon = input.substring(0, input.length() - 3) + input.substring(input.length() - 2);
             return formatTimezone.parse(removeColon);
+        }
+        if (input.contains(".")) {
+            return formatSimpleMilliSeconds.parse(input);
         }
         return formatSimple.parse(input);
     }
@@ -613,7 +617,7 @@ public abstract class GPXParser extends FileParser {
 
                     try {
                         if (attrs.getIndex("ref") > -1) {
-                            trackable.geocode = attrs.getValue("ref").toUpperCase();
+                            trackable.setGeocode(attrs.getValue("ref").toUpperCase());
                         }
                     } catch (Exception e) {
                         // nothing
@@ -628,7 +632,7 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void end() {
-                    if (StringUtils.isNotBlank(trackable.geocode) && StringUtils.isNotBlank(trackable.name)) {
+                    if (StringUtils.isNotBlank(trackable.getGeocode()) && StringUtils.isNotBlank(trackable.getName())) {
                         if (cache.inventory == null) {
                             cache.inventory = new ArrayList<cgTrackable>();
                         }
@@ -642,7 +646,7 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void end(String tbName) {
-                    trackable.name = validate(tbName);
+                    trackable.setName(validate(tbName));
                 }
             });
 
