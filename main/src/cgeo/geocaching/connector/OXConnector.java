@@ -12,7 +12,7 @@ public class OXConnector extends AbstractConnector implements IConnector {
 
     @Override
     public boolean canHandle(String geocode) {
-        return StringUtils.isNotBlank(geocode) && StringUtils.startsWithIgnoreCase(geocode, "OX");
+        return StringUtils.startsWithIgnoreCase(geocode, "OX");
     }
 
     @Override

@@ -50,4 +50,12 @@ public abstract class AbstractConnector implements IConnector {
     public UUID searchByGeocode(cgBase base, String geocode, String guid, cgeoapplication app, cgSearch search, int reason, Handler handler) {
         return null;
     }
+
+    protected static boolean isNumericId(final String string) {
+        try {
+            return Integer.valueOf(string) > 0;
+        } catch (NumberFormatException e) {
+        }
+        return false;
+    }
 }

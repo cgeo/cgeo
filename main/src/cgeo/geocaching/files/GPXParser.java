@@ -89,6 +89,7 @@ public abstract class GPXParser extends FileParser {
      * Parser result. Maps geocode to cache.
      */
     private final Map<String, cgCache> result = new HashMap<String, cgCache>(500);
+    private ProgressInputStream progressStream;
 
     private final class UserDataListener implements EndTextElementListener {
         private final int index;
@@ -284,7 +285,7 @@ public abstract class GPXParser extends FileParser {
                     createNoteFromGSAKUserdata();
 
                     result.put(cache.geocode, cache);
-                    showCountMessage(handler, R.string.gpx_import_loading_caches, ++importedRecords);
+                    showCountMessage(handler, R.string.gpx_import_loading_caches, ++importedRecords, progressStream.getProgress());
                 } else if (StringUtils.isNotBlank(cache.name)
                         && cache.coords != null
                         && StringUtils.contains(type, "waypoint")) {
@@ -298,10 +299,10 @@ public abstract class GPXParser extends FileParser {
                 fixCache(cache);
 
                 if (cache.name.length() > 2) {
-                    String cacheGeocodeForWaypoint = "GC" + cache.name.substring(2);
+                    final String cacheGeocodeForWaypoint = "GC" + cache.name.substring(2);
 
                     // lookup cache for waypoint in already parsed caches
-                    cgCache cacheForWaypoint = result.get(cacheGeocodeForWaypoint);
+                    final cgCache cacheForWaypoint = result.get(cacheGeocodeForWaypoint);
                     if (cacheForWaypoint != null) {
                         final cgWaypoint waypoint = new cgWaypoint();
                         waypoint.id = -1;
@@ -319,7 +320,7 @@ public abstract class GPXParser extends FileParser {
                         }
                         cgWaypoint.mergeWayPoints(cacheForWaypoint.waypoints, Collections.singletonList(waypoint));
                         result.put(cacheGeocodeForWaypoint, cacheForWaypoint);
-                        showCountMessage(handler, R.string.gpx_import_loading_waypoints, ++importedRecords);
+                        showCountMessage(handler, R.string.gpx_import_loading_waypoints, ++importedRecords, progressStream.getProgress());
                     }
                 }
             }
@@ -562,7 +563,7 @@ public abstract class GPXParser extends FileParser {
                     if (StringUtils.isBlank(cache.location)) {
                         cache.location = validate(country);
                     } else {
-                        cache.location = cache.location + ", " + country.trim();
+                        cache.location += ", " + country.trim();
                     }
                 }
             });
@@ -732,7 +733,8 @@ public abstract class GPXParser extends FileParser {
         }
 
         try {
-            Xml.parse(stream, Xml.Encoding.UTF_8, root.getContentHandler());
+            progressStream = new ProgressInputStream(stream);
+            Xml.parse(progressStream, Xml.Encoding.UTF_8, root.getContentHandler());
             return true;
         } catch (IOException e) {
             Log.e(Settings.tag, "Cannot parse .gpx file as GPX " + version + ": could not read file!");
@@ -787,7 +789,7 @@ public abstract class GPXParser extends FileParser {
     }
 
     private void setType(final String parsedString) {
-        String lowercase = parsedString.toLowerCase().trim();
+        final String lowercase = parsedString.toLowerCase().trim();
         final String knownType = cgBase.cacheTypes.get(lowercase);
         if (knownType != null) {
             cache.type = knownType;
@@ -905,7 +907,7 @@ public abstract class GPXParser extends FileParser {
     static File getWaypointsFileForGpx(File file) {
         final String name = file.getName();
         if (StringUtils.endsWithIgnoreCase(name, GPX_FILE_EXTENSION) && (StringUtils.length(name) > GPX_FILE_EXTENSION.length())) {
-            String wptsName = StringUtils.substringBeforeLast(name, ".") + "-wpts" + StringUtils.right(name, GPX_FILE_EXTENSION.length());
+            final String wptsName = StringUtils.substringBeforeLast(name, ".") + "-wpts" + StringUtils.right(name, GPX_FILE_EXTENSION.length());
             return new File(file.getParentFile(), wptsName);
         } else {
             return null;

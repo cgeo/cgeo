@@ -20,7 +20,7 @@ public class OpenCachingConnector extends AbstractConnector implements IConnecto
 
     @Override
     public boolean canHandle(String geocode) {
-        return StringUtils.isNotBlank(geocode) && StringUtils.startsWithIgnoreCase(geocode, prefix);
+        return StringUtils.startsWithIgnoreCase(geocode, prefix);
     }
 
     @Override

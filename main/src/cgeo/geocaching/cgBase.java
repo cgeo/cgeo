@@ -1561,7 +1561,12 @@ public class cgBase {
         }
 
         try {
-            final JSONObject resp = new JSONObject(cgBase.getResponseData(response));
+            final String rawResponse = cgBase.getResponseData(response);
+            if (rawResponse == null) {
+                Log.e(Settings.tag, "cgBase.loadLogsFromDetails: unable to read whole response");
+                return;
+            }
+            final JSONObject resp = new JSONObject(rawResponse);
             if (!resp.getString("status").equals("success")) {
                 Log.e(Settings.tag, "cgBase.loadLogsFromDetails: status is " + resp.getString("status"));
                 return;

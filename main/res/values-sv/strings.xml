@@ -11,6 +11,8 @@
   <string name="helpers">Program att installera</string>
   <string name="about">Om c:geo</string>
   <string name="helper">Vill du lära dig mer om <b>c:geo</b>?\nLäs manualen (på engelska).</string>
+  <string name="latitude">Latitud</string>
+  <string name="longitude">Longitud</string>
 
   <!-- actionbar -->
   <string name="action_bar_share_title">Skicka cachens länk via</string>
@@ -116,82 +118,83 @@
   <string name="err_parse">misslyckades analysera inloggningssidan</string>
   <string name="err_server">misslyckades att ansluta till Geocaching.com (servern eller anslutningen nere?)</string>
   <string name="err_login">Inloggningsinformationen ej sparad</string>
-  <string name="err_login_failed">Tyvärr, c:geo kan inte logga in.</string>
-  <string name="err_login_failed_toast">Tyvärr, c:geo kan inte logga in. c:geo kommer att köra i offline läge. Kontrollera dina inloggningsuppgifter i inställningarna och aktivera din internetanslutning.</string>
+  <string name="err_login_failed">Tyvärr kan c:geo inte logga in.</string>
+  <string name="err_login_failed_toast">Tyvärr kan c:geo inte logga in. c:geo kommer att köra i offline läge. Kontrollera dina inloggningsuppgifter i inställningarna och aktivera din internetanslutning.</string>
   <string name="err_unknown">Okänt fel</string>
   <string name="err_comm">Okänt kommunikationsfel</string>
   <string name="err_missing_auth">Användarnamn och/eller lösenord saknas.</string>
   <string name="err_wrong">felaktiga inloggningsuppgifter</string>
   <string name="err_license">användaren inte har bekräftat licensavtalet med Geocaching.com</string>
-  <string name="err_store">Tyvärr, c:geo kan inte spara cachen.</string>
-  <string name="err_drop">Tyvärr, c:geo kan inte ta bort cachen.</string>
-  <string name="err_detail_open">Tyvärr, c:geo kan inte visa detaljer om geocachen.</string>
-  <string name="err_detail_cache">Tyvärr, c:geo kan inte visa den geocache du önskar. Är det verkligen en geocache?</string>
-  <string name="err_detail_cache_find">Tyvärr, c:geo kan inte hitta geocache</string>
-  <string name="err_detail_cache_find_some">Tyvärr, c:geo kan inte hitta geocachen.</string>
-  <string name="err_detail_cache_find_any">Tyvärr, c:geo kan inte hitta någon geocache.</string>
-  <string name="err_detail_cache_find_next">Tyvärr, c:geo kan inte hitta nästa geocache.</string>
-  <string name="err_detail_cache_forgot">Tyvärr, c:geo glömde vilken geocache du ville se.</string>
-  <string name="err_detail_cache_forgot_visit">Tyvärr, c:geo glömde vilken cache tittade på.</string>
+  <string name="err_unpublished">Den sökta cachen är opubliserad.</string>
+  <string name="err_premium_only">Cachen är enbart för premium medlemmar på Geocaching.com</string>
+  <string name="err_store">Tyvärr kan c:geo inte spara cachen.</string>
+  <string name="err_drop">Tyvärr kan c:geo inte ta bort cachen.</string>
+  <string name="err_detail_open">Tyvärr kan c:geo inte visa detaljer om geocachen.</string>
+  <string name="err_detail_cache">Tyvärr kan c:geo inte visa den geocache du önskar. Är det verkligen en geocache?</string>
+  <string name="err_detail_cache_find">Tyvärr kan c:geo inte hitta geocache</string>
+  <string name="err_detail_cache_find_some">Tyvärr kan c:geo inte hitta geocachen.</string>
+  <string name="err_detail_cache_find_any">Tyvärr kan c:geo inte hitta någon geocache.</string>
+  <string name="err_detail_cache_find_next">Tyvärr kan c:geo inte hitta nästa geocache.</string>
+  <string name="err_detail_cache_forgot">Tyvärr glömde c:geo vilken geocache du ville se.</string>
+  <string name="err_detail_cache_forgot_visit">Tyvärr glömde c:geo vilken cache tittade på.</string>
   <string name="err_detail_no_spoiler">c:geo hittade inga spoiler bilder för den här cachen.</string>
   <string name="err_detail_no_map_static">c:geo hittade inga sparade kartor för denna cache.</string>
-  <string name="err_detail_not_load_map_static">Tyvärr, c:geo misslyckades att ladda sparade kartor.</string>
-  <string name="err_detail_still_removing">Fortsätter att ta bort denna cache.</string>
-  <string name="err_detail_still_saving">Fortsätter att spara denna cache.</string>
-  <string name="err_detail_still_refreshing">Fortsätter att ladda om denna cache.</string>
+  <string name="err_detail_not_load_map_static">Tyvärr misslyckades c:geo att ladda sparade kartor.</string>
+  <string name="err_detail_still_working">Arbetar fortfarande med annat.</string>
   <string name="err_watchlist_still_managing">Hanterar fortfarande din watchlist.</string>
   <string name="err_watchlist_failed">Hanteringen av din watchlist misslyckades.</string>
   <string name="err_navigation_no">c:geo kan inte hitta något stöd för navigering.</string>
   <string name="err_application_no">c:geo kan inte hitta något lämpligt program.</string>
-  <string name="err_auth_initialize">Tyvärr, c:geo misslyckades att starta inloggningsproceduren.</string>
+  <string name="err_auth_initialize">Tyvärr misslyckades c:geo att starta inloggningsproceduren.</string>
   <string name="err_auth_process">Inloggningsproceduren misslyckades.</string>
   <string name="err_cannot_log_visit">c:geo har inte tillräckligt med information för att logga ditt besök. Vänligen försök igen från vyn men all information om cachen.</string>
-  <string name="err_init_cleared">Tyvärr, c:geo kan inte rensa inloggningsinställningarna.</string>
-  <string name="err_download_fail">Tyvärr, c:geo misslyckades att ladda ner cacher pga</string>
-  <string name="err_list_load_fail">Tyvärr, c:geo misslyckades att ladda listan med cacher.</string>
-  <string name="err_store_failed">Tyvärr, c:geo kan inte spara geocachen.</string>
-  <string name="err_refresh_failed">Tyvärr, c:geo kan inte uppdatera geocachen.</string>
-  <string name="err_drop_failed">Tyvärr, c:geo kan inte radera geocachen.</string>
-  <string name="err_dwld_details_failed">Tyvärr, c:geo misslyckades att ladda detaljer.</string>
-  <string name="err_dwld_details_failed_reason">Tyvärr, c:geo misslyckades att ladda detaljer pga</string>
-  <string name="err_load_descr_failed">Tyvärr, c:geo kan inte ladda beskrivningen.</string>
+  <string name="err_init_cleared">Tyvärr kan c:geo inte rensa inloggningsinställningarna.</string>
+  <string name="err_download_fail">Tyvärr misslyckades c:geo att ladda ner cacher pga</string>
+  <string name="err_list_load_fail">Tyvärr misslyckades c:geo att ladda listan med cacher.</string>
+  <string name="err_store_failed">Tyvärr kan c:geo inte spara geocachen.</string>
+  <string name="err_refresh_failed">Tyvärr kan c:geo inte uppdatera geocachen.</string>
+  <string name="err_drop_failed">Tyvärr kan c:geo inte radera geocachen.</string>
+  <string name="err_dwld_details_failed">Tyvärr misslyckades c:geo att ladda detaljer.</string>
+  <string name="err_dwld_details_failed_reason">Tyvärr misslyckades c:geo att ladda detaljer pga</string>
+  <string name="err_load_descr_failed">Tyvärr kan c:geo inte ladda beskrivningen.</string>
   <string name="err_location_unknown">c:geo har inte koordinaterna för cachen.</string>
   <string name="err_missing_device_name">Vänligen ange ett namn för din enhet innan registering.</string>
 
-  <string name="err_tb_display">Tyvärr, c:geo kan inte visa den trackable du önskar. Är den verkligen trackable?</string>
-  <string name="err_tb_details_open">Tyvärr, c:geo kan inte öppna detaljer för trackable.</string>
-  <string name="err_tb_details_download">Tyvärr, c:geo misslyckades att ladda ner detaljer för trackable pga</string>
-  <string name="err_tb_forgot">Tyvärr, c:geo glömde vilken trackable önskade.</string>
-  <string name="err_tb_forgot_saw">Tyvärr, c:geo glömde vilken trackable du såg.</string>
-  <string name="err_tb_find">Tyvärr, c:geo kunde inte hitta trackable</string>
-  <string name="err_tb_find_that">Tyvärr, c:geo kan inte hitta önskad trackable.</string>
+  <string name="err_tb_display">Tyvärr kan c:geo inte visa den trackable du önskar. Är den verkligen trackable?</string>
+  <string name="err_tb_details_open">Tyvärr kan c:geo inte öppna detaljer för trackable.</string>
+  <string name="err_tb_details_download">Tyvärr misslyckades c:geo att ladda ner detaljer för trackable pga</string>
+  <string name="err_tb_forgot">Tyvärr glömde c:geo vilken trackable önskade.</string>
+  <string name="err_tb_forgot_saw">Tyvärr glömde c:geo vilken trackable du såg.</string>
+  <string name="err_tb_find">Tyvärr kunde c:geo inte hitta trackable</string>
+  <string name="err_tb_find_that">Tyvärr kan c:geo inte hitta önskad trackable.</string>
+  <string name="err_cache_inventory_load_fail">Tyvärr kunde c:geo inte läsa information om trackables i cachen.</string>
 
-  <string name="err_waypoint_cache_unknown">Tyvärr, c:geo vet inte till vilken cache du vill lägga till en punkt.</string>
-  <string name="err_waypoint_unknown">Tyvärr, c:geo glömde vilken punkt du ville visa.</string>
-  <string name="err_waypoint_add_failed">Tyvärr, c:geo misslyckades att lägga till din punkt.</string>
-  <string name="err_waypoint_load_failed">Tyvärr, c:geo misslyckades att ladda punkten.</string>
-  <string name="err_waypoint_delete_failed">Tyvärr, c:geo kan inte ta bort punkten.</string>
-  <string name="err_point_unknown_position">Tyvärr, c:geo kan inte bestämma din position.</string>
+  <string name="err_waypoint_cache_unknown">Tyvärr vet inte c:geo till vilken cache du vill lägga till en punkt.</string>
+  <string name="err_waypoint_unknown">Tyvärr glömde c:geo vilken punkt du ville visa.</string>
+  <string name="err_waypoint_add_failed">Tyvärr misslyckades c:geo att lägga till din punkt.</string>
+  <string name="err_waypoint_load_failed">Tyvärr misslyckades c:geo att ladda punkten.</string>
+  <string name="err_waypoint_delete_failed">Tyvärr kan c:geo inte ta bort punkten.</string>
+  <string name="err_point_unknown_position">Tyvärr kan c:geo inte bestämma din position.</string>
   <string name="err_point_no_position_given_title">Mer info krävs</string>
   <string name="err_point_no_position_given">Ange minst latitud och longitud eller avstånd och riktning. Du kan också ange alla fyra.</string>
   <string name="err_point_curr_position_unavailable">c:geo har ännu inte nuvarande koordinater. Vänta en stund…</string>
   <string name="err_point_bear_and_dist_title">Tips!</string>
   <string name="err_point_bear_and_dist">Ange både riktning och avstånd. Rikting är en vinkel mellan 0 och 360 grader relativt norr. Avstånd anges med eller utan enhet.</string>
-  <string name="err_point_location_error">Tyvärr, c:geo kan inte få fram platsen för din punkt.</string>
+  <string name="err_point_location_error">Tyvärr kan c:geo inte få fram platsen för din punkt.</string>
 
-  <string name="err_log_load_data">Tyvärr, c:geo kan inte ladda information som krävs för att logga ditt besök.</string>
-  <string name="err_log_load_data_again">Tyvärr, c:geo kan inte ladda information som krävs för att logga ditt besök. Försöker igen.</string>
+  <string name="err_log_load_data">Tyvärr kan c:geo inte ladda information som krävs för att logga ditt besök.</string>
+  <string name="err_log_load_data_again">Tyvärr kan c:geo inte ladda information som krävs för att logga ditt besök. Försöker igen.</string>
   <string name="err_log_load_data_still">c:geo laddar fortfarande data för att kunna posta loggen. Vänligen vänta en stund till.</string>
-  <string name="err_log_failed_server">Tyvärr, c:geo misslyckades att posta loggen eftersom servern inte svarade.</string>
-  <string name="err_log_post_failed">Tyvärr, c:geo misslyckades att posta loggen.</string>
+  <string name="err_log_failed_server">Tyvärr misslyckades c:geo att posta loggen eftersom servern inte svarade.</string>
+  <string name="err_log_post_failed">Tyvärr misslyckades c:geo att posta loggen.</string>
 
-  <string name="err_search_address_no_match">Tyvärr, c:geo hittade ingen plats som stämde.</string>
-  <string name="err_search_address_forgot">Tyvärr, c:geo glömde adressen du sökte efter.</string>
+  <string name="err_search_address_no_match">Tyvärr hittade c:geo ingen plats som stämde.</string>
+  <string name="err_search_address_forgot">Tyvärr glömde c:geo adressen du sökte efter.</string>
   <string name="err_search_address">Söker efter platser</string>
-  <string name="err_parse_lat">Tyvärr, c:geo kan inte tolka latitud.</string>
-  <string name="err_parse_lon">Tyvärr, c:geo kan inte tolka longitud.</string>
-  <string name="err_parse_dist">Tyvärr, c:geo kan inte tolka avstånd.</string>
-  <string name="err_parse_lat_lon">Tyvärr, c:geo kan inte tolka latitud eller longitud.</string>
+  <string name="err_parse_lat">Tyvärr kan c:geo inte tolka latitud.</string>
+  <string name="err_parse_lon">Tyvärr kan c:geo inte tolka longitud.</string>
+  <string name="err_parse_dist">Tyvärr kan c:geo inte tolka avstånd.</string>
+  <string name="err_parse_lat_lon">Tyvärr kan c:geo inte tolka latitud eller longitud.</string>
   <string name="err_invalid_lat_lon">Tyvärr, felaktig latitud eller longitud.</string>
 
   <string name="err_fieldnotes_export_failed">Exportering av Field Notes misslyckades.</string>
@@ -208,6 +211,7 @@
   <string name="warn_search_help_user">Ange en användare på Geocaching.com.</string>
   <string name="warn_search_help_tb">Ange koden för en trackable. Tex \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Vänligen skriv någon text i loggen.</string>
+  <string name="warn_load_images">Tyvärr misslyckades c:geo att ladda ner bilder.</string>
 
 
   <string name="info_log_posted">c:geo har postat din logg.</string>
@@ -322,6 +326,7 @@
   <string name="list_menu_create">Skapa en ny lista</string>
   <string name="list_menu_drop">Ta bort den här listan</string>
   <string name="list_menu_change">Byt lista</string>
+  <string name="list_menu_rename">Byt namn på den här listan</string>
   <string name="list_title">Välj en lista</string>
   <string name="list_inbox">Sparade</string>
   <string name="list_wpt">Punkter</string>
@@ -335,6 +340,8 @@
   <string name="list_dialog_remove">Ta bort</string>
   <string name="list_dialog_remove_ok">Listan har tagits bort</string>
   <string name="list_dialog_remove_err">c:geo misslyckades med att ta bort listan</string>
+  <string name="list_dialog_rename_title">Byt namn på listan</string>
+  <string name="list_dialog_rename">Byt namn</string>
 
   <!-- about -->
   <string name="about_changelog">Historik</string>
@@ -377,6 +384,8 @@
   <string name="init_captcha">Visa CAPTCHA (robotfällor) vid behov</string>
   <string name="init_useenglish">Använd engelska i c:geo (kräver omstart)</string>
   <string name="init_exclude">Dölj egna och hittade cacher</string>
+  <string name="init_showwaypoints">Extra punkter på Live kartan</string>
+  <string name="init_showwaypoint_description">Nivå där extra punkter (parkering eller tillagd lösning) börjar visas i Live kartan.</string>
   <string name="init_disabled">Dölj inaktiva cacher</string>
   <string name="init_offline">Spara kartor för användning offline</string>
   <string name="init_save_log_img">Spara bilder från loggar</string>
@@ -392,12 +401,15 @@
   <string name="init_cleared">c:geo har rensat inloggningsinformationen</string>
   <string name="init_backup">Säkerhetskopiering</string>
   <string name="init_backup_backup">Kopiera</string>
+  <string name="init_backup_running">Skapar säkerhetskopia av databasen med cacher…</string>
   <string name="init_backup_note">Med knapparna ovan kan du säkerhetskopiera eller återställa databasen som innehåller cacher och punkter (waypoints). Inställningar (såsom användarnamn och lösenord) kopieras inte.</string>
   <string name="init_backup_restore">Återställ</string>
   <string name="init_backup_success">Databasen som används av c:geo har kopierats till filen</string>
   <string name="init_backup_failed">Kopieringen av c:geos databas misslyckades.</string>
+  <string name="init_backup_unnecessary">Databasen är tom, säkerhetkopiering behövs inte.</string>
   <string name="init_restore_success">Återställning klar.</string>
   <string name="init_restore_failed">Återställningen misslyckades.</string>
+  <string name="init_restore_running">Återställer databasen med cacher…</string>
   <string name="init_backup_last">Tillgänglig kopia från</string>
   <string name="init_backup_last_no">Det finns ingen säkerhetskopia.</string>
   <string name="init_mapsources">Kartkällor</string>
@@ -460,6 +472,7 @@
   <string name="cache_attributes">Attribut</string>
   <string name="cache_attributes_no_icons">(uppdatera cachen för att visa bilder för attribut)</string>
   <string name="cache_inventory">Innehåll</string>
+  <string name="cache_inventory_loading">hämtar info om trackables…</string>
   <string name="cache_log_offline">Offline logg</string>
   <string name="cache_log_images_loading">Laddar loggbilder…</string>
   <string name="cache_log_images_title">Loggbild</string>
@@ -477,6 +490,13 @@
   <string name="cache_hint">Tips</string>
   <string name="cache_logs">Loggbok</string>
   <string name="cache_dialog_loading_details">Laddar detaljer om cachen…</string>
+  <string name="cache_dialog_loading_details_status_loadpage">Laddar ner från gc.com</string>
+  <string name="cache_dialog_loading_details_status_details">Analyserar cacheinformation</string>
+  <string name="cache_dialog_loading_details_status_spoilers">Laddar ner spoilerbilder</string>
+  <string name="cache_dialog_loading_details_status_logs">Laddar ner tidgare loggar</string>
+  <string name="cache_dialog_loading_details_status_waypoints">Analyserar punkter</string>
+  <string name="cache_dialog_loading_details_status_gcvote">Hämtar betyg från GCVote</string>
+  <string name="cache_dialog_loading_details_status_render">Förbereder för visning</string>
   <string name="cache_dialog_loading_description">Laddar beskrivning om cachen…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">Sparar cachen för användning offline…</string>
@@ -537,14 +557,18 @@
   <string name="cache_export_fieldnote">Exportera som Field Notes</string>
   <string name="cache_clear_history">Rensa historik</string>
   <string name="cache_remove_from_history">Ta bort från historik</string>
+  <string name="cache_license">Licens</string>
 
   <!-- file list base -->
   <string name="file_searching_in">Söker efter filer\ni</string>
-  <string name="file_list_no_files">Tyvärr, c:geo hittade inga lämpliga filer.</string>
+  <string name="file_list_no_files">Tyvärr hittade c:geo inga lämpliga filer.</string>
   <string name="file_searching">Söker efter matchande filer</string>
   <string name="file_title_searching">Söker</string>
 
   <!-- gpx -->
+  <string name="gpx_import_loading_caches">Läser in cacher från .gpx filen.\nLäst:</string>
+  <string name="gpx_import_loading_waypoints">Läser in punkter från .gpx file\nLäst:</string>
+  <string name="gpx_import_storing">Skriver cacher till databasen\nSparat:</string>
   <string name="gpx_import_loading_stored">Laddar cacher från .gpx fil\nSparat:</string>
   <string name="gpx_import_caches_imported">cacher importerade</string>
   <string name="gpx_import_loading">Laddar cacher från .gpx fil</string>
@@ -633,6 +657,7 @@
   <string name="search_tb_hint">Identifiering av trackable</string>
   <string name="search_tb_button">Sök efter trackable</string>
   <string name="search_destination">Mål</string>
+  <string name="search_some_destination">Något mål</string>
   <string name="search_direction_rel">Från min plats</string>
   <string name="search_address_started">Söker efter platser</string>
   <string name="search_address_result">Hittade platser</string>
