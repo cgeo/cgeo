@@ -114,19 +114,19 @@
 
   <!-- errors, warnings, info toasts -->
   <string name="err_none">ok</string>
-  <string name="err_start">communication non démarrée</string>
-  <string name="err_parse">échec login lecture page</string>
-  <string name="err_server">échec de la connexion à Geocaching.com (probléme de serveur ou de connexion?)</string>
-  <string name="err_login">pas d\'utilisateur ou de mot de passe enregistré</string>
+  <string name="err_start">Communication non démarrée</string>
+  <string name="err_parse">Échec login lecture page</string>
+  <string name="err_server">Échec de la connexion à Geocaching.com (probléme de serveur ou de connexion?)</string>
+  <string name="err_login">Pas d\'utilisateur ou de mot de passe enregistré</string>
   <string name="err_login_failed">c:geo ne peut pas se connecter.</string>
-  <string name="err_login_failed_toast">Désolé, c:geo ne peut pas se connecter. c:geo est en mode hors-ligne. Vérifiez vos paramètres et activez votre connexion Internet.</string>
-  <string name="err_unknown">erreur inconnue</string>
-  <string name="err_comm">erreur inconnue de communication</string>
-  <string name="err_missing_auth">nom d\'utilisateur ou mot de passe manquant.</string>
-  <string name="err_wrong">nom d\'utilisateur inconnu ou mauvais mot de passe</string>
-  <string name="err_license">l\'utilisateur n\'a pas accepté les termes et les conditions d\'utilisation de Geocaching.com</string>
-  <string name="err_unpublished">la cache a été retirée de la publication</string>
-  <string name="err_premium_only">la cache est réservée aux membres Premium de Geocaching.com</string>
+  <string name="err_login_failed_toast">c:geo est en mode hors-ligne et ne peut pas se connecter. Vérifiez votre connexion Internet.</string>
+  <string name="err_unknown">Erreur inconnue</string>
+  <string name="err_comm">Erreur inconnue de communication</string>
+  <string name="err_missing_auth">Nom d\'utilisateur ou mot de passe manquant.</string>
+  <string name="err_wrong">Nom d\'utilisateur inconnu ou mauvais mot de passe</string>
+  <string name="err_license">L\'utilisateur n\'a pas accepté les termes et les conditions d\'utilisation de Geocaching.com</string>
+  <string name="err_unpublished">La cache a été retirée de la publication</string>
+  <string name="err_premium_only">La cache est réservée aux membres Premium de Geocaching.com</string>
   <string name="err_store">Désolé, c:geo ne peut pas enregister la cache.</string>
   <string name="err_drop">Désolé, c:geo ne peut pas effacer la cache.</string>
   <string name="err_detail_open">Désolé, c:geo ne peut pas ouvrir le détail de la cache.</string>
@@ -176,7 +176,7 @@
   <string name="err_waypoint_delete_failed">Désolé, c:geo ne peut pas effacer l\'étape.</string>
   <string name="err_point_unknown_position">Désolé, c:geo ne peut pas savoir où vous êtes.</string>
   <string name="err_point_no_position_given_title">Information obligatoire</string>
-  <string name="err_point_no_position_given">Remplissez au moins la latitude ou la longitude ou la distance et le relèvement . Vous pouvez aussi remplir tous les champs.</string>
+  <string name="err_point_no_position_given">Remplissez au moins la latitude ou la longitude ou la distance et le relèvement. Vous pouvez aussi remplir tous les champs.</string>
   <string name="err_point_curr_position_unavailable">c:geo ne connaît pas encore votre position. Veuillez patienter…</string>
   <string name="err_point_bear_and_dist_title">Besoin d\'aide?</string>
   <string name="err_point_bear_and_dist">Remplissez le relèvement et la distance. Le relèvement est l\'angle de 0 à 360 degrés par rapport au Nord. La distance est avec ou sans les unités.</string>
@@ -215,7 +215,7 @@
 
 
   <string name="info_log_posted">Envoi de la visite réussi.</string>
-  <string name="info_log_saved">Sauvegarde de la visite réussi.</string>
+  <string name="info_log_saved">Sauvegarde de la visite réussie.</string>
   <string name="info_log_cleared">La visite a été effacée.</string>
   <string name="info_log_type_changed">Le type de visite a changé!</string>
 
@@ -304,7 +304,6 @@
   <string name="caches_filter_size_title">Choisir la taille</string>
   <string name="caches_filter_type_title">Choisir le type</string>
   <string name="caches_filter_type_traditional">Traditionelle</string>
-  <string name="caches_filter_type_multi">Multi-cache</string>
   <string name="caches_filter_type_mystery">Mystère</string>
   <string name="caches_filter_type_letterbox">Boîte aux lettres hybride</string>
   <string name="caches_filter_type_event">Événement</string>
@@ -623,8 +622,8 @@
   <string name="map_map">Carte</string>
   <string name="map_live">Carte active</string>
   <string name="map_view_map">Voir carte</string>
-  <string name="map_trail_show">Afficher le sentier</string>
-  <string name="map_trail_hide">Cacher le sentier</string>
+  <string name="map_trail_show">Afficher le parcours</string>
+  <string name="map_trail_hide">Cacher le parcours</string>
   <string name="map_circles_show">Afficher les cercles</string> <!-- since: 2.23 RC3 -->
   <string name="map_circles_hide">Cacher les cercles</string> <!-- since: 2.23 RC3 -->
   <string name="map_live_enable">Activer Temps réel</string>
