@@ -290,22 +290,20 @@ public class cgeoapplication extends Application {
         return searches.get(searchId).getCount();
     }
 
-    public Integer getNotOfflineCount(final UUID searchId) {
+    public boolean hasUnsavedCaches(final UUID searchId) {
         if (unknownSearch(searchId)) {
-            return 0;
+            return false;
         }
 
-        int count = 0;
         List<String> geocodes = searches.get(searchId).getGeocodes();
         if (geocodes != null) {
             for (String geocode : geocodes) {
                 if (!isOffline(geocode, null)) {
-                    count++;
+                    return true;
                 }
             }
         }
-
-        return count;
+        return false;
     }
 
     private boolean unknownSearch(final UUID searchId) {

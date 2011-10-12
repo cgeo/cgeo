@@ -8,11 +8,13 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgDirection;
 import cgeo.geocaching.cgGeo;
+import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgUpdateDir;
 import cgeo.geocaching.cgUpdateLoc;
 import cgeo.geocaching.cgUser;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.cgeocaches;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
@@ -66,6 +68,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private static final int MENU_STORE_CACHES = 3;
     private static final int MENU_TRAIL_MODE = 4;
     private static final int MENU_CIRCLE_MODE = 5;
+    private static final int MENU_AS_LIST = 6;
 
     private static final int SUBMENU_VIEW_GOOGLE_MAP = 10;
     private static final int SUBMENU_VIEW_GOOGLE_SAT = 11;
@@ -493,6 +496,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         menu.add(0, MENU_STORE_CACHES, 0, res.getString(R.string.caches_store_offline)).setIcon(android.R.drawable.ic_menu_set_as).setEnabled(false);
         menu.add(0, MENU_TRAIL_MODE, 0, res.getString(R.string.map_trail_hide)).setIcon(android.R.drawable.ic_menu_recent_history);
         menu.add(0, MENU_CIRCLE_MODE, 0, res.getString(R.string.map_circles_hide)).setIcon(R.drawable.ic_menu_circle);
+        menu.add(0, MENU_AS_LIST, 0, res.getString(R.string.map_as_list)).setIcon(android.R.drawable.ic_menu_agenda);
 
         return true;
     }
@@ -524,23 +528,18 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             }
 
             item = menu.findItem(MENU_MAP_LIVE); // live map
-            if (live == false) {
-                item.setEnabled(false);
-                item.setTitle(res.getString(R.string.map_live_enable));
-            } else {
+            if (live) {
                 if (Settings.isLiveMap()) {
                     item.setTitle(res.getString(R.string.map_live_disable));
                 } else {
                     item.setTitle(res.getString(R.string.map_live_enable));
                 }
-            }
-
-            item = menu.findItem(MENU_STORE_CACHES); // store loaded
-            if (live && !isLoading() && app.getNotOfflineCount(searchId) > 0 && caches != null && caches.size() > 0) {
-                item.setEnabled(true);
             } else {
                 item.setEnabled(false);
+                item.setTitle(res.getString(R.string.map_live_enable));
             }
+
+            menu.findItem(MENU_STORE_CACHES).setEnabled(live && !isLoading() && CollectionUtils.isNotEmpty(caches) && app.hasUnsavedCaches(searchId));
 
             item = menu.findItem(MENU_CIRCLE_MODE); // show circles
             if (overlayCaches != null && overlayCaches.getCircles()) {
@@ -549,12 +548,11 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 item.setTitle(res.getString(R.string.map_circles_show));
             }
 
-            item = menu.findItem(SUBMENU_VIEW_MF_OFFLINE);
-            if (Settings.isValidMapFile()) {
-                item.setEnabled(true);
-            } else {
-                item.setEnabled(false);
-            }
+            menu.findItem(SUBMENU_VIEW_MF_OFFLINE).setEnabled(Settings.isValidMapFile());
+
+            item = menu.findItem(MENU_AS_LIST);
+            item.setVisible(live);
+            item.setEnabled(CollectionUtils.isNotEmpty(caches));
         } catch (Exception e) {
             Log.e(Settings.tag, "cgeomap.onPrepareOptionsMenu: " + e.toString());
         }
@@ -565,134 +563,144 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         final int id = item.getItemId();
+        switch (id) {
+            case MENU_TRAIL_MODE:
+                Settings.setMapTrail(!Settings.isMapTrail());
+                return true;
+            case MENU_MAP_LIVE:
+                Settings.setLiveMap(!Settings.isLiveMap());
+                liveChanged = true;
+                searchId = null;
+                searchIdIntent = null;
+                return true;
+            case MENU_STORE_CACHES:
+                if (live && !isLoading() && CollectionUtils.isNotEmpty(caches)) {
+                    final List<String> geocodes = new ArrayList<String>();
 
-        if (id == MENU_TRAIL_MODE) {
-            Settings.setMapTrail(!Settings.isMapTrail());
-        } else if (id == MENU_MAP_LIVE) {
-            Settings.setLiveMap(!Settings.isLiveMap());
-            liveChanged = true;
-            searchId = null;
-            searchIdIntent = null;
-        } else if (id == MENU_STORE_CACHES) {
-            if (live && !isLoading() && CollectionUtils.isNotEmpty(caches)) {
-                final List<String> geocodes = new ArrayList<String>();
+                    List<cgCache> cachesProtected = new ArrayList<cgCache>(caches);
+                    try {
+                        if (cachesProtected.size() > 0) {
+                            final GeoPointImpl mapCenter = mapView.getMapViewCenter();
+                            final int mapCenterLat = mapCenter.getLatitudeE6();
+                            final int mapCenterLon = mapCenter.getLongitudeE6();
+                            final int mapSpanLat = mapView.getLatitudeSpan();
+                            final int mapSpanLon = mapView.getLongitudeSpan();
 
-                List<cgCache> cachesProtected = new ArrayList<cgCache>(caches);
-                try {
-                    if (cachesProtected.size() > 0) {
-                        final GeoPointImpl mapCenter = mapView.getMapViewCenter();
-                        final int mapCenterLat = mapCenter.getLatitudeE6();
-                        final int mapCenterLon = mapCenter.getLongitudeE6();
-                        final int mapSpanLat = mapView.getLatitudeSpan();
-                        final int mapSpanLon = mapView.getLongitudeSpan();
-
-                        for (cgCache oneCache : cachesProtected) {
-                            if (oneCache != null && oneCache.coords != null) {
-                                if (cgBase.isCacheInViewPort(mapCenterLat, mapCenterLon, mapSpanLat, mapSpanLon, oneCache.coords) && app.isOffline(oneCache.geocode, null) == false) {
-                                    geocodes.add(oneCache.geocode);
+                            for (cgCache oneCache : cachesProtected) {
+                                if (oneCache != null && oneCache.coords != null) {
+                                    if (cgBase.isCacheInViewPort(mapCenterLat, mapCenterLon, mapSpanLat, mapSpanLon, oneCache.coords) && app.isOffline(oneCache.geocode, null) == false) {
+                                        geocodes.add(oneCache.geocode);
+                                    }
                                 }
                             }
                         }
+                    } catch (Exception e) {
+                        Log.e(Settings.tag, "cgeomap.onOptionsItemSelected.#4: " + e.toString());
                     }
-                } catch (Exception e) {
-                    Log.e(Settings.tag, "cgeomap.onOptionsItemSelected.#4: " + e.toString());
+
+                    detailTotal = geocodes.size();
+
+                    if (detailTotal == 0) {
+                        ActivityMixin.showToast(activity, res.getString(R.string.warn_save_nothing));
+
+                        return true;
+                    }
+
+                    waitDialog = new ProgressDialog(activity);
+                    waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                    waitDialog.setCancelable(true);
+                    waitDialog.setMax(detailTotal);
+                    waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+                        public void onCancel(DialogInterface arg0) {
+                            try {
+                                if (loadDetailsThread != null) {
+                                    loadDetailsThread.stopIt();
+                                }
+
+                                if (geo == null) {
+                                    geo = app.startGeo(activity, geoUpdate, base, 0, 0);
+                                }
+                                if (Settings.isUseCompass() && dir == null) {
+                                    dir = app.startDir(activity, dirUpdate);
+                                }
+                            } catch (Exception e) {
+                                Log.e(Settings.tag, "cgeocaches.onPrepareOptionsMenu.onCancel: " + e.toString());
+                            }
+                        }
+                    });
+
+                    Float etaTime = Float.valueOf((detailTotal * (float) 7) / 60);
+                    if (etaTime < 0.4) {
+                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
+                    } else if (etaTime < 1.5) {
+                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format(Locale.getDefault(), "%.0f", etaTime) + " " + res.getString(R.string.caches_eta_min));
+                    } else {
+                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format(Locale.getDefault(), "%.0f", etaTime) + " " + res.getString(R.string.caches_eta_mins));
+                    }
+                    waitDialog.show();
+
+                    detailProgressTime = System.currentTimeMillis();
+
+                    loadDetailsThread = new LoadDetails(loadDetailsHandler, geocodes);
+                    loadDetailsThread.start();
+                }
+                return true;
+            case MENU_CIRCLE_MODE:
+                if (overlayCaches == null) {
+                    return false;
                 }
 
-                detailTotal = geocodes.size();
+                overlayCaches.switchCircles();
+                mapView.invalidate();
+                return true;
+            case MENU_AS_LIST:
+                final cgSearch search = new cgSearch();
+                search.totalCnt = caches.size();
+                for (cgCache cache : caches) {
+                    search.addGeocode(cache.geocode);
+                }
+                cgeocaches.startActivityMap(activity, app.addSearch(search, caches, true, 0));
+                return true;
+            default:
+                if (SUBMENU_VIEW_GOOGLE_MAP <= id && SUBMENU_VIEW_MF_OFFLINE >= id) {
+                    item.setChecked(true);
+                    mapSourceEnum mapSource = getMapSourceFromMenuId(id);
 
-                if (detailTotal == 0) {
-                    ActivityMixin.showToast(activity, res.getString(R.string.warn_save_nothing));
+                    boolean mapRestartRequired = switchMapSource(mapSource);
+
+                    if (mapRestartRequired) {
+                        // close old mapview
+                        activity.finish();
+
+                        // prepare information to restart a similar view
+                        Intent mapIntent = new Intent(activity, Settings.getMapFactory().getMapClass());
+
+                        mapIntent.putExtra("detail", fromDetailIntent);
+                        mapIntent.putExtra("searchid", searchIdIntent);
+                        mapIntent.putExtra("geocode", geocodeIntent);
+                        if (coordsIntent != null) {
+                            mapIntent.putExtra("latitude", coordsIntent.getLatitude());
+                            mapIntent.putExtra("longitude", coordsIntent.getLongitude());
+                        }
+                        mapIntent.putExtra("wpttype", waypointTypeIntent);
+                        int[] mapState = new int[4];
+                        GeoPointImpl mapCenter = mapView.getMapViewCenter();
+                        mapState[0] = mapCenter.getLatitudeE6();
+                        mapState[1] = mapCenter.getLongitudeE6();
+                        mapState[2] = mapView.getMapZoomLevel();
+                        mapState[3] = followMyLocation ? 1 : 0;
+                        mapIntent.putExtra("mapstate", mapState);
+
+                        // start the new map
+                        activity.startActivity(mapIntent);
+
+                    }
 
                     return true;
                 }
-
-                waitDialog = new ProgressDialog(activity);
-                waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-                waitDialog.setCancelable(true);
-                waitDialog.setMax(detailTotal);
-                waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-
-                    public void onCancel(DialogInterface arg0) {
-                        try {
-                            if (loadDetailsThread != null) {
-                                loadDetailsThread.stopIt();
-                            }
-
-                            if (geo == null) {
-                                geo = app.startGeo(activity, geoUpdate, base, 0, 0);
-                            }
-                            if (Settings.isUseCompass() && dir == null) {
-                                dir = app.startDir(activity, dirUpdate);
-                            }
-                        } catch (Exception e) {
-                            Log.e(Settings.tag, "cgeocaches.onPrepareOptionsMenu.onCancel: " + e.toString());
-                        }
-                    }
-                });
-
-                Float etaTime = Float.valueOf((detailTotal * (float) 7) / 60);
-                if (etaTime < 0.4) {
-                    waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
-                } else if (etaTime < 1.5) {
-                    waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format(Locale.getDefault(), "%.0f", etaTime) + " " + res.getString(R.string.caches_eta_min));
-                } else {
-                    waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format(Locale.getDefault(), "%.0f", etaTime) + " " + res.getString(R.string.caches_eta_mins));
-                }
-                waitDialog.show();
-
-                detailProgressTime = System.currentTimeMillis();
-
-                loadDetailsThread = new LoadDetails(loadDetailsHandler, geocodes);
-                loadDetailsThread.start();
-
-                return true;
-            }
-        } else if (id == MENU_CIRCLE_MODE) {
-            if (overlayCaches == null) {
-                return false;
-            }
-
-            overlayCaches.switchCircles();
-            mapView.invalidate();
-
-        } else if (SUBMENU_VIEW_GOOGLE_MAP <= id && SUBMENU_VIEW_MF_OFFLINE >= id) {
-
-            item.setChecked(true);
-            mapSourceEnum mapSource = getMapSourceFromMenuId(id);
-
-            boolean mapRestartRequired = switchMapSource(mapSource);
-
-            if (mapRestartRequired) {
-                // close old mapview
-                activity.finish();
-
-                // prepare information to restart a similar view
-                Intent mapIntent = new Intent(activity, Settings.getMapFactory().getMapClass());
-
-                mapIntent.putExtra("detail", fromDetailIntent);
-                mapIntent.putExtra("searchid", searchIdIntent);
-                mapIntent.putExtra("geocode", geocodeIntent);
-                if (coordsIntent != null) {
-                    mapIntent.putExtra("latitude", coordsIntent.getLatitude());
-                    mapIntent.putExtra("longitude", coordsIntent.getLongitude());
-                }
-                mapIntent.putExtra("wpttype", waypointTypeIntent);
-                int[] mapState = new int[4];
-                GeoPointImpl mapCenter = mapView.getMapViewCenter();
-                mapState[0] = mapCenter.getLatitudeE6();
-                mapState[1] = mapCenter.getLongitudeE6();
-                mapState[2] = mapView.getMapZoomLevel();
-                mapState[3] = followMyLocation ? 1 : 0;
-                mapIntent.putExtra("mapstate", mapState);
-
-                // start the new map
-                activity.startActivity(mapIntent);
-
-            }
-
-            return true;
+                break;
         }
-
         return false;
     }
 
