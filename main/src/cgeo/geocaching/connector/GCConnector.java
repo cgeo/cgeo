@@ -23,7 +23,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
 
     @Override
     public boolean canHandle(String geocode) {
-        return StringUtils.isNotBlank(geocode) && StringUtils.startsWithIgnoreCase(geocode, "GC");
+        return StringUtils.startsWithIgnoreCase(geocode, "GC");
     }
 
     @Override
@@ -83,7 +83,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
 
         base.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
 
-        String page = cgBase.requestLogged("http://www.geocaching.com/seek/cache_details.aspx", params, false, false, false);
+        final String page = cgBase.requestLogged("http://www.geocaching.com/seek/cache_details.aspx", params, false, false, false);
 
         if (StringUtils.isEmpty(page)) {
             if (app.isThere(geocode, guid, true, false)) {
@@ -125,7 +125,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
             return null;
         }
 
-        List<cgCache> cacheList = cgBase.filterSearchResults(search, caches, false, false, null);
+        final List<cgCache> cacheList = cgBase.filterSearchResults(search, caches, false, false, null);
         app.addSearch(search, cacheList, true, reason);
 
         return search.getCurrentId();

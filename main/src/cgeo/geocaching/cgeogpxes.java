@@ -35,6 +35,10 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
         public void handleMessage(Message msg) {
             if (parseDialog != null) {
                 parseDialog.setMessage(res.getString(msg.arg1) + " " + msg.arg2);
+                if (msg.obj != null) {
+                    final int progress = (Integer) msg.obj;
+                    parseDialog.setProgress(progress);
+                }
             }
         }
     };
@@ -82,12 +86,13 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
 
     public void loadGPX(File file) {
 
-        parseDialog = ProgressDialog.show(
-                this,
-                res.getString(R.string.gpx_import_title_reading_file),
-                res.getString(R.string.gpx_import_loading),
-                true,
-                false);
+        parseDialog = new ProgressDialog(this);
+        parseDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        parseDialog.setTitle(res.getString(R.string.gpx_import_title_reading_file));
+        parseDialog.setMessage(res.getString(R.string.gpx_import_loading));
+        parseDialog.setCancelable(false);
+        parseDialog.setMax((int) file.length());
+        parseDialog.show();
 
         new loadCaches(file).start();
     }
