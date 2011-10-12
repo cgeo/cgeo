@@ -33,14 +33,21 @@ public abstract class FileParser {
         }
     }
 
+    protected static void showCountMessage(final Handler handler, final int msgId, final int count, final int bytesRead) {
+        if (handler != null && (count <= 1 || count % 10 == 0)) {
+            handler.sendMessage(handler.obtainMessage(0, msgId, count, bytesRead));
+        }
+    }
+
     protected static void fixCache(cgCache cache) {
         if (cache.inventory != null) {
             cache.inventoryItems = cache.inventory.size();
         } else {
             cache.inventoryItems = 0;
         }
-        cache.updated = new Date().getTime();
-        cache.detailedUpdate = new Date().getTime();
+        final long time = new Date().getTime();
+        cache.updated = time;
+        cache.detailedUpdate = time;
     }
 
 }

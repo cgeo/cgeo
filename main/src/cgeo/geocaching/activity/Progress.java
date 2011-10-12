@@ -17,11 +17,10 @@ public class Progress {
         }
     }
 
-    public static ProgressDialog show(Context context, String title, String message, boolean indeterminate, boolean cancelable) {
+    public static void show(Context context, String title, String message, boolean indeterminate, boolean cancelable) {
         if (dialog == null) {
             dialog = ProgressDialog.show(context, title, message, indeterminate, cancelable);
         }
-        return dialog;
     }
 
     public static void setMessage(final String message) {
