@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import org.apache.commons.lang3.StringUtils;
@@ -12,7 +13,7 @@ import java.util.List;
 public class cgWaypoint implements Comparable<cgWaypoint> {
     public Integer id = 0;
     public String geocode = "geocode";
-    public String type = "waypoint";
+    public WaypointType type = WaypointType.WAYPOINT;
     private String prefix = "";
     public String lookup = "";
     public String name = "";
@@ -22,14 +23,7 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
     private Integer cachedOrder = null;
 
     public void setIcon(Resources res, cgBase base, TextView nameView) {
-        int iconId = R.drawable.waypoint_waypoint;
-        if (type != null) {
-            int specialId = res.getIdentifier("waypoint_" + type, "drawable", base.context.getPackageName());
-            if (specialId > 0) {
-                iconId = specialId;
-            }
-        }
-        nameView.setCompoundDrawablesWithIntrinsicBounds(res.getDrawable(iconId), null, null, null);
+        nameView.setCompoundDrawablesWithIntrinsicBounds(res.getDrawable(type.drawableId), null, null, null);
     }
 
     public void merge(final cgWaypoint old) {
@@ -84,7 +78,7 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
     }
 
     public boolean isUserDefined() {
-        return type != null && type.equalsIgnoreCase("own");
+        return type == WaypointType.OWN;
     }
 
     private int computeOrder() {

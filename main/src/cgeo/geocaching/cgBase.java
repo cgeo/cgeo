@@ -135,7 +135,7 @@ public class cgBase {
     public final static Map<String, String> cacheTypesInv = new HashMap<String, String>();
     public final static Map<String, String> cacheIDsChoices = new HashMap<String, String>();
     public final static Map<CacheSize, String> cacheSizesInv = new HashMap<CacheSize, String>();
-    public final static Map<String, String> waypointTypes = new HashMap<String, String>();
+    public final static Map<WaypointType, String> waypointTypes = new HashMap<WaypointType, String>();
     public final static Map<String, Integer> logTypes = new HashMap<String, Integer>();
     public final static Map<String, Integer> logTypes0 = new HashMap<String, Integer>();
     public final static Map<Integer, String> logTypes1 = new HashMap<Integer, String>();
@@ -189,7 +189,6 @@ public class cgBase {
     private static String idBrowser = "Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Chrome/5.0.375.86 Safari/533.4";
     Context context = null;
     final private static Map<String, Integer> gcIcons = new HashMap<String, Integer>();
-    final private static Map<String, Integer> wpIcons = new HashMap<String, Integer>();
 
     public static final int LOG_FOUND_IT = 2;
     public static final int LOG_DIDNT_FIND_IT = 3;
@@ -239,12 +238,11 @@ public class cgBase {
         }
 
         // waypoint types
-        waypointTypes.put("flag", res.getString(WaypointType.FLAG.stringId));
-        waypointTypes.put("stage", res.getString(WaypointType.STAGE.stringId));
-        waypointTypes.put("puzzle", res.getString(WaypointType.PUZZLE.stringId));
-        waypointTypes.put("pkg", res.getString(WaypointType.PKG.stringId));
-        waypointTypes.put("trailhead", res.getString(WaypointType.TRAILHEAD.stringId));
-        waypointTypes.put("waypoint", res.getString(WaypointType.WAYPOINT.stringId));
+        for (WaypointType wt : WaypointType.values()) {
+            if (wt != WaypointType.OWN) {
+                waypointTypes.put(wt, res.getString(wt.stringId));
+            }
+        }
 
         // log types
         logTypes.put("icon_smile", LOG_FOUND_IT);
@@ -1422,7 +1420,7 @@ public class cgBase {
                     try {
                         final Matcher matcherWpType = patternWpType.matcher(wp[3]);
                         if (matcherWpType.find() && matcherWpType.groupCount() > 0) {
-                            waypoint.type = matcherWpType.group(1).trim();
+                            waypoint.type = WaypointType.FIND_BY_ID.get(matcherWpType.group(1).trim());
                         }
                     } catch (Exception e) {
                         // failed to parse type
@@ -3309,53 +3307,30 @@ public class cgBase {
         return gcIcons.get("type_traditional");
     }
 
-    public static int getMarkerIcon(final boolean cache, final String type, final boolean own, final boolean found, final boolean disabled) {
+    public static int getCacheMarkerIcon(final String type, final boolean own, final boolean found, final boolean disabled) {
         fillIconsMap();
-
-        if (wpIcons.isEmpty()) {
-            wpIcons.put("waypoint", R.drawable.marker_waypoint_waypoint);
-            wpIcons.put("flag", R.drawable.marker_waypoint_flag);
-            wpIcons.put("pkg", R.drawable.marker_waypoint_pkg);
-            wpIcons.put("puzzle", R.drawable.marker_waypoint_puzzle);
-            wpIcons.put("stage", R.drawable.marker_waypoint_stage);
-            wpIcons.put("trailhead", R.drawable.marker_waypoint_trailhead);
-        }
 
         int icon = -1;
         String iconTxt = null;
 
-        if (cache) {
-            if (StringUtils.isNotBlank(type)) {
-                if (own) {
-                    iconTxt = type + "-own";
-                } else if (found) {
-                    iconTxt = type + "-found";
-                } else if (disabled) {
-                    iconTxt = type + "-disabled";
-                } else {
-                    iconTxt = type;
-                }
+        if (StringUtils.isNotBlank(type)) {
+            if (own) {
+                iconTxt = type + "-own";
+            } else if (found) {
+                iconTxt = type + "-found";
+            } else if (disabled) {
+                iconTxt = type + "-disabled";
             } else {
-                iconTxt = "traditional";
-            }
-
-            if (gcIcons.containsKey(iconTxt)) {
-                icon = gcIcons.get(iconTxt);
-            } else {
-                icon = gcIcons.get("traditional");
+                iconTxt = type;
             }
         } else {
-            if (StringUtils.isNotBlank(type)) {
-                iconTxt = type;
-            } else {
-                iconTxt = "waypoint";
-            }
+            iconTxt = "traditional";
+        }
 
-            if (wpIcons.containsKey(iconTxt)) {
-                icon = wpIcons.get(iconTxt);
-            } else {
-                icon = wpIcons.get("waypoint");
-            }
+        if (gcIcons.containsKey(iconTxt)) {
+            icon = gcIcons.get(iconTxt);
+        } else {
+            icon = gcIcons.get("traditional");
         }
 
         return icon;

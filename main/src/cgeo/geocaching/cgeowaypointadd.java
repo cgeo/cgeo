@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
@@ -32,7 +33,7 @@ public class cgeowaypointadd extends AbstractActivity {
     private cgUpdateLoc geoUpdate = new update();
     private ProgressDialog waitDialog = null;
     private cgWaypoint waypoint = null;
-    private String type = "own";
+    private WaypointType type = WaypointType.OWN;
     private String prefix = "OWN";
     private String lookup = "---";
     /**
