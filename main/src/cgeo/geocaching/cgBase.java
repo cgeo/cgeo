@@ -1052,8 +1052,7 @@ public class cgBase {
         cache.guid = BaseUtils.getMatch(page, GCConstants.PATTERN_GUID, true, cache.guid);
 
         // name
-        // was cache.name = Html.fromHtml(BaseUtils.getMatch(page, Constants.PATTERN_NAME, 1, cache.name)).toString();
-        cache.name = BaseUtils.getMatch(page, GCConstants.PATTERN_NAME, true, cache.name);
+        cache.name = Html.fromHtml(BaseUtils.getMatch(page, GCConstants.PATTERN_NAME, true, cache.name)).toString();
 
         // owner real name
         // was cache.ownerReal = URLDecoder.decode(BaseUtils.getMatch(page, Constants.PATTERN_OWNERREAL, 1, cache.ownerReal));
@@ -1097,8 +1096,7 @@ public class cgBase {
             }
 
             // owner
-            // was cache.owner = Html.fromHtml(BaseUtils.getMatch(tableInside, Constants.PATTERN_OWNER, cache.owner)).toString();
-            cache.owner = BaseUtils.getMatch(tableInside, GCConstants.PATTERN_OWNER, false, cache.owner);
+            cache.owner = Html.fromHtml(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_OWNER, false, cache.owner)).toString();
 
             // hidden
             try {
@@ -3423,7 +3421,7 @@ public class cgBase {
     /**
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 sept. à 12:35".
-     *
+     * 
      * @param context
      *            a Context
      * @param date
