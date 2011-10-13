@@ -726,7 +726,7 @@ public class cgeoinit extends AbstractActivity {
                     final Parameters params = new Parameters("name", nam, "code", cod);
                     HttpResponse response = cgBase.request("http://send2.cgeo.org/auth.html", params, true);
 
-                    if (response.getStatusLine().getStatusCode() == 200)
+                    if (response != null && response.getStatusLine().getStatusCode() == 200)
                     {
                         //response was OK
                         String[] strings = cgBase.getResponseData(response).split(",");
