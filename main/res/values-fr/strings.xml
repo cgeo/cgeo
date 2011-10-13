@@ -304,6 +304,7 @@
   <string name="caches_filter_size_title">Choisir la taille</string>
   <string name="caches_filter_type_title">Choisir le type</string>
   <string name="caches_filter_type_traditional">Traditionelle</string>
+  <string name="caches_filter_type_multi">Multiple</string>
   <string name="caches_filter_type_mystery">Mystère</string>
   <string name="caches_filter_type_letterbox">Boîte aux lettres hybride</string>
   <string name="caches_filter_type_event">Événement</string>
@@ -630,7 +631,8 @@
   <string name="map_live_disable">Désactiver Temps réel</string>
   <string name="map_static_title">Cartes statiques</string>
   <string name="map_static_loading">Chargement des cartes statiques…</string>
-  <string name="map_token_err">Depuis que c:geo est capable de télécharger des données partielles, les coordonnées des caches peuvent être inexactes.</string> <!-- since: 2.26 RC3 -->
+  <string name="map_token_err">Depuis que c:geo est capable de télécharger des données partielles, les coordonnées des caches peuvent être inexactes.</string>
+  <string name="map_as_list">Lister les caches</string>
 
   <!-- search -->
   <string name="search_bar_hint">Recherche de caches</string>
