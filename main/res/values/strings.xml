@@ -378,6 +378,9 @@
   <string name="init_signature_template_datetime">Date &amp; Time</string>
   <string name="init_signature_template_user">User</string>
   <string name="init_signature_template_number">Number</string>
+  <string name="init_details">Cache details</string>
+  <string name="init_additionaldetails">Load additional details like rating, elevation etc.</string>
+  <string name="init_autoload">Auto-loading long description</string>
   <string name="init_other">Other options</string>
   <string name="init_skin">Light skin\n(needs restart of c:geo)</string>
   <string name="init_address">Show address on mainscreen</string>
@@ -391,7 +394,6 @@
   <string name="init_save_log_img">Save Images from Logs</string>
   <string name="init_units">Use miles/feet\n(imperial units)</string>
   <string name="init_nav">Use Google Navigation</string>
-  <string name="init_autoload">Auto-loading long description</string>
   <string name="init_log_offline">When logging, always log offline (don\'t show online log screen when logging, don\'t send the log online)</string>
   <string name="init_livelist">Show direction to caches in its list</string>
   <string name="init_browser">Identify c:geo as standard browser</string>

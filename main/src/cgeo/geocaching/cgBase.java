@@ -1507,17 +1507,19 @@ public class cgBase {
             }
         }
 
-        if (cache.coords != null) {
-            cache.elevation = getElevation(cache.coords);
-        }
+        if (Settings.isAdditionalDetails()) {
+            if (cache.coords != null) {
+                cache.elevation = getElevation(cache.coords);
+            }
 
-        sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_gcvote);
+            sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_gcvote);
 
-        final cgRating rating = GCVote.getRating(cache.guid, cache.geocode);
-        if (rating != null) {
-            cache.rating = rating.rating;
-            cache.votes = rating.votes;
-            cache.myVote = rating.myVote;
+            final cgRating rating = GCVote.getRating(cache.guid, cache.geocode);
+            if (rating != null) {
+                cache.rating = rating.rating;
+                cache.votes = rating.votes;
+                cache.myVote = rating.myVote;
+            }
         }
 
         cache.updated = System.currentTimeMillis();

@@ -47,6 +47,7 @@ public final class Settings {
     private static final String KEY_TWITTER_TOKEN_PUBLIC = "tokenpublic";
     private static final String KEY_VERSION = "version";
     private static final String KEY_LOAD_DESCRIPTION = "autoloaddesc";
+    private static final String KEY_ADDITIONAL_DETAILS = "additionaldetails";
     private static final String KEY_USE_ENGLISH = "useenglish";
     private static final String KEY_AS_BROWSER = "asbrowser";
     private static final String KEY_USE_COMPASS = "usecompass";
@@ -138,13 +139,9 @@ public final class Settings {
         // this class is not to be instantiated;
     }
 
-    private static void setLanguage(boolean useEnglish) {
-        Locale locale = Locale.getDefault();
-        if (useEnglish) {
-            locale = new Locale("en");
-        }
+    public static void setLanguage(boolean useEnglish) {
         final Configuration config = new Configuration();
-        config.locale = locale;
+        config.locale = useEnglish ? new Locale("en") : Locale.getDefault();
         final Resources resources = cgeoapplication.getInstance().getResources();
         resources.updateConfiguration(config, resources.getDisplayMetrics());
     }
@@ -553,6 +550,20 @@ public final class Settings {
             @Override
             public void edit(Editor edit) {
                 edit.putInt(KEY_LOAD_DESCRIPTION, autoLoad ? 1 : 0);
+            }
+        });
+    }
+
+    public static boolean isAdditionalDetails() {
+        return sharedPrefs.getBoolean(KEY_ADDITIONAL_DETAILS, true);
+    }
+
+    public static void setAdditionalDetails(final boolean additionaldetails) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putBoolean(KEY_ADDITIONAL_DETAILS, additionaldetails);
             }
         });
     }

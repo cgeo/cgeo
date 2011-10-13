@@ -76,6 +76,8 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
         app = (cgeoapplication) this.getApplication();
         prefs = getSharedPreferences(Settings.preferences, Context.MODE_PRIVATE);
         base = new cgBase(app);
+
+        Settings.setLanguage(Settings.isUseEnglish());
     }
 
     public void addVisitMenu(Menu menu, cgCache cache) {
