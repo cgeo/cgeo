@@ -41,6 +41,6 @@ public class cgCoord {
         coords = waypoint.coords;
         name = waypoint.name;
         type = "waypoint";
-        typeSpec = waypoint.type;
+        typeSpec = waypoint.type != null ? waypoint.type.id : null;
     }
 }

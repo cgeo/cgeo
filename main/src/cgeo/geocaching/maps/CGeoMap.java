@@ -16,6 +16,7 @@ import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -92,7 +93,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private String searchIdIntent = null;
     private String geocodeIntent = null;
     private Geopoint coordsIntent = null;
-    private String waypointTypeIntent = null;
+    private WaypointType waypointTypeIntent = null;
     private int[] mapStateIntent = null;
     // status data
     private UUID searchId = null;
@@ -330,7 +331,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             final double latitudeIntent = extras.getDouble("latitude");
             final double longitudeIntent = extras.getDouble("longitude");
             coordsIntent = new Geopoint(latitudeIntent, longitudeIntent);
-            waypointTypeIntent = extras.getString("wpttype");
+            waypointTypeIntent = WaypointType.FIND_BY_ID.get(extras.getString("wpttype"));
             mapStateIntent = extras.getIntArray("mapstate");
 
             if ("".equals(searchIdIntent)) {
@@ -683,7 +684,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                             mapIntent.putExtra("latitude", coordsIntent.getLatitude());
                             mapIntent.putExtra("longitude", coordsIntent.getLongitude());
                         }
-                        mapIntent.putExtra("wpttype", waypointTypeIntent);
+                        mapIntent.putExtra("wpttype", waypointTypeIntent != null ? waypointTypeIntent.id : null);
                         int[] mapState = new int[4];
                         GeoPointImpl mapCenter = mapView.getMapViewCenter();
                         mapState[0] = mapCenter.getLatitudeE6();
@@ -1314,10 +1315,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                                     continue;
                                 }
 
-                                items.add(getItem(new cgCoord(oneWaypoint), false, oneWaypoint.type, false, false, false));
+                                items.add(getWaypointItem(new cgCoord(oneWaypoint), oneWaypoint.type));
                             }
                         }
-                        items.add(getItem(new cgCoord(cacheOne), true, cacheOne.type, cacheOne.own, cacheOne.found, cacheOne.disabled));
+                        items.add(getCacheItem(new cgCoord(cacheOne), cacheOne.type, cacheOne.own, cacheOne.found, cacheOne.disabled));
                     }
 
                     overlayCaches.updateItems(items);
@@ -1346,12 +1347,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
 
         /**
-         * Returns a OverlayItem representing the cache/waypoint
+         * Returns a OverlayItem representing the cache
          *
          * @param cgCoord
          *            The coords
-         * @param cache
-         *            true for caches
          * @param type
          *            String name
          * @param own
@@ -1362,13 +1361,36 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
          *            true for disabled
          * @return
          */
+        private CachesOverlayItemImpl getCacheItem(cgCoord cgCoord, String type, boolean own, boolean found, boolean disabled) {
+            return getItem(cgCoord, cgBase.getCacheMarkerIcon(type, own, found, disabled));
+        }
 
-        private CachesOverlayItemImpl getItem(cgCoord cgCoord, boolean cache, String type, boolean own, boolean found, boolean disabled) {
+        /**
+         * Returns a OverlayItem representing the waypoint
+         *
+         * @param cgCoord
+         *            The coords
+         * @param type
+         *            The waypoint's type
+         * @return
+         */
+        private CachesOverlayItemImpl getWaypointItem(cgCoord cgCoord, WaypointType type) {
+            return getItem(cgCoord, type != null ? type.markerId : WaypointType.WAYPOINT.markerId);
+        }
 
+        /**
+         * Returns a OverlayItem represented by an icon
+         *
+         * @param cgCoord
+         *            The coords
+         * @param icon
+         *            The icon
+         * @return
+         */
+        private CachesOverlayItemImpl getItem(cgCoord cgCoord, int icon) {
             coordinates.add(cgCoord);
             CachesOverlayItemImpl item = Settings.getMapFactory().getCachesOverlayItem(cgCoord, null);
 
-            int icon = cgBase.getMarkerIcon(cache, type, own, found, disabled);
             Drawable pin = null;
             if (iconsCache.containsKey(icon)) {
                 pin = iconsCache.get(icon);
@@ -1515,7 +1537,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 coordinates.add(coord);
                 CachesOverlayItemImpl item = Settings.getMapFactory().getCachesOverlayItem(coord, null);
 
-                final int icon = cgBase.getMarkerIcon(false, waypointTypeIntent, false, false, false);
+                final int icon = waypointTypeIntent != null ? waypointTypeIntent.markerId : null;
                 Drawable pin = null;
                 if (iconsCache.containsKey(icon)) {
                     pin = iconsCache.get(icon);

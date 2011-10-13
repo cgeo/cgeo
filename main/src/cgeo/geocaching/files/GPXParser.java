@@ -306,7 +306,7 @@ public abstract class GPXParser extends FileParser {
                     if (cacheForWaypoint != null) {
                         final cgWaypoint waypoint = new cgWaypoint();
                         waypoint.id = -1;
-                        waypoint.type = convertWaypointSym2Type(sym).id;
+                        waypoint.type = convertWaypointSym2Type(sym);
                         waypoint.geocode = cacheGeocodeForWaypoint;
                         waypoint.setPrefix(cache.name.substring(0, 2));
                         waypoint.lookup = "---";

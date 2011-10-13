@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Geopoint.MalformedCoordinateException;
@@ -1408,7 +1409,7 @@ public class cgData {
                     values.clear();
                     values.put("geocode", geocode);
                     values.put("updated", timeStamp);
-                    values.put("type", oneWaypoint.type);
+                    values.put("type", oneWaypoint.type != null ? oneWaypoint.type.id : null);
                     values.put("prefix", oneWaypoint.getPrefix());
                     values.put("lookup", oneWaypoint.lookup);
                     values.put("name", oneWaypoint.name);
@@ -1494,7 +1495,7 @@ public class cgData {
             ContentValues values = new ContentValues();
             values.put("geocode", geocode);
             values.put("updated", System.currentTimeMillis());
-            values.put("type", waypoint.type);
+            values.put("type", waypoint.type != null ? waypoint.type.id : null);
             values.put("prefix", waypoint.getPrefix());
             values.put("lookup", waypoint.lookup);
             values.put("name", waypoint.name);
@@ -2199,9 +2200,10 @@ public class cgData {
 
     private static cgWaypoint createWaypointFromDatabaseContent(Cursor cursor) {
         cgWaypoint waypoint = new cgWaypoint();
+
         waypoint.id = cursor.getInt(cursor.getColumnIndex("_id"));
         waypoint.geocode = cursor.getString(cursor.getColumnIndex("geocode"));
-        waypoint.type = cursor.getString(cursor.getColumnIndex("type"));
+        waypoint.type = WaypointType.FIND_BY_ID.get(cursor.getString(cursor.getColumnIndex("type")));
         waypoint.setPrefix(cursor.getString(cursor.getColumnIndex("prefix")));
         waypoint.lookup = cursor.getString(cursor.getColumnIndex("lookup"));
         waypoint.name = cursor.getString(cursor.getColumnIndex("name"));
