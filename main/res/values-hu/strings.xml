@@ -138,9 +138,6 @@
   <string name="err_detail_no_spoiler">A c:geo nem talált spoiler képeket ehhez a ládához.</string>
   <string name="err_detail_no_map_static">A c:geo nem talált statikus térképeket ehhez a ládához.</string>
   <string name="err_detail_not_load_map_static">Sajnáljuk, a c:geo nem tudott betölteni statikus térképeket.</string>
-  <string name="err_detail_still_removing">A láda még eltávolítás alatt áll.</string>
-  <string name="err_detail_still_saving">A láda még mentés alatt áll.</string>
-  <string name="err_detail_still_refreshing">A láda még újratöltés alatt áll.</string>
   <string name="err_watchlist_still_managing">Még folyik a figyelőlista kezelése.</string>
   <string name="err_watchlist_failed">A figyelőlita megváltoztatása nem sikerült.</string>
   <string name="err_navigation_no">A c:geo nem talál semilyen támogatott navigációt.</string>

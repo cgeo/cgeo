@@ -135,9 +135,6 @@
   <string name="err_detail_no_spoiler">O c:geo não encontrou images spoiler para esta cache.</string>
   <string name="err_detail_no_map_static">O c:geo não encontrou mapas estáticos para esta cache.</string>
   <string name="err_detail_not_load_map_static">Desculpe, o c:geo falhou o carregamento de mapas estáticos.</string>
-  <string name="err_detail_still_removing">A remover a cache.</string>
-  <string name="err_detail_still_saving">A gravar a cache.</string>
-  <string name="err_detail_still_refreshing">A recarregar a cache.</string>
   <string name="err_watchlist_still_managing">Ainda a gerir a sua watchlist.</string>
   <string name="err_watchlist_failed">A gestão da sua watchlist falhou.</string>
   <string name="err_navigation_no">O c:geo não encontra nenhuma navegação suportada.</string>

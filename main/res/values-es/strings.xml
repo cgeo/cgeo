@@ -135,9 +135,6 @@
   <string name="err_detail_no_spoiler">c:geo no ha encontrado imágenes/pista para este escondite.</string>
   <string name="err_detail_no_map_static">c:geo no ha encontrado mapas estáticos para este escondite.</string>
   <string name="err_detail_not_load_map_static">Lo siento, c:geo no ha podido cargar mapas estáticos.</string>
-  <string name="err_detail_still_removing">Seguir borrando este escondite.</string>
-  <string name="err_detail_still_saving">Seguir guardando este escondite.</string>
-  <string name="err_detail_still_refreshing">Seguir recargando este escondite.</string>
   <string name="err_watchlist_still_managing">Seguir gestionando tu lista de seguimiento.</string>
   <string name="err_watchlist_failed">Error al cambiar la lista de seguimiento.</string>
   <string name="err_navigation_no">c:geo no encuentra ninguna navegación soportada.</string>

@@ -135,9 +135,6 @@
   <string name="err_detail_no_spoiler">c:geo nie znalazł zdjęcia spoilera dla tej skrzynki.</string>
   <string name="err_detail_no_map_static">c:geo nie znalazł mapki statycznej dla tej skrzynki.</string>
   <string name="err_detail_not_load_map_static">Przepraszam, c:geo nie mógł załadować statycznej mapki.</string>
-  <string name="err_detail_still_removing">Kasuje nadal skrzynkę.</string>
-  <string name="err_detail_still_saving">Zapisuje nadal skrzynkę.</string>
-  <string name="err_detail_still_refreshing">Nadal ładuje skrzynkę.</string>
   <string name="err_watchlist_still_managing">Nadal pracuję nad listą obserwowanych.</string>
   <string name="err_watchlist_failed">c:geo nie mógł zmienić listy obserwowanych.</string>
   <string name="err_navigation_no">c:geo nie znalazł żadnych wsparć do nawigacji.</string>

@@ -136,9 +136,6 @@
   <string name="err_detail_no_spoiler">c:geo Heeft geen spoiler images gevonden voor deze cache.</string>
   <string name="err_detail_no_map_static">c:geo Heeft geen statische kaarten gevonden voor deze cache.</string>
   <string name="err_detail_not_load_map_static">Sorry, c:geo kon de statische kaart niet laden.</string>
-  <string name="err_detail_still_removing">Bezig met wissen van deze cache.</string>
-  <string name="err_detail_still_saving">Bezig met opslaan van deze cache.</string>
-  <string name="err_detail_still_refreshing">Bezig met opnieuw laden van deze cache.</string>
   <string name="err_watchlist_still_managing">Bezig je watchlist te beheren.</string>
   <string name="err_watchlist_failed">Het veranderen van watchlist lukt niet.</string>
   <string name="err_navigation_no">c:geo Kan geen ondersteunde navigatie applicatie vinden.</string>

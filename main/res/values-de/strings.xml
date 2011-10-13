@@ -140,9 +140,6 @@
   <string name="err_detail_no_spoiler">c:geo hat kein Hinweisbild für diesen Cache gefunden.</string>
   <string name="err_detail_no_map_static">c:geo hat keine statische Karte für diesen Cache gefunden.</string>
   <string name="err_detail_not_load_map_static">c:geo konnte die statische Karte nicht laden.</string>
-  <string name="err_detail_still_removing">c:geo löscht diesen Cache noch immer.</string>
-  <string name="err_detail_still_saving">c:geo speichert diesen Cache noch immer.</string>
-  <string name="err_detail_still_refreshing">c:geo versucht noch immer diesen Cache zu aktualisieren.</string>
   <string name="err_watchlist_still_managing">c:geo versucht noch immer deine Watchlist zu aktualisieren.</string>
   <string name="err_watchlist_failed">Ändern der Watchlist nicht erfolgreich.</string>
   <string name="err_navigation_no">c:geo konnte keine unterstützte Art der Navigation finden.</string>

@@ -83,9 +83,6 @@
   <string name="err_detail_cache_forgot">Beklager, c:geo husker ikke hvilken cache du ønskede.</string>
   <string name="err_detail_no_spoiler">c:geo fandt ingen spoilerbilleder til denne cache.</string>
   <string name="err_detail_no_map_static">c:geo fandt ingen statiske kort til denne cache.</string>
-  <string name="err_detail_still_removing">Fjerner stadig cachen.</string>
-  <string name="err_detail_still_saving">Gemmer stadig cachen.</string>
-  <string name="err_detail_still_refreshing">Indlæser stadig cachen.</string>
   <string name="err_navigation_no">c:geo kan ikke finde understøttet navigation.</string>
   <string name="err_application_no">c:geo kan ikke finde en passende applikation.</string>
   <string name="err_auth_initialize">Beklager, c:geo kan ikke gennemføre godkendelsen.</string>
