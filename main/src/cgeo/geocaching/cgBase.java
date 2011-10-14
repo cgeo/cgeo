@@ -120,7 +120,7 @@ public class cgBase {
     private final static Pattern PATTERN_TRACKABLE_Icon = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
     private final static Pattern PATTERN_TRACKABLE_Type = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"[^\"]+\" alt=\"([^\"]+)\"[^>]*>", Pattern.CASE_INSENSITIVE);
     private final static Pattern PATTERN_TRACKABLE_Distance = Pattern.compile("<h4[^>]*\\W*Tracking History \\(([0-9.,]+(km|mi))[^\\)]*\\)", Pattern.CASE_INSENSITIVE);
-    private final static Pattern PATTERN_TRACKABLE_Log = Pattern.compile("<tr class=\"Data.+?src=\"/images/icons/([^.]+)\\.gif[^>]+>&nbsp;([^<]+)</td>.+?guid.+?>([^<]+)</a>.+?(?:guid=([^\"]+)\">([^<]+)</a>.+?)?<td colspan=\"4\">(.+?)(?:<ul.+?ul>)?\\s*</td>\\s*</tr>", Pattern.CASE_INSENSITIVE);
+    private final static Pattern PATTERN_TRACKABLE_Log =  Pattern.compile("<tr class=\"Data.+?src=\"/images/icons/([^.]+)\\.gif[^>]+>&nbsp;([^<]+)</td>.+?guid.+?>([^<]+)</a>.+?(?:guid=([^\"]+)\">(<span class=\"Strike\">)?([^<]+)</.+?)?<td colspan=\"4\">(.+?)(?:<ul.+?ul>)?\\s*</td>\\s*</tr>", Pattern.CASE_INSENSITIVE);
 
     private static final String passMatch = "(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+";
 
@@ -1926,8 +1926,9 @@ public class cgBase {
              * 2. Date
              * 3. Author
              * 4. Cache-GUID
-             * 5. Cache-name
-             * 6. Logtext
+             * 5. <ignored> (strike-through property for ancien caches)
+             * 6. Cache-name
+             * 7. Logtext
              */
             while (matcherLogs.find())
             {
@@ -1950,12 +1951,12 @@ public class cgBase {
                 } catch (ParseException e) {
                 }
 
-                logDone.log = matcherLogs.group(6).trim();
+                logDone.log = matcherLogs.group(7).trim();
 
-                if (matcherLogs.group(4) != null && matcherLogs.group(5) != null)
+                if (matcherLogs.group(4) != null && matcherLogs.group(6) != null)
                 {
                     logDone.cacheGuid = matcherLogs.group(4);
-                    logDone.cacheName = matcherLogs.group(5);
+                    logDone.cacheName = matcherLogs.group(6);
                 }
 
                 trackable.getLogs().add(logDone);
