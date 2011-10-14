@@ -1040,7 +1040,7 @@ public class cgeodetail extends AbstractActivity {
                             nameView.setText(wpt.name.trim());
                         }
                     }
-                    wpt.setIcon(res, base, nameView);
+                    wpt.setIcon(res, nameView);
 
                     // avoid HTML parsing
                     if (containsHtml(wpt.note)) {

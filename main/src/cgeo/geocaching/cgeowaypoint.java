@@ -69,7 +69,7 @@ public class cgeowaypoint extends AbstractActivity {
                         identification.setText(res.getString(R.string.waypoint_custom));
                     }
                     registerNavigationMenu(identification);
-                    waypoint.setIcon(res, base, identification);
+                    waypoint.setIcon(res, identification);
 
                     if (waypoint.coords != null) {
                         coords.setText(Html.fromHtml(cgBase.formatCoords(waypoint.coords, true)), TextView.BufferType.SPANNABLE);
