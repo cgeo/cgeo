@@ -140,6 +140,7 @@
   <string name="err_detail_no_spoiler">c:geo nenašla pre túto skrýšu žiaden spoilerový obrázok.</string>
   <string name="err_detail_no_map_static">c:geo nenašla žiadnu statickú mapu pre túto skrýšu.</string>
   <string name="err_detail_not_load_map_static">Prepáčte, c:geo sa nepodarilo načítať statické mapy.</string>
+  <string name="err_detail_still_working">Stále prebieha práca na inej úlohe.</string>
   <string name="err_watchlist_still_managing">Stále prebieha správa vášho zoznamu sledovaných.</string>
   <string name="err_watchlist_failed">Zlyhala zmena sledovaných.</string>
   <string name="err_navigation_no">Prepáčte, c:geo nemôže nájsť žiadnu podporovanú navigáciu.</string>
@@ -633,6 +634,7 @@
   <string name="map_static_title">Statické mapy</string>
   <string name="map_static_loading">Načítanie statických máp…</string>
   <string name="map_token_err">Pretože c:geo bola schopná stiahnuť iba čiastočné údaje, súradnice skrýš môžu byť nepresné.</string> <!-- since: 2.26 RC3 -->
+  <string name="map_as_list">Zobraziť ako zoznam</string> <!-- since: 2.26 RC3 -->
 
   <!-- search -->
   <string name="search_bar_hint">Hľadanie skrýš</string>
