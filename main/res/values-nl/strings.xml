@@ -302,7 +302,7 @@
   <string name="caches_filter_track">met trackables</string>
   <string name="caches_filter_clear">maak filters leeg</string>
   <string name="caches_filter_size_title">Kies grootte</string>
-  <string name="caches_filter_type_title">Kiest type</string>
+  <string name="caches_filter_type_title">Kies type</string>
   <string name="caches_filter_type_traditional">Traditional cache</string>
   <string name="caches_filter_type_multi">Multi-cache</string>
   <string name="caches_filter_type_mystery">Unknown cache</string>
