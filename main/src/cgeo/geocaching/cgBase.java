@@ -1728,7 +1728,16 @@ public class cgBase {
         return null;
     }
 
-    public cgTrackable parseTrackable(String page) {
+    /**
+     * Parse a trackable HTML description into a cgTrackable object
+     * 
+     * @param page
+     *            the HTML page to parse, already processed through {@link BaseUtils#replaceWhitespace}
+     * @param app
+     *            if not null, the application to use to save the trackable
+     * @return the parsed trackable, or null if none could be parsed
+     */
+    public static cgTrackable parseTrackable(final String page, final cgeoapplication app) {
         if (StringUtils.isBlank(page)) {
             Log.e(Settings.tag, "cgeoBase.parseTrackable: No page given");
             return null;
@@ -1966,7 +1975,9 @@ public class cgBase {
             Log.w(Settings.tag, "cgeoBase.parseCache: Failed to parse cache logs");
         }
 
-        app.saveTrackable(trackable);
+        if (app != null) {
+            app.saveTrackable(trackable);
+        }
 
         return trackable;
     }
@@ -2506,7 +2517,7 @@ public class cgBase {
             return trackable;
         }
 
-        trackable = parseTrackable(page);
+        trackable = parseTrackable(page, app);
         if (trackable == null) {
             Log.e(Settings.tag, "cgeoBase.searchTrackable: No trackable parsed");
             return trackable;
