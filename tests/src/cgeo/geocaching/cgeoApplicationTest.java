@@ -1,17 +1,14 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.test.mock.GC1ZXX2;
-import cgeo.geocaching.test.mock.GC2CJPF;
+import cgeo.geocaching.test.RegExPerformanceTest;
 import cgeo.geocaching.test.mock.MockedCache;
 
 import android.test.ApplicationTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.UUID;
 
 import junit.framework.Assert;
@@ -61,17 +58,13 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
         Assert.assertNotNull(id);
     }
 
-/**
-* Test {@link cgBase#parseCache(String, int) with "mocked" data
-* @param base
-*/
+    /**
+     * Test {@link cgBase#parseCache(String, int) with "mocked" data
+     * @param base
+     */
     @MediumTest
     public void testParseCache() {
-        final List<MockedCache> cachesToTest = new ArrayList<MockedCache>();
-        cachesToTest.add(new GC2CJPF());
-        cachesToTest.add(new GC1ZXX2());
-
-        for (MockedCache cache : cachesToTest) {
+        for (MockedCache cache : RegExPerformanceTest.MOCKED_CACHES) {
             cgCacheWrap caches = base.parseCache(cache.getData(), 0, null);
             cgCache cacheParsed = caches.cacheList.get(0);
             Assert.assertEquals(cache.getGeocode(), cacheParsed.getGeocode());
@@ -95,6 +88,24 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
             Assert.assertEquals(cache.getGuid(), cacheParsed.getGuid());
             Assert.assertEquals(cache.getLocation(), cacheParsed.getLocation());
             Assert.assertEquals(cache.getPersonalNote(), cacheParsed.getPersonalNote());
+            Assert.assertEquals(cache.isFound(), cacheParsed.isFound());
+            Assert.assertEquals(cache.isFavorite(), cacheParsed.isFavorite());
+            Assert.assertEquals(cache.getFavoritePoints(), cacheParsed.getFavoritePoints());
+            Assert.assertEquals(cache.isWatchlist(), cacheParsed.isWatchlist());
+            Assert.assertEquals(cache.getHiddenDate().toString(), cacheParsed.getHiddenDate().toString());
+            for (String attribute : cache.getAttributes()) {
+                Assert.assertTrue(cacheParsed.getAttributes().contains(attribute));
+            }
+            for (Integer key : cache.getLogCounts().keySet()) {
+                Assert.assertEquals(cache.getLogCounts().get(key), cacheParsed.getLogCounts().get(key));
+            }
+            if (null != cache.getInventory() || null != cacheParsed.getInventory()) {
+                Assert.assertEquals(cache.getInventory().size(), cacheParsed.getInventory().size());
+            }
+            if (null != cache.getSpoilers() || null != cacheParsed.getSpoilers()) {
+                Assert.assertEquals(cache.getSpoilers().size(), cacheParsed.getSpoilers().size());
+            }
+
         }
     }
 

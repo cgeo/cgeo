@@ -2,6 +2,7 @@ package cgeo.geocaching.test;
 
 import cgeo.geocaching.test.mock.GC1ZXX2;
 import cgeo.geocaching.test.mock.GC2CJPF;
+import cgeo.geocaching.test.mock.GC2JVEH;
 import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.BaseUtils;
 
@@ -66,45 +67,13 @@ public class RegExPerformanceTest extends TestCase {
     public final static Pattern PATTERN_DESCRIPTION_OLD = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\"[^>]*>" + "(.*)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>", Pattern.CASE_INSENSITIVE);
     public final static Pattern PATTERN_DESCRIPTION = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\">(.*?)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>");
 
-    public final static Pattern PATTERN_HINT_OLD = Pattern.compile("<div id=\"div_hint\"[^>]*>(.*?)</div>", Pattern.CASE_INSENSITIVE);
-    public final static Pattern PATTERN_HINT = Pattern.compile("<div id=\"div_hint\"[^>]*>(.*?)</div>");
 
-    public final static Pattern PATTERN_SHORTDESC_OLD = Pattern.compile("<div class=\"UserSuppliedContent\">[^<]*<span id=\"ctl00_ContentBody_ShortDescription\"[^>]*>((?:(?!</span>[^\\w^<]*</div>).)*)</span>[^\\w^<]*</div>", Pattern.CASE_INSENSITIVE);
-    public final static Pattern PATTERN_SHORTDESC = Pattern.compile("<span id=\"ctl00_ContentBody_ShortDescription\">(.*?)</span>[^\\w^<]*</div>");
-
-    private final static Pattern PATTERN_GEOCODE_OLD = Pattern.compile("<meta name=\"og:url\" content=\"[^\"]+/(GC[0-9A-Z]+)\"[^>]*>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern PATTERN_GEOCODE = Pattern.compile("<meta name=\"og:url\" content=\"[^\"]+/(GC[0-9A-Z]+)\"");
-
-    private final static Pattern PATTERN_CACHEID_OLD = Pattern.compile("/seek/log\\.aspx\\?ID=(\\d+)", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern PATTERN_CACHEID = Pattern.compile("/seek/log\\.aspx\\?ID=(\\d+)");
-
-    private final static Pattern PATTERN_GUID_OLD = Pattern.compile(Pattern.quote("&wid=") + "([0-9a-z\\-]+)" + Pattern.quote("&"), Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern PATTERN_GUID = Pattern.compile(Pattern.quote("&wid=") + "([0-9a-z\\-]+)" + Pattern.quote("&"));
-
-    private final static Pattern PATTERN_SIZE_OLD = Pattern.compile("<div class=\"CacheSize[^\"]*\">[^<]*<p[^>]*>[^S]*Size[^:]*:[^<]*<span[^>]*>[^<]*<img src=\"[^\"]*/icons/container/[a-z_]+\\.gif\" alt=\"Size: ([^\"]+)\"[^>]*>[^<]*<small>[^<]*</small>[^<]*</span>[^<]*</p>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern PATTERN_SIZE = Pattern.compile("<div class=\"CacheSize[^\"]*\">[^<]*<p[^>]*>[^S]*Size[^:]*:[^<]*<span[^>]*>[^<]*<img src=\"[^\"]*/icons/container/[a-z_]+\\.gif\" alt=\"Size: ([^\"]+)\"[^>]*>[^<]*<small>[^<]*</small>[^<]*</span>[^<]*</p>");
-
-    private final static Pattern PATTERN_LATLON_OLD = Pattern.compile("<span id=\"ctl00_ContentBody_LatLon\"[^>]*>([^<]*)<\\/span>", Pattern.CASE_INSENSITIVE);
-    private final static Pattern PATTERN_LATLON = Pattern.compile("<span id=\"ctl00_ContentBody_LatLon\"[^>]*>(.*?)</span>");
-
-    private final static Pattern PATTERN_LOCATION_OLD = Pattern.compile("<span id=\"ctl00_ContentBody_Location\"[^>]*>In ([^<]*)", Pattern.CASE_INSENSITIVE);
-    private final static Pattern PATTERN_LOCATION = Pattern.compile("<span id=\"ctl00_ContentBody_Location\">In (.*?)</span>");
-
-    private final static Pattern PATTERN_PERSONALNOTE_OLD = Pattern.compile("<p id=\"cache_note\"[^>]*>([^<]*)</p>", Pattern.CASE_INSENSITIVE);
-    private final static Pattern PATTERN_PERSONALNOTE = Pattern.compile("<p id=\"cache_note\"[^>]*>(.*?)</p>");
-
-    private final static Pattern PATTERN_NAME_OLD = Pattern.compile("<h2[^>]*>[^<]*<span id=\"ctl00_ContentBody_CacheName\">([^<]+)<\\/span>[^<]*<\\/h2>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern PATTERN_NAME = Pattern.compile("<span id=\"ctl00_ContentBody_CacheName\">(.*?)</span>");
-
-    private final static Pattern PATTERN_DIFFICULTY_OLD = Pattern.compile("<span id=\"ctl00_ContentBody_uxLegendScale\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\" alt=\"[^\"]+\"[^>]*>[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern PATTERN_DIFFICULTY = Pattern.compile("<span id=\"ctl00_ContentBody_uxLegendScale\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\" alt=\"");
-
-    private final static Pattern PATTERN_TERRAIN_OLD = Pattern.compile("<span id=\"ctl00_ContentBody_Localize6\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\" alt=\"[^\"]+\"[^>]*>[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
-    private final static Pattern PATTERN_TERRAIN = Pattern.compile("<span id=\"ctl00_ContentBody_Localize6\"[^>]*>[^<]*<img src=\"[^\"]*/images/stars/stars([0-9_]+)\\.gif\" alt=\"");
-
-    private final static Pattern PATTERN_OWNERREAL_OLD = Pattern.compile("<a id=\"ctl00_ContentBody_uxFindLinksHiddenByThisUser\" href=\"[^\"]*/seek/nearest\\.aspx\\?u=*([^\"]+)\">[^<]+</a>", Pattern.CASE_INSENSITIVE);
-    private final static Pattern PATTERN_OWNERREAL = Pattern.compile("<a id=\"ctl00_ContentBody_uxFindLinksHiddenByThisUser\" href=\"[^\"]*/seek/nearest\\.aspx\\?u=(.*?)\"");
-
+    public final static List<MockedCache> MOCKED_CACHES = new ArrayList<MockedCache>();
+    static {
+        MOCKED_CACHES.add(new GC2CJPF());
+        MOCKED_CACHES.add(new GC1ZXX2());
+        MOCKED_CACHES.add(new GC2JVEH());
+    }
 
     public static void testRegEx() {
         List<String> output = doTheTests(10);
@@ -118,20 +87,7 @@ public class RegExPerformanceTest extends TestCase {
 
         List<String> output = new ArrayList<String>();
 
-        output.addAll(measure(iterations, "hint", PATTERN_HINT_OLD, PATTERN_HINT));
         output.addAll(measure(iterations, "description", PATTERN_DESCRIPTION_OLD, PATTERN_DESCRIPTION));
-        output.addAll(measure(iterations, "short description", PATTERN_SHORTDESC_OLD, PATTERN_SHORTDESC));
-        output.addAll(measure(iterations, "geocode", PATTERN_GEOCODE_OLD, PATTERN_GEOCODE));
-        output.addAll(measure(iterations, "cache id", PATTERN_CACHEID_OLD, PATTERN_CACHEID));
-        output.addAll(measure(iterations, "cache guid", PATTERN_GUID_OLD, PATTERN_GUID));
-        output.addAll(measure(iterations, "size", PATTERN_SIZE_OLD, PATTERN_SIZE));
-        output.addAll(measure(iterations, "latlon", PATTERN_LATLON_OLD, PATTERN_LATLON));
-        output.addAll(measure(iterations, "location", PATTERN_LOCATION_OLD, PATTERN_LOCATION));
-        output.addAll(measure(iterations, "personal note", PATTERN_PERSONALNOTE_OLD, PATTERN_PERSONALNOTE));
-        output.addAll(measure(iterations, "name", PATTERN_NAME_OLD, PATTERN_NAME));
-        output.addAll(measure(iterations, "difficulty", PATTERN_DIFFICULTY_OLD, PATTERN_DIFFICULTY));
-        output.addAll(measure(iterations, "terrain", PATTERN_TERRAIN_OLD, PATTERN_TERRAIN));
-        output.addAll(measure(iterations, "owner real", PATTERN_OWNERREAL_OLD, PATTERN_OWNERREAL));
 
         return output;
     }
@@ -141,14 +97,10 @@ public class RegExPerformanceTest extends TestCase {
         List<String> output = new ArrayList<String>();
         output.add(fieldName + ":");
 
-        List<MockedCache> cachesForParsing = new ArrayList<MockedCache>();
-        cachesForParsing.add(new GC2CJPF());
-        cachesForParsing.add(new GC1ZXX2());
-
-        for (MockedCache cache : cachesForParsing) {
+        for (MockedCache cache : MOCKED_CACHES) {
             String page = cache.getData();
-            String result1 = BaseUtils.getMatch(page, p1, 1, "");
-            String result2 = BaseUtils.getMatch(page, p2, 1, "");
+            String result1 = BaseUtils.getMatch(page, p1, true, "");
+            String result2 = BaseUtils.getMatch(page, p2, true, "");
             assertEquals(result1, result2);
 
             long diff1, diff2;
@@ -174,7 +126,7 @@ public class RegExPerformanceTest extends TestCase {
     private static long parse(String page, Pattern pattern, int iterations) {
         long start = System.currentTimeMillis();
         for (int j = 0; j < iterations; j++) {
-            BaseUtils.getMatch(page, pattern, 1, "");
+            BaseUtils.getMatch(page, pattern, true, "");
         }
         return (System.currentTimeMillis() - start);
 
