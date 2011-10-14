@@ -1902,13 +1902,13 @@ public class cgBase {
         try {
             final Matcher matcherDetailsImage = PATTERN_TRACKABLE_DETAILSIMAGE.matcher(page);
             if (matcherDetailsImage.find() && matcherDetailsImage.groupCount() > 0) {
-                final String image = matcherDetailsImage.group(3).trim();
-                final String details = matcherDetailsImage.group(4).trim();
+                final String image = StringUtils.trim(matcherDetailsImage.group(3));
+                final String details = StringUtils.trim(matcherDetailsImage.group(4));
 
-                if (image != null) {
+                if (StringUtils.isNotEmpty(image)) {
                     trackable.setImage(image);
                 }
-                if (details != null && !details.equals("No additional details available.")) {
+                if (StringUtils.isNotEmpty(details) && !StringUtils.equals(details, "No additional details available.")) {
                     trackable.setDetails(details);
                 }
             }
