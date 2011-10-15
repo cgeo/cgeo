@@ -27,6 +27,7 @@ import cgeo.geocaching.sorting.SizeComparator;
 import cgeo.geocaching.sorting.StateComparator;
 import cgeo.geocaching.sorting.TerrainComparator;
 import cgeo.geocaching.sorting.VoteComparator;
+import cgeo.geocaching.utils.RunnableWithArgument;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -991,7 +992,7 @@ public class cgeocaches extends AbstractListActivity {
                 importGpx();
                 return false;
             case MENU_CREATE_LIST:
-                createList();
+                createList(null);
                 return false;
             case MENU_DROP_LIST:
                 removeList();
@@ -2412,16 +2413,27 @@ public class cgeocaches extends AbstractListActivity {
         for (cgList list : lists) {
             listsTitle.add(list.title);
         }
+        listsTitle.add("<" + res.getString(R.string.list_menu_create) + ">");
 
         final CharSequence[] items = new CharSequence[listsTitle.size()];
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(res.getString(R.string.list_title));
         builder.setItems(listsTitle.toArray(items), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialogInterface, int item) {
-                switchListById(lists.get(item).id);
+            public void onClick(DialogInterface dialogInterface, int itemId) {
+                if (itemId >= lists.size()) {
+                    // create new list on the fly
+                    createList(new RunnableWithArgument<Integer>() {
 
-                return;
+                        @Override
+                        public void run() {
+                            switchListById(getArgument());
+                        }
+                    });
+                }
+                else {
+                    switchListById(lists.get(itemId).id);
+                }
             }
         });
         builder.create().show();
@@ -2484,15 +2496,7 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
-    private abstract class RunnableWithInput implements Runnable {
-        String input;
-
-        public void setInput(final String input) {
-            this.input = input;
-        }
-    }
-
-    private void handleListNameInput(final String defaultValue, int dialogTitle, int buttonTitle, final RunnableWithInput runnable) {
+    private void handleListNameInput(final String defaultValue, int dialogTitle, int buttonTitle, final RunnableWithArgument<String> runnable) {
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
         final View view = inflater.inflate(R.layout.list_create_dialog, null);
         final EditText input = (EditText) view.findViewById(R.id.text);
@@ -2503,9 +2507,9 @@ public class cgeocaches extends AbstractListActivity {
         alert.setPositiveButton(buttonTitle, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 // remove whitespaces added by autocompletion of Android keyboard
-                String value = StringUtils.trim(input.getText().toString());
-                if (StringUtils.isNotBlank(value)) {
-                    runnable.setInput(value);
+                String listName = StringUtils.trim(input.getText().toString());
+                if (StringUtils.isNotBlank(listName)) {
+                    runnable.setArgument(listName);
                     runnable.run();
                 }
             }
@@ -2519,15 +2523,20 @@ public class cgeocaches extends AbstractListActivity {
         alert.show();
     }
 
-    private void createList() {
-        handleListNameInput("", R.string.list_dialog_create_title, R.string.list_dialog_create, new RunnableWithInput() {
+    private void createList(final RunnableWithArgument<Integer> runAfterwards) {
+        handleListNameInput("", R.string.list_dialog_create_title, R.string.list_dialog_create, new RunnableWithArgument<String>() {
 
             @Override
             public void run() {
-                int newId = app.createList(input);
+                String listName = getArgument();
+                int newId = app.createList(listName);
 
                 if (newId >= 10) {
                     showToast(res.getString(R.string.list_dialog_create_ok));
+                    if (runAfterwards != null) {
+                        runAfterwards.setArgument(newId);
+                        runAfterwards.run();
+                    }
                 } else {
                     showToast(res.getString(R.string.list_dialog_create_err));
                 }
@@ -2537,11 +2546,12 @@ public class cgeocaches extends AbstractListActivity {
 
     private void renameList() {
         final cgList list = app.getList(listId);
-        handleListNameInput(list.title, R.string.list_dialog_rename_title, R.string.list_dialog_rename, new RunnableWithInput() {
+        handleListNameInput(list.title, R.string.list_dialog_rename_title, R.string.list_dialog_rename, new RunnableWithArgument<String>() {
 
             @Override
             public void run() {
-                app.renameList(listId, input);
+                String listName = getArgument();
+                app.renameList(listId, listName);
                 refreshCurrentList();
             }
         });
