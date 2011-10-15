@@ -13,6 +13,7 @@ import cgeo.geocaching.filter.cgFilterBySize;
 import cgeo.geocaching.filter.cgFilterByTrackables;
 import cgeo.geocaching.filter.cgFilterByType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.DateComparator;
 import cgeo.geocaching.sorting.DifficultyComparator;
@@ -2595,11 +2596,7 @@ public class cgeocaches extends AbstractListActivity {
             return;
         }
 
-        Intent mapIntent = new Intent(this, Settings.getMapFactory().getMapClass());
-        mapIntent.putExtra("detail", false);
-        mapIntent.putExtra("searchid", searchId.toString());
-
-        startActivity(mapIntent);
+        CGeoMap.startActivitySearch(this, searchId, title + " [" + app.getCount(searchId) + "]", false);
     }
 
     public void goManual(View view) {

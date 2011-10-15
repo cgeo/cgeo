@@ -4,6 +4,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.maps.CGeoMap;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -604,7 +605,7 @@ public class cgeo extends AbstractActivity {
      */
     public void cgeoFindOnMap(View v) {
         findViewById(R.id.map).setPressed(true);
-        context.startActivity(new Intent(context, Settings.getMapFactory().getMapClass()));
+        CGeoMap.startActivityLiveMap(context);
     }
 
     /**
