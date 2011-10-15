@@ -1,7 +1,10 @@
 package cgeo.geocaching.test.mock;
 
+import cgeo.geocaching.GCConstants;
 import cgeo.geocaching.ICache;
 import cgeo.geocaching.cgBase;
+import cgeo.geocaching.cgImage;
+import cgeo.geocaching.cgTrackable;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.BaseUtils;
 
@@ -9,13 +12,20 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class MockedCache implements ICache {
 
     final protected Geopoint coords;
+    String data;
 
     protected MockedCache(final Geopoint coords) {
         this.coords = coords;
+    }
+
+    protected String getUserLoggedIn() {
+        return BaseUtils.getMatch(data, GCConstants.PATTERN_USERLOGGEDIN, true, "");
     }
 
     /*
@@ -24,7 +34,8 @@ public abstract class MockedCache implements ICache {
      * into a browser and saving the file
      */
     public String getData() {
-        return readCachePage(getGeocode());
+        data = MockedCache.readCachePage(getGeocode());
+        return data;
     }
 
     public static String readCachePage(final String geocode) {
@@ -55,6 +66,71 @@ public abstract class MockedCache implements ICache {
     @Override
     public String getLongitude() {
         return cgBase.formatLongitude(coords.getLongitude(), true);
+    }
+
+    @Override
+    public boolean isArchived() {
+        return false;
+    }
+
+    @Override
+    public boolean isDisabled() {
+        return false;
+    }
+
+    @Override
+    public boolean isMembersOnly() {
+        return false;
+    }
+
+    @Override
+    public boolean isOwn() {
+        return false;
+    }
+
+    @Override
+    public String getHint() {
+        return "";
+    }
+
+    @Override
+    public String getShortDescription() {
+        return "";
+    }
+
+    @Override
+    public String getPersonalNote() {
+        return "";
+    }
+
+    @Override
+    public boolean isFound() {
+        return false;
+    }
+
+    @Override
+    public boolean isFavorite() {
+        return false;
+    }
+
+    @Override
+    public Integer getFavoritePoints() {
+        return new Integer(0);
+    }
+
+    @Override
+    public boolean isWatchlist() {
+        return false;
+    }
+
+    @Override
+    public List<cgTrackable> getInventory() {
+        return new ArrayList<cgTrackable>();
+    }
+
+    @Override
+    public List<cgImage> getSpoilers() {
+        return null;
     }
 
 }
