@@ -295,9 +295,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         // initialize map
         mapView = (MapViewImpl) activity.findViewById(mapFactory.getMapViewId());
         mapView.setMapSource();
-        if (!mapView.needsScaleOverlay()) {
-            mapView.setBuiltinScale(true);
-        }
         mapView.setBuiltInZoomControls(true);
         mapView.displayZoomControls(true);
         mapView.preLoad();
@@ -318,7 +315,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             overlayCaches = mapView.createAddMapOverlay(mapView.getContext(), getResources().getDrawable(R.drawable.marker), fromDetailIntent);
         }
 
-        if (overlayScale == null && mapView.needsScaleOverlay()) {
+        if (overlayScale == null) {
             overlayScale = mapView.createAddScaleOverlay(activity);
         }
 

@@ -112,4 +112,9 @@ public class GoogleCacheOverlay extends ItemizedOverlay<GoogleCacheOverlayItem> 
         lock.unlock();
     }
 
+    @Override
+    public MapViewImpl getMapViewImpl() {
+        throw new UnsupportedOperationException();
+    }
+
 }

@@ -144,16 +144,6 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public boolean needsScaleOverlay() {
-        return true;
-    }
-
-    @Override
-    public void setBuiltinScale(boolean b) {
-        //Nothing to do for google maps...
-    }
-
-    @Override
     public void repaintRequired(GeneralOverlay overlay) {
         invalidate();
     }
