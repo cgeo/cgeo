@@ -1642,7 +1642,7 @@ public class cgBase {
 
     /**
      * Parse a trackable HTML description into a cgTrackable object
-     * 
+     *
      * @param page
      *            the HTML page to parse, already processed through {@link BaseUtils#replaceWhitespace}
      * @param app
@@ -2385,7 +2385,7 @@ public class cgBase {
 
             if (c > 300) {
                 logUpdated.append("&#");
-                logUpdated.append(Integer.toString((int) c));
+                logUpdated.append(Integer.toString(c));
                 logUpdated.append(';');
             } else {
                 logUpdated.append(c);
@@ -3413,7 +3413,7 @@ public class cgBase {
     /**
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 sept. à 12:35".
-     * 
+     *
      * @param context
      *            a Context
      * @param date
