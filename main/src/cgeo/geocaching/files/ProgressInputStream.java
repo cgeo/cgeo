@@ -21,9 +21,8 @@ public class ProgressInputStream extends FilterInputStream {
 
     @Override
     public int read(byte[] buffer) throws IOException {
-        final int read = super.read(buffer);
-        progress += read;
-        return read;
+        return super.read(buffer);
+        // don't increment here, this calls another read implementation which we already measure
     }
 
     @Override
@@ -34,7 +33,7 @@ public class ProgressInputStream extends FilterInputStream {
     }
 
     int getProgress() {
-        return progress / 2;
+        return progress;
     }
 
 }

@@ -685,6 +685,13 @@ public class cgeocaches extends AbstractListActivity {
                 thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
                 thread.start();
                 break;
+            case MAP:
+                title = res.getString(R.string.map_map);
+                setTitle(title);
+                showProgress(true);
+                searchId = (UUID) extras.get("searchId");
+                loadCachesHandler.sendMessage(Message.obtain());
+                break;
             default:
                 title = "caches";
                 setTitle(title);
@@ -2710,4 +2717,12 @@ public class cgeocaches extends AbstractListActivity {
         cachesIntent.putExtra("keyword", keyword);
         context.startActivity(cachesIntent);
     }
+
+    public static void startActivityMap(final Context context, final UUID uuid) {
+        final Intent cachesIntent = new Intent(context, cgeocaches.class);
+        cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.MAP);
+        cachesIntent.putExtra("searchId", uuid);
+        context.startActivity(cachesIntent);
+    }
+
 }

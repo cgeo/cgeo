@@ -8,5 +8,6 @@ public enum CacheListType {
     KEYWORD,
     ADDRESS,
     USERNAME,
-    OWNER;
+    OWNER,
+    MAP;
 }
