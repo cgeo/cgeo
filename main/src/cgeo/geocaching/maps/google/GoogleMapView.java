@@ -1,5 +1,7 @@
 package cgeo.geocaching.maps.google;
 
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.maps.CachesOverlay;
 import cgeo.geocaching.maps.OtherCachersOverlay;
@@ -66,7 +68,7 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     public void displayZoomControls(boolean takeFocus) {
         try {
             // Push zoom controls to the right
-            FrameLayout.LayoutParams zoomParams = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            FrameLayout.LayoutParams zoomParams = new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
             zoomParams.gravity = Gravity.RIGHT;
             getZoomButtonsController().getZoomControls().setLayoutParams(zoomParams);
 
