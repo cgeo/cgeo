@@ -1867,7 +1867,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         mapIntent.putExtra(EXTRAS_LATITUDE, coords.getLatitude());
         mapIntent.putExtra(EXTRAS_LONGITUDE, coords.getLongitude());
         if (type != null) {
-            mapIntent.putExtra(EXTRAS_WPTTYPE, type != null ? type.id : null);
+            mapIntent.putExtra(EXTRAS_WPTTYPE, type.id);
         }
         context.startActivity(mapIntent);
     }
