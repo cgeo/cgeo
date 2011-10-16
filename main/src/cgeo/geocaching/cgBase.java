@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocParser;
@@ -81,10 +82,6 @@ import java.util.regex.Pattern;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
 
-/**
- * @author bananeweizen
- *
- */
 public class cgBase {
 
     private static final String passMatch = "(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+";
@@ -105,8 +102,6 @@ public class cgBase {
     public final static Map<String, Integer> logTypes0 = new HashMap<String, Integer>();
     public final static Map<Integer, String> logTypes1 = new HashMap<Integer, String>();
     public final static Map<Integer, String> logTypes2 = new HashMap<Integer, String>();
-    public final static Map<Integer, String> logTypesTrackable = new HashMap<Integer, String>();
-    public final static Map<Integer, String> logTypesTrackableAction = new HashMap<Integer, String>();
     public final static Map<String, SimpleDateFormat> gcCustomDateFormats;
     static {
         final String[] formats = new String[] {
@@ -293,14 +288,6 @@ public class cgBase {
         logTypes2.put(LOG_DISCOVERED_IT, res.getString(R.string.log_discovered)); //trackable
         logTypes2.put(LOG_POST_REVIEWER_NOTE, res.getString(R.string.log_reviewed)); // X
         logTypes2.put(LOG_ANNOUNCEMENT, res.getString(R.string.log_announcement)); // X
-
-        // trackables for logs
-        logTypesTrackable.put(0, res.getString(R.string.log_tb_nothing)); // do nothing
-        logTypesTrackable.put(1, res.getString(R.string.log_tb_visit)); // visit cache
-        logTypesTrackable.put(2, res.getString(R.string.log_tb_drop)); // drop here
-        logTypesTrackableAction.put(0, ""); // do nothing
-        logTypesTrackableAction.put(1, "_Visited"); // visit cache
-        logTypesTrackableAction.put(2, "_DroppedOff"); // drop here
 
         // init
         app = appIn;
@@ -2419,10 +2406,9 @@ public class cgBase {
             final StringBuilder hdnSelected = new StringBuilder();
 
             for (cgTrackableLog tb : trackables) {
-                final String action = Integer.toString(tb.id) + logTypesTrackableAction.get(tb.action);
-
-                if (tb.action > 0) {
-                    hdnSelected.append(action);
+                if (tb.action != LogTypeTrackable.DO_NOTHING) {
+                    hdnSelected.append(Integer.toString(tb.id));
+                    hdnSelected.append(tb.action.action);
                     hdnSelected.append(',');
                 }
             }
@@ -2474,7 +2460,7 @@ public class cgBase {
 
                     for (cgTrackableLog tb : trackables) {
                         String ctl = null;
-                        final String action = Integer.toString(tb.id) + logTypesTrackableAction.get(tb.action);
+                        final String action = Integer.toString(tb.id) + tb.action.action;
 
                         if (tb.ctl < 10) {
                             ctl = "0" + Integer.toString(tb.ctl);
@@ -2483,7 +2469,7 @@ public class cgBase {
                         }
 
                         params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$repTravelBugs$ctl" + ctl + "$ddlAction", action);
-                        if (tb.action > 0) {
+                        if (tb.action != LogTypeTrackable.DO_NOTHING) {
                             hdnSelected.append(action);
                             hdnSelected.append(',');
                         }

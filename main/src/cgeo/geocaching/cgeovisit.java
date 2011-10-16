@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.LogTemplateProvider.LogTemplate;
+import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -121,7 +122,7 @@ public class cgeovisit extends cgLogForm {
 
                     ((TextView) inventoryItem.findViewById(R.id.trackcode)).setText(tb.trackCode);
                     ((TextView) inventoryItem.findViewById(R.id.name)).setText(tb.name);
-                    ((TextView) inventoryItem.findViewById(R.id.action)).setText(cgBase.logTypesTrackable.get(Settings.isTrackableAutoVisit() ? 1 : 0));
+                    ((TextView) inventoryItem.findViewById(R.id.action)).setText(res.getString(Settings.isTrackableAutoVisit() ? LogTypeTrackable.VISITED.resourceId : LogTypeTrackable.DO_NOTHING.resourceId));
 
                     inventoryItem.setId(tb.id);
                     final String tbCode = tb.trackCode;
@@ -146,7 +147,7 @@ public class cgeovisit extends cgLogForm {
 
                     if (Settings.isTrackableAutoVisit())
                     {
-                        tb.action = 1;
+                        tb.action = LogTypeTrackable.VISITED;
                         tbChanged = true;
                     }
                 }
@@ -350,8 +351,8 @@ public class cgeovisit extends cgLogForm {
             final int textId = ((TextView) findViewById(viewId)).getId();
 
             menu.setHeaderTitle(res.getString(R.string.log_tb_changeall));
-            for (final int logTbAction : cgBase.logTypesTrackable.keySet()) {
-                menu.add(textId, logTbAction, 0, cgBase.logTypesTrackable.get(logTbAction));
+            for (LogTypeTrackable logType : LogTypeTrackable.values()) {
+                menu.add(textId, logType.id, 0, res.getString(logType.resourceId));
             }
         } else {
             final int realViewId = ((LinearLayout) findViewById(viewId)).getId();
@@ -361,8 +362,8 @@ public class cgeovisit extends cgLogForm {
                     menu.setHeaderTitle(tb.name);
                 }
             }
-            for (final int logTbAction : cgBase.logTypesTrackable.keySet()) {
-                menu.add(realViewId, logTbAction, 0, cgBase.logTypesTrackable.get(logTbAction));
+            for (LogTypeTrackable logType : LogTypeTrackable.values()) {
+                menu.add(realViewId, logType.id, 0, res.getString(logType.resourceId));
             }
         }
     }
@@ -378,8 +379,8 @@ public class cgeovisit extends cgLogForm {
             return true;
         } else if (group == R.id.changebutton) {
             try {
-                final String logTbAction = cgBase.logTypesTrackable.get(id);
-                if (logTbAction != null) {
+                final LogTypeTrackable logType = LogTypeTrackable.findById(id);
+                if (logType != null) {
                     final LinearLayout inventView = (LinearLayout) findViewById(R.id.inventory);
                     for (int count = 0; count < inventView.getChildCount(); count++) {
                         final LinearLayout tbView = (LinearLayout) inventView.getChildAt(count);
@@ -391,10 +392,10 @@ public class cgeovisit extends cgLogForm {
                         if (tbText == null) {
                             return false;
                         }
-                        tbText.setText(logTbAction);
+                        tbText.setText(res.getString(logType.resourceId));
                     }
                     for (cgTrackableLog tb : trackables) {
-                        tb.action = id;
+                        tb.action = logType;
                     }
                     tbChanged = true;
                     return true;
@@ -404,8 +405,8 @@ public class cgeovisit extends cgLogForm {
             }
         } else {
             try {
-                final String logTbAction = cgBase.logTypesTrackable.get(id);
-                if (logTbAction != null) {
+                final LogTypeTrackable logType = LogTypeTrackable.findById(id);
+                if (logType != null) {
                     final LinearLayout tbView = (LinearLayout) findViewById(group);
                     if (tbView == null) {
                         return false;
@@ -420,8 +421,8 @@ public class cgeovisit extends cgLogForm {
                         if (tb.id == group) {
                             tbChanged = true;
 
-                            tb.action = id;
-                            tbText.setText(logTbAction);
+                            tb.action = logType;
+                            tbText.setText(res.getString(logType.resourceId));
 
                             Log.i(Settings.tag, "Trackable " + tb.trackCode + " (" + tb.name + ") has new action: #" + id);
                         }
