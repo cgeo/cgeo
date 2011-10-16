@@ -26,7 +26,9 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.Gravity;
 import android.view.MotionEvent;
+import android.widget.FrameLayout;
 
 public class GoogleMapView extends MapView implements MapViewImpl {
     private GestureDetector gestureDetector;
@@ -63,6 +65,11 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     @Override
     public void displayZoomControls(boolean takeFocus) {
         try {
+            // Push zoom controls to the right
+            FrameLayout.LayoutParams zoomParams = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            zoomParams.gravity = Gravity.RIGHT;
+            getZoomButtonsController().getZoomControls().setLayoutParams(zoomParams);
+
             super.displayZoomControls(takeFocus);
         } catch (Exception e) {
             Log.e(Settings.tag, "cgMapView.displayZoomControls: " + e.toString());
@@ -141,16 +148,6 @@ public class GoogleMapView extends MapView implements MapViewImpl {
             default:
                 setSatellite(false);
         }
-    }
-
-    @Override
-    public boolean needsScaleOverlay() {
-        return true;
-    }
-
-    @Override
-    public void setBuiltinScale(boolean b) {
-        //Nothing to do for google maps...
     }
 
     @Override

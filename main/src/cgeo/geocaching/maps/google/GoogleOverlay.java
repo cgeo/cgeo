@@ -52,4 +52,10 @@ public class GoogleOverlay extends Overlay implements OverlayImpl {
     public void unlock() {
         lock.unlock();
     }
+
+    @Override
+    public MapViewImpl getMapViewImpl() {
+        throw new UnsupportedOperationException();
+    }
+
 }

@@ -59,10 +59,6 @@ public interface MapViewImpl {
 
     PositionOverlay createAddPositionOverlay(Activity activity);
 
-    boolean needsScaleOverlay();
-
-    void setBuiltinScale(boolean b);
-
     void setMapSource();
 
     void repaintRequired(GeneralOverlay overlay);
