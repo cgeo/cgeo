@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.CGeoMap;
@@ -348,9 +349,9 @@ public class cgeo extends AbstractActivity {
 
         // then add all other cache types sorted alphabetically
         Map<String, String> allTypes = new HashMap<String, String>(cgBase.cacheTypesInv);
-        allTypes.remove("traditional");
-        allTypes.remove("multi");
-        allTypes.remove("mystery");
+        allTypes.remove(CacheType.TRADITIONAL.id);
+        allTypes.remove(CacheType.MULTI.id);
+        allTypes.remove(CacheType.MYSTERY.id);
         List<String> sorted = new ArrayList<String>(allTypes.values());
         Collections.sort(sorted);
         for (String choice : sorted) {

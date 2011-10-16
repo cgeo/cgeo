@@ -8,6 +8,7 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -682,7 +683,7 @@ public class cgeodetail extends AbstractActivity {
             if (cgBase.cacheTypesInv.containsKey(cache.type)) { // cache icon
                 itemValue.setText(cgBase.cacheTypesInv.get(cache.type) + size);
             } else {
-                itemValue.setText(cgBase.cacheTypesInv.get("mystery") + size);
+                itemValue.setText(cgBase.cacheTypesInv.get(CacheType.MYSTERY.id) + size);
             }
             detailsList.addView(itemLayout);
 
@@ -808,7 +809,7 @@ public class cgeodetail extends AbstractActivity {
                 itemName = (TextView) itemLayout.findViewById(R.id.name);
                 itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
-                if (cache.type != null && (cache.type.equalsIgnoreCase("event") || cache.type.equalsIgnoreCase("mega") || cache.type.equalsIgnoreCase("cito"))) {
+                if (cache.isEventCache()) {
                     itemName.setText(res.getString(R.string.cache_event));
                 } else {
                     itemName.setText(res.getString(R.string.cache_hidden));

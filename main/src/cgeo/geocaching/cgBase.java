@@ -964,29 +964,31 @@ public class cgBase {
                             cacheToAdd.disabled = !oneCache.getBoolean("ia");
                             int ctid = oneCache.getInt("ctid");
                             if (ctid == 2) {
-                                cacheToAdd.type = "traditional";
+                                cacheToAdd.type = CacheType.TRADITIONAL.id;
                             } else if (ctid == 3) {
-                                cacheToAdd.type = "multi";
+                                cacheToAdd.type = CacheType.MULTI.id;
                             } else if (ctid == 4) {
-                                cacheToAdd.type = "virtual";
+                                cacheToAdd.type = CacheType.VIRTUAL.id;
                             } else if (ctid == 5) {
-                                cacheToAdd.type = "letterbox";
+                                cacheToAdd.type = CacheType.LETTERBOX.id;
                             } else if (ctid == 6) {
-                                cacheToAdd.type = "event";
+                                cacheToAdd.type = CacheType.EVENT.id;
                             } else if (ctid == 8) {
-                                cacheToAdd.type = "mystery";
+                                cacheToAdd.type = CacheType.MYSTERY.id;
                             } else if (ctid == 11) {
-                                cacheToAdd.type = "webcam";
+                                cacheToAdd.type = CacheType.WEBCAM.id;
                             } else if (ctid == 13) {
-                                cacheToAdd.type = "cito";
+                                cacheToAdd.type = CacheType.CITO.id;
                             } else if (ctid == 137) {
-                                cacheToAdd.type = "earth";
+                                cacheToAdd.type = CacheType.EARTH.id;
                             } else if (ctid == 453) {
-                                cacheToAdd.type = "mega";
+                                cacheToAdd.type = CacheType.MEGA_EVENT.id;
                             } else if (ctid == 1858) {
-                                cacheToAdd.type = "wherigo";
+                                cacheToAdd.type = CacheType.WHERIGO.id;
                             } else if (ctid == 3653) {
-                                cacheToAdd.type = "lost";
+                                cacheToAdd.type = CacheType.LOSTANDFOUND.id;
+                            } else {
+                                cacheToAdd.type = CacheType.UNKNOWN.id;
                             }
 
                             caches.cacheList.add(cacheToAdd);
@@ -3168,13 +3170,13 @@ public class cgBase {
                 iconTxt = type;
             }
         } else {
-            iconTxt = "traditional";
+            iconTxt = CacheType.TRADITIONAL.id;
         }
 
         if (gcIcons.containsKey(iconTxt)) {
             icon = gcIcons.get(iconTxt);
         } else {
-            icon = gcIcons.get("traditional");
+            icon = gcIcons.get(CacheType.TRADITIONAL.id);
         }
 
         return icon;
@@ -3197,20 +3199,20 @@ public class cgBase {
             gcIcons.put("type_mystery", R.drawable.type_mystery);
             gcIcons.put("type_gchq", R.drawable.type_hq);
             // default markers
-            gcIcons.put("ape", R.drawable.marker_cache_ape);
-            gcIcons.put("cito", R.drawable.marker_cache_cito);
-            gcIcons.put("earth", R.drawable.marker_cache_earth);
-            gcIcons.put("event", R.drawable.marker_cache_event);
-            gcIcons.put("letterbox", R.drawable.marker_cache_letterbox);
+            gcIcons.put(CacheType.PROJECT_APE.id, R.drawable.marker_cache_ape);
+            gcIcons.put(CacheType.CITO.id, R.drawable.marker_cache_cito);
+            gcIcons.put(CacheType.EARTH.id, R.drawable.marker_cache_earth);
+            gcIcons.put(CacheType.EVENT.id, R.drawable.marker_cache_event);
+            gcIcons.put(CacheType.LETTERBOX.id, R.drawable.marker_cache_letterbox);
             gcIcons.put("locationless", R.drawable.marker_cache_locationless);
-            gcIcons.put("mega", R.drawable.marker_cache_mega);
-            gcIcons.put("multi", R.drawable.marker_cache_multi);
-            gcIcons.put("traditional", R.drawable.marker_cache_traditional);
-            gcIcons.put("virtual", R.drawable.marker_cache_virtual);
-            gcIcons.put("webcam", R.drawable.marker_cache_webcam);
-            gcIcons.put("wherigo", R.drawable.marker_cache_wherigo);
-            gcIcons.put("mystery", R.drawable.marker_cache_mystery);
-            gcIcons.put("gchq", R.drawable.marker_cache_gchq);
+            gcIcons.put(CacheType.MEGA_EVENT.id, R.drawable.marker_cache_mega);
+            gcIcons.put(CacheType.MULTI.id, R.drawable.marker_cache_multi);
+            gcIcons.put(CacheType.TRADITIONAL.id, R.drawable.marker_cache_traditional);
+            gcIcons.put(CacheType.VIRTUAL.id, R.drawable.marker_cache_virtual);
+            gcIcons.put(CacheType.WEBCAM.id, R.drawable.marker_cache_webcam);
+            gcIcons.put(CacheType.WHERIGO.id, R.drawable.marker_cache_wherigo);
+            gcIcons.put(CacheType.MYSTERY.id, R.drawable.marker_cache_mystery);
+            gcIcons.put(CacheType.GCHQ.id, R.drawable.marker_cache_gchq);
             // own cache markers
             gcIcons.put("ape-own", R.drawable.marker_cache_ape_own);
             gcIcons.put("cito-own", R.drawable.marker_cache_cito_own);

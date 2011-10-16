@@ -7,6 +7,7 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cachelist.CacheListAppFactory;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.filter.cgFilter;
 import cgeo.geocaching.filter.cgFilterBySize;
@@ -1254,35 +1255,35 @@ public class cgeocaches extends AbstractListActivity {
         } else if (id == MENU_FILTER_SIZE_NOT_CHOSEN) {
             return setFilter(new cgFilterBySize(CacheSize.NOT_CHOSEN));
         } else if (id == MENU_FILTER_TYPE_TRADITIONAL) {
-            return setFilter(new cgFilterByType("traditional"));
+            return setFilter(new cgFilterByType(CacheType.TRADITIONAL));
         } else if (id == MENU_FILTER_TYPE_MULTI) {
-            return setFilter(new cgFilterByType("multi"));
+            return setFilter(new cgFilterByType(CacheType.MULTI));
         } else if (id == MENU_FILTER_TYPE_MYSTERY) {
-            return setFilter(new cgFilterByType("mystery"));
+            return setFilter(new cgFilterByType(CacheType.MYSTERY));
         } else if (id == MENU_FILTER_TYPE_LETTERBOX) {
-            return setFilter(new cgFilterByType("letterbox"));
+            return setFilter(new cgFilterByType(CacheType.LETTERBOX));
         } else if (id == MENU_FILTER_TYPE_EVENT) {
-            return setFilter(new cgFilterByType("event"));
+            return setFilter(new cgFilterByType(CacheType.EVENT));
         } else if (id == MENU_FILTER_TYPE_MEGA) {
-            return setFilter(new cgFilterByType("mega"));
+            return setFilter(new cgFilterByType(CacheType.MEGA_EVENT));
         } else if (id == MENU_FILTER_TYPE_EARTH) {
-            return setFilter(new cgFilterByType("earth"));
+            return setFilter(new cgFilterByType(CacheType.EARTH));
         } else if (id == MENU_FILTER_TYPE_CITO) {
-            return setFilter(new cgFilterByType("cito"));
+            return setFilter(new cgFilterByType(CacheType.CITO));
         } else if (id == MENU_FILTER_TYPE_WEBCAM) {
-            return setFilter(new cgFilterByType("webcam"));
+            return setFilter(new cgFilterByType(CacheType.WEBCAM));
         } else if (id == MENU_FILTER_TYPE_VIRTUAL) {
-            return setFilter(new cgFilterByType("virtual"));
+            return setFilter(new cgFilterByType(CacheType.VIRTUAL));
         } else if (id == MENU_FILTER_TYPE_WHERIGO) {
-            return setFilter(new cgFilterByType("wherigo"));
+            return setFilter(new cgFilterByType(CacheType.WHERIGO));
         } else if (id == MENU_FILTER_TYPE_LOSTFOUND) {
-            return setFilter(new cgFilterByType("lostfound"));
+            return setFilter(new cgFilterByType(CacheType.LOSTANDFOUND));
         } else if (id == MENU_FILTER_TYPE_APE) {
-            return setFilter(new cgFilterByType("ape"));
+            return setFilter(new cgFilterByType(CacheType.PROJECT_APE));
         } else if (id == MENU_FILTER_TYPE_GCHQ) {
-            return setFilter(new cgFilterByType("gchq"));
+            return setFilter(new cgFilterByType(CacheType.GCHQ));
         } else if (id == MENU_FILTER_TYPE_GPS) {
-            return setFilter(new cgFilterByType("gps"));
+            return setFilter(new cgFilterByType(CacheType.GPS_EXHIBIT));
         } else if (id == MENU_DROP_CACHE) {
             cgBase.dropCache(app, cache, new Handler() {
                 @Override

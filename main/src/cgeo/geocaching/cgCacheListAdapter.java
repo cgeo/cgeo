@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filter.cgFilter;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.sorting.CacheComparator;
@@ -437,7 +438,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         if (gcIconDrawables.containsKey(cache.type)) { // cache icon
             holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(cache.type), null, null, null);
         } else { // unknown cache type, "mystery" icon
-            holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get("mystery"), null, null, null);
+            holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(CacheType.MYSTERY.id), null, null, null);
         }
 
         if (holder.inventory.getChildCount() > 0) {

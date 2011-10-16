@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 
 public class cgCoord {
@@ -8,7 +9,7 @@ public class cgCoord {
     public Integer id = null;
     public String geocode = "";
     public String type = "cache";
-    public String typeSpec = "traditional";
+    public String typeSpec = CacheType.TRADITIONAL.id;
     public String name = "";
     public boolean found = false;
     public boolean disabled = false;

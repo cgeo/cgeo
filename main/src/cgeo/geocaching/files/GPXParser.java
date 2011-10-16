@@ -11,6 +11,7 @@ import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 
@@ -796,7 +797,7 @@ public abstract class GPXParser extends FileParser {
         }
         else {
             if (StringUtils.isBlank(cache.type)) {
-                cache.type = "mystery"; // default for not recognized types
+                cache.type = CacheType.UNKNOWN.id;
             }
         }
     }

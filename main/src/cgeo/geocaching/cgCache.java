@@ -4,6 +4,7 @@ import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -262,7 +263,8 @@ public class cgCache implements ICache {
     }
 
     public boolean isEventCache() {
-        return "event".equalsIgnoreCase(type) || "mega".equalsIgnoreCase(type) || "cito".equalsIgnoreCase(type);
+        return CacheType.EVENT.id.equalsIgnoreCase(type) || CacheType.MEGA_EVENT.id.equalsIgnoreCase(type)
+                || CacheType.CITO.id.equalsIgnoreCase(type) || CacheType.LOSTANDFOUND.id.equalsIgnoreCase(type);
     }
 
     public boolean logVisit(IAbstractActivity fromActivity) {
@@ -309,7 +311,7 @@ public class cgCache implements ICache {
     public List<Integer> getPossibleLogTypes() {
         boolean isOwner = owner != null && owner.equalsIgnoreCase(Settings.getUsername());
         List<Integer> types = new ArrayList<Integer>();
-        if ("event".equals(type) || "mega".equals(type) || "cito".equals(type) || "lostfound".equals(type)) {
+        if (isEventCache()) {
             types.add(cgBase.LOG_WILL_ATTEND);
             types.add(cgBase.LOG_NOTE);
             types.add(cgBase.LOG_ATTENDED);
@@ -317,7 +319,7 @@ public class cgCache implements ICache {
             if (isOwner) {
                 types.add(cgBase.LOG_ANNOUNCEMENT);
             }
-        } else if ("webcam".equals(type)) {
+        } else if (CacheType.WEBCAM.id.equals(type)) {
             types.add(cgBase.LOG_WEBCAM_PHOTO_TAKEN);
             types.add(cgBase.LOG_DIDNT_FIND_IT);
             types.add(cgBase.LOG_NOTE);

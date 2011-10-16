@@ -8,6 +8,7 @@ import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.GeopointParser;
 
 import org.apache.commons.lang3.StringUtils;
@@ -156,7 +157,7 @@ public final class LocParser extends FileParser {
                 caches.cacheList.add(cache);
 
                 fixCache(cache);
-                cache.type = "traditional"; // type is not given in the LOC file
+                cache.type = CacheType.UNKNOWN.id; // type is not given in the LOC file
                 cache.reason = listId;
                 cache.detailed = true;
 

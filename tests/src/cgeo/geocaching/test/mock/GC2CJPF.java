@@ -2,6 +2,7 @@ package cgeo.geocaching.test.mock;
 
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import java.text.ParseException;
@@ -54,7 +55,7 @@ public class GC2CJPF extends MockedCache {
 
     @Override
     public String getType() {
-        return "multi";
+        return CacheType.MULTI.id;
     }
 
     @Override

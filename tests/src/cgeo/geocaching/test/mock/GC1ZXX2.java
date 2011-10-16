@@ -2,6 +2,7 @@ package cgeo.geocaching.test.mock;
 
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import java.text.ParseException;
@@ -50,7 +51,7 @@ public class GC1ZXX2 extends MockedCache {
 
     @Override
     public String getType() {
-        return "traditional";
+        return CacheType.TRADITIONAL.id;
     }
 
     @Override

@@ -35,6 +35,7 @@
   <string name="ape">Project ape cache</string>
   <string name="gchq">Groundspeak hq</string>
   <string name="gps">GPS cache exhibit</string>
+  <string name="unknown">Unknown cache</string>
 
   <!-- cache sizes -->
   <string name="cache_size_micro">micro</string>
