@@ -584,6 +584,7 @@
   <string name="gpx_import_title">Import GPX</string>
   <string name="gpx_import_title_reading_file">Reading file</string>
   <string name="gpx_import_title_caches_imported">Result</string>
+  <string name="gpx_import_confirm">Do you want to import the GPX file into c:geo?</string>
 
   <!-- map file select -->
   <string name="map_file_select_title">Select map file</string>

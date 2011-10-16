@@ -165,9 +165,9 @@ public final class LocParser extends FileParser {
             }
             caches.totalCnt = caches.cacheList.size();
             showCountMessage(handler, R.string.gpx_import_loading_stored, search.getCount());
-            Log.i(Settings.tag, "Caches found in .gpx file: " + caches.totalCnt);
+            Log.i(Settings.tag, "Caches found in .loc file: " + caches.totalCnt);
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgBase.parseGPX: " + e.toString());
+            Log.e(Settings.tag, "LocParser.parseLoc: " + e.toString());
         }
 
         return search.getCurrentId();

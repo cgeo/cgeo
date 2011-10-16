@@ -66,7 +66,7 @@ public class cgGPXListAdapter extends ArrayAdapter<File> {
 
         // tap on item
         public void onClick(View view) {
-            parent.loadGPX(file);
+            parent.importGPX(file);
         }
     }
 }

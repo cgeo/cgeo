@@ -3131,7 +3131,7 @@ public class cgData {
 
         List<cgList> lists = new ArrayList<cgList>();
 
-        lists.add(new cgList(true, 1, res.getString(R.string.list_inbox)));
+        lists.add(new cgList(cgList.STANDARD_LIST_ID, res.getString(R.string.list_inbox)));
         // lists.add(new cgList(true, 2, res.getString(R.string.list_wpt)));
 
         ArrayList<cgList> storedLists = readLists(null, "title COLLATE NOCASE ASC");
@@ -3158,16 +3158,10 @@ public class cgData {
                     int indexId = cursor.getColumnIndex("_id");
                     int indexTitle = cursor.getColumnIndex("title");
                     int indexUpdated = cursor.getColumnIndex("updated");
-                    int indexLatitude = cursor.getColumnIndex("latitude");
-                    int indexLongitude = cursor.getColumnIndex("longitude");
 
                     do {
-                        cgList list = new cgList(false);
-
-                        list.id = (cursor.getInt(indexId)) + 10;
-                        list.title = cursor.getString(indexTitle);
+                        cgList list = new cgList(cursor.getInt(indexId) + 10, cursor.getString(indexTitle));
                         list.updated = cursor.getLong(indexUpdated);
-                        list.coords = getCoords(cursor, indexLatitude, indexLongitude);
 
                         result.add(list);
                     } while (cursor.moveToNext());
@@ -3182,10 +3176,10 @@ public class cgData {
     }
 
     public cgList getList(int id, Resources res) {
-        if (id == 1) {
-            return new cgList(true, 1, res.getString(R.string.list_inbox));
+        if (id == cgList.STANDARD_LIST_ID) {
+            return new cgList(cgList.STANDARD_LIST_ID, res.getString(R.string.list_inbox));
         } else if (id == 2) {
-            return new cgList(true, 2, res.getString(R.string.list_wpt));
+            return new cgList(2, res.getString(R.string.list_wpt));
         } else if (id >= 10) {
             init();
 

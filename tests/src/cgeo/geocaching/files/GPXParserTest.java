@@ -181,7 +181,7 @@ public class GPXParserTest extends InstrumentationTestCase {
         assertEquals(new File("/mnt/sdcard/1-wpts.gpx"), GPXParser.getWaypointsFileForGpx(new File("/mnt/sdcard/1.gpx")));
         assertEquals(new File("/mnt/sd.card/1-wpts.gpx"), GPXParser.getWaypointsFileForGpx(new File("/mnt/sd.card/1.gpx")));
         assertEquals(new File("1234567.9-wpts.gpx"), GPXParser.getWaypointsFileForGpx(new File("1234567.9.gpx")));
-        assertEquals(new File("1234567-wpts.GPX"), GPXParser.getWaypointsFileForGpx(new File("1234567.GPX")));
+        assertEquals(new File("1234567-wpts.gpx"), GPXParser.getWaypointsFileForGpx(new File("1234567.GPX")));
         assertEquals(new File("gpx.gpx-wpts.gpx"), GPXParser.getWaypointsFileForGpx(new File("gpx.gpx.gpx")));
         assertNull(GPXParser.getWaypointsFileForGpx(new File("123.gpy")));
         assertNull(GPXParser.getWaypointsFileForGpx(new File("gpx")));

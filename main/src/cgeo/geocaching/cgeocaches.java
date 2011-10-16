@@ -590,7 +590,7 @@ public class cgeocaches extends AbstractListActivity {
             case OFFLINE:
                 listId = Settings.getLastList();
                 if (listId <= 0) {
-                    listId = 1;
+                    listId = cgList.STANDARD_LIST_ID;
                     title = res.getString(R.string.caches_stored);
                 } else {
                     final cgList list = app.getList(listId);

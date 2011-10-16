@@ -292,6 +292,16 @@
 				<action android:name="cgeo.geocaching.CGEOSELMAP"/>
 			</intent-filter>
 		</activity>
+		<activity android:name=".cgeogpxes"
+		          android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:mimeType="text/xml" />
+                <data android:mimeType="application/xml" />
+            </intent-filter>
+		</activity>
         <provider android:name="cgeo.geocaching.apps.LocusDataStorageProvider" 
             android:authorities="cgeo.geocaching.apps.locusdatastorageprovider" />
 	</application>
