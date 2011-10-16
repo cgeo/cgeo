@@ -1,8 +1,8 @@
 package cgeo.geocaching.maps;
 
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.Settings.mapSourceEnum;
+import cgeo.geocaching.cgBase;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -19,6 +19,9 @@ import android.graphics.Typeface;
 import android.util.DisplayMetrics;
 
 public class ScaleOverlay implements GeneralOverlay {
+
+    private static final double SCALE_WIDTH_FACTOR = 1.0 / 2.5;
+
     private Paint scale = null;
     private Paint scaleShadow = null;
     private BlurMaskFilter blur = null;
@@ -41,24 +44,26 @@ public class ScaleOverlay implements GeneralOverlay {
     @Override
     public void drawOverlayBitmap(Canvas canvas, Point drawPosition,
             MapProjectionImpl projection, byte drawZoomLevel) {
-        // Scale overlay is only necessary for google maps, so the mapsforge
-        // related draw method needs not to be filled.
+        drawInternal(canvas, getOverlayImpl().getMapViewImpl());
     }
 
     @Override
     public void draw(Canvas canvas, MapViewImpl mapView, boolean shadow) {
-        //super.draw(canvas, mapView, shadow);
+        drawInternal(canvas, mapView);
+    }
+
+    private void drawInternal(Canvas canvas, MapViewImpl mapView) {
 
         final double span = mapView.getLongitudeSpan() / 1e6;
         final GeoPointImpl center = mapView.getMapViewCenter();
 
-        pixels = mapView.getWidth() / 2.0; // pixels related to following latitude span
+        pixels = mapView.getWidth() * SCALE_WIDTH_FACTOR; // pixels related to following latitude span
         bottom = mapView.getHeight() - 14; // pixels from bottom side of screen
 
         final Geopoint leftCoords = new Geopoint(center.getLatitudeE6() / 1e6, center.getLongitudeE6() / 1e6 - span / 2);
         final Geopoint rightCoords = new Geopoint(center.getLatitudeE6() / 1e6, center.getLongitudeE6() / 1e6 + span / 2);
 
-        distance = leftCoords.distanceTo(rightCoords) / 2;
+        distance = leftCoords.distanceTo(rightCoords) * SCALE_WIDTH_FACTOR;
         distanceRound = 0d;
 
         if (Settings.isUseMetricUnits()) {

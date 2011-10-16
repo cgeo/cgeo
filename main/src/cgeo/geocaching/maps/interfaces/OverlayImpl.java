@@ -18,4 +18,5 @@ public interface OverlayImpl {
 
     void unlock();
 
+    MapViewImpl getMapViewImpl();
 }
