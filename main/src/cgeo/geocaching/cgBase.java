@@ -939,27 +939,29 @@ public class cgBase {
             }
         }
 
-        // get ratings
-        if (guids.size() > 0) {
-            Log.i(Settings.tag, "Trying to get ratings for " + cids.size() + " caches");
+        if (Settings.isAdditionalDetails()) {
+            // get ratings
+            if (guids.size() > 0) {
+                Log.i(Settings.tag, "Trying to get ratings for " + cids.size() + " caches");
 
-            try {
-                final Map<String, cgRating> ratings = GCVote.getRating(guids, null);
+                try {
+                    final Map<String, cgRating> ratings = GCVote.getRating(guids, null);
 
-                if (MapUtils.isNotEmpty(ratings)) {
-                    // save found cache coordinates
-                    for (cgCache oneCache : caches.cacheList) {
-                        if (ratings.containsKey(oneCache.guid)) {
-                            cgRating thisRating = ratings.get(oneCache.guid);
+                    if (MapUtils.isNotEmpty(ratings)) {
+                        // save found cache coordinates
+                        for (cgCache oneCache : caches.cacheList) {
+                            if (ratings.containsKey(oneCache.guid)) {
+                                cgRating thisRating = ratings.get(oneCache.guid);
 
-                            oneCache.rating = thisRating.rating;
-                            oneCache.votes = thisRating.votes;
-                            oneCache.myVote = thisRating.myVote;
+                                oneCache.rating = thisRating.rating;
+                                oneCache.votes = thisRating.votes;
+                                oneCache.myVote = thisRating.myVote;
+                            }
                         }
                     }
+                } catch (Exception e) {
+                    Log.e(Settings.tag, "cgBase.parseSearch.GCvote: " + e.toString());
                 }
-            } catch (Exception e) {
-                Log.e(Settings.tag, "cgBase.parseSearch.GCvote: " + e.toString());
             }
         }
 

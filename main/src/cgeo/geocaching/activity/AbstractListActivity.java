@@ -73,8 +73,6 @@ public abstract class AbstractListActivity extends ListActivity implements
         app = (cgeoapplication) this.getApplication();
         prefs = getSharedPreferences(Settings.preferences, Context.MODE_PRIVATE);
         base = new cgBase(app);
-
-        Settings.setLanguage(Settings.isUseEnglish());
     }
 
     final public void setTitle(final String title) {
