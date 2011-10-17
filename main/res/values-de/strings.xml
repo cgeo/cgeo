@@ -304,7 +304,7 @@
   <string name="caches_filter_type_title">Wähle den Typ</string>
   <string name="caches_filter_type_traditional">Traditional-Cache</string>
   <string name="caches_filter_type_multi">Multi-Cache</string>
-  <string name="caches_filter_type_mystery">Unknown-Cache</string>
+  <string name="caches_filter_type_mystery">Mystery-Cache</string>
   <string name="caches_filter_type_letterbox">Letterbox Hybrid</string>
   <string name="caches_filter_type_event">Event-Cache</string>
   <string name="caches_filter_type_mega">Mega Event-Cache</string>
