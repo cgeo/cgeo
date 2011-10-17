@@ -3175,7 +3175,6 @@ public class cgBase {
             gcIcons.put("type_earth", R.drawable.type_earth);
             gcIcons.put("type_event", R.drawable.type_event);
             gcIcons.put("type_letterbox", R.drawable.type_letterbox);
-            gcIcons.put("type_locationless", R.drawable.type_locationless);
             gcIcons.put("type_mega", R.drawable.type_mega);
             gcIcons.put("type_multi", R.drawable.type_multi);
             gcIcons.put("type_traditional", R.drawable.type_traditional);
@@ -3190,7 +3189,6 @@ public class cgBase {
             gcIcons.put(CacheType.EARTH.id, R.drawable.marker_cache_earth);
             gcIcons.put(CacheType.EVENT.id, R.drawable.marker_cache_event);
             gcIcons.put(CacheType.LETTERBOX.id, R.drawable.marker_cache_letterbox);
-            gcIcons.put("locationless", R.drawable.marker_cache_locationless);
             gcIcons.put(CacheType.MEGA_EVENT.id, R.drawable.marker_cache_mega);
             gcIcons.put(CacheType.MULTI.id, R.drawable.marker_cache_multi);
             gcIcons.put(CacheType.TRADITIONAL.id, R.drawable.marker_cache_traditional);
@@ -3205,7 +3203,6 @@ public class cgBase {
             gcIcons.put("earth-own", R.drawable.marker_cache_earth_own);
             gcIcons.put("event-own", R.drawable.marker_cache_event_own);
             gcIcons.put("letterbox-own", R.drawable.marker_cache_letterbox_own);
-            gcIcons.put("locationless-own", R.drawable.marker_cache_locationless_own);
             gcIcons.put("mega-own", R.drawable.marker_cache_mega_own);
             gcIcons.put("multi-own", R.drawable.marker_cache_multi_own);
             gcIcons.put("traditional-own", R.drawable.marker_cache_traditional_own);
@@ -3220,7 +3217,6 @@ public class cgBase {
             gcIcons.put("earth-found", R.drawable.marker_cache_earth_found);
             gcIcons.put("event-found", R.drawable.marker_cache_event_found);
             gcIcons.put("letterbox-found", R.drawable.marker_cache_letterbox_found);
-            gcIcons.put("locationless-found", R.drawable.marker_cache_locationless_found);
             gcIcons.put("mega-found", R.drawable.marker_cache_mega_found);
             gcIcons.put("multi-found", R.drawable.marker_cache_multi_found);
             gcIcons.put("traditional-found", R.drawable.marker_cache_traditional_found);
@@ -3235,7 +3231,6 @@ public class cgBase {
             gcIcons.put("earth-disabled", R.drawable.marker_cache_earth_disabled);
             gcIcons.put("event-disabled", R.drawable.marker_cache_event_disabled);
             gcIcons.put("letterbox-disabled", R.drawable.marker_cache_letterbox_disabled);
-            gcIcons.put("locationless-disabled", R.drawable.marker_cache_locationless_disabled);
             gcIcons.put("mega-disabled", R.drawable.marker_cache_mega_disabled);
             gcIcons.put("multi-disabled", R.drawable.marker_cache_multi_disabled);
             gcIcons.put("traditional-disabled", R.drawable.marker_cache_traditional_disabled);
