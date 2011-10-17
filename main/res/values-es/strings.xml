@@ -293,21 +293,6 @@
   <string name="caches_filter_clear">limpiar filtros</string>
   <string name="caches_filter_size_title">Indica tamaño</string>
   <string name="caches_filter_type_title">Indica tipo</string>
-  <string name="caches_filter_type_traditional">Tradicional cache</string>
-  <string name="caches_filter_type_multi">Multi</string>
-  <string name="caches_filter_type_mystery">Desconocido</string>
-  <string name="caches_filter_type_letterbox">Buzón híbrido</string>
-  <string name="caches_filter_type_event">Evento</string>
-  <string name="caches_filter_type_mega">Mega-evento</string>
-  <string name="caches_filter_type_earth">Educativos (Earth)</string>
-  <string name="caches_filter_type_cito">Limpieza de escondites</string>
-  <string name="caches_filter_type_webcam">Webcam</string>
-  <string name="caches_filter_type_virtual">Virtual</string>
-  <string name="caches_filter_type_wherigo">Wherigo</string>
-  <string name="caches_filter_type_lostfound">Perdido y Encontrado</string>
-  <string name="caches_filter_type_ape">Projecto APE</string>
-  <string name="caches_filter_type_gchq">Groundspeak HQ</string>
-  <string name="caches_filter_type_gps">GPS Cache exhibit</string>
   <string name="caches_exporting_fieldnote">Exportando como Notas de campo…</string>
   <string name="caches_removing_from_history">Borrando del historial…</string>
   

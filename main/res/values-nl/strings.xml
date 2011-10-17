@@ -303,21 +303,6 @@
   <string name="caches_filter_clear">maak filters leeg</string>
   <string name="caches_filter_size_title">Kies grootte</string>
   <string name="caches_filter_type_title">Kies type</string>
-  <string name="caches_filter_type_traditional">Traditional cache</string>
-  <string name="caches_filter_type_multi">Multi-cache</string>
-  <string name="caches_filter_type_mystery">Unknown cache</string>
-  <string name="caches_filter_type_letterbox">Letterbox Hybrid</string>
-  <string name="caches_filter_type_event">Event cache</string>
-  <string name="caches_filter_type_mega">Mega-event cache</string>
-  <string name="caches_filter_type_earth">Earth cache</string>
-  <string name="caches_filter_type_cito">Cache In Trash Out event</string>
-  <string name="caches_filter_type_webcam">Webcam cache</string>
-  <string name="caches_filter_type_virtual">Virtual cache</string>
-  <string name="caches_filter_type_wherigo">Wherigo cache</string>
-  <string name="caches_filter_type_lostfound">Lost &amp; Found</string>
-  <string name="caches_filter_type_ape">Project APE cache</string>
-  <string name="caches_filter_type_gchq">Groundspeak HQ</string>
-  <string name="caches_filter_type_gps">GPS Cache exhibit</string>
   <string name="caches_exporting_fieldnote">Exporteer als Field Notes…</string>
   <string name="caches_removing_from_history">Verwijderen uit geschiedenis…</string>
 

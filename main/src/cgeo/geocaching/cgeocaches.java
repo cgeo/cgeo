@@ -1129,21 +1129,21 @@ public class cgeocaches extends AbstractListActivity {
                 menu.add(0, MENU_FILTER_SIZE_NOT_CHOSEN, 0, res.getString(CacheSize.NOT_CHOSEN.stringId));
             } else if (selectedFilter.equals(res.getString(R.string.caches_filter_type))) {
                 menu.setHeaderTitle(res.getString(R.string.caches_filter_type_title));
-                menu.add(0, MENU_FILTER_TYPE_TRADITIONAL, 0, res.getString(R.string.caches_filter_type_traditional));
-                menu.add(0, MENU_FILTER_TYPE_MULTI, 0, res.getString(R.string.caches_filter_type_multi));
-                menu.add(0, MENU_FILTER_TYPE_MYSTERY, 0, res.getString(R.string.caches_filter_type_mystery));
-                menu.add(0, MENU_FILTER_TYPE_LETTERBOX, 0, res.getString(R.string.caches_filter_type_letterbox));
-                menu.add(0, MENU_FILTER_TYPE_EVENT, 0, res.getString(R.string.caches_filter_type_event));
-                menu.add(0, MENU_FILTER_TYPE_MEGA, 0, res.getString(R.string.caches_filter_type_mega));
-                menu.add(0, MENU_FILTER_TYPE_EARTH, 0, res.getString(R.string.caches_filter_type_earth));
-                menu.add(0, MENU_FILTER_TYPE_CITO, 0, res.getString(R.string.caches_filter_type_cito));
-                menu.add(0, MENU_FILTER_TYPE_WEBCAM, 0, res.getString(R.string.caches_filter_type_webcam));
-                menu.add(0, MENU_FILTER_TYPE_VIRTUAL, 0, res.getString(R.string.caches_filter_type_virtual));
-                menu.add(0, MENU_FILTER_TYPE_WHERIGO, 0, res.getString(R.string.caches_filter_type_wherigo));
-                menu.add(0, MENU_FILTER_TYPE_LOSTFOUND, 0, res.getString(R.string.caches_filter_type_lostfound));
-                menu.add(0, MENU_FILTER_TYPE_APE, 0, res.getString(R.string.caches_filter_type_ape));
-                menu.add(0, MENU_FILTER_TYPE_GCHQ, 0, res.getString(R.string.caches_filter_type_gchq));
-                menu.add(0, MENU_FILTER_TYPE_GPS, 0, res.getString(R.string.caches_filter_type_gps));
+                menu.add(0, MENU_FILTER_TYPE_TRADITIONAL, 0, res.getString(CacheType.TRADITIONAL.stringId));
+                menu.add(0, MENU_FILTER_TYPE_MULTI, 0, res.getString(CacheType.MULTI.stringId));
+                menu.add(0, MENU_FILTER_TYPE_MYSTERY, 0, res.getString(CacheType.MYSTERY.stringId));
+                menu.add(0, MENU_FILTER_TYPE_LETTERBOX, 0, res.getString(CacheType.LETTERBOX.stringId));
+                menu.add(0, MENU_FILTER_TYPE_EVENT, 0, res.getString(CacheType.EVENT.stringId));
+                menu.add(0, MENU_FILTER_TYPE_MEGA, 0, res.getString(CacheType.MEGA_EVENT.stringId));
+                menu.add(0, MENU_FILTER_TYPE_EARTH, 0, res.getString(CacheType.EARTH.stringId));
+                menu.add(0, MENU_FILTER_TYPE_CITO, 0, res.getString(CacheType.CITO.stringId));
+                menu.add(0, MENU_FILTER_TYPE_WEBCAM, 0, res.getString(CacheType.WEBCAM.stringId));
+                menu.add(0, MENU_FILTER_TYPE_VIRTUAL, 0, res.getString(CacheType.VIRTUAL.stringId));
+                menu.add(0, MENU_FILTER_TYPE_WHERIGO, 0, res.getString(CacheType.WHERIGO.stringId));
+                menu.add(0, MENU_FILTER_TYPE_LOSTFOUND, 0, res.getString(CacheType.LOSTANDFOUND.stringId));
+                menu.add(0, MENU_FILTER_TYPE_APE, 0, res.getString(CacheType.PROJECT_APE.stringId));
+                menu.add(0, MENU_FILTER_TYPE_GCHQ, 0, res.getString(CacheType.GCHQ.stringId));
+                menu.add(0, MENU_FILTER_TYPE_GPS, 0, res.getString(CacheType.GPS_EXHIBIT.stringId));
             }
         } else {
             if (adapterInfo.position >= adapter.getCount()) {

@@ -300,21 +300,6 @@
   <string name="caches_filter_clear">szűrők törlése</string>
   <string name="caches_filter_size_title">Válassz méretet</string>
   <string name="caches_filter_type_title">Válassz típust</string>
-  <string name="caches_filter_type_traditional">Hagyományos láda</string>
-  <string name="caches_filter_type_multi">Multi-láda</string>
-  <string name="caches_filter_type_mystery">Rejtvény láda</string>
-  <string name="caches_filter_type_letterbox">Postaláda hibrid</string>
-  <string name="caches_filter_type_event">Esemény láda</string>
-  <string name="caches_filter_type_mega">Mega-esemény láda</string>
-  <string name="caches_filter_type_earth">Earth cache</string>
-  <string name="caches_filter_type_cito">CITO esemény</string>
-  <string name="caches_filter_type_webcam">Webkamera láda</string>
-  <string name="caches_filter_type_virtual">Virtuális láda</string>
-  <string name="caches_filter_type_wherigo">Wherigo láda</string>
-  <string name="caches_filter_type_lostfound">Elveszett &amp; Megtalált</string>
-  <string name="caches_filter_type_ape">Project APE láda</string>
-  <string name="caches_filter_type_gchq">Groundspeak székház</string>
-  <string name="caches_filter_type_gps">GPS láda kiállítás</string>
   <string name="caches_exporting_fieldnote">Exportálás terepjegyzetként…</string>
   <string name="caches_removing_from_history">Eltávolítás a Előzményekből…</string>
 

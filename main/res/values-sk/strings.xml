@@ -303,21 +303,6 @@
   <string name="caches_filter_clear">vymazať filtre</string>
   <string name="caches_filter_size_title">Výber veľkosti</string>
   <string name="caches_filter_type_title">Výber typu</string>
-  <string name="caches_filter_type_traditional">Tradičné skrýše</string>
-  <string name="caches_filter_type_multi">Multi skrýše</string>
-  <string name="caches_filter_type_mystery">Neznáme skrýše</string>
-  <string name="caches_filter_type_letterbox">Hybridné veľkosti listu</string>
-  <string name="caches_filter_type_event">Skrýše udalosti</string>
-  <string name="caches_filter_type_mega">Skrýše megaudalostí</string>
-  <string name="caches_filter_type_earth">Zemské skrýše</string>
-  <string name="caches_filter_type_cito">Skrýše v udalosti košov</string>
-  <string name="caches_filter_type_webcam">Skrýše web kamier</string>
-  <string name="caches_filter_type_virtual">Virtuálne skrýše</string>
-  <string name="caches_filter_type_wherigo">Wherigo skrýše</string>
-  <string name="caches_filter_type_lostfound">Straty a nálezy</string>
-  <string name="caches_filter_type_ape">Skrýše projektu APE</string>
-  <string name="caches_filter_type_gchq">Centrála Groundspeak</string>
-  <string name="caches_filter_type_gps">Skrýša výstavy GPS</string>
   <string name="caches_exporting_fieldnote">Exportovanie ako poznámky…</string>
   <string name="caches_removing_from_history">Odstraňovanie z histórie…</string>
 
