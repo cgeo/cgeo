@@ -80,7 +80,7 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
             listId = cgList.STANDARD_LIST_ID;
         }
 
-        if (getIntent().getScheme().equals("content")) {
+        if ("content".equals(getIntent().getScheme())) {
             new AlertDialog.Builder(this)
                     .setTitle(res.getString(R.string.gpx_import_title))
                     .setMessage(res.getString(R.string.gpx_import_confirm))
