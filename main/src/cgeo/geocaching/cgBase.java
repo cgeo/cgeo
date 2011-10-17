@@ -685,7 +685,10 @@ public class cgBase {
                 final Matcher matcherCode = patternCode.matcher(row);
                 while (matcherCode.find()) {
                     if (matcherCode.groupCount() > 0) {
-                        cache.geocode = matcherCode.group(1).toUpperCase();
+                        // The String constructor is necessary as long as the pattern matching doesn't use the
+                        // methods from BaseUtil. Otherwise every geocode holds the complete page in memory
+                        // FIXME: Use BaseUtil for parsing
+                        cache.geocode = new String(matcherCode.group(1).toUpperCase().trim());
                     }
                 }
             } catch (Exception e) {
@@ -1609,7 +1612,8 @@ public class cgBase {
 
         if (matcher.find())
         {
-            Settings.setGcCustomDate(matcher.group(1));
+            // FIXME: Use BaseUtils for pattern matching to avoid huge Strings
+            Settings.setGcCustomDate(new String(matcher.group(1).trim()));
         }
     }
 
