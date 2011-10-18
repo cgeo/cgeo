@@ -111,29 +111,29 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
 
     public void testParseLocationWithLink() {
         cgCacheWrap caches = base.parseCache(MockedCache.readCachePage("GCV2R9"), 0, null);
+        assertEquals(1, caches.cacheList.size());
         cgCache cache = caches.cacheList.get(0);
         Assert.assertEquals("California, United States", cache.getLocation());
     }
 
     public void testSearchTrackable() {
         cgTrackable tb = base.searchTrackable("TB2J1VZ", null, null);
-        Assert.assertEquals("aefffb86-099f-444f-b132-605436163aa8", tb.getGuid());
-        Assert.assertEquals("TB2J1VZ", tb.getGeocode());
-        Assert.assertEquals("http://www.geocaching.com/images/wpttypes/21.gif", tb.getIconUrl());
-        Assert.assertEquals("blafoo's Children Music CD", tb.getName());
-        Assert.assertEquals("Travel Bug Dog Tag", tb.getType());
-        Assert.assertEquals(new Date(2009 - 1900, 8 - 1, 24), tb.getReleased());
-        Assert.assertEquals(10617.8f, tb.getDistance());
-        Assert.assertEquals("Niedersachsen, Germany", tb.getOrigin());
-        Assert.assertEquals("blafoo", tb.getOwner());
-        Assert.assertEquals("0564a940-8311-40ee-8e76-7e91b2cf6284", tb.getOwnerGuid());
-        Assert.assertEquals("Nice place for a break cache", tb.getSpottedName());
-        Assert.assertEquals(cgTrackable.SPOTTED_CACHE, tb.getSpottedType());
-        Assert.assertEquals("faa2d47d-19ea-422f-bec8-318fc82c8063", tb.getSpottedGuid());
-        Assert.assertEquals("Kinder erfreuen.<br/><br/>Make children happy.", tb.getGoal());
-        Assert.assertTrue(tb.getDetails().startsWith("Auf der CD sind"));
-        Assert.assertEquals("http://img.geocaching.com/track/display/38382780-87a7-4393-8393-78841678ee8c.jpg", tb.getImage());
-        Assert.assertEquals(10, tb.getLogs().size());
+        assertEquals("aefffb86-099f-444f-b132-605436163aa8", tb.getGuid());
+        assertEquals("TB2J1VZ", tb.getGeocode());
+        assertEquals("http://www.geocaching.com/images/wpttypes/21.gif", tb.getIconUrl());
+        assertEquals("blafoo's Children Music CD", tb.getName());
+        assertEquals("Travel Bug Dog Tag", tb.getType());
+        assertEquals(new Date(2009 - 1900, 8 - 1, 24), tb.getReleased());
+        assertEquals(10617.8f, tb.getDistance());
+        assertEquals("Niedersachsen, Germany", tb.getOrigin());
+        assertEquals("blafoo", tb.getOwner());
+        assertEquals("0564a940-8311-40ee-8e76-7e91b2cf6284", tb.getOwnerGuid());
+        assertEquals("Nice place for a break cache", tb.getSpottedName());
+        assertEquals(cgTrackable.SPOTTED_CACHE, tb.getSpottedType());
+        assertEquals("faa2d47d-19ea-422f-bec8-318fc82c8063", tb.getSpottedGuid());
+        assertEquals("Kinder erfreuen.<br/><br/>Make children happy.", tb.getGoal());
+        assertTrue(tb.getDetails().startsWith("Auf der CD sind"));
+        assertEquals("http://img.geocaching.com/track/display/38382780-87a7-4393-8393-78841678ee8c.jpg", tb.getImage());
+        assertEquals(10, tb.getLogs().size());
     }
-
 }

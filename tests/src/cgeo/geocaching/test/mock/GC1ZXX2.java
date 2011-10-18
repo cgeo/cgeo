@@ -36,7 +36,7 @@ public class GC1ZXX2 extends MockedCache {
 
     @Override
     public String getOwner() {
-        return "Rich Uncle Pennybags ";
+        return "Rich Uncle Pennybags";
     }
 
     @Override

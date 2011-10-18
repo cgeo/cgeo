@@ -63,6 +63,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -175,35 +176,7 @@ public class cgBase {
 
     public static final int UPDATE_LOAD_PROGRESS_DETAIL = 42186;
 
-    public cgBase(cgeoapplication appIn) {
-        context = appIn.getBaseContext();
-        res = appIn.getBaseContext().getResources();
-
-        // setup cache type mappings
-
-        final String CACHETYPE_ALL_GUID = "9a79e6ce-3344-409c-bbe9-496530baf758";
-
-        cacheIDs.put("all", CACHETYPE_ALL_GUID);
-        cacheIDsChoices.put(res.getString(R.string.all), CACHETYPE_ALL_GUID);
-
-        for (CacheType ct : CacheType.values()) {
-            String l10n = res.getString(ct.stringId);
-            cacheTypesInv.put(ct.id, l10n);
-            cacheIDsChoices.put(l10n, ct.guid);
-        }
-
-        for (CacheSize cs : CacheSize.values()) {
-            cacheSizesInv.put(cs, res.getString(cs.stringId));
-        }
-
-        // waypoint types
-        for (WaypointType wt : WaypointType.values()) {
-            if (wt != WaypointType.OWN) {
-                waypointTypes.put(wt, res.getString(wt.stringId));
-            }
-        }
-
-        // log types
+    static {
         logTypes.put("icon_smile", LOG_FOUND_IT);
         logTypes.put("icon_sad", LOG_DIDNT_FIND_IT);
         logTypes.put("icon_note", LOG_NOTE);
@@ -247,6 +220,37 @@ public class cgBase {
         logTypes0.put("visit", LOG_VISIT); // unknown ID; used number doesn't match any GC.com's ID
         logTypes0.put("webcam photo taken", LOG_WEBCAM_PHOTO_TAKEN); // unknown ID; used number doesn't match any GC.com's ID
         logTypes0.put("announcement", LOG_ANNOUNCEMENT); // unknown ID; used number doesn't match any GC.com's ID
+    }
+
+    public cgBase(cgeoapplication appIn) {
+        context = appIn.getBaseContext();
+        res = appIn.getBaseContext().getResources();
+
+        // setup cache type mappings
+
+        final String CACHETYPE_ALL_GUID = "9a79e6ce-3344-409c-bbe9-496530baf758";
+
+        cacheIDs.put("all", CACHETYPE_ALL_GUID);
+        cacheIDsChoices.put(res.getString(R.string.all), CACHETYPE_ALL_GUID);
+
+        for (CacheType ct : CacheType.values()) {
+            String l10n = res.getString(ct.stringId);
+            cacheTypesInv.put(ct.id, l10n);
+            cacheIDsChoices.put(l10n, ct.guid);
+        }
+
+        for (CacheSize cs : CacheSize.values()) {
+            cacheSizesInv.put(cs, res.getString(cs.stringId));
+        }
+
+        // waypoint types
+        for (WaypointType wt : WaypointType.values()) {
+            if (wt != WaypointType.OWN) {
+                waypointTypes.put(wt, res.getString(wt.stringId));
+            }
+        }
+
+        // log types
 
         logTypes1.put(LOG_FOUND_IT, res.getString(R.string.log_found));
         logTypes1.put(LOG_DIDNT_FIND_IT, res.getString(R.string.log_dnf));
@@ -336,9 +340,9 @@ public class cgBase {
         return message.replaceAll(passMatch, "password=***");
     }
 
-    public void sendLoadProgressDetail(final Handler handler, final int str) {
+    public static void sendLoadProgressDetail(final Handler handler, final int str) {
         if (null != handler) {
-            handler.obtainMessage(UPDATE_LOAD_PROGRESS_DETAIL, res.getString(str)).sendToTarget();
+            handler.obtainMessage(UPDATE_LOAD_PROGRESS_DETAIL, cgeoapplication.getInstance().getString(str)).sendToTarget();
         }
     }
 
@@ -996,7 +1000,7 @@ public class cgBase {
         return caches;
     }
 
-    public cgCacheWrap parseCache(final String page, final int reason, final Handler handler) {
+    public static cgCacheWrap parseCache(final String page, final int reason, final Handler handler) {
         sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_details);
 
         if (StringUtils.isBlank(page)) {
@@ -1045,8 +1049,7 @@ public class cgBase {
         cache.name = Html.fromHtml(BaseUtils.getMatch(page, GCConstants.PATTERN_NAME, true, cache.name)).toString();
 
         // owner real name
-        // was cache.ownerReal = URLDecoder.decode(BaseUtils.getMatch(page, Constants.PATTERN_OWNERREAL, 1, cache.ownerReal));
-        cache.ownerReal = BaseUtils.getMatch(page, GCConstants.PATTERN_OWNERREAL, true, cache.ownerReal);
+        cache.ownerReal = URLDecoder.decode(BaseUtils.getMatch(page, GCConstants.PATTERN_OWNERREAL, true, cache.ownerReal));
 
         final String username = Settings.getUsername();
         if (cache.ownerReal != null && username != null && cache.ownerReal.equalsIgnoreCase(username)) {
@@ -1086,7 +1089,7 @@ public class cgBase {
             }
 
             // owner
-            cache.owner = Html.fromHtml(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_OWNER, false, cache.owner)).toString();
+            cache.owner = Html.fromHtml(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_OWNER, true, cache.owner)).toString();
 
             // hidden
             try {
