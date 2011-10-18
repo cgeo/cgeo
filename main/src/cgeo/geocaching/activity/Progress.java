@@ -13,8 +13,8 @@ public class Progress {
     public static void dismiss() {
         if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();
-            dialog = null;
         }
+        dialog = null;
     }
 
     public static void show(Context context, String title, String message, boolean indeterminate, boolean cancelable) {
