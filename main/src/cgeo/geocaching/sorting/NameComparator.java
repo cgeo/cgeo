@@ -4,13 +4,16 @@ import cgeo.geocaching.cgCache;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * sorts caches by name
  *
  */
 public class NameComparator extends AbstractCacheComparator {
+
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
     @Override
     protected boolean canCompare(cgCache cache1, cgCache cache2) {
@@ -27,12 +30,20 @@ public class NameComparator extends AbstractCacheComparator {
             if (remaining1.length() > 0 && Character.isDigit(remaining1.charAt(0))) {
                 final String remaining2 = cache2.name.substring(prefix.length()).trim();
                 if (remaining2.length() > 0 && Character.isDigit(remaining2.charAt(0))) {
-                    final Integer number1 = (new Scanner(remaining1)).nextInt();
-                    final Integer number2 = (new Scanner(remaining2)).nextInt();
+                    final Integer number1 = getNumber(remaining1);
+                    final Integer number2 = getNumber(remaining2);
                     return number1.compareTo(number2);
                 }
             }
         }
         return cache1.name.compareToIgnoreCase(cache2.name);
+    }
+
+    private static Integer getNumber(final String string) {
+        Matcher matcher = NUMBER_PATTERN.matcher(string);
+        if (matcher.find()) {
+            return Integer.valueOf(matcher.group());
+        }
+        return 0;
     }
 }
