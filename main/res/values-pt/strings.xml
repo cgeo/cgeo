@@ -73,7 +73,7 @@
   <string name="log_taken">Visita</string>
   <string name="log_tb_nothing">Não fazer nada</string>
   <string name="log_tb_visit">Visita</string>
-  <string name="log_tb_drop">Passei aqui</string>
+  <string name="log_tb_drop">Deixei aqui</string>
   <string name="log_tb_changeall">Alterar todos</string>
   <string name="log_save">Gravar</string>
   <string name="log_saving">A gravar o log…</string>
