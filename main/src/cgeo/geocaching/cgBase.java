@@ -692,9 +692,14 @@ public class cgBase {
             String inventoryPre = null;
 
             // GC* code
+            // FIXME: most of the blocks below cannot raise any exception
             try {
                 final Matcher matcherCode = patternCode.matcher(row);
+                // FIXME: what are those while loops that can erase the previous values? This should either be fixed
+                // or documented here.
                 while (matcherCode.find()) {
+                    // FIXME: here, and probably below, a find necessarily has a group count > 0 as the first group
+                    // is not optional.
                     if (matcherCode.groupCount() > 0) {
                         // The String constructor is necessary as long as the pattern matching doesn't use the
                         // methods from BaseUtil. Otherwise every geocode holds the complete page in memory
