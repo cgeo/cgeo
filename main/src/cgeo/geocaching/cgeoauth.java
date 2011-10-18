@@ -127,7 +127,7 @@ public class cgeoauth extends AbstractActivity {
     }
 
     private void requestToken() {
-        final String host = "twitter.com";
+        final String host = "api.twitter.com";
         final String pathRequest = "/oauth/request_token";
         final String pathAuthorize = "/oauth/authorize";
         final String method = "GET";
@@ -175,7 +175,7 @@ public class cgeoauth extends AbstractActivity {
     }
 
     private void changeToken() {
-        final String host = "twitter.com";
+        final String host = "api.twitter.com";
         final String path = "/oauth/access_token";
         final String method = "POST";
 
