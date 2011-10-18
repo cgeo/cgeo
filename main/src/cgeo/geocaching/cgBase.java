@@ -2872,7 +2872,12 @@ public class cgBase {
             final long before = System.currentTimeMillis();
             try {
                 final HttpResponse response = client.execute(request);
-                Log.d(Settings.tag, response.getStatusLine().getStatusCode() + formatTimeSpan(before) + reqLogStr);
+                int status = response.getStatusLine().getStatusCode();
+                if (status == 200) {
+                    Log.d(Settings.tag, status + formatTimeSpan(before) + reqLogStr);
+                } else {
+                    Log.w(Settings.tag, status + " [" + response.getStatusLine().getReasonPhrase() + "]" + formatTimeSpan(before) + reqLogStr);
+                }
                 return response;
             } catch (IOException e) {
                 final String timeSpan = formatTimeSpan(before);
