@@ -386,7 +386,7 @@ public class cgBase {
     /**
      * put viewstates into request parameters
      */
-    private static void setViewstates(final String[] viewstates, final Parameters params) {
+    private static void putViewstates(final Parameters params, final String[] viewstates) {
         if (ArrayUtils.isEmpty(viewstates)) {
             return;
         }
@@ -404,7 +404,7 @@ public class cgBase {
      * (next request)
      */
     public static void transferViewstates(final String page, final Parameters params) {
-        setViewstates(getViewstates(page), params);
+        putViewstates(params, getViewstates(page));
     }
 
     /**
@@ -447,6 +447,13 @@ public class cgBase {
 
         loginResponse = request("https://www.geocaching.com/login/default.aspx", null, false, false, false);
         loginData = getResponseData(loginResponse);
+        viewstates = getViewstates(loginData);
+
+        if (isEmpty(viewstates)) {
+            Log.e(Settings.tag, "cgeoBase.login: Failed to find viewstates");
+            return StatusCode.LOGIN_PARSE_ERROR; // no viewstates
+        }
+
         if (StringUtils.isNotBlank(loginData)) {
             if (checkLogin(loginData)) {
                 Log.i(Settings.tag, "Already logged in Geocaching.com as " + loginStart.left);
@@ -456,12 +463,6 @@ public class cgBase {
                 return StatusCode.NO_ERROR; // logged in
             }
 
-            viewstates = getViewstates(loginData);
-
-            if (isEmpty(viewstates)) {
-                Log.e(Settings.tag, "cgeoBase.login: Failed to find viewstates");
-                return StatusCode.LOGIN_PARSE_ERROR; // no viewstates
-            }
         } else {
             Log.e(Settings.tag, "cgeoBase.login: Failed to retrieve login page (1st)");
             return StatusCode.CONNECTION_FAILED; // no loginpage
@@ -483,7 +484,7 @@ public class cgBase {
                 "ctl00$ContentBody$tbPassword", login.right,
                 "ctl00$ContentBody$cbRememberMe", "on",
                 "ctl00$ContentBody$btnSignIn", "Login");
-        setViewstates(viewstates, params);
+        putViewstates(params, viewstates);
 
         loginResponse = postRequest("https://www.geocaching.com/login/default.aspx", params);
         loginData = getResponseData(loginResponse);
@@ -538,7 +539,7 @@ public class cgBase {
         final Parameters params = new Parameters(
                 "__EVENTTARGET", "ctl00$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem", // switch to english
                 "__EVENTARGUMENT", "");
-        setViewstates(viewstates, params);
+        putViewstates(params, viewstates);
 
         final HttpResponse response = postRequest("http://www.geocaching.com/default.aspx", params);
         if (!isSuccess(response)) {
@@ -2016,7 +2017,7 @@ public class cgBase {
         final Parameters params = new Parameters(
                 "__EVENTTARGET", "ctl00$ContentBody$pgrBottom$ctl08",
                 "__EVENTARGUMENT", "");
-        setViewstates(viewstates, params);
+        putViewstates(params, viewstates);
 
         String page = getResponseData(postRequest(uri, params));
         if (!checkLogin(page)) {
@@ -2411,7 +2412,7 @@ public class cgBase {
                 "ctl00$ContentBody$LogBookPanel1$uxLogInfo", logInfo,
                 "ctl00$ContentBody$LogBookPanel1$LogButton", "Submit Log Entry",
                 "ctl00$ContentBody$uxVistOtherListingGC", "");
-        setViewstates(viewstates, params);
+        putViewstates(params, viewstates);
         if (CollectionUtils.isNotEmpty(trackables)) { //  we have some trackables to proceed
             final StringBuilder hdnSelected = new StringBuilder();
 
@@ -2458,7 +2459,7 @@ public class cgBase {
                 }
 
                 params.clear();
-                setViewstates(viewstatesConfirm, params);
+                putViewstates(params, viewstatesConfirm);
                 params.put("__EVENTTARGET", "");
                 params.put("__EVENTARGUMENT", "");
                 params.put("__LASTFOCUS", "");
@@ -2543,7 +2544,7 @@ public class cgBase {
                 "__LASTFOCUS", "",
                 "ctl00$ContentBody$LogBookPanel1$ddLogType", Integer.toString(logType),
                 "ctl00$ContentBody$LogBookPanel1$tbCode", trackingCode);
-        setViewstates(viewstates, params);
+        putViewstates(params, viewstates);
         if (currentDate.get(Calendar.YEAR) == year && (currentDate.get(Calendar.MONTH) + 1) == month && currentDate.get(Calendar.DATE) == day) {
             params.put("ctl00$ContentBody$LogBookPanel1$DateTimeLogged", "");
         } else {
