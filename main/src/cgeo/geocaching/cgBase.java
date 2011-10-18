@@ -458,7 +458,7 @@ public class cgBase {
             if (checkLogin(loginData)) {
                 Log.i(Settings.tag, "Already logged in Geocaching.com as " + loginStart.left);
 
-                switchToEnglish(viewstates);
+                switchToEnglish();
 
                 return StatusCode.NO_ERROR; // logged in
             }
@@ -493,7 +493,7 @@ public class cgBase {
             if (checkLogin(loginData)) {
                 Log.i(Settings.tag, "Successfully logged in Geocaching.com as " + login.left);
 
-                switchToEnglish(getViewstates(loginData));
+                switchToEnglish();
 
                 return StatusCode.NO_ERROR; // logged in
             } else {
@@ -535,12 +535,15 @@ public class cgBase {
         return false;
     }
 
-    public static void switchToEnglish(final String[] viewstates) {
+    public static void switchToEnglish() {
+        final String page = getResponseData(request("http://www.geocaching.com/default.aspx", null, false));
+        if (page == null) {
+            Log.e(Settings.tag, "Failed to read viewstates to set geocaching.com language");
+        }
         final Parameters params = new Parameters(
                 "__EVENTTARGET", "ctl00$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem", // switch to english
                 "__EVENTARGUMENT", "");
-        putViewstates(params, viewstates);
-
+        transferViewstates(page, params);
         final HttpResponse response = postRequest("http://www.geocaching.com/default.aspx", params);
         if (!isSuccess(response)) {
             Log.e(Settings.tag, "Failed to set geocaching.com language to English");
