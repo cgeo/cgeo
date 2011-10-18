@@ -534,13 +534,16 @@ public class cgBase {
         return false;
     }
 
-    public static String switchToEnglish(final String[] viewstates) {
+    public static void switchToEnglish(final String[] viewstates) {
         final Parameters params = new Parameters(
                 "__EVENTTARGET", "ctl00$uxLocaleList$uxLocaleList$ctl00$uxLocaleItem", // switch to english
                 "__EVENTARGUMENT", "");
         setViewstates(viewstates, params);
 
-        return cgBase.getResponseData(postRequest("http://www.geocaching.com/default.aspx", params));
+        final HttpResponse response = postRequest("http://www.geocaching.com/default.aspx", params);
+        if (!isSuccess(response)) {
+            Log.e(Settings.tag, "Failed to set geocaching.com language to English");
+        }
     }
 
     public static cgCacheWrap parseSearch(final cgSearchThread thread, final String url, String page, final boolean showCaptcha) {
@@ -2742,7 +2745,7 @@ public class cgBase {
     }
 
     static public String getResponseData(final HttpResponse response) {
-        if (response == null) {
+        if (!isSuccess(response)) {
             return null;
         }
         try {
@@ -2853,6 +2856,10 @@ public class cgBase {
 
     static private String formatTimeSpan(final long before) {
         return String.format(" (%d ms) ", System.currentTimeMillis() - before);
+    }
+
+    static public boolean isSuccess(final HttpResponse response) {
+        return response != null && response.getStatusLine().getStatusCode() == 200;
     }
 
     static public HttpResponse doRequest(final HttpRequestBase request) {
