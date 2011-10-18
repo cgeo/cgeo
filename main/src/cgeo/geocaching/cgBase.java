@@ -2848,8 +2848,8 @@ public class cgBase {
 
     private static HttpResponse request(final HttpRequestBase request) {
         if (Settings.isBrowser()) {
-            request.setHeader("Accept-Charset", "utf-8, iso-8859-1, utf-16, *;q=0.7");
-            request.setHeader("Accept-Language", "en-US");
+            request.setHeader("Accept-Charset", "utf-8,iso-8859-1;q=0.8,utf-16;q=0.8,*;q=0.7");
+            request.setHeader("Accept-Language", "en-US,*;q=0.9");
             request.getParams().setParameter(CoreProtocolPNames.USER_AGENT, idBrowser);
         }
         return doRequest(request);
