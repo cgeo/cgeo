@@ -172,4 +172,10 @@ public interface ICache {
      */
     public Map<Integer, Integer> getLogCounts();
 
+    /**
+     * get the name for lexicographical sorting.
+     * 
+     * @return normalized, cached name which sort also correct for numerical parts in the name
+     */
+    public String getNameForSorting();
 }

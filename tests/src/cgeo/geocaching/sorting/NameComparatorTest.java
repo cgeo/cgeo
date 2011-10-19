@@ -29,7 +29,12 @@ public class NameComparatorTest extends AndroidTestCase {
     public void testNumericalNamePart() {
         assertSorted(new NamedCache("AHR#2"), new NamedCache("AHR#11"));
         assertSorted(new NamedCache("AHR#7 LP"), new NamedCache("AHR#11 Bonsaibuche"));
-        assertNotSorted(new NamedCache("2"), new NamedCache("11")); // there is no common prefix, therefore sort alphabetical
+        assertSorted(new NamedCache("2"), new NamedCache("11"));
+    }
+
+    public void testNumericalWithSuffix() {
+        assertSorted(new NamedCache("abc123def"), new NamedCache("abc123xyz"));
+        assertEquals("abc000123def456", (new NamedCache("abc123def456")).getNameForSorting());
     }
 
     private void assertSorted(final cgCache cache1, final cgCache cache2) {

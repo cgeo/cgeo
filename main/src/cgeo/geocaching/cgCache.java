@@ -85,7 +85,9 @@ public class cgCache implements ICache {
     public boolean statusChecked = false;
     public boolean statusCheckedView = false;
     public String directionImg = null;
+    private String nameForSorting;
 
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
     /**
      * Gather missing information from another cache object.
      *
@@ -562,4 +564,17 @@ public class cgCache implements ICache {
         return favouriteCnt;
     }
 
+    @Override
+    public String getNameForSorting() {
+        if (null == nameForSorting) {
+            final Matcher matcher = NUMBER_PATTERN.matcher(name);
+            if (matcher.find()) {
+                nameForSorting = name.replace(matcher.group(), StringUtils.leftPad(matcher.group(), 6, '0'));
+            }
+            else {
+                nameForSorting = name;
+            }
+        }
+        return nameForSorting;
+    }
 }

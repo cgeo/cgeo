@@ -133,4 +133,8 @@ public abstract class MockedCache implements ICache {
         return null;
     }
 
+    @Override
+    public String getNameForSorting() {
+        return getName();
+    }
 }
