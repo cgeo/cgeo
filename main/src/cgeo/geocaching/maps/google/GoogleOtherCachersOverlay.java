@@ -106,4 +106,9 @@ public class GoogleOtherCachersOverlay extends ItemizedOverlay<GoogleOtherCacher
         lock.unlock();
     }
 
+    @Override
+    public MapViewImpl getMapViewImpl() {
+        throw new UnsupportedOperationException();
+    }
+
 }

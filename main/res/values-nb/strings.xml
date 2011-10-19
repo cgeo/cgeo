@@ -107,9 +107,6 @@
   <string name="err_detail_cache_forgot_visit">Beklager, c:geo glemte hvilken cache du fant.</string>
   <string name="err_detail_no_spoiler">c:geo fant ingen bilder for denne cachen.</string>
   <string name="err_detail_no_map_static">c:geo fant ingen statiske kart for denne cachen.</string>
-  <string name="err_detail_still_removing">c:geo holder fortsatt på med å slette denne cachen.</string>
-  <string name="err_detail_still_saving">c:geo holder fortsatt på med å lagre denne cachen.</string>
-  <string name="err_detail_still_refreshing">c:geo holder fortsatt på med å laste inn denne cachen på nytt.</string>
   <string name="err_navigation_no">c:geo klarte ikke å finne støttet navigasjon.</string>
   <string name="err_application_no">c:geo klarte ikke å finne en passende applikasjon.</string>
   <string name="err_auth_initialize">Beklager, c:geo klarte ikke å igangsette autoriserings-prosessen.</string>

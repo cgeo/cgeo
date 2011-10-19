@@ -113,9 +113,6 @@
   <string name="err_detail_no_spoiler">このキャッシュのスポイラー画像を見つけることができませんでした。</string>
   <string name="err_detail_no_map_static">このキャッシュのオフライン地図を見つけることができませんでした。</string>
   <string name="err_detail_not_load_map_static">オフライン地図のロードに失敗しました。</string>
-  <string name="err_detail_still_removing">このキャッシュはまだ削除中です。</string>
-  <string name="err_detail_still_saving">このキャッシュはまだ保存中です。</string>
-  <string name="err_detail_still_refreshing">このキャッシュはまだ更新中です。</string>
   <string name="err_navigation_no">使用できるナビゲーションが見つかりません。</string>
   <string name="err_application_no">適切なアプリケーションが見つかりません。</string>
   <string name="err_auth_initialize">認証プロセスの初期化に失敗しました。</string>

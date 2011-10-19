@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.maps.CGeoMap;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -242,12 +243,7 @@ public class cgeonavigate extends AbstractActivity {
         int id = item.getItemId();
 
         if (id == 0) {
-            Intent mapIntent = new Intent(this, Settings.getMapFactory().getMapClass());
-            mapIntent.putExtra("detail", false);
-            mapIntent.putExtra("latitude", dstCoords.getLatitude());
-            mapIntent.putExtra("longitude", dstCoords.getLongitude());
-
-            startActivity(mapIntent);
+            CGeoMap.startActivityCoords(this, dstCoords, null);
         } else if (id == 1) {
             boolean oldSetting = Settings.isUseCompass();
             Settings.setUseCompass(!oldSetting);

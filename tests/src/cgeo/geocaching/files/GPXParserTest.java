@@ -5,6 +5,7 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgLog;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.test.R;
@@ -36,7 +37,7 @@ public class GPXParserTest extends InstrumentationTestCase {
         final cgCache cache = caches.get(0);
         assertEquals("GC1BKP3", cache.geocode);
         assertEquals("9946f030-a514-46d8-a050-a60e92fd2e1a", cache.guid);
-        assertEquals("traditional", cache.type);
+        assertEquals(CacheType.TRADITIONAL.id, cache.type);
         assertEquals(false, cache.archived);
         assertEquals(false, cache.disabled);
         assertEquals("Die Schatzinsel / treasure island", cache.name);
@@ -60,7 +61,7 @@ public class GPXParserTest extends InstrumentationTestCase {
         final List<cgCache> caches = readGPX(R.raw.oc5952_gpx);
         final cgCache cache = caches.get(0);
         assertEquals("OC5952", cache.geocode);
-        assertEquals("traditional", cache.type);
+        assertEquals(CacheType.TRADITIONAL.id, cache.type);
         assertEquals(false, cache.archived);
         assertEquals(false, cache.disabled);
         assertEquals("Die Schatzinsel / treasure island", cache.name);
@@ -180,7 +181,7 @@ public class GPXParserTest extends InstrumentationTestCase {
         assertEquals(new File("/mnt/sdcard/1-wpts.gpx"), GPXParser.getWaypointsFileForGpx(new File("/mnt/sdcard/1.gpx")));
         assertEquals(new File("/mnt/sd.card/1-wpts.gpx"), GPXParser.getWaypointsFileForGpx(new File("/mnt/sd.card/1.gpx")));
         assertEquals(new File("1234567.9-wpts.gpx"), GPXParser.getWaypointsFileForGpx(new File("1234567.9.gpx")));
-        assertEquals(new File("1234567-wpts.GPX"), GPXParser.getWaypointsFileForGpx(new File("1234567.GPX")));
+        assertEquals(new File("1234567-wpts.gpx"), GPXParser.getWaypointsFileForGpx(new File("1234567.GPX")));
         assertEquals(new File("gpx.gpx-wpts.gpx"), GPXParser.getWaypointsFileForGpx(new File("gpx.gpx.gpx")));
         assertNull(GPXParser.getWaypointsFileForGpx(new File("123.gpy")));
         assertNull(GPXParser.getWaypointsFileForGpx(new File("gpx")));

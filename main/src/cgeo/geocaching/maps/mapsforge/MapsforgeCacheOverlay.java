@@ -107,4 +107,9 @@ public class MapsforgeCacheOverlay extends ItemizedOverlay<MapsforgeCacheOverlay
         lock.unlock();
     }
 
+    @Override
+    public MapViewImpl getMapViewImpl() {
+        return (MapViewImpl) internalMapView;
+    }
+
 }

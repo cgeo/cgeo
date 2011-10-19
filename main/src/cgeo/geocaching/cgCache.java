@@ -4,6 +4,7 @@ import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -84,7 +85,9 @@ public class cgCache implements ICache {
     public boolean statusChecked = false;
     public boolean statusCheckedView = false;
     public String directionImg = null;
+    private String nameForSorting;
 
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
     /**
      * Gather missing information from another cache object.
      *
@@ -262,7 +265,8 @@ public class cgCache implements ICache {
     }
 
     public boolean isEventCache() {
-        return "event".equalsIgnoreCase(type) || "mega".equalsIgnoreCase(type) || "cito".equalsIgnoreCase(type);
+        return CacheType.EVENT.id.equalsIgnoreCase(type) || CacheType.MEGA_EVENT.id.equalsIgnoreCase(type)
+                || CacheType.CITO.id.equalsIgnoreCase(type) || CacheType.LOSTANDFOUND.id.equalsIgnoreCase(type);
     }
 
     public boolean logVisit(IAbstractActivity fromActivity) {
@@ -309,7 +313,7 @@ public class cgCache implements ICache {
     public List<Integer> getPossibleLogTypes() {
         boolean isOwner = owner != null && owner.equalsIgnoreCase(Settings.getUsername());
         List<Integer> types = new ArrayList<Integer>();
-        if ("event".equals(type) || "mega".equals(type) || "cito".equals(type) || "lostfound".equals(type)) {
+        if (isEventCache()) {
             types.add(cgBase.LOG_WILL_ATTEND);
             types.add(cgBase.LOG_NOTE);
             types.add(cgBase.LOG_ATTENDED);
@@ -317,7 +321,7 @@ public class cgCache implements ICache {
             if (isOwner) {
                 types.add(cgBase.LOG_ANNOUNCEMENT);
             }
-        } else if ("webcam".equals(type)) {
+        } else if (CacheType.WEBCAM.id.equals(type)) {
             types.add(cgBase.LOG_WEBCAM_PHOTO_TAKEN);
             types.add(cgBase.LOG_DIDNT_FIND_IT);
             types.add(cgBase.LOG_NOTE);
@@ -515,4 +519,62 @@ public class cgCache implements ICache {
         this.description = description;
     }
 
+    @Override
+    public boolean isFound() {
+        return found;
+    }
+
+    @Override
+    public boolean isFavorite() {
+        return favourite;
+    }
+
+    @Override
+    public boolean isWatchlist() {
+        return onWatchlist;
+    }
+
+    @Override
+    public Date getHiddenDate() {
+        return hidden;
+    }
+
+    @Override
+    public List<String> getAttributes() {
+        return attributes;
+    }
+
+    @Override
+    public List<cgTrackable> getInventory() {
+        return inventory;
+    }
+
+    @Override
+    public List<cgImage> getSpoilers() {
+        return spoilers;
+    }
+
+    @Override
+    public Map<Integer, Integer> getLogCounts() {
+        return logCounts;
+    }
+
+    @Override
+    public Integer getFavoritePoints() {
+        return favouriteCnt;
+    }
+
+    @Override
+    public String getNameForSorting() {
+        if (null == nameForSorting) {
+            final Matcher matcher = NUMBER_PATTERN.matcher(name);
+            if (matcher.find()) {
+                nameForSorting = name.replace(matcher.group(), StringUtils.leftPad(matcher.group(), 6, '0'));
+            }
+            else {
+                nameForSorting = name;
+            }
+        }
+        return nameForSorting;
+    }
 }

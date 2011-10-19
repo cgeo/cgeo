@@ -22,7 +22,7 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
     public String note = "";
     private Integer cachedOrder = null;
 
-    public void setIcon(Resources res, cgBase base, TextView nameView) {
+    public void setIcon(final Resources res, final TextView nameView) {
         nameView.setCompoundDrawablesWithIntrinsicBounds(res.getDrawable(type.drawableId), null, null, null);
     }
 

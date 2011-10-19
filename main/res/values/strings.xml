@@ -22,7 +22,7 @@
   <string name="all_types">All cache types</string>
   <string name="traditional">Traditional cache</string>
   <string name="multi">Multi-cache</string>
-  <string name="mystery">Unknown cache</string>
+  <string name="mystery">Mystery cache</string>
   <string name="letterbox">Letterbox hybrid</string>
   <string name="event">Event cache</string>
   <string name="mega">Mega-event cache</string>
@@ -35,6 +35,7 @@
   <string name="ape">Project ape cache</string>
   <string name="gchq">Groundspeak hq</string>
   <string name="gps">GPS cache exhibit</string>
+  <string name="unknown">Unknown cache</string>
 
   <!-- cache sizes -->
   <string name="cache_size_micro">micro</string>
@@ -303,21 +304,6 @@
   <string name="caches_filter_clear">clear filters</string>
   <string name="caches_filter_size_title">Choose size</string>
   <string name="caches_filter_type_title">Choose type</string>
-  <string name="caches_filter_type_traditional">Traditional cache</string>
-  <string name="caches_filter_type_multi">Multi-cache</string>
-  <string name="caches_filter_type_mystery">Unknown cache</string>
-  <string name="caches_filter_type_letterbox">Letterbox Hybrid</string>
-  <string name="caches_filter_type_event">Event cache</string>
-  <string name="caches_filter_type_mega">Mega-event cache</string>
-  <string name="caches_filter_type_earth">Earth cache</string>
-  <string name="caches_filter_type_cito">Cache In Trash Out event</string>
-  <string name="caches_filter_type_webcam">Webcam cache</string>
-  <string name="caches_filter_type_virtual">Virtual cache</string>
-  <string name="caches_filter_type_wherigo">Wherigo cache</string>
-  <string name="caches_filter_type_lostfound">Lost &amp; Found</string>
-  <string name="caches_filter_type_ape">Project APE cache</string>
-  <string name="caches_filter_type_gchq">Groundspeak HQ</string>
-  <string name="caches_filter_type_gps">GPS Cache exhibit</string>
   <string name="caches_exporting_fieldnote">Exporting as Field Notes…</string>
   <string name="caches_removing_from_history">Removing from history…</string>
 
@@ -583,6 +569,7 @@
   <string name="gpx_import_title">Import GPX</string>
   <string name="gpx_import_title_reading_file">Reading file</string>
   <string name="gpx_import_title_caches_imported">Result</string>
+  <string name="gpx_import_confirm">Do you want to import the GPX file into c:geo?</string>
 
   <!-- map file select -->
   <string name="map_file_select_title">Select map file</string>

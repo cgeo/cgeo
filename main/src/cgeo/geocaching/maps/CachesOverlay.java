@@ -7,6 +7,7 @@ import cgeo.geocaching.cgeodetail;
 import cgeo.geocaching.cgeonavigate;
 import cgeo.geocaching.cgeopopup;
 import cgeo.geocaching.cgeowaypoint;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
@@ -155,7 +156,7 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
                     int radius = center.x - left.x;
 
                     final String type = item.getType();
-                    if (type == null || "multi".equals(type) || "mystery".equals(type) || "virtual".equals(type)) {
+                    if (type == null || CacheType.MULTI.id.equals(type) || CacheType.MYSTERY.id.equals(type) || CacheType.VIRTUAL.id.equals(type)) {
                         blockedCircle.setColor(0x66000000);
                         blockedCircle.setStyle(Style.STROKE);
                         canvas.drawCircle(center.x, center.y, radius, blockedCircle);
@@ -279,7 +280,7 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
                 if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec)) {
                     cacheType = cgBase.cacheTypesInv.get(coordinate.typeSpec);
                 } else {
-                    cacheType = cgBase.cacheTypesInv.get("mystery");
+                    cacheType = cgBase.cacheTypesInv.get(CacheType.MYSTERY.id);
                 }
 
                 dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ngeocode: " + coordinate.geocode.toUpperCase() + "\ntype: " + cacheType);

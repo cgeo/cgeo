@@ -17,6 +17,6 @@ public class NameComparator extends AbstractCacheComparator {
 
     @Override
     protected int compareCaches(cgCache cache1, cgCache cache2) {
-        return cache1.name.compareToIgnoreCase(cache2.name);
+        return cache1.getNameForSorting().compareToIgnoreCase(cache2.getNameForSorting());
     }
 }

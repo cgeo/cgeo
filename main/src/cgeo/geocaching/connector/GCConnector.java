@@ -81,7 +81,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
             return null;
         }
 
-        base.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
+        cgBase.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
 
         final String page = cgBase.requestLogged("http://www.geocaching.com/seek/cache_details.aspx", params, false, false, false);
 
@@ -109,7 +109,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
             return null;
         }
 
-        final cgCacheWrap caches = base.parseCache(page, reason, handler);
+        final cgCacheWrap caches = cgBase.parseCache(page, reason, handler);
 
         if (caches == null || CollectionUtils.isEmpty(caches.cacheList)) {
             if (caches != null && caches.error != null) {

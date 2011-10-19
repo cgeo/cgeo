@@ -10,17 +10,19 @@ public class ProgressTest extends ActivityInstrumentationTestCase2<cgeo> {
     }
 
     public void testProgressWrapper() {
-        assertFalse(Progress.isShowing()); // nothing shown initially
+        final Progress progress = new Progress();
 
-        Progress.show(getActivity(), "Title", "Message", true, false);
-        assertTrue(Progress.isShowing());
+        assertFalse(progress.isShowing()); // nothing shown initially
 
-        Progress.setMessage("Test");
-        assertTrue(Progress.isShowing());
+        progress.show(getActivity(), "Title", "Message", true, false);
+        assertTrue(progress.isShowing());
+
+        progress.setMessage("Test");
+        assertTrue(progress.isShowing());
 
         for (int i = 0; i < 2; i++) { // fault tolerant when dismissing to often
-            Progress.dismiss();
-            assertFalse(Progress.isShowing());
+            progress.dismiss();
+            assertFalse(progress.isShowing());
         }
     }
 }

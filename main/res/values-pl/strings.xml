@@ -135,9 +135,6 @@
   <string name="err_detail_no_spoiler">c:geo nie znalazł zdjęcia spoilera dla tej skrzynki.</string>
   <string name="err_detail_no_map_static">c:geo nie znalazł mapki statycznej dla tej skrzynki.</string>
   <string name="err_detail_not_load_map_static">Przepraszam, c:geo nie mógł załadować statycznej mapki.</string>
-  <string name="err_detail_still_removing">Kasuje nadal skrzynkę.</string>
-  <string name="err_detail_still_saving">Zapisuje nadal skrzynkę.</string>
-  <string name="err_detail_still_refreshing">Nadal ładuje skrzynkę.</string>
   <string name="err_watchlist_still_managing">Nadal pracuję nad listą obserwowanych.</string>
   <string name="err_watchlist_failed">c:geo nie mógł zmienić listy obserwowanych.</string>
   <string name="err_navigation_no">c:geo nie znalazł żadnych wsparć do nawigacji.</string>
@@ -292,21 +289,6 @@
   <string name="caches_filter_clear">wykasój filter</string>
   <string name="caches_filter_size_title">Wybierz wielkość</string>
   <string name="caches_filter_type_title">Wybierz typ</string>
-  <string name="caches_filter_type_traditional">tradycyjna</string>
-  <string name="caches_filter_type_multi">wieloetapowa</string>
-  <string name="caches_filter_type_mystery">zagadkowa</string>
-  <string name="caches_filter_type_letterbox">Letterbox Hybrydowa</string>
-  <string name="caches_filter_type_event">wydarzeniowa</string>
-  <string name="caches_filter_type_mega">Mega-wydarzeniowa</string>
-  <string name="caches_filter_type_earth">Earthcache</string>
-  <string name="caches_filter_type_cito">CITO</string>
-  <string name="caches_filter_type_webcam">webcam</string>
-  <string name="caches_filter_type_virtual">wirtualna</string>
-  <string name="caches_filter_type_wherigo">Wherigo</string>
-  <string name="caches_filter_type_lostfound">Lost &amp; Found</string>
-  <string name="caches_filter_type_ape">Project APE</string>
-  <string name="caches_filter_type_gchq">Groundspeak HQ</string>
-  <string name="caches_filter_type_gps">GPS Cache wystawa</string>
   <string name="caches_exporting_fieldnote">Eksportuj jako notatki terenowe…</string>
   <string name="caches_removing_from_history">Kasuję z historii…</string>
 

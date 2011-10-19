@@ -93,23 +93,23 @@ public class GeopointParser
         final Matcher matcher = pattern.matcher(text);
 
         if (matcher.find()) {
-            final int sign = matcher.group(1).equalsIgnoreCase("S") || matcher.group(1).equalsIgnoreCase("W") ? -1 : 1;
-            final int degree = Integer.parseInt(matcher.group(2));
+            final double sign = matcher.group(1).equalsIgnoreCase("S") || matcher.group(1).equalsIgnoreCase("W") ? -1.0 : 1.0;
+            final double degree = Integer.valueOf(matcher.group(2)).doubleValue();
 
-            int minutes = 0;
-            double seconds = 0;
+            double minutes = 0.0;
+            double seconds = 0.0;
 
             if (null != matcher.group(3)) {
-                minutes = Integer.parseInt(matcher.group(3));
+                minutes = Integer.valueOf(matcher.group(3)).doubleValue();
 
                 if (null != matcher.group(4)) {
-                    seconds = Double.parseDouble("0." + matcher.group(4)) * 60;
+                    seconds = Double.parseDouble("0." + matcher.group(4)) * 60.0;
                 } else if (null != matcher.group(5)) {
                     seconds = Double.parseDouble(matcher.group(5));
                 }
             }
 
-            return (double) sign * ((double) degree + (double) minutes / 60 + seconds / 3600);
+            return sign * (degree + minutes / 60.0 + seconds / 3600.0);
 
         } else {
 

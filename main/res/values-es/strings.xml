@@ -135,9 +135,6 @@
   <string name="err_detail_no_spoiler">c:geo no ha encontrado imágenes/pista para este escondite.</string>
   <string name="err_detail_no_map_static">c:geo no ha encontrado mapas estáticos para este escondite.</string>
   <string name="err_detail_not_load_map_static">Lo siento, c:geo no ha podido cargar mapas estáticos.</string>
-  <string name="err_detail_still_removing">Seguir borrando este escondite.</string>
-  <string name="err_detail_still_saving">Seguir guardando este escondite.</string>
-  <string name="err_detail_still_refreshing">Seguir recargando este escondite.</string>
   <string name="err_watchlist_still_managing">Seguir gestionando tu lista de seguimiento.</string>
   <string name="err_watchlist_failed">Error al cambiar la lista de seguimiento.</string>
   <string name="err_navigation_no">c:geo no encuentra ninguna navegación soportada.</string>
@@ -296,21 +293,6 @@
   <string name="caches_filter_clear">limpiar filtros</string>
   <string name="caches_filter_size_title">Indica tamaño</string>
   <string name="caches_filter_type_title">Indica tipo</string>
-  <string name="caches_filter_type_traditional">Tradicional cache</string>
-  <string name="caches_filter_type_multi">Multi</string>
-  <string name="caches_filter_type_mystery">Desconocido</string>
-  <string name="caches_filter_type_letterbox">Buzón híbrido</string>
-  <string name="caches_filter_type_event">Evento</string>
-  <string name="caches_filter_type_mega">Mega-evento</string>
-  <string name="caches_filter_type_earth">Educativos (Earth)</string>
-  <string name="caches_filter_type_cito">Limpieza de escondites</string>
-  <string name="caches_filter_type_webcam">Webcam</string>
-  <string name="caches_filter_type_virtual">Virtual</string>
-  <string name="caches_filter_type_wherigo">Wherigo</string>
-  <string name="caches_filter_type_lostfound">Perdido y Encontrado</string>
-  <string name="caches_filter_type_ape">Projecto APE</string>
-  <string name="caches_filter_type_gchq">Groundspeak HQ</string>
-  <string name="caches_filter_type_gps">GPS Cache exhibit</string>
   <string name="caches_exporting_fieldnote">Exportando como Notas de campo…</string>
   <string name="caches_removing_from_history">Borrando del historial…</string>
   

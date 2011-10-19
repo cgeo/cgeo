@@ -43,7 +43,6 @@ public class cgData {
             "favourite_cnt", "rating", "votes", "myvote", "disabled", "archived", "members", "found", "favourite", "inventorycoins", "inventorytags",
             "inventoryunknown", "onWatchlist", "personal_note", "reliable_latlon"
     };
-    public cgCacheWrap caches;
     private Context context = null;
     private String path = null;
     private cgDbHelper dbHelper = null;
@@ -1756,11 +1755,11 @@ public class cgData {
                 if (cnt > 0) {
                     cursor.moveToFirst();
 
-                    viewport.add((Integer) cursor.getInt(cursor.getColumnIndex("cnt")));
-                    viewport.add((Double) cursor.getDouble(cursor.getColumnIndex("latMin")));
-                    viewport.add((Double) cursor.getDouble(cursor.getColumnIndex("latMax")));
-                    viewport.add((Double) cursor.getDouble(cursor.getColumnIndex("lonMin")));
-                    viewport.add((Double) cursor.getDouble(cursor.getColumnIndex("lonMax")));
+                    viewport.add(cursor.getInt(cursor.getColumnIndex("cnt")));
+                    viewport.add(cursor.getDouble(cursor.getColumnIndex("latMin")));
+                    viewport.add(cursor.getDouble(cursor.getColumnIndex("latMax")));
+                    viewport.add(cursor.getDouble(cursor.getColumnIndex("lonMin")));
+                    viewport.add(cursor.getDouble(cursor.getColumnIndex("lonMax")));
                 }
             }
         } catch (Exception e) {
@@ -2040,8 +2039,8 @@ public class cgData {
         cache.updated = cursor.getLong(cursor.getColumnIndex("updated"));
         cache.reason = cursor.getInt(cursor.getColumnIndex("reason"));
         cache.detailed = cursor.getInt(cursor.getColumnIndex("detailed")) == 1;
-        cache.detailedUpdate = (Long) cursor.getLong(cursor.getColumnIndex("detailedupdate"));
-        cache.visitedDate = (Long) cursor.getLong(cursor.getColumnIndex("visiteddate"));
+        cache.detailedUpdate = cursor.getLong(cursor.getColumnIndex("detailedupdate"));
+        cache.visitedDate = cursor.getLong(cursor.getColumnIndex("visiteddate"));
         cache.geocode = cursor.getString(cursor.getColumnIndex("geocode"));
         cache.cacheId = cursor.getString(cursor.getColumnIndex("cacheid"));
         cache.guid = cursor.getString(cursor.getColumnIndex("guid"));
@@ -2053,7 +2052,7 @@ public class cgData {
         cache.hidden = new Date(cursor.getLong(cursor.getColumnIndex("hidden")));
         cache.hint = cursor.getString(cursor.getColumnIndex("hint"));
         cache.size = CacheSize.FIND_BY_ID.get(cursor.getString(cursor.getColumnIndex("size")));
-        cache.difficulty = (Float) cursor.getFloat(cursor.getColumnIndex("difficulty"));
+        cache.difficulty = cursor.getFloat(cursor.getColumnIndex("difficulty"));
         index = cursor.getColumnIndex("direction");
         if (cursor.isNull(index)) {
             cache.direction = null;
@@ -2066,7 +2065,7 @@ public class cgData {
         } else {
             cache.distance = cursor.getFloat(index);
         }
-        cache.terrain = (Float) cursor.getFloat(cursor.getColumnIndex("terrain"));
+        cache.terrain = cursor.getFloat(cursor.getColumnIndex("terrain"));
         cache.latlon = cursor.getString(cursor.getColumnIndex("latlon"));
         cache.location = cursor.getString(cursor.getColumnIndex("location"));
         cache.coords = getCoords(cursor);
@@ -2074,22 +2073,22 @@ public class cgData {
         if (cursor.isNull(index)) {
             cache.elevation = null;
         } else {
-            cache.elevation = (Double) cursor.getDouble(index);
+            cache.elevation = cursor.getDouble(index);
         }
         cache.personalNote = cursor.getString(cursor.getColumnIndex("personal_note"));
         cache.shortdesc = cursor.getString(cursor.getColumnIndex("shortdesc"));
         // do not set cache.description !
-        cache.favouriteCnt = (Integer) cursor.getInt(cursor.getColumnIndex("favourite_cnt"));
-        cache.rating = (Float) cursor.getFloat(cursor.getColumnIndex("rating"));
-        cache.votes = (Integer) cursor.getInt(cursor.getColumnIndex("votes"));
-        cache.myVote = (Float) cursor.getFloat(cursor.getColumnIndex("myvote"));
-        cache.disabled = cursor.getLong(cursor.getColumnIndex("disabled")) == 1l;
-        cache.archived = cursor.getLong(cursor.getColumnIndex("archived")) == 1l;
-        cache.members = cursor.getLong(cursor.getColumnIndex("members")) == 1l;
-        cache.found = cursor.getLong(cursor.getColumnIndex("found")) == 1l;
-        cache.favourite = cursor.getLong(cursor.getColumnIndex("favourite")) == 1l;
-        cache.inventoryItems = (Integer) cursor.getInt(cursor.getColumnIndex("inventoryunknown"));
-        cache.onWatchlist = cursor.getLong(cursor.getColumnIndex("onWatchlist")) == 1l;
+        cache.favouriteCnt = cursor.getInt(cursor.getColumnIndex("favourite_cnt"));
+        cache.rating = cursor.getFloat(cursor.getColumnIndex("rating"));
+        cache.votes = cursor.getInt(cursor.getColumnIndex("votes"));
+        cache.myVote = cursor.getFloat(cursor.getColumnIndex("myvote"));
+        cache.disabled = cursor.getLong(cursor.getColumnIndex("disabled")) == 1L;
+        cache.archived = cursor.getLong(cursor.getColumnIndex("archived")) == 1L;
+        cache.members = cursor.getLong(cursor.getColumnIndex("members")) == 1L;
+        cache.found = cursor.getLong(cursor.getColumnIndex("found")) == 1L;
+        cache.favourite = cursor.getLong(cursor.getColumnIndex("favourite")) == 1L;
+        cache.inventoryItems = cursor.getInt(cursor.getColumnIndex("inventoryunknown"));
+        cache.onWatchlist = cursor.getLong(cursor.getColumnIndex("onWatchlist")) == 1L;
         cache.reliableLatLon = cursor.getInt(cursor.getColumnIndex("reliable_latlon")) > 0;
         return cache;
     }
@@ -3132,7 +3131,7 @@ public class cgData {
 
         List<cgList> lists = new ArrayList<cgList>();
 
-        lists.add(new cgList(true, 1, res.getString(R.string.list_inbox)));
+        lists.add(new cgList(cgList.STANDARD_LIST_ID, res.getString(R.string.list_inbox)));
         // lists.add(new cgList(true, 2, res.getString(R.string.list_wpt)));
 
         ArrayList<cgList> storedLists = readLists(null, "title COLLATE NOCASE ASC");
@@ -3159,16 +3158,10 @@ public class cgData {
                     int indexId = cursor.getColumnIndex("_id");
                     int indexTitle = cursor.getColumnIndex("title");
                     int indexUpdated = cursor.getColumnIndex("updated");
-                    int indexLatitude = cursor.getColumnIndex("latitude");
-                    int indexLongitude = cursor.getColumnIndex("longitude");
 
                     do {
-                        cgList list = new cgList(false);
-
-                        list.id = (cursor.getInt(indexId)) + 10;
-                        list.title = cursor.getString(indexTitle);
-                        list.updated = (Long) cursor.getLong(indexUpdated);
-                        list.coords = getCoords(cursor, indexLatitude, indexLongitude);
+                        cgList list = new cgList(cursor.getInt(indexId) + 10, cursor.getString(indexTitle));
+                        list.updated = cursor.getLong(indexUpdated);
 
                         result.add(list);
                     } while (cursor.moveToNext());
@@ -3183,10 +3176,10 @@ public class cgData {
     }
 
     public cgList getList(int id, Resources res) {
-        if (id == 1) {
-            return new cgList(true, 1, res.getString(R.string.list_inbox));
+        if (id == cgList.STANDARD_LIST_ID) {
+            return new cgList(cgList.STANDARD_LIST_ID, res.getString(R.string.list_inbox));
         } else if (id == 2) {
-            return new cgList(true, 2, res.getString(R.string.list_wpt));
+            return new cgList(2, res.getString(R.string.list_wpt));
         } else if (id >= 10) {
             init();
 

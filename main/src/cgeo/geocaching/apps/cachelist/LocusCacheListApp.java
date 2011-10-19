@@ -27,10 +27,11 @@ class LocusCacheListApp extends AbstractLocusApp implements CacheListApp {
     @Override
     public boolean invoke(cgGeo geo, List<cgCache> cacheList, Activity activity, Resources res,
             final UUID searchId) {
-        if (CollectionUtils.isEmpty(cacheList))
+        if (CollectionUtils.isEmpty(cacheList)) {
             return false;
+        }
 
-        showInLocus((List<? extends Object>) cacheList, false, activity);
+        showInLocus(cacheList, false, activity);
 
         return true;
     }

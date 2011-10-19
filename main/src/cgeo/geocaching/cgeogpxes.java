@@ -7,7 +7,9 @@ import cgeo.geocaching.files.LocParser;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -15,6 +17,8 @@ import android.os.Handler;
 import android.os.Message;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,7 +48,6 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
     };
 
     final private Handler loadCachesHandler = new Handler() {
-
         @Override
         public void handleMessage(Message msg) {
             if (parseDialog != null) {
@@ -74,9 +77,33 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
             listId = extras.getInt(EXTRAS_LIST_ID);
         }
         if (listId <= 0) {
-            listId = 1;
+            listId = cgList.STANDARD_LIST_ID;
         }
 
+        if ("content".equals(getIntent().getScheme())) {
+            new AlertDialog.Builder(this)
+                    .setTitle(res.getString(R.string.gpx_import_title))
+                    .setMessage(res.getString(R.string.gpx_import_confirm))
+                    .setCancelable(false)
+                    .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            try {
+                                final InputStream attachment = getContentResolver().openInputStream(getIntent().getData());
+                                importGPX(attachment);
+                            } catch (FileNotFoundException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
+                        }
+                    })
+                    .setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    })
+                    .create()
+                    .show();
+        }
     }
 
     @Override
@@ -84,39 +111,65 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
         setTitle(res.getString(R.string.gpx_import_title));
     }
 
-    public void loadGPX(File file) {
+    public void importGPX(final File file) {
+        createProgressDialog((int) file.length());
+        new ImportFileThread(file).start();
+    }
 
+    public void importGPX(final InputStream stream) {
+        createProgressDialog(-1);
+        new ImportStreamThread(stream).start();
+    }
+
+    private void createProgressDialog(int maxBytes) {
         parseDialog = new ProgressDialog(this);
         parseDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         parseDialog.setTitle(res.getString(R.string.gpx_import_title_reading_file));
         parseDialog.setMessage(res.getString(R.string.gpx_import_loading));
         parseDialog.setCancelable(false);
-        parseDialog.setMax((int) file.length());
+        parseDialog.setMax(maxBytes);
         parseDialog.show();
-
-        new loadCaches(file).start();
     }
 
-    private class loadCaches extends Thread {
-
-        File file = null;
-
-        public loadCaches(File fileIn) {
-            file = fileIn;
-        }
+    private abstract class ImportThread extends Thread {
 
         @Override
         public void run() {
-            final UUID searchId;
-            final String name = file.getName().toLowerCase();
-            if (name.endsWith("gpx")) {
-                searchId = GPXParser.parseGPX(file, listId, changeParseDialogHandler);
+            final UUID searchId = doImport();
+            loadCachesHandler.sendMessage(loadCachesHandler.obtainMessage(0, app.getCount(searchId), 0));
+        }
+
+        protected abstract UUID doImport();
+    }
+
+    private class ImportFileThread extends ImportThread {
+        private final File file;
+
+        public ImportFileThread(final File file) {
+            this.file = file;
+        }
+
+        @Override
+        protected UUID doImport() {
+            if (StringUtils.endsWithIgnoreCase(file.getName(), GPXParser.GPX_FILE_EXTENSION)) {
+                return GPXParser.importGPX(file, listId, changeParseDialogHandler);
             }
             else {
-                searchId = LocParser.parseLoc(file, listId, changeParseDialogHandler);
+                return LocParser.parseLoc(file, listId, changeParseDialogHandler);
             }
+        }
+    }
 
-            loadCachesHandler.sendMessage(loadCachesHandler.obtainMessage(0, app.getCount(searchId), 0));
+    private class ImportStreamThread extends ImportThread {
+        private final InputStream stream;
+
+        public ImportStreamThread(InputStream stream) {
+            this.stream = stream;
+        }
+
+        @Override
+        protected UUID doImport() {
+            return GPXParser.importGPX(stream, listId, changeParseDialogHandler);
         }
     }
 
@@ -130,9 +183,8 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
     protected boolean filenameBelongsToList(final String filename) {
         if (super.filenameBelongsToList(filename)) {
             // filter out waypoint files
-            return !StringUtils.endsWithIgnoreCase(filename, "-wpts.gpx");
-        } else {
-            return false;
+            return !StringUtils.endsWithIgnoreCase(filename, GPXParser.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION);
         }
+        return false;
     }
 }
