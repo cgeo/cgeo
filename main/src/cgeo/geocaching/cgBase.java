@@ -26,9 +26,11 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.cookie.Cookie;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.params.BasicHttpParams;
 import org.apache.http.params.CoreConnectionPNames;
 import org.apache.http.params.CoreProtocolPNames;
@@ -468,6 +470,7 @@ public class cgBase {
         }
 
         clearCookies();
+        Settings.setCookieStore(null);
 
         final Parameters params = new Parameters(
                 "__EVENTTARGET", "",
@@ -486,6 +489,7 @@ public class cgBase {
                 Log.i(Settings.tag, "Successfully logged in Geocaching.com as " + login.left);
 
                 switchToEnglish(loginData);
+                Settings.setCookieStore(dumpCookieStore());
 
                 return StatusCode.NO_ERROR; // logged in
             } else {
@@ -2794,32 +2798,54 @@ public class cgBase {
         return request(uri, addFToParams(params, my, addF), xContentType);
     }
 
-    private static HttpParams clientParams;
-    private static CookieStore cookieStore;
+    final private static CookieStore cookieStore = new BasicCookieStore();
+    private static boolean cookieStoreRestored = false;
+    final private static HttpParams clientParams = new BasicHttpParams();
+
+    static {
+        clientParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, HTTP.UTF_8);
+        clientParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
+        clientParams.setParameter(CoreConnectionPNames.SO_TIMEOUT, 30000);
+    }
 
     public static HttpClient getHttpClient() {
-        if (cookieStore == null) {
-            synchronized (cgBase.class) {
-                if (cookieStore == null) {
-                    clientParams = new BasicHttpParams();
-                    clientParams.setParameter(CoreProtocolPNames.HTTP_CONTENT_CHARSET, HTTP.UTF_8);
-                    clientParams.setParameter(CoreConnectionPNames.CONNECTION_TIMEOUT, 30000);
-                    clientParams.setParameter(CoreConnectionPNames.SO_TIMEOUT, 30000);
-                    cookieStore = new BasicCookieStore();
-                }
-            }
-        }
         final DefaultHttpClient client = new DefaultHttpClient();
         client.setCookieStore(cookieStore);
         client.setParams(clientParams);
         return client;
     }
 
-    public static void clearCookies() {
-        if (cookieStore == null) {
-            // If cookie store has not been created yet, force its creation
-            getHttpClient();
+    public static void restoreCookieStore(final String oldCookies) {
+        if (!cookieStoreRestored) {
+            clearCookies();
+            if (oldCookies != null) {
+                for (final String cookie : StringUtils.split(oldCookies, ';')) {
+                    final String[] split = StringUtils.split(cookie, "=", 3);
+                    if (split.length == 3) {
+                        final BasicClientCookie newCookie = new BasicClientCookie(split[0], split[1]);
+                        newCookie.setDomain(split[2]);
+                        cookieStore.addCookie(newCookie);
+                    }
+                }
+            }
+            cookieStoreRestored = true;
         }
+    }
+
+    public static String dumpCookieStore() {
+        StringBuilder cookies = new StringBuilder();
+        for (final Cookie cookie : cookieStore.getCookies()) {
+            cookies.append(cookie.getName());
+            cookies.append('=');
+            cookies.append(cookie.getValue());
+            cookies.append('=');
+            cookies.append(cookie.getDomain());
+            cookies.append(';');
+        }
+        return cookies.toString();
+    }
+
+    public static void clearCookies() {
         cookieStore.clear();
     }
 
