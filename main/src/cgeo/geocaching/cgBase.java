@@ -425,14 +425,6 @@ public class cgBase {
         return true;
     }
 
-    public class loginThread extends Thread {
-
-        @Override
-        public void run() {
-            login();
-        }
-    }
-
     public static StatusCode login() {
         HttpResponse loginResponse = null;
         String loginData = null;
