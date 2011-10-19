@@ -606,6 +606,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     }
 
                     detailTotal = geocodes.size();
+                    detailProgress = 0;
 
                     if (detailTotal == 0) {
                         ActivityMixin.showToast(activity, res.getString(R.string.warn_save_nothing));
