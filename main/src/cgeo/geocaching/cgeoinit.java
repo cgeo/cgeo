@@ -314,6 +314,27 @@ public class cgeoinit extends AbstractActivity {
             }
         });
 
+        // Cache details
+        final CheckBox autoloadButton = (CheckBox) findViewById(R.id.autoload);
+        autoloadButton.setChecked(Settings.isAutoLoadDescription());
+        autoloadButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Settings.setAutoLoadDesc(autoloadButton.isChecked());
+            }
+        });
+
+        final CheckBox additionalDetailsButton = (CheckBox) findViewById(R.id.additionaldetails);
+        additionalDetailsButton.setChecked(Settings.isAdditionalDetails());
+        additionalDetailsButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Settings.setAdditionalDetails(additionalDetailsButton.isChecked());
+            }
+        });
+
         // Other settings
         final CheckBox skinButton = (CheckBox) findViewById(R.id.skin);
         skinButton.setChecked(Settings.isLightSkin());
@@ -416,16 +437,6 @@ public class cgeoinit extends AbstractActivity {
             @Override
             public void onClick(View v) {
                 Settings.setStoreLogImages(saveLogImgButton.isChecked());
-            }
-        });
-
-        final CheckBox autoloadButton = (CheckBox) findViewById(R.id.autoload);
-        autoloadButton.setChecked(Settings.isAutoLoadDescription());
-        autoloadButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setAutoLoadDesc(autoloadButton.isChecked());
             }
         });
 

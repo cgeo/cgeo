@@ -362,6 +362,9 @@
   <string name="init_signature_template_datetime">Datum &amp; Zeit</string>
   <string name="init_signature_template_user">Benutzer</string>
   <string name="init_signature_template_number">Nummer</string>
+  <string name="init_details">Cache Details</string>
+  <string name="init_additionaldetails">Zusätzliche Cache Details wie Bewertung, Höhe etc. laden</string>
+  <string name="init_autoload">Ausführliche Beschreibung automatisch laden</string>
   <string name="init_other">Weitere Optionen</string>
   <string name="init_skin">Helle Oberfläche (Neustart erforderlich)</string>
   <string name="init_address">Position am Startbildschirm anzeigen</string>
@@ -375,7 +378,6 @@
   <string name="init_save_log_img">Logbilder abspeichern</string>
   <string name="init_units">Imperiale Einheiten (Meilen/Fuß)</string>
   <string name="init_nav">Google Navigation verwenden</string>
-  <string name="init_autoload">Ausführliche Beschreibung automatisch laden</string>
   <string name="init_livelist">Richtung zum Cache in der Cache-Liste anzeigen</string>
   <string name="init_log_offline">Offline loggen (Dialog für Online-Log nicht anzeigen)</string>
   <string name="init_browser">c:geo als normalen Internet-Browser tarnen</string>
