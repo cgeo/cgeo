@@ -6,6 +6,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.utils.ChangeLog;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -152,6 +153,13 @@ public class cgeo extends AbstractActivity {
         super.onCreate(savedInstanceState);
 
         context = this;
+
+        ChangeLog cl = new ChangeLog(this);
+        // if (cl.firstRun()) {
+            // use this to only show what's new: cl.getLogDialog().show();
+            cl.getFullLogDialog().show();
+        // }
+
         app.setAction(null);
 
         app.cleanGeo();

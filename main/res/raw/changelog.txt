@@ -1,0 +1,126 @@
+<html>
+  <head>
+    <style type='text/css'>
+      a            { color:#a0a0e0 }
+      div.title    { 
+          color:#C0F0C0; 
+          font-size:1.2em; 
+          font-weight:bold; 
+          margin-top:1em; 
+          margin-bottom:0.5em; 
+          text-align:center }
+      div.subtitle { 
+          color:#C0C0F0; 
+          font-size:0.6em; 
+          margin-bottom:1em; 
+          text-align:center }
+      div.freetext { color:#F0F0F0 }
+      div.list     { 
+          color:#C0C0C0;
+          font-size:0.8em }
+    </style>
+  </head>
+  <body>
+$ new release
+  % new release
+  _ This also is in this version:
+    * <b>new:</b> cleanup the cgeo private cache directory when caches are removed from database
+    * <b>new:</b> display user avatar when checking login/password from geocaching.com
+
+$ 09.10.2011
+  % 09.10.2011
+    * <b>fix:</b> small bugs due to GC.com change
+    
+$ 06.10.2011
+  % 06.10.2011
+    * <b>new:</b> import waypoint files from pocket query
+    * <b>new:</b> automatically filter out counter images from cache description
+    * <b>new:</b> show all the images belonging to a log entry at once
+    * <b>new:</b> make it possible to display intermediate waypoints on live map
+    * <b>new:</b> better progress information when importing GPX files
+    * <b>new:</b> better progress information during backup/restore of database
+    * <b>new:</b> better French, German, Hungarian, and Slovak translations
+    * <b>new:</b> better icon for caches needing maintenance
+    * <b>fix:</b> work again on all devices, it was broken on some Android 1.6 models
+    * <b>fix:</b> correctly display target on map when using any coordinates mode
+    * <b>fix:</b> forwarding of OC caches used wrong URL
+    * <b>fix:</b> better performance when parsing cache description
+    * <b>fix:</b> performance improvements when importing waypoints
+    * <b>fix:</b> reclaim bitmap memory earlier to prevent memory exhaustion
+    * <b>fix:</b> cleaner location names (no more HTML) in cache descriptions
+    * <b>fix:</b> load descriptions from database only when needed (lower memory consumption)
+    * <b>fix:</b> one of the coordinates entry mode was using the wrong coordinate when reediting
+    * <b>fix:</b> latitude and longitude are now localized
+    * <b>fix:</b> remove redundant fields in the database to reduce used space
+    * <b>fix:</b> various bug fixes and internal enhancements
+    
+$ 24.09.2011
+  % 24.09.2011
+    * <b>new:</b> import of LOC files
+    * <b>new:</b> search for geo code supports OpenCaching.ORG.UK/.PL/.US
+    * <b>new:</b> restore settings after reinstallation (Android 2.3+)
+    * <b>new:</b> save the log locally when leaving the log activity
+    * <b>new:</b> insert signature after the cursor when logging
+    * <b>fix:</b> various bug fixes
+    
+$ 18.09.2011
+  % 18.09.2011
+    * <b>fix:</b> Android 3+ compatibility
+    
+$ 17.09.2011
+  % 17.09.2011
+    * <b>fix:</b> more small fixes
+    
+$ 16.09.2011
+  % 16.09.2011
+    * <b>fix:</b> many small fixed due to GC.com changes
+    
+$ 15.09.2011
+  % 15.09.2011
+    * <b>new:</b> sort by state, sort by find count
+    * <b>new:</b> experimental support for .gpx from opencaching.com
+    * <b>new:</b> scan QR code to open cache description (Barcode Scanner from Market)
+    * <b>new:</b> context menu on stored caches button (main screen)
+    * <b>new:</b> compass immediately shows the right direction
+    * <b>new:</b> active filters are shown in list mode
+    * <b>fix:</b> performance of GPX import
+    * <b>fix:</b> performance of deleting caches from list
+    * <b>fix:</b> performance of web traffic
+    * <b>fix:</b> return to list after GPX import
+    * <b>fix:</b> fill signature when logging offline
+    * <b>fix:</b> show strikethrough in caches
+    * <b>fix:</b> no more empty map previews
+    * <b>fix:</b> send2c:geo authorization
+    
+$ 26.08.2011
+  % 26.08.2011
+    * <b>new:</b> street view
+    * <b>new:</b> attribute icons
+    * <b>new:</b> experimental support for .gpx from opencaching.de
+    * <b>fix:</b> log-dates
+    * <b>fix:</b> coordinates input
+    * <b>fix:</b> nearby list performance update
+    
+$ 22.08.2011
+  % 22.08.2011
+    * <b>fix:</b> due to GC.com changes c:geo hangs in displaying cache detail
+    
+$ 20.08.2011
+  % 20.08.2011
+    * <b>fix:</b> Additional adaption to GC.com changes
+    
+$ 19.08.2011
+  % 19.08.2011
+    * <b>new:</b> Numeric entry for coordinates
+    * <b>fix:</b> adaption to GC.com changes
+    
+$ 15.08.2011
+  % 15.08.2011
+    * <b>new:</b> OpenStreetMap support
+    * <b>new:</b> Send to c:geo from web
+    * <b>new:</b> Export field notes
+    * <b>new:</b> Clear history
+    * <b>fix:</b> A lot of bugs
+$ END_OF_CHANGE_LOG
+  </body>
+</html>
