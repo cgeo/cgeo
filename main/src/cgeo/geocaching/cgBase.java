@@ -537,8 +537,7 @@ public class cgBase {
 
     public static void switchToEnglish(String previousPage) {
         final String ENGLISH = "English&#9660;";
-        if (previousPage != null && previousPage.indexOf(ENGLISH) > 0)
-        {
+        if (previousPage != null && previousPage.indexOf(ENGLISH) > 0) {
             Log.i(Settings.tag, "Geocaching.com language already set to English");
         } else {
             final String page = getResponseData(request("http://www.geocaching.com/default.aspx", null, false));
@@ -3430,7 +3429,7 @@ public class cgBase {
     /**
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 sept. à 12:35".
-     *
+     * 
      * @param context
      *            a Context
      * @param date
