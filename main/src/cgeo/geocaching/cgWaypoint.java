@@ -22,6 +22,22 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
     public String note = "";
     private Integer cachedOrder = null;
 
+    /**
+     * default constructor, no fields are set
+     */
+    public cgWaypoint() {
+    }
+
+    /**
+     * copy constructor
+     *
+     * @param other
+     */
+    public cgWaypoint(final cgWaypoint other) {
+        merge(other);
+        id = 0;
+    }
+
     public void setIcon(final Resources res, final TextView nameView) {
         nameView.setCompoundDrawablesWithIntrinsicBounds(res.getDrawable(type.drawableId), null, null, null);
     }
@@ -79,6 +95,11 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
 
     public boolean isUserDefined() {
         return type == WaypointType.OWN;
+    }
+
+    public void setUserDefined() {
+        type = WaypointType.OWN;
+        setPrefix("OWN");
     }
 
     private int computeOrder() {

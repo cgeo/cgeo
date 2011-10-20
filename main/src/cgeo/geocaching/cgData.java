@@ -2135,7 +2135,7 @@ public class cgData {
 
         init();
 
-        cgWaypoint waypoint = new cgWaypoint();
+        cgWaypoint waypoint = null;
 
         Cursor cursor = databaseRO.query(
                 dbTableWaypoints,

@@ -74,6 +74,9 @@ import java.util.UUID;
  */
 public class cgeodetail extends AbstractActivity {
 
+    private static final int CONTEXT_MENU_WAYPOINT_DELETE = 1235;
+    private static final int CONTEXT_MENU_WAYPOINT_DUPLICATE = 1234;
+
     public cgeodetail() {
         super("c:geo-cache-details");
     }
@@ -455,50 +458,102 @@ public class cgeodetail extends AbstractActivity {
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo info) {
         super.onCreateContextMenu(menu, view, info);
         final int viewId = view.getId();
-
-        if (viewId == R.id.author || viewId == R.id.value) {
-            if (viewId == R.id.author) { // Author of a log entry
-                contextMenuUser = ((TextView) view).getText().toString();
-            } else if (viewId == R.id.value) { // The owner of the cache
-                if (StringUtils.isNotBlank(cache.ownerReal)) {
-                    contextMenuUser = cache.ownerReal;
-                } else {
-                    contextMenuUser = cache.owner;
+        switch (viewId) {
+            case R.id.author:
+            case R.id.value:
+                if (viewId == R.id.author) { // Author of a log entry
+                    contextMenuUser = ((TextView) view).getText().toString();
+                } else if (viewId == R.id.value) { // The owner of the cache
+                    if (StringUtils.isNotBlank(cache.ownerReal)) {
+                        contextMenuUser = cache.ownerReal;
+                    } else {
+                        contextMenuUser = cache.owner;
+                    }
                 }
-            }
 
-            menu.setHeaderTitle(res.getString(R.string.user_menu_title) + " " + contextMenuUser);
-            menu.add(viewId, 1, 0, res.getString(R.string.user_menu_view_hidden));
-            menu.add(viewId, 2, 0, res.getString(R.string.user_menu_view_found));
-            menu.add(viewId, 3, 0, res.getString(R.string.user_menu_open_browser));
-        }
-        if (viewId == R.id.map_preview) {
-            menu.setHeaderTitle(res.getString(R.string.cache_menu_navigate));
-            addNavigationMenuItems(menu);
+                menu.setHeaderTitle(res.getString(R.string.user_menu_title) + " " + contextMenuUser);
+                menu.add(viewId, 1, 0, res.getString(R.string.user_menu_view_hidden));
+                menu.add(viewId, 2, 0, res.getString(R.string.user_menu_view_found));
+                menu.add(viewId, 3, 0, res.getString(R.string.user_menu_open_browser));
+                break;
+            case R.id.map_preview:
+                menu.setHeaderTitle(res.getString(R.string.cache_menu_navigate));
+                addNavigationMenuItems(menu);
+                break;
+            case -1:
+                if (null != cache.waypoints) {
+                    try {
+                        final ViewGroup parent = ((ViewGroup) view.getParent());
+                        for (int i = 0; i < parent.getChildCount(); i++) {
+                            if (parent.getChildAt(i) == view) {
+                                final List<cgWaypoint> sortedWaypoints = new ArrayList<cgWaypoint>(cache.waypoints);
+                                Collections.sort(sortedWaypoints);
+                                final cgWaypoint waypoint = sortedWaypoints.get(i);
+                                final int index = cache.waypoints.indexOf(waypoint);
+                                menu.setHeaderTitle(res.getString(R.string.waypoint));
+                                menu.add(CONTEXT_MENU_WAYPOINT_DUPLICATE, index, 0, R.string.waypoint_duplicate);
+                                if (waypoint.isUserDefined()) {
+                                    menu.add(CONTEXT_MENU_WAYPOINT_DELETE, index, 0, R.string.waypoint_delete);
+                                }
+                            }
+                        }
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+                break;
+            default:
+                break;
         }
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        final int group = item.getGroupId();
-
-        if (group == R.id.author || group == R.id.value) {
-            final int id = item.getItemId();
-
-            if (id == 1) {
-                cgeocaches.startActivityOwner(this, contextMenuUser);
-                return true;
-            } else if (id == 2) {
-                cgeocaches.startActivityUserName(this, contextMenuUser);
-                return true;
-            } else if (id == 3) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(contextMenuUser))));
-
-                return true;
-            }
-        }
-        else {
-            return onOptionsItemSelected(item);
+        final int groupId = item.getGroupId();
+        final int index = item.getItemId();
+        switch (groupId) {
+            case R.id.author:
+            case R.id.value:
+                final int itemId = item.getItemId();
+                switch (itemId) {
+                    case 1:
+                        cgeocaches.startActivityOwner(this, contextMenuUser);
+                        return true;
+                    case 2:
+                        cgeocaches.startActivityUserName(this, contextMenuUser);
+                        return true;
+                    case 3:
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(contextMenuUser))));
+                        return true;
+                    default:
+                        break;
+                }
+                break;
+            case CONTEXT_MENU_WAYPOINT_DUPLICATE:
+                if (null != cache.waypoints && index < cache.waypoints.size()) {
+                    final cgWaypoint copy = new cgWaypoint(cache.waypoints.get(index));
+                    copy.setUserDefined();
+                    copy.name = res.getString(R.string.waypoint_copy_of) + " " + copy.name;
+                    cache.waypoints.add(index + 1, copy);
+                    app.saveOwnWaypoint(-1, cache.geocode, copy);
+                    app.removeCacheFromCache(geocode);
+                    setView(); // refresh
+                }
+                break;
+            case CONTEXT_MENU_WAYPOINT_DELETE:
+                if (null != cache.waypoints && index < cache.waypoints.size()) {
+                    final cgWaypoint waypoint = cache.waypoints.get(index);
+                    if (waypoint.isUserDefined()) {
+                        cache.waypoints.remove(index);
+                        app.deleteWaypoint(waypoint.id);
+                        app.removeCacheFromCache(geocode);
+                        setView(); // refresh
+                    }
+                }
+                break;
+            default:
+                return onOptionsItemSelected(item);
         }
         return false;
     }
@@ -1046,14 +1101,19 @@ public class cgeodetail extends AbstractActivity {
                     wpt.setIcon(res, nameView);
 
                     // avoid HTML parsing
+                    TextView noteView = (TextView) waypointView.findViewById(R.id.note);
                     if (containsHtml(wpt.note)) {
-                        ((TextView) waypointView.findViewById(R.id.note)).setText(Html.fromHtml(wpt.note.trim()), TextView.BufferType.SPANNABLE);
+                        noteView.setText(Html.fromHtml(wpt.note.trim()), TextView.BufferType.SPANNABLE);
                     }
                     else {
-                        ((TextView) waypointView.findViewById(R.id.note)).setText(wpt.note.trim());
+                        noteView.setText(wpt.note.trim());
                     }
 
                     waypointView.setOnClickListener(new waypointInfo(wpt.id));
+                    registerForContextMenu(waypointView);
+                    //                    registerForContextMenu(identification);
+                    //                    registerForContextMenu(nameView);
+                    //                    registerForContextMenu(noteView);
 
                     waypoints.addView(waypointView);
                 }
