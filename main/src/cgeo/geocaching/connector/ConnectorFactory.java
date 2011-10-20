@@ -21,7 +21,8 @@ public final class ConnectorFactory {
             new ApiOpenCachingConnector("OpenCaching.PL", "www.opencaching.pl", "OP", "GkxM47WkUkLQXXsZ9qSh"),
             new ApiOpenCachingConnector("OpenCaching.US", "www.opencaching.us", "OU", "pTsYAYSXFcfcRQnYE6uA"),
             new OXConnector(),
-            new GeocachingAustraliaConnector()
+            new GeocachingAustraliaConnector(),
+            new GeopeitusConnector()
     };
 
     public static IConnector[] getConnectors() {
