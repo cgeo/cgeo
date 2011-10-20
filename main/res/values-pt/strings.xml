@@ -73,7 +73,7 @@
   <string name="log_taken">Visita</string>
   <string name="log_tb_nothing">Não fazer nada</string>
   <string name="log_tb_visit">Visita</string>
-  <string name="log_tb_drop">Passei aqui</string>
+  <string name="log_tb_drop">Deixei aqui</string>
   <string name="log_tb_changeall">Alterar todos</string>
   <string name="log_save">Gravar</string>
   <string name="log_saving">A gravar o log…</string>
@@ -135,9 +135,6 @@
   <string name="err_detail_no_spoiler">O c:geo não encontrou images spoiler para esta cache.</string>
   <string name="err_detail_no_map_static">O c:geo não encontrou mapas estáticos para esta cache.</string>
   <string name="err_detail_not_load_map_static">Desculpe, o c:geo falhou o carregamento de mapas estáticos.</string>
-  <string name="err_detail_still_removing">A remover a cache.</string>
-  <string name="err_detail_still_saving">A gravar a cache.</string>
-  <string name="err_detail_still_refreshing">A recarregar a cache.</string>
   <string name="err_watchlist_still_managing">Ainda a gerir a sua watchlist.</string>
   <string name="err_watchlist_failed">A gestão da sua watchlist falhou.</string>
   <string name="err_navigation_no">O c:geo não encontra nenhuma navegação suportada.</string>
@@ -292,21 +289,6 @@
   <string name="caches_filter_clear">Limpar filtros</string>
   <string name="caches_filter_size_title">Escolha o tamanho</string>
   <string name="caches_filter_type_title">Escolha o tipo</string>
-  <string name="caches_filter_type_traditional">Cache tradicional</string>
-  <string name="caches_filter_type_multi">Multi-cache</string>
-  <string name="caches_filter_type_mystery">Cache desconhecida</string>
-  <string name="caches_filter_type_letterbox">Caixa de correio híbrida</string>
-  <string name="caches_filter_type_event">Cache evento</string>
-  <string name="caches_filter_type_mega">Cache mega-evento</string>
-  <string name="caches_filter_type_earth">Cache Terra</string>
-  <string name="caches_filter_type_cito">Evento Cache In Trash Out</string>
-  <string name="caches_filter_type_webcam">Cache Webcam</string>
-  <string name="caches_filter_type_virtual">Cache virtual</string>
-  <string name="caches_filter_type_wherigo">Cache wherigo</string>
-  <string name="caches_filter_type_lostfound">Perdidos &amp; Achados</string>
-  <string name="caches_filter_type_ape">Cache projecto APE</string>
-  <string name="caches_filter_type_gchq">Groundspeak HQ</string>
-  <string name="caches_filter_type_gps">Cache exposição GPS</string>
   <string name="caches_exporting_fieldnote">A exportar como Notas de Campo…</string>
   <string name="caches_removing_from_history">A remover do histórico…</string>
 

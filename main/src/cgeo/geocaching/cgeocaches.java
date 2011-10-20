@@ -7,12 +7,14 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cachelist.CacheListAppFactory;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.filter.cgFilter;
 import cgeo.geocaching.filter.cgFilterBySize;
 import cgeo.geocaching.filter.cgFilterByTrackables;
 import cgeo.geocaching.filter.cgFilterByType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.DateComparator;
 import cgeo.geocaching.sorting.DifficultyComparator;
@@ -26,6 +28,7 @@ import cgeo.geocaching.sorting.SizeComparator;
 import cgeo.geocaching.sorting.StateComparator;
 import cgeo.geocaching.sorting.TerrainComparator;
 import cgeo.geocaching.sorting.VoteComparator;
+import cgeo.geocaching.utils.RunnableWithArgument;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -587,7 +590,7 @@ public class cgeocaches extends AbstractListActivity {
             case OFFLINE:
                 listId = Settings.getLastList();
                 if (listId <= 0) {
-                    listId = 1;
+                    listId = cgList.STANDARD_LIST_ID;
                     title = res.getString(R.string.caches_stored);
                 } else {
                     final cgList list = app.getList(listId);
@@ -990,7 +993,7 @@ public class cgeocaches extends AbstractListActivity {
                 importGpx();
                 return false;
             case MENU_CREATE_LIST:
-                createList();
+                createList(null);
                 return false;
             case MENU_DROP_LIST:
                 removeList();
@@ -1126,21 +1129,21 @@ public class cgeocaches extends AbstractListActivity {
                 menu.add(0, MENU_FILTER_SIZE_NOT_CHOSEN, 0, res.getString(CacheSize.NOT_CHOSEN.stringId));
             } else if (selectedFilter.equals(res.getString(R.string.caches_filter_type))) {
                 menu.setHeaderTitle(res.getString(R.string.caches_filter_type_title));
-                menu.add(0, MENU_FILTER_TYPE_TRADITIONAL, 0, res.getString(R.string.caches_filter_type_traditional));
-                menu.add(0, MENU_FILTER_TYPE_MULTI, 0, res.getString(R.string.caches_filter_type_multi));
-                menu.add(0, MENU_FILTER_TYPE_MYSTERY, 0, res.getString(R.string.caches_filter_type_mystery));
-                menu.add(0, MENU_FILTER_TYPE_LETTERBOX, 0, res.getString(R.string.caches_filter_type_letterbox));
-                menu.add(0, MENU_FILTER_TYPE_EVENT, 0, res.getString(R.string.caches_filter_type_event));
-                menu.add(0, MENU_FILTER_TYPE_MEGA, 0, res.getString(R.string.caches_filter_type_mega));
-                menu.add(0, MENU_FILTER_TYPE_EARTH, 0, res.getString(R.string.caches_filter_type_earth));
-                menu.add(0, MENU_FILTER_TYPE_CITO, 0, res.getString(R.string.caches_filter_type_cito));
-                menu.add(0, MENU_FILTER_TYPE_WEBCAM, 0, res.getString(R.string.caches_filter_type_webcam));
-                menu.add(0, MENU_FILTER_TYPE_VIRTUAL, 0, res.getString(R.string.caches_filter_type_virtual));
-                menu.add(0, MENU_FILTER_TYPE_WHERIGO, 0, res.getString(R.string.caches_filter_type_wherigo));
-                menu.add(0, MENU_FILTER_TYPE_LOSTFOUND, 0, res.getString(R.string.caches_filter_type_lostfound));
-                menu.add(0, MENU_FILTER_TYPE_APE, 0, res.getString(R.string.caches_filter_type_ape));
-                menu.add(0, MENU_FILTER_TYPE_GCHQ, 0, res.getString(R.string.caches_filter_type_gchq));
-                menu.add(0, MENU_FILTER_TYPE_GPS, 0, res.getString(R.string.caches_filter_type_gps));
+                menu.add(0, MENU_FILTER_TYPE_TRADITIONAL, 0, res.getString(CacheType.TRADITIONAL.stringId));
+                menu.add(0, MENU_FILTER_TYPE_MULTI, 0, res.getString(CacheType.MULTI.stringId));
+                menu.add(0, MENU_FILTER_TYPE_MYSTERY, 0, res.getString(CacheType.MYSTERY.stringId));
+                menu.add(0, MENU_FILTER_TYPE_LETTERBOX, 0, res.getString(CacheType.LETTERBOX.stringId));
+                menu.add(0, MENU_FILTER_TYPE_EVENT, 0, res.getString(CacheType.EVENT.stringId));
+                menu.add(0, MENU_FILTER_TYPE_MEGA, 0, res.getString(CacheType.MEGA_EVENT.stringId));
+                menu.add(0, MENU_FILTER_TYPE_EARTH, 0, res.getString(CacheType.EARTH.stringId));
+                menu.add(0, MENU_FILTER_TYPE_CITO, 0, res.getString(CacheType.CITO.stringId));
+                menu.add(0, MENU_FILTER_TYPE_WEBCAM, 0, res.getString(CacheType.WEBCAM.stringId));
+                menu.add(0, MENU_FILTER_TYPE_VIRTUAL, 0, res.getString(CacheType.VIRTUAL.stringId));
+                menu.add(0, MENU_FILTER_TYPE_WHERIGO, 0, res.getString(CacheType.WHERIGO.stringId));
+                menu.add(0, MENU_FILTER_TYPE_LOSTFOUND, 0, res.getString(CacheType.LOSTANDFOUND.stringId));
+                menu.add(0, MENU_FILTER_TYPE_APE, 0, res.getString(CacheType.PROJECT_APE.stringId));
+                menu.add(0, MENU_FILTER_TYPE_GCHQ, 0, res.getString(CacheType.GCHQ.stringId));
+                menu.add(0, MENU_FILTER_TYPE_GPS, 0, res.getString(CacheType.GPS_EXHIBIT.stringId));
             }
         } else {
             if (adapterInfo.position >= adapter.getCount()) {
@@ -1252,35 +1255,35 @@ public class cgeocaches extends AbstractListActivity {
         } else if (id == MENU_FILTER_SIZE_NOT_CHOSEN) {
             return setFilter(new cgFilterBySize(CacheSize.NOT_CHOSEN));
         } else if (id == MENU_FILTER_TYPE_TRADITIONAL) {
-            return setFilter(new cgFilterByType("traditional"));
+            return setFilter(new cgFilterByType(CacheType.TRADITIONAL));
         } else if (id == MENU_FILTER_TYPE_MULTI) {
-            return setFilter(new cgFilterByType("multi"));
+            return setFilter(new cgFilterByType(CacheType.MULTI));
         } else if (id == MENU_FILTER_TYPE_MYSTERY) {
-            return setFilter(new cgFilterByType("mystery"));
+            return setFilter(new cgFilterByType(CacheType.MYSTERY));
         } else if (id == MENU_FILTER_TYPE_LETTERBOX) {
-            return setFilter(new cgFilterByType("letterbox"));
+            return setFilter(new cgFilterByType(CacheType.LETTERBOX));
         } else if (id == MENU_FILTER_TYPE_EVENT) {
-            return setFilter(new cgFilterByType("event"));
+            return setFilter(new cgFilterByType(CacheType.EVENT));
         } else if (id == MENU_FILTER_TYPE_MEGA) {
-            return setFilter(new cgFilterByType("mega"));
+            return setFilter(new cgFilterByType(CacheType.MEGA_EVENT));
         } else if (id == MENU_FILTER_TYPE_EARTH) {
-            return setFilter(new cgFilterByType("earth"));
+            return setFilter(new cgFilterByType(CacheType.EARTH));
         } else if (id == MENU_FILTER_TYPE_CITO) {
-            return setFilter(new cgFilterByType("cito"));
+            return setFilter(new cgFilterByType(CacheType.CITO));
         } else if (id == MENU_FILTER_TYPE_WEBCAM) {
-            return setFilter(new cgFilterByType("webcam"));
+            return setFilter(new cgFilterByType(CacheType.WEBCAM));
         } else if (id == MENU_FILTER_TYPE_VIRTUAL) {
-            return setFilter(new cgFilterByType("virtual"));
+            return setFilter(new cgFilterByType(CacheType.VIRTUAL));
         } else if (id == MENU_FILTER_TYPE_WHERIGO) {
-            return setFilter(new cgFilterByType("wherigo"));
+            return setFilter(new cgFilterByType(CacheType.WHERIGO));
         } else if (id == MENU_FILTER_TYPE_LOSTFOUND) {
-            return setFilter(new cgFilterByType("lostfound"));
+            return setFilter(new cgFilterByType(CacheType.LOSTANDFOUND));
         } else if (id == MENU_FILTER_TYPE_APE) {
-            return setFilter(new cgFilterByType("ape"));
+            return setFilter(new cgFilterByType(CacheType.PROJECT_APE));
         } else if (id == MENU_FILTER_TYPE_GCHQ) {
-            return setFilter(new cgFilterByType("gchq"));
+            return setFilter(new cgFilterByType(CacheType.GCHQ));
         } else if (id == MENU_FILTER_TYPE_GPS) {
-            return setFilter(new cgFilterByType("gps"));
+            return setFilter(new cgFilterByType(CacheType.GPS_EXHIBIT));
         } else if (id == MENU_DROP_CACHE) {
             cgBase.dropCache(app, cache, new Handler() {
                 @Override
@@ -2087,7 +2090,7 @@ public class cgeocaches extends AbstractListActivity {
                 final Parameters params = new Parameters("code", deviceCode);
                 HttpResponse responseFromWeb = cgBase.request("http://send2.cgeo.org/read.html", params, true);
 
-                if (responseFromWeb.getStatusLine().getStatusCode() == 200) {
+                if (responseFromWeb != null && responseFromWeb.getStatusLine().getStatusCode() == 200) {
                     final String response = cgBase.getResponseData(responseFromWeb);
                     if (response.length() > 2) {
 
@@ -2120,7 +2123,7 @@ public class cgeocaches extends AbstractListActivity {
                         yield();
                     }
                 }
-                if (responseFromWeb.getStatusLine().getStatusCode() != 200) {
+                if (responseFromWeb == null || responseFromWeb.getStatusLine().getStatusCode() != 200) {
                     needToStop = true;
                     handler.sendEmptyMessage(-2);
                     return;
@@ -2411,16 +2414,27 @@ public class cgeocaches extends AbstractListActivity {
         for (cgList list : lists) {
             listsTitle.add(list.title);
         }
+        listsTitle.add("<" + res.getString(R.string.list_menu_create) + ">");
 
         final CharSequence[] items = new CharSequence[listsTitle.size()];
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(res.getString(R.string.list_title));
         builder.setItems(listsTitle.toArray(items), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialogInterface, int item) {
-                switchListById(lists.get(item).id);
+            public void onClick(DialogInterface dialogInterface, int itemId) {
+                if (itemId >= lists.size()) {
+                    // create new list on the fly
+                    createList(new RunnableWithArgument<Integer>() {
 
-                return;
+                        @Override
+                        public void run() {
+                            switchListById(getArgument());
+                        }
+                    });
+                }
+                else {
+                    switchListById(lists.get(itemId).id);
+                }
             }
         });
         builder.create().show();
@@ -2483,15 +2497,7 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
-    private abstract class RunnableWithInput implements Runnable {
-        String input;
-
-        public void setInput(final String input) {
-            this.input = input;
-        }
-    }
-
-    private void handleListNameInput(final String defaultValue, int dialogTitle, int buttonTitle, final RunnableWithInput runnable) {
+    private void handleListNameInput(final String defaultValue, int dialogTitle, int buttonTitle, final RunnableWithArgument<String> runnable) {
         final AlertDialog.Builder alert = new AlertDialog.Builder(this);
         final View view = inflater.inflate(R.layout.list_create_dialog, null);
         final EditText input = (EditText) view.findViewById(R.id.text);
@@ -2502,9 +2508,9 @@ public class cgeocaches extends AbstractListActivity {
         alert.setPositiveButton(buttonTitle, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 // remove whitespaces added by autocompletion of Android keyboard
-                String value = StringUtils.trim(input.getText().toString());
-                if (StringUtils.isNotBlank(value)) {
-                    runnable.setInput(value);
+                String listName = StringUtils.trim(input.getText().toString());
+                if (StringUtils.isNotBlank(listName)) {
+                    runnable.setArgument(listName);
                     runnable.run();
                 }
             }
@@ -2518,15 +2524,20 @@ public class cgeocaches extends AbstractListActivity {
         alert.show();
     }
 
-    private void createList() {
-        handleListNameInput("", R.string.list_dialog_create_title, R.string.list_dialog_create, new RunnableWithInput() {
+    private void createList(final RunnableWithArgument<Integer> runAfterwards) {
+        handleListNameInput("", R.string.list_dialog_create_title, R.string.list_dialog_create, new RunnableWithArgument<String>() {
 
             @Override
             public void run() {
-                int newId = app.createList(input);
+                String listName = getArgument();
+                int newId = app.createList(listName);
 
                 if (newId >= 10) {
                     showToast(res.getString(R.string.list_dialog_create_ok));
+                    if (runAfterwards != null) {
+                        runAfterwards.setArgument(newId);
+                        runAfterwards.run();
+                    }
                 } else {
                     showToast(res.getString(R.string.list_dialog_create_err));
                 }
@@ -2536,11 +2547,12 @@ public class cgeocaches extends AbstractListActivity {
 
     private void renameList() {
         final cgList list = app.getList(listId);
-        handleListNameInput(list.title, R.string.list_dialog_rename_title, R.string.list_dialog_rename, new RunnableWithInput() {
+        handleListNameInput(list.title, R.string.list_dialog_rename_title, R.string.list_dialog_rename, new RunnableWithArgument<String>() {
 
             @Override
             public void run() {
-                app.renameList(listId, input);
+                String listName = getArgument();
+                app.renameList(listId, listName);
                 refreshCurrentList();
             }
         });
@@ -2595,11 +2607,7 @@ public class cgeocaches extends AbstractListActivity {
             return;
         }
 
-        Intent mapIntent = new Intent(this, Settings.getMapFactory().getMapClass());
-        mapIntent.putExtra("detail", false);
-        mapIntent.putExtra("searchid", searchId.toString());
-
-        startActivity(mapIntent);
+        CGeoMap.startActivitySearch(this, searchId, title + " [" + app.getCount(searchId) + "]", false);
     }
 
     public void goManual(View view) {

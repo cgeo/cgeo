@@ -303,21 +303,6 @@
   <string name="caches_filter_clear">rensa filter</string>
   <string name="caches_filter_size_title">Välj storlek</string>
   <string name="caches_filter_type_title">Välj typ</string>
-  <string name="caches_filter_type_traditional">Traditionell cache</string>
-  <string name="caches_filter_type_multi">Multi-cache</string>
-  <string name="caches_filter_type_mystery">Mysterie cache</string>
-  <string name="caches_filter_type_letterbox">Letterbox Hybrid</string>
-  <string name="caches_filter_type_event">Event cache</string>
-  <string name="caches_filter_type_mega">Mega-event cache</string>
-  <string name="caches_filter_type_earth">Earth cache</string>
-  <string name="caches_filter_type_cito">Cache In Trash Out event</string>
-  <string name="caches_filter_type_webcam">Webcam cache</string>
-  <string name="caches_filter_type_virtual">Virtual cache</string>
-  <string name="caches_filter_type_wherigo">Wherigo cache</string>
-  <string name="caches_filter_type_lostfound">Lost &amp; Found</string>
-  <string name="caches_filter_type_ape">Project APE cache</string>
-  <string name="caches_filter_type_gchq">Groundspeak HQ</string>
-  <string name="caches_filter_type_gps">GPS Cache utställning</string>
   <string name="caches_exporting_fieldnote">Exporterar som Field Notes…</string>
   <string name="caches_removing_from_history">Tar bort från historik…</string>
 

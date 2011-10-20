@@ -8,6 +8,7 @@ import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.GeopointParser;
 
 import org.apache.commons.lang3.StringUtils;
@@ -156,7 +157,7 @@ public final class LocParser extends FileParser {
                 caches.cacheList.add(cache);
 
                 fixCache(cache);
-                cache.type = "traditional"; // type is not given in the LOC file
+                cache.type = CacheType.UNKNOWN.id; // type is not given in the LOC file
                 cache.reason = listId;
                 cache.detailed = true;
 
@@ -164,9 +165,9 @@ public final class LocParser extends FileParser {
             }
             caches.totalCnt = caches.cacheList.size();
             showCountMessage(handler, R.string.gpx_import_loading_stored, search.getCount());
-            Log.i(Settings.tag, "Caches found in .gpx file: " + caches.totalCnt);
+            Log.i(Settings.tag, "Caches found in .loc file: " + caches.totalCnt);
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgBase.parseGPX: " + e.toString());
+            Log.e(Settings.tag, "LocParser.parseLoc: " + e.toString());
         }
 
         return search.getCurrentId();

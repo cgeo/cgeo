@@ -163,16 +163,6 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public boolean needsScaleOverlay() {
-        return false;
-    }
-
-    @Override
-    public void setBuiltinScale(boolean b) {
-        setScaleBar(b);
-    }
-
-    @Override
     public void setMapSource() {
 
         switch (Settings.getMapSource()) {

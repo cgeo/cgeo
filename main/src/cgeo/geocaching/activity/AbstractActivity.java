@@ -76,6 +76,9 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
         app = (cgeoapplication) this.getApplication();
         prefs = getSharedPreferences(Settings.preferences, Context.MODE_PRIVATE);
         base = new cgBase(app);
+
+        // Restore cookie store if needed
+        cgBase.restoreCookieStore(Settings.getCookieStore());
     }
 
     public void addVisitMenu(Menu menu, cgCache cache) {

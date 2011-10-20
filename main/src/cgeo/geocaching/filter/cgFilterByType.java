@@ -2,19 +2,23 @@ package cgeo.geocaching.filter;
 
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.enumerations.CacheType;
 
 public class cgFilterByType extends cgFilter {
-    public cgFilterByType(String type) {
-        super(type);
+    private CacheType cacheType;
+
+    public cgFilterByType(final CacheType cacheType) {
+        super(cacheType.id);
+        this.cacheType = cacheType;
     }
 
     @Override
-    boolean applyFilter(cgCache cache) {
-        return name.equals(cache.type);
+    boolean applyFilter(final cgCache cache) {
+        return cacheType.id.equals(cache.type);
     }
 
     @Override
     public String getFilterName() {
-        return cgBase.cacheTypesInv.get(name);
+        return cgBase.cacheTypesInv.get(cacheType.id);
     }
 }

@@ -2,8 +2,10 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.maps.CGeoMap;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -347,9 +349,9 @@ public class cgeo extends AbstractActivity {
 
         // then add all other cache types sorted alphabetically
         Map<String, String> allTypes = new HashMap<String, String>(cgBase.cacheTypesInv);
-        allTypes.remove("traditional");
-        allTypes.remove("multi");
-        allTypes.remove("mystery");
+        allTypes.remove(CacheType.TRADITIONAL.id);
+        allTypes.remove(CacheType.MULTI.id);
+        allTypes.remove(CacheType.MYSTERY.id);
         List<String> sorted = new ArrayList<String>(allTypes.values());
         Collections.sort(sorted);
         for (String choice : sorted) {
@@ -604,7 +606,7 @@ public class cgeo extends AbstractActivity {
      */
     public void cgeoFindOnMap(View v) {
         findViewById(R.id.map).setPressed(true);
-        context.startActivity(new Intent(context, Settings.getMapFactory().getMapClass()));
+        CGeoMap.startActivityLiveMap(context);
     }
 
     /**

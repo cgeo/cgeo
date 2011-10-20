@@ -138,9 +138,6 @@
   <string name="err_detail_no_spoiler">A c:geo nem talált spoiler képeket ehhez a ládához.</string>
   <string name="err_detail_no_map_static">A c:geo nem talált statikus térképeket ehhez a ládához.</string>
   <string name="err_detail_not_load_map_static">Sajnáljuk, a c:geo nem tudott betölteni statikus térképeket.</string>
-  <string name="err_detail_still_removing">A láda még eltávolítás alatt áll.</string>
-  <string name="err_detail_still_saving">A láda még mentés alatt áll.</string>
-  <string name="err_detail_still_refreshing">A láda még újratöltés alatt áll.</string>
   <string name="err_watchlist_still_managing">Még folyik a figyelőlista kezelése.</string>
   <string name="err_watchlist_failed">A figyelőlita megváltoztatása nem sikerült.</string>
   <string name="err_navigation_no">A c:geo nem talál semilyen támogatott navigációt.</string>
@@ -303,21 +300,6 @@
   <string name="caches_filter_clear">szűrők törlése</string>
   <string name="caches_filter_size_title">Válassz méretet</string>
   <string name="caches_filter_type_title">Válassz típust</string>
-  <string name="caches_filter_type_traditional">Hagyományos láda</string>
-  <string name="caches_filter_type_multi">Multi-láda</string>
-  <string name="caches_filter_type_mystery">Rejtvény láda</string>
-  <string name="caches_filter_type_letterbox">Postaláda hibrid</string>
-  <string name="caches_filter_type_event">Esemény láda</string>
-  <string name="caches_filter_type_mega">Mega-esemény láda</string>
-  <string name="caches_filter_type_earth">Earth cache</string>
-  <string name="caches_filter_type_cito">CITO esemény</string>
-  <string name="caches_filter_type_webcam">Webkamera láda</string>
-  <string name="caches_filter_type_virtual">Virtuális láda</string>
-  <string name="caches_filter_type_wherigo">Wherigo láda</string>
-  <string name="caches_filter_type_lostfound">Elveszett &amp; Megtalált</string>
-  <string name="caches_filter_type_ape">Project APE láda</string>
-  <string name="caches_filter_type_gchq">Groundspeak székház</string>
-  <string name="caches_filter_type_gps">GPS láda kiállítás</string>
   <string name="caches_exporting_fieldnote">Exportálás terepjegyzetként…</string>
   <string name="caches_removing_from_history">Eltávolítás a Előzményekből…</string>
 

@@ -8,6 +8,7 @@ import cgeo.geocaching.cgLog;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.GeopointParser;
 
 import org.apache.commons.lang3.StringUtils;
@@ -233,15 +234,15 @@ final public class OkapiClient {
 
     private static String getCacheType(final String type) {
         if (type.equalsIgnoreCase("Traditional")) {
-            return "traditional";
+            return CacheType.TRADITIONAL.id;
         } else if (type.equalsIgnoreCase("Multi")) {
-            return "multi";
+            return CacheType.MULTI.id;
         } else if (type.equalsIgnoreCase("Quiz")) {
-            return "mystery";
+            return CacheType.MYSTERY.id;
         } else if (type.equalsIgnoreCase("Virtual")) {
-            return "virtual";
+            return CacheType.VIRTUAL.id;
         }
-        return "other";
+        return CacheType.UNKNOWN.id;
     }
 
     private static JSONObject request(final String geoCode, final String service, final Parameters params) {

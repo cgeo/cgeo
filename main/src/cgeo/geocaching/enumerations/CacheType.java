@@ -26,7 +26,8 @@ public enum CacheType {
     LOSTANDFOUND("lostfound", "lost & found", "3ea6533d-bb52-42fe-b2d2-79a3424d4728", R.string.lostfound),
     PROJECT_APE("ape", "project ape cache", "2555690d-b2bc-4b55-b5ac-0cb704c0b768", R.string.ape),
     GCHQ("gchq", "groundspeak hq", "416f2494-dc17-4b6a-9bab-1a29dd292d8c", R.string.gchq),
-    GPS_EXHIBIT("gps", "gps cache exhibit", "72e69af2-7986-4990-afd9-bc16cbbb4ce3", R.string.gps);
+    GPS_EXHIBIT("gps", "gps cache exhibit", "72e69af2-7986-4990-afd9-bc16cbbb4ce3", R.string.gps),
+    UNKNOWN("unknown", "unknown", "", R.string.unknown);
 
     public final String id;
     public final String pattern;

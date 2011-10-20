@@ -67,6 +67,7 @@ public final class Settings {
     private static final String KEY_LOAD_DIRECTION_IMG = "loaddirectionimg";
     private static final String KEY_GC_CUSTOM_DATE = "gccustomdate";
     private static final String KEY_SHOW_WAYPOINTS_THRESHOLD = "gcshowwaypointsthreshold";
+    private static final String KEY_COOKIE_STORE = "cookiestore";
 
     private final static int unitsMetric = 1;
     private final static int unitsImperial = 2;
@@ -260,6 +261,26 @@ public final class Settings {
 
     public static String getSignature() {
         return sharedPrefs.getString(KEY_SIGNATURE, null);
+    }
+
+    public static boolean setCookieStore(final String cookies) {
+        return editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(final Editor edit) {
+                if (StringUtils.isBlank(cookies)) {
+                    // erase cookies
+                    edit.remove(KEY_COOKIE_STORE);
+                } else {
+                    // save cookies
+                    edit.putString(KEY_COOKIE_STORE, cookies);
+                }
+            }
+        });
+    }
+
+    public static String getCookieStore() {
+        return sharedPrefs.getString(KEY_COOKIE_STORE, null);
     }
 
     public static String setCacheType(final String cacheTypeIn) {

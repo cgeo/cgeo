@@ -3,6 +3,7 @@ package cgeo.geocaching.maps.mapsforge;
 import cgeo.geocaching.maps.PositionOverlay;
 import cgeo.geocaching.maps.ScaleOverlay;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
+import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 
 import org.mapsforge.android.maps.Overlay;
@@ -53,4 +54,10 @@ public class MapsforgeOverlay extends Overlay implements OverlayImpl {
     public void unlock() {
         lock.unlock();
     }
+
+    @Override
+    public MapViewImpl getMapViewImpl() {
+        return (MapViewImpl) internalMapView;
+    }
+
 }

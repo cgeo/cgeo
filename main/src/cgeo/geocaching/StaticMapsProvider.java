@@ -80,7 +80,7 @@ public class StaticMapsProvider {
                 waypoints.append("&markers=icon%3A");
                 waypoints.append(MARKERS_URL);
                 waypoints.append("marker_waypoint_");
-                waypoints.append(waypoint.type);
+                waypoints.append(waypoint.type != null ? waypoint.type.id : null);
                 waypoints.append(".png%7C");
                 waypoints.append(String.format((Locale) null, "%.6f", waypoint.coords.getLatitude()));
                 waypoints.append(',');
@@ -105,7 +105,7 @@ public class StaticMapsProvider {
     }
 
     private static String getMarkerUrl(final cgCache cache) {
-        String type = "mystery";
+        String type;
         if (cache.found) {
             type = cache.type + "_found";
         } else if (cache.disabled) {

@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.enumerations.CacheType;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -245,10 +246,10 @@ public class cgeopopup extends AbstractActivity {
                 }
             } else {
                 if (cache.size != null) {
-                    itemValue.setText(cgBase.cacheTypesInv.get("mystery")
+                    itemValue.setText(cgBase.cacheTypesInv.get(CacheType.MYSTERY.id)
                             + " (" + res.getString(cache.size.stringId) + ")");
                 } else {
-                    itemValue.setText(cgBase.cacheTypesInv.get("mystery"));
+                    itemValue.setText(cgBase.cacheTypesInv.get(CacheType.MYSTERY.id));
                 }
             }
             detailsList.addView(itemLayout);

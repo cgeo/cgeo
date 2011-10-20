@@ -106,9 +106,6 @@
   <string name="err_detail_cache_forgot_visit">c:geo zapomělo, jakou keš jste pohlížel.</string>
   <string name="err_detail_no_spoiler">c:geo nenašlo žádný obrázek pro tuto keš.</string>
   <string name="err_detail_no_map_static">c:geo nenašlo žádnou statickou mapu pro tuto keš.</string>
-  <string name="err_detail_still_removing">Ještě odstraňuji keš.</string>
-  <string name="err_detail_still_saving">Ještě ukládám keš.</string>
-  <string name="err_detail_still_refreshing">Ještě aktualizuji keš.</string>
   <string name="err_navigation_no">c:geo nemůže najít žádnou podporovanou navigaci.</string>
   <string name="err_application_no">c:geo nemůže najít žádnou použitelnou aplikaci.</string>
   <string name="err_auth_initialize">c:geo nedokázalo zahájit autorizaci.</string>

@@ -8,28 +8,28 @@ import android.content.Context;
  */
 public class Progress {
 
-    private static ProgressDialog dialog;
+    private ProgressDialog dialog;
 
-    public static void dismiss() {
+    public synchronized void dismiss() {
         if (dialog != null && dialog.isShowing()) {
             dialog.dismiss();
-            dialog = null;
         }
+        dialog = null;
     }
 
-    public static void show(Context context, String title, String message, boolean indeterminate, boolean cancelable) {
+    public synchronized void show(Context context, String title, String message, boolean indeterminate, boolean cancelable) {
         if (dialog == null) {
             dialog = ProgressDialog.show(context, title, message, indeterminate, cancelable);
         }
     }
 
-    public static void setMessage(final String message) {
+    public synchronized void setMessage(final String message) {
         if (dialog != null && dialog.isShowing()) {
             dialog.setMessage(message);
         }
     }
 
-    public static boolean isShowing() {
+    public synchronized boolean isShowing() {
         return dialog != null && dialog.isShowing();
     }
 

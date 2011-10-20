@@ -16,6 +16,7 @@ import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -30,6 +31,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -71,6 +73,13 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private static final int FINISHED_LOADING_DETAILS = 1;
 
     //Menu
+    private static final String EXTRAS_GEOCODE = "geocode";
+    private static final String EXTRAS_LONGITUDE = "longitude";
+    private static final String EXTRAS_LATITUDE = "latitude";
+    private static final String EXTRAS_WPTTYPE = "wpttype";
+    private static final String EXTRAS_MAPSTATE = "mapstate";
+    private static final String EXTRAS_SEARCHID = "searchid";
+    private static final String EXTRAS_DETAIL = "detail";
     private static final int MENU_SELECT_MAPVIEW = 1;
     private static final int MENU_MAP_LIVE = 2;
     private static final int MENU_STORE_CACHES = 3;
@@ -85,6 +94,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private static final int SUBMENU_VIEW_MF_OSMARENDER = 14;
     private static final int SUBMENU_VIEW_MF_CYCLEMAP = 15;
     private static final int SUBMENU_VIEW_MF_OFFLINE = 16;
+    private static final String EXTRAS_MAP_TITLE = "mapTitle";
 
     private Resources res = null;
     private Activity activity = null;
@@ -101,11 +111,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private String searchIdIntent = null;
     private String geocodeIntent = null;
     private Geopoint coordsIntent = null;
-    private String waypointTypeIntent = null;
+    private WaypointType waypointTypeIntent = null;
     private int[] mapStateIntent = null;
     // status data
-    //FIXME Horrible! multiple Downloadthreads could use this
-    private UUID searchId = null;
 
     private String token = null;
     private boolean noMapTokenShowed = false;
@@ -166,17 +174,17 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     // set title
                     final StringBuilder title = new StringBuilder();
 
-                    if (live) {
-                        title.append(res.getString(R.string.map_live));
-                    } else {
-                        title.append(res.getString(R.string.map_map));
-                    }
+                if (live) {
+                    title.append(res.getString(R.string.map_live));
+                } else {
+                    title.append(mapTitle);
+                }
 
-                    if (caches != null && cachesCnt > 0) {
-                        title.append(" [");
-                        title.append(caches.size());
-                        title.append(']');
-                    }
+                if (caches != null && cachesCnt > 0 && !mapTitle.contains("[")) {
+                    title.append(" [");
+                    title.append(caches.size());
+                    title.append(']');
+                }
 
                     ActivityMixin.setTitle(activity, title.toString());
                     break;
@@ -254,6 +262,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             }
         }
     };
+    /**
+     * calling activities can set the map title via extras
+     */
+    private String mapTitle;
 
     public CGeoMap(MapActivityImpl activity) {
         super(activity);
@@ -292,9 +304,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         // initialize map
         mapView = (MapViewImpl) activity.findViewById(mapFactory.getMapViewId());
         mapView.setMapSource();
-        if (!mapView.needsScaleOverlay()) {
-            mapView.setBuiltinScale(true);
-        }
         mapView.setBuiltInZoomControls(true);
         mapView.displayZoomControls(true);
         mapView.preLoad();
@@ -315,7 +324,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             overlayCaches = mapView.createAddMapOverlay(mapView.getContext(), getResources().getDrawable(R.drawable.marker), fromDetailIntent);
         }
 
-        if (overlayScale == null && mapView.needsScaleOverlay()) {
+        if (overlayScale == null) {
             overlayScale = mapView.createAddScaleOverlay(activity);
         }
 
@@ -335,14 +344,15 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         // get parameters
         Bundle extras = activity.getIntent().getExtras();
         if (extras != null) {
-            fromDetailIntent = extras.getBoolean("detail");
-            searchIdIntent = extras.getString("searchid");
-            geocodeIntent = extras.getString("geocode");
-            final double latitudeIntent = extras.getDouble("latitude");
-            final double longitudeIntent = extras.getDouble("longitude");
+            fromDetailIntent = extras.getBoolean(EXTRAS_DETAIL);
+            searchIdIntent = extras.getString(EXTRAS_SEARCHID);
+            geocodeIntent = extras.getString(EXTRAS_GEOCODE);
+            final double latitudeIntent = extras.getDouble(EXTRAS_LATITUDE);
+            final double longitudeIntent = extras.getDouble(EXTRAS_LONGITUDE);
             coordsIntent = new Geopoint(latitudeIntent, longitudeIntent);
-            waypointTypeIntent = extras.getString("wpttype");
-            mapStateIntent = extras.getIntArray("mapstate");
+            waypointTypeIntent = WaypointType.FIND_BY_ID.get(extras.getString(EXTRAS_WPTTYPE));
+            mapStateIntent = extras.getIntArray(EXTRAS_MAPSTATE);
+            mapTitle = extras.getString(EXTRAS_MAP_TITLE);
 
             if ("".equals(searchIdIntent)) {
                 searchIdIntent = null;
@@ -352,20 +362,15 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             }
         }
 
-        // live or death
-        //FIXME What?
-        if (searchIdIntent == null && geocodeIntent == null && coordsIntent == null) {
-            live = true;
-        } else {
-            live = false;
+        if (StringUtils.isBlank(mapTitle)) {
+            mapTitle = res.getString(R.string.map_map);
         }
 
+        // live map, if no arguments are given
+        live = (searchIdIntent == null && geocodeIntent == null && coordsIntent == null);
+
         if (null == mapStateIntent) {
-            if (live) {
-                followMyLocation = true;
-            } else {
-                followMyLocation = false;
-            }
+            followMyLocation = live;
         } else {
             followMyLocation = 1 == mapStateIntent[3] ? true : false;
         }
@@ -512,7 +517,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 item.setTitle(res.getString(R.string.map_live_enable));
             }
 
-            menu.findItem(MENU_STORE_CACHES).setEnabled(live && !isLoading() && CollectionUtils.isNotEmpty(caches) && app.hasUnsavedCaches(searchId));
+            menu.findItem(MENU_STORE_CACHES).setEnabled(live && !isLoading() && CollectionUtils.isNotEmpty(caches) && app.hasUnsavedCaches(caches));
 
             item = menu.findItem(MENU_CIRCLE_MODE); // show circles
             if (overlayCaches != null && overlayCaches.getCircles()) {
@@ -544,7 +549,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             case MENU_MAP_LIVE:
                 Settings.setLiveMap(!Settings.isLiveMap());
                 liveChanged = true;
-                searchId = null;
                 searchIdIntent = null;
                 return true;
             case MENU_STORE_CACHES:
@@ -573,6 +577,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     }
 
                     detailTotal = geocodes.size();
+                    detailProgress = 0;
 
                     if (detailTotal == 0) {
                         ActivityMixin.showToast(activity, res.getString(R.string.warn_save_nothing));
@@ -645,21 +650,21 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         // prepare information to restart a similar view
                         Intent mapIntent = new Intent(activity, Settings.getMapFactory().getMapClass());
 
-                        mapIntent.putExtra("detail", fromDetailIntent);
-                        mapIntent.putExtra("searchid", searchIdIntent);
-                        mapIntent.putExtra("geocode", geocodeIntent);
+                        mapIntent.putExtra(EXTRAS_DETAIL, fromDetailIntent);
+                        mapIntent.putExtra(EXTRAS_SEARCHID, searchIdIntent);
+                        mapIntent.putExtra(EXTRAS_GEOCODE, geocodeIntent);
                         if (coordsIntent != null) {
-                            mapIntent.putExtra("latitude", coordsIntent.getLatitude());
-                            mapIntent.putExtra("longitude", coordsIntent.getLongitude());
+                            mapIntent.putExtra(EXTRAS_LATITUDE, coordsIntent.getLatitude());
+                            mapIntent.putExtra(EXTRAS_LONGITUDE, coordsIntent.getLongitude());
                         }
-                        mapIntent.putExtra("wpttype", waypointTypeIntent);
+                        mapIntent.putExtra(EXTRAS_WPTTYPE, waypointTypeIntent != null ? waypointTypeIntent.id : null);
                         int[] mapState = new int[4];
                         GeoPointImpl mapCenter = mapView.getMapViewCenter();
                         mapState[0] = mapCenter.getLatitudeE6();
                         mapState[1] = mapCenter.getLongitudeE6();
                         mapState[2] = mapView.getMapZoomLevel();
                         mapState[3] = followMyLocation ? 1 : 0;
-                        mapIntent.putExtra("mapstate", mapState);
+                        mapIntent.putExtra(EXTRAS_MAPSTATE, mapState);
 
                         // start the new map
                         activity.startActivity(mapIntent);
@@ -1084,7 +1089,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 //2. fetch and draw(in another thread) and then insert into the db caches from geocaching.com - dont draw/insert if exist in memory?
 
                 // stage 1 - pull and render from the DB only
-
+                UUID searchId = null;
                 if (fromDetailIntent || StringUtils.isNotEmpty(searchIdIntent)) {
                     searchId = UUID.fromString(searchIdIntent);
                 } else {
@@ -1211,7 +1216,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                searchId = base.searchByViewport(token, latMin, latMax, lonMin, lonMax, 0);
+                UUID searchId = base.searchByViewport(token, latMin, latMax, lonMin, lonMax, 0);
                 if (searchId != null) {
                     downloaded = true;
                 }
@@ -1223,11 +1228,11 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                //TODO Portree Only overwrite if we got some. Otherwise maybe error icon
-                //TODO Merge not to show locally found caches
                 List<cgCache> downloadedCaches = app.getCaches(searchId, centerLat, centerLon, spanLat, spanLon);
                 if (downloadedCaches != null && downloadedCaches.size() > 0)
                 {
+                    //Only overwrite when actually got a response.
+                    //Should there not be any in the viewframe that doesn't matter user can't see them anyway.
                     caches = downloadedCaches;
                 }
                 else
@@ -1306,10 +1311,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                                     continue;
                                 }
 
-                                items.add(getItem(new cgCoord(oneWaypoint), false, oneWaypoint.type, false, false, false));
+                                items.add(getWaypointItem(new cgCoord(oneWaypoint), oneWaypoint.type));
                             }
                         }
-                        items.add(getItem(new cgCoord(cacheOne), true, cacheOne.type, cacheOne.own, cacheOne.found, cacheOne.disabled));
+                        items.add(getCacheItem(new cgCoord(cacheOne), cacheOne.type, cacheOne.own, cacheOne.found, cacheOne.disabled));
                     }
 
                     overlayCaches.updateItems(items);
@@ -1338,12 +1343,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
 
         /**
-         * Returns a OverlayItem representing the cache/waypoint
+         * Returns a OverlayItem representing the cache
          *
          * @param cgCoord
          *            The coords
-         * @param cache
-         *            true for caches
          * @param type
          *            String name
          * @param own
@@ -1354,13 +1357,36 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
          *            true for disabled
          * @return
          */
+        private CachesOverlayItemImpl getCacheItem(cgCoord cgCoord, String type, boolean own, boolean found, boolean disabled) {
+            return getItem(cgCoord, cgBase.getCacheMarkerIcon(type, own, found, disabled));
+        }
 
-        private CachesOverlayItemImpl getItem(cgCoord cgCoord, boolean cache, String type, boolean own, boolean found, boolean disabled) {
+        /**
+         * Returns a OverlayItem representing the waypoint
+         *
+         * @param cgCoord
+         *            The coords
+         * @param type
+         *            The waypoint's type
+         * @return
+         */
+        private CachesOverlayItemImpl getWaypointItem(cgCoord cgCoord, WaypointType type) {
+            return getItem(cgCoord, type != null ? type.markerId : WaypointType.WAYPOINT.markerId);
+        }
 
+        /**
+         * Returns a OverlayItem represented by an icon
+         *
+         * @param cgCoord
+         *            The coords
+         * @param icon
+         *            The icon
+         * @return
+         */
+        private CachesOverlayItemImpl getItem(cgCoord cgCoord, int icon) {
             coordinates.add(cgCoord);
             CachesOverlayItemImpl item = Settings.getMapFactory().getCachesOverlayItem(cgCoord, null);
 
-            int icon = cgBase.getMarkerIcon(cache, type, own, found, disabled);
             Drawable pin = null;
             if (iconsCache.containsKey(icon)) {
                 pin = iconsCache.get(icon);
@@ -1504,7 +1530,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 coordinates.add(coord);
                 CachesOverlayItemImpl item = Settings.getMapFactory().getCachesOverlayItem(coord, null);
 
-                final int icon = cgBase.getMarkerIcon(false, waypointTypeIntent, false, false, false);
+                final int icon = waypointTypeIntent != null ? waypointTypeIntent.markerId : null;
                 Drawable pin = null;
                 if (iconsCache.containsKey(icon)) {
                     pin = iconsCache.get(icon);
@@ -1801,5 +1827,38 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         imageView.setScaleType(ScaleType.CENTER);
         imageView.setLayoutParams(new ImageSwitcher.LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.FILL_PARENT));
         return imageView;
+    }
+
+    public static void startActivitySearch(final Activity fromActivity, final UUID searchId, final String title, boolean detail) {
+        Intent mapIntent = new Intent(fromActivity, Settings.getMapFactory().getMapClass());
+        mapIntent.putExtra(EXTRAS_DETAIL, detail);
+        mapIntent.putExtra(EXTRAS_SEARCHID, searchId.toString());
+        if (StringUtils.isNotBlank(title)) {
+            mapIntent.putExtra(CGeoMap.EXTRAS_MAP_TITLE, title);
+        }
+        fromActivity.startActivity(mapIntent);
+    }
+
+    public static void startActivityLiveMap(final Context context) {
+        context.startActivity(new Intent(context, Settings.getMapFactory().getMapClass()));
+    }
+
+    public static void startActivityCoords(final Context context, final Geopoint coords, final WaypointType type) {
+        Intent mapIntent = new Intent(context, Settings.getMapFactory().getMapClass());
+        mapIntent.putExtra(EXTRAS_DETAIL, false);
+        mapIntent.putExtra(EXTRAS_LATITUDE, coords.getLatitude());
+        mapIntent.putExtra(EXTRAS_LONGITUDE, coords.getLongitude());
+        if (type != null) {
+            mapIntent.putExtra(EXTRAS_WPTTYPE, type.id);
+        }
+        context.startActivity(mapIntent);
+    }
+
+    public static void startActivityGeoCode(final Context context, final String geocode) {
+        Intent mapIntent = new Intent(context, Settings.getMapFactory().getMapClass());
+        mapIntent.putExtra(EXTRAS_DETAIL, false);
+        mapIntent.putExtra(EXTRAS_GEOCODE, geocode);
+        mapIntent.putExtra(EXTRAS_MAP_TITLE, geocode);
+        context.startActivity(mapIntent);
     }
 }
