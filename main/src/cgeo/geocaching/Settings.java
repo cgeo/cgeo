@@ -139,7 +139,7 @@ public final class Settings {
         // this class is not to be instantiated;
     }
 
-    private static void setLanguage(boolean useEnglish) {
+    static void setLanguage(boolean useEnglish) {
         Locale locale = Locale.getDefault();
         if (useEnglish) {
             locale = new Locale("en");

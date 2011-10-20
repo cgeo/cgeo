@@ -441,6 +441,8 @@ public class cgeo extends AbstractActivity {
 
         initialized = true;
 
+        Settings.setLanguage(Settings.isUseEnglish());
+
         Settings.getLogin();
 
         if (app.firstRun) {
