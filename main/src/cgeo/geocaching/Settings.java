@@ -15,9 +15,7 @@ import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 /**
  * General c:geo preferences/settings set by the user
@@ -228,19 +226,15 @@ public final class Settings {
         });
     }
 
-    public static Map<String, String> getGCvoteLogin() {
-        final String preUsername = sharedPrefs.getString(KEY_USERNAME, null);
-        final String prePassword = sharedPrefs.getString(KEY_GCVOTE_PASSWORD, null);
+    public static ImmutablePair<String, String> getGCvoteLogin() {
+        final String username = sharedPrefs.getString(KEY_USERNAME, null);
+        final String password = sharedPrefs.getString(KEY_GCVOTE_PASSWORD, null);
 
-        if (StringUtils.isBlank(preUsername) || StringUtils.isBlank(prePassword)) {
+        if (StringUtils.isBlank(username) || StringUtils.isBlank(password)) {
             return null;
         }
-        final Map<String, String> login = new HashMap<String, String>();
 
-        login.put(KEY_USERNAME, preUsername);
-        login.put(KEY_PASSWORD, prePassword);
-
-        return login;
+        return new ImmutablePair<String, String>(username, password);
     }
 
     public static boolean setSignature(final String signature) {

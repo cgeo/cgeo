@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 import android.util.Log;
 
@@ -55,9 +56,9 @@ public final class GCVote {
         try {
             final Parameters params = new Parameters();
             if (Settings.isLogin()) {
-                final Map<String, String> login = Settings.getGCvoteLogin();
+                final ImmutablePair<String, String> login = Settings.getGCvoteLogin();
                 if (login != null) {
-                    params.put("userName", login.get("username"), "password", login.get("password"));
+                    params.put("userName", login.left, "password", login.right);
                 }
             }
             if (CollectionUtils.isNotEmpty(guids)) {
@@ -168,14 +169,14 @@ public final class GCVote {
             return false;
         }
 
-        final Map<String, String> login = Settings.getGCvoteLogin();
+        final ImmutablePair<String, String> login = Settings.getGCvoteLogin();
         if (login == null) {
             return false;
         }
 
         final Parameters params = new Parameters(
-                "userName", login.get("username"),
-                "password", login.get("password"),
+                "userName", login.left,
+                "password", login.right,
                 "cacheId", guid,
                 "voteUser", String.format("%.1f", vote).replace(',', '.'),
                 "version", "cgeo");
