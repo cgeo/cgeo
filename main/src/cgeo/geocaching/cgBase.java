@@ -428,17 +428,15 @@ public class cgBase {
     }
 
     public static StatusCode login() {
-        HttpResponse loginResponse = null;
-        String loginData = null;
+        final ImmutablePair<String, String> login = Settings.getLogin();
 
-        final ImmutablePair<String, String> loginStart = Settings.getLogin();
-
-        if (loginStart == null) {
-            return StatusCode.NO_LOGIN_INFO_STORED; // no login information stored
+        if (login == null || StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
+            Log.e(Settings.tag, "cgeoBase.login: No login information stored");
+            return StatusCode.NO_LOGIN_INFO_STORED;
         }
 
-        loginResponse = request("https://www.geocaching.com/login/default.aspx", null, false, false, false);
-        loginData = getResponseData(loginResponse);
+        HttpResponse loginResponse = request("https://www.geocaching.com/login/default.aspx", null, false, false, false);
+        String loginData = getResponseData(loginResponse);
 
         if (StringUtils.isBlank(loginData)) {
             Log.e(Settings.tag, "cgeoBase.login: Failed to retrieve login page (1st)");
@@ -446,18 +444,9 @@ public class cgBase {
         }
 
         if (checkLogin(loginData)) {
-            Log.i(Settings.tag, "Already logged in Geocaching.com as " + loginStart.left);
-
+            Log.i(Settings.tag, "Already logged in Geocaching.com as " + login.left);
             switchToEnglish(loginData);
-
             return StatusCode.NO_ERROR; // logged in
-        }
-
-        final ImmutablePair<String, String> login = Settings.getLogin();
-
-        if (login == null || StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
-            Log.e(Settings.tag, "cgeoBase.login: No login information stored");
-            return StatusCode.NO_LOGIN_INFO_STORED;
         }
 
         clearCookies();
@@ -491,17 +480,15 @@ public class cgBase {
             } else {
                 if (loginData.contains("Your username/password combination does not match.")) {
                     Log.i(Settings.tag, "Failed to log in Geocaching.com as " + login.left + " because of wrong username/password");
-
                     return StatusCode.WRONG_LOGIN_DATA; // wrong login
                 } else {
                     Log.i(Settings.tag, "Failed to log in Geocaching.com as " + login.left + " for some unknown reason");
-
                     return StatusCode.UNKNOWN_ERROR; // can't login
                 }
             }
         } else {
             Log.e(Settings.tag, "cgeoBase.login: Failed to retrieve login page (2nd)");
-
+            // FIXME: should it be CONNECTION_FAILED to match the first attempt?
             return StatusCode.COMMUNICATION_ERROR; // no login page
         }
     }
