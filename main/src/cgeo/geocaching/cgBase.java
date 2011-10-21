@@ -431,8 +431,6 @@ public class cgBase {
         HttpResponse loginResponse = null;
         String loginData = null;
 
-        String[] viewstates = null;
-
         final ImmutablePair<String, String> loginStart = Settings.getLogin();
 
         if (loginStart == null) {
@@ -441,25 +439,18 @@ public class cgBase {
 
         loginResponse = request("https://www.geocaching.com/login/default.aspx", null, false, false, false);
         loginData = getResponseData(loginResponse);
-        viewstates = getViewstates(loginData);
 
-        if (isEmpty(viewstates)) {
-            Log.e(Settings.tag, "cgeoBase.login: Failed to find viewstates");
-            return StatusCode.LOGIN_PARSE_ERROR; // no viewstates
-        }
-
-        if (StringUtils.isNotBlank(loginData)) {
-            if (checkLogin(loginData)) {
-                Log.i(Settings.tag, "Already logged in Geocaching.com as " + loginStart.left);
-
-                switchToEnglish(loginData);
-
-                return StatusCode.NO_ERROR; // logged in
-            }
-
-        } else {
+        if (StringUtils.isBlank(loginData)) {
             Log.e(Settings.tag, "cgeoBase.login: Failed to retrieve login page (1st)");
             return StatusCode.CONNECTION_FAILED; // no loginpage
+        }
+
+        if (checkLogin(loginData)) {
+            Log.i(Settings.tag, "Already logged in Geocaching.com as " + loginStart.left);
+
+            switchToEnglish(loginData);
+
+            return StatusCode.NO_ERROR; // logged in
         }
 
         final ImmutablePair<String, String> login = Settings.getLogin();
@@ -479,6 +470,11 @@ public class cgBase {
                 "ctl00$ContentBody$tbPassword", login.right,
                 "ctl00$ContentBody$cbRememberMe", "on",
                 "ctl00$ContentBody$btnSignIn", "Login");
+        final String[] viewstates = getViewstates(loginData);
+        if (isEmpty(viewstates)) {
+            Log.e(Settings.tag, "cgeoBase.login: Failed to find viewstates");
+            return StatusCode.LOGIN_PARSE_ERROR; // no viewstates
+        }
         putViewstates(params, viewstates);
 
         loginResponse = postRequest("https://www.geocaching.com/login/default.aspx", params);
