@@ -129,8 +129,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     //FIXME should be members of UsersTimer since started by it.
     private UsersThread usersThread = null;
     private DisplayUsersThread displayUsersThread = null;
-    //Interthread communication flag But what does it do?
-    private volatile boolean downloaded = false;
+    //FIXME Interthread communication flag. Set to true when the first caches were found.
+    private boolean downloaded = false;
     // overlays
     private CachesOverlay overlayCaches = null;
     private OtherCachersOverlay overlayOtherCachers = null;
@@ -386,7 +386,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         myLocSwitch.setOnClickListener(new MyLocationListener());
         switchMyLocationButton();
 
-        startTimer();
+        // removed startTimer since onResume is allways called
 
         // show the filter warning bar if the filter is set
         if (Settings.getCacheType() != null) {
@@ -897,6 +897,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                             moved = true;
                             force = true;
                         } else if (live && Settings.isLiveMap() && !downloaded) {
+                            //Keep moving until something has been found.
                             moved = true;
                         } else if (centerLatitude == null || centerLongitude == null) {
                             moved = true;
@@ -926,6 +927,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                                     force = true; // probably stucked thread
                                 }
 
+                                //FIXME Why stop it and wait for it to have stopped. We just have to ignore the result.
                                 if (force && loadThread != null && loadThread.isWorking()) {
                                     loadThread.stopIt();
 
