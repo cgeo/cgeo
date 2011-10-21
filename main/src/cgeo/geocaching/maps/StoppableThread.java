@@ -19,9 +19,17 @@ public class StoppableThread extends Thread {
         super(name);
     }
 
+    /**
+     * @return true when this Thread has been requested to stop.
+     */
+
     public boolean isStopped() {
         return stop;
     }
+
+    /**
+     * Requests this Thread to stop.
+     */
 
     public synchronized void stopIt() {
         stop = true;
