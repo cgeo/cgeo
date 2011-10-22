@@ -7,7 +7,6 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.utils.CryptUtils;
 
@@ -16,6 +15,7 @@ import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import android.R.color;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -262,6 +262,15 @@ public class cgeodetail extends AbstractActivity {
                     descView.setVisibility(View.VISIBLE);
                     descView.setText(longDesc, TextView.BufferType.SPANNABLE);
                     descView.setMovementMethod(LinkMovementMethod.getInstance());
+                    // handle caches with black font color
+                    if (!Settings.isLightSkin()) {
+                        if (cache.getDescription().contains("color=\"#000000")) {
+                            descView.setBackgroundResource(color.darker_gray);
+                        }
+                        else {
+                            descView.setBackgroundResource(color.black);
+                        }
+                    }
                 }
                 else {
                     descView.setVisibility(View.GONE);
@@ -732,8 +741,8 @@ public class cgeodetail extends AbstractActivity {
 
             String size = "";
             if (cache.size != null) {
-                // don't show "not chosen" for events, that should be the normal case
-                if (!(cache.isEventCache() && cache.size == CacheSize.NOT_CHOSEN)) {
+                // don't show "not chosen" for events and virtuals, that should be the normal case
+                if (cache.showSize()) {
                     size = " (" + res.getString(cache.size.stringId) + ")";
                 }
             }
@@ -1153,8 +1162,11 @@ public class cgeodetail extends AbstractActivity {
     }
 
     private void parseLongDescription() {
-        if (longDesc == null && cache != null && cache.getDescription() != null) {
-            longDesc = Html.fromHtml(cache.getDescription().trim(), new cgHtmlImg(this, geocode, true, cache.reason, false), new UnknownTagsHandler());
+        if (longDesc == null && cache != null) {
+            String description = cache.getDescription();
+            if (description != null) {
+                longDesc = Html.fromHtml(description.trim(), new cgHtmlImg(this, geocode, true, cache.reason, false), new UnknownTagsHandler());
+            }
         }
     }
 
