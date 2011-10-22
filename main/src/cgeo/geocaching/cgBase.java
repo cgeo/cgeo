@@ -997,6 +997,18 @@ public class cgBase {
     }
 
     public static cgCacheWrap parseCache(final String page, final int reason, final Handler handler) {
+        final cgCacheWrap caches = parseCacheFromText(page, reason, handler);
+        if (!caches.cacheList.isEmpty()) {
+            final cgCache cache = caches.cacheList.get(0);
+            getExtraOnlineInfo(cache, page, handler);
+            cache.updated = System.currentTimeMillis();
+            cache.detailedUpdate = cache.updated;
+            cache.detailed = true;
+        }
+        return caches;
+    }
+
+    static cgCacheWrap parseCacheFromText(final String page, final int reason, final Handler handler) {
         sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_details);
 
         if (StringUtils.isBlank(page)) {
@@ -1278,11 +1290,6 @@ public class cgBase {
             Log.w(Settings.tag, "cgeoBase.parseCache: Failed to parse cache log count");
         }
 
-        // cache logs
-        sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
-
-        loadLogsFromDetails(page, cache);
-
         int wpBegin = 0;
         int wpEnd = 0;
 
@@ -1411,25 +1418,27 @@ public class cgBase {
             }
         }
 
+        caches.cacheList.add(cache);
+
+        return caches;
+    }
+
+    private static void getExtraOnlineInfo(final cgCache cache, final String page, final Handler handler) {
+        sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
+        loadLogsFromDetails(page, cache);
+
+        sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_elevation);
         if (cache.coords != null) {
             cache.elevation = getElevation(cache.coords);
         }
 
         sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_gcvote);
-
         final cgRating rating = GCVote.getRating(cache.guid, cache.geocode);
         if (rating != null) {
             cache.rating = rating.rating;
             cache.votes = rating.votes;
             cache.myVote = rating.myVote;
         }
-
-        cache.updated = System.currentTimeMillis();
-        cache.detailedUpdate = System.currentTimeMillis();
-        cache.detailed = true;
-        caches.cacheList.add(cache);
-
-        return caches;
     }
 
     /**

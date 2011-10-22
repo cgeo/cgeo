@@ -480,6 +480,7 @@
   <string name="cache_dialog_loading_details_status_logs">Chargement des entrées de carnets</string>
   <string name="cache_dialog_loading_details_status_waypoints">Traitement des points intermédiaires</string>
   <string name="cache_dialog_loading_details_status_gcvote">Chargement des votes</string>
+  <string name="cache_dialog_loading_details_status_elevation">Chargement de l\'altitude</string>
   <string name="cache_dialog_loading_details_status_render">Préparation de la page</string>
   <string name="cache_dialog_loading_description">Chargement de la description…</string>
   <string name="cache_dialog_offline_save_title">Hors ligne</string>
