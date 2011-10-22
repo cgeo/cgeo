@@ -1526,43 +1526,43 @@ public class cgBase {
 
     private static void checkFields(cgCache cache) {
         if (StringUtils.isBlank(cache.geocode)) {
-            Log.w(Settings.tag, "cgBase.loadLogsFromDetails: geo code not parsed correctly");
+            Log.e(Settings.tag, "cgBase.loadLogsFromDetails: geo code not parsed correctly");
         }
         if (StringUtils.isBlank(cache.name)) {
-            Log.w(Settings.tag, "name not parsed correctly");
+            Log.e(Settings.tag, "name not parsed correctly");
         }
         if (StringUtils.isBlank(cache.guid)) {
-            Log.w(Settings.tag, "guid not parsed correctly");
+            Log.e(Settings.tag, "guid not parsed correctly");
         }
         if (cache.terrain == null || cache.terrain == 0.0) {
-            Log.w(Settings.tag, "terrain not parsed correctly");
+            Log.e(Settings.tag, "terrain not parsed correctly");
         }
         if (cache.difficulty == null || cache.difficulty == 0.0) {
-            Log.w(Settings.tag, "difficulty not parsed correctly");
+            Log.e(Settings.tag, "difficulty not parsed correctly");
         }
         if (StringUtils.isBlank(cache.owner)) {
-            Log.w(Settings.tag, "owner not parsed correctly");
+            Log.e(Settings.tag, "owner not parsed correctly");
         }
         if (StringUtils.isBlank(cache.ownerReal)) {
-            Log.w(Settings.tag, "owner real not parsed correctly");
+            Log.e(Settings.tag, "owner real not parsed correctly");
         }
         if (cache.hidden == null) {
-            Log.w(Settings.tag, "hidden not parsed correctly");
+            Log.e(Settings.tag, "hidden not parsed correctly");
         }
         if (cache.favouriteCnt == null) {
-            Log.w(Settings.tag, "favoriteCount not parsed correctly");
+            Log.e(Settings.tag, "favoriteCount not parsed correctly");
         }
         if (cache.size == null) {
-            Log.w(Settings.tag, "size not parsed correctly");
+            Log.e(Settings.tag, "size not parsed correctly");
         }
         if (StringUtils.isBlank(cache.type)) {
-            Log.w(Settings.tag, "type not parsed correctly");
+            Log.e(Settings.tag, "type not parsed correctly");
         }
         if (cache.coords == null) {
-            Log.w(Settings.tag, "coordinates not parsed correctly");
+            Log.e(Settings.tag, "coordinates not parsed correctly");
         }
         if (StringUtils.isBlank(cache.location)) {
-            Log.w(Settings.tag, "location not parsed correctly");
+            Log.e(Settings.tag, "location not parsed correctly");
         }
     }
 
