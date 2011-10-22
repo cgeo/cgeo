@@ -577,4 +577,13 @@ public class cgCache implements ICache {
         }
         return nameForSorting;
     }
+
+    public boolean isVirtual() {
+        return CacheType.VIRTUAL.id.equalsIgnoreCase(type) || CacheType.WEBCAM.id.equalsIgnoreCase(type)
+                || CacheType.EARTH.id.equalsIgnoreCase(type);
+    }
+
+    public boolean showSize() {
+        return !((isEventCache() || isVirtual()) && size == CacheSize.NOT_CHOSEN);
+    }
 }
