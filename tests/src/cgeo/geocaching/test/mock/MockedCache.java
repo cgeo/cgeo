@@ -41,7 +41,7 @@ public abstract class MockedCache implements ICache {
     public static String readCachePage(final String geocode) {
         try {
             final InputStream is = MockedCache.class.getResourceAsStream("/cgeo/geocaching/test/mock/" + geocode + ".html");
-            final BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            final BufferedReader br = new BufferedReader(new InputStreamReader(is), 150000);
 
             final StringBuffer buffer = new StringBuffer();
             String line = null;

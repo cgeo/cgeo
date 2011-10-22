@@ -26,9 +26,9 @@ public class WhitespaceTest extends AndroidTestCase {
 
     @Override
     protected void setUp() throws Exception {
-        final StringBuffer buffer = new StringBuffer();
+        final StringBuffer buffer = new StringBuffer(4096);
         final InputStream is = this.getClass().getResourceAsStream("/cgeo/geocaching/test/mock/GC2CJPF.html");
-        final BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        final BufferedReader br = new BufferedReader(new InputStreamReader(is), 4096);
 
         String line = null;
 
@@ -78,7 +78,7 @@ public class WhitespaceTest extends AndroidTestCase {
         String result = matcher.replaceAll(" ").trim();
         final long end = System.currentTimeMillis();
         assertEquals(111956, result.length());
-        Log.w(Settings.tag, (end - start) + " ms regex");
+        Log.d(Settings.tag, (end - start) + " ms regex");
     }
 
     public void testReplaceAll() {
@@ -86,7 +86,7 @@ public class WhitespaceTest extends AndroidTestCase {
         String result = data.replaceAll("\\s+", " ");
         final long end = System.currentTimeMillis();
         assertEquals(111958, result.length());
-        Log.w(Settings.tag, (end - start) + " ms replaceAll");
+        Log.d(Settings.tag, (end - start) + " ms replaceAll");
     }
 
     public void testActualImplementation() {
@@ -95,7 +95,7 @@ public class WhitespaceTest extends AndroidTestCase {
         result = BaseUtils.replaceWhitespace(data);
         final long end = System.currentTimeMillis();
         assertEquals(111957, result.length());
-        Log.w(Settings.tag, (end - start) + " ms actual implementation");
+        Log.d(Settings.tag, (end - start) + " ms actual implementation");
     }
 
     public void testManually() {
@@ -104,7 +104,7 @@ public class WhitespaceTest extends AndroidTestCase {
         result = replaceWhitespaceManually(data);
         final long end = System.currentTimeMillis();
         assertEquals(111957, result.length());
-        Log.w(Settings.tag, (end - start) + " ms manually");
+        Log.d(Settings.tag, (end - start) + " ms manually");
     }
 
     public void testStringUtils() {
@@ -113,6 +113,6 @@ public class WhitespaceTest extends AndroidTestCase {
         result = replaceWhitespaceStringUtils(data);
         final long end = System.currentTimeMillis();
         assertEquals(111956, result.length());
-        Log.w(Settings.tag, (end - start) + " ms StringUtils");
+        Log.d(Settings.tag, (end - start) + " ms StringUtils");
     }
 }

@@ -20,7 +20,7 @@ public class RegExRealPerformanceTest extends AndroidTestCase {
         List<String> output = RegExPerformanceTest.doTheTests(10);
 
         for (String s : output) {
-            Log.w(Settings.tag, s);
+            Log.d(Settings.tag, s);
         }
 
     }
