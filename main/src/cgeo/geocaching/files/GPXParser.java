@@ -47,9 +47,9 @@ import java.util.regex.Pattern;
 
 public abstract class GPXParser extends FileParser {
 
-    private static final SimpleDateFormat formatSimple = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // 2010-04-20T07:00:00Z
-    private static final SimpleDateFormat formatSimpleMilliSeconds = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S'Z'"); // 2010-04-20T07:00:00.000Z
-    private static final SimpleDateFormat formatTimezone = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SZ"); // 2010-04-20T01:01:03.000-04:00
+    private static final SimpleDateFormat formatSimple = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"); // 2010-04-20T07:00:00
+    private static final SimpleDateFormat formatSimpleZ = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // 2010-04-20T07:00:00Z
+    private static final SimpleDateFormat formatTimezone = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ"); // 2010-04-20T01:01:03-04:00
 
     private static final Pattern patternGeocode = Pattern.compile("([A-Z]{2}[0-9A-Z]+)", Pattern.CASE_INSENSITIVE);
     private static final Pattern patternGuid = Pattern.compile(".*" + Pattern.quote("guid=") + "([0-9a-z\\-]+)", Pattern.CASE_INSENSITIVE);
@@ -69,6 +69,7 @@ public abstract class GPXParser extends FileParser {
 
     public static final String GPX_FILE_EXTENSION = ".gpx";
     public static final String WAYPOINTS_FILE_SUFFIX_AND_EXTENSION = "-wpts.gpx";
+    private static final Pattern PATTERN_MILLISECONDS = Pattern.compile("\\.\\d{3}");
 
     private int listId = 1;
     final protected String namespace;
@@ -229,13 +230,16 @@ public abstract class GPXParser extends FileParser {
     }
 
     static Date parseDate(String inputUntrimmed) throws ParseException {
-        final String input = inputUntrimmed.trim();
-        if (input.length() >= 3 && input.charAt(input.length() - 3) == ':') {
+        String input = inputUntrimmed.trim();
+        // remove milli seconds to reduce number of needed patterns
+        final Matcher matcher = PATTERN_MILLISECONDS.matcher(input);
+        input = matcher.replaceFirst("");
+        if (input.contains("Z")) {
+            return formatSimpleZ.parse(input);
+        }
+        if (StringUtils.countMatches(input, ":") == 3) {
             final String removeColon = input.substring(0, input.length() - 3) + input.substring(input.length() - 2);
             return formatTimezone.parse(removeColon);
-        }
-        if (input.contains(".")) {
-            return formatSimpleMilliSeconds.parse(input);
         }
         return formatSimple.parse(input);
     }
