@@ -13,6 +13,7 @@ import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.AlertDialog;
@@ -953,13 +954,7 @@ public class cgeodetail extends AbstractActivity {
                     if (inventoryString.length() > 0) {
                         inventoryString.append('\n');
                     }
-                    // avoid HTML parsing where possible
-                    if (containsHtml(inventoryItem.getName())) {
-                        inventoryString.append(Html.fromHtml(inventoryItem.getName()).toString());
-                    }
-                    else {
-                        inventoryString.append(inventoryItem.getName());
-                    }
+                    inventoryString.append(StringEscapeUtils.unescapeHtml4(inventoryItem.getName()));
                 }
                 inventView.setText(inventoryString);
                 inventBox.setClickable(true);
@@ -1090,30 +1085,15 @@ public class cgeodetail extends AbstractActivity {
                     if (StringUtils.isBlank(wpt.name)) {
                         nameView.setText(cgBase.formatCoords(wpt.coords, true));
                     } else {
-                        // avoid HTML parsing
-                        if (containsHtml(wpt.name)) {
-                            nameView.setText(Html.fromHtml(wpt.name.trim()), TextView.BufferType.SPANNABLE);
-                        }
-                        else {
-                            nameView.setText(wpt.name.trim());
-                        }
+                        nameView.setText(StringEscapeUtils.unescapeHtml4(wpt.name));
                     }
                     wpt.setIcon(res, nameView);
 
-                    // avoid HTML parsing
                     TextView noteView = (TextView) waypointView.findViewById(R.id.note);
-                    if (containsHtml(wpt.note)) {
-                        noteView.setText(Html.fromHtml(wpt.note.trim()), TextView.BufferType.SPANNABLE);
-                    }
-                    else {
-                        noteView.setText(wpt.note.trim());
-                    }
+                    noteView.setText(StringEscapeUtils.unescapeHtml4(wpt.note));
 
                     waypointView.setOnClickListener(new waypointInfo(wpt.id));
                     registerForContextMenu(waypointView);
-                    //                    registerForContextMenu(identification);
-                    //                    registerForContextMenu(nameView);
-                    //                    registerForContextMenu(noteView);
 
                     waypoints.addView(waypointView);
                 }
@@ -1266,13 +1246,7 @@ public class cgeodetail extends AbstractActivity {
                 } else {
                     ((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(4)); // note if type is unknown
                 }
-                // avoid parsing HTML if not necessary
-                if (containsHtml(log.author)) {
-                    ((TextView) rowView.findViewById(R.id.author)).setText(Html.fromHtml(log.author), TextView.BufferType.SPANNABLE);
-                }
-                else {
-                    ((TextView) rowView.findViewById(R.id.author)).setText(log.author);
-                }
+                ((TextView) rowView.findViewById(R.id.author)).setText(StringEscapeUtils.unescapeHtml4(log.author));
 
                 if (log.found == -1) {
                     ((TextView) rowView.findViewById(R.id.count)).setVisibility(View.GONE);
