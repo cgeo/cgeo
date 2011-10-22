@@ -43,6 +43,10 @@ public class cgData {
             "favourite_cnt", "rating", "votes", "myvote", "disabled", "archived", "members", "found", "favourite", "inventorycoins", "inventorytags",
             "inventoryunknown", "onWatchlist", "personal_note", "reliable_latlon"
     };
+    /**
+     * holds the column indexes of the cache table to avoid lookups
+     */
+    private static int[] cacheColumnIndex;
     private Context context = null;
     private String path = null;
     private cgDbHelper dbHelper = null;
@@ -2020,60 +2024,101 @@ public class cgData {
         int index;
         cgCache cache = new cgCache();
 
-        cache.updated = cursor.getLong(cursor.getColumnIndex("updated"));
-        cache.reason = cursor.getInt(cursor.getColumnIndex("reason"));
-        cache.detailed = cursor.getInt(cursor.getColumnIndex("detailed")) == 1;
-        cache.detailedUpdate = cursor.getLong(cursor.getColumnIndex("detailedupdate"));
-        cache.visitedDate = cursor.getLong(cursor.getColumnIndex("visiteddate"));
-        cache.geocode = cursor.getString(cursor.getColumnIndex("geocode"));
-        cache.cacheId = cursor.getString(cursor.getColumnIndex("cacheid"));
-        cache.guid = cursor.getString(cursor.getColumnIndex("guid"));
-        cache.type = cursor.getString(cursor.getColumnIndex("type"));
-        cache.name = cursor.getString(cursor.getColumnIndex("name"));
-        cache.own = cursor.getInt(cursor.getColumnIndex("own")) == 1;
-        cache.owner = cursor.getString(cursor.getColumnIndex("owner"));
-        cache.ownerReal = cursor.getString(cursor.getColumnIndex("owner_real"));
-        cache.hidden = new Date(cursor.getLong(cursor.getColumnIndex("hidden")));
-        cache.hint = cursor.getString(cursor.getColumnIndex("hint"));
-        cache.size = CacheSize.FIND_BY_ID.get(cursor.getString(cursor.getColumnIndex("size")));
-        cache.difficulty = cursor.getFloat(cursor.getColumnIndex("difficulty"));
-        index = cursor.getColumnIndex("direction");
+        if (cacheColumnIndex == null) {
+            cacheColumnIndex = new int[37];
+            cacheColumnIndex[0] = cursor.getColumnIndex("updated");
+            cacheColumnIndex[1] = cursor.getColumnIndex("reason");
+            cacheColumnIndex[2] = cursor.getColumnIndex("detailed");
+            cacheColumnIndex[3] = cursor.getColumnIndex("detailedupdate");
+            cacheColumnIndex[4] = cursor.getColumnIndex("visiteddate");
+            cacheColumnIndex[5] = cursor.getColumnIndex("geocode");
+            cacheColumnIndex[6] = cursor.getColumnIndex("cacheid");
+            cacheColumnIndex[7] = cursor.getColumnIndex("guid");
+            cacheColumnIndex[8] = cursor.getColumnIndex("type");
+            cacheColumnIndex[9] = cursor.getColumnIndex("name");
+            cacheColumnIndex[10] = cursor.getColumnIndex("own");
+            cacheColumnIndex[11] = cursor.getColumnIndex("owner");
+            cacheColumnIndex[12] = cursor.getColumnIndex("owner_real");
+            cacheColumnIndex[13] = cursor.getColumnIndex("hidden");
+            cacheColumnIndex[14] = cursor.getColumnIndex("hint");
+            cacheColumnIndex[15] = cursor.getColumnIndex("size");
+            cacheColumnIndex[16] = cursor.getColumnIndex("difficulty");
+            cacheColumnIndex[17] = cursor.getColumnIndex("direction");
+            cacheColumnIndex[18] = cursor.getColumnIndex("distance");
+            cacheColumnIndex[19] = cursor.getColumnIndex("terrain");
+            cacheColumnIndex[20] = cursor.getColumnIndex("latlon");
+            cacheColumnIndex[21] = cursor.getColumnIndex("location");
+            cacheColumnIndex[22] = cursor.getColumnIndex("elevation");
+            cacheColumnIndex[23] = cursor.getColumnIndex("personal_note");
+            cacheColumnIndex[24] = cursor.getColumnIndex("shortdesc");
+            cacheColumnIndex[25] = cursor.getColumnIndex("favourite_cnt");
+            cacheColumnIndex[26] = cursor.getColumnIndex("rating");
+            cacheColumnIndex[27] = cursor.getColumnIndex("votes");
+            cacheColumnIndex[28] = cursor.getColumnIndex("myvote");
+            cacheColumnIndex[29] = cursor.getColumnIndex("disabled");
+            cacheColumnIndex[30] = cursor.getColumnIndex("archived");
+            cacheColumnIndex[31] = cursor.getColumnIndex("members");
+            cacheColumnIndex[32] = cursor.getColumnIndex("found");
+            cacheColumnIndex[33] = cursor.getColumnIndex("favourite");
+            cacheColumnIndex[34] = cursor.getColumnIndex("inventoryunknown");
+            cacheColumnIndex[35] = cursor.getColumnIndex("onWatchlist");
+            cacheColumnIndex[36] = cursor.getColumnIndex("reliable_latlon");
+        }
+
+        cache.updated = cursor.getLong(cacheColumnIndex[0]);
+        cache.reason = cursor.getInt(cacheColumnIndex[1]);
+        cache.detailed = cursor.getInt(cacheColumnIndex[2]) == 1;
+        cache.detailedUpdate = cursor.getLong(cacheColumnIndex[3]);
+        cache.visitedDate = cursor.getLong(cacheColumnIndex[4]);
+        cache.geocode = cursor.getString(cacheColumnIndex[5]);
+        cache.cacheId = cursor.getString(cacheColumnIndex[6]);
+        cache.guid = cursor.getString(cacheColumnIndex[7]);
+        cache.type = cursor.getString(cacheColumnIndex[8]);
+        cache.name = cursor.getString(cacheColumnIndex[9]);
+        cache.own = cursor.getInt(cacheColumnIndex[10]) == 1;
+        cache.owner = cursor.getString(cacheColumnIndex[11]);
+        cache.ownerReal = cursor.getString(cacheColumnIndex[12]);
+        cache.hidden = new Date(cursor.getLong(cacheColumnIndex[13]));
+        cache.hint = cursor.getString(cacheColumnIndex[14]);
+        cache.size = CacheSize.FIND_BY_ID.get(cursor.getString(cacheColumnIndex[15]));
+        cache.difficulty = cursor.getFloat(cacheColumnIndex[16]);
+        index = cacheColumnIndex[17];
         if (cursor.isNull(index)) {
             cache.direction = null;
         } else {
             cache.direction = cursor.getFloat(index);
         }
-        index = cursor.getColumnIndex("distance");
+        index = cacheColumnIndex[18];
         if (cursor.isNull(index)) {
             cache.distance = null;
         } else {
             cache.distance = cursor.getFloat(index);
         }
-        cache.terrain = cursor.getFloat(cursor.getColumnIndex("terrain"));
-        cache.latlon = cursor.getString(cursor.getColumnIndex("latlon"));
-        cache.location = cursor.getString(cursor.getColumnIndex("location"));
+        cache.terrain = cursor.getFloat(cacheColumnIndex[19]);
+        cache.latlon = cursor.getString(cacheColumnIndex[20]);
+        cache.location = cursor.getString(cacheColumnIndex[21]);
         cache.coords = getCoords(cursor);
-        index = cursor.getColumnIndex("elevation");
+        index = cacheColumnIndex[22];
         if (cursor.isNull(index)) {
             cache.elevation = null;
         } else {
             cache.elevation = cursor.getDouble(index);
         }
-        cache.personalNote = cursor.getString(cursor.getColumnIndex("personal_note"));
-        cache.shortdesc = cursor.getString(cursor.getColumnIndex("shortdesc"));
+        cache.personalNote = cursor.getString(cacheColumnIndex[23]);
+        cache.shortdesc = cursor.getString(cacheColumnIndex[24]);
         // do not set cache.description !
-        cache.favouriteCnt = cursor.getInt(cursor.getColumnIndex("favourite_cnt"));
-        cache.rating = cursor.getFloat(cursor.getColumnIndex("rating"));
-        cache.votes = cursor.getInt(cursor.getColumnIndex("votes"));
-        cache.myVote = cursor.getFloat(cursor.getColumnIndex("myvote"));
-        cache.disabled = cursor.getLong(cursor.getColumnIndex("disabled")) == 1L;
-        cache.archived = cursor.getLong(cursor.getColumnIndex("archived")) == 1L;
-        cache.members = cursor.getLong(cursor.getColumnIndex("members")) == 1L;
-        cache.found = cursor.getLong(cursor.getColumnIndex("found")) == 1L;
-        cache.favourite = cursor.getLong(cursor.getColumnIndex("favourite")) == 1L;
-        cache.inventoryItems = cursor.getInt(cursor.getColumnIndex("inventoryunknown"));
-        cache.onWatchlist = cursor.getLong(cursor.getColumnIndex("onWatchlist")) == 1L;
-        cache.reliableLatLon = cursor.getInt(cursor.getColumnIndex("reliable_latlon")) > 0;
+        cache.favouriteCnt = cursor.getInt(cacheColumnIndex[25]);
+        cache.rating = cursor.getFloat(cacheColumnIndex[26]);
+        cache.votes = cursor.getInt(cacheColumnIndex[27]);
+        cache.myVote = cursor.getFloat(cacheColumnIndex[28]);
+        cache.disabled = cursor.getInt(cacheColumnIndex[29]) == 1;
+        cache.archived = cursor.getInt(cacheColumnIndex[30]) == 1;
+        cache.members = cursor.getInt(cacheColumnIndex[31]) == 1;
+        cache.found = cursor.getInt(cacheColumnIndex[32]) == 1;
+        cache.favourite = cursor.getInt(cacheColumnIndex[33]) == 1;
+        cache.inventoryItems = cursor.getInt(cacheColumnIndex[34]);
+        cache.onWatchlist = cursor.getInt(cacheColumnIndex[35]) == 1;
+        cache.reliableLatLon = cursor.getInt(cacheColumnIndex[36]) > 0;
         return cache;
     }
 
