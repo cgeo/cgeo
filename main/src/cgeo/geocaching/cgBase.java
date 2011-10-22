@@ -1377,7 +1377,7 @@ public class cgBase {
                         final Matcher matcherWpLatLon = patternWpPrefixOrLookupOrLatlon.matcher(wp[7]);
                         if (matcherWpLatLon.find() && matcherWpLatLon.groupCount() > 1) {
                             String latlon = Html.fromHtml(matcherWpLatLon.group(2)).toString().trim();
-                            if (!StringUtils.containsOnly(latlon, '?')) {
+                            if (!StringUtils.startsWith(latlon, "???")) {
                                 waypoint.latlon = latlon;
                                 waypoint.coords = new Geopoint(latlon);
                             }
@@ -3430,7 +3430,7 @@ public class cgBase {
     /**
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 sept. à 12:35".
-     * 
+     *
      * @param context
      *            a Context
      * @param date
