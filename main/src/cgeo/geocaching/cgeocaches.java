@@ -187,7 +187,7 @@ public class cgeocaches extends AbstractListActivity {
                     setTitle(title + " [" + app.getCount(searchId) + "]");
                     cacheList.clear();
 
-                    final List<cgCache> cacheListTmp = app.getCaches(searchId);
+                    final List<cgCache> cacheListTmp = app.getCaches(searchId, false);
                     if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                         cacheList.addAll(cacheListTmp);
                         cacheListTmp.clear();
@@ -285,7 +285,7 @@ public class cgeocaches extends AbstractListActivity {
                     setTitle(title + " [" + app.getCount(searchId) + "]");
                     cacheList.clear();
 
-                    final List<cgCache> cacheListTmp = app.getCaches(searchId);
+                    final List<cgCache> cacheListTmp = app.getCaches(searchId, false);
                     if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                         cacheList.addAll(cacheListTmp);
                         cacheListTmp.clear();
@@ -374,7 +374,7 @@ public class cgeocaches extends AbstractListActivity {
                 }
             } else {
                 if (cacheList != null && searchId != null) {
-                    final List<cgCache> cacheListTmp = app.getCaches(searchId);
+                    final List<cgCache> cacheListTmp = app.getCaches(searchId, false);
                     if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                         cacheList.clear();
                         cacheList.addAll(cacheListTmp);
@@ -444,7 +444,7 @@ public class cgeocaches extends AbstractListActivity {
 
                 cacheList.clear();
 
-                final List<cgCache> cacheListTmp = app.getCaches(searchId);
+                final List<cgCache> cacheListTmp = app.getCaches(searchId, false);
                 if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                     cacheList.addAll(cacheListTmp);
                     cacheListTmp.clear();
@@ -472,7 +472,7 @@ public class cgeocaches extends AbstractListActivity {
 
             cacheList.clear();
 
-            final List<cgCache> cacheListTmp = app.getCaches(searchId);
+            final List<cgCache> cacheListTmp = app.getCaches(searchId, false);
             if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                 cacheList.addAll(cacheListTmp);
                 cacheListTmp.clear();

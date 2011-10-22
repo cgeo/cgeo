@@ -1129,7 +1129,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                caches = app.getCaches(searchId);
+                caches = app.getCaches(searchId, true);
 
                 //if in live map and stored caches are found / disables are also shown.
                 if (live && Settings.isLiveMap()) {
