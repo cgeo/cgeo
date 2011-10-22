@@ -12,6 +12,7 @@ import cgeo.geocaching.files.LocParser;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.BaseUtils;
+import cgeo.geocaching.utils.CancellableHandler;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
@@ -995,19 +996,22 @@ public class cgBase {
         return caches;
     }
 
-    public static cgCacheWrap parseCache(final String page, final int reason, final Handler handler) {
+    public static cgCacheWrap parseCache(final String page, final int reason, final CancellableHandler handler) {
         final cgCacheWrap caches = parseCacheFromText(page, reason, handler);
-        if (!caches.cacheList.isEmpty()) {
+        if (caches != null && !caches.cacheList.isEmpty()) {
             final cgCache cache = caches.cacheList.get(0);
             getExtraOnlineInfo(cache, page, handler);
             cache.updated = System.currentTimeMillis();
             cache.detailedUpdate = cache.updated;
             cache.detailed = true;
         }
+        if (CancellableHandler.isCancelled(handler)) {
+            return null;
+        }
         return caches;
     }
 
-    static cgCacheWrap parseCacheFromText(final String page, final int reason, final Handler handler) {
+    static cgCacheWrap parseCacheFromText(final String page, final int reason, final CancellableHandler handler) {
         sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_details);
 
         if (StringUtils.isBlank(page)) {
@@ -1203,6 +1207,9 @@ public class cgBase {
         try {
             final String spoilers = BaseUtils.getMatch(page, GCConstants.PATTERN_SPOILERS, false, null);
             if (null != spoilers) {
+                if (CancellableHandler.isCancelled(handler)) {
+                    return null;
+                }
                 sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_spoilers);
 
                 final Matcher matcherSpoilersInside = GCConstants.PATTERN_SPOILERSINSIDE.matcher(spoilers);
@@ -1294,6 +1301,9 @@ public class cgBase {
 
         wpBegin = page.indexOf("<table class=\"Table\" id=\"ctl00_ContentBody_Waypoints\">");
         if (wpBegin != -1) { // parse waypoints
+            if (CancellableHandler.isCancelled(handler)) {
+                return null;
+            }
             sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_waypoints);
 
             final Pattern patternWpType = Pattern.compile("\\/wpttypes\\/sm\\/(.+)\\.jpg", Pattern.CASE_INSENSITIVE);
@@ -1422,15 +1432,24 @@ public class cgBase {
         return caches;
     }
 
-    private static void getExtraOnlineInfo(final cgCache cache, final String page, final Handler handler) {
+    private static void getExtraOnlineInfo(final cgCache cache, final String page, final CancellableHandler handler) {
+        if (CancellableHandler.isCancelled(handler)) {
+            return;
+        }
         sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
         loadLogsFromDetails(page, cache);
 
+        if (CancellableHandler.isCancelled(handler)) {
+            return;
+        }
         sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_elevation);
         if (cache.coords != null) {
             cache.elevation = getElevation(cache.coords);
         }
 
+        if (CancellableHandler.isCancelled(handler)) {
+            return;
+        }
         sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_gcvote);
         final cgRating rating = GCVote.getRating(cache.guid, cache.geocode);
         if (rating != null) {
@@ -2065,7 +2084,7 @@ public class cgBase {
         return search;
     }
 
-    public cgSearch searchByGeocode(final String geocode, final String guid, final int reason, final boolean forceReload, final Handler handler) {
+    public cgSearch searchByGeocode(final String geocode, final String guid, final int reason, final boolean forceReload, final CancellableHandler handler) {
         final cgSearch search = new cgSearch();
 
         if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
@@ -2953,7 +2972,7 @@ public class cgBase {
         return path.delete();
     }
 
-    public void storeCache(cgeoapplication app, Activity activity, cgCache cache, String geocode, int listId, Handler handler) {
+    public void storeCache(cgeoapplication app, Activity activity, cgCache cache, String geocode, int listId, CancellableHandler handler) {
         try {
             // get cache details, they may not yet be complete
             if (cache != null) {
@@ -2975,6 +2994,10 @@ public class cgBase {
                 return;
             }
 
+            if (CancellableHandler.isCancelled(handler)) {
+                return;
+            }
+
             final cgHtmlImg imgGetter = new cgHtmlImg(activity, cache.geocode, false, listId, true);
 
             // store images from description
@@ -2982,11 +3005,19 @@ public class cgBase {
                 Html.fromHtml(cache.getDescription(), imgGetter, null);
             }
 
+            if (CancellableHandler.isCancelled(handler)) {
+                return;
+            }
+
             // store spoilers
             if (CollectionUtils.isNotEmpty(cache.spoilers)) {
                 for (cgImage oneSpoiler : cache.spoilers) {
                     imgGetter.getDrawable(oneSpoiler.url);
                 }
+            }
+
+            if (CancellableHandler.isCancelled(handler)) {
+                return;
             }
 
             // store images from logs
@@ -3000,8 +3031,16 @@ public class cgBase {
                 }
             }
 
+            if (CancellableHandler.isCancelled(handler)) {
+                return;
+            }
+
             // store map previews
             StaticMapsProvider.downloadMaps(cache, activity);
+
+            if (CancellableHandler.isCancelled(handler)) {
+                return;
+            }
 
             app.markStored(cache.geocode, listId);
             app.removeCacheFromCache(cache.geocode);
@@ -3010,7 +3049,7 @@ public class cgBase {
                 handler.sendMessage(new Message());
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgBase.storeCache: " + e.toString());
+            Log.e(Settings.tag, "cgBase.storeCache");
         }
     }
 

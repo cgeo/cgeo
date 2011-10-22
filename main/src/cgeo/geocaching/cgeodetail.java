@@ -8,6 +8,7 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -120,9 +121,9 @@ public class cgeodetail extends AbstractActivity {
 
     private Progress progress = new Progress();
 
-    private Handler storeCacheHandler = new Handler() {
+    private class StoreCacheHandler extends CancellableHandler {
         @Override
-        public void handleMessage(Message msg) {
+        public void handleRegularMessage(Message msg) {
             storeThread = null;
 
             try {
@@ -137,9 +138,9 @@ public class cgeodetail extends AbstractActivity {
         }
     };
 
-    private Handler refreshCacheHandler = new Handler() {
+    private class RefreshCacheHandler extends CancellableHandler {
         @Override
-        public void handleMessage(Message msg) {
+        public void handleRegularMessage(Message msg) {
             refreshThread = null;
 
             try {
@@ -169,9 +170,9 @@ public class cgeodetail extends AbstractActivity {
         }
     };
 
-    private Handler loadCacheHandler = new Handler() {
+    private class LoadCacheHandler extends CancellableHandler {
         @Override
-        public void handleMessage(Message msg) {
+        public void handleRegularMessage(final Message msg) {
             if (cgBase.UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
                 updateStatusMsg((String) msg.obj);
             } else {
@@ -398,6 +399,8 @@ public class cgeodetail extends AbstractActivity {
 
         app.setAction(geocode);
 
+        final LoadCacheHandler loadCacheHandler = new LoadCacheHandler();
+
         try {
             String title = res.getString(R.string.cache);
             if (StringUtils.isNotBlank(name)) {
@@ -405,7 +408,7 @@ public class cgeodetail extends AbstractActivity {
             } else if (StringUtils.isNotBlank(geocode)) {
                 title = geocode.toUpperCase();
             }
-            progress.show(this, title, res.getString(R.string.cache_dialog_loading_details), true, true);
+            progress.show(this, title, res.getString(R.string.cache_dialog_loading_details), true, loadCacheHandler.cancelMessage());
         } catch (Exception e) {
             // nothing, we lost the window
         }
@@ -1361,9 +1364,9 @@ public class cgeodetail extends AbstractActivity {
 
     private class loadCache extends Thread {
 
-        private Handler handler = null;
+        private CancellableHandler handler = null;
 
-        public loadCache(Handler handlerIn) {
+        public loadCache(CancellableHandler handlerIn) {
             handler = handlerIn;
 
             if (geocode == null && guid == null) {
@@ -1420,7 +1423,7 @@ public class cgeodetail extends AbstractActivity {
     }
 
     public void loadLongDesc() {
-        progress.show(this, null, res.getString(R.string.cache_dialog_loading_description), true, true);
+        progress.show(this, null, res.getString(R.string.cache_dialog_loading_description), true, null);
 
         threadLongDesc = new loadLongDesc(loadDescriptionHandler);
         threadLongDesc.start();
@@ -1718,7 +1721,9 @@ public class cgeodetail extends AbstractActivity {
                 return;
             }
 
-            progress.show(cgeodetail.this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, true);
+            final StoreCacheHandler storeCacheHandler = new StoreCacheHandler();
+
+            progress.show(cgeodetail.this, res.getString(R.string.cache_dialog_offline_save_title), res.getString(R.string.cache_dialog_offline_save_message), true, storeCacheHandler.cancelMessage());
 
             if (storeThread != null) {
                 storeThread.interrupt();
@@ -1736,7 +1741,9 @@ public class cgeodetail extends AbstractActivity {
                 return;
             }
 
-            progress.show(cgeodetail.this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, true);
+            final RefreshCacheHandler refreshCacheHandler = new RefreshCacheHandler();
+
+            progress.show(cgeodetail.this, res.getString(R.string.cache_dialog_refresh_title), res.getString(R.string.cache_dialog_refresh_message), true, refreshCacheHandler.cancelMessage());
 
             if (refreshThread != null) {
                 refreshThread.interrupt();
@@ -1748,30 +1755,30 @@ public class cgeodetail extends AbstractActivity {
     }
 
     private class storeCacheThread extends Thread {
-        private Handler handler = null;
+        final private CancellableHandler handler;
 
-        public storeCacheThread(Handler handlerIn) {
-            handler = handlerIn;
+        public storeCacheThread(final CancellableHandler handler) {
+            this.handler = handler;
         }
 
         @Override
         public void run() {
-            int reason = (cache.reason > 1) ? cache.reason : 1;
+            int reason = cache.reason > 1 ? cache.reason : 1;
             base.storeCache(app, cgeodetail.this, cache, null, reason, handler);
         }
     }
 
     private class refreshCacheThread extends Thread {
-        private Handler handler = null;
+        final private CancellableHandler handler;
 
-        public refreshCacheThread(Handler handlerIn) {
-            handler = handlerIn;
+        public refreshCacheThread(final CancellableHandler handler) {
+            this.handler = handler;
         }
 
         @Override
         public void run() {
             app.removeCacheFromCache(geocode);
-            search = base.searchByGeocode(cache.geocode, null, 0, true, null);
+            search = base.searchByGeocode(cache.geocode, null, 0, true, handler);
 
             handler.sendEmptyMessage(0);
         }
@@ -1784,7 +1791,7 @@ public class cgeodetail extends AbstractActivity {
                 return;
             }
 
-            progress.show(cgeodetail.this, res.getString(R.string.cache_dialog_offline_drop_title), res.getString(R.string.cache_dialog_offline_drop_message), true, false);
+            progress.show(cgeodetail.this, res.getString(R.string.cache_dialog_offline_drop_title), res.getString(R.string.cache_dialog_offline_drop_message), true, null);
             Thread thread = new dropCacheThread(dropCacheHandler);
             thread.start();
         }
@@ -1813,7 +1820,7 @@ public class cgeodetail extends AbstractActivity {
                 showToast(res.getString(R.string.err_watchlist_still_managing));
                 return;
             }
-            progress.show(cgeodetail.this, res.getString(titleId), res.getString(messageId), true, true);
+            progress.show(cgeodetail.this, res.getString(titleId), res.getString(messageId), true, null);
 
             if (watchlistThread != null) {
                 watchlistThread.interrupt();

@@ -8,11 +8,11 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCacheWrap;
 import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.utils.CancellableHandler;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import android.os.Handler;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -67,7 +67,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
     }
 
     @Override
-    public cgSearch searchByGeocode(final cgBase base, String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final Handler handler) {
+    public cgSearch searchByGeocode(final cgBase base, String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final CancellableHandler handler) {
         final Parameters params = new Parameters("decrypt", "y");
         if (StringUtils.isNotBlank(geocode)) {
             params.put("wp", geocode);

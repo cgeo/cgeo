@@ -2,6 +2,7 @@ package cgeo.geocaching.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.Message;
 
 /**
  * progress dialog wrapper for easier management of resources
@@ -17,9 +18,12 @@ public class Progress {
         dialog = null;
     }
 
-    public synchronized void show(Context context, String title, String message, boolean indeterminate, boolean cancelable) {
+    public synchronized void show(final Context context, final String title, final String message, final boolean indeterminate, final Message cancelMessage) {
         if (dialog == null) {
-            dialog = ProgressDialog.show(context, title, message, indeterminate, cancelable);
+            dialog = ProgressDialog.show(context, title, message, indeterminate, cancelMessage != null);
+            if (cancelMessage != null) {
+                dialog.setCancelMessage(cancelMessage);
+            }
         }
     }
 
