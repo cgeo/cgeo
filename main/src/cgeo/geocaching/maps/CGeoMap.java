@@ -130,7 +130,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private UsersThread usersThread = null;
     private DisplayUsersThread displayUsersThread = null;
     //FIXME Interthread communication flag. Set to true when the first caches were found.
-    private boolean downloaded = false;
+    private volatile boolean downloaded = false;
     // overlays
     private CachesOverlay overlayCaches = null;
     private OtherCachersOverlay overlayOtherCachers = null;
@@ -1532,6 +1532,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 coordinates.add(coord);
                 CachesOverlayItemImpl item = Settings.getMapFactory().getCachesOverlayItem(coord, null);
 
+                //FIXME assign with null?
                 final int icon = waypointTypeIntent != null ? waypointTypeIntent.markerId : null;
                 Drawable pin = null;
                 if (iconsCache.containsKey(icon)) {
