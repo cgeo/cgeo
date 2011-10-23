@@ -809,7 +809,7 @@ public abstract class GPXParser extends FileParser {
 
     static WaypointType convertWaypointSym2Type(final String sym) {
         if ("parking area".equalsIgnoreCase(sym)) {
-            return WaypointType.PKG;
+            return WaypointType.PARKING;
         } else if ("stages of a multicache".equalsIgnoreCase(sym)) {
             return WaypointType.STAGE;
         } else if ("question to answer".equalsIgnoreCase(sym)) {
@@ -817,7 +817,7 @@ public abstract class GPXParser extends FileParser {
         } else if ("trailhead".equalsIgnoreCase(sym)) {
             return WaypointType.TRAILHEAD;
         } else if ("final location".equalsIgnoreCase(sym)) {
-            return WaypointType.FLAG;
+            return WaypointType.FINAL;
         } else {
             return WaypointType.WAYPOINT;
         }

@@ -1,35 +1,47 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.enumerations.WaypointType;
 
 import android.test.AndroidTestCase;
-
-import junit.framework.Assert;
 
 public class cgWaypointTest extends AndroidTestCase {
 
     public static void testOrder() {
-		final cgWaypoint wp1 = new cgWaypoint();
-		final cgWaypoint wp2 = new cgWaypoint();
+        final cgWaypoint cache = new cgWaypoint();
+        cache.type = WaypointType.FINAL;
 
-		wp1.setPrefix("PK");
-		wp2.setPrefix("X");
-		Assert.assertTrue(wp1.compareTo(wp2) < 0);
+        final cgWaypoint trailhead = new cgWaypoint();
+        trailhead.type = WaypointType.TRAILHEAD;
 
-		wp1.setPrefix("S1");
-		Assert.assertTrue(wp1.compareTo(wp2) > 0);
+        final cgWaypoint stage = new cgWaypoint();
+        stage.type = WaypointType.STAGE;
 
-		wp2.setPrefix("S3");
-		Assert.assertTrue(wp1.compareTo(wp2) < 0);
+        final cgWaypoint puzzle = new cgWaypoint();
+        puzzle.type = WaypointType.PUZZLE;
 
-		wp1.setPrefix("S10");
-		Assert.assertTrue(wp1.compareTo(wp2) > 0);
+        final cgWaypoint own = new cgWaypoint();
+        own.type = WaypointType.OWN;
 
-		wp2.setPrefix("FI");
-		Assert.assertTrue(wp1.compareTo(wp2) < 0);
+        final cgWaypoint parking = new cgWaypoint();
+        parking.type = WaypointType.PARKING;
 
-		wp1.setPrefix("OWN");
-		Assert.assertTrue(wp1.compareTo(wp2) > 0);
+        assertTrue(trailhead.compareTo(puzzle) < 0);
+        assertTrue(trailhead.compareTo(stage) < 0);
+        assertTrue(trailhead.compareTo(cache) < 0);
+
+        assertTrue(stage.compareTo(cache) < 0);
+        assertTrue(puzzle.compareTo(cache) < 0);
+
+        assertTrue(trailhead.compareTo(own) < 0);
+        assertTrue(puzzle.compareTo(own) < 0);
+        assertTrue(stage.compareTo(own) < 0);
+        assertTrue(cache.compareTo(own) < 0);
+
+        assertTrue(parking.compareTo(puzzle) < 0);
+        assertTrue(parking.compareTo(stage) < 0);
+        assertTrue(parking.compareTo(cache) < 0);
+        assertTrue(parking.compareTo(own) < 0);
+        assertTrue(parking.compareTo(trailhead) < 0);
 	}
 
 }

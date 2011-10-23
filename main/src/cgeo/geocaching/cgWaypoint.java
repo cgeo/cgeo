@@ -103,27 +103,19 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
     }
 
     private int computeOrder() {
-        if (StringUtils.isEmpty(getPrefix())) {
-            return 0;
-        }
-        // check only the first character. sometimes there are inconsistencies like FI or FN for the FINAL
-        final char firstLetter = Character.toUpperCase(getPrefix().charAt(0));
-        switch (firstLetter) {
-            case 'P':
-                return -100; // parking
-            case 'S': { // stage N
-                try {
-                    final Integer stageNumber = Integer.valueOf(getPrefix().substring(1));
-                    return stageNumber;
-                } catch (NumberFormatException e) {
-                    // nothing
-                }
-                return 0;
-            }
-            case 'F':
-                return 1000; // final
-            case 'O':
-                return 10000; // own
+        switch (type) {
+            case PARKING:
+                return -1;
+            case TRAILHEAD:
+                return 1;
+            case STAGE: // puzzles and stages with same value
+                return 2;
+            case PUZZLE:
+                return 2;
+            case FINAL:
+                return 3;
+            case OWN:
+                return 4;
             default:
                 return 0;
         }

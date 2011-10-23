@@ -102,11 +102,11 @@ public class GPXParserTest extends InstrumentationTestCase {
     public static void testConvertWaypointSym2Type() {
         assertEquals(WaypointType.WAYPOINT, GPXParser.convertWaypointSym2Type("unknown sym"));
 
-        assertEquals(WaypointType.PKG, GPXParser.convertWaypointSym2Type("Parking area"));
+        assertEquals(WaypointType.PARKING, GPXParser.convertWaypointSym2Type("Parking area"));
         assertEquals(WaypointType.STAGE, GPXParser.convertWaypointSym2Type("Stages of a multicache"));
         assertEquals(WaypointType.PUZZLE, GPXParser.convertWaypointSym2Type("Question to answer"));
         assertEquals(WaypointType.TRAILHEAD, GPXParser.convertWaypointSym2Type("Trailhead"));
-        assertEquals(WaypointType.FLAG, GPXParser.convertWaypointSym2Type("Final location"));
+        assertEquals(WaypointType.FINAL, GPXParser.convertWaypointSym2Type("Final location"));
         assertEquals(WaypointType.WAYPOINT, GPXParser.convertWaypointSym2Type("Reference point"));
     }
 
@@ -160,7 +160,7 @@ public class GPXParserTest extends InstrumentationTestCase {
         assertEquals("---", wp.lookup);
         assertEquals("Parkplatz", wp.name);
         assertEquals("Kostenfreies Parken (je nach Parkreihe Parkscheibe erforderlich)", wp.note);
-        assertEquals(WaypointType.PKG, wp.type);
+        assertEquals(WaypointType.PARKING, wp.type);
         assertEquals(49.317517, wp.coords.getLatitude(), 0.000001);
         assertEquals(8.545083, wp.coords.getLongitude(), 0.000001);
 

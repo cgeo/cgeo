@@ -250,11 +250,11 @@ public abstract class AbstractLocusApp extends AbstractApp {
 
     private static String toLocusId(final WaypointType wt) {
         switch (wt) {
-            case FLAG:
+            case FINAL:
                 return PointGeocachingData.CACHE_WAYPOINT_TYPE_FINAL;
             case OWN:
                 return PointGeocachingData.CACHE_WAYPOINT_TYPE_STAGES;
-            case PKG:
+            case PARKING:
                 return PointGeocachingData.CACHE_WAYPOINT_TYPE_PARKING;
             case PUZZLE:
                 return PointGeocachingData.CACHE_WAYPOINT_TYPE_QUESTION;
