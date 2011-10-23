@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="cgeo">
+<project name="cgeo-include">
 
 <!-- The local.properties file is created and updated by the 'android'
      tool.
@@ -31,21 +31,26 @@
          This file is an integral part of the build system for your
          application and should be checked into Version Control Systems. -->
     <property file="default.properties" />
-    
+
     <!-- The private.properties file sets api-keys as well as keystore,
          certificate and passwords (if you want).
          See /templates/private.properties for more information. -->
     <property file="private.properties" />
 
-
-    <!-- Required pre-setup import -->
-    <import file="${sdk.dir}/tools/ant/pre_setup.xml" />
-
+    <target name="install_release" description="Install signed release application" depends="release">
+        <exec executable="${sdk.dir}/platform-tools/adb">
+            <arg line="install -r ./bin/${ant.project.name}-release.apk" />
+        </exec>
+    </target>
 
 <!-- extension targets. Uncomment the ones where you want to do custom work
      in between standard targets -->
 
     <target name="-pre-build">
+        <condition property="build.mode.release" else="false">
+            <equals arg1="${build.target}" arg2="release" />
+        </condition>
+
         <if condition="${build.mode.release}">
             <then>
                 <filterset id="build-tokens">
@@ -96,6 +101,5 @@
                below to <setup import="false" />.
              - customize to your needs.
     -->
-    <setup />
 
 </project>
