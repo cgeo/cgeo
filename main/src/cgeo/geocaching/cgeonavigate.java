@@ -20,12 +20,17 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
 public class cgeonavigate extends AbstractActivity {
 
-    public final static List<cgCoord> coordinates = new ArrayList<cgCoord>();
+    private static final String EXTRAS_LONGITUDE = "longitude";
+    private static final String EXTRAS_LATITUDE = "latitude";
+    private static final String EXTRAS_NAME = "name";
+    private static final String EXTRAS_GEOCODE = "geocode";
+    private static final List<cgCoord> coordinates = new ArrayList<cgCoord>();
     private PowerManager pm = null;
     private cgGeo geo = null;
     private cgDirection dir = null;
@@ -83,9 +88,9 @@ public class cgeonavigate extends AbstractActivity {
         // get parameters
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            title = extras.getString("geocode");
-            name = extras.getString("name");
-            dstCoords = new Geopoint(extras.getDouble("latitude"), extras.getDouble("longitude"));
+            title = extras.getString(EXTRAS_GEOCODE);
+            name = extras.getString(EXTRAS_NAME);
+            dstCoords = new Geopoint(extras.getDouble(EXTRAS_LATITUDE), extras.getDouble(EXTRAS_LONGITUDE));
 
             if (StringUtils.isNotBlank(name)) {
                 if (StringUtils.isNotBlank(title)) {
@@ -443,5 +448,19 @@ public class cgeonavigate extends AbstractActivity {
                 }
             }
         }
+    }
+
+    public static void startActivity(final Context context, final String geocode, final String displayedName, final Geopoint coords, final Collection<cgCoord> coordinatesWithType) {
+        coordinates.clear();
+        coordinates.addAll(coordinatesWithType);
+
+        final Intent navigateIntent = new Intent(context, cgeonavigate.class);
+        navigateIntent.putExtra(EXTRAS_LATITUDE, coords.getLatitude());
+        navigateIntent.putExtra(EXTRAS_LONGITUDE, coords.getLongitude());
+        navigateIntent.putExtra(EXTRAS_GEOCODE, geocode.toUpperCase());
+        if (null != displayedName) {
+            navigateIntent.putExtra(EXTRAS_NAME, displayedName);
+        }
+        context.startActivity(navigateIntent);
     }
 }

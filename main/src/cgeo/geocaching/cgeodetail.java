@@ -918,9 +918,10 @@ public class cgeodetail extends AbstractActivity {
                         .getDefaultDisplay().getWidth();
                 ViewParent child = attribBox;
                 do {
-                    if (child instanceof View)
+                    if (child instanceof View) {
                         attributeBoxMaxWidth = attributeBoxMaxWidth - ((View) child).getPaddingLeft()
                                 - ((View) child).getPaddingRight();
+                    }
                     child = child.getParent();
                 } while (child != null);
 
@@ -1153,8 +1154,9 @@ public class cgeodetail extends AbstractActivity {
             }
         }
 
-        if (geo != null)
+        if (geo != null) {
             geoUpdate.updateLoc(geo);
+        }
     }
 
     static private boolean containsHtml(final String str) {
@@ -1459,16 +1461,16 @@ public class cgeodetail extends AbstractActivity {
 
         try {
             // waypoints
-            for (cgWaypoint waypoint : cache.waypoints) {
-                if (waypoint.coords == null) {
-                    continue;
+            if (null != cache.waypoints) {
+                for (cgWaypoint waypoint : cache.waypoints) {
+                    if (null != waypoint.coords) {
+                        coords = new cgCoord();
+                        coords.type = "waypoint";
+                        coords.name = waypoint.name;
+                        coords.coords = waypoint.coords;
+                        coordinates.add(coords);
+                    }
                 }
-
-                coords = new cgCoord();
-                coords.type = "waypoint";
-                coords.name = waypoint.name;
-                coords.coords = waypoint.coords;
-                coordinates.add(coords);
             }
         } catch (Exception e) {
             Log.e(Settings.tag, "cgeodetail.getCoordinates (waypoint): " + e.toString());
@@ -1601,17 +1603,7 @@ public class cgeodetail extends AbstractActivity {
             showToast(res.getString(R.string.err_location_unknown));
         }
 
-        cgeonavigate navigateActivity = new cgeonavigate();
-
-        Intent navigateIntent = new Intent(this, navigateActivity.getClass());
-        navigateIntent.putExtra("latitude", cache.coords.getLatitude());
-        navigateIntent.putExtra("longitude", cache.coords.getLongitude());
-        navigateIntent.putExtra("geocode", cache.geocode.toUpperCase());
-        navigateIntent.putExtra("name", cache.name);
-
-        cgeonavigate.coordinates.clear();
-        cgeonavigate.coordinates.addAll(getCoordinates());
-        startActivity(navigateIntent);
+        cgeonavigate.startActivity(this, cache.geocode, cache.name, cache.coords, getCoordinates());
     }
 
     private class waypointInfo implements View.OnClickListener {
@@ -1948,16 +1940,7 @@ public class cgeodetail extends AbstractActivity {
 
             return;
         }
-
-        Intent navigateIntent = new Intent(this, cgeonavigate.class);
-        navigateIntent.putExtra("latitude", cache.coords.getLatitude());
-        navigateIntent.putExtra("longitude", cache.coords.getLongitude());
-        navigateIntent.putExtra("geocode", cache.geocode.toUpperCase());
-        navigateIntent.putExtra("name", cache.name);
-
-        cgeonavigate.coordinates.clear();
-        cgeonavigate.coordinates.addAll(getCoordinates());
-        startActivity(navigateIntent);
+        cgeonavigate.startActivity(this, cache.geocode, cache.name, cache.coords, getCoordinates());
     }
 
     /**
@@ -2090,13 +2073,15 @@ public class cgeodetail extends AbstractActivity {
                     attribute = translated;
                 }
             }
-            if (buffer.length() > 0)
+            if (buffer.length() > 0) {
                 buffer.append('\n');
+            }
             buffer.append(attribute);
         }
 
-        if (noAttributeIconsFound)
+        if (noAttributeIconsFound) {
             buffer.append("\n\n").append(res.getString(R.string.cache_attributes_no_icons));
+        }
 
         attribView.setText(buffer);
 

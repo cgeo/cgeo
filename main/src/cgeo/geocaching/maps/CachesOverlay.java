@@ -36,6 +36,7 @@ import android.text.Html;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOverlay {
@@ -290,16 +291,9 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
                     dialog.setPositiveButton("navigate", new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int id) {
-                            cgeonavigate navigateActivity = new cgeonavigate();
-
-                            cgeonavigate.coordinates.clear();
-                            cgeonavigate.coordinates.add(coordinate);
-
-                            Intent navigateIntent = new Intent(context, navigateActivity.getClass());
-                            navigateIntent.putExtra("latitude", coordinate.coords.getLatitude());
-                            navigateIntent.putExtra("longitude", coordinate.coords.getLongitude());
-                            navigateIntent.putExtra("geocode", coordinate.geocode.toUpperCase());
-                            context.startActivity(navigateIntent);
+                            final Collection<cgCoord> coordinatesWithType = new ArrayList<cgCoord>();
+                            coordinatesWithType.add(coordinate);
+                            cgeonavigate.startActivity(context, coordinate.geocode.toUpperCase(), null, coordinate.coords, coordinatesWithType);
                             dialog.cancel();
                         }
                     });
@@ -327,17 +321,9 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
                 dialog.setPositiveButton("navigate", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int id) {
-                        cgeonavigate navigateActivity = new cgeonavigate();
-
-                        cgeonavigate.coordinates.clear();
-                        cgeonavigate.coordinates.add(coordinate);
-
-                        Intent navigateIntent = new Intent(context, navigateActivity.getClass());
-                        navigateIntent.putExtra("latitude", coordinate.coords.getLatitude());
-                        navigateIntent.putExtra("longitude", coordinate.coords.getLongitude());
-                        navigateIntent.putExtra("geocode", coordinate.name);
-
-                        context.startActivity(navigateIntent);
+                        Collection<cgCoord> coordinatesWithType = new ArrayList<cgCoord>();
+                        coordinatesWithType.add(coordinate);
+                        cgeonavigate.startActivity(context, coordinate.name, null, coordinate.coords, coordinatesWithType);
                         dialog.cancel();
                     }
                 });

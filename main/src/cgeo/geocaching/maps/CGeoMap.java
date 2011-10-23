@@ -1539,15 +1539,22 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             }
 
             if (coordsIntent != null) {
-                cgCoord coord = new cgCoord();
+                final cgCoord coord = new cgCoord();
                 coord.type = "waypoint";
                 coord.coords = coordsIntent;
                 coord.name = "some place";
 
                 coordinates.add(coord);
-                CachesOverlayItemImpl item = Settings.getMapFactory().getCachesOverlayItem(coord, null);
+                final CachesOverlayItemImpl item = Settings.getMapFactory().getCachesOverlayItem(coord, null);
 
-                final int icon = waypointTypeIntent != null ? waypointTypeIntent.markerId : null;
+                final int icon;
+                if (waypointTypeIntent != null) {
+                    icon = waypointTypeIntent.markerId;
+                }
+                else {
+                    icon = WaypointType.WAYPOINT.markerId;
+                }
+
                 Drawable pin = null;
                 if (iconsCache.containsKey(icon)) {
                     pin = iconsCache.get(icon);
