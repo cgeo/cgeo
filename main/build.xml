@@ -38,27 +38,61 @@
          This file is an integral part of the build system for your
          application and should be checked into Version Control Systems. -->
     <loadproperties srcFile="project.properties" />
+    
+    <!-- The private.properties file sets api-keys as well as keystore,
+         certificate and passwords (if you want).
+         See /templates/private.properties for more information. -->
+    <property file="private.properties" />
 
     <!-- quick check on sdk.dir -->
     <fail
             message="sdk.dir is missing. Make sure to generate local.properties using 'android update project'"
             unless="sdk.dir"
     />
-
-    <import file="build_cgeo.xml"/>
-
-
-<!-- extension targets. Uncomment the ones where you want to do custom work
-     in between standard targets -->
-<!--
-    <target name="-pre-build">
+    
+    <!-- Custom targets -->
+    <target name="install_release" description="Install signed release application" depends="release">
+        <exec executable="${sdk.dir}/platform-tools/adb">
+            <arg line="install -r ./bin/${ant.project.name}-release.apk" />
+        </exec>
     </target>
+    
+    <target name="debugAPI" depends="-pre-build"
+        description="Changes API key to debug">
+    </target>
+    
+    <!-- extension targets. Uncomment the ones where you want to do custom work
+         in between standard targets -->
+    <target name="-pre-build">
+        <condition property="build.mode.release" else="false">
+            <equals arg1="${build.target}" arg2="release" />
+        </condition>
+
+        <if condition="${build.mode.release}">
+            <then>
+                <filterset id="build-tokens">
+                    <filter token="maps.api.key" value="${maps.api.key.market}"/>
+                </filterset>
+            </then>
+            <else>
+                <filterset id="build-tokens">
+                    <filter token="maps.api.key" value="${maps.api.key}"/>
+                </filterset>
+            </else>
+        </if>
+        <copy file="./templates/mapsapikey.xml" todir="./res/values/" overwrite="true">
+            <filterset refid="build-tokens" />
+        </copy>
+    </target>
+
+<!--
     <target name="-pre-compile">
     </target>
-
-    /* This is typically used for code obfuscation.
+-->
+    <!-- This is typically used for code obfuscation.
        Compiled code location: ${out.classes.absolute.dir}
-       If this is not done in place, override ${out.dex.input.absolute.dir} */
+       If this is not done in place, override ${out.dex.input.absolute.dir} -->
+<!--
     <target name="-post-compile">
     </target>
 -->
