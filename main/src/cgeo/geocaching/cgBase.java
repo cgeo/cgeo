@@ -1718,11 +1718,14 @@ public class cgBase {
             Log.w(Settings.tag, "cgeoBase.parseTrackable: Failed to parse trackable last known place");
         }
 
-        // released
+        // released date - can be missing on the page
         try {
-            trackable.setReleased(dateTbIn1.parse(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_RELEASES, false, null)));
-            if (trackable.getReleased() == null) {
-                trackable.setReleased(dateTbIn2.parse(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_RELEASES, false, null)));
+            String releaseString = BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_RELEASES, false, null);
+            if (releaseString != null) {
+                trackable.setReleased(dateTbIn1.parse(releaseString));
+                if (trackable.getReleased() == null) {
+                    trackable.setReleased(dateTbIn2.parse(releaseString));
+                }
             }
         } catch (ParseException e1) {
             trackable.setReleased(null);
@@ -1731,7 +1734,10 @@ public class cgBase {
 
         // trackable distance
         try {
-            trackable.setDistance(DistanceParser.parseDistance(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_DISTANCE, false, null), Settings.isUseMetricUnits()));
+            String distanceString = BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_DISTANCE, false, null);
+            if (distanceString != null) {
+                trackable.setDistance(DistanceParser.parseDistance(distanceString, Settings.isUseMetricUnits()));
+            }
         } catch (NumberFormatException e) {
             trackable.setDistance(null);
             throw e;
