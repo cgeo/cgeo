@@ -1100,8 +1100,12 @@ public class cgeodetail extends AbstractActivity {
                     wpt.setIcon(res, nameView);
 
                     TextView noteView = (TextView) waypointView.findViewById(R.id.note);
-                    noteView.setText(StringEscapeUtils.unescapeHtml4(wpt.note));
-
+                    if (containsHtml(wpt.note)) {
+                        noteView.setText(Html.fromHtml(wpt.note.trim()), TextView.BufferType.SPANNABLE);
+                    }
+                    else {
+                        noteView.setText(wpt.note.trim());
+                    }
                     waypointView.setOnClickListener(new waypointInfo(wpt.id));
                     registerForContextMenu(waypointView);
 
