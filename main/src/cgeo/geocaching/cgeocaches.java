@@ -1159,11 +1159,9 @@ public class cgeocaches extends AbstractListActivity {
 
             if (cache.coords != null) {
                 menu.add(0, MENU_COMPASS, 0, res.getString(R.string.cache_menu_compass));
-                SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
+                SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
                 NavigationAppFactory.addMenuItems(subMenu, this, res);
                 addVisitMenu(menu, cache);
-                //				String label = settings.getLogOffline()? res.getString(R.string.cache_menu_visit_offline) : res.getString(R.string.cache_menu_visit);
-                //				menu.add(0, MENU_LOG_VISIT, 0, label);
                 menu.add(0, MENU_CACHE_DETAILS, 0, res.getString(R.string.cache_menu_details));
             }
             if (cache.reason >= 1) {

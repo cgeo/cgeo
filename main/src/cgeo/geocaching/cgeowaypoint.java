@@ -138,7 +138,7 @@ public class cgeowaypoint extends AbstractActivity {
 
         setTheme();
         setContentView(R.layout.waypoint);
-        setTitle("waypoint");
+        setTitle(R.string.waypoint_title);
 
         // get parameters
         Bundle extras = getIntent().getExtras();
@@ -213,7 +213,7 @@ public class cgeowaypoint extends AbstractActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, MENU_ID_COMPASS, 0, res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass); // compass
 
-        SubMenu subMenu = menu.addSubMenu(1, MENU_ID_NAVIGATION, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
+        SubMenu subMenu = menu.addSubMenu(1, MENU_ID_NAVIGATION, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
         addNavigationMenuItems(subMenu);
 
         menu.add(0, MENU_ID_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
