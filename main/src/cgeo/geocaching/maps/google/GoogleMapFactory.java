@@ -36,7 +36,7 @@ public class GoogleMapFactory implements MapFactory {
     }
 
     @Override
-    public CachesOverlayItemImpl getCachesOverlayItem(cgCoord coordinate, String type) {
+    public CachesOverlayItemImpl getCachesOverlayItem(final cgCoord coordinate, final String type) {
         GoogleCacheOverlayItem baseItem = new GoogleCacheOverlayItem(coordinate, type);
         return baseItem;
     }

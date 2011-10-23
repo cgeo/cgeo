@@ -24,7 +24,7 @@ public interface MapFactory {
 
     public GeoPointImpl getGeoPointBase(final Geopoint coords);
 
-    CachesOverlayItemImpl getCachesOverlayItem(cgCoord coordinate, String type);
+    public CachesOverlayItemImpl getCachesOverlayItem(final cgCoord coordinate, final String type);
 
     public OtherCachersOverlayItemImpl getOtherCachersOverlayItemBase(Context context,
             cgUser userOne);

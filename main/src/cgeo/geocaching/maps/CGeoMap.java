@@ -213,10 +213,11 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 if (waitDialog != null) {
                     int secondsElapsed = (int) ((System.currentTimeMillis() - detailProgressTime) / 1000);
                     int secondsRemaining;
-                    if (detailProgress > 0) //DP can be zero and cause devisionByZero
+                    if (detailProgress > 0) {
                         secondsRemaining = (detailTotal - detailProgress) * secondsElapsed / detailProgress;
-                    else
+                    } else {
                         secondsRemaining = (detailTotal - detailProgress) * secondsElapsed;
+                    }
 
                     waitDialog.setProgress(detailProgress);
                     if (secondsRemaining < 40) {
@@ -595,7 +596,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
                             for (cgCache oneCache : cachesProtected) {
                                 if (oneCache != null && oneCache.coords != null) {
-                                    if (cgBase.isCacheInViewPort(mapCenterLat, mapCenterLon, mapSpanLat, mapSpanLon, oneCache.coords) && app.isOffline(oneCache.geocode, null) == false) {
+                                    if (!cgBase.isCacheInViewPort(mapCenterLat, mapCenterLon, mapSpanLat, mapSpanLon, oneCache.coords) && app.isOffline(oneCache.geocode, null)) {
                                         geocodes.add(oneCache.geocode);
                                     }
                                 }
@@ -1369,7 +1370,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
          * @return
          */
         private CachesOverlayItemImpl getCacheItem(cgCoord cgCoord, String type, boolean own, boolean found, boolean disabled) {
-            return getItem(cgCoord, cgBase.getCacheMarkerIcon(type, own, found, disabled));
+            return getItem(cgCoord, cgBase.getCacheMarkerIcon(type, own, found, disabled), type);
         }
 
         /**
@@ -1382,7 +1383,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
          * @return
          */
         private CachesOverlayItemImpl getWaypointItem(cgCoord cgCoord, WaypointType type) {
-            return getItem(cgCoord, type != null ? type.markerId : WaypointType.WAYPOINT.markerId);
+            return getItem(cgCoord, type != null ? type.markerId : WaypointType.WAYPOINT.markerId, null);
         }
 
         /**
@@ -1392,11 +1393,13 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
          *            The coords
          * @param icon
          *            The icon
+         * @param cacheType
+         *            cacheType, this will influence the style of the circles drawn around it
          * @return
          */
-        private CachesOverlayItemImpl getItem(cgCoord cgCoord, int icon) {
+        private CachesOverlayItemImpl getItem(cgCoord cgCoord, int icon, final String cacheType) {
             coordinates.add(cgCoord);
-            CachesOverlayItemImpl item = Settings.getMapFactory().getCachesOverlayItem(cgCoord, null);
+            CachesOverlayItemImpl item = Settings.getMapFactory().getCachesOverlayItem(cgCoord, cacheType);
 
             Drawable pin = null;
             if (iconsCache.containsKey(icon)) {
@@ -1571,7 +1574,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
      * Abstract Base Class for the worker threads.
      */
 
-    private abstract class DoThread extends Thread {
+    private abstract static class DoThread extends Thread {
 
         protected boolean working = true;
         protected boolean stop = false;
@@ -1735,8 +1738,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     viewport = app.getBounds(UUID.fromString(searchIdCenter));
                 }
 
-                if (viewport == null)
+                if (viewport == null) {
                     return;
+                }
 
                 Integer cnt = (Integer) viewport.get(0);
                 Integer minLat = null;

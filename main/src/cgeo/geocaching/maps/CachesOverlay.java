@@ -130,10 +130,12 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
                     blockedCircle.setPathEffect(new DashPathEffect(new float[] { 3, 2 }, 0));
                 }
 
-                if (setfil == null)
+                if (setfil == null) {
                     setfil = new PaintFlagsDrawFilter(0, Paint.FILTER_BITMAP_FLAG);
-                if (remfil == null)
+                }
+                if (remfil == null) {
                     remfil = new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG, 0);
+                }
 
                 canvas.setDrawFilter(setfil);
 
@@ -284,18 +286,7 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
                 }
 
                 dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ngeocode: " + coordinate.geocode.toUpperCase() + "\ntype: " + cacheType);
-                if (fromDetail == false) {
-                    dialog.setPositiveButton("detail", new DialogInterface.OnClickListener() {
-
-                        public void onClick(DialogInterface dialog, int id) {
-                            Intent cachesIntent = new Intent(context, cgeodetail.class);
-                            cachesIntent.putExtra("geocode", coordinate.geocode.toUpperCase());
-                            context.startActivity(cachesIntent);
-
-                            dialog.cancel();
-                        }
-                    });
-                } else {
+                if (fromDetail) {
                     dialog.setPositiveButton("navigate", new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int id) {
@@ -309,6 +300,17 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
                             navigateIntent.putExtra("longitude", coordinate.coords.getLongitude());
                             navigateIntent.putExtra("geocode", coordinate.geocode.toUpperCase());
                             context.startActivity(navigateIntent);
+                            dialog.cancel();
+                        }
+                    });
+                } else {
+                    dialog.setPositiveButton("detail", new DialogInterface.OnClickListener() {
+
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent cachesIntent = new Intent(context, cgeodetail.class);
+                            cachesIntent.putExtra("geocode", coordinate.geocode.toUpperCase());
+                            context.startActivity(cachesIntent);
+
                             dialog.cancel();
                         }
                     });
