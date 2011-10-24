@@ -104,13 +104,13 @@ public class cgGeo {
         try {
             geoManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, time, distance, geoNetListener);
         } catch (Exception e) {
-            Log.e(Settings.tag, "There is no NETWORK location provider");
+            Log.w(Settings.tag, "There is no NETWORK location provider");
         }
 
         try {
             geoManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, time, distance, geoGpsListener);
         } catch (Exception e) {
-            Log.e(Settings.tag, "There is no GPS location provider");
+            Log.w(Settings.tag, "There is no GPS location provider");
         }
     }
 
