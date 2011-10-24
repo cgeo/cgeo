@@ -12,9 +12,9 @@ import java.util.Map;
  * @author koem
  */
 public enum WaypointType {
-    FLAG("flag", R.string.wp_final, R.drawable.waypoint_flag, R.drawable.marker_waypoint_flag),
+    FINAL("flag", R.string.wp_final, R.drawable.waypoint_flag, R.drawable.marker_waypoint_flag),
     OWN("own", R.string.wp_waypoint, R.drawable.waypoint_waypoint, R.drawable.marker_waypoint_waypoint),
-    PKG("pkg", R.string.wp_pkg, R.drawable.waypoint_pkg, R.drawable.marker_waypoint_pkg),
+    PARKING("pkg", R.string.wp_pkg, R.drawable.waypoint_pkg, R.drawable.marker_waypoint_pkg),
     PUZZLE("puzzle", R.string.wp_puzzle, R.drawable.waypoint_puzzle, R.drawable.marker_waypoint_puzzle),
     STAGE("stage", R.string.wp_stage, R.drawable.waypoint_stage, R.drawable.marker_waypoint_stage),
     TRAILHEAD("trailhead", R.string.wp_trailhead, R.drawable.waypoint_trailhead, R.drawable.marker_waypoint_trailhead),

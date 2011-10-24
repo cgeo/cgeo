@@ -76,8 +76,9 @@ public class PositionOverlay implements GeneralOverlay {
 
     private void drawInternal(Canvas canvas, MapProjectionImpl projection) {
 
-        if (coordinates == null || location == null)
+        if (coordinates == null || location == null) {
             return;
+        }
 
         if (accuracyCircle == null) {
             accuracyCircle = new Paint();
@@ -99,10 +100,12 @@ public class PositionOverlay implements GeneralOverlay {
             historyLineShadow.setColor(0x66000000);
         }
 
-        if (setfil == null)
+        if (setfil == null) {
             setfil = new PaintFlagsDrawFilter(0, Paint.FILTER_BITMAP_FLAG);
-        if (remfil == null)
+        }
+        if (remfil == null) {
             remfil = new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG, 0);
+        }
 
         canvas.setDrawFilter(setfil);
 
@@ -130,8 +133,9 @@ public class PositionOverlay implements GeneralOverlay {
         canvas.drawCircle(center.x, center.y, radius, accuracyCircle);
 
         if (coordinates.getAccuracy() < 50f && ((historyRecent != null && historyRecent.distanceTo(coordinates) > 5.0) || historyRecent == null)) {
-            if (historyRecent != null)
+            if (historyRecent != null) {
                 history.add(historyRecent);
+            }
             historyRecent = coordinates;
 
             int toRemove = history.size() - 700;
@@ -148,8 +152,9 @@ public class PositionOverlay implements GeneralOverlay {
             if (size > 1) {
                 int alpha = 0;
                 int alphaCnt = size - 201;
-                if (alphaCnt < 1)
+                if (alphaCnt < 1) {
                     alphaCnt = 1;
+                }
 
                 for (int cnt = 1; cnt < size; cnt++) {
                     Location prev = history.get(cnt - 1);

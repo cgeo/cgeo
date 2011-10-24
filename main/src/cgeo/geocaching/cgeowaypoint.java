@@ -22,6 +22,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class cgeowaypoint extends AbstractActivity {
 
     private static final int MENU_ID_NAVIGATION = 0;
@@ -135,7 +138,7 @@ public class cgeowaypoint extends AbstractActivity {
 
         setTheme();
         setContentView(R.layout.waypoint);
-        setTitle("waypoint");
+        setTitle(R.string.waypoint_title);
 
         // get parameters
         Bundle extras = getIntent().getExtras();
@@ -210,7 +213,7 @@ public class cgeowaypoint extends AbstractActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, MENU_ID_COMPASS, 0, res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass); // compass
 
-        SubMenu subMenu = menu.addSubMenu(1, MENU_ID_NAVIGATION, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
+        SubMenu subMenu = menu.addSubMenu(1, MENU_ID_NAVIGATION, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
         addNavigationMenuItems(subMenu);
 
         menu.add(0, MENU_ID_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
@@ -316,15 +319,9 @@ public class cgeowaypoint extends AbstractActivity {
             return;
         }
 
-        Intent navigateIntent = new Intent(this, cgeonavigate.class);
-        navigateIntent.putExtra("latitude", waypoint.coords.getLatitude());
-        navigateIntent.putExtra("longitude", waypoint.coords.getLongitude());
-        navigateIntent.putExtra("geocode", waypoint.getPrefix().trim() + "/" + waypoint.lookup.trim());
-        navigateIntent.putExtra("name", waypoint.name);
-
-        cgeonavigate.coordinates.clear();
-        cgeonavigate.coordinates.add(new cgCoord(waypoint));
-        startActivity(navigateIntent);
+        Collection<cgCoord> coordinatesWithType = new ArrayList<cgCoord>();
+        coordinatesWithType.add(new cgCoord(waypoint));
+        cgeonavigate.startActivity(this, waypoint.getPrefix().trim() + "/" + waypoint.lookup.trim(), waypoint.name, waypoint.coords, coordinatesWithType);
     }
 
     private boolean navigationPossible() {

@@ -7,14 +7,15 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import android.R.color;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.Context;
@@ -73,6 +74,9 @@ import java.util.UUID;
  *
  */
 public class cgeodetail extends AbstractActivity {
+
+    private static final int CONTEXT_MENU_WAYPOINT_DELETE = 1235;
+    private static final int CONTEXT_MENU_WAYPOINT_DUPLICATE = 1234;
 
     public cgeodetail() {
         super("c:geo-cache-details");
@@ -258,6 +262,15 @@ public class cgeodetail extends AbstractActivity {
                     descView.setVisibility(View.VISIBLE);
                     descView.setText(longDesc, TextView.BufferType.SPANNABLE);
                     descView.setMovementMethod(LinkMovementMethod.getInstance());
+                    // handle caches with black font color
+                    if (!Settings.isLightSkin()) {
+                        if (cache.getDescription().contains("color=\"#000000")) {
+                            descView.setBackgroundResource(color.darker_gray);
+                        }
+                        else {
+                            descView.setBackgroundResource(color.black);
+                        }
+                    }
                 }
                 else {
                     descView.setVisibility(View.GONE);
@@ -455,50 +468,102 @@ public class cgeodetail extends AbstractActivity {
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo info) {
         super.onCreateContextMenu(menu, view, info);
         final int viewId = view.getId();
-
-        if (viewId == R.id.author || viewId == R.id.value) {
-            if (viewId == R.id.author) { // Author of a log entry
-                contextMenuUser = ((TextView) view).getText().toString();
-            } else if (viewId == R.id.value) { // The owner of the cache
-                if (StringUtils.isNotBlank(cache.ownerReal)) {
-                    contextMenuUser = cache.ownerReal;
-                } else {
-                    contextMenuUser = cache.owner;
+        switch (viewId) {
+            case R.id.author:
+            case R.id.value:
+                if (viewId == R.id.author) { // Author of a log entry
+                    contextMenuUser = ((TextView) view).getText().toString();
+                } else if (viewId == R.id.value) { // The owner of the cache
+                    if (StringUtils.isNotBlank(cache.ownerReal)) {
+                        contextMenuUser = cache.ownerReal;
+                    } else {
+                        contextMenuUser = cache.owner;
+                    }
                 }
-            }
 
-            menu.setHeaderTitle(res.getString(R.string.user_menu_title) + " " + contextMenuUser);
-            menu.add(viewId, 1, 0, res.getString(R.string.user_menu_view_hidden));
-            menu.add(viewId, 2, 0, res.getString(R.string.user_menu_view_found));
-            menu.add(viewId, 3, 0, res.getString(R.string.user_menu_open_browser));
-        }
-        if (viewId == R.id.map_preview) {
-            menu.setHeaderTitle(res.getString(R.string.cache_menu_navigate));
-            addNavigationMenuItems(menu);
+                menu.setHeaderTitle(res.getString(R.string.user_menu_title) + " " + contextMenuUser);
+                menu.add(viewId, 1, 0, res.getString(R.string.user_menu_view_hidden));
+                menu.add(viewId, 2, 0, res.getString(R.string.user_menu_view_found));
+                menu.add(viewId, 3, 0, res.getString(R.string.user_menu_open_browser));
+                break;
+            case R.id.map_preview:
+                menu.setHeaderTitle(res.getString(R.string.cache_menu_navigate));
+                addNavigationMenuItems(menu);
+                break;
+            case -1:
+                if (null != cache.waypoints) {
+                    try {
+                        final ViewGroup parent = ((ViewGroup) view.getParent());
+                        for (int i = 0; i < parent.getChildCount(); i++) {
+                            if (parent.getChildAt(i) == view) {
+                                final List<cgWaypoint> sortedWaypoints = new ArrayList<cgWaypoint>(cache.waypoints);
+                                Collections.sort(sortedWaypoints);
+                                final cgWaypoint waypoint = sortedWaypoints.get(i);
+                                final int index = cache.waypoints.indexOf(waypoint);
+                                menu.setHeaderTitle(res.getString(R.string.waypoint));
+                                menu.add(CONTEXT_MENU_WAYPOINT_DUPLICATE, index, 0, R.string.waypoint_duplicate);
+                                if (waypoint.isUserDefined()) {
+                                    menu.add(CONTEXT_MENU_WAYPOINT_DELETE, index, 0, R.string.waypoint_delete);
+                                }
+                            }
+                        }
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
+                }
+                break;
+            default:
+                break;
         }
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        final int group = item.getGroupId();
-
-        if (group == R.id.author || group == R.id.value) {
-            final int id = item.getItemId();
-
-            if (id == 1) {
-                cgeocaches.startActivityOwner(this, contextMenuUser);
-                return true;
-            } else if (id == 2) {
-                cgeocaches.startActivityUserName(this, contextMenuUser);
-                return true;
-            } else if (id == 3) {
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(contextMenuUser))));
-
-                return true;
-            }
-        }
-        else {
-            return onOptionsItemSelected(item);
+        final int groupId = item.getGroupId();
+        final int index = item.getItemId();
+        switch (groupId) {
+            case R.id.author:
+            case R.id.value:
+                final int itemId = item.getItemId();
+                switch (itemId) {
+                    case 1:
+                        cgeocaches.startActivityOwner(this, contextMenuUser);
+                        return true;
+                    case 2:
+                        cgeocaches.startActivityUserName(this, contextMenuUser);
+                        return true;
+                    case 3:
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(contextMenuUser))));
+                        return true;
+                    default:
+                        break;
+                }
+                break;
+            case CONTEXT_MENU_WAYPOINT_DUPLICATE:
+                if (null != cache.waypoints && index < cache.waypoints.size()) {
+                    final cgWaypoint copy = new cgWaypoint(cache.waypoints.get(index));
+                    copy.setUserDefined();
+                    copy.name = res.getString(R.string.waypoint_copy_of) + " " + copy.name;
+                    cache.waypoints.add(index + 1, copy);
+                    app.saveOwnWaypoint(-1, cache.geocode, copy);
+                    app.removeCacheFromCache(geocode);
+                    setView(); // refresh
+                }
+                break;
+            case CONTEXT_MENU_WAYPOINT_DELETE:
+                if (null != cache.waypoints && index < cache.waypoints.size()) {
+                    final cgWaypoint waypoint = cache.waypoints.get(index);
+                    if (waypoint.isUserDefined()) {
+                        cache.waypoints.remove(index);
+                        app.deleteWaypoint(waypoint.id);
+                        app.removeCacheFromCache(geocode);
+                        setView(); // refresh
+                    }
+                }
+                break;
+            default:
+                return onOptionsItemSelected(item);
         }
         return false;
     }
@@ -676,8 +741,8 @@ public class cgeodetail extends AbstractActivity {
 
             String size = "";
             if (cache.size != null) {
-                // don't show "not chosen" for events, that should be the normal case
-                if (!(cache.isEventCache() && cache.size == CacheSize.NOT_CHOSEN)) {
+                // don't show "not chosen" for events and virtuals, that should be the normal case
+                if (cache.showSize()) {
                     size = " (" + res.getString(cache.size.stringId) + ")";
                 }
             }
@@ -853,9 +918,10 @@ public class cgeodetail extends AbstractActivity {
                         .getDefaultDisplay().getWidth();
                 ViewParent child = attribBox;
                 do {
-                    if (child instanceof View)
+                    if (child instanceof View) {
                         attributeBoxMaxWidth = attributeBoxMaxWidth - ((View) child).getPaddingLeft()
                                 - ((View) child).getPaddingRight();
+                    }
                     child = child.getParent();
                 } while (child != null);
 
@@ -898,13 +964,7 @@ public class cgeodetail extends AbstractActivity {
                     if (inventoryString.length() > 0) {
                         inventoryString.append('\n');
                     }
-                    // avoid HTML parsing where possible
-                    if (containsHtml(inventoryItem.getName())) {
-                        inventoryString.append(Html.fromHtml(inventoryItem.getName()).toString());
-                    }
-                    else {
-                        inventoryString.append(inventoryItem.getName());
-                    }
+                    inventoryString.append(StringEscapeUtils.unescapeHtml4(inventoryItem.getName()));
                 }
                 inventView.setText(inventoryString);
                 inventBox.setClickable(true);
@@ -1035,25 +1095,19 @@ public class cgeodetail extends AbstractActivity {
                     if (StringUtils.isBlank(wpt.name)) {
                         nameView.setText(cgBase.formatCoords(wpt.coords, true));
                     } else {
-                        // avoid HTML parsing
-                        if (containsHtml(wpt.name)) {
-                            nameView.setText(Html.fromHtml(wpt.name.trim()), TextView.BufferType.SPANNABLE);
-                        }
-                        else {
-                            nameView.setText(wpt.name.trim());
-                        }
+                        nameView.setText(StringEscapeUtils.unescapeHtml4(wpt.name));
                     }
                     wpt.setIcon(res, nameView);
 
-                    // avoid HTML parsing
+                    TextView noteView = (TextView) waypointView.findViewById(R.id.note);
                     if (containsHtml(wpt.note)) {
-                        ((TextView) waypointView.findViewById(R.id.note)).setText(Html.fromHtml(wpt.note.trim()), TextView.BufferType.SPANNABLE);
+                        noteView.setText(Html.fromHtml(wpt.note.trim()), TextView.BufferType.SPANNABLE);
                     }
                     else {
-                        ((TextView) waypointView.findViewById(R.id.note)).setText(wpt.note.trim());
+                        noteView.setText(wpt.note.trim());
                     }
-
                     waypointView.setOnClickListener(new waypointInfo(wpt.id));
+                    registerForContextMenu(waypointView);
 
                     waypoints.addView(waypointView);
                 }
@@ -1104,8 +1158,9 @@ public class cgeodetail extends AbstractActivity {
             }
         }
 
-        if (geo != null)
+        if (geo != null) {
             geoUpdate.updateLoc(geo);
+        }
     }
 
     static private boolean containsHtml(final String str) {
@@ -1113,8 +1168,11 @@ public class cgeodetail extends AbstractActivity {
     }
 
     private void parseLongDescription() {
-        if (longDesc == null && cache != null && cache.getDescription() != null) {
-            longDesc = Html.fromHtml(cache.getDescription().trim(), new cgHtmlImg(this, geocode, true, cache.reason, false), new UnknownTagsHandler());
+        if (longDesc == null && cache != null) {
+            String description = cache.getDescription();
+            if (description != null) {
+                longDesc = Html.fromHtml(description.trim(), new cgHtmlImg(this, geocode, true, cache.reason, false), new UnknownTagsHandler());
+            }
         }
     }
 
@@ -1206,13 +1264,7 @@ public class cgeodetail extends AbstractActivity {
                 } else {
                     ((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(4)); // note if type is unknown
                 }
-                // avoid parsing HTML if not necessary
-                if (containsHtml(log.author)) {
-                    ((TextView) rowView.findViewById(R.id.author)).setText(Html.fromHtml(log.author), TextView.BufferType.SPANNABLE);
-                }
-                else {
-                    ((TextView) rowView.findViewById(R.id.author)).setText(log.author);
-                }
+                ((TextView) rowView.findViewById(R.id.author)).setText(StringEscapeUtils.unescapeHtml4(log.author));
 
                 if (log.found == -1) {
                     ((TextView) rowView.findViewById(R.id.count)).setVisibility(View.GONE);
@@ -1413,16 +1465,16 @@ public class cgeodetail extends AbstractActivity {
 
         try {
             // waypoints
-            for (cgWaypoint waypoint : cache.waypoints) {
-                if (waypoint.coords == null) {
-                    continue;
+            if (null != cache.waypoints) {
+                for (cgWaypoint waypoint : cache.waypoints) {
+                    if (null != waypoint.coords) {
+                        coords = new cgCoord();
+                        coords.type = "waypoint";
+                        coords.name = waypoint.name;
+                        coords.coords = waypoint.coords;
+                        coordinates.add(coords);
+                    }
                 }
-
-                coords = new cgCoord();
-                coords.type = "waypoint";
-                coords.name = waypoint.name;
-                coords.coords = waypoint.coords;
-                coordinates.add(coords);
             }
         } catch (Exception e) {
             Log.e(Settings.tag, "cgeodetail.getCoordinates (waypoint): " + e.toString());
@@ -1555,17 +1607,7 @@ public class cgeodetail extends AbstractActivity {
             showToast(res.getString(R.string.err_location_unknown));
         }
 
-        cgeonavigate navigateActivity = new cgeonavigate();
-
-        Intent navigateIntent = new Intent(this, navigateActivity.getClass());
-        navigateIntent.putExtra("latitude", cache.coords.getLatitude());
-        navigateIntent.putExtra("longitude", cache.coords.getLongitude());
-        navigateIntent.putExtra("geocode", cache.geocode.toUpperCase());
-        navigateIntent.putExtra("name", cache.name);
-
-        cgeonavigate.coordinates.clear();
-        cgeonavigate.coordinates.addAll(getCoordinates());
-        startActivity(navigateIntent);
+        cgeonavigate.startActivity(this, cache.geocode, cache.name, cache.coords, getCoordinates());
     }
 
     private class waypointInfo implements View.OnClickListener {
@@ -1902,16 +1944,7 @@ public class cgeodetail extends AbstractActivity {
 
             return;
         }
-
-        Intent navigateIntent = new Intent(this, cgeonavigate.class);
-        navigateIntent.putExtra("latitude", cache.coords.getLatitude());
-        navigateIntent.putExtra("longitude", cache.coords.getLongitude());
-        navigateIntent.putExtra("geocode", cache.geocode.toUpperCase());
-        navigateIntent.putExtra("name", cache.name);
-
-        cgeonavigate.coordinates.clear();
-        cgeonavigate.coordinates.addAll(getCoordinates());
-        startActivity(navigateIntent);
+        cgeonavigate.startActivity(this, cache.geocode, cache.name, cache.coords, getCoordinates());
     }
 
     /**
@@ -2044,13 +2077,15 @@ public class cgeodetail extends AbstractActivity {
                     attribute = translated;
                 }
             }
-            if (buffer.length() > 0)
+            if (buffer.length() > 0) {
                 buffer.append('\n');
+            }
             buffer.append(attribute);
         }
 
-        if (noAttributeIconsFound)
+        if (noAttributeIconsFound) {
             buffer.append("\n\n").append(res.getString(R.string.cache_attributes_no_icons));
+        }
 
         attribView.setText(buffer);
 

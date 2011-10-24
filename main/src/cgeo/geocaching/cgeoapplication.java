@@ -315,7 +315,7 @@ public class cgeoapplication extends Application {
         return getCacheByGeocode(geocode, false, true, false, false, false, false);
     }
 
-    public cgCache getCacheByGeocode(String geocode, boolean loadA, boolean loadW, boolean loadS, boolean loadL, boolean loadI, boolean loadO) {
+    public cgCache getCacheByGeocode(String geocode, boolean loadAttributes, boolean loadWaypoints, boolean loadSpoilers, boolean loadLogs, boolean loadInventory, boolean loadOfflineLog) {
         if (StringUtils.isBlank(geocode)) {
             return null;
         }
@@ -324,9 +324,9 @@ public class cgeoapplication extends Application {
         if (cachesCache.containsKey(geocode)) {
             cache = cachesCache.get(geocode);
         } else {
-            cache = getStorage().loadCache(geocode, null, loadA, loadW, loadS, loadL, loadI, loadO);
+            cache = getStorage().loadCache(geocode, null, loadAttributes, loadWaypoints, loadSpoilers, loadLogs, loadInventory, loadOfflineLog);
 
-            if (cache != null && cache.detailed && loadA && loadW && loadS && loadL && loadI) {
+            if (cache != null && cache.detailed && loadAttributes && loadWaypoints && loadSpoilers && loadLogs && loadInventory) {
                 putCacheInCache(cache);
             }
         }
@@ -420,12 +420,14 @@ public class cgeoapplication extends Application {
         return getCacheByGeocode(geocodeList.get(0), true, true, true, true, true, true);
     }
 
-    public List<cgCache> getCaches(final UUID searchId) {
-        return getCaches(searchId, null, null, null, null, false, true, false, false, false, true);
-    }
-
-    public List<cgCache> getCaches(final UUID searchId, boolean loadA, boolean loadW, boolean loadS, boolean loadL, boolean loadI, boolean loadO) {
-        return getCaches(searchId, null, null, null, null, loadA, loadW, loadS, loadL, loadI, loadO);
+    /**
+     * @param searchId
+     * @param loadWaypoints
+     *            only load waypoints for map usage. All other callers should set this to <code>false</code>
+     * @return
+     */
+    public List<cgCache> getCaches(final UUID searchId, final boolean loadWaypoints) {
+        return getCaches(searchId, null, null, null, null, false, loadWaypoints, false, false, false, true);
     }
 
     public List<cgCache> getCaches(final UUID searchId, Long centerLat, Long centerLon, Long spanLat, Long spanLon) {

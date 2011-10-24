@@ -172,12 +172,15 @@ public class cgHtmlImg implements Html.ImageGetter {
             if (Uri.parse(url).isAbsolute()) {
                 return url;
             } else {
-                return "http://" + ConnectorFactory.getConnector(geocode).getHost() + url;
+                String host = ConnectorFactory.getConnector(geocode).getHost();
+                if (StringUtils.isNotEmpty(host)) {
+                    return "http://" + host + url;
+                }
             }
         } catch (Exception e) {
             Log.e(Settings.tag, "cgHtmlImg.makeAbsoluteURL (parse URL)", e);
-            return null;
         }
+        return null;
     }
 
     private Bitmap loadCachedImage(final File file) {

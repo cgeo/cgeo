@@ -187,7 +187,7 @@ public class cgeocaches extends AbstractListActivity {
                     setTitle(title + " [" + app.getCount(searchId) + "]");
                     cacheList.clear();
 
-                    final List<cgCache> cacheListTmp = app.getCaches(searchId);
+                    final List<cgCache> cacheListTmp = app.getCaches(searchId, false);
                     if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                         cacheList.addAll(cacheListTmp);
                         cacheListTmp.clear();
@@ -285,7 +285,7 @@ public class cgeocaches extends AbstractListActivity {
                     setTitle(title + " [" + app.getCount(searchId) + "]");
                     cacheList.clear();
 
-                    final List<cgCache> cacheListTmp = app.getCaches(searchId);
+                    final List<cgCache> cacheListTmp = app.getCaches(searchId, false);
                     if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                         cacheList.addAll(cacheListTmp);
                         cacheListTmp.clear();
@@ -374,7 +374,7 @@ public class cgeocaches extends AbstractListActivity {
                 }
             } else {
                 if (cacheList != null && searchId != null) {
-                    final List<cgCache> cacheListTmp = app.getCaches(searchId);
+                    final List<cgCache> cacheListTmp = app.getCaches(searchId, false);
                     if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                         cacheList.clear();
                         cacheList.addAll(cacheListTmp);
@@ -444,7 +444,7 @@ public class cgeocaches extends AbstractListActivity {
 
                 cacheList.clear();
 
-                final List<cgCache> cacheListTmp = app.getCaches(searchId);
+                final List<cgCache> cacheListTmp = app.getCaches(searchId, false);
                 if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                     cacheList.addAll(cacheListTmp);
                     cacheListTmp.clear();
@@ -472,7 +472,7 @@ public class cgeocaches extends AbstractListActivity {
 
             cacheList.clear();
 
-            final List<cgCache> cacheListTmp = app.getCaches(searchId);
+            final List<cgCache> cacheListTmp = app.getCaches(searchId, false);
             if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                 cacheList.addAll(cacheListTmp);
                 cacheListTmp.clear();
@@ -1159,11 +1159,9 @@ public class cgeocaches extends AbstractListActivity {
 
             if (cache.coords != null) {
                 menu.add(0, MENU_COMPASS, 0, res.getString(R.string.cache_menu_compass));
-                SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
+                SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
                 NavigationAppFactory.addMenuItems(subMenu, this, res);
                 addVisitMenu(menu, cache);
-                //				String label = settings.getLogOffline()? res.getString(R.string.cache_menu_visit_offline) : res.getString(R.string.cache_menu_visit);
-                //				menu.add(0, MENU_LOG_VISIT, 0, label);
                 menu.add(0, MENU_CACHE_DETAILS, 0, res.getString(R.string.cache_menu_details));
             }
             if (cache.reason >= 1) {

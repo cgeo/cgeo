@@ -428,49 +428,25 @@ public class cgBase {
     }
 
     public static StatusCode login() {
-        HttpResponse loginResponse = null;
-        String loginData = null;
-
-        String[] viewstates = null;
-
-        final ImmutablePair<String, String> loginStart = Settings.getLogin();
-
-        if (loginStart == null) {
-            return StatusCode.NO_LOGIN_INFO_STORED; // no login information stored
-        }
-
-        loginResponse = request("https://www.geocaching.com/login/default.aspx", null, false, false, false);
-        if (loginResponse == null)
-        {
-            return StatusCode.LOGIN_PARSE_ERROR;
-        }
-        loginData = getResponseData(loginResponse);
-        viewstates = getViewstates(loginData);
-
-        if (isEmpty(viewstates)) {
-            Log.e(Settings.tag, "cgeoBase.login: Failed to find viewstates");
-            return StatusCode.LOGIN_PARSE_ERROR; // no viewstates
-        }
-
-        if (StringUtils.isNotBlank(loginData)) {
-            if (checkLogin(loginData)) {
-                Log.i(Settings.tag, "Already logged in Geocaching.com as " + loginStart.left);
-
-                switchToEnglish(loginData);
-
-                return StatusCode.NO_ERROR; // logged in
-            }
-
-        } else {
-            Log.e(Settings.tag, "cgeoBase.login: Failed to retrieve login page (1st)");
-            return StatusCode.CONNECTION_FAILED; // no loginpage
-        }
-
         final ImmutablePair<String, String> login = Settings.getLogin();
 
         if (login == null || StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
             Log.e(Settings.tag, "cgeoBase.login: No login information stored");
             return StatusCode.NO_LOGIN_INFO_STORED;
+        }
+
+        HttpResponse loginResponse = request("https://www.geocaching.com/login/default.aspx", null, false, false, false);
+        String loginData = getResponseData(loginResponse);
+
+        if (StringUtils.isBlank(loginData)) {
+            Log.e(Settings.tag, "cgeoBase.login: Failed to retrieve login page (1st)");
+            return StatusCode.CONNECTION_FAILED; // no loginpage
+        }
+
+        if (checkLogin(loginData)) {
+            Log.i(Settings.tag, "Already logged in Geocaching.com as " + login.left);
+            switchToEnglish(loginData);
+            return StatusCode.NO_ERROR; // logged in
         }
 
         clearCookies();
@@ -483,6 +459,11 @@ public class cgBase {
                 "ctl00$ContentBody$tbPassword", login.right,
                 "ctl00$ContentBody$cbRememberMe", "on",
                 "ctl00$ContentBody$btnSignIn", "Login");
+        final String[] viewstates = getViewstates(loginData);
+        if (isEmpty(viewstates)) {
+            Log.e(Settings.tag, "cgeoBase.login: Failed to find viewstates");
+            return StatusCode.LOGIN_PARSE_ERROR; // no viewstates
+        }
         putViewstates(params, viewstates);
 
         loginResponse = postRequest("https://www.geocaching.com/login/default.aspx", params);
@@ -499,17 +480,15 @@ public class cgBase {
             } else {
                 if (loginData.contains("Your username/password combination does not match.")) {
                     Log.i(Settings.tag, "Failed to log in Geocaching.com as " + login.left + " because of wrong username/password");
-
                     return StatusCode.WRONG_LOGIN_DATA; // wrong login
                 } else {
                     Log.i(Settings.tag, "Failed to log in Geocaching.com as " + login.left + " for some unknown reason");
-
                     return StatusCode.UNKNOWN_ERROR; // can't login
                 }
             }
         } else {
             Log.e(Settings.tag, "cgeoBase.login: Failed to retrieve login page (2nd)");
-
+            // FIXME: should it be CONNECTION_FAILED to match the first attempt?
             return StatusCode.COMMUNICATION_ERROR; // no login page
         }
     }
@@ -1018,6 +997,18 @@ public class cgBase {
     }
 
     public static cgCacheWrap parseCache(final String page, final int reason, final Handler handler) {
+        final cgCacheWrap caches = parseCacheFromText(page, reason, handler);
+        if (!caches.cacheList.isEmpty()) {
+            final cgCache cache = caches.cacheList.get(0);
+            getExtraOnlineInfo(cache, page, handler);
+            cache.updated = System.currentTimeMillis();
+            cache.detailedUpdate = cache.updated;
+            cache.detailed = true;
+        }
+        return caches;
+    }
+
+    static cgCacheWrap parseCacheFromText(final String page, final int reason, final Handler handler) {
         sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_details);
 
         if (StringUtils.isBlank(page)) {
@@ -1299,11 +1290,6 @@ public class cgBase {
             Log.w(Settings.tag, "cgeoBase.parseCache: Failed to parse cache log count");
         }
 
-        // cache logs
-        sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
-
-        loadLogsFromDetails(page, cache);
-
         int wpBegin = 0;
         int wpEnd = 0;
 
@@ -1398,7 +1384,7 @@ public class cgBase {
                         final Matcher matcherWpLatLon = patternWpPrefixOrLookupOrLatlon.matcher(wp[7]);
                         if (matcherWpLatLon.find() && matcherWpLatLon.groupCount() > 1) {
                             String latlon = Html.fromHtml(matcherWpLatLon.group(2)).toString().trim();
-                            if (!StringUtils.containsOnly(latlon, '?')) {
+                            if (!StringUtils.startsWith(latlon, "???")) {
                                 waypoint.latlon = latlon;
                                 waypoint.coords = new Geopoint(latlon);
                             }
@@ -1432,25 +1418,27 @@ public class cgBase {
             }
         }
 
+        caches.cacheList.add(cache);
+
+        return caches;
+    }
+
+    private static void getExtraOnlineInfo(final cgCache cache, final String page, final Handler handler) {
+        sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
+        loadLogsFromDetails(page, cache);
+
+        sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_elevation);
         if (cache.coords != null) {
             cache.elevation = getElevation(cache.coords);
         }
 
         sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_gcvote);
-
         final cgRating rating = GCVote.getRating(cache.guid, cache.geocode);
         if (rating != null) {
             cache.rating = rating.rating;
             cache.votes = rating.votes;
             cache.myVote = rating.myVote;
         }
-
-        cache.updated = System.currentTimeMillis();
-        cache.detailedUpdate = System.currentTimeMillis();
-        cache.detailed = true;
-        caches.cacheList.add(cache);
-
-        return caches;
     }
 
     /**
@@ -1547,43 +1535,43 @@ public class cgBase {
 
     private static void checkFields(cgCache cache) {
         if (StringUtils.isBlank(cache.geocode)) {
-            Log.w(Settings.tag, "cgBase.loadLogsFromDetails: geo code not parsed correctly");
+            Log.e(Settings.tag, "cgBase.loadLogsFromDetails: geo code not parsed correctly");
         }
         if (StringUtils.isBlank(cache.name)) {
-            Log.w(Settings.tag, "name not parsed correctly");
+            Log.e(Settings.tag, "name not parsed correctly");
         }
         if (StringUtils.isBlank(cache.guid)) {
-            Log.w(Settings.tag, "guid not parsed correctly");
+            Log.e(Settings.tag, "guid not parsed correctly");
         }
         if (cache.terrain == null || cache.terrain == 0.0) {
-            Log.w(Settings.tag, "terrain not parsed correctly");
+            Log.e(Settings.tag, "terrain not parsed correctly");
         }
         if (cache.difficulty == null || cache.difficulty == 0.0) {
-            Log.w(Settings.tag, "difficulty not parsed correctly");
+            Log.e(Settings.tag, "difficulty not parsed correctly");
         }
         if (StringUtils.isBlank(cache.owner)) {
-            Log.w(Settings.tag, "owner not parsed correctly");
+            Log.e(Settings.tag, "owner not parsed correctly");
         }
         if (StringUtils.isBlank(cache.ownerReal)) {
-            Log.w(Settings.tag, "owner real not parsed correctly");
+            Log.e(Settings.tag, "owner real not parsed correctly");
         }
         if (cache.hidden == null) {
-            Log.w(Settings.tag, "hidden not parsed correctly");
+            Log.e(Settings.tag, "hidden not parsed correctly");
         }
         if (cache.favouriteCnt == null) {
-            Log.w(Settings.tag, "favoriteCount not parsed correctly");
+            Log.e(Settings.tag, "favoriteCount not parsed correctly");
         }
         if (cache.size == null) {
-            Log.w(Settings.tag, "size not parsed correctly");
+            Log.e(Settings.tag, "size not parsed correctly");
         }
         if (StringUtils.isBlank(cache.type)) {
-            Log.w(Settings.tag, "type not parsed correctly");
+            Log.e(Settings.tag, "type not parsed correctly");
         }
         if (cache.coords == null) {
-            Log.w(Settings.tag, "coordinates not parsed correctly");
+            Log.e(Settings.tag, "coordinates not parsed correctly");
         }
         if (StringUtils.isBlank(cache.location)) {
-            Log.w(Settings.tag, "location not parsed correctly");
+            Log.e(Settings.tag, "location not parsed correctly");
         }
     }
 
@@ -1730,11 +1718,14 @@ public class cgBase {
             Log.w(Settings.tag, "cgeoBase.parseTrackable: Failed to parse trackable last known place");
         }
 
-        // released
+        // released date - can be missing on the page
         try {
-            trackable.setReleased(dateTbIn1.parse(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_RELEASES, false, null)));
-            if (trackable.getReleased() == null) {
-                trackable.setReleased(dateTbIn2.parse(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_RELEASES, false, null)));
+            String releaseString = BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_RELEASES, false, null);
+            if (releaseString != null) {
+                trackable.setReleased(dateTbIn1.parse(releaseString));
+                if (trackable.getReleased() == null) {
+                    trackable.setReleased(dateTbIn2.parse(releaseString));
+                }
             }
         } catch (ParseException e1) {
             trackable.setReleased(null);
@@ -1743,7 +1734,10 @@ public class cgBase {
 
         // trackable distance
         try {
-            trackable.setDistance(DistanceParser.parseDistance(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_DISTANCE, false, null), Settings.isUseMetricUnits()));
+            String distanceString = BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_DISTANCE, false, null);
+            if (distanceString != null) {
+                trackable.setDistance(DistanceParser.parseDistance(distanceString, Settings.isUseMetricUnits()));
+            }
         } catch (NumberFormatException e) {
             trackable.setDistance(null);
             throw e;
@@ -3450,8 +3444,12 @@ public class cgBase {
 
     /**
      * Generate a numeric date and time string according to system-wide settings (locale,
+     * <<<<<<< HEAD
      * date format) such as "7 sept. à 12:35".
-     *
+     * =======
+     * date format) such as "7 sept. at 12:35".
+     * >>>>>>> upstream/master
+     * 
      * @param context
      *            a Context
      * @param date

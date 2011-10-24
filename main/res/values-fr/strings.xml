@@ -475,11 +475,12 @@
   <string name="cache_logs">Carnet de bord</string>
   <string name="cache_dialog_loading_details">Chargement des détails…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Chargement de la page</string>
-  <string name="cache_dialog_loading_details_status_details">Traitement des informations</string>
-  <string name="cache_dialog_loading_details_status_spoilers">Chargement des images indices</string>
-  <string name="cache_dialog_loading_details_status_logs">Chargement des entrées de carnets</string>
-  <string name="cache_dialog_loading_details_status_waypoints">Traitement des points intermédiaires</string>
-  <string name="cache_dialog_loading_details_status_gcvote">Chargement des votes</string>
+  <string name="cache_dialog_loading_details_status_details">Analyse</string>
+  <string name="cache_dialog_loading_details_status_spoilers">Images indices</string>
+  <string name="cache_dialog_loading_details_status_logs">Entrées du carnet</string>
+  <string name="cache_dialog_loading_details_status_waypoints">Points intermédiaires</string>
+  <string name="cache_dialog_loading_details_status_gcvote">Votes</string>
+  <string name="cache_dialog_loading_details_status_elevation">Altitude</string>
   <string name="cache_dialog_loading_details_status_render">Préparation de la page</string>
   <string name="cache_dialog_loading_description">Chargement de la description…</string>
   <string name="cache_dialog_offline_save_title">Hors ligne</string>
@@ -595,12 +596,14 @@
   <string name="waypoint_loading">Chargement d\'une étape…</string>
   <string name="waypoint_unknown_coordinates">Coordonnées inconnues</string>
   <string name="waypoint_done">Ok</string>
+  <string name="waypoint_duplicate">Dupliquer</string>
+  <string name="waypoint_copy_of">Copie de</string>
   <string name="search_history">Historique</string>
   <string name="search_history_empty">Aucune destination précédente</string>
   <string name="search_remove_destination">Destination effacée</string>
   <string name="search_clear_history">Effacer l\'historique</string>
   <string name="search_history_cleared">Historique effacé</string>
-  
+
   <string name="waypoint_coordinate_formats_plain">Texte</string>
 
   <!-- visit -->

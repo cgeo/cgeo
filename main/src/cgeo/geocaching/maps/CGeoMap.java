@@ -221,10 +221,11 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 if (waitDialog != null) {
                     int secondsElapsed = (int) ((System.currentTimeMillis() - detailProgressTime) / 1000);
                     int secondsRemaining;
-                    if (detailProgress > 0) //DP can be zero and cause devisionByZero
+                    if (detailProgress > 0) {
                         secondsRemaining = (detailTotal - detailProgress) * secondsElapsed / detailProgress;
-                    else
+                    } else {
                         secondsRemaining = (detailTotal - detailProgress) * secondsElapsed;
+                    }
 
                     waitDialog.setProgress(detailProgress);
                     if (secondsRemaining < 40) {
@@ -566,7 +567,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
                             for (cgCache oneCache : cachesProtected) {
                                 if (oneCache != null && oneCache.coords != null) {
-                                    if (cgBase.isCacheInViewPort(mapCenterLat, mapCenterLon, mapSpanLat, mapSpanLon, oneCache.coords) && app.isOffline(oneCache.geocode, null) == false) {
+                                    if (!cgBase.isCacheInViewPort(mapCenterLat, mapCenterLon, mapSpanLat, mapSpanLon, oneCache.coords) && app.isOffline(oneCache.geocode, null)) {
                                         geocodes.add(oneCache.geocode);
                                     }
                                 }
@@ -1113,7 +1114,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                caches = app.getCaches(searchId);
+                caches = app.getCaches(searchId, true);
 
                 //if in live map and stored caches are found / disables are also shown.
                 if (live && Settings.isLiveMap()) {
@@ -1360,7 +1361,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
          * @return
          */
         private CachesOverlayItemImpl getCacheItem(cgCoord cgCoord, String type, boolean own, boolean found, boolean disabled) {
-            return getItem(cgCoord, cgBase.getCacheMarkerIcon(type, own, found, disabled));
+            return getItem(cgCoord, cgBase.getCacheMarkerIcon(type, own, found, disabled), type);
         }
 
         /**
@@ -1373,7 +1374,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
          * @return
          */
         private CachesOverlayItemImpl getWaypointItem(cgCoord cgCoord, WaypointType type) {
-            return getItem(cgCoord, type != null ? type.markerId : WaypointType.WAYPOINT.markerId);
+            return getItem(cgCoord, type != null ? type.markerId : WaypointType.WAYPOINT.markerId, null);
         }
 
         /**
@@ -1383,11 +1384,13 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
          *            The coords
          * @param icon
          *            The icon
+         * @param cacheType
+         *            cacheType, this will influence the style of the circles drawn around it
          * @return
          */
-        private CachesOverlayItemImpl getItem(cgCoord cgCoord, int icon) {
+        private CachesOverlayItemImpl getItem(cgCoord cgCoord, int icon, final String cacheType) {
             coordinates.add(cgCoord);
-            CachesOverlayItemImpl item = Settings.getMapFactory().getCachesOverlayItem(cgCoord, null);
+            CachesOverlayItemImpl item = Settings.getMapFactory().getCachesOverlayItem(cgCoord, cacheType);
 
             Drawable pin = null;
             if (iconsCache.containsKey(icon)) {
@@ -1524,16 +1527,22 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             }
 
             if (coordsIntent != null) {
-                cgCoord coord = new cgCoord();
+                final cgCoord coord = new cgCoord();
                 coord.type = "waypoint";
                 coord.coords = coordsIntent;
                 coord.name = "some place";
 
                 coordinates.add(coord);
-                CachesOverlayItemImpl item = Settings.getMapFactory().getCachesOverlayItem(coord, null);
+                final CachesOverlayItemImpl item = Settings.getMapFactory().getCachesOverlayItem(coord, null);
 
-                //FIXME assign with null?
-                final int icon = waypointTypeIntent != null ? waypointTypeIntent.markerId : null;
+                final int icon;
+                if (waypointTypeIntent != null) {
+                    icon = waypointTypeIntent.markerId;
+                }
+                else {
+                    icon = WaypointType.WAYPOINT.markerId;
+                }
+
                 Drawable pin = null;
                 if (iconsCache.containsKey(icon)) {
                     pin = iconsCache.get(icon);
@@ -1560,7 +1569,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
      * Abstract Base Class for the worker threads.
      */
 
-    private abstract class DoThread extends StoppableThread {
+    private abstract static class DoThread extends StoppableThread {
 
         protected boolean working = true;
         protected long centerLat = 0L;
@@ -1719,8 +1728,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     viewport = app.getBounds(UUID.fromString(searchIdCenter));
                 }
 
-                if (viewport == null)
+                if (viewport == null) {
                     return;
+                }
 
                 Integer cnt = (Integer) viewport.get(0);
                 Integer minLat = null;

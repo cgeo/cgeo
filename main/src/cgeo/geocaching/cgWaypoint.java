@@ -22,6 +22,22 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
     public String note = "";
     private Integer cachedOrder = null;
 
+    /**
+     * default constructor, no fields are set
+     */
+    public cgWaypoint() {
+    }
+
+    /**
+     * copy constructor
+     *
+     * @param other
+     */
+    public cgWaypoint(final cgWaypoint other) {
+        merge(other);
+        id = 0;
+    }
+
     public void setIcon(final Resources res, final TextView nameView) {
         nameView.setCompoundDrawablesWithIntrinsicBounds(res.getDrawable(type.drawableId), null, null, null);
     }
@@ -81,28 +97,25 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
         return type == WaypointType.OWN;
     }
 
+    public void setUserDefined() {
+        type = WaypointType.OWN;
+        setPrefix("OWN");
+    }
+
     private int computeOrder() {
-        if (StringUtils.isEmpty(getPrefix())) {
-            return 0;
-        }
-        // check only the first character. sometimes there are inconsistencies like FI or FN for the FINAL
-        final char firstLetter = Character.toUpperCase(getPrefix().charAt(0));
-        switch (firstLetter) {
-            case 'P':
-                return -100; // parking
-            case 'S': { // stage N
-                try {
-                    final Integer stageNumber = Integer.valueOf(getPrefix().substring(1));
-                    return stageNumber;
-                } catch (NumberFormatException e) {
-                    // nothing
-                }
-                return 0;
-            }
-            case 'F':
-                return 1000; // final
-            case 'O':
-                return 10000; // own
+        switch (type) {
+            case PARKING:
+                return -1;
+            case TRAILHEAD:
+                return 1;
+            case STAGE: // puzzles and stages with same value
+                return 2;
+            case PUZZLE:
+                return 2;
+            case FINAL:
+                return 3;
+            case OWN:
+                return 4;
             default:
                 return 0;
         }

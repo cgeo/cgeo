@@ -1,40 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="cgeo">
-	<property file="local.properties" />
 
-	<property name="cgeo.buildxml" value="./build_cgeo.xml"/>
+    <!-- The local.properties file is created and updated by the 'android' tool.
+         It contains the path to the SDK. It should *NOT* be checked into
+         Version Control Systems. -->
+    <loadproperties srcFile="local.properties" />
 
-	<target name="help" description="Display available targets">
-		<ant antfile="${cgeo.buildxml}" target="help"/>
+    <!-- The ant.properties file can be created by you. It is only edited by the
+         'android' tool to add properties to it.
+         This is the place to change some Ant specific build properties.
+         Here are some properties you may want to change/update:
+
+         source.dir
+             The name of the source directory. Default is 'src'.
+         out.dir
+             The name of the output directory. Default is 'bin'.
+
+         For other overridable properties, look at the beginning of the rules
+         files in the SDK, at tools/ant/build.xml
+
+         Properties related to the SDK location or the project target should
+         be updated using the 'android' tool with the 'update' action.
+
+         This file is an integral part of the build system for your
+         application and should be checked into Version Control Systems.
+
+         -->
+    <property file="ant.properties" />
+
+    <!-- The project.properties file is created and updated by the 'android'
+         tool, as well as ADT.
+
+         This contains project specific properties such as project target, and library
+         dependencies. Lower level build properties are stored in ant.properties
+         (or in .classpath for Eclipse projects).
+
+         This file is an integral part of the build system for your
+         application and should be checked into Version Control Systems. -->
+    <loadproperties srcFile="project.properties" />
+    
+    <!-- The private.properties file sets api-keys as well as keystore,
+         certificate and passwords (if you want).
+         See /templates/private.properties for more information. -->
+    <property file="private.properties" />
+
+    <!-- quick check on sdk.dir -->
+    <fail
+            message="sdk.dir is missing. Make sure to generate local.properties using 'android update project'"
+            unless="sdk.dir"
+    />
+    
+    <!-- Custom targets -->
+    <target name="install_release" description="Install signed release application" depends="release">
+        <exec executable="${sdk.dir}/platform-tools/adb">
+            <arg line="install -r ./bin/${ant.project.name}-release.apk" />
+        </exec>
+    </target>
+    
+    <target name="debugAPI" depends="-pre-build"
+        description="Changes API key to debug">
+    </target>
+    
+    <!-- extension targets. Uncomment the ones where you want to do custom work
+         in between standard targets -->
+    <target name="-pre-build">
+        <condition property="build.mode.release" else="false">
+            <equals arg1="${build.target}" arg2="release" />
+        </condition>
+
+        <if condition="${build.mode.release}">
+            <then>
+                <filterset id="build-tokens">
+                    <filter token="maps.api.key" value="${maps.api.key.market}"/>
+                </filterset>
+            </then>
+            <else>
+                <filterset id="build-tokens">
+                    <filter token="maps.api.key" value="${maps.api.key}"/>
+                </filterset>
+            </else>
+        </if>
+        <copy file="./templates/mapsapikey.xml" todir="./res/values/" overwrite="true">
+            <filterset refid="build-tokens" />
+        </copy>
     </target>
 
-	<target name="clean" description="Remove output files">
-		<ant antfile="${cgeo.buildxml}" target="clean"/>
+<!--
+    <target name="-pre-compile">
     </target>
+-->
+    <!-- This is typically used for code obfuscation.
+       Compiled code location: ${out.classes.absolute.dir}
+       If this is not done in place, override ${out.dex.input.absolute.dir} -->
+<!--
+    <target name="-post-compile">
+    </target>
+-->
 
-	<target name="compile" description="Compile project">
-		<ant antfile="${cgeo.buildxml}" target="compile"/>
-    </target>
+    <!-- Import the actual build file.
 
-	<target name="debug" description="Build application">
-		<ant antfile="${cgeo.buildxml}" target="debug"/>
-    </target>
+         To customize existing targets, there are two options:
+         - Customize only one target:
+             - copy/paste the target into this file, *before* the
+               <import> task.
+             - customize it to your needs.
+         - Customize the whole content of build.xml
+             - copy/paste the content of the rules files (minus the top node)
+               into this file, replacing the <import> task.
+             - customize to your needs.
 
-	<target name="release" description="Build application">
-		<ant antfile="${cgeo.buildxml}" target="release"/>
-    </target>
+         ***********************
+         ****** IMPORTANT ******
+         ***********************
+         In all cases you must update the value of version-tag below to read 'custom' instead of an integer,
+         in order to avoid having your file be overridden by tools such as "android update project"
+    -->
+    <!-- version-tag: custom -->
+    <import file="${sdk.dir}/tools/ant/build.xml" />
 
-	<target name="install" description="Install application">
-		<ant antfile="${cgeo.buildxml}" target="install"/>
-    </target>
-
-	<target name="uninstall" description="Uninstall application">
-		<ant antfile="${cgeo.buildxml}" target="uninstall"/>
-    </target>
-	
-	<target name="install_release" description="Install signed release application" depends="release">
-		<exec executable="${sdk.dir}/platform-tools/adb">
-			<arg line="install -r ./bin/${ant.project.name}-release.apk" />
-		</exec>
-	</target>
 </project>
