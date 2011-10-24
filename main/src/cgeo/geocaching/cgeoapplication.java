@@ -290,15 +290,16 @@ public class cgeoapplication extends Application {
         return searches.get(searchId).getCount();
     }
 
-    public boolean hasUnsavedCaches(final UUID searchId) {
-        if (unknownSearch(searchId)) {
-            return false;
-        }
-
-        List<String> geocodes = searches.get(searchId).getGeocodes();
-        if (geocodes != null) {
-            for (String geocode : geocodes) {
-                if (!isOffline(geocode, null)) {
+    /**
+     * Checks if one of the caches can be stored.
+     * 
+     * @param caches
+     * @return
+     */
+    public boolean hasUnsavedCaches(final List<cgCache> caches) {
+        if (caches != null) {
+            for (cgCache cache : caches) {
+                if (!isOffline(cache.geocode, null)) {
                     return true;
                 }
             }
