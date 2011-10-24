@@ -4,8 +4,7 @@ import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgeoapplication;
-
-import android.os.Handler;
+import cgeo.geocaching.utils.CancellableHandler;
 
 public interface IConnector {
     /**
@@ -76,5 +75,5 @@ public interface IConnector {
      */
     public boolean supportsCachesAround();
 
-    public cgSearch searchByGeocode(final cgBase base, final String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final Handler handler);
+    public cgSearch searchByGeocode(final cgBase base, final String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final CancellableHandler handler);
 }

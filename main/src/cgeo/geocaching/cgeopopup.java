@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.utils.CancellableHandler;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -53,10 +54,10 @@ public class cgeopopup extends AbstractActivity {
             }
         }
     };
-    private Handler storeCacheHandler = new Handler() {
+    private CancellableHandler storeCacheHandler = new CancellableHandler() {
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleRegularMessage(Message msg) {
             try {
                 if (storeDialog != null) {
                     storeDialog.dismiss();
@@ -566,10 +567,10 @@ public class cgeopopup extends AbstractActivity {
 
     private class storeCacheThread extends Thread {
 
-        private Handler handler = null;
+        final private CancellableHandler handler;
 
-        public storeCacheThread(Handler handlerIn) {
-            handler = handlerIn;
+        public storeCacheThread(final CancellableHandler handler) {
+            this.handler = handler;
         }
 
         @Override

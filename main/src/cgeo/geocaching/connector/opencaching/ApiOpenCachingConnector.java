@@ -7,9 +7,8 @@ import cgeo.geocaching.cgCacheWrap;
 import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
-
-import android.os.Handler;
 
 import java.util.List;
 
@@ -38,7 +37,7 @@ public class ApiOpenCachingConnector extends OpenCachingConnector implements ICo
     }
 
     @Override
-    public cgSearch searchByGeocode(final cgBase base, final String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final Handler handler) {
+    public cgSearch searchByGeocode(final cgBase base, final String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final CancellableHandler handler) {
         final cgCache cache = OkapiClient.getCache(geocode);
         if (cache == null) {
             return null;

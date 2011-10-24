@@ -27,6 +27,7 @@ import cgeo.geocaching.maps.interfaces.MapFactory;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnDragListener;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
+import cgeo.geocaching.utils.CancellableHandler;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -206,10 +207,11 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             }
         }
     };
-    final private Handler loadDetailsHandler = new Handler() {
+
+    final private class LoadDetailsHandler extends CancellableHandler {
 
         @Override
-        public void handleMessage(Message msg) {
+        public void handleRegularMessage(Message msg) {
             if (msg.what == 0) {
                 if (waitDialog != null) {
                     int secondsElapsed = (int) ((System.currentTimeMillis() - detailProgressTime) / 1000);
@@ -243,6 +245,21 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 }
             }
         }
+
+        @Override
+        public void handleCancel(final Object extra) {
+            if (loadDetailsThread != null) {
+                loadDetailsThread.stopIt();
+            }
+
+            if (geo == null) {
+                geo = app.startGeo(activity, geoUpdate, base, 0, 0);
+            }
+            if (Settings.isUseCompass() && dir == null) {
+                dir = app.startDir(activity, dirUpdate);
+            }
+        }
+
     };
     final private Handler noMapTokenHandler = new Handler() {
 
@@ -617,9 +634,12 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         return true;
                     }
 
+                    final LoadDetailsHandler loadDetailsHandler = new LoadDetailsHandler();
+
                     waitDialog = new ProgressDialog(activity);
                     waitDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                     waitDialog.setCancelable(true);
+                    waitDialog.setCancelMessage(loadDetailsHandler.cancelMessage());
                     waitDialog.setMax(detailTotal);
                     waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
@@ -1636,18 +1656,17 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
     private class LoadDetails extends Thread {
 
-        private Handler handler = null;
-        private List<String> geocodes = null;
-        private volatile boolean stop = false;
+        final private CancellableHandler handler;
+        final private List<String> geocodes;
         private long last = 0L;
 
-        public LoadDetails(Handler handlerIn, List<String> geocodesIn) {
-            handler = handlerIn;
-            geocodes = geocodesIn;
+        public LoadDetails(final CancellableHandler handler, final List<String> geocodes) {
+            this.handler = handler;
+            this.geocodes = geocodes;
         }
 
         public void stopIt() {
-            stop = true;
+            handler.cancel();
         }
 
         @Override
@@ -1665,7 +1684,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
             for (String geocode : geocodes) {
                 try {
-                    if (stop) {
+                    if (handler.isCancelled()) {
                         break;
                     }
 
@@ -1683,7 +1702,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                             }
                         }
 
-                        if (stop) {
+                        if (handler.isCancelled()) {
                             Log.i(Settings.tag, "Stopped storing process.");
 
                             break;
@@ -1699,6 +1718,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     handler.sendEmptyMessage(0);
                 }
 
+                // FIXME: what does this yield() do here?
                 yield();
 
                 last = System.currentTimeMillis();

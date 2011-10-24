@@ -14,7 +14,7 @@ public class ProgressTest extends ActivityInstrumentationTestCase2<cgeo> {
 
         assertFalse(progress.isShowing()); // nothing shown initially
 
-        progress.show(getActivity(), "Title", "Message", true, false);
+        progress.show(getActivity(), "Title", "Message", true, null);
         assertTrue(progress.isShowing());
 
         progress.setMessage("Test");
