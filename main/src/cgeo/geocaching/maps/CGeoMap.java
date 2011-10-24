@@ -16,6 +16,7 @@ import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
@@ -86,6 +87,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private static final int MENU_TRAIL_MODE = 4;
     private static final int MENU_CIRCLE_MODE = 5;
     private static final int MENU_AS_LIST = 6;
+    private static final int MENU_NAVIGATE = 7;
 
     //Submenu
     private static final int SUBMENU_VIEW_GOOGLE_MAP = 10;
@@ -476,6 +478,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         menu.add(0, MENU_TRAIL_MODE, 0, res.getString(R.string.map_trail_hide)).setIcon(android.R.drawable.ic_menu_recent_history);
         menu.add(0, MENU_CIRCLE_MODE, 0, res.getString(R.string.map_circles_hide)).setIcon(R.drawable.ic_menu_circle);
         menu.add(0, MENU_AS_LIST, 0, res.getString(R.string.map_as_list)).setIcon(android.R.drawable.ic_menu_agenda);
+        submenu = menu.addSubMenu(2, MENU_NAVIGATE, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
+        NavigationAppFactory.addMenuItems(submenu, this.activity, res, false);
 
         return true;
     }
@@ -532,6 +536,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             item = menu.findItem(MENU_AS_LIST);
             item.setVisible(live);
             item.setEnabled(CollectionUtils.isNotEmpty(caches));
+
+            menu.findItem(MENU_NAVIGATE).setEnabled(cachesCnt <= 1);
         } catch (Exception e) {
             Log.e(Settings.tag, "cgeomap.onPrepareOptionsMenu: " + e.toString());
         }
@@ -673,6 +679,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     }
 
                     return true;
+                }
+                else {
+                    NavigationAppFactory.onMenuItemSelected(item, geo, activity, res, caches != null && caches.size() > 0 ? caches.get(0) : null, searchId, null, coordsIntent);
                 }
                 break;
         }

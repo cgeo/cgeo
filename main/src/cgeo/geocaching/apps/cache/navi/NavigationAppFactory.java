@@ -1,8 +1,8 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -37,11 +37,18 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         return apps;
     }
 
-    public static void addMenuItems(Menu menu, Activity activity,
-            Resources res) {
+    public static void addMenuItems(final Menu menu, final Activity activity,
+            final Resources res) {
+        addMenuItems(menu, activity, res, true);
+    }
+
+    public static void addMenuItems(final Menu menu, final Activity activity,
+            final Resources res, final boolean showInternalMap) {
         for (NavigationApp app : getNavigationApps(res)) {
             if (app.isInstalled(activity)) {
-                menu.add(0, app.getId(), 0, app.getName());
+                if (showInternalMap || !(app instanceof InternalMap)) {
+                    menu.add(0, app.getId(), 0, app.getName());
+                }
             }
         }
     }
