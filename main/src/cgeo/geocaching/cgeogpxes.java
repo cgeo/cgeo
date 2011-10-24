@@ -20,7 +20,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
-import java.util.UUID;
 
 public class cgeogpxes extends FileList<cgGPXListAdapter> {
 
@@ -135,11 +134,11 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
 
         @Override
         public void run() {
-            final UUID searchId = doImport();
-            loadCachesHandler.sendMessage(loadCachesHandler.obtainMessage(0, app.getCount(searchId), 0));
+            final cgSearch search = doImport();
+            loadCachesHandler.sendMessage(loadCachesHandler.obtainMessage(0, cgeoapplication.getCount(search), 0));
         }
 
-        protected abstract UUID doImport();
+        protected abstract cgSearch doImport();
     }
 
     private class ImportFileThread extends ImportThread {
@@ -150,7 +149,7 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
         }
 
         @Override
-        protected UUID doImport() {
+        protected cgSearch doImport() {
             if (StringUtils.endsWithIgnoreCase(file.getName(), GPXParser.GPX_FILE_EXTENSION)) {
                 return GPXParser.importGPX(file, listId, changeParseDialogHandler);
             }
@@ -168,7 +167,7 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
         }
 
         @Override
-        protected UUID doImport() {
+        protected cgSearch doImport() {
             return GPXParser.importGPX(stream, listId, changeParseDialogHandler);
         }
     }

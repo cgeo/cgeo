@@ -20,7 +20,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -140,7 +139,7 @@ public final class LocParser extends FileParser {
         return coords;
     }
 
-    public static UUID parseLoc(File file, int listId,
+    public static cgSearch parseLoc(File file, int listId,
             Handler handler) {
         final cgSearch search = new cgSearch();
 
@@ -170,6 +169,6 @@ public final class LocParser extends FileParser {
             Log.e(Settings.tag, "LocParser.parseLoc: " + e.toString());
         }
 
-        return search.getCurrentId();
+        return search;
     }
 }

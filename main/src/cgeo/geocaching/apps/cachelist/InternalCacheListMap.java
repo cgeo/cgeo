@@ -3,6 +3,7 @@ package cgeo.geocaching.apps.cachelist;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
+import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.apps.AbstractApp;
 import cgeo.geocaching.maps.CGeoMap;
 
@@ -11,7 +12,6 @@ import android.content.Context;
 import android.content.res.Resources;
 
 import java.util.List;
-import java.util.UUID;
 
 class InternalCacheListMap extends AbstractApp implements CacheListApp {
 
@@ -25,8 +25,8 @@ class InternalCacheListMap extends AbstractApp implements CacheListApp {
     }
 
     @Override
-    public boolean invoke(cgGeo geo, List<cgCache> caches, Activity activity, Resources res, final UUID searchId) {
-        CGeoMap.startActivitySearch(activity, searchId, null, false);
+    public boolean invoke(cgGeo geo, List<cgCache> caches, Activity activity, Resources res, final cgSearch search) {
+        CGeoMap.startActivitySearch(activity, search, null, false);
         return true;
     }
 }

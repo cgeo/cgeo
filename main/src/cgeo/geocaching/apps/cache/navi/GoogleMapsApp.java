@@ -1,9 +1,10 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -14,8 +15,6 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.util.Log;
-
-import java.util.UUID;
 
 class GoogleMapsApp extends AbstractNavigationApp implements NavigationApp {
 
@@ -30,7 +29,7 @@ class GoogleMapsApp extends AbstractNavigationApp implements NavigationApp {
 
     public boolean invoke(cgGeo geo, Activity activity, Resources res,
             cgCache cache,
-            final UUID searchId, cgWaypoint waypoint, final Geopoint coords) {
+            final cgSearch search, cgWaypoint waypoint, final Geopoint coords) {
         if (cache == null && waypoint == null && coords == null) {
             return false;
         }
