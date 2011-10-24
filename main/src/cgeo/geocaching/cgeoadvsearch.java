@@ -217,8 +217,12 @@ public class cgeoadvsearch extends AbstractActivity {
                 }
 
                 if (geo.coordsNow != null) {
-                    latEdit.setHint(cgBase.formatLatitude(geo.coordsNow.getLatitude(), false));
-                    lonEdit.setHint(cgBase.formatLongitude(geo.coordsNow.getLongitude(), false));
+                    if (latEdit != null) {
+                        latEdit.setHint(cgBase.formatLatitude(geo.coordsNow.getLatitude(), false));
+                    }
+                    if (lonEdit != null) {
+                        lonEdit.setHint(cgBase.formatLongitude(geo.coordsNow.getLongitude(), false));
+                    }
                 }
             } catch (Exception e) {
                 Log.w(Settings.tag, "Failed to update location.");
