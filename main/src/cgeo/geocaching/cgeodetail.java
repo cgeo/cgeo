@@ -211,6 +211,12 @@ public class cgeodetail extends AbstractActivity {
                     + "\n\n"
                     + msg);
         }
+
+        @Override
+        public void handleCancel(final Object extra) {
+            finish();
+        }
+
     };
 
     final Handler loadMapPreviewHandler = new Handler() {
