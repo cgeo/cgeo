@@ -363,7 +363,6 @@
   <string name="init_signature_template_user">Benutzer</string>
   <string name="init_signature_template_number">Nummer</string>
   <string name="init_details">Cache Details</string>
-  <string name="init_additionaldetails">Zusätzliche Cache Details wie Bewertung, Höhe etc. laden</string>
   <string name="init_autoload">Ausführliche Beschreibung automatisch laden</string>
   <string name="init_other">Weitere Optionen</string>
   <string name="init_skin">Helle Oberfläche (Neustart erforderlich)</string>

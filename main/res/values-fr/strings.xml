@@ -364,6 +364,10 @@
   <string name="init_signature_template_datetime">Date &amp; Heure</string>
   <string name="init_signature_template_user">Utilisateur</string>
   <string name="init_signature_template_number">Nombre</string>
+  <string name="init_details">Détails des caches</string>
+  <string name="init_ratingwanted">Charger la note depuis GCvote.com</string>
+  <string name="init_elevationwanted">Charger l\'altitude de la cache</string>
+  <string name="init_autoload">Afficher automatiquement les descriptions longues</string>
   <string name="init_other">Autres options</string>
   <string name="init_skin">Aspect sobre (nécessite le redémarrage de c:geo)</string>
   <string name="init_address">Afficher l\'adresse sur l\'accueil</string>
@@ -377,7 +381,6 @@
   <string name="init_save_log_img">Sauver les images des visites</string>
   <string name="init_units">Utiliser des unités de distance impériales</string>
   <string name="init_nav">Utiliser Google Navigation</string>
-  <string name="init_autoload">Chargement automatique des descriptions longues</string>
   <string name="init_log_offline">Toujours utiliser le mode hors-ligne, même si connecté.</string>
   <string name="init_livelist">Afficher la direction des caches dans les listes</string>
   <string name="init_browser">Identifier c:geo comme navigateur standard</string>

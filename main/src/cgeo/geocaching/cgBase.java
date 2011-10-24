@@ -884,7 +884,7 @@ public class cgBase {
             }
         }
 
-        if (Settings.isAdditionalDetails()) {
+        if (Settings.isRatingWanted()) {
             // get ratings
             if (guids.size() > 0) {
                 Log.i(Settings.tag, "Trying to get ratings for " + cids.size() + " caches");
@@ -1441,8 +1441,7 @@ public class cgBase {
         sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
         loadLogsFromDetails(page, cache);
 
-        if (Settings.isAdditionalDetails()) {
-
+        if (Settings.isElevationWanted()) {
             if (CancellableHandler.isCancelled(handler)) {
                 return;
             }
@@ -1450,7 +1449,9 @@ public class cgBase {
             if (cache.coords != null) {
                 cache.elevation = getElevation(cache.coords);
             }
+        }
 
+        if (Settings.isRatingWanted()) {
             if (CancellableHandler.isCancelled(handler)) {
                 return;
             }

@@ -325,13 +325,23 @@ public class cgeoinit extends AbstractActivity {
             }
         });
 
-        final CheckBox additionalDetailsButton = (CheckBox) findViewById(R.id.additionaldetails);
-        additionalDetailsButton.setChecked(Settings.isAdditionalDetails());
-        additionalDetailsButton.setOnClickListener(new View.OnClickListener() {
+        final CheckBox ratingWantedButton = (CheckBox) findViewById(R.id.ratingwanted);
+        ratingWantedButton.setChecked(Settings.isRatingWanted());
+        ratingWantedButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                Settings.setAdditionalDetails(additionalDetailsButton.isChecked());
+                Settings.setRatingWanted(ratingWantedButton.isChecked());
+            }
+        });
+
+        final CheckBox elevationWantedButton = (CheckBox) findViewById(R.id.elevationwanted);
+        elevationWantedButton.setChecked(Settings.isElevationWanted());
+        elevationWantedButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Settings.setElevationWanted(elevationWantedButton.isChecked());
             }
         });
 

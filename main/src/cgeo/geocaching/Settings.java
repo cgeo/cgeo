@@ -45,7 +45,8 @@ public final class Settings {
     private static final String KEY_TWITTER_TOKEN_PUBLIC = "tokenpublic";
     private static final String KEY_VERSION = "version";
     private static final String KEY_LOAD_DESCRIPTION = "autoloaddesc";
-    private static final String KEY_ADDITIONAL_DETAILS = "additionaldetails";
+    private static final String KEY_RATING_WANTED = "ratingwanted";
+    private static final String KEY_ELEVATION_WANTED = "elevationwanted";
     private static final String KEY_USE_ENGLISH = "useenglish";
     private static final String KEY_AS_BROWSER = "asbrowser";
     private static final String KEY_USE_COMPASS = "usecompass";
@@ -569,16 +570,30 @@ public final class Settings {
         });
     }
 
-    public static boolean isAdditionalDetails() {
-        return sharedPrefs.getBoolean(KEY_ADDITIONAL_DETAILS, true);
+    public static boolean isRatingWanted() {
+        return sharedPrefs.getBoolean(KEY_RATING_WANTED, true);
     }
 
-    public static void setAdditionalDetails(final boolean additionaldetails) {
+    public static void setRatingWanted(final boolean ratingWanted) {
         editSharedSettings(new PrefRunnable() {
 
             @Override
             public void edit(Editor edit) {
-                edit.putBoolean(KEY_ADDITIONAL_DETAILS, additionaldetails);
+                edit.putBoolean(KEY_RATING_WANTED, ratingWanted);
+            }
+        });
+    }
+
+    public static boolean isElevationWanted() {
+        return sharedPrefs.getBoolean(KEY_ELEVATION_WANTED, true);
+    }
+
+    public static void setElevationWanted(final boolean elevationWanted) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putBoolean(KEY_ELEVATION_WANTED, elevationWanted);
             }
         });
     }
