@@ -133,6 +133,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private DisplayUsersThread displayUsersThread = null;
     //FIXME Interthread communication flag. Set to true when the first caches were found.
     private volatile boolean downloaded = false;
+    private UUID lastSearchId;
+
     // overlays
     private CachesOverlay overlayCaches = null;
     private OtherCachersOverlay overlayOtherCachers = null;
@@ -681,7 +683,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return true;
                 }
                 else {
-                    NavigationAppFactory.onMenuItemSelected(item, geo, activity, res, caches != null && caches.size() > 0 ? caches.get(0) : null, searchId, null, coordsIntent);
+                    NavigationAppFactory.onMenuItemSelected(item, geo, activity, res, caches != null && caches.size() > 0 ? caches.get(0) : null, lastSearchId, null, coordsIntent);
                 }
                 break;
         }
@@ -1111,6 +1113,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         searchId = app.getCachedInViewport(centerLat, centerLon, spanLat, spanLon, Settings.getCacheType());
                     }
                 }
+                lastSearchId = searchId;
 
                 if (searchId != null) {
                     downloaded = true;
@@ -1232,6 +1235,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 if (searchId != null) {
                     downloaded = true;
                 }
+                lastSearchId = searchId;
 
                 if (isStopped()) {
                     displayHandler.sendEmptyMessage(UPDATE_TITLE);
