@@ -486,8 +486,14 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             holder.distance.clear();
 
             final Bitmap dirImgPre = BitmapFactory.decodeFile(cgDirectionImg.getDirectionFile(cache.geocode).getPath());
-            final Bitmap dirImg = dirImgPre.copy(Bitmap.Config.ARGB_8888, true);
-            dirImgPre.recycle();
+            final Bitmap dirImg;
+            if (dirImgPre != null) { // null happens for invalid caches (not yet released)
+                dirImg = dirImgPre.copy(Bitmap.Config.ARGB_8888, true);
+                dirImgPre.recycle();
+            }
+            else {
+                dirImg = null;
+            }
 
             if (dirImg != null) {
                 if (!Settings.isLightSkin()) {
