@@ -41,7 +41,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -870,7 +869,7 @@ public abstract class GPXParser extends FileParser {
         }
     }
 
-    public static UUID importGPX(File file, int listId, Handler handler) {
+    public static cgSearch importGPX(File file, int listId, Handler handler) {
         try {
             // parse cache file
             GPXParser parser = new GPX10Parser(listId);
@@ -899,7 +898,7 @@ public abstract class GPXParser extends FileParser {
         return null;
     }
 
-    public static UUID importGPX(InputStream stream, int listId, Handler handler) {
+    public static cgSearch importGPX(InputStream stream, int listId, Handler handler) {
         try {
             // parse cache file
             GPXParser parser = new GPX10Parser(listId);
@@ -920,7 +919,7 @@ public abstract class GPXParser extends FileParser {
         return null;
     }
 
-    private static UUID storeParsedCaches(Handler handler, GPXParser parser) {
+    private static cgSearch storeParsedCaches(Handler handler, GPXParser parser) {
         final cgSearch search = new cgSearch();
         final cgeoapplication app = cgeoapplication.getInstance();
         int storedCaches = 0;
@@ -931,7 +930,7 @@ public abstract class GPXParser extends FileParser {
             showCountMessage(handler, R.string.gpx_import_storing, ++storedCaches);
         }
         Log.i(Settings.tag, "Caches found in .gpx file: " + parser.getParsedCaches().size());
-        return search.getCurrentId();
+        return search;
     }
 
     // 1234567.gpx -> 1234567-wpts.gpx

@@ -59,7 +59,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.UUID;
 
 /**
  * Class representing the Map in c:geo
@@ -71,7 +70,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private static final String EXTRAS_LATITUDE = "latitude";
     private static final String EXTRAS_WPTTYPE = "wpttype";
     private static final String EXTRAS_MAPSTATE = "mapstate";
-    private static final String EXTRAS_SEARCHID = "searchid";
+    private static final String EXTRAS_SEARCH = "search";
     private static final String EXTRAS_DETAIL = "detail";
     private static final int MENU_SELECT_MAPVIEW = 1;
     private static final int MENU_MAP_LIVE = 2;
@@ -101,13 +100,13 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private cgUpdateDir dirUpdate = new UpdateDir();
     // from intent
     private boolean fromDetailIntent = false;
-    private String searchIdIntent = null;
+    private cgSearch searchIntent = null;
     private String geocodeIntent = null;
     private Geopoint coordsIntent = null;
     private WaypointType waypointTypeIntent = null;
     private int[] mapStateIntent = null;
     // status data
-    private UUID searchId = null;
+    private cgSearch search = null;
     private String token = null;
     private boolean noMapTokenShowed = false;
     // map status data
@@ -339,7 +338,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         Bundle extras = activity.getIntent().getExtras();
         if (extras != null) {
             fromDetailIntent = extras.getBoolean(EXTRAS_DETAIL);
-            searchIdIntent = extras.getString(EXTRAS_SEARCHID);
+            searchIntent = (cgSearch) extras.getParcelable(EXTRAS_SEARCH);
             geocodeIntent = extras.getString(EXTRAS_GEOCODE);
             final double latitudeIntent = extras.getDouble(EXTRAS_LATITUDE);
             final double longitudeIntent = extras.getDouble(EXTRAS_LONGITUDE);
@@ -348,9 +347,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             mapStateIntent = extras.getIntArray(EXTRAS_MAPSTATE);
             mapTitle = extras.getString(EXTRAS_MAP_TITLE);
 
-            if ("".equals(searchIdIntent)) {
-                searchIdIntent = null;
-            }
             if (coordsIntent.getLatitude() == 0.0 || coordsIntent.getLongitude() == 0.0) {
                 coordsIntent = null;
             }
@@ -361,15 +357,15 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
 
         // live map, if no arguments are given
-        live = (searchIdIntent == null && geocodeIntent == null && coordsIntent == null);
+        live = (searchIntent == null && geocodeIntent == null && coordsIntent == null);
 
         if (null == mapStateIntent) {
             followMyLocation = live;
         } else {
             followMyLocation = 1 == mapStateIntent[3] ? true : false;
         }
-        if (geocodeIntent != null || searchIdIntent != null || coordsIntent != null || mapStateIntent != null) {
-            centerMap(geocodeIntent, searchIdIntent, coordsIntent, mapStateIntent);
+        if (geocodeIntent != null || searchIntent != null || coordsIntent != null || mapStateIntent != null) {
+            centerMap(geocodeIntent, searchIntent, coordsIntent, mapStateIntent);
         }
 
         // prepare my location button
@@ -551,7 +547,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 item.setTitle(res.getString(R.string.map_live_enable));
             }
 
-            menu.findItem(MENU_STORE_CACHES).setEnabled(live && !isLoading() && CollectionUtils.isNotEmpty(caches) && app.hasUnsavedCaches(searchId));
+            menu.findItem(MENU_STORE_CACHES).setEnabled(live && !isLoading() && CollectionUtils.isNotEmpty(caches) && app.hasUnsavedCaches(search));
 
             item = menu.findItem(MENU_CIRCLE_MODE); // show circles
             if (overlayCaches != null && overlayCaches.getCircles()) {
@@ -584,8 +580,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             case MENU_MAP_LIVE:
                 Settings.setLiveMap(!Settings.isLiveMap());
                 liveChanged = true;
-                searchId = null;
-                searchIdIntent = null;
+                search = null;
+                searchIntent = null;
                 return true;
             case MENU_STORE_CACHES:
                 if (live && !isLoading() && CollectionUtils.isNotEmpty(caches)) {
@@ -669,7 +665,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 overlayCaches.switchCircles();
                 mapView.invalidate();
                 return true;
-            case MENU_AS_LIST:
+            case MENU_AS_LIST: {
                 final cgSearch search = new cgSearch();
                 search.totalCnt = caches.size();
                 for (cgCache cache : caches) {
@@ -677,6 +673,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 }
                 cgeocaches.startActivityMap(activity, app.addSearch(search, caches, true, 0));
                 return true;
+            }
             default:
                 if (SUBMENU_VIEW_GOOGLE_MAP <= id && SUBMENU_VIEW_MF_OFFLINE >= id) {
                     item.setChecked(true);
@@ -692,7 +689,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         Intent mapIntent = new Intent(activity, Settings.getMapFactory().getMapClass());
 
                         mapIntent.putExtra(EXTRAS_DETAIL, fromDetailIntent);
-                        mapIntent.putExtra(EXTRAS_SEARCHID, searchIdIntent);
+                        mapIntent.putExtra(EXTRAS_SEARCH, searchIntent);
                         mapIntent.putExtra(EXTRAS_GEOCODE, geocodeIntent);
                         if (coordsIntent != null) {
                             mapIntent.putExtra(EXTRAS_LATITUDE, coordsIntent.getLatitude());
@@ -713,9 +710,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     }
 
                     return true;
-                }
-                else {
-                    NavigationAppFactory.onMenuItemSelected(item, geo, activity, res, caches != null && caches.size() > 0 ? caches.get(0) : null, searchId, null, coordsIntent);
+                } else {
+                    NavigationAppFactory.onMenuItemSelected(item, geo, activity, res, caches != null && caches.size() > 0 ? caches.get(0) : null, search, null, coordsIntent);
                 }
                 break;
         }
@@ -1118,17 +1114,17 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
                 // stage 1 - pull and render from the DB only
 
-                if (fromDetailIntent || StringUtils.isNotEmpty(searchIdIntent)) {
-                    searchId = UUID.fromString(searchIdIntent);
+                if (fromDetailIntent || searchIntent != null) {
+                    search = searchIntent;
                 } else {
                     if (!live || !Settings.isLiveMap()) {
-                        searchId = app.getStoredInViewport(centerLat, centerLon, spanLat, spanLon, Settings.getCacheType());
+                        search = app.getStoredInViewport(centerLat, centerLon, spanLat, spanLon, Settings.getCacheType());
                     } else {
-                        searchId = app.getCachedInViewport(centerLat, centerLon, spanLat, spanLon, Settings.getCacheType());
+                        search = app.getCachedInViewport(centerLat, centerLon, spanLat, spanLon, Settings.getCacheType());
                     }
                 }
 
-                if (searchId != null) {
+                if (search != null) {
                     downloaded = true;
                 }
 
@@ -1139,7 +1135,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                caches = app.getCaches(searchId, true);
+                caches = app.getCaches(search, true);
 
                 //if in live map and stored caches are found / disables are also shown.
                 if (live && Settings.isLiveMap()) {
@@ -1245,8 +1241,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                searchId = base.searchByViewport(token, latMin, latMax, lonMin, lonMax, 0);
-                if (searchId != null) {
+                search = base.searchByViewport(token, latMin, latMax, lonMin, lonMax, 0);
+                if (search != null) {
                     downloaded = true;
                 }
 
@@ -1259,7 +1255,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
                 //TODO Portree Only overwrite if we got some. Otherwise maybe error icon
                 //TODO Merge not to show locally found caches
-                caches = app.getCaches(searchId, centerLat, centerLon, spanLat, spanLon);
+                caches = app.getCaches(search, centerLat, centerLon, spanLat, spanLon);
 
                 if (stop) {
                     displayHandler.sendEmptyMessage(0);
@@ -1731,8 +1727,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
     }
 
-    // move map to view results of searchIdIntent
-    private void centerMap(String geocodeCenter, String searchIdCenter, final Geopoint coordsCenter, int[] mapState) {
+    // move map to view results of searchIntent
+    private void centerMap(String geocodeCenter, final cgSearch searchCenter, final Geopoint coordsCenter, int[] mapState) {
 
         if (!centered && mapState != null) {
             try {
@@ -1744,14 +1740,14 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
             centered = true;
             alreadyCentered = true;
-        } else if (!centered && (geocodeCenter != null || searchIdIntent != null)) {
+        } else if (!centered && (geocodeCenter != null || searchIntent != null)) {
             try {
                 List<Object> viewport = null;
 
                 if (geocodeCenter != null) {
                     viewport = app.getBounds(geocodeCenter);
                 } else {
-                    viewport = app.getBounds(UUID.fromString(searchIdCenter));
+                    viewport = app.getBounds(searchCenter);
                 }
 
                 if (viewport == null) {
@@ -1868,10 +1864,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         return imageView;
     }
 
-    public static void startActivitySearch(final Activity fromActivity, final UUID searchId, final String title, boolean detail) {
+    public static void startActivitySearch(final Activity fromActivity, final cgSearch search, final String title, boolean detail) {
         Intent mapIntent = new Intent(fromActivity, Settings.getMapFactory().getMapClass());
         mapIntent.putExtra(EXTRAS_DETAIL, detail);
-        mapIntent.putExtra(EXTRAS_SEARCHID, searchId.toString());
+        mapIntent.putExtra(EXTRAS_SEARCH, search);
         if (StringUtils.isNotBlank(title)) {
             mapIntent.putExtra(CGeoMap.EXTRAS_MAP_TITLE, title);
         }

@@ -12,7 +12,6 @@ import cgeo.geocaching.utils.CryptUtils;
 import android.os.Handler;
 
 import java.util.List;
-import java.util.UUID;
 
 public class ApiOpenCachingConnector extends OpenCachingConnector implements IConnector {
 
@@ -39,7 +38,7 @@ public class ApiOpenCachingConnector extends OpenCachingConnector implements ICo
     }
 
     @Override
-    public UUID searchByGeocode(final cgBase base, final String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final Handler handler) {
+    public cgSearch searchByGeocode(final cgBase base, final String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final Handler handler) {
         final cgCache cache = OkapiClient.getCache(geocode);
         if (cache == null) {
             return null;
@@ -50,6 +49,6 @@ public class ApiOpenCachingConnector extends OpenCachingConnector implements ICo
         final List<cgCache> cacheList = cgBase.filterSearchResults(search, caches, false, false, null);
         app.addSearch(search, cacheList, true, reason);
 
-        return search.getCurrentId();
+        return search;
     }
 }

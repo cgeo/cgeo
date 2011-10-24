@@ -3,6 +3,7 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
+import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeosmaps;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -12,8 +13,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
-
-import java.util.UUID;
 
 class StaticMapApp extends AbstractNavigationApp implements
         NavigationApp {
@@ -30,7 +29,7 @@ class StaticMapApp extends AbstractNavigationApp implements
     @Override
     public boolean invoke(cgGeo geo, Activity activity, Resources res,
             cgCache cache,
-            final UUID searchId, cgWaypoint waypoint, final Geopoint coords) {
+            final cgSearch search, cgWaypoint waypoint, final Geopoint coords) {
 
         if (cache == null || cache.reason == 0) {
             ActivityMixin.showToast(activity, res.getString(R.string.err_detail_no_map_static));

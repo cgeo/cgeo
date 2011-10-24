@@ -67,7 +67,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.UUID;
 
 /**
  * Activity to display all details of a cache like owner, difficulty, description etc.
@@ -82,7 +81,7 @@ public class cgeodetail extends AbstractActivity {
         super("c:geo-cache-details");
     }
 
-    public UUID searchId = null;
+    public cgSearch search = null;
     public cgCache cache = null;
     public String geocode = null;
     public String name = null;
@@ -127,7 +126,7 @@ public class cgeodetail extends AbstractActivity {
             storeThread = null;
 
             try {
-                cache = app.getCache(searchId); // reload cache details
+                cache = app.getCache(search); // reload cache details
             } catch (Exception e) {
                 showToast(res.getString(R.string.err_store_failed));
 
@@ -144,7 +143,7 @@ public class cgeodetail extends AbstractActivity {
             refreshThread = null;
 
             try {
-                cache = app.getCache(searchId); // reload cache details
+                cache = app.getCache(search); // reload cache details
             } catch (Exception e) {
                 showToast(res.getString(R.string.err_refresh_failed));
 
@@ -159,7 +158,7 @@ public class cgeodetail extends AbstractActivity {
         @Override
         public void handleMessage(Message msg) {
             try {
-                cache = app.getCache(searchId); // reload cache details
+                cache = app.getCache(search); // reload cache details
             } catch (Exception e) {
                 showToast(res.getString(R.string.err_drop_failed));
 
@@ -176,15 +175,15 @@ public class cgeodetail extends AbstractActivity {
             if (cgBase.UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
                 updateStatusMsg((String) msg.obj);
             } else {
-                if (searchId == null) {
+                if (search == null) {
                     showToast(res.getString(R.string.err_dwld_details_failed));
 
                     finish();
                     return;
                 }
 
-                if (app.getError(searchId) != null) {
-                    showToast(res.getString(R.string.err_dwld_details_failed_reason) + " " + app.getError(searchId) + ".");
+                if (cgeoapplication.getError(search) != null) {
+                    showToast(res.getString(R.string.err_dwld_details_failed_reason) + " " + cgeoapplication.getError(search) + ".");
 
                     finish();
                     return;
@@ -636,7 +635,7 @@ public class cgeodetail extends AbstractActivity {
             }
             return false;
         }
-        if (NavigationAppFactory.onMenuItemSelected(item, geo, this, res, cache, searchId, null, null)) {
+        if (NavigationAppFactory.onMenuItemSelected(item, geo, this, res, cache, search, null, null)) {
             return true;
         }
         if (GeneralAppsFactory.onMenuItemSelected(item, this, cache)) {
@@ -659,8 +658,8 @@ public class cgeodetail extends AbstractActivity {
             geo = app.startGeo(this, geoUpdate, base, 0, 0);
         }
 
-        if (searchId != null) {
-            cache = app.getCache(searchId);
+        if (search != null) {
+            cache = app.getCache(search);
             if (cache != null && cache.geocode != null) {
                 geocode = cache.geocode;
             }
@@ -676,11 +675,11 @@ public class cgeodetail extends AbstractActivity {
         TextView itemName;
         TextView itemValue;
 
-        if (searchId == null) {
+        if (search == null) {
             return;
         }
 
-        cache = app.getCache(searchId);
+        cache = app.getCache(search);
 
         if (cache == null) {
             progress.dismiss();
@@ -1380,7 +1379,7 @@ public class cgeodetail extends AbstractActivity {
             if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
                 return;
             }
-            searchId = base.searchByGeocode(geocode, StringUtils.isBlank(geocode) ? guid : null, 0, false, handler);
+            search = base.searchByGeocode(geocode, StringUtils.isBlank(geocode) ? guid : null, 0, false, handler);
             handler.sendMessage(new Message());
         }
     }
@@ -1772,7 +1771,7 @@ public class cgeodetail extends AbstractActivity {
         @Override
         public void run() {
             app.removeCacheFromCache(geocode);
-            searchId = base.searchByGeocode(cache.geocode, null, 0, true, null);
+            search = base.searchByGeocode(cache.geocode, null, 0, true, null);
 
             handler.sendEmptyMessage(0);
         }

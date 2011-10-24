@@ -17,7 +17,6 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class GCConnector extends AbstractConnector implements IConnector {
 
@@ -68,7 +67,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
     }
 
     @Override
-    public UUID searchByGeocode(final cgBase base, String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final Handler handler) {
+    public cgSearch searchByGeocode(final cgBase base, String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final Handler handler) {
         final Parameters params = new Parameters("decrypt", "y");
         if (StringUtils.isNotBlank(geocode)) {
             params.put("wp", geocode);
@@ -102,7 +101,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
 
                 cacheList.clear();
 
-                return search.getCurrentId();
+                return search;
             }
 
             Log.e(Settings.tag, "cgeoBase.searchByGeocode: No data from server");
@@ -128,6 +127,6 @@ public class GCConnector extends AbstractConnector implements IConnector {
         final List<cgCache> cacheList = cgBase.filterSearchResults(search, caches, false, false, null);
         app.addSearch(search, cacheList, true, reason);
 
-        return search.getCurrentId();
+        return search;
     }
 }

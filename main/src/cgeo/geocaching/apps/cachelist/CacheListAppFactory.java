@@ -1,9 +1,10 @@
 package cgeo.geocaching.apps.cachelist;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.Settings;
+import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.apps.AbstractAppFactory;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -17,7 +18,6 @@ import android.view.SubMenu;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public final class CacheListAppFactory extends AbstractAppFactory {
     private static CacheListApp[] apps = new CacheListApp[] {};
@@ -64,11 +64,11 @@ public final class CacheListAppFactory extends AbstractAppFactory {
 
     public static boolean onMenuItemSelected(final MenuItem item,
             final cgGeo geo, final List<cgCache> caches, final Activity activity, final Resources res,
-            final UUID searchId) {
+            final cgSearch search) {
         CacheListApp app = (CacheListApp) getAppFromMenuItem(item, apps);
         if (app != null) {
             try {
-                return app.invoke(geo, caches, activity, res, searchId);
+                return app.invoke(geo, caches, activity, res, search);
             } catch (Exception e) {
                 Log.e(Settings.tag, "CacheListAppFactory.onMenuItemSelected: " + e.toString());
             }

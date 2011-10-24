@@ -7,8 +7,6 @@ import cgeo.geocaching.cgeoapplication;
 
 import android.os.Handler;
 
-import java.util.UUID;
-
 public interface IConnector {
     /**
      * get name for display (currently only used in links)
@@ -78,5 +76,5 @@ public interface IConnector {
      */
     public boolean supportsCachesAround();
 
-    public UUID searchByGeocode(final cgBase base, final String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final Handler handler);
+    public cgSearch searchByGeocode(final cgBase base, final String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final Handler handler);
 }
