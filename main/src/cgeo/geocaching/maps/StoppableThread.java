@@ -31,7 +31,7 @@ public class StoppableThread extends Thread {
      * Requests this Thread to stop.
      */
 
-    public synchronized void stopIt() {
+    public void stopIt() {
         stop = true;
     }
 }
