@@ -3444,12 +3444,8 @@ public class cgBase {
 
     /**
      * Generate a numeric date and time string according to system-wide settings (locale,
-     * <<<<<<< HEAD
-     * date format) such as "7 sept. à 12:35".
-     * =======
      * date format) such as "7 sept. at 12:35".
-     * >>>>>>> upstream/master
-     * 
+     *
      * @param context
      *            a Context
      * @param date
