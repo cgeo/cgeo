@@ -37,12 +37,12 @@ class LocusApp extends AbstractLocusApp implements NavigationApp {
             final ArrayList<Object> points = new ArrayList<Object>();
 
             // add cache if present
-            if (cache != null && cache.coords != null) {
+            if (cache != null && cache.getCoords() != null) {
                 points.add(cache);
             }
 
             // add waypoint if present
-            if (waypoint != null && waypoint.coords != null) {
+            if (waypoint != null && waypoint.getCoords() != null) {
                 points.add(waypoint);
             }
 

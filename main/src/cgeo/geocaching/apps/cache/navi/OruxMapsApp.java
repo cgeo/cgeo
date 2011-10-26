@@ -48,10 +48,10 @@ class OruxMapsApp extends AbstractNavigationApp implements NavigationApp {
 
     private static Geopoint getCoords(cgCache cache, cgWaypoint waypoint, Geopoint coords) {
         if (cache != null) {
-            return cache.coords;
+            return cache.getCoords();
         }
         else if (waypoint != null) {
-            return waypoint.coords;
+            return waypoint.getCoords();
         }
         return coords;
     }

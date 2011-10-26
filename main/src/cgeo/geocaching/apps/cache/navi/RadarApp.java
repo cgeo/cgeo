@@ -36,10 +36,10 @@ class RadarApp extends AbstractNavigationApp implements NavigationApp {
             cgCache cache,
             final cgSearch search, cgWaypoint waypoint, final Geopoint coords) {
         if (cache != null) {
-            return navigateTo(activity, cache.coords);
+            return navigateTo(activity, cache.getCoords());
         }
         if (waypoint != null) {
-            return navigateTo(activity, waypoint.coords);
+            return navigateTo(activity, waypoint.getCoords());
         }
         return navigateTo(activity, coords);
     }

@@ -40,14 +40,14 @@ public abstract class FileParser {
     }
 
     protected static void fixCache(cgCache cache) {
-        if (cache.inventory != null) {
-            cache.inventoryItems = cache.inventory.size();
+        if (cache.getInventory() != null) {
+            cache.setInventoryItems(cache.getInventory().size());
         } else {
-            cache.inventoryItems = 0;
+            cache.setInventoryItems(0);
         }
         final long time = new Date().getTime();
-        cache.updated = time;
-        cache.detailedUpdate = time;
+        cache.setUpdated(time);
+        cache.setDetailedUpdate(time);
     }
 
 }

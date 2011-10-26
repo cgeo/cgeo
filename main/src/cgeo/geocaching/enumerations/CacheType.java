@@ -41,13 +41,25 @@ public enum CacheType {
         this.stringId = stringId;
     }
 
-    public final static Map<String, CacheType> FIND_BY_ID;
+    private final static Map<String, CacheType> FIND_BY_ID;
+    private final static Map<String, CacheType> FIND_BY_PATTERN;
     static {
-        final HashMap<String, CacheType> mapping = new HashMap<String, CacheType>();
+        final HashMap<String, CacheType> mappingId = new HashMap<String, CacheType>();
+        final HashMap<String, CacheType> mappingPattern = new HashMap<String, CacheType>();
         for (CacheType ct : values()) {
-            mapping.put(ct.id, ct);
+            mappingId.put(ct.id, ct);
+            mappingPattern.put(ct.pattern, ct);
         }
-        FIND_BY_ID = Collections.unmodifiableMap(mapping);
+        FIND_BY_ID = Collections.unmodifiableMap(mappingId);
+        FIND_BY_PATTERN = Collections.unmodifiableMap(mappingPattern);
+    }
+
+    public final static CacheType getById(final String id) {
+        return CacheType.FIND_BY_ID.get(id.toLowerCase().trim());
+    }
+
+    public final static CacheType getByPattern(final String pattern) {
+        return CacheType.FIND_BY_PATTERN.get(pattern.toLowerCase().trim());
     }
 
 }

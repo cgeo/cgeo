@@ -42,7 +42,7 @@ public final class ConnectorFactory {
     }
 
     public static IConnector getConnector(cgCache cache) {
-        return getConnector(cache.geocode);
+        return getConnector(cache.getGeocode());
     }
 
     public static IConnector getConnector(String geocode) {

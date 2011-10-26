@@ -13,7 +13,7 @@ public class MapsforgeCacheOverlayItem extends OverlayItem implements CachesOver
     private cgCoord coord;
 
     public MapsforgeCacheOverlayItem(cgCoord coordinate, String type) {
-        super(new GeoPoint(coordinate.coords.getLatitudeE6(), coordinate.coords.getLongitudeE6()), coordinate.name, "");
+        super(new GeoPoint(coordinate.getCoords().getLatitudeE6(), coordinate.getCoords().getLongitudeE6()), coordinate.getName(), "");
 
         this.cacheType = type;
         this.coord = coordinate;

@@ -1,7 +1,5 @@
 package cgeo.geocaching.geopoint;
 
-import cgeo.geocaching.geopoint.DistanceParser;
-
 import android.test.AndroidTestCase;
 
 import junit.framework.Assert;

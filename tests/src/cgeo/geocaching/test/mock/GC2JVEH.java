@@ -67,8 +67,8 @@ public class GC2JVEH extends MockedCache {
     }
 
     @Override
-    public String getType() {
-        return CacheType.MYSTERY.id;
+    public CacheType getCacheType() {
+        return CacheType.MYSTERY;
     }
 
     @Override
