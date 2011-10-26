@@ -20,10 +20,10 @@ public class StateComparator extends AbstractCacheComparator implements
     }
 
     private static int getState(final cgCache cache) {
-        if (cache.disabled) {
+        if (cache.isDisabled()) {
             return 1;
         }
-        if (cache.archived) {
+        if (cache.isArchived()) {
             return 2;
         }
         return 0;

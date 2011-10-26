@@ -313,7 +313,7 @@ public class cgeoapplication extends Application {
         } else {
             cache = getStorage().loadCache(geocode, null, loadAttributes, loadWaypoints, loadSpoilers, loadLogs, loadInventory, loadOfflineLog);
 
-            if (cache != null && cache.detailed && loadAttributes && loadWaypoints && loadSpoilers && loadLogs && loadInventory) {
+            if (cache != null && cache.getDetailed() && loadAttributes && loadWaypoints && loadSpoilers && loadLogs && loadInventory) {
                 putCacheInCache(cache);
             }
         }
@@ -339,15 +339,15 @@ public class cgeoapplication extends Application {
     }
 
     public void putCacheInCache(cgCache cache) {
-        if (cache == null || cache.geocode == null) {
+        if (cache == null || cache.getGeocode() == null) {
             return;
         }
 
-        if (cachesCache.containsKey(cache.geocode)) {
-            cachesCache.remove(cache.geocode);
+        if (cachesCache.containsKey(cache.getGeocode())) {
+            cachesCache.remove(cache.getGeocode());
         }
 
-        cachesCache.put(cache.geocode, cache);
+        cachesCache.put(cache.getGeocode(), cache);
     }
 
     public String[] geocodesInCache() {
@@ -555,7 +555,7 @@ public class cgeoapplication extends Application {
         if (newItem) {
             // save only newly downloaded data
             for (final cgCache cache : cacheList) {
-                cache.reason = reason;
+                cache.setReason(reason);
                 storeWithMerge(cache, false);
             }
         }
@@ -568,10 +568,10 @@ public class cgeoapplication extends Application {
             return false;
         }
 
-        final boolean status = storeWithMerge(cache, cache.reason >= 1);
+        final boolean status = storeWithMerge(cache, cache.getReason() >= 1);
 
         if (status) {
-            search.addGeocode(cache.geocode);
+            search.addGeocode(cache.getGeocode());
         }
 
         return status;
@@ -589,7 +589,7 @@ public class cgeoapplication extends Application {
 
     private boolean storeWithMerge(final cgCache cache, final boolean override) {
         if (!override) {
-            final cgCache oldCache = storage.loadCache(cache.geocode, cache.guid,
+            final cgCache oldCache = storage.loadCache(cache.getGeocode(), cache.getGuid(),
                     true, true, true, true, true, true);
             cache.gatherMissingFrom(oldCache);
         }

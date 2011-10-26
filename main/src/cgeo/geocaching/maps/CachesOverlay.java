@@ -11,7 +11,6 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
-import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.maps.interfaces.MapFactory;
@@ -39,7 +38,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOverlay {
+public class CachesOverlay extends AbstractItemizedOverlay {
 
     private List<CachesOverlayItemImpl> items = new ArrayList<CachesOverlayItemImpl>();
     private Context context = null;
@@ -144,14 +143,14 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
                     final cgCoord itemCoord = item.getCoord();
                     float[] result = new float[1];
 
-                    Location.distanceBetween(itemCoord.coords.getLatitude(), itemCoord.coords.getLongitude(),
-                            itemCoord.coords.getLatitude(), itemCoord.coords.getLongitude() + 1, result);
+                    Location.distanceBetween(itemCoord.getCoords().getLatitude(), itemCoord.getCoords().getLongitude(),
+                            itemCoord.getCoords().getLatitude(), itemCoord.getCoords().getLongitude() + 1, result);
                     final float longitudeLineDistance = result[0];
 
-                    GeoPointImpl itemGeo = mapFactory.getGeoPointBase(itemCoord.coords);
+                    GeoPointImpl itemGeo = mapFactory.getGeoPointBase(itemCoord.getCoords());
 
-                    final Geopoint leftCoords = new Geopoint(itemCoord.coords.getLatitude(),
-                            itemCoord.coords.getLongitude() - 161 / longitudeLineDistance);
+                    final Geopoint leftCoords = new Geopoint(itemCoord.getCoords().getLatitude(),
+                            itemCoord.getCoords().getLongitude() - 161 / longitudeLineDistance);
                     GeoPointImpl leftGeo = mapFactory.getGeoPointBase(leftCoords);
 
                     projection.toPixels(itemGeo, center);
@@ -213,18 +212,18 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
 
             cgCoord coordinate = item.getCoord();
 
-            if (StringUtils.isNotBlank(coordinate.type) && coordinate.type.equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.geocode)) {
+            if (StringUtils.isNotBlank(coordinate.getType()) && coordinate.getType().equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
                 Intent popupIntent = new Intent(context, cgeopopup.class);
 
                 popupIntent.putExtra("fromdetail", fromDetail);
-                popupIntent.putExtra("geocode", coordinate.geocode);
+                popupIntent.putExtra("geocode", coordinate.getGeocode());
 
                 context.startActivity(popupIntent);
-            } else if (coordinate.type != null && coordinate.type.equalsIgnoreCase("waypoint") && coordinate.id != null && coordinate.id > 0) {
+            } else if (coordinate.getType() != null && coordinate.getType().equalsIgnoreCase("waypoint") && coordinate.getId() != null && coordinate.getId() > 0) {
                 Intent popupIntent = new Intent(context, cgeowaypoint.class);
 
-                popupIntent.putExtra("waypoint", coordinate.id);
-                popupIntent.putExtra("geocode", coordinate.geocode);
+                popupIntent.putExtra("waypoint", coordinate.getId());
+                popupIntent.putExtra("geocode", coordinate.getGeocode());
 
                 context.startActivity(popupIntent);
             } else {
@@ -276,24 +275,24 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
             AlertDialog.Builder dialog = new AlertDialog.Builder(context);
             dialog.setCancelable(true);
 
-            if (coordinate.type.equalsIgnoreCase("cache")) {
+            if (coordinate.getType().equalsIgnoreCase("cache")) {
                 dialog.setTitle("cache");
 
                 String cacheType;
-                if (cgBase.cacheTypesInv.containsKey(coordinate.typeSpec)) {
-                    cacheType = cgBase.cacheTypesInv.get(coordinate.typeSpec);
+                if (cgBase.cacheTypesInv.containsKey(coordinate.getTypeSpec())) {
+                    cacheType = cgBase.cacheTypesInv.get(coordinate.getTypeSpec());
                 } else {
                     cacheType = cgBase.cacheTypesInv.get(CacheType.MYSTERY.id);
                 }
 
-                dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ngeocode: " + coordinate.geocode.toUpperCase() + "\ntype: " + cacheType);
+                dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ngeocode: " + coordinate.getGeocode().toUpperCase() + "\ntype: " + cacheType);
                 if (fromDetail) {
                     dialog.setPositiveButton("navigate", new DialogInterface.OnClickListener() {
 
                         public void onClick(DialogInterface dialog, int id) {
                             final Collection<cgCoord> coordinatesWithType = new ArrayList<cgCoord>();
                             coordinatesWithType.add(coordinate);
-                            cgeonavigate.startActivity(context, coordinate.geocode.toUpperCase(), null, coordinate.coords, coordinatesWithType);
+                            cgeonavigate.startActivity(context, coordinate.getGeocode().toUpperCase(), null, coordinate.getCoords(), coordinatesWithType);
                             dialog.cancel();
                         }
                     });
@@ -302,7 +301,7 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
 
                         public void onClick(DialogInterface dialog, int id) {
                             Intent cachesIntent = new Intent(context, cgeodetail.class);
-                            cachesIntent.putExtra("geocode", coordinate.geocode.toUpperCase());
+                            cachesIntent.putExtra("geocode", coordinate.getGeocode().toUpperCase());
                             context.startActivity(cachesIntent);
 
                             dialog.cancel();
@@ -312,7 +311,7 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
             } else {
                 dialog.setTitle("waypoint");
 
-                String waypointL10N = cgBase.waypointTypes.get(WaypointType.FIND_BY_ID.get(coordinate.typeSpec));
+                String waypointL10N = cgBase.waypointTypes.get(WaypointType.FIND_BY_ID.get(coordinate.getTypeSpec()));
                 if (waypointL10N == null) {
                     waypointL10N = cgBase.waypointTypes.get(WaypointType.WAYPOINT);
                 }
@@ -323,7 +322,7 @@ public class CachesOverlay extends AbstractItemizedOverlay implements GeneralOve
                     public void onClick(DialogInterface dialog, int id) {
                         Collection<cgCoord> coordinatesWithType = new ArrayList<cgCoord>();
                         coordinatesWithType.add(coordinate);
-                        cgeonavigate.startActivity(context, coordinate.name, null, coordinate.coords, coordinatesWithType);
+                        cgeonavigate.startActivity(context, coordinate.getName(), null, coordinate.getCoords(), coordinatesWithType);
                         dialog.cancel();
                     }
                 });

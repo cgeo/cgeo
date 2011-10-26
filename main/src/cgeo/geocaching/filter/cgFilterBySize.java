@@ -14,7 +14,7 @@ public class cgFilterBySize extends cgFilter {
 
     @Override
     boolean applyFilter(cgCache cache) {
-        return this.size == cache.size;
+        return this.size == cache.getSize();
     }
 
     @Override

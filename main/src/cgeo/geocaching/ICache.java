@@ -3,8 +3,6 @@
  */
 package cgeo.geocaching;
 
-import cgeo.geocaching.enumerations.CacheSize;
-
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -15,17 +13,7 @@ import java.util.Map;
  * @author blafoo
  *
  */
-public interface ICache {
-
-    /**
-     * @return Geocode like GCxxxx
-     */
-    public String getGeocode();
-
-    /**
-     * @return Tradi, multi etc.
-     */
-    public String getType();
+public interface ICache extends IBasicCache {
 
     /**
      * @return Displayed owner, might differ from the real owner
@@ -38,21 +26,6 @@ public interface ICache {
     public String getOwnerReal();
 
     /**
-     * @return Micro, small etc.
-     */
-    public CacheSize getSize();
-
-    /**
-     * @return Difficulty assessment
-     */
-    public Float getDifficulty();
-
-    /**
-     * @return Terrain assessment
-     */
-    public Float getTerrain();
-
-    /**
      * @return Latitude, e.g. N 52° 12.345
      */
     public String getLatitude();
@@ -61,11 +34,6 @@ public interface ICache {
      * @return Longitude, e.g. E 9° 34.567
      */
     public String getLongitude();
-
-    /**
-     * @return true if the cache is disabled, false else
-     */
-    public boolean isDisabled();
 
     /**
      * @return true if the user is the owner of the cache, false else
@@ -97,10 +65,6 @@ public interface ICache {
      */
     public String getShortDescription();
 
-    /**
-     * @return Name
-     */
-    public String getName();
 
     /**
      * @return Id
@@ -122,11 +86,6 @@ public interface ICache {
      */
     public String getPersonalNote();
 
-    /**
-     * @return true if the user already found the cache
-     *
-     */
-    public boolean isFound();
 
     /**
      * @return true if the user gave a favorite point to the cache
@@ -174,7 +133,7 @@ public interface ICache {
 
     /**
      * get the name for lexicographical sorting.
-     * 
+     *
      * @return normalized, cached name which sort also correct for numerical parts in the name
      */
     public String getNameForSorting();

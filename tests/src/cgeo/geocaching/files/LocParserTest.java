@@ -44,21 +44,21 @@ public class LocParserTest extends InstrumentationTestCase {
         final Map<String, cgCoord> coords = readLoc(R.raw.oc5952_loc);
         final cgCoord coord = coords.get("OC5952");
         assertNotNull(coord);
-        assertEquals("OC5952", coord.geocode);
-        assertEquals("Die Schatzinsel / treasure island", coord.name);
-        assertTrue(new Geopoint(48.85968, 9.18740).isEqualTo(coord.coords));
+        assertEquals("OC5952", coord.getGeocode());
+        assertEquals("Die Schatzinsel / treasure island", coord.getName());
+        assertTrue(new Geopoint(48.85968, 9.18740).isEqualTo(coord.getCoords()));
     }
 
     public void testGCLoc() {
         final Map<String, cgCoord> coords = readLoc(R.raw.gc1bkp3_loc);
         final cgCoord coord = coords.get("GC1BKP3");
         assertNotNull(coord);
-        assertEquals("GC1BKP3", coord.geocode);
-        assertEquals("Die Schatzinsel / treasure island", coord.name);
-        assertTrue(new Geopoint(48.859683, 9.1874).isEqualTo(coord.coords));
-        assertEquals(1.0f, coord.difficulty.floatValue());
-        assertEquals(5.0f, coord.terrain.floatValue());
-        assertEquals(CacheSize.MICRO, coord.size);
+        assertEquals("GC1BKP3", coord.getGeocode());
+        assertEquals("Die Schatzinsel / treasure island", coord.getName());
+        assertTrue(new Geopoint(48.859683, 9.1874).isEqualTo(coord.getCoords()));
+        assertEquals(1.0f, coord.getDifficulty().floatValue());
+        assertEquals(5.0f, coord.getTerrain().floatValue());
+        assertEquals(CacheSize.MICRO, coord.getSize());
     }
 
 }

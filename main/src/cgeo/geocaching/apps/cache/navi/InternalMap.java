@@ -24,13 +24,13 @@ class InternalMap extends AbstractInternalMap implements
             cgCache cache,
             final cgSearch search, cgWaypoint waypoint, final Geopoint coords) {
         if (search != null) {
-            CGeoMap.startActivitySearch(activity, search, cache != null ? cache.geocode : null, true);
+            CGeoMap.startActivitySearch(activity, search, cache != null ? cache.getGeocode() : null, true);
         }
         else if (cache != null) {
-            CGeoMap.startActivityGeoCode(activity, cache.geocode);
+            CGeoMap.startActivityGeoCode(activity, cache.getGeocode());
         }
         else if (waypoint != null) {
-            CGeoMap.startActivityCoords(activity, waypoint.coords, waypoint.type);
+            CGeoMap.startActivityCoords(activity, waypoint.getCoords(), waypoint.getWaypointType());
         }
         else if (coords != null) {
             CGeoMap.startActivityCoords(activity, coords, WaypointType.WAYPOINT);

@@ -60,22 +60,22 @@ public class cgeowaypoint extends AbstractActivity {
                     final View headline = findViewById(R.id.headline);
                     registerNavigationMenu(headline);
 
-                    if (StringUtils.isNotBlank(waypoint.name)) {
-                        setTitle(Html.fromHtml(waypoint.name.trim()).toString());
+                    if (StringUtils.isNotBlank(waypoint.getName())) {
+                        setTitle(Html.fromHtml(waypoint.getName().trim()).toString());
                     } else {
                         setTitle(res.getString(R.string.waypoint_title));
                     }
 
                     if (!waypoint.getPrefix().equalsIgnoreCase("OWN")) {
-                        identification.setText(waypoint.getPrefix().trim() + "/" + waypoint.lookup.trim());
+                        identification.setText(waypoint.getPrefix().trim() + "/" + waypoint.getLookup().trim());
                     } else {
                         identification.setText(res.getString(R.string.waypoint_custom));
                     }
                     registerNavigationMenu(identification);
                     waypoint.setIcon(res, identification);
 
-                    if (waypoint.coords != null) {
-                        coords.setText(Html.fromHtml(cgBase.formatCoords(waypoint.coords, true)), TextView.BufferType.SPANNABLE);
+                    if (waypoint.getCoords() != null) {
+                        coords.setText(Html.fromHtml(cgBase.formatCoords(waypoint.getCoords(), true)), TextView.BufferType.SPANNABLE);
                         compass.setVisibility(View.VISIBLE);
                         separator.setVisibility(View.VISIBLE);
                     } else {
@@ -85,9 +85,9 @@ public class cgeowaypoint extends AbstractActivity {
                     }
                     registerNavigationMenu(coords);
 
-                    if (StringUtils.isNotBlank(waypoint.note)) {
+                    if (StringUtils.isNotBlank(waypoint.getNote())) {
                         final TextView note = (TextView) findViewById(R.id.note);
-                        note.setText(Html.fromHtml(waypoint.note.trim()), TextView.BufferType.SPANNABLE);
+                        note.setText(Html.fromHtml(waypoint.getNote().trim()), TextView.BufferType.SPANNABLE);
                         registerNavigationMenu(note);
                     }
 
@@ -230,7 +230,7 @@ public class cgeowaypoint extends AbstractActivity {
         super.onPrepareOptionsMenu(menu);
 
         try {
-            boolean visible = waypoint != null && waypoint.coords != null;
+            boolean visible = waypoint != null && waypoint.getCoords() != null;
             menu.findItem(MENU_ID_NAVIGATION).setVisible(visible);
             menu.findItem(MENU_ID_COMPASS).setVisible(visible);
             menu.findItem(MENU_ID_CACHES_AROUND).setVisible(visible);
@@ -256,11 +256,11 @@ public class cgeowaypoint extends AbstractActivity {
     }
 
     private void cachesAround() {
-        if (waypoint == null || waypoint.coords == null) {
+        if (waypoint == null || waypoint.getCoords() == null) {
             showToast(res.getString(R.string.err_location_unknown));
         }
 
-        cgeocaches.startActivityCachesAround(this, waypoint.coords);
+        cgeocaches.startActivityCachesAround(this, waypoint.getCoords());
 
         finish();
     }
@@ -321,11 +321,11 @@ public class cgeowaypoint extends AbstractActivity {
 
         Collection<cgCoord> coordinatesWithType = new ArrayList<cgCoord>();
         coordinatesWithType.add(new cgCoord(waypoint));
-        cgeonavigate.startActivity(this, waypoint.getPrefix().trim() + "/" + waypoint.lookup.trim(), waypoint.name, waypoint.coords, coordinatesWithType);
+        cgeonavigate.startActivity(this, waypoint.getPrefix().trim() + "/" + waypoint.getLookup().trim(), waypoint.getName(), waypoint.getCoords(), coordinatesWithType);
     }
 
     private boolean navigationPossible() {
-        if (waypoint == null || waypoint.coords == null) {
+        if (waypoint == null || waypoint.getCoords() == null) {
             showToast(res.getString(R.string.err_location_unknown));
             return false;
         }

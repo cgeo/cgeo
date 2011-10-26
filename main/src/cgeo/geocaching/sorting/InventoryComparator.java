@@ -17,8 +17,8 @@ public class InventoryComparator extends AbstractCacheComparator {
 
     @Override
     protected int compareCaches(cgCache cache1, cgCache cache2) {
-        int itemCount1 = cache1.inventoryItems;
-        int itemCount2 = cache2.inventoryItems;
+        int itemCount1 = cache1.getInventoryItems();
+        int itemCount2 = cache2.getInventoryItems();
         if (itemCount1 < itemCount2) {
             return 1;
         } else if (itemCount2 < itemCount1) {

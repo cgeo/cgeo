@@ -30,7 +30,7 @@ public class OpenCachingConnector extends AbstractConnector implements IConnecto
 
     @Override
     public String getCacheUrl(cgCache cache) {
-        return "http://" + host + "/viewcache.php?wp=" + cache.geocode;
+        return "http://" + host + "/viewcache.php?wp=" + cache.getGeocode();
     }
 
     @Override

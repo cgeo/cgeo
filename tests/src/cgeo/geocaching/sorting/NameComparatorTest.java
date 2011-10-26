@@ -9,7 +9,7 @@ public class NameComparatorTest extends AndroidTestCase {
     private static class NamedCache extends cgCache {
 
         public NamedCache(final String name) {
-            this.name = name;
+            this.setName(name);
         }
     }
 

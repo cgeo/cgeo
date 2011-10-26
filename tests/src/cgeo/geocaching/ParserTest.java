@@ -18,6 +18,6 @@ public class ParserTest extends InstrumentationTestCase {
         cgCacheWrap caches = cgBase.parseCacheFromText(getFileContent(R.raw.gc1zxez), 0, null);
         assertEquals(1, caches.cacheList.size());
         final cgCache cache = caches.cacheList.get(0);
-        assertEquals("Ms.Marple/Mr.Stringer", cache.ownerReal);
+        assertEquals("Ms.Marple/Mr.Stringer", cache.getOwnerReal());
     }
 }

@@ -67,7 +67,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
             cgCacheWrap caches = cgBase.parseCacheFromText(cache.getData(), 0, null);
             cgCache cacheParsed = caches.cacheList.get(0);
             Assert.assertEquals(cache.getGeocode(), cacheParsed.getGeocode());
-            Assert.assertEquals(cache.getType(), cacheParsed.getType());
+            Assert.assertEquals(cache.getCacheType(), cacheParsed.getCacheType());
             Assert.assertEquals(cache.getOwner(), cacheParsed.getOwner());
             Assert.assertEquals(cache.getDifficulty(), cacheParsed.getDifficulty());
             Assert.assertEquals(cache.getTerrain(), cacheParsed.getTerrain());

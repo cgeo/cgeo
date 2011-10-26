@@ -259,8 +259,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 dir = app.startDir(activity, dirUpdate);
             }
         }
+    }
 
-    };
     final private Handler noMapTokenHandler = new Handler() {
 
         @Override
@@ -614,9 +614,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                             final int mapSpanLon = mapView.getLongitudeSpan();
 
                             for (cgCache oneCache : cachesProtected) {
-                                if (oneCache != null && oneCache.coords != null) {
-                                    if (!cgBase.isCacheInViewPort(mapCenterLat, mapCenterLon, mapSpanLat, mapSpanLon, oneCache.coords) && app.isOffline(oneCache.geocode, null)) {
-                                        geocodes.add(oneCache.geocode);
+                                if (oneCache != null && oneCache.getCoords() != null) {
+                                    if (!cgBase.isCacheInViewPort(mapCenterLat, mapCenterLon, mapSpanLat, mapSpanLon, oneCache.getCoords()) && app.isOffline(oneCache.getGeocode(), null)) {
+                                        geocodes.add(oneCache.getGeocode());
                                     }
                                 }
                             }
@@ -689,7 +689,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 final cgSearch search = new cgSearch();
                 search.totalCnt = caches.size();
                 for (cgCache cache : caches) {
-                    search.addGeocode(cache.geocode);
+                    search.addGeocode(cache.getGeocode());
                 }
                 cgeocaches.startActivityMap(activity, app.addSearch(search, caches, true, 0));
                 return true;
@@ -1164,7 +1164,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
                     for (int i = caches.size() - 1; i >= 0; i--) {
                         cgCache cache = caches.get(i);
-                        if ((cache.found && excludeMine) || (cache.own && excludeMine) || (cache.disabled && excludeDisabled)) {
+                        if ((cache.isFound() && excludeMine) || (cache.isOwn() && excludeMine) || (cache.isDisabled() && excludeDisabled)) {
                             caches.remove(i);
                         }
                     }
@@ -1333,25 +1333,25 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                             return;
                         }
 
-                        if (cacheOne.coords == null) {
+                        if (cacheOne.getCoords() == null) {
                             continue;
                         }
 
                         // display cache waypoints
-                        if (cacheOne.waypoints != null
+                        if (cacheOne.getWaypoints() != null
                                 // Only show waypoints for single view or setting
                                 // when less than showWaypointsthreshold Caches shown
                                 && (cachesProtected.size() == 1 || (cachesProtected.size() < Settings.getWayPointsThreshold()))
-                                && !cacheOne.waypoints.isEmpty()) {
-                            for (cgWaypoint oneWaypoint : cacheOne.waypoints) {
-                                if (oneWaypoint.coords == null) {
+                                && !cacheOne.getWaypoints().isEmpty()) {
+                            for (cgWaypoint oneWaypoint : cacheOne.getWaypoints()) {
+                                if (oneWaypoint.getCoords() == null) {
                                     continue;
                                 }
 
-                                items.add(getWaypointItem(new cgCoord(oneWaypoint), oneWaypoint.type));
+                                items.add(getWaypointItem(new cgCoord(oneWaypoint), oneWaypoint.getWaypointType()));
                             }
                         }
-                        items.add(getCacheItem(new cgCoord(cacheOne), cacheOne.type, cacheOne.own, cacheOne.found, cacheOne.disabled));
+                        items.add(getCacheItem(new cgCoord(cacheOne), cacheOne.getType(), cacheOne.isOwn(), cacheOne.isFound(), cacheOne.isDisabled()));
                     }
 
                     overlayCaches.updateItems(items);
@@ -1565,9 +1565,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
             if (coordsIntent != null) {
                 final cgCoord coord = new cgCoord();
-                coord.type = "waypoint";
-                coord.coords = coordsIntent;
-                coord.name = "some place";
+                coord.setType("waypoint");
+                coord.setCoords(coordsIntent);
+                coord.setName("some place");
 
                 coordinates.add(coord);
                 final CachesOverlayItemImpl item = Settings.getMapFactory().getCachesOverlayItem(coord, null);
@@ -1867,11 +1867,13 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     }
 
     // close activity and open homescreen
+    @Override
     public void goHome(View view) {
         ActivityMixin.goHome(activity);
     }
 
     // open manual entry
+    @Override
     public void goManual(View view) {
         ActivityMixin.goManual(activity, "c:geo-live-map");
     }

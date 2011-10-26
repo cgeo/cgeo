@@ -69,8 +69,8 @@ final public class OkapiClient {
 
         final cgCache cache = parseCache(data);
 
-        cache.updated = new Date().getTime();
-        cache.detailedUpdate = new Date().getTime();
+        cache.setUpdated(new Date().getTime());
+        cache.setDetailedUpdate(new Date().getTime());
 
         return cache;
     }
@@ -78,34 +78,34 @@ final public class OkapiClient {
     private static cgCache parseCache(final JSONObject response) {
         final cgCache cache = new cgCache();
         try {
-            cache.geocode = response.getString(CACHE_CODE);
-            cache.name = response.getString(CACHE_NAME);
+            cache.setGeocode(response.getString(CACHE_CODE));
+            cache.setName(response.getString(CACHE_NAME));
             // not used: names
             setLocation(cache, response.getString(CACHE_LOCATION));
-            cache.type = getCacheType(response.getString(CACHE_TYPE));
+            cache.setCacheType(CacheType.getById(getCacheType(response.getString(CACHE_TYPE))));
 
             final String status = response.getString(CACHE_STATUS);
-            cache.disabled = status.equalsIgnoreCase("Temporarily unavailable");
-            cache.archived = status.equalsIgnoreCase("Archived");
+            cache.setDisabled(status.equalsIgnoreCase("Temporarily unavailable"));
+            cache.setArchived(status.equalsIgnoreCase("Archived"));
 
             // not used: url
             final JSONObject owner = response.getJSONObject(CACHE_OWNER);
-            cache.owner = parseUser(owner);
+            cache.setOwner(parseUser(owner));
 
-            cache.logCounts.put(cgBase.LOG_FOUND_IT, response.getInt(CACHE_FOUNDS));
-            cache.logCounts.put(cgBase.LOG_DIDNT_FIND_IT, response.getInt(CACHE_NOTFOUNDS));
-            cache.size = getCacheSize(response);
-            cache.difficulty = (float) response.getDouble(CACHE_DIFFICULTY);
-            cache.terrain = (float) response.getDouble(CACHE_TERRAIN);
+            cache.getLogCounts().put(cgBase.LOG_FOUND_IT, response.getInt(CACHE_FOUNDS));
+            cache.getLogCounts().put(cgBase.LOG_DIDNT_FIND_IT, response.getInt(CACHE_NOTFOUNDS));
+            cache.setSize(getCacheSize(response));
+            cache.setDifficulty((float) response.getDouble(CACHE_DIFFICULTY));
+            cache.setTerrain((float) response.getDouble(CACHE_TERRAIN));
             if (response.has(CACHE_RATING) && !isNull(response.getString(CACHE_RATING))) {
-                cache.rating = (float) response.getDouble(CACHE_RATING);
+                cache.setRating((float) response.getDouble(CACHE_RATING));
             }
-            cache.votes = response.getInt(CACHE_VOTES);
+            cache.setVotes(response.getInt(CACHE_VOTES));
 
-            cache.favouriteCnt = response.getInt(CACHE_RECOMMENDATIONS);
+            cache.setFavouriteCnt(response.getInt(CACHE_RECOMMENDATIONS));
             // not used: req_password
             cache.setDescription(response.getString(CACHE_DESCRIPTION));
-            cache.hint = Html.fromHtml(response.getString(CACHE_HINT)).toString();
+            cache.setHint(Html.fromHtml(response.getString(CACHE_HINT)).toString());
             // not used: hints
 
             final JSONArray images = response.getJSONArray(CACHE_IMAGES);
@@ -117,18 +117,18 @@ final public class OkapiClient {
                     if (imageResponse.getBoolean(CACHE_IMAGE_IS_SPOILER)) {
                         image = new cgImage();
                         image.title = imageResponse.getString(CACHE_IMAGE_CAPTION);
-                        image.url = absoluteUrl(imageResponse.getString(CACHE_IMAGE_URL), cache.geocode);
-                        if (cache.spoilers == null) {
-                            cache.spoilers = new ArrayList<cgImage>();
+                        image.url = absoluteUrl(imageResponse.getString(CACHE_IMAGE_URL), cache.getGeocode());
+                        if (cache.getSpoilers() == null) {
+                            cache.setSpoilers(new ArrayList<cgImage>());
                         }
-                        cache.spoilers.add(image);
+                        cache.getSpoilers().add(image);
                     }
                 }
             }
 
             // not used: attrnames
-            cache.logs = parseLogs(response.getJSONArray(CACHE_LATEST_LOGS));
-            cache.hidden = parseDate(response.getString(CACHE_HIDDEN));
+            cache.setLogs(parseLogs(response.getJSONArray(CACHE_LATEST_LOGS)));
+            cache.setHidden(parseDate(response.getString(CACHE_HIDDEN)));
 
         } catch (JSONException e) {
             // TODO Auto-generated catch block
@@ -204,7 +204,7 @@ final public class OkapiClient {
         final String latitude = StringUtils.substringBefore(location, "|");
         final String longitude = StringUtils.substringAfter(location, "|");
         // FIXME: the next line should be a setter at cgCache
-        cache.coords = GeopointParser.parse(latitude, longitude);
+        cache.setCoords(GeopointParser.parse(latitude, longitude));
     }
 
     private static CacheSize getCacheSize(final JSONObject response) {

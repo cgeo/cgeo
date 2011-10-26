@@ -12,7 +12,7 @@ public class NameComparator extends AbstractCacheComparator {
 
     @Override
     protected boolean canCompare(cgCache cache1, cgCache cache2) {
-        return StringUtils.isNotBlank(cache1.name) && StringUtils.isNotBlank(cache2.name);
+        return StringUtils.isNotBlank(cache1.getName()) && StringUtils.isNotBlank(cache2.getName());
     }
 
     @Override

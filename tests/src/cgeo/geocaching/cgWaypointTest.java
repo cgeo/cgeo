@@ -8,22 +8,22 @@ public class cgWaypointTest extends AndroidTestCase {
 
     public static void testOrder() {
         final cgWaypoint cache = new cgWaypoint();
-        cache.type = WaypointType.FINAL;
+        cache.setWaypointType(WaypointType.FINAL);
 
         final cgWaypoint trailhead = new cgWaypoint();
-        trailhead.type = WaypointType.TRAILHEAD;
+        trailhead.setWaypointType(WaypointType.TRAILHEAD);
 
         final cgWaypoint stage = new cgWaypoint();
-        stage.type = WaypointType.STAGE;
+        stage.setWaypointType(WaypointType.STAGE);
 
         final cgWaypoint puzzle = new cgWaypoint();
-        puzzle.type = WaypointType.PUZZLE;
+        puzzle.setWaypointType(WaypointType.PUZZLE);
 
         final cgWaypoint own = new cgWaypoint();
-        own.type = WaypointType.OWN;
+        own.setWaypointType(WaypointType.OWN);
 
         final cgWaypoint parking = new cgWaypoint();
-        parking.type = WaypointType.PARKING;
+        parking.setWaypointType(WaypointType.PARKING);
 
         assertTrue(trailhead.compareTo(puzzle) < 0);
         assertTrue(trailhead.compareTo(stage) < 0);

@@ -19,13 +19,13 @@ public class VoteComparator extends AbstractCacheComparator {
     protected int compareCaches(cgCache cache1, cgCache cache2) {
         // if there is no vote available, put that cache at the end of the list
         float vote1 = 0;
-        if (cache1.myVote != null) {
-            vote1 = cache1.myVote;
+        if (cache1.getMyVote() != null) {
+            vote1 = cache1.getMyVote();
         }
 
         float vote2 = 0;
-        if (cache2.myVote != null) {
-            vote2 = cache2.myVote;
+        if (cache2.getMyVote() != null) {
+            vote2 = cache2.getMyVote();
         }
 
         // compare

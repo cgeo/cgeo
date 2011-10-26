@@ -71,7 +71,7 @@ public final class Geopoint
 
     /**
      * Creates new Geopoint with latitude and longitude parsed from strings.
-     * 
+     *
      * @param latText
      *            latitude string to parse
      * @param lonText
@@ -267,7 +267,7 @@ public final class Geopoint
     /**
      * Returns formatted coordinates with default format.
      * Default format is decimalminutes, e.g. N 52° 36.123 E 010° 03.456
-     *
+     * 
      * @return formatted coordinates
      */
     public String toString()

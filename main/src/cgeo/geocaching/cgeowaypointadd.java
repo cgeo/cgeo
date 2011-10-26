@@ -53,19 +53,19 @@ public class cgeowaypointadd extends AbstractActivity {
 
                     id = -1;
                 } else {
-                    geocode = waypoint.geocode;
-                    type = waypoint.type;
+                    geocode = waypoint.getGeocode();
+                    type = waypoint.getWaypointType();
                     prefix = waypoint.getPrefix();
-                    lookup = waypoint.lookup;
+                    lookup = waypoint.getLookup();
 
                     app.setAction(geocode);
 
-                    if (waypoint.coords != null) {
-                        ((Button) findViewById(R.id.buttonLatitude)).setText(cgBase.formatLatitude(waypoint.coords.getLatitude(), true));
-                        ((Button) findViewById(R.id.buttonLongitude)).setText(cgBase.formatLongitude(waypoint.coords.getLongitude(), true));
+                    if (waypoint.getCoords() != null) {
+                        ((Button) findViewById(R.id.buttonLatitude)).setText(cgBase.formatLatitude(waypoint.getCoords().getLatitude(), true));
+                        ((Button) findViewById(R.id.buttonLongitude)).setText(cgBase.formatLongitude(waypoint.getCoords().getLongitude(), true));
                     }
-                    ((EditText) findViewById(R.id.name)).setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.name)).toString());
-                    ((EditText) findViewById(R.id.note)).setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.note)).toString());
+                    ((EditText) findViewById(R.id.name)).setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.getName())).toString());
+                    ((EditText) findViewById(R.id.note)).setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.getNote())).toString());
 
                     if (waitDialog != null) {
                         waitDialog.dismiss();
@@ -223,8 +223,8 @@ public class cgeowaypointadd extends AbstractActivity {
 
         public void onClick(View arg0) {
             Geopoint gp = null;
-            if (waypoint != null && waypoint.coords != null)
-                gp = waypoint.coords;
+            if (waypoint != null && waypoint.getCoords() != null)
+                gp = waypoint.getCoords();
             cgeocoords coordsDialog = new cgeocoords(cgeowaypointadd.this, gp, geo);
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
@@ -233,7 +233,7 @@ public class cgeowaypointadd extends AbstractActivity {
                     ((Button) findViewById(R.id.buttonLatitude)).setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
                     ((Button) findViewById(R.id.buttonLongitude)).setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
                     if (waypoint != null) {
-                        waypoint.coords = gp;
+                        waypoint.setCoords(gp);
                     }
                 }
             });
@@ -329,13 +329,13 @@ public class cgeowaypointadd extends AbstractActivity {
             final String note = ((EditText) findViewById(R.id.note)).getText().toString().trim();
 
             final cgWaypoint waypoint = new cgWaypoint();
-            waypoint.type = type;
-            waypoint.geocode = geocode;
+            waypoint.setWaypointType(type);
+            waypoint.setGeocode(geocode);
             waypoint.setPrefix(prefix);
-            waypoint.lookup = lookup;
-            waypoint.name = name;
-            waypoint.coords = new Geopoint(coords.get(0), coords.get(1));
-            waypoint.note = note;
+            waypoint.setLookup(lookup);
+            waypoint.setName(name);
+            waypoint.setCoords(new Geopoint(coords.get(0), coords.get(1)));
+            waypoint.setNote(note);
 
             if (app.saveOwnWaypoint(id, geocode, waypoint)) {
                 app.removeCacheFromCache(geocode);
@@ -348,6 +348,7 @@ public class cgeowaypointadd extends AbstractActivity {
         }
     }
 
+    @Override
     public void goManual(View view) {
         if (id >= 0) {
             ActivityMixin.goManual(this, "c:geo-waypoint-edit");
