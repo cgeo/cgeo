@@ -26,9 +26,9 @@ import android.widget.TextView;
 
 public class cgeocoords extends Dialog {
 
-    private AbstractActivity context = null;
-    private cgGeo geo = null;
-    private Geopoint gp = null;
+    final private AbstractActivity context;
+    final private cgGeo geo;
+    private Geopoint gp;
 
     private EditText eLat, eLon;
     private Button bLat, bLon;
@@ -43,15 +43,17 @@ public class cgeocoords extends Dialog {
 
     coordInputFormatEnum currentFormat = null;
 
-    public cgeocoords(final AbstractActivity contextIn, final Geopoint gpIn, final cgGeo geoIn) {
-        super(contextIn);
-        context = contextIn;
-        geo = geoIn;
+    public cgeocoords(final AbstractActivity context, final Geopoint gp, final cgGeo geo) {
+        super(context);
+        this.context = context;
+        this.geo = geo;
 
-        if (gpIn != null) {
-            gp = gpIn;
+        if (gp != null) {
+            this.gp = gp;
         } else if (geo != null && geo.coordsNow != null) {
-            gp = geo.coordsNow;
+            this.gp = geo.coordsNow;
+        } else {
+            this.gp = new Geopoint(0.0, 0.0);
         }
     }
 
