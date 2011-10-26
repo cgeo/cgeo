@@ -885,17 +885,20 @@
     · <a href="mailto:bazsy@freemail.hu">Balazs Szabo (Bazsy1983)</a> (loc. HU)\n
     · Bananeweizen (code, loc. DE)\n
     · blafoo (code)\n
-    · BudBundi (localization DE)\n
+    · Bonemaro (tester)\n
+    · BudBundi (localization DE, tester)\n
     · Charles (localization FR)\n
     · Denny (localization DA)\n
     · Eisbehr (code, open source project leader)\n
     · F. Coello (localization ES)\n
     · Filipe C. (code)\n
+    · <a href="http://www.hunterthornsberry.com">Hunter275</a> (tester)\n
     · <a href="http://iirojappinen.com/">Iiro Jäppinen</a> (graphic)\n
     · inkantis (localization PL)\n
     · <a href="http://www.jaytech.cz/">Jan Žatecký</a> (graphic)\n
     · <a href="http://joachim-wilke.de/">JoWi24</a> (code)\n
     · <a href="http://github.com/koem">Karsten Priegnitz</a> (code, artwork computation)\n
+    · Lineflyer (tester)\n
     · Ludovic Valente (localization FR)\n
     · MichielK (code, loc. NL)\n
     · mucek4 (code, open source project leader)\n
@@ -910,6 +913,7 @@
     · <a href="http://www.rfc1149.net/sam.html">Samuel Tardieu</a> (code, localization FR)\n
     · serenity (localization FR)\n
     · Shan, a.k.a. ShakurNO (localization NO)\n
+    · Shizo87 (tester)\n
     · stephanme/Geoteufel (code)\n
     · thiasB (code, loc. DE EN)\n
     · YraFyra (code, loc. SV)\n
@@ -923,9 +927,17 @@
 
   <!-- changelog -->
   <string name="changelog">\n
-    <b>New release</b>\n
+    <b>RC</b>\n
     · new: cleanup the cgeo private cache directory when caches are removed from database\n
     · new: display user avatar when checking login/password from geocaching.com\n
+    · new: support Geocaching Australia caches (GAxxxx, TPxxxx)\n
+    · new: import GPX from mail\n
+    · new: support geopeitus.ee caches\n
+    · new: verbose cache-loading\n
+    · fix: Twitter authorization\n
+    · fix: login problems\n
+    · fix: Google & OSM maps consistency\n
+    · fix: many other bugs\n
     \n\n
     <b>09.10.2011</b>\n
     · fix: small bugs due to GC.com change\n
