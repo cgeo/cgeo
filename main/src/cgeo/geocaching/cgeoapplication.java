@@ -299,23 +299,22 @@ public class cgeoapplication extends Application {
     }
 
     public cgCache getCacheByGeocode(String geocode) {
-        return getCacheByGeocode(geocode, false, true, false, false, false, false);
-    }
-
-    public cgCache getCacheByGeocode(String geocode, boolean loadAttributes, boolean loadWaypoints, boolean loadSpoilers, boolean loadLogs, boolean loadInventory, boolean loadOfflineLog) {
         if (StringUtils.isBlank(geocode)) {
             return null;
         }
 
-        cgCache cache = null;
-        if (cachesCache.containsKey(geocode)) {
-            cache = cachesCache.get(geocode);
-        } else {
-            cache = getStorage().loadCache(geocode, null, loadAttributes, loadWaypoints, loadSpoilers, loadLogs, loadInventory, loadOfflineLog);
+        return getCacheByGeocode(geocode, false, true, false, false, false, false);
+    }
 
-            if (cache != null && cache.detailed && loadAttributes && loadWaypoints && loadSpoilers && loadLogs && loadInventory) {
-                putCacheInCache(cache);
-            }
+    public cgCache getCacheByGeocode(final String geocode, final boolean loadAttributes, final boolean loadWaypoints, final boolean loadSpoilers, final boolean loadLogs, final boolean loadInventory, final boolean loadOfflineLog) {
+        if (cachesCache.containsKey(geocode)) {
+            return cachesCache.get(geocode);
+        }
+
+        final cgCache cache = getStorage().loadCache(geocode, null, loadAttributes, loadWaypoints, loadSpoilers, loadLogs, loadInventory, loadOfflineLog);
+
+        if (cache != null && cache.detailed && loadAttributes && loadWaypoints && loadSpoilers && loadLogs && loadInventory) {
+            putCacheInCache(cache);
         }
 
         return cache;
