@@ -31,6 +31,17 @@ import java.util.regex.Pattern;
  */
 public class cgCache implements ICache {
 
+    /**
+     * Cache loading parameters
+     */
+    final public static int LOADATTRIBUTES = 1 << 0;
+    final public static int LOADWAYPOINTS = 1 << 1;
+    final public static int LOADSPOILERS = 1 << 2;
+    final public static int LOADLOGS = 1 << 3;
+    final public static int LOADINVENTORY = 1 << 4;
+    final public static int LOADOFFLINELOG = 1 << 5;
+    final public static int LOADALL = LOADATTRIBUTES | LOADWAYPOINTS | LOADSPOILERS | LOADLOGS | LOADINVENTORY | LOADOFFLINELOG;
+
     public Long updated = null;
     public Long detailedUpdate = null;
     public Long visitedDate = null;

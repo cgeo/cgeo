@@ -1792,7 +1792,7 @@ public class cgData {
      * @return the loaded cache
      */
 
-    public cgCache loadCache(String geocode, String guid, boolean loadAttributes, boolean loadWaypoints, boolean loadSpoilers, boolean loadLogs, boolean loadInventory, boolean loadOfflineLogs) {
+    public cgCache loadCache(final String geocode, final String guid, final int loadFlags) {
         Object[] geocodes = new Object[1];
         Object[] guids = new Object[1];
 
@@ -1808,7 +1808,7 @@ public class cgData {
             guids = null;
         }
 
-        List<cgCache> caches = loadCaches(geocodes, null, null, null, null, null, loadAttributes, loadWaypoints, loadSpoilers, loadLogs, loadInventory, loadOfflineLogs);
+        List<cgCache> caches = loadCaches(geocodes, null, null, null, null, null, loadFlags);
         if (CollectionUtils.isNotEmpty(caches)) {
             return caches.get(0);
         }
@@ -1816,7 +1816,7 @@ public class cgData {
         return null;
     }
 
-    public List<cgCache> loadCaches(Object[] geocodes, Object[] guids, Long centerLat, Long centerLon, Long spanLat, Long spanLon, boolean loadAttributes, boolean loadWaypoints, boolean loadSpoilers, boolean loadLogs, boolean loadInventory, boolean loadOfflineLogs) {
+    public List<cgCache> loadCaches(final Object[] geocodes, final Object[] guids, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final int loadFlags) {
         init();
         // Using more than one of the parametersets results in overly comlex wheres
         if (((geocodes != null && geocodes.length > 0) && (guids != null && guids.length > 0))) {
@@ -1926,7 +1926,7 @@ public class cgData {
                         // cache.attributes entity probably does not need to be preserved,
                         // and the resolution of the "if" statement could be simply
                         // cache.attributes = attributes
-                        if (loadAttributes) {
+                        if ((loadFlags & cgCache.LOADATTRIBUTES) != 0) {
                             final List<String> attributes = loadAttributes(cache.geocode);
                             if (CollectionUtils.isNotEmpty(attributes)) {
                                 if (cache.attributes == null) {
@@ -1938,7 +1938,7 @@ public class cgData {
                             }
                         }
 
-                        if (loadWaypoints) {
+                        if ((loadFlags & cgCache.LOADWAYPOINTS) != 0) {
                             final List<cgWaypoint> waypoints = loadWaypoints(cache.geocode);
                             if (CollectionUtils.isNotEmpty(waypoints)) {
                                 if (cache.waypoints == null) {
@@ -1950,7 +1950,7 @@ public class cgData {
                             }
                         }
 
-                        if (loadSpoilers) {
+                        if ((loadFlags & cgCache.LOADSPOILERS) != 0) {
                             final List<cgImage> spoilers = loadSpoilers(cache.geocode);
                             if (CollectionUtils.isNotEmpty(spoilers)) {
                                 if (cache.spoilers == null) {
@@ -1962,7 +1962,7 @@ public class cgData {
                             }
                         }
 
-                        if (loadLogs) {
+                        if ((loadFlags & cgCache.LOADLOGS) != 0) {
                             final List<cgLog> logs = loadLogs(cache.geocode);
                             if (CollectionUtils.isNotEmpty(logs)) {
                                 if (cache.logs == null) {
@@ -1979,7 +1979,7 @@ public class cgData {
                             }
                         }
 
-                        if (loadInventory) {
+                        if ((loadFlags & cgCache.LOADINVENTORY) != 0) {
                             final List<cgTrackable> inventory = loadInventory(cache.geocode);
                             if (CollectionUtils.isNotEmpty(inventory)) {
                                 if (cache.inventory == null) {
@@ -1991,7 +1991,7 @@ public class cgData {
                             }
                         }
 
-                        if (loadOfflineLogs) {
+                        if ((loadFlags & cgCache.LOADOFFLINELOG) != 0) {
                             cache.logOffline = hasLogOffline(cache.geocode);
                         }
 

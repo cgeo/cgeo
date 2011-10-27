@@ -2102,7 +2102,7 @@ public class cgBase {
             final String realGeocode = StringUtils.isNotBlank(geocode) ? geocode : app.getGeocode(guid);
 
             List<cgCache> cacheList = new ArrayList<cgCache>();
-            cacheList.add(app.getCacheByGeocode(realGeocode, true, true, true, true, true, true));
+            cacheList.add(app.getCacheByGeocode(realGeocode, cgCache.LOADALL));
             search.addGeocode(realGeocode);
 
             app.addSearch(search, cacheList, false, reason);

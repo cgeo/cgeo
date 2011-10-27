@@ -303,17 +303,17 @@ public class cgeoapplication extends Application {
             return null;
         }
 
-        return getCacheByGeocode(geocode, false, true, false, false, false, false);
+        return getCacheByGeocode(geocode, cgCache.LOADWAYPOINTS);
     }
 
-    public cgCache getCacheByGeocode(final String geocode, final boolean loadAttributes, final boolean loadWaypoints, final boolean loadSpoilers, final boolean loadLogs, final boolean loadInventory, final boolean loadOfflineLog) {
+    public cgCache getCacheByGeocode(final String geocode, final int loadFlags) {
         if (cachesCache.containsKey(geocode)) {
             return cachesCache.get(geocode);
         }
 
-        final cgCache cache = getStorage().loadCache(geocode, null, loadAttributes, loadWaypoints, loadSpoilers, loadLogs, loadInventory, loadOfflineLog);
+        final cgCache cache = getStorage().loadCache(geocode, null, loadFlags);
 
-        if (cache != null && cache.detailed && loadAttributes && loadWaypoints && loadSpoilers && loadLogs && loadInventory) {
+        if (cache != null && cache.detailed && loadFlags == cgCache.LOADALL) {
             putCacheInCache(cache);
         }
 
@@ -401,7 +401,7 @@ public class cgeoapplication extends Application {
 
         final List<String> geocodeList = search.getGeocodes();
 
-        return getCacheByGeocode(geocodeList.get(0), true, true, true, true, true, true);
+        return getCacheByGeocode(geocodeList.get(0), cgCache.LOADALL);
     }
 
     /**
@@ -411,19 +411,18 @@ public class cgeoapplication extends Application {
      * @return
      */
     public List<cgCache> getCaches(final cgSearch search, final boolean loadWaypoints) {
-        return getCaches(search, null, null, null, null, false, loadWaypoints, false, false, false, true);
+        return getCaches(search, null, null, null, null, (loadWaypoints ? cgCache.LOADWAYPOINTS : 0) | cgCache.LOADOFFLINELOG);
     }
 
     public List<cgCache> getCaches(final cgSearch search, Long centerLat, Long centerLon, Long spanLat, Long spanLon) {
-        return getCaches(search, centerLat, centerLon, spanLat, spanLon, false, true, false, false, false, true);
+        return getCaches(search, centerLat, centerLon, spanLat, spanLon, cgCache.LOADWAYPOINTS | cgCache.LOADOFFLINELOG);
     }
 
-    public List<cgCache> getCaches(final cgSearch search, Long centerLat, Long centerLon, Long spanLat, Long spanLon, boolean loadA, boolean loadW, boolean loadS, boolean loadL, boolean loadI, boolean loadO) {
+    public List<cgCache> getCaches(final cgSearch search, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final int loadFlags) {
         if (search == null) {
             List<cgCache> cachesOut = new ArrayList<cgCache>();
 
-            final List<cgCache> cachesPre = storage.loadCaches(null, null, centerLat, centerLon, spanLat, spanLon, loadA, loadW, loadS, loadL, loadI, loadO);
-
+            final List<cgCache> cachesPre = storage.loadCaches(null, null, centerLat, centerLon, spanLat, spanLon, loadFlags);
             if (cachesPre != null) {
                 cachesOut.addAll(cachesPre);
             }
@@ -436,7 +435,7 @@ public class cgeoapplication extends Application {
         final List<String> geocodeList = search.getGeocodes();
 
         // The list of geocodes is sufficient. more parameters generate an overly complex select.
-        final List<cgCache> cachesPre = getStorage().loadCaches(geocodeList.toArray(), null, null, null, null, null, loadA, loadW, loadS, loadL, loadI, loadO);
+        final List<cgCache> cachesPre = getStorage().loadCaches(geocodeList.toArray(), null, null, null, null, null, loadFlags);
         if (cachesPre != null) {
             cachesOut.addAll(cachesPre);
         }
@@ -588,8 +587,7 @@ public class cgeoapplication extends Application {
 
     private boolean storeWithMerge(final cgCache cache, final boolean override) {
         if (!override) {
-            final cgCache oldCache = storage.loadCache(cache.geocode, cache.guid,
-                    true, true, true, true, true, true);
+            final cgCache oldCache = storage.loadCache(cache.geocode, cache.guid, cgCache.LOADALL);
             cache.gatherMissingFrom(oldCache);
         }
         return storage.saveCache(cache);
