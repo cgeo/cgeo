@@ -316,9 +316,11 @@ public class cgData {
     private void closePreparedStatements() {
         if (statementDescription != null) {
             statementDescription.close();
+            statementDescription = null;
         }
         if (statementLogCount != null) {
             statementLogCount.close();
+            statementLogCount = null;
         }
     }
 
