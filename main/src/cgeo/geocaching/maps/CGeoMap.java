@@ -123,10 +123,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     // threads
     private LoadTimer loadTimer = null;
     private UsersTimer usersTimer = null;
-    //FIXME should be members of LoadTimer since started by it.
-    private LoadThread loadThread = null;
-    private DownloadThread downloadThread = null;
-    private DisplayThread displayThread = null;
     //FIXME should be members of UsersTimer since started by it.
     private UsersThread usersThread = null;
     private DisplayUsersThread displayUsersThread = null;
@@ -887,9 +883,32 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
      * loading timer Triggers every 250ms and checks for viewport change and starts a {@link LoadThread}.
      */
     private class LoadTimer extends Thread {
+        private LoadThread loadThread = null;
+        private DownloadThread downloadThread = null;
+        private DisplayThread displayThread = null;
 
         public LoadTimer() {
             super("Load Timer");
+        }
+
+        public DownloadThread getDownloadThread() {
+            return downloadThread;
+        }
+
+        public void setDownloadThread(DownloadThread downloadThread) {
+            this.downloadThread = downloadThread;
+        }
+
+        public DisplayThread getDisplayThread() {
+            return displayThread;
+        }
+
+        public void setDisplayThread(DisplayThread displayThread) {
+            this.displayThread = displayThread;
+        }
+
+        public LoadThread getLoadThread() {
+            return loadThread;
         }
 
         private volatile boolean stop = false;
@@ -1179,14 +1198,16 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 }
 
                 //render
-                if (displayThread != null && displayThread.isWorking()) {
-                    displayThread.stopIt();
+                if (loadTimer != null) {
+                    if (loadTimer.getDisplayThread() != null && loadTimer.getDisplayThread().isWorking()) {
+                        loadTimer.getDisplayThread().stopIt();
+                    }
                 }
-                displayThread = new DisplayThread(centerLat, centerLon, spanLat, spanLon);
-                displayThread.start();
+                loadTimer.setDisplayThread(new DisplayThread(centerLat, centerLon, spanLat, spanLon));
+                loadTimer.getDisplayThread().start();
 
                 if (stop) {
-                    displayThread.stopIt();
+                    loadTimer.getDisplayThread().stopIt();
                     displayHandler.sendEmptyMessage(0);
                     working = false;
 
@@ -1198,12 +1219,14 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 //this should just fetch and insert into the db _and_ be cancel-able if the viewport changes
 
                 if (live && Settings.isLiveMap()) {
-                    if (downloadThread != null && downloadThread.isWorking()) {
-                        downloadThread.stopIt();
+                    if (loadTimer != null) {
+                        if (loadTimer.getDownloadThread() != null && loadTimer.getDownloadThread().isWorking()) {
+                            loadTimer.getDownloadThread().stopIt();
+                        }
+                        loadTimer.setDownloadThread(new DownloadThread(centerLat, centerLon, spanLat, spanLon));
+                        loadTimer.getDownloadThread().setName("downloadThread");
+                        loadTimer.getDownloadThread().start();
                     }
-                    downloadThread = new DownloadThread(centerLat, centerLon, spanLat, spanLon);
-                    downloadThread.setName("downloadThread");
-                    downloadThread.start();
                 }
             } finally {
                 working = false;
@@ -1285,12 +1308,13 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 }
 
                 //render
-                if (displayThread != null && displayThread.isWorking()) {
-                    displayThread.stopIt();
+                if (loadTimer != null) {
+                    if (loadTimer.getDisplayThread() != null && loadTimer.getDisplayThread().isWorking()) {
+                        loadTimer.getDisplayThread().stopIt();
+                    }
+                    loadTimer.setDisplayThread(new DisplayThread(centerLat, centerLon, spanLat, spanLon));
+                    loadTimer.getDisplayThread().start();
                 }
-                displayThread = new DisplayThread(centerLat, centerLon, spanLat, spanLon);
-                displayThread.start();
-
             } finally {
                 working = false;
             }
@@ -1639,12 +1663,14 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private synchronized boolean isLoading() {
         boolean loading = false;
 
-        if (loadThread != null && loadThread.isWorking()) {
-            loading = true;
-        } else if (downloadThread != null && downloadThread.isWorking()) {
-            loading = true;
-        } else if (displayThread != null && displayThread.isWorking()) {
-            loading = true;
+        if (loadTimer != null) {
+            if (loadTimer.getLoadThread() != null && loadTimer.getLoadThread().isWorking()) {
+                loading = true;
+            } else if (loadTimer.getDownloadThread() != null && loadTimer.getDownloadThread().isWorking()) {
+                loading = true;
+            } else if (loadTimer.getDownloadThread() != null && loadTimer.getDisplayThread().isWorking()) {
+                loading = true;
+            }
         }
 
         return loading;
