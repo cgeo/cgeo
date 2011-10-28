@@ -34,7 +34,7 @@ public final class GCConstants {
     public final static Pattern PATTERN_OWNER = Pattern.compile("<span class=\"minorCacheDetails\">[^<]+<a href=\"[^\"]+\">([^<]+)</a></span>");
     public final static Pattern PATTERN_TYPE = Pattern.compile("<img src=\"[^\"]*/WptTypes/\\d+\\.gif\" alt=\"([^\"]+?)\" title=\"[^\"]+\" width=\"32\" height=\"32\"");
     public final static Pattern PATTERN_HIDDEN = Pattern.compile("<span class=\"minorCacheDetails\">\\W*Hidden[\\s:]*([^<]+?)</span>");
-    public final static Pattern PATTERN_HIDDENEVENT = Pattern.compile("<span[^>]*>\\W*Event\\W*Date[^:]*:([^<]*?)</span>");
+    public final static Pattern PATTERN_HIDDENEVENT = Pattern.compile("Event\\s*Date\\s*:\\s*([^<]+)</span>", Pattern.DOTALL);
     public final static Pattern PATTERN_FAVORITE = Pattern.compile("<img src=\"/images/icons/icon_favDelete.png\" alt=\"Remove from your Favorites\" title=\"Remove from your Favorites\" />");
     public final static Pattern PATTERN_FAVORITECOUNT = Pattern.compile("<a id=\"uxFavContainerLink\"[^>]+>[^<]*<div[^<]*<span class=\"favorite-value\">\\D*([0-9]+?)</span>");
     public final static Pattern PATTERN_COUNTLOGS = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p(.+?)</p></span>");
