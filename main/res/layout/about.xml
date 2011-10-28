@@ -186,20 +186,6 @@
 			<RelativeLayout style="@style/separator_horizontal_layout" >
 				<View style="@style/separator_horizontal" />
 				<TextView style="@style/separator_horizontal_headline"
-						android:text="@string/about_changelog" />
-			</RelativeLayout>
-			<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_margin="7dip"
-					android:layout_gravity="left"
-					android:paddingLeft="3dip"
-					android:textSize="12dip"
-					android:textColor="?text_color"
-					android:text="@string/changelog" />
-			<RelativeLayout style="@style/separator_horizontal_layout" >
-				<View style="@style/separator_horizontal" />
-				<TextView style="@style/separator_horizontal_headline"
 						android:text="@string/about_contributors" />
 			</RelativeLayout>
 			<TextView android:id="@+id/contributors"
