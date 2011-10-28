@@ -112,12 +112,16 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
 
     public void importGPX(final File file) {
         createProgressDialog((int) file.length());
-        new ImportFileThread(file).start();
+        if (StringUtils.endsWithIgnoreCase(file.getName(), GPXParser.GPX_FILE_EXTENSION)) {
+            new ImportGpxFileThread(file, listId, loadCachesHandler, changeParseDialogHandler).start();
+        } else {
+            new ImportLocFileThread(file, listId, loadCachesHandler, changeParseDialogHandler).start();
+        }
     }
 
     public void importGPX(final InputStream stream) {
         createProgressDialog(-1);
-        new ImportStreamThread(stream).start();
+        new ImportStreamThread(stream, listId, loadCachesHandler, changeParseDialogHandler).start();
     }
 
     private void createProgressDialog(int maxBytes) {
@@ -130,45 +134,65 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
         parseDialog.show();
     }
 
-    private abstract class ImportThread extends Thread {
+    static abstract class ImportThread extends Thread {
+        final int listId;
+        final Handler importStepHandler;
+        final Handler progressHandler;
+
+        public ImportThread(int listId, Handler importStepHandler, Handler progressHandler) {
+            this.listId = listId;
+            this.importStepHandler = importStepHandler;
+            this.progressHandler = progressHandler;
+        }
 
         @Override
         public void run() {
             final cgSearch search = doImport();
-            loadCachesHandler.sendMessage(loadCachesHandler.obtainMessage(0, cgeoapplication.getCount(search), 0));
+            importStepHandler.sendMessage(importStepHandler.obtainMessage(0, cgeoapplication.getCount(search), 0, search));
         }
 
         protected abstract cgSearch doImport();
     }
 
-    private class ImportFileThread extends ImportThread {
+    static class ImportGpxFileThread extends ImportThread {
         private final File file;
 
-        public ImportFileThread(final File file) {
+        public ImportGpxFileThread(final File file, int listId, Handler importStepHandler, Handler progressHandler) {
+            super(listId, importStepHandler, progressHandler);
             this.file = file;
         }
 
         @Override
         protected cgSearch doImport() {
-            if (StringUtils.endsWithIgnoreCase(file.getName(), GPXParser.GPX_FILE_EXTENSION)) {
-                return GPXParser.importGPX(file, listId, changeParseDialogHandler);
-            }
-            else {
-                return LocParser.parseLoc(file, listId, changeParseDialogHandler);
-            }
+            return GPXParser.importGPX(file, listId, progressHandler);
         }
     }
 
-    private class ImportStreamThread extends ImportThread {
+    static class ImportLocFileThread extends ImportThread {
+        private final File file;
+
+        public ImportLocFileThread(final File file, int listId, Handler importStepHandler, Handler progressHandler) {
+            super(listId, importStepHandler, progressHandler);
+            this.file = file;
+        }
+
+        @Override
+        protected cgSearch doImport() {
+            return LocParser.parseLoc(file, listId, progressHandler);
+        }
+    }
+
+    static class ImportStreamThread extends ImportThread {
         private final InputStream stream;
 
-        public ImportStreamThread(InputStream stream) {
+        public ImportStreamThread(InputStream stream, int listId, Handler importStepHandler, Handler progressHandler) {
+            super(listId, importStepHandler, progressHandler);
             this.stream = stream;
         }
 
         @Override
         protected cgSearch doImport() {
-            return GPXParser.importGPX(stream, listId, changeParseDialogHandler);
+            return GPXParser.importGPX(stream, listId, progressHandler);
         }
     }
 
