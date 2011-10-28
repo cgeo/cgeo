@@ -1101,11 +1101,16 @@ public class cgBase {
 
             // hidden
             try {
-                cache.hidden = parseGcCustomDate(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_HIDDEN, true, null));
-
+                String hiddenString = BaseUtils.getMatch(tableInside, GCConstants.PATTERN_HIDDEN, true, null);
+                if (StringUtils.isNotBlank(hiddenString)) {
+                    cache.hidden = parseGcCustomDate(hiddenString);
+                }
                 if (cache.hidden == null) {
                     // event date
-                    cache.hidden = parseGcCustomDate(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_HIDDENEVENT, true, null));
+                    hiddenString = BaseUtils.getMatch(tableInside, GCConstants.PATTERN_HIDDENEVENT, true, null);
+                    if (StringUtils.isNotBlank(hiddenString)) {
+                        cache.hidden = parseGcCustomDate(hiddenString);
+                    }
                 }
             } catch (ParseException e) {
                 // failed to parse cache hidden date
