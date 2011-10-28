@@ -30,10 +30,10 @@ class InternalMap extends AbstractInternalMap implements
             CGeoMap.startActivityGeoCode(activity, cache.geocode);
         }
         else if (waypoint != null) {
-            CGeoMap.startActivityCoords(activity, waypoint.coords, waypoint.type);
+            CGeoMap.startActivityCoords(activity, waypoint.coords, waypoint.type, waypoint.name);
         }
         else if (coords != null) {
-            CGeoMap.startActivityCoords(activity, coords, WaypointType.WAYPOINT);
+            CGeoMap.startActivityCoords(activity, coords, WaypointType.WAYPOINT, null);
         }
 
         return true;

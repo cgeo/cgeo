@@ -248,7 +248,7 @@ public class cgeonavigate extends AbstractActivity {
         int id = item.getItemId();
 
         if (id == 0) {
-            CGeoMap.startActivityCoords(this, dstCoords, null);
+            CGeoMap.startActivityCoords(this, dstCoords, null, null);
         } else if (id == 1) {
             boolean oldSetting = Settings.isUseCompass();
             Settings.setUseCompass(!oldSetting);

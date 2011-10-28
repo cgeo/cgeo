@@ -1898,13 +1898,16 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         context.startActivity(new Intent(context, Settings.getMapFactory().getMapClass()));
     }
 
-    public static void startActivityCoords(final Context context, final Geopoint coords, final WaypointType type) {
+    public static void startActivityCoords(final Context context, final Geopoint coords, final WaypointType type, final String title) {
         Intent mapIntent = new Intent(context, Settings.getMapFactory().getMapClass());
         mapIntent.putExtra(EXTRAS_DETAIL, false);
         mapIntent.putExtra(EXTRAS_LATITUDE, coords.getLatitude());
         mapIntent.putExtra(EXTRAS_LONGITUDE, coords.getLongitude());
         if (type != null) {
             mapIntent.putExtra(EXTRAS_WPTTYPE, type.id);
+        }
+        if (StringUtils.isNotBlank(title)) {
+            mapIntent.putExtra(EXTRAS_MAP_TITLE, title);
         }
         context.startActivity(mapIntent);
     }
