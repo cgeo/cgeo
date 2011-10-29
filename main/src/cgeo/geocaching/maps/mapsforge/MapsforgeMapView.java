@@ -188,15 +188,19 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     @Override
     public void repaintRequired(GeneralOverlay overlay) {
 
-        try {
-            MapsforgeOverlay ovl = (MapsforgeOverlay) overlay.getOverlayImpl();
+        if (null == overlay) {
+            invalidate();
+        } else {
+            try {
+                Overlay ovl = (Overlay) overlay.getOverlayImpl();
 
-            if (ovl != null) {
-                ovl.requestRedraw();
+                if (ovl != null) {
+                    ovl.requestRedraw();
+                }
+
+            } catch (Exception e) {
+                Log.e(Settings.tag, "mfMapView.repaintRequired: " + e.toString());
             }
-
-        } catch (Exception e) {
-            Log.e(Settings.tag, "mfMapView.repaintRequired: " + e.toString());
         }
     }
 

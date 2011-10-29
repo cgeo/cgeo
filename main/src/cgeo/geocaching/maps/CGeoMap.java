@@ -189,7 +189,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
                 ActivityMixin.setTitle(activity, title.toString());
             } else if (what == 1 && mapView != null) {
-                mapView.invalidate();
+                mapView.repaintRequired(null);
             }
         }
     };
@@ -338,7 +338,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             overlayScale = mapView.createAddScaleOverlay(activity);
         }
 
-        mapView.invalidate();
+        mapView.repaintRequired(null);
 
         mapController = mapView.getMapController();
         mapController.setZoom(Settings.getMapZoom());
@@ -683,7 +683,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 }
 
                 overlayCaches.switchCircles();
-                mapView.invalidate();
+                mapView.repaintRequired(overlayCaches);
                 return true;
             case MENU_AS_LIST: {
                 final cgSearch search = new cgSearch();
@@ -850,7 +850,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
             if (overlayPosition != null && mapView != null && (geo == null || geo.speedNow == null || geo.speedNow <= 5)) { // use compass when speed is lower than 18 km/h
                 overlayPosition.setHeading(dir.directionNow);
-                mapView.invalidate();
+                mapView.repaintRequired(overlayPosition);
             }
         }
     }
