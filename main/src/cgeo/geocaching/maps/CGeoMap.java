@@ -602,7 +602,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
                             for (cgCache oneCache : cachesProtected) {
                                 if (oneCache != null && oneCache.coords != null) {
-                                    if (!cgBase.isCacheInViewPort(mapCenterLat, mapCenterLon, mapSpanLat, mapSpanLon, oneCache.coords) && app.isOffline(oneCache.geocode, null)) {
+                                    if (cgBase.isCacheInViewPort(mapCenterLat, mapCenterLon, mapSpanLat, mapSpanLon, oneCache.coords) && !app.isOffline(oneCache.geocode, null)) {
                                         geocodes.add(oneCache.geocode);
                                     }
                                 }
