@@ -18,8 +18,6 @@ import android.graphics.drawable.Drawable;
  */
 public interface MapViewImpl {
 
-    void invalidate();
-
     void setBuiltInZoomControls(boolean b);
 
     void displayZoomControls(boolean b);
@@ -61,6 +59,14 @@ public interface MapViewImpl {
 
     void setMapSource();
 
+    /**
+     * Map-library unspecific method to request a repaint of either
+     * a specific overlay, that changed, or the mapview as a whole
+     * (if overlay is null)
+     * 
+     * @param overlay
+     *            Overlay to repaint or null if the mapview has changed
+     */
     void repaintRequired(GeneralOverlay overlay);
 
     void setOnDragListener(OnDragListener onDragListener);
