@@ -29,7 +29,6 @@ public class cgeoabout extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        settings.load();
     }
 
     @Override
@@ -48,42 +47,70 @@ public class cgeoabout extends AbstractActivity {
 
             ((TextView) findViewById(R.id.contributors)).setMovementMethod(LinkMovementMethod.getInstance());
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgeoabout.init: Failed to obtain package version.");
+            Log.e(Settings.tag, "cgeoabout.init: Failed to obtain package version.");
         }
     }
 
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void donateMore(View view) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FMLNN8GXZKJEE")));
-        //activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N2FKGNCPPRUVE")));
-        //activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=2Z69QWLRCBE9N&lc=US&item_name=c%3ageo&currency_code=EUR&amount=15&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted")));
     }
 
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void donateLess(View view) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FMLNN8GXZKJEE")));
-        //activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4PRD9CX4Y8XR6")));
-        //activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=2Z69QWLRCBE9N&lc=US&item_name=c%3ageo&currency_code=EUR&amount=7&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted")));
     }
 
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void author(View view) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://carnero.cc/")));
     }
 
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void support(View view) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:support@cgeo.org")));
     }
 
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void website(View view) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.cgeo.org/")));
     }
 
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void facebook(View view) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.facebook.com/pages/cgeo/297269860090")));
     }
 
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void twitter(View view) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://twitter.com/android_gc")));
     }
 
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void nutshellmanual(View view) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.cgeo.org/")));
     }

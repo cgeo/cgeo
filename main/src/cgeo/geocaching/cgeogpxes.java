@@ -4,8 +4,12 @@ import cgeo.geocaching.files.FileList;
 import cgeo.geocaching.files.GPXParser;
 import cgeo.geocaching.files.LocParser;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
@@ -13,74 +17,92 @@ import android.os.Handler;
 import android.os.Message;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
-import java.util.UUID;
 
 public class cgeogpxes extends FileList<cgGPXListAdapter> {
 
     private static final String EXTRAS_LIST_ID = "list";
 
     public cgeogpxes() {
-        super(new String[] { "gpx"
-                // TODO	, "loc"
-        });
+        super(new String[] { "gpx", "loc" });
     }
 
     private ProgressDialog parseDialog = null;
     private int listId = 1;
-    private int imported = 0;
 
     final private Handler changeParseDialogHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
-            if (msg.obj != null && parseDialog != null) {
-                parseDialog.setMessage(res.getString(R.string.gpx_import_loading_stored) + " " + (Integer) msg.obj);
+            if (parseDialog != null) {
+                parseDialog.setMessage(res.getString(msg.arg1) + " " + msg.arg2);
+                if (msg.obj != null) {
+                    final int progress = (Integer) msg.obj;
+                    parseDialog.setProgress(progress);
+                }
             }
         }
     };
-    final private Handler loadCachesHandler = new Handler() {
 
+    final private Handler loadCachesHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            try {
-                if (parseDialog != null) {
-                    parseDialog.dismiss();
-                }
-
-                helpDialog(res.getString(R.string.gpx_import_title_caches_imported), imported + " " + res.getString(R.string.gpx_import_caches_imported));
-                imported = 0;
-            } catch (Exception e) {
-                if (parseDialog != null) {
-                    parseDialog.dismiss();
-                }
+            if (parseDialog != null) {
+                parseDialog.dismiss();
             }
+
+            helpDialog(res.getString(R.string.gpx_import_title_caches_imported), msg.arg1 + " " + res.getString(R.string.gpx_import_caches_imported));
         }
     };
 
     @Override
     protected cgGPXListAdapter getAdapter(List<File> files) {
-        return new cgGPXListAdapter(this, getSettings(), files);
+        return new cgGPXListAdapter(this, files);
     }
 
     @Override
-    protected String[] getBaseFolders() {
-        String base = Environment.getExternalStorageDirectory().toString();
-        return new String[] { base + "/gpx" };
+    protected File[] getBaseFolders() {
+        return new File[] { new File(Environment.getExternalStorageDirectory(), "gpx") };
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Bundle extras = getIntent().getExtras();
+        final Bundle extras = getIntent().getExtras();
         if (extras != null) {
             listId = extras.getInt(EXTRAS_LIST_ID);
         }
         if (listId <= 0) {
-            listId = 1;
+            listId = cgList.STANDARD_LIST_ID;
         }
 
+        if ("content".equals(getIntent().getScheme())) {
+            new AlertDialog.Builder(this)
+                    .setTitle(res.getString(R.string.gpx_import_title))
+                    .setMessage(res.getString(R.string.gpx_import_confirm))
+                    .setCancelable(false)
+                    .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            try {
+                                final InputStream attachment = getContentResolver().openInputStream(getIntent().getData());
+                                importGPX(attachment);
+                            } catch (FileNotFoundException e) {
+                                // TODO Auto-generated catch block
+                                e.printStackTrace();
+                            }
+                        }
+                    })
+                    .setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    })
+                    .create()
+                    .show();
+        }
     }
 
     @Override
@@ -88,39 +110,65 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
         setTitle(res.getString(R.string.gpx_import_title));
     }
 
-    public void loadGPX(File file) {
-
-        parseDialog = ProgressDialog.show(
-                this,
-                res.getString(R.string.gpx_import_title_reading_file),
-                res.getString(R.string.gpx_import_loading),
-                true,
-                false);
-
-        new loadCaches(file).start();
+    public void importGPX(final File file) {
+        createProgressDialog((int) file.length());
+        new ImportFileThread(file).start();
     }
 
-    private class loadCaches extends Thread {
+    public void importGPX(final InputStream stream) {
+        createProgressDialog(-1);
+        new ImportStreamThread(stream).start();
+    }
 
-        File file = null;
+    private void createProgressDialog(int maxBytes) {
+        parseDialog = new ProgressDialog(this);
+        parseDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        parseDialog.setTitle(res.getString(R.string.gpx_import_title_reading_file));
+        parseDialog.setMessage(res.getString(R.string.gpx_import_loading));
+        parseDialog.setCancelable(false);
+        parseDialog.setMax(maxBytes);
+        parseDialog.show();
+    }
 
-        public loadCaches(File fileIn) {
-            file = fileIn;
-        }
+    private abstract class ImportThread extends Thread {
 
         @Override
         public void run() {
-            final UUID searchId;
-            String name = file.getName().toLowerCase();
-            if (name.endsWith("gpx")) {
-                searchId = GPXParser.parseGPX(app, file, listId, changeParseDialogHandler);
+            final cgSearch search = doImport();
+            loadCachesHandler.sendMessage(loadCachesHandler.obtainMessage(0, cgeoapplication.getCount(search), 0));
+        }
+
+        protected abstract cgSearch doImport();
+    }
+
+    private class ImportFileThread extends ImportThread {
+        private final File file;
+
+        public ImportFileThread(final File file) {
+            this.file = file;
+        }
+
+        @Override
+        protected cgSearch doImport() {
+            if (StringUtils.endsWithIgnoreCase(file.getName(), GPXParser.GPX_FILE_EXTENSION)) {
+                return GPXParser.importGPX(file, listId, changeParseDialogHandler);
             }
             else {
-                searchId = LocParser.parseLoc(app, file, listId, changeParseDialogHandler);
+                return LocParser.parseLoc(file, listId, changeParseDialogHandler);
             }
-            imported = app.getCount(searchId);
+        }
+    }
 
-            loadCachesHandler.sendMessage(new Message());
+    private class ImportStreamThread extends ImportThread {
+        private final InputStream stream;
+
+        public ImportStreamThread(InputStream stream) {
+            this.stream = stream;
+        }
+
+        @Override
+        protected cgSearch doImport() {
+            return GPXParser.importGPX(stream, listId, changeParseDialogHandler);
         }
     }
 
@@ -128,5 +176,14 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
         final Intent intent = new Intent(fromActivity, cgeogpxes.class);
         intent.putExtra(EXTRAS_LIST_ID, listId);
         fromActivity.startActivityForResult(intent, 0);
+    }
+
+    @Override
+    protected boolean filenameBelongsToList(final String filename) {
+        if (super.filenameBelongsToList(filename)) {
+            // filter out waypoint files
+            return !StringUtils.endsWithIgnoreCase(filename, GPXParser.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION);
+        }
+        return false;
     }
 }

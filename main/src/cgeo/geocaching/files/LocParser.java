@@ -1,12 +1,14 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCacheWrap;
 import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgSearch;
-import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.GeopointParser;
 
 import org.apache.commons.lang3.StringUtils;
@@ -18,7 +20,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -63,7 +64,7 @@ public final class LocParser extends FileParser {
         }
     }
 
-    private static Map<String, cgCoord> parseCoordinates(
+    public static Map<String, cgCoord> parseCoordinates(
             final String fileContent) {
         final Map<String, cgCoord> coords = new HashMap<String, cgCoord>();
         if (StringUtils.isBlank(fileContent)) {
@@ -86,11 +87,8 @@ public final class LocParser extends FileParser {
             final Matcher matcherName = patternName.matcher(pointString);
             if (matcherName.find()) {
                 String name = matcherName.group(1).trim();
-                int pos = name.indexOf(" by ");
-                if (pos > 0) {
-                    name = name.substring(0, pos).trim();
-                }
-                pointCoord.name = name;
+                pointCoord.name = StringUtils.substringBeforeLast(name, " by ").trim();
+                // owner = StringUtils.substringAfterLast(" by ").trim();
             }
             final Matcher matcherLat = patternLat.matcher(pointString);
             final Matcher matcherLon = patternLon.matcher(pointString);
@@ -136,18 +134,17 @@ public final class LocParser extends FileParser {
             }
         }
 
-        Log.i(cgSettings.tag,
+        Log.i(Settings.tag,
                 "Coordinates found in .loc file: " + coords.size());
         return coords;
     }
 
-    public static UUID parseLoc(cgeoapplication app, File file, int listId,
+    public static cgSearch parseLoc(File file, int listId,
             Handler handler) {
-        cgSearch search = new cgSearch();
-        UUID searchId = null;
+        final cgSearch search = new cgSearch();
 
         try {
-            Map<String, cgCoord> coords = parseCoordinates(readFile(file).toString());
+            final Map<String, cgCoord> coords = parseCoordinates(readFile(file).toString());
             final cgCacheWrap caches = new cgCacheWrap();
             for (Entry<String, cgCoord> entry : coords.entrySet()) {
                 cgCoord coord = entry.getValue();
@@ -159,19 +156,19 @@ public final class LocParser extends FileParser {
                 caches.cacheList.add(cache);
 
                 fixCache(cache);
+                cache.type = CacheType.UNKNOWN.id; // type is not given in the LOC file
                 cache.reason = listId;
-                cache.detailed = false;
+                cache.detailed = true;
 
-                app.addCacheToSearch(search, cache);
+                cgeoapplication.getInstance().addCacheToSearch(search, cache);
             }
             caches.totalCnt = caches.cacheList.size();
-            showFinishedMessage(handler, search);
+            showCountMessage(handler, R.string.gpx_import_loading_stored, search.getCount());
+            Log.i(Settings.tag, "Caches found in .loc file: " + caches.totalCnt);
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgBase.parseGPX: " + e.toString());
+            Log.e(Settings.tag, "LocParser.parseLoc: " + e.toString());
         }
 
-        Log.i(cgSettings.tag, "Caches found in .gpx file: " + app.getCount(searchId));
-
-        return search.getCurrentId();
+        return search;
     }
 }

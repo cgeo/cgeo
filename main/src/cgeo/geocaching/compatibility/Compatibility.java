@@ -1,44 +1,53 @@
 package cgeo.geocaching.compatibility;
 
+import cgeo.geocaching.Settings;
+
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Log;
 import android.view.Display;
 import android.view.Surface;
 
+import java.lang.reflect.Method;
+
 public final class Compatibility {
 
-    private static AndroidLevel8 level8;
-    private static boolean initialized = false;
+    private final static int sdkVersion = Integer.parseInt(Build.VERSION.SDK);
+    private final static boolean isLevel8 = sdkVersion >= 8;
 
-    private static AndroidLevel8 getLevel8() {
-        if (!initialized) {
+    private static Method dataChangedMethod = null;
+    private static Method getRotationMethod = null;
+
+    static {
+        if (isLevel8) {
             try {
-                final int sdk = Integer.valueOf(Build.VERSION.SDK).intValue();
-                if (sdk >= 8) {
-                    level8 = new AndroidLevel8();
-                }
-            } catch (Exception e) {
-                // nothing
+                final Class<?> cl = Class.forName("cgeo.geocaching.compatibility.AndroidLevel8");
+                dataChangedMethod = cl.getDeclaredMethod("dataChanged", String.class);
+                getRotationMethod = cl.getDeclaredMethod("getRotation", Activity.class);
+            } catch (final Exception e) {
+                // Exception can be ClassNotFoundException, SecurityException or NoSuchMethodException
+                Log.e(Settings.tag, "Cannot load AndroidLevel8 class", e);
             }
-            initialized = true;
         }
-        return level8;
     }
 
     public static Float getDirectionNow(final Float directionNowPre,
             final Activity activity) {
-        AndroidLevel8 level8 = getLevel8();
-
-        if (level8 != null) {
-            final int rotation = level8.getRotation(activity);
-            if (rotation == Surface.ROTATION_90) {
-                return directionNowPre + 90;
-            } else if (rotation == Surface.ROTATION_180) {
-                return directionNowPre + 180;
-            } else if (rotation == Surface.ROTATION_270) {
-                return directionNowPre + 270;
+        if (isLevel8) {
+            try {
+                final int rotation = (Integer) getRotationMethod.invoke(null, activity);
+                if (rotation == Surface.ROTATION_90) {
+                    return directionNowPre + 90;
+                } else if (rotation == Surface.ROTATION_180) {
+                    return directionNowPre + 180;
+                } else if (rotation == Surface.ROTATION_270) {
+                    return directionNowPre + 270;
+                }
+            } catch (final Exception e) {
+                // This should never happen: IllegalArgumentException, IllegalAccessException or InvocationTargetException
+                Log.e(Settings.tag, "Cannot call getRotation()", e);
             }
         } else {
             final Display display = activity.getWindowManager()
@@ -52,20 +61,21 @@ public final class Compatibility {
     }
 
     public static Uri getCalendarProviderURI() {
-        final int sdk = Integer.valueOf(Build.VERSION.SDK).intValue();
-        if (sdk >= 8) {
-            return Uri.parse("content://com.android.calendar/calendars");
-        } else {
-            return Uri.parse("content://calendar/calendars");
-        }
+        return Uri.parse(isLevel8 ? "content://com.android.calendar/calendars" : "content://calendar/calendars");
     }
 
     public static Uri getCalenderEventsProviderURI() {
-        final int sdk = Integer.valueOf(Build.VERSION.SDK).intValue();
-        if (sdk >= 8) {
-            return Uri.parse("content://com.android.calendar/events");
-        } else {
-            return Uri.parse("content://calendar/events");
+        return Uri.parse(isLevel8 ? "content://com.android.calendar/events" : "content://calendar/events");
+    }
+
+    public static void dataChanged(final String name) {
+        if (isLevel8) {
+            try {
+                dataChangedMethod.invoke(null, name);
+            } catch (final Exception e) {
+                // This should never happen: IllegalArgumentException, IllegalAccessException or InvocationTargetException
+                Log.e(Settings.tag, "Cannot call dataChanged()", e);
+            }
         }
     }
 

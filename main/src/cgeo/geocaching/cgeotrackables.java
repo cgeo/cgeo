@@ -40,13 +40,13 @@ public class cgeotrackables extends AbstractActivity {
                         waitDialog.dismiss();
                     }
 
-                    showToast("Sorry, c:geo failed to load cache inventory.");
+                    showToast(res.getString(R.string.err_cache_inventory_load_fail));
 
                     finish();
                     return;
                 } else if (trackables.size() == 1) {
                     cgTrackable trackable = trackables.get(0);
-                    cgeotrackable.startActivity(cgeotrackables.this, trackable.guid, trackable.geocode, trackable.name);
+                    cgeotrackable.startActivity(cgeotrackables.this, trackable.getGuid(), trackable.getGeocode(), trackable.getName());
                     finish();
                     return;
                 } else {
@@ -56,13 +56,13 @@ public class cgeotrackables extends AbstractActivity {
 
                         Button oneTb = (Button) oneTbPre.findViewById(R.id.button);
 
-                        if (trackable.name != null) {
-                            oneTb.setText(Html.fromHtml(trackable.name).toString());
+                        if (trackable.getName() != null) {
+                            oneTb.setText(Html.fromHtml(trackable.getName()).toString());
                         } else {
                             oneTb.setText("some trackable");
                         }
                         oneTb.setClickable(true);
-                        oneTb.setOnClickListener(new buttonListener(trackable.guid, trackable.geocode, trackable.name));
+                        oneTb.setOnClickListener(new buttonListener(trackable.getGuid(), trackable.getGeocode(), trackable.getName()));
                         addList.addView(oneTbPre);
                     }
                 }
@@ -74,7 +74,7 @@ public class cgeotrackables extends AbstractActivity {
                 if (waitDialog != null) {
                     waitDialog.dismiss();
                 }
-                Log.e(cgSettings.tag, "cgeotrackables.loadInventoryHandler: " + e.toString());
+                Log.e(Settings.tag, "cgeotrackables.loadInventoryHandler: " + e.toString());
             }
         }
     };
@@ -89,7 +89,7 @@ public class cgeotrackables extends AbstractActivity {
 
         setTheme();
         setContentView(R.layout.trackables);
-        setTitle("Trackables");
+        setTitle(res.getString(R.string.trackable));
 
         // get parameters
         Bundle extras = getIntent().getExtras();
@@ -100,12 +100,12 @@ public class cgeotrackables extends AbstractActivity {
         }
 
         if (geocode == null) {
-            showToast("Sorry, c:geo forgot for what cache you want to load trackables.");
+            showToast(res.getString(R.string.err_tb_forgot));
             finish();
             return;
         }
 
-        waitDialog = ProgressDialog.show(this, null, "loading cache inventory...", true);
+        waitDialog = ProgressDialog.show(this, null, res.getString(R.string.cache_inventory_loading), true);
         waitDialog.setCancelable(true);
 
         (new loadInventory()).start();
@@ -115,7 +115,6 @@ public class cgeotrackables extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        settings.load();
     }
 
     private class loadInventory extends Thread {
@@ -127,7 +126,7 @@ public class cgeotrackables extends AbstractActivity {
 
                 loadInventoryHandler.sendMessage(new Message());
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgeotrackables.loadInventory.run: " + e.toString());
+                Log.e(Settings.tag, "cgeotrackables.loadInventory.run: " + e.toString());
             }
         }
     }

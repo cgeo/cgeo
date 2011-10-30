@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.files.FileList;
+import cgeo.geocaching.files.LocalStorage;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,8 +21,7 @@ public class cgSelectMapfile extends FileList<cgMapfileListAdapter> {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        mapFile = getSettings().getMapFile();
+        mapFile = Settings.getMapFile();
     }
 
     public void close() {
@@ -40,9 +40,13 @@ public class cgSelectMapfile extends FileList<cgMapfileListAdapter> {
     }
 
     @Override
-    protected String[] getBaseFolders() {
-        String base = Environment.getExternalStorageDirectory().toString();
-        return new String[] { base + "/mfmaps", base + "/Locus/mapsVector" };
+    protected File[] getBaseFolders() {
+        final File base = Environment.getExternalStorageDirectory();
+        return new File[] {
+                new File(base, "mfmaps"),
+                new File(new File(base, "Locus"), "mapsVector"),
+                new File(base, LocalStorage.cache)
+        };
     }
 
     @Override

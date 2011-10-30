@@ -4,37 +4,38 @@
   <string name="app_name_compass">boussole c:geo</string>
 
   <!-- basics -->
-  <string name="cache">cache</string>
-  <string name="detail">détails</string>
-  <string name="search">rechercher</string>
+  <string name="cache">Cache</string>
+  <string name="detail">Détails</string>
+  <string name="search">Rechercher</string>
   <string name="settings">Paramètres</string>
-  <string name="helpers">Quoi installer</string>
+  <string name="helpers">Aide à l\'installation</string>
   <string name="about">À propos de c:geo</string>
   <string name="helper">Voulez-vous en savoir plus au sujet de <b>c:geo</b> ?\nLisez notre manuel (en anglais).</string>
-  <string name="database_error_title">Problème avec la base de données</string>
-  <string name="database_error_message">c:geo n\'a pas pu se connecter à la base de données interne.\nEssayez de relancer c:geo plus tard. Si le problème persiste, allez dans le menu <i>Paramètres</i> / <i>Applications</i> / <i>Gérer les applications</i> / <i>c:geo</i> du téléphone et pressez le bouton <i>Effacer les données</i>. Vous pouvez aussi désinstaller et réinstaller c:geo. Désolé.</string>
+  <string name="latitude">Latitude</string>
+  <string name="longitude">Longitude</string>
 
   <!-- actionbar -->
   <string name="action_bar_share_title">Partager le lien vers la cache</string>
 
   <!-- caches -->
-  <string name="all">toutes</string>
-  <string name="all_types">tous les genres</string>
-  <string name="traditional">traditionnelles</string>
-  <string name="multi">multiples</string>
-  <string name="mystery">inconnues</string>
-  <string name="letterbox">boîtes aux lettres hybrides</string>
-  <string name="event">événements</string>
-  <string name="mega">méga-événements</string>
-  <string name="earth">earthcache</string>
-  <string name="cito">cache in trash out</string>
-  <string name="webcam">webcams</string>
-  <string name="virtual">virtuelles</string>
-  <string name="wherigo">wherigo</string>
-  <string name="lostfound">perdues &amp; trouvées</string>
-  <string name="ape">project ape cache</string>
-  <string name="gchq">groundspeak hq</string>
-  <string name="gps">gps cache exhibit</string>
+  <string name="all">Toutes</string>
+  <string name="all_types">Tous les genres</string>
+  <string name="traditional">Traditionnelles</string>
+  <string name="multi">Multiples</string>
+  <string name="mystery">Inconnues</string>
+  <string name="letterbox">Boîtes aux lettres hybrides</string>
+  <string name="event">Événements</string>
+  <string name="mega">Méga-événements</string>
+  <string name="earth">Earthcache</string>
+  <string name="cito">Cache in trash out</string>
+  <string name="webcam">Webcams</string>
+  <string name="virtual">Virtuelles</string>
+  <string name="wherigo">Wherigo</string>
+  <string name="lostfound">Perdues &amp; trouvées</string>
+  <string name="ape">Project ape cache</string>
+  <string name="gchq">Groundspeak hq</string>
+  <string name="gps">GPS cache exhibit</string>
+  <string name="unknown">Type inconnu</string>
 
   <!-- cache sizes -->
   <string name="cache_size_micro">micro</string>
@@ -51,7 +52,7 @@
   <string name="wp_puzzle">Énigme</string>
   <string name="wp_pkg">Parking</string>
   <string name="wp_trailhead">Départ du sentier</string>
-  <string name="wp_waypoint">Ooint de repère</string>
+  <string name="wp_waypoint">Point de repère</string>
 
   <!-- logs -->
   <string name="log_found">Trouvée</string>
@@ -67,7 +68,6 @@
   <string name="log_grabbed">Pris ailleurs</string>
   <string name="log_maintained">Maintenance effectuée</string>
   <string name="log_maintenance_needed">Nécessite une maintenance</string>
-  <string name="log_maintenance_owner">Maintenance</string>
   <string name="log_update">Coordonnées mises à jour</string>
   <string name="log_archived">Archivée</string>
   <string name="log_needs_archived">Nécessite d\'être archivée</string>
@@ -101,7 +101,7 @@
   <string name="log_stars_5">5 étoiles</string>
   <string name="log_stars_1_description">faible</string>
   <string name="log_stars_15_description">plutôt faible</string>
-  <string name="log_stars_2_description">léger</string>
+  <string name="log_stars_2_description">en dessous de la moyenne</string>
   <string name="log_stars_25_description">pas si mal</string>
   <string name="log_stars_3_description">dans la moyenne</string>
   <string name="log_stars_35_description">pas mal du tout</string>
@@ -115,79 +115,146 @@
 
   <!-- errors, warnings, info toasts -->
   <string name="err_none">ok</string>
-  <string name="err_start">communication non démarrée</string>
-  <string name="err_parse">échec login lecture page</string>
-  <string name="err_server">échec de la connexion à geocaching.com (probléme de serveur ou de connexion?)</string>
-  <string name="err_login">pas d\'utilisateur ou de mot de passe enregistré</string>
+  <string name="err_start">Communication non démarrée</string>
+  <string name="err_parse">Échec login lecture page</string>
+  <string name="err_server">Échec de la connexion à Geocaching.com (probléme de serveur ou de connexion?)</string>
+  <string name="err_login">Pas d\'utilisateur ou de mot de passe enregistré</string>
   <string name="err_login_failed">c:geo ne peut pas se connecter.</string>
-  <string name="err_login_failed_toast">Désolé, c:geo ne peut pas se connecter. c:geo est en mode hors-ligne. Vérifiez vos paramètres et activez votre connexion Internet.</string>
-  <string name="err_unknown">erreur inconnue</string>
-  <string name="err_comm">erreur inconnue de communication</string>
-  <string name="err_missing_auth">nom d\'utilisateur ou mot de passe manquant.</string>
-  <string name="err_wrong">nom d\'utilisateur inconnu ou mauvais mot de passe</string>
-  <string name="err_license">l\'utilisateur n\'a pas accepté les termes et les conditions d\'utilisation de Geocaching.com</string>
+  <string name="err_login_failed_toast">c:geo est en mode hors-ligne et ne peut pas se connecter. Vérifiez votre connexion Internet.</string>
+  <string name="err_unknown">Erreur inconnue</string>
+  <string name="err_comm">Erreur inconnue de communication</string>
+  <string name="err_missing_auth">Nom d\'utilisateur ou mot de passe manquant.</string>
+  <string name="err_wrong">Nom d\'utilisateur inconnu ou mauvais mot de passe</string>
+  <string name="err_license">L\'utilisateur n\'a pas accepté les termes et les conditions d\'utilisation de Geocaching.com</string>
+  <string name="err_unpublished">La cache a été retirée de la publication</string>
+  <string name="err_premium_only">La cache est réservée aux membres Premium de Geocaching.com</string>
   <string name="err_store">Désolé, c:geo ne peut pas enregister la cache.</string>
   <string name="err_drop">Désolé, c:geo ne peut pas effacer la cache.</string>
-  <string name="err_title_problem">problème</string>
   <string name="err_detail_open">Désolé, c:geo ne peut pas ouvrir le détail de la cache.</string>
-  <string name="err_detail_cache">Désolé, c:geo ne peut pas afficher cette cache. Est-ce vraiment une geocache?</string>
+  <string name="err_detail_cache">Désolé, c:geo ne peut pas afficher cette cache. Est-ce vraiment une géocache?</string>
   <string name="err_detail_cache_find">Désolé, c:geo ne peut pas trouver de caches</string>
-  <string name="err_detail_cache_find_some">Désolé, c:geo ne peut pas trouver cette geocache.</string>
+  <string name="err_detail_cache_find_some">Désolé, c:geo ne peut pas trouver cette cache.</string>
+  <string name="err_detail_cache_find_any">Désolé, c:geo ne peut pas trouver de caches.</string>
+  <string name="err_detail_cache_find_next">Désolé, c:geo ne peut pas trouver les caches suivantes.</string>
   <string name="err_detail_cache_forgot">Désolé, c:geo a oublié la cache demandée.</string>
-  <string name="err_detail_cache_language">c:geo ne peut pas lire certains details de la cache. Merci de vérifier que le site Web geocaching.com est configuré en Anglais. Malheureusement, c:geo ne supporte pas les autres langues.</string>
-  <string name="err_detail_no_spoiler">c:geo n\'a pas trouvé de photo solution pour cette cache.</string>
+  <string name="err_detail_cache_forgot_visit">Désolé, c:geo a oublié la cache que vous avez visité.</string>
+  <string name="err_detail_no_spoiler">c:geo n\'a pas trouvé d\'image indice pour cette cache.</string>
   <string name="err_detail_no_map_static">c:geo n\'a pas trouvé de cartes statiques pour cette cache.</string>
-  <string name="err_detail_still_removing">Cache toujours en cours d\'effacement.</string>
-  <string name="err_detail_still_saving">Cache toujours en cours de sauvegarde.</string>
-  <string name="err_detail_still_refreshing">Cache toujours en cours de chargement.</string>
-  <string name="err_radar_title">Le radar n\'est pas installé.</string>
-  <string name="err_radar_message">Cette fonction nécessite l\'application Radar. Voulez-vous l\'installer?</string>
-  <string name="err_radar_market">c:geo ne peux pas démarrer le Market Android pour rechercher l\'application Radar.</string>
-  <string name="err_radar_generic">Désolé, c:geo ne peux pas démarrer l\'application Radar. Est-elle installé?</string>
-  <string name="err_navigation_no">c:geo ne trouve pas de navigation supporté.</string>
+  <string name="err_detail_not_load_map_static">Désolé, c:geo n\'a pas réussi à charger les cartes statiques.</string>
+  <string name="err_detail_still_working">Autre tâche déjà en cours.</string>
+  <string name="err_watchlist_still_managing">Liste de suivi toujours en traitement.</string>
+  <string name="err_watchlist_failed">Échec lors du changement de votre liste de suivi.</string>
+  <string name="err_navigation_no">c:geo ne trouve pas de navigation supportée.</string>
   <string name="err_application_no">c:geo ne trouve pas d\'application conforme.</string>
   <string name="err_auth_initialize">Désolé, c:geo a échoué dans la demande d\'autorisation.</string>
-  <string name="err_auth_process">Echec de la demande d\'autorisation.</string>
+  <string name="err_auth_process">Échec de la demande d\'autorisation.</string>
   <string name="err_cannot_log_visit">c:geo n\'a pas assez d\'information pour logger votre visite. Faites le depuis le détail de la cache, s\'il vous plait!</string>
   <string name="err_init_cleared">Désolé, c:geo ne peux pas effacer votre nom d\'utilisateur.</string>
+  <string name="err_download_fail">Désolé, c:geo n\'a pas réussi à télécharger les caches car </string>
+  <string name="err_list_load_fail">Désolé, c:geo n\'a pas réussi à charger la liste des caches.</string>
+  <string name="err_store_failed">Désolé, c:geo ne peut pas enregistrer la cache.</string>
+  <string name="err_refresh_failed">Désolé, c:geo ne peut pas rafraîchir la cache.</string>
+  <string name="err_drop_failed">Désolé, c:geo ne peut pas effacer la cache.</string>
+  <string name="err_dwld_details_failed">Désolé, c:geo n\'a pas réussi à télécharger les détails de la cache.</string>
+  <string name="err_dwld_details_failed_reason">Désolé, c:geo n\'a pas réussi à télécharger les détails de la cache car </string>
+  <string name="err_load_descr_failed">Désolé, c:geo ne peut pas charger la description.</string>
+  <string name="err_location_unknown">c:geo ne connait pas la position de la cache.</string>
+  <string name="err_missing_device_name">Veuillez saisir un nom pour votre appareil avant l\'enregistrement.</string>
+
+  <string name="err_tb_display">"Désolé, c:geo ne peut pas afficher l\'objet voyageur demandé. Est-ce vraiment un objet voyageur?</string>
+  <string name="err_tb_details_open">Désolé, c:geo ne peut pas ouvrir le détail de l\'objet voyageur.</string>
+  <string name="err_tb_details_download">Désolé, c:geo ne peut pas télécharger le détail de l\'objet voyageur car </string>
+  <string name="err_tb_forgot">Désolé, c:geo a oublié quel objet voyageur vous vouliez.</string>
+  <string name="err_tb_forgot_saw">Désolé, c:geo a oublié quel objet voyageur vous avez vu.</string>
+  <string name="err_tb_find">Désolé, c:geo ne peut pas trouver d\'objet voyageur.</string>
+  <string name="err_tb_find_that">Désolé, c:geo ne peut pas trouver cet objet voyageur.</string>
+  <string name="err_cache_inventory_load_fail">Désolé, c:geo n\'a pas pu charger l\'inventaire.</string>
+
+  <string name="err_waypoint_cache_unknown">Désolé, c:geo ne sait pas à quel cache vous voulez ajouter une étape.</string>
+  <string name="err_waypoint_unknown">Désolé, c:geo a oublié quel étape vous vouliez afficher.</string>
+  <string name="err_waypoint_add_failed">Désolé, c:geo n\'a pas réussi à afficher l\'étape.</string>
+  <string name="err_waypoint_load_failed">Désolé, c:geo n\'arrive pas à charger l\'étape.</string>
+  <string name="err_waypoint_delete_failed">Désolé, c:geo ne peut pas effacer l\'étape.</string>
+  <string name="err_point_unknown_position">Désolé, c:geo ne peut pas savoir où vous êtes.</string>
+  <string name="err_point_no_position_given_title">Information obligatoire</string>
+  <string name="err_point_no_position_given">Remplissez au moins la latitude ou la longitude ou la distance et le relèvement. Vous pouvez aussi remplir tous les champs.</string>
+  <string name="err_point_curr_position_unavailable">c:geo ne connaît pas encore votre position. Veuillez patienter…</string>
+  <string name="err_point_bear_and_dist_title">Besoin d\'aide?</string>
+  <string name="err_point_bear_and_dist">Remplissez le relèvement et la distance. Le relèvement est l\'angle de 0 à 360 degrés par rapport au Nord. La distance est avec ou sans les unités.</string>
+  <string name="err_point_location_error">Désolé, c:geo ne peut pas trouver la position de l\'étape.</string>
+
+  <string name="err_log_load_data">Désolé, c:geo ne peut pas charger les données pour enregistrer votre visite.</string>
+  <string name="err_log_load_data_again">Désolé, c:geo ne peut pas charger les données pour enregistrer votre visite. Essayer plus tard.</string>
+  <string name="err_log_load_data_still">c:geo est en train de charger les données pour enregistrer votre visite. Veuillez patienter encore un peu.</string>
+  <string name="err_log_failed_server">Désolé, c:geo n\'a pas réussi à charger les données pour enregistrer votre visite car le serveur ne répond pas.</string>
+  <string name="err_log_post_failed">Il semble que votre visite n\'a pas été enregistrée. Veuillez vérifier sur le site geocaching.com.</string>
+
+  <string name="err_search_address_no_match">Désolé, c:geo n\'a pas trouvé de lieu correspondant.</string>
+  <string name="err_search_address_forgot">Désolé, c:geo a oublié l\'adresse recherchée.</string>
+  <string name="err_search_address">Recherche de lieux</string>
+  <string name="err_parse_lat">Désolé, c:geo n\'arrive pas à lire la latitude.</string>
+  <string name="err_parse_lon">Désolé, c:geo n\'arrive pas à lire la longitude.</string>
+  <string name="err_parse_dist">Désolé, c:geo n\'arrive pas à lire la distance.</string>
+  <string name="err_parse_lat_lon">Désolé, c:geo n\'arrive pas à lire la latitude ou la longitude.</string>
+  <string name="err_invalid_lat_lon">Désolé, latitude ou longitude invalide.</string>
+
+  <string name="err_fieldnotes_export_failed">L\'export du champ Notes a échoué.</string>
+
+  <string name="warn_save_nothing">Il n\'y a rien à sauver.</string>
+  <string name="warn_no_cache_coord">Il n\'y pas de caches avec les coordonnées associées.</string>
+  <string name="warn_no_coordinates">Aucune coordonnée associée.</string>
+  <string name="warn_no_keyword">Pas de mot clé.</string>
+  <string name="warn_no_username">Pas de nom d\'utilisateur.</string>
+  <string name="warn_search_help_title">Besoin d\'aide?</string>
+  <string name="warn_search_help_address">Veuillez remplir l\'adresse ou le lieu. Par exemple l\'adresse \"100 Avenue Montainge, Paris, France\", nom de la ville \"Berlin\" ou simplement \"Parc Yellowstone\".</string>
+  <string name="warn_search_help_gccode">Veuillez remplir le code de la cache. Par exemple \"GC1VCAZ\".</string>
+  <string name="warn_search_help_keyword">Veuillez saisir un mot censé se trouver dans le nom de la cache recherchée.</string>
+  <string name="warn_search_help_user">Veuillez remplir le nom d\'utilisateur utilisé sur Geocaching.com.</string>
+  <string name="warn_search_help_tb">Veuillez remplir le code de l\'objet voyageur. Par exemple \"TB29QMZ\".</string>
+  <string name="warn_log_text_fill">Merci de saisir un texte pour votre visite.</string>
+  <string name="warn_load_images">Désolé, c:geo n\'a pas pu charger les images.</string>
+
+
+  <string name="info_log_posted">Envoi de la visite réussi.</string>
+  <string name="info_log_saved">Sauvegarde de la visite réussie.</string>
+  <string name="info_log_cleared">La visite a été effacée.</string>
+  <string name="info_log_type_changed">Le type de visite a changé!</string>
+
+  <string name="info_fieldnotes_exported_to">Notes exporté vers</string>
 
   <!-- location service -->
-  <string name="loc_last">dernière pos. connue</string>
-  <string name="loc_net">réseau</string>
-  <string name="loc_gps">gps</string>
-  <string name="loc_sat">satellites</string>
-  <string name="loc_trying">localisation en cours…</string>
-  <string name="loc_no_addr">adresse inconnue</string>
+  <string name="loc_last">Dernière pos. connue</string>
+  <string name="loc_net">Réseau</string>
+  <string name="loc_gps">Gps</string>
+  <string name="loc_sat">Satellites</string>
+  <string name="loc_trying">Localisation en cours…</string>
+  <string name="loc_no_addr">Adresse inconnue</string>
 
   <!-- standard menu -->
-  <string name="menu_about">à propos de c:geo</string>
-  <string name="menu_settings">paramètres</string>
-  <string name="menu_filter">filtre</string>
+  <string name="menu_about">À propos de c:geo</string>
+  <string name="menu_helpers">Utilitaires</string>
+  <string name="menu_settings">Paramètres</string>
+  <string name="menu_history">Historique</string>
+  <string name="menu_filter">Filtre</string>
+  <string name="menu_scan">QR code</string>
 
   <!-- main screen -->
-  <string name="live_map_button">carte active</string>
-  <string name="caches_nearby_button">proches</string>
-  <string name="advanced_search_button">recherche</string>
-  <string name="stored_caches_button">enregistrées</string>
-  <string name="any_button">n\'importe où</string>
-  <string name="about_button">à propos</string>
-  <string name="settings_button">paramètres</string>
-  <string name="type">type</string>
-  <string name="now_searching">recherche en cours…</string>
+  <string name="live_map_button">Carte</string>
+  <string name="caches_nearby_button">Proches</string>
+  <string name="advanced_search_button">Recherche</string>
+  <string name="stored_caches_button">Stockées</string>
+  <string name="any_button">N\'importe</string>
+  <string name="unknown_scan">Le scan ne trouve pas de géocode.</string>
 
   <!-- caches -->
-  <string name="caches_searching">Recherches de caches</string>
   <string name="caches_no_cache">Aucune cache</string>
   <string name="caches_more_caches">Charger plus de caches</string>
   <string name="caches_more_caches_no">Pas d\'autres caches</string>
   <string name="caches_more_caches_loading">Chargement des caches…</string>
   <string name="caches_downloading">Téléchargement des caches…\nRestant: </string>
-  <string name="caches_progress_loading_title">Chargement</string>
-  <string name="caches_progress_loading_text">Caches téléchargées</string>
   <string name="caches_eta_ltm">Moins d\'une minute</string>
   <string name="caches_eta_mins"> minutes</string>
   <string name="caches_eta_min"> minute</string>
-  <string name="caches_no_caches"> (pas de caches)</string>
   <string name="caches_store_offline">Stocker localement</string>
   <string name="caches_store_selected">Stocker la sélection</string>
   <string name="caches_stored">Stockées</string>
@@ -204,11 +271,11 @@
   <string name="caches_sort_gccode">code GC</string> <!-- since: 2.2 -->
   <string name="caches_sort_rating">note</string>
   <string name="caches_sort_vote">vote (note perso)</string>
-  <string name="caches_sort_inventory">taille de l\'inventaire</string>
+  <string name="caches_sort_inventory">nombre d\'objets dans l\'inventaire</string>
   <string name="caches_sort_date">date</string>
-  <string name="caches_sort_finds">découvertes</string>
+  <string name="caches_sort_finds">trouvées</string>
   <string name="caches_sort_state">état</string>
-  <string name="caches_select">Sélectionner dans la liste</string>
+  <string name="caches_select">Choisir dans la liste</string>
   <string name="caches_select_mode">Mode sélection</string>
   <string name="caches_select_mode_exit">Sortir du mode sélection</string>
   <string name="caches_select_invert">Inverser la sélection</string>
@@ -224,7 +291,6 @@
   <string name="caches_refresh_all">Tout rafraîchir</string>
   <string name="caches_move_selected">Déplacer les caches sélectionnées</string>
   <string name="caches_move_all">Tout déplacer</string>
-  <string name="caches_map_cgeo">c:geo</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Recopier le texte se trouvant dans l\'image pour charger les coordonnées des caches. Cette étape peut être désactivée dans les Paramètres.</string>
@@ -238,21 +304,6 @@
   <string name="caches_filter_clear">effacer les filtres</string>
   <string name="caches_filter_size_title">Choisir la taille</string>
   <string name="caches_filter_type_title">Choisir le type</string>
-  <string name="caches_filter_type_traditional">Traditionelle</string>
-  <string name="caches_filter_type_multi">Multi-cache</string>
-  <string name="caches_filter_type_mystery">Mystère</string>
-  <string name="caches_filter_type_letterbox">Boîtes aux lettres hybrides</string>
-  <string name="caches_filter_type_event">Événement</string>
-  <string name="caches_filter_type_mega">Mega-événement</string>
-  <string name="caches_filter_type_earth">Earth cache</string>
-  <string name="caches_filter_type_cito">Cache In Trash Out</string>
-  <string name="caches_filter_type_webcam">Webcam</string>
-  <string name="caches_filter_type_virtual">Virtuelle</string>
-  <string name="caches_filter_type_wherigo">Wherigo</string>
-  <string name="caches_filter_type_lostfound">Perdue &amp; trouvée</string>
-  <string name="caches_filter_type_ape">Project APE cache</string>
-  <string name="caches_filter_type_gchq">Groundspeak HQ</string>
-  <string name="caches_filter_type_gps">GPS Cache exhibit</string>
   <string name="caches_exporting_fieldnote">Exporter commme notes de terrain…</string>
   <string name="caches_removing_from_history">Effacer de l\'historique…</string>
 
@@ -260,13 +311,14 @@
   <string name="list_menu">Listes</string>
   <string name="list_menu_create">Nouvelle liste</string>
   <string name="list_menu_drop">Effacer la liste courante</string>
-  <string name="list_menu_change">Changer de liste</string> <!-- since: 2.2 -->
+  <string name="list_menu_change">Changer de liste</string>
+  <string name="list_menu_rename">Renommer la liste courante</string>
   <string name="list_title">Choisir une liste</string>
-  <string name="list_inbox">Stockées</string>
+  <string name="list_inbox">Enregistrées</string>
   <string name="list_wpt">Étapes</string>
   <string name="list_dialog_create_title">Nouvelle liste</string>
   <string name="list_dialog_create">Créer</string>
-  <string name="list_dialog_cancel">Abandonner</string>
+  <string name="list_dialog_cancel">Annuler</string>
   <string name="list_dialog_create_ok">Nouvelle liste créée</string>
   <string name="list_dialog_create_err">c:geo n\'a pas pu créer la liste</string>
   <string name="list_dialog_remove_title">Supprimer la liste</string>
@@ -274,58 +326,113 @@
   <string name="list_dialog_remove">Effacer</string>
   <string name="list_dialog_remove_ok">Liste supprimée</string>
   <string name="list_dialog_remove_err">c:geo n\'a pas réussi à supprimer la liste courante</string>
+  <string name="list_dialog_rename_title">Renommer la liste</string>
+  <string name="list_dialog_rename">Renommer</string>
 
   <!-- about -->
-  <string name="about_changelog">versions</string>
-  <string name="about_donate">dons</string>
-  <string name="about_detail">détails</string>
-  <string name="about_donation_less">don\nmini</string>
-  <string name="about_donation_more">don\ndéveloppement</string>
+  <string name="about_changelog">Versions</string>
+  <string name="about_donate">Dons</string>
+  <string name="about_detail">Détails</string>
+  <string name="about_donation_less">Don\nminimum</string>
+  <string name="about_donation_more">Don\ndéveloppement</string>
+  <string name="about_contributors">Contributeurs</string>
 
   <!-- init -->
-  <string name="init_geocaching">geocaching.com</string>
-  <string name="init_gcvote">gcvote.com</string>
+  <string name="init_geocaching">Geocaching.com</string>
+  <string name="init_gcvote">GCvote.com</string>
   <string name="init_go4cache">Go 4 Cache</string>
-  <string name="init_twitter">twitter</string>
-  <string name="init_username">identifiant</string>
-  <string name="init_password">mot de passe</string>
-  <string name="init_passvote">mot de passe</string>
-  <string name="init_login">vérification de l\'identifiant &amp; du format de date</string>
+  <string name="init_twitter">Twitter</string>
+  <string name="init_username">Identifiant</string>
+  <string name="init_password">Mot de passe</string>
+  <string name="init_passvote">Mot de passe</string>
+  <string name="init_login">Vérification de l\'identifiant &amp; du format de date</string>
   <string name="init_login_popup">Connexion</string>
-  <string name="init_login_popup_working">Connexion à geocaching.com…</string>
+  <string name="init_login_popup_working">Connexion à Geocaching.com…</string>
   <string name="init_login_popup_ok">Identifiants corrects.</string>
   <string name="init_login_popup_failed">Erreur de connexion.</string>
   <string name="init_login_popup_failed_reason">Erreur de connexion: </string>
-  <string name="init_legal">note légale</string>
-  <string name="init_go4cache_connect">connexion à Go 4 Cache</string>
-  <string name="init_twitter_authorize">autorisation de c:geo</string>
-  <string name="init_twitter_publish">publication d\'une cache trouvée</string>
+  <string name="init_go4cache_connect">Connexion à Go 4 Cache</string>
+  <string name="init_twitter_authorize">Autorisation de c:geo</string>
+  <string name="init_twitter_publish">Publication d\'une cache trouvée</string>
   <string name="init_signature">Signature</string>
-  <string name="init_signature_template_button">Insérer modèle</string>
+  <string name="init_signature_help_button">Aide</string>
+  <string name="init_signature_help_title">Conseils sur la signature</string>
+  <string name="init_signature_help_text">Écrivez votre propre signature pour vos visites.\nLes codes spéciaux supportés sont : [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nAu moment de l\'insertion de la signature, ces codes seront remplacés par la valeur correspondante.</string>
+  <string name="init_signature_template_button">Insérer un modèle</string>
   <string name="init_signature_template_date">Date</string>
   <string name="init_signature_template_time">Heure</string>
+  <string name="init_signature_template_datetime">Date &amp; Heure</string>
   <string name="init_signature_template_user">Utilisateur</string>
   <string name="init_signature_template_number">Nombre</string>
-  <string name="init_other">autres options</string>
-  <string name="init_skin">aspect sobre (nécessite le redémarrage de c:geo)</string>
-  <string name="init_transparent">accueil de c:geo transparent</string>
-  <string name="init_address">afficher l\'adresse sur l\'accueil</string>
-  <string name="init_exclude">exclure les caches trouvées et les miennes</string>
-  <string name="init_disabled">exclure les cachess désactivées</string>
-  <string name="init_offline">enregistrer les cartes pour une utilisation hors ligne</string>
-  <string name="init_units">utiliser des unités de distance impériales</string>
-  <string name="init_nav">utiliser Google Navigation</string>
-  <string name="init_autoload">chargement automatique des descriptions longues</string>
-  <string name="init_livelist">afficher la direction des caches dans les listes</string>
-  <string name="init_browser">identifier c:geo comme navigateur standard</string>
+  <string name="init_details">Détails des caches</string>
+  <string name="init_ratingwanted">Charger la note depuis GCvote.com</string>
+  <string name="init_elevationwanted">Charger l\'altitude de la cache</string>
+  <string name="init_autoload">Afficher automatiquement les descriptions longues</string>
+  <string name="init_other">Autres options</string>
+  <string name="init_skin">Aspect sobre (nécessite le redémarrage de c:geo)</string>
+  <string name="init_address">Afficher l\'adresse sur l\'accueil</string>
+  <string name="init_captcha">Afficher le CAPTCHA si nécessaire</string>
+  <string name="init_useenglish">Utiliser l\'anglais dans c:geo\n(redémarrage nécessaire)</string>
+  <string name="init_exclude">Exclure mes caches et les caches trouvées</string>
+  <string name="init_showwaypoints">Points intermédiaires</string>
+  <string name="init_showwaypoint_description">Nombre de caches en-dessous duquel les points intermédiaires sont affichés sur la carte active.</string>
+  <string name="init_disabled">Exclure les caches désactivées</string>
+  <string name="init_offline">Enregistrer les cartes pour une utilisation hors ligne</string>
+  <string name="init_save_log_img">Sauver les images des visites</string>
+  <string name="init_units">Utiliser des unités de distance impériales</string>
+  <string name="init_nav">Utiliser Google Navigation</string>
+  <string name="init_log_offline">Toujours utiliser le mode hors-ligne, même si connecté.</string>
+  <string name="init_livelist">Afficher la direction des caches dans les listes</string>
+  <string name="init_browser">Identifier c:geo comme navigateur standard</string>
+  <string name="init_altitude">Correction de l\'altitude</string>
+  <string name="init_altitude_description">Si le GPS indique une mauvaise altitude, vous pouvez la corriger avec une valeur en mètres, positive ou négative.</string>
+  <string name="init_clear">Effacer l\'identifiant</string>
   <string name="init_cleared">c:geo a effacé votre identifiant.</string>
+  <string name="init_backup">Sauvegarde</string>
+  <string name="init_backup_backup">Sauvegarde</string>
+  <string name="init_backup_running">Création de la copie de sauvegarde…</string>
+  <string name="init_backup_note">Noter que cette option va sauvegarder/restaurer la base de données contenant les caches et les étapes, pas les paramètres. vos informations d\'utilisateur (mots de passe) ne quitteront pas l\'application.</string>
+  <string name="init_backup_restore">Restauration</string>
+  <string name="init_backup_success">La base de données de c:geo a été sauvegardée dans un fichier</string>
+  <string name="init_backup_failed">La sauvegarde de la base de données de c:geo a échouée.</string>
+  <string name="init_backup_unnecessary">La base de données est vide, sauvegarde non nécessaire.</string>
+  <string name="init_restore_success">Restauration terminée.</string>
+  <string name="init_restore_failed">Échec de la restauration.</string>
+  <string name="init_restore_running">Restauration de la base de données des caches…</string>
+  <string name="init_backup_last">Sauvegarde disponible depuis</string>
+  <string name="init_backup_last_no">Il n\'y a pas de fichier avec une sauvegarde.</string>
+  <string name="init_mapsources">Source des cartes</string> <!-- since: 2.26 RC3 -->
+  <string name="init_mapsources_description">Vous pouvez choisir la source de vos cartes. En tant qu\'alternative aux cartes Google, diverses cartes de type OpenStreetMap sont disponibles et même en hors-ligne (voir <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> pour plus de détails).</string> <!-- since: 2.26 RC3 -->
+  <string name="init_mapsource_select">Choisir la source des cartes</string>
+  <string name="init_select_mapfile">…</string>
+  <string name="init_trackautovisit">Marquer automatiquement les objets voyageurs comme \"visité\"</string>
+  <string name="init_sigautoinsert">Insérer la signature automatiquement</string>
+  <string name="init_loaddirectionimg">Charge la direction de l\'image si nécessaire</string>
+
+  <!-- map sources -->
+  <string name="map_source_google_map">Google Maps : plan</string>
+  <string name="map_source_google_satellite">Google Maps : satellite</string>
+  <string name="map_source_osm_mapnik">OSM : rendu Mapnik</string>
+  <string name="map_source_osm_osmarender">OSM : rendu Osmarender</string>
+  <string name="map_source_osm_cyclemap">OSM : pistes cyclables</string>
+  <string name="map_source_osm_offline">OSM : hors-ligne</string>
+
+  <string name="init_sendToCgeo">Envoyers vers c:geo</string>
+  <string name="init_sendToCgeo_name">Votre nom d\'appareil:</string>
+  <string name="init_sendToCgeo_description">Envoyers vers c:geo permet de recevoir les caches directement depuis le site geocaching.com en utilisant une extension pour Firefox ou Chrome. Après votre inscription, veuillez lire <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. Pour utiliser send2cgeo, vous avez juste besoin de vous inscrire. c:geo fonctionnera aussi sans enregistrer votre appareil.</string>
+  <string name="init_sendToCgeo_register">Demande d\'enregistrement</string>
+  <string name="init_sendToCgeo_registering">Enregistrer votre appareil pour "Send to c:geo"…</string>
+  <string name="init_sendToCgeo_register_ok">Enregistrement réussi. Le code PIN est ####. Utiliser le sur le site de c:geo pour ajouter votre appareil dans votre navigateur.</string>
+  <string name="init_sendToCgeo_register_fail">Échec de l\'enregistrement.</string>
+  <string name="sendToCgeo_download_fail">c:geo n\'a pas pu charger les caches. Pas de connexion Internet ou problème avec le site send2c:geo.</string>
+  <string name="sendToCgeo_no_registration">c:geo n\'a pas pu charger les caches. L\'abonnement à send2c:geo a expiré. Merci de vous réenregistrer dans les Paramètres.</string>
 
   <!-- auth -->
   <string name="auth_twitter">twitter</string>
   <string name="auth_authorize">autorisation de c:geo</string>
   <string name="auth_start">début d\'autorisation</string>
   <string name="auth_again">redémarre</string>
-  <string name="auth_pin_hint">code pin attribué par twitter</string>
+  <string name="auth_pin_hint">code donné par Twitter</string>
   <string name="auth_finish">terminé</string>
   <string name="auth_dialog_wait">en attente de Twitter…</string>
   <string name="auth_dialog_pin_title">code PIN</string>
@@ -348,16 +455,36 @@
   <string name="cache_offline_time_hour">une heure</string>
   <string name="cache_offline_time_hours">heures</string>
   <string name="cache_offline_time_days">jours</string>
-  <string name="cache_attributes">attributs</string>
-  <string name="cache_inventory">inventaire</string>
-  <string name="cache_log_offline">enregistrement hors ligne</string>
-  <string name="cache_description">description</string>
-  <string name="cache_description_long">description longue</string>
-  <string name="cache_waypoints">étapes</string>
-  <string name="cache_waypoints_add">ajouter une étape</string>
-  <string name="cache_hint">indice</string>
-  <string name="cache_logs">carnet de bord</string>
+  <string name="cache_premium">Premium</string>
+  <string name="cache_attributes">Attributs</string>
+  <string name="cache_attributes_no_icons">(recharger la cache pour voir les icônes des attributs)</string>
+  <string name="cache_inventory">Inventaire</string>
+  <string name="cache_inventory_loading">Chargement de l\'inventaire…</string>
+  <string name="cache_log_offline">Visite hors-ligne</string>
+  <string name="cache_log_images_loading">Chargement de l\'image de la visite…</string>
+  <string name="cache_log_images_title">Image de la visite</string>
+  <string name="cache_log_image_default_title">Photo</string>
+  <string name="cache_personal_note">Note personnelle</string>
+  <string name="cache_description">Description</string>
+  <string name="cache_description_long">Description longue</string>
+  <string name="cache_watchlist">Liste de suivi</string>
+  <string name="cache_watchlist_on">Cette cache est dans votre liste de suivi.</string>
+  <string name="cache_watchlist_not_on">Cette cache n\'est pas dans votre liste de suivi.</string>
+  <string name="cache_watchlist_add">Ajouter à votre liste de suivi</string>
+  <string name="cache_watchlist_remove">Retirer de votre liste de suivi</string>
+  <string name="cache_waypoints">Étapes</string>
+  <string name="cache_waypoints_add">Ajouter une étape</string>
+  <string name="cache_hint">Indice</string>
+  <string name="cache_logs">Carnet de bord</string>
   <string name="cache_dialog_loading_details">Chargement des détails…</string>
+  <string name="cache_dialog_loading_details_status_loadpage">Chargement de la page</string>
+  <string name="cache_dialog_loading_details_status_details">Analyse</string>
+  <string name="cache_dialog_loading_details_status_spoilers">Images indices</string>
+  <string name="cache_dialog_loading_details_status_logs">Entrées du carnet</string>
+  <string name="cache_dialog_loading_details_status_waypoints">Points intermédiaires</string>
+  <string name="cache_dialog_loading_details_status_gcvote">Votes</string>
+  <string name="cache_dialog_loading_details_status_elevation">Altitude</string>
+  <string name="cache_dialog_loading_details_status_render">Préparation de la page</string>
   <string name="cache_dialog_loading_description">Chargement de la description…</string>
   <string name="cache_dialog_offline_save_title">Hors ligne</string>
   <string name="cache_dialog_offline_save_message">Enregistrement pour une utilisation hors ligne…</string>
@@ -365,67 +492,373 @@
   <string name="cache_dialog_offline_drop_message">Suppression des caches de la mémoire…</string>
   <string name="cache_dialog_refresh_title">Recharger</string>
   <string name="cache_dialog_refresh_message">Rechargement des détails…</string>
+  <string name="cache_dialog_watchlist_add_title">Liste de suivi</string>
+  <string name="cache_dialog_watchlist_add_message">Ajout de la cache à votre liste de suivi…</string>
+  <string name="cache_dialog_watchlist_remove_title">Liste de suivi</string>
+  <string name="cache_dialog_watchlist_remove_message">Retrait de la cache de votre liste de suivi…</string>
   <string name="cache_menu_navigate">Navigation</string>
   <string name="cache_menu_compass">Boussole</string>
   <string name="cache_menu_tbt">Itinéraire</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Carte</string>
+  <string name="cache_menu_map_static">Cartes statiques</string>
+  <string name="cache_menu_rmaps">Rmaps</string>
   <string name="cache_menu_map_ext">Carte externe</string>
-  <string name="cache_menu_map_static">Carte statique</string>
+  <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Navigateur</string>
   <string name="cache_menu_visit">Carnet</string>
-  <string name="cache_menu_spoilers">Photos solutions</string>
+  <string name="cache_menu_visit_offline">Enregistrer la visite hors-ligne</string>
+  <string name="cache_menu_spoilers">Images indices</string>
   <string name="cache_menu_around">Alentours</string>
   <string name="cache_menu_event">Ajouter à l\'agenda</string>
   <string name="cache_menu_details">Détails</string>
-  <string name="cache_menu_share">Partager</string>
-  <string name="cache_menu_move_list">Changer de liste</string>
-  <string name="cache_status">statut</string>
-  <string name="cache_status_offline_log">logs sauvés</string>
-  <string name="cache_status_found">trouvée</string>
-  <string name="cache_status_archived">archivée</string>
-  <string name="cache_status_disabled">désactivée</string>
-  <string name="cache_status_premium">membres privilégiés seulement</string>
-  <string name="cache_geocode">code gc</string>
-  <string name="cache_name">nom</string>
-  <string name="cache_type">type</string>
-  <string name="cache_distance">distance</string>
-  <string name="cache_difficulty">difficulté</string>
-  <string name="cache_terrain">terrain</string>
-  <string name="cache_rating">note</string>
-  <string name="cache_favourite">favorie</string>
-  <string name="cache_owner">propriétaire</string>
-  <string name="cache_hidden">cachée</string>
-  <string name="cache_event">date</string>
-  <string name="cache_location">localisation</string>
-  <string name="cache_coordinates">coordonnées</string>
-  <string name="cache_calendars">choisir un agenda</string>
+  <string name="cache_menu_share">Partager la cache</string>
+  <string name="cache_menu_move_list">Déplacer dans une autre liste</string>
+  <string name="cache_menu_gcc">GCC</string>
+  <string name="cache_menu_whereyougo">WhereYouGo</string>
+  <string name="cache_menu_oruxmaps">OruxMaps</string>
+  <string name="cache_status">Statut</string>
+  <string name="cache_status_offline_log">Visite sauvée hors-ligne</string>
+  <string name="cache_status_found">Trouvée</string>
+  <string name="cache_status_archived">Archivée</string>
+  <string name="cache_status_disabled">Désactivée</string>
+  <string name="cache_status_premium">Membres privilégiés seulement</string>
+  <string name="cache_geocode">Code gc</string>
+  <string name="cache_name">Nom</string>
+  <string name="cache_type">Type</string>
+  <string name="cache_distance">Distance</string>
+  <string name="cache_difficulty">Difficulté</string>
+  <string name="cache_terrain">Terrain</string>
+  <string name="cache_rating">Note</string>
+  <string name="cache_rating_of">de</string>
+  <string name="cache_favourite">Favori</string>
+  <string name="cache_owner">Propriétaire</string>
+  <string name="cache_hidden">Cachée</string>
+  <string name="cache_event">Date</string>
+  <string name="cache_location">Lieu</string>
+  <string name="cache_coordinates">Coordonnées</string>
+  <string name="cache_calendars">Choisir un agenda</string>
+  <string name="cache_spoiler_images_title">Images indices</string>
+  <string name="cache_spoiler_images_loading">Chargement des images indices…</string>
+  <string name="cache_log_types">Types de visites</string> <!-- since: 2.10 RC2 -->
+  <string name="cache_coordinates_no">Cette cache n\'a pas de coordonnées.</string> <!-- since: 2.26 RC2 -->
+  <string name="cache_export_fieldnote">Export en tant que champ Notes</string>
+  <string name="cache_clear_history">Effacer l\'historique</string>
+  <string name="cache_remove_from_history">Effacer de l\'historique</string>
+  <string name="cache_license">Licence</string>
+
+  <!-- file list base -->
+  <string name="file_searching_in">Recherche de fichiers\nin</string>
+  <string name="file_list_no_files">Désolé, c:geo n\'a pas trouvé les fichiers nécessaires.</string>
+  <string name="file_searching">Recherche des fichiers nécessaires</string>
+  <string name="file_title_searching">Recherche en cours</string>
+
+  <!-- gpx -->
+  <string name="gpx_import_loading_caches">Chargement des caches depuis le fichier .gpx\nLus:</string>
+  <string name="gpx_import_loading_waypoints">Chargement des points intermédiaires depuis le fichier .gpx\nLus:</string>
+  <string name="gpx_import_storing">Écriture des caches dans la base de données\nEnregistrés :</string>
+  <string name="gpx_import_loading_stored">Chargement des caches depuis les fichiers .gpx\nEnregistrés :</string>
+  <string name="gpx_import_caches_imported">caches importées</string>
+  <string name="gpx_import_loading">Chargement des caches depuis le fichier .gpx</string>
+  <string name="gpx_import_title">Importation GPX</string>
+  <string name="gpx_import_title_reading_file">Lecture du fichier</string>
+  <string name="gpx_import_title_caches_imported">Résultat</string>
+  <string name="gpx_import_confirm">Voulez vous importer le fichier GPX dans c:geo ?</string>
+
+  <!-- map file select -->
+  <string name="map_file_select_title">Choisir un fichier carte</string>
+
+  <!--  import -->
+  <string name="import_title">Import…</string>
+  <string name="web_import_title">Import depuis le web</string>
+  <string name="web_import_waiting">En attente de nouvelles caches depuis le web…</string>
+  <string name="web_downloading">Téléchargement</string>
+  <string name="web_downloaded">Téléchargé</string>
 
   <!-- event -->
   <string name="event_success">Cache évènement ajoutée à l\'agenda</string>
-  <string name="event_fail">Echec d\'ajout de la cache évènement à l\'agenda</string>
+  <string name="event_fail">Échec d\'ajout de la cache événement à l\'agenda</string>
 
   <!-- popup -->
-  <string name="popup_more">plus de détails</string>
+  <string name="popup_more">Plus de détails</string>
 
   <!-- waypoint -->
-  <string name="waypoint_custom">personnalisé</string>
+  <string name="waypoint">Étape</string>
+  <string name="waypoint_title">Étape</string>
+  <string name="waypoint_custom">Personnalisé</string>
+  <string name="waypoint_my_coordinates">Ma position</string>
+  <string name="waypoint_bearing">Relèvement</string>
+  <string name="waypoint_distance">Distance</string>
+  <string name="waypoint_name">Nom</string>
+  <string name="waypoint_edit">Éditer</string>
+  <string name="waypoint_delete">Effacer</string>
+  <string name="waypoint_edit_title">Éditer une étape</string>
+  <string name="waypoint_add_title">Ajouter une étape</string>
+  <string name="waypoint_note">Note</string>
+  <string name="waypoint_save">Sauver</string>
+  <string name="waypoint_loading">Chargement d\'une étape…</string>
+  <string name="waypoint_unknown_coordinates">Coordonnées inconnues</string>
+  <string name="waypoint_done">Ok</string>
+  <string name="waypoint_duplicate">Dupliquer</string>
+  <string name="waypoint_copy_of">Copie de</string>
+  <string name="search_history">Historique</string>
+  <string name="search_history_empty">Aucune destination précédente</string>
+  <string name="search_remove_destination">Destination effacée</string>
+  <string name="search_clear_history">Effacer l\'historique</string>
+  <string name="search_history_cleared">Historique effacé</string>
+
+  <string name="waypoint_coordinate_formats_plain">Texte</string>
 
   <!-- visit -->
-  <string name="visit_tweet">publier votre découverte sur twitter</string>
+  <string name="visit_tweet">Publier votre découverte sur Twitter</string>
+
+  <!-- map -->
+  <string name="map_map">Carte</string>
+  <string name="map_live">Carte active</string>
+  <string name="map_view_map">Voir carte</string>
+  <string name="map_trail_show">Afficher le parcours</string>
+  <string name="map_trail_hide">Cacher le parcours</string>
+  <string name="map_circles_show">Afficher les cercles</string> <!-- since: 2.23 RC3 -->
+  <string name="map_circles_hide">Cacher les cercles</string> <!-- since: 2.23 RC3 -->
+  <string name="map_live_enable">Activer Temps réel</string>
+  <string name="map_live_disable">Désactiver Temps réel</string>
+  <string name="map_static_title">Cartes statiques</string>
+  <string name="map_static_loading">Chargement des cartes statiques…</string>
+  <string name="map_token_err">Depuis que c:geo est capable de télécharger des données partielles, les coordonnées des caches peuvent être inexactes.</string>
+  <string name="map_as_list">Lister les caches</string>
+
+  <!-- search -->
+  <string name="search_bar_hint">Recherche de caches</string>
+  <string name="search_bar_desc">Caches (code GC, mot clé), Objets voyageurs (code TB)</string>
+  <string name="search_coordinates">Coordonnées</string>
+  <string name="search_coordinates_button">Recherche par coordonnées</string>
+  <string name="search_address">Adresse</string>
+  <string name="search_address_button">Recherche par adresse</string>
+  <string name="search_gc">Geocode</string>
+  <string name="search_gc_button">Recherche par geocode</string>
+  <string name="search_kw">Mots clés</string>
+  <string name="search_kw_prefill">Mot clé</string>
+  <string name="search_kw_button">Recherche par mot clé</string>
+  <string name="search_fbu">Trouvé par utilisateur</string>
+  <string name="search_fbu_prefill">Utilisateur</string>
+  <string name="search_fbu_button">Recherche par utilisateur</string>
+  <string name="search_hbu">Cachées par utilisateur</string>
+  <string name="search_hbu_prefill">Propriétaire</string>
+  <string name="search_hbu_button">Recherche par propriétaire</string>
+  <string name="search_tb">Objet voyageur</string>
+  <string name="search_tb_hint">Identifiant de l\'objet</string>
+  <string name="search_tb_button">Recherche par objet voyageur</string>
+  <string name="search_destination">Destination</string>
+  <string name="search_some_destination">Destination arbitraire</string>
+  <string name="search_direction_rel">De cette position</string>
+  <string name="search_address_started">Recherche par lieu</string>
+  <string name="search_address_result">Lieux trouvés</string>
+  <string name="search_own_caches">Chercher mes caches</string>
+
+  <!-- trackable -->
+  <string name="trackable">Objet voyageur</string>
+  <string name="trackable_details_loading">Chargement des détails d\'un objet voyageur…</string>
+  <string name="trackable_log_touch">Toucher l\'objet</string>
+  <string name="trackable_browser_open">Ouvrir dans un navigateur</string>
+  <string name="trackable_goal">But</string>
+  <string name="trackable_details">Détails</string>
+  <string name="trackable_image">Image</string>
+  <string name="trackable_code">Code TB</string>
+  <string name="trackable_name">Nom</string>
+  <string name="trackable_type">Type</string>
+  <string name="trackable_owner">Propriétaire</string>
+  <string name="trackable_spotted">Se situe</string>
+  <string name="trackable_spotted_in_cache">Dans</string>
+  <string name="trackable_spotted_at_user">Entre les mains de </string>
+  <string name="trackable_spotted_unknown_location">Lieu inconnu</string>
+  <string name="trackable_spotted_owner">Entre les mains du propriétaire</string>
+  <string name="trackable_origin">Origine</string>
+  <string name="trackable_unknown">Inconnu</string>
+  <string name="trackable_released">Libéré</string>
+  <string name="trackable_distance">Distance</string>
+  <string name="trackable_touch">Toucher</string>
+
+  <!--  user -->
+  <string name="user_menu_title">A propos</string>
+  <string name="user_menu_view_hidden">Caches cachées</string>
+  <string name="user_menu_view_found">Caches trouvées</string>
+  <string name="user_menu_open_browser">Ouvrir le profil dans un navigateur</string>
 
   <!-- navigation -->
-  <string name="navigation">navigation</string>
+  <string name="navigation">Navigation</string>
+  <string name="compass_title">Boussole</string>
+  <string name="use_gps">Utiliser GPS</string>
+  <string name="use_compass">Utiliser la boussole</string>
+  <string name="destination_select">Choisir une destination</string>
+  <string name="destination_set">Définir une destination</string>
+
+  <!-- license -->
+  <string name="license">Licence</string>
+  <string name="license_show">Afficher la licence</string>
+  <string name="license_dismiss">Rejeter</string>
+
+  <!-- helpers -->
+  <string name="helper_manual_title">Manuel</string>
+  <string name="helper_manual_description">Manuel complet pour c:geo contenant la description de toutes les fonctionnalités de cette application (y compris celle secrètes).</string>
+  <string name="helper_locus_title">Locus</string>
+  <string name="helper_locus_description">Application simple affichant des cartes en ligne et hors ligne. Permet d\'enregistrer son parcours, de gérer des POI et de nombreuses autres fonctions utiles.</string>
+  <string name="helper_gpsstatus_title">Etat GPS</string>
+  <string name="helper_gpsstatus_description">Vous pouvez utiliser le radar de cette application dans c:geo. Il gère des informations supplémentaires relatives au GPS.</string>
+  <string name="helper_bluetoothgps_title">GPS Bluetooth</string>
+  <string name="helper_bluetoothgps_description">Vous permet d\'utiliser un GPS externe pour une meilleure réception, plus précis et économise la batterie.</string>
+
+  <!--  attributes (permissions -> allowed, not allowed) -->
+  <string name="attribute_dogs_yes">Chiens autorisés</string>
+  <string name="attribute_dogs_no">Chiens interdits</string>
+  <string name="attribute_bicycles_yes">Vélos autorisés</string>
+  <string name="attribute_bicycles_no">Vélos interdits</string>
+  <string name="attribute_motorcycles_yes">Motos autorisées</string>
+  <string name="attribute_motorcycles_no">Motos interdites</string>
+  <string name="attribute_quads_yes">Quads autorisés</string>
+  <string name="attribute_quads_no">Quads interdits</string>
+  <string name="attribute_jeeps_yes">Véhicules tout-terrain autorisés</string>
+  <string name="attribute_jeeps_no">Véhicules tout-terrain interdits</string>
+  <string name="attribute_snowmobiles_yes">Motos-neige autorisées</string>
+  <string name="attribute_snowmobiles_no">Motos-neige interdites</string>
+  <string name="attribute_horses_yes">Chevaux autorisés</string>
+  <string name="attribute_horses_no">Chevaux interdits</string>
+  <string name="attribute_campfires_yes">Feux de camp autorisés</string>
+  <string name="attribute_campfires_no">Feux de camp interdits</string>
+  <string name="attribute_rv_yes">Camions/Camping-cars autorisés</string>
+  <string name="attribute_rv_no">Camions/Camping-cars interdits</string>
+
+  <!--  attributes (conditions -> yes, no) -->
+  <string name="attribute_kids_yes">Recommandé pour les enfants</string>
+  <string name="attribute_kids_no">Non recommandé pour les enfants</string>
+  <string name="attribute_onehour_yes">Prend moins d\'une heure</string>
+  <string name="attribute_onehour_no">Prend plus d\'une heure</string>
+  <string name="attribute_scenic_yes">Point de vue</string>
+  <string name="attribute_scenic_no">Pas de point de vue</string>
+  <string name="attribute_hiking_yes">Randonnée importante</string>
+  <string name="attribute_hiking_no">Randonnée peu importante</string>
+  <string name="attribute_climbing_yes">Escalade difficile</string>
+  <string name="attribute_climbing_no">Pas d\'escalade difficile</string>
+  <string name="attribute_wading_yes">Peut demander à barboter</string>
+  <string name="attribute_wading_no">Ne demande pas à barboter</string>
+  <string name="attribute_swimming_yes">Peut demander à nager</string>
+  <string name="attribute_swimming_no">Ne demande pas à nager</string>
+  <string name="attribute_available_yes">Disponible par tout temps</string>
+  <string name="attribute_available_no">Pas disponible par tout temps</string>
+  <string name="attribute_night_yes">Recommandé de nuit</string>
+  <string name="attribute_night_no">Non recommandé de nuit</string>
+  <string name="attribute_winter_yes">Disponible durant l\'hiver</string>
+  <string name="attribute_winter_no">Pas disponible durant l\'hiver</string>
+  <string name="attribute_stealth_yes">Bonne santé nécessaire</string>
+  <string name="attribute_stealth_no">Bonne santé pas nécessaire</string>
+  <string name="attribute_firstaid_yes">Nécessite une maintenance</string>
+  <string name="attribute_firstaid_no">Ne nécessite pas de maintenance</string>
+  <string name="attribute_cow_yes">Attention au bétail</string>
+  <string name="attribute_cow_no">Pas de bétail</string>
+  <string name="attribute_field_puzzle_yes">Puzzle de terrain</string>
+  <string name="attribute_field_puzzle_no">Pas de puzzle de terrain</string>
+  <string name="attribute_nightcache_yes">Cache de nuit</string>
+  <string name="attribute_nightcache_no">Pas une cache de nuit</string>
+  <string name="attribute_parkngrab_yes">Drive-in</string>
+  <string name="attribute_parkngrab_no">Pas une drive-in</string>
+  <string name="attribute_abandonedbuilding_yes">Batiment abandonné</string>
+  <string name="attribute_abandonedbuilding_no">Pas batiment abandonné</string>
+  <string name="attribute_hike_short_yes">Randonnée courte (moins d\'1 km)</string>
+  <string name="attribute_hike_short_no">Pas de randonnée courte</string>
+  <string name="attribute_hike_med_yes">Randonnée moyenne (1 à 10 km)</string>
+  <string name="attribute_hike_med_no">Pas de randonnée moyenne</string>
+  <string name="attribute_hike_long_yes">Randonnée longue (plus de 10 km)</string>
+  <string name="attribute_hike_long_no">Pas de randonnée longue</string>
+  <string name="attribute_seasonal_yes">Accès saisonnier</string>
+  <string name="attribute_seasonal_no">Pas d\'accès saisonnier</string>
+  <string name="attribute_touristok_yes">Ami des touristes</string>
+  <string name="attribute_touristok_no">Pas ami avec les touristes</string>
+  <string name="attribute_frontyard_yes">Résidence privée</string>
+  <string name="attribute_frontyard_no">Pas une résidence privée</string>
+  <string name="attribute_teamwork_yes">Travail d\'équipe nécessaire</string>
+  <string name="attribute_teamwork_no">Pas de travail d\'équipe nécessaire</string>
+  <string name="attribute_landf_yes">Circuit Perdu et trouvé</string>
+  <string name="attribute_landf_no">Pas un circuit Perdu et trouvé</string>
+  <string name="attribute_partnership_yes">Cache en partenariat</string>
+  <string name="attribute_partnership_no">Pas de cache en partenariat</string>
+
+  <!--  attributes (equipment -> required, not required) -->
+  <string name="attribute_fee_yes">Parking payant</string>
+  <string name="attribute_fee_no">Pas de parking payant</string>
+  <string name="attribute_rappelling_yes">Matériel d\'escalade nécessaire</string>
+  <string name="attribute_rappelling_no">Matériel d\'escalade pas nécessaire</string>
+  <string name="attribute_boat_yes">Bateau nécessaire</string>
+  <string name="attribute_boat_no">Pas de bateau nécessaire</string>
+  <string name="attribute_scuba_yes">Matériel de plongée nécessaire</string>
+  <string name="attribute_scuba_no">Matériel de plongée pas nécessaire</string>
+  <string name="attribute_flashlight_yes">Torche nécessaire</string>
+  <string name="attribute_flashlight_no">Torche pas nécessaire</string>
+  <string name="attribute_uv_yes">Lumière UV nécessaire</string>
+  <string name="attribute_uv_no">Lumière UV pas nécessaire</string>
+  <string name="attribute_snowshoes_yes">Chaussures de neige nécessaires</string>
+  <string name="attribute_snowshoes_no">Chaussures de neige pas nécessaires</string>
+  <string name="attribute_skiis_yes">Skis de fond nécessaires</string>
+  <string name="attribute_skiis_no">Skis de fond pas nécessaires</string>
+  <string name="attribute_s_tool_yes">Outils spéciaux nécessaires</string>
+  <string name="attribute_s_tool_no">Outils spéciaux pas nécessaires</string>
+  <string name="attribute_wirelessbeacon_yes">Balise sans fil</string>
+  <string name="attribute_wirelessbeacon_no">Pas de balise sans fil</string>
+  <string name="attribute_treeclimbing_yes">Escalade d\'arbre nécessaire</string>
+  <string name="attribute_treeclimbing_no">Pas d\'escalade d\'arbre nécessaire</string>
+
+  <!--  attributes (hazards -> present, not present) -->
+  <string name="attribute_poisonoak_yes">Plantes toxiques</string>
+  <string name="attribute_poisonoak_no">Pas de plantes toxiques</string>
+  <string name="attribute_dangerousanimals_yes">Animaux dangereux</string>
+  <string name="attribute_dangerousanimals_no">Pas d\'animaux dangereux</string>
+  <string name="attribute_ticks_yes">Tiques</string>
+  <string name="attribute_ticks_no">Pas de tique</string>
+  <string name="attribute_mine_yes">Mines abandonnées</string>
+  <string name="attribute_mine_no">Pas de mine abandonnée</string>
+  <string name="attribute_cliff_yes">Chutes de pierres</string>
+  <string name="attribute_cliff_no">Pas de chute de pierres</string>
+  <string name="attribute_hunting_yes">Chasse</string>
+  <string name="attribute_hunting_no">Pas de chasse</string>
+  <string name="attribute_danger_yes">Zone dangereuse</string>
+  <string name="attribute_danger_no">Pas de zone dangereuse</string>
+  <string name="attribute_thorn_yes">Épines</string>
+  <string name="attribute_thorn_no">Pas d\'épine</string>
+
+  <!--  attributes (facilities -> yes, no) -->
+  <string name="attribute_wheelchair_yes">Accessible en fauteuil roulant</string>
+  <string name="attribute_wheelchair_no">Pas accessible en fauteuil roulant</string>
+  <string name="attribute_parking_yes">Parking possible</string>
+  <string name="attribute_parking_no">Pas de parking possible</string>
+  <string name="attribute_public_yes">Transport public</string>
+  <string name="attribute_public_no">Pas de transport public</string>
+  <string name="attribute_water_yes">Eau potable proche</string>
+  <string name="attribute_water_no">Pas d\'eau potable proche</string>
+  <string name="attribute_restrooms_yes">Toilettes publiques proches</string>
+  <string name="attribute_restrooms_no">Pas de toilette publique proche</string>
+  <string name="attribute_phone_yes">Téléphone proche</string>
+  <string name="attribute_phone_no">Pas de téléphone proche</string>
+  <string name="attribute_picnic_yes">Tables de pique-nique proches</string>
+  <string name="attribute_picnic_no">Pas de table de pique-nique proche</string>
+  <string name="attribute_camping_yes">Camping possible</string>
+  <string name="attribute_camping_no">Pas de camping possible</string>
+  <string name="attribute_stroller_yes">Accessible en poussette</string>
+  <string name="attribute_stroller_no">Pas accessible en poussette</string>
+  <string name="attribute_fuel_yes">Essence proche</string>
+  <string name="attribute_fuel_no">Pas d\'essence proche</string>
+  <string name="attribute_food_yes">Nourriture proche</string>
+  <string name="attribute_food_no">Pas de nourriture proche</string>
 
   <!-- next things -->
   <string name="legal_note">Pour utiliser les services de geocaching.com, vous devez accepter les termes et conditions de la <a href="http://www.geocaching.com/about/termsofuse.aspx">mise en garde de Groundspeak</a>.</string>
+  <string name="quote">Pour faciliter le géocaching.</string>
+  <string name="powered_by">carnero</string>
   <string name="author">auteur: <a href="http://carnero.cc/">carnero</a></string>
   <string name="support">support: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">site: <a href="http://cgeo.org/">cgeo.org</a></string>
   <string name="facebook">facebook: <a href="http://www.facebook.com/pages/cgeo/297269860090">page c:geo</a></string>
   <string name="twitter">twitter: <a href="http://twitter.com/android_gc">@android_GC</a></string>
+  <string name="nutshellmanual">Manuel: <a href="http://manual.cgeo.org/">c:geo en bref</a></string>
   <string name="about_go4cache">Le service <b>Go 4 cache</b> vous permet de voir en temps réel d\'autres géocacheurs sur une carte (dans <b>c:geo</b> ou dans le navigateur). Il peut afficher les caches en cours de recherche. En vous connectant sur <b>Go 4 cache</b> vous permettez à <b>c:geo</b> de publier votre publication (seulement si <b>c:geo</b> fonctionne).</string>
   <string name="about_twitter">Voulez-vous publier un nouveau statut sur Twitter à chaque nouvelle cache découverte sous <b>c:geo</b>?</string>
   <string name="about_auth_1">Le processus suivant permet à <b>c:geo</b> d\'accéder à votre compte Twitter - si vous acceptez.</string>
-  <string name="about_auth_2">Cliquer sur le bouton \"autoriser c:geo\" pour démarrer. Une fenêtre de navigateur va s\'ouvrir pour vous connecter sur Twitter. Accepter pour que <b>c:geo</b> accéde à votre compte. Twitter vous affichera alors une code PIN composé de chiffres. Merci de coller ce code dans <b>c:geo</b> puis confirmer. C\'est tout!</string>
+  <string name="about_auth_2">Cliquer sur le bouton \"début d\'autorisation\" pour démarrer. Une fenêtre de navigateur va s\'ouvrir pour vous connecter sur Twitter. Accepter pour que <b>c:geo</b> accéde à votre compte. Twitter vous affichera alors une code PIN composé de chiffres. Merci de coller ce code dans <b>c:geo</b> puis confirmer. C\'est tout!</string>
 </resources>

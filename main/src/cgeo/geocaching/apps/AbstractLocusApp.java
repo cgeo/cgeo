@@ -1,8 +1,8 @@
 package cgeo.geocaching.apps;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -53,8 +53,8 @@ public abstract class AbstractLocusApp extends AbstractApp {
      * @param activity
      * @author koem
      */
-    protected void showInLocus(List<? extends Object> objectsToShow, boolean withCacheWaypoints,
-            Activity activity) {
+    protected static void showInLocus(final List<? extends Object> objectsToShow, final boolean withCacheWaypoints,
+            final Activity activity) {
         if (objectsToShow == null) {
             return;
         }
@@ -105,7 +105,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
         }
 
         // create one simple point with location
-        Location loc = new Location(cgSettings.tag);
+        Location loc = new Location(Settings.tag);
         loc.setLatitude(cache.coords.getLatitude());
         loc.setLongitude(cache.coords.getLongitude());
 
@@ -148,7 +148,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
                 PointGeocachingDataWaypoint wp = new PointGeocachingDataWaypoint();
                 wp.code = waypoint.geocode;
                 wp.name = waypoint.name;
-                String locusWpId = toLocusId(WaypointType.FIND_BY_ID.get(waypoint.type));
+                String locusWpId = toLocusId(waypoint.type);
                 if (locusWpId != null) {
                     wp.type = locusWpId;
                 }
@@ -183,12 +183,12 @@ public abstract class AbstractLocusApp extends AbstractApp {
         }
 
         // create one simple point with location
-        Location loc = new Location(cgSettings.tag);
+        Location loc = new Location(Settings.tag);
         loc.setLatitude(waypoint.coords.getLatitude());
         loc.setLongitude(waypoint.coords.getLongitude());
 
         Point p = new Point(waypoint.name, loc);
-        p.setDescription("<a href=\"http://coord.info/" + waypoint.geocode + "\">"
+        p.setDescription("<a href=\"" + waypoint.getUrl() + "\">"
                 + waypoint.geocode + "</a>");
 
         return p;
@@ -250,11 +250,11 @@ public abstract class AbstractLocusApp extends AbstractApp {
 
     private static String toLocusId(final WaypointType wt) {
         switch (wt) {
-            case FLAG:
+            case FINAL:
                 return PointGeocachingData.CACHE_WAYPOINT_TYPE_FINAL;
             case OWN:
                 return PointGeocachingData.CACHE_WAYPOINT_TYPE_STAGES;
-            case PKG:
+            case PARKING:
                 return PointGeocachingData.CACHE_WAYPOINT_TYPE_PARKING;
             case PUZZLE:
                 return PointGeocachingData.CACHE_WAYPOINT_TYPE_QUESTION;

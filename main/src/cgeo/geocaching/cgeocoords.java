@@ -1,6 +1,6 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.cgSettings.coordInputFormatEnum;
+import cgeo.geocaching.Settings.coordInputFormatEnum;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Geopoint.MalformedCoordinateException;
@@ -26,10 +26,9 @@ import android.widget.TextView;
 
 public class cgeocoords extends Dialog {
 
-    private AbstractActivity context = null;
-    private cgSettings settings = null;
-    private cgGeo geo = null;
-    private Geopoint gp = null;
+    final private AbstractActivity context;
+    final private cgGeo geo;
+    private Geopoint gp;
 
     private EditText eLat, eLon;
     private Button bLat, bLon;
@@ -44,16 +43,17 @@ public class cgeocoords extends Dialog {
 
     coordInputFormatEnum currentFormat = null;
 
-    public cgeocoords(final AbstractActivity contextIn, cgSettings settingsIn, final Geopoint gpIn, final cgGeo geoIn) {
-        super(contextIn);
-        context = contextIn;
-        settings = settingsIn;
-        geo = geoIn;
+    public cgeocoords(final AbstractActivity context, final Geopoint gp, final cgGeo geo) {
+        super(context);
+        this.context = context;
+        this.geo = geo;
 
-        if (gpIn != null) {
-            gp = gpIn;
+        if (gp != null) {
+            this.gp = gp;
         } else if (geo != null && geo.coordsNow != null) {
-            gp = geo.coordsNow;
+            this.gp = geo.coordsNow;
+        } else {
+            this.gp = new Geopoint(0.0, 0.0);
         }
     }
 
@@ -77,7 +77,7 @@ public class cgeocoords extends Dialog {
                         android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        spinner.setSelection(settings.getCoordInputFormat().ordinal());
+        spinner.setSelection(Settings.getCoordInputFormat().ordinal());
         spinner.setOnItemSelectedListener(new CoordinateFormatListener());
 
         bLat = (Button) findViewById(R.id.ButtonLat);
@@ -181,10 +181,10 @@ public class cgeocoords extends Dialog {
                 tLatSep2.setText("°");
                 tLonSep2.setText("°");
 
-                eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
-                eLatMin.setText(addZeros(latDegFrac, 5) + Integer.toString(latDegFrac));
-                eLonDeg.setText(addZeros(latDeg, 3) + Integer.toString(lonDeg));
-                eLonMin.setText(addZeros(lonDegFrac, 5) + Integer.toString(lonDegFrac));
+                eLatDeg.setText(addZeros(latDeg, 2));
+                eLatMin.setText(addZeros(latDegFrac, 5));
+                eLonDeg.setText(addZeros(lonDeg, 3));
+                eLonMin.setText(addZeros(lonDegFrac, 5));
                 break;
             case Min: // DDD° MM.MMM
                 findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
@@ -204,12 +204,12 @@ public class cgeocoords extends Dialog {
                 tLatSep3.setText("'");
                 tLonSep3.setText("'");
 
-                eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
-                eLatMin.setText(addZeros(latMin, 2) + Integer.toString(latMin));
-                eLatSec.setText(addZeros(latMinFrac, 3) + Integer.toString(latMinFrac));
-                eLonDeg.setText(addZeros(lonDeg, 3) + Integer.toString(lonDeg));
-                eLonMin.setText(addZeros(lonMin, 2) + Integer.toString(lonMin));
-                eLonSec.setText(addZeros(lonMinFrac, 3) + Integer.toString(lonMinFrac));
+                eLatDeg.setText(addZeros(latDeg, 2));
+                eLatMin.setText(addZeros(latMin, 2));
+                eLatSec.setText(addZeros(latMinFrac, 3));
+                eLonDeg.setText(addZeros(lonDeg, 3));
+                eLonMin.setText(addZeros(lonMin, 2));
+                eLonSec.setText(addZeros(lonMinFrac, 3));
                 break;
             case Sec: // DDD° MM SS.SSS
                 findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
@@ -229,29 +229,21 @@ public class cgeocoords extends Dialog {
                 tLatSep3.setText(".");
                 tLonSep3.setText(".");
 
-                eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
-                eLatMin.setText(addZeros(latMin, 2) + Integer.toString(latMin));
-                eLatSec.setText(addZeros(latSec, 2) + Integer.toString(latSec));
-                eLatSub.setText(addZeros(latSecFrac, 3) + Integer.toString(latSecFrac));
-                eLonDeg.setText(addZeros(lonDeg, 3) + Integer.toString(lonDeg));
-                eLonMin.setText(addZeros(lonMin, 2) + Integer.toString(lonMin));
-                eLonSec.setText(addZeros(lonSec, 2) + Integer.toString(lonSec));
-                eLonSub.setText(addZeros(lonSecFrac, 3) + Integer.toString(lonSecFrac));
+                eLatDeg.setText(addZeros(latDeg, 2));
+                eLatMin.setText(addZeros(latMin, 2));
+                eLatSec.setText(addZeros(latSec, 2));
+                eLatSub.setText(addZeros(latSecFrac, 3));
+                eLonDeg.setText(addZeros(lonDeg, 3));
+                eLonMin.setText(addZeros(lonMin, 2));
+                eLonSec.setText(addZeros(lonSec, 2));
+                eLonSub.setText(addZeros(lonSecFrac, 3));
                 break;
         }
     }
 
-    private static String addZeros(int value, int len) {
-        StringBuilder zeros = new StringBuilder();
-        if (value == 0) {
-            value = 1;
-        }
-        double wantedLength = Math.pow(10, len - 1);
-        while (value < wantedLength) {
-            zeros.append('0');
-            value *= 10;
-        }
-        return zeros.toString();
+    private static String addZeros(final int value, final int len) {
+        final String n = Integer.toString(value);
+        return StringUtils.repeat('0', Math.max(0, len - n.length())) + n;
     }
 
     private class ButtonClickListener implements View.OnClickListener {
@@ -360,7 +352,7 @@ public class cgeocoords extends Dialog {
     private boolean calc(final boolean signalError) {
         if (currentFormat == coordInputFormatEnum.Plain) {
             try {
-                gp = new Geopoint(eLat.getText().toString() + " " + eLon.getText().toString());
+                gp = new Geopoint(eLat.getText().toString(), eLon.getText().toString());
             } catch (ParseException e) {
                 if (signalError) {
                     context.showToast(context.getResources().getString(R.string.err_parse_lat_lon));
@@ -413,6 +405,8 @@ public class cgeocoords extends Dialog {
                 latitude = latDeg + latMin / 60.0 + latSec / 60.0 / 60.0 + latSecFrac / 60.0 / 60.0;
                 longitude = lonDeg + lonMin / 60.0 + lonSec / 60.0 / 60.0 + lonSecFrac / 60.0 / 60.0;
                 break;
+            case Plain:
+                // This case has been handled above
         }
         latitude *= (bLat.getText().toString().equalsIgnoreCase("S") ? -1 : 1);
         longitude *= (bLon.getText().toString().equalsIgnoreCase("W") ? -1 : 1);
@@ -447,7 +441,7 @@ public class cgeocoords extends Dialog {
             }
 
             currentFormat = coordInputFormatEnum.fromInt(pos);
-            settings.setCoordInputFormat(currentFormat);
+            Settings.setCoordInputFormat(currentFormat);
             updateGUI();
         }
 

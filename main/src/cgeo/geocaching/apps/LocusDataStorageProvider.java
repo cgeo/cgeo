@@ -4,6 +4,8 @@ import menion.android.locus.addon.publiclib.geoData.PointsData;
 import menion.android.locus.addon.publiclib.utils.DataCursor;
 import menion.android.locus.addon.publiclib.utils.DataStorage;
 
+import org.apache.commons.collections.CollectionUtils;
+
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -24,7 +26,7 @@ public class LocusDataStorageProvider extends ContentProvider {
         DataCursor cursor = new DataCursor(new String[] { "data" });
 
         ArrayList<PointsData> data = DataStorage.getData();
-        if (data == null || data.size() == 0) {
+        if (CollectionUtils.isEmpty(data)) {
             return cursor;
         }
 

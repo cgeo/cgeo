@@ -25,27 +25,29 @@ public class cgMapfileListAdapter extends ArrayAdapter<File> {
     }
 
     @Override
-    public View getView(int position, View rowView, ViewGroup parent) {
+    public View getView(final int position, final View rowView, final ViewGroup parent) {
         if (inflater == null)
             inflater = ((Activity) getContext()).getLayoutInflater();
 
         if (position > getCount()) {
-            Log.w(cgSettings.tag, "cgGPXListAdapter.getView: Attempt to access missing item #" + position);
+            Log.w(Settings.tag, "cgGPXListAdapter.getView: Attempt to access missing item #" + position);
             return null;
         }
 
         File file = getItem(position);
 
-        if (rowView == null) {
-            rowView = (View) inflater.inflate(R.layout.mapfile_item, null);
+        View v = rowView;
+
+        if (v == null) {
+            v = inflater.inflate(R.layout.mapfile_item, null);
 
             holder = new MapfileView();
-            holder.filepath = (TextView) rowView.findViewById(R.id.mapfilepath);
-            holder.filename = (TextView) rowView.findViewById(R.id.mapfilename);
+            holder.filepath = (TextView) v.findViewById(R.id.mapfilepath);
+            holder.filename = (TextView) v.findViewById(R.id.mapfilename);
 
-            rowView.setTag(holder);
+            v.setTag(holder);
         } else {
-            holder = (MapfileView) rowView.getTag();
+            holder = (MapfileView) v.getTag();
         }
 
         File current = new File(parentView.getCurrentMapfile());
@@ -57,17 +59,12 @@ public class cgMapfileListAdapter extends ArrayAdapter<File> {
         }
 
         final touchListener touchLst = new touchListener(file);
-        rowView.setOnClickListener(touchLst);
+        v.setOnClickListener(touchLst);
 
         holder.filepath.setText(file.getParent());
         holder.filename.setText(file.getName());
 
-        return rowView;
-    }
-
-    @Override
-    public void notifyDataSetChanged() {
-        super.notifyDataSetChanged();
+        return v;
     }
 
     private class touchListener implements View.OnClickListener {

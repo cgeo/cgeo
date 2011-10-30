@@ -1,7 +1,5 @@
 package cgeo.geocaching;
 
-public class cgUpdateLoc {
-    public void updateLoc(cgGeo geo) {
-        // to be overriden
-    }
+abstract public class cgUpdateLoc {
+    abstract public void updateLoc(cgGeo geo);
 }

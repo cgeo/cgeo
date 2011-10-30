@@ -1,9 +1,7 @@
 package cgeo.geocaching.apps;
 
-import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.utils.CollectionUtils;
+import org.apache.commons.collections.CollectionUtils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -73,10 +71,5 @@ public abstract class AbstractApp implements App {
     @Override
     public int getId() {
         return getName().hashCode();
-    }
-
-    protected static cgSettings getSettings(Activity activity) {
-        return new cgSettings(activity,
-                activity.getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE));
     }
 }

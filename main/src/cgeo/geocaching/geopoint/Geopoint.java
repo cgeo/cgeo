@@ -21,6 +21,8 @@ public final class Geopoint
      *            latitude
      * @param lon
      *            longitude
+     * @throws MalformedCoordinateException
+     *             if any coordinate is incorrect
      */
     public Geopoint(final double lat, final double lon)
     {
@@ -30,7 +32,8 @@ public final class Geopoint
             throw new MalformedCoordinateException("malformed latitude: " + lat);
         }
         if (lon <= 180 && lon >= -180) {
-            longitude = lon;
+            // Prefer 180 degrees rather than the equivalent -180.
+            longitude = lon == -180 ? 180 : lon;
         } else {
             throw new MalformedCoordinateException("malformed longitude: " + lon);
         }
@@ -43,6 +46,8 @@ public final class Geopoint
      *            latitude
      * @param lon
      *            longitude
+     * @throws MalformedCoordinateException
+     *             if any coordinate is incorrect
      */
     public Geopoint(final int lat, final int lon)
     {
@@ -54,11 +59,31 @@ public final class Geopoint
      *
      * @param text
      *            string to parse
+     * @throws GeopointParser.ParseException
+     *             if the string cannot be parsed
+     * @throws MalformedCoordinateException
+     *             if any coordinate is incorrect
      * @see GeopointParser.parse()
      */
-    public Geopoint(final String text)
-    {
+    public Geopoint(final String text) {
         this(GeopointParser.parseLatitude(text), GeopointParser.parseLongitude(text));
+    }
+
+    /**
+     * Creates new Geopoint with latitude and longitude parsed from strings.
+     * 
+     * @param latText
+     *            latitude string to parse
+     * @param lonText
+     *            longitude string to parse
+     * @throws GeopointParser.ParseException
+     *             if any argument string cannot be parsed
+     * @throws MalformedCoordinateException
+     *             if any coordinate is incorrect
+     * @see GeopointParser.parse()
+     */
+    public Geopoint(final String latText, final String lonText) {
+        this(GeopointParser.parseLatitude(latText), GeopointParser.parseLongitude(lonText));
     }
 
     /**
@@ -250,7 +275,7 @@ public final class Geopoint
         return format(GeopointFormatter.Format.LAT_LON_DECMINUTE);
     }
 
-    public static class GeopointException
+    abstract public static class GeopointException
             extends RuntimeException
     {
         private static final long serialVersionUID = 1L;

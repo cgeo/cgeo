@@ -25,7 +25,6 @@ public class cgeohelpers extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        settings.load();
     }
 
     private void installFromMarket(String marketId) {
@@ -38,6 +37,10 @@ public class cgeohelpers extends AbstractActivity {
         finish();
     }
 
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void installManual(View view) {
         final Locale loc = Locale.getDefault();
         final String language = loc.getLanguage();
@@ -50,14 +53,26 @@ public class cgeohelpers extends AbstractActivity {
         }
     }
 
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void installLocus(View view) {
         installFromMarket("menion.android.locus");
     }
 
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void installGpsStatus(View view) {
         installFromMarket("com.eclipsim.gpsstatus2");
     }
 
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void installBluetoothGps(View view) {
         installFromMarket("googoo.android.btgps");
     }

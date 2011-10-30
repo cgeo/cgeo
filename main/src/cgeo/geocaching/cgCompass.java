@@ -43,7 +43,7 @@ public class cgCompass extends View {
             try {
                 invalidate();
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgCompass.changeHandler: " + e.toString());
+                Log.e(Settings.tag, "cgCompass.changeHandler: " + e.toString());
             }
         }
     };
@@ -153,7 +153,7 @@ public class cgCompass extends View {
 
         @Override
         public void run() {
-            while (wantStop == false) {
+            while (!wantStop) {
                 try {
                     sleep(50);
                 } catch (Exception e) {

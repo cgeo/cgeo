@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class cgFilter {
-    String name;
+    private String name;
 
     public cgFilter(String name) {
         this.name = name;

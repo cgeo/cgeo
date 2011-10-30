@@ -1,11 +1,8 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgSearch;
 
 import android.os.Handler;
-import android.os.Message;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,8 +14,8 @@ import java.util.Date;
 public abstract class FileParser {
     protected static StringBuilder readFile(File file)
             throws FileNotFoundException, IOException {
-        StringBuilder buffer = new StringBuilder();
-        BufferedReader input = new BufferedReader(new FileReader(file));
+        final StringBuilder buffer = new StringBuilder();
+        final BufferedReader input = new BufferedReader(new FileReader(file));
         try {
             String line = null;
             while ((line = input.readLine()) != null) {
@@ -30,24 +27,27 @@ public abstract class FileParser {
         return buffer;
     }
 
-    static void showFinishedMessage(Handler handler, cgSearch search) {
-        if (handler != null) {
-            final Message msg = new Message();
-            msg.obj = search.getCount();
-            handler.sendMessage(msg);
+    protected static void showCountMessage(final Handler handler, final int msgId, final int count) {
+        if (handler != null && (count <= 1 || count % 10 == 0)) {
+            handler.sendMessage(handler.obtainMessage(0, msgId, count));
+        }
+    }
+
+    protected static void showCountMessage(final Handler handler, final int msgId, final int count, final int bytesRead) {
+        if (handler != null && (count <= 1 || count % 10 == 0)) {
+            handler.sendMessage(handler.obtainMessage(0, msgId, count, bytesRead));
         }
     }
 
     protected static void fixCache(cgCache cache) {
-        cache.latitudeString = cgBase.formatLatitude(cache.coords.getLatitude(), true);
-        cache.longitudeString = cgBase.formatLongitude(cache.coords.getLongitude(), true);
         if (cache.inventory != null) {
             cache.inventoryItems = cache.inventory.size();
         } else {
             cache.inventoryItems = 0;
         }
-        cache.updated = new Date().getTime();
-        cache.detailedUpdate = new Date().getTime();
+        final long time = new Date().getTime();
+        cache.updated = time;
+        cache.detailedUpdate = time;
     }
 
 }

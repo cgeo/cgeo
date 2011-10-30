@@ -22,6 +22,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class cgeowaypoint extends AbstractActivity {
 
     private static final int MENU_ID_NAVIGATION = 0;
@@ -52,9 +55,9 @@ public class cgeowaypoint extends AbstractActivity {
                     final TextView identification = (TextView) findViewById(R.id.identification);
                     final TextView coords = (TextView) findViewById(R.id.coordinates);
                     final ImageView compass = (ImageView) findViewById(R.id.compass);
-                    final View separator = (View) findViewById(R.id.separator);
+                    final View separator = findViewById(R.id.separator);
 
-                    final View headline = (View) findViewById(R.id.headline);
+                    final View headline = findViewById(R.id.headline);
                     registerNavigationMenu(headline);
 
                     if (StringUtils.isNotBlank(waypoint.name)) {
@@ -63,13 +66,13 @@ public class cgeowaypoint extends AbstractActivity {
                         setTitle(res.getString(R.string.waypoint_title));
                     }
 
-                    if (waypoint.getPrefix().equalsIgnoreCase("OWN") == false) {
+                    if (!waypoint.getPrefix().equalsIgnoreCase("OWN")) {
                         identification.setText(waypoint.getPrefix().trim() + "/" + waypoint.lookup.trim());
                     } else {
                         identification.setText(res.getString(R.string.waypoint_custom));
                     }
                     registerNavigationMenu(identification);
-                    waypoint.setIcon(res, base, identification);
+                    waypoint.setIcon(res, identification);
 
                     if (waypoint.coords != null) {
                         coords.setText(Html.fromHtml(cgBase.formatCoords(waypoint.coords, true)), TextView.BufferType.SPANNABLE);
@@ -107,7 +110,7 @@ public class cgeowaypoint extends AbstractActivity {
                     waitDialog.dismiss();
                     waitDialog = null;
                 }
-                Log.e(cgSettings.tag, "cgeowaypoint.loadWaypointHandler: " + e.toString());
+                Log.e(Settings.tag, "cgeowaypoint.loadWaypointHandler: " + e.toString());
             }
         }
 
@@ -135,7 +138,7 @@ public class cgeowaypoint extends AbstractActivity {
 
         setTheme();
         setContentView(R.layout.waypoint);
-        setTitle("waypoint");
+        setTitle(R.string.waypoint_title);
 
         // get parameters
         Bundle extras = getIntent().getExtras();
@@ -153,7 +156,7 @@ public class cgeowaypoint extends AbstractActivity {
         }
 
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
+            geo = app.startGeo(this, geoUpdate, base, 0, 0);
         }
 
         waitDialog = ProgressDialog.show(this, null, res.getString(R.string.waypoint_loading), true);
@@ -166,10 +169,9 @@ public class cgeowaypoint extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        settings.load();
 
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
+            geo = app.startGeo(this, geoUpdate, base, 0, 0);
         }
 
         if (waitDialog == null) {
@@ -211,7 +213,7 @@ public class cgeowaypoint extends AbstractActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, MENU_ID_COMPASS, 0, res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass); // compass
 
-        SubMenu subMenu = menu.addSubMenu(1, MENU_ID_NAVIGATION, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
+        SubMenu subMenu = menu.addSubMenu(1, MENU_ID_NAVIGATION, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
         addNavigationMenuItems(subMenu);
 
         menu.add(0, MENU_ID_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
@@ -272,7 +274,7 @@ public class cgeowaypoint extends AbstractActivity {
 
                 loadWaypointHandler.sendMessage(new Message());
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgeowaypoint.loadWaypoint.run: " + e.toString());
+                Log.e(Settings.tag, "cgeowaypoint.loadWaypoint.run: " + e.toString());
             }
         }
     }
@@ -297,31 +299,29 @@ public class cgeowaypoint extends AbstractActivity {
     private class deleteWaypointListener implements View.OnClickListener {
 
         public void onClick(View arg0) {
-            if (app.deleteWaypoint(id) == false) {
-                showToast(res.getString(R.string.err_waypoint_delete_failed));
-            } else {
+            if (app.deleteWaypoint(id)) {
                 app.removeCacheFromCache(geocode);
 
                 finish();
                 return;
+            } else {
+                showToast(res.getString(R.string.err_waypoint_delete_failed));
             }
         }
     }
 
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void goCompass(View view) {
         if (!navigationPossible()) {
             return;
         }
 
-        Intent navigateIntent = new Intent(this, cgeonavigate.class);
-        navigateIntent.putExtra("latitude", waypoint.coords.getLatitude());
-        navigateIntent.putExtra("longitude", waypoint.coords.getLongitude());
-        navigateIntent.putExtra("geocode", waypoint.getPrefix().trim() + "/" + waypoint.lookup.trim());
-        navigateIntent.putExtra("name", waypoint.name);
-
-        cgeonavigate.coordinates.clear();
-        cgeonavigate.coordinates.add(new cgCoord(waypoint));
-        startActivity(navigateIntent);
+        Collection<cgCoord> coordinatesWithType = new ArrayList<cgCoord>();
+        coordinatesWithType.add(new cgCoord(waypoint));
+        cgeonavigate.startActivity(this, waypoint.getPrefix().trim() + "/" + waypoint.lookup.trim(), waypoint.name, waypoint.coords, coordinatesWithType);
     }
 
     private boolean navigationPossible() {

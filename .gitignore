@@ -1,5 +1,10 @@
-bin/
-gen/
+/main/bin/
+/main/gen/
 /main/local.properties
 /main/private.properties
 /main/res/values/mapsapikey.xml
+/tests/bin/
+/tests/gen/
+/main/project/localization/*.missing
+/main/project/attributes/drawable/*
+/main/project/attributes/iconlist1res.html

@@ -4,7 +4,7 @@ import org.xml.sax.XMLReader;
 
 import android.text.Editable;
 import android.text.Html.TagHandler;
-import android.text.Spannable;
+import android.text.Spanned;
 import android.text.style.StrikethroughSpan;
 
 public class UnknownTagsHandler implements TagHandler {
@@ -25,7 +25,7 @@ public class UnknownTagsHandler implements TagHandler {
             strikePos = length;
         } else {
             if (strikePos > UNDEFINED_POSITION) {
-                output.setSpan(new StrikethroughSpan(), strikePos, length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                output.setSpan(new StrikethroughSpan(), strikePos, length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 strikePos = UNDEFINED_POSITION;
             }
         }

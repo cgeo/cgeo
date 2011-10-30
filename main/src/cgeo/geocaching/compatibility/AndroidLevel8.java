@@ -1,27 +1,21 @@
 package cgeo.geocaching.compatibility;
 
+import cgeo.geocaching.Settings;
+
 import android.app.Activity;
+import android.app.backup.BackupManager;
+import android.util.Log;
+import android.view.Display;
 
 public class AndroidLevel8 {
-    static {
-        try {
-            Class.forName("cgeo.geocaching.compatibility.AndroidLevel8Internal");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+
+    static public int getRotation(final Activity activity) {
+        Display display = activity.getWindowManager().getDefaultDisplay();
+        return display.getRotation();
     }
 
-    private AndroidLevel8Internal internal;
-
-    public static void check() {
-        // nothing
-    }
-
-    public AndroidLevel8() {
-        internal = new AndroidLevel8Internal();
-    }
-
-    public int getRotation(Activity activity) {
-        return internal.getRotation(activity);
+    static public void dataChanged(final String name) {
+        Log.i(Settings.tag, "Requesting settings backup with settings manager");
+        BackupManager.dataChanged(name);
     }
 }

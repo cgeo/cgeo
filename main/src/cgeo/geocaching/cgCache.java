@@ -4,8 +4,10 @@ import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
@@ -28,6 +30,17 @@ import java.util.regex.Pattern;
  * Internal c:geo representation of a "cache"
  */
 public class cgCache implements ICache {
+
+    /**
+     * Cache loading parameters
+     */
+    final public static int LOADATTRIBUTES = 1 << 0;
+    final public static int LOADWAYPOINTS = 1 << 1;
+    final public static int LOADSPOILERS = 1 << 2;
+    final public static int LOADLOGS = 1 << 3;
+    final public static int LOADINVENTORY = 1 << 4;
+    final public static int LOADOFFLINELOG = 1 << 5;
+    final public static int LOADALL = LOADATTRIBUTES | LOADWAYPOINTS | LOADSPOILERS | LOADLOGS | LOADINVENTORY | LOADOFFLINELOG;
 
     public Long updated = null;
     public Long detailedUpdate = null;
@@ -53,15 +66,13 @@ public class cgCache implements ICache {
     public Float direction = null;
     public Float distance = null;
     public String latlon = "";
-    public String latitudeString = "";
-    public String longitudeString = "";
     public String location = "";
     public Geopoint coords = null;
     public boolean reliableLatLon = false;
     public Double elevation = null;
     public String personalNote = null;
     public String shortdesc = "";
-    public String description = "";
+    private String description = null;
     public boolean disabled = false;
     public boolean archived = false;
     public boolean members = false;
@@ -76,7 +87,7 @@ public class cgCache implements ICache {
     public boolean onWatchlist = false;
     public List<String> attributes = null;
     public List<cgWaypoint> waypoints = null;
-    public List<cgImage> spoilers = null;
+    public ArrayList<cgImage> spoilers = null;
     public List<cgLog> logs = null;
     public List<cgTrackable> inventory = null;
     public Map<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
@@ -85,7 +96,9 @@ public class cgCache implements ICache {
     public boolean statusChecked = false;
     public boolean statusCheckedView = false;
     public String directionImg = null;
+    private String nameForSorting;
 
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
     /**
      * Gather missing information from another cache object.
      *
@@ -98,7 +111,7 @@ public class cgCache implements ICache {
         }
 
         updated = System.currentTimeMillis();
-        if (detailed == false && other.detailed) {
+        if (!detailed && other.detailed) {
             detailed = true;
             detailedUpdate = updated;
         }
@@ -157,12 +170,6 @@ public class cgCache implements ICache {
         if (StringUtils.isBlank(latlon)) {
             latlon = other.latlon;
         }
-        if (StringUtils.isBlank(latitudeString)) {
-            latitudeString = other.latitudeString;
-        }
-        if (StringUtils.isBlank(longitudeString)) {
-            longitudeString = other.longitudeString;
-        }
         if (StringUtils.isBlank(location)) {
             location = other.location;
         }
@@ -172,7 +179,7 @@ public class cgCache implements ICache {
         if (elevation == null) {
             elevation = other.elevation;
         }
-        if (StringUtils.isNotBlank(personalNote)) {
+        if (personalNote == null) { // don't use StringUtils.isBlank. Otherwise we cannot recognize a note which was deleted on GC
             personalNote = other.personalNote;
         }
         if (StringUtils.isBlank(shortdesc)) {
@@ -199,7 +206,9 @@ public class cgCache implements ICache {
         if (waypoints == null) {
             waypoints = other.waypoints;
         }
-        cgWaypoint.mergeWayPoints(waypoints, other.waypoints);
+        else {
+            cgWaypoint.mergeWayPoints(waypoints, other.waypoints);
+        }
         if (spoilers == null) {
             spoilers = other.spoilers;
         }
@@ -211,7 +220,7 @@ public class cgCache implements ICache {
             inventory = other.inventory;
             inventoryItems = other.inventoryItems;
         }
-        if (logs == null || logs.isEmpty()) { // keep last known logs if none
+        if (CollectionUtils.isEmpty(logs)) { // keep last known logs if none
             logs = other.logs;
         }
     }
@@ -258,16 +267,17 @@ public class cgCache implements ICache {
         Pattern patternOk = Pattern.compile(guid, Pattern.CASE_INSENSITIVE);
         Matcher matcherOk = patternOk.matcher(page);
         if (matcherOk.find()) {
-            Log.i(cgSettings.tag, "cgCache.isGuidContainedInPage: guid '" + guid + "' found");
+            Log.i(Settings.tag, "cgCache.isGuidContainedInPage: guid '" + guid + "' found");
             return true;
         } else {
-            Log.i(cgSettings.tag, "cgCache.isGuidContainedInPage: guid '" + guid + "' not found");
+            Log.i(Settings.tag, "cgCache.isGuidContainedInPage: guid '" + guid + "' not found");
             return false;
         }
     }
 
     public boolean isEventCache() {
-        return "event".equalsIgnoreCase(type) || "mega".equalsIgnoreCase(type) || "cito".equalsIgnoreCase(type);
+        return CacheType.EVENT.id.equalsIgnoreCase(type) || CacheType.MEGA_EVENT.id.equalsIgnoreCase(type)
+                || CacheType.CITO.id.equalsIgnoreCase(type) || CacheType.LOSTANDFOUND.id.equalsIgnoreCase(type);
     }
 
     public boolean logVisit(IAbstractActivity fromActivity) {
@@ -285,11 +295,11 @@ public class cgCache implements ICache {
         return true;
     }
 
-    public boolean logOffline(final IAbstractActivity fromActivity, final int logType, final cgSettings settings, final cgBase base) {
+    public boolean logOffline(final IAbstractActivity fromActivity, final int logType, final cgBase base) {
         String log = "";
-        if (StringUtils.isNotBlank(settings.getSignature())
-                && settings.signatureAutoinsert) {
-            log = LogTemplateProvider.applyTemplates(settings.getSignature(), base, true);
+        if (StringUtils.isNotBlank(Settings.getSignature())
+                && Settings.isAutoInsertSignature()) {
+            log = LogTemplateProvider.applyTemplates(Settings.getSignature(), base, true);
         }
         logOffline(fromActivity, log, Calendar.getInstance(), logType);
         return true;
@@ -311,10 +321,10 @@ public class cgCache implements ICache {
         }
     }
 
-    public List<Integer> getPossibleLogTypes(cgSettings settings) {
-        boolean isOwner = owner != null && owner.equalsIgnoreCase(settings.getUsername());
+    public List<Integer> getPossibleLogTypes() {
+        boolean isOwner = owner != null && owner.equalsIgnoreCase(Settings.getUsername());
         List<Integer> types = new ArrayList<Integer>();
-        if ("event".equals(type) || "mega".equals(type) || "cito".equals(type) || "lostfound".equals(type)) {
+        if (isEventCache()) {
             types.add(cgBase.LOG_WILL_ATTEND);
             types.add(cgBase.LOG_NOTE);
             types.add(cgBase.LOG_ATTENDED);
@@ -322,7 +332,7 @@ public class cgCache implements ICache {
             if (isOwner) {
                 types.add(cgBase.LOG_ANNOUNCEMENT);
             }
-        } else if ("webcam".equals(type)) {
+        } else if (CacheType.WEBCAM.id.equals(type)) {
             types.add(cgBase.LOG_WEBCAM_PHOTO_TAKEN);
             types.add(cgBase.LOG_DIDNT_FIND_IT);
             types.add(cgBase.LOG_NOTE);
@@ -385,12 +395,12 @@ public class cgCache implements ICache {
 
     @Override
     public String getLatitude() {
-        return latitudeString;
+        return coords != null ? cgBase.formatLatitude(coords.getLatitude(), true) : null;
     }
 
     @Override
     public String getLongitude() {
-        return longitudeString;
+        return coords != null ? cgBase.formatLongitude(coords.getLongitude(), true) : null;
     }
 
     @Override
@@ -445,6 +455,9 @@ public class cgCache implements ICache {
 
     @Override
     public String getDescription() {
+        if (description == null) {
+            description = StringUtils.defaultString(cgeoapplication.getInstance().getCacheDescription(geocode));
+        }
         return description;
     }
 
@@ -458,4 +471,130 @@ public class cgCache implements ICache {
         return name;
     }
 
+    @Override
+    public String getCacheId() {
+        return cacheId;
+    }
+
+    @Override
+    public String getGuid() {
+        return guid;
+    }
+
+    @Override
+    public String getLocation() {
+        return location;
+    }
+
+    @Override
+    public String getPersonalNote() {
+        return personalNote;
+    }
+
+    public boolean supportsUserActions() {
+        return getConnector().supportsUserActions();
+    }
+
+    public boolean supportsCachesAround() {
+        return getConnector().supportsCachesAround();
+    }
+
+    public void shareCache(Activity fromActivity, Resources res) {
+        if (geocode == null) {
+            return;
+        }
+
+        StringBuilder subject = new StringBuilder("Geocache ");
+        subject.append(geocode.toUpperCase());
+        if (StringUtils.isNotBlank(name)) {
+            subject.append(" - ").append(name);
+        }
+
+        final Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject.toString());
+        intent.putExtra(Intent.EXTRA_TEXT, getUrl());
+
+        fromActivity.startActivity(Intent.createChooser(intent, res.getText(R.string.action_bar_share_title)));
+    }
+
+    public String getUrl() {
+        return getConnector().getCacheUrl(this);
+    }
+
+    public boolean supportsGCVote() {
+        return StringUtils.startsWithIgnoreCase(geocode, "GC");
+    }
+
+    public void setDescription(final String description) {
+        this.description = description;
+    }
+
+    @Override
+    public boolean isFound() {
+        return found;
+    }
+
+    @Override
+    public boolean isFavorite() {
+        return favourite;
+    }
+
+    @Override
+    public boolean isWatchlist() {
+        return onWatchlist;
+    }
+
+    @Override
+    public Date getHiddenDate() {
+        return hidden;
+    }
+
+    @Override
+    public List<String> getAttributes() {
+        return attributes;
+    }
+
+    @Override
+    public List<cgTrackable> getInventory() {
+        return inventory;
+    }
+
+    @Override
+    public List<cgImage> getSpoilers() {
+        return spoilers;
+    }
+
+    @Override
+    public Map<Integer, Integer> getLogCounts() {
+        return logCounts;
+    }
+
+    @Override
+    public Integer getFavoritePoints() {
+        return favouriteCnt;
+    }
+
+    @Override
+    public String getNameForSorting() {
+        if (null == nameForSorting) {
+            final Matcher matcher = NUMBER_PATTERN.matcher(name);
+            if (matcher.find()) {
+                nameForSorting = name.replace(matcher.group(), StringUtils.leftPad(matcher.group(), 6, '0'));
+            }
+            else {
+                nameForSorting = name;
+            }
+        }
+        return nameForSorting;
+    }
+
+    public boolean isVirtual() {
+        return CacheType.VIRTUAL.id.equalsIgnoreCase(type) || CacheType.WEBCAM.id.equalsIgnoreCase(type)
+                || CacheType.EARTH.id.equalsIgnoreCase(type);
+    }
+
+    public boolean showSize() {
+        return !((isEventCache() || isVirtual()) && size == CacheSize.NOT_CHOSEN);
+    }
 }
