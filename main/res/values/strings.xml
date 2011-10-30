@@ -929,7 +929,9 @@
 
   <!-- changelog -->
   <string name="changelog">\n
-    <b>RC</b>\n
+    <b>New release</b>\n
+    \n\n
+    <b>30.10.2011</b>\n
     · new: cleanup the cgeo private cache directory when caches are removed from database\n
     · new: display user avatar when checking login/password from geocaching.com\n
     · new: support Geocaching Australia caches (GAxxxx, TPxxxx)\n
@@ -939,6 +941,7 @@
     · fix: Twitter authorization\n
     · fix: login problems\n
     · fix: Google &amp; OSM maps consistency\n
+    · fix: readable cache description (black on black, white on white)\n
     · fix: many other bugs\n
     \n\n
     <b>09.10.2011</b>\n
