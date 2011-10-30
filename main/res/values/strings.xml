@@ -564,15 +564,17 @@
   <string name="file_title_searching">Searching</string>
 
   <!-- gpx -->
-  <string name="gpx_import_loading_caches">Loading caches from .gpx file\nRead:</string>
-  <string name="gpx_import_loading_waypoints">Loading waypoints from .gpx file\nRead:</string>
-  <string name="gpx_import_storing">Writing caches to database\nStored:</string>
-  <string name="gpx_import_loading_stored">Loading caches from .gpx file\nStored:</string>
+  <string name="gpx_import_loading_caches">Loading caches from .gpx file</string>
+  <string name="gpx_import_loading_waypoints">Loading waypoints file</string>
+  <string name="gpx_import_storing">Writing caches to database</string>
   <string name="gpx_import_caches_imported">caches imported</string>
-  <string name="gpx_import_loading">Loading caches from .gpx file</string>
   <string name="gpx_import_title">Import GPX</string>
   <string name="gpx_import_title_reading_file">Reading file</string>
   <string name="gpx_import_title_caches_imported">Result</string>
+  <string name="gpx_import_title_caches_import_failed">Import failed</string>
+  <string name="gpx_import_error_io">Can\'t read file</string>
+  <string name="gpx_import_error_parser">File format not ok</string>
+  <string name="gpx_import_error_unexpected">Unexpected error</string>
   <string name="gpx_import_confirm">Do you want to import the GPX file into c:geo?</string>
 
   <!-- map file select -->

@@ -14,7 +14,6 @@ import android.content.res.Resources;
 import android.os.Handler;
 import android.test.InstrumentationTestCase;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
@@ -30,7 +29,7 @@ public class GPXParserTest extends InstrumentationTestCase {
         testGPXVersion(R.raw.gc1bkp3_gpx100);
     }
 
-    private cgCache testGPXVersion(final int resourceId) throws IOException {
+    private cgCache testGPXVersion(final int resourceId) throws IOException, ParserException {
         final List<cgCache> caches = readGPX(resourceId);
         assertNotNull(caches);
         assertEquals(1, caches.size());
@@ -51,13 +50,13 @@ public class GPXParserTest extends InstrumentationTestCase {
         return cache;
     }
 
-    public void testGPXVersion101() throws IOException {
+    public void testGPXVersion101() throws IOException, ParserException {
         final cgCache cache = testGPXVersion(R.raw.gc1bkp3_gpx101);
         assertNotNull(cache.attributes);
         assertEquals(10, cache.attributes.size());
     }
 
-    public void testOC() throws IOException {
+    public void testOC() throws IOException, ParserException {
         final List<cgCache> caches = readGPX(R.raw.oc5952_gpx);
         final cgCache cache = caches.get(0);
         assertEquals("OC5952", cache.geocode);
@@ -74,7 +73,7 @@ public class GPXParserTest extends InstrumentationTestCase {
         assertTrue(new Geopoint(48.85968, 9.18740).isEqualTo(cache.coords));
     }
 
-    public void testGc31j2h() throws IOException {
+    public void testGc31j2h() throws IOException, ParserException {
         final List<cgCache> caches = readGPX(R.raw.gc31j2h);
         assertEquals(1, caches.size());
         final cgCache cache = caches.get(0);
@@ -86,7 +85,7 @@ public class GPXParserTest extends InstrumentationTestCase {
         assertNull(cache.waypoints);
     }
 
-    public void testGc31j2hWpts() throws IOException {
+    public void testGc31j2hWpts() throws IOException, ParserException {
         List<cgCache> caches = readGPX(R.raw.gc31j2h, R.raw.gc31j2h_wpts);
         assertEquals(1, caches.size());
         cgCache cache = caches.get(0);
@@ -94,7 +93,7 @@ public class GPXParserTest extends InstrumentationTestCase {
         assertGc31j2hWaypoints(cache);
     }
 
-    public void testGc31j2hWptsWithoutCache() throws IOException {
+    public void testGc31j2hWptsWithoutCache() throws IOException, ParserException {
         final List<cgCache> caches = readGPX(R.raw.gc31j2h_wpts);
         assertEquals(0, caches.size());
     }
@@ -175,33 +174,20 @@ public class GPXParserTest extends InstrumentationTestCase {
         assertEquals(8.545100, wp.coords.getLongitude(), 0.000001);
     }
 
-    public static void testGetWaypointsFileForGpx() {
-        assertEquals(new File("1234567-wpts.gpx"), GPXParser.getWaypointsFileForGpx(new File("1234567.gpx")));
-        assertEquals(new File("/mnt/sdcard/1234567-wpts.gpx"), GPXParser.getWaypointsFileForGpx(new File("/mnt/sdcard/1234567.gpx")));
-        assertEquals(new File("/mnt/sdcard/1-wpts.gpx"), GPXParser.getWaypointsFileForGpx(new File("/mnt/sdcard/1.gpx")));
-        assertEquals(new File("/mnt/sd.card/1-wpts.gpx"), GPXParser.getWaypointsFileForGpx(new File("/mnt/sd.card/1.gpx")));
-        assertEquals(new File("1234567.9-wpts.gpx"), GPXParser.getWaypointsFileForGpx(new File("1234567.9.gpx")));
-        assertEquals(new File("1234567-wpts.gpx"), GPXParser.getWaypointsFileForGpx(new File("1234567.GPX")));
-        assertEquals(new File("gpx.gpx-wpts.gpx"), GPXParser.getWaypointsFileForGpx(new File("gpx.gpx.gpx")));
-        assertNull(GPXParser.getWaypointsFileForGpx(new File("123.gpy")));
-        assertNull(GPXParser.getWaypointsFileForGpx(new File("gpx")));
-        assertNull(GPXParser.getWaypointsFileForGpx(new File(".gpx")));
-        assertNull(GPXParser.getWaypointsFileForGpx(new File("/mnt/sdcard/.gpx")));
-    }
-
-    private List<cgCache> readGPX(int... resourceIds) throws IOException {
+    private List<cgCache> readGPX(int... resourceIds) throws IOException, ParserException {
         final GPX10Parser parser = new GPX10Parser(1);
+        Collection<cgCache> caches = null;
         for (int resourceId : resourceIds) {
             final Resources res = getInstrumentation().getContext().getResources();
             final InputStream instream = res.openRawResource(resourceId);
             try {
-                assertTrue(parser.parse(instream, new Handler()));
+                caches = parser.parse(instream, new Handler());
+                assertNotNull(caches);
             } finally {
                 instream.close();
             }
         }
-        Collection<cgCache> caches = parser.getParsedCaches();
-        assertNotNull(caches);
+
         List<cgCache> cacheList = new ArrayList<cgCache>(caches);
         // TODO: may need to sort by geocode when a test imports more than one cache
         return cacheList;
