@@ -11,6 +11,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocParser;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 
@@ -1659,7 +1660,7 @@ public class cgBase {
             final String profile = BaseUtils.replaceWhitespace(getResponseData(request("http://www.geocaching.com/my/", null, false)));
             final String avatarURL = BaseUtils.getMatch(profile, GCConstants.PATTERN_AVATAR_IMAGE, false, null);
             if (null != avatarURL) {
-                final cgHtmlImg imgGetter = new cgHtmlImg(context, "", false, 0, false, false);
+                final HtmlImage imgGetter = new HtmlImage(context, "", false, 0, false, false);
                 return imgGetter.getDrawable(avatarURL);
             }
             // No match? There may be no avatar set by user.
@@ -3009,7 +3010,7 @@ public class cgBase {
                 return;
             }
 
-            final cgHtmlImg imgGetter = new cgHtmlImg(activity, cache.geocode, false, listId, true);
+            final HtmlImage imgGetter = new HtmlImage(activity, cache.geocode, false, listId, true);
 
             // store images from description
             if (StringUtils.isNotBlank(cache.getDescription())) {

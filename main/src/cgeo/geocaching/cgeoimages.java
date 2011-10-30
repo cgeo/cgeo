@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.files.LocalStorage;
+import cgeo.geocaching.network.HtmlImage;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -89,7 +90,7 @@ public class cgeoimages extends AbstractActivity {
 
         @Override
         protected BitmapDrawable doInBackground(Void... params) {
-            final cgHtmlImg imgGetter = new cgHtmlImg(cgeoimages.this, geocode, true, offline ? 1 : 0, false, save);
+            final HtmlImage imgGetter = new HtmlImage(cgeoimages.this, geocode, true, offline ? 1 : 0, false, save);
             return imgGetter.getDrawable(img.url);
         }
 

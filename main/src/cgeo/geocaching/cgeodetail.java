@@ -8,6 +8,7 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
 
@@ -1037,7 +1038,7 @@ public class cgeodetail extends AbstractActivity {
 
                 TextView descView = (TextView) findViewById(R.id.shortdesc);
                 descView.setVisibility(View.VISIBLE);
-                descView.setText(Html.fromHtml(cache.shortdesc.trim(), new cgHtmlImg(this, geocode, true, cache.reason, false), null), TextView.BufferType.SPANNABLE);
+                descView.setText(Html.fromHtml(cache.shortdesc.trim(), new HtmlImage(this, geocode, true, cache.reason, false), null), TextView.BufferType.SPANNABLE);
                 descView.setMovementMethod(LinkMovementMethod.getInstance());
             }
 
@@ -1179,7 +1180,7 @@ public class cgeodetail extends AbstractActivity {
         if (longDesc == null && cache != null) {
             String description = cache.getDescription();
             if (description != null) {
-                longDesc = Html.fromHtml(description.trim(), new cgHtmlImg(this, geocode, true, cache.reason, false), new UnknownTagsHandler());
+                longDesc = Html.fromHtml(description.trim(), new HtmlImage(this, geocode, true, cache.reason, false), new UnknownTagsHandler());
             }
         }
     }
@@ -1285,7 +1286,7 @@ public class cgeodetail extends AbstractActivity {
                 }
                 // avoid parsing HTML if not necessary
                 if (containsHtml(log.log)) {
-                    ((TextView) rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log, new cgHtmlImg(this, null, false, cache.reason, false), null), TextView.BufferType.SPANNABLE);
+                    ((TextView) rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log, new HtmlImage(this, null, false, cache.reason, false), null), TextView.BufferType.SPANNABLE);
                 }
                 else {
                     ((TextView) rowView.findViewById(R.id.log)).setText(log.log);
@@ -1418,7 +1419,7 @@ public class cgeodetail extends AbstractActivity {
 
                 String markerUrl = cgBase.urlencode_rfc3986("http://cgeo.carnero.cc/_markers/my_location_mdpi.png");
 
-                cgHtmlImg mapGetter = new cgHtmlImg(cgeodetail.this, cache.geocode, false, 0, false);
+                HtmlImage mapGetter = new HtmlImage(cgeodetail.this, cache.geocode, false, 0, false);
                 image = mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?center=" + latlonMap + "&zoom=15&size=" + width + "x" + height + "&maptype=terrain&markers=icon%3A" + markerUrl + "%7C" + latlonMap + "&sensor=false");
                 Message message = handler.obtainMessage(0, image);
                 handler.sendMessage(message);

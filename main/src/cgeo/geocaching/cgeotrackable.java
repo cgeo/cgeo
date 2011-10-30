@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.network.HtmlImage;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -226,7 +227,7 @@ public class cgeotrackable extends AbstractActivity {
                     ((LinearLayout) findViewById(R.id.goal_box)).setVisibility(View.VISIBLE);
                     TextView descView = (TextView) findViewById(R.id.goal);
                     descView.setVisibility(View.VISIBLE);
-                    descView.setText(Html.fromHtml(trackable.getGoal(), new cgHtmlImg(cgeotrackable.this, geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
+                    descView.setText(Html.fromHtml(trackable.getGoal(), new HtmlImage(cgeotrackable.this, geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
                     descView.setMovementMethod(LinkMovementMethod.getInstance());
                 }
 
@@ -235,7 +236,7 @@ public class cgeotrackable extends AbstractActivity {
                     ((LinearLayout) findViewById(R.id.details_box)).setVisibility(View.VISIBLE);
                     TextView descView = (TextView) findViewById(R.id.details);
                     descView.setVisibility(View.VISIBLE);
-                    descView.setText(Html.fromHtml(trackable.getDetails(), new cgHtmlImg(cgeotrackable.this, geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
+                    descView.setText(Html.fromHtml(trackable.getDetails(), new HtmlImage(cgeotrackable.this, geocode, true, 0, false), null), TextView.BufferType.SPANNABLE);
                     descView.setMovementMethod(LinkMovementMethod.getInstance());
                 }
 
@@ -273,7 +274,7 @@ public class cgeotrackable extends AbstractActivity {
                         public void run() {
                             BitmapDrawable image = null;
                             try {
-                                cgHtmlImg imgGetter = new cgHtmlImg(cgeotrackable.this, geocode, true, 0, false);
+                                HtmlImage imgGetter = new HtmlImage(cgeotrackable.this, geocode, true, 0, false);
 
                                 image = imgGetter.getDrawable(trackable.getImage());
                                 Message message = handler.obtainMessage(0, image);
@@ -520,7 +521,7 @@ public class cgeotrackable extends AbstractActivity {
                     });
                 }
 
-                ((TextView) rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log, new cgHtmlImg(cgeotrackable.this, null, false, 0, false), null), TextView.BufferType.SPANNABLE);
+                ((TextView) rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log, new HtmlImage(cgeotrackable.this, null, false, 0, false), null), TextView.BufferType.SPANNABLE);
 
                 ((TextView) rowView.findViewById(R.id.author)).setOnClickListener(new userActions());
                 listView.addView(rowView);
@@ -572,7 +573,7 @@ public class cgeotrackable extends AbstractActivity {
 
             BitmapDrawable image = null;
             try {
-                cgHtmlImg imgGetter = new cgHtmlImg(cgeotrackable.this, trackable.getGeocode(), false, 0, false);
+                HtmlImage imgGetter = new HtmlImage(cgeotrackable.this, trackable.getGeocode(), false, 0, false);
 
                 image = imgGetter.getDrawable(url);
                 Message message = handler.obtainMessage(0, image);
