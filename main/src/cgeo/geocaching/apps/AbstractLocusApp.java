@@ -123,7 +123,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
         if (cache.getHidden() != null) {
             pg.hidden = ISO8601DATE.format(cache.getHidden().getTime());
         }
-        int locusId = toLocusId(CacheType.getById(cache.getType()));
+        int locusId = toLocusId(cache.getCacheType());
         if (locusId != NO_LOCUS_ID) {
             pg.type = locusId;
         }
