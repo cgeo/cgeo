@@ -1,12 +1,9 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCacheWrap;
 import cgeo.geocaching.cgCoord;
-import cgeo.geocaching.cgSearch;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.GeopointParser;
@@ -16,8 +13,12 @@ import org.apache.commons.lang3.StringUtils;
 import android.os.Handler;
 import android.util.Log;
 
-import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.regex.Matcher;
@@ -38,6 +39,8 @@ public final class LocParser extends FileParser {
     private static final Pattern patternContainer = Pattern
             .compile("<container>([^<]+)</container>");
     private static final Pattern patternName = Pattern.compile("CDATA\\[([^\\]]+)\\]");
+
+    private int listId;
 
     public static void parseLoc(final cgCacheWrap caches,
             final String fileContent) {
@@ -64,7 +67,7 @@ public final class LocParser extends FileParser {
         }
     }
 
-    public static Map<String, cgCoord> parseCoordinates(
+    static Map<String, cgCoord> parseCoordinates(
             final String fileContent) {
         final Map<String, cgCoord> coords = new HashMap<String, cgCoord>();
         if (StringUtils.isBlank(fileContent)) {
@@ -139,36 +142,31 @@ public final class LocParser extends FileParser {
         return coords;
     }
 
-    public static cgSearch parseLoc(File file, int listId,
-            Handler handler) {
-        final cgSearch search = new cgSearch();
+    public LocParser(int listId) {
+        this.listId = listId;
+    }
 
-        try {
-            final Map<String, cgCoord> coords = parseCoordinates(readFile(file).toString());
-            final cgCacheWrap caches = new cgCacheWrap();
-            for (Entry<String, cgCoord> entry : coords.entrySet()) {
-                cgCoord coord = entry.getValue();
-                if (StringUtils.isBlank(coord.geocode) || StringUtils.isBlank(coord.name)) {
-                    continue;
-                }
-                cgCache cache = new cgCache();
-                copyCoordToCache(coord, cache);
-                caches.cacheList.add(cache);
-
-                fixCache(cache);
-                cache.type = CacheType.UNKNOWN.id; // type is not given in the LOC file
-                cache.reason = listId;
-                cache.detailed = true;
-
-                cgeoapplication.getInstance().addCacheToSearch(search, cache);
+    @Override
+    public Collection<cgCache> parse(InputStream stream, Handler progressHandler) throws IOException, ParserException {
+        // TODO: progress reporting happens during reading stream only, not during parsing
+        String streamContent = readStream(stream, progressHandler).toString();
+        final Map<String, cgCoord> coords = parseCoordinates(streamContent);
+        final List<cgCache> caches = new ArrayList<cgCache>();
+        for (Entry<String, cgCoord> entry : coords.entrySet()) {
+            cgCoord coord = entry.getValue();
+            if (StringUtils.isBlank(coord.geocode) || StringUtils.isBlank(coord.name)) {
+                continue;
             }
-            caches.totalCnt = caches.cacheList.size();
-            showCountMessage(handler, R.string.gpx_import_loading_stored, search.getCount());
-            Log.i(Settings.tag, "Caches found in .loc file: " + caches.totalCnt);
-        } catch (Exception e) {
-            Log.e(Settings.tag, "LocParser.parseLoc: " + e.toString());
-        }
+            cgCache cache = new cgCache();
+            copyCoordToCache(coord, cache);
+            caches.add(cache);
 
-        return search;
+            fixCache(cache);
+            cache.type = CacheType.UNKNOWN.id; // type is not given in the LOC file
+            cache.reason = listId;
+            cache.detailed = true;
+        }
+        Log.i(Settings.tag, "Caches found in .loc file: " + caches.size());
+        return caches;
     }
 }
