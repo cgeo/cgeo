@@ -731,6 +731,14 @@ public class cgeocaches extends AbstractListActivity {
         if (loadCachesHandler != null && search != null) {
             loadCachesHandler.sendEmptyMessage(0);
         }
+
+        // refresh standard list if it has changed (new caches downloaded)
+        if (type == CacheListType.OFFLINE && listId == cgList.STANDARD_LIST_ID && search != null) {
+            cgSearch newSearch = base.searchByOffline(coords, cachetype, listId);
+            if (newSearch != null && newSearch.totalCnt != search.totalCnt) {
+                refreshCurrentList();
+            }
+        }
     }
 
     @Override
@@ -1790,7 +1798,7 @@ public class cgeocaches extends AbstractListActivity {
 
         private Handler handler = null;
         private Geopoint coords = null;
-        private int listId = 1;
+        private int listId = cgList.STANDARD_LIST_ID;
 
         public geocachesLoadByOffline(final Handler handlerIn, final Geopoint coordsIn, int listIdIn) {
             handler = handlerIn;
@@ -1803,7 +1811,7 @@ public class cgeocaches extends AbstractListActivity {
             if (coords != null) {
                 search = base.searchByOffline(coords, Settings.getCacheType(), listId);
             } else {
-                search = base.searchByOffline(null, null, 1);
+                search = base.searchByOffline(null, null, cgList.STANDARD_LIST_ID);
             }
             handler.sendMessage(new Message());
         }
