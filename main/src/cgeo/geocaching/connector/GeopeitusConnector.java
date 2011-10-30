@@ -13,7 +13,7 @@ public class GeopeitusConnector extends AbstractConnector implements IConnector 
 
     @Override
     public String getCacheUrl(final cgCache cache) {
-        return "http://" + getHost() + "/aare/" + StringUtils.stripStart(cache.geocode.substring(2), "0");
+        return "http://" + getHost() + "/aare/" + StringUtils.stripStart(cache.getGeocode().substring(2), "0");
     }
 
     @Override

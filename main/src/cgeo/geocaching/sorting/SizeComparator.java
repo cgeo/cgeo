@@ -10,11 +10,11 @@ public class SizeComparator extends AbstractCacheComparator {
 
     @Override
     protected boolean canCompare(cgCache cache1, cgCache cache2) {
-        return cache1.size != null && cache2.size != null;
+        return cache1.getSize() != null && cache2.getSize() != null;
     }
 
     @Override
     protected int compareCaches(cgCache cache1, cgCache cache2) {
-        return cache2.size.comparable - cache1.size.comparable;
+        return cache2.getSize().comparable - cache1.getSize().comparable;
     }
 }

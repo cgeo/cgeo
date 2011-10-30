@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class cgTrackable {
+public class cgTrackable implements ILogable {
     static final public int SPOTTED_UNSET = 0;
     static final public int SPOTTED_CACHE = 1;
     static final public int SPOTTED_USER = 2;
@@ -194,4 +194,5 @@ public class cgTrackable {
     public void setLogs(List<cgLog> logs) {
         this.logs = logs;
     }
+
 }

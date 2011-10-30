@@ -34,10 +34,10 @@ class StreetviewApp extends AbstractNavigationApp implements NavigationApp {
         }
 
         try {
-            if (cache != null && cache.coords != null) {
-                startActivity(activity, cache.coords);
-            } else if (waypoint != null && waypoint.coords != null) {
-                startActivity(activity, waypoint.coords);
+            if (cache != null && cache.getCoords() != null) {
+                startActivity(activity, cache.getCoords());
+            } else if (waypoint != null && waypoint.getCoords() != null) {
+                startActivity(activity, waypoint.getCoords());
             } else if (coords != null) {
                 startActivity(activity, coords);
             }

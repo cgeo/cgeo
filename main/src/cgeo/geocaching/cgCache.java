@@ -42,60 +42,57 @@ public class cgCache implements ICache {
     final public static int LOADOFFLINELOG = 1 << 5;
     final public static int LOADALL = LOADATTRIBUTES | LOADWAYPOINTS | LOADSPOILERS | LOADLOGS | LOADINVENTORY | LOADOFFLINELOG;
 
-    public Long updated = null;
-    public Long detailedUpdate = null;
-    public Long visitedDate = null;
-    public Integer reason = 0;
-    public Boolean detailed = false;
-    /**
-     * Code of the cache like GCABCD
-     */
-    public String geocode = "";
-    public String cacheId = "";
-    public String guid = "";
-    public String type = "";
-    public String name = "";
-    public Spannable nameSp = null;
-    public String owner = "";
-    public String ownerReal = "";
-    public Date hidden = null;
-    public String hint = "";
-    public CacheSize size = null;
-    public Float difficulty = Float.valueOf(0);
-    public Float terrain = Float.valueOf(0);
-    public Float direction = null;
-    public Float distance = null;
-    public String latlon = "";
-    public String location = "";
-    public Geopoint coords = null;
-    public boolean reliableLatLon = false;
-    public Double elevation = null;
-    public String personalNote = null;
-    public String shortdesc = "";
+    private Long updated = null;
+    private Long detailedUpdate = null;
+    private Long visitedDate = null;
+    private Integer reason = 0;
+    private Boolean detailed = false;
+    private String geocode = "";
+    private String cacheId = "";
+    private String guid = "";
+    private CacheType cacheType = null;
+    private String name = "";
+    private Spannable nameSp = null;
+    private String owner = "";
+    private String ownerReal = "";
+    private Date hidden = null;
+    private String hint = "";
+    private CacheSize size = null;
+    private Float difficulty = Float.valueOf(0);
+    private Float terrain = Float.valueOf(0);
+    private Float direction = null;
+    private Float distance = null;
+    private String latlon = "";
+    private String location = "";
+    private Geopoint coords = null;
+    private boolean reliableLatLon = false;
+    private Double elevation = null;
+    private String personalNote = null;
+    private String shortdesc = "";
     private String description = null;
-    public boolean disabled = false;
-    public boolean archived = false;
-    public boolean members = false;
-    public boolean found = false;
-    public boolean favourite = false;
-    public boolean own = false;
-    public Integer favouriteCnt = null;
-    public Float rating = null;
-    public Integer votes = null;
-    public Float myVote = null;
-    public int inventoryItems = 0;
-    public boolean onWatchlist = false;
-    public List<String> attributes = null;
-    public List<cgWaypoint> waypoints = null;
-    public ArrayList<cgImage> spoilers = null;
-    public List<cgLog> logs = null;
-    public List<cgTrackable> inventory = null;
-    public Map<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
-    public boolean logOffline = false;
+    private boolean disabled = false;
+    private boolean archived = false;
+    private boolean members = false;
+    private boolean found = false;
+    private boolean favourite = false;
+    private boolean own = false;
+    private Integer favouriteCnt = null;
+    private Float rating = null;
+    private Integer votes = null;
+    private Float myVote = null;
+    private int inventoryItems = 0;
+    private boolean onWatchlist = false;
+    private List<String> attributes = null;
+    private List<cgWaypoint> waypoints = null;
+    private ArrayList<cgImage> spoilers = null;
+    private List<cgLog> logs = null;
+    private List<cgTrackable> inventory = null;
+    private Map<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
+    private boolean logOffline = false;
     // temporary values
-    public boolean statusChecked = false;
-    public boolean statusCheckedView = false;
-    public String directionImg = null;
+    private boolean statusChecked = false;
+    private boolean statusCheckedView = false;
+    private String directionImg = null;
     private String nameForSorting;
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
@@ -117,34 +114,34 @@ public class cgCache implements ICache {
         }
 
         if (visitedDate == null || visitedDate == 0) {
-            visitedDate = other.visitedDate;
+            visitedDate = other.getVisitedDate();
         }
         if (reason == null || reason == 0) {
             reason = other.reason;
         }
         if (StringUtils.isBlank(geocode)) {
-            geocode = other.geocode;
+            geocode = other.getGeocode();
         }
         if (StringUtils.isBlank(cacheId)) {
             cacheId = other.cacheId;
         }
         if (StringUtils.isBlank(guid)) {
-            guid = other.guid;
+            guid = other.getGuid();
         }
-        if (StringUtils.isBlank(type)) {
-            type = other.type;
+        if (null == cacheType) {
+            cacheType = other.getCacheType();
         }
         if (StringUtils.isBlank(name)) {
-            name = other.name;
+            name = other.getName();
         }
         if (StringUtils.isBlank(nameSp)) {
             nameSp = other.nameSp;
         }
         if (StringUtils.isBlank(owner)) {
-            owner = other.owner;
+            owner = other.getOwner();
         }
         if (StringUtils.isBlank(ownerReal)) {
-            ownerReal = other.ownerReal;
+            ownerReal = other.getOwnerReal();
         }
         if (hidden == null) {
             hidden = other.hidden;
@@ -156,16 +153,16 @@ public class cgCache implements ICache {
             size = other.size;
         }
         if (difficulty == null || difficulty == 0) {
-            difficulty = other.difficulty;
+            difficulty = other.getDifficulty();
         }
         if (terrain == null || terrain == 0) {
-            terrain = other.terrain;
+            terrain = other.getTerrain();
         }
         if (direction == null) {
             direction = other.direction;
         }
         if (distance == null) {
-            distance = other.distance;
+            distance = other.getDistance();
         }
         if (StringUtils.isBlank(latlon)) {
             latlon = other.latlon;
@@ -174,7 +171,7 @@ public class cgCache implements ICache {
             location = other.location;
         }
         if (coords == null) {
-            coords = other.coords;
+            coords = other.getCoords();
         }
         if (elevation == null) {
             elevation = other.elevation;
@@ -183,31 +180,31 @@ public class cgCache implements ICache {
             personalNote = other.personalNote;
         }
         if (StringUtils.isBlank(shortdesc)) {
-            shortdesc = other.shortdesc;
+            shortdesc = other.getShortdesc();
         }
         if (StringUtils.isBlank(description)) {
             description = other.description;
         }
         if (favouriteCnt == null) {
-            favouriteCnt = other.favouriteCnt;
+            favouriteCnt = other.getFavouriteCnt();
         }
         if (rating == null) {
-            rating = other.rating;
+            rating = other.getRating();
         }
         if (votes == null) {
             votes = other.votes;
         }
         if (myVote == null) {
-            myVote = other.myVote;
+            myVote = other.getMyVote();
         }
         if (attributes == null) {
-            attributes = other.attributes;
+            attributes = other.getAttributes();
         }
         if (waypoints == null) {
-            waypoints = other.waypoints;
+            waypoints = other.getWaypoints();
         }
         else {
-            cgWaypoint.mergeWayPoints(waypoints, other.waypoints);
+            cgWaypoint.mergeWayPoints(waypoints, other.getWaypoints());
         }
         if (spoilers == null) {
             spoilers = other.spoilers;
@@ -276,8 +273,8 @@ public class cgCache implements ICache {
     }
 
     public boolean isEventCache() {
-        return CacheType.EVENT.id.equalsIgnoreCase(type) || CacheType.MEGA_EVENT.id.equalsIgnoreCase(type)
-                || CacheType.CITO.id.equalsIgnoreCase(type) || CacheType.LOSTANDFOUND.id.equalsIgnoreCase(type);
+        return CacheType.EVENT == cacheType || CacheType.MEGA_EVENT == cacheType
+                || CacheType.CITO == cacheType || CacheType.LOSTANDFOUND == cacheType;
     }
 
     public boolean logVisit(IAbstractActivity fromActivity) {
@@ -332,7 +329,7 @@ public class cgCache implements ICache {
             if (isOwner) {
                 types.add(cgBase.LOG_ANNOUNCEMENT);
             }
-        } else if (CacheType.WEBCAM.id.equals(type)) {
+        } else if (CacheType.WEBCAM == cacheType) {
             types.add(cgBase.LOG_WEBCAM_PHOTO_TAKEN);
             types.add(cgBase.LOG_DIDNT_FIND_IT);
             types.add(cgBase.LOG_NOTE);
@@ -418,9 +415,17 @@ public class cgCache implements ICache {
         return terrain;
     }
 
-    @Override
+    /**
+     * @deprecated Use getCacheType() instead
+     * @return cache type as an id
+     */
+    @Deprecated
     public String getType() {
-        return type;
+        if (null != cacheType) {
+            return cacheType.id;
+        } else {
+            return "";
+        }
     }
 
     @Override
@@ -561,7 +566,7 @@ public class cgCache implements ICache {
     }
 
     @Override
-    public List<cgImage> getSpoilers() {
+    public ArrayList<cgImage> getSpoilers() {
         return spoilers;
     }
 
@@ -590,11 +595,330 @@ public class cgCache implements ICache {
     }
 
     public boolean isVirtual() {
-        return CacheType.VIRTUAL.id.equalsIgnoreCase(type) || CacheType.WEBCAM.id.equalsIgnoreCase(type)
-                || CacheType.EARTH.id.equalsIgnoreCase(type);
+        return CacheType.VIRTUAL == cacheType || CacheType.WEBCAM == cacheType
+                || CacheType.EARTH == cacheType;
     }
 
     public boolean showSize() {
         return !((isEventCache() || isVirtual()) && size == CacheSize.NOT_CHOSEN);
     }
+
+    public Long getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Long updated) {
+        this.updated = updated;
+    }
+
+    public Long getDetailedUpdate() {
+        return detailedUpdate;
+    }
+
+    public void setDetailedUpdate(Long detailedUpdate) {
+        this.detailedUpdate = detailedUpdate;
+    }
+
+    public Long getVisitedDate() {
+        return visitedDate;
+    }
+
+    public void setVisitedDate(Long visitedDate) {
+        this.visitedDate = visitedDate;
+    }
+
+    public Integer getReason() {
+        return reason;
+    }
+
+    public void setReason(Integer reason) {
+        this.reason = reason;
+    }
+
+    public Boolean getDetailed() {
+        return detailed;
+    }
+
+    public void setDetailed(Boolean detailed) {
+        this.detailed = detailed;
+    }
+
+    public Spannable getNameSp() {
+        return nameSp;
+    }
+
+    public void setNameSp(Spannable nameSp) {
+        this.nameSp = nameSp;
+    }
+
+    public Date getHidden() {
+        return hidden;
+    }
+
+    public void setHidden(Date hidden) {
+        this.hidden = hidden;
+    }
+
+    public Float getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Float direction) {
+        this.direction = direction;
+    }
+
+    public Float getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Float distance) {
+        this.distance = distance;
+    }
+
+    public String getLatlon() {
+        return latlon;
+    }
+
+    public void setLatlon(String latlon) {
+        this.latlon = latlon;
+    }
+
+    public Geopoint getCoords() {
+        return coords;
+    }
+
+    public void setCoords(Geopoint coords) {
+        this.coords = coords;
+    }
+
+    public boolean isReliableLatLon() {
+        return reliableLatLon;
+    }
+
+    public void setReliableLatLon(boolean reliableLatLon) {
+        this.reliableLatLon = reliableLatLon;
+    }
+
+    public Double getElevation() {
+        return elevation;
+    }
+
+    public void setElevation(Double elevation) {
+        this.elevation = elevation;
+    }
+
+    public String getShortdesc() {
+        return shortdesc;
+    }
+
+    public void setShortdesc(String shortdesc) {
+        this.shortdesc = shortdesc;
+    }
+
+    public boolean isMembers() {
+        return members;
+    }
+
+    public void setMembers(boolean members) {
+        this.members = members;
+    }
+
+    public boolean isFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        this.favourite = favourite;
+    }
+
+    public Integer getFavouriteCnt() {
+        return favouriteCnt;
+    }
+
+    public void setFavouriteCnt(Integer favouriteCnt) {
+        this.favouriteCnt = favouriteCnt;
+    }
+
+    public Float getRating() {
+        return rating;
+    }
+
+    public void setRating(Float rating) {
+        this.rating = rating;
+    }
+
+    public Integer getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Integer votes) {
+        this.votes = votes;
+    }
+
+    public Float getMyVote() {
+        return myVote;
+    }
+
+    public void setMyVote(Float myVote) {
+        this.myVote = myVote;
+    }
+
+    public int getInventoryItems() {
+        return inventoryItems;
+    }
+
+    public void setInventoryItems(int inventoryItems) {
+        this.inventoryItems = inventoryItems;
+    }
+
+    public boolean isOnWatchlist() {
+        return onWatchlist;
+    }
+
+    public void setOnWatchlist(boolean onWatchlist) {
+        this.onWatchlist = onWatchlist;
+    }
+
+    public List<cgWaypoint> getWaypoints() {
+        return waypoints;
+    }
+
+    public void setWaypoints(List<cgWaypoint> waypoints) {
+        this.waypoints = waypoints;
+    }
+
+    public List<cgLog> getLogs() {
+        return logs;
+    }
+
+    public void setLogs(List<cgLog> logs) {
+        this.logs = logs;
+    }
+
+    public boolean isLogOffline() {
+        return logOffline;
+    }
+
+    public void setLogOffline(boolean logOffline) {
+        this.logOffline = logOffline;
+    }
+
+    public boolean isStatusChecked() {
+        return statusChecked;
+    }
+
+    public void setStatusChecked(boolean statusChecked) {
+        this.statusChecked = statusChecked;
+    }
+
+    public boolean isStatusCheckedView() {
+        return statusCheckedView;
+    }
+
+    public void setStatusCheckedView(boolean statusCheckedView) {
+        this.statusCheckedView = statusCheckedView;
+    }
+
+    public String getDirectionImg() {
+        return directionImg;
+    }
+
+    public void setDirectionImg(String directionImg) {
+        this.directionImg = directionImg;
+    }
+
+    public void setGeocode(String geocode) {
+        this.geocode = geocode;
+    }
+
+    public void setCacheId(String cacheId) {
+        this.cacheId = cacheId;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public void setOwnerReal(String ownerReal) {
+        this.ownerReal = ownerReal;
+    }
+
+    public void setHint(String hint) {
+        this.hint = hint;
+    }
+
+    public void setSize(CacheSize size) {
+        this.size = size;
+    }
+
+    public void setDifficulty(Float difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public void setTerrain(Float terrain) {
+        this.terrain = terrain;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setPersonalNote(String personalNote) {
+        this.personalNote = personalNote;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+    }
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
+    }
+
+    public void setFound(boolean found) {
+        this.found = found;
+    }
+
+    public void setOwn(boolean own) {
+        this.own = own;
+    }
+
+    public void setAttributes(List<String> attributes) {
+        this.attributes = attributes;
+    }
+
+    public void setSpoilers(ArrayList<cgImage> spoilers) {
+        this.spoilers = spoilers;
+    }
+
+    public void setInventory(List<cgTrackable> inventory) {
+        this.inventory = inventory;
+    }
+
+    public void setLogCounts(Map<Integer, Integer> logCounts) {
+        this.logCounts = logCounts;
+    }
+
+    public void setNameForSorting(String nameForSorting) {
+        this.nameForSorting = nameForSorting;
+    }
+
+    @Override
+    public CacheType getCacheType() {
+        return cacheType;
+    }
+
+    public void setCacheType(CacheType cacheType) {
+        this.cacheType = cacheType;
+    }
+
 }

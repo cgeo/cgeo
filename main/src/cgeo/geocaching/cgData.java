@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -1199,102 +1200,102 @@ public class cgData {
 
         ContentValues values = new ContentValues();
 
-        if (cache.updated == null) {
+        if (cache.getUpdated() == null) {
             values.put("updated", System.currentTimeMillis());
         } else {
-            values.put("updated", cache.updated);
+            values.put("updated", cache.getUpdated());
         }
-        values.put("reason", cache.reason);
-        values.put("detailed", cache.detailed ? 1 : 0);
-        values.put("detailedupdate", cache.detailedUpdate);
-        values.put("visiteddate", cache.visitedDate);
-        values.put("geocode", cache.geocode);
-        values.put("cacheid", cache.cacheId);
-        values.put("guid", cache.guid);
-        values.put("type", cache.type);
-        values.put("name", cache.name);
-        values.put("own", cache.own ? 1 : 0);
-        values.put("owner", cache.owner);
-        values.put("owner_real", cache.ownerReal);
-        if (cache.hidden == null) {
+        values.put("reason", cache.getReason());
+        values.put("detailed", cache.getDetailed() ? 1 : 0);
+        values.put("detailedupdate", cache.getDetailedUpdate());
+        values.put("visiteddate", cache.getVisitedDate());
+        values.put("geocode", cache.getGeocode());
+        values.put("cacheid", cache.getCacheId());
+        values.put("guid", cache.getGuid());
+        values.put("type", cache.getCacheType().id);
+        values.put("name", cache.getName());
+        values.put("own", cache.isOwn() ? 1 : 0);
+        values.put("owner", cache.getOwner());
+        values.put("owner_real", cache.getOwnerReal());
+        if (cache.getHidden() == null) {
             values.put("hidden", 0);
         } else {
-            values.put("hidden", cache.hidden.getTime());
+            values.put("hidden", cache.getHidden().getTime());
         }
-        values.put("hint", cache.hint);
-        values.put("size", cache.size == null ? "" : cache.size.id);
-        values.put("difficulty", cache.difficulty);
-        values.put("terrain", cache.terrain);
-        values.put("latlon", cache.latlon);
-        values.put("location", cache.location);
-        values.put("distance", cache.distance);
-        values.put("direction", cache.direction);
-        putCoords(values, cache.coords);
-        values.put("reliable_latlon", cache.reliableLatLon ? 1 : 0);
-        values.put("elevation", cache.elevation);
-        values.put("shortdesc", cache.shortdesc);
-        values.put("personal_note", cache.personalNote);
+        values.put("hint", cache.getHint());
+        values.put("size", cache.getSize() == null ? "" : cache.getSize().id);
+        values.put("difficulty", cache.getDifficulty());
+        values.put("terrain", cache.getTerrain());
+        values.put("latlon", cache.getLatlon());
+        values.put("location", cache.getLocation());
+        values.put("distance", cache.getDistance());
+        values.put("direction", cache.getDirection());
+        putCoords(values, cache.getCoords());
+        values.put("reliable_latlon", cache.isReliableLatLon() ? 1 : 0);
+        values.put("elevation", cache.getElevation());
+        values.put("shortdesc", cache.getShortdesc());
+        values.put("personal_note", cache.getPersonalNote());
         values.put("description", cache.getDescription());
-        values.put("favourite_cnt", cache.favouriteCnt);
-        values.put("rating", cache.rating);
-        values.put("votes", cache.votes);
-        values.put("myvote", cache.myVote);
-        values.put("disabled", cache.disabled ? 1 : 0);
-        values.put("archived", cache.archived ? 1 : 0);
-        values.put("members", cache.members ? 1 : 0);
-        values.put("found", cache.found ? 1 : 0);
-        values.put("favourite", cache.favourite ? 1 : 0);
-        values.put("inventoryunknown", cache.inventoryItems);
-        values.put("onWatchlist", cache.onWatchlist ? 1 : 0);
+        values.put("favourite_cnt", cache.getFavouriteCnt());
+        values.put("rating", cache.getRating());
+        values.put("votes", cache.getVotes());
+        values.put("myvote", cache.getMyVote());
+        values.put("disabled", cache.isDisabled() ? 1 : 0);
+        values.put("archived", cache.isArchived() ? 1 : 0);
+        values.put("members", cache.isMembers() ? 1 : 0);
+        values.put("found", cache.isFound() ? 1 : 0);
+        values.put("favourite", cache.isFavourite() ? 1 : 0);
+        values.put("inventoryunknown", cache.getInventoryItems());
+        values.put("onWatchlist", cache.isOnWatchlist() ? 1 : 0);
 
         boolean statusOk = true;
 
-        if (cache.attributes != null) {
-            if (!saveAttributes(cache.geocode, cache.attributes)) {
+        if (cache.getAttributes() != null) {
+            if (!saveAttributes(cache.getGeocode(), cache.getAttributes())) {
                 statusOk = false;
             }
         }
 
-        if (cache.waypoints != null) {
-            if (!saveWaypoints(cache.geocode, cache.waypoints, true)) {
+        if (cache.getWaypoints() != null) {
+            if (!saveWaypoints(cache.getGeocode(), cache.getWaypoints(), true)) {
                 statusOk = false;
             }
         }
 
-        if (cache.spoilers != null) {
-            if (!saveSpoilers(cache.geocode, cache.spoilers)) {
+        if (cache.getSpoilers() != null) {
+            if (!saveSpoilers(cache.getGeocode(), cache.getSpoilers())) {
                 statusOk = false;
             }
         }
 
-        if (cache.logs != null) {
-            if (!saveLogs(cache.geocode, cache.logs)) {
+        if (cache.getLogs() != null) {
+            if (!saveLogs(cache.getGeocode(), cache.getLogs())) {
                 statusOk = false;
             }
         }
 
-        if (MapUtils.isNotEmpty(cache.logCounts)) {
-            if (!saveLogCount(cache.geocode, cache.logCounts)) {
+        if (MapUtils.isNotEmpty(cache.getLogCounts())) {
+            if (!saveLogCount(cache.getGeocode(), cache.getLogCounts())) {
                 statusOk = false;
             }
         }
 
-        if (cache.inventory != null) {
-            if (!saveInventory(cache.geocode, cache.inventory)) {
+        if (cache.getInventory() != null) {
+            if (!saveInventory(cache.getGeocode(), cache.getInventory())) {
                 statusOk = false;
             }
         }
 
         if (!statusOk) {
-            cache.detailed = false;
-            cache.detailedUpdate = 0L;
+            cache.setDetailed(false);
+            cache.setDetailedUpdate(0L);
         }
 
         init();
 
         //try to update record else insert fresh..
         try {
-            int rows = databaseRW.update(dbTableCaches, values, "geocode = ?", new String[] { cache.geocode });
+            int rows = databaseRW.update(dbTableCaches, values, "geocode = ?", new String[] { cache.getGeocode() });
             if (rows > 0) {
                 values = null;
                 return true;
@@ -1414,13 +1415,13 @@ public class cgData {
                     values.clear();
                     values.put("geocode", geocode);
                     values.put("updated", timeStamp);
-                    values.put("type", oneWaypoint.type != null ? oneWaypoint.type.id : null);
+                    values.put("type", oneWaypoint.getWaypointType() != null ? oneWaypoint.getWaypointType().id : null);
                     values.put("prefix", oneWaypoint.getPrefix());
-                    values.put("lookup", oneWaypoint.lookup);
-                    values.put("name", oneWaypoint.name);
-                    values.put("latlon", oneWaypoint.latlon);
-                    putCoords(values, oneWaypoint.coords);
-                    values.put("note", oneWaypoint.note);
+                    values.put("lookup", oneWaypoint.getLookup());
+                    values.put("name", oneWaypoint.getName());
+                    values.put("latlon", oneWaypoint.getLatlon());
+                    putCoords(values, oneWaypoint.getCoords());
+                    values.put("note", oneWaypoint.getNote());
 
                     databaseRW.insert(dbTableWaypoints, null, values);
                 }
@@ -1500,13 +1501,13 @@ public class cgData {
             ContentValues values = new ContentValues();
             values.put("geocode", geocode);
             values.put("updated", System.currentTimeMillis());
-            values.put("type", waypoint.type != null ? waypoint.type.id : null);
+            values.put("type", waypoint.getWaypointType() != null ? waypoint.getWaypointType().id : null);
             values.put("prefix", waypoint.getPrefix());
-            values.put("lookup", waypoint.lookup);
-            values.put("name", waypoint.name);
-            values.put("latlon", waypoint.latlon);
-            putCoords(values, waypoint.coords);
-            values.put("note", waypoint.note);
+            values.put("lookup", waypoint.getLookup());
+            values.put("name", waypoint.getName());
+            values.put("latlon", waypoint.getLatlon());
+            putCoords(values, waypoint.getCoords());
+            values.put("note", waypoint.getNote());
 
             if (id <= 0) {
                 databaseRW.insert(dbTableWaypoints, null, values);
@@ -1925,76 +1926,76 @@ public class cgData {
                         cgCache cache = createCacheFromDatabaseContent(cursor);
 
                         // FIXME: in the following code (and similar blocks below), the
-                        // cache.attributes entity probably does not need to be preserved,
+                        // cache.getAttributes() entity probably does not need to be preserved,
                         // and the resolution of the "if" statement could be simply
-                        // cache.attributes = attributes
+                        // cache.getAttributes() = attributes
                         if ((loadFlags & cgCache.LOADATTRIBUTES) != 0) {
-                            final List<String> attributes = loadAttributes(cache.geocode);
+                            final List<String> attributes = loadAttributes(cache.getGeocode());
                             if (CollectionUtils.isNotEmpty(attributes)) {
-                                if (cache.attributes == null) {
-                                    cache.attributes = new ArrayList<String>();
+                                if (cache.getAttributes() == null) {
+                                    cache.setAttributes(new ArrayList<String>());
                                 } else {
-                                    cache.attributes.clear();
+                                    cache.getAttributes().clear();
                                 }
-                                cache.attributes.addAll(attributes);
+                                cache.getAttributes().addAll(attributes);
                             }
                         }
 
                         if ((loadFlags & cgCache.LOADWAYPOINTS) != 0) {
-                            final List<cgWaypoint> waypoints = loadWaypoints(cache.geocode);
+                            final List<cgWaypoint> waypoints = loadWaypoints(cache.getGeocode());
                             if (CollectionUtils.isNotEmpty(waypoints)) {
-                                if (cache.waypoints == null) {
-                                    cache.waypoints = new ArrayList<cgWaypoint>();
+                                if (cache.getWaypoints() == null) {
+                                    cache.setWaypoints(new ArrayList<cgWaypoint>());
                                 } else {
-                                    cache.waypoints.clear();
+                                    cache.getWaypoints().clear();
                                 }
-                                cache.waypoints.addAll(waypoints);
+                                cache.getWaypoints().addAll(waypoints);
                             }
                         }
 
                         if ((loadFlags & cgCache.LOADSPOILERS) != 0) {
-                            final List<cgImage> spoilers = loadSpoilers(cache.geocode);
+                            final List<cgImage> spoilers = loadSpoilers(cache.getGeocode());
                             if (CollectionUtils.isNotEmpty(spoilers)) {
-                                if (cache.spoilers == null) {
-                                    cache.spoilers = new ArrayList<cgImage>();
+                                if (cache.getSpoilers() == null) {
+                                    cache.setSpoilers(new ArrayList<cgImage>());
                                 } else {
-                                    cache.spoilers.clear();
+                                    cache.getSpoilers().clear();
                                 }
-                                cache.spoilers.addAll(spoilers);
+                                cache.getSpoilers().addAll(spoilers);
                             }
                         }
 
                         if ((loadFlags & cgCache.LOADLOGS) != 0) {
-                            final List<cgLog> logs = loadLogs(cache.geocode);
+                            final List<cgLog> logs = loadLogs(cache.getGeocode());
                             if (CollectionUtils.isNotEmpty(logs)) {
-                                if (cache.logs == null) {
-                                    cache.logs = new ArrayList<cgLog>();
+                                if (cache.getLogs() == null) {
+                                    cache.setLogs(new ArrayList<cgLog>());
                                 } else {
-                                    cache.logs.clear();
+                                    cache.getLogs().clear();
                                 }
-                                cache.logs.addAll(logs);
+                                cache.getLogs().addAll(logs);
                             }
-                            final Map<Integer, Integer> logCounts = loadLogCounts(cache.geocode);
+                            final Map<Integer, Integer> logCounts = loadLogCounts(cache.getGeocode());
                             if (MapUtils.isNotEmpty(logCounts)) {
-                                cache.logCounts.clear();
-                                cache.logCounts.putAll(logCounts);
+                                cache.getLogCounts().clear();
+                                cache.getLogCounts().putAll(logCounts);
                             }
                         }
 
                         if ((loadFlags & cgCache.LOADINVENTORY) != 0) {
-                            final List<cgTrackable> inventory = loadInventory(cache.geocode);
+                            final List<cgTrackable> inventory = loadInventory(cache.getGeocode());
                             if (CollectionUtils.isNotEmpty(inventory)) {
-                                if (cache.inventory == null) {
-                                    cache.inventory = new ArrayList<cgTrackable>();
+                                if (cache.getInventory() == null) {
+                                    cache.setInventory(new ArrayList<cgTrackable>());
                                 } else {
-                                    cache.inventory.clear();
+                                    cache.getInventory().clear();
                                 }
-                                cache.inventory.addAll(inventory);
+                                cache.getInventory().addAll(inventory);
                             }
                         }
 
                         if ((loadFlags & cgCache.LOADOFFLINELOG) != 0) {
-                            cache.logOffline = hasLogOffline(cache.geocode);
+                            cache.setLogOffline(hasLogOffline(cache.getGeocode()));
                         }
 
                         caches.add(cache);
@@ -2067,60 +2068,60 @@ public class cgData {
             cacheColumnIndex[36] = cursor.getColumnIndex("reliable_latlon");
         }
 
-        cache.updated = cursor.getLong(cacheColumnIndex[0]);
-        cache.reason = cursor.getInt(cacheColumnIndex[1]);
-        cache.detailed = cursor.getInt(cacheColumnIndex[2]) == 1;
-        cache.detailedUpdate = cursor.getLong(cacheColumnIndex[3]);
-        cache.visitedDate = cursor.getLong(cacheColumnIndex[4]);
-        cache.geocode = cursor.getString(cacheColumnIndex[5]);
-        cache.cacheId = cursor.getString(cacheColumnIndex[6]);
-        cache.guid = cursor.getString(cacheColumnIndex[7]);
-        cache.type = cursor.getString(cacheColumnIndex[8]);
-        cache.name = cursor.getString(cacheColumnIndex[9]);
-        cache.own = cursor.getInt(cacheColumnIndex[10]) == 1;
-        cache.owner = cursor.getString(cacheColumnIndex[11]);
-        cache.ownerReal = cursor.getString(cacheColumnIndex[12]);
-        cache.hidden = new Date(cursor.getLong(cacheColumnIndex[13]));
-        cache.hint = cursor.getString(cacheColumnIndex[14]);
-        cache.size = CacheSize.FIND_BY_ID.get(cursor.getString(cacheColumnIndex[15]));
-        cache.difficulty = cursor.getFloat(cacheColumnIndex[16]);
+        cache.setUpdated(cursor.getLong(cacheColumnIndex[0]));
+        cache.setReason(cursor.getInt(cacheColumnIndex[1]));
+        cache.setDetailed(cursor.getInt(cacheColumnIndex[2]) == 1);
+        cache.setDetailedUpdate(cursor.getLong(cacheColumnIndex[3]));
+        cache.setVisitedDate(cursor.getLong(cacheColumnIndex[4]));
+        cache.setGeocode(cursor.getString(cacheColumnIndex[5]));
+        cache.setCacheId(cursor.getString(cacheColumnIndex[6]));
+        cache.setGuid(cursor.getString(cacheColumnIndex[7]));
+        cache.setCacheType(CacheType.getById(cursor.getString(cacheColumnIndex[8])));
+        cache.setName(cursor.getString(cacheColumnIndex[9]));
+        cache.setOwn(cursor.getInt(cacheColumnIndex[10]) == 1);
+        cache.setOwner(cursor.getString(cacheColumnIndex[11]));
+        cache.setOwnerReal(cursor.getString(cacheColumnIndex[12]));
+        cache.setHidden(new Date(cursor.getLong(cacheColumnIndex[13])));
+        cache.setHint(cursor.getString(cacheColumnIndex[14]));
+        cache.setSize(CacheSize.FIND_BY_ID.get(cursor.getString(cacheColumnIndex[15])));
+        cache.setDifficulty(cursor.getFloat(cacheColumnIndex[16]));
         index = cacheColumnIndex[17];
         if (cursor.isNull(index)) {
-            cache.direction = null;
+            cache.setDirection(null);
         } else {
-            cache.direction = cursor.getFloat(index);
+            cache.setDirection(cursor.getFloat(index));
         }
         index = cacheColumnIndex[18];
         if (cursor.isNull(index)) {
-            cache.distance = null;
+            cache.setDistance(null);
         } else {
-            cache.distance = cursor.getFloat(index);
+            cache.setDistance(cursor.getFloat(index));
         }
-        cache.terrain = cursor.getFloat(cacheColumnIndex[19]);
-        cache.latlon = cursor.getString(cacheColumnIndex[20]);
-        cache.location = cursor.getString(cacheColumnIndex[21]);
-        cache.coords = getCoords(cursor);
+        cache.setTerrain(cursor.getFloat(cacheColumnIndex[19]));
+        cache.setLatlon(cursor.getString(cacheColumnIndex[20]));
+        cache.setLocation(cursor.getString(cacheColumnIndex[21]));
+        cache.setCoords(getCoords(cursor));
         index = cacheColumnIndex[22];
         if (cursor.isNull(index)) {
-            cache.elevation = null;
+            cache.setElevation(null);
         } else {
-            cache.elevation = cursor.getDouble(index);
+            cache.setElevation(cursor.getDouble(index));
         }
-        cache.personalNote = cursor.getString(cacheColumnIndex[23]);
-        cache.shortdesc = cursor.getString(cacheColumnIndex[24]);
+        cache.setPersonalNote(cursor.getString(cacheColumnIndex[23]));
+        cache.setShortdesc(cursor.getString(cacheColumnIndex[24]));
         // do not set cache.description !
-        cache.favouriteCnt = cursor.getInt(cacheColumnIndex[25]);
-        cache.rating = cursor.getFloat(cacheColumnIndex[26]);
-        cache.votes = cursor.getInt(cacheColumnIndex[27]);
-        cache.myVote = cursor.getFloat(cacheColumnIndex[28]);
-        cache.disabled = cursor.getInt(cacheColumnIndex[29]) == 1;
-        cache.archived = cursor.getInt(cacheColumnIndex[30]) == 1;
-        cache.members = cursor.getInt(cacheColumnIndex[31]) == 1;
-        cache.found = cursor.getInt(cacheColumnIndex[32]) == 1;
-        cache.favourite = cursor.getInt(cacheColumnIndex[33]) == 1;
-        cache.inventoryItems = cursor.getInt(cacheColumnIndex[34]);
-        cache.onWatchlist = cursor.getInt(cacheColumnIndex[35]) == 1;
-        cache.reliableLatLon = cursor.getInt(cacheColumnIndex[36]) > 0;
+        cache.setFavouriteCnt(cursor.getInt(cacheColumnIndex[25]));
+        cache.setRating(cursor.getFloat(cacheColumnIndex[26]));
+        cache.setVotes(cursor.getInt(cacheColumnIndex[27]));
+        cache.setMyVote(cursor.getFloat(cacheColumnIndex[28]));
+        cache.setDisabled(cursor.getInt(cacheColumnIndex[29]) == 1);
+        cache.setArchived(cursor.getInt(cacheColumnIndex[30]) == 1);
+        cache.setMembers(cursor.getInt(cacheColumnIndex[31]) == 1);
+        cache.setFound(cursor.getInt(cacheColumnIndex[32]) == 1);
+        cache.setFavourite(cursor.getInt(cacheColumnIndex[33]) == 1);
+        cache.setInventoryItems(cursor.getInt(cacheColumnIndex[34]));
+        cache.setOnWatchlist(cursor.getInt(cacheColumnIndex[35]) == 1);
+        cache.setReliableLatLon(cursor.getInt(cacheColumnIndex[36]) > 0);
         return cache;
     }
 
@@ -2231,15 +2232,15 @@ public class cgData {
     private static cgWaypoint createWaypointFromDatabaseContent(Cursor cursor) {
         cgWaypoint waypoint = new cgWaypoint();
 
-        waypoint.id = cursor.getInt(cursor.getColumnIndex("_id"));
-        waypoint.geocode = cursor.getString(cursor.getColumnIndex("geocode"));
-        waypoint.type = WaypointType.FIND_BY_ID.get(cursor.getString(cursor.getColumnIndex("type")));
+        waypoint.setId(cursor.getInt(cursor.getColumnIndex("_id")));
+        waypoint.setGeocode(cursor.getString(cursor.getColumnIndex("geocode")));
+        waypoint.setWaypointType(WaypointType.FIND_BY_ID.get(cursor.getString(cursor.getColumnIndex("type"))));
         waypoint.setPrefix(cursor.getString(cursor.getColumnIndex("prefix")));
-        waypoint.lookup = cursor.getString(cursor.getColumnIndex("lookup"));
-        waypoint.name = cursor.getString(cursor.getColumnIndex("name"));
-        waypoint.latlon = cursor.getString(cursor.getColumnIndex("latlon"));
-        waypoint.coords = getCoords(cursor);
-        waypoint.note = cursor.getString(cursor.getColumnIndex("note"));
+        waypoint.setLookup(cursor.getString(cursor.getColumnIndex("lookup")));
+        waypoint.setName(cursor.getString(cursor.getColumnIndex("name")));
+        waypoint.setLatlon(cursor.getString(cursor.getColumnIndex("latlon")));
+        waypoint.setCoords(getCoords(cursor));
+        waypoint.setNote(cursor.getString(cursor.getColumnIndex("note")));
 
         return waypoint;
     }

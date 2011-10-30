@@ -50,8 +50,8 @@ public class GC1ZXX2 extends MockedCache {
     }
 
     @Override
-    public String getType() {
-        return CacheType.TRADITIONAL.id;
+    public CacheType getCacheType() {
+        return CacheType.TRADITIONAL;
     }
 
     @Override

@@ -13,7 +13,7 @@ public class GeocachingAustraliaConnector extends AbstractConnector implements I
 
     @Override
     public String getCacheUrl(final cgCache cache) {
-        return "http://" + getHost() + "/cache/" + cache.geocode;
+        return "http://" + getHost() + "/cache/" + cache.getGeocode();
     }
 
     @Override

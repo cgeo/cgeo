@@ -233,10 +233,10 @@ public class cgeovisit extends cgLogForm {
 
         cache = app.getCacheByGeocode(geocode);
 
-        if (StringUtils.isNotBlank(cache.name)) {
-            setTitle(res.getString(R.string.log_new_log) + " " + cache.name);
+        if (StringUtils.isNotBlank(cache.getName())) {
+            setTitle(res.getString(R.string.log_new_log) + " " + cache.getName());
         } else {
-            setTitle(res.getString(R.string.log_new_log) + " " + cache.geocode.toUpperCase());
+            setTitle(res.getString(R.string.log_new_log) + " " + cache.getGeocode().toUpperCase());
         }
 
         app.setAction(geocode);
@@ -293,7 +293,7 @@ public class cgeovisit extends cgLogForm {
         boolean signatureAvailable = Settings.getSignature() != null;
         menu.findItem(MENU_SIGNATURE).setVisible(signatureAvailable);
 
-        boolean voteAvailable = Settings.isGCvoteLogin() && typeSelected == cgBase.LOG_FOUND_IT && StringUtils.isNotBlank(cache.guid);
+        boolean voteAvailable = Settings.isGCvoteLogin() && typeSelected == cgBase.LOG_FOUND_IT && StringUtils.isNotBlank(cache.getGuid());
         menu.findItem(SUBMENU_VOTE).setVisible(voteAvailable);
 
         return true;
@@ -531,6 +531,7 @@ public class cgeovisit extends cgLogForm {
         clear.setOnClickListener(new clearListener());
     }
 
+    @Override
     public void setDate(Calendar dateIn) {
         date = dateIn;
 
@@ -720,15 +721,15 @@ public class cgeovisit extends cgLogForm {
                 logNow.type = typeSelected;
                 logNow.log = log;
 
-                if (cache != null && null != cache.logs) {
-                    cache.logs.add(0, logNow);
+                if (cache != null && null != cache.getLogs()) {
+                    cache.getLogs().add(0, logNow);
                 }
                 app.addLog(geocode, logNow);
 
                 if (typeSelected == cgBase.LOG_FOUND_IT) {
                     app.markFound(geocode);
                     if (cache != null) {
-                        cache.found = true;
+                        cache.setFound(true);
                     }
                 }
 

@@ -14,7 +14,7 @@ import android.content.res.Resources;
 import java.util.ArrayList;
 import java.util.Locale;
 
-class RMapsApp extends AbstractNavigationApp implements NavigationApp {
+class RMapsApp extends AbstractNavigationApp {
 
     private static final String INTENT = "com.robert.maps.action.SHOW_POINTS";
 
@@ -33,24 +33,24 @@ class RMapsApp extends AbstractNavigationApp implements NavigationApp {
         try {
             if (isInstalled(activity)) {
                 final ArrayList<String> locations = new ArrayList<String>();
-                if (cache != null && cache.coords != null) {
+                if (cache != null && cache.getCoords() != null) {
                     locations.add(String.format((Locale) null, "%.6f",
-                            cache.coords.getLatitude())
+                            cache.getCoords().getLatitude())
                             + ","
                             + String.format((Locale) null, "%.6f",
-                                    cache.coords.getLongitude())
+                                    cache.getCoords().getLongitude())
                             + ";"
-                            + cache.geocode
-                            + ";" + cache.name);
-                } else if (waypoint != null && waypoint.coords != null) {
+                            + cache.getGeocode()
+                            + ";" + cache.getName());
+                } else if (waypoint != null && waypoint.getCoords() != null) {
                     locations.add(String.format((Locale) null, "%.6f",
-                            waypoint.coords.getLatitude())
+                            waypoint.getCoords().getLatitude())
                             + ","
                             + String.format((Locale) null, "%.6f",
-                                    waypoint.coords.getLongitude())
+                                    waypoint.getCoords().getLongitude())
                             + ";"
-                            + waypoint.lookup
-                            + ";" + waypoint.name);
+                            + waypoint.getLookup()
+                            + ";" + waypoint.getName());
                 }
 
                 final Intent intent = new Intent(INTENT);

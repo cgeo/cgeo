@@ -216,7 +216,7 @@ public class cgeonavigate extends AbstractActivity {
 
             int cnt = 4;
             for (cgCoord coordinate : coordinates) {
-                subMenu.add(0, cnt, 0, coordinate.name + " (" + coordinate.type + ")");
+                subMenu.add(0, cnt, 0, coordinate.getName() + " (" + coordinate.getType() + ")");
                 cnt++;
             }
 
@@ -270,8 +270,8 @@ public class cgeonavigate extends AbstractActivity {
         } else if (id > 3 && coordinates.get(id - 4) != null) {
             cgCoord coordinate = coordinates.get(id - 4);
 
-            title = coordinate.name;
-            dstCoords = coordinate.coords;
+            title = coordinate.getName();
+            dstCoords = coordinate.getCoords();
             setTitle();
             setDestCoords();
             updateDistanceInfo();

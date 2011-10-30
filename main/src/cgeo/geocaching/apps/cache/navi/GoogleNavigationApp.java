@@ -41,10 +41,10 @@ class GoogleNavigationApp extends AbstractNavigationApp implements
             navigationResult = navigateToCoordinates(geo, activity, coords);
         }
         else if (waypoint != null) {
-            navigationResult = navigateToCoordinates(geo, activity, waypoint.coords);
+            navigationResult = navigateToCoordinates(geo, activity, waypoint.getCoords());
         }
         else if (cache != null) {
-            navigationResult = navigateToCoordinates(geo, activity, cache.coords);
+            navigationResult = navigateToCoordinates(geo, activity, cache.getCoords());
         }
 
         if (!navigationResult) {

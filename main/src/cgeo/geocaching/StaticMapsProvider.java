@@ -39,7 +39,7 @@ public class StaticMapsProvider {
 
         final String url = mapUrl + "&zoom=" + zoom + "&size=" + edge + "x" + edge + "&maptype=" + mapType + "&markers=icon%3A" + markerUrl + "%7C" + latlonMap + waypoints + "&sensor=false";
 
-        final File file = getMapFile(cache.geocode, level);
+        final File file = getMapFile(cache.getGeocode(), level);
         final HttpResponse httpResponse = cgBase.request(url, null, false);
 
         if (httpResponse != null) {
@@ -54,12 +54,12 @@ public class StaticMapsProvider {
     }
 
     public static void downloadMaps(cgCache cache, Activity activity) {
-        if (!Settings.isStoreOfflineMaps() || cache.coords == null || StringUtils.isBlank(cache.geocode)) {
+        if (!Settings.isStoreOfflineMaps() || cache.getCoords() == null || StringUtils.isBlank(cache.getGeocode())) {
             return;
         }
 
-        final String latlonMap = String.format((Locale) null, "%.6f", cache.coords.getLatitude()) + "," +
-                String.format((Locale) null, "%.6f", cache.coords.getLongitude());
+        final String latlonMap = String.format((Locale) null, "%.6f", cache.getCoords().getLatitude()) + "," +
+                String.format((Locale) null, "%.6f", cache.getCoords().getLongitude());
         final Display display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         final int maxWidth = display.getWidth() - 25;
         final int maxHeight = display.getHeight() - 25;
@@ -71,20 +71,20 @@ public class StaticMapsProvider {
         }
 
         final StringBuilder waypoints = new StringBuilder();
-        if (CollectionUtils.isNotEmpty(cache.waypoints)) {
-            for (cgWaypoint waypoint : cache.waypoints) {
-                if (waypoint.coords == null) {
+        if (CollectionUtils.isNotEmpty(cache.getWaypoints())) {
+            for (cgWaypoint waypoint : cache.getWaypoints()) {
+                if (waypoint.getCoords() == null) {
                     continue;
                 }
 
                 waypoints.append("&markers=icon%3A");
                 waypoints.append(MARKERS_URL);
                 waypoints.append("marker_waypoint_");
-                waypoints.append(waypoint.type != null ? waypoint.type.id : null);
+                waypoints.append(waypoint.getWaypointType() != null ? waypoint.getWaypointType().id : null);
                 waypoints.append(".png%7C");
-                waypoints.append(String.format((Locale) null, "%.6f", waypoint.coords.getLatitude()));
+                waypoints.append(String.format((Locale) null, "%.6f", waypoint.getCoords().getLatitude()));
                 waypoints.append(',');
-                waypoints.append(String.format((Locale) null, "%.6f", waypoint.coords.getLongitude()));
+                waypoints.append(String.format((Locale) null, "%.6f", waypoint.getCoords().getLongitude()));
             }
         }
 
@@ -106,12 +106,12 @@ public class StaticMapsProvider {
 
     private static String getMarkerUrl(final cgCache cache) {
         String type;
-        if (cache.found) {
-            type = cache.type + "_found";
-        } else if (cache.disabled) {
-            type = cache.type + "_disabled";
+        if (cache.isFound()) {
+            type = cache.getType() + "_found";
+        } else if (cache.isDisabled()) {
+            type = cache.getType() + "_disabled";
         } else {
-            type = cache.type;
+            type = cache.getType();
         }
 
         return cgBase.urlencode_rfc3986(MARKERS_URL + "marker_cache_" + type + ".png");

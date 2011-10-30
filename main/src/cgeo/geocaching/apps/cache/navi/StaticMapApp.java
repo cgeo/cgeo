@@ -31,14 +31,14 @@ class StaticMapApp extends AbstractNavigationApp implements
             cgCache cache,
             final cgSearch search, cgWaypoint waypoint, final Geopoint coords) {
 
-        if (cache == null || cache.reason == 0) {
+        if (cache == null || cache.getReason() == 0) {
             ActivityMixin.showToast(activity, res.getString(R.string.err_detail_no_map_static));
             return true;
         }
 
-        if (cache.geocode != null) {
+        if (cache.getGeocode() != null) {
             Intent smapsIntent = new Intent(activity, cgeosmaps.class);
-            smapsIntent.putExtra("geocode", cache.geocode.toUpperCase());
+            smapsIntent.putExtra("geocode", cache.getGeocode().toUpperCase());
             activity.startActivity(smapsIntent);
             return true;
         }

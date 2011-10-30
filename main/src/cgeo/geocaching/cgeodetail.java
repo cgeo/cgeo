@@ -137,7 +137,7 @@ public class cgeodetail extends AbstractActivity {
 
             setView();
         }
-    };
+    }
 
     private class RefreshCacheHandler extends CancellableHandler {
         @Override
@@ -154,7 +154,7 @@ public class cgeodetail extends AbstractActivity {
 
             setView();
         }
-    };
+    }
 
     private Handler dropCacheHandler = new Handler() {
         @Override
@@ -218,7 +218,7 @@ public class cgeodetail extends AbstractActivity {
             finish();
         }
 
-    };
+    }
 
     final Handler loadMapPreviewHandler = new Handler() {
         @Override
@@ -311,7 +311,7 @@ public class cgeodetail extends AbstractActivity {
         Button buttonRemove = (Button) findViewById(R.id.remove_from_watchlist);
         TextView text = (TextView) findViewById(R.id.watchlist_text);
 
-        if (cache.onWatchlist) {
+        if (cache.isOnWatchlist()) {
             buttonAdd.setVisibility(View.GONE);
             buttonRemove.setVisibility(View.VISIBLE);
             text.setText(R.string.cache_watchlist_on);
@@ -483,10 +483,10 @@ public class cgeodetail extends AbstractActivity {
                 if (viewId == R.id.author) { // Author of a log entry
                     contextMenuUser = ((TextView) view).getText().toString();
                 } else if (viewId == R.id.value) { // The owner of the cache
-                    if (StringUtils.isNotBlank(cache.ownerReal)) {
-                        contextMenuUser = cache.ownerReal;
+                    if (StringUtils.isNotBlank(cache.getOwnerReal())) {
+                        contextMenuUser = cache.getOwnerReal();
                     } else {
-                        contextMenuUser = cache.owner;
+                        contextMenuUser = cache.getOwner();
                     }
                 }
 
@@ -500,15 +500,15 @@ public class cgeodetail extends AbstractActivity {
                 addNavigationMenuItems(menu);
                 break;
             case -1:
-                if (null != cache.waypoints) {
+                if (null != cache.getWaypoints()) {
                     try {
                         final ViewGroup parent = ((ViewGroup) view.getParent());
                         for (int i = 0; i < parent.getChildCount(); i++) {
                             if (parent.getChildAt(i) == view) {
-                                final List<cgWaypoint> sortedWaypoints = new ArrayList<cgWaypoint>(cache.waypoints);
+                                final List<cgWaypoint> sortedWaypoints = new ArrayList<cgWaypoint>(cache.getWaypoints());
                                 Collections.sort(sortedWaypoints);
                                 final cgWaypoint waypoint = sortedWaypoints.get(i);
-                                final int index = cache.waypoints.indexOf(waypoint);
+                                final int index = cache.getWaypoints().indexOf(waypoint);
                                 menu.setHeaderTitle(res.getString(R.string.waypoint));
                                 menu.add(CONTEXT_MENU_WAYPOINT_DUPLICATE, index, 0, R.string.waypoint_duplicate);
                                 if (waypoint.isUserDefined()) {
@@ -550,22 +550,22 @@ public class cgeodetail extends AbstractActivity {
                 }
                 break;
             case CONTEXT_MENU_WAYPOINT_DUPLICATE:
-                if (null != cache.waypoints && index < cache.waypoints.size()) {
-                    final cgWaypoint copy = new cgWaypoint(cache.waypoints.get(index));
+                if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
+                    final cgWaypoint copy = new cgWaypoint(cache.getWaypoints().get(index));
                     copy.setUserDefined();
-                    copy.name = res.getString(R.string.waypoint_copy_of) + " " + copy.name;
-                    cache.waypoints.add(index + 1, copy);
-                    app.saveOwnWaypoint(-1, cache.geocode, copy);
+                    copy.setName(res.getString(R.string.waypoint_copy_of) + " " + copy.getName());
+                    cache.getWaypoints().add(index + 1, copy);
+                    app.saveOwnWaypoint(-1, cache.getGeocode(), copy);
                     app.removeCacheFromCache(geocode);
                     setView(); // refresh
                 }
                 break;
             case CONTEXT_MENU_WAYPOINT_DELETE:
-                if (null != cache.waypoints && index < cache.waypoints.size()) {
-                    final cgWaypoint waypoint = cache.waypoints.get(index);
+                if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
+                    final cgWaypoint waypoint = cache.getWaypoints().get(index);
                     if (waypoint.isUserDefined()) {
-                        cache.waypoints.remove(index);
-                        app.deleteWaypoint(waypoint.id);
+                        cache.getWaypoints().remove(index);
+                        app.deleteWaypoint(waypoint.getId());
                         app.removeCacheFromCache(geocode);
                         setView(); // refresh
                     }
@@ -579,7 +579,7 @@ public class cgeodetail extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (cache != null && cache.coords != null) {
+        if (cache != null && cache.getCoords() != null) {
             menu.add(0, 2, 0, res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass); // compass
             SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
             addNavigationMenuItems(subMenu);
@@ -590,11 +590,11 @@ public class cgeodetail extends AbstractActivity {
         }
         addVisitMenu(menu, cache);
 
-        if (cache != null && CollectionUtils.isNotEmpty(cache.spoilers)) {
+        if (cache != null && CollectionUtils.isNotEmpty(cache.getSpoilers())) {
             menu.add(1, 5, 0, res.getString(R.string.cache_menu_spoilers)).setIcon(android.R.drawable.ic_menu_gallery); // spoiler images
         }
 
-        if (cache != null && cache.coords != null && cache.supportsCachesAround()) {
+        if (cache != null && cache.getCoords() != null && cache.supportsCachesAround()) {
             menu.add(0, 10, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
         }
 
@@ -670,8 +670,8 @@ public class cgeodetail extends AbstractActivity {
 
         if (search != null) {
             cache = app.getCache(search);
-            if (cache != null && cache.geocode != null) {
-                geocode = cache.geocode;
+            if (cache != null && cache.getGeocode() != null) {
+                geocode = cache.getGeocode();
             }
         }
 
@@ -707,15 +707,15 @@ public class cgeodetail extends AbstractActivity {
 
         try {
 
-            if (geocode == null && StringUtils.isNotBlank(cache.geocode)) {
-                geocode = cache.geocode;
+            if (geocode == null && StringUtils.isNotBlank(cache.getGeocode())) {
+                geocode = cache.getGeocode();
             }
 
-            if (guid == null && StringUtils.isNotBlank(cache.guid)) {
-                guid = cache.guid;
+            if (guid == null && StringUtils.isNotBlank(cache.getGuid())) {
+                guid = cache.getGuid();
             }
 
-            setTitle(cache.geocode.toUpperCase());
+            setTitle(cache.getGeocode().toUpperCase());
 
             inflater = getLayoutInflater();
 
@@ -726,7 +726,7 @@ public class cgeodetail extends AbstractActivity {
             detailsList.removeAllViews();
 
             // actionbar icon, default myster<
-            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.type)), null, null, null);
+            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.getType())), null, null, null);
 
             // cache name (full name)
             itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
@@ -734,8 +734,8 @@ public class cgeodetail extends AbstractActivity {
             itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
             itemName.setText(res.getString(R.string.cache_name));
-            Spannable span = (new Spannable.Factory()).newSpannable(Html.fromHtml(cache.name).toString());
-            if (cache.disabled || cache.archived) { // strike
+            Spannable span = (new Spannable.Factory()).newSpannable(Html.fromHtml(cache.getName()).toString());
+            if (cache.isDisabled() || cache.isArchived()) { // strike
                 span.setSpan(new StrikethroughSpan(), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
             itemValue.setText(span);
@@ -749,15 +749,15 @@ public class cgeodetail extends AbstractActivity {
             itemName.setText(res.getString(R.string.cache_type));
 
             String size = "";
-            if (cache.size != null) {
+            if (cache.getSize() != null) {
                 // don't show "not chosen" for events and virtuals, that should be the normal case
                 if (cache.showSize()) {
-                    size = " (" + res.getString(cache.size.stringId) + ")";
+                    size = " (" + res.getString(cache.getSize().stringId) + ")";
                 }
             }
 
-            if (cgBase.cacheTypesInv.containsKey(cache.type)) { // cache icon
-                itemValue.setText(cgBase.cacheTypesInv.get(cache.type) + size);
+            if (cgBase.cacheTypesInv.containsKey(cache.getType())) { // cache icon
+                itemValue.setText(cgBase.cacheTypesInv.get(cache.getType()) + size);
             } else {
                 itemValue.setText(cgBase.cacheTypesInv.get(CacheType.MYSTERY.id) + size);
             }
@@ -769,11 +769,11 @@ public class cgeodetail extends AbstractActivity {
             itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
             itemName.setText(res.getString(R.string.cache_geocode));
-            itemValue.setText(cache.geocode.toUpperCase());
+            itemValue.setText(cache.getGeocode().toUpperCase());
             detailsList.addView(itemLayout);
 
             // cache state
-            if (cache.logOffline || cache.archived || cache.disabled || cache.members || cache.found) {
+            if (cache.isLogOffline() || cache.isArchived() || cache.isDisabled() || cache.isMembers() || cache.isFound()) {
                 itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
                 itemName = (TextView) itemLayout.findViewById(R.id.name);
                 itemValue = (TextView) itemLayout.findViewById(R.id.value);
@@ -781,31 +781,31 @@ public class cgeodetail extends AbstractActivity {
                 itemName.setText(res.getString(R.string.cache_status));
 
                 StringBuilder state = new StringBuilder();
-                if (cache.logOffline) {
+                if (cache.isLogOffline()) {
                     if (state.length() > 0) {
                         state.append(", ");
                     }
                     state.append(res.getString(R.string.cache_status_offline_log));
                 }
-                if (cache.found) {
+                if (cache.isFound()) {
                     if (state.length() > 0) {
                         state.append(", ");
                     }
                     state.append(res.getString(R.string.cache_status_found));
                 }
-                if (cache.archived) {
+                if (cache.isArchived()) {
                     if (state.length() > 0) {
                         state.append(", ");
                     }
                     state.append(res.getString(R.string.cache_status_archived));
                 }
-                if (cache.disabled) {
+                if (cache.isDisabled()) {
                     if (state.length() > 0) {
                         state.append(", ");
                     }
                     state.append(res.getString(R.string.cache_status_disabled));
                 }
-                if (cache.members) {
+                if (cache.isMembers()) {
                     if (state.length() > 0) {
                         state.append(", ");
                     }
@@ -824,8 +824,8 @@ public class cgeodetail extends AbstractActivity {
             itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
             itemName.setText(res.getString(R.string.cache_distance));
-            if (cache.distance != null) {
-                itemValue.setText("~" + cgBase.getHumanDistance(cache.distance));
+            if (cache.getDistance() != null) {
+                itemValue.setText("~" + cgBase.getHumanDistance(cache.getDistance()));
             } else {
                 itemValue.setText("--");
             }
@@ -833,54 +833,54 @@ public class cgeodetail extends AbstractActivity {
             cacheDistance = itemValue;
 
             // difficulty
-            if (cache.difficulty != null && cache.difficulty > 0) {
-                addStarRating(detailsList, res.getString(R.string.cache_difficulty), cache.difficulty);
+            if (cache.getDifficulty() != null && cache.getDifficulty() > 0) {
+                addStarRating(detailsList, res.getString(R.string.cache_difficulty), cache.getDifficulty());
             }
 
             // terrain
-            if (cache.terrain != null && cache.terrain > 0) {
-                addStarRating(detailsList, res.getString(R.string.cache_terrain), cache.terrain);
+            if (cache.getTerrain() != null && cache.getTerrain() > 0) {
+                addStarRating(detailsList, res.getString(R.string.cache_terrain), cache.getTerrain());
             }
 
             // rating
-            if (cache.rating != null && cache.rating > 0) {
-                itemLayout = addStarRating(detailsList, res.getString(R.string.cache_rating), cache.rating);
-                if (cache.votes != null) {
+            if (cache.getRating() != null && cache.getRating() > 0) {
+                itemLayout = addStarRating(detailsList, res.getString(R.string.cache_rating), cache.getRating());
+                if (cache.getVotes() != null) {
                     final TextView itemAddition = (TextView) itemLayout.findViewById(R.id.addition);
-                    itemAddition.setText("(" + cache.votes + ")");
+                    itemAddition.setText("(" + cache.getVotes() + ")");
                     itemAddition.setVisibility(View.VISIBLE);
                 }
             }
 
             // favourite count
-            if (cache.favouriteCnt != null) {
+            if (cache.getFavouriteCnt() != null) {
                 itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
                 itemName = (TextView) itemLayout.findViewById(R.id.name);
                 itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
                 itemName.setText(res.getString(R.string.cache_favourite));
-                itemValue.setText(String.format("%d", cache.favouriteCnt) + "×");
+                itemValue.setText(String.format("%d", cache.getFavouriteCnt()) + "×");
                 detailsList.addView(itemLayout);
             }
 
             // cache author
-            if (StringUtils.isNotBlank(cache.owner) || StringUtils.isNotBlank(cache.ownerReal)) {
+            if (StringUtils.isNotBlank(cache.getOwner()) || StringUtils.isNotBlank(cache.getOwnerReal())) {
                 itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
                 itemName = (TextView) itemLayout.findViewById(R.id.name);
                 itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
                 itemName.setText(res.getString(R.string.cache_owner));
-                if (StringUtils.isNotBlank(cache.owner)) {
-                    itemValue.setText(Html.fromHtml(cache.owner), TextView.BufferType.SPANNABLE);
-                } else if (StringUtils.isNotBlank(cache.ownerReal)) {
-                    itemValue.setText(Html.fromHtml(cache.ownerReal), TextView.BufferType.SPANNABLE);
+                if (StringUtils.isNotBlank(cache.getOwner())) {
+                    itemValue.setText(Html.fromHtml(cache.getOwner()), TextView.BufferType.SPANNABLE);
+                } else if (StringUtils.isNotBlank(cache.getOwnerReal())) {
+                    itemValue.setText(Html.fromHtml(cache.getOwnerReal()), TextView.BufferType.SPANNABLE);
                 }
                 itemValue.setOnClickListener(new userActions());
                 detailsList.addView(itemLayout);
             }
 
             // cache hidden
-            if (cache.hidden != null && cache.hidden.getTime() > 0) {
+            if (cache.getHidden() != null && cache.getHidden().getTime() > 0) {
                 itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
                 itemName = (TextView) itemLayout.findViewById(R.id.name);
                 itemValue = (TextView) itemLayout.findViewById(R.id.value);
@@ -890,23 +890,23 @@ public class cgeodetail extends AbstractActivity {
                 } else {
                     itemName.setText(res.getString(R.string.cache_hidden));
                 }
-                itemValue.setText(base.formatFullDate(cache.hidden.getTime()));
+                itemValue.setText(base.formatFullDate(cache.getHidden().getTime()));
                 detailsList.addView(itemLayout);
             }
 
             // cache location
-            if (StringUtils.isNotBlank(cache.location)) {
+            if (StringUtils.isNotBlank(cache.getLocation())) {
                 itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
                 itemName = (TextView) itemLayout.findViewById(R.id.name);
                 itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
                 itemName.setText(res.getString(R.string.cache_location));
-                itemValue.setText(cache.location);
+                itemValue.setText(cache.getLocation());
                 detailsList.addView(itemLayout);
             }
 
             // cache coordinates
-            if (cache.coords != null) {
+            if (cache.getCoords() != null) {
                 itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
                 itemName = (TextView) itemLayout.findViewById(R.id.name);
                 itemValue = (TextView) itemLayout.findViewById(R.id.value);
@@ -917,7 +917,7 @@ public class cgeodetail extends AbstractActivity {
             }
 
             // cache attributes
-            if (CollectionUtils.isNotEmpty(cache.attributes)) {
+            if (CollectionUtils.isNotEmpty(cache.getAttributes())) {
 
                 final LinearLayout attribBox = (LinearLayout) findViewById(
                         R.id.attributes_innerbox);
@@ -964,12 +964,12 @@ public class cgeodetail extends AbstractActivity {
             }
 
             // cache inventory
-            if (CollectionUtils.isNotEmpty(cache.inventory)) {
+            if (CollectionUtils.isNotEmpty(cache.getInventory())) {
                 final LinearLayout inventBox = (LinearLayout) findViewById(R.id.inventory_box);
                 final TextView inventView = (TextView) findViewById(R.id.inventory);
 
                 StringBuilder inventoryString = new StringBuilder();
-                for (cgTrackable inventoryItem : cache.inventory) {
+                for (cgTrackable inventoryItem : cache.getInventory()) {
                     if (inventoryString.length() > 0) {
                         inventoryString.append('\n');
                     }
@@ -986,8 +986,8 @@ public class cgeodetail extends AbstractActivity {
             final Button offlineRefresh = (Button) findViewById(R.id.offline_refresh);
             final Button offlineStore = (Button) findViewById(R.id.offline_store);
 
-            if (cache.reason >= 1) {
-                Long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.detailedUpdate / (60 * 1000)); // minutes
+            if (cache.getReason() >= 1) {
+                Long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
 
                 String ago = "";
                 if (diff < 15) {
@@ -1020,12 +1020,12 @@ public class cgeodetail extends AbstractActivity {
             offlineRefresh.setClickable(true);
 
             // cache personal note
-            if (StringUtils.isNotBlank(cache.personalNote)) {
+            if (StringUtils.isNotBlank(cache.getPersonalNote())) {
                 ((LinearLayout) findViewById(R.id.personalnote_box)).setVisibility(View.VISIBLE);
 
                 TextView personalNoteText = (TextView) findViewById(R.id.personalnote);
                 personalNoteText.setVisibility(View.VISIBLE);
-                personalNoteText.setText(cache.personalNote, TextView.BufferType.SPANNABLE);
+                personalNoteText.setText(cache.getPersonalNote(), TextView.BufferType.SPANNABLE);
                 personalNoteText.setMovementMethod(LinkMovementMethod.getInstance());
             }
             else {
@@ -1033,12 +1033,12 @@ public class cgeodetail extends AbstractActivity {
             }
 
             // cache short desc
-            if (StringUtils.isNotBlank(cache.shortdesc)) {
+            if (StringUtils.isNotBlank(cache.getShortdesc())) {
                 ((LinearLayout) findViewById(R.id.desc_box)).setVisibility(View.VISIBLE);
 
                 TextView descView = (TextView) findViewById(R.id.shortdesc);
                 descView.setVisibility(View.VISIBLE);
-                descView.setText(Html.fromHtml(cache.shortdesc.trim(), new HtmlImage(this, geocode, true, cache.reason, false), null), TextView.BufferType.SPANNABLE);
+                descView.setText(Html.fromHtml(cache.getShortdesc().trim(), new HtmlImage(this, geocode, true, cache.getReason(), false), null), TextView.BufferType.SPANNABLE);
                 descView.setMovementMethod(LinkMovementMethod.getInstance());
             }
 
@@ -1082,40 +1082,40 @@ public class cgeodetail extends AbstractActivity {
             LinearLayout waypoints = (LinearLayout) findViewById(R.id.waypoints);
             waypoints.removeAllViews();
 
-            if (CollectionUtils.isNotEmpty(cache.waypoints)) {
+            if (CollectionUtils.isNotEmpty(cache.getWaypoints())) {
                 LinearLayout waypointView;
 
                 // sort waypoints: PP, Sx, FI, OWN
-                List<cgWaypoint> sortedWaypoints = new ArrayList<cgWaypoint>(cache.waypoints);
+                List<cgWaypoint> sortedWaypoints = new ArrayList<cgWaypoint>(cache.getWaypoints());
                 Collections.sort(sortedWaypoints);
 
                 for (cgWaypoint wpt : sortedWaypoints) {
                     waypointView = (LinearLayout) inflater.inflate(R.layout.waypoint_item, null);
                     final TextView identification = (TextView) waypointView.findViewById(R.id.identification);
 
-                    ((TextView) waypointView.findViewById(R.id.type)).setText(cgBase.waypointTypes.get(wpt.type));
+                    ((TextView) waypointView.findViewById(R.id.type)).setText(cgBase.waypointTypes.get(wpt.getWaypointType()));
                     if (!wpt.getPrefix().equalsIgnoreCase("OWN")) {
-                        identification.setText(wpt.getPrefix().trim() + "/" + wpt.lookup.trim());
+                        identification.setText(wpt.getPrefix().trim() + "/" + wpt.getLookup().trim());
                     } else {
                         identification.setText(res.getString(R.string.waypoint_custom));
                     }
 
                     TextView nameView = (TextView) waypointView.findViewById(R.id.name);
-                    if (StringUtils.isBlank(wpt.name)) {
-                        nameView.setText(cgBase.formatCoords(wpt.coords, true));
+                    if (StringUtils.isBlank(wpt.getName())) {
+                        nameView.setText(cgBase.formatCoords(wpt.getCoords(), true));
                     } else {
-                        nameView.setText(StringEscapeUtils.unescapeHtml4(wpt.name));
+                        nameView.setText(StringEscapeUtils.unescapeHtml4(wpt.getName()));
                     }
                     wpt.setIcon(res, nameView);
 
                     TextView noteView = (TextView) waypointView.findViewById(R.id.note);
-                    if (containsHtml(wpt.note)) {
-                        noteView.setText(Html.fromHtml(wpt.note.trim()), TextView.BufferType.SPANNABLE);
+                    if (containsHtml(wpt.getNote())) {
+                        noteView.setText(Html.fromHtml(wpt.getNote().trim()), TextView.BufferType.SPANNABLE);
                     }
                     else {
-                        noteView.setText(wpt.note.trim());
+                        noteView.setText(wpt.getNote().trim());
                     }
-                    waypointView.setOnClickListener(new waypointInfo(wpt.id));
+                    waypointView.setOnClickListener(new waypointInfo(wpt.getId()));
                     registerForContextMenu(waypointView);
 
                     waypoints.addView(waypointView);
@@ -1127,10 +1127,10 @@ public class cgeodetail extends AbstractActivity {
             addWaypoint.setOnClickListener(new addWaypoint());
 
             // cache hint
-            if (StringUtils.isNotBlank(cache.hint)) {
+            if (StringUtils.isNotBlank(cache.getHint())) {
                 ((LinearLayout) findViewById(R.id.hint_box)).setVisibility(View.VISIBLE);
                 TextView hintView = ((TextView) findViewById(R.id.hint));
-                hintView.setText(CryptUtils.rot13(cache.hint.trim()));
+                hintView.setText(CryptUtils.rot13(cache.getHint().trim()));
                 hintView.setClickable(true);
                 hintView.setOnClickListener(new codeHint());
             } else {
@@ -1140,8 +1140,8 @@ public class cgeodetail extends AbstractActivity {
                 hintView.setOnClickListener(null);
             }
 
-            if (geo != null && geo.coordsNow != null && cache != null && cache.coords != null) {
-                cacheDistance.setText(cgBase.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
+            if (geo != null && geo.coordsNow != null && cache != null && cache.getCoords() != null) {
+                cacheDistance.setText(cgBase.getHumanDistance(geo.coordsNow.distanceTo(cache.getCoords())));
                 cacheDistance.bringToFront();
             }
         } catch (Exception e) {
@@ -1180,7 +1180,7 @@ public class cgeodetail extends AbstractActivity {
         if (longDesc == null && cache != null) {
             String description = cache.getDescription();
             if (description != null) {
-                longDesc = Html.fromHtml(description.trim(), new HtmlImage(this, geocode, true, cache.reason, false), new UnknownTagsHandler());
+                longDesc = Html.fromHtml(description.trim(), new HtmlImage(this, geocode, true, cache.getReason(), false), new UnknownTagsHandler());
             }
         }
     }
@@ -1212,14 +1212,14 @@ public class cgeodetail extends AbstractActivity {
         // cache logs
         TextView textView = (TextView) findViewById(R.id.logcount);
         int logCounter = 0;
-        if (cache != null && cache.logCounts != null) {
+        if (cache != null && cache.getLogCounts() != null) {
             final StringBuffer buff = new StringBuffer();
             buff.append(res.getString(R.string.cache_log_types));
             buff.append(": ");
 
             // sort the log counts by type id ascending. that way the FOUND, DNF log types are the first and most visible ones
             List<Entry<Integer, Integer>> sortedLogCounts = new ArrayList<Entry<Integer, Integer>>();
-            sortedLogCounts.addAll(cache.logCounts.entrySet());
+            sortedLogCounts.addAll(cache.getLogCounts().entrySet());
             Collections.sort(sortedLogCounts, new Comparator<Entry<Integer, Integer>>() {
 
                 @Override
@@ -1258,8 +1258,8 @@ public class cgeodetail extends AbstractActivity {
 
         RelativeLayout rowView;
 
-        if (cache != null && cache.logs != null) {
-            for (cgLog log : cache.logs) {
+        if (cache != null && cache.getLogs() != null) {
+            for (cgLog log : cache.getLogs()) {
                 rowView = (RelativeLayout) inflater.inflate(R.layout.log_item, null);
 
                 if (log.date > 0) {
@@ -1286,7 +1286,7 @@ public class cgeodetail extends AbstractActivity {
                 }
                 // avoid parsing HTML if not necessary
                 if (containsHtml(log.log)) {
-                    ((TextView) rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log, new HtmlImage(this, null, false, cache.reason, false), null), TextView.BufferType.SPANNABLE);
+                    ((TextView) rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log, new HtmlImage(this, null, false, cache.getReason(), false), null), TextView.BufferType.SPANNABLE);
                 }
                 else {
                     ((TextView) rowView.findViewById(R.id.log)).setText(log.log);
@@ -1363,7 +1363,7 @@ public class cgeodetail extends AbstractActivity {
                 listView.addView(rowView);
             }
 
-            if (cache.logs.size() > 0) {
+            if (cache.getLogs().size() > 0) {
                 ((LinearLayout) findViewById(R.id.log_box)).setVisibility(View.VISIBLE);
             }
         }
@@ -1403,15 +1403,15 @@ public class cgeodetail extends AbstractActivity {
 
         @Override
         public void run() {
-            if (cache == null || cache.coords == null) {
+            if (cache == null || cache.getCoords() == null) {
                 return;
             }
 
             BitmapDrawable image = null;
 
             try {
-                final String latlonMap = String.format((Locale) null, "%.6f", cache.coords.getLatitude()) + "," +
-                        String.format((Locale) null, "%.6f", cache.coords.getLongitude());
+                final String latlonMap = String.format((Locale) null, "%.6f", cache.getCoords().getLatitude()) + "," +
+                        String.format((Locale) null, "%.6f", cache.getCoords().getLongitude());
                 final Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 
                 int width = display.getWidth();
@@ -1419,7 +1419,7 @@ public class cgeodetail extends AbstractActivity {
 
                 String markerUrl = cgBase.urlencode_rfc3986("http://cgeo.carnero.cc/_markers/my_location_mdpi.png");
 
-                HtmlImage mapGetter = new HtmlImage(cgeodetail.this, cache.geocode, false, 0, false);
+                HtmlImage mapGetter = new HtmlImage(cgeodetail.this, cache.getGeocode(), false, 0, false);
                 image = mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?center=" + latlonMap + "&zoom=15&size=" + width + "x" + height + "&maptype=terrain&markers=icon%3A" + markerUrl + "%7C" + latlonMap + "&sensor=false");
                 Message message = handler.obtainMessage(0, image);
                 handler.sendMessage(message);
@@ -1460,13 +1460,13 @@ public class cgeodetail extends AbstractActivity {
         try {
             // cache
             coords = new cgCoord();
-            coords.type = "cache";
+            coords.setType("cache");
             if (StringUtils.isNotBlank(name)) {
-                coords.name = name;
+                coords.setName(name);
             } else {
-                coords.name = geocode.toUpperCase();
+                coords.setName(geocode.toUpperCase());
             }
-            coords.coords = cache.coords;
+            coords.setCoords(cache.getCoords());
             coordinates.add(coords);
         } catch (Exception e) {
             Log.e(Settings.tag, "cgeodetail.getCoordinates (cache): " + e.toString());
@@ -1474,13 +1474,13 @@ public class cgeodetail extends AbstractActivity {
 
         try {
             // waypoints
-            if (null != cache.waypoints) {
-                for (cgWaypoint waypoint : cache.waypoints) {
-                    if (null != waypoint.coords) {
+            if (null != cache.getWaypoints()) {
+                for (cgWaypoint waypoint : cache.getWaypoints()) {
+                    if (null != waypoint.getCoords()) {
                         coords = new cgCoord();
-                        coords.type = "waypoint";
-                        coords.name = waypoint.name;
-                        coords.coords = waypoint.coords;
+                        coords.setType("waypoint");
+                        coords.setName(waypoint.getName());
+                        coords.setCoords(waypoint.getCoords());
                         coordinates.add(coords);
                     }
                 }
@@ -1493,7 +1493,7 @@ public class cgeodetail extends AbstractActivity {
     }
 
     private void cachesAround() {
-        cgeocaches.startActivityCachesAround(this, cache.coords);
+        cgeocaches.startActivityCachesAround(this, cache.getCoords());
 
         finish();
     }
@@ -1556,7 +1556,7 @@ public class cgeodetail extends AbstractActivity {
             final Integer[] keys = calendars.keySet().toArray(new Integer[calendars.size()]);
             final Integer calId = keys[index];
 
-            final Date eventDate = cache.hidden;
+            final Date eventDate = cache.getHidden();
             eventDate.setHours(0);
             eventDate.setMinutes(0);
             eventDate.setSeconds(0);
@@ -1564,12 +1564,12 @@ public class cgeodetail extends AbstractActivity {
             StringBuilder description = new StringBuilder();
             description.append(cache.getUrl());
             description.append("\n\n");
-            if (StringUtils.isNotBlank(cache.shortdesc)) {
-                description.append(Html.fromHtml(cache.shortdesc).toString());
+            if (StringUtils.isNotBlank(cache.getShortdesc())) {
+                description.append(Html.fromHtml(cache.getShortdesc()).toString());
             }
 
-            if (StringUtils.isNotBlank(cache.personalNote)) {
-                description.append("\n\n" + Html.fromHtml(cache.personalNote).toString());
+            if (StringUtils.isNotBlank(cache.getPersonalNote())) {
+                description.append("\n\n" + Html.fromHtml(cache.getPersonalNote()).toString());
             }
 
             ContentValues event = new ContentValues();
@@ -1577,20 +1577,20 @@ public class cgeodetail extends AbstractActivity {
             event.put("dtstart", eventDate.getTime() + 43200000); // noon
             event.put("dtend", eventDate.getTime() + 43200000 + 3600000); // + one hour
             event.put("eventTimezone", "UTC");
-            event.put("title", Html.fromHtml(cache.name).toString());
+            event.put("title", Html.fromHtml(cache.getName()).toString());
             event.put("description", description.toString());
             String location = "";
-            if (cache.coords != null) {
+            if (cache.getCoords() != null) {
                 location += cache.getLatitude() + " " + cache.getLongitude();
             }
-            if (StringUtils.isNotBlank(cache.location)) {
+            if (StringUtils.isNotBlank(cache.getLocation())) {
                 boolean addParenteses = false;
                 if (location.length() > 0) {
                     addParenteses = true;
                     location += " (";
                 }
 
-                location += Html.fromHtml(cache.location).toString();
+                location += Html.fromHtml(cache.getLocation()).toString();
                 if (addParenteses) {
                     location += ")";
                 }
@@ -1612,11 +1612,11 @@ public class cgeodetail extends AbstractActivity {
     }
 
     private void navigateTo() {
-        if (cache == null || cache.coords == null) {
+        if (cache == null || cache.getCoords() == null) {
             showToast(res.getString(R.string.err_location_unknown));
         }
 
-        cgeonavigate.startActivity(this, cache.geocode, cache.name, cache.coords, getCoordinates());
+        cgeonavigate.startActivity(this, cache.getGeocode(), cache.getName(), cache.getCoords(), getCoordinates());
     }
 
     private class waypointInfo implements View.OnClickListener {
@@ -1629,7 +1629,7 @@ public class cgeodetail extends AbstractActivity {
         public void onClick(View arg0) {
             Intent waypointIntent = new Intent(cgeodetail.this, cgeowaypoint.class);
             waypointIntent.putExtra("waypoint", id);
-            waypointIntent.putExtra("geocode", cache.geocode);
+            waypointIntent.putExtra("geocode", cache.getGeocode());
             startActivity(waypointIntent);
         }
     }
@@ -1639,14 +1639,14 @@ public class cgeodetail extends AbstractActivity {
     }
 
     private void showSpoilers() {
-        if (cache == null || CollectionUtils.isEmpty(cache.spoilers)) {
+        if (cache == null || CollectionUtils.isEmpty(cache.getSpoilers())) {
             showToast(res.getString(R.string.err_detail_no_spoiler));
         }
 
         Intent spoilersIntent = new Intent(this, cgeoimages.class);
         spoilersIntent.putExtra("geocode", geocode.toUpperCase());
         spoilersIntent.putExtra("type", cgeoimages.SPOILER_IMAGES);
-        spoilersIntent.putParcelableArrayListExtra("images", cache.spoilers);
+        spoilersIntent.putParcelableArrayListExtra("images", cache.getSpoilers());
         startActivity(spoilersIntent);
     }
 
@@ -1671,13 +1671,13 @@ public class cgeodetail extends AbstractActivity {
             try {
                 StringBuilder dist = new StringBuilder();
 
-                if (geo.coordsNow != null && cache != null && cache.coords != null) {
-                    dist.append(cgBase.getHumanDistance(geo.coordsNow.distanceTo(cache.coords)));
+                if (geo.coordsNow != null && cache != null && cache.getCoords() != null) {
+                    dist.append(cgBase.getHumanDistance(geo.coordsNow.distanceTo(cache.getCoords())));
                 }
 
-                if (cache != null && cache.elevation != null) {
+                if (cache != null && cache.getElevation() != null) {
                     if (geo.altitudeNow != null) {
-                        Double diff = (cache.elevation - geo.altitudeNow);
+                        Double diff = (cache.getElevation() - geo.altitudeNow);
                         if (diff >= 0) {
                             dist.append(" ↗");
                         } else if (diff < 0) {
@@ -1706,8 +1706,8 @@ public class cgeodetail extends AbstractActivity {
             // show list of trackables
             try {
                 // jump directly into details if there is only one trackable
-                if (cache != null && cache.inventory != null && cache.inventory.size() == 1) {
-                    cgTrackable trackable = cache.inventory.get(0);
+                if (cache != null && cache.getInventory() != null && cache.getInventory().size() == 1) {
+                    cgTrackable trackable = cache.getInventory().get(0);
                     cgeotrackable.startActivity(cgeodetail.this, trackable.getGuid(), trackable.getGeocode(), trackable.getName());
                 }
                 else {
@@ -1770,7 +1770,7 @@ public class cgeodetail extends AbstractActivity {
 
         @Override
         public void run() {
-            int reason = cache.reason > 1 ? cache.reason : 1;
+            int reason = cache.getReason() > 1 ? cache.getReason() : 1;
             base.storeCache(app, cgeodetail.this, cache, null, reason, handler);
         }
     }
@@ -1785,7 +1785,7 @@ public class cgeodetail extends AbstractActivity {
         @Override
         public void run() {
             app.removeCacheFromCache(geocode);
-            search = base.searchByGeocode(cache.geocode, null, 0, true, handler);
+            search = base.searchByGeocode(cache.getGeocode(), null, 0, true, handler);
 
             handler.sendEmptyMessage(0);
         }
@@ -1895,8 +1895,8 @@ public class cgeodetail extends AbstractActivity {
 
             addWptIntent.putExtra("geocode", geocode);
             int wpCount = 0;
-            if (cache.waypoints != null) {
-                wpCount = cache.waypoints.size();
+            if (cache.getWaypoints() != null) {
+                wpCount = cache.getWaypoints().size();
             }
             addWptIntent.putExtra("count", wpCount);
 
@@ -1952,12 +1952,12 @@ public class cgeodetail extends AbstractActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void goCompass(View view) {
-        if (cache == null || cache.coords == null) {
+        if (cache == null || cache.getCoords() == null) {
             showToast(res.getString(R.string.cache_coordinates_no));
 
             return;
         }
-        cgeonavigate.startActivity(this, cache.geocode, cache.name, cache.coords, getCoordinates());
+        cgeonavigate.startActivity(this, cache.getGeocode(), cache.getName(), cache.getCoords(), getCoordinates());
     }
 
     /**
@@ -2018,7 +2018,7 @@ public class cgeodetail extends AbstractActivity {
 
         noAttributeIconsFound = true;
 
-        for (String attributeName : cache.attributes) {
+        for (String attributeName : cache.getAttributes()) {
             boolean strikethru = attributeName.endsWith("_no");
             // cut off _yes / _no
             if (attributeName.endsWith("_no") || attributeName.endsWith("_yes")) {
@@ -2078,8 +2078,8 @@ public class cgeodetail extends AbstractActivity {
 
         StringBuilder buffer = new StringBuilder();
         String attribute;
-        for (int i = 0; i < cache.attributes.size(); i++) {
-            attribute = cache.attributes.get(i);
+        for (int i = 0; i < cache.getAttributes().size(); i++) {
+            attribute = cache.getAttributes().get(i);
 
             // dynamically search for a translation of the attribute
             int id = res.getIdentifier("attribute_" + attribute, "string",

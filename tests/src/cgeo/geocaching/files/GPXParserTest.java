@@ -35,43 +35,43 @@ public class GPXParserTest extends InstrumentationTestCase {
         assertNotNull(caches);
         assertEquals(1, caches.size());
         final cgCache cache = caches.get(0);
-        assertEquals("GC1BKP3", cache.geocode);
-        assertEquals("9946f030-a514-46d8-a050-a60e92fd2e1a", cache.guid);
-        assertEquals(CacheType.TRADITIONAL.id, cache.type);
-        assertEquals(false, cache.archived);
-        assertEquals(false, cache.disabled);
-        assertEquals("Die Schatzinsel / treasure island", cache.name);
-        assertEquals("Die unbesiegbaren Geo - Geparden", cache.owner);
-        assertEquals(CacheSize.MICRO, cache.size);
-        assertEquals(1.0f, cache.difficulty.floatValue());
-        assertEquals(5.0f, cache.terrain.floatValue());
-        assertEquals("Baden-Württemberg, Germany", cache.location);
-        assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel.\nA old dream of my childhood, a treasure on a lonely island.", cache.shortdesc);
-        assertTrue(new Geopoint(48.859683, 9.1874).isEqualTo(cache.coords));
+        assertEquals("GC1BKP3", cache.getGeocode());
+        assertEquals("9946f030-a514-46d8-a050-a60e92fd2e1a", cache.getGuid());
+        assertEquals(CacheType.TRADITIONAL.id, cache.getType());
+        assertEquals(false, cache.isArchived());
+        assertEquals(false, cache.isDisabled());
+        assertEquals("Die Schatzinsel / treasure island", cache.getName());
+        assertEquals("Die unbesiegbaren Geo - Geparden", cache.getOwner());
+        assertEquals(CacheSize.MICRO, cache.getSize());
+        assertEquals(1.0f, cache.getDifficulty().floatValue());
+        assertEquals(5.0f, cache.getTerrain().floatValue());
+        assertEquals("Baden-Württemberg, Germany", cache.getLocation());
+        assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel.\nA old dream of my childhood, a treasure on a lonely island.", cache.getShortdesc());
+        assertTrue(new Geopoint(48.859683, 9.1874).isEqualTo(cache.getCoords()));
         return cache;
     }
 
     public void testGPXVersion101() throws IOException {
         final cgCache cache = testGPXVersion(R.raw.gc1bkp3_gpx101);
-        assertNotNull(cache.attributes);
-        assertEquals(10, cache.attributes.size());
+        assertNotNull(cache.getAttributes());
+        assertEquals(10, cache.getAttributes().size());
     }
 
     public void testOC() throws IOException {
         final List<cgCache> caches = readGPX(R.raw.oc5952_gpx);
         final cgCache cache = caches.get(0);
-        assertEquals("OC5952", cache.geocode);
-        assertEquals(CacheType.TRADITIONAL.id, cache.type);
-        assertEquals(false, cache.archived);
-        assertEquals(false, cache.disabled);
-        assertEquals("Die Schatzinsel / treasure island", cache.name);
-        assertEquals("Die unbesiegbaren Geo - Geparden", cache.owner);
-        assertEquals(CacheSize.SMALL, cache.size);
-        assertEquals(1.0f, cache.difficulty.floatValue());
-        assertEquals(4.0f, cache.terrain.floatValue());
-        assertEquals("Baden-Württemberg, Germany", cache.location);
-        assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel. A old dream of my childhood, a treasure on a lonely is", cache.shortdesc);
-        assertTrue(new Geopoint(48.85968, 9.18740).isEqualTo(cache.coords));
+        assertEquals("OC5952", cache.getGeocode());
+        assertEquals(CacheType.TRADITIONAL.id, cache.getType());
+        assertEquals(false, cache.isArchived());
+        assertEquals(false, cache.isDisabled());
+        assertEquals("Die Schatzinsel / treasure island", cache.getName());
+        assertEquals("Die unbesiegbaren Geo - Geparden", cache.getOwner());
+        assertEquals(CacheSize.SMALL, cache.getSize());
+        assertEquals(1.0f, cache.getDifficulty().floatValue());
+        assertEquals(4.0f, cache.getTerrain().floatValue());
+        assertEquals("Baden-Württemberg, Germany", cache.getLocation());
+        assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel. A old dream of my childhood, a treasure on a lonely is", cache.getShortdesc());
+        assertTrue(new Geopoint(48.85968, 9.18740).isEqualTo(cache.getCoords()));
     }
 
     public void testGc31j2h() throws IOException {
@@ -83,7 +83,7 @@ public class GPXParserTest extends InstrumentationTestCase {
         assertSame(cache, caches.get(0));
 
         // no waypoints without importing waypoint file
-        assertNull(cache.waypoints);
+        assertNull(cache.getWaypoints());
     }
 
     public void testGc31j2hWpts() throws IOException {
@@ -129,18 +129,18 @@ public class GPXParserTest extends InstrumentationTestCase {
         assertFalse(cache.isEventCache());
         assertFalse(cache.isMembersOnly());
         assertFalse(cache.isOwn());
-        assertTrue(cache.found);
+        assertTrue(cache.isFound());
         assertEquals("Station3: Der zerbrochene Stein zählt doppelt.\nFinal: Oben neben dem Tor", cache.getHint());
         // logs
-        assertEquals(6, cache.logs.size());
-        final cgLog log = cache.logs.get(5);
+        assertEquals(6, cache.getLogs().size());
+        final cgLog log = cache.getLogs().get(5);
         assertEquals("Geoteufel", log.author);
         assertEquals(parseTime("2011-09-11T07:00:00Z"), log.date);
         assertEquals(-1, log.found);
         assertEquals("Sehr schöne Runde und wir haben wieder etwas Neues über Hockenheim gelernt. Super Tarnung.\nTFTC, Geoteufel", log.log);
 
         // following info is not contained in pocket query gpx file
-        assertNull(cache.attributes);
+        assertNull(cache.getAttributes());
     }
 
     private static long parseTime(final String time) {
@@ -152,27 +152,27 @@ public class GPXParserTest extends InstrumentationTestCase {
     }
 
     private static void assertGc31j2hWaypoints(final cgCache cache) {
-        assertNotNull(cache.waypoints);
-        assertEquals(2, cache.waypoints.size());
-        cgWaypoint wp = cache.waypoints.get(0);
-        assertEquals("GC31J2H", wp.geocode);
+        assertNotNull(cache.getWaypoints());
+        assertEquals(2, cache.getWaypoints().size());
+        cgWaypoint wp = cache.getWaypoints().get(0);
+        assertEquals("GC31J2H", wp.getGeocode());
         assertEquals("00", wp.getPrefix());
-        assertEquals("---", wp.lookup);
-        assertEquals("Parkplatz", wp.name);
-        assertEquals("Kostenfreies Parken (je nach Parkreihe Parkscheibe erforderlich)", wp.note);
-        assertEquals(WaypointType.PARKING, wp.type);
-        assertEquals(49.317517, wp.coords.getLatitude(), 0.000001);
-        assertEquals(8.545083, wp.coords.getLongitude(), 0.000001);
+        assertEquals("---", wp.getLookup());
+        assertEquals("Parkplatz", wp.getName());
+        assertEquals("Kostenfreies Parken (je nach Parkreihe Parkscheibe erforderlich)", wp.getNote());
+        assertEquals(WaypointType.PARKING, wp.getWaypointType());
+        assertEquals(49.317517, wp.getCoords().getLatitude(), 0.000001);
+        assertEquals(8.545083, wp.getCoords().getLongitude(), 0.000001);
 
-        wp = cache.waypoints.get(1);
-        assertEquals("GC31J2H", wp.geocode);
+        wp = cache.getWaypoints().get(1);
+        assertEquals("GC31J2H", wp.getGeocode());
         assertEquals("S1", wp.getPrefix());
-        assertEquals("---", wp.lookup);
-        assertEquals("Station 1", wp.name);
-        assertEquals("Ein zweiter Wegpunkt, der nicht wirklich existiert sondern nur zum Testen gedacht ist.", wp.note);
-        assertEquals(WaypointType.STAGE, wp.type);
-        assertEquals(49.317500, wp.coords.getLatitude(), 0.000001);
-        assertEquals(8.545100, wp.coords.getLongitude(), 0.000001);
+        assertEquals("---", wp.getLookup());
+        assertEquals("Station 1", wp.getName());
+        assertEquals("Ein zweiter Wegpunkt, der nicht wirklich existiert sondern nur zum Testen gedacht ist.", wp.getNote());
+        assertEquals(WaypointType.STAGE, wp.getWaypointType());
+        assertEquals(49.317500, wp.getCoords().getLatitude(), 0.000001);
+        assertEquals(8.545100, wp.getCoords().getLongitude(), 0.000001);
     }
 
     public static void testGetWaypointsFileForGpx() {

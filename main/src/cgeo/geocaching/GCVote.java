@@ -161,7 +161,7 @@ public final class GCVote {
         if (!cache.supportsGCVote()) {
             return false;
         }
-        String guid = cache.guid;
+        String guid = cache.getGuid();
         if (StringUtils.isBlank(guid)) {
             return false;
         }

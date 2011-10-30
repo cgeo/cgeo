@@ -353,7 +353,7 @@ public class cgeocaches extends AbstractListActivity {
 
             if (msg.what > -1) {
                 if (waitDialog != null) {
-                    cacheList.get(msg.what).statusChecked = false;
+                    cacheList.get(msg.what).setStatusChecked(false);
 
                     if (adapter != null) {
                         adapter.notifyDataSetChanged();
@@ -492,7 +492,7 @@ public class cgeocaches extends AbstractListActivity {
             setAdapter();
 
             if (msg.what > -1) {
-                cacheList.get(msg.what).statusChecked = false;
+                cacheList.get(msg.what).setStatusChecked(false);
             } else {
                 if (adapter != null) {
                     adapter.setSelectMode(false, true);
@@ -516,7 +516,7 @@ public class cgeocaches extends AbstractListActivity {
 
             if (msg.what > -1)
             {
-                cacheList.get(msg.what).statusChecked = false;
+                cacheList.get(msg.what).setStatusChecked(false);
                 waitDialog.setProgress(detailProgress);
             }
             else if (-2 == msg.what)
@@ -967,7 +967,7 @@ public class cgeocaches extends AbstractListActivity {
                 item.setEnabled(false);
                 for (cgCache cache : cacheList)
                 {
-                    if (cache.logOffline)
+                    if (cache.isLogOffline())
                     {
                         item.setEnabled(true);
                         break;
@@ -1158,20 +1158,20 @@ public class cgeocaches extends AbstractListActivity {
             }
             final cgCache cache = adapter.getItem(adapterInfo.position);
 
-            if (StringUtils.isNotBlank(cache.name)) {
-                menu.setHeaderTitle(cache.name);
+            if (StringUtils.isNotBlank(cache.getName())) {
+                menu.setHeaderTitle(cache.getName());
             } else {
-                menu.setHeaderTitle(cache.geocode);
+                menu.setHeaderTitle(cache.getGeocode());
             }
 
-            if (cache.coords != null) {
+            if (cache.getCoords() != null) {
                 menu.add(0, MENU_COMPASS, 0, res.getString(R.string.cache_menu_compass));
                 SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
                 NavigationAppFactory.addMenuItems(subMenu, this, res);
                 addVisitMenu(menu, cache);
                 menu.add(0, MENU_CACHE_DETAILS, 0, res.getString(R.string.cache_menu_details));
             }
-            if (cache.reason >= 1) {
+            if (cache.getReason() >= 1) {
                 menu.add(0, MENU_DROP_CACHE, 0, res.getString(R.string.cache_offline_drop));
                 List<cgList> cacheLists = app.getLists();
                 int listCount = cacheLists.size();
@@ -1227,10 +1227,10 @@ public class cgeocaches extends AbstractListActivity {
 
         if (id == MENU_COMPASS) {
             Intent navigateIntent = new Intent(this, cgeonavigate.class);
-            navigateIntent.putExtra("latitude", cache.coords.getLatitude());
-            navigateIntent.putExtra("longitude", cache.coords.getLongitude());
-            navigateIntent.putExtra("geocode", cache.geocode.toUpperCase());
-            navigateIntent.putExtra("name", cache.name);
+            navigateIntent.putExtra("latitude", cache.getCoords().getLatitude());
+            navigateIntent.putExtra("longitude", cache.getCoords().getLongitude());
+            navigateIntent.putExtra("geocode", cache.getGeocode().toUpperCase());
+            navigateIntent.putExtra("name", cache.getName());
 
             startActivity(navigateIntent);
 
@@ -1239,8 +1239,8 @@ public class cgeocaches extends AbstractListActivity {
             return cache.logVisit(this);
         } else if (id == MENU_CACHE_DETAILS) {
             Intent cachesIntent = new Intent(this, cgeodetail.class);
-            cachesIntent.putExtra("geocode", cache.geocode.toUpperCase());
-            cachesIntent.putExtra("name", cache.name);
+            cachesIntent.putExtra("geocode", cache.getGeocode().toUpperCase());
+            cachesIntent.putExtra("name", cache.getName());
             startActivity(cachesIntent);
 
             return true;
@@ -1300,7 +1300,7 @@ public class cgeocaches extends AbstractListActivity {
         } else if (id >= CONTEXT_MENU_MOVE_TO_LIST && id < CONTEXT_MENU_MOVE_TO_LIST + 100) {
             int newListId = id - CONTEXT_MENU_MOVE_TO_LIST;
             if (cache != null) {
-                app.moveToList(cache.geocode, newListId);
+                app.moveToList(cache.getGeocode(), newListId);
             }
             adapter.resetChecks();
 
@@ -1311,8 +1311,8 @@ public class cgeocaches extends AbstractListActivity {
             boolean moveAll = adapter.getChecked() == 0;
             final List<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
             for (cgCache c : cacheListTemp) {
-                if (moveAll || c.statusChecked) {
-                    app.moveToList(c.geocode, newListId);
+                if (moveAll || c.isStatusChecked()) {
+                    app.moveToList(c.getGeocode(), newListId);
                 }
             }
             adapter.resetChecks();
@@ -1328,7 +1328,7 @@ public class cgeocaches extends AbstractListActivity {
 
         if (cache != null) {
             // create a search for a single cache (as if in details view)
-            final cgSearch singleSearch = base.searchByGeocode(cache.geocode, null, 0, false, null);
+            final cgSearch singleSearch = base.searchByGeocode(cache.getGeocode(), null, 0, false, null);
 
             if (NavigationAppFactory.onMenuItemSelected(item, geo, this,
                     res, cache, singleSearch, null, null)) {
@@ -2000,7 +2000,7 @@ public class cgeocaches extends AbstractListActivity {
 
             final List<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
             for (cgCache cache : cacheListTemp) {
-                if (checked > 0 && !cache.statusChecked) {
+                if (checked > 0 && !cache.isStatusChecked()) {
                     handler.sendEmptyMessage(0);
 
                     yield();
@@ -2183,7 +2183,7 @@ public class cgeocaches extends AbstractListActivity {
 
             final List<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
             for (cgCache cache : cacheListTemp) {
-                if (checked > 0 && !cache.statusChecked) {
+                if (checked > 0 && !cache.isStatusChecked()) {
                     continue;
                 }
 
@@ -2193,7 +2193,7 @@ public class cgeocaches extends AbstractListActivity {
                         break;
                     }
 
-                    app.markDropped(cache.geocode);
+                    app.markDropped(cache.getGeocode());
                 } catch (Exception e) {
                     Log.e(Settings.tag, "cgeocaches.geocachesDropDetails: " + e.toString());
                 }
@@ -2227,7 +2227,7 @@ public class cgeocaches extends AbstractListActivity {
         @Override
         public void run() {
             for (cgCache cache : cacheList) {
-                if (checked > 0 && !cache.statusChecked) {
+                if (checked > 0 && !cache.isStatusChecked()) {
                     handler.sendEmptyMessage(0);
 
                     yield();
@@ -2240,7 +2240,7 @@ public class cgeocaches extends AbstractListActivity {
                         break;
                     }
 
-                    app.clearVisitDate(cache.geocode);
+                    app.clearVisitDate(cache.getGeocode());
 
                     handler.sendEmptyMessage(cacheList.indexOf(cache));
 
@@ -2297,7 +2297,7 @@ public class cgeocaches extends AbstractListActivity {
             logTypes.put(cgBase.LOG_WEBCAM_PHOTO_TAKEN, "Webcam Photo Taken");
 
             for (cgCache cache : cacheList) {
-                if (checked > 0 && !cache.statusChecked) {
+                if (checked > 0 && !cache.isStatusChecked()) {
                     handler.sendEmptyMessage(0);
 
                     yield();
@@ -2311,13 +2311,13 @@ public class cgeocaches extends AbstractListActivity {
                         break;
                     }
 
-                    if (cache.logOffline)
+                    if (cache.isLogOffline())
                     {
-                        cgLog log = app.loadLogOffline(cache.geocode);
+                        cgLog log = app.loadLogOffline(cache.getGeocode());
 
                         if (null != logTypes.get(log.type))
                         {
-                            fieldNoteBuffer.append(cache.geocode)
+                            fieldNoteBuffer.append(cache.getGeocode())
                                     .append(',')
                                     .append(fieldNoteDateFormat.format(new Date(log.date)))
                                     .append(',')
@@ -2492,8 +2492,8 @@ public class cgeocaches extends AbstractListActivity {
             if (checked > 0) {
                 final List<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
                 for (cgCache cache : cacheListTemp) {
-                    if (cache.statusChecked) {
-                        app.moveToList(cache.geocode, listId);
+                    if (cache.isStatusChecked()) {
+                        app.moveToList(cache.getGeocode(), listId);
                     }
                 }
             }

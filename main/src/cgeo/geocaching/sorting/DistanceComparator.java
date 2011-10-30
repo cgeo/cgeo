@@ -21,19 +21,19 @@ public class DistanceComparator extends AbstractCacheComparator {
 
     @Override
     protected int compareCaches(final cgCache cache1, final cgCache cache2) {
-        if ((cache1.coords == null || cache2.coords == null)
-                && cache1.distance != null && cache2.distance != null) {
-            return Double.compare(cache1.distance, cache2.distance);
+        if ((cache1.getCoords() == null || cache2.getCoords() == null)
+                && cache1.getDistance() != null && cache2.getDistance() != null) {
+            return Double.compare(cache1.getDistance(), cache2.getDistance());
         } else {
-            if (cache1.coords == null) {
+            if (cache1.getCoords() == null) {
                 return 1;
             }
-            if (cache2.coords == null) {
+            if (cache2.getCoords() == null) {
                 return -1;
             }
 
-            return Float.compare(coords.distanceTo(cache1.coords),
-                    coords.distanceTo(cache2.coords));
+            return Float.compare(coords.distanceTo(cache1.getCoords()),
+                    coords.distanceTo(cache2.getCoords()));
         }
     }
 
