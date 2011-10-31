@@ -1422,19 +1422,18 @@ public class cgeocaches extends AbstractListActivity {
             return;
         }
 
-        if (!more) {
+        if (more) {
+            listFooterText.setText(res.getString(R.string.caches_more_caches) + " (" + res.getString(R.string.caches_more_caches_currently) + ": " + cacheList.size() + ")");
+            listFooter.setOnClickListener(new moreCachesListener());
+        } else {
             if (CollectionUtils.isEmpty(cacheList)) {
                 listFooterText.setText(res.getString(R.string.caches_no_cache));
             } else {
                 listFooterText.setText(res.getString(R.string.caches_more_caches_no));
             }
-            listFooter.setClickable(false);
             listFooter.setOnClickListener(null);
-        } else {
-            listFooterText.setText(res.getString(R.string.caches_more_caches));
-            listFooter.setClickable(true);
-            listFooter.setOnClickListener(new moreCachesListener());
         }
+        listFooter.setClickable(more);
     }
 
     private void init() {

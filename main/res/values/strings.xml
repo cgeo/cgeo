@@ -248,9 +248,10 @@
 
   <!-- caches -->
   <string name="caches_no_cache">There is no cache</string>
-  <string name="caches_more_caches">Not enough? Get more caches!</string>
-  <string name="caches_more_caches_no">That\'s all. No more caches.</string>
+  <string name="caches_more_caches">Load more caches</string>
+  <string name="caches_more_caches_no">No more caches</string>
   <string name="caches_more_caches_loading">Loading caches…</string>
+  <string name="caches_more_caches_currently">currently</string>
   <string name="caches_downloading">Downloading caches…\nETA: </string>
   <string name="caches_eta_ltm">Less than a minute</string>
   <string name="caches_eta_mins"> minutes</string>
