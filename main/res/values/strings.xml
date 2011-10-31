@@ -926,6 +926,9 @@
 
   <!-- changelog -->
   <string name="changelog">\n
+    <b>31.10.2011</b>\n
+    · fix: Store for offline from Live map\n
+    \n\n
     <b>30.10.2011</b>\n
     · new: cleanup the cgeo private cache directory when caches are removed from database\n
     · new: display user avatar when checking login/password from geocaching.com\n
