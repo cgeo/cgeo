@@ -50,7 +50,7 @@ public class cgCache implements ICache {
     private String geocode = "";
     private String cacheId = "";
     private String guid = "";
-    private CacheType cacheType = null;
+    private CacheType cacheType = CacheType.UNKNOWN;
     private String name = "";
     private Spannable nameSp = null;
     private String owner = "";
@@ -128,7 +128,7 @@ public class cgCache implements ICache {
         if (StringUtils.isBlank(guid)) {
             guid = other.getGuid();
         }
-        if (null == cacheType) {
+        if (null == cacheType || CacheType.UNKNOWN == cacheType) {
             cacheType = other.getCacheType();
         }
         if (StringUtils.isBlank(name)) {
@@ -918,7 +918,12 @@ public class cgCache implements ICache {
     }
 
     public void setCacheType(CacheType cacheType) {
-        this.cacheType = cacheType;
+        if (cacheType == null) {
+            this.cacheType = CacheType.UNKNOWN;
+        }
+        else {
+            this.cacheType = cacheType;
+        }
     }
 
 }

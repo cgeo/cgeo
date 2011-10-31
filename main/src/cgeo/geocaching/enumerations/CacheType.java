@@ -55,11 +55,19 @@ public enum CacheType {
     }
 
     public final static CacheType getById(final String id) {
-        return CacheType.FIND_BY_ID.get(id.toLowerCase().trim());
+        final CacheType result = CacheType.FIND_BY_ID.get(id.toLowerCase().trim());
+        if (result == null) {
+            return UNKNOWN;
+        }
+        return result;
     }
 
     public final static CacheType getByPattern(final String pattern) {
-        return CacheType.FIND_BY_PATTERN.get(pattern.toLowerCase().trim());
+        final CacheType result = CacheType.FIND_BY_PATTERN.get(pattern.toLowerCase().trim());
+        if (result == null) {
+            return UNKNOWN;
+        }
+        return result;
     }
 
 }
