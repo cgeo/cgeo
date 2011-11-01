@@ -204,16 +204,7 @@ public class cgeocaches extends AbstractListActivity {
                     setMoreCaches(false);
                 } else {
                     final Integer count = cgeoapplication.getTotal(search);
-
-                    if (count != null && count > 0) {
-                        if (cacheList.size() < cgeoapplication.getTotal(search) && cacheList.size() < MAX_LIST_ITEMS) {
-                            setMoreCaches(true);
-                        } else {
-                            setMoreCaches(false);
-                        }
-                    } else {
-                        setMoreCaches(false);
-                    }
+                    setMoreCaches(count != null && count > 0 && cacheList != null && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
                 }
 
                 if (cacheList != null && cgeoapplication.getError(search) == StatusCode.UNAPPROVED_LICENSE) {
@@ -304,15 +295,7 @@ public class cgeocaches extends AbstractListActivity {
                     setMoreCaches(false);
                 } else {
                     final Integer count = cgeoapplication.getTotal(search);
-                    if (count != null && count > 0) {
-                        if (cacheList.size() < cgeoapplication.getTotal(search) && cacheList.size() < MAX_LIST_ITEMS) {
-                            setMoreCaches(true);
-                        } else {
-                            setMoreCaches(false);
-                        }
-                    } else {
-                        setMoreCaches(false);
-                    }
+                    setMoreCaches(count != null && count > 0 && cacheList != null && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
                 }
 
                 if (cgeoapplication.getError(search) != null) {
@@ -334,8 +317,6 @@ public class cgeocaches extends AbstractListActivity {
                 showToast(res.getString(R.string.err_detail_cache_find_next));
                 Log.e(Settings.tag, "cgeocaches.loadNextPageHandler: " + e.toString());
             }
-
-            listFooter.setOnClickListener(new moreCachesListener());
 
             hideLoading();
             showProgress(false);
@@ -1445,27 +1426,12 @@ public class cgeocaches extends AbstractListActivity {
             dir = app.startDir(this, dirUpdate);
         }
 
-        if (cacheList != null) {
-            setTitle(title);
-        }
-
         if (CollectionUtils.isNotEmpty(cacheList)) {
             final Integer count = cgeoapplication.getTotal(search);
-            if (count != null && count > 0) {
-                setTitle(title);
-                if (cacheList.size() < cgeoapplication.getTotal(search) && cacheList.size() < MAX_LIST_ITEMS) {
-                    setMoreCaches(true);
-                } else {
-                    setMoreCaches(false);
-                }
-            } else {
-                setTitle(title);
-                setMoreCaches(false);
-            }
-        } else {
-            setTitle(title);
+            setMoreCaches(count != null && count > 0 && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
         }
 
+        setTitle(title);
         setAdapter();
 
         if (geo != null) {
