@@ -236,7 +236,6 @@
   <string name="menu_settings">Paramètres</string>
   <string name="menu_history">Historique</string>
   <string name="menu_filter">Filtre</string>
-  <string name="menu_scan">QR code</string>
 
   <!-- main screen -->
   <string name="live_map_button">Carte</string>

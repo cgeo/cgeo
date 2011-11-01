@@ -235,7 +235,6 @@
   <string name="menu_settings">Inställningar</string>
   <string name="menu_history">Loggade cacher</string>
   <string name="menu_filter">Filter</string>
-  <string name="menu_scan">Scanna QR kod</string>
 
   <!-- main screen -->
   <string name="live_map_button">Live karta</string>

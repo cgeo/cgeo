@@ -232,7 +232,6 @@
   <string name="menu_settings">Beállítások</string>
   <string name="menu_history">Előzmények</string>
   <string name="menu_filter">Szűrő</string>
-  <string name="menu_scan">Vonalkód beolvasása</string>
 
   <!-- main screen -->
   <string name="live_map_button">Élő térkép</string>

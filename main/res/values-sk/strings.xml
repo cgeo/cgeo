@@ -236,7 +236,6 @@
   <string name="menu_settings">Nastavenia</string>
   <string name="menu_history">História</string>
   <string name="menu_filter">Filter</string>
-  <string name="menu_scan">Snímať QR kód</string>
 
   <!-- main screen -->
   <string name="live_map_button">Aktívna mapa</string>
