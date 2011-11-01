@@ -47,7 +47,7 @@ public class cgeoimages extends AbstractActivity {
 
     static private Collection<Bitmap> bitmaps = Collections.synchronizedCollection(new ArrayList<Bitmap>());
 
-    private void loadImages(final List<cgImage> images, final int progressMessage, final boolean save, final boolean offline) {
+    private void loadImages(final List<cgImage> images, final int progressMessage, final boolean offline) {
 
         count = images.size();
         progressDialog = new ProgressDialog(cgeoimages.this);
@@ -69,7 +69,7 @@ public class cgeoimages extends AbstractActivity {
                 descView.setVisibility(View.VISIBLE);
             }
 
-            new AsyncImgLoader(rowView, img, save, offline).execute();
+            new AsyncImgLoader(rowView, img, offline).execute();
             imagesView.addView(rowView);
         }
     }
@@ -78,19 +78,17 @@ public class cgeoimages extends AbstractActivity {
 
         final private LinearLayout view;
         final private cgImage img;
-        final private boolean save;
         final boolean offline;
 
-        public AsyncImgLoader(final LinearLayout view, final cgImage img, final boolean save, final boolean offline) {
+        public AsyncImgLoader(final LinearLayout view, final cgImage img, final boolean offline) {
             this.view = view;
             this.img = img;
-            this.save = save;
             this.offline = offline;
         }
 
         @Override
         protected BitmapDrawable doInBackground(Void... params) {
-            final HtmlImage imgGetter = new HtmlImage(cgeoimages.this, geocode, true, offline ? 1 : 0, false, save);
+            final HtmlImage imgGetter = new HtmlImage(cgeoimages.this, geocode, true, offline ? 1 : 0, false);
             return imgGetter.getDrawable(img.url);
         }
 
@@ -188,9 +186,8 @@ public class cgeoimages extends AbstractActivity {
 
         final int message = img_type == SPOILER_IMAGES ? R.string.cache_spoiler_images_loading : R.string.cache_log_images_loading;
         final boolean offline = app.isOffline(geocode, null) && (img_type == SPOILER_IMAGES || Settings.isStoreLogImages());
-        final boolean save = img_type == SPOILER_IMAGES ? true : Settings.isStoreLogImages();
 
-        loadImages(images, message, save, offline);
+        loadImages(images, message, offline);
     }
 
     @Override
