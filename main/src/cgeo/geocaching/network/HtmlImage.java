@@ -22,6 +22,8 @@ import android.view.Display;
 import android.view.WindowManager;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Date;
 
 public class HtmlImage implements Html.ImageGetter {
@@ -101,6 +103,15 @@ public class HtmlImage implements Html.ImageGetter {
             if (save) {
                 final File file = LocalStorage.getStorageFile(geocode, url, true);
                 LocalStorage.saveEntityToFile(bufferedEntity, file);
+            } else {
+                setSampleSize(bufferedEntity.getContentLength());
+                InputStream is;
+                try {
+                    is = bufferedEntity.getContent();
+                    imagePre = BitmapFactory.decodeStream(is, null, bfOptions);
+                } catch (IOException e) {
+                    Log.e(Settings.tag, "HtmlImage.getDrawable (decoding image)", e);
+                }
             }
         }
 
