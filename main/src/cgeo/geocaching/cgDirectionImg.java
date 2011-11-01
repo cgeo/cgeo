@@ -9,7 +9,7 @@ import java.io.File;
 
 public class cgDirectionImg {
 
-    public static void getDrawable(String geocode, String code) {
+    public static void getDrawable(final String geocode, final String code) {
         if (StringUtils.isBlank(geocode) || StringUtils.isBlank(code)) {
             return;
         }

@@ -716,7 +716,7 @@ public class cgBase {
                     final Matcher matcherDirection = patternDirection.matcher(row);
                     while (matcherDirection.find()) {
                         if (matcherDirection.groupCount() > 0) {
-                            cache.directionImg = matcherDirection.group(1);
+                            cache.directionImg = URLDecoder.decode(matcherDirection.group(1));
                         }
                     }
                 } catch (Exception e) {
