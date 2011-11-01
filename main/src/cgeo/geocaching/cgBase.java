@@ -155,8 +155,7 @@ public class cgBase {
 
         Map<String, SimpleDateFormat> map = new HashMap<String, SimpleDateFormat>();
 
-        for (String format : formats)
-        {
+        for (String format : formats) {
             map.put(format, new SimpleDateFormat(format, Locale.ENGLISH));
         }
 
@@ -415,8 +414,7 @@ public class cgBase {
             String sno = matcherViewstates.group(1); // number of viewstate
             if ("".equals(sno)) {
                 no = 0;
-            }
-            else {
+            } else {
                 no = Integer.parseInt(sno);
             }
             viewstates[no] = matcherViewstates.group(2);
@@ -559,8 +557,7 @@ public class cgBase {
         }
     }
 
-    public static boolean isPremium(String page)
-    {
+    public static boolean isPremium(String page) {
         if (checkLogin(page)) {
             final Matcher matcherIsPremium = patternIsPremium.matcher(page);
             return matcherIsPremium.find();
@@ -587,6 +584,60 @@ public class cgBase {
         }
 
         return false;
+    }
+
+    public static String AdressIconLogin(String page) {
+        if (page == null || page.length() == 0) {
+            return "";
+        }
+
+        final Pattern patternIconLogin = Pattern.compile(
+                "<img title=\"your profile\" src=\"([^\"]+)\"",
+                Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+
+        final Matcher matcherIconLogin = patternIconLogin.matcher(page);
+        if (matcherIconLogin.find()) {
+            if (matcherIconLogin.groupCount() > 0) {
+                return matcherIconLogin.group(1);
+            }
+
+        }
+        return "";
+
+    }
+
+    public static String UsernameLogin(String page) {
+        if (page == null || page.length() == 0) {
+            return "";
+        }
+        final Matcher matcherLogin = patternLogged2In.matcher(page);
+        if (matcherLogin.find()) {
+            if (matcherLogin.groupCount() > 0) {
+                return matcherLogin.group(1);
+            }
+
+        }
+        return "";
+
+    }
+
+    public static String UserNbCaches(String page) {
+        if (page == null || page.length() == 0) {
+            return "";
+        }
+        final Pattern patternNbCaches = Pattern.compile(
+                "title=\"Caches Found\" /> ([^<]+)</strong>",
+                Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+
+        final Matcher matcherNbCaches = patternNbCaches.matcher(page);
+        if (matcherNbCaches.find()) {
+            if (matcherNbCaches.groupCount() > 0) {
+                return matcherNbCaches.group(1).replaceAll(",", "");
+            }
+
+        }
+        return "";
+
     }
 
     public static String switchToEnglish(final String[] viewstates) {
@@ -766,8 +817,7 @@ public class cgBase {
             }
 
             // cache direction - image
-            if (Settings.getLoadDirImg())
-            {
+            if (Settings.getLoadDirImg()) {
                 try {
                     final Matcher matcherDirection = patternDirection.matcher(row);
                     while (matcherDirection.find()) {
@@ -931,8 +981,7 @@ public class cgBase {
         }
 
         // get direction images
-        if (Settings.getLoadDirImg())
-        {
+        if (Settings.getLoadDirImg()) {
             for (cgCache oneCache : caches.cacheList) {
                 if (oneCache.coords == null && oneCache.directionImg != null) {
                     cgDirectionImg.getDrawable(oneCache.geocode, oneCache.directionImg);
@@ -1344,29 +1393,24 @@ public class cgBase {
         }
 
         // cache logs counts
-        try
-        {
+        try {
             final Matcher matcherLogCounts = patternCountLogs.matcher(page);
 
-            if (matcherLogCounts.find())
-            {
+            if (matcherLogCounts.find()) {
                 final Matcher matcherLog = patternCountLog.matcher(matcherLogCounts.group(1));
 
-                while (matcherLog.find())
-                {
+                while (matcherLog.find()) {
                     String typeStr = matcherLog.group(1);
                     String countStr = matcherLog.group(2).replaceAll("[.,]", "");
 
                     if (StringUtils.isNotBlank(typeStr)
                             && logTypes.containsKey(typeStr.toLowerCase())
-                            && StringUtils.isNotBlank(countStr))
-                    {
+                            && StringUtils.isNotBlank(countStr)) {
                         cache.logCounts.put(logTypes.get(typeStr.toLowerCase()), Integer.parseInt(countStr));
                     }
                 }
             }
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             // failed to parse logs
             Log.w(Settings.tag, "cgeoBase.parseCache: Failed to parse cache log count");
         }
@@ -1655,28 +1699,22 @@ public class cgBase {
     }
 
     public static Date parseGcCustomDate(final String input)
-            throws ParseException
-    {
-        if (StringUtils.isBlank(input))
-        {
+            throws ParseException {
+        if (StringUtils.isBlank(input)) {
             throw new ParseException("Input is null", 0);
         }
 
         final String trimmed = input.trim();
 
-        if (gcCustomDateFormats.containsKey(Settings.getGcCustomDate()))
-        {
-            try
-            {
+        if (gcCustomDateFormats.containsKey(Settings.getGcCustomDate())) {
+            try {
                 return gcCustomDateFormats.get(Settings.getGcCustomDate()).parse(trimmed);
             } catch (ParseException e) {
             }
         }
 
-        for (SimpleDateFormat format : gcCustomDateFormats.values())
-        {
-            try
-            {
+        for (SimpleDateFormat format : gcCustomDateFormats.values()) {
+            try {
                 return format.parse(trimmed);
             } catch (ParseException e) {
             }
@@ -1685,8 +1723,7 @@ public class cgBase {
         throw new ParseException("No matching pattern", 0);
     }
 
-    public static void detectGcCustomDate()
-    {
+    public static void detectGcCustomDate() {
         final String result = getResponseData(request("http://www.geocaching.com/account/ManagePreferences.aspx", null, false, false, false));
 
         if (null == result) {
@@ -1697,8 +1734,7 @@ public class cgBase {
         final Pattern pattern = Pattern.compile("<option selected=\"selected\" value=\"([ /Mdy-]+)\">", Pattern.CASE_INSENSITIVE);
         final Matcher matcher = pattern.matcher(result);
 
-        if (matcher.find())
-        {
+        if (matcher.find()) {
             Settings.setGcCustomDate(matcher.group(1));
         }
     }
@@ -1910,8 +1946,7 @@ public class cgBase {
         }
 
         // trackable logs
-        try
-        {
+        try {
             final Matcher matcherLogs = PATTERN_TRACKABLE_Log.matcher(page);
             /*
              * 1. Type (img)
@@ -1921,31 +1956,25 @@ public class cgBase {
              * 5. Cache-name
              * 6. Logtext
              */
-            while (matcherLogs.find())
-            {
+            while (matcherLogs.find()) {
                 final cgLog logDone = new cgLog();
 
-                if (logTypes.containsKey(matcherLogs.group(1).toLowerCase()))
-                {
+                if (logTypes.containsKey(matcherLogs.group(1).toLowerCase())) {
                     logDone.type = logTypes.get(matcherLogs.group(1).toLowerCase());
-                }
-                else
-                {
+                } else {
                     logDone.type = logTypes.get("icon_note");
                 }
 
                 logDone.author = Html.fromHtml(matcherLogs.group(3)).toString();
 
-                try
-                {
+                try {
                     logDone.date = parseGcCustomDate(matcherLogs.group(2)).getTime();
                 } catch (ParseException e) {
                 }
 
                 logDone.log = matcherLogs.group(6).trim();
 
-                if (matcherLogs.group(4) != null && matcherLogs.group(5) != null)
-                {
+                if (matcherLogs.group(4) != null && matcherLogs.group(5) != null) {
                     logDone.cacheGuid = matcherLogs.group(4);
                     logDone.cacheName = matcherLogs.group(5);
                 }
@@ -2573,7 +2602,7 @@ public class cgBase {
             }
 
             params.put("ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnSelectedActions", hdnSelected.toString(), // selected trackables
-                    "ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnCurrentFilter", "");
+            "ctl00$ContentBody$LogBookPanel1$uxTrackables$hdnCurrentFilter", "");
         }
 
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/log.aspx").encodedQuery("ID=" + cacheid).build().toString();
@@ -2811,8 +2840,7 @@ public class cgBase {
         final String url = cache.getUrl();
         if (url.length() >= 100) {
             status = "I found " + url;
-        }
-        else {
+        } else {
             String name = cache.name;
             status = "I found " + name + " (" + url + ")";
             if (status.length() > Twitter.MAX_TWEET_SIZE) {
