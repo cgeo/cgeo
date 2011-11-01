@@ -142,7 +142,10 @@ final public class OkapiClient {
 
         if (!uri.isAbsolute()) {
             final IConnector connector = ConnectorFactory.getConnector(geocode);
-            return "http://" + connector.getHost() + "/" + url;
+            final String host = connector.getHost();
+            if (StringUtils.isNotBlank(host)) {
+                return "http://" + host + "/" + url;
+            }
         }
         return url;
     }
@@ -254,7 +257,12 @@ final public class OkapiClient {
             return null;
         }
 
-        final String uri = "http://" + connector.getHost() + service;
+        final String host = connector.getHost();
+        if (StringUtils.isBlank(host)) {
+            return null;
+        }
+
+        final String uri = "http://" + host + service;
         ((ApiOpenCachingConnector) connector).addAuthentication(params);
         return cgBase.requestJSON(uri, params);
     }

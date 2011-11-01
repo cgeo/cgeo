@@ -260,11 +260,17 @@ public abstract class GPXParser extends FileParser {
 
             @Override
             public void end() {
+                // try to find geocode somewhere else
                 if (StringUtils.isBlank(cache.getGeocode())) {
-                    // try to find geocode somewhere else
                     findGeoCode(name);
                     findGeoCode(desc);
                     findGeoCode(cmt);
+                }
+                // take the name as code, if nothing else is available
+                if (StringUtils.isBlank(cache.getGeocode())) {
+                    if (StringUtils.isNotBlank(name)) {
+                        cache.setGeocode(name.trim());
+                    }
                 }
 
                 if (StringUtils.isNotBlank(cache.getGeocode())
@@ -772,11 +778,15 @@ public abstract class GPXParser extends FileParser {
         if (input == null || StringUtils.isNotBlank(cache.getGeocode())) {
             return;
         }
-        final Matcher matcherGeocode = patternGeocode.matcher(input);
+        final String trimmed = input.trim();
+        final Matcher matcherGeocode = patternGeocode.matcher(trimmed);
         if (matcherGeocode.find()) {
             final String geocode = matcherGeocode.group(1);
-            if (ConnectorFactory.canHandle(geocode)) {
-                cache.setGeocode(geocode);
+            // a geocode should not be part of a word
+            if (geocode.length() == trimmed.length() || Character.isWhitespace(trimmed.charAt(geocode.length()))) {
+                if (ConnectorFactory.canHandle(geocode)) {
+                    cache.setGeocode(geocode);
+                }
             }
         }
     }

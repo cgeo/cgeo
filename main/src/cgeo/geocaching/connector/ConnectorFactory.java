@@ -7,9 +7,9 @@ import cgeo.geocaching.connector.opencaching.OpenCachingConnector;
 import org.apache.commons.lang3.StringUtils;
 
 public final class ConnectorFactory {
-    private static final GCConnector GC_CONNECTOR = new GCConnector();
+    private static final UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
     private static final IConnector[] connectors = new IConnector[] {
-            GC_CONNECTOR,
+            new GCConnector(),
             new OpenCachingConnector("OpenCaching.DE", "www.opencaching.de", "OC"),
             new OpenCachingConnector("OpenCaching.CZ", "www.opencaching.cz", "OZ"),
             new ApiOpenCachingConnector("OpenCaching.CO.UK", "www.opencaching.org.uk", "OK", "arU4okouc4GEjMniE2fq"),
@@ -22,7 +22,8 @@ public final class ConnectorFactory {
             new ApiOpenCachingConnector("OpenCaching.US", "www.opencaching.us", "OU", "pTsYAYSXFcfcRQnYE6uA"),
             new OXConnector(),
             new GeocachingAustraliaConnector(),
-            new GeopeitusConnector()
+            new GeopeitusConnector(),
+            UNKNOWN_CONNECTOR // the unknown connector MUST be the last one
     };
 
     public static IConnector[] getConnectors() {
@@ -47,21 +48,18 @@ public final class ConnectorFactory {
 
     public static IConnector getConnector(String geocode) {
         if (isInvalidGeocode(geocode)) {
-            return GC_CONNECTOR;
+            return UNKNOWN_CONNECTOR;
         }
         for (IConnector connector : connectors) {
             if (connector.canHandle(geocode)) {
                 return connector;
             }
         }
-        // in case of errors, assume GC as default
-        return GC_CONNECTOR;
+        // in case of errors, take UNKNOWN
+        return UNKNOWN_CONNECTOR;
     }
 
     private static boolean isInvalidGeocode(final String geocode) {
-        if (StringUtils.isBlank(geocode) || geocode.length() <= 2) {
-            return true;
-        }
-        return false;
+        return StringUtils.isBlank(geocode);
     }
 }
