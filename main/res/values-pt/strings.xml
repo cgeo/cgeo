@@ -247,15 +247,15 @@
   <string name="caches_stored">Arquivadas</string>
   <string name="caches_history">Histórico</string>
   <string name="caches_on_map">Mostrar no mapa</string>
-  <string name="caches_sort">Ordenar</string> <!-- since: 2.10 RC2 -->
-  <string name="caches_sort_title">Ordenar por</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_distance">distância</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_difficulty">dificuldade</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_terrain">terreno</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_size">tamanho</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_favorites">popularidade</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_name">nome</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_gccode">código GC</string> <!-- since: 2.2 -->
+  <string name="caches_sort">Ordenar</string>
+  <string name="caches_sort_title">Ordenar por</string>
+  <string name="caches_sort_distance">distância</string>
+  <string name="caches_sort_difficulty">dificuldade</string>
+  <string name="caches_sort_terrain">terreno</string>
+  <string name="caches_sort_size">tamanho</string>
+  <string name="caches_sort_favorites">popularidade</string>
+  <string name="caches_sort_name">nome</string>
+  <string name="caches_sort_gccode">código GC</string>
   <string name="caches_sort_rating">pontuação</string>
   <string name="caches_sort_vote">votos (pontuação própria)</string>
   <string name="caches_sort_inventory">somatório do inventário</string>
@@ -296,7 +296,7 @@
   <string name="list_menu">Listas</string>
   <string name="list_menu_create">Criar nova lista</string>
   <string name="list_menu_drop">Apagar lista actual</string>
-  <string name="list_menu_change">Mudar de lista</string> <!-- since: 2.2 -->
+  <string name="list_menu_change">Mudar de lista</string>
   <string name="list_title">Escolha uma lista</string>
   <string name="list_inbox">Arquivadas</string>
   <string name="list_wpt">Pontos de referência</string>
@@ -373,8 +373,8 @@
   <string name="init_restore_failed">O restauro falhou.</string>
   <string name="init_backup_last">Disponível backup de</string>
   <string name="init_backup_last_no">Não existe nenhum ficheiro de backup.</string>
-  <string name="init_mapsources">Fontes de mapa</string> <!-- since: 2.26 RC3 -->
-  <string name="init_mapsources_description">Aqui pode seleccionar a fonte dos seus mapas. Como alternativa ao Google Maps, vários estilos de OpenStreetMap estão disponíveis, e até ficheiros de mapas offline (veja <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> para mais detalhes).</string> <!-- since: 2.26 RC3 -->
+  <string name="init_mapsources">Fontes de mapa</string>
+  <string name="init_mapsources_description">Aqui pode seleccionar a fonte dos seus mapas. Como alternativa ao Google Maps, vários estilos de OpenStreetMap estão disponíveis, e até ficheiros de mapas offline (veja <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> para mais detalhes).</string>
   <string name="init_mapsource_select">Seleccione a fonte de mapa</string>
   <string name="init_select_mapfile">…</string>
   <string name="init_trackautovisit">Marcar automaticamente os trackables como \"visitados\"</string>
@@ -496,8 +496,8 @@
   <string name="cache_calendars">Selecionar calendário</string>
   <string name="cache_spoiler_images_title">Imagens spoiler</string>
   <string name="cache_spoiler_images_loading">A carregar imagens spoiler…</string>
-  <string name="cache_log_types">Tipos de log</string> <!-- since: 2.10 RC2 -->
-  <string name="cache_coordinates_no">Esta cache não tem coordenadas.</string> <!-- since: 2.26 RC2 -->
+  <string name="cache_log_types">Tipos de log</string>
+  <string name="cache_coordinates_no">Esta cache não tem coordenadas.</string>
   <string name="cache_export_fieldnote">Exportar como Notas de Campo</string>
   <string name="cache_clear_history">Apagar histórico</string>
   <string name="cache_remove_from_history">Remover do histórico</string>
@@ -564,13 +564,13 @@
   <string name="map_view_map">Vista de mapa</string>
   <string name="map_trail_show">Mostrar caminho</string>
   <string name="map_trail_hide">Esconder caminho</string>
-  <string name="map_circles_show">Mostrar círculos</string> <!-- since: 2.23 RC3 -->
-  <string name="map_circles_hide">Esconder círculos</string> <!-- since: 2.23 RC3 -->
+  <string name="map_circles_show">Mostrar círculos</string>
+  <string name="map_circles_hide">Esconder círculos</string>
   <string name="map_live_enable">Activar ao vivo</string>
   <string name="map_live_disable">Desactivar ao vivo</string>
   <string name="map_static_title">Mapas estáticos</string>
   <string name="map_static_loading">A carregar mapas estáticos…</string>
-  <string name="map_token_err">Como o c:geo apenas pode transferir dados parciais, as coordenadas das caches podem não ser precisas.</string> <!-- since: 2.26 RC3 -->
+  <string name="map_token_err">Como o c:geo apenas pode transferir dados parciais, as coordenadas das caches podem não ser precisas.</string>
 
   <!-- search -->
   <string name="search_bar_hint">Procurar caches</string>

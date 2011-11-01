@@ -218,15 +218,15 @@
   <string name="caches_stored">保存済み</string>
   <string name="caches_history">履歴</string>
   <string name="caches_on_map">地図で表示</string>
-  <string name="caches_sort">並び替え</string> <!-- since: 2.10 RC2 -->
-  <string name="caches_sort_title">並び替え</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_distance">距離順</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_difficulty">難易度順</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_terrain">地形順</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_size">サイズ順</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_favorites">人気順</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_name">名前順</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_gccode">GCコード順(隠した年代順)</string> <!-- since: 2.2 -->
+  <string name="caches_sort">並び替え</string>
+  <string name="caches_sort_title">並び替え</string>
+  <string name="caches_sort_distance">距離順</string>
+  <string name="caches_sort_difficulty">難易度順</string>
+  <string name="caches_sort_terrain">地形順</string>
+  <string name="caches_sort_size">サイズ順</string>
+  <string name="caches_sort_favorites">人気順</string>
+  <string name="caches_sort_name">名前順</string>
+  <string name="caches_sort_gccode">GCコード順(隠した年代順)</string>
   <string name="caches_sort_rating">評価順</string>
   <string name="caches_sort_vote">vote (own rating)</string>
   <string name="caches_sort_inventory">目録の数順</string>
@@ -254,7 +254,7 @@
   <string name="list_menu">リスト</string>
   <string name="list_menu_create">新しいリストを作成</string>
   <string name="list_menu_drop">このリストを消去</string>
-  <string name="list_menu_change">別のリストにする</string> <!-- since: 2.2 -->
+  <string name="list_menu_change">別のリストにする</string>
   <string name="list_title">リストの選択</string>
   <string name="list_inbox">保存済み</string>
   <string name="list_wpt">Waypoints</string>
@@ -410,7 +410,7 @@
   <string name="cache_calendars">カレンダーを選択</string>
   <string name="cache_spoiler_images_title">スポイラー画像</string>
   <string name="cache_spoiler_images_loading">スポイラー画像をロード中…</string>
-  <string name="cache_log_types">ログタイプ</string> <!-- Since: 2.10 RC2 -->
+  <string name="cache_log_types">ログタイプ</string>
 
   <!-- gpx -->
   <string name="gpx_import_loading_stored">GPXファイルをロード中\n保存済み:</string>
@@ -453,8 +453,8 @@
   <string name="map_view_map">地図表示</string>
   <string name="map_trail_show">軌跡表示</string>
   <string name="map_trail_hide">軌跡非表示</string>
-  <string name="map_circles_show">Show circles</string> <!-- since: 2.23 RC3 -->
-  <string name="map_circles_hide">Hide circles</string> <!-- since: 2.23 RC3 -->
+  <string name="map_circles_show">Show circles</string>
+  <string name="map_circles_hide">Hide circles</string>
   <string name="map_live_enable">オンラインで取得</string>
   <string name="map_live_disable">保存済みキャッシュのみ</string>
   <string name="map_static_title">オフライン地図</string>

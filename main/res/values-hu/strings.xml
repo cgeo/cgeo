@@ -255,15 +255,15 @@
   <string name="caches_stored">Mentett</string>
   <string name="caches_history">Előzmények</string>
   <string name="caches_on_map">Mutasd meg térképen</string>
-  <string name="caches_sort">Rendezés</string> <!-- since: 2.10 RC2 -->
-  <string name="caches_sort_title">Rendezés eszerint</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_distance">távolság</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_difficulty">nehézség</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_terrain">terep</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_size">méret</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_favorites">sikeresség</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_name">név</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_gccode">GC-kód</string> <!-- since: 2.2 -->
+  <string name="caches_sort">Rendezés</string>
+  <string name="caches_sort_title">Rendezés eszerint</string>
+  <string name="caches_sort_distance">távolság</string>
+  <string name="caches_sort_difficulty">nehézség</string>
+  <string name="caches_sort_terrain">terep</string>
+  <string name="caches_sort_size">méret</string>
+  <string name="caches_sort_favorites">sikeresség</string>
+  <string name="caches_sort_name">név</string>
+  <string name="caches_sort_gccode">GC-kód</string>
   <string name="caches_sort_rating">osztályzat</string>
   <string name="caches_sort_vote">szavazat (saját osztályzat)</string>
   <string name="caches_sort_inventory">tárgyak száma</string>
@@ -306,7 +306,7 @@
   <string name="list_menu">Lista</string>
   <string name="list_menu_create">Új lista létrehozása</string>
   <string name="list_menu_drop">Jelenlegi lista elvetése</string>
-  <string name="list_menu_change">Lista megváltoztatása</string> <!-- since: 2.2 -->
+  <string name="list_menu_change">Lista megváltoztatása</string>
   <string name="list_title">Válassz listát</string>
   <string name="list_inbox">Mentett</string>
   <string name="list_wpt">Útpontok</string>
@@ -387,8 +387,8 @@
   <string name="init_restore_failed">A visszaállítás sikertelen.</string>
   <string name="init_backup_last">Elérhető biztonsági mentés</string>
   <string name="init_backup_last_no">Nem találató fájl biztonsági mentéssel.</string>
-  <string name="init_mapsources">Térkép források</string> <!-- since: 2.26 RC3 -->
-  <string name="init_mapsources_description">Itt választhatod ki a térképeid forrását. A Google térképek alternatívájaként több OpenStreetMap stílus is hozzáférhető és offline térkép fájlokat is használhatsz. (További információ <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a>).</string> <!-- since: 2.26 RC3 -->
+  <string name="init_mapsources">Térkép források</string>
+  <string name="init_mapsources_description">Itt választhatod ki a térképeid forrását. A Google térképek alternatívájaként több OpenStreetMap stílus is hozzáférhető és offline térkép fájlokat is használhatsz. (További információ <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a>).</string>
   <string name="init_mapsource_select">Válassz térkép forrást</string>
   <string name="init_select_mapfile">…</string>
   <string name="init_trackautovisit">A nyomonkövethető tárgyak automatikus \"látogatott\" logolása</string>
@@ -521,8 +521,8 @@
   <string name="cache_calendars">Naptár kiválasztása</string>
   <string name="cache_spoiler_images_title">Spoiler képek</string>
   <string name="cache_spoiler_images_loading">Spoiler képek betöltése…</string>
-  <string name="cache_log_types">Bejegyzés típusok</string> <!-- since: 2.10 RC2 -->
-  <string name="cache_coordinates_no">Ennek a ládának nincsenek koordinátái.</string> <!-- since: 2.26 RC2 -->
+  <string name="cache_log_types">Bejegyzés típusok</string>
+  <string name="cache_coordinates_no">Ennek a ládának nincsenek koordinátái.</string>
   <string name="cache_export_fieldnote">Exportálás terepjegyzetként</string>
   <string name="cache_clear_history">Előzmények törlése</string>
   <string name="cache_remove_from_history">Eltávolítás az előzményekből</string>
@@ -593,13 +593,13 @@
   <string name="map_view_map">Térkép nézet</string>
   <string name="map_trail_show">Ösvény mutatása</string>
   <string name="map_trail_hide">Ösvény elrejtése</string>
-  <string name="map_circles_show">Körök mutatása</string> <!-- since: 2.23 RC3 -->
-  <string name="map_circles_hide">Körök elrejtése</string> <!-- since: 2.23 RC3 -->
+  <string name="map_circles_show">Körök mutatása</string>
+  <string name="map_circles_hide">Körök elrejtése</string>
   <string name="map_live_enable">Élő mód engedélyezése</string>
   <string name="map_live_disable">Élő mód tiltása</string>
   <string name="map_static_title">Statikus térképek</string>
   <string name="map_static_loading">Statikus térképek betöltése…</string>
-  <string name="map_token_err">Mivel a c:geo csak részleges adatokat tud letölteni, a ládák koordinátái pontatlanok lehetnek.</string> <!-- since: 2.26 RC3 -->
+  <string name="map_token_err">Mivel a c:geo csak részleges adatokat tud letölteni, a ládák koordinátái pontatlanok lehetnek.</string>
 
   <!-- search -->
   <string name="search_bar_hint">Ládák keresése</string>

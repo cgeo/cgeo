@@ -261,15 +261,15 @@
   <string name="caches_stored">Stockées</string>
   <string name="caches_history">Historique</string>
   <string name="caches_on_map">Voir sur la carte</string>
-  <string name="caches_sort">Trier</string> <!-- since: 2.10 RC2 -->
-  <string name="caches_sort_title">Trier par</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_distance">distance</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_difficulty">difficulté</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_terrain">terrain</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_size">taille</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_favorites">popularité</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_name">nom</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_gccode">code GC</string> <!-- since: 2.2 -->
+  <string name="caches_sort">Trier</string>
+  <string name="caches_sort_title">Trier par</string>
+  <string name="caches_sort_distance">distance</string>
+  <string name="caches_sort_difficulty">difficulté</string>
+  <string name="caches_sort_terrain">terrain</string>
+  <string name="caches_sort_size">taille</string>
+  <string name="caches_sort_favorites">popularité</string>
+  <string name="caches_sort_name">nom</string>
+  <string name="caches_sort_gccode">code GC</string>
   <string name="caches_sort_rating">note</string>
   <string name="caches_sort_vote">vote (note perso)</string>
   <string name="caches_sort_inventory">nombre d\'objets dans l\'inventaire</string>
@@ -402,8 +402,8 @@
   <string name="init_restore_running">Restauration de la base de données des caches…</string>
   <string name="init_backup_last">Sauvegarde disponible depuis</string>
   <string name="init_backup_last_no">Il n\'y a pas de fichier avec une sauvegarde.</string>
-  <string name="init_mapsources">Source des cartes</string> <!-- since: 2.26 RC3 -->
-  <string name="init_mapsources_description">Vous pouvez choisir la source de vos cartes. En tant qu\'alternative aux cartes Google, diverses cartes de type OpenStreetMap sont disponibles et même en hors-ligne (voir <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> pour plus de détails).</string> <!-- since: 2.26 RC3 -->
+  <string name="init_mapsources">Source des cartes</string>
+  <string name="init_mapsources_description">Vous pouvez choisir la source de vos cartes. En tant qu\'alternative aux cartes Google, diverses cartes de type OpenStreetMap sont disponibles et même en hors-ligne (voir <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> pour plus de détails).</string>
   <string name="init_mapsource_select">Choisir la source des cartes</string>
   <string name="init_select_mapfile">…</string>
   <string name="init_trackautovisit">Marquer automatiquement les objets voyageurs comme \"visité\"</string>
@@ -541,8 +541,8 @@
   <string name="cache_calendars">Choisir un agenda</string>
   <string name="cache_spoiler_images_title">Images indices</string>
   <string name="cache_spoiler_images_loading">Chargement des images indices…</string>
-  <string name="cache_log_types">Types de visites</string> <!-- since: 2.10 RC2 -->
-  <string name="cache_coordinates_no">Cette cache n\'a pas de coordonnées.</string> <!-- since: 2.26 RC2 -->
+  <string name="cache_log_types">Types de visites</string>
+  <string name="cache_coordinates_no">Cette cache n\'a pas de coordonnées.</string>
   <string name="cache_export_fieldnote">Export en tant que champ Notes</string>
   <string name="cache_clear_history">Effacer l\'historique</string>
   <string name="cache_remove_from_history">Effacer de l\'historique</string>
@@ -619,8 +619,8 @@
   <string name="map_view_map">Voir carte</string>
   <string name="map_trail_show">Afficher le parcours</string>
   <string name="map_trail_hide">Cacher le parcours</string>
-  <string name="map_circles_show">Afficher les cercles</string> <!-- since: 2.23 RC3 -->
-  <string name="map_circles_hide">Cacher les cercles</string> <!-- since: 2.23 RC3 -->
+  <string name="map_circles_show">Afficher les cercles</string>
+  <string name="map_circles_hide">Cacher les cercles</string>
   <string name="map_live_enable">Activer Temps réel</string>
   <string name="map_live_disable">Désactiver Temps réel</string>
   <string name="map_static_title">Cartes statiques</string>

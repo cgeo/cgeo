@@ -258,15 +258,15 @@
   <string name="caches_stored">Opgeslagen</string>
   <string name="caches_history">Geschiedenis</string>
   <string name="caches_on_map">Toon op kaart</string>
-  <string name="caches_sort">Sorteer</string> <!-- since: 2.10 RC2 -->
-  <string name="caches_sort_title">Sorteer op</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_distance">afstand</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_difficulty">moeilijkheid</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_terrain">terrein</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_size">formaat</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_favorites">populariteit</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_name">naam</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_gccode">GC-code</string> <!-- since: 2.2 -->
+  <string name="caches_sort">Sorteer</string>
+  <string name="caches_sort_title">Sorteer op</string>
+  <string name="caches_sort_distance">afstand</string>
+  <string name="caches_sort_difficulty">moeilijkheid</string>
+  <string name="caches_sort_terrain">terrein</string>
+  <string name="caches_sort_size">formaat</string>
+  <string name="caches_sort_favorites">populariteit</string>
+  <string name="caches_sort_name">naam</string>
+  <string name="caches_sort_gccode">GC-code</string>
   <string name="caches_sort_rating">waardering</string>
   <string name="caches_sort_vote">stemmen (eigen waardering)</string>
   <string name="caches_sort_inventory">aantal items</string>
@@ -396,8 +396,8 @@
   <string name="init_restore_running">Herstellen van de cache database…</string>
   <string name="init_backup_last">Backup beschikbaar van</string>
   <string name="init_backup_last_no">Er is geen bestand met een backup.</string>
-  <string name="init_mapsources">Kaartbron</string> <!-- since: 2.26 RC3 -->
-  <string name="init_mapsources_description">Hier kan een kaartenbron geselecteerd worden. Als alternatief voor Google maps zijn verschillende OpenStreetMap varianten en ook offline kaarten-files beschikbaar (Zie <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> voor meer info).</string> <!-- since: 2.26 RC3 -->
+  <string name="init_mapsources">Kaartbron</string>
+  <string name="init_mapsources_description">Hier kan een kaartenbron geselecteerd worden. Als alternatief voor Google maps zijn verschillende OpenStreetMap varianten en ook offline kaarten-files beschikbaar (Zie <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> voor meer info).</string>
   <string name="init_mapsource_select">Selecteer kaartbron</string>
   <string name="init_select_mapfile">…</string>
   <string name="init_trackautovisit">Zet trackables automatisch op \'bezocht\'</string>
@@ -536,8 +536,8 @@
   <string name="cache_calendars">Selecteer kalender</string>
   <string name="cache_spoiler_images_title">Spoiler afbeeldingen</string>
   <string name="cache_spoiler_images_loading">Spoiler afbeeldingen laden…</string>
-  <string name="cache_log_types">Log types</string> <!-- since: 2.10 RC2 -->
-  <string name="cache_coordinates_no">Deze cache heeft geen coördinaten.</string> <!-- since: 2.26 RC2 -->
+  <string name="cache_log_types">Log types</string>
+  <string name="cache_coordinates_no">Deze cache heeft geen coördinaten.</string>
   <string name="cache_export_fieldnote">Exporteer als Field Notes</string>
   <string name="cache_clear_history">Maak geschiedenis leeg</string>
   <string name="cache_remove_from_history">Verwijder uit geschiedenis</string>
@@ -609,14 +609,14 @@
   <string name="map_view_map">Kaart weergave</string>
   <string name="map_trail_show">Toon spoor</string>
   <string name="map_trail_hide">Verberg spoor</string>
-  <string name="map_circles_show">Laat cirkels zien</string> <!-- since: 2.23 RC3 -->
-  <string name="map_circles_hide">Verberg cirkels</string> <!-- since: 2.23 RC3 -->
+  <string name="map_circles_show">Laat cirkels zien</string>
+  <string name="map_circles_hide">Verberg cirkels</string>
   <string name="map_live_enable">Live aanzetten</string>
   <string name="map_live_disable">Live uitzetten</string>
   <string name="map_static_title">Statische kaarten</string>
   <string name="map_static_loading">Statische kaarten laden…</string>
-  <string name="map_token_err">Omdat c:geo alleen gedeeltelijke gegevens kan downloaden, kunnen de coördinaten inaccuraat zijn.</string> <!-- since: 2.26 RC3 -->
-  <string name="map_as_list">Laat zien als lijst</string> <!-- since: 2.26 RC3 -->
+  <string name="map_token_err">Omdat c:geo alleen gedeeltelijke gegevens kan downloaden, kunnen de coördinaten inaccuraat zijn.</string>
+  <string name="map_as_list">Laat zien als lijst</string>
 
   <!-- search -->
   <string name="search_bar_hint">Zoek naar caches</string>

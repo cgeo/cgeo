@@ -254,8 +254,8 @@
   <string name="caches_sort_terrain">terenu</string>
   <string name="caches_sort_size">wielkości</string>
   <string name="caches_sort_favorites">popularności</string>
-  <string name="caches_sort_name">nazwy</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_gccode">GC-kodu</string> <!-- since: 2.2 -->
+  <string name="caches_sort_name">nazwy</string>
+  <string name="caches_sort_gccode">GC-kodu</string>
   <string name="caches_sort_rating">oceny</string>
   <string name="caches_sort_vote">głosów (twoja ocena)</string>
   <string name="caches_sort_inventory">ilości w inwentarzu</string>

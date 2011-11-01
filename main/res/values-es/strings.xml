@@ -250,15 +250,15 @@
   <string name="caches_stored">Almacenados</string>
   <string name="caches_history">Historial</string>
   <string name="caches_on_map">Ver en mapa</string>
-  <string name="caches_sort">Ordenar</string> <!-- since: 2.10 RC2 -->
-  <string name="caches_sort_title">Ordenar por</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_distance">distancia</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_difficulty">dificultad</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_terrain">terreno</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_size">tamaño</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_favorites">popularidad</string> <!-- since: 2.10 RC3 -->  
-  <string name="caches_sort_name">nombre</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_gccode">Código GC</string> <!-- since: 2.2 -->
+  <string name="caches_sort">Ordenar</string>
+  <string name="caches_sort_title">Ordenar por</string>
+  <string name="caches_sort_distance">distancia</string>
+  <string name="caches_sort_difficulty">dificultad</string>
+  <string name="caches_sort_terrain">terreno</string>
+  <string name="caches_sort_size">tamaño</string>
+  <string name="caches_sort_favorites">popularidad</string>  
+  <string name="caches_sort_name">nombre</string>
+  <string name="caches_sort_gccode">Código GC</string>
   <string name="caches_sort_rating">valoración</string>
   <string name="caches_sort_vote">votar (valoración propia)</string>
   <string name="caches_sort_inventory">recuento de inventario</string>
@@ -300,7 +300,7 @@
   <string name="list_menu">Lista</string>
   <string name="list_menu_create">Crear nueva lista</string>
   <string name="list_menu_drop">Borrar lista actual</string>
-<string name="list_menu_change">Cambiar lista</string> <!-- since: 2.2 -->
+<string name="list_menu_change">Cambiar lista</string>
   <string name="list_title">Escoger lista</string>
   <string name="list_inbox">Guardadas</string>
   <string name="list_wpt">Puntos de referencia</string>
@@ -379,8 +379,8 @@
   <string name="init_restore_failed">Restauración errónea</string>
   <string name="init_backup_last">Copia guardada el</string>
   <string name="init_backup_last_no">No hay ninguna copia de seguridad.</string>
-  <string name="init_mapsources">Proveedor de mapas</string> <!-- since: 2.26 RC3 -->
-  <string name="init_mapsources_description">Aquí puedes seleccionar un proveedor de mapas. Como alternativa a Google Maps están disponibles varios estilos de OpenStreetMap e incluso mapas fuera de linea (mira <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> para más información).</string> <!-- since: 2.26 RC3 -->
+  <string name="init_mapsources">Proveedor de mapas</string>
+  <string name="init_mapsources_description">Aquí puedes seleccionar un proveedor de mapas. Como alternativa a Google Maps están disponibles varios estilos de OpenStreetMap e incluso mapas fuera de linea (mira <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> para más información).</string>
   <string name="init_mapsource_select">Elige proveedor de mapas</string>
   <string name="init_select_mapfile">…</string>
   <string name="init_trackautovisit">Convertir rastreables automáticamente a \"visita\"</string>
@@ -503,8 +503,8 @@
   <string name="cache_calendars">Elegir calendario</string>
   <string name="cache_spoiler_images_title">Imágenes reveladoras</string>
   <string name="cache_spoiler_images_loading">Cargando imágenes reveladoras…</string>
-  <string name="cache_log_types">Tipos de registro</string> <!-- Since: 2.10 RC2 -->
-  <string name="cache_coordinates_no">Este escondite no tiene coordenadas.</string> <!-- since: 2.26 RC2 -->
+  <string name="cache_log_types">Tipos de registro</string>
+  <string name="cache_coordinates_no">Este escondite no tiene coordenadas.</string>
   <string name="cache_export_fieldnote">Exportar como Notas de campo</string>
   <string name="cache_clear_history">Borrar historial</string>
   <string name="cache_remove_from_history">Borrar del historial</string>  
@@ -570,13 +570,13 @@
   <string name="map_view_map">Ver mapa</string>
   <string name="map_trail_show">Mostrar rastro</string>
   <string name="map_trail_hide">Ocultar rastro</string>
-  <string name="map_circles_show">Mostrar círculos</string> <!-- since: 2.23 RC3 -->
-  <string name="map_circles_hide">Ocultar círculos</string> <!-- since: 2.23 RC3 -->
+  <string name="map_circles_show">Mostrar círculos</string>
+  <string name="map_circles_hide">Ocultar círculos</string>
   <string name="map_live_enable">Activar en vivo</string>
   <string name="map_live_disable">Desactivar en vivo</string>
   <string name="map_static_title">Mapas estáticos</string>
   <string name="map_static_loading">Cargando mapas estáticos…</string>
-  <string name="map_token_err">Dado que c:geo sólo es capaz de descargar datos parciales, la coordenadas de algunso escondites pueden ser inexactas.</string> <!-- since: 2.26 RC3 -->
+  <string name="map_token_err">Dado que c:geo sólo es capaz de descargar datos parciales, la coordenadas de algunso escondites pueden ser inexactas.</string>
 
   <!-- search -->
   <string name="search_bar_hint">Buscar escondites</string>

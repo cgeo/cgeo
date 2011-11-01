@@ -259,15 +259,15 @@
   <string name="caches_stored">Uložené</string>
   <string name="caches_history">História</string>
   <string name="caches_on_map">Zobraziť na mape</string>
-  <string name="caches_sort">Zoradiť</string> <!-- since: 2.10 RC2 -->
-  <string name="caches_sort_title">Zoradiť podľa</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_distance">vzdialenosti</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_difficulty">náročnosti</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_terrain">terénu</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_size">veľkosti</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_favorites">obľúbenosti</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_name">názvu</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_gccode">GC kódu</string> <!-- since: 2.2 -->
+  <string name="caches_sort">Zoradiť</string>
+  <string name="caches_sort_title">Zoradiť podľa</string>
+  <string name="caches_sort_distance">vzdialenosti</string>
+  <string name="caches_sort_difficulty">náročnosti</string>
+  <string name="caches_sort_terrain">terénu</string>
+  <string name="caches_sort_size">veľkosti</string>
+  <string name="caches_sort_favorites">obľúbenosti</string>
+  <string name="caches_sort_name">názvu</string>
+  <string name="caches_sort_gccode">GC kódu</string>
   <string name="caches_sort_rating">hodnotenia</string>
   <string name="caches_sort_vote">hlasovania (vlastného hodn.)</string>
   <string name="caches_sort_inventory">počtu položiek v skrýši</string>
@@ -310,7 +310,7 @@
   <string name="list_menu">Zoznam</string>
   <string name="list_menu_create">Vytvoriť nový zoznam</string>
   <string name="list_menu_drop">Zahodiť aktuálny zoznam</string>
-  <string name="list_menu_change">Zmeniť zoznam</string> <!-- since: 2.2 -->
+  <string name="list_menu_change">Zmeniť zoznam</string>
   <string name="list_menu_rename">Premenovať tento zoznam</string>
   <string name="list_title">Výber zoznamu</string>
   <string name="list_inbox">Uložené</string>
@@ -397,8 +397,8 @@
   <string name="init_restore_running">Obnovovanie databázy skrýš…</string>
   <string name="init_backup_last">Posledná dostupná záloha</string>
   <string name="init_backup_last_no">Neexistuje súbor zo zálohou.</string>
-  <string name="init_mapsources">Mapové zdroje</string> <!-- since: 2.26 RC3 -->
-  <string name="init_mapsources_description">Tu môžete vybrať zdroje pre vaše mapy. Je to alternatíva ku Google mapám rôznych OpenStreetMap styles sú dostupné a dokonca offline mapové súbory (podrobnosti nájdete na <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a>).</string> <!-- since: 2.26 RC3 -->
+  <string name="init_mapsources">Mapové zdroje</string>
+  <string name="init_mapsources_description">Tu môžete vybrať zdroje pre vaše mapy. Je to alternatíva ku Google mapám rôznych OpenStreetMap styles sú dostupné a dokonca offline mapové súbory (podrobnosti nájdete na <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a>).</string>
   <string name="init_mapsource_select">Vyberte zdroj máp</string>
   <string name="init_select_mapfile">…</string>
   <string name="init_trackautovisit">Nastaviť trasovateľné predmety automaticky na „navštívené“</string>
@@ -537,8 +537,8 @@
   <string name="cache_calendars">vyberte kalendár</string>
   <string name="cache_spoiler_images_title">Spoilerové obrázky</string>
   <string name="cache_spoiler_images_loading">Načítanie spoilerových obrázkov…</string>
-  <string name="cache_log_types">Typy záznamov</string> <!-- since: 2.10 RC2 -->
-  <string name="cache_coordinates_no">Táto skrýša nemá žiadne súradnice.</string> <!-- since: 2.26 RC2 -->
+  <string name="cache_log_types">Typy záznamov</string>
+  <string name="cache_coordinates_no">Táto skrýša nemá žiadne súradnice.</string>
   <string name="cache_export_fieldnote">Exportovať ako poznámky</string>
   <string name="cache_clear_history">Vymazať históriu</string>
   <string name="cache_remove_from_history">Odstrániť z histórie</string>
@@ -613,14 +613,14 @@
   <string name="map_view_map">Zobrazenie mapy</string>
   <string name="map_trail_show">Zobraziť záznam trasy</string>
   <string name="map_trail_hide">Skryť záznam trasy</string>
-  <string name="map_circles_show">Zobraziť kruhy</string> <!-- since: 2.23 RC3 -->
-  <string name="map_circles_hide">Skryť kruhy</string> <!-- since: 2.23 RC3 -->
+  <string name="map_circles_show">Zobraziť kruhy</string>
+  <string name="map_circles_hide">Skryť kruhy</string>
   <string name="map_live_enable">Povoliť aktuálnu polohu</string>
   <string name="map_live_disable">Zakázať aktuálnu polohu</string>
   <string name="map_static_title">Statické mapy</string>
   <string name="map_static_loading">Načítanie statických máp…</string>
-  <string name="map_token_err">Pretože c:geo bola schopná stiahnuť iba čiastočné údaje, súradnice skrýš môžu byť nepresné.</string> <!-- since: 2.26 RC3 -->
-  <string name="map_as_list">Zobraziť ako zoznam</string> <!-- since: 2.26 RC3 -->
+  <string name="map_token_err">Pretože c:geo bola schopná stiahnuť iba čiastočné údaje, súradnice skrýš môžu byť nepresné.</string>
+  <string name="map_as_list">Zobraziť ako zoznam</string>
 
   <!-- search -->
   <string name="search_bar_hint">Hľadanie skrýš</string>
