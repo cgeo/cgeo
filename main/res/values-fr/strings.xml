@@ -236,6 +236,7 @@
   <string name="menu_settings">Paramètres</string>
   <string name="menu_history">Historique</string>
   <string name="menu_filter">Filtre</string>
+  <string name="menu_scan_geo">Scanner géocode</string>
 
   <!-- main screen -->
   <string name="live_map_button">Carte</string>
@@ -250,6 +251,7 @@
   <string name="caches_more_caches">Charger plus de caches</string>
   <string name="caches_more_caches_no">Pas d\'autres caches</string>
   <string name="caches_more_caches_loading">Chargement des caches…</string>
+  <string name="caches_more_caches_currently">actuellement</string>
   <string name="caches_downloading">Téléchargement des caches…\nRestant: </string>
   <string name="caches_eta_ltm">Moins d\'une minute</string>
   <string name="caches_eta_mins"> minutes</string>
