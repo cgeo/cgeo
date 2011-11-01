@@ -1,64 +1,59 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.cgCoord;
+import cgeo.geocaching.cgCache;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.test.R;
 
 import android.content.res.Resources;
+import android.os.Handler;
 import android.test.InstrumentationTestCase;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 public class LocParserTest extends InstrumentationTestCase {
-    private Map<String, cgCoord> readLoc(int resourceId) {
-        Map<String, cgCoord> caches = null;
+    private List<cgCache> readLoc(int resourceId) throws IOException, ParserException {
+        LocParser parser = new LocParser(1);
+        Collection<cgCache> caches = null;
         final Resources res = getInstrumentation().getContext().getResources();
         final InputStream instream = res.openRawResource(resourceId);
         try {
-            final StringBuilder buffer = new StringBuilder();
-            int ch;
-            while ((ch = instream.read()) != -1) {
-                buffer.append((char) ch);
-            }
-            caches = LocParser.parseCoordinates(buffer.toString());
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            caches = parser.parse(instream, new Handler());
+            assertNotNull(caches);
+            assertTrue(caches.size() > 0);
         } finally {
-            try {
-                instream.close();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            instream.close();
         }
-        assertNotNull(caches);
-        assertTrue(caches.size() > 0);
-        return caches;
+
+        List<cgCache> cacheList = new ArrayList<cgCache>(caches);
+        // TODO: may need to sort by geocode when a test imports more than one cache
+        return cacheList;
     }
 
-    public void testOCLoc() {
-        final Map<String, cgCoord> coords = readLoc(R.raw.oc5952_loc);
-        final cgCoord coord = coords.get("OC5952");
-        assertNotNull(coord);
-        assertEquals("OC5952", coord.getGeocode());
-        assertEquals("Die Schatzinsel / treasure island", coord.getName());
-        assertTrue(new Geopoint(48.85968, 9.18740).isEqualTo(coord.getCoords()));
+    public void testOCLoc() throws IOException, ParserException {
+        final List<cgCache> caches = readLoc(R.raw.oc5952_loc);
+        assertEquals(1, caches.size());
+        final cgCache cache = caches.get(0);
+        assertNotNull(cache);
+        assertEquals("OC5952", cache.getGeocode());
+        assertEquals("Die Schatzinsel / treasure island", cache.getName());
+        assertTrue(new Geopoint(48.85968, 9.18740).isEqualTo(cache.getCoords()));
     }
 
-    public void testGCLoc() {
-        final Map<String, cgCoord> coords = readLoc(R.raw.gc1bkp3_loc);
-        final cgCoord coord = coords.get("GC1BKP3");
-        assertNotNull(coord);
-        assertEquals("GC1BKP3", coord.getGeocode());
-        assertEquals("Die Schatzinsel / treasure island", coord.getName());
-        assertTrue(new Geopoint(48.859683, 9.1874).isEqualTo(coord.getCoords()));
-        assertEquals(1.0f, coord.getDifficulty().floatValue());
-        assertEquals(5.0f, coord.getTerrain().floatValue());
-        assertEquals(CacheSize.MICRO, coord.getSize());
+    public void testGCLoc() throws IOException, ParserException {
+        final List<cgCache> caches = readLoc(R.raw.gc1bkp3_loc);
+        assertEquals(1, caches.size());
+        final cgCache cache = caches.get(0);
+        assertNotNull(cache);
+        assertEquals("GC1BKP3", cache.getGeocode());
+        assertEquals("Die Schatzinsel / treasure island", cache.getName());
+        assertTrue(new Geopoint(48.859683, 9.1874).isEqualTo(cache.getCoords()));
+        assertEquals(1.0f, cache.getDifficulty().floatValue());
+        assertEquals(5.0f, cache.getTerrain().floatValue());
+        assertEquals(CacheSize.MICRO, cache.getSize());
     }
-
 }

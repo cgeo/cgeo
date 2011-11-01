@@ -5,7 +5,6 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgLog;
-import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgTrackable;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
@@ -28,9 +27,6 @@ import android.sax.StartElementListener;
 import android.util.Log;
 import android.util.Xml;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
@@ -66,15 +62,11 @@ public abstract class GPXParser extends FileParser {
      */
     private static final String GSAK_NS = "http://www.gsak.net/xmlv1/5";
 
-    public static final String GPX_FILE_EXTENSION = ".gpx";
-    public static final String WAYPOINTS_FILE_SUFFIX_AND_EXTENSION = "-wpts.gpx";
     private static final Pattern PATTERN_MILLISECONDS = Pattern.compile("\\.\\d{3}");
 
     private int listId = 1;
     final protected String namespace;
     final private String version;
-    private Handler handler = null;
-    private int importedRecords;
 
     private cgCache cache = new cgCache();
     private cgTrackable trackable = new cgTrackable();
@@ -243,10 +235,7 @@ public abstract class GPXParser extends FileParser {
         return formatSimple.parse(input);
     }
 
-    boolean parse(final InputStream stream, Handler handlerIn) {
-        importedRecords = 0;
-        handler = handlerIn;
-
+    public Collection<cgCache> parse(final InputStream stream, final Handler progressHandler) throws IOException, ParserException {
         final RootElement root = new RootElement(namespace, "gpx");
         final Element waypoint = root.getChild(namespace, "wpt");
 
@@ -290,7 +279,7 @@ public abstract class GPXParser extends FileParser {
                     createNoteFromGSAKUserdata();
 
                     result.put(cache.getGeocode(), cache);
-                    showCountMessage(handler, R.string.gpx_import_loading_caches, ++importedRecords, progressStream.getProgress());
+                    showProgressMessage(progressHandler, progressStream.getProgress());
                 } else if (StringUtils.isNotBlank(cache.getName())
                         && cache.getCoords() != null
                         && StringUtils.contains(type, "waypoint")) {
@@ -325,7 +314,7 @@ public abstract class GPXParser extends FileParser {
                         }
                         cgWaypoint.mergeWayPoints(cacheForWaypoint.getWaypoints(), Collections.singletonList(waypoint));
                         result.put(cacheGeocodeForWaypoint, cacheForWaypoint);
-                        showCountMessage(handler, R.string.gpx_import_loading_waypoints, ++importedRecords, progressStream.getProgress());
+                        showProgressMessage(progressHandler, progressStream.getProgress());
                     }
                 }
             }
@@ -740,41 +729,11 @@ public abstract class GPXParser extends FileParser {
         try {
             progressStream = new ProgressInputStream(stream);
             Xml.parse(progressStream, Xml.Encoding.UTF_8, root.getContentHandler());
-            return true;
-        } catch (IOException e) {
-            Log.e(Settings.tag, "Cannot parse .gpx file as GPX " + version + ": could not read file!");
+            return result.values();
         } catch (SAXException e) {
             Log.e(Settings.tag, "Cannot parse .gpx file as GPX " + version + ": could not parse XML - " + e.toString());
+            throw new ParserException("Cannot parse .gpx file as GPX " + version + ": could not parse XML", e);
         }
-        return false;
-    }
-
-    private boolean parse(final File file, final Handler handlerIn) {
-        if (file == null) {
-            return false;
-        }
-
-        FileInputStream fis = null;
-        boolean parsed = false;
-        try {
-            fis = new FileInputStream(file);
-            parsed = parse(fis, handlerIn);
-        } catch (FileNotFoundException e) {
-            Log.e(Settings.tag, "Cannot parse .gpx file " + file.getAbsolutePath() + " as GPX " + version + ": file not found!");
-        } finally {
-            try {
-                if (fis != null) {
-                    fis.close();
-                }
-            } catch (IOException e) {
-                Log.e(Settings.tag, "Error after parsing .gpx file " + file.getAbsolutePath() + " as GPX " + version + ": could not close file!");
-            }
-        }
-        return parsed;
-    }
-
-    public Collection<cgCache> getParsedCaches() {
-        return result.values();
     }
 
     /**
@@ -853,81 +812,6 @@ public abstract class GPXParser extends FileParser {
             if (StringUtils.isNotBlank(note)) {
                 cache.setPersonalNote(note);
             }
-        }
-    }
-
-    public static cgSearch importGPX(File file, int listId, Handler handler) {
-        try {
-            // parse cache file
-            GPXParser parser = new GPX10Parser(listId);
-            boolean parsed = parser.parse(file, handler);
-            if (!parsed) {
-                parser = new GPX11Parser(listId);
-                parsed = parser.parse(file, handler);
-            }
-
-            // parse waypoint file if exists
-            if (parsed) {
-                final File wptsFile = getWaypointsFileForGpx(file);
-                if (wptsFile != null && wptsFile.canRead()) {
-                    parser.parse(wptsFile, handler);
-                }
-            }
-
-            if (parsed) {
-                return storeParsedCaches(handler, parser);
-            }
-
-        } catch (Exception e) {
-            Log.e(Settings.tag, "GPXParser.importGPX: " + e.toString());
-        }
-
-        return null;
-    }
-
-    public static cgSearch importGPX(InputStream stream, int listId, Handler handler) {
-        try {
-            // parse cache file
-            GPXParser parser = new GPX10Parser(listId);
-            boolean parsed = parser.parse(stream, handler);
-            if (!parsed) {
-                parser = new GPX11Parser(listId);
-                parsed = parser.parse(stream, handler);
-            }
-
-            if (parsed) {
-                return storeParsedCaches(handler, parser);
-            }
-
-        } catch (Exception e) {
-            Log.e(Settings.tag, "GPXParser.importGPX: " + e.toString());
-        }
-
-        return null;
-    }
-
-    private static cgSearch storeParsedCaches(Handler handler, GPXParser parser) {
-        final cgSearch search = new cgSearch();
-        final cgeoapplication app = cgeoapplication.getInstance();
-        int storedCaches = 0;
-        for (cgCache cache : parser.getParsedCaches()) {
-            // remove from cache, cache can be re-imported
-            app.removeCacheFromCache(cache.getGeocode());
-            app.addCacheToSearch(search, cache);
-            showCountMessage(handler, R.string.gpx_import_storing, ++storedCaches);
-        }
-        Log.i(Settings.tag, "Caches found in .gpx file: " + parser.getParsedCaches().size());
-        return search;
-    }
-
-    // 1234567.gpx -> 1234567-wpts.gpx
-    static File getWaypointsFileForGpx(File file) {
-        final String name = file.getName();
-        if (StringUtils.endsWithIgnoreCase(name, GPX_FILE_EXTENSION) && (StringUtils.length(name) > GPX_FILE_EXTENSION.length())) {
-            final String wptsName = StringUtils.substringBeforeLast(name, ".") + WAYPOINTS_FILE_SUFFIX_AND_EXTENSION;
-            return new File(file.getParentFile(), wptsName);
-        } else {
-            return null;
         }
     }
 }

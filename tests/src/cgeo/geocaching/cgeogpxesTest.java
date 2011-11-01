@@ -1,25 +1,189 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.cgeogpxes;
+import cgeo.geocaching.test.R;
 
-import android.test.AndroidTestCase;
+import android.os.Handler;
+import android.os.Message;
+import android.test.ActivityInstrumentationTestCase2;
 
-public class cgeogpxesTest extends AndroidTestCase {
-    private cgeogpxes cgeogpxes = new cgeogpxes();
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class cgeogpxesTest extends ActivityInstrumentationTestCase2<cgeogpxes> {
+    private int listId;
+    private cgeogpxes importGpxActivity = new cgeogpxes();
+    private File tempDir;
+    private TestHandler importStepHandler = new TestHandler();
+    private TestHandler progressHandler = new TestHandler();
+
+    public cgeogpxesTest() {
+        super("cgeo.geocaching", cgeogpxes.class);
+    }
+
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+
+        tempDir = new File(System.getProperty("java.io.tmpdir"), "cgeogpxesTest");
+        tempDir.mkdir();
+
+        // workaround to get storage initialized
+        cgeoapplication.getInstance().getAllHistoricCachesCount();
+        listId = cgeoapplication.getInstance().createList("cgeogpxesTest");
+    }
+
+    @Override
+    protected void tearDown() throws Exception {
+        cgeoapplication.getInstance().dropStored(listId);
+        cgeoapplication.getInstance().removeList(listId);
+        deleteDirectory(tempDir);
+        super.tearDown();
+    }
+
+
+    private void copyResourceToFile(int resourceId, File file) throws IOException {
+        final InputStream is = getInstrumentation().getContext().getResources().openRawResource(resourceId);
+        final FileOutputStream os = new FileOutputStream(file);
+
+        try {
+            byte[] buffer = new byte[4096];
+            int byteCount;
+            while ((byteCount = is.read(buffer)) >= 0) {
+                os.write(buffer, 0, byteCount);
+            }
+        } finally {
+            os.close();
+            is.close();
+        }
+    }
+
+    private void deleteDirectory(File dir) {
+        for (File f : dir.listFiles()) {
+            if (f.isFile()) {
+                f.delete();
+            } else if (f.isDirectory()) {
+                deleteDirectory(f);
+            }
+        }
+        dir.delete();
+    }
+
+    static class TestHandler extends Handler {
+        List<Message> messages = new ArrayList<Message>();
+
+        @Override
+        public void handleMessage(Message msg) {
+            Message msg1 = new Message();
+            msg1.copyFrom(msg);
+            messages.add(msg1);
+        }
+    }
 
     public void testFileNameMatches() {
-        assertTrue(cgeogpxes.filenameBelongsToList("1234567.gpx"));
-        assertTrue(cgeogpxes.filenameBelongsToList("1234567.GPX"));
-        assertTrue(cgeogpxes.filenameBelongsToList(".gpx"));
-        assertTrue(cgeogpxes.filenameBelongsToList("1234567.loc"));
-        assertTrue(cgeogpxes.filenameBelongsToList("1234567.LOC"));
+        assertTrue(importGpxActivity.filenameBelongsToList("1234567.gpx"));
+        assertTrue(importGpxActivity.filenameBelongsToList("1234567.GPX"));
+        assertTrue(importGpxActivity.filenameBelongsToList(".gpx"));
+        assertTrue(importGpxActivity.filenameBelongsToList("1234567.loc"));
+        assertTrue(importGpxActivity.filenameBelongsToList("1234567.LOC"));
 
-        assertFalse(cgeogpxes.filenameBelongsToList("1234567.gpy"));
-        assertFalse(cgeogpxes.filenameBelongsToList("1234567.agpx"));
-        assertFalse(cgeogpxes.filenameBelongsToList("1234567"));
-        assertFalse(cgeogpxes.filenameBelongsToList(""));
-        assertFalse(cgeogpxes.filenameBelongsToList("gpx"));
+        assertFalse(importGpxActivity.filenameBelongsToList("1234567.gpy"));
+        assertFalse(importGpxActivity.filenameBelongsToList("1234567.agpx"));
+        assertFalse(importGpxActivity.filenameBelongsToList("1234567"));
+        assertFalse(importGpxActivity.filenameBelongsToList(""));
+        assertFalse(importGpxActivity.filenameBelongsToList("gpx"));
 
-        assertFalse(cgeogpxes.filenameBelongsToList("1234567-wpts.gpx"));
+        assertFalse(importGpxActivity.filenameBelongsToList("1234567-wpts.gpx"));
     }
+
+    public void testGetWaypointsFileForGpx() {
+        assertEquals(new File("1234567-wpts.gpx"), cgeogpxes.getWaypointsFileForGpx(new File("1234567.gpx")));
+        assertEquals(new File("/mnt/sdcard/1234567-wpts.gpx"), cgeogpxes.getWaypointsFileForGpx(new File("/mnt/sdcard/1234567.gpx")));
+        assertEquals(new File("/mnt/sdcard/1-wpts.gpx"), cgeogpxes.getWaypointsFileForGpx(new File("/mnt/sdcard/1.gpx")));
+        assertEquals(new File("/mnt/sd.card/1-wpts.gpx"), cgeogpxes.getWaypointsFileForGpx(new File("/mnt/sd.card/1.gpx")));
+        assertEquals(new File("1234567.9-wpts.gpx"), cgeogpxes.getWaypointsFileForGpx(new File("1234567.9.gpx")));
+        assertEquals(new File("1234567-wpts.gpx"), cgeogpxes.getWaypointsFileForGpx(new File("1234567.GPX")));
+        assertEquals(new File("gpx.gpx-wpts.gpx"), cgeogpxes.getWaypointsFileForGpx(new File("gpx.gpx.gpx")));
+        assertNull(cgeogpxes.getWaypointsFileForGpx(new File("123.gpy")));
+        assertNull(cgeogpxes.getWaypointsFileForGpx(new File("gpx")));
+        assertNull(cgeogpxes.getWaypointsFileForGpx(new File(".gpx")));
+        assertNull(cgeogpxes.getWaypointsFileForGpx(new File("/mnt/sdcard/.gpx")));
+    }
+
+    public void testImportGpx() throws IOException {
+        File gc31j2h = new File(tempDir, "gc31j2h.gpx");
+        copyResourceToFile(R.raw.gc31j2h, gc31j2h);
+
+        cgeogpxes.ImportGpxFileThread importThread = new cgeogpxes.ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
+        importThread.run();
+
+        assertEquals(3, importStepHandler.messages.size());
+        assertEquals(cgeogpxes.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
+        assertEquals(cgeogpxes.IMPORT_STEP_STORE_CACHES, importStepHandler.messages.get(1).what);
+        assertEquals(cgeogpxes.IMPORT_STEP_FINISHED, importStepHandler.messages.get(2).what);
+        cgSearch search = (cgSearch) importStepHandler.messages.get(2).obj;
+        assertEquals(Collections.singletonList("GC31J2H"), search.getGeocodes());
+
+        cgCache cache = cgeoapplication.getInstance().getCacheByGeocode("GC31J2H");
+        assertNotNull(cache);
+
+        // can't assert, for whatever reason the waypoints are remembered in DB
+        //        assertNull(cache.waypoints);
+    }
+
+    public void testImportGpxWithWaypoints() throws IOException {
+        File gc31j2h = new File(tempDir, "gc31j2h.gpx");
+        copyResourceToFile(R.raw.gc31j2h, gc31j2h);
+        copyResourceToFile(R.raw.gc31j2h_wpts, new File(tempDir, "gc31j2h-wpts.gpx"));
+
+        cgeogpxes.ImportGpxFileThread importThread = new cgeogpxes.ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
+        importThread.run();
+
+        assertEquals(4, importStepHandler.messages.size());
+        assertEquals(cgeogpxes.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
+        assertEquals(cgeogpxes.IMPORT_STEP_READ_WPT_FILE, importStepHandler.messages.get(1).what);
+        assertEquals(cgeogpxes.IMPORT_STEP_STORE_CACHES, importStepHandler.messages.get(2).what);
+        assertEquals(cgeogpxes.IMPORT_STEP_FINISHED, importStepHandler.messages.get(3).what);
+        cgSearch search = (cgSearch) importStepHandler.messages.get(3).obj;
+        assertEquals(Collections.singletonList("GC31J2H"), search.getGeocodes());
+
+        cgCache cache = cgeoapplication.getInstance().getCacheByGeocode("GC31J2H");
+        assertNotNull(cache);
+        assertEquals(2, cache.getWaypoints().size());
+    }
+
+    public void testImportLoc() throws IOException {
+        File oc5952 = new File(tempDir, "oc5952.loc");
+        copyResourceToFile(R.raw.oc5952_loc, oc5952);
+
+        cgeogpxes.ImportLocFileThread importThread = new cgeogpxes.ImportLocFileThread(oc5952, listId, importStepHandler, progressHandler);
+        importThread.run();
+
+        assertEquals(3, importStepHandler.messages.size());
+        assertEquals(cgeogpxes.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
+        assertEquals(cgeogpxes.IMPORT_STEP_STORE_CACHES, importStepHandler.messages.get(1).what);
+        assertEquals(cgeogpxes.IMPORT_STEP_FINISHED, importStepHandler.messages.get(2).what);
+        cgSearch search = (cgSearch) importStepHandler.messages.get(2).obj;
+        assertEquals(Collections.singletonList("OC5952"), search.getGeocodes());
+
+        cgCache cache = cgeoapplication.getInstance().getCacheByGeocode("OC5952");
+        assertNotNull(cache);
+    }
+
+    public void testImportGpxError() throws IOException {
+        File gc31j2h = new File(tempDir, "gc31j2h.gpx");
+        copyResourceToFile(R.raw.gc31j2h_err, gc31j2h);
+
+        cgeogpxes.ImportGpxFileThread importThread = new cgeogpxes.ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
+        importThread.run();
+
+        assertEquals(2, importStepHandler.messages.size());
+        assertEquals(cgeogpxes.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
+        assertEquals(cgeogpxes.IMPORT_STEP_FINISHED_WITH_ERROR, importStepHandler.messages.get(1).what);
+    }
+
 }

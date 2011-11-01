@@ -544,17 +544,19 @@
   <string name="file_title_searching">Suche</string>
 
   <!-- gpx -->
-  <string name="gpx_import_loading_caches">Lade Caches aus GPX-Datei\nGelesen:</string>
-  <string name="gpx_import_loading_waypoints">Lade Wegpunkte aus GPX-Datei\nGelesen:</string>
-  <string name="gpx_import_storing">Schreibe Caches in Datenbank\nGespeichert:</string>
-  <string name="gpx_import_loading_stored">Lade Caches aus GPX-Datei\nGespeichert:</string>
+  <string name="gpx_import_loading_caches">Lade Caches aus GPX-Datei</string>
+  <string name="gpx_import_loading_waypoints">Lade Wegpunkte aus GPX-Datei</string>
+  <string name="gpx_import_storing">Schreibe Caches in Datenbank</string>
   <string name="gpx_import_caches_imported">Caches importiert.</string>
-  <string name="gpx_import_loading">Lade Caches aus GPX-Datei</string>
   <string name="gpx_import_title">Importiere GPX-Datei</string>
   <string name="gpx_import_title_reading_file">Lese Datei</string>
   <string name="gpx_import_title_caches_imported">Ergebnis</string>
+  <string name="gpx_import_title_caches_import_failed">Import-Fehler</string>
+  <string name="gpx_import_error_io">Fehler beim Lesen der Datei</string>
+  <string name="gpx_import_error_parser">Dateiformat nicht ok</string>
+  <string name="gpx_import_error_unexpected">Unerwarteter Fehler</string>
   <string name="gpx_import_confirm">Soll die GPX-Datei importiert werden?</string>
-
+      
   <!-- map file select -->
   <string name="map_file_select_title">Wähle eine Kartendatei</string>
 
