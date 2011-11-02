@@ -236,6 +236,7 @@
   <string name="menu_settings">Nastavenia</string>
   <string name="menu_history">História</string>
   <string name="menu_filter">Filter</string>
+  <string name="menu_scan_geo">Nasnímať geo kód</string>
 
   <!-- main screen -->
   <string name="live_map_button">Aktívna mapa</string>
@@ -250,6 +251,7 @@
   <string name="caches_more_caches">Ďalšie skrýše</string>
   <string name="caches_more_caches_no">Žiadne ďalšie skrýše</string>
   <string name="caches_more_caches_loading">Načítanie skrýš…</string>
+  <string name="caches_more_caches_currently">momentálne</string>
   <string name="caches_downloading">Sťahovanie skrýš…\nOdhad:</string>
   <string name="caches_eta_ltm">menej než minúta</string>
   <string name="caches_eta_mins"> minúty</string>
@@ -363,6 +365,10 @@
   <string name="init_signature_template_datetime">Dátum a čas</string>
   <string name="init_signature_template_user">Používateľ</string>
   <string name="init_signature_template_number">Číslo</string>
+  <string name="init_details">Detaily skrýše</string>
+  <string name="init_ratingwanted">Načítať hodnotenie skrýše z GCvote.com</string>
+  <string name="init_elevationwanted">Načítať údaje o stúpaní skrýše</string>
+  <string name="init_autoload">Automatické načítanie dlhého popisu</string>
   <string name="init_other">Ďalšie možnosti</string>
   <string name="init_skin">Svetlý vzhľad\n(vyžaduje reštart c:geo)</string>
   <string name="init_address">Adresa na úvodnej obrazovke</string>
@@ -376,7 +382,6 @@
   <string name="init_save_log_img">Uložiť obrázky zo záznamov</string>
   <string name="init_units">Používať imperiálne jednotky vzdialenosti</string>
   <string name="init_nav">Používať Navigáciu Google</string>
-  <string name="init_autoload">Automaticky sťahovať dlhé popisy</string>
   <string name="init_log_offline">Pri zaznamenávaní vždy použiť offline režim (nezobrazovať online obrazovku počas zaznamenávania, neposielať záznam online)</string>
   <string name="init_livelist">Zobrazovať smer v zozname skrýš</string>
   <string name="init_browser">Tváriť sa ako bežný webový prehliadač</string>
@@ -481,6 +486,7 @@
   <string name="cache_dialog_loading_details_status_logs">Načítanie logov</string>
   <string name="cache_dialog_loading_details_status_waypoints">Spracovanie bodov trasy</string>
   <string name="cache_dialog_loading_details_status_gcvote">Načítanie GCVote</string>
+  <string name="cache_dialog_loading_details_status_elevation">Načítanie údajov o stúpaní</string>
   <string name="cache_dialog_loading_details_status_render">Vykreslovanie pohľadu</string>
   <string name="cache_dialog_loading_description">Načítanie popisu skrýše…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
@@ -554,13 +560,16 @@
   <string name="gpx_import_loading_caches">Načítanie skrýš z .gpx súboru\nNačítané:</string>
   <string name="gpx_import_loading_waypoints">Načítanie bodov trasy z .gpx súboru\nNačítané:</string>
   <string name="gpx_import_storing">Zapisovanie skrýš do databázy\nZapísané:</string>
-  <string name="gpx_import_loading_stored">Nahrávanie skrýš z .gpx súboru\nUložených:</string>
   <string name="gpx_import_caches_imported">skrýše importované</string>
-  <string name="gpx_import_loading">Načítanie skrýš z .gpx súboru</string>
   <string name="gpx_import_title">Import GPX</string>
   <string name="gpx_import_title_reading_file">Čítanie súboru</string>
   <string name="gpx_import_title_caches_imported">Výsledok</string>
+  <string name="gpx_import_title_caches_import_failed">Import zlyhal</string>
+  <string name="gpx_import_error_io">Nedá sa prečítať súbor</string>
+  <string name="gpx_import_error_parser">Nie je v poriadku formát súboru</string>
+  <string name="gpx_import_error_unexpected">Neočakávaná chyba</string>
   <string name="gpx_import_confirm">Chcete importovať GPX súbor do c:geo?</string>
+  <string name="gpx_import_loading">Načitanie skrýš z .gpx súboru</string>
 
   <!-- map file select -->
   <string name="map_file_select_title">Výber mapového súboru</string>
@@ -596,12 +605,14 @@
   <string name="waypoint_loading">Načítanie bodu trasy…</string>
   <string name="waypoint_unknown_coordinates">Neznáme súradnice</string>
   <string name="waypoint_done">Hotovo</string>
+  <string name="waypoint_duplicate">Duplikovať</string>
+  <string name="waypoint_copy_of">Kópia</string>
   <string name="search_history">História</string>
   <string name="search_history_empty">Bez predchádzajúcich cieľov</string>
   <string name="search_remove_destination">Cieľ odstránený</string>
   <string name="search_clear_history">Zmazať históriu</string>
   <string name="search_history_cleared">História zmazaná</string>
-  
+
   <string name="waypoint_coordinate_formats_plain">Čistý</string>
 
   <!-- visit -->
