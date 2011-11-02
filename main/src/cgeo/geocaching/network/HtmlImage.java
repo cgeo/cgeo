@@ -22,8 +22,6 @@ import android.view.Display;
 import android.view.WindowManager;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Date;
 
 public class HtmlImage implements Html.ImageGetter {
@@ -45,22 +43,16 @@ public class HtmlImage implements Html.ImageGetter {
     final private boolean returnErrorImage;
     final private int reason;
     final private boolean onlySave;
-    final private boolean save;
     final private BitmapFactory.Options bfOptions;
     final private int maxWidth;
     final private int maxHeight;
 
-    public HtmlImage(final Context context, final String geocode, final boolean returnErrorImage, final int reason, final boolean onlySave) {
-        this(context, geocode, returnErrorImage, reason, onlySave, true);
-    }
-
-    public HtmlImage(final Context contextIn, final String geocode, final boolean returnErrorImage, final int reason, final boolean onlySave, final boolean save) {
+    public HtmlImage(final Context contextIn, final String geocode, final boolean returnErrorImage, final int reason, final boolean onlySave) {
         this.context = contextIn;
         this.geocode = geocode;
         this.returnErrorImage = returnErrorImage;
         this.reason = reason;
         this.onlySave = onlySave;
-        this.save = save;
 
         bfOptions = new BitmapFactory.Options();
         bfOptions.inTempStorage = new byte[16 * 1024];
@@ -100,19 +92,8 @@ public class HtmlImage implements Html.ImageGetter {
                 }
             }
 
-            if (save) {
-                final File file = LocalStorage.getStorageFile(geocode, url, true);
-                LocalStorage.saveEntityToFile(bufferedEntity, file);
-            } else {
-                setSampleSize(bufferedEntity.getContentLength());
-                InputStream is;
-                try {
-                    is = bufferedEntity.getContent();
-                    imagePre = BitmapFactory.decodeStream(is, null, bfOptions);
-                } catch (IOException e) {
-                    Log.e(Settings.tag, "HtmlImage.getDrawable (decoding image)", e);
-                }
-            }
+            final File file = LocalStorage.getStorageFile(geocode, url, true);
+            LocalStorage.saveEntityToFile(bufferedEntity, file);
         }
 
         if (onlySave) {

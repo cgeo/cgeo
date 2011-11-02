@@ -1653,7 +1653,7 @@ public class cgBase {
             final String profile = BaseUtils.replaceWhitespace(getResponseData(request("http://www.geocaching.com/my/", null, false)));
             final String avatarURL = BaseUtils.getMatch(profile, GCConstants.PATTERN_AVATAR_IMAGE, false, null);
             if (null != avatarURL) {
-                final HtmlImage imgGetter = new HtmlImage(context, "", false, 0, false, false);
+                final HtmlImage imgGetter = new HtmlImage(context, "", false, 0, false);
                 return imgGetter.getDrawable(avatarURL);
             }
             // No match? There may be no avatar set by user.
