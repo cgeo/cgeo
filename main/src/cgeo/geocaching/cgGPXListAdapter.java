@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.files.GPXImporter;
+
 import android.app.Activity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,8 +26,9 @@ public class cgGPXListAdapter extends ArrayAdapter<File> {
 
     @Override
     public View getView(final int position, final View rowView, final ViewGroup parent) {
-        if (inflater == null)
+        if (inflater == null) {
             inflater = ((Activity) getContext()).getLayoutInflater();
+        }
 
         if (position > getCount()) {
             Log.w(Settings.tag, "cgGPXListAdapter.getView: Attempt to access missing item #" + position);
@@ -65,8 +68,9 @@ public class cgGPXListAdapter extends ArrayAdapter<File> {
         }
 
         // tap on item
+        @Override
         public void onClick(View view) {
-            parent.importGPX(file);
+            (new GPXImporter(parent.getListId())).importGPX(parent, file);
         }
     }
 }
