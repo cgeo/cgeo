@@ -695,7 +695,7 @@ public class cgBase {
                 final Matcher matcherCacheType = patternCacheType.matcher(row);
                 while (matcherCacheType.find()) {
                     if (matcherCacheType.groupCount() > 0) {
-                        cache.setCacheType(CacheType.getById(matcherCacheType.group(1)));
+                        cache.setCacheType(CacheType.getByPattern(matcherCacheType.group(1)));
                     }
                 }
             } catch (Exception e) {
