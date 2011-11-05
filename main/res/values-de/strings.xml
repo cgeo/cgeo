@@ -37,12 +37,12 @@
   <string name="gps">GPS Cache Exhibit</string>
 
   <!-- cache sizes -->
-  <string name="cache_size_micro">mikro</string>
-  <string name="cache_size_small">klein</string>
-  <string name="cache_size_regular">normal</string>
-  <string name="cache_size_large">groß</string>
+  <string name="cache_size_micro">micro / sehr klein</string>
+  <string name="cache_size_small">small / klein</string>
+  <string name="cache_size_regular">regular / normal</string>
+  <string name="cache_size_large">large / groß</string>
   <string name="cache_size_other">anderes</string>
-  <string name="cache_size_virtual">virtuell</string>
+  <string name="cache_size_virtual">virtual / kein Behälter</string>
   <string name="cache_size_notchosen">nicht gewählt</string>
 
   <!-- waypoints -->
