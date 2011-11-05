@@ -35,6 +35,7 @@
   <string name="ape">Project Ape-Cache</string>
   <string name="gchq">Groundspeak HQ</string>
   <string name="gps">GPS Cache Exhibit</string>
+  <string name="unknown">Unbekannter Typ</string>
 
   <!-- cache sizes -->
   <string name="cache_size_micro">micro / sehr klein</string>
@@ -140,6 +141,7 @@
   <string name="err_detail_no_spoiler">c:geo hat kein Hinweisbild für diesen Cache gefunden.</string>
   <string name="err_detail_no_map_static">c:geo hat keine statische Karte für diesen Cache gefunden.</string>
   <string name="err_detail_not_load_map_static">c:geo konnte die statische Karte nicht laden.</string>
+  <string name="err_detail_still_working">Arbeite noch an anderer Aufgabe.</string>
   <string name="err_watchlist_still_managing">c:geo versucht noch immer deine Watchlist zu aktualisieren.</string>
   <string name="err_watchlist_failed">Ändern der Watchlist nicht erfolgreich.</string>
   <string name="err_navigation_no">c:geo konnte keine unterstützte Art der Navigation finden.</string>
@@ -249,6 +251,7 @@
   <string name="caches_more_caches">Mehr Caches laden</string>
   <string name="caches_more_caches_no">Keine weiteren Caches</string>
   <string name="caches_more_caches_loading">Lade Caches…</string>
+  <string name="caches_more_caches_currently">aktuell</string>
   <string name="caches_downloading">Lade Caches…\nGeschätzte Zeit: </string>
   <string name="caches_eta_ltm">Weniger als eine Minute</string>
   <string name="caches_eta_mins"> Minuten</string>
@@ -363,6 +366,8 @@
   <string name="init_signature_template_user">Benutzer</string>
   <string name="init_signature_template_number">Nummer</string>
   <string name="init_details">Cache Details</string>
+  <string name="init_ratingwanted">Lade Cache-Bewertung von GCvote.com</string>
+  <string name="init_elevationwanted">Lade Höhe des Caches</string>
   <string name="init_autoload">Ausführliche Beschreibung automatisch laden</string>
   <string name="init_other">Weitere Optionen</string>
   <string name="init_skin">Helle Oberfläche (Neustart erforderlich)</string>
@@ -476,6 +481,7 @@
   <string name="cache_dialog_loading_details_status_logs">Lade Logs</string>
   <string name="cache_dialog_loading_details_status_waypoints">Verarbeite Wegpunkte</string>
   <string name="cache_dialog_loading_details_status_gcvote">Lade GCVote</string>
+  <string name="cache_dialog_loading_details_status_elevation">Lade Höhe</string>
   <string name="cache_dialog_loading_details_status_render">Erzeuge Darstellung</string>
   <string name="cache_dialog_loading_description">Lade Cache-Beschreibung…</string>
   <string name="cache_dialog_offline_save_title">Offline-Verwendung</string>
@@ -556,6 +562,7 @@
   <string name="gpx_import_error_parser">Dateiformat nicht ok</string>
   <string name="gpx_import_error_unexpected">Unerwarteter Fehler</string>
   <string name="gpx_import_confirm">Soll die GPX-Datei importiert werden?</string>
+  <string name="gpx_import_loading">Lade Caches von GPS-Datei</string>
       
   <!-- map file select -->
   <string name="map_file_select_title">Wähle eine Kartendatei</string>
@@ -591,6 +598,8 @@
   <string name="waypoint_loading">Lade Wegpunkt…</string>
   <string name="waypoint_unknown_coordinates">Unbekannte Koordinaten</string>
   <string name="waypoint_done">Fertig</string>
+  <string name="waypoint_duplicate">Dupliziere</string>
+  <string name="waypoint_copy_of">Kopie von</string>
   <string name="search_history">Verlauf</string>
   <string name="search_history_empty">Keine Ziele bisher</string>
   <string name="search_remove_destination">Ziel gelöscht</string>
