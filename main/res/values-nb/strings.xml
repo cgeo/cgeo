@@ -324,7 +324,6 @@
   <string name="cache_calendars">Velg kalender</string>
 
   <!-- gpx -->
-  <string name="gpx_import_loading_stored">Laster cacher fra *.GPX-filer\nlagret:</string>
   <string name="gpx_import_caches_imported">Cacher importert</string>
   <string name="gpx_import_loading">Laster cacher fra .*.GPX-fil</string>
   <string name="gpx_import_title">Importer GPX</string>

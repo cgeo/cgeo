@@ -513,7 +513,6 @@
   <string name="file_title_searching">Szukam</string>
   
   <!-- gpx -->
-  <string name="gpx_import_loading_stored">Ładuje skrzynki z pliku .gpx\nZapisane:</string>
   <string name="gpx_import_caches_imported">skrzynek importowanych</string>
   <string name="gpx_import_loading">Ładuje skrzynki z pliku .gpx</string>
   <string name="gpx_import_title">Import GPX</string>

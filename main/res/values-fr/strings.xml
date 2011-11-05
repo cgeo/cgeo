@@ -558,7 +558,6 @@
   <string name="gpx_import_loading_caches">Chargement des caches depuis le fichier .gpx\nLus:</string>
   <string name="gpx_import_loading_waypoints">Chargement des points intermédiaires depuis le fichier .gpx\nLus:</string>
   <string name="gpx_import_storing">Écriture des caches dans la base de données\nEnregistrés :</string>
-  <string name="gpx_import_loading_stored">Chargement des caches depuis les fichiers .gpx\nEnregistrés :</string>
   <string name="gpx_import_caches_imported">caches importées</string>
   <string name="gpx_import_loading">Chargement des caches depuis le fichier .gpx</string>
   <string name="gpx_import_title">Importation GPX</string>

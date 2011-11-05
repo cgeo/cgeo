@@ -339,7 +339,6 @@
   <string name="cache_spoiler_images_loading">Loading spoiler images…</string>
 
   <!-- gpx -->
-  <string name="gpx_import_loading_stored">nahrávání keší z .gpx souboru\nuloženo:</string>
   <string name="gpx_import_caches_imported">keše importovány</string>
   <string name="gpx_import_loading">nahrávání keší z .gpx souboru</string>
   <string name="gpx_import_title">Import GPX</string>
