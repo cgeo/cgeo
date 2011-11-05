@@ -573,10 +573,13 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void end(String state) {
-                    if (StringUtils.isBlank(cache.getLocation())) {
-                        cache.setLocation(validate(state));
-                    } else {
-                        cache.setLocation(state.trim() + ", " + cache.getLocation());
+                    String trimmedState = state.trim();
+                    if (StringUtils.isNotEmpty(trimmedState)) { // state can be completely empty
+                        if (StringUtils.isBlank(cache.getLocation())) {
+                            cache.setLocation(validate(state));
+                        } else {
+                            cache.setLocation(trimmedState + ", " + cache.getLocation());
+                        }
                     }
                 }
             });

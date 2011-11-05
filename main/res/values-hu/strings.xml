@@ -535,7 +535,6 @@
   <string name="file_title_searching">Keresés</string>
 
   <!-- gpx -->
-  <string name="gpx_import_loading_stored">Ládák betöltése .gpx fájlból \nHely:</string>
   <string name="gpx_import_caches_imported">ládák importálva</string>
   <string name="gpx_import_loading">Ládák betöltése .gpx fájlból</string>
   <string name="gpx_import_title">GPX importálása</string>

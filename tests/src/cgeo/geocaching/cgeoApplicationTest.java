@@ -133,7 +133,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
         // changing data
         assertTrue(tb.getDistance() >= 10617.8f);
         assertTrue(tb.getLogs().size() >= 10);
-        assertTrue(cgTrackable.SPOTTED_CACHE == tb.getSpottedType() || cgTrackable.SPOTTED_OWNER == tb.getSpottedType());
+        assertTrue(cgTrackable.SPOTTED_CACHE == tb.getSpottedType() || cgTrackable.SPOTTED_USER == tb.getSpottedType());
         // no assumption possible: assertEquals("faa2d47d-19ea-422f-bec8-318fc82c8063", tb.getSpottedGuid());
         // no assumption possible: assertEquals("Nice place for a break cache", tb.getSpottedName());
 

@@ -413,7 +413,6 @@
   <string name="cache_log_types">ログタイプ</string>
 
   <!-- gpx -->
-  <string name="gpx_import_loading_stored">GPXファイルをロード中\n保存済み:</string>
   <string name="gpx_import_caches_imported">個のキャッシュを読み込みました</string>
   <string name="gpx_import_loading">GPXファイルをロード中</string>
   <string name="gpx_import_title">GPXファイルの読み込み</string>

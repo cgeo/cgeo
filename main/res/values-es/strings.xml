@@ -516,7 +516,6 @@
   <string name="file_title_searching">Buscando</string>
 
   <!-- gpx -->
-  <string name="gpx_import_loading_stored">Cargando escondites del archivo .gpx\nGuardados:</string>
   <string name="gpx_import_caches_imported">escondites importados</string>
   <string name="gpx_import_loading">Cargando escondites del archivo .gpx</string>
   <string name="gpx_import_title">Importar GPX</string>

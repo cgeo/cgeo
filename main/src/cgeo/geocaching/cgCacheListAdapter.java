@@ -340,7 +340,6 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             v = inflater.inflate(R.layout.cache, null);
 
             holder = new cgCacheView();
-            holder.oneCache = (RelativeLayout) v.findViewById(R.id.one_cache);
             holder.checkbox = (CheckBox) v.findViewById(R.id.checkbox);
             holder.oneInfo = (RelativeLayout) v.findViewById(R.id.one_info);
             holder.oneCheckbox = (RelativeLayout) v.findViewById(R.id.one_checkbox);
@@ -557,15 +556,6 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             if (StringUtils.isNotBlank(cache.getGeocode())) {
                 cacheInfo.append(cache.getGeocode());
             }
-            if (cache.getSize() != null) {
-                // don't show "not chosen" for events and virtuals, that should be the normal case
-                if (cache.showSize()) {
-                    if (cacheInfo.length() > 0) {
-                        cacheInfo.append(" | ");
-                    }
-                    cacheInfo.append(res.getString(cache.getSize().stringId));
-                }
-            }
             if ((cache.getDifficulty() != null && cache.getDifficulty() > 0f) || (cache.getTerrain() != null && cache.getTerrain() > 0f) || (cache.getRating() != null && cache.getRating() > 0f)) {
                 if (cacheInfo.length() > 0 && ((cache.getDifficulty() != null && cache.getDifficulty() > 0f) || (cache.getTerrain() != null && cache.getTerrain() > 0f))) {
                     cacheInfo.append(" |");
@@ -578,6 +568,15 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
                 if (cache.getTerrain() != null && cache.getTerrain() > 0f) {
                     cacheInfo.append(" T:");
                     cacheInfo.append(String.format(Locale.getDefault(), "%.1f", cache.getTerrain()));
+                }
+            }
+            if (cache.getSize() != null) {
+                // don't show "not chosen" for events and virtuals, that should be the normal case
+                if (cache.showSize()) {
+                    if (cacheInfo.length() > 0) {
+                        cacheInfo.append(" | ");
+                    }
+                    cacheInfo.append(res.getString(cache.getSize().stringId));
                 }
             }
             if (cache.isMembers()) {

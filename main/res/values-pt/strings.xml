@@ -509,7 +509,6 @@
   <string name="file_title_searching">A procurar</string>
 
   <!-- gpx -->
-  <string name="gpx_import_loading_stored">a carregar caches do ficheiro .gpx\narmazenado:</string>
   <string name="gpx_import_caches_imported">Caches importadas</string>
   <string name="gpx_import_loading">A carregar caches do ficheiro .gpx</string>
   <string name="gpx_import_title">Importar GPX</string>
