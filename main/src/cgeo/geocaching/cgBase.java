@@ -1976,6 +1976,7 @@ public class cgBase {
         }
     }
 
+    @Deprecated
     private static String formatCoordinate(final Double coordIn, final boolean degrees, final String direction, final String digitsFormat) {
         if (coordIn == null) {
             return "";
@@ -1998,14 +1999,17 @@ public class cgBase {
         return formatted.toString();
     }
 
+    @Deprecated
     public static String formatLatitude(final Double coord, final boolean degrees) {
         return formatCoordinate(coord, degrees, (coord >= 0) ? "N " : "S ", "%02.0f");
     }
 
+    @Deprecated
     public static String formatLongitude(final Double coord, final boolean degrees) {
         return formatCoordinate(coord, degrees, (coord >= 0) ? "E " : "W ", "%03.0f");
     }
 
+    @Deprecated
     public static String formatCoords(final Geopoint coords, final boolean degrees) {
         return formatLatitude(coords.getLatitude(), degrees) + " | " + formatLongitude(coords.getLongitude(), degrees);
     }
