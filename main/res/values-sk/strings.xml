@@ -569,7 +569,6 @@
   <string name="gpx_import_error_parser">Nie je v poriadku formát súboru</string>
   <string name="gpx_import_error_unexpected">Neočakávaná chyba</string>
   <string name="gpx_import_confirm">Chcete importovať GPX súbor do c:geo?</string>
-  <string name="gpx_import_loading">Načitanie skrýš z .gpx súboru</string>
 
   <!-- map file select -->
   <string name="map_file_select_title">Výber mapového súboru</string>

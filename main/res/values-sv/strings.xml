@@ -554,7 +554,6 @@
   <string name="gpx_import_loading_waypoints">Läser in punkter från .gpx file\nLäst:</string>
   <string name="gpx_import_storing">Skriver cacher till databasen\nSparat:</string>
   <string name="gpx_import_caches_imported">cacher importerade</string>
-  <string name="gpx_import_loading">Laddar cacher från .gpx fil</string>
   <string name="gpx_import_title">Importera GPX</string>
   <string name="gpx_import_title_reading_file">Läser fil</string>
   <string name="gpx_import_title_caches_imported">Resultat</string>

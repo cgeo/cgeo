@@ -325,7 +325,7 @@
 
   <!-- gpx -->
   <string name="gpx_import_caches_imported">Cacher importert</string>
-  <string name="gpx_import_loading">Laster cacher fra .*.GPX-fil</string>
+  <string name="gpx_import_loading_caches">Laster cacher fra .*.GPX-fil</string>
   <string name="gpx_import_title">Importer GPX</string>
   <string name="gpx_import_title_reading_file">Leser fil</string>
   <string name="gpx_import_title_caches_imported">Resultat</string>

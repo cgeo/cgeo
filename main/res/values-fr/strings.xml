@@ -555,11 +555,10 @@
   <string name="file_title_searching">Recherche en cours</string>
 
   <!-- gpx -->
-  <string name="gpx_import_loading_caches">Chargement des caches depuis le fichier .gpx\nLus:</string>
-  <string name="gpx_import_loading_waypoints">Chargement des points intermédiaires depuis le fichier .gpx\nLus:</string>
+  <string name="gpx_import_loading_caches">Chargement des caches depuis le fichier .gpx</string>
+  <string name="gpx_import_loading_waypoints">Chargement des points intermédiaires depuis le fichier .gpx</string>
   <string name="gpx_import_storing">Écriture des caches dans la base de données\nEnregistrés :</string>
   <string name="gpx_import_caches_imported">caches importées</string>
-  <string name="gpx_import_loading">Chargement des caches depuis le fichier .gpx</string>
   <string name="gpx_import_title">Importation GPX</string>
   <string name="gpx_import_title_reading_file">Lecture du fichier</string>
   <string name="gpx_import_title_caches_imported">Résultat</string>

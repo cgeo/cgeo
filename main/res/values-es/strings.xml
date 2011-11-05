@@ -517,7 +517,7 @@
 
   <!-- gpx -->
   <string name="gpx_import_caches_imported">escondites importados</string>
-  <string name="gpx_import_loading">Cargando escondites del archivo .gpx</string>
+  <string name="gpx_import_loading_caches">Cargando escondites del archivo .gpx</string>
   <string name="gpx_import_title">Importar GPX</string>
   <string name="gpx_import_title_reading_file">Leyendo archivo</string>
   <string name="gpx_import_title_caches_imported">Resultados</string>

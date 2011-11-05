@@ -550,11 +550,10 @@
   <string name="file_title_searching">Bezig met zoeken</string>
 
   <!-- gpx -->
-  <string name="gpx_import_loading_caches">Caches laden van .gpx bestand\nGelezen:</string>
-  <string name="gpx_import_loading_waypoints">Waypoints laden van .gpx bestand\nGelezen:</string>
-  <string name="gpx_import_storing">Opslaan caches in de database\nOpgeslagen:</string>
+  <string name="gpx_import_loading_caches">Caches laden van .gpx bestand</string>
+  <string name="gpx_import_loading_waypoints">Waypoints laden van .gpx bestand</string>
+  <string name="gpx_import_storing">Opslaan caches in de database</string>
   <string name="gpx_import_caches_imported">Caches geïmporteerd</string>
-  <string name="gpx_import_loading">Caches laden van .gpx bestand</string>
   <string name="gpx_import_title">Importeer GPX</string>
   <string name="gpx_import_title_reading_file">Bestand aan het lezen</string>
   <string name="gpx_import_title_caches_imported">Resultaat</string>

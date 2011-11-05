@@ -514,7 +514,7 @@
   
   <!-- gpx -->
   <string name="gpx_import_caches_imported">skrzynek importowanych</string>
-  <string name="gpx_import_loading">Ładuje skrzynki z pliku .gpx</string>
+  <string name="gpx_import_loading_caches">Ładuje skrzynki z pliku .gpx</string>
   <string name="gpx_import_title">Import GPX</string>
   <string name="gpx_import_title_reading_file">Czytanie pliku</string>
   <string name="gpx_import_title_caches_imported">Wynik</string>
