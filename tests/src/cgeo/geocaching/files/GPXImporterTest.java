@@ -52,7 +52,7 @@ public class GPXImporterTest extends InstrumentationTestCase {
         assertEquals(Collections.singletonList("GC31J2H"), search.getGeocodes());
 
         cgCache cache = cgeoapplication.getInstance().getCacheByGeocode("GC31J2H");
-        assertNotNull(cache);
+        assertCacheProperties(cache);
 
         // can't assert, for whatever reason the waypoints are remembered in DB
         //        assertNull(cache.waypoints);
@@ -75,7 +75,7 @@ public class GPXImporterTest extends InstrumentationTestCase {
         assertEquals(Collections.singletonList("GC31J2H"), search.getGeocodes());
 
         cgCache cache = cgeoapplication.getInstance().getCacheByGeocode("GC31J2H");
-        assertNotNull(cache);
+        assertCacheProperties(cache);
         assertEquals(2, cache.getWaypoints().size());
     }
 
@@ -94,7 +94,12 @@ public class GPXImporterTest extends InstrumentationTestCase {
         assertEquals(Collections.singletonList("OC5952"), search.getGeocodes());
 
         cgCache cache = cgeoapplication.getInstance().getCacheByGeocode("OC5952");
+        assertCacheProperties(cache);
+    }
+
+    private static void assertCacheProperties(cgCache cache) {
         assertNotNull(cache);
+        assertFalse(cache.getLocation().startsWith(","));
     }
 
     public void testImportGpxError() throws IOException {
