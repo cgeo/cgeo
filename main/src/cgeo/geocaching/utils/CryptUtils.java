@@ -110,4 +110,32 @@ public final class CryptUtils {
         }
         return buffer;
     }
+
+    public static String convertToGcBase31(final String gccode) {
+        final String alphabet = "0123456789ABCDEFGHJKMNPQRTVWXYZ";
+
+        if (null == gccode) {
+            return "";
+        }
+
+        char[] characters = gccode.toUpperCase().toCharArray();
+
+        if (characters.length <= 2) {
+            return "";
+        }
+
+        final int base = (characters.length <= 5 || (characters.length == 6 && alphabet.indexOf(characters[2]) < 16)) ? 16 : 31;
+        int result = 0;
+
+        for (int i = 2; i < characters.length; i++) {
+            result *= base;
+            result += alphabet.indexOf(characters[i]);
+        }
+
+        if (31 == base) {
+            result += Math.pow(16, 4) - 16 * Math.pow(31, 3);
+        }
+
+        return Integer.toString(result);
+    }
 }
