@@ -42,9 +42,9 @@
   <string name="cache_size_small">small / klein</string>
   <string name="cache_size_regular">regular / normal</string>
   <string name="cache_size_large">large / groß</string>
-  <string name="cache_size_other">anderes</string>
+  <string name="cache_size_other">Größe unbekannt</string>
   <string name="cache_size_virtual">virtual / kein Behälter</string>
-  <string name="cache_size_notchosen">nicht gewählt</string>
+  <string name="cache_size_notchosen">Größe nicht gewählt</string>
 
   <!-- waypoints -->
   <string name="wp_final">Final</string>
