@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -478,6 +479,11 @@ public class cgCache implements ICache {
 
     @Override
     public String getCacheId() {
+        // TODO: Only valid for GC-cache
+        if (StringUtils.isBlank(cacheId)) {
+            return CryptUtils.convertToGcBase31(geocode);
+        }
+
         return cacheId;
     }
 

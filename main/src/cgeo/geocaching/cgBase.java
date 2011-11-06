@@ -14,7 +14,6 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
-import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
@@ -2633,11 +2632,7 @@ public class cgBase {
      * @return -1: error occured
      */
     public static int addToWatchlist(final cgCache cache) {
-        final String id = StringUtils.isEmpty(cache.getCacheId())
-                ? CryptUtils.convertToGcBase31(cache.getGeocode())
-                : cache.getCacheId();
-
-        final String uri = "http://www.geocaching.com/my/watchlist.aspx?w=" + id;
+        final String uri = "http://www.geocaching.com/my/watchlist.aspx?w=" + cache.getCacheId();
         String page = postRequestLogged(uri);
 
         if (StringUtils.isBlank(page)) {
@@ -2663,11 +2658,7 @@ public class cgBase {
      * @return -1: error occured
      */
     public static int removeFromWatchlist(final cgCache cache) {
-        final String id = StringUtils.isEmpty(cache.getCacheId())
-                ? CryptUtils.convertToGcBase31(cache.getGeocode())
-                : cache.getCacheId();
-
-        final String uri = "http://www.geocaching.com/my/watchlist.aspx?ds=1&action=rem&id=" + id;
+        final String uri = "http://www.geocaching.com/my/watchlist.aspx?ds=1&action=rem&id=" + cache.getCacheId();
         String page = postRequestLogged(uri);
 
         if (StringUtils.isBlank(page)) {
