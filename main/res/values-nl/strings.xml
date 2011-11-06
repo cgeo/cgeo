@@ -35,6 +35,7 @@
   <string name="ape">Project ape cache</string>
   <string name="gchq">Groundspeak hq</string>
   <string name="gps">Gps cache exhibit</string>
+  <string name="unknown">Onbekend type</string>
 
   <!-- cache sizes -->
   <string name="cache_size_micro">micro</string>
@@ -160,7 +161,7 @@
   <string name="err_location_unknown">c:geo kent de locatie van de cache niet.</string>
   <string name="err_missing_device_name">Voer een apparaatnaam in voor registratie.</string>
 
-  <string name="err_tb_display">"Sorry, c:geo kan de gezochte trackable niet weergeven. Is het echt een trackable?</string>
+  <string name="err_tb_display">Sorry, c:geo kan de gezochte trackable niet weergeven. Is het wel een trackable?</string>
   <string name="err_tb_details_open">Sorry, c:geo kan de trackable details niet laden.</string>
   <string name="err_tb_details_download">Sorry, c:geo kon de trackable details niet downloaden omdat</string>
   <string name="err_tb_forgot">Sorry, c:geo is vergeten welke trackable je wilde.</string>
@@ -249,6 +250,7 @@
   <string name="caches_more_caches">Meer caches</string>
   <string name="caches_more_caches_no">Einde cachelijst</string>
   <string name="caches_more_caches_loading">Caches laden…</string>
+  <string name="caches_more_caches_currently">op dit moment</string>
   <string name="caches_downloading">Caches aan het downloaden…\nETE: </string>
   <string name="caches_eta_ltm">Minder dan een minuut</string>
   <string name="caches_eta_mins"> minuten</string>
@@ -362,6 +364,10 @@
   <string name="init_signature_template_datetime">Datum &amp; tijd</string>
   <string name="init_signature_template_user">Gebruiker</string>
   <string name="init_signature_template_number">Nummer</string>
+  <string name="init_details">Cache details</string>
+  <string name="init_ratingwanted">Laad cachewaardering van GCvote.com</string>
+  <string name="init_elevationwanted">Laad cache hoogte gegevens</string>
+  <string name="init_autoload">Automatisch laden van lange omschrijving</string>
   <string name="init_other">Overige opties</string>
   <string name="init_skin">Lichte skin (c:geo herstarten)</string>
   <string name="init_address">Toon adres op hoofdscherm</string>
@@ -375,7 +381,6 @@
   <string name="init_save_log_img">Sla afbeeldingen van logs op</string>
   <string name="init_units">Gebruik imperiale stelsel voor afstanden</string>
   <string name="init_nav">Gebruik Google Navigatie</string>
-  <string name="init_autoload">Automatisch lange omschrijving laden</string>
   <string name="init_log_offline">Als er gelogd word, doe dit altijd offline (Laat het online log scherm niet zien en verzend de log niet)</string>
   <string name="init_livelist">Toon afstand tot cache in lijst</string>
   <string name="init_browser">c:geo Als standaard browser instellen</string>
@@ -480,6 +485,7 @@
   <string name="cache_dialog_loading_details_status_logs">Laden logs</string>
   <string name="cache_dialog_loading_details_status_waypoints">Verwerken waypoints</string>
   <string name="cache_dialog_loading_details_status_gcvote">Laden GCVote</string>
+  <string name="cache_dialog_loading_details_status_elevation">Laden van hoogte gegevens</string>
   <string name="cache_dialog_loading_details_status_render">Weergave genereren</string>
   <string name="cache_dialog_loading_description">Laden cacheomschrijving…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
@@ -554,10 +560,15 @@
   <string name="gpx_import_loading_waypoints">Waypoints laden van .gpx bestand\nGelezen:</string>
   <string name="gpx_import_storing">Opslaan caches in de database\nOpgeslagen:</string>
   <string name="gpx_import_caches_imported">Caches geïmporteerd</string>
-  <string name="gpx_import_loading">Caches laden van .gpx bestand</string>
   <string name="gpx_import_title">Importeer GPX</string>
   <string name="gpx_import_title_reading_file">Bestand aan het lezen</string>
   <string name="gpx_import_title_caches_imported">Resultaat</string>
+  <string name="gpx_import_title_caches_import_failed">Importeren niet gelukt</string>
+  <string name="gpx_import_error_io">Kan bestand niet lezen</string>
+  <string name="gpx_import_error_parser">Bestandsformaat niet goed</string>
+  <string name="gpx_import_error_unexpected">Onbekend probleem</string>
+  <string name="gpx_import_confirm">Wil je de GPX gegevens in c:geo laden?</string>  
+  <string name="gpx_import_loading">Caches laden van GPX bestand</string>
 
   <!-- map file select -->
   <string name="map_file_select_title">Selecteer mapbestand</string>
@@ -593,6 +604,8 @@
   <string name="waypoint_loading">Waypoint laden…</string>
   <string name="waypoint_unknown_coordinates">coördinaten niet bekend</string>
   <string name="waypoint_done">Klaar</string>
+  <string name="waypoint_duplicate">Dubbel</string>
+  <string name="waypoint_copy_of">Kopie van</string>
   <string name="search_history">Geschiedenis</string>
   <string name="search_history_empty">Geen eerdere bestemmingen</string>
   <string name="search_remove_destination">Bestemming verwijderd</string>
@@ -600,7 +613,7 @@
   <string name="search_history_cleared">Geschiedenis leeggemaakt</string>
 
   <!-- visit -->
-  <string name="visit_tweet">Post deze vondst naar Twitter</string>
+  <string name="visit_tweet">Post deze vondst op Twitter</string>
 
   <!-- map -->
   <string name="map_map">Kaart</string>
