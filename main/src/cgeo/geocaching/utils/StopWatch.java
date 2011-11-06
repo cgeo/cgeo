@@ -6,7 +6,7 @@ package cgeo.geocaching.utils;
 
 /**
  * Stop watch
- * 
+ *
  * @author blafoo
  */
 public final class StopWatch {
@@ -26,6 +26,13 @@ public final class StopWatch {
      */
     public String getTimeAsString() {
         return String.format("%d ms", getTime());
+    }
+
+    /**
+     * @return difference in ms from the start to "now" formated as ' (xx ms) '
+     */
+    public String formatTimeSpan() {
+        return String.format(" (%d ms) ", getTime());
     }
 
     /**

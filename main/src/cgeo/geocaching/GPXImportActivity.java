@@ -5,7 +5,6 @@ import cgeo.geocaching.files.GPXImporter;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.net.Uri;
 import android.os.Bundle;
 
 public class GPXImportActivity extends AbstractActivity {
@@ -24,7 +23,7 @@ public class GPXImportActivity extends AbstractActivity {
                 .setCancelable(false)
                 .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        (new GPXImporter(cgList.STANDARD_LIST_ID)).importGPX(GPXImportActivity.this, (Uri) getIntent().getData(), getContentResolver());
+                        (new GPXImporter(cgList.STANDARD_LIST_ID)).importGPX(GPXImportActivity.this, getIntent().getData(), getContentResolver());
                     }
                 })
                 .setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {

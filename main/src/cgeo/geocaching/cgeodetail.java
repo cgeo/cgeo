@@ -726,7 +726,7 @@ public class cgeodetail extends AbstractActivity {
             detailsList.removeAllViews();
 
             // actionbar icon, default myster<
-            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.getType())), null, null, null);
+            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.getCacheType().id)), null, null, null);
 
             // cache name (full name)
             itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
@@ -752,15 +752,11 @@ public class cgeodetail extends AbstractActivity {
             if (cache.getSize() != null) {
                 // don't show "not chosen" for events and virtuals, that should be the normal case
                 if (cache.showSize()) {
-                    size = " (" + res.getString(cache.getSize().stringId) + ")";
+                    size = " (" + cache.getSize().getL10n() + ")";
                 }
             }
 
-            if (cgBase.cacheTypesInv.containsKey(cache.getType())) { // cache icon
-                itemValue.setText(cgBase.cacheTypesInv.get(cache.getType()) + size);
-            } else {
-                itemValue.setText(cgBase.cacheTypesInv.get(CacheType.MYSTERY.id) + size);
-            }
+            itemValue.setText(cache.getCacheType() != CacheType.UNKNOWN ? cache.getCacheType().getL10n() + size : CacheType.MYSTERY.getL10n() + size);
             detailsList.addView(itemLayout);
 
             // gc-code

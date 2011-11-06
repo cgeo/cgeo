@@ -43,6 +43,7 @@ public class GPXImporterTest extends InstrumentationTestCase {
 
         GPXImporter.ImportGpxFileThread importThread = new GPXImporter.ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
         importThread.run();
+        waitForFastSystems();
 
         assertEquals(3, importStepHandler.messages.size());
         assertEquals(GPXImporter.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
@@ -65,6 +66,7 @@ public class GPXImporterTest extends InstrumentationTestCase {
 
         GPXImporter.ImportGpxFileThread importThread = new GPXImporter.ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
         importThread.run();
+        waitForFastSystems();
 
         assertEquals(4, importStepHandler.messages.size());
         assertEquals(GPXImporter.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
@@ -85,6 +87,7 @@ public class GPXImporterTest extends InstrumentationTestCase {
 
         GPXImporter.ImportLocFileThread importThread = new GPXImporter.ImportLocFileThread(oc5952, listId, importStepHandler, progressHandler);
         importThread.run();
+        waitForFastSystems();
 
         assertEquals(3, importStepHandler.messages.size());
         assertEquals(GPXImporter.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
@@ -108,6 +111,7 @@ public class GPXImporterTest extends InstrumentationTestCase {
 
         GPXImporter.ImportGpxFileThread importThread = new GPXImporter.ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
         importThread.run();
+        waitForFastSystems();
 
         assertEquals(2, importStepHandler.messages.size());
         assertEquals(GPXImporter.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
@@ -170,6 +174,18 @@ public class GPXImporterTest extends InstrumentationTestCase {
             }
         }
         dir.delete();
+    }
+
+    /**
+     * On very fast systems (Asus Transformer EeePad e.g.) not all messages are already handled
+     * when the size of the message queue is checked. Solution: wait some milliseconds !
+     */
+    private void waitForFastSystems() {
+        try {
+            Thread.sleep(500, 0);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 }

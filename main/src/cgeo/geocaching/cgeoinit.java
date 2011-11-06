@@ -4,6 +4,7 @@ import cgeo.geocaching.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.Settings.mapSourceEnum;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 
 import org.apache.commons.lang3.StringUtils;
@@ -558,7 +559,7 @@ public class cgeoinit extends AbstractActivity {
      */
     public void backup(View view) {
         // avoid overwriting an existing backup with an empty database (can happen directly after reinstalling the app)
-        if (app.getAllStoredCachesCount(true, null, null) == 0) {
+        if (app.getAllStoredCachesCount(true, CacheType.ALL, null) == 0) {
             helpDialog(res.getString(R.string.init_backup), res.getString(R.string.init_backup_unnecessary));
             return;
         }
@@ -567,6 +568,7 @@ public class cgeoinit extends AbstractActivity {
         final ProgressDialog dialog = ProgressDialog.show(this, res.getString(R.string.init_backup), res.getString(R.string.init_backup_running), true, false);
         Thread backupThread = new Thread() {
             final Handler handler = new Handler() {
+                @Override
                 public void handleMessage(Message msg) {
                     dialog.dismiss();
                     final String file = fileRef.get();
@@ -607,6 +609,7 @@ public class cgeoinit extends AbstractActivity {
         final AtomicBoolean atomic = new AtomicBoolean(false);
         Thread restoreThread = new Thread() {
             final Handler handler = new Handler() {
+                @Override
                 public void handleMessage(Message msg) {
                     dialog.dismiss();
                     boolean restored = atomic.get();

@@ -3,6 +3,7 @@ package cgeo.geocaching.maps.google;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgUser;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -36,7 +37,7 @@ public class GoogleMapFactory implements MapFactory {
     }
 
     @Override
-    public CachesOverlayItemImpl getCachesOverlayItem(final cgCoord coordinate, final String type) {
+    public CachesOverlayItemImpl getCachesOverlayItem(final cgCoord coordinate, final CacheType type) {
         GoogleCacheOverlayItem baseItem = new GoogleCacheOverlayItem(coordinate, type);
         return baseItem;
     }

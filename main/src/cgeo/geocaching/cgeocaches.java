@@ -148,7 +148,7 @@ public class cgeocaches extends AbstractListActivity {
     private String action = null;
     private CacheListType type = null;
     private Geopoint coords = null;
-    private String cachetype = null;
+    private CacheType cachetype = null;
     private String keyword = null;
     private String address = null;
     private String username = null;
@@ -555,7 +555,7 @@ public class cgeocaches extends AbstractListActivity {
             Object typeObject = extras.get(EXTRAS_LIST_TYPE);
             type = (typeObject instanceof CacheListType) ? (CacheListType) typeObject : CacheListType.OFFLINE;
             coords = new Geopoint(extras.getDouble("latitude"), extras.getDouble("longitude"));
-            cachetype = Settings.getCacheType();
+            cachetype = Settings.getCacheTypeForFilter();
             keyword = extras.getString("keyword");
             address = extras.getString("address");
             username = extras.getString("username");
@@ -571,7 +571,7 @@ public class cgeocaches extends AbstractListActivity {
                 listId = Settings.getLastList();
                 if (listId <= 0) {
                     listId = cgList.STANDARD_LIST_ID;
-                    title = res.getString(R.string.caches_stored);
+                    title = res.getString(R.string.stored_caches_button);
                 } else {
                     final cgList list = app.getList(listId);
                     title = list.title;
@@ -605,7 +605,7 @@ public class cgeocaches extends AbstractListActivity {
                 showProgress(true);
                 setLoadingCaches();
 
-                thread = new geocachesLoadByCoords(loadCachesHandler, coords, cachetype);
+                thread = new geocachesLoadByCoords(loadCachesHandler, coords);
                 thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
                 thread.start();
                 break;
@@ -616,7 +616,7 @@ public class cgeocaches extends AbstractListActivity {
                 showProgress(true);
                 setLoadingCaches();
 
-                thread = new geocachesLoadByCoords(loadCachesHandler, coords, cachetype);
+                thread = new geocachesLoadByCoords(loadCachesHandler, coords);
                 thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
                 thread.start();
                 break;
@@ -626,7 +626,7 @@ public class cgeocaches extends AbstractListActivity {
                 showProgress(true);
                 setLoadingCaches();
 
-                thread = new geocachesLoadByKeyword(loadCachesHandler, keyword, cachetype);
+                thread = new geocachesLoadByKeyword(loadCachesHandler, keyword);
                 thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
                 thread.start();
                 break;
@@ -644,7 +644,7 @@ public class cgeocaches extends AbstractListActivity {
                     setLoadingCaches();
                 }
 
-                thread = new geocachesLoadByCoords(loadCachesHandler, coords, cachetype);
+                thread = new geocachesLoadByCoords(loadCachesHandler, coords);
                 thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
                 thread.start();
                 break;
@@ -654,7 +654,7 @@ public class cgeocaches extends AbstractListActivity {
                 showProgress(true);
                 setLoadingCaches();
 
-                thread = new geocachesLoadByUserName(loadCachesHandler, username, cachetype);
+                thread = new geocachesLoadByUserName(loadCachesHandler, username);
                 thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
                 thread.start();
                 break;
@@ -664,7 +664,7 @@ public class cgeocaches extends AbstractListActivity {
                 showProgress(true);
                 setLoadingCaches();
 
-                thread = new geocachesLoadByOwner(loadCachesHandler, username, cachetype);
+                thread = new geocachesLoadByOwner(loadCachesHandler, username);
                 thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
                 thread.start();
                 break;
@@ -766,7 +766,7 @@ public class cgeocaches extends AbstractListActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         SubMenu subMenuFilter = menu.addSubMenu(0, SUBMENU_FILTER, 0, res.getString(R.string.caches_filter)).setIcon(R.drawable.ic_menu_filter);
         subMenuFilter.setHeaderTitle(res.getString(R.string.caches_filter_title));
-        if (Settings.getCacheType() == null) {
+        if (Settings.getCacheTypeForFilter() == CacheType.ALL) {
             subMenuFilter.add(0, SUBMENU_FILTER_TYPE, 0, res.getString(R.string.caches_filter_type));
         }
         subMenuFilter.add(0, SUBMENU_FILTER_SIZE, 0, res.getString(R.string.caches_filter_size));
@@ -1108,30 +1108,30 @@ public class cgeocaches extends AbstractListActivity {
 
             if (selectedFilter.equals(res.getString(R.string.caches_filter_size))) {
                 menu.setHeaderTitle(res.getString(R.string.caches_filter_size_title));
-                menu.add(0, MENU_FILTER_SIZE_MICRO, 0, res.getString(CacheSize.MICRO.stringId));
-                menu.add(0, MENU_FILTER_SIZE_SMALL, 0, res.getString(CacheSize.SMALL.stringId));
-                menu.add(0, MENU_FILTER_SIZE_REGULAR, 0, res.getString(CacheSize.REGULAR.stringId));
-                menu.add(0, MENU_FILTER_SIZE_LARGE, 0, res.getString(CacheSize.LARGE.stringId));
-                menu.add(0, MENU_FILTER_SIZE_OTHER, 0, res.getString(CacheSize.OTHER.stringId));
-                menu.add(0, MENU_FILTER_SIZE_VIRTUAL, 0, res.getString(CacheSize.VIRTUAL.stringId));
-                menu.add(0, MENU_FILTER_SIZE_NOT_CHOSEN, 0, res.getString(CacheSize.NOT_CHOSEN.stringId));
+                menu.add(0, MENU_FILTER_SIZE_MICRO, 0, CacheSize.MICRO.getL10n());
+                menu.add(0, MENU_FILTER_SIZE_SMALL, 0, CacheSize.SMALL.getL10n());
+                menu.add(0, MENU_FILTER_SIZE_REGULAR, 0, CacheSize.REGULAR.getL10n());
+                menu.add(0, MENU_FILTER_SIZE_LARGE, 0, CacheSize.LARGE.getL10n());
+                menu.add(0, MENU_FILTER_SIZE_OTHER, 0, CacheSize.OTHER.getL10n());
+                menu.add(0, MENU_FILTER_SIZE_VIRTUAL, 0, CacheSize.VIRTUAL.getL10n());
+                menu.add(0, MENU_FILTER_SIZE_NOT_CHOSEN, 0, CacheSize.NOT_CHOSEN.getL10n());
             } else if (selectedFilter.equals(res.getString(R.string.caches_filter_type))) {
                 menu.setHeaderTitle(res.getString(R.string.caches_filter_type_title));
-                menu.add(0, MENU_FILTER_TYPE_TRADITIONAL, 0, res.getString(CacheType.TRADITIONAL.stringId));
-                menu.add(0, MENU_FILTER_TYPE_MULTI, 0, res.getString(CacheType.MULTI.stringId));
-                menu.add(0, MENU_FILTER_TYPE_MYSTERY, 0, res.getString(CacheType.MYSTERY.stringId));
-                menu.add(0, MENU_FILTER_TYPE_LETTERBOX, 0, res.getString(CacheType.LETTERBOX.stringId));
-                menu.add(0, MENU_FILTER_TYPE_EVENT, 0, res.getString(CacheType.EVENT.stringId));
-                menu.add(0, MENU_FILTER_TYPE_MEGA, 0, res.getString(CacheType.MEGA_EVENT.stringId));
-                menu.add(0, MENU_FILTER_TYPE_EARTH, 0, res.getString(CacheType.EARTH.stringId));
-                menu.add(0, MENU_FILTER_TYPE_CITO, 0, res.getString(CacheType.CITO.stringId));
-                menu.add(0, MENU_FILTER_TYPE_WEBCAM, 0, res.getString(CacheType.WEBCAM.stringId));
-                menu.add(0, MENU_FILTER_TYPE_VIRTUAL, 0, res.getString(CacheType.VIRTUAL.stringId));
-                menu.add(0, MENU_FILTER_TYPE_WHERIGO, 0, res.getString(CacheType.WHERIGO.stringId));
-                menu.add(0, MENU_FILTER_TYPE_LOSTFOUND, 0, res.getString(CacheType.LOSTANDFOUND.stringId));
-                menu.add(0, MENU_FILTER_TYPE_APE, 0, res.getString(CacheType.PROJECT_APE.stringId));
-                menu.add(0, MENU_FILTER_TYPE_GCHQ, 0, res.getString(CacheType.GCHQ.stringId));
-                menu.add(0, MENU_FILTER_TYPE_GPS, 0, res.getString(CacheType.GPS_EXHIBIT.stringId));
+                menu.add(0, MENU_FILTER_TYPE_TRADITIONAL, 0, CacheType.TRADITIONAL.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_MULTI, 0, CacheType.MULTI.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_MYSTERY, 0, CacheType.MYSTERY.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_LETTERBOX, 0, CacheType.LETTERBOX.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_EVENT, 0, CacheType.EVENT.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_MEGA, 0, CacheType.MEGA_EVENT.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_EARTH, 0, CacheType.EARTH.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_CITO, 0, CacheType.CITO.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_WEBCAM, 0, CacheType.WEBCAM.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_VIRTUAL, 0, CacheType.VIRTUAL.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_WHERIGO, 0, CacheType.WHERIGO.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_LOSTFOUND, 0, CacheType.LOSTANDFOUND.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_APE, 0, CacheType.PROJECT_APE.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_GCHQ, 0, CacheType.GCHQ.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_GPS, 0, CacheType.GPS_EXHIBIT.getL10n());
             }
         } else {
             if (adapterInfo.position >= adapter.getCount()) {
@@ -1774,9 +1774,9 @@ public class cgeocaches extends AbstractListActivity {
         @Override
         public void run() {
             if (coords != null) {
-                search = base.searchByOffline(coords, Settings.getCacheType(), listId);
+                search = base.searchByOffline(coords, Settings.getCacheTypeForFilter(), listId);
             } else {
-                search = base.searchByOffline(null, null, cgList.STANDARD_LIST_ID);
+                search = base.searchByOffline(null, Settings.getCacheTypeForFilter(), cgList.STANDARD_LIST_ID);
             }
             handler.sendMessage(new Message());
         }
@@ -1792,7 +1792,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = base.searchByHistory(coords != null ? Settings.getCacheType() : null);
+            search = base.searchByHistory(coords != null ? Settings.getCacheTypeForFilter() : CacheType.ALL);
             handler.sendMessage(new Message());
         }
     }
@@ -1817,14 +1817,12 @@ public class cgeocaches extends AbstractListActivity {
 
         private Handler handler = null;
         private Geopoint coords = null;
-        private String cachetype = null;
 
-        public geocachesLoadByCoords(Handler handlerIn, final Geopoint coordsIn, String cachetypeIn) {
+        public geocachesLoadByCoords(Handler handlerIn, final Geopoint coordsIn) {
             setPriority(Thread.MIN_PRIORITY);
 
             handler = handlerIn;
             coords = coordsIn;
-            cachetype = cachetypeIn;
 
             if (coords == null) {
                 showToast(res.getString(R.string.warn_no_coordinates));
@@ -1846,14 +1844,12 @@ public class cgeocaches extends AbstractListActivity {
 
         private Handler handler = null;
         private String keyword = null;
-        private String cachetype = null;
 
-        public geocachesLoadByKeyword(Handler handlerIn, String keywordIn, String cachetypeIn) {
+        public geocachesLoadByKeyword(Handler handlerIn, String keywordIn) {
             setPriority(Thread.MIN_PRIORITY);
 
             handler = handlerIn;
             keyword = keywordIn;
-            cachetype = cachetypeIn;
 
             if (keyword == null) {
                 showToast(res.getString(R.string.warn_no_keyword));
@@ -1874,14 +1870,12 @@ public class cgeocaches extends AbstractListActivity {
 
         private Handler handler = null;
         private String username = null;
-        private String cachetype = null;
 
-        public geocachesLoadByUserName(Handler handlerIn, String usernameIn, String cachetypeIn) {
+        public geocachesLoadByUserName(Handler handlerIn, String usernameIn) {
             setPriority(Thread.MIN_PRIORITY);
 
             handler = handlerIn;
             username = usernameIn;
-            cachetype = cachetypeIn;
 
             if (StringUtils.isBlank(username)) {
                 showToast(res.getString(R.string.warn_no_username));
@@ -1902,14 +1896,12 @@ public class cgeocaches extends AbstractListActivity {
 
         private Handler handler = null;
         private String username = null;
-        private String cachetype = null;
 
-        public geocachesLoadByOwner(Handler handlerIn, String usernameIn, String cachetypeIn) {
+        public geocachesLoadByOwner(Handler handlerIn, String usernameIn) {
             setPriority(Thread.MIN_PRIORITY);
 
             handler = handlerIn;
             username = usernameIn;
-            cachetype = cachetypeIn;
 
             if (StringUtils.isBlank(username)) {
                 showToast(res.getString(R.string.warn_no_username));
@@ -1923,7 +1915,7 @@ public class cgeocaches extends AbstractListActivity {
         public void run() {
             Map<String, String> params = new HashMap<String, String>();
             params.put("username", username);
-            params.put("cachetype", cachetype);
+            params.put("cachetype", cachetype.id);
 
             search = base.searchByOwner(this, username, cachetype, 0, Settings.isShowCaptcha());
 
@@ -2580,6 +2572,7 @@ public class cgeocaches extends AbstractListActivity {
         CGeoMap.startActivitySearch(this, search, title + " [" + cgeoapplication.getCount(search) + "]", false);
     }
 
+    @Override
     public void goManual(View view) {
         switch (type) {
             case OFFLINE:
@@ -2634,27 +2627,19 @@ public class cgeocaches extends AbstractListActivity {
     }
 
     private void prepareFilterBar() {
-        TextView filterTextView = (TextView) findViewById(R.id.filter_text);
-        View filterBar = findViewById(R.id.filter_bar);
-        String cacheType = "", filter = "";
+        if (Settings.getCacheTypeForFilter() != CacheType.ALL || adapter.isFilter()) {
+            String filter = "";
+            String cacheType = Settings.getCacheTypeForFilter().getL10n();
 
-        if (Settings.getCacheType() != null || adapter.isFilter()) {
-            if (Settings.getCacheType() != null) {
-                cacheType = cgBase.cacheTypesInv.get(Settings.getCacheType());
-            }
             if (adapter.isFilter()) {
-                filter = adapter.getFilterName();
+                filter = ", " + adapter.getFilterName();
             }
 
-            if (Settings.getCacheType() != null && adapter.isFilter()) {
-                filter = ", " + filter;
-            }
-
-            filterTextView.setText(cacheType + filter);
-            filterBar.setVisibility(View.VISIBLE);
+            ((TextView) findViewById(R.id.filter_text)).setText(cacheType + filter);
+            findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
         }
         else {
-            filterBar.setVisibility(View.GONE);
+            findViewById(R.id.filter_bar).setVisibility(View.GONE);
         }
     }
 

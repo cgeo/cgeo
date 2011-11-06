@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 
@@ -353,14 +354,6 @@ public class cgeoapplication extends Application {
         return getStorage().allDetailedThere();
     }
 
-    public cgWaypoint getWaypointById(Integer id) {
-        if (id == null || id == 0) {
-            return null;
-        }
-
-        return getStorage().loadWaypoint(id);
-    }
-
     public List<Object> getBounds(String geocode) {
         if (geocode == null) {
             return null;
@@ -443,7 +436,7 @@ public class cgeoapplication extends Application {
         return cachesOut;
     }
 
-    public cgSearch getBatchOfStoredCaches(boolean detailedOnly, final Geopoint coords, String cachetype, int list) {
+    public cgSearch getBatchOfStoredCaches(boolean detailedOnly, final Geopoint coords, CacheType cachetype, int list) {
         final List<String> geocodes = getStorage().loadBatchOfStoredGeocodes(detailedOnly, coords, cachetype, list);
         return new cgSearch(geocodes);
     }
@@ -452,27 +445,22 @@ public class cgeoapplication extends Application {
         return getStorage().loadHistoryOfSearchedLocations();
     }
 
-    public cgSearch getHistoryOfCaches(boolean detailedOnly, String cachetype) {
+    public cgSearch getHistoryOfCaches(boolean detailedOnly, CacheType cachetype) {
         final List<String> geocodes = getStorage().loadBatchOfHistoricGeocodes(detailedOnly, cachetype);
         return new cgSearch(geocodes);
     }
 
-    public cgSearch getCachedInViewport(Long centerLat, Long centerLon, Long spanLat, Long spanLon, String cachetype) {
+    public cgSearch getCachedInViewport(Long centerLat, Long centerLon, Long spanLat, Long spanLon, CacheType cachetype) {
         final List<String> geocodes = getStorage().getCachedInViewport(centerLat, centerLon, spanLat, spanLon, cachetype);
         return new cgSearch(geocodes);
     }
 
-    public cgSearch getStoredInViewport(Long centerLat, Long centerLon, Long spanLat, Long spanLon, String cachetype) {
+    public cgSearch getStoredInViewport(Long centerLat, Long centerLon, Long spanLat, Long spanLon, CacheType cachetype) {
         final List<String> geocodes = getStorage().getStoredInViewport(centerLat, centerLon, spanLat, spanLon, cachetype);
         return new cgSearch(geocodes);
     }
 
-    public cgSearch getOfflineAll(String cachetype) {
-        final List<String> geocodes = getStorage().getOfflineAll(cachetype);
-        return new cgSearch(geocodes);
-    }
-
-    public int getAllStoredCachesCount(boolean detailedOnly, String cachetype, Integer list) {
+    public int getAllStoredCachesCount(boolean detailedOnly, CacheType cachetype, Integer list) {
         return getStorage().getAllStoredCachesCount(detailedOnly, cachetype, list);
     }
 

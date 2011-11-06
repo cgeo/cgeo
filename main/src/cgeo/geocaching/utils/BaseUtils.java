@@ -3,11 +3,13 @@
  */
 package cgeo.geocaching.utils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Misc. utils
+ * Misc. utils. All methods don't use Android specific stuff to use these methods in plain JUnit tests.
  */
 public final class BaseUtils {
 
@@ -18,19 +20,42 @@ public final class BaseUtils {
      *            Data to search in
      * @param p
      *            Pattern to search for
+     * @param trim
+     *            Set to true if the group found should be trim'ed
      * @param group
      *            Number of the group to return if found
      * @param defaultValue
      *            Value to return if the pattern is not found
-     * @return defaultValue or the n-th group if the pattern matches (trimed)
+     * @param last
+     *            Find the last occurring value
+     * @return defaultValue or the n-th group if the pattern matches (trimed if wanted)
      */
-    public static String getMatch(final String data, final Pattern p, final int group, final String defaultValue) {
+    public static String getMatch(final String data, final Pattern p, final boolean trim, final int group, final String defaultValue, boolean last) {
+        String result = null;
+
+        last = false; // Optimization 1: 'while (matcher.find())' returns the same result as 'mather.find()' (for the tested patterns so far)
+
         final Matcher matcher = p.matcher(data);
-        if (matcher.find() && matcher.groupCount() >= group) {
-            return new String(matcher.group(group).trim());
+
+        if (last) {
+            while (matcher.find()) {
+                // Optimization 2: 'matcher.find && matcher.groupCount() >= xx' can be shortened to 'matcher.find()'
+                // if (matcher.groupCount() >= group) {
+                result = matcher.group(group);
+            }
+        } else {
+            // Optimization 2: 'matcher.find && matcher.groupCount() >= xx' can be shortened to 'matcher.find()'
+            // if (matcher.find() && matcher.groupCount() >= group) {
+            if (matcher.find()) {
+                result = matcher.group(group);
+            }
+        }
+        if (null != result) {
+            return trim ? new String(result).trim() : new String(result);
             // Java copies the whole page String, when matching with regular expressions
             // later this would block the garbage collector, as we only need tiny parts of the page
             // see http://developer.android.com/reference/java/lang/String.html#backing_array
+            // Thus the creating of a new String via String constructor is necessary here!!
 
             // And BTW: You cannot even see that effect in the debugger, but must use a separate memory profiler!
         }
@@ -48,32 +73,49 @@ public final class BaseUtils {
      *            Set to true if the group found should be trim'ed
      * @param defaultValue
      *            Value to return if the pattern is not found
-     * @return defaultValue or the first group if the pattern matches (trimed if wanted)
+     * @return defaultValue or the first group if the pattern matches (trimmed if wanted)
      */
     public static String getMatch(final String data, final Pattern p, final boolean trim, final String defaultValue) {
-        final Matcher matcher = p.matcher(data);
-        if (matcher.find() && matcher.groupCount() >= 1) {
-            if (trim) {
-                return new String(matcher.group(1).trim());
-            }
-            return new String(matcher.group(1));
-            // Java copies the whole page String, when matching with regular expressions
-            // later this would block the garbage collector, as we only need tiny parts of the page
-            // see http://developer.android.com/reference/java/lang/String.html#backing_array
-            // Thus the creating of a new String via String constructor is necessary here!!
-
-            // And BTW: You cannot even see that effect in the debugger, but must use a separate memory profiler!
-        }
-        return defaultValue;
+        return BaseUtils.getMatch(data, p, trim, 1, defaultValue, false);
     }
 
     /**
+     * Searches for the pattern p in the data. If the pattern is not found defaultValue is returned
+     *
      * @param data
-     * @param regex
-     * @return
+     *            Data to search in
+     * @param p
+     *            Pattern to search for
+     * @param defaultValue
+     *            Value to return if the pattern is not found
+     * @return defaultValue or the first group if the pattern matches (trimmed)
+     */
+    public static String getMatch(final String data, final Pattern p, final String defaultValue) {
+        return BaseUtils.getMatch(data, p, true, 1, defaultValue, false);
+    }
+
+    public static List<String> getMatches(final String data, final Pattern p, int count) {
+        ArrayList<String> result = new ArrayList<String>();
+        final Matcher matcher = p.matcher(data);
+        while (matcher.find()) {
+            for (int i = 0; i < count; i++) {
+                result.add(matcher.group(i));
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Searches for the pattern p in the data.
+     *
+     * @param data
+     * @param p
+     * @return true if data contains the pattern p
      */
     public static boolean matches(final String data, final Pattern p) {
+        // matcher is faster than String.contains() and more flexible - it takes patterns instead of fixed texts
         return p.matcher(data).find();
+
     }
 
     /**

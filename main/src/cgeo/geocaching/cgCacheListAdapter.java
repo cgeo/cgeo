@@ -84,8 +84,8 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         pixelDensity = metrics.density;
 
-        for (final String cacheType : cgBase.cacheTypesInv.keySet()) {
-            gcIconDrawables.put(cacheType, activity.getResources().getDrawable(cgBase.getCacheIcon(cacheType)));
+        for (final CacheType cacheType : CacheType.values()) {
+            gcIconDrawables.put(cacheType.id, activity.getResources().getDrawable(cgBase.getCacheIcon(cacheType.id)));
         }
 
         if (Settings.isLightSkin()) {
@@ -434,8 +434,8 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         }
 
         holder.text.setText(cache.getNameSp(), TextView.BufferType.SPANNABLE);
-        if (gcIconDrawables.containsKey(cache.getType())) { // cache icon
-            holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(cache.getType()), null, null, null);
+        if (gcIconDrawables.containsKey(cache.getCacheType().id)) { // cache icon
+            holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(cache.getCacheType().id), null, null, null);
         } else { // unknown cache type, "mystery" icon
             holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(CacheType.MYSTERY.id), null, null, null);
         }
@@ -576,7 +576,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
                     if (cacheInfo.length() > 0) {
                         cacheInfo.append(" | ");
                     }
-                    cacheInfo.append(res.getString(cache.getSize().stringId));
+                    cacheInfo.append(cache.getSize().getL10n());
                 }
             }
             if (cache.isMembers()) {

@@ -2083,7 +2083,7 @@ public class cgData {
         cache.setOwnerReal(cursor.getString(cacheColumnIndex[12]));
         cache.setHidden(new Date(cursor.getLong(cacheColumnIndex[13])));
         cache.setHint(cursor.getString(cacheColumnIndex[14]));
-        cache.setSize(CacheSize.FIND_BY_ID.get(cursor.getString(cacheColumnIndex[15])));
+        cache.setSize(CacheSize.getById(cursor.getString(cacheColumnIndex[15])));
         cache.setDifficulty(cursor.getFloat(cacheColumnIndex[16]));
         index = cacheColumnIndex[17];
         if (cursor.isNull(index)) {
@@ -2538,7 +2538,7 @@ public class cgData {
         return trackable;
     }
 
-    public int getAllStoredCachesCount(boolean detailedOnly, String cachetype, Integer list) {
+    public int getAllStoredCachesCount(boolean detailedOnly, CacheType cachetype, Integer list) {
         String listSql = null;
         String listSqlW = null;
         if (list == null) {
@@ -2555,16 +2555,16 @@ public class cgData {
         try {
             String sql = "select count(_id) from " + dbTableCaches; // this default is not used, but we like to have variables initialized
             if (!detailedOnly) {
-                if (cachetype == null) {
+                if (cachetype == CacheType.ALL) {
                     sql = "select count(_id) from " + dbTableCaches + listSql;
                 } else {
-                    sql = "select count(_id) from " + dbTableCaches + " where type = \"" + cachetype + "\"" + listSqlW;
+                    sql = "select count(_id) from " + dbTableCaches + " where type = \"" + cachetype.id + "\"" + listSqlW;
                 }
             } else {
-                if (cachetype == null) {
+                if (cachetype == CacheType.ALL) {
                     sql = "select count(_id) from " + dbTableCaches + " where detailed = 1" + listSqlW;
                 } else {
-                    sql = "select count(_id) from " + dbTableCaches + " where detailed = 1 and type = \"" + cachetype + "\"" + listSqlW;
+                    sql = "select count(_id) from " + dbTableCaches + " where detailed = 1 and type = \"" + cachetype.id + "\"" + listSqlW;
                 }
             }
             SQLiteStatement compiledStmnt = databaseRO.compileStatement(sql);
@@ -2593,7 +2593,7 @@ public class cgData {
         return count;
     }
 
-    public List<String> loadBatchOfStoredGeocodes(final boolean detailedOnly, final Geopoint coords, final String cachetype, final int list) {
+    public List<String> loadBatchOfStoredGeocodes(final boolean detailedOnly, final Geopoint coords, final CacheType cachetype, final int list) {
         init();
 
         List<String> geocodes = new ArrayList<String>();
@@ -2607,9 +2607,9 @@ public class cgData {
             specifySql.append(" and detailed = 1 ");
         }
 
-        if (cachetype != null) {
+        if (cachetype != CacheType.ALL) {
             specifySql.append(" and type = \"");
-            specifySql.append(cachetype);
+            specifySql.append(cachetype.id);
             specifySql.append('"');
         }
 
@@ -2648,7 +2648,7 @@ public class cgData {
         return geocodes;
     }
 
-    public List<String> loadBatchOfHistoricGeocodes(boolean detailedOnly, String cachetype) {
+    public List<String> loadBatchOfHistoricGeocodes(boolean detailedOnly, CacheType cachetype) {
         init();
 
         List<String> geocodes = new ArrayList<String>();
@@ -2659,7 +2659,7 @@ public class cgData {
         if (detailedOnly) {
             specifySql.append(" and detailed = 1");
         }
-        if (cachetype != null) {
+        if (cachetype != CacheType.ALL) {
             specifySql.append(" and type = \"");
             specifySql.append(cachetype);
             specifySql.append('"');
@@ -2698,15 +2698,15 @@ public class cgData {
         return geocodes;
     }
 
-    public List<String> getCachedInViewport(Long centerLat, Long centerLon, Long spanLat, Long spanLon, String cachetype) {
+    public List<String> getCachedInViewport(Long centerLat, Long centerLon, Long spanLat, Long spanLon, CacheType cachetype) {
         return getInViewport(false, centerLat, centerLon, spanLat, spanLon, cachetype);
     }
 
-    public List<String> getStoredInViewport(Long centerLat, Long centerLon, Long spanLat, Long spanLon, String cachetype) {
+    public List<String> getStoredInViewport(Long centerLat, Long centerLon, Long spanLat, Long spanLon, CacheType cachetype) {
         return getInViewport(true, centerLat, centerLon, spanLat, spanLon, cachetype);
     }
 
-    public List<String> getInViewport(boolean stored, Long centerLat, Long centerLon, Long spanLat, Long spanLon, String cachetype) {
+    public List<String> getInViewport(boolean stored, Long centerLat, Long centerLon, Long spanLat, Long spanLon, CacheType cachetype) {
         if (centerLat == null || centerLon == null || spanLat == null || spanLon == null) {
             return null;
         }
@@ -2744,9 +2744,9 @@ public class cgData {
         where.append(String.format((Locale) null, "%.6f", lonMax));
 
         // cachetype limitation
-        if (cachetype != null) {
+        if (cachetype != CacheType.ALL) {
             where.append(" and type = \"");
-            where.append(cachetype);
+            where.append(cachetype.id);
             where.append('"');
         }
 
@@ -2788,7 +2788,7 @@ public class cgData {
         return geocodes;
     }
 
-    public List<String> getOfflineAll(String cachetype) {
+    public List<String> getOfflineAll(CacheType cachetype) {
         init();
 
         List<String> geocodes = new ArrayList<String>();
@@ -2796,8 +2796,8 @@ public class cgData {
         StringBuilder where = new StringBuilder();
 
         // cachetype limitation
-        if (cachetype != null) {
-            where.append(cachetype);
+        if (cachetype != CacheType.ALL) {
+            where.append(cachetype.id);
             where.append('"');
         }
 

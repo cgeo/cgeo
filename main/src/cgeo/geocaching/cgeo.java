@@ -33,11 +33,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class cgeo extends AbstractActivity {
 
@@ -301,6 +298,7 @@ public class cgeo extends AbstractActivity {
         return false;
     }
 
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == SCAN_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
@@ -342,17 +340,23 @@ public class cgeo extends AbstractActivity {
         menu.setHeaderTitle(res.getString(R.string.menu_filter));
 
         //first add the most used types
-        menu.add(1, 0, 0, res.getString(R.string.all_types));
-        menu.add(1, 1, 0, res.getString(R.string.traditional));
-        menu.add(1, 2, 0, res.getString(R.string.multi));
-        menu.add(1, 3, 0, res.getString(R.string.mystery));
+        menu.add(1, 0, 0, CacheType.ALL.getL10n());
+        menu.add(1, 1, 0, CacheType.TRADITIONAL.getL10n());
+        menu.add(1, 2, 0, CacheType.MULTI.getL10n());
+        menu.add(1, 3, 0, CacheType.MYSTERY.getL10n());
 
         // then add all other cache types sorted alphabetically
-        Map<String, String> allTypes = new HashMap<String, String>(cgBase.cacheTypesInv);
-        allTypes.remove(CacheType.TRADITIONAL.id);
-        allTypes.remove(CacheType.MULTI.id);
-        allTypes.remove(CacheType.MYSTERY.id);
-        List<String> sorted = new ArrayList<String>(allTypes.values());
+        List<String> sorted = new ArrayList<String>();
+        for (CacheType ct : CacheType.values()) {
+            if (ct == CacheType.ALL ||
+                    ct == CacheType.TRADITIONAL ||
+                    ct == CacheType.MULTI ||
+                    ct == CacheType.MYSTERY) {
+                continue;
+            }
+            sorted.add(ct.getL10n());
+        }
+
         Collections.sort(sorted);
         for (String choice : sorted) {
             menu.add(1, menu.size(), 0, choice);
@@ -362,16 +366,12 @@ public class cgeo extends AbstractActivity {
         menu.setGroupCheckable(1, true, true);
         boolean foundItem = false;
         int itemCount = menu.size();
-        if (Settings.getCacheType() != null) {
-            String typeTitle = cgBase.cacheTypesInv.get(Settings.getCacheType());
-            if (typeTitle != null) {
-                for (int i = 0; i < itemCount; i++) {
-                    if (menu.getItem(i).getTitle().equals(typeTitle)) {
-                        menu.getItem(i).setChecked(true);
-                        foundItem = true;
-                        break;
-                    }
-                }
+        String typeTitle = Settings.getCacheTypeForFilter().getL10n();
+        for (int i = 0; i < itemCount; i++) {
+            if (menu.getItem(i).getTitle().equals(typeTitle)) {
+                menu.getItem(i).setChecked(true);
+                foundItem = true;
+                break;
             }
         }
         if (!foundItem) {
@@ -384,7 +384,7 @@ public class cgeo extends AbstractActivity {
         final int id = item.getItemId();
 
         if (id == 0) {
-            Settings.setCacheType(null);
+            Settings.setCacheTypeForFilter(CacheType.ALL);
             setFilterTitle();
 
             return true;
@@ -395,18 +395,14 @@ public class cgeo extends AbstractActivity {
             return true;
         } else if (id > 0) {
             String itemTitle = item.getTitle().toString();
-            String choice = null;
-            for (Entry<String, String> entry : cgBase.cacheTypesInv.entrySet()) {
-                if (entry.getValue().equalsIgnoreCase(itemTitle)) {
-                    choice = entry.getKey();
+            CacheType cacheType = CacheType.ALL;
+            for (CacheType ct : CacheType.values()) {
+                if (ct.getL10n().equalsIgnoreCase(itemTitle)) {
+                    cacheType = ct;
                     break;
                 }
             }
-            if (choice == null) {
-                Settings.setCacheType(null);
-            } else {
-                Settings.setCacheType(choice);
-            }
+            Settings.setCacheTypeForFilter(cacheType);
             setFilterTitle();
 
             return true;
@@ -419,10 +415,10 @@ public class cgeo extends AbstractActivity {
         if (filterTitle == null) {
             filterTitle = (TextView) findViewById(R.id.filter_button_title);
         }
-        if (Settings.getCacheType() != null) {
-            filterTitle.setText(cgBase.cacheTypesInv.get(Settings.getCacheType()));
-        } else {
+        if (CacheType.ALL == Settings.getCacheTypeForFilter()) {
             filterTitle.setText(res.getString(R.string.all));
+        } else {
+            filterTitle.setText(Settings.getCacheTypeForFilter().getL10n());
         }
     }
 
@@ -451,10 +447,6 @@ public class cgeo extends AbstractActivity {
 
         (new countBubbleUpdate()).start();
         (new cleanDatabase()).start();
-
-        if (Settings.getCacheType() != null && !cgBase.cacheTypesInv.containsKey(Settings.getCacheType())) {
-            Settings.setCacheType(null);
-        }
 
         if (geo == null) {
             geo = app.startGeo(context, geoUpdate, base, 0, 0);
@@ -682,7 +674,7 @@ public class cgeo extends AbstractActivity {
                 }
             }
 
-            countBubbleCnt = app.getAllStoredCachesCount(true, null, null);
+            countBubbleCnt = app.getAllStoredCachesCount(true, CacheType.ALL, null);
 
             countBubbleHandler.sendEmptyMessage(0);
         }

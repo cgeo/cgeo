@@ -1,18 +1,18 @@
 package cgeo.geocaching.connector.opencaching;
 
 import cgeo.geocaching.Parameters;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCacheWrap;
 import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgeoapplication;
-import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
 
 import java.util.List;
 
-public class ApiOpenCachingConnector extends OpenCachingConnector implements IConnector {
+public class ApiOpenCachingConnector extends OpenCachingConnector {
 
     private final String cK;
 
@@ -45,7 +45,7 @@ public class ApiOpenCachingConnector extends OpenCachingConnector implements ICo
         final cgCacheWrap caches = new cgCacheWrap();
         caches.cacheList.add(cache);
 
-        final List<cgCache> cacheList = cgBase.filterSearchResults(search, caches, false, false, null);
+        final List<cgCache> cacheList = cgBase.filterSearchResults(search, caches, false, false, Settings.getCacheTypeForFilter());
         app.addSearch(search, cacheList, true, reason);
 
         return search;
