@@ -92,7 +92,7 @@ public class cgCache implements ICache {
     // temporary values
     private boolean statusChecked = false;
     private boolean statusCheckedView = false;
-    private String directionImg = null;
+    private String directionImg = "";
     private String nameForSorting;
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
@@ -413,19 +413,6 @@ public class cgCache implements ICache {
     @Override
     public Float getTerrain() {
         return terrain;
-    }
-
-    /**
-     * @deprecated Use getCacheType() instead
-     * @return cache type as an id
-     */
-    @Deprecated
-    public String getType() {
-        if (null != cacheType) {
-            return cacheType.id;
-        } else {
-            return "";
-        }
     }
 
     @Override
@@ -918,12 +905,10 @@ public class cgCache implements ICache {
     }
 
     public void setCacheType(CacheType cacheType) {
-        if (cacheType == null) {
-            this.cacheType = CacheType.UNKNOWN;
+        if (CacheType.ALL == cacheType) {
+            throw new IllegalArgumentException("Illegal cache type");
         }
-        else {
-            this.cacheType = cacheType;
-        }
+        this.cacheType = cacheType;
     }
 
 }

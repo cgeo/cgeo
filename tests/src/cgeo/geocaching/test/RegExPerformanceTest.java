@@ -115,7 +115,7 @@ public class RegExPerformanceTest extends TestCase {
                 diff2 = parse(page, p2, iterations);
                 output.add("Time pattern 2:\t" + diff2 + " ms");
             }
-            Float reduction = new Float((float) diff2 * 100 / (float) diff1);
+            Float reduction = new Float(diff2 * 100 / diff1);
             output.add("New runtime:\t" + String.format("%.1f", reduction) + "%\n");
         }
 

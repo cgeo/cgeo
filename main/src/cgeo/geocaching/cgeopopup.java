@@ -230,7 +230,7 @@ public class cgeopopup extends AbstractActivity {
             detailsList.removeAllViews();
 
             // actionbar icon
-            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.getType())), null, null, null);
+            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.getCacheType().id)), null, null, null);
 
             // cache type
             itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
@@ -238,21 +238,14 @@ public class cgeopopup extends AbstractActivity {
             itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
             itemName.setText(res.getString(R.string.cache_type));
-            if (cgBase.cacheTypesInv.containsKey(cache.getType())) { // cache icon
+
+            String cacheType = cache.getCacheType() != CacheType.UNKNOWN ? cache.getCacheType().getL10n() : CacheType.MYSTERY.getL10n();
                 if (cache.getSize() != null) {
-                    itemValue.setText(cgBase.cacheTypesInv.get(cache.getType())
-                            + " (" + res.getString(cache.getSize().stringId) + ")");
+                itemValue.setText(cacheType
+                        + " (" + cache.getSize().getL10n() + ")");
                 } else {
-                    itemValue.setText(cgBase.cacheTypesInv.get(cache.getType()));
+                itemValue.setText(cacheType);
                 }
-            } else {
-                if (cache.getSize() != null) {
-                    itemValue.setText(cgBase.cacheTypesInv.get(CacheType.MYSTERY.id)
-                            + " (" + res.getString(cache.getSize().stringId) + ")");
-                } else {
-                    itemValue.setText(cgBase.cacheTypesInv.get(CacheType.MYSTERY.id));
-                }
-            }
             detailsList.addView(itemLayout);
 
             // gc-code
@@ -364,7 +357,7 @@ public class cgeopopup extends AbstractActivity {
             if (cache.getRating() != null && cache.getRating() > 0) {
                 setRating(cache.getRating(), cache.getVotes());
             } else {
-                if (cache.supportsGCVote()) {
+                if (cache.supportsGCVote() && Settings.isRatingWanted()) {
                     (new Thread() {
 
                         @Override

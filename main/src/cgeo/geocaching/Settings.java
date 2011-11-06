@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.google.GoogleMapFactory;
 import cgeo.geocaching.maps.interfaces.MapFactory;
@@ -275,14 +276,13 @@ public final class Settings {
         return sharedPrefs.getString(KEY_COOKIE_STORE, null);
     }
 
-    public static String setCacheType(final String cacheTypeIn) {
+    public static void setCacheTypeForFilter(final CacheType cacheType) {
         editSharedSettings(new PrefRunnable() {
             @Override
             public void edit(Editor edit) {
-                edit.putString(KEY_CACHE_TYPE, cacheTypeIn);
+                edit.putString(KEY_CACHE_TYPE, cacheType.id);
             }
         });
-        return cacheTypeIn;
     }
 
     public static void setLiveMap(final boolean live) {
@@ -806,8 +806,8 @@ public final class Settings {
         return sharedPrefs.getString(KEY_WEBDEVICE_NAME, null);
     }
 
-    public static String getCacheType() {
-        return sharedPrefs.getString(KEY_CACHE_TYPE, null);
+    public static CacheType getCacheTypeForFilter() {
+        return CacheType.getById(sharedPrefs.getString(KEY_CACHE_TYPE, CacheType.ALL.id));
     }
 
     public static int getWayPointsThreshold() {

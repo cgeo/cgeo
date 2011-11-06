@@ -2,6 +2,7 @@ package cgeo.geocaching.maps.interfaces;
 
 import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgUser;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import android.app.Activity;
@@ -24,7 +25,7 @@ public interface MapFactory {
 
     public GeoPointImpl getGeoPointBase(final Geopoint coords);
 
-    public CachesOverlayItemImpl getCachesOverlayItem(final cgCoord coordinate, final String type);
+    public CachesOverlayItemImpl getCachesOverlayItem(final cgCoord coordinate, final CacheType type);
 
     public OtherCachersOverlayItemImpl getOtherCachersOverlayItemBase(Context context,
             cgUser userOne);

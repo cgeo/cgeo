@@ -296,6 +296,7 @@ public class cgeotouch extends cgLogForm {
         }
     }
 
+    @Override
     public void setDate(Calendar dateIn) {
         date = dateIn;
 

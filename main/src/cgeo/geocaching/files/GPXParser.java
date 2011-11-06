@@ -235,6 +235,7 @@ public abstract class GPXParser extends FileParser {
         return formatSimple.parse(input);
     }
 
+    @Override
     public Collection<cgCache> parse(final InputStream stream, final Handler progressHandler) throws IOException, ParserException {
         final RootElement root = new RootElement(namespace, "gpx");
         final Element waypoint = root.getChild(namespace, "wpt");
@@ -491,7 +492,7 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void end(String body) {
-                    cache.setSize(CacheSize.FIND_BY_ID.get(validate(body.toLowerCase())));
+                    cache.setSize(CacheSize.getById(validate(body.toLowerCase())));
                 }
             });
 

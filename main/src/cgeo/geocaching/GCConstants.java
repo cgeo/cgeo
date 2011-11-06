@@ -6,15 +6,16 @@ import java.util.regex.Pattern;
  * These patterns have been optimized for speed. Improve them only if you can prove
  * that *YOUR* pattern is faster. Use RegExRealPerformanceTest to show.
  *
+ * For further information about patterns have a look at
+ * http://download.oracle.com/javase/1.4.2/docs/api/java/util/regex/Pattern.html
+ *
  * @author blafoo
  */
 public final class GCConstants {
 
     /**
-     * For further information about patterns have a look at
-     * http://download.oracle.com/javase/1.4.2/docs/api/java/util/regex/Pattern.html
+     * Patterns for parsing the result of a (detailed) search
      */
-
     public final static Pattern PATTERN_HINT = Pattern.compile("<div id=\"div_hint\"[^>]*>(.*?)</div>");
     public final static Pattern PATTERN_DESC = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\">(.*?)</span>[^<]*</div>[^<]*<p>[^<]*</p>[^<]*<p>[^<]*<strong>\\W*Additional Hints</strong>");
     public final static Pattern PATTERN_SHORTDESC = Pattern.compile("<span id=\"ctl00_ContentBody_ShortDescription\">(.*?)</span>[^\\w^<]*</div>");
@@ -50,9 +51,15 @@ public final class GCConstants {
     public final static Pattern PATTERN_INVENTORYINSIDE = Pattern.compile("[^<]*<li>[^<]*<a href=\"[a-z0-9\\-\\_\\.\\?\\/\\:\\@]*\\/track\\/details\\.aspx\\?guid=([0-9a-z\\-]+)[^\"]*\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>([^<]+)<\\/span>[^<]*<\\/a>[^<]*<\\/li>");
     public final static Pattern PATTERN_WATCHLIST = Pattern.compile("<img src=\"\\/images/stockholm/16x16/icon_stop_watchlist.gif\"");
 
+    public static final Pattern PATTERN_LOGGEDIN = Pattern.compile("<span class=\"Success\">You are logged in as[^<]*<strong[^>]*>([^<]+)</strong>[^<]*</span>");
+    public static final Pattern PATTERN_LOGGEDIN2 = Pattern.compile("<strong>\\W*Hello,[^<]*<a[^>]+>([^<]+)</a>[^<]*</strong>");
     public static final Pattern PATTERN_USERLOGGEDIN = Pattern.compile("<strong>Hello, <a href=\"/my/default.aspx\" title=\"View Profile for[^\"]*\" class=\"SignedInProfileLink\">(.*?)</a></strong>");
     public static final Pattern PATTERN_AVATAR_IMAGE = Pattern.compile("<img src=\"(http://img.geocaching.com/user/avatar/[0-9a-f-]+\\.jpg)\"[^>]*\\salt=\"Avatar\"");
+    public static final Pattern PATTERN_CUSTOMDATE = Pattern.compile("<option selected=\"selected\" value=\"([ /Mdy-]+)\">");
 
+    /**
+     * Patterns for parsing trackables
+     */
     public final static Pattern PATTERN_TRACKABLE_ID = Pattern.compile("<a id=\"ctl00_ContentBody_LogLink\" title=\"[^\"]*\" href=\".*log\\.aspx\\?wid=([a-z0-9\\-]+)\"[^>]*>[^<]*</a>");
     public final static Pattern PATTERN_TRACKABLE_GEOCODE = Pattern.compile("<span id=\"ctl00_ContentBody_BugDetails_BugTBNum\" String=\"[^\"]*\">Use[^<]*<strong>(TB[0-9A-Z]+)[^<]*</strong> to reference this item.[^<]*</span>");
     public final static Pattern PATTERN_TRACKABLE_NAME = Pattern.compile("<h2>(?:[^<]*<img[^>]*>)?[^<]*<span id=\"ctl00_ContentBody_lbHeading\">([^<]+)</span>[^<]*</h2>");
@@ -72,5 +79,55 @@ public final class GCConstants {
     public final static Pattern PATTERN_TRACKABLE_ICON = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"([^\"]+)\"[^>]*>");
     public final static Pattern PATTERN_TRACKABLE_TYPE = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"[^\"]+\" alt=\"([^\"]+)\"[^>]*>");
     public final static Pattern PATTERN_TRACKABLE_DISTANCE = Pattern.compile("<h4[^>]*\\W*Tracking History \\(([0-9.,]+(km|mi))[^\\)]*\\)");
-    public final static Pattern PATTERN_TRACKABLE_LOG = Pattern.compile("<tr class=\"Data.+?src=\"/images/icons/([^.]+)\\.gif[^>]+>&nbsp;([^<]+)</td>.+?guid.+?>([^<]+)</a>.+?(?:guid=([^\"]+)\">(<span class=\"Strike\">)?([^<]+)</.+?)?<td colspan=\"4\">(.+?)(?:<ul.+?ul>)?\\s*</td>\\s*</tr>", Pattern.CASE_INSENSITIVE);
+    public final static Pattern PATTERN_TRACKABLE_LOG = Pattern.compile("<tr class=\"Data.+?src=\"/images/icons/([^.]+)\\.gif[^>]+>&nbsp;([^<]+)</td>.+?guid.+?>([^<]+)</a>.+?(?:guid=([^\"]+)\">(<span class=\"Strike\">)?([^<]+)</.+?)?<td colspan=\"4\">(.+?)(?:<ul.+?ul>)?\\s*</td>\\s*</tr>");
+
+    /**
+     * Patterns for parsing the result of a search (next)
+     */
+    public final static Pattern PATTERN_SEARCH_TYPE = Pattern.compile("<td class=\"Merge\">[^<]*<a href=\"[^\"]*/seek/cache_details\\.aspx\\?guid=[^\"]+\"[^>]+>[^<]*<img src=\"[^\"]*/images/wpttypes/[^.]+\\.gif\" alt=\"([^\"]+)\" title=\"[^\"]+\"[^>]*>[^<]*</a>");
+    public final static Pattern PATTERN_SEARCH_GUIDANDDISABLED = Pattern.compile("<img src=\"[^\"]*/images/wpttypes/[^>]*>[^<]*</a></td><td class=\"Merge\">[^<]*<a href=\"[^\"]*/seek/cache_details\\.aspx\\?guid=([a-z0-9\\-]+)\" class=\"lnk([^\"]*)\">([^<]*<span>)?([^<]*)(</span>[^<]*)?</a>[^<]+<br />([^<]*)<span[^>]+>([^<]*)</span>([^<]*<img[^>]+>)?[^<]*<br />[^<]*</td>");
+    /** Two groups **/
+    public final static Pattern PATTERN_SEARCH_TRACKABLES = Pattern.compile("<a id=\"ctl00_ContentBody_dlResults_ctl[0-9]+_uxTravelBugList\" class=\"tblist\" data-tbcount=\"([0-9]+)\" data-id=\"[^\"]*\"[^>]*>(.*)</a>");
+    /** Second group used */
+    public final static Pattern PATTERN_SEARCH_TRACKABLESINSIDE = Pattern.compile("(<img src=\"[^\"]+\" alt=\"([^\"]+)\" title=\"[^\"]*\" />[^<]*)");
+    public final static Pattern PATTERN_SEARCH_DIRECTION = Pattern.compile("<img id=\"ctl00_ContentBody_dlResults_ctl[0-9]+_uxDistanceAndHeading\" title=\"[^\"]*\" src=\"[^\"]*/seek/CacheDir\\.ashx\\?k=([^\"]+)\"[^>]*>");
+    public final static Pattern PATTERN_SEARCH_GEOCODE = Pattern.compile("\\|\\W*(GC[0-9A-Z]+)[^\\|]*\\|");
+    public final static Pattern PATTERN_SEARCH_ID = Pattern.compile("name=\"CID\"[^v]*value=\"([0-9]+)\"");
+    public final static Pattern PATTERN_SEARCH_FAVORITE = Pattern.compile("<span id=\"ctl00_ContentBody_dlResults_ctl[0-9]+_uxFavoritesValue\" title=\"[^\"]*\" class=\"favorite-rank\">([0-9]+)</span>");
+    public final static Pattern PATTERN_SEARCH_TOTOALCOUNT = Pattern.compile("<td class=\"PageBuilderWidget\"><span>Total Records[^<]*<b>(\\d+)<\\/b>");
+    public final static Pattern PATTERN_SEARCH_RECAPTCHA = Pattern.compile("<script[^>]*src=\"[^\"]*/recaptcha/api/challenge\\?k=([^\"]+)\"[^>]*>");
+    public final static Pattern PATTERN_SEARCH_RECAPTCHACHALLENGE = Pattern.compile("challenge : '([^']+)'");
+
+    /**
+     * Patterns for waypoints
+     */
+    public final static Pattern PATTERN_WPTYPE = Pattern.compile("\\/wpttypes\\/sm\\/(.+)\\.jpg");
+    public final static Pattern PATTERN_WPPREFIXORLOOKUPORLATLON = Pattern.compile(">([^<]*<[^>]+>)?([^<]+)(<[^>]+>[^<]*)?<\\/td>");
+    public final static Pattern PATTERN_WPNAME = Pattern.compile(">[^<]*<a[^>]+>([^<]*)<\\/a>");
+    public final static Pattern PATTERN_WPNOTE = Pattern.compile("colspan=\"6\">(.*)<\\/td>");
+
+    /**
+     * Patterns for different purposes
+     */
+    /** replace linebreak and paragraph tags */
+    public final static Pattern PATTERN_LINEBREAK = Pattern.compile("<(br|p)[^>]*>");
+    public final static Pattern PATTERN_TYPEBOX = Pattern.compile("<select name=\"ctl00\\$ContentBody\\$LogBookPanel1\\$ddLogType\" id=\"ctl00_ContentBody_LogBookPanel1_ddLogType\"[^>]*>"
+            + "(([^<]*<option[^>]*>[^<]+</option>)+)[^<]*</select>", Pattern.CASE_INSENSITIVE);
+    public final static Pattern PATTERN_TYPE2 = Pattern.compile("<option( selected=\"selected\")? value=\"(\\d+)\">[^<]+</option>", Pattern.CASE_INSENSITIVE);
+    // FIXME: pattern is over specified
+    public final static Pattern PATTERN_TRACKABLE = Pattern.compile("<tr id=\"ctl00_ContentBody_LogBookPanel1_uxTrackables_repTravelBugs_ctl[0-9]+_row\"[^>]*>"
+            + "[^<]*<td>[^<]*<a href=\"[^\"]+\">([A-Z0-9]+)</a>[^<]*</td>[^<]*<td>([^<]+)</td>[^<]*<td>"
+            + "[^<]*<select name=\"ctl00\\$ContentBody\\$LogBookPanel1\\$uxTrackables\\$repTravelBugs\\$ctl([0-9]+)\\$ddlAction\"[^>]*>"
+            + "([^<]*<option value=\"([0-9]+)(_[a-z]+)?\">[^<]+</option>)+"
+            + "[^<]*</select>[^<]*</td>[^<]*</tr>", Pattern.CASE_INSENSITIVE);
+    public final static Pattern PATTERN_MAINTENANCE = Pattern.compile("<span id=\"ctl00_ContentBody_LogBookPanel1_lbConfirm\"[^>]*>([^<]*<font[^>]*>)?([^<]+)(</font>[^<]*)?</span>", Pattern.CASE_INSENSITIVE);
+    public final static Pattern PATTERN_OK1 = Pattern.compile("<h2[^>]*>[^<]*<span id=\"ctl00_ContentBody_lbHeading\"[^>]*>[^<]*</span>[^<]*</h2>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+    public final static Pattern PATTERN_OK2 = Pattern.compile("<div id=[\"|']ctl00_ContentBody_LogBookPanel1_ViewLogPanel[\"|']>", Pattern.CASE_INSENSITIVE);
+    public final static Pattern PATTERN_USERTOKEN = Pattern.compile("var userToken[^=]*=[^']*'([^']+)';", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+    public final static Pattern PATTERN_VIEWSTATEFIELDCOUNT = Pattern.compile("id=\"__VIEWSTATEFIELDCOUNT\"[^(value)]+value=\"(\\d+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+    public final static Pattern PATTERN_VIEWSTATES = Pattern.compile("id=\"__VIEWSTATE(\\d*)\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+    public final static Pattern PATTERN_USERTOKEN2 = Pattern.compile("userToken\\s*=\\s*'([^']+)'");
+
+    public final static String PATTERN_PARAGRAPH = Pattern.quote("</p>");
+
 }

@@ -13,6 +13,6 @@ class WhereYouGoApp extends AbstractGeneralApp implements GeneralApp {
 
     @Override
     public boolean isEnabled(cgCache cache) {
-        return cache != null && cache.getType() != null && cache.getType().equalsIgnoreCase(CacheType.WHERIGO.id);
+        return cache != null && cache.getCacheType() == CacheType.WHERIGO;
     }
 }

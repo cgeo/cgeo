@@ -124,7 +124,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
             return null;
         }
 
-        final List<cgCache> cacheList = cgBase.filterSearchResults(search, caches, false, false, null);
+        final List<cgCache> cacheList = cgBase.filterSearchResults(search, caches, false, false, Settings.getCacheTypeForFilter());
         app.addSearch(search, cacheList, true, reason);
 
         return search;

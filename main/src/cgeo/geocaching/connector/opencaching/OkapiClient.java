@@ -235,14 +235,14 @@ final public class OkapiClient {
         return CacheSize.NOT_CHOSEN;
     }
 
-    private static String getCacheType(final String type) {
-        if (type.equalsIgnoreCase("Traditional")) {
+    private static String getCacheType(final String cacheType) {
+        if (cacheType.equalsIgnoreCase("Traditional")) {
             return CacheType.TRADITIONAL.id;
-        } else if (type.equalsIgnoreCase("Multi")) {
+        } else if (cacheType.equalsIgnoreCase("Multi")) {
             return CacheType.MULTI.id;
-        } else if (type.equalsIgnoreCase("Quiz")) {
+        } else if (cacheType.equalsIgnoreCase("Quiz")) {
             return CacheType.MYSTERY.id;
-        } else if (type.equalsIgnoreCase("Virtual")) {
+        } else if (cacheType.equalsIgnoreCase("Virtual")) {
             return CacheType.VIRTUAL.id;
         }
         return CacheType.UNKNOWN.id;

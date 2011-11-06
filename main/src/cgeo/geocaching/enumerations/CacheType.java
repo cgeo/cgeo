@@ -1,6 +1,7 @@
 package cgeo.geocaching.enumerations;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.cgeoapplication;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -27,18 +28,20 @@ public enum CacheType {
     PROJECT_APE("ape", "project ape cache", "2555690d-b2bc-4b55-b5ac-0cb704c0b768", R.string.ape),
     GCHQ("gchq", "groundspeak hq", "416f2494-dc17-4b6a-9bab-1a29dd292d8c", R.string.gchq),
     GPS_EXHIBIT("gps", "gps cache exhibit", "72e69af2-7986-4990-afd9-bc16cbbb4ce3", R.string.gps),
-    UNKNOWN("unknown", "unknown", "", R.string.unknown);
+    UNKNOWN("unknown", "unknown", "", R.string.unknown),
+    /** No real cache type -> filter */
+    ALL("all", "display all caches", "9a79e6ce-3344-409c-bbe9-496530baf758", R.string.all_types);
 
     public final String id;
     public final String pattern;
     public final String guid;
-    public final int stringId;
+    private final String l10n;
 
     private CacheType(String id, String pattern, String guid, int stringId) {
         this.id = id;
         this.pattern = pattern;
         this.guid = guid;
-        this.stringId = stringId;
+        this.l10n = cgeoapplication.getInstance().getBaseContext().getResources().getString(stringId);
     }
 
     private final static Map<String, CacheType> FIND_BY_ID;
@@ -55,7 +58,7 @@ public enum CacheType {
     }
 
     public final static CacheType getById(final String id) {
-        final CacheType result = CacheType.FIND_BY_ID.get(id.toLowerCase().trim());
+        final CacheType result = id != null ? CacheType.FIND_BY_ID.get(id.toLowerCase().trim()) : null;
         if (result == null) {
             return UNKNOWN;
         }
@@ -68,6 +71,10 @@ public enum CacheType {
             return UNKNOWN;
         }
         return result;
+    }
+
+    public final String getL10n() {
+        return l10n;
     }
 
 }

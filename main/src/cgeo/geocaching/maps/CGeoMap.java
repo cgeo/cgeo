@@ -17,6 +17,7 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
@@ -391,11 +392,17 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
         startTimer();
 
+        prepareFilterBar();
+    }
+
+    private void prepareFilterBar() {
         // show the filter warning bar if the filter is set
-        if (Settings.getCacheType() != null) {
-            String cacheType = cgBase.cacheTypesInv.get(Settings.getCacheType());
+        if (Settings.getCacheTypeForFilter() != CacheType.ALL) {
+            String cacheType = Settings.getCacheTypeForFilter().getL10n();
             ((TextView) activity.findViewById(R.id.filter_text)).setText(cacheType);
             activity.findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
+        } else {
+            activity.findViewById(R.id.filter_bar).setVisibility(View.GONE);
         }
     }
 
@@ -639,6 +646,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     waitDialog.setMax(detailTotal);
                     waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
 
+                        @Override
                         public void onCancel(DialogInterface arg0) {
                             try {
                                 if (loadDetailsThread != null) {
@@ -1172,9 +1180,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     search = searchIntent;
                 } else {
                     if (!live || !Settings.isLiveMap()) {
-                        search = app.getStoredInViewport(centerLat, centerLon, spanLat, spanLon, Settings.getCacheType());
+                        search = app.getStoredInViewport(centerLat, centerLon, spanLat, spanLon, Settings.getCacheTypeForFilter());
                     } else {
-                        search = app.getCachedInViewport(centerLat, centerLon, spanLat, spanLon, Settings.getCacheType());
+                        search = app.getCachedInViewport(centerLat, centerLon, spanLat, spanLon, Settings.getCacheTypeForFilter());
                     }
                 }
 
@@ -1380,7 +1388,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                                 items.add(getWaypointItem(new cgCoord(oneWaypoint), oneWaypoint.getWaypointType()));
                             }
                         }
-                        items.add(getCacheItem(new cgCoord(cacheOne), cacheOne.getType(), cacheOne.isOwn(), cacheOne.isFound(), cacheOne.isDisabled()));
+                        items.add(getCacheItem(new cgCoord(cacheOne), cacheOne.getCacheType(), cacheOne.isOwn(), cacheOne.isFound(), cacheOne.isDisabled()));
                     }
 
                     overlayCaches.updateItems(items);
@@ -1423,7 +1431,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
          *            true for disabled
          * @return
          */
-        private CachesOverlayItemImpl getCacheItem(cgCoord cgCoord, String type, boolean own, boolean found, boolean disabled) {
+        private CachesOverlayItemImpl getCacheItem(cgCoord cgCoord, CacheType type, boolean own, boolean found, boolean disabled) {
             return getItem(cgCoord, cgBase.getCacheMarkerIcon(type, own, found, disabled), type);
         }
 
@@ -1451,7 +1459,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
          *            cacheType, this will influence the style of the circles drawn around it
          * @return
          */
-        private CachesOverlayItemImpl getItem(cgCoord cgCoord, int icon, final String cacheType) {
+        private CachesOverlayItemImpl getItem(cgCoord cgCoord, int icon, final CacheType cacheType) {
             coordinates.add(cgCoord);
             CachesOverlayItemImpl item = Settings.getMapFactory().getCachesOverlayItem(cgCoord, cacheType);
 
@@ -1870,6 +1878,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
     // set my location listener
     private class MyLocationListener implements View.OnClickListener {
+        @Override
         public void onClick(View view) {
             followMyLocation = !followMyLocation;
             switchMyLocationButton();

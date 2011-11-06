@@ -270,6 +270,7 @@ public final class Geopoint
      * 
      * @return formatted coordinates
      */
+    @Override
     public String toString()
     {
         return format(GeopointFormatter.Format.LAT_LON_DECMINUTE);

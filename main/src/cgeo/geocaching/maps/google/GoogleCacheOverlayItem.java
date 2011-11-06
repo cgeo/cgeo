@@ -1,16 +1,17 @@
 package cgeo.geocaching.maps.google;
 
 import cgeo.geocaching.cgCoord;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.OverlayItem;
 
 public class GoogleCacheOverlayItem extends OverlayItem implements CachesOverlayItemImpl {
-    private String cacheType = null;
+    private CacheType cacheType = null;
     private cgCoord coord;
 
-    public GoogleCacheOverlayItem(cgCoord coordinate, String type) {
+    public GoogleCacheOverlayItem(cgCoord coordinate, CacheType type) {
         super(new GeoPoint(coordinate.getCoords().getLatitudeE6(), coordinate.getCoords().getLongitudeE6()), coordinate.getName(), "");
 
         this.cacheType = type;
@@ -21,7 +22,7 @@ public class GoogleCacheOverlayItem extends OverlayItem implements CachesOverlay
         return coord;
     }
 
-    public String getType() {
+    public CacheType getType() {
         return cacheType;
     }
 
