@@ -12,6 +12,7 @@ import cgeo.geocaching.files.LocParser;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
+import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -2183,12 +2184,15 @@ public class cgBase {
         return searchByAny(thread, cacheType, false, reason, showCaptcha, params);
     }
 
-    public cgSearch searchByViewport(final String userToken, final double latMin, final double latMax, final double lonMin, final double lonMax, int reason) {
+    public cgSearch searchByViewport(final String userToken, final Viewport viewport) {
         final cgSearch search = new cgSearch();
 
         String page = null;
 
-        final String params = "{\"dto\":{\"data\":{\"c\":1,\"m\":\"\",\"d\":\"" + latMax + "|" + latMin + "|" + lonMax + "|" + lonMin + "\"},\"ut\":\"" + StringUtils.defaultString(userToken) + "\"}}";
+        final String params = "{\"dto\":{\"data\":{\"c\":1,\"m\":\"\",\"d\":\"" +
+                viewport.getLatitudeMax() + "|" + viewport.getLatitudeMin() + "|" +
+                viewport.getLongitudeMax() + "|" + viewport.getLongitudeMin() + "\"},\"ut\":\"" +
+                StringUtils.defaultString(userToken) + "\"}}";
 
         final String uri = "http://www.geocaching.com/map/default.aspx/MapAction";
         page = requestJSONgc(uri, params);
@@ -2210,7 +2214,7 @@ public class cgBase {
 
         List<cgCache> cacheList = filterSearchResults(search, caches, Settings.isExcludeDisabledCaches(), Settings.isExcludeMyCaches(), Settings.getCacheType());
 
-        app.addSearch(cacheList, reason);
+        app.addSearch(cacheList, 0);
 
         return search;
     }
