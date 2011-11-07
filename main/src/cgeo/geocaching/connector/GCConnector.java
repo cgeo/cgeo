@@ -66,7 +66,7 @@ public class GCConnector extends AbstractConnector implements IConnector {
     }
 
     @Override
-    public cgSearch searchByGeocode(final cgBase base, String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final CancellableHandler handler) {
+    public cgSearch searchByGeocode(final cgBase base, final String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final CancellableHandler handler) {
         final Parameters params = new Parameters("decrypt", "y");
         if (StringUtils.isNotBlank(geocode)) {
             params.put("wp", geocode);
@@ -88,9 +88,10 @@ public class GCConnector extends AbstractConnector implements IConnector {
                 if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
                     Log.i(Settings.tag, "Loading old cache from cache.");
 
-                    geocode = app.getGeocode(guid);
+                    search.addGeocode(app.getGeocode(guid));
+                } else {
+                    search.addGeocode(geocode);
                 }
-                search.addGeocode(geocode);
                 search.error = null;
                 return search;
             }

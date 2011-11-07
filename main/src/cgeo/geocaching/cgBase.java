@@ -549,8 +549,8 @@ public class cgBase {
         }
     }
 
-    public static cgCacheWrap parseSearch(final cgSearchThread thread, final String url, String page, final boolean showCaptcha) {
-        if (StringUtils.isBlank(page)) {
+    public static cgCacheWrap parseSearch(final cgSearchThread thread, final String url, final String pageContent, final boolean showCaptcha) {
+        if (StringUtils.isBlank(pageContent)) {
             Log.e(Settings.tag, "cgeoBase.parseSearch: No page given");
             return null;
         }
@@ -560,6 +560,7 @@ public class cgBase {
         final List<String> guids = new ArrayList<String>();
         String recaptchaChallenge = null;
         String recaptchaText = null;
+        String page = pageContent;
 
         caches.url = url;
 
@@ -2944,18 +2945,23 @@ public class cgBase {
         return path.delete();
     }
 
-    public void storeCache(cgeoapplication app, Activity activity, cgCache cache, String geocode, int listId, CancellableHandler handler) {
+    public void storeCache(cgeoapplication app, Activity activity, cgCache origCache, String geocode, int listId, CancellableHandler handler) {
         try {
+            cgCache cache;
             // get cache details, they may not yet be complete
-            if (cache != null) {
+            if (origCache != null) {
                 // only reload the cache, if it was already stored or has not all details (by checking the description)
-                if (cache.getReason() > 0 || StringUtils.isBlank(cache.getDescription())) {
-                    final cgSearch search = searchByGeocode(cache.getGeocode(), null, listId, false, null);
+                if (origCache.getReason() > 0 || StringUtils.isBlank(origCache.getDescription())) {
+                    final cgSearch search = searchByGeocode(origCache.getGeocode(), null, listId, false, null);
                     cache = app.getCache(search);
+                } else {
+                    cache = origCache;
                 }
             } else if (StringUtils.isNotBlank(geocode)) {
                 final cgSearch search = searchByGeocode(geocode, null, listId, false, null);
                 cache = app.getCache(search);
+            } else {
+                cache = null;
             }
 
             if (cache == null) {
@@ -3474,19 +3480,22 @@ public class cgBase {
      * @param moveCursor
      *            place the cursor after the inserted text
      */
-    static void insertAtPosition(final EditText editText, String insertText, final boolean moveCursor) {
+    static void insertAtPosition(final EditText editText, final String insertText, final boolean moveCursor) {
         int selectionStart = editText.getSelectionStart();
         int selectionEnd = editText.getSelectionEnd();
         int start = Math.min(selectionStart, selectionEnd);
         int end = Math.max(selectionStart, selectionEnd);
 
-        String content = editText.getText().toString();
+        final String content = editText.getText().toString();
+        String completeText;
         if (start > 0 && !Character.isWhitespace(content.charAt(start - 1))) {
-            insertText = " " + insertText;
+            completeText = " " + insertText;
+        } else {
+            completeText = insertText;
         }
 
-        editText.getText().replace(start, end, insertText);
-        int newCursor = moveCursor ? start + insertText.length() : start;
+        editText.getText().replace(start, end, completeText);
+        int newCursor = moveCursor ? start + completeText.length() : start;
         editText.setSelection(newCursor, newCursor);
     }
 }
