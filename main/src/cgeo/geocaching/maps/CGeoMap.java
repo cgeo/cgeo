@@ -790,16 +790,11 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         Settings.setMapZoom(mapView.getMapZoomLevel());
     }
 
-    // set center of map to my location
+    // Set center of map to my location if appropriate.
     private void myLocationInMiddle() {
-        if (geo == null) {
-            return;
+        if (followMyLocation && geo != null) {
+            centerMap(geo.coordsNow);
         }
-        if (!followMyLocation) {
-            return;
-        }
-
-        centerMap(geo.coordsNow);
     }
 
     // class: update location
