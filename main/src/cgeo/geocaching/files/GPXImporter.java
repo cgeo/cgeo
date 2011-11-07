@@ -51,7 +51,7 @@ public class GPXImporter {
         parseDialog = new ProgressDialog(realActivity);
         parseDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
         parseDialog.setTitle(res.getString(R.string.gpx_import_title_reading_file));
-        parseDialog.setMessage(res.getString(R.string.gpx_import_loading));
+        parseDialog.setMessage(res.getString(R.string.gpx_import_loading_caches));
         parseDialog.setCancelable(false);
         parseDialog.setMax(-1);
         parseDialog.show();

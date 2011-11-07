@@ -510,7 +510,6 @@
 
   <!-- gpx -->
   <string name="gpx_import_caches_imported">Caches importadas</string>
-  <string name="gpx_import_loading">A carregar caches do ficheiro .gpx</string>
   <string name="gpx_import_title">Importar GPX</string>
   <string name="gpx_import_title_reading_file">A ler o ficheiro</string>
   <string name="gpx_import_title_caches_imported">Resultado</string>

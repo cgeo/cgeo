@@ -536,7 +536,7 @@
 
   <!-- gpx -->
   <string name="gpx_import_caches_imported">ládák importálva</string>
-  <string name="gpx_import_loading">Ládák betöltése .gpx fájlból</string>
+  <string name="gpx_import_loading_caches">Ládák betöltése .gpx fájlból</string>
   <string name="gpx_import_title">GPX importálása</string>
   <string name="gpx_import_title_reading_file">Fájl olvasása</string>
   <string name="gpx_import_title_caches_imported">Eredmény</string>
