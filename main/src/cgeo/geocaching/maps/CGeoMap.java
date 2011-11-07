@@ -300,7 +300,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         res = this.getResources();
         activity = this.getActivity();
         app = (cgeoapplication) activity.getApplication();
-        app.setAction(null);
         base = cgBase.getInstance(app);
         MapFactory mapFactory = Settings.getMapFactory();
 
@@ -418,7 +417,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     public void onResume() {
         super.onResume();
 
-        app.setAction(null);
+        app.setAction(StringUtils.defaultIfBlank(geocodeIntent, null));
         if (geo == null) {
             geo = app.startGeo(activity, geoUpdate, 0, 0);
         }
