@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.maps.CGeoMap;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -575,9 +576,9 @@ public class cgeo extends AbstractActivity {
                     } else {
                         if (geo.altitudeNow != null) {
                             final String humanAlt = cgBase.getHumanDistance(geo.altitudeNow.floatValue() / 1000);
-                            navLocation.setText(cgBase.formatCoords(geo.coordsNow, true) + " | " + humanAlt);
+                            navLocation.setText(geo.coordsNow.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_PIPE) + " | " + humanAlt);
                         } else {
-                            navLocation.setText(cgBase.formatCoords(geo.coordsNow, true));
+                            navLocation.setText(geo.coordsNow.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_PIPE));
                         }
                     }
                 } else {

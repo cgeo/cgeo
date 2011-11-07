@@ -1976,44 +1976,6 @@ public class cgBase {
         }
     }
 
-    @Deprecated
-    private static String formatCoordinate(final Double coordIn, final boolean degrees, final String direction, final String digitsFormat) {
-        if (coordIn == null) {
-            return "";
-        }
-        StringBuilder formatted = new StringBuilder(direction);
-
-        double coordAbs = Math.abs(coordIn);
-        Locale locale = Locale.getDefault();
-        double floor = Math.floor(coordAbs);
-
-        formatted.append(String.format(locale, digitsFormat, floor));
-
-        if (degrees) {
-            formatted.append("° ");
-        } else {
-            formatted.append(' ');
-        }
-        formatted.append(String.format(locale, "%06.3f", ((coordAbs - floor) * 60)));
-
-        return formatted.toString();
-    }
-
-    @Deprecated
-    public static String formatLatitude(final Double coord, final boolean degrees) {
-        return formatCoordinate(coord, degrees, (coord >= 0) ? "N " : "S ", "%02.0f");
-    }
-
-    @Deprecated
-    public static String formatLongitude(final Double coord, final boolean degrees) {
-        return formatCoordinate(coord, degrees, (coord >= 0) ? "E " : "W ", "%03.0f");
-    }
-
-    @Deprecated
-    public static String formatCoords(final Geopoint coords, final boolean degrees) {
-        return formatLatitude(coords.getLatitude(), degrees) + " | " + formatLongitude(coords.getLongitude(), degrees);
-    }
-
     /**
      * Insert the right cache type restriction in parameters
      *

@@ -23,7 +23,7 @@ public class GPXImporterTest extends InstrumentationTestCase {
     private int listId;
     private File tempDir;
 
-    public void testGetWaypointsFileForGpx() {
+    public static void testGetWaypointsFileForGpx() {
         assertEquals(new File("1234567-wpts.gpx"), GPXImporter.getWaypointsFileForGpx(new File("1234567.gpx")));
         assertEquals(new File("/mnt/sdcard/1234567-wpts.gpx"), GPXImporter.getWaypointsFileForGpx(new File("/mnt/sdcard/1234567.gpx")));
         assertEquals(new File("/mnt/sdcard/1-wpts.gpx"), GPXImporter.getWaypointsFileForGpx(new File("/mnt/sdcard/1.gpx")));

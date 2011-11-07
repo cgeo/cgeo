@@ -4,6 +4,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser;
 
 import org.apache.commons.lang3.StringUtils;
@@ -60,8 +61,8 @@ public class cgeopoint extends AbstractActivity {
                     .findViewById(R.id.simple_way_point_latitude);
             TextView date = (TextView) v.findViewById(R.id.date);
 
-            String lonString = cgBase.formatLongitude(loc.getCoords().getLongitude(), true);
-            String latString = cgBase.formatLatitude(loc.getCoords().getLatitude(), true);
+            String lonString = loc.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE);
+            String latString = loc.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE);
 
             longitude.setText(lonString);
             latitude.setText(latString);
@@ -239,8 +240,9 @@ public class cgeopoint extends AbstractActivity {
         lonButton.setOnClickListener(new coordDialogListener());
 
         if (prefs.contains("anylatitude") && prefs.contains("anylongitude")) {
-            latButton.setText(cgBase.formatLatitude(Double.valueOf(prefs.getFloat("anylatitude", 0f)), true));
-            lonButton.setText(cgBase.formatLongitude(Double.valueOf(prefs.getFloat("anylongitude", 0f)), true));
+            final Geopoint coords = new Geopoint(prefs.getFloat("anylatitude", 0f), prefs.getFloat("anylongitude", 0f));
+            latButton.setText(coords.format(GeopointFormatter.Format.LAT_DECMINUTE));
+            lonButton.setText(coords.format(GeopointFormatter.Format.LON_DECMINUTE));
         }
 
         Button buttonCurrent = (Button) findViewById(R.id.current);
@@ -261,8 +263,8 @@ public class cgeopoint extends AbstractActivity {
             coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
                 @Override
                 public void update(Geopoint gp) {
-                    latButton.setText(cgBase.formatLatitude(gp.getLatitude(), true));
-                    lonButton.setText(cgBase.formatLongitude(gp.getLongitude(), true));
+                    latButton.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
+                    lonButton.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
                     changed = true;
                 }
             });
@@ -434,8 +436,8 @@ public class cgeopoint extends AbstractActivity {
             }
 
             try {
-                latButton.setHint(cgBase.formatLatitude(geo.coordsNow.getLatitude(), false));
-                lonButton.setHint(cgBase.formatLongitude(geo.coordsNow.getLongitude(), false));
+                latButton.setHint(geo.coordsNow.format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
+                lonButton.setHint(geo.coordsNow.format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
             } catch (Exception e) {
                 Log.w(Settings.tag, "Failed to update location.");
             }
@@ -450,8 +452,8 @@ public class cgeopoint extends AbstractActivity {
                 return;
             }
 
-            latButton.setText(cgBase.formatLatitude(geo.coordsNow.getLatitude(), true));
-            lonButton.setText(cgBase.formatLongitude(geo.coordsNow.getLongitude(), true));
+            latButton.setText(geo.coordsNow.format(GeopointFormatter.Format.LAT_DECMINUTE));
+            lonButton.setText(geo.coordsNow.format(GeopointFormatter.Format.LON_DECMINUTE));
 
             changed = false;
         }

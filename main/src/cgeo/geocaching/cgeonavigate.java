@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.maps.CGeoMap;
 
 import org.apache.commons.lang3.StringUtils;
@@ -298,7 +299,7 @@ public class cgeonavigate extends AbstractActivity {
             return;
         }
 
-        ((TextView) findViewById(R.id.destination)).setText(cgBase.formatCoords(dstCoords, true));
+        ((TextView) findViewById(R.id.destination)).setText(dstCoords.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_PIPE));
     }
 
     public void setDest(final Geopoint coords) {
@@ -382,9 +383,9 @@ public class cgeonavigate extends AbstractActivity {
 
                     if (geo.altitudeNow != null) {
                         final String humanAlt = cgBase.getHumanDistance(geo.altitudeNow.floatValue() / 1000);
-                        navLocation.setText(cgBase.formatCoords(geo.coordsNow, true) + " | " + humanAlt);
+                        navLocation.setText(geo.coordsNow.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_PIPE) + " | " + humanAlt);
                     } else {
-                        navLocation.setText(cgBase.formatCoords(geo.coordsNow, true));
+                        navLocation.setText(geo.coordsNow.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_PIPE));
                     }
 
                     updateDistanceInfo();

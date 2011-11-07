@@ -61,8 +61,8 @@ public class cgeowaypointadd extends AbstractActivity {
                     app.setAction(geocode);
 
                     if (waypoint.getCoords() != null) {
-                        ((Button) findViewById(R.id.buttonLatitude)).setText(cgBase.formatLatitude(waypoint.getCoords().getLatitude(), true));
-                        ((Button) findViewById(R.id.buttonLongitude)).setText(cgBase.formatLongitude(waypoint.getCoords().getLongitude(), true));
+                        ((Button) findViewById(R.id.buttonLatitude)).setText(waypoint.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE));
+                        ((Button) findViewById(R.id.buttonLongitude)).setText(waypoint.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE));
                     }
                     ((EditText) findViewById(R.id.name)).setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.getName())).toString());
                     ((EditText) findViewById(R.id.note)).setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.getNote())).toString());
@@ -197,8 +197,8 @@ public class cgeowaypointadd extends AbstractActivity {
             try {
                 Button bLat = (Button) findViewById(R.id.buttonLatitude);
                 Button bLon = (Button) findViewById(R.id.buttonLongitude);
-                bLat.setHint(cgBase.formatLatitude(geo.coordsNow.getLatitude(), false));
-                bLon.setHint(cgBase.formatLongitude(geo.coordsNow.getLongitude(), false));
+                bLat.setHint(geo.coordsNow.format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
+                bLon.setHint(geo.coordsNow.format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
             } catch (Exception e) {
                 Log.w(Settings.tag, "Failed to update location.");
             }

@@ -2,10 +2,10 @@ package cgeo.geocaching.test.mock;
 
 import cgeo.geocaching.GCConstants;
 import cgeo.geocaching.ICache;
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgImage;
 import cgeo.geocaching.cgTrackable;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.utils.BaseUtils;
 
 import java.io.BufferedReader;
@@ -60,12 +60,12 @@ public abstract class MockedCache implements ICache {
 
     @Override
     public String getLatitude() {
-        return cgBase.formatLatitude(coords.getLatitude(), true);
+        return coords.format(GeopointFormatter.Format.LAT_DECMINUTE);
     }
 
     @Override
     public String getLongitude() {
-        return cgBase.formatLongitude(coords.getLongitude(), true);
+        return coords.format(GeopointFormatter.Format.LON_DECMINUTE);
     }
 
     @Override

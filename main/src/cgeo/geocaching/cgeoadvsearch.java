@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser;
 
 import org.apache.commons.lang3.StringUtils;
@@ -218,10 +219,10 @@ public class cgeoadvsearch extends AbstractActivity {
 
                 if (geo.coordsNow != null) {
                     if (latEdit != null) {
-                        latEdit.setHint(cgBase.formatLatitude(geo.coordsNow.getLatitude(), false));
+                        latEdit.setHint(geo.coordsNow.format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
                     }
                     if (lonEdit != null) {
-                        lonEdit.setHint(cgBase.formatLongitude(geo.coordsNow.getLongitude(), false));
+                        lonEdit.setHint(geo.coordsNow.format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
                     }
                 }
             } catch (Exception e) {
@@ -239,8 +240,8 @@ public class cgeoadvsearch extends AbstractActivity {
             coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
                 @Override
                 public void update(Geopoint gp) {
-                    ((Button) findViewById(R.id.buttonLatitude)).setText(cgBase.formatLatitude(gp.getLatitude(), true));
-                    ((Button) findViewById(R.id.buttonLongitude)).setText(cgBase.formatLongitude(gp.getLongitude(), true));
+                    ((Button) findViewById(R.id.buttonLatitude)).setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
+                    ((Button) findViewById(R.id.buttonLongitude)).setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
                 }
             });
             coordsDialog.show();
@@ -262,8 +263,8 @@ public class cgeoadvsearch extends AbstractActivity {
 
         if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) {
             if (geo.coordsNow != null) {
-                latView.setText(cgBase.formatLatitude(geo.coordsNow.getLatitude(), true));
-                lonView.setText(cgBase.formatLongitude(geo.coordsNow.getLongitude(), true));
+                latView.setText(geo.coordsNow.format(GeopointFormatter.Format.LAT_DECMINUTE));
+                lonView.setText(geo.coordsNow.format(GeopointFormatter.Format.LON_DECMINUTE));
             }
         } else {
             try {

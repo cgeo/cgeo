@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -393,12 +394,12 @@ public class cgCache implements ICache {
 
     @Override
     public String getLatitude() {
-        return coords != null ? cgBase.formatLatitude(coords.getLatitude(), true) : null;
+        return coords != null ? coords.format(GeopointFormatter.Format.LAT_DECMINUTE) : null;
     }
 
     @Override
     public String getLongitude() {
-        return coords != null ? cgBase.formatLongitude(coords.getLongitude(), true) : null;
+        return coords != null ? coords.format(GeopointFormatter.Format.LON_DECMINUTE) : null;
     }
 
     @Override

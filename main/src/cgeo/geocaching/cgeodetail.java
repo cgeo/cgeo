@@ -8,6 +8,7 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
@@ -1106,7 +1107,7 @@ public class cgeodetail extends AbstractActivity {
 
                     TextView nameView = (TextView) waypointView.findViewById(R.id.name);
                     if (StringUtils.isBlank(wpt.getName())) {
-                        nameView.setText(cgBase.formatCoords(wpt.getCoords(), true));
+                        nameView.setText(wpt.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_PIPE));
                     } else {
                         nameView.setText(StringEscapeUtils.unescapeHtml4(wpt.getName()));
                     }

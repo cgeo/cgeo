@@ -20,12 +20,15 @@ public class GeopointFormatter
     {
         LAT_LON_DECDEGREE("%y6d %x6d"),
         LAT_LON_DECMINUTE("%yn %yd° %y3m %xn %xd° %x3m"),
+        LAT_LON_DECMINUTE_PIPE("%yn %yd° %y3m | %xn %xd° %x3m"),
         LAT_LON_DECSECOND("%yn %yd° %ym' %ys\" %xn %xd° %xm' %xs\""),
         LAT_DECDEGREE("%y6d"),
         LAT_DECMINUTE("%yn %yd° %y3m"),
+        LAT_DECMINUTE_RAW("%yn %yd %y3m"),
         LAT_DECSECOND("%yn %yd° %ym' %ys\""),
         LON_DECDEGREE("%x6d"),
         LON_DECMINUTE("%xn %xd° %x3m"),
+        LON_DECMINUTE_RAW("%xn %xd %x3m"),
         LON_DECSECOND("%xn %xd° %xm' %xs\"");
 
         private final String format;
@@ -165,23 +168,41 @@ public class GeopointFormatter
     {
         // Don't parse often used formats
 
-        switch (format)
-        {
-            case LAT_LON_DECDEGREE:
-                return String.format("%.6f %.6f", gp.getLatitude(), gp.getLongitude());
+        if (format == Format.LAT_LON_DECDEGREE) {
+            return String.format("%.6f %.6f", gp.getLatitude(), gp.getLongitude());
+        }
 
+        final double latSigned = gp.getLatitude();
+        final double lonSigned = gp.getLongitude();
+        final double lat = Math.abs(latSigned);
+        final double lon = Math.abs(lonSigned);
+        final double latFloor = Math.floor(lat);
+        final double lonFloor = Math.floor(lon);
+        final double latMin = (lat - latFloor) * 60;
+        final double lonMin = (lon - lonFloor) * 60;
+        final char latDir = latSigned < 0 ? 'S' : 'N';
+        final char lonDir = lonSigned < 0 ? 'W' : 'E';
+
+        switch (format) {
             case LAT_LON_DECMINUTE:
-                final double lat = Math.abs(gp.getLatitude());
-                final double lon = Math.abs(gp.getLongitude());
-                final boolean latPos = (gp.getLatitude() < 0);
-                final boolean lonPos = (gp.getLongitude() < 0);
+                return String.format("%c %02.0f° %.3f %c %03.0f° %.3f",
+                        latDir, latFloor, latMin, lonDir, lonFloor, lonMin);
 
-                return String.format("%s %02.0f° %.3f %s %03.0f° %.3f", (latPos) ? "S" : "N",
-                        Math.floor(lat),
-                        (lat - Math.floor(lat)) * 60,
-                        (lonPos) ? "W" : "E",
-                        Math.floor(lon),
-                        (lon - Math.floor(lon)) * 60);
+            case LAT_LON_DECMINUTE_PIPE:
+                return String.format("%c %02.0f° %.3f | %c %03.0f° %.3f",
+                        latDir, latFloor, latMin, lonDir, lonFloor, lonMin);
+
+            case LAT_DECMINUTE:
+                return String.format("%c %02.0f° %.3f", latDir, latFloor, latMin);
+
+            case LAT_DECMINUTE_RAW:
+                return String.format("%c %02.0f %.3f", latDir, latFloor, latMin);
+
+            case LON_DECMINUTE:
+                return String.format("%c %03.0f° %.3f", lonDir, lonFloor, lonMin);
+
+            case LON_DECMINUTE_RAW:
+                return String.format("%c %03.0f %.3f", lonDir, lonFloor, lonMin);
 
             default:
                 return format(format.toString(), gp);

@@ -1,6 +1,5 @@
 package cgeo.geocaching.files;
 
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgLog;
 import cgeo.geocaching.cgWaypoint;
@@ -8,6 +7,7 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.test.R;
 
 import android.content.res.Resources;
@@ -118,8 +118,8 @@ public class GPXParserTest extends InstrumentationTestCase {
         assertEquals(2.0f, cache.getDifficulty().floatValue(), 0.01f);
         assertEquals(1.0f, cache.getTerrain().floatValue(), 0.01f);
         final Geopoint refCoordinates = new Geopoint("N 49° 19.122", "E 008° 32.739");
-        assertEquals(cgBase.formatLatitude(refCoordinates.getLatitude(), true), cache.getLatitude());
-        assertEquals(cgBase.formatLongitude(refCoordinates.getLongitude(), true), cache.getLongitude());
+        assertEquals(refCoordinates.format(GeopointFormatter.Format.LAT_DECMINUTE), cache.getLatitude());
+        assertEquals(refCoordinates.format(GeopointFormatter.Format.LON_DECMINUTE), cache.getLongitude());
         assertEquals("vptsz", cache.getOwner());
         assertEquals(CacheSize.SMALL, cache.getSize());
         assertEquals(CacheType.MULTI, cache.getCacheType());
