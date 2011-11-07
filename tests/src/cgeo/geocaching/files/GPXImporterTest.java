@@ -43,6 +43,7 @@ public class GPXImporterTest extends InstrumentationTestCase {
 
         GPXImporter.ImportGpxFileThread importThread = new GPXImporter.ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
         importThread.run();
+        importStepHandler.waitForCompletion();
 
         assertEquals(3, importStepHandler.messages.size());
         assertEquals(GPXImporter.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
@@ -65,6 +66,7 @@ public class GPXImporterTest extends InstrumentationTestCase {
 
         GPXImporter.ImportGpxFileThread importThread = new GPXImporter.ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
         importThread.run();
+        importStepHandler.waitForCompletion();
 
         assertEquals(4, importStepHandler.messages.size());
         assertEquals(GPXImporter.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
@@ -85,6 +87,7 @@ public class GPXImporterTest extends InstrumentationTestCase {
 
         GPXImporter.ImportLocFileThread importThread = new GPXImporter.ImportLocFileThread(oc5952, listId, importStepHandler, progressHandler);
         importThread.run();
+        importStepHandler.waitForCompletion();
 
         assertEquals(3, importStepHandler.messages.size());
         assertEquals(GPXImporter.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
@@ -108,6 +111,7 @@ public class GPXImporterTest extends InstrumentationTestCase {
 
         GPXImporter.ImportGpxFileThread importThread = new GPXImporter.ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
         importThread.run();
+        importStepHandler.waitForCompletion();
 
         assertEquals(2, importStepHandler.messages.size());
         assertEquals(GPXImporter.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
@@ -131,13 +135,30 @@ public class GPXImporterTest extends InstrumentationTestCase {
     }
 
     static class TestHandler extends Handler {
-        List<Message> messages = new ArrayList<Message>();
+        private final List<Message> messages = new ArrayList<Message>();
+        private long lastMessage = System.currentTimeMillis();
 
         @Override
-        public void handleMessage(Message msg) {
-            Message msg1 = new Message();
+        public synchronized void handleMessage(Message msg) {
+            final Message msg1 = new Message();
             msg1.copyFrom(msg);
             messages.add(msg1);
+            lastMessage = System.currentTimeMillis();
+            notify();
+        }
+
+        public synchronized void waitForCompletion(final long milliseconds, final int maxMessages) {
+            try {
+                while (System.currentTimeMillis() - lastMessage <= milliseconds && messages.size() <= maxMessages) {
+                    wait(milliseconds);
+                }
+            } catch (InterruptedException e) {
+            }
+        }
+
+        public void waitForCompletion() {
+            // Use reasonable defaults
+            waitForCompletion(200, 10);
         }
     }
 
