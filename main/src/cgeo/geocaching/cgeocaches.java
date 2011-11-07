@@ -2398,8 +2398,8 @@ public class cgeocaches extends AbstractListActivity {
                     createList(new RunnableWithArgument<Integer>() {
 
                         @Override
-                        public void run() {
-                            switchListById(getArgument());
+                        public void run(final Integer arg) {
+                            switchListById(arg);
                         }
                     });
                 }
@@ -2481,8 +2481,7 @@ public class cgeocaches extends AbstractListActivity {
                 // remove whitespaces added by autocompletion of Android keyboard
                 String listName = StringUtils.trim(input.getText().toString());
                 if (StringUtils.isNotBlank(listName)) {
-                    runnable.setArgument(listName);
-                    runnable.run();
+                    runnable.run(listName);
                 }
             }
         });
@@ -2499,15 +2498,13 @@ public class cgeocaches extends AbstractListActivity {
         handleListNameInput("", R.string.list_dialog_create_title, R.string.list_dialog_create, new RunnableWithArgument<String>() {
 
             @Override
-            public void run() {
-                String listName = getArgument();
-                int newId = app.createList(listName);
+            public void run(final String listName) {
+                final int newId = app.createList(listName);
 
                 if (newId >= 10) {
                     showToast(res.getString(R.string.list_dialog_create_ok));
                     if (runAfterwards != null) {
-                        runAfterwards.setArgument(newId);
-                        runAfterwards.run();
+                        runAfterwards.run(newId);
                     }
                 } else {
                     showToast(res.getString(R.string.list_dialog_create_err));
@@ -2521,8 +2518,7 @@ public class cgeocaches extends AbstractListActivity {
         handleListNameInput(list.title, R.string.list_dialog_rename_title, R.string.list_dialog_rename, new RunnableWithArgument<String>() {
 
             @Override
-            public void run() {
-                String listName = getArgument();
+            public void run(final String listName) {
                 app.renameList(listId, listName);
                 refreshCurrentList();
             }

@@ -1,14 +1,7 @@
 package cgeo.geocaching.utils;
 
-public abstract class RunnableWithArgument<T> implements Runnable {
+public interface RunnableWithArgument<T> {
 
-    private T argument;
+    abstract void run(final T argument);
 
-    public void setArgument(final T argument) {
-        this.argument = argument;
-    }
-
-    public T getArgument() {
-        return argument;
-    }
 }
