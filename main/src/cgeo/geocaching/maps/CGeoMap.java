@@ -249,7 +249,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 }
 
                 if (geo == null) {
-                    geo = app.startGeo(activity, geoUpdate, base, 0, 0);
+                    geo = app.startGeo(activity, geoUpdate, 0, 0);
                 }
                 if (Settings.isUseCompass() && dir == null) {
                     dir = app.startDir(activity, dirUpdate);
@@ -264,7 +264,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             }
 
             if (geo == null) {
-                geo = app.startGeo(activity, geoUpdate, base, 0, 0);
+                geo = app.startGeo(activity, geoUpdate, 0, 0);
             }
             if (Settings.isUseCompass() && dir == null) {
                 dir = app.startDir(activity, dirUpdate);
@@ -316,7 +316,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         ActivityMixin.setTitle(activity, res.getString(R.string.map_map));
 
         if (geo == null) {
-            geo = app.startGeo(activity, geoUpdate, base, 0, 0);
+            geo = app.startGeo(activity, geoUpdate, 0, 0);
         }
         if (Settings.isUseCompass() && dir == null) {
             dir = app.startDir(activity, dirUpdate);
@@ -420,7 +420,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
         app.setAction(null);
         if (geo == null) {
-            geo = app.startGeo(activity, geoUpdate, base, 0, 0);
+            geo = app.startGeo(activity, geoUpdate, 0, 0);
         }
         if (Settings.isUseCompass() && dir == null) {
             dir = app.startDir(activity, dirUpdate);
@@ -661,7 +661,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                                 }
 
                                 if (geo == null) {
-                                    geo = app.startGeo(activity, geoUpdate, base, 0, 0);
+                                    geo = app.startGeo(activity, geoUpdate, 0, 0);
                                 }
                                 if (Settings.isUseCompass() && dir == null) {
                                     dir = app.startDir(activity, dirUpdate);

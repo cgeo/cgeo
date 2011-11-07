@@ -439,7 +439,7 @@ public class cgeodetail extends AbstractActivity {
 
 
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, 0, 0);
+            geo = app.startGeo(this, geoUpdate, 0, 0);
         }
         if (!disableResumeSetView) {
             setView();
@@ -666,7 +666,7 @@ public class cgeodetail extends AbstractActivity {
             inflater = getLayoutInflater();
         }
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, 0, 0);
+            geo = app.startGeo(this, geoUpdate, 0, 0);
         }
 
         if (search != null) {

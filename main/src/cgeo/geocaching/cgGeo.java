@@ -1,9 +1,6 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.utils.CryptUtils;
-
-import org.apache.commons.lang3.StringUtils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -16,7 +13,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 import java.util.Iterator;
-import java.util.Locale;
 
 public class cgGeo {
 
@@ -24,7 +20,6 @@ public class cgGeo {
     private cgeoapplication app = null;
     private LocationManager geoManager = null;
     private cgUpdateLoc geoUpdate = null;
-    private cgBase base = null;
     private SharedPreferences prefs = null;
     private cgeoGeoListener geoNetListener = null;
     private cgeoGeoListener geoGpsListener = null;
@@ -34,8 +29,6 @@ public class cgGeo {
     private Location locGps = null;
     private Location locNet = null;
     private long locGpsLast = 0L;
-    private boolean g4cRunning = false;
-    private Geopoint lastGo4cacheCoords = null;
     public Location location = null;
     public int gps = -1;
     public Geopoint coordsNow = null;
@@ -48,11 +41,10 @@ public class cgGeo {
     public Integer satellitesFixed = null;
     public double distanceNow = 0d;
 
-    public cgGeo(Context contextIn, cgeoapplication appIn, cgUpdateLoc geoUpdateIn, cgBase baseIn, int timeIn, int distanceIn) {
+    public cgGeo(Context contextIn, cgeoapplication appIn, cgUpdateLoc geoUpdateIn, int timeIn, int distanceIn) {
         context = contextIn;
         app = appIn;
         geoUpdate = geoUpdateIn;
-        base = baseIn;
         time = timeIn;
         distance = distanceIn;
 
@@ -340,7 +332,7 @@ public class cgGeo {
 
         if (gps == 1) {
             // save travelled distance only when location is from GPS
-            if (coordsBefore != null && coordsNow != null) {
+            if (coordsBefore != null) {
                 final float dst = coordsBefore.distanceTo(coordsNow);
 
                 if (dst > 0.005) {
@@ -358,54 +350,7 @@ public class cgGeo {
         }
 
         if (gps > -1) {
-            (new publishLoc()).start();
-        }
-    }
-
-    private class publishLoc extends Thread {
-
-        private publishLoc() {
-            setPriority(Thread.MIN_PRIORITY);
-        }
-
-        @Override
-        public void run() {
-            if (g4cRunning) {
-                return;
-            }
-
-            if (Settings.isPublicLoc() && (lastGo4cacheCoords == null || coordsNow.distanceTo(lastGo4cacheCoords) > 0.75)) {
-                g4cRunning = true;
-
-                String action = null;
-                if (app != null) {
-                    action = app.getAction();
-                } else {
-                    action = "";
-                }
-
-                final String username = Settings.getUsername();
-                if (username != null) {
-                    final String latStr = String.format((Locale) null, "%.6f", coordsNow.getLatitude());
-                    final String lonStr = String.format((Locale) null, "%.6f", coordsNow.getLongitude());
-                    final Parameters params = new Parameters(
-                            "u", username,
-                            "lt", latStr,
-                            "ln", lonStr,
-                            "a", action,
-                            "s", (CryptUtils.sha1(username + "|" + latStr + "|" + lonStr + "|" + action + "|" + CryptUtils.md5("carnero: developing your dreams"))).toLowerCase());
-                    if (base.version != null) {
-                        params.put("v", base.version);
-                    }
-                    final String res = cgBase.getResponseData(cgBase.postRequest("http://api.go4cache.com/", params));
-
-                    if (StringUtils.isNotBlank(res)) {
-                        lastGo4cacheCoords = coordsNow;
-                    }
-                }
-            }
-
-            g4cRunning = false;
+            Go4Cache.signalCoordinates(app, coordsNow);
         }
     }
 

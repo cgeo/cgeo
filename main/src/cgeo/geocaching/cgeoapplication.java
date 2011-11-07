@@ -102,9 +102,9 @@ public class cgeoapplication extends Application {
         return storage.status();
     }
 
-    public cgGeo startGeo(Context context, cgUpdateLoc geoUpdate, cgBase base, int time, int distance) {
+    public cgGeo startGeo(Context context, cgUpdateLoc geoUpdate, int time, int distance) {
         if (geo == null) {
-            geo = new cgGeo(context, this, geoUpdate, base, time, distance);
+            geo = new cgGeo(context, this, geoUpdate, time, distance);
             geo.initGeo();
 
             Log.i(Settings.tag, "Location service started");
@@ -606,10 +606,7 @@ public class cgeoapplication extends Application {
     }
 
     public String getAction() {
-        if (action == null) {
-            return "";
-        }
-        return action;
+        return StringUtils.defaultString(action);
     }
 
     public boolean addLog(String geocode, cgLog log) {

@@ -91,7 +91,7 @@ public class cgeowaypointadd extends AbstractActivity {
         setTitle("waypoint");
 
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, 0, 0);
+            geo = app.startGeo(this, geoUpdate, 0, 0);
         }
 
         // get parameters
@@ -146,7 +146,7 @@ public class cgeowaypointadd extends AbstractActivity {
 
 
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, 0, 0);
+            geo = app.startGeo(this, geoUpdate, 0, 0);
         }
 
         if (id > 0) {

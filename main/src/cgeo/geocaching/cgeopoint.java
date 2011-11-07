@@ -230,7 +230,7 @@ public class cgeopoint extends AbstractActivity {
 
     private void init() {
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, 0, 0);
+            geo = app.startGeo(this, geoUpdate, 0, 0);
         }
 
         latButton = (Button) findViewById(R.id.buttonLatitude);

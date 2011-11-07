@@ -376,7 +376,7 @@ public class cgeocaches extends AbstractListActivity {
                 }
 
                 if (geo == null) {
-                    geo = app.startGeo(cgeocaches.this, geoUpdate, base, 0, 0);
+                    geo = app.startGeo(cgeocaches.this, geoUpdate, 0, 0);
                 }
                 if (Settings.isLiveList() && Settings.isUseCompass() && dir == null) {
                     dir = app.startDir(cgeocaches.this, dirUpdate);
@@ -1421,7 +1421,7 @@ public class cgeocaches extends AbstractListActivity {
     private void init() {
         // sensor & geolocation manager
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, 0, 0);
+            geo = app.startGeo(this, geoUpdate, 0, 0);
         }
         if (Settings.isLiveList() && Settings.isUseCompass() && dir == null) {
             dir = app.startDir(this, dirUpdate);
@@ -1474,7 +1474,7 @@ public class cgeocaches extends AbstractListActivity {
                     }
 
                     if (geo == null) {
-                        geo = app.startGeo(cgeocaches.this, geoUpdate, base, 0, 0);
+                        geo = app.startGeo(cgeocaches.this, geoUpdate, 0, 0);
                     }
                     if (Settings.isLiveList() && Settings.isUseCompass() && dir == null) {
                         dir = app.startDir(cgeocaches.this, dirUpdate);
@@ -1630,7 +1630,7 @@ public class cgeocaches extends AbstractListActivity {
                     }
 
                     if (geo == null) {
-                        geo = app.startGeo(cgeocaches.this, geoUpdate, base, 0, 0);
+                        geo = app.startGeo(cgeocaches.this, geoUpdate, 0, 0);
                     }
                     if (Settings.isLiveList() && Settings.isUseCompass() && dir == null) {
                         dir = app.startDir(cgeocaches.this, dirUpdate);

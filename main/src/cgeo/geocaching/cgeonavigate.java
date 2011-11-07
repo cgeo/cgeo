@@ -80,7 +80,7 @@ public class cgeonavigate extends AbstractActivity {
 
         // sensor & geolocation manager
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, 0, 0);
+            geo = app.startGeo(this, geoUpdate, 0, 0);
         }
         if (Settings.isUseCompass() && dir == null) {
             dir = app.startDir(this, dirUpdate);
@@ -146,7 +146,7 @@ public class cgeonavigate extends AbstractActivity {
 
         // sensor & geolocation manager
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, 0, 0);
+            geo = app.startGeo(this, geoUpdate, 0, 0);
         }
         if (Settings.isUseCompass() && dir == null) {
             dir = app.startDir(this, dirUpdate);

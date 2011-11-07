@@ -157,7 +157,7 @@ public class cgeowaypoint extends AbstractActivity {
         }
 
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, 0, 0);
+            geo = app.startGeo(this, geoUpdate, 0, 0);
         }
 
         waitDialog = ProgressDialog.show(this, null, res.getString(R.string.waypoint_loading), true);
@@ -172,7 +172,7 @@ public class cgeowaypoint extends AbstractActivity {
 
 
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, 0, 0);
+            geo = app.startGeo(this, geoUpdate, 0, 0);
         }
 
         if (waitDialog == null) {

@@ -458,7 +458,7 @@ public class cgeo extends AbstractActivity {
         }
 
         if (geo == null) {
-            geo = app.startGeo(context, geoUpdate, base, 0, 0);
+            geo = app.startGeo(context, geoUpdate, 0, 0);
         }
 
         navType = (TextView) findViewById(R.id.nav_type);
