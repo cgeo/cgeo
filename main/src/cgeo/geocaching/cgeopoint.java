@@ -114,7 +114,7 @@ public class cgeopoint extends AbstractActivity {
 
         View pointControls = getLayoutInflater().inflate(
                 R.layout.point_controls, null);
-        historyListView.addHeaderView(pointControls);
+        historyListView.addHeaderView(pointControls, null, false);
 
         if (getHistoryOfSearchedLocations().isEmpty()) {
             historyListView.addFooterView(getEmptyHistoryFooter(), null, false);
