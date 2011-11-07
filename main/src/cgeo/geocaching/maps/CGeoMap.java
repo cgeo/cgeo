@@ -425,9 +425,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             dir = app.startDir(activity, dirUpdate);
         }
 
-        if (geo != null) {
-            geoUpdate.updateLoc(geo);
-        }
+        geoUpdate.updateLoc(geo);
+
         if (dir != null) {
             dirUpdate.updateDir(dir);
         }
