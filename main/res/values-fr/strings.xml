@@ -559,11 +559,15 @@
   <string name="gpx_import_loading_waypoints">Chargement des points intermédiaires depuis le fichier .gpx\nLus:</string>
   <string name="gpx_import_storing">Écriture des caches dans la base de données\nEnregistrés :</string>
   <string name="gpx_import_caches_imported">caches importées</string>
-  <string name="gpx_import_loading">Chargement des caches depuis le fichier .gpx</string>
   <string name="gpx_import_title">Importation GPX</string>
   <string name="gpx_import_title_reading_file">Lecture du fichier</string>
   <string name="gpx_import_title_caches_imported">Résultat</string>
+  <string name="gpx_import_title_caches_import_failed">Échec de l\'importation</string>
+  <string name="gpx_import_error_io">Impossible de lire le fichier</string>
+  <string name="gpx_import_error_parser">Format de fichier incorrect</string>
+  <string name="gpx_import_error_unexpected">Erreur inattendue</string>
   <string name="gpx_import_confirm">Voulez vous importer le fichier GPX dans c:geo ?</string>
+  <string name="gpx_import_loading">Chargement des caches depuis le fichier .gpx</string>
 
   <!-- map file select -->
   <string name="map_file_select_title">Choisir un fichier carte</string>
