@@ -46,7 +46,7 @@ public class ApiOpenCachingConnector extends OpenCachingConnector implements ICo
         caches.cacheList.add(cache);
 
         final List<cgCache> cacheList = cgBase.filterSearchResults(search, caches, false, false, null);
-        app.addSearch(search, cacheList, true, reason);
+        app.addSearch(cacheList, reason);
 
         return search;
     }

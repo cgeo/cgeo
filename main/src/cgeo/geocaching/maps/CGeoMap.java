@@ -702,7 +702,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 for (cgCache cache : caches) {
                     search.addGeocode(cache.getGeocode());
                 }
-                cgeocaches.startActivityMap(activity, app.addSearch(search, caches, true, 0));
+                app.addSearch(caches, 0);
+                cgeocaches.startActivityMap(activity, search);
                 return true;
             }
             default:

@@ -534,31 +534,19 @@ public class cgeoapplication extends Application {
         search.addGeocode(geocode);
     }
 
-    public cgSearch addSearch(final cgSearch search, List<cgCache> cacheList, Boolean newItem, int reason) {
-        if (search == null) {
-            return null;
-        }
-
-        return addSearch(search, cacheList, newItem, reason);
-    }
-
-    public cgSearch addSearch(final cgSearch search, final List<cgCache> cacheList, final boolean newItem, final int reason) {
+    public void addSearch(final List<cgCache> cacheList, final int reason) {
         if (CollectionUtils.isEmpty(cacheList)) {
-            return null;
+            return;
         }
 
         if (storage == null) {
             storage = new cgData(this);
         }
-        if (newItem) {
-            // save only newly downloaded data
-            for (final cgCache cache : cacheList) {
-                cache.setReason(reason);
-                storeWithMerge(cache, false);
-            }
-        }
 
-        return search;
+        for (final cgCache cache : cacheList) {
+            cache.setReason(reason);
+            storeWithMerge(cache, false);
+        }
     }
 
     public boolean addCacheToSearch(cgSearch search, cgCache cache) {

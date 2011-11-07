@@ -15,7 +15,6 @@ import org.apache.commons.lang3.StringUtils;
 
 import android.util.Log;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GCConnector extends AbstractConnector implements IConnector {
@@ -91,16 +90,8 @@ public class GCConnector extends AbstractConnector implements IConnector {
 
                     geocode = app.getGeocode(guid);
                 }
-
-                final List<cgCache> cacheList = new ArrayList<cgCache>();
-                cacheList.add(app.getCacheByGeocode(geocode));
                 search.addGeocode(geocode);
                 search.error = null;
-
-                app.addSearch(search, cacheList, false, reason);
-
-                cacheList.clear();
-
                 return search;
             }
 
@@ -118,14 +109,14 @@ public class GCConnector extends AbstractConnector implements IConnector {
                 search.url = caches.url;
             }
 
-            app.addSearch(search, null, true, reason);
+            app.addSearch(null, reason);
 
             Log.e(Settings.tag, "cgeoBase.searchByGeocode: No cache parsed");
             return null;
         }
 
         final List<cgCache> cacheList = cgBase.filterSearchResults(search, caches, false, false, null);
-        app.addSearch(search, cacheList, true, reason);
+        app.addSearch(cacheList, reason);
 
         return search;
     }

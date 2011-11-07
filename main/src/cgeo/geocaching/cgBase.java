@@ -2044,13 +2044,11 @@ public class cgBase {
         cgeoapplication.setError(search, caches.error);
         cgeoapplication.setViewstates(search, caches.viewstates);
 
-        final List<cgCache> cacheList = new ArrayList<cgCache>();
-        for (cgCache cache : caches.cacheList) {
+        for (final cgCache cache : caches.cacheList) {
             cgeoapplication.addGeocode(search, cache.getGeocode());
-            cacheList.add(cache);
         }
 
-        app.addSearch(search, cacheList, true, reason);
+        app.addSearch(caches.cacheList, reason);
 
         return search;
     }
@@ -2065,16 +2063,7 @@ public class cgBase {
 
         if (!forceReload && reason == 0 && (app.isOffline(geocode, guid) || app.isThere(geocode, guid, true, true))) {
             final String realGeocode = StringUtils.isNotBlank(geocode) ? geocode : app.getGeocode(guid);
-
-            List<cgCache> cacheList = new ArrayList<cgCache>();
-            cacheList.add(app.getCacheByGeocode(realGeocode, cgCache.LOADALL));
             search.addGeocode(realGeocode);
-
-            app.addSearch(search, cacheList, false, reason);
-
-            cacheList.clear();
-            cacheList = null;
-
             return search;
         }
 
@@ -2137,8 +2126,7 @@ public class cgBase {
         }
 
         List<cgCache> cacheList = filterSearchResults(search, caches, Settings.isExcludeDisabledCaches(), false, null);
-
-        app.addSearch(search, cacheList, true, reason);
+        app.addSearch(cacheList, reason);
 
         return search;
     }
@@ -2212,7 +2200,7 @@ public class cgBase {
 
         List<cgCache> cacheList = filterSearchResults(search, caches, Settings.isExcludeDisabledCaches(), Settings.isExcludeMyCaches(), Settings.getCacheType());
 
-        app.addSearch(search, cacheList, true, reason);
+        app.addSearch(cacheList, reason);
 
         return search;
     }
