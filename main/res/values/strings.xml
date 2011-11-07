@@ -537,6 +537,7 @@
   <string name="cache_geocode">GC-code</string>
   <string name="cache_name">Name</string>
   <string name="cache_type">Type</string>
+  <string name="cache_size">Size</string>
   <string name="cache_distance">Distance</string>
   <string name="cache_difficulty">Difficulty</string>
   <string name="cache_terrain">Terrain</string>

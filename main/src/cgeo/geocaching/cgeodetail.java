@@ -725,7 +725,7 @@ public class cgeodetail extends AbstractActivity {
             LinearLayout detailsList = (LinearLayout) findViewById(R.id.details_list);
             detailsList.removeAllViews();
 
-            // actionbar icon, default myster<
+            // actionbar icon, default mystery
             ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.getType())), null, null, null);
 
             // cache name (full name)
@@ -748,20 +748,24 @@ public class cgeodetail extends AbstractActivity {
 
             itemName.setText(res.getString(R.string.cache_type));
 
-            String size = "";
-            if (cache.getSize() != null) {
-                // don't show "not chosen" for events and virtuals, that should be the normal case
-                if (cache.showSize()) {
-                    size = " (" + res.getString(cache.getSize().stringId) + ")";
-                }
+            if (cgBase.cacheTypesInv.containsKey(cache.getType())) { // cache icon
+                itemValue.setText(cgBase.cacheTypesInv.get(cache.getType()));
+            } else {
+                itemValue.setText(cgBase.cacheTypesInv.get(CacheType.MYSTERY.id)); // TODO: or UNKNOWN?
             }
 
-            if (cgBase.cacheTypesInv.containsKey(cache.getType())) { // cache icon
-                itemValue.setText(cgBase.cacheTypesInv.get(cache.getType()) + size);
-            } else {
-                itemValue.setText(cgBase.cacheTypesInv.get(CacheType.MYSTERY.id) + size);
-            }
             detailsList.addView(itemLayout);
+
+            // size
+            if (null != cache.getSize() && cache.showSize()) {
+                itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
+                itemName = (TextView) itemLayout.findViewById(R.id.name);
+                itemValue = (TextView) itemLayout.findViewById(R.id.value);
+
+                itemName.setText(res.getString(R.string.cache_size));
+                itemValue.setText(res.getString(cache.getSize().stringId));
+                detailsList.addView(itemLayout);
+            }
 
             // gc-code
             itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
