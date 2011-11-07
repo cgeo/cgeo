@@ -381,12 +381,7 @@ public class cgeonavigate extends AbstractActivity {
                     }
 
                     if (geo.altitudeNow != null) {
-                        String humanAlt;
-                        if (Settings.isUseMetricUnits()) {
-                            humanAlt = String.format("%.0f", geo.altitudeNow) + " m";
-                        } else {
-                            humanAlt = String.format("%.0f", (geo.altitudeNow * 3.2808399)) + " ft";
-                        }
+                        final String humanAlt = cgBase.getHumanDistance(geo.altitudeNow.floatValue() / 1000);
                         navLocation.setText(cgBase.formatCoords(geo.coordsNow, true) + " | " + humanAlt);
                     } else {
                         navLocation.setText(cgBase.formatCoords(geo.coordsNow, true));
