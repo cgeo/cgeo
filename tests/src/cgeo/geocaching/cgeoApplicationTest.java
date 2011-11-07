@@ -33,7 +33,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
         createApplication();
 
         // create required c:geo objects
-        base = new cgBase(this.getApplication());
+        base = cgBase.getInstance(this.getApplication());
     }
 
     /**

@@ -75,7 +75,7 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
         res = this.getResources();
         app = (cgeoapplication) this.getApplication();
         prefs = getSharedPreferences(Settings.preferences, Context.MODE_PRIVATE);
-        base = new cgBase(app);
+        base = cgBase.getInstance(app);
 
         // Restore cookie store if needed
         cgBase.restoreCookieStore(Settings.getCookieStore());

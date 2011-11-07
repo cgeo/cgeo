@@ -301,7 +301,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         activity = this.getActivity();
         app = (cgeoapplication) activity.getApplication();
         app.setAction(null);
-        base = new cgBase(app);
+        base = cgBase.getInstance(app);
         MapFactory mapFactory = Settings.getMapFactory();
 
         // reset status

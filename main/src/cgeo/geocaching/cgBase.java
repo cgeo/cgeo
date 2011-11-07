@@ -131,7 +131,6 @@ public class cgBase {
     public final static SimpleDateFormat dateTbIn1 = new SimpleDateFormat("EEEEE, dd MMMMM yyyy", Locale.ENGLISH); // Saturday, 28 March 2009
     public final static SimpleDateFormat dateTbIn2 = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
     public final static SimpleDateFormat dateSqlIn = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 2010-07-25 14:44:01
-    private Resources res = null;
     private static final Pattern patternLoggedIn = Pattern.compile("<span class=\"Success\">You are logged in as[^<]*<strong[^>]*>([^<]+)</strong>[^<]*</span>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private static final Pattern patternLogged2In = Pattern.compile("<strong>\\W*Hello,[^<]*<a[^>]+>([^<]+)</a>[^<]*</strong>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private static final Pattern patternViewstateFieldCount = Pattern.compile("id=\"__VIEWSTATEFIELDCOUNT\"[^(value)]+value=\"(\\d+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
@@ -143,7 +142,6 @@ public class cgBase {
     public static final double deg2rad = Math.PI / 180;
     public static final double rad2deg = 180 / Math.PI;
     public static final float erad = 6371.0f;
-    private cgeoapplication app = null;
     public String version = null;
 
     /**
@@ -151,7 +149,11 @@ public class cgBase {
      * settings)
      */
     private static String idBrowser = "Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Chrome/5.0.375.86 Safari/533.4";
-    Context context = null;
+
+    final private cgeoapplication app;
+    final Context context;
+    final private Resources res;
+
     final private static Map<String, Integer> gcIcons = new HashMap<String, Integer>();
 
     public static final int LOG_FOUND_IT = 2;
@@ -226,9 +228,23 @@ public class cgBase {
         logTypes0.put("announcement", LOG_ANNOUNCEMENT); // unknown ID; used number doesn't match any GC.com's ID
     }
 
-    public cgBase(cgeoapplication appIn) {
-        context = appIn.getBaseContext();
-        res = appIn.getBaseContext().getResources();
+    private static cgBase instance;
+
+    public static cgBase getInstance(final cgeoapplication app) {
+        if (instance == null) {
+            synchronized (cgBase.class) {
+                if (instance == null) {
+                    instance = new cgBase(app);
+                }
+            }
+        }
+        return instance;
+    }
+
+    private cgBase(final cgeoapplication app) {
+        this.app = app;
+        context = app.getBaseContext();
+        res = app.getBaseContext().getResources();
 
         // setup cache type mappings
 
@@ -296,9 +312,6 @@ public class cgBase {
         logTypes2.put(LOG_DISCOVERED_IT, res.getString(R.string.log_discovered)); //trackable
         logTypes2.put(LOG_POST_REVIEWER_NOTE, res.getString(R.string.log_reviewed)); // X
         logTypes2.put(LOG_ANNOUNCEMENT, res.getString(R.string.log_announcement)); // X
-
-        // init
-        app = appIn;
 
         try {
             final PackageManager manager = app.getPackageManager();
