@@ -66,6 +66,15 @@ import java.util.Map;
  */
 public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory {
 
+    /** Handler Messages */
+    private static final int HIDE_PROGRESS = 0;
+    private static final int SHOW_PROGRESS = 1;
+    private static final int UPDATE_TITLE = 0;
+    private static final int INVALIDATE_MAP = 1;
+    private static final int UPDATE_PROGRESS = 0;
+    private static final int FINISHED_LOADING_DETAILS = 1;
+
+    //Menu
     private static final String EXTRAS_GEOCODE = "geocode";
     private static final String EXTRAS_LONGITUDE = "longitude";
     private static final String EXTRAS_LATITUDE = "latitude";
@@ -167,25 +176,31 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         public void handleMessage(Message msg) {
             final int what = msg.what;
 
-            if (what == 0) {
-                // set title
-                final StringBuilder title = new StringBuilder();
+            switch (what) {
+                case UPDATE_TITLE:
+                    // set title
+                    final StringBuilder title = new StringBuilder();
 
-                if (live) {
-                    title.append(res.getString(R.string.map_live));
-                } else {
-                    title.append(mapTitle);
-                }
+                    if (live) {
+                        title.append(res.getString(R.string.map_live));
+                    } else {
+                        title.append(mapTitle);
+                    }
 
-                if (caches != null && cachesCnt > 0 && !mapTitle.contains("[")) {
-                    title.append(" [");
-                    title.append(caches.size());
-                    title.append(']');
-                }
+                    if (caches != null && cachesCnt > 0 && !mapTitle.contains("[")) {
+                        title.append(" [");
+                        title.append(caches.size());
+                        title.append(']');
+                    }
 
-                ActivityMixin.setTitle(activity, title.toString());
-            } else if (what == 1 && mapView != null) {
-                mapView.repaintRequired(null);
+                    ActivityMixin.setTitle(activity, title.toString());
+                    break;
+                case INVALIDATE_MAP:
+                    mapView.repaintRequired(null);
+                    break;
+
+                default:
+                    break;
             }
         }
     };
@@ -196,9 +211,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         public void handleMessage(Message msg) {
             final int what = msg.what;
 
-            if (what == 0) {
+            if (what == HIDE_PROGRESS) {
                 ActivityMixin.showProgress(activity, false);
-            } else if (what == 1) {
+            } else if (what == SHOW_PROGRESS) {
                 ActivityMixin.showProgress(activity, true);
             }
         }
@@ -208,7 +223,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
         @Override
         public void handleRegularMessage(Message msg) {
-            if (msg.what == 0) {
+            if (msg.what == UPDATE_PROGRESS) {
                 if (waitDialog != null) {
                     int secondsElapsed = (int) ((System.currentTimeMillis() - detailProgressTime) / 1000);
                     int secondsRemaining;
@@ -227,7 +242,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format(Locale.getDefault(), "%d", (secondsRemaining / 60)) + " " + res.getString(R.string.caches_eta_mins));
                     }
                 }
-            } else {
+            } else if (msg.what == FINISHED_LOADING_DETAILS) {
                 if (waitDialog != null) {
                     waitDialog.dismiss();
                     waitDialog.setOnCancelListener(null);
@@ -389,7 +404,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         myLocSwitch.setOnClickListener(new MyLocationListener());
         switchMyLocationButton();
 
-        startTimer();
+        // removed startTimer since onResume is always called
 
         // show the filter warning bar if the filter is set
         if (Settings.getCacheType() != null) {
@@ -992,7 +1007,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                                 spanLatitude = spanLatitudeNow;
                                 spanLongitude = spanLongitudeNow;
 
-                                showProgressHandler.sendEmptyMessage(1); // show progress
+                                showProgressHandler.sendEmptyMessage(SHOW_PROGRESS); // show progress
 
                                 loadThread = new LoadThread(centerLatitude, centerLongitude, spanLatitude, spanLongitude);
                                 loadThread.start(); //loadThread will kick off downloadThread once it's done
@@ -1001,7 +1016,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     }
 
                     if (!isLoading()) {
-                        showProgressHandler.sendEmptyMessage(0); // hide progress
+                        showProgressHandler.sendEmptyMessage(HIDE_PROGRESS); // hide progress
                     }
 
                     yield();
@@ -1156,7 +1171,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 loadThreadRun = System.currentTimeMillis();
 
                 if (stop) {
-                    displayHandler.sendEmptyMessage(0);
+                    displayHandler.sendEmptyMessage(UPDATE_TITLE);
                     working = false;
 
                     return;
@@ -1183,7 +1198,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 }
 
                 if (stop) {
-                    displayHandler.sendEmptyMessage(0);
+                    displayHandler.sendEmptyMessage(UPDATE_TITLE);
                     working = false;
 
                     return;
@@ -1206,7 +1221,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 }
 
                 if (stop) {
-                    displayHandler.sendEmptyMessage(0);
+                    displayHandler.sendEmptyMessage(UPDATE_TITLE);
                     working = false;
 
                     return;
@@ -1221,7 +1236,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     if (loadTimer != null) {
                         loadTimer.stopDisplayThread();
                     }
-                    displayHandler.sendEmptyMessage(0);
+                    displayHandler.sendEmptyMessage(UPDATE_TITLE);
                     working = false;
 
                     return;
@@ -1261,7 +1276,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 working = true;
 
                 if (stop) {
-                    displayHandler.sendEmptyMessage(0);
+                    displayHandler.sendEmptyMessage(UPDATE_TITLE);
                     working = false;
 
                     return;
@@ -1287,7 +1302,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 }
 
                 if (stop) {
-                    displayHandler.sendEmptyMessage(0);
+                    displayHandler.sendEmptyMessage(UPDATE_TITLE);
                     working = false;
 
                     return;
@@ -1299,7 +1314,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 }
 
                 if (stop) {
-                    displayHandler.sendEmptyMessage(0);
+                    displayHandler.sendEmptyMessage(UPDATE_TITLE);
                     working = false;
 
                     return;
@@ -1310,7 +1325,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 caches = app.getCaches(search, centerLat, centerLon, spanLat, spanLon);
 
                 if (stop) {
-                    displayHandler.sendEmptyMessage(0);
+                    displayHandler.sendEmptyMessage(UPDATE_TITLE);
                     working = false;
 
                     return;
@@ -1343,7 +1358,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 working = true;
 
                 if (mapView == null || caches == null) {
-                    displayHandler.sendEmptyMessage(0);
+                    displayHandler.sendEmptyMessage(UPDATE_TITLE);
                     working = false;
 
                     return;
@@ -1356,7 +1371,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 if (!cachesProtected.isEmpty()) {
                     for (cgCache cacheOne : cachesProtected) {
                         if (stop) {
-                            displayHandler.sendEmptyMessage(0);
+                            displayHandler.sendEmptyMessage(UPDATE_TITLE);
                             working = false;
 
                             return;
@@ -1384,12 +1399,12 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     }
 
                     overlayCaches.updateItems(items);
-                    displayHandler.sendEmptyMessage(1);
+                    displayHandler.sendEmptyMessage(INVALIDATE_MAP);
 
                     cachesCnt = cachesProtected.size();
 
                     if (stop) {
-                        displayHandler.sendEmptyMessage(0);
+                        displayHandler.sendEmptyMessage(UPDATE_TITLE);
                         working = false;
 
                         return;
@@ -1397,12 +1412,12 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
                 } else {
                     overlayCaches.updateItems(items);
-                    displayHandler.sendEmptyMessage(1);
+                    displayHandler.sendEmptyMessage(INVALIDATE_MAP);
                 }
 
                 cachesProtected.clear();
 
-                displayHandler.sendEmptyMessage(0);
+                displayHandler.sendEmptyMessage(UPDATE_TITLE);
             } finally {
                 working = false;
             }
@@ -1570,7 +1585,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     counter++;
                     if ((counter % 10) == 0) {
                         overlayOtherCachers.updateItems(items);
-                        displayHandler.sendEmptyMessage(1);
+                        displayHandler.sendEmptyMessage(INVALIDATE_MAP);
                     }
                 }
 
@@ -1620,14 +1635,14 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 item.setMarker(pin);
 
                 overlayCaches.updateItems(item);
-                displayHandler.sendEmptyMessage(1);
+                displayHandler.sendEmptyMessage(INVALIDATE_MAP);
 
                 cachesCnt = 1;
             } else {
                 cachesCnt = 0;
             }
 
-            displayHandler.sendEmptyMessage(0);
+            displayHandler.sendEmptyMessage(UPDATE_TITLE);
         }
     }
 
@@ -1738,7 +1753,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 } finally {
                     // one more cache over
                     detailProgress++;
-                    handler.sendEmptyMessage(0);
+                    handler.sendEmptyMessage(UPDATE_PROGRESS);
                 }
 
                 // FIXME: what does this yield() do here?
@@ -1748,7 +1763,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             }
 
             // we're done
-            handler.sendEmptyMessage(1);
+            handler.sendEmptyMessage(FINISHED_LOADING_DETAILS);
         }
     }
 
