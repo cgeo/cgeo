@@ -166,8 +166,9 @@
 					android:id="@+id/signature"
 					android:hint="@string/init_signature"
 					android:singleLine="false"
-					android:lines="3"
-					android:scrollHorizontally="false" />
+                    android:layout_height="wrap_content"
+					android:minLines="3"
+                    android:capitalize="sentences" />
 			<LinearLayout android:layout_width="fill_parent"
 					android:layout_height="wrap_content"
 					android:gravity="right"

@@ -20,7 +20,6 @@
 
 	<style name="edittext" parent="@android:style/Widget.EditText">
 		<item name="android:padding">6dip</item>
-		<item name="android:lines">1</item>
 		<item name="android:singleLine">true</item>
 		<item name="android:autoText">true</item>
 		<item name="android:textSize">22dip</item>
