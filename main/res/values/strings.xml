@@ -125,6 +125,7 @@
   <string name="err_comm">Unknown communication error</string>
   <string name="err_missing_auth">No username and/or password set.</string>
   <string name="err_wrong">Wrong login informations</string>
+  <string name="err_maintenance">Geocaching.com site is under maintenance, try again later. c:geo works in offline mode.</string>
   <string name="err_license">User has not agreed to Geocaching.com license agreement, so c:geo can\'t load caches coordinates.</string>
   <string name="err_unpublished">The requested cache was unpublished</string>
   <string name="err_premium_only">Cache is only available to Geocaching.com premium members</string>

@@ -125,6 +125,7 @@
   <string name="err_comm">Erreur inconnue de communication</string>
   <string name="err_missing_auth">Nom d\'utilisateur ou mot de passe manquant.</string>
   <string name="err_wrong">Nom d\'utilisateur inconnu ou mauvais mot de passe</string>
+  <string name="err_maintenance">Le site de Geocaching.com est en cours de maintenance, essayez plus tard. c:geo fonctionne en mode hors-ligne.</string>
   <string name="err_license">L\'utilisateur n\'a pas accepté les termes et les conditions d\'utilisation de Geocaching.com</string>
   <string name="err_unpublished">La cache a été retirée de la publication</string>
   <string name="err_premium_only">La cache est réservée aux membres Premium de Geocaching.com</string>

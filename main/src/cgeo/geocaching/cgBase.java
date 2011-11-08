@@ -133,6 +133,7 @@ public class cgBase {
     private static final Pattern patternViewstateFieldCount = Pattern.compile("id=\"__VIEWSTATEFIELDCOUNT\"[^(value)]+value=\"(\\d+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private static final Pattern patternViewstates = Pattern.compile("id=\"__VIEWSTATE(\\d*)\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     private static final Pattern patternUserToken = Pattern.compile("userToken\\s*=\\s*'([^']+)'");
+    private static final Pattern patternMaintenance = Pattern.compile("Geocaching.com is temporarily down for maintenance");
     public static final float miles2km = 1.609344f;
     public static final float feet2km = 0.0003048f;
     public static final float yards2km = 0.0009144f;
@@ -446,7 +447,10 @@ public class cgBase {
         }
 
         HttpResponse loginResponse = request("https://www.geocaching.com/login/default.aspx", null, false, false, false);
-        String loginData = getResponseData(loginResponse);
+        String loginData = getResponseDataOnError(loginResponse);
+        if (loginResponse.getStatusLine().getStatusCode() == 503 && patternMaintenance.matcher(loginData).find()) {
+            return StatusCode.MAINTENANCE;
+        }
 
         if (StringUtils.isBlank(loginData)) {
             Log.e(Settings.tag, "cgeoBase.login: Failed to retrieve login page (1st)");
@@ -2734,16 +2738,20 @@ public class cgBase {
         return getViewstates(getResponseData(response));
     }
 
-    static public String getResponseData(final HttpResponse response) {
-        if (!isSuccess(response)) {
-            return null;
-        }
+    static public String getResponseDataOnError(final HttpResponse response) {
         try {
             return BaseUtils.replaceWhitespace(EntityUtils.toString(response.getEntity(), HTTP.UTF_8));
         } catch (Exception e) {
             Log.e(Settings.tag, "getResponseData", e);
             return null;
         }
+    }
+
+    static public String getResponseData(final HttpResponse response) {
+        if (!isSuccess(response)) {
+            return null;
+        }
+        return getResponseDataOnError(response);
     }
 
     public static String postRequestLogged(final String uri) {

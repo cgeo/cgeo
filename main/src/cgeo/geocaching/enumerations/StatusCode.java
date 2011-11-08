@@ -19,6 +19,7 @@ public enum StatusCode {
     UNAPPROVED_LICENSE(-7, R.string.err_license),
     UNPUBLISHED_CACHE(-8, R.string.err_unpublished),
     PREMIUM_ONLY(-9, R.string.err_premium_only),
+    MAINTENANCE(-10, R.string.err_maintenance),
     LOG_POST_ERROR(1000, R.string.err_log_post_failed),
     NO_LOG_TEXT(1001, R.string.warn_log_text_fill),
     NO_DATA_FROM_SERVER(1002, R.string.err_log_failed_server);

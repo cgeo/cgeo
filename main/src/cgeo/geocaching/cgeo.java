@@ -136,7 +136,7 @@ public class cgeo extends AbstractActivity {
                 final StatusCode reason = (StatusCode) msg.obj;
 
                 if (reason != null && reason != StatusCode.NO_ERROR) { //LoginFailed
-                    showToast(res.getString(R.string.err_login_failed_toast));
+                    showToast(res.getString(reason == StatusCode.MAINTENANCE ? reason.getErrorString() : R.string.err_login_failed_toast));
                 }
             } catch (Exception e) {
                 Log.w(Settings.tag, "cgeo.fisrtLoginHander: " + e.toString());
