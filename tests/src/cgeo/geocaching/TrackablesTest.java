@@ -46,7 +46,7 @@ public class TrackablesTest extends InstrumentationTestCase {
         assertEquals("Adrian C", trackable.getOwner());
         assertTrue(trackable.getGoal().startsWith("I'm on the run from the law."));
         assertTrue(trackable.getGoal().endsWith("what I've seen."));
-        assertEquals(8451.9, trackable.getDistance(), 0.01);
+        assertTrue(trackable.getDistance() >= 11663.5f);
         // the next two items are normally available for trackables, but not for this one, so explicitly test for null
         assertNull(trackable.getReleased());
         assertNull(trackable.getOrigin());

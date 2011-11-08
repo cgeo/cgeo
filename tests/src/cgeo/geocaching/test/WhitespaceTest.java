@@ -22,6 +22,7 @@ import java.util.regex.Pattern;
  */
 public class WhitespaceTest extends AndroidTestCase {
 
+    private final int EXPECTED_SIZE = 119418;
     private String data;
 
     @Override
@@ -77,7 +78,7 @@ public class WhitespaceTest extends AndroidTestCase {
         Matcher matcher = pattern.matcher(data);
         String result = matcher.replaceAll(" ").trim();
         final long end = System.currentTimeMillis();
-        assertEquals(111956, result.length());
+        assertEquals(EXPECTED_SIZE - 1, result.length());
         Log.d(Settings.tag, (end - start) + " ms regex");
     }
 
@@ -85,7 +86,7 @@ public class WhitespaceTest extends AndroidTestCase {
         final long start = System.currentTimeMillis();
         String result = data.replaceAll("\\s+", " ");
         final long end = System.currentTimeMillis();
-        assertEquals(111958, result.length());
+        assertEquals(EXPECTED_SIZE + 1, result.length());
         Log.d(Settings.tag, (end - start) + " ms replaceAll");
     }
 
@@ -94,7 +95,7 @@ public class WhitespaceTest extends AndroidTestCase {
         final long start = System.currentTimeMillis();
         result = BaseUtils.replaceWhitespace(data);
         final long end = System.currentTimeMillis();
-        assertEquals(111957, result.length());
+        assertEquals(EXPECTED_SIZE, result.length());
         Log.d(Settings.tag, (end - start) + " ms actual implementation");
     }
 
@@ -103,7 +104,7 @@ public class WhitespaceTest extends AndroidTestCase {
         final long start = System.currentTimeMillis();
         result = replaceWhitespaceManually(data);
         final long end = System.currentTimeMillis();
-        assertEquals(111957, result.length());
+        assertEquals(EXPECTED_SIZE, result.length());
         Log.d(Settings.tag, (end - start) + " ms manually");
     }
 
@@ -112,7 +113,7 @@ public class WhitespaceTest extends AndroidTestCase {
         final long start = System.currentTimeMillis();
         result = replaceWhitespaceStringUtils(data);
         final long end = System.currentTimeMillis();
-        assertEquals(111956, result.length());
+        assertEquals(EXPECTED_SIZE - 1, result.length());
         Log.d(Settings.tag, (end - start) + " ms StringUtils");
     }
 }
