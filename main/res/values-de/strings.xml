@@ -52,7 +52,7 @@
   <string name="wp_puzzle">Station mit Frage</string>
   <string name="wp_pkg">Parkplatz</string>
   <string name="wp_trailhead">Ausgangspunkt</string>
-  <string name="wp_waypoint">Wegpunkt</string>
+  <string name="wp_waypoint">Referenzpunkt</string>
 
   <!-- logs -->
   <string name="log_found">Gefunden</string>
