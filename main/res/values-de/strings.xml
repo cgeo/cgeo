@@ -43,7 +43,7 @@
   <string name="cache_size_regular">Regular</string>
   <string name="cache_size_large">Large</string>
   <string name="cache_size_other">Other</string>
-  <string name="cache_size_virtual">Virtuell</string>
+  <string name="cache_size_virtual">Kein Behälter</string>
   <string name="cache_size_notchosen">Nicht gewählt</string>
 
   <!-- waypoints -->
