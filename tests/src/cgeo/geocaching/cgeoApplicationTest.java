@@ -117,7 +117,6 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
 
     public void testSearchTrackable() {
         cgTrackable tb = base.searchTrackable("TB2J1VZ", null, null);
-        // fix data
         assertEquals("aefffb86-099f-444f-b132-605436163aa8", tb.getGuid());
         assertEquals("TB2J1VZ", tb.getGeocode());
         assertEquals("http://www.geocaching.com/images/wpttypes/21.gif", tb.getIconUrl());
@@ -130,12 +129,10 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
         assertEquals("Kinder erfreuen.<br/><br/>Make children happy.", tb.getGoal());
         assertTrue(tb.getDetails().startsWith("Auf der CD sind"));
         assertEquals("http://img.geocaching.com/track/display/38382780-87a7-4393-8393-78841678ee8c.jpg", tb.getImage());
-        // changing data
+        // Following data can change over time
         assertTrue(tb.getDistance() >= 10617.8f);
         assertTrue(tb.getLogs().size() >= 10);
         assertTrue(cgTrackable.SPOTTED_CACHE == tb.getSpottedType() || cgTrackable.SPOTTED_USER == tb.getSpottedType());
-        // no assumption possible: assertEquals("faa2d47d-19ea-422f-bec8-318fc82c8063", tb.getSpottedGuid());
-        // no assumption possible: assertEquals("Nice place for a break cache", tb.getSpottedName());
 
     }
 }
