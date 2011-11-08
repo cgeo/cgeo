@@ -556,7 +556,7 @@ public class cgeocaches extends AbstractListActivity {
             Object typeObject = extras.get(EXTRAS_LIST_TYPE);
             type = (typeObject instanceof CacheListType) ? (CacheListType) typeObject : CacheListType.OFFLINE;
             coords = new Geopoint(extras.getDouble("latitude"), extras.getDouble("longitude"));
-            cachetype = CacheType.getById(Settings.getCacheType());
+            cachetype = Settings.getCacheType();
             keyword = extras.getString("keyword");
             address = extras.getString("address");
             username = extras.getString("username");
@@ -1775,7 +1775,7 @@ public class cgeocaches extends AbstractListActivity {
         @Override
         public void run() {
             if (coords != null) {
-                search = base.searchByOffline(coords, CacheType.getById(Settings.getCacheType()), listId);
+                search = base.searchByOffline(coords, Settings.getCacheType(), listId);
             } else {
                 search = base.searchByOffline(null, null, cgList.STANDARD_LIST_ID);
             }
