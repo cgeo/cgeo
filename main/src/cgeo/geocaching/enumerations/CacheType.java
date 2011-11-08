@@ -55,6 +55,9 @@ public enum CacheType {
     }
 
     public final static CacheType getById(final String id) {
+        if (id == null) {
+            return null;
+        }
         final CacheType result = CacheType.FIND_BY_ID.get(id.toLowerCase().trim());
         if (result == null) {
             return UNKNOWN;
