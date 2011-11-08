@@ -120,11 +120,12 @@
   <string name="err_server">Verbindung zu Geocaching.com konnte nicht hergestellt werden (Server oder Verbindung inaktiv?)</string>
   <string name="err_login">Keine Anmeldedaten gespeichert.</string>
   <string name="err_login_failed">Login fehlgeschlagen.</string>
-  <string name="err_login_failed_toast">c:geo konnte sich nicht einloggen. c:geo arbeitet im offline mode. Überprüfe den Login in den Einstellungen oder stelle eine Internetverbindung her.</string>
+  <string name="err_login_failed_toast">c:geo konnte sich nicht einloggen. c:geo arbeitet im Offline-Modus. Überprüfe den Login in den Einstellungen oder stelle eine Internetverbindung her.</string>
   <string name="err_unknown">Unbekannter Fehler</string>
   <string name="err_comm">Unbekannter Kommunikationsfehler</string>
   <string name="err_missing_auth">Benutzername oder Passwort nicht gesetzt.</string>
   <string name="err_wrong">Falsche Anmeldedaten</string>
+  <string name="err_maintenance">Geocaching.com wird zur Zeit gewartet, bitte versuche es später erneut. c:geo arbeitet im Offline-Modus.</string>
   <string name="err_license">Die Geocaching.com Nutzungsbedingungen wurden nicht akzeptiert. c:geo kann deshalb keine Koordinaten laden.</string>
   <string name="err_unpublished">Der aufgerufene Cache ist noch nicht veröffentlicht</string>
   <string name="err_premium_only">Der Cache ist nur für Premium Mitglieder von Geocaching.com verfügbar</string>
