@@ -52,7 +52,7 @@
   <string name="wp_puzzle">Station mit Frage</string>
   <string name="wp_pkg">Parkplatz</string>
   <string name="wp_trailhead">Ausgangspunkt</string>
-  <string name="wp_waypoint">Referenzpunkt</string>
+  <string name="wp_waypoint">Wegpunkt</string>
 
   <!-- logs -->
   <string name="log_found">Gefunden</string>
@@ -99,15 +99,15 @@
   <string name="log_stars_4">4 Sterne</string>
   <string name="log_stars_45">4,5 Sterne</string>
   <string name="log_stars_5">5 Sterne</string>
-  <string name="log_stars_1_description">schlecht</string>
-  <string name="log_stars_15_description">lohnt nicht</string>
-  <string name="log_stars_2_description">schwach</string>
-  <string name="log_stars_25_description">ok</string>
-  <string name="log_stars_3_description">durchschnittlich</string>
-  <string name="log_stars_35_description">besser</string>
-  <string name="log_stars_4_description">gut</string>
-  <string name="log_stars_45_description">fast perfekt</string>
-  <string name="log_stars_5_description">großartig</string>
+  <string name="log_stars_1_description">Schlecht</string>
+  <string name="log_stars_15_description">Lohnt sich nicht</string>
+  <string name="log_stars_2_description">Schwach</string>
+  <string name="log_stars_25_description">OK</string>
+  <string name="log_stars_3_description">Durchschnittlich</string>
+  <string name="log_stars_35_description">Besser</string>
+  <string name="log_stars_4_description">Gut</string>
+  <string name="log_stars_45_description">Fast perfekt</string>
+  <string name="log_stars_5_description">Großartig</string>
   <string name="log_webcam">Webcam-Foto gemacht</string>
   <string name="log_new_log">Loggen</string>
   <string name="log_new_log_text">Log-Text</string>
@@ -625,6 +625,7 @@
   <string name="map_static_title">Statische Karte</string>
   <string name="map_static_loading">Lade statische Karte…</string>
   <string name="map_token_err">c:geo konnte nur Teildaten herunterladen, die Koordinaten der Caches könnten ungenau sein.</string>
+  <string name="map_as_list">Als Liste anzeigen</string>
 
   <!-- search -->
   <string name="search_bar_hint">Suche nach Caches</string>
