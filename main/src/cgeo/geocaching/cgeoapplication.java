@@ -452,17 +452,17 @@ public class cgeoapplication extends Application {
         return getStorage().loadHistoryOfSearchedLocations();
     }
 
-    public cgSearch getHistoryOfCaches(boolean detailedOnly, String cachetype) {
+    public cgSearch getHistoryOfCaches(final boolean detailedOnly, final CacheType cachetype) {
         final List<String> geocodes = getStorage().loadBatchOfHistoricGeocodes(detailedOnly, cachetype);
         return new cgSearch(geocodes);
     }
 
-    public cgSearch getCachedInViewport(Long centerLat, Long centerLon, Long spanLat, Long spanLon, String cachetype) {
+    public cgSearch getCachedInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cachetype) {
         final List<String> geocodes = getStorage().getCachedInViewport(centerLat, centerLon, spanLat, spanLon, cachetype);
         return new cgSearch(geocodes);
     }
 
-    public cgSearch getStoredInViewport(Long centerLat, Long centerLon, Long spanLat, Long spanLon, String cachetype) {
+    public cgSearch getStoredInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cachetype) {
         final List<String> geocodes = getStorage().getStoredInViewport(centerLat, centerLon, spanLat, spanLon, cachetype);
         return new cgSearch(geocodes);
     }

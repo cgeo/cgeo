@@ -2648,7 +2648,7 @@ public class cgData {
         return geocodes;
     }
 
-    public List<String> loadBatchOfHistoricGeocodes(boolean detailedOnly, String cachetype) {
+    public List<String> loadBatchOfHistoricGeocodes(final boolean detailedOnly, final CacheType cachetype) {
         init();
 
         List<String> geocodes = new ArrayList<String>();
@@ -2661,7 +2661,7 @@ public class cgData {
         }
         if (cachetype != null) {
             specifySql.append(" and type = \"");
-            specifySql.append(cachetype);
+            specifySql.append(cachetype.id);
             specifySql.append('"');
         }
 
@@ -2698,15 +2698,15 @@ public class cgData {
         return geocodes;
     }
 
-    public List<String> getCachedInViewport(Long centerLat, Long centerLon, Long spanLat, Long spanLon, String cachetype) {
+    public List<String> getCachedInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cachetype) {
         return getInViewport(false, centerLat, centerLon, spanLat, spanLon, cachetype);
     }
 
-    public List<String> getStoredInViewport(Long centerLat, Long centerLon, Long spanLat, Long spanLon, String cachetype) {
+    public List<String> getStoredInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cachetype) {
         return getInViewport(true, centerLat, centerLon, spanLat, spanLon, cachetype);
     }
 
-    public List<String> getInViewport(boolean stored, Long centerLat, Long centerLon, Long spanLat, Long spanLon, String cachetype) {
+    public List<String> getInViewport(final boolean stored, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cachetype) {
         if (centerLat == null || centerLon == null || spanLat == null || spanLon == null) {
             return null;
         }
@@ -2746,7 +2746,7 @@ public class cgData {
         // cachetype limitation
         if (cachetype != null) {
             where.append(" and type = \"");
-            where.append(cachetype);
+            where.append(cachetype.id);
             where.append('"');
         }
 

@@ -157,8 +157,8 @@ public class CachesOverlay extends AbstractItemizedOverlay {
                     projection.toPixels(leftGeo, left);
                     int radius = center.x - left.x;
 
-                    final String type = item.getType();
-                    if (type == null || CacheType.MULTI.id.equals(type) || CacheType.MYSTERY.id.equals(type) || CacheType.VIRTUAL.id.equals(type)) {
+                    final CacheType type = item.getType();
+                    if (type == null || type == CacheType.MULTI || type == CacheType.MYSTERY || type == CacheType.VIRTUAL) {
                         blockedCircle.setColor(0x66000000);
                         blockedCircle.setStyle(Style.STROKE);
                         canvas.drawCircle(center.x, center.y, radius, blockedCircle);
@@ -280,9 +280,9 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
                 String cacheType;
                 if (cgBase.cacheTypesInv.containsKey(coordinate.getTypeSpec())) {
-                    cacheType = cgBase.cacheTypesInv.get(coordinate.getTypeSpec());
+                    cacheType = cgBase.cacheTypesInv.get(CacheType.getById(coordinate.getTypeSpec()));
                 } else {
-                    cacheType = cgBase.cacheTypesInv.get(CacheType.MYSTERY.id);
+                    cacheType = cgBase.cacheTypesInv.get(CacheType.MYSTERY);
                 }
 
                 dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ngeocode: " + coordinate.getGeocode().toUpperCase() + "\ntype: " + cacheType);

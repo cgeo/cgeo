@@ -17,6 +17,7 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
@@ -1395,7 +1396,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                                 items.add(getWaypointItem(new cgCoord(oneWaypoint), oneWaypoint.getWaypointType()));
                             }
                         }
-                        items.add(getCacheItem(new cgCoord(cacheOne), cacheOne.getType(), cacheOne.isOwn(), cacheOne.isFound(), cacheOne.isDisabled()));
+                        items.add(getCacheItem(new cgCoord(cacheOne), cacheOne.getCacheType(), cacheOne.isOwn(), cacheOne.isFound(), cacheOne.isDisabled()));
                     }
 
                     overlayCaches.updateItems(items);
@@ -1438,7 +1439,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
          *            true for disabled
          * @return
          */
-        private CachesOverlayItemImpl getCacheItem(cgCoord cgCoord, String type, boolean own, boolean found, boolean disabled) {
+        private CachesOverlayItemImpl getCacheItem(final cgCoord cgCoord, final CacheType type, final boolean own, final boolean found, final boolean disabled) {
             return getItem(cgCoord, cgBase.getCacheMarkerIcon(type, own, found, disabled), type);
         }
 
@@ -1466,7 +1467,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
          *            cacheType, this will influence the style of the circles drawn around it
          * @return
          */
-        private CachesOverlayItemImpl getItem(cgCoord cgCoord, int icon, final String cacheType) {
+        private CachesOverlayItemImpl getItem(cgCoord cgCoord, int icon, final CacheType cacheType) {
             coordinates.add(cgCoord);
             CachesOverlayItemImpl item = Settings.getMapFactory().getCachesOverlayItem(cgCoord, cacheType);
 

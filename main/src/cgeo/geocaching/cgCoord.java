@@ -33,7 +33,7 @@ public class cgCoord implements IBasicCache, IWaypoint {
         coords = cache.getCoords();
         name = cache.getName();
         type = "cache";
-        typeSpec = cache.getType();
+        typeSpec = cache.getCacheType().id;
         difficulty = cache.getDifficulty();
         terrain = cache.getTerrain();
         size = cache.getSize();

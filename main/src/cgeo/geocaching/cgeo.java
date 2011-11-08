@@ -349,10 +349,10 @@ public class cgeo extends AbstractActivity {
         menu.add(1, 3, 0, res.getString(R.string.mystery));
 
         // then add all other cache types sorted alphabetically
-        Map<String, String> allTypes = new HashMap<String, String>(cgBase.cacheTypesInv);
-        allTypes.remove(CacheType.TRADITIONAL.id);
-        allTypes.remove(CacheType.MULTI.id);
-        allTypes.remove(CacheType.MYSTERY.id);
+        Map<CacheType, String> allTypes = new HashMap<CacheType, String>(cgBase.cacheTypesInv);
+        allTypes.remove(CacheType.TRADITIONAL);
+        allTypes.remove(CacheType.MULTI);
+        allTypes.remove(CacheType.MYSTERY);
         List<String> sorted = new ArrayList<String>(allTypes.values());
         Collections.sort(sorted);
         for (String choice : sorted) {
@@ -364,7 +364,7 @@ public class cgeo extends AbstractActivity {
         boolean foundItem = false;
         int itemCount = menu.size();
         if (Settings.getCacheType() != null) {
-            String typeTitle = cgBase.cacheTypesInv.get(Settings.getCacheType());
+            final String typeTitle = cgBase.cacheTypesInv.get(Settings.getCacheType());
             if (typeTitle != null) {
                 for (int i = 0; i < itemCount; i++) {
                     if (menu.getItem(i).getTitle().equals(typeTitle)) {
@@ -395,19 +395,15 @@ public class cgeo extends AbstractActivity {
             cgeocaches.startActivityOffline(context);
             return true;
         } else if (id > 0) {
-            String itemTitle = item.getTitle().toString();
-            String choice = null;
-            for (Entry<String, String> entry : cgBase.cacheTypesInv.entrySet()) {
+            final String itemTitle = item.getTitle().toString();
+            CacheType choice = null;
+            for (Entry<CacheType, String> entry : cgBase.cacheTypesInv.entrySet()) {
                 if (entry.getValue().equalsIgnoreCase(itemTitle)) {
                     choice = entry.getKey();
                     break;
                 }
             }
-            if (choice == null) {
-                Settings.setCacheType(null);
-            } else {
-                Settings.setCacheType(choice);
-            }
+            Settings.setCacheType(choice);
             setFilterTitle();
 
             return true;

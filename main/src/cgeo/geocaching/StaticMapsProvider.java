@@ -105,13 +105,11 @@ public class StaticMapsProvider {
     }
 
     private static String getMarkerUrl(final cgCache cache) {
-        String type;
+        String type = cache.getCacheType().id;
         if (cache.isFound()) {
-            type = cache.getType() + "_found";
+            type += "_found";
         } else if (cache.isDisabled()) {
-            type = cache.getType() + "_disabled";
-        } else {
-            type = cache.getType();
+            type += "_disabled";
         }
 
         return cgBase.urlencode_rfc3986(MARKERS_URL + "marker_cache_" + type + ".png");

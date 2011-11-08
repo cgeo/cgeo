@@ -3,6 +3,7 @@ package cgeo.geocaching.maps.mapsforge;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgUser;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -35,7 +36,7 @@ public class MapsforgeMapFactory implements MapFactory {
     }
 
     @Override
-    public CachesOverlayItemImpl getCachesOverlayItem(cgCoord coordinate, String type) {
+    public CachesOverlayItemImpl getCachesOverlayItem(final cgCoord coordinate, final CacheType type) {
         MapsforgeCacheOverlayItem baseItem = new MapsforgeCacheOverlayItem(coordinate, type);
         return baseItem;
     }

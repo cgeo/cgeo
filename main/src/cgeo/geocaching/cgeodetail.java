@@ -727,7 +727,7 @@ public class cgeodetail extends AbstractActivity {
             detailsList.removeAllViews();
 
             // actionbar icon, default mystery
-            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.getType())), null, null, null);
+            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.getCacheType())), null, null, null);
 
             // cache name (full name)
             itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
@@ -749,10 +749,10 @@ public class cgeodetail extends AbstractActivity {
 
             itemName.setText(res.getString(R.string.cache_type));
 
-            if (cgBase.cacheTypesInv.containsKey(cache.getType())) { // cache icon
-                itemValue.setText(cgBase.cacheTypesInv.get(cache.getType()));
+            if (cgBase.cacheTypesInv.containsKey(cache.getCacheType())) { // cache icon
+                itemValue.setText(cgBase.cacheTypesInv.get(cache.getCacheType()));
             } else {
-                itemValue.setText(cgBase.cacheTypesInv.get(CacheType.MYSTERY.id)); // TODO: or UNKNOWN?
+                itemValue.setText(cgBase.cacheTypesInv.get(CacheType.MYSTERY)); // TODO: or UNKNOWN?
             }
 
             detailsList.addView(itemLayout);

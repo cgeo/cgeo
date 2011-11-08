@@ -61,7 +61,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
     private boolean sort = true;
     private int checked = 0;
     private boolean selectMode = false;
-    final private static Map<String, Drawable> gcIconDrawables = new HashMap<String, Drawable>();
+    final private static Map<CacheType, Drawable> gcIconDrawables = new HashMap<CacheType, Drawable>();
     final private Set<cgCompassMini> compasses = new LinkedHashSet<cgCompassMini>();
     final private Set<cgDistanceView> distances = new LinkedHashSet<cgDistanceView>();
     final private int[] ratingBcgs = new int[3];
@@ -84,7 +84,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         pixelDensity = metrics.density;
 
-        for (final String cacheType : cgBase.cacheTypesInv.keySet()) {
+        for (final CacheType cacheType : cgBase.cacheTypesInv.keySet()) {
             gcIconDrawables.put(cacheType, activity.getResources().getDrawable(cgBase.getCacheIcon(cacheType)));
         }
 
@@ -434,10 +434,10 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         }
 
         holder.text.setText(cache.getNameSp(), TextView.BufferType.SPANNABLE);
-        if (gcIconDrawables.containsKey(cache.getType())) { // cache icon
-            holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(cache.getType()), null, null, null);
+        if (gcIconDrawables.containsKey(cache.getCacheType())) { // cache icon
+            holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(cache.getCacheType()), null, null, null);
         } else { // unknown cache type, "mystery" icon
-            holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(CacheType.MYSTERY.id), null, null, null);
+            holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(CacheType.MYSTERY), null, null, null);
         }
 
         if (holder.inventory.getChildCount() > 0) {

@@ -99,7 +99,7 @@ public class cgBase {
             cacheIDs.put(ct.id, ct.guid);
         }
     }
-    public final static Map<String, String> cacheTypesInv = new HashMap<String, String>();
+    public final static Map<CacheType, String> cacheTypesInv = new HashMap<CacheType, String>();
     public final static Map<String, String> cacheIDsChoices = new HashMap<String, String>();
     public final static Map<CacheSize, String> cacheSizesInv = new HashMap<CacheSize, String>();
     public final static Map<WaypointType, String> waypointTypes = new HashMap<WaypointType, String>();
@@ -255,7 +255,7 @@ public class cgBase {
 
         for (CacheType ct : CacheType.values()) {
             String l10n = res.getString(ct.stringId);
-            cacheTypesInv.put(ct.id, l10n);
+            cacheTypesInv.put(ct, l10n);
             cacheIDsChoices.put(l10n, ct.guid);
         }
 
@@ -1141,7 +1141,7 @@ public class cgBase {
         cache.setFound(BaseUtils.matches(page, GCConstants.PATTERN_FOUND) || BaseUtils.matches(page, GCConstants.PATTERN_FOUND_ALTERNATIVE));
 
         // cache type
-        cache.setCacheType(CacheType.getByPattern(BaseUtils.getMatch(page, GCConstants.PATTERN_TYPE, true, cache.getType())));
+        cache.setCacheType(CacheType.getByPattern(BaseUtils.getMatch(page, GCConstants.PATTERN_TYPE, true, cache.getCacheType().id)));
 
         // on watchlist
         cache.setOnWatchlist(BaseUtils.matches(page, GCConstants.PATTERN_WATCHLIST));
@@ -1601,7 +1601,7 @@ public class cgBase {
         if (cache.getSize() == null) {
             Log.e(Settings.tag, "size not parsed correctly");
         }
-        if (StringUtils.isBlank(cache.getType())) {
+        if (cache.getCacheType() == null || cache.getCacheType() == CacheType.UNKNOWN) {
             Log.e(Settings.tag, "type not parsed correctly");
         }
         if (cache.getCoords() == null) {
@@ -2094,7 +2094,7 @@ public class cgBase {
         return search;
     }
 
-    public cgSearch searchByHistory(final String cacheType) {
+    public cgSearch searchByHistory(final CacheType cacheType) {
         if (app == null) {
             Log.e(Settings.tag, "cgeoBase.searchByHistory: No application found");
             return null;
@@ -2295,7 +2295,7 @@ public class cgBase {
         return users;
     }
 
-    public static List<cgCache> filterSearchResults(final cgSearch search, final cgCacheWrap caches, final boolean excludeDisabled, final boolean excludeMine, final String cacheType) {
+    public static List<cgCache> filterSearchResults(final cgSearch search, final cgCacheWrap caches, final boolean excludeDisabled, final boolean excludeMine, final CacheType cacheType) {
         List<cgCache> cacheList = new ArrayList<cgCache>();
         if (caches != null) {
             if (caches.error != null) {
@@ -2312,7 +2312,7 @@ public class cgBase {
                     // Is there any reason to exclude the cache from the list?
                     final boolean excludeCache = (excludeDisabled && cache.isDisabled()) ||
                             (excludeMine && (cache.isOwn() || cache.isFound())) ||
-                            (cacheType != null && !cacheType.equals(cache.getType()));
+                            (cacheType != null && cacheType != cache.getCacheType());
                     if (!excludeCache) {
                         search.addGeocode(cache.getGeocode());
                         cacheList.add(cache);
@@ -3194,7 +3194,8 @@ public class cgBase {
         return out;
     }
 
-    public static int getCacheIcon(final String type) {
+    public static int getCacheIcon(final CacheType cacheType) {
+        final String type = cacheType.id;
         fillIconsMap();
         Integer iconId = gcIcons.get("type_" + type);
         if (iconId != null) {
@@ -3204,11 +3205,13 @@ public class cgBase {
         return gcIcons.get("type_traditional");
     }
 
-    public static int getCacheMarkerIcon(final String type, final boolean own, final boolean found, final boolean disabled) {
+    public static int getCacheMarkerIcon(final CacheType cacheType, final boolean own, final boolean found, final boolean disabled) {
         fillIconsMap();
 
         int icon = -1;
         String iconTxt = null;
+
+        final String type = cacheType != null ? cacheType.id : null;
 
         if (StringUtils.isNotBlank(type)) {
             if (own) {
