@@ -38,13 +38,13 @@
   <string name="unknown">Unbekannter Typ</string>
 
   <!-- cache sizes -->
-  <string name="cache_size_micro">micro</string>
-  <string name="cache_size_small">small</string>
-  <string name="cache_size_regular">regular</string>
-  <string name="cache_size_large">large</string>
-  <string name="cache_size_other">Größe unbekannt</string>
-  <string name="cache_size_virtual">kein Behälter</string>
-  <string name="cache_size_notchosen">Größe nicht gewählt</string>
+  <string name="cache_size_micro">Micro</string>
+  <string name="cache_size_small">Small</string>
+  <string name="cache_size_regular">Regular</string>
+  <string name="cache_size_large">Large</string>
+  <string name="cache_size_other">Other</string>
+  <string name="cache_size_virtual">Virtuell</string>
+  <string name="cache_size_notchosen">Nicht gewählt</string>
 
   <!-- waypoints -->
   <string name="wp_final">Final</string>
