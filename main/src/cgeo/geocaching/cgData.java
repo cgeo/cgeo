@@ -2538,7 +2538,7 @@ public class cgData {
         return trackable;
     }
 
-    public int getAllStoredCachesCount(boolean detailedOnly, String cachetype, Integer list) {
+    public int getAllStoredCachesCount(final boolean detailedOnly, final CacheType cacheType, final Integer list) {
         String listSql = null;
         String listSqlW = null;
         if (list == null) {
@@ -2555,16 +2555,16 @@ public class cgData {
         try {
             String sql = "select count(_id) from " + dbTableCaches; // this default is not used, but we like to have variables initialized
             if (!detailedOnly) {
-                if (cachetype == null) {
+                if (cacheType == null) {
                     sql = "select count(_id) from " + dbTableCaches + listSql;
                 } else {
-                    sql = "select count(_id) from " + dbTableCaches + " where type = \"" + cachetype + "\"" + listSqlW;
+                    sql = "select count(_id) from " + dbTableCaches + " where type = \"" + cacheType.id + "\"" + listSqlW;
                 }
             } else {
-                if (cachetype == null) {
+                if (cacheType == null) {
                     sql = "select count(_id) from " + dbTableCaches + " where detailed = 1" + listSqlW;
                 } else {
-                    sql = "select count(_id) from " + dbTableCaches + " where detailed = 1 and type = \"" + cachetype + "\"" + listSqlW;
+                    sql = "select count(_id) from " + dbTableCaches + " where detailed = 1 and type = \"" + cacheType.id + "\"" + listSqlW;
                 }
             }
             SQLiteStatement compiledStmnt = databaseRO.compileStatement(sql);
@@ -2593,7 +2593,7 @@ public class cgData {
         return count;
     }
 
-    public List<String> loadBatchOfStoredGeocodes(final boolean detailedOnly, final Geopoint coords, final String cachetype, final int list) {
+    public List<String> loadBatchOfStoredGeocodes(final boolean detailedOnly, final Geopoint coords, final CacheType cacheType, final int list) {
         init();
 
         List<String> geocodes = new ArrayList<String>();
@@ -2607,9 +2607,9 @@ public class cgData {
             specifySql.append(" and detailed = 1 ");
         }
 
-        if (cachetype != null) {
+        if (cacheType != null) {
             specifySql.append(" and type = \"");
-            specifySql.append(cachetype);
+            specifySql.append(cacheType.id);
             specifySql.append('"');
         }
 

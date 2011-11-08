@@ -149,7 +149,7 @@ public class cgeocaches extends AbstractListActivity {
     private String action = null;
     private CacheListType type = null;
     private Geopoint coords = null;
-    private String cachetype = null;
+    private CacheType cachetype = null;
     private String keyword = null;
     private String address = null;
     private String username = null;
@@ -556,7 +556,7 @@ public class cgeocaches extends AbstractListActivity {
             Object typeObject = extras.get(EXTRAS_LIST_TYPE);
             type = (typeObject instanceof CacheListType) ? (CacheListType) typeObject : CacheListType.OFFLINE;
             coords = new Geopoint(extras.getDouble("latitude"), extras.getDouble("longitude"));
-            cachetype = Settings.getCacheType();
+            cachetype = CacheType.getById(Settings.getCacheType());
             keyword = extras.getString("keyword");
             address = extras.getString("address");
             username = extras.getString("username");
@@ -1775,7 +1775,7 @@ public class cgeocaches extends AbstractListActivity {
         @Override
         public void run() {
             if (coords != null) {
-                search = base.searchByOffline(coords, Settings.getCacheType(), listId);
+                search = base.searchByOffline(coords, CacheType.getById(Settings.getCacheType()), listId);
             } else {
                 search = base.searchByOffline(null, null, cgList.STANDARD_LIST_ID);
             }
@@ -1816,16 +1816,16 @@ public class cgeocaches extends AbstractListActivity {
 
     private class geocachesLoadByCoords extends cgSearchThread {
 
-        private Handler handler = null;
-        private Geopoint coords = null;
-        private String cachetype = null;
+        final private Handler handler;
+        final private Geopoint coords;
+        final private CacheType cacheType;
 
-        public geocachesLoadByCoords(Handler handlerIn, final Geopoint coordsIn, String cachetypeIn) {
+        public geocachesLoadByCoords(final Handler handler, final Geopoint coords, final CacheType cacheType) {
             setPriority(Thread.MIN_PRIORITY);
 
-            handler = handlerIn;
-            coords = coordsIn;
-            cachetype = cachetypeIn;
+            this.handler = handler;
+            this.coords = coords;
+            this.cacheType = cacheType;
 
             if (coords == null) {
                 showToast(res.getString(R.string.warn_no_coordinates));
@@ -1837,7 +1837,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = base.searchByCoords(this, coords, cachetype, 0, Settings.isShowCaptcha());
+            search = base.searchByCoords(this, coords, cacheType, 0, Settings.isShowCaptcha());
 
             handler.sendMessage(new Message());
         }
@@ -1845,16 +1845,16 @@ public class cgeocaches extends AbstractListActivity {
 
     private class geocachesLoadByKeyword extends cgSearchThread {
 
-        private Handler handler = null;
-        private String keyword = null;
-        private String cachetype = null;
+        final private Handler handler;
+        final private String keyword;
+        final private CacheType cacheType;
 
-        public geocachesLoadByKeyword(Handler handlerIn, String keywordIn, String cachetypeIn) {
+        public geocachesLoadByKeyword(final Handler handler, final String keyword, final CacheType cacheType) {
             setPriority(Thread.MIN_PRIORITY);
 
-            handler = handlerIn;
-            keyword = keywordIn;
-            cachetype = cachetypeIn;
+            this.handler = handler;
+            this.keyword = keyword;
+            this.cacheType = cacheType;
 
             if (keyword == null) {
                 showToast(res.getString(R.string.warn_no_keyword));
@@ -1866,23 +1866,23 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = base.searchByKeyword(this, keyword, cachetype, 0, Settings.isShowCaptcha());
+            search = base.searchByKeyword(this, keyword, cacheType, 0, Settings.isShowCaptcha());
             handler.sendMessage(new Message());
         }
     }
 
     private class geocachesLoadByUserName extends cgSearchThread {
 
-        private Handler handler = null;
-        private String username = null;
-        private String cachetype = null;
+        final private Handler handler;
+        final private String username;
+        final private CacheType cacheType;
 
-        public geocachesLoadByUserName(Handler handlerIn, String usernameIn, String cachetypeIn) {
+        public geocachesLoadByUserName(final Handler handler, final String username, final CacheType cacheType) {
             setPriority(Thread.MIN_PRIORITY);
 
-            handler = handlerIn;
-            username = usernameIn;
-            cachetype = cachetypeIn;
+            this.handler = handler;
+            this.username = username;
+            this.cacheType = cacheType;
 
             if (StringUtils.isBlank(username)) {
                 showToast(res.getString(R.string.warn_no_username));
@@ -1894,23 +1894,23 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = base.searchByUsername(this, username, cachetype, 0, Settings.isShowCaptcha());
+            search = base.searchByUsername(this, username, cacheType, 0, Settings.isShowCaptcha());
             handler.sendMessage(new Message());
         }
     }
 
     private class geocachesLoadByOwner extends cgSearchThread {
 
-        private Handler handler = null;
-        private String username = null;
-        private String cachetype = null;
+        final private Handler handler;
+        final private String username;
+        final private CacheType cacheType;
 
-        public geocachesLoadByOwner(Handler handlerIn, String usernameIn, String cachetypeIn) {
+        public geocachesLoadByOwner(final Handler handler, final String username, final CacheType cacheType) {
             setPriority(Thread.MIN_PRIORITY);
 
-            handler = handlerIn;
-            username = usernameIn;
-            cachetype = cachetypeIn;
+            this.handler = handler;
+            this.username = username;
+            this.cacheType = cacheType;
 
             if (StringUtils.isBlank(username)) {
                 showToast(res.getString(R.string.warn_no_username));
@@ -1924,9 +1924,9 @@ public class cgeocaches extends AbstractListActivity {
         public void run() {
             Map<String, String> params = new HashMap<String, String>();
             params.put("username", username);
-            params.put("cachetype", cachetype);
+            params.put("cachetype", cachetype.id);
 
-            search = base.searchByOwner(this, username, cachetype, 0, Settings.isShowCaptcha());
+            search = base.searchByOwner(this, username, cacheType, 0, Settings.isShowCaptcha());
 
             handler.sendMessage(new Message());
         }

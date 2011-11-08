@@ -417,19 +417,6 @@ public class cgCache implements ICache {
         return terrain;
     }
 
-    /**
-     * @deprecated Use getCacheType() instead
-     * @return cache type as an id
-     */
-    @Deprecated
-    public String getType() {
-        if (null != cacheType) {
-            return cacheType.id;
-        } else {
-            return "";
-        }
-    }
-
     @Override
     public boolean isArchived() {
         return archived;

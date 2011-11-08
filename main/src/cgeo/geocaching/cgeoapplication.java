@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 
@@ -443,7 +444,7 @@ public class cgeoapplication extends Application {
         return cachesOut;
     }
 
-    public cgSearch getBatchOfStoredCaches(boolean detailedOnly, final Geopoint coords, String cachetype, int list) {
+    public cgSearch getBatchOfStoredCaches(final boolean detailedOnly, final Geopoint coords, final CacheType cachetype, final int list) {
         final List<String> geocodes = getStorage().loadBatchOfStoredGeocodes(detailedOnly, coords, cachetype, list);
         return new cgSearch(geocodes);
     }
@@ -472,8 +473,8 @@ public class cgeoapplication extends Application {
         return new cgSearch(geocodes);
     }
 
-    public int getAllStoredCachesCount(boolean detailedOnly, String cachetype, Integer list) {
-        return getStorage().getAllStoredCachesCount(detailedOnly, cachetype, list);
+    public int getAllStoredCachesCount(final boolean detailedOnly, final CacheType cacheType, final Integer list) {
+        return getStorage().getAllStoredCachesCount(detailedOnly, cacheType, list);
     }
 
     private cgData getStorage() {

@@ -90,12 +90,9 @@ public class cgBase {
 
     private static final String passMatch = "(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+";
 
-    @Deprecated
-    public final static Map<String, String> cacheTypes = new HashMap<String, String>();
     public final static Map<String, String> cacheIDs = new HashMap<String, String>();
     static {
         for (CacheType ct : CacheType.values()) {
-            cacheTypes.put(ct.pattern, ct.id);
             cacheIDs.put(ct.id, ct.guid);
         }
     }
@@ -248,10 +245,8 @@ public class cgBase {
 
         // setup cache type mappings
 
-        final String CACHETYPE_ALL_GUID = "9a79e6ce-3344-409c-bbe9-496530baf758";
 
-        cacheIDs.put("all", CACHETYPE_ALL_GUID);
-        cacheIDsChoices.put(res.getString(R.string.all), CACHETYPE_ALL_GUID);
+        cacheIDsChoices.put(res.getString(R.string.all), CacheType.ALL_GUID);
 
         for (CacheType ct : CacheType.values()) {
             String l10n = res.getString(ct.stringId);
@@ -1996,14 +1991,10 @@ public class cgBase {
      * @param params
      *            the parameters to insert the restriction into
      * @param cacheType
-     *            the type of cache, or "all" if null or not recognized
+     *            the type of cache, or null to include everything
      */
-    static private void insertCacheType(final Parameters params, final String cacheType) {
-        if (StringUtils.isNotBlank(cacheType) && cacheIDs.containsKey(cacheType)) {
-            params.put("tx", cacheIDs.get(cacheType));
-        } else {
-            params.put("tx", cacheIDs.get("all"));
-        }
+    static private void insertCacheType(final Parameters params, final CacheType cacheType) {
+        params.put("tx", cacheType != null ? cacheType.guid : CacheType.ALL_GUID);
     }
 
     public cgSearch searchByNextPage(cgSearchThread thread, final cgSearch search, int reason, boolean showCaptcha) {
@@ -2084,7 +2075,7 @@ public class cgBase {
         return ConnectorFactory.getConnector(geocode).searchByGeocode(this, geocode, guid, app, search, reason, handler);
     }
 
-    public cgSearch searchByOffline(final Geopoint coords, final String cacheType, final int list) {
+    public cgSearch searchByOffline(final Geopoint coords, final CacheType cacheType, final int list) {
         if (app == null) {
             Log.e(Settings.tag, "cgeoBase.searchByOffline: No application found");
             return null;
@@ -2116,7 +2107,7 @@ public class cgBase {
      *            the parameters to add to the request URI
      * @return
      */
-    private cgSearch searchByAny(final cgSearchThread thread, final String cacheType, final boolean my, final int reason, final boolean showCaptcha, final Parameters params) {
+    private cgSearch searchByAny(final cgSearchThread thread, final CacheType cacheType, final boolean my, final int reason, final boolean showCaptcha, final Parameters params) {
         final cgSearch search = new cgSearch();
         insertCacheType(params, cacheType);
 
@@ -2145,12 +2136,12 @@ public class cgBase {
         return search;
     }
 
-    public cgSearch searchByCoords(final cgSearchThread thread, final Geopoint coords, final String cacheType, final int reason, final boolean showCaptcha) {
+    public cgSearch searchByCoords(final cgSearchThread thread, final Geopoint coords, final CacheType cacheType, final int reason, final boolean showCaptcha) {
         final Parameters params = new Parameters("lat", Double.toString(coords.getLatitude()), "lng", Double.toString(coords.getLongitude()));
         return searchByAny(thread, cacheType, false, reason, showCaptcha, params);
     }
 
-    public cgSearch searchByKeyword(final cgSearchThread thread, final String keyword, final String cacheType, final int reason, final boolean showCaptcha) {
+    public cgSearch searchByKeyword(final cgSearchThread thread, final String keyword, final CacheType cacheType, final int reason, final boolean showCaptcha) {
         if (StringUtils.isBlank(keyword)) {
             Log.e(Settings.tag, "cgeoBase.searchByKeyword: No keyword given");
             return null;
@@ -2160,7 +2151,7 @@ public class cgBase {
         return searchByAny(thread, cacheType, false, reason, showCaptcha, params);
     }
 
-    public cgSearch searchByUsername(final cgSearchThread thread, final String userName, final String cacheType, final int reason, final boolean showCaptcha) {
+    public cgSearch searchByUsername(final cgSearchThread thread, final String userName, final CacheType cacheType, final int reason, final boolean showCaptcha) {
         if (StringUtils.isBlank(userName)) {
             Log.e(Settings.tag, "cgeoBase.searchByUsername: No user name given");
             return null;
@@ -2177,7 +2168,7 @@ public class cgBase {
         return searchByAny(thread, cacheType, my, reason, showCaptcha, params);
     }
 
-    public cgSearch searchByOwner(final cgSearchThread thread, final String userName, final String cacheType, final int reason, final boolean showCaptcha) {
+    public cgSearch searchByOwner(final cgSearchThread thread, final String userName, final CacheType cacheType, final int reason, final boolean showCaptcha) {
         if (StringUtils.isBlank(userName)) {
             Log.e(Settings.tag, "cgeoBase.searchByOwner: No user name given");
             return null;

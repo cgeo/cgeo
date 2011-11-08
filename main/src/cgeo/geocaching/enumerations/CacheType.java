@@ -73,4 +73,5 @@ public enum CacheType {
         return result;
     }
 
+    final public static String ALL_GUID = "9a79e6ce-3344-409c-bbe9-496530baf758";
 }
