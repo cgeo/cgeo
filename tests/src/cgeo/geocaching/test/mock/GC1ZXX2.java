@@ -120,10 +120,10 @@ public class GC1ZXX2 extends MockedCache {
     public Map<Integer, Integer> getLogCounts() {
         Map<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
         logCounts.put(cgBase.LOG_PUBLISH_LISTING, 1);
-        logCounts.put(cgBase.LOG_FOUND_IT, 370);
+        logCounts.put(cgBase.LOG_FOUND_IT, 369);
         logCounts.put(cgBase.LOG_POST_REVIEWER_NOTE, 1);
         logCounts.put(cgBase.LOG_DIDNT_FIND_IT, 7);
-        logCounts.put(cgBase.LOG_NOTE, 8);
+        logCounts.put(cgBase.LOG_NOTE, 10);
         logCounts.put(cgBase.LOG_ARCHIVE, 1);
         logCounts.put(cgBase.LOG_ENABLE_LISTING, 2);
         logCounts.put(cgBase.LOG_TEMP_DISABLE_LISTING, 3);
@@ -133,7 +133,7 @@ public class GC1ZXX2 extends MockedCache {
 
     @Override
     public Integer getFavoritePoints() {
-        return new Integer(49);
+        return new Integer(47);
     }
 
     @Override

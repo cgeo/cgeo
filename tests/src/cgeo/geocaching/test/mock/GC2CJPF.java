@@ -60,7 +60,7 @@ public class GC2CJPF extends MockedCache {
 
     @Override
     public String getHint() {
-        return "Das Final (unter Steinen) ist mit GC gekennzeichnet.";
+        return "Das Final ist unter Steinen";
     }
 
     @Override
@@ -134,19 +134,19 @@ public class GC2CJPF extends MockedCache {
     public Map<Integer, Integer> getLogCounts() {
         Map<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
         logCounts.put(cgBase.LOG_PUBLISH_LISTING, 1);
-        logCounts.put(cgBase.LOG_FOUND_IT, 55);
-        logCounts.put(cgBase.LOG_DIDNT_FIND_IT, 1);
-        logCounts.put(cgBase.LOG_NOTE, 5);
+        logCounts.put(cgBase.LOG_FOUND_IT, 60);
+        logCounts.put(cgBase.LOG_DIDNT_FIND_IT, 3);
+        logCounts.put(cgBase.LOG_NOTE, 6);
         logCounts.put(cgBase.LOG_ENABLE_LISTING, 2);
         logCounts.put(cgBase.LOG_TEMP_DISABLE_LISTING, 2);
-        logCounts.put(cgBase.LOG_OWNER_MAINTENANCE, 2);
+        logCounts.put(cgBase.LOG_OWNER_MAINTENANCE, 3);
         logCounts.put(cgBase.LOG_NEEDS_MAINTENANCE, 2);
         return logCounts;
     }
 
     @Override
     public Integer getFavoritePoints() {
-        return new Integer(6);
+        return new Integer(7);
     }
 
 }
