@@ -82,7 +82,7 @@ final public class OkapiClient {
             cache.setName(response.getString(CACHE_NAME));
             // not used: names
             setLocation(cache, response.getString(CACHE_LOCATION));
-            cache.setCacheType(CacheType.getById(getCacheType(response.getString(CACHE_TYPE))));
+            cache.setCacheType(getCacheType(response.getString(CACHE_TYPE)));
 
             final String status = response.getString(CACHE_STATUS);
             cache.setDisabled(status.equalsIgnoreCase("Temporarily unavailable"));
@@ -235,17 +235,17 @@ final public class OkapiClient {
         return CacheSize.NOT_CHOSEN;
     }
 
-    private static String getCacheType(final String type) {
+    private static CacheType getCacheType(final String type) {
         if (type.equalsIgnoreCase("Traditional")) {
-            return CacheType.TRADITIONAL.id;
+            return CacheType.TRADITIONAL;
         } else if (type.equalsIgnoreCase("Multi")) {
-            return CacheType.MULTI.id;
+            return CacheType.MULTI;
         } else if (type.equalsIgnoreCase("Quiz")) {
-            return CacheType.MYSTERY.id;
+            return CacheType.MYSTERY;
         } else if (type.equalsIgnoreCase("Virtual")) {
-            return CacheType.VIRTUAL.id;
+            return CacheType.VIRTUAL;
         }
-        return CacheType.UNKNOWN.id;
+        return CacheType.UNKNOWN;
     }
 
     private static JSONObject request(final String geoCode, final String service, final Parameters params) {
