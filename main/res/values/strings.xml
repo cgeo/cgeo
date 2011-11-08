@@ -926,6 +926,9 @@
 
   <!-- changelog -->
   <string name="changelog">\n
+    <b>08.11.2011</b>\n
+    · fix: adaption to GC.com changes\n
+    \n\n
     <b>31.10.2011</b>\n
     · fix: Store for offline from Live map\n
     \n\n
