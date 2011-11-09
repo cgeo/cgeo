@@ -7,10 +7,10 @@ import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.GeopointParser;
+import cgeo.geocaching.utils.CancellableHandler;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.os.Handler;
 import android.util.Log;
 
 import java.io.IOException;
@@ -145,7 +145,7 @@ public final class LocParser extends FileParser {
     }
 
     @Override
-    public Collection<cgCache> parse(InputStream stream, Handler progressHandler) throws IOException, ParserException {
+    public Collection<cgCache> parse(InputStream stream, CancellableHandler progressHandler) throws IOException, ParserException {
         // TODO: progress reporting happens during reading stream only, not during parsing
         String streamContent = readStream(stream, progressHandler).toString();
         final Map<String, cgCoord> coords = parseCoordinates(streamContent);
