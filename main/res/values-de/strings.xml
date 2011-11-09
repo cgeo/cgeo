@@ -564,8 +564,8 @@
   <string name="gpx_import_error_parser">Dateiformat nicht ok</string>
   <string name="gpx_import_error_unexpected">Unerwarteter Fehler</string>
   <string name="gpx_import_confirm">Soll die GPX-Datei importiert werden?</string>
-  <string name="gpx_import_loading">Lade Caches von GPS-Datei</string>
-      
+  <string name="gpx_import_canceled">Der GPX-Import wurde abgebrochen</string>      
+
   <!-- map file select -->
   <string name="map_file_select_title">Wähle eine Kartendatei</string>
 

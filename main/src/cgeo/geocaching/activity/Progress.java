@@ -27,6 +27,22 @@ public class Progress {
         }
     }
 
+    public synchronized void show(final Context context, final String title, final String message, final int style, final Message cancelMessage) {
+        if (dialog == null) {
+            dialog = new ProgressDialog(context);
+            dialog.setTitle(title);
+            dialog.setMessage(message);
+            dialog.setProgressStyle(style);
+            if (cancelMessage != null) {
+                dialog.setCancelable(true);
+                dialog.setCancelMessage(cancelMessage);
+            } else {
+                dialog.setCancelable(false);
+            }
+            dialog.show();
+        }
+    }
+
     public synchronized void setMessage(final String message) {
         if (dialog != null && dialog.isShowing()) {
             dialog.setMessage(message);
@@ -37,4 +53,16 @@ public class Progress {
         return dialog != null && dialog.isShowing();
     }
 
+    public synchronized void setMaxProgressAndReset(final int max) {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.setMax(max);
+            dialog.setProgress(0);
+        }
+    }
+
+    public synchronized void setProgress(final int progress) {
+        if (dialog != null && dialog.isShowing()) {
+            dialog.setProgress(progress);
+        }
+    }
 }

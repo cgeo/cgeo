@@ -11,7 +11,6 @@ import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.test.R;
 
 import android.content.res.Resources;
-import android.os.Handler;
 import android.test.InstrumentationTestCase;
 
 import java.io.IOException;
@@ -190,7 +189,7 @@ public class GPXParserTest extends InstrumentationTestCase {
             final Resources res = getInstrumentation().getContext().getResources();
             final InputStream instream = res.openRawResource(resourceId);
             try {
-                caches = parser.parse(instream, new Handler());
+                caches = parser.parse(instream, null);
                 assertNotNull(caches);
             } finally {
                 instream.close();

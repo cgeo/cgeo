@@ -23,7 +23,7 @@ public class GPXImportActivity extends AbstractActivity {
                 .setCancelable(false)
                 .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        (new GPXImporter(cgList.STANDARD_LIST_ID)).importGPX(GPXImportActivity.this, getIntent().getData(), getContentResolver());
+                        (new GPXImporter(GPXImportActivity.this, cgList.STANDARD_LIST_ID)).importGPX(getIntent().getData(), getContentResolver());
                     }
                 })
                 .setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
