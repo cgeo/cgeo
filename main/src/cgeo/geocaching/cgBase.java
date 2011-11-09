@@ -11,6 +11,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocParser;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -3385,8 +3386,7 @@ public class cgBase {
             final String uri = "http://maps.googleapis.com/maps/api/elevation/json";
             final Parameters params = new Parameters(
                     "sensor", "false",
-                    "locations", String.format((Locale) null, "%.6f", coords.getLatitude()) + "," +
-                            String.format((Locale) null, "%.6f", coords.getLongitude()));
+                    "locations", coords.format(Format.LAT_LON_DECDEGREE_COMMA));
             final JSONObject response = requestJSON(uri, params);
 
             if (response == null) {

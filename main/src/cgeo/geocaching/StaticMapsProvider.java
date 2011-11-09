@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.files.LocalStorage;
+import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -12,7 +13,6 @@ import android.view.Display;
 import android.view.WindowManager;
 
 import java.io.File;
-import java.util.Locale;
 
 public class StaticMapsProvider {
     private static final String MARKERS_URL = "http://cgeo.carnero.cc/_markers/";
@@ -58,8 +58,7 @@ public class StaticMapsProvider {
             return;
         }
 
-        final String latlonMap = String.format((Locale) null, "%.6f", cache.getCoords().getLatitude()) + "," +
-                String.format((Locale) null, "%.6f", cache.getCoords().getLongitude());
+        final String latlonMap = cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
         final Display display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         final int maxWidth = display.getWidth() - 25;
         final int maxHeight = display.getHeight() - 25;
@@ -82,9 +81,7 @@ public class StaticMapsProvider {
                 waypoints.append("marker_waypoint_");
                 waypoints.append(waypoint.getWaypointType() != null ? waypoint.getWaypointType().id : null);
                 waypoints.append(".png%7C");
-                waypoints.append(String.format((Locale) null, "%.6f", waypoint.getCoords().getLatitude()));
-                waypoints.append(',');
-                waypoints.append(String.format((Locale) null, "%.6f", waypoint.getCoords().getLongitude()));
+                waypoints.append(waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA));
             }
         }
 

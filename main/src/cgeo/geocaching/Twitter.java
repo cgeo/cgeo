@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.network.OAuth;
 
 import org.apache.http.HttpResponse;
@@ -22,8 +23,8 @@ public final class Twitter {
             Parameters parameters = new Parameters("status", status);
             if (coords != null) {
                 parameters.put(
-                        "lat", String.format("%.6f", coords.getLatitude()),
-                        "long", String.format("%.6f", coords.getLongitude()),
+                        "lat", coords.format(Format.LAT_DECDEGREE_RAW),
+                        "long", coords.format(Format.LON_DECDEGREE_RAW),
                         "display_coordinates", "true");
             }
 

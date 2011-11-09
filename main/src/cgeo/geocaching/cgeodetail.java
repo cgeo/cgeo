@@ -9,6 +9,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
@@ -1415,8 +1416,7 @@ public class cgeodetail extends AbstractActivity {
             BitmapDrawable image = null;
 
             try {
-                final String latlonMap = String.format((Locale) null, "%.6f", cache.getCoords().getLatitude()) + "," +
-                        String.format((Locale) null, "%.6f", cache.getCoords().getLongitude());
+                final String latlonMap = cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
                 final Display display = ((WindowManager) getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 
                 int width = display.getWidth();

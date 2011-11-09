@@ -1,13 +1,13 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
 
 import android.util.Log;
 
-import java.util.Locale;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
@@ -78,8 +78,8 @@ public class Go4Cache extends Thread {
                     continue;
                 }
 
-                final String latStr = String.format((Locale) null, "%.6f", currentCoords.getLatitude());
-                final String lonStr = String.format((Locale) null, "%.6f", currentCoords.getLongitude());
+                final String latStr = currentCoords.format(Format.LAT_DECDEGREE_RAW);
+                final String lonStr = currentCoords.format(Format.LON_DECDEGREE_RAW);
                 final Parameters params = new Parameters(
                         "u", username,
                         "lt", latStr,

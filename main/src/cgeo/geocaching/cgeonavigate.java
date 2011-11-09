@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.maps.CGeoMap;
 
 import org.apache.commons.lang3.StringUtils;
@@ -277,9 +278,7 @@ public class cgeonavigate extends AbstractActivity {
             setDestCoords();
             updateDistanceInfo();
 
-            Log.d(Settings.tag, "destination set: " + title + " (" +
-                    String.format(Locale.getDefault(), "%.8f", dstCoords.getLatitude()) + " | " +
-                    String.format(Locale.getDefault(), "%.8f", dstCoords.getLongitude()) + ")");
+            Log.d(Settings.tag, "destination set: " + title + " (" + dstCoords.format(Format.LAT_LON_DECMINUTE_PIPE) + ")");
             return true;
         }
 

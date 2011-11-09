@@ -6,13 +6,13 @@ import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 class RMapsApp extends AbstractNavigationApp {
 
@@ -34,20 +34,12 @@ class RMapsApp extends AbstractNavigationApp {
             if (isInstalled(activity)) {
                 final ArrayList<String> locations = new ArrayList<String>();
                 if (cache != null && cache.getCoords() != null) {
-                    locations.add(String.format((Locale) null, "%.6f",
-                            cache.getCoords().getLatitude())
-                            + ","
-                            + String.format((Locale) null, "%.6f",
-                                    cache.getCoords().getLongitude())
+                    locations.add(cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA)
                             + ";"
                             + cache.getGeocode()
                             + ";" + cache.getName());
                 } else if (waypoint != null && waypoint.getCoords() != null) {
-                    locations.add(String.format((Locale) null, "%.6f",
-                            waypoint.getCoords().getLatitude())
-                            + ","
-                            + String.format((Locale) null, "%.6f",
-                                    waypoint.getCoords().getLongitude())
+                    locations.add(waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA)
                             + ";"
                             + waypoint.getLookup()
                             + ";" + waypoint.getName());
