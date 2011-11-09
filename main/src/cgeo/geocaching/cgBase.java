@@ -2236,65 +2236,6 @@ public class cgBase {
         return page;
     }
 
-    public static List<cgUser> getGeocachersInViewport(final String username, final Double latMin, final Double latMax, final Double lonMin, final Double lonMax) {
-        final List<cgUser> users = new ArrayList<cgUser>();
-
-        if (username == null) {
-            return users;
-        }
-        if (latMin == null || latMax == null || lonMin == null || lonMax == null) {
-            return users;
-        }
-
-        final Parameters params = new Parameters(
-                "u", username,
-                "ltm", String.format((Locale) null, "%.6f", latMin),
-                "ltx", String.format((Locale) null, "%.6f", latMax),
-                "lnm", String.format((Locale) null, "%.6f", lonMin),
-                "lnx", String.format((Locale) null, "%.6f", lonMax));
-
-        final String data = getResponseData(postRequest("http://api.go4cache.com/get.php", params));
-
-        if (StringUtils.isBlank(data)) {
-            Log.e(Settings.tag, "cgeoBase.getGeocachersInViewport: No data from server");
-            return null;
-        }
-
-        try {
-            final JSONObject dataJSON = new JSONObject(data);
-
-            final JSONArray usersData = dataJSON.getJSONArray("users");
-            if (usersData != null && usersData.length() > 0) {
-                int count = usersData.length();
-                JSONObject oneUser = null;
-                for (int i = 0; i < count; i++) {
-                    final cgUser user = new cgUser();
-                    oneUser = usersData.getJSONObject(i);
-                    if (oneUser != null) {
-                        final String located = oneUser.getString("located");
-                        if (located != null) {
-                            user.located = dateSqlIn.parse(located);
-                        } else {
-                            user.located = new Date();
-                        }
-                        user.username = oneUser.getString("user");
-                        user.coords = new Geopoint(oneUser.getDouble("latitude"), oneUser.getDouble("longitude"));
-                        user.action = oneUser.getString("action");
-                        user.client = oneUser.getString("client");
-
-                        if (user.coords != null) {
-                            users.add(user);
-                        }
-                    }
-                }
-            }
-        } catch (Exception e) {
-            Log.e(Settings.tag, "cgBase.getGeocachersInViewport: " + e.toString());
-        }
-
-        return users;
-    }
-
     public static List<cgCache> filterSearchResults(final cgSearch search, final cgCacheWrap caches, final boolean excludeDisabled, final boolean excludeMine, final CacheType cacheType) {
         List<cgCache> cacheList = new ArrayList<cgCache>();
         if (caches != null) {

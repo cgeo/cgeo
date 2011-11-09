@@ -2,12 +2,20 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
+import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.util.Log;
 
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
@@ -100,5 +108,71 @@ public class Go4Cache extends Thread {
         } catch (InterruptedException e) {
             Log.e(Settings.tag, "Go4Cache.run: interrupted", e);
         }
+    }
+
+    /**
+     * Return an immutable list of users present in the given viewport.
+     *
+     * @param username
+     *            the current username
+     * @param viewport
+     *            the current viewport
+     * @return the list of users present in the viewport
+     */
+    public static List<cgUser> getGeocachersInViewport(final String username, final Viewport viewport) {
+        final List<cgUser> users = new ArrayList<cgUser>();
+
+        if (username == null) {
+            return users;
+        }
+
+        final Parameters params = new Parameters(
+                "u", username,
+                "ltm", viewport.bottomLeft.format(Format.LAT_DECDEGREE_RAW),
+                "ltx", viewport.topRight.format(Format.LAT_DECDEGREE_RAW),
+                "lnm", viewport.bottomLeft.format(Format.LON_DECDEGREE_RAW),
+                "lnx", viewport.topRight.format(Format.LON_DECDEGREE_RAW));
+
+        final String data = cgBase.getResponseData(cgBase.postRequest("http://api.go4cache.com/get.php", params));
+
+        if (StringUtils.isBlank(data)) {
+            Log.e(Settings.tag, "cgeoBase.getGeocachersInViewport: No data from server");
+            return null;
+        }
+
+        try {
+            final JSONArray usersData = new JSONObject(data).getJSONArray("users");
+            final int count = usersData.length();
+            for (int i = 0; i < count; i++) {
+                final JSONObject oneUser = usersData.getJSONObject(i);
+                users.add(parseUser(oneUser));
+            }
+        } catch (Exception e) {
+            Log.e(Settings.tag, "cgBase.getGeocachersInViewport: " + e.toString());
+        }
+
+        return Collections.unmodifiableList(users);
+    }
+
+    /**
+     * Parse user information from go4cache.com.
+     *
+     * @param oneUser
+     *            a JSON object
+     * @return a cgCache user filled with information
+     * @throws JSONException
+     *             if JSON could not be parsed correctly
+     * @throws ParseException
+     *             if the date could not be parsed as expected
+     */
+    private static cgUser parseUser(final JSONObject oneUser) throws JSONException, ParseException {
+        final cgUser user = new cgUser();
+        final String located = oneUser.getString("located");
+        user.located = cgBase.dateSqlIn.parse(located);
+        user.username = oneUser.getString("user");
+        user.coords = new Geopoint(oneUser.getDouble("latitude"), oneUser.getDouble("longitude"));
+        user.action = oneUser.getString("action");
+        user.client = oneUser.getString("client");
+        return user;
     }
 }

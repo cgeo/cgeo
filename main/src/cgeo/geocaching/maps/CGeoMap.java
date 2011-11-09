@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.Go4Cache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.Settings.mapSourceEnum;
@@ -1494,6 +1495,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
         @Override
         public void run() {
+            final Geopoint center = new Geopoint((int) centerLat, (int) centerLon);
+            final Viewport viewport = new Viewport(center, spanLat / 1e6 * 1.5, spanLon / 1e6 * 1.5);
+
             try {
                 stop = false;
                 working = true;
@@ -1503,24 +1507,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                double latMin = (centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
-                double latMax = (centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
-                double lonMin = (centerLon / 1e6) - ((spanLon / 1e6) / 2) - ((spanLon / 1e6) / 4);
-                double lonMax = (centerLon / 1e6) + ((spanLon / 1e6) / 2) + ((spanLon / 1e6) / 4);
-                double llCache;
-
-                if (latMin > latMax) {
-                    llCache = latMax;
-                    latMax = latMin;
-                    latMin = llCache;
-                }
-                if (lonMin > lonMax) {
-                    llCache = lonMax;
-                    lonMax = lonMin;
-                    lonMin = llCache;
-                }
-
-                users = cgBase.getGeocachersInViewport(Settings.getUsername(), latMin, latMax, lonMin, lonMax);
+                users = Go4Cache.getGeocachersInViewport(Settings.getUsername(), viewport);
 
                 if (stop) {
                     return;
