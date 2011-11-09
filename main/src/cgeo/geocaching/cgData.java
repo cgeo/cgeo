@@ -5,7 +5,6 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.Geopoint.MalformedCoordinateException;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
@@ -1465,14 +1464,7 @@ public class cgData {
             return null;
         }
 
-        try {
-            return new Geopoint(cursor.getDouble(indexLat), cursor.getDouble(indexLon));
-        } catch (MalformedCoordinateException e) {
-            // TODO: check whether the exception should be returned to the caller instead,
-            // as it might want to remove an invalid geopoint from the database.
-            Log.e(Settings.tag, "cannot parse geopoint from database: " + e.getMessage());
-            return null;
-        }
+        return new Geopoint(cursor.getDouble(indexLat), cursor.getDouble(indexLon));
     }
 
     /**

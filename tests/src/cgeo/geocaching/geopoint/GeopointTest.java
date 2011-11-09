@@ -1,8 +1,5 @@
 package cgeo.geocaching.geopoint;
 
-import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.Geopoint.GeopointException;
-
 import android.test.AndroidTestCase;
 
 import junit.framework.Assert;
@@ -16,7 +13,7 @@ public class GeopointTest extends AndroidTestCase {
     }
 
     public static void testCreationAtLimit() {
-        // No exception should be raised at limits.
+        // No exception should be raised.
         final Geopoint gp1 = new Geopoint(90.0, 10.0);
         Assert.assertEquals(90, gp1.getLatitude(), 1e-8);
 
@@ -25,26 +22,6 @@ public class GeopointTest extends AndroidTestCase {
 
         final Geopoint gp3 = new Geopoint(10.0, 180.0);
         Assert.assertEquals(180, gp3.getLongitude(), 1e-8);
-
-        // 180 should be preferred to -180
-        final Geopoint gp4 = new Geopoint(10.0, -180.0);
-        Assert.assertEquals(180, gp4.getLongitude(), 1e-8);
-    }
-
-    private static void createShouldFail(final double lat, final double lon) {
-        try {
-            final Geopoint gp = new Geopoint(lat, lon);
-            Assert.fail("creation should fail: " + gp);
-        } catch (GeopointException e) {
-            // Success
-        }
-    }
-
-    public static void testCreationFails() {
-        createShouldFail(90.1, 0.0);
-        createShouldFail(-90.1, 0.0);
-        createShouldFail(0.0, 180.1);
-        createShouldFail(0.0, -180.1);
     }
 
     public static void testEqual() {

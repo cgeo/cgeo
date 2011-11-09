@@ -21,22 +21,11 @@ public final class Geopoint
      *            latitude
      * @param lon
      *            longitude
-     * @throws MalformedCoordinateException
-     *             if any coordinate is incorrect
      */
     public Geopoint(final double lat, final double lon)
     {
-        if (lat <= 90 && lat >= -90) {
-            latitude = lat;
-        } else {
-            throw new MalformedCoordinateException("malformed latitude: " + lat);
-        }
-        if (lon <= 180 && lon >= -180) {
-            // Prefer 180 degrees rather than the equivalent -180.
-            longitude = lon == -180 ? 180 : lon;
-        } else {
-            throw new MalformedCoordinateException("malformed longitude: " + lon);
-        }
+        latitude = lat;
+        longitude = lon;
     }
 
     /**
@@ -46,8 +35,6 @@ public final class Geopoint
      *            latitude
      * @param lon
      *            longitude
-     * @throws MalformedCoordinateException
-     *             if any coordinate is incorrect
      */
     public Geopoint(final int lat, final int lon)
     {
@@ -61,8 +48,6 @@ public final class Geopoint
      *            string to parse
      * @throws GeopointParser.ParseException
      *             if the string cannot be parsed
-     * @throws MalformedCoordinateException
-     *             if any coordinate is incorrect
      * @see GeopointParser.parse()
      */
     public Geopoint(final String text) {
@@ -78,8 +63,6 @@ public final class Geopoint
      *            longitude string to parse
      * @throws GeopointParser.ParseException
      *             if any argument string cannot be parsed
-     * @throws MalformedCoordinateException
-     *             if any coordinate is incorrect
      * @see GeopointParser.parse()
      */
     public Geopoint(final String latText, final String lonText) {
@@ -255,17 +238,6 @@ public final class Geopoint
         private static final long serialVersionUID = 1L;
 
         public GeopointException(String msg)
-        {
-            super(msg);
-        }
-    }
-
-    public static class MalformedCoordinateException
-            extends GeopointException
-    {
-        private static final long serialVersionUID = 1L;
-
-        public MalformedCoordinateException(String msg)
         {
             super(msg);
         }

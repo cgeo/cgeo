@@ -3,7 +3,6 @@ package cgeo.geocaching;
 import cgeo.geocaching.Settings.coordInputFormatEnum;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.Geopoint.MalformedCoordinateException;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser.ParseException;
 
@@ -358,11 +357,6 @@ public class cgeocoords extends Dialog {
                     context.showToast(context.getResources().getString(R.string.err_parse_lat_lon));
                 }
                 return false;
-            } catch (MalformedCoordinateException e) {
-                if (signalError) {
-                    context.showToast(context.getResources().getString(R.string.err_invalid_lat_lon));
-                }
-                return false;
             }
             return true;
         }
@@ -411,14 +405,7 @@ public class cgeocoords extends Dialog {
         latitude *= (bLat.getText().toString().equalsIgnoreCase("S") ? -1 : 1);
         longitude *= (bLon.getText().toString().equalsIgnoreCase("W") ? -1 : 1);
 
-        try {
-            gp = new Geopoint(latitude, longitude);
-        } catch (MalformedCoordinateException e) {
-            if (signalError) {
-                context.showToast(context.getResources().getString(R.string.err_invalid_lat_lon));
-            }
-            return false;
-        }
+        gp = new Geopoint(latitude, longitude);
         return true;
     }
 
