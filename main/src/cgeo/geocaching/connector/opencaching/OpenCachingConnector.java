@@ -2,11 +2,10 @@ package cgeo.geocaching.connector.opencaching;
 
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.connector.AbstractConnector;
-import cgeo.geocaching.connector.IConnector;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class OpenCachingConnector extends AbstractConnector implements IConnector {
+public class OpenCachingConnector extends AbstractConnector {
 
     private final String host;
     private final String name;

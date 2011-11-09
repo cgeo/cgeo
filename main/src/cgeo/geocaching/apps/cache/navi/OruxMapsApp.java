@@ -11,7 +11,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 
-class OruxMapsApp extends AbstractNavigationApp implements NavigationApp {
+class OruxMapsApp extends AbstractNavigationApp {
 
     private static final String INTENT = "com.oruxmaps.VIEW_MAP_ONLINE";
 

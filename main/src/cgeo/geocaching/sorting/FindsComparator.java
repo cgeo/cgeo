@@ -4,8 +4,7 @@ import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 
-public class FindsComparator extends AbstractCacheComparator implements
-        CacheComparator {
+public class FindsComparator extends AbstractCacheComparator {
 
     private cgeoapplication app;
 

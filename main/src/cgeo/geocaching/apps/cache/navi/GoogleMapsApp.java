@@ -16,7 +16,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.util.Log;
 
-class GoogleMapsApp extends AbstractNavigationApp implements NavigationApp {
+class GoogleMapsApp extends AbstractNavigationApp {
 
     GoogleMapsApp(final Resources res) {
         super(res.getString(R.string.cache_menu_map_ext), null);

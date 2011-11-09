@@ -16,8 +16,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.util.Log;
 
-class GoogleNavigationApp extends AbstractNavigationApp implements
-        NavigationApp {
+class GoogleNavigationApp extends AbstractNavigationApp {
 
     GoogleNavigationApp(final Resources res) {
         super(res.getString(R.string.cache_menu_tbt), null);

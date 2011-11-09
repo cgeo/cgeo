@@ -6,13 +6,12 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCacheWrap;
 import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgeoapplication;
-import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
 
 import java.util.List;
 
-public class ApiOpenCachingConnector extends OpenCachingConnector implements IConnector {
+public class ApiOpenCachingConnector extends OpenCachingConnector {
 
     private final String cK;
 

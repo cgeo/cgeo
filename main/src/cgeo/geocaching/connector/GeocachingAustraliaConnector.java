@@ -4,7 +4,7 @@ import cgeo.geocaching.cgCache;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class GeocachingAustraliaConnector extends AbstractConnector implements IConnector {
+public class GeocachingAustraliaConnector extends AbstractConnector {
 
     @Override
     public String getName() {

@@ -11,7 +11,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 
-class RadarApp extends AbstractNavigationApp implements NavigationApp {
+class RadarApp extends AbstractNavigationApp {
 
     private static final String INTENT = "com.google.android.radar.SHOW_RADAR";
     private static final String PACKAGE_NAME = "com.eclipsim.gpsstatus2";

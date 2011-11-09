@@ -4,7 +4,7 @@ import cgeo.geocaching.cgCache;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class GeopeitusConnector extends AbstractConnector implements IConnector {
+public class GeopeitusConnector extends AbstractConnector {
 
     @Override
     public String getName() {

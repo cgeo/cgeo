@@ -17,7 +17,7 @@ import android.util.Log;
 
 import java.util.List;
 
-public class GCConnector extends AbstractConnector implements IConnector {
+public class GCConnector extends AbstractConnector {
 
     @Override
     public boolean canHandle(String geocode) {

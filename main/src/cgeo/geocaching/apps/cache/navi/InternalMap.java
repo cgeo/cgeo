@@ -12,8 +12,7 @@ import cgeo.geocaching.maps.CGeoMap;
 import android.app.Activity;
 import android.content.res.Resources;
 
-class InternalMap extends AbstractInternalMap implements
-        NavigationApp {
+class InternalMap extends AbstractInternalMap {
 
     InternalMap(Resources res) {
         super(res.getString(R.string.cache_menu_map), null);

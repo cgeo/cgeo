@@ -7,7 +7,6 @@ import cgeo.geocaching.cgeodetail;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
-import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
 
 import org.apache.commons.lang3.StringUtils;
@@ -25,7 +24,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class OtherCachersOverlay extends AbstractItemizedOverlay implements GeneralOverlay {
+public class OtherCachersOverlay extends AbstractItemizedOverlay {
 
     private List<OtherCachersOverlayItemImpl> items = new ArrayList<OtherCachersOverlayItemImpl>();
     private Context context = null;

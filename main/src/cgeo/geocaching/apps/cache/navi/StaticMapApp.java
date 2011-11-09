@@ -14,8 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 
-class StaticMapApp extends AbstractNavigationApp implements
-        NavigationApp {
+class StaticMapApp extends AbstractNavigationApp {
 
     StaticMapApp(final Resources res) {
         super(res.getString(R.string.cache_menu_map_static), null);

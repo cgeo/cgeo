@@ -15,7 +15,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 
-class StreetviewApp extends AbstractNavigationApp implements NavigationApp {
+class StreetviewApp extends AbstractNavigationApp {
 
     StreetviewApp(final Resources res) {
         super(res.getString(R.string.cache_menu_streetview), null);
