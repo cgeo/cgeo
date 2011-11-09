@@ -836,8 +836,8 @@
   <string name="attribute_restrooms_no">Keine öffentliche Toiletten in der Nähe</string>
   <string name="attribute_phone_yes">Telefon in der Nähe</string>
   <string name="attribute_phone_no">Kein Telefon in der Nähe</string>
-  <string name="attribute_picnic_yes">Picknickmöglichkeit in der Nähe</string>
-  <string name="attribute_picnic_no">Keine Picknickmöglichkeit in der Nähe</string>
+  <string name="attribute_picnic_yes">Picknicktische in der Nähe</string>
+  <string name="attribute_picnic_no">Keine Picknicktische in der Nähe</string>
   <string name="attribute_camping_yes">Camping möglich</string>
   <string name="attribute_camping_no">Camping nicht möglich</string>
   <string name="attribute_stroller_yes">Mit Kinderwagen erreichbar</string>
