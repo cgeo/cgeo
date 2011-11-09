@@ -125,6 +125,7 @@
   <string name="err_comm">Neznáma chyba pri komunikácii</string>
   <string name="err_missing_auth">Nevyplnené používateľské meno a/alebo heslo.</string>
   <string name="err_wrong">Prihlasovacie údaje sú nesprávne</string>
+  <string name="err_maintenance">Na webe Geocaching.com prebieha údržba, opakujte požiadavku neskôr. c:geo funguje v offline režime.</string>
   <string name="err_license">Používateľ nepotvrdil súhlas s licenčnou dohodou serveru Geocaching.com, takže c:geo nemôže načítať koordináty skrýše.</string>
   <string name="err_unpublished">Požadovaná skrýša nebola publikovaná</string>
   <string name="err_premium_only">Skrýša je dostupná iba pre platiacich používateľov Geocaching.com</string>
@@ -529,6 +530,7 @@
   <string name="cache_geocode">GC kód</string>
   <string name="cache_name">Názov</string>
   <string name="cache_type">Typ</string>
+  <string name="cache_size">Veľkosť</string>
   <string name="cache_distance">Vzdialenosť</string>
   <string name="cache_difficulty">Náročnosť</string>
   <string name="cache_terrain">Terén</string>
