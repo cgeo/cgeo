@@ -96,7 +96,7 @@ public class cgeodetail extends AbstractActivity {
     private TextView cacheDistance = null;
     private String contextMenuUser = null;
     private Spanned longDesc = null;
-    private Boolean longDescDisplayed = false;
+    private boolean longDescDisplayed = false;
     private loadCache threadCache = null;
     private loadLongDesc threadLongDesc = null;
     private Thread storeThread = null;

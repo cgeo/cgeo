@@ -200,11 +200,11 @@ public class cgeoapplication extends Application {
         databaseCleaned = true;
     }
 
-    public Boolean isThere(String geocode, String guid, boolean detailed, boolean checkTime) {
+    public boolean isThere(String geocode, String guid, boolean detailed, boolean checkTime) {
         return getStorage().isThere(geocode, guid, detailed, checkTime);
     }
 
-    public Boolean isOffline(String geocode, String guid) {
+    public boolean isOffline(String geocode, String guid) {
         return getStorage().isOffline(geocode, guid);
     }
 

@@ -1,7 +1,5 @@
 package gnu.android.app.appmanualclient;
 
-import java.util.List;
-
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +8,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.util.Log;
+
+import java.util.List;
 
 /**
  * The "App Manual Reader" client is a class to be used in applications which
@@ -200,7 +200,7 @@ public class AppManualReaderClient {
 	 *                {@literal fallbackUri} was given.
 	 */
 	public static void openManual(String manualIdentifier, String topic,
-			Context context, String fallbackUri, Boolean contextAffinity)
+            Context context, String fallbackUri, boolean contextAffinity)
 			throws ActivityNotFoundException {
 		//
 		// The path of an "appmanual:" URI consists simply of the locale

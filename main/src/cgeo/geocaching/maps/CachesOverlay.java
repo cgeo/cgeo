@@ -42,7 +42,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
     private List<CachesOverlayItemImpl> items = new ArrayList<CachesOverlayItemImpl>();
     private Context context = null;
-    private Boolean fromDetail = false;
+    private boolean fromDetail = false;
     private boolean displayCircles = false;
     private ProgressDialog waitDialog = null;
     private Point center = new Point();
@@ -52,7 +52,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
     private PaintFlagsDrawFilter remfil = null;
     private MapFactory mapFactory = null;
 
-    public CachesOverlay(ItemizedOverlayImpl ovlImpl, Context contextIn, Boolean fromDetailIn) {
+    public CachesOverlay(ItemizedOverlayImpl ovlImpl, Context contextIn, boolean fromDetailIn) {
         super(ovlImpl);
 
         populate();

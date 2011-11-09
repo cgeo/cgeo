@@ -30,7 +30,7 @@ import android.widget.TextView;
 
 public class cgeopopup extends AbstractActivity {
 
-    private Boolean fromDetail = false;
+    private boolean fromDetail = false;
     private LayoutInflater inflater = null;
     private String geocode = null;
     private cgCache cache = null;

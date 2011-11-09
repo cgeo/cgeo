@@ -33,7 +33,7 @@ public class cgeotouch extends cgLogForm {
     private String guid = null;
     private String geocode = null;
     private String[] viewstates = null;
-    private Boolean gettingViewstate = true;
+    private boolean gettingViewstate = true;
     private Calendar date = Calendar.getInstance();
     private int typeSelected = -1;
     private int attempts = 0;

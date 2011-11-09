@@ -48,7 +48,7 @@ public class cgCache implements ICache {
     private Long detailedUpdate = null;
     private Long visitedDate = null;
     private Integer reason = 0;
-    private Boolean detailed = false;
+    private boolean detailed = false;
     private String geocode = "";
     private String cacheId = "";
     private String guid = "";
@@ -629,11 +629,11 @@ public class cgCache implements ICache {
         this.reason = reason;
     }
 
-    public Boolean getDetailed() {
+    public boolean getDetailed() {
         return detailed;
     }
 
-    public void setDetailed(Boolean detailed) {
+    public void setDetailed(boolean detailed) {
         this.detailed = detailed;
     }
 

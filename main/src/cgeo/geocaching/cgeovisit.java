@@ -50,7 +50,7 @@ public class cgeovisit extends cgLogForm {
     private String text = null;
     private boolean alreadyFound = false;
     private String[] viewstates = null;
-    private Boolean gettingViewstate = true;
+    private boolean gettingViewstate = true;
     private List<cgTrackableLog> trackables = null;
     private Calendar date = Calendar.getInstance();
     private int typeSelected = 1;

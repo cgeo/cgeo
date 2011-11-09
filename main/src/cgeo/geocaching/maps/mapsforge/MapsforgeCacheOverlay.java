@@ -21,7 +21,7 @@ public class MapsforgeCacheOverlay extends ItemizedOverlay<MapsforgeCacheOverlay
     private CachesOverlay base;
     private Lock lock = new ReentrantLock();
 
-    public MapsforgeCacheOverlay(Context contextIn, Drawable markerIn, Boolean fromDetailIn) {
+    public MapsforgeCacheOverlay(Context contextIn, Drawable markerIn, boolean fromDetailIn) {
         super(boundCenterBottom(markerIn));
         base = new CachesOverlay(this, contextIn, fromDetailIn);
     }

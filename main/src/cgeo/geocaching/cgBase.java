@@ -2853,7 +2853,7 @@ public class cgBase {
         }
     }
 
-    public static HttpResponse request(final String uri, final Parameters params, final Boolean xContentType) {
+    public static HttpResponse request(final String uri, final Parameters params, final boolean xContentType) {
         final String fullUri = params == null ? uri : Uri.parse(uri).buildUpon().encodedQuery(params.toString()).build().toString();
         final HttpRequestBase request = new HttpGet(fullUri);
 
