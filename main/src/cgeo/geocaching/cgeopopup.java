@@ -28,8 +28,6 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import java.util.Locale;
-
 public class cgeopopup extends AbstractActivity {
 
     private Boolean fromDetail = false;
@@ -322,7 +320,7 @@ public class cgeopopup extends AbstractActivity {
                 itemStars = (LinearLayout) itemLayout.findViewById(R.id.stars);
 
                 itemName.setText(res.getString(R.string.cache_difficulty));
-                itemValue.setText(String.format(Locale.getDefault(), "%.1f", cache.getDifficulty()) + ' ' + res.getString(R.string.cache_rating_of) + " 5");
+                itemValue.setText(String.format("%.1f", cache.getDifficulty()) + ' ' + res.getString(R.string.cache_rating_of) + " 5");
                 for (int i = 0; i <= 4; i++) {
                     ImageView star = (ImageView) inflater.inflate(R.layout.star, null);
                     if ((cache.getDifficulty() - i) >= 1.0) {
@@ -345,7 +343,7 @@ public class cgeopopup extends AbstractActivity {
                 itemStars = (LinearLayout) itemLayout.findViewById(R.id.stars);
 
                 itemName.setText(res.getString(R.string.cache_terrain));
-                itemValue.setText(String.format(Locale.getDefault(), "%.1f", cache.getTerrain()) + ' ' + res.getString(R.string.cache_rating_of) + " 5");
+                itemValue.setText(String.format("%.1f", cache.getTerrain()) + ' ' + res.getString(R.string.cache_rating_of) + " 5");
                 for (int i = 0; i <= 4; i++) {
                     ImageView star = (ImageView) inflater.inflate(R.layout.star, null);
                     if ((cache.getTerrain() - i) >= 1.0) {
@@ -626,7 +624,7 @@ public class cgeopopup extends AbstractActivity {
         itemStars = (LinearLayout) itemLayout.findViewById(R.id.stars);
 
         itemName.setText(res.getString(R.string.cache_rating));
-        itemValue.setText(String.format(Locale.getDefault(), "%.1f", rating) + ' ' + res.getString(R.string.cache_rating_of) + " 5");
+        itemValue.setText(String.format("%.1f", rating) + ' ' + res.getString(R.string.cache_rating_of) + " 5");
         for (int i = 0; i <= 4; i++) {
             ImageView star = (ImageView) inflater.inflate(R.layout.star, null);
             if ((rating - i) >= 1.0) {

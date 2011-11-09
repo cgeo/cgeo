@@ -42,7 +42,6 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -563,11 +562,11 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
                 if (cache.getDifficulty() != null && cache.getDifficulty() > 0f) {
                     cacheInfo.append(" D:");
-                    cacheInfo.append(String.format(Locale.getDefault(), "%.1f", cache.getDifficulty()));
+                    cacheInfo.append(String.format("%.1f", cache.getDifficulty()));
                 }
                 if (cache.getTerrain() != null && cache.getTerrain() > 0f) {
                     cacheInfo.append(" T:");
-                    cacheInfo.append(String.format(Locale.getDefault(), "%.1f", cache.getTerrain()));
+                    cacheInfo.append(String.format("%.1f", cache.getTerrain()));
                 }
             }
             if (cache.getSize() != null) {

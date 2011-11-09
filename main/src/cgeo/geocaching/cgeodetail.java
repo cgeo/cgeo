@@ -68,7 +68,6 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -1198,7 +1197,7 @@ public class cgeodetail extends AbstractActivity {
         LinearLayout itemStars = (LinearLayout) itemLayout.findViewById(R.id.stars);
 
         itemName.setText(name);
-        itemValue.setText(String.format(Locale.getDefault(), "%.1f", value) + ' ' + res.getString(R.string.cache_rating_of) + " 5");
+        itemValue.setText(String.format("%.1f", value) + ' ' + res.getString(R.string.cache_rating_of) + " 5");
         for (int i = 0; i <= 4; i++) {
             ImageView star = (ImageView) inflater.inflate(R.layout.star, null);
             if ((value - i) >= 1.0) {
@@ -1689,10 +1688,10 @@ public class cgeodetail extends AbstractActivity {
                             dist.append(" ↘");
                         }
                         if (Settings.isUseMetricUnits()) {
-                            dist.append(String.format(Locale.getDefault(), "%.0f", (Math.abs(diff))));
+                            dist.append(String.format("%.0f", (Math.abs(diff))));
                             dist.append(" m");
                         } else {
-                            dist.append(String.format(Locale.getDefault(), "%.0f", (Math.abs(diff) * 3.2808399)));
+                            dist.append(String.format("%.0f", (Math.abs(diff) * 3.2808399)));
                             dist.append(" ft");
                         }
                     }

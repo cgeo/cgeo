@@ -554,9 +554,9 @@ public class cgeo extends AbstractActivity {
 
                     if (geo.accuracyNow != null) {
                         if (Settings.isUseMetricUnits()) {
-                            navAccuracy.setText("±" + String.format(Locale.getDefault(), "%.0f", geo.accuracyNow) + " m");
+                            navAccuracy.setText("±" + String.format("%.0f", geo.accuracyNow) + " m");
                         } else {
-                            navAccuracy.setText("±" + String.format(Locale.getDefault(), "%.0f", (geo.accuracyNow * 3.2808399)) + " ft");
+                            navAccuracy.setText("±" + String.format("%.0f", (geo.accuracyNow * 3.2808399)) + " ft");
                         }
                     } else {
                         navAccuracy.setText(null);

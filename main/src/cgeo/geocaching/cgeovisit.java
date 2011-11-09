@@ -31,7 +31,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class cgeovisit extends cgLogForm {
     static final String EXTRAS_FOUND = "found";
@@ -334,7 +333,7 @@ public class cgeovisit extends cgLogForm {
     }
 
     private static String ratingTextValue(final double rating) {
-        return String.format(Locale.getDefault(), "%.1f", rating);
+        return String.format("%.1f", rating);
     }
 
     @Override

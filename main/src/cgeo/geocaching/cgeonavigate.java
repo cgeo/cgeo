@@ -24,7 +24,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Locale;
 
 public class cgeonavigate extends AbstractActivity {
 
@@ -332,7 +331,7 @@ public class cgeonavigate extends AbstractActivity {
 
         cacheHeading = geo.coordsNow.bearingTo(dstCoords);
         distanceView.setText(cgBase.getHumanDistance(geo.coordsNow.distanceTo(dstCoords)));
-        headingView.setText(String.format(Locale.getDefault(), "%.0f", cacheHeading) + "°");
+        headingView.setText(String.format("%.0f", cacheHeading) + "°");
     }
 
     private class update extends cgUpdateLoc {
@@ -372,9 +371,9 @@ public class cgeonavigate extends AbstractActivity {
 
                     if (geo.accuracyNow != null) {
                         if (Settings.isUseMetricUnits()) {
-                            navAccuracy.setText("±" + String.format(Locale.getDefault(), "%.0f", geo.accuracyNow) + " m");
+                            navAccuracy.setText("±" + String.format("%.0f", geo.accuracyNow) + " m");
                         } else {
-                            navAccuracy.setText("±" + String.format(Locale.getDefault(), "%.0f", (geo.accuracyNow * 3.2808399)) + " ft");
+                            navAccuracy.setText("±" + String.format("%.0f", (geo.accuracyNow * 3.2808399)) + " ft");
                         }
                     } else {
                         navAccuracy.setText(null);
