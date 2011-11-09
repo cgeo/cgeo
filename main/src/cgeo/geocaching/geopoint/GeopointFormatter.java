@@ -10,7 +10,7 @@ public class GeopointFormatter
     /**
      * Predefined formats.
      */
-    public enum Format {
+    public static enum Format {
         /** Example: "-0,123456 10,123456" */
         LAT_LON_DECDEGREE,
         /** Example: "-0.123456,10.123456" (unlocalized) */
