@@ -233,32 +233,6 @@ public final class Geopoint
      * @see GeopointFormatter
      * @return formatted coordinates
      */
-    public String format(GeopointFormatter format)
-    {
-        return format.format(this);
-    }
-
-    /**
-     * Returns formatted coordinates.
-     *
-     * @param format
-     *            the desired format
-     * @see GeopointFormatter
-     * @return formatted coordinates
-     */
-    public String format(String format)
-    {
-        return GeopointFormatter.format(format, this);
-    }
-
-    /**
-     * Returns formatted coordinates.
-     *
-     * @param format
-     *            the desired format
-     * @see GeopointFormatter
-     * @return formatted coordinates
-     */
     public String format(GeopointFormatter.Format format)
     {
         return GeopointFormatter.format(format, this);
@@ -267,7 +241,7 @@ public final class Geopoint
     /**
      * Returns formatted coordinates with default format.
      * Default format is decimalminutes, e.g. N 52° 36.123 E 010° 03.456
-     * 
+     *
      * @return formatted coordinates
      */
     public String toString()
