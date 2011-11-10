@@ -530,6 +530,7 @@
   <string name="cache_geocode">GC-kod</string>
   <string name="cache_name">Namn</string>
   <string name="cache_type">Typ</string>
+  <string name="cache_size">Storlek</string>
   <string name="cache_distance">Avstånd</string>
   <string name="cache_difficulty">Svårighet</string>
   <string name="cache_terrain">Terräng</string>
