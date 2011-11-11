@@ -35,6 +35,7 @@
   <string name="ape">Projekt APE cache</string>
   <string name="gchq">Groundspeak HQ</string>
   <string name="gps">GPS cache utställning</string>
+  <string name="unknown">Okänd cache</string>
 
   <!-- cache sizes -->
   <string name="cache_size_micro">micro</string>
@@ -124,6 +125,7 @@
   <string name="err_comm">Okänt kommunikationsfel</string>
   <string name="err_missing_auth">Användarnamn och/eller lösenord saknas.</string>
   <string name="err_wrong">felaktiga inloggningsuppgifter</string>
+  <string name="err_maintenance">Arbete pågår med servern Geocaching.com, försök igen senare. c:geo fungerar under tiden i offline läge.</string>
   <string name="err_license">användaren inte har bekräftat licensavtalet med Geocaching.com</string>
   <string name="err_unpublished">Den sökta cachen är opubliserad.</string>
   <string name="err_premium_only">Cachen är enbart för premium medlemmar på Geocaching.com</string>
@@ -235,6 +237,7 @@
   <string name="menu_settings">Inställningar</string>
   <string name="menu_history">Loggade cacher</string>
   <string name="menu_filter">Filter</string>
+  <string name="menu_scan_geo">Scanna geokod</string>
 
   <!-- main screen -->
   <string name="live_map_button">Live karta</string>
@@ -249,6 +252,7 @@
   <string name="caches_more_caches">Ladda fler cacher</string>
   <string name="caches_more_caches_no">Inga fler cacher att ladda</string>
   <string name="caches_more_caches_loading">Laddar fler cacher…</string>
+  <string name="caches_more_caches_currently">samtidigt</string>
   <string name="caches_downloading">Laddar ner cacher…\nTid kvar: </string>
   <string name="caches_eta_ltm">mindre än en minut</string>
   <string name="caches_eta_mins"> minuter</string>
@@ -362,6 +366,10 @@
   <string name="init_signature_template_datetime">Datum &amp; Tid</string>
   <string name="init_signature_template_user">Namn</string>
   <string name="init_signature_template_number">Nummer</string>
+  <string name="init_details">Cacheinformation</string>
+  <string name="init_ratingwanted">Ladda cache betyg från GCvote.com</string>
+  <string name="init_elevationwanted">Ladda höjddata för cacher</string>
+  <string name="init_autoload">Ladda full beskrivning automatiskt</string>
   <string name="init_other">Övriga inställningar</string>
   <string name="init_skin">Vitt skal (kräver omstart av c:geo)</string>
   <string name="init_address">Visa adress på huvudskärmen</string>
@@ -375,7 +383,6 @@
   <string name="init_save_log_img">Spara bilder från loggar</string>
   <string name="init_units">Använd amerikanska enheter för avstånd</string>
   <string name="init_nav">Använd Google Navigering</string>
-  <string name="init_autoload">Ladda full beskrivning automatiskt</string>
   <string name="init_log_offline">Vid loggning: spara bara loggen lokalt (visa inte loggningfönster och skicka inte loggen till gc.com)</string>
   <string name="init_livelist">Visa riktning till cacher i listan</string>
   <string name="init_browser">Identifiera c:geo som normal webbläsare</string>
@@ -474,12 +481,13 @@
   <string name="cache_hint">Tips</string>
   <string name="cache_logs">Loggbok</string>
   <string name="cache_dialog_loading_details">Laddar detaljer om cachen…</string>
-  <string name="cache_dialog_loading_details_status_loadpage">Laddar ner från gc.com</string>
+  <string name="cache_dialog_loading_details_status_loadpage">Hämtar från gc.com</string>
   <string name="cache_dialog_loading_details_status_details">Analyserar cacheinformation</string>
-  <string name="cache_dialog_loading_details_status_spoilers">Laddar ner spoilerbilder</string>
-  <string name="cache_dialog_loading_details_status_logs">Laddar ner tidgare loggar</string>
+  <string name="cache_dialog_loading_details_status_spoilers">Hämtar spoilerbilder</string>
+  <string name="cache_dialog_loading_details_status_logs">Hämtar tidgare loggar</string>
   <string name="cache_dialog_loading_details_status_waypoints">Analyserar punkter</string>
-  <string name="cache_dialog_loading_details_status_gcvote">Hämtar betyg från GCVote</string>
+  <string name="cache_dialog_loading_details_status_gcvote">Hämtar betyg från GCVote.com</string>
+  <string name="cache_dialog_loading_details_status_elevation">Hämtar höjddata</string>
   <string name="cache_dialog_loading_details_status_render">Förbereder för visning</string>
   <string name="cache_dialog_loading_description">Laddar beskrivning om cachen…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
@@ -522,6 +530,7 @@
   <string name="cache_geocode">GC-kod</string>
   <string name="cache_name">Namn</string>
   <string name="cache_type">Typ</string>
+  <string name="cache_size">Storlek</string>
   <string name="cache_distance">Avstånd</string>
   <string name="cache_difficulty">Svårighet</string>
   <string name="cache_terrain">Terräng</string>
@@ -557,6 +566,11 @@
   <string name="gpx_import_title">Importera GPX</string>
   <string name="gpx_import_title_reading_file">Läser fil</string>
   <string name="gpx_import_title_caches_imported">Resultat</string>
+  <string name="gpx_import_title_caches_import_failed">Importeringen misslyckades</string>
+  <string name="gpx_import_error_io">Kan inte läsa filen</string>
+  <string name="gpx_import_error_parser">Filens format är felaktigt</string>
+  <string name="gpx_import_error_unexpected">Oväntat fel</string>
+  <string name="gpx_import_confirm">Vill du importera GPX filen till c:geo?</string>
 
   <!-- map file select -->
   <string name="map_file_select_title">Välj kartfil</string>
@@ -592,6 +606,8 @@
   <string name="waypoint_loading">Laddar punkt…</string>
   <string name="waypoint_unknown_coordinates">Koordinaterna ogiltiga</string>
   <string name="waypoint_done">Klar</string>
+  <string name="waypoint_duplicate">Duplicera</string>
+  <string name="waypoint_copy_of">Kopia av</string>
   <string name="search_history">Historik</string>
   <string name="search_history_empty">Inga tidigare destinationer</string>
   <string name="search_remove_destination">Destinationen borttagen</string>
@@ -616,6 +632,7 @@
   <string name="map_static_title">Sparade kartor</string>
   <string name="map_static_loading">Laddar sparade kartor…</string>
   <string name="map_token_err">Eftersom c:geo bara kunde hämta en del av informationen så kan positionen för cacher vara felaktig.</string>
+  <string name="map_as_list">Visa som lista</string>
 
   <!-- search -->
   <string name="search_bar_hint">Sök cache/TB</string>
