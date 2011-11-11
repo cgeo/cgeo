@@ -1,15 +1,12 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.BaseUtils;
 
-import android.test.InstrumentationTestCase;
-
-import java.io.InputStream;
 import java.util.List;
-import java.util.Scanner;
 
-public class TrackablesTest extends InstrumentationTestCase {
+public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
 
     public void testLogPageWithTrackables() {
         List<cgTrackableLog> tbLogs = cgBase.parseTrackableLog(getFileContent(R.raw.log_with_2tb));
@@ -50,11 +47,6 @@ public class TrackablesTest extends InstrumentationTestCase {
         // the next two items are normally available for trackables, but not for this one, so explicitly test for null
         assertNull(trackable.getReleased());
         assertNull(trackable.getOrigin());
-    }
-
-    private String getFileContent(int resourceId) {
-        InputStream ins = getInstrumentation().getContext().getResources().openRawResource(resourceId);
-        return new Scanner(ins).useDelimiter("\\A").next();
     }
 
     private cgTrackable getTB2R124() {

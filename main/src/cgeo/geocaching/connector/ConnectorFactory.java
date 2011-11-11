@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.cgCache;
+import cgeo.geocaching.ICache;
 import cgeo.geocaching.connector.opencaching.ApiOpenCachingConnector;
 import cgeo.geocaching.connector.opencaching.OpenCachingConnector;
 
@@ -9,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 public final class ConnectorFactory {
     private static final UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
     private static final IConnector[] connectors = new IConnector[] {
-            new GCConnector(),
+            GCConnector.getInstance(),
             new OpenCachingConnector("OpenCaching.DE", "www.opencaching.de", "OC"),
             new OpenCachingConnector("OpenCaching.CZ", "www.opencaching.cz", "OZ"),
             new ApiOpenCachingConnector("OpenCaching.CO.UK", "www.opencaching.org.uk", "OK", "arU4okouc4GEjMniE2fq"),
@@ -42,7 +42,7 @@ public final class ConnectorFactory {
         return false;
     }
 
-    public static IConnector getConnector(cgCache cache) {
+    public static IConnector getConnector(ICache cache) {
         return getConnector(cache.getGeocode());
     }
 

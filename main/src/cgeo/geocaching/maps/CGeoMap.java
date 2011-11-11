@@ -372,7 +372,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             final double latitudeIntent = extras.getDouble(EXTRAS_LATITUDE);
             final double longitudeIntent = extras.getDouble(EXTRAS_LONGITUDE);
             coordsIntent = new Geopoint(latitudeIntent, longitudeIntent);
-            waypointTypeIntent = WaypointType.FIND_BY_ID.get(extras.getString(EXTRAS_WPTTYPE));
+            waypointTypeIntent = WaypointType.findById(extras.getString(EXTRAS_WPTTYPE));
             mapStateIntent = extras.getIntArray(EXTRAS_MAPSTATE);
             mapTitle = extras.getString(EXTRAS_MAP_TITLE);
 

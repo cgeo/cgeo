@@ -2226,7 +2226,7 @@ public class cgData {
 
         waypoint.setId(cursor.getInt(cursor.getColumnIndex("_id")));
         waypoint.setGeocode(cursor.getString(cursor.getColumnIndex("geocode")));
-        waypoint.setWaypointType(WaypointType.FIND_BY_ID.get(cursor.getString(cursor.getColumnIndex("type"))));
+        waypoint.setWaypointType(WaypointType.findById(cursor.getString(cursor.getColumnIndex("type"))));
         waypoint.setPrefix(cursor.getString(cursor.getColumnIndex("prefix")));
         waypoint.setLookup(cursor.getString(cursor.getColumnIndex("lookup")));
         waypoint.setName(cursor.getString(cursor.getColumnIndex("name")));

@@ -19,6 +19,19 @@ import java.util.List;
 
 public class GCConnector extends AbstractConnector {
 
+    private static GCConnector instance;
+
+    private GCConnector() {
+        // singleton
+    }
+
+    public static GCConnector getInstance() {
+        if (instance == null) {
+            instance = new GCConnector();
+        }
+        return instance;
+    }
+
     @Override
     public boolean canHandle(String geocode) {
         return StringUtils.startsWithIgnoreCase(geocode, "GC");

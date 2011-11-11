@@ -1356,7 +1356,7 @@ public class cgBase {
                     try {
                         final Matcher matcherWpType = patternWpType.matcher(wp[3]);
                         if (matcherWpType.find() && matcherWpType.groupCount() > 0) {
-                            waypoint.setWaypointType(WaypointType.FIND_BY_ID.get(matcherWpType.group(1).trim()));
+                            waypoint.setWaypointType(WaypointType.findById(matcherWpType.group(1).trim()));
                         }
                     } catch (Exception e) {
                         // failed to parse type

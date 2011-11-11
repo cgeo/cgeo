@@ -3,11 +3,10 @@ package cgeo.geocaching.files;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 
-import android.content.res.Resources;
 import android.os.Handler;
-import android.test.InstrumentationTestCase;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,12 +14,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class LocParserTest extends InstrumentationTestCase {
+public class LocParserTest extends AbstractResourceInstrumentationTestCase {
     private List<cgCache> readLoc(int resourceId) throws IOException, ParserException {
         LocParser parser = new LocParser(1);
         Collection<cgCache> caches = null;
-        final Resources res = getInstrumentation().getContext().getResources();
-        final InputStream instream = res.openRawResource(resourceId);
+        final InputStream instream = getResourceStream(resourceId);
         try {
             caches = parser.parse(instream, new Handler());
             assertNotNull(caches);

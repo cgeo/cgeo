@@ -311,7 +311,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
             } else {
                 dialog.setTitle("waypoint");
 
-                String waypointL10N = cgBase.waypointTypes.get(WaypointType.FIND_BY_ID.get(coordinate.getTypeSpec()));
+                String waypointL10N = cgBase.waypointTypes.get(WaypointType.findById(coordinate.getTypeSpec()));
                 if (waypointL10N == null) {
                     waypointL10N = cgBase.waypointTypes.get(WaypointType.WAYPOINT);
                 }

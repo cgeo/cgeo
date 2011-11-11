@@ -8,11 +8,10 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 
-import android.content.res.Resources;
 import android.os.Handler;
-import android.test.InstrumentationTestCase;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class GPXParserTest extends InstrumentationTestCase {
+public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
     private static final SimpleDateFormat LOG_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'"); // 2010-04-20T07:00:00Z
 
     public void testGPXVersion100() throws Exception {
@@ -187,8 +186,7 @@ public class GPXParserTest extends InstrumentationTestCase {
     private List<cgCache> readVersionedGPX(final GPXParser parser, int... resourceIds) throws IOException, ParserException {
         Collection<cgCache> caches = null;
         for (int resourceId : resourceIds) {
-            final Resources res = getInstrumentation().getContext().getResources();
-            final InputStream instream = res.openRawResource(resourceId);
+            final InputStream instream = getResourceStream(resourceId);
             try {
                 caches = parser.parse(instream, new Handler());
                 assertNotNull(caches);

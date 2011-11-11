@@ -32,13 +32,32 @@ public enum WaypointType {
         this.markerId = markerId;
     }
 
-    public static final Map<String, WaypointType> FIND_BY_ID;
+    /**
+     * inverse lookup of waypoint IDs<br/>
+     * non public so that <code>null</code> handling can be handled centrally in the enum type itself
+     */
+    private static final Map<String, WaypointType> FIND_BY_ID;
     static {
         final HashMap<String, WaypointType> mapping = new HashMap<String, WaypointType>();
         for (WaypointType wt : values()) {
             mapping.put(wt.id, wt);
         }
         FIND_BY_ID = Collections.unmodifiableMap(mapping);
+    }
+
+    /**
+     * inverse lookup of waypoint IDs<br/>
+     * here the <code>null</code> handling shall be done
+     */
+    public static WaypointType findById(final String id) {
+        if (null == id) {
+            return WAYPOINT;
+        }
+        WaypointType waypointType = FIND_BY_ID.get(id);
+        if (null == waypointType) {
+            return WAYPOINT;
+        }
+        return waypointType;
     }
 
 }

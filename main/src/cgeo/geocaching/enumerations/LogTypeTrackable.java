@@ -23,7 +23,7 @@ public enum LogTypeTrackable {
                 return logType;
             }
         }
-        return null;
+        return DO_NOTHING;
     }
 
 }

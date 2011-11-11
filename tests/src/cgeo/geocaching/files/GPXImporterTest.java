@@ -3,21 +3,19 @@ package cgeo.geocaching.files;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 
 import android.os.Handler;
 import android.os.Message;
-import android.test.InstrumentationTestCase;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class GPXImporterTest extends InstrumentationTestCase {
+public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     private TestHandler importStepHandler = new TestHandler();
     private TestHandler progressHandler = new TestHandler();
     private int listId;
@@ -116,22 +114,6 @@ public class GPXImporterTest extends InstrumentationTestCase {
         assertEquals(2, importStepHandler.messages.size());
         assertEquals(GPXImporter.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
         assertEquals(GPXImporter.IMPORT_STEP_FINISHED_WITH_ERROR, importStepHandler.messages.get(1).what);
-    }
-
-    private void copyResourceToFile(int resourceId, File file) throws IOException {
-        final InputStream is = getInstrumentation().getContext().getResources().openRawResource(resourceId);
-        final FileOutputStream os = new FileOutputStream(file);
-
-        try {
-            byte[] buffer = new byte[4096];
-            int byteCount;
-            while ((byteCount = is.read(buffer)) >= 0) {
-                os.write(buffer, 0, byteCount);
-            }
-        } finally {
-            os.close();
-            is.close();
-        }
     }
 
     static class TestHandler extends Handler {

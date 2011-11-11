@@ -812,7 +812,11 @@ public final class Settings {
     }
 
     public static CacheType getCacheType() {
-        return CacheType.getById(sharedPrefs.getString(KEY_CACHE_TYPE, null));
+        String cacheFilterType = sharedPrefs.getString(KEY_CACHE_TYPE, null);
+        if (cacheFilterType == null) {
+            return null;
+        }
+        return CacheType.getById(cacheFilterType);
     }
 
     public static int getWayPointsThreshold() {
