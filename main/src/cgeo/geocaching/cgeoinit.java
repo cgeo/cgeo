@@ -33,7 +33,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.File;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class cgeoinit extends AbstractActivity {
@@ -603,28 +602,7 @@ public class cgeoinit extends AbstractActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void restore(View view) {
-        final ProgressDialog dialog = ProgressDialog.show(this, res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_running), true, false);
-        final AtomicBoolean atomic = new AtomicBoolean(false);
-        Thread restoreThread = new Thread() {
-            final Handler handler = new Handler() {
-                public void handleMessage(Message msg) {
-                    dialog.dismiss();
-                    boolean restored = atomic.get();
-                    if (restored) {
-                        helpDialog(res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_success));
-                    } else {
-                        helpDialog(res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_failed));
-                    }
-                }
-            };
-
-            @Override
-            public void run() {
-                atomic.set(app.restoreDatabase());
-                handler.sendMessage(handler.obtainMessage());
-            }
-        };
-        restoreThread.start();
+        app.restoreDatabase(this);
     }
 
     public boolean saveValues() {

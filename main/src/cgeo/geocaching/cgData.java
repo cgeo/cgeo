@@ -221,6 +221,7 @@ public class cgData {
     public boolean initialized = false;
     private SQLiteStatement statementDescription;
     private SQLiteStatement statementLogCount;
+    private static boolean newlyCreatedDatabase = false;
 
     public cgData(Context contextIn) {
         context = contextIn;
@@ -385,6 +386,7 @@ public class cgData {
 
         @Override
         public void onCreate(SQLiteDatabase db) {
+            newlyCreatedDatabase = true;
             db.execSQL(dbCreateCaches);
             db.execSQL(dbCreateLists);
             db.execSQL(dbCreateAttributes);
@@ -3363,5 +3365,21 @@ public class cgData {
         }
 
         return null;
+    }
+
+    /**
+     * checks if this is a newly created database
+     *
+     * @return
+     */
+    public static boolean isNewlyCreatedDatebase() {
+        return newlyCreatedDatabase;
+    }
+
+    /**
+     * resets flag for newly created database to avoid asking the user multiple times
+     */
+    public static void resetNewlyCreatedDatabase() {
+        newlyCreatedDatabase = false;
     }
 }

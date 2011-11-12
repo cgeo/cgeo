@@ -60,7 +60,7 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
     }
 
     public final void helpDialog(final String title, final String message) {
-        ActivityMixin.helpDialog(this, title, message, null);
+        ActivityMixin.helpDialog(this, title, message);
     }
 
     public final void helpDialog(final String title, final String message, final Drawable icon) {

@@ -401,6 +401,7 @@
   <string name="init_restore_success">Restoration completed.</string>
   <string name="init_restore_failed">Restoration failed.</string>
   <string name="init_restore_running">Restoring cache database…</string>
+  <string name="init_restore_confirm">Database is empty. Do you want to restore the database backup?</string>
   <string name="init_backup_last">Available backup from</string>
   <string name="init_backup_last_no">There is no file with backup.</string>
   <string name="init_mapsources">Map Sources</string>

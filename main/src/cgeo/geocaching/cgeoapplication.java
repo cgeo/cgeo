@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -7,8 +8,13 @@ import cgeo.geocaching.geopoint.Geopoint;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import android.app.Activity;
 import android.app.Application;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.res.Resources;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 import java.io.File;
@@ -17,6 +23,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class cgeoapplication extends Application {
 
@@ -81,8 +88,33 @@ public class cgeoapplication extends Application {
         return cgData.isRestoreFile();
     }
 
-    public boolean restoreDatabase() {
-        return storage.restoreDatabase();
+    /**
+     * restore the database in a new thread, showing a progress window
+     *
+     * @param fromActivity
+     *            calling activity
+     */
+    public void restoreDatabase(final Activity fromActivity) {
+        final Resources res = this.getResources();
+        final ProgressDialog dialog = ProgressDialog.show(fromActivity, res.getString(R.string.init_backup_restore), res.getString(R.string.init_restore_running), true, false);
+        final AtomicBoolean atomic = new AtomicBoolean(false);
+        Thread restoreThread = new Thread() {
+            final Handler handler = new Handler() {
+                public void handleMessage(Message msg) {
+                    dialog.dismiss();
+                    boolean restored = atomic.get();
+                    String message = restored ? res.getString(R.string.init_restore_success) : res.getString(R.string.init_restore_failed);
+                    ActivityMixin.helpDialog(fromActivity, res.getString(R.string.init_backup_restore), message);
+                }
+            };
+
+            @Override
+            public void run() {
+                atomic.set(storage.restoreDatabase());
+                handler.sendMessage(handler.obtainMessage());
+            }
+        };
+        restoreThread.start();
     }
 
     public void cleanGeo() {

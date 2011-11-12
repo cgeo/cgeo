@@ -11,7 +11,9 @@ import cgeo.geocaching.maps.CGeoMap;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -446,7 +448,7 @@ public class cgeo extends AbstractActivity {
             (new firstLogin()).start();
         }
 
-        (new countBubbleUpdate()).start();
+        updateCacheCounter();
         (new cleanDatabase()).start();
 
         if (Settings.getCacheType() != null && !cgBase.cacheTypesInv.containsKey(Settings.getCacheType())) {
@@ -478,7 +480,7 @@ public class cgeo extends AbstractActivity {
         });
         registerForContextMenu(findByOffline);
 
-        (new countBubbleUpdate()).start();
+        updateCacheCounter();
 
         final View advanced = findViewById(R.id.advanced_button);
         advanced.setClickable(true);
@@ -506,6 +508,37 @@ public class cgeo extends AbstractActivity {
         });
 
         setFilterTitle();
+        checkRestore();
+    }
+
+    private void updateCacheCounter() {
+        (new countBubbleUpdate()).start();
+    }
+
+    private void checkRestore() {
+        if (!cgData.isNewlyCreatedDatebase() || null == cgData.isRestoreFile()) {
+            return;
+        }
+        new AlertDialog.Builder(this)
+                .setTitle(res.getString(R.string.init_backup_restore))
+                .setMessage(res.getString(R.string.init_restore_confirm))
+                .setCancelable(false)
+                .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                        cgData.resetNewlyCreatedDatabase();
+                        app.restoreDatabase(cgeo.this);
+                        updateCacheCounter();
+                    }
+                })
+                .setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        cgData.resetNewlyCreatedDatabase();
+                    }
+                })
+                .create()
+                .show();
     }
 
     private class update extends cgUpdateLoc {

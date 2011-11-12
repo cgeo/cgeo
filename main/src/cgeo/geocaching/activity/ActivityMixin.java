@@ -122,6 +122,10 @@ public final class ActivityMixin {
         alert.show();
     }
 
+    public static void helpDialog(Activity activity, String title, String message) {
+        helpDialog(activity, title, message, null);
+    }
+
     protected static void addVisitMenu(IAbstractActivity activity, Menu menu, cgCache cache) {
         if (cache == null) {
             return;
@@ -145,5 +149,4 @@ public final class ActivityMixin {
             }
         }
     }
-
 }
