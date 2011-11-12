@@ -674,7 +674,6 @@ public class cgeovisit extends cgLogForm {
                     types.addAll(typesPre);
                     types.remove(Integer.valueOf(cgBase.LOG_UPDATE_COORDINATES));
                 }
-                typesPre.clear();
             } catch (Exception e) {
                 Log.e(Settings.tag, "cgeovisit.loadData.run: " + e.toString());
             }
