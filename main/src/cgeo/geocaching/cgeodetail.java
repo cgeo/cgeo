@@ -77,6 +77,12 @@ import java.util.Map.Entry;
  */
 public class cgeodetail extends AbstractActivity {
 
+    private static final int MENU_SHARE = 12;
+    private static final int MENU_CALENDAR = 11;
+    private static final int MENU_CACHES_AROUND = 10;
+    private static final int MENU_BROWSER = 7;
+    private static final int MENU_SPOILERS = 5;
+    private static final int MENU_NAVIGATE = 2;
     private static final int CONTEXT_MENU_WAYPOINT_DELETE = 1235;
     private static final int CONTEXT_MENU_WAYPOINT_DUPLICATE = 1234;
 
@@ -580,31 +586,28 @@ public class cgeodetail extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (cache != null && cache.getCoords() != null) {
-            menu.add(0, 2, 0, res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass); // compass
-            SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
+        if (null != cache) {
+            menu.add(0, MENU_NAVIGATE, 0, res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass); // compass
+            final SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
             addNavigationMenuItems(subMenu);
+            menu.add(1, MENU_CALENDAR, 0, res.getString(R.string.cache_menu_event)).setIcon(android.R.drawable.ic_menu_agenda); // add event to calendar
+            addVisitMenu(menu, cache);
+            menu.add(1, MENU_SPOILERS, 0, res.getString(R.string.cache_menu_spoilers)).setIcon(android.R.drawable.ic_menu_gallery); // spoiler images
+            menu.add(0, MENU_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
+            menu.add(1, MENU_BROWSER, 0, res.getString(R.string.cache_menu_browser)).setIcon(R.drawable.ic_menu_globe); // browser
+            menu.add(0, MENU_SHARE, 0, res.getString(R.string.cache_menu_share)).setIcon(android.R.drawable.ic_menu_share); // share cache
         }
-
-        if (cache != null && cache.canBeAddedToCalendar()) {
-            menu.add(1, 11, 0, res.getString(R.string.cache_menu_event)).setIcon(android.R.drawable.ic_menu_agenda); // add event to calendar
-        }
-        addVisitMenu(menu, cache);
-
-        if (cache != null && CollectionUtils.isNotEmpty(cache.getSpoilers())) {
-            menu.add(1, 5, 0, res.getString(R.string.cache_menu_spoilers)).setIcon(android.R.drawable.ic_menu_gallery); // spoiler images
-        }
-
-        if (cache != null && cache.getCoords() != null && cache.supportsCachesAround()) {
-            menu.add(0, 10, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
-        }
-
-        if (cache != null && cache.canOpenInBrowser()) {
-            menu.add(1, 7, 0, res.getString(R.string.cache_menu_browser)).setIcon(R.drawable.ic_menu_globe); // browser
-        }
-        menu.add(0, 12, 0, res.getString(R.string.cache_menu_share)).setIcon(android.R.drawable.ic_menu_share); // share cache
-
         return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(MENU_NAVIGATE).setVisible(null != cache.getCoords());
+        menu.findItem(MENU_CALENDAR).setVisible(cache.canBeAddedToCalendar());
+        menu.findItem(MENU_SPOILERS).setVisible(CollectionUtils.isNotEmpty(cache.getSpoilers()));
+        menu.findItem(MENU_CACHES_AROUND).setVisible(null != cache.getCoords() && cache.supportsCachesAround());
+        menu.findItem(MENU_BROWSER).setVisible(cache.canOpenInBrowser());
+        return super.onPrepareOptionsMenu(menu);
     }
 
     private void addNavigationMenuItems(final Menu menu) {
@@ -621,25 +624,25 @@ public class cgeodetail extends AbstractActivity {
             return false;
         }
 
-        if (menuItem == 2) {
+        if (menuItem == MENU_NAVIGATE) {
             navigateTo();
             return true;
         } else if (menuItem == MENU_LOG_VISIT) {
             logVisit();
             return true;
-        } else if (menuItem == 5) {
+        } else if (menuItem == MENU_SPOILERS) {
             showSpoilers();
             return true;
-        } else if (menuItem == 7) {
+        } else if (menuItem == MENU_BROWSER) {
             cache.openInBrowser(this);
             return true;
-        } else if (menuItem == 10) {
+        } else if (menuItem == MENU_CACHES_AROUND) {
             cachesAround();
             return true;
-        } else if (menuItem == 11) {
+        } else if (menuItem == MENU_CALENDAR) {
             addToCalendar();
             return true;
-        } else if (menuItem == 12) {
+        } else if (menuItem == MENU_SHARE) {
             if (cache != null) {
                 cache.shareCache(this, res);
                 return true;
