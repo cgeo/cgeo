@@ -1306,17 +1306,13 @@ public class cgeodetail extends AbstractActivity {
                     final View.OnClickListener listener = new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent logImgIntent = new Intent(cgeodetail.this, cgeoimages.class);
-                            logImgIntent.putExtra("geocode", geocode.toUpperCase());
-                            logImgIntent.putExtra("type", cgeoimages.LOG_IMAGES);
-                            logImgIntent.putParcelableArrayListExtra("images", logImages);
-                            startActivity(logImgIntent);
+                            cgeoimages.startActivityLogImages(cgeodetail.this, geocode, logImages);
                         }
                     };
 
                     ArrayList<String> titles = new ArrayList<String>();
                     for (int i_img_cnt = 0; i_img_cnt < log.logImages.size(); i_img_cnt++) {
-                        String img_title = log.logImages.get(i_img_cnt).title;
+                        String img_title = log.logImages.get(i_img_cnt).getTitle();
                         if (!StringUtils.isBlank(img_title)) {
                             titles.add(img_title);
                         }
@@ -1647,11 +1643,7 @@ public class cgeodetail extends AbstractActivity {
             showToast(res.getString(R.string.err_detail_no_spoiler));
         }
 
-        Intent spoilersIntent = new Intent(this, cgeoimages.class);
-        spoilersIntent.putExtra("geocode", geocode.toUpperCase());
-        spoilersIntent.putExtra("type", cgeoimages.SPOILER_IMAGES);
-        spoilersIntent.putParcelableArrayListExtra("images", cache.getSpoilers());
-        startActivity(spoilersIntent);
+        cgeoimages.startActivitySpoilerImages(cgeodetail.this, geocode, cache.getSpoilers());
     }
 
     public class codeHint implements View.OnClickListener {

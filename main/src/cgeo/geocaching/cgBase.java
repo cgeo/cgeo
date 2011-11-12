@@ -1231,15 +1231,17 @@ public class cgBase {
                 final Matcher matcherSpoilersInside = GCConstants.PATTERN_SPOILERSINSIDE.matcher(spoilers);
 
                 while (matcherSpoilersInside.find()) {
-                    final cgImage spoiler = new cgImage();
-                    spoiler.url = matcherSpoilersInside.group(1);
+                    String url = matcherSpoilersInside.group(1);
 
+                    String title = null;
                     if (matcherSpoilersInside.group(2) != null) {
-                        spoiler.title = matcherSpoilersInside.group(2);
+                        title = matcherSpoilersInside.group(2);
                     }
+                    String description = null;
                     if (matcherSpoilersInside.group(3) != null) {
-                        spoiler.description = matcherSpoilersInside.group(3);
+                        description = matcherSpoilersInside.group(3);
                     }
+                    final cgImage spoiler = new cgImage(url, title, description);
 
                     if (cache.getSpoilers() == null) {
                         cache.setSpoilers(new ArrayList<cgImage>());
@@ -1551,9 +1553,9 @@ public class cgBase {
                 final JSONArray images = entry.getJSONArray("Images");
                 for (int i = 0; i < images.length(); i++) {
                     final JSONObject image = images.getJSONObject(i);
-                    final cgImage logImage = new cgImage();
-                    logImage.url = "http://img.geocaching.com/cache/log/" + image.getString("FileName");
-                    logImage.title = image.getString("Name");
+                    String url = "http://img.geocaching.com/cache/log/" + image.getString("FileName");
+                    String title = image.getString("Name");
+                    final cgImage logImage = new cgImage(url, title);
                     if (logDone.logImages == null) {
                         logDone.logImages = new ArrayList<cgImage>();
                     }
@@ -2935,7 +2937,7 @@ public class cgBase {
             // store spoilers
             if (CollectionUtils.isNotEmpty(cache.getSpoilers())) {
                 for (cgImage oneSpoiler : cache.getSpoilers()) {
-                    imgGetter.getDrawable(oneSpoiler.url);
+                    imgGetter.getDrawable(oneSpoiler.getUrl());
                 }
             }
 
@@ -2948,7 +2950,7 @@ public class cgBase {
                 for (cgLog log : cache.getLogs()) {
                     if (CollectionUtils.isNotEmpty(log.logImages)) {
                         for (cgImage oneLogImg : log.logImages) {
-                            imgGetter.getDrawable(oneLogImg.url);
+                            imgGetter.getDrawable(oneLogImg.getUrl());
                         }
                     }
                 }

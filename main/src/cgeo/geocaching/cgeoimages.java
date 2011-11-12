@@ -8,6 +8,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
@@ -35,8 +36,8 @@ import java.util.List;
 public class cgeoimages extends AbstractActivity {
 
     private static final int UNKNOWN_TYPE = 0;
-    public static final int LOG_IMAGES = 1;
-    public static final int SPOILER_IMAGES = 2;
+    private static final int LOG_IMAGES = 1;
+    private static final int SPOILER_IMAGES = 2;
 
     private String geocode = null;
     private LayoutInflater inflater = null;
@@ -45,7 +46,7 @@ public class cgeoimages extends AbstractActivity {
     private int count = 0;
     private int countDone = 0;
 
-    static private Collection<Bitmap> bitmaps = Collections.synchronizedCollection(new ArrayList<Bitmap>());
+    static private final Collection<Bitmap> bitmaps = Collections.synchronizedCollection(new ArrayList<Bitmap>());
 
     private void loadImages(final List<cgImage> images, final int progressMessage, final boolean offline) {
 
@@ -61,11 +62,11 @@ public class cgeoimages extends AbstractActivity {
         for (final cgImage img : images) {
             rowView = (LinearLayout) inflater.inflate(R.layout.cache_image_item, null);
 
-            ((TextView) rowView.findViewById(R.id.title)).setText(Html.fromHtml(img.title));
+            ((TextView) rowView.findViewById(R.id.title)).setText(Html.fromHtml(img.getTitle()));
 
-            if (StringUtils.isNotBlank(img.description)) {
+            if (StringUtils.isNotBlank(img.getDescription())) {
                 final TextView descView = (TextView) rowView.findViewById(R.id.description);
-                descView.setText(Html.fromHtml(img.description), TextView.BufferType.SPANNABLE);
+                descView.setText(Html.fromHtml(img.getDescription()), TextView.BufferType.SPANNABLE);
                 descView.setVisibility(View.VISIBLE);
             }
 
@@ -89,7 +90,7 @@ public class cgeoimages extends AbstractActivity {
         @Override
         protected BitmapDrawable doInBackground(Void... params) {
             final HtmlImage imgGetter = new HtmlImage(cgeoimages.this, geocode, true, offline ? 1 : 0, false);
-            return imgGetter.getDrawable(img.url);
+            return imgGetter.getDrawable(img.getUrl());
         }
 
         @Override
@@ -115,13 +116,14 @@ public class cgeoimages extends AbstractActivity {
                             return;
                         }
 
-                        Intent intent = new Intent();
+                        final Intent intent = new Intent();
                         intent.setAction(android.content.Intent.ACTION_VIEW);
                         intent.setDataAndType(Uri.fromFile(file), "image/jpg");
                         startActivity(intent);
 
-                        if (file.exists())
+                        if (file.exists()) {
                             file.deleteOnExit();
+                        }
                     }
                 });
                 image_view.setImageDrawable(image);
@@ -146,7 +148,7 @@ public class cgeoimages extends AbstractActivity {
         super.onCreate(savedInstanceState);
 
         // get parameters
-        Bundle extras = getIntent().getExtras();
+        final Bundle extras = getIntent().getExtras();
 
         // try to get data from extras
         int img_type = UNKNOWN_TYPE;
@@ -200,10 +202,20 @@ public class cgeoimages extends AbstractActivity {
         super.onDestroy();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
+    public static void startActivityLogImages(final Context fromActivity, final String geocode, ArrayList<cgImage> logImages) {
+        startActivity(fromActivity, geocode, logImages, cgeoimages.LOG_IMAGES);
+    }
 
+    private static void startActivity(final Context fromActivity, final String geocode, ArrayList<cgImage> logImages, int imageType) {
+        final Intent logImgIntent = new Intent(fromActivity, cgeoimages.class);
+        logImgIntent.putExtra("geocode", geocode.toUpperCase());
+        logImgIntent.putExtra("type", imageType);
+        logImgIntent.putParcelableArrayListExtra("images", logImages);
+        fromActivity.startActivity(logImgIntent);
+    }
+
+    public static void startActivitySpoilerImages(final Context fromActivity, String geocode, ArrayList<cgImage> spoilers) {
+        startActivity(fromActivity, geocode, spoilers, cgeoimages.SPOILER_IMAGES);
     }
 
 }

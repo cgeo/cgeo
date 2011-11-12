@@ -1554,9 +1554,9 @@ public class cgData {
                     values.clear();
                     values.put("geocode", geocode);
                     values.put("updated", timeStamp);
-                    values.put("url", oneSpoiler.url);
-                    values.put("title", oneSpoiler.title);
-                    values.put("description", oneSpoiler.description);
+                    values.put("url", oneSpoiler.getUrl());
+                    values.put("title", oneSpoiler.getTitle());
+                    values.put("description", oneSpoiler.getDescription());
 
                     databaseRW.insert(dbTableSpoilers, null, values);
                 }
@@ -1608,8 +1608,8 @@ public class cgData {
                         for (cgImage img : log.logImages) {
                             values.clear();
                             values.put("log_id", log_id);
-                            values.put("title", img.title);
-                            values.put("url", img.url);
+                            values.put("title", img.getTitle());
+                            values.put("url", img.getUrl());
                             databaseRW.insert(dbTableLogImages, null, values);
                         }
                     }
@@ -2263,10 +2263,7 @@ public class cgData {
             int indexDescription = cursor.getColumnIndex("description");
 
             do {
-                cgImage spoiler = new cgImage();
-                spoiler.url = cursor.getString(indexUrl);
-                spoiler.title = cursor.getString(indexTitle);
-                spoiler.description = cursor.getString(indexDescription);
+                cgImage spoiler = new cgImage(cursor.getString(indexUrl), cursor.getString(indexTitle), cursor.getString(indexDescription));
 
                 spoilers.add(spoiler);
             } while (cursor.moveToNext());
@@ -2382,18 +2379,12 @@ public class cgData {
                     logs.add(log);
                 }
                 if (!cursor.isNull(indexLogImagesId)) {
-                    final cgImage log_img = new cgImage();
-                    log_img.title = cursor.getString(indexTitle);
-                    if (log_img.title == null) {
-                        log_img.title = "";
-                    }
-                    log_img.url = cursor.getString(indexUrl);
-                    if (log_img.url == null) {
-                        log_img.url = "";
-                    }
+                    String title = cursor.getString(indexTitle);
+                    String url = cursor.getString(indexUrl);
                     if (log.logImages == null) {
                         log.logImages = new ArrayList<cgImage>();
                     }
+                    final cgImage log_img = new cgImage(url, title);
                     log.logImages.add(log_img);
                 }
             }

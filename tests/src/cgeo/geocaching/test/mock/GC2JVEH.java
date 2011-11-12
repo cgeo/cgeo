@@ -97,7 +97,7 @@ public class GC2JVEH extends MockedCache {
 
     @Override
     public List<String> getAttributes() {
-        String[] attributes = new String[] {
+        final String[] attributes = new String[] {
                 "winter_yes",
                 "flashlight_yes",
                 "stealth_yes",
@@ -111,7 +111,7 @@ public class GC2JVEH extends MockedCache {
 
     @Override
     public Map<Integer, Integer> getLogCounts() {
-        Map<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
+        final Map<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
         logCounts.put(cgBase.LOG_FOUND_IT, 59);
         logCounts.put(cgBase.LOG_NOTE, 7);
         logCounts.put(cgBase.LOG_TEMP_DISABLE_LISTING, 1);
@@ -122,7 +122,7 @@ public class GC2JVEH extends MockedCache {
 
     @Override
     public Integer getFavoritePoints() {
-        return new Integer(21);
+        return 21;
     }
 
     @Override
@@ -132,17 +132,18 @@ public class GC2JVEH extends MockedCache {
 
     @Override
     public List<cgTrackable> getInventory() {
-        ArrayList<cgTrackable> inventory = new ArrayList<cgTrackable>();
+        final ArrayList<cgTrackable> inventory = new ArrayList<cgTrackable>();
         inventory.add(new cgTrackable());
         return inventory;
     }
 
     @Override
     public List<cgImage> getSpoilers() {
-        ArrayList<cgImage> spoilers = new ArrayList<cgImage>();
-        spoilers.add(new cgImage());
-        spoilers.add(new cgImage());
-        spoilers.add(new cgImage());
+        final ArrayList<cgImage> spoilers = new ArrayList<cgImage>();
+        final cgImage mockedImage = new cgImage(null, null, null);
+        spoilers.add(mockedImage);
+        spoilers.add(mockedImage);
+        spoilers.add(mockedImage);
         return spoilers;
     }
 }

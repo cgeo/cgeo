@@ -4,11 +4,18 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class cgImage implements Parcelable {
-    public String url = "";
-    public String title = "";
-    public String description = "";
+    private final String url;
+    private final String title;
+    private final String description;
 
-    public cgImage() {
+    public cgImage(final String url, final String title, final String description) {
+        this.url = url;
+        this.title = title;
+        this.description = description;
+    }
+
+    public cgImage(final String url, final String title) {
+        this(url, title, null);
     }
 
     public cgImage(final Parcel in) {
@@ -39,4 +46,16 @@ public class cgImage implements Parcelable {
             return new cgImage[size];
         }
     };
+
+    public String getUrl() {
+        return url;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 }
