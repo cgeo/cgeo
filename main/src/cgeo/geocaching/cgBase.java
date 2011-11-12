@@ -449,7 +449,7 @@ public class cgBase {
         }
 
         HttpResponse loginResponse = request("https://www.geocaching.com/login/default.aspx", null, false, false, false);
-        String loginData = getResponseDataOnError(loginResponse);
+        String loginData = getResponseData(loginResponse);
         if (loginResponse != null && loginResponse.getStatusLine().getStatusCode() == 503 && patternMaintenance.matcher(loginData).find()) {
             return StatusCode.MAINTENANCE;
         }
