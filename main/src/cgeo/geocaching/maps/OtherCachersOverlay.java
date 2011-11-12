@@ -1,9 +1,8 @@
 package cgeo.geocaching.maps;
 
-import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgUser;
 import cgeo.geocaching.cgeodetail;
+import cgeo.geocaching.go4cache.Go4CacheUser;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
@@ -21,14 +20,11 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class OtherCachersOverlay extends AbstractItemizedOverlay {
 
     private List<OtherCachersOverlayItemImpl> items = new ArrayList<OtherCachersOverlayItemImpl>();
     private Context context = null;
-    private final Pattern patternGeocode = Pattern.compile("^(GC[A-Z0-9]+)(\\: ?(.+))?$", Pattern.CASE_INSENSITIVE);
 
     public OtherCachersOverlay(ItemizedOverlayImpl ovlImplIn, Context contextIn) {
         super(ovlImplIn);
@@ -71,45 +67,20 @@ public class OtherCachersOverlay extends AbstractItemizedOverlay {
             }
 
             final OtherCachersOverlayItemImpl item = items.get(index);
-            final cgUser user = item.getUser();
+            final Go4CacheUser user = item.getUser();
 
             // set action
-            String action = null;
-            String geocode = null;
-            final Matcher matcherGeocode = patternGeocode.matcher(user.action.trim());
-
-            if (user.action.length() == 0 || user.action.equalsIgnoreCase("pending")) {
-                action = "Looking around";
-            } else if (user.action.equalsIgnoreCase("tweeting")) {
-                action = "Tweeting";
-            } else if (matcherGeocode.find()) {
-                if (matcherGeocode.group(1) != null) {
-                    geocode = matcherGeocode.group(1).trim().toUpperCase();
-                }
-                if (matcherGeocode.group(3) != null) {
-                    action = "Heading to " + geocode + " (" + matcherGeocode.group(3).trim() + ")";
-                } else {
-                    action = "Heading to " + geocode;
-                }
-            } else {
-                action = user.action;
-            }
+            String action = user.getAction();
+            String geocode = user.getGeocode();
 
             // set icon
-            int icon = -1;
-            if (user.client.equalsIgnoreCase("c:geo")) {
-                icon = R.drawable.client_cgeo;
-            } else if (user.client.equalsIgnoreCase("preCaching")) {
-                icon = R.drawable.client_precaching;
-            } else if (user.client.equalsIgnoreCase("Handy Geocaching")) {
-                icon = R.drawable.client_handygeocaching;
-            }
+            int icon = user.getIconId();
 
             final AlertDialog.Builder dialog = new AlertDialog.Builder(context);
             if (icon > -1) {
                 dialog.setIcon(icon);
             }
-            dialog.setTitle(user.username);
+            dialog.setTitle(user.getUsername());
             dialog.setMessage(action);
             dialog.setCancelable(true);
             if (StringUtils.isNotBlank(geocode)) {

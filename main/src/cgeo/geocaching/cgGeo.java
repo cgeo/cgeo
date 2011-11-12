@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.go4cache.Go4Cache;
 
 import android.content.Context;
 import android.content.SharedPreferences;

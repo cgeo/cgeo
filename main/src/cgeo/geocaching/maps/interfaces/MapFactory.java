@@ -1,9 +1,9 @@
 package cgeo.geocaching.maps.interfaces;
 
 import cgeo.geocaching.cgCoord;
-import cgeo.geocaching.cgUser;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.go4cache.Go4CacheUser;
 
 import android.app.Activity;
 import android.content.Context;
@@ -28,6 +28,6 @@ public interface MapFactory {
     public CachesOverlayItemImpl getCachesOverlayItem(final cgCoord coordinate, final CacheType type);
 
     public OtherCachersOverlayItemImpl getOtherCachersOverlayItemBase(Context context,
-            cgUser userOne);
+            Go4CacheUser userOne);
 
 }

@@ -2,9 +2,9 @@ package cgeo.geocaching.maps.mapsforge;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCoord;
-import cgeo.geocaching.cgUser;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.go4cache.Go4CacheUser;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapFactory;
@@ -42,7 +42,7 @@ public class MapsforgeMapFactory implements MapFactory {
     }
 
     @Override
-    public OtherCachersOverlayItemImpl getOtherCachersOverlayItemBase(Context context, cgUser userOne) {
+    public OtherCachersOverlayItemImpl getOtherCachersOverlayItemBase(Context context, Go4CacheUser userOne) {
         MapsforgeOtherCachersOverlayItem baseItem = new MapsforgeOtherCachersOverlayItem(context, userOne);
         return baseItem;
     }

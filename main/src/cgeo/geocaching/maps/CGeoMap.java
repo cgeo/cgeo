@@ -1,6 +1,5 @@
 package cgeo.geocaching.maps;
 
-import cgeo.geocaching.Go4Cache;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.Settings.mapSourceEnum;
@@ -12,7 +11,6 @@ import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgUpdateDir;
 import cgeo.geocaching.cgUpdateLoc;
-import cgeo.geocaching.cgUser;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
@@ -22,6 +20,8 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.go4cache.Go4Cache;
+import cgeo.geocaching.go4cache.Go4CacheUser;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
@@ -156,7 +156,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     /** List of caches in the viewport */
     private List<cgCache> caches = new ArrayList<cgCache>();
     /** List of users in the viewport */
-    private List<cgUser> users = new ArrayList<cgUser>();
+    private List<Go4CacheUser> users = new ArrayList<Go4CacheUser>();
     private List<cgCoord> coordinates = new ArrayList<cgCoord>();
     // storing for offline
     private ProgressDialog waitDialog = null;
@@ -1529,9 +1529,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
      */
     private class DisplayUsersThread extends DoThread {
 
-        private List<cgUser> users = null;
+        private List<Go4CacheUser> users = null;
 
-        public DisplayUsersThread(List<cgUser> usersIn, long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
+        public DisplayUsersThread(List<Go4CacheUser> usersIn, long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
             super(centerLatIn, centerLonIn, spanLatIn, spanLonIn);
             setName("Display Users");
             users = usersIn;
@@ -1553,12 +1553,12 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 int counter = 0;
                 OtherCachersOverlayItemImpl item = null;
 
-                for (cgUser userOne : users) {
+                for (Go4CacheUser userOne : users) {
                     if (stop) {
                         return;
                     }
 
-                    if (userOne.coords == null) {
+                    if (userOne.getCoords() == null) {
                         continue;
                     }
 

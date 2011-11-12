@@ -1,5 +1,9 @@
-package cgeo.geocaching;
+package cgeo.geocaching.go4cache;
 
+import cgeo.geocaching.Parameters;
+import cgeo.geocaching.Settings;
+import cgeo.geocaching.cgBase;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.geopoint.Viewport;
@@ -15,6 +19,7 @@ import android.util.Log;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 
@@ -35,7 +40,7 @@ public class Go4Cache extends Thread {
     final private cgBase base;
 
     private static Go4Cache getInstance(final cgeoapplication app) {
-        if (instance == null) {
+        if (null == instance) {
             synchronized(Go4Cache.class) {
                 instance = new Go4Cache(app);
                 instance.start();
@@ -45,6 +50,7 @@ public class Go4Cache extends Thread {
     }
 
     private Go4Cache(final cgeoapplication app) {
+        super("Go4Cache");
         this.app = app;
         base = cgBase.getInstance(app);
         setPriority(Thread.MIN_PRIORITY);
@@ -77,7 +83,7 @@ public class Go4Cache extends Thread {
 
                 // If we are too close and we haven't changed our current action, no need
                 // to update our situation.
-                if (latestCoords != null && latestCoords.distanceTo(currentCoords) < 0.75 && StringUtils.equals(latestAction, currentAction)) {
+                if (null != latestCoords && latestCoords.distanceTo(currentCoords) < 0.75 && StringUtils.equals(latestAction, currentAction)) {
                     continue;
                 }
 
@@ -94,13 +100,13 @@ public class Go4Cache extends Thread {
                         "ln", lonStr,
                         "a", currentAction,
                         "s", (CryptUtils.sha1(username + "|" + latStr + "|" + lonStr + "|" + currentAction + "|" + CryptUtils.md5("carnero: developing your dreams"))).toLowerCase());
-                if (base.version != null) {
+                if (null != base.version) {
                     params.put("v", base.version);
                 }
 
                 cgBase.postRequest("http://api.go4cache.com/", params);
 
-                // Update our coordinates even if the request was not succesful, as not to hammer the server
+                // Update our coordinates even if the request was not successful, as not to hammer the server
                 // with invalid requests for every new GPS position.
                 latestCoords = currentCoords;
                 latestAction = currentAction;
@@ -119,10 +125,10 @@ public class Go4Cache extends Thread {
      *            the current viewport
      * @return the list of users present in the viewport
      */
-    public static List<cgUser> getGeocachersInViewport(final String username, final Viewport viewport) {
-        final List<cgUser> users = new ArrayList<cgUser>();
+    public static List<Go4CacheUser> getGeocachersInViewport(final String username, final Viewport viewport) {
+        final List<Go4CacheUser> users = new ArrayList<Go4CacheUser>();
 
-        if (username == null) {
+        if (null == username) {
             return users;
         }
 
@@ -157,7 +163,7 @@ public class Go4Cache extends Thread {
     /**
      * Parse user information from go4cache.com.
      *
-     * @param oneUser
+     * @param user
      *            a JSON object
      * @return a cgCache user filled with information
      * @throws JSONException
@@ -165,14 +171,13 @@ public class Go4Cache extends Thread {
      * @throws ParseException
      *             if the date could not be parsed as expected
      */
-    private static cgUser parseUser(final JSONObject oneUser) throws JSONException, ParseException {
-        final cgUser user = new cgUser();
-        final String located = oneUser.getString("located");
-        user.located = cgBase.dateSqlIn.parse(located);
-        user.username = oneUser.getString("user");
-        user.coords = new Geopoint(oneUser.getDouble("latitude"), oneUser.getDouble("longitude"));
-        user.action = oneUser.getString("action");
-        user.client = oneUser.getString("client");
-        return user;
+    private static Go4CacheUser parseUser(final JSONObject user) throws JSONException, ParseException {
+        final String located = user.getString("located");
+        final Date userlocated = cgBase.dateSqlIn.parse(located);
+        final String username = user.getString("user");
+        final Geopoint coords = new Geopoint(user.getDouble("latitude"), user.getDouble("longitude"));
+        final String action = user.getString("action");
+        final String client = user.getString("client");
+        return new Go4CacheUser(username, coords, userlocated, action, client);
     }
 }
