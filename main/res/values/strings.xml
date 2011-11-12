@@ -559,7 +559,10 @@
   <string name="cache_clear_history">Clear history</string>
   <string name="cache_remove_from_history">Remove from history</string>
   <string name="cache_license">License</string>
-
+  <string name="cache_image">Image</string>
+  <string name="cache_image_open_file">Open as file</string>
+  <string name="cache_image_open_browser">Open in browser</string>
+      
   <!-- file list base -->
   <string name="file_searching_in">Searching for files\nin</string>
   <string name="file_list_no_files">Sorry, c:geo found no appropriate files.</string>

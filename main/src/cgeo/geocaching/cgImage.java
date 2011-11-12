@@ -1,5 +1,10 @@
 package cgeo.geocaching;
 
+import org.apache.commons.lang3.StringUtils;
+
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -57,5 +62,13 @@ public class cgImage implements Parcelable {
 
     public String getDescription() {
         return description;
+    }
+
+    public void openInBrowser(final Context fromActivity) {
+        if (StringUtils.isBlank(url)) {
+            return;
+        }
+        final Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        fromActivity.startActivity(browserIntent);
     }
 }

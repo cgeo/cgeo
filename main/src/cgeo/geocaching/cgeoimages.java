@@ -19,7 +19,10 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
@@ -31,10 +34,13 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 public class cgeoimages extends AbstractActivity {
 
+    private static final int MENU_BROWSER = 2;
+    private static final int MENU_FILE = 1;
     private static final int UNKNOWN_TYPE = 0;
     private static final int LOG_IMAGES = 1;
     private static final int SPOILER_IMAGES = 2;
@@ -45,6 +51,9 @@ public class cgeoimages extends AbstractActivity {
     private LinearLayout imagesView = null;
     private int count = 0;
     private int countDone = 0;
+    private final HashMap<Integer, cgImage> images = new HashMap<Integer, cgImage>();
+    private BitmapDrawable currentDrawable;
+    private cgImage currentImage;
 
     static private final Collection<Bitmap> bitmaps = Collections.synchronizedCollection(new ArrayList<Bitmap>());
 
@@ -106,31 +115,17 @@ public class cgeoimages extends AbstractActivity {
                 image_view.setOnClickListener(new View.OnClickListener() {
 
                     public void onClick(View arg0) {
-                        final File file = LocalStorage.getStorageFile(null, "temp.jpg", false);
-                        try {
-                            final FileOutputStream fos = new FileOutputStream(file);
-                            image.getBitmap().compress(CompressFormat.JPEG, 100, fos);
-                            fos.close();
-                        } catch (Exception e) {
-                            Log.e(Settings.tag, "cgeoimages.handleMessage.onClick: " + e.toString());
-                            return;
-                        }
-
-                        final Intent intent = new Intent();
-                        intent.setAction(android.content.Intent.ACTION_VIEW);
-                        intent.setDataAndType(Uri.fromFile(file), "image/jpg");
-                        startActivity(intent);
-
-                        if (file.exists()) {
-                            file.deleteOnExit();
-                        }
+                        viewImageInStandardApp(image);
                     }
                 });
+                cgeoimages.this.registerForContextMenu(image_view);
                 image_view.setImageDrawable(image);
                 image_view.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 image_view.setLayoutParams(new LayoutParams(bounds.width(), bounds.height()));
 
                 view.addView(image_view);
+
+                images.put(image_view.getId(), img);
             }
 
             synchronized (cgeoimages.this) {
@@ -202,6 +197,27 @@ public class cgeoimages extends AbstractActivity {
         super.onDestroy();
     }
 
+    private void viewImageInStandardApp(final BitmapDrawable image) {
+        final File file = LocalStorage.getStorageFile(null, "temp.jpg", false);
+        try {
+            final FileOutputStream fos = new FileOutputStream(file);
+            image.getBitmap().compress(CompressFormat.JPEG, 100, fos);
+            fos.close();
+        } catch (Exception e) {
+            Log.e(Settings.tag, "cgeoimages.handleMessage.onClick: " + e.toString());
+            return;
+        }
+
+        final Intent intent = new Intent();
+        intent.setAction(android.content.Intent.ACTION_VIEW);
+        intent.setDataAndType(Uri.fromFile(file), "image/jpg");
+        startActivity(intent);
+
+        if (file.exists()) {
+            file.deleteOnExit();
+        }
+    }
+
     public static void startActivityLogImages(final Context fromActivity, final String geocode, ArrayList<cgImage> logImages) {
         startActivity(fromActivity, geocode, logImages, cgeoimages.LOG_IMAGES);
     }
@@ -218,4 +234,31 @@ public class cgeoimages extends AbstractActivity {
         startActivity(fromActivity, geocode, spoilers, cgeoimages.SPOILER_IMAGES);
     }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.setHeaderTitle(res.getString(R.string.cache_image));
+        menu.add(0, MENU_FILE, 0, res.getString(R.string.cache_image_open_file));
+        menu.add(0, MENU_BROWSER, 0, res.getString(R.string.cache_image_open_browser));
+        final ImageView view = (ImageView) v;
+        currentDrawable = (BitmapDrawable) view.getDrawable();
+        currentImage = images.get(view.getId());
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case MENU_FILE:
+                viewImageInStandardApp(currentDrawable);
+                return true;
+            case MENU_BROWSER:
+                if (currentImage != null) {
+                    currentImage.openInBrowser(this);
+                }
+                return true;
+            default:
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }
 }
