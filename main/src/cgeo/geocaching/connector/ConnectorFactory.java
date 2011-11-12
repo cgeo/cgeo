@@ -60,6 +60,6 @@ public final class ConnectorFactory {
     }
 
     private static boolean isInvalidGeocode(final String geocode) {
-        return StringUtils.isBlank(geocode);
+        return StringUtils.isBlank(geocode) || !Character.isLetterOrDigit(geocode.charAt(0));
     }
 }

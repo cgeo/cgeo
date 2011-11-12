@@ -15,6 +15,7 @@ public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCas
         assertFalse(ConnectorFactory.canHandle(""));
         assertTrue(ConnectorFactory.canHandle("GC12345"));
         assertTrue(ConnectorFactory.canHandle("some string")); // using unknown connector
+        assertFalse(ConnectorFactory.canHandle("[/start with special char"));
     }
 
     public void testGetConnectorCgCache() {
