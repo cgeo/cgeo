@@ -1924,7 +1924,9 @@ public class cgeocaches extends AbstractListActivity {
         public void run() {
             Map<String, String> params = new HashMap<String, String>();
             params.put("username", username);
-            params.put("cachetype", cachetype.id);
+            if (cachetype != null) {
+                params.put("cachetype", cachetype.id);
+            }
 
             search = base.searchByOwner(this, username, cacheType, 0, Settings.isShowCaptcha());
 
