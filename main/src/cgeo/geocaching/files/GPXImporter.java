@@ -27,6 +27,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.concurrent.CancellationException;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 public class GPXImporter {
     static final int IMPORT_STEP_READ_FILE = 1;
@@ -38,6 +40,7 @@ public class GPXImporter {
     static final int IMPORT_STEP_CANCELED = 7;
 
     public static final String GPX_FILE_EXTENSION = ".gpx";
+    public static final String ZIP_FILE_EXTENSION = ".zip";
     public static final String WAYPOINTS_FILE_SUFFIX_AND_EXTENSION = "-wpts.gpx";
 
     private Progress progress = new Progress();
@@ -57,6 +60,8 @@ public class GPXImporter {
     public void importGPX(final File file) {
         if (StringUtils.endsWithIgnoreCase(file.getName(), GPX_FILE_EXTENSION)) {
             new ImportGpxFileThread(file, listId, importStepHandler, progressHandler).start();
+        } else if (StringUtils.endsWithIgnoreCase(file.getName(), ZIP_FILE_EXTENSION)) {
+            new ImportGpxZipFileThread(file, listId, importStepHandler, progressHandler).start();
         } else {
             new ImportLocFileThread(file, listId, importStepHandler, progressHandler).start();
         }
@@ -148,7 +153,7 @@ public class GPXImporter {
                 caches = parser.parse(cacheFile, progressHandler);
             }
 
-            final File wptsFile = getWaypointsFileForGpx(cacheFile);
+            final File wptsFile = new File(cacheFile.getParentFile(), getWaypointsFileNameForGpxFileName(cacheFile.getName()));
             if (wptsFile != null && wptsFile.canRead()) {
                 Log.i(Settings.tag, "Import GPX waypoint file: " + wptsFile.getAbsolutePath());
                 importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_WPT_FILE, R.string.gpx_import_loading_waypoints, (int) wptsFile.length()));
@@ -156,6 +161,55 @@ public class GPXImporter {
             }
 
             return caches;
+        }
+    }
+
+    static class ImportGpxZipFileThread extends ImportThread {
+        private final File cacheFile;
+
+        public ImportGpxZipFileThread(final File file, int listId, Handler importStepHandler, CancellableHandler progressHandler) {
+            super(listId, importStepHandler, progressHandler);
+            this.cacheFile = file;
+        }
+
+        @Override
+        protected Collection<cgCache> doImport() throws IOException, ParserException {
+            Log.i(Settings.tag, "Import GPX zip file: " + cacheFile.getAbsolutePath());
+            ZipFile zipFile = new ZipFile(cacheFile);
+            try {
+                final String gpxName = getGpxFileNameForZipFileName(cacheFile.getName());
+                if (gpxName == null) {
+                    throw new ParserException(cacheFile.getName() + " is not a GPX zip file");
+                }
+                final ZipEntry gpxEntry = zipFile.getEntry(gpxName);
+                if (gpxEntry == null) {
+                    throw new ParserException(cacheFile.getName() + " is not a GPX zip file");
+                }
+                importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, (int) gpxEntry.getSize()));
+
+                Collection<cgCache> caches;
+                GPXParser parser;
+                try {
+                    // try to parse cache file as GPX 10
+                    parser = new GPX10Parser(listId);
+                    caches = parser.parse(zipFile.getInputStream(gpxEntry), progressHandler);
+                } catch (ParserException pe) {
+                    // didn't work -> lets try GPX11
+                    parser = new GPX11Parser(listId);
+                    caches = parser.parse(zipFile.getInputStream(gpxEntry), progressHandler);
+                }
+
+                final ZipEntry gpxWptsEntry = zipFile.getEntry(getWaypointsFileNameForGpxFileName(gpxName));
+                if (gpxWptsEntry != null) {
+                    Log.i(Settings.tag, "Import GPX waypoint file: " + gpxWptsEntry.getName());
+                    importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_WPT_FILE, R.string.gpx_import_loading_waypoints, (int) gpxWptsEntry.getSize()));
+                    caches = parser.parse(zipFile.getInputStream(gpxWptsEntry), progressHandler);
+                }
+
+                return caches;
+            } finally {
+                zipFile.close();
+            }
         }
     }
 
@@ -263,12 +317,19 @@ public class GPXImporter {
         }
     };
 
+    // 1234567.zip -> 1234567.gpx
+    static String getGpxFileNameForZipFileName(String name) {
+        if (StringUtils.endsWithIgnoreCase(name, ZIP_FILE_EXTENSION) && (StringUtils.length(name) > ZIP_FILE_EXTENSION.length())) {
+            return StringUtils.substringBeforeLast(name, ".") + GPX_FILE_EXTENSION;
+        } else {
+            return null;
+        }
+    }
+
     // 1234567.gpx -> 1234567-wpts.gpx
-    static File getWaypointsFileForGpx(File file) {
-        final String name = file.getName();
+    static String getWaypointsFileNameForGpxFileName(String name) {
         if (StringUtils.endsWithIgnoreCase(name, GPX_FILE_EXTENSION) && (StringUtils.length(name) > GPX_FILE_EXTENSION.length())) {
-            final String wptsName = StringUtils.substringBeforeLast(name, ".") + WAYPOINTS_FILE_SUFFIX_AND_EXTENSION;
-            return new File(file.getParentFile(), wptsName);
+            return StringUtils.substringBeforeLast(name, ".") + WAYPOINTS_FILE_SUFFIX_AND_EXTENSION;
         } else {
             return null;
         }

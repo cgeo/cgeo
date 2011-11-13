@@ -21,18 +21,32 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     private int listId;
     private File tempDir;
 
-    public static void testGetWaypointsFileForGpx() {
-        assertEquals(new File("1234567-wpts.gpx"), GPXImporter.getWaypointsFileForGpx(new File("1234567.gpx")));
-        assertEquals(new File("/mnt/sdcard/1234567-wpts.gpx"), GPXImporter.getWaypointsFileForGpx(new File("/mnt/sdcard/1234567.gpx")));
-        assertEquals(new File("/mnt/sdcard/1-wpts.gpx"), GPXImporter.getWaypointsFileForGpx(new File("/mnt/sdcard/1.gpx")));
-        assertEquals(new File("/mnt/sd.card/1-wpts.gpx"), GPXImporter.getWaypointsFileForGpx(new File("/mnt/sd.card/1.gpx")));
-        assertEquals(new File("1234567.9-wpts.gpx"), GPXImporter.getWaypointsFileForGpx(new File("1234567.9.gpx")));
-        assertEquals(new File("1234567-wpts.gpx"), GPXImporter.getWaypointsFileForGpx(new File("1234567.GPX")));
-        assertEquals(new File("gpx.gpx-wpts.gpx"), GPXImporter.getWaypointsFileForGpx(new File("gpx.gpx.gpx")));
-        assertNull(GPXImporter.getWaypointsFileForGpx(new File("123.gpy")));
-        assertNull(GPXImporter.getWaypointsFileForGpx(new File("gpx")));
-        assertNull(GPXImporter.getWaypointsFileForGpx(new File(".gpx")));
-        assertNull(GPXImporter.getWaypointsFileForGpx(new File("/mnt/sdcard/.gpx")));
+    public void testGetWaypointsFileNameForGpxFileName() {
+        assertEquals("1234567-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("1234567.gpx"));
+        assertEquals("/mnt/sdcard/1234567-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("/mnt/sdcard/1234567.gpx"));
+        assertEquals("/mnt/sdcard/1-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("/mnt/sdcard/1.gpx"));
+        assertEquals("/mnt/sd.card/1-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("/mnt/sd.card/1.gpx"));
+        assertEquals("1234567.9-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("1234567.9.gpx"));
+        assertEquals("1234567-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("1234567.GPX"));
+        assertEquals("gpx.gpx-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("gpx.gpx.gpx"));
+        assertEquals("/mnt/sdcard/-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("/mnt/sdcard/.gpx"));
+        assertNull(GPXImporter.getWaypointsFileNameForGpxFileName("123.gpy"));
+        assertNull(GPXImporter.getWaypointsFileNameForGpxFileName("gpx"));
+        assertNull(GPXImporter.getWaypointsFileNameForGpxFileName(".gpx"));
+    }
+
+    public void testGetGpxFileNameForZipFileName() {
+        assertEquals("1234567.gpx", GPXImporter.getGpxFileNameForZipFileName("1234567.zip"));
+        assertEquals("/mnt/sdcard/1234567.gpx", GPXImporter.getGpxFileNameForZipFileName("/mnt/sdcard/1234567.zip"));
+        assertEquals("1.gpx", GPXImporter.getGpxFileNameForZipFileName("1.zip"));
+        assertEquals("/mnt/sd.card/1.gpx", GPXImporter.getGpxFileNameForZipFileName("/mnt/sd.card/1.zip"));
+        assertEquals("1234567.9.gpx", GPXImporter.getGpxFileNameForZipFileName("1234567.9.zip"));
+        assertEquals("1234567.gpx", GPXImporter.getGpxFileNameForZipFileName("1234567.ZIP"));
+        assertEquals("zip.zip.gpx", GPXImporter.getGpxFileNameForZipFileName("zip.zip.zip"));
+        assertEquals("/mnt/sdcard/.gpx", GPXImporter.getGpxFileNameForZipFileName("/mnt/sdcard/.zip"));
+        assertNull(GPXImporter.getGpxFileNameForZipFileName("123.zap"));
+        assertNull(GPXImporter.getGpxFileNameForZipFileName("zip"));
+        assertNull(GPXImporter.getGpxFileNameForZipFileName(".zip"));
     }
 
     public void testImportGpx() throws IOException {
@@ -128,6 +142,40 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(2, importStepHandler.messages.size());
         assertEquals(GPXImporter.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
         assertEquals(GPXImporter.IMPORT_STEP_CANCELED, importStepHandler.messages.get(1).what);
+    }
+
+    public void testImportGpxZip() throws IOException {
+        File pq7545915 = new File(tempDir, "7545915.zip");
+        copyResourceToFile(R.raw.pq7545915, pq7545915);
+
+        GPXImporter.ImportGpxZipFileThread importThread = new GPXImporter.ImportGpxZipFileThread(pq7545915, listId, importStepHandler, progressHandler);
+        importThread.run();
+        importStepHandler.waitForCompletion();
+
+        assertEquals(4, importStepHandler.messages.size());
+        assertEquals(GPXImporter.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
+        assertEquals(GPXImporter.IMPORT_STEP_READ_WPT_FILE, importStepHandler.messages.get(1).what);
+        assertEquals(GPXImporter.IMPORT_STEP_STORE_CACHES, importStepHandler.messages.get(2).what);
+        assertEquals(GPXImporter.IMPORT_STEP_FINISHED, importStepHandler.messages.get(3).what);
+        cgSearch search = (cgSearch) importStepHandler.messages.get(3).obj;
+        assertEquals(Collections.singletonList("GC31J2H"), search.getGeocodes());
+
+        cgCache cache = cgeoapplication.getInstance().getCacheByGeocode("GC31J2H");
+        assertCacheProperties(cache);
+        assertEquals(1, cache.getWaypoints().size()); // this is the original pocket query result without test waypoint
+    }
+
+    public void testImportGpxZipErr() throws IOException {
+        // zip file name doesn't match name of gpx entry
+        File pq1 = new File(tempDir, "1.zip");
+        copyResourceToFile(R.raw.pq7545915, pq1);
+
+        GPXImporter.ImportGpxZipFileThread importThread = new GPXImporter.ImportGpxZipFileThread(pq1, listId, importStepHandler, progressHandler);
+        importThread.run();
+        importStepHandler.waitForCompletion();
+
+        assertEquals(1, importStepHandler.messages.size());
+        assertEquals(GPXImporter.IMPORT_STEP_FINISHED_WITH_ERROR, importStepHandler.messages.get(0).what);
     }
 
     static class TestHandler extends CancellableHandler {
