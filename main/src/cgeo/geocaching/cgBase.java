@@ -369,6 +369,11 @@ public class cgBase {
     public static String[] getViewstates(String page) {
         // Get the number of viewstates.
         // If there is only one viewstate, __VIEWSTATEFIELDCOUNT is not present
+
+        if (page == null) { // no network access
+            return null;
+        }
+
         int count = 1;
         final Matcher matcherViewstateCount = patternViewstateFieldCount.matcher(page);
         if (matcherViewstateCount.find()) {
