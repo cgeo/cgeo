@@ -38,9 +38,9 @@ public class cgeocoords extends Dialog {
 
     private Spinner spinner;
 
-    CoordinateUpdate cuListener;
+    private CoordinateUpdate cuListener;
 
-    coordInputFormatEnum currentFormat = null;
+    private coordInputFormatEnum currentFormat = null;
 
     public cgeocoords(final AbstractActivity context, final Geopoint gp, final cgGeo geo) {
         super(context);
@@ -70,7 +70,7 @@ public class cgeocoords extends Dialog {
         setContentView(R.layout.coords);
 
         spinner = (Spinner) findViewById(R.id.spinnerCoordinateFormats);
-        ArrayAdapter<CharSequence> adapter =
+        final ArrayAdapter<CharSequence> adapter =
                 ArrayAdapter.createFromResource(context,
                         R.array.waypoint_coordinate_formats,
                         android.R.layout.simple_spinner_item);
@@ -111,15 +111,16 @@ public class cgeocoords extends Dialog {
         bLat.setOnClickListener(new ButtonClickListener());
         bLon.setOnClickListener(new ButtonClickListener());
 
-        Button buttonCurrent = (Button) findViewById(R.id.current);
+        final Button buttonCurrent = (Button) findViewById(R.id.current);
         buttonCurrent.setOnClickListener(new CurrentListener());
-        Button buttonDone = (Button) findViewById(R.id.done);
+        final Button buttonDone = (Button) findViewById(R.id.done);
         buttonDone.setOnClickListener(new InputDoneListener());
     }
 
     private void updateGUI() {
-        if (gp == null)
+        if (gp == null) {
             return;
+        }
         Double lat = 0.0;
         if (gp.getLatitude() < 0) {
             bLat.setText("S");
@@ -138,23 +139,23 @@ public class cgeocoords extends Dialog {
 
         lon = Math.abs(gp.getLongitude());
 
-        int latDeg = (int) Math.floor(lat);
-        int latDegFrac = (int) Math.round((lat - latDeg) * 100000);
+        final int latDeg = (int) Math.floor(lat);
+        final int latDegFrac = (int) Math.round((lat - latDeg) * 100000);
 
-        int latMin = (int) Math.floor((lat - latDeg) * 60);
-        int latMinFrac = (int) Math.round(((lat - latDeg) * 60 - latMin) * 1000);
+        final int latMin = (int) Math.floor((lat - latDeg) * 60);
+        final int latMinFrac = (int) Math.round(((lat - latDeg) * 60 - latMin) * 1000);
 
-        int latSec = (int) Math.floor(((lat - latDeg) * 60 - latMin) * 60);
-        int latSecFrac = (int) Math.round((((lat - latDeg) * 60 - latMin) * 60 - latSec) * 1000);
+        final int latSec = (int) Math.floor(((lat - latDeg) * 60 - latMin) * 60);
+        final int latSecFrac = (int) Math.round((((lat - latDeg) * 60 - latMin) * 60 - latSec) * 1000);
 
-        int lonDeg = (int) Math.floor(lon);
-        int lonDegFrac = (int) Math.round((lon - lonDeg) * 100000);
+        final int lonDeg = (int) Math.floor(lon);
+        final int lonDegFrac = (int) Math.round((lon - lonDeg) * 100000);
 
-        int lonMin = (int) Math.floor((lon - lonDeg) * 60);
-        int lonMinFrac = (int) Math.round(((lon - lonDeg) * 60 - lonMin) * 1000);
+        final int lonMin = (int) Math.floor((lon - lonDeg) * 60);
+        final int lonMinFrac = (int) Math.round(((lon - lonDeg) * 60 - lonMin) * 1000);
 
-        int lonSec = (int) Math.floor(((lon - lonDeg) * 60 - lonMin) * 60);
-        int lonSecFrac = (int) Math.round((((lon - lonDeg) * 60 - lonMin) * 60 - lonSec) * 1000);
+        final int lonSec = (int) Math.floor(((lon - lonDeg) * 60 - lonMin) * 60);
+        final int lonSecFrac = (int) Math.round((((lon - lonDeg) * 60 - lonMin) * 60 - lonSec) * 1000);
 
         switch (currentFormat) {
             case Plain:
@@ -241,31 +242,30 @@ public class cgeocoords extends Dialog {
     }
 
     private static String addZeros(final int value, final int len) {
-        final String n = Integer.toString(value);
-        return StringUtils.repeat('0', Math.max(0, len - n.length())) + n;
+        return StringUtils.leftPad(Integer.toString(value), len, '0');
     }
 
     private class ButtonClickListener implements View.OnClickListener {
 
         @Override
-        public void onClick(View v) {
-            Button e = (Button) v;
-            CharSequence text = e.getText();
+        public void onClick(View view) {
+            final Button button = (Button) view;
+            final CharSequence text = button.getText();
             if (StringUtils.isBlank(text)) {
                 return;
             }
             switch (text.charAt(0)) {
                 case 'N':
-                    e.setText("S");
+                    button.setText("S");
                     break;
                 case 'S':
-                    e.setText("N");
+                    button.setText("N");
                     break;
                 case 'E':
-                    e.setText("W");
+                    button.setText("W");
                     break;
                 case 'W':
-                    e.setText("E");
+                    button.setText("E");
                     break;
             }
             calc(true);
@@ -274,7 +274,7 @@ public class cgeocoords extends Dialog {
 
     private class TextChanged implements TextWatcher {
 
-        private EditText editText;
+        private final EditText editText;
 
         public TextChanged(EditText editText) {
             this.editText = editText;
@@ -292,49 +292,45 @@ public class cgeocoords extends Dialog {
              * formatSec 2/3 2 2 3
              */
 
-            if (currentFormat == coordInputFormatEnum.Plain)
+            if (currentFormat == coordInputFormatEnum.Plain) {
                 return;
-
-            int maxLength = 2;
-            if (editText == eLonDeg || editText == eLatSub || editText == eLonSub) {
-                maxLength = 3;
-            }
-            if ((editText == eLatMin || editText == eLonMin) && currentFormat == coordInputFormatEnum.Deg) {
-                maxLength = 5;
-            }
-            if ((editText == eLatSec || editText == eLonSec) && currentFormat == coordInputFormatEnum.Min) {
-                maxLength = 3;
             }
 
+            final int maxLength = getMaxLengthFromCurrentField(editText);
             if (s.length() == maxLength) {
-                if (editText == eLatDeg)
+                if (editText == eLatDeg) {
                     eLatMin.requestFocus();
-                else if (editText == eLatMin)
-                    if (eLatSec.getVisibility() == View.GONE)
+                } else if (editText == eLatMin) {
+                    if (eLatSec.getVisibility() == View.GONE) {
                         eLonDeg.requestFocus();
-                    else
+                    } else {
                         eLatSec.requestFocus();
-                else if (editText == eLatSec)
-                    if (eLatSub.getVisibility() == View.GONE)
+                    }
+                } else if (editText == eLatSec) {
+                    if (eLatSub.getVisibility() == View.GONE) {
                         eLonDeg.requestFocus();
-                    else
+                    } else {
                         eLatSub.requestFocus();
-                else if (editText == eLatSub)
+                    }
+                } else if (editText == eLatSub) {
                     eLonDeg.requestFocus();
-                else if (editText == eLonDeg)
+                } else if (editText == eLonDeg) {
                     eLonMin.requestFocus();
-                else if (editText == eLonMin)
-                    if (eLonSec.getVisibility() == View.GONE)
+                } else if (editText == eLonMin) {
+                    if (eLonSec.getVisibility() == View.GONE) {
                         eLatDeg.requestFocus();
-                    else
+                    } else {
                         eLonSec.requestFocus();
-                else if (editText == eLonSec)
-                    if (eLonSub.getVisibility() == View.GONE)
+                    }
+                } else if (editText == eLonSec) {
+                    if (eLonSub.getVisibility() == View.GONE) {
                         eLatDeg.requestFocus();
-                    else
+                    } else {
                         eLonSub.requestFocus();
-                else if (editText == eLonSub)
+                    }
+                } else if (editText == eLonSub) {
                     eLatDeg.requestFocus();
+                }
             }
         }
 
@@ -409,6 +405,19 @@ public class cgeocoords extends Dialog {
         return true;
     }
 
+    public int getMaxLengthFromCurrentField(final EditText editText) {
+        if (editText == eLonDeg || editText == eLatSub || editText == eLonSub) {
+            return 3;
+        }
+        if ((editText == eLatMin || editText == eLonMin) && currentFormat == coordInputFormatEnum.Deg) {
+            return 5;
+        }
+        if ((editText == eLatSec || editText == eLonSec) && currentFormat == coordInputFormatEnum.Min) {
+            return 3;
+        }
+        return 2;
+    }
+
     private class CoordinateFormatListener implements OnItemSelectedListener {
 
         @Override
@@ -456,10 +465,12 @@ public class cgeocoords extends Dialog {
 
         @Override
         public void onClick(View v) {
-            if (!calc(true))
+            if (!calc(true)) {
                 return;
-            if (gp != null)
+            }
+            if (gp != null) {
                 cuListener.update(gp);
+            }
             dismiss();
         }
     }
