@@ -15,12 +15,17 @@ public class cgeogpxesTest extends ActivityInstrumentationTestCase2<cgeogpxes> {
         assertTrue(importGpxActivity.filenameBelongsToList(".gpx"));
         assertTrue(importGpxActivity.filenameBelongsToList("1234567.loc"));
         assertTrue(importGpxActivity.filenameBelongsToList("1234567.LOC"));
+        assertTrue(importGpxActivity.filenameBelongsToList("1234567.zip"));
+        assertTrue(importGpxActivity.filenameBelongsToList("1234567.ZIP"));
 
         assertFalse(importGpxActivity.filenameBelongsToList("1234567.gpy"));
         assertFalse(importGpxActivity.filenameBelongsToList("1234567.agpx"));
         assertFalse(importGpxActivity.filenameBelongsToList("1234567"));
         assertFalse(importGpxActivity.filenameBelongsToList(""));
         assertFalse(importGpxActivity.filenameBelongsToList("gpx"));
+        assertFalse(importGpxActivity.filenameBelongsToList("test.zip"));
+        assertFalse(importGpxActivity.filenameBelongsToList("zip"));
+        assertFalse(importGpxActivity.filenameBelongsToList(".zip"));
 
         assertFalse(importGpxActivity.filenameBelongsToList("1234567-wpts.gpx"));
     }

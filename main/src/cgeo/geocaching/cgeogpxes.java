@@ -12,12 +12,15 @@ import android.os.Environment;
 
 import java.io.File;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class cgeogpxes extends FileList<cgGPXListAdapter> {
     private static final String EXTRAS_LIST_ID = "list";
 
+    private static final Pattern gpxZipFilePattern = Pattern.compile("\\d+\\.zip", Pattern.CASE_INSENSITIVE);
+
     public cgeogpxes() {
-        super(new String[] { "gpx", "loc" });
+        super(new String[] { "gpx", "loc", "zip" });
     }
 
     private int listId = 1;
@@ -59,6 +62,9 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
     @Override
     protected boolean filenameBelongsToList(final String filename) {
         if (super.filenameBelongsToList(filename)) {
+            if (StringUtils.endsWithIgnoreCase(filename, GPXImporter.ZIP_FILE_EXTENSION)) {
+                return gpxZipFilePattern.matcher(filename).matches();
+            }
             // filter out waypoint files
             return !StringUtils.endsWithIgnoreCase(filename, GPXImporter.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION);
         }
