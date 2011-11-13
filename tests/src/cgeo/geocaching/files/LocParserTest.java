@@ -6,8 +6,6 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 
-import android.os.Handler;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -20,7 +18,7 @@ public class LocParserTest extends AbstractResourceInstrumentationTestCase {
         Collection<cgCache> caches = null;
         final InputStream instream = getResourceStream(resourceId);
         try {
-            caches = parser.parse(instream, new Handler());
+            caches = parser.parse(instream, null);
             assertNotNull(caches);
             assertTrue(caches.size() > 0);
         } finally {

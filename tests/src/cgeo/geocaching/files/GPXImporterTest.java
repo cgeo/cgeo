@@ -5,8 +5,8 @@ import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
+import cgeo.geocaching.utils.CancellableHandler;
 
-import android.os.Handler;
 import android.os.Message;
 
 import java.io.File;
@@ -116,12 +116,26 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(GPXImporter.IMPORT_STEP_FINISHED_WITH_ERROR, importStepHandler.messages.get(1).what);
     }
 
-    static class TestHandler extends Handler {
+    public void testImportGpxCancel() throws IOException {
+        File gc31j2h = new File(tempDir, "gc31j2h.gpx");
+        copyResourceToFile(R.raw.gc31j2h, gc31j2h);
+
+        progressHandler.cancel();
+        GPXImporter.ImportGpxFileThread importThread = new GPXImporter.ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
+        importThread.run();
+        importStepHandler.waitForCompletion();
+
+        assertEquals(2, importStepHandler.messages.size());
+        assertEquals(GPXImporter.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
+        assertEquals(GPXImporter.IMPORT_STEP_CANCELED, importStepHandler.messages.get(1).what);
+    }
+
+    static class TestHandler extends CancellableHandler {
         private final List<Message> messages = new ArrayList<Message>();
         private long lastMessage = System.currentTimeMillis();
 
         @Override
-        public synchronized void handleMessage(Message msg) {
+        public synchronized void handleRegularMessage(Message msg) {
             final Message msg1 = new Message();
             msg1.copyFrom(msg);
             messages.add(msg1);

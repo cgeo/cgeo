@@ -13,12 +13,12 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.utils.CancellableHandler;
 
 import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 
-import android.os.Handler;
 import android.sax.Element;
 import android.sax.EndElementListener;
 import android.sax.EndTextElementListener;
@@ -235,7 +235,7 @@ public abstract class GPXParser extends FileParser {
         return formatSimple.parse(input);
     }
 
-    public Collection<cgCache> parse(final InputStream stream, final Handler progressHandler) throws IOException, ParserException {
+    public Collection<cgCache> parse(final InputStream stream, final CancellableHandler progressHandler) throws IOException, ParserException {
         final RootElement root = new RootElement(namespace, "gpx");
         final Element waypoint = root.getChild(namespace, "wpt");
 

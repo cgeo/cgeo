@@ -9,7 +9,7 @@ import android.os.Message;
  */
 public abstract class CancellableHandler extends Handler {
 
-    private boolean cancelled = false;
+    private volatile boolean cancelled = false;
 
     private static class CancelHolder {
         final Object payload;

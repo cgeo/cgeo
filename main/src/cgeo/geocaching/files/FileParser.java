@@ -1,8 +1,7 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.cgCache;
-
-import android.os.Handler;
+import cgeo.geocaching.utils.CancellableHandler;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Collection;
 import java.util.Date;
+import java.util.concurrent.CancellationException;
 
 public abstract class FileParser {
     /**
@@ -26,18 +26,18 @@ public abstract class FileParser {
      * @throws ParserException
      *             if the input stream contains data not matching the file format of the parser
      */
-    public abstract Collection<cgCache> parse(final InputStream stream, final Handler progressHandler) throws IOException, ParserException;
+    public abstract Collection<cgCache> parse(final InputStream stream, final CancellableHandler progressHandler) throws IOException, ParserException;
 
     /**
      * Convenience method for parsing a file.
-     * 
+     *
      * @param file
      * @param progressHandler
      * @return
      * @throws IOException
      * @throws ParserException
      */
-    public Collection<cgCache> parse(final File file, final Handler progressHandler) throws IOException, ParserException {
+    public Collection<cgCache> parse(final File file, final CancellableHandler progressHandler) throws IOException, ParserException {
         FileInputStream fis = new FileInputStream(file);
         try {
             return parse(fis, progressHandler);
@@ -46,7 +46,7 @@ public abstract class FileParser {
         }
     }
 
-    protected static StringBuilder readStream(InputStream is, Handler progressHandler) throws IOException {
+    protected static StringBuilder readStream(InputStream is, CancellableHandler progressHandler) throws IOException {
         final StringBuilder buffer = new StringBuilder();
         ProgressInputStream progressInputStream = new ProgressInputStream(is);
         final BufferedReader input = new BufferedReader(new InputStreamReader(progressInputStream));
@@ -63,8 +63,11 @@ public abstract class FileParser {
         }
     }
 
-    protected static void showProgressMessage(final Handler handler, final int bytesRead) {
+    protected static void showProgressMessage(final CancellableHandler handler, final int bytesRead) {
         if (handler != null) {
+            if (handler.isCancelled()) {
+                throw new CancellationException();
+            }
             handler.sendMessage(handler.obtainMessage(0, bytesRead, 0));
         }
     }
