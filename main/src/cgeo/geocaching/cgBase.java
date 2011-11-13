@@ -530,6 +530,67 @@ public class cgBase {
         return false;
     }
 
+    public static boolean isPremium(String page) {
+        if (checkLogin(page)) {
+            final Pattern patternIsPremium = Pattern.compile("<span id=\"ctl00_litPMLevel\"", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+            final Matcher matcherIsPremium = patternIsPremium.matcher(page);
+            return matcherIsPremium.find();
+        }
+        return false;
+    }
+    public static String AdressIconLogin(String page) {
+        if (page == null || page.length() == 0) {
+            return "";
+        }
+
+        final Pattern patternIconLogin = Pattern.compile(
+                "<img title=\"your profile\" src=\"([^\"]+)\"",
+                Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+
+        final Matcher matcherIconLogin = patternIconLogin.matcher(page);
+        if (matcherIconLogin.find()) {
+            if (matcherIconLogin.groupCount() > 0) {
+                return matcherIconLogin.group(1);
+            }
+
+        }
+        return "";
+
+    }
+
+    public static String UsernameLogin(String page) {
+        if (page == null || page.length() == 0) {
+            return "";
+        }
+        final Matcher matcherLogin = patternLogged2In.matcher(page);
+        if (matcherLogin.find()) {
+            if (matcherLogin.groupCount() > 0) {
+                return matcherLogin.group(1);
+            }
+
+        }
+        return "";
+
+    }
+
+    public static String UserNbCaches(String page) {
+        if (page == null || page.length() == 0) {
+            return "";
+        }
+        final Pattern patternNbCaches = Pattern.compile(
+                "title=\"Caches Found\" /> ([^<]+)</strong>",
+                Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
+
+        final Matcher matcherNbCaches = patternNbCaches.matcher(page);
+        if (matcherNbCaches.find()) {
+            if (matcherNbCaches.groupCount() > 0) {
+                return matcherNbCaches.group(1).replaceAll(",", "");
+            }
+
+        }
+        return "";
+
+    }
     public static void switchToEnglish(String previousPage) {
         final String ENGLISH = "English&#9660;";
         if (previousPage != null && previousPage.indexOf(ENGLISH) > 0) {
