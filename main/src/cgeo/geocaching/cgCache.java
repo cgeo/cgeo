@@ -284,10 +284,10 @@ public class cgCache implements ICache {
             fromActivity.showToast(((Activity) fromActivity).getResources().getString(R.string.err_cannot_log_visit));
             return true;
         }
-        Intent logVisitIntent = new Intent((Activity) fromActivity, cgeovisit.class);
-        logVisitIntent.putExtra(cgeovisit.EXTRAS_ID, cacheId);
-        logVisitIntent.putExtra(cgeovisit.EXTRAS_GEOCODE, geocode.toUpperCase());
-        logVisitIntent.putExtra(cgeovisit.EXTRAS_FOUND, found);
+        Intent logVisitIntent = new Intent((Activity) fromActivity, VisitCacheActivity.class);
+        logVisitIntent.putExtra(VisitCacheActivity.EXTRAS_ID, cacheId);
+        logVisitIntent.putExtra(VisitCacheActivity.EXTRAS_GEOCODE, geocode.toUpperCase());
+        logVisitIntent.putExtra(VisitCacheActivity.EXTRAS_FOUND, found);
 
         ((Activity) fromActivity).startActivity(logVisitIntent);
 
