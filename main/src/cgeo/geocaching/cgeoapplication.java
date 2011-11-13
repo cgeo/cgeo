@@ -634,8 +634,19 @@ public class cgeoapplication extends Application {
         return storage.loadWaypoint(id);
     }
 
-    public void setAction(String act) {
-        action = act;
+    /**
+     * set the current action to be reported to Go4Cache (if enabled in settings)<br>
+     * this might be either
+     * <ul>
+     * <li>geocode</li>
+     * <li>name of a cache</li>
+     * <li>action like twittering</li>
+     * </ul>
+     * 
+     * @param action
+     */
+    public void setAction(String action) {
+        this.action = action;
     }
 
     public String getAction() {

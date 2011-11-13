@@ -63,6 +63,7 @@ public class cgeonavigate extends AbstractActivity {
             }
         }
     };
+    private String geocode;
 
     public cgeonavigate() {
         super("c:geo-compass");
@@ -89,7 +90,8 @@ public class cgeonavigate extends AbstractActivity {
         // get parameters
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            title = extras.getString(EXTRAS_GEOCODE);
+            geocode = extras.getString(EXTRAS_GEOCODE);
+            title = geocode;
             name = extras.getString(EXTRAS_NAME);
             dstCoords = new Geopoint(extras.getDouble(EXTRAS_LATITUDE), extras.getDouble(EXTRAS_LONGITUDE));
 
@@ -108,11 +110,7 @@ public class cgeonavigate extends AbstractActivity {
             return;
         }
 
-        if (StringUtils.isNotBlank(title)) {
-            app.setAction(title);
-        } else if (StringUtils.isNotBlank(name)) {
-            app.setAction(name);
-        }
+        setGo4CacheAction();
 
         // set header
         setTitle();
@@ -137,12 +135,7 @@ public class cgeonavigate extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-
-        if (StringUtils.isNotBlank(title)) {
-            app.setAction(title);
-        } else if (StringUtils.isNotBlank(name)) {
-            app.setAction(name);
-        }
+        setGo4CacheAction();
 
         // sensor & geolocation manager
         if (geo == null) {
@@ -161,6 +154,14 @@ public class cgeonavigate extends AbstractActivity {
         if (updater == null) {
             updater = new updaterThread(updaterHandler);
             updater.start();
+        }
+    }
+
+    private void setGo4CacheAction() {
+        if (StringUtils.isNotBlank(geocode)) {
+            app.setAction(geocode);
+        } else if (StringUtils.isNotBlank(name)) {
+            app.setAction(name);
         }
     }
 
