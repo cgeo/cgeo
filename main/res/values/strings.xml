@@ -888,7 +888,13 @@
   <string name="about_twitter">Should <b>c:geo</b> publish new status on Twitter every time a cache is logged?</string>
   <string name="about_auth_1">The following process allows <b>c:geo</b> to access Twitter - if agreed.</string>
   <string name="about_auth_2">Click on \"authorize c:geo\" button will start the process. This process will open up a web browser with Twitter page. Login on this page and allow <b>c:geo</b> to access your account. If accepted, Twitter will show up a numeric PIN code. This PIN must be pasted into <b>c:geo</b> and be confirmed. That\'s all.</string>
-
+  
+  <!-- go4cache -->
+  <string name="go4cache_looking_around">Looking around</string>
+  <string name="go4cache_tweeting">Tweeting</string>
+  <string name="go4cache_heading_to">Heading to</string>
+  <string name="go4cache_minutes">Minutes</string>
+      
   <!-- ====== please, do not translate (and include in translation) things below this line ====== -->
 
   <!-- contributors -->

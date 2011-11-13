@@ -25,7 +25,7 @@ public class MapsforgeOtherCachersOverlayItem extends OverlayItem implements Oth
     public Drawable getMarker(int state) {
         Drawable marker = null;
 
-        if (user != null && user.getLocated() != null && user.getLocated().getTime() >= (System.currentTimeMillis() - (20 * 60 * 1000))) {
+        if (user != null && user.getDate() != null && user.getDate().getTime() >= (System.currentTimeMillis() - (20 * 60 * 1000))) {
             marker = context.getResources().getDrawable(R.drawable.user_location_active);
         } else {
             marker = context.getResources().getDrawable(R.drawable.user_location);

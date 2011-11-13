@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeodetail;
 import cgeo.geocaching.go4cache.Go4CacheUser;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
@@ -34,7 +35,7 @@ public class OtherCachersOverlay extends AbstractItemizedOverlay {
     }
 
     protected void updateItems(OtherCachersOverlayItemImpl item) {
-        List<OtherCachersOverlayItemImpl> itemsPre = new ArrayList<OtherCachersOverlayItemImpl>();
+        final List<OtherCachersOverlayItemImpl> itemsPre = new ArrayList<OtherCachersOverlayItemImpl>();
         itemsPre.add(item);
 
         updateItems(itemsPre);
@@ -69,32 +70,27 @@ public class OtherCachersOverlay extends AbstractItemizedOverlay {
             final OtherCachersOverlayItemImpl item = items.get(index);
             final Go4CacheUser user = item.getUser();
 
-            // set action
-            String action = user.getAction();
-            String geocode = user.getGeocode();
-
-            // set icon
-            int icon = user.getIconId();
+            final String geocode = user.getGeocode();
+            final int icon = user.getIconId();
 
             final AlertDialog.Builder dialog = new AlertDialog.Builder(context);
             if (icon > -1) {
                 dialog.setIcon(icon);
             }
             dialog.setTitle(user.getUsername());
-            dialog.setMessage(action);
+            dialog.setMessage(user.getAction());
             dialog.setCancelable(true);
             if (StringUtils.isNotBlank(geocode)) {
-                dialog.setPositiveButton(geocode + "?", new cacheDetails(geocode));
+                dialog.setPositiveButton(geocode, new cacheDetails(geocode));
             }
-            dialog.setNeutralButton("Dismiss", new DialogInterface.OnClickListener() {
+            dialog.setNeutralButton(cgeoapplication.getInstance().getResources().getString(android.R.string.ok), new DialogInterface.OnClickListener() {
 
                 public void onClick(DialogInterface dialog, int id) {
                     dialog.cancel();
                 }
             });
 
-            AlertDialog alert = dialog.create();
-            alert.show();
+            dialog.create().show();
 
             return true;
         } catch (Exception e) {
@@ -147,7 +143,7 @@ public class OtherCachersOverlay extends AbstractItemizedOverlay {
 
         public void onClick(DialogInterface dialog, int id) {
             if (geocode != null) {
-                Intent detailIntent = new Intent(context, cgeodetail.class);
+                final Intent detailIntent = new Intent(context, cgeodetail.class);
                 detailIntent.putExtra("geocode", geocode);
                 context.startActivity(detailIntent);
             }

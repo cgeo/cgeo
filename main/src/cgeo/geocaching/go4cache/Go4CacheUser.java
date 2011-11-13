@@ -1,7 +1,10 @@
 package cgeo.geocaching.go4cache;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
+
+import android.content.res.Resources;
 
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -10,7 +13,7 @@ import java.util.regex.Pattern;
 public class Go4CacheUser {
     private static final Pattern patternGeocode = Pattern.compile("^(GC[A-Z0-9]+)(\\: ?(.+))?$", Pattern.CASE_INSENSITIVE);
 
-    private final Date located;
+    private final Date date;
     private final String username;
     private final Geopoint coords;
     private final String action;
@@ -18,17 +21,18 @@ public class Go4CacheUser {
 
     private String actionForDisplay;
     private String geocode;
+    private Resources res;
 
-    public Go4CacheUser(final String username, final Geopoint coords, final Date located, final String action, final String client) {
+    public Go4CacheUser(final String username, final Geopoint coords, final Date date, final String action, final String client) {
         this.username = username;
         this.coords = coords;
-        this.located = located;
+        this.date = date;
         this.action = action;
         this.client = client;
     }
 
-    public Date getLocated() {
-        return located;
+    public Date getDate() {
+        return date;
     }
 
     public String getUsername() {
@@ -55,20 +59,21 @@ public class Go4CacheUser {
 
     private void getGeocodeAndAction() {
         final Matcher matcherGeocode = patternGeocode.matcher(action.trim());
+        res = cgeoapplication.getInstance().getResources();
 
         geocode = "";
         if (0 == action.length() || action.equalsIgnoreCase("pending")) {
-            actionForDisplay = "Looking around";
+            actionForDisplay = res.getString(R.string.go4cache_looking_around);
         } else if (action.equalsIgnoreCase("tweeting")) {
-            actionForDisplay = "Tweeting";
+            actionForDisplay = res.getString(R.string.go4cache_tweeting);
         } else if (matcherGeocode.find()) {
             if (null != matcherGeocode.group(1)) {
                 geocode = matcherGeocode.group(1).trim().toUpperCase();
             }
             if (null != matcherGeocode.group(3)) {
-                actionForDisplay = "Heading to " + geocode + " (" + matcherGeocode.group(3).trim() + ")";
+                actionForDisplay = res.getString(R.string.go4cache_heading_to) + " " + geocode + " (" + matcherGeocode.group(3).trim() + ")";
             } else {
-                actionForDisplay = "Heading to " + geocode;
+                actionForDisplay = res.getString(R.string.go4cache_heading_to) + " " + geocode;
             }
         } else {
             actionForDisplay = action;
@@ -79,7 +84,15 @@ public class Go4CacheUser {
         if (null == actionForDisplay) {
             getGeocodeAndAction();
         }
-        return actionForDisplay;
+        return actionForDisplay + getTime();
+    }
+
+    private String getTime() {
+        long minutes = (System.currentTimeMillis() - date.getTime()) / 60000;
+        if (minutes < 0) {
+            minutes = 0;
+        }
+        return " " + minutes + " " + res.getString(R.string.go4cache_minutes);
     }
 
     public String getGeocode() {

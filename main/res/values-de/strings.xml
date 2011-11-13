@@ -861,4 +861,11 @@
   <string name="about_twitter">Soll jeder neue Fund auf Twitter veröffentlicht werden, wenn er über <b>c:geo</b> geloggt wird?</string>
   <string name="about_auth_1">Der folgende Prozess erlaubt es <b>c:geo</b> auf den persönlichen Twitter-Account zuzugreifen, wenn zugestimmt wird.</string>
   <string name="about_auth_2">Ein Klick auf \"Starte Autorisierung\" öffnet eine Twitter-Seite in einem Browserfenster. Durch die Anmeldung und die Bestätigung wird <b>c:geo</b> ermöglicht, auf den persönlichen Twitter-Account zuzugreifen. Wird dies bestätigt, nennt Twitter eine numerische PIN, diese muss kopiert und in <b>c:geo</b> eingefügt werden. Das ist alles.</string>
+
+  <!-- go4cache -->
+  <string name="go4cache_looking_around">Schaut umher</string>
+  <string name="go4cache_tweeting">Twittert</string>
+  <string name="go4cache_heading_to">Unterwegs zu</string>
+  <string name="go4cache_minutes">Minuten</string>
+
 </resources>

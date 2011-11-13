@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import android.util.Log;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -33,6 +34,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 public class Go4Cache extends Thread {
 
+    private final static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 2010-07-25 14:44:01
     private static Go4Cache instance;
 
     final private ArrayBlockingQueue<Geopoint> queue = new ArrayBlockingQueue<Geopoint>(1);
@@ -172,12 +174,11 @@ public class Go4Cache extends Thread {
      *             if the date could not be parsed as expected
      */
     private static Go4CacheUser parseUser(final JSONObject user) throws JSONException, ParseException {
-        final String located = user.getString("located");
-        final Date userlocated = cgBase.dateSqlIn.parse(located);
+        final Date date = dateFormat.parse(user.getString("located"));
         final String username = user.getString("user");
         final Geopoint coords = new Geopoint(user.getDouble("latitude"), user.getDouble("longitude"));
         final String action = user.getString("action");
         final String client = user.getString("client");
-        return new Go4CacheUser(username, coords, userlocated, action, client);
+        return new Go4CacheUser(username, coords, date, action, client);
     }
 }
