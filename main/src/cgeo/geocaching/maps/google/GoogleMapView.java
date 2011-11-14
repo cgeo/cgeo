@@ -142,14 +142,7 @@ public class GoogleMapView extends MapView implements MapViewImpl {
 
     @Override
     public void setMapSource() {
-
-        switch (Settings.getMapSource()) {
-            case googleSat:
-                setSatellite(true);
-                break;
-            default:
-                setSatellite(false);
-        }
+        setSatellite(GoogleMapProvider.IsSatelliteSource(Settings.getMapSource()));
     }
 
     @Override
@@ -186,5 +179,10 @@ public class GoogleMapView extends MapView implements MapViewImpl {
             }
             return super.onScroll(e1, e2, distanceX, distanceY);
         }
+    }
+
+    @Override
+    public boolean NeedsInvertedColors() {
+        return false;
     }
 }

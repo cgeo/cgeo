@@ -63,11 +63,20 @@ public interface MapViewImpl {
      * Map-library unspecific method to request a repaint of either
      * a specific overlay, that changed, or the mapview as a whole
      * (if overlay is null)
-     * 
+     *
      * @param overlay
      *            Overlay to repaint or null if the mapview has changed
      */
     void repaintRequired(GeneralOverlay overlay);
 
     void setOnDragListener(OnDragListener onDragListener);
+
+    /**
+     * Indicates if overlay text or line colours should be dark (normal case)
+     * or light (inverted case)
+     * 
+     * @return true - text/draw in light colors, false text/draw in dark colors
+     */
+    boolean NeedsInvertedColors();
+
 }
