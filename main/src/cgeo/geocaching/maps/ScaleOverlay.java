@@ -1,7 +1,6 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.Settings.mapSourceEnum;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
@@ -131,7 +130,7 @@ public class ScaleOverlay implements GeneralOverlay {
             scale.setTypeface(Typeface.DEFAULT_BOLD);
         }
 
-        if (mapSourceEnum.googleSat == Settings.getMapSource()) {
+        if (mapView.NeedsInvertedColors()) {
             scaleShadow.setColor(0xFF000000);
             scale.setColor(0xFFFFFFFF);
         } else {

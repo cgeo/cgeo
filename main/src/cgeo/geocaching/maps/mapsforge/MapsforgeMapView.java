@@ -165,14 +165,14 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     @Override
     public void setMapSource() {
 
-        switch (Settings.getMapSource()) {
-            case mapsforgeOsmarender:
+        switch (MapsforgeMapProvider.getMapsforgeSource(Settings.getMapSource())) {
+            case MapsforgeMapProvider.OSMARENDER:
                 setMapViewMode(MapViewMode.OSMARENDER_TILE_DOWNLOAD);
                 break;
-            case mapsforgeCycle:
+            case MapsforgeMapProvider.CYCLEMAP:
                 setMapViewMode(MapViewMode.OPENCYCLEMAP_TILE_DOWNLOAD);
                 break;
-            case mapsforgeOffline:
+            case MapsforgeMapProvider.OFFLINE:
                 if (MapDatabase.isValidMapFile(Settings.getMapFile())) {
                     setMapViewMode(MapViewMode.CANVAS_RENDERER);
                     super.setMapFile(Settings.getMapFile());
@@ -232,5 +232,10 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
             }
             return super.onScroll(e1, e2, distanceX, distanceY);
         }
+    }
+
+    @Override
+    public boolean NeedsInvertedColors() {
+        return false;
     }
 }
