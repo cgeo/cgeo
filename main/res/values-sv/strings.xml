@@ -84,6 +84,7 @@
   <string name="log_post">Posta logg</string>
   <string name="log_post_rate">Posta logg &amp; ge betyget</string>
   <string name="log_post_no_rate">Posta logg utan betyg</string>
+  <string name="log_post_not_possible">Loggning ej möjlig</string>
   <string name="log_add">Lägg till</string>
   <string name="log_date">Datum</string>
   <string name="log_time">Tid</string>
@@ -401,6 +402,7 @@
   <string name="init_restore_success">Återställning klar.</string>
   <string name="init_restore_failed">Återställningen misslyckades.</string>
   <string name="init_restore_running">Återställer databasen med cacher…</string>
+  <string name="init_restore_confirm">Databasen är tom. Vill du återställa med säkerhetskopian du gjort tidigare?</string>
   <string name="init_backup_last">Tillgänglig kopia från</string>
   <string name="init_backup_last_no">Det finns ingen säkerhetskopia.</string>
   <string name="init_mapsources">Kartkällor</string>
@@ -551,6 +553,9 @@
   <string name="cache_clear_history">Rensa historik</string>
   <string name="cache_remove_from_history">Ta bort från historik</string>
   <string name="cache_license">Licens</string>
+  <string name="cache_image">Bild</string>
+  <string name="cache_image_open_file">Öppna som fil</string>
+  <string name="cache_image_open_browser">Öppna i webbläsare</string>
 
   <!-- file list base -->
   <string name="file_searching_in">Söker efter filer\ni</string>
@@ -571,6 +576,7 @@
   <string name="gpx_import_error_parser">Filens format är felaktigt</string>
   <string name="gpx_import_error_unexpected">Oväntat fel</string>
   <string name="gpx_import_confirm">Vill du importera GPX filen till c:geo?</string>
+  <string name="gpx_import_canceled">Importeringen av GPX filen avbröts</string>
 
   <!-- map file select -->
   <string name="map_file_select_title">Välj kartfil</string>
@@ -725,4 +731,10 @@
   <string name="about_twitter">Ska <b>c:geo</b> publicera ny status på Twitter varje gång en cache loggas?</string>
   <string name="about_auth_1">Nedan tillåter du <b>c:geo</b> att ansluta till Twitter.</string>
   <string name="about_auth_2">Klicka på \"Påbörja koppling mot Twitter\" om du vill koppla ihop <b>c:geo</b> med Twitter. Twitters hemsida kommer att öppnas i en webbläsare. Logga in på den sidan och tillåt <b>c:geo</b> att ansluta till ditt konto. När du godkänt så kommer Twitter att visa en PIN kod. Kom ihåg denna PIN kod, stäng webbläsaren och skriv in PIN koden i <b>c:geo</b> och bekräfta.</string>
+
+  <!-- go4cache -->
+  <string name="go4cache_looking_around">Tittar omkring</string>
+  <string name="go4cache_tweeting">Tweeting</string>
+  <string name="go4cache_heading_to">På väg mot</string>
+  <string name="go4cache_minutes">Minuter</string>
 </resources>
