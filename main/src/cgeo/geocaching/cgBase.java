@@ -3,6 +3,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.GCConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
@@ -2084,6 +2085,11 @@ public class cgBase {
             final String realGeocode = StringUtils.isNotBlank(geocode) ? geocode : app.getGeocode(guid);
             search.addGeocode(realGeocode);
             return search;
+        }
+
+        // if we have no geocode, we can't dynamically select the handler, but must explicitly use GC
+        if (geocode == null && guid != null) {
+            return GCConnector.getInstance().searchByGeocode(this, geocode, guid, app, search, reason, handler);
         }
 
         return ConnectorFactory.getConnector(geocode).searchByGeocode(this, geocode, guid, app, search, reason, handler);
