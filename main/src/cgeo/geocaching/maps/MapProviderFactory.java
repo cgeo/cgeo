@@ -33,7 +33,7 @@ public class MapProviderFactory {
         }
     }
 
-    private static MapProviderFactory getFactory() {
+    private static MapProviderFactory getInstance() {
         if (null == instance) {
             initInstance();
         }
@@ -41,15 +41,15 @@ public class MapProviderFactory {
     }
 
     public static SortedMap<Integer, String> getMapSources() {
-        return getFactory().mapSources;
+        return getInstance().mapSources;
     }
 
     public static boolean IsValidSourceId(int sourceId) {
-        return getFactory().mapSources.containsKey(sourceId);
+        return getInstance().mapSources.containsKey(sourceId);
     }
 
     public static boolean IsSameProvider(int sourceId1, int sourceId2) {
-        for (MapProvider mp : getFactory().mapProviders) {
+        for (MapProvider mp : getInstance().mapProviders) {
             if (mp.IsMySource(sourceId1) && mp.IsMySource(sourceId2)) {
                 return true;
             }
@@ -58,18 +58,18 @@ public class MapProviderFactory {
     }
 
     public static MapProvider getMapProvider(int sourceId) {
-        for (MapProvider mp : getFactory().mapProviders) {
+        for (MapProvider mp : getInstance().mapProviders) {
             if (mp.IsMySource(sourceId)) {
                 return mp;
             }
         }
-        return getFactory().mapProviders[0];
+        return getInstance().mapProviders[0];
     }
 
     public static int getSourceOrdinalFromId(int sourceId) {
 
-        int sourceOrdinal = 1;
-        for (int key : getFactory().mapSources.keySet()) {
+        int sourceOrdinal = 0;
+        for (int key : getInstance().mapSources.keySet()) {
             if (sourceId == key) {
                 return sourceOrdinal;
             }
@@ -79,19 +79,19 @@ public class MapProviderFactory {
     }
 
     public static int getSourceIdFromOrdinal(int sourceOrdinal) {
-        int count = 1;
-        for (int key : getFactory().mapSources.keySet()) {
+        int count = 0;
+        for (int key : getInstance().mapSources.keySet()) {
             if (sourceOrdinal == count) {
                 return key;
             }
             count++;
         }
-        return getFactory().mapSources.firstKey();
+        return getInstance().mapSources.firstKey();
     }
 
     public static void addMapviewMenuItems(Menu parentMenu, int groupId, int currentSource) {
 
-        SortedMap<Integer, String> mapSources = getFactory().mapSources;
+        SortedMap<Integer, String> mapSources = getInstance().mapSources;
 
         for (int key : mapSources.keySet()) {
             parentMenu.add(groupId, key, 0, mapSources.get(key)).setCheckable(true).setChecked(key == currentSource);
