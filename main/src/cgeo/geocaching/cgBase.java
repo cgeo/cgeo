@@ -9,6 +9,8 @@ import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocParser;
+import cgeo.geocaching.gcvote.GCVote;
+import cgeo.geocaching.gcvote.GCVoteRating;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
@@ -903,17 +905,17 @@ public class cgBase {
                 Log.i(Settings.tag, "Trying to get ratings for " + cids.size() + " caches");
 
                 try {
-                    final Map<String, cgRating> ratings = GCVote.getRating(guids, null);
+                    final Map<String, GCVoteRating> ratings = GCVote.getRating(guids, null);
 
                     if (MapUtils.isNotEmpty(ratings)) {
                         // save found cache coordinates
-                        for (cgCache oneCache : caches.cacheList) {
-                            if (ratings.containsKey(oneCache.getGuid())) {
-                                cgRating thisRating = ratings.get(oneCache.getGuid());
+                        for (cgCache cache : caches.cacheList) {
+                            if (ratings.containsKey(cache.getGuid())) {
+                                GCVoteRating rating = ratings.get(cache.getGuid());
 
-                                oneCache.setRating(thisRating.rating);
-                                oneCache.setVotes(thisRating.votes);
-                                oneCache.setMyVote(thisRating.myVote);
+                                cache.setRating(rating.getRating());
+                                cache.setVotes(rating.getVotes());
+                                cache.setMyVote(rating.getMyVote());
                             }
                         }
                     }
@@ -1476,11 +1478,11 @@ public class cgBase {
                 return;
             }
             sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_gcvote);
-            final cgRating rating = GCVote.getRating(cache.getGuid(), cache.getGeocode());
+            final GCVoteRating rating = GCVote.getRating(cache.getGuid(), cache.getGeocode());
             if (rating != null) {
-                cache.setRating(rating.rating);
-                cache.setVotes(rating.votes);
-                cache.setMyVote(rating.myVote);
+                cache.setRating(rating.getRating());
+                cache.setVotes(rating.getVotes());
+                cache.setMyVote(rating.getMyVote());
             }
         }
     }

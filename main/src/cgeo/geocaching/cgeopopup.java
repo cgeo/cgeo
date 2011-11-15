@@ -3,6 +3,8 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.gcvote.GCVote;
+import cgeo.geocaching.gcvote.GCVoteRating;
 import cgeo.geocaching.utils.CancellableHandler;
 
 import org.apache.commons.lang3.StringUtils;
@@ -367,17 +369,17 @@ public class cgeopopup extends AbstractActivity {
 
                         @Override
                         public void run() {
-                            cgRating rating = GCVote.getRating(cache.getGuid(), geocode);
+                            GCVoteRating rating = GCVote.getRating(cache.getGuid(), geocode);
 
                             Message msg = new Message();
                             Bundle bundle = new Bundle();
 
-                            if (rating == null || rating.rating == null) {
+                            if (rating == null) {
                                 return;
                             }
 
-                            bundle.putFloat("rating", rating.rating);
-                            bundle.putInt("votes", rating.votes);
+                            bundle.putFloat("rating", rating.getRating());
+                            bundle.putInt("votes", rating.getVotes());
                             msg.setData(bundle);
 
                             ratingHandler.sendMessage(msg);

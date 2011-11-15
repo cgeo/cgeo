@@ -1,4 +1,9 @@
-package cgeo.geocaching;
+package cgeo.geocaching.gcvote;
+
+import cgeo.geocaching.Parameters;
+import cgeo.geocaching.Settings;
+import cgeo.geocaching.cgBase;
+import cgeo.geocaching.cgCache;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -22,7 +27,7 @@ public final class GCVote {
     private static final Pattern patternVote = Pattern.compile("voteUser='([0-9.]+)'", Pattern.CASE_INSENSITIVE);
     private static final Pattern patternVoteElement = Pattern.compile("<vote ([^>]+)>", Pattern.CASE_INSENSITIVE);
 
-    public static cgRating getRating(String guid, String geocode) {
+    public static GCVoteRating getRating(String guid, String geocode) {
         List<String> guids = null;
         List<String> geocodes = null;
 
@@ -36,9 +41,9 @@ public final class GCVote {
             return null;
         }
 
-        final Map<String, cgRating> ratings = getRating(guids, geocodes);
+        final Map<String, GCVoteRating> ratings = getRating(guids, geocodes);
         if (ratings != null) {
-            for (Entry<String, cgRating> entry : ratings.entrySet()) {
+            for (Entry<String, GCVoteRating> entry : ratings.entrySet()) {
                 return entry.getValue();
             }
         }
@@ -46,12 +51,12 @@ public final class GCVote {
         return null;
     }
 
-    public static Map<String, cgRating> getRating(List<String> guids, List<String> geocodes) {
+    public static Map<String, GCVoteRating> getRating(List<String> guids, List<String> geocodes) {
         if (guids == null && geocodes == null) {
             return null;
         }
 
-        final Map<String, cgRating> ratings = new HashMap<String, cgRating>();
+        final Map<String, GCVoteRating> ratings = new HashMap<String, GCVoteRating>();
 
         try {
             final Parameters params = new Parameters();
@@ -67,26 +72,20 @@ public final class GCVote {
                 params.put("waypoints", StringUtils.join(geocodes.toArray(), ','));
             }
             params.put("version", "cgeo");
-            final String votes = cgBase.getResponseData(cgBase.request("http://gcvote.com/getVotes.php", params, false, false, false));
-            if (votes == null) {
+            final String page = cgBase.getResponseData(cgBase.request("http://gcvote.com/getVotes.php", params, false, false, false));
+            if (page == null) {
                 return null;
             }
 
             String voteData = null;
-            final Matcher matcherVoteElement = patternVoteElement.matcher(votes);
+            final Matcher matcherVoteElement = patternVoteElement.matcher(page);
             while (matcherVoteElement.find()) {
-                if (matcherVoteElement.groupCount() > 0) {
-                    voteData = matcherVoteElement.group(1);
-                }
-
+                voteData = matcherVoteElement.group(1);
                 if (voteData == null) {
                     continue;
                 }
 
                 String guid = null;
-                cgRating rating = new cgRating();
-                boolean loggedIn = false;
-
                 try {
                     final Matcher matcherGuid = patternGuid.matcher(voteData);
                     if (matcherGuid.find()) {
@@ -97,9 +96,13 @@ public final class GCVote {
                 } catch (Exception e) {
                     Log.w(Settings.tag, "cgBase.getRating: Failed to parse guid");
                 }
+                if (guid == null) {
+                    continue;
+                }
 
+                boolean loggedIn = false;
                 try {
-                    final Matcher matcherLoggedIn = patternLogIn.matcher(votes);
+                    final Matcher matcherLoggedIn = patternLogIn.matcher(page);
                     if (matcherLoggedIn.find()) {
                         if (matcherLoggedIn.groupCount() > 0) {
                             if (matcherLoggedIn.group(1).equalsIgnoreCase("true")) {
@@ -111,35 +114,38 @@ public final class GCVote {
                     Log.w(Settings.tag, "cgBase.getRating: Failed to parse loggedIn");
                 }
 
+                float rating = 0;
                 try {
                     final Matcher matcherRating = patternRating.matcher(voteData);
                     if (matcherRating.find()) {
-                        if (matcherRating.groupCount() > 0) {
-                            rating.rating = Float.parseFloat(matcherRating.group(1));
-                        }
+                        rating = Float.parseFloat(matcherRating.group(1));
                     }
                 } catch (Exception e) {
                     Log.w(Settings.tag, "cgBase.getRating: Failed to parse rating");
                 }
+                if (rating <= 0) {
+                    continue;
+                }
 
+                int votes = -1;
                 try {
                     final Matcher matcherVotes = patternVotes.matcher(voteData);
                     if (matcherVotes.find()) {
-                        if (matcherVotes.groupCount() > 0) {
-                            rating.votes = Integer.parseInt(matcherVotes.group(1));
-                        }
+                        votes = Integer.parseInt(matcherVotes.group(1));
                     }
                 } catch (Exception e) {
                     Log.w(Settings.tag, "cgBase.getRating: Failed to parse vote count");
                 }
+                if (votes < 0) {
+                    continue;
+                }
 
+                Float myVote = null;
                 if (loggedIn) {
                     try {
                         final Matcher matcherVote = patternVote.matcher(voteData);
                         if (matcherVote.find()) {
-                            if (matcherVote.groupCount() > 0) {
-                                rating.myVote = Float.parseFloat(matcherVote.group(1));
-                            }
+                            myVote = Float.parseFloat(matcherVote.group(1));
                         }
                     } catch (Exception e) {
                         Log.w(Settings.tag, "cgBase.getRating: Failed to parse user's vote");
@@ -147,7 +153,8 @@ public final class GCVote {
                 }
 
                 if (StringUtils.isNotBlank(guid)) {
-                    ratings.put(guid, rating);
+                    GCVoteRating gcvoteRating = new GCVoteRating(rating, votes, myVote);
+                    ratings.put(guid, gcvoteRating);
                 }
             }
         } catch (Exception e) {
