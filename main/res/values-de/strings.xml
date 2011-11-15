@@ -84,6 +84,7 @@
   <string name="log_post">Loggen</string>
   <string name="log_post_rate">Loggen &amp; bewerten</string>
   <string name="log_post_no_rate">Loggen ohne Bewertung</string>
+  <string name="log_post_not_possible">Loggen nicht möglich</string>
   <string name="log_add">Hinzufügen</string>
   <string name="log_date">Datum</string>
   <string name="log_time">Uhrzeit</string>
@@ -400,6 +401,7 @@
   <string name="init_restore_success">Wiederherstellung beendet.</string>
   <string name="init_restore_failed">Wiederherstellung fehlgeschlagen.</string>
   <string name="init_restore_running">Wiederherstellung der Cache-Datenbank…</string>
+  <string name="init_restore_confirm">Die Cache-Datenbank ist leer. Möchtest du die vorhandene Sicherung wiederherstellen?</string>
   <string name="init_backup_last">Backup verfügbar von</string>
   <string name="init_backup_last_no">Keine Datei mit Datenbanksicherung gefunden.</string>
   <string name="init_mapsources">Kartenherkunft</string>
@@ -543,6 +545,9 @@
   <string name="cache_clear_history">Verlauf leeren</string>
   <string name="cache_remove_from_history">Aus Verlauf löschen</string>
   <string name="cache_license">Lizenz</string>
+  <string name="cache_image">Bild</string>
+  <string name="cache_image_open_file">Als Datei öffnen</string>
+  <string name="cache_image_open_browser">Im Browser öffnen</string>
 
   <!-- file list base -->
   <string name="file_searching_in">Suche nach Dateien\nin</string>
@@ -563,7 +568,8 @@
   <string name="gpx_import_error_parser">Dateiformat nicht ok</string>
   <string name="gpx_import_error_unexpected">Unerwarteter Fehler</string>
   <string name="gpx_import_confirm">Soll die GPX-Datei importiert werden?</string>
-  <string name="gpx_import_loading">Lade Caches von GPS-Datei</string>
+  <string name="gpx_import_loading">Lade Caches von GPX-Datei</string>
+  <string name="gpx_import_canceled">Import der GPX-Datei abgebrochen</string>      
       
   <!-- map file select -->
   <string name="map_file_select_title">Wähle eine Kartendatei</string>
@@ -860,4 +866,11 @@
   <string name="about_twitter">Soll jeder neue Fund auf Twitter veröffentlicht werden, wenn er über <b>c:geo</b> geloggt wird?</string>
   <string name="about_auth_1">Der folgende Prozess erlaubt es <b>c:geo</b> auf den persönlichen Twitter-Account zuzugreifen, wenn zugestimmt wird.</string>
   <string name="about_auth_2">Ein Klick auf \"Starte Autorisierung\" öffnet eine Twitter-Seite in einem Browserfenster. Durch die Anmeldung und die Bestätigung wird <b>c:geo</b> ermöglicht, auf den persönlichen Twitter-Account zuzugreifen. Wird dies bestätigt, nennt Twitter eine numerische PIN, diese muss kopiert und in <b>c:geo</b> eingefügt werden. Das ist alles.</string>
+  
+   <!-- go4cache -->
+  <string name="go4cache_looking_around">Schaut sich um</string>
+  <string name="go4cache_tweeting">Tweeting</string>
+  <string name="go4cache_heading_to">Auf dem Weg zu</string>
+  <string name="go4cache_minutes">Minuten</string>
+  
 </resources>
