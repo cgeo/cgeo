@@ -2,9 +2,8 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.maps.google.GoogleMapFactory;
-import cgeo.geocaching.maps.interfaces.MapFactory;
-import cgeo.geocaching.maps.mapsforge.MapsforgeMapFactory;
+import cgeo.geocaching.maps.MapProviderFactory;
+import cgeo.geocaching.maps.interfaces.MapProvider;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -81,32 +80,6 @@ public final class Settings {
         void edit(final Editor edit);
     }
 
-    public enum mapSourceEnum {
-        googleMap,
-        googleSat,
-        mapsforgeMapnik,
-        mapsforgeOsmarender,
-        mapsforgeCycle,
-        mapsforgeOffline;
-
-        static mapSourceEnum fromInt(int id) {
-            final mapSourceEnum[] values = mapSourceEnum.values();
-            if (id >= 0 && id < values.length) {
-                return values[id];
-            } else {
-                return googleMap;
-            }
-        }
-
-        public boolean isGoogleMapSource() {
-            if (googleMap == this || googleSat == this) {
-                return true;
-            }
-
-            return false;
-        }
-    }
-
     public enum coordInputFormatEnum {
         Plain,
         Deg,
@@ -134,7 +107,7 @@ public final class Settings {
     private static String password = null;
 
     // maps
-    private static MapFactory mapFactory = null;
+    private static MapProvider mapProvider = null;
 
     private Settings() {
         // this class is not to be instantiated;
@@ -328,16 +301,11 @@ public final class Settings {
         });
     }
 
-    public static MapFactory getMapFactory() {
-        if (mapFactory == null) {
-            if (getMapSource().isGoogleMapSource()) {
-                mapFactory = new GoogleMapFactory();
-            }
-            else {
-                mapFactory = new MapsforgeMapFactory();
-            }
+    public static MapProvider getMapProvider() {
+        if (mapProvider == null) {
+            mapProvider = MapProviderFactory.getMapProvider(getMapSource());
         }
-        return mapFactory;
+        return mapProvider;
     }
 
     public static String getMapFile() {
@@ -705,19 +673,19 @@ public final class Settings {
         });
     }
 
-    public static mapSourceEnum getMapSource() {
-        return mapSourceEnum.fromInt(sharedPrefs.getInt(KEY_MAP_SOURCE, 0));
+    public static int getMapSource() {
+        return sharedPrefs.getInt(KEY_MAP_SOURCE, 0);
     }
 
-    public static void setMapSource(final mapSourceEnum newMapSource) {
-        if (getMapSource().isGoogleMapSource() != newMapSource.isGoogleMapSource()) {
-            mapFactory = null;
+    public static void setMapSource(final int newMapSource) {
+        if (!MapProviderFactory.IsSameProvider(getMapSource(), newMapSource)) {
+            mapProvider = null;
         }
         editSharedSettings(new PrefRunnable() {
 
             @Override
             public void edit(Editor edit) {
-                edit.putInt(KEY_MAP_SOURCE, newMapSource.ordinal());
+                edit.putInt(KEY_MAP_SOURCE, newMapSource);
             }
         });
     }
