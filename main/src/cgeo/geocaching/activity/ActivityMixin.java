@@ -134,19 +134,17 @@ public final class ActivityMixin {
             return;
         }
         Resources res = ((Activity) activity).getResources();
-        if (Settings.isLogin()) {
-            if (Settings.getLogOffline()) {
-                SubMenu logMenu = menu.addSubMenu(1, IAbstractActivity.MENU_LOG_VISIT_OFFLINE, 0, res.getString(R.string.cache_menu_visit_offline)).setIcon(MENU_ICON_LOG_VISIT);
-                List<Integer> logTypes = cache.getPossibleLogTypes();
-                for (Integer logType : logTypes) {
-                    String label = cgBase.logTypes2.get(logType);
-                    logMenu.add(1, IAbstractActivity.MENU_LOG_VISIT_OFFLINE + logType, 0, label);
-                }
-                logMenu.add(1, IAbstractActivity.MENU_LOG_VISIT, 0, res.getString(R.string.cache_menu_visit));
+        if (Settings.getLogOffline()) {
+            SubMenu logMenu = menu.addSubMenu(1, IAbstractActivity.MENU_LOG_VISIT_OFFLINE, 0, res.getString(R.string.cache_menu_visit_offline)).setIcon(MENU_ICON_LOG_VISIT);
+            List<Integer> logTypes = cache.getPossibleLogTypes();
+            for (Integer logType : logTypes) {
+                String label = cgBase.logTypes2.get(logType);
+                logMenu.add(1, IAbstractActivity.MENU_LOG_VISIT_OFFLINE + logType, 0, label);
             }
-            else {
-                menu.add(1, IAbstractActivity.MENU_LOG_VISIT, 0, res.getString(R.string.cache_menu_visit)).setIcon(MENU_ICON_LOG_VISIT);
-            }
+            logMenu.add(1, IAbstractActivity.MENU_LOG_VISIT, 0, res.getString(R.string.cache_menu_visit));
+        }
+        else {
+            menu.add(1, IAbstractActivity.MENU_LOG_VISIT, 0, res.getString(R.string.cache_menu_visit)).setIcon(MENU_ICON_LOG_VISIT);
         }
     }
 }

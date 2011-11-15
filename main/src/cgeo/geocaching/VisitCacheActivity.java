@@ -616,10 +616,18 @@ public class VisitCacheActivity extends cgLogForm {
                 finish();
                 return;
             }
+            if (!Settings.isLogin()) { // allow offline logging
+                showToast(res.getString(R.string.err_login));
+                return;
+            }
         }
 
         @Override
         public void run() {
+            if (!Settings.isLogin()) {
+                // enable only offline logging, don't get the current state of the cache
+                return;
+            }
             final Parameters params = new Parameters();
 
             gettingViewstate = true;
