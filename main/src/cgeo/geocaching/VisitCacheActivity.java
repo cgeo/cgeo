@@ -169,6 +169,23 @@ public class VisitCacheActivity extends cgLogForm {
         else {
             postButton.setOnTouchListener(null);
             postButton.setOnClickListener(null);
+        }
+        updatePostButtonText();
+    }
+
+    private void updatePostButtonText() {
+        if (postButton.isEnabled()) {
+            if (typeSelected == cgBase.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
+                if (rating == 0) {
+                    postButton.setText(res.getString(R.string.log_post_no_rate));
+                } else {
+                    postButton.setText(res.getString(R.string.log_post_rate) + " " + ratingTextValue(rating) + "*");
+                }
+            } else {
+                postButton.setText(res.getString(R.string.log_post));
+            }
+        }
+        else {
             postButton.setText(res.getString(R.string.log_post_not_possible));
         }
     }
@@ -306,12 +323,7 @@ public class VisitCacheActivity extends cgLogForm {
             return true;
         } else if (id >= 10 && id <= 19) {
             rating = (id - 9) / 2.0;
-
-            if (rating == 0.0) {
-                postButton.setText(res.getString(R.string.log_post_no_rate));
-            } else {
-                postButton.setText(res.getString(R.string.log_post_rate) + " " + ratingTextValue(rating) + "*");
-            }
+            updatePostButtonText();
             return true;
         }
         final LogTemplate template = LogTemplateProvider.getTemplate(id);
@@ -450,9 +462,7 @@ public class VisitCacheActivity extends cgLogForm {
             typeSelected = log.type;
             date.setTime(new Date(log.date));
             text = log.log;
-            if (typeSelected == cgBase.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
-                postButton.setText(res.getString(R.string.log_post_no_rate));
-            }
+            updatePostButtonText();
         } else if (StringUtils.isNotBlank(Settings.getSignature())
                 && Settings.isAutoInsertSignature()
                 && StringUtils.isBlank(((EditText) findViewById(R.id.log)).getText())) {
@@ -537,16 +547,7 @@ public class VisitCacheActivity extends cgLogForm {
         } else {
             tweetBox.setVisibility(View.GONE);
         }
-
-        if (type == cgBase.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
-            if (rating == 0) {
-                postButton.setText(res.getString(R.string.log_post_no_rate));
-            } else {
-                postButton.setText(res.getString(R.string.log_post_rate) + " " + ratingTextValue(rating) + "*");
-            }
-        } else {
-            postButton.setText(res.getString(R.string.log_post));
-        }
+        updatePostButtonText();
     }
 
     private class DateListener implements View.OnClickListener {
