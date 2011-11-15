@@ -1,10 +1,10 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.LogTemplateProvider.LogTemplate;
-import cgeo.geocaching.Settings.mapSourceEnum;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.maps.MapProviderFactory;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
@@ -33,6 +33,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.File;
+import java.util.SortedMap;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class cgeoinit extends AbstractActivity {
@@ -518,13 +519,13 @@ public class cgeoinit extends AbstractActivity {
         webAuth.setOnClickListener(new webAuth());
 
         // Map source settings
+        SortedMap<Integer, String> mapSources = MapProviderFactory.getMapSources();
         Spinner mapSourceSelector = (Spinner) findViewById(R.id.mapsource);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                this, R.array.map_sources, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, mapSources.values().toArray(new String[] {}));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mapSourceSelector.setAdapter(adapter);
         int mapsource = prefs.getInt("mapsource", 0);
-        mapSourceSelector.setSelection(mapsource);
+        mapSourceSelector.setSelection(MapProviderFactory.getSourceOrdinalFromId(mapsource));
         mapSourceSelector.setOnItemSelectedListener(new cgeoChangeMapSource());
 
         initMapfileEdittext(false);
@@ -657,12 +658,12 @@ public class cgeoinit extends AbstractActivity {
         @Override
         public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
                 long arg3) {
-            Settings.setMapSource(mapSourceEnum.fromInt(arg2));
+            Settings.setMapSource(MapProviderFactory.getSourceIdFromOrdinal(arg2));
         }
 
         @Override
         public void onNothingSelected(AdapterView<?> arg0) {
-            arg0.setSelection(Settings.getMapSource().ordinal());
+            arg0.setSelection(MapProviderFactory.getSourceIdFromOrdinal(Settings.getMapSource()));
         }
     }
 
