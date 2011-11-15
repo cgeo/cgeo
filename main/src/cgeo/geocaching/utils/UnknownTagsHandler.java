@@ -1,4 +1,4 @@
-package cgeo.geocaching;
+package cgeo.geocaching.utils;
 
 import org.xml.sax.XMLReader;
 

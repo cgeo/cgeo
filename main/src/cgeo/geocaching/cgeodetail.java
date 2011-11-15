@@ -13,6 +13,7 @@ import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
