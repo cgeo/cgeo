@@ -323,6 +323,9 @@ public class VisitCacheActivity extends cgLogForm {
             return true;
         } else if (id >= 10 && id <= 19) {
             rating = (id - 9) / 2.0;
+            if (rating < 1) {
+                rating = 0;
+            }
             updatePostButtonText();
             return true;
         }
