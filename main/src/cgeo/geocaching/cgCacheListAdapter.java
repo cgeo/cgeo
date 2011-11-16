@@ -483,7 +483,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             holder.directionLayout.setVisibility(View.GONE);
             holder.distance.clear();
 
-            final Bitmap dirImgPre = BitmapFactory.decodeFile(cgDirectionImg.getDirectionFile(cache.getGeocode()).getPath());
+            final Bitmap dirImgPre = BitmapFactory.decodeFile(cgDirectionImg.getDirectionFile(cache.getGeocode(), false).getPath());
             final Bitmap dirImg;
             if (dirImgPre != null) { // null happens for invalid caches (not yet released)
                 dirImg = dirImgPre.copy(Bitmap.Config.ARGB_8888, true);

@@ -21,8 +21,8 @@ public class StaticMapsProvider {
      */
     private static final int MIN_MAP_IMAGE_BYTES = 6000;
 
-    public static File getMapFile(final String geocode, final int level) {
-        return LocalStorage.getStorageFile(geocode, "map_" + level, false);
+    public static File getMapFile(final String geocode, final int level, final boolean createDirs) {
+        return LocalStorage.getStorageFile(geocode, "map_" + level, false, createDirs);
     }
 
     private static void downloadMapsInThread(final cgCache cache, String latlonMap, int edge, String waypoints) {
@@ -39,7 +39,7 @@ public class StaticMapsProvider {
 
         final String url = mapUrl + "&zoom=" + zoom + "&size=" + edge + "x" + edge + "&maptype=" + mapType + "&markers=icon%3A" + markerUrl + "%7C" + latlonMap + waypoints + "&sensor=false";
 
-        final File file = getMapFile(cache.getGeocode(), level);
+        final File file = getMapFile(cache.getGeocode(), level, true);
         final HttpResponse httpResponse = cgBase.request(url, null, false);
 
         if (httpResponse != null) {

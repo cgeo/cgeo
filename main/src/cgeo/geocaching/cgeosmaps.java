@@ -116,7 +116,7 @@ public class cgeosmaps extends AbstractActivity {
 
                 for (int level = 1; level <= 5; level++) {
                     try {
-                        final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, level).getPath());
+                        final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, level, false).getPath());
                         if (image != null) {
                             maps.add(image);
                         }
@@ -128,7 +128,7 @@ public class cgeosmaps extends AbstractActivity {
                 if (maps.isEmpty()) {
                     for (int level = 1; level <= 5; level++) {
                         try {
-                            final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, level).getPath());
+                            final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, level, false).getPath());
                             if (image != null) {
                                 maps.add(image);
                             }

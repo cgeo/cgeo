@@ -92,7 +92,7 @@ public class HtmlImage implements Html.ImageGetter {
                 }
             }
 
-            final File file = LocalStorage.getStorageFile(geocode, url, true);
+            final File file = LocalStorage.getStorageFile(geocode, url, true, true);
             LocalStorage.saveEntityToFile(bufferedEntity, file);
         }
 
@@ -146,7 +146,7 @@ public class HtmlImage implements Html.ImageGetter {
 
     private Bitmap loadImageFromStorage(final String url) {
         try {
-            final File file = LocalStorage.getStorageFile(geocode, url, true);
+            final File file = LocalStorage.getStorageFile(geocode, url, true, false);
             final Bitmap image = loadCachedImage(file);
             if (image != null) {
                 return image;

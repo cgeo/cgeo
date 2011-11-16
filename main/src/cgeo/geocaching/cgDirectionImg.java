@@ -17,12 +17,12 @@ public class cgDirectionImg {
         final HttpResponse httpResponse =
                     cgBase.request("http://www.geocaching.com/ImgGen/seek/CacheDir.ashx", new Parameters("k", code), false);
         if (httpResponse != null) {
-            LocalStorage.saveEntityToFile(httpResponse.getEntity(), getDirectionFile(geocode));
+            LocalStorage.saveEntityToFile(httpResponse.getEntity(), getDirectionFile(geocode, true));
         }
     }
 
-    public static File getDirectionFile(final String geocode) {
-        return LocalStorage.getStorageFile(geocode, "direction.png", false);
+    public static File getDirectionFile(final String geocode, final boolean createDirs) {
+        return LocalStorage.getStorageFile(geocode, "direction.png", false, createDirs);
     }
 
 }

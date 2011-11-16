@@ -198,7 +198,7 @@ public class cgeoimages extends AbstractActivity {
     }
 
     private void viewImageInStandardApp(final BitmapDrawable image) {
-        final File file = LocalStorage.getStorageFile(null, "temp.jpg", false);
+        final File file = LocalStorage.getStorageFile(null, "temp.jpg", false, true);
         try {
             final FileOutputStream fos = new FileOutputStream(file);
             image.getBitmap().compress(CompressFormat.JPEG, 100, fos);

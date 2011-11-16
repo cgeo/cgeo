@@ -36,7 +36,7 @@ public class LocalStorage {
     }
 
     /**
-     * Return the primary storage cache root (phone if external media is mounted, external media otherwise).
+     * Return the secondary storage cache root (phone if external media is mounted, external media otherwise).
      *
      * @return the root of the cache directory
      */
@@ -68,33 +68,31 @@ public class LocalStorage {
     }
 
     /**
-     * Get the primary storage cache directory for a geocode. The directory and its parents will be created if
-     * necessary. A null or empty geocode will be replaced by a default value.
+     * Get the primary storage cache directory for a geocode. A null or empty geocode will be replaced by a default
+     * value.
      *
      * @param geocode
      *            the geocode
      * @return the cache directory
      */
     public static File getStorageDir(final String geocode) {
-        return buildStorageDir(getStorage(), geocode);
+        return storageDir(getStorage(), geocode);
     }
 
     /**
-     * Get the secondary storage cache directory for a geocode. The directory and its parents will be created if
-     * necessary. A null or empty geocode will be replaced by a default value.
+     * Get the secondary storage cache directory for a geocode. A null or empty geocode will be replaced by a default
+     * value.
      *
      * @param geocode
      *            the geocode
      * @return the cache directory
      */
-    public static File getStorageSecDir(final String geocode) {
-        return buildStorageDir(getStorageSec(), geocode);
+    private static File getStorageSecDir(final String geocode) {
+        return storageDir(getStorageSec(), geocode);
     }
 
-    private static File buildStorageDir(final File base, final String geocode) {
-        final File dir = new File(base, StringUtils.defaultIfEmpty(geocode, "_others"));
-        dir.mkdirs();
-        return dir;
+    private static File storageDir(final File base, final String geocode) {
+        return new File(base, StringUtils.defaultIfEmpty(geocode, "_others"));
     }
 
     /**
@@ -110,13 +108,13 @@ public class LocalStorage {
      *            true if an url was given, false if a file name was given
      * @return the file
      */
-    public static File getStorageFile(final String geocode, final String fileNameOrUrl, final boolean isUrl) {
-        return buildFile(getStorageDir(geocode), fileNameOrUrl, isUrl);
+    public static File getStorageFile(final String geocode, final String fileNameOrUrl, final boolean isUrl, final boolean createDirs) {
+        return buildFile(getStorageDir(geocode), fileNameOrUrl, isUrl, createDirs);
     }
 
     /**
      * Get the secondary file corresponding to a geocode and a file name or an url. If it is an url, an appropriate
-     * filename will be built by hashing it. The directory structure will be created if needed.
+     * filename will be built by hashing it. The directory structure will not be created automatically.
      * A null or empty geocode will be replaced by a default value.
      *
      * @param geocode
@@ -128,10 +126,13 @@ public class LocalStorage {
      * @return the file
      */
     public static File getStorageSecFile(final String geocode, final String fileNameOrUrl, final boolean isUrl) {
-        return buildFile(getStorageSecDir(geocode), fileNameOrUrl, isUrl);
+        return buildFile(getStorageSecDir(geocode), fileNameOrUrl, isUrl, false);
     }
 
-    private static File buildFile(final File base, final String fileName, final boolean isUrl) {
+    private static File buildFile(final File base, final String fileName, final boolean isUrl, final boolean createDirs) {
+        if (createDirs) {
+            base.mkdirs();
+        }
         return new File(base, isUrl ? CryptUtils.md5(fileName) + getExtension(fileName) : fileName);
     }
 
