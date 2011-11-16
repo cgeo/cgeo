@@ -35,6 +35,10 @@ import android.widget.TextView;
 import java.util.List;
 
 public class cgeopoint extends AbstractActivity {
+    private static final int MENU_COMPASS = 2;
+    private static final int MENU_NAVIGATE = 0;
+    private static final int MENU_CACHES_AROUND = 5;
+    private static final int MENU_CLEAR_HISTORY = 6;
 
     private static class DestinationHistoryAdapter extends ArrayAdapter<cgDestination> {
         private LayoutInflater inflater = null;
@@ -90,7 +94,11 @@ public class cgeopoint extends AbstractActivity {
     private ListView historyListView;
     private TextView historyFooter;
 
-    private static final int CONTEXT_MENU_DELETE_WAYPOINT = Menu.FIRST;
+    private static final int CONTEXT_MENU_NAVIGATE = 1;
+    private static final int CONTEXT_MENU_DELETE_WAYPOINT = 2;
+    private static final int CONTEXT_MENU_EDIT_WAYPOINT = 3;
+
+    private int contextMenuItemPosition;
 
     public cgeopoint() {
         super("c:geo-navigate-any");
@@ -132,33 +140,53 @@ public class cgeopoint extends AbstractActivity {
                 }
             }
         });
-        historyListView
-                .setOnCreateContextMenuListener(new OnCreateContextMenuListener() {
 
-                    @Override
-                    public void onCreateContextMenu(ContextMenu menu, View v,
-                            ContextMenuInfo menuInfo) {
-                        menu.add(Menu.NONE, CONTEXT_MENU_DELETE_WAYPOINT,
-                                Menu.NONE, R.string.waypoint_delete);
-                    }
-                });
+        final Activity thisActivity = this;
+        historyListView.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {
+            @Override
+            public void onCreateContextMenu(ContextMenu menu, View v,
+                    ContextMenuInfo menuInfo) {
+                SubMenu subMenu = menu.addSubMenu(Menu.NONE, CONTEXT_MENU_NAVIGATE, Menu.NONE, res.getString(R.string.cache_menu_navigate));
+                NavigationAppFactory.addMenuItems(subMenu, thisActivity, res);
+
+                menu.add(Menu.NONE, CONTEXT_MENU_EDIT_WAYPOINT, Menu.NONE, R.string.waypoint_edit);
+                menu.add(Menu.NONE, CONTEXT_MENU_DELETE_WAYPOINT, Menu.NONE, R.string.waypoint_delete);
+            }
+        });
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        final int position = (null != menuInfo) ? menuInfo.position : contextMenuItemPosition;
+        Object destination = historyListView.getItemAtPosition(position);
+
         switch (item.getItemId()) {
+            case CONTEXT_MENU_NAVIGATE:
+                contextMenuItemPosition = position;
+                break;
+
             case CONTEXT_MENU_DELETE_WAYPOINT:
-                AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item
-                        .getMenuInfo();
-                Object destination = historyListView
-                        .getItemAtPosition(menuInfo.position);
                 if (destination instanceof cgDestination) {
                     removeFromHistory((cgDestination) destination);
                 }
                 return true;
+
+            case CONTEXT_MENU_EDIT_WAYPOINT:
+                if (destination instanceof cgDestination) {
+                    final Geopoint gp = ((cgDestination) destination).getCoords();
+                    latButton.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
+                    lonButton.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
+                }
+                return true;
+
             default:
-                return super.onContextItemSelected(item);
+                if (destination instanceof cgDestination) {
+                    return NavigationAppFactory.onMenuItemSelected(item, geo, this, res, null, null, null, ((cgDestination) destination).getCoords());
+                }
         }
+
+        return super.onContextItemSelected(item);
     }
 
     private TextView getEmptyHistoryFooter() {
@@ -274,16 +302,14 @@ public class cgeopoint extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 2, 0, res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass); // compass
+        menu.add(0, MENU_COMPASS, 0, res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass); // compass
 
-        SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
+        SubMenu subMenu = menu.addSubMenu(1, MENU_NAVIGATE, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
         NavigationAppFactory.addMenuItems(subMenu, this, res);
 
-        menu.add(0, 5, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
+        menu.add(0, MENU_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
 
-        // clear history
-        MenuItem clearHistoryItem = menu.add(0, 6, 0, res.getString(R.string.search_clear_history));
-        clearHistoryItem.setIcon(android.R.drawable.ic_menu_delete);
+        menu.add(0, MENU_CLEAR_HISTORY, 0, res.getString(R.string.search_clear_history)).setIcon(android.R.drawable.ic_menu_delete); // clear history
 
         return true;
     }
@@ -296,16 +322,16 @@ public class cgeopoint extends AbstractActivity {
             final Geopoint coords = getDestination();
 
             if (coords != null) {
-                menu.findItem(0).setVisible(true);
-                menu.findItem(2).setVisible(true);
-                menu.findItem(5).setVisible(true);
+                menu.findItem(MENU_NAVIGATE).setVisible(true);
+                menu.findItem(MENU_COMPASS).setVisible(true);
+                menu.findItem(MENU_CACHES_AROUND).setVisible(true);
             } else {
-                menu.findItem(0).setVisible(false);
-                menu.findItem(2).setVisible(false);
-                menu.findItem(5).setVisible(false);
+                menu.findItem(MENU_NAVIGATE).setVisible(false);
+                menu.findItem(MENU_COMPASS).setVisible(false);
+                menu.findItem(MENU_CACHES_AROUND).setVisible(false);
             }
 
-            menu.findItem(6).setEnabled(!getHistoryOfSearchedLocations().isEmpty());
+            menu.findItem(MENU_CLEAR_HISTORY).setEnabled(!getHistoryOfSearchedLocations().isEmpty());
         } catch (Exception e) {
             // nothing
         }
@@ -324,19 +350,22 @@ public class cgeopoint extends AbstractActivity {
             addToHistory(coords);
         }
 
-        if (menuItem == 2) {
-            navigateTo();
-            return true;
-        } else if (menuItem == 5) {
-            cachesAround();
-            return true;
-        }
-        else if (menuItem == 6) {
-            clearHistory();
-            return true;
-        }
+        switch (menuItem) {
+            case MENU_COMPASS:
+                navigateTo();
+                return true;
 
-        return NavigationAppFactory.onMenuItemSelected(item, geo, this, res, null, null, null, coords);
+            case MENU_CACHES_AROUND:
+                cachesAround();
+                return true;
+
+            case MENU_CLEAR_HISTORY:
+                clearHistory();
+                return true;
+
+            default:
+                return NavigationAppFactory.onMenuItemSelected(item, geo, this, res, null, null, null, coords);
+        }
     }
 
     private void addToHistory(final Geopoint coords) {
