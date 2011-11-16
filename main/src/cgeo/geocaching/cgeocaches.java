@@ -551,7 +551,7 @@ public class cgeocaches extends AbstractListActivity {
         setTitle("caches");
 
         // get parameters
-        Bundle extras = getIntent().getExtras();
+        final Bundle extras = getIntent().getExtras();
         if (extras != null) {
             Object typeObject = extras.get(EXTRAS_LIST_TYPE);
             type = (typeObject instanceof CacheListType) ? (CacheListType) typeObject : CacheListType.OFFLINE;
@@ -673,7 +673,7 @@ public class cgeocaches extends AbstractListActivity {
                 title = res.getString(R.string.map_map);
                 setTitle(title);
                 showProgress(true);
-                search = (cgSearch) extras.get("search");
+                search = extras != null ? (cgSearch) extras.get("search") : null;
                 loadCachesHandler.sendMessage(Message.obtain());
                 break;
             default:
@@ -1198,18 +1198,9 @@ public class cgeocaches extends AbstractListActivity {
             Log.w(Settings.tag, "cgeocaches.onContextItemSelected: " + e.toString());
         }
 
-        // the context menu may be invoked for the cache or for the filter list
-        int touchedPos = -1;
-        cgCache cache = null;
-        if (adapterInfo != null) {
-            touchedPos = adapterInfo.position;
-            if (touchedPos < adapter.getCount()) {
-                cache = adapter.getItem(touchedPos);
-            }
-        }
-
         if (id == MENU_COMPASS) {
-            Intent navigateIntent = new Intent(this, cgeonavigate.class);
+            final Intent navigateIntent = new Intent(this, cgeonavigate.class);
+            final cgCache cache = getCacheFromAdapter(adapterInfo);
             navigateIntent.putExtra("latitude", cache.getCoords().getLatitude());
             navigateIntent.putExtra("longitude", cache.getCoords().getLongitude());
             navigateIntent.putExtra("geocode", cache.getGeocode().toUpperCase());
@@ -1219,9 +1210,10 @@ public class cgeocaches extends AbstractListActivity {
 
             return true;
         } else if (id == MENU_LOG_VISIT) {
-            return cache.logVisit(this);
+            return getCacheFromAdapter(adapterInfo).logVisit(this);
         } else if (id == MENU_CACHE_DETAILS) {
-            Intent cachesIntent = new Intent(this, cgeodetail.class);
+            final Intent cachesIntent = new Intent(this, cgeodetail.class);
+            final cgCache cache = getCacheFromAdapter(adapterInfo);
             cachesIntent.putExtra("geocode", cache.getGeocode().toUpperCase());
             cachesIntent.putExtra("name", cache.getName());
             startActivity(cachesIntent);
@@ -1273,7 +1265,7 @@ public class cgeocaches extends AbstractListActivity {
         } else if (id == MENU_FILTER_TYPE_GPS) {
             return setFilter(new cgFilterByType(CacheType.GPS_EXHIBIT));
         } else if (id == MENU_DROP_CACHE) {
-            cgBase.dropCache(app, cache, new Handler() {
+            cgBase.dropCache(app, getCacheFromAdapter(adapterInfo), new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     refreshCurrentList();
@@ -1281,19 +1273,18 @@ public class cgeocaches extends AbstractListActivity {
             });
             return true;
         } else if (id >= CONTEXT_MENU_MOVE_TO_LIST && id < CONTEXT_MENU_MOVE_TO_LIST + 100) {
-            int newListId = id - CONTEXT_MENU_MOVE_TO_LIST;
-            if (cache != null) {
-                app.moveToList(cache.getGeocode(), newListId);
+            final int newListId = id - CONTEXT_MENU_MOVE_TO_LIST;
+            if (adapterInfo != null) {
+                app.moveToList(getCacheFromAdapter(adapterInfo).getGeocode(), newListId);
             }
             adapter.resetChecks();
 
             refreshCurrentList();
             return true;
         } else if (id >= MENU_MOVE_SELECTED_OR_ALL_TO_LIST && id < MENU_MOVE_SELECTED_OR_ALL_TO_LIST + 100) {
-            int newListId = id - MENU_MOVE_SELECTED_OR_ALL_TO_LIST;
-            boolean moveAll = adapter.getChecked() == 0;
-            final List<cgCache> cacheListTemp = new ArrayList<cgCache>(cacheList);
-            for (cgCache c : cacheListTemp) {
+            final int newListId = id - MENU_MOVE_SELECTED_OR_ALL_TO_LIST;
+            final boolean moveAll = adapter.getChecked() == 0;
+            for (final cgCache c : Collections.unmodifiableList(cacheList)) {
                 if (moveAll || c.isStatusChecked()) {
                     app.moveToList(c.getGeocode(), newListId);
                 }
@@ -1309,8 +1300,9 @@ public class cgeocaches extends AbstractListActivity {
         // https://code.google.com/p/android/issues/detail?id=7139
         lastMenuInfo = info;
 
-        if (cache != null) {
+        if (adapterInfo != null) {
             // create a search for a single cache (as if in details view)
+            final cgCache cache = getCacheFromAdapter(adapterInfo);
             final cgSearch singleSearch = base.searchByGeocode(cache.getGeocode(), null, 0, false, null);
 
             if (NavigationAppFactory.onMenuItemSelected(item, geo, this,
@@ -1322,6 +1314,17 @@ public class cgeocaches extends AbstractListActivity {
             cache.logOffline(this, logType, base);
         }
         return true;
+    }
+
+    /**
+     * Extract a cache from adapter data.
+     *
+     * @param adapterInfo
+     *            an adapterInfo
+     * @return the pointed cache
+     */
+    private cgCache getCacheFromAdapter(final AdapterContextMenuInfo adapterInfo) {
+        return adapter.getItem(adapterInfo.position);
     }
 
     private boolean setFilter(cgFilter filter) {

@@ -5,7 +5,6 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -66,7 +65,7 @@ public final class GCVote {
                     params.put("userName", login.left, "password", login.right);
                 }
             }
-            if (CollectionUtils.isNotEmpty(guids)) {
+            if (guids != null && !guids.isEmpty()) {
                 params.put("cacheIds", StringUtils.join(guids.toArray(), ','));
             } else {
                 params.put("waypoints", StringUtils.join(geocodes.toArray(), ','));

@@ -2366,10 +2366,10 @@ public class cgBase {
                 "ctl00$ContentBody$LogBookPanel1$LogButton", "Submit Log Entry",
                 "ctl00$ContentBody$uxVistOtherListingGC", "");
         putViewstates(params, viewstates);
-        if (CollectionUtils.isNotEmpty(trackables)) { //  we have some trackables to proceed
+        if (trackables != null && !trackables.isEmpty()) { //  we have some trackables to proceed
             final StringBuilder hdnSelected = new StringBuilder();
 
-            for (cgTrackableLog tb : trackables) {
+            for (final cgTrackableLog tb : trackables) {
                 if (tb.action != LogTypeTrackable.DO_NOTHING) {
                     hdnSelected.append(Integer.toString(tb.id));
                     hdnSelected.append(tb.action.action);
@@ -2419,7 +2419,7 @@ public class cgBase {
                 params.put("ctl00$ContentBody$LogBookPanel1$btnConfirm", "Yes");
                 params.put("ctl00$ContentBody$LogBookPanel1$uxLogInfo", logInfo);
                 params.put("ctl00$ContentBody$uxVistOtherListingGC", "");
-                if (CollectionUtils.isNotEmpty(trackables)) { //  we have some trackables to proceed
+                if (trackables != null && !trackables.isEmpty()) { //  we have some trackables to proceed
                     final StringBuilder hdnSelected = new StringBuilder();
 
                     for (cgTrackableLog tb : trackables) {
