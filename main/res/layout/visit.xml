@@ -126,7 +126,6 @@
 						android:gravity="right"
 						android:orientation="vertical" >
 					<Button style="@style/button"
-							android:visibility="gone"
 							android:id="@+id/changebutton"
 							android:layout_width="wrap_content"
 							android:layout_weight="1"

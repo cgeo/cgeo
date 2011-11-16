@@ -154,7 +154,7 @@ public class VisitCacheActivity extends cgLogForm {
                         }
                     });
 
-                    ((LinearLayout) findViewById(R.id.inventory_changeall)).setVisibility(View.VISIBLE);
+                    inventoryChangeAllView.setVisibility(View.VISIBLE);
                 }
             }
 
