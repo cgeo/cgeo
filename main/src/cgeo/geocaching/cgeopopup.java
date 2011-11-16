@@ -627,17 +627,8 @@ public class cgeopopup extends AbstractActivity {
 
         itemName.setText(res.getString(R.string.cache_rating));
         itemValue.setText(String.format("%.1f", rating) + ' ' + res.getString(R.string.cache_rating_of) + " 5");
-        for (int i = 0; i <= 4; i++) {
-            ImageView star = (ImageView) inflater.inflate(R.layout.star, null);
-            if ((rating - i) >= 1.0) {
-                star.setImageResource(R.drawable.star_on);
-            } else if ((rating - i) > 0.0) {
-                star.setImageResource(R.drawable.star_half);
-            } else {
-                star.setImageResource(R.drawable.star_off);
-            }
-            itemStars.addView(star, (1 + i));
-        }
+        itemStars.addView(cgBase.createStarRating(rating, 5, this), 1);
+
         if (votes != null) {
             final TextView itemAddition = (TextView) itemLayout.findViewById(R.id.addition);
             itemAddition.setText("(" + votes + ")");

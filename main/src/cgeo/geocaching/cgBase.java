@@ -64,7 +64,10 @@ import android.text.Spanned;
 import android.text.format.DateUtils;
 import android.text.style.StrikethroughSpan;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.io.File;
 import java.io.IOException;
@@ -3441,7 +3444,7 @@ public class cgBase {
      * @param moveCursor
      *            place the cursor after the inserted text
      */
-    static void insertAtPosition(final EditText editText, final String insertText, final boolean moveCursor) {
+    public static void insertAtPosition(final EditText editText, final String insertText, final boolean moveCursor) {
         int selectionStart = editText.getSelectionStart();
         int selectionEnd = editText.getSelectionEnd();
         int start = Math.min(selectionStart, selectionEnd);
@@ -3458,5 +3461,25 @@ public class cgBase {
         editText.getText().replace(start, end, completeText);
         int newCursor = moveCursor ? start + completeText.length() : start;
         editText.setSelection(newCursor, newCursor);
+    }
+
+    public static LinearLayout createStarRating(final float value, final int count, final Context context) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        LinearLayout starsContainer = new LinearLayout(context);
+        starsContainer.setOrientation(LinearLayout.HORIZONTAL);
+
+        for (int i = 0; i < count; i++) {
+            ImageView star = (ImageView) inflater.inflate(R.layout.star, null);
+            if (value - i >= 0.75) {
+                star.setImageResource(R.drawable.star_on);
+            } else if (value - i >= 0.25) {
+                star.setImageResource(R.drawable.star_half);
+            } else {
+                star.setImageResource(R.drawable.star_off);
+            }
+            starsContainer.addView(star);
+        }
+
+        return starsContainer;
     }
 }

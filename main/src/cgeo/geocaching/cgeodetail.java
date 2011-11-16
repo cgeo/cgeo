@@ -1202,17 +1202,8 @@ public class cgeodetail extends AbstractActivity {
 
         itemName.setText(name);
         itemValue.setText(String.format("%.1f", value) + ' ' + res.getString(R.string.cache_rating_of) + " 5");
-        for (int i = 0; i <= 4; i++) {
-            ImageView star = (ImageView) inflater.inflate(R.layout.star, null);
-            if ((value - i) >= 1.0) {
-                star.setImageResource(R.drawable.star_on);
-            } else if ((value - i) > 0.0) {
-                star.setImageResource(R.drawable.star_half);
-            } else {
-                star.setImageResource(R.drawable.star_off);
-            }
-            itemStars.addView(star, (1 + i));
-        }
+        itemStars.addView(cgBase.createStarRating(value, 5, this), 1);
+
         detailsList.addView(itemLayout);
         return itemLayout;
     }
