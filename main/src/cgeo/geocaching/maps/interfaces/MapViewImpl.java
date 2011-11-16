@@ -70,4 +70,13 @@ public interface MapViewImpl {
     void repaintRequired(GeneralOverlay overlay);
 
     void setOnDragListener(OnDragListener onDragListener);
+
+    /**
+     * Indicates if overlay text or line colours should be dark (normal case)
+     * or light (inverted case)
+     *
+     * @return true - text/draw in light colors, false text/draw in dark colors
+     */
+    boolean NeedsInvertedColors();
+
 }
