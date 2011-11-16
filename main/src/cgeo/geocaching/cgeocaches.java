@@ -1085,7 +1085,7 @@ public class cgeocaches extends AbstractListActivity {
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo info) {
+    public void onCreateContextMenu(final ContextMenu menu, final View view, final ContextMenu.ContextMenuInfo info) {
         super.onCreateContextMenu(menu, view, info);
 
         if (adapter == null) {
@@ -1135,7 +1135,8 @@ public class cgeocaches extends AbstractListActivity {
                 menu.add(0, MENU_FILTER_TYPE_GPS, 0, res.getString(CacheType.GPS_EXHIBIT.stringId));
             }
         } else {
-            if (adapterInfo.position >= adapter.getCount()) {
+            // adapterInfo cannot be null here, but the compiler cannot guess it so this prevents warnings
+            if (adapterInfo == null || adapterInfo.position >= adapter.getCount()) {
                 return;
             }
             final cgCache cache = adapter.getItem(adapterInfo.position);
