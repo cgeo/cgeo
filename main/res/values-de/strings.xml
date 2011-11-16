@@ -383,8 +383,8 @@
   <string name="init_save_log_img">Logbilder abspeichern</string>
   <string name="init_units">Imperiale Einheiten (Meilen/Fuß)</string>
   <string name="init_nav">Google Navigation verwenden</string>
-  <string name="init_livelist">Richtung zum Cache in der Cache-Liste anzeigen</string>
   <string name="init_log_offline">Offline loggen (Dialog für Online-Log nicht anzeigen)</string>
+  <string name="init_livelist">Richtung zum Cache in der Cache-Liste anzeigen</string>
   <string name="init_browser">c:geo als normalen Internet-Browser tarnen</string>
   <string name="init_altitude">Höhenkorrektur</string>
   <string name="init_altitude_description">Falls das GPS eine falsche Höhe ermittelt, kannst du sie durch Angabe eines positiven oder negativen Wertes in Metern korrigieren.</string>
@@ -569,7 +569,6 @@
   <string name="gpx_import_error_unexpected">Unerwarteter Fehler</string>
   <string name="gpx_import_confirm">Soll die GPX-Datei importiert werden?</string>
   <string name="gpx_import_canceled">Der GPX-Import wurde abgebrochen</string>      
-  <string name="gpx_import_loading">Lade Caches von GPX-Datei</string>
 
   <!-- map file select -->
   <string name="map_file_select_title">Wähle eine Kartendatei</string>

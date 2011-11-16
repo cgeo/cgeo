@@ -567,7 +567,6 @@
   <string name="gpx_import_error_parser">Bestandsformaat niet goed</string>
   <string name="gpx_import_error_unexpected">Onbekend probleem</string>
   <string name="gpx_import_confirm">Wil je de GPX gegevens in c:geo laden?</string>  
-  <string name="gpx_import_loading">Caches laden van GPX bestand</string>
 
   <!-- map file select -->
   <string name="map_file_select_title">Selecteer mapbestand</string>
