@@ -53,7 +53,6 @@ public class cgeo extends AbstractActivity {
     private static final int SCAN_REQUEST_CODE = 1;
     private static final int MENU_OPEN_LIST = 100;
 
-    private Context context = null;
     private Integer version = null;
     private cgGeo geo = null;
     private cgUpdateLoc geoUpdate = new update();
@@ -154,7 +153,6 @@ public class cgeo extends AbstractActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        context = this;
         app.setAction(null);
 
         app.cleanGeo();
@@ -186,7 +184,7 @@ public class cgeo extends AbstractActivity {
                     helper.setOnClickListener(new View.OnClickListener() {
 
                         public void onClick(View view) {
-                            ActivityMixin.goManual(context, "c:geo-intro");
+                            ActivityMixin.goManual(cgeo.this, "c:geo-intro");
                             view.setVisibility(View.GONE);
                         }
                     });
@@ -284,13 +282,13 @@ public class cgeo extends AbstractActivity {
                 showAbout(null);
                 return true;
             case MENU_HELPERS:
-                context.startActivity(new Intent(context, cgeohelpers.class));
+                startActivity(new Intent(this, cgeohelpers.class));
                 return true;
             case MENU_SETTINGS:
-                context.startActivity(new Intent(context, cgeoinit.class));
+                startActivity(new Intent(this, cgeoinit.class));
                 return true;
             case MENU_HISTORY:
-                cgeocaches.startActivityHistory(context);
+                cgeocaches.startActivityHistory(this);
                 return true;
             case MENU_SCAN:
                 Intent intent = new Intent(SCAN_INTENT);
@@ -394,7 +392,7 @@ public class cgeo extends AbstractActivity {
         } else if (id > MENU_OPEN_LIST) {
             int listId = id - MENU_OPEN_LIST;
             Settings.saveLastList(listId);
-            cgeocaches.startActivityOffline(context);
+            cgeocaches.startActivityOffline(this);
             return true;
         } else if (id > 0) {
             final String itemTitle = item.getTitle().toString();
@@ -456,7 +454,7 @@ public class cgeo extends AbstractActivity {
         }
 
         if (geo == null) {
-            geo = app.startGeo(context, geoUpdate, 0, 0);
+            geo = app.startGeo(this, geoUpdate, 0, 0);
         }
 
         navType = (TextView) findViewById(R.id.nav_type);
@@ -633,7 +631,7 @@ public class cgeo extends AbstractActivity {
      */
     public void cgeoFindOnMap(View v) {
         findViewById(R.id.map).setPressed(true);
-        CGeoMap.startActivityLiveMap(context);
+        CGeoMap.startActivityLiveMap(this);
     }
 
     /**
@@ -646,7 +644,7 @@ public class cgeo extends AbstractActivity {
         }
 
         findViewById(R.id.nearest).setPressed(true);
-        cgeocaches.startActivityNearest(context, geo.coordsNow);
+        cgeocaches.startActivityNearest(this, geo.coordsNow);
     }
 
     /**
@@ -655,7 +653,7 @@ public class cgeo extends AbstractActivity {
      */
     public void cgeoFindByOffline(View v) {
         findViewById(R.id.search_offline).setPressed(true);
-        cgeocaches.startActivityOffline(context);
+        cgeocaches.startActivityOffline(this);
     }
 
     /**
@@ -664,7 +662,7 @@ public class cgeo extends AbstractActivity {
      */
     public void cgeoSearch(View v) {
         findViewById(R.id.advanced_button).setPressed(true);
-        context.startActivity(new Intent(context, cgeoadvsearch.class));
+        startActivity(new Intent(this, cgeoadvsearch.class));
     }
 
     /**
@@ -673,7 +671,7 @@ public class cgeo extends AbstractActivity {
      */
     public void cgeoPoint(View v) {
         findViewById(R.id.any_button).setPressed(true);
-        context.startActivity(new Intent(context, cgeopoint.class));
+        startActivity(new Intent(this, cgeopoint.class));
     }
 
     /**
@@ -789,7 +787,7 @@ public class cgeo extends AbstractActivity {
             addressObtaining = true;
 
             try {
-                Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+                final Geocoder geocoder = new Geocoder(cgeo.this, Locale.getDefault());
 
                 addresses = geocoder.getFromLocation(geo.coordsNow.getLatitude(), geo.coordsNow.getLongitude(), 1);
             } catch (Exception e) {
@@ -807,7 +805,7 @@ public class cgeo extends AbstractActivity {
      *            unused here but needed since this method is referenced from XML layout
      */
     public void showAbout(View view) {
-        context.startActivity(new Intent(context, cgeoabout.class));
+        startActivity(new Intent(this, cgeoabout.class));
     }
 
     /**
