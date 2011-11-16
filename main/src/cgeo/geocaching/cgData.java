@@ -52,7 +52,7 @@ public class cgData {
     private cgDbHelper dbHelper = null;
     private SQLiteDatabase databaseRO = null;
     private SQLiteDatabase databaseRW = null;
-    private static final int dbVersion = 59;
+    private static final int dbVersion = 60;
     private static final String dbName = "data";
     private static final String dbTableCaches = "cg_caches";
     private static final String dbTableLists = "cg_lists";
@@ -874,6 +874,14 @@ public class cgData {
                         }
                     }
 
+                    if (oldVersion < 60) {
+                        try {
+                            removeSecEmptyDirs();
+                        } catch (Exception e) {
+                            Log.e(Settings.tag, "Failed to upgrade to ver. 60", e);
+                        }
+                    }
+
                 }
 
                 db.setTransactionSuccessful();
@@ -919,6 +927,18 @@ public class cgData {
                 }
             }
         }).start();
+    }
+
+    /*
+     * Remove empty directories created in the secondary storage area.
+     */
+    private static void removeSecEmptyDirs() {
+        for (final File file : LocalStorage.getStorageSec().listFiles()) {
+            if (file.isDirectory()) {
+                // This will silently fail if the directory is not empty.
+                file.delete();
+            }
+        }
     }
 
     private static void dropDatabase(SQLiteDatabase db) {
