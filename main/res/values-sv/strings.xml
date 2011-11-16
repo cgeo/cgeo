@@ -198,7 +198,6 @@
   <string name="err_parse_lon">Tyvärr kan c:geo inte tolka longitud.</string>
   <string name="err_parse_dist">Tyvärr kan c:geo inte tolka avstånd.</string>
   <string name="err_parse_lat_lon">Tyvärr kan c:geo inte tolka latitud eller longitud.</string>
-  <string name="err_invalid_lat_lon">Tyvärr, felaktig latitud eller longitud.</string>
 
   <string name="err_fieldnotes_export_failed">Exportering av Field Notes misslyckades.</string>
 

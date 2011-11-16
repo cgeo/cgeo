@@ -196,7 +196,6 @@
   <string name="err_parse_lon">Sorry, c:geo kan lengtegraad niet verwerken.</string>
   <string name="err_parse_dist">Sorry, c:geo kan afstand niet verwerken.</string>
   <string name="err_parse_lat_lon">Sorry, c:geo kan breedtegraad of lengtegraad niet verwerken.</string>
-  <string name="err_invalid_lat_lon">Sorry, onjuiste breedtegraad of lengtegraad.</string>
 
   <string name="err_fieldnotes_export_failed">Exporteren van Field Notes niet gelukt.</string>
 

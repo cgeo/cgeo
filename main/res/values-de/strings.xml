@@ -198,7 +198,6 @@
   <string name="err_parse_lon">c:geo konnte den Längengrad nicht verarbeiten.</string>
   <string name="err_parse_dist">c:geo konnte die Entfernung nicht verarbeiten.</string>
   <string name="err_parse_lat_lon">c:geo konnte den Breiten- oder Längengrad nicht verarbeiten.</string>
-  <string name="err_invalid_lat_lon">Ungültiger Breiten- oder Längengrad.</string>
 
   <string name="err_fieldnotes_export_failed">Exportieren der Field-Notes fehlgeschlagen.</string>
 

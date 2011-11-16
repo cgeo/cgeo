@@ -197,7 +197,6 @@
   <string name="err_parse_lon">Désolé, c:geo n\'arrive pas à lire la longitude.</string>
   <string name="err_parse_dist">Désolé, c:geo n\'arrive pas à lire la distance.</string>
   <string name="err_parse_lat_lon">Désolé, c:geo n\'arrive pas à lire la latitude ou la longitude.</string>
-  <string name="err_invalid_lat_lon">Désolé, latitude ou longitude invalide.</string>
 
   <string name="err_fieldnotes_export_failed">L\'export du champ Notes a échoué.</string>
 

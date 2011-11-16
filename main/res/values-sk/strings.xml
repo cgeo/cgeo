@@ -197,7 +197,6 @@
   <string name="err_parse_lon">c:geo nemôže dopočítať dĺžku.</string>
   <string name="err_parse_dist">c:geo nemôže dopočítať vzdialenosť.</string>
   <string name="err_parse_lat_lon">c:geo nemôže zistiť šírku a dĺžku.</string>
-  <string name="err_invalid_lat_lon">Nesprávna šírka a dĺžka.</string>
 
   <string name="err_fieldnotes_export_failed">Zlyhal export poznámok v poli.</string>
 

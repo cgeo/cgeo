@@ -192,7 +192,6 @@
   <string name="err_parse_lon">Sajnáljuk, a c:geo nem tudja értelmezni a hosszúságot.</string>
   <string name="err_parse_dist">Sajnáljuk, a c:geo nem tudja értelmezni a távolságot.</string>
   <string name="err_parse_lat_lon">Sajnáljuk, a c:geo nem tudja értelmezni a szélességet vagy a hosszúságot.</string>
-  <string name="err_invalid_lat_lon">Sajnáljuk, érvénytelen szélesség vagz hosszúság.</string>
 
   <string name="err_fieldnotes_export_failed">A terepjegyzetek exportálása sikertelen.</string>
 
