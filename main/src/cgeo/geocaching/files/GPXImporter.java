@@ -154,7 +154,7 @@ public class GPXImporter {
             }
 
             final File wptsFile = new File(cacheFile.getParentFile(), getWaypointsFileNameForGpxFileName(cacheFile.getName()));
-            if (wptsFile != null && wptsFile.canRead()) {
+            if (wptsFile.canRead()) {
                 Log.i(Settings.tag, "Import GPX waypoint file: " + wptsFile.getAbsolutePath());
                 importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_WPT_FILE, R.string.gpx_import_loading_waypoints, (int) wptsFile.length()));
                 caches = parser.parse(wptsFile, progressHandler);
