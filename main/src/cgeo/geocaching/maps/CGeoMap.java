@@ -1869,8 +1869,12 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         return imageView;
     }
 
+    private static Intent newIntent(final Context context) {
+        return new Intent(context, Settings.getMapProvider().getMapClass());
+    }
+
     public static void startActivitySearch(final Activity fromActivity, final cgSearch search, final String title, boolean detail) {
-        Intent mapIntent = new Intent(fromActivity, Settings.getMapProvider().getMapClass());
+        final Intent mapIntent = newIntent(fromActivity);
         mapIntent.putExtra(EXTRAS_DETAIL, detail);
         mapIntent.putExtra(EXTRAS_SEARCH, search);
         if (StringUtils.isNotBlank(title)) {
@@ -1879,12 +1883,12 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         fromActivity.startActivity(mapIntent);
     }
 
-    public static void startActivityLiveMap(final Context context) {
-        context.startActivity(new Intent(context, Settings.getMapProvider().getMapClass()));
+    public static void startActivityLiveMap(final Activity fromActivity) {
+        fromActivity.startActivity(newIntent(fromActivity));
     }
 
-    public static void startActivityCoords(final Context context, final Geopoint coords, final WaypointType type, final String title) {
-        Intent mapIntent = new Intent(context, Settings.getMapProvider().getMapClass());
+    public static void startActivityCoords(final Activity fromActivity, final Geopoint coords, final WaypointType type, final String title) {
+        final Intent mapIntent = newIntent(fromActivity);
         mapIntent.putExtra(EXTRAS_DETAIL, false);
         mapIntent.putExtra(EXTRAS_LATITUDE, coords.getLatitude());
         mapIntent.putExtra(EXTRAS_LONGITUDE, coords.getLongitude());
@@ -1894,14 +1898,14 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         if (StringUtils.isNotBlank(title)) {
             mapIntent.putExtra(EXTRAS_MAP_TITLE, title);
         }
-        context.startActivity(mapIntent);
+        fromActivity.startActivity(mapIntent);
     }
 
-    public static void startActivityGeoCode(final Context context, final String geocode) {
-        Intent mapIntent = new Intent(context, Settings.getMapProvider().getMapClass());
+    public static void startActivityGeoCode(final Activity fromActivity, final String geocode) {
+        final Intent mapIntent = newIntent(fromActivity);
         mapIntent.putExtra(EXTRAS_DETAIL, false);
         mapIntent.putExtra(EXTRAS_GEOCODE, geocode);
         mapIntent.putExtra(EXTRAS_MAP_TITLE, geocode);
-        context.startActivity(mapIntent);
+        fromActivity.startActivity(mapIntent);
     }
 }
