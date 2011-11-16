@@ -13,8 +13,8 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
-import cgeo.geocaching.maps.interfaces.MapFactory;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
+import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 
 import org.apache.commons.lang3.StringUtils;
@@ -50,7 +50,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
     private Paint blockedCircle = null;
     private PaintFlagsDrawFilter setfil = null;
     private PaintFlagsDrawFilter remfil = null;
-    private MapFactory mapFactory = null;
+    private MapProvider mapProvider = null;
 
     public CachesOverlay(ItemizedOverlayImpl ovlImpl, Context contextIn, boolean fromDetailIn) {
         super(ovlImpl);
@@ -60,7 +60,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
         context = contextIn;
         fromDetail = fromDetailIn;
 
-        mapFactory = Settings.getMapFactory();
+        mapProvider = Settings.getMapProvider();
     }
 
     public void updateItems(CachesOverlayItemImpl item) {
@@ -147,11 +147,11 @@ public class CachesOverlay extends AbstractItemizedOverlay {
                             itemCoord.getCoords().getLatitude(), itemCoord.getCoords().getLongitude() + 1, result);
                     final float longitudeLineDistance = result[0];
 
-                    GeoPointImpl itemGeo = mapFactory.getGeoPointBase(itemCoord.getCoords());
+                    GeoPointImpl itemGeo = mapProvider.getGeoPointBase(itemCoord.getCoords());
 
                     final Geopoint leftCoords = new Geopoint(itemCoord.getCoords().getLatitude(),
                             itemCoord.getCoords().getLongitude() - 161 / longitudeLineDistance);
-                    GeoPointImpl leftGeo = mapFactory.getGeoPointBase(leftCoords);
+                    GeoPointImpl leftGeo = mapProvider.getGeoPointBase(leftCoords);
 
                     projection.toPixels(itemGeo, center);
                     projection.toPixels(leftGeo, left);
