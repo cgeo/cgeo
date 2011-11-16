@@ -5,24 +5,24 @@ import cgeo.geocaching.test.mock.GC1ZXX2;
 
 public class ConnectorFactoryTest extends AbstractResourceInstrumentationTestCase {
 
-    public void testGetConnectors() {
+    public static void testGetConnectors() {
         IConnector[] connectors = ConnectorFactory.getConnectors();
         assertNotNull(connectors);
         assertTrue(connectors.length > 0); // unknown connector must exist
     }
 
-    public void testCanHandle() {
+    public static void testCanHandle() {
         assertFalse(ConnectorFactory.canHandle(""));
         assertTrue(ConnectorFactory.canHandle("GC12345"));
         assertTrue(ConnectorFactory.canHandle("some string")); // using unknown connector
         assertFalse(ConnectorFactory.canHandle("[/start with special char"));
     }
 
-    public void testGetConnectorCgCache() {
+    public static void testGetConnectorCgCache() {
         assertEquals(GCConnector.getInstance(), ConnectorFactory.getConnector(new GC1ZXX2()));
     }
 
-    public void testGetConnectorString() {
+    public static void testGetConnectorString() {
         IConnector connector = ConnectorFactory.getConnector("GC12345");
         assertNotNull(connector);
         assertEquals(GCConnector.getInstance().getName(), connector.getName());

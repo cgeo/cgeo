@@ -531,7 +531,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         return true;
     }
 
-    private void addMapViewMenuItems(final Menu menu) {
+    private static void addMapViewMenuItems(final Menu menu) {
         MapProviderFactory.addMapviewMenuItems(menu, 1, Settings.getMapSource());
         menu.setGroupCheckable(1, true, true);
     }

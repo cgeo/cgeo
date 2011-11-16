@@ -4,7 +4,7 @@ import android.test.AndroidTestCase;
 
 public class WaypointTypeTest extends AndroidTestCase {
 
-    public void testFindById() {
+    public static void testFindById() {
         assertEquals(WaypointType.WAYPOINT, WaypointType.findById("random garbage"));
     }
 

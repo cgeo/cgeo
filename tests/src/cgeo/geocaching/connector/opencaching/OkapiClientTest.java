@@ -6,7 +6,7 @@ import android.test.AndroidTestCase;
 
 public class OkapiClientTest extends AndroidTestCase {
 
-    public void testGetOCCache() {
+    public static void testGetOCCache() {
         String geoCode = "OU0331";
         cgCache cache = OkapiClient.getCache(geoCode);
         assertNotNull(cache);

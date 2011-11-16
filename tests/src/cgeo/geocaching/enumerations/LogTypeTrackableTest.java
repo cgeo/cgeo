@@ -4,7 +4,7 @@ import android.test.AndroidTestCase;
 
 public class LogTypeTrackableTest extends AndroidTestCase {
 
-    public void testFindById() {
+    public static void testFindById() {
         assertEquals(LogTypeTrackable.DO_NOTHING, LogTypeTrackable.findById(12345));
     }
 

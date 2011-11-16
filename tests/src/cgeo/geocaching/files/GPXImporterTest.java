@@ -21,7 +21,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     private int listId;
     private File tempDir;
 
-    public void testGetWaypointsFileNameForGpxFileName() {
+    public static void testGetWaypointsFileNameForGpxFileName() {
         assertEquals("1234567-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("1234567.gpx"));
         assertEquals("/mnt/sdcard/1234567-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("/mnt/sdcard/1234567.gpx"));
         assertEquals("/mnt/sdcard/1-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("/mnt/sdcard/1.gpx"));
@@ -36,7 +36,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertNull(GPXImporter.getWaypointsFileNameForGpxFileName(".gpx"));
     }
 
-    public void testGetGpxFileNameForZipFileName() {
+    public static void testGetGpxFileNameForZipFileName() {
         assertEquals("1234567.gpx", GPXImporter.getGpxFileNameForZipFileName("1234567.zip"));
         assertEquals("/mnt/sdcard/1234567.gpx", GPXImporter.getGpxFileNameForZipFileName("/mnt/sdcard/1234567.zip"));
         assertEquals("1.gpx", GPXImporter.getGpxFileNameForZipFileName("1.zip"));
