@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.Settings.coordInputFormatEnum;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser.ParseException;
@@ -68,6 +69,13 @@ public class cgeocoords extends Dialog {
         }
 
         setContentView(R.layout.coords);
+
+        findViewById(R.id.actionBarManualbutton).setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                ActivityMixin.goManual(context, "c:geo-geocoordinate-input");
+            }
+        });
 
         spinner = (Spinner) findViewById(R.id.spinnerCoordinateFormats);
         final ArrayAdapter<CharSequence> adapter =
