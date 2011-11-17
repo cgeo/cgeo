@@ -884,25 +884,24 @@ public class cgeocaches extends AbstractListActivity {
             }
 
             // Hide menus if cache-list is empty
-            int[] hideIfEmptyList = new int[] { MENU_SWITCH_SELECT_MODE,
+            int[] hideIfEmptyList = new int[] {
+                    MENU_SWITCH_SELECT_MODE,
                     SUBMENU_MANAGE_OFFLINE,
                     SUBMENU_MANAGE_HISTORY,
                     SUBMENU_SHOW_MAP,
                     SUBMENU_SORT,
                     MENU_REFRESH_STORED };
 
-            boolean menuEnabled = cacheList.size() > 0;
-            for (int itemId : hideIfEmptyList)
-            {
+            boolean menuVisible = cacheList.size() > 0;
+            for (int itemId : hideIfEmptyList) {
                 MenuItem item = menu.findItem(itemId);
-                if (null != item)
-                {
-                    item.setEnabled(menuEnabled);
+                if (null != item) {
+                    item.setVisible(menuVisible);
                 }
             }
 
             if (navigationMenu != null) {
-                navigationMenu.setEnabled(menuEnabled);
+                navigationMenu.setVisible(menuVisible);
             }
 
             boolean isNonDefaultList = listId != 1;
@@ -936,26 +935,21 @@ public class cgeocaches extends AbstractListActivity {
 
             item = menu.findItem(MENU_EXPORT_NOTES);
             if (null != item) {
-                if (hasSelection) {
-                    item.setTitle(res.getString(R.string.cache_export_fieldnote) + " (" + adapter.getChecked() + ")");
-                } else {
-                    item.setTitle(res.getString(R.string.cache_export_fieldnote));
-                }
-            }
-
-            // Hide Field Notes export if there are no caches with logs
-            item = menu.findItem(MENU_EXPORT_NOTES);
-            if (null != item) {
-                item.setEnabled(false);
-                for (cgCache cache : cacheList)
-                {
-                    if (cache.isLogOffline())
-                    {
-                        item.setEnabled(true);
+                // Hide Field Notes export if there are no caches with logs
+                item.setVisible(false);
+                for (cgCache cache : cacheList) {
+                    if (cache.isLogOffline()) {
+                        item.setVisible(true);
+                        if (hasSelection) {
+                            item.setTitle(res.getString(R.string.cache_export_fieldnote) + " (" + adapter.getChecked() + ")");
+                        } else {
+                            item.setTitle(res.getString(R.string.cache_export_fieldnote));
+                        }
                         break;
                     }
                 }
             }
+
         } catch (Exception e) {
             Log.e(Settings.tag, "cgeocaches.onPrepareOptionsMenu: " + e.toString());
         }
