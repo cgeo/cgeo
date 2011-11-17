@@ -204,7 +204,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
 
         public void waitForCompletion() {
             // Use reasonable defaults
-            waitForCompletion(200, 10);
+            waitForCompletion(500, 10);
         }
     }
 
