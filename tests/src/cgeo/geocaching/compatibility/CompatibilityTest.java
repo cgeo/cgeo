@@ -1,7 +1,6 @@
 package cgeo.geocaching.compatibility;
 
 import cgeo.geocaching.cgeo;
-import cgeo.geocaching.compatibility.Compatibility;
 
 import android.test.ActivityInstrumentationTestCase2;
 
