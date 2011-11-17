@@ -1,16 +1,14 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.test.RegExPerformanceTest;
-import cgeo.geocaching.test.mock.MockedCache;
+import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.utils.CancellableHandler;
 
 import android.test.ApplicationTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import java.util.Date;
-import java.util.HashMap;
-
-import junit.framework.Assert;
 
 /**
  * The c:geo application test. It can be used for tests that require an
@@ -47,76 +45,12 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
     }
 
     /**
-     * Test {@link cgBase#searchByGeocode(HashMap, int, boolean)}
-     *
-     * @param base
+     * Test {@link cgBase#searchTrackable(String, String, String)}
      */
     @MediumTest
-    public void testSearchByGeocode() {
-        final cgSearch search = base.searchByGeocode("GC1RMM2", null, 0, true, null);
-        Assert.assertNotNull(search);
-    }
-
-    /**
-     * Test {@link cgBase#parseCacheFromText(String, int, Handler) with "mocked" data
-     * @param base
-     */
-    @MediumTest
-    public static void testParseCacheFromText() {
-        for (MockedCache cache : RegExPerformanceTest.MOCKED_CACHES) {
-            cgCacheWrap caches = cgBase.parseCacheFromText(cache.getData(), 0, null);
-            cgCache cacheParsed = caches.cacheList.get(0);
-            Assert.assertEquals(cache.getGeocode(), cacheParsed.getGeocode());
-            Assert.assertEquals(cache.getCacheType(), cacheParsed.getCacheType());
-            Assert.assertEquals(cache.getOwner(), cacheParsed.getOwner());
-            Assert.assertEquals(cache.getDifficulty(), cacheParsed.getDifficulty());
-            Assert.assertEquals(cache.getTerrain(), cacheParsed.getTerrain());
-            Assert.assertEquals(cache.getLatitude(), cacheParsed.getLatitude());
-            Assert.assertEquals(cache.getLongitude(), cacheParsed.getLongitude());
-            Assert.assertEquals(cache.isDisabled(), cacheParsed.isDisabled());
-            Assert.assertEquals(cache.isOwn(), cacheParsed.isOwn());
-            Assert.assertEquals(cache.isArchived(), cacheParsed.isArchived());
-            Assert.assertEquals(cache.isMembersOnly(), cacheParsed.isMembersOnly());
-            Assert.assertEquals(cache.getOwnerReal(), cacheParsed.getOwnerReal());
-            Assert.assertEquals(cache.getSize(), cacheParsed.getSize());
-            Assert.assertEquals(cache.getHint(), cacheParsed.getHint());
-            Assert.assertTrue(cacheParsed.getDescription().startsWith(cache.getDescription()));
-            Assert.assertEquals(cache.getShortDescription(), cacheParsed.getShortDescription());
-            Assert.assertEquals(cache.getName(), cacheParsed.getName());
-            Assert.assertEquals(cache.getCacheId(), cacheParsed.getCacheId());
-            Assert.assertEquals(cache.getGuid(), cacheParsed.getGuid());
-            Assert.assertEquals(cache.getLocation(), cacheParsed.getLocation());
-            Assert.assertEquals(cache.getPersonalNote(), cacheParsed.getPersonalNote());
-            Assert.assertEquals(cache.isFound(), cacheParsed.isFound());
-            Assert.assertEquals(cache.isFavorite(), cacheParsed.isFavorite());
-            Assert.assertEquals(cache.getFavoritePoints(), cacheParsed.getFavoritePoints());
-            Assert.assertEquals(cache.isWatchlist(), cacheParsed.isWatchlist());
-            Assert.assertEquals(cache.getHiddenDate().toString(), cacheParsed.getHiddenDate().toString());
-            for (String attribute : cache.getAttributes()) {
-                Assert.assertTrue(cacheParsed.getAttributes().contains(attribute));
-            }
-            for (Integer key : cache.getLogCounts().keySet()) {
-                Assert.assertEquals(cache.getLogCounts().get(key), cacheParsed.getLogCounts().get(key));
-            }
-            if (null != cache.getInventory() || null != cacheParsed.getInventory()) {
-                Assert.assertEquals(cache.getInventory().size(), cacheParsed.getInventory().size());
-            }
-            if (null != cache.getSpoilers() || null != cacheParsed.getSpoilers()) {
-                Assert.assertEquals(cache.getSpoilers().size(), cacheParsed.getSpoilers().size());
-            }
-
-        }
-    }
-
-    public static void testParseLocationWithLink() {
-        cgCacheWrap caches = cgBase.parseCacheFromText(MockedCache.readCachePage("GCV2R9"), 0, null);
-        assertEquals(1, caches.cacheList.size());
-        cgCache cache = caches.cacheList.get(0);
-        Assert.assertEquals("California, United States", cache.getLocation());
-    }
-
     public void testSearchTrackable() {
         cgTrackable tb = base.searchTrackable("TB2J1VZ", null, null);
+        // fix data
         assertEquals("aefffb86-099f-444f-b132-605436163aa8", tb.getGuid());
         assertEquals("TB2J1VZ", tb.getGeocode());
         assertEquals("http://www.geocaching.com/images/wpttypes/21.gif", tb.getIconUrl());
@@ -133,6 +67,53 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
         assertTrue(tb.getDistance() >= 10617.8f);
         assertTrue(tb.getLogs().size() >= 10);
         assertTrue(cgTrackable.SPOTTED_CACHE == tb.getSpottedType() || cgTrackable.SPOTTED_USER == tb.getSpottedType());
-
+        // no assumption possible: assertEquals("faa2d47d-19ea-422f-bec8-318fc82c8063", tb.getSpottedGuid());
+        // no assumption possible: assertEquals("Nice place for a break cache", tb.getSpottedName());
     }
+
+    /**
+     * Test {@link cgBase#searchByGeocode(String, String, int, boolean, CancellableHandler)}
+     */
+    @MediumTest
+    public void testSearchByGeocode() {
+        final cgSearch search = base.searchByGeocode("GC1RMM2", null, 0, true, null);
+        assertNotNull(search);
+        assertEquals(1, search.getGeocodes().size());
+        assertTrue(search.getGeocodes().contains("GC1RMM2"));
+    }
+
+    /**
+     * Test {@link cgBase#searchByCoords(cgSearchThread, Geopoint, String, int, boolean)}
+     */
+    @MediumTest
+    public void testSearchByCoords() {
+        final cgSearch search = base.searchByCoords(null, new Geopoint("N 52° 24.972 E 009° 35.647"), CacheType.MYSTERY, 0, false);
+        assertNotNull(search);
+        assertEquals(20, search.getGeocodes().size());
+        assertTrue(search.getGeocodes().contains("GC1RMM2"));
+    }
+
+    /**
+     * Test {@link cgBase#searchByOwner(String, String, int, boolean, CancellableHandler)}
+     */
+    @MediumTest
+    public void testSearchByOwner() {
+        final cgSearch search = base.searchByOwner(null, "blafoo", CacheType.EVENT, 0, false);
+        assertNotNull(search);
+        assertEquals(1, search.getGeocodes().size());
+        assertTrue(search.getGeocodes().contains("GC36K5E"));
+    }
+
+    /**
+     * Test {@link cgBase#searchByUsername(String, String, int, boolean, CancellableHandler)}
+     */
+    @MediumTest
+    public void testSearchByUsername() {
+        final cgSearch search = base.searchByUsername(null, "blafoo", CacheType.WEBCAM, 0, false);
+        assertNotNull(search);
+        assertEquals(3, search.totalCnt);
+        assertTrue(search.getGeocodes().contains("GCP0A9"));
+    }
+
 }
+
