@@ -920,4 +920,12 @@ public class cgCache implements ICache {
         }
     }
 
+    public boolean hasDifficulty() {
+        return difficulty != null && difficulty > 0f;
+    }
+
+    public boolean hasTerrain() {
+        return terrain != null && terrain > 0f;
+    }
+
 }

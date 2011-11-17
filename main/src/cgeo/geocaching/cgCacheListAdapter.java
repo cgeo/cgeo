@@ -47,6 +47,7 @@ import java.util.Set;
 
 public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
+    private static final String SEPARATOR = " | ";
     final private Resources res;
     final private List<cgCache> list;
     private cgCacheView holder = null;
@@ -546,7 +547,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         }
         holder.favourite.setBackgroundResource(favoriteBack);
 
-        StringBuilder cacheInfo = new StringBuilder();
+        StringBuilder cacheInfo = new StringBuilder(50);
         if (historic && cache.getVisitedDate() != null) {
             cacheInfo.append(base.formatTime(cache.getVisitedDate()));
             cacheInfo.append("; ");
@@ -555,38 +556,41 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             if (StringUtils.isNotBlank(cache.getGeocode())) {
                 cacheInfo.append(cache.getGeocode());
             }
-            if ((cache.getDifficulty() != null && cache.getDifficulty() > 0f) || (cache.getTerrain() != null && cache.getTerrain() > 0f) || (cache.getRating() != null && cache.getRating() > 0f)) {
-                if (cacheInfo.length() > 0 && ((cache.getDifficulty() != null && cache.getDifficulty() > 0f) || (cache.getTerrain() != null && cache.getTerrain() > 0f))) {
-                    cacheInfo.append(" |");
+            if (cache.hasDifficulty() || cache.hasTerrain()) {
+                if (cacheInfo.length() > 0) {
+                    cacheInfo.append(SEPARATOR);
                 }
 
-                if (cache.getDifficulty() != null && cache.getDifficulty() > 0f) {
-                    cacheInfo.append(" D:");
-                    cacheInfo.append(String.format("%.1f", cache.getDifficulty()));
+                if (cache.hasDifficulty()) {
+                    cacheInfo.append("D:");
+                    cacheInfo.append(String.format("%.1f ", cache.getDifficulty()));
                 }
-                if (cache.getTerrain() != null && cache.getTerrain() > 0f) {
-                    cacheInfo.append(" T:");
+                if (cache.hasTerrain()) {
+                    cacheInfo.append("T:");
                     cacheInfo.append(String.format("%.1f", cache.getTerrain()));
                 }
             }
-            if (cache.getSize() != null) {
-                // don't show "not chosen" for events and virtuals, that should be the normal case
-                if (cache.showSize()) {
-                    if (cacheInfo.length() > 0) {
-                        cacheInfo.append(" | ");
-                    }
-                    cacheInfo.append(res.getString(cache.getSize().stringId));
+            // don't show "not chosen" for events and virtuals, that should be the normal case
+            if (cache.getSize() != null && cache.showSize()) {
+                if (cacheInfo.length() > 0) {
+                    cacheInfo.append(SEPARATOR);
                 }
+                cacheInfo.append(res.getString(cache.getSize().stringId));
+            } else if (cache.isEventCache() && cache.getHiddenDate() != null) {
+                if (cacheInfo.length() > 0) {
+                    cacheInfo.append(SEPARATOR);
+                }
+                cacheInfo.append(base.formatShortDate(cache.getHidden().getTime()));
             }
             if (cache.isMembers()) {
                 if (cacheInfo.length() > 0) {
-                    cacheInfo.append(" | ");
+                    cacheInfo.append(SEPARATOR);
                 }
                 cacheInfo.append(res.getString(R.string.cache_premium));
             }
             if (cache.getReason() != null && cache.getReason() == 1) {
                 if (cacheInfo.length() > 0) {
-                    cacheInfo.append(" | ");
+                    cacheInfo.append(SEPARATOR);
                 }
                 cacheInfo.append(res.getString(R.string.cache_offline));
             }
