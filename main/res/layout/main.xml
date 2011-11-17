@@ -8,6 +8,11 @@
 		<ImageView style="@style/action_bar_icon_cgeo"
 				android:onClick="showAbout" />
 		<TextView style="@style/action_bar_title" />
+    <ImageView style="@style/action_bar_icon_user" android:id="@+id/view_iconlogin"
+        android:onClick="displayInfoUser" />
+    <TextView style="@style/action_bar_login" android:id="@+id/view_login" />
+    <ProgressBar style="@style/action_bar_progress"
+        android:visibility="gone" />
 		<View style="@style/action_bar_separator" />
 		<ImageView style="@style/action_bar_action"
 				android:src="@drawable/actionbar_search"

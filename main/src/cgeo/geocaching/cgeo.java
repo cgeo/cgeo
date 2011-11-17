@@ -10,6 +10,13 @@ import cgeo.geocaching.maps.CGeoMap;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.entity.BufferedHttpEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -20,6 +27,10 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
@@ -31,6 +42,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -68,6 +81,43 @@ public class cgeo extends AbstractActivity {
     private List<Address> addresses = null;
     private boolean addressObtaining = false;
     private boolean initialized = false;
+
+    private ProgressBar progress = null;
+    private TextView vue = null;
+    private String infoUser = "";
+    private BitmapDrawable image = null;
+    private ImageView img = null;
+
+    final private Handler showProgressHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            final int what = msg.what;
+
+            if (what == 0) {
+                img = (ImageView) findViewById(R.id.view_iconlogin);
+
+                if (image == null) {
+                    img.setImageResource(R.drawable.actionbar_user);
+                } else {
+                    img.setImageDrawable(image);
+
+                }
+                image = null;
+
+                vue = (TextView) findViewById(R.id.view_login);
+                vue.setText(infoUser);
+
+                showProgress(false);
+                img.setClickable(true);
+
+            } else if (what == 1) {
+                img = (ImageView) findViewById(R.id.view_iconlogin);
+                img.setClickable(false);
+                showProgress(true);
+            }
+        }
+    };
     private Handler countBubbleHandler = new Handler() {
 
         @Override
@@ -814,5 +864,114 @@ public class cgeo extends AbstractActivity {
      */
     public void goSearch(View view) {
         onSearchRequested();
+    }
+
+    public void displayInfoUser(View view) {
+
+        progress = (ProgressBar) findViewById(R.id.actionbar_progress);
+        showProgressHandler.sendEmptyMessage(1);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                int maxWidth = 80, maxHeight = 80;
+                String iconUserUrl = "";
+                HttpResponse loginResponse = null;
+                String loginData = null;
+                String[] viewstates = null;
+
+                final ImmutablePair<String, String> loginStart = Settings.getLogin();
+
+                if (loginStart != null) {
+
+                    loginResponse = cgBase.request("https://www.geocaching.com/default.aspx", null, false, false, false);
+                    loginData = cgBase.getResponseData(loginResponse);
+                    if (loginData != null && loginData.length() > 0) {
+                        String premium = "";
+                        if (cgBase.isPremium(loginData)) {
+                            premium = "Premium Member";
+                        }
+                        if (cgBase.UsernameLogin(loginData) == "") {
+                            infoUser = "";
+                        } else {
+                            infoUser = cgBase.UsernameLogin(loginData) + "\n"
+                                    + premium + "\n" + "caches: "
+                                    + cgBase.UserNbCaches(loginData);
+                        }
+
+                        try {
+
+                            final BitmapFactory.Options bfOptions = new BitmapFactory.Options();
+                            Bitmap imagePre = null;
+                            HttpClient client = null;
+                            HttpGet getMethod = null;
+                            HttpResponse httpResponse = null;
+                            HttpEntity entity = null;
+                            BufferedHttpEntity bufferedEntity = null;
+                            client = new DefaultHttpClient();
+                            getMethod = new HttpGet(cgBase
+                                    .AdressIconLogin(loginData));
+                            httpResponse = client.execute(getMethod);
+                            entity = httpResponse.getEntity();
+                            bufferedEntity = new BufferedHttpEntity(entity);
+
+                            if (bufferedEntity != null) {
+                                imagePre = BitmapFactory.decodeStream(
+                                        bufferedEntity.getContent(), null,
+                                        bfOptions);
+                            }
+                            if (imagePre != null) {
+                                int width, height, imgWidth = imagePre
+                                        .getWidth(), imgHeight = imagePre
+                                        .getHeight();
+                                double ratio;
+
+                                if (imgWidth > maxWidth
+                                        || imgHeight > maxHeight) {
+                                    if ((maxWidth / imgWidth) > (maxHeight / imgHeight)) {
+                                        ratio = (double) maxHeight
+                                                / (double) imgHeight;
+                                    } else {
+                                        ratio = (double) maxWidth
+                                                / (double) imgWidth;
+                                    }
+
+                                    width = (int) Math.ceil(imgWidth * ratio);
+                                    height = (int) Math.ceil(imgHeight * ratio);
+
+                                    try {
+                                        imagePre = Bitmap.createScaledBitmap(
+                                                imagePre, width, height, true);
+                                    } catch (Exception e) {
+                                        Log
+                                                .d(Settings.tag,
+                                                        "cgeo.displayInfoUser: Failed to scale image");
+
+                                    }
+                                } else {
+                                    width = imgWidth;
+                                    height = imgHeight;
+                                }
+
+                                image = new BitmapDrawable(imagePre);
+                                image.setBounds(new Rect(0, 0, width, height));
+
+                            }
+
+                        } catch (Exception e) {
+                            Log.e(Settings.tag,
+                                    "cgeo.displayInfoUser (downloading from web): "
+                                            + e.toString());
+                        }
+
+                    }
+
+                }
+                showProgressHandler.sendEmptyMessage(0);
+            }
+
+        }).start();
+
     }
 }

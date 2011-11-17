@@ -52,8 +52,8 @@
 	</style>
 
 	<style name="action_bar_action">
-		<item name="android:layout_width">@dimen/actionbar_height</item>
-		<item name="android:layout_height">@dimen/actionbar_height</item>
+		<item name="android:layout_width">@dimen/icon_height</item>
+		<item name="android:layout_height">@dimen/icon_height</item>
 		<item name="android:padding">2dip</item>
 		<item name="android:scaleType">center</item>
 		<item name="android:focusable">true</item>
@@ -80,19 +80,44 @@
 		<item name="android:id">@id/actionbar_title</item>
 		<item name="android:layout_width">0dip</item>
 		<item name="android:layout_height">wrap_content</item>
-		<item name="android:layout_weight">1</item>
-		<item name="android:paddingLeft">6dip</item>
+		<item name="android:layout_weight">5</item>
+		<item name="android:paddingLeft">0dip</item>
 		<item name="android:singleLine">true</item>
 		<item name="android:scrollHorizontally">true</item>
 		<item name="android:ellipsize">marquee</item>
 		<item name="android:lines">1</item>
-		<item name="android:textSize">20dip</item>
+		<item name="android:textSize">18dip</item>
 		<item name="android:textColor">@color/just_white</item>
 		<item name="android:text">c:geo</item>
 	</style>
-
-<!-- button: full width -->
-	<style name="button">
+  
+  <style name="action_bar_icon_user">
+    <item name="android:layout_width">@dimen/icon_height</item>
+    <item name="android:layout_height">fill_parent</item>
+    <item name="android:layout_weight">1</item>
+    <item name="android:gravity">left</item>
+    <item name="android:scaleType">center</item>
+    <item name="android:src">@drawable/actionbar_user</item>
+  </style>
+  
+  <style name="action_bar_login">
+    <item name="android:id">@id/actionbar_title</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_weight">1</item>
+    <item name="android:layout_height">fill_parent</item>
+    <item name="android:gravity">left</item>
+    <item name="android:singleLine">false</item>
+    <item name="android:scrollHorizontally">true</item>
+    <item name="android:ellipsize">marquee</item>
+    <item name="android:lines">3</item>
+    <item name="android:textSize">11dip</item>
+    <item name="android:textColor">@color/just_white</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:text">"" </item>
+    </style>
+  
+  <!-- button: full width -->
+  <style name="button">
 		<item name="android:layout_width">fill_parent</item>
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:layout_marginLeft">10dip</item>
