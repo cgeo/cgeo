@@ -20,6 +20,9 @@ public class GeopointFormatter
         /** Example: "N 10° 12,345 W 5° 12,345" */
         LAT_LON_DECMINUTE,
 
+        /** Example: "N 10° 12' 34" W 5° 12' 34"" */
+        LAT_LON_DECSECOND,
+
         /** Example: "-0.123456" (unlocalized latitude) */
         LAT_DECDEGREE_RAW,
 
@@ -58,6 +61,10 @@ public class GeopointFormatter
         final double lonFloor = Math.floor(lon);
         final double latMin = (lat - latFloor) * 60;
         final double lonMin = (lon - lonFloor) * 60;
+        final double latMinFloor = Math.floor(latMin);
+        final double lonMinFloor = Math.floor(lonMin);
+        final double latSec = (latMin - latMinFloor) * 60;
+        final double lonSec = (lonMin - lonMinFloor) * 60;
         final char latDir = latSigned < 0 ? 'S' : 'N';
         final char lonDir = lonSigned < 0 ? 'W' : 'E';
 
@@ -71,6 +78,10 @@ public class GeopointFormatter
             case LAT_LON_DECMINUTE:
                 return String.format("%c %02.0f° %.3f %c %03.0f° %.3f",
                         latDir, latFloor, latMin, lonDir, lonFloor, lonMin);
+
+            case LAT_LON_DECSECOND:
+                return String.format("%c %02.0f° %02.0f' %.3f\" %c %03.0f° %02.0f' %.3f\"",
+                        latDir, latFloor, latMinFloor, latSec, lonDir, lonFloor, lonMinFloor, lonSec);
 
             case LAT_DECDEGREE_RAW:
                 return String.format((Locale) null, "%.6f", latSigned);

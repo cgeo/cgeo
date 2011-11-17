@@ -8,6 +8,7 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -838,7 +839,24 @@ public class cgeodetail extends AbstractActivity {
 
             // cache coordinates
             if (cache.getCoords() != null) {
-                addCacheDetail(R.string.cache_coordinates, cache.getCoords().toString());
+                addCacheDetail(R.string.cache_coordinates, cache.getCoords().toString())
+                        .setOnClickListener(new View.OnClickListener() {
+                            private int position = 0;
+                            private GeopointFormatter.Format[] availableFormats = new GeopointFormatter.Format[] {
+                                    GeopointFormatter.Format.LAT_LON_DECMINUTE,
+                                    GeopointFormatter.Format.LAT_LON_DECSECOND,
+                                    GeopointFormatter.Format.LAT_LON_DECDEGREE
+                            };
+
+                            // rotate coordinate formats on click
+                            @Override
+                            public void onClick(View view) {
+                                position = (position + 1) % availableFormats.length;
+
+                                final TextView valueView = (TextView) view.findViewById(R.id.value);
+                                valueView.setText(cache.getCoords().format(availableFormats[position]));
+                            }
+                        });
             }
 
             // cache attributes
