@@ -11,25 +11,31 @@ public class GeopointFormatter
      * Predefined formats.
      */
     public static enum Format {
-        /** Example: "-0,123456 10,123456" */
+        /** Example: "10,123456 -0,123456" */
         LAT_LON_DECDEGREE,
-        /** Example: "-0.123456,10.123456" (unlocalized) */
+
+        /** Example: "10.123456,-0.123456" (unlocalized) */
         LAT_LON_DECDEGREE_COMMA,
-        /** Example: "W 5° 12,345 N 10° 12,345" */
+
+        /** Example: "N 10° 12,345 W 5° 12,345" */
         LAT_LON_DECMINUTE,
-        /** Example: "W 5° 12,345 | N 10° 12,345" */
-        LAT_LON_DECMINUTE_PIPE,
+
         /** Example: "-0.123456" (unlocalized latitude) */
         LAT_DECDEGREE_RAW,
-        /** Example: "W 5° 12,345" */
+
+        /** Example: "N 10° 12,345" */
         LAT_DECMINUTE,
-        /** Example: "W 5 12,345" */
+
+        /** Example: "N 10 12,345" */
         LAT_DECMINUTE_RAW,
+
         /** Example: "-0.123456" (unlocalized longitude) */
         LON_DECDEGREE_RAW,
-        /** Example: "N 10° 12,345" */
+
+        /** Example: "W 5° 12,345" */
         LON_DECMINUTE,
-        /** Example: "N 10 12,345" */
+
+        /** Example: "W 5 12,345" */
         LON_DECMINUTE_RAW;
     }
 
@@ -64,10 +70,6 @@ public class GeopointFormatter
 
             case LAT_LON_DECMINUTE:
                 return String.format("%c %02.0f° %.3f %c %03.0f° %.3f",
-                        latDir, latFloor, latMin, lonDir, lonFloor, lonMin);
-
-            case LAT_LON_DECMINUTE_PIPE:
-                return String.format("%c %02.0f° %.3f | %c %03.0f° %.3f",
                         latDir, latFloor, latMin, lonDir, lonFloor, lonMin);
 
             case LAT_DECDEGREE_RAW:

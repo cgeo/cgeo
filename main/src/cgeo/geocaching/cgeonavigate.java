@@ -2,8 +2,6 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.GeopointFormatter;
-import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.maps.CGeoMap;
 
 import org.apache.commons.lang3.StringUtils;
@@ -278,7 +276,7 @@ public class cgeonavigate extends AbstractActivity {
             setDestCoords();
             updateDistanceInfo();
 
-            Log.d(Settings.tag, "destination set: " + title + " (" + dstCoords.format(Format.LAT_LON_DECMINUTE_PIPE) + ")");
+            Log.d(Settings.tag, "destination set: " + title + " (" + dstCoords + ")");
             return true;
         }
 
@@ -298,7 +296,7 @@ public class cgeonavigate extends AbstractActivity {
             return;
         }
 
-        ((TextView) findViewById(R.id.destination)).setText(dstCoords.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_PIPE));
+        ((TextView) findViewById(R.id.destination)).setText(dstCoords.toString());
     }
 
     public void setDest(final Geopoint coords) {
@@ -382,9 +380,9 @@ public class cgeonavigate extends AbstractActivity {
 
                     if (geo.altitudeNow != null) {
                         final String humanAlt = cgBase.getHumanDistance(geo.altitudeNow.floatValue() / 1000);
-                        navLocation.setText(geo.coordsNow.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_PIPE) + " | " + humanAlt);
+                        navLocation.setText(geo.coordsNow + " | " + humanAlt);
                     } else {
-                        navLocation.setText(geo.coordsNow.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_PIPE));
+                        navLocation.setText(geo.coordsNow.toString());
                     }
 
                     updateDistanceInfo();

@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
-import cgeo.geocaching.geopoint.GeopointFormatter;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -76,7 +75,7 @@ public class cgeowaypoint extends AbstractActivity {
                     waypoint.setIcon(res, identification);
 
                     if (waypoint.getCoords() != null) {
-                        coords.setText(Html.fromHtml(waypoint.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_PIPE)), TextView.BufferType.SPANNABLE);
+                        coords.setText(Html.fromHtml(waypoint.getCoords().toString()), TextView.BufferType.SPANNABLE);
                         compass.setVisibility(View.VISIBLE);
                         separator.setVisibility(View.VISIBLE);
                     } else {

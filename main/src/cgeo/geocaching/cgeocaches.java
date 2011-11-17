@@ -14,7 +14,6 @@ import cgeo.geocaching.filter.cgFilterBySize;
 import cgeo.geocaching.filter.cgFilterByTrackables;
 import cgeo.geocaching.filter.cgFilterByType;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.DateComparator;
@@ -612,7 +611,7 @@ public class cgeocaches extends AbstractListActivity {
                 break;
             case COORDINATE:
                 action = "planning";
-                title = coords.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_PIPE);
+                title = coords.toString();
                 setTitle(title);
                 showProgress(true);
                 setLoadingCaches();
@@ -639,7 +638,7 @@ public class cgeocaches extends AbstractListActivity {
                     showProgress(true);
                     setLoadingCaches();
                 } else {
-                    title = coords.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_PIPE);
+                    title = coords.toString();
                     setTitle(title);
                     showProgress(true);
                     setLoadingCaches();
