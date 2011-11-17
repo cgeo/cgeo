@@ -43,7 +43,7 @@
 			android:layout_weight="1"
 			android:layout_alignParentRight="true"
 			android:layout_gravity="right"
-			android:gravity="center"
+			android:gravity="right"
 			android:lines="1"
 			android:singleLine="true"
 			android:scrollHorizontally="true"

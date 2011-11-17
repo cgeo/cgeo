@@ -109,7 +109,11 @@ public class VisitCacheActivity extends cgLogForm {
 
                     ((TextView) inventoryItem.findViewById(R.id.trackcode)).setText(tb.trackCode);
                     ((TextView) inventoryItem.findViewById(R.id.name)).setText(tb.name);
-                    ((TextView) inventoryItem.findViewById(R.id.action)).setText(res.getString(Settings.isTrackableAutoVisit() ? LogTypeTrackable.VISITED.resourceId : LogTypeTrackable.DO_NOTHING.resourceId));
+                    ((TextView) inventoryItem.findViewById(R.id.action))
+                            .setText(res.getString(Settings.isTrackableAutoVisit()
+                                    ? LogTypeTrackable.VISITED.resourceId
+                                    : LogTypeTrackable.DO_NOTHING.resourceId)
+                                    + " ▼");
 
                     inventoryItem.setId(tb.id);
                     final String tbCode = tb.trackCode;
@@ -403,7 +407,7 @@ public class VisitCacheActivity extends cgLogForm {
                         if (tbText == null) {
                             return false;
                         }
-                        tbText.setText(res.getString(logType.resourceId));
+                        tbText.setText(res.getString(logType.resourceId) + " ▼");
                     }
                     for (cgTrackableLog tb : trackables) {
                         tb.action = logType;
@@ -433,7 +437,7 @@ public class VisitCacheActivity extends cgLogForm {
                             tbChanged = true;
 
                             tb.action = logType;
-                            tbText.setText(res.getString(logType.resourceId));
+                            tbText.setText(res.getString(logType.resourceId) + " ▼");
 
                             Log.i(Settings.tag, "Trackable " + tb.trackCode + " (" + tb.name + ") has new action: #" + id);
                         }
