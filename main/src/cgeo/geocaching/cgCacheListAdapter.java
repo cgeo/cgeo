@@ -47,7 +47,7 @@ import java.util.Set;
 
 public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
-    private static final String SEPARATOR = " | ";
+    private static final String SEPARATOR = " · ";
     final private Resources res;
     final private List<cgCache> list;
     private cgCacheView holder = null;
@@ -556,19 +556,19 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             if (StringUtils.isNotBlank(cache.getGeocode())) {
                 cacheInfo.append(cache.getGeocode());
             }
-            if (cache.hasDifficulty() || cache.hasTerrain()) {
+            if (cache.hasDifficulty()) {
                 if (cacheInfo.length() > 0) {
                     cacheInfo.append(SEPARATOR);
                 }
-
-                if (cache.hasDifficulty()) {
-                    cacheInfo.append("D:");
-                    cacheInfo.append(String.format("%.1f ", cache.getDifficulty()));
+                cacheInfo.append("D ");
+                cacheInfo.append(String.format("%.1f", cache.getDifficulty()));
+            }
+            if (cache.hasTerrain()) {
+                if (cacheInfo.length() > 0) {
+                    cacheInfo.append(SEPARATOR);
                 }
-                if (cache.hasTerrain()) {
-                    cacheInfo.append("T:");
-                    cacheInfo.append(String.format("%.1f", cache.getTerrain()));
-                }
+                cacheInfo.append("T ");
+                cacheInfo.append(String.format("%.1f", cache.getTerrain()));
             }
             // don't show "not chosen" for events and virtuals, that should be the normal case
             if (cache.getSize() != null && cache.showSize()) {
