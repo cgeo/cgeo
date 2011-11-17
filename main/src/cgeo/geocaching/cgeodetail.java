@@ -345,6 +345,7 @@ public class cgeodetail extends AbstractActivity {
             }
         }
     };
+    private LinearLayout detailsList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -686,10 +687,6 @@ public class cgeodetail extends AbstractActivity {
     }
 
     private void setView() {
-        RelativeLayout itemLayout;
-        TextView itemName;
-        TextView itemValue;
-
         if (search == null) {
             return;
         }
@@ -727,73 +724,40 @@ public class cgeodetail extends AbstractActivity {
             ScrollView scroll = (ScrollView) findViewById(R.id.details_list_box);
             scroll.setVisibility(View.VISIBLE);
 
-            LinearLayout detailsList = (LinearLayout) findViewById(R.id.details_list);
+            detailsList = (LinearLayout) findViewById(R.id.details_list);
             detailsList.removeAllViews();
 
             // actionbar icon, default mystery
             ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.getCacheType())), null, null, null);
 
             // cache name (full name)
-            itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
-            itemName = (TextView) itemLayout.findViewById(R.id.name);
-            itemValue = (TextView) itemLayout.findViewById(R.id.value);
-
-            itemName.setText(res.getString(R.string.cache_name));
             Spannable span = (new Spannable.Factory()).newSpannable(Html.fromHtml(cache.getName()).toString());
             if (cache.isDisabled() || cache.isArchived()) { // strike
                 span.setSpan(new StrikethroughSpan(), 0, span.toString().length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
-            itemValue.setText(span);
-            detailsList.addView(itemLayout);
+            addCacheDetail(R.string.cache_name, span);
 
+            String cacheType;
             // cache type
-            itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
-            itemName = (TextView) itemLayout.findViewById(R.id.name);
-            itemValue = (TextView) itemLayout.findViewById(R.id.value);
-
-            itemName.setText(res.getString(R.string.cache_type));
-
             if (cgBase.cacheTypesInv.containsKey(cache.getCacheType())) { // cache icon
-                itemValue.setText(cgBase.cacheTypesInv.get(cache.getCacheType()));
+                cacheType = cgBase.cacheTypesInv.get(cache.getCacheType());
             } else {
-                itemValue.setText(cgBase.cacheTypesInv.get(CacheType.MYSTERY)); // TODO: or UNKNOWN?
+                cacheType = cgBase.cacheTypesInv.get(CacheType.MYSTERY); // TODO: or UNKNOWN?
             }
-
-            detailsList.addView(itemLayout);
+            addCacheDetail(R.string.cache_type, cacheType);
 
             // size
             if (null != cache.getSize() && cache.showSize()) {
-                itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
-                itemName = (TextView) itemLayout.findViewById(R.id.name);
-                itemValue = (TextView) itemLayout.findViewById(R.id.value);
-
-                itemName.setText(res.getString(R.string.cache_size));
-                itemValue.setText(res.getString(cache.getSize().stringId));
-                detailsList.addView(itemLayout);
+                addCacheDetail(R.string.cache_size, res.getString(cache.getSize().stringId));
             }
 
             // gc-code
-            itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
-            itemName = (TextView) itemLayout.findViewById(R.id.name);
-            itemValue = (TextView) itemLayout.findViewById(R.id.value);
-
-            itemName.setText(res.getString(R.string.cache_geocode));
-            itemValue.setText(cache.getGeocode().toUpperCase());
-            detailsList.addView(itemLayout);
+            addCacheDetail(R.string.cache_geocode, cache.getGeocode().toUpperCase());
 
             // cache state
             if (cache.isLogOffline() || cache.isArchived() || cache.isDisabled() || cache.isMembers() || cache.isFound()) {
-                itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
-                itemName = (TextView) itemLayout.findViewById(R.id.name);
-                itemValue = (TextView) itemLayout.findViewById(R.id.value);
-
-                itemName.setText(res.getString(R.string.cache_status));
-
-                StringBuilder state = new StringBuilder();
+                final StringBuilder state = new StringBuilder();
                 if (cache.isLogOffline()) {
-                    if (state.length() > 0) {
-                        state.append(", ");
-                    }
                     state.append(res.getString(R.string.cache_status_offline_log));
                 }
                 if (cache.isFound()) {
@@ -821,39 +785,25 @@ public class cgeodetail extends AbstractActivity {
                     state.append(res.getString(R.string.cache_status_premium));
                 }
 
-                itemValue.setText(state.toString());
-                detailsList.addView(itemLayout);
-
-                state = null;
+                addCacheDetail(R.string.cache_status, state.toString());
             }
 
             // distance
-            itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
-            itemName = (TextView) itemLayout.findViewById(R.id.name);
-            itemValue = (TextView) itemLayout.findViewById(R.id.value);
-
-            itemName.setText(res.getString(R.string.cache_distance));
-            if (cache.getDistance() != null) {
-                itemValue.setText("~" + cgBase.getHumanDistance(cache.getDistance()));
-            } else {
-                itemValue.setText("--");
-            }
-            detailsList.addView(itemLayout);
-            cacheDistance = itemValue;
+            cacheDistance = addCacheDetail(R.string.cache_distance, cache.getDistance() != null ? "~" + cgBase.getHumanDistance(cache.getDistance()) : "--");
 
             // difficulty
             if (cache.getDifficulty() != null && cache.getDifficulty() > 0) {
-                addStarRating(detailsList, res.getString(R.string.cache_difficulty), cache.getDifficulty());
+                addStarRating(R.string.cache_difficulty, cache.getDifficulty());
             }
 
             // terrain
             if (cache.getTerrain() != null && cache.getTerrain() > 0) {
-                addStarRating(detailsList, res.getString(R.string.cache_terrain), cache.getTerrain());
+                addStarRating(R.string.cache_terrain, cache.getTerrain());
             }
 
             // rating
             if (cache.getRating() != null && cache.getRating() > 0) {
-                itemLayout = addStarRating(detailsList, res.getString(R.string.cache_rating), cache.getRating());
+                final RelativeLayout itemLayout = addStarRating(R.string.cache_rating, cache.getRating());
                 if (cache.getVotes() != null) {
                     final TextView itemAddition = (TextView) itemLayout.findViewById(R.id.addition);
                     itemAddition.setText("(" + cache.getVotes() + ")");
@@ -863,66 +813,33 @@ public class cgeodetail extends AbstractActivity {
 
             // favourite count
             if (cache.getFavouriteCnt() != null) {
-                itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
-                itemName = (TextView) itemLayout.findViewById(R.id.name);
-                itemValue = (TextView) itemLayout.findViewById(R.id.value);
-
-                itemName.setText(res.getString(R.string.cache_favourite));
-                itemValue.setText(String.format("%d", cache.getFavouriteCnt()) + "×");
-                detailsList.addView(itemLayout);
+                addCacheDetail(R.string.cache_favourite, String.format("%d", cache.getFavouriteCnt()) + "×");
             }
 
             // cache author
             if (StringUtils.isNotBlank(cache.getOwner()) || StringUtils.isNotBlank(cache.getOwnerReal())) {
-                itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
-                itemName = (TextView) itemLayout.findViewById(R.id.name);
-                itemValue = (TextView) itemLayout.findViewById(R.id.value);
-
-                itemName.setText(res.getString(R.string.cache_owner));
+                TextView ownerView = addCacheDetail(R.string.cache_owner, "");
                 if (StringUtils.isNotBlank(cache.getOwner())) {
-                    itemValue.setText(Html.fromHtml(cache.getOwner()), TextView.BufferType.SPANNABLE);
+                    ownerView.setText(Html.fromHtml(cache.getOwner()), TextView.BufferType.SPANNABLE);
                 } else if (StringUtils.isNotBlank(cache.getOwnerReal())) {
-                    itemValue.setText(Html.fromHtml(cache.getOwnerReal()), TextView.BufferType.SPANNABLE);
+                    ownerView.setText(Html.fromHtml(cache.getOwnerReal()), TextView.BufferType.SPANNABLE);
                 }
-                itemValue.setOnClickListener(new userActions());
-                detailsList.addView(itemLayout);
+                ownerView.setOnClickListener(new userActions());
             }
 
             // cache hidden
             if (cache.getHidden() != null && cache.getHidden().getTime() > 0) {
-                itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
-                itemName = (TextView) itemLayout.findViewById(R.id.name);
-                itemValue = (TextView) itemLayout.findViewById(R.id.value);
-
-                if (cache.isEventCache()) {
-                    itemName.setText(res.getString(R.string.cache_event));
-                } else {
-                    itemName.setText(res.getString(R.string.cache_hidden));
-                }
-                itemValue.setText(base.formatFullDate(cache.getHidden().getTime()));
-                detailsList.addView(itemLayout);
+                addCacheDetail(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, base.formatFullDate(cache.getHidden().getTime()));
             }
 
             // cache location
             if (StringUtils.isNotBlank(cache.getLocation())) {
-                itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
-                itemName = (TextView) itemLayout.findViewById(R.id.name);
-                itemValue = (TextView) itemLayout.findViewById(R.id.value);
-
-                itemName.setText(res.getString(R.string.cache_location));
-                itemValue.setText(cache.getLocation());
-                detailsList.addView(itemLayout);
+                addCacheDetail(R.string.cache_location, cache.getLocation());
             }
 
             // cache coordinates
             if (cache.getCoords() != null) {
-                itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
-                itemName = (TextView) itemLayout.findViewById(R.id.name);
-                itemValue = (TextView) itemLayout.findViewById(R.id.value);
-
-                itemName.setText(res.getString(R.string.cache_coordinates));
-                itemValue.setText(cache.getLatitude() + " | " + cache.getLongitude());
-                detailsList.addView(itemLayout);
+                addCacheDetail(R.string.cache_coordinates, cache.getLatitude() + " | " + cache.getLongitude());
             }
 
             // cache attributes
@@ -1181,6 +1098,15 @@ public class cgeodetail extends AbstractActivity {
         }
     }
 
+    private TextView addCacheDetail(final int nameId, final CharSequence value) {
+        final RelativeLayout layout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
+        ((TextView) layout.findViewById(R.id.name)).setText(res.getString(nameId));
+        final TextView valueView = (TextView) layout.findViewById(R.id.value);
+        valueView.setText(value);
+        detailsList.addView(layout);
+        return valueView;
+    }
+
     static private boolean containsHtml(final String str) {
         return str.indexOf('<') != -1 || str.indexOf('&') != -1;
     }
@@ -1194,18 +1120,18 @@ public class cgeodetail extends AbstractActivity {
         }
     }
 
-    private RelativeLayout addStarRating(final LinearLayout detailsList, final String name, final float value) {
-        RelativeLayout itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_layout, null);
-        TextView itemName = (TextView) itemLayout.findViewById(R.id.name);
-        TextView itemValue = (TextView) itemLayout.findViewById(R.id.value);
-        LinearLayout itemStars = (LinearLayout) itemLayout.findViewById(R.id.stars);
+    private RelativeLayout addStarRating(final int nameId, final float value) {
+        final RelativeLayout layout = (RelativeLayout) inflater.inflate(R.layout.cache_layout, null);
+        TextView viewName = (TextView) layout.findViewById(R.id.name);
+        TextView viewValue = (TextView) layout.findViewById(R.id.value);
+        LinearLayout layoutStars = (LinearLayout) layout.findViewById(R.id.stars);
 
-        itemName.setText(name);
-        itemValue.setText(String.format("%.1f", value) + ' ' + res.getString(R.string.cache_rating_of) + " 5");
-        itemStars.addView(cgBase.createStarRating(value, 5, this), 1);
+        viewName.setText(res.getString(nameId));
+        viewValue.setText(String.format("%.1f", value) + ' ' + res.getString(R.string.cache_rating_of) + " 5");
+        layoutStars.addView(cgBase.createStarRating(value, 5, this), 1);
 
-        detailsList.addView(itemLayout);
-        return itemLayout;
+        detailsList.addView(layout);
+        return layout;
     }
 
     private void displayLogs() {
