@@ -76,30 +76,30 @@ public class GeopointFormatter
                 return String.format((Locale) null, "%.6f,%.6f", latSigned, lonSigned);
 
             case LAT_LON_DECMINUTE:
-                return String.format("%c %02.0f° %.3f %c %03.0f° %.3f",
+                return String.format("%c %02.0f° %06.3f %c %03.0f° %06.3f",
                         latDir, latFloor, latMin, lonDir, lonFloor, lonMin);
 
             case LAT_LON_DECSECOND:
-                return String.format("%c %02.0f° %02.0f' %.3f\" %c %03.0f° %02.0f' %.3f\"",
+                return String.format("%c %02.0f° %02.0f' %06.3f\" %c %03.0f° %02.0f' %06.3f\"",
                         latDir, latFloor, latMinFloor, latSec, lonDir, lonFloor, lonMinFloor, lonSec);
 
             case LAT_DECDEGREE_RAW:
                 return String.format((Locale) null, "%.6f", latSigned);
 
             case LAT_DECMINUTE:
-                return String.format("%c %02.0f° %.3f", latDir, latFloor, latMin);
+                return String.format("%c %02.0f° %06.3f", latDir, latFloor, latMin);
 
             case LAT_DECMINUTE_RAW:
-                return String.format("%c %02.0f %.3f", latDir, latFloor, latMin);
+                return String.format("%c %02.0f %06.3f", latDir, latFloor, latMin);
 
             case LON_DECDEGREE_RAW:
                 return String.format((Locale) null, "%.6f", lonSigned);
 
             case LON_DECMINUTE:
-                return String.format("%c %03.0f° %.3f", lonDir, lonFloor, lonMin);
+                return String.format("%c %03.0f° %06.3f", lonDir, lonFloor, lonMin);
 
             case LON_DECMINUTE_RAW:
-                return String.format("%c %03.0f %.3f", lonDir, lonFloor, lonMin);
+                return String.format("%c %03.0f %06.3f", lonDir, lonFloor, lonMin);
         }
 
         // Keep the compiler happy even though it cannot happen
