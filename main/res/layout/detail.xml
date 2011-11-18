@@ -246,6 +246,16 @@
 						android:textColor="?text_color"
 						android:linksClickable="true"
 						android:textColorLink="?text_color_link" />
+                <TextView
+                        android:id="@+id/hint_spoilerlink"
+                        android:text="@string/cache_menu_spoilers"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:drawableLeft="?log_img_icon"
+                        android:drawablePadding="3dip"
+                        android:textSize="14dip"
+                        android:textColor="?text_color" />
 			</LinearLayout>
 			<LinearLayout android:id="@+id/log_box"
 					android:visibility="gone"

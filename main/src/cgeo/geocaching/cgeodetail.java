@@ -82,7 +82,6 @@ public class cgeodetail extends AbstractActivity {
     private static final int MENU_CALENDAR = 11;
     private static final int MENU_CACHES_AROUND = 10;
     private static final int MENU_BROWSER = 7;
-    private static final int MENU_SPOILERS = 5;
     private static final int MENU_NAVIGATE = 2;
     private static final int CONTEXT_MENU_WAYPOINT_DELETE = 1235;
     private static final int CONTEXT_MENU_WAYPOINT_DUPLICATE = 1234;
@@ -594,7 +593,6 @@ public class cgeodetail extends AbstractActivity {
             addNavigationMenuItems(subMenu);
             menu.add(1, MENU_CALENDAR, 0, res.getString(R.string.cache_menu_event)).setIcon(android.R.drawable.ic_menu_agenda); // add event to calendar
             addVisitMenu(menu, cache);
-            menu.add(1, MENU_SPOILERS, 0, res.getString(R.string.cache_menu_spoilers)).setIcon(android.R.drawable.ic_menu_gallery); // spoiler images
             menu.add(0, MENU_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
             menu.add(1, MENU_BROWSER, 0, res.getString(R.string.cache_menu_browser)).setIcon(R.drawable.ic_menu_globe); // browser
             menu.add(0, MENU_SHARE, 0, res.getString(R.string.cache_menu_share)).setIcon(android.R.drawable.ic_menu_share); // share cache
@@ -606,7 +604,6 @@ public class cgeodetail extends AbstractActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         menu.findItem(MENU_NAVIGATE).setVisible(null != cache.getCoords());
         menu.findItem(MENU_CALENDAR).setVisible(cache.canBeAddedToCalendar());
-        menu.findItem(MENU_SPOILERS).setVisible(CollectionUtils.isNotEmpty(cache.getSpoilers()));
         menu.findItem(MENU_CACHES_AROUND).setVisible(null != cache.getCoords() && cache.supportsCachesAround());
         menu.findItem(MENU_BROWSER).setVisible(cache.canOpenInBrowser());
         return super.onPrepareOptionsMenu(menu);
@@ -631,9 +628,6 @@ public class cgeodetail extends AbstractActivity {
             return true;
         } else if (menuItem == MENU_LOG_VISIT) {
             logVisit();
-            return true;
-        } else if (menuItem == MENU_SPOILERS) {
-            showSpoilers();
             return true;
         } else if (menuItem == MENU_BROWSER) {
             cache.openInBrowser(this);
@@ -1070,17 +1064,40 @@ public class cgeodetail extends AbstractActivity {
             addWaypoint.setOnClickListener(new addWaypoint());
 
             // cache hint
-            if (StringUtils.isNotBlank(cache.getHint())) {
+            if (StringUtils.isNotBlank(cache.getHint()) || CollectionUtils.isNotEmpty(cache.getSpoilers())) {
                 ((LinearLayout) findViewById(R.id.hint_box)).setVisibility(View.VISIBLE);
+            } else {
+                ((LinearLayout) findViewById(R.id.hint_box)).setVisibility(View.GONE);
+            }
+
+            if (StringUtils.isNotBlank(cache.getHint())) {
                 TextView hintView = ((TextView) findViewById(R.id.hint));
                 hintView.setText(CryptUtils.rot13(cache.getHint().trim()));
+                hintView.setVisibility(View.VISIBLE);
                 hintView.setClickable(true);
                 hintView.setOnClickListener(new codeHint());
             } else {
-                ((LinearLayout) findViewById(R.id.hint_box)).setVisibility(View.GONE);
                 TextView hintView = ((TextView) findViewById(R.id.hint));
+                hintView.setVisibility(View.GONE);
                 hintView.setClickable(false);
                 hintView.setOnClickListener(null);
+            }
+
+            if (CollectionUtils.isNotEmpty(cache.getSpoilers())) {
+                TextView spoilerlinkView = ((TextView) findViewById(R.id.hint_spoilerlink));
+                spoilerlinkView.setVisibility(View.VISIBLE);
+                spoilerlinkView.setClickable(true);
+                spoilerlinkView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View arg0) {
+                        showSpoilers();
+                    }
+                });
+            } else {
+                TextView spoilerlinkView = ((TextView) findViewById(R.id.hint_spoilerlink));
+                spoilerlinkView.setVisibility(View.GONE);
+                spoilerlinkView.setClickable(true);
+                spoilerlinkView.setOnClickListener(null);
             }
 
             if (geo != null && geo.coordsNow != null && cache != null && cache.getCoords() != null) {
