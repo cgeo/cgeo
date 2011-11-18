@@ -91,6 +91,7 @@ public class GC2JVEH extends MockedCache {
         try {
             return cgBase.parseGcCustomDate("28/11/2010");
         } catch (ParseException e) {
+            // intentionally left blank
         }
         return null;
     }

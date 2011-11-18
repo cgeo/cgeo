@@ -301,6 +301,7 @@ public class cgeo extends AbstractActivity {
         return false;
     }
 
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == SCAN_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {

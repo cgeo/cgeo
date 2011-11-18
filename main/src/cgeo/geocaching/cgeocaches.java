@@ -2576,6 +2576,7 @@ public class cgeocaches extends AbstractListActivity {
         CGeoMap.startActivitySearch(this, search, title + " [" + cgeoapplication.getCount(search) + "]", false);
     }
 
+    @Override
     public void goManual(View view) {
         switch (type) {
             case OFFLINE:

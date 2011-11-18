@@ -42,6 +42,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
      */
     @SmallTest
     public void testPreconditions() {
+        // intentionally left blank
     }
 
     /**

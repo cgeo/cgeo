@@ -100,6 +100,7 @@ public class cgeoapplication extends Application {
         final AtomicBoolean atomic = new AtomicBoolean(false);
         Thread restoreThread = new Thread() {
             final Handler handler = new Handler() {
+                @Override
                 public void handleMessage(Message msg) {
                     dialog.dismiss();
                     boolean restored = atomic.get();
@@ -642,7 +643,7 @@ public class cgeoapplication extends Application {
      * <li>name of a cache</li>
      * <li>action like twittering</li>
      * </ul>
-     * 
+     *
      * @param action
      */
     public void setAction(String action) {

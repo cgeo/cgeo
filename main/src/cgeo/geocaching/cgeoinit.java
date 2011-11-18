@@ -567,6 +567,7 @@ public class cgeoinit extends AbstractActivity {
         final ProgressDialog dialog = ProgressDialog.show(this, res.getString(R.string.init_backup), res.getString(R.string.init_backup_running), true, false);
         Thread backupThread = new Thread() {
             final Handler handler = new Handler() {
+                @Override
                 public void handleMessage(Message msg) {
                     dialog.dismiss();
                     final String file = fileRef.get();

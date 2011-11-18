@@ -199,12 +199,13 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
                     wait(milliseconds);
                 }
             } catch (InterruptedException e) {
+                // intentionally left blank
             }
         }
 
         public void waitForCompletion() {
             // Use reasonable defaults
-            waitForCompletion(500, 10);
+            waitForCompletion(1000, 10);
         }
     }
 

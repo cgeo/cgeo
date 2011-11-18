@@ -1,6 +1,5 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.cgDestination;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import android.test.AndroidTestCase;

@@ -224,9 +224,10 @@ public final class Geopoint
     /**
      * Returns formatted coordinates with default format.
      * Default format is decimalminutes, e.g. N 52° 36.123 E 010° 03.456
-     *
+     * 
      * @return formatted coordinates
      */
+    @Override
     public String toString()
     {
         return format(GeopointFormatter.Format.LAT_LON_DECMINUTE);
