@@ -188,15 +188,20 @@
 				<TextView style="@style/separator_horizontal_headline"
 						android:text="@string/about_changelog" />
 			</RelativeLayout>
-			<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_margin="7dip"
-					android:layout_gravity="left"
-					android:paddingLeft="3dip"
-					android:textSize="12dip"
-					android:textColor="?text_color"
-					android:text="@string/changelog" />
+            <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dip"
+                    android:orientation="horizontal"
+                    android:gravity="center_horizontal" >
+                <Button style="@style/button"
+                        android:id="@+id/full_changelog"
+                        android:layout_width="280dip"
+                        android:singleLine="false"
+                        android:lines="2"
+                        android:onClick="showFullChangeLog"
+                        android:text="@string/about_button_changelog" />
+            </LinearLayout>
 			<RelativeLayout style="@style/separator_horizontal_layout" >
 				<View style="@style/separator_horizontal" />
 				<TextView style="@style/separator_horizontal_headline"
