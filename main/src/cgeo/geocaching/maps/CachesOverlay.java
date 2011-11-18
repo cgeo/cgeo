@@ -212,14 +212,14 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
             cgCoord coordinate = item.getCoord();
 
-            if (StringUtils.isNotBlank(coordinate.getType()) && coordinate.getType().equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
+            if (StringUtils.isNotBlank(coordinate.getCoordType()) && coordinate.getCoordType().equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
                 Intent popupIntent = new Intent(context, cgeopopup.class);
 
                 popupIntent.putExtra("fromdetail", fromDetail);
                 popupIntent.putExtra("geocode", coordinate.getGeocode());
 
                 context.startActivity(popupIntent);
-            } else if (coordinate.getType() != null && coordinate.getType().equalsIgnoreCase("waypoint") && coordinate.getId() != null && coordinate.getId() > 0) {
+            } else if (coordinate.getCoordType() != null && coordinate.getCoordType().equalsIgnoreCase("waypoint") && coordinate.getId() != null && coordinate.getId() > 0) {
                 Intent popupIntent = new Intent(context, cgeowaypoint.class);
 
                 popupIntent.putExtra("waypoint", coordinate.getId());
@@ -275,15 +275,11 @@ public class CachesOverlay extends AbstractItemizedOverlay {
             AlertDialog.Builder dialog = new AlertDialog.Builder(context);
             dialog.setCancelable(true);
 
-            if (coordinate.getType().equalsIgnoreCase("cache")) {
+            if (coordinate.getCoordType().equalsIgnoreCase("cache")) {
                 dialog.setTitle("cache");
 
-                String cacheType;
-                if (cgBase.cacheTypesInv.containsKey(coordinate.getTypeSpec())) {
-                    cacheType = cgBase.cacheTypesInv.get(CacheType.getById(coordinate.getTypeSpec()));
-                } else {
-                    cacheType = cgBase.cacheTypesInv.get(CacheType.MYSTERY);
-                }
+                CacheType ct = CacheType.getById(coordinate.getTypeSpec());
+                String cacheType = CacheType.UNKNOWN != ct ? ct.getL10n() : CacheType.MYSTERY.getL10n();
 
                 dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ngeocode: " + coordinate.getGeocode().toUpperCase() + "\ntype: " + cacheType);
                 if (fromDetail) {

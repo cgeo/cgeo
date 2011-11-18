@@ -230,7 +230,7 @@ public class cgeopopup extends AbstractActivity {
             detailsList.removeAllViews();
 
             // actionbar icon
-            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.getCacheType())), null, null, null);
+            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.getType())), null, null, null);
 
             // cache type
             itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
@@ -238,20 +238,13 @@ public class cgeopopup extends AbstractActivity {
             itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
             itemName.setText(res.getString(R.string.cache_type));
-            if (cgBase.cacheTypesInv.containsKey(cache.getCacheType())) { // cache icon
-                if (cache.getSize() != null) {
-                    itemValue.setText(cgBase.cacheTypesInv.get(cache.getCacheType())
-                            + " (" + res.getString(cache.getSize().stringId) + ")");
-                } else {
-                    itemValue.setText(cgBase.cacheTypesInv.get(cache.getCacheType()));
-                }
+
+            String cacheType = cache.getType() != CacheType.UNKNOWN ? cache.getType().getL10n() : CacheType.MYSTERY.getL10n();
+            if (cache.getSize() != null) {
+                itemValue.setText(cacheType
+                        + " (" + cache.getSize().getL10n() + ")");
             } else {
-                if (cache.getSize() != null) {
-                    itemValue.setText(cgBase.cacheTypesInv.get(CacheType.MYSTERY)
-                            + " (" + res.getString(cache.getSize().stringId) + ")");
-                } else {
-                    itemValue.setText(cgBase.cacheTypesInv.get(CacheType.MYSTERY));
-                }
+                itemValue.setText(cacheType);
             }
             detailsList.addView(itemLayout);
 

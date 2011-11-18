@@ -82,7 +82,7 @@ final public class OkapiClient {
             cache.setName(response.getString(CACHE_NAME));
             // not used: names
             setLocation(cache, response.getString(CACHE_LOCATION));
-            cache.setCacheType(getCacheType(response.getString(CACHE_TYPE)));
+            cache.setType(getCacheType(response.getString(CACHE_TYPE)));
 
             final String status = response.getString(CACHE_STATUS);
             cache.setDisabled(status.equalsIgnoreCase("Temporarily unavailable"));
@@ -234,14 +234,14 @@ final public class OkapiClient {
         return CacheSize.NOT_CHOSEN;
     }
 
-    private static CacheType getCacheType(final String type) {
-        if (type.equalsIgnoreCase("Traditional")) {
+    private static CacheType getCacheType(final String cacheType) {
+        if (cacheType.equalsIgnoreCase("Traditional")) {
             return CacheType.TRADITIONAL;
-        } else if (type.equalsIgnoreCase("Multi")) {
+        } else if (cacheType.equalsIgnoreCase("Multi")) {
             return CacheType.MULTI;
-        } else if (type.equalsIgnoreCase("Quiz")) {
+        } else if (cacheType.equalsIgnoreCase("Quiz")) {
             return CacheType.MYSTERY;
-        } else if (type.equalsIgnoreCase("Virtual")) {
+        } else if (cacheType.equalsIgnoreCase("Virtual")) {
             return CacheType.VIRTUAL;
         }
         return CacheType.UNKNOWN;

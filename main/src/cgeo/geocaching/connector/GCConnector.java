@@ -129,7 +129,7 @@ public class GCConnector extends AbstractConnector {
             return null;
         }
 
-        final List<cgCache> cacheList = cgBase.filterSearchResults(search, caches, false, false, null);
+        final List<cgCache> cacheList = cgBase.filterSearchResults(search, caches, false, false, Settings.getCacheType());
         app.addSearch(cacheList, reason);
 
         return search;

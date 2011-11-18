@@ -399,11 +399,17 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
         // removed startTimer since onResume is always called
 
+        prepareFilterBar();
+    }
+
+    private void prepareFilterBar() {
         // show the filter warning bar if the filter is set
-        if (Settings.getCacheType() != null) {
-            String cacheType = cgBase.cacheTypesInv.get(Settings.getCacheType());
+        if (Settings.getCacheType() != CacheType.ALL) {
+            String cacheType = Settings.getCacheType().getL10n();
             ((TextView) activity.findViewById(R.id.filter_text)).setText(cacheType);
             activity.findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
+        } else {
+            activity.findViewById(R.id.filter_bar).setVisibility(View.GONE);
         }
     }
 
@@ -1344,7 +1350,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                                 items.add(getWaypointItem(new cgCoord(oneWaypoint), oneWaypoint.getWaypointType()));
                             }
                         }
-                        items.add(getCacheItem(new cgCoord(cacheOne), cacheOne.getCacheType(), cacheOne.isOwn(), cacheOne.isFound(), cacheOne.isDisabled()));
+                        items.add(getCacheItem(new cgCoord(cacheOne), cacheOne.getType(), cacheOne.isOwn(), cacheOne.isFound(), cacheOne.isDisabled()));
                     }
 
                     overlayCaches.updateItems(items);
@@ -1544,7 +1550,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
             if (coordsIntent != null) {
                 final cgCoord coord = new cgCoord();
-                coord.setType("waypoint");
+                coord.setCoordType("waypoint");
                 coord.setCoords(coordsIntent);
                 coord.setName("some place");
 

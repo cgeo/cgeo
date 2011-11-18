@@ -249,7 +249,11 @@ public final class Settings {
         return sharedPrefs.getString(KEY_COOKIE_STORE, null);
     }
 
-    public static CacheType setCacheType(final CacheType cacheType) {
+    /**
+     * @param cacheType
+     *            The cache type used for future filtering
+     */
+    public static void setCacheType(final CacheType cacheType) {
         editSharedSettings(new PrefRunnable() {
             @Override
             public void edit(Editor edit) {
@@ -260,7 +264,6 @@ public final class Settings {
                 }
             }
         });
-        return cacheType;
     }
 
     public static void setLiveMap(final boolean live) {
@@ -779,12 +782,11 @@ public final class Settings {
         return sharedPrefs.getString(KEY_WEBDEVICE_NAME, null);
     }
 
+    /**
+     * @return The cache type used for filtering or ALL if no filter is active. Returns never null
+     */
     public static CacheType getCacheType() {
-        String cacheFilterType = sharedPrefs.getString(KEY_CACHE_TYPE, null);
-        if (cacheFilterType == null) {
-            return null;
-        }
-        return CacheType.getById(cacheFilterType);
+        return CacheType.getById(sharedPrefs.getString(KEY_CACHE_TYPE, CacheType.ALL.id));
     }
 
     public static int getWayPointsThreshold() {

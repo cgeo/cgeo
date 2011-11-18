@@ -12,7 +12,7 @@ public class cgCoord implements IBasicCache, IWaypoint {
     private String guid = null; // only valid if constructed with a cache
     private CacheType cacheType = null; // only valid if constructed with a cache
     private String geocode = "";
-    private String type = "cache"; // used values: { cache, waypoint }
+    private String coordType = "cache"; // used values: { cache, waypoint }
     private String typeSpec = CacheType.TRADITIONAL.id;
     private String name = "";
     private boolean found = false;
@@ -32,12 +32,12 @@ public class cgCoord implements IBasicCache, IWaypoint {
         geocode = cache.getGeocode();
         coords = cache.getCoords();
         name = cache.getName();
-        type = "cache";
-        typeSpec = cache.getCacheType().id;
+        coordType = "cache";
+        typeSpec = cache.getType().id;
         difficulty = cache.getDifficulty();
         terrain = cache.getTerrain();
         size = cache.getSize();
-        cacheType = cache.getCacheType();
+        cacheType = cache.getType();
     }
 
     public cgCoord(cgWaypoint waypoint) {
@@ -47,7 +47,7 @@ public class cgCoord implements IBasicCache, IWaypoint {
         geocode = "";
         coords = waypoint.getCoords();
         name = waypoint.getName();
-        type = "waypoint";
+        coordType = "waypoint";
         typeSpec = waypoint.getWaypointType() != null ? waypoint.getWaypointType().id : null;
         waypointType = waypoint.getWaypointType();
     }
@@ -69,12 +69,12 @@ public class cgCoord implements IBasicCache, IWaypoint {
         this.geocode = geocode;
     }
 
-    public String getType() {
-        return type;
+    public String getCoordType() {
+        return coordType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setCoordType(String type) {
+        this.coordType = type;
     }
 
     public String getTypeSpec() {
@@ -162,7 +162,7 @@ public class cgCoord implements IBasicCache, IWaypoint {
     }
 
     @Override
-    public CacheType getCacheType() {
+    public CacheType getType() {
         return cacheType;
     }
 }
