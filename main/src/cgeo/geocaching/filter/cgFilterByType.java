@@ -1,6 +1,5 @@
 package cgeo.geocaching.filter;
 
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.enumerations.CacheType;
 
@@ -14,11 +13,11 @@ public class cgFilterByType extends cgFilter {
 
     @Override
     boolean applyFilter(final cgCache cache) {
-        return cacheType == cache.getCacheType();
+        return cacheType == cache.getType();
     }
 
     @Override
     public String getFilterName() {
-        return cgBase.cacheTypesInv.get(cacheType.id);
+        return this.cacheType.getL10n();
     }
 }

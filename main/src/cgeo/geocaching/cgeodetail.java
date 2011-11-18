@@ -7,7 +7,6 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.network.HtmlImage;
@@ -728,7 +727,7 @@ public class cgeodetail extends AbstractActivity {
             detailsList.removeAllViews();
 
             // actionbar icon, default mystery
-            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.getCacheType())), null, null, null);
+            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.getType())), null, null, null);
 
             // cache name (full name)
             Spannable span = (new Spannable.Factory()).newSpannable(Html.fromHtml(cache.getName()).toString());
@@ -737,18 +736,12 @@ public class cgeodetail extends AbstractActivity {
             }
             addCacheDetail(R.string.cache_name, span);
 
-            String cacheType;
             // cache type
-            if (cgBase.cacheTypesInv.containsKey(cache.getCacheType())) { // cache icon
-                cacheType = cgBase.cacheTypesInv.get(cache.getCacheType());
-            } else {
-                cacheType = cgBase.cacheTypesInv.get(CacheType.MYSTERY); // TODO: or UNKNOWN?
-            }
-            addCacheDetail(R.string.cache_type, cacheType);
+            addCacheDetail(R.string.cache_type, cache.getType().getL10n());
 
             // size
             if (null != cache.getSize() && cache.showSize()) {
-                addCacheDetail(R.string.cache_size, res.getString(cache.getSize().stringId));
+                addCacheDetail(R.string.cache_size, cache.getSize().getL10n());
             }
 
             // gc-code
@@ -1398,7 +1391,7 @@ public class cgeodetail extends AbstractActivity {
         try {
             // cache
             coords = new cgCoord();
-            coords.setType("cache");
+            coords.setCoordType("cache");
             if (StringUtils.isNotBlank(name)) {
                 coords.setName(name);
             } else {
@@ -1416,7 +1409,7 @@ public class cgeodetail extends AbstractActivity {
                 for (cgWaypoint waypoint : cache.getWaypoints()) {
                     if (null != waypoint.getCoords()) {
                         coords = new cgCoord();
-                        coords.setType("waypoint");
+                        coords.setCoordType("waypoint");
                         coords.setName(waypoint.getName());
                         coords.setCoords(waypoint.getCoords());
                         coordinates.add(coords);

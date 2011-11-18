@@ -18,7 +18,7 @@ public interface IBasicCache extends ILogable {
     /**
      * @return Tradi, multi etc.
      */
-    public abstract CacheType getCacheType();
+    public abstract CacheType getType();
 
     /**
      * @return Micro, small etc.

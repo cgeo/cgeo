@@ -483,7 +483,7 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void end(String body) {
-                    cache.setCacheType(CacheType.getByPattern(validate(body.toLowerCase())));
+                    cache.setType(CacheType.getByPattern(validate(body.toLowerCase())));
                 }
             });
 
@@ -492,7 +492,7 @@ public abstract class GPXParser extends FileParser {
 
                 @Override
                 public void end(String body) {
-                    cache.setSize(CacheSize.FIND_BY_ID.get(validate(body.toLowerCase())));
+                    cache.setSize(CacheSize.getById(validate(body.toLowerCase())));
                 }
             });
 

@@ -131,7 +131,7 @@ public class cgCache implements ICache {
             guid = other.getGuid();
         }
         if (null == cacheType || CacheType.UNKNOWN == cacheType) {
-            cacheType = other.getCacheType();
+            cacheType = other.getType();
         }
         if (StringUtils.isBlank(name)) {
             name = other.getName();
@@ -906,18 +906,23 @@ public class cgCache implements ICache {
         this.nameForSorting = nameForSorting;
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see cgeo.geocaching.IBasicCache#getType()
+     *
+     * @returns Never null
+     */
     @Override
-    public CacheType getCacheType() {
+    public CacheType getType() {
         return cacheType;
     }
 
-    public void setCacheType(CacheType cacheType) {
-        if (cacheType == null) {
-            this.cacheType = CacheType.UNKNOWN;
+    public void setType(CacheType cacheType) {
+        if (cacheType == null || CacheType.ALL == cacheType) {
+            throw new IllegalArgumentException("Illegal cache type");
         }
-        else {
-            this.cacheType = cacheType;
-        }
+        this.cacheType = cacheType;
     }
 
     public boolean hasDifficulty() {

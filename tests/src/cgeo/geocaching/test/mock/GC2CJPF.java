@@ -54,7 +54,7 @@ public class GC2CJPF extends MockedCache {
     }
 
     @Override
-    public CacheType getCacheType() {
+    public CacheType getType() {
         return CacheType.MULTI;
     }
 

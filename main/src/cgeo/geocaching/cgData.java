@@ -1233,7 +1233,7 @@ public class cgData {
         values.put("geocode", cache.getGeocode());
         values.put("cacheid", cache.getCacheId());
         values.put("guid", cache.getGuid());
-        values.put("type", cache.getCacheType().id);
+        values.put("type", cache.getType().id);
         values.put("name", cache.getName());
         values.put("own", cache.isOwn() ? 1 : 0);
         values.put("owner", cache.getOwner());
@@ -2090,14 +2090,14 @@ public class cgData {
         cache.setGeocode(cursor.getString(cacheColumnIndex[5]));
         cache.setCacheId(cursor.getString(cacheColumnIndex[6]));
         cache.setGuid(cursor.getString(cacheColumnIndex[7]));
-        cache.setCacheType(CacheType.getById(cursor.getString(cacheColumnIndex[8])));
+        cache.setType(CacheType.getById(cursor.getString(cacheColumnIndex[8])));
         cache.setName(cursor.getString(cacheColumnIndex[9]));
         cache.setOwn(cursor.getInt(cacheColumnIndex[10]) == 1);
         cache.setOwner(cursor.getString(cacheColumnIndex[11]));
         cache.setOwnerReal(cursor.getString(cacheColumnIndex[12]));
         cache.setHidden(new Date(cursor.getLong(cacheColumnIndex[13])));
         cache.setHint(cursor.getString(cacheColumnIndex[14]));
-        cache.setSize(CacheSize.FIND_BY_ID.get(cursor.getString(cacheColumnIndex[15])));
+        cache.setSize(CacheSize.getById(cursor.getString(cacheColumnIndex[15])));
         cache.setDifficulty(cursor.getFloat(cacheColumnIndex[16]));
         index = cacheColumnIndex[17];
         if (cursor.isNull(index)) {
@@ -2560,13 +2560,13 @@ public class cgData {
         try {
             String sql = "select count(_id) from " + dbTableCaches; // this default is not used, but we like to have variables initialized
             if (!detailedOnly) {
-                if (cacheType == null) {
+                if (cacheType == CacheType.ALL) {
                     sql = "select count(_id) from " + dbTableCaches + listSql;
                 } else {
                     sql = "select count(_id) from " + dbTableCaches + " where type = \"" + cacheType.id + "\"" + listSqlW;
                 }
             } else {
-                if (cacheType == null) {
+                if (cacheType == CacheType.ALL) {
                     sql = "select count(_id) from " + dbTableCaches + " where detailed = 1" + listSqlW;
                 } else {
                     sql = "select count(_id) from " + dbTableCaches + " where detailed = 1 and type = \"" + cacheType.id + "\"" + listSqlW;
@@ -2612,7 +2612,7 @@ public class cgData {
             specifySql.append(" and detailed = 1 ");
         }
 
-        if (cacheType != null) {
+        if (cacheType != CacheType.ALL) {
             specifySql.append(" and type = \"");
             specifySql.append(cacheType.id);
             specifySql.append('"');
@@ -2653,7 +2653,7 @@ public class cgData {
         return geocodes;
     }
 
-    public List<String> loadBatchOfHistoricGeocodes(final boolean detailedOnly, final CacheType cachetype) {
+    public List<String> loadBatchOfHistoricGeocodes(final boolean detailedOnly, final CacheType cacheType) {
         init();
 
         List<String> geocodes = new ArrayList<String>();
@@ -2664,9 +2664,9 @@ public class cgData {
         if (detailedOnly) {
             specifySql.append(" and detailed = 1");
         }
-        if (cachetype != null) {
+        if (cacheType != CacheType.ALL) {
             specifySql.append(" and type = \"");
-            specifySql.append(cachetype.id);
+            specifySql.append(cacheType.id);
             specifySql.append('"');
         }
 
@@ -2703,15 +2703,15 @@ public class cgData {
         return geocodes;
     }
 
-    public List<String> getCachedInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cachetype) {
-        return getInViewport(false, centerLat, centerLon, spanLat, spanLon, cachetype);
+    public List<String> getCachedInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
+        return getInViewport(false, centerLat, centerLon, spanLat, spanLon, cacheType);
     }
 
-    public List<String> getStoredInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cachetype) {
-        return getInViewport(true, centerLat, centerLon, spanLat, spanLon, cachetype);
+    public List<String> getStoredInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
+        return getInViewport(true, centerLat, centerLon, spanLat, spanLon, cacheType);
     }
 
-    public List<String> getInViewport(final boolean stored, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cachetype) {
+    public List<String> getInViewport(final boolean stored, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
         if (centerLat == null || centerLon == null || spanLat == null || spanLon == null) {
             return null;
         }
@@ -2748,10 +2748,10 @@ public class cgData {
         where.append(" and longitude <= ");
         where.append(String.format((Locale) null, "%.6f", lonMax));
 
-        // cachetype limitation
-        if (cachetype != null) {
+        // cacheType limitation
+        if (cacheType != CacheType.ALL) {
             where.append(" and type = \"");
-            where.append(cachetype.id);
+            where.append(cacheType.id);
             where.append('"');
         }
 
@@ -2793,16 +2793,16 @@ public class cgData {
         return geocodes;
     }
 
-    public List<String> getOfflineAll(String cachetype) {
+    public List<String> getOfflineAll(CacheType cacheType) {
         init();
 
         List<String> geocodes = new ArrayList<String>();
 
         StringBuilder where = new StringBuilder();
 
-        // cachetype limitation
-        if (cachetype != null) {
-            where.append(cachetype);
+        // cacheType limitation
+        if (cacheType != CacheType.ALL) {
+            where.append(cacheType);
             where.append('"');
         }
 
