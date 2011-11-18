@@ -94,7 +94,7 @@ public class cgCache implements ICache {
     // temporary values
     private boolean statusChecked = false;
     private boolean statusCheckedView = false;
-    private String directionImg = null;
+    private String directionImg = "";
     private String nameForSorting;
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
