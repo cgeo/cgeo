@@ -364,7 +364,7 @@ public class cgeopopup extends AbstractActivity {
             if (cache.getRating() != null && cache.getRating() > 0) {
                 setRating(cache.getRating(), cache.getVotes());
             } else {
-                if (cache.supportsGCVote()) {
+                if (Settings.isRatingWanted() && cache.supportsGCVote()) {
                     (new Thread() {
 
                         @Override
