@@ -5,7 +5,7 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.enumerations.CacheType;
 
 public class cgFilterByType extends cgFilter {
-    private CacheType cacheType;
+    private final CacheType cacheType;
 
     public cgFilterByType(final CacheType cacheType) {
         super(cacheType.id);
@@ -19,6 +19,6 @@ public class cgFilterByType extends cgFilter {
 
     @Override
     public String getFilterName() {
-        return cgBase.cacheTypesInv.get(cacheType.id);
+        return cgBase.cacheTypesInv.get(cacheType);
     }
 }
