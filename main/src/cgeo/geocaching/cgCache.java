@@ -645,10 +645,6 @@ public class cgCache implements ICache {
         this.nameSp = nameSp;
     }
 
-    public Date getHidden() {
-        return hidden;
-    }
-
     public void setHidden(Date hidden) {
         this.hidden = hidden;
     }

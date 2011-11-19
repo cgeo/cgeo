@@ -822,8 +822,8 @@ public class cgeodetail extends AbstractActivity {
             }
 
             // cache hidden
-            if (cache.getHidden() != null && cache.getHidden().getTime() > 0) {
-                addCacheDetail(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, cgBase.formatFullDate(cache.getHidden().getTime()));
+            if (cache.getHiddenDate() != null && cache.getHiddenDate().getTime() > 0) {
+                addCacheDetail(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, cgBase.formatFullDate(cache.getHiddenDate().getTime()));
             }
 
             // cache location
@@ -1514,7 +1514,7 @@ public class cgeodetail extends AbstractActivity {
             final Integer[] keys = calendars.keySet().toArray(new Integer[calendars.size()]);
             final Integer calId = keys[index];
 
-            final Date eventDate = cache.getHidden();
+            final Date eventDate = cache.getHiddenDate();
             eventDate.setHours(0);
             eventDate.setMinutes(0);
             eventDate.setSeconds(0);

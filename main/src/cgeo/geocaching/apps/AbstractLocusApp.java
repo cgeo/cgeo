@@ -120,8 +120,8 @@ public abstract class AbstractLocusApp extends AbstractApp {
         pg.premiumOnly = cache.isMembers();
         pg.name = cache.getName();
         pg.placedBy = cache.getOwner();
-        if (cache.getHidden() != null) {
-            pg.hidden = ISO8601DATE.format(cache.getHidden().getTime());
+        if (cache.getHiddenDate() != null) {
+            pg.hidden = ISO8601DATE.format(cache.getHiddenDate().getTime());
         }
         int locusId = toLocusId(cache.getCacheType());
         if (locusId != NO_LOCUS_ID) {

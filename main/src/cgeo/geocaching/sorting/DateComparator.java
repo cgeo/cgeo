@@ -19,8 +19,8 @@ public class DateComparator extends AbstractCacheComparator {
 
     @Override
     protected int compareCaches(cgCache cache1, cgCache cache2) {
-        Date date1 = cache1.getHidden();
-        Date date2 = cache2.getHidden();
+        Date date1 = cache1.getHiddenDate();
+        Date date2 = cache2.getHiddenDate();
         if (date1 != null && date2 != null) {
             return date1.compareTo(date2);
         }

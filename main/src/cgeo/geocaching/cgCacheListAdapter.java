@@ -578,7 +578,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
                 if (cacheInfo.length() > 0) {
                     cacheInfo.append(SEPARATOR);
                 }
-                cacheInfo.append(cgBase.formatShortDate(cache.getHidden().getTime()));
+                cacheInfo.append(cgBase.formatShortDate(cache.getHiddenDate().getTime()));
             }
             if (cache.isMembers()) {
                 if (cacheInfo.length() > 0) {

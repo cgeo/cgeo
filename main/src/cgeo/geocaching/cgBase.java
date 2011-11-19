@@ -1015,7 +1015,7 @@ public class cgBase {
                 if (StringUtils.isNotBlank(hiddenString)) {
                     cache.setHidden(parseGcCustomDate(hiddenString));
                 }
-                if (cache.getHidden() == null) {
+                if (cache.getHiddenDate() == null) {
                     // event date
                     hiddenString = BaseUtils.getMatch(tableInside, GCConstants.PATTERN_HIDDENEVENT, true, null);
                     if (StringUtils.isNotBlank(hiddenString)) {
@@ -1448,7 +1448,7 @@ public class cgBase {
         if (StringUtils.isBlank(cache.getOwnerReal())) {
             Log.e(Settings.tag, "owner real not parsed correctly");
         }
-        if (cache.getHidden() == null) {
+        if (cache.getHiddenDate() == null) {
             Log.e(Settings.tag, "hidden not parsed correctly");
         }
         if (cache.getFavouriteCnt() == null) {

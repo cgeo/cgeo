@@ -1238,10 +1238,10 @@ public class cgData {
         values.put("own", cache.isOwn() ? 1 : 0);
         values.put("owner", cache.getOwner());
         values.put("owner_real", cache.getOwnerReal());
-        if (cache.getHidden() == null) {
+        if (cache.getHiddenDate() == null) {
             values.put("hidden", 0);
         } else {
-            values.put("hidden", cache.getHidden().getTime());
+            values.put("hidden", cache.getHiddenDate().getTime());
         }
         values.put("hint", cache.getHint());
         values.put("size", cache.getSize() == null ? "" : cache.getSize().id);
