@@ -2095,7 +2095,10 @@ public class cgData {
         cache.setOwn(cursor.getInt(cacheColumnIndex[10]) == 1);
         cache.setOwner(cursor.getString(cacheColumnIndex[11]));
         cache.setOwnerReal(cursor.getString(cacheColumnIndex[12]));
-        cache.setHidden(new Date(cursor.getLong(cacheColumnIndex[13])));
+        long dateValue = cursor.getLong(cacheColumnIndex[13]);
+        if (dateValue != 0) {
+            cache.setHidden(new Date(dateValue));
+        }
         cache.setHint(cursor.getString(cacheColumnIndex[14]));
         cache.setSize(CacheSize.FIND_BY_ID.get(cursor.getString(cacheColumnIndex[15])));
         cache.setDifficulty(cursor.getFloat(cacheColumnIndex[16]));
