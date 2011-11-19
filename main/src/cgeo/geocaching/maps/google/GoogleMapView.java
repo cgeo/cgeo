@@ -142,7 +142,7 @@ public class GoogleMapView extends MapView implements MapViewImpl {
 
     @Override
     public void setMapSource() {
-        setSatellite(GoogleMapProvider.IsSatelliteSource(Settings.getMapSource()));
+        setSatellite(GoogleMapProvider.isSatelliteSource(Settings.getMapSource()));
     }
 
     @Override
@@ -182,7 +182,7 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public boolean NeedsInvertedColors() {
+    public boolean needsInvertedColors() {
         return false;
     }
 }

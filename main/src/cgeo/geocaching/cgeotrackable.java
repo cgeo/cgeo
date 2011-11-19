@@ -46,13 +46,6 @@ public class cgeotrackable extends AbstractActivity {
             TextView itemName;
             TextView itemValue;
 
-            if (trackable != null && trackable.getErrorRetrieve() != null) {
-                showToast(res.getString(R.string.err_tb_details_download) + " " + trackable.getErrorRetrieve().getErrorString(res) + ".");
-
-                finish();
-                return;
-            }
-
             if (trackable != null && StringUtils.isNotBlank(trackable.getError())) {
                 showToast(res.getString(R.string.err_tb_details_download) + " " + trackable.getError() + ".");
 

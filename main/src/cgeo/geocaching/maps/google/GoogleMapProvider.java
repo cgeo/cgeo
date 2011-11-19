@@ -45,11 +45,11 @@ public class GoogleMapProvider implements MapProvider {
     }
 
     @Override
-    public boolean IsMySource(int sourceId) {
+    public boolean isMySource(int sourceId) {
         return sourceId >= baseId + MAP && sourceId <= baseId + SATELLITE;
     }
 
-    public static boolean IsSatelliteSource(int sourceId) {
+    public static boolean isSatelliteSource(int sourceId) {
         MapProvider mp = MapProviderFactory.getMapProvider(sourceId);
         if (mp instanceof GoogleMapProvider) {
             GoogleMapProvider gp = (GoogleMapProvider) mp;

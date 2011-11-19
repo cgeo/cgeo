@@ -21,7 +21,7 @@ public interface MapProvider {
 
     public Map<Integer, String> getMapSources();
 
-    public boolean IsMySource(int sourceId);
+    public boolean isMySource(int sourceId);
 
     public Class<? extends Activity> getMapClass();
 

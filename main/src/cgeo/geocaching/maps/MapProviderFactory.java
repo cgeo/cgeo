@@ -44,13 +44,13 @@ public class MapProviderFactory {
         return getInstance().mapSources;
     }
 
-    public static boolean IsValidSourceId(int sourceId) {
+    public static boolean isValidSourceId(int sourceId) {
         return getInstance().mapSources.containsKey(sourceId);
     }
 
-    public static boolean IsSameProvider(int sourceId1, int sourceId2) {
+    public static boolean isSameProvider(int sourceId1, int sourceId2) {
         for (MapProvider mp : getInstance().mapProviders) {
-            if (mp.IsMySource(sourceId1) && mp.IsMySource(sourceId2)) {
+            if (mp.isMySource(sourceId1) && mp.isMySource(sourceId2)) {
                 return true;
             }
         }
@@ -59,7 +59,7 @@ public class MapProviderFactory {
 
     public static MapProvider getMapProvider(int sourceId) {
         for (MapProvider mp : getInstance().mapProviders) {
-            if (mp.IsMySource(sourceId)) {
+            if (mp.isMySource(sourceId)) {
                 return mp;
             }
         }
@@ -67,7 +67,6 @@ public class MapProviderFactory {
     }
 
     public static int getSourceOrdinalFromId(int sourceId) {
-
         int sourceOrdinal = 0;
         for (int key : getInstance().mapSources.keySet()) {
             if (sourceId == key) {
@@ -90,7 +89,6 @@ public class MapProviderFactory {
     }
 
     public static void addMapviewMenuItems(Menu parentMenu, int groupId, int currentSource) {
-
         SortedMap<Integer, String> mapSources = getInstance().mapSources;
 
         for (int key : mapSources.keySet()) {

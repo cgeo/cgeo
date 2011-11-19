@@ -77,6 +77,6 @@ public interface MapViewImpl {
      *
      * @return true - text/draw in light colors, false text/draw in dark colors
      */
-    boolean NeedsInvertedColors();
+    boolean needsInvertedColors();
 
 }

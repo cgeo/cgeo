@@ -1924,7 +1924,7 @@ public class cgBase {
 
         // if we have no geocode, we can't dynamically select the handler, but must explicitly use GC
         if (geocode == null && guid != null) {
-            return GCConnector.getInstance().searchByGeocode(geocode, guid, app, search, reason, handler);
+            return GCConnector.getInstance().searchByGeocode(null, guid, app, search, reason, handler);
         }
 
         return ConnectorFactory.getConnector(geocode).searchByGeocode(geocode, guid, app, search, reason, handler);

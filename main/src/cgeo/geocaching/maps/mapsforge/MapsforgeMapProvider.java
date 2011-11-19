@@ -48,7 +48,7 @@ public class MapsforgeMapProvider implements MapProvider {
     }
 
     @Override
-    public boolean IsMySource(int sourceId) {
+    public boolean isMySource(int sourceId) {
         return sourceId >= baseId + MAPNIK && sourceId <= baseId + OFFLINE;
     }
 

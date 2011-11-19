@@ -18,7 +18,7 @@ public class OAuth {
                 "oauth_consumer_key", Settings.getKeyConsumerPublic(),
                 "oauth_nonce", CryptUtils.md5(Long.toString(System.currentTimeMillis())),
                 "oauth_signature_method", "HMAC-SHA1",
-                "oauth_timestamp", Long.toString((long) Math.floor(new Date().getTime() / 1000)),
+                "oauth_timestamp", Long.toString(new Date().getTime() / 1000),
                 "oauth_token", StringUtils.defaultString(token),
                 "oauth_version", "1.0");
         params.sort();

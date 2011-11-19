@@ -235,7 +235,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public boolean NeedsInvertedColors() {
+    public boolean needsInvertedColors() {
         return false;
     }
 }

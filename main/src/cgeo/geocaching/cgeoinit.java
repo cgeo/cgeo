@@ -654,7 +654,7 @@ public class cgeoinit extends AbstractActivity {
         }
     }
 
-    private class cgeoChangeMapSource implements OnItemSelectedListener {
+    private static class cgeoChangeMapSource implements OnItemSelectedListener {
 
         @Override
         public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,

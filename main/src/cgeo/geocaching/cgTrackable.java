@@ -1,7 +1,5 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.enumerations.StatusCode;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,7 +11,6 @@ public class cgTrackable implements ILogable {
     static final public int SPOTTED_UNKNOWN = 3;
     static final public int SPOTTED_OWNER = 4;
 
-    private StatusCode errorRetrieve = null;
     private String error = "";
     private String guid = "";
     private String geocode = "";
@@ -37,27 +34,9 @@ public class cgTrackable implements ILogable {
         return "http://coord.info/" + geocode.toUpperCase();
     }
 
-    public StatusCode getErrorRetrieve() {
-        return errorRetrieve;
-    }
-
-    /*
-     * unused
-     * public void setErrorRetrieve(StatusCode errorRetrieve) {
-     * this.errorRetrieve = errorRetrieve;
-     * }
-     */
-
     public String getError() {
         return error;
     }
-
-    /*
-     * Unused
-     * public void setError(String error) {
-     * this.error = error;
-     * }
-     */
 
     public String getGuid() {
         return guid;

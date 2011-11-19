@@ -682,7 +682,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 return true;
             }
             default:
-                if (MapProviderFactory.IsValidSourceId(MapProviderFactory.getMapSourceFromMenuId(id))) {
+                if (MapProviderFactory.isValidSourceId(MapProviderFactory.getMapSourceFromMenuId(id))) {
                     item.setChecked(true);
                     int mapSource = MapProviderFactory.getMapSourceFromMenuId(id);
 
@@ -723,7 +723,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     }
 
     private boolean switchMapSource(int sourceId) {
-        boolean mapRestartRequired = !MapProviderFactory.IsSameProvider(Settings.getMapSource(), sourceId);
+        boolean mapRestartRequired = !MapProviderFactory.isSameProvider(Settings.getMapSource(), sourceId);
 
         Settings.setMapSource(sourceId);
 

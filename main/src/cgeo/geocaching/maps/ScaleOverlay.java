@@ -130,7 +130,7 @@ public class ScaleOverlay implements GeneralOverlay {
             scale.setTypeface(Typeface.DEFAULT_BOLD);
         }
 
-        if (mapView.NeedsInvertedColors()) {
+        if (mapView.needsInvertedColors()) {
             scaleShadow.setColor(0xFF000000);
             scale.setColor(0xFFFFFFFF);
         } else {

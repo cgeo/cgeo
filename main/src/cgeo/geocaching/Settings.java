@@ -678,7 +678,7 @@ public final class Settings {
     }
 
     public static void setMapSource(final int newMapSource) {
-        if (!MapProviderFactory.IsSameProvider(getMapSource(), newMapSource)) {
+        if (!MapProviderFactory.isSameProvider(getMapSource(), newMapSource)) {
             mapProvider = null;
         }
         editSharedSettings(new PrefRunnable() {
