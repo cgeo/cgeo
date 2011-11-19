@@ -552,6 +552,7 @@
   <string name="cache_event">Date</string>
   <string name="cache_location">Location</string>
   <string name="cache_coordinates">Coordinates</string>
+  <string name="cache_coordinates_original">Original coordinates</string>
   <string name="cache_calendars">Select calendar</string>
   <string name="cache_spoiler_images_title">Spoiler images</string>
   <string name="cache_spoiler_images_loading">Loading spoiler images…</string>

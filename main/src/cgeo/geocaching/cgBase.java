@@ -1205,6 +1205,26 @@ public class cgBase {
             Log.w(Settings.tag, "cgeoBase.parseCache: Failed to parse cache log count");
         }
 
+        // add waypoint for original coordinates in case of user-modified listing-coordinates
+        try {
+            final String originalCoords = BaseUtils.getMatch(page, GCConstants.PATTERN_LATLON_ORIG, false, null);
+
+            if (null != originalCoords) {
+                final cgWaypoint waypoint = new cgWaypoint();
+
+                waypoint.setCoords(new Geopoint(originalCoords));
+                waypoint.setWaypointType(WaypointType.WAYPOINT);
+                waypoint.setName(res.getString(R.string.cache_coordinates_original));
+
+                if (null == cache.getWaypoints()) {
+                    cache.setWaypoints(new ArrayList<cgWaypoint>());
+                }
+                cache.getWaypoints().add(waypoint);
+            }
+        } catch (Geopoint.GeopointException e) {
+        }
+
+        // waypoints
         int wpBegin = 0;
         int wpEnd = 0;
 

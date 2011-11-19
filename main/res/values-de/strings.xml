@@ -537,6 +537,7 @@
   <string name="cache_event">Zeitangabe</string>
   <string name="cache_location">Bundesland</string>
   <string name="cache_coordinates">Koordinaten</string>
+  <string name="cache_coordinates_original">Ursprüngliche Koordinaten</string>
   <string name="cache_calendars">Kalender auswählen</string>
   <string name="cache_spoiler_images_title">Hinweisbilder</string>
   <string name="cache_spoiler_images_loading">Lade Hinweisbilder…</string>
