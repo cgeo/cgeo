@@ -9,6 +9,8 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser;
 
 import org.apache.commons.lang3.StringUtils;
@@ -59,9 +61,11 @@ final public class OkapiClient {
     private static final String SERVICE_CACHE = "/okapi/services/caches/geocache";
     private static final String SERVICE_CACHE_FIELDS = "code|name|location|type|status|owner|founds|notfounds|size|difficulty|terrain|rating|rating_votes|recommendations|description|hint|images|latest_logs|date_hidden";
 
+    private static final String SERVICE_NEAREST = "/okapi/services/caches/search/nearest";
+
     public static cgCache getCache(final String geoCode) {
         final Parameters params = new Parameters("cache_code", geoCode, "fields", SERVICE_CACHE_FIELDS);
-        final JSONObject data = request(geoCode, SERVICE_CACHE, params);
+        final JSONObject data = request(ConnectorFactory.getConnector(geoCode), SERVICE_CACHE, params);
 
         if (data == null) {
             return null;
@@ -73,6 +77,45 @@ final public class OkapiClient {
         cache.setDetailedUpdate(new Date().getTime());
 
         return cache;
+    }
+
+    public static List<cgCache> getCachesAround(final Geopoint center, IConnector connector) {
+        String centerString = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, center) + "|" + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, center);
+        final Parameters params = new Parameters("center", centerString);
+        final JSONObject data = request(connector, SERVICE_NEAREST, params);
+
+        if (data == null) {
+            return null;
+        }
+
+        return parseCaches(data);
+    }
+
+    private static List<cgCache> parseCaches(final JSONObject response) {
+        try {
+            final JSONArray cachesResponse = response.getJSONArray("results");
+            if (cachesResponse != null) {
+                ArrayList<String> geocodes = new ArrayList<String>(cachesResponse.length());
+                for (int i = 0; i < cachesResponse.length(); i++) {
+                    String geocode = cachesResponse.getString(i);
+                    if (StringUtils.isNotBlank(geocode)) {
+                        geocodes.add(geocode);
+                    }
+                }
+                List<cgCache> caches = new ArrayList<cgCache>(geocodes.size());
+                for (String geocode : geocodes) {
+                    cgCache cache = getCache(geocode);
+                    if (cache != null) {
+                        caches.add(cache);
+                    }
+                }
+                return caches;
+            }
+        } catch (JSONException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
     }
 
     private static cgCache parseCache(final JSONObject response) {
@@ -247,8 +290,7 @@ final public class OkapiClient {
         return CacheType.UNKNOWN;
     }
 
-    private static JSONObject request(final String geoCode, final String service, final Parameters params) {
-        final IConnector connector = ConnectorFactory.getConnector(geoCode);
+    private static JSONObject request(final IConnector connector, final String service, final Parameters params) {
         if (connector == null) {
             return null;
         }

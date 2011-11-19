@@ -576,7 +576,7 @@ public class cgeopopup extends AbstractActivity {
 
         @Override
         public void run() {
-            base.storeCache(app, cgeopopup.this, cache, null, 1, handler);
+            cgBase.storeCache(app, cgeopopup.this, cache, null, 1, handler);
         }
     }
 

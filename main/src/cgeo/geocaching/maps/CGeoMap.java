@@ -96,7 +96,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private Activity activity = null;
     private MapViewImpl mapView = null;
     private MapControllerImpl mapController = null;
-    private cgBase base = null;
     private cgeoapplication app = null;
     private cgGeo geo = null;
     private cgDirection dir = null;
@@ -294,7 +293,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         res = this.getResources();
         activity = this.getActivity();
         app = (cgeoapplication) activity.getApplication();
-        base = cgBase.getInstance(app);
         mapProvider = Settings.getMapProvider();
 
         // reset status
@@ -1257,7 +1255,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 }
 
                 final Viewport viewport = new Viewport(new Geopoint(latMin, lonMin), new Geopoint(latMax, lonMax));
-                search = base.searchByViewport(token, viewport);
+                search = cgBase.searchByViewport(token, viewport);
                 if (search != null) {
                     downloaded = true;
                 }
@@ -1681,7 +1679,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                             break;
                         }
 
-                        base.storeCache(app, activity, null, geocode, 1, handler);
+                        cgBase.storeCache(app, activity, null, geocode, 1, handler);
                     }
                 } catch (Exception e) {
                     Log.e(Settings.tag, "cgeocaches.LoadDetails.run: " + e.toString());

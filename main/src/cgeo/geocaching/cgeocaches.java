@@ -715,7 +715,7 @@ public class cgeocaches extends AbstractListActivity {
 
         // refresh standard list if it has changed (new caches downloaded)
         if (type == CacheListType.OFFLINE && listId == cgList.STANDARD_LIST_ID && search != null) {
-            cgSearch newSearch = base.searchByOffline(coords, cachetype, listId);
+            cgSearch newSearch = cgBase.searchByOffline(coords, cachetype, listId);
             if (newSearch != null && newSearch.totalCnt != search.totalCnt) {
                 refreshCurrentList();
             }
@@ -1296,7 +1296,7 @@ public class cgeocaches extends AbstractListActivity {
         if (adapterInfo != null) {
             // create a search for a single cache (as if in details view)
             final cgCache cache = getCacheFromAdapter(adapterInfo);
-            final cgSearch singleSearch = base.searchByGeocode(cache.getGeocode(), null, 0, false, null);
+            final cgSearch singleSearch = cgBase.searchByGeocode(cache.getGeocode(), null, 0, false, null);
 
             if (NavigationAppFactory.onMenuItemSelected(item, geo, this,
                     res, cache, singleSearch, null, null)) {
@@ -1365,7 +1365,7 @@ public class cgeocaches extends AbstractListActivity {
             list.setLongClickable(true);
             list.addFooterView(listFooter);
 
-            adapter = new cgCacheListAdapter(this, cacheList, base);
+            adapter = new cgCacheListAdapter(this, cacheList);
             setListAdapter(adapter);
         } else {
             adapter.notifyDataSetChanged();
@@ -1772,9 +1772,9 @@ public class cgeocaches extends AbstractListActivity {
         @Override
         public void run() {
             if (coords != null) {
-                search = base.searchByOffline(coords, Settings.getCacheType(), listId);
+                search = cgBase.searchByOffline(coords, Settings.getCacheType(), listId);
             } else {
-                search = base.searchByOffline(null, null, cgList.STANDARD_LIST_ID);
+                search = cgBase.searchByOffline(null, null, cgList.STANDARD_LIST_ID);
             }
             handler.sendMessage(new Message());
         }
@@ -1790,7 +1790,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = base.searchByHistory(coords != null ? Settings.getCacheType() : null);
+            search = cgBase.searchByHistory(coords != null ? Settings.getCacheType() : null);
             handler.sendMessage(new Message());
         }
     }
@@ -1805,7 +1805,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = base.searchByNextPage(this, search, 0, Settings.isShowCaptcha());
+            search = cgBase.searchByNextPage(this, search, 0, Settings.isShowCaptcha());
 
             handler.sendMessage(new Message());
         }
@@ -1834,7 +1834,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = base.searchByCoords(this, coords, cacheType, 0, Settings.isShowCaptcha());
+            search = cgBase.searchByCoords(this, coords, cacheType, 0, Settings.isShowCaptcha());
 
             handler.sendMessage(new Message());
         }
@@ -1863,7 +1863,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = base.searchByKeyword(this, keyword, cacheType, 0, Settings.isShowCaptcha());
+            search = cgBase.searchByKeyword(this, keyword, cacheType, 0, Settings.isShowCaptcha());
             handler.sendMessage(new Message());
         }
     }
@@ -1891,7 +1891,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = base.searchByUsername(this, username, cacheType, 0, Settings.isShowCaptcha());
+            search = cgBase.searchByUsername(this, username, cacheType, 0, Settings.isShowCaptcha());
             handler.sendMessage(new Message());
         }
     }
@@ -1925,7 +1925,7 @@ public class cgeocaches extends AbstractListActivity {
                 params.put("cachetype", cachetype.id);
             }
 
-            search = base.searchByOwner(this, username, cacheType, 0, Settings.isShowCaptcha());
+            search = cgBase.searchByOwner(this, username, cacheType, 0, Settings.isShowCaptcha());
 
             handler.sendMessage(new Message());
         }
@@ -1998,7 +1998,7 @@ public class cgeocaches extends AbstractListActivity {
                     }
 
                     detailProgress++;
-                    base.storeCache(app, cgeocaches.this, cache, null, reason, null);
+                    cgBase.storeCache(app, cgeocaches.this, cache, null, reason, null);
 
                     handler.sendEmptyMessage(cacheList.indexOf(cache));
 
@@ -2073,7 +2073,7 @@ public class cgeocaches extends AbstractListActivity {
                         handler.sendMessage(mes);
                         yield();
 
-                        base.storeCache(app, cgeocaches.this, null, GCcode,
+                        cgBase.storeCache(app, cgeocaches.this, null, GCcode,
                                 reason, null);
 
                         Message mes1 = new Message();

@@ -52,7 +52,6 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
     final private List<cgCache> list;
     private cgCacheView holder = null;
     private LayoutInflater inflater = null;
-    final private cgBase base;
     private CacheComparator statComparator = null;
     private boolean historic = false;
     private Geopoint coords = null;
@@ -73,12 +72,11 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
     private cgFilter currentFilter = null;
     private List<cgCache> originalList = null;
 
-    public cgCacheListAdapter(final Activity activity, final List<cgCache> list, final cgBase base) {
+    public cgCacheListAdapter(final Activity activity, final List<cgCache> list) {
         super(activity, 0, list);
 
         this.res = activity.getResources();
         this.list = list;
-        this.base = base;
 
         final DisplayMetrics metrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -409,7 +407,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         holder.checkbox.setOnClickListener(new checkBoxListener(cache));
 
         distances.add(holder.distance);
-        holder.distance.setContent(base, cache.getCoords());
+        holder.distance.setContent(cache.getCoords());
         compasses.add(holder.direction);
         holder.direction.setContent(cache.getCoords());
 

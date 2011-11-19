@@ -21,7 +21,6 @@ public abstract class AbstractListActivity extends ListActivity implements
 
     protected cgeoapplication app = null;
     protected Resources res = null;
-    protected cgBase base = null;
     protected SharedPreferences prefs = null;
 
     protected AbstractListActivity() {
@@ -72,7 +71,7 @@ public abstract class AbstractListActivity extends ListActivity implements
         res = this.getResources();
         app = (cgeoapplication) this.getApplication();
         prefs = getSharedPreferences(Settings.preferences, Context.MODE_PRIVATE);
-        base = cgBase.getInstance(app);
+        cgBase.initialize(app);
     }
 
     final public void setTitle(final String title) {

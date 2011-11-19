@@ -1345,7 +1345,7 @@ public class cgeodetail extends AbstractActivity {
             if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
                 return;
             }
-            search = base.searchByGeocode(geocode, StringUtils.isBlank(geocode) ? guid : null, 0, false, handler);
+            search = cgBase.searchByGeocode(geocode, StringUtils.isBlank(geocode) ? guid : null, 0, false, handler);
             handler.sendMessage(new Message());
         }
     }
@@ -1722,7 +1722,7 @@ public class cgeodetail extends AbstractActivity {
         @Override
         public void run() {
             int reason = cache.getReason() > 1 ? cache.getReason() : 1;
-            base.storeCache(app, cgeodetail.this, cache, null, reason, handler);
+            cgBase.storeCache(app, cgeodetail.this, cache, null, reason, handler);
         }
     }
 
@@ -1736,7 +1736,7 @@ public class cgeodetail extends AbstractActivity {
         @Override
         public void run() {
             app.removeCacheFromCache(geocode);
-            search = base.searchByGeocode(cache.getGeocode(), null, 0, true, handler);
+            search = cgBase.searchByGeocode(cache.getGeocode(), null, 0, true, handler);
 
             handler.sendEmptyMessage(0);
         }

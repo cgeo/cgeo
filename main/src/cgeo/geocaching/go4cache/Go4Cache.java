@@ -39,7 +39,6 @@ public class Go4Cache extends Thread {
 
     final private ArrayBlockingQueue<Geopoint> queue = new ArrayBlockingQueue<Geopoint>(1);
     final private cgeoapplication app;
-    final private cgBase base;
 
     private static Go4Cache getInstance(final cgeoapplication app) {
         if (null == instance) {
@@ -54,7 +53,6 @@ public class Go4Cache extends Thread {
     private Go4Cache(final cgeoapplication app) {
         super("Go4Cache");
         this.app = app;
-        base = cgBase.getInstance(app);
         setPriority(Thread.MIN_PRIORITY);
     }
 
@@ -102,8 +100,8 @@ public class Go4Cache extends Thread {
                         "ln", lonStr,
                         "a", currentAction,
                         "s", (CryptUtils.sha1(username + "|" + latStr + "|" + lonStr + "|" + currentAction + "|" + CryptUtils.md5("carnero: developing your dreams"))).toLowerCase());
-                if (null != base.version) {
-                    params.put("v", base.version);
+                if (null != cgBase.version) {
+                    params.put("v", cgBase.version);
                 }
 
                 cgBase.postRequest("http://api.go4cache.com/", params);

@@ -20,7 +20,6 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
 
     protected cgeoapplication app = null;
     protected Resources res = null;
-    protected cgBase base = null;
     protected SharedPreferences prefs = null;
 
     protected AbstractActivity() {
@@ -75,7 +74,8 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
         res = this.getResources();
         app = (cgeoapplication) this.getApplication();
         prefs = getSharedPreferences(Settings.preferences, Context.MODE_PRIVATE);
-        base = cgBase.getInstance(app);
+
+        cgBase.initialize(app);
 
         // Restore cookie store if needed
         cgBase.restoreCookieStore(Settings.getCookieStore());

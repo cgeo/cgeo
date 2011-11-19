@@ -478,7 +478,7 @@ public class cgeotrackable extends AbstractActivity {
 
         @Override
         public void run() {
-            trackable = base.searchTrackable(geocode, guid, id);
+            trackable = cgBase.searchTrackable(geocode, guid, id);
             handler.sendMessage(new Message());
         }
     }

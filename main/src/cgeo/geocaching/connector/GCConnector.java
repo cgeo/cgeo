@@ -79,7 +79,7 @@ public class GCConnector extends AbstractConnector {
     }
 
     @Override
-    public cgSearch searchByGeocode(final cgBase base, final String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final CancellableHandler handler) {
+    public cgSearch searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final CancellableHandler handler) {
         final Parameters params = new Parameters("decrypt", "y");
         if (StringUtils.isNotBlank(geocode)) {
             params.put("wp", geocode);

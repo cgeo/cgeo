@@ -1,9 +1,9 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.CancellableHandler;
 
 public interface IConnector {
@@ -75,5 +75,13 @@ public interface IConnector {
      */
     public boolean supportsCachesAround();
 
-    public cgSearch searchByGeocode(final cgBase base, final String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final CancellableHandler handler);
+    public cgSearch searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final CancellableHandler handler);
+
+    /**
+     * search caches by coordinate. must be implemented if {@link supportsCachesAround} returns <code>true</true>
+     *
+     * @param center
+     * @return
+     */
+    public cgSearch searchByCoordinate(final Geopoint center);
 }
