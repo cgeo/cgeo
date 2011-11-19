@@ -117,15 +117,15 @@
   <!-- errors, warnings, info toasts -->
   <string name="err_none">Ok</string>
   <string name="err_start">Kommunikationen har inte påbörjats</string>
-  <string name="err_parse">misslyckades analysera inloggningssidan</string>
-  <string name="err_server">misslyckades att ansluta till Geocaching.com (servern eller anslutningen nere?)</string>
+  <string name="err_parse">Misslyckades att analysera inloggningssidan</string>
+  <string name="err_server">Misslyckades att ansluta till Geocaching.com (servern eller anslutningen nere?)</string>
   <string name="err_login">Inloggningsinformationen ej sparad</string>
   <string name="err_login_failed">Tyvärr kan c:geo inte logga in.</string>
   <string name="err_login_failed_toast">Tyvärr kan c:geo inte logga in. c:geo kommer att köra i offline läge. Kontrollera dina inloggningsuppgifter i inställningarna och aktivera din internetanslutning.</string>
   <string name="err_unknown">Okänt fel</string>
   <string name="err_comm">Okänt kommunikationsfel</string>
   <string name="err_missing_auth">Användarnamn och/eller lösenord saknas.</string>
-  <string name="err_wrong">felaktiga inloggningsuppgifter</string>
+  <string name="err_wrong">Felaktiga inloggningsuppgifter</string>
   <string name="err_maintenance">Arbete pågår med servern Geocaching.com, försök igen senare. c:geo fungerar under tiden i offline läge.</string>
   <string name="err_license">användaren inte har bekräftat licensavtalet med Geocaching.com</string>
   <string name="err_unpublished">Den sökta cachen är opubliserad.</string>
@@ -221,7 +221,7 @@
   <string name="info_log_cleared">Loggen har rensats.</string>
   <string name="info_log_type_changed">Typen av logg har ändrats!</string>
 
-  <string name="info_fieldnotes_exported_to">Field Notes exporterade till</string>
+  <string name="info_fieldnotes_exported_to">Field Notes har exporterats till</string>
 
   <!-- location service -->
   <string name="loc_last">Senast kända</string>
@@ -252,7 +252,7 @@
   <string name="caches_more_caches">Ladda fler cacher</string>
   <string name="caches_more_caches_no">Inga fler cacher att ladda</string>
   <string name="caches_more_caches_loading">Laddar fler cacher…</string>
-  <string name="caches_more_caches_currently">samtidigt</string>
+  <string name="caches_more_caches_currently">nu</string>
   <string name="caches_downloading">Laddar ner cacher…\nTid kvar: </string>
   <string name="caches_eta_ltm">mindre än en minut</string>
   <string name="caches_eta_mins"> minuter</string>
@@ -289,6 +289,7 @@
   <string name="caches_drop_all_ask">Vill du ta bort alla cacher från enheten?</string>
   <string name="caches_drop_stored">Ta bort sparade</string>
   <string name="caches_drop_progress">Tar bort cacher</string>
+  <string name="caches_drop_all_and_list">Ta bort listan och dess cacher</string>
   <string name="caches_refresh_selected">Uppdatera valda</string>
   <string name="caches_refresh_all">Uppdatera alla</string>
   <string name="caches_move_selected">Flytta valda</string>
@@ -333,10 +334,10 @@
 
   <!-- about -->
   <string name="about_changelog">Historik</string>
-  <string name="about_donate">Donera</string>
+  <string name="about_donate">Stöd c:geo</string>
   <string name="about_detail">Detaljer</string>
   <string name="about_donation_less">Donera\nlite</string>
-  <string name="about_donation_more">Donera\nutveckling</string>
+  <string name="about_donation_more">Donera till\nutveckling</string>
   <string name="about_contributors">Medarbetare</string>
 
   <!-- init -->
@@ -347,7 +348,7 @@
   <string name="init_username">Användare</string>
   <string name="init_password">Lösenord</string>
   <string name="init_passvote">Lösenord</string>
-  <string name="init_login">Testa inloggning</string>
+  <string name="init_login">Testa inloggning &amp; datumformat</string>
   <string name="init_login_popup">Inloggning</string>
   <string name="init_login_popup_working">Testar inloggning mot Geocaching.com…</string>
   <string name="init_login_popup_ok">Inloggning ok.</string>
@@ -543,6 +544,7 @@
   <string name="cache_event">Datum</string>
   <string name="cache_location">Plats</string>
   <string name="cache_coordinates">Koordinater</string>
+  <string name="cache_coordinates_original">Ursprungliga koordinater</string>
   <string name="cache_calendars">Välj kalender</string>
   <string name="cache_spoiler_images_title">Spoiler bilder</string>
   <string name="cache_spoiler_images_loading">Laddar spoiler bilder…</string>
@@ -615,7 +617,7 @@
   <string name="waypoint_copy_of">Kopia av</string>
   <string name="search_history">Historik</string>
   <string name="search_history_empty">Inga tidigare destinationer</string>
-  <string name="search_remove_destination">Destinationen borttagen</string>
+  <string name="search_remove_destination">Destinatione borttagen</string>
   <string name="search_clear_history">Rensa historik</string>
   <string name="search_history_cleared">Historiken rensad</string>
   
@@ -627,7 +629,7 @@
   <!-- map -->
   <string name="map_map">Karta</string>
   <string name="map_live">Live karta</string>
-  <string name="map_view_map">Kartvy</string>
+  <string name="map_view_map">Karttyp</string>
   <string name="map_trail_show">Visa spår</string>
   <string name="map_trail_hide">Dölj spår</string>
   <string name="map_circles_show">Visa cirklar</string>
