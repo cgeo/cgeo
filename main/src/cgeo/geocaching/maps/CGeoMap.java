@@ -1084,7 +1084,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                             spanLatitudeUsers = spanLatitudeNow;
                             spanLongitudeUsers = spanLongitudeNow;
 
-                            usersThread = new UsersThread(centerLatitude, centerLongitude, spanLatitude, spanLongitude);
+                            usersThread = new UsersThread(centerLatitudeNow, centerLongitudeNow, spanLatitudeNow, spanLongitudeNow);
                             usersThread.start();
                         }
                     }
