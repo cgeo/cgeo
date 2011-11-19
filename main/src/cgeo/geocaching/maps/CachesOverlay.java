@@ -1,14 +1,10 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCoord;
-import cgeo.geocaching.cgeodetail;
-import cgeo.geocaching.cgeonavigate;
 import cgeo.geocaching.cgeopopup;
 import cgeo.geocaching.cgeowaypoint;
 import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
@@ -19,10 +15,8 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.DashPathEffect;
@@ -31,11 +25,9 @@ import android.graphics.Paint.Style;
 import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.Point;
 import android.location.Location;
-import android.text.Html;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class CachesOverlay extends AbstractItemizedOverlay {
@@ -259,86 +251,5 @@ public class CachesOverlay extends AbstractItemizedOverlay {
         }
 
         return 0;
-    }
-
-    public void infoDialog(int index) {
-
-        final CachesOverlayItemImpl item = items.get(index);
-        final cgCoord coordinate = item.getCoord();
-
-        if (coordinate == null) {
-            Log.e(Settings.tag, "cgMapOverlay:infoDialog: No coordinates given");
-            return;
-        }
-
-        try {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(context);
-            dialog.setCancelable(true);
-
-            if (coordinate.getType().equalsIgnoreCase("cache")) {
-                dialog.setTitle("cache");
-
-                String cacheType;
-                if (cgBase.cacheTypesInv.containsKey(coordinate.getTypeSpec())) {
-                    cacheType = cgBase.cacheTypesInv.get(CacheType.getById(coordinate.getTypeSpec()));
-                } else {
-                    cacheType = cgBase.cacheTypesInv.get(CacheType.MYSTERY);
-                }
-
-                dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ngeocode: " + coordinate.getGeocode().toUpperCase() + "\ntype: " + cacheType);
-                if (fromDetail) {
-                    dialog.setPositiveButton("navigate", new DialogInterface.OnClickListener() {
-
-                        public void onClick(DialogInterface dialog, int id) {
-                            final Collection<cgCoord> coordinatesWithType = new ArrayList<cgCoord>();
-                            coordinatesWithType.add(coordinate);
-                            cgeonavigate.startActivity(context, coordinate.getGeocode().toUpperCase(), null, coordinate.getCoords(), coordinatesWithType);
-                            dialog.cancel();
-                        }
-                    });
-                } else {
-                    dialog.setPositiveButton("detail", new DialogInterface.OnClickListener() {
-
-                        public void onClick(DialogInterface dialog, int id) {
-                            Intent cachesIntent = new Intent(context, cgeodetail.class);
-                            cachesIntent.putExtra("geocode", coordinate.getGeocode().toUpperCase());
-                            context.startActivity(cachesIntent);
-
-                            dialog.cancel();
-                        }
-                    });
-                }
-            } else {
-                dialog.setTitle("waypoint");
-
-                String waypointL10N = cgBase.waypointTypes.get(WaypointType.findById(coordinate.getTypeSpec()));
-                if (waypointL10N == null) {
-                    waypointL10N = cgBase.waypointTypes.get(WaypointType.WAYPOINT);
-                }
-
-                dialog.setMessage(Html.fromHtml(item.getTitle()) + "\n\ntype: " + waypointL10N);
-                dialog.setPositiveButton("navigate", new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int id) {
-                        Collection<cgCoord> coordinatesWithType = new ArrayList<cgCoord>();
-                        coordinatesWithType.add(coordinate);
-                        cgeonavigate.startActivity(context, coordinate.getName(), null, coordinate.getCoords(), coordinatesWithType);
-                        dialog.cancel();
-                    }
-                });
-            }
-
-            dialog.setNegativeButton("dismiss", new DialogInterface.OnClickListener() {
-
-                public void onClick(DialogInterface dialog, int id) {
-                    dialog.cancel();
-                }
-            });
-
-            AlertDialog alert = dialog.create();
-            alert.show();
-        } catch (Exception e) {
-            Log.e(Settings.tag, "cgMapOverlay.infoDialog: " + e.toString());
-        }
     }
 }
