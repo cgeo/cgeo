@@ -2580,7 +2580,12 @@ public class cgeocaches extends AbstractListActivity {
             return;
         }
 
-        CGeoMap.startActivitySearch(this, search, title + " [" + cgeoapplication.getCount(search) + "]", false);
+        int count = cgeoapplication.getCount(search);
+        String mapTitle = title;
+        if (count > 0) {
+            mapTitle = title + " [" + count + "]";
+        }
+        CGeoMap.startActivitySearch(this, search, mapTitle, false);
     }
 
     @Override

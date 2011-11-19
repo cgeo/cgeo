@@ -180,7 +180,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         title.append(mapTitle);
                     }
 
-                    if (caches != null && cachesCnt > 0 && !mapTitle.contains("[")) {
+                    if (caches != null && caches.size() > 0 && !mapTitle.contains("[")) {
                         title.append(" [");
                         title.append(caches.size());
                         title.append(']');
