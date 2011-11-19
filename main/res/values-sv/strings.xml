@@ -616,8 +616,8 @@
   <string name="waypoint_duplicate">Duplicera</string>
   <string name="waypoint_copy_of">Kopia av</string>
   <string name="search_history">Historik</string>
-  <string name="search_history_empty">Inga tidigare destinationer</string>
-  <string name="search_remove_destination">Destinatione borttagen</string>
+  <string name="search_history_empty">Inga tidigare mål</string>
+  <string name="search_remove_destination">Målet borttagen</string>
   <string name="search_clear_history">Rensa historik</string>
   <string name="search_history_cleared">Historiken rensad</string>
   
