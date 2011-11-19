@@ -185,8 +185,8 @@ public class cgeotouch extends cgLogForm {
             textContent = text.getText().toString();
 
             final long now = System.currentTimeMillis();
-            dateString = base.formatDate(now);
-            timeString = base.formatTime(now);
+            dateString = cgBase.formatDate(now);
+            timeString = cgBase.formatTime(now);
 
             if ((id & 0x4) == 0x4) {
                 addText += dateString;
@@ -201,11 +201,10 @@ public class cgeotouch extends cgLogForm {
                 if (addText.length() > 0) {
                     addText += "\n";
                 }
-                addText += Settings.getSignature()
-                        .replaceAll("\\[DATE\\]", dateString)
-                        .replaceAll("\\[TIME\\]", timeString)
-                        .replaceAll("\\[USER\\]", Settings.getUsername())
-                        .replaceAll("\\[NUMBER\\]", "");
+                // number replaced by empty string (there are no numbers for trackables)
+                addText += StringUtils.replaceEach(Settings.getSignature(),
+                        new String[] { "[DATE]", "[TIME]", "[USER]", "[NUMBER]" },
+                        new String[] { dateString, timeString, Settings.getUsername(), "" });
             }
             if (textContent.length() > 0 && addText.length() > 0) {
                 addText = "\n" + addText;
@@ -270,7 +269,7 @@ public class cgeotouch extends cgLogForm {
         });
 
         Button dateButton = (Button) findViewById(R.id.date);
-        dateButton.setText(base.formatShortDate(date.getTime().getTime()));
+        dateButton.setText(cgBase.formatShortDate(date.getTime().getTime()));
         dateButton.setOnClickListener(new cgeotouchDateListener());
 
         if (tweetBox == null) {
@@ -301,7 +300,7 @@ public class cgeotouch extends cgLogForm {
         date = dateIn;
 
         final Button dateButton = (Button) findViewById(R.id.date);
-        dateButton.setText(base.formatShortDate(date.getTime().getTime()));
+        dateButton.setText(cgBase.formatShortDate(date.getTime().getTime()));
     }
 
     public void setType(int type) {

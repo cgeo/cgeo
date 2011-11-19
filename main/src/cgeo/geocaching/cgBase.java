@@ -149,7 +149,7 @@ public class cgBase {
     private static String idBrowser = "Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Chrome/5.0.375.86 Safari/533.4";
 
     final private cgeoapplication app;
-    final Context context;
+    private static Context context;
     final private Resources res;
 
     final private static Map<String, Integer> gcIcons = new HashMap<String, Integer>();
@@ -1073,7 +1073,7 @@ public class cgBase {
             // replace linebreak and paragraph tags
             String hint = GCConstants.PATTERN_LINEBREAK.matcher(result).replaceAll("\n");
             if (hint != null) {
-                cache.setHint(hint.replaceAll(GCConstants.PATTERN_PARAGRAPH, "").trim());
+                cache.setHint(StringUtils.replace(hint, "</p>", "").trim());
             }
         }
 
@@ -2486,7 +2486,7 @@ public class cgBase {
     }
 
     public static String urlencode_rfc3986(String text) {
-        final String encoded = URLEncoder.encode(text).replace("+", "%20").replaceAll("%7E", "~");
+        final String encoded = StringUtils.replace(URLEncoder.encode(text).replace("+", "%20"), "%7E", "~");
 
         return encoded;
     }
@@ -3235,7 +3235,7 @@ public class cgBase {
      *            milliseconds since the epoch
      * @return the formatted string
      */
-    public String formatTime(long date) {
+    public static String formatTime(long date) {
         return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_TIME);
     }
 
@@ -3247,7 +3247,7 @@ public class cgBase {
      *            milliseconds since the epoch
      * @return the formatted string
      */
-    public String formatDate(long date) {
+    public static String formatDate(long date) {
         return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE);
     }
 
@@ -3260,7 +3260,7 @@ public class cgBase {
      *            milliseconds since the epoch
      * @return the formatted string
      */
-    public String formatFullDate(long date) {
+    public static String formatFullDate(long date) {
         return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE
                 | DateUtils.FORMAT_SHOW_YEAR);
     }
@@ -3273,7 +3273,7 @@ public class cgBase {
      *            milliseconds since the epoch
      * @return the formatted string
      */
-    public String formatShortDate(long date) {
+    public static String formatShortDate(long date) {
         return DateUtils.formatDateTime(context, date, DateUtils.FORMAT_SHOW_DATE
                 | DateUtils.FORMAT_NUMERIC_DATE);
     }

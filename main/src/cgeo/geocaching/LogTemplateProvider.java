@@ -13,15 +13,15 @@ import java.util.regex.Pattern;
  */
 public class LogTemplateProvider {
     public static abstract class LogTemplate {
-        private String template;
-        private int resourceId;
+        private final String template;
+        private final int resourceId;
 
         protected LogTemplate(String template, int resourceId) {
             this.template = template;
             this.resourceId = resourceId;
         }
 
-        abstract String getValue(cgBase base, boolean offline);
+        abstract String getValue(boolean offline);
 
         public int getResourceId() {
             return resourceId;
@@ -35,9 +35,9 @@ public class LogTemplateProvider {
             return template;
         }
 
-        protected String apply(String input, cgBase base, boolean offline) {
+        protected String apply(String input, boolean offline) {
             if (input.contains("[" + template + "]")) {
-                return input.replaceAll("\\[" + template + "\\]", getValue(base, offline));
+                return StringUtils.replace(input, "[" + template + "]", getValue(offline));
             }
             return input;
         }
@@ -51,36 +51,36 @@ public class LogTemplateProvider {
                     new LogTemplate("DATE", R.string.init_signature_template_date) {
 
                         @Override
-                        String getValue(final cgBase base, final boolean offline) {
-                            return base.formatFullDate(System.currentTimeMillis());
+                        String getValue(final boolean offline) {
+                            return cgBase.formatFullDate(System.currentTimeMillis());
                         }
                     },
                     new LogTemplate("TIME", R.string.init_signature_template_time) {
 
                         @Override
-                        String getValue(final cgBase base, final boolean offline) {
-                            return base.formatTime(System.currentTimeMillis());
+                        String getValue(final boolean offline) {
+                            return cgBase.formatTime(System.currentTimeMillis());
                         }
                     },
                     new LogTemplate("DATETIME", R.string.init_signature_template_datetime) {
 
                         @Override
-                        String getValue(final cgBase base, final boolean offline) {
+                        String getValue(final boolean offline) {
                             final long currentTime = System.currentTimeMillis();
-                            return base.formatFullDate(currentTime) + " " + base.formatTime(currentTime);
+                            return cgBase.formatFullDate(currentTime) + " " + cgBase.formatTime(currentTime);
                         }
                     },
                     new LogTemplate("USER", R.string.init_signature_template_user) {
 
                         @Override
-                        String getValue(final cgBase base, final boolean offline) {
+                        String getValue(final boolean offline) {
                             return Settings.getUsername();
                         }
                     },
                     new LogTemplate("NUMBER", R.string.init_signature_template_number) {
 
                         @Override
-                        String getValue(final cgBase base, final boolean offline) {
+                        String getValue(final boolean offline) {
                             if (offline) {
                                 return "";
                             }
@@ -108,13 +108,13 @@ public class LogTemplateProvider {
         return null;
     }
 
-    public static String applyTemplates(String signature, cgBase base, boolean offline) {
+    public static String applyTemplates(String signature, boolean offline) {
         if (signature == null) {
             return "";
         }
         String result = signature;
         for (LogTemplate template : getTemplates()) {
-            result = template.apply(result, base, offline);
+            result = template.apply(result, offline);
         }
         return result;
     }
@@ -137,7 +137,7 @@ public class LogTemplateProvider {
                         if (count.length() == 0) {
                             findCount = 0;
                         } else {
-                            findCount = Integer.parseInt(count.replaceAll(",", ""));
+                            findCount = Integer.parseInt(count.replaceAll("[.,]", ""));
                         }
                     }
                 }

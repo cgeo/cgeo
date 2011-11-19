@@ -593,7 +593,7 @@ public class cgeoinit extends AbstractActivity {
         TextView lastBackup = (TextView) findViewById(R.id.backup_last);
         File lastBackupFile = cgeoapplication.isRestoreFile();
         if (lastBackupFile != null) {
-            lastBackup.setText(res.getString(R.string.init_backup_last) + " " + base.formatTime(lastBackupFile.lastModified()) + ", " + base.formatDate(lastBackupFile.lastModified()));
+            lastBackup.setText(res.getString(R.string.init_backup_last) + " " + cgBase.formatTime(lastBackupFile.lastModified()) + ", " + cgBase.formatDate(lastBackupFile.lastModified()));
         } else {
             lastBackup.setText(res.getString(R.string.init_backup_last_no));
         }

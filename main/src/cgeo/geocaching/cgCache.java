@@ -294,11 +294,11 @@ public class cgCache implements ICache {
         return true;
     }
 
-    public boolean logOffline(final IAbstractActivity fromActivity, final int logType, final cgBase base) {
+    public boolean logOffline(final IAbstractActivity fromActivity, final int logType) {
         String log = "";
         if (StringUtils.isNotBlank(Settings.getSignature())
                 && Settings.isAutoInsertSignature()) {
-            log = LogTemplateProvider.applyTemplates(Settings.getSignature(), base, true);
+            log = LogTemplateProvider.applyTemplates(Settings.getSignature(), true);
         }
         logOffline(fromActivity, log, Calendar.getInstance(), logType);
         return true;

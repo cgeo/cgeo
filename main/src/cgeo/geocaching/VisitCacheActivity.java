@@ -324,7 +324,7 @@ public class VisitCacheActivity extends cgLogForm {
         final int id = item.getItemId();
 
         if (id == MENU_SIGNATURE) {
-            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), base, false), true);
+            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), false), true);
             return true;
         } else if (id >= 10 && id <= 19) {
             rating = (id - 9) / 2.0;
@@ -336,7 +336,7 @@ public class VisitCacheActivity extends cgLogForm {
         }
         final LogTemplate template = LogTemplateProvider.getTemplate(id);
         if (template != null) {
-            final String newText = template.getValue(base, false);
+            final String newText = template.getValue(false);
             insertIntoLog(newText, true);
             return true;
         }
@@ -474,7 +474,7 @@ public class VisitCacheActivity extends cgLogForm {
         } else if (StringUtils.isNotBlank(Settings.getSignature())
                 && Settings.isAutoInsertSignature()
                 && StringUtils.isBlank(((EditText) findViewById(R.id.log)).getText())) {
-            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), base, false), false);
+            insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), false), false);
         }
 
         if (!types.contains(typeSelected)) {
@@ -497,7 +497,7 @@ public class VisitCacheActivity extends cgLogForm {
         });
 
         final Button dateButton = (Button) findViewById(R.id.date);
-        dateButton.setText(base.formatShortDate(date.getTime().getTime()));
+        dateButton.setText(cgBase.formatShortDate(date.getTime().getTime()));
         dateButton.setOnClickListener(new DateListener());
 
         final EditText logView = (EditText) findViewById(R.id.log);
@@ -530,7 +530,7 @@ public class VisitCacheActivity extends cgLogForm {
         date = dateIn;
 
         final Button dateButton = (Button) findViewById(R.id.date);
-        dateButton.setText(base.formatShortDate(date.getTime().getTime()));
+        dateButton.setText(cgBase.formatShortDate(date.getTime().getTime()));
     }
 
     public void setType(int type) {
@@ -599,7 +599,7 @@ public class VisitCacheActivity extends cgLogForm {
             setType(typeSelected);
 
             final Button dateButton = (Button) findViewById(R.id.date);
-            dateButton.setText(base.formatShortDate(date.getTime().getTime()));
+            dateButton.setText(cgBase.formatShortDate(date.getTime().getTime()));
             dateButton.setOnClickListener(new DateListener());
 
             final EditText logView = (EditText) findViewById(R.id.log);

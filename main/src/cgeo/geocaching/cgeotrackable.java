@@ -207,7 +207,7 @@ public class cgeotrackable extends AbstractActivity {
                     itemValue = (TextView) itemLayout.findViewById(R.id.value);
 
                     itemName.setText(res.getString(R.string.trackable_released));
-                    itemValue.setText(base.formatDate(trackable.getReleased().getTime()));
+                    itemValue.setText(cgBase.formatDate(trackable.getReleased().getTime()));
                     detailsList.addView(itemLayout);
                 }
 
@@ -495,7 +495,7 @@ public class cgeotrackable extends AbstractActivity {
                 rowView = (RelativeLayout) inflater.inflate(R.layout.trackable_logitem, null);
 
                 if (log.date > 0) {
-                    ((TextView) rowView.findViewById(R.id.added)).setText(base.formatShortDate(log.date));
+                    ((TextView) rowView.findViewById(R.id.added)).setText(cgBase.formatShortDate(log.date));
                 }
 
                 if (cgBase.logTypes1.containsKey(log.type)) {

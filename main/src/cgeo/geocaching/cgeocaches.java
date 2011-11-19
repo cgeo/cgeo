@@ -1304,7 +1304,7 @@ public class cgeocaches extends AbstractListActivity {
             }
 
             int logType = id - MENU_LOG_VISIT_OFFLINE;
-            cache.logOffline(this, logType, base);
+            cache.logOffline(this, logType);
         }
         return true;
     }
@@ -2288,7 +2288,7 @@ public class cgeocaches extends AbstractListActivity {
                                     .append(',')
                                     .append(logTypes.get(log.type))
                                     .append(",\"")
-                                    .append(log.log.replaceAll("\"", "'"))
+                                    .append(StringUtils.replaceChars(log.log, '"', '\''))
                                     .append("\"\n");
                         }
                     }

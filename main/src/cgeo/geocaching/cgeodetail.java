@@ -653,7 +653,7 @@ public class cgeodetail extends AbstractActivity {
         }
 
         int logType = menuItem - MENU_LOG_VISIT_OFFLINE;
-        cache.logOffline(this, logType, base);
+        cache.logOffline(this, logType);
         return true;
     }
 
@@ -823,7 +823,7 @@ public class cgeodetail extends AbstractActivity {
 
             // cache hidden
             if (cache.getHidden() != null && cache.getHidden().getTime() > 0) {
-                addCacheDetail(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, base.formatFullDate(cache.getHidden().getTime()));
+                addCacheDetail(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, cgBase.formatFullDate(cache.getHidden().getTime()));
             }
 
             // cache location
@@ -1223,7 +1223,7 @@ public class cgeodetail extends AbstractActivity {
                 rowView = (RelativeLayout) inflater.inflate(R.layout.log_item, null);
 
                 if (log.date > 0) {
-                    ((TextView) rowView.findViewById(R.id.added)).setText(base.formatShortDate(log.date));
+                    ((TextView) rowView.findViewById(R.id.added)).setText(cgBase.formatShortDate(log.date));
                 } else {
                     ((TextView) rowView.findViewById(R.id.added)).setVisibility(View.GONE);
                 }
@@ -1969,6 +1969,7 @@ public class cgeodetail extends AbstractActivity {
 
         noAttributeIconsFound = true;
 
+        final String packageName = cgeoapplication.getInstance().getBaseContext().getPackageName();
         for (String attributeName : cache.getAttributes()) {
             boolean strikethru = attributeName.endsWith("_no");
             // cut off _yes / _no
@@ -1988,8 +1989,7 @@ public class cgeodetail extends AbstractActivity {
 
             // dynamically search icon of the attribute
             Drawable d = null;
-            int id = res.getIdentifier("attribute_" + attributeName, "drawable",
-                    base.context.getPackageName());
+            int id = res.getIdentifier("attribute_" + attributeName, "drawable", packageName);
             if (id > 0) {
                 noAttributeIconsFound = false;
                 d = res.getDrawable(id);
@@ -2029,12 +2029,12 @@ public class cgeodetail extends AbstractActivity {
 
         StringBuilder buffer = new StringBuilder();
         String attribute;
+        final String packageName = cgeoapplication.getInstance().getBaseContext().getPackageName();
         for (int i = 0; i < cache.getAttributes().size(); i++) {
             attribute = cache.getAttributes().get(i);
 
             // dynamically search for a translation of the attribute
-            int id = res.getIdentifier("attribute_" + attribute, "string",
-                    base.context.getPackageName());
+            int id = res.getIdentifier("attribute_" + attribute, "string", packageName);
             if (id > 0) {
                 String translated = res.getString(id);
                 if (StringUtils.isNotBlank(translated)) {

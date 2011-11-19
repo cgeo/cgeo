@@ -190,7 +190,7 @@ public class cgeopopup extends AbstractActivity {
         }
 
         int logType = menuItem - MENU_LOG_VISIT_OFFLINE;
-        cache.logOffline(this, logType, base);
+        cache.logOffline(this, logType);
         return true;
     }
 

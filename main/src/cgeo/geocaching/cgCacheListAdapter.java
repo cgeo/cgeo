@@ -549,9 +549,9 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
         StringBuilder cacheInfo = new StringBuilder(50);
         if (historic && cache.getVisitedDate() != null) {
-            cacheInfo.append(base.formatTime(cache.getVisitedDate()));
+            cacheInfo.append(cgBase.formatTime(cache.getVisitedDate()));
             cacheInfo.append("; ");
-            cacheInfo.append(base.formatDate(cache.getVisitedDate()));
+            cacheInfo.append(cgBase.formatDate(cache.getVisitedDate()));
         } else {
             if (StringUtils.isNotBlank(cache.getGeocode())) {
                 cacheInfo.append(cache.getGeocode());
@@ -580,7 +580,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
                 if (cacheInfo.length() > 0) {
                     cacheInfo.append(SEPARATOR);
                 }
-                cacheInfo.append(base.formatShortDate(cache.getHidden().getTime()));
+                cacheInfo.append(cgBase.formatShortDate(cache.getHidden().getTime()));
             }
             if (cache.isMembers()) {
                 if (cacheInfo.length() > 0) {
