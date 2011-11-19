@@ -141,6 +141,7 @@ public class cgeocaches extends AbstractListActivity {
     private static final int MENU_SORT_FINDS = 62;
     private static final int MENU_SORT_STATE = 63;
     private static final int MENU_RENAME_LIST = 64;
+    private static final int MENU_DROP_CACHES_AND_LIST = 65;
 
     private static final int CONTEXT_MENU_MOVE_TO_LIST = 1000;
     private static final int MENU_MOVE_SELECTED_OR_ALL_TO_LIST = 1200;
@@ -806,6 +807,7 @@ public class cgeocaches extends AbstractListActivity {
         if (type == CacheListType.OFFLINE) {
             SubMenu subMenu = menu.addSubMenu(0, SUBMENU_MANAGE_OFFLINE, 0, res.getString(R.string.caches_manage)).setIcon(android.R.drawable.ic_menu_save);
             subMenu.add(0, MENU_DROP_CACHES, 0, res.getString(R.string.caches_drop_all)); // delete saved caches
+            subMenu.add(0, MENU_DROP_CACHES_AND_LIST, 0, res.getString(R.string.caches_drop_all_and_list));
             subMenu.add(0, MENU_REFRESH_STORED, 0, res.getString(R.string.cache_offline_refresh)); // download details for all caches
             subMenu.add(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
             subMenu.add(0, MENU_EXPORT_NOTES, 0, res.getString(R.string.cache_export_fieldnote)); // export field notes
@@ -862,6 +864,7 @@ public class cgeocaches extends AbstractListActivity {
                 } else {
                     menu.findItem(MENU_DROP_CACHES).setTitle(res.getString(R.string.caches_drop_all));
                 }
+                menu.findItem(MENU_DROP_CACHES_AND_LIST).setVisible(!hasSelection);
 
                 if (hasSelection) {
                     menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_refresh_selected) + " (" + adapter.getChecked() + ")");
@@ -969,8 +972,11 @@ public class cgeocaches extends AbstractListActivity {
                 refreshStored();
                 return true;
             case MENU_DROP_CACHES:
-                dropStored();
+                dropStored(false);
                 return false;
+            case MENU_DROP_CACHES_AND_LIST:
+                dropStored(true);
+                return true;
             case MENU_IMPORT_GPX:
                 importGpx();
                 return false;
@@ -978,7 +984,7 @@ public class cgeocaches extends AbstractListActivity {
                 createList(null);
                 return false;
             case MENU_DROP_LIST:
-                removeList();
+                removeList(true);
                 return false;
             case MENU_RENAME_LIST:
                 renameList();
@@ -1647,30 +1653,26 @@ public class cgeocaches extends AbstractListActivity {
         threadW.start();
     }
 
-    public void dropStored() {
+    public void dropStored(final boolean removeListAfterwards) {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setCancelable(true);
         dialog.setTitle(res.getString(R.string.caches_drop_stored));
 
         if (adapter != null && adapter.getChecked() > 0) {
             dialog.setMessage(res.getString(R.string.caches_drop_selected_ask));
-            dialog.setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
-
-                public void onClick(DialogInterface dialog, int id) {
-                    dropSelected();
-                    dialog.cancel();
-                }
-            });
         } else {
             dialog.setMessage(res.getString(R.string.caches_drop_all_ask));
-            dialog.setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
-
-                public void onClick(DialogInterface dialog, int id) {
-                    dropSelected();
-                    dialog.cancel();
-                }
-            });
         }
+        dialog.setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int id) {
+                dropSelected();
+                if (removeListAfterwards) {
+                    removeList(false);
+                }
+                dialog.cancel();
+            }
+        });
         dialog.setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int id) {
@@ -2535,10 +2537,15 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
-    private void removeList() {
+    private void removeList(final boolean askForConfirmation) {
         // if there are no caches on this list, don't bother the user with questions.
         // there is no harm in deleting the list, he could recreate it easily
         if (CollectionUtils.isEmpty(cacheList)) {
+            removeListInternal();
+            return;
+        }
+
+        if (!askForConfirmation) {
             removeListInternal();
             return;
         }
