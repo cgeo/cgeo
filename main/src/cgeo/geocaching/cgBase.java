@@ -1270,10 +1270,10 @@ public class cgBase {
                     waypoint.setPrefix(BaseUtils.getMatch(wp[4], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getPrefix(), false));
 
                     // waypoint lookup
-                    waypoint.setPrefix(BaseUtils.getMatch(wp[5], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getLookup(), false));
+                    waypoint.setLookup(BaseUtils.getMatch(wp[5], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getLookup(), false));
 
                     // waypoint name
-                    waypoint.setPrefix(BaseUtils.getMatch(wp[6], GCConstants.PATTERN_WPNAME, true, 1, waypoint.getName(), true));
+                    waypoint.setName(BaseUtils.getMatch(wp[6], GCConstants.PATTERN_WPNAME, true, 1, waypoint.getName(), true));
 
                     // waypoint latitude and logitude
                     String latlon = Html.fromHtml(BaseUtils.getMatch(wp[7], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, false, 2, "", false)).toString().trim();
