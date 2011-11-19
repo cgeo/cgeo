@@ -1028,14 +1028,20 @@ public class cgeodetail extends AbstractActivity {
 
                 for (cgWaypoint wpt : sortedWaypoints) {
                     waypointView = (LinearLayout) inflater.inflate(R.layout.waypoint_item, null);
-                    final TextView identification = (TextView) waypointView.findViewById(R.id.identification);
 
-                    ((TextView) waypointView.findViewById(R.id.type)).setText(cgBase.waypointTypes.get(wpt.getWaypointType()));
-                    if (!"OWN".equalsIgnoreCase(wpt.getPrefix())) {
-                        identification.setText(StringUtils.trimToEmpty(wpt.getPrefix()) + "/" + StringUtils.trimToEmpty(wpt.getLookup()));
+                    final List<String> infoTextList = new ArrayList<String>(3);
+                    infoTextList.add(cgBase.waypointTypes.get(wpt.getWaypointType()));
+                    if ("OWN".equalsIgnoreCase(wpt.getPrefix())) {
+                        infoTextList.add(res.getString(R.string.waypoint_custom));
                     } else {
-                        identification.setText(res.getString(R.string.waypoint_custom));
+                        if (StringUtils.isNotBlank(wpt.getPrefix())) {
+                            infoTextList.add(wpt.getPrefix());
+                        }
+                        if (StringUtils.isNotBlank(wpt.getLookup())) {
+                            infoTextList.add(wpt.getLookup());
+                        }
                     }
+                    ((TextView) waypointView.findViewById(R.id.info)).setText(StringUtils.join(infoTextList, " · "));
 
                     TextView nameView = (TextView) waypointView.findViewById(R.id.name);
                     if (StringUtils.isNotBlank(wpt.getName())) {
@@ -1048,13 +1054,17 @@ public class cgeodetail extends AbstractActivity {
 
                     wpt.setIcon(res, nameView);
 
-                    TextView noteView = (TextView) waypointView.findViewById(R.id.note);
-                    if (containsHtml(wpt.getNote())) {
-                        noteView.setText(Html.fromHtml(StringUtils.trimToEmpty(wpt.getNote())), TextView.BufferType.SPANNABLE);
+                    if (StringUtils.isNotBlank(wpt.getNote())) {
+                        TextView noteView = (TextView) waypointView.findViewById(R.id.note);
+                        noteView.setVisibility(View.VISIBLE);
+                        if (containsHtml(wpt.getNote())) {
+                            noteView.setText(Html.fromHtml(wpt.getNote().trim()), TextView.BufferType.SPANNABLE);
+                        }
+                        else {
+                            noteView.setText(wpt.getNote().trim());
+                        }
                     }
-                    else {
-                        noteView.setText(StringUtils.trimToEmpty(wpt.getNote()));
-                    }
+
                     waypointView.setOnClickListener(new waypointInfo(wpt.getId()));
                     registerForContextMenu(waypointView);
 
