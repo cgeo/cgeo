@@ -197,8 +197,6 @@
                 <Button style="@style/button"
                         android:id="@+id/full_changelog"
                         android:layout_width="280dip"
-                        android:singleLine="false"
-                        android:lines="2"
                         android:onClick="showFullChangeLog"
                         android:text="@string/about_button_changelog" />
             </LinearLayout>
