@@ -32,28 +32,23 @@ import java.util.concurrent.ArrayBlockingQueue;
  *
  */
 
-public class Go4Cache extends Thread {
+public final class Go4Cache extends Thread {
 
-    private final static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 2010-07-25 14:44:01
-    private static Go4Cache instance;
-
-    final private ArrayBlockingQueue<Geopoint> queue = new ArrayBlockingQueue<Geopoint>(1);
-    final private cgeoapplication app;
-
-    private static Go4Cache getInstance(final cgeoapplication app) {
-        if (null == instance) {
-            synchronized(Go4Cache.class) {
-                instance = new Go4Cache(app);
-                instance.start();
-            }
-        }
-        return instance;
+    private static class InstanceHolder { // initialization on demand holder
+        private static final Go4Cache INSTANCE = new Go4Cache();
     }
 
-    private Go4Cache(final cgeoapplication app) {
+    private final static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 2010-07-25 14:44:01
+    final private ArrayBlockingQueue<Geopoint> queue = new ArrayBlockingQueue<Geopoint>(1);
+
+    public static Go4Cache getInstance() { // no need to be synchronized
+        return InstanceHolder.INSTANCE;
+    }
+
+    private Go4Cache() { // private singleton constructor
         super("Go4Cache");
-        this.app = app;
         setPriority(Thread.MIN_PRIORITY);
+        start();
     }
 
     /**
@@ -64,9 +59,9 @@ public class Go4Cache extends Thread {
      * @param coords
      *            the current coordinates
      */
-    public static void signalCoordinates(final cgeoapplication app, final Geopoint coords) {
+    public static void signalCoordinates(final Geopoint coords) {
         if (Settings.isPublicLoc()) {
-            getInstance(app).queue.offer(coords);
+            getInstance().queue.offer(coords);
         }
     }
 
@@ -79,7 +74,7 @@ public class Go4Cache extends Thread {
         try {
             for (;;) {
                 final Geopoint currentCoords = queue.take();
-                final String currentAction = app.getAction();
+                final String currentAction = cgeoapplication.getInstance().getAction();
 
                 // If we are too close and we haven't changed our current action, no need
                 // to update our situation.

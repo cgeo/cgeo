@@ -1,7 +1,5 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.Parameters;
-
 import android.test.AndroidTestCase;
 
 import java.security.InvalidParameterException;
@@ -12,8 +10,8 @@ public class ParametersTest extends AndroidTestCase {
 
     public static void testException() {
         try {
-            @SuppressWarnings("unused")
             final Parameters params = new Parameters("aaa", "AAA", "bbb");
+            params.clear(); // this will never be invoked, but suppresses warnings about unused objects
             Assert.fail("Exception not raised");
         } catch (InvalidParameterException e) {
             // Ok

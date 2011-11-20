@@ -56,8 +56,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         copyResourceToFile(R.raw.gc31j2h, gc31j2h);
 
         GPXImporter.ImportGpxFileThread importThread = new GPXImporter.ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
-        importThread.run();
-        importStepHandler.waitForCompletion();
+        runImportThread(importThread);
 
         assertEquals(3, importStepHandler.messages.size());
         assertEquals(GPXImporter.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
@@ -73,14 +72,24 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         //        assertNull(cache.waypoints);
     }
 
+    private void runImportThread(GPXImporter.ImportThread importThread) {
+        importThread.start();
+        try {
+            importThread.join();
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        importStepHandler.waitForCompletion();
+    }
+
     public void testImportGpxWithWaypoints() throws IOException {
         File gc31j2h = new File(tempDir, "gc31j2h.gpx");
         copyResourceToFile(R.raw.gc31j2h, gc31j2h);
         copyResourceToFile(R.raw.gc31j2h_wpts, new File(tempDir, "gc31j2h-wpts.gpx"));
 
         GPXImporter.ImportGpxFileThread importThread = new GPXImporter.ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
-        importThread.run();
-        importStepHandler.waitForCompletion();
+        runImportThread(importThread);
 
         assertEquals(4, importStepHandler.messages.size());
         assertEquals(GPXImporter.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
@@ -100,8 +109,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         copyResourceToFile(R.raw.oc5952_loc, oc5952);
 
         GPXImporter.ImportLocFileThread importThread = new GPXImporter.ImportLocFileThread(oc5952, listId, importStepHandler, progressHandler);
-        importThread.run();
-        importStepHandler.waitForCompletion();
+        runImportThread(importThread);
 
         assertEquals(3, importStepHandler.messages.size());
         assertEquals(GPXImporter.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
@@ -124,8 +132,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         copyResourceToFile(R.raw.gc31j2h_err, gc31j2h);
 
         GPXImporter.ImportGpxFileThread importThread = new GPXImporter.ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
-        importThread.run();
-        importStepHandler.waitForCompletion();
+        runImportThread(importThread);
 
         assertEquals(2, importStepHandler.messages.size());
         assertEquals(GPXImporter.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
@@ -138,8 +145,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
 
         progressHandler.cancel();
         GPXImporter.ImportGpxFileThread importThread = new GPXImporter.ImportGpxFileThread(gc31j2h, listId, importStepHandler, progressHandler);
-        importThread.run();
-        importStepHandler.waitForCompletion();
+        runImportThread(importThread);
 
         assertEquals(2, importStepHandler.messages.size());
         assertEquals(GPXImporter.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
@@ -151,8 +157,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         copyResourceToFile(R.raw.pq7545915, pq7545915);
 
         GPXImporter.ImportGpxZipFileThread importThread = new GPXImporter.ImportGpxZipFileThread(pq7545915, listId, importStepHandler, progressHandler);
-        importThread.run();
-        importStepHandler.waitForCompletion();
+        runImportThread(importThread);
 
         assertEquals(4, importStepHandler.messages.size());
         assertEquals(GPXImporter.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
@@ -173,8 +178,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         copyResourceToFile(R.raw.pq7545915, pq1);
 
         GPXImporter.ImportGpxZipFileThread importThread = new GPXImporter.ImportGpxZipFileThread(pq1, listId, importStepHandler, progressHandler);
-        importThread.run();
-        importStepHandler.waitForCompletion();
+        runImportThread(importThread);
 
         assertEquals(1, importStepHandler.messages.size());
         assertEquals(GPXImporter.IMPORT_STEP_FINISHED_WITH_ERROR, importStepHandler.messages.get(0).what);

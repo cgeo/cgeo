@@ -3106,13 +3106,9 @@ public class cgData {
         databaseRW.delete(dbTableLogsOffline, "geocode = ?", new String[] { geocode });
     }
 
-    private SQLiteStatement getStatementLogCount() {
+    private synchronized SQLiteStatement getStatementLogCount() {
         if (statementLogCount == null) {
-            synchronized (this) {
-                if (statementLogCount == null) {
-                    statementLogCount = databaseRO.compileStatement("SELECT count(_id) FROM " + dbTableLogsOffline + " WHERE geocode = ?");
-                }
-            }
+            statementLogCount = databaseRO.compileStatement("SELECT count(_id) FROM " + dbTableLogsOffline + " WHERE geocode = ?");
         }
         return statementLogCount;
     }
@@ -3358,13 +3354,9 @@ public class cgData {
         return success;
     }
 
-    private SQLiteStatement getStatementDescription() {
+    private synchronized SQLiteStatement getStatementDescription() {
         if (statementDescription == null) {
-            synchronized (this) {
-                if (statementDescription == null) {
-                    statementDescription = databaseRO.compileStatement("SELECT description FROM " + dbTableCaches + " WHERE geocode = ?");
-                }
-            }
+            statementDescription = databaseRO.compileStatement("SELECT description FROM " + dbTableCaches + " WHERE geocode = ?");
         }
         return statementDescription;
     }

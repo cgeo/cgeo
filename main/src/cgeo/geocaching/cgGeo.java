@@ -351,7 +351,7 @@ public class cgGeo {
         }
 
         if (gps > -1) {
-            Go4Cache.signalCoordinates(app, coordsNow);
+            Go4Cache.signalCoordinates(coordsNow);
         }
     }
 
