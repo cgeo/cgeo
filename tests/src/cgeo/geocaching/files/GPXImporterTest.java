@@ -7,6 +7,7 @@ import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.CancellableHandler;
 
+import android.net.Uri;
 import android.os.Message;
 
 import java.io.File;
@@ -152,6 +153,26 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(GPXImporter.IMPORT_STEP_CANCELED, importStepHandler.messages.get(1).what);
     }
 
+    public void testImportGpxAttachment() {
+        Uri uri = Uri.parse("android.resource://cgeo.geocaching.test/raw/gc31j2h");
+
+        GPXImporter.ImportGpxAttachmentThread importThread = new GPXImporter.ImportGpxAttachmentThread(uri, getInstrumentation().getContext().getContentResolver(), listId, importStepHandler, progressHandler);
+        runImportThread(importThread);
+
+        assertEquals(3, importStepHandler.messages.size());
+        assertEquals(GPXImporter.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
+        assertEquals(GPXImporter.IMPORT_STEP_STORE_CACHES, importStepHandler.messages.get(1).what);
+        assertEquals(GPXImporter.IMPORT_STEP_FINISHED, importStepHandler.messages.get(2).what);
+        cgSearch search = (cgSearch) importStepHandler.messages.get(2).obj;
+        assertEquals(Collections.singletonList("GC31J2H"), search.getGeocodes());
+
+        cgCache cache = cgeoapplication.getInstance().getCacheByGeocode("GC31J2H");
+        assertCacheProperties(cache);
+
+        // can't assert, for whatever reason the waypoints are remembered in DB
+        //        assertNull(cache.waypoints);
+    }
+
     public void testImportGpxZip() throws IOException {
         File pq7545915 = new File(tempDir, "7545915.zip");
         copyResourceToFile(R.raw.pq7545915, pq7545915);
@@ -182,6 +203,25 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
 
         assertEquals(1, importStepHandler.messages.size());
         assertEquals(GPXImporter.IMPORT_STEP_FINISHED_WITH_ERROR, importStepHandler.messages.get(0).what);
+    }
+
+    public void testImportGpxZipAttachment() {
+        Uri uri = Uri.parse("android.resource://cgeo.geocaching.test/raw/pq7545915");
+
+        GPXImporter.ImportGpxZipAttachmentThread importThread = new GPXImporter.ImportGpxZipAttachmentThread(uri, getInstrumentation().getContext().getContentResolver(), listId, importStepHandler, progressHandler);
+        runImportThread(importThread);
+
+        assertEquals(4, importStepHandler.messages.size());
+        assertEquals(GPXImporter.IMPORT_STEP_READ_FILE, importStepHandler.messages.get(0).what);
+        assertEquals(GPXImporter.IMPORT_STEP_READ_WPT_FILE, importStepHandler.messages.get(1).what);
+        assertEquals(GPXImporter.IMPORT_STEP_STORE_CACHES, importStepHandler.messages.get(2).what);
+        assertEquals(GPXImporter.IMPORT_STEP_FINISHED, importStepHandler.messages.get(3).what);
+        cgSearch search = (cgSearch) importStepHandler.messages.get(3).obj;
+        assertEquals(Collections.singletonList("GC31J2H"), search.getGeocodes());
+
+        cgCache cache = cgeoapplication.getInstance().getCacheByGeocode("GC31J2H");
+        assertCacheProperties(cache);
+        assertEquals(1, cache.getWaypoints().size()); // this is the original pocket query result without test waypoint
     }
 
     static class TestHandler extends CancellableHandler {

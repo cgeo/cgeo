@@ -16,6 +16,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 import android.os.Handler;
@@ -26,9 +27,11 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.concurrent.CancellationException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
 
 public class GPXImporter {
     static final int IMPORT_STEP_READ_FILE = 1;
@@ -53,10 +56,15 @@ public class GPXImporter {
     public GPXImporter(final IAbstractActivity fromActivity, final int listId) {
         this.listId = listId;
         this.fromActivity = fromActivity;
-        Activity realActivity = (Activity) fromActivity;
-        res = realActivity.getResources();
+        res = ((Activity) fromActivity).getResources();
     }
 
+    /**
+     * Import GPX file. Currently supports *.gpx, *.zip (containing gpx files, e.g. PQ queries) or *.loc files.
+     *
+     * @param file
+     *            the file to import
+     */
     public void importGPX(final File file) {
         if (StringUtils.endsWithIgnoreCase(file.getName(), GPX_FILE_EXTENSION)) {
             new ImportGpxFileThread(file, listId, importStepHandler, progressHandler).start();
@@ -67,9 +75,34 @@ public class GPXImporter {
         }
     }
 
-    public void importGPX(final Uri uri, ContentResolver contentResolver) {
+    /**
+     * Import GPX provided via intent of import activity that instantiated this GPXImporter.
+     */
+    public void importGPX() {
         closeOnFinish = true;
-        new ImportAttachmentThread(uri, contentResolver, listId, importStepHandler, progressHandler).start();
+        final ContentResolver contentResolver = ((Activity) fromActivity).getContentResolver();
+        final Intent intent = ((Activity) fromActivity).getIntent();
+        final Uri uri = intent.getData();
+
+        String mimeType = intent.getType();
+        if (mimeType == null) {
+            mimeType = contentResolver.getType(uri);
+        }
+        // if mimetype can't be determined (e.g. for emulators email app), use a default
+        // TODO: check if problem occurs with gmail as well
+        if (mimeType == null) {
+            mimeType = "application/zip";
+        }
+
+        Log.i(Settings.tag, "importGPX: " + uri + ", mimetype=" + mimeType);
+        if (StringUtils.equalsIgnoreCase("text/xml", mimeType) || StringUtils.equalsIgnoreCase("application/xml", mimeType)) {
+            new ImportGpxAttachmentThread(uri, contentResolver, listId, importStepHandler, progressHandler).start();
+        } else if (StringUtils.equalsIgnoreCase("application/zip", mimeType)) {
+            new ImportGpxZipAttachmentThread(uri, contentResolver, listId, importStepHandler, progressHandler).start();
+        } else {
+            // should not happen, GPXImportActivity accepts only mime types handled above
+            closeActivity();
+        }
     }
 
     static abstract class ImportThread extends Thread {
@@ -230,11 +263,11 @@ public class GPXImporter {
         }
     }
 
-    static class ImportAttachmentThread extends ImportThread {
+    static class ImportGpxAttachmentThread extends ImportThread {
         private final Uri uri;
         private ContentResolver contentResolver;
 
-        public ImportAttachmentThread(Uri uri, ContentResolver contentResolver, int listId, Handler importStepHandler, CancellableHandler progressHandler) {
+        public ImportGpxAttachmentThread(Uri uri, ContentResolver contentResolver, int listId, Handler importStepHandler, CancellableHandler progressHandler) {
             super(listId, importStepHandler, progressHandler);
             this.uri = uri;
             this.contentResolver = contentResolver;
@@ -266,6 +299,68 @@ public class GPXImporter {
             } finally {
                 is.close();
             }
+        }
+    }
+
+    static class ImportGpxZipAttachmentThread extends ImportThread {
+        private final Uri uri;
+        private ContentResolver contentResolver;
+
+        public ImportGpxZipAttachmentThread(Uri uri, ContentResolver contentResolver, int listId, Handler importStepHandler, CancellableHandler progressHandler) {
+            super(listId, importStepHandler, progressHandler);
+            this.uri = uri;
+            this.contentResolver = contentResolver;
+        }
+
+        @Override
+        protected Collection<cgCache> doImport() throws IOException, ParserException {
+            Log.i(Settings.tag, "Import zipped GPX from uri: " + uri);
+
+            try {
+                // try to parse cache file as GPX 10
+                return parseAttachment(new GPX10Parser(listId));
+            } catch (ParserException pe) {
+                // didn't work -> lets try GPX11
+                return parseAttachment(new GPX11Parser(listId));
+            }
+        }
+
+        private Collection<cgCache> parseAttachment(GPXParser parser) throws IOException, ParserException {
+            Collection<cgCache> caches = Collections.emptySet();
+            // can't assume that GPX file comes before waypoint file in zip -> so we need two passes
+            // 1. parse GPX files
+            ZipInputStream zis = new ZipInputStream(contentResolver.openInputStream(uri));
+            try {
+                for (ZipEntry zipEntry = zis.getNextEntry(); zipEntry != null; zipEntry = zis.getNextEntry()) {
+                    if (StringUtils.endsWithIgnoreCase(zipEntry.getName(), GPX_FILE_EXTENSION)) {
+                        if (!StringUtils.endsWithIgnoreCase(zipEntry.getName(), WAYPOINTS_FILE_SUFFIX_AND_EXTENSION)) {
+                            importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, (int) zipEntry.getSize()));
+                            caches = parser.parse(new NoCloseInputStream(zis), progressHandler);
+                        }
+                    } else {
+                        throw new ParserException(uri.toString() + " is not a GPX zip file");
+                    }
+                    zis.closeEntry();
+                }
+            } finally {
+                zis.close();
+            }
+
+            // 2. parse waypoint files
+            zis = new ZipInputStream(contentResolver.openInputStream(uri));
+            try {
+                for (ZipEntry zipEntry = zis.getNextEntry(); zipEntry != null; zipEntry = zis.getNextEntry()) {
+                    if (StringUtils.endsWithIgnoreCase(zipEntry.getName(), WAYPOINTS_FILE_SUFFIX_AND_EXTENSION)) {
+                        importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_WPT_FILE, R.string.gpx_import_loading_waypoints, (int) zipEntry.getSize()));
+                        caches = parser.parse(new NoCloseInputStream(zis), progressHandler);
+                    }
+                    zis.closeEntry();
+                }
+            } finally {
+                zis.close();
+            }
+
+            return caches;
         }
     }
 

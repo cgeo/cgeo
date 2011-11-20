@@ -294,6 +294,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:mimeType="text/xml" />
                 <data android:mimeType="application/xml" />
+                <data android:mimeType="application/zip" />
             </intent-filter>
         </activity>
 		<activity
