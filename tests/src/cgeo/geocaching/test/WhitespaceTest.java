@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
  */
 public class WhitespaceTest extends AndroidTestCase {
 
-    private final int EXPECTED_SIZE = 119418;
+    private final static int EXPECTED_SIZE = 119418;
     private String data;
 
     @Override

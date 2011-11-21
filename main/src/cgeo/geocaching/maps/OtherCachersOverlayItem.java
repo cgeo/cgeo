@@ -15,7 +15,7 @@ public class OtherCachersOverlayItem {
         user = userIn;
     }
 
-    public Drawable getMarker(int state) {
+    public Drawable getMarker() {
         Drawable marker = null;
 
         if (user != null && user.getDate() != null && user.getDate().getTime() >= (System.currentTimeMillis() - (20 * 60 * 1000))) {

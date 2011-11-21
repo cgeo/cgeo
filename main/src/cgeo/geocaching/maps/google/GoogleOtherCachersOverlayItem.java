@@ -20,7 +20,7 @@ public class GoogleOtherCachersOverlayItem extends OverlayItem implements OtherC
 
     @Override
     public Drawable getMarker(int state) {
-        final Drawable marker = item.getMarker(state);
+        final Drawable marker = item.getMarker();
         setMarker(marker);
         return marker;
     }

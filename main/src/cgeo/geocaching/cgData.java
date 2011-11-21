@@ -1809,9 +1809,8 @@ public class cgData {
      * @return the loaded cache
      */
 
-    public cgCache loadCache(final String geocode, final String guid, final int loadFlags) {
+    public cgCache loadCache(final String geocode, final int loadFlags) {
         Object[] geocodes = new Object[1];
-        Object[] guids = new Object[1];
 
         if (StringUtils.isNotBlank(geocode)) {
             geocodes[0] = geocode;
@@ -1819,13 +1818,7 @@ public class cgData {
             geocodes = null;
         }
 
-        if (StringUtils.isNotBlank(guid)) {
-            guids[0] = guid;
-        } else {
-            guids = null;
-        }
-
-        List<cgCache> caches = loadCaches(geocodes, null, null, null, null, null, loadFlags);
+        List<cgCache> caches = loadCaches(geocodes, null, null, null, null, loadFlags);
         if (CollectionUtils.isNotEmpty(caches)) {
             return caches.get(0);
         }
@@ -1833,13 +1826,10 @@ public class cgData {
         return null;
     }
 
-    public List<cgCache> loadCaches(final Object[] geocodes, final Object[] guids, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final int loadFlags) {
+    public List<cgCache> loadCaches(final Object[] geocodes, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final int loadFlags) {
         init();
         // Using more than one of the parametersets results in overly comlex wheres
-        if (((geocodes != null && geocodes.length > 0) && (guids != null && guids.length > 0))) {
-            throw new IllegalArgumentException("Please use only one parameter");
-        }
-        if (((geocodes != null && geocodes.length > 0) || (guids != null && guids.length > 0))
+        if ((geocodes != null && geocodes.length > 0)
                 && centerLat != null
                 && centerLon != null
                 && spanLat != null
@@ -1866,23 +1856,6 @@ public class cgData {
                     where.append(" and ");
                 }
                 where.append("geocode in (");
-                where.append(all);
-                where.append(')');
-            } else if (guids != null && guids.length > 0) {
-                StringBuilder all = new StringBuilder();
-                for (Object one : guids) {
-                    if (all.length() > 0) {
-                        all.append(", ");
-                    }
-                    all.append('"');
-                    all.append((String) one);
-                    all.append('"');
-                }
-
-                if (where.length() > 0) {
-                    where.append(" and ");
-                }
-                where.append("guid in (");
                 where.append(all);
                 where.append(')');
             } else {
@@ -3106,13 +3079,9 @@ public class cgData {
         databaseRW.delete(dbTableLogsOffline, "geocode = ?", new String[] { geocode });
     }
 
-    private SQLiteStatement getStatementLogCount() {
+    private synchronized SQLiteStatement getStatementLogCount() {
         if (statementLogCount == null) {
-            synchronized (this) {
-                if (statementLogCount == null) {
-                    statementLogCount = databaseRO.compileStatement("SELECT count(_id) FROM " + dbTableLogsOffline + " WHERE geocode = ?");
-                }
-            }
+            statementLogCount = databaseRO.compileStatement("SELECT count(_id) FROM " + dbTableLogsOffline + " WHERE geocode = ?");
         }
         return statementLogCount;
     }
@@ -3358,13 +3327,9 @@ public class cgData {
         return success;
     }
 
-    private SQLiteStatement getStatementDescription() {
+    private synchronized SQLiteStatement getStatementDescription() {
         if (statementDescription == null) {
-            synchronized (this) {
-                if (statementDescription == null) {
-                    statementDescription = databaseRO.compileStatement("SELECT description FROM " + dbTableCaches + " WHERE geocode = ?");
-                }
-            }
+            statementDescription = databaseRO.compileStatement("SELECT description FROM " + dbTableCaches + " WHERE geocode = ?");
         }
         return statementDescription;
     }

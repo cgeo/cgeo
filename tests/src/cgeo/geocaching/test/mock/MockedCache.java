@@ -115,7 +115,7 @@ public abstract class MockedCache implements ICache {
 
     @Override
     public Integer getFavoritePoints() {
-        return new Integer(0);
+        return 0;
     }
 
     @Override

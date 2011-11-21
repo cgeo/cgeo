@@ -20,7 +20,7 @@ public class MapsforgeOtherCachersOverlayItem extends OverlayItem implements Oth
 
     @Override
     public Drawable getMarker(int state) {
-        Drawable marker = item.getMarker(state);
+        Drawable marker = item.getMarker();
         setMarker(marker);
         return marker;
     }
