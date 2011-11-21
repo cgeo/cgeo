@@ -62,7 +62,7 @@ public abstract class GPXParser extends FileParser {
      */
     private static final String GSAK_NS = "http://www.gsak.net/xmlv1/5";
 
-    private static final Pattern PATTERN_MILLISECONDS = Pattern.compile("\\.\\d{3}");
+    private static final Pattern PATTERN_MILLISECONDS = Pattern.compile("\\.\\d{3,7}");
 
     private int listId = 1;
     final protected String namespace;

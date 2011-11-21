@@ -209,6 +209,17 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         }
     }
 
+    public static void testParseDateWithHugeFraction() {
+        // see issue 821
+        String dateString = "2011-11-07T00:00:00.0000000-07:00";
+        try {
+            GPXParser.parseDate(dateString);
+        } catch (ParseException e) {
+            fail();
+            e.printStackTrace();
+        }
+    }
+
     public void testSelfmadeGPXWithoutGeocodes() throws Exception {
         final List<cgCache> caches = readGPX11(R.raw.no_connector);
         assertEquals(13, caches.size());
