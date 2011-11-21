@@ -38,7 +38,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class cgeoinit extends AbstractActivity {
 
-    private final int SELECT_MAPFILE_REQUEST = 1;
+    private final static int SELECT_MAPFILE_REQUEST = 1;
 
     private ProgressDialog loginDialog = null;
     private ProgressDialog webDialog = null;

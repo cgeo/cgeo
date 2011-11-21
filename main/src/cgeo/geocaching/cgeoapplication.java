@@ -349,7 +349,7 @@ public class cgeoapplication extends Application {
             return cachesCache.get(geocode);
         }
 
-        final cgCache cache = getStorage().loadCache(geocode, null, loadFlags);
+        final cgCache cache = getStorage().loadCache(geocode, loadFlags);
 
         if (cache != null && cache.getDetailed() && loadFlags == cgCache.LOADALL) {
             putCacheInCache(cache);
@@ -460,7 +460,7 @@ public class cgeoapplication extends Application {
         if (search == null) {
             List<cgCache> cachesOut = new ArrayList<cgCache>();
 
-            final List<cgCache> cachesPre = storage.loadCaches(null, null, centerLat, centerLon, spanLat, spanLon, loadFlags);
+            final List<cgCache> cachesPre = storage.loadCaches(null, centerLat, centerLon, spanLat, spanLon, loadFlags);
             if (cachesPre != null) {
                 cachesOut.addAll(cachesPre);
             }
@@ -473,7 +473,7 @@ public class cgeoapplication extends Application {
         final List<String> geocodeList = search.getGeocodes();
 
         // The list of geocodes is sufficient. more parameters generate an overly complex select.
-        final List<cgCache> cachesPre = getStorage().loadCaches(geocodeList.toArray(), null, null, null, null, null, loadFlags);
+        final List<cgCache> cachesPre = getStorage().loadCaches(geocodeList.toArray(), null, null, null, null, loadFlags);
         if (cachesPre != null) {
             cachesOut.addAll(cachesPre);
         }
@@ -613,7 +613,7 @@ public class cgeoapplication extends Application {
 
     private boolean storeWithMerge(final cgCache cache, final boolean override) {
         if (!override) {
-            final cgCache oldCache = storage.loadCache(cache.getGeocode(), cache.getGuid(), cgCache.LOADALL);
+            final cgCache oldCache = storage.loadCache(cache.getGeocode(), cgCache.LOADALL);
             cache.gatherMissingFrom(oldCache);
         }
         return storage.saveCache(cache);
