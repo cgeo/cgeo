@@ -109,7 +109,7 @@ public final class ActivityMixin {
         }
 
         AlertDialog.Builder dialog = new AlertDialog.Builder(activity).setTitle(title).setMessage(message).setCancelable(true);
-        dialog.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+        dialog.setNeutralButton(android.R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
