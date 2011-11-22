@@ -11,9 +11,7 @@ public class GPXImportActivity extends AbstractActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if ("content".equals(getIntent().getScheme())) {
-            importGPXFromIntent();
-        }
+        importGPXFromIntent();
     }
 
     private void importGPXFromIntent() {
@@ -23,12 +21,13 @@ public class GPXImportActivity extends AbstractActivity {
                 .setCancelable(false)
                 .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        (new GPXImporter(GPXImportActivity.this, cgList.STANDARD_LIST_ID)).importGPX(getIntent().getData(), getContentResolver());
+                        (new GPXImporter(GPXImportActivity.this, cgList.STANDARD_LIST_ID)).importGPX();
                     }
                 })
                 .setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
+                        finish();
                     }
                 })
                 .create()
