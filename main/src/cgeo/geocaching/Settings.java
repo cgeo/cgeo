@@ -44,6 +44,7 @@ public final class Settings {
     private static final String KEY_TWITTER_TOKEN_SECRET = "tokensecret";
     private static final String KEY_TWITTER_TOKEN_PUBLIC = "tokenpublic";
     private static final String KEY_VERSION = "version";
+    private static final String KEY_VERSION_NAME = "versionname";
     private static final String KEY_LOAD_DESCRIPTION = "autoloaddesc";
     private static final String KEY_RATING_WANTED = "ratingwanted";
     private static final String KEY_ELEVATION_WANTED = "elevationwanted";
@@ -830,6 +831,20 @@ public final class Settings {
 
     public static int getVersion() {
         return sharedPrefs.getInt(KEY_VERSION, 0);
+    }
+
+    public static String getVersionName() {
+        return sharedPrefs.getString(KEY_VERSION_NAME, "");
+    }
+
+    public static void setVersionName(final String versionName) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putString(KEY_VERSION_NAME, versionName);
+            }
+        });
     }
 
 }

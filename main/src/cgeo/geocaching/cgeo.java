@@ -10,6 +10,8 @@ import cgeo.geocaching.maps.CGeoMap;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import sheetrock.panda.changelog.ChangeLog;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -192,6 +194,13 @@ public class cgeo extends AbstractActivity {
             }
         } catch (Exception e) {
             // nothing
+        }
+
+        // eventually show change log
+        ChangeLog changeLog = new ChangeLog(this, Settings.getVersionName());
+        if (changeLog.firstRun()) {
+            changeLog.getLogDialog().show();
+            Settings.setVersionName(changeLog.getThisVersion());
         }
 
         init();

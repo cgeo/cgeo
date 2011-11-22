@@ -2,6 +2,8 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 
+import sheetrock.panda.changelog.ChangeLog;
+
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -73,6 +75,14 @@ public class cgeoabout extends AbstractActivity {
      */
     public void author(View view) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://carnero.cc/")));
+    }
+
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
+    public void showFullChangeLog(View view) {
+        new ChangeLog(this).getFullLogDialog().show();
     }
 
     /**
