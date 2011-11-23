@@ -1602,7 +1602,10 @@ public class cgBase {
 
         // trackable distance
         try {
-            trackable.setDistance(DistanceParser.parseDistance(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_DISTANCE, false, null), Settings.isUseMetricUnits()));
+            final String distance = BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_DISTANCE, false, null);
+            if (null != distance) {
+                trackable.setDistance(DistanceParser.parseDistance(distance, Settings.isUseMetricUnits()));
+            }
         } catch (NumberFormatException e) {
             trackable.setDistance(null);
             throw e;
