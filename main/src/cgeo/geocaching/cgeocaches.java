@@ -1117,13 +1117,21 @@ public class cgeocaches extends AbstractListActivity {
                 menu.add(0, MENU_FILTER_SIZE_NOT_CHOSEN, 0, CacheSize.NOT_CHOSEN.getL10n());
             } else if (selectedFilter.equals(res.getString(R.string.caches_filter_type))) {
                 menu.setHeaderTitle(res.getString(R.string.caches_filter_type_title));
-                menu.add(0, MENU_FILTER_SIZE_MICRO, 0, CacheSize.MICRO.getL10n());
-                menu.add(0, MENU_FILTER_SIZE_SMALL, 0, CacheSize.SMALL.getL10n());
-                menu.add(0, MENU_FILTER_SIZE_REGULAR, 0, CacheSize.REGULAR.getL10n());
-                menu.add(0, MENU_FILTER_SIZE_LARGE, 0, CacheSize.LARGE.getL10n());
-                menu.add(0, MENU_FILTER_SIZE_OTHER, 0, CacheSize.OTHER.getL10n());
-                menu.add(0, MENU_FILTER_SIZE_VIRTUAL, 0, CacheSize.VIRTUAL.getL10n());
-                menu.add(0, MENU_FILTER_SIZE_NOT_CHOSEN, 0, CacheSize.NOT_CHOSEN.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_TRADITIONAL, 0, CacheType.TRADITIONAL.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_MULTI, 0, CacheType.MULTI.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_MYSTERY, 0, CacheType.MYSTERY.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_LETTERBOX, 0, CacheType.LETTERBOX.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_EVENT, 0, CacheType.EVENT.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_MEGA, 0, CacheType.MEGA_EVENT.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_EARTH, 0, CacheType.EARTH.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_CITO, 0, CacheType.CITO.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_WEBCAM, 0, CacheType.WEBCAM.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_VIRTUAL, 0, CacheType.VIRTUAL.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_WHERIGO, 0, CacheType.WHERIGO.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_LOSTFOUND, 0, CacheType.LOSTANDFOUND.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_APE, 0, CacheType.PROJECT_APE.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_GCHQ, 0, CacheType.GCHQ.getL10n());
+                menu.add(0, MENU_FILTER_TYPE_GPS, 0, CacheType.GPS_EXHIBIT.getL10n());
             }
         } else {
             // adapterInfo cannot be null here, but the compiler cannot guess it so this prevents warnings
