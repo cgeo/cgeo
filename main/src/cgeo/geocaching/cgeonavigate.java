@@ -216,7 +216,7 @@ public class cgeonavigate extends AbstractActivity {
 
             int cnt = 4;
             for (cgCoord coordinate : coordinates) {
-                subMenu.add(0, cnt, 0, coordinate.getName() + " (" + coordinate.getType() + ")");
+                subMenu.add(0, cnt, 0, coordinate.getName() + " (" + coordinate.getCoordType() + ")");
                 cnt++;
             }
 

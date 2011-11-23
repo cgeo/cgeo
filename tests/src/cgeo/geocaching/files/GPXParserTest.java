@@ -33,7 +33,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         final cgCache cache = caches.get(0);
         assertEquals("GC1BKP3", cache.getGeocode());
         assertEquals("9946f030-a514-46d8-a050-a60e92fd2e1a", cache.getGuid());
-        assertEquals(CacheType.TRADITIONAL, cache.getCacheType());
+        assertEquals(CacheType.TRADITIONAL, cache.getType());
         assertEquals(false, cache.isArchived());
         assertEquals(false, cache.isDisabled());
         assertEquals("Die Schatzinsel / treasure island", cache.getName());
@@ -57,7 +57,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         final List<cgCache> caches = readGPX10(R.raw.oc5952_gpx);
         final cgCache cache = caches.get(0);
         assertEquals("OC5952", cache.getGeocode());
-        assertEquals(CacheType.TRADITIONAL, cache.getCacheType());
+        assertEquals(CacheType.TRADITIONAL, cache.getType());
         assertEquals(false, cache.isArchived());
         assertEquals(false, cache.isDisabled());
         assertEquals("Die Schatzinsel / treasure island", cache.getName());
@@ -119,7 +119,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(refCoordinates.format(GeopointFormatter.Format.LON_DECMINUTE), cache.getLongitude());
         assertEquals("vptsz", cache.getOwner());
         assertEquals(CacheSize.SMALL, cache.getSize());
-        assertEquals(CacheType.MULTI, cache.getCacheType());
+        assertEquals(CacheType.MULTI, cache.getType());
         assertFalse(cache.isArchived());
         assertFalse(cache.isDisabled());
         assertFalse(cache.isEventCache());

@@ -1,6 +1,7 @@
 package cgeo.geocaching.connector.opencaching;
 
 import cgeo.geocaching.Parameters;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCacheWrap;
@@ -44,7 +45,7 @@ public class ApiOpenCachingConnector extends OpenCachingConnector {
         final cgCacheWrap caches = new cgCacheWrap();
         caches.cacheList.add(cache);
 
-        final List<cgCache> cacheList = cgBase.filterSearchResults(search, caches, false, false, null);
+        final List<cgCache> cacheList = cgBase.filterSearchResults(search, caches, false, false, Settings.getCacheType());
         app.addSearch(cacheList, reason);
 
         return search;

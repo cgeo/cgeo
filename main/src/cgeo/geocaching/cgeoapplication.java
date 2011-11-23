@@ -481,8 +481,8 @@ public class cgeoapplication extends Application {
         return cachesOut;
     }
 
-    public cgSearch getBatchOfStoredCaches(final boolean detailedOnly, final Geopoint coords, final CacheType cachetype, final int list) {
-        final List<String> geocodes = getStorage().loadBatchOfStoredGeocodes(detailedOnly, coords, cachetype, list);
+    public cgSearch getBatchOfStoredCaches(final boolean detailedOnly, final Geopoint coords, final CacheType cacheType, final int list) {
+        final List<String> geocodes = getStorage().loadBatchOfStoredGeocodes(detailedOnly, coords, cacheType, list);
         return new cgSearch(geocodes);
     }
 
@@ -490,23 +490,18 @@ public class cgeoapplication extends Application {
         return getStorage().loadHistoryOfSearchedLocations();
     }
 
-    public cgSearch getHistoryOfCaches(final boolean detailedOnly, final CacheType cachetype) {
-        final List<String> geocodes = getStorage().loadBatchOfHistoricGeocodes(detailedOnly, cachetype);
+    public cgSearch getHistoryOfCaches(final boolean detailedOnly, final CacheType cacheType) {
+        final List<String> geocodes = getStorage().loadBatchOfHistoricGeocodes(detailedOnly, cacheType);
         return new cgSearch(geocodes);
     }
 
-    public cgSearch getCachedInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cachetype) {
-        final List<String> geocodes = getStorage().getCachedInViewport(centerLat, centerLon, spanLat, spanLon, cachetype);
+    public cgSearch getCachedInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
+        final List<String> geocodes = getStorage().getCachedInViewport(centerLat, centerLon, spanLat, spanLon, cacheType);
         return new cgSearch(geocodes);
     }
 
-    public cgSearch getStoredInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cachetype) {
-        final List<String> geocodes = getStorage().getStoredInViewport(centerLat, centerLon, spanLat, spanLon, cachetype);
-        return new cgSearch(geocodes);
-    }
-
-    public cgSearch getOfflineAll(String cachetype) {
-        final List<String> geocodes = getStorage().getOfflineAll(cachetype);
+    public cgSearch getStoredInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
+        final List<String> geocodes = getStorage().getStoredInViewport(centerLat, centerLon, spanLat, spanLon, cacheType);
         return new cgSearch(geocodes);
     }
 

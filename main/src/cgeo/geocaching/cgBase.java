@@ -97,15 +97,6 @@ public class cgBase {
 
     private static final String passMatch = "(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+";
 
-    public final static Map<String, String> cacheIDs = new HashMap<String, String>();
-    static {
-        for (CacheType ct : CacheType.values()) {
-            cacheIDs.put(ct.id, ct.guid);
-        }
-    }
-    public final static Map<CacheType, String> cacheTypesInv = new HashMap<CacheType, String>();
-    public final static Map<String, String> cacheIDsChoices = new HashMap<String, String>();
-    public final static Map<CacheSize, String> cacheSizesInv = new HashMap<CacheSize, String>();
     public final static Map<WaypointType, String> waypointTypes = new HashMap<WaypointType, String>();
     public final static Map<String, Integer> logTypes = new HashMap<String, Integer>();
     public final static Map<String, Integer> logTypes0 = new HashMap<String, Integer>();
@@ -232,22 +223,7 @@ public class cgBase {
 
     public static void initialize(final cgeoapplication app) {
         context = app.getBaseContext();
-        res = context.getResources();
-
-        // setup cache type mappings
-
-
-        cacheIDsChoices.put(res.getString(R.string.all), CacheType.ALL_GUID);
-
-        for (CacheType ct : CacheType.values()) {
-            String l10n = res.getString(ct.stringId);
-            cacheTypesInv.put(ct, l10n);
-            cacheIDsChoices.put(l10n, ct.guid);
-        }
-
-        for (CacheSize cs : CacheSize.values()) {
-            cacheSizesInv.put(cs, res.getString(cs.stringId));
-        }
+        res = app.getBaseContext().getResources();
 
         // waypoint types
         for (WaypointType wt : WaypointType.values()) {
@@ -649,7 +625,7 @@ public class cgBase {
             cache.setGeocode(BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_GEOCODE, true, 1, cache.getGeocode(), true).toUpperCase());
 
             // cache type
-            cache.setCacheType(CacheType.getByPattern(BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_TYPE, true, 1, null, true)));
+            cache.setType(CacheType.getByPattern(BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_TYPE, true, 1, null, true)));
 
             // cache direction - image
             if (Settings.getLoadDirImg()) {
@@ -862,31 +838,31 @@ public class cgBase {
                             cacheToAdd.setDisabled(!oneCache.getBoolean("ia"));
                             int ctid = oneCache.getInt("ctid");
                             if (ctid == 2) {
-                                cacheToAdd.setCacheType(CacheType.TRADITIONAL);
+                                cacheToAdd.setType(CacheType.TRADITIONAL);
                             } else if (ctid == 3) {
-                                cacheToAdd.setCacheType(CacheType.MULTI);
+                                cacheToAdd.setType(CacheType.MULTI);
                             } else if (ctid == 4) {
-                                cacheToAdd.setCacheType(CacheType.VIRTUAL);
+                                cacheToAdd.setType(CacheType.VIRTUAL);
                             } else if (ctid == 5) {
-                                cacheToAdd.setCacheType(CacheType.LETTERBOX);
+                                cacheToAdd.setType(CacheType.LETTERBOX);
                             } else if (ctid == 6) {
-                                cacheToAdd.setCacheType(CacheType.EVENT);
+                                cacheToAdd.setType(CacheType.EVENT);
                             } else if (ctid == 8) {
-                                cacheToAdd.setCacheType(CacheType.MYSTERY);
+                                cacheToAdd.setType(CacheType.MYSTERY);
                             } else if (ctid == 11) {
-                                cacheToAdd.setCacheType(CacheType.WEBCAM);
+                                cacheToAdd.setType(CacheType.WEBCAM);
                             } else if (ctid == 13) {
-                                cacheToAdd.setCacheType(CacheType.CITO);
+                                cacheToAdd.setType(CacheType.CITO);
                             } else if (ctid == 137) {
-                                cacheToAdd.setCacheType(CacheType.EARTH);
+                                cacheToAdd.setType(CacheType.EARTH);
                             } else if (ctid == 453) {
-                                cacheToAdd.setCacheType(CacheType.MEGA_EVENT);
+                                cacheToAdd.setType(CacheType.MEGA_EVENT);
                             } else if (ctid == 1858) {
-                                cacheToAdd.setCacheType(CacheType.WHERIGO);
+                                cacheToAdd.setType(CacheType.WHERIGO);
                             } else if (ctid == 3653) {
-                                cacheToAdd.setCacheType(CacheType.LOSTANDFOUND);
+                                cacheToAdd.setType(CacheType.LOSTANDFOUND);
                             } else {
-                                cacheToAdd.setCacheType(CacheType.UNKNOWN);
+                                cacheToAdd.setType(CacheType.UNKNOWN);
                             }
 
                             caches.cacheList.add(cacheToAdd);
@@ -1031,14 +1007,14 @@ public class cgBase {
             cache.setFavouriteCnt(Integer.parseInt(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_FAVORITECOUNT, true, "0")));
 
             // cache size
-            cache.setSize(CacheSize.FIND_BY_ID.get(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_SIZE, true, CacheSize.NOT_CHOSEN.id).toLowerCase()));
+            cache.setSize(CacheSize.getById(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_SIZE, true, CacheSize.NOT_CHOSEN.id).toLowerCase()));
         }
 
         // cache found
         cache.setFound(BaseUtils.matches(page, GCConstants.PATTERN_FOUND) || BaseUtils.matches(page, GCConstants.PATTERN_FOUND_ALTERNATIVE));
 
         // cache type
-        cache.setCacheType(CacheType.getByPattern(BaseUtils.getMatch(page, GCConstants.PATTERN_TYPE, true, cache.getCacheType().id)));
+        cache.setType(CacheType.getByPattern(BaseUtils.getMatch(page, GCConstants.PATTERN_TYPE, true, cache.getType().id)));
 
         // on watchlist
         cache.setOnWatchlist(BaseUtils.matches(page, GCConstants.PATTERN_WATCHLIST));
@@ -1457,7 +1433,7 @@ public class cgBase {
         if (cache.getSize() == null) {
             Log.e(Settings.tag, "size not parsed correctly");
         }
-        if (cache.getCacheType() == null || cache.getCacheType() == CacheType.UNKNOWN) {
+        if (cache.getType() == null || cache.getType() == CacheType.UNKNOWN) {
             Log.e(Settings.tag, "type not parsed correctly");
         }
         if (cache.getCoords() == null) {
@@ -1843,7 +1819,7 @@ public class cgBase {
      *            the type of cache, or null to include everything
      */
     static private void insertCacheType(final Parameters params, final CacheType cacheType) {
-        params.put("tx", cacheType != null ? cacheType.guid : CacheType.ALL_GUID);
+        params.put("tx", cacheType.guid);
     }
 
     public static cgSearch searchByNextPage(cgSearchThread thread, final cgSearch search, int reason, boolean showCaptcha) {
@@ -1973,7 +1949,7 @@ public class cgBase {
             Log.e(Settings.tag, "cgeoBase.searchByAny: No cache parsed");
         }
 
-        List<cgCache> cacheList = filterSearchResults(search, caches, Settings.isExcludeDisabledCaches(), false, null);
+        List<cgCache> cacheList = filterSearchResults(search, caches, Settings.isExcludeDisabledCaches(), false, cacheType);
         cgeoapplication.getInstance().addSearch(cacheList, reason);
 
         return search;
@@ -2085,7 +2061,7 @@ public class cgBase {
                     // Is there any reason to exclude the cache from the list?
                     final boolean excludeCache = (excludeDisabled && cache.isDisabled()) ||
                             (excludeMine && (cache.isOwn() || cache.isFound())) ||
-                            (cacheType != null && cacheType != cache.getCacheType());
+                            (cacheType != CacheType.ALL && cacheType != cache.getType());
                     if (!excludeCache) {
                         search.addGeocode(cache.getGeocode());
                         cacheList.add(cache);

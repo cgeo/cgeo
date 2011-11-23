@@ -204,14 +204,14 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
             cgCoord coordinate = item.getCoord();
 
-            if (StringUtils.isNotBlank(coordinate.getType()) && coordinate.getType().equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
+            if (StringUtils.isNotBlank(coordinate.getCoordType()) && coordinate.getCoordType().equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
                 Intent popupIntent = new Intent(context, cgeopopup.class);
 
                 popupIntent.putExtra("fromdetail", fromDetail);
                 popupIntent.putExtra("geocode", coordinate.getGeocode());
 
                 context.startActivity(popupIntent);
-            } else if (coordinate.getType() != null && coordinate.getType().equalsIgnoreCase("waypoint") && coordinate.getId() != null && coordinate.getId() > 0) {
+            } else if (coordinate.getCoordType() != null && coordinate.getCoordType().equalsIgnoreCase("waypoint") && coordinate.getId() != null && coordinate.getId() > 0) {
                 Intent popupIntent = new Intent(context, cgeowaypoint.class);
 
                 popupIntent.putExtra("waypoint", coordinate.getId());

@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.compatibility.Compatibility;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.maps.MapProviderFactory;
 
@@ -558,7 +559,7 @@ public class cgeoinit extends AbstractActivity {
      */
     public void backup(View view) {
         // avoid overwriting an existing backup with an empty database (can happen directly after reinstalling the app)
-        if (app.getAllStoredCachesCount(true, null, null) == 0) {
+        if (app.getAllStoredCachesCount(true, CacheType.ALL, null) == 0) {
             helpDialog(res.getString(R.string.init_backup), res.getString(R.string.init_backup_unnecessary));
             return;
         }
