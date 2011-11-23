@@ -44,6 +44,15 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
      * Test {@link cgBase#searchTrackable(String, String, String)}
      */
     @MediumTest
+    public static void testSearchTrackableNotExisting() {
+        cgTrackable tb = cgBase.searchTrackable("123456", null, null);
+        assertNotNull(tb);
+    }
+
+    /**
+     * Test {@link cgBase#searchTrackable(String, String, String)}
+     */
+    @MediumTest
     public static void testSearchTrackable() {
         cgTrackable tb = cgBase.searchTrackable("TB2J1VZ", null, null);
         // fix data
@@ -76,6 +85,15 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
         assertNotNull(search);
         assertEquals(1, search.getGeocodes().size());
         assertTrue(search.getGeocodes().contains("GC1RMM2"));
+    }
+
+    /**
+     * Test {@link cgBase#searchByGeocode(String, String, int, boolean, CancellableHandler)}
+     */
+    @MediumTest
+    public static void testSearchByGeocodeNotExisting() {
+        final cgSearch search = cgBase.searchByGeocode("GC123456", null, 0, true, null);
+        assertNull(search);
     }
 
     /**
