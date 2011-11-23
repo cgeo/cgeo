@@ -5,7 +5,6 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgeoapplication;
-import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -52,12 +51,13 @@ public class GPXImporter {
     private Resources res;
     private int listId;
     private IAbstractActivity fromActivity;
-    private boolean closeOnFinish = false;
+    private Handler importFinishedHandler;
 
-    public GPXImporter(final IAbstractActivity fromActivity, final int listId) {
+    public GPXImporter(final IAbstractActivity fromActivity, final int listId, final Handler importFinishedHandler) {
         this.listId = listId;
         this.fromActivity = fromActivity;
         res = ((Activity) fromActivity).getResources();
+        this.importFinishedHandler = importFinishedHandler;
     }
 
     /**
@@ -77,19 +77,18 @@ public class GPXImporter {
     }
 
     /**
-     * Import GPX provided via intent of import activity that instantiated this GPXImporter.
+     * Import GPX provided via intent of activity that instantiated this GPXImporter.
      */
     public void importGPX() {
-        closeOnFinish = true;
         final ContentResolver contentResolver = ((Activity) fromActivity).getContentResolver();
         final Intent intent = ((Activity) fromActivity).getIntent();
         final Uri uri = intent.getData();
 
         String mimeType = intent.getType();
-        if (mimeType == null) {
-            mimeType = contentResolver.getType(uri);
-        }
         // if mimetype can't be determined (e.g. for emulators email app), use a default
+        // contentResolver.getType(uri) doesn't help but throws exception for emulators email app
+        //   Permission Denial: reading com.android.email.provider.EmailProvider uri
+        // Google search says: there is no solution for this problem
         // TODO: check if problem occurs with gmail as well
         if (mimeType == null) {
             mimeType = "application/zip";
@@ -101,8 +100,7 @@ public class GPXImporter {
         } else if (StringUtils.equalsIgnoreCase("application/zip", mimeType)) {
             new ImportGpxZipAttachmentThread(uri, contentResolver, listId, importStepHandler, progressHandler).start();
         } else {
-            // should not happen, GPXImportActivity accepts only mime types handled above
-            closeActivity();
+            importFinished();
         }
     }
 
@@ -355,13 +353,13 @@ public class GPXImporter {
                 case IMPORT_STEP_FINISHED:
                     progress.dismiss();
                     fromActivity.helpDialog(res.getString(R.string.gpx_import_title_caches_imported), msg.arg1 + " " + res.getString(R.string.gpx_import_caches_imported));
-                    closeActivity();
+                    importFinished();
                     break;
 
                 case IMPORT_STEP_FINISHED_WITH_ERROR:
                     progress.dismiss();
                     fromActivity.helpDialog(res.getString(R.string.gpx_import_title_caches_import_failed), res.getString(msg.arg1) + "\n\n" + msg.obj);
-                    closeActivity();
+                    importFinished();
                     break;
 
                 case IMPORT_STEP_CANCEL:
@@ -371,7 +369,7 @@ public class GPXImporter {
 
                 case IMPORT_STEP_CANCELED:
                     fromActivity.showShortToast(res.getString(R.string.gpx_import_canceled));
-                    closeActivity();
+                    importFinished();
                     break;
             }
         }
@@ -386,9 +384,9 @@ public class GPXImporter {
         }
     }
 
-    protected void closeActivity() {
-        if (closeOnFinish) {
-            ((AbstractActivity) fromActivity).finish();
+    protected void importFinished() {
+        if (importFinishedHandler != null) {
+            importFinishedHandler.sendEmptyMessage(0);
         }
     }
 }
