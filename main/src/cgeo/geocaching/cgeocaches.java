@@ -2572,12 +2572,23 @@ public class cgeocaches extends AbstractListActivity {
             return;
         }
 
-        int count = cgeoapplication.getCount(search);
+        cgSearch searchToUse = search;
+
+        // apply filter settings (if there's a filter)
+        if (adapter != null) {
+            List<String> geocodes = new ArrayList<String>();
+            for (cgCache cache : adapter.getFilteredList()) {
+                geocodes.add(cache.getGeocode());
+            }
+            searchToUse = new cgSearch(geocodes);
+        }
+
+        int count = cgeoapplication.getCount(searchToUse);
         String mapTitle = title;
         if (count > 0) {
             mapTitle = title + " [" + count + "]";
         }
-        CGeoMap.startActivitySearch(this, search, mapTitle, false);
+        CGeoMap.startActivitySearch(this, searchToUse, mapTitle, false);
     }
 
     @Override

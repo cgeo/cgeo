@@ -12,6 +12,10 @@ public abstract class cgFilter {
         this.name = name;
     }
 
+    /**
+     * @param cache
+     * @return true if the cache applies (passes the criteria), false else
+     */
     abstract boolean applyFilter(cgCache cache);
 
     public void filter(List<cgCache> list) {

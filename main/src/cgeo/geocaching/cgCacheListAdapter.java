@@ -49,6 +49,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
     private static final String SEPARATOR = " · ";
     final private Resources res;
+    /** Resulting list of caches */
     final private List<cgCache> list;
     private cgCacheView holder = null;
     private LayoutInflater inflater = null;
@@ -830,5 +831,9 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
         holder.oneInfo.startAnimation(selectAnimation);
         cache.setStatusCheckedView(false);
+    }
+
+    public List<cgCache> getFilteredList() {
+        return list;
     }
 }
