@@ -84,6 +84,7 @@
   <string name="log_post">Odoslať log</string>
   <string name="log_post_rate">Odoslať log a hlasovať</string>
   <string name="log_post_no_rate">Odoslať log a nehlasovať</string>
+  <string name="log_post_not_possible">Načítanie stránky s logmi…</string>
   <string name="log_add">Pridať</string>
   <string name="log_date">Dátum</string>
   <string name="log_time">Čas</string>
@@ -288,6 +289,7 @@
   <string name="caches_drop_all_ask">Naozaj chcete zmazať všetky skrýše zo zariadenia?</string>
   <string name="caches_drop_stored">Zmazať uložené</string>
   <string name="caches_drop_progress">Odstraňovanie skrýš</string>
+  <string name="caches_drop_all_and_list">Zmazať všetky a odstrániť zoznam</string>
   <string name="caches_refresh_selected">Obnoviť vybraté</string>
   <string name="caches_refresh_all">Obnoviť všetky</string>
   <string name="caches_move_selected">Presunúť vybrané</string>
@@ -400,6 +402,7 @@
   <string name="init_restore_success">Úspešne obnovené.</string>
   <string name="init_restore_failed">Obnova zlyhala.</string>
   <string name="init_restore_running">Obnovovanie databázy skrýš…</string>
+  <string name="init_restore_confirm">Databáza je prázdna. Chcete ju obnoviť zo zálohy?</string>
   <string name="init_backup_last">Posledná dostupná záloha</string>
   <string name="init_backup_last_no">Neexistuje súbor zo zálohou.</string>
   <string name="init_mapsources">Mapové zdroje</string>
@@ -541,6 +544,7 @@
   <string name="cache_event">Dátum</string>
   <string name="cache_location">Miesto</string>
   <string name="cache_coordinates">Súradnice</string>
+  <string name="cache_coordinates_original">Pôvodné súradnice</string>
   <string name="cache_calendars">vyberte kalendár</string>
   <string name="cache_spoiler_images_title">Spoilerové obrázky</string>
   <string name="cache_spoiler_images_loading">Načítanie spoilerových obrázkov…</string>
@@ -550,6 +554,9 @@
   <string name="cache_clear_history">Vymazať históriu</string>
   <string name="cache_remove_from_history">Odstrániť z histórie</string>
   <string name="cache_license">Licencia</string>
+  <string name="cache_image">Obrázok</string>
+  <string name="cache_image_open_file">Otvoriť ako súbor</string>
+  <string name="cache_image_open_browser">Otvoriť v prehliadači</string>
 
   <!-- file list base -->
   <string name="file_searching_in">Vyhľadávanie súborov\nv</string>
@@ -570,6 +577,7 @@
   <string name="gpx_import_error_parser">Nie je v poriadku formát súboru</string>
   <string name="gpx_import_error_unexpected">Neočakávaná chyba</string>
   <string name="gpx_import_confirm">Chcete importovať GPX súbor do c:geo?</string>
+  <string name="gpx_import_canceled">Import GPX bol zrušený</string>      
 
   <!-- map file select -->
   <string name="map_file_select_title">Výber mapového súboru</string>
@@ -867,4 +875,11 @@
   <string name="about_twitter">Chcete, aby <b>c:geo</b> napísalo na váš Twitter vždy keď zapíšete nájdenie skrýše?</string>
   <string name="about_auth_1">Pomocou nasledujúceho procesu môžete aplikácii <b>c:geo</b> umožniť odosielanie príspevkov na váš Twitter.  </string>
   <string name="about_auth_2">Ťuknutím na tlačidlo „Zahájiť autorizáciu“ celý proces začne. Tento proces otvorí webovú stránku Twitteru, kde sa sa prihlásite a tlačidlom „Authorize app“ umožníte aplikácii <b>c:geo</b> prístup k vášmu Twitter účtu. Potom čo ťuknete na „Authorize app“, Twitter vám pridelí PIN kód. Tento kód skopírujte a vložte do aplikácie <b>c:geo</b>. A potvrďte. To je všetko.</string>
+  
+  <!-- go4cache -->
+  <string name="go4cache_looking_around">Prehľadávanie okolia</string>
+  <string name="go4cache_tweeting">Posielanie tweetov</string>
+  <string name="go4cache_heading_to">Smerovanie k</string>
+  <string name="go4cache_minutes">Minút</string>
+      
 </resources>
