@@ -151,4 +151,14 @@ public final class BaseUtils {
         return String.valueOf(chars, 0, resultSize);
     }
 
+    /**
+     * Quick and naive check for possible html-content of a string.
+     *
+     * @param str
+     * @return True, if <code>str</code> could contain html
+     */
+    public static boolean containsHtml(final String str) {
+        return str.indexOf('<') != -1 || str.indexOf('&') != -1;
+    }
+
 }

@@ -663,7 +663,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             }
 
             // load cache details
-            Intent cachesIntent = new Intent(getContext(), cgeodetail.class);
+            Intent cachesIntent = new Intent(getContext(), CacheDetailActivity.class);
             cachesIntent.putExtra("geocode", geocode);
             cachesIntent.putExtra("name", name);
             getContext().startActivity(cachesIntent);

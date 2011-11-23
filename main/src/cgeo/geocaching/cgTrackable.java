@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import android.text.Html;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -174,4 +176,16 @@ public class cgTrackable implements ILogable {
         this.logs = logs;
     }
 
+    @Override
+    public String toString() {
+        if (null != name) {
+            return Html.fromHtml(name).toString();
+        }
+
+        if (guid != null) {
+            return guid;
+        }
+
+        return "???";
+    }
 }

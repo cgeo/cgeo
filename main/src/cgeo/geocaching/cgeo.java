@@ -309,7 +309,7 @@ public class cgeo extends AbstractActivity {
                 String host = "http://coord.info/";
                 if (scan.toLowerCase().startsWith(host)) {
                     String geocode = scan.substring(host.length()).trim();
-                    cgeodetail.startActivity(this, geocode);
+                    CacheDetailActivity.startActivity(this, geocode);
                 }
                 else {
                     showToast(res.getString(R.string.unknown_scan));
