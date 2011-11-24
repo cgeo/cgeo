@@ -147,7 +147,15 @@
 			<intent-filter>
 				<action android:name="cgeo.geocaching.CGEOCACHES"/>
 			</intent-filter>
-		</activity>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:mimeType="text/xml" />
+                <data android:mimeType="application/xml" />
+                <data android:mimeType="application/zip" />
+            </intent-filter>
+        </activity>		    		
 		<activity
 			android:name=".maps.google.GoogleMapActivity"
 			android:label="@string/app_name"
@@ -284,18 +292,6 @@
 				<action android:name="cgeo.geocaching.CGEOGPXES"/>
 			</intent-filter>
     	</activity>
-        <activity
-            android:name=".GPXImportActivity"
-            android:label="@string/app_name"
-            android:configChanges="keyboardHidden|orientation" >
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data android:mimeType="text/xml" />
-                <data android:mimeType="application/xml" />
-            </intent-filter>
-        </activity>
 		<activity
 			android:name=".cgSelectMapfile"
 			android:label="@string/app_name"

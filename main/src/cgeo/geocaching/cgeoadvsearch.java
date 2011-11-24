@@ -143,10 +143,6 @@ public class cgeoadvsearch extends AbstractActivity {
     private void init() {
         Settings.getLogin();
 
-        if (Settings.getCacheType() != null && !cgBase.cacheTypesInv.containsKey(Settings.getCacheType())) {
-            Settings.setCacheType(null);
-        }
-
         if (geo == null) {
             geo = app.startGeo(this, geoUpdate, 0, 0);
         }

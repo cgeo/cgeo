@@ -49,6 +49,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
     private static final String SEPARATOR = " · ";
     final private Resources res;
+    /** Resulting list of caches */
     final private List<cgCache> list;
     private cgCacheView holder = null;
     private LayoutInflater inflater = null;
@@ -82,7 +83,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         pixelDensity = metrics.density;
 
-        for (final CacheType cacheType : cgBase.cacheTypesInv.keySet()) {
+        for (final CacheType cacheType : CacheType.values()) {
             gcIconDrawables.put(cacheType, activity.getResources().getDrawable(cgBase.getCacheIcon(cacheType)));
         }
 
@@ -432,8 +433,8 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         }
 
         holder.text.setText(cache.getNameSp(), TextView.BufferType.SPANNABLE);
-        if (gcIconDrawables.containsKey(cache.getCacheType())) { // cache icon
-            holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(cache.getCacheType()), null, null, null);
+        if (gcIconDrawables.containsKey(cache.getType())) { // cache icon
+            holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(cache.getType()), null, null, null);
         } else { // unknown cache type, "mystery" icon
             holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(CacheType.MYSTERY), null, null, null);
         }
@@ -573,7 +574,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
                 if (cacheInfo.length() > 0) {
                     cacheInfo.append(SEPARATOR);
                 }
-                cacheInfo.append(res.getString(cache.getSize().stringId));
+                cacheInfo.append(cache.getSize().getL10n());
             } else if (cache.isEventCache() && cache.getHiddenDate() != null) {
                 if (cacheInfo.length() > 0) {
                     cacheInfo.append(SEPARATOR);
@@ -830,5 +831,9 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
         holder.oneInfo.startAnimation(selectAnimation);
         cache.setStatusCheckedView(false);
+    }
+
+    public List<cgCache> getFilteredList() {
+        return list;
     }
 }

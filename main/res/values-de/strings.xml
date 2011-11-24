@@ -84,7 +84,7 @@
   <string name="log_post">Loggen</string>
   <string name="log_post_rate">Loggen &amp; bewerten</string>
   <string name="log_post_no_rate">Loggen ohne Bewertung</string>
-  <string name="log_post_not_possible">Loggen nicht möglich</string>
+  <string name="log_post_not_possible">Lade Log-Seite…</string>
   <string name="log_add">Hinzufügen</string>
   <string name="log_date">Datum</string>
   <string name="log_time">Uhrzeit</string>

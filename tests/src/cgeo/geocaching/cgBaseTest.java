@@ -32,7 +32,7 @@ public class cgBaseTest extends AndroidTestCase {
             cgCacheWrap caches = cgBase.parseCacheFromText(cache.getData(), 0, null);
             cgCache cacheParsed = caches.cacheList.get(0);
             Assert.assertEquals(cache.getGeocode(), cacheParsed.getGeocode());
-            Assert.assertTrue(cache.getCacheType() == cacheParsed.getCacheType());
+            Assert.assertTrue(cache.getType() == cacheParsed.getType());
             Assert.assertEquals(cache.getOwner(), cacheParsed.getOwner());
             Assert.assertEquals(cache.getDifficulty(), cacheParsed.getDifficulty());
             Assert.assertEquals(cache.getTerrain(), cacheParsed.getTerrain());

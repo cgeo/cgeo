@@ -70,7 +70,7 @@ public class cgGPXListAdapter extends ArrayAdapter<File> {
         // tap on item
         @Override
         public void onClick(View view) {
-            (new GPXImporter(parent, parent.getListId())).importGPX(file);
+            (new GPXImporter(parent, parent.getListId(), null)).importGPX(file);
         }
     }
 }

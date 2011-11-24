@@ -1,7 +1,5 @@
 package cgeo.geocaching.geopoint;
 
-import cgeo.geocaching.cgBase;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,12 +35,12 @@ public final class DistanceParser {
             return value;
         }
         if (unit.equals("yd")) {
-            return value * cgBase.yards2km;
+            return value * IConversion.yards2km;
         }
         if (unit.equals("mi")) {
-            return value * cgBase.miles2km;
+            return value * IConversion.miles2km;
         }
-        return value * cgBase.feet2km;
+        return value * IConversion.feet2km;
     }
 
 }

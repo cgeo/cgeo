@@ -1,8 +1,8 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
@@ -24,7 +24,7 @@ public class ScaleOverlay implements GeneralOverlay {
     private Paint scale = null;
     private Paint scaleShadow = null;
     private BlurMaskFilter blur = null;
-    private float pixelDensity = 0L;
+    private float pixelDensity = 0;
     private double pixels = 0d;
     private int bottom = 0;
     private double distance = 0d;
@@ -65,6 +65,7 @@ public class ScaleOverlay implements GeneralOverlay {
         distance = leftCoords.distanceTo(rightCoords) * SCALE_WIDTH_FACTOR;
         distanceRound = 0d;
 
+        //FIXME: merge with getHumanDistance()
         if (Settings.isUseMetricUnits()) {
             if (distance > 100) { // 100+ km > 1xx km
                 distanceRound = Math.floor(distance / 100) * 100;
@@ -85,7 +86,7 @@ public class ScaleOverlay implements GeneralOverlay {
                 units = "m";
             }
         } else {
-            distance /= cgBase.miles2km;
+            distance /= IConversion.miles2km;
 
             if (distance > 100) { // 100+ mi > 1xx mi
                 distanceRound = Math.floor(distance / 100) * 100;

@@ -102,7 +102,7 @@ public class StaticMapsProvider {
     }
 
     private static String getMarkerUrl(final cgCache cache) {
-        String type = cache.getCacheType().id;
+        String type = cache.getType().id;
         if (cache.isFound()) {
             type += "_found";
         } else if (cache.isDisabled()) {

@@ -84,7 +84,7 @@
   <string name="log_post">Post log</string>
   <string name="log_post_rate">Post log &amp; rate</string>
   <string name="log_post_no_rate">Post log &amp; do not rate</string>
-  <string name="log_post_not_possible">Logging not possible</string>
+  <string name="log_post_not_possible">Loading log page…</string>
   <string name="log_add">Add</string>
   <string name="log_date">Date</string>
   <string name="log_time">Time</string>
@@ -919,7 +919,7 @@
     · <a href="http://www.jaytech.cz/">Jan Žatecký</a> (graphic)\n
     · <a href="http://joachim-wilke.de/">JoWi24</a> (code)\n
     · <a href="http://github.com/koem">Karsten Priegnitz</a> (code, artwork computation)\n
-    · Lineflyer (tester)\n
+    · <a href="http://www.geocaching.com/email/?guid=d11a3e3d-7db0-4d43-87f2-7893238844a6">Lineflyer</a> (tester)\n
     · Ludovic Valente (localization FR)\n
     · MichielK (code, loc. NL)\n
     · mucek4 (code, open source project leader)\n
