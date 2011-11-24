@@ -29,6 +29,7 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -69,6 +70,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -1712,14 +1714,20 @@ public class CacheDetailActivity extends AbstractActivity {
             showDesc.setOnClickListener(null);
             view.findViewById(R.id.loading).setVisibility(View.VISIBLE);
 
-            new LoadLongDescriptionThread(new LoadLongDescriptionHandler()).start();
+            new LoadLongDescriptionTask().execute((Void) null);
         }
 
-        private class LoadLongDescriptionHandler extends Handler {
-            @Override
-            public void handleMessage(Message msg) {
-                Spanned longDesc = (Spanned) msg.obj;
+        private class LoadLongDescriptionTask extends AsyncTask<Void, Void, Void> {
+            private Spanned longDesc;
 
+            @Override
+            protected Void doInBackground(Void... params) {
+                longDesc = Html.fromHtml(cache.getDescription().trim(), new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), true, cache.getReason(), false), new UnknownTagsHandler());
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void param) {
                 if (longDesc != null) {
                     TextView descView = (TextView) view.findViewById(R.id.longdesc);
                     if (StringUtils.isNotBlank(cache.getDescription())) {
@@ -1742,21 +1750,6 @@ public class CacheDetailActivity extends AbstractActivity {
                 }
 
                 view.findViewById(R.id.loading).setVisibility(View.GONE);
-            }
-        }
-
-        private class LoadLongDescriptionThread extends Thread {
-            private Handler handler = null;
-
-            public LoadLongDescriptionThread(Handler handlerIn) {
-                handler = handlerIn;
-            }
-
-            @Override
-            public void run() {
-                Spanned longDesc = Html.fromHtml(cache.getDescription().trim(), new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), true, cache.getReason(), false), new UnknownTagsHandler());
-
-                handler.obtainMessage(0, longDesc).sendToTarget();
             }
         }
 
@@ -1933,147 +1926,170 @@ public class CacheDetailActivity extends AbstractActivity {
 
             view = (ScrollView) getLayoutInflater().inflate(R.layout.cacheview_logs, null);
 
-            TextView logCounterView = (TextView) view.findViewById(R.id.log_count);
-            int logCounter = 0;
-            if (cache != null && cache.getLogCounts() != null) {
-                final StringBuilder text = new StringBuilder();
-                text.append(res.getString(R.string.cache_log_types));
-                text.append(": ");
-
-                // sort the log counts by type id ascending. that way the FOUND, DNF log types are the first and most visible ones
-                List<Entry<Integer, Integer>> sortedLogCounts = new ArrayList<Entry<Integer, Integer>>();
-                sortedLogCounts.addAll(cache.getLogCounts().entrySet());
-                Collections.sort(sortedLogCounts, new Comparator<Entry<Integer, Integer>>() {
-
-                    @Override
-                    public int compare(Entry<Integer, Integer> logCountItem1,
-                            Entry<Integer, Integer> logCountItem2) {
-                        return logCountItem1.getKey().compareTo(logCountItem2.getKey());
-                    }
-                });
-                for (Entry<Integer, Integer> pair : sortedLogCounts) {
-                    int logTypeId = pair.getKey().intValue();
-                    String logTypeLabel = cgBase.logTypes1.get(logTypeId);
-                    // it may happen that the label is unknown -> then avoid any output for this type
-                    if (logTypeLabel != null) {
-                        if (logCounter > 0) {
-                            text.append(", ");
-                        }
-                        text.append(pair.getValue().intValue());
-                        text.append("× ");
-                        text.append(logTypeLabel);
-                    }
-                    logCounter++;
-                }
-                logCounterView.setText(text.toString());
-            }
-            // it may happen, that the logCounts map is available, but every log type has zero counts,
-            // therefore check again for the number of counted logs
-            if (logCounter > 0) {
-                logCounterView.setVisibility(View.VISIBLE);
-            } else {
-                logCounterView.setVisibility(View.GONE);
-            }
-
-            // cache logs
-            LinearLayout logListView = (LinearLayout) view.findViewById(R.id.log_list);
-
-            RelativeLayout rowView;
-
-            if (cache != null && cache.getLogs() != null) {
-                for (cgLog log : cache.getLogs()) {
-                    rowView = (RelativeLayout) getLayoutInflater().inflate(R.layout.log_item, null);
-
-                    if (log.date > 0) {
-                        ((TextView) rowView.findViewById(R.id.added)).setText(cgBase.formatShortDate(log.date));
-                    } else {
-                        ((TextView) rowView.findViewById(R.id.added)).setVisibility(View.GONE);
-                    }
-
-                    if (cgBase.logTypes1.containsKey(log.type)) {
-                        ((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(log.type));
-                    } else {
-                        ((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(4)); // note if type is unknown
-                    }
-                    ((TextView) rowView.findViewById(R.id.author)).setText(StringEscapeUtils.unescapeHtml4(log.author));
-
-                    if (log.found == -1) {
-                        ((TextView) rowView.findViewById(R.id.count)).setVisibility(View.GONE);
-                    } else if (log.found == 0) {
-                        ((TextView) rowView.findViewById(R.id.count)).setText(res.getString(R.string.cache_count_no));
-                    } else if (log.found == 1) {
-                        ((TextView) rowView.findViewById(R.id.count)).setText(res.getString(R.string.cache_count_one));
-                    } else {
-                        ((TextView) rowView.findViewById(R.id.count)).setText(log.found + " " + res.getString(R.string.cache_count_more));
-                    }
-                    // avoid parsing HTML if not necessary
-                    if (BaseUtils.containsHtml(log.log)) {
-                        ((TextView) rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log, new HtmlImage(CacheDetailActivity.this, null, false, cache.getReason(), false), null), TextView.BufferType.SPANNABLE);
-                    }
-                    else {
-                        ((TextView) rowView.findViewById(R.id.log)).setText(log.log);
-                    }
-                    // add LogImages
-                    LinearLayout logLayout = (LinearLayout) rowView.findViewById(R.id.log_layout);
-
-                    if (CollectionUtils.isNotEmpty(log.logImages)) {
-
-                        final ArrayList<cgImage> logImages = new ArrayList<cgImage>(log.logImages);
-
-                        final View.OnClickListener listener = new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                cgeoimages.startActivityLogImages(CacheDetailActivity.this, cache.getGeocode(), logImages);
-                            }
-                        };
-
-                        ArrayList<String> titles = new ArrayList<String>();
-                        for (int i_img_cnt = 0; i_img_cnt < log.logImages.size(); i_img_cnt++) {
-                            String img_title = log.logImages.get(i_img_cnt).getTitle();
-                            if (!StringUtils.isBlank(img_title)) {
-                                titles.add(img_title);
-                            }
-                        }
-                        if (titles.isEmpty()) {
-                            titles.add(res.getString(R.string.cache_log_image_default_title));
-                        }
-
-                        LinearLayout log_imgView = (LinearLayout) getLayoutInflater().inflate(R.layout.log_img, null);
-                        TextView log_img_title = (TextView) log_imgView.findViewById(R.id.title);
-                        log_img_title.setText(StringUtils.join(titles.toArray(new String[titles.size()]), ", "));
-                        log_img_title.setOnClickListener(listener);
-                        logLayout.addView(log_imgView);
-                    }
-
-                    // Add colored mark
-                    final ImageView logMark = (ImageView) rowView.findViewById(R.id.log_mark);
-                    if (log.type == cgBase.LOG_FOUND_IT
-                            || log.type == cgBase.LOG_WEBCAM_PHOTO_TAKEN
-                            || log.type == cgBase.LOG_ATTENDED) {
-                        logMark.setImageResource(R.drawable.mark_green);
-                    } else if (log.type == cgBase.LOG_PUBLISH_LISTING
-                            || log.type == cgBase.LOG_ENABLE_LISTING
-                            || log.type == cgBase.LOG_OWNER_MAINTENANCE) {
-                        logMark.setImageResource(R.drawable.mark_green_more);
-                    } else if (log.type == cgBase.LOG_DIDNT_FIND_IT
-                            || log.type == cgBase.LOG_NEEDS_MAINTENANCE
-                            || log.type == cgBase.LOG_NEEDS_ARCHIVE) {
-                        logMark.setImageResource(R.drawable.mark_red);
-                    } else if (log.type == cgBase.LOG_TEMP_DISABLE_LISTING
-                            || log.type == cgBase.LOG_ARCHIVE) {
-                        logMark.setImageResource(R.drawable.mark_red_more);
-                    } else {
-                        logMark.setVisibility(View.GONE);
-                    }
-
-                    ((TextView) rowView.findViewById(R.id.author)).setOnClickListener(new UserActionsClickListener());
-                    ((TextView) logLayout.findViewById(R.id.log)).setOnClickListener(new DecryptLogClickListener());
-
-                    logListView.addView(rowView);
-                }
-            }
+            new LogInflaterTask().execute((Void) null);
 
             return view;
+        }
+
+        private class LogInflaterTask extends AsyncTask<Void, Void, Void> {
+            private List<RelativeLayout> loglist = new LinkedList<RelativeLayout>();
+            private String logCounter;
+            private Boolean showLogCounter = false;
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                // log count
+                if (cache != null && cache.getLogCounts() != null) {
+                    final StringBuilder text = new StringBuilder();
+                    text.append(res.getString(R.string.cache_log_types));
+                    text.append(": ");
+
+                    // sort the log counts by type id ascending. that way the FOUND, DNF log types are the first and most visible ones
+                    List<Entry<Integer, Integer>> sortedLogCounts = new ArrayList<Entry<Integer, Integer>>();
+                    sortedLogCounts.addAll(cache.getLogCounts().entrySet());
+                    Collections.sort(sortedLogCounts, new Comparator<Entry<Integer, Integer>>() {
+
+                        @Override
+                        public int compare(Entry<Integer, Integer> logCountItem1,
+                                Entry<Integer, Integer> logCountItem2) {
+                            return logCountItem1.getKey().compareTo(logCountItem2.getKey());
+                        }
+                    });
+                    for (Entry<Integer, Integer> pair : sortedLogCounts) {
+                        int logTypeId = pair.getKey().intValue();
+                        String logTypeLabel = cgBase.logTypes1.get(logTypeId);
+                        // it may happen that the label is unknown -> then avoid any output for this type
+                        if (logTypeLabel != null) {
+                            if (showLogCounter) {
+                                text.append(", ");
+                            }
+                            text.append(pair.getValue().intValue());
+                            text.append("× ");
+                            text.append(logTypeLabel);
+                        }
+                        showLogCounter = true;
+                    }
+                    logCounter = text.toString();
+                }
+
+                // cache logs
+                RelativeLayout rowView;
+
+                if (cache != null && cache.getLogs() != null) {
+                    for (cgLog log : cache.getLogs()) {
+                        rowView = (RelativeLayout) getLayoutInflater().inflate(R.layout.log_item, null);
+
+                        if (log.date > 0) {
+                            ((TextView) rowView.findViewById(R.id.added)).setText(cgBase.formatShortDate(log.date));
+                        } else {
+                            ((TextView) rowView.findViewById(R.id.added)).setVisibility(View.GONE);
+                        }
+
+                        if (cgBase.logTypes1.containsKey(log.type)) {
+                            ((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(log.type));
+                        } else {
+                            ((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(4)); // note if type is unknown
+                        }
+                        ((TextView) rowView.findViewById(R.id.author)).setText(StringEscapeUtils.unescapeHtml4(log.author));
+
+                        if (log.found == -1) {
+                            ((TextView) rowView.findViewById(R.id.count)).setVisibility(View.GONE);
+                        } else if (log.found == 0) {
+                            ((TextView) rowView.findViewById(R.id.count)).setText(res.getString(R.string.cache_count_no));
+                        } else if (log.found == 1) {
+                            ((TextView) rowView.findViewById(R.id.count)).setText(res.getString(R.string.cache_count_one));
+                        } else {
+                            ((TextView) rowView.findViewById(R.id.count)).setText(log.found + " " + res.getString(R.string.cache_count_more));
+                        }
+                        // avoid parsing HTML if not necessary
+                        if (BaseUtils.containsHtml(log.log)) {
+                            ((TextView) rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log, new HtmlImage(CacheDetailActivity.this, null, false, cache.getReason(), false), null), TextView.BufferType.SPANNABLE);
+                        }
+                        else {
+                            ((TextView) rowView.findViewById(R.id.log)).setText(log.log);
+                        }
+                        // add LogImages
+                        LinearLayout logLayout = (LinearLayout) rowView.findViewById(R.id.log_layout);
+
+                        if (CollectionUtils.isNotEmpty(log.logImages)) {
+
+                            final ArrayList<cgImage> logImages = new ArrayList<cgImage>(log.logImages);
+
+                            final View.OnClickListener listener = new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    cgeoimages.startActivityLogImages(CacheDetailActivity.this, cache.getGeocode(), logImages);
+                                }
+                            };
+
+                            ArrayList<String> titles = new ArrayList<String>();
+                            for (int i_img_cnt = 0; i_img_cnt < log.logImages.size(); i_img_cnt++) {
+                                String img_title = log.logImages.get(i_img_cnt).getTitle();
+                                if (!StringUtils.isBlank(img_title)) {
+                                    titles.add(img_title);
+                                }
+                            }
+                            if (titles.isEmpty()) {
+                                titles.add(res.getString(R.string.cache_log_image_default_title));
+                            }
+
+                            LinearLayout log_imgView = (LinearLayout) getLayoutInflater().inflate(R.layout.log_img, null);
+                            TextView log_img_title = (TextView) log_imgView.findViewById(R.id.title);
+                            log_img_title.setText(StringUtils.join(titles.toArray(new String[titles.size()]), ", "));
+                            log_img_title.setOnClickListener(listener);
+                            logLayout.addView(log_imgView);
+                        }
+
+                        // Add colored mark
+                        final ImageView logMark = (ImageView) rowView.findViewById(R.id.log_mark);
+                        if (log.type == cgBase.LOG_FOUND_IT
+                                || log.type == cgBase.LOG_WEBCAM_PHOTO_TAKEN
+                                || log.type == cgBase.LOG_ATTENDED) {
+                            logMark.setImageResource(R.drawable.mark_green);
+                        } else if (log.type == cgBase.LOG_PUBLISH_LISTING
+                                || log.type == cgBase.LOG_ENABLE_LISTING
+                                || log.type == cgBase.LOG_OWNER_MAINTENANCE) {
+                            logMark.setImageResource(R.drawable.mark_green_more);
+                        } else if (log.type == cgBase.LOG_DIDNT_FIND_IT
+                                || log.type == cgBase.LOG_NEEDS_MAINTENANCE
+                                || log.type == cgBase.LOG_NEEDS_ARCHIVE) {
+                            logMark.setImageResource(R.drawable.mark_red);
+                        } else if (log.type == cgBase.LOG_TEMP_DISABLE_LISTING
+                                || log.type == cgBase.LOG_ARCHIVE) {
+                            logMark.setImageResource(R.drawable.mark_red_more);
+                        } else {
+                            logMark.setVisibility(View.GONE);
+                        }
+
+                        ((TextView) rowView.findViewById(R.id.author)).setOnClickListener(new UserActionsClickListener());
+                        ((TextView) logLayout.findViewById(R.id.log)).setOnClickListener(new DecryptLogClickListener());
+
+                        loglist.add(rowView);
+                    }
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void param) {
+                // hide loader
+                view.findViewById(R.id.loading).setVisibility(View.GONE);
+
+                // show log count
+                TextView logCounterView = (TextView) view.findViewById(R.id.log_count);
+                if (showLogCounter) {
+                    logCounterView.setText(logCounter);
+                    logCounterView.setVisibility(View.VISIBLE);
+                }
+
+                // show logs
+                LinearLayout loglistView = (LinearLayout) view.findViewById(R.id.log_list);
+                for (RelativeLayout log : loglist) {
+                    loglistView.addView(log);
+                }
+                loglistView.setVisibility(View.VISIBLE);
+            }
         }
 
         private class DecryptLogClickListener implements View.OnClickListener {
