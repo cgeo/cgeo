@@ -9,6 +9,7 @@ import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.filter.cgFilter;
 import cgeo.geocaching.filter.cgFilterBySize;
 import cgeo.geocaching.filter.cgFilterByTrackables;
@@ -524,6 +525,14 @@ public class cgeocaches extends AbstractListActivity {
             }
         }
     };
+
+    private Handler importGpxAttachementFinishedHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            refreshCurrentList();
+        }
+    };
+
     private ContextMenuInfo lastMenuInfo;
     /**
      * the navigation menu item for the cache list (not the context menu!), or <code>null</code>
@@ -560,6 +569,12 @@ public class cgeocaches extends AbstractListActivity {
             keyword = extras.getString("keyword");
             address = extras.getString("address");
             username = extras.getString("username");
+        }
+        if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
+            type = CacheListType.OFFLINE;
+            if (coords == null) {
+                coords = new Geopoint(0, 0);
+            }
         }
 
         init();
@@ -683,6 +698,29 @@ public class cgeocaches extends AbstractListActivity {
                 break;
         }
         prepareFilterBar();
+
+        if (Intent.ACTION_VIEW.equals(getIntent().getAction())) {
+            importGpxAttachement();
+        }
+    }
+
+    private void importGpxAttachement() {
+        new AlertDialog.Builder(this)
+                .setTitle(res.getString(R.string.gpx_import_title))
+                .setMessage(res.getString(R.string.gpx_import_confirm))
+                .setCancelable(false)
+                .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        new GPXImporter(cgeocaches.this, listId, importGpxAttachementFinishedHandler).importGPX();
+                    }
+                })
+                .setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                })
+                .create()
+                .show();
     }
 
     @Override
@@ -1773,11 +1811,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            if (coords != null) {
-                search = cgBase.searchByOffline(coords, Settings.getCacheType(), listId);
-            } else {
-                search = cgBase.searchByOffline(null, Settings.getCacheType(), cgList.STANDARD_LIST_ID);
-            }
+            search = cgBase.searchByOffline(coords, Settings.getCacheType(), listId);
             handler.sendMessage(new Message());
         }
     }
