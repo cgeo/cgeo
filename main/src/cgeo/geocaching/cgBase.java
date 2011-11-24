@@ -15,6 +15,7 @@ import cgeo.geocaching.gcvote.GCVoteRating;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
+import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.BaseUtils;
@@ -125,12 +126,6 @@ public class cgBase {
     }
     private final static SimpleDateFormat dateTbIn1 = new SimpleDateFormat("EEEEE, dd MMMMM yyyy", Locale.ENGLISH); // Saturday, 28 March 2009
     private final static SimpleDateFormat dateTbIn2 = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
-    public static final float miles2km = 1.609344f;
-    public static final float feet2km = 0.0003048f;
-    public static final float yards2km = 0.0009144f;
-    public static final double deg2rad = Math.PI / 180;
-    public static final double rad2deg = 180 / Math.PI;
-    public static final float erad = 6371.0f;
     public static String version = null;
 
     /**
@@ -1796,7 +1791,7 @@ public class cgBase {
                 return String.format("%.2f", Double.valueOf(Math.round(distance * 1000.0 * 100.0) / 100.0)) + " m";
             }
         } else {
-            final Float miles = distance / miles2km;
+            final Float miles = distance / IConversion.miles2km;
             if (distance > 100) {
                 return String.format("%.0f", Double.valueOf(Math.round(miles))) + " mi";
             } else if (distance > 0.5) {
