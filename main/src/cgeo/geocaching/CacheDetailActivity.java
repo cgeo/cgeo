@@ -2157,7 +2157,9 @@ public class CacheDetailActivity extends AbstractActivity {
                     waypointView = (LinearLayout) getLayoutInflater().inflate(R.layout.waypoint_item, null);
 
                     final List<String> infoTextList = new ArrayList<String>(3);
-                    infoTextList.add(cgBase.waypointTypes.get(wpt.getWaypointType()));
+                    if (StringUtils.isNotBlank(cgBase.waypointTypes.get(wpt.getWaypointType()))) {
+                        infoTextList.add(cgBase.waypointTypes.get(wpt.getWaypointType()));
+                    }
                     if ("OWN".equalsIgnoreCase(wpt.getPrefix())) {
                         infoTextList.add(res.getString(R.string.waypoint_custom));
                     } else {
