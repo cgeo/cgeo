@@ -33,7 +33,8 @@ public class HtmlImage implements Html.ImageGetter {
             "gccounter/imgcount.php",
             "flagcounter.com",
             "compteur-blog.net",
-            "counter.digits.com"
+            "counter.digits.com",
+            "andyhoppe"
     };
     final private Context context;
     final private String geocode;
