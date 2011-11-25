@@ -22,6 +22,9 @@ import android.view.Display;
 import android.view.WindowManager;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Date;
 
 public class HtmlImage implements Html.ImageGetter {
@@ -181,26 +184,35 @@ public class HtmlImage implements Html.ImageGetter {
     private Bitmap loadCachedImage(final File file) {
         if (file.exists()) {
             if (reason > 0 || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000))) {
-                setSampleSize(file.length());
+                setSampleSize(file);
                 return BitmapFactory.decodeFile(file.getPath(), bfOptions);
             }
         }
         return null;
     }
 
-    private void setSampleSize(final long imageSize) {
-        // large images will be downscaled on input to save memory
-        if (imageSize > (6 * 1024 * 1024)) {
-            bfOptions.inSampleSize = 48;
-        } else if (imageSize > (4 * 1024 * 1024)) {
-            bfOptions.inSampleSize = 16;
-        } else if (imageSize > (2 * 1024 * 1024)) {
-            bfOptions.inSampleSize = 10;
-        } else if (imageSize > (1 * 1024 * 1024)) {
-            bfOptions.inSampleSize = 6;
-        } else if (imageSize > (0.5 * 1024 * 1024)) {
-            bfOptions.inSampleSize = 2;
+    private void setSampleSize(final File file) {
+        //Decode image size only
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            BitmapFactory.decodeStream(fis, null, options);
+            fis.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
+
+        int scale = 1;
+        if (options.outHeight > maxHeight || options.outWidth > maxWidth) {
+            scale = Math.max(options.outHeight / maxHeight, options.outWidth / maxWidth);
+        }
+        bfOptions.inSampleSize = scale;
     }
 
     private static boolean isCounter(final String url) {
