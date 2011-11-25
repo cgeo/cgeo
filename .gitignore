@@ -5,6 +5,8 @@
 /main/res/values/mapsapikey.xml
 /tests/bin/
 /tests/gen/
+/tests/local.properties
+/tests/private.properties
 /main/project/localization/*.missing
 /main/project/attributes/drawable/*
 /main/project/attributes/iconlist1res.html
