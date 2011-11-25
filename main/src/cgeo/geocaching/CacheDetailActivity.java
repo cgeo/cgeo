@@ -1248,34 +1248,54 @@ public class CacheDetailActivity extends AbstractActivity {
         private class StoreCacheHandler extends CancellableHandler {
             @Override
             public void handleRegularMessage(Message msg) {
-                storeThread = null;
+                if (cgBase.UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
+                    updateStatusMsg((String) msg.obj);
+                } else {
+                    storeThread = null;
 
-                try {
-                    cache = app.getCache(search); // reload cache details
-                } catch (Exception e) {
-                    showToast(res.getString(R.string.err_store_failed));
+                    try {
+                        cache = app.getCache(search); // reload cache details
+                    } catch (Exception e) {
+                        showToast(res.getString(R.string.err_store_failed));
 
-                    Log.e(Settings.tag, "CacheDetailActivity.storeCacheHandler: " + e.toString());
+                        Log.e(Settings.tag, "CacheDetailActivity.storeCacheHandler: " + e.toString());
+                    }
+
+                    CacheDetailActivity.this.notifyDataSetChanged();
                 }
+            }
 
-                CacheDetailActivity.this.notifyDataSetChanged();
+            private void updateStatusMsg(final String msg) {
+                progress.setMessage(res.getString(R.string.cache_dialog_offline_save_message)
+                        + "\n\n"
+                        + msg);
             }
         }
 
         private class RefreshCacheHandler extends CancellableHandler {
             @Override
             public void handleRegularMessage(Message msg) {
-                refreshThread = null;
+                if (cgBase.UPDATE_LOAD_PROGRESS_DETAIL == msg.what && msg.obj instanceof String) {
+                    updateStatusMsg((String) msg.obj);
+                } else {
+                    refreshThread = null;
 
-                try {
-                    cache = app.getCache(search); // reload cache details
-                } catch (Exception e) {
-                    showToast(res.getString(R.string.err_refresh_failed));
+                    try {
+                        cache = app.getCache(search); // reload cache details
+                    } catch (Exception e) {
+                        showToast(res.getString(R.string.err_refresh_failed));
 
-                    Log.e(Settings.tag, "CacheDetailActivity.refreshCacheHandler: " + e.toString());
+                        Log.e(Settings.tag, "CacheDetailActivity.refreshCacheHandler: " + e.toString());
+                    }
+
+                    CacheDetailActivity.this.notifyDataSetChanged();
                 }
+            }
 
-                CacheDetailActivity.this.notifyDataSetChanged();
+            private void updateStatusMsg(final String msg) {
+                progress.setMessage(res.getString(R.string.cache_dialog_refresh_message)
+                        + "\n\n"
+                        + msg);
             }
         }
 
