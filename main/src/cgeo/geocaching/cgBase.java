@@ -2746,7 +2746,7 @@ public class cgBase {
                     cache = origCache;
                 }
             } else if (StringUtils.isNotBlank(geocode)) {
-                final cgSearch search = searchByGeocode(geocode, null, listId, false, handler);
+                final cgSearch search = searchByGeocode(geocode, null, listId, false, null);
                 cache = app.getCache(search);
             } else {
                 cache = null;
