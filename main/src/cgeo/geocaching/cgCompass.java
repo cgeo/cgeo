@@ -21,10 +21,22 @@ public class cgCompass extends View {
     private Bitmap compassRose = null;
     private Bitmap compassArrow = null;
     private Bitmap compassOverlay = null;
-    private double azimuth = 0.0;
-    private double heading = 0.0;
-    private double cacheHeading = 0.0;
-    private double northHeading = 0.0;
+    /**
+     * North direction currently SHOWN on compass (not measured)
+     */
+    private double azimuthShown = 0.0;
+    /**
+     * cache direction currently SHOWN on compass (not measured)
+     */
+    private double cacheHeadingShown = 0.0;
+    /**
+     * cache direction measured from device, or 0.0
+     */
+    private double cacheHeadingMeasured = 0.0;
+    /**
+     * North direction measured from device, or 0.0
+     */
+    private double northMeasured = 0.0;
     private PaintFlagsDrawFilter setfil = null;
     private PaintFlagsDrawFilter remfil = null;
     private int compassUnderlayWidth = 0;
@@ -109,12 +121,16 @@ public class cgCompass extends View {
         if (initialDisplay) {
             // We will force the compass to move brutally if this is the first
             // update since it is visible.
-            azimuth = northHeadingIn;
-            heading = cacheHeadingIn;
-            initialDisplay = false;
+            azimuthShown = northHeadingIn;
+            cacheHeadingShown = cacheHeadingIn;
+
+            // it may take some time to get an initial direction measurement for the device
+            if (northHeadingIn != 0.0) {
+                initialDisplay = false;
+            }
         }
-        northHeading = northHeadingIn;
-        cacheHeading = cacheHeadingIn;
+        northMeasured = northHeadingIn;
+        cacheHeadingMeasured = cacheHeadingIn;
     }
 
     /**
@@ -161,8 +177,8 @@ public class cgCompass extends View {
                 }
 
                 synchronized (cgCompass.this) {
-                    azimuth = smoothUpdate(northHeading, azimuth);
-                    heading = smoothUpdate(cacheHeading, heading);
+                    azimuthShown = smoothUpdate(northMeasured, azimuthShown);
+                    cacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
                 }
 
                 changeHandler.sendMessage(new Message());
@@ -172,16 +188,17 @@ public class cgCompass extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        double currentAzimuth;
-        double currentHeading;
+        // use local synchronized variables to avoid them being changed from the device during drawing
+        double azimuthDrawn;
+        double headingDrawn;
 
         synchronized (this) {
-            currentAzimuth = azimuth;
-            currentHeading = heading;
+            azimuthDrawn = azimuthShown;
+            headingDrawn = cacheHeadingShown;
         }
 
-        double azimuthTemp = currentAzimuth;
-        double azimuthRelative = azimuthTemp - currentHeading;
+        double azimuthTemp = azimuthDrawn;
+        double azimuthRelative = azimuthTemp - headingDrawn;
         if (azimuthRelative < 0) {
             azimuthRelative = azimuthRelative + 360;
         } else if (azimuthRelative >= 360) {

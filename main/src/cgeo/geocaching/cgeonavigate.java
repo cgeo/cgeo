@@ -30,6 +30,8 @@ public class cgeonavigate extends AbstractActivity {
     private static final String EXTRAS_NAME = "name";
     private static final String EXTRAS_GEOCODE = "geocode";
     private static final List<cgCoord> coordinates = new ArrayList<cgCoord>();
+    private static final int MENU_MAP = 0;
+    private static final int MENU_SWITCH_COMPASS_GPS = 1;
     private PowerManager pm = null;
     private cgGeo geo = null;
     private cgDirection dir = null;
@@ -37,7 +39,7 @@ public class cgeonavigate extends AbstractActivity {
     private cgUpdateDir dirUpdate = new UpdateDirection();
     private Geopoint dstCoords = null;
     private float cacheHeading = 0;
-    private float northHeading = 0;
+    private Float northHeading = null;
     private String title = null;
     private String name = null;
     private TextView navType = null;
@@ -53,7 +55,7 @@ public class cgeonavigate extends AbstractActivity {
         @Override
         public void handleMessage(Message msg) {
             try {
-                if (compassView != null) {
+                if (compassView != null && northHeading != null) {
                     compassView.updateNorth(northHeading, cacheHeading);
                 }
             } catch (Exception e) {
@@ -114,19 +116,19 @@ public class cgeonavigate extends AbstractActivity {
         setTitle();
         setDestCoords();
 
-        // get textviews once
-        compassView = (cgCompass) findViewById(R.id.rose);
-
-        // start updater thread
-        updater = new updaterThread(updaterHandler);
-        updater.start();
-
         if (geo != null) {
             geoUpdate.updateLoc(geo);
         }
         if (dir != null) {
             dirUpdate.updateDir(dir);
         }
+
+        // get textviews once
+        compassView = (cgCompass) findViewById(R.id.rose);
+
+        // start updater thread
+        updater = new updaterThread(updaterHandler);
+        updater.start();
     }
 
     @Override
@@ -205,11 +207,11 @@ public class cgeonavigate extends AbstractActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (Settings.isUseCompass()) {
-            menu.add(0, 1, 0, res.getString(R.string.use_gps)).setIcon(android.R.drawable.ic_menu_compass);
+            menu.add(0, MENU_SWITCH_COMPASS_GPS, 0, res.getString(R.string.use_gps)).setIcon(android.R.drawable.ic_menu_compass);
         } else {
-            menu.add(0, 1, 0, res.getString(R.string.use_compass)).setIcon(android.R.drawable.ic_menu_compass);
+            menu.add(0, MENU_SWITCH_COMPASS_GPS, 0, res.getString(R.string.use_compass)).setIcon(android.R.drawable.ic_menu_compass);
         }
-        menu.add(0, 0, 0, res.getString(R.string.caches_on_map)).setIcon(android.R.drawable.ic_menu_mapmode);
+        menu.add(0, MENU_MAP, 0, res.getString(R.string.caches_on_map)).setIcon(android.R.drawable.ic_menu_mapmode);
         menu.add(0, 2, 0, res.getString(R.string.destination_set)).setIcon(android.R.drawable.ic_menu_edit);
         if (coordinates.size() > 1) {
             SubMenu subMenu = menu.addSubMenu(0, 3, 0, res.getString(R.string.destination_select)).setIcon(android.R.drawable.ic_menu_myplaces);
@@ -247,9 +249,9 @@ public class cgeonavigate extends AbstractActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == 0) {
+        if (id == MENU_MAP) {
             CGeoMap.startActivityCoords(this, dstCoords, null, null);
-        } else if (id == 1) {
+        } else if (id == MENU_SWITCH_COMPASS_GPS) {
             boolean oldSetting = Settings.isUseCompass();
             Settings.setUseCompass(!oldSetting);
             if (oldSetting) {
@@ -396,7 +398,7 @@ public class cgeonavigate extends AbstractActivity {
                     if (geo.bearingNow != null) {
                         northHeading = geo.bearingNow;
                     } else {
-                        northHeading = 0;
+                        northHeading = 0f;
                     }
                 }
             } catch (Exception e) {
