@@ -196,16 +196,22 @@ public class HtmlImage implements Html.ImageGetter {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
 
+        FileInputStream fis = null;
         try {
-            FileInputStream fis = new FileInputStream(file);
+            fis = new FileInputStream(file);
             BitmapFactory.decodeStream(fis, null, options);
-            fis.close();
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        } finally {
+            if (fis != null) {
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
         }
 
         int scale = 1;
