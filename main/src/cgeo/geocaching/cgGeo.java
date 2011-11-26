@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.LocationProviderType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.go4cache.Go4Cache;
 
@@ -31,7 +32,7 @@ public class cgGeo {
     private Location locNet = null;
     private long locGpsLast = 0L;
     public Location location = null;
-    public int gps = -1;
+    public LocationProviderType locationProvider = LocationProviderType.LAST;
     public Geopoint coordsNow = null;
     public Geopoint coordsBefore = null;
     public Double altitudeNow = null;
@@ -75,7 +76,7 @@ public class cgGeo {
 
     public void initGeo() {
         location = null;
-        gps = -1;
+        locationProvider = LocationProviderType.LAST;
         coordsNow = null;
         altitudeNow = null;
         bearingNow = null;
@@ -278,7 +279,7 @@ public class cgGeo {
             return;
         }
 
-        gps = -1;
+        locationProvider = LocationProviderType.LAST;
         coordsNow = coords;
         altitudeNow = null;
         bearingNow = 0f;
@@ -292,7 +293,7 @@ public class cgGeo {
 
     private void assign(Location loc) {
         if (loc == null) {
-            gps = -1;
+            locationProvider = LocationProviderType.LAST;
             return;
         }
 
@@ -300,38 +301,38 @@ public class cgGeo {
 
         String provider = location.getProvider();
         if (provider.equals(LocationManager.GPS_PROVIDER)) {
-            gps = 1;
+            locationProvider = LocationProviderType.GPS;
         } else if (provider.equals(LocationManager.NETWORK_PROVIDER)) {
-            gps = 0;
-        } else if (provider.equals("last")) {
-            gps = -1;
+            locationProvider = LocationProviderType.NETWORK;
+        } else if (provider.equalsIgnoreCase("last")) {
+            locationProvider = LocationProviderType.LAST;
         }
 
         coordsNow = new Geopoint(location.getLatitude(), location.getLongitude());
         app.setLastLoc(coordsNow);
 
-        if (location.hasAltitude() && gps != -1) {
+        if (location.hasAltitude() && locationProvider != LocationProviderType.LAST) {
             altitudeNow = location.getAltitude() + Settings.getAltCorrection();
         } else {
             altitudeNow = null;
         }
-        if (location.hasBearing() && gps != -1) {
+        if (location.hasBearing() && locationProvider != LocationProviderType.LAST) {
             bearingNow = location.getBearing();
         } else {
             bearingNow = 0f;
         }
-        if (location.hasSpeed() && gps != -1) {
+        if (location.hasSpeed() && locationProvider != LocationProviderType.LAST) {
             speedNow = location.getSpeed();
         } else {
             speedNow = 0f;
         }
-        if (location.hasAccuracy() && gps != -1) {
+        if (location.hasAccuracy() && locationProvider != LocationProviderType.LAST) {
             accuracyNow = location.getAccuracy();
         } else {
             accuracyNow = 999f;
         }
 
-        if (gps == 1) {
+        if (locationProvider == LocationProviderType.GPS) {
             // save travelled distance only when location is from GPS
             if (coordsBefore != null) {
                 final float dst = coordsBefore.distanceTo(coordsNow);
@@ -350,7 +351,7 @@ public class cgGeo {
             geoUpdate.updateLoc(this);
         }
 
-        if (gps > -1) {
+        if (locationProvider == LocationProviderType.GPS || locationProvider == LocationProviderType.NETWORK) {
             Go4Cache.signalCoordinates(coordsNow);
         }
     }

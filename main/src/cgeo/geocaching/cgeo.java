@@ -569,14 +569,7 @@ public class cgeo extends AbstractActivity {
                         satellites = "";
                     }
                     navSatellites.setText(satellites);
-
-                    if (geo.gps == -1) {
-                        navType.setText(res.getString(R.string.loc_last));
-                    } else if (geo.gps == 0) {
-                        navType.setText(res.getString(R.string.loc_net));
-                    } else {
-                        navType.setText(res.getString(R.string.loc_gps));
-                    }
+                    navType.setText(res.getString(geo.locationProvider.resourceId));
 
                     if (geo.accuracyNow != null) {
                         if (Settings.isUseMetricUnits()) {
