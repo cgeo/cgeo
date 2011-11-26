@@ -35,7 +35,7 @@
   <string name="ape">Projekt APE cache</string>
   <string name="gchq">Groundspeak HQ</string>
   <string name="gps">GPS cache utställning</string>
-  <string name="unknown">Okänd cache</string>
+  <string name="unknown">Okänd typ</string>
 
   <!-- cache sizes -->
   <string name="cache_size_micro">micro</string>
@@ -84,7 +84,7 @@
   <string name="log_post">Posta logg</string>
   <string name="log_post_rate">Posta logg &amp; ge betyget</string>
   <string name="log_post_no_rate">Posta logg utan betyg</string>
-  <string name="log_post_not_possible">Loggning ej möjlig</string>
+  <string name="log_post_not_possible">Laddar loggningssida…</string>
   <string name="log_add">Lägg till</string>
   <string name="log_date">Datum</string>
   <string name="log_time">Tid</string>
@@ -235,7 +235,7 @@
   <string name="menu_about">Om c:geo</string>
   <string name="menu_helpers">Tilläggsprogram</string>
   <string name="menu_settings">Inställningar</string>
-  <string name="menu_history">Loggade cacher</string>
+  <string name="menu_history">Hittade cacher</string>
   <string name="menu_filter">Filter</string>
   <string name="menu_scan_geo">Scanna geokod</string>
 
@@ -260,7 +260,7 @@
   <string name="caches_store_offline">Spara för Offline</string>
   <string name="caches_store_selected">Spara valda</string>
   <string name="caches_stored">Sparade cacher</string>
-  <string name="caches_history">Senast loggade cacher</string>
+  <string name="caches_history">Senast hittade cacher</string>
   <string name="caches_on_map">Visa på karta</string>
   <string name="caches_sort">Sortering</string>
   <string name="caches_sort_title">Sortera efter</string>
