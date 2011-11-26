@@ -70,7 +70,7 @@ public class HtmlImage implements Html.ImageGetter {
     public BitmapDrawable getDrawable(final String url) {
         // Reject empty and counter images URL
         if (StringUtils.isBlank(url) || isCounter(url)) {
-            return null;
+            return new BitmapDrawable(getTransparent1x1Image());
         }
 
         Bitmap imagePre = null;
@@ -116,7 +116,7 @@ public class HtmlImage implements Html.ImageGetter {
             if (returnErrorImage) {
                 imagePre = BitmapFactory.decodeResource(context.getResources(), R.drawable.image_not_loaded);
             } else {
-                imagePre = BitmapFactory.decodeResource(context.getResources(), R.drawable.image_no_placement);
+                imagePre = getTransparent1x1Image();
             }
         }
 
@@ -146,6 +146,10 @@ public class HtmlImage implements Html.ImageGetter {
         image.setBounds(new Rect(0, 0, width, height));
 
         return image;
+    }
+
+    private Bitmap getTransparent1x1Image() {
+        return BitmapFactory.decodeResource(context.getResources(), R.drawable.image_no_placement);
     }
 
     private Bitmap loadImageFromStorage(final String url) {
