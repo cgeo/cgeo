@@ -1249,7 +1249,7 @@ public class cgeocaches extends AbstractListActivity {
         } else if (id == MENU_LOG_VISIT) {
             return getCacheFromAdapter(adapterInfo).logVisit(this);
         } else if (id == MENU_CACHE_DETAILS) {
-            final Intent cachesIntent = new Intent(this, cgeodetail.class);
+            final Intent cachesIntent = new Intent(this, CacheDetailActivity.class);
             final cgCache cache = getCacheFromAdapter(adapterInfo);
             cachesIntent.putExtra("geocode", cache.getGeocode().toUpperCase());
             cachesIntent.putExtra("name", cache.getName());

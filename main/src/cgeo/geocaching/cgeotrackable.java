@@ -168,7 +168,7 @@ public class cgeotrackable extends AbstractActivity {
                     if (cgTrackable.SPOTTED_CACHE == trackable.getSpottedType()) {
                         itemLayout.setOnClickListener(new View.OnClickListener() {
                             public void onClick(View arg0) {
-                                Intent cacheIntent = new Intent(cgeotrackable.this, cgeodetail.class);
+                                Intent cacheIntent = new Intent(cgeotrackable.this, CacheDetailActivity.class);
                                 cacheIntent.putExtra("guid", trackable.getSpottedGuid());
                                 cacheIntent.putExtra("name", trackable.getSpottedName());
                                 startActivity(cacheIntent);
@@ -506,7 +506,7 @@ public class cgeotrackable extends AbstractActivity {
                     final String cacheName = log.cacheName;
                     ((TextView) rowView.findViewById(R.id.location)).setOnClickListener(new View.OnClickListener() {
                         public void onClick(View arg0) {
-                            Intent cacheIntent = new Intent(cgeotrackable.this, cgeodetail.class);
+                            Intent cacheIntent = new Intent(cgeotrackable.this, CacheDetailActivity.class);
                             cacheIntent.putExtra("guid", cacheGuid);
                             cacheIntent.putExtra("name", Html.fromHtml(cacheName).toString());
                             startActivity(cacheIntent);

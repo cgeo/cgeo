@@ -118,7 +118,7 @@ public class cgeoadvsearch extends AbstractActivity {
 
         try {
             if (gcCodeM.find()) { // GC-code
-                final Intent cachesIntent = new Intent(this, cgeodetail.class);
+                final Intent cachesIntent = new Intent(this, CacheDetailActivity.class);
                 cachesIntent.putExtra("geocode", query.trim().toUpperCase());
                 startActivity(cachesIntent);
 
@@ -423,7 +423,7 @@ public class cgeoadvsearch extends AbstractActivity {
             return;
         }
 
-        cgeodetail.startActivity(this, geocodeText);
+        CacheDetailActivity.startActivity(this, geocodeText);
     }
 
     private class findTrackableAction implements TextView.OnEditorActionListener {
