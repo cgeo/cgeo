@@ -17,6 +17,7 @@
   <attr name="background_color_notice" format="color" />
   <attr name="background_color_transparent" format="color" />
   <attr name="separator_color" format="color" />
+  <attr name="text_color_pagerindicator" format="color" />
 
   <!-- drawables -->
   <attr name="button" format="integer" />

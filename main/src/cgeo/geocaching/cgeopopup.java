@@ -389,7 +389,7 @@ public class cgeopopup extends AbstractActivity {
                 buttonMore.setOnClickListener(new OnClickListener() {
 
                     public void onClick(View arg0) {
-                        Intent cachesIntent = new Intent(cgeopopup.this, cgeodetail.class);
+                        Intent cachesIntent = new Intent(cgeopopup.this, CacheDetailActivity.class);
                         cachesIntent.putExtra("geocode", geocode.toUpperCase());
                         startActivity(cachesIntent);
 

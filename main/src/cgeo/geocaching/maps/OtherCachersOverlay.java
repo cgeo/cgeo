@@ -1,8 +1,8 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeoapplication;
-import cgeo.geocaching.cgeodetail;
 import cgeo.geocaching.go4cache.Go4CacheUser;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
@@ -143,7 +143,7 @@ public class OtherCachersOverlay extends AbstractItemizedOverlay {
 
         public void onClick(DialogInterface dialog, int id) {
             if (geocode != null) {
-                final Intent detailIntent = new Intent(context, cgeodetail.class);
+                final Intent detailIntent = new Intent(context, CacheDetailActivity.class);
                 detailIntent.putExtra("geocode", geocode);
                 context.startActivity(detailIntent);
             }

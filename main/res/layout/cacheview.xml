@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="?background_color"
+    android:orientation="vertical" >
+
+    <LinearLayout style="@style/action_bar" >
+
+        <ImageView
+            style="@style/action_bar_action"
+            android:onClick="goHome" />
+
+        <View style="@style/action_bar_separator" />
+
+        <TextView style="@style/action_bar_title" />
+
+        <View style="@style/action_bar_separator" />
+
+        <ImageView
+            style="@style/action_bar_action"
+            android:onClick="startCompassNavigation"
+            android:src="@drawable/actionbar_compass" />
+
+        <View style="@style/action_bar_separator" />
+
+        <ImageView
+            style="@style/action_bar_action"
+            android:onClick="goManual"
+            android:src="@drawable/actionbar_manual" />
+    </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <RelativeLayout style="@style/pager_indicator" >
+
+        <TextView
+            android:id="@+id/indicator_prev"
+            style="@style/pager_indicator.side"
+            android:layout_alignParentLeft="true" />
+
+        <TextView
+            android:id="@+id/indicator_current"
+            style="@style/pager_indicator.title" />
+
+        <TextView
+            android:id="@+id/indicator_next"
+            style="@style/pager_indicator.side"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+</LinearLayout>
