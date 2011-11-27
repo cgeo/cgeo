@@ -1149,6 +1149,11 @@ public class CacheDetailActivity extends AbstractActivity {
                 addCacheDetail(R.string.cache_favourite, String.format("%d", cache.getFavouriteCnt()) + "×");
             }
 
+            // own rating
+            if (cache.getMyVote() != null && cache.getMyVote() > 0) {
+                addStarRating(R.string.cache_own_rating, cache.getMyVote());
+            }
+
             // cache author
             if (StringUtils.isNotBlank(cache.getOwner()) || StringUtils.isNotBlank(cache.getOwnerReal())) {
                 TextView ownerView = addCacheDetail(R.string.cache_owner, "");
