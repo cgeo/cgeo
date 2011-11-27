@@ -4,6 +4,7 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.compatibility.Compatibility;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,6 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.EditText;
 
 public abstract class AbstractActivity extends Activity implements IAbstractActivity {
 
@@ -85,4 +87,7 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
         ActivityMixin.addVisitMenu(this, menu, cache);
     }
 
+    protected static void disableSuggestions(final EditText edit) {
+        Compatibility.disableSuggestions(edit);
+    }
 }

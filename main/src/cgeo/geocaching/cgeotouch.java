@@ -293,6 +293,7 @@ public class cgeotouch extends cgLogForm {
             buttonPost.setEnabled(true);
             buttonPost.setOnClickListener(new postListener());
         }
+        disableSuggestions((EditText) findViewById(R.id.tracking));
     }
 
     @Override

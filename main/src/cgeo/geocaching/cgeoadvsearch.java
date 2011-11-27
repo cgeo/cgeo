@@ -192,6 +192,7 @@ public class cgeoadvsearch extends AbstractActivity {
 
         EditText trackable = (EditText) findViewById(R.id.trackable);
         trackable.setOnEditorActionListener(new findTrackableAction());
+        disableSuggestions(trackable);
 
         final Button displayTrackable = (Button) findViewById(R.id.display_trackable);
         displayTrackable.setOnClickListener(new findTrackableListener());
