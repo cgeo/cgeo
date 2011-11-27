@@ -37,13 +37,14 @@ If the workspace directory name contains a space and leads to errors in the -dex
 1. copy `./main/templates/private.properties` to `./main/`
 2. edit `private.properties` (see comments in the file)
 3. copy `./main/templates/local.properties` to `./main/`
+3. copy `./main/templates/local.properties` to `./tests/`
 4. edit `local.properties` (see comments in the file)
 5. copy `./main/templates/mapsapikey.xml` to `./main/res/values/`
 6. edit `./main/res/values/mapsapikey.xml` and insert your Maps API key (see comments in the file)
 
 ### Building with Ant ###
 
-Run one of the following commands in `./`
+Run one of the following commands in `./main`
 
     ant help
     ant clean
@@ -64,6 +65,10 @@ the class under test.
 Every class can be "Run As" (or "Debug As") an "Android JUnit Test" from Eclipse.
 To run all tests use the test suite in CgeoTestSuite in package cgeo.geocaching.test.
 Further information can be found at http://developer.android.com/guide/topics/testing/testing_android.html
+
+### Code coverage / Emma ###
+
+A code coverage report can be generated with Emma. A little how-to (german) can be found at http://www.blafoo.de/blog/index.php#param=id_32
 
 License
 -------
