@@ -728,7 +728,7 @@ public class CacheDetailActivity extends AbstractActivity {
             event.put("description", description.toString());
             String location = "";
             if (cache.getCoords() != null) {
-                location += cache.getCoords();
+                location += cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW);
             }
             if (StringUtils.isNotBlank(cache.getLocation())) {
                 boolean addParenteses = false;
