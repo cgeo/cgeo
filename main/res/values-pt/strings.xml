@@ -147,7 +147,6 @@
   <string name="err_list_load_fail">Desculpe, o c:geo falhou a carregar a lista das caches.</string>
   <string name="err_store_failed">Desculpe, o c:geo não pode arquivar a geocache.</string>
   <string name="err_refresh_failed">Desculpe, o c:geo não consegue actualizar a geocache.</string>
-  <string name="err_drop_failed">Desculpe, o c:geo não consegue apagar a cache.</string>
   <string name="err_dwld_details_failed">Desculpe, o c:geo falhou o download dos detalhes da cache.</string>
   <string name="err_dwld_details_failed_reason">Desculpe, o c:geo falhou o download dos detalhes da cache porque</string>
   <string name="err_load_descr_failed">Desculpe, o c:geo não consegue carregar a descrição.</string>
@@ -244,7 +243,6 @@
   <string name="caches_eta_min"> minuto</string>
   <string name="caches_store_offline">Arquivar para uso offline</string>
   <string name="caches_store_selected">Arquivar selecionadas</string>
-  <string name="caches_stored">Arquivadas</string>
   <string name="caches_history">Histórico</string>
   <string name="caches_on_map">Mostrar no mapa</string>
   <string name="caches_sort">Ordenar</string>
@@ -444,7 +442,6 @@
   <string name="cache_hint">Pista</string>
   <string name="cache_logs">Livro de registo</string>
   <string name="cache_dialog_loading_details">A carregar os detalhes da cache…</string>
-  <string name="cache_dialog_loading_description">A carregar a descrição da cache…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">A gravar cache para utilizar offline …</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>

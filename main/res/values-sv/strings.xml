@@ -156,7 +156,6 @@
   <string name="err_list_load_fail">Tyvärr misslyckades c:geo att ladda listan med cacher.</string>
   <string name="err_store_failed">Tyvärr kan c:geo inte spara geocachen.</string>
   <string name="err_refresh_failed">Tyvärr kan c:geo inte uppdatera geocachen.</string>
-  <string name="err_drop_failed">Tyvärr kan c:geo inte radera geocachen.</string>
   <string name="err_dwld_details_failed">Tyvärr misslyckades c:geo att ladda detaljer.</string>
   <string name="err_dwld_details_failed_reason">Tyvärr misslyckades c:geo att ladda detaljer pga</string>
   <string name="err_load_descr_failed">Tyvärr kan c:geo inte ladda beskrivningen.</string>
@@ -170,7 +169,6 @@
   <string name="err_tb_forgot_saw">Tyvärr glömde c:geo vilken trackable du såg.</string>
   <string name="err_tb_find">Tyvärr kunde c:geo inte hitta trackable</string>
   <string name="err_tb_find_that">Tyvärr kan c:geo inte hitta önskad trackable.</string>
-  <string name="err_cache_inventory_load_fail">Tyvärr kunde c:geo inte läsa information om trackables i cachen.</string>
 
   <string name="err_waypoint_cache_unknown">Tyvärr vet inte c:geo till vilken cache du vill lägga till en punkt.</string>
   <string name="err_waypoint_unknown">Tyvärr glömde c:geo vilken punkt du ville visa.</string>
@@ -259,7 +257,6 @@
   <string name="caches_eta_min"> minut</string>
   <string name="caches_store_offline">Spara för Offline</string>
   <string name="caches_store_selected">Spara valda</string>
-  <string name="caches_stored">Sparade cacher</string>
   <string name="caches_history">Senast hittade cacher</string>
   <string name="caches_on_map">Visa på karta</string>
   <string name="caches_sort">Sortering</string>
@@ -491,7 +488,6 @@
   <string name="cache_dialog_loading_details_status_gcvote">Hämtar betyg från GCVote.com</string>
   <string name="cache_dialog_loading_details_status_elevation">Hämtar höjddata</string>
   <string name="cache_dialog_loading_details_status_render">Förbereder för visning</string>
-  <string name="cache_dialog_loading_description">Laddar beskrivning om cachen…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">Sparar cachen för användning offline…</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>

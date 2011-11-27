@@ -156,7 +156,6 @@
   <string name="err_list_load_fail">Laden der Cacheliste fehlgeschlagen.</string>
   <string name="err_store_failed">Speichern des Caches fehlgeschlagen.</string>
   <string name="err_refresh_failed">Aktualisierung fehlgeschlagen.</string>
-  <string name="err_drop_failed">Löschen des Caches fehlgeschlagen.</string>
   <string name="err_dwld_details_failed">Download der Cache-Details fehlgeschlagen.</string>
   <string name="err_dwld_details_failed_reason">Download der Cache-Details fehlgeschlagen, wegen</string>
   <string name="err_load_descr_failed">Laden der Cachebeschreibung fehlgeschlagen.</string>
@@ -170,7 +169,6 @@
   <string name="err_tb_forgot_saw">c:geo hat vergessen, welchen Trackable du gesehen hast.</string>
   <string name="err_tb_find">c:geo findet den Trackable nicht</string>
   <string name="err_tb_find_that">c:geo konnte diesen Trackable nicht finden.</string>
-  <string name="err_cache_inventory_load_fail">c:geo konnte das Inventar nicht laden.</string>
 
   <string name="err_waypoint_cache_unknown">c:geo weiß nicht, zu welchem Cache der Wegpunkt hinzugefügt werden soll.</string>
   <string name="err_waypoint_unknown">c:geo hat vergessen, welchen Wegpunkt du ansehen wolltest.</string>
@@ -259,7 +257,6 @@
   <string name="caches_eta_min"> Minute</string>
   <string name="caches_store_offline">Für Offline speichern</string>
   <string name="caches_store_selected">Ausgewählte speichern</string>
-  <string name="caches_stored">Gespeichert</string>
   <string name="caches_history">Verlauf</string>
   <string name="caches_on_map">Zeige auf Karte</string>
   <string name="caches_sort">Sortierung</string>
@@ -486,7 +483,6 @@
   <string name="cache_dialog_loading_details_status_gcvote">Lade GCVote</string>
   <string name="cache_dialog_loading_details_status_elevation">Lade Höhe</string>
   <string name="cache_dialog_loading_details_status_render">Erzeuge Darstellung</string>
-  <string name="cache_dialog_loading_description">Lade Cache-Beschreibung…</string>
   <string name="cache_dialog_offline_save_title">Offline-Verwendung</string>
   <string name="cache_dialog_offline_save_message">Speichere Cache für Offline-Verwendung…</string>
   <string name="cache_dialog_offline_drop_title">Offline-Verwendung</string>

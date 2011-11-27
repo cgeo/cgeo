@@ -117,7 +117,6 @@
   <string name="err_list_load_fail">Beklager, c:geo klarte ikke å laste cache-listen..</string>
   <string name="err_store_failed">Beklager, c:geo klarte ikke å lagre cachen.</string>
   <string name="err_refresh_failed">Beklager, c:geo klarte ikke å oppdatere cachen.</string>
-  <string name="err_drop_failed">Beklager, c:geo klarte ikke å slette cachen.</string>
   <string name="err_dwld_details_failed">Beklager, c:geo klarte ikke å laste ned cachens detaljer</string>
   <string name="err_dwld_details_failed_reason">Beklager, c:geo klarte ikke å laste ned cachens detaljer p.g.a.</string>
   <string name="err_load_descr_failed">Beklager, c:geo klarte ikke å åpne beskrivelsen.</string>
@@ -188,7 +187,6 @@
   <string name="caches_eta_min"> minutt</string>
   <string name="caches_store_offline">Lagre for offline-bruk</string>
   <string name="caches_store_selected">Lagre valgte</string>
-  <string name="caches_stored">Lagret</string>
   <string name="caches_on_map">Vis på kartet</string>
   <string name="caches_select">Velg fra listen</string>
   <string name="caches_select_mode">Velge-modus</string>
@@ -283,7 +281,6 @@
   <string name="cache_hint">Hint</string>
   <string name="cache_logs">Loggbok</string>
   <string name="cache_dialog_loading_details">Laster cachens detaljer…</string>
-  <string name="cache_dialog_loading_description">Laster cachens fulle beskrivelse…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">Lagrer cachen for offline-bruk…</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>

@@ -147,7 +147,6 @@
   <string name="err_list_load_fail">Przepraszam, c:geo nie może załadować listy skrzynek.</string>
   <string name="err_store_failed">Przepraszam, c:geo nie może zapisać skrzynki.</string>
   <string name="err_refresh_failed">Przepraszam, c:geo nie może zaktualizować skrzynki.</string>
-  <string name="err_drop_failed">Przepraszam, c:geo nie może skasować skrzynki.</string>
   <string name="err_dwld_details_failed">Przepraszam, c:geo nie może załadować szczegółów skrzynki.</string>
   <string name="err_dwld_details_failed_reason">Przepraszam, c:geo nie może załadować szczegółów skrzynki, ponieważ</string>
   <string name="err_load_descr_failed">Przepraszam, c:geo nie może załadować opisu.</string>
@@ -244,7 +243,6 @@
   <string name="caches_eta_min"> minuta</string>
   <string name="caches_store_offline">Zapisz offline</string>
   <string name="caches_store_selected">Zapisz wybrane</string>
-  <string name="caches_stored">Zapisane</string>
   <string name="caches_history">Historia</string>
   <string name="caches_on_map">Pokaż na mapie</string>
   <string name="caches_sort">Sortuj</string>
@@ -446,7 +444,6 @@
   <string name="cache_hint">Wskazówka</string>
   <string name="cache_logs">Dziennik</string>
   <string name="cache_dialog_loading_details">Ładuje szczegóły skrzynki…</string>
-  <string name="cache_dialog_loading_description">Ładuje opis skrzynki…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">Zapisywanie skrzynek do trybu offline…</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>

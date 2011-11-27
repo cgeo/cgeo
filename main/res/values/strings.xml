@@ -156,7 +156,6 @@
   <string name="err_list_load_fail">Sorry, c:geo failed to load cache list.</string>
   <string name="err_store_failed">Sorry, c:geo can\'t store geocache.</string>
   <string name="err_refresh_failed">Sorry, c:geo can\'t refresh geocache.</string>
-  <string name="err_drop_failed">Sorry, c:geo can\'t drop geocache.</string>
   <string name="err_dwld_details_failed">Sorry, c:geo failed to download cache details.</string>
   <string name="err_dwld_details_failed_reason">Sorry, c:geo failed to download cache details because of</string>
   <string name="err_load_descr_failed">Sorry, c:geo can\'t load description.</string>
@@ -170,7 +169,6 @@
   <string name="err_tb_forgot_saw">Sorry, c:geo forgot which trackable you saw.</string>
   <string name="err_tb_find">Sorry, c:geo can\'t find trackable</string>
   <string name="err_tb_find_that">Sorry, c:geo can\'t find that trackable.</string>
-  <string name="err_cache_inventory_load_fail">Sorry, c:geo failed to load cache inventory.</string>
 
   <string name="err_waypoint_cache_unknown">Sorry, c:geo doesn\'t know to which cache you want to add waypoint.</string>
   <string name="err_waypoint_unknown">Sorry, c:geo forgot what waypoint you want to display.</string>
@@ -259,7 +257,6 @@
   <string name="caches_eta_min"> minute</string>
   <string name="caches_store_offline">Store for Offline</string>
   <string name="caches_store_selected">Store selected</string>
-  <string name="caches_stored">Stored</string>
   <string name="caches_history">History</string>
   <string name="caches_on_map">Show on map</string>
   <string name="caches_sort">Sort</string>
@@ -499,7 +496,6 @@
   <string name="cache_dialog_loading_details_status_gcvote">Loading GCVote</string>
   <string name="cache_dialog_loading_details_status_elevation">Loading elevation data</string>
   <string name="cache_dialog_loading_details_status_render">Render view</string>
-  <string name="cache_dialog_loading_description">Loading cache description…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">Saving cache for offline use…</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>

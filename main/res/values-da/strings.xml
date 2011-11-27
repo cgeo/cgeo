@@ -197,7 +197,6 @@
   <string name="cache_hint">Hint</string>
   <string name="cache_logs">Logbog</string>
   <string name="cache_dialog_loading_details">Indlæser cachedetaljer…</string>
-  <string name="cache_dialog_loading_description">Indlæser cachebeskrivelse…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">Gemmer cache til offlinebrug…</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>

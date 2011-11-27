@@ -156,7 +156,6 @@
   <string name="err_list_load_fail">c:geo nemôže načítať zoznam skrýš.</string>
   <string name="err_store_failed">c:geo nemôže uložiť skrýšu.</string>
   <string name="err_refresh_failed">c:geo nemôže obnoviť skrýšu.</string>
-  <string name="err_drop_failed">c:geo nemôže zmazať skrýšu.</string>
   <string name="err_dwld_details_failed">c:geo nemôže stiahnuť detaily skrýše.</string>
   <string name="err_dwld_details_failed_reason">c:geo nemôže načítať podrobnosti o skrýši, pretože</string>
   <string name="err_load_descr_failed">c:geo nemôže stiahnuť popis skrýše.</string>
@@ -170,7 +169,6 @@
   <string name="err_tb_forgot_saw">c:geo zabudlo, ktorý trasovateľný predmet ste pozerali.</string>
   <string name="err_tb_find">c:geo nemôže nájsť trasovateľný predmet.</string>
   <string name="err_tb_find_that">c:geo nemôže nájsť tento trasovateľný predmet.</string>
-  <string name="err_cache_inventory_load_fail">c:geo sa nepodarilo načítať obsah skrýše.</string>
 
   <string name="err_waypoint_cache_unknown">c:geo nevie, ku ktorej skrýši chcete pridať bod trasy.</string>
   <string name="err_waypoint_unknown">c:geo zabudlo, ktorý bod trasy chcete zobraziť.</string>
@@ -259,7 +257,6 @@
   <string name="caches_eta_min"> minúta</string>
   <string name="caches_store_offline">Uložiť offline</string>
   <string name="caches_store_selected">Uložiť vybraté</string>
-  <string name="caches_stored">Uložené</string>
   <string name="caches_history">História</string>
   <string name="caches_on_map">Zobraziť na mape</string>
   <string name="caches_sort">Zoradiť</string>
@@ -491,7 +488,6 @@
   <string name="cache_dialog_loading_details_status_gcvote">Načítanie GCVote</string>
   <string name="cache_dialog_loading_details_status_elevation">Načítanie údajov o stúpaní</string>
   <string name="cache_dialog_loading_details_status_render">Vykreslovanie pohľadu</string>
-  <string name="cache_dialog_loading_description">Načítanie popisu skrýše…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">Ukladanie skrýše pre použitie offline…</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>

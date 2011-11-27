@@ -147,7 +147,6 @@
   <string name="err_list_load_fail">Lo siento, c:geo no ha podido cargar la lista de escondites.</string>
   <string name="err_store_failed">Lo siento, c:geo no puede guardar el escondite.</string>
   <string name="err_refresh_failed">Lo siento, c:geo no puede actualizar el escondite.</string>
-  <string name="err_drop_failed">Lo siento, c:geo no puede omitir el escondite.</string>
   <string name="err_dwld_details_failed">Lo siento, c:geo no ha podido descargar los detalles del escondite.</string>
   <string name="err_dwld_details_failed_reason">Lo siento, c:geo no ha podido descargar los detalles del escondite debido a </string>
   <string name="err_load_descr_failed">Lo siento, c:geo no ha podido cargar la descripción.</string>
@@ -247,7 +246,6 @@
   <string name="caches_eta_min"> minuto</string>
   <string name="caches_store_offline">Usar sin conexión luego</string>
   <string name="caches_store_selected">Almacenamiento seleccionado</string>
-  <string name="caches_stored">Almacenados</string>
   <string name="caches_history">Historial</string>
   <string name="caches_on_map">Ver en mapa</string>
   <string name="caches_sort">Ordenar</string>
@@ -450,7 +448,6 @@
   <string name="cache_hint">Pista</string>
   <string name="cache_logs">Bitácora</string>
   <string name="cache_dialog_loading_details">Cargando detalles del escondite…</string>
-  <string name="cache_dialog_loading_description">Cargando descripción del escondite…</string>
   <string name="cache_dialog_offline_save_title">Desconectado</string>
   <string name="cache_dialog_offline_save_message">Guardando escondite para usar desconectado…</string>
   <string name="cache_dialog_offline_drop_title">Desconectado</string>

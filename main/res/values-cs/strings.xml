@@ -116,7 +116,6 @@
   <string name="err_list_load_fail">c:geo nemůže načíst seznam keší</string>
   <string name="err_store_failed">c:geo nemůže uložit keš</string>
   <string name="err_refresh_failed">c:geo nemůže obnovit keš</string>
-  <string name="err_drop_failed">c:geo nemůže smazat keš</string>
   <string name="err_dwld_details_failed">c:geo nemůže stáhnout detaily keše</string>
   <string name="err_dwld_details_failed_reason">c:geo nemůže načíst podrobnosti o keši, protože</string>
   <string name="err_load_descr_failed">c:geo nemůže stáhnout popis keše.</string>
@@ -198,7 +197,6 @@
   <string name="caches_eta_min">minuta</string>
   <string name="caches_store_offline">uložit pro offline</string>
   <string name="caches_store_selected">uložit vybrané</string>
-  <string name="caches_stored">uložené</string>
   <string name="caches_on_map">zobrazit na mapě</string>
   <string name="caches_select">vybrat ze seznamu</string>
   <string name="caches_select_mode">mód výběru</string>
@@ -296,7 +294,6 @@
   <string name="cache_hint">nápověda</string>
   <string name="cache_logs">logbook</string>
   <string name="cache_dialog_loading_details">načítám detaily keše…</string>
-  <string name="cache_dialog_loading_description">načítám popis keše…</string>
   <string name="cache_dialog_offline_save_title">offline</string>
   <string name="cache_dialog_offline_save_message">Ukládám keš pro použití offline…</string>
   <string name="cache_dialog_offline_drop_title">offline</string>

@@ -154,7 +154,6 @@
   <string name="err_list_load_fail">Sorry, c:geo heeft cache lijst niet kunnen laden.</string>
   <string name="err_store_failed">Sorry, c:geo kan de geocache niet opslaan.</string>
   <string name="err_refresh_failed">Sorry, c:geo kan de geocache niet verversen.</string>
-  <string name="err_drop_failed">Sorry, c:geo kan de geocache niet wissen.</string>
   <string name="err_dwld_details_failed">Sorry, c:geo kon de cache details niet downloaden.</string>
   <string name="err_dwld_details_failed_reason">Sorry, c:geo kon de cache details niet downloaden omdat</string>
   <string name="err_load_descr_failed">Sorry, c:geo kan de omschrijving niet laden.</string>
@@ -168,7 +167,6 @@
   <string name="err_tb_forgot_saw">Sorry, c:geo is vergeten welke trackable je gezien hebt.</string>
   <string name="err_tb_find">Sorry, c:geo kan de trackable niet vinden</string>
   <string name="err_tb_find_that">Sorry, c:geo kan die trackable niet vinden.</string>
-  <string name="err_cache_inventory_load_fail">Sorry, c:geo kon de cacheinhoud niet ophalen.</string>
 
   <string name="err_waypoint_cache_unknown">Sorry, c:geo weet niet aan welke cache je een waypoint wil toevoegen.</string>
   <string name="err_waypoint_unknown">Sorry, c:geo is vergeten welke waypoint je wil laten zien.</string>
@@ -256,7 +254,6 @@
   <string name="caches_eta_min"> minuut</string>
   <string name="caches_store_offline">Opslaan voor Offline gebruik</string>
   <string name="caches_store_selected">Geselecteerden opslaan</string>
-  <string name="caches_stored">Opgeslagen</string>
   <string name="caches_history">Geschiedenis</string>
   <string name="caches_on_map">Toon op kaart</string>
   <string name="caches_sort">Sorteer</string>
@@ -486,7 +483,6 @@
   <string name="cache_dialog_loading_details_status_gcvote">Laden GCVote</string>
   <string name="cache_dialog_loading_details_status_elevation">Laden van hoogte gegevens</string>
   <string name="cache_dialog_loading_details_status_render">Weergave genereren</string>
-  <string name="cache_dialog_loading_description">Laden cacheomschrijving…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">Cache opslaan voor offline gebruik…</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>

@@ -150,7 +150,6 @@
   <string name="err_list_load_fail">Sajnáljuk, a c:geo nem tudja betölteni a ládalistát.</string>
   <string name="err_store_failed">Sajnáljuk, a c:geo nem tudja elmenteni a geoládát.</string>
   <string name="err_refresh_failed">Sajnáljuk, a c:geo nem tudjarefresh geocache.</string>
-  <string name="err_drop_failed">Sajnáljuk, a c:geo nem tudja elvetni a geoládát.</string>
   <string name="err_dwld_details_failed">Sajnáljuk, a c:geo nem tudja letölteni a láda adatait.</string>
   <string name="err_dwld_details_failed_reason">Sajnáljuk, a c:geo nem tudja letölteni a láda adatait, mert</string>
   <string name="err_load_descr_failed">Sajnáljuk, a c:geo nem tudja betölteni a leírást.</string>
@@ -164,7 +163,6 @@
   <string name="err_tb_forgot_saw">Sajnáljuk, a c:geo elfelejtette melyik nyomonkövethető tárgyat láttad.</string>
   <string name="err_tb_find">Sajnáljuk, a c:geo nem találja a nyomonkövethető tárgyat.</string>
   <string name="err_tb_find_that">Sajnáljuk, a c:geo nem találja azt a követhető tárgyat.</string>
-  <string name="err_cache_inventory_load_fail">Sajnáljuk, a c:geo nem tudta betölteni a ládában található tárgyakat.</string>
 
   <string name="err_waypoint_cache_unknown">Sajnáljuk, a c:geo nem tudja melyik ládához szeretnéd hozzáadni az útpontot.</string>
   <string name="err_waypoint_unknown">Sajnáljuk, a c:geo elfelejtette melyik útpontot szeretnéd megjeleníteni.</string>
@@ -251,7 +249,6 @@
   <string name="caches_eta_min"> perc</string>
   <string name="caches_store_offline">Offlineba mentés</string>
   <string name="caches_store_selected">Kijelöltek mentése</string>
-  <string name="caches_stored">Mentett</string>
   <string name="caches_history">Előzmények</string>
   <string name="caches_on_map">Mutasd meg térképen</string>
   <string name="caches_sort">Rendezés</string>
@@ -465,7 +462,6 @@
   <string name="cache_hint">Segítség</string>
   <string name="cache_logs">Láda napló</string>
   <string name="cache_dialog_loading_details">Láda adatainak betöltése…</string>
-  <string name="cache_dialog_loading_description">Láda leírásának betöltése…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">Láda mentése offline használathoz…</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>

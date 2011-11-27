@@ -155,7 +155,6 @@
   <string name="err_list_load_fail">Désolé, c:geo n\'a pas réussi à charger la liste des caches.</string>
   <string name="err_store_failed">Désolé, c:geo ne peut pas enregistrer la cache.</string>
   <string name="err_refresh_failed">Désolé, c:geo ne peut pas rafraîchir la cache.</string>
-  <string name="err_drop_failed">Désolé, c:geo ne peut pas effacer la cache.</string>
   <string name="err_dwld_details_failed">Désolé, c:geo n\'a pas réussi à télécharger les détails de la cache.</string>
   <string name="err_dwld_details_failed_reason">Désolé, c:geo n\'a pas réussi à télécharger les détails de la cache car </string>
   <string name="err_load_descr_failed">Désolé, c:geo ne peut pas charger la description.</string>
@@ -169,7 +168,6 @@
   <string name="err_tb_forgot_saw">Désolé, c:geo a oublié quel objet voyageur vous avez vu.</string>
   <string name="err_tb_find">Désolé, c:geo ne peut pas trouver d\'objet voyageur.</string>
   <string name="err_tb_find_that">Désolé, c:geo ne peut pas trouver cet objet voyageur.</string>
-  <string name="err_cache_inventory_load_fail">Désolé, c:geo n\'a pas pu charger l\'inventaire.</string>
 
   <string name="err_waypoint_cache_unknown">Désolé, c:geo ne sait pas à quel cache vous voulez ajouter une étape.</string>
   <string name="err_waypoint_unknown">Désolé, c:geo a oublié quel étape vous vouliez afficher.</string>
@@ -258,7 +256,6 @@
   <string name="caches_eta_min"> minute</string>
   <string name="caches_store_offline">Stocker localement</string>
   <string name="caches_store_selected">Stocker la sélection</string>
-  <string name="caches_stored">Stockées</string>
   <string name="caches_history">Historique</string>
   <string name="caches_on_map">Voir sur la carte</string>
   <string name="caches_sort">Trier</string>
@@ -486,7 +483,6 @@
   <string name="cache_dialog_loading_details_status_gcvote">Votes</string>
   <string name="cache_dialog_loading_details_status_elevation">Altitude</string>
   <string name="cache_dialog_loading_details_status_render">Préparation de la page</string>
-  <string name="cache_dialog_loading_description">Chargement de la description…</string>
   <string name="cache_dialog_offline_save_title">Hors ligne</string>
   <string name="cache_dialog_offline_save_message">Enregistrement pour une utilisation hors ligne…</string>
   <string name="cache_dialog_offline_drop_title">Hors ligne</string>

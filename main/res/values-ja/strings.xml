@@ -123,7 +123,6 @@
   <string name="err_list_load_fail">キャッシュリストのロードに失敗しました。</string>
   <string name="err_store_failed">キャッシュ情報を保存することができません。</string>
   <string name="err_refresh_failed">キャッシュ情報を更新することができません。</string>
-  <string name="err_drop_failed">キャッシュ情報を破棄することができません。</string>
   <string name="err_dwld_details_failed">キャッシュ情報の詳細をダウンロードすることができません。</string>
   <string name="err_dwld_details_failed_reason">キャッシュ情報の詳細をダウンロードすることができません。原因: </string>
   <string name="err_load_descr_failed">キャッシュの説明をロードすることができません。</string>
@@ -215,7 +214,6 @@
   <string name="caches_eta_min"> 分</string>
   <string name="caches_store_offline">オフライン用に保存</string>
   <string name="caches_store_selected">選択したキャッシュを保存</string>
-  <string name="caches_stored">保存済み</string>
   <string name="caches_history">履歴</string>
   <string name="caches_on_map">地図で表示</string>
   <string name="caches_sort">並び替え</string>
@@ -365,7 +363,6 @@
   <string name="cache_hint">ヒント</string>
   <string name="cache_logs">ログブック</string>
   <string name="cache_dialog_loading_details">キャッシュの詳細をロード中…</string>
-  <string name="cache_dialog_loading_description">キャッシュの説明をロード中…</string>
   <string name="cache_dialog_offline_save_title">オフライン</string>
   <string name="cache_dialog_offline_save_message">オフライン用にキャッシュを保存中…</string>
   <string name="cache_dialog_offline_drop_title">オフライン</string>
