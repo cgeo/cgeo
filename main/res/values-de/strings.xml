@@ -526,6 +526,7 @@
   <string name="cache_difficulty">Schwierigkeit</string>
   <string name="cache_terrain">Terrain</string>
   <string name="cache_rating">Bewertung</string>
+  <string name="cache_own_rating">Eigene Bewertung</string>
   <string name="cache_rating_of">von</string>
   <string name="cache_favourite">Favorit</string>
   <string name="cache_owner">Besitzer</string>
