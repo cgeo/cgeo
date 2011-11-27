@@ -6,9 +6,11 @@ import android.app.Activity;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Build;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Display;
 import android.view.Surface;
+import android.widget.EditText;
 
 import java.lang.reflect.Method;
 
@@ -16,6 +18,7 @@ public final class Compatibility {
 
     private final static int sdkVersion = Integer.parseInt(Build.VERSION.SDK);
     private final static boolean isLevel8 = sdkVersion >= 8;
+    private final static boolean isLevel5 = sdkVersion >= 5;
 
     private static Method dataChangedMethod = null;
     private static Method getRotationMethod = null;
@@ -76,6 +79,18 @@ public final class Compatibility {
                 // This should never happen: IllegalArgumentException, IllegalAccessException or InvocationTargetException
                 Log.e(Settings.tag, "Cannot call dataChanged()", e);
             }
+        }
+    }
+
+    public static void disableSuggestions(EditText edit) {
+        if (isLevel5) {
+            edit.setInputType(edit.getInputType()
+                    | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
+                    | InputType.TYPE_TEXT_VARIATION_FILTER);
+        }
+        else {
+            edit.setInputType(edit.getInputType()
+                    | InputType.TYPE_TEXT_VARIATION_FILTER);
         }
     }
 
