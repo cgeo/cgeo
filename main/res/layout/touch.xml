@@ -52,7 +52,7 @@
 						android:hint="@string/trackable_code" />
 				<EditText style="@style/edittext"
 						android:id="@+id/log"
-						android:hint="log"
+                        android:hint="@string/log_new_log_text"
 						android:singleLine="false"
 						android:lines="5"
 						android:capitalize="sentences" />
