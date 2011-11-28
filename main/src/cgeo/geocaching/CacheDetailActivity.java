@@ -2259,6 +2259,7 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             public void onClick(View arg0) {
+                refreshOnResume = true;
                 Intent waypointIntent = new Intent(CacheDetailActivity.this, cgeowaypoint.class);
                 waypointIntent.putExtra("waypoint", id);
                 waypointIntent.putExtra("geocode", cache.getGeocode());
