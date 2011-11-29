@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.Settings.coordInputFormatEnum;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser.ParseException;
@@ -115,6 +116,15 @@ public class cgeocoords extends Dialog {
         eLonMin.addTextChangedListener(new TextChanged(eLonMin));
         eLonSec.addTextChangedListener(new TextChanged(eLonSec));
         eLonSub.addTextChangedListener(new TextChanged(eLonSub));
+
+        Compatibility.disableSuggestions(eLatDeg);
+        Compatibility.disableSuggestions(eLatMin);
+        Compatibility.disableSuggestions(eLatSec);
+        Compatibility.disableSuggestions(eLatSub);
+        Compatibility.disableSuggestions(eLonDeg);
+        Compatibility.disableSuggestions(eLonMin);
+        Compatibility.disableSuggestions(eLonSec);
+        Compatibility.disableSuggestions(eLonSub);
 
         bLat.setOnClickListener(new ButtonClickListener());
         bLon.setOnClickListener(new ButtonClickListener());

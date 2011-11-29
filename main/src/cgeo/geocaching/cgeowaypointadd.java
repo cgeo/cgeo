@@ -138,6 +138,8 @@ public class cgeowaypointadd extends AbstractActivity {
 
             (new loadWaypoint()).start();
         }
+
+        disableSuggestions((EditText) findViewById(R.id.distance));
     }
 
     @Override

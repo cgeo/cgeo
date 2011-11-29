@@ -277,6 +277,7 @@ public class cgeopoint extends AbstractActivity {
         buttonCurrent.setOnClickListener(new currentListener());
 
         getDestionationHistoryAdapter().notifyDataSetChanged();
+        disableSuggestions((EditText) findViewById(R.id.distance));
     }
 
     private class coordDialogListener implements View.OnClickListener {
