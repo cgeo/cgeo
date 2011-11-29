@@ -5,7 +5,6 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.go4cache.Go4Cache;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
 import android.location.Location;
@@ -18,16 +17,11 @@ import java.util.Iterator;
 
 public class cgGeo {
 
-    private Context context = null;
-    private cgeoapplication app = null;
     private LocationManager geoManager = null;
     private cgUpdateLoc geoUpdate = null;
-    private SharedPreferences prefs = null;
     private cgeoGeoListener geoNetListener = null;
     private cgeoGeoListener geoGpsListener = null;
     private cgeoGpsStatusListener geoGpsStatusListener = null;
-    private Integer time = 0;
-    private Integer distance = 0;
     private Location locGps = null;
     private Location locNet = null;
     private long locGpsLast = 0L;
@@ -41,29 +35,9 @@ public class cgGeo {
     public Float accuracyNow = null;
     public Integer satellitesVisible = null;
     public Integer satellitesFixed = null;
-    public double distanceNow = 0d;
 
-    public cgGeo(Context contextIn, cgeoapplication appIn, cgUpdateLoc geoUpdateIn, int timeIn, int distanceIn) {
-        context = contextIn;
-        app = appIn;
+    public cgGeo(cgUpdateLoc geoUpdateIn) {
         geoUpdate = geoUpdateIn;
-        time = timeIn;
-        distance = distanceIn;
-
-        if (prefs == null) {
-            prefs = context.getSharedPreferences(Settings.preferences, 0);
-        }
-        distanceNow = prefs.getFloat("dst", 0f);
-        if (Double.isNaN(distanceNow)) {
-            distanceNow = 0d;
-        }
-        if (distanceNow == 0f) {
-            final SharedPreferences.Editor prefsEdit = context.getSharedPreferences(Settings.preferences, 0).edit();
-            if (prefsEdit != null) {
-                prefsEdit.putLong("dst-since", System.currentTimeMillis());
-                prefsEdit.commit();
-            }
-        }
 
         geoNetListener = new cgeoGeoListener();
         geoNetListener.setProvider(LocationManager.NETWORK_PROVIDER);
@@ -72,9 +46,11 @@ public class cgGeo {
         geoGpsListener.setProvider(LocationManager.GPS_PROVIDER);
 
         geoGpsStatusListener = new cgeoGpsStatusListener();
+
+        initGeo();
     }
 
-    public void initGeo() {
+    private void initGeo() {
         location = null;
         locationProvider = LocationProviderType.LAST;
         coordsNow = null;
@@ -86,7 +62,7 @@ public class cgGeo {
         satellitesFixed = 0;
 
         if (geoManager == null) {
-            geoManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+            geoManager = (LocationManager) cgeoapplication.getInstance().getSystemService(Context.LOCATION_SERVICE);
         }
 
         lastLoc();
@@ -96,13 +72,13 @@ public class cgGeo {
         geoManager.addGpsStatusListener(geoGpsStatusListener);
 
         try {
-            geoManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, time, distance, geoNetListener);
+            geoManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, geoNetListener);
         } catch (Exception e) {
             Log.w(Settings.tag, "There is no NETWORK location provider");
         }
 
         try {
-            geoManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, time, distance, geoGpsListener);
+            geoManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, geoGpsListener);
         } catch (Exception e) {
             Log.w(Settings.tag, "There is no GPS location provider");
         }
@@ -117,12 +93,6 @@ public class cgGeo {
         }
         if (geoManager != null) {
             geoManager.removeGpsStatusListener(geoGpsStatusListener);
-        }
-
-        final SharedPreferences.Editor prefsEdit = context.getSharedPreferences(Settings.preferences, 0).edit();
-        if (prefsEdit != null && !Double.isNaN(distanceNow)) {
-            prefsEdit.putFloat("dst", (float) distanceNow);
-            prefsEdit.commit();
         }
     }
 
@@ -309,7 +279,7 @@ public class cgGeo {
         }
 
         coordsNow = new Geopoint(location.getLatitude(), location.getLongitude());
-        app.setLastLoc(coordsNow);
+        cgeoapplication.getInstance().setLastCoords(coordsNow);
 
         if (location.hasAltitude() && locationProvider != LocationProviderType.LAST) {
             altitudeNow = location.getAltitude() + Settings.getAltCorrection();
@@ -338,8 +308,6 @@ public class cgGeo {
                 final float dst = coordsBefore.distanceTo(coordsNow);
 
                 if (dst > 0.005) {
-                    distanceNow += dst;
-
                     coordsBefore = coordsNow;
                 }
             } else if (coordsBefore == null) { // values aren't initialized
@@ -357,7 +325,7 @@ public class cgGeo {
     }
 
     public void lastLoc() {
-        assign(app.getLastCoords());
+        assign(cgeoapplication.getInstance().getLastCoords());
 
         Location lastGps = geoManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 

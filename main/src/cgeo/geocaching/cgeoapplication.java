@@ -65,15 +65,8 @@ public class cgeoapplication extends Application {
     public void onTerminate() {
         Log.d(Settings.tag, "Terminating c:geo...");
 
-        if (geo != null) {
-            geo.closeGeo();
-            geo = null;
-        }
-
-        if (dir != null) {
-            dir.closeDir();
-            dir = null;
-        }
+        cleanGeo();
+        cleanDir();
 
         if (storage != null) {
             storage.clean();
@@ -140,10 +133,9 @@ public class cgeoapplication extends Application {
         return storage.status();
     }
 
-    public cgGeo startGeo(Context context, cgUpdateLoc geoUpdate, int time, int distance) {
+    public cgGeo startGeo(cgUpdateLoc geoUpdate) {
         if (geo == null) {
-            geo = new cgGeo(context, this, geoUpdate, time, distance);
-            geo.initGeo();
+            geo = new cgGeo(geoUpdate);
 
             Log.i(Settings.tag, "Location service started");
         }
@@ -176,9 +168,7 @@ public class cgeoapplication extends Application {
             }
 
             if (!geoInUse && geo != null) {
-                geo.closeGeo();
-                geo = null;
-
+                cleanGeo();
                 Log.i(Settings.tag, "Location service stopped");
             }
         }
@@ -187,7 +177,6 @@ public class cgeoapplication extends Application {
     public cgDirection startDir(Context context, cgUpdateDir dirUpdate) {
         if (dir == null) {
             dir = new cgDirection(context, dirUpdate);
-            dir.initDir();
 
             Log.i(Settings.tag, "Direction service started");
         }
@@ -220,9 +209,7 @@ public class cgeoapplication extends Application {
             }
 
             if (!dirInUse && dir != null) {
-                dir.closeDir();
-                dir = null;
-
+                cleanDir();
                 Log.i(Settings.tag, "Direction service stopped");
             }
         }
@@ -667,7 +654,7 @@ public class cgeoapplication extends Application {
         return storage.saveLogs(geocode, list, false);
     }
 
-    public void setLastLoc(final Geopoint coords) {
+    public void setLastCoords(final Geopoint coords) {
         lastCoords = coords;
     }
 

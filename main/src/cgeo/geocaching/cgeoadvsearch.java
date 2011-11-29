@@ -144,7 +144,7 @@ public class cgeoadvsearch extends AbstractActivity {
         Settings.getLogin();
 
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, 0, 0);
+            geo = app.startGeo(geoUpdate);
         }
 
         ((Button) findViewById(R.id.buttonLatitude)).setOnClickListener(new findByCoordsAction());

@@ -196,7 +196,7 @@ public class cgeopopup extends AbstractActivity {
 
     private void init() {
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, 0, 0);
+            geo = app.startGeo(geoUpdate);
         }
 
         app.setAction(geocode);

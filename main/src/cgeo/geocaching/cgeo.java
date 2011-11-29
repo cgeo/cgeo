@@ -449,7 +449,7 @@ public class cgeo extends AbstractActivity {
         (new cleanDatabase()).start();
 
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, 0, 0);
+            geo = app.startGeo(geoUpdate);
         }
 
         navType = (TextView) findViewById(R.id.nav_type);

@@ -148,7 +148,7 @@ public class CacheDetailActivity extends AbstractActivity {
         setTitle(res.getString(R.string.cache));
 
         if (geolocation == null) {
-            geolocation = app.startGeo(this, locationUpdater, 0, 0);
+            geolocation = app.startGeo(locationUpdater);
         }
 
         String geocode = null;
@@ -261,7 +261,7 @@ public class CacheDetailActivity extends AbstractActivity {
         super.onResume();
 
         if (geolocation == null) {
-            geolocation = app.startGeo(this, locationUpdater, 0, 0);
+            geolocation = app.startGeo(locationUpdater);
         }
 
         if (refreshOnResume) {

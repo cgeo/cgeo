@@ -833,5 +833,4 @@ public final class Settings {
     public static int getVersion() {
         return sharedPrefs.getInt(KEY_VERSION, 0);
     }
-
 }
