@@ -14,6 +14,9 @@ import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
+import com.viewpagerindicator.TitlePageIndicator;
+import com.viewpagerindicator.TitleProvider;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
@@ -100,12 +103,6 @@ public class CacheDetailActivity extends AbstractActivity {
     private String contextMenuUser = null;
 
     /**
-     * The index of the current page. We need this hack because {@link onPageSelected()} is not called after
-     * initialization.
-     */
-    private int currentPageIndex = 0;
-
-    /**
      * A {@link List} of all available pages.
      */
     private final List<Page> pageOrder = new ArrayList<Page>();
@@ -119,11 +116,6 @@ public class CacheDetailActivity extends AbstractActivity {
      * The {@link ViewPagerAdapter} for this activity.
      */
     private ViewPagerAdapter viewPagerAdapter;
-
-    /**
-     * The {@link ViewPagerIndicator} for this activity.
-     */
-    private ViewPagerIndicator viewPagerIndicator;
 
     /**
      * If another activity is called and can modify the data of this activity, we refresh it on resume.
@@ -240,10 +232,11 @@ public class CacheDetailActivity extends AbstractActivity {
 
         // initialize ViewPager
         ViewPager pager = (ViewPager) findViewById(R.id.viewpager);
-        viewPagerIndicator = new ViewPagerIndicator();
-        pager.setOnPageChangeListener(viewPagerIndicator);
         viewPagerAdapter = new ViewPagerAdapter();
         pager.setAdapter(viewPagerAdapter);
+
+        TitlePageIndicator titleIndicator = (TitlePageIndicator) findViewById(R.id.pager_indicator);
+        titleIndicator.setViewPager(pager);
 
         // Initialization done. Let's load the data with the given information.
         new LoadCacheThread(geocode, guid, loadCacheHandler).start();
@@ -544,9 +537,6 @@ public class CacheDetailActivity extends AbstractActivity {
 
         // notify the adapter that the data has changed
         viewPagerAdapter.notifyDataSetChanged();
-
-        // notify the indicator about the change
-        viewPagerIndicator.onPageSelected(currentPageIndex);
 
         // rendering done! remove progress-popup if any there
         progress.dismiss();
@@ -851,7 +841,7 @@ public class CacheDetailActivity extends AbstractActivity {
     /**
      * The ViewPagerAdapter for scrolling through pages of the CacheDetailActivity.
      */
-    private class ViewPagerAdapter extends PagerAdapter {
+    private class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 
         @Override
         public void destroyItem(View container, int position, Object object) {
@@ -939,50 +929,10 @@ public class CacheDetailActivity extends AbstractActivity {
             // The ViewPager will get it back in instantiateItem()
             return POSITION_NONE;
         }
-    }
-
-    private class ViewPagerIndicator implements ViewPager.OnPageChangeListener {
-
-        // TODO: Clickable prev + next
-        private TextView indicatorPrev;
-        private TextView indicatorCurrent;
-        private TextView indicatorNext;
-
-        public ViewPagerIndicator() {
-            super();
-
-            indicatorPrev = (TextView) findViewById(R.id.indicator_prev);
-            indicatorCurrent = (TextView) findViewById(R.id.indicator_current);
-            indicatorNext = (TextView) findViewById(R.id.indicator_next);
-        }
 
         @Override
-        public void onPageScrollStateChanged(int state) {
-        }
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            currentPageIndex = position;
-
-            indicatorCurrent.setText(res.getString(pageOrder.get(position).titleStringId));
-
-            if (position > 0) {
-                indicatorPrev.setText(res.getString(pageOrder.get(position - 1).titleStringId));
-                indicatorPrev.setVisibility(View.VISIBLE);
-            } else {
-                indicatorPrev.setVisibility(View.GONE);
-            }
-
-            if (position < (pageOrder.size() - 1)) {
-                indicatorNext.setText(res.getString(pageOrder.get(position + 1).titleStringId));
-                indicatorNext.setVisibility(View.VISIBLE);
-            } else {
-                indicatorNext.setVisibility(View.GONE);
-            }
+        public String getTitle(int position) {
+            return res.getString(pageOrder.get(position).titleStringId);
         }
     }
 
