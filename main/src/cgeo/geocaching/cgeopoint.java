@@ -85,7 +85,7 @@ public class cgeopoint extends AbstractActivity {
     }
 
     private cgGeo geo = null;
-    private cgUpdateLoc geoUpdate = new update();
+    private UpdateLocationCallback geoUpdate = new update();
     private Button latButton = null;
     private Button lonButton = null;
     private boolean changed = false;
@@ -457,10 +457,10 @@ public class cgeopoint extends AbstractActivity {
         finish();
     }
 
-    private class update extends cgUpdateLoc {
+    private class update implements UpdateLocationCallback {
 
         @Override
-        public void updateLoc(cgGeo geo) {
+        public void updateLocation(cgGeo geo) {
             if (geo == null) {
                 return;
             }

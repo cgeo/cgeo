@@ -552,9 +552,9 @@ public class CacheDetailActivity extends AbstractActivity {
         progress.dismiss();
     }
 
-    private class LocationUpdater extends cgUpdateLoc {
+    private class LocationUpdater implements UpdateLocationCallback {
         @Override
-        public void updateLoc(cgGeo geo) {
+        public void updateLocation(cgGeo geo) {
             if (geo == null) {
                 return;
             }
@@ -1222,7 +1222,7 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             if (geolocation != null) {
-                locationUpdater.updateLoc(geolocation);
+                locationUpdater.updateLocation(geolocation);
             }
 
             return view;

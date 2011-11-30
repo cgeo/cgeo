@@ -30,7 +30,7 @@ public class cgeowaypointadd extends AbstractActivity {
     private String geocode = null;
     private int id = -1;
     private cgGeo geo = null;
-    private cgUpdateLoc geoUpdate = new update();
+    private UpdateLocationCallback geoUpdate = new update();
     private ProgressDialog waitDialog = null;
     private cgWaypoint waypoint = null;
     private WaypointType type = WaypointType.OWN;
@@ -188,10 +188,10 @@ public class cgeowaypointadd extends AbstractActivity {
         super.onPause();
     }
 
-    private class update extends cgUpdateLoc {
+    private class update implements UpdateLocationCallback {
 
         @Override
-        public void updateLoc(cgGeo geo) {
+        public void updateLocation(cgGeo geo) {
             if (geo == null || geo.coordsNow == null) {
                 return;
             }

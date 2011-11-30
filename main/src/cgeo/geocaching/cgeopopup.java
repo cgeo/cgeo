@@ -37,7 +37,7 @@ public class cgeopopup extends AbstractActivity {
     private String geocode = null;
     private cgCache cache = null;
     private cgGeo geo = null;
-    private cgUpdateLoc geoUpdate = new update();
+    private UpdateLocationCallback geoUpdate = new update();
     private ProgressDialog storeDialog = null;
     private ProgressDialog dropDialog = null;
     private TextView cacheDistance = null;
@@ -454,7 +454,7 @@ public class cgeopopup extends AbstractActivity {
         }
 
         if (geo != null) {
-            geoUpdate.updateLoc(geo);
+            geoUpdate.updateLocation(geo);
         }
     }
 
@@ -499,10 +499,10 @@ public class cgeopopup extends AbstractActivity {
         super.onPause();
     }
 
-    private class update extends cgUpdateLoc {
+    private class update implements UpdateLocationCallback {
 
         @Override
-        public void updateLoc(cgGeo geo) {
+        public void updateLocation(cgGeo geo) {
             if (geo == null) {
                 return;
             }

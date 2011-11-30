@@ -8,8 +8,8 @@ import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgDirection;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSearch;
-import cgeo.geocaching.cgUpdateDir;
-import cgeo.geocaching.cgUpdateLoc;
+import cgeo.geocaching.UpdateDirectionCallback;
+import cgeo.geocaching.UpdateLocationCallback;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
@@ -99,8 +99,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private cgeoapplication app = null;
     private cgGeo geo = null;
     private cgDirection dir = null;
-    private cgUpdateLoc geoUpdate = new UpdateLoc();
-    private cgUpdateDir dirUpdate = new UpdateDir();
+    private UpdateLocationCallback geoUpdate = new UpdateLoc();
+    private UpdateDirectionCallback dirUpdate = new UpdateDir();
     // from intent
     private boolean fromDetailIntent = false;
     private cgSearch searchIntent = null;
@@ -347,10 +347,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
         // start location and directory services
         if (geo != null) {
-            geoUpdate.updateLoc(geo);
+            geoUpdate.updateLocation(geo);
         }
         if (dir != null) {
-            dirUpdate.updateDir(dir);
+            dirUpdate.updateDirection(dir);
         }
 
         // get parameters
@@ -423,10 +423,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             dir = app.startDir(activity, dirUpdate);
         }
 
-        geoUpdate.updateLoc(geo);
+        geoUpdate.updateLocation(geo);
 
         if (dir != null) {
-            dirUpdate.updateDir(dir);
+            dirUpdate.updateDirection(dir);
         }
 
         startTimer();
@@ -756,10 +756,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     }
 
     // class: update location
-    private class UpdateLoc extends cgUpdateLoc {
+    private class UpdateLoc implements UpdateLocationCallback {
 
         @Override
-        public void updateLoc(cgGeo geo) {
+        public void updateLocation(cgGeo geo) {
             if (geo == null) {
                 return;
             }
@@ -803,10 +803,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     }
 
     // class: update direction
-    private class UpdateDir extends cgUpdateDir {
+    private class UpdateDir implements UpdateDirectionCallback {
 
         @Override
-        public void updateDir(cgDirection dir) {
+        public void updateDirection(cgDirection dir) {
             if (dir == null || dir.directionNow == null) {
                 return;
             }

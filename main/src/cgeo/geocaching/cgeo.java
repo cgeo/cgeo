@@ -51,7 +51,7 @@ public class cgeo extends AbstractActivity {
 
     private Integer version = null;
     private cgGeo geo = null;
-    private cgUpdateLoc geoUpdate = new update();
+    private UpdateLocationCallback geoUpdate = new update();
     private TextView navType = null;
     private TextView navAccuracy = null;
     private TextView navSatellites = null;
@@ -534,10 +534,10 @@ public class cgeo extends AbstractActivity {
                 .show();
     }
 
-    private class update extends cgUpdateLoc {
+    private class update implements UpdateLocationCallback {
 
         @Override
-        public void updateLoc(cgGeo geo) {
+        public void updateLocation(cgGeo geo) {
             if (geo == null) {
                 return;
             }
@@ -561,9 +561,9 @@ public class cgeo extends AbstractActivity {
                     findNearest.setBackgroundResource(R.drawable.main_nearby);
 
                     String satellites = null;
-                    if (geo.satellitesVisible != null && geo.satellitesFixed != null && geo.satellitesFixed > 0) {
+                    if (geo.satellitesFixed > 0) {
                         satellites = res.getString(R.string.loc_sat) + ": " + geo.satellitesFixed + "/" + geo.satellitesVisible;
-                    } else if (geo.satellitesVisible != null) {
+                    } else if (geo.satellitesVisible >= 0) {
                         satellites = res.getString(R.string.loc_sat) + ": 0/" + geo.satellitesVisible;
                     } else {
                         satellites = "";

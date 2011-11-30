@@ -164,8 +164,8 @@ public class cgeocaches extends AbstractListActivity {
     private Float northHeading = 0f;
     private cgGeo geo = null;
     private cgDirection dir = null;
-    private cgUpdateLoc geoUpdate = new update();
-    private cgUpdateDir dirUpdate = new UpdateDirection();
+    private UpdateLocationCallback geoUpdate = new update();
+    private UpdateDirectionCallback dirUpdate = new UpdateDirection();
     private String title = "";
     private int detailTotal = 0;
     private int detailProgress = 0;
@@ -1477,10 +1477,10 @@ public class cgeocaches extends AbstractListActivity {
         setAdapter();
 
         if (geo != null) {
-            geoUpdate.updateLoc(geo);
+            geoUpdate.updateLocation(geo);
         }
         if (dir != null) {
-            dirUpdate.updateDir(dir);
+            dirUpdate.updateDirection(dir);
         }
     }
 
@@ -1745,10 +1745,10 @@ public class cgeocaches extends AbstractListActivity {
         threadR.start();
     }
 
-    private class update extends cgUpdateLoc {
+    private class update implements UpdateLocationCallback {
 
         @Override
-        public void updateLoc(cgGeo geo) {
+        public void updateLocation(cgGeo geo) {
             if (geo == null) {
                 return;
             }
@@ -1779,10 +1779,10 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
-    private class UpdateDirection extends cgUpdateDir {
+    private class UpdateDirection implements UpdateDirectionCallback {
 
         @Override
-        public void updateDir(cgDirection dir) {
+        public void updateDirection(cgDirection dir) {
             if (!Settings.isLiveList()) {
                 return;
             }

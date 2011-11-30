@@ -35,8 +35,8 @@ public class cgeonavigate extends AbstractActivity {
     private PowerManager pm = null;
     private cgGeo geo = null;
     private cgDirection dir = null;
-    private cgUpdateLoc geoUpdate = new update();
-    private cgUpdateDir dirUpdate = new UpdateDirection();
+    private UpdateLocationCallback geoUpdate = new update();
+    private UpdateDirectionCallback dirUpdate = new UpdateDirection();
     private Geopoint dstCoords = null;
     private float cacheHeading = 0;
     private Float northHeading = null;
@@ -117,10 +117,10 @@ public class cgeonavigate extends AbstractActivity {
         setDestCoords();
 
         if (geo != null) {
-            geoUpdate.updateLoc(geo);
+            geoUpdate.updateLocation(geo);
         }
         if (dir != null) {
-            dirUpdate.updateDir(dir);
+            dirUpdate.updateDirection(dir);
         }
 
         // get textviews once
@@ -335,10 +335,10 @@ public class cgeonavigate extends AbstractActivity {
         headingView.setText(String.format("%.0f", cacheHeading) + "°");
     }
 
-    private class update extends cgUpdateLoc {
+    private class update implements UpdateLocationCallback {
 
         @Override
-        public void updateLoc(cgGeo geo) {
+        public void updateLocation(cgGeo geo) {
             if (geo == null) {
                 return;
             }
@@ -353,9 +353,9 @@ public class cgeonavigate extends AbstractActivity {
 
                 if (geo.coordsNow != null) {
                     String satellites = null;
-                    if (geo.satellitesVisible != null && geo.satellitesFixed != null && geo.satellitesFixed > 0) {
+                    if (geo.satellitesFixed > 0) {
                         satellites = res.getString(R.string.loc_sat) + ": " + geo.satellitesFixed + "/" + geo.satellitesVisible;
-                    } else if (geo.satellitesVisible != null) {
+                    } else if (geo.satellitesVisible >= 0) {
                         satellites = res.getString(R.string.loc_sat) + ": 0/" + geo.satellitesVisible;
                     } else {
                         satellites = "";
@@ -400,10 +400,10 @@ public class cgeonavigate extends AbstractActivity {
         }
     }
 
-    private class UpdateDirection extends cgUpdateDir {
+    private class UpdateDirection implements UpdateDirectionCallback {
 
         @Override
-        public void updateDir(cgDirection dir) {
+        public void updateDirection(cgDirection dir) {
             if (dir == null || dir.directionNow == null) {
                 return;
             }

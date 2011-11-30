@@ -421,12 +421,10 @@ public class cgeotrackable extends AbstractActivity {
 
         @Override
         public void run() {
-            // FIXME: Differentiation of trackable sources must be more globally, outside of activity
-            if (StringUtils.startsWithIgnoreCase(geocode, "GK")) {
-                trackable = cgeoapplication.getInstance().getTrackableByGeocode(geocode);
-            }
-            else {
+            if (trackable.isLoggable()) {
                 trackable = cgBase.searchTrackable(geocode, guid, id);
+            } else {
+                trackable = cgeoapplication.getInstance().getTrackableByGeocode(geocode);
             }
             handler.sendMessage(Message.obtain());
         }

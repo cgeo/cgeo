@@ -31,7 +31,7 @@ public class cgeoadvsearch extends AbstractActivity {
 
     private static final int MENU_SEARCH_OWN_CACHES = 1;
     private cgGeo geo = null;
-    private cgUpdateLoc geoUpdate = new update();
+    private UpdateLocationCallback geoUpdate = new update();
     private EditText latEdit = null;
     private EditText lonEdit = null;
     private String[] geocodesInCache = null;
@@ -198,10 +198,10 @@ public class cgeoadvsearch extends AbstractActivity {
         displayTrackable.setOnClickListener(new findTrackableListener());
     }
 
-    private class update extends cgUpdateLoc {
+    private class update implements UpdateLocationCallback {
 
         @Override
-        public void updateLoc(cgGeo geo) {
+        public void updateLocation(cgGeo geo) {
             if (geo == null) {
                 return;
             }

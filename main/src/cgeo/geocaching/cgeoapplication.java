@@ -133,10 +133,9 @@ public class cgeoapplication extends Application {
         return storage.status();
     }
 
-    public cgGeo startGeo(cgUpdateLoc geoUpdate) {
+    public cgGeo startGeo(UpdateLocationCallback geoUpdate) {
         if (geo == null) {
-            geo = new cgGeo(geoUpdate);
-
+            geo = new cgGeo();
             Log.i(Settings.tag, "Location service started");
         }
 
@@ -174,7 +173,7 @@ public class cgeoapplication extends Application {
         }
     }
 
-    public cgDirection startDir(Context context, cgUpdateDir dirUpdate) {
+    public cgDirection startDir(Context context, UpdateDirectionCallback dirUpdate) {
         if (dir == null) {
             dir = new cgDirection(context, dirUpdate);
 
