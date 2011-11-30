@@ -176,7 +176,13 @@ public class HtmlImage implements Html.ImageGetter {
             } else {
                 final String host = ConnectorFactory.getConnector(geocode).getHost();
                 if (StringUtils.isNotEmpty(host)) {
-                    return "http://" + host + url;
+                    StringBuilder builder = new StringBuilder("http://");
+                    builder.append(host);
+                    if (!StringUtils.startsWith(url, "/")) {
+                        builder.append('/');
+                    }
+                    builder.append(url);
+                    return builder.toString();
                 }
             }
         } catch (Exception e) {
