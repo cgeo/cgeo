@@ -2071,16 +2071,17 @@ public class cgBase {
     }
 
     public static cgTrackable searchTrackable(final String geocode, final String guid, final String id) {
-        cgTrackable trackable = new cgTrackable();
-
         if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid) && StringUtils.isBlank(id)) {
             Log.w(Settings.tag, "cgeoBase.searchTrackable: No geocode nor guid nor id given");
             return null;
         }
 
+        cgTrackable trackable = new cgTrackable();
+
         final Parameters params = new Parameters();
         if (StringUtils.isNotBlank(geocode)) {
             params.put("tracker", geocode);
+            trackable.setGeocode(geocode);
         } else if (StringUtils.isNotBlank(guid)) {
             params.put("guid", guid);
         } else if (StringUtils.isNotBlank(id)) {
@@ -2097,7 +2098,7 @@ public class cgBase {
         trackable = parseTrackable(page, cgeoapplication.getInstance());
         if (trackable == null) {
             Log.e(Settings.tag, "cgeoBase.searchTrackable: No trackable parsed");
-            return trackable;
+            return null;
         }
 
         return trackable;
@@ -2429,8 +2430,13 @@ public class cgBase {
         if (name.length() > 82) {
             name = name.substring(0, 79) + "...";
         }
-        String status = "I touched " + name + " (" + trackable.getUrl() + ")!";
-        status = Twitter.appendHashTag(status, "cgeo");
+        StringBuilder builder = new StringBuilder("I touched ");
+        builder.append(name);
+        if (trackable.getUrl() != null) {
+            builder.append(" (").append(trackable.getUrl()).append(')');
+        }
+        builder.append('!');
+        String status = Twitter.appendHashTag(builder.toString(), "cgeo");
         status = Twitter.appendHashTag(status, "geocaching");
         Twitter.postTweet(app, status, null);
     }

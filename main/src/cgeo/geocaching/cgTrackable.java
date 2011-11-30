@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.text.Html;
 
 import java.util.ArrayList;
@@ -33,6 +35,17 @@ public class cgTrackable implements ILogable {
     private List<cgLog> logs = new ArrayList<cgLog>();
 
     public String getUrl() {
+        if (StringUtils.startsWithIgnoreCase(geocode, "GK")) {
+            String hex = geocode.substring(3);
+            try {
+                int id = Integer.parseInt(hex, 16);
+                return "http://geokrety.org/konkret.php?id=" + id;
+            } catch (NumberFormatException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+                return null;
+            }
+        }
         return "http://coord.info/" + geocode.toUpperCase();
     }
 
@@ -187,5 +200,12 @@ public class cgTrackable implements ILogable {
         }
 
         return "???";
+    }
+
+    public boolean isLoggable() {
+        if (StringUtils.startsWithIgnoreCase(geocode, "GK")) {
+            return false;
+        }
+        return true;
     }
 }

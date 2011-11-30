@@ -613,8 +613,11 @@ public abstract class GPXParser extends FileParser {
             // waypoint.cache.travelbugs
             final Element gcTBs = gcCache.getChild(nsGC, "travelbugs");
 
+            // waypoint.cache.travelbug
+            final Element gcTB = gcTBs.getChild(nsGC, "travelbug");
+
             // waypoint.cache.travelbugs.travelbug
-            gcTBs.getChild(nsGC, "travelbug").setStartElementListener(new StartElementListener() {
+            gcTB.setStartElementListener(new StartElementListener() {
 
                 @Override
                 public void start(Attributes attrs) {
@@ -629,9 +632,6 @@ public abstract class GPXParser extends FileParser {
                     }
                 }
             });
-
-            // waypoint.cache.travelbug
-            final Element gcTB = gcTBs.getChild(nsGC, "travelbug");
 
             gcTB.setEndElementListener(new EndElementListener() {
 
