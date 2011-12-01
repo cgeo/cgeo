@@ -645,8 +645,13 @@ public class cgCache implements ICache {
         this.nameSp = nameSp;
     }
 
-    public void setHidden(Date hidden) {
-        this.hidden = hidden;
+    public void setHidden(final Date hidden) {
+        if (hidden == null) {
+            this.hidden = null;
+        }
+        else {
+            this.hidden = new Date(hidden.getTime()); // avoid storing the external reference in this object
+        }
     }
 
     public Float getDirection() {

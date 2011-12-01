@@ -37,7 +37,6 @@ public class cgeoapplication extends Application {
     final private Map<String, cgCache> cachesCache = new HashMap<String, cgCache>(); // caching caches into memory
     public boolean firstRun = true; // c:geo is just launched
     public boolean showLoginToast = true; //login toast shown just once.
-    public boolean warnedLanguage = false; // user was warned about different language settings on geocaching.com
     private boolean databaseCleaned = false; // database was cleaned
     private static cgeoapplication instance;
 

@@ -98,7 +98,12 @@ public class cgTrackable implements ILogable {
     }
 
     public void setReleased(Date released) {
-        this.released = released;
+        if (released == null) {
+            this.released = null;
+        }
+        else {
+            this.released = new Date(released.getTime()); // avoid storing external reference in this object
+        }
     }
 
     public Float getDistance() {

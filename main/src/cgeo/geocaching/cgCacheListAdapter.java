@@ -343,7 +343,6 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             holder.oneInfo = (RelativeLayout) v.findViewById(R.id.one_info);
             holder.oneCheckbox = (RelativeLayout) v.findViewById(R.id.one_checkbox);
             holder.logStatusMark = (ImageView) v.findViewById(R.id.log_status_mark);
-            holder.oneCache = (RelativeLayout) v.findViewById(R.id.one_cache);
             holder.text = (TextView) v.findViewById(R.id.text);
             holder.directionLayout = (RelativeLayout) v.findViewById(R.id.direction_layout);
             holder.distance = (cgDistanceView) v.findViewById(R.id.distance);

@@ -6,7 +6,6 @@ public class cgList {
 
     public int id = 0;
     public String title = null;
-    public Long updated = null;
 
     public cgList(int idIn, String titleIn) {
         id = idIn;

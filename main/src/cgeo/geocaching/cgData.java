@@ -1671,8 +1671,8 @@ public class cgData {
                 values.clear();
                 values.put("geocode", geocode);
                 values.put("updated", timeStamp);
-                values.put("type", pair.getKey().intValue());
-                values.put("count", pair.getValue().intValue());
+                values.put("type", pair.getKey());
+                values.put("count", pair.getValue());
 
                 databaseRW.insert(dbTableLogCount, null, values);
             }
@@ -2015,44 +2015,45 @@ public class cgData {
         cgCache cache = new cgCache();
 
         if (cacheColumnIndex == null) {
-            cacheColumnIndex = new int[37];
-            cacheColumnIndex[0] = cursor.getColumnIndex("updated");
-            cacheColumnIndex[1] = cursor.getColumnIndex("reason");
-            cacheColumnIndex[2] = cursor.getColumnIndex("detailed");
-            cacheColumnIndex[3] = cursor.getColumnIndex("detailedupdate");
-            cacheColumnIndex[4] = cursor.getColumnIndex("visiteddate");
-            cacheColumnIndex[5] = cursor.getColumnIndex("geocode");
-            cacheColumnIndex[6] = cursor.getColumnIndex("cacheid");
-            cacheColumnIndex[7] = cursor.getColumnIndex("guid");
-            cacheColumnIndex[8] = cursor.getColumnIndex("type");
-            cacheColumnIndex[9] = cursor.getColumnIndex("name");
-            cacheColumnIndex[10] = cursor.getColumnIndex("own");
-            cacheColumnIndex[11] = cursor.getColumnIndex("owner");
-            cacheColumnIndex[12] = cursor.getColumnIndex("owner_real");
-            cacheColumnIndex[13] = cursor.getColumnIndex("hidden");
-            cacheColumnIndex[14] = cursor.getColumnIndex("hint");
-            cacheColumnIndex[15] = cursor.getColumnIndex("size");
-            cacheColumnIndex[16] = cursor.getColumnIndex("difficulty");
-            cacheColumnIndex[17] = cursor.getColumnIndex("direction");
-            cacheColumnIndex[18] = cursor.getColumnIndex("distance");
-            cacheColumnIndex[19] = cursor.getColumnIndex("terrain");
-            cacheColumnIndex[20] = cursor.getColumnIndex("latlon");
-            cacheColumnIndex[21] = cursor.getColumnIndex("location");
-            cacheColumnIndex[22] = cursor.getColumnIndex("elevation");
-            cacheColumnIndex[23] = cursor.getColumnIndex("personal_note");
-            cacheColumnIndex[24] = cursor.getColumnIndex("shortdesc");
-            cacheColumnIndex[25] = cursor.getColumnIndex("favourite_cnt");
-            cacheColumnIndex[26] = cursor.getColumnIndex("rating");
-            cacheColumnIndex[27] = cursor.getColumnIndex("votes");
-            cacheColumnIndex[28] = cursor.getColumnIndex("myvote");
-            cacheColumnIndex[29] = cursor.getColumnIndex("disabled");
-            cacheColumnIndex[30] = cursor.getColumnIndex("archived");
-            cacheColumnIndex[31] = cursor.getColumnIndex("members");
-            cacheColumnIndex[32] = cursor.getColumnIndex("found");
-            cacheColumnIndex[33] = cursor.getColumnIndex("favourite");
-            cacheColumnIndex[34] = cursor.getColumnIndex("inventoryunknown");
-            cacheColumnIndex[35] = cursor.getColumnIndex("onWatchlist");
-            cacheColumnIndex[36] = cursor.getColumnIndex("reliable_latlon");
+            int[] local_cci = new int[37]; // use a local variable to avoid having the not yet fully initialized array be visible to other threads
+            local_cci[0] = cursor.getColumnIndex("updated");
+            local_cci[1] = cursor.getColumnIndex("reason");
+            local_cci[2] = cursor.getColumnIndex("detailed");
+            local_cci[3] = cursor.getColumnIndex("detailedupdate");
+            local_cci[4] = cursor.getColumnIndex("visiteddate");
+            local_cci[5] = cursor.getColumnIndex("geocode");
+            local_cci[6] = cursor.getColumnIndex("cacheid");
+            local_cci[7] = cursor.getColumnIndex("guid");
+            local_cci[8] = cursor.getColumnIndex("type");
+            local_cci[9] = cursor.getColumnIndex("name");
+            local_cci[10] = cursor.getColumnIndex("own");
+            local_cci[11] = cursor.getColumnIndex("owner");
+            local_cci[12] = cursor.getColumnIndex("owner_real");
+            local_cci[13] = cursor.getColumnIndex("hidden");
+            local_cci[14] = cursor.getColumnIndex("hint");
+            local_cci[15] = cursor.getColumnIndex("size");
+            local_cci[16] = cursor.getColumnIndex("difficulty");
+            local_cci[17] = cursor.getColumnIndex("direction");
+            local_cci[18] = cursor.getColumnIndex("distance");
+            local_cci[19] = cursor.getColumnIndex("terrain");
+            local_cci[20] = cursor.getColumnIndex("latlon");
+            local_cci[21] = cursor.getColumnIndex("location");
+            local_cci[22] = cursor.getColumnIndex("elevation");
+            local_cci[23] = cursor.getColumnIndex("personal_note");
+            local_cci[24] = cursor.getColumnIndex("shortdesc");
+            local_cci[25] = cursor.getColumnIndex("favourite_cnt");
+            local_cci[26] = cursor.getColumnIndex("rating");
+            local_cci[27] = cursor.getColumnIndex("votes");
+            local_cci[28] = cursor.getColumnIndex("myvote");
+            local_cci[29] = cursor.getColumnIndex("disabled");
+            local_cci[30] = cursor.getColumnIndex("archived");
+            local_cci[31] = cursor.getColumnIndex("members");
+            local_cci[32] = cursor.getColumnIndex("found");
+            local_cci[33] = cursor.getColumnIndex("favourite");
+            local_cci[34] = cursor.getColumnIndex("inventoryunknown");
+            local_cci[35] = cursor.getColumnIndex("onWatchlist");
+            local_cci[36] = cursor.getColumnIndex("reliable_latlon");
+            cacheColumnIndex = local_cci;
         }
 
         cache.setUpdated(cursor.getLong(cacheColumnIndex[0]));
@@ -3166,12 +3167,8 @@ public class cgData {
                     cursor.moveToFirst();
                     int indexId = cursor.getColumnIndex("_id");
                     int indexTitle = cursor.getColumnIndex("title");
-                    int indexUpdated = cursor.getColumnIndex("updated");
-
                     do {
                         cgList list = new cgList(cursor.getInt(indexId) + 10, cursor.getString(indexTitle));
-                        list.updated = cursor.getLong(indexUpdated);
-
                         result.add(list);
                     } while (cursor.moveToNext());
                 }

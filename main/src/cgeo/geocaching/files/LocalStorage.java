@@ -180,13 +180,21 @@ public class LocalStorage {
     public static boolean copy(final File source, final File destination) {
         destination.getParentFile().mkdirs();
 
-        InputStream input;
+        InputStream input = null;
         OutputStream output;
         try {
             input = new FileInputStream(source);
             output = new FileOutputStream(destination);
         } catch (FileNotFoundException e) {
             Log.e(Settings.tag, "LocalStorage.copy: could not open file", e);
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            }
             return false;
         }
 

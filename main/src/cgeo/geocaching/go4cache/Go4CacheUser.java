@@ -26,7 +26,7 @@ public class Go4CacheUser {
     public Go4CacheUser(final String username, final Geopoint coords, final Date date, final String action, final String client) {
         this.username = username;
         this.coords = coords;
-        this.date = date;
+        this.date = new Date(date.getTime());
         this.action = action;
         this.client = client;
     }

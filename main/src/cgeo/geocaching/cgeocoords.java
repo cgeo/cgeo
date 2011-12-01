@@ -285,6 +285,8 @@ public class cgeocoords extends Dialog {
                 case 'W':
                     button.setText("E");
                     break;
+                default:
+                    break;
             }
             calc(true);
         }

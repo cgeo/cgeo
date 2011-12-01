@@ -1966,13 +1966,15 @@ public class CacheDetailActivity extends AbstractActivity {
             protected Void doInBackground(Void... params) {
                 // log count
                 if (cache != null && cache.getLogCounts() != null) {
-                    final StringBuilder text = new StringBuilder();
+                    final StringBuilder text = new StringBuilder(200);
                     text.append(res.getString(R.string.cache_log_types));
                     text.append(": ");
 
                     // sort the log counts by type id ascending. that way the FOUND, DNF log types are the first and most visible ones
                     List<Entry<Integer, Integer>> sortedLogCounts = new ArrayList<Entry<Integer, Integer>>();
-                    sortedLogCounts.addAll(cache.getLogCounts().entrySet());
+                    for (Entry<Integer, Integer> entry : cache.getLogCounts().entrySet()) {
+                        sortedLogCounts.add(entry); // don't add these entries using addAll(), the iterator in the EntrySet can go wrong (see Findbugs)
+                    }
                     Collections.sort(sortedLogCounts, new Comparator<Entry<Integer, Integer>>() {
 
                         @Override

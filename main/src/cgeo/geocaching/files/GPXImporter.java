@@ -371,6 +371,9 @@ public class GPXImporter {
                     fromActivity.showShortToast(res.getString(R.string.gpx_import_canceled));
                     importFinished();
                     break;
+
+                default:
+                    break;
             }
         }
     };
