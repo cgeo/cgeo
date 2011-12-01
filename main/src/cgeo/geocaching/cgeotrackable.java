@@ -421,9 +421,10 @@ public class cgeotrackable extends AbstractActivity {
 
         @Override
         public void run() {
-            if (trackable.isLoggable()) {
+            if (trackable == null || trackable.isLoggable()) {
                 trackable = cgBase.searchTrackable(geocode, guid, id);
             } else {
+                // for non TB trackables, we should just use what we have in the database
                 trackable = cgeoapplication.getInstance().getTrackableByGeocode(geocode);
             }
             handler.sendMessage(Message.obtain());
