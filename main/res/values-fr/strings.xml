@@ -457,7 +457,6 @@
   <string name="cache_attributes">Attributs</string>
   <string name="cache_attributes_no_icons">(recharger la cache pour voir les icônes des attributs)</string>
   <string name="cache_inventory">Inventaire</string>
-  <string name="cache_inventory_loading">Chargement de l\'inventaire…</string>
   <string name="cache_log_offline">Visite hors-ligne</string>
   <string name="cache_log_images_loading">Chargement de l\'image de la visite…</string>
   <string name="cache_log_images_title">Image de la visite</string>

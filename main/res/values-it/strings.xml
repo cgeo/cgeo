@@ -454,7 +454,6 @@
   <string name="cache_attributes">Attributi</string>
   <string name="cache_attributes_no_icons">(aggiorna la cache per visualizzare le icone degli attributi)</string>
   <string name="cache_inventory">Oggetti Trackable contenuti</string>
-  <string name="cache_inventory_loading">Caricamento trackable…</string>
   <string name="cache_log_offline">Log Offline</string>
   <string name="cache_log_images_loading">Caricamento immagini log…</string>
   <string name="cache_log_images_title">Immagini Log</string>

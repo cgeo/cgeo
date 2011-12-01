@@ -457,7 +457,6 @@
   <string name="cache_attributes">Attributen</string>
   <string name="cache_attributes_no_icons">(herlaad cache om attribuut-iconen weer te geven)</string>
   <string name="cache_inventory">Inventaris</string>
-  <string name="cache_inventory_loading">Laden cache-inhoud…</string>
   <string name="cache_log_offline">Offline log</string>
   <string name="cache_log_images_loading">Laden van logafbeeldingen…</string>
   <string name="cache_log_images_title">Logafbeelding</string>

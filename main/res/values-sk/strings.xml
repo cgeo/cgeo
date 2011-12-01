@@ -462,7 +462,6 @@
   <string name="cache_attributes">Atribúty</string>
   <string name="cache_attributes_no_icons">(obnoví skrýšu pre zobrazenie ikon atribútov)</string>
   <string name="cache_inventory">Obsah</string>
-  <string name="cache_inventory_loading">Načítanie obsahu skrýše…</string>
   <string name="cache_log_offline">Offline log</string>
   <string name="cache_log_images_loading">Načítanie obrázku z logu…</string>
   <string name="cache_log_images_title">Obrázok z logu</string>
