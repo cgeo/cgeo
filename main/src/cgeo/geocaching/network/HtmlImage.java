@@ -211,15 +211,13 @@ public class HtmlImage implements Html.ImageGetter {
             fis = new FileInputStream(file);
             BitmapFactory.decodeStream(fis, null, options);
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Log.e(Settings.tag, "HtmlImage.setSampleSize", e);
         } finally {
             if (fis != null) {
                 try {
                     fis.close();
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    // ignore
                 }
             }
         }

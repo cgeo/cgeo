@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.GCConnector;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -467,8 +468,7 @@ public class cgCache implements ICache {
 
     @Override
     public String getCacheId() {
-        // TODO: Only valid for GC-cache
-        if (StringUtils.isBlank(cacheId)) {
+        if (StringUtils.isBlank(cacheId) && getConnector().equals(GCConnector.getInstance())) {
             return CryptUtils.convertToGcBase31(geocode);
         }
 

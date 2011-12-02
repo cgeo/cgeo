@@ -1,6 +1,7 @@
 package cgeo.geocaching.connector.opencaching;
 
 import cgeo.geocaching.Parameters;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgImage;
@@ -20,6 +21,7 @@ import org.json.JSONObject;
 
 import android.net.Uri;
 import android.text.Html;
+import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -112,8 +114,7 @@ final public class OkapiClient {
                 return caches;
             }
         } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Log.e(Settings.tag, "OkapiClient.parseCaches", e);
         }
         return null;
     }
@@ -173,8 +174,7 @@ final public class OkapiClient {
             cache.setHidden(parseDate(response.getString(CACHE_HIDDEN)));
 
         } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Log.e(Settings.tag, "OkapiClient.parseCache", e);
         }
         return cache;
     }
@@ -215,10 +215,8 @@ final public class OkapiClient {
                 }
                 result.add(log);
             } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                Log.e(Settings.tag, "OkapiClient.parseLogs", e);
             }
-
         }
         return result;
     }
@@ -239,8 +237,7 @@ final public class OkapiClient {
         try {
             return ISO8601DATEFORMAT.parse(strippedDate);
         } catch (ParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Log.e(Settings.tag, "OkapiClient.parseDate", e);
         }
         return null;
     }
@@ -257,8 +254,7 @@ final public class OkapiClient {
         try {
             size = response.getDouble("size");
         } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Log.e(Settings.tag, "OkapiClient.getCacheSize", e);
         }
         switch ((int) Math.round(size)) {
             case 1:

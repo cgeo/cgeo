@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import org.apache.commons.lang3.StringUtils;
 
 import android.text.Html;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -41,8 +42,7 @@ public class cgTrackable implements ILogable {
                 int id = Integer.parseInt(hex, 16);
                 return "http://geokrety.org/konkret.php?id=" + id;
             } catch (NumberFormatException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                Log.e(Settings.tag, "cgTrackable.getUrl", e);
                 return null;
             }
         }
