@@ -66,6 +66,7 @@ import android.widget.TextView.BufferType;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -88,8 +89,12 @@ public class CacheDetailActivity extends AbstractActivity {
     private static final int MENU_BROWSER = 7;
     private static final int MENU_NAVIGATE = 2;
 
-    private static final int CONTEXT_MENU_WAYPOINT_DELETE = 1235;
-    private static final int CONTEXT_MENU_WAYPOINT_DUPLICATE = 1234;
+    private static final int CONTEXT_MENU_WAYPOINT_EDIT = 1234;
+    private static final int CONTEXT_MENU_WAYPOINT_DUPLICATE = 1235;
+    private static final int CONTEXT_MENU_WAYPOINT_DELETE = 1236;
+    private static final int CONTEXT_MENU_WAYPOINT_COMPASS = 1237;
+    private static final int CONTEXT_MENU_WAYPOINT_NAVIGATE = 1238;
+    private static final int CONTEXT_MENU_WAYPOINT_CACHES_AROUND = 1239;
 
     private cgGeo geolocation;
     private cgCache cache;
@@ -98,6 +103,7 @@ public class CacheDetailActivity extends AbstractActivity {
     private cgSearch search;
     private final LocationUpdater locationUpdater = new LocationUpdater();
     private String contextMenuUser = null;
+    private int contextMenuWPIndex = -1;
 
     /**
      * The index of the current page. We need this hack because {@link onPageSelected()} is not called after
@@ -301,6 +307,7 @@ public class CacheDetailActivity extends AbstractActivity {
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo info) {
         super.onCreateContextMenu(menu, view, info);
         final int viewId = view.getId();
+        contextMenuWPIndex = -1;
         switch (viewId) {
             case R.id.author:
             case R.id.value:
@@ -330,10 +337,19 @@ public class CacheDetailActivity extends AbstractActivity {
                                 final cgWaypoint waypoint = sortedWaypoints.get(i);
                                 final int index = cache.getWaypoints().indexOf(waypoint);
                                 menu.setHeaderTitle(res.getString(R.string.waypoint));
+                                menu.add(CONTEXT_MENU_WAYPOINT_EDIT, index, 0, R.string.waypoint_edit);
                                 menu.add(CONTEXT_MENU_WAYPOINT_DUPLICATE, index, 0, R.string.waypoint_duplicate);
+                                contextMenuWPIndex = index;
                                 if (waypoint.isUserDefined()) {
                                     menu.add(CONTEXT_MENU_WAYPOINT_DELETE, index, 0, R.string.waypoint_delete);
                                 }
+                                if (waypoint.getCoords() != null) {
+                                    menu.add(CONTEXT_MENU_WAYPOINT_COMPASS, index, 0, R.string.cache_menu_compass);
+                                    SubMenu subMenu = menu.addSubMenu(CONTEXT_MENU_WAYPOINT_NAVIGATE, index, 0, R.string.cache_menu_navigate).setIcon(android.R.drawable.ic_menu_mapmode);
+                                    NavigationAppFactory.addMenuItems(subMenu, this, res);
+                                    menu.add(CONTEXT_MENU_WAYPOINT_CACHES_AROUND, index, 0, R.string.cache_menu_around);
+                                }
+                                break;
                             }
                         }
                     } catch (Exception e) {
@@ -367,6 +383,14 @@ public class CacheDetailActivity extends AbstractActivity {
                         break;
                 }
                 break;
+            case CONTEXT_MENU_WAYPOINT_EDIT:
+                if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
+                    final cgWaypoint waypoint = cache.getWaypoints().get(index);
+                    Intent editIntent = new Intent(this, cgeowaypointadd.class);
+                    editIntent.putExtra("waypoint", waypoint.getId());
+                    startActivity(editIntent);
+                }
+                break;
             case CONTEXT_MENU_WAYPOINT_DUPLICATE:
                 if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
                     final cgWaypoint copy = new cgWaypoint(cache.getWaypoints().get(index));
@@ -389,7 +413,32 @@ public class CacheDetailActivity extends AbstractActivity {
                     }
                 }
                 break;
+            case CONTEXT_MENU_WAYPOINT_COMPASS:
+                if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
+                    final cgWaypoint waypoint = cache.getWaypoints().get(index);
+                    Collection<cgCoord> coordinatesWithType = new ArrayList<cgCoord>();
+                    coordinatesWithType.add(new cgCoord(waypoint));
+                    cgeonavigate.startActivity(this, waypoint.getPrefix().trim() + "/" + waypoint.getLookup().trim(), waypoint.getName(), waypoint.getCoords(), coordinatesWithType);
+                }
+                break;
+            case CONTEXT_MENU_WAYPOINT_NAVIGATE:
+                // No processing necessary, sub-menu gets displayed;
+                break;
+            case CONTEXT_MENU_WAYPOINT_CACHES_AROUND:
+                if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
+                    final cgWaypoint waypoint = cache.getWaypoints().get(index);
+                    cgeocaches.startActivityCachesAround(this, waypoint.getCoords());
+                }
+                break;
             default:
+                // First check the navigation menu, then the option items
+                if (null != cache.getWaypoints() && 0 <= contextMenuWPIndex && contextMenuWPIndex < cache.getWaypoints().size()) {
+                    final cgWaypoint waypoint = cache.getWaypoints().get(contextMenuWPIndex);
+                    if (NavigationAppFactory.onMenuItemSelected(item, geolocation, this,
+                            res, null, null, waypoint, null)) {
+                        return true;
+                    }
+                }
                 return onOptionsItemSelected(item);
         }
         return false;
