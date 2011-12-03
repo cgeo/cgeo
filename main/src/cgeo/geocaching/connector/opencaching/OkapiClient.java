@@ -75,8 +75,9 @@ final public class OkapiClient {
 
         final cgCache cache = parseCache(data);
 
-        cache.setUpdated(new Date().getTime());
-        cache.setDetailedUpdate(new Date().getTime());
+        long time = new Date().getTime();
+        cache.setUpdated(time);
+        cache.setDetailedUpdate(time);
 
         return cache;
     }

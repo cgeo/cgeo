@@ -1221,7 +1221,7 @@ public class cgData {
 
         ContentValues values = new ContentValues();
 
-        if (cache.getUpdated() == null) {
+        if (cache.getUpdated() == 0) {
             values.put("updated", System.currentTimeMillis());
         } else {
             values.put("updated", cache.getUpdated());
@@ -2151,8 +2151,8 @@ public class cgData {
         return attributes;
     }
 
-    public cgWaypoint loadWaypoint(Integer id) {
-        if (id == null || id == 0) {
+    public cgWaypoint loadWaypoint(int id) {
+        if (id == 0) {
             return null;
         }
 

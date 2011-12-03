@@ -32,7 +32,7 @@ public class cgGeo {
     public Double altitudeNow = null;
     public Float bearingNow = null;
     public Float speedNow = null;
-    public Float accuracyNow = null;
+    public float accuracyNow = -1f;
     public int satellitesVisible = 0;
     public int satellitesFixed = 0;
 

@@ -12,7 +12,7 @@ import cgeo.geocaching.geopoint.Geopoint;
  */
 public interface IWaypoint extends ILogable {
 
-    public abstract Integer getId();
+    public abstract int getId();
 
     public abstract Geopoint getCoords();
 

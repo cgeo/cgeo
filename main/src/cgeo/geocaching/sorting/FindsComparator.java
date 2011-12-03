@@ -31,7 +31,7 @@ public class FindsComparator extends AbstractCacheComparator {
         }
         Integer logged = cache.getLogCounts().get(cgBase.LOG_FOUND_IT);
         if (logged != null) {
-            finds = logged;
+            finds = logged.intValue();
         }
         return finds;
     }

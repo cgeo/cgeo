@@ -10,7 +10,7 @@ public class DifficultyComparator extends AbstractCacheComparator {
 
     @Override
     protected boolean canCompare(cgCache cache1, cgCache cache2) {
-        return cache1.getDifficulty() != null && cache2.getDifficulty() != null;
+        return cache1.getDifficulty() != 0.0 && cache2.getDifficulty() != 0.0;
     }
 
     @Override

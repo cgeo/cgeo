@@ -571,7 +571,7 @@ public class cgeo extends AbstractActivity {
                     navSatellites.setText(satellites);
                     navType.setText(res.getString(geo.locationProvider.resourceId));
 
-                    if (geo.accuracyNow != null) {
+                    if (geo.accuracyNow >= 0) {
                         if (Settings.isUseMetricUnits()) {
                             navAccuracy.setText("±" + String.format("%.0f", geo.accuracyNow) + " m");
                         } else {

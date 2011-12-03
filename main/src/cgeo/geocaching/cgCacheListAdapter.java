@@ -526,20 +526,22 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         } else {
             favoriteBack = R.drawable.favourite_background_dark;
         }
-        if (cache.getMyVote() != null && cache.getMyVote() > 0) {
-            if (cache.getMyVote() >= 4) {
+        if (cache.getMyVote() != null) {
+            float myVote = cache.getMyVote();
+            if (myVote >= 4) {
                 favoriteBack = ratingBcgs[2];
-            } else if (cache.getMyVote() >= 3) {
+            } else if (myVote >= 3) {
                 favoriteBack = ratingBcgs[1];
-            } else if (cache.getMyVote() > 0) {
+            } else if (myVote > 0) {
                 favoriteBack = ratingBcgs[0];
             }
-        } else if (cache.getRating() != null && cache.getRating() > 0) {
-            if (cache.getRating() >= 3.5) {
+        } else if (cache.getRating() != null) {
+            float rating = cache.getRating();
+            if (rating >= 3.5) {
                 favoriteBack = ratingBcgs[2];
-            } else if (cache.getRating() >= 2.1) {
+            } else if (rating >= 2.1) {
                 favoriteBack = ratingBcgs[1];
-            } else if (cache.getRating() > 0.0) {
+            } else if (rating > 0.0) {
                 favoriteBack = ratingBcgs[0];
             }
         }
@@ -586,7 +588,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
                 }
                 cacheInfo.append(res.getString(R.string.cache_premium));
             }
-            if (cache.getReason() != null && cache.getReason() == 1) {
+            if (cache.getReason() == 1) {
                 if (cacheInfo.length() > 0) {
                     cacheInfo.append(SEPARATOR);
                 }

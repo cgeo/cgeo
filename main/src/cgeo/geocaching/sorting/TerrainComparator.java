@@ -10,7 +10,7 @@ public class TerrainComparator extends AbstractCacheComparator {
 
     @Override
     protected boolean canCompare(cgCache cache1, cgCache cache2) {
-        return cache1.getTerrain() != null && cache2.getTerrain() != null;
+        return cache1.getTerrain() != 0.0 && cache2.getTerrain() != 0.0;
     }
 
     @Override

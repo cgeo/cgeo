@@ -39,12 +39,12 @@ public interface IBasicCache extends ILogable {
     /**
      * @return Difficulty assessment
      */
-    public abstract Float getDifficulty();
+    public abstract float getDifficulty();
 
     /**
      * @return Terrain assessment
      */
-    public abstract Float getTerrain();
+    public abstract float getTerrain();
 
 
 

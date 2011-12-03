@@ -45,10 +45,10 @@ public class cgCache implements ICache {
     final public static int LOADOFFLINELOG = 1 << 5;
     final public static int LOADALL = LOADATTRIBUTES | LOADWAYPOINTS | LOADSPOILERS | LOADLOGS | LOADINVENTORY | LOADOFFLINELOG;
 
-    private Long updated = null;
-    private Long detailedUpdate = null;
+    private long updated = 0;
+    private long detailedUpdate = 0;
     private Long visitedDate = null;
-    private Integer reason = 0;
+    private int reason = 0;
     private boolean detailed = false;
     private String geocode = "";
     private String cacheId = "";
@@ -61,8 +61,8 @@ public class cgCache implements ICache {
     private Date hidden = null;
     private String hint = "";
     private CacheSize size = null;
-    private Float difficulty = Float.valueOf(0);
-    private Float terrain = Float.valueOf(0);
+    private float difficulty = 0;
+    private float terrain = 0;
     private Float direction = null;
     private Float distance = null;
     private String latlon = "";
@@ -119,7 +119,7 @@ public class cgCache implements ICache {
         if (visitedDate == null || visitedDate == 0) {
             visitedDate = other.getVisitedDate();
         }
-        if (reason == null || reason == 0) {
+        if (reason == 0) {
             reason = other.reason;
         }
         if (StringUtils.isBlank(geocode)) {
@@ -155,10 +155,10 @@ public class cgCache implements ICache {
         if (size == null) {
             size = other.size;
         }
-        if (difficulty == null || difficulty == 0) {
+        if (difficulty == 0) {
             difficulty = other.getDifficulty();
         }
-        if (terrain == null || terrain == 0) {
+        if (terrain == 0) {
             terrain = other.getTerrain();
         }
         if (direction == null) {
@@ -384,7 +384,7 @@ public class cgCache implements ICache {
     }
 
     @Override
-    public Float getDifficulty() {
+    public float getDifficulty() {
         return difficulty;
     }
 
@@ -414,7 +414,7 @@ public class cgCache implements ICache {
     }
 
     @Override
-    public Float getTerrain() {
+    public float getTerrain() {
         return terrain;
     }
 
@@ -597,19 +597,19 @@ public class cgCache implements ICache {
         return !((isEventCache() || isVirtual()) && size == CacheSize.NOT_CHOSEN);
     }
 
-    public Long getUpdated() {
+    public long getUpdated() {
         return updated;
     }
 
-    public void setUpdated(Long updated) {
+    public void setUpdated(long updated) {
         this.updated = updated;
     }
 
-    public Long getDetailedUpdate() {
+    public long getDetailedUpdate() {
         return detailedUpdate;
     }
 
-    public void setDetailedUpdate(Long detailedUpdate) {
+    public void setDetailedUpdate(long detailedUpdate) {
         this.detailedUpdate = detailedUpdate;
     }
 
@@ -621,11 +621,11 @@ public class cgCache implements ICache {
         this.visitedDate = visitedDate;
     }
 
-    public Integer getReason() {
+    public int getReason() {
         return reason;
     }
 
-    public void setReason(Integer reason) {
+    public void setReason(int reason) {
         this.reason = reason;
     }
 
@@ -855,11 +855,11 @@ public class cgCache implements ICache {
         this.size = size;
     }
 
-    public void setDifficulty(Float difficulty) {
+    public void setDifficulty(float difficulty) {
         this.difficulty = difficulty;
     }
 
-    public void setTerrain(Float terrain) {
+    public void setTerrain(float terrain) {
         this.terrain = terrain;
     }
 
@@ -927,11 +927,11 @@ public class cgCache implements ICache {
     }
 
     public boolean hasDifficulty() {
-        return difficulty != null && difficulty > 0f;
+        return difficulty > 0f;
     }
 
     public boolean hasTerrain() {
-        return terrain != null && terrain > 0f;
+        return terrain > 0f;
     }
 
 }

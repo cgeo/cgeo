@@ -968,13 +968,13 @@ public class cgBase {
             // cache terrain
             String result = BaseUtils.getMatch(tableInside, GCConstants.PATTERN_TERRAIN, true, null);
             if (result != null) {
-                cache.setTerrain(new Float(StringUtils.replaceChars(result, '_', '.')));
+                cache.setTerrain(Float.parseFloat(StringUtils.replaceChars(result, '_', '.')));
             }
 
             // cache difficulty
             result = BaseUtils.getMatch(tableInside, GCConstants.PATTERN_DIFFICULTY, true, null);
             if (result != null) {
-                cache.setDifficulty(new Float(StringUtils.replaceChars(result, '_', '.')));
+                cache.setDifficulty(Float.parseFloat(StringUtils.replaceChars(result, '_', '.')));
             }
 
             // owner
@@ -1407,10 +1407,10 @@ public class cgBase {
         if (StringUtils.isBlank(cache.getGuid())) {
             Log.e(Settings.tag, "guid not parsed correctly");
         }
-        if (cache.getTerrain() == null || cache.getTerrain() == 0.0) {
+        if (cache.getTerrain() == 0.0) {
             Log.e(Settings.tag, "terrain not parsed correctly");
         }
-        if (cache.getDifficulty() == null || cache.getDifficulty() == 0.0) {
+        if (cache.getDifficulty() == 0.0) {
             Log.e(Settings.tag, "difficulty not parsed correctly");
         }
         if (StringUtils.isBlank(cache.getOwner())) {
@@ -1771,36 +1771,36 @@ public class cgBase {
         return trackables;
     }
 
-    public static String getHumanDistance(final Float distance) {
-        if (distance == null) {
+    public static String getHumanDistance(final Float distanceKilometers) {
+        if (distanceKilometers == null) {
             return "?";
         }
 
         if (Settings.isUseMetricUnits()) {
-            if (distance > 100) {
-                return String.format("%.0f", Double.valueOf(Math.round(distance))) + " km";
-            } else if (distance > 10) {
-                return String.format("%.1f", Double.valueOf(Math.round(distance * 10.0) / 10.0)) + " km";
-            } else if (distance > 1) {
-                return String.format("%.2f", Double.valueOf(Math.round(distance * 100.0) / 100.0)) + " km";
-            } else if (distance > 0.1) {
-                return String.format("%.0f", Double.valueOf(Math.round(distance * 1000.0))) + " m";
-            } else if (distance > 0.01) {
-                return String.format("%.1f", Double.valueOf(Math.round(distance * 1000.0 * 10.0) / 10.0)) + " m";
+            if (distanceKilometers > 100) {
+                return String.format("%.0f", Double.valueOf(Math.round(distanceKilometers))) + " km";
+            } else if (distanceKilometers > 10) {
+                return String.format("%.1f", Double.valueOf(Math.round(distanceKilometers * 10.0) / 10.0)) + " km";
+            } else if (distanceKilometers > 1) {
+                return String.format("%.2f", Double.valueOf(Math.round(distanceKilometers * 100.0) / 100.0)) + " km";
+            } else if (distanceKilometers > 0.1) {
+                return String.format("%.0f", Double.valueOf(Math.round(distanceKilometers * 1000.0))) + " m";
+            } else if (distanceKilometers > 0.01) {
+                return String.format("%.1f", Double.valueOf(Math.round(distanceKilometers * 1000.0 * 10.0) / 10.0)) + " m";
             } else {
-                return String.format("%.2f", Double.valueOf(Math.round(distance * 1000.0 * 100.0) / 100.0)) + " m";
+                return String.format("%.2f", Double.valueOf(Math.round(distanceKilometers * 1000.0 * 100.0) / 100.0)) + " m";
             }
         } else {
-            final Float miles = distance / IConversion.miles2km;
-            if (distance > 100) {
+            final float miles = distanceKilometers / IConversion.miles2km;
+            if (distanceKilometers > 100) {
                 return String.format("%.0f", Double.valueOf(Math.round(miles))) + " mi";
-            } else if (distance > 0.5) {
+            } else if (distanceKilometers > 0.5) {
                 return String.format("%.1f", Double.valueOf(Math.round(miles * 10.0) / 10.0)) + " mi";
-            } else if (distance > 0.1) {
+            } else if (distanceKilometers > 0.1) {
                 return String.format("%.2f", Double.valueOf(Math.round(miles * 100.0) / 100.0)) + " mi";
-            } else if (distance > 0.05) {
+            } else if (distanceKilometers > 0.05) {
                 return String.format("%.0f", Double.valueOf(Math.round(miles * 5280.0))) + " ft";
-            } else if (distance > 0.01) {
+            } else if (distanceKilometers > 0.01) {
                 return String.format("%.1f", Double.valueOf(Math.round(miles * 5280 * 10.0) / 10.0)) + " ft";
             } else {
                 return String.format("%.2f", Double.valueOf(Math.round(miles * 5280 * 100.0) / 100.0)) + " ft";
@@ -2645,7 +2645,7 @@ public class cgBase {
      * @param xContentType
      * @return
      */
-    public static HttpResponse request(final String uri, final Parameters params, final Boolean xContentType) {
+    public static HttpResponse request(final String uri, final Parameters params, final boolean xContentType) {
         final String fullUri = params == null ? uri : Uri.parse(uri).buildUpon().encodedQuery(params.toString()).build().toString();
         final HttpRequestBase request = new HttpGet(fullUri);
 

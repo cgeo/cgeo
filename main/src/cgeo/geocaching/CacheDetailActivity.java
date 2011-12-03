@@ -610,7 +610,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
                 if (cache != null && cache.getElevation() != null) {
                     if (geo.altitudeNow != null) {
-                        Double diff = (cache.getElevation() - geo.altitudeNow);
+                        double diff = (cache.getElevation() - geo.altitudeNow);
                         if (diff >= 0) {
                             dist.append(" ↗");
                         } else if (diff < 0) {
@@ -701,7 +701,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 do {
                     calIdPre = cursor.getString(calIdIn);
                     if (calIdPre != null) {
-                        calId = new Integer(calIdPre);
+                        calId = Integer.parseInt(calIdPre);
                     }
                     calName = cursor.getString(calNameIn);
 
@@ -1124,12 +1124,12 @@ public class CacheDetailActivity extends AbstractActivity {
             cacheDistanceView = addCacheDetail(R.string.cache_distance, cache.getDistance() != null ? "~" + cgBase.getHumanDistance(cache.getDistance()) : "--");
 
             // difficulty
-            if (cache.getDifficulty() != null && cache.getDifficulty() > 0) {
+            if (cache.getDifficulty() > 0) {
                 addStarRating(R.string.cache_difficulty, cache.getDifficulty());
             }
 
             // terrain
-            if (cache.getTerrain() != null && cache.getTerrain() > 0) {
+            if (cache.getTerrain() > 0) {
                 addStarRating(R.string.cache_terrain, cache.getTerrain());
             }
 
@@ -1527,7 +1527,7 @@ public class CacheDetailActivity extends AbstractActivity {
             final Button offlineStore = (Button) view.findViewById(R.id.offline_store);
 
             if (cache.getReason() >= 1) {
-                Long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
+                long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
 
                 String ago = "";
                 if (diff < 15) {
@@ -1959,7 +1959,7 @@ public class CacheDetailActivity extends AbstractActivity {
         private class LogInflaterTask extends AsyncTask<Void, Void, Void> {
             private List<RelativeLayout> loglist = new LinkedList<RelativeLayout>();
             private String logCounter;
-            private Boolean showLogCounter = false;
+            private boolean showLogCounter = false;
 
             @Override
             protected Void doInBackground(Void... params) {

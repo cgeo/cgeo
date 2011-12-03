@@ -153,7 +153,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private ProgressDialog waitDialog = null;
     private int detailTotal = 0;
     private int detailProgress = 0;
-    private Long detailProgressTime = 0L;
+    private long detailProgressTime = 0L;
     // views
     private ImageSwitcher myLocSwitch = null;
     // other things

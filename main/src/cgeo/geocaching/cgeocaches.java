@@ -205,8 +205,8 @@ public class cgeocaches extends AbstractListActivity {
                     showToast(res.getString(R.string.err_list_load_fail));
                     setMoreCaches(false);
                 } else {
-                    final Integer count = cgeoapplication.getTotal(search);
-                    setMoreCaches(count != null && count > 0 && cacheList != null && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
+                    final int count = cgeoapplication.getTotal(search);
+                    setMoreCaches(count > 0 && cacheList != null && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
                 }
 
                 if (cacheList != null && cgeoapplication.getError(search) == StatusCode.UNAPPROVED_LICENSE) {
@@ -296,8 +296,8 @@ public class cgeocaches extends AbstractListActivity {
                     showToast(res.getString(R.string.err_list_load_fail));
                     setMoreCaches(false);
                 } else {
-                    final Integer count = cgeoapplication.getTotal(search);
-                    setMoreCaches(count != null && count > 0 && cacheList != null && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
+                    final int count = cgeoapplication.getTotal(search);
+                    setMoreCaches(count > 0 && cacheList != null && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
                 }
 
                 if (cgeoapplication.getError(search) != null) {
@@ -835,7 +835,7 @@ public class cgeocaches extends AbstractListActivity {
         Collections.sort(sortedLabels);
         for (String label : sortedLabels) {
             Integer id = comparators.get(label);
-            subMenuSort.add(1, id, 0, label).setCheckable(true).setChecked(id == MENU_SORT_DISTANCE);
+            subMenuSort.add(1, id.intValue(), 0, label).setCheckable(true).setChecked(id.intValue() == MENU_SORT_DISTANCE);
         }
 
         subMenuSort.setGroupCheckable(1, true, true);
@@ -1469,8 +1469,8 @@ public class cgeocaches extends AbstractListActivity {
         }
 
         if (CollectionUtils.isNotEmpty(cacheList)) {
-            final Integer count = cgeoapplication.getTotal(search);
-            setMoreCaches(count != null && count > 0 && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
+            final int count = cgeoapplication.getTotal(search);
+            setMoreCaches(count > 0 && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
         }
 
         setTitle(title);
@@ -2710,7 +2710,7 @@ public class cgeocaches extends AbstractListActivity {
         context.startActivity(cachesIntent);
     }
 
-    public static void startActivityAddress(Context context, Double latitude, Double longitude, String address) {
+    public static void startActivityAddress(Context context, double latitude, double longitude, String address) {
         Intent addressIntent = new Intent(context, cgeocaches.class);
         addressIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.ADDRESS);
         addressIntent.putExtra("latitude", latitude);

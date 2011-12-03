@@ -48,8 +48,8 @@ public class LocParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals("GC1BKP3", cache.getGeocode());
         assertEquals("Die Schatzinsel / treasure island", cache.getName());
         assertTrue(new Geopoint(48.859683, 9.1874).isEqualTo(cache.getCoords()));
-        assertEquals(1.0f, cache.getDifficulty().floatValue());
-        assertEquals(5.0f, cache.getTerrain().floatValue());
+        assertEquals(1.0f, cache.getDifficulty());
+        assertEquals(5.0f, cache.getTerrain());
         assertEquals(CacheSize.MICRO, cache.getSize());
     }
 }

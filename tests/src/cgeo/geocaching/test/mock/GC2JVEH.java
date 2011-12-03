@@ -27,12 +27,12 @@ public class GC2JVEH extends MockedCache {
     }
 
     @Override
-    public Float getDifficulty() {
+    public float getDifficulty() {
         return 5.0f;
     }
 
     @Override
-    public Float getTerrain() {
+    public float getTerrain() {
         return 3.0f;
     }
 

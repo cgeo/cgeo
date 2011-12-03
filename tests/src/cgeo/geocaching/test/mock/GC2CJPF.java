@@ -25,7 +25,7 @@ public class GC2CJPF extends MockedCache {
     }
 
     @Override
-    public Float getDifficulty() {
+    public float getDifficulty() {
         return 2.5f;
     }
 
@@ -49,7 +49,7 @@ public class GC2CJPF extends MockedCache {
     }
 
     @Override
-    public Float getTerrain() {
+    public float getTerrain() {
         return 2.0f;
     }
 

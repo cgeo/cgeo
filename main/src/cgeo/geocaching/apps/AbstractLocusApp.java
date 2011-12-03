@@ -131,10 +131,10 @@ public abstract class AbstractLocusApp extends AbstractApp {
         if (locusId != NO_LOCUS_ID) {
             pg.container = locusId;
         }
-        if (cache.getDifficulty() != null) {
+        if (cache.getDifficulty() > 0) {
             pg.difficulty = cache.getDifficulty();
         }
-        if (cache.getTerrain() != null) {
+        if (cache.getTerrain() > 0) {
             pg.terrain = cache.getTerrain();
         }
         pg.found = cache.isFound();

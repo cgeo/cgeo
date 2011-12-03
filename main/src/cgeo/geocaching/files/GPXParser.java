@@ -536,8 +536,8 @@ public abstract class GPXParser extends FileParser {
                 @Override
                 public void end(String body) {
                     try {
-                        cache.setDifficulty(new Float(body));
-                    } catch (Exception e) {
+                        cache.setDifficulty(Float.parseFloat(body));
+                    } catch (NumberFormatException e) {
                         Log.w(Settings.tag, "Failed to parse difficulty: " + e.toString());
                     }
                 }
@@ -549,8 +549,8 @@ public abstract class GPXParser extends FileParser {
                 @Override
                 public void end(String body) {
                     try {
-                        cache.setTerrain(new Float(body));
-                    } catch (Exception e) {
+                        cache.setTerrain(Float.parseFloat(body));
+                    } catch (NumberFormatException e) {
                         Log.w(Settings.tag, "Failed to parse terrain: " + e.toString());
                     }
                 }

@@ -292,15 +292,15 @@ public class cgeoapplication extends Application {
         return true;
     }
 
-    public static Integer getTotal(final cgSearch search) {
+    public static int getTotal(final cgSearch search) {
         if (search == null) {
-            return null;
+            return 0;
         }
 
         return search.totalCnt;
     }
 
-    public static Integer getCount(final cgSearch search) {
+    public static int getCount(final cgSearch search) {
         if (search == null) {
             return 0;
         }
@@ -374,14 +374,6 @@ public class cgeoapplication extends Application {
 
     public String[] geocodesInCache() {
         return getStorage().allDetailedThere();
-    }
-
-    public cgWaypoint getWaypointById(Integer id) {
-        if (id == null || id == 0) {
-            return null;
-        }
-
-        return getStorage().loadWaypoint(id);
     }
 
     public List<Object> getBounds(String geocode) {

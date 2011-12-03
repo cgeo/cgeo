@@ -7,7 +7,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 
 public class cgCoord implements IBasicCache, IWaypoint {
 
-    private Integer id = null; // only valid if constructed with a waypoint
+    private int id = 0; // only valid if constructed with a waypoint
     private WaypointType waypointType = null; // only valid if constructed with a waypoint
     private String guid = null; // only valid if constructed with a cache
     private CacheType cacheType = null; // only valid if constructed with a cache
@@ -18,8 +18,8 @@ public class cgCoord implements IBasicCache, IWaypoint {
     private boolean found = false;
     private boolean disabled = false;
     private Geopoint coords = new Geopoint(0, 0);
-    private Float difficulty = null;
-    private Float terrain = null;
+    private float difficulty = 0;
+    private float terrain = 0;
     private CacheSize size = null;
 
     public cgCoord() {
@@ -52,11 +52,11 @@ public class cgCoord implements IBasicCache, IWaypoint {
         waypointType = waypoint.getWaypointType();
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -121,20 +121,20 @@ public class cgCoord implements IBasicCache, IWaypoint {
     }
 
     @Override
-    public Float getDifficulty() {
+    public float getDifficulty() {
         return difficulty;
     }
 
-    public void setDifficulty(Float difficulty) {
+    public void setDifficulty(float difficulty) {
         this.difficulty = difficulty;
     }
 
     @Override
-    public Float getTerrain() {
+    public float getTerrain() {
         return terrain;
     }
 
-    public void setTerrain(Float terrain) {
+    public void setTerrain(float terrain) {
         this.terrain = terrain;
     }
 
