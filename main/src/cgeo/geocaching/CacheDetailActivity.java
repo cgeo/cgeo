@@ -382,6 +382,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     Intent editIntent = new Intent(this, cgeowaypointadd.class);
                     editIntent.putExtra("waypoint", waypoint.getId());
                     startActivity(editIntent);
+                    refreshOnResume = true;
                 }
                 break;
             case CONTEXT_MENU_WAYPOINT_DUPLICATE:
