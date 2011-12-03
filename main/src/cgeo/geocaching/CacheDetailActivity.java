@@ -2183,6 +2183,14 @@ public class CacheDetailActivity extends AbstractActivity {
                 for (cgWaypoint wpt : sortedWaypoints) {
                     waypointView = (LinearLayout) getLayoutInflater().inflate(R.layout.waypoint_item, null);
 
+                    // coordinates
+                    if (null != wpt.getCoords()) {
+                        final TextView coordinatesView = (TextView) waypointView.findViewById(R.id.coordinates);
+                        coordinatesView.setText(wpt.getCoords().toString());
+                        coordinatesView.setVisibility(View.VISIBLE);
+                    }
+
+                    // info
                     final List<String> infoTextList = new ArrayList<String>(3);
                     if (StringUtils.isNotBlank(cgBase.waypointTypes.get(wpt.getWaypointType()))) {
                         infoTextList.add(cgBase.waypointTypes.get(wpt.getWaypointType()));
@@ -2197,8 +2205,13 @@ public class CacheDetailActivity extends AbstractActivity {
                             infoTextList.add(wpt.getLookup());
                         }
                     }
-                    ((TextView) waypointView.findViewById(R.id.info)).setText(StringUtils.join(infoTextList, " · "));
+                    if (CollectionUtils.isNotEmpty(infoTextList)) {
+                        final TextView infoView = (TextView) waypointView.findViewById(R.id.info);
+                        infoView.setText(StringUtils.join(infoTextList, " · "));
+                        infoView.setVisibility(View.VISIBLE);
+                    }
 
+                    // title
                     TextView nameView = (TextView) waypointView.findViewById(R.id.name);
                     if (StringUtils.isNotBlank(wpt.getName())) {
                         nameView.setText(StringEscapeUtils.unescapeHtml4(wpt.getName()));
@@ -2207,11 +2220,11 @@ public class CacheDetailActivity extends AbstractActivity {
                     } else {
                         nameView.setText(res.getString(R.string.waypoint));
                     }
-
                     wpt.setIcon(res, nameView);
 
+                    // note
                     if (StringUtils.isNotBlank(wpt.getNote())) {
-                        TextView noteView = (TextView) waypointView.findViewById(R.id.note);
+                        final TextView noteView = (TextView) waypointView.findViewById(R.id.note);
                         noteView.setVisibility(View.VISIBLE);
                         if (BaseUtils.containsHtml(wpt.getNote())) {
                             noteView.setText(Html.fromHtml(wpt.getNote().trim()), TextView.BufferType.SPANNABLE);
@@ -2221,8 +2234,8 @@ public class CacheDetailActivity extends AbstractActivity {
                         }
                     }
 
-                    waypointView.setOnClickListener(new WaypointInfoClickListener(wpt.getId()));
                     registerForContextMenu(waypointView);
+                    waypointView.setOnClickListener(new WaypointInfoClickListener());
 
                     waypoints.addView(waypointView);
                 }
@@ -2253,18 +2266,8 @@ public class CacheDetailActivity extends AbstractActivity {
         }
 
         private class WaypointInfoClickListener implements View.OnClickListener {
-            private int id = -1;
-
-            public WaypointInfoClickListener(int idIn) {
-                id = idIn;
-            }
-
-            public void onClick(View arg0) {
-                refreshOnResume = true;
-                Intent waypointIntent = new Intent(CacheDetailActivity.this, cgeowaypoint.class);
-                waypointIntent.putExtra("waypoint", id);
-                waypointIntent.putExtra("geocode", cache.getGeocode());
-                startActivity(waypointIntent);
+            public void onClick(View view) {
+                openContextMenu(view);
             }
         }
     }

@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="12dip"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:paddingBottom="12dip" >
 
     <TextView
         android:id="@+id/name"
@@ -23,7 +23,22 @@
         android:scrollHorizontally="true"
         android:singleLine="true"
         android:textColor="?text_color_headline"
-        android:textSize="12dip" />
+        android:textSize="12dip"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/coordinates"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="12dip"
+        android:ellipsize="marquee"
+        android:lines="1"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:textColor="?text_color_headline"
+        android:textSize="12dip"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/note"
