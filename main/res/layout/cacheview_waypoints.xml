@@ -19,7 +19,8 @@
         <Button
             android:id="@+id/add_waypoint"
             style="@style/button"
-            android:text="@string/cache_waypoints_add" />
+            android:text="@string/cache_waypoints_add"
+            android:layout_marginTop="9dp" />
     </LinearLayout>
 
 </ScrollView>

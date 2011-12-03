@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingBottom="18dp" >
+    android:paddingTop="9dp" >
 
     <TextView
         android:id="@+id/name"
@@ -48,5 +48,9 @@
         android:textColor="?text_color"
         android:textSize="14dp"
         android:visibility="gone" />
+
+    <View
+        style="@style/separator_horizontal"
+        android:layout_marginTop="9dp" />
 
 </LinearLayout>
