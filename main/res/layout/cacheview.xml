@@ -41,6 +41,7 @@
         android:id="@+id/pager_indicator"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/actionbar_background"
         app:footerColor="#ff888888"
         app:footerIndicatorHeight="3dp"
         app:footerIndicatorStyle="underline"
