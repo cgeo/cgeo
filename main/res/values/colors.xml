@@ -25,7 +25,5 @@
     <color name="link">#FF00C0FF</color>
     <color name="button_enabled">#FF000000</color>
     <color name="button_disabled">#66000000</color>
-    <color name="text_pagerindicator">#FFFFFFFF</color>
-    <color name="text_pagerindicator_sides">#88FFFFFF</color>
 
 </resources>

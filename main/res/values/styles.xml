@@ -303,38 +303,4 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
-    <!-- pager -->
-    <style name="pager_indicator">
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">@drawable/pagerindicator_background</item>
-    </style>
-
-    <style name="pager_indicator.title">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">5dip</item>
-        <item name="android:layout_centerInParent">true</item>
-        <item name="android:lines">1</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">16dip</item>
-        <item name="android:textColor">@color/text_pagerindicator</item>
-        <item name="android:background">@null</item>
-    </style>
-
-    <style name="pager_indicator.side">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">1dip</item>
-        <item name="android:layout_centerVertical">true</item>
-        <item name="android:lines">1</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:textSize">12dip</item>
-        <item name="android:textColor">@color/text_pagerindicator_sides</item>
-        <item name="android:background">@null</item>
-    </style>
-
 </resources>
