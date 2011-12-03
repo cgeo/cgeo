@@ -2004,7 +2004,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
                 if (cache != null && cache.getLogs() != null) {
                     for (cgLog log : cache.getLogs()) {
-                        rowView = (RelativeLayout) getLayoutInflater().inflate(R.layout.log_item, null);
+                        rowView = (RelativeLayout) getLayoutInflater().inflate(R.layout.cacheview_logs_item, null);
 
                         if (log.date > 0) {
                             ((TextView) rowView.findViewById(R.id.added)).setText(cgBase.formatShortDate(log.date));
@@ -2060,7 +2060,7 @@ public class CacheDetailActivity extends AbstractActivity {
                                 titles.add(res.getString(R.string.cache_log_image_default_title));
                             }
 
-                            LinearLayout log_imgView = (LinearLayout) getLayoutInflater().inflate(R.layout.log_img, null);
+                            LinearLayout log_imgView = (LinearLayout) getLayoutInflater().inflate(R.layout.cacheview_logs_img, null);
                             TextView log_img_title = (TextView) log_imgView.findViewById(R.id.title);
                             log_img_title.setText(StringUtils.join(titles.toArray(new String[titles.size()]), ", "));
                             log_img_title.setOnClickListener(listener);
