@@ -112,10 +112,10 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
      */
     @MediumTest
     public static void testSearchByOwner() {
-        final cgSearch search = cgBase.searchByOwner(null, "blafoo", CacheType.EVENT, 0, false);
+        final cgSearch search = cgBase.searchByOwner(null, "blafoo", CacheType.MYSTERY, 0, false);
         assertNotNull(search);
-        assertEquals(1, search.getGeocodes().size());
-        assertTrue(search.getGeocodes().contains("GC36K5E"));
+        assertEquals(3, search.getGeocodes().size());
+        assertTrue(search.getGeocodes().contains("GC36RT6"));
     }
 
     /**
