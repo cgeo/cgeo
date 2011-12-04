@@ -5,7 +5,7 @@
 
   <!-- basics -->
   <string name="cache">Cache</string>
-  <string name="detail">Detail</string>
+  <string name="detail">Details</string>
   <string name="search">Search</string>
   <string name="settings">Settings</string>
   <string name="helpers">What to install</string>
