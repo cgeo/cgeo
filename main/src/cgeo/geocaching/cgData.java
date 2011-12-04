@@ -1257,7 +1257,7 @@ public class cgData {
         values.put("shortdesc", cache.getShortdesc());
         values.put("personal_note", cache.getPersonalNote());
         values.put("description", cache.getDescription());
-        values.put("favourite_cnt", cache.getFavouriteCnt());
+        values.put("favourite_cnt", cache.getFavoritePoints());
         values.put("rating", cache.getRating());
         values.put("votes", cache.getVotes());
         values.put("myvote", cache.getMyVote());
@@ -1731,12 +1731,12 @@ public class cgData {
         return true;
     }
 
-    public List<Object> getBounds(Object[] geocodes) {
+    public List<Number> getBounds(Object[] geocodes) {
         init();
 
         Cursor cursor = null;
 
-        final List<Object> viewport = new ArrayList<Object>();
+        final List<Number> viewport = new ArrayList<Number>();
 
         try {
             final StringBuilder where = new StringBuilder();
@@ -2101,7 +2101,7 @@ public class cgData {
         cache.setPersonalNote(cursor.getString(cacheColumnIndex[23]));
         cache.setShortdesc(cursor.getString(cacheColumnIndex[24]));
         // do not set cache.description !
-        cache.setFavouriteCnt(cursor.getInt(cacheColumnIndex[25]));
+        cache.setFavouritePoints(cursor.getInt(cacheColumnIndex[25]));
         cache.setRating(cursor.getFloat(cacheColumnIndex[26]));
         cache.setVotes(cursor.getInt(cacheColumnIndex[27]));
         cache.setMyVote(cursor.getFloat(cacheColumnIndex[28]));

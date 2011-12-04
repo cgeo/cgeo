@@ -23,7 +23,7 @@ public class cgTrackable implements ILogable {
     private String name = "";
     private String type = null;
     private Date released = null;
-    private Float distance = null;
+    private float distance = -1;
     private String origin = null;
     private String owner = null;
     private String ownerGuid = null;
@@ -106,11 +106,11 @@ public class cgTrackable implements ILogable {
         }
     }
 
-    public Float getDistance() {
+    public float getDistance() {
         return distance;
     }
 
-    public void setDistance(Float distance) {
+    public void setDistance(float distance) {
         this.distance = distance;
     }
 

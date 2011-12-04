@@ -354,7 +354,7 @@ public class cgeopopup extends AbstractActivity {
             }
 
             // rating
-            if (cache.getRating() != null && cache.getRating() > 0) {
+            if (cache.getRating() > 0) {
                 setRating(cache.getRating(), cache.getVotes());
             } else {
                 if (Settings.isRatingWanted() && cache.supportsGCVote()) {
@@ -602,8 +602,8 @@ public class cgeopopup extends AbstractActivity {
         }
     }
 
-    private void setRating(Float rating, Integer votes) {
-        if (rating == null || rating <= 0) {
+    private void setRating(float rating, int votes) {
+        if (rating <= 0) {
             return;
         }
 
@@ -622,7 +622,7 @@ public class cgeopopup extends AbstractActivity {
         itemValue.setText(String.format("%.1f", rating) + ' ' + res.getString(R.string.cache_rating_of) + " 5");
         itemStars.addView(cgBase.createStarRating(rating, 5, this), 1);
 
-        if (votes != null) {
+        if (votes > 0) {
             final TextView itemAddition = (TextView) itemLayout.findViewById(R.id.addition);
             itemAddition.setText("(" + votes + ")");
             itemAddition.setVisibility(View.VISIBLE);

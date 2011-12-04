@@ -10,13 +10,13 @@ public class RatingComparator extends AbstractCacheComparator {
 
     @Override
     protected boolean canCompare(cgCache cache1, cgCache cache2) {
-        return cache1.getRating() != null && cache2.getRating() != null;
+        return true;
     }
 
     @Override
     protected int compareCaches(cgCache cache1, cgCache cache2) {
-        Float rating1 = cache1.getRating();
-        Float rating2 = cache2.getRating();
+        float rating1 = cache1.getRating();
+        float rating2 = cache2.getRating();
 
         // voting can be disabled for caches, then assume an average rating instead
         if (rating1 == 0.0) {

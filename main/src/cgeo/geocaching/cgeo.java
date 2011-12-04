@@ -49,7 +49,7 @@ public class cgeo extends AbstractActivity {
     private static final int SCAN_REQUEST_CODE = 1;
     private static final int MENU_OPEN_LIST = 100;
 
-    private Integer version = null;
+    private int version = 0;
     private cgGeo geo = null;
     private UpdateLocationCallback geoUpdate = new update();
     private TextView navType = null;
@@ -721,7 +721,7 @@ public class cgeo extends AbstractActivity {
             app.cleanDatabase(more);
             cleanupRunning = false;
 
-            if (version != null && version > 0) {
+            if (version > 0) {
                 SharedPreferences.Editor edit = prefs.edit();
                 edit.putInt("version", version);
                 edit.commit();

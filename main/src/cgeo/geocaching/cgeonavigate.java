@@ -387,12 +387,8 @@ public class cgeonavigate extends AbstractActivity {
                     navLocation.setText(res.getString(R.string.loc_trying));
                 }
 
-                if (!Settings.isUseCompass() || (geo.speedNow != null && geo.speedNow > 5)) { // use GPS when speed is higher than 18 km/h
-                    if (geo.bearingNow != null) {
-                        northHeading = geo.bearingNow;
-                    } else {
-                        northHeading = 0f;
-                    }
+                if (!Settings.isUseCompass() || geo.speedNow > 5) { // use GPS when speed is higher than 18 km/h
+                    northHeading = geo.bearingNow;
                 }
             } catch (Exception e) {
                 Log.w(Settings.tag, "Failed to update location.");
@@ -408,7 +404,7 @@ public class cgeonavigate extends AbstractActivity {
                 return;
             }
 
-            if (geo == null || geo.speedNow == null || geo.speedNow <= 5) { // use compass when speed is lower than 18 km/h
+            if (geo == null || geo.speedNow <= 5) { // use compass when speed is lower than 18 km/h
                 northHeading = dir.directionNow;
             }
         }

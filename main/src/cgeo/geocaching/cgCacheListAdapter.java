@@ -513,11 +513,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             }
         }
 
-        if (cache.getFavouriteCnt() != null) {
-            holder.favourite.setText(String.format("%d", cache.getFavouriteCnt()));
-        } else {
-            holder.favourite.setText("---");
-        }
+        holder.favourite.setText(String.format("%d", cache.getFavoritePoints()));
 
         int favoriteBack;
         // set default background, neither vote nor rating may be available
@@ -526,8 +522,8 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         } else {
             favoriteBack = R.drawable.favourite_background_dark;
         }
-        if (cache.getMyVote() != null) {
-            float myVote = cache.getMyVote();
+        float myVote = cache.getMyVote();
+        if (myVote > 0) { // use my own rating for display, if I have voted
             if (myVote >= 4) {
                 favoriteBack = ratingBcgs[2];
             } else if (myVote >= 3) {
@@ -535,7 +531,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             } else if (myVote > 0) {
                 favoriteBack = ratingBcgs[0];
             }
-        } else if (cache.getRating() != null) {
+        } else {
             float rating = cache.getRating();
             if (rating >= 3.5) {
                 favoriteBack = ratingBcgs[2];
@@ -548,7 +544,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         holder.favourite.setBackgroundResource(favoriteBack);
 
         StringBuilder cacheInfo = new StringBuilder(50);
-        if (historic && cache.getVisitedDate() != null) {
+        if (historic && cache.getVisitedDate() > 0) {
             cacheInfo.append(cgBase.formatTime(cache.getVisitedDate()));
             cacheInfo.append("; ");
             cacheInfo.append(cgBase.formatDate(cache.getVisitedDate()));

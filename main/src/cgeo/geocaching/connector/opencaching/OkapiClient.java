@@ -147,7 +147,7 @@ final public class OkapiClient {
             }
             cache.setVotes(response.getInt(CACHE_VOTES));
 
-            cache.setFavouriteCnt(response.getInt(CACHE_RECOMMENDATIONS));
+            cache.setFavouritePoints(response.getInt(CACHE_RECOMMENDATIONS));
             // not used: req_password
             cache.setDescription(response.getString(CACHE_DESCRIPTION));
             cache.setHint(Html.fromHtml(response.getString(CACHE_HINT)).toString());

@@ -156,7 +156,7 @@ public class cgeotrackable extends AbstractActivity {
                 }
 
                 // trackable distance
-                if (trackable.getDistance() != null) {
+                if (trackable.getDistance() >= 0) {
                     addDetail(R.string.trackable_distance, cgBase.getHumanDistance(trackable.getDistance()));
                 }
 

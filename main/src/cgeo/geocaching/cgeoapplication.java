@@ -376,7 +376,7 @@ public class cgeoapplication extends Application {
         return getStorage().allDetailedThere();
     }
 
-    public List<Object> getBounds(String geocode) {
+    public List<Number> getBounds(String geocode) {
         if (geocode == null) {
             return null;
         }
@@ -387,7 +387,7 @@ public class cgeoapplication extends Application {
         return getBounds(geocodeList);
     }
 
-    public List<Object> getBounds(final cgSearch search) {
+    public List<Number> getBounds(final cgSearch search) {
         if (search == null) {
             return null;
         }
@@ -401,7 +401,7 @@ public class cgeoapplication extends Application {
         return getBounds(geocodeList);
     }
 
-    public List<Object> getBounds(final List<String> geocodes) {
+    public List<Number> getBounds(final List<String> geocodes) {
         if (CollectionUtils.isEmpty(geocodes)) {
             return null;
         }

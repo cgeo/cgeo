@@ -139,7 +139,7 @@ public final class ActivityMixin {
             List<Integer> logTypes = cache.getPossibleLogTypes();
             for (Integer logType : logTypes) {
                 String label = cgBase.logTypes2.get(logType);
-                logMenu.add(1, IAbstractActivity.MENU_LOG_VISIT_OFFLINE + logType, 0, label);
+                logMenu.add(1, IAbstractActivity.MENU_LOG_VISIT_OFFLINE + logType.intValue(), 0, label);
             }
             logMenu.add(1, IAbstractActivity.MENU_LOG_VISIT, 0, res.getString(R.string.cache_menu_visit));
         }

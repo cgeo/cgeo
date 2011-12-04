@@ -672,7 +672,7 @@ public class cgBase {
             try {
                 result = BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_FAVORITE, false, 1, null, true);
                 if (null != result) {
-                    cache.setFavouriteCnt(Integer.parseInt(result));
+                    cache.setFavouritePoints(Integer.parseInt(result));
                 }
             } catch (NumberFormatException e) {
                 Log.w(Settings.tag, "cgeoBase.parseSearch: Failed to parse favourite count");
@@ -999,7 +999,7 @@ public class cgBase {
             }
 
             // favourite
-            cache.setFavouriteCnt(Integer.parseInt(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_FAVORITECOUNT, true, "0")));
+            cache.setFavouritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_FAVORITECOUNT, true, "0")));
 
             // cache size
             cache.setSize(CacheSize.getById(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_SIZE, true, CacheSize.NOT_CHOSEN.id).toLowerCase()));
@@ -1422,7 +1422,7 @@ public class cgBase {
         if (cache.getHiddenDate() == null) {
             Log.e(Settings.tag, "hidden not parsed correctly");
         }
-        if (cache.getFavouriteCnt() == null) {
+        if (cache.getFavoritePoints() < 0) {
             Log.e(Settings.tag, "favoriteCount not parsed correctly");
         }
         if (cache.getSize() == null) {
@@ -1602,7 +1602,6 @@ public class cgBase {
                 trackable.setDistance(DistanceParser.parseDistance(distance, Settings.isUseMetricUnits()));
             }
         } catch (NumberFormatException e) {
-            trackable.setDistance(null);
             throw e;
         }
 

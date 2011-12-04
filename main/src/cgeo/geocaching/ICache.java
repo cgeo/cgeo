@@ -97,7 +97,7 @@ public interface ICache extends IBasicCache {
      * @return number of favorite points
      *
      */
-    public Integer getFavoritePoints();
+    public int getFavoritePoints();
 
     /**
      * @return true if the cache is on the watchlist of the user

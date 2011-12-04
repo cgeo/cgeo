@@ -1761,13 +1761,9 @@ public class cgeocaches extends AbstractListActivity {
                     adapter.setActualCoordinates(geo.coordsNow);
                 }
 
-                if (!Settings.isUseCompass() || (geo.speedNow != null && geo.speedNow > 5)) { // use GPS when speed is higher than 18 km/h
+                if (!Settings.isUseCompass() || geo.speedNow > 5) { // use GPS when speed is higher than 18 km/h
                     if (!Settings.isUseCompass()) {
-                        if (geo.bearingNow != null) {
-                            adapter.setActualHeading(geo.bearingNow);
-                        } else {
-                            adapter.setActualHeading(0f);
-                        }
+                        adapter.setActualHeading(geo.bearingNow);
                     }
                     if (northHeading != null) {
                         adapter.setActualHeading(northHeading);
@@ -1791,7 +1787,7 @@ public class cgeocaches extends AbstractListActivity {
             }
 
             northHeading = dir.directionNow;
-            if (northHeading != null && adapter != null && (geo == null || geo.speedNow == null || geo.speedNow <= 5)) { // use compass when speed is lower than 18 km/h) {
+            if (northHeading != null && adapter != null && (geo == null || geo.speedNow <= 5)) { // use compass when speed is lower than 18 km/h) {
                 adapter.setActualHeading(northHeading);
             }
         }
@@ -2426,7 +2422,7 @@ public class cgeocaches extends AbstractListActivity {
 
                         @Override
                         public void run(final Integer arg) {
-                            switchListById(arg);
+                            switchListById(arg.intValue());
                         }
                     });
                 }

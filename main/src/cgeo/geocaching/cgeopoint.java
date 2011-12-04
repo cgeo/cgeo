@@ -522,13 +522,10 @@ public class cgeopoint extends AbstractActivity {
 
         if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
             // bearing & distance
-            Double bearing = null;
+            double bearing = 0;
             try {
-                bearing = new Double(bearingText);
-            } catch (Exception e) {
-                // probably not a number
-            }
-            if (bearing == null) {
+                bearing = Double.parseDouble(bearingText);
+            } catch (NumberFormatException e) {
                 helpDialog(res.getString(R.string.err_point_bear_and_dist_title), res.getString(R.string.err_point_bear_and_dist));
                 return null;
             }

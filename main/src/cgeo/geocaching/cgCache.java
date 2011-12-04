@@ -47,7 +47,7 @@ public class cgCache implements ICache {
 
     private long updated = 0;
     private long detailedUpdate = 0;
-    private Long visitedDate = null;
+    private long visitedDate = 0;
     private int reason = 0;
     private boolean detailed = false;
     private String geocode = "";
@@ -79,10 +79,10 @@ public class cgCache implements ICache {
     private boolean found = false;
     private boolean favourite = false;
     private boolean own = false;
-    private Integer favouriteCnt = null;
-    private Float rating = null;
-    private Integer votes = null;
-    private Float myVote = null;
+    private int favouritePoints = 0;
+    private float rating = 0; // valid ratings are larger than zero
+    private int votes = 0;
+    private float myVote = 0; // valid ratings are larger than zero
     private int inventoryItems = 0;
     private boolean onWatchlist = false;
     private List<String> attributes = null;
@@ -116,7 +116,7 @@ public class cgCache implements ICache {
             detailedUpdate = updated;
         }
 
-        if (visitedDate == null || visitedDate == 0) {
+        if (visitedDate == 0) {
             visitedDate = other.getVisitedDate();
         }
         if (reason == 0) {
@@ -188,16 +188,16 @@ public class cgCache implements ICache {
         if (StringUtils.isBlank(description)) {
             description = other.description;
         }
-        if (favouriteCnt == null) {
-            favouriteCnt = other.getFavouriteCnt();
+        if (favouritePoints == 0) {
+            favouritePoints = other.getFavoritePoints();
         }
-        if (rating == null) {
+        if (rating == 0) {
             rating = other.getRating();
         }
-        if (votes == null) {
+        if (votes == 0) {
             votes = other.votes;
         }
-        if (myVote == null) {
+        if (myVote == 0) {
             myVote = other.getMyVote();
         }
         if (attributes == null) {
@@ -570,8 +570,8 @@ public class cgCache implements ICache {
     }
 
     @Override
-    public Integer getFavoritePoints() {
-        return favouriteCnt;
+    public int getFavoritePoints() {
+        return favouritePoints;
     }
 
     @Override
@@ -613,11 +613,11 @@ public class cgCache implements ICache {
         this.detailedUpdate = detailedUpdate;
     }
 
-    public Long getVisitedDate() {
+    public long getVisitedDate() {
         return visitedDate;
     }
 
-    public void setVisitedDate(Long visitedDate) {
+    public void setVisitedDate(long visitedDate) {
         this.visitedDate = visitedDate;
     }
 
@@ -726,35 +726,31 @@ public class cgCache implements ICache {
         this.favourite = favourite;
     }
 
-    public Integer getFavouriteCnt() {
-        return favouriteCnt;
+    public void setFavouritePoints(int favouriteCnt) {
+        this.favouritePoints = favouriteCnt;
     }
 
-    public void setFavouriteCnt(Integer favouriteCnt) {
-        this.favouriteCnt = favouriteCnt;
-    }
-
-    public Float getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(Float rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 
-    public Integer getVotes() {
+    public int getVotes() {
         return votes;
     }
 
-    public void setVotes(Integer votes) {
+    public void setVotes(int votes) {
         this.votes = votes;
     }
 
-    public Float getMyVote() {
+    public float getMyVote() {
         return myVote;
     }
 
-    public void setMyVote(Float myVote) {
+    public void setMyVote(float myVote) {
         this.myVote = myVote;
     }
 

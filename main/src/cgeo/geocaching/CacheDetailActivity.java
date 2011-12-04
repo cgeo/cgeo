@@ -1135,9 +1135,9 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             // rating
-            if (cache.getRating() != null && cache.getRating() > 0) {
+            if (cache.getRating() > 0) {
                 final RelativeLayout itemLayout = addStarRating(R.string.cache_rating, cache.getRating());
-                if (cache.getVotes() != null) {
+                if (cache.getVotes() > 0) {
                     final TextView itemAddition = (TextView) itemLayout.findViewById(R.id.addition);
                     itemAddition.setText("(" + cache.getVotes() + ")");
                     itemAddition.setVisibility(View.VISIBLE);
@@ -1145,12 +1145,10 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             // favourite count
-            if (cache.getFavouriteCnt() != null) {
-                addCacheDetail(R.string.cache_favourite, String.format("%d", cache.getFavouriteCnt()) + "×");
-            }
+            addCacheDetail(R.string.cache_favourite, String.format("%d", cache.getFavoritePoints()) + "×");
 
             // own rating
-            if (cache.getMyVote() != null && cache.getMyVote() > 0) {
+            if (cache.getMyVote() > 0) {
                 addStarRating(R.string.cache_own_rating, cache.getMyVote());
             }
 
@@ -2016,7 +2014,7 @@ public class CacheDetailActivity extends AbstractActivity {
                         if (cgBase.logTypes1.containsKey(log.type)) {
                             ((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(log.type));
                         } else {
-                            ((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(4)); // note if type is unknown
+                            ((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(cgBase.LOG_NOTE)); // note if type is unknown
                         }
                         ((TextView) rowView.findViewById(R.id.author)).setText(StringEscapeUtils.unescapeHtml4(log.author));
 

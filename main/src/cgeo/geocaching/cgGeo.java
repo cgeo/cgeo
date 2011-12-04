@@ -30,8 +30,8 @@ public class cgGeo {
     public LocationProviderType locationProvider = LocationProviderType.LAST;
     public Geopoint coordsNow = null;
     public Double altitudeNow = null;
-    public Float bearingNow = null;
-    public Float speedNow = null;
+    public float bearingNow = 0;
+    public float speedNow = 0;
     public float accuracyNow = -1f;
     public int satellitesVisible = 0;
     public int satellitesFixed = 0;
