@@ -55,7 +55,7 @@
   <string name="wp_waypoint">Punto di riferimento</string>
 
   <!-- logs -->
-  <string name="log_found">Trovata (Found)</string>
+  <string name="log_found">Trovata</string>
   <string name="log_dnf">Non trovata (DNF)</string>
   <string name="log_note">Note</string>
   <string name="log_published">Pubblicata</string>
@@ -80,15 +80,15 @@
   <string name="log_tb_changeall">Cambia tutto</string>
   <string name="log_save">Salva</string>
   <string name="log_saving">Salvataggio log…</string>
-  <string name="log_clear">Cancella</string>
+  <string name="log_clear">Azzera</string>
   <string name="log_post">Invia log</string>
-  <string name="log_post_rate">Invia log &amp; voto</string>
-  <string name="log_post_no_rate">Invia log &amp; senza voto</string>
-  <string name="log_post_not_possible">Caricamento pagina log…</string>
+  <string name="log_post_rate">Invia log + voto</string>
+  <string name="log_post_no_rate">Invia log senza voto</string>
+  <string name="log_post_not_possible">Connessione…</string>
   <string name="log_add">Aggiungi</string>
   <string name="log_date">Data</string>
   <string name="log_time">Ota</string>
-  <string name="log_date_time">Data &amp; ora</string>
+  <string name="log_date_time">Data e ora</string>
   <string name="log_rating">Voto</string>
   <string name="log_no_rating">Nessun voto</string>
   <string name="log_stars_1">1 stella</string>
@@ -231,15 +231,15 @@
 
   <!-- standard menu -->
   <string name="menu_about">About c:geo</string>
-  <string name="menu_helpers">Programmi utilità</string>
+  <string name="menu_helpers">Programmi utili</string>
   <string name="menu_settings">Settaggi</string>
   <string name="menu_history">Cronologia</string>
   <string name="menu_filter">Filtri</string>
-  <string name="menu_scan_geo">Scan geo code</string>
+  <string name="menu_scan_geo">Scan geocode</string>
 
   <!-- main screen -->
-  <string name="live_map_button">Mappa online</string>
-  <string name="caches_nearby_button">Vicino</string>
+  <string name="live_map_button">Mappa</string>
+  <string name="caches_nearby_button">Vicine</string>
   <string name="advanced_search_button">Cerca</string>
   <string name="stored_caches_button">Salvate</string>
   <string name="any_button">Ovunque</string>
@@ -301,7 +301,7 @@
   <string name="caches_filter_size">dimensione</string>
   <string name="caches_filter_type">tipo</string>
   <string name="caches_filter_track">con oggetti trackables</string>
-  <string name="caches_filter_clear">azzera filtri</string>
+  <string name="caches_filter_clear">senza filtri</string>
   <string name="caches_filter_size_title">Scegli dimensione</string>
   <string name="caches_filter_type_title">Scegli tipo</string>
   <string name="caches_exporting_fieldnote">Esportando le note…</string>
@@ -345,7 +345,7 @@
   <string name="init_username">Utente</string>
   <string name="init_password">Password</string>
   <string name="init_passvote">Password</string>
-  <string name="init_login">Verifica login &amp; seleziona il formato Data</string>
+  <string name="init_login">Verifica login</string>
   <string name="init_login_popup">Login</string>
   <string name="init_login_popup_working">Logging in Geocaching.com…</string>
   <string name="init_login_popup_ok">Login ok.</string>
@@ -357,11 +357,11 @@
   <string name="init_signature">Firma</string>
   <string name="init_signature_help_button">Aiuto</string>
   <string name="init_signature_help_title">Suggerimento per la Firma</string>
-  <string name="init_signature_help_text">Scrivi la tua firma da usare nei testi di log.\nStringhe speciali possono essere usate come: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nSaranno espanse quando la firma viene inserita.</string>
+  <string name="init_signature_help_text">Scrivi la tua firma da usare nei testi di log.\nStringhe speciali possono essere usate come: [DATE], [TIME], [DATETIME], [USER] e [NUMBER].\nSaranno espanse quando la firma viene inserita.</string>
   <string name="init_signature_template_button">Stringhe speciali</string>
   <string name="init_signature_template_date">Data</string>
   <string name="init_signature_template_time">Ora</string>
-  <string name="init_signature_template_datetime">Data &amp; Ora</string>
+  <string name="init_signature_template_datetime">Data e Ora</string>
   <string name="init_signature_template_user">Utente</string>
   <string name="init_signature_template_number">Numero cache</string>
   <string name="init_details">Dettagli cache</string>
@@ -374,8 +374,8 @@
   <string name="init_captcha">Visualizza CAPTCHA se necessario</string>
   <string name="init_useenglish">Usa sempre English in c:geo\n(richiede riavvio)</string>
   <string name="init_exclude">Escludi le mie cache e quelle trovate</string>
-  <string name="init_showwaypoints">Visualizza waypoints sulla mappa</string>
-  <string name="init_showwaypoint_description">Livello al di sotto del quale visualizzare waypoints sulla mappa.</string>
+  <string name="init_showwaypoints">Mostra waypoints sulla mappa</string>
+  <string name="init_showwaypoint_description">Livello al di sotto del quale mostrare waypoints sulla mappa.</string>
   <string name="init_disabled">Esclude cache non attive</string>
   <string name="init_offline">Conserva le mappe per uso offline</string>
   <string name="init_save_log_img">Salva immagini contenute nei log</string>
@@ -400,13 +400,13 @@
   <string name="init_restore_failed">Ripristino fallito.</string>
   <string name="init_restore_running">Ripristino del database delle cache…</string>
   <string name="init_restore_confirm">Il database è vuoto. Vuoi ripristinare il backup?</string>
-  <string name="init_backup_last">Backup disponibile da</string>
+  <string name="init_backup_last">Disponibile Backup del</string>
   <string name="init_backup_last_no">Non esiste il file con il backup.</string>
   <string name="init_mapsources">Tipi di mappe</string>
   <string name="init_mapsources_description">Qui puoi scegliere dove c:geo preleverà le mappe. Come alternativa a Google maps esistono vari stili di OpenStreetMap disponibili anche per uso offline (vedi <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> per dettagli).</string>
   <string name="init_mapsource_select">Seleziona il tipo di mappa</string>
   <string name="init_select_mapfile">…</string>
-  <string name="init_trackautovisit">Setta i tuoi oggetti trackables automaticamente su \"visit\" quando logghi</string>
+  <string name="init_trackautovisit">Setta i miei oggetti trackables automaticamente su \"visit\" quando invio log</string>
   <string name="init_sigautoinsert">Inserisce la firma automaticamente</string>
   <string name="init_loaddirectionimg">Carica le immagini di direzione se necessario</string>
 
@@ -444,7 +444,7 @@
   <string name="cache_offline_store">Salva</string>
   <string name="cache_offline_stored">Salvata nel dispositivo</string>
   <string name="cache_offline_not_ready">Non pronta\nper uso offline</string>
-  <string name="cache_offline_time_about">about</string>
+  <string name="cache_offline_time_about"> </string>
   <string name="cache_offline_time_mins">minuti fa</string>
   <string name="cache_offline_time_mins_few">qualche minuto fa</string>
   <string name="cache_offline_time_hour">un\'ora fa</string>
@@ -453,7 +453,7 @@
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Attributi</string>
   <string name="cache_attributes_no_icons">(aggiorna la cache per visualizzare le icone degli attributi)</string>
-  <string name="cache_inventory">Oggetti Trackable contenuti</string>
+  <string name="cache_inventory">Oggetti</string>
   <string name="cache_log_offline">Log Offline</string>
   <string name="cache_log_images_loading">Caricamento immagini log…</string>
   <string name="cache_log_images_title">Immagini Log</string>
@@ -491,12 +491,12 @@
   <string name="cache_dialog_watchlist_remove_message">Rimozione cache dalla tua watchlist…</string>
   <string name="cache_menu_navigate">Naviga</string>
   <string name="cache_menu_compass">Bussola</string>
-  <string name="cache_menu_tbt">Turn-by-turn</string>
+  <string name="cache_menu_tbt">Itinerario guidato</string>
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Mappa</string>
   <string name="cache_menu_map_static">Mappe statiche</string>
   <string name="cache_menu_rmaps">Rmaps</string>
-  <string name="cache_menu_map_ext">Mappe esterne</string>
+  <string name="cache_menu_map_ext">Mappa su app esterna</string>
   <string name="cache_menu_streetview">Street View</string>
   <string name="cache_menu_browser">Apri nel browser</string>
   <string name="cache_menu_visit">Scrivi Log</string>
@@ -526,11 +526,11 @@
   <string name="cache_rating">Voto</string>
   <string name="cache_own_rating">Il tuo voto</string>
   <string name="cache_rating_of">di</string>
-  <string name="cache_favourite">Preferita</string>
+  <string name="cache_favourite">Popolarità</string>
   <string name="cache_owner">Proprietario</string>
   <string name="cache_hidden">Nascosta</string>
   <string name="cache_event">Data</string>
-  <string name="cache_location">Posizione</string>
+  <string name="cache_location">Luogo</string>
   <string name="cache_coordinates">Coordinate</string>
   <string name="cache_coordinates_original">Coordinate originali</string>
   <string name="cache_calendars">Scegli calendario</string>
@@ -538,7 +538,7 @@
   <string name="cache_spoiler_images_loading">Caricamento immagini spoiler…</string>
   <string name="cache_log_types">Tipi di Log</string>
   <string name="cache_coordinates_no">Questa cache non ha coordinate.</string>
-  <string name="cache_export_fieldnote">Esporta le note</string>
+  <string name="cache_export_fieldnote">Esporta le note (Field notes)</string>
   <string name="cache_clear_history">Cancella cronologia</string>
   <string name="cache_remove_from_history">Rimuovi dalla cronologia</string>
   <string name="cache_license">Licenza</string>
@@ -553,7 +553,7 @@
   <string name="file_title_searching">Ricerca in corso</string>
 
   <!-- gpx -->
-  <string name="gpx_import_loading_caches">Caricamento caches da file .gpx</string>
+  <string name="gpx_import_loading_caches">Caricamento caches da file GPX</string>
   <string name="gpx_import_loading_waypoints">Caricamento file waypoints</string>
   <string name="gpx_import_storing">Salvataggio delle cache nel database</string>
   <string name="gpx_import_caches_imported">cache importate</string>
@@ -588,7 +588,7 @@
   <string name="waypoint">Waypoint</string>
   <string name="waypoint_title">Waypoint</string>
   <string name="waypoint_custom">Custom</string>
-  <string name="waypoint_my_coordinates">Mie coordinate</string>
+  <string name="waypoint_my_coordinates">Coordinate attuali</string>
   <string name="waypoint_bearing">Angolo</string>
   <string name="waypoint_distance">Distanza</string>
   <string name="waypoint_name">Nome</string>
