@@ -345,7 +345,7 @@
   <string name="init_username">Utente</string>
   <string name="init_password">Password</string>
   <string name="init_passvote">Password</string>
-  <string name="init_login">Verifica login</string>
+  <string name="init_login">Verifica e salva login</string>
   <string name="init_login_popup">Login</string>
   <string name="init_login_popup_working">Logging in Geocaching.com…</string>
   <string name="init_login_popup_ok">Login ok.</string>
@@ -444,7 +444,7 @@
   <string name="cache_offline_store">Salva</string>
   <string name="cache_offline_stored">Salvata nel dispositivo</string>
   <string name="cache_offline_not_ready">Non pronta\nper uso offline</string>
-  <string name="cache_offline_time_about"> </string>
+  <string name="cache_offline_time_about">circa</string>
   <string name="cache_offline_time_mins">minuti fa</string>
   <string name="cache_offline_time_mins_few">qualche minuto fa</string>
   <string name="cache_offline_time_hour">un\'ora fa</string>
