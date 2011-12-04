@@ -6,6 +6,7 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.maps.MapProviderFactory;
+import cgeo.geocaching.twitter.TwitterAuthorizationActivity;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
@@ -264,7 +265,7 @@ public class cgeoinit extends AbstractActivity {
         authorizeTwitter.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View arg0) {
-                Intent authIntent = new Intent(cgeoinit.this, cgeoauth.class);
+                Intent authIntent = new Intent(cgeoinit.this, TwitterAuthorizationActivity.class);
                 startActivity(authIntent);
             }
         });
@@ -277,7 +278,7 @@ public class cgeoinit extends AbstractActivity {
             public void onClick(View v) {
                 Settings.setUseTwitter(twitterButton.isChecked());
                 if (Settings.isUseTwitter() && !Settings.isTwitterLoginValid()) {
-                    Intent authIntent = new Intent(cgeoinit.this, cgeoauth.class);
+                    Intent authIntent = new Intent(cgeoinit.this, TwitterAuthorizationActivity.class);
                     startActivity(authIntent);
                 }
 

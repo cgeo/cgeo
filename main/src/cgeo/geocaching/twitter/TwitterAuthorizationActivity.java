@@ -1,5 +1,9 @@
-package cgeo.geocaching;
+package cgeo.geocaching.twitter;
 
+import cgeo.geocaching.Parameters;
+import cgeo.geocaching.R;
+import cgeo.geocaching.Settings;
+import cgeo.geocaching.cgBase;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.network.OAuth;
 
@@ -22,7 +26,7 @@ import android.widget.EditText;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class cgeoauth extends AbstractActivity {
+public class TwitterAuthorizationActivity extends AbstractActivity {
     private String OAtoken = null;
     private String OAtokenSecret = null;
     private final Pattern paramsPattern1 = Pattern.compile("oauth_token=([a-zA-Z0-9\\-\\_.]+)");
@@ -163,12 +167,12 @@ public class cgeoauth extends AbstractActivity {
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://" + host + pathAuthorize + "?" + encodedParams)));
                         status = 1;
                     } catch (Exception e) {
-                        Log.e(Settings.tag, "cgeoauth.requestToken(2): " + e.toString());
+                        Log.e(Settings.tag, "TwitterAuthorizationActivity.requestToken(2): " + e.toString());
                     }
                 }
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgeoauth.requestToken(1): " + e.toString());
+            Log.e(Settings.tag, "TwitterAuthorizationActivity.requestToken(1): " + e.toString());
         }
 
         requestTokenHandler.sendEmptyMessage(status);
@@ -220,7 +224,7 @@ public class cgeoauth extends AbstractActivity {
                 status = 1;
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgeoauth.changeToken: " + e.toString());
+            Log.e(Settings.tag, "TwitterAuthorizationActivity.changeToken: " + e.toString());
         }
 
         changeTokensHandler.sendEmptyMessage(status);
@@ -230,7 +234,7 @@ public class cgeoauth extends AbstractActivity {
 
         public void onClick(View arg0) {
             if (requestTokenDialog == null) {
-                requestTokenDialog = new ProgressDialog(cgeoauth.this);
+                requestTokenDialog = new ProgressDialog(TwitterAuthorizationActivity.this);
                 requestTokenDialog.setCancelable(false);
                 requestTokenDialog.setMessage(res.getString(R.string.auth_dialog_wait));
             }
@@ -263,7 +267,7 @@ public class cgeoauth extends AbstractActivity {
             }
 
             if (changeTokensDialog == null) {
-                changeTokensDialog = new ProgressDialog(cgeoauth.this);
+                changeTokensDialog = new ProgressDialog(TwitterAuthorizationActivity.this);
                 changeTokensDialog.setCancelable(false);
                 changeTokensDialog.setMessage(res.getString(R.string.auth_dialog_wait));
             }

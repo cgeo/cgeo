@@ -87,7 +87,7 @@
 			</intent-filter>
 		</activity>
 		<activity
-			android:name=".cgeoauth"
+			android:name=".twitter.TwitterAuthorizationActivity"
 			android:label="@string/app_name"
 			android:windowSoftInputMode="stateHidden"
 			android:configChanges="keyboardHidden|orientation" >
