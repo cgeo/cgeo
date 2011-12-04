@@ -124,6 +124,11 @@ public class CacheDetailActivity extends AbstractActivity {
     private ViewPagerAdapter viewPagerAdapter;
 
     /**
+     * The {@link TitlePageIndicator} for this activity.
+     */
+    private TitlePageIndicator titleIndicator;
+
+    /**
      * If another activity is called and can modify the data of this activity, we refresh it on resume.
      */
     private boolean refreshOnResume = false;
@@ -241,7 +246,7 @@ public class CacheDetailActivity extends AbstractActivity {
         viewPagerAdapter = new ViewPagerAdapter();
         pager.setAdapter(viewPagerAdapter);
 
-        TitlePageIndicator titleIndicator = (TitlePageIndicator) findViewById(R.id.pager_indicator);
+        titleIndicator = (TitlePageIndicator) findViewById(R.id.pager_indicator);
         titleIndicator.setViewPager(pager);
 
         // Initialization done. Let's load the data with the given information.
@@ -587,6 +592,9 @@ public class CacheDetailActivity extends AbstractActivity {
 
         // notify the adapter that the data has changed
         viewPagerAdapter.notifyDataSetChanged();
+
+        // notify the indicator that the data has changed
+        titleIndicator.notifyDataSetChanged();
 
         // rendering done! remove progress-popup if any there
         progress.dismiss();
