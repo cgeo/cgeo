@@ -22,6 +22,8 @@ import java.util.Locale;
  */
 public final class Settings {
 
+    private static final String KEY_TEMP_TOKEN_SECRET = "temp-token-secret";
+    private static final String KEY_TEMP_TOKEN_PUBLIC = "temp-token-public";
     private static final String KEY_HELP_SHOWN = "helper";
     private static final String KEY_ANYLONGITUDE = "anylongitude";
     private static final String KEY_ANYLATITUDE = "anylatitude";
@@ -710,6 +712,15 @@ public final class Settings {
 
     }
 
+    public static Geopoint getAnyCoordinates() {
+        if (sharedPrefs.contains(KEY_ANYLATITUDE) && sharedPrefs.contains(KEY_ANYLONGITUDE)) {
+            float lat = sharedPrefs.getFloat(KEY_ANYLATITUDE, 0);
+            float lon = sharedPrefs.getFloat(KEY_ANYLONGITUDE, 0);
+            return new Geopoint(lat, lon);
+        }
+        return null;
+    }
+
     public static boolean isUseCompass() {
         return 0 != sharedPrefs.getInt(KEY_USE_COMPASS, 1);
     }
@@ -833,4 +844,47 @@ public final class Settings {
     public static int getVersion() {
         return sharedPrefs.getInt(KEY_VERSION, 0);
     }
+
+    public static void setTwitterTokens(final String tokenPublic, final String tokenSecret, boolean enableTwitter) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putString(KEY_TWITTER_TOKEN_PUBLIC, tokenPublic);
+                edit.putString(KEY_TWITTER_TOKEN_SECRET, tokenSecret);
+                if (tokenPublic != null) {
+                    edit.remove(KEY_TEMP_TOKEN_PUBLIC);
+                    edit.remove(KEY_TEMP_TOKEN_SECRET);
+                }
+            }
+        });
+        setUseTwitter(enableTwitter);
+    }
+
+    public static void setTwitterTempTokens(final String tokenPublic, final String tokenSecret) {
+        editSharedSettings(new PrefRunnable() {
+            @Override
+            public void edit(Editor edit) {
+                edit.putString(KEY_TEMP_TOKEN_PUBLIC, tokenPublic);
+                edit.putString(KEY_TEMP_TOKEN_SECRET, tokenSecret);
+            }
+        });
+    }
+
+    public static ImmutablePair<String, String> getTempToken() {
+        String tokenPublic = sharedPrefs.getString(KEY_TEMP_TOKEN_PUBLIC, null);
+        String tokenSecret = sharedPrefs.getString(KEY_TEMP_TOKEN_SECRET, null);
+        return new ImmutablePair<String, String>(tokenPublic, tokenSecret);
+    }
+
+    public static void setVersion(final int version) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putInt(KEY_VERSION, version);
+            }
+        });
+    }
+
 }

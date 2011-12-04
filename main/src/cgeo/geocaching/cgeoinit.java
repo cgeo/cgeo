@@ -9,6 +9,7 @@ import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.twitter.TwitterAuthorizationActivity;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.http.HttpResponse;
 
 import android.app.ProgressDialog;
@@ -213,13 +214,10 @@ public class cgeoinit extends AbstractActivity {
     public void init() {
 
         // geocaching.com settings
-        String usernameNow = prefs.getString("username", null);
-        if (usernameNow != null) {
-            ((EditText) findViewById(R.id.username)).setText(usernameNow);
-        }
-        String passwordNow = prefs.getString("password", null);
-        if (usernameNow != null) {
-            ((EditText) findViewById(R.id.password)).setText(passwordNow);
+        ImmutablePair<String, String> login = Settings.getLogin();
+        if (login != null) {
+            ((EditText) findViewById(R.id.username)).setText(login.left);
+            ((EditText) findViewById(R.id.password)).setText(login.right);
         }
 
         Button logMeIn = (Button) findViewById(R.id.log_me_in);
@@ -235,7 +233,7 @@ public class cgeoinit extends AbstractActivity {
         });
 
         // gcvote settings
-        String passvoteNow = prefs.getString("pass-vote", null);
+        String passvoteNow = Settings.getGCvoteLogin().right;
         if (passvoteNow != null) {
             ((EditText) findViewById(R.id.passvote)).setText(passvoteNow);
         }
@@ -420,7 +418,7 @@ public class cgeoinit extends AbstractActivity {
         });
 
         TextView showWaypointsThreshold = (TextView) findViewById(R.id.showwaypointsthreshold);
-        showWaypointsThreshold.setText("" + prefs.getInt("gcshowwaypointsthreshold", 0));
+        showWaypointsThreshold.setText(String.valueOf(Settings.getWayPointsThreshold()));
 
         final CheckBox autovisitButton = (CheckBox) findViewById(R.id.trackautovisit);
         autovisitButton.setChecked(Settings.isTrackableAutoVisit());
@@ -505,7 +503,7 @@ public class cgeoinit extends AbstractActivity {
 
         // Altitude settings
         EditText altitudeEdit = (EditText) findViewById(R.id.altitude);
-        altitudeEdit.setText("" + prefs.getInt("altcorrection", 0));
+        altitudeEdit.setText(String.valueOf(Settings.getAltCorrection()));
 
         //Send2cgeo settings
         String webDeviceName = Settings.getWebDeviceName();
@@ -526,7 +524,7 @@ public class cgeoinit extends AbstractActivity {
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, mapSources.values().toArray(new String[] {}));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mapSourceSelector.setAdapter(adapter);
-        int mapsource = prefs.getInt("mapsource", 0);
+        int mapsource = Settings.getMapSource();
         mapSourceSelector.setSelection(MapProviderFactory.getSourceOrdinalFromId(mapsource));
         mapSourceSelector.setOnItemSelectedListener(new cgeoChangeMapSource());
 
@@ -548,7 +546,7 @@ public class cgeoinit extends AbstractActivity {
 
     private void initMapfileEdittext(boolean setFocus) {
         EditText mfmapFileEdit = (EditText) findViewById(R.id.mapfile);
-        mfmapFileEdit.setText(prefs.getString("mfmapfile", ""));
+        mfmapFileEdit.setText(Settings.getMapFile());
         if (setFocus) {
             mfmapFileEdit.requestFocus();
         }
@@ -707,7 +705,7 @@ public class cgeoinit extends AbstractActivity {
 
         public void onClick(View arg0) {
             final String deviceName = ((EditText) findViewById(R.id.webDeviceName)).getText().toString();
-            final String deviceCode = prefs.getString("webDeviceCode", null);
+            final String deviceCode = Settings.getWebDeviceCode();
 
             if (StringUtils.isBlank(deviceName)) {
                 showToast(res.getString(R.string.err_missing_device_name));

@@ -8,12 +8,12 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.network.OAuth;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.util.EntityUtils;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -111,8 +111,9 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
         pinEntry = (EditText) findViewById(R.id.pin);
         pinEntryButton = (Button) findViewById(R.id.pin_button);
 
-        OAtoken = prefs.getString("temp-token-public", null);
-        OAtokenSecret = prefs.getString("temp-token-secret", null);
+        ImmutablePair<String, String> tempToken = Settings.getTempToken();
+        OAtoken = tempToken.left;
+        OAtokenSecret = tempToken.right;
 
         startButton.setEnabled(true);
         startButton.setOnClickListener(new startListener());
@@ -154,11 +155,7 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
                 }
 
                 if (StringUtils.isNotBlank(OAtoken) && StringUtils.isNotBlank(OAtokenSecret)) {
-                    final SharedPreferences.Editor prefsEdit = getSharedPreferences(Settings.preferences, 0).edit();
-                    prefsEdit.putString("temp-token-public", OAtoken);
-                    prefsEdit.putString("temp-token-secret", OAtokenSecret);
-                    prefsEdit.commit();
-
+                    Settings.setTwitterTempTokens(OAtoken, OAtokenSecret);
                     try {
                         final Parameters paramsBrowser = new Parameters();
                         paramsBrowser.put("oauth_callback", "oob");
@@ -206,21 +203,9 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
             if (StringUtils.isBlank(OAtoken) && StringUtils.isBlank(OAtokenSecret)) {
                 OAtoken = "";
                 OAtokenSecret = "";
-
-                final SharedPreferences.Editor prefs = getSharedPreferences(Settings.preferences, 0).edit();
-                prefs.putString("tokenpublic", null);
-                prefs.putString("tokensecret", null);
-                prefs.putInt("twitter", 0);
-                prefs.commit();
+                Settings.setTwitterTokens(null, null, false);
             } else {
-                final SharedPreferences.Editor prefs = getSharedPreferences(Settings.preferences, 0).edit();
-                prefs.remove("temp-token-public");
-                prefs.remove("temp-token-secret");
-                prefs.putString("tokenpublic", OAtoken);
-                prefs.putString("tokensecret", OAtokenSecret);
-                prefs.putInt("twitter", 1);
-                prefs.commit();
-
+                Settings.setTwitterTokens(OAtoken, OAtokenSecret, true);
                 status = 1;
             }
         } catch (Exception e) {
@@ -243,11 +228,7 @@ public class TwitterAuthorizationActivity extends AbstractActivity {
             startButton.setOnTouchListener(null);
             startButton.setOnClickListener(null);
 
-            final SharedPreferences.Editor prefs = getSharedPreferences(Settings.preferences, 0).edit();
-            prefs.putString("temp-token-public", null);
-            prefs.putString("temp-token-secret", null);
-            prefs.commit();
-
+            Settings.setTwitterTempTokens(null, null);
             (new Thread() {
 
                 @Override

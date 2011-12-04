@@ -7,8 +7,6 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.compatibility.Compatibility;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -22,7 +20,6 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
 
     protected cgeoapplication app = null;
     protected Resources res = null;
-    protected SharedPreferences prefs = null;
 
     protected AbstractActivity() {
         this(null);
@@ -75,7 +72,6 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
         // init
         res = this.getResources();
         app = (cgeoapplication) this.getApplication();
-        prefs = getSharedPreferences(Settings.preferences, Context.MODE_PRIVATE);
 
         cgBase.initialize(app);
 

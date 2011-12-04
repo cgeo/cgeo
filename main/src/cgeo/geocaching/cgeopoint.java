@@ -267,8 +267,8 @@ public class cgeopoint extends AbstractActivity {
         latButton.setOnClickListener(new coordDialogListener());
         lonButton.setOnClickListener(new coordDialogListener());
 
-        if (prefs.contains("anylatitude") && prefs.contains("anylongitude")) {
-            final Geopoint coords = new Geopoint(prefs.getFloat("anylatitude", 0f), prefs.getFloat("anylongitude", 0f));
+        final Geopoint coords = Settings.getAnyCoordinates();
+        if (coords != null) {
             latButton.setText(coords.format(GeopointFormatter.Format.LAT_DECMINUTE));
             lonButton.setText(coords.format(GeopointFormatter.Format.LON_DECMINUTE));
         }

@@ -14,7 +14,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -722,9 +721,7 @@ public class cgeo extends AbstractActivity {
             cleanupRunning = false;
 
             if (version > 0) {
-                SharedPreferences.Editor edit = prefs.edit();
-                edit.putInt("version", version);
-                edit.commit();
+                Settings.setVersion(version);
             }
         }
     }
