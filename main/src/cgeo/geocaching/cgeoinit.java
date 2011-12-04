@@ -214,7 +214,7 @@ public class cgeoinit extends AbstractActivity {
     public void init() {
 
         // geocaching.com settings
-        ImmutablePair<String, String> login = Settings.getLogin();
+        final ImmutablePair<String, String> login = Settings.getLogin();
         if (login != null) {
             ((EditText) findViewById(R.id.username)).setText(login.left);
             ((EditText) findViewById(R.id.password)).setText(login.right);
@@ -233,9 +233,9 @@ public class cgeoinit extends AbstractActivity {
         });
 
         // gcvote settings
-        String passvoteNow = Settings.getGCvoteLogin().right;
-        if (passvoteNow != null) {
-            ((EditText) findViewById(R.id.passvote)).setText(passvoteNow);
+        final ImmutablePair<String, String> gcvoteLogin = Settings.getGCvoteLogin();
+        if (null != gcvoteLogin && null != gcvoteLogin.right) {
+            ((EditText) findViewById(R.id.passvote)).setText(gcvoteLogin.right);
         }
 
         // go4cache settings
