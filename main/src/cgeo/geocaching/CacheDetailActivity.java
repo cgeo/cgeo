@@ -1029,7 +1029,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
         @Override
         public String getTitle(int position) {
-            return res.getString(pageOrder.get(position).titleStringId);
+            return (null == pageOrder.get(position)) ? "" : res.getString(pageOrder.get(position).titleStringId);
         }
     }
 
