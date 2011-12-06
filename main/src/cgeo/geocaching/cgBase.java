@@ -1186,7 +1186,9 @@ public class cgBase {
 
                 waypoint.setCoords(new Geopoint(originalCoords));
                 waypoint.setWaypointType(WaypointType.WAYPOINT);
-                waypoint.setName(res.getString(R.string.cache_coordinates_original));
+                if (res != null) {
+                    waypoint.setName(res.getString(R.string.cache_coordinates_original));
+                }
 
                 if (null == cache.getWaypoints()) {
                     cache.setWaypoints(new ArrayList<cgWaypoint>());
