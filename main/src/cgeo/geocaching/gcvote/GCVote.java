@@ -139,7 +139,7 @@ public final class GCVote {
                     continue;
                 }
 
-                Float myVote = null;
+                float myVote = 0;
                 if (loggedIn) {
                     try {
                         final Matcher matcherVote = patternVote.matcher(voteData);

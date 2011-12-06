@@ -3,9 +3,9 @@ package cgeo.geocaching.gcvote;
 public final class GCVoteRating {
     private final float rating;
     private final int votes;
-    private final Float myVote;
+    private final float myVote;
 
-    public GCVoteRating(float rating, int votes, Float myVote) {
+    public GCVoteRating(float rating, int votes, float myVote) {
         this.rating = rating;
         this.votes = votes;
         this.myVote = myVote;
@@ -19,7 +19,7 @@ public final class GCVoteRating {
         return votes;
     }
 
-    public Float getMyVote() {
+    public float getMyVote() {
         return myVote;
     }
 }
