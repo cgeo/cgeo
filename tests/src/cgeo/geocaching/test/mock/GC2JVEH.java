@@ -113,7 +113,7 @@ public class GC2JVEH extends MockedCache {
     @Override
     public Map<Integer, Integer> getLogCounts() {
         final Map<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
-        logCounts.put(cgBase.LOG_FOUND_IT, 59);
+        logCounts.put(cgBase.LOG_FOUND_IT, 64);
         logCounts.put(cgBase.LOG_NOTE, 7);
         logCounts.put(cgBase.LOG_TEMP_DISABLE_LISTING, 1);
         logCounts.put(cgBase.LOG_ENABLE_LISTING, 1);
@@ -123,7 +123,7 @@ public class GC2JVEH extends MockedCache {
 
     @Override
     public int getFavoritePoints() {
-        return 21;
+        return 22;
     }
 
     @Override
