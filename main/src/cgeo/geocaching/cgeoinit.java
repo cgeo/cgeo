@@ -345,6 +345,16 @@ public class cgeoinit extends AbstractActivity {
             }
         });
 
+        final CheckBox openLastDetailsPageButton = (CheckBox) findViewById(R.id.openlastdetailspage);
+        openLastDetailsPageButton.setChecked(Settings.isOpenLastDetailsPage());
+        openLastDetailsPageButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Settings.setOpenLastDetailsPage(openLastDetailsPageButton.isChecked());
+            }
+        });
+
         // Other settings
         final CheckBox skinButton = (CheckBox) findViewById(R.id.skin);
         skinButton.setChecked(Settings.isLightSkin());
