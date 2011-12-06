@@ -367,6 +367,7 @@
   <string name="init_details">Cache details</string>
   <string name="init_ratingwanted">Load cache rating from GCvote.com</string>
   <string name="init_elevationwanted">Load cache elevation data</string>
+  <string name="init_openlastdetailspage">Open details with last used page</string>
   <string name="init_autoload">Auto-loading long description</string>
   <string name="init_other">Other options</string>
   <string name="init_skin">Light skin\n(needs restart of c:geo)</string>

@@ -70,6 +70,8 @@ public final class Settings {
     private static final String KEY_GC_CUSTOM_DATE = "gccustomdate";
     private static final String KEY_SHOW_WAYPOINTS_THRESHOLD = "gcshowwaypointsthreshold";
     private static final String KEY_COOKIE_STORE = "cookiestore";
+    private static final String KEY_OPEN_LAST_DETAILS_PAGE = "opendetailslastpage";
+    private static final String KEY_LAST_DETAILS_PAGE = "lastdetailspage";
 
     private final static int unitsMetric = 1;
     private final static int unitsImperial = 2;
@@ -887,4 +889,31 @@ public final class Settings {
         });
     }
 
+    public static boolean isOpenLastDetailsPage() {
+        return sharedPrefs.getBoolean(KEY_OPEN_LAST_DETAILS_PAGE, false);
+    }
+
+    public static void setOpenLastDetailsPage(final boolean openLastPage) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putBoolean(KEY_OPEN_LAST_DETAILS_PAGE, openLastPage);
+            }
+        });
+    }
+
+    public static int getLastDetailsPage() {
+        return sharedPrefs.getInt(KEY_LAST_DETAILS_PAGE, 1);
+    }
+
+    public static void setLastDetailsPage(final int index) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putInt(KEY_LAST_DETAILS_PAGE, index);
+            }
+        });
+    }
 }

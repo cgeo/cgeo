@@ -39,6 +39,7 @@ import android.os.Message;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.Spanned;
@@ -110,6 +111,8 @@ public class CacheDetailActivity extends AbstractActivity {
 
     /**
      * A {@link List} of all available pages.
+     *
+     * @todo Move to adapter
      */
     private final List<Page> pageOrder = new ArrayList<Page>();
 
@@ -117,6 +120,11 @@ public class CacheDetailActivity extends AbstractActivity {
      * Instances of all {@link PageViewCreator}.
      */
     private final Map<Page, PageViewCreator> viewCreators = new HashMap<Page, PageViewCreator>();
+
+    /**
+     * The {@link ViewPager} for this activity.
+     */
+    private ViewPager viewPager;
 
     /**
      * The {@link ViewPagerAdapter} for this activity.
@@ -242,12 +250,38 @@ public class CacheDetailActivity extends AbstractActivity {
         }
 
         // initialize ViewPager
-        ViewPager pager = (ViewPager) findViewById(R.id.viewpager);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPagerAdapter = new ViewPagerAdapter();
-        pager.setAdapter(viewPagerAdapter);
+        viewPager.setAdapter(viewPagerAdapter);
 
         titleIndicator = (TitlePageIndicator) findViewById(R.id.pager_indicator);
-        titleIndicator.setViewPager(pager);
+        titleIndicator.setViewPager(viewPager);
+        titleIndicator.setOnPageChangeListener(new OnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                if (Settings.isOpenLastDetailsPage()) {
+                    Settings.setLastDetailsPage(position);
+                }
+            }
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+
+        // switch to entry page (last used or 2)
+        final int entryPageIndex = Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
+        if (viewPagerAdapter.getCount() < entryPageIndex) {
+            for (int i = 0; i <= entryPageIndex; i++) {
+                // we can't switch to a page that is out of bounds, so we add null-pages
+                pageOrder.add(null);
+            }
+        }
+        viewPager.setCurrentItem(entryPageIndex, false);
 
         // Initialization done. Let's load the data with the given information.
         new LoadCacheThread(geocode, guid, loadCacheHandler).start();
@@ -580,14 +614,19 @@ public class CacheDetailActivity extends AbstractActivity {
         // add available pages (remove old pages first)
         pageOrder.clear();
 
+        pageOrder.add(Page.WAYPOINTS);
         pageOrder.add(Page.DETAILS);
         pageOrder.add(Page.DESCRIPTION);
         if (CollectionUtils.isNotEmpty(cache.getLogs())) {
             pageOrder.add(Page.LOGS);
         }
-        pageOrder.add(Page.WAYPOINTS);
         if (CollectionUtils.isNotEmpty(cache.getInventory())) {
             pageOrder.add(Page.INVENTORY);
+        }
+
+        // switch to page 2 (index 1) if we're out of bounds
+        if (viewPager.getCurrentItem() < 0 || viewPager.getCurrentItem() >= viewPagerAdapter.getCount()) {
+            viewPager.setCurrentItem(1, false);
         }
 
         // notify the adapter that the data has changed
@@ -921,7 +960,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             PageViewCreator creator = viewCreators.get(page);
 
-            if (null == creator) {
+            if (null == creator && null != page) {
                 // The creator is not instantiated yet, let's do it.
                 switch (page) {
                     case DETAILS:
@@ -990,7 +1029,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
         @Override
         public String getTitle(int position) {
-            return res.getString(pageOrder.get(position).titleStringId);
+            return (null == pageOrder.get(position)) ? "" : res.getString(pageOrder.get(position).titleStringId);
         }
     }
 
