@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Locale;
 
 final public class OkapiClient {
+    private static final String CACHE_SIZE = "size";
     private static final String CACHE_VOTES = "rating_votes";
     private static final String CACHE_NOTFOUNDS = "notfounds";
     private static final String CACHE_FOUNDS = "founds";
@@ -142,7 +143,7 @@ final public class OkapiClient {
             cache.setSize(getCacheSize(response));
             cache.setDifficulty((float) response.getDouble(CACHE_DIFFICULTY));
             cache.setTerrain((float) response.getDouble(CACHE_TERRAIN));
-            if (response.has(CACHE_RATING) && !isNull(response.getString(CACHE_RATING))) {
+            if (!response.isNull(CACHE_RATING)) {
                 cache.setRating((float) response.getDouble(CACHE_RATING));
             }
             cache.setVotes(response.getInt(CACHE_VOTES));
@@ -191,10 +192,6 @@ final public class OkapiClient {
             }
         }
         return url;
-    }
-
-    private static boolean isNull(String string) {
-        return string.equalsIgnoreCase("null");
     }
 
     private static String parseUser(JSONObject user) throws JSONException {
@@ -251,9 +248,12 @@ final public class OkapiClient {
     }
 
     private static CacheSize getCacheSize(final JSONObject response) {
+        if (response.isNull(CACHE_SIZE)) {
+            return CacheSize.NOT_CHOSEN;
+        }
         double size = 0;
         try {
-            size = response.getDouble("size");
+            size = response.getDouble(CACHE_SIZE);
         } catch (JSONException e) {
             Log.e(Settings.tag, "OkapiClient.getCacheSize", e);
         }
