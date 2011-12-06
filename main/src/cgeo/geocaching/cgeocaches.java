@@ -156,7 +156,7 @@ public class cgeocaches extends AbstractListActivity {
     private String username = null;
     private cgSearch search = null;
     private List<cgCache> cacheList = new ArrayList<cgCache>();
-    private cgCacheListAdapter adapter = null;
+    private CacheListAdapter adapter = null;
     private LayoutInflater inflater = null;
     private View listFooter = null;
     private TextView listFooterText = null;
@@ -1409,7 +1409,7 @@ public class cgeocaches extends AbstractListActivity {
             list.setLongClickable(true);
             list.addFooterView(listFooter);
 
-            adapter = new cgCacheListAdapter(this, cacheList);
+            adapter = new CacheListAdapter(this, cacheList, type);
             setListAdapter(adapter);
         } else {
             adapter.notifyDataSetChanged();

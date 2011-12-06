@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filter.cgFilter;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -45,7 +46,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
+public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
     private static final String SEPARATOR = " · ";
     final private Resources res;
@@ -72,12 +73,14 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
     private static final float SWIPE_OPACITY = 0.5f;
     private cgFilter currentFilter = null;
     private List<cgCache> originalList = null;
+    private final CacheListType cacheListType;
 
-    public cgCacheListAdapter(final Activity activity, final List<cgCache> list) {
+    public CacheListAdapter(final Activity activity, final List<cgCache> list, CacheListType cacheListType) {
         super(activity, 0, list);
 
         this.res = activity.getResources();
         this.list = list;
+        this.cacheListType = cacheListType;
 
         final DisplayMetrics metrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -327,7 +330,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         }
 
         if (position > getCount()) {
-            Log.w(Settings.tag, "cgCacheListAdapter.getView: Attempt to access missing item #" + position);
+            Log.w(Settings.tag, "CacheListAdapter.getView: Attempt to access missing item #" + position);
             return null;
         }
 
@@ -543,55 +546,37 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         }
         holder.favourite.setBackgroundResource(favoriteBack);
 
-        StringBuilder cacheInfo = new StringBuilder(50);
         if (historic && cache.getVisitedDate() > 0) {
+            StringBuilder cacheInfo = new StringBuilder(50);
             cacheInfo.append(cgBase.formatTime(cache.getVisitedDate()));
             cacheInfo.append("; ");
             cacheInfo.append(cgBase.formatDate(cache.getVisitedDate()));
+            holder.info.setText(cacheInfo.toString());
         } else {
+            ArrayList<String> infos = new ArrayList<String>();
             if (StringUtils.isNotBlank(cache.getGeocode())) {
-                cacheInfo.append(cache.getGeocode());
+                infos.add(cache.getGeocode());
             }
             if (cache.hasDifficulty()) {
-                if (cacheInfo.length() > 0) {
-                    cacheInfo.append(SEPARATOR);
-                }
-                cacheInfo.append("D ");
-                cacheInfo.append(String.format("%.1f", cache.getDifficulty()));
+                infos.add("D " + String.format("%.1f", cache.getDifficulty()));
             }
             if (cache.hasTerrain()) {
-                if (cacheInfo.length() > 0) {
-                    cacheInfo.append(SEPARATOR);
-                }
-                cacheInfo.append("T ");
-                cacheInfo.append(String.format("%.1f", cache.getTerrain()));
+                infos.add("T " + String.format("%.1f", cache.getTerrain()));
             }
             // don't show "not chosen" for events and virtuals, that should be the normal case
             if (cache.getSize() != null && cache.showSize()) {
-                if (cacheInfo.length() > 0) {
-                    cacheInfo.append(SEPARATOR);
-                }
-                cacheInfo.append(cache.getSize().getL10n());
+                infos.add(cache.getSize().getL10n());
             } else if (cache.isEventCache() && cache.getHiddenDate() != null) {
-                if (cacheInfo.length() > 0) {
-                    cacheInfo.append(SEPARATOR);
-                }
-                cacheInfo.append(cgBase.formatShortDate(cache.getHiddenDate().getTime()));
+                infos.add(cgBase.formatShortDate(cache.getHiddenDate().getTime()));
             }
             if (cache.isMembers()) {
-                if (cacheInfo.length() > 0) {
-                    cacheInfo.append(SEPARATOR);
-                }
-                cacheInfo.append(res.getString(R.string.cache_premium));
+                infos.add(res.getString(R.string.cache_premium));
             }
-            if (cache.getReason() == 1) {
-                if (cacheInfo.length() > 0) {
-                    cacheInfo.append(SEPARATOR);
-                }
-                cacheInfo.append(res.getString(R.string.cache_offline));
+            if (cacheListType != CacheListType.OFFLINE && cacheListType != CacheListType.HISTORY && cache.getReason() > 0) {
+                infos.add(res.getString(R.string.cache_offline));
             }
+            holder.info.setText(StringUtils.join(infos, SEPARATOR));
         }
-        holder.info.setText(cacheInfo.toString());
 
         return v;
     }
@@ -743,7 +728,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
                     return true;
                 }
             } catch (Exception e) {
-                Log.w(Settings.tag, "cgCacheListAdapter.detectGesture.onFling: " + e.toString());
+                Log.w(Settings.tag, "CacheListAdapter.detectGesture.onFling: " + e.toString());
             }
 
             return false;
