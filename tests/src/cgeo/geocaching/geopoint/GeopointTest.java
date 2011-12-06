@@ -12,6 +12,12 @@ public class GeopointTest extends AndroidTestCase {
         Assert.assertEquals(3.5, gp.getLongitude(), 1e-8);
     }
 
+    public static void testCreationWithParsing() {
+        final Geopoint gp = new Geopoint("N 52° 25,111 E 009° 39,111");
+        Assert.assertEquals(52.41852, gp.getLatitude(), 1e-4);
+        Assert.assertEquals(9.65185, gp.getLongitude(), 1e-4);
+    }
+
     public static void testCreationAtLimit() {
         // No exception should be raised.
         final Geopoint gp1 = new Geopoint(90.0, 10.0);
