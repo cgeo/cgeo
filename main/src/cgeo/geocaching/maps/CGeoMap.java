@@ -177,7 +177,12 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     if (live) {
                         title.append(res.getString(R.string.map_live));
                     } else {
-                        title.append(mapTitle.substring(0, mapTitle.lastIndexOf("[")));
+                        if (mapTitle.contains("["))
+                        {
+                            title.append(mapTitle.substring(0, mapTitle.lastIndexOf("[")));
+                        } else {
+                            title.append(mapTitle);
+                        }
                     }
 
                     // Number of caches in the viewport.
@@ -1279,7 +1284,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 double latMax = Math.max(lat1, lat2);
                 double lonMin = Math.min(lon1, lon2);
                 double lonMax = Math.max(lon1, lon2);
-
 
                 //*** this needs to be in it's own thread
                 // stage 2 - pull and render from geocaching.com
