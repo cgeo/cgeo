@@ -367,6 +367,7 @@
   <string name="init_details">Cache details</string>
   <string name="init_ratingwanted">Load cache rating from GCvote.com</string>
   <string name="init_elevationwanted">Load cache elevation data</string>
+  <string name="init_friendlogswanted">Load logbook (friends)</string>
   <string name="init_openlastdetailspage">Open details with last used page</string>
   <string name="init_autoload">Auto-loading long description</string>
   <string name="init_other">Other options</string>
@@ -487,6 +488,7 @@
   <string name="cache_waypoints_add">Add waypoint</string>
   <string name="cache_hint">Hint</string>
   <string name="cache_logs">Logbook</string>
+  <string name="cache_logsfriends">Logbook (Friends)</string>
   <string name="cache_dialog_loading_details">Loading cache details…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Loading page</string>
   <string name="cache_dialog_loading_details_status_details">Processing details</string>
@@ -947,6 +949,7 @@
   <!-- changelog -->
   <string name="changelog">\n
     <b>next release</b>\n
+    · new: additional page in the details view for logs from friends\n
     · new: horizontal scrollable pages for cache details\n
     · new: click on cache coordinates to change format\n
     · new: show own rating in cache details\n
