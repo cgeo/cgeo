@@ -225,8 +225,9 @@ public class cgeowaypointadd extends AbstractActivity {
 
         public void onClick(View arg0) {
             Geopoint gp = null;
-            if (waypoint != null && waypoint.getCoords() != null)
+            if (waypoint != null && waypoint.getCoords() != null) {
                 gp = waypoint.getCoords();
+            }
             cgeocoords coordsDialog = new cgeocoords(cgeowaypointadd.this, gp, geo);
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {

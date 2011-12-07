@@ -102,9 +102,9 @@ public class cgCompassMini extends View {
 
         float azimuthRelative = azimuth - heading;
         if (azimuthRelative < 0) {
-            azimuthRelative = azimuthRelative + 360;
+            azimuthRelative += 360;
         } else if (azimuthRelative >= 360) {
-            azimuthRelative = azimuthRelative - 360;
+            azimuthRelative -= 360;
         }
 
         // compass margins

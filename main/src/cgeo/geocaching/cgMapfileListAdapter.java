@@ -26,8 +26,9 @@ public class cgMapfileListAdapter extends ArrayAdapter<File> {
 
     @Override
     public View getView(final int position, final View rowView, final ViewGroup parent) {
-        if (inflater == null)
+        if (inflater == null) {
             inflater = ((Activity) getContext()).getLayoutInflater();
+        }
 
         if (position > getCount()) {
             Log.w(Settings.tag, "cgGPXListAdapter.getView: Attempt to access missing item #" + position);

@@ -39,24 +39,27 @@ public class GoogleCacheOverlay extends ItemizedOverlay<GoogleCacheOverlayItem> 
 
     @Override
     protected GoogleCacheOverlayItem createItem(int i) {
-        if (base == null)
+        if (base == null) {
             return null;
+        }
 
         return (GoogleCacheOverlayItem) base.createItem(i);
     }
 
     @Override
     public int size() {
-        if (base == null)
+        if (base == null) {
             return 0;
+        }
 
         return base.size();
     }
 
     @Override
     protected boolean onTap(int arg0) {
-        if (base == null)
+        if (base == null) {
             return false;
+        }
 
         return base.onTap(arg0);
     }

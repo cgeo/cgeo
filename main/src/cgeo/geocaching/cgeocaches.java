@@ -164,17 +164,17 @@ public class cgeocaches extends AbstractListActivity {
     private Float northHeading = 0f;
     private cgGeo geo = null;
     private cgDirection dir = null;
-    private UpdateLocationCallback geoUpdate = new update();
+    private UpdateLocationCallback geoUpdate = new UpdateLocation();
     private UpdateDirectionCallback dirUpdate = new UpdateDirection();
     private String title = "";
     private int detailTotal = 0;
     private int detailProgress = 0;
     private long detailProgressTime = 0L;
-    private geocachesLoadDetails threadD = null;
-    private geocachesLoadFromWeb threadW = null;
-    private geocachesDropDetails threadR = null;
-    private geocachesExportFieldNotes threadF = null;
-    private geocachesRemoveFromHistory threadH = null;
+    private LoadDetailsThread threadDetails = null;
+    private LoadFromWebThread threadWeb = null;
+    private DropDetailsThread threadR = null;
+    private ExportFieldNotesThread threadF = null;
+    private RemoveFromHistoryThread threadH = null;
     private int listId = 0;
     private List<cgList> lists = null;
     private String selectedFilter = null;
@@ -303,7 +303,7 @@ public class cgeocaches extends AbstractListActivity {
                 if (cgeoapplication.getError(search) != null) {
                     showToast(res.getString(R.string.err_download_fail) + cgeoapplication.getError(search).getErrorString(res) + ".");
 
-                    listFooter.setOnClickListener(new moreCachesListener());
+                    listFooter.setOnClickListener(new MoreCachesListener());
                     hideLoading();
                     showProgress(false);
 
@@ -597,7 +597,7 @@ public class cgeocaches extends AbstractListActivity {
                 showProgress(true);
                 setLoadingCaches();
 
-                threadPure = new geocachesLoadByOffline(loadCachesHandler, coords, listId);
+                threadPure = new LoadByOfflineThread(loadCachesHandler, coords, listId);
                 threadPure.start();
 
                 break;
@@ -611,7 +611,7 @@ public class cgeocaches extends AbstractListActivity {
                 showProgress(true);
                 setLoadingCaches();
 
-                threadPure = new geocachesLoadByHistory(loadCachesHandler);
+                threadPure = new LoadByHistoryThread(loadCachesHandler);
                 threadPure.start();
                 break;
             case NEAREST:
@@ -621,7 +621,7 @@ public class cgeocaches extends AbstractListActivity {
                 showProgress(true);
                 setLoadingCaches();
 
-                thread = new geocachesLoadByCoords(loadCachesHandler, coords);
+                thread = new LoadByCoordsThread(loadCachesHandler, coords);
                 thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
                 thread.start();
                 break;
@@ -632,7 +632,7 @@ public class cgeocaches extends AbstractListActivity {
                 showProgress(true);
                 setLoadingCaches();
 
-                thread = new geocachesLoadByCoords(loadCachesHandler, coords);
+                thread = new LoadByCoordsThread(loadCachesHandler, coords);
                 thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
                 thread.start();
                 break;
@@ -642,7 +642,7 @@ public class cgeocaches extends AbstractListActivity {
                 showProgress(true);
                 setLoadingCaches();
 
-                thread = new geocachesLoadByKeyword(loadCachesHandler, keyword);
+                thread = new LoadByKeywordThread(loadCachesHandler, keyword);
                 thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
                 thread.start();
                 break;
@@ -660,7 +660,7 @@ public class cgeocaches extends AbstractListActivity {
                     setLoadingCaches();
                 }
 
-                thread = new geocachesLoadByCoords(loadCachesHandler, coords);
+                thread = new LoadByCoordsThread(loadCachesHandler, coords);
                 thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
                 thread.start();
                 break;
@@ -670,7 +670,7 @@ public class cgeocaches extends AbstractListActivity {
                 showProgress(true);
                 setLoadingCaches();
 
-                thread = new geocachesLoadByUserName(loadCachesHandler, username);
+                thread = new LoadByUserNameThread(loadCachesHandler, username);
                 thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
                 thread.start();
                 break;
@@ -680,7 +680,7 @@ public class cgeocaches extends AbstractListActivity {
                 showProgress(true);
                 setLoadingCaches();
 
-                thread = new geocachesLoadByOwner(loadCachesHandler, username);
+                thread = new LoadByOwnerThread(loadCachesHandler, username);
                 thread.setRecaptchaHandler(new cgSearchHandler(this, res, thread));
                 thread.start();
                 break;
@@ -1396,7 +1396,7 @@ public class cgeocaches extends AbstractListActivity {
             listFooter = inflater.inflate(R.layout.caches_footer, null);
 
             listFooter.setClickable(true);
-            listFooter.setOnClickListener(new moreCachesListener());
+            listFooter.setOnClickListener(new MoreCachesListener());
         }
         if (listFooterText == null) {
             listFooterText = (TextView) listFooter.findViewById(R.id.more_caches);
@@ -1447,7 +1447,7 @@ public class cgeocaches extends AbstractListActivity {
 
         if (more) {
             listFooterText.setText(res.getString(R.string.caches_more_caches) + " (" + res.getString(R.string.caches_more_caches_currently) + ": " + cacheList.size() + ")");
-            listFooter.setOnClickListener(new moreCachesListener());
+            listFooter.setOnClickListener(new MoreCachesListener());
         } else {
             if (CollectionUtils.isEmpty(cacheList)) {
                 listFooterText.setText(res.getString(R.string.caches_no_cache));
@@ -1510,8 +1510,8 @@ public class cgeocaches extends AbstractListActivity {
 
             public void onCancel(DialogInterface arg0) {
                 try {
-                    if (threadD != null) {
-                        threadD.kill();
+                    if (threadDetails != null) {
+                        threadDetails.kill();
                     }
 
                     if (geo == null) {
@@ -1541,8 +1541,8 @@ public class cgeocaches extends AbstractListActivity {
 
         detailProgressTime = System.currentTimeMillis();
 
-        threadD = new geocachesLoadDetails(loadDetailsHandler, listId);
-        threadD.start();
+        threadDetails = new LoadDetailsThread(loadDetailsHandler, listId);
+        threadDetails.start();
     }
 
     public void removeFromHistoryCheck()
@@ -1608,7 +1608,7 @@ public class cgeocaches extends AbstractListActivity {
         waitDialog.setMax(detailTotal);
         waitDialog.show();
 
-        threadH = new geocachesRemoveFromHistory(removeFromHistoryHandler);
+        threadH = new RemoveFromHistoryThread(removeFromHistoryHandler);
         threadH.start();
     }
 
@@ -1652,7 +1652,7 @@ public class cgeocaches extends AbstractListActivity {
         waitDialog.setMax(detailTotal);
         waitDialog.show();
 
-        threadF = new geocachesExportFieldNotes(exportFieldNotesHandler);
+        threadF = new ExportFieldNotesThread(exportFieldNotesHandler);
         threadF.start();
     }
 
@@ -1666,8 +1666,8 @@ public class cgeocaches extends AbstractListActivity {
 
             public void onCancel(DialogInterface arg0) {
                 try {
-                    if (threadW != null) {
-                        threadW.kill();
+                    if (threadWeb != null) {
+                        threadWeb.kill();
                     }
 
                     if (geo == null) {
@@ -1687,8 +1687,8 @@ public class cgeocaches extends AbstractListActivity {
         waitDialog.setCancelable(true);
         waitDialog.show();
 
-        threadW = new geocachesLoadFromWeb(downloadFromWebHandler, listId);
-        threadW.start();
+        threadWeb = new LoadFromWebThread(downloadFromWebHandler, listId);
+        threadWeb.start();
     }
 
     public void dropStored(final boolean removeListAfterwards) {
@@ -1741,11 +1741,11 @@ public class cgeocaches extends AbstractListActivity {
         waitDialog.setCancelable(true);
         waitDialog.show();
 
-        threadR = new geocachesDropDetails(dropDetailsHandler);
+        threadR = new DropDetailsThread(dropDetailsHandler);
         threadR.start();
     }
 
-    private class update implements UpdateLocationCallback {
+    private class UpdateLocation implements UpdateLocationCallback {
 
         @Override
         public void updateLocation(cgGeo geo) {
@@ -1770,7 +1770,7 @@ public class cgeocaches extends AbstractListActivity {
                     }
                 }
             } catch (Exception e) {
-                Log.w(Settings.tag, "Failed to update location.");
+                Log.w(Settings.tag, "Failed to UpdateLocation location.");
             }
         }
     }
@@ -1793,13 +1793,13 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
-    private class geocachesLoadByOffline extends Thread {
+    private class LoadByOfflineThread extends Thread {
 
-        private Handler handler = null;
-        private Geopoint coords = null;
-        private int listId = cgList.STANDARD_LIST_ID;
+        final private Handler handler;
+        final private Geopoint coords;
+        final private int listId;
 
-        public geocachesLoadByOffline(final Handler handlerIn, final Geopoint coordsIn, int listIdIn) {
+        public LoadByOfflineThread(final Handler handlerIn, final Geopoint coordsIn, int listIdIn) {
             handler = handlerIn;
             coords = coordsIn;
             listId = listIdIn;
@@ -1812,11 +1812,11 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
-    private class geocachesLoadByHistory extends Thread {
+    private class LoadByHistoryThread extends Thread {
 
-        private Handler handler = null;
+        final private Handler handler;
 
-        public geocachesLoadByHistory(Handler handlerIn) {
+        public LoadByHistoryThread(Handler handlerIn) {
             handler = handlerIn;
         }
 
@@ -1827,11 +1827,11 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
-    private class geocachesLoadNextPage extends cgSearchThread {
+    private class LoadNextPageThread extends cgSearchThread {
 
-        private Handler handler = null;
+        private final Handler handler;
 
-        public geocachesLoadNextPage(Handler handlerIn) {
+        public LoadNextPageThread(Handler handlerIn) {
             handler = handlerIn;
         }
 
@@ -1843,12 +1843,12 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
-    private class geocachesLoadByCoords extends cgSearchThread {
+    private class LoadByCoordsThread extends cgSearchThread {
 
         final private Handler handler;
         final private Geopoint coords;
 
-        public geocachesLoadByCoords(final Handler handler, final Geopoint coords) {
+        public LoadByCoordsThread(final Handler handler, final Geopoint coords) {
             setPriority(Thread.MIN_PRIORITY);
 
             this.handler = handler;
@@ -1870,12 +1870,12 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
-    private class geocachesLoadByKeyword extends cgSearchThread {
+    private class LoadByKeywordThread extends cgSearchThread {
 
         final private Handler handler;
         final private String keyword;
 
-        public geocachesLoadByKeyword(final Handler handler, final String keyword) {
+        public LoadByKeywordThread(final Handler handler, final String keyword) {
             setPriority(Thread.MIN_PRIORITY);
 
             this.handler = handler;
@@ -1896,12 +1896,12 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
-    private class geocachesLoadByUserName extends cgSearchThread {
+    private class LoadByUserNameThread extends cgSearchThread {
 
         final private Handler handler;
         final private String username;
 
-        public geocachesLoadByUserName(final Handler handler, final String username) {
+        public LoadByUserNameThread(final Handler handler, final String username) {
             setPriority(Thread.MIN_PRIORITY);
 
             this.handler = handler;
@@ -1922,12 +1922,12 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
-    private class geocachesLoadByOwner extends cgSearchThread {
+    private class LoadByOwnerThread extends cgSearchThread {
 
         final private Handler handler;
         final private String username;
 
-        public geocachesLoadByOwner(final Handler handler, final String username) {
+        public LoadByOwnerThread(final Handler handler, final String username) {
             setPriority(Thread.MIN_PRIORITY);
 
             this.handler = handler;
@@ -1955,15 +1955,15 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
-    private class geocachesLoadDetails extends Thread {
+    private class LoadDetailsThread extends Thread {
 
-        private Handler handler = null;
-        private int reason = 1;
+        final private Handler handler;
+        final private int reason;
         private volatile boolean needToStop = false;
         private int checked = 0;
         private long last = 0L;
 
-        public geocachesLoadDetails(Handler handlerIn, int reasonIn) {
+        public LoadDetailsThread(Handler handlerIn, int reasonIn) {
             setPriority(Thread.MIN_PRIORITY);
 
             handler = handlerIn;
@@ -2012,7 +2012,7 @@ public class cgeocaches extends AbstractListActivity {
                             Log.i(Settings.tag, "Waiting for next cache " + delay + " ms");
                             sleep(delay);
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "cgeocaches.geocachesLoadDetails.sleep: " + e.toString());
+                            Log.e(Settings.tag, "cgeocaches.LoadDetailsThread.sleep: " + e.toString());
                         }
                     }
 
@@ -2028,7 +2028,7 @@ public class cgeocaches extends AbstractListActivity {
 
                     yield();
                 } catch (Exception e) {
-                    Log.e(Settings.tag, "cgeocaches.geocachesLoadDetails: " + e.toString());
+                    Log.e(Settings.tag, "cgeocaches.LoadDetailsThread: " + e.toString());
                 }
 
                 last = System.currentTimeMillis();
@@ -2039,13 +2039,13 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
-    private class geocachesLoadFromWeb extends Thread {
+    private class LoadFromWebThread extends Thread {
 
-        private Handler handler = null;
-        private int reason = 1;
+        final private Handler handler;
+        final private int reason;
         private volatile boolean needToStop = false;
 
-        public geocachesLoadFromWeb(Handler handlerIn, int reasonIn) {
+        public LoadFromWebThread(Handler handlerIn, int reasonIn) {
             setPriority(Thread.MIN_PRIORITY);
 
             handler = handlerIn;
@@ -2134,20 +2134,20 @@ public class cgeocaches extends AbstractListActivity {
                         times = 0;
                     }
                 } catch (InterruptedException e) {
-                    Log.e(Settings.tag, "cgeocaches.geocachesLoadFromWeb.sleep: " + e.toString());
+                    Log.e(Settings.tag, "cgeocaches.LoadFromWebThread.sleep: " + e.toString());
                 }
             }
             handler.sendEmptyMessage(-1);
         }
     }
 
-    private class geocachesDropDetails extends Thread {
+    private class DropDetailsThread extends Thread {
 
-        private Handler handler = null;
+        final private Handler handler;
         private volatile boolean needToStop = false;
         private int checked = 0;
 
-        public geocachesDropDetails(Handler handlerIn) {
+        public DropDetailsThread(Handler handlerIn) {
             setPriority(Thread.MIN_PRIORITY);
 
             handler = handlerIn;
@@ -2184,7 +2184,7 @@ public class cgeocaches extends AbstractListActivity {
 
                     app.markDropped(cache.getGeocode());
                 } catch (Exception e) {
-                    Log.e(Settings.tag, "cgeocaches.geocachesDropDetails: " + e.toString());
+                    Log.e(Settings.tag, "cgeocaches.DropDetailsThread: " + e.toString());
                 }
             }
             cacheListTemp.clear();
@@ -2193,13 +2193,13 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
-    private class geocachesRemoveFromHistory extends Thread {
+    private class RemoveFromHistoryThread extends Thread {
 
-        private Handler handler = null;
+        final private Handler handler;
         private volatile boolean needToStop = false;
         private int checked = 0;
 
-        public geocachesRemoveFromHistory(Handler handlerIn) {
+        public RemoveFromHistoryThread(Handler handlerIn) {
             setPriority(Thread.MIN_PRIORITY);
 
             handler = handlerIn;
@@ -2235,7 +2235,7 @@ public class cgeocaches extends AbstractListActivity {
 
                     yield();
                 } catch (Exception e) {
-                    Log.e(Settings.tag, "cgeocaches.geocachesRemoveFromHistory: " + e.toString());
+                    Log.e(Settings.tag, "cgeocaches.RemoveFromHistoryThread: " + e.toString());
                 }
             }
 
@@ -2243,13 +2243,13 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
-    private class geocachesExportFieldNotes extends Thread
+    private class ExportFieldNotesThread extends Thread
     {
-        private Handler handler = null;
+        private final Handler handler;
         private volatile boolean needToStop = false;
         private int checked = 0;
 
-        public geocachesExportFieldNotes(Handler handlerIn)
+        public ExportFieldNotesThread(Handler handlerIn)
         {
             setPriority(Thread.MIN_PRIORITY);
 
@@ -2323,7 +2323,7 @@ public class cgeocaches extends AbstractListActivity {
 
                     yield();
                 } catch (Exception e) {
-                    Log.e(Settings.tag, "cgeocaches.geocachesExportFieldNotes: " + e.toString());
+                    Log.e(Settings.tag, "cgeocaches.ExportFieldNotesThread: " + e.toString());
                 }
             }
 
@@ -2345,7 +2345,7 @@ public class cgeocaches extends AbstractListActivity {
 
                     Message.obtain(handler, -2, exportFile).sendToTarget();
                 } catch (IOException e) {
-                    Log.e(Settings.tag, "cgeocaches.geocachesExportFieldNotes: " + e.toString());
+                    Log.e(Settings.tag, "cgeocaches.ExportFieldNotesThread: " + e.toString());
                     handler.sendEmptyMessage(-3);
                 } finally
                 {
@@ -2354,7 +2354,7 @@ public class cgeocaches extends AbstractListActivity {
                         try {
                             fw.close();
                         } catch (IOException e) {
-                            Log.e(Settings.tag, "cgeocaches.geocachesExportFieldNotes: " + e.toString());
+                            Log.e(Settings.tag, "cgeocaches.ExportFieldNotesThread: " + e.toString());
                         }
                     }
                 }
@@ -2364,7 +2364,7 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
-    private class moreCachesListener implements View.OnClickListener {
+    private class MoreCachesListener implements View.OnClickListener {
 
         @Override
         public void onClick(View arg0) {
@@ -2372,8 +2372,8 @@ public class cgeocaches extends AbstractListActivity {
             setLoadingCaches();
             listFooter.setOnClickListener(null);
 
-            geocachesLoadNextPage thread;
-            thread = new geocachesLoadNextPage(loadNextPageHandler);
+            LoadNextPageThread thread;
+            thread = new LoadNextPageThread(loadNextPageHandler);
             thread.setRecaptchaHandler(new cgSearchHandler(cgeocaches.this, res, thread));
             thread.start();
         }
@@ -2455,22 +2455,22 @@ public class cgeocaches extends AbstractListActivity {
         showProgress(true);
         setLoadingCaches();
 
-        (new moveCachesToList(listId, new MoveHandler())).start();
+        (new MoveCachesToListThread(listId, new MoveHandler())).start();
     }
 
     private class MoveHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
-            Thread threadPure = new geocachesLoadByOffline(loadCachesHandler, coords, msg.what);
+            Thread threadPure = new LoadByOfflineThread(loadCachesHandler, coords, msg.what);
             threadPure.start();
         }
     }
 
-    private class moveCachesToList extends Thread {
-        int listId = -1;
-        Handler handler = null;
+    private class MoveCachesToListThread extends Thread {
+        final private int listId;
+        final private Handler handler;
 
-        public moveCachesToList(int listIdIn, Handler handlerIn) {
+        public MoveCachesToListThread(int listIdIn, Handler handlerIn) {
             listId = listIdIn;
             handler = handlerIn;
         }

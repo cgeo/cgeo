@@ -495,7 +495,7 @@ public class cgBase {
 
     public static void switchToEnglish(String previousPage) {
         final String ENGLISH = "English&#9660;";
-        if (previousPage != null && previousPage.indexOf(ENGLISH) > 0) {
+        if (previousPage != null && previousPage.indexOf(ENGLISH) >= 0) {
             Log.i(Settings.tag, "Geocaching.com language already set to English");
         } else {
             final String page = getResponseData(request("http://www.geocaching.com/default.aspx", null, false));

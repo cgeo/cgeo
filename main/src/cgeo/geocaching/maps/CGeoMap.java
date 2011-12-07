@@ -906,7 +906,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         if (liveChanged) {
                             moved = true;
                             force = true;
-                        } else if (live && Settings.isLiveMap() && downloaded == false) {
+                        } else if (live && Settings.isLiveMap() && !downloaded) {
                             moved = true;
                         } else if (centerLatitude == null || centerLongitude == null) {
                             moved = true;

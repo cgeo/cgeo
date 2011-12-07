@@ -97,7 +97,7 @@ public class cgeonavigate extends AbstractActivity {
 
             if (StringUtils.isNotBlank(name)) {
                 if (StringUtils.isNotBlank(title)) {
-                    title = title + ": " + name;
+                    title += ": " + name;
                 } else {
                     title = name;
                 }
