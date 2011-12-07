@@ -44,6 +44,7 @@ import android.text.Html;
 import android.text.Spannable;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
+import android.text.style.ImageSpan;
 import android.text.style.StrikethroughSpan;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -102,7 +103,6 @@ public class CacheDetailActivity extends AbstractActivity {
 
     private cgGeo geolocation;
     private cgCache cache;
-    private final Map<Integer, String> calendars = new HashMap<Integer, String>();
     private final Progress progress = new Progress();
     private cgSearch search;
     private final LocationUpdater locationUpdater = new LocationUpdater();
@@ -732,7 +732,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
         Cursor cursor = managedQuery(calendarProvider, projection, "selected=1", null, null);
 
-        calendars.clear();
+        final Map<Integer, String> calendars = new HashMap<Integer, String>();
         int cnt = 0;
         if (cursor != null) {
             cnt = cursor.getCount();
@@ -766,7 +766,7 @@ public class CacheDetailActivity extends AbstractActivity {
         builder.setTitle(R.string.cache_calendars);
         builder.setItems(items, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
-                addToCalendarFn(item);
+                addToCalendarFn(calendars, item);
             }
         });
         AlertDialog alert = builder.create();
@@ -776,10 +776,12 @@ public class CacheDetailActivity extends AbstractActivity {
     /**
      * Helper for {@link addToCalendar()}.
      *
+     * @param calendars
+     *
      * @param index
      *            The selected calendar
      */
-    private void addToCalendarFn(int index) {
+    private void addToCalendarFn(Map<Integer, String> calendars, int index) {
         if (MapUtils.isEmpty(calendars)) {
             return;
         }
@@ -797,13 +799,22 @@ public class CacheDetailActivity extends AbstractActivity {
 
             StringBuilder description = new StringBuilder();
             description.append(cache.getUrl());
-            description.append("\n\n");
             if (StringUtils.isNotBlank(cache.getShortdesc())) {
-                description.append(Html.fromHtml(cache.getShortdesc()).toString());
+                // remove images in short description
+                Spanned spanned = Html.fromHtml(cache.getShortdesc(), null, null);
+                String text = spanned.toString();
+                ImageSpan[] spans = spanned.getSpans(0, spanned.length(), ImageSpan.class);
+                for (int i = spans.length - 1; i >= 0; i--) {
+                    text = StringUtils.left(text, spanned.getSpanStart(spans[i]) - 1) + StringUtils.substring(text, spanned.getSpanEnd(spans[i]) + 1);
+                }
+                if (StringUtils.isNotBlank(text)) {
+                    description.append("\n\n");
+                    description.append(text);
+                }
             }
 
             if (StringUtils.isNotBlank(cache.getPersonalNote())) {
-                description.append("\n\n" + Html.fromHtml(cache.getPersonalNote()).toString());
+                description.append("\n\n").append(Html.fromHtml(cache.getPersonalNote()).toString());
             }
 
             ContentValues event = new ContentValues();
@@ -813,24 +824,24 @@ public class CacheDetailActivity extends AbstractActivity {
             event.put("eventTimezone", "UTC");
             event.put("title", Html.fromHtml(cache.getName()).toString());
             event.put("description", description.toString());
-            String location = "";
+            StringBuilder location = new StringBuilder();
             if (cache.getCoords() != null) {
-                location += cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW);
+                location.append(cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW));
             }
             if (StringUtils.isNotBlank(cache.getLocation())) {
-                boolean addParenteses = false;
+                boolean addParentheses = false;
                 if (location.length() > 0) {
-                    addParenteses = true;
-                    location += " (";
+                    addParentheses = true;
+                    location.append(" (");
                 }
 
-                location += Html.fromHtml(cache.getLocation()).toString();
-                if (addParenteses) {
-                    location += ")";
+                location.append(Html.fromHtml(cache.getLocation()).toString());
+                if (addParentheses) {
+                    location.append(')');
                 }
             }
             if (location.length() > 0) {
-                event.put("eventLocation", location);
+                event.put("eventLocation", location.toString());
             }
             event.put("allDay", 1);
             event.put("hasAlarm", 0);
