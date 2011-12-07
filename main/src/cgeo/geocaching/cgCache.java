@@ -243,7 +243,7 @@ public class cgCache implements ICache {
         today.setHours(0);
         today.setMinutes(0);
         today.setSeconds(0);
-        if (hidden.compareTo(today) <= 0) {
+        if (hidden.compareTo(today) < 0) {
             return false;
         }
         return true;
