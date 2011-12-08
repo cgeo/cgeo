@@ -946,8 +946,27 @@
 
   <!-- changelog -->
   <string name="changelog">\n
-    <b>New release</b>\n
-\n\n
+    <b>next release</b>\n
+    · new: horizontal scrollable pages for cache details\n
+    · new: click on cache coordinates to change format\n
+    · new: show own rating in cache details\n
+    · new: import zipped pocket queries\n
+    · new: import pocket queries from e-mail\n
+    · new: show original coordinates as waypoint if user has modified listing-coordinates on gc.com\n
+    · new: delete caches and list together\n
+    · new: have link from hint section to spoiler images\n
+    · new: edit and more options for any-location-history\n
+    · new: allow offline log without any login data stored\n
+    · new: ask for restore after reinstallation\n
+    · new: context menu to open spoiler/log images online\n
+    · fix: several calendar bugs\n
+    · fix: some enhancement due to gc.com update\n
+    · fix: new translation IT, several translation-updates\n
+    · fix: lot of design enhancements (icons, font-size, autoresizing text-fields, auto-suggestion, seperators, inventory-actions, stars color and value, many more)\n
+    · fix: Refresh not stored caches\n
+    · fix: batch-actions for trackables not working\n
+    · 100+ bugfixes and enhancements\n
+    \n\n
     <b>08.11.2011</b>\n
     · fix: adaption to GC.com changes\n
     \n\n
