@@ -367,6 +367,7 @@
   <string name="init_details">Detaily skrýše</string>
   <string name="init_ratingwanted">Načítať hodnotenie skrýše z GCvote.com</string>
   <string name="init_elevationwanted">Načítať údaje o stúpaní skrýše</string>
+  <string name="init_openlastdetailspage">Otvoriť detaily na naposledy použitej stránke</string>
   <string name="init_autoload">Automatické načítanie dlhého popisu</string>
   <string name="init_other">Ďalšie možnosti</string>
   <string name="init_skin">Svetlý vzhľad\n(vyžaduje reštart c:geo)</string>
@@ -532,6 +533,7 @@
   <string name="cache_difficulty">Náročnosť</string>
   <string name="cache_terrain">Terén</string>
   <string name="cache_rating">Hodnotenie</string>
+  <string name="cache_own_rating">Vlastné hodnotenie</string>
   <string name="cache_rating_of">z</string>
   <string name="cache_favourite">Obľúbené</string>
   <string name="cache_owner">Vlastník</string>
