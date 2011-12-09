@@ -1816,7 +1816,7 @@ public class CacheDetailActivity extends AbstractActivity {
                         descView.setMovementMethod(LinkMovementMethod.getInstance());
                         // handle caches with black font color
                         if (!Settings.isLightSkin()) {
-                            if (cache.getDescription().contains("color=\"#000000")) {
+                            if (-1 != StringUtils.indexOfAny(cache.getDescription(), new String[] { "color=\"#000000", "color=\"black" })) {
                                 descView.setBackgroundResource(color.darker_gray);
                             }
                             else {
