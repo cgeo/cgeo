@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.CacheListType;
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filter.cgFilter;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -563,12 +564,14 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             if (cache.hasTerrain()) {
                 infos.add("T " + String.format("%.1f", cache.getTerrain()));
             }
+
             // don't show "not chosen" for events and virtuals, that should be the normal case
-            if (cache.getSize() != null && cache.showSize()) {
+            if (cache.getSize() != CacheSize.UNKNOWN && cache.showSize()) {
                 infos.add(cache.getSize().getL10n());
             } else if (cache.isEventCache() && cache.getHiddenDate() != null) {
                 infos.add(cgBase.formatShortDate(cache.getHiddenDate().getTime()));
             }
+
             if (cache.isMembers()) {
                 infos.add(res.getString(R.string.cache_premium));
             }

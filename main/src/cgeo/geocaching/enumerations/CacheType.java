@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  * Enum listing all cache types
- * 
+ *
  * @author koem
  */
 public enum CacheType {
@@ -35,13 +35,15 @@ public enum CacheType {
     public final String id;
     public final String pattern;
     public final String guid;
-    private final String l10n;
+    private final int stringId;
+    private String l10n; // not final because the locale can be changed
 
     private CacheType(String id, String pattern, String guid, int stringId) {
         this.id = id;
         this.pattern = pattern;
         this.guid = guid;
-        this.l10n = cgeoapplication.getInstance().getBaseContext().getResources().getString(stringId);
+        this.stringId = stringId;
+        setL10n();
     }
 
     private final static Map<String, CacheType> FIND_BY_ID;
@@ -66,7 +68,7 @@ public enum CacheType {
     }
 
     public final static CacheType getByPattern(final String pattern) {
-        final CacheType result = CacheType.FIND_BY_PATTERN.get(pattern.toLowerCase().trim());
+        final CacheType result = pattern != null ? CacheType.FIND_BY_PATTERN.get(pattern.toLowerCase().trim()) : null;
         if (result == null) {
             return UNKNOWN;
         }
@@ -75,6 +77,10 @@ public enum CacheType {
 
     public final String getL10n() {
         return l10n;
+    }
+
+    public void setL10n() {
+        this.l10n = cgeoapplication.getInstance().getBaseContext().getResources().getString(this.stringId);
     }
 
 }

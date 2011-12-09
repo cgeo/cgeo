@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -437,6 +438,19 @@ public class cgeo extends AbstractActivity {
         initialized = true;
 
         Settings.setLanguage(Settings.isUseEnglish());
+
+        /*
+         * "update" the cache size/type. For a better performance
+         * the resource strings a stored in the enum's. In case of a
+         * locale change the resource strings don't get updated automatically.
+         * That's why we have to do it on our own.
+         */
+        for (CacheSize cacheSize : CacheSize.values()) {
+            cacheSize.setL10n();
+        }
+        for (CacheType cacheType : CacheType.values()) {
+            cacheType.setL10n();
+        }
 
         Settings.getLogin();
 

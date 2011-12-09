@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  * Enum listing cache sizes
- * 
+ *
  * @author koem
  */
 public enum CacheSize {
@@ -20,16 +20,18 @@ public enum CacheSize {
     VIRTUAL("virtual", 0, R.string.cache_size_virtual),
     NOT_CHOSEN("not chosen", 0, R.string.cache_size_notchosen),
     OTHER("other", 0, R.string.cache_size_other),
-    UNKNOWN("unknown", 0, R.string.unknown);
+    UNKNOWN("unknown", 0, R.string.err_unknown); // CacheSize not init. yet
 
     public final String id;
     public final int comparable;
-    private final String l10n;
+    private final int stringId;
+    private String l10n; // not final because the locale can be changed
 
     private CacheSize(String id, int comparable, int stringId) {
         this.id = id;
         this.comparable = comparable;
-        this.l10n = cgeoapplication.getInstance().getBaseContext().getResources().getString(stringId);
+        this.stringId = stringId;
+        setL10n();
     }
 
     final private static Map<String, CacheSize> FIND_BY_ID;
@@ -51,6 +53,10 @@ public enum CacheSize {
 
     public final String getL10n() {
         return l10n;
+    }
+
+    public void setL10n() {
+        this.l10n = cgeoapplication.getInstance().getBaseContext().getResources().getString(this.stringId);
     }
 
 }
