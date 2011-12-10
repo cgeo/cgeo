@@ -779,9 +779,31 @@ public class cgCache implements ICache {
     }
 
     public List<cgLog> getLogs() {
-        return logs;
+        return getLogs(true);
     }
 
+    /**
+     * @param allLogs
+     *            true for all logs, false for friend logs only
+     * @return the logs with all entries or just the entries of the friends
+     */
+    public List<cgLog> getLogs(boolean allLogs) {
+        if (allLogs) {
+            return logs;
+        }
+        ArrayList<cgLog> friendLogs = new ArrayList<cgLog>();
+        for (cgLog log : logs) {
+            if (log.friend) {
+                friendLogs.add(log);
+            }
+        }
+        return friendLogs;
+    }
+
+    /**
+     * @param logs
+     *            the log entries
+     */
     public void setLogs(List<cgLog> logs) {
         this.logs = logs;
     }

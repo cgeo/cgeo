@@ -617,8 +617,11 @@ public class CacheDetailActivity extends AbstractActivity {
         pageOrder.add(Page.WAYPOINTS);
         pageOrder.add(Page.DETAILS);
         pageOrder.add(Page.DESCRIPTION);
-        if (CollectionUtils.isNotEmpty(cache.getLogs())) {
+        if (CollectionUtils.isNotEmpty(cache.getLogs(true))) {
             pageOrder.add(Page.LOGS);
+        }
+        if (CollectionUtils.isNotEmpty(cache.getLogs(false))) {
+            pageOrder.add(Page.LOGSFRIENDS);
         }
         if (CollectionUtils.isNotEmpty(cache.getInventory())) {
             pageOrder.add(Page.INVENTORY);
@@ -983,7 +986,11 @@ public class CacheDetailActivity extends AbstractActivity {
                         break;
 
                     case LOGS:
-                        creator = new LogsViewCreator();
+                        creator = new LogsViewCreator(true);
+                        break;
+
+                    case LOGSFRIENDS:
+                        creator = new LogsViewCreator(false);
                         break;
 
                     case WAYPOINTS:
@@ -1051,6 +1058,7 @@ public class CacheDetailActivity extends AbstractActivity {
         DETAILS(R.string.detail),
         DESCRIPTION(R.string.cache_description),
         LOGS(R.string.cache_logs),
+        LOGSFRIENDS(R.string.cache_logsfriends),
         WAYPOINTS(R.string.cache_waypoints),
         INVENTORY(R.string.cache_inventory);
 
@@ -1997,6 +2005,12 @@ public class CacheDetailActivity extends AbstractActivity {
 
     private class LogsViewCreator implements PageViewCreator {
         ScrollView view;
+        boolean allLogs;
+
+        LogsViewCreator(boolean allLogs) {
+            super();
+            this.allLogs = allLogs;
+        }
 
         @Override
         public void notifyDataSetChanged() {
@@ -2072,8 +2086,8 @@ public class CacheDetailActivity extends AbstractActivity {
                 // cache logs
                 RelativeLayout rowView;
 
-                if (cache != null && cache.getLogs() != null) {
-                    for (cgLog log : cache.getLogs()) {
+                if (cache != null && cache.getLogs(allLogs) != null) {
+                    for (cgLog log : cache.getLogs(allLogs)) {
                         rowView = (RelativeLayout) getLayoutInflater().inflate(R.layout.cacheview_logs_item, null);
 
                         if (log.date > 0) {

@@ -345,6 +345,16 @@ public class cgeoinit extends AbstractActivity {
             }
         });
 
+        final CheckBox friendLogsWantedButton = (CheckBox) findViewById(R.id.friendlogswanted);
+        friendLogsWantedButton.setChecked(Settings.isFriendLogsWanted());
+        friendLogsWantedButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Settings.setFriendLogsWanted(friendLogsWantedButton.isChecked());
+            }
+        });
+
         final CheckBox openLastDetailsPageButton = (CheckBox) findViewById(R.id.openlastdetailspage);
         openLastDetailsPageButton.setChecked(Settings.isOpenLastDetailsPage());
         openLastDetailsPageButton.setOnClickListener(new View.OnClickListener() {

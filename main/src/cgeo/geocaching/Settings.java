@@ -49,6 +49,7 @@ public final class Settings {
     private static final String KEY_LOAD_DESCRIPTION = "autoloaddesc";
     private static final String KEY_RATING_WANTED = "ratingwanted";
     private static final String KEY_ELEVATION_WANTED = "elevationwanted";
+    private static final String KEY_FRIENDLOGS_WANTED = "friendlogswanted";
     private static final String KEY_USE_ENGLISH = "useenglish";
     private static final String KEY_AS_BROWSER = "asbrowser";
     private static final String KEY_USE_COMPASS = "usecompass";
@@ -574,6 +575,20 @@ public final class Settings {
             @Override
             public void edit(Editor edit) {
                 edit.putBoolean(KEY_ELEVATION_WANTED, elevationWanted);
+            }
+        });
+    }
+
+    public static boolean isFriendLogsWanted() {
+        return sharedPrefs.getBoolean(KEY_FRIENDLOGS_WANTED, true);
+    }
+
+    public static void setFriendLogsWanted(final boolean friendLogsWanted) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putBoolean(KEY_FRIENDLOGS_WANTED, friendLogsWanted);
             }
         });
     }
