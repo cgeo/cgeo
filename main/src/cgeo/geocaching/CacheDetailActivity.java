@@ -1662,6 +1662,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 descView.setVisibility(View.VISIBLE);
                 descView.setText(Html.fromHtml(cache.getShortdesc().trim(), new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), true, cache.getReason(), false), null), TextView.BufferType.SPANNABLE);
                 descView.setMovementMethod(LinkMovementMethod.getInstance());
+                fixBlackTextColor(descView, cache.getShortdesc());
             }
 
             // long description
@@ -1814,15 +1815,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     if (StringUtils.isNotBlank(cache.getDescription())) {
                         descView.setText(longDesc, TextView.BufferType.SPANNABLE);
                         descView.setMovementMethod(LinkMovementMethod.getInstance());
-                        // handle caches with black font color
-                        if (!Settings.isLightSkin()) {
-                            if (-1 != StringUtils.indexOfAny(cache.getDescription(), new String[] { "color=\"#000000", "color=\"black" })) {
-                                descView.setBackgroundResource(color.darker_gray);
-                            }
-                            else {
-                                descView.setBackgroundResource(color.black);
-                            }
-                        }
+                        fixBlackTextColor(descView, cache.getDescription());
                     }
 
                     descView.setVisibility(View.VISIBLE);
@@ -1977,6 +1970,23 @@ public class CacheDetailActivity extends AbstractActivity {
             attribView.setText(buffer);
 
             return descriptions;
+        }
+
+        /**
+         * handle caches with black font color
+         * 
+         * @param view
+         * @param text
+         */
+        private void fixBlackTextColor(final TextView view, final String text) {
+            if (!Settings.isLightSkin()) {
+                if (-1 != StringUtils.indexOfAny(text, new String[] { "color=\"#000000", "color=\"black" })) {
+                    view.setBackgroundResource(color.darker_gray);
+                }
+                else {
+                    view.setBackgroundResource(color.black);
+                }
+            }
         }
     }
 
