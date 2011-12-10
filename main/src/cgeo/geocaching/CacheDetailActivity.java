@@ -1061,6 +1061,206 @@ public class CacheDetailActivity extends AbstractActivity {
         }
     }
 
+    private class AttributeViewBuilder {
+        private ViewGroup attributeIconsLayout; // layout for attribute icons
+        private ViewGroup attributeDescriptionsLayout; // layout for attribute descriptions
+        private boolean attributesShowAsIcons = true; // default: show icons
+        /**
+         * True, if the cache was imported with an older version of c:geo.
+         * These older versions parsed the attribute description from the tooltip in the web
+         * page and put them into the DB. No icons can be matched for these.
+         */
+        private boolean noAttributeIconsFound = false;
+        private int attributeBoxMaxWidth;
+
+        public void fillView(final LinearLayout attributeBox) {
+            // first ensure that the view is empty
+            attributeBox.removeAllViews();
+
+            // maximum width for attribute icons is screen width - paddings of parents
+            attributeBoxMaxWidth = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
+                    .getDefaultDisplay().getWidth();
+            ViewParent child = attributeBox;
+            do {
+                if (child instanceof View) {
+                    attributeBoxMaxWidth -= ((View) child).getPaddingLeft() - ((View) child).getPaddingRight();
+                }
+                child = child.getParent();
+            } while (child != null);
+
+            // delete views holding description / icons
+            attributeDescriptionsLayout = null;
+            attributeIconsLayout = null;
+
+            attributeBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // toggle between attribute icons and descriptions
+                    toggleAttributeDisplay(attributeBox, attributeBoxMaxWidth);
+                }
+            });
+
+            // icons or text?
+            //
+            // also show icons when noAttributeImagesFound == true. Explanation:
+            //  1. no icons could be found in the first invocation of this method
+            //  2. user refreshes cache from web
+            //  3. now this method is called again
+            //  4. attributeShowAsIcons is false but noAttributeImagesFound is true
+            //     => try to show them now
+            if (attributesShowAsIcons || noAttributeIconsFound) {
+                showAttributeIcons(attributeBox, attributeBoxMaxWidth);
+            } else {
+                showAttributeDescriptions(attributeBox);
+            }
+        }
+
+        /**
+         * lazy-creates the layout holding the icons of the chaches attributes
+         * and makes it visible
+         */
+        private void showAttributeIcons(LinearLayout attribBox, int parentWidth) {
+            if (attributeIconsLayout == null) {
+                attributeIconsLayout = createAttributeIconsLayout(parentWidth);
+                // no matching icons found? show text
+                if (noAttributeIconsFound) {
+                    showAttributeDescriptions(attribBox);
+                    return;
+                }
+            }
+            attribBox.removeAllViews();
+            attribBox.addView(attributeIconsLayout);
+            attributesShowAsIcons = true;
+        }
+
+        /**
+         * lazy-creates the layout holding the discriptions of the chaches attributes
+         * and makes it visible
+         */
+        private void showAttributeDescriptions(LinearLayout attribBox) {
+            if (attributeDescriptionsLayout == null) {
+                attributeDescriptionsLayout = createAttributeDescriptionsLayout();
+            }
+            attribBox.removeAllViews();
+            attribBox.addView(attributeDescriptionsLayout);
+            attributesShowAsIcons = false;
+        }
+
+        /**
+         * toggle attribute descriptions and icons
+         */
+        private void toggleAttributeDisplay(LinearLayout attribBox, int parentWidth) {
+            // Don't toggle when there are no icons to show.
+            if (noAttributeIconsFound) {
+                return;
+            }
+
+            // toggle
+            if (attributesShowAsIcons) {
+                showAttributeDescriptions(attribBox);
+            } else {
+                showAttributeIcons(attribBox, parentWidth);
+            }
+        }
+
+        private ViewGroup createAttributeIconsLayout(int parentWidth) {
+            LinearLayout rows = new LinearLayout(CacheDetailActivity.this);
+            rows.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+            rows.setOrientation(LinearLayout.VERTICAL);
+
+            LinearLayout attributeRow = newAttributeIconsRow();
+            rows.addView(attributeRow);
+
+            noAttributeIconsFound = true;
+
+            final String packageName = cgeoapplication.getInstance().getBaseContext().getPackageName();
+            for (String attributeName : cache.getAttributes()) {
+                boolean strikethru = attributeName.endsWith("_no");
+                // cut off _yes / _no
+                if (attributeName.endsWith("_no") || attributeName.endsWith("_yes")) {
+                    attributeName = attributeName.substring(0, attributeName.lastIndexOf("_"));
+                }
+                // check if another attribute icon fits in this row
+                attributeRow.measure(0, 0);
+                int rowWidth = attributeRow.getMeasuredWidth();
+                FrameLayout fl = (FrameLayout) getLayoutInflater().inflate(R.layout.attribute_image, null);
+                ImageView iv = (ImageView) fl.getChildAt(0);
+                if ((parentWidth - rowWidth) < iv.getLayoutParams().width) {
+                    // make a new row
+                    attributeRow = newAttributeIconsRow();
+                    rows.addView(attributeRow);
+                }
+
+                // dynamically search icon of the attribute
+                Drawable d = null;
+                int id = res.getIdentifier("attribute_" + attributeName, "drawable", packageName);
+                if (id > 0) {
+                    noAttributeIconsFound = false;
+                    d = res.getDrawable(id);
+                    iv.setImageDrawable(d);
+                    // strike through?
+                    if (strikethru) {
+                        // generate strikethru image with same properties as attribute image
+                        ImageView strikethruImage = new ImageView(CacheDetailActivity.this);
+                        strikethruImage.setLayoutParams(iv.getLayoutParams());
+                        d = res.getDrawable(R.drawable.attribute__strikethru);
+                        strikethruImage.setImageDrawable(d);
+                        fl.addView(strikethruImage);
+                    }
+                } else {
+                    d = res.getDrawable(R.drawable.attribute_icon_not_found);
+                    iv.setImageDrawable(d);
+                }
+
+                attributeRow.addView(fl);
+            }
+
+            return rows;
+        }
+
+        private LinearLayout newAttributeIconsRow() {
+            LinearLayout rowLayout = new LinearLayout(CacheDetailActivity.this);
+            rowLayout.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+                    LayoutParams.WRAP_CONTENT));
+            rowLayout.setOrientation(LinearLayout.HORIZONTAL);
+            return rowLayout;
+        }
+
+        private ViewGroup createAttributeDescriptionsLayout() {
+            final LinearLayout descriptions = (LinearLayout) getLayoutInflater().inflate(
+                    R.layout.attribute_descriptions, null);
+            TextView attribView = (TextView) descriptions.getChildAt(0);
+
+            StringBuilder buffer = new StringBuilder();
+            String attribute;
+            final String packageName = cgeoapplication.getInstance().getBaseContext().getPackageName();
+            for (int i = 0; i < cache.getAttributes().size(); i++) {
+                attribute = cache.getAttributes().get(i);
+
+                // dynamically search for a translation of the attribute
+                int id = res.getIdentifier("attribute_" + attribute, "string", packageName);
+                if (id > 0) {
+                    String translated = res.getString(id);
+                    if (StringUtils.isNotBlank(translated)) {
+                        attribute = translated;
+                    }
+                }
+                if (buffer.length() > 0) {
+                    buffer.append('\n');
+                }
+                buffer.append(attribute);
+            }
+
+            if (noAttributeIconsFound) {
+                buffer.append("\n\n").append(res.getString(R.string.cache_attributes_no_icons));
+            }
+
+            attribView.setText(buffer);
+
+            return descriptions;
+        }
+    }
+
     private interface PageViewCreator {
         /**
          * Returns a validated view.
@@ -1620,17 +1820,6 @@ public class CacheDetailActivity extends AbstractActivity {
 
     private class DescriptionViewCreator implements PageViewCreator {
 
-        private ViewGroup attributeIconsLayout; // layout for attribute icons
-        private ViewGroup attributeDescriptionsLayout; // layout for attribute descriptions
-        private boolean attributesShowAsIcons = true; // default: show icons
-        /**
-         * True, if the cache was imported with an older version of c:geo.
-         * These older versions parsed the attribute description from the tooltip in the web
-         * page and put them into the DB. No icons can be matched for these.
-         */
-        private boolean noAttributeIconsFound = false;
-        private int attributeBoxMaxWidth;
-
         ScrollView view;
 
         @Override
@@ -1682,46 +1871,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             // cache attributes
             if (CollectionUtils.isNotEmpty(cache.getAttributes())) {
-
-                final LinearLayout attribBox = (LinearLayout) view.findViewById(R.id.attributes_innerbox);
-
-                // maximum width for attribute icons is screen width - paddings of parents
-                attributeBoxMaxWidth = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
-                        .getDefaultDisplay().getWidth();
-                ViewParent child = attribBox;
-                do {
-                    if (child instanceof View) {
-                        attributeBoxMaxWidth -= ((View) child).getPaddingLeft() - ((View) child).getPaddingRight();
-                    }
-                    child = child.getParent();
-                } while (child != null);
-
-                // delete views holding description / icons
-                attributeDescriptionsLayout = null;
-                attributeIconsLayout = null;
-
-                attribBox.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // toggle between attribute icons and descriptions
-                        toggleAttributeDisplay(attribBox, attributeBoxMaxWidth);
-                    }
-                });
-
-                // icons or text?
-                //
-                // also show icons when noAttributeImagesFound == true. Explanation:
-                //  1. no icons could be found in the first invocation of this method
-                //  2. user refreshes cache from web
-                //  3. now this method is called again
-                //  4. attributeShowAsIcons is false but noAttributeImagesFound is true
-                //     => try to show them now
-                if (attributesShowAsIcons || noAttributeIconsFound) {
-                    showAttributeIcons(attribBox, attributeBoxMaxWidth);
-                } else {
-                    showAttributeDescriptions(attribBox);
-                }
-
+                new AttributeViewBuilder().fillView((LinearLayout) view.findViewById(R.id.attributes_innerbox));
                 view.findViewById(R.id.attributes_box).setVisibility(View.VISIBLE);
             }
 
@@ -1828,153 +1978,8 @@ public class CacheDetailActivity extends AbstractActivity {
         }
 
         /**
-         * lazy-creates the layout holding the icons of the chaches attributes
-         * and makes it visible
-         */
-        private void showAttributeIcons(LinearLayout attribBox, int parentWidth) {
-            if (attributeIconsLayout == null) {
-                attributeIconsLayout = createAttributeIconsLayout(parentWidth);
-                // no matching icons found? show text
-                if (noAttributeIconsFound) {
-                    showAttributeDescriptions(attribBox);
-                    return;
-                }
-            }
-            attribBox.removeAllViews();
-            attribBox.addView(attributeIconsLayout);
-            attributesShowAsIcons = true;
-        }
-
-        /**
-         * lazy-creates the layout holding the discriptions of the chaches attributes
-         * and makes it visible
-         */
-        private void showAttributeDescriptions(LinearLayout attribBox) {
-            if (attributeDescriptionsLayout == null) {
-                attributeDescriptionsLayout = createAttributeDescriptionsLayout();
-            }
-            attribBox.removeAllViews();
-            attribBox.addView(attributeDescriptionsLayout);
-            attributesShowAsIcons = false;
-        }
-
-        /**
-         * toggle attribute descriptions and icons
-         */
-        private void toggleAttributeDisplay(LinearLayout attribBox, int parentWidth) {
-            // Don't toggle when there are no icons to show.
-            if (noAttributeIconsFound) {
-                return;
-            }
-
-            // toggle
-            if (attributesShowAsIcons) {
-                showAttributeDescriptions(attribBox);
-            } else {
-                showAttributeIcons(attribBox, parentWidth);
-            }
-        }
-
-        private ViewGroup createAttributeIconsLayout(int parentWidth) {
-            LinearLayout rows = new LinearLayout(CacheDetailActivity.this);
-            rows.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
-            rows.setOrientation(LinearLayout.VERTICAL);
-
-            LinearLayout attributeRow = newAttributeIconsRow();
-            rows.addView(attributeRow);
-
-            noAttributeIconsFound = true;
-
-            final String packageName = cgeoapplication.getInstance().getBaseContext().getPackageName();
-            for (String attributeName : cache.getAttributes()) {
-                boolean strikethru = attributeName.endsWith("_no");
-                // cut off _yes / _no
-                if (attributeName.endsWith("_no") || attributeName.endsWith("_yes")) {
-                    attributeName = attributeName.substring(0, attributeName.lastIndexOf("_"));
-                }
-                // check if another attribute icon fits in this row
-                attributeRow.measure(0, 0);
-                int rowWidth = attributeRow.getMeasuredWidth();
-                FrameLayout fl = (FrameLayout) getLayoutInflater().inflate(R.layout.attribute_image, null);
-                ImageView iv = (ImageView) fl.getChildAt(0);
-                if ((parentWidth - rowWidth) < iv.getLayoutParams().width) {
-                    // make a new row
-                    attributeRow = newAttributeIconsRow();
-                    rows.addView(attributeRow);
-                }
-
-                // dynamically search icon of the attribute
-                Drawable d = null;
-                int id = res.getIdentifier("attribute_" + attributeName, "drawable", packageName);
-                if (id > 0) {
-                    noAttributeIconsFound = false;
-                    d = res.getDrawable(id);
-                    iv.setImageDrawable(d);
-                    // strike through?
-                    if (strikethru) {
-                        // generate strikethru image with same properties as attribute image
-                        ImageView strikethruImage = new ImageView(CacheDetailActivity.this);
-                        strikethruImage.setLayoutParams(iv.getLayoutParams());
-                        d = res.getDrawable(R.drawable.attribute__strikethru);
-                        strikethruImage.setImageDrawable(d);
-                        fl.addView(strikethruImage);
-                    }
-                } else {
-                    d = res.getDrawable(R.drawable.attribute_icon_not_found);
-                    iv.setImageDrawable(d);
-                }
-
-                attributeRow.addView(fl);
-            }
-
-            return rows;
-        }
-
-        private LinearLayout newAttributeIconsRow() {
-            LinearLayout rowLayout = new LinearLayout(CacheDetailActivity.this);
-            rowLayout.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
-                    LayoutParams.WRAP_CONTENT));
-            rowLayout.setOrientation(LinearLayout.HORIZONTAL);
-            return rowLayout;
-        }
-
-        private ViewGroup createAttributeDescriptionsLayout() {
-            final LinearLayout descriptions = (LinearLayout) getLayoutInflater().inflate(
-                    R.layout.attribute_descriptions, null);
-            TextView attribView = (TextView) descriptions.getChildAt(0);
-
-            StringBuilder buffer = new StringBuilder();
-            String attribute;
-            final String packageName = cgeoapplication.getInstance().getBaseContext().getPackageName();
-            for (int i = 0; i < cache.getAttributes().size(); i++) {
-                attribute = cache.getAttributes().get(i);
-
-                // dynamically search for a translation of the attribute
-                int id = res.getIdentifier("attribute_" + attribute, "string", packageName);
-                if (id > 0) {
-                    String translated = res.getString(id);
-                    if (StringUtils.isNotBlank(translated)) {
-                        attribute = translated;
-                    }
-                }
-                if (buffer.length() > 0) {
-                    buffer.append('\n');
-                }
-                buffer.append(attribute);
-            }
-
-            if (noAttributeIconsFound) {
-                buffer.append("\n\n").append(res.getString(R.string.cache_attributes_no_icons));
-            }
-
-            attribView.setText(buffer);
-
-            return descriptions;
-        }
-
-        /**
          * handle caches with black font color
-         * 
+         *
          * @param view
          * @param text
          */
@@ -1991,7 +1996,6 @@ public class CacheDetailActivity extends AbstractActivity {
     }
 
     private class LogsViewCreator implements PageViewCreator {
-
         ScrollView view;
 
         @Override
