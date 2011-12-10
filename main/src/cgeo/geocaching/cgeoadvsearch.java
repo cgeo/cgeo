@@ -108,36 +108,34 @@ public class cgeoadvsearch extends AbstractActivity {
         super.onPause();
     }
 
-    private boolean instantSearch(String query) {
-        boolean found = false;
-
-        final Pattern gcCode = Pattern.compile("^GC[0-9A-Z]+$", Pattern.CASE_INSENSITIVE);
-        final Pattern tbCode = Pattern.compile("^TB[0-9A-Z]+$", Pattern.CASE_INSENSITIVE);
-        final Matcher gcCodeM = gcCode.matcher(query);
-        final Matcher tbCodeM = tbCode.matcher(query);
+    private boolean instantSearch(final String queryIn) {
+        final String query = queryIn.trim();
 
         try {
-            if (gcCodeM.find()) { // GC-code
+            final Pattern gcCode = Pattern.compile("^GC[0-9A-Z]+$", Pattern.CASE_INSENSITIVE);
+            if (gcCode.matcher(query).find()) { // GC-code
                 final Intent cachesIntent = new Intent(this, CacheDetailActivity.class);
-                cachesIntent.putExtra("geocode", query.trim().toUpperCase());
+                cachesIntent.putExtra("geocode", query.toUpperCase());
                 startActivity(cachesIntent);
 
-                found = true;
-            } else if (tbCodeM.find()) { // TB-code
-                final Intent trackablesIntent = new Intent(this, cgeotrackable.class);
-                trackablesIntent.putExtra("geocode", query.trim().toUpperCase());
-                startActivity(trackablesIntent);
-
-                found = true;
-            } else { // keyword (fallback)
-                cgeocaches.startActivityKeyword(this, query);
-                found = true;
+                return true;
+            } else {
+                final Pattern tbCode = Pattern.compile("^TB[0-9A-Z]+$", Pattern.CASE_INSENSITIVE);
+                if (tbCode.matcher(query).find()) { // TB-code
+                    final Intent trackablesIntent = new Intent(this, cgeotrackable.class);
+                    trackablesIntent.putExtra("geocode", query.toUpperCase());
+                    startActivity(trackablesIntent);
+                    return true;
+                } else { // keyword (fallback)
+                    cgeocaches.startActivityKeyword(this, query);
+                    return true;
+                }
             }
         } catch (Exception e) {
             Log.w(Settings.tag, "cgeoadvsearch.instantSearch: " + e.toString());
         }
 
-        return found;
+        return false;
     }
 
     private void init() {
