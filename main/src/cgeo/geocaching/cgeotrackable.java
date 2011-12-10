@@ -421,11 +421,11 @@ public class cgeotrackable extends AbstractActivity {
 
         @Override
         public void run() {
-            if (trackable == null || trackable.isLoggable()) {
+            // for non TB trackables, we should just use what we have in the database
+            trackable = cgeoapplication.getInstance().getTrackableByGeocode(geocode);
+
+            if ((trackable == null || trackable.isLoggable() && (!StringUtils.startsWithIgnoreCase(geocode, "GK")))) {
                 trackable = cgBase.searchTrackable(geocode, guid, id);
-            } else {
-                // for non TB trackables, we should just use what we have in the database
-                trackable = cgeoapplication.getInstance().getTrackableByGeocode(geocode);
             }
             handler.sendMessage(Message.obtain());
         }
