@@ -113,7 +113,7 @@ public class cgCache implements ICache {
         updated = System.currentTimeMillis();
         if (!detailed && other.detailed) {
             detailed = true;
-            detailedUpdate = updated;
+            detailedUpdate = other.detailedUpdate;
         }
 
         if (visitedDate == 0) {
