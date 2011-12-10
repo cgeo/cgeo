@@ -367,6 +367,7 @@
   <string name="init_details">Dettagli cache</string>
   <string name="init_ratingwanted">Carica il rating della cache da GCvote.com</string>
   <string name="init_elevationwanted">Carica dati altitudine cache</string>
+  <string name="init_openlastdetailspage">Ricorda l\'ultima pagina usata nei dettagli</string>
   <string name="init_autoload">Auto-carica descrizione estesa</string>
   <string name="init_other">Altre opzioni</string>
   <string name="init_skin">Tema chiaro\n(richiede riavvio di c:geo)</string>
@@ -617,7 +618,7 @@
   <!-- map -->
   <string name="map_map">Mappa</string>
   <string name="map_live">Mappa online</string>
-  <string name="map_view_map">Vista mappa</string>
+  <string name="map_view_map">Scegli mappa</string>
   <string name="map_trail_show">Mostra scia</string>
   <string name="map_trail_hide">Nasconde scia</string>
   <string name="map_circles_show">Mostra cerchie</string>
