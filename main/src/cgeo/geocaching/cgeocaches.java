@@ -145,7 +145,6 @@ public class cgeocaches extends AbstractListActivity {
     private static final int MENU_DROP_CACHES_AND_LIST = 65;
 
     private static final int CONTEXT_MENU_MOVE_TO_LIST = 1000;
-    private static final int MENU_MOVE_SELECTED_OR_ALL_TO_LIST = 1200;
 
     private String action = null;
     private CacheListType type = null;
@@ -538,10 +537,6 @@ public class cgeocaches extends AbstractListActivity {
      * the navigation menu item for the cache list (not the context menu!), or <code>null</code>
      */
     private MenuItem navigationMenu;
-    /**
-     * flag indicating whether we shall show the move to list context menu
-     */
-    private boolean contextMenuMoveToList = false;
 
     /**
      * flag indicating whether we shall show the filter context menu
@@ -1104,10 +1099,8 @@ public class cgeocaches extends AbstractListActivity {
                 removeFromHistoryCheck();
                 return false;
             case MENU_MOVE_TO_LIST:
-                contextMenuMoveToList = true;
-                openContextMenu(getListView());
-                contextMenuMoveToList = false;
-                return false;
+                moveCachesToOtherList();
+                return true;
         }
 
         return CacheListAppFactory.onMenuItemSelected(item, geo, cacheList, this, res, search);
@@ -1126,11 +1119,6 @@ public class cgeocaches extends AbstractListActivity {
         super.onCreateContextMenu(menu, view, info);
 
         if (adapter == null) {
-            return;
-        }
-
-        if (contextMenuMoveToList) {
-            createFakeContextMenuMoveToList(menu);
             return;
         }
 
@@ -1206,14 +1194,34 @@ public class cgeocaches extends AbstractListActivity {
         }
     }
 
-    private void createFakeContextMenuMoveToList(ContextMenu menu) {
-        List<cgList> cacheLists = app.getLists();
-        int listCount = cacheLists.size();
-        menu.setHeaderTitle(res.getString(R.string.cache_menu_move_list));
-        for (int i = 0; i < listCount; i++) {
-            cgList list = cacheLists.get(i);
-            menu.add(Menu.NONE, MENU_MOVE_SELECTED_OR_ALL_TO_LIST + list.id, Menu.NONE, list.title);
+    private void moveCachesToOtherList() {
+        final List<cgList> cacheLists = app.getLists();
+        ArrayList<String> listNames = new ArrayList<String>();
+        for (cgList list : cacheLists) {
+            listNames.add(list.title);
         }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(res.getString(R.string.cache_menu_move_list));
+        builder.setItems(listNames.toArray(new String[listNames.size()]), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                moveCachesToList(cacheLists.get(item));
+            }
+        });
+        builder.create().show();
+    }
+
+    private void moveCachesToList(final cgList list) {
+        int newListId = list.id;
+        final boolean moveAll = adapter.getChecked() == 0;
+        for (final cgCache c : Collections.unmodifiableList(cacheList)) {
+            if (moveAll || c.isStatusChecked()) {
+                app.moveToList(c.getGeocode(), newListId);
+            }
+        }
+        adapter.resetChecks();
+
+        refreshCurrentList();
     }
 
     @Override
@@ -1313,18 +1321,6 @@ public class cgeocaches extends AbstractListActivity {
             final int newListId = id - CONTEXT_MENU_MOVE_TO_LIST;
             if (adapterInfo != null) {
                 app.moveToList(getCacheFromAdapter(adapterInfo).getGeocode(), newListId);
-            }
-            adapter.resetChecks();
-
-            refreshCurrentList();
-            return true;
-        } else if (id >= MENU_MOVE_SELECTED_OR_ALL_TO_LIST && id < MENU_MOVE_SELECTED_OR_ALL_TO_LIST + 100) {
-            final int newListId = id - MENU_MOVE_SELECTED_OR_ALL_TO_LIST;
-            final boolean moveAll = adapter.getChecked() == 0;
-            for (final cgCache c : Collections.unmodifiableList(cacheList)) {
-                if (moveAll || c.isStatusChecked()) {
-                    app.moveToList(c.getGeocode(), newListId);
-                }
             }
             adapter.resetChecks();
 
