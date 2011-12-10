@@ -4,6 +4,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.CGeoMap;
@@ -450,6 +451,9 @@ public class cgeo extends AbstractActivity {
         }
         for (CacheType cacheType : CacheType.values()) {
             cacheType.setL10n();
+        }
+        for (LogType logType : LogType.values()) {
+            logType.setL10n();
         }
 
         Settings.getLogin();

@@ -3,6 +3,7 @@ package cgeo.geocaching.test.mock;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 
@@ -136,16 +137,16 @@ public class GC2CJPF extends MockedCache {
     }
 
     @Override
-    public Map<Integer, Integer> getLogCounts() {
-        Map<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
-        logCounts.put(cgBase.LOG_PUBLISH_LISTING, 1);
-        logCounts.put(cgBase.LOG_FOUND_IT, 62);
-        logCounts.put(cgBase.LOG_DIDNT_FIND_IT, 3);
-        logCounts.put(cgBase.LOG_NOTE, 6);
-        logCounts.put(cgBase.LOG_ENABLE_LISTING, 2);
-        logCounts.put(cgBase.LOG_TEMP_DISABLE_LISTING, 2);
-        logCounts.put(cgBase.LOG_OWNER_MAINTENANCE, 3);
-        logCounts.put(cgBase.LOG_NEEDS_MAINTENANCE, 2);
+    public Map<LogType, Integer> getLogCounts() {
+        Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
+        logCounts.put(LogType.LOG_PUBLISH_LISTING, 1);
+        logCounts.put(LogType.LOG_FOUND_IT, 62);
+        logCounts.put(LogType.LOG_DIDNT_FIND_IT, 3);
+        logCounts.put(LogType.LOG_NOTE, 6);
+        logCounts.put(LogType.LOG_ENABLE_LISTING, 2);
+        logCounts.put(LogType.LOG_TEMP_DISABLE_LISTING, 2);
+        logCounts.put(LogType.LOG_OWNER_MAINTENANCE, 3);
+        logCounts.put(LogType.LOG_NEEDS_MAINTENANCE, 2);
         return logCounts;
     }
 

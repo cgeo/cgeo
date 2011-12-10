@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.test.RegExPerformanceTest;
 import cgeo.geocaching.test.mock.MockedCache;
@@ -60,8 +61,8 @@ public class cgBaseTest extends AndroidTestCase {
             for (String attribute : cache.getAttributes()) {
                 Assert.assertTrue(cacheParsed.getAttributes().contains(attribute));
             }
-            for (Integer key : cache.getLogCounts().keySet()) {
-                Assert.assertEquals(cache.getLogCounts().get(key), cacheParsed.getLogCounts().get(key));
+            for (LogType logType : cache.getLogCounts().keySet()) {
+                Assert.assertEquals(cache.getLogCounts().get(logType), cacheParsed.getLogCounts().get(logType));
             }
             if (null != cache.getInventory() || null != cacheParsed.getInventory()) {
                 Assert.assertEquals(cache.getInventory().size(), cacheParsed.getInventory().size());

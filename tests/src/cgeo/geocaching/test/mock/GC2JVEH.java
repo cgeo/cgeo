@@ -5,6 +5,7 @@ import cgeo.geocaching.cgImage;
 import cgeo.geocaching.cgTrackable;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import java.text.ParseException;
@@ -111,13 +112,13 @@ public class GC2JVEH extends MockedCache {
     }
 
     @Override
-    public Map<Integer, Integer> getLogCounts() {
-        final Map<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
-        logCounts.put(cgBase.LOG_FOUND_IT, 64);
-        logCounts.put(cgBase.LOG_NOTE, 7);
-        logCounts.put(cgBase.LOG_TEMP_DISABLE_LISTING, 1);
-        logCounts.put(cgBase.LOG_ENABLE_LISTING, 1);
-        logCounts.put(cgBase.LOG_PUBLISH_LISTING, 1);
+    public Map<LogType, Integer> getLogCounts() {
+        final Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
+        logCounts.put(LogType.LOG_FOUND_IT, 64);
+        logCounts.put(LogType.LOG_NOTE, 7);
+        logCounts.put(LogType.LOG_TEMP_DISABLE_LISTING, 1);
+        logCounts.put(LogType.LOG_ENABLE_LISTING, 1);
+        logCounts.put(LogType.LOG_PUBLISH_LISTING, 1);
         return logCounts;
     }
 

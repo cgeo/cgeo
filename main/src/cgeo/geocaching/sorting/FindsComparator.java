@@ -1,8 +1,8 @@
 package cgeo.geocaching.sorting;
 
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.enumerations.LogType;
 
 public class FindsComparator extends AbstractCacheComparator {
 
@@ -29,7 +29,7 @@ public class FindsComparator extends AbstractCacheComparator {
         if (cache.getLogCounts().isEmpty()) {
             cache.setLogCounts(app.loadLogCounts(cache.getGeocode()));
         }
-        Integer logged = cache.getLogCounts().get(cgBase.LOG_FOUND_IT);
+        Integer logged = cache.getLogCounts().get(LogType.LOG_FOUND_IT);
         if (logged != null) {
             finds = logged.intValue();
         }

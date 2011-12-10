@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -1629,7 +1630,7 @@ public class cgData {
 
                     helper.bind(LOGS_GEOCODE, geocode);
                     helper.bind(LOGS_UPDATED, timeStamp);
-                    helper.bind(LOGS_TYPE, log.type);
+                    helper.bind(LOGS_TYPE, log.type.id);
                     helper.bind(LOGS_AUTHOR, log.author);
                     helper.bind(LOGS_LOG, log.log);
                     helper.bind(LOGS_DATE, log.date);
@@ -1659,11 +1660,11 @@ public class cgData {
         return true;
     }
 
-    public boolean saveLogCount(String geocode, Map<Integer, Integer> logCounts) {
+    public boolean saveLogCount(String geocode, Map<LogType, Integer> logCounts) {
         return saveLogCount(geocode, logCounts, true);
     }
 
-    public boolean saveLogCount(String geocode, Map<Integer, Integer> logCounts, boolean drop) {
+    public boolean saveLogCount(String geocode, Map<LogType, Integer> logCounts, boolean drop) {
         init();
 
         if (StringUtils.isBlank(geocode) || MapUtils.isEmpty(logCounts)) {
@@ -1678,13 +1679,13 @@ public class cgData {
 
             ContentValues values = new ContentValues();
 
-            Set<Entry<Integer, Integer>> logCountsItems = logCounts.entrySet();
+            Set<Entry<LogType, Integer>> logCountsItems = logCounts.entrySet();
             long timeStamp = System.currentTimeMillis();
-            for (Entry<Integer, Integer> pair : logCountsItems) {
+            for (Entry<LogType, Integer> pair : logCountsItems) {
                 values.clear();
                 values.put("geocode", geocode);
                 values.put("updated", timeStamp);
-                values.put("type", pair.getKey());
+                values.put("type", pair.getKey().id);
                 values.put("count", pair.getValue());
 
                 databaseRW.insert(dbTableLogCount, null, values);
@@ -1975,7 +1976,7 @@ public class cgData {
                                 }
                                 cache.getLogs().addAll(logs);
                             }
-                            final Map<Integer, Integer> logCounts = loadLogCounts(cache.getGeocode());
+                            final Map<LogType, Integer> logCounts = loadLogCounts(cache.getGeocode());
                             if (MapUtils.isNotEmpty(logCounts)) {
                                 cache.getLogCounts().clear();
                                 cache.getLogCounts().putAll(logCounts);
@@ -2386,7 +2387,7 @@ public class cgData {
                 if (log == null || log.id != cursor.getInt(indexLogsId)) {
                     log = new cgLog();
                     log.id = cursor.getInt(indexLogsId);
-                    log.type = cursor.getInt(indexType);
+                    log.type = LogType.getById(cursor.getInt(indexType));
                     log.author = cursor.getString(indexAuthor);
                     log.log = cursor.getString(indexLog);
                     log.date = cursor.getLong(indexDate);
@@ -2413,14 +2414,14 @@ public class cgData {
         return logs;
     }
 
-    public Map<Integer, Integer> loadLogCounts(String geocode) {
+    public Map<LogType, Integer> loadLogCounts(String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return null;
         }
 
         init();
 
-        Map<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
+        Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
 
         Cursor cursor = databaseRO.query(
                 dbTableLogCount,
@@ -2438,7 +2439,7 @@ public class cgData {
             int indexCount = cursor.getColumnIndex("count");
 
             do {
-                Integer type = cursor.getInt(indexType);
+                LogType type = LogType.getById(cursor.getInt(indexType));
                 Integer count = cursor.getInt(indexCount);
 
                 logCounts.put(type, count);
@@ -3013,11 +3014,11 @@ public class cgData {
         }
     }
 
-    public boolean saveLogOffline(String geocode, Date date, int type, String log) {
+    public boolean saveLogOffline(String geocode, Date date, LogType type, String log) {
         if (StringUtils.isBlank(geocode)) {
             return false;
         }
-        if (type <= 0 && StringUtils.isBlank(log)) {
+        if (LogType.LOG_UNKNOWN == type && StringUtils.isBlank(log)) {
             return false;
         }
 
@@ -3026,7 +3027,7 @@ public class cgData {
         ContentValues values = new ContentValues();
         values.put("geocode", geocode);
         values.put("updated", System.currentTimeMillis());
-        values.put("type", type);
+        values.put("type", type.id);
         values.put("log", log);
         values.put("date", date.getTime());
 
@@ -3075,7 +3076,7 @@ public class cgData {
 
             log = new cgLog();
             log.id = cursor.getInt(cursor.getColumnIndex("_id"));
-            log.type = cursor.getInt(cursor.getColumnIndex("type"));
+            log.type = LogType.getById(cursor.getInt(cursor.getColumnIndex("type")));
             log.log = cursor.getString(cursor.getColumnIndex("log"));
             log.date = cursor.getLong(cursor.getColumnIndex("date"));
         }

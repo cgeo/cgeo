@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 
@@ -593,7 +594,7 @@ public class cgeoapplication extends Application {
         return storage.loadInventory(geocode);
     }
 
-    public Map<Integer, Integer> loadLogCounts(String geocode) {
+    public Map<LogType, Integer> loadLogCounts(String geocode) {
         return storage.loadLogCounts(geocode);
     }
 
@@ -646,7 +647,7 @@ public class cgeoapplication extends Application {
         return lastCoords;
     }
 
-    public boolean saveLogOffline(String geocode, Date date, int logtype, String log) {
+    public boolean saveLogOffline(String geocode, Date date, LogType logtype, String log) {
         return storage.saveLogOffline(geocode, date, logtype, log);
     }
 
