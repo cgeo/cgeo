@@ -367,6 +367,7 @@
   <string name="init_details">Cache Details</string>
   <string name="init_ratingwanted">Lade Cache-Bewertung von GCvote.com</string>
   <string name="init_elevationwanted">Lade Höhe des Caches</string>
+  <string name="init_friendlogswanted">Lade Logbuch (Freunde)</string>
   <string name="init_openlastdetailspage">Öffne Details mit zuletzt genutzter Seite</string>
   <string name="init_autoload">Ausführliche Beschreibung automatisch laden</string>
   <string name="init_other">Weitere Optionen</string>
@@ -474,6 +475,7 @@
   <string name="cache_waypoints_add">Wegpunkt hinzufügen</string>
   <string name="cache_hint">Hinweis</string>
   <string name="cache_logs">Logbuch</string>
+  <string name="cache_logsfriends">Logbuch (Freunde)</string>
   <string name="cache_dialog_loading_details">Lade Cache-Details…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Lade Seite</string>
   <string name="cache_dialog_loading_details_status_details">Verarbeite Details</string>

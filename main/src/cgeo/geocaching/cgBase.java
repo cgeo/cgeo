@@ -87,9 +87,11 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 
 import javax.net.ssl.HostnameVerifier;
@@ -1194,6 +1196,7 @@ public class cgBase {
                     cache.setWaypoints(new ArrayList<cgWaypoint>());
                 }
                 cache.getWaypoints().add(waypoint);
+                // cache.setcoordsChanged(true);
             }
         } catch (Geopoint.GeopointException e) {
         }
@@ -1282,7 +1285,12 @@ public class cgBase {
             return;
         }
         sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
-        loadLogsFromDetails(page, cache);
+        cache.setLogs(loadLogsFromDetails(page, cache, false));
+        if (Settings.isFriendLogsWanted()) {
+            Set<cgLog> logs = new HashSet<cgLog>(loadLogsFromDetails(page, cache, true));
+            logs.addAll(cache.getLogs());
+            cache.setLogs(new ArrayList<cgLog>(logs));
+        }
 
         if (Settings.isElevationWanted()) {
             if (CancellableHandler.isCancelled(handler)) {
@@ -1315,12 +1323,14 @@ public class cgBase {
      *            the text of the details page
      * @param cache
      *            the cache object to put the logs in
+     * @param friends
+     *            retrieve friend logs
      */
-    private static void loadLogsFromDetails(final String page, final cgCache cache) {
+    private static List<cgLog> loadLogsFromDetails(final String page, final cgCache cache, final boolean friends) {
         final Matcher userTokenMatcher = GCConstants.PATTERN_USERTOKEN2.matcher(page);
         if (!userTokenMatcher.find()) {
             Log.e(Settings.tag, "cgBase.loadLogsFromDetails: unable to extract userToken");
-            return;
+            return null;
         }
 
         final String userToken = userTokenMatcher.group(1);
@@ -1328,28 +1338,33 @@ public class cgBase {
                 "tkn", userToken,
                 "idx", "1",
                 "num", "35",
-                "decrypt", "true");
+                "decrypt", "true",
+                // "sp", Boolean.toString(personal), // personal logs
+                "sf", Boolean.toString(friends));
+
         final HttpResponse response = request("http://www.geocaching.com/seek/geocache.logbook", params, false, false, false);
         if (response == null) {
             Log.e(Settings.tag, "cgBase.loadLogsFromDetails: cannot log logs, response is null");
-            return;
+            return null;
         }
         final int statusCode = response.getStatusLine().getStatusCode();
         if (statusCode != 200) {
             Log.e(Settings.tag, "cgBase.loadLogsFromDetails: error " + statusCode + " when requesting log information");
-            return;
+            return null;
         }
+
+        List<cgLog> logs = new ArrayList<cgLog>();
 
         try {
             final String rawResponse = cgBase.getResponseData(response);
             if (rawResponse == null) {
                 Log.e(Settings.tag, "cgBase.loadLogsFromDetails: unable to read whole response");
-                return;
+                return null;
             }
             final JSONObject resp = new JSONObject(rawResponse);
             if (!resp.getString("status").equals("success")) {
                 Log.e(Settings.tag, "cgBase.loadLogsFromDetails: status is " + resp.getString("status"));
-                return;
+                return null;
             }
 
             final JSONArray data = resp.getJSONArray("data");
@@ -1357,6 +1372,7 @@ public class cgBase {
             for (int index = 0; index < data.length(); index++) {
                 final JSONObject entry = data.getJSONObject(index);
                 final cgLog logDone = new cgLog();
+                logDone.friend = friends;
 
                 // FIXME: use the "LogType" field instead of the "LogTypeImage" one.
                 final String logIconNameExt = entry.optString("LogTypeImage", ".gif");
@@ -1389,15 +1405,14 @@ public class cgBase {
                     logDone.logImages.add(logImage);
                 }
 
-                if (null == cache.getLogs()) {
-                    cache.setLogs(new ArrayList<cgLog>());
-                }
-                cache.getLogs().add(logDone);
+                logs.add(logDone);
             }
         } catch (JSONException e) {
             // failed to parse logs
             Log.w(Settings.tag, "cgBase.loadLogsFromDetails: Failed to parse cache logs", e);
         }
+
+        return logs;
     }
 
     private static void checkFields(cgCache cache) {

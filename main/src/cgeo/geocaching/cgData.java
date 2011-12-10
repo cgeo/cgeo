@@ -41,7 +41,7 @@ public class cgData {
             "_id", "updated", "reason", "detailed", "detailedupdate", "visiteddate", "geocode", "cacheid", "guid", "type", "name", "own", "owner", "owner_real", "hidden", "hint", "size",
             "difficulty", "distance", "direction", "terrain", "latlon", "location", "latitude", "longitude", "elevation", "shortdesc",
             "favourite_cnt", "rating", "votes", "myvote", "disabled", "archived", "members", "found", "favourite", "inventorycoins", "inventorytags",
-            "inventoryunknown", "onWatchlist", "personal_note", "reliable_latlon"
+            "inventoryunknown", "onWatchlist", "personal_note", "reliable_latlon", "coordsChanged"
     };
     /**
      * holds the column indexes of the cache table to avoid lookups
@@ -52,7 +52,7 @@ public class cgData {
     private cgDbHelper dbHelper = null;
     private SQLiteDatabase databaseRO = null;
     private SQLiteDatabase databaseRW = null;
-    private static final int dbVersion = 60;
+    private static final int dbVersion = 61;
     private static final String dbName = "data";
     private static final String dbTableCaches = "cg_caches";
     private static final String dbTableLists = "cg_lists";
@@ -109,7 +109,8 @@ public class cgData {
             + "inventorycoins integer default 0, "
             + "inventorytags integer default 0, "
             + "inventoryunknown integer default 0, "
-            + "onWatchlist integer default 0 "
+            + "onWatchlist integer default 0, "
+            + "coordsChanged integer default 0"
             + "); ";
     private static final String dbCreateLists = ""
             + "create table " + dbTableLists + " ("
@@ -162,7 +163,8 @@ public class cgData {
             + "author text, "
             + "log text, "
             + "date long, "
-            + "found integer not null default 0 "
+            + "found integer not null default 0, "
+            + "friend integer "
             + "); ";
     private final static int LOGS_GEOCODE = 2;
     private final static int LOGS_UPDATED = 3;
@@ -171,6 +173,7 @@ public class cgData {
     private final static int LOGS_LOG = 6;
     private final static int LOGS_DATE = 7;
     private final static int LOGS_FOUND = 8;
+    private final static int LOGS_FRIEND = 9;
 
     private static final String dbCreateLogCount = ""
             + "create table " + dbTableLogCount + " ("
@@ -741,7 +744,6 @@ public class cgData {
                             db.execSQL("alter table " + dbTableCaches + " add column personal_note text");
                         } catch (Exception e) {
                             Log.e(Settings.tag, "Failed to upgrade to ver. 55: " + e.toString());
-
                         }
                     }
 
@@ -879,6 +881,15 @@ public class cgData {
                             removeSecEmptyDirs();
                         } catch (Exception e) {
                             Log.e(Settings.tag, "Failed to upgrade to ver. 60", e);
+                        }
+                    }
+                    if (oldVersion < 61) {
+                        try {
+                            db.execSQL("alter table " + dbTableLogs + " add column friend integer");
+                            db.execSQL("alter table " + dbTableCaches + " add column coordsChanged integer default 0");
+                        } catch (Exception e) {
+                            Log.e(Settings.tag, "Failed to upgrade to ver. 61: " + e.toString());
+
                         }
                     }
 
@@ -1268,6 +1279,7 @@ public class cgData {
         values.put("favourite", cache.isFavourite() ? 1 : 0);
         values.put("inventoryunknown", cache.getInventoryItems());
         values.put("onWatchlist", cache.isOnWatchlist() ? 1 : 0);
+        // values.put("coordsChanged", cache.coordsChanged() ? 1 : 0);
 
         boolean statusOk = true;
 
@@ -1622,6 +1634,7 @@ public class cgData {
                     helper.bind(LOGS_LOG, log.log);
                     helper.bind(LOGS_DATE, log.date);
                     helper.bind(LOGS_FOUND, log.found);
+                    helper.bind(LOGS_FRIEND, log.friend);
 
                     long log_id = helper.execute();
 
@@ -2053,6 +2066,7 @@ public class cgData {
             local_cci[34] = cursor.getColumnIndex("inventoryunknown");
             local_cci[35] = cursor.getColumnIndex("onWatchlist");
             local_cci[36] = cursor.getColumnIndex("reliable_latlon");
+            // local_cci[37] = cursor.getColumnIndex("coordsChanged");
             cacheColumnIndex = local_cci;
         }
 
@@ -2113,6 +2127,7 @@ public class cgData {
         cache.setInventoryItems(cursor.getInt(cacheColumnIndex[34]));
         cache.setOnWatchlist(cursor.getInt(cacheColumnIndex[35]) == 1);
         cache.setReliableLatLon(cursor.getInt(cacheColumnIndex[36]) > 0);
+        //cache.setCoordsChanged(cursor.getInt(cacheColumnIndex[37]) > 0);
         return cache;
     }
 
@@ -2351,7 +2366,7 @@ public class cgData {
         List<cgLog> logs = new ArrayList<cgLog>();
 
         Cursor cursor = databaseRO.rawQuery(
-                "SELECT cg_logs._id as cg_logs_id, type, author, log, date, found, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url FROM "
+                "SELECT cg_logs._id as cg_logs_id, type, author, log, date, found, friend, " + dbTableLogImages + "._id as cg_logImages_id, log_id, title, url FROM "
                         + dbTableLogs + " LEFT OUTER JOIN " + dbTableLogImages
                         + " ON ( cg_logs._id = log_id ) WHERE geocode = ?  ORDER BY date desc, cg_logs._id asc", new String[] { geocode });
 
@@ -2363,6 +2378,7 @@ public class cgData {
             int indexLog = cursor.getColumnIndex("log");
             int indexDate = cursor.getColumnIndex("date");
             int indexFound = cursor.getColumnIndex("found");
+            int indexFriend = cursor.getColumnIndex("friend");
             int indexLogImagesId = cursor.getColumnIndex("cg_logImages_id");
             int indexTitle = cursor.getColumnIndex("title");
             int indexUrl = cursor.getColumnIndex("url");
@@ -2375,6 +2391,7 @@ public class cgData {
                     log.log = cursor.getString(indexLog);
                     log.date = cursor.getLong(indexDate);
                     log.found = cursor.getInt(indexFound);
+                    log.friend = cursor.getInt(indexFriend) == 1 ? true : false;
                     logs.add(log);
                 }
                 if (!cursor.isNull(indexLogImagesId)) {
