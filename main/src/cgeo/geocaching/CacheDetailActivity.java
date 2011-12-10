@@ -1453,6 +1453,12 @@ public class CacheDetailActivity extends AbstractActivity {
                         });
             }
 
+            // cache attributes
+            if (CollectionUtils.isNotEmpty(cache.getAttributes())) {
+                new AttributeViewBuilder().fillView((LinearLayout) view.findViewById(R.id.attributes_innerbox));
+                view.findViewById(R.id.attributes_box).setVisibility(View.VISIBLE);
+            }
+
             updateOfflineBox();
 
             // watchlist
@@ -1867,12 +1873,6 @@ public class CacheDetailActivity extends AbstractActivity {
                         }
                     });
                 }
-            }
-
-            // cache attributes
-            if (CollectionUtils.isNotEmpty(cache.getAttributes())) {
-                new AttributeViewBuilder().fillView((LinearLayout) view.findViewById(R.id.attributes_innerbox));
-                view.findViewById(R.id.attributes_box).setVisibility(View.VISIBLE);
             }
 
             // cache personal note
