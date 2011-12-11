@@ -3,7 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.filter.cgFilter;
+import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.DistanceComparator;
@@ -72,7 +72,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
     private static final int SWIPE_MAX_OFF_PATH = 100;
     private static final int SWIPE_DISTANCE = 80;
     private static final float SWIPE_OPACITY = 0.5f;
-    private cgFilter currentFilter = null;
+    private IFilter currentFilter = null;
     private List<cgCache> originalList = null;
     private final CacheListType cacheListType;
 
@@ -123,7 +123,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
     /**
      * Called after a user action on the filter menu.
      */
-    public void setFilter(cgFilter filter) {
+    public void setFilter(final IFilter filter) {
         // Backup current caches list if it isn't backed up yet
         if (originalList == null) {
             originalList = new ArrayList<cgCache>(list);
@@ -161,7 +161,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
     }
 
     public String getFilterName() {
-        return currentFilter.getFilterName();
+        return currentFilter.getName();
     }
 
     public void setHistoric(boolean historicIn) {

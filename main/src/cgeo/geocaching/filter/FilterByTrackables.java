@@ -2,13 +2,13 @@ package cgeo.geocaching.filter;
 
 import cgeo.geocaching.cgCache;
 
-public class cgFilterByTrackables extends cgFilter {
-    public cgFilterByTrackables(String name) {
+public class FilterByTrackables extends AbstractFilter {
+    public FilterByTrackables(String name) {
         super(name);
     }
 
     @Override
-    boolean applyFilter(cgCache cache) {
+    public boolean accepts(cgCache cache) {
         return cache.hasTrackables();
     }
 }

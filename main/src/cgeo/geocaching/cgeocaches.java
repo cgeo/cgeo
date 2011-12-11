@@ -10,10 +10,10 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.files.GPXImporter;
-import cgeo.geocaching.filter.cgFilter;
-import cgeo.geocaching.filter.cgFilterBySize;
-import cgeo.geocaching.filter.cgFilterByTrackables;
-import cgeo.geocaching.filter.cgFilterByType;
+import cgeo.geocaching.filter.FilterBySize;
+import cgeo.geocaching.filter.FilterByTrackables;
+import cgeo.geocaching.filter.FilterByType;
+import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.sorting.CacheComparator;
@@ -1048,7 +1048,7 @@ public class cgeocaches extends AbstractListActivity {
                 showFilterMenu(SUBMENU_FILTER_SIZE);
                 return true;
             case MENU_FILTER_TRACKABLES:
-                setFilter(new cgFilterByTrackables(res.getString(R.string.caches_filter_track)));
+                setFilter(new FilterByTrackables(res.getString(R.string.caches_filter_track)));
                 return true;
             case MENU_FILTER_CLEAR:
                 if (adapter != null) {
@@ -1084,7 +1084,7 @@ public class cgeocaches extends AbstractListActivity {
                 }
                 builder.setItems(names.toArray(new String[names.size()]), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
-                        setFilter(new cgFilterBySize(cacheSizes[item]));
+                        setFilter(new FilterBySize(cacheSizes[item]));
                     }
                 });
                 break;
@@ -1099,7 +1099,7 @@ public class cgeocaches extends AbstractListActivity {
                 }
                 builder.setItems(typeNames.toArray(new String[typeNames.size()]), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int item) {
-                        setFilter(new cgFilterByType(cacheTypes[item]));
+                        setFilter(new FilterByType(cacheTypes[item]));
                     }
                 });
                 break;
@@ -1285,7 +1285,7 @@ public class cgeocaches extends AbstractListActivity {
         return adapter.getItem(adapterInfo.position);
     }
 
-    private boolean setFilter(cgFilter filter) {
+    private boolean setFilter(IFilter filter) {
         if (adapter != null) {
             adapter.setFilter(filter);
             prepareFilterBar();
