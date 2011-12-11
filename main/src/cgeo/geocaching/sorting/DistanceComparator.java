@@ -4,8 +4,8 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.geopoint.Geopoint;
 
 /**
- * sorts caches by distance to current position
- *
+ * sorts caches by distance to given position
+ * 
  */
 public class DistanceComparator extends AbstractCacheComparator {
     private final Geopoint coords;

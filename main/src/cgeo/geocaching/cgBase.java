@@ -614,7 +614,6 @@ public class cgBase {
 
             if (Settings.isExcludeDisabledCaches() && (cache.isDisabled() || cache.isArchived())) {
                 // skip disabled and archived caches
-                cache = null;
                 continue;
             }
 

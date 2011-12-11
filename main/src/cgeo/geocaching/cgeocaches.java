@@ -569,10 +569,6 @@ public class cgeocaches extends AbstractListActivity {
 
                 break;
             case HISTORY:
-                if (adapter != null) {
-                    adapter.setHistoric(true);
-                }
-
                 title = res.getString(R.string.caches_history);
                 setTitle(title);
                 showProgress(true);

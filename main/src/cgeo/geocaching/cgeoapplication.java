@@ -392,13 +392,7 @@ public class cgeoapplication extends Application {
             return null;
         }
 
-        if (storage == null) {
-            storage = new cgData(this);
-        }
-
-        final List<String> geocodeList = search.getGeocodes();
-
-        return getBounds(geocodeList);
+        return getBounds(search.getGeocodes());
     }
 
     public List<Number> getBounds(final List<String> geocodes) {

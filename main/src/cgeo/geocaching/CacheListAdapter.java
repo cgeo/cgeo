@@ -49,14 +49,12 @@ import java.util.Set;
 
 public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
-    private static final String SEPARATOR = " · ";
     final private Resources res;
     /** Resulting list of caches */
     final private List<cgCache> list;
     private cgCacheView holder = null;
     private LayoutInflater inflater = null;
-    private CacheComparator statComparator = null;
-    private boolean historic = false;
+    private CacheComparator cacheComparator = null;
     private Geopoint coords = null;
     private float azimuth = 0;
     private long lastSort = 0L;
@@ -72,6 +70,11 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
     private static final int SWIPE_MAX_OFF_PATH = 100;
     private static final int SWIPE_DISTANCE = 80;
     private static final float SWIPE_OPACITY = 0.5f;
+    /**
+     * time in milliseconds after which the list may be resorted due to position updates
+     */
+    private static final int PAUSE_BETWEEN_LIST_SORT = 1000;
+    private static final String SEPARATOR = " · ";
     private IFilter currentFilter = null;
     private List<cgCache> originalList = null;
     private final CacheListType cacheListType;
@@ -82,6 +85,9 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         this.res = activity.getResources();
         this.list = list;
         this.cacheListType = cacheListType;
+        if (cacheListType == CacheListType.HISTORY) {
+            cacheComparator = new VisitComparator();
+        }
 
         final DisplayMetrics metrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -102,9 +108,13 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         }
     }
 
-    public void setComparator(CacheComparator comparator) {
-        statComparator = comparator;
-
+    /**
+     * change the sort order
+     *
+     * @param comparator
+     */
+    public void setComparator(final CacheComparator comparator) {
+        cacheComparator = comparator;
         forceSort(coords);
     }
 
@@ -162,16 +172,6 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
     public String getFilterName() {
         return currentFilter.getName();
-    }
-
-    public void setHistoric(boolean historicIn) {
-        historic = historicIn;
-
-        if (historic) {
-            statComparator = new VisitComparator();
-        } else {
-            statComparator = null;
-        }
     }
 
     public int getChecked() {
@@ -246,16 +246,16 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             return;
         }
 
-        if (statComparator != null) {
-            Collections.sort(list, statComparator);
-        } else {
+        if (isSortedByDistance()) {
             if (coordsIn == null) {
                 return;
             }
-
-            final DistanceComparator dstComparator = new DistanceComparator(coordsIn);
-            Collections.sort(list, dstComparator);
+            Collections.sort(list, new DistanceComparator(coordsIn));
         }
+        else {
+            Collections.sort(list, cacheComparator);
+        }
+
         notifyDataSetChanged();
     }
 
@@ -266,8 +266,8 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
         coords = coordsIn;
 
-        if (CollectionUtils.isNotEmpty(list) && (System.currentTimeMillis() - lastSort) > 1000 && sort) {
-            Collections.sort(list, statComparator != null ? statComparator : new DistanceComparator(coordsIn));
+        if (CollectionUtils.isNotEmpty(list) && (System.currentTimeMillis() - lastSort) > PAUSE_BETWEEN_LIST_SORT && sort && isSortedByDistance()) {
+            Collections.sort(list, new DistanceComparator(coordsIn));
             notifyDataSetChanged();
             lastSort = System.currentTimeMillis();
         }
@@ -279,6 +279,10 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         for (final cgCompassMini compass : compasses) {
             compass.updateCoords(coordsIn);
         }
+    }
+
+    private boolean isSortedByDistance() {
+        return cacheComparator == null || cacheComparator instanceof DistanceComparator;
     }
 
     public void setActualHeading(Float directionNow) {
@@ -547,7 +551,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         }
         holder.favourite.setBackgroundResource(favoriteBack);
 
-        if (historic && cache.getVisitedDate() > 0) {
+        if (cacheListType == CacheListType.HISTORY && cache.getVisitedDate() > 0) {
             StringBuilder cacheInfo = new StringBuilder(50);
             cacheInfo.append(cgBase.formatTime(cache.getVisitedDate()));
             cacheInfo.append("; ");
