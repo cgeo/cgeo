@@ -28,6 +28,7 @@ import cgeo.geocaching.sorting.RatingComparator;
 import cgeo.geocaching.sorting.SizeComparator;
 import cgeo.geocaching.sorting.StateComparator;
 import cgeo.geocaching.sorting.TerrainComparator;
+import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.sorting.VoteComparator;
 import cgeo.geocaching.utils.RunnableWithArgument;
 
@@ -176,6 +177,8 @@ public class cgeocaches extends AbstractListActivity {
                 }
 
                 setAdapter();
+
+                setDateComparatorForEventList();
 
                 if (cacheList == null) {
                     showToast(res.getString(R.string.err_list_load_fail));
@@ -2606,6 +2609,30 @@ public class cgeocaches extends AbstractListActivity {
         }
         else {
             findViewById(R.id.filter_bar).setVisibility(View.GONE);
+        }
+    }
+
+    /**
+     * set date comparator for pure event lists
+     */
+    private void setDateComparatorForEventList() {
+        if (CollectionUtils.isNotEmpty(cacheList)) {
+            boolean eventsOnly = true;
+            for (cgCache cache : cacheList) {
+                if (!cache.isEventCache()) {
+                    eventsOnly = false;
+                    break;
+                }
+            }
+            if (eventsOnly) {
+                adapter.setComparator(new DateComparator());
+            }
+            else if (type == CacheListType.HISTORY) {
+                adapter.setComparator(new VisitComparator());
+            }
+            else {
+                adapter.setComparator(null);
+            }
         }
     }
 
