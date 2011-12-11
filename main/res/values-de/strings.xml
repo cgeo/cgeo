@@ -377,7 +377,7 @@
   <string name="init_useenglish">c:geo auf Englisch nutzen (Neustart erforderlich)</string>
   <string name="init_exclude">Eigene und gefundene Caches ausblenden</string>
   <string name="init_showwaypoints">Wegpunkte zeigen</string>
-  <string name="init_showwaypoint_description">Grenze unter der Wegpunkte in der Karte angezeigt werden.</string>
+  <string name="init_showwaypoint_description">Anzahl der Caches in der Karte unterhalb der Wegpunkte angezeigt werden.</string>
   <string name="init_disabled">Deaktivierte Caches ausblenden</string>
   <string name="init_offline">Statische Karten für Offline-Verwendung speichern</string>
   <string name="init_save_log_img">Logbilder abspeichern</string>

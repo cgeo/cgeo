@@ -377,7 +377,7 @@
   <string name="init_useenglish">Use English inside c:geo\n(restart needed)</string>
   <string name="init_exclude">Exclude own and found caches</string>
   <string name="init_showwaypoints">Show waypoints in live map</string>
-  <string name="init_showwaypoint_description">Level below which waypoints are shown in live map.</string>
+  <string name="init_showwaypoint_description">Number of caches in live map below waypoints are shown.</string>
   <string name="init_disabled">Exclude disabled caches</string>
   <string name="init_offline">Store static maps for offline use</string>
   <string name="init_save_log_img">Save Images from Logs</string>
