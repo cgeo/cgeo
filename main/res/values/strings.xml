@@ -367,7 +367,7 @@
   <string name="init_details">Cache details</string>
   <string name="init_ratingwanted">Load cache rating from GCvote.com</string>
   <string name="init_elevationwanted">Load cache elevation data</string>
-  <string name="init_friendlogswanted">Load logbook (friends)</string>
+  <string name="init_friendlogswanted">Load additional logbook page for logs from friends</string>
   <string name="init_openlastdetailspage">Open details with last used page</string>
   <string name="init_autoload">Auto-loading long description</string>
   <string name="init_other">Other options</string>
