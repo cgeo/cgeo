@@ -367,6 +367,7 @@
   <string name="init_details">Dettagli cache</string>
   <string name="init_ratingwanted">Carica il rating della cache da GCvote.com</string>
   <string name="init_elevationwanted">Carica dati altitudine cache</string>
+  <string name="init_friendlogswanted">Carica logbook (amici)</string>
   <string name="init_openlastdetailspage">Ricorda l\'ultima pagina usata nei dettagli</string>
   <string name="init_autoload">Auto-carica descrizione estesa</string>
   <string name="init_other">Altre opzioni</string>
@@ -376,7 +377,7 @@
   <string name="init_useenglish">Usa sempre English in c:geo\n(richiede riavvio)</string>
   <string name="init_exclude">Escludi le mie cache e quelle trovate</string>
   <string name="init_showwaypoints">Mostra waypoints sulla mappa</string>
-  <string name="init_showwaypoint_description">Livello al di sotto del quale mostrare waypoints sulla mappa.</string>
+  <string name="init_showwaypoint_description">Numero di cache al di sotto del quale mostrare waypoints sulla mappa.</string>
   <string name="init_disabled">Esclude cache non attive</string>
   <string name="init_offline">Conserva le mappe per uso offline</string>
   <string name="init_save_log_img">Salva immagini contenute nei log</string>
@@ -471,6 +472,7 @@
   <string name="cache_waypoints_add">Aggiungi waypoint</string>
   <string name="cache_hint">Aiuto</string>
   <string name="cache_logs">Logbook</string>
+  <string name="cache_logsfriends">Log amici</string>  
   <string name="cache_dialog_loading_details">Caricamento dettagli cache…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Caricamento pagina</string>
   <string name="cache_dialog_loading_details_status_details">Elaborazione dettagli</string>
