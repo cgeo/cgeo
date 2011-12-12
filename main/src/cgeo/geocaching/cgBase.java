@@ -1200,6 +1200,28 @@ public class cgBase {
         } catch (Geopoint.GeopointException e) {
         }
 
+        // add waypoint for PERSONAL NOTE coordinates
+        try {
+            final String personalCoords = BaseUtils.getMatch(page, GCConstants.PATTERN_LATLON_PERSONAL, false, null);
+
+            if (null != personalCoords) {
+                final cgWaypoint waypoint = new cgWaypoint();
+
+                waypoint.setCoords(new Geopoint(personalCoords));
+                waypoint.setWaypointType(WaypointType.FINAL);
+                if (res != null) {
+                    waypoint.setName("Personal Note FINAL");
+                }
+
+                if (null == cache.getWaypoints()) {
+                    cache.setWaypoints(new ArrayList<cgWaypoint>());
+                }
+                cache.getWaypoints().add(waypoint);
+                // cache.setcoordsChanged(true);
+            }
+        } catch (Geopoint.GeopointException e) {
+        }
+
         // waypoints
         int wpBegin = 0;
         int wpEnd = 0;
