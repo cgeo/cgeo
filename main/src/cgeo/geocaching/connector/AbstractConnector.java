@@ -60,4 +60,10 @@ public abstract class AbstractConnector implements IConnector {
         }
         return false;
     }
+
+    @Override
+    public boolean isZippedGPXFile(String fileName) {
+        // don't accept any file by default
+        return false;
+    }
 }

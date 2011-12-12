@@ -16,10 +16,12 @@ import org.apache.commons.lang3.StringUtils;
 import android.util.Log;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class GCConnector extends AbstractConnector {
 
     private static GCConnector instance;
+    private static final Pattern gpxZipFilePattern = Pattern.compile("\\d{7,}(_.+)?\\.zip", Pattern.CASE_INSENSITIVE);
 
     private GCConnector() {
         // singleton
@@ -133,5 +135,10 @@ public class GCConnector extends AbstractConnector {
         app.addSearch(cacheList, reason);
 
         return search;
+    }
+
+    @Override
+    public boolean isZippedGPXFile(final String fileName) {
+        return gpxZipFilePattern.matcher(fileName).matches();
     }
 }

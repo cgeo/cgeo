@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.files.FileList;
 import cgeo.geocaching.files.GPXImporter;
 
@@ -12,12 +14,9 @@ import android.os.Environment;
 
 import java.io.File;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class cgeogpxes extends FileList<cgGPXListAdapter> {
     private static final String EXTRAS_LIST_ID = "list";
-
-    private static final Pattern gpxZipFilePattern = Pattern.compile("\\d{7,}(_.+)?\\.zip", Pattern.CASE_INSENSITIVE);
 
     public cgeogpxes() {
         super(new String[] { "gpx", "loc", "zip" });
@@ -63,7 +62,12 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
     protected boolean filenameBelongsToList(final String filename) {
         if (super.filenameBelongsToList(filename)) {
             if (StringUtils.endsWithIgnoreCase(filename, GPXImporter.ZIP_FILE_EXTENSION)) {
-                return gpxZipFilePattern.matcher(filename).matches();
+                for (IConnector connector : ConnectorFactory.getConnectors()) {
+                    if (connector.isZippedGPXFile(filename)) {
+                        return true;
+                    }
+                }
+                return false;
             }
             // filter out waypoint files
             return !StringUtils.endsWithIgnoreCase(filename, GPXImporter.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION);

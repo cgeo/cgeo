@@ -3,7 +3,7 @@ package cgeo.geocaching;
 import android.test.ActivityInstrumentationTestCase2;
 
 public class cgeogpxesTest extends ActivityInstrumentationTestCase2<cgeogpxes> {
-    private cgeogpxes importGpxActivity = new cgeogpxes();
+    private final cgeogpxes importGpxActivity = new cgeogpxes();
 
     public cgeogpxesTest() {
         super("cgeo.geocaching", cgeogpxes.class);
@@ -22,6 +22,8 @@ public class cgeogpxesTest extends ActivityInstrumentationTestCase2<cgeogpxes> {
         assertTrue(importGpxActivity.filenameBelongsToList("12345678_query.zip"));
         assertTrue(importGpxActivity.filenameBelongsToList("12345678_my_query_1.zip"));
         assertTrue(importGpxActivity.filenameBelongsToList("12345678_my query.zip"));
+        assertTrue(importGpxActivity.filenameBelongsToList("ocde12345.zip"));
+        assertTrue(importGpxActivity.filenameBelongsToList("ocde12345678.zip"));
 
         assertFalse(importGpxActivity.filenameBelongsToList("1234567.gpy"));
         assertFalse(importGpxActivity.filenameBelongsToList("1234567.agpx"));
@@ -34,6 +36,8 @@ public class cgeogpxesTest extends ActivityInstrumentationTestCase2<cgeogpxes> {
         assertFalse(importGpxActivity.filenameBelongsToList("123456.zip"));
         assertFalse(importGpxActivity.filenameBelongsToList("1234567query.zip"));
         assertFalse(importGpxActivity.filenameBelongsToList("1234567_.zip"));
+        assertFalse(importGpxActivity.filenameBelongsToList("ocde_12345678.zip"));
+        assertFalse(importGpxActivity.filenameBelongsToList("acde12345678.zip"));
 
         assertFalse(importGpxActivity.filenameBelongsToList("1234567-wpts.gpx"));
     }

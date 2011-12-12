@@ -84,4 +84,12 @@ public interface IConnector {
      * @return
      */
     public cgSearch searchByCoordinate(final Geopoint center);
+
+    /**
+     * return true if this is a ZIP file containing a GPX file
+     * 
+     * @param fileName
+     * @return
+     */
+    public boolean isZippedGPXFile(final String fileName);
 }
