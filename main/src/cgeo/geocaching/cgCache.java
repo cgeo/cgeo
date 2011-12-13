@@ -238,12 +238,14 @@ public class cgCache implements ICache {
         if (hidden == null) {
             return false;
         }
-        // is in future?
-        Date today = new Date();
-        today.setHours(0);
-        today.setMinutes(0);
-        today.setSeconds(0);
-        if (hidden.compareTo(today) < 0) {
+        // is not in the past?
+        final Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.set(Calendar.HOUR, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        if (hidden.compareTo(cal.getTime()) < 0) {
             return false;
         }
         return true;
