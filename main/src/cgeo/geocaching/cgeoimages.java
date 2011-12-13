@@ -210,7 +210,7 @@ public class cgeoimages extends AbstractActivity {
 
         final Intent intent = new Intent();
         intent.setAction(android.content.Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.fromFile(file), "image/jpg");
+        intent.setDataAndType(Uri.fromFile(file), "image/jpeg");
         startActivity(intent);
 
         if (file.exists()) {
