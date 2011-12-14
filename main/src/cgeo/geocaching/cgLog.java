@@ -1,10 +1,12 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.LogType;
+
 import java.util.List;
 
 public class cgLog {
     public int id = 0;
-    public int type = cgBase.LOG_NOTE; // note
+    public LogType type = LogType.LOG_NOTE; // note
     public String author = "";
     public String log = "";
     public long date = 0;
@@ -17,7 +19,7 @@ public class cgLog {
 
     @Override
     public int hashCode() {
-        return (int) date * type * author.hashCode() * log.hashCode();
+        return (int) date * type.hashCode() * author.hashCode() * log.hashCode();
     }
 
     @Override

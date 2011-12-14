@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 
 import org.apache.commons.lang3.StringUtils;
@@ -28,14 +29,14 @@ import java.util.List;
 
 public class cgeotouch extends cgLogForm {
     private cgTrackable trackable = null;
-    private List<Integer> types = new ArrayList<Integer>();
+    private List<LogType> logTypes = new ArrayList<LogType>();
     private ProgressDialog waitDialog = null;
     private String guid = null;
     private String geocode = null;
     private String[] viewstates = null;
     private boolean gettingViewstate = true;
     private Calendar date = Calendar.getInstance();
-    private int typeSelected = -1;
+    private LogType typeSelected = LogType.LOG_UNKNOWN;
     private int attempts = 0;
     private CheckBox tweetCheck = null;
     private LinearLayout tweetBox = null;
@@ -223,8 +224,8 @@ public class cgeotouch extends cgLogForm {
         final int viewId = view.getId();
 
         if (viewId == R.id.type) {
-            for (final int typeOne : types) {
-                menu.add(viewId, typeOne, 0, cgBase.logTypes2.get(typeOne));
+            for (final LogType typeOne : logTypes) {
+                menu.add(viewId, typeOne.id, 0, typeOne.getL10n());
             }
         }
     }
@@ -235,7 +236,7 @@ public class cgeotouch extends cgLogForm {
         final int id = item.getItemId();
 
         if (group == R.id.type) {
-            setType(id);
+            setType(LogType.getById(id));
 
             return true;
         }
@@ -248,20 +249,20 @@ public class cgeotouch extends cgLogForm {
             app.setAction("logging trackable");
         }
 
-        types.clear();
-        types.add(cgBase.LOG_RETRIEVED_IT);
-        types.add(cgBase.LOG_GRABBED_IT);
-        types.add(cgBase.LOG_NOTE);
-        types.add(cgBase.LOG_DISCOVERED_IT);
+        logTypes.clear();
+        logTypes.add(LogType.LOG_RETRIEVED_IT);
+        logTypes.add(LogType.LOG_GRABBED_IT);
+        logTypes.add(LogType.LOG_NOTE);
+        logTypes.add(LogType.LOG_DISCOVERED_IT);
 
-        if (typeSelected < 0 && cgBase.logTypes2.get(typeSelected) == null) {
-            typeSelected = types.get(2);
+        if (LogType.LOG_UNKNOWN == typeSelected) {
+            typeSelected = LogType.LOG_FOUND_IT;
         }
         setType(typeSelected);
 
         Button typeButton = (Button) findViewById(R.id.type);
         registerForContextMenu(typeButton);
-        typeButton.setText(cgBase.logTypes2.get(typeSelected));
+        typeButton.setText(typeSelected.getL10n());
         typeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 openContextMenu(view);
@@ -304,16 +305,11 @@ public class cgeotouch extends cgLogForm {
         dateButton.setText(cgBase.formatShortDate(date.getTime().getTime()));
     }
 
-    public void setType(int type) {
+    public void setType(LogType type) {
         final Button typeButton = (Button) findViewById(R.id.type);
 
-        if (cgBase.logTypes2.get(type) != null) {
-            typeSelected = type;
-        }
-        if (cgBase.logTypes2.get(typeSelected) == null) {
-            typeSelected = 0;
-        }
-        typeButton.setText(cgBase.logTypes2.get(typeSelected));
+        typeSelected = type;
+        typeButton.setText(typeSelected.getL10n());
 
         if (tweetBox == null) {
             tweetBox = (LinearLayout) findViewById(R.id.tweet_box);
@@ -383,15 +379,15 @@ public class cgeotouch extends cgLogForm {
 
                 viewstates = cgBase.getViewstates(page);
 
-                final List<Integer> typesPre = cgBase.parseTypes(page);
+                final List<LogType> typesPre = cgBase.parseTypes(page);
                 if (typesPre.size() > 0) {
-                    types.clear();
-                    types.addAll(typesPre);
+                    logTypes.clear();
+                    logTypes.addAll(typesPre);
                 }
                 typesPre.clear();
 
-                if (!types.contains(typeSelected)) {
-                    typeSelected = types.get(0);
+                if (!logTypes.contains(typeSelected)) {
+                    typeSelected = logTypes.get(0);
                     setType(typeSelected);
                     showToast(res.getString(R.string.info_log_type_changed));
                 }

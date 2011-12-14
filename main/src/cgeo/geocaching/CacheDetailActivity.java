@@ -7,6 +7,7 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.BaseUtils;
@@ -544,7 +545,7 @@ public class CacheDetailActivity extends AbstractActivity {
         }
 
         int logType = menuItem - MENU_LOG_VISIT_OFFLINE;
-        cache.logOffline(this, logType);
+        cache.logOffline(this, LogType.getById(logType));
         return true;
     }
 
@@ -2054,21 +2055,20 @@ public class CacheDetailActivity extends AbstractActivity {
                     text.append(": ");
 
                     // sort the log counts by type id ascending. that way the FOUND, DNF log types are the first and most visible ones
-                    List<Entry<Integer, Integer>> sortedLogCounts = new ArrayList<Entry<Integer, Integer>>();
-                    for (Entry<Integer, Integer> entry : cache.getLogCounts().entrySet()) {
+                    List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<Entry<LogType, Integer>>();
+                    for (Entry<LogType, Integer> entry : cache.getLogCounts().entrySet()) {
                         sortedLogCounts.add(entry); // don't add these entries using addAll(), the iterator in the EntrySet can go wrong (see Findbugs)
                     }
-                    Collections.sort(sortedLogCounts, new Comparator<Entry<Integer, Integer>>() {
+                    Collections.sort(sortedLogCounts, new Comparator<Entry<LogType, Integer>>() {
 
                         @Override
-                        public int compare(Entry<Integer, Integer> logCountItem1,
-                                Entry<Integer, Integer> logCountItem2) {
+                        public int compare(Entry<LogType, Integer> logCountItem1,
+                                Entry<LogType, Integer> logCountItem2) {
                             return logCountItem1.getKey().compareTo(logCountItem2.getKey());
                         }
                     });
-                    for (Entry<Integer, Integer> pair : sortedLogCounts) {
-                        int logTypeId = pair.getKey().intValue();
-                        String logTypeLabel = cgBase.logTypes1.get(logTypeId);
+                    for (Entry<LogType, Integer> pair : sortedLogCounts) {
+                        String logTypeLabel = pair.getKey().getL10n();
                         // it may happen that the label is unknown -> then avoid any output for this type
                         if (logTypeLabel != null) {
                             if (showLogCounter) {
@@ -2096,11 +2096,7 @@ public class CacheDetailActivity extends AbstractActivity {
                             ((TextView) rowView.findViewById(R.id.added)).setVisibility(View.GONE);
                         }
 
-                        if (cgBase.logTypes1.containsKey(log.type)) {
-                            ((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(log.type));
-                        } else {
-                            ((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(cgBase.LOG_NOTE)); // note if type is unknown
-                        }
+                        ((TextView) rowView.findViewById(R.id.type)).setText(log.type.getL10n());
                         ((TextView) rowView.findViewById(R.id.author)).setText(StringEscapeUtils.unescapeHtml4(log.author));
 
                         if (log.found == -1) {
@@ -2153,20 +2149,20 @@ public class CacheDetailActivity extends AbstractActivity {
 
                         // Add colored mark
                         final ImageView logMark = (ImageView) rowView.findViewById(R.id.log_mark);
-                        if (log.type == cgBase.LOG_FOUND_IT
-                                || log.type == cgBase.LOG_WEBCAM_PHOTO_TAKEN
-                                || log.type == cgBase.LOG_ATTENDED) {
+                        if (log.type == LogType.LOG_FOUND_IT
+                                || log.type == LogType.LOG_WEBCAM_PHOTO_TAKEN
+                                || log.type == LogType.LOG_ATTENDED) {
                             logMark.setImageResource(R.drawable.mark_green);
-                        } else if (log.type == cgBase.LOG_PUBLISH_LISTING
-                                || log.type == cgBase.LOG_ENABLE_LISTING
-                                || log.type == cgBase.LOG_OWNER_MAINTENANCE) {
+                        } else if (log.type == LogType.LOG_PUBLISH_LISTING
+                                || log.type == LogType.LOG_ENABLE_LISTING
+                                || log.type == LogType.LOG_OWNER_MAINTENANCE) {
                             logMark.setImageResource(R.drawable.mark_green_more);
-                        } else if (log.type == cgBase.LOG_DIDNT_FIND_IT
-                                || log.type == cgBase.LOG_NEEDS_MAINTENANCE
-                                || log.type == cgBase.LOG_NEEDS_ARCHIVE) {
+                        } else if (log.type == LogType.LOG_DIDNT_FIND_IT
+                                || log.type == LogType.LOG_NEEDS_MAINTENANCE
+                                || log.type == LogType.LOG_NEEDS_ARCHIVE) {
                             logMark.setImageResource(R.drawable.mark_red);
-                        } else if (log.type == cgBase.LOG_TEMP_DISABLE_LISTING
-                                || log.type == cgBase.LOG_ARCHIVE) {
+                        } else if (log.type == LogType.LOG_TEMP_DISABLE_LISTING
+                                || log.type == LogType.LOG_ARCHIVE) {
                             logMark.setImageResource(R.drawable.mark_red_more);
                         } else {
                             logMark.setVisibility(View.GONE);

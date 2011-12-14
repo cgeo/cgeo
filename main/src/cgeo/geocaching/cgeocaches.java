@@ -8,6 +8,7 @@ import cgeo.geocaching.apps.cachelist.CacheListAppFactory;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.filter.FilterBySize;
@@ -1268,7 +1269,7 @@ public class cgeocaches extends AbstractListActivity {
             }
 
             int logType = id - MENU_LOG_VISIT_OFFLINE;
-            cache.logOffline(this, logType);
+            cache.logOffline(this, LogType.getById(logType));
         }
         return true;
     }
@@ -2192,18 +2193,18 @@ public class cgeocaches extends AbstractListActivity {
             SimpleDateFormat fieldNoteDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
             StringBuffer fieldNoteBuffer = new StringBuffer(500);
 
-            // We need our own HashMap because cgBase.LogTypes1 will give us localized and maybe
+            // We need our own HashMap because LogType will give us localized and maybe
             // different strings than gc.com expects in the field note
             // We only need such logtypes that are possible to log via c:geo
-            Map<Integer, String> logTypes = new HashMap<Integer, String>();
-            logTypes.put(cgBase.LOG_FOUND_IT, "Found it");
-            logTypes.put(cgBase.LOG_DIDNT_FIND_IT, "Didn't find it");
-            logTypes.put(cgBase.LOG_NOTE, "Write Note");
-            logTypes.put(cgBase.LOG_NEEDS_ARCHIVE, "Needs archived");
-            logTypes.put(cgBase.LOG_NEEDS_MAINTENANCE, "Needs Maintenance");
-            logTypes.put(cgBase.LOG_WILL_ATTEND, "Will Attend");
-            logTypes.put(cgBase.LOG_ATTENDED, "Attended");
-            logTypes.put(cgBase.LOG_WEBCAM_PHOTO_TAKEN, "Webcam Photo Taken");
+            Map<LogType, String> logTypes = new HashMap<LogType, String>();
+            logTypes.put(LogType.LOG_FOUND_IT, "Found it");
+            logTypes.put(LogType.LOG_DIDNT_FIND_IT, "Didn't find it");
+            logTypes.put(LogType.LOG_NOTE, "Write Note");
+            logTypes.put(LogType.LOG_NEEDS_ARCHIVE, "Needs archived");
+            logTypes.put(LogType.LOG_NEEDS_MAINTENANCE, "Needs Maintenance");
+            logTypes.put(LogType.LOG_WILL_ATTEND, "Will Attend");
+            logTypes.put(LogType.LOG_ATTENDED, "Attended");
+            logTypes.put(LogType.LOG_WEBCAM_PHOTO_TAKEN, "Webcam Photo Taken");
 
             for (cgCache cache : cacheList) {
                 if (checked > 0 && !cache.isStatusChecked()) {

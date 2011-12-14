@@ -2,7 +2,6 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgLog;
 import cgeo.geocaching.cgTrackable;
@@ -11,6 +10,7 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -709,11 +709,7 @@ public abstract class GPXParser extends FileParser {
                 @Override
                 public void end(String body) {
                     final String logType = validate(body).toLowerCase();
-                    if (cgBase.logTypes0.containsKey(logType)) {
-                        log.type = cgBase.logTypes0.get(logType);
-                    } else {
-                        log.type = cgBase.LOG_NOTE;
-                    }
+                    log.type = LogType.getByType(logType);
                 }
             });
 
