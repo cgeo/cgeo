@@ -87,11 +87,9 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 import java.util.regex.Matcher;
 
 import javax.net.ssl.HostnameVerifier;
@@ -1286,9 +1284,13 @@ public class cgBase {
         sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
         cache.setLogs(loadLogsFromDetails(page, cache, false));
         if (Settings.isFriendLogsWanted()) {
-            Set<cgLog> logs = new HashSet<cgLog>(loadLogsFromDetails(page, cache, true));
-            logs.addAll(cache.getLogs());
-            cache.setLogs(new ArrayList<cgLog>(logs));
+            List<cgLog> allLogs = cache.getLogs();
+            List<cgLog> friendLogs = loadLogsFromDetails(page, cache, true);
+            for (cgLog log : allLogs) {
+                if (friendLogs.contains(log)) {
+                    log.friend = true;
+                }
+            }
         }
 
         if (Settings.isElevationWanted()) {
