@@ -576,7 +576,7 @@ public class cgBase {
 
         // total caches found
         try {
-            String result = BaseUtils.getMatch(page, GCConstants.PATTERN_SEARCH_TOTOALCOUNT, false, 1, null, true);
+            String result = BaseUtils.getMatch(page, GCConstants.PATTERN_SEARCH_TOTALCOUNT, false, 1, null, true);
             if (null != result) {
                 caches.totalCnt = Integer.parseInt(result);
             }
