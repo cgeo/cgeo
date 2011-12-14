@@ -214,7 +214,7 @@
   <string name="warn_load_images">Sorry, c:geo failed to load images.</string>
 
 
-  <string name="info_log_posted">c:geo successfully posted the log.</string>
+  <string name="info_log_posted">c:geo successfully submitted the log.</string>
   <string name="info_log_saved">c:geo successfully saved the log.</string>
   <string name="info_log_cleared">Log was cleared.</string>
   <string name="info_log_type_changed">Type of log has been changed!</string>
@@ -371,7 +371,7 @@
   <string name="init_openlastdetailspage">Open details with last used page</string>
   <string name="init_autoload">Auto-loading of long description</string>
   <string name="init_other">Other Options</string>
-  <string name="init_skin">Use light skin\n(needs restart of c:geo)</string>
+  <string name="init_skin">Use light skin\n(Restart needed)</string>
   <string name="init_address">Show address on Mainscreen</string>
   <string name="init_captcha">Show CAPTCHA if necessary</string>
   <string name="init_useenglish">Use English language for c:geo\n(Restart needed)</string>
@@ -381,13 +381,13 @@
   <string name="init_disabled">Exclude disabled caches</string>
   <string name="init_offline">Store static maps for offline use</string>
   <string name="init_save_log_img">Save Images from Logs</string>
-  <string name="init_units">Use miles/feet\n(Imperial Units)</string>
+  <string name="init_units">Use Imperial Units instead of Metric Units</string>
   <string name="init_nav">Use Google Navigation</string>
   <string name="init_log_offline">Enable Offline Logging\n(Don\'t show online Log screen when logging, don\'t send the Log online)</string>
   <string name="init_livelist">Show Direction to caches in the list</string>
   <string name="init_browser">Identify c:geo as an ordinary webbrowser</string>
   <string name="init_altitude">Altitude Correction</string>
-  <string name="init_altitude_description">If GPS is giving a wrong altitude to you, you can correct it with a positive or negative number. The correction always has to be given in meters.</string>
+  <string name="init_altitude_description">If your GPS is calculating a wrong altitude, you can correct it with a positive or negative number. The correction always has to be given in meters.</string>
   <string name="init_clear">Clear Login</string>
   <string name="init_cleared">c:geo cleared login information.</string>
   <string name="init_backup">Backup</string>
@@ -409,7 +409,7 @@
   <string name="init_mapsource_select">Select Map Source</string>
   <string name="init_select_mapfile">…</string>
   <string name="init_trackautovisit">Set trackables to \"Visited\" as a default</string>
-  <string name="init_sigautoinsert">Automatically insert Signature</string>
+  <string name="init_sigautoinsert">Insert signature automatically</string>
   <string name="init_loaddirectionimg">Load direction-image if necessary</string>
 
   <!-- map sources -->
@@ -430,7 +430,7 @@
 
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Your device name:</string>
-  <string name="init_sendToCgeo_description"><b>Send2cgeo</b> allows you to recieve caches directly from the geocaching site using a special plugin for Firefox or Chrome. Before registration please read <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. You only need to register if you want to use send2cgeo. c:geo will work normal even without registering your device.</string>
+  <string name="init_sendToCgeo_description"><b>Send2cgeo</b> allows you to receive caches directly from the geocaching site using a special plugin for Firefox or Chrome. Before registration please read <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. You only need to register if you want to use send2cgeo. c:geo will work normal even without registering your device.</string>
   <string name="init_sendToCgeo_register">Request Registration</string>
   <string name="init_sendToCgeo_registering">Registering your device for "Send to c:geo"…</string>
   <string name="init_sendToCgeo_register_ok">Registration successful. PIN code is ####. Use it on c:geo website to add this device to your browser.</string>
@@ -449,7 +449,7 @@
   <string name="auth_finish">Finish</string>
   <string name="auth_dialog_wait">Waiting for Twitter…</string>
   <string name="auth_dialog_pin_title">PIN code</string>
-  <string name="auth_dialog_pin_message">Please type in PIN code provided by the Twitter website. It\'s mandatory to complete the authorization.</string>
+  <string name="auth_dialog_pin_message">Please type in PIN code provided by the Twitter website. It is mandatory to complete the authorization.</string>
   <string name="auth_dialog_completed">c:geo is now authorized to post on Twitter.</string>
 
   <!-- cache -->
@@ -461,7 +461,7 @@
   <string name="cache_offline_drop">Drop</string>
   <string name="cache_offline_store">Store</string>
   <string name="cache_offline_stored">Stored in device</string>
-  <string name="cache_offline_not_ready">Not ready\nfor offline use</string>
+  <string name="cache_offline_not_ready">Not available offline</string>
   <string name="cache_offline_time_about">about</string>
   <string name="cache_offline_time_mins">minutes ago</string>
   <string name="cache_offline_time_mins_few">a few minutes ago</string>
@@ -472,7 +472,7 @@
   <string name="cache_attributes">Attributes</string>
   <string name="cache_attributes_no_icons">(refresh cache to show attribute icons)</string>
   <string name="cache_inventory">Inventory</string>
-  <string name="cache_log_offline">Offline log</string>
+  <string name="cache_log_offline">Offline oLg</string>
   <string name="cache_log_images_loading">Loading Log images …</string>
   <string name="cache_log_images_title">Log images</string>
   <string name="cache_log_image_default_title">Photo</string>
