@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.GCConnector;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.utils.CryptUtils;
@@ -90,7 +91,7 @@ public class cgCache implements ICache {
     private ArrayList<cgImage> spoilers = null;
     private List<cgLog> logs = null;
     private List<cgTrackable> inventory = null;
-    private Map<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
+    private Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
     private boolean logOffline = false;
     // temporary values
     private boolean statusChecked = false;
@@ -297,7 +298,7 @@ public class cgCache implements ICache {
         return true;
     }
 
-    public boolean logOffline(final IAbstractActivity fromActivity, final int logType) {
+    public boolean logOffline(final IAbstractActivity fromActivity, final LogType logType) {
         String log = "";
         if (StringUtils.isNotBlank(Settings.getSignature())
                 && Settings.isAutoInsertSignature()) {
@@ -307,8 +308,8 @@ public class cgCache implements ICache {
         return true;
     }
 
-    void logOffline(final IAbstractActivity fromActivity, final String log, Calendar date, final int logType) {
-        if (logType <= 0) {
+    void logOffline(final IAbstractActivity fromActivity, final String log, Calendar date, final LogType logType) {
+        if (logType == LogType.LOG_UNKNOWN) {
             return;
         }
         cgeoapplication app = (cgeoapplication) ((Activity) fromActivity).getApplication();
@@ -323,38 +324,38 @@ public class cgCache implements ICache {
         }
     }
 
-    public List<Integer> getPossibleLogTypes() {
+    public List<LogType> getPossibleLogTypes() {
         boolean isOwner = owner != null && owner.equalsIgnoreCase(Settings.getUsername());
-        List<Integer> types = new ArrayList<Integer>();
+        List<LogType> logTypes = new ArrayList<LogType>();
         if (isEventCache()) {
-            types.add(cgBase.LOG_WILL_ATTEND);
-            types.add(cgBase.LOG_NOTE);
-            types.add(cgBase.LOG_ATTENDED);
-            types.add(cgBase.LOG_NEEDS_ARCHIVE);
+            logTypes.add(LogType.LOG_WILL_ATTEND);
+            logTypes.add(LogType.LOG_NOTE);
+            logTypes.add(LogType.LOG_ATTENDED);
+            logTypes.add(LogType.LOG_NEEDS_ARCHIVE);
             if (isOwner) {
-                types.add(cgBase.LOG_ANNOUNCEMENT);
+                logTypes.add(LogType.LOG_ANNOUNCEMENT);
             }
         } else if (CacheType.WEBCAM == cacheType) {
-            types.add(cgBase.LOG_WEBCAM_PHOTO_TAKEN);
-            types.add(cgBase.LOG_DIDNT_FIND_IT);
-            types.add(cgBase.LOG_NOTE);
-            types.add(cgBase.LOG_NEEDS_ARCHIVE);
-            types.add(cgBase.LOG_NEEDS_MAINTENANCE);
+            logTypes.add(LogType.LOG_WEBCAM_PHOTO_TAKEN);
+            logTypes.add(LogType.LOG_DIDNT_FIND_IT);
+            logTypes.add(LogType.LOG_NOTE);
+            logTypes.add(LogType.LOG_NEEDS_ARCHIVE);
+            logTypes.add(LogType.LOG_NEEDS_MAINTENANCE);
         } else {
-            types.add(cgBase.LOG_FOUND_IT);
-            types.add(cgBase.LOG_DIDNT_FIND_IT);
-            types.add(cgBase.LOG_NOTE);
-            types.add(cgBase.LOG_NEEDS_ARCHIVE);
-            types.add(cgBase.LOG_NEEDS_MAINTENANCE);
+            logTypes.add(LogType.LOG_FOUND_IT);
+            logTypes.add(LogType.LOG_DIDNT_FIND_IT);
+            logTypes.add(LogType.LOG_NOTE);
+            logTypes.add(LogType.LOG_NEEDS_ARCHIVE);
+            logTypes.add(LogType.LOG_NEEDS_MAINTENANCE);
         }
         if (isOwner) {
-            types.add(cgBase.LOG_OWNER_MAINTENANCE);
-            types.add(cgBase.LOG_TEMP_DISABLE_LISTING);
-            types.add(cgBase.LOG_ENABLE_LISTING);
-            types.add(cgBase.LOG_ARCHIVE);
-            types.remove(Integer.valueOf(cgBase.LOG_UPDATE_COORDINATES));
+            logTypes.add(LogType.LOG_OWNER_MAINTENANCE);
+            logTypes.add(LogType.LOG_TEMP_DISABLE_LISTING);
+            logTypes.add(LogType.LOG_ENABLE_LISTING);
+            logTypes.add(LogType.LOG_ARCHIVE);
+            logTypes.remove(LogType.LOG_UPDATE_COORDINATES);
         }
-        return types;
+        return logTypes;
     }
 
     public void openInBrowser(Activity fromActivity) {
@@ -567,7 +568,7 @@ public class cgCache implements ICache {
     }
 
     @Override
-    public Map<Integer, Integer> getLogCounts() {
+    public Map<LogType, Integer> getLogCounts() {
         return logCounts;
     }
 
@@ -919,7 +920,7 @@ public class cgCache implements ICache {
         this.inventory = inventory;
     }
 
-    public void setLogCounts(Map<Integer, Integer> logCounts) {
+    public void setLogCounts(Map<LogType, Integer> logCounts) {
         this.logCounts = logCounts;
     }
 

@@ -3,6 +3,7 @@ package cgeo.geocaching.test.mock;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import java.text.ParseException;
@@ -118,17 +119,17 @@ public class GC1ZXX2 extends MockedCache {
 
 
     @Override
-    public Map<Integer, Integer> getLogCounts() {
-        Map<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
-        logCounts.put(cgBase.LOG_PUBLISH_LISTING, 1);
-        logCounts.put(cgBase.LOG_FOUND_IT, 369);
-        logCounts.put(cgBase.LOG_POST_REVIEWER_NOTE, 1);
-        logCounts.put(cgBase.LOG_DIDNT_FIND_IT, 7);
-        logCounts.put(cgBase.LOG_NOTE, 10);
-        logCounts.put(cgBase.LOG_ARCHIVE, 1);
-        logCounts.put(cgBase.LOG_ENABLE_LISTING, 2);
-        logCounts.put(cgBase.LOG_TEMP_DISABLE_LISTING, 3);
-        logCounts.put(cgBase.LOG_OWNER_MAINTENANCE, 7);
+    public Map<LogType, Integer> getLogCounts() {
+        Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
+        logCounts.put(LogType.LOG_PUBLISH_LISTING, 1);
+        logCounts.put(LogType.LOG_FOUND_IT, 369);
+        logCounts.put(LogType.LOG_POST_REVIEWER_NOTE, 1);
+        logCounts.put(LogType.LOG_DIDNT_FIND_IT, 7);
+        logCounts.put(LogType.LOG_NOTE, 10);
+        logCounts.put(LogType.LOG_ARCHIVE, 1);
+        logCounts.put(LogType.LOG_ENABLE_LISTING, 2);
+        logCounts.put(LogType.LOG_TEMP_DISABLE_LISTING, 3);
+        logCounts.put(LogType.LOG_OWNER_MAINTENANCE, 7);
         return logCounts;
     }
 

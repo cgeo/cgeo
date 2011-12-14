@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.GCConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -100,10 +101,6 @@ public class cgBase {
     private static final String passMatch = "(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+";
 
     public final static Map<WaypointType, String> waypointTypes = new HashMap<WaypointType, String>();
-    public final static Map<String, Integer> logTypes = new HashMap<String, Integer>();
-    public final static Map<String, Integer> logTypes0 = new HashMap<String, Integer>();
-    public final static Map<Integer, String> logTypes1 = new HashMap<Integer, String>();
-    public final static Map<Integer, String> logTypes2 = new HashMap<Integer, String>();
     public final static Map<String, SimpleDateFormat> gcCustomDateFormats;
     static {
         final String[] formats = new String[] {
@@ -140,77 +137,9 @@ public class cgBase {
 
     final private static Map<String, Integer> gcIcons = new HashMap<String, Integer>();
 
-    public static final int LOG_FOUND_IT = 2;
-    public static final int LOG_DIDNT_FIND_IT = 3;
-    public static final int LOG_NOTE = 4;
-    public static final int LOG_PUBLISH_LISTING = 1003; // unknown ID; used number doesn't match any GC.com's ID
-    public static final int LOG_ENABLE_LISTING = 23;
-    public static final int LOG_ARCHIVE = 5;
-    public static final int LOG_TEMP_DISABLE_LISTING = 22;
-    public static final int LOG_NEEDS_ARCHIVE = 7;
-    public static final int LOG_WILL_ATTEND = 9;
-    public static final int LOG_ATTENDED = 10;
-    public static final int LOG_RETRIEVED_IT = 13;
-    public static final int LOG_PLACED_IT = 14;
-    public static final int LOG_GRABBED_IT = 19;
-    public static final int LOG_NEEDS_MAINTENANCE = 45;
-    public static final int LOG_OWNER_MAINTENANCE = 46;
-    public static final int LOG_UPDATE_COORDINATES = 47;
-    public static final int LOG_DISCOVERED_IT = 48;
-    public static final int LOG_POST_REVIEWER_NOTE = 18;
-    public static final int LOG_VISIT = 1001; // unknown ID; used number doesn't match any GC.com's ID
-    public static final int LOG_WEBCAM_PHOTO_TAKEN = 11;
-    public static final int LOG_ANNOUNCEMENT = 74;
-
     private static final int NB_DOWNLOAD_RETRIES = 4;
 
     public static final int UPDATE_LOAD_PROGRESS_DETAIL = 42186;
-
-    static {
-        logTypes.put("icon_smile", LOG_FOUND_IT);
-        logTypes.put("icon_sad", LOG_DIDNT_FIND_IT);
-        logTypes.put("icon_note", LOG_NOTE);
-        logTypes.put("icon_greenlight", LOG_PUBLISH_LISTING);
-        logTypes.put("icon_enabled", LOG_ENABLE_LISTING);
-        logTypes.put("traffic_cone", LOG_ARCHIVE);
-        logTypes.put("icon_disabled", LOG_TEMP_DISABLE_LISTING);
-        logTypes.put("icon_remove", LOG_NEEDS_ARCHIVE);
-        logTypes.put("icon_rsvp", LOG_WILL_ATTEND);
-        logTypes.put("icon_attended", LOG_ATTENDED);
-        logTypes.put("picked_up", LOG_RETRIEVED_IT);
-        logTypes.put("dropped_off", LOG_PLACED_IT);
-        logTypes.put("transfer", LOG_GRABBED_IT);
-        logTypes.put("icon_needsmaint", LOG_NEEDS_MAINTENANCE);
-        logTypes.put("icon_maint", LOG_OWNER_MAINTENANCE);
-        logTypes.put("coord_update", LOG_UPDATE_COORDINATES);
-        logTypes.put("icon_discovered", LOG_DISCOVERED_IT);
-        logTypes.put("big_smile", LOG_POST_REVIEWER_NOTE);
-        logTypes.put("icon_visited", LOG_VISIT); // unknown ID; used number doesn't match any GC.com's ID
-        logTypes.put("icon_camera", LOG_WEBCAM_PHOTO_TAKEN); // unknown ID; used number doesn't match any GC.com's ID
-        logTypes.put("icon_announcement", LOG_ANNOUNCEMENT); // unknown ID; used number doesn't match any GC.com's ID
-
-        logTypes0.put("found it", LOG_FOUND_IT);
-        logTypes0.put("didn't find it", LOG_DIDNT_FIND_IT);
-        logTypes0.put("write note", LOG_NOTE);
-        logTypes0.put("publish listing", LOG_PUBLISH_LISTING);
-        logTypes0.put("enable listing", LOG_ENABLE_LISTING);
-        logTypes0.put("archive", LOG_ARCHIVE);
-        logTypes0.put("temporarily disable listing", LOG_TEMP_DISABLE_LISTING);
-        logTypes0.put("needs archived", LOG_NEEDS_ARCHIVE);
-        logTypes0.put("will attend", LOG_WILL_ATTEND);
-        logTypes0.put("attended", LOG_ATTENDED);
-        logTypes0.put("retrieved it", LOG_RETRIEVED_IT);
-        logTypes0.put("placed it", LOG_PLACED_IT);
-        logTypes0.put("grabbed it", LOG_GRABBED_IT);
-        logTypes0.put("needs maintenance", LOG_NEEDS_MAINTENANCE);
-        logTypes0.put("owner maintenance", LOG_OWNER_MAINTENANCE);
-        logTypes0.put("update coordinates", LOG_UPDATE_COORDINATES);
-        logTypes0.put("discovered it", LOG_DISCOVERED_IT);
-        logTypes0.put("post reviewer note", LOG_POST_REVIEWER_NOTE);
-        logTypes0.put("visit", LOG_VISIT); // unknown ID; used number doesn't match any GC.com's ID
-        logTypes0.put("webcam photo taken", LOG_WEBCAM_PHOTO_TAKEN); // unknown ID; used number doesn't match any GC.com's ID
-        logTypes0.put("announcement", LOG_ANNOUNCEMENT); // unknown ID; used number doesn't match any GC.com's ID
-    }
 
     private cgBase() {
         //initialize(app);
@@ -227,49 +156,6 @@ public class cgBase {
                 waypointTypes.put(wt, res.getString(wt.stringId));
             }
         }
-
-        // log types
-
-        logTypes1.put(LOG_FOUND_IT, res.getString(R.string.log_found));
-        logTypes1.put(LOG_DIDNT_FIND_IT, res.getString(R.string.log_dnf));
-        logTypes1.put(LOG_NOTE, res.getString(R.string.log_note));
-        logTypes1.put(LOG_PUBLISH_LISTING, res.getString(R.string.log_published));
-        logTypes1.put(LOG_ENABLE_LISTING, res.getString(R.string.log_enabled));
-        logTypes1.put(LOG_ARCHIVE, res.getString(R.string.log_archived));
-        logTypes1.put(LOG_TEMP_DISABLE_LISTING, res.getString(R.string.log_disabled));
-        logTypes1.put(LOG_NEEDS_ARCHIVE, res.getString(R.string.log_needs_archived));
-        logTypes1.put(LOG_WILL_ATTEND, res.getString(R.string.log_attend));
-        logTypes1.put(LOG_ATTENDED, res.getString(R.string.log_attended));
-        logTypes1.put(LOG_RETRIEVED_IT, res.getString(R.string.log_retrieved));
-        logTypes1.put(LOG_PLACED_IT, res.getString(R.string.log_placed));
-        logTypes1.put(LOG_GRABBED_IT, res.getString(R.string.log_grabbed));
-        logTypes1.put(LOG_NEEDS_MAINTENANCE, res.getString(R.string.log_maintenance_needed));
-        logTypes1.put(LOG_OWNER_MAINTENANCE, res.getString(R.string.log_maintained));
-        logTypes1.put(LOG_UPDATE_COORDINATES, res.getString(R.string.log_update));
-        logTypes1.put(LOG_DISCOVERED_IT, res.getString(R.string.log_discovered));
-        logTypes1.put(LOG_POST_REVIEWER_NOTE, res.getString(R.string.log_reviewed));
-        logTypes1.put(LOG_VISIT, res.getString(R.string.log_taken));
-        logTypes1.put(LOG_WEBCAM_PHOTO_TAKEN, res.getString(R.string.log_webcam));
-        logTypes1.put(LOG_ANNOUNCEMENT, res.getString(R.string.log_announcement));
-
-        logTypes2.put(LOG_FOUND_IT, res.getString(R.string.log_found)); // traditional, multi, mystery, earth, wherigo, virtual, letterbox
-        logTypes2.put(LOG_DIDNT_FIND_IT, res.getString(R.string.log_dnf)); // traditional, multi, mystery, earth, wherigo, virtual, letterbox, webcam
-        logTypes2.put(LOG_NOTE, res.getString(R.string.log_note)); // traditional, multi, mystery, earth, wherigo, virtual, event, letterbox, webcam, trackable
-        logTypes2.put(LOG_PUBLISH_LISTING, res.getString(R.string.log_published)); // X
-        logTypes2.put(LOG_ENABLE_LISTING, res.getString(R.string.log_enabled)); // owner
-        logTypes2.put(LOG_ARCHIVE, res.getString(R.string.log_archived)); // traditional, multi, mystery, earth, event, wherigo, virtual, letterbox, webcam
-        logTypes2.put(LOG_TEMP_DISABLE_LISTING, res.getString(R.string.log_disabled)); // owner
-        logTypes2.put(LOG_NEEDS_ARCHIVE, res.getString(R.string.log_needs_archived)); // traditional, multi, mystery, earth, event, wherigo, virtual, letterbox, webcam
-        logTypes2.put(LOG_WILL_ATTEND, res.getString(R.string.log_attend)); // event
-        logTypes2.put(LOG_ATTENDED, res.getString(R.string.log_attended)); // event
-        logTypes2.put(LOG_WEBCAM_PHOTO_TAKEN, res.getString(R.string.log_webcam)); // webcam
-        logTypes2.put(LOG_RETRIEVED_IT, res.getString(R.string.log_retrieved)); //trackable
-        logTypes2.put(LOG_GRABBED_IT, res.getString(R.string.log_grabbed)); //trackable
-        logTypes2.put(LOG_NEEDS_MAINTENANCE, res.getString(R.string.log_maintenance_needed)); // traditional, mystery, multi, wherigo, virtual, letterbox, webcam
-        logTypes2.put(LOG_OWNER_MAINTENANCE, res.getString(R.string.log_maintained)); // owner
-        logTypes2.put(LOG_DISCOVERED_IT, res.getString(R.string.log_discovered)); //trackable
-        logTypes2.put(LOG_POST_REVIEWER_NOTE, res.getString(R.string.log_reviewed)); // X
-        logTypes2.put(LOG_ANNOUNCEMENT, res.getString(R.string.log_announcement)); // X
 
         try {
             final PackageManager manager = app.getPackageManager();
@@ -1163,10 +1049,9 @@ public class cgBase {
                     String countStr = matcherLog.group(2).replaceAll("[.,]", "");
 
                     if (StringUtils.isNotBlank(typeStr)
-                            && logTypes.containsKey(typeStr.toLowerCase())
-                            && StringUtils.isNotBlank(countStr))
-                    {
-                        cache.getLogCounts().put(logTypes.get(typeStr.toLowerCase()), Integer.parseInt(countStr));
+                            && LogType.LOG_UNKNOWN != LogType.getByIconName(typeStr)
+                            && StringUtils.isNotBlank(countStr)) {
+                        cache.getLogCounts().put(LogType.getByIconName(typeStr), Integer.parseInt(countStr));
                     }
                 }
             }
@@ -1378,11 +1263,7 @@ public class cgBase {
                 // FIXME: use the "LogType" field instead of the "LogTypeImage" one.
                 final String logIconNameExt = entry.optString("LogTypeImage", ".gif");
                 final String logIconName = logIconNameExt.substring(0, logIconNameExt.length() - 4);
-                if (logTypes.containsKey(logIconName)) {
-                    logDone.type = logTypes.get(logIconName);
-                } else {
-                    logDone.type = logTypes.get("icon_note");
-                }
+                logDone.type = LogType.getByIconName(logIconName);
 
                 try {
                     logDone.date = parseGcCustomDate(entry.getString("Visited")).getTime();
@@ -1663,15 +1544,7 @@ public class cgBase {
             {
                 final cgLog logDone = new cgLog();
 
-                if (logTypes.containsKey(matcherLogs.group(1).toLowerCase()))
-                {
-                    logDone.type = logTypes.get(matcherLogs.group(1).toLowerCase().trim());
-                }
-                else
-                {
-                    logDone.type = logTypes.get("icon_note");
-                }
-
+                logDone.type = LogType.getByIconName(matcherLogs.group(1));
                 logDone.author = Html.fromHtml(matcherLogs.group(3)).toString().trim();
 
                 try
@@ -1702,12 +1575,12 @@ public class cgBase {
         return trackable;
     }
 
-    public static List<Integer> parseTypes(String page) {
+    public static List<LogType> parseTypes(String page) {
         if (StringUtils.isEmpty(page)) {
             return null;
         }
 
-        final List<Integer> types = new ArrayList<Integer>();
+        final List<LogType> types = new ArrayList<LogType>();
 
         final Matcher typeBoxMatcher = GCConstants.PATTERN_TYPEBOX.matcher(page);
         String typesText = null;
@@ -1725,7 +1598,7 @@ public class cgBase {
                     final int type = Integer.parseInt(typeMatcher.group(2));
 
                     if (type > 0) {
-                        types.add(type);
+                        types.add(LogType.getById(type));
                     }
                 }
             }
@@ -2123,15 +1996,10 @@ public class cgBase {
     }
 
     public static StatusCode postLog(final cgeoapplication app, final String geocode, final String cacheid, final String[] viewstates,
-            final int logType, final int year, final int month, final int day,
+            final LogType logType, final int year, final int month, final int day,
             final String log, final List<cgTrackableLog> trackables) {
         if (isEmpty(viewstates)) {
             Log.e(Settings.tag, "cgeoBase.postLog: No viewstate given");
-            return StatusCode.LOG_POST_ERROR;
-        }
-
-        if (!logTypes2.containsKey(logType)) {
-            Log.e(Settings.tag, "cgeoBase.postLog: Unknown logtype");
             return StatusCode.LOG_POST_ERROR;
         }
 
@@ -2168,7 +2036,7 @@ public class cgBase {
                 "__EVENTTARGET", "",
                 "__EVENTARGUMENT", "",
                 "__LASTFOCUS", "",
-                "ctl00$ContentBody$LogBookPanel1$ddLogType", Integer.toString(logType),
+                "ctl00$ContentBody$LogBookPanel1$ddLogType", Integer.toString(logType.id),
                 "ctl00$ContentBody$LogBookPanel1$DateTimeLogged", String.format("%02d", month) + "/" + String.format("%02d", day) + "/" + String.format("%04d", year),
                 "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Month", Integer.toString(month),
                 "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day", Integer.toString(day),
@@ -2281,14 +2149,9 @@ public class cgBase {
     }
 
     public static StatusCode postLogTrackable(final String tbid, final String trackingCode, final String[] viewstates,
-            final int logType, final int year, final int month, final int day, final String log) {
+            final LogType logType, final int year, final int month, final int day, final String log) {
         if (isEmpty(viewstates)) {
             Log.e(Settings.tag, "cgeoBase.postLogTrackable: No viewstate given");
-            return StatusCode.LOG_POST_ERROR;
-        }
-
-        if (!logTypes2.containsKey(logType)) {
-            Log.e(Settings.tag, "cgeoBase.postLogTrackable: Unknown logtype");
             return StatusCode.LOG_POST_ERROR;
         }
 
@@ -2306,7 +2169,7 @@ public class cgBase {
                 "__EVENTTARGET", "",
                 "__EVENTARGUMENT", "",
                 "__LASTFOCUS", "",
-                "ctl00$ContentBody$LogBookPanel1$ddLogType", Integer.toString(logType),
+                "ctl00$ContentBody$LogBookPanel1$ddLogType", Integer.toString(logType.id),
                 "ctl00$ContentBody$LogBookPanel1$tbCode", trackingCode);
         putViewstates(params, viewstates);
         if (currentDate.get(Calendar.YEAR) == year && (currentDate.get(Calendar.MONTH) + 1) == month && currentDate.get(Calendar.DATE) == day) {
@@ -2809,8 +2672,8 @@ public class cgBase {
             }
 
             // store images from logs
-            if (Settings.isStoreLogImages() && cache.getLogs() != null) {
-                for (cgLog log : cache.getLogs()) {
+            if (Settings.isStoreLogImages() && cache.getLogs(true) != null) {
+                for (cgLog log : cache.getLogs(true)) {
                     if (CollectionUtils.isNotEmpty(log.logImages)) {
                         for (cgImage oneLogImg : log.logImages) {
                             imgGetter.getDrawable(oneLogImg.getUrl());

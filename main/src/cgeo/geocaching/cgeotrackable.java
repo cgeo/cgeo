@@ -446,11 +446,7 @@ public class cgeotrackable extends AbstractActivity {
                     ((TextView) rowView.findViewById(R.id.added)).setText(cgBase.formatShortDate(log.date));
                 }
 
-                if (cgBase.logTypes1.containsKey(log.type)) {
-                    ((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(log.type));
-                } else {
-                    ((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(4)); // note if type is unknown
-                }
+                ((TextView) rowView.findViewById(R.id.type)).setText(log.type.getL10n());
                 ((TextView) rowView.findViewById(R.id.author)).setText(Html.fromHtml(log.author), TextView.BufferType.SPANNABLE);
 
                 if (StringUtils.isBlank(log.cacheName)) {

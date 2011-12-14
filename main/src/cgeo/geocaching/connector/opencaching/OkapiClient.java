@@ -10,6 +10,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser;
@@ -138,8 +139,8 @@ final public class OkapiClient {
             final JSONObject owner = response.getJSONObject(CACHE_OWNER);
             cache.setOwner(parseUser(owner));
 
-            cache.getLogCounts().put(cgBase.LOG_FOUND_IT, response.getInt(CACHE_FOUNDS));
-            cache.getLogCounts().put(cgBase.LOG_DIDNT_FIND_IT, response.getInt(CACHE_NOTFOUNDS));
+            cache.getLogCounts().put(LogType.LOG_FOUND_IT, response.getInt(CACHE_FOUNDS));
+            cache.getLogCounts().put(LogType.LOG_DIDNT_FIND_IT, response.getInt(CACHE_NOTFOUNDS));
             cache.setSize(getCacheSize(response));
             cache.setDifficulty((float) response.getDouble(CACHE_DIFFICULTY));
             cache.setTerrain((float) response.getDouble(CACHE_TERRAIN));
@@ -219,14 +220,14 @@ final public class OkapiClient {
         return result;
     }
 
-    private static int parseLogType(String logType) {
+    private static LogType parseLogType(String logType) {
         if ("Found it".equalsIgnoreCase(logType)) {
-            return cgBase.LOG_FOUND_IT;
+            return LogType.LOG_FOUND_IT;
         }
         else if ("Didn't find it".equalsIgnoreCase(logType)) {
-            return cgBase.LOG_DIDNT_FIND_IT;
+            return LogType.LOG_DIDNT_FIND_IT;
         }
-        return cgBase.LOG_NOTE;
+        return LogType.LOG_NOTE;
     }
 
     private static Date parseDate(final String date) {
