@@ -472,7 +472,7 @@
   <string name="cache_attributes">Attributes</string>
   <string name="cache_attributes_no_icons">(refresh cache to show attribute icons)</string>
   <string name="cache_inventory">Inventory</string>
-  <string name="cache_log_offline">Offline oLg</string>
+  <string name="cache_log_offline">Offline Log</string>
   <string name="cache_log_images_loading">Loading Log images …</string>
   <string name="cache_log_images_title">Log images</string>
   <string name="cache_log_image_default_title">Photo</string>
