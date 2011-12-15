@@ -979,7 +979,9 @@ public class cgBase {
                 final Matcher matcherSpoilersInside = GCConstants.PATTERN_SPOILERSINSIDE.matcher(spoilers);
 
                 while (matcherSpoilersInside.find()) {
-                    String url = matcherSpoilersInside.group(1);
+                    // the original spoiler URL (include .../display/... contains a low-resolution image
+                    // if we shorten the URL we get the original-resolution image
+                    String url = matcherSpoilersInside.group(1).replace("/display", "");
 
                     String title = null;
                     if (matcherSpoilersInside.group(2) != null) {
