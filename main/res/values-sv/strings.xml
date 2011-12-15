@@ -367,6 +367,8 @@
   <string name="init_details">Cacheinformation</string>
   <string name="init_ratingwanted">Ladda cache betyg från GCvote.com</string>
   <string name="init_elevationwanted">Ladda höjddata för cacher</string>
+  <string name="init_friendlogswanted">Ladda extra sida med loggbok för dina vänner</string>
+  <string name="init_openlastdetailspage">Visa senaste använda delsidan när detaljer öppnas</string>
   <string name="init_autoload">Ladda full beskrivning automatiskt</string>
   <string name="init_other">Övriga inställningar</string>
   <string name="init_skin">Vitt skal (kräver omstart av c:geo)</string>
@@ -478,6 +480,7 @@
   <string name="cache_waypoints_add">Lägg till punkt</string>
   <string name="cache_hint">Tips</string>
   <string name="cache_logs">Loggbok</string>
+  <string name="cache_logsfriends">Loggbok (Vänner)</string>
   <string name="cache_dialog_loading_details">Laddar detaljer om cachen…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Hämtar från gc.com</string>
   <string name="cache_dialog_loading_details_status_details">Analyserar cacheinformation</string>
@@ -532,6 +535,7 @@
   <string name="cache_difficulty">Svårighet</string>
   <string name="cache_terrain">Terräng</string>
   <string name="cache_rating">Betyg</string>
+  <string name="cache_own_rating">Eget betyg</string>
   <string name="cache_rating_of">av</string>
   <string name="cache_favourite">Favorit</string>
   <string name="cache_owner">Ägare</string>
