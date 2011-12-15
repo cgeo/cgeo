@@ -1959,16 +1959,45 @@ public class CacheDetailActivity extends AbstractActivity {
         }
 
         private class LoadLongDescriptionTask extends AsyncTask<Void, Void, Void> {
+
             private Spanned longDesc;
 
-            @Override
-            protected Void doInBackground(Void... params) {
-                longDesc = Html.fromHtml(cache.getDescription().trim(), new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), true, cache.getReason(), false), new UnknownTagsHandler());
-                return null;
+            private class HtmlImageCounter implements Html.ImageGetter {
+
+                private int imageCount = 0;
+
+                @Override
+                public Drawable getDrawable(String url) {
+                    imageCount++;
+                    return null;
+                }
+
+                public int getImageCount() {
+                    return imageCount;
+                }
             }
 
             @Override
-            protected void onPostExecute(Void param) {
+            protected Void doInBackground(Void... params) {
+                // Fast preview: parse only HTML without loading any images
+                HtmlImageCounter imageCounter = new HtmlImageCounter();
+                longDesc = Html.fromHtml(cache.getDescription().trim(), imageCounter, new UnknownTagsHandler());
+                publishProgress(params);
+                if (imageCounter.getImageCount() > 0) {
+                    // Complete view: parse again with loading images - if necessary ! If there are any images causing problems the user can see at least the preview
+                    longDesc = Html.fromHtml(cache.getDescription().trim(), new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), true, cache.getReason(), false), new UnknownTagsHandler());
+                    publishProgress(params);
+                }
+                return null;
+            }
+
+            /*
+             * (non-Javadoc)
+             *
+             * @see android.os.AsyncTask#onProgressUpdate(Progress[])
+             */
+            @Override
+            protected void onProgressUpdate(Void... values) {
                 if (longDesc != null) {
                     TextView descView = (TextView) view.findViewById(R.id.longdesc);
                     if (StringUtils.isNotBlank(cache.getDescription())) {
