@@ -1169,11 +1169,14 @@ public class cgBase {
         sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
         cache.setLogs(loadLogsFromDetails(page, cache, false));
         if (Settings.isFriendLogsWanted()) {
+            int position = 0;
             List<cgLog> allLogs = cache.getLogs();
             List<cgLog> friendLogs = loadLogsFromDetails(page, cache, true);
-            for (cgLog log : allLogs) {
-                if (friendLogs.contains(log)) {
-                    log.friend = true;
+            for (cgLog log : friendLogs) {
+                if (allLogs.contains(log)) {
+                    allLogs.get(allLogs.indexOf(log)).friend = true;
+                } else {
+                    allLogs.add(position++, log);
                 }
             }
         }
