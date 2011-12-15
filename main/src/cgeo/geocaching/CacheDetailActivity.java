@@ -1092,7 +1092,7 @@ public class CacheDetailActivity extends AbstractActivity {
             ViewParent child = attributeBox;
             do {
                 if (child instanceof View) {
-                    attributeBoxMaxWidth -= ((View) child).getPaddingLeft() - ((View) child).getPaddingRight();
+                    attributeBoxMaxWidth -= ((View) child).getPaddingLeft() + ((View) child).getPaddingRight();
                 }
                 child = child.getParent();
             } while (child != null);
