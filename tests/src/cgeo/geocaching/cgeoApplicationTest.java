@@ -10,6 +10,8 @@ import android.test.suitebuilder.annotation.SmallTest;
 
 import java.util.Date;
 
+import junit.framework.Assert;
+
 /**
  * The c:geo application test. It can be used for tests that require an
  * application and/or context.
@@ -80,11 +82,12 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
      * Test {@link cgBase#searchByGeocode(String, String, int, boolean, CancellableHandler)}
      */
     @MediumTest
-    public static void testSearchByGeocode() {
-        final cgSearch search = cgBase.searchByGeocode("GC1RMM2", null, 0, true, null);
+    public static cgCache testSearchByGeocode(final String geocode) {
+        final cgSearch search = cgBase.searchByGeocode(geocode, null, 0, true, null);
         assertNotNull(search);
         assertEquals(1, search.getGeocodes().size());
-        assertTrue(search.getGeocodes().contains("GC1RMM2"));
+        assertTrue(search.getGeocodes().contains(geocode));
+        return cgeoapplication.getInstance().getCacheByGeocode(geocode);
     }
 
     /**
@@ -127,6 +130,14 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
         assertNotNull(search);
         assertEquals(3, search.totalCnt);
         assertTrue(search.getGeocodes().contains("GCP0A9"));
+    }
+
+    /**
+     * Caches that are good test cases
+     */
+    public static void testSpecialties() {
+        cgCache GCV2R9 = cgeoApplicationTest.testSearchByGeocode("GCV2R9");
+        Assert.assertEquals("California, United States", GCV2R9.getLocation());
     }
 
 }

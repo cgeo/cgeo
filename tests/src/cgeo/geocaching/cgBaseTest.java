@@ -74,11 +74,4 @@ public class cgBaseTest extends AndroidTestCase {
         }
     }
 
-    public static void testParseLocationWithLink() {
-        cgCacheWrap caches = cgBase.parseCacheFromText(MockedCache.readCachePage("GCV2R9"), 0, null);
-        assertEquals(1, caches.cacheList.size());
-        cgCache cache = caches.cacheList.get(0);
-        Assert.assertEquals("California, United States", cache.getLocation());
-    }
-
 }
