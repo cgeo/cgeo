@@ -650,6 +650,27 @@
 							android:textColor="?text_color"
 							android:text="@string/init_browser" />
 				</LinearLayout>
+				<LinearLayout
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal" >
+					<CheckBox android:id="@+id/trail"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_alignParentLeft="true"
+							android:layout_gravity="left"
+							android:padding="1px"
+							android:gravity="center" />
+					<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="center_vertical"
+							android:gravity="left"
+							android:paddingRight="3dip"
+							android:textSize="14dip"
+							android:textColor="?text_color"
+							android:text="@string/init_maptrail" />
+				</LinearLayout>
 			</LinearLayout>
 <!-- ** -->
 			<RelativeLayout style="@style/separator_horizontal_layout" >
@@ -677,32 +698,6 @@
 					android:textColorLink="?text_color_link"
 					android:linksClickable="true"
 					android:text="@string/init_showwaypoint_description" />
-<!-- ** -->
-			<RelativeLayout style="@style/separator_horizontal_layout" >
-				<View style="@style/separator_horizontal" />
-				<TextView style="@style/separator_horizontal_headline"
-						android:text="@string/init_altitude" />
-			</RelativeLayout>
-			<EditText style="@style/edittext"
-					android:id="@+id/altitude"
-					android:singleLine="true"
-					android:lines="1"
-					android:scrollHorizontally="true"
-                    android:inputType="numberSigned" />
-			<TextView
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginLeft="10dip"
-					android:layout_marginRight="10dip"
-					android:layout_marginBottom="5dip"
-					android:layout_alignParentLeft="true"
-					android:layout_gravity="left"
-					android:padding="3dip"
-					android:textSize="14dip"
-					android:textColor="?text_color"
-					android:textColorLink="?text_color_link"
-					android:linksClickable="true"
-					android:text="@string/init_altitude_description" />
 <!-- ** -->
 			<RelativeLayout style="@style/separator_horizontal_layout" >
 				<View style="@style/separator_horizontal" />
@@ -742,6 +737,32 @@
 						android:lines="1"
 						android:scrollHorizontally="true" />
 			</LinearLayout>
+<!-- ** -->
+			<RelativeLayout style="@style/separator_horizontal_layout" >
+				<View style="@style/separator_horizontal" />
+				<TextView style="@style/separator_horizontal_headline"
+						android:text="@string/init_altitude" />
+			</RelativeLayout>
+			<EditText style="@style/edittext"
+					android:id="@+id/altitude"
+					android:singleLine="true"
+					android:lines="1"
+					android:scrollHorizontally="true"
+                    android:inputType="numberSigned" />
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="10dip"
+					android:layout_marginRight="10dip"
+					android:layout_marginBottom="5dip"
+					android:layout_alignParentLeft="true"
+					android:layout_gravity="left"
+					android:padding="3dip"
+					android:textSize="14dip"
+					android:textColor="?text_color"
+					android:textColorLink="?text_color_link"
+					android:linksClickable="true"
+					android:text="@string/init_altitude_description" />
 <!-- ** -->
 			<RelativeLayout style="@style/separator_horizontal_layout" >
 				<View style="@style/separator_horizontal" />

@@ -407,6 +407,7 @@
   <string name="init_mapsources_description">Hier kannst du die Quelle für deine Karte wählen. Alternativ zu Google Maps stehen verschiedene OpenStreetMap-Stile zur Verfügung und daneben auch Karten-Dateien für die Offline-Nutzung (siehe http://code.google.com/p/mapsforge/ für die Details).</string>
   <string name="init_mapsource_select">Wähle eine Kartenquelle</string>
   <string name="init_select_mapfile">…</string>
+  <string name="init_maptrail">Zeige Spur auf Karte</string>
   <string name="init_trackautovisit">Trackables automatisch auf \"besuchen\" setzen</string>
   <string name="init_sigautoinsert">Signatur automatisch einfügen</string>
   <string name="init_loaddirectionimg">Richtungs-Grafik laden wenn nötig</string>

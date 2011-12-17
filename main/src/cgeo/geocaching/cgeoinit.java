@@ -560,6 +560,16 @@ public class cgeoinit extends AbstractActivity {
             }
         });
 
+        final CheckBox trailButton = (CheckBox) findViewById(R.id.trail);
+        trailButton.setChecked(Settings.isMapTrail());
+        trailButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Settings.setMapTrail(trailButton.isChecked());
+            }
+        });
+
         refreshBackupLabel();
 
     }
