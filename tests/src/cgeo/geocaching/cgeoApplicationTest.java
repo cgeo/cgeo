@@ -2,6 +2,8 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.test.RegExPerformanceTest;
+import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.CancellableHandler;
 
 import android.test.ApplicationTestCase;
@@ -133,9 +135,19 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
     }
 
     /**
+     * Test cache parsing. Esp. useful after a GC.com update
+     */
+    public static void testCacheBasics() {
+        for (MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
+            cgCache parsedCache = cgeoApplicationTest.testSearchByGeocode(mockedCache.getGeocode());
+            cgBaseTest.testCompareCaches(mockedCache, parsedCache);
+        }
+    }
+
+    /**
      * Caches that are good test cases
      */
-    public static void testSpecialties() {
+    public static void testCacheSpecialties() {
         cgCache GCV2R9 = cgeoApplicationTest.testSearchByGeocode("GCV2R9");
         Assert.assertEquals("California, United States", GCV2R9.getLocation());
     }

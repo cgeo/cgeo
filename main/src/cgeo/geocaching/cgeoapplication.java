@@ -327,7 +327,7 @@ public class cgeoapplication extends Application {
             return null;
         }
 
-        return getCacheByGeocode(geocode, cgCache.LOADWAYPOINTS);
+        return getCacheByGeocode(geocode, cgCache.LOADALL);
     }
 
     public cgCache getCacheByGeocode(final String geocode, final int loadFlags) {
