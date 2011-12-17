@@ -319,7 +319,7 @@ public abstract class GPXParser extends FileParser {
                         if (cacheForWaypoint.getWaypoints() == null) {
                             cacheForWaypoint.setWaypoints(new ArrayList<cgWaypoint>());
                         }
-                        cgWaypoint.mergeWayPoints(cacheForWaypoint.getWaypoints(), Collections.singletonList(waypoint));
+                        cgWaypoint.mergeWayPoints(cacheForWaypoint.getWaypoints(), Collections.singletonList(waypoint), true);
                         result.put(cacheGeocodeForWaypoint, cacheForWaypoint);
                         showProgressMessage(progressHandler, progressStream.getProgress());
                     }

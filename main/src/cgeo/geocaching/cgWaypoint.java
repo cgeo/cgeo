@@ -71,7 +71,7 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
     }
 
     public static void mergeWayPoints(List<cgWaypoint> newPoints,
-            List<cgWaypoint> oldPoints) {
+            List<cgWaypoint> oldPoints, boolean forceMerge) {
         // copy user modified details of the waypoints
         if (newPoints != null && oldPoints != null) {
             for (cgWaypoint old : oldPoints) {
@@ -89,7 +89,7 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
                         }
                     }
                     // user added waypoints should also be in the new list
-                    if (!merged && old.isUserDefined()) {
+                    if (!merged && (old.isUserDefined() || forceMerge)) {
                         newPoints.add(old);
                     }
                 }
