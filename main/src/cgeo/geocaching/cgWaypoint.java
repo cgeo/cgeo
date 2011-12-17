@@ -75,21 +75,23 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
         // copy user modified details of the waypoints
         if (newPoints != null && oldPoints != null) {
             for (cgWaypoint old : oldPoints) {
-                boolean merged = false;
-                if (old != null && old.getName() != null && old.getName().length() > 0) {
-                    for (cgWaypoint waypoint : newPoints) {
-                        if (waypoint != null && waypoint.getName() != null) {
-                            if (old.getName().equalsIgnoreCase(waypoint.getName())) {
-                                waypoint.merge(old);
-                                merged = true;
-                                break;
+                if (old != null) {
+                    boolean merged = false;
+                    if (old.getName() != null && old.getName().length() > 0) {
+                        for (cgWaypoint waypoint : newPoints) {
+                            if (waypoint != null && waypoint.getName() != null) {
+                                if (old.getName().equalsIgnoreCase(waypoint.getName())) {
+                                    waypoint.merge(old);
+                                    merged = true;
+                                    break;
+                                }
                             }
                         }
                     }
-                }
-                // user added waypoints should also be in the new list
-                if (!merged) {
-                    newPoints.add(old);
+                    // user added waypoints should also be in the new list
+                    if (!merged && old.isUserDefined()) {
+                        newPoints.add(old);
+                    }
                 }
             }
         }
