@@ -73,7 +73,6 @@
   <string name="log_needs_archived">Needs Archived</string>
   <string name="log_discovered">Discovered</string>
   <string name="log_reviewed">Reviewer Note</string>
-  <string name="log_taken">Visit</string>
   <string name="log_tb_nothing">Do Nothing</string>
   <string name="log_tb_visit">Visited</string>
   <string name="log_tb_drop">Dropped Off</string>

@@ -19,7 +19,7 @@ public enum LogType {
     LOG_FOUND_IT(2,"icon_smile","found it",R.string.log_found),
     LOG_DIDNT_FIND_IT(3, "icon_sad", "didn't find it", R.string.log_dnf),
     LOG_NOTE(4,"icon_note","write note",R.string.log_note),
-    LOG_PUBLISH_LISTING(1003,"icon_greenlight","publish listing",R.string.log_published), // unknown ID), used number doesn't match any GC.com's ID
+    LOG_PUBLISH_LISTING(1003, "icon_greenlight", "publish listing", R.string.log_published),
     LOG_ENABLE_LISTING(23,"icon_enabled","enable listing",R.string.log_enabled),
     LOG_ARCHIVE(5,"traffic_cone","archive",R.string.log_archived),
     LOG_TEMP_DISABLE_LISTING(22,"icon_disabled","temporarily disable listing",R.string.log_disabled),
@@ -34,9 +34,9 @@ public enum LogType {
     LOG_UPDATE_COORDINATES(47,"coord_update","update coordinates",R.string.log_update),
     LOG_DISCOVERED_IT(48,"icon_discovered","discovered it",R.string.log_discovered),
     LOG_POST_REVIEWER_NOTE(18,"big_smile","post reviewer note",R.string.log_reviewed),
-    LOG_VISIT(1001,"icon_visited","visit",R.string.log_reviewed), // unknown ID), used number doesn't match any GC.com's ID
-    LOG_WEBCAM_PHOTO_TAKEN(11,"icon_camera","webcam photo taken",R.string.log_webcam), // unknown ID; used number doesn't match any GC.com's ID
-    LOG_ANNOUNCEMENT(74, "icon_announcement", "announcement", R.string.log_announcement), // unknown ID; used number doesn't match any GC.com's ID
+    LOG_VISIT(1001, "icon_visited", "visit", R.string.log_tb_visit),
+    LOG_WEBCAM_PHOTO_TAKEN(11, "icon_camera", "webcam photo taken", R.string.log_webcam),
+    LOG_ANNOUNCEMENT(74, "icon_announcement", "announcement", R.string.log_announcement),
     LOG_UNKNOWN(0, "unknown", "", R.string.err_unknown); // LogType not init. yet
 
     public final int id;

@@ -73,9 +73,8 @@
   <string name="log_needs_archived">Sollte archiviert werden</string>
   <string name="log_discovered">Gesehen</string>
   <string name="log_reviewed">Überprüft</string>
-  <string name="log_taken">Cache besucht</string>
   <string name="log_tb_nothing">Keine Aktion</string>
-  <string name="log_tb_visit">Besuchen</string>
+  <string name="log_tb_visit">Besucht</string>
   <string name="log_tb_drop">Ablegen</string>
   <string name="log_tb_changeall">Alle ändern</string>
   <string name="log_save">Speichern</string>
