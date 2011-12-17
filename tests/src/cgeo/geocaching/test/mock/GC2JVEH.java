@@ -74,7 +74,7 @@ public class GC2JVEH extends MockedCache {
 
     @Override
     public String getShortDescription() {
-        return "Aufgabe zum Start: Finde die Schattenlinie. !!!Die Skizze mit den Zahlen solltest du mitnehmen!!! Du solltest den cache so beginnen, das du station 2 in der Zeit von mo- fr von 11-19 Uhr und sa von11-16 Uhr erledigt hast.";
+        return "Aufgabe zum Start: Finde die Schattenlinie. !!!Die Skizze mit den Zahlen solltest du mitnehmen!!! Du solltest den cache so beginnen, das du station 2 in der Zeit von mo- fr von 11-19 Uhr und sa von 11-16 Uhr erledigt hast. Achtung: Damit ihr die Zahlenpause in druckbarer Größe sehen könnt müsst ihr über die Bildergalerie gehen nicht über den unten zu sehenden link.....";
     }
 
     @Override
@@ -114,7 +114,7 @@ public class GC2JVEH extends MockedCache {
     @Override
     public Map<LogType, Integer> getLogCounts() {
         final Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
-        logCounts.put(LogType.LOG_FOUND_IT, 64);
+        logCounts.put(LogType.LOG_FOUND_IT, 66);
         logCounts.put(LogType.LOG_NOTE, 7);
         logCounts.put(LogType.LOG_TEMP_DISABLE_LISTING, 1);
         logCounts.put(LogType.LOG_ENABLE_LISTING, 1);
@@ -124,7 +124,7 @@ public class GC2JVEH extends MockedCache {
 
     @Override
     public int getFavoritePoints() {
-        return 22;
+        return 23;
     }
 
     @Override

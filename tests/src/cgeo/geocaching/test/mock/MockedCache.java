@@ -8,11 +8,12 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.utils.BaseUtils;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class MockedCache implements ICache {
@@ -22,6 +23,7 @@ public abstract class MockedCache implements ICache {
 
     protected MockedCache(final Geopoint coords) {
         this.coords = coords;
+        this.data = getData();
     }
 
     protected String getUserLoggedIn() {
@@ -34,7 +36,9 @@ public abstract class MockedCache implements ICache {
      * into a browser and saving the file
      */
     public String getData() {
-        data = MockedCache.readCachePage(getGeocode());
+        if (StringUtils.isEmpty(data)) {
+            data = MockedCache.readCachePage(getGeocode());
+        }
         return data;
     }
 
@@ -125,7 +129,7 @@ public abstract class MockedCache implements ICache {
 
     @Override
     public List<cgTrackable> getInventory() {
-        return new ArrayList<cgTrackable>();
+        return null;
     }
 
     @Override
