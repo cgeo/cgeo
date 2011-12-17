@@ -84,15 +84,15 @@ public class Go4CacheUser {
         if (null == actionForDisplay) {
             getGeocodeAndAction();
         }
-        return actionForDisplay + getTime();
+        return actionForDisplay + getTime() + ".";
     }
 
     private String getTime() {
-        long minutes = (System.currentTimeMillis() - date.getTime()) / 60000;
+        int minutes = (int) ((System.currentTimeMillis() - date.getTime()) / 60000);
         if (minutes < 0) {
             minutes = 0;
         }
-        return " " + minutes + " " + res.getString(R.string.go4cache_minutes);
+        return " (" + res.getQuantityString(R.plurals.go4cache_time_minutes, minutes, minutes) + ")";
     }
 
     public String getGeocode() {

@@ -870,6 +870,8 @@
   <string name="go4cache_looking_around">Schaut sich um</string>
   <string name="go4cache_tweeting">Twittert</string>
   <string name="go4cache_heading_to">Auf dem Weg zu</string>
-  <string name="go4cache_minutes">Minuten</string>
-  
+  <plurals name="go4cache_time_minutes">
+	<item quantity="one">vor einer Minute</item>
+	<item quantity="other">vor %d Minuten</item>
+  </plurals>
 </resources>

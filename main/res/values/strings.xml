@@ -892,8 +892,11 @@
   <string name="go4cache_looking_around">Looking around</string>
   <string name="go4cache_tweeting">Tweeting</string>
   <string name="go4cache_heading_to">Heading to</string>
-  <string name="go4cache_minutes">Minutes</string>
-
+  <plurals name="go4cache_time_minutes">
+	<item quantity="one">one Minute ago</item>
+	<item quantity="other">%d Minutes ago</item>
+  </plurals>
+      
   <!-- ====== please, do not translate (and include in translation) things below this line ====== -->
 
   <!-- contributors -->
