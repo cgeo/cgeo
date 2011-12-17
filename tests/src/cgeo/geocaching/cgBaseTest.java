@@ -55,12 +55,14 @@ public class cgBaseTest extends AndroidTestCase {
         for (LogType logType : expected.getLogCounts().keySet()) {
             Assert.assertEquals(expected.getLogCounts().get(logType), actual.getLogCounts().get(logType));
         }
-        if (null != expected.getInventory() || null != actual.getInventory()) {
-            Assert.assertEquals(expected.getInventory().size(), actual.getInventory().size());
-        }
-        if (null != expected.getSpoilers() || null != actual.getSpoilers()) {
-            Assert.assertEquals(expected.getSpoilers().size(), actual.getSpoilers().size());
-        }
+
+        int actualInventorySize = null != actual.getInventory() ? actual.getInventory().size() : 0;
+        int expectInventorysize = null != expected.getInventory() ? expected.getInventory().size() : 0;
+        Assert.assertEquals(expectInventorysize, actualInventorySize);
+
+        int actualSpoilersSize = null != actual.getSpoilers() ? actual.getSpoilers().size() : 0;
+        int expectSpoilerssize = null != expected.getSpoilers() ? expected.getSpoilers().size() : 0;
+        Assert.assertEquals(expectSpoilerssize, actualSpoilersSize);
     }
 
     /**
