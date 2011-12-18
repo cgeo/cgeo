@@ -472,6 +472,10 @@
   <string name="cache_watchlist_add">Hinzufügen</string>
   <string name="cache_watchlist_remove">Entfernen</string>
   <string name="cache_waypoints">Wegpunkte</string>
+  <plurals name="waypoints">
+      <item quantity="one">1 Wegpunkt</item>
+      <item quantity="other">%d Wegpunkte</item>
+  </plurals>
   <string name="cache_waypoints_add">Wegpunkt hinzufügen</string>
   <string name="cache_hint">Hinweis</string>
   <string name="cache_logs">Logbuch</string>

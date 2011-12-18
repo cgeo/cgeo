@@ -1048,7 +1048,16 @@ public class CacheDetailActivity extends AbstractActivity {
 
         @Override
         public String getTitle(int position) {
-            return (null == pageOrder.get(position)) ? "" : res.getString(pageOrder.get(position).titleStringId);
+            final Page page = pageOrder.get(position);
+            if (null == page) {
+                return "";
+            }
+            // show number of waypoints directly in waypoint title
+            if (page == Page.WAYPOINTS) {
+                int waypointCount = (cache.getWaypoints() == null ? 0 : cache.getWaypoints().size());
+                return res.getQuantityString(R.plurals.waypoints, waypointCount, waypointCount);
+            }
+            return res.getString(page.titleStringId);
         }
     }
 
@@ -1063,7 +1072,7 @@ public class CacheDetailActivity extends AbstractActivity {
         WAYPOINTS(R.string.cache_waypoints),
         INVENTORY(R.string.cache_inventory);
 
-        public final int titleStringId;
+        final private int titleStringId;
 
         private Page(final int titleStringId) {
             this.titleStringId = titleStringId;

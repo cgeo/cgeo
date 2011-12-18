@@ -485,6 +485,10 @@
   <string name="cache_watchlist_add">Add to Watchlist</string>
   <string name="cache_watchlist_remove">Remove from Watchlist</string>
   <string name="cache_waypoints">Waypoints</string>
+  <plurals name="waypoints">
+      <item quantity="one">1 Waypoint</item>
+      <item quantity="other">%d Waypoints</item>
+  </plurals>
   <string name="cache_waypoints_add">Add Waypoint</string>
   <string name="cache_hint">Hint</string>
   <string name="cache_logs">Logbook</string>
