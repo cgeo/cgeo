@@ -129,7 +129,7 @@ public class cgeocaches extends AbstractListActivity {
     private String action = null;
     private CacheListType type = null;
     private Geopoint coords = null;
-    private CacheType cacheType = null;
+    private CacheType cacheType = Settings.getCacheType();
     private String keyword = null;
     private String address = null;
     private String username = null;
