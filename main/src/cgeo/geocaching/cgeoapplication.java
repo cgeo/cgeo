@@ -550,7 +550,7 @@ public class cgeoapplication extends Application {
 
         for (final cgCache cache : cacheList) {
             cache.setReason(reason);
-            storeWithMerge(cache, false);
+            storeWithMerge(cache, reason >= 1);
         }
     }
 

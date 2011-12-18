@@ -128,7 +128,7 @@ public class GCConnector extends AbstractConnector {
             app.addSearch(null, reason);
 
             Log.e(Settings.tag, "cgeoBase.searchByGeocode: No cache parsed");
-            return null;
+            return search;
         }
 
         final List<cgCache> cacheList = cgBase.filterSearchResults(search, caches, false, false, Settings.getCacheType());
