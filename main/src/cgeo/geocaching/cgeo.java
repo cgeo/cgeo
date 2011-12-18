@@ -590,9 +590,9 @@ public class cgeo extends AbstractActivity {
 
                     if (geo.accuracyNow >= 0) {
                         if (Settings.isUseMetricUnits()) {
-                            navAccuracy.setText("±" + String.format("%.0f", geo.accuracyNow) + " m");
+                            navAccuracy.setText("±" + Math.round(geo.accuracyNow) + " m");
                         } else {
-                            navAccuracy.setText("±" + String.format("%.0f", (geo.accuracyNow * 3.2808399)) + " ft");
+                            navAccuracy.setText("±" + Math.round(geo.accuracyNow * 3.2808399) + " ft");
                         }
                     } else {
                         navAccuracy.setText(null);

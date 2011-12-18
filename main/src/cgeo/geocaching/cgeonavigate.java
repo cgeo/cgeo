@@ -332,7 +332,7 @@ public class cgeonavigate extends AbstractActivity {
 
         cacheHeading = geo.coordsNow.bearingTo(dstCoords);
         distanceView.setText(cgBase.getHumanDistance(geo.coordsNow.distanceTo(dstCoords)));
-        headingView.setText(String.format("%.0f", cacheHeading) + "°");
+        headingView.setText(Math.round(cacheHeading) + "°");
     }
 
     private class update implements UpdateLocationCallback {
@@ -365,9 +365,9 @@ public class cgeonavigate extends AbstractActivity {
 
                     if (geo.accuracyNow >= 0) {
                         if (Settings.isUseMetricUnits()) {
-                            navAccuracy.setText("±" + String.format("%.0f", geo.accuracyNow) + " m");
+                            navAccuracy.setText("±" + Math.round(geo.accuracyNow) + " m");
                         } else {
-                            navAccuracy.setText("±" + String.format("%.0f", (geo.accuracyNow * 3.2808399)) + " ft");
+                            navAccuracy.setText("±" + Math.round(geo.accuracyNow * 3.2808399) + " ft");
                         }
                     } else {
                         navAccuracy.setText(null);

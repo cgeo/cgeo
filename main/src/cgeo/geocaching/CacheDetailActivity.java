@@ -669,10 +669,10 @@ public class CacheDetailActivity extends AbstractActivity {
                             dist.append(" ↘");
                         }
                         if (Settings.isUseMetricUnits()) {
-                            dist.append(String.format("%.0f", (Math.abs(diff))));
+                            dist.append(Math.abs((int) diff));
                             dist.append(" m");
                         } else {
-                            dist.append(String.format("%.0f", (Math.abs(diff) * 3.2808399)));
+                            dist.append(Math.abs((int) (diff * 3.2808399)));
                             dist.append(" ft");
                         }
                     }
@@ -1421,7 +1421,7 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             // favourite count
-            addCacheDetail(R.string.cache_favourite, String.format("%d", cache.getFavoritePoints()) + "×");
+            addCacheDetail(R.string.cache_favourite, cache.getFavoritePoints() + "×");
 
             // own rating
             if (cache.getMyVote() > 0) {

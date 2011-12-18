@@ -79,4 +79,8 @@ public class cgBaseTest extends AndroidTestCase {
         }
     }
 
+    public static void testHumanDistance() {
+        assertEquals("?", cgBase.getHumanDistance(null));
+        assertEquals("123 km", cgBase.getHumanDistance(123.456f));
+    }
 }

@@ -250,7 +250,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             if (coordsIn == null) {
                 return;
             }
-            Collections.sort(list, new DistanceComparator(coordsIn));
+            Collections.sort(list, new DistanceComparator(coordsIn, list));
         }
         else {
             Collections.sort(list, cacheComparator);
@@ -267,7 +267,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         coords = coordsIn;
 
         if (CollectionUtils.isNotEmpty(list) && (System.currentTimeMillis() - lastSort) > PAUSE_BETWEEN_LIST_SORT && sort && isSortedByDistance()) {
-            Collections.sort(list, new DistanceComparator(coordsIn));
+            Collections.sort(list, new DistanceComparator(coordsIn, list));
             notifyDataSetChanged();
             lastSort = System.currentTimeMillis();
         }
@@ -521,7 +521,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             }
         }
 
-        holder.favourite.setText(String.format("%d", cache.getFavoritePoints()));
+        holder.favourite.setText(Integer.toString(cache.getFavoritePoints()));
 
         int favoriteBack;
         // set default background, neither vote nor rating may be available

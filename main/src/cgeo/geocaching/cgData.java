@@ -222,7 +222,7 @@ public class cgData {
             + "longitude double "
             + "); ";
 
-    public boolean initialized = false;
+    private boolean initialized = false;
     private SQLiteStatement statementDescription;
     private SQLiteStatement statementLogCount;
     private static boolean newlyCreatedDatabase = false;
@@ -232,6 +232,10 @@ public class cgData {
     }
 
     public synchronized void init() {
+        if (initialized) {
+            return;
+        }
+
         if (databaseRW == null || !databaseRW.isOpen()) {
             try {
                 if (dbHelper == null) {
@@ -282,6 +286,7 @@ public class cgData {
     }
 
     public void closeDb() {
+        initialized = false;
         closePreparedStatements();
 
         if (databaseRO != null) {
@@ -1502,19 +1507,6 @@ public class cgData {
         return new Geopoint(cursor.getDouble(indexLat), cursor.getDouble(indexLon));
     }
 
-    /**
-     * Retrieve coordinates from a Cursor
-     *
-     * @param cursor
-     *            a Cursor representing a row in the database
-     * @return the coordinates, or null if latitude or longitude is null or the coordinates are invalid
-     */
-    private static Geopoint getCoords(final Cursor cursor) {
-        final int indexLat = cursor.getColumnIndex("latitude");
-        final int indexLon = cursor.getColumnIndex("longitude");
-        return getCoords(cursor, indexLat, indexLon);
-    }
-
     public boolean saveOwnWaypoint(int id, String geocode, cgWaypoint waypoint) {
         init();
 
@@ -2029,7 +2021,7 @@ public class cgData {
         cgCache cache = new cgCache();
 
         if (cacheColumnIndex == null) {
-            int[] local_cci = new int[37]; // use a local variable to avoid having the not yet fully initialized array be visible to other threads
+            int[] local_cci = new int[40]; // use a local variable to avoid having the not yet fully initialized array be visible to other threads
             local_cci[0] = cursor.getColumnIndex("updated");
             local_cci[1] = cursor.getColumnIndex("reason");
             local_cci[2] = cursor.getColumnIndex("detailed");
@@ -2068,6 +2060,8 @@ public class cgData {
             local_cci[35] = cursor.getColumnIndex("onWatchlist");
             local_cci[36] = cursor.getColumnIndex("reliable_latlon");
             // local_cci[37] = cursor.getColumnIndex("coordsChanged");
+            local_cci[38] = cursor.getColumnIndex("latitude");
+            local_cci[39] = cursor.getColumnIndex("longitude");
             cacheColumnIndex = local_cci;
         }
 
@@ -2106,7 +2100,7 @@ public class cgData {
         cache.setTerrain(cursor.getFloat(cacheColumnIndex[19]));
         cache.setLatlon(cursor.getString(cacheColumnIndex[20]));
         cache.setLocation(cursor.getString(cacheColumnIndex[21]));
-        cache.setCoords(getCoords(cursor));
+        cache.setCoords(getCoords(cursor, cacheColumnIndex[38], cacheColumnIndex[39]));
         index = cacheColumnIndex[22];
         if (cursor.isNull(index)) {
             cache.setElevation(null);
@@ -2246,7 +2240,7 @@ public class cgData {
         waypoint.setLookup(cursor.getString(cursor.getColumnIndex("lookup")));
         waypoint.setName(cursor.getString(cursor.getColumnIndex("name")));
         waypoint.setLatlon(cursor.getString(cursor.getColumnIndex("latlon")));
-        waypoint.setCoords(getCoords(cursor));
+        waypoint.setCoords(getCoords(cursor, cursor.getColumnIndex("latitude"), cursor.getColumnIndex("longitude")));
         waypoint.setNote(cursor.getString(cursor.getColumnIndex("note")));
 
         return waypoint;
@@ -3114,7 +3108,7 @@ public class cgData {
         try {
             final SQLiteStatement logCount = getStatementLogCount();
             synchronized (logCount) {
-                statementLogCount.bindString(1, geocode.toUpperCase());
+                statementLogCount.bindString(1, geocode);
                 return statementLogCount.simpleQueryForLong() > 0;
             }
         } catch (Exception e) {

@@ -44,11 +44,20 @@ public enum CacheSize {
     }
 
     public final static CacheSize getById(final String id) {
-        final CacheSize result = id != null ? CacheSize.FIND_BY_ID.get(id.toLowerCase().trim()) : null;
-        if (result == null) {
+        if (id == null) {
             return UNKNOWN;
         }
-        return result;
+        // avoid String operations for performance reasons
+        final CacheSize result = CacheSize.FIND_BY_ID.get(id);
+        if (result != null) {
+            return result;
+        }
+        // only if String was not found, normalize it
+        final CacheSize resultNormalized = CacheSize.FIND_BY_ID.get(id.toLowerCase().trim());
+        if (resultNormalized != null) {
+            return resultNormalized;
+        }
+        return UNKNOWN;
     }
 
     public final String getL10n() {
@@ -56,7 +65,7 @@ public enum CacheSize {
     }
 
     public void setL10n() {
-        this.l10n = cgeoapplication.getInstance().getBaseContext().getResources().getString(this.stringId);
+        this.l10n = cgeoapplication.getInstance().getBaseContext().getResources().getString(stringId);
     }
 
 }

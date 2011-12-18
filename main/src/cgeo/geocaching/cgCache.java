@@ -855,7 +855,6 @@ public class cgCache implements ICache {
         this.guid = guid;
     }
 
-
     public void setName(String name) {
         this.name = name;
     }
@@ -922,10 +921,6 @@ public class cgCache implements ICache {
 
     public void setLogCounts(Map<LogType, Integer> logCounts) {
         this.logCounts = logCounts;
-    }
-
-    public void setNameForSorting(String nameForSorting) {
-        this.nameForSorting = nameForSorting;
     }
 
     /*

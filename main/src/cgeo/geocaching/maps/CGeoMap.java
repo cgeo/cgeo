@@ -230,9 +230,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     if (secondsRemaining < 40) {
                         waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
                     } else if (secondsRemaining < 90) {
-                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format("%d", (secondsRemaining / 60)) + " " + res.getString(R.string.caches_eta_min));
+                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + (secondsRemaining / 60) + " " + res.getString(R.string.caches_eta_min));
                     } else {
-                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format("%d", (secondsRemaining / 60)) + " " + res.getString(R.string.caches_eta_mins));
+                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + (secondsRemaining / 60) + " " + res.getString(R.string.caches_eta_mins));
                     }
                 }
             } else if (msg.what == FINISHED_LOADING_DETAILS) {
@@ -657,9 +657,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     if (etaTime < 0.4) {
                         waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
                     } else if (etaTime < 1.5) {
-                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format("%.0f", etaTime) + " " + res.getString(R.string.caches_eta_min));
+                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + Math.round(etaTime) + " " + res.getString(R.string.caches_eta_min));
                     } else {
-                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format("%.0f", etaTime) + " " + res.getString(R.string.caches_eta_mins));
+                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + Math.round(etaTime) + " " + res.getString(R.string.caches_eta_mins));
                     }
                     waitDialog.show();
 
