@@ -863,13 +863,15 @@ public class cgeocaches extends AbstractListActivity {
             }
 
             boolean hasSelection = adapter != null && adapter.getChecked() > 0;
+            boolean isNonDefaultList = listId != 1;
+
             if (type == CacheListType.OFFLINE) { // only offline list
                 if (hasSelection) {
                     menu.findItem(MENU_DROP_CACHES).setTitle(res.getString(R.string.caches_drop_selected) + " (" + adapter.getChecked() + ")");
                 } else {
                     menu.findItem(MENU_DROP_CACHES).setTitle(res.getString(R.string.caches_drop_all));
                 }
-                menu.findItem(MENU_DROP_CACHES_AND_LIST).setVisible(!hasSelection);
+                menu.findItem(MENU_DROP_CACHES_AND_LIST).setVisible(!hasSelection && isNonDefaultList);
 
                 if (hasSelection) {
                     menu.findItem(MENU_REFRESH_STORED).setTitle(res.getString(R.string.caches_refresh_selected) + " (" + adapter.getChecked() + ")");
@@ -911,7 +913,6 @@ public class cgeocaches extends AbstractListActivity {
                 navigationMenu.setVisible(menuVisible);
             }
 
-            boolean isNonDefaultList = listId != 1;
             MenuItem item = menu.findItem(MENU_DROP_LIST);
             if (item != null) {
                 item.setVisible(isNonDefaultList);
