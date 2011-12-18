@@ -327,12 +327,12 @@ public class cgeo extends AbstractActivity {
 
         // context menu for offline button
         if (v.getId() == R.id.search_offline) {
-            List<cgList> cacheLists = app.getLists();
+            List<StoredList> cacheLists = app.getLists();
             int listCount = cacheLists.size();
             menu.setHeaderTitle(res.getString(R.string.list_title));
             for (int i = 0; i < listCount; i++) {
-                cgList list = cacheLists.get(i);
-                menu.add(Menu.NONE, MENU_OPEN_LIST + list.id, Menu.NONE, list.title);
+                StoredList list = cacheLists.get(i);
+                menu.add(Menu.NONE, MENU_OPEN_LIST + list.id, Menu.NONE, list.getTitleAndCount());
             }
             return;
         }

@@ -225,6 +225,7 @@ public class cgData {
     private boolean initialized = false;
     private SQLiteStatement statementDescription;
     private SQLiteStatement statementLogCount;
+    private SQLiteStatement statementStandardList;
     private static boolean newlyCreatedDatabase = false;
 
     public cgData(Context contextIn) {
@@ -331,6 +332,10 @@ public class cgData {
         if (statementLogCount != null) {
             statementLogCount.close();
             statementLogCount = null;
+        }
+        if (statementStandardList != null) {
+            statementStandardList.close();
+            statementStandardList = null;
         }
     }
 
@@ -3099,6 +3104,13 @@ public class cgData {
         return statementLogCount;
     }
 
+    private synchronized SQLiteStatement getStatementStandardList() {
+        if (statementStandardList == null) {
+            statementStandardList = databaseRO.compileStatement("SELECT count(_id) FROM " + dbTableCaches + " WHERE reason = " + StoredList.STANDARD_LIST_ID);
+        }
+        return statementStandardList;
+    }
+
     public boolean hasLogOffline(final String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return false;
@@ -3148,60 +3160,67 @@ public class cgData {
         }
     }
 
-    public List<cgList> getLists(Resources res) {
+    public List<StoredList> getLists(Resources res) {
         init();
 
-        List<cgList> lists = new ArrayList<cgList>();
+        List<StoredList> lists = new ArrayList<StoredList>();
+        lists.add(new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) getStatementStandardList().simpleQueryForLong()));
 
-        lists.add(new cgList(cgList.STANDARD_LIST_ID, res.getString(R.string.list_inbox)));
-        // lists.add(new cgList(true, 2, res.getString(R.string.list_wpt)));
+        try {
+            String query = "SELECT l._id as _id, l.title as title, COUNT(c._id) as count" +
+                    " FROM " + dbTableLists + " l LEFT OUTER JOIN " + dbTableCaches + " c" +
+                    " ON l._id + 10 = c.reason" +
+                    " GROUP BY l._id" +
+                    " ORDER BY l.title COLLATE NOCASE ASC";
 
-        ArrayList<cgList> storedLists = readLists(null, "title COLLATE NOCASE ASC");
-        lists.addAll(storedLists);
+            Cursor cursor = databaseRO.rawQuery(query, null);
+            ArrayList<StoredList> storedLists = getListsFromCursor(cursor);
+            lists.addAll(storedLists);
 
+        } catch (Exception e) {
+            Log.e(Settings.tag, "cgData.readLists: " + e.toString());
+        }
         return lists;
     }
 
-    private ArrayList<cgList> readLists(String selection, String sorting) {
-        ArrayList<cgList> result = new ArrayList<cgList>();
-        try {
-            Cursor cursor = databaseRO.query(
-                    dbTableLists,
-                    new String[] { "_id", "title", "updated", "latitude", "longitude" },
-                    selection,
-                    null,
-                    null,
-                    null,
-                    sorting);
-
-            if (cursor != null) {
-                if (cursor.getCount() > 0) {
-                    cursor.moveToFirst();
-                    int indexId = cursor.getColumnIndex("_id");
-                    int indexTitle = cursor.getColumnIndex("title");
-                    do {
-                        cgList list = new cgList(cursor.getInt(indexId) + 10, cursor.getString(indexTitle));
-                        result.add(list);
-                    } while (cursor.moveToNext());
-                }
-
-                cursor.close();
+    private static ArrayList<StoredList> getListsFromCursor(Cursor cursor) {
+        ArrayList<StoredList> result = new ArrayList<StoredList>();
+        if (cursor != null) {
+            if (cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                int indexId = cursor.getColumnIndex("_id");
+                int indexTitle = cursor.getColumnIndex("title");
+                int indexCount = cursor.getColumnIndex("count");
+                do {
+                    int count = 0;
+                    if (indexCount >= 0) {
+                        count = cursor.getInt(indexCount);
+                    }
+                    StoredList list = new StoredList(cursor.getInt(indexId) + 10, cursor.getString(indexTitle), count);
+                    result.add(list);
+                } while (cursor.moveToNext());
             }
-        } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.readLists: " + e.toString());
+
+            cursor.close();
         }
         return result;
     }
 
-    public cgList getList(int id, Resources res) {
-        if (id == cgList.STANDARD_LIST_ID) {
-            return new cgList(cgList.STANDARD_LIST_ID, res.getString(R.string.list_inbox));
-        } else if (id == 2) {
-            return new cgList(2, res.getString(R.string.list_wpt));
+    public StoredList getList(int id, Resources res) {
+        if (id == StoredList.STANDARD_LIST_ID) {
+            return new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) getStatementStandardList().simpleQueryForLong());
         } else if (id >= 10) {
             init();
 
-            ArrayList<cgList> lists = readLists("_id = " + (id - 10), null);
+            Cursor cursor = databaseRO.query(
+                    dbTableLists,
+                    new String[] { "_id", "title" },
+                    "_id = " + (id - 10),
+                    null,
+                    null,
+                    null,
+                    null);
+            ArrayList<StoredList> lists = getListsFromCursor(cursor);
             if (!lists.isEmpty()) {
                 return lists.get(0);
             }

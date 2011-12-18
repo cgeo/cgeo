@@ -43,7 +43,7 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
             listId = extras.getInt(EXTRAS_LIST_ID);
         }
         if (listId <= 0) {
-            listId = cgList.STANDARD_LIST_ID;
+            listId = StoredList.STANDARD_LIST_ID;
         }
     }
 

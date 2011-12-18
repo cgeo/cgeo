@@ -667,11 +667,11 @@ public class cgeoapplication extends Application {
         storage.clearVisitDate(geocode);
     }
 
-    public List<cgList> getLists() {
+    public List<StoredList> getLists() {
         return storage.getLists(getResources());
     }
 
-    public cgList getList(int id) {
+    public StoredList getList(int id) {
         return storage.getList(id, getResources());
     }
 

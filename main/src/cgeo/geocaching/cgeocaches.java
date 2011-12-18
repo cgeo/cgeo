@@ -155,7 +155,7 @@ public class cgeocaches extends AbstractListActivity {
     private ExportFieldNotesThread threadF = null;
     private RemoveFromHistoryThread threadH = null;
     private int listId = 0;
-    private List<cgList> lists = null;
+    private List<StoredList> lists = null;
     private GeocodeComparator gcComparator = new GeocodeComparator();
     private Handler loadCachesHandler = new Handler() {
 
@@ -557,10 +557,10 @@ public class cgeocaches extends AbstractListActivity {
             case OFFLINE:
                 listId = Settings.getLastList();
                 if (listId <= 0) {
-                    listId = cgList.STANDARD_LIST_ID;
+                    listId = StoredList.STANDARD_LIST_ID;
                     title = res.getString(R.string.stored_caches_button);
                 } else {
-                    final cgList list = app.getList(listId);
+                    final StoredList list = app.getList(listId);
                     title = list.title;
                 }
 
@@ -720,7 +720,7 @@ public class cgeocaches extends AbstractListActivity {
         }
 
         // refresh standard list if it has changed (new caches downloaded)
-        if (type == CacheListType.OFFLINE && listId == cgList.STANDARD_LIST_ID && search != null) {
+        if (type == CacheListType.OFFLINE && listId == StoredList.STANDARD_LIST_ID && search != null) {
             cgSearch newSearch = cgBase.searchByOffline(coords, cacheType, listId);
             if (newSearch != null && newSearch.totalCnt != search.totalCnt) {
                 refreshCurrentList();
@@ -1152,23 +1152,23 @@ public class cgeocaches extends AbstractListActivity {
         }
         if (cache.getReason() >= 1) {
             menu.add(0, MENU_DROP_CACHE, 0, res.getString(R.string.cache_offline_drop));
-            final List<cgList> cacheLists = app.getLists();
+            final List<StoredList> cacheLists = app.getLists();
             final int listCount = cacheLists.size();
             if (listCount > 1) {
                 final SubMenu submenu = menu.addSubMenu(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
                 for (int i = 0; i < listCount; i++) {
-                    cgList list = cacheLists.get(i);
-                    submenu.add(Menu.NONE, CONTEXT_MENU_MOVE_TO_LIST + list.id, Menu.NONE, list.title);
+                    StoredList list = cacheLists.get(i);
+                    submenu.add(Menu.NONE, CONTEXT_MENU_MOVE_TO_LIST + list.id, Menu.NONE, list.getTitleAndCount());
                 }
             }
         }
     }
 
     private void moveCachesToOtherList() {
-        final List<cgList> cacheLists = app.getLists();
+        final List<StoredList> cacheLists = app.getLists();
         ArrayList<String> listNames = new ArrayList<String>();
-        for (cgList list : cacheLists) {
-            listNames.add(list.title);
+        for (StoredList list : cacheLists) {
+            listNames.add(list.getTitleAndCount());
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -1181,7 +1181,7 @@ public class cgeocaches extends AbstractListActivity {
         builder.create().show();
     }
 
-    private void moveCachesToList(final cgList list) {
+    private void moveCachesToList(final StoredList list) {
         int newListId = list.id;
         final boolean moveAll = adapter.getChecked() == 0;
         for (final cgCache c : Collections.unmodifiableList(cacheList)) {
@@ -2326,8 +2326,8 @@ public class cgeocaches extends AbstractListActivity {
         }
 
         final List<CharSequence> listsTitle = new ArrayList<CharSequence>();
-        for (cgList list : lists) {
-            listsTitle.add(list.title);
+        for (StoredList list : lists) {
+            listsTitle.add(list.getTitleAndCount());
         }
         listsTitle.add("<" + res.getString(R.string.list_menu_create) + ">");
 
@@ -2356,7 +2356,7 @@ public class cgeocaches extends AbstractListActivity {
     }
 
     public void switchListById(int id) {
-        cgList list = null;
+        StoredList list = null;
 
         if (id >= 0) {
             list = app.getList(id);
@@ -2458,7 +2458,7 @@ public class cgeocaches extends AbstractListActivity {
     }
 
     private void renameList() {
-        final cgList list = app.getList(listId);
+        final StoredList list = app.getList(listId);
         handleListNameInput(list.title, R.string.list_dialog_rename_title, R.string.list_dialog_rename, new RunnableWithArgument<String>() {
 
             @Override
