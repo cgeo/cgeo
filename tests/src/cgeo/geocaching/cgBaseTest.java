@@ -42,8 +42,15 @@ public class cgBaseTest extends AndroidTestCase {
         Assert.assertEquals(expected.getName(), actual.getName());
         Assert.assertEquals(expected.getCacheId(), actual.getCacheId());
         Assert.assertEquals(expected.getGuid(), actual.getGuid());
-        // Assert.assertEquals(expected.getLocation(), actual.getLocation());
-        Assert.assertEquals(expected.getPersonalNote(), actual.getPersonalNote());
+        Assert.assertEquals(expected.getLocation(), actual.getLocation());
+        // the personal note is different for premium and non-premium user:
+        // null for non-premium, empty string for premium users.
+        int actualPersonalNoteLength = null != actual.getPersonalNote() ? actual.getPersonalNote().length() : 0;
+        int expectedPersonalNoteLength = null != expected.getPersonalNote() ? expected.getPersonalNote().length() : 0;
+        Assert.assertEquals(expectedPersonalNoteLength, actualPersonalNoteLength);
+        if (expectedPersonalNoteLength == actualPersonalNoteLength && expectedPersonalNoteLength > 0) {
+            Assert.assertEquals(expected.getPersonalNote(), actual.getPersonalNote());
+        }
         Assert.assertEquals(expected.isFound(), actual.isFound());
         Assert.assertEquals(expected.isFavorite(), actual.isFavorite());
         Assert.assertEquals(expected.getFavoritePoints(), actual.getFavoritePoints());
@@ -57,18 +64,17 @@ public class cgBaseTest extends AndroidTestCase {
         }
 
         int actualInventorySize = null != actual.getInventory() ? actual.getInventory().size() : 0;
-        int expectInventorysize = null != expected.getInventory() ? expected.getInventory().size() : 0;
-        Assert.assertEquals(expectInventorysize, actualInventorySize);
+        int expectedInventorySize = null != expected.getInventory() ? expected.getInventory().size() : 0;
+        Assert.assertEquals(expectedInventorySize, actualInventorySize);
 
         int actualSpoilersSize = null != actual.getSpoilers() ? actual.getSpoilers().size() : 0;
-        int expectSpoilerssize = null != expected.getSpoilers() ? expected.getSpoilers().size() : 0;
-        Assert.assertEquals(expectSpoilerssize, actualSpoilersSize);
+        int expectedSpoilersSize = null != expected.getSpoilers() ? expected.getSpoilers().size() : 0;
+        Assert.assertEquals(expectedSpoilersSize, actualSpoilersSize);
     }
 
     /**
      * Test {@link cgBase#parseCacheFromText(String, int, CancellableHandler)} with "mocked" data
      *
-     * @param base
      */
     @MediumTest
     public static void testParseCacheFromTextWithMockedData() {

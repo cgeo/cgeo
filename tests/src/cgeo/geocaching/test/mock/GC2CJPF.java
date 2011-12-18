@@ -1,5 +1,6 @@
 package cgeo.geocaching.test.mock;
 
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -95,18 +96,31 @@ public class GC2CJPF extends MockedCache {
 
     @Override
     public boolean isFound() {
-        if ("blafoo".equals(this.getUserLoggedIn())) {
+        if ("blafoo".equals(this.getMockedDataUser())) {
             return true;
         }
-        return false;
+        return super.isFound();
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see cgeo.geocaching.test.mock.MockedCache#isOwn()
+     */
+    @Override
+    public boolean isOwn() {
+        if ("Tom03".equals(Settings.getUsername())) {
+            return true;
+        }
+        return super.isOwn();
     }
 
     @Override
     public boolean isFavorite() {
-        if ("blafoo".equals(this.getUserLoggedIn())) {
+        if ("blafoo".equals(this.getMockedDataUser())) {
             return true;
         }
-        return false;
+        return super.isFavorite();
     }
 
     @Override
@@ -157,7 +171,7 @@ public class GC2CJPF extends MockedCache {
 
     @Override
     public String getLatitude() {
-        if ("blafoo".equals(this.getUserLoggedIn())) {
+        if ("blafoo".equals(this.getMockedDataUser())) {
             return userCoords.format(GeopointFormatter.Format.LAT_DECMINUTE);
         }
         return coords.format(GeopointFormatter.Format.LAT_DECMINUTE);
@@ -165,7 +179,7 @@ public class GC2CJPF extends MockedCache {
 
     @Override
     public String getLongitude() {
-        if ("blafoo".equals(this.getUserLoggedIn())) {
+        if ("blafoo".equals(this.getMockedDataUser())) {
             return userCoords.format(GeopointFormatter.Format.LON_DECMINUTE);
         }
         return coords.format(GeopointFormatter.Format.LON_DECMINUTE);

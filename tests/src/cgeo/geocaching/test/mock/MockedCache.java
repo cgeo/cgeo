@@ -8,8 +8,6 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.utils.BaseUtils;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,14 +18,21 @@ public abstract class MockedCache implements ICache {
 
     final protected Geopoint coords;
     String data;
+    String mockedDataUser;
 
     protected MockedCache(final Geopoint coords) {
         this.coords = coords;
-        this.data = getData();
+        this.data = MockedCache.readCachePage(getGeocode());
+        // for mocked caches the user logged in is the user who saved the html file(s)
+        this.mockedDataUser = BaseUtils.getMatch(data, GCConstants.PATTERN_USERLOGGEDIN, true, "");
     }
 
-    protected String getUserLoggedIn() {
-        return BaseUtils.getMatch(data, GCConstants.PATTERN_USERLOGGEDIN, true, "");
+    public String getMockedDataUser() {
+        return mockedDataUser;
+    }
+
+    public void setMockedDataUser(String mockedDataUser) {
+        this.mockedDataUser = mockedDataUser;
     }
 
     /*
@@ -36,10 +41,7 @@ public abstract class MockedCache implements ICache {
      * into a browser and saving the file
      */
     public String getData() {
-        if (StringUtils.isEmpty(data)) {
-            data = MockedCache.readCachePage(getGeocode());
-        }
-        return data;
+        return this.data;
     }
 
     public static String readCachePage(final String geocode) {
@@ -104,7 +106,7 @@ public abstract class MockedCache implements ICache {
 
     @Override
     public String getPersonalNote() {
-        return "";
+        return null;
     }
 
     @Override

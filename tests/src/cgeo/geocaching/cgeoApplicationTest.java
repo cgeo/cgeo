@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.test.RegExPerformanceTest;
 import cgeo.geocaching.test.mock.MockedCache;
@@ -85,11 +86,15 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
      */
     @MediumTest
     public static cgCache testSearchByGeocode(final String geocode) {
-        final cgSearch search = cgBase.searchByGeocode(geocode, null, 0, true, null);
+        final cgSearch search = cgBase.searchByGeocode(geocode, null, 1, true, null);
         assertNotNull(search);
-        assertEquals(1, search.getGeocodes().size());
-        assertTrue(search.getGeocodes().contains(geocode));
-        return cgeoapplication.getInstance().getCacheByGeocode(geocode);
+        if (Settings.isPremiumMember() || search.error == null) {
+            assertEquals(1, search.getGeocodes().size());
+            assertTrue(search.getGeocodes().contains(geocode));
+            return cgeoapplication.getInstance().getCacheByGeocode(geocode);
+        }
+        assertEquals(0, search.getGeocodes().size());
+        return null;
     }
 
     /**
@@ -98,7 +103,8 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
     @MediumTest
     public static void testSearchByGeocodeNotExisting() {
         final cgSearch search = cgBase.searchByGeocode("GC123456", null, 0, true, null);
-        assertNull(search);
+        assertNotNull(search);
+        assertEquals(search.error, StatusCode.UNPUBLISHED_CACHE);
     }
 
     /**
@@ -139,8 +145,11 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
      */
     public static void testCacheBasics() {
         for (MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
+            mockedCache.setMockedDataUser(Settings.getUsername());
             cgCache parsedCache = cgeoApplicationTest.testSearchByGeocode(mockedCache.getGeocode());
-            cgBaseTest.testCompareCaches(mockedCache, parsedCache);
+            if (null != parsedCache) {
+                cgBaseTest.testCompareCaches(mockedCache, parsedCache);
+            }
         }
     }
 

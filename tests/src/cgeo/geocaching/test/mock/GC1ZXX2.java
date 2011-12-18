@@ -87,10 +87,10 @@ public class GC1ZXX2 extends MockedCache {
 
     @Override
     public boolean isWatchlist() {
-        if ("blafoo".equals(this.getUserLoggedIn())) {
+        if ("blafoo".equals(this.getMockedDataUser())) {
             return true;
         }
-        return false;
+        return super.isWatchlist();
     }
 
     @Override
@@ -140,10 +140,10 @@ public class GC1ZXX2 extends MockedCache {
 
     @Override
     public String getPersonalNote() {
-        if ("blafoo".equals(this.getUserLoggedIn())) {
+        if ("blafoo".equals(this.getMockedDataUser())) {
             return "Test für c:geo";
         }
-        return null;
+        return super.getPersonalNote();
     }
 
 }
