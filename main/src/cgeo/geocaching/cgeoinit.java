@@ -723,7 +723,7 @@ public class cgeoinit extends AbstractActivity {
                     Object payload = loginResult;
                     if (loginResult == StatusCode.NO_ERROR) {
                         cgBase.detectGcCustomDate();
-                        payload = cgBase.downloadAvatar(cgeoinit.this);
+                        payload = cgBase.downloadAvatarAndGetMemberStatus(cgeoinit.this);
                     }
                     logInHandler.obtainMessage(0, payload).sendToTarget();
                 }

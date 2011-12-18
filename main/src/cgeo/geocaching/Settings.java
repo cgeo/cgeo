@@ -65,6 +65,7 @@ public final class Settings {
     private static final String KEY_GCVOTE_PASSWORD = "pass-vote";
     private static final String KEY_PASSWORD = "password";
     private static final String KEY_USERNAME = "username";
+    private static final String KEY_MEMBER_STATUS = "memberstatus";
     private static final String KEY_COORD_INPUT_FORMAT = "coordinputformat";
     private static final String KEY_LOG_OFFLINE = "log_offline";
     private static final String KEY_LOAD_DIRECTION_IMG = "loaddirectionimg";
@@ -175,6 +176,31 @@ public final class Settings {
                     // save username and password
                     edit.putString(KEY_USERNAME, username);
                     edit.putString(KEY_PASSWORD, password);
+                }
+            }
+        });
+    }
+
+    public static boolean isPremiumMember() {
+        // Basic Member, Premium Member, ???
+        return "Premium Member".compareTo(Settings.getMemberStatus()) == 0;
+    }
+
+    public static String getMemberStatus() {
+        return sharedPrefs.getString(KEY_MEMBER_STATUS, null);
+    }
+
+    public static boolean setMemberStatus(final String memberStatus) {
+        return editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                if (StringUtils.isBlank(memberStatus)) {
+                    // erase password
+                    edit.remove(KEY_MEMBER_STATUS);
+                } else {
+                    // save password
+                    edit.putString(KEY_MEMBER_STATUS, memberStatus);
                 }
             }
         });

@@ -360,6 +360,18 @@ public class cgBase {
         }
     }
 
+    public static StatusCode logout() {
+        HttpResponse logoutResponse = request("https://www.geocaching.com/login/default.aspx?RESET=Y&redir=http%3a%2f%2fwww.geocaching.com%2fdefault.aspx%3f", null, false, false, false);
+        String logoutData = getResponseData(logoutResponse);
+        if (logoutResponse != null && logoutResponse.getStatusLine().getStatusCode() == 503 && BaseUtils.matches(logoutData, GCConstants.PATTERN_MAINTENANCE)) {
+            return StatusCode.MAINTENANCE;
+        }
+
+        clearCookies();
+        Settings.setCookieStore(null);
+        return StatusCode.NO_ERROR;
+    }
+
     public static boolean checkLogin(String page) {
         if (StringUtils.isBlank(page)) {
             Log.e(Settings.tag, "cgeoBase.checkLogin: No page given");
@@ -785,7 +797,6 @@ public class cgBase {
         }
 
         final cgCacheWrap caches = new cgCacheWrap();
-        final cgCache cache = new cgCache();
 
         if (page.contains("Cache is Unpublished")) {
             caches.error = StatusCode.UNPUBLISHED_CACHE;
@@ -802,6 +813,7 @@ public class cgBase {
             return caches;
         }
 
+        final cgCache cache = new cgCache();
         cache.setDisabled(page.contains("<li>This cache is temporarily unavailable."));
 
         cache.setArchived(page.contains("<li>This cache has been archived,"));
@@ -1393,9 +1405,12 @@ public class cgBase {
         }
     }
 
-    public static BitmapDrawable downloadAvatar(final Context context) {
+    public static BitmapDrawable downloadAvatarAndGetMemberStatus(final Context context) {
         try {
             final String profile = BaseUtils.replaceWhitespace(getResponseData(request("http://www.geocaching.com/my/", null, false)));
+
+            Settings.setMemberStatus(BaseUtils.getMatch(profile, GCConstants.PATTERN_MEMBER_STATUS, true, null));
+
             final String avatarURL = BaseUtils.getMatch(profile, GCConstants.PATTERN_AVATAR_IMAGE, false, null);
             if (null != avatarURL) {
                 final HtmlImage imgGetter = new HtmlImage(context, "", false, 0, false);

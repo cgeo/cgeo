@@ -56,6 +56,7 @@ public final class GCConstants {
     public static final Pattern PATTERN_LOGGEDIN2 = Pattern.compile("<strong>\\W*Hello,[^<]*<a[^>]+>([^<]+)</a>[^<]*</strong>");
     public static final Pattern PATTERN_USERLOGGEDIN = Pattern.compile("<strong>Hello, <a href=\"/my/default.aspx\" title=\"View Profile for[^\"]*\" class=\"SignedInProfileLink\">(.*?)</a></strong>");
     public static final Pattern PATTERN_AVATAR_IMAGE = Pattern.compile("<img src=\"(http://img.geocaching.com/user/avatar/[0-9a-f-]+\\.jpg)\"[^>]*\\salt=\"Avatar\"");
+    public static final Pattern PATTERN_MEMBER_STATUS = Pattern.compile("<p class=\"NoBottomSpacing\" id=\"memberStatus\">([^<]+)<br");
     public static final Pattern PATTERN_CUSTOMDATE = Pattern.compile("<option selected=\"selected\" value=\"([ /Mdy-]+)\">");
 
     /**
