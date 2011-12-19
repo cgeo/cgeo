@@ -425,6 +425,10 @@ public final class Settings {
         });
     }
 
+    /**
+     * @return User selected date format on GC.com
+     * @see cgBase.gcCustomDateFormats
+     */
     public static String getGcCustomDate() {
         return sharedPrefs.getString(KEY_GC_CUSTOM_DATE, null);
     }

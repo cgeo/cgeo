@@ -90,7 +90,7 @@ public class GC2JVEH extends MockedCache {
     @Override
     public Date getHiddenDate() {
         try {
-            return cgBase.parseGcCustomDate("28/11/2010");
+            return cgBase.parseGcCustomDate("28/11/2010", getDateFormat());
         } catch (ParseException e) {
             // intentionally left blank
         }

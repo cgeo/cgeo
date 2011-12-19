@@ -10,6 +10,8 @@ import cgeo.geocaching.utils.CancellableHandler;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 
+import java.util.Date;
+
 import junit.framework.Assert;
 
 public class cgBaseTest extends AndroidTestCase {
@@ -48,7 +50,9 @@ public class cgBaseTest extends AndroidTestCase {
         Assert.assertEquals(expected.isFavorite(), actual.isFavorite());
         Assert.assertEquals(expected.getFavoritePoints(), actual.getFavoritePoints());
         Assert.assertEquals(expected.isWatchlist(), actual.isWatchlist());
-        Assert.assertEquals(expected.getHiddenDate().toString(), actual.getHiddenDate().toString());
+        Date date1 = expected.getHiddenDate();
+        Date date2 = actual.getHiddenDate();
+        Assert.assertEquals(date1.toString(), date2.toString());
         for (String attribute : expected.getAttributes()) {
             Assert.assertTrue(actual.getAttributes().contains(attribute));
         }
@@ -71,11 +75,15 @@ public class cgBaseTest extends AndroidTestCase {
      */
     @MediumTest
     public static void testParseCacheFromTextWithMockedData() {
+        String gcCustomDate = Settings.getGcCustomDate();
         for (MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
+            // to get the same results we have to use the date format used when the mocked data was created
+            Settings.setGcCustomDate(mockedCache.getDateFormat());
             cgCacheWrap caches = cgBase.parseCacheFromText(mockedCache.getData(), 0, null);
             cgCache parsedCache = caches.cacheList.get(0);
             cgBaseTest.testCompareCaches(mockedCache, parsedCache);
         }
+        Settings.setGcCustomDate(gcCustomDate);
     }
 
     public static void testHumanDistance() {

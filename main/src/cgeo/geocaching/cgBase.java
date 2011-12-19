@@ -101,7 +101,7 @@ public class cgBase {
     private static final String passMatch = "(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+";
 
     public final static Map<WaypointType, String> waypointTypes = new HashMap<WaypointType, String>();
-    public final static Map<String, SimpleDateFormat> gcCustomDateFormats;
+    private final static Map<String, SimpleDateFormat> gcCustomDateFormats;
     static {
         final String[] formats = new String[] {
                 "MM/dd/yyyy",
@@ -1356,35 +1356,32 @@ public class cgBase {
         }
     }
 
-    public static Date parseGcCustomDate(final String input)
-            throws ParseException
-    {
-        if (StringUtils.isBlank(input))
-        {
+    public static Date parseGcCustomDate(final String input, final String format) throws ParseException {
+        if (StringUtils.isBlank(input)) {
             throw new ParseException("Input is null", 0);
         }
 
         final String trimmed = input.trim();
 
-        if (gcCustomDateFormats.containsKey(Settings.getGcCustomDate()))
-        {
-            try
-            {
-                return gcCustomDateFormats.get(Settings.getGcCustomDate()).parse(trimmed);
+        if (gcCustomDateFormats.containsKey(format)) {
+            try {
+                return gcCustomDateFormats.get(format).parse(trimmed);
             } catch (ParseException e) {
             }
         }
 
-        for (SimpleDateFormat format : gcCustomDateFormats.values())
-        {
-            try
-            {
-                return format.parse(trimmed);
+        for (SimpleDateFormat sdf : gcCustomDateFormats.values()) {
+            try {
+                return sdf.parse(trimmed);
             } catch (ParseException e) {
             }
         }
 
         throw new ParseException("No matching pattern", 0);
+    }
+
+    public static Date parseGcCustomDate(final String input) throws ParseException {
+        return parseGcCustomDate(input, Settings.getGcCustomDate());
     }
 
     /**
