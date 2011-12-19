@@ -242,7 +242,7 @@ public class cgCache implements ICache {
         // is not in the past?
         final Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
-        cal.set(Calendar.HOUR, 0);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
