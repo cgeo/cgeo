@@ -1151,7 +1151,7 @@ public class cgeocaches extends AbstractListActivity {
             addVisitMenu(menu, cache);
             menu.add(0, MENU_CACHE_DETAILS, 0, res.getString(R.string.cache_menu_details));
         }
-        if (cache.getReason() >= 1) {
+        if (cache.getListId() >= 1) {
             menu.add(0, MENU_DROP_CACHE, 0, res.getString(R.string.cache_offline_drop));
             final List<StoredList> cacheLists = app.getLists();
             final int listCount = cacheLists.size();
@@ -1880,16 +1880,16 @@ public class cgeocaches extends AbstractListActivity {
     private class LoadDetailsThread extends Thread {
 
         final private Handler handler;
-        final private int reason;
+        final private int listIdLD;
         private volatile boolean needToStop = false;
         private int checked = 0;
         private long last = 0L;
 
-        public LoadDetailsThread(Handler handlerIn, int reasonIn) {
+        public LoadDetailsThread(Handler handlerIn, int listId) {
             setPriority(Thread.MIN_PRIORITY);
 
             handler = handlerIn;
-            reason = reasonIn;
+            this.listIdLD = listId;
 
             if (adapter != null) {
                 checked = adapter.getChecked();
@@ -1944,7 +1944,7 @@ public class cgeocaches extends AbstractListActivity {
                     }
 
                     detailProgress++;
-                    cgBase.storeCache(app, cgeocaches.this, cache, null, reason, null);
+                    cgBase.storeCache(app, cgeocaches.this, cache, null, listIdLD, null);
 
                     handler.sendEmptyMessage(cacheList.indexOf(cache));
 
@@ -1964,14 +1964,14 @@ public class cgeocaches extends AbstractListActivity {
     private class LoadFromWebThread extends Thread {
 
         final private Handler handler;
-        final private int reason;
+        final private int listIdLFW;
         private volatile boolean needToStop = false;
 
-        public LoadFromWebThread(Handler handlerIn, int reasonIn) {
+        public LoadFromWebThread(Handler handlerIn, int listId) {
             setPriority(Thread.MIN_PRIORITY);
 
             handler = handlerIn;
-            reason = reasonIn;
+            listIdLFW = listId;
         }
 
         public void kill() {
@@ -2020,7 +2020,7 @@ public class cgeocaches extends AbstractListActivity {
                         yield();
 
                         cgBase.storeCache(app, cgeocaches.this, null, GCcode,
-                                reason, null);
+                                listIdLFW, null);
 
                         Message mes1 = new Message();
                         mes1.what = 2;

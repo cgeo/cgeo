@@ -49,7 +49,7 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
-    public cgSearch searchByGeocode(String geocode, String guid, cgeoapplication app, cgSearch search, int reason, CancellableHandler handler) {
+    public cgSearch searchByGeocode(String geocode, String guid, cgeoapplication app, cgSearch search, int listId, CancellableHandler handler) {
         return null;
     }
 

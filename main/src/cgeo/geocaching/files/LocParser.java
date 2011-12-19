@@ -161,7 +161,7 @@ public final class LocParser extends FileParser {
 
             fixCache(cache);
             cache.setType(CacheType.UNKNOWN); // type is not given in the LOC file
-            cache.setReason(listId);
+            cache.setListId(listId);
             cache.setDetailed(true);
         }
         Log.i(Settings.tag, "Caches found in .loc file: " + caches.size());

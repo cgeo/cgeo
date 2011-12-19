@@ -407,7 +407,7 @@ public class cgeopopup extends AbstractActivity {
                 final Button offlineRefresh = (Button) findViewById(R.id.offline_refresh);
                 final Button offlineStore = (Button) findViewById(R.id.offline_store);
 
-                if (cache.getReason() > 0) {
+                if (cache.getListId() > 0) {
                     long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
 
                     String ago = "";

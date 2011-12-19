@@ -539,7 +539,7 @@ public class cgeoapplication extends Application {
         search.addGeocode(geocode);
     }
 
-    public void addSearch(final List<cgCache> cacheList, final int reason) {
+    public void addSearch(final List<cgCache> cacheList, final int listId) {
         if (CollectionUtils.isEmpty(cacheList)) {
             return;
         }
@@ -549,8 +549,8 @@ public class cgeoapplication extends Application {
         }
 
         for (final cgCache cache : cacheList) {
-            cache.setReason(reason);
-            storeWithMerge(cache, reason >= 1);
+            cache.setListId(listId);
+            storeWithMerge(cache, listId >= 1);
         }
     }
 
@@ -559,7 +559,7 @@ public class cgeoapplication extends Application {
             return false;
         }
 
-        final boolean status = storeWithMerge(cache, cache.getReason() >= 1);
+        final boolean status = storeWithMerge(cache, cache.getListId() >= 1);
 
         if (status) {
             search.addGeocode(cache.getGeocode());

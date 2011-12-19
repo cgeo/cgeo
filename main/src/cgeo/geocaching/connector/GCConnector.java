@@ -81,7 +81,7 @@ public class GCConnector extends AbstractConnector {
     }
 
     @Override
-    public cgSearch searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final CancellableHandler handler) {
+    public cgSearch searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int listId, final CancellableHandler handler) {
         final Parameters params = new Parameters("decrypt", "y");
         if (StringUtils.isNotBlank(geocode)) {
             params.put("wp", geocode);
@@ -115,7 +115,7 @@ public class GCConnector extends AbstractConnector {
             return null;
         }
 
-        final cgCacheWrap caches = cgBase.parseCache(page, reason, handler);
+        final cgCacheWrap caches = cgBase.parseCache(page, listId, handler);
 
         if (caches == null || CollectionUtils.isEmpty(caches.cacheList)) {
             if (caches != null && caches.error != null) {
@@ -125,14 +125,14 @@ public class GCConnector extends AbstractConnector {
                 search.url = caches.url;
             }
 
-            app.addSearch(null, reason);
+            app.addSearch(null, listId);
 
             Log.e(Settings.tag, "cgeoBase.searchByGeocode: No cache parsed");
             return search;
         }
 
         final List<cgCache> cacheList = cgBase.filterSearchResults(search, caches, false, false, Settings.getCacheType());
-        app.addSearch(cacheList, reason);
+        app.addSearch(cacheList, listId);
 
         return search;
     }

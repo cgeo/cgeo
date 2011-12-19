@@ -43,6 +43,7 @@ public class cgData {
             "difficulty", "distance", "direction", "terrain", "latlon", "location", "latitude", "longitude", "elevation", "shortdesc",
             "favourite_cnt", "rating", "votes", "myvote", "disabled", "archived", "members", "found", "favourite", "inventorycoins", "inventorytags",
             "inventoryunknown", "onWatchlist", "personal_note", "reliable_latlon", "coordsChanged"
+            // reason is replaced by listId in cgCache
     };
     /**
      * holds the column indexes of the cache table to avoid lookups
@@ -1248,7 +1249,7 @@ public class cgData {
         } else {
             values.put("updated", cache.getUpdated());
         }
-        values.put("reason", cache.getReason());
+        values.put("reason", cache.getListId());
         values.put("detailed", cache.getDetailed() ? 1 : 0);
         values.put("detailedupdate", cache.getDetailedUpdate());
         values.put("visiteddate", cache.getVisitedDate());
@@ -2071,7 +2072,7 @@ public class cgData {
         }
 
         cache.setUpdated(cursor.getLong(cacheColumnIndex[0]));
-        cache.setReason(cursor.getInt(cacheColumnIndex[1]));
+        cache.setListId(cursor.getInt(cacheColumnIndex[1]));
         cache.setDetailed(cursor.getInt(cacheColumnIndex[2]) == 1);
         cache.setDetailedUpdate(cursor.getLong(cacheColumnIndex[3]));
         cache.setVisitedDate(cursor.getLong(cacheColumnIndex[4]));

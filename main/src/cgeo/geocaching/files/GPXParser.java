@@ -280,7 +280,7 @@ public abstract class GPXParser extends FileParser {
                                 || StringUtils.contains(type, "geocache")
                                 || StringUtils.contains(sym, "geocache"))) {
                     fixCache(cache);
-                    cache.setReason(listId);
+                    cache.setListId(listId);
                     cache.setDetailed(true);
 
                     createNoteFromGSAKUserdata();

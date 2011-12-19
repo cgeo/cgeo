@@ -1641,8 +1641,8 @@ public class CacheDetailActivity extends AbstractActivity {
 
             @Override
             public void run() {
-                int reason = cache.getReason() > 1 ? cache.getReason() : 1;
-                cgBase.storeCache(app, CacheDetailActivity.this, cache, null, reason, handler);
+                int listId = cache.getListId() > 1 ? cache.getListId() : 1;
+                cgBase.storeCache(app, CacheDetailActivity.this, cache, null, listId, handler);
             }
         }
 
@@ -1807,7 +1807,7 @@ public class CacheDetailActivity extends AbstractActivity {
             final Button offlineRefresh = (Button) view.findViewById(R.id.offline_refresh);
             final Button offlineStore = (Button) view.findViewById(R.id.offline_store);
 
-            if (cache.getReason() >= 1) {
+            if (cache.getListId() >= 1) {
                 long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
 
                 String ago = "";
@@ -1873,7 +1873,7 @@ public class CacheDetailActivity extends AbstractActivity {
             if (StringUtils.isNotBlank(cache.getShortdesc())) {
                 TextView descView = (TextView) view.findViewById(R.id.shortdesc);
                 descView.setVisibility(View.VISIBLE);
-                descView.setText(Html.fromHtml(cache.getShortdesc().trim(), new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), true, cache.getReason(), false), null), TextView.BufferType.SPANNABLE);
+                descView.setText(Html.fromHtml(cache.getShortdesc().trim(), new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), true, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
                 descView.setMovementMethod(LinkMovementMethod.getInstance());
                 fixBlackTextColor(descView, cache.getShortdesc());
             }
@@ -1994,7 +1994,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 publishProgress(params);
                 if (imageCounter.getImageCount() > 0) {
                     // Complete view: parse again with loading images - if necessary ! If there are any images causing problems the user can see at least the preview
-                    longDesc = Html.fromHtml(cache.getDescription().trim(), new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), true, cache.getReason(), false), new UnknownTagsHandler());
+                    longDesc = Html.fromHtml(cache.getDescription().trim(), new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), true, cache.getListId(), false), new UnknownTagsHandler());
                     publishProgress(params);
                 }
                 return null;
@@ -2148,7 +2148,7 @@ public class CacheDetailActivity extends AbstractActivity {
                         }
                         // avoid parsing HTML if not necessary
                         if (BaseUtils.containsHtml(log.log)) {
-                            ((TextView) rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log, new HtmlImage(CacheDetailActivity.this, null, false, cache.getReason(), false), null), TextView.BufferType.SPANNABLE);
+                            ((TextView) rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log, new HtmlImage(CacheDetailActivity.this, null, false, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
                         }
                         else {
                             ((TextView) rowView.findViewById(R.id.log)).setText(log.log);

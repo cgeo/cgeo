@@ -37,7 +37,7 @@ public class ApiOpenCachingConnector extends OpenCachingConnector {
     }
 
     @Override
-    public cgSearch searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final CancellableHandler handler) {
+    public cgSearch searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int listId, final CancellableHandler handler) {
         final cgCache cache = OkapiClient.getCache(geocode);
         if (cache == null) {
             return null;
@@ -46,7 +46,7 @@ public class ApiOpenCachingConnector extends OpenCachingConnector {
         caches.cacheList.add(cache);
 
         final List<cgCache> cacheList = cgBase.filterSearchResults(search, caches, false, false, Settings.getCacheType());
-        app.addSearch(cacheList, reason);
+        app.addSearch(cacheList, listId);
 
         return search;
     }

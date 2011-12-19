@@ -579,7 +579,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             if (cache.isMembers()) {
                 infos.add(res.getString(R.string.cache_premium));
             }
-            if (cacheListType != CacheListType.OFFLINE && cacheListType != CacheListType.HISTORY && cache.getReason() > 0) {
+            if (cacheListType != CacheListType.OFFLINE && cacheListType != CacheListType.HISTORY && cache.getListId() > 0) {
                 infos.add(res.getString(R.string.cache_offline));
             }
             holder.info.setText(StringUtils.join(infos, SEPARATOR));

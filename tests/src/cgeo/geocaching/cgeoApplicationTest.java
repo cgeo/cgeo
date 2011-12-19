@@ -86,7 +86,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
      */
     @MediumTest
     public static cgCache testSearchByGeocode(final String geocode) {
-        final cgSearch search = cgBase.searchByGeocode(geocode, null, 1, true, null);
+        final cgSearch search = cgBase.searchByGeocode(geocode, null, 0, true, null);
         assertNotNull(search);
         if (Settings.isPremiumMember() || search.error == null) {
             assertEquals(1, search.getGeocodes().size());

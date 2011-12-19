@@ -35,6 +35,7 @@ public abstract class MockedCache implements ICache {
         this.mockedDataUser = mockedDataUser;
     }
 
+    @SuppressWarnings("static-method")
     public String getDateFormat() {
         return "dd/MM/yyyy";
     }

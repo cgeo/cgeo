@@ -49,7 +49,7 @@ public class cgCache implements ICache {
     private long updated = 0;
     private long detailedUpdate = 0;
     private long visitedDate = 0;
-    private int reason = 0;
+    private int listId = 0;
     private boolean detailed = false;
     private String geocode = "";
     private String cacheId = "";
@@ -120,8 +120,8 @@ public class cgCache implements ICache {
         if (visitedDate == 0) {
             visitedDate = other.getVisitedDate();
         }
-        if (reason == 0) {
-            reason = other.reason;
+        if (listId == 0) {
+            listId = other.listId;
         }
         if (StringUtils.isBlank(geocode)) {
             geocode = other.getGeocode();
@@ -629,12 +629,12 @@ public class cgCache implements ICache {
         this.visitedDate = visitedDate;
     }
 
-    public int getReason() {
-        return reason;
+    public int getListId() {
+        return listId;
     }
 
-    public void setReason(int reason) {
-        this.reason = reason;
+    public void setListId(int listId) {
+        this.listId = listId;
     }
 
     public boolean getDetailed() {
