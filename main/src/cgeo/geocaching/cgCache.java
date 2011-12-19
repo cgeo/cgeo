@@ -180,7 +180,7 @@ public class cgCache implements ICache {
         if (elevation == null) {
             elevation = other.elevation;
         }
-        if (personalNote == null) { // don't use StringUtils.isBlank. Otherwise we cannot recognize a note which was deleted on GC
+        if (personalNote == null) { // don't use StringUtils.isBlank here. Otherwise we cannot recognize a note which was deleted on GC
             personalNote = other.personalNote;
         }
         if (StringUtils.isBlank(shortdesc)) {
@@ -490,6 +490,11 @@ public class cgCache implements ICache {
 
     @Override
     public String getPersonalNote() {
+        // non premium members have no personal notes, premium members have an empty string by default.
+        // map both to null, so other code doesn't need to differentiate
+        if (StringUtils.isBlank(personalNote)) {
+            return null;
+        }
         return personalNote;
     }
 
