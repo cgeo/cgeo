@@ -183,7 +183,11 @@ public final class Settings {
 
     public static boolean isPremiumMember() {
         // Basic Member, Premium Member, ???
-        return "Premium Member".compareTo(Settings.getMemberStatus()) == 0;
+        String memberStatus = Settings.getMemberStatus();
+        if (memberStatus == null) {
+            return false;
+        }
+        return "Premium Member".equalsIgnoreCase(memberStatus);
     }
 
     public static String getMemberStatus() {
