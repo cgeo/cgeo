@@ -2,14 +2,14 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.UpdateDirectionCallback;
+import cgeo.geocaching.UpdateLocationCallback;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgDirection;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgSearch;
-import cgeo.geocaching.cgUpdateDir;
-import cgeo.geocaching.cgUpdateLoc;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
@@ -99,8 +99,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private cgeoapplication app = null;
     private cgGeo geo = null;
     private cgDirection dir = null;
-    private cgUpdateLoc geoUpdate = new UpdateLoc();
-    private cgUpdateDir dirUpdate = new UpdateDir();
+    private UpdateLocationCallback geoUpdate = new UpdateLoc();
+    private UpdateDirectionCallback dirUpdate = new UpdateDir();
     // from intent
     private boolean fromDetailIntent = false;
     private cgSearch searchIntent = null;
@@ -153,7 +153,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private ProgressDialog waitDialog = null;
     private int detailTotal = 0;
     private int detailProgress = 0;
-    private Long detailProgressTime = 0L;
+    private long detailProgressTime = 0L;
     // views
     private ImageSwitcher myLocSwitch = null;
     // other things
@@ -230,9 +230,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     if (secondsRemaining < 40) {
                         waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
                     } else if (secondsRemaining < 90) {
-                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format("%d", (secondsRemaining / 60)) + " " + res.getString(R.string.caches_eta_min));
+                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + (secondsRemaining / 60) + " " + res.getString(R.string.caches_eta_min));
                     } else {
-                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format("%d", (secondsRemaining / 60)) + " " + res.getString(R.string.caches_eta_mins));
+                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + (secondsRemaining / 60) + " " + res.getString(R.string.caches_eta_mins));
                     }
                 }
             } else if (msg.what == FINISHED_LOADING_DETAILS) {
@@ -347,10 +347,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
         // start location and directory services
         if (geo != null) {
-            geoUpdate.updateLoc(geo);
+            geoUpdate.updateLocation(geo);
         }
         if (dir != null) {
-            dirUpdate.updateDir(dir);
+            dirUpdate.updateDirection(dir);
         }
 
         // get parameters
@@ -423,10 +423,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             dir = app.startDir(activity, dirUpdate);
         }
 
-        geoUpdate.updateLoc(geo);
+        geoUpdate.updateLocation(geo);
 
         if (dir != null) {
-            dirUpdate.updateDir(dir);
+            dirUpdate.updateDirection(dir);
         }
 
         startTimer();
@@ -524,7 +524,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
         menu.add(0, MENU_MAP_LIVE, 0, res.getString(R.string.map_live_disable)).setIcon(R.drawable.ic_menu_refresh);
         menu.add(0, MENU_STORE_CACHES, 0, res.getString(R.string.caches_store_offline)).setIcon(android.R.drawable.ic_menu_set_as).setEnabled(false);
-        menu.add(0, MENU_TRAIL_MODE, 0, res.getString(R.string.map_trail_hide)).setIcon(android.R.drawable.ic_menu_recent_history);
+        menu.add(0, MENU_TRAIL_MODE, 0, res.getString(R.string.map_trail_hide)).setIcon(R.drawable.ic_menu_trail);
         menu.add(0, MENU_CIRCLE_MODE, 0, res.getString(R.string.map_circles_hide)).setIcon(R.drawable.ic_menu_circle);
         menu.add(0, MENU_AS_LIST, 0, res.getString(R.string.map_as_list)).setIcon(android.R.drawable.ic_menu_agenda);
 
@@ -653,13 +653,13 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         }
                     });
 
-                    Float etaTime = Float.valueOf((detailTotal * (float) 7) / 60);
+                    float etaTime = detailTotal * 7.0f / 60.0f;
                     if (etaTime < 0.4) {
                         waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
                     } else if (etaTime < 1.5) {
-                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format("%.0f", etaTime) + " " + res.getString(R.string.caches_eta_min));
+                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + Math.round(etaTime) + " " + res.getString(R.string.caches_eta_min));
                     } else {
-                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + String.format("%.0f", etaTime) + " " + res.getString(R.string.caches_eta_mins));
+                        waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + Math.round(etaTime) + " " + res.getString(R.string.caches_eta_mins));
                     }
                     waitDialog.show();
 
@@ -756,10 +756,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     }
 
     // class: update location
-    private class UpdateLoc extends cgUpdateLoc {
+    private class UpdateLoc implements UpdateLocationCallback {
 
         @Override
-        public void updateLoc(cgGeo geo) {
+        public void updateLocation(cgGeo geo) {
             if (geo == null) {
                 return;
             }
@@ -783,12 +783,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     }
                 }
 
-                if (!Settings.isUseCompass() || (geo.speedNow != null && geo.speedNow > 5)) { // use GPS when speed is higher than 18 km/h
-                    if (geo.bearingNow != null) {
-                        overlayPosition.setHeading(geo.bearingNow);
-                    } else {
-                        overlayPosition.setHeading(0f);
-                    }
+                if (!Settings.isUseCompass() || geo.speedNow > 5) { // use GPS when speed is higher than 18 km/h
+                    overlayPosition.setHeading(geo.bearingNow);
                     repaintRequired = true;
                 }
 
@@ -803,15 +799,15 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     }
 
     // class: update direction
-    private class UpdateDir extends cgUpdateDir {
+    private class UpdateDir implements UpdateDirectionCallback {
 
         @Override
-        public void updateDir(cgDirection dir) {
+        public void updateDirection(cgDirection dir) {
             if (dir == null || dir.directionNow == null) {
                 return;
             }
 
-            if (overlayPosition != null && mapView != null && (geo == null || geo.speedNow == null || geo.speedNow <= 5)) { // use compass when speed is lower than 18 km/h
+            if (overlayPosition != null && mapView != null && (geo == null || geo.speedNow <= 5)) { // use compass when speed is lower than 18 km/h
                 overlayPosition.setHeading(dir.directionNow);
                 mapView.repaintRequired(overlayPosition);
             }
@@ -910,7 +906,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         if (liveChanged) {
                             moved = true;
                             force = true;
-                        } else if (live && Settings.isLiveMap() && downloaded == false) {
+                        } else if (live && Settings.isLiveMap() && !downloaded) {
                             moved = true;
                         } else if (centerLatitude == null || centerLongitude == null) {
                             moved = true;
@@ -1668,7 +1664,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     if (!app.isOffline(geocode, null)) {
                         if ((System.currentTimeMillis() - last) < 1500) {
                             try {
-                                int delay = 1000 + ((Double) (Math.random() * 1000)).intValue() - (int) (System.currentTimeMillis() - last);
+                                int delay = 1000 + (int) (Math.random() * 1000.0) - (int) (System.currentTimeMillis() - last);
                                 if (delay < 0) {
                                     delay = 500;
                                 }
@@ -1739,7 +1735,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             alreadyCentered = true;
         } else if (!centered && (geocodeCenter != null || searchIntent != null)) {
             try {
-                List<Object> viewport = null;
+                List<Number> viewport = null;
 
                 if (geocodeCenter != null) {
                     viewport = app.getBounds(geocodeCenter);
@@ -1747,32 +1743,18 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     viewport = app.getBounds(searchCenter);
                 }
 
-                if (viewport == null) {
+                if (viewport == null || viewport.size() < 5) {
                     return;
                 }
 
-                Integer cnt = (Integer) viewport.get(0);
-                Integer minLat = null;
-                Integer maxLat = null;
-                Integer minLon = null;
-                Integer maxLon = null;
-
-                if (viewport.get(1) != null) {
-                    minLat = (int) ((Double) viewport.get(1) * 1e6);
-                }
-                if (viewport.get(2) != null) {
-                    maxLat = (int) ((Double) viewport.get(2) * 1e6);
-                }
-                if (viewport.get(3) != null) {
-                    maxLon = (int) ((Double) viewport.get(3) * 1e6);
-                }
-                if (viewport.get(4) != null) {
-                    minLon = (int) ((Double) viewport.get(4) * 1e6);
-                }
-
-                if (cnt == null || cnt <= 0 || minLat == null || maxLat == null || minLon == null || maxLon == null) {
+                int cnt = (Integer) viewport.get(0);
+                if (cnt <= 0) {
                     return;
                 }
+                int minLat = (int) ((Double) viewport.get(1) * 1e6);
+                int maxLat = (int) ((Double) viewport.get(2) * 1e6);
+                int maxLon = (int) ((Double) viewport.get(3) * 1e6);
+                int minLon = (int) ((Double) viewport.get(4) * 1e6);
 
                 int centerLat = 0;
                 int centerLon = 0;
@@ -1788,11 +1770,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     centerLon = maxLon;
                 }
 
-                if (cnt > 0) {
-                    mapController.setCenter(mapProvider.getGeoPointBase(new Geopoint(centerLat, centerLon)));
-                    if (Math.abs(maxLat - minLat) != 0 && Math.abs(maxLon - minLon) != 0) {
-                        mapController.zoomToSpan(Math.abs(maxLat - minLat), Math.abs(maxLon - minLon));
-                    }
+                mapController.setCenter(mapProvider.getGeoPointBase(new Geopoint(centerLat, centerLon)));
+                if (Math.abs(maxLat - minLat) != 0 && Math.abs(maxLon - minLon) != 0) {
+                    mapController.zoomToSpan(Math.abs(maxLat - minLat), Math.abs(maxLon - minLon));
                 }
             } catch (Exception e) {
                 // nothing at all

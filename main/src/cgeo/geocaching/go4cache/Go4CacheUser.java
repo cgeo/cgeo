@@ -26,7 +26,7 @@ public class Go4CacheUser {
     public Go4CacheUser(final String username, final Geopoint coords, final Date date, final String action, final String client) {
         this.username = username;
         this.coords = coords;
-        this.date = date;
+        this.date = new Date(date.getTime());
         this.action = action;
         this.client = client;
     }
@@ -84,15 +84,15 @@ public class Go4CacheUser {
         if (null == actionForDisplay) {
             getGeocodeAndAction();
         }
-        return actionForDisplay + getTime();
+        return actionForDisplay + getTime() + ".";
     }
 
     private String getTime() {
-        long minutes = (System.currentTimeMillis() - date.getTime()) / 60000;
+        int minutes = (int) ((System.currentTimeMillis() - date.getTime()) / 60000);
         if (minutes < 0) {
             minutes = 0;
         }
-        return " " + minutes + " " + res.getString(R.string.go4cache_minutes);
+        return " (" + res.getQuantityString(R.plurals.go4cache_time_minutes, minutes, minutes) + ")";
     }
 
     public String getGeocode() {

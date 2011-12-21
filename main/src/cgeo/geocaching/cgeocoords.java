@@ -139,7 +139,7 @@ public class cgeocoords extends Dialog {
         if (gp == null) {
             return;
         }
-        Double lat = 0.0;
+        double lat = 0.0;
         if (gp.getLatitude() < 0) {
             bLat.setText("S");
         } else {
@@ -148,7 +148,7 @@ public class cgeocoords extends Dialog {
 
         lat = Math.abs(gp.getLatitude());
 
-        Double lon = 0.0;
+        double lon = 0.0;
         if (gp.getLongitude() < 0) {
             bLon.setText("W");
         } else {
@@ -285,6 +285,8 @@ public class cgeocoords extends Dialog {
                 case 'W':
                     button.setText("E");
                     break;
+                default:
+                    break;
             }
             calc(true);
         }
@@ -377,8 +379,8 @@ public class cgeocoords extends Dialog {
 
         int latDeg = 0, latMin = 0, latSec = 0;
         int lonDeg = 0, lonMin = 0, lonSec = 0;
-        Double latDegFrac = 0.0, latMinFrac = 0.0, latSecFrac = 0.0;
-        Double lonDegFrac = 0.0, lonMinFrac = 0.0, lonSecFrac = 0.0;
+        double latDegFrac = 0.0, latMinFrac = 0.0, latSecFrac = 0.0;
+        double lonDegFrac = 0.0, lonMinFrac = 0.0, lonSecFrac = 0.0;
 
         try {
             latDeg = Integer.parseInt(eLatDeg.getText().toString());

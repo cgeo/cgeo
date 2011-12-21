@@ -367,6 +367,7 @@
   <string name="init_details">Detaily skrýše</string>
   <string name="init_ratingwanted">Načítať hodnotenie skrýše z GCvote.com</string>
   <string name="init_elevationwanted">Načítať údaje o stúpaní skrýše</string>
+  <string name="init_openlastdetailspage">Otvoriť detaily na naposledy použitej stránke</string>
   <string name="init_autoload">Automatické načítanie dlhého popisu</string>
   <string name="init_other">Ďalšie možnosti</string>
   <string name="init_skin">Svetlý vzhľad\n(vyžaduje reštart c:geo)</string>
@@ -462,7 +463,6 @@
   <string name="cache_attributes">Atribúty</string>
   <string name="cache_attributes_no_icons">(obnoví skrýšu pre zobrazenie ikon atribútov)</string>
   <string name="cache_inventory">Obsah</string>
-  <string name="cache_inventory_loading">Načítanie obsahu skrýše…</string>
   <string name="cache_log_offline">Offline log</string>
   <string name="cache_log_images_loading">Načítanie obrázku z logu…</string>
   <string name="cache_log_images_title">Obrázok z logu</string>
@@ -533,6 +533,7 @@
   <string name="cache_difficulty">Náročnosť</string>
   <string name="cache_terrain">Terén</string>
   <string name="cache_rating">Hodnotenie</string>
+  <string name="cache_own_rating">Vlastné hodnotenie</string>
   <string name="cache_rating_of">z</string>
   <string name="cache_favourite">Obľúbené</string>
   <string name="cache_owner">Vlastník</string>
@@ -876,6 +877,5 @@
   <string name="go4cache_looking_around">Prehľadávanie okolia</string>
   <string name="go4cache_tweeting">Posielanie tweetov</string>
   <string name="go4cache_heading_to">Smerovanie k</string>
-  <string name="go4cache_minutes">Minút</string>
       
 </resources>

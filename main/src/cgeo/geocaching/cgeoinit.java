@@ -6,8 +6,10 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.maps.MapProviderFactory;
+import cgeo.geocaching.twitter.TwitterAuthorizationActivity;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.http.HttpResponse;
 
 import android.app.ProgressDialog;
@@ -212,13 +214,10 @@ public class cgeoinit extends AbstractActivity {
     public void init() {
 
         // geocaching.com settings
-        String usernameNow = prefs.getString("username", null);
-        if (usernameNow != null) {
-            ((EditText) findViewById(R.id.username)).setText(usernameNow);
-        }
-        String passwordNow = prefs.getString("password", null);
-        if (usernameNow != null) {
-            ((EditText) findViewById(R.id.password)).setText(passwordNow);
+        final ImmutablePair<String, String> login = Settings.getLogin();
+        if (login != null) {
+            ((EditText) findViewById(R.id.username)).setText(login.left);
+            ((EditText) findViewById(R.id.password)).setText(login.right);
         }
 
         Button logMeIn = (Button) findViewById(R.id.log_me_in);
@@ -234,9 +233,9 @@ public class cgeoinit extends AbstractActivity {
         });
 
         // gcvote settings
-        String passvoteNow = prefs.getString("pass-vote", null);
-        if (passvoteNow != null) {
-            ((EditText) findViewById(R.id.passvote)).setText(passvoteNow);
+        final ImmutablePair<String, String> gcvoteLogin = Settings.getGCvoteLogin();
+        if (null != gcvoteLogin && null != gcvoteLogin.right) {
+            ((EditText) findViewById(R.id.passvote)).setText(gcvoteLogin.right);
         }
 
         // go4cache settings
@@ -264,7 +263,7 @@ public class cgeoinit extends AbstractActivity {
         authorizeTwitter.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View arg0) {
-                Intent authIntent = new Intent(cgeoinit.this, cgeoauth.class);
+                Intent authIntent = new Intent(cgeoinit.this, TwitterAuthorizationActivity.class);
                 startActivity(authIntent);
             }
         });
@@ -277,7 +276,7 @@ public class cgeoinit extends AbstractActivity {
             public void onClick(View v) {
                 Settings.setUseTwitter(twitterButton.isChecked());
                 if (Settings.isUseTwitter() && !Settings.isTwitterLoginValid()) {
-                    Intent authIntent = new Intent(cgeoinit.this, cgeoauth.class);
+                    Intent authIntent = new Intent(cgeoinit.this, TwitterAuthorizationActivity.class);
                     startActivity(authIntent);
                 }
 
@@ -343,6 +342,26 @@ public class cgeoinit extends AbstractActivity {
             @Override
             public void onClick(View v) {
                 Settings.setElevationWanted(elevationWantedButton.isChecked());
+            }
+        });
+
+        final CheckBox friendLogsWantedButton = (CheckBox) findViewById(R.id.friendlogswanted);
+        friendLogsWantedButton.setChecked(Settings.isFriendLogsWanted());
+        friendLogsWantedButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Settings.setFriendLogsWanted(friendLogsWantedButton.isChecked());
+            }
+        });
+
+        final CheckBox openLastDetailsPageButton = (CheckBox) findViewById(R.id.openlastdetailspage);
+        openLastDetailsPageButton.setChecked(Settings.isOpenLastDetailsPage());
+        openLastDetailsPageButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Settings.setOpenLastDetailsPage(openLastDetailsPageButton.isChecked());
             }
         });
 
@@ -419,7 +438,7 @@ public class cgeoinit extends AbstractActivity {
         });
 
         TextView showWaypointsThreshold = (TextView) findViewById(R.id.showwaypointsthreshold);
-        showWaypointsThreshold.setText("" + prefs.getInt("gcshowwaypointsthreshold", 0));
+        showWaypointsThreshold.setText(String.valueOf(Settings.getWayPointsThreshold()));
 
         final CheckBox autovisitButton = (CheckBox) findViewById(R.id.trackautovisit);
         autovisitButton.setChecked(Settings.isTrackableAutoVisit());
@@ -504,7 +523,7 @@ public class cgeoinit extends AbstractActivity {
 
         // Altitude settings
         EditText altitudeEdit = (EditText) findViewById(R.id.altitude);
-        altitudeEdit.setText("" + prefs.getInt("altcorrection", 0));
+        altitudeEdit.setText(String.valueOf(Settings.getAltCorrection()));
 
         //Send2cgeo settings
         String webDeviceName = Settings.getWebDeviceName();
@@ -525,7 +544,7 @@ public class cgeoinit extends AbstractActivity {
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(this, android.R.layout.simple_spinner_item, mapSources.values().toArray(new String[] {}));
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mapSourceSelector.setAdapter(adapter);
-        int mapsource = prefs.getInt("mapsource", 0);
+        int mapsource = Settings.getMapSource();
         mapSourceSelector.setSelection(MapProviderFactory.getSourceOrdinalFromId(mapsource));
         mapSourceSelector.setOnItemSelectedListener(new cgeoChangeMapSource());
 
@@ -541,13 +560,23 @@ public class cgeoinit extends AbstractActivity {
             }
         });
 
+        final CheckBox trailButton = (CheckBox) findViewById(R.id.trail);
+        trailButton.setChecked(Settings.isMapTrail());
+        trailButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Settings.setMapTrail(trailButton.isChecked());
+            }
+        });
+
         refreshBackupLabel();
 
     }
 
     private void initMapfileEdittext(boolean setFocus) {
         EditText mfmapFileEdit = (EditText) findViewById(R.id.mapfile);
-        mfmapFileEdit.setText(prefs.getString("mfmapfile", ""));
+        mfmapFileEdit.setText(Settings.getMapFile());
         if (setFocus) {
             mfmapFileEdit.requestFocus();
         }
@@ -694,7 +723,7 @@ public class cgeoinit extends AbstractActivity {
                     Object payload = loginResult;
                     if (loginResult == StatusCode.NO_ERROR) {
                         cgBase.detectGcCustomDate();
-                        payload = cgBase.downloadAvatar(cgeoinit.this);
+                        payload = cgBase.downloadAvatarAndGetMemberStatus(cgeoinit.this);
                     }
                     logInHandler.obtainMessage(0, payload).sendToTarget();
                 }
@@ -706,7 +735,7 @@ public class cgeoinit extends AbstractActivity {
 
         public void onClick(View arg0) {
             final String deviceName = ((EditText) findViewById(R.id.webDeviceName)).getText().toString();
-            final String deviceCode = prefs.getString("webDeviceCode", null);
+            final String deviceCode = Settings.getWebDeviceCode();
 
             if (StringUtils.isBlank(deviceName)) {
                 showToast(res.getString(R.string.err_missing_device_name));

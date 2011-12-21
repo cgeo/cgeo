@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/cgeo.geocaching"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="?background_color"
@@ -36,21 +37,14 @@
         android:layout_height="wrap_content"
         android:layout_weight="1" />
 
-    <RelativeLayout style="@style/pager_indicator" >
-
-        <TextView
-            android:id="@+id/indicator_prev"
-            style="@style/pager_indicator.side"
-            android:layout_alignParentLeft="true" />
-
-        <TextView
-            android:id="@+id/indicator_current"
-            style="@style/pager_indicator.title" />
-
-        <TextView
-            android:id="@+id/indicator_next"
-            style="@style/pager_indicator.side"
-            android:layout_alignParentRight="true" />
-    </RelativeLayout>
+    <com.viewpagerindicator.TitlePageIndicator
+        android:id="@+id/pager_indicator"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/actionbar_background"
+        app:footerColor="#ff888888"
+        app:footerIndicatorHeight="3dp"
+        app:footerIndicatorStyle="underline"
+        app:textSize="16dp" />
 
 </LinearLayout>

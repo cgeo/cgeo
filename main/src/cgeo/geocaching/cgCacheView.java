@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 public class cgCacheView {
     // layouts & views
-    public RelativeLayout oneCache;
     public RelativeLayout oneInfo;
     public RelativeLayout oneCheckbox;
     public CheckBox checkbox;
@@ -21,8 +20,4 @@ public class cgCacheView {
     public cgCompassMini direction;
     public RelativeLayout dirImgLayout;
     public ImageView dirImg;
-
-    // status
-    public float startX = -1;
-    public float prevX = -1;
 }

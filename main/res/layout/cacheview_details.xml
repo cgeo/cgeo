@@ -30,6 +30,31 @@
             android:orientation="vertical" >
         </LinearLayout>
 
+        <!-- Attributes box -->
+
+        <LinearLayout
+            android:id="@+id/attributes_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <View
+                style="@style/separator_horizontal"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="9dp" />
+
+            <!-- innerbox is only needed to define the paddings easily -->
+
+            <LinearLayout
+                android:id="@+id/attributes_innerbox"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp" />
+        </LinearLayout>
+
         <!-- Offline box -->
 
         <LinearLayout
@@ -38,14 +63,10 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <RelativeLayout style="@style/separator_horizontal_layout" >
-
-                <View style="@style/separator_horizontal" />
-
-                <TextView
-                    style="@style/separator_horizontal_headline"
-                    android:text="@string/cache_offline" />
-            </RelativeLayout>
+            <View
+                style="@style/separator_horizontal"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="9dp" />
 
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -88,15 +109,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
-
-            <RelativeLayout style="@style/separator_horizontal_layout" >
-
-                <View style="@style/separator_horizontal" />
-
-                <TextView
-                    style="@style/separator_horizontal_headline"
-                    android:text="@string/cache_watchlist" />
-            </RelativeLayout>
+            <View
+                style="@style/separator_horizontal"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="9dp" />
 
             <RelativeLayout
                 android:layout_width="fill_parent"

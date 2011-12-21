@@ -35,7 +35,7 @@ public class cgeowaypoint extends AbstractActivity {
     private int id = -1;
     private ProgressDialog waitDialog = null;
     private cgGeo geo = null;
-    private cgUpdateLoc geoUpdate = new update();
+    private UpdateLocationCallback geoUpdate = new update();
     private Handler loadWaypointHandler = new Handler() {
 
         @Override
@@ -279,10 +279,10 @@ public class cgeowaypoint extends AbstractActivity {
         }
     }
 
-    private static class update extends cgUpdateLoc {
+    private static class update implements UpdateLocationCallback {
 
         @Override
-        public void updateLoc(cgGeo geo) {
+        public void updateLocation(cgGeo geo) {
             // nothing
         }
     }

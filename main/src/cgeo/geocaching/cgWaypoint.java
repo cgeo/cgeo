@@ -12,7 +12,8 @@ import java.util.List;
 
 public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
 
-    private Integer id = 0;
+    private static final int ORDER_UNDEFINED = -2;
+    private int id = 0;
     private String geocode = "geocode";
     private WaypointType waypointType = WaypointType.WAYPOINT;
     private String prefix = "";
@@ -21,7 +22,7 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
     private String latlon = "";
     private Geopoint coords = null;
     private String note = "";
-    private Integer cachedOrder = null;
+    private int cachedOrder = ORDER_UNDEFINED;
 
     /**
      * default constructor, no fields are set
@@ -70,25 +71,27 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
     }
 
     public static void mergeWayPoints(List<cgWaypoint> newPoints,
-            List<cgWaypoint> oldPoints) {
+            List<cgWaypoint> oldPoints, boolean forceMerge) {
         // copy user modified details of the waypoints
         if (newPoints != null && oldPoints != null) {
             for (cgWaypoint old : oldPoints) {
-                boolean merged = false;
-                if (old != null && old.getName() != null && old.getName().length() > 0) {
-                    for (cgWaypoint waypoint : newPoints) {
-                        if (waypoint != null && waypoint.getName() != null) {
-                            if (old.getName().equalsIgnoreCase(waypoint.getName())) {
-                                waypoint.merge(old);
-                                merged = true;
-                                break;
+                if (old != null) {
+                    boolean merged = false;
+                    if (old.getName() != null && old.getName().length() > 0) {
+                        for (cgWaypoint waypoint : newPoints) {
+                            if (waypoint != null && waypoint.getName() != null) {
+                                if (old.getName().equalsIgnoreCase(waypoint.getName())) {
+                                    waypoint.merge(old);
+                                    merged = true;
+                                    break;
+                                }
                             }
                         }
                     }
-                }
-                // user added waypoints should also be in the new list
-                if (!merged) {
-                    newPoints.add(old);
+                    // user added waypoints should also be in the new list
+                    if (!merged && (old.isUserDefined() || forceMerge)) {
+                        newPoints.add(old);
+                    }
                 }
             }
         }
@@ -123,7 +126,7 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
     }
 
     private int order() {
-        if (cachedOrder == null) {
+        if (cachedOrder == ORDER_UNDEFINED) {
             cachedOrder = computeOrder();
         }
         return cachedOrder;
@@ -140,18 +143,18 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
 
     public void setPrefix(String prefix) {
         this.prefix = prefix;
-        cachedOrder = null;
+        cachedOrder = ORDER_UNDEFINED;
     }
 
     public String getUrl() {
         return "http://coord.info/" + geocode.toUpperCase();
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -211,11 +214,11 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
         this.note = note;
     }
 
-    public Integer getCachedOrder() {
+    public int getCachedOrder() {
         return cachedOrder;
     }
 
-    public void setCachedOrder(Integer cachedOrder) {
+    public void setCachedOrder(int cachedOrder) {
         this.cachedOrder = cachedOrder;
     }
 

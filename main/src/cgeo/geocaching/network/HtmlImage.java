@@ -45,17 +45,17 @@ public class HtmlImage implements Html.ImageGetter {
      * on error: return large error image, if <code>true</code>, otherwise empty 1x1 image
      */
     final private boolean returnErrorImage;
-    final private int reason;
+    final private int listId;
     final private boolean onlySave;
     final private BitmapFactory.Options bfOptions;
     final private int maxWidth;
     final private int maxHeight;
 
-    public HtmlImage(final Context contextIn, final String geocode, final boolean returnErrorImage, final int reason, final boolean onlySave) {
+    public HtmlImage(final Context contextIn, final String geocode, final boolean returnErrorImage, final int listId, final boolean onlySave) {
         this.context = contextIn;
         this.geocode = geocode;
         this.returnErrorImage = returnErrorImage;
-        this.reason = reason;
+        this.listId = listId;
         this.onlySave = onlySave;
 
         bfOptions = new BitmapFactory.Options();
@@ -176,7 +176,13 @@ public class HtmlImage implements Html.ImageGetter {
             } else {
                 final String host = ConnectorFactory.getConnector(geocode).getHost();
                 if (StringUtils.isNotEmpty(host)) {
-                    return "http://" + host + url;
+                    StringBuilder builder = new StringBuilder("http://");
+                    builder.append(host);
+                    if (!StringUtils.startsWith(url, "/")) {
+                        builder.append('/');
+                    }
+                    builder.append(url);
+                    return builder.toString();
                 }
             }
         } catch (Exception e) {
@@ -187,7 +193,7 @@ public class HtmlImage implements Html.ImageGetter {
 
     private Bitmap loadCachedImage(final File file) {
         if (file.exists()) {
-            if (reason > 0 || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000))) {
+            if (listId > 0 || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000))) {
                 setSampleSize(file);
                 return BitmapFactory.decodeFile(file.getPath(), bfOptions);
             }
@@ -205,15 +211,13 @@ public class HtmlImage implements Html.ImageGetter {
             fis = new FileInputStream(file);
             BitmapFactory.decodeStream(fis, null, options);
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Log.e(Settings.tag, "HtmlImage.setSampleSize", e);
         } finally {
             if (fis != null) {
                 try {
                     fis.close();
                 } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    // ignore
                 }
             }
         }

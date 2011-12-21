@@ -85,7 +85,7 @@ public class cgeopoint extends AbstractActivity {
     }
 
     private cgGeo geo = null;
-    private cgUpdateLoc geoUpdate = new update();
+    private UpdateLocationCallback geoUpdate = new update();
     private Button latButton = null;
     private Button lonButton = null;
     private boolean changed = false;
@@ -267,8 +267,8 @@ public class cgeopoint extends AbstractActivity {
         latButton.setOnClickListener(new coordDialogListener());
         lonButton.setOnClickListener(new coordDialogListener());
 
-        if (prefs.contains("anylatitude") && prefs.contains("anylongitude")) {
-            final Geopoint coords = new Geopoint(prefs.getFloat("anylatitude", 0f), prefs.getFloat("anylongitude", 0f));
+        final Geopoint coords = Settings.getAnyCoordinates();
+        if (coords != null) {
             latButton.setText(coords.format(GeopointFormatter.Format.LAT_DECMINUTE));
             lonButton.setText(coords.format(GeopointFormatter.Format.LON_DECMINUTE));
         }
@@ -457,10 +457,10 @@ public class cgeopoint extends AbstractActivity {
         finish();
     }
 
-    private class update extends cgUpdateLoc {
+    private class update implements UpdateLocationCallback {
 
         @Override
-        public void updateLoc(cgGeo geo) {
+        public void updateLocation(cgGeo geo) {
             if (geo == null) {
                 return;
             }
@@ -522,13 +522,10 @@ public class cgeopoint extends AbstractActivity {
 
         if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
             // bearing & distance
-            Double bearing = null;
+            double bearing = 0;
             try {
-                bearing = new Double(bearingText);
-            } catch (Exception e) {
-                // probably not a number
-            }
-            if (bearing == null) {
+                bearing = Double.parseDouble(bearingText);
+            } catch (NumberFormatException e) {
                 helpDialog(res.getString(R.string.err_point_bear_and_dist_title), res.getString(R.string.err_point_bear_and_dist));
                 return null;
             }

@@ -1,6 +1,7 @@
 package cgeo.geocaching.connector.opencaching;
 
 import cgeo.geocaching.Parameters;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgImage;
@@ -9,6 +10,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser;
@@ -20,6 +22,7 @@ import org.json.JSONObject;
 
 import android.net.Uri;
 import android.text.Html;
+import android.util.Log;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,6 +32,7 @@ import java.util.List;
 import java.util.Locale;
 
 final public class OkapiClient {
+    private static final String CACHE_SIZE = "size";
     private static final String CACHE_VOTES = "rating_votes";
     private static final String CACHE_NOTFOUNDS = "notfounds";
     private static final String CACHE_FOUNDS = "founds";
@@ -73,8 +77,9 @@ final public class OkapiClient {
 
         final cgCache cache = parseCache(data);
 
-        cache.setUpdated(new Date().getTime());
-        cache.setDetailedUpdate(new Date().getTime());
+        long time = new Date().getTime();
+        cache.setUpdated(time);
+        cache.setDetailedUpdate(time);
 
         return cache;
     }
@@ -112,8 +117,7 @@ final public class OkapiClient {
                 return caches;
             }
         } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Log.e(Settings.tag, "OkapiClient.parseCaches", e);
         }
         return null;
     }
@@ -135,17 +139,17 @@ final public class OkapiClient {
             final JSONObject owner = response.getJSONObject(CACHE_OWNER);
             cache.setOwner(parseUser(owner));
 
-            cache.getLogCounts().put(cgBase.LOG_FOUND_IT, response.getInt(CACHE_FOUNDS));
-            cache.getLogCounts().put(cgBase.LOG_DIDNT_FIND_IT, response.getInt(CACHE_NOTFOUNDS));
+            cache.getLogCounts().put(LogType.LOG_FOUND_IT, response.getInt(CACHE_FOUNDS));
+            cache.getLogCounts().put(LogType.LOG_DIDNT_FIND_IT, response.getInt(CACHE_NOTFOUNDS));
             cache.setSize(getCacheSize(response));
             cache.setDifficulty((float) response.getDouble(CACHE_DIFFICULTY));
             cache.setTerrain((float) response.getDouble(CACHE_TERRAIN));
-            if (response.has(CACHE_RATING) && !isNull(response.getString(CACHE_RATING))) {
+            if (!response.isNull(CACHE_RATING)) {
                 cache.setRating((float) response.getDouble(CACHE_RATING));
             }
             cache.setVotes(response.getInt(CACHE_VOTES));
 
-            cache.setFavouriteCnt(response.getInt(CACHE_RECOMMENDATIONS));
+            cache.setFavouritePoints(response.getInt(CACHE_RECOMMENDATIONS));
             // not used: req_password
             cache.setDescription(response.getString(CACHE_DESCRIPTION));
             cache.setHint(Html.fromHtml(response.getString(CACHE_HINT)).toString());
@@ -173,8 +177,7 @@ final public class OkapiClient {
             cache.setHidden(parseDate(response.getString(CACHE_HIDDEN)));
 
         } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Log.e(Settings.tag, "OkapiClient.parseCache", e);
         }
         return cache;
     }
@@ -190,10 +193,6 @@ final public class OkapiClient {
             }
         }
         return url;
-    }
-
-    private static boolean isNull(String string) {
-        return string.equalsIgnoreCase("null");
     }
 
     private static String parseUser(JSONObject user) throws JSONException {
@@ -215,22 +214,20 @@ final public class OkapiClient {
                 }
                 result.add(log);
             } catch (JSONException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+                Log.e(Settings.tag, "OkapiClient.parseLogs", e);
             }
-
         }
         return result;
     }
 
-    private static int parseLogType(String logType) {
+    private static LogType parseLogType(String logType) {
         if ("Found it".equalsIgnoreCase(logType)) {
-            return cgBase.LOG_FOUND_IT;
+            return LogType.LOG_FOUND_IT;
         }
         else if ("Didn't find it".equalsIgnoreCase(logType)) {
-            return cgBase.LOG_DIDNT_FIND_IT;
+            return LogType.LOG_DIDNT_FIND_IT;
         }
-        return cgBase.LOG_NOTE;
+        return LogType.LOG_NOTE;
     }
 
     private static Date parseDate(final String date) {
@@ -239,8 +236,7 @@ final public class OkapiClient {
         try {
             return ISO8601DATEFORMAT.parse(strippedDate);
         } catch (ParseException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Log.e(Settings.tag, "OkapiClient.parseDate", e);
         }
         return null;
     }
@@ -253,12 +249,14 @@ final public class OkapiClient {
     }
 
     private static CacheSize getCacheSize(final JSONObject response) {
+        if (response.isNull(CACHE_SIZE)) {
+            return CacheSize.NOT_CHOSEN;
+        }
         double size = 0;
         try {
-            size = response.getDouble("size");
+            size = response.getDouble(CACHE_SIZE);
         } catch (JSONException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Log.e(Settings.tag, "OkapiClient.getCacheSize", e);
         }
         switch ((int) Math.round(size)) {
             case 1:

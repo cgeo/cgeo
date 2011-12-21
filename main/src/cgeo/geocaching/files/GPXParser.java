@@ -2,7 +2,6 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgLog;
 import cgeo.geocaching.cgTrackable;
@@ -11,6 +10,7 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -280,7 +280,7 @@ public abstract class GPXParser extends FileParser {
                                 || StringUtils.contains(type, "geocache")
                                 || StringUtils.contains(sym, "geocache"))) {
                     fixCache(cache);
-                    cache.setReason(listId);
+                    cache.setListId(listId);
                     cache.setDetailed(true);
 
                     createNoteFromGSAKUserdata();
@@ -319,7 +319,7 @@ public abstract class GPXParser extends FileParser {
                         if (cacheForWaypoint.getWaypoints() == null) {
                             cacheForWaypoint.setWaypoints(new ArrayList<cgWaypoint>());
                         }
-                        cgWaypoint.mergeWayPoints(cacheForWaypoint.getWaypoints(), Collections.singletonList(waypoint));
+                        cgWaypoint.mergeWayPoints(cacheForWaypoint.getWaypoints(), Collections.singletonList(waypoint), true);
                         result.put(cacheGeocodeForWaypoint, cacheForWaypoint);
                         showProgressMessage(progressHandler, progressStream.getProgress());
                     }
@@ -536,8 +536,8 @@ public abstract class GPXParser extends FileParser {
                 @Override
                 public void end(String body) {
                     try {
-                        cache.setDifficulty(new Float(body));
-                    } catch (Exception e) {
+                        cache.setDifficulty(Float.parseFloat(body));
+                    } catch (NumberFormatException e) {
                         Log.w(Settings.tag, "Failed to parse difficulty: " + e.toString());
                     }
                 }
@@ -549,8 +549,8 @@ public abstract class GPXParser extends FileParser {
                 @Override
                 public void end(String body) {
                     try {
-                        cache.setTerrain(new Float(body));
-                    } catch (Exception e) {
+                        cache.setTerrain(Float.parseFloat(body));
+                    } catch (NumberFormatException e) {
                         Log.w(Settings.tag, "Failed to parse terrain: " + e.toString());
                     }
                 }
@@ -613,8 +613,11 @@ public abstract class GPXParser extends FileParser {
             // waypoint.cache.travelbugs
             final Element gcTBs = gcCache.getChild(nsGC, "travelbugs");
 
+            // waypoint.cache.travelbug
+            final Element gcTB = gcTBs.getChild(nsGC, "travelbug");
+
             // waypoint.cache.travelbugs.travelbug
-            gcTBs.getChild(nsGC, "travelbug").setStartElementListener(new StartElementListener() {
+            gcTB.setStartElementListener(new StartElementListener() {
 
                 @Override
                 public void start(Attributes attrs) {
@@ -629,9 +632,6 @@ public abstract class GPXParser extends FileParser {
                     }
                 }
             });
-
-            // waypoint.cache.travelbug
-            final Element gcTB = gcTBs.getChild(nsGC, "travelbug");
 
             gcTB.setEndElementListener(new EndElementListener() {
 
@@ -709,11 +709,7 @@ public abstract class GPXParser extends FileParser {
                 @Override
                 public void end(String body) {
                     final String logType = validate(body).toLowerCase();
-                    if (cgBase.logTypes0.containsKey(logType)) {
-                        log.type = cgBase.logTypes0.get(logType);
-                    } else {
-                        log.type = cgBase.LOG_NOTE;
-                    }
+                    log.type = LogType.getByType(logType);
                 }
             });
 

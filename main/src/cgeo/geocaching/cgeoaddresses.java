@@ -124,11 +124,11 @@ public class cgeoaddresses extends AbstractActivity {
 
     private class buttonListener implements View.OnClickListener {
 
-        private Double latitude = null;
-        private Double longitude = null;
-        private String address = null;
+        private final double latitude;
+        private final double longitude;
+        private final String address;
 
-        public buttonListener(Double latitudeIn, Double longitudeIn, String addressIn) {
+        public buttonListener(double latitudeIn, double longitudeIn, String addressIn) {
             latitude = latitudeIn;
             longitude = longitudeIn;
             address = addressIn;

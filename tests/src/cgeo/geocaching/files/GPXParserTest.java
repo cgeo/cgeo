@@ -39,8 +39,8 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals("Die Schatzinsel / treasure island", cache.getName());
         assertEquals("Die unbesiegbaren Geo - Geparden", cache.getOwner());
         assertEquals(CacheSize.MICRO, cache.getSize());
-        assertEquals(1.0f, cache.getDifficulty().floatValue());
-        assertEquals(5.0f, cache.getTerrain().floatValue());
+        assertEquals(1.0f, cache.getDifficulty());
+        assertEquals(5.0f, cache.getTerrain());
         assertEquals("Baden-Württemberg, Germany", cache.getLocation());
         assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel.\nA old dream of my childhood, a treasure on a lonely island.", cache.getShortdesc());
         assertTrue(new Geopoint(48.859683, 9.1874).isEqualTo(cache.getCoords()));
@@ -63,8 +63,8 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals("Die Schatzinsel / treasure island", cache.getName());
         assertEquals("Die unbesiegbaren Geo - Geparden", cache.getOwner());
         assertEquals(CacheSize.SMALL, cache.getSize());
-        assertEquals(1.0f, cache.getDifficulty().floatValue());
-        assertEquals(4.0f, cache.getTerrain().floatValue());
+        assertEquals(1.0f, cache.getDifficulty());
+        assertEquals(4.0f, cache.getTerrain());
         assertEquals("Baden-Württemberg, Germany", cache.getLocation());
         assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel. A old dream of my childhood, a treasure on a lonely is", cache.getShortdesc());
         assertTrue(new Geopoint(48.85968, 9.18740).isEqualTo(cache.getCoords()));
@@ -112,8 +112,8 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertTrue("Hockenheimer City-Brunnen by vptsz, Multi-cache (2/1)", cache.getShortDescription().startsWith("Kurzer informativer Multi entlang der Brunnen"));
         assertTrue(cache.getDescription().startsWith("Cachemobile können kostenfrei am Messplatz geparkt werden."));
         assertTrue(cache.hasTrackables());
-        assertEquals(2.0f, cache.getDifficulty().floatValue(), 0.01f);
-        assertEquals(1.0f, cache.getTerrain().floatValue(), 0.01f);
+        assertEquals(2.0f, cache.getDifficulty(), 0.01f);
+        assertEquals(1.0f, cache.getTerrain(), 0.01f);
         final Geopoint refCoordinates = new Geopoint("N 49° 19.122", "E 008° 32.739");
         assertEquals(refCoordinates.format(GeopointFormatter.Format.LAT_DECMINUTE), cache.getLatitude());
         assertEquals(refCoordinates.format(GeopointFormatter.Format.LON_DECMINUTE), cache.getLongitude());

@@ -2,9 +2,9 @@ package cgeo.geocaching.activity;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
-import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeo;
+import cgeo.geocaching.enumerations.LogType;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -136,10 +136,9 @@ public final class ActivityMixin {
         Resources res = ((Activity) activity).getResources();
         if (Settings.getLogOffline()) {
             SubMenu logMenu = menu.addSubMenu(1, IAbstractActivity.MENU_LOG_VISIT_OFFLINE, 0, res.getString(R.string.cache_menu_visit_offline)).setIcon(MENU_ICON_LOG_VISIT);
-            List<Integer> logTypes = cache.getPossibleLogTypes();
-            for (Integer logType : logTypes) {
-                String label = cgBase.logTypes2.get(logType);
-                logMenu.add(1, IAbstractActivity.MENU_LOG_VISIT_OFFLINE + logType, 0, label);
+            List<LogType> logTypes = cache.getPossibleLogTypes();
+            for (LogType logType : logTypes) {
+                logMenu.add(1, IAbstractActivity.MENU_LOG_VISIT_OFFLINE + logType.id, 0, logType.getL10n());
             }
             logMenu.add(1, IAbstractActivity.MENU_LOG_VISIT, 0, res.getString(R.string.cache_menu_visit));
         }

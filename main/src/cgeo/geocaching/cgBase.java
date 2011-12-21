@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.GCConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
@@ -18,6 +19,7 @@ import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.HtmlImage;
+import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 
@@ -99,11 +101,7 @@ public class cgBase {
     private static final String passMatch = "(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+";
 
     public final static Map<WaypointType, String> waypointTypes = new HashMap<WaypointType, String>();
-    public final static Map<String, Integer> logTypes = new HashMap<String, Integer>();
-    public final static Map<String, Integer> logTypes0 = new HashMap<String, Integer>();
-    public final static Map<Integer, String> logTypes1 = new HashMap<Integer, String>();
-    public final static Map<Integer, String> logTypes2 = new HashMap<Integer, String>();
-    public final static Map<String, SimpleDateFormat> gcCustomDateFormats;
+    private final static Map<String, SimpleDateFormat> gcCustomDateFormats;
     static {
         final String[] formats = new String[] {
                 "MM/dd/yyyy",
@@ -139,77 +137,9 @@ public class cgBase {
 
     final private static Map<String, Integer> gcIcons = new HashMap<String, Integer>();
 
-    public static final int LOG_FOUND_IT = 2;
-    public static final int LOG_DIDNT_FIND_IT = 3;
-    public static final int LOG_NOTE = 4;
-    public static final int LOG_PUBLISH_LISTING = 1003; // unknown ID; used number doesn't match any GC.com's ID
-    public static final int LOG_ENABLE_LISTING = 23;
-    public static final int LOG_ARCHIVE = 5;
-    public static final int LOG_TEMP_DISABLE_LISTING = 22;
-    public static final int LOG_NEEDS_ARCHIVE = 7;
-    public static final int LOG_WILL_ATTEND = 9;
-    public static final int LOG_ATTENDED = 10;
-    public static final int LOG_RETRIEVED_IT = 13;
-    public static final int LOG_PLACED_IT = 14;
-    public static final int LOG_GRABBED_IT = 19;
-    public static final int LOG_NEEDS_MAINTENANCE = 45;
-    public static final int LOG_OWNER_MAINTENANCE = 46;
-    public static final int LOG_UPDATE_COORDINATES = 47;
-    public static final int LOG_DISCOVERED_IT = 48;
-    public static final int LOG_POST_REVIEWER_NOTE = 18;
-    public static final int LOG_VISIT = 1001; // unknown ID; used number doesn't match any GC.com's ID
-    public static final int LOG_WEBCAM_PHOTO_TAKEN = 11;
-    public static final int LOG_ANNOUNCEMENT = 74;
-
     private static final int NB_DOWNLOAD_RETRIES = 4;
 
     public static final int UPDATE_LOAD_PROGRESS_DETAIL = 42186;
-
-    static {
-        logTypes.put("icon_smile", LOG_FOUND_IT);
-        logTypes.put("icon_sad", LOG_DIDNT_FIND_IT);
-        logTypes.put("icon_note", LOG_NOTE);
-        logTypes.put("icon_greenlight", LOG_PUBLISH_LISTING);
-        logTypes.put("icon_enabled", LOG_ENABLE_LISTING);
-        logTypes.put("traffic_cone", LOG_ARCHIVE);
-        logTypes.put("icon_disabled", LOG_TEMP_DISABLE_LISTING);
-        logTypes.put("icon_remove", LOG_NEEDS_ARCHIVE);
-        logTypes.put("icon_rsvp", LOG_WILL_ATTEND);
-        logTypes.put("icon_attended", LOG_ATTENDED);
-        logTypes.put("picked_up", LOG_RETRIEVED_IT);
-        logTypes.put("dropped_off", LOG_PLACED_IT);
-        logTypes.put("transfer", LOG_GRABBED_IT);
-        logTypes.put("icon_needsmaint", LOG_NEEDS_MAINTENANCE);
-        logTypes.put("icon_maint", LOG_OWNER_MAINTENANCE);
-        logTypes.put("coord_update", LOG_UPDATE_COORDINATES);
-        logTypes.put("icon_discovered", LOG_DISCOVERED_IT);
-        logTypes.put("big_smile", LOG_POST_REVIEWER_NOTE);
-        logTypes.put("icon_visited", LOG_VISIT); // unknown ID; used number doesn't match any GC.com's ID
-        logTypes.put("icon_camera", LOG_WEBCAM_PHOTO_TAKEN); // unknown ID; used number doesn't match any GC.com's ID
-        logTypes.put("icon_announcement", LOG_ANNOUNCEMENT); // unknown ID; used number doesn't match any GC.com's ID
-
-        logTypes0.put("found it", LOG_FOUND_IT);
-        logTypes0.put("didn't find it", LOG_DIDNT_FIND_IT);
-        logTypes0.put("write note", LOG_NOTE);
-        logTypes0.put("publish listing", LOG_PUBLISH_LISTING);
-        logTypes0.put("enable listing", LOG_ENABLE_LISTING);
-        logTypes0.put("archive", LOG_ARCHIVE);
-        logTypes0.put("temporarily disable listing", LOG_TEMP_DISABLE_LISTING);
-        logTypes0.put("needs archived", LOG_NEEDS_ARCHIVE);
-        logTypes0.put("will attend", LOG_WILL_ATTEND);
-        logTypes0.put("attended", LOG_ATTENDED);
-        logTypes0.put("retrieved it", LOG_RETRIEVED_IT);
-        logTypes0.put("placed it", LOG_PLACED_IT);
-        logTypes0.put("grabbed it", LOG_GRABBED_IT);
-        logTypes0.put("needs maintenance", LOG_NEEDS_MAINTENANCE);
-        logTypes0.put("owner maintenance", LOG_OWNER_MAINTENANCE);
-        logTypes0.put("update coordinates", LOG_UPDATE_COORDINATES);
-        logTypes0.put("discovered it", LOG_DISCOVERED_IT);
-        logTypes0.put("post reviewer note", LOG_POST_REVIEWER_NOTE);
-        logTypes0.put("visit", LOG_VISIT); // unknown ID; used number doesn't match any GC.com's ID
-        logTypes0.put("webcam photo taken", LOG_WEBCAM_PHOTO_TAKEN); // unknown ID; used number doesn't match any GC.com's ID
-        logTypes0.put("announcement", LOG_ANNOUNCEMENT); // unknown ID; used number doesn't match any GC.com's ID
-    }
 
     private cgBase() {
         //initialize(app);
@@ -226,49 +156,6 @@ public class cgBase {
                 waypointTypes.put(wt, res.getString(wt.stringId));
             }
         }
-
-        // log types
-
-        logTypes1.put(LOG_FOUND_IT, res.getString(R.string.log_found));
-        logTypes1.put(LOG_DIDNT_FIND_IT, res.getString(R.string.log_dnf));
-        logTypes1.put(LOG_NOTE, res.getString(R.string.log_note));
-        logTypes1.put(LOG_PUBLISH_LISTING, res.getString(R.string.log_published));
-        logTypes1.put(LOG_ENABLE_LISTING, res.getString(R.string.log_enabled));
-        logTypes1.put(LOG_ARCHIVE, res.getString(R.string.log_archived));
-        logTypes1.put(LOG_TEMP_DISABLE_LISTING, res.getString(R.string.log_disabled));
-        logTypes1.put(LOG_NEEDS_ARCHIVE, res.getString(R.string.log_needs_archived));
-        logTypes1.put(LOG_WILL_ATTEND, res.getString(R.string.log_attend));
-        logTypes1.put(LOG_ATTENDED, res.getString(R.string.log_attended));
-        logTypes1.put(LOG_RETRIEVED_IT, res.getString(R.string.log_retrieved));
-        logTypes1.put(LOG_PLACED_IT, res.getString(R.string.log_placed));
-        logTypes1.put(LOG_GRABBED_IT, res.getString(R.string.log_grabbed));
-        logTypes1.put(LOG_NEEDS_MAINTENANCE, res.getString(R.string.log_maintenance_needed));
-        logTypes1.put(LOG_OWNER_MAINTENANCE, res.getString(R.string.log_maintained));
-        logTypes1.put(LOG_UPDATE_COORDINATES, res.getString(R.string.log_update));
-        logTypes1.put(LOG_DISCOVERED_IT, res.getString(R.string.log_discovered));
-        logTypes1.put(LOG_POST_REVIEWER_NOTE, res.getString(R.string.log_reviewed));
-        logTypes1.put(LOG_VISIT, res.getString(R.string.log_taken));
-        logTypes1.put(LOG_WEBCAM_PHOTO_TAKEN, res.getString(R.string.log_webcam));
-        logTypes1.put(LOG_ANNOUNCEMENT, res.getString(R.string.log_announcement));
-
-        logTypes2.put(LOG_FOUND_IT, res.getString(R.string.log_found)); // traditional, multi, mystery, earth, wherigo, virtual, letterbox
-        logTypes2.put(LOG_DIDNT_FIND_IT, res.getString(R.string.log_dnf)); // traditional, multi, mystery, earth, wherigo, virtual, letterbox, webcam
-        logTypes2.put(LOG_NOTE, res.getString(R.string.log_note)); // traditional, multi, mystery, earth, wherigo, virtual, event, letterbox, webcam, trackable
-        logTypes2.put(LOG_PUBLISH_LISTING, res.getString(R.string.log_published)); // X
-        logTypes2.put(LOG_ENABLE_LISTING, res.getString(R.string.log_enabled)); // owner
-        logTypes2.put(LOG_ARCHIVE, res.getString(R.string.log_archived)); // traditional, multi, mystery, earth, event, wherigo, virtual, letterbox, webcam
-        logTypes2.put(LOG_TEMP_DISABLE_LISTING, res.getString(R.string.log_disabled)); // owner
-        logTypes2.put(LOG_NEEDS_ARCHIVE, res.getString(R.string.log_needs_archived)); // traditional, multi, mystery, earth, event, wherigo, virtual, letterbox, webcam
-        logTypes2.put(LOG_WILL_ATTEND, res.getString(R.string.log_attend)); // event
-        logTypes2.put(LOG_ATTENDED, res.getString(R.string.log_attended)); // event
-        logTypes2.put(LOG_WEBCAM_PHOTO_TAKEN, res.getString(R.string.log_webcam)); // webcam
-        logTypes2.put(LOG_RETRIEVED_IT, res.getString(R.string.log_retrieved)); //trackable
-        logTypes2.put(LOG_GRABBED_IT, res.getString(R.string.log_grabbed)); //trackable
-        logTypes2.put(LOG_NEEDS_MAINTENANCE, res.getString(R.string.log_maintenance_needed)); // traditional, mystery, multi, wherigo, virtual, letterbox, webcam
-        logTypes2.put(LOG_OWNER_MAINTENANCE, res.getString(R.string.log_maintained)); // owner
-        logTypes2.put(LOG_DISCOVERED_IT, res.getString(R.string.log_discovered)); //trackable
-        logTypes2.put(LOG_POST_REVIEWER_NOTE, res.getString(R.string.log_reviewed)); // X
-        logTypes2.put(LOG_ANNOUNCEMENT, res.getString(R.string.log_announcement)); // X
 
         try {
             final PackageManager manager = app.getPackageManager();
@@ -473,6 +360,18 @@ public class cgBase {
         }
     }
 
+    public static StatusCode logout() {
+        HttpResponse logoutResponse = request("https://www.geocaching.com/login/default.aspx?RESET=Y&redir=http%3a%2f%2fwww.geocaching.com%2fdefault.aspx%3f", null, false, false, false);
+        String logoutData = getResponseData(logoutResponse);
+        if (logoutResponse != null && logoutResponse.getStatusLine().getStatusCode() == 503 && BaseUtils.matches(logoutData, GCConstants.PATTERN_MAINTENANCE)) {
+            return StatusCode.MAINTENANCE;
+        }
+
+        clearCookies();
+        Settings.setCookieStore(null);
+        return StatusCode.NO_ERROR;
+    }
+
     public static boolean checkLogin(String page) {
         if (StringUtils.isBlank(page)) {
             Log.e(Settings.tag, "cgeoBase.checkLogin: No page given");
@@ -494,7 +393,7 @@ public class cgBase {
 
     public static void switchToEnglish(String previousPage) {
         final String ENGLISH = "English&#9660;";
-        if (previousPage != null && previousPage.indexOf(ENGLISH) > 0) {
+        if (previousPage != null && previousPage.indexOf(ENGLISH) >= 0) {
             Log.i(Settings.tag, "Geocaching.com language already set to English");
         } else {
             final String page = getResponseData(request("http://www.geocaching.com/default.aspx", null, false));
@@ -611,7 +510,6 @@ public class cgBase {
 
             if (Settings.isExcludeDisabledCaches() && (cache.isDisabled() || cache.isArchived())) {
                 // skip disabled and archived caches
-                cache = null;
                 continue;
             }
 
@@ -672,7 +570,7 @@ public class cgBase {
             try {
                 result = BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_FAVORITE, false, 1, null, true);
                 if (null != result) {
-                    cache.setFavouriteCnt(Integer.parseInt(result));
+                    cache.setFavouritePoints(Integer.parseInt(result));
                 }
             } catch (NumberFormatException e) {
                 Log.w(Settings.tag, "cgeoBase.parseSearch: Failed to parse favourite count");
@@ -690,7 +588,7 @@ public class cgBase {
 
         // total caches found
         try {
-            String result = BaseUtils.getMatch(page, GCConstants.PATTERN_SEARCH_TOTOALCOUNT, false, 1, null, true);
+            String result = BaseUtils.getMatch(page, GCConstants.PATTERN_SEARCH_TOTALCOUNT, false, 1, null, true);
             if (null != result) {
                 caches.totalCnt = Integer.parseInt(result);
             }
@@ -875,8 +773,8 @@ public class cgBase {
         return caches;
     }
 
-    public static cgCacheWrap parseCache(final String page, final int reason, final CancellableHandler handler) {
-        final cgCacheWrap caches = parseCacheFromText(page, reason, handler);
+    public static cgCacheWrap parseCache(final String page, final int listId, final CancellableHandler handler) {
+        final cgCacheWrap caches = parseCacheFromText(page, listId, handler);
         if (caches != null && !caches.cacheList.isEmpty()) {
             final cgCache cache = caches.cacheList.get(0);
             getExtraOnlineInfo(cache, page, handler);
@@ -890,7 +788,7 @@ public class cgBase {
         return caches;
     }
 
-    static cgCacheWrap parseCacheFromText(final String page, final int reason, final CancellableHandler handler) {
+    static cgCacheWrap parseCacheFromText(final String page, final int listId, final CancellableHandler handler) {
         sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_details);
 
         if (StringUtils.isBlank(page)) {
@@ -899,7 +797,6 @@ public class cgBase {
         }
 
         final cgCacheWrap caches = new cgCacheWrap();
-        final cgCache cache = new cgCache();
 
         if (page.contains("Cache is Unpublished")) {
             caches.error = StatusCode.UNPUBLISHED_CACHE;
@@ -916,6 +813,7 @@ public class cgBase {
             return caches;
         }
 
+        final cgCache cache = new cgCache();
         cache.setDisabled(page.contains("<li>This cache is temporarily unavailable."));
 
         cache.setArchived(page.contains("<li>This cache has been archived,"));
@@ -924,7 +822,7 @@ public class cgBase {
 
         cache.setFavourite(BaseUtils.matches(page, GCConstants.PATTERN_FAVORITE));
 
-        cache.setReason(reason);
+        cache.setListId(listId);
 
         // cache geocode
         cache.setGeocode(BaseUtils.getMatch(page, GCConstants.PATTERN_GEOCODE, true, cache.getGeocode()));
@@ -968,13 +866,13 @@ public class cgBase {
             // cache terrain
             String result = BaseUtils.getMatch(tableInside, GCConstants.PATTERN_TERRAIN, true, null);
             if (result != null) {
-                cache.setTerrain(new Float(StringUtils.replaceChars(result, '_', '.')));
+                cache.setTerrain(Float.parseFloat(StringUtils.replaceChars(result, '_', '.')));
             }
 
             // cache difficulty
             result = BaseUtils.getMatch(tableInside, GCConstants.PATTERN_DIFFICULTY, true, null);
             if (result != null) {
-                cache.setDifficulty(new Float(StringUtils.replaceChars(result, '_', '.')));
+                cache.setDifficulty(Float.parseFloat(StringUtils.replaceChars(result, '_', '.')));
             }
 
             // owner
@@ -999,7 +897,7 @@ public class cgBase {
             }
 
             // favourite
-            cache.setFavouriteCnt(Integer.parseInt(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_FAVORITECOUNT, true, "0")));
+            cache.setFavouritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_FAVORITECOUNT, true, "0")));
 
             // cache size
             cache.setSize(CacheSize.getById(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_SIZE, true, CacheSize.NOT_CHOSEN.id).toLowerCase()));
@@ -1093,7 +991,9 @@ public class cgBase {
                 final Matcher matcherSpoilersInside = GCConstants.PATTERN_SPOILERSINSIDE.matcher(spoilers);
 
                 while (matcherSpoilersInside.find()) {
-                    String url = matcherSpoilersInside.group(1);
+                    // the original spoiler URL (include .../display/... contains a low-resolution image
+                    // if we shorten the URL we get the original-resolution image
+                    String url = matcherSpoilersInside.group(1).replace("/display", "");
 
                     String title = null;
                     if (matcherSpoilersInside.group(2) != null) {
@@ -1163,10 +1063,9 @@ public class cgBase {
                     String countStr = matcherLog.group(2).replaceAll("[.,]", "");
 
                     if (StringUtils.isNotBlank(typeStr)
-                            && logTypes.containsKey(typeStr.toLowerCase())
-                            && StringUtils.isNotBlank(countStr))
-                    {
-                        cache.getLogCounts().put(logTypes.get(typeStr.toLowerCase()), Integer.parseInt(countStr));
+                            && LogType.LOG_UNKNOWN != LogType.getByIconName(typeStr)
+                            && StringUtils.isNotBlank(countStr)) {
+                        cache.getLogCounts().put(LogType.getByIconName(typeStr), Integer.parseInt(countStr));
                     }
                 }
             }
@@ -1185,12 +1084,15 @@ public class cgBase {
 
                 waypoint.setCoords(new Geopoint(originalCoords));
                 waypoint.setWaypointType(WaypointType.WAYPOINT);
-                waypoint.setName(res.getString(R.string.cache_coordinates_original));
+                if (res != null) {
+                    waypoint.setName(res.getString(R.string.cache_coordinates_original));
+                }
 
                 if (null == cache.getWaypoints()) {
                     cache.setWaypoints(new ArrayList<cgWaypoint>());
                 }
                 cache.getWaypoints().add(waypoint);
+                // cache.setcoordsChanged(true);
             }
         } catch (Geopoint.GeopointException e) {
         }
@@ -1279,7 +1181,19 @@ public class cgBase {
             return;
         }
         sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
-        loadLogsFromDetails(page, cache);
+        cache.setLogs(loadLogsFromDetails(page, cache, false));
+        if (Settings.isFriendLogsWanted()) {
+            int position = 0;
+            List<cgLog> allLogs = cache.getLogs();
+            List<cgLog> friendLogs = loadLogsFromDetails(page, cache, true);
+            for (cgLog log : friendLogs) {
+                if (allLogs.contains(log)) {
+                    allLogs.get(allLogs.indexOf(log)).friend = true;
+                } else {
+                    allLogs.add(position++, log);
+                }
+            }
+        }
 
         if (Settings.isElevationWanted()) {
             if (CancellableHandler.isCancelled(handler)) {
@@ -1312,12 +1226,14 @@ public class cgBase {
      *            the text of the details page
      * @param cache
      *            the cache object to put the logs in
+     * @param friends
+     *            retrieve friend logs
      */
-    private static void loadLogsFromDetails(final String page, final cgCache cache) {
+    private static List<cgLog> loadLogsFromDetails(final String page, final cgCache cache, final boolean friends) {
         final Matcher userTokenMatcher = GCConstants.PATTERN_USERTOKEN2.matcher(page);
         if (!userTokenMatcher.find()) {
             Log.e(Settings.tag, "cgBase.loadLogsFromDetails: unable to extract userToken");
-            return;
+            return null;
         }
 
         final String userToken = userTokenMatcher.group(1);
@@ -1325,28 +1241,33 @@ public class cgBase {
                 "tkn", userToken,
                 "idx", "1",
                 "num", "35",
-                "decrypt", "true");
+                "decrypt", "true",
+                // "sp", Boolean.toString(personal), // personal logs
+                "sf", Boolean.toString(friends));
+
         final HttpResponse response = request("http://www.geocaching.com/seek/geocache.logbook", params, false, false, false);
         if (response == null) {
             Log.e(Settings.tag, "cgBase.loadLogsFromDetails: cannot log logs, response is null");
-            return;
+            return null;
         }
         final int statusCode = response.getStatusLine().getStatusCode();
         if (statusCode != 200) {
             Log.e(Settings.tag, "cgBase.loadLogsFromDetails: error " + statusCode + " when requesting log information");
-            return;
+            return null;
         }
+
+        List<cgLog> logs = new ArrayList<cgLog>();
 
         try {
             final String rawResponse = cgBase.getResponseData(response);
             if (rawResponse == null) {
                 Log.e(Settings.tag, "cgBase.loadLogsFromDetails: unable to read whole response");
-                return;
+                return null;
             }
             final JSONObject resp = new JSONObject(rawResponse);
             if (!resp.getString("status").equals("success")) {
                 Log.e(Settings.tag, "cgBase.loadLogsFromDetails: status is " + resp.getString("status"));
-                return;
+                return null;
             }
 
             final JSONArray data = resp.getJSONArray("data");
@@ -1354,15 +1275,12 @@ public class cgBase {
             for (int index = 0; index < data.length(); index++) {
                 final JSONObject entry = data.getJSONObject(index);
                 final cgLog logDone = new cgLog();
+                logDone.friend = friends;
 
                 // FIXME: use the "LogType" field instead of the "LogTypeImage" one.
                 final String logIconNameExt = entry.optString("LogTypeImage", ".gif");
                 final String logIconName = logIconNameExt.substring(0, logIconNameExt.length() - 4);
-                if (logTypes.containsKey(logIconName)) {
-                    logDone.type = logTypes.get(logIconName);
-                } else {
-                    logDone.type = logTypes.get("icon_note");
-                }
+                logDone.type = LogType.getByIconName(logIconName);
 
                 try {
                     logDone.date = parseGcCustomDate(entry.getString("Visited")).getTime();
@@ -1386,15 +1304,14 @@ public class cgBase {
                     logDone.logImages.add(logImage);
                 }
 
-                if (null == cache.getLogs()) {
-                    cache.setLogs(new ArrayList<cgLog>());
-                }
-                cache.getLogs().add(logDone);
+                logs.add(logDone);
             }
         } catch (JSONException e) {
             // failed to parse logs
             Log.w(Settings.tag, "cgBase.loadLogsFromDetails: Failed to parse cache logs", e);
         }
+
+        return logs;
     }
 
     private static void checkFields(cgCache cache) {
@@ -1407,10 +1324,10 @@ public class cgBase {
         if (StringUtils.isBlank(cache.getGuid())) {
             Log.e(Settings.tag, "guid not parsed correctly");
         }
-        if (cache.getTerrain() == null || cache.getTerrain() == 0.0) {
+        if (cache.getTerrain() == 0.0) {
             Log.e(Settings.tag, "terrain not parsed correctly");
         }
-        if (cache.getDifficulty() == null || cache.getDifficulty() == 0.0) {
+        if (cache.getDifficulty() == 0.0) {
             Log.e(Settings.tag, "difficulty not parsed correctly");
         }
         if (StringUtils.isBlank(cache.getOwner())) {
@@ -1422,7 +1339,7 @@ public class cgBase {
         if (cache.getHiddenDate() == null) {
             Log.e(Settings.tag, "hidden not parsed correctly");
         }
-        if (cache.getFavouriteCnt() == null) {
+        if (cache.getFavoritePoints() < 0) {
             Log.e(Settings.tag, "favoriteCount not parsed correctly");
         }
         if (cache.getSize() == null) {
@@ -1439,35 +1356,32 @@ public class cgBase {
         }
     }
 
-    public static Date parseGcCustomDate(final String input)
-            throws ParseException
-    {
-        if (StringUtils.isBlank(input))
-        {
+    public static Date parseGcCustomDate(final String input, final String format) throws ParseException {
+        if (StringUtils.isBlank(input)) {
             throw new ParseException("Input is null", 0);
         }
 
         final String trimmed = input.trim();
 
-        if (gcCustomDateFormats.containsKey(Settings.getGcCustomDate()))
-        {
-            try
-            {
-                return gcCustomDateFormats.get(Settings.getGcCustomDate()).parse(trimmed);
+        if (gcCustomDateFormats.containsKey(format)) {
+            try {
+                return gcCustomDateFormats.get(format).parse(trimmed);
             } catch (ParseException e) {
             }
         }
 
-        for (SimpleDateFormat format : gcCustomDateFormats.values())
-        {
-            try
-            {
-                return format.parse(trimmed);
+        for (SimpleDateFormat sdf : gcCustomDateFormats.values()) {
+            try {
+                return sdf.parse(trimmed);
             } catch (ParseException e) {
             }
         }
 
         throw new ParseException("No matching pattern", 0);
+    }
+
+    public static Date parseGcCustomDate(final String input) throws ParseException {
+        return parseGcCustomDate(input, Settings.getGcCustomDate());
     }
 
     /**
@@ -1488,9 +1402,12 @@ public class cgBase {
         }
     }
 
-    public static BitmapDrawable downloadAvatar(final Context context) {
+    public static BitmapDrawable downloadAvatarAndGetMemberStatus(final Context context) {
         try {
             final String profile = BaseUtils.replaceWhitespace(getResponseData(request("http://www.geocaching.com/my/", null, false)));
+
+            Settings.setMemberStatus(BaseUtils.getMatch(profile, GCConstants.PATTERN_MEMBER_STATUS, true, null));
+
             final String avatarURL = BaseUtils.getMatch(profile, GCConstants.PATTERN_AVATAR_IMAGE, false, null);
             if (null != avatarURL) {
                 final HtmlImage imgGetter = new HtmlImage(context, "", false, 0, false);
@@ -1602,7 +1519,6 @@ public class cgBase {
                 trackable.setDistance(DistanceParser.parseDistance(distance, Settings.isUseMetricUnits()));
             }
         } catch (NumberFormatException e) {
-            trackable.setDistance(null);
             throw e;
         }
 
@@ -1645,15 +1561,7 @@ public class cgBase {
             {
                 final cgLog logDone = new cgLog();
 
-                if (logTypes.containsKey(matcherLogs.group(1).toLowerCase()))
-                {
-                    logDone.type = logTypes.get(matcherLogs.group(1).toLowerCase().trim());
-                }
-                else
-                {
-                    logDone.type = logTypes.get("icon_note");
-                }
-
+                logDone.type = LogType.getByIconName(matcherLogs.group(1));
                 logDone.author = Html.fromHtml(matcherLogs.group(3)).toString().trim();
 
                 try
@@ -1684,12 +1592,12 @@ public class cgBase {
         return trackable;
     }
 
-    public static List<Integer> parseTypes(String page) {
+    public static List<LogType> parseTypes(String page) {
         if (StringUtils.isEmpty(page)) {
             return null;
         }
 
-        final List<Integer> types = new ArrayList<Integer>();
+        final List<LogType> types = new ArrayList<LogType>();
 
         final Matcher typeBoxMatcher = GCConstants.PATTERN_TYPEBOX.matcher(page);
         String typesText = null;
@@ -1707,7 +1615,7 @@ public class cgBase {
                     final int type = Integer.parseInt(typeMatcher.group(2));
 
                     if (type > 0) {
-                        types.add(type);
+                        types.add(LogType.getById(type));
                     }
                 }
             }
@@ -1771,36 +1679,36 @@ public class cgBase {
         return trackables;
     }
 
-    public static String getHumanDistance(final Float distance) {
-        if (distance == null) {
+    public static String getHumanDistance(final Float distanceKilometers) {
+        if (distanceKilometers == null) {
             return "?";
         }
 
         if (Settings.isUseMetricUnits()) {
-            if (distance > 100) {
-                return String.format("%.0f", Double.valueOf(Math.round(distance))) + " km";
-            } else if (distance > 10) {
-                return String.format("%.1f", Double.valueOf(Math.round(distance * 10.0) / 10.0)) + " km";
-            } else if (distance > 1) {
-                return String.format("%.2f", Double.valueOf(Math.round(distance * 100.0) / 100.0)) + " km";
-            } else if (distance > 0.1) {
-                return String.format("%.0f", Double.valueOf(Math.round(distance * 1000.0))) + " m";
-            } else if (distance > 0.01) {
-                return String.format("%.1f", Double.valueOf(Math.round(distance * 1000.0 * 10.0) / 10.0)) + " m";
+            if (distanceKilometers > 100) {
+                return String.format("%d", Math.round(distanceKilometers)) + " km";
+            } else if (distanceKilometers > 10) {
+                return String.format("%.1f", Double.valueOf(Math.round(distanceKilometers * 10.0) / 10.0)) + " km";
+            } else if (distanceKilometers > 1) {
+                return String.format("%.2f", Double.valueOf(Math.round(distanceKilometers * 100.0) / 100.0)) + " km";
+            } else if (distanceKilometers > 0.1) {
+                return String.format("%d", Math.round(distanceKilometers * 1000.0)) + " m";
+            } else if (distanceKilometers > 0.01) {
+                return String.format("%.1f", Double.valueOf(Math.round(distanceKilometers * 1000.0 * 10.0) / 10.0)) + " m";
             } else {
-                return String.format("%.2f", Double.valueOf(Math.round(distance * 1000.0 * 100.0) / 100.0)) + " m";
+                return String.format("%.2f", Double.valueOf(Math.round(distanceKilometers * 1000.0 * 100.0) / 100.0)) + " m";
             }
         } else {
-            final Float miles = distance / IConversion.miles2km;
-            if (distance > 100) {
-                return String.format("%.0f", Double.valueOf(Math.round(miles))) + " mi";
-            } else if (distance > 0.5) {
+            final float miles = distanceKilometers / IConversion.miles2km;
+            if (distanceKilometers > 100) {
+                return String.format("%d", Math.round(miles)) + " mi";
+            } else if (distanceKilometers > 0.5) {
                 return String.format("%.1f", Double.valueOf(Math.round(miles * 10.0) / 10.0)) + " mi";
-            } else if (distance > 0.1) {
+            } else if (distanceKilometers > 0.1) {
                 return String.format("%.2f", Double.valueOf(Math.round(miles * 100.0) / 100.0)) + " mi";
-            } else if (distance > 0.05) {
-                return String.format("%.0f", Double.valueOf(Math.round(miles * 5280.0))) + " ft";
-            } else if (distance > 0.01) {
+            } else if (distanceKilometers > 0.05) {
+                return String.format("%d", Math.round(miles * 5280.0)) + " ft";
+            } else if (distanceKilometers > 0.01) {
                 return String.format("%.1f", Double.valueOf(Math.round(miles * 5280 * 10.0) / 10.0)) + " ft";
             } else {
                 return String.format("%.2f", Double.valueOf(Math.round(miles * 5280 * 100.0) / 100.0)) + " ft";
@@ -1820,7 +1728,7 @@ public class cgBase {
         params.put("tx", cacheType.guid);
     }
 
-    public static cgSearch searchByNextPage(cgSearchThread thread, final cgSearch search, int reason, boolean showCaptcha) {
+    public static cgSearch searchByNextPage(cgSearchThread thread, final cgSearch search, int listId, boolean showCaptcha) {
         final String[] viewstates = cgeoapplication.getViewstates(search);
 
         final String url = cgeoapplication.getUrl(search);
@@ -1876,12 +1784,12 @@ public class cgBase {
             cgeoapplication.addGeocode(search, cache.getGeocode());
         }
 
-        cgeoapplication.getInstance().addSearch(caches.cacheList, reason);
+        cgeoapplication.getInstance().addSearch(caches.cacheList, listId);
 
         return search;
     }
 
-    public static cgSearch searchByGeocode(final String geocode, final String guid, final int reason, final boolean forceReload, final CancellableHandler handler) {
+    public static cgSearch searchByGeocode(final String geocode, final String guid, final int listId, final boolean forceReload, final CancellableHandler handler) {
         final cgSearch search = new cgSearch();
 
         if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
@@ -1890,7 +1798,7 @@ public class cgBase {
         }
 
         cgeoapplication app = cgeoapplication.getInstance();
-        if (!forceReload && reason == 0 && (app.isOffline(geocode, guid) || app.isThere(geocode, guid, true, true))) {
+        if (!forceReload && listId == 0 && (app.isOffline(geocode, guid) || app.isThere(geocode, guid, true, true))) {
             final String realGeocode = StringUtils.isNotBlank(geocode) ? geocode : app.getGeocode(guid);
             search.addGeocode(realGeocode);
             return search;
@@ -1898,10 +1806,10 @@ public class cgBase {
 
         // if we have no geocode, we can't dynamically select the handler, but must explicitly use GC
         if (geocode == null && guid != null) {
-            return GCConnector.getInstance().searchByGeocode(null, guid, app, search, reason, handler);
+            return GCConnector.getInstance().searchByGeocode(null, guid, app, search, listId, handler);
         }
 
-        return ConnectorFactory.getConnector(geocode).searchByGeocode(geocode, guid, app, search, reason, handler);
+        return ConnectorFactory.getConnector(geocode).searchByGeocode(geocode, guid, app, search, listId, handler);
     }
 
     public static cgSearch searchByOffline(final Geopoint coords, final CacheType cacheType, final int list) {
@@ -1923,13 +1831,13 @@ public class cgBase {
      * @param thread
      *            thread to run the captcha if needed
      * @param cacheType
-     * @param reason
+     * @param listId
      * @param showCaptcha
      * @param params
      *            the parameters to add to the request URI
      * @return
      */
-    private static cgSearch searchByAny(final cgSearchThread thread, final CacheType cacheType, final boolean my, final int reason, final boolean showCaptcha, final Parameters params) {
+    private static cgSearch searchByAny(final cgSearchThread thread, final CacheType cacheType, final boolean my, final int listId, final boolean showCaptcha, final Parameters params) {
         final cgSearch search = new cgSearch();
         insertCacheType(params, cacheType);
 
@@ -1948,27 +1856,27 @@ public class cgBase {
         }
 
         List<cgCache> cacheList = filterSearchResults(search, caches, Settings.isExcludeDisabledCaches(), false, cacheType);
-        cgeoapplication.getInstance().addSearch(cacheList, reason);
+        cgeoapplication.getInstance().addSearch(cacheList, listId);
 
         return search;
     }
 
-    public static cgSearch searchByCoords(final cgSearchThread thread, final Geopoint coords, final CacheType cacheType, final int reason, final boolean showCaptcha) {
+    public static cgSearch searchByCoords(final cgSearchThread thread, final Geopoint coords, final CacheType cacheType, final int listId, final boolean showCaptcha) {
         final Parameters params = new Parameters("lat", Double.toString(coords.getLatitude()), "lng", Double.toString(coords.getLongitude()));
-        return searchByAny(thread, cacheType, false, reason, showCaptcha, params);
+        return searchByAny(thread, cacheType, false, listId, showCaptcha, params);
     }
 
-    public static cgSearch searchByKeyword(final cgSearchThread thread, final String keyword, final CacheType cacheType, final int reason, final boolean showCaptcha) {
+    public static cgSearch searchByKeyword(final cgSearchThread thread, final String keyword, final CacheType cacheType, final int listId, final boolean showCaptcha) {
         if (StringUtils.isBlank(keyword)) {
             Log.e(Settings.tag, "cgeoBase.searchByKeyword: No keyword given");
             return null;
         }
 
         final Parameters params = new Parameters("key", keyword);
-        return searchByAny(thread, cacheType, false, reason, showCaptcha, params);
+        return searchByAny(thread, cacheType, false, listId, showCaptcha, params);
     }
 
-    public static cgSearch searchByUsername(final cgSearchThread thread, final String userName, final CacheType cacheType, final int reason, final boolean showCaptcha) {
+    public static cgSearch searchByUsername(final cgSearchThread thread, final String userName, final CacheType cacheType, final int listId, final boolean showCaptcha) {
         if (StringUtils.isBlank(userName)) {
             Log.e(Settings.tag, "cgeoBase.searchByUsername: No user name given");
             return null;
@@ -1982,17 +1890,17 @@ public class cgBase {
             Log.i(Settings.tag, "cgBase.searchByUsername: Overriding users choice, downloading all caches.");
         }
 
-        return searchByAny(thread, cacheType, my, reason, showCaptcha, params);
+        return searchByAny(thread, cacheType, my, listId, showCaptcha, params);
     }
 
-    public static cgSearch searchByOwner(final cgSearchThread thread, final String userName, final CacheType cacheType, final int reason, final boolean showCaptcha) {
+    public static cgSearch searchByOwner(final cgSearchThread thread, final String userName, final CacheType cacheType, final int listId, final boolean showCaptcha) {
         if (StringUtils.isBlank(userName)) {
             Log.e(Settings.tag, "cgeoBase.searchByOwner: No user name given");
             return null;
         }
 
         final Parameters params = new Parameters("u", userName);
-        return searchByAny(thread, cacheType, false, reason, showCaptcha, params);
+        return searchByAny(thread, cacheType, false, listId, showCaptcha, params);
     }
 
     public static cgSearch searchByViewport(final String userToken, final Viewport viewport) {
@@ -2071,16 +1979,17 @@ public class cgBase {
     }
 
     public static cgTrackable searchTrackable(final String geocode, final String guid, final String id) {
-        cgTrackable trackable = new cgTrackable();
-
         if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid) && StringUtils.isBlank(id)) {
             Log.w(Settings.tag, "cgeoBase.searchTrackable: No geocode nor guid nor id given");
             return null;
         }
 
+        cgTrackable trackable = new cgTrackable();
+
         final Parameters params = new Parameters();
         if (StringUtils.isNotBlank(geocode)) {
             params.put("tracker", geocode);
+            trackable.setGeocode(geocode);
         } else if (StringUtils.isNotBlank(guid)) {
             params.put("guid", guid);
         } else if (StringUtils.isNotBlank(id)) {
@@ -2097,22 +2006,17 @@ public class cgBase {
         trackable = parseTrackable(page, cgeoapplication.getInstance());
         if (trackable == null) {
             Log.e(Settings.tag, "cgeoBase.searchTrackable: No trackable parsed");
-            return trackable;
+            return null;
         }
 
         return trackable;
     }
 
     public static StatusCode postLog(final cgeoapplication app, final String geocode, final String cacheid, final String[] viewstates,
-            final int logType, final int year, final int month, final int day,
+            final LogType logType, final int year, final int month, final int day,
             final String log, final List<cgTrackableLog> trackables) {
         if (isEmpty(viewstates)) {
             Log.e(Settings.tag, "cgeoBase.postLog: No viewstate given");
-            return StatusCode.LOG_POST_ERROR;
-        }
-
-        if (!logTypes2.containsKey(logType)) {
-            Log.e(Settings.tag, "cgeoBase.postLog: Unknown logtype");
             return StatusCode.LOG_POST_ERROR;
         }
 
@@ -2149,7 +2053,7 @@ public class cgBase {
                 "__EVENTTARGET", "",
                 "__EVENTARGUMENT", "",
                 "__LASTFOCUS", "",
-                "ctl00$ContentBody$LogBookPanel1$ddLogType", Integer.toString(logType),
+                "ctl00$ContentBody$LogBookPanel1$ddLogType", Integer.toString(logType.id),
                 "ctl00$ContentBody$LogBookPanel1$DateTimeLogged", String.format("%02d", month) + "/" + String.format("%02d", day) + "/" + String.format("%04d", year),
                 "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Month", Integer.toString(month),
                 "ctl00$ContentBody$LogBookPanel1$DateTimeLogged$Day", Integer.toString(day),
@@ -2262,14 +2166,9 @@ public class cgBase {
     }
 
     public static StatusCode postLogTrackable(final String tbid, final String trackingCode, final String[] viewstates,
-            final int logType, final int year, final int month, final int day, final String log) {
+            final LogType logType, final int year, final int month, final int day, final String log) {
         if (isEmpty(viewstates)) {
             Log.e(Settings.tag, "cgeoBase.postLogTrackable: No viewstate given");
-            return StatusCode.LOG_POST_ERROR;
-        }
-
-        if (!logTypes2.containsKey(logType)) {
-            Log.e(Settings.tag, "cgeoBase.postLogTrackable: Unknown logtype");
             return StatusCode.LOG_POST_ERROR;
         }
 
@@ -2287,7 +2186,7 @@ public class cgBase {
                 "__EVENTTARGET", "",
                 "__EVENTARGUMENT", "",
                 "__LASTFOCUS", "",
-                "ctl00$ContentBody$LogBookPanel1$ddLogType", Integer.toString(logType),
+                "ctl00$ContentBody$LogBookPanel1$ddLogType", Integer.toString(logType.id),
                 "ctl00$ContentBody$LogBookPanel1$tbCode", trackingCode);
         putViewstates(params, viewstates);
         if (currentDate.get(Calendar.YEAR) == year && (currentDate.get(Calendar.MONTH) + 1) == month && currentDate.get(Calendar.DATE) == day) {
@@ -2429,8 +2328,13 @@ public class cgBase {
         if (name.length() > 82) {
             name = name.substring(0, 79) + "...";
         }
-        String status = "I touched " + name + " (" + trackable.getUrl() + ")!";
-        status = Twitter.appendHashTag(status, "cgeo");
+        StringBuilder builder = new StringBuilder("I touched ");
+        builder.append(name);
+        if (trackable.getUrl() != null) {
+            builder.append(" (").append(trackable.getUrl()).append(')');
+        }
+        builder.append('!');
+        String status = Twitter.appendHashTag(builder.toString(), "cgeo");
         status = Twitter.appendHashTag(status, "geocaching");
         Twitter.postTweet(app, status, null);
     }
@@ -2639,7 +2543,7 @@ public class cgBase {
      * @param xContentType
      * @return
      */
-    public static HttpResponse request(final String uri, final Parameters params, final Boolean xContentType) {
+    public static HttpResponse request(final String uri, final Parameters params, final boolean xContentType) {
         final String fullUri = params == null ? uri : Uri.parse(uri).buildUpon().encodedQuery(params.toString()).build().toString();
         final HttpRequestBase request = new HttpGet(fullUri);
 
@@ -2662,7 +2566,8 @@ public class cgBase {
     }
 
     static private String formatTimeSpan(final long before) {
-        return String.format(" (%d ms) ", System.currentTimeMillis() - before);
+        // don't use String.format in a pure logging routine, it has very bad performance
+        return " (" + (System.currentTimeMillis() - before) + " ms) ";
     }
 
     static public boolean isSuccess(final HttpResponse response) {
@@ -2737,7 +2642,7 @@ public class cgBase {
             // get cache details, they may not yet be complete
             if (origCache != null) {
                 // only reload the cache, if it was already stored or has not all details (by checking the description)
-                if (origCache.getReason() > 0 || StringUtils.isBlank(origCache.getDescription())) {
+                if (origCache.getListId() > 0 || StringUtils.isBlank(origCache.getDescription())) {
                     final cgSearch search = searchByGeocode(origCache.getGeocode(), null, listId, false, null);
                     cache = app.getCache(search);
                 } else {
@@ -2785,8 +2690,8 @@ public class cgBase {
             }
 
             // store images from logs
-            if (Settings.isStoreLogImages() && cache.getLogs() != null) {
-                for (cgLog log : cache.getLogs()) {
+            if (Settings.isStoreLogImages() && cache.getLogs(true) != null) {
+                for (cgLog log : cache.getLogs(true)) {
                     if (CollectionUtils.isNotEmpty(log.logImages)) {
                         for (cgImage oneLogImg : log.logImages) {
                             imgGetter.getDrawable(oneLogImg.getUrl());

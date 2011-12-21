@@ -49,15 +49,21 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
-    public cgSearch searchByGeocode(String geocode, String guid, cgeoapplication app, cgSearch search, int reason, CancellableHandler handler) {
+    public cgSearch searchByGeocode(String geocode, String guid, cgeoapplication app, cgSearch search, int listId, CancellableHandler handler) {
         return null;
     }
 
     protected static boolean isNumericId(final String string) {
         try {
-            return Integer.valueOf(string) > 0;
+            return Integer.parseInt(string) > 0;
         } catch (NumberFormatException e) {
         }
+        return false;
+    }
+
+    @Override
+    public boolean isZippedGPXFile(String fileName) {
+        // don't accept any file by default
         return false;
     }
 }

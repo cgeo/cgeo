@@ -3,6 +3,8 @@
  */
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.LogType;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -97,7 +99,7 @@ public interface ICache extends IBasicCache {
      * @return number of favorite points
      *
      */
-    public Integer getFavoritePoints();
+    public int getFavoritePoints();
 
     /**
      * @return true if the cache is on the watchlist of the user
@@ -129,7 +131,7 @@ public interface ICache extends IBasicCache {
     /**
      * @return a statistic how often the caches has been found, disabled, archived etc.
      */
-    public Map<Integer, Integer> getLogCounts();
+    public Map<LogType, Integer> getLogCounts();
 
     /**
      * get the name for lexicographical sorting.

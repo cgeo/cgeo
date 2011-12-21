@@ -5,7 +5,7 @@
 
   <!-- basics -->
   <string name="cache">Cache</string>
-  <string name="detail">Detail</string>
+  <string name="detail">Details</string>
   <string name="search">Suche</string>
   <string name="settings">Einstellungen</string>
   <string name="helpers">Nützliche Apps</string>
@@ -73,9 +73,8 @@
   <string name="log_needs_archived">Sollte archiviert werden</string>
   <string name="log_discovered">Gesehen</string>
   <string name="log_reviewed">Überprüft</string>
-  <string name="log_taken">Cache besucht</string>
   <string name="log_tb_nothing">Keine Aktion</string>
-  <string name="log_tb_visit">Besuchen</string>
+  <string name="log_tb_visit">Besucht</string>
   <string name="log_tb_drop">Ablegen</string>
   <string name="log_tb_changeall">Alle ändern</string>
   <string name="log_save">Speichern</string>
@@ -345,7 +344,7 @@
   <string name="init_username">Benutzername</string>
   <string name="init_password">Passwort</string>
   <string name="init_passvote">Passwort</string>
-  <string name="init_login">Anmeldedaten überprüfen &amp; Datumsformat setzen</string>
+  <string name="init_login">Anmeldedaten überprüfen und speichern</string>
   <string name="init_login_popup">Login</string>
   <string name="init_login_popup_working">Bei Geocaching.com anmelden…</string>
   <string name="init_login_popup_ok">Login erfolgreich.</string>
@@ -367,6 +366,8 @@
   <string name="init_details">Cache Details</string>
   <string name="init_ratingwanted">Lade Cache-Bewertung von GCvote.com</string>
   <string name="init_elevationwanted">Lade Höhe des Caches</string>
+  <string name="init_friendlogswanted">Lade zusätzliche Logbuch-Seite für Logs von Freunden</string>
+  <string name="init_openlastdetailspage">Öffne Details mit zuletzt genutzter Seite</string>
   <string name="init_autoload">Ausführliche Beschreibung automatisch laden</string>
   <string name="init_other">Weitere Optionen</string>
   <string name="init_skin">Helle Oberfläche (Neustart erforderlich)</string>
@@ -375,7 +376,7 @@
   <string name="init_useenglish">c:geo auf Englisch nutzen (Neustart erforderlich)</string>
   <string name="init_exclude">Eigene und gefundene Caches ausblenden</string>
   <string name="init_showwaypoints">Wegpunkte zeigen</string>
-  <string name="init_showwaypoint_description">Grenze unter der Wegpunkte in der Karte angezeigt werden.</string>
+  <string name="init_showwaypoint_description">Anzahl der Caches in der Karte unterhalb der Wegpunkte angezeigt werden.</string>
   <string name="init_disabled">Deaktivierte Caches ausblenden</string>
   <string name="init_offline">Statische Karten für Offline-Verwendung speichern</string>
   <string name="init_save_log_img">Logbilder abspeichern</string>
@@ -406,6 +407,7 @@
   <string name="init_mapsources_description">Hier kannst du die Quelle für deine Karte wählen. Alternativ zu Google Maps stehen verschiedene OpenStreetMap-Stile zur Verfügung und daneben auch Karten-Dateien für die Offline-Nutzung (siehe http://code.google.com/p/mapsforge/ für die Details).</string>
   <string name="init_mapsource_select">Wähle eine Kartenquelle</string>
   <string name="init_select_mapfile">…</string>
+  <string name="init_maptrail">Zeige Spur auf Karte</string>
   <string name="init_trackautovisit">Trackables automatisch auf \"besuchen\" setzen</string>
   <string name="init_sigautoinsert">Signatur automatisch einfügen</string>
   <string name="init_loaddirectionimg">Richtungs-Grafik laden wenn nötig</string>
@@ -457,7 +459,6 @@
   <string name="cache_attributes">Attribute</string>
   <string name="cache_attributes_no_icons">(aktualisiere den Cache um die Attribut-Icons anzuzeigen)</string>
   <string name="cache_inventory">Inventar</string>
-  <string name="cache_inventory_loading">Lade Inventar…</string>
   <string name="cache_log_offline">Offline-Log</string>
   <string name="cache_log_images_loading">Lade Logbild …</string>
   <string name="cache_log_images_title">Logbild</string>
@@ -471,9 +472,14 @@
   <string name="cache_watchlist_add">Hinzufügen</string>
   <string name="cache_watchlist_remove">Entfernen</string>
   <string name="cache_waypoints">Wegpunkte</string>
+  <plurals name="waypoints">
+      <item quantity="one">1 Wegpunkt</item>
+      <item quantity="other">%d Wegpunkte</item>
+  </plurals>
   <string name="cache_waypoints_add">Wegpunkt hinzufügen</string>
   <string name="cache_hint">Hinweis</string>
   <string name="cache_logs">Logbuch</string>
+  <string name="cache_logsfriends">Logbuch (Freunde)</string>
   <string name="cache_dialog_loading_details">Lade Cache-Details…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Lade Seite</string>
   <string name="cache_dialog_loading_details_status_details">Verarbeite Details</string>
@@ -603,7 +609,7 @@
   <string name="waypoint_loading">Lade Wegpunkt…</string>
   <string name="waypoint_unknown_coordinates">Unbekannte Koordinaten</string>
   <string name="waypoint_done">Fertig</string>
-  <string name="waypoint_duplicate">Dupliziere</string>
+  <string name="waypoint_duplicate">Duplizieren</string>
   <string name="waypoint_copy_of">Kopie von</string>
   <string name="search_history">Verlauf</string>
   <string name="search_history_empty">Keine Ziele bisher</string>
@@ -869,6 +875,8 @@
   <string name="go4cache_looking_around">Schaut sich um</string>
   <string name="go4cache_tweeting">Twittert</string>
   <string name="go4cache_heading_to">Auf dem Weg zu</string>
-  <string name="go4cache_minutes">Minuten</string>
-  
+  <plurals name="go4cache_time_minutes">
+	<item quantity="one">vor einer Minute</item>
+	<item quantity="other">vor %d Minuten</item>
+  </plurals>
 </resources>

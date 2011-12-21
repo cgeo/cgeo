@@ -1,9 +1,12 @@
 package cgeo.geocaching.test.mock;
 
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.GeopointFormatter;
 
 import java.text.ParseException;
 import java.util.Arrays;
@@ -15,8 +18,11 @@ import java.util.Map;
 
 public class GC2CJPF extends MockedCache {
 
+    final protected Geopoint userCoords;
+
     public GC2CJPF() {
         super(new Geopoint(52425067, 9664200));
+        this.userCoords = new Geopoint("N 52° 25.111 E 009° 39.111");
     }
 
     @Override
@@ -25,7 +31,7 @@ public class GC2CJPF extends MockedCache {
     }
 
     @Override
-    public Float getDifficulty() {
+    public float getDifficulty() {
         return 2.5f;
     }
 
@@ -49,7 +55,7 @@ public class GC2CJPF extends MockedCache {
     }
 
     @Override
-    public Float getTerrain() {
+    public float getTerrain() {
         return 2.0f;
     }
 
@@ -90,24 +96,37 @@ public class GC2CJPF extends MockedCache {
 
     @Override
     public boolean isFound() {
-        if ("blafoo".equals(this.getUserLoggedIn())) {
+        if ("blafoo".equals(this.getMockedDataUser())) {
             return true;
         }
-        return false;
+        return super.isFound();
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see cgeo.geocaching.test.mock.MockedCache#isOwn()
+     */
+    @Override
+    public boolean isOwn() {
+        if ("Tom03".equals(Settings.getUsername())) {
+            return true;
+        }
+        return super.isOwn();
     }
 
     @Override
     public boolean isFavorite() {
-        if ("blafoo".equals(this.getUserLoggedIn())) {
+        if ("blafoo".equals(this.getMockedDataUser())) {
             return true;
         }
-        return false;
+        return super.isFavorite();
     }
 
     @Override
     public Date getHiddenDate() {
         try {
-            return cgBase.parseGcCustomDate("31/07/2010");
+            return cgBase.parseGcCustomDate("31/07/2010", getDateFormat());
         } catch (ParseException e) {
             // intentionally left blank
         }
@@ -132,22 +151,39 @@ public class GC2CJPF extends MockedCache {
     }
 
     @Override
-    public Map<Integer, Integer> getLogCounts() {
-        Map<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
-        logCounts.put(cgBase.LOG_PUBLISH_LISTING, 1);
-        logCounts.put(cgBase.LOG_FOUND_IT, 60);
-        logCounts.put(cgBase.LOG_DIDNT_FIND_IT, 3);
-        logCounts.put(cgBase.LOG_NOTE, 6);
-        logCounts.put(cgBase.LOG_ENABLE_LISTING, 2);
-        logCounts.put(cgBase.LOG_TEMP_DISABLE_LISTING, 2);
-        logCounts.put(cgBase.LOG_OWNER_MAINTENANCE, 3);
-        logCounts.put(cgBase.LOG_NEEDS_MAINTENANCE, 2);
+    public Map<LogType, Integer> getLogCounts() {
+        Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
+        logCounts.put(LogType.LOG_PUBLISH_LISTING, 1);
+        logCounts.put(LogType.LOG_FOUND_IT, 62);
+        logCounts.put(LogType.LOG_DIDNT_FIND_IT, 3);
+        logCounts.put(LogType.LOG_NOTE, 6);
+        logCounts.put(LogType.LOG_ENABLE_LISTING, 2);
+        logCounts.put(LogType.LOG_TEMP_DISABLE_LISTING, 2);
+        logCounts.put(LogType.LOG_OWNER_MAINTENANCE, 3);
+        logCounts.put(LogType.LOG_NEEDS_MAINTENANCE, 2);
         return logCounts;
     }
 
     @Override
-    public Integer getFavoritePoints() {
+    public int getFavoritePoints() {
         return 7;
+    }
+
+    @Override
+    public String getLatitude() {
+        if ("blafoo".equals(this.getMockedDataUser())) {
+            return userCoords.format(GeopointFormatter.Format.LAT_DECMINUTE);
+        }
+        return coords.format(GeopointFormatter.Format.LAT_DECMINUTE);
+    }
+
+    @Override
+    public String getLongitude() {
+        if ("blafoo".equals(this.getMockedDataUser())) {
+            return userCoords.format(GeopointFormatter.Format.LON_DECMINUTE);
+        }
+        return coords.format(GeopointFormatter.Format.LON_DECMINUTE);
+
     }
 
 }

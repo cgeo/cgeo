@@ -5,6 +5,7 @@ import cgeo.geocaching.cgImage;
 import cgeo.geocaching.cgTrackable;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import java.text.ParseException;
@@ -27,12 +28,12 @@ public class GC2JVEH extends MockedCache {
     }
 
     @Override
-    public Float getDifficulty() {
+    public float getDifficulty() {
         return 5.0f;
     }
 
     @Override
-    public Float getTerrain() {
+    public float getTerrain() {
         return 3.0f;
     }
 
@@ -73,7 +74,7 @@ public class GC2JVEH extends MockedCache {
 
     @Override
     public String getShortDescription() {
-        return "Aufgabe zum Start: Finde die Schattenlinie. !!!Die Skizze mit den Zahlen solltest du mitnehmen!!! Du solltest den cache so beginnen, das du station 2 in der Zeit von mo- fr von 11-19 Uhr und sa von11-16 Uhr erledigt hast.";
+        return "Aufgabe zum Start: Finde die Schattenlinie. !!!Die Skizze mit den Zahlen solltest du mitnehmen!!! Du solltest den cache so beginnen, das du station 2 in der Zeit von mo- fr von 11-19 Uhr und sa von 11-16 Uhr erledigt hast. Achtung: Damit ihr die Zahlenpause in druckbarer Größe sehen könnt müsst ihr über die Bildergalerie gehen nicht über den unten zu sehenden link.....";
     }
 
     @Override
@@ -89,7 +90,7 @@ public class GC2JVEH extends MockedCache {
     @Override
     public Date getHiddenDate() {
         try {
-            return cgBase.parseGcCustomDate("28/11/2010");
+            return cgBase.parseGcCustomDate("28/11/2010", getDateFormat());
         } catch (ParseException e) {
             // intentionally left blank
         }
@@ -111,19 +112,19 @@ public class GC2JVEH extends MockedCache {
     }
 
     @Override
-    public Map<Integer, Integer> getLogCounts() {
-        final Map<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
-        logCounts.put(cgBase.LOG_FOUND_IT, 59);
-        logCounts.put(cgBase.LOG_NOTE, 7);
-        logCounts.put(cgBase.LOG_TEMP_DISABLE_LISTING, 1);
-        logCounts.put(cgBase.LOG_ENABLE_LISTING, 1);
-        logCounts.put(cgBase.LOG_PUBLISH_LISTING, 1);
+    public Map<LogType, Integer> getLogCounts() {
+        final Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
+        logCounts.put(LogType.LOG_FOUND_IT, 66);
+        logCounts.put(LogType.LOG_NOTE, 7);
+        logCounts.put(LogType.LOG_TEMP_DISABLE_LISTING, 1);
+        logCounts.put(LogType.LOG_ENABLE_LISTING, 1);
+        logCounts.put(LogType.LOG_PUBLISH_LISTING, 1);
         return logCounts;
     }
 
     @Override
-    public Integer getFavoritePoints() {
-        return 21;
+    public int getFavoritePoints() {
+        return 23;
     }
 
     @Override

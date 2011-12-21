@@ -3,15 +3,24 @@ package cgeo.geocaching.sorting;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.geopoint.Geopoint;
 
+import java.util.List;
+
 /**
- * sorts caches by distance to current position
+ * sorts caches by distance to given position
  *
  */
 public class DistanceComparator extends AbstractCacheComparator {
-    private final Geopoint coords;
 
-    public DistanceComparator(final Geopoint coords) {
-        this.coords = coords;
+    public DistanceComparator(final Geopoint coords, List<cgCache> list) {
+        // calculate all distances to avoid duplicate calculations during sorting
+        for (cgCache cache : list) {
+            if (cache.getCoords() != null) {
+                cache.setDistance(coords.distanceTo(cache.getCoords()));
+            }
+            else {
+                cache.setDistance(null);
+            }
+        }
     }
 
     @Override
@@ -21,20 +30,13 @@ public class DistanceComparator extends AbstractCacheComparator {
 
     @Override
     protected int compareCaches(final cgCache cache1, final cgCache cache2) {
-        if ((cache1.getCoords() == null || cache2.getCoords() == null)
-                && cache1.getDistance() != null && cache2.getDistance() != null) {
-            return Double.compare(cache1.getDistance(), cache2.getDistance());
-        } else {
-            if (cache1.getCoords() == null) {
-                return 1;
-            }
-            if (cache2.getCoords() == null) {
-                return -1;
-            }
-
-            return Float.compare(coords.distanceTo(cache1.getCoords()),
-                    coords.distanceTo(cache2.getCoords()));
+        if (cache1.getCoords() == null) {
+            return 1;
         }
+        if (cache2.getCoords() == null) {
+            return -1;
+        }
+        return Float.compare(cache1.getDistance(), cache2.getDistance());
     }
 
 }

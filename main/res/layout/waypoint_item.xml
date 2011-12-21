@@ -2,36 +2,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="12dip"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:paddingTop="9dp" >
 
     <TextView
         android:id="@+id/name"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textColor="?text_color"
-        android:textSize="14dip" />
+        android:textSize="18dp" />
 
     <TextView
         android:id="@+id/info"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:layout_marginLeft="12dip"
+        android:layout_marginLeft="12dp"
         android:ellipsize="marquee"
         android:lines="1"
         android:scrollHorizontally="true"
         android:singleLine="true"
         android:textColor="?text_color_headline"
-        android:textSize="12dip" />
+        android:textSize="14dp"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/coordinates"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:layout_marginLeft="12dp"
+        android:ellipsize="marquee"
+        android:lines="1"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
+        android:textColor="?text_color_headline"
+        android:textSize="14dp"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/note"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dip"
+        android:layout_marginLeft="12dp"
         android:textColor="?text_color"
-        android:textSize="12dip"
+        android:textSize="14dp"
         android:visibility="gone" />
+
+    <View
+        style="@style/separator_horizontal"
+        android:layout_marginTop="9dp" />
 
 </LinearLayout>

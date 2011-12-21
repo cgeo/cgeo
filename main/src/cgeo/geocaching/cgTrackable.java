@@ -1,6 +1,9 @@
 package cgeo.geocaching;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.text.Html;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,7 +23,7 @@ public class cgTrackable implements ILogable {
     private String name = "";
     private String type = null;
     private Date released = null;
-    private Float distance = null;
+    private float distance = -1;
     private String origin = null;
     private String owner = null;
     private String ownerGuid = null;
@@ -33,6 +36,16 @@ public class cgTrackable implements ILogable {
     private List<cgLog> logs = new ArrayList<cgLog>();
 
     public String getUrl() {
+        if (StringUtils.startsWithIgnoreCase(geocode, "GK")) {
+            String hex = geocode.substring(3);
+            try {
+                int id = Integer.parseInt(hex, 16);
+                return "http://geokrety.org/konkret.php?id=" + id;
+            } catch (NumberFormatException e) {
+                Log.e(Settings.tag, "cgTrackable.getUrl", e);
+                return null;
+            }
+        }
         return "http://coord.info/" + geocode.toUpperCase();
     }
 
@@ -85,14 +98,19 @@ public class cgTrackable implements ILogable {
     }
 
     public void setReleased(Date released) {
-        this.released = released;
+        if (released == null) {
+            this.released = null;
+        }
+        else {
+            this.released = new Date(released.getTime()); // avoid storing external reference in this object
+        }
     }
 
-    public Float getDistance() {
+    public float getDistance() {
         return distance;
     }
 
-    public void setDistance(Float distance) {
+    public void setDistance(float distance) {
         this.distance = distance;
     }
 
@@ -187,5 +205,12 @@ public class cgTrackable implements ILogable {
         }
 
         return "???";
+    }
+
+    public boolean isLoggable() {
+        if (StringUtils.startsWithIgnoreCase(geocode, "GK")) {
+            return false;
+        }
+        return true;
     }
 }

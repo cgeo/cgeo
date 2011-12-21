@@ -36,7 +36,7 @@ public final class Compatibility {
         }
     }
 
-    public static Float getDirectionNow(final Float directionNowPre,
+    public static float getDirectionNow(final float directionNowPre,
             final Activity activity) {
         if (isLevel8) {
             try {

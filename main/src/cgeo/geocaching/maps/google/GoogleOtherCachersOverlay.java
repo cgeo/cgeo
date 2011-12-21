@@ -33,24 +33,27 @@ public class GoogleOtherCachersOverlay extends ItemizedOverlay<GoogleOtherCacher
 
     @Override
     protected GoogleOtherCachersOverlayItem createItem(int i) {
-        if (base == null)
+        if (base == null) {
             return null;
+        }
 
         return (GoogleOtherCachersOverlayItem) base.createItem(i);
     }
 
     @Override
     public int size() {
-        if (base == null)
+        if (base == null) {
             return 0;
+        }
 
         return base.size();
     }
 
     @Override
     protected boolean onTap(int arg0) {
-        if (base == null)
+        if (base == null) {
             return false;
+        }
 
         return base.onTap(arg0);
     }

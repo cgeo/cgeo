@@ -2,7 +2,9 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.CGeoMap;
@@ -14,7 +16,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -49,9 +50,9 @@ public class cgeo extends AbstractActivity {
     private static final int SCAN_REQUEST_CODE = 1;
     private static final int MENU_OPEN_LIST = 100;
 
-    private Integer version = null;
+    private int version = 0;
     private cgGeo geo = null;
-    private cgUpdateLoc geoUpdate = new update();
+    private UpdateLocationCallback geoUpdate = new update();
     private TextView navType = null;
     private TextView navAccuracy = null;
     private TextView navSatellites = null;
@@ -326,12 +327,12 @@ public class cgeo extends AbstractActivity {
 
         // context menu for offline button
         if (v.getId() == R.id.search_offline) {
-            List<cgList> cacheLists = app.getLists();
+            List<StoredList> cacheLists = app.getLists();
             int listCount = cacheLists.size();
             menu.setHeaderTitle(res.getString(R.string.list_title));
             for (int i = 0; i < listCount; i++) {
-                cgList list = cacheLists.get(i);
-                menu.add(Menu.NONE, MENU_OPEN_LIST + list.id, Menu.NONE, list.title);
+                StoredList list = cacheLists.get(i);
+                menu.add(Menu.NONE, MENU_OPEN_LIST + list.id, Menu.NONE, list.getTitleAndCount());
             }
             return;
         }
@@ -439,6 +440,22 @@ public class cgeo extends AbstractActivity {
 
         Settings.setLanguage(Settings.isUseEnglish());
 
+        /*
+         * "update" the cache size/type. For a better performance
+         * the resource strings a stored in the enum's. In case of a
+         * locale change the resource strings don't get updated automatically.
+         * That's why we have to do it on our own.
+         */
+        for (CacheSize cacheSize : CacheSize.values()) {
+            cacheSize.setL10n();
+        }
+        for (CacheType cacheType : CacheType.values()) {
+            cacheType.setL10n();
+        }
+        for (LogType logType : LogType.values()) {
+            logType.setL10n();
+        }
+
         Settings.getLogin();
 
         if (app.firstRun) {
@@ -534,10 +551,10 @@ public class cgeo extends AbstractActivity {
                 .show();
     }
 
-    private class update extends cgUpdateLoc {
+    private class update implements UpdateLocationCallback {
 
         @Override
-        public void updateLoc(cgGeo geo) {
+        public void updateLocation(cgGeo geo) {
             if (geo == null) {
                 return;
             }
@@ -561,9 +578,9 @@ public class cgeo extends AbstractActivity {
                     findNearest.setBackgroundResource(R.drawable.main_nearby);
 
                     String satellites = null;
-                    if (geo.satellitesVisible != null && geo.satellitesFixed != null && geo.satellitesFixed > 0) {
+                    if (geo.satellitesFixed > 0) {
                         satellites = res.getString(R.string.loc_sat) + ": " + geo.satellitesFixed + "/" + geo.satellitesVisible;
-                    } else if (geo.satellitesVisible != null) {
+                    } else if (geo.satellitesVisible >= 0) {
                         satellites = res.getString(R.string.loc_sat) + ": 0/" + geo.satellitesVisible;
                     } else {
                         satellites = "";
@@ -571,11 +588,11 @@ public class cgeo extends AbstractActivity {
                     navSatellites.setText(satellites);
                     navType.setText(res.getString(geo.locationProvider.resourceId));
 
-                    if (geo.accuracyNow != null) {
+                    if (geo.accuracyNow >= 0) {
                         if (Settings.isUseMetricUnits()) {
-                            navAccuracy.setText("±" + String.format("%.0f", geo.accuracyNow) + " m");
+                            navAccuracy.setText("±" + Math.round(geo.accuracyNow) + " m");
                         } else {
-                            navAccuracy.setText("±" + String.format("%.0f", (geo.accuracyNow * 3.2808399)) + " ft");
+                            navAccuracy.setText("±" + Math.round(geo.accuracyNow * 3.2808399) + " ft");
                         }
                     } else {
                         navAccuracy.setText(null);
@@ -721,10 +738,8 @@ public class cgeo extends AbstractActivity {
             app.cleanDatabase(more);
             cleanupRunning = false;
 
-            if (version != null && version > 0) {
-                SharedPreferences.Editor edit = prefs.edit();
-                edit.putInt("version", version);
-                edit.commit();
+            if (version > 0) {
+                Settings.setVersion(version);
             }
         }
     }

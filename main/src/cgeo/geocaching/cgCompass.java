@@ -149,9 +149,9 @@ public class cgCompass extends View {
         double offset = 0.0;
 
         if (diff < 0.0) {
-            diff = diff + 360.0;
+            diff += 360.0;
         } else if (diff >= 360.0) {
-            diff = diff - 360.0;
+            diff -= 360.0;
         }
 
         // If the difference is smaller than 1 degree, do nothing as it
@@ -200,9 +200,9 @@ public class cgCompass extends View {
         double azimuthTemp = azimuthDrawn;
         double azimuthRelative = azimuthTemp - headingDrawn;
         if (azimuthRelative < 0) {
-            azimuthRelative = azimuthRelative + 360;
+            azimuthRelative += 360;
         } else if (azimuthRelative >= 360) {
-            azimuthRelative = azimuthRelative - 360;
+            azimuthRelative -= 360;
         }
 
         // compass margins

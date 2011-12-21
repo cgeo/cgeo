@@ -1,15 +1,19 @@
-package cgeo.geocaching;
+package cgeo.geocaching.twitter;
 
+import cgeo.geocaching.Parameters;
+import cgeo.geocaching.R;
+import cgeo.geocaching.Settings;
+import cgeo.geocaching.cgBase;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.network.OAuth;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.util.EntityUtils;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,7 +26,7 @@ import android.widget.EditText;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class cgeoauth extends AbstractActivity {
+public class TwitterAuthorizationActivity extends AbstractActivity {
     private String OAtoken = null;
     private String OAtokenSecret = null;
     private final Pattern paramsPattern1 = Pattern.compile("oauth_token=([a-zA-Z0-9\\-\\_.]+)");
@@ -107,8 +111,9 @@ public class cgeoauth extends AbstractActivity {
         pinEntry = (EditText) findViewById(R.id.pin);
         pinEntryButton = (Button) findViewById(R.id.pin_button);
 
-        OAtoken = prefs.getString("temp-token-public", null);
-        OAtokenSecret = prefs.getString("temp-token-secret", null);
+        ImmutablePair<String, String> tempToken = Settings.getTempToken();
+        OAtoken = tempToken.left;
+        OAtokenSecret = tempToken.right;
 
         startButton.setEnabled(true);
         startButton.setOnClickListener(new startListener());
@@ -150,11 +155,7 @@ public class cgeoauth extends AbstractActivity {
                 }
 
                 if (StringUtils.isNotBlank(OAtoken) && StringUtils.isNotBlank(OAtokenSecret)) {
-                    final SharedPreferences.Editor prefsEdit = getSharedPreferences(Settings.preferences, 0).edit();
-                    prefsEdit.putString("temp-token-public", OAtoken);
-                    prefsEdit.putString("temp-token-secret", OAtokenSecret);
-                    prefsEdit.commit();
-
+                    Settings.setTwitterTempTokens(OAtoken, OAtokenSecret);
                     try {
                         final Parameters paramsBrowser = new Parameters();
                         paramsBrowser.put("oauth_callback", "oob");
@@ -163,12 +164,12 @@ public class cgeoauth extends AbstractActivity {
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://" + host + pathAuthorize + "?" + encodedParams)));
                         status = 1;
                     } catch (Exception e) {
-                        Log.e(Settings.tag, "cgeoauth.requestToken(2): " + e.toString());
+                        Log.e(Settings.tag, "TwitterAuthorizationActivity.requestToken(2): " + e.toString());
                     }
                 }
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgeoauth.requestToken(1): " + e.toString());
+            Log.e(Settings.tag, "TwitterAuthorizationActivity.requestToken(1): " + e.toString());
         }
 
         requestTokenHandler.sendEmptyMessage(status);
@@ -202,25 +203,13 @@ public class cgeoauth extends AbstractActivity {
             if (StringUtils.isBlank(OAtoken) && StringUtils.isBlank(OAtokenSecret)) {
                 OAtoken = "";
                 OAtokenSecret = "";
-
-                final SharedPreferences.Editor prefs = getSharedPreferences(Settings.preferences, 0).edit();
-                prefs.putString("tokenpublic", null);
-                prefs.putString("tokensecret", null);
-                prefs.putInt("twitter", 0);
-                prefs.commit();
+                Settings.setTwitterTokens(null, null, false);
             } else {
-                final SharedPreferences.Editor prefs = getSharedPreferences(Settings.preferences, 0).edit();
-                prefs.remove("temp-token-public");
-                prefs.remove("temp-token-secret");
-                prefs.putString("tokenpublic", OAtoken);
-                prefs.putString("tokensecret", OAtokenSecret);
-                prefs.putInt("twitter", 1);
-                prefs.commit();
-
+                Settings.setTwitterTokens(OAtoken, OAtokenSecret, true);
                 status = 1;
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgeoauth.changeToken: " + e.toString());
+            Log.e(Settings.tag, "TwitterAuthorizationActivity.changeToken: " + e.toString());
         }
 
         changeTokensHandler.sendEmptyMessage(status);
@@ -230,7 +219,7 @@ public class cgeoauth extends AbstractActivity {
 
         public void onClick(View arg0) {
             if (requestTokenDialog == null) {
-                requestTokenDialog = new ProgressDialog(cgeoauth.this);
+                requestTokenDialog = new ProgressDialog(TwitterAuthorizationActivity.this);
                 requestTokenDialog.setCancelable(false);
                 requestTokenDialog.setMessage(res.getString(R.string.auth_dialog_wait));
             }
@@ -239,11 +228,7 @@ public class cgeoauth extends AbstractActivity {
             startButton.setOnTouchListener(null);
             startButton.setOnClickListener(null);
 
-            final SharedPreferences.Editor prefs = getSharedPreferences(Settings.preferences, 0).edit();
-            prefs.putString("temp-token-public", null);
-            prefs.putString("temp-token-secret", null);
-            prefs.commit();
-
+            Settings.setTwitterTempTokens(null, null);
             (new Thread() {
 
                 @Override
@@ -263,7 +248,7 @@ public class cgeoauth extends AbstractActivity {
             }
 
             if (changeTokensDialog == null) {
-                changeTokensDialog = new ProgressDialog(cgeoauth.this);
+                changeTokensDialog = new ProgressDialog(TwitterAuthorizationActivity.this);
                 changeTokensDialog.setCancelable(false);
                 changeTokensDialog.setMessage(res.getString(R.string.auth_dialog_wait));
             }

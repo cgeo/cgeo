@@ -7,12 +7,16 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
+
+import com.viewpagerindicator.TitlePageIndicator;
+import com.viewpagerindicator.TitleProvider;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
@@ -36,10 +40,12 @@ import android.os.Message;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
+import android.text.style.ImageSpan;
 import android.text.style.StrikethroughSpan;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -66,6 +72,7 @@ import android.widget.TextView.BufferType;
 
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -88,25 +95,25 @@ public class CacheDetailActivity extends AbstractActivity {
     private static final int MENU_BROWSER = 7;
     private static final int MENU_NAVIGATE = 2;
 
-    private static final int CONTEXT_MENU_WAYPOINT_DELETE = 1235;
-    private static final int CONTEXT_MENU_WAYPOINT_DUPLICATE = 1234;
+    private static final int CONTEXT_MENU_WAYPOINT_EDIT = 1234;
+    private static final int CONTEXT_MENU_WAYPOINT_DUPLICATE = 1235;
+    private static final int CONTEXT_MENU_WAYPOINT_DELETE = 1236;
+    private static final int CONTEXT_MENU_WAYPOINT_COMPASS = 1237;
+    private static final int CONTEXT_MENU_WAYPOINT_NAVIGATE = 1238;
+    private static final int CONTEXT_MENU_WAYPOINT_CACHES_AROUND = 1239;
 
     private cgGeo geolocation;
     private cgCache cache;
-    private final Map<Integer, String> calendars = new HashMap<Integer, String>();
     private final Progress progress = new Progress();
     private cgSearch search;
     private final LocationUpdater locationUpdater = new LocationUpdater();
     private String contextMenuUser = null;
-
-    /**
-     * The index of the current page. We need this hack because {@link onPageSelected()} is not called after
-     * initialization.
-     */
-    private int currentPageIndex = 0;
+    private int contextMenuWPIndex = -1;
 
     /**
      * A {@link List} of all available pages.
+     *
+     * @todo Move to adapter
      */
     private final List<Page> pageOrder = new ArrayList<Page>();
 
@@ -116,14 +123,19 @@ public class CacheDetailActivity extends AbstractActivity {
     private final Map<Page, PageViewCreator> viewCreators = new HashMap<Page, PageViewCreator>();
 
     /**
+     * The {@link ViewPager} for this activity.
+     */
+    private ViewPager viewPager;
+
+    /**
      * The {@link ViewPagerAdapter} for this activity.
      */
     private ViewPagerAdapter viewPagerAdapter;
 
     /**
-     * The {@link ViewPagerIndicator} for this activity.
+     * The {@link TitlePageIndicator} for this activity.
      */
-    private ViewPagerIndicator viewPagerIndicator;
+    private TitlePageIndicator titleIndicator;
 
     /**
      * If another activity is called and can modify the data of this activity, we refresh it on resume.
@@ -239,11 +251,38 @@ public class CacheDetailActivity extends AbstractActivity {
         }
 
         // initialize ViewPager
-        ViewPager pager = (ViewPager) findViewById(R.id.viewpager);
-        viewPagerIndicator = new ViewPagerIndicator();
-        pager.setOnPageChangeListener(viewPagerIndicator);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
         viewPagerAdapter = new ViewPagerAdapter();
-        pager.setAdapter(viewPagerAdapter);
+        viewPager.setAdapter(viewPagerAdapter);
+
+        titleIndicator = (TitlePageIndicator) findViewById(R.id.pager_indicator);
+        titleIndicator.setViewPager(viewPager);
+        titleIndicator.setOnPageChangeListener(new OnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                if (Settings.isOpenLastDetailsPage()) {
+                    Settings.setLastDetailsPage(position);
+                }
+            }
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+
+        // switch to entry page (last used or 2)
+        final int entryPageIndex = Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : 1;
+        if (viewPagerAdapter.getCount() < entryPageIndex) {
+            for (int i = 0; i <= entryPageIndex; i++) {
+                // we can't switch to a page that is out of bounds, so we add null-pages
+                pageOrder.add(null);
+            }
+        }
+        viewPager.setCurrentItem(entryPageIndex, false);
 
         // Initialization done. Let's load the data with the given information.
         new LoadCacheThread(geocode, guid, loadCacheHandler).start();
@@ -301,6 +340,7 @@ public class CacheDetailActivity extends AbstractActivity {
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo info) {
         super.onCreateContextMenu(menu, view, info);
         final int viewId = view.getId();
+        contextMenuWPIndex = -1;
         switch (viewId) {
             case R.id.author:
             case R.id.value:
@@ -330,10 +370,19 @@ public class CacheDetailActivity extends AbstractActivity {
                                 final cgWaypoint waypoint = sortedWaypoints.get(i);
                                 final int index = cache.getWaypoints().indexOf(waypoint);
                                 menu.setHeaderTitle(res.getString(R.string.waypoint));
+                                menu.add(CONTEXT_MENU_WAYPOINT_EDIT, index, 0, R.string.waypoint_edit);
                                 menu.add(CONTEXT_MENU_WAYPOINT_DUPLICATE, index, 0, R.string.waypoint_duplicate);
+                                contextMenuWPIndex = index;
                                 if (waypoint.isUserDefined()) {
                                     menu.add(CONTEXT_MENU_WAYPOINT_DELETE, index, 0, R.string.waypoint_delete);
                                 }
+                                if (waypoint.getCoords() != null) {
+                                    menu.add(CONTEXT_MENU_WAYPOINT_COMPASS, index, 0, R.string.cache_menu_compass);
+                                    SubMenu subMenu = menu.addSubMenu(CONTEXT_MENU_WAYPOINT_NAVIGATE, index, 0, R.string.cache_menu_navigate).setIcon(android.R.drawable.ic_menu_mapmode);
+                                    NavigationAppFactory.addMenuItems(subMenu, this, res);
+                                    menu.add(CONTEXT_MENU_WAYPOINT_CACHES_AROUND, index, 0, R.string.cache_menu_around);
+                                }
+                                break;
                             }
                         }
                     } catch (Exception e) {
@@ -367,6 +416,15 @@ public class CacheDetailActivity extends AbstractActivity {
                         break;
                 }
                 break;
+            case CONTEXT_MENU_WAYPOINT_EDIT:
+                if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
+                    final cgWaypoint waypoint = cache.getWaypoints().get(index);
+                    Intent editIntent = new Intent(this, cgeowaypointadd.class);
+                    editIntent.putExtra("waypoint", waypoint.getId());
+                    startActivity(editIntent);
+                    refreshOnResume = true;
+                }
+                break;
             case CONTEXT_MENU_WAYPOINT_DUPLICATE:
                 if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
                     final cgWaypoint copy = new cgWaypoint(cache.getWaypoints().get(index));
@@ -389,7 +447,32 @@ public class CacheDetailActivity extends AbstractActivity {
                     }
                 }
                 break;
+            case CONTEXT_MENU_WAYPOINT_COMPASS:
+                if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
+                    final cgWaypoint waypoint = cache.getWaypoints().get(index);
+                    Collection<cgCoord> coordinatesWithType = new ArrayList<cgCoord>();
+                    coordinatesWithType.add(new cgCoord(waypoint));
+                    cgeonavigate.startActivity(this, waypoint.getPrefix().trim() + "/" + waypoint.getLookup().trim(), waypoint.getName(), waypoint.getCoords(), coordinatesWithType);
+                }
+                break;
+            case CONTEXT_MENU_WAYPOINT_NAVIGATE:
+                // No processing necessary, sub-menu gets displayed;
+                break;
+            case CONTEXT_MENU_WAYPOINT_CACHES_AROUND:
+                if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
+                    final cgWaypoint waypoint = cache.getWaypoints().get(index);
+                    cgeocaches.startActivityCachesAround(this, waypoint.getCoords());
+                }
+                break;
             default:
+                // First check the navigation menu, then the option items
+                if (null != cache.getWaypoints() && 0 <= contextMenuWPIndex && contextMenuWPIndex < cache.getWaypoints().size()) {
+                    final cgWaypoint waypoint = cache.getWaypoints().get(contextMenuWPIndex);
+                    if (NavigationAppFactory.onMenuItemSelected(item, geolocation, this,
+                            res, null, null, waypoint, null)) {
+                        return true;
+                    }
+                }
                 return onOptionsItemSelected(item);
         }
         return false;
@@ -462,7 +545,7 @@ public class CacheDetailActivity extends AbstractActivity {
         }
 
         int logType = menuItem - MENU_LOG_VISIT_OFFLINE;
-        cache.logOffline(this, logType);
+        cache.logOffline(this, LogType.getById(logType));
         return true;
     }
 
@@ -532,29 +615,37 @@ public class CacheDetailActivity extends AbstractActivity {
         // add available pages (remove old pages first)
         pageOrder.clear();
 
+        pageOrder.add(Page.WAYPOINTS);
         pageOrder.add(Page.DETAILS);
         pageOrder.add(Page.DESCRIPTION);
-        if (CollectionUtils.isNotEmpty(cache.getLogs())) {
+        if (CollectionUtils.isNotEmpty(cache.getLogs(true))) {
             pageOrder.add(Page.LOGS);
         }
-        pageOrder.add(Page.WAYPOINTS);
+        if (CollectionUtils.isNotEmpty(cache.getLogs(false))) {
+            pageOrder.add(Page.LOGSFRIENDS);
+        }
         if (CollectionUtils.isNotEmpty(cache.getInventory())) {
             pageOrder.add(Page.INVENTORY);
+        }
+
+        // switch to page 2 (index 1) if we're out of bounds
+        if (viewPager.getCurrentItem() < 0 || viewPager.getCurrentItem() >= viewPagerAdapter.getCount()) {
+            viewPager.setCurrentItem(1, false);
         }
 
         // notify the adapter that the data has changed
         viewPagerAdapter.notifyDataSetChanged();
 
-        // notify the indicator about the change
-        viewPagerIndicator.onPageSelected(currentPageIndex);
+        // notify the indicator that the data has changed
+        titleIndicator.notifyDataSetChanged();
 
         // rendering done! remove progress-popup if any there
         progress.dismiss();
     }
 
-    private class LocationUpdater extends cgUpdateLoc {
+    private class LocationUpdater implements UpdateLocationCallback {
         @Override
-        public void updateLoc(cgGeo geo) {
+        public void updateLocation(cgGeo geo) {
             if (geo == null) {
                 return;
             }
@@ -571,17 +662,17 @@ public class CacheDetailActivity extends AbstractActivity {
 
                 if (cache != null && cache.getElevation() != null) {
                     if (geo.altitudeNow != null) {
-                        Double diff = (cache.getElevation() - geo.altitudeNow);
+                        double diff = (cache.getElevation() - geo.altitudeNow);
                         if (diff >= 0) {
                             dist.append(" ↗");
                         } else if (diff < 0) {
                             dist.append(" ↘");
                         }
                         if (Settings.isUseMetricUnits()) {
-                            dist.append(String.format("%.0f", (Math.abs(diff))));
+                            dist.append(Math.abs((int) diff));
                             dist.append(" m");
                         } else {
-                            dist.append(String.format("%.0f", (Math.abs(diff) * 3.2808399)));
+                            dist.append(Math.abs((int) (diff * 3.2808399)));
                             dist.append(" ft");
                         }
                     }
@@ -645,7 +736,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
         Cursor cursor = managedQuery(calendarProvider, projection, "selected=1", null, null);
 
-        calendars.clear();
+        final Map<Integer, String> calendars = new HashMap<Integer, String>();
         int cnt = 0;
         if (cursor != null) {
             cnt = cursor.getCount();
@@ -662,7 +753,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 do {
                     calIdPre = cursor.getString(calIdIn);
                     if (calIdPre != null) {
-                        calId = new Integer(calIdPre);
+                        calId = Integer.parseInt(calIdPre);
                     }
                     calName = cursor.getString(calNameIn);
 
@@ -679,7 +770,7 @@ public class CacheDetailActivity extends AbstractActivity {
         builder.setTitle(R.string.cache_calendars);
         builder.setItems(items, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
-                addToCalendarFn(item);
+                addToCalendarFn(calendars, item);
             }
         });
         AlertDialog alert = builder.create();
@@ -689,10 +780,12 @@ public class CacheDetailActivity extends AbstractActivity {
     /**
      * Helper for {@link addToCalendar()}.
      *
+     * @param calendars
+     *
      * @param index
      *            The selected calendar
      */
-    private void addToCalendarFn(int index) {
+    private void addToCalendarFn(Map<Integer, String> calendars, int index) {
         if (MapUtils.isEmpty(calendars)) {
             return;
         }
@@ -710,13 +803,22 @@ public class CacheDetailActivity extends AbstractActivity {
 
             StringBuilder description = new StringBuilder();
             description.append(cache.getUrl());
-            description.append("\n\n");
             if (StringUtils.isNotBlank(cache.getShortdesc())) {
-                description.append(Html.fromHtml(cache.getShortdesc()).toString());
+                // remove images in short description
+                Spanned spanned = Html.fromHtml(cache.getShortdesc(), null, null);
+                String text = spanned.toString();
+                ImageSpan[] spans = spanned.getSpans(0, spanned.length(), ImageSpan.class);
+                for (int i = spans.length - 1; i >= 0; i--) {
+                    text = StringUtils.left(text, spanned.getSpanStart(spans[i]) - 1) + StringUtils.substring(text, spanned.getSpanEnd(spans[i]) + 1);
+                }
+                if (StringUtils.isNotBlank(text)) {
+                    description.append("\n\n");
+                    description.append(text);
+                }
             }
 
             if (StringUtils.isNotBlank(cache.getPersonalNote())) {
-                description.append("\n\n" + Html.fromHtml(cache.getPersonalNote()).toString());
+                description.append("\n\n").append(Html.fromHtml(cache.getPersonalNote()).toString());
             }
 
             ContentValues event = new ContentValues();
@@ -726,24 +828,24 @@ public class CacheDetailActivity extends AbstractActivity {
             event.put("eventTimezone", "UTC");
             event.put("title", Html.fromHtml(cache.getName()).toString());
             event.put("description", description.toString());
-            String location = "";
+            StringBuilder location = new StringBuilder();
             if (cache.getCoords() != null) {
-                location += cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW);
+                location.append(cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW));
             }
             if (StringUtils.isNotBlank(cache.getLocation())) {
-                boolean addParenteses = false;
+                boolean addParentheses = false;
                 if (location.length() > 0) {
-                    addParenteses = true;
-                    location += " (";
+                    addParentheses = true;
+                    location.append(" (");
                 }
 
-                location += Html.fromHtml(cache.getLocation()).toString();
-                if (addParenteses) {
-                    location += ")";
+                location.append(Html.fromHtml(cache.getLocation()).toString());
+                if (addParentheses) {
+                    location.append(')');
                 }
             }
             if (location.length() > 0) {
-                event.put("eventLocation", location);
+                event.put("eventLocation", location.toString());
             }
             event.put("allDay", 1);
             event.put("hasAlarm", 0);
@@ -851,7 +953,7 @@ public class CacheDetailActivity extends AbstractActivity {
     /**
      * The ViewPagerAdapter for scrolling through pages of the CacheDetailActivity.
      */
-    private class ViewPagerAdapter extends PagerAdapter {
+    private class ViewPagerAdapter extends PagerAdapter implements TitleProvider {
 
         @Override
         public void destroyItem(View container, int position, Object object) {
@@ -873,7 +975,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             PageViewCreator creator = viewCreators.get(page);
 
-            if (null == creator) {
+            if (null == creator && null != page) {
                 // The creator is not instantiated yet, let's do it.
                 switch (page) {
                     case DETAILS:
@@ -885,7 +987,11 @@ public class CacheDetailActivity extends AbstractActivity {
                         break;
 
                     case LOGS:
-                        creator = new LogsViewCreator();
+                        creator = new LogsViewCreator(true);
+                        break;
+
+                    case LOGSFRIENDS:
+                        creator = new LogsViewCreator(false);
                         break;
 
                     case WAYPOINTS:
@@ -939,50 +1045,19 @@ public class CacheDetailActivity extends AbstractActivity {
             // The ViewPager will get it back in instantiateItem()
             return POSITION_NONE;
         }
-    }
-
-    private class ViewPagerIndicator implements ViewPager.OnPageChangeListener {
-
-        // TODO: Clickable prev + next
-        private TextView indicatorPrev;
-        private TextView indicatorCurrent;
-        private TextView indicatorNext;
-
-        public ViewPagerIndicator() {
-            super();
-
-            indicatorPrev = (TextView) findViewById(R.id.indicator_prev);
-            indicatorCurrent = (TextView) findViewById(R.id.indicator_current);
-            indicatorNext = (TextView) findViewById(R.id.indicator_next);
-        }
 
         @Override
-        public void onPageScrollStateChanged(int state) {
-        }
-
-        @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-        }
-
-        @Override
-        public void onPageSelected(int position) {
-            currentPageIndex = position;
-
-            indicatorCurrent.setText(res.getString(pageOrder.get(position).titleStringId));
-
-            if (position > 0) {
-                indicatorPrev.setText(res.getString(pageOrder.get(position - 1).titleStringId));
-                indicatorPrev.setVisibility(View.VISIBLE);
-            } else {
-                indicatorPrev.setVisibility(View.GONE);
+        public String getTitle(int position) {
+            final Page page = pageOrder.get(position);
+            if (null == page) {
+                return "";
             }
-
-            if (position < (pageOrder.size() - 1)) {
-                indicatorNext.setText(res.getString(pageOrder.get(position + 1).titleStringId));
-                indicatorNext.setVisibility(View.VISIBLE);
-            } else {
-                indicatorNext.setVisibility(View.GONE);
+            // show number of waypoints directly in waypoint title
+            if (page == Page.WAYPOINTS) {
+                int waypointCount = (cache.getWaypoints() == null ? 0 : cache.getWaypoints().size());
+                return res.getQuantityString(R.plurals.waypoints, waypointCount, waypointCount);
             }
+            return res.getString(page.titleStringId);
         }
     }
 
@@ -993,13 +1068,214 @@ public class CacheDetailActivity extends AbstractActivity {
         DETAILS(R.string.detail),
         DESCRIPTION(R.string.cache_description),
         LOGS(R.string.cache_logs),
+        LOGSFRIENDS(R.string.cache_logsfriends),
         WAYPOINTS(R.string.cache_waypoints),
         INVENTORY(R.string.cache_inventory);
 
-        public final int titleStringId;
+        final private int titleStringId;
 
         private Page(final int titleStringId) {
             this.titleStringId = titleStringId;
+        }
+    }
+
+    private class AttributeViewBuilder {
+        private ViewGroup attributeIconsLayout; // layout for attribute icons
+        private ViewGroup attributeDescriptionsLayout; // layout for attribute descriptions
+        private boolean attributesShowAsIcons = true; // default: show icons
+        /**
+         * True, if the cache was imported with an older version of c:geo.
+         * These older versions parsed the attribute description from the tooltip in the web
+         * page and put them into the DB. No icons can be matched for these.
+         */
+        private boolean noAttributeIconsFound = false;
+        private int attributeBoxMaxWidth;
+
+        public void fillView(final LinearLayout attributeBox) {
+            // first ensure that the view is empty
+            attributeBox.removeAllViews();
+
+            // maximum width for attribute icons is screen width - paddings of parents
+            attributeBoxMaxWidth = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
+                    .getDefaultDisplay().getWidth();
+            ViewParent child = attributeBox;
+            do {
+                if (child instanceof View) {
+                    attributeBoxMaxWidth -= ((View) child).getPaddingLeft() + ((View) child).getPaddingRight();
+                }
+                child = child.getParent();
+            } while (child != null);
+
+            // delete views holding description / icons
+            attributeDescriptionsLayout = null;
+            attributeIconsLayout = null;
+
+            attributeBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // toggle between attribute icons and descriptions
+                    toggleAttributeDisplay(attributeBox, attributeBoxMaxWidth);
+                }
+            });
+
+            // icons or text?
+            //
+            // also show icons when noAttributeImagesFound == true. Explanation:
+            //  1. no icons could be found in the first invocation of this method
+            //  2. user refreshes cache from web
+            //  3. now this method is called again
+            //  4. attributeShowAsIcons is false but noAttributeImagesFound is true
+            //     => try to show them now
+            if (attributesShowAsIcons || noAttributeIconsFound) {
+                showAttributeIcons(attributeBox, attributeBoxMaxWidth);
+            } else {
+                showAttributeDescriptions(attributeBox);
+            }
+        }
+
+        /**
+         * lazy-creates the layout holding the icons of the chaches attributes
+         * and makes it visible
+         */
+        private void showAttributeIcons(LinearLayout attribBox, int parentWidth) {
+            if (attributeIconsLayout == null) {
+                attributeIconsLayout = createAttributeIconsLayout(parentWidth);
+                // no matching icons found? show text
+                if (noAttributeIconsFound) {
+                    showAttributeDescriptions(attribBox);
+                    return;
+                }
+            }
+            attribBox.removeAllViews();
+            attribBox.addView(attributeIconsLayout);
+            attributesShowAsIcons = true;
+        }
+
+        /**
+         * lazy-creates the layout holding the discriptions of the chaches attributes
+         * and makes it visible
+         */
+        private void showAttributeDescriptions(LinearLayout attribBox) {
+            if (attributeDescriptionsLayout == null) {
+                attributeDescriptionsLayout = createAttributeDescriptionsLayout();
+            }
+            attribBox.removeAllViews();
+            attribBox.addView(attributeDescriptionsLayout);
+            attributesShowAsIcons = false;
+        }
+
+        /**
+         * toggle attribute descriptions and icons
+         */
+        private void toggleAttributeDisplay(LinearLayout attribBox, int parentWidth) {
+            // Don't toggle when there are no icons to show.
+            if (noAttributeIconsFound) {
+                return;
+            }
+
+            // toggle
+            if (attributesShowAsIcons) {
+                showAttributeDescriptions(attribBox);
+            } else {
+                showAttributeIcons(attribBox, parentWidth);
+            }
+        }
+
+        private ViewGroup createAttributeIconsLayout(int parentWidth) {
+            LinearLayout rows = new LinearLayout(CacheDetailActivity.this);
+            rows.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+            rows.setOrientation(LinearLayout.VERTICAL);
+
+            LinearLayout attributeRow = newAttributeIconsRow();
+            rows.addView(attributeRow);
+
+            noAttributeIconsFound = true;
+
+            final String packageName = cgeoapplication.getInstance().getBaseContext().getPackageName();
+            for (String attributeName : cache.getAttributes()) {
+                boolean strikethru = attributeName.endsWith("_no");
+                // cut off _yes / _no
+                if (attributeName.endsWith("_no") || attributeName.endsWith("_yes")) {
+                    attributeName = attributeName.substring(0, attributeName.lastIndexOf("_"));
+                }
+                // check if another attribute icon fits in this row
+                attributeRow.measure(0, 0);
+                int rowWidth = attributeRow.getMeasuredWidth();
+                FrameLayout fl = (FrameLayout) getLayoutInflater().inflate(R.layout.attribute_image, null);
+                ImageView iv = (ImageView) fl.getChildAt(0);
+                if ((parentWidth - rowWidth) < iv.getLayoutParams().width) {
+                    // make a new row
+                    attributeRow = newAttributeIconsRow();
+                    rows.addView(attributeRow);
+                }
+
+                // dynamically search icon of the attribute
+                Drawable d = null;
+                int id = res.getIdentifier("attribute_" + attributeName, "drawable", packageName);
+                if (id > 0) {
+                    noAttributeIconsFound = false;
+                    d = res.getDrawable(id);
+                    iv.setImageDrawable(d);
+                    // strike through?
+                    if (strikethru) {
+                        // generate strikethru image with same properties as attribute image
+                        ImageView strikethruImage = new ImageView(CacheDetailActivity.this);
+                        strikethruImage.setLayoutParams(iv.getLayoutParams());
+                        d = res.getDrawable(R.drawable.attribute__strikethru);
+                        strikethruImage.setImageDrawable(d);
+                        fl.addView(strikethruImage);
+                    }
+                } else {
+                    d = res.getDrawable(R.drawable.attribute_icon_not_found);
+                    iv.setImageDrawable(d);
+                }
+
+                attributeRow.addView(fl);
+            }
+
+            return rows;
+        }
+
+        private LinearLayout newAttributeIconsRow() {
+            LinearLayout rowLayout = new LinearLayout(CacheDetailActivity.this);
+            rowLayout.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
+                    LayoutParams.WRAP_CONTENT));
+            rowLayout.setOrientation(LinearLayout.HORIZONTAL);
+            return rowLayout;
+        }
+
+        private ViewGroup createAttributeDescriptionsLayout() {
+            final LinearLayout descriptions = (LinearLayout) getLayoutInflater().inflate(
+                    R.layout.attribute_descriptions, null);
+            TextView attribView = (TextView) descriptions.getChildAt(0);
+
+            StringBuilder buffer = new StringBuilder();
+            String attribute;
+            final String packageName = cgeoapplication.getInstance().getBaseContext().getPackageName();
+            for (int i = 0; i < cache.getAttributes().size(); i++) {
+                attribute = cache.getAttributes().get(i);
+
+                // dynamically search for a translation of the attribute
+                int id = res.getIdentifier("attribute_" + attribute, "string", packageName);
+                if (id > 0) {
+                    String translated = res.getString(id);
+                    if (StringUtils.isNotBlank(translated)) {
+                        attribute = translated;
+                    }
+                }
+                if (buffer.length() > 0) {
+                    buffer.append('\n');
+                }
+                buffer.append(attribute);
+            }
+
+            if (noAttributeIconsFound) {
+                buffer.append("\n\n").append(res.getString(R.string.cache_attributes_no_icons));
+            }
+
+            attribView.setText(buffer);
+
+            return descriptions;
         }
     }
 
@@ -1125,19 +1401,19 @@ public class CacheDetailActivity extends AbstractActivity {
             cacheDistanceView = addCacheDetail(R.string.cache_distance, cache.getDistance() != null ? "~" + cgBase.getHumanDistance(cache.getDistance()) : "--");
 
             // difficulty
-            if (cache.getDifficulty() != null && cache.getDifficulty() > 0) {
+            if (cache.getDifficulty() > 0) {
                 addStarRating(R.string.cache_difficulty, cache.getDifficulty());
             }
 
             // terrain
-            if (cache.getTerrain() != null && cache.getTerrain() > 0) {
+            if (cache.getTerrain() > 0) {
                 addStarRating(R.string.cache_terrain, cache.getTerrain());
             }
 
             // rating
-            if (cache.getRating() != null && cache.getRating() > 0) {
+            if (cache.getRating() > 0) {
                 final RelativeLayout itemLayout = addStarRating(R.string.cache_rating, cache.getRating());
-                if (cache.getVotes() != null) {
+                if (cache.getVotes() > 0) {
                     final TextView itemAddition = (TextView) itemLayout.findViewById(R.id.addition);
                     itemAddition.setText("(" + cache.getVotes() + ")");
                     itemAddition.setVisibility(View.VISIBLE);
@@ -1145,12 +1421,10 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             // favourite count
-            if (cache.getFavouriteCnt() != null) {
-                addCacheDetail(R.string.cache_favourite, String.format("%d", cache.getFavouriteCnt()) + "×");
-            }
+            addCacheDetail(R.string.cache_favourite, cache.getFavoritePoints() + "×");
 
             // own rating
-            if (cache.getMyVote() != null && cache.getMyVote() > 0) {
+            if (cache.getMyVote() > 0) {
                 addStarRating(R.string.cache_own_rating, cache.getMyVote());
             }
 
@@ -1197,6 +1471,12 @@ public class CacheDetailActivity extends AbstractActivity {
                         });
             }
 
+            // cache attributes
+            if (CollectionUtils.isNotEmpty(cache.getAttributes())) {
+                new AttributeViewBuilder().fillView((LinearLayout) view.findViewById(R.id.attributes_innerbox));
+                view.findViewById(R.id.attributes_box).setVisibility(View.VISIBLE);
+            }
+
             updateOfflineBox();
 
             // watchlist
@@ -1222,7 +1502,7 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             if (geolocation != null) {
-                locationUpdater.updateLoc(geolocation);
+                locationUpdater.updateLocation(geolocation);
             }
 
             return view;
@@ -1361,8 +1641,8 @@ public class CacheDetailActivity extends AbstractActivity {
 
             @Override
             public void run() {
-                int reason = cache.getReason() > 1 ? cache.getReason() : 1;
-                cgBase.storeCache(app, CacheDetailActivity.this, cache, null, reason, handler);
+                int listId = cache.getListId() > 1 ? cache.getListId() : 1;
+                cgBase.storeCache(app, CacheDetailActivity.this, cache, null, listId, handler);
             }
         }
 
@@ -1527,8 +1807,8 @@ public class CacheDetailActivity extends AbstractActivity {
             final Button offlineRefresh = (Button) view.findViewById(R.id.offline_refresh);
             final Button offlineStore = (Button) view.findViewById(R.id.offline_store);
 
-            if (cache.getReason() >= 1) {
-                Long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
+            if (cache.getListId() >= 1) {
+                long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
 
                 String ago = "";
                 if (diff < 15) {
@@ -1564,17 +1844,6 @@ public class CacheDetailActivity extends AbstractActivity {
 
     private class DescriptionViewCreator implements PageViewCreator {
 
-        private ViewGroup attributeIconsLayout; // layout for attribute icons
-        private ViewGroup attributeDescriptionsLayout; // layout for attribute descriptions
-        private boolean attributesShowAsIcons = true; // default: show icons
-        /**
-         * True, if the cache was imported with an older version of c:geo.
-         * These older versions parsed the attribute description from the tooltip in the web
-         * page and put them into the DB. No icons can be matched for these.
-         */
-        private boolean noAttributeIconsFound = false;
-        private int attributeBoxMaxWidth;
-
         ScrollView view;
 
         @Override
@@ -1604,8 +1873,9 @@ public class CacheDetailActivity extends AbstractActivity {
             if (StringUtils.isNotBlank(cache.getShortdesc())) {
                 TextView descView = (TextView) view.findViewById(R.id.shortdesc);
                 descView.setVisibility(View.VISIBLE);
-                descView.setText(Html.fromHtml(cache.getShortdesc().trim(), new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), true, cache.getReason(), false), null), TextView.BufferType.SPANNABLE);
+                descView.setText(Html.fromHtml(cache.getShortdesc().trim(), new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), true, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
                 descView.setMovementMethod(LinkMovementMethod.getInstance());
+                fixBlackTextColor(descView, cache.getShortdesc());
             }
 
             // long description
@@ -1621,52 +1891,6 @@ public class CacheDetailActivity extends AbstractActivity {
                         }
                     });
                 }
-            }
-
-            // cache attributes
-            if (CollectionUtils.isNotEmpty(cache.getAttributes())) {
-
-                final LinearLayout attribBox = (LinearLayout) view.findViewById(R.id.attributes_innerbox);
-
-                // maximum width for attribute icons is screen width - paddings of parents
-                attributeBoxMaxWidth = ((WindowManager) getSystemService(Context.WINDOW_SERVICE))
-                        .getDefaultDisplay().getWidth();
-                ViewParent child = attribBox;
-                do {
-                    if (child instanceof View) {
-                        attributeBoxMaxWidth = attributeBoxMaxWidth - ((View) child).getPaddingLeft()
-                                - ((View) child).getPaddingRight();
-                    }
-                    child = child.getParent();
-                } while (child != null);
-
-                // delete views holding description / icons
-                attributeDescriptionsLayout = null;
-                attributeIconsLayout = null;
-
-                attribBox.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // toggle between attribute icons and descriptions
-                        toggleAttributeDisplay(attribBox, attributeBoxMaxWidth);
-                    }
-                });
-
-                // icons or text?
-                //
-                // also show icons when noAttributeImagesFound == true. Explanation:
-                //  1. no icons could be found in the first invocation of this method
-                //  2. user refreshes cache from web
-                //  3. now this method is called again
-                //  4. attributeShowAsIcons is false but noAttributeImagesFound is true
-                //     => try to show them now
-                if (attributesShowAsIcons || noAttributeIconsFound) {
-                    showAttributeIcons(attribBox, attributeBoxMaxWidth);
-                } else {
-                    showAttributeDescriptions(attribBox);
-                }
-
-                view.findViewById(R.id.attributes_box).setVisibility(View.VISIBLE);
             }
 
             // cache personal note
@@ -1744,30 +1968,51 @@ public class CacheDetailActivity extends AbstractActivity {
         }
 
         private class LoadLongDescriptionTask extends AsyncTask<Void, Void, Void> {
+
             private Spanned longDesc;
 
-            @Override
-            protected Void doInBackground(Void... params) {
-                longDesc = Html.fromHtml(cache.getDescription().trim(), new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), true, cache.getReason(), false), new UnknownTagsHandler());
-                return null;
+            private class HtmlImageCounter implements Html.ImageGetter {
+
+                private int imageCount = 0;
+
+                @Override
+                public Drawable getDrawable(String url) {
+                    imageCount++;
+                    return null;
+                }
+
+                public int getImageCount() {
+                    return imageCount;
+                }
             }
 
             @Override
-            protected void onPostExecute(Void param) {
+            protected Void doInBackground(Void... params) {
+                // Fast preview: parse only HTML without loading any images
+                HtmlImageCounter imageCounter = new HtmlImageCounter();
+                longDesc = Html.fromHtml(cache.getDescription().trim(), imageCounter, new UnknownTagsHandler());
+                publishProgress(params);
+                if (imageCounter.getImageCount() > 0) {
+                    // Complete view: parse again with loading images - if necessary ! If there are any images causing problems the user can see at least the preview
+                    longDesc = Html.fromHtml(cache.getDescription().trim(), new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), true, cache.getListId(), false), new UnknownTagsHandler());
+                    publishProgress(params);
+                }
+                return null;
+            }
+
+            /*
+             * (non-Javadoc)
+             *
+             * @see android.os.AsyncTask#onProgressUpdate(Progress[])
+             */
+            @Override
+            protected void onProgressUpdate(Void... values) {
                 if (longDesc != null) {
                     TextView descView = (TextView) view.findViewById(R.id.longdesc);
                     if (StringUtils.isNotBlank(cache.getDescription())) {
                         descView.setText(longDesc, TextView.BufferType.SPANNABLE);
                         descView.setMovementMethod(LinkMovementMethod.getInstance());
-                        // handle caches with black font color
-                        if (!Settings.isLightSkin()) {
-                            if (cache.getDescription().contains("color=\"#000000")) {
-                                descView.setBackgroundResource(color.darker_gray);
-                            }
-                            else {
-                                descView.setBackgroundResource(color.black);
-                            }
-                        }
+                        fixBlackTextColor(descView, cache.getDescription());
                     }
 
                     descView.setVisibility(View.VISIBLE);
@@ -1780,154 +2025,31 @@ public class CacheDetailActivity extends AbstractActivity {
         }
 
         /**
-         * lazy-creates the layout holding the icons of the chaches attributes
-         * and makes it visible
+         * handle caches with black font color
+         *
+         * @param view
+         * @param text
          */
-        private void showAttributeIcons(LinearLayout attribBox, int parentWidth) {
-            if (attributeIconsLayout == null) {
-                attributeIconsLayout = createAttributeIconsLayout(parentWidth);
-                // no matching icons found? show text
-                if (noAttributeIconsFound) {
-                    showAttributeDescriptions(attribBox);
-                    return;
+        private void fixBlackTextColor(final TextView view, final String text) {
+            if (!Settings.isLightSkin()) {
+                if (-1 != StringUtils.indexOfAny(text, new String[] { "color=\"#000000", "color=\"black" })) {
+                    view.setBackgroundResource(color.darker_gray);
+                }
+                else {
+                    view.setBackgroundResource(color.black);
                 }
             }
-            attribBox.removeAllViews();
-            attribBox.addView(attributeIconsLayout);
-            attributesShowAsIcons = true;
-        }
-
-        /**
-         * lazy-creates the layout holding the discriptions of the chaches attributes
-         * and makes it visible
-         */
-        private void showAttributeDescriptions(LinearLayout attribBox) {
-            if (attributeDescriptionsLayout == null) {
-                attributeDescriptionsLayout = createAttributeDescriptionsLayout();
-            }
-            attribBox.removeAllViews();
-            attribBox.addView(attributeDescriptionsLayout);
-            attributesShowAsIcons = false;
-        }
-
-        /**
-         * toggle attribute descriptions and icons
-         */
-        private void toggleAttributeDisplay(LinearLayout attribBox, int parentWidth) {
-            // Don't toggle when there are no icons to show.
-            if (noAttributeIconsFound) {
-                return;
-            }
-
-            // toggle
-            if (attributesShowAsIcons) {
-                showAttributeDescriptions(attribBox);
-            } else {
-                showAttributeIcons(attribBox, parentWidth);
-            }
-        }
-
-        private ViewGroup createAttributeIconsLayout(int parentWidth) {
-            LinearLayout rows = new LinearLayout(CacheDetailActivity.this);
-            rows.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
-            rows.setOrientation(LinearLayout.VERTICAL);
-
-            LinearLayout attributeRow = newAttributeIconsRow();
-            rows.addView(attributeRow);
-
-            noAttributeIconsFound = true;
-
-            final String packageName = cgeoapplication.getInstance().getBaseContext().getPackageName();
-            for (String attributeName : cache.getAttributes()) {
-                boolean strikethru = attributeName.endsWith("_no");
-                // cut off _yes / _no
-                if (attributeName.endsWith("_no") || attributeName.endsWith("_yes")) {
-                    attributeName = attributeName.substring(0, attributeName.lastIndexOf("_"));
-                }
-                // check if another attribute icon fits in this row
-                attributeRow.measure(0, 0);
-                int rowWidth = attributeRow.getMeasuredWidth();
-                FrameLayout fl = (FrameLayout) getLayoutInflater().inflate(R.layout.attribute_image, null);
-                ImageView iv = (ImageView) fl.getChildAt(0);
-                if ((parentWidth - rowWidth) < iv.getLayoutParams().width) {
-                    // make a new row
-                    attributeRow = newAttributeIconsRow();
-                    rows.addView(attributeRow);
-                }
-
-                // dynamically search icon of the attribute
-                Drawable d = null;
-                int id = res.getIdentifier("attribute_" + attributeName, "drawable", packageName);
-                if (id > 0) {
-                    noAttributeIconsFound = false;
-                    d = res.getDrawable(id);
-                    iv.setImageDrawable(d);
-                    // strike through?
-                    if (strikethru) {
-                        // generate strikethru image with same properties as attribute image
-                        ImageView strikethruImage = new ImageView(CacheDetailActivity.this);
-                        strikethruImage.setLayoutParams(iv.getLayoutParams());
-                        d = res.getDrawable(R.drawable.attribute__strikethru);
-                        strikethruImage.setImageDrawable(d);
-                        fl.addView(strikethruImage);
-                    }
-                } else {
-                    d = res.getDrawable(R.drawable.attribute_icon_not_found);
-                    iv.setImageDrawable(d);
-                }
-
-                attributeRow.addView(fl);
-            }
-
-            return rows;
-        }
-
-        private LinearLayout newAttributeIconsRow() {
-            LinearLayout rowLayout = new LinearLayout(CacheDetailActivity.this);
-            rowLayout.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
-                    LayoutParams.WRAP_CONTENT));
-            rowLayout.setOrientation(LinearLayout.HORIZONTAL);
-            return rowLayout;
-        }
-
-        private ViewGroup createAttributeDescriptionsLayout() {
-            final LinearLayout descriptions = (LinearLayout) getLayoutInflater().inflate(
-                    R.layout.attribute_descriptions, null);
-            TextView attribView = (TextView) descriptions.getChildAt(0);
-
-            StringBuilder buffer = new StringBuilder();
-            String attribute;
-            final String packageName = cgeoapplication.getInstance().getBaseContext().getPackageName();
-            for (int i = 0; i < cache.getAttributes().size(); i++) {
-                attribute = cache.getAttributes().get(i);
-
-                // dynamically search for a translation of the attribute
-                int id = res.getIdentifier("attribute_" + attribute, "string", packageName);
-                if (id > 0) {
-                    String translated = res.getString(id);
-                    if (StringUtils.isNotBlank(translated)) {
-                        attribute = translated;
-                    }
-                }
-                if (buffer.length() > 0) {
-                    buffer.append('\n');
-                }
-                buffer.append(attribute);
-            }
-
-            if (noAttributeIconsFound) {
-                buffer.append("\n\n").append(res.getString(R.string.cache_attributes_no_icons));
-            }
-
-            attribView.setText(buffer);
-
-            return descriptions;
         }
     }
 
     private class LogsViewCreator implements PageViewCreator {
-
         ScrollView view;
+        boolean allLogs;
+
+        LogsViewCreator(boolean allLogs) {
+            super();
+            this.allLogs = allLogs;
+        }
 
         @Override
         public void notifyDataSetChanged() {
@@ -1960,30 +2082,31 @@ public class CacheDetailActivity extends AbstractActivity {
         private class LogInflaterTask extends AsyncTask<Void, Void, Void> {
             private List<RelativeLayout> loglist = new LinkedList<RelativeLayout>();
             private String logCounter;
-            private Boolean showLogCounter = false;
+            private boolean showLogCounter = false;
 
             @Override
             protected Void doInBackground(Void... params) {
                 // log count
                 if (cache != null && cache.getLogCounts() != null) {
-                    final StringBuilder text = new StringBuilder();
+                    final StringBuilder text = new StringBuilder(200);
                     text.append(res.getString(R.string.cache_log_types));
                     text.append(": ");
 
                     // sort the log counts by type id ascending. that way the FOUND, DNF log types are the first and most visible ones
-                    List<Entry<Integer, Integer>> sortedLogCounts = new ArrayList<Entry<Integer, Integer>>();
-                    sortedLogCounts.addAll(cache.getLogCounts().entrySet());
-                    Collections.sort(sortedLogCounts, new Comparator<Entry<Integer, Integer>>() {
+                    List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<Entry<LogType, Integer>>();
+                    for (Entry<LogType, Integer> entry : cache.getLogCounts().entrySet()) {
+                        sortedLogCounts.add(entry); // don't add these entries using addAll(), the iterator in the EntrySet can go wrong (see Findbugs)
+                    }
+                    Collections.sort(sortedLogCounts, new Comparator<Entry<LogType, Integer>>() {
 
                         @Override
-                        public int compare(Entry<Integer, Integer> logCountItem1,
-                                Entry<Integer, Integer> logCountItem2) {
+                        public int compare(Entry<LogType, Integer> logCountItem1,
+                                Entry<LogType, Integer> logCountItem2) {
                             return logCountItem1.getKey().compareTo(logCountItem2.getKey());
                         }
                     });
-                    for (Entry<Integer, Integer> pair : sortedLogCounts) {
-                        int logTypeId = pair.getKey().intValue();
-                        String logTypeLabel = cgBase.logTypes1.get(logTypeId);
+                    for (Entry<LogType, Integer> pair : sortedLogCounts) {
+                        String logTypeLabel = pair.getKey().getL10n();
                         // it may happen that the label is unknown -> then avoid any output for this type
                         if (logTypeLabel != null) {
                             if (showLogCounter) {
@@ -2001,9 +2124,9 @@ public class CacheDetailActivity extends AbstractActivity {
                 // cache logs
                 RelativeLayout rowView;
 
-                if (cache != null && cache.getLogs() != null) {
-                    for (cgLog log : cache.getLogs()) {
-                        rowView = (RelativeLayout) getLayoutInflater().inflate(R.layout.log_item, null);
+                if (cache != null && cache.getLogs(allLogs) != null) {
+                    for (cgLog log : cache.getLogs(allLogs)) {
+                        rowView = (RelativeLayout) getLayoutInflater().inflate(R.layout.cacheview_logs_item, null);
 
                         if (log.date > 0) {
                             ((TextView) rowView.findViewById(R.id.added)).setText(cgBase.formatShortDate(log.date));
@@ -2011,11 +2134,7 @@ public class CacheDetailActivity extends AbstractActivity {
                             ((TextView) rowView.findViewById(R.id.added)).setVisibility(View.GONE);
                         }
 
-                        if (cgBase.logTypes1.containsKey(log.type)) {
-                            ((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(log.type));
-                        } else {
-                            ((TextView) rowView.findViewById(R.id.type)).setText(cgBase.logTypes1.get(4)); // note if type is unknown
-                        }
+                        ((TextView) rowView.findViewById(R.id.type)).setText(log.type.getL10n());
                         ((TextView) rowView.findViewById(R.id.author)).setText(StringEscapeUtils.unescapeHtml4(log.author));
 
                         if (log.found == -1) {
@@ -2029,7 +2148,7 @@ public class CacheDetailActivity extends AbstractActivity {
                         }
                         // avoid parsing HTML if not necessary
                         if (BaseUtils.containsHtml(log.log)) {
-                            ((TextView) rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log, new HtmlImage(CacheDetailActivity.this, null, false, cache.getReason(), false), null), TextView.BufferType.SPANNABLE);
+                            ((TextView) rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log, new HtmlImage(CacheDetailActivity.this, null, false, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
                         }
                         else {
                             ((TextView) rowView.findViewById(R.id.log)).setText(log.log);
@@ -2059,7 +2178,7 @@ public class CacheDetailActivity extends AbstractActivity {
                                 titles.add(res.getString(R.string.cache_log_image_default_title));
                             }
 
-                            LinearLayout log_imgView = (LinearLayout) getLayoutInflater().inflate(R.layout.log_img, null);
+                            LinearLayout log_imgView = (LinearLayout) getLayoutInflater().inflate(R.layout.cacheview_logs_img, null);
                             TextView log_img_title = (TextView) log_imgView.findViewById(R.id.title);
                             log_img_title.setText(StringUtils.join(titles.toArray(new String[titles.size()]), ", "));
                             log_img_title.setOnClickListener(listener);
@@ -2068,20 +2187,20 @@ public class CacheDetailActivity extends AbstractActivity {
 
                         // Add colored mark
                         final ImageView logMark = (ImageView) rowView.findViewById(R.id.log_mark);
-                        if (log.type == cgBase.LOG_FOUND_IT
-                                || log.type == cgBase.LOG_WEBCAM_PHOTO_TAKEN
-                                || log.type == cgBase.LOG_ATTENDED) {
+                        if (log.type == LogType.LOG_FOUND_IT
+                                || log.type == LogType.LOG_WEBCAM_PHOTO_TAKEN
+                                || log.type == LogType.LOG_ATTENDED) {
                             logMark.setImageResource(R.drawable.mark_green);
-                        } else if (log.type == cgBase.LOG_PUBLISH_LISTING
-                                || log.type == cgBase.LOG_ENABLE_LISTING
-                                || log.type == cgBase.LOG_OWNER_MAINTENANCE) {
+                        } else if (log.type == LogType.LOG_PUBLISH_LISTING
+                                || log.type == LogType.LOG_ENABLE_LISTING
+                                || log.type == LogType.LOG_OWNER_MAINTENANCE) {
                             logMark.setImageResource(R.drawable.mark_green_more);
-                        } else if (log.type == cgBase.LOG_DIDNT_FIND_IT
-                                || log.type == cgBase.LOG_NEEDS_MAINTENANCE
-                                || log.type == cgBase.LOG_NEEDS_ARCHIVE) {
+                        } else if (log.type == LogType.LOG_DIDNT_FIND_IT
+                                || log.type == LogType.LOG_NEEDS_MAINTENANCE
+                                || log.type == LogType.LOG_NEEDS_ARCHIVE) {
                             logMark.setImageResource(R.drawable.mark_red);
-                        } else if (log.type == cgBase.LOG_TEMP_DISABLE_LISTING
-                                || log.type == cgBase.LOG_ARCHIVE) {
+                        } else if (log.type == LogType.LOG_TEMP_DISABLE_LISTING
+                                || log.type == LogType.LOG_ARCHIVE) {
                             logMark.setImageResource(R.drawable.mark_red_more);
                         } else {
                             logMark.setVisibility(View.GONE);
@@ -2182,6 +2301,14 @@ public class CacheDetailActivity extends AbstractActivity {
                 for (cgWaypoint wpt : sortedWaypoints) {
                     waypointView = (LinearLayout) getLayoutInflater().inflate(R.layout.waypoint_item, null);
 
+                    // coordinates
+                    if (null != wpt.getCoords()) {
+                        final TextView coordinatesView = (TextView) waypointView.findViewById(R.id.coordinates);
+                        coordinatesView.setText(wpt.getCoords().toString());
+                        coordinatesView.setVisibility(View.VISIBLE);
+                    }
+
+                    // info
                     final List<String> infoTextList = new ArrayList<String>(3);
                     if (StringUtils.isNotBlank(cgBase.waypointTypes.get(wpt.getWaypointType()))) {
                         infoTextList.add(cgBase.waypointTypes.get(wpt.getWaypointType()));
@@ -2196,8 +2323,13 @@ public class CacheDetailActivity extends AbstractActivity {
                             infoTextList.add(wpt.getLookup());
                         }
                     }
-                    ((TextView) waypointView.findViewById(R.id.info)).setText(StringUtils.join(infoTextList, " · "));
+                    if (CollectionUtils.isNotEmpty(infoTextList)) {
+                        final TextView infoView = (TextView) waypointView.findViewById(R.id.info);
+                        infoView.setText(StringUtils.join(infoTextList, " · "));
+                        infoView.setVisibility(View.VISIBLE);
+                    }
 
+                    // title
                     TextView nameView = (TextView) waypointView.findViewById(R.id.name);
                     if (StringUtils.isNotBlank(wpt.getName())) {
                         nameView.setText(StringEscapeUtils.unescapeHtml4(wpt.getName()));
@@ -2206,11 +2338,11 @@ public class CacheDetailActivity extends AbstractActivity {
                     } else {
                         nameView.setText(res.getString(R.string.waypoint));
                     }
-
                     wpt.setIcon(res, nameView);
 
+                    // note
                     if (StringUtils.isNotBlank(wpt.getNote())) {
-                        TextView noteView = (TextView) waypointView.findViewById(R.id.note);
+                        final TextView noteView = (TextView) waypointView.findViewById(R.id.note);
                         noteView.setVisibility(View.VISIBLE);
                         if (BaseUtils.containsHtml(wpt.getNote())) {
                             noteView.setText(Html.fromHtml(wpt.getNote().trim()), TextView.BufferType.SPANNABLE);
@@ -2220,8 +2352,8 @@ public class CacheDetailActivity extends AbstractActivity {
                         }
                     }
 
-                    waypointView.setOnClickListener(new WaypointInfoClickListener(wpt.getId()));
                     registerForContextMenu(waypointView);
+                    waypointView.setOnClickListener(new WaypointInfoClickListener());
 
                     waypoints.addView(waypointView);
                 }
@@ -2252,18 +2384,8 @@ public class CacheDetailActivity extends AbstractActivity {
         }
 
         private class WaypointInfoClickListener implements View.OnClickListener {
-            private int id = -1;
-
-            public WaypointInfoClickListener(int idIn) {
-                id = idIn;
-            }
-
-            public void onClick(View arg0) {
-                refreshOnResume = true;
-                Intent waypointIntent = new Intent(CacheDetailActivity.this, cgeowaypoint.class);
-                waypointIntent.putExtra("waypoint", id);
-                waypointIntent.putExtra("geocode", cache.getGeocode());
-                startActivity(waypointIntent);
+            public void onClick(View view) {
+                openContextMenu(view);
             }
         }
     }

@@ -1,7 +1,9 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.CacheListType;
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.filter.cgFilter;
+import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.DistanceComparator;
@@ -45,16 +47,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
+public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
-    private static final String SEPARATOR = " · ";
     final private Resources res;
     /** Resulting list of caches */
     final private List<cgCache> list;
     private cgCacheView holder = null;
     private LayoutInflater inflater = null;
-    private CacheComparator statComparator = null;
-    private boolean historic = false;
+    private CacheComparator cacheComparator = null;
     private Geopoint coords = null;
     private float azimuth = 0;
     private long lastSort = 0L;
@@ -70,14 +70,24 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
     private static final int SWIPE_MAX_OFF_PATH = 100;
     private static final int SWIPE_DISTANCE = 80;
     private static final float SWIPE_OPACITY = 0.5f;
-    private cgFilter currentFilter = null;
+    /**
+     * time in milliseconds after which the list may be resorted due to position updates
+     */
+    private static final int PAUSE_BETWEEN_LIST_SORT = 1000;
+    private static final String SEPARATOR = " · ";
+    private IFilter currentFilter = null;
     private List<cgCache> originalList = null;
+    private final CacheListType cacheListType;
 
-    public cgCacheListAdapter(final Activity activity, final List<cgCache> list) {
+    public CacheListAdapter(final Activity activity, final List<cgCache> list, CacheListType cacheListType) {
         super(activity, 0, list);
 
         this.res = activity.getResources();
         this.list = list;
+        this.cacheListType = cacheListType;
+        if (cacheListType == CacheListType.HISTORY) {
+            cacheComparator = new VisitComparator();
+        }
 
         final DisplayMetrics metrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
@@ -98,9 +108,13 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         }
     }
 
-    public void setComparator(CacheComparator comparator) {
-        statComparator = comparator;
-
+    /**
+     * change the sort order
+     *
+     * @param comparator
+     */
+    public void setComparator(final CacheComparator comparator) {
+        cacheComparator = comparator;
         forceSort(coords);
     }
 
@@ -119,7 +133,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
     /**
      * Called after a user action on the filter menu.
      */
-    public void setFilter(cgFilter filter) {
+    public void setFilter(final IFilter filter) {
         // Backup current caches list if it isn't backed up yet
         if (originalList == null) {
             originalList = new ArrayList<cgCache>(list);
@@ -157,17 +171,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
     }
 
     public String getFilterName() {
-        return currentFilter.getFilterName();
-    }
-
-    public void setHistoric(boolean historicIn) {
-        historic = historicIn;
-
-        if (historic) {
-            statComparator = new VisitComparator();
-        } else {
-            statComparator = null;
-        }
+        return currentFilter.getName();
     }
 
     public int getChecked() {
@@ -242,16 +246,16 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             return;
         }
 
-        if (statComparator != null) {
-            Collections.sort(list, statComparator);
-        } else {
+        if (isSortedByDistance()) {
             if (coordsIn == null) {
                 return;
             }
-
-            final DistanceComparator dstComparator = new DistanceComparator(coordsIn);
-            Collections.sort(list, dstComparator);
+            Collections.sort(list, new DistanceComparator(coordsIn, list));
         }
+        else {
+            Collections.sort(list, cacheComparator);
+        }
+
         notifyDataSetChanged();
     }
 
@@ -262,8 +266,8 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
 
         coords = coordsIn;
 
-        if (CollectionUtils.isNotEmpty(list) && (System.currentTimeMillis() - lastSort) > 1000 && sort) {
-            Collections.sort(list, statComparator != null ? statComparator : new DistanceComparator(coordsIn));
+        if (CollectionUtils.isNotEmpty(list) && (System.currentTimeMillis() - lastSort) > PAUSE_BETWEEN_LIST_SORT && sort && isSortedByDistance()) {
+            Collections.sort(list, new DistanceComparator(coordsIn, list));
             notifyDataSetChanged();
             lastSort = System.currentTimeMillis();
         }
@@ -275,6 +279,10 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         for (final cgCompassMini compass : compasses) {
             compass.updateCoords(coordsIn);
         }
+    }
+
+    private boolean isSortedByDistance() {
+        return cacheComparator == null || cacheComparator instanceof DistanceComparator;
     }
 
     public void setActualHeading(Float directionNow) {
@@ -327,7 +335,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         }
 
         if (position > getCount()) {
-            Log.w(Settings.tag, "cgCacheListAdapter.getView: Attempt to access missing item #" + position);
+            Log.w(Settings.tag, "CacheListAdapter.getView: Attempt to access missing item #" + position);
             return null;
         }
 
@@ -343,7 +351,6 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             holder.oneInfo = (RelativeLayout) v.findViewById(R.id.one_info);
             holder.oneCheckbox = (RelativeLayout) v.findViewById(R.id.one_checkbox);
             holder.logStatusMark = (ImageView) v.findViewById(R.id.log_status_mark);
-            holder.oneCache = (RelativeLayout) v.findViewById(R.id.one_cache);
             holder.text = (TextView) v.findViewById(R.id.text);
             holder.directionLayout = (RelativeLayout) v.findViewById(R.id.direction_layout);
             holder.distance = (cgDistanceView) v.findViewById(R.id.distance);
@@ -514,11 +521,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
             }
         }
 
-        if (cache.getFavouriteCnt() != null) {
-            holder.favourite.setText(String.format("%d", cache.getFavouriteCnt()));
-        } else {
-            holder.favourite.setText("---");
-        }
+        holder.favourite.setText(Integer.toString(cache.getFavoritePoints()));
 
         int favoriteBack;
         // set default background, neither vote nor rating may be available
@@ -527,74 +530,60 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
         } else {
             favoriteBack = R.drawable.favourite_background_dark;
         }
-        if (cache.getMyVote() != null && cache.getMyVote() > 0) {
-            if (cache.getMyVote() >= 4) {
+        float myVote = cache.getMyVote();
+        if (myVote > 0) { // use my own rating for display, if I have voted
+            if (myVote >= 4) {
                 favoriteBack = ratingBcgs[2];
-            } else if (cache.getMyVote() >= 3) {
+            } else if (myVote >= 3) {
                 favoriteBack = ratingBcgs[1];
-            } else if (cache.getMyVote() > 0) {
+            } else if (myVote > 0) {
                 favoriteBack = ratingBcgs[0];
             }
-        } else if (cache.getRating() != null && cache.getRating() > 0) {
-            if (cache.getRating() >= 3.5) {
+        } else {
+            float rating = cache.getRating();
+            if (rating >= 3.5) {
                 favoriteBack = ratingBcgs[2];
-            } else if (cache.getRating() >= 2.1) {
+            } else if (rating >= 2.1) {
                 favoriteBack = ratingBcgs[1];
-            } else if (cache.getRating() > 0.0) {
+            } else if (rating > 0.0) {
                 favoriteBack = ratingBcgs[0];
             }
         }
         holder.favourite.setBackgroundResource(favoriteBack);
 
-        StringBuilder cacheInfo = new StringBuilder(50);
-        if (historic && cache.getVisitedDate() != null) {
+        if (cacheListType == CacheListType.HISTORY && cache.getVisitedDate() > 0) {
+            StringBuilder cacheInfo = new StringBuilder(50);
             cacheInfo.append(cgBase.formatTime(cache.getVisitedDate()));
             cacheInfo.append("; ");
             cacheInfo.append(cgBase.formatDate(cache.getVisitedDate()));
+            holder.info.setText(cacheInfo.toString());
         } else {
+            ArrayList<String> infos = new ArrayList<String>();
             if (StringUtils.isNotBlank(cache.getGeocode())) {
-                cacheInfo.append(cache.getGeocode());
+                infos.add(cache.getGeocode());
             }
             if (cache.hasDifficulty()) {
-                if (cacheInfo.length() > 0) {
-                    cacheInfo.append(SEPARATOR);
-                }
-                cacheInfo.append("D ");
-                cacheInfo.append(String.format("%.1f", cache.getDifficulty()));
+                infos.add("D " + String.format("%.1f", cache.getDifficulty()));
             }
             if (cache.hasTerrain()) {
-                if (cacheInfo.length() > 0) {
-                    cacheInfo.append(SEPARATOR);
-                }
-                cacheInfo.append("T ");
-                cacheInfo.append(String.format("%.1f", cache.getTerrain()));
+                infos.add("T " + String.format("%.1f", cache.getTerrain()));
             }
+
             // don't show "not chosen" for events and virtuals, that should be the normal case
-            if (cache.getSize() != null && cache.showSize()) {
-                if (cacheInfo.length() > 0) {
-                    cacheInfo.append(SEPARATOR);
-                }
-                cacheInfo.append(cache.getSize().getL10n());
+            if (cache.getSize() != CacheSize.UNKNOWN && cache.showSize()) {
+                infos.add(cache.getSize().getL10n());
             } else if (cache.isEventCache() && cache.getHiddenDate() != null) {
-                if (cacheInfo.length() > 0) {
-                    cacheInfo.append(SEPARATOR);
-                }
-                cacheInfo.append(cgBase.formatShortDate(cache.getHiddenDate().getTime()));
+                infos.add(cgBase.formatShortDate(cache.getHiddenDate().getTime()));
             }
+
             if (cache.isMembers()) {
-                if (cacheInfo.length() > 0) {
-                    cacheInfo.append(SEPARATOR);
-                }
-                cacheInfo.append(res.getString(R.string.cache_premium));
+                infos.add(res.getString(R.string.cache_premium));
             }
-            if (cache.getReason() != null && cache.getReason() == 1) {
-                if (cacheInfo.length() > 0) {
-                    cacheInfo.append(SEPARATOR);
-                }
-                cacheInfo.append(res.getString(R.string.cache_offline));
+            if (cacheListType != CacheListType.OFFLINE && cacheListType != CacheListType.HISTORY && cache.getListId() > 0) {
+                infos.add(res.getString(R.string.cache_offline));
             }
+            holder.info.setText(StringUtils.join(infos, SEPARATOR));
         }
-        holder.info.setText(cacheInfo.toString());
 
         return v;
     }
@@ -746,7 +735,7 @@ public class cgCacheListAdapter extends ArrayAdapter<cgCache> {
                     return true;
                 }
             } catch (Exception e) {
-                Log.w(Settings.tag, "cgCacheListAdapter.detectGesture.onFling: " + e.toString());
+                Log.w(Settings.tag, "CacheListAdapter.detectGesture.onFling: " + e.toString());
             }
 
             return false;

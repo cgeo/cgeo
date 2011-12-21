@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.test.RegExPerformanceTest;
 import cgeo.geocaching.test.mock.MockedCache;
@@ -8,6 +9,8 @@ import cgeo.geocaching.utils.CancellableHandler;
 
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
+
+import java.util.Date;
 
 import junit.framework.Assert;
 
@@ -21,63 +24,70 @@ public class cgBaseTest extends AndroidTestCase {
         Assert.assertEquals(125.663703918457, cgBase.getElevation(new Geopoint(48.0, 2.0)), 0.1);
     }
 
+    public static void testCompareCaches(ICache expected, cgCache actual) {
+        Assert.assertEquals(expected.getGeocode(), actual.getGeocode());
+        Assert.assertTrue(expected.getType() == actual.getType());
+        Assert.assertEquals(expected.getOwner(), actual.getOwner());
+        Assert.assertEquals(expected.getDifficulty(), actual.getDifficulty());
+        Assert.assertEquals(expected.getTerrain(), actual.getTerrain());
+        Assert.assertEquals(expected.getLatitude(), actual.getLatitude());
+        Assert.assertEquals(expected.getLongitude(), actual.getLongitude());
+        Assert.assertEquals(expected.isDisabled(), actual.isDisabled());
+        Assert.assertEquals(expected.isOwn(), actual.isOwn());
+        Assert.assertEquals(expected.isArchived(), actual.isArchived());
+        Assert.assertEquals(expected.isMembersOnly(), actual.isMembersOnly());
+        Assert.assertEquals(expected.getOwnerReal(), actual.getOwnerReal());
+        Assert.assertEquals(expected.getSize(), actual.getSize());
+        Assert.assertEquals(expected.getHint(), actual.getHint());
+        Assert.assertTrue(actual.getDescription().startsWith(expected.getDescription()));
+        Assert.assertEquals(expected.getShortDescription(), actual.getShortDescription());
+        Assert.assertEquals(expected.getName(), actual.getName());
+        Assert.assertEquals(expected.getCacheId(), actual.getCacheId());
+        Assert.assertEquals(expected.getGuid(), actual.getGuid());
+        Assert.assertEquals(expected.getLocation(), actual.getLocation());
+        Assert.assertEquals(expected.getPersonalNote(), actual.getPersonalNote());
+        Assert.assertEquals(expected.isFound(), actual.isFound());
+        Assert.assertEquals(expected.isFavorite(), actual.isFavorite());
+        Assert.assertEquals(expected.getFavoritePoints(), actual.getFavoritePoints());
+        Assert.assertEquals(expected.isWatchlist(), actual.isWatchlist());
+        Date date1 = expected.getHiddenDate();
+        Date date2 = actual.getHiddenDate();
+        Assert.assertEquals(date1.toString(), date2.toString());
+        for (String attribute : expected.getAttributes()) {
+            Assert.assertTrue(actual.getAttributes().contains(attribute));
+        }
+        for (LogType logType : expected.getLogCounts().keySet()) {
+            Assert.assertEquals(expected.getLogCounts().get(logType), actual.getLogCounts().get(logType));
+        }
+
+        int actualInventorySize = null != actual.getInventory() ? actual.getInventory().size() : 0;
+        int expectedInventorySize = null != expected.getInventory() ? expected.getInventory().size() : 0;
+        Assert.assertEquals(expectedInventorySize, actualInventorySize);
+
+        int actualSpoilersSize = null != actual.getSpoilers() ? actual.getSpoilers().size() : 0;
+        int expectedSpoilersSize = null != expected.getSpoilers() ? expected.getSpoilers().size() : 0;
+        Assert.assertEquals(expectedSpoilersSize, actualSpoilersSize);
+    }
+
     /**
      * Test {@link cgBase#parseCacheFromText(String, int, CancellableHandler)} with "mocked" data
-     * 
-     * @param base
+     *
      */
     @MediumTest
-    public static void testParseCacheFromText() {
-        for (MockedCache cache : RegExPerformanceTest.MOCKED_CACHES) {
-            cgCacheWrap caches = cgBase.parseCacheFromText(cache.getData(), 0, null);
-            cgCache cacheParsed = caches.cacheList.get(0);
-            Assert.assertEquals(cache.getGeocode(), cacheParsed.getGeocode());
-            Assert.assertTrue(cache.getType() == cacheParsed.getType());
-            Assert.assertEquals(cache.getOwner(), cacheParsed.getOwner());
-            Assert.assertEquals(cache.getDifficulty(), cacheParsed.getDifficulty());
-            Assert.assertEquals(cache.getTerrain(), cacheParsed.getTerrain());
-            Assert.assertEquals(cache.getLatitude(), cacheParsed.getLatitude());
-            Assert.assertEquals(cache.getLongitude(), cacheParsed.getLongitude());
-            Assert.assertEquals(cache.isDisabled(), cacheParsed.isDisabled());
-            Assert.assertEquals(cache.isOwn(), cacheParsed.isOwn());
-            Assert.assertEquals(cache.isArchived(), cacheParsed.isArchived());
-            Assert.assertEquals(cache.isMembersOnly(), cacheParsed.isMembersOnly());
-            Assert.assertEquals(cache.getOwnerReal(), cacheParsed.getOwnerReal());
-            Assert.assertEquals(cache.getSize(), cacheParsed.getSize());
-            Assert.assertEquals(cache.getHint(), cacheParsed.getHint());
-            Assert.assertTrue(cacheParsed.getDescription().startsWith(cache.getDescription()));
-            Assert.assertEquals(cache.getShortDescription(), cacheParsed.getShortDescription());
-            Assert.assertEquals(cache.getName(), cacheParsed.getName());
-            Assert.assertEquals(cache.getCacheId(), cacheParsed.getCacheId());
-            Assert.assertEquals(cache.getGuid(), cacheParsed.getGuid());
-            Assert.assertEquals(cache.getLocation(), cacheParsed.getLocation());
-            Assert.assertEquals(cache.getPersonalNote(), cacheParsed.getPersonalNote());
-            Assert.assertEquals(cache.isFound(), cacheParsed.isFound());
-            Assert.assertEquals(cache.isFavorite(), cacheParsed.isFavorite());
-            Assert.assertEquals(cache.getFavoritePoints(), cacheParsed.getFavoritePoints());
-            Assert.assertEquals(cache.isWatchlist(), cacheParsed.isWatchlist());
-            Assert.assertEquals(cache.getHiddenDate().toString(), cacheParsed.getHiddenDate().toString());
-            for (String attribute : cache.getAttributes()) {
-                Assert.assertTrue(cacheParsed.getAttributes().contains(attribute));
-            }
-            for (Integer key : cache.getLogCounts().keySet()) {
-                Assert.assertEquals(cache.getLogCounts().get(key), cacheParsed.getLogCounts().get(key));
-            }
-            if (null != cache.getInventory() || null != cacheParsed.getInventory()) {
-                Assert.assertEquals(cache.getInventory().size(), cacheParsed.getInventory().size());
-            }
-            if (null != cache.getSpoilers() || null != cacheParsed.getSpoilers()) {
-                Assert.assertEquals(cache.getSpoilers().size(), cacheParsed.getSpoilers().size());
-            }
-
+    public static void testParseCacheFromTextWithMockedData() {
+        String gcCustomDate = Settings.getGcCustomDate();
+        for (MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
+            // to get the same results we have to use the date format used when the mocked data was created
+            Settings.setGcCustomDate(mockedCache.getDateFormat());
+            cgCacheWrap caches = cgBase.parseCacheFromText(mockedCache.getData(), 0, null);
+            cgCache parsedCache = caches.cacheList.get(0);
+            cgBaseTest.testCompareCaches(mockedCache, parsedCache);
         }
+        Settings.setGcCustomDate(gcCustomDate);
     }
 
-    public static void testParseLocationWithLink() {
-        cgCacheWrap caches = cgBase.parseCacheFromText(MockedCache.readCachePage("GCV2R9"), 0, null);
-        assertEquals(1, caches.cacheList.size());
-        cgCache cache = caches.cacheList.get(0);
-        Assert.assertEquals("California, United States", cache.getLocation());
+    public static void testHumanDistance() {
+        assertEquals("?", cgBase.getHumanDistance(null));
+        assertEquals("123 km", cgBase.getHumanDistance(123.456f));
     }
-
 }

@@ -2,7 +2,9 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteRating;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -37,7 +39,7 @@ public class cgeopopup extends AbstractActivity {
     private String geocode = null;
     private cgCache cache = null;
     private cgGeo geo = null;
-    private cgUpdateLoc geoUpdate = new update();
+    private UpdateLocationCallback geoUpdate = new update();
     private ProgressDialog storeDialog = null;
     private ProgressDialog dropDialog = null;
     private TextView cacheDistance = null;
@@ -190,7 +192,7 @@ public class cgeopopup extends AbstractActivity {
         }
 
         int logType = menuItem - MENU_LOG_VISIT_OFFLINE;
-        cache.logOffline(this, logType);
+        cache.logOffline(this, LogType.getById(logType));
         return true;
     }
 
@@ -240,12 +242,8 @@ public class cgeopopup extends AbstractActivity {
             itemName.setText(res.getString(R.string.cache_type));
 
             String cacheType = cache.getType() != CacheType.UNKNOWN ? cache.getType().getL10n() : CacheType.MYSTERY.getL10n();
-            if (cache.getSize() != null) {
-                itemValue.setText(cacheType
-                        + " (" + cache.getSize().getL10n() + ")");
-            } else {
-                itemValue.setText(cacheType);
-            }
+            String cacheSize = cache.getSize() != CacheSize.UNKNOWN ? " (" + cache.getSize().getL10n() + ")" : "";
+            itemValue.setText(cacheType + cacheSize);
             detailsList.addView(itemLayout);
 
             // gc-code
@@ -354,7 +352,7 @@ public class cgeopopup extends AbstractActivity {
             }
 
             // rating
-            if (cache.getRating() != null && cache.getRating() > 0) {
+            if (cache.getRating() > 0) {
                 setRating(cache.getRating(), cache.getVotes());
             } else {
                 if (Settings.isRatingWanted() && cache.supportsGCVote()) {
@@ -409,8 +407,8 @@ public class cgeopopup extends AbstractActivity {
                 final Button offlineRefresh = (Button) findViewById(R.id.offline_refresh);
                 final Button offlineStore = (Button) findViewById(R.id.offline_store);
 
-                if (cache.getReason() > 0) {
-                    Long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
+                if (cache.getListId() > 0) {
+                    long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
 
                     String ago = "";
                     if (diff < 15) {
@@ -454,7 +452,7 @@ public class cgeopopup extends AbstractActivity {
         }
 
         if (geo != null) {
-            geoUpdate.updateLoc(geo);
+            geoUpdate.updateLocation(geo);
         }
     }
 
@@ -499,10 +497,10 @@ public class cgeopopup extends AbstractActivity {
         super.onPause();
     }
 
-    private class update extends cgUpdateLoc {
+    private class update implements UpdateLocationCallback {
 
         @Override
-        public void updateLoc(cgGeo geo) {
+        public void updateLocation(cgGeo geo) {
             if (geo == null) {
                 return;
             }
@@ -602,8 +600,8 @@ public class cgeopopup extends AbstractActivity {
         }
     }
 
-    private void setRating(Float rating, Integer votes) {
-        if (rating == null || rating <= 0) {
+    private void setRating(float rating, int votes) {
+        if (rating <= 0) {
             return;
         }
 
@@ -622,7 +620,7 @@ public class cgeopopup extends AbstractActivity {
         itemValue.setText(String.format("%.1f", rating) + ' ' + res.getString(R.string.cache_rating_of) + " 5");
         itemStars.addView(cgBase.createStarRating(rating, 5, this), 1);
 
-        if (votes != null) {
+        if (votes > 0) {
             final TextView itemAddition = (TextView) itemLayout.findViewById(R.id.addition);
             itemAddition.setText("(" + votes + ")");
             itemAddition.setVisibility(View.VISIBLE);

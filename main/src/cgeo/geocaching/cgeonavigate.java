@@ -35,8 +35,8 @@ public class cgeonavigate extends AbstractActivity {
     private PowerManager pm = null;
     private cgGeo geo = null;
     private cgDirection dir = null;
-    private cgUpdateLoc geoUpdate = new update();
-    private cgUpdateDir dirUpdate = new UpdateDirection();
+    private UpdateLocationCallback geoUpdate = new update();
+    private UpdateDirectionCallback dirUpdate = new UpdateDirection();
     private Geopoint dstCoords = null;
     private float cacheHeading = 0;
     private Float northHeading = null;
@@ -97,7 +97,7 @@ public class cgeonavigate extends AbstractActivity {
 
             if (StringUtils.isNotBlank(name)) {
                 if (StringUtils.isNotBlank(title)) {
-                    title = title + ": " + name;
+                    title += ": " + name;
                 } else {
                     title = name;
                 }
@@ -117,10 +117,10 @@ public class cgeonavigate extends AbstractActivity {
         setDestCoords();
 
         if (geo != null) {
-            geoUpdate.updateLoc(geo);
+            geoUpdate.updateLocation(geo);
         }
         if (dir != null) {
-            dirUpdate.updateDir(dir);
+            dirUpdate.updateDirection(dir);
         }
 
         // get textviews once
@@ -332,13 +332,13 @@ public class cgeonavigate extends AbstractActivity {
 
         cacheHeading = geo.coordsNow.bearingTo(dstCoords);
         distanceView.setText(cgBase.getHumanDistance(geo.coordsNow.distanceTo(dstCoords)));
-        headingView.setText(String.format("%.0f", cacheHeading) + "°");
+        headingView.setText(Math.round(cacheHeading) + "°");
     }
 
-    private class update extends cgUpdateLoc {
+    private class update implements UpdateLocationCallback {
 
         @Override
-        public void updateLoc(cgGeo geo) {
+        public void updateLocation(cgGeo geo) {
             if (geo == null) {
                 return;
             }
@@ -353,9 +353,9 @@ public class cgeonavigate extends AbstractActivity {
 
                 if (geo.coordsNow != null) {
                     String satellites = null;
-                    if (geo.satellitesVisible != null && geo.satellitesFixed != null && geo.satellitesFixed > 0) {
+                    if (geo.satellitesFixed > 0) {
                         satellites = res.getString(R.string.loc_sat) + ": " + geo.satellitesFixed + "/" + geo.satellitesVisible;
-                    } else if (geo.satellitesVisible != null) {
+                    } else if (geo.satellitesVisible >= 0) {
                         satellites = res.getString(R.string.loc_sat) + ": 0/" + geo.satellitesVisible;
                     } else {
                         satellites = "";
@@ -363,11 +363,11 @@ public class cgeonavigate extends AbstractActivity {
                     navSatellites.setText(satellites);
                     navType.setText(res.getString(geo.locationProvider.resourceId));
 
-                    if (geo.accuracyNow != null) {
+                    if (geo.accuracyNow >= 0) {
                         if (Settings.isUseMetricUnits()) {
-                            navAccuracy.setText("±" + String.format("%.0f", geo.accuracyNow) + " m");
+                            navAccuracy.setText("±" + Math.round(geo.accuracyNow) + " m");
                         } else {
-                            navAccuracy.setText("±" + String.format("%.0f", (geo.accuracyNow * 3.2808399)) + " ft");
+                            navAccuracy.setText("±" + Math.round(geo.accuracyNow * 3.2808399) + " ft");
                         }
                     } else {
                         navAccuracy.setText(null);
@@ -387,12 +387,8 @@ public class cgeonavigate extends AbstractActivity {
                     navLocation.setText(res.getString(R.string.loc_trying));
                 }
 
-                if (!Settings.isUseCompass() || (geo.speedNow != null && geo.speedNow > 5)) { // use GPS when speed is higher than 18 km/h
-                    if (geo.bearingNow != null) {
-                        northHeading = geo.bearingNow;
-                    } else {
-                        northHeading = 0f;
-                    }
+                if (!Settings.isUseCompass() || geo.speedNow > 5) { // use GPS when speed is higher than 18 km/h
+                    northHeading = geo.bearingNow;
                 }
             } catch (Exception e) {
                 Log.w(Settings.tag, "Failed to update location.");
@@ -400,15 +396,15 @@ public class cgeonavigate extends AbstractActivity {
         }
     }
 
-    private class UpdateDirection extends cgUpdateDir {
+    private class UpdateDirection implements UpdateDirectionCallback {
 
         @Override
-        public void updateDir(cgDirection dir) {
+        public void updateDirection(cgDirection dir) {
             if (dir == null || dir.directionNow == null) {
                 return;
             }
 
-            if (geo == null || geo.speedNow == null || geo.speedNow <= 5) { // use compass when speed is lower than 18 km/h
+            if (geo == null || geo.speedNow <= 5) { // use compass when speed is lower than 18 km/h
                 northHeading = dir.directionNow;
             }
         }

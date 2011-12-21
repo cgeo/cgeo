@@ -2,9 +2,11 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.GCConnector;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.utils.CryptUtils;
@@ -44,10 +46,10 @@ public class cgCache implements ICache {
     final public static int LOADOFFLINELOG = 1 << 5;
     final public static int LOADALL = LOADATTRIBUTES | LOADWAYPOINTS | LOADSPOILERS | LOADLOGS | LOADINVENTORY | LOADOFFLINELOG;
 
-    private Long updated = null;
-    private Long detailedUpdate = null;
-    private Long visitedDate = null;
-    private Integer reason = 0;
+    private long updated = 0;
+    private long detailedUpdate = 0;
+    private long visitedDate = 0;
+    private int listId = 0;
     private boolean detailed = false;
     private String geocode = "";
     private String cacheId = "";
@@ -60,8 +62,8 @@ public class cgCache implements ICache {
     private Date hidden = null;
     private String hint = "";
     private CacheSize size = null;
-    private Float difficulty = Float.valueOf(0);
-    private Float terrain = Float.valueOf(0);
+    private float difficulty = 0;
+    private float terrain = 0;
     private Float direction = null;
     private Float distance = null;
     private String latlon = "";
@@ -78,10 +80,10 @@ public class cgCache implements ICache {
     private boolean found = false;
     private boolean favourite = false;
     private boolean own = false;
-    private Integer favouriteCnt = null;
-    private Float rating = null;
-    private Integer votes = null;
-    private Float myVote = null;
+    private int favouritePoints = 0;
+    private float rating = 0; // valid ratings are larger than zero
+    private int votes = 0;
+    private float myVote = 0; // valid ratings are larger than zero
     private int inventoryItems = 0;
     private boolean onWatchlist = false;
     private List<String> attributes = null;
@@ -89,7 +91,7 @@ public class cgCache implements ICache {
     private ArrayList<cgImage> spoilers = null;
     private List<cgLog> logs = null;
     private List<cgTrackable> inventory = null;
-    private Map<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
+    private Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
     private boolean logOffline = false;
     // temporary values
     private boolean statusChecked = false;
@@ -112,14 +114,14 @@ public class cgCache implements ICache {
         updated = System.currentTimeMillis();
         if (!detailed && other.detailed) {
             detailed = true;
-            detailedUpdate = updated;
+            detailedUpdate = other.detailedUpdate;
         }
 
-        if (visitedDate == null || visitedDate == 0) {
+        if (visitedDate == 0) {
             visitedDate = other.getVisitedDate();
         }
-        if (reason == null || reason == 0) {
-            reason = other.reason;
+        if (listId == 0) {
+            listId = other.listId;
         }
         if (StringUtils.isBlank(geocode)) {
             geocode = other.getGeocode();
@@ -154,10 +156,10 @@ public class cgCache implements ICache {
         if (size == null) {
             size = other.size;
         }
-        if (difficulty == null || difficulty == 0) {
+        if (difficulty == 0) {
             difficulty = other.getDifficulty();
         }
-        if (terrain == null || terrain == 0) {
+        if (terrain == 0) {
             terrain = other.getTerrain();
         }
         if (direction == null) {
@@ -178,7 +180,7 @@ public class cgCache implements ICache {
         if (elevation == null) {
             elevation = other.elevation;
         }
-        if (personalNote == null) { // don't use StringUtils.isBlank. Otherwise we cannot recognize a note which was deleted on GC
+        if (personalNote == null) { // don't use StringUtils.isBlank here. Otherwise we cannot recognize a note which was deleted on GC
             personalNote = other.personalNote;
         }
         if (StringUtils.isBlank(shortdesc)) {
@@ -187,16 +189,16 @@ public class cgCache implements ICache {
         if (StringUtils.isBlank(description)) {
             description = other.description;
         }
-        if (favouriteCnt == null) {
-            favouriteCnt = other.getFavouriteCnt();
+        if (favouritePoints == 0) {
+            favouritePoints = other.getFavoritePoints();
         }
-        if (rating == null) {
+        if (rating == 0) {
             rating = other.getRating();
         }
-        if (votes == null) {
+        if (votes == 0) {
             votes = other.votes;
         }
-        if (myVote == null) {
+        if (myVote == 0) {
             myVote = other.getMyVote();
         }
         if (attributes == null) {
@@ -206,7 +208,7 @@ public class cgCache implements ICache {
             waypoints = other.getWaypoints();
         }
         else {
-            cgWaypoint.mergeWayPoints(waypoints, other.getWaypoints());
+            cgWaypoint.mergeWayPoints(waypoints, other.getWaypoints(), waypoints == null || waypoints.isEmpty());
         }
         if (spoilers == null) {
             spoilers = other.spoilers;
@@ -237,12 +239,14 @@ public class cgCache implements ICache {
         if (hidden == null) {
             return false;
         }
-        // is in future?
-        Date today = new Date();
-        today.setHours(0);
-        today.setMinutes(0);
-        today.setSeconds(0);
-        if (hidden.compareTo(today) <= 0) {
+        // is not in the past?
+        final Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        if (hidden.compareTo(cal.getTime()) < 0) {
             return false;
         }
         return true;
@@ -294,7 +298,7 @@ public class cgCache implements ICache {
         return true;
     }
 
-    public boolean logOffline(final IAbstractActivity fromActivity, final int logType) {
+    public boolean logOffline(final IAbstractActivity fromActivity, final LogType logType) {
         String log = "";
         if (StringUtils.isNotBlank(Settings.getSignature())
                 && Settings.isAutoInsertSignature()) {
@@ -304,8 +308,8 @@ public class cgCache implements ICache {
         return true;
     }
 
-    void logOffline(final IAbstractActivity fromActivity, final String log, Calendar date, final int logType) {
-        if (logType <= 0) {
+    void logOffline(final IAbstractActivity fromActivity, final String log, Calendar date, final LogType logType) {
+        if (logType == LogType.LOG_UNKNOWN) {
             return;
         }
         cgeoapplication app = (cgeoapplication) ((Activity) fromActivity).getApplication();
@@ -320,38 +324,38 @@ public class cgCache implements ICache {
         }
     }
 
-    public List<Integer> getPossibleLogTypes() {
+    public List<LogType> getPossibleLogTypes() {
         boolean isOwner = owner != null && owner.equalsIgnoreCase(Settings.getUsername());
-        List<Integer> types = new ArrayList<Integer>();
+        List<LogType> logTypes = new ArrayList<LogType>();
         if (isEventCache()) {
-            types.add(cgBase.LOG_WILL_ATTEND);
-            types.add(cgBase.LOG_NOTE);
-            types.add(cgBase.LOG_ATTENDED);
-            types.add(cgBase.LOG_NEEDS_ARCHIVE);
+            logTypes.add(LogType.LOG_WILL_ATTEND);
+            logTypes.add(LogType.LOG_NOTE);
+            logTypes.add(LogType.LOG_ATTENDED);
+            logTypes.add(LogType.LOG_NEEDS_ARCHIVE);
             if (isOwner) {
-                types.add(cgBase.LOG_ANNOUNCEMENT);
+                logTypes.add(LogType.LOG_ANNOUNCEMENT);
             }
         } else if (CacheType.WEBCAM == cacheType) {
-            types.add(cgBase.LOG_WEBCAM_PHOTO_TAKEN);
-            types.add(cgBase.LOG_DIDNT_FIND_IT);
-            types.add(cgBase.LOG_NOTE);
-            types.add(cgBase.LOG_NEEDS_ARCHIVE);
-            types.add(cgBase.LOG_NEEDS_MAINTENANCE);
+            logTypes.add(LogType.LOG_WEBCAM_PHOTO_TAKEN);
+            logTypes.add(LogType.LOG_DIDNT_FIND_IT);
+            logTypes.add(LogType.LOG_NOTE);
+            logTypes.add(LogType.LOG_NEEDS_ARCHIVE);
+            logTypes.add(LogType.LOG_NEEDS_MAINTENANCE);
         } else {
-            types.add(cgBase.LOG_FOUND_IT);
-            types.add(cgBase.LOG_DIDNT_FIND_IT);
-            types.add(cgBase.LOG_NOTE);
-            types.add(cgBase.LOG_NEEDS_ARCHIVE);
-            types.add(cgBase.LOG_NEEDS_MAINTENANCE);
+            logTypes.add(LogType.LOG_FOUND_IT);
+            logTypes.add(LogType.LOG_DIDNT_FIND_IT);
+            logTypes.add(LogType.LOG_NOTE);
+            logTypes.add(LogType.LOG_NEEDS_ARCHIVE);
+            logTypes.add(LogType.LOG_NEEDS_MAINTENANCE);
         }
         if (isOwner) {
-            types.add(cgBase.LOG_OWNER_MAINTENANCE);
-            types.add(cgBase.LOG_TEMP_DISABLE_LISTING);
-            types.add(cgBase.LOG_ENABLE_LISTING);
-            types.add(cgBase.LOG_ARCHIVE);
-            types.remove(Integer.valueOf(cgBase.LOG_UPDATE_COORDINATES));
+            logTypes.add(LogType.LOG_OWNER_MAINTENANCE);
+            logTypes.add(LogType.LOG_TEMP_DISABLE_LISTING);
+            logTypes.add(LogType.LOG_ENABLE_LISTING);
+            logTypes.add(LogType.LOG_ARCHIVE);
+            logTypes.remove(LogType.LOG_UPDATE_COORDINATES);
         }
-        return types;
+        return logTypes;
     }
 
     public void openInBrowser(Activity fromActivity) {
@@ -383,7 +387,7 @@ public class cgCache implements ICache {
     }
 
     @Override
-    public Float getDifficulty() {
+    public float getDifficulty() {
         return difficulty;
     }
 
@@ -413,7 +417,7 @@ public class cgCache implements ICache {
     }
 
     @Override
-    public Float getTerrain() {
+    public float getTerrain() {
         return terrain;
     }
 
@@ -467,8 +471,7 @@ public class cgCache implements ICache {
 
     @Override
     public String getCacheId() {
-        // TODO: Only valid for GC-cache
-        if (StringUtils.isBlank(cacheId)) {
+        if (StringUtils.isBlank(cacheId) && getConnector().equals(GCConnector.getInstance())) {
             return CryptUtils.convertToGcBase31(geocode);
         }
 
@@ -487,6 +490,11 @@ public class cgCache implements ICache {
 
     @Override
     public String getPersonalNote() {
+        // non premium members have no personal notes, premium members have an empty string by default.
+        // map both to null, so other code doesn't need to differentiate
+        if (StringUtils.isBlank(personalNote)) {
+            return null;
+        }
         return personalNote;
     }
 
@@ -565,13 +573,13 @@ public class cgCache implements ICache {
     }
 
     @Override
-    public Map<Integer, Integer> getLogCounts() {
+    public Map<LogType, Integer> getLogCounts() {
         return logCounts;
     }
 
     @Override
-    public Integer getFavoritePoints() {
-        return favouriteCnt;
+    public int getFavoritePoints() {
+        return favouritePoints;
     }
 
     @Override
@@ -597,36 +605,36 @@ public class cgCache implements ICache {
         return !((isEventCache() || isVirtual()) && size == CacheSize.NOT_CHOSEN);
     }
 
-    public Long getUpdated() {
+    public long getUpdated() {
         return updated;
     }
 
-    public void setUpdated(Long updated) {
+    public void setUpdated(long updated) {
         this.updated = updated;
     }
 
-    public Long getDetailedUpdate() {
+    public long getDetailedUpdate() {
         return detailedUpdate;
     }
 
-    public void setDetailedUpdate(Long detailedUpdate) {
+    public void setDetailedUpdate(long detailedUpdate) {
         this.detailedUpdate = detailedUpdate;
     }
 
-    public Long getVisitedDate() {
+    public long getVisitedDate() {
         return visitedDate;
     }
 
-    public void setVisitedDate(Long visitedDate) {
+    public void setVisitedDate(long visitedDate) {
         this.visitedDate = visitedDate;
     }
 
-    public Integer getReason() {
-        return reason;
+    public int getListId() {
+        return listId;
     }
 
-    public void setReason(Integer reason) {
-        this.reason = reason;
+    public void setListId(int listId) {
+        this.listId = listId;
     }
 
     public boolean getDetailed() {
@@ -645,8 +653,13 @@ public class cgCache implements ICache {
         this.nameSp = nameSp;
     }
 
-    public void setHidden(Date hidden) {
-        this.hidden = hidden;
+    public void setHidden(final Date hidden) {
+        if (hidden == null) {
+            this.hidden = null;
+        }
+        else {
+            this.hidden = new Date(hidden.getTime()); // avoid storing the external reference in this object
+        }
     }
 
     public Float getDirection() {
@@ -721,35 +734,31 @@ public class cgCache implements ICache {
         this.favourite = favourite;
     }
 
-    public Integer getFavouriteCnt() {
-        return favouriteCnt;
+    public void setFavouritePoints(int favouriteCnt) {
+        this.favouritePoints = favouriteCnt;
     }
 
-    public void setFavouriteCnt(Integer favouriteCnt) {
-        this.favouriteCnt = favouriteCnt;
-    }
-
-    public Float getRating() {
+    public float getRating() {
         return rating;
     }
 
-    public void setRating(Float rating) {
+    public void setRating(float rating) {
         this.rating = rating;
     }
 
-    public Integer getVotes() {
+    public int getVotes() {
         return votes;
     }
 
-    public void setVotes(Integer votes) {
+    public void setVotes(int votes) {
         this.votes = votes;
     }
 
-    public Float getMyVote() {
+    public float getMyVote() {
         return myVote;
     }
 
-    public void setMyVote(Float myVote) {
+    public void setMyVote(float myVote) {
         this.myVote = myVote;
     }
 
@@ -778,9 +787,31 @@ public class cgCache implements ICache {
     }
 
     public List<cgLog> getLogs() {
-        return logs;
+        return getLogs(true);
     }
 
+    /**
+     * @param allLogs
+     *            true for all logs, false for friend logs only
+     * @return the logs with all entries or just the entries of the friends
+     */
+    public List<cgLog> getLogs(boolean allLogs) {
+        if (allLogs) {
+            return logs;
+        }
+        ArrayList<cgLog> friendLogs = new ArrayList<cgLog>();
+        for (cgLog log : logs) {
+            if (log.friend) {
+                friendLogs.add(log);
+            }
+        }
+        return friendLogs;
+    }
+
+    /**
+     * @param logs
+     *            the log entries
+     */
     public void setLogs(List<cgLog> logs) {
         this.logs = logs;
     }
@@ -829,7 +860,6 @@ public class cgCache implements ICache {
         this.guid = guid;
     }
 
-
     public void setName(String name) {
         this.name = name;
     }
@@ -850,11 +880,11 @@ public class cgCache implements ICache {
         this.size = size;
     }
 
-    public void setDifficulty(Float difficulty) {
+    public void setDifficulty(float difficulty) {
         this.difficulty = difficulty;
     }
 
-    public void setTerrain(Float terrain) {
+    public void setTerrain(float terrain) {
         this.terrain = terrain;
     }
 
@@ -894,12 +924,8 @@ public class cgCache implements ICache {
         this.inventory = inventory;
     }
 
-    public void setLogCounts(Map<Integer, Integer> logCounts) {
+    public void setLogCounts(Map<LogType, Integer> logCounts) {
         this.logCounts = logCounts;
-    }
-
-    public void setNameForSorting(String nameForSorting) {
-        this.nameForSorting = nameForSorting;
     }
 
     /*
@@ -922,11 +948,11 @@ public class cgCache implements ICache {
     }
 
     public boolean hasDifficulty() {
-        return difficulty != null && difficulty > 0f;
+        return difficulty > 0f;
     }
 
     public boolean hasTerrain() {
-        return terrain != null && terrain > 0f;
+        return terrain > 0f;
     }
 
 }

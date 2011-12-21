@@ -60,34 +60,6 @@
                 android:indeterminate="true" />
         </RelativeLayout>
 
-        <!-- Attributes box -->
-
-        <LinearLayout
-            android:id="@+id/attributes_box"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone" >
-
-            <RelativeLayout style="@style/separator_horizontal_layout" >
-
-                <View style="@style/separator_horizontal" />
-
-                <TextView
-                    style="@style/separator_horizontal_headline"
-                    android:text="@string/cache_attributes" />
-            </RelativeLayout>
-            <!-- innerbox is only needed to define the paddings easily -->
-
-            <LinearLayout
-                android:id="@+id/attributes_innerbox"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingLeft="6dp"
-                android:paddingRight="6dp" />
-        </LinearLayout>
-
         <!-- Hint and spoiler-images box -->
 
         <LinearLayout

@@ -3,6 +3,7 @@ package cgeo.geocaching.test.mock;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import java.text.ParseException;
@@ -25,7 +26,7 @@ public class GC1ZXX2 extends MockedCache {
     }
 
     @Override
-    public Float getDifficulty() {
+    public float getDifficulty() {
         return 3.0f;
     }
 
@@ -45,7 +46,7 @@ public class GC1ZXX2 extends MockedCache {
     }
 
     @Override
-    public Float getTerrain() {
+    public float getTerrain() {
         return 1.5f;
     }
 
@@ -86,16 +87,16 @@ public class GC1ZXX2 extends MockedCache {
 
     @Override
     public boolean isWatchlist() {
-        if ("blafoo".equals(this.getUserLoggedIn())) {
+        if ("blafoo".equals(this.getMockedDataUser())) {
             return true;
         }
-        return false;
+        return super.isWatchlist();
     }
 
     @Override
     public Date getHiddenDate() {
         try {
-            return cgBase.parseGcCustomDate("16/10/2009");
+            return cgBase.parseGcCustomDate("16/10/2009", getDateFormat());
         } catch (ParseException e) {
             // intentionally left blank
         }
@@ -118,31 +119,31 @@ public class GC1ZXX2 extends MockedCache {
 
 
     @Override
-    public Map<Integer, Integer> getLogCounts() {
-        Map<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
-        logCounts.put(cgBase.LOG_PUBLISH_LISTING, 1);
-        logCounts.put(cgBase.LOG_FOUND_IT, 369);
-        logCounts.put(cgBase.LOG_POST_REVIEWER_NOTE, 1);
-        logCounts.put(cgBase.LOG_DIDNT_FIND_IT, 7);
-        logCounts.put(cgBase.LOG_NOTE, 10);
-        logCounts.put(cgBase.LOG_ARCHIVE, 1);
-        logCounts.put(cgBase.LOG_ENABLE_LISTING, 2);
-        logCounts.put(cgBase.LOG_TEMP_DISABLE_LISTING, 3);
-        logCounts.put(cgBase.LOG_OWNER_MAINTENANCE, 7);
+    public Map<LogType, Integer> getLogCounts() {
+        Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
+        logCounts.put(LogType.LOG_PUBLISH_LISTING, 1);
+        logCounts.put(LogType.LOG_FOUND_IT, 369);
+        logCounts.put(LogType.LOG_POST_REVIEWER_NOTE, 1);
+        logCounts.put(LogType.LOG_DIDNT_FIND_IT, 7);
+        logCounts.put(LogType.LOG_NOTE, 10);
+        logCounts.put(LogType.LOG_ARCHIVE, 1);
+        logCounts.put(LogType.LOG_ENABLE_LISTING, 2);
+        logCounts.put(LogType.LOG_TEMP_DISABLE_LISTING, 3);
+        logCounts.put(LogType.LOG_OWNER_MAINTENANCE, 7);
         return logCounts;
     }
 
     @Override
-    public Integer getFavoritePoints() {
-        return 47;
+    public int getFavoritePoints() {
+        return 46;
     }
 
     @Override
     public String getPersonalNote() {
-        if ("blafoo".equals(this.getUserLoggedIn())) {
+        if ("blafoo".equals(this.getMockedDataUser())) {
             return "Test für c:geo";
         }
-        return null;
+        return super.getPersonalNote();
     }
 
 }

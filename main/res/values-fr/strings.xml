@@ -84,6 +84,7 @@
   <string name="log_post">Envoyer</string>
   <string name="log_post_rate">Envoyer &amp; noter</string>
   <string name="log_post_no_rate">Envoyer &amp; ne pas noter</string>
+  <string name="log_post_not_possible">Chargement de la page…</string>
   <string name="log_add">Ajouter</string>
   <string name="log_date">Date</string>
   <string name="log_time">Heure</string>
@@ -285,6 +286,7 @@
   <string name="caches_drop_all_ask">Effacer les caches de la liste courante ?</string>
   <string name="caches_drop_stored">Effacer les caches stockées</string>
   <string name="caches_drop_progress">Suppression des caches en cours</string>
+  <string name="caches_drop_all_and_list">Suppression des caches et de la liste</string>
   <string name="caches_refresh_selected">Rafraîchir les caches sélectionnées</string>
   <string name="caches_refresh_all">Tout rafraîchir</string>
   <string name="caches_move_selected">Déplacer les caches sélectionnées</string>
@@ -365,6 +367,8 @@
   <string name="init_details">Détails des caches</string>
   <string name="init_ratingwanted">Charger la note depuis GCvote.com</string>
   <string name="init_elevationwanted">Charger l\'altitude de la cache</string>
+  <string name="init_friendlogswanted">Charger le carnet (amis)</string>
+  <string name="init_openlastdetailspage">Réouvrir les détails à la dernière page ouverte</string>
   <string name="init_autoload">Afficher automatiquement les descriptions longues</string>
   <string name="init_other">Autres options</string>
   <string name="init_skin">Aspect sobre (nécessite le redémarrage de c:geo)</string>
@@ -397,6 +401,7 @@
   <string name="init_restore_success">Restauration terminée.</string>
   <string name="init_restore_failed">Échec de la restauration.</string>
   <string name="init_restore_running">Restauration de la base de données des caches…</string>
+  <string name="init_restore_confirm">La base de données est vide. Voulez-vous restaurer la copie de sauvegarde ?</string>
   <string name="init_backup_last">Sauvegarde disponible depuis</string>
   <string name="init_backup_last_no">Il n\'y a pas de fichier avec une sauvegarde.</string>
   <string name="init_mapsources">Source des cartes</string>
@@ -457,7 +462,6 @@
   <string name="cache_attributes">Attributs</string>
   <string name="cache_attributes_no_icons">(recharger la cache pour voir les icônes des attributs)</string>
   <string name="cache_inventory">Inventaire</string>
-  <string name="cache_inventory_loading">Chargement de l\'inventaire…</string>
   <string name="cache_log_offline">Visite hors-ligne</string>
   <string name="cache_log_images_loading">Chargement de l\'image de la visite…</string>
   <string name="cache_log_images_title">Image de la visite</string>
@@ -474,6 +478,7 @@
   <string name="cache_waypoints_add">Ajouter une étape</string>
   <string name="cache_hint">Indice</string>
   <string name="cache_logs">Carnet de bord</string>
+  <string name="cache_logsfriends">Carnet (amis)</string>
   <string name="cache_dialog_loading_details">Chargement des détails…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Chargement de la page</string>
   <string name="cache_dialog_loading_details_status_details">Analyse</string>
@@ -523,10 +528,12 @@
   <string name="cache_geocode">Code gc</string>
   <string name="cache_name">Nom</string>
   <string name="cache_type">Type</string>
+  <string name="cache_size">Taille</string>
   <string name="cache_distance">Distance</string>
   <string name="cache_difficulty">Difficulté</string>
   <string name="cache_terrain">Terrain</string>
   <string name="cache_rating">Note</string>
+  <string name="cache_own_rating">Note personnelle</string>
   <string name="cache_rating_of">de</string>
   <string name="cache_favourite">Favori</string>
   <string name="cache_owner">Propriétaire</string>
@@ -534,6 +541,7 @@
   <string name="cache_event">Date</string>
   <string name="cache_location">Lieu</string>
   <string name="cache_coordinates">Coordonnées</string>
+  <string name="cache_coordinates_original">Coordonnées d\'origine</string>
   <string name="cache_calendars">Choisir un agenda</string>
   <string name="cache_spoiler_images_title">Images indices</string>
   <string name="cache_spoiler_images_loading">Chargement des images indices…</string>
@@ -543,6 +551,9 @@
   <string name="cache_clear_history">Effacer l\'historique</string>
   <string name="cache_remove_from_history">Effacer de l\'historique</string>
   <string name="cache_license">Licence</string>
+  <string name="cache_image">Image</string>
+  <string name="cache_image_open_file">Ouvrir en tant que fichier</string>
+  <string name="cache_image_open_browser">Ouvrir dans le navigateur</string>
 
   <!-- file list base -->
   <string name="file_searching_in">Recherche de fichiers\nin</string>
@@ -563,6 +574,7 @@
   <string name="gpx_import_error_parser">Format de fichier incorrect</string>
   <string name="gpx_import_error_unexpected">Erreur inattendue</string>
   <string name="gpx_import_confirm">Voulez vous importer le fichier GPX dans c:geo ?</string>
+  <string name="gpx_import_canceled">Importation GPX interrompue</string>
 
   <!-- map file select -->
   <string name="map_file_select_title">Choisir un fichier carte</string>
@@ -860,4 +872,10 @@
   <string name="about_twitter">Voulez-vous publier un nouveau statut sur Twitter à chaque nouvelle cache découverte sous <b>c:geo</b>?</string>
   <string name="about_auth_1">Le processus suivant permet à <b>c:geo</b> d\'accéder à votre compte Twitter - si vous acceptez.</string>
   <string name="about_auth_2">Cliquer sur le bouton \"début d\'autorisation\" pour démarrer. Une fenêtre de navigateur va s\'ouvrir pour vous connecter sur Twitter. Accepter pour que <b>c:geo</b> accéde à votre compte. Twitter vous affichera alors une code PIN composé de chiffres. Merci de coller ce code dans <b>c:geo</b> puis confirmer. C\'est tout!</string>
+
+  <!-- go4cache -->
+  <string name="go4cache_looking_around">En balade</string>
+  <string name="go4cache_tweeting">En train de tweeter</string>
+  <string name="go4cache_heading_to">En direction de</string>
+
 </resources>

@@ -1,7 +1,10 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.test.RegExPerformanceTest;
+import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.CancellableHandler;
 
 import android.test.ApplicationTestCase;
@@ -9,6 +12,8 @@ import android.test.suitebuilder.annotation.MediumTest;
 import android.test.suitebuilder.annotation.SmallTest;
 
 import java.util.Date;
+
+import junit.framework.Assert;
 
 /**
  * The c:geo application test. It can be used for tests that require an
@@ -80,11 +85,16 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
      * Test {@link cgBase#searchByGeocode(String, String, int, boolean, CancellableHandler)}
      */
     @MediumTest
-    public static void testSearchByGeocode() {
-        final cgSearch search = cgBase.searchByGeocode("GC1RMM2", null, 0, true, null);
+    public static cgCache testSearchByGeocode(final String geocode) {
+        final cgSearch search = cgBase.searchByGeocode(geocode, null, 0, true, null);
         assertNotNull(search);
-        assertEquals(1, search.getGeocodes().size());
-        assertTrue(search.getGeocodes().contains("GC1RMM2"));
+        if (Settings.isPremiumMember() || search.error == null) {
+            assertEquals(1, search.getGeocodes().size());
+            assertTrue(search.getGeocodes().contains(geocode));
+            return cgeoapplication.getInstance().getCacheByGeocode(geocode);
+        }
+        assertEquals(0, search.getGeocodes().size());
+        return null;
     }
 
     /**
@@ -93,7 +103,8 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
     @MediumTest
     public static void testSearchByGeocodeNotExisting() {
         final cgSearch search = cgBase.searchByGeocode("GC123456", null, 0, true, null);
-        assertNull(search);
+        assertNotNull(search);
+        assertEquals(search.error, StatusCode.UNPUBLISHED_CACHE);
     }
 
     /**
@@ -112,10 +123,10 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
      */
     @MediumTest
     public static void testSearchByOwner() {
-        final cgSearch search = cgBase.searchByOwner(null, "blafoo", CacheType.EVENT, 0, false);
+        final cgSearch search = cgBase.searchByOwner(null, "blafoo", CacheType.MYSTERY, 0, false);
         assertNotNull(search);
-        assertEquals(1, search.getGeocodes().size());
-        assertTrue(search.getGeocodes().contains("GC36K5E"));
+        assertEquals(3, search.getGeocodes().size());
+        assertTrue(search.getGeocodes().contains("GC36RT6"));
     }
 
     /**
@@ -127,6 +138,27 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
         assertNotNull(search);
         assertEquals(3, search.totalCnt);
         assertTrue(search.getGeocodes().contains("GCP0A9"));
+    }
+
+    /**
+     * Test cache parsing. Esp. useful after a GC.com update
+     */
+    public static void testCacheBasics() {
+        for (MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
+            mockedCache.setMockedDataUser(Settings.getUsername());
+            cgCache parsedCache = cgeoApplicationTest.testSearchByGeocode(mockedCache.getGeocode());
+            if (null != parsedCache) {
+                cgBaseTest.testCompareCaches(mockedCache, parsedCache);
+            }
+        }
+    }
+
+    /**
+     * Caches that are good test cases
+     */
+    public static void testCacheSpecialties() {
+        cgCache GCV2R9 = cgeoApplicationTest.testSearchByGeocode("GCV2R9");
+        Assert.assertEquals("California, United States", GCV2R9.getLocation());
     }
 
 }

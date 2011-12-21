@@ -10,24 +10,18 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 public class cgDirection {
-    private Context context = null;
-    private SensorManager sensorManager = null;
-    private cgeoSensorListener sensorListener = null;
-    private cgUpdateDir dirUpdate = null;
+    private final Context context;
+    private final SensorManager sensorManager;
+    private final SensorListener sensorListener;
+    private UpdateDirectionCallback updateDirectionCallback = null;
 
     public Float directionNow = null;
 
-    public cgDirection(Context contextIn, cgUpdateDir dirUpdateIn) {
+    public cgDirection(Context contextIn, UpdateDirectionCallback callback) {
         context = contextIn;
-        dirUpdate = dirUpdateIn;
-        sensorListener = new cgeoSensorListener();
-        initDir();
-    }
-
-    private void initDir() {
-        if (sensorManager == null) {
-            sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        }
+        updateDirectionCallback = callback;
+        sensorListener = new SensorListener();
+        sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         sensorManager.registerListener(sensorListener, sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION), SensorManager.SENSOR_DELAY_NORMAL);
     }
 
@@ -37,15 +31,18 @@ public class cgDirection {
         }
     }
 
-    public void replaceUpdate(cgUpdateDir dirUpdateIn) {
-        dirUpdate = dirUpdateIn;
+    public void replaceUpdate(UpdateDirectionCallback callback) {
+        updateDirectionCallback = callback;
+        fireDirectionCallback();
+    }
 
-        if (dirUpdate != null && directionNow != null) {
-            dirUpdate.updateDir(this);
+    private void fireDirectionCallback() {
+        if (updateDirectionCallback != null && directionNow != null) {
+            updateDirectionCallback.updateDirection(this);
         }
     }
 
-    private class cgeoSensorListener implements SensorEventListener {
+    private final class SensorListener implements SensorEventListener {
         @Override
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
             /*
@@ -64,10 +61,7 @@ public class cgDirection {
         @Override
         public void onSensorChanged(SensorEvent event) {
             directionNow = Compatibility.getDirectionNow(event.values[0], (Activity) context);
-
-            if (dirUpdate != null && directionNow != null) {
-                dirUpdate.updateDir(cgDirection.this);
-            }
+            fireDirectionCallback();
         }
     }
 }

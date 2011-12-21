@@ -22,6 +22,8 @@ import java.util.Locale;
  */
 public final class Settings {
 
+    private static final String KEY_TEMP_TOKEN_SECRET = "temp-token-secret";
+    private static final String KEY_TEMP_TOKEN_PUBLIC = "temp-token-public";
     private static final String KEY_HELP_SHOWN = "helper";
     private static final String KEY_ANYLONGITUDE = "anylongitude";
     private static final String KEY_ANYLATITUDE = "anylatitude";
@@ -47,6 +49,7 @@ public final class Settings {
     private static final String KEY_LOAD_DESCRIPTION = "autoloaddesc";
     private static final String KEY_RATING_WANTED = "ratingwanted";
     private static final String KEY_ELEVATION_WANTED = "elevationwanted";
+    private static final String KEY_FRIENDLOGS_WANTED = "friendlogswanted";
     private static final String KEY_USE_ENGLISH = "useenglish";
     private static final String KEY_AS_BROWSER = "asbrowser";
     private static final String KEY_USE_COMPASS = "usecompass";
@@ -62,12 +65,15 @@ public final class Settings {
     private static final String KEY_GCVOTE_PASSWORD = "pass-vote";
     private static final String KEY_PASSWORD = "password";
     private static final String KEY_USERNAME = "username";
+    private static final String KEY_MEMBER_STATUS = "memberstatus";
     private static final String KEY_COORD_INPUT_FORMAT = "coordinputformat";
     private static final String KEY_LOG_OFFLINE = "log_offline";
     private static final String KEY_LOAD_DIRECTION_IMG = "loaddirectionimg";
     private static final String KEY_GC_CUSTOM_DATE = "gccustomdate";
     private static final String KEY_SHOW_WAYPOINTS_THRESHOLD = "gcshowwaypointsthreshold";
     private static final String KEY_COOKIE_STORE = "cookiestore";
+    private static final String KEY_OPEN_LAST_DETAILS_PAGE = "opendetailslastpage";
+    private static final String KEY_LAST_DETAILS_PAGE = "lastdetailspage";
 
     private final static int unitsMetric = 1;
     private final static int unitsImperial = 2;
@@ -170,6 +176,35 @@ public final class Settings {
                     // save username and password
                     edit.putString(KEY_USERNAME, username);
                     edit.putString(KEY_PASSWORD, password);
+                }
+            }
+        });
+    }
+
+    public static boolean isPremiumMember() {
+        // Basic Member, Premium Member, ???
+        String memberStatus = Settings.getMemberStatus();
+        if (memberStatus == null) {
+            return false;
+        }
+        return "Premium Member".equalsIgnoreCase(memberStatus);
+    }
+
+    public static String getMemberStatus() {
+        return sharedPrefs.getString(KEY_MEMBER_STATUS, null);
+    }
+
+    public static boolean setMemberStatus(final String memberStatus) {
+        return editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                if (StringUtils.isBlank(memberStatus)) {
+                    // erase password
+                    edit.remove(KEY_MEMBER_STATUS);
+                } else {
+                    // save password
+                    edit.putString(KEY_MEMBER_STATUS, memberStatus);
                 }
             }
         });
@@ -390,6 +425,10 @@ public final class Settings {
         });
     }
 
+    /**
+     * @return User selected date format on GC.com
+     * @see cgBase.gcCustomDateFormats
+     */
     public static String getGcCustomDate() {
         return sharedPrefs.getString(KEY_GC_CUSTOM_DATE, null);
     }
@@ -574,6 +613,20 @@ public final class Settings {
         });
     }
 
+    public static boolean isFriendLogsWanted() {
+        return sharedPrefs.getBoolean(KEY_FRIENDLOGS_WANTED, true);
+    }
+
+    public static void setFriendLogsWanted(final boolean friendLogsWanted) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putBoolean(KEY_FRIENDLOGS_WANTED, friendLogsWanted);
+            }
+        });
+    }
+
     public static boolean isLiveList() {
         return 0 != sharedPrefs.getInt(KEY_LIVE_LIST, 1);
     }
@@ -710,6 +763,15 @@ public final class Settings {
 
     }
 
+    public static Geopoint getAnyCoordinates() {
+        if (sharedPrefs.contains(KEY_ANYLATITUDE) && sharedPrefs.contains(KEY_ANYLONGITUDE)) {
+            float lat = sharedPrefs.getFloat(KEY_ANYLATITUDE, 0);
+            float lon = sharedPrefs.getFloat(KEY_ANYLONGITUDE, 0);
+            return new Geopoint(lat, lon);
+        }
+        return null;
+    }
+
     public static boolean isUseCompass() {
         return 0 != sharedPrefs.getInt(KEY_USE_COMPASS, 1);
     }
@@ -832,5 +894,75 @@ public final class Settings {
 
     public static int getVersion() {
         return sharedPrefs.getInt(KEY_VERSION, 0);
+    }
+
+    public static void setTwitterTokens(final String tokenPublic, final String tokenSecret, boolean enableTwitter) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putString(KEY_TWITTER_TOKEN_PUBLIC, tokenPublic);
+                edit.putString(KEY_TWITTER_TOKEN_SECRET, tokenSecret);
+                if (tokenPublic != null) {
+                    edit.remove(KEY_TEMP_TOKEN_PUBLIC);
+                    edit.remove(KEY_TEMP_TOKEN_SECRET);
+                }
+            }
+        });
+        setUseTwitter(enableTwitter);
+    }
+
+    public static void setTwitterTempTokens(final String tokenPublic, final String tokenSecret) {
+        editSharedSettings(new PrefRunnable() {
+            @Override
+            public void edit(Editor edit) {
+                edit.putString(KEY_TEMP_TOKEN_PUBLIC, tokenPublic);
+                edit.putString(KEY_TEMP_TOKEN_SECRET, tokenSecret);
+            }
+        });
+    }
+
+    public static ImmutablePair<String, String> getTempToken() {
+        String tokenPublic = sharedPrefs.getString(KEY_TEMP_TOKEN_PUBLIC, null);
+        String tokenSecret = sharedPrefs.getString(KEY_TEMP_TOKEN_SECRET, null);
+        return new ImmutablePair<String, String>(tokenPublic, tokenSecret);
+    }
+
+    public static void setVersion(final int version) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putInt(KEY_VERSION, version);
+            }
+        });
+    }
+
+    public static boolean isOpenLastDetailsPage() {
+        return sharedPrefs.getBoolean(KEY_OPEN_LAST_DETAILS_PAGE, false);
+    }
+
+    public static void setOpenLastDetailsPage(final boolean openLastPage) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putBoolean(KEY_OPEN_LAST_DETAILS_PAGE, openLastPage);
+            }
+        });
+    }
+
+    public static int getLastDetailsPage() {
+        return sharedPrefs.getInt(KEY_LAST_DETAILS_PAGE, 1);
+    }
+
+    public static void setLastDetailsPage(final int index) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putInt(KEY_LAST_DETAILS_PAGE, index);
+            }
+        });
     }
 }

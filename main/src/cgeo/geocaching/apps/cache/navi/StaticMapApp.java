@@ -30,7 +30,7 @@ class StaticMapApp extends AbstractNavigationApp {
             cgCache cache,
             final cgSearch search, cgWaypoint waypoint, final Geopoint coords) {
 
-        if (cache == null || cache.getReason() == 0) {
+        if (cache == null || cache.getListId() == 0) {
             ActivityMixin.showToast(activity, res.getString(R.string.err_detail_no_map_static));
             return true;
         }

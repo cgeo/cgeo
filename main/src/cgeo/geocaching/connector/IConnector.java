@@ -75,7 +75,7 @@ public interface IConnector {
      */
     public boolean supportsCachesAround();
 
-    public cgSearch searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int reason, final CancellableHandler handler);
+    public cgSearch searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int listId, final CancellableHandler handler);
 
     /**
      * search caches by coordinate. must be implemented if {@link supportsCachesAround} returns <code>true</true>
@@ -84,4 +84,12 @@ public interface IConnector {
      * @return
      */
     public cgSearch searchByCoordinate(final Geopoint center);
+
+    /**
+     * return true if this is a ZIP file containing a GPX file
+     * 
+     * @param fileName
+     * @return
+     */
+    public boolean isZippedGPXFile(final String fileName);
 }

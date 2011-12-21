@@ -54,6 +54,7 @@ public class GeopointFormatter
      *            one of the predefined formats
      * @return the formatted coordinates
      */
+    @SuppressWarnings("boxing")
     public static String format(final Format format, final Geopoint gp)
     {
         final double latSigned = gp.getLatitude();

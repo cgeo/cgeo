@@ -30,7 +30,7 @@ public class cgeowaypointadd extends AbstractActivity {
     private String geocode = null;
     private int id = -1;
     private cgGeo geo = null;
-    private cgUpdateLoc geoUpdate = new update();
+    private UpdateLocationCallback geoUpdate = new update();
     private ProgressDialog waitDialog = null;
     private cgWaypoint waypoint = null;
     private WaypointType type = WaypointType.OWN;
@@ -188,10 +188,10 @@ public class cgeowaypointadd extends AbstractActivity {
         super.onPause();
     }
 
-    private class update extends cgUpdateLoc {
+    private class update implements UpdateLocationCallback {
 
         @Override
-        public void updateLoc(cgGeo geo) {
+        public void updateLocation(cgGeo geo) {
             if (geo == null || geo.coordsNow == null) {
                 return;
             }
@@ -225,8 +225,9 @@ public class cgeowaypointadd extends AbstractActivity {
 
         public void onClick(View arg0) {
             Geopoint gp = null;
-            if (waypoint != null && waypoint.getCoords() != null)
+            if (waypoint != null && waypoint.getCoords() != null) {
                 gp = waypoint.getCoords();
+            }
             cgeocoords coordsDialog = new cgeocoords(cgeowaypointadd.this, gp, geo);
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
@@ -246,10 +247,6 @@ public class cgeowaypointadd extends AbstractActivity {
     private class coordsListener implements View.OnClickListener {
 
         public void onClick(View arg0) {
-            List<Double> coords = new ArrayList<Double>();
-            Double latitude = null;
-            Double longitude = null;
-
             final String bearingText = ((EditText) findViewById(R.id.bearing)).getText().toString();
             final String distanceText = ((EditText) findViewById(R.id.distance)).getText().toString();
             final String latText = ((Button) findViewById(R.id.buttonLatitude)).getText().toString();
@@ -260,6 +257,9 @@ public class cgeowaypointadd extends AbstractActivity {
                 helpDialog(res.getString(R.string.err_point_no_position_given_title), res.getString(R.string.err_point_no_position_given));
                 return;
             }
+
+            double latitude;
+            double longitude;
 
             if (StringUtils.isNotBlank(latText) && StringUtils.isNotBlank(lonText)) {
                 try {
@@ -279,15 +279,13 @@ public class cgeowaypointadd extends AbstractActivity {
                 longitude = geo.coordsNow.getLongitude();
             }
 
+            Geopoint coords = null;
             if (StringUtils.isNotBlank(bearingText) && StringUtils.isNotBlank(distanceText)) {
                 // bearing & distance
-                Double bearing = null;
+                double bearing = 0;
                 try {
-                    bearing = new Double(bearingText);
-                } catch (Exception e) {
-                    // probably not a number
-                }
-                if (bearing == null) {
+                    bearing = Double.parseDouble(bearingText);
+                } catch (NumberFormatException e) {
                     helpDialog(res.getString(R.string.err_point_bear_and_dist_title), res.getString(R.string.err_point_bear_and_dist));
                     return;
                 }
@@ -300,27 +298,9 @@ public class cgeowaypointadd extends AbstractActivity {
                     return;
                 }
 
-                Double latParsed = null;
-                Double lonParsed = null;
-
-                final Geopoint coordsDst = new Geopoint(latitude, longitude).project(bearing, distance);
-
-                latParsed = coordsDst.getLatitude();
-                lonParsed = coordsDst.getLongitude();
-
-                if (latParsed == null || lonParsed == null) {
-                    showToast(res.getString(R.string.err_point_location_error));
-                    return;
-                }
-
-                coords.add(0, latParsed);
-                coords.add(1, lonParsed);
-            } else if (latitude != null && longitude != null) {
-                coords.add(0, latitude);
-                coords.add(1, longitude);
+                coords = new Geopoint(latitude, longitude).project(bearing, distance);
             } else {
-                showToast(res.getString(R.string.err_point_location_error));
-                return;
+                coords = new Geopoint(latitude, longitude);
             }
 
             String name = ((EditText) findViewById(R.id.name)).getText().toString().trim();
@@ -336,7 +316,7 @@ public class cgeowaypointadd extends AbstractActivity {
             waypoint.setPrefix(prefix);
             waypoint.setLookup(lookup);
             waypoint.setName(name);
-            waypoint.setCoords(new Geopoint(coords.get(0), coords.get(1)));
+            waypoint.setCoords(coords);
             waypoint.setNote(note);
 
             if (app.saveOwnWaypoint(id, geocode, waypoint)) {

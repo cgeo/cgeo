@@ -100,11 +100,11 @@ public final class LocParser extends FileParser {
             }
             final Matcher matcherDifficulty = patternDifficulty.matcher(pointString);
             if (matcherDifficulty.find()) {
-                pointCoord.setDifficulty(new Float(matcherDifficulty.group(1).trim()));
+                pointCoord.setDifficulty(Float.parseFloat(matcherDifficulty.group(1).trim()));
             }
             final Matcher matcherTerrain = patternTerrain.matcher(pointString);
             if (matcherTerrain.find()) {
-                pointCoord.setTerrain(new Float(matcherTerrain.group(1).trim()));
+                pointCoord.setTerrain(Float.parseFloat(matcherTerrain.group(1).trim()));
             }
             final Matcher matcherContainer = patternContainer.matcher(pointString);
             if (matcherContainer.find()) {
@@ -161,7 +161,7 @@ public final class LocParser extends FileParser {
 
             fixCache(cache);
             cache.setType(CacheType.UNKNOWN); // type is not given in the LOC file
-            cache.setReason(listId);
+            cache.setListId(listId);
             cache.setDetailed(true);
         }
         Log.i(Settings.tag, "Caches found in .loc file: " + caches.size());

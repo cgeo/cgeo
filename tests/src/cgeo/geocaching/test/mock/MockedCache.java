@@ -12,20 +12,32 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class MockedCache implements ICache {
 
     final protected Geopoint coords;
     String data;
+    String mockedDataUser;
 
     protected MockedCache(final Geopoint coords) {
         this.coords = coords;
+        this.data = MockedCache.readCachePage(getGeocode());
+        // for mocked caches the user logged in is the user who saved the html file(s)
+        this.mockedDataUser = BaseUtils.getMatch(data, GCConstants.PATTERN_USERLOGGEDIN, true, "");
     }
 
-    protected String getUserLoggedIn() {
-        return BaseUtils.getMatch(data, GCConstants.PATTERN_USERLOGGEDIN, true, "");
+    public String getMockedDataUser() {
+        return mockedDataUser;
+    }
+
+    public void setMockedDataUser(String mockedDataUser) {
+        this.mockedDataUser = mockedDataUser;
+    }
+
+    @SuppressWarnings("static-method")
+    public String getDateFormat() {
+        return "dd/MM/yyyy";
     }
 
     /*
@@ -34,8 +46,7 @@ public abstract class MockedCache implements ICache {
      * into a browser and saving the file
      */
     public String getData() {
-        data = MockedCache.readCachePage(getGeocode());
-        return data;
+        return this.data;
     }
 
     public static String readCachePage(final String geocode) {
@@ -100,7 +111,7 @@ public abstract class MockedCache implements ICache {
 
     @Override
     public String getPersonalNote() {
-        return "";
+        return null;
     }
 
     @Override
@@ -114,7 +125,7 @@ public abstract class MockedCache implements ICache {
     }
 
     @Override
-    public Integer getFavoritePoints() {
+    public int getFavoritePoints() {
         return 0;
     }
 
@@ -125,7 +136,7 @@ public abstract class MockedCache implements ICache {
 
     @Override
     public List<cgTrackable> getInventory() {
-        return new ArrayList<cgTrackable>();
+        return null;
     }
 
     @Override

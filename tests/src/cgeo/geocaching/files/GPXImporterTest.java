@@ -1,5 +1,6 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgeoapplication;
@@ -9,6 +10,7 @@ import cgeo.geocaching.utils.CancellableHandler;
 
 import android.net.Uri;
 import android.os.Message;
+import android.util.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -66,8 +68,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         try {
             importThread.join();
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            Log.e(Settings.tag, "GPXImporterTest.runImportThread", e);
         }
         importStepHandler.waitForCompletion();
     }

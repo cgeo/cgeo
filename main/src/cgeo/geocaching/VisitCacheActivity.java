@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.LogTemplateProvider.LogTemplate;
+import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
@@ -44,7 +45,7 @@ public class VisitCacheActivity extends cgLogForm {
 
     private LayoutInflater inflater = null;
     private cgCache cache = null;
-    private List<Integer> types = new ArrayList<Integer>();
+    private List<LogType> possibleLogTypes = new ArrayList<LogType>();
     private ProgressDialog waitDialog = null;
     private String cacheid = null;
     private String geocode = null;
@@ -54,7 +55,7 @@ public class VisitCacheActivity extends cgLogForm {
     private boolean gettingViewstate = true;
     private List<cgTrackableLog> trackables = null;
     private Calendar date = Calendar.getInstance();
-    private int typeSelected = 1;
+    private LogType typeSelected = LogType.LOG_UNKNOWN;
     private int attempts = 0;
     private Button postButton = null;
     private Button saveButton = null;
@@ -69,8 +70,8 @@ public class VisitCacheActivity extends cgLogForm {
 
         @Override
         public void handleMessage(Message msg) {
-            if (!types.contains(typeSelected)) {
-                typeSelected = types.get(0);
+            if (!possibleLogTypes.contains(typeSelected)) {
+                typeSelected = possibleLogTypes.get(0);
                 setType(typeSelected);
 
                 showToast(res.getString(R.string.info_log_type_changed));
@@ -180,7 +181,7 @@ public class VisitCacheActivity extends cgLogForm {
 
     private void updatePostButtonText() {
         if (postButton.isEnabled()) {
-            if (typeSelected == cgBase.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
+            if (typeSelected == LogType.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
                 if (rating == 0) {
                     postButton.setText(res.getString(R.string.log_post_no_rate));
                 } else {
@@ -313,7 +314,7 @@ public class VisitCacheActivity extends cgLogForm {
         final boolean signatureAvailable = Settings.getSignature() != null;
         menu.findItem(MENU_SIGNATURE).setVisible(signatureAvailable);
 
-        final boolean voteAvailable = Settings.isGCvoteLogin() && typeSelected == cgBase.LOG_FOUND_IT && StringUtils.isNotBlank(cache.getGuid());
+        final boolean voteAvailable = Settings.isGCvoteLogin() && typeSelected == LogType.LOG_FOUND_IT && StringUtils.isNotBlank(cache.getGuid());
         menu.findItem(SUBMENU_VOTE).setVisible(voteAvailable);
 
         return true;
@@ -358,9 +359,9 @@ public class VisitCacheActivity extends cgLogForm {
         final int viewId = view.getId();
 
         if (viewId == R.id.type) {
-            for (final int typeOne : types) {
-                menu.add(viewId, typeOne, 0, cgBase.logTypes2.get(typeOne));
-                Log.w(Settings.tag, "Adding " + typeOne + " " + cgBase.logTypes2.get(typeOne));
+            for (final LogType typeOne : possibleLogTypes) {
+                menu.add(viewId, typeOne.id, 0, typeOne.getL10n());
+                Log.w(Settings.tag, "Adding " + typeOne + " " + typeOne.getL10n());
             }
         } else if (viewId == R.id.changebutton) {
             final int textId = ((TextView) findViewById(viewId)).getId();
@@ -389,7 +390,7 @@ public class VisitCacheActivity extends cgLogForm {
         final int id = item.getItemId();
 
         if (group == R.id.type) {
-            setType(id);
+            setType(LogType.getById(id));
 
             return true;
         } else if (group == R.id.changebutton) {
@@ -463,7 +464,7 @@ public class VisitCacheActivity extends cgLogForm {
         clearButton = (Button) findViewById(R.id.clear);
         saveButton = (Button) findViewById(R.id.save);
 
-        types = cache.getPossibleLogTypes();
+        possibleLogTypes = cache.getPossibleLogTypes();
 
         final cgLog log = app.loadLogOffline(geocode);
         if (log != null) {
@@ -477,18 +478,18 @@ public class VisitCacheActivity extends cgLogForm {
             insertIntoLog(LogTemplateProvider.applyTemplates(Settings.getSignature(), false), false);
         }
 
-        if (!types.contains(typeSelected)) {
+        if (!possibleLogTypes.contains(typeSelected)) {
             if (alreadyFound) {
-                typeSelected = cgBase.LOG_NOTE;
+                typeSelected = LogType.LOG_NOTE;
             } else {
-                typeSelected = types.get(0);
+                typeSelected = possibleLogTypes.get(0);
             }
             setType(typeSelected);
         }
 
         final Button typeButton = (Button) findViewById(R.id.type);
         registerForContextMenu(typeButton);
-        typeButton.setText(cgBase.logTypes2.get(typeSelected));
+        typeButton.setText(typeSelected.getL10n());
         typeButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
@@ -533,24 +534,19 @@ public class VisitCacheActivity extends cgLogForm {
         dateButton.setText(cgBase.formatShortDate(date.getTime().getTime()));
     }
 
-    public void setType(int type) {
+    public void setType(LogType type) {
         final Button typeButton = (Button) findViewById(R.id.type);
 
-        if (cgBase.logTypes2.get(type) != null) {
-            typeSelected = type;
-        }
-        if (cgBase.logTypes2.get(typeSelected) == null) {
-            typeSelected = 1;
-        }
-        typeButton.setText(cgBase.logTypes2.get(typeSelected));
+        typeSelected = type;
+        typeButton.setText(typeSelected.getL10n());
 
-        if (type == 2 && !tbChanged) {
+        if (LogType.LOG_FOUND_IT == type && !tbChanged) {
             // TODO: change action
-        } else if (type != 2 && !tbChanged) {
+        } else if (LogType.LOG_FOUND_IT != type && !tbChanged) {
             // TODO: change action
         }
 
-        if (type == cgBase.LOG_FOUND_IT && Settings.isUseTwitter()) {
+        if (type == LogType.LOG_FOUND_IT && Settings.isUseTwitter()) {
             tweetBox.setVisibility(View.VISIBLE);
         } else {
             tweetBox.setVisibility(View.GONE);
@@ -589,9 +585,9 @@ public class VisitCacheActivity extends cgLogForm {
             app.clearLogOffline(geocode);
 
             if (alreadyFound) {
-                typeSelected = cgBase.LOG_NOTE;
+                typeSelected = LogType.LOG_NOTE;
             } else {
-                typeSelected = types.get(0);
+                typeSelected = possibleLogTypes.get(0);
             }
             date.setTime(new Date());
             text = null;
@@ -651,11 +647,11 @@ public class VisitCacheActivity extends cgLogForm {
                 viewstates = cgBase.getViewstates(page);
                 trackables = cgBase.parseTrackableLog(page);
 
-                final List<Integer> typesPre = cgBase.parseTypes(page);
+                final List<LogType> typesPre = cgBase.parseTypes(page);
                 if (CollectionUtils.isNotEmpty(typesPre)) {
-                    types.clear();
-                    types.addAll(typesPre);
-                    types.remove(Integer.valueOf(cgBase.LOG_UPDATE_COORDINATES));
+                    possibleLogTypes.clear();
+                    possibleLogTypes.addAll(typesPre);
+                    possibleLogTypes.remove(LogType.LOG_UPDATE_COORDINATES);
                 }
             } catch (Exception e) {
                 Log.e(Settings.tag, "cgeovisit.loadData.run: " + e.toString());
@@ -701,7 +697,7 @@ public class VisitCacheActivity extends cgLogForm {
                 }
                 app.addLog(geocode, logNow);
 
-                if (typeSelected == cgBase.LOG_FOUND_IT) {
+                if (typeSelected == LogType.LOG_FOUND_IT) {
                     app.markFound(geocode);
                     if (cache != null) {
                         cache.setFound(true);
@@ -719,13 +715,13 @@ public class VisitCacheActivity extends cgLogForm {
                 app.clearLogOffline(geocode);
             }
 
-            if (status == StatusCode.NO_ERROR && typeSelected == cgBase.LOG_FOUND_IT && Settings.isUseTwitter()
+            if (status == StatusCode.NO_ERROR && typeSelected == LogType.LOG_FOUND_IT && Settings.isUseTwitter()
                     && Settings.isTwitterLoginValid()
                     && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
                 cgBase.postTweetCache(app, geocode);
             }
 
-            if (status == StatusCode.NO_ERROR && typeSelected == cgBase.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
+            if (status == StatusCode.NO_ERROR && typeSelected == LogType.LOG_FOUND_IT && Settings.isGCvoteLogin()) {
                 GCVote.setRating(cache, rating);
             }
 
