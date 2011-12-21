@@ -57,7 +57,7 @@
   <!-- logs -->
   <string name="log_found">Trovata</string>
   <string name="log_dnf">Non trovata (DNF)</string>
-  <string name="log_note">Note</string>
+  <string name="log_note">Scrivi Nota</string>
   <string name="log_published">Pubblicata</string>
   <string name="log_enabled">Attiva</string>
   <string name="log_disabled">Non attiva</string>
@@ -73,10 +73,10 @@
   <string name="log_needs_archived">Necessita archiviazione</string>
   <string name="log_discovered">Scoperta</string>
   <string name="log_reviewed">Nota del revisore</string>
-  <string name="log_taken">Visitato</string>
+  <string name="log_taken">Visita</string>
   <string name="log_tb_nothing">Non fare nulla</string>
-  <string name="log_tb_visit">Visita</string>
-  <string name="log_tb_drop">Lascia qui</string>
+  <string name="log_tb_visit">Visitato</string>
+  <string name="log_tb_drop">Lasciato</string>
   <string name="log_tb_changeall">Cambia tutto</string>
   <string name="log_save">Salva</string>
   <string name="log_saving">Salvataggio log…</string>
@@ -367,7 +367,7 @@
   <string name="init_details">Dettagli cache</string>
   <string name="init_ratingwanted">Carica il rating della cache da GCvote.com</string>
   <string name="init_elevationwanted">Carica dati altitudine cache</string>
-  <string name="init_friendlogswanted">Carica logbook (amici)</string>
+  <string name="init_friendlogswanted">Carica logbook addizionale con i log dei miei amici</string>
   <string name="init_openlastdetailspage">Ricorda l\'ultima pagina usata nei dettagli</string>
   <string name="init_autoload">Auto-carica descrizione estesa</string>
   <string name="init_other">Altre opzioni</string>
@@ -393,7 +393,7 @@
   <string name="init_backup">Backup</string>
   <string name="init_backup_backup">Backup</string>
   <string name="init_backup_running">Creazione del backup del database delle cache in corso…</string>
-  <string name="init_backup_note">Si prega di notare che questa opzione farà backup/ripristino del database contenente le cache ed i waypoint, ma non i settaggi. Quindi le tue informazioni di login non lasceranno mai questo dispositivo.</string>
+  <string name="init_backup_note">Si prega di notare che questa opzione farà backup o ripristino del database contenente le cache ed i waypoint, ma non i settaggi. Quindi le tue informazioni di login non lasceranno mai questo dispositivo.</string>
   <string name="init_backup_restore">Ripristino</string>
   <string name="init_backup_success">Il database di c:geo è stato salvato con successo nel file</string>
   <string name="init_backup_failed">Backup del database di c:geo fallito.</string>
@@ -408,6 +408,7 @@
   <string name="init_mapsources_description">Qui puoi scegliere dove c:geo preleverà le mappe. Come alternativa a Google maps esistono vari stili di OpenStreetMap disponibili anche per uso offline (vedi <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> per dettagli).</string>
   <string name="init_mapsource_select">Seleziona il tipo di mappa</string>
   <string name="init_select_mapfile">…</string>
+  <string name="init_maptrail">Mostra la scia nella Mappa</string>
   <string name="init_trackautovisit">Setta i miei oggetti trackables automaticamente su \"visit\" quando invio log</string>
   <string name="init_sigautoinsert">Inserisce la firma automaticamente</string>
   <string name="init_loaddirectionimg">Carica le immagini di direzione se necessario</string>
@@ -445,7 +446,7 @@
   <string name="cache_offline_drop">Elimina</string>
   <string name="cache_offline_store">Salva</string>
   <string name="cache_offline_stored">Salvata nel dispositivo</string>
-  <string name="cache_offline_not_ready">Non pronta\nper uso offline</string>
+  <string name="cache_offline_not_ready">Non disponibile offline</string>
   <string name="cache_offline_time_about">circa</string>
   <string name="cache_offline_time_mins">minuti fa</string>
   <string name="cache_offline_time_mins_few">qualche minuto fa</string>
@@ -469,6 +470,10 @@
   <string name="cache_watchlist_add">Aggiungi alla watchlist</string>
   <string name="cache_watchlist_remove">Rimuovi dalla watchlist</string>
   <string name="cache_waypoints">Waypoints</string>
+  <plurals name="waypoints">
+      <item quantity="one">1 Waypoint</item>
+      <item quantity="other">%d Waypoint</item>
+  </plurals>  
   <string name="cache_waypoints_add">Aggiungi waypoint</string>
   <string name="cache_hint">Aiuto</string>
   <string name="cache_logs">Logbook</string>
@@ -871,4 +876,8 @@
   <string name="go4cache_looking_around">Guardando attorno</string>
   <string name="go4cache_tweeting">Tweeting</string>
   <string name="go4cache_heading_to">Puntando a</string>
+  <plurals name="go4cache_time_minutes">
+    <item quantity="one">un minuto fa</item>
+	  <item quantity="other">%d minuti fa</item>
+  </plurals>  
 </resources>
