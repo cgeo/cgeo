@@ -4,7 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.cgSearch;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.apps.AbstractAppFactory;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -64,7 +64,7 @@ public final class CacheListAppFactory extends AbstractAppFactory {
 
     public static boolean onMenuItemSelected(final MenuItem item,
             final cgGeo geo, final List<cgCache> caches, final Activity activity, final Resources res,
-            final cgSearch search) {
+            final SearchResult search) {
         CacheListApp app = (CacheListApp) getAppFromMenuItem(item, apps);
         if (app != null) {
             try {

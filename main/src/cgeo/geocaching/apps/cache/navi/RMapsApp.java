@@ -3,7 +3,7 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.cgSearch;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
@@ -25,7 +25,7 @@ class RMapsApp extends AbstractNavigationApp {
     @Override
     public boolean invoke(cgGeo geo, Activity activity, Resources res,
             cgCache cache,
-            final cgSearch search, cgWaypoint waypoint, final Geopoint coords) {
+            final SearchResult search, cgWaypoint waypoint, final Geopoint coords) {
         if (cache == null && waypoint == null && coords == null) {
             return false;
         }

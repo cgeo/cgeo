@@ -79,8 +79,8 @@ public class cgBaseTest extends AndroidTestCase {
         for (MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
             // to get the same results we have to use the date format used when the mocked data was created
             Settings.setGcCustomDate(mockedCache.getDateFormat());
-            cgCacheWrap caches = cgBase.parseCacheFromText(mockedCache.getData(), 0, null);
-            cgCache parsedCache = caches.cacheList.get(0);
+            ParseResult parseResult = cgBase.parseCacheFromText(mockedCache.getData(), 0, null);
+            cgCache parsedCache = parseResult.cacheList.get(0);
             cgBaseTest.testCompareCaches(mockedCache, parsedCache);
         }
         Settings.setGcCustomDate(gcCustomDate);

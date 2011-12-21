@@ -3,7 +3,7 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.cgSearch;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -21,7 +21,7 @@ class InternalMap extends AbstractInternalMap {
     @Override
     public boolean invoke(cgGeo geo, Activity activity, Resources res,
             cgCache cache,
-            final cgSearch search, cgWaypoint waypoint, final Geopoint coords) {
+            final SearchResult search, cgWaypoint waypoint, final Geopoint coords) {
         if (search != null) {
             CGeoMap.startActivitySearch(activity, search, cache != null ? cache.getGeocode() : null, true);
         }

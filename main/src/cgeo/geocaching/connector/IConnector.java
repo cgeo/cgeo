@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector;
 
+import cgeo.geocaching.ParseResult;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -75,7 +75,7 @@ public interface IConnector {
      */
     public boolean supportsCachesAround();
 
-    public cgSearch searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final cgSearch search, final int listId, final CancellableHandler handler);
+    public ParseResult searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final int listId, final CancellableHandler handler);
 
     /**
      * search caches by coordinate. must be implemented if {@link supportsCachesAround} returns <code>true</true>
@@ -83,11 +83,11 @@ public interface IConnector {
      * @param center
      * @return
      */
-    public cgSearch searchByCoordinate(final Geopoint center);
+    public ParseResult searchByCoordinate(final Geopoint center);
 
     /**
      * return true if this is a ZIP file containing a GPX file
-     * 
+     *
      * @param fileName
      * @return
      */

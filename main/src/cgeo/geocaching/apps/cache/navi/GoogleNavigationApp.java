@@ -4,7 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.cgSearch;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -30,7 +30,7 @@ class GoogleNavigationApp extends AbstractNavigationApp {
     @Override
     public boolean invoke(final cgGeo geo, final Activity activity, final Resources res,
             final cgCache cache,
-            final cgSearch search, final cgWaypoint waypoint, final Geopoint coords) {
+            final SearchResult search, final cgWaypoint waypoint, final Geopoint coords) {
         if (activity == null) {
             return false;
         }
