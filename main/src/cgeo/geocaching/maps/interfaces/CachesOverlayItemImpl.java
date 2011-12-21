@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps.interfaces;
 
 import cgeo.geocaching.cgCoord;
+import cgeo.geocaching.enumerations.CacheType;
 
 /**
  * Covers the common functions of the provider-specific
@@ -13,6 +14,6 @@ public interface CachesOverlayItemImpl extends OverlayItemImpl {
 
     public cgCoord getCoord();
 
-    public String getType();
+    public CacheType getType();
 
 }

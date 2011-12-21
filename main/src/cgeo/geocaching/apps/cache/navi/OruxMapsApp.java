@@ -3,6 +3,7 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
+import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.geopoint.Geopoint;
 
@@ -10,9 +11,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 
-import java.util.UUID;
-
-class OruxMapsApp extends AbstractNavigationApp implements NavigationApp {
+class OruxMapsApp extends AbstractNavigationApp {
 
     private static final String INTENT = "com.oruxmaps.VIEW_MAP_ONLINE";
 
@@ -23,7 +22,7 @@ class OruxMapsApp extends AbstractNavigationApp implements NavigationApp {
     @Override
     public boolean invoke(cgGeo geo, Activity activity, Resources res,
             cgCache cache,
-            final UUID searchId, cgWaypoint waypoint, final Geopoint coords) {
+            final cgSearch search, cgWaypoint waypoint, final Geopoint coords) {
         if (cache == null && waypoint == null && coords == null) {
             return false;
         }
@@ -49,10 +48,10 @@ class OruxMapsApp extends AbstractNavigationApp implements NavigationApp {
 
     private static Geopoint getCoords(cgCache cache, cgWaypoint waypoint, Geopoint coords) {
         if (cache != null) {
-            return cache.coords;
+            return cache.getCoords();
         }
         else if (waypoint != null) {
-            return waypoint.coords;
+            return waypoint.getCoords();
         }
         return coords;
     }

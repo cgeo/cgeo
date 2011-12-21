@@ -1,13 +1,12 @@
 package cgeo.geocaching.maps;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.cgUser;
-import cgeo.geocaching.cgeodetail;
+import cgeo.geocaching.CacheDetailActivity;
+import cgeo.geocaching.Settings;
+import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.go4cache.Go4CacheUser;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
-import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
 
 import org.apache.commons.lang3.StringUtils;
@@ -22,14 +21,11 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class OtherCachersOverlay extends AbstractItemizedOverlay implements GeneralOverlay {
+public class OtherCachersOverlay extends AbstractItemizedOverlay {
 
     private List<OtherCachersOverlayItemImpl> items = new ArrayList<OtherCachersOverlayItemImpl>();
     private Context context = null;
-    private final Pattern patternGeocode = Pattern.compile("^(GC[A-Z0-9]+)(\\: ?(.+))?$", Pattern.CASE_INSENSITIVE);
 
     public OtherCachersOverlay(ItemizedOverlayImpl ovlImplIn, Context contextIn) {
         super(ovlImplIn);
@@ -39,7 +35,7 @@ public class OtherCachersOverlay extends AbstractItemizedOverlay implements Gene
     }
 
     protected void updateItems(OtherCachersOverlayItemImpl item) {
-        List<OtherCachersOverlayItemImpl> itemsPre = new ArrayList<OtherCachersOverlayItemImpl>();
+        final List<OtherCachersOverlayItemImpl> itemsPre = new ArrayList<OtherCachersOverlayItemImpl>();
         itemsPre.add(item);
 
         updateItems(itemsPre);
@@ -72,63 +68,33 @@ public class OtherCachersOverlay extends AbstractItemizedOverlay implements Gene
             }
 
             final OtherCachersOverlayItemImpl item = items.get(index);
-            final cgUser user = item.getUser();
+            final Go4CacheUser user = item.getUser();
 
-            // set action
-            String action = null;
-            String geocode = null;
-            final Matcher matcherGeocode = patternGeocode.matcher(user.action.trim());
-
-            if (user.action.length() == 0 || user.action.equalsIgnoreCase("pending")) {
-                action = "Looking around";
-            } else if (user.action.equalsIgnoreCase("tweeting")) {
-                action = "Tweeting";
-            } else if (matcherGeocode.find()) {
-                if (matcherGeocode.group(1) != null) {
-                    geocode = matcherGeocode.group(1).trim().toUpperCase();
-                }
-                if (matcherGeocode.group(3) != null) {
-                    action = "Heading to " + geocode + " (" + matcherGeocode.group(3).trim() + ")";
-                } else {
-                    action = "Heading to " + geocode;
-                }
-            } else {
-                action = user.action;
-            }
-
-            // set icon
-            int icon = -1;
-            if (user.client.equalsIgnoreCase("c:geo")) {
-                icon = R.drawable.client_cgeo;
-            } else if (user.client.equalsIgnoreCase("preCaching")) {
-                icon = R.drawable.client_precaching;
-            } else if (user.client.equalsIgnoreCase("Handy Geocaching")) {
-                icon = R.drawable.client_handygeocaching;
-            }
+            final String geocode = user.getGeocode();
+            final int icon = user.getIconId();
 
             final AlertDialog.Builder dialog = new AlertDialog.Builder(context);
             if (icon > -1) {
                 dialog.setIcon(icon);
             }
-            dialog.setTitle(user.username);
-            dialog.setMessage(action);
+            dialog.setTitle(user.getUsername());
+            dialog.setMessage(user.getAction());
             dialog.setCancelable(true);
             if (StringUtils.isNotBlank(geocode)) {
-                dialog.setPositiveButton(geocode + "?", new cacheDetails(geocode));
+                dialog.setPositiveButton(geocode, new cacheDetails(geocode));
             }
-            dialog.setNeutralButton("Dismiss", new DialogInterface.OnClickListener() {
+            dialog.setNeutralButton(cgeoapplication.getInstance().getResources().getString(android.R.string.ok), new DialogInterface.OnClickListener() {
 
                 public void onClick(DialogInterface dialog, int id) {
                     dialog.cancel();
                 }
             });
 
-            AlertDialog alert = dialog.create();
-            alert.show();
+            dialog.create().show();
 
             return true;
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgUsersOverlay.onTap: " + e.toString());
+            Log.e(Settings.tag, "cgUsersOverlay.onTap: " + e.toString());
         }
 
         return false;
@@ -150,7 +116,7 @@ public class OtherCachersOverlay extends AbstractItemizedOverlay implements Gene
         try {
             return items.get(index);
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgUsersOverlay.createItem: " + e.toString());
+            Log.e(Settings.tag, "cgUsersOverlay.createItem: " + e.toString());
         }
 
         return null;
@@ -161,7 +127,7 @@ public class OtherCachersOverlay extends AbstractItemizedOverlay implements Gene
         try {
             return items.size();
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgUsersOverlay.size: " + e.toString());
+            Log.e(Settings.tag, "cgUsersOverlay.size: " + e.toString());
         }
 
         return 0;
@@ -177,7 +143,7 @@ public class OtherCachersOverlay extends AbstractItemizedOverlay implements Gene
 
         public void onClick(DialogInterface dialog, int id) {
             if (geocode != null) {
-                Intent detailIntent = new Intent(context, cgeodetail.class);
+                final Intent detailIntent = new Intent(context, CacheDetailActivity.class);
                 detailIntent.putExtra("geocode", geocode);
                 context.startActivity(detailIntent);
             }

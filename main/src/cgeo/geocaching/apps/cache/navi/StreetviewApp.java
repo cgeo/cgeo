@@ -3,6 +3,7 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
+import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -14,9 +15,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
 
-import java.util.UUID;
-
-class StreetviewApp extends AbstractNavigationApp implements NavigationApp {
+class StreetviewApp extends AbstractNavigationApp {
 
     StreetviewApp(final Resources res) {
         super(res.getString(R.string.cache_menu_streetview), null);
@@ -29,16 +28,16 @@ class StreetviewApp extends AbstractNavigationApp implements NavigationApp {
 
     public boolean invoke(cgGeo geo, Activity activity, Resources res,
             cgCache cache,
-            final UUID searchId, cgWaypoint waypoint, final Geopoint coords) {
+            final cgSearch search, cgWaypoint waypoint, final Geopoint coords) {
         if (cache == null && waypoint == null && coords == null) {
             return false;
         }
 
         try {
-            if (cache != null && cache.coords != null) {
-                startActivity(activity, cache.coords);
-            } else if (waypoint != null && waypoint.coords != null) {
-                startActivity(activity, waypoint.coords);
+            if (cache != null && cache.getCoords() != null) {
+                startActivity(activity, cache.getCoords());
+            } else if (waypoint != null && waypoint.getCoords() != null) {
+                startActivity(activity, waypoint.getCoords());
             } else if (coords != null) {
                 startActivity(activity, coords);
             }

@@ -6,12 +6,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class cgFilter {
-    String name;
+    private String name;
 
     public cgFilter(String name) {
         this.name = name;
     }
 
+    /**
+     * @param cache
+     * @return true if the cache applies (passes the criteria), false else
+     */
     abstract boolean applyFilter(cgCache cache);
 
     public void filter(List<cgCache> list) {

@@ -1,9 +1,10 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.cgSettings.coordInputFormatEnum;
+import cgeo.geocaching.Settings.coordInputFormatEnum;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.Geopoint.MalformedCoordinateException;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser.ParseException;
 
@@ -26,10 +27,9 @@ import android.widget.TextView;
 
 public class cgeocoords extends Dialog {
 
-    private AbstractActivity context = null;
-    private cgSettings settings = null;
-    private cgGeo geo = null;
-    private Geopoint gp = null;
+    final private AbstractActivity context;
+    final private cgGeo geo;
+    private Geopoint gp;
 
     private EditText eLat, eLon;
     private Button bLat, bLon;
@@ -40,20 +40,21 @@ public class cgeocoords extends Dialog {
 
     private Spinner spinner;
 
-    CoordinateUpdate cuListener;
+    private CoordinateUpdate cuListener;
 
-    coordInputFormatEnum currentFormat = null;
+    private coordInputFormatEnum currentFormat = null;
 
-    public cgeocoords(final AbstractActivity contextIn, cgSettings settingsIn, final Geopoint gpIn, final cgGeo geoIn) {
-        super(contextIn);
-        context = contextIn;
-        settings = settingsIn;
-        geo = geoIn;
+    public cgeocoords(final AbstractActivity context, final Geopoint gp, final cgGeo geo) {
+        super(context);
+        this.context = context;
+        this.geo = geo;
 
-        if (gpIn != null) {
-            gp = gpIn;
+        if (gp != null) {
+            this.gp = gp;
         } else if (geo != null && geo.coordsNow != null) {
-            gp = geo.coordsNow;
+            this.gp = geo.coordsNow;
+        } else {
+            this.gp = new Geopoint(0.0, 0.0);
         }
     }
 
@@ -70,14 +71,21 @@ public class cgeocoords extends Dialog {
 
         setContentView(R.layout.coords);
 
+        findViewById(R.id.actionBarManualbutton).setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                ActivityMixin.goManual(context, "c:geo-geocoordinate-input");
+            }
+        });
+
         spinner = (Spinner) findViewById(R.id.spinnerCoordinateFormats);
-        ArrayAdapter<CharSequence> adapter =
+        final ArrayAdapter<CharSequence> adapter =
                 ArrayAdapter.createFromResource(context,
                         R.array.waypoint_coordinate_formats,
                         android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        spinner.setSelection(settings.getCoordInputFormat().ordinal());
+        spinner.setSelection(Settings.getCoordInputFormat().ordinal());
         spinner.setOnItemSelectedListener(new CoordinateFormatListener());
 
         bLat = (Button) findViewById(R.id.ButtonLat);
@@ -109,18 +117,28 @@ public class cgeocoords extends Dialog {
         eLonSec.addTextChangedListener(new TextChanged(eLonSec));
         eLonSub.addTextChangedListener(new TextChanged(eLonSub));
 
+        Compatibility.disableSuggestions(eLatDeg);
+        Compatibility.disableSuggestions(eLatMin);
+        Compatibility.disableSuggestions(eLatSec);
+        Compatibility.disableSuggestions(eLatSub);
+        Compatibility.disableSuggestions(eLonDeg);
+        Compatibility.disableSuggestions(eLonMin);
+        Compatibility.disableSuggestions(eLonSec);
+        Compatibility.disableSuggestions(eLonSub);
+
         bLat.setOnClickListener(new ButtonClickListener());
         bLon.setOnClickListener(new ButtonClickListener());
 
-        Button buttonCurrent = (Button) findViewById(R.id.current);
+        final Button buttonCurrent = (Button) findViewById(R.id.current);
         buttonCurrent.setOnClickListener(new CurrentListener());
-        Button buttonDone = (Button) findViewById(R.id.done);
+        final Button buttonDone = (Button) findViewById(R.id.done);
         buttonDone.setOnClickListener(new InputDoneListener());
     }
 
     private void updateGUI() {
-        if (gp == null)
+        if (gp == null) {
             return;
+        }
         Double lat = 0.0;
         if (gp.getLatitude() < 0) {
             bLat.setText("S");
@@ -139,23 +157,23 @@ public class cgeocoords extends Dialog {
 
         lon = Math.abs(gp.getLongitude());
 
-        int latDeg = (int) Math.floor(lat);
-        int latDegFrac = (int) Math.round((lat - latDeg) * 100000);
+        final int latDeg = (int) Math.floor(lat);
+        final int latDegFrac = (int) Math.round((lat - latDeg) * 100000);
 
-        int latMin = (int) Math.floor((lat - latDeg) * 60);
-        int latMinFrac = (int) Math.round(((lat - latDeg) * 60 - latMin) * 1000);
+        final int latMin = (int) Math.floor((lat - latDeg) * 60);
+        final int latMinFrac = (int) Math.round(((lat - latDeg) * 60 - latMin) * 1000);
 
-        int latSec = (int) Math.floor(((lat - latDeg) * 60 - latMin) * 60);
-        int latSecFrac = (int) Math.round((((lat - latDeg) * 60 - latMin) * 60 - latSec) * 1000);
+        final int latSec = (int) Math.floor(((lat - latDeg) * 60 - latMin) * 60);
+        final int latSecFrac = (int) Math.round((((lat - latDeg) * 60 - latMin) * 60 - latSec) * 1000);
 
-        int lonDeg = (int) Math.floor(lon);
-        int lonDegFrac = (int) Math.round((lon - lonDeg) * 100000);
+        final int lonDeg = (int) Math.floor(lon);
+        final int lonDegFrac = (int) Math.round((lon - lonDeg) * 100000);
 
-        int lonMin = (int) Math.floor((lon - lonDeg) * 60);
-        int lonMinFrac = (int) Math.round(((lon - lonDeg) * 60 - lonMin) * 1000);
+        final int lonMin = (int) Math.floor((lon - lonDeg) * 60);
+        final int lonMinFrac = (int) Math.round(((lon - lonDeg) * 60 - lonMin) * 1000);
 
-        int lonSec = (int) Math.floor(((lon - lonDeg) * 60 - lonMin) * 60);
-        int lonSecFrac = (int) Math.round((((lon - lonDeg) * 60 - lonMin) * 60 - lonSec) * 1000);
+        final int lonSec = (int) Math.floor(((lon - lonDeg) * 60 - lonMin) * 60);
+        final int lonSecFrac = (int) Math.round((((lon - lonDeg) * 60 - lonMin) * 60 - lonSec) * 1000);
 
         switch (currentFormat) {
             case Plain:
@@ -181,10 +199,10 @@ public class cgeocoords extends Dialog {
                 tLatSep2.setText("°");
                 tLonSep2.setText("°");
 
-                eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
-                eLatMin.setText(addZeros(latDegFrac, 5) + Integer.toString(latDegFrac));
-                eLonDeg.setText(addZeros(latDeg, 3) + Integer.toString(lonDeg));
-                eLonMin.setText(addZeros(lonDegFrac, 5) + Integer.toString(lonDegFrac));
+                eLatDeg.setText(addZeros(latDeg, 2));
+                eLatMin.setText(addZeros(latDegFrac, 5));
+                eLonDeg.setText(addZeros(lonDeg, 3));
+                eLonMin.setText(addZeros(lonDegFrac, 5));
                 break;
             case Min: // DDD° MM.MMM
                 findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
@@ -204,12 +222,12 @@ public class cgeocoords extends Dialog {
                 tLatSep3.setText("'");
                 tLonSep3.setText("'");
 
-                eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
-                eLatMin.setText(addZeros(latMin, 2) + Integer.toString(latMin));
-                eLatSec.setText(addZeros(latMinFrac, 3) + Integer.toString(latMinFrac));
-                eLonDeg.setText(addZeros(lonDeg, 3) + Integer.toString(lonDeg));
-                eLonMin.setText(addZeros(lonMin, 2) + Integer.toString(lonMin));
-                eLonSec.setText(addZeros(lonMinFrac, 3) + Integer.toString(lonMinFrac));
+                eLatDeg.setText(addZeros(latDeg, 2));
+                eLatMin.setText(addZeros(latMin, 2));
+                eLatSec.setText(addZeros(latMinFrac, 3));
+                eLonDeg.setText(addZeros(lonDeg, 3));
+                eLonMin.setText(addZeros(lonMin, 2));
+                eLonSec.setText(addZeros(lonMinFrac, 3));
                 break;
             case Sec: // DDD° MM SS.SSS
                 findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
@@ -229,52 +247,43 @@ public class cgeocoords extends Dialog {
                 tLatSep3.setText(".");
                 tLonSep3.setText(".");
 
-                eLatDeg.setText(addZeros(latDeg, 2) + Integer.toString(latDeg));
-                eLatMin.setText(addZeros(latMin, 2) + Integer.toString(latMin));
-                eLatSec.setText(addZeros(latSec, 2) + Integer.toString(latSec));
-                eLatSub.setText(addZeros(latSecFrac, 3) + Integer.toString(latSecFrac));
-                eLonDeg.setText(addZeros(lonDeg, 3) + Integer.toString(lonDeg));
-                eLonMin.setText(addZeros(lonMin, 2) + Integer.toString(lonMin));
-                eLonSec.setText(addZeros(lonSec, 2) + Integer.toString(lonSec));
-                eLonSub.setText(addZeros(lonSecFrac, 3) + Integer.toString(lonSecFrac));
+                eLatDeg.setText(addZeros(latDeg, 2));
+                eLatMin.setText(addZeros(latMin, 2));
+                eLatSec.setText(addZeros(latSec, 2));
+                eLatSub.setText(addZeros(latSecFrac, 3));
+                eLonDeg.setText(addZeros(lonDeg, 3));
+                eLonMin.setText(addZeros(lonMin, 2));
+                eLonSec.setText(addZeros(lonSec, 2));
+                eLonSub.setText(addZeros(lonSecFrac, 3));
                 break;
         }
     }
 
-    private static String addZeros(int value, int len) {
-        StringBuilder zeros = new StringBuilder();
-        if (value == 0) {
-            value = 1;
-        }
-        double wantedLength = Math.pow(10, len - 1);
-        while (value < wantedLength) {
-            zeros.append('0');
-            value *= 10;
-        }
-        return zeros.toString();
+    private static String addZeros(final int value, final int len) {
+        return StringUtils.leftPad(Integer.toString(value), len, '0');
     }
 
     private class ButtonClickListener implements View.OnClickListener {
 
         @Override
-        public void onClick(View v) {
-            Button e = (Button) v;
-            CharSequence text = e.getText();
+        public void onClick(View view) {
+            final Button button = (Button) view;
+            final CharSequence text = button.getText();
             if (StringUtils.isBlank(text)) {
                 return;
             }
             switch (text.charAt(0)) {
                 case 'N':
-                    e.setText("S");
+                    button.setText("S");
                     break;
                 case 'S':
-                    e.setText("N");
+                    button.setText("N");
                     break;
                 case 'E':
-                    e.setText("W");
+                    button.setText("W");
                     break;
                 case 'W':
-                    e.setText("E");
+                    button.setText("E");
                     break;
             }
             calc(true);
@@ -283,7 +292,7 @@ public class cgeocoords extends Dialog {
 
     private class TextChanged implements TextWatcher {
 
-        private EditText editText;
+        private final EditText editText;
 
         public TextChanged(EditText editText) {
             this.editText = editText;
@@ -301,49 +310,45 @@ public class cgeocoords extends Dialog {
              * formatSec 2/3 2 2 3
              */
 
-            if (currentFormat == coordInputFormatEnum.Plain)
+            if (currentFormat == coordInputFormatEnum.Plain) {
                 return;
-
-            int maxLength = 2;
-            if (editText == eLonDeg || editText == eLatSub || editText == eLonSub) {
-                maxLength = 3;
-            }
-            if ((editText == eLatMin || editText == eLonMin) && currentFormat == coordInputFormatEnum.Deg) {
-                maxLength = 5;
-            }
-            if ((editText == eLatSec || editText == eLonSec) && currentFormat == coordInputFormatEnum.Min) {
-                maxLength = 3;
             }
 
+            final int maxLength = getMaxLengthFromCurrentField(editText);
             if (s.length() == maxLength) {
-                if (editText == eLatDeg)
+                if (editText == eLatDeg) {
                     eLatMin.requestFocus();
-                else if (editText == eLatMin)
-                    if (eLatSec.getVisibility() == View.GONE)
+                } else if (editText == eLatMin) {
+                    if (eLatSec.getVisibility() == View.GONE) {
                         eLonDeg.requestFocus();
-                    else
+                    } else {
                         eLatSec.requestFocus();
-                else if (editText == eLatSec)
-                    if (eLatSub.getVisibility() == View.GONE)
+                    }
+                } else if (editText == eLatSec) {
+                    if (eLatSub.getVisibility() == View.GONE) {
                         eLonDeg.requestFocus();
-                    else
+                    } else {
                         eLatSub.requestFocus();
-                else if (editText == eLatSub)
+                    }
+                } else if (editText == eLatSub) {
                     eLonDeg.requestFocus();
-                else if (editText == eLonDeg)
+                } else if (editText == eLonDeg) {
                     eLonMin.requestFocus();
-                else if (editText == eLonMin)
-                    if (eLonSec.getVisibility() == View.GONE)
+                } else if (editText == eLonMin) {
+                    if (eLonSec.getVisibility() == View.GONE) {
                         eLatDeg.requestFocus();
-                    else
+                    } else {
                         eLonSec.requestFocus();
-                else if (editText == eLonSec)
-                    if (eLonSub.getVisibility() == View.GONE)
+                    }
+                } else if (editText == eLonSec) {
+                    if (eLonSub.getVisibility() == View.GONE) {
                         eLatDeg.requestFocus();
-                    else
+                    } else {
                         eLonSub.requestFocus();
-                else if (editText == eLonSub)
+                    }
+                } else if (editText == eLonSub) {
                     eLatDeg.requestFocus();
+                }
             }
         }
 
@@ -360,15 +365,10 @@ public class cgeocoords extends Dialog {
     private boolean calc(final boolean signalError) {
         if (currentFormat == coordInputFormatEnum.Plain) {
             try {
-                gp = new Geopoint(eLat.getText().toString() + " " + eLon.getText().toString());
+                gp = new Geopoint(eLat.getText().toString(), eLon.getText().toString());
             } catch (ParseException e) {
                 if (signalError) {
                     context.showToast(context.getResources().getString(R.string.err_parse_lat_lon));
-                }
-                return false;
-            } catch (MalformedCoordinateException e) {
-                if (signalError) {
-                    context.showToast(context.getResources().getString(R.string.err_invalid_lat_lon));
                 }
                 return false;
             }
@@ -413,19 +413,27 @@ public class cgeocoords extends Dialog {
                 latitude = latDeg + latMin / 60.0 + latSec / 60.0 / 60.0 + latSecFrac / 60.0 / 60.0;
                 longitude = lonDeg + lonMin / 60.0 + lonSec / 60.0 / 60.0 + lonSecFrac / 60.0 / 60.0;
                 break;
+            case Plain:
+                // This case has been handled above
         }
         latitude *= (bLat.getText().toString().equalsIgnoreCase("S") ? -1 : 1);
         longitude *= (bLon.getText().toString().equalsIgnoreCase("W") ? -1 : 1);
 
-        try {
-            gp = new Geopoint(latitude, longitude);
-        } catch (MalformedCoordinateException e) {
-            if (signalError) {
-                context.showToast(context.getResources().getString(R.string.err_invalid_lat_lon));
-            }
-            return false;
-        }
+        gp = new Geopoint(latitude, longitude);
         return true;
+    }
+
+    public int getMaxLengthFromCurrentField(final EditText editText) {
+        if (editText == eLonDeg || editText == eLatSub || editText == eLonSub) {
+            return 3;
+        }
+        if ((editText == eLatMin || editText == eLonMin) && currentFormat == coordInputFormatEnum.Deg) {
+            return 5;
+        }
+        if ((editText == eLatSec || editText == eLonSec) && currentFormat == coordInputFormatEnum.Min) {
+            return 3;
+        }
+        return 2;
     }
 
     private class CoordinateFormatListener implements OnItemSelectedListener {
@@ -447,7 +455,7 @@ public class cgeocoords extends Dialog {
             }
 
             currentFormat = coordInputFormatEnum.fromInt(pos);
-            settings.setCoordInputFormat(currentFormat);
+            Settings.setCoordInputFormat(currentFormat);
             updateGUI();
         }
 
@@ -475,10 +483,12 @@ public class cgeocoords extends Dialog {
 
         @Override
         public void onClick(View v) {
-            if (!calc(true))
+            if (!calc(true)) {
                 return;
-            if (gp != null)
+            }
+            if (gp != null) {
                 cuListener.update(gp);
+            }
             dismiss();
         }
     }

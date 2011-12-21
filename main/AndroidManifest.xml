@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-		android:versionName="18.09.2011"
-		android:versionCode="20110918"
+		android:versionName="08.11.2011"
+		android:versionCode="20111108"
 		package="cgeo.geocaching"
 		name="c:geo"
 		android:installLocation="auto">
-	<uses-sdk android:minSdkVersion="3" android:targetSdkVersion="8" />
+	<uses-sdk android:minSdkVersion="4" android:targetSdkVersion="8" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -22,11 +22,15 @@
 			android:name=".cgeoapplication"
 			android:theme="@style/cgeo"
 			android:label="@string/app_name"
-			android:icon="@drawable/cgeo" >
+			android:icon="@drawable/cgeo"
+			android:backupAgent="cgeo.geocaching.backup.CentralBackupAgent" >
 		<uses-library android:name="com.google.android.maps" />
 		<meta-data
 			android:name="android.app.default_searchable"
 			android:value=".cgeoadvsearch" />
+		<meta-data
+			android:name="com.google.android.backup.api_key"
+			android:value="AEdPqrEAAAAIsvD_aUSDMwWOf9NkwwxZ4kJJI_AG2EaxjSu2jw" />
 		<activity
 			android:name=".cgeo"
 			android:label="@string/app_name"
@@ -143,7 +147,15 @@
 			<intent-filter>
 				<action android:name="cgeo.geocaching.CGEOCACHES"/>
 			</intent-filter>
-		</activity>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:mimeType="text/xml" />
+                <data android:mimeType="application/xml" />
+                <data android:mimeType="application/zip" />
+            </intent-filter>
+        </activity>		    		
 		<activity
 			android:name=".maps.google.GoogleMapActivity"
 			android:label="@string/app_name"
@@ -177,7 +189,7 @@
 			</intent-filter>
 		</activity>
 		<activity
-			android:name=".cgeovisit"
+			android:name=".VisitCacheActivity"
 			android:label="@string/app_name"
 			android:configChanges="keyboardHidden|orientation" >
 			<intent-filter>
@@ -201,15 +213,7 @@
 			</intent-filter>
 		</activity>
 		<activity
-			android:name=".cgeotrackables"
-			android:label="@string/app_name"
-			android:configChanges="keyboardHidden|orientation" >
-			<intent-filter>
-				<action android:name="cgeo.geocaching.CGEOTRACKABLES"/>
-			</intent-filter>
-		</activity>
-		<activity
-				android:name=".cgeodetail"
+				android:name=".CacheDetailActivity"
 				android:label="@string/app_name"
 				android:configChanges="keyboardHidden|orientation" >
 			<intent-filter>
@@ -279,7 +283,7 @@
 			<intent-filter>
 				<action android:name="cgeo.geocaching.CGEOGPXES"/>
 			</intent-filter>
-		</activity>
+    	</activity>
 		<activity
 			android:name=".cgSelectMapfile"
 			android:label="@string/app_name"

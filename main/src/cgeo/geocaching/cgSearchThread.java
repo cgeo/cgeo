@@ -3,7 +3,7 @@ package cgeo.geocaching;
 import android.os.Handler;
 import android.util.Log;
 
-public class cgSearchThread extends Thread {
+abstract public class cgSearchThread extends Thread {
     private Handler recaptchaHandler = null;
     private String recaptchaChallenge = null;
     private String recaptchaText = null;
@@ -22,7 +22,7 @@ public class cgSearchThread extends Thread {
         try {
             wait();
         } catch (InterruptedException e) {
-            Log.w(cgSettings.tag, "searchThread is not waiting for user...");
+            Log.w(Settings.tag, "searchThread is not waiting for user...");
         }
     }
 

@@ -1,10 +1,9 @@
 package cgeo.geocaching.maps.interfaces;
 
-import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.maps.PositionOverlay;
 import cgeo.geocaching.maps.CachesOverlay;
-import cgeo.geocaching.maps.ScaleOverlay;
 import cgeo.geocaching.maps.OtherCachersOverlay;
+import cgeo.geocaching.maps.PositionOverlay;
+import cgeo.geocaching.maps.ScaleOverlay;
 
 import android.app.Activity;
 import android.content.Context;
@@ -18,8 +17,6 @@ import android.graphics.drawable.Drawable;
  *
  */
 public interface MapViewImpl {
-
-    void invalidate();
 
     void setBuiltInZoomControls(boolean b);
 
@@ -51,22 +48,35 @@ public interface MapViewImpl {
 
     Context getContext();
 
-    CachesOverlay createAddMapOverlay(cgSettings settings, Context context,
+    CachesOverlay createAddMapOverlay(Context context,
             Drawable drawable, boolean fromDetailIntent);
 
     OtherCachersOverlay createAddUsersOverlay(Context context, Drawable markerIn);
 
-    ScaleOverlay createAddScaleOverlay(Activity activity, cgSettings settingsIn);
+    ScaleOverlay createAddScaleOverlay(Activity activity);
 
-    PositionOverlay createAddPositionOverlay(Activity activity, cgSettings settingsIn);
+    PositionOverlay createAddPositionOverlay(Activity activity);
 
-    boolean needsScaleOverlay();
+    void setMapSource();
 
-    void setBuiltinScale(boolean b);
-
-    void setMapSource(cgSettings settings);
-
+    /**
+     * Map-library unspecific method to request a repaint of either
+     * a specific overlay, that changed, or the mapview as a whole
+     * (if overlay is null)
+     * 
+     * @param overlay
+     *            Overlay to repaint or null if the mapview has changed
+     */
     void repaintRequired(GeneralOverlay overlay);
 
     void setOnDragListener(OnDragListener onDragListener);
+
+    /**
+     * Indicates if overlay text or line colours should be dark (normal case)
+     * or light (inverted case)
+     *
+     * @return true - text/draw in light colors, false text/draw in dark colors
+     */
+    boolean needsInvertedColors();
+
 }

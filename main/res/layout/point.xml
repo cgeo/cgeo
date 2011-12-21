@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-		android:layout_width="fill_parent"
-		android:layout_height="fill_parent"
-		android:orientation="vertical"
-		android:background="?background_color" >
-	<LinearLayout style="@style/action_bar">
-		<ImageView style="@style/action_bar_action"
-				android:onClick="goHome" />
-		<View style="@style/action_bar_separator" />
-		<TextView style="@style/action_bar_title" />
-		<View style="@style/action_bar_separator" />
-		<ImageView style="@style/action_bar_action"
-				android:src="@drawable/actionbar_manual"
-				android:onClick="goManual" />
-	</LinearLayout>
-	<ListView android:id="@+id/historyList" android:layout_width="match_parent" android:layout_height="match_parent" android:headerDividersEnabled="false" android:footerDividersEnabled="false"></ListView>
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="?background_color"
+    android:orientation="vertical" >
+    <LinearLayout style="@style/action_bar" >
+        <ImageView
+            style="@style/action_bar_action"
+            android:onClick="goHome" />
+        <View style="@style/action_bar_separator" />
+        <TextView style="@style/action_bar_title" />
+        <View style="@style/action_bar_separator" />
+        <ImageView
+            style="@style/action_bar_action"
+            android:onClick="goManual"
+            android:src="@drawable/actionbar_manual" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/historyList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false" >
+    </ListView>
+
 </LinearLayout>

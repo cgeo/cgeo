@@ -3,18 +3,16 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.maps.CGeoMap;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Resources;
 
-import java.util.UUID;
-
-class InternalMap extends AbstractInternalMap implements
-        NavigationApp {
+class InternalMap extends AbstractInternalMap {
 
     InternalMap(Resources res) {
         super(res.getString(R.string.cache_menu_map), null);
@@ -23,24 +21,20 @@ class InternalMap extends AbstractInternalMap implements
     @Override
     public boolean invoke(cgGeo geo, Activity activity, Resources res,
             cgCache cache,
-            final UUID searchId, cgWaypoint waypoint, final Geopoint coords) {
-        cgSettings settings = getSettings(activity);
-        Intent mapIntent = new Intent(activity, settings.getMapFactory().getMapClass());
-        if (cache != null) {
-            mapIntent.putExtra("detail", false);
-            mapIntent.putExtra("geocode", cache.geocode);
+            final cgSearch search, cgWaypoint waypoint, final Geopoint coords) {
+        if (search != null) {
+            CGeoMap.startActivitySearch(activity, search, cache != null ? cache.getGeocode() : null, true);
         }
-        if (searchId != null) {
-            mapIntent.putExtra("detail", true);
-            mapIntent.putExtra("searchid", searchId.toString());
+        else if (cache != null) {
+            CGeoMap.startActivityGeoCode(activity, cache.getGeocode());
         }
-        if (waypoint != null) {
-            mapIntent.putExtra("latitude", waypoint.coords.getLatitude());
-            mapIntent.putExtra("longitude", waypoint.coords.getLongitude());
-            mapIntent.putExtra("wpttype", waypoint.type);
+        else if (waypoint != null) {
+            CGeoMap.startActivityCoords(activity, waypoint.getCoords(), waypoint.getWaypointType(), waypoint.getName());
+        }
+        else if (coords != null) {
+            CGeoMap.startActivityCoords(activity, coords, WaypointType.WAYPOINT, null);
         }
 
-        activity.startActivity(mapIntent);
         return true;
     }
 

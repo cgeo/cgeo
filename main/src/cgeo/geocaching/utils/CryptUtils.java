@@ -1,6 +1,6 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.Settings;
 
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
@@ -49,7 +49,7 @@ public final class CryptUtils {
             digest.update(text.getBytes(), 0, text.length());
             hashed = new BigInteger(1, digest.digest()).toString(16);
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgBase.md5: " + e.toString());
+            Log.e(Settings.tag, "cgBase.md5: " + e.toString());
         }
 
         return hashed;
@@ -63,7 +63,7 @@ public final class CryptUtils {
             digest.update(text.getBytes(), 0, text.length());
             hashed = new BigInteger(1, digest.digest()).toString(16);
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgBase.sha1: " + e.toString());
+            Log.e(Settings.tag, "cgBase.sha1: " + e.toString());
         }
 
         return hashed;
@@ -78,7 +78,7 @@ public final class CryptUtils {
             mac.init(secretKeySpec);
             macBytes = mac.doFinal(text.getBytes());
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgBase.hashHmac: " + e.toString());
+            Log.e(Settings.tag, "cgBase.hashHmac: " + e.toString());
         }
 
         return macBytes;
@@ -109,5 +109,33 @@ public final class CryptUtils {
             buffer.replace(index, index + 1, String.valueOf((char) c));
         }
         return buffer;
+    }
+
+    public static String convertToGcBase31(final String gccode) {
+        final String alphabet = "0123456789ABCDEFGHJKMNPQRTVWXYZ";
+
+        if (null == gccode) {
+            return "";
+        }
+
+        char[] characters = gccode.toUpperCase().toCharArray();
+
+        if (characters.length <= 2) {
+            return "";
+        }
+
+        final int base = (characters.length <= 5 || (characters.length == 6 && alphabet.indexOf(characters[2]) < 16)) ? 16 : 31;
+        int result = 0;
+
+        for (int i = 2; i < characters.length; i++) {
+            result *= base;
+            result += alphabet.indexOf(characters[i]);
+        }
+
+        if (31 == base) {
+            result += Math.pow(16, 4) - 16 * Math.pow(31, 3);
+        }
+
+        return Integer.toString(result);
     }
 }

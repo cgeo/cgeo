@@ -3,6 +3,7 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
+import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.geopoint.Geopoint;
 
@@ -10,9 +11,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 
-import java.util.UUID;
-
-class RadarApp extends AbstractNavigationApp implements NavigationApp {
+class RadarApp extends AbstractNavigationApp {
 
     private static final String INTENT = "com.google.android.radar.SHOW_RADAR";
     private static final String PACKAGE_NAME = "com.eclipsim.gpsstatus2";
@@ -35,12 +34,12 @@ class RadarApp extends AbstractNavigationApp implements NavigationApp {
     @Override
     public boolean invoke(cgGeo geo, Activity activity, Resources res,
             cgCache cache,
-            final UUID searchId, cgWaypoint waypoint, final Geopoint coords) {
+            final cgSearch search, cgWaypoint waypoint, final Geopoint coords) {
         if (cache != null) {
-            return navigateTo(activity, cache.coords);
+            return navigateTo(activity, cache.getCoords());
         }
         if (waypoint != null) {
-            return navigateTo(activity, waypoint.coords);
+            return navigateTo(activity, waypoint.getCoords());
         }
         return navigateTo(activity, coords);
     }

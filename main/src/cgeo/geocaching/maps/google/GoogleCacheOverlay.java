@@ -1,6 +1,5 @@
 package cgeo.geocaching.maps.google;
 
-import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.maps.CachesOverlay;
 import cgeo.geocaching.maps.interfaces.ItemizedOverlayImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
@@ -28,9 +27,9 @@ public class GoogleCacheOverlay extends ItemizedOverlay<GoogleCacheOverlayItem> 
     private CachesOverlay base;
     private Lock lock = new ReentrantLock();
 
-    public GoogleCacheOverlay(cgSettings settingsIn, Context contextIn, Drawable markerIn, Boolean fromDetailIn) {
+    public GoogleCacheOverlay(Context contextIn, Drawable markerIn, boolean fromDetailIn) {
         super(boundCenterBottom(markerIn));
-        base = new CachesOverlay(settingsIn, this, contextIn, fromDetailIn);
+        base = new CachesOverlay(this, contextIn, fromDetailIn);
     }
 
     @Override
@@ -111,6 +110,11 @@ public class GoogleCacheOverlay extends ItemizedOverlay<GoogleCacheOverlayItem> 
     @Override
     public void unlock() {
         lock.unlock();
+    }
+
+    @Override
+    public MapViewImpl getMapViewImpl() {
+        throw new UnsupportedOperationException();
     }
 
 }

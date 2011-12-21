@@ -4,8 +4,7 @@ import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 
-public class FindsComparator extends AbstractCacheComparator implements
-        CacheComparator {
+public class FindsComparator extends AbstractCacheComparator {
 
     private cgeoapplication app;
 
@@ -15,7 +14,7 @@ public class FindsComparator extends AbstractCacheComparator implements
 
     @Override
     protected boolean canCompare(cgCache cache1, cgCache cache2) {
-        return cache1.logCounts != null && cache2.logCounts != null;
+        return cache1.getLogCounts() != null && cache2.getLogCounts() != null;
     }
 
     @Override
@@ -27,10 +26,10 @@ public class FindsComparator extends AbstractCacheComparator implements
 
     private int getFindsCount(cgCache cache) {
         int finds = 0;
-        if (cache.logCounts.isEmpty()) {
-            cache.logCounts = app.loadLogCounts(cache.geocode);
+        if (cache.getLogCounts().isEmpty()) {
+            cache.setLogCounts(app.loadLogCounts(cache.getGeocode()));
         }
-        Integer logged = cache.logCounts.get(cgBase.LOG_FOUND_IT);
+        Integer logged = cache.getLogCounts().get(cgBase.LOG_FOUND_IT);
         if (logged != null) {
             finds = logged;
         }

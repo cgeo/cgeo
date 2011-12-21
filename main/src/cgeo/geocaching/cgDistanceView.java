@@ -7,7 +7,6 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 public class cgDistanceView extends TextView {
-    private cgBase base = null;
     private Geopoint cacheCoords = null;
 
     public cgDistanceView(Context context) {
@@ -22,20 +21,19 @@ public class cgDistanceView extends TextView {
         super(context, attrs, defStyle);
     }
 
-    public void setContent(cgBase baseIn, final Geopoint cacheCoordsIn) {
-        base = baseIn;
+    public void setContent(final Geopoint cacheCoordsIn) {
         cacheCoords = cacheCoordsIn;
     }
 
     public void update(final Geopoint coords) {
-        if (cacheCoords == null || coords == null || base == null) {
+        if (cacheCoords == null || coords == null) {
             return;
         }
-        setText(base.getHumanDistance(coords.distanceTo(cacheCoords)));
+        setText(cgBase.getHumanDistance(coords.distanceTo(cacheCoords)));
     }
 
     public void setDistance(Float distance) {
-        setText("~" + base.getHumanDistance(distance));
+        setText("~" + cgBase.getHumanDistance(distance));
     }
 
     public void clear() {

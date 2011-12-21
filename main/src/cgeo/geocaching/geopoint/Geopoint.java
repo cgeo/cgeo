@@ -24,16 +24,8 @@ public final class Geopoint
      */
     public Geopoint(final double lat, final double lon)
     {
-        if (lat <= 90 && lat >= -90) {
-            latitude = lat;
-        } else {
-            throw new MalformedCoordinateException("malformed latitude: " + lat);
-        }
-        if (lon <= 180 && lon >= -180) {
-            longitude = lon;
-        } else {
-            throw new MalformedCoordinateException("malformed longitude: " + lon);
-        }
+        latitude = lat;
+        longitude = lon;
     }
 
     /**
@@ -54,11 +46,27 @@ public final class Geopoint
      *
      * @param text
      *            string to parse
+     * @throws GeopointParser.ParseException
+     *             if the string cannot be parsed
      * @see GeopointParser.parse()
      */
-    public Geopoint(final String text)
-    {
+    public Geopoint(final String text) {
         this(GeopointParser.parseLatitude(text), GeopointParser.parseLongitude(text));
+    }
+
+    /**
+     * Creates new Geopoint with latitude and longitude parsed from strings.
+     *
+     * @param latText
+     *            latitude string to parse
+     * @param lonText
+     *            longitude string to parse
+     * @throws GeopointParser.ParseException
+     *             if any argument string cannot be parsed
+     * @see GeopointParser.parse()
+     */
+    public Geopoint(final String latText, final String lonText) {
+        this(GeopointParser.parseLatitude(latText), GeopointParser.parseLongitude(lonText));
     }
 
     /**
@@ -208,32 +216,6 @@ public final class Geopoint
      * @see GeopointFormatter
      * @return formatted coordinates
      */
-    public String format(GeopointFormatter format)
-    {
-        return format.format(this);
-    }
-
-    /**
-     * Returns formatted coordinates.
-     *
-     * @param format
-     *            the desired format
-     * @see GeopointFormatter
-     * @return formatted coordinates
-     */
-    public String format(String format)
-    {
-        return GeopointFormatter.format(format, this);
-    }
-
-    /**
-     * Returns formatted coordinates.
-     *
-     * @param format
-     *            the desired format
-     * @see GeopointFormatter
-     * @return formatted coordinates
-     */
     public String format(GeopointFormatter.Format format)
     {
         return GeopointFormatter.format(format, this);
@@ -242,31 +224,21 @@ public final class Geopoint
     /**
      * Returns formatted coordinates with default format.
      * Default format is decimalminutes, e.g. N 52° 36.123 E 010° 03.456
-     *
+     * 
      * @return formatted coordinates
      */
+    @Override
     public String toString()
     {
         return format(GeopointFormatter.Format.LAT_LON_DECMINUTE);
     }
 
-    public static class GeopointException
+    abstract public static class GeopointException
             extends RuntimeException
     {
         private static final long serialVersionUID = 1L;
 
         public GeopointException(String msg)
-        {
-            super(msg);
-        }
-    }
-
-    public static class MalformedCoordinateException
-            extends GeopointException
-    {
-        private static final long serialVersionUID = 1L;
-
-        public MalformedCoordinateException(String msg)
         {
             super(msg);
         }

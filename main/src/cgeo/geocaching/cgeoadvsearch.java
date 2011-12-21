@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser;
 
 import org.apache.commons.lang3.StringUtils;
@@ -77,7 +78,6 @@ public class cgeoadvsearch extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        settings.load();
         init();
     }
 
@@ -118,7 +118,7 @@ public class cgeoadvsearch extends AbstractActivity {
 
         try {
             if (gcCodeM.find()) { // GC-code
-                final Intent cachesIntent = new Intent(this, cgeodetail.class);
+                final Intent cachesIntent = new Intent(this, CacheDetailActivity.class);
                 cachesIntent.putExtra("geocode", query.trim().toUpperCase());
                 startActivity(cachesIntent);
 
@@ -130,31 +130,21 @@ public class cgeoadvsearch extends AbstractActivity {
 
                 found = true;
             } else { // keyword (fallback)
-                final Intent cachesIntent = new Intent(this, cgeocaches.class);
-                cachesIntent.putExtra("type", "keyword");
-                cachesIntent.putExtra("keyword", query);
-                cachesIntent.putExtra("cachetype", settings.cacheType);
-                startActivity(cachesIntent);
-
+                cgeocaches.startActivityKeyword(this, query);
                 found = true;
             }
         } catch (Exception e) {
-            Log.w(cgSettings.tag, "cgeoadvsearch.instantSearch: " + e.toString());
+            Log.w(Settings.tag, "cgeoadvsearch.instantSearch: " + e.toString());
         }
 
         return found;
     }
 
     private void init() {
-        settings.getLogin();
-        settings.reloadCacheType();
-
-        if (settings.cacheType != null && cgBase.cacheTypesInv.containsKey(settings.cacheType) == false) {
-            settings.setCacheType(null);
-        }
+        Settings.getLogin();
 
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
+            geo = app.startGeo(geoUpdate);
         }
 
         ((Button) findViewById(R.id.buttonLatitude)).setOnClickListener(new findByCoordsAction());
@@ -202,6 +192,7 @@ public class cgeoadvsearch extends AbstractActivity {
 
         EditText trackable = (EditText) findViewById(R.id.trackable);
         trackable.setOnEditorActionListener(new findTrackableAction());
+        disableSuggestions(trackable);
 
         final Button displayTrackable = (Button) findViewById(R.id.display_trackable);
         displayTrackable.setOnClickListener(new findTrackableListener());
@@ -224,11 +215,15 @@ public class cgeoadvsearch extends AbstractActivity {
                 }
 
                 if (geo.coordsNow != null) {
-                    latEdit.setHint(cgBase.formatLatitude(geo.coordsNow.getLatitude(), false));
-                    lonEdit.setHint(cgBase.formatLongitude(geo.coordsNow.getLongitude(), false));
+                    if (latEdit != null) {
+                        latEdit.setHint(geo.coordsNow.format(GeopointFormatter.Format.LAT_DECMINUTE_RAW));
+                    }
+                    if (lonEdit != null) {
+                        lonEdit.setHint(geo.coordsNow.format(GeopointFormatter.Format.LON_DECMINUTE_RAW));
+                    }
                 }
             } catch (Exception e) {
-                Log.w(cgSettings.tag, "Failed to update location.");
+                Log.w(Settings.tag, "Failed to update location.");
             }
         }
     }
@@ -237,13 +232,13 @@ public class cgeoadvsearch extends AbstractActivity {
 
         @Override
         public void onClick(View arg0) {
-            cgeocoords coordsDialog = new cgeocoords(cgeoadvsearch.this, settings, null, geo);
+            cgeocoords coordsDialog = new cgeocoords(cgeoadvsearch.this, null, geo);
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
                 @Override
                 public void update(Geopoint gp) {
-                    ((Button) findViewById(R.id.buttonLatitude)).setText(cgBase.formatLatitude(gp.getLatitude(), true));
-                    ((Button) findViewById(R.id.buttonLongitude)).setText(cgBase.formatLongitude(gp.getLongitude(), true));
+                    ((Button) findViewById(R.id.buttonLatitude)).setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
+                    ((Button) findViewById(R.id.buttonLongitude)).setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
                 }
             });
             coordsDialog.show();
@@ -265,17 +260,12 @@ public class cgeoadvsearch extends AbstractActivity {
 
         if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) {
             if (geo.coordsNow != null) {
-                latView.setText(cgBase.formatLatitude(geo.coordsNow.getLatitude(), true));
-                lonView.setText(cgBase.formatLongitude(geo.coordsNow.getLongitude(), true));
+                latView.setText(geo.coordsNow.format(GeopointFormatter.Format.LAT_DECMINUTE));
+                lonView.setText(geo.coordsNow.format(GeopointFormatter.Format.LON_DECMINUTE));
             }
         } else {
             try {
-                final Intent cachesIntent = new Intent(this, cgeocaches.class);
-                cachesIntent.putExtra("latitude", GeopointParser.parseLatitude(latText));
-                cachesIntent.putExtra("longitude", GeopointParser.parseLongitude(lonText));
-                cachesIntent.putExtra("type", "coordinate");
-                cachesIntent.putExtra("cachetype", settings.cacheType);
-                startActivity(cachesIntent);
+                cgeocaches.startActivityCoordinates(this, GeopointParser.parseLatitude(latText), GeopointParser.parseLongitude(lonText));
             } catch (GeopointParser.ParseException e) {
                 showToast(res.getString(e.resource));
             }
@@ -311,11 +301,7 @@ public class cgeoadvsearch extends AbstractActivity {
             return;
         }
 
-        final Intent cachesIntent = new Intent(this, cgeocaches.class);
-        cachesIntent.putExtra("type", "keyword");
-        cachesIntent.putExtra("keyword", keyText);
-        cachesIntent.putExtra("cachetype", settings.cacheType);
-        startActivity(cachesIntent);
+        cgeocaches.startActivityKeyword(this, keyText);
     }
 
     private class findByAddressAction implements TextView.OnEditorActionListener {
@@ -379,11 +365,7 @@ public class cgeoadvsearch extends AbstractActivity {
             return;
         }
 
-        final Intent cachesIntent = new Intent(this, cgeocaches.class);
-        cachesIntent.putExtra("type", "username");
-        cachesIntent.putExtra("username", usernameText);
-        cachesIntent.putExtra("cachetype", settings.cacheType);
-        startActivity(cachesIntent);
+        cgeocaches.startActivityUserName(this, usernameText);
     }
 
     private class findByOwnerAction implements TextView.OnEditorActionListener {
@@ -411,11 +393,7 @@ public class cgeoadvsearch extends AbstractActivity {
             return;
         }
 
-        final Intent cachesIntent = new Intent(this, cgeocaches.class);
-        cachesIntent.putExtra("type", "owner");
-        cachesIntent.putExtra("username", usernameText);
-        cachesIntent.putExtra("cachetype", settings.cacheType);
-        startActivity(cachesIntent);
+        cgeocaches.startActivityOwner(this, usernameText);
     }
 
     private class findByGeocodeAction implements TextView.OnEditorActionListener {
@@ -446,7 +424,7 @@ public class cgeoadvsearch extends AbstractActivity {
             return;
         }
 
-        cgeodetail.startActivity(this, geocodeText);
+        CacheDetailActivity.startActivity(this, geocodeText);
     }
 
     private class findTrackableAction implements TextView.OnEditorActionListener {
@@ -491,7 +469,7 @@ public class cgeoadvsearch extends AbstractActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == MENU_SEARCH_OWN_CACHES) {
-            findByOwnerFn(settings.getUsername());
+            findByOwnerFn(Settings.getUsername());
             return true;
         }
         return super.onOptionsItemSelected(item);

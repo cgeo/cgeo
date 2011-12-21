@@ -4,6 +4,14 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="?background_color">
+    <LinearLayout style="@style/action_bar">
+        <TextView style="@style/action_bar_title"
+            android:text="@string/cache_coordinates" />
+        <View style="@style/action_bar_separator" />
+        <ImageView android:id="@+id/actionBarManualbutton"
+            style="@style/action_bar_action"
+            android:src="@drawable/actionbar_manual" />
+    </LinearLayout>
     <Spinner android:id="@+id/spinnerCoordinateFormats"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content" />

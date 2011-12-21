@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.files.GPXImporter;
+
 import android.app.Activity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,48 +18,46 @@ public class cgGPXListAdapter extends ArrayAdapter<File> {
     private cgeogpxes parent = null;
     private LayoutInflater inflater = null;
 
-    public cgGPXListAdapter(cgeogpxes parentIn, cgSettings settingsIn, List<File> listIn) {
+    public cgGPXListAdapter(cgeogpxes parentIn, List<File> listIn) {
         super(parentIn, 0, listIn);
 
         parent = parentIn;
     }
 
     @Override
-    public View getView(int position, View rowView, ViewGroup parent) {
-        if (inflater == null)
+    public View getView(final int position, final View rowView, final ViewGroup parent) {
+        if (inflater == null) {
             inflater = ((Activity) getContext()).getLayoutInflater();
+        }
 
         if (position > getCount()) {
-            Log.w(cgSettings.tag, "cgGPXListAdapter.getView: Attempt to access missing item #" + position);
+            Log.w(Settings.tag, "cgGPXListAdapter.getView: Attempt to access missing item #" + position);
             return null;
         }
 
         File file = getItem(position);
 
-        if (rowView == null) {
-            rowView = (View) inflater.inflate(R.layout.gpx_item, null);
+        View v = rowView;
+
+        if (v == null) {
+            v = inflater.inflate(R.layout.gpx_item, null);
 
             holder = new cgGPXView();
-            holder.filepath = (TextView) rowView.findViewById(R.id.filepath);
-            holder.filename = (TextView) rowView.findViewById(R.id.filename);
+            holder.filepath = (TextView) v.findViewById(R.id.filepath);
+            holder.filename = (TextView) v.findViewById(R.id.filename);
 
-            rowView.setTag(holder);
+            v.setTag(holder);
         } else {
-            holder = (cgGPXView) rowView.getTag();
+            holder = (cgGPXView) v.getTag();
         }
 
         final touchListener touchLst = new touchListener(file);
-        rowView.setOnClickListener(touchLst);
+        v.setOnClickListener(touchLst);
 
         holder.filepath.setText(file.getParent());
         holder.filename.setText(file.getName());
 
-        return rowView;
-    }
-
-    @Override
-    public void notifyDataSetChanged() {
-        super.notifyDataSetChanged();
+        return v;
     }
 
     private class touchListener implements View.OnClickListener {
@@ -68,8 +68,9 @@ public class cgGPXListAdapter extends ArrayAdapter<File> {
         }
 
         // tap on item
+        @Override
         public void onClick(View view) {
-            parent.loadGPX(file);
+            (new GPXImporter(parent, parent.getListId(), null)).importGPX(file);
         }
     }
 }

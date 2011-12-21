@@ -4,8 +4,12 @@ import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.utils.CryptUtils;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
@@ -29,63 +33,71 @@ import java.util.regex.Pattern;
  */
 public class cgCache implements ICache {
 
-    public Long updated = null;
-    public Long detailedUpdate = null;
-    public Long visitedDate = null;
-    public Integer reason = 0;
-    public Boolean detailed = false;
     /**
-     * Code of the cache like GCABCD
+     * Cache loading parameters
      */
-    public String geocode = "";
-    public String cacheId = "";
-    public String guid = "";
-    public String type = "";
-    public String name = "";
-    public Spannable nameSp = null;
-    public String owner = "";
-    public String ownerReal = "";
-    public Date hidden = null;
-    public String hint = "";
-    public CacheSize size = null;
-    public Float difficulty = Float.valueOf(0);
-    public Float terrain = Float.valueOf(0);
-    public Float direction = null;
-    public Float distance = null;
-    public String latlon = "";
-    public String latitudeString = "";
-    public String longitudeString = "";
-    public String location = "";
-    public Geopoint coords = null;
-    public boolean reliableLatLon = false;
-    public Double elevation = null;
-    public String personalNote = null;
-    public String shortdesc = "";
-    public String description = "";
-    public boolean disabled = false;
-    public boolean archived = false;
-    public boolean members = false;
-    public boolean found = false;
-    public boolean favourite = false;
-    public boolean own = false;
-    public Integer favouriteCnt = null;
-    public Float rating = null;
-    public Integer votes = null;
-    public Float myVote = null;
-    public int inventoryItems = 0;
-    public boolean onWatchlist = false;
-    public List<String> attributes = null;
-    public List<cgWaypoint> waypoints = null;
-    public List<cgImage> spoilers = null;
-    public List<cgLog> logs = null;
-    public List<cgTrackable> inventory = null;
-    public Map<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
-    public boolean logOffline = false;
-    // temporary values
-    public boolean statusChecked = false;
-    public boolean statusCheckedView = false;
-    public String directionImg = null;
+    final public static int LOADATTRIBUTES = 1 << 0;
+    final public static int LOADWAYPOINTS = 1 << 1;
+    final public static int LOADSPOILERS = 1 << 2;
+    final public static int LOADLOGS = 1 << 3;
+    final public static int LOADINVENTORY = 1 << 4;
+    final public static int LOADOFFLINELOG = 1 << 5;
+    final public static int LOADALL = LOADATTRIBUTES | LOADWAYPOINTS | LOADSPOILERS | LOADLOGS | LOADINVENTORY | LOADOFFLINELOG;
 
+    private Long updated = null;
+    private Long detailedUpdate = null;
+    private Long visitedDate = null;
+    private Integer reason = 0;
+    private boolean detailed = false;
+    private String geocode = "";
+    private String cacheId = "";
+    private String guid = "";
+    private CacheType cacheType = CacheType.UNKNOWN;
+    private String name = "";
+    private Spannable nameSp = null;
+    private String owner = "";
+    private String ownerReal = "";
+    private Date hidden = null;
+    private String hint = "";
+    private CacheSize size = null;
+    private Float difficulty = Float.valueOf(0);
+    private Float terrain = Float.valueOf(0);
+    private Float direction = null;
+    private Float distance = null;
+    private String latlon = "";
+    private String location = "";
+    private Geopoint coords = null;
+    private boolean reliableLatLon = false;
+    private Double elevation = null;
+    private String personalNote = null;
+    private String shortdesc = "";
+    private String description = null;
+    private boolean disabled = false;
+    private boolean archived = false;
+    private boolean members = false;
+    private boolean found = false;
+    private boolean favourite = false;
+    private boolean own = false;
+    private Integer favouriteCnt = null;
+    private Float rating = null;
+    private Integer votes = null;
+    private Float myVote = null;
+    private int inventoryItems = 0;
+    private boolean onWatchlist = false;
+    private List<String> attributes = null;
+    private List<cgWaypoint> waypoints = null;
+    private ArrayList<cgImage> spoilers = null;
+    private List<cgLog> logs = null;
+    private List<cgTrackable> inventory = null;
+    private Map<Integer, Integer> logCounts = new HashMap<Integer, Integer>();
+    private boolean logOffline = false;
+    // temporary values
+    private boolean statusChecked = false;
+    private boolean statusCheckedView = false;
+    private String directionImg = "";
+    private String nameForSorting;
+
+    private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
     /**
      * Gather missing information from another cache object.
      *
@@ -98,40 +110,40 @@ public class cgCache implements ICache {
         }
 
         updated = System.currentTimeMillis();
-        if (detailed == false && other.detailed) {
+        if (!detailed && other.detailed) {
             detailed = true;
             detailedUpdate = updated;
         }
 
         if (visitedDate == null || visitedDate == 0) {
-            visitedDate = other.visitedDate;
+            visitedDate = other.getVisitedDate();
         }
         if (reason == null || reason == 0) {
             reason = other.reason;
         }
         if (StringUtils.isBlank(geocode)) {
-            geocode = other.geocode;
+            geocode = other.getGeocode();
         }
         if (StringUtils.isBlank(cacheId)) {
             cacheId = other.cacheId;
         }
         if (StringUtils.isBlank(guid)) {
-            guid = other.guid;
+            guid = other.getGuid();
         }
-        if (StringUtils.isBlank(type)) {
-            type = other.type;
+        if (null == cacheType || CacheType.UNKNOWN == cacheType) {
+            cacheType = other.getType();
         }
         if (StringUtils.isBlank(name)) {
-            name = other.name;
+            name = other.getName();
         }
         if (StringUtils.isBlank(nameSp)) {
             nameSp = other.nameSp;
         }
         if (StringUtils.isBlank(owner)) {
-            owner = other.owner;
+            owner = other.getOwner();
         }
         if (StringUtils.isBlank(ownerReal)) {
-            ownerReal = other.ownerReal;
+            ownerReal = other.getOwnerReal();
         }
         if (hidden == null) {
             hidden = other.hidden;
@@ -143,63 +155,59 @@ public class cgCache implements ICache {
             size = other.size;
         }
         if (difficulty == null || difficulty == 0) {
-            difficulty = other.difficulty;
+            difficulty = other.getDifficulty();
         }
         if (terrain == null || terrain == 0) {
-            terrain = other.terrain;
+            terrain = other.getTerrain();
         }
         if (direction == null) {
             direction = other.direction;
         }
         if (distance == null) {
-            distance = other.distance;
+            distance = other.getDistance();
         }
         if (StringUtils.isBlank(latlon)) {
             latlon = other.latlon;
-        }
-        if (StringUtils.isBlank(latitudeString)) {
-            latitudeString = other.latitudeString;
-        }
-        if (StringUtils.isBlank(longitudeString)) {
-            longitudeString = other.longitudeString;
         }
         if (StringUtils.isBlank(location)) {
             location = other.location;
         }
         if (coords == null) {
-            coords = other.coords;
+            coords = other.getCoords();
         }
         if (elevation == null) {
             elevation = other.elevation;
         }
-        if (StringUtils.isNotBlank(personalNote)) {
+        if (personalNote == null) { // don't use StringUtils.isBlank. Otherwise we cannot recognize a note which was deleted on GC
             personalNote = other.personalNote;
         }
         if (StringUtils.isBlank(shortdesc)) {
-            shortdesc = other.shortdesc;
+            shortdesc = other.getShortdesc();
         }
         if (StringUtils.isBlank(description)) {
             description = other.description;
         }
         if (favouriteCnt == null) {
-            favouriteCnt = other.favouriteCnt;
+            favouriteCnt = other.getFavouriteCnt();
         }
         if (rating == null) {
-            rating = other.rating;
+            rating = other.getRating();
         }
         if (votes == null) {
             votes = other.votes;
         }
         if (myVote == null) {
-            myVote = other.myVote;
+            myVote = other.getMyVote();
         }
         if (attributes == null) {
-            attributes = other.attributes;
+            attributes = other.getAttributes();
         }
         if (waypoints == null) {
-            waypoints = other.waypoints;
+            waypoints = other.getWaypoints();
         }
-        cgWaypoint.mergeWayPoints(waypoints, other.waypoints);
+        else {
+            cgWaypoint.mergeWayPoints(waypoints, other.getWaypoints());
+        }
         if (spoilers == null) {
             spoilers = other.spoilers;
         }
@@ -211,7 +219,7 @@ public class cgCache implements ICache {
             inventory = other.inventory;
             inventoryItems = other.inventoryItems;
         }
-        if (logs == null || logs.isEmpty()) { // keep last known logs if none
+        if (CollectionUtils.isEmpty(logs)) { // keep last known logs if none
             logs = other.logs;
         }
     }
@@ -258,16 +266,17 @@ public class cgCache implements ICache {
         Pattern patternOk = Pattern.compile(guid, Pattern.CASE_INSENSITIVE);
         Matcher matcherOk = patternOk.matcher(page);
         if (matcherOk.find()) {
-            Log.i(cgSettings.tag, "cgCache.isGuidContainedInPage: guid '" + guid + "' found");
+            Log.i(Settings.tag, "cgCache.isGuidContainedInPage: guid '" + guid + "' found");
             return true;
         } else {
-            Log.i(cgSettings.tag, "cgCache.isGuidContainedInPage: guid '" + guid + "' not found");
+            Log.i(Settings.tag, "cgCache.isGuidContainedInPage: guid '" + guid + "' not found");
             return false;
         }
     }
 
     public boolean isEventCache() {
-        return "event".equalsIgnoreCase(type) || "mega".equalsIgnoreCase(type) || "cito".equalsIgnoreCase(type);
+        return CacheType.EVENT == cacheType || CacheType.MEGA_EVENT == cacheType
+                || CacheType.CITO == cacheType || CacheType.LOSTANDFOUND == cacheType;
     }
 
     public boolean logVisit(IAbstractActivity fromActivity) {
@@ -275,21 +284,21 @@ public class cgCache implements ICache {
             fromActivity.showToast(((Activity) fromActivity).getResources().getString(R.string.err_cannot_log_visit));
             return true;
         }
-        Intent logVisitIntent = new Intent((Activity) fromActivity, cgeovisit.class);
-        logVisitIntent.putExtra(cgeovisit.EXTRAS_ID, cacheId);
-        logVisitIntent.putExtra(cgeovisit.EXTRAS_GEOCODE, geocode.toUpperCase());
-        logVisitIntent.putExtra(cgeovisit.EXTRAS_FOUND, found);
+        Intent logVisitIntent = new Intent((Activity) fromActivity, VisitCacheActivity.class);
+        logVisitIntent.putExtra(VisitCacheActivity.EXTRAS_ID, cacheId);
+        logVisitIntent.putExtra(VisitCacheActivity.EXTRAS_GEOCODE, geocode.toUpperCase());
+        logVisitIntent.putExtra(VisitCacheActivity.EXTRAS_FOUND, found);
 
         ((Activity) fromActivity).startActivity(logVisitIntent);
 
         return true;
     }
 
-    public boolean logOffline(final IAbstractActivity fromActivity, final int logType, final cgSettings settings, final cgBase base) {
+    public boolean logOffline(final IAbstractActivity fromActivity, final int logType) {
         String log = "";
-        if (StringUtils.isNotBlank(settings.getSignature())
-                && settings.signatureAutoinsert) {
-            log = LogTemplateProvider.applyTemplates(settings.getSignature(), base, true);
+        if (StringUtils.isNotBlank(Settings.getSignature())
+                && Settings.isAutoInsertSignature()) {
+            log = LogTemplateProvider.applyTemplates(Settings.getSignature(), true);
         }
         logOffline(fromActivity, log, Calendar.getInstance(), logType);
         return true;
@@ -311,10 +320,10 @@ public class cgCache implements ICache {
         }
     }
 
-    public List<Integer> getPossibleLogTypes(cgSettings settings) {
-        boolean isOwner = owner != null && owner.equalsIgnoreCase(settings.getUsername());
+    public List<Integer> getPossibleLogTypes() {
+        boolean isOwner = owner != null && owner.equalsIgnoreCase(Settings.getUsername());
         List<Integer> types = new ArrayList<Integer>();
-        if ("event".equals(type) || "mega".equals(type) || "cito".equals(type) || "lostfound".equals(type)) {
+        if (isEventCache()) {
             types.add(cgBase.LOG_WILL_ATTEND);
             types.add(cgBase.LOG_NOTE);
             types.add(cgBase.LOG_ATTENDED);
@@ -322,7 +331,7 @@ public class cgCache implements ICache {
             if (isOwner) {
                 types.add(cgBase.LOG_ANNOUNCEMENT);
             }
-        } else if ("webcam".equals(type)) {
+        } else if (CacheType.WEBCAM == cacheType) {
             types.add(cgBase.LOG_WEBCAM_PHOTO_TAKEN);
             types.add(cgBase.LOG_DIDNT_FIND_IT);
             types.add(cgBase.LOG_NOTE);
@@ -385,12 +394,12 @@ public class cgCache implements ICache {
 
     @Override
     public String getLatitude() {
-        return latitudeString;
+        return coords != null ? coords.format(GeopointFormatter.Format.LAT_DECMINUTE) : null;
     }
 
     @Override
     public String getLongitude() {
-        return longitudeString;
+        return coords != null ? coords.format(GeopointFormatter.Format.LON_DECMINUTE) : null;
     }
 
     @Override
@@ -406,11 +415,6 @@ public class cgCache implements ICache {
     @Override
     public Float getTerrain() {
         return terrain;
-    }
-
-    @Override
-    public String getType() {
-        return type;
     }
 
     @Override
@@ -445,6 +449,9 @@ public class cgCache implements ICache {
 
     @Override
     public String getDescription() {
+        if (description == null) {
+            description = StringUtils.defaultString(cgeoapplication.getInstance().getCacheDescription(geocode));
+        }
         return description;
     }
 
@@ -456,6 +463,470 @@ public class cgCache implements ICache {
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public String getCacheId() {
+        // TODO: Only valid for GC-cache
+        if (StringUtils.isBlank(cacheId)) {
+            return CryptUtils.convertToGcBase31(geocode);
+        }
+
+        return cacheId;
+    }
+
+    @Override
+    public String getGuid() {
+        return guid;
+    }
+
+    @Override
+    public String getLocation() {
+        return location;
+    }
+
+    @Override
+    public String getPersonalNote() {
+        return personalNote;
+    }
+
+    public boolean supportsUserActions() {
+        return getConnector().supportsUserActions();
+    }
+
+    public boolean supportsCachesAround() {
+        return getConnector().supportsCachesAround();
+    }
+
+    public void shareCache(Activity fromActivity, Resources res) {
+        if (geocode == null) {
+            return;
+        }
+
+        StringBuilder subject = new StringBuilder("Geocache ");
+        subject.append(geocode.toUpperCase());
+        if (StringUtils.isNotBlank(name)) {
+            subject.append(" - ").append(name);
+        }
+
+        final Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject.toString());
+        intent.putExtra(Intent.EXTRA_TEXT, getUrl());
+
+        fromActivity.startActivity(Intent.createChooser(intent, res.getText(R.string.action_bar_share_title)));
+    }
+
+    public String getUrl() {
+        return getConnector().getCacheUrl(this);
+    }
+
+    public boolean supportsGCVote() {
+        return StringUtils.startsWithIgnoreCase(geocode, "GC");
+    }
+
+    public void setDescription(final String description) {
+        this.description = description;
+    }
+
+    @Override
+    public boolean isFound() {
+        return found;
+    }
+
+    @Override
+    public boolean isFavorite() {
+        return favourite;
+    }
+
+    @Override
+    public boolean isWatchlist() {
+        return onWatchlist;
+    }
+
+    @Override
+    public Date getHiddenDate() {
+        return hidden;
+    }
+
+    @Override
+    public List<String> getAttributes() {
+        return attributes;
+    }
+
+    @Override
+    public List<cgTrackable> getInventory() {
+        return inventory;
+    }
+
+    @Override
+    public ArrayList<cgImage> getSpoilers() {
+        return spoilers;
+    }
+
+    @Override
+    public Map<Integer, Integer> getLogCounts() {
+        return logCounts;
+    }
+
+    @Override
+    public Integer getFavoritePoints() {
+        return favouriteCnt;
+    }
+
+    @Override
+    public String getNameForSorting() {
+        if (null == nameForSorting) {
+            final Matcher matcher = NUMBER_PATTERN.matcher(name);
+            if (matcher.find()) {
+                nameForSorting = name.replace(matcher.group(), StringUtils.leftPad(matcher.group(), 6, '0'));
+            }
+            else {
+                nameForSorting = name;
+            }
+        }
+        return nameForSorting;
+    }
+
+    public boolean isVirtual() {
+        return CacheType.VIRTUAL == cacheType || CacheType.WEBCAM == cacheType
+                || CacheType.EARTH == cacheType;
+    }
+
+    public boolean showSize() {
+        return !((isEventCache() || isVirtual()) && size == CacheSize.NOT_CHOSEN);
+    }
+
+    public Long getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Long updated) {
+        this.updated = updated;
+    }
+
+    public Long getDetailedUpdate() {
+        return detailedUpdate;
+    }
+
+    public void setDetailedUpdate(Long detailedUpdate) {
+        this.detailedUpdate = detailedUpdate;
+    }
+
+    public Long getVisitedDate() {
+        return visitedDate;
+    }
+
+    public void setVisitedDate(Long visitedDate) {
+        this.visitedDate = visitedDate;
+    }
+
+    public Integer getReason() {
+        return reason;
+    }
+
+    public void setReason(Integer reason) {
+        this.reason = reason;
+    }
+
+    public boolean getDetailed() {
+        return detailed;
+    }
+
+    public void setDetailed(boolean detailed) {
+        this.detailed = detailed;
+    }
+
+    public Spannable getNameSp() {
+        return nameSp;
+    }
+
+    public void setNameSp(Spannable nameSp) {
+        this.nameSp = nameSp;
+    }
+
+    public void setHidden(Date hidden) {
+        this.hidden = hidden;
+    }
+
+    public Float getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Float direction) {
+        this.direction = direction;
+    }
+
+    public Float getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Float distance) {
+        this.distance = distance;
+    }
+
+    public String getLatlon() {
+        return latlon;
+    }
+
+    public void setLatlon(String latlon) {
+        this.latlon = latlon;
+    }
+
+    public Geopoint getCoords() {
+        return coords;
+    }
+
+    public void setCoords(Geopoint coords) {
+        this.coords = coords;
+    }
+
+    public boolean isReliableLatLon() {
+        return reliableLatLon;
+    }
+
+    public void setReliableLatLon(boolean reliableLatLon) {
+        this.reliableLatLon = reliableLatLon;
+    }
+
+    public Double getElevation() {
+        return elevation;
+    }
+
+    public void setElevation(Double elevation) {
+        this.elevation = elevation;
+    }
+
+    public String getShortdesc() {
+        return shortdesc;
+    }
+
+    public void setShortdesc(String shortdesc) {
+        this.shortdesc = shortdesc;
+    }
+
+    public boolean isMembers() {
+        return members;
+    }
+
+    public void setMembers(boolean members) {
+        this.members = members;
+    }
+
+    public boolean isFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        this.favourite = favourite;
+    }
+
+    public Integer getFavouriteCnt() {
+        return favouriteCnt;
+    }
+
+    public void setFavouriteCnt(Integer favouriteCnt) {
+        this.favouriteCnt = favouriteCnt;
+    }
+
+    public Float getRating() {
+        return rating;
+    }
+
+    public void setRating(Float rating) {
+        this.rating = rating;
+    }
+
+    public Integer getVotes() {
+        return votes;
+    }
+
+    public void setVotes(Integer votes) {
+        this.votes = votes;
+    }
+
+    public Float getMyVote() {
+        return myVote;
+    }
+
+    public void setMyVote(Float myVote) {
+        this.myVote = myVote;
+    }
+
+    public int getInventoryItems() {
+        return inventoryItems;
+    }
+
+    public void setInventoryItems(int inventoryItems) {
+        this.inventoryItems = inventoryItems;
+    }
+
+    public boolean isOnWatchlist() {
+        return onWatchlist;
+    }
+
+    public void setOnWatchlist(boolean onWatchlist) {
+        this.onWatchlist = onWatchlist;
+    }
+
+    public List<cgWaypoint> getWaypoints() {
+        return waypoints;
+    }
+
+    public void setWaypoints(List<cgWaypoint> waypoints) {
+        this.waypoints = waypoints;
+    }
+
+    public List<cgLog> getLogs() {
+        return logs;
+    }
+
+    public void setLogs(List<cgLog> logs) {
+        this.logs = logs;
+    }
+
+    public boolean isLogOffline() {
+        return logOffline;
+    }
+
+    public void setLogOffline(boolean logOffline) {
+        this.logOffline = logOffline;
+    }
+
+    public boolean isStatusChecked() {
+        return statusChecked;
+    }
+
+    public void setStatusChecked(boolean statusChecked) {
+        this.statusChecked = statusChecked;
+    }
+
+    public boolean isStatusCheckedView() {
+        return statusCheckedView;
+    }
+
+    public void setStatusCheckedView(boolean statusCheckedView) {
+        this.statusCheckedView = statusCheckedView;
+    }
+
+    public String getDirectionImg() {
+        return directionImg;
+    }
+
+    public void setDirectionImg(String directionImg) {
+        this.directionImg = directionImg;
+    }
+
+    public void setGeocode(String geocode) {
+        this.geocode = geocode;
+    }
+
+    public void setCacheId(String cacheId) {
+        this.cacheId = cacheId;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public void setOwnerReal(String ownerReal) {
+        this.ownerReal = ownerReal;
+    }
+
+    public void setHint(String hint) {
+        this.hint = hint;
+    }
+
+    public void setSize(CacheSize size) {
+        this.size = size;
+    }
+
+    public void setDifficulty(Float difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public void setTerrain(Float terrain) {
+        this.terrain = terrain;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setPersonalNote(String personalNote) {
+        this.personalNote = personalNote;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+    }
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
+    }
+
+    public void setFound(boolean found) {
+        this.found = found;
+    }
+
+    public void setOwn(boolean own) {
+        this.own = own;
+    }
+
+    public void setAttributes(List<String> attributes) {
+        this.attributes = attributes;
+    }
+
+    public void setSpoilers(ArrayList<cgImage> spoilers) {
+        this.spoilers = spoilers;
+    }
+
+    public void setInventory(List<cgTrackable> inventory) {
+        this.inventory = inventory;
+    }
+
+    public void setLogCounts(Map<Integer, Integer> logCounts) {
+        this.logCounts = logCounts;
+    }
+
+    public void setNameForSorting(String nameForSorting) {
+        this.nameForSorting = nameForSorting;
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see cgeo.geocaching.IBasicCache#getType()
+     *
+     * @returns Never null
+     */
+    @Override
+    public CacheType getType() {
+        return cacheType;
+    }
+
+    public void setType(CacheType cacheType) {
+        if (cacheType == null || CacheType.ALL == cacheType) {
+            throw new IllegalArgumentException("Illegal cache type");
+        }
+        this.cacheType = cacheType;
+    }
+
+    public boolean hasDifficulty() {
+        return difficulty != null && difficulty > 0f;
+    }
+
+    public boolean hasTerrain() {
+        return terrain != null && terrain > 0f;
     }
 
 }

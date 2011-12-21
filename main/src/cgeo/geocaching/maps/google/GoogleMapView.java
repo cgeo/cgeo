@@ -1,16 +1,18 @@
 package cgeo.geocaching.maps.google;
 
-import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.maps.PositionOverlay;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
+
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.maps.CachesOverlay;
-import cgeo.geocaching.maps.ScaleOverlay;
 import cgeo.geocaching.maps.OtherCachersOverlay;
+import cgeo.geocaching.maps.PositionOverlay;
+import cgeo.geocaching.maps.ScaleOverlay;
+import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapControllerImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OnDragListener;
-import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl.overlayType;
 
@@ -26,7 +28,9 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
+import android.view.Gravity;
 import android.view.MotionEvent;
+import android.widget.FrameLayout;
 
 public class GoogleMapView extends MapView implements MapViewImpl {
     private GestureDetector gestureDetector;
@@ -56,16 +60,21 @@ public class GoogleMapView extends MapView implements MapViewImpl {
 
             super.draw(canvas);
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgMapView.draw: " + e.toString());
+            Log.e(Settings.tag, "cgMapView.draw: " + e.toString());
         }
     }
 
     @Override
     public void displayZoomControls(boolean takeFocus) {
         try {
+            // Push zoom controls to the right
+            FrameLayout.LayoutParams zoomParams = new FrameLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+            zoomParams.gravity = Gravity.RIGHT;
+            getZoomButtonsController().getZoomControls().setLayoutParams(zoomParams);
+
             super.displayZoomControls(takeFocus);
         } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgMapView.displayZoomControls: " + e.toString());
+            Log.e(Settings.tag, "cgMapView.displayZoomControls: " + e.toString());
         }
     }
 
@@ -96,10 +105,9 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public CachesOverlay createAddMapOverlay(cgSettings settings,
-            Context context, Drawable drawable, boolean fromDetailIntent) {
+    public CachesOverlay createAddMapOverlay(Context context, Drawable drawable, boolean fromDetailIntent) {
 
-        GoogleCacheOverlay ovl = new GoogleCacheOverlay(settings, context, drawable, fromDetailIntent);
+        GoogleCacheOverlay ovl = new GoogleCacheOverlay(context, drawable, fromDetailIntent);
         getOverlays().add(ovl);
         return ovl.getBase();
     }
@@ -112,19 +120,17 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public PositionOverlay createAddPositionOverlay(Activity activity,
-            cgSettings settingsIn) {
+    public PositionOverlay createAddPositionOverlay(Activity activity) {
 
-        GoogleOverlay ovl = new GoogleOverlay(activity, settingsIn, overlayType.PositionOverlay);
+        GoogleOverlay ovl = new GoogleOverlay(activity, overlayType.PositionOverlay);
         getOverlays().add(ovl);
         return (PositionOverlay) ovl.getBase();
     }
 
     @Override
-    public ScaleOverlay createAddScaleOverlay(Activity activity,
-            cgSettings settingsIn) {
+    public ScaleOverlay createAddScaleOverlay(Activity activity) {
 
-        GoogleOverlay ovl = new GoogleOverlay(activity, settingsIn, overlayType.ScaleOverlay);
+        GoogleOverlay ovl = new GoogleOverlay(activity, overlayType.ScaleOverlay);
         getOverlays().add(ovl);
         return (ScaleOverlay) ovl.getBase();
     }
@@ -135,25 +141,8 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public void setMapSource(cgSettings settings) {
-
-        switch (settings.mapSource) {
-            case googleSat:
-                setSatellite(true);
-                break;
-            default:
-                setSatellite(false);
-        }
-    }
-
-    @Override
-    public boolean needsScaleOverlay() {
-        return true;
-    }
-
-    @Override
-    public void setBuiltinScale(boolean b) {
-        //Nothing to do for google maps...
+    public void setMapSource() {
+        setSatellite(GoogleMapProvider.isSatelliteSource(Settings.getMapSource()));
     }
 
     @Override
@@ -190,5 +179,10 @@ public class GoogleMapView extends MapView implements MapViewImpl {
             }
             return super.onScroll(e1, e2, distanceX, distanceY);
         }
+    }
+
+    @Override
+    public boolean needsInvertedColors() {
+        return false;
     }
 }

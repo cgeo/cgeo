@@ -1,8 +1,5 @@
 package cgeo.geocaching.geopoint;
 
-import cgeo.geocaching.cgBase;
-import cgeo.geocaching.cgSettings;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,7 +18,7 @@ public final class DistanceParser {
      * @throws NumberFormatException
      *             if the given number is invalid
      */
-    public static float parseDistance(String distanceText, final int defaultUnit) {
+    public static float parseDistance(String distanceText, final boolean metricUnit) {
         final Matcher matcher = pattern.matcher(distanceText);
 
         if (!matcher.find()) {
@@ -31,19 +28,19 @@ public final class DistanceParser {
         final float value = Float.parseFloat(matcher.group(1).replace(',', '.'));
         final String unit = matcher.group(2).toLowerCase();
 
-        if (unit.equals("m") || (unit.length() == 0 && defaultUnit == cgSettings.unitsMetric)) {
+        if (unit.equals("m") || (unit.length() == 0 && metricUnit)) {
             return value / 1000;
         }
         if (unit.equals("km")) {
             return value;
         }
         if (unit.equals("yd")) {
-            return value * cgBase.yards2km;
+            return value * IConversion.yards2km;
         }
         if (unit.equals("mi")) {
-            return value * cgBase.miles2km;
+            return value * IConversion.miles2km;
         }
-        return value * cgBase.feet2km;
+        return value * IConversion.feet2km;
     }
 
 }

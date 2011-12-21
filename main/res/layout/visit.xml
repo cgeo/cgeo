@@ -50,9 +50,9 @@
 						android:id="@+id/log"
 						android:hint="@string/log_new_log_text"
 						android:singleLine="false"
-						android:lines="5"
-						android:capitalize="sentences"
-						android:scrollbars="vertical" />
+                        android:layout_height="wrap_content"
+                        android:minLines="5"
+						android:capitalize="sentences" />
 				<LinearLayout android:id="@+id/tweet_box"
 						android:layout_width="fill_parent"
 						android:layout_height="wrap_content"
@@ -126,7 +126,6 @@
 						android:gravity="right"
 						android:orientation="vertical" >
 					<Button style="@style/button"
-							android:visibility="gone"
 							android:id="@+id/changebutton"
 							android:layout_width="wrap_content"
 							android:layout_weight="1"

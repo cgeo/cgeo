@@ -11,8 +11,6 @@
   <string name="helpers">¿Qué instalar?</string>  
   <string name="about">Sobre c:geo</string>
   <string name="helper">Si quieres aprender cosas sobre <b>c:geo</b>?\nEcha un ojo a nuestro manual.</string>
-  <string name="database_error_title">Problema con la base de datos</string>
-  <string name="database_error_message">c:geo no se ha podido conectar a la base de datos interna.\nIntenta arrancar c:geo un poco más tarde. Si has visto este mensaje muchas veces, ve a los ajustes del teléfono / Aplicaciones / c:geo y pulsa el botón borrar datos. O desinstálalo e instálalo de nuevo. Lamentamos los problemas.</string>
 
   <!-- actionbar -->
   <string name="action_bar_share_title">Compartir enlace a escondite</string>
@@ -67,7 +65,6 @@
   <string name="log_grabbed">Guardado en alguna parte</string>
   <string name="log_maintained">Mantenimiento efectuado</string>
   <string name="log_maintenance_needed">Necesita mantenimiento</string>
-  <string name="log_maintenance_owner">Mantenimiento</string>
   <string name="log_update">Coordenadas actualizadas</string>
   <string name="log_archived">Archivado</string>
   <string name="log_needs_archived">Necesita ser archivado</string>
@@ -117,7 +114,7 @@
   <string name="err_none">Aceptar</string>
   <string name="err_start">Comunicación no iniciada</string>
   <string name="err_parse">Error procesando la página de acceso</string>
-  <string name="err_server">Error conectando a geocaching.com (¿servidor o conexión caidos?)</string>
+  <string name="err_server">Error conectando a Geocaching.com (¿servidor o conexión caidos?)</string>
   <string name="err_login">No hay información de acceso guardada</string>
   <string name="err_login_failed">Lo siento, c:geo no puede conectarse.</string>
   <string name="err_unknown">Error desconocido</string>
@@ -127,7 +124,6 @@
   <string name="err_license">El usuario no ha aceptado las condiciones de Geocaching.com license agreement, por lo que c:geo no puede cargar las coordenadas de los escondites.</string>
   <string name="err_store">Lo siento, c:geo no puede almacenar el escondite.</string>
   <string name="err_drop">Lo siento, c:geo no puede omitir el escondite.</string>
-  <string name="err_title_problem">Problema</string>
   <string name="err_detail_open">Lo siento, c:geo no puede abrir los detalles del escondite.</string>
   <string name="err_detail_cache">Lo siento, c:geo no puee mostrar el escondite que quieres. ¿Segur que es un geocache?</string>
   <string name="err_detail_cache_find">Lo siento, c:geo no puede encontrar escondites</string>
@@ -136,39 +132,25 @@
   <string name="err_detail_cache_find_next">Lo siento, c:geo no puede encontrar los siguientes escondites.</string>
   <string name="err_detail_cache_forgot">Lo siento, c:geo ha olvidado el escondite que quieres.</string>
   <string name="err_detail_cache_forgot_visit">Lo siento, c:geo ha olvidado que escondite has visitado.</string>
-  <string name="err_detail_cache_language">c:geo no puede leer algunos detalles del escondite. Verifica que la web geocaching.com website esté configurada en inglés. por desgracia, c:geo no entiende otras localizaciones.</string>
   <string name="err_detail_no_spoiler">c:geo no ha encontrado imágenes/pista para este escondite.</string>
   <string name="err_detail_no_map_static">c:geo no ha encontrado mapas estáticos para este escondite.</string>
   <string name="err_detail_not_load_map_static">Lo siento, c:geo no ha podido cargar mapas estáticos.</string>
-  <string name="err_detail_still_removing">Seguir borrando este escondite.</string>
-  <string name="err_detail_still_saving">Seguir guardando este escondite.</string>
-  <string name="err_detail_still_refreshing">Seguir recargando este escondite.</string>
   <string name="err_watchlist_still_managing">Seguir gestionando tu lista de seguimiento.</string>
   <string name="err_watchlist_failed">Error al cambiar la lista de seguimiento.</string>
-  <string name="err_radar_title">El radar no está instalado.</string>
-  <string name="err_radar_message">Esta acción requiere instalar el radar. ¿Quieres instalarlo?</string>
-  <string name="err_radar_market">c:geo no puede cargar el Android Market Para buscar la aplicación Radar.</string>
-  <string name="err_radar_generic">Lo siento, c:geo no puede arrancar el Radar. ¿Está instalado?</string>
   <string name="err_navigation_no">c:geo no encuentra ninguna navegación soportada.</string>
   <string name="err_application_no">c:geo no encuentra ninguna aplicación válida.</string>
   <string name="err_auth_initialize">Lo siento, c:geo no ha podido iniciar el proceso de autorización.</string>
   <string name="err_auth_process">El proceso de autorización ha fallado.</string>
   <string name="err_cannot_log_visit">c:geo no tiene información suficiente para registrar la visita. Inténtalo de nuevo con más detalles sobre el escondite.</string>
   <string name="err_init_cleared">Lo siento, c:geo no puede borrar la información registrada.</string>
-  <string name="err_no_chaches">Lo siento, c:geo no ha podido abrir el/los escondite/s</string>
   <string name="err_download_fail">Lo siento, c:geo no ha podido descargar escondites a causa de </string>
-  <string name="err_update_fail">Error al actualizar la distancia recorrida.</string>
   <string name="err_list_load_fail">Lo siento, c:geo no ha podido cargar la lista de escondites.</string>
   <string name="err_store_failed">Lo siento, c:geo no puede guardar el escondite.</string>
   <string name="err_refresh_failed">Lo siento, c:geo no puede actualizar el escondite.</string>
-  <string name="err_drop_failed">Lo siento, c:geo no puede omitir el escondite.</string>
   <string name="err_dwld_details_failed">Lo siento, c:geo no ha podido descargar los detalles del escondite.</string>
   <string name="err_dwld_details_failed_reason">Lo siento, c:geo no ha podido descargar los detalles del escondite debido a </string>
   <string name="err_load_descr_failed">Lo siento, c:geo no ha podido cargar la descripción.</string>
   <string name="err_location_unknown">c:geo no conoce la ubicación del escondite.</string>
-  <string name="err_manual_title">El manual no está instalado.</string>
-  <string name="err_manual_message">El manual de c:geo no se encuentra en tu dispositivo.¿Debería instalarse?</string>
-  <string name="err_manual_market">c:geo No puede abrir el Android MArket para buscar el manual.</string>
   <string name="err_missing_device_name">Debes indicar un nombre de dispositivo antes de registrarte.</string>
 
   <string name="err_tb_display">"Lo siento, c:geo no puede mostrar el rastreable que buscas. ¿Es realmente rastreable?</string>
@@ -192,21 +174,18 @@
   <string name="err_point_bear_and_dist">Rellena ambos, orientación y distancia. La orientación es un ángulo de 0 a 360 grados relativo al norte. Distancia con o sin unidades.</string>
 
   <string name="err_point_location_error">Lo siento, c:geo no puede ubicar ese punto de referencia.</string>
-  <string name="err_navigation_not_found">c:geo no encuentra ninguna navegación soportada.</string>
 
   <string name="err_log_load_data">Lo siento, c:geo no puede cargar los datos necesarios para registrar la visita.</string>
   <string name="err_log_load_data_again">Lo siento, c:geo no puede cargar los datos necesarios para registrar la visita. Intentándolo de nuevo.</string>
   <string name="err_log_load_data_still">c:geo sigue cargando datos para registrar el escondite. Debes esperar un poquito mas.</string>
   <string name="err_log_failed_server">Lo siento, c:geo no ha podido enviar el registro porque el servidor no responde.</string>
   <string name="err_log_post_failed">Lo siento, c:geo no ha podido enviar el registro.</string>
-  <string name="err_log_post_failed_because">Lo siento, c:geo no ha podido enviar el registro porque </string>
 
   <string name="err_search_address_no_match">Lo siento, c:geo no encuentra ningún lugar coincidente.</string>
   <string name="err_search_address_forgot">Lo siento, c:geo ha olvidado la dirección que buscabas.</string>
   <string name="err_search_address">Buscando lugares</string>
   <string name="err_parse_lat">Lo siento, c:geo no puede procesar la latitud.</string>
   <string name="err_parse_lon">Lo siento, c:geo no puede procesar la longitud.</string>
-  <string name="err_parse_bear">Lo siento, c:geo no puede procesar la orientación.</string>
   <string name="err_parse_dist">Lo siento, c:geo can\'t no puede procesar la distancia.</string>
 
   <string name="err_fieldnotes_export_failed">Eror al exportar notas de campo.</string>  
@@ -224,13 +203,8 @@
   <string name="warn_search_help_user">Escribe el nombre de usuario de Geocaching.com.</string>
   <string name="warn_search_help_tb">Escribe el código del rastreable. Por ejemplo \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Escribe algún texto de registro.</string>
-  <string name="warn_load_log_image">Error al cargar la imagen del registro.</string>
-  <string name="warn_load_spoiler_image">Error al cargar la imagen reveladora.</string>
+  <string name="warn_load_images">Error al cargar las imágenes.</string>
   
-  <string name="info_altitude">Altitud actual</string>
-  <string name="info_distance">Distancia recorrida</string>
-  <string name="info_distance_cleared">La distancia recorrida ha sido borrada.</string>
-  <string name="info_since">\n(desde </string>
 
   <string name="info_log_posted">c:geo registro enviado sin problemas.</string>
   <string name="info_log_saved">c:geo guardado sin problemas.</string>
@@ -260,38 +234,29 @@
   <string name="advanced_search_button">Buscar</string>
   <string name="stored_caches_button">Guardados</string>
   <string name="any_button">Manual</string>
-  <string name="about_button">Sobre</string>
-  <string name="settings_button">Ajustes</string>
-  <string name="type">Tipo</string>
-  <string name="now_searching">Buscando ahora</string>
 
   <!-- caches -->
-  <string name="caches_searching">Buscando escondites</string>
   <string name="caches_no_cache">Ningún escondite</string>
   <string name="caches_more_caches">Buscar mas</string>
   <string name="caches_more_caches_no">No hay mas escondites</string>
   <string name="caches_more_caches_loading">Cargando escondites…</string>
   <string name="caches_downloading">Descargando escondites…\nFaltan: </string>
-  <string name="caches_progress_loading_title">Cargando escondites</string>
-  <string name="caches_progress_loading_text">Escondites almacenados en el dispositivo</string>
   <string name="caches_eta_ltm">Menos de un minuto</string>
   <string name="caches_eta_mins"> minutos</string>
   <string name="caches_eta_min"> minuto</string>
-  <string name="caches_no_caches"> (sin escondites)</string>
   <string name="caches_store_offline">Usar sin conexión luego</string>
   <string name="caches_store_selected">Almacenamiento seleccionado</string>
-  <string name="caches_stored">Almacenados</string>
   <string name="caches_history">Historial</string>
   <string name="caches_on_map">Ver en mapa</string>
-  <string name="caches_sort">Ordenar</string> <!-- since: 2.10 RC2 -->
-  <string name="caches_sort_title">Ordenar por</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_distance">distancia</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_difficulty">dificultad</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_terrain">terreno</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_size">tamaño</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_favorites">popularidad</string> <!-- since: 2.10 RC3 -->  
-  <string name="caches_sort_name">nombre</string> <!-- since: 2.10 RC3 -->
-  <string name="caches_sort_gccode">Código GC</string> <!-- since: 2.2 -->
+  <string name="caches_sort">Ordenar</string>
+  <string name="caches_sort_title">Ordenar por</string>
+  <string name="caches_sort_distance">distancia</string>
+  <string name="caches_sort_difficulty">dificultad</string>
+  <string name="caches_sort_terrain">terreno</string>
+  <string name="caches_sort_size">tamaño</string>
+  <string name="caches_sort_favorites">popularidad</string>  
+  <string name="caches_sort_name">nombre</string>
+  <string name="caches_sort_gccode">Código GC</string>
   <string name="caches_sort_rating">valoración</string>
   <string name="caches_sort_vote">votar (valoración propia)</string>
   <string name="caches_sort_inventory">recuento de inventario</string>
@@ -312,7 +277,6 @@
   <string name="caches_refresh_all">Actualizar todos</string>
   <string name="caches_move_selected">Mover seleccionados</string>
   <string name="caches_move_all">Mover todos</string>
-  <string name="caches_map_cgeo">c:geo</string>
   <string name="caches_map_locus">Locus</string>
   <string name="caches_recaptcha_title">reCAPTCHA</string>
   <string name="caches_recaptcha_explanation">Debes  escribir el texto de la imagen. Es importante que descargues las coordenadas de los escondites. Es opcional y lo puedes desactivar en Ajustes.</string>
@@ -327,21 +291,6 @@
   <string name="caches_filter_clear">limpiar filtros</string>
   <string name="caches_filter_size_title">Indica tamaño</string>
   <string name="caches_filter_type_title">Indica tipo</string>
-  <string name="caches_filter_type_traditional">Tradicional cache</string>
-  <string name="caches_filter_type_multi">Multi</string>
-  <string name="caches_filter_type_mystery">Desconocido</string>
-  <string name="caches_filter_type_letterbox">Buzón híbrido</string>
-  <string name="caches_filter_type_event">Evento</string>
-  <string name="caches_filter_type_mega">Mega-evento</string>
-  <string name="caches_filter_type_earth">Educativos (Earth)</string>
-  <string name="caches_filter_type_cito">Limpieza de escondites</string>
-  <string name="caches_filter_type_webcam">Webcam</string>
-  <string name="caches_filter_type_virtual">Virtual</string>
-  <string name="caches_filter_type_wherigo">Wherigo</string>
-  <string name="caches_filter_type_lostfound">Perdido y Encontrado</string>
-  <string name="caches_filter_type_ape">Projecto APE</string>
-  <string name="caches_filter_type_gchq">Groundspeak HQ</string>
-  <string name="caches_filter_type_gps">GPS Cache exhibit</string>
   <string name="caches_exporting_fieldnote">Exportando como Notas de campo…</string>
   <string name="caches_removing_from_history">Borrando del historial…</string>
   
@@ -349,7 +298,7 @@
   <string name="list_menu">Lista</string>
   <string name="list_menu_create">Crear nueva lista</string>
   <string name="list_menu_drop">Borrar lista actual</string>
-<string name="list_menu_change">Cambiar lista</string> <!-- since: 2.2 -->
+<string name="list_menu_change">Cambiar lista</string>
   <string name="list_title">Escoger lista</string>
   <string name="list_inbox">Guardadas</string>
   <string name="list_wpt">Puntos de referencia</string>
@@ -382,11 +331,10 @@
   <string name="init_passvote">Contraseña</string>
   <string name="init_login">Acceder</string>
   <string name="init_login_popup">Acceso</string>
-  <string name="init_login_popup_working">Accediendo a geocaching.com…</string>
+  <string name="init_login_popup_working">Accediendo a Geocaching.com…</string>
   <string name="init_login_popup_ok">Acceso conseguido.</string>
   <string name="init_login_popup_failed">Error en el acceso.</string>
   <string name="init_login_popup_failed_reason">El acceso ha fallado debido a </string>
-  <string name="init_legal">Nota legal</string>
   <string name="init_go4cache_connect">Conectar a Go 4 Cache</string>
   <string name="init_twitter_authorize">Autorizar a c:geo</string>
   <string name="init_twitter_publish">Publicar estado cuando se encuente un escondite</string>
@@ -399,13 +347,8 @@
   <string name="init_signature_template_time">Hora</string>
   <string name="init_signature_template_user">Usuario</string>
   <string name="init_signature_template_number">Número</string> 
- <string name="init_languages">Traducción</string>
-  <string name="init_languages_description">¿Qué lenguajes no necesitas traducir? Indica códigos de idioma de 2 caracteres.</string>
-  <string name="init_languages_hint">en es pt fr</string>
-  <string name="init_translate">Traducir descripción y pista</string>  
   <string name="init_other">Otras opciones</string>
   <string name="init_skin">Fondo blanco (necesita reiniciar c:geo)</string>
-  <string name="init_transparent">Usar pantalla de inicio transparente</string>
   <string name="init_address">Mostrar dirección en la pantalla principal</string>
   <string name="init_captcha">Mostrar CAPTCHA si es necesario</string>
   <string name="init_useenglish">Usar inglés interno (necesita reiniciar c:geo)</string>
@@ -434,22 +377,20 @@
   <string name="init_restore_failed">Restauración errónea</string>
   <string name="init_backup_last">Copia guardada el</string>
   <string name="init_backup_last_no">No hay ninguna copia de seguridad.</string>
-  <string name="init_mapsources">Proveedor de mapas</string> <!-- since: 2.26 RC3 -->
-  <string name="init_mapsources_description">Aquí puedes seleccionar un proveedor de mapas. Como alternativa a Google Maps están disponibles varios estilos de OpenStreetMap e incluso mapas fuera de linea (mira <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> para más información).</string> <!-- since: 2.26 RC3 -->
+  <string name="init_mapsources">Proveedor de mapas</string>
+  <string name="init_mapsources_description">Aquí puedes seleccionar un proveedor de mapas. Como alternativa a Google Maps están disponibles varios estilos de OpenStreetMap e incluso mapas fuera de linea (mira <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> para más información).</string>
   <string name="init_mapsource_select">Elige proveedor de mapas</string>
   <string name="init_select_mapfile">…</string>
   <string name="init_trackautovisit">Convertir rastreables automáticamente a \"visita\"</string>
   <string name="init_sigautoinsert">Insertar firma automáticamente</string>
 
   <!-- map sources -->
-  <string-array name="map_sources">
-    <item>Google: Mapa</item>
-    <item>Google: Satélite</item>
-    <item>OSM: Mapnik</item>
-    <item>OSM: Osmarender</item>
-    <item>OSM: Cyclemap</item>
-    <item>OSM: Offline</item>
-  </string-array>
+  <string name="map_source_google_map">Google: Mapa</string>
+  <string name="map_source_google_satellite">Google: Satélite</string>
+  <string name="map_source_osm_mapnik">OSM: Mapnik</string>
+  <string name="map_source_osm_osmarender">OSM: Osmarender</string>
+  <string name="map_source_osm_cyclemap">OSM: Cyclemap</string>
+  <string name="map_source_osm_offline">OSM: Offline</string>
 
   <string name="init_sendToCgeo">Enviar a c:geo</string>
   <string name="init_sendToCgeo_name">Nombre de tu dispositivo:</string>
@@ -507,7 +448,6 @@
   <string name="cache_hint">Pista</string>
   <string name="cache_logs">Bitácora</string>
   <string name="cache_dialog_loading_details">Cargando detalles del escondite…</string>
-  <string name="cache_dialog_loading_description">Cargando descripción del escondite…</string>
   <string name="cache_dialog_offline_save_title">Desconectado</string>
   <string name="cache_dialog_offline_save_message">Guardando escondite para usar desconectado…</string>
   <string name="cache_dialog_offline_drop_title">Desconectado</string>
@@ -524,11 +464,8 @@
   <string name="cache_menu_radar">Radar</string>
   <string name="cache_menu_map">Ver en mapa</string>
   <string name="cache_menu_map_static">Mapas estáticos</string>
-  <string name="cache_menu_locus">Locus</string>
   <string name="cache_menu_rmaps">Rmaps</string>  
 <string name="cache_menu_map_ext">Mostrar en mapa ext.</string>
-  <string name="cache_menu_map_short">Mapas</string>
-  <string name="cache_menu_map_ext_short">Mapa ext.</string>  
   <string name="cache_menu_browser">Navegador</string>
   <string name="cache_menu_visit">Encontrado</string>
   <string name="cache_menu_visit_offline">Registar vista sin conexión</string>  
@@ -560,12 +497,11 @@
   <string name="cache_event">Fecha</string>
   <string name="cache_location">Ubicación</string>
   <string name="cache_coordinates">Coordenadas</string>
-  <string name="cache_elevation">Elevación</string>  
   <string name="cache_calendars">Elegir calendario</string>
   <string name="cache_spoiler_images_title">Imágenes reveladoras</string>
   <string name="cache_spoiler_images_loading">Cargando imágenes reveladoras…</string>
-  <string name="cache_log_types">Tipos de registro</string> <!-- Since: 2.10 RC2 -->
-  <string name="cache_coordinates_no">Este escondite no tiene coordenadas.</string> <!-- since: 2.26 RC2 -->
+  <string name="cache_log_types">Tipos de registro</string>
+  <string name="cache_coordinates_no">Este escondite no tiene coordenadas.</string>
   <string name="cache_export_fieldnote">Exportar como Notas de campo</string>
   <string name="cache_clear_history">Borrar historial</string>
   <string name="cache_remove_from_history">Borrar del historial</string>  
@@ -577,10 +513,8 @@
   <string name="file_title_searching">Buscando</string>
 
   <!-- gpx -->
-  <string name="gpx_import_loading_stored">Cargando escondites del archivo .gpx\nGuardados:</string>
-  <string name="gpx_import_no_files">Lo siento, c:geo no ha encontrado archivos .gpx.</string>
   <string name="gpx_import_caches_imported">escondites importados</string>
-  <string name="gpx_import_loading">Cargando escondites del archivo .gpx</string>
+  <string name="gpx_import_loading_caches">Cargando escondites del archivo .gpx</string>
   <string name="gpx_import_title">Importar GPX</string>
   <string name="gpx_import_title_reading_file">Leyendo archivo</string>
   <string name="gpx_import_title_caches_imported">Resultados</string>
@@ -591,7 +525,6 @@
   <!--  import -->
   <string name="import_title">Importar…</string>
   <string name="web_import_title">Importar de la web</string>
-  <string name="web_import_server_problem">ha habido un problema al contactar con el servidor. Vuelve a registrar tu dispositivo e inténtalo de nuevo.</string>
   <string name="web_import_waiting">Esperando por nuevos escondites desde la web…</string>
   <string name="web_downloading">Descargando</string>
   <string name="web_downloaded">Descargados</string>  
@@ -602,7 +535,6 @@
 
   <!-- popup -->
   <string name="popup_more">Más detalles</string>
-  <string name="popup_offline">Desconectado</string>
 
   <!-- waypoint -->
   <string name="waypoint_title">Punto de referencia</string>
@@ -623,14 +555,7 @@
   <string name="search_history_empty">No hay destinos anteriores</string>
   <string name="search_remove_destination">Destino borrado</string>
   <string name="search_clear_history">Borrar historial</string>
-  <string name="search_history_cleared">Historial borrado</string>  
-
-  <string-array name="waypoint_coordinate_formats">
-    <item>Plain</item>
-  <item>GGG.GGGGGº</item>
-	<item>GGGºMM.MMM\'</item>
-	<item>GGGºMM\'SS.SSS\"</item>
-  </string-array>  
+  <string name="search_history_cleared">Historial borrado</string>
   
   <!-- visit -->
   <string name="visit_tweet">Publicar en Twitter</string>
@@ -641,13 +566,13 @@
   <string name="map_view_map">Ver mapa</string>
   <string name="map_trail_show">Mostrar rastro</string>
   <string name="map_trail_hide">Ocultar rastro</string>
-  <string name="map_circles_show">Mostrar círculos</string> <!-- since: 2.23 RC3 -->
-  <string name="map_circles_hide">Ocultar círculos</string> <!-- since: 2.23 RC3 -->
+  <string name="map_circles_show">Mostrar círculos</string>
+  <string name="map_circles_hide">Ocultar círculos</string>
   <string name="map_live_enable">Activar en vivo</string>
   <string name="map_live_disable">Desactivar en vivo</string>
   <string name="map_static_title">Mapas estáticos</string>
   <string name="map_static_loading">Cargando mapas estáticos…</string>
-  <string name="map_token_err">Dado que c:geo sólo es capaz de descargar datos parciales, la coordenadas de algunso escondites pueden ser inexactas.</string> <!-- since: 2.26 RC3 -->
+  <string name="map_token_err">Dado que c:geo sólo es capaz de descargar datos parciales, la coordenadas de algunso escondites pueden ser inexactas.</string>
 
   <!-- search -->
   <string name="search_bar_hint">Buscar escondites</string>
@@ -661,9 +586,6 @@
   <string name="search_kw">Palabras clave</string>
   <string name="search_kw_prefill">palabra clave</string>
   <string name="search_kw_button">Buscar por palabra clave</string>
-  <string name="search_kw_caches">Escondites por palabra clave</string>
-  <string name="search_caches_found_by">Encondites encontrados por</string>
-  <string name="search_caches_hidden_by">Escondites ocultos por</string>
   <string name="search_fbu">Encontrar por usuario</string>
   <string name="search_fbu_prefill">Nombre de usuario</string>
   <string name="search_fbu_button">Buscar por nombre de usuario</string>
@@ -675,16 +597,11 @@
   <string name="search_tb_button">Buscar rastreables</string>
   <string name="search_destination">Destino</string>
   <string name="search_direction_rel">Desde esta posición</string>
-  <string name="search_lat">Lat</string>
-  <string name="search_lon">Lon</string>
-  <string name="search_caches">Buscar escondites</string>
-  <string name="search_caches_near">Escondites cercanos</string>
   <string name="search_address_started">Buscando lugares</string>
   <string name="search_address_result">Lugares encontrados</string>
 
   <!-- trackable -->
   <string name="trackable">Rastreable</string>
-  <string name="trackable_select_title">Rastreables</string>
   <string name="trackable_details_loading">Cargando detalles del rastreable…</string>
   <string name="trackable_log_touch">Registrar contacto</string>
   <string name="trackable_browser_open">Abrir en navegador</string>
@@ -877,7 +794,7 @@
   <string name="attribute_food_no">No hay comida cerca</string>
 
   <!-- next things -->
-  <string name="legal_note">Para utilizar los servicios de geocaching.com, debes aceptar las <a href="http://www.geocaching.com/about/termsofuse.aspx">condiciones de Groundspeak</a>.</string>
+  <string name="legal_note">Para utilizar los servicios de Geocaching.com, debes aceptar las <a href="http://www.geocaching.com/about/termsofuse.aspx">condiciones de Groundspeak</a>.</string>
   <string name="quote">Para hacer el geocaching más sencillo, para hacer a los usuarios más vagos.</string>
 
   <string name="author">Autor: <a href="http://carnero.cc/">carnero</a></string>

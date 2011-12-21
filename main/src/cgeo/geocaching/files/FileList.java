@@ -1,10 +1,12 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.activity.AbstractListActivity;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -41,7 +43,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
         @Override
         public void handleMessage(Message msg) {
             try {
-                if (files == null || files.isEmpty()) {
+                if (CollectionUtils.isEmpty(files)) {
                     if (waitDialog != null) {
                         waitDialog.dismiss();
                     }
@@ -63,7 +65,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
                 if (waitDialog != null) {
                     waitDialog.dismiss();
                 }
-                Log.e(cgSettings.tag, "cgFileList.loadFilesHandler: " + e.toString());
+                Log.e(Settings.tag, "cgFileList.loadFilesHandler: " + e.toString());
             }
         }
     };
@@ -114,7 +116,6 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
     public void onResume() {
         super.onResume();
 
-        getSettings().load();
     }
 
     protected abstract T getAdapter(List<File> files);
@@ -131,7 +132,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
      *
      * @return The folder to start the recursive search in
      */
-    protected abstract String[] getBaseFolders();
+    protected abstract File[] getBaseFolders();
 
     /**
      * Triggers the deriving class to set the title
@@ -150,10 +151,8 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
             try {
                 if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                     boolean loaded = false;
-                    for (String baseFolder : getBaseFolders())
+                    for (final File dir : getBaseFolders())
                     {
-                        final File dir = new File(baseFolder);
-
                         if (dir.exists() && dir.isDirectory()) {
                             listDir(list, dir);
                             if (list.size() > 0) {
@@ -166,10 +165,10 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
                         listDir(list, Environment.getExternalStorageDirectory());
                     }
                 } else {
-                    Log.w(cgSettings.tag, "No external media mounted.");
+                    Log.w(Settings.tag, "No external media mounted.");
                 }
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgFileList.loadFiles.run: " + e.toString());
+                Log.e(Settings.tag, "cgFileList.loadFiles.run: " + e.toString());
             }
 
             final Message msg = new Message();
@@ -200,14 +199,9 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
                 }
                 String name = file.getName();
                 if (file.isFile()) {
-                    for (String ext : extensions) {
-                        int extLength = ext.length();
-                        if (name.length() > extLength && name.substring(name.length() - extLength, name.length()).equalsIgnoreCase(ext)) {
-                            result.add(file); // add file to list
-                            break;
-                        }
+                    if (filenameBelongsToList(name)) {
+                        result.add(file); // add file to list
                     }
-
                 } else if (file.isDirectory()) {
                     if (name.charAt(0) == '.') {
                         continue; // skip hidden directories
@@ -227,6 +221,22 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
         return;
     }
 
+    /**
+     * Check if a filename belongs to the FileList. This implementation checks for file extensions.
+     * Subclasses may override this method to filter out specific files.
+     *
+     * @param filename
+     * @return <code>true</code> if the filename belongs to the list
+     */
+    protected boolean filenameBelongsToList(final String filename) {
+        for (String ext : extensions) {
+            if (StringUtils.endsWithIgnoreCase(filename, ext)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     protected FileList(final String extension) {
         setExtensions(new String[] { extension });
     }
@@ -236,9 +246,10 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
     }
 
     private void setExtensions(String[] extensionsIn) {
-        for (String extension : extensionsIn) {
+        for (int i = 0; i < extensionsIn.length; i++) {
+            String extension = extensionsIn[i];
             if (extension.length() == 0 || extension.charAt(0) != '.') {
-                extension = "." + extension;
+                extensionsIn[i] = "." + extension;
             }
         }
         extensions = extensionsIn;

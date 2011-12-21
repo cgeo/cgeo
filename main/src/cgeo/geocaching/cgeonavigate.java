@@ -2,12 +2,12 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.maps.CGeoMap;
 
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,12 +20,18 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import java.util.Locale;
 
 public class cgeonavigate extends AbstractActivity {
 
-    public final static List<cgCoord> coordinates = new ArrayList<cgCoord>();
+    private static final String EXTRAS_LONGITUDE = "longitude";
+    private static final String EXTRAS_LATITUDE = "latitude";
+    private static final String EXTRAS_NAME = "name";
+    private static final String EXTRAS_GEOCODE = "geocode";
+    private static final List<cgCoord> coordinates = new ArrayList<cgCoord>();
+    private static final int MENU_MAP = 0;
+    private static final int MENU_SWITCH_COMPASS_GPS = 1;
     private PowerManager pm = null;
     private cgGeo geo = null;
     private cgDirection dir = null;
@@ -33,7 +39,7 @@ public class cgeonavigate extends AbstractActivity {
     private cgUpdateDir dirUpdate = new UpdateDirection();
     private Geopoint dstCoords = null;
     private float cacheHeading = 0;
-    private float northHeading = 0;
+    private Float northHeading = null;
     private String title = null;
     private String name = null;
     private TextView navType = null;
@@ -49,14 +55,15 @@ public class cgeonavigate extends AbstractActivity {
         @Override
         public void handleMessage(Message msg) {
             try {
-                if (compassView != null) {
+                if (compassView != null && northHeading != null) {
                     compassView.updateNorth(northHeading, cacheHeading);
                 }
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgeonavigate.updaterHandler: " + e.toString());
+                Log.e(Settings.tag, "cgeonavigate.updaterHandler: " + e.toString());
             }
         }
     };
+    private String geocode;
 
     public cgeonavigate() {
         super("c:geo-compass");
@@ -74,18 +81,19 @@ public class cgeonavigate extends AbstractActivity {
 
         // sensor & geolocation manager
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
+            geo = app.startGeo(geoUpdate);
         }
-        if (settings.useCompass == 1 && dir == null) {
+        if (Settings.isUseCompass() && dir == null) {
             dir = app.startDir(this, dirUpdate);
         }
 
         // get parameters
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            title = extras.getString("geocode");
-            name = extras.getString("name");
-            dstCoords = new Geopoint(extras.getDouble("latitude"), extras.getDouble("longitude"));
+            geocode = extras.getString(EXTRAS_GEOCODE);
+            title = geocode;
+            name = extras.getString(EXTRAS_NAME);
+            dstCoords = new Geopoint(extras.getDouble(EXTRAS_LATITUDE), extras.getDouble(EXTRAS_LONGITUDE));
 
             if (StringUtils.isNotBlank(name)) {
                 if (StringUtils.isNotBlank(title)) {
@@ -102,22 +110,11 @@ public class cgeonavigate extends AbstractActivity {
             return;
         }
 
-        if (StringUtils.isNotBlank(title)) {
-            app.setAction(title);
-        } else if (StringUtils.isNotBlank(name)) {
-            app.setAction(name);
-        }
+        setGo4CacheAction();
 
         // set header
         setTitle();
         setDestCoords();
-
-        // get textviews once
-        compassView = (cgCompass) findViewById(R.id.rose);
-
-        // start updater thread
-        updater = new updaterThread(updaterHandler);
-        updater.start();
 
         if (geo != null) {
             geoUpdate.updateLoc(geo);
@@ -125,25 +122,26 @@ public class cgeonavigate extends AbstractActivity {
         if (dir != null) {
             dirUpdate.updateDir(dir);
         }
+
+        // get textviews once
+        compassView = (cgCompass) findViewById(R.id.rose);
+
+        // start updater thread
+        updater = new updaterThread(updaterHandler);
+        updater.start();
     }
 
     @Override
     public void onResume() {
         super.onResume();
 
-        settings.load();
-
-        if (StringUtils.isNotBlank(title)) {
-            app.setAction(title);
-        } else if (StringUtils.isNotBlank(name)) {
-            app.setAction(name);
-        }
+        setGo4CacheAction();
 
         // sensor & geolocation manager
         if (geo == null) {
-            geo = app.startGeo(this, geoUpdate, base, settings, 0, 0);
+            geo = app.startGeo(geoUpdate);
         }
-        if (settings.useCompass == 1 && dir == null) {
+        if (Settings.isUseCompass() && dir == null) {
             dir = app.startDir(this, dirUpdate);
         }
 
@@ -156,6 +154,14 @@ public class cgeonavigate extends AbstractActivity {
         if (updater == null) {
             updater = new updaterThread(updaterHandler);
             updater.start();
+        }
+    }
+
+    private void setGo4CacheAction() {
+        if (StringUtils.isNotBlank(geocode)) {
+            app.setAction(geocode);
+        } else if (StringUtils.isNotBlank(name)) {
+            app.setAction(name);
         }
     }
 
@@ -200,19 +206,19 @@ public class cgeonavigate extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (settings.useCompass == 1) {
-            menu.add(0, 1, 0, res.getString(R.string.use_gps)).setIcon(android.R.drawable.ic_menu_compass);
+        if (Settings.isUseCompass()) {
+            menu.add(0, MENU_SWITCH_COMPASS_GPS, 0, res.getString(R.string.use_gps)).setIcon(android.R.drawable.ic_menu_compass);
         } else {
-            menu.add(0, 1, 0, res.getString(R.string.use_compass)).setIcon(android.R.drawable.ic_menu_compass);
+            menu.add(0, MENU_SWITCH_COMPASS_GPS, 0, res.getString(R.string.use_compass)).setIcon(android.R.drawable.ic_menu_compass);
         }
-        menu.add(0, 0, 0, res.getString(R.string.caches_on_map)).setIcon(android.R.drawable.ic_menu_mapmode);
+        menu.add(0, MENU_MAP, 0, res.getString(R.string.caches_on_map)).setIcon(android.R.drawable.ic_menu_mapmode);
         menu.add(0, 2, 0, res.getString(R.string.destination_set)).setIcon(android.R.drawable.ic_menu_edit);
         if (coordinates.size() > 1) {
             SubMenu subMenu = menu.addSubMenu(0, 3, 0, res.getString(R.string.destination_select)).setIcon(android.R.drawable.ic_menu_myplaces);
 
             int cnt = 4;
             for (cgCoord coordinate : coordinates) {
-                subMenu.add(0, cnt, 0, coordinate.name + " (" + coordinate.type + ")");
+                subMenu.add(0, cnt, 0, coordinate.getName() + " (" + coordinate.getCoordType() + ")");
                 cnt++;
             }
 
@@ -230,7 +236,7 @@ public class cgeonavigate extends AbstractActivity {
 
         MenuItem item;
         item = menu.findItem(1);
-        if (settings.useCompass == 1) {
+        if (Settings.isUseCompass()) {
             item.setTitle(res.getString(R.string.use_gps));
         } else {
             item.setTitle(res.getString(R.string.use_compass));
@@ -243,34 +249,19 @@ public class cgeonavigate extends AbstractActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == 0) {
-            Intent mapIntent = new Intent(this, settings.getMapFactory().getMapClass());
-            mapIntent.putExtra("detail", false);
-            mapIntent.putExtra("latitude", dstCoords.getLatitude());
-            mapIntent.putExtra("longitude", dstCoords.getLongitude());
-
-            startActivity(mapIntent);
-        } else if (id == 1) {
-            if (settings.useCompass == 1) {
-                settings.useCompass = 0;
-
+        if (id == MENU_MAP) {
+            CGeoMap.startActivityCoords(this, dstCoords, null, null);
+        } else if (id == MENU_SWITCH_COMPASS_GPS) {
+            boolean oldSetting = Settings.isUseCompass();
+            Settings.setUseCompass(!oldSetting);
+            if (oldSetting) {
                 if (dir != null) {
                     dir = app.removeDir();
                 }
-
-                SharedPreferences.Editor prefsEdit = getSharedPreferences(cgSettings.preferences, 0).edit();
-                prefsEdit.putInt("usecompass", settings.useCompass);
-                prefsEdit.commit();
             } else {
-                settings.useCompass = 1;
-
                 if (dir == null) {
                     dir = app.startDir(this, dirUpdate);
                 }
-
-                SharedPreferences.Editor prefsEdit = getSharedPreferences(cgSettings.preferences, 0).edit();
-                prefsEdit.putInt("usecompass", settings.useCompass);
-                prefsEdit.commit();
             }
         } else if (id == 2) {
             Intent pointIntent = new Intent(this, cgeopoint.class);
@@ -281,15 +272,13 @@ public class cgeonavigate extends AbstractActivity {
         } else if (id > 3 && coordinates.get(id - 4) != null) {
             cgCoord coordinate = coordinates.get(id - 4);
 
-            title = coordinate.name;
-            dstCoords = coordinate.coords;
+            title = coordinate.getName();
+            dstCoords = coordinate.getCoords();
             setTitle();
             setDestCoords();
             updateDistanceInfo();
 
-            Log.d(cgSettings.tag, "destination set: " + title + " (" +
-                    String.format(Locale.getDefault(), "%.8f", dstCoords.getLatitude()) + " | " +
-                    String.format(Locale.getDefault(), "%.8f", dstCoords.getLongitude()) + ")");
+            Log.d(Settings.tag, "destination set: " + title + " (" + dstCoords + ")");
             return true;
         }
 
@@ -309,7 +298,7 @@ public class cgeonavigate extends AbstractActivity {
             return;
         }
 
-        ((TextView) findViewById(R.id.destination)).setText(cgBase.formatCoords(dstCoords, true));
+        ((TextView) findViewById(R.id.destination)).setText(dstCoords.toString());
     }
 
     public void setDest(final Geopoint coords) {
@@ -342,8 +331,8 @@ public class cgeonavigate extends AbstractActivity {
         }
 
         cacheHeading = geo.coordsNow.bearingTo(dstCoords);
-        distanceView.setText(base.getHumanDistance(geo.coordsNow.distanceTo(dstCoords)));
-        headingView.setText(String.format(Locale.getDefault(), "%.0f", cacheHeading) + "°");
+        distanceView.setText(cgBase.getHumanDistance(geo.coordsNow.distanceTo(dstCoords)));
+        headingView.setText(String.format("%.0f", cacheHeading) + "°");
     }
 
     private class update extends cgUpdateLoc {
@@ -372,35 +361,23 @@ public class cgeonavigate extends AbstractActivity {
                         satellites = "";
                     }
                     navSatellites.setText(satellites);
-
-                    if (geo.gps == -1) {
-                        navType.setText(res.getString(R.string.loc_last));
-                    } else if (geo.gps == 0) {
-                        navType.setText(res.getString(R.string.loc_net));
-                    } else {
-                        navType.setText(res.getString(R.string.loc_gps));
-                    }
+                    navType.setText(res.getString(geo.locationProvider.resourceId));
 
                     if (geo.accuracyNow != null) {
-                        if (settings.units == cgSettings.unitsImperial) {
-                            navAccuracy.setText("±" + String.format(Locale.getDefault(), "%.0f", (geo.accuracyNow * 3.2808399)) + " ft");
+                        if (Settings.isUseMetricUnits()) {
+                            navAccuracy.setText("±" + String.format("%.0f", geo.accuracyNow) + " m");
                         } else {
-                            navAccuracy.setText("±" + String.format(Locale.getDefault(), "%.0f", geo.accuracyNow) + " m");
+                            navAccuracy.setText("±" + String.format("%.0f", (geo.accuracyNow * 3.2808399)) + " ft");
                         }
                     } else {
                         navAccuracy.setText(null);
                     }
 
                     if (geo.altitudeNow != null) {
-                        String humanAlt;
-                        if (settings.units == cgSettings.unitsImperial) {
-                            humanAlt = String.format("%.0f", (geo.altitudeNow * 3.2808399)) + " ft";
-                        } else {
-                            humanAlt = String.format("%.0f", geo.altitudeNow) + " m";
-                        }
-                        navLocation.setText(cgBase.formatCoords(geo.coordsNow, true) + " | " + humanAlt);
+                        final String humanAlt = cgBase.getHumanDistance(geo.altitudeNow.floatValue() / 1000);
+                        navLocation.setText(geo.coordsNow + " | " + humanAlt);
                     } else {
-                        navLocation.setText(cgBase.formatCoords(geo.coordsNow, true));
+                        navLocation.setText(geo.coordsNow.toString());
                     }
 
                     updateDistanceInfo();
@@ -410,15 +387,15 @@ public class cgeonavigate extends AbstractActivity {
                     navLocation.setText(res.getString(R.string.loc_trying));
                 }
 
-                if (settings.useCompass == 0 || (geo.speedNow != null && geo.speedNow > 5)) { // use GPS when speed is higher than 18 km/h
-                    if (geo != null && geo.bearingNow != null) {
+                if (!Settings.isUseCompass() || (geo.speedNow != null && geo.speedNow > 5)) { // use GPS when speed is higher than 18 km/h
+                    if (geo.bearingNow != null) {
                         northHeading = geo.bearingNow;
                     } else {
-                        northHeading = 0;
+                        northHeading = 0f;
                     }
                 }
             } catch (Exception e) {
-                Log.w(cgSettings.tag, "Failed to update location.");
+                Log.w(Settings.tag, "Failed to update location.");
             }
         }
     }
@@ -459,5 +436,19 @@ public class cgeonavigate extends AbstractActivity {
                 }
             }
         }
+    }
+
+    public static void startActivity(final Context context, final String geocode, final String displayedName, final Geopoint coords, final Collection<cgCoord> coordinatesWithType) {
+        coordinates.clear();
+        coordinates.addAll(coordinatesWithType);
+
+        final Intent navigateIntent = new Intent(context, cgeonavigate.class);
+        navigateIntent.putExtra(EXTRAS_LATITUDE, coords.getLatitude());
+        navigateIntent.putExtra(EXTRAS_LONGITUDE, coords.getLongitude());
+        navigateIntent.putExtra(EXTRAS_GEOCODE, geocode.toUpperCase());
+        if (null != displayedName) {
+            navigateIntent.putExtra(EXTRAS_NAME, displayedName);
+        }
+        context.startActivity(navigateIntent);
     }
 }

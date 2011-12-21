@@ -1,38 +1,46 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.widget.TextView;
 
 import java.util.List;
 
-public class cgWaypoint implements Comparable<cgWaypoint> {
-    public Integer id = 0;
-    public String geocode = "geocode";
-    public String type = "waypoint";
+public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
+
+    private Integer id = 0;
+    private String geocode = "geocode";
+    private WaypointType waypointType = WaypointType.WAYPOINT;
     private String prefix = "";
-    public String lookup = "";
-    public String name = "";
-    public String latlon = "";
-    public String latitudeString = "";
-    public String longitudeString = "";
-    public Geopoint coords = null;
-    public String note = "";
+    private String lookup = "";
+    private String name = "";
+    private String latlon = "";
+    private Geopoint coords = null;
+    private String note = "";
     private Integer cachedOrder = null;
 
-    public void setIcon(Resources res, cgBase base, TextView nameView) {
-        int iconId = R.drawable.waypoint_waypoint;
-        if (type != null) {
-            int specialId = res.getIdentifier("waypoint_" + type, "drawable", base.context.getPackageName());
-            if (specialId > 0) {
-                iconId = specialId;
-            }
-        }
-        nameView.setCompoundDrawablesWithIntrinsicBounds((Drawable) res.getDrawable(iconId), null, null, null);
+    /**
+     * default constructor, no fields are set
+     */
+    public cgWaypoint() {
+    }
+
+    /**
+     * copy constructor
+     *
+     * @param other
+     */
+    public cgWaypoint(final cgWaypoint other) {
+        merge(other);
+        id = 0;
+    }
+
+    public void setIcon(final Resources res, final TextView nameView) {
+        nameView.setCompoundDrawablesWithIntrinsicBounds(res.getDrawable(waypointType.drawableId), null, null, null);
     }
 
     public void merge(final cgWaypoint old) {
@@ -43,19 +51,13 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
             lookup = old.lookup;
         }
         if (StringUtils.isBlank(name)) {
-            this.name = old.name;
+            setName(old.getName());
         }
-        if (StringUtils.isBlank(latlon)) {
+        if (StringUtils.isBlank(latlon) || latlon.startsWith("?")) { // there are waypoints containing "???"
             latlon = old.latlon;
         }
-        if (StringUtils.isBlank(latitudeString)) {
-            latitudeString = old.latitudeString;
-        }
-        if (StringUtils.isBlank(longitudeString)) {
-            longitudeString = old.longitudeString;
-        }
         if (coords == null) {
-            coords = old.coords;
+            coords = old.getCoords();
         }
         if (StringUtils.isBlank(note)) {
             note = old.note;
@@ -73,10 +75,10 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
         if (newPoints != null && oldPoints != null) {
             for (cgWaypoint old : oldPoints) {
                 boolean merged = false;
-                if (old != null && old.name != null && old.name.length() > 0) {
+                if (old != null && old.getName() != null && old.getName().length() > 0) {
                     for (cgWaypoint waypoint : newPoints) {
-                        if (waypoint != null && waypoint.name != null) {
-                            if (old.name.equalsIgnoreCase(waypoint.name)) {
+                        if (waypoint != null && waypoint.getName() != null) {
+                            if (old.getName().equalsIgnoreCase(waypoint.getName())) {
                                 waypoint.merge(old);
                                 merged = true;
                                 break;
@@ -93,33 +95,31 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
     }
 
     public boolean isUserDefined() {
-        return type != null && type.equalsIgnoreCase("own");
+        return waypointType == WaypointType.OWN;
+    }
+
+    public void setUserDefined() {
+        waypointType = WaypointType.OWN;
+        setPrefix("OWN");
     }
 
     private int computeOrder() {
-        if (StringUtils.isEmpty(getPrefix())) {
-            return 0;
-        }
-        // check only the first character. sometimes there are inconsistencies like FI or FN for the FINAL
-        char firstLetter = Character.toUpperCase(getPrefix().charAt(0));
-        switch (firstLetter) {
-            case 'P':
-                return -100; // parking
-            case 'S': { // stage N
-                try {
-                    Integer stageNumber = Integer.valueOf(getPrefix().substring(1));
-                    return stageNumber;
-                } catch (NumberFormatException e) {
-                    // nothing
-                }
+        switch (waypointType) {
+            case PARKING:
+                return -1;
+            case TRAILHEAD:
+                return 1;
+            case STAGE: // puzzles and stages with same value
+                return 2;
+            case PUZZLE:
+                return 2;
+            case FINAL:
+                return 3;
+            case OWN:
+                return 4;
+            default:
                 return 0;
-            }
-            case 'F':
-                return 1000; // final
-            case 'O':
-                return 10000; // own
         }
-        return 0;
     }
 
     private int order() {
@@ -142,4 +142,81 @@ public class cgWaypoint implements Comparable<cgWaypoint> {
         this.prefix = prefix;
         cachedOrder = null;
     }
+
+    public String getUrl() {
+        return "http://coord.info/" + geocode.toUpperCase();
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getGeocode() {
+        return geocode;
+    }
+
+    public void setGeocode(String geocode) {
+        this.geocode = geocode;
+    }
+
+    public WaypointType getWaypointType() {
+        return waypointType;
+    }
+
+    public void setWaypointType(WaypointType type) {
+        this.waypointType = type;
+    }
+
+    public String getLookup() {
+        return lookup;
+    }
+
+    public void setLookup(String lookup) {
+        this.lookup = lookup;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLatlon() {
+        return latlon;
+    }
+
+    public void setLatlon(String latlon) {
+        this.latlon = latlon;
+    }
+
+    public Geopoint getCoords() {
+        return coords;
+    }
+
+    public void setCoords(Geopoint coords) {
+        this.coords = coords;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public Integer getCachedOrder() {
+        return cachedOrder;
+    }
+
+    public void setCachedOrder(Integer cachedOrder) {
+        this.cachedOrder = cachedOrder;
+    }
+
 }

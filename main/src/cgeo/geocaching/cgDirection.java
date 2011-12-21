@@ -10,7 +10,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 public class cgDirection {
-    private cgDirection dir = null;
     private Context context = null;
     private SensorManager sensorManager = null;
     private cgeoSensorListener sensorListener = null;
@@ -22,11 +21,10 @@ public class cgDirection {
         context = contextIn;
         dirUpdate = dirUpdateIn;
         sensorListener = new cgeoSensorListener();
+        initDir();
     }
 
-    public void initDir() {
-        dir = this;
-
+    private void initDir() {
         if (sensorManager == null) {
             sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         }
@@ -43,7 +41,7 @@ public class cgDirection {
         dirUpdate = dirUpdateIn;
 
         if (dirUpdate != null && directionNow != null) {
-            dirUpdate.updateDir(dir);
+            dirUpdate.updateDir(this);
         }
     }
 
@@ -60,7 +58,7 @@ public class cgDirection {
              * See for example https://code.google.com/p/android/issues/detail?id=14792
              */
 
-            //Log.i(cgSettings.tag, "Compass' accuracy is low (" + accuracy + ")");
+            //Log.i(Settings.tag, "Compass' accuracy is low (" + accuracy + ")");
         }
 
         @Override
@@ -68,7 +66,7 @@ public class cgDirection {
             directionNow = Compatibility.getDirectionNow(event.values[0], (Activity) context);
 
             if (dirUpdate != null && directionNow != null) {
-                dirUpdate.updateDir(dir);
+                dirUpdate.updateDir(cgDirection.this);
             }
         }
     }

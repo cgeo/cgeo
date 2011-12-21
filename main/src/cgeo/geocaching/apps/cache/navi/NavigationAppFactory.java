@@ -1,8 +1,9 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -14,8 +15,6 @@ import android.content.res.Resources;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import java.util.UUID;
 
 public final class NavigationAppFactory extends AbstractAppFactory {
     private static NavigationApp[] apps = new NavigationApp[] {};
@@ -37,11 +36,18 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         return apps;
     }
 
-    public static void addMenuItems(Menu menu, Activity activity,
-            Resources res) {
+    public static void addMenuItems(final Menu menu, final Activity activity,
+            final Resources res) {
+        addMenuItems(menu, activity, res, true);
+    }
+
+    public static void addMenuItems(final Menu menu, final Activity activity,
+            final Resources res, final boolean showInternalMap) {
         for (NavigationApp app : getNavigationApps(res)) {
             if (app.isInstalled(activity)) {
-                menu.add(0, app.getId(), 0, app.getName());
+                if (showInternalMap || !(app instanceof InternalMap)) {
+                    menu.add(0, app.getId(), 0, app.getName());
+                }
             }
         }
     }
@@ -49,14 +55,14 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     public static boolean onMenuItemSelected(final MenuItem item,
             final cgGeo geo, Activity activity, Resources res,
             cgCache cache,
-            final UUID searchId, cgWaypoint waypoint, final Geopoint destination) {
+            final cgSearch search, cgWaypoint waypoint, final Geopoint destination) {
         NavigationApp app = (NavigationApp) getAppFromMenuItem(item, apps);
         if (app != null) {
             try {
                 return app.invoke(geo, activity, res, cache,
-                        searchId, waypoint, destination);
+                        search, waypoint, destination);
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "NavigationAppFactory.onMenuItemSelected: " + e.toString());
+                Log.e(Settings.tag, "NavigationAppFactory.onMenuItemSelected: " + e.toString());
             }
         }
         return false;

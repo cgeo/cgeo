@@ -1,6 +1,6 @@
 package cgeo.geocaching.maps.interfaces;
 
-import cgeo.geocaching.cgUser;
+import cgeo.geocaching.go4cache.Go4CacheUser;
 
 /**
  * Common functions of the provider-specific
@@ -11,5 +11,5 @@ import cgeo.geocaching.cgUser;
  */
 public interface OtherCachersOverlayItemImpl extends OverlayItemImpl {
 
-    public cgUser getUser();
+    public Go4CacheUser getUser();
 }

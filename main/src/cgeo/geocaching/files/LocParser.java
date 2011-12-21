@@ -1,24 +1,26 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCacheWrap;
 import cgeo.geocaching.cgCoord;
-import cgeo.geocaching.cgSearch;
-import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.GeopointParser;
+import cgeo.geocaching.utils.CancellableHandler;
 
 import org.apache.commons.lang3.StringUtils;
 
-import android.os.Handler;
 import android.util.Log;
 
-import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,14 +40,16 @@ public final class LocParser extends FileParser {
             .compile("<container>([^<]+)</container>");
     private static final Pattern patternName = Pattern.compile("CDATA\\[([^\\]]+)\\]");
 
+    private int listId;
+
     public static void parseLoc(final cgCacheWrap caches,
             final String fileContent) {
         final Map<String, cgCoord> cidCoords = parseCoordinates(fileContent);
 
         // save found cache coordinates
         for (cgCache cache : caches.cacheList) {
-            if (cidCoords.containsKey(cache.geocode)) {
-                cgCoord coord = cidCoords.get(cache.geocode);
+            if (cidCoords.containsKey(cache.getGeocode())) {
+                cgCoord coord = cidCoords.get(cache.getGeocode());
 
                 copyCoordToCache(coord, cache);
             }
@@ -53,17 +57,17 @@ public final class LocParser extends FileParser {
     }
 
     private static void copyCoordToCache(final cgCoord coord, final cgCache cache) {
-        cache.coords = coord.coords;
-        cache.difficulty = coord.difficulty;
-        cache.terrain = coord.terrain;
-        cache.size = coord.size;
-        cache.geocode = coord.geocode.toUpperCase();
-        if (StringUtils.isBlank(cache.name)) {
-            cache.name = coord.name;
+        cache.setCoords(coord.getCoords());
+        cache.setDifficulty(coord.getDifficulty());
+        cache.setTerrain(coord.getTerrain());
+        cache.setSize(coord.getSize());
+        cache.setGeocode(coord.getGeocode().toUpperCase());
+        if (StringUtils.isBlank(cache.getName())) {
+            cache.setName(coord.getName());
         }
     }
 
-    public static Map<String, cgCoord> parseCoordinates(
+    static Map<String, cgCoord> parseCoordinates(
             final String fileContent) {
         final Map<String, cgCoord> coords = new HashMap<String, cgCoord>();
         if (StringUtils.isBlank(fileContent)) {
@@ -80,29 +84,27 @@ public final class LocParser extends FileParser {
             final Matcher matcherGeocode = patternGeocode.matcher(pointString);
             if (matcherGeocode.find()) {
                 String geocode = matcherGeocode.group(1).trim().toUpperCase();
-                pointCoord.name = geocode;
-                pointCoord.geocode = geocode;
+                pointCoord.setName(geocode);
+                pointCoord.setGeocode(geocode);
             }
             final Matcher matcherName = patternName.matcher(pointString);
             if (matcherName.find()) {
                 String name = matcherName.group(1).trim();
-                pointCoord.name = StringUtils.substringBeforeLast(name, " by ").trim();
+                pointCoord.setName(StringUtils.substringBeforeLast(name, " by ").trim());
                 // owner = StringUtils.substringAfterLast(" by ").trim();
             }
             final Matcher matcherLat = patternLat.matcher(pointString);
             final Matcher matcherLon = patternLon.matcher(pointString);
             if (matcherLat.find() && matcherLon.find()) {
-                pointCoord.coords =
-                        GeopointParser.parse(matcherLat.group(1).trim(), matcherLon.group(1).trim());
+                pointCoord.setCoords(GeopointParser.parse(matcherLat.group(1).trim(), matcherLon.group(1).trim()));
             }
             final Matcher matcherDifficulty = patternDifficulty.matcher(pointString);
             if (matcherDifficulty.find()) {
-                pointCoord.difficulty = new Float(matcherDifficulty.group(1)
-                        .trim());
+                pointCoord.setDifficulty(new Float(matcherDifficulty.group(1).trim()));
             }
             final Matcher matcherTerrain = patternTerrain.matcher(pointString);
             if (matcherTerrain.find()) {
-                pointCoord.terrain = new Float(matcherTerrain.group(1).trim());
+                pointCoord.setTerrain(new Float(matcherTerrain.group(1).trim()));
             }
             final Matcher matcherContainer = patternContainer.matcher(pointString);
             if (matcherContainer.find()) {
@@ -110,64 +112,59 @@ public final class LocParser extends FileParser {
                         .trim());
 
                 if (size == 1) {
-                    pointCoord.size = CacheSize.NOT_CHOSEN;
+                    pointCoord.setSize(CacheSize.NOT_CHOSEN);
                 } else if (size == 2) {
-                    pointCoord.size = CacheSize.MICRO;
+                    pointCoord.setSize(CacheSize.MICRO);
                 } else if (size == 3) {
-                    pointCoord.size = CacheSize.REGULAR;
+                    pointCoord.setSize(CacheSize.REGULAR);
                 } else if (size == 4) {
-                    pointCoord.size = CacheSize.LARGE;
+                    pointCoord.setSize(CacheSize.LARGE);
                 } else if (size == 5) {
-                    pointCoord.size = CacheSize.VIRTUAL;
+                    pointCoord.setSize(CacheSize.VIRTUAL);
                 } else if (size == 6) {
-                    pointCoord.size = CacheSize.OTHER;
+                    pointCoord.setSize(CacheSize.OTHER);
                 } else if (size == 8) {
-                    pointCoord.size = CacheSize.SMALL;
+                    pointCoord.setSize(CacheSize.SMALL);
                 } else {
-                    pointCoord.size = null;
+                    pointCoord.setSize(null);
                 }
             }
 
-            if (StringUtils.isNotBlank(pointCoord.geocode)) {
-                coords.put(pointCoord.geocode, pointCoord);
+            if (StringUtils.isNotBlank(pointCoord.getGeocode())) {
+                coords.put(pointCoord.getGeocode(), pointCoord);
             }
         }
 
-        Log.i(cgSettings.tag,
+        Log.i(Settings.tag,
                 "Coordinates found in .loc file: " + coords.size());
         return coords;
     }
 
-    public static UUID parseLoc(File file, int listId,
-            Handler handler) {
-        final cgSearch search = new cgSearch();
+    public LocParser(int listId) {
+        this.listId = listId;
+    }
 
-        try {
-            final Map<String, cgCoord> coords = parseCoordinates(readFile(file).toString());
-            final cgCacheWrap caches = new cgCacheWrap();
-            for (Entry<String, cgCoord> entry : coords.entrySet()) {
-                cgCoord coord = entry.getValue();
-                if (StringUtils.isBlank(coord.geocode) || StringUtils.isBlank(coord.name)) {
-                    continue;
-                }
-                cgCache cache = new cgCache();
-                copyCoordToCache(coord, cache);
-                caches.cacheList.add(cache);
-
-                fixCache(cache);
-                cache.type = "traditional"; // type is not given in the LOC file
-                cache.reason = listId;
-                cache.detailed = true;
-
-                cgeoapplication.getInstance().addCacheToSearch(search, cache);
+    @Override
+    public Collection<cgCache> parse(InputStream stream, CancellableHandler progressHandler) throws IOException, ParserException {
+        // TODO: progress reporting happens during reading stream only, not during parsing
+        String streamContent = readStream(stream, progressHandler).toString();
+        final Map<String, cgCoord> coords = parseCoordinates(streamContent);
+        final List<cgCache> caches = new ArrayList<cgCache>();
+        for (Entry<String, cgCoord> entry : coords.entrySet()) {
+            cgCoord coord = entry.getValue();
+            if (StringUtils.isBlank(coord.getGeocode()) || StringUtils.isBlank(coord.getName())) {
+                continue;
             }
-            caches.totalCnt = caches.cacheList.size();
-            showCountMessage(handler, search.getCount());
-            Log.i(cgSettings.tag, "Caches found in .gpx file: " + caches.totalCnt);
-        } catch (Exception e) {
-            Log.e(cgSettings.tag, "cgBase.parseGPX: " + e.toString());
-        }
+            cgCache cache = new cgCache();
+            copyCoordToCache(coord, cache);
+            caches.add(cache);
 
-        return search.getCurrentId();
+            fixCache(cache);
+            cache.setType(CacheType.UNKNOWN); // type is not given in the LOC file
+            cache.setReason(listId);
+            cache.setDetailed(true);
+        }
+        Log.i(Settings.tag, "Caches found in .loc file: " + caches.size());
+        return caches;
     }
 }

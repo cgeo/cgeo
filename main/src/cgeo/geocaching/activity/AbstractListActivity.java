@@ -1,14 +1,15 @@
 package cgeo.geocaching.activity;
 
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgSettings;
 import cgeo.geocaching.cgeoapplication;
 
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -20,8 +21,6 @@ public abstract class AbstractListActivity extends ListActivity implements
 
     protected cgeoapplication app = null;
     protected Resources res = null;
-    protected cgSettings settings = null;
-    protected cgBase base = null;
     protected SharedPreferences prefs = null;
 
     protected AbstractListActivity() {
@@ -56,8 +55,12 @@ public abstract class AbstractListActivity extends ListActivity implements
         ActivityMixin.showShortToast(this, text);
     }
 
-    public final void helpDialog(String title, String message) {
-        ActivityMixin.helpDialog(this, title, message);
+    public final void helpDialog(final String title, final String message) {
+        ActivityMixin.helpDialog(this, title, message, null);
+    }
+
+    public final void helpDialog(final String title, final String message, final Drawable icon) {
+        ActivityMixin.helpDialog(this, title, message, icon);
     }
 
     @Override
@@ -67,17 +70,12 @@ public abstract class AbstractListActivity extends ListActivity implements
         // init
         res = this.getResources();
         app = (cgeoapplication) this.getApplication();
-        prefs = getSharedPreferences(cgSettings.preferences, Context.MODE_PRIVATE);
-        settings = new cgSettings(this, prefs);
-        base = new cgBase(app, settings, prefs);
+        prefs = getSharedPreferences(Settings.preferences, Context.MODE_PRIVATE);
+        cgBase.initialize(app);
     }
 
     final public void setTitle(final String title) {
         ActivityMixin.setTitle(this, title);
-    }
-
-    final public cgSettings getSettings() {
-        return settings;
     }
 
     public void addVisitMenu(Menu menu, cgCache cache) {

@@ -53,7 +53,6 @@
   <string name="log_grabbed">Tatt fra en plass den ikke skulle vært</string>
   <string name="log_maintained">Vedlikehold utført</string>
   <string name="log_maintenance_needed">Trenger vedlikehold</string>
-  <string name="log_maintenance_owner">Vedlikehold</string>
   <string name="log_update">Koordinater oppdatert</string>
   <string name="log_archived">Arkivert</string>
   <string name="log_needs_archived">Bør arkiveres</string>
@@ -88,7 +87,7 @@
   <string name="err_none">Ok</string>
   <string name="err_start">Klarte ikke å koble til</string>
   <string name="err_parse">Klarte ikke å lese innloggings-siden</string>
-  <string name="err_server">Klarte ikke å koble til geocaching.com (server eller tilkobling nede?)</string>
+  <string name="err_server">Klarte ikke å koble til Geocaching.com (server eller tilkobling nede?)</string>
   <string name="err_login">Ingen innloggings-opplysninger lagret</string>
   <string name="err_login_failed">Beklager, c:geo kan ikke logge inn.</string>
   <string name="err_unknown">Ukjent feil</string>
@@ -98,7 +97,6 @@
   <string name="err_license">Brukeren har ikke akseptert Geocaching.com sin lisens-betingelse, så c:geo kan ikke laste cachens koordinater</string>
   <string name="err_store">Beklager, c:geo klarte ikke å lagre cachen.</string>
   <string name="err_drop">Beklager, c:geo klarte ikke å slette cachen.</string>
-  <string name="err_title_problem">problem</string>
   <string name="err_detail_open">Beklager, c:geo klarte ikke å finne detaljene.</string>
   <string name="err_detail_cache">Beklager, c:geo klarte ikke å finne den forespurte cachen. Er du sikker på at den eksisterer?</string>
   <string name="err_detail_cache_find">Beklager, c:geo klarte ikke å finne geocachen</string>
@@ -107,29 +105,18 @@
   <string name="err_detail_cache_find_next">Beklager, c:geo klarte ikke å finne den neste geocachen.</string>
   <string name="err_detail_cache_forgot">Beklager, c:geo glemte hvilken cache du ønsket.</string>
   <string name="err_detail_cache_forgot_visit">Beklager, c:geo glemte hvilken cache du fant.</string>
-  <string name="err_detail_cache_language">c:geo klarte ikke å finne cache-detaljene. Vennligst sjekk om geocaching.com sitt språk er satt til engelsk. Desverre, forstår ikke c:geo andre språk.</string>
   <string name="err_detail_no_spoiler">c:geo fant ingen bilder for denne cachen.</string>
   <string name="err_detail_no_map_static">c:geo fant ingen statiske kart for denne cachen.</string>
-  <string name="err_detail_still_removing">c:geo holder fortsatt på med å slette denne cachen.</string>
-  <string name="err_detail_still_saving">c:geo holder fortsatt på med å lagre denne cachen.</string>
-  <string name="err_detail_still_refreshing">c:geo holder fortsatt på med å laste inn denne cachen på nytt.</string>
-  <string name="err_radar_title">Radar er ikke installert.</string>
-  <string name="err_radar_message">Denne funksjonen krever applikasjonen "Radar" . Burde det være installert?</string>
-  <string name="err_radar_market">c:geo klarte ikke å åpne Android Marked for å søke etter applikasjonen "Radar".</string>
-  <string name="err_radar_generic">Beklager, c:geo klarte ikke å åpne applikasjonen "Radar". Er det installert?</string>
   <string name="err_navigation_no">c:geo klarte ikke å finne støttet navigasjon.</string>
   <string name="err_application_no">c:geo klarte ikke å finne en passende applikasjon.</string>
   <string name="err_auth_initialize">Beklager, c:geo klarte ikke å igangsette autoriserings-prosessen.</string>
   <string name="err_auth_process">Autoriserings-prosessen mislyktes.</string>
   <string name="err_cannot_log_visit">c:geo har ikke nok informasjon til å logge funn. Prøv å laste inn cachens detaljer først.</string>
   <string name="err_init_cleared">Beklager, c:geo klarte ikke å fjerne innloggings-opplysningene.</string>
-  <string name="err_no_chaches">Beklager, c:geo klarte ikke å laste cachen eller cachenes informasjon..</string>
   <string name="err_download_fail">Beklager. c:geo klarte ikke å laste ned cachene p.g.a.</string>
-  <string name="err_update_fail">c:geo klarte ikke å oppdatere avstanden reist</string>
   <string name="err_list_load_fail">Beklager, c:geo klarte ikke å laste cache-listen..</string>
   <string name="err_store_failed">Beklager, c:geo klarte ikke å lagre cachen.</string>
   <string name="err_refresh_failed">Beklager, c:geo klarte ikke å oppdatere cachen.</string>
-  <string name="err_drop_failed">Beklager, c:geo klarte ikke å slette cachen.</string>
   <string name="err_dwld_details_failed">Beklager, c:geo klarte ikke å laste ned cachens detaljer</string>
   <string name="err_dwld_details_failed_reason">Beklager, c:geo klarte ikke å laste ned cachens detaljer p.g.a.</string>
   <string name="err_load_descr_failed">Beklager, c:geo klarte ikke å åpne beskrivelsen.</string>
@@ -148,14 +135,12 @@
   <string name="err_log_load_data_still">c:geo laster fortsatt informasjonen som er nødvendig for å logge funnet. Vennligst vent.</string>
   <string name="err_log_failed_server">Beklager, c:geo klarte ikke å logge funnet fordi serveren er nede.</string>
   <string name="err_log_post_failed">Beklager, c:geo klarte ikke å logge funnet.</string>
-  <string name="err_log_post_failed_because">Beklager, c:geo klarte ikke å logge funnet p.g.a.</string>
 
   <string name="err_search_address_no_match">Beklager, c:geo klarte ikke å finne den forespurte adressen.</string>
   <string name="err_search_address_forgot">Beklager, c:geo glemte adressen du prøvde å finne.</string>
   <string name="err_search_address">Søker etter plasser</string>
   <string name="err_parse_lat">Beklager, c:geo klarte ikke å lese breddegraden.</string>
   <string name="err_parse_lon">Beklager, c:geo klarte ikke å lese lengdegraden.</string>
-  <string name="err_parse_bear">Beklager, c:geo klarte ikke å lese peilingen..</string>
   <string name="err_parse_dist">Beklager, c:geo klarte ikke å lese avstanden.</string>
 
   <string name="warn_save_nothing">Det er ingenting som kan lagres.</string>
@@ -166,10 +151,6 @@
 
   <string name="warn_log_text_fill">Vennligst skriv en logg-tekst.</string>
 
-  <string name="info_altitude">Nåværende høyde</string>
-  <string name="info_distance">Avstand reist</string>
-  <string name="info_distance_cleared">Avstanden reist ble nullstilt.</string>
-  <string name="info_since">\n(siden </string>
 
   <string name="info_log_posted">c:geo lyktes i å logge funnet.</string>
   <string name="info_log_saved">c:geo lyktes i å lagre loggen.</string>
@@ -195,26 +176,17 @@
   <string name="advanced_search_button">Søk</string>
   <string name="stored_caches_button">Lagret</string>
   <string name="any_button">Finn</string>
-  <string name="about_button">Om c:geo</string>
-  <string name="settings_button">Instillinger</string>
-  <string name="type">Type</string>
-  <string name="now_searching">Søker</string>
 
   <!-- caches -->
-  <string name="caches_searching">Søker etter cacher</string>
   <string name="caches_no_cache">ingen cacher</string>
   <string name="caches_more_caches">flere cacher</string>
   <string name="caches_more_caches_no">ingen flere cacher</string>
   <string name="caches_downloading">Laster ned cacher…\nETA: </string>
-  <string name="caches_progress_loading_title">Laster cacher</string>
-  <string name="caches_progress_loading_text">Cachene er lagret på enheten</string>
   <string name="caches_eta_ltm">Mindre enn ett minutt</string>
   <string name="caches_eta_mins"> minutter</string>
   <string name="caches_eta_min"> minutt</string>
-  <string name="caches_no_caches"> (ingen cacher)</string>
   <string name="caches_store_offline">Lagre for offline-bruk</string>
   <string name="caches_store_selected">Lagre valgte</string>
-  <string name="caches_stored">Lagret</string>
   <string name="caches_on_map">Vis på kartet</string>
   <string name="caches_select">Velg fra listen</string>
   <string name="caches_select_mode">Velge-modus</string>
@@ -227,7 +199,6 @@
   <string name="caches_drop_stored">Slett lagrede</string>
   <string name="caches_refresh_selected">Oppdater valgte</string>
   <string name="caches_refresh_all">Oppdater alle</string>
-  <string name="caches_map_cgeo">c:geo</string>
   <string name="caches_map_locus">Locus</string>
 
 
@@ -249,18 +220,16 @@
   <string name="init_passvote">Passord</string>
   <string name="init_login">Sjekk innloggings-opplysninger</string>
   <string name="init_login_popup">Logg inn</string>
-  <string name="init_login_popup_working">Logger inn på geocaching.com…</string>
+  <string name="init_login_popup_working">Logger inn på Geocaching.com…</string>
   <string name="init_login_popup_ok">Innlogging fullført.</string>
   <string name="init_login_popup_failed">Innlogging mislyktes.</string>
   <string name="init_login_popup_failed_reason">Innlogging mislyktes p.g.a.</string>
-  <string name="init_legal">Juridisk informasjon</string>
   <string name="init_go4cache_connect">Koble til go 4 cache</string>
   <string name="init_twitter_authorize">Autoriser c:geo</string>
   <string name="init_twitter_publish">Del på Twitter når du finner cacher</string>
   <string name="init_signature">Signatur</string>
   <string name="init_other">Andre instillinger</string>
   <string name="init_skin">Hvitt tema</string>
-  <string name="init_transparent">Bruk mobilens bakgrunn i menyen</string>
   <string name="init_address">Vis adressen i menyen</string>
   <string name="init_exclude">Ekskluder egne og funnede cacher fra kartet</string>
   <string name="init_disabled">Ekskluder deaktiverte cacher</string>
@@ -312,7 +281,6 @@
   <string name="cache_hint">Hint</string>
   <string name="cache_logs">Loggbok</string>
   <string name="cache_dialog_loading_details">Laster cachens detaljer…</string>
-  <string name="cache_dialog_loading_description">Laster cachens fulle beskrivelse…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">Lagrer cachen for offline-bruk…</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>
@@ -353,10 +321,8 @@
   <string name="cache_calendars">Velg kalender</string>
 
   <!-- gpx -->
-  <string name="gpx_import_loading_stored">Laster cacher fra *.GPX-filer\nlagret:</string>
-  <string name="gpx_import_no_files">Beklager, c:geo fant ingen *.GPX-filer.</string>
   <string name="gpx_import_caches_imported">Cacher importert</string>
-  <string name="gpx_import_loading">Laster cacher fra .*.GPX-fil</string>
+  <string name="gpx_import_loading_caches">Laster cacher fra .*.GPX-fil</string>
   <string name="gpx_import_title">Importer GPX</string>
   <string name="gpx_import_title_reading_file">Leser fil</string>
   <string name="gpx_import_title_caches_imported">Resultat</string>
@@ -367,7 +333,6 @@
 
   <!-- popup -->
   <string name="popup_more">Mer detaljer</string>
-  <string name="popup_offline">Offline</string>
 
   <!-- waypoint -->
   <string name="waypoint_custom">Eget veipunkt</string>
@@ -404,9 +369,6 @@
   <string name="search_kw">Nøkklord</string>
   <string name="search_kw_prefill">Nøkkelord</string>
   <string name="search_kw_button">Søk med nøkkelord</string>
-  <string name="search_kw_caches">Cacher med nøkkelord</string>
-  <string name="search_caches_found_by">Cacher funnet av</string>
-  <string name="search_caches_hidden_by">Cacher gjemt av</string>
   <string name="search_fbu">Funnet av bruker</string>
   <string name="search_fbu_prefill">Brukernavn</string>
   <string name="search_fbu_button">Søk med brukernavn</string>
@@ -418,10 +380,6 @@
   <string name="search_tb_button">Søk etter trackable</string>
   <string name="search_destination">Lokaliser ved hjelp av koordinater</string>
   <string name="search_direction_rel">Fra denne plassen</string>
-  <string name="search_lat">Peiling</string>
-  <string name="search_lon">Lengdegrad</string>
-  <string name="search_caches">Søk etter cacher</string>
-  <string name="search_caches_near">Cacher i nærheten</string>
   <string name="search_address_started">Søker etter steder</string>
   <string name="search_address_result">Fant plasser</string>
 
@@ -457,7 +415,7 @@
   <string name="license_dismiss">Dismiss</string>
 
   <!-- next things -->
-  <string name="legal_note">For å bruke tjenestene til geocaching.com, må brukeren samtykke i vilkårene og betingelsene til <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak\'s ansvarsfraskrivelse</a></string>
+  <string name="legal_note">For å bruke tjenestene til Geocaching.com, må brukeren samtykke i vilkårene og betingelsene til <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeak\'s ansvarsfraskrivelse</a></string>
   <string name="author">utvikler: <a href="http://carnero.cc/">carnero</a></string>
   <string name="support">e-post adresse: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">web-side: <a href="http://cgeo.org/">cgeo.org</a></string>

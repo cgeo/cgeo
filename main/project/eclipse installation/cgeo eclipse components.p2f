@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?p2f version='1.0.0'?>
+<p2f version='1.0.0'>
+  <ius size='16'>
+    <iu id='com.android.ide.eclipse.ddms.feature.group' name='Android DDMS' version='12.0.0.v201106281929-138431'>
+      <repositories size='1'>
+        <repository location='https://dl-ssl.google.com/android/eclipse/'/>
+      </repositories>
+    </iu>
+    <iu id='com.android.ide.eclipse.adt.feature.group' name='Android Development Tools' version='12.0.0.v201106281929-138431'>
+      <repositories size='1'>
+        <repository location='https://dl-ssl.google.com/android/eclipse/'/>
+      </repositories>
+    </iu>
+    <iu id='com.android.ide.eclipse.hierarchyviewer.feature.group' name='Android Hierarchy Viewer' version='12.0.0.v201106281929-138431'>
+      <repositories size='1'>
+        <repository location='https://dl-ssl.google.com/android/eclipse/'/>
+      </repositories>
+    </iu>
+    <iu id='com.android.ide.eclipse.traceview.feature.group' name='Android Traceview' version='12.0.0.v201106281929-138431'>
+      <repositories size='1'>
+        <repository location='https://dl-ssl.google.com/android/eclipse/'/>
+      </repositories>
+    </iu>
+    <iu id='com.instantiations.assist.eclipse.audit.feature.group' name='CodePro - Audit' version='7.1.0.r37x201109091206'>
+      <repositories size='1'>
+        <repository location='http://dl.google.com/eclipse/inst/codepro/latest/3.7'/>
+      </repositories>
+    </iu>
+    <iu id='com.instantiations.eclipse.analysis.appanalysis.feature.feature.group' name='CodePro - Similar Code Analysis' version='7.1.0.r37x201109091143'>
+      <repositories size='1'>
+        <repository location='http://dl.google.com/eclipse/inst/codepro/latest/3.7'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.egit.feature.group' name='Eclipse EGit' version='1.1.0.201109151100-r'>
+      <repositories size='1'>
+        <repository location='http://download.eclipse.org/releases/indigo'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.mylyn.github.feature.feature.group' name='Eclipse EGit Mylyn GitHub Feature' version='1.1.0.201109151100-r'>
+      <repositories size='1'>
+        <repository location='http://download.eclipse.org/releases/indigo'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.jdt.feature.group' name='Eclipse Java Development Tools' version='3.7.1.r371_v20110810-0800-7z8gFcoFMLfTabvKsR5Qm9rBGEBK'>
+      <repositories size='2'>
+        <repository location='http://download.eclipse.org/eclipse/updates/3.7'/>
+        <repository location='http://download.eclipse.org/releases/indigo'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.platform.ide' name='Eclipse Platform' version='3.7.1.M20110909-1335'>
+      <repositories size='2'>
+        <repository location='http://download.eclipse.org/eclipse/updates/3.7'/>
+        <repository location='http://download.eclipse.org/releases/indigo'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.egit.mylyn.feature.group' name='EGit Mylyn' version='1.1.0.201109151100-r'>
+      <repositories size='1'>
+        <repository location='http://download.eclipse.org/releases/indigo'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.mylyn.ide_feature.feature.group' name='Mylyn Context Connector: Eclipse IDE' version='3.6.2.v20110908-0706'>
+      <repositories size='1'>
+        <repository location='http://download.eclipse.org/releases/indigo'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.mylyn.java_feature.feature.group' name='Mylyn Context Connector: Java Development' version='3.6.2.v20110908-0706'>
+      <repositories size='1'>
+        <repository location='http://download.eclipse.org/releases/indigo'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.mylyn.team_feature.feature.group' name='Mylyn Context Connector: Team Support' version='3.6.2.v20110908-0706'>
+      <repositories size='1'>
+        <repository location='http://download.eclipse.org/releases/indigo'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.mylyn_feature.feature.group' name='Mylyn Task List' version='3.6.2.v20110908-0706'>
+      <repositories size='1'>
+        <repository location='http://download.eclipse.org/releases/indigo'/>
+      </repositories>
+    </iu>
+    <iu id='org.eclipse.mylyn.context_feature.feature.group' name='Mylyn Task-Focused Interface' version='3.6.2.v20110908-0706'>
+      <repositories size='1'>
+        <repository location='http://download.eclipse.org/releases/indigo'/>
+      </repositories>
+    </iu>
+  </ius>
+</p2f>

@@ -2,12 +2,17 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.utils.CollectionUtils;
+import cgeo.geocaching.maps.CGeoMap;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
@@ -30,11 +35,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class cgeo extends AbstractActivity {
 
@@ -47,7 +49,6 @@ public class cgeo extends AbstractActivity {
     private static final int SCAN_REQUEST_CODE = 1;
     private static final int MENU_OPEN_LIST = 100;
 
-    private Context context = null;
     private Integer version = null;
     private cgGeo geo = null;
     private cgUpdateLoc geoUpdate = new update();
@@ -80,7 +81,7 @@ public class cgeo extends AbstractActivity {
                     countBubble.setVisibility(View.VISIBLE);
                 }
             } catch (Exception e) {
-                Log.w(cgSettings.tag, "cgeo.countBubbleHander: " + e.toString());
+                Log.w(Settings.tag, "cgeo.countBubbleHander: " + e.toString());
             }
         }
     };
@@ -129,13 +130,13 @@ public class cgeo extends AbstractActivity {
         @Override
         public void handleMessage(Message msg) {
             try {
-                int reason = msg.what;
+                final StatusCode reason = (StatusCode) msg.obj;
 
-                if (reason < 0) { //LoginFailed
-                    showToast(res.getString(R.string.err_login_failed_toast));
+                if (reason != null && reason != StatusCode.NO_ERROR) { //LoginFailed
+                    showToast(res.getString(reason == StatusCode.MAINTENANCE ? reason.getErrorString() : R.string.err_login_failed_toast));
                 }
             } catch (Exception e) {
-                Log.w(cgSettings.tag, "cgeo.fisrtLoginHander: " + e.toString());
+                Log.w(Settings.tag, "cgeo.fisrtLoginHander: " + e.toString());
             }
         }
     };
@@ -148,7 +149,6 @@ public class cgeo extends AbstractActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        context = this;
         app.setAction(null);
 
         app.cleanGeo();
@@ -163,16 +163,16 @@ public class cgeo extends AbstractActivity {
 
             version = info.versionCode;
 
-            Log.i(cgSettings.tag, "Starting " + info.packageName + " " + info.versionCode + " a.k.a " + info.versionName + "...");
+            Log.i(Settings.tag, "Starting " + info.packageName + " " + info.versionCode + " a.k.a " + info.versionName + "...");
 
             info = null;
             manager = null;
         } catch (Exception e) {
-            Log.i(cgSettings.tag, "No info.");
+            Log.i(Settings.tag, "No info.");
         }
 
         try {
-            if (settings.helper == 0) {
+            if (!Settings.isHelpShown()) {
                 RelativeLayout helper = (RelativeLayout) findViewById(R.id.helper);
                 if (helper != null) {
                     helper.setVisibility(View.VISIBLE);
@@ -180,14 +180,11 @@ public class cgeo extends AbstractActivity {
                     helper.setOnClickListener(new View.OnClickListener() {
 
                         public void onClick(View view) {
-                            ActivityMixin.goManual(context, "c:geo-intro");
+                            ActivityMixin.goManual(cgeo.this, "c:geo-intro");
                             view.setVisibility(View.GONE);
                         }
                     });
-
-                    final SharedPreferences.Editor edit = getSharedPreferences(cgSettings.preferences, 0).edit();
-                    edit.putInt("helper", 1);
-                    edit.commit();
+                    Settings.setHelpShown();
                 }
             }
         } catch (Exception e) {
@@ -208,7 +205,6 @@ public class cgeo extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        settings.load();
         init();
     }
 
@@ -251,7 +247,7 @@ public class cgeo extends AbstractActivity {
         menu.add(0, MENU_SETTINGS, 0, res.getString(R.string.menu_settings)).setIcon(android.R.drawable.ic_menu_preferences);
         menu.add(0, MENU_HISTORY, 0, res.getString(R.string.menu_history)).setIcon(android.R.drawable.ic_menu_recent_history);
         menu.add(0, MENU_HELPERS, 0, res.getString(R.string.menu_helpers)).setIcon(R.drawable.ic_menu_shopping);
-        menu.add(0, MENU_SCAN, 0, res.getString(R.string.menu_scan)).setIcon(R.drawable.ic_menu_barcode);
+        menu.add(0, MENU_SCAN, 0, res.getString(R.string.menu_scan_geo)).setIcon(R.drawable.ic_menu_barcode);
         menu.add(0, MENU_ABOUT, 0, res.getString(R.string.menu_about)).setIcon(android.R.drawable.ic_menu_info_details);
         return true;
     }
@@ -282,15 +278,13 @@ public class cgeo extends AbstractActivity {
                 showAbout(null);
                 return true;
             case MENU_HELPERS:
-                context.startActivity(new Intent(context, cgeohelpers.class));
+                startActivity(new Intent(this, cgeohelpers.class));
                 return true;
             case MENU_SETTINGS:
-                context.startActivity(new Intent(context, cgeoinit.class));
+                startActivity(new Intent(this, cgeoinit.class));
                 return true;
             case MENU_HISTORY:
-                final Intent cachesIntent = new Intent(context, cgeocaches.class);
-                cachesIntent.putExtra("type", "history");
-                context.startActivity(cachesIntent);
+                cgeocaches.startActivityHistory(this);
                 return true;
             case MENU_SCAN:
                 Intent intent = new Intent(SCAN_INTENT);
@@ -304,6 +298,7 @@ public class cgeo extends AbstractActivity {
         return false;
     }
 
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == SCAN_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
@@ -314,7 +309,7 @@ public class cgeo extends AbstractActivity {
                 String host = "http://coord.info/";
                 if (scan.toLowerCase().startsWith(host)) {
                     String geocode = scan.substring(host.length()).trim();
-                    cgeodetail.startActivity(this, geocode);
+                    CacheDetailActivity.startActivity(this, geocode);
                 }
                 else {
                     showToast(res.getString(R.string.unknown_scan));
@@ -345,17 +340,22 @@ public class cgeo extends AbstractActivity {
         menu.setHeaderTitle(res.getString(R.string.menu_filter));
 
         //first add the most used types
-        menu.add(1, 0, 0, res.getString(R.string.all_types));
-        menu.add(1, 1, 0, res.getString(R.string.traditional));
-        menu.add(1, 2, 0, res.getString(R.string.multi));
-        menu.add(1, 3, 0, res.getString(R.string.mystery));
+        menu.add(1, 0, 0, CacheType.ALL.getL10n());
+        menu.add(1, 1, 0, CacheType.TRADITIONAL.getL10n());
+        menu.add(1, 2, 0, CacheType.MULTI.getL10n());
+        menu.add(1, 3, 0, CacheType.MYSTERY.getL10n());
 
         // then add all other cache types sorted alphabetically
-        Map<String, String> allTypes = new HashMap<String, String>(cgBase.cacheTypesInv);
-        allTypes.remove("traditional");
-        allTypes.remove("multi");
-        allTypes.remove("mystery");
-        List<String> sorted = new ArrayList<String>(allTypes.values());
+        List<String> sorted = new ArrayList<String>();
+        for (CacheType ct : CacheType.values()) {
+            if (ct == CacheType.ALL ||
+                    ct == CacheType.TRADITIONAL ||
+                    ct == CacheType.MULTI ||
+                    ct == CacheType.MYSTERY) {
+                continue;
+            }
+            sorted.add(ct.getL10n());
+        }
         Collections.sort(sorted);
         for (String choice : sorted) {
             menu.add(1, menu.size(), 0, choice);
@@ -365,16 +365,12 @@ public class cgeo extends AbstractActivity {
         menu.setGroupCheckable(1, true, true);
         boolean foundItem = false;
         int itemCount = menu.size();
-        if (settings.cacheType != null) {
-            String typeTitle = cgBase.cacheTypesInv.get(settings.cacheType);
-            if (typeTitle != null) {
-                for (int i = 0; i < itemCount; i++) {
-                    if (menu.getItem(i).getTitle().equals(typeTitle)) {
-                        menu.getItem(i).setChecked(true);
-                        foundItem = true;
-                        break;
-                    }
-                }
+        String typeTitle = Settings.getCacheType().getL10n();
+        for (int i = 0; i < itemCount; i++) {
+            if (menu.getItem(i).getTitle().equals(typeTitle)) {
+                menu.getItem(i).setChecked(true);
+                foundItem = true;
+                break;
             }
         }
         if (!foundItem) {
@@ -387,29 +383,25 @@ public class cgeo extends AbstractActivity {
         final int id = item.getItemId();
 
         if (id == 0) {
-            settings.setCacheType(null);
+            Settings.setCacheType(CacheType.ALL);
             setFilterTitle();
 
             return true;
         } else if (id > MENU_OPEN_LIST) {
             int listId = id - MENU_OPEN_LIST;
-            settings.saveLastList(listId);
-            cgeocaches.startActivityOffline(context);
+            Settings.saveLastList(listId);
+            cgeocaches.startActivityOffline(this);
             return true;
         } else if (id > 0) {
-            String itemTitle = item.getTitle().toString();
-            String choice = null;
-            for (Entry<String, String> entry : cgBase.cacheTypesInv.entrySet()) {
-                if (entry.getValue().equalsIgnoreCase(itemTitle)) {
-                    choice = entry.getKey();
+            final String itemTitle = item.getTitle().toString();
+            CacheType cacheType = CacheType.ALL;
+            for (CacheType ct : CacheType.values()) {
+                if (ct.getL10n().equalsIgnoreCase(itemTitle)) {
+                    cacheType = ct;
                     break;
                 }
             }
-            if (choice == null) {
-                settings.setCacheType(null);
-            } else {
-                settings.setCacheType(choice);
-            }
+            Settings.setCacheType(cacheType);
             setFilterTitle();
 
             return true;
@@ -422,10 +414,11 @@ public class cgeo extends AbstractActivity {
         if (filterTitle == null) {
             filterTitle = (TextView) findViewById(R.id.filter_button_title);
         }
-        if (settings.cacheType != null) {
-            filterTitle.setText(cgBase.cacheTypesInv.get(settings.cacheType));
-        } else {
+        if (CacheType.ALL == Settings.getCacheType()) {
+            // The text for ALL is R.string.all_types
             filterTitle.setText(res.getString(R.string.all));
+        } else {
+            filterTitle.setText(Settings.getCacheType().getL10n());
         }
     }
 
@@ -444,22 +437,19 @@ public class cgeo extends AbstractActivity {
 
         initialized = true;
 
-        settings.getLogin();
-        settings.reloadCacheType();
+        Settings.setLanguage(Settings.isUseEnglish());
+
+        Settings.getLogin();
 
         if (app.firstRun) {
             (new firstLogin()).start();
         }
 
-        (new countBubbleUpdate()).start();
+        updateCacheCounter();
         (new cleanDatabase()).start();
 
-        if (settings.cacheType != null && cgBase.cacheTypesInv.containsKey(settings.cacheType) == false) {
-            settings.setCacheType(null);
-        }
-
         if (geo == null) {
-            geo = app.startGeo(context, geoUpdate, base, settings, 0, 0);
+            geo = app.startGeo(geoUpdate);
         }
 
         navType = (TextView) findViewById(R.id.nav_type);
@@ -483,7 +473,7 @@ public class cgeo extends AbstractActivity {
         });
         registerForContextMenu(findByOffline);
 
-        (new countBubbleUpdate()).start();
+        updateCacheCounter();
 
         final View advanced = findViewById(R.id.advanced_button);
         advanced.setClickable(true);
@@ -511,6 +501,37 @@ public class cgeo extends AbstractActivity {
         });
 
         setFilterTitle();
+        checkRestore();
+    }
+
+    private void updateCacheCounter() {
+        (new countBubbleUpdate()).start();
+    }
+
+    private void checkRestore() {
+        if (!cgData.isNewlyCreatedDatebase() || null == cgData.isRestoreFile()) {
+            return;
+        }
+        new AlertDialog.Builder(this)
+                .setTitle(res.getString(R.string.init_backup_restore))
+                .setMessage(res.getString(R.string.init_restore_confirm))
+                .setCancelable(false)
+                .setPositiveButton(getString(android.R.string.yes), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                        cgData.resetNewlyCreatedDatabase();
+                        app.restoreDatabase(cgeo.this);
+                        updateCacheCounter();
+                    }
+                })
+                .setNegativeButton(getString(android.R.string.no), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                        cgData.resetNewlyCreatedDatabase();
+                    }
+                })
+                .create()
+                .show();
     }
 
     private class update extends cgUpdateLoc {
@@ -548,43 +569,31 @@ public class cgeo extends AbstractActivity {
                         satellites = "";
                     }
                     navSatellites.setText(satellites);
-
-                    if (geo.gps == -1) {
-                        navType.setText(res.getString(R.string.loc_last));
-                    } else if (geo.gps == 0) {
-                        navType.setText(res.getString(R.string.loc_net));
-                    } else {
-                        navType.setText(res.getString(R.string.loc_gps));
-                    }
+                    navType.setText(res.getString(geo.locationProvider.resourceId));
 
                     if (geo.accuracyNow != null) {
-                        if (settings.units == cgSettings.unitsImperial) {
-                            navAccuracy.setText("±" + String.format(Locale.getDefault(), "%.0f", (geo.accuracyNow * 3.2808399)) + " ft");
+                        if (Settings.isUseMetricUnits()) {
+                            navAccuracy.setText("±" + String.format("%.0f", geo.accuracyNow) + " m");
                         } else {
-                            navAccuracy.setText("±" + String.format(Locale.getDefault(), "%.0f", geo.accuracyNow) + " m");
+                            navAccuracy.setText("±" + String.format("%.0f", (geo.accuracyNow * 3.2808399)) + " ft");
                         }
                     } else {
                         navAccuracy.setText(null);
                     }
 
-                    if (settings.showAddress == 1) {
+                    if (Settings.isShowAddress()) {
                         if (addCoords == null) {
                             navLocation.setText(res.getString(R.string.loc_no_addr));
                         }
-                        if (addCoords == null || (geo.coordsNow.distanceTo(addCoords) > 0.5 && addressObtaining == false)) {
+                        if (addCoords == null || (geo.coordsNow.distanceTo(addCoords) > 0.5 && !addressObtaining)) {
                             (new obtainAddress()).start();
                         }
                     } else {
                         if (geo.altitudeNow != null) {
-                            String humanAlt;
-                            if (settings.units == cgSettings.unitsImperial) {
-                                humanAlt = String.format("%.0f", (geo.altitudeNow * 3.2808399)) + " ft";
-                            } else {
-                                humanAlt = String.format("%.0f", geo.altitudeNow) + " m";
-                            }
-                            navLocation.setText(cgBase.formatCoords(geo.coordsNow, true) + " | " + humanAlt);
+                            final String humanAlt = cgBase.getHumanDistance(geo.altitudeNow.floatValue() / 1000);
+                            navLocation.setText(geo.coordsNow + " | " + humanAlt);
                         } else {
-                            navLocation.setText(cgBase.formatCoords(geo.coordsNow, true));
+                            navLocation.setText(geo.coordsNow.toString());
                         }
                     }
                 } else {
@@ -599,47 +608,64 @@ public class cgeo extends AbstractActivity {
                     navLocation.setText(res.getString(R.string.loc_trying));
                 }
             } catch (Exception e) {
-                Log.w(cgSettings.tag, "Failed to update location.");
+                Log.w(Settings.tag, "Failed to update location.");
             }
         }
     }
 
+    /**
+     * @param v
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void cgeoFindOnMap(View v) {
         findViewById(R.id.map).setPressed(true);
-        context.startActivity(new Intent(context, settings.getMapFactory().getMapClass()));
+        CGeoMap.startActivityLiveMap(this);
     }
 
+    /**
+     * @param v
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void cgeoFindNearest(View v) {
-        if (geo == null) {
+        if (geo == null || geo.coordsNow == null) {
             return;
         }
 
         findViewById(R.id.nearest).setPressed(true);
-        final Intent cachesIntent = new Intent(context, cgeocaches.class);
-        cachesIntent.putExtra("type", "nearest");
-        cachesIntent.putExtra("latitude", geo.coordsNow.getLatitude());
-        cachesIntent.putExtra("longitude", geo.coordsNow.getLongitude());
-        cachesIntent.putExtra("cachetype", settings.cacheType);
-        context.startActivity(cachesIntent);
+        cgeocaches.startActivityNearest(this, geo.coordsNow);
     }
 
+    /**
+     * @param v
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void cgeoFindByOffline(View v) {
         findViewById(R.id.search_offline).setPressed(true);
-        final Intent cachesIntent = new Intent(context, cgeocaches.class);
-        cachesIntent.putExtra("type", "offline");
-        context.startActivity(cachesIntent);
+        cgeocaches.startActivityOffline(this);
     }
 
+    /**
+     * @param v
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void cgeoSearch(View v) {
         findViewById(R.id.advanced_button).setPressed(true);
-        context.startActivity(new Intent(context, cgeoadvsearch.class));
+        startActivity(new Intent(this, cgeoadvsearch.class));
     }
 
+    /**
+     * @param v
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void cgeoPoint(View v) {
         findViewById(R.id.any_button).setPressed(true);
-        context.startActivity(new Intent(context, cgeopoint.class));
+        startActivity(new Intent(this, cgeopoint.class));
     }
 
+    /**
+     * @param v
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void cgeoFilter(View v) {
         findViewById(R.id.filter_button).setPressed(true);
         findViewById(R.id.filter_button).performClick();
@@ -654,7 +680,7 @@ public class cgeo extends AbstractActivity {
             }
 
             int checks = 0;
-            while (app.storageStatus() == false) {
+            while (!app.storageStatus()) {
                 try {
                     wait(500);
                     checks++;
@@ -667,7 +693,7 @@ public class cgeo extends AbstractActivity {
                 }
             }
 
-            countBubbleCnt = app.getAllStoredCachesCount(true, null, null);
+            countBubbleCnt = app.getAllStoredCachesCount(true, CacheType.ALL, null);
 
             countBubbleHandler.sendEmptyMessage(0);
         }
@@ -685,8 +711,8 @@ public class cgeo extends AbstractActivity {
             }
 
             boolean more = false;
-            if (version != settings.version) {
-                Log.i(cgSettings.tag, "Initializing hard cleanup - version changed from " + settings.version + " to " + version + ".");
+            if (version != Settings.getVersion()) {
+                Log.i(Settings.tag, "Initializing hard cleanup - version changed from " + Settings.getVersion() + " to " + version + ".");
 
                 more = true;
             }
@@ -711,16 +737,23 @@ public class cgeo extends AbstractActivity {
                 return;
             }
 
-            int status = base.login();
+            final StatusCode status = cgBase.login();
 
-            if (status == 1) {
+            if (status == StatusCode.NO_ERROR) {
                 app.firstRun = false;
-                base.detectGcCustomDate();
+                cgBase.detectGcCustomDate();
             }
 
             if (app.showLoginToast) {
-                firstLoginHandler.sendEmptyMessage(status);
+                firstLoginHandler.sendMessage(firstLoginHandler.obtainMessage(0, status));
                 app.showLoginToast = false;
+
+                // invoke settings activity to insert login details
+                if (status == StatusCode.NO_LOGIN_INFO_STORED) {
+                    final Context context = cgeo.this;
+                    final Intent initIntent = new Intent(context, cgeoinit.class);
+                    context.startActivity(initIntent);
+                }
             }
         }
     }
@@ -742,11 +775,11 @@ public class cgeo extends AbstractActivity {
             addressObtaining = true;
 
             try {
-                Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+                final Geocoder geocoder = new Geocoder(cgeo.this, Locale.getDefault());
 
                 addresses = geocoder.getFromLocation(geo.coordsNow.getLatitude(), geo.coordsNow.getLongitude(), 1);
             } catch (Exception e) {
-                Log.i(cgSettings.tag, "Failed to obtain address");
+                Log.i(Settings.tag, "Failed to obtain address");
             }
 
             obtainAddressHandler.sendEmptyMessage(0);
@@ -755,10 +788,18 @@ public class cgeo extends AbstractActivity {
         }
     }
 
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void showAbout(View view) {
-        context.startActivity(new Intent(context, cgeoabout.class));
+        startActivity(new Intent(this, cgeoabout.class));
     }
 
+    /**
+     * @param view
+     *            unused here but needed since this method is referenced from XML layout
+     */
     public void goSearch(View view) {
         onSearchRequested();
     }

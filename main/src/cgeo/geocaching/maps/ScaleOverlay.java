@@ -1,13 +1,12 @@
 package cgeo.geocaching.maps;
 
-import cgeo.geocaching.cgBase;
-import cgeo.geocaching.cgSettings;
-import cgeo.geocaching.cgSettings.mapSourceEnum;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.IConversion;
+import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
-import cgeo.geocaching.maps.interfaces.GeneralOverlay;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 
 import android.app.Activity;
@@ -19,11 +18,13 @@ import android.graphics.Typeface;
 import android.util.DisplayMetrics;
 
 public class ScaleOverlay implements GeneralOverlay {
-    private cgSettings settings = null;
+
+    private static final double SCALE_WIDTH_FACTOR = 1.0 / 2.5;
+
     private Paint scale = null;
     private Paint scaleShadow = null;
     private BlurMaskFilter blur = null;
-    private float pixelDensity = 0L;
+    private float pixelDensity = 0;
     private double pixels = 0d;
     private int bottom = 0;
     private double distance = 0d;
@@ -31,8 +32,7 @@ public class ScaleOverlay implements GeneralOverlay {
     private String units = null;
     private OverlayImpl ovlImpl = null;
 
-    public ScaleOverlay(Activity activity, cgSettings settingsIn, OverlayImpl overlayImpl) {
-        settings = settingsIn;
+    public ScaleOverlay(Activity activity, OverlayImpl overlayImpl) {
         this.ovlImpl = overlayImpl;
 
         DisplayMetrics metrics = new DisplayMetrics();
@@ -43,28 +43,50 @@ public class ScaleOverlay implements GeneralOverlay {
     @Override
     public void drawOverlayBitmap(Canvas canvas, Point drawPosition,
             MapProjectionImpl projection, byte drawZoomLevel) {
-        // Scale overlay is only necessary for google maps, so the mapsforge
-        // related draw method needs not to be filled.
+        drawInternal(canvas, getOverlayImpl().getMapViewImpl());
     }
 
     @Override
     public void draw(Canvas canvas, MapViewImpl mapView, boolean shadow) {
-        //super.draw(canvas, mapView, shadow);
+        drawInternal(canvas, mapView);
+    }
+
+    private void drawInternal(Canvas canvas, MapViewImpl mapView) {
 
         final double span = mapView.getLongitudeSpan() / 1e6;
         final GeoPointImpl center = mapView.getMapViewCenter();
 
-        pixels = mapView.getWidth() / 2.0; // pixels related to following latitude span
+        pixels = mapView.getWidth() * SCALE_WIDTH_FACTOR; // pixels related to following latitude span
         bottom = mapView.getHeight() - 14; // pixels from bottom side of screen
 
         final Geopoint leftCoords = new Geopoint(center.getLatitudeE6() / 1e6, center.getLongitudeE6() / 1e6 - span / 2);
         final Geopoint rightCoords = new Geopoint(center.getLatitudeE6() / 1e6, center.getLongitudeE6() / 1e6 + span / 2);
 
-        distance = leftCoords.distanceTo(rightCoords) / 2;
+        distance = leftCoords.distanceTo(rightCoords) * SCALE_WIDTH_FACTOR;
         distanceRound = 0d;
 
-        if (settings.units == cgSettings.unitsImperial) {
-            distance /= cgBase.miles2km;
+        //FIXME: merge with getHumanDistance()
+        if (Settings.isUseMetricUnits()) {
+            if (distance > 100) { // 100+ km > 1xx km
+                distanceRound = Math.floor(distance / 100) * 100;
+                units = "km";
+            } else if (distance > 10) { // 10 - 100 km > 1x km
+                distanceRound = Math.floor(distance / 10) * 10;
+                units = "km";
+            } else if (distance > 1) { // 1 - 10 km > 1.x km
+                distanceRound = Math.floor(distance);
+                units = "km";
+            } else if (distance > 0.1) { // 100 m - 1 km > 1xx m
+                distance *= 1000;
+                distanceRound = Math.floor(distance / 100) * 100;
+                units = "m";
+            } else { // 1 - 100 m > 1x m
+                distance *= 1000;
+                distanceRound = Math.round(distance / 10) * 10;
+                units = "m";
+            }
+        } else {
+            distance /= IConversion.miles2km;
 
             if (distance > 100) { // 100+ mi > 1xx mi
                 distanceRound = Math.floor(distance / 100) * 100;
@@ -83,25 +105,6 @@ public class ScaleOverlay implements GeneralOverlay {
                 distance *= 5280;
                 distanceRound = Math.round(distance / 10) * 10;
                 units = "ft";
-            }
-        } else {
-            if (distance > 100) { // 100+ km > 1xx km
-                distanceRound = Math.floor(distance / 100) * 100;
-                units = "km";
-            } else if (distance > 10) { // 10 - 100 km > 1x km
-                distanceRound = Math.floor(distance / 10) * 10;
-                units = "km";
-            } else if (distance > 1) { // 1 - 10 km > 1.x km
-                distanceRound = Math.floor(distance);
-                units = "km";
-            } else if (distance > 0.1) { // 100 m - 1 km > 1xx m
-                distance *= 1000;
-                distanceRound = Math.floor(distance / 100) * 100;
-                units = "m";
-            } else { // 1 - 100 m > 1x m
-                distance *= 1000;
-                distanceRound = Math.round(distance / 10) * 10;
-                units = "m";
             }
         }
 
@@ -128,7 +131,7 @@ public class ScaleOverlay implements GeneralOverlay {
             scale.setTypeface(Typeface.DEFAULT_BOLD);
         }
 
-        if (mapSourceEnum.googleSat == settings.mapSource) {
+        if (mapView.needsInvertedColors()) {
             scaleShadow.setColor(0xFF000000);
             scale.setColor(0xFFFFFFFF);
         } else {

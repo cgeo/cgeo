@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:padding="4dip" >
+
+        <!-- Short description -->
+
+        <TextView
+            android:id="@+id/shortdesc"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dip"
+            android:layout_marginTop="12dip"
+            android:linksClickable="true"
+            android:textColor="?text_color"
+            android:textColorLink="?text_color_link"
+            android:textSize="14dip"
+            android:visibility="gone" />
+
+        <!-- Long description -->
+
+        <TextView
+            android:id="@+id/longdesc"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dip"
+            android:layout_marginTop="12dip"
+            android:linksClickable="true"
+            android:textColor="?text_color"
+            android:textColorLink="?text_color_link"
+            android:textSize="14dip"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/show_description"
+            style="@style/button_small"
+            android:layout_marginBottom="36dip"
+            android:layout_marginTop="12dip"
+            android:text="@string/cache_description_long"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:id="@+id/loading"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" >
+
+            <ProgressBar
+                style="@android:style/Widget.ProgressBar.Large.Inverse"
+                android:layout_width="76dip"
+                android:layout_height="76dip"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:indeterminate="true" />
+        </RelativeLayout>
+
+        <!-- Attributes box -->
+
+        <LinearLayout
+            android:id="@+id/attributes_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <RelativeLayout style="@style/separator_horizontal_layout" >
+
+                <View style="@style/separator_horizontal" />
+
+                <TextView
+                    style="@style/separator_horizontal_headline"
+                    android:text="@string/cache_attributes" />
+            </RelativeLayout>
+            <!-- innerbox is only needed to define the paddings easily -->
+
+            <LinearLayout
+                android:id="@+id/attributes_innerbox"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp" />
+        </LinearLayout>
+
+        <!-- Hint and spoiler-images box -->
+
+        <LinearLayout
+            android:id="@+id/hint_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dip"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <RelativeLayout style="@style/separator_horizontal_layout" >
+
+                <View style="@style/separator_horizontal" />
+
+                <TextView
+                    style="@style/separator_horizontal_headline"
+                    android:text="@string/cache_hint" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/hint"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:linksClickable="true"
+                android:textColor="?text_color"
+                android:textColorLink="?text_color_link"
+                android:textSize="14dip" />
+
+            <TextView
+                android:id="@+id/hint_spoilerlink"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginTop="6dip"
+                android:drawableLeft="?log_img_icon"
+                android:drawablePadding="3dip"
+                android:text="@string/cache_menu_spoilers"
+                android:textColor="?text_color"
+                android:textSize="14dip" />
+        </LinearLayout>
+
+        <!-- Personal note box -->
+
+        <LinearLayout
+            android:id="@+id/personalnote_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dip"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <RelativeLayout style="@style/separator_horizontal_layout" >
+
+                <View style="@style/separator_horizontal" />
+
+                <TextView
+                    style="@style/separator_horizontal_headline"
+                    android:text="@string/cache_personal_note" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/personalnote"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:linksClickable="true"
+                android:textColor="?text_color"
+                android:textColorLink="?text_color_link"
+                android:textSize="14dip"
+                android:visibility="gone" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

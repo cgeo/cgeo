@@ -1,7 +1,8 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.utils.CollectionUtils;
+
+import org.apache.commons.collections.CollectionUtils;
 
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
@@ -65,7 +66,7 @@ public class cgeosmaps extends AbstractActivity {
                 if (waitDialog != null) {
                     waitDialog.dismiss();
                 }
-                Log.e(cgSettings.tag, "cgeosmaps.loadMapsHandler: " + e.toString());
+                Log.e(Settings.tag, "cgeosmaps.loadMapsHandler: " + e.toString());
             }
         }
     };
@@ -102,7 +103,6 @@ public class cgeosmaps extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
-        settings.load();
     }
 
     private class loadMaps extends Thread {
@@ -116,31 +116,31 @@ public class cgeosmaps extends AbstractActivity {
 
                 for (int level = 1; level <= 5; level++) {
                     try {
-                        Bitmap image = BitmapFactory.decodeFile(cgSettings.getStorage() + geocode + "/map_" + level);
+                        final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, level, false).getPath());
                         if (image != null) {
                             maps.add(image);
                         }
                     } catch (Exception e) {
-                        Log.e(cgSettings.tag, "cgeosmaps.loadMaps.run.1: " + e.toString());
+                        Log.e(Settings.tag, "cgeosmaps.loadMaps.run.1: " + e.toString());
                     }
                 }
 
                 if (maps.isEmpty()) {
                     for (int level = 1; level <= 5; level++) {
                         try {
-                            Bitmap image = BitmapFactory.decodeFile(cgSettings.getStorageSec() + geocode + "/map_" + level);
+                            final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, level, false).getPath());
                             if (image != null) {
                                 maps.add(image);
                             }
                         } catch (Exception e) {
-                            Log.e(cgSettings.tag, "cgeosmaps.loadMaps.run.2: " + e.toString());
+                            Log.e(Settings.tag, "cgeosmaps.loadMaps.run.2: " + e.toString());
                         }
                     }
                 }
 
                 loadMapsHandler.sendMessage(new Message());
             } catch (Exception e) {
-                Log.e(cgSettings.tag, "cgeosmaps.loadMaps.run: " + e.toString());
+                Log.e(Settings.tag, "cgeosmaps.loadMaps.run: " + e.toString());
             }
         }
     }

@@ -1,7 +1,6 @@
 package cgeo.geocaching.activity;
 
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgSettings;
 
 import android.view.Menu;
 import android.view.View;
@@ -25,11 +24,6 @@ public interface IAbstractActivity {
     public void helpDialog(String title, String message);
 
     public void setTitle(final String title);
-
-    /**
-     * TODO: remove after settings are a singleton
-     */
-    public cgSettings getSettings();
 
     void addVisitMenu(Menu menu, cgCache cache);
 

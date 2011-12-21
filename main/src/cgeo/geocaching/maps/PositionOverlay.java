@@ -1,13 +1,13 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgSettings;
+import cgeo.geocaching.Settings;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.maps.interfaces.GeoPointImpl;
-import cgeo.geocaching.maps.interfaces.MapFactory;
-import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
-import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
+import cgeo.geocaching.maps.interfaces.GeoPointImpl;
+import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
+import cgeo.geocaching.maps.interfaces.MapProvider;
+import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 
 import android.app.Activity;
@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PositionOverlay implements GeneralOverlay {
-    private cgSettings settings = null;
     private Location coordinates = null;
     private GeoPointImpl location = null;
     private Float heading = 0f;
@@ -44,19 +43,18 @@ public class PositionOverlay implements GeneralOverlay {
     private Point historyPointN = new Point();
     private Point historyPointP = new Point();
     private Activity activity;
-    private MapFactory mapFactory = null;
+    private MapProvider mapProvider = null;
     private OverlayImpl ovlImpl = null;
 
-    public PositionOverlay(cgSettings settingsIn, Activity activity, OverlayImpl ovlImpl) {
-        settings = settingsIn;
+    public PositionOverlay(Activity activity, OverlayImpl ovlImpl) {
         this.activity = activity;
-        this.mapFactory = settings.getMapFactory();
+        this.mapProvider = Settings.getMapProvider();
         this.ovlImpl = ovlImpl;
     }
 
     public void setCoordinates(Location coordinatesIn) {
         coordinates = coordinatesIn;
-        location = settings.getMapFactory().getGeoPointBase(new Geopoint(coordinates));
+        location = mapProvider.getGeoPointBase(new Geopoint(coordinates));
     }
 
     public void setHeading(Float bearingNow) {
@@ -78,8 +76,9 @@ public class PositionOverlay implements GeneralOverlay {
 
     private void drawInternal(Canvas canvas, MapProjectionImpl projection) {
 
-        if (coordinates == null || location == null)
+        if (coordinates == null || location == null) {
             return;
+        }
 
         if (accuracyCircle == null) {
             accuracyCircle = new Paint();
@@ -101,10 +100,12 @@ public class PositionOverlay implements GeneralOverlay {
             historyLineShadow.setColor(0x66000000);
         }
 
-        if (setfil == null)
+        if (setfil == null) {
             setfil = new PaintFlagsDrawFilter(0, Paint.FILTER_BITMAP_FLAG);
-        if (remfil == null)
+        }
+        if (remfil == null) {
             remfil = new PaintFlagsDrawFilter(Paint.FILTER_BITMAP_FLAG, 0);
+        }
 
         canvas.setDrawFilter(setfil);
 
@@ -118,7 +119,7 @@ public class PositionOverlay implements GeneralOverlay {
         float longitudeLineDistance = result[0];
 
         final Geopoint leftCoords = new Geopoint(latitude, longitude - accuracy / longitudeLineDistance);
-        GeoPointImpl leftGeo = mapFactory.getGeoPointBase(leftCoords);
+        GeoPointImpl leftGeo = mapProvider.getGeoPointBase(leftCoords);
         projection.toPixels(leftGeo, left);
         projection.toPixels(location, center);
         int radius = center.x - left.x;
@@ -132,8 +133,9 @@ public class PositionOverlay implements GeneralOverlay {
         canvas.drawCircle(center.x, center.y, radius, accuracyCircle);
 
         if (coordinates.getAccuracy() < 50f && ((historyRecent != null && historyRecent.distanceTo(coordinates) > 5.0) || historyRecent == null)) {
-            if (historyRecent != null)
+            if (historyRecent != null) {
                 history.add(historyRecent);
+            }
             historyRecent = coordinates;
 
             int toRemove = history.size() - 700;
@@ -145,21 +147,22 @@ public class PositionOverlay implements GeneralOverlay {
             }
         }
 
-        if (settings.maptrail == 1) {
+        if (Settings.isMapTrail()) {
             int size = history.size();
             if (size > 1) {
                 int alpha = 0;
                 int alphaCnt = size - 201;
-                if (alphaCnt < 1)
+                if (alphaCnt < 1) {
                     alphaCnt = 1;
+                }
 
                 for (int cnt = 1; cnt < size; cnt++) {
                     Location prev = history.get(cnt - 1);
                     Location now = history.get(cnt);
 
                     if (prev != null && now != null) {
-                        projection.toPixels(mapFactory.getGeoPointBase(new Geopoint(prev)), historyPointP);
-                        projection.toPixels(mapFactory.getGeoPointBase(new Geopoint(now)), historyPointN);
+                        projection.toPixels(mapProvider.getGeoPointBase(new Geopoint(prev)), historyPointP);
+                        projection.toPixels(mapProvider.getGeoPointBase(new Geopoint(now)), historyPointN);
 
                         if ((alphaCnt - cnt) > 0) {
                             alpha = 255 / (alphaCnt - cnt);
@@ -182,8 +185,8 @@ public class PositionOverlay implements GeneralOverlay {
                 Location now = coordinates;
 
                 if (prev != null && now != null) {
-                    projection.toPixels(mapFactory.getGeoPointBase(new Geopoint(prev)), historyPointP);
-                    projection.toPixels(mapFactory.getGeoPointBase(new Geopoint(now)), historyPointN);
+                    projection.toPixels(mapProvider.getGeoPointBase(new Geopoint(prev)), historyPointP);
+                    projection.toPixels(mapProvider.getGeoPointBase(new Geopoint(now)), historyPointN);
 
                     historyLineShadow.setAlpha(255);
                     historyLine.setAlpha(255);
