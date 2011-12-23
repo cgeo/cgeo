@@ -145,6 +145,36 @@
                     android:visibility="gone" />
             </RelativeLayout>
         </LinearLayout>
+        
+        <!--  Debug info Box -->
+         <LinearLayout
+            android:id="@+id/debug_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <View
+                style="@style/separator_horizontal"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="9dp" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            
+	            <TextView
+	                    android:id="@+id/debug_text"
+	                    android:layout_width="fill_parent"
+	                    android:layout_height="wrap_content"
+	                    android:layout_alignParentLeft="true"
+	                    android:layout_gravity="left"
+	                    android:layout_marginLeft="6dip"
+	                    android:layout_marginRight="130dip"
+	                    android:paddingRight="3dip"
+	                    android:textColor="?text_color"
+	                    android:textSize="14dip" />
+             </RelativeLayout>
+        </LinearLayout>
 
         <!-- License Box -->
 

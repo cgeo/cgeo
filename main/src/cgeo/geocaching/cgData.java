@@ -39,6 +39,12 @@ import java.util.regex.Pattern;
 
 public class cgData {
 
+    public enum StorageLocations {
+        HEAP,
+        CACHE,
+        DATABASE,
+    }
+
     /** The list of fields needed for mapping. */
     private static final String[] CACHE_COLUMNS = new String[] {
             "_id", "updated", "reason", "detailed", "detailedupdate", "visiteddate", "geocode", "cacheid", "guid", "type", "name", "own", "owner", "owner_real", "hidden", "hint", "size",
@@ -1252,7 +1258,7 @@ public class cgData {
             values.put("updated", cache.getUpdated());
         }
         values.put("reason", cache.getListId());
-        values.put("detailed", cache.getDetailed() ? 1 : 0);
+        values.put("detailed", cache.isDetailed() ? 1 : 0);
         values.put("detailedupdate", cache.getDetailedUpdate());
         values.put("visiteddate", cache.getVisitedDate());
         values.put("geocode", cache.getGeocode());
@@ -1998,6 +2004,7 @@ public class cgData {
                         if (loadFlags.contains(LoadFlag.LOADOFFLINELOG)) {
                             cache.setLogOffline(hasLogOffline(cache.getGeocode()));
                         }
+                        cache.addStorageLocation(StorageLocations.DATABASE);
 
                         caches.add(cache);
                     } while (cursor.moveToNext());

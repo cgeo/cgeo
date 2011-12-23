@@ -74,6 +74,7 @@ public final class Settings {
     private static final String KEY_COOKIE_STORE = "cookiestore";
     private static final String KEY_OPEN_LAST_DETAILS_PAGE = "opendetailslastpage";
     private static final String KEY_LAST_DETAILS_PAGE = "lastdetailspage";
+    private static final String KEY_DEBUG_INFORMATIONS = "debuginfos";
 
     private final static int unitsMetric = 1;
     private final static int unitsImperial = 2;
@@ -962,6 +963,20 @@ public final class Settings {
             @Override
             public void edit(Editor edit) {
                 edit.putInt(KEY_LAST_DETAILS_PAGE, index);
+            }
+        });
+    }
+
+    public static boolean isDebugInfos() {
+        return sharedPrefs.getBoolean(KEY_DEBUG_INFORMATIONS, false);
+    }
+
+    public static void setDebugInfos(final boolean showDebugInfos) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putBoolean(KEY_DEBUG_INFORMATIONS, showDebugInfos);
             }
         });
     }

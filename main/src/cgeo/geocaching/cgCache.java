@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.cgData.StorageLocations;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.GCConnector;
@@ -24,6 +25,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,8 +89,10 @@ public class cgCache implements ICache {
     private boolean statusCheckedView = false;
     private String directionImg = "";
     private String nameForSorting;
+    private final EnumSet<StorageLocations> storageLocation = EnumSet.of(StorageLocations.HEAP);
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
+
     /**
      * Gather missing information from another cache object.
      *
@@ -626,7 +630,7 @@ public class cgCache implements ICache {
         this.listId = listId;
     }
 
-    public boolean getDetailed() {
+    public boolean isDetailed() {
         return detailed;
     }
 
@@ -942,6 +946,21 @@ public class cgCache implements ICache {
 
     public boolean hasTerrain() {
         return terrain > 0f;
+    }
+
+    /**
+     * @return the storageLocation
+     */
+    public EnumSet<StorageLocations> getStorageLocation() {
+        return storageLocation;
+    }
+
+    /**
+     * @param storageLocation
+     *            the storageLocation to set
+     */
+    public void addStorageLocation(StorageLocations sl) {
+        this.storageLocation.add(sl);
     }
 
 }

@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.cgData.StorageLocations;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.GeneralAppsFactory;
@@ -1486,6 +1487,8 @@ public class CacheDetailActivity extends AbstractActivity {
             buttonWatchlistRemove.setOnClickListener(new RemoveFromWatchlistClickListener());
             updateWatchlistBox();
 
+            updateDebugInfos();
+
             // data license
             IConnector connector = ConnectorFactory.getConnector(cache);
             if (connector != null) {
@@ -1840,6 +1843,27 @@ public class CacheDetailActivity extends AbstractActivity {
             offlineRefresh.setVisibility(cache.supportsRefresh() ? View.VISIBLE : View.GONE);
             offlineRefresh.setClickable(true);
         }
+
+        private void updateDebugInfos() {
+
+            if (Settings.isDebugInfos()) {
+                ((LinearLayout) view.findViewById(R.id.debug_box)).setVisibility(View.VISIBLE);
+                final TextView internalsText = (TextView) view.findViewById(R.id.debug_text);
+
+                String sl = "Storage location: ";
+                if (cache.getStorageLocation().contains(StorageLocations.CACHE)) {
+                    sl += "Cache ";
+                }
+                if (cache.getStorageLocation().contains(StorageLocations.DATABASE)) {
+                    sl += "Database (" + cache.getListId() + ")";
+                }
+
+                internalsText.setText(sl);
+            } else {
+                ((LinearLayout) view.findViewById(R.id.debug_box)).setVisibility(View.GONE);
+            }
+        }
+
     }
 
     private class DescriptionViewCreator implements PageViewCreator {

@@ -24,7 +24,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -38,7 +37,6 @@ public class cgeoapplication extends Application {
     private boolean geoInUse = false;
     private cgDirection dir = null;
     private boolean dirInUse = false;
-    final private Map<String, cgCache> cachesCache = new HashMap<String, cgCache>(); // caching caches into memory
     public boolean firstRun = true; // c:geo is just launched
     public boolean showLoginToast = true; //login toast shown just once.
     private boolean databaseCleaned = false; // database was cleaned
@@ -57,7 +55,7 @@ public class cgeoapplication extends Application {
     public void onLowMemory() {
         Log.i(Settings.tag, "Cleaning applications cache.");
 
-        cachesCache.clear();
+        CacheCache.getInstance().removeAll();
     }
 
     @Override
@@ -331,14 +329,16 @@ public class cgeoapplication extends Application {
     }
 
     public cgCache getCacheByGeocode(final String geocode, final EnumSet<LoadFlag> loadFlags) {
-        if (cachesCache.containsKey(geocode)) {
-            return cachesCache.get(geocode);
+        cgCache cache = CacheCache.getInstance().getCacheFromCache(geocode);
+        if (cache != null) {
+            return cache;
         }
 
-        final cgCache cache = storage.loadCache(geocode, loadFlags);
+        cache = storage.loadCache(geocode, loadFlags);
 
-        if (cache != null && cache.getDetailed() && loadFlags == LoadFlags.LOADALL) {
-            putCacheInCache(cache);
+        if (cache != null && cache.isDetailed() && loadFlags == LoadFlags.LOADALL) {
+            // "Store" cache for the next access in the cache
+            CacheCache.getInstance().putCacheInCache(cache);
         }
 
         return cache;
@@ -355,22 +355,14 @@ public class cgeoapplication extends Application {
         return trackable;
     }
 
-    public void removeCacheFromCache(String geocode) {
-        if (geocode != null && cachesCache.containsKey(geocode)) {
-            cachesCache.remove(geocode);
-        }
+    @SuppressWarnings("static-method")
+    public void removeCacheFromCache(final String geocode) {
+        CacheCache.getInstance().removeCacheFromCache(geocode);
     }
 
-    public void putCacheInCache(cgCache cache) {
-        if (cache == null || cache.getGeocode() == null) {
-            return;
-        }
-
-        if (cachesCache.containsKey(cache.getGeocode())) {
-            cachesCache.remove(cache.getGeocode());
-        }
-
-        cachesCache.put(cache.getGeocode(), cache);
+    @SuppressWarnings("static-method")
+    public void putCacheInCache(final cgCache cache) {
+        CacheCache.getInstance().putCacheInCache(cache);
     }
 
     public String[] geocodesInCache() {
@@ -549,7 +541,6 @@ public class cgeoapplication extends Application {
         }
 
         final boolean status = storeWithMerge(cache, cache.getListId() >= 1);
-
         if (status) {
             search.addGeocode(cache.getGeocode());
         }
