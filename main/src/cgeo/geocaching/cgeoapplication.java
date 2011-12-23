@@ -2,6 +2,8 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -21,6 +23,7 @@ import android.util.Log;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -327,17 +330,17 @@ public class cgeoapplication extends Application {
             return null;
         }
 
-        return getCacheByGeocode(geocode, cgCache.LOADALL);
+        return getCacheByGeocode(geocode, LoadFlags.LOADALL);
     }
 
-    public cgCache getCacheByGeocode(final String geocode, final int loadFlags) {
+    public cgCache getCacheByGeocode(final String geocode, final EnumSet<LoadFlag> loadFlags) {
         if (cachesCache.containsKey(geocode)) {
             return cachesCache.get(geocode);
         }
 
         final cgCache cache = getStorage().loadCache(geocode, loadFlags);
 
-        if (cache != null && cache.getDetailed() && loadFlags == cgCache.LOADALL) {
+        if (cache != null && cache.getDetailed() && loadFlags == LoadFlags.LOADALL) {
             putCacheInCache(cache);
         }
 
@@ -411,7 +414,7 @@ public class cgeoapplication extends Application {
 
         final List<String> geocodeList = search.getGeocodes();
 
-        return getCacheByGeocode(geocodeList.get(0), cgCache.LOADALL);
+        return getCacheByGeocode(geocodeList.get(0), LoadFlags.LOADALL);
     }
 
     /**
@@ -421,14 +424,14 @@ public class cgeoapplication extends Application {
      * @return
      */
     public List<cgCache> getCaches(final cgSearch search, final boolean loadWaypoints) {
-        return getCaches(search, null, null, null, null, (loadWaypoints ? cgCache.LOADWAYPOINTS : 0) | cgCache.LOADOFFLINELOG);
+        return getCaches(search, null, null, null, null, loadWaypoints ? EnumSet.of(LoadFlag.LOADWAYPOINTS, LoadFlag.LOADOFFLINELOG) : EnumSet.of(LoadFlag.LOADOFFLINELOG));
     }
 
     public List<cgCache> getCaches(final cgSearch search, Long centerLat, Long centerLon, Long spanLat, Long spanLon) {
-        return getCaches(search, centerLat, centerLon, spanLat, spanLon, cgCache.LOADWAYPOINTS | cgCache.LOADOFFLINELOG);
+        return getCaches(search, centerLat, centerLon, spanLat, spanLon, EnumSet.of(LoadFlag.LOADWAYPOINTS, LoadFlag.LOADOFFLINELOG));
     }
 
-    public List<cgCache> getCaches(final cgSearch search, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final int loadFlags) {
+    public List<cgCache> getCaches(final cgSearch search, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final EnumSet<LoadFlag> loadFlags) {
         if (search == null) {
             List<cgCache> cachesOut = new ArrayList<cgCache>();
 
@@ -580,7 +583,7 @@ public class cgeoapplication extends Application {
 
     private boolean storeWithMerge(final cgCache cache, final boolean override) {
         if (!override) {
-            final cgCache oldCache = storage.loadCache(cache.getGeocode(), cgCache.LOADALL);
+            final cgCache oldCache = storage.loadCache(cache.getGeocode(), LoadFlags.LOADALL);
             cache.gatherMissingFrom(oldCache);
         }
         return storage.saveCache(cache);
