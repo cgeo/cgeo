@@ -1107,7 +1107,7 @@ public class cgData {
         init();
 
         Cursor cursor = null;
-        long reason = 0;
+        long listId = 0;
 
         try {
             if (StringUtils.isNotBlank(geocode)) {
@@ -1142,7 +1142,7 @@ public class cgData {
                     cursor.moveToFirst();
 
                     index = cursor.getColumnIndex("reason");
-                    reason = cursor.getLong(index);
+                    listId = cursor.getLong(index);
                 }
 
                 cursor.close();
@@ -1151,7 +1151,7 @@ public class cgData {
             Log.e(Settings.tag, "cgData.isOffline: " + e.toString());
         }
 
-        return reason >= 1;
+        return listId >= 1;
     }
 
     public String getGeocodeForGuid(String guid) {
