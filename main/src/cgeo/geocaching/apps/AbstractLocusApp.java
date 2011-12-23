@@ -59,13 +59,14 @@ public abstract class AbstractLocusApp extends AbstractApp {
             return;
         }
 
+        boolean withCacheDetails = objectsToShow.size() < 200;
         int pc = 0; // counter for points
         PointsData pd = new PointsData("c:geo");
         for (Object o : objectsToShow) {
             // get icon and Point
             Point p = null;
             if (o instanceof cgCache) {
-                p = getPoint((cgCache) o, withCacheWaypoints);
+                p = getPoint((cgCache) o, withCacheWaypoints, withCacheDetails);
             } else if (o instanceof cgWaypoint) {
                 p = getPoint((cgWaypoint) o);
             } else {
@@ -92,14 +93,17 @@ public abstract class AbstractLocusApp extends AbstractApp {
 
     /**
      * This method constructs a <code>Point</code> for displaying in Locus
-     *
+     * 
      * @param cache
      * @param withWaypoints
      *            whether to give waypoints to Locus or not
+     * @param withCacheDetails
+     *            whether to give cache details (description, hint) to Locus or not
+     *            should be false for all if more then 200 Caches are transferred
      * @return null, when the <code>Point</code> could not be constructed
      * @author koem
      */
-    private static Point getPoint(cgCache cache, boolean withWaypoints) {
+    private static Point getPoint(cgCache cache, boolean withWaypoints, boolean withCacheDetails) {
         if (cache == null || cache.getCoords() == null) {
             return null;
         }
@@ -158,14 +162,15 @@ public abstract class AbstractLocusApp extends AbstractApp {
             }
         }
 
-        // Other properties of caches, not used yet. When there are many caches to be displayed
+        // Other properties of caches. When there are many caches to be displayed
         // in Locus, using these properties can lead to Exceptions in Locus.
-        // Examination necessary when to display and when not. E. g.: > 200 caches: don't display
-        // these properties.
+        // Should not be used if caches count > 200
 
-        //pg.getShortdesc()ription = cache.getShortdesc();
-        //pg.longDescription = cache.description;
-        //pg.encodedHints = cache.hint;
+        if (withCacheDetails) {
+            pg.shortDescription = cache.getShortDescription();
+            pg.longDescription = cache.getDescription();
+            pg.encodedHints = cache.getHint();
+        }
 
         return p;
     }
