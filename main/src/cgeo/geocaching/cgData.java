@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocalStorage;
@@ -26,6 +27,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -1105,7 +1107,7 @@ public class cgData {
         init();
 
         Cursor cursor = null;
-        long reason = 0;
+        long listId = 0;
 
         try {
             if (StringUtils.isNotBlank(geocode)) {
@@ -1140,7 +1142,7 @@ public class cgData {
                     cursor.moveToFirst();
 
                     index = cursor.getColumnIndex("reason");
-                    reason = cursor.getLong(index);
+                    listId = cursor.getLong(index);
                 }
 
                 cursor.close();
@@ -1149,7 +1151,7 @@ public class cgData {
             Log.e(Settings.tag, "cgData.isOffline: " + e.toString());
         }
 
-        return reason >= 1;
+        return listId >= 1;
     }
 
     public String getGeocodeForGuid(String guid) {
@@ -1821,7 +1823,7 @@ public class cgData {
      * @return the loaded cache
      */
 
-    public cgCache loadCache(final String geocode, final int loadFlags) {
+    public cgCache loadCache(final String geocode, final EnumSet<LoadFlag> loadFlags) {
         Object[] geocodes = new Object[1];
 
         if (StringUtils.isNotBlank(geocode)) {
@@ -1838,7 +1840,7 @@ public class cgData {
         return null;
     }
 
-    public List<cgCache> loadCaches(final Object[] geocodes, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final int loadFlags) {
+    public List<cgCache> loadCaches(final Object[] geocodes, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final EnumSet<LoadFlag> loadFlags) {
         init();
         // Using more than one of the parametersets results in overly comlex wheres
         if ((geocodes != null && geocodes.length > 0)
@@ -1928,7 +1930,7 @@ public class cgData {
                         // cache.getAttributes() entity probably does not need to be preserved,
                         // and the resolution of the "if" statement could be simply
                         // cache.getAttributes() = attributes
-                        if ((loadFlags & cgCache.LOADATTRIBUTES) != 0) {
+                        if (loadFlags.contains(LoadFlag.LOADATTRIBUTES)) {
                             final List<String> attributes = loadAttributes(cache.getGeocode());
                             if (CollectionUtils.isNotEmpty(attributes)) {
                                 if (cache.getAttributes() == null) {
@@ -1940,7 +1942,7 @@ public class cgData {
                             }
                         }
 
-                        if ((loadFlags & cgCache.LOADWAYPOINTS) != 0) {
+                        if (loadFlags.contains(LoadFlag.LOADWAYPOINTS)) {
                             final List<cgWaypoint> waypoints = loadWaypoints(cache.getGeocode());
                             if (CollectionUtils.isNotEmpty(waypoints)) {
                                 if (cache.getWaypoints() == null) {
@@ -1952,7 +1954,7 @@ public class cgData {
                             }
                         }
 
-                        if ((loadFlags & cgCache.LOADSPOILERS) != 0) {
+                        if (loadFlags.contains(LoadFlag.LOADSPOILERS)) {
                             final List<cgImage> spoilers = loadSpoilers(cache.getGeocode());
                             if (CollectionUtils.isNotEmpty(spoilers)) {
                                 if (cache.getSpoilers() == null) {
@@ -1964,7 +1966,7 @@ public class cgData {
                             }
                         }
 
-                        if ((loadFlags & cgCache.LOADLOGS) != 0) {
+                        if (loadFlags.contains(LoadFlag.LOADLOGS)) {
                             final List<cgLog> logs = loadLogs(cache.getGeocode());
                             if (CollectionUtils.isNotEmpty(logs)) {
                                 if (cache.getLogs() == null) {
@@ -1981,7 +1983,7 @@ public class cgData {
                             }
                         }
 
-                        if ((loadFlags & cgCache.LOADINVENTORY) != 0) {
+                        if (loadFlags.contains(LoadFlag.LOADINVENTORY)) {
                             final List<cgTrackable> inventory = loadInventory(cache.getGeocode());
                             if (CollectionUtils.isNotEmpty(inventory)) {
                                 if (cache.getInventory() == null) {
@@ -1993,7 +1995,7 @@ public class cgData {
                             }
                         }
 
-                        if ((loadFlags & cgCache.LOADOFFLINELOG) != 0) {
+                        if (loadFlags.contains(LoadFlag.LOADOFFLINELOG)) {
                             cache.setLogOffline(hasLogOffline(cache.getGeocode()));
                         }
 
