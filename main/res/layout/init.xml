@@ -735,7 +735,8 @@
 						android:id="@+id/mapfile"
 						android:singleLine="true"
 						android:lines="1"
-						android:scrollHorizontally="true" />
+						android:scrollHorizontally="true"
+						android:inputType="textNoSuggestions" />
 			</LinearLayout>
 <!-- ** -->
 			<RelativeLayout style="@style/separator_horizontal_layout" >
@@ -783,12 +784,13 @@
 					android:textColorLink="?text_color_link"
 					android:linksClickable="true"
 					android:text="@string/init_sendToCgeo_name" />
-                        <EditText style="@style/edittext"
+            <EditText style="@style/edittext"
 					android:id="@+id/webDeviceName"
 					android:singleLine="true"
 					android:lines="1"
-                                        android:maxLength="15"
-					android:scrollHorizontally="true" />
+                    android:maxLength="15"
+					android:scrollHorizontally="true"
+					android:inputType="textNoSuggestions" />
 			<TextView
                                         android:layout_width="wrap_content"
 					android:layout_height="wrap_content"

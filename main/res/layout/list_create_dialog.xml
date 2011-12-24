@@ -4,5 +4,6 @@
 		android:layout_height="fill_parent"
 		android:orientation="vertical" >
 	<EditText style="@style/edittext_dialog"
-			android:id="@+id/text" />
+			android:id="@+id/text" 
+			android:inputType="textNoSuggestions"/>
 </LinearLayout>

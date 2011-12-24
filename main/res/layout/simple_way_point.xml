@@ -10,11 +10,11 @@
 			android:textAppearance="?android:attr/textAppearanceSmall"
 			android:id="@+id/simple_way_point_latitude" android:layout_width="wrap_content"
 			android:layout_alignParentLeft="true" android:layout_alignParentTop="true"
-			android:text="latitude" android:layout_marginLeft="10dp"></TextView>
+			android:text="@string/latitude" android:layout_marginLeft="10dp"></TextView>
 		<TextView android:layout_height="wrap_content"
 			android:textAppearance="?android:attr/textAppearanceSmall"
 			android:id="@+id/simple_way_point_longitude" android:layout_width="wrap_content"
-			android:layout_below="@+id/simple_way_point_latitude" android:text="longitude"
+			android:layout_below="@+id/simple_way_point_latitude" android:text="@string/longitude"
 			android:layout_marginLeft="10dp"></TextView>
 		<TextView android:layout_height="wrap_content"
 			android:textAppearance="?android:attr/textAppearanceSmall"

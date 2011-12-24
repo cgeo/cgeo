@@ -137,7 +137,7 @@
   <string name="err_point_no_position_given">Vyplňte alespoň šířku nebo délku nebo vzdálenost a směr. Můžete také vyplnit všechny čtyři pole.</string>
   <string name="err_point_curr_position_unavailable">c:geo stále nemá aktuální polohu. Prosím, čekejte…</string>
   <string name="err_point_bear_and_dist_title">Potřebujete poradit?</string>
-  <string name="err_point_bear_and_dist">Vyplňte jak směru a vzdálenosti. Úhel je úhel 0 - 360 stupňů vzhledem k severu. Vzdálenost s nebo bez jednotek.</string>
+  <string name="err_point_bear_and_dist">Vyplňte jak směru a vzdálenosti. Úhel je úhel 0 &#8211; 360 stupňů vzhledem k severu. Vzdálenost s nebo bez jednotek.</string>
   <string name="err_point_location_error">c:geo nemůže získat polohu bodu cesty.</string>
   <string name="err_log_load_data">c:geo nemůže načíst data potřebná pro zalogování návštěvy.</string>
   <string name="err_log_load_data_again">c:geo nemůže načíst data potřebná pro zalogování návštěvy. Zkouší to znovu.</string>

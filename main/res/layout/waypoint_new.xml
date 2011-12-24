@@ -38,12 +38,12 @@
             <Button
                 android:id="@+id/buttonLatitude"
                 style="@style/button"
-                android:hint="Latitude" />
+                android:hint="@string/latitude" />
 
             <Button
                 android:id="@+id/buttonLongitude"
                 style="@style/button"
-                android:hint="Longitude" />
+                android:hint="@string/longitude" />
 
             <EditText
                 android:id="@+id/bearing"

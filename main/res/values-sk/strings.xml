@@ -180,7 +180,7 @@
   <string name="err_point_no_position_given">Vyplňte aspoň šírku alebo dĺžku alebo vzdialenosť a smer. Môžete tiež vyplniť všetky štyri polia.</string>
   <string name="err_point_curr_position_unavailable">c:geo stále nemá aktuálnu polohu. Prosím, čakajte…</string>
   <string name="err_point_bear_and_dist_title">Potrebujete poradiť?</string>
-  <string name="err_point_bear_and_dist">Vyplňte smer a vzdialenosť. Uhol je uhol 0 - 360 stupňov vzhľadom k severu. Vzdialenosť môže byť s, alebo bez jednotiek.</string>
+  <string name="err_point_bear_and_dist">Vyplňte smer a vzdialenosť. Uhol je uhol 0 &#8211; 360 stupňov vzhľadom k severu. Vzdialenosť môže byť s, alebo bez jednotiek.</string>
   <string name="err_point_location_error">c:geo nemôže získať polohu bodov cesty.</string>
 
   <string name="err_log_load_data">c:geo nemôže načítať dáta potrebné pre zalogovanie návštevy.</string>

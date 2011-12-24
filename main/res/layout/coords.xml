@@ -94,12 +94,12 @@
 		            android:layout_width="fill_parent"
 		            android:layout_height="wrap_content"
 		            android:id="@+id/latitude"
-		            android:hint="latitude" />
+		            android:hint="@string/latitude" />
 		    <EditText style="@style/edittext"
 		            android:layout_width="fill_parent"
 		            android:layout_height="wrap_content"
 		            android:id="@+id/longitude"
-		            android:hint="longitude" />
+		            android:hint="@string/longitude" />
 		    <Button style="@style/button"
 		            android:layout_width="fill_parent"
 		            android:layout_height="wrap_content"
