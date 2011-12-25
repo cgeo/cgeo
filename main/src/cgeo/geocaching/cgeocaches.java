@@ -133,7 +133,7 @@ public class cgeocaches extends AbstractListActivity {
     private String keyword = null;
     private String address = null;
     private String username = null;
-    private cgSearch search = null;
+    private ParseResult search = null;
     private List<cgCache> cacheList = new ArrayList<cgCache>();
     private CacheListAdapter adapter = null;
     private LayoutInflater inflater = null;
@@ -163,7 +163,7 @@ public class cgeocaches extends AbstractListActivity {
         public void handleMessage(Message msg) {
             try {
                 if (search != null) {
-                    setTitle(title + " [" + cgeoapplication.getCount(search) + "]");
+                    setTitle(title + " [" + SearchResult.getCount(search) + "]");
                     cacheList.clear();
 
                     final List<cgCache> cacheListTmp = app.getCaches(search, false);
@@ -185,11 +185,11 @@ public class cgeocaches extends AbstractListActivity {
                     showToast(res.getString(R.string.err_list_load_fail));
                     setMoreCaches(false);
                 } else {
-                    final int count = cgeoapplication.getTotal(search);
+                    final int count = SearchResult.getTotal(search);
                     setMoreCaches(count > 0 && cacheList != null && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
                 }
 
-                if (cacheList != null && cgeoapplication.getError(search) == StatusCode.UNAPPROVED_LICENSE) {
+                if (cacheList != null && SearchResult.getError(search) == StatusCode.UNAPPROVED_LICENSE) {
                     AlertDialog.Builder dialog = new AlertDialog.Builder(cgeocaches.this);
                     dialog.setTitle(res.getString(R.string.license));
                     dialog.setMessage(res.getString(R.string.err_license));
@@ -211,8 +211,8 @@ public class cgeocaches extends AbstractListActivity {
 
                     AlertDialog alert = dialog.create();
                     alert.show();
-                } else if (app != null && cgeoapplication.getError(search) != null) {
-                    showToast(res.getString(R.string.err_download_fail) + cgeoapplication.getError(search).getErrorString(res) + ".");
+                } else if (app != null && SearchResult.getError(search) != null) {
+                    showToast(res.getString(R.string.err_download_fail) + SearchResult.getError(search).getErrorString(res) + ".");
 
                     hideLoading();
                     showProgress(false);
@@ -254,7 +254,7 @@ public class cgeocaches extends AbstractListActivity {
         public void handleMessage(Message msg) {
             try {
                 if (search != null) {
-                    setTitle(title + " [" + cgeoapplication.getCount(search) + "]");
+                    setTitle(title + " [" + SearchResult.getCount(search) + "]");
                     cacheList.clear();
 
                     final List<cgCache> cacheListTmp = app.getCaches(search, false);
@@ -276,12 +276,12 @@ public class cgeocaches extends AbstractListActivity {
                     showToast(res.getString(R.string.err_list_load_fail));
                     setMoreCaches(false);
                 } else {
-                    final int count = cgeoapplication.getTotal(search);
+                    final int count = SearchResult.getTotal(search);
                     setMoreCaches(count > 0 && cacheList != null && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
                 }
 
-                if (cgeoapplication.getError(search) != null) {
-                    showToast(res.getString(R.string.err_download_fail) + cgeoapplication.getError(search).getErrorString(res) + ".");
+                if (SearchResult.getError(search) != null) {
+                    showToast(res.getString(R.string.err_download_fail) + SearchResult.getError(search).getErrorString(res) + ".");
 
                     listFooter.setOnClickListener(new MoreCachesListener());
                     hideLoading();
@@ -655,7 +655,8 @@ public class cgeocaches extends AbstractListActivity {
                 title = res.getString(R.string.map_map);
                 setTitle(title);
                 showProgress(true);
-                search = extras != null ? (cgSearch) extras.get("search") : null;
+                SearchResult result = extras != null ? (SearchResult) extras.get("search") : null;
+                search = new ParseResult(result);
                 loadCachesHandler.sendMessage(Message.obtain());
                 break;
             default:
@@ -721,7 +722,7 @@ public class cgeocaches extends AbstractListActivity {
 
         // refresh standard list if it has changed (new caches downloaded)
         if (type == CacheListType.OFFLINE && listId == StoredList.STANDARD_LIST_ID && search != null) {
-            cgSearch newSearch = cgBase.searchByOffline(coords, cacheType, listId);
+            SearchResult newSearch = cgBase.searchByOffline(coords, cacheType, listId);
             if (newSearch != null && newSearch.totalCnt != search.totalCnt) {
                 refreshCurrentList();
             }
@@ -1262,7 +1263,7 @@ public class cgeocaches extends AbstractListActivity {
         if (adapterInfo != null) {
             // create a search for a single cache (as if in details view)
             final cgCache cache = getCacheFromAdapter(adapterInfo);
-            final cgSearch singleSearch = cgBase.searchByGeocode(cache.getGeocode(), null, 0, false, null);
+            final SearchResult singleSearch = cgBase.searchByGeocode(cache.getGeocode(), null, 0, false, null);
 
             if (NavigationAppFactory.onMenuItemSelected(item, geo, this,
                     res, cache, singleSearch, null, null)) {
@@ -1391,7 +1392,7 @@ public class cgeocaches extends AbstractListActivity {
         }
 
         if (CollectionUtils.isNotEmpty(cacheList)) {
-            final int count = cgeoapplication.getTotal(search);
+            final int count = SearchResult.getTotal(search);
             setMoreCaches(count > 0 && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
         }
 
@@ -2524,7 +2525,7 @@ public class cgeocaches extends AbstractListActivity {
             return;
         }
 
-        cgSearch searchToUse = search;
+        SearchResult searchToUse = search;
 
         // apply filter settings (if there's a filter)
         if (adapter != null) {
@@ -2532,10 +2533,10 @@ public class cgeocaches extends AbstractListActivity {
             for (cgCache cache : adapter.getFilteredList()) {
                 geocodes.add(cache.getGeocode());
             }
-            searchToUse = new cgSearch(geocodes);
+            searchToUse = new SearchResult(geocodes);
         }
 
-        int count = cgeoapplication.getCount(searchToUse);
+        int count = SearchResult.getCount(searchToUse);
         String mapTitle = title;
         if (count > 0) {
             mapTitle = title + " [" + count + "]";
@@ -2676,7 +2677,7 @@ public class cgeocaches extends AbstractListActivity {
         context.startActivity(cachesIntent);
     }
 
-    public static void startActivityMap(final Context context, final cgSearch search) {
+    public static void startActivityMap(final Context context, final SearchResult search) {
         final Intent cachesIntent = new Intent(context, cgeocaches.class);
         cachesIntent.putExtra(EXTRAS_LIST_TYPE, CacheListType.MAP);
         cachesIntent.putExtra("search", search);

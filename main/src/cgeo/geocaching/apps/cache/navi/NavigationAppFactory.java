@@ -3,7 +3,7 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.cgSearch;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -55,7 +55,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     public static boolean onMenuItemSelected(final MenuItem item,
             final cgGeo geo, Activity activity, Resources res,
             cgCache cache,
-            final cgSearch search, cgWaypoint waypoint, final Geopoint destination) {
+            final SearchResult search, cgWaypoint waypoint, final Geopoint destination) {
         NavigationApp app = (NavigationApp) getAppFromMenuItem(item, apps);
         if (app != null) {
             try {
