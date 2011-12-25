@@ -1,7 +1,7 @@
 package cgeo.geocaching.connector;
 
+import cgeo.geocaching.ParseResult;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgSearch;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -44,12 +44,12 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
-    public cgSearch searchByCoordinate(Geopoint center) {
+    public ParseResult searchByCoordinate(Geopoint center) {
         return null;
     }
 
     @Override
-    public cgSearch searchByGeocode(String geocode, String guid, cgeoapplication app, cgSearch search, int listId, CancellableHandler handler) {
+    public ParseResult searchByGeocode(String geocode, String guid, cgeoapplication app, int listId, CancellableHandler handler) {
         return null;
     }
 

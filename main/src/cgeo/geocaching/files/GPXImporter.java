@@ -3,7 +3,7 @@ package cgeo.geocaching.files;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgSearch;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.activity.Progress;
@@ -123,10 +123,10 @@ public class GPXImporter {
                 caches = doImport();
 
                 importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_STORE_CACHES, R.string.gpx_import_storing, caches.size()));
-                cgSearch search = storeParsedCaches(caches);
+                SearchResult search = storeParsedCaches(caches);
                 Log.i(Settings.tag, "Imported successfully " + caches.size() + " caches.");
 
-                importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED, cgeoapplication.getCount(search), 0, search));
+                importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED, SearchResult.getCount(search), 0, search));
             } catch (IOException e) {
                 Log.i(Settings.tag, "Importing caches failed - error reading data: " + e.getMessage());
                 importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED_WITH_ERROR, R.string.gpx_import_error_io, 0, e.getLocalizedMessage()));
@@ -144,8 +144,8 @@ public class GPXImporter {
 
         protected abstract Collection<cgCache> doImport() throws IOException, ParserException;
 
-        private cgSearch storeParsedCaches(Collection<cgCache> caches) {
-            final cgSearch search = new cgSearch();
+        private SearchResult storeParsedCaches(Collection<cgCache> caches) {
+            final SearchResult search = new SearchResult();
             final cgeoapplication app = cgeoapplication.getInstance();
             int storedCaches = 0;
             for (cgCache cache : caches) {

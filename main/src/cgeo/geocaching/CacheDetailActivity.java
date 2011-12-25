@@ -106,7 +106,7 @@ public class CacheDetailActivity extends AbstractActivity {
     private cgGeo geolocation;
     private cgCache cache;
     private final Progress progress = new Progress();
-    private cgSearch search;
+    private SearchResult search;
     private final LocationUpdater locationUpdater = new LocationUpdater();
     private String contextMenuUser = null;
     private int contextMenuWPIndex = -1;
@@ -563,8 +563,8 @@ public class CacheDetailActivity extends AbstractActivity {
                     return;
                 }
 
-                if (cgeoapplication.getError(search) != null) {
-                    showToast(res.getString(R.string.err_dwld_details_failed_reason) + " " + cgeoapplication.getError(search) + ".");
+                if (SearchResult.getError(search) != null) {
+                    showToast(res.getString(R.string.err_dwld_details_failed_reason) + " " + SearchResult.getError(search) + ".");
 
                     finish();
                     return;

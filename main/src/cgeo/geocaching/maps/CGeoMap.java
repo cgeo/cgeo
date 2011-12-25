@@ -9,7 +9,7 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgDirection;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.cgSearch;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
@@ -103,13 +103,13 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private UpdateDirectionCallback dirUpdate = new UpdateDir();
     // from intent
     private boolean fromDetailIntent = false;
-    private cgSearch searchIntent = null;
+    private SearchResult searchIntent = null;
     private String geocodeIntent = null;
     private Geopoint coordsIntent = null;
     private WaypointType waypointTypeIntent = null;
     private int[] mapStateIntent = null;
     // status data
-    private cgSearch search = null;
+    private SearchResult search = null;
     private String token = null;
     private boolean noMapTokenShowed = false;
     // map status data
@@ -357,7 +357,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         Bundle extras = activity.getIntent().getExtras();
         if (extras != null) {
             fromDetailIntent = extras.getBoolean(EXTRAS_DETAIL);
-            searchIntent = (cgSearch) extras.getParcelable(EXTRAS_SEARCH);
+            searchIntent = (SearchResult) extras.getParcelable(EXTRAS_SEARCH);
             geocodeIntent = extras.getString(EXTRAS_GEOCODE);
             final double latitudeIntent = extras.getDouble(EXTRAS_LATITUDE);
             final double longitudeIntent = extras.getDouble(EXTRAS_LONGITUDE);
@@ -678,7 +678,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 mapView.repaintRequired(overlayCaches);
                 return true;
             case MENU_AS_LIST: {
-                final cgSearch search = new cgSearch();
+                final SearchResult search = new SearchResult();
                 search.totalCnt = caches.size();
                 for (cgCache cache : caches) {
                     search.addGeocode(cache.getGeocode());
@@ -1721,7 +1721,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     }
 
     // move map to view results of searchIntent
-    private void centerMap(String geocodeCenter, final cgSearch searchCenter, final Geopoint coordsCenter, int[] mapState) {
+    private void centerMap(String geocodeCenter, final SearchResult searchCenter, final Geopoint coordsCenter, int[] mapState) {
 
         if (!centered && mapState != null) {
             try {
@@ -1847,7 +1847,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         return new Intent(context, Settings.getMapProvider().getMapClass());
     }
 
-    public static void startActivitySearch(final Activity fromActivity, final cgSearch search, final String title, boolean detail) {
+    public static void startActivitySearch(final Activity fromActivity, final SearchResult search, final String title, boolean detail) {
         final Intent mapIntent = newIntent(fromActivity);
         mapIntent.putExtra(EXTRAS_DETAIL, detail);
         mapIntent.putExtra(EXTRAS_SEARCH, search);

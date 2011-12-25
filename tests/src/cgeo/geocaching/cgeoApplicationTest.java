@@ -86,7 +86,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
      */
     @MediumTest
     public static cgCache testSearchByGeocode(final String geocode) {
-        final cgSearch search = cgBase.searchByGeocode(geocode, null, 0, true, null);
+        final ParseResult search = cgBase.searchByGeocode(geocode, null, 0, true, null);
         assertNotNull(search);
         if (Settings.isPremiumMember() || search.error == null) {
             assertEquals(1, search.getGeocodes().size());
@@ -102,7 +102,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
      */
     @MediumTest
     public static void testSearchByGeocodeNotExisting() {
-        final cgSearch search = cgBase.searchByGeocode("GC123456", null, 0, true, null);
+        final ParseResult search = cgBase.searchByGeocode("GC123456", null, 0, true, null);
         assertNotNull(search);
         assertEquals(search.error, StatusCode.UNPUBLISHED_CACHE);
     }
@@ -112,7 +112,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
      */
     @MediumTest
     public static void testSearchByCoords() {
-        final cgSearch search = cgBase.searchByCoords(null, new Geopoint("N 52° 24.972 E 009° 35.647"), CacheType.MYSTERY, 0, false);
+        final ParseResult search = cgBase.searchByCoords(null, new Geopoint("N 52° 24.972 E 009° 35.647"), CacheType.MYSTERY, 0, false);
         assertNotNull(search);
         assertEquals(20, search.getGeocodes().size());
         assertTrue(search.getGeocodes().contains("GC1RMM2"));
@@ -123,7 +123,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
      */
     @MediumTest
     public static void testSearchByOwner() {
-        final cgSearch search = cgBase.searchByOwner(null, "blafoo", CacheType.MYSTERY, 0, false);
+        final ParseResult search = cgBase.searchByOwner(null, "blafoo", CacheType.MYSTERY, 0, false);
         assertNotNull(search);
         assertEquals(3, search.getGeocodes().size());
         assertTrue(search.getGeocodes().contains("GC36RT6"));
@@ -134,7 +134,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
      */
     @MediumTest
     public static void testSearchByUsername() {
-        final cgSearch search = cgBase.searchByUsername(null, "blafoo", CacheType.WEBCAM, 0, false);
+        final ParseResult search = cgBase.searchByUsername(null, "blafoo", CacheType.WEBCAM, 0, false);
         assertNotNull(search);
         assertEquals(3, search.totalCnt);
         assertTrue(search.getGeocodes().contains("GCP0A9"));
@@ -159,6 +159,9 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
     public static void testCacheSpecialties() {
         cgCache GCV2R9 = cgeoApplicationTest.testSearchByGeocode("GCV2R9");
         Assert.assertEquals("California, United States", GCV2R9.getLocation());
+
+        cgCache GC1ZXEZ = cgeoApplicationTest.testSearchByGeocode("GC1ZXEZ");
+        Assert.assertEquals("Ms.Marple/Mr.Stringer", GC1ZXEZ.getOwnerReal());
     }
 
 }
