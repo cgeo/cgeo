@@ -10,7 +10,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 import android.app.Activity;
 import android.content.res.Resources;
 
-interface NavigationApp extends App {
+public interface NavigationApp extends App {
     public boolean invoke(final cgGeo geo, final Activity activity,
             final Resources res,
             final cgCache cache,

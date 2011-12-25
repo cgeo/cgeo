@@ -16,13 +16,16 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class NavigationAppFactory extends AbstractAppFactory {
     private static NavigationApp[] apps = new NavigationApp[] {};
 
     private static NavigationApp[] getNavigationApps(Resources res) {
         if (ArrayUtils.isEmpty(apps)) {
             apps = new NavigationApp[] {
-                    // compass
+                    new CompassApp(res),
                     new RadarApp(res),
                     new InternalMap(res),
                     new StaticMapApp(res),
@@ -52,6 +55,29 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         }
     }
 
+    public static List<NavigationApp> getInstalledNavigationApps(final Activity activity, final Resources res) {
+        List<NavigationApp> installedNavigationApps = new ArrayList<NavigationApp>();
+        for (NavigationApp app : getNavigationApps(res)) {
+            if (app.isInstalled(activity)) {
+                installedNavigationApps.add(app);
+            }
+        }
+        return installedNavigationApps;
+    }
+
+    public static int getOrdinalFromId(final Activity activity, final Resources res, final int id) {
+        int ordinal = 0;
+        for (NavigationApp app : getNavigationApps(res)) {
+            if (app.isInstalled(activity)) {
+                if (app.getId() == id) {
+                    return ordinal;
+                }
+                ordinal++;
+            }
+        }
+        return 0;
+    }
+
     public static boolean onMenuItemSelected(final MenuItem item,
             final cgGeo geo, Activity activity, Resources res,
             cgCache cache,
@@ -66,6 +92,29 @@ public final class NavigationAppFactory extends AbstractAppFactory {
             }
         }
         return false;
+    }
+
+    public static void startDefaultNavigationApplication(final cgGeo geo, Activity activity, Resources res, cgCache cache,
+            final cgSearch search, cgWaypoint waypoint, final Geopoint destination) {
+        int defaultNavigationTool = Settings.getDefaultNavigationTool();
+        if (defaultNavigationTool == 0) {
+            return;
+        }
+        NavigationApp app = null;
+        List<NavigationApp> installedNavigationApps = getInstalledNavigationApps(activity, res);
+        for (NavigationApp navigationApp : installedNavigationApps) {
+            if (navigationApp.getId() == defaultNavigationTool) {
+                app = navigationApp;
+                break;
+            }
+        }
+        if (app != null) {
+            try {
+                app.invoke(geo, activity, res, cache, search, waypoint, destination);
+            } catch (Exception e) {
+                Log.e(Settings.tag, "NavigationAppFactory.startDefaultNavigationApplication: " + e.toString());
+            }
+        }
     }
 
 }

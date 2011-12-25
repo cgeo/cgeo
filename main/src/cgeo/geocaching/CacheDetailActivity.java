@@ -92,14 +92,14 @@ public class CacheDetailActivity extends AbstractActivity {
     private static final int MENU_CALENDAR = 11;
     private static final int MENU_CACHES_AROUND = 10;
     private static final int MENU_BROWSER = 7;
-    private static final int MENU_NAVIGATE = 2;
+    private static final int MENU_DEFAULT_NAVIGATION = 13;
 
     private static final int CONTEXT_MENU_WAYPOINT_EDIT = 1234;
     private static final int CONTEXT_MENU_WAYPOINT_DUPLICATE = 1235;
     private static final int CONTEXT_MENU_WAYPOINT_DELETE = 1236;
-    private static final int CONTEXT_MENU_WAYPOINT_COMPASS = 1237;
     private static final int CONTEXT_MENU_WAYPOINT_NAVIGATE = 1238;
     private static final int CONTEXT_MENU_WAYPOINT_CACHES_AROUND = 1239;
+    private static final int CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION = 1240;
 
     private cgGeo geolocation;
     private cgCache cache;
@@ -376,7 +376,7 @@ public class CacheDetailActivity extends AbstractActivity {
                                     menu.add(CONTEXT_MENU_WAYPOINT_DELETE, index, 0, R.string.waypoint_delete);
                                 }
                                 if (waypoint.getCoords() != null) {
-                                    menu.add(CONTEXT_MENU_WAYPOINT_COMPASS, index, 0, R.string.cache_menu_compass);
+                                    menu.add(CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION, index, 0, R.string.cache_menu_default_navigation);
                                     SubMenu subMenu = menu.addSubMenu(CONTEXT_MENU_WAYPOINT_NAVIGATE, index, 0, R.string.cache_menu_navigate).setIcon(android.R.drawable.ic_menu_mapmode);
                                     NavigationAppFactory.addMenuItems(subMenu, this, res);
                                     menu.add(CONTEXT_MENU_WAYPOINT_CACHES_AROUND, index, 0, R.string.cache_menu_around);
@@ -446,12 +446,12 @@ public class CacheDetailActivity extends AbstractActivity {
                     }
                 }
                 break;
-            case CONTEXT_MENU_WAYPOINT_COMPASS:
+            case CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION:
                 if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
                     final cgWaypoint waypoint = cache.getWaypoints().get(index);
                     Collection<cgCoord> coordinatesWithType = new ArrayList<cgCoord>();
                     coordinatesWithType.add(new cgCoord(waypoint));
-                    cgeonavigate.startActivity(this, waypoint.getPrefix().trim() + "/" + waypoint.getLookup().trim(), waypoint.getName(), waypoint.getCoords(), coordinatesWithType);
+                    NavigationAppFactory.startDefaultNavigationApplication(geolocation, this, getResources(), cache, search, waypoint, waypoint.getCoords());
                 }
                 break;
             case CONTEXT_MENU_WAYPOINT_NAVIGATE:
@@ -480,7 +480,7 @@ public class CacheDetailActivity extends AbstractActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (null != cache) {
-            menu.add(0, MENU_NAVIGATE, 0, res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass); // compass
+            menu.add(0, MENU_DEFAULT_NAVIGATION, 0, res.getString(R.string.cache_menu_default_navigation)).setIcon(android.R.drawable.ic_menu_directions); // default navigation tool
 
             final SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
             NavigationAppFactory.addMenuItems(subMenu, this, res);
@@ -497,7 +497,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(MENU_NAVIGATE).setVisible(null != cache.getCoords());
+        menu.findItem(MENU_DEFAULT_NAVIGATION).setVisible(null != cache.getCoords());
         menu.findItem(MENU_CALENDAR).setVisible(cache.canBeAddedToCalendar());
         menu.findItem(MENU_CACHES_AROUND).setVisible(null != cache.getCoords() && cache.supportsCachesAround());
         menu.findItem(MENU_BROWSER).setVisible(cache.canOpenInBrowser());
@@ -513,8 +513,8 @@ public class CacheDetailActivity extends AbstractActivity {
             return false;
         }
 
-        if (menuItem == MENU_NAVIGATE) {
-            startCompassNavigation();
+        if (menuItem == MENU_DEFAULT_NAVIGATION) {
+            startDefaultNavigation();
             return true;
         } else if (menuItem == MENU_LOG_VISIT) {
             refreshOnResume = true;
@@ -903,22 +903,18 @@ public class CacheDetailActivity extends AbstractActivity {
     }
 
     /**
-     * Tries to navigate to the {@link cgCache} of this activity.
+     * Wrapper for the referenced method in the xml-layout.
      */
-    private void startCompassNavigation() {
+    public void startDefaultNavigation(@SuppressWarnings("unused") View view) {
+        startDefaultNavigation();
+    }
+
+    private void startDefaultNavigation() {
         if (cache == null || cache.getCoords() == null) {
             showToast(res.getString(R.string.err_location_unknown));
             return;
         }
-
-        cgeonavigate.startActivity(this, cache.getGeocode(), cache.getName(), cache.getCoords(), getCoordinates());
-    }
-
-    /**
-     * Wrapper for the referenced method in the xml-layout.
-     */
-    public void startCompassNavigation(@SuppressWarnings("unused") View view) {
-        startCompassNavigation();
+        NavigationAppFactory.startDefaultNavigationApplication(geolocation, this, getResources(), cache, null, null, cache.getCoords());
     }
 
     /**

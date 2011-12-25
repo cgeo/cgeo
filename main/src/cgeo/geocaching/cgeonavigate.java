@@ -436,7 +436,9 @@ public class cgeonavigate extends AbstractActivity {
 
     public static void startActivity(final Context context, final String geocode, final String displayedName, final Geopoint coords, final Collection<cgCoord> coordinatesWithType) {
         coordinates.clear();
-        coordinates.addAll(coordinatesWithType);
+        if (coordinatesWithType != null) { // avoid possible NPE
+            coordinates.addAll(coordinatesWithType);
+        }
 
         final Intent navigateIntent = new Intent(context, cgeonavigate.class);
         navigateIntent.putExtra(EXTRAS_LATITUDE, coords.getLatitude());
