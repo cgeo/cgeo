@@ -2219,7 +2219,7 @@ public class cgData {
                 new String[] { geocode },
                 null,
                 null,
-                null,
+                "_id",
                 "100");
 
         if (cursor != null && cursor.getCount() > 0) {
