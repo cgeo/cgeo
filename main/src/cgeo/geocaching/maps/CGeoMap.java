@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.UpdateDirectionCallback;
 import cgeo.geocaching.UpdateLocationCallback;
@@ -9,7 +10,6 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.cgDirection;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
@@ -1331,11 +1331,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         }
 
                         // display cache waypoints
-                        if (cacheOne.getWaypoints() != null
+                        if (cacheOne.hasWaypoints()
                                 // Only show waypoints for single view or setting
                                 // when less than showWaypointsthreshold Caches shown
-                                && (cachesProtected.size() == 1 || (cachesProtected.size() < Settings.getWayPointsThreshold()))
-                                && !cacheOne.getWaypoints().isEmpty()) {
+                                && (cachesProtected.size() == 1 || (cachesProtected.size() < Settings.getWayPointsThreshold()))) {
                             for (cgWaypoint oneWaypoint : cacheOne.getWaypoints()) {
                                 if (oneWaypoint.getCoords() == null) {
                                     continue;

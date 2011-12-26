@@ -855,7 +855,7 @@ public class cgBase {
 
         pos = tableInside.indexOf("<div class=\"CacheInformationTable\"");
         if (pos == -1) {
-            Log.e(Settings.tag, "cgeoBase.parseCache: ID \"CacheInformationTable\" not found on page");
+            Log.e(Settings.tag, "cgeoBase.parseCache: class \"CacheInformationTable\" not found on page");
             return null;
         }
 
@@ -1079,18 +1079,11 @@ public class cgBase {
             final String originalCoords = BaseUtils.getMatch(page, GCConstants.PATTERN_LATLON_ORIG, false, null);
 
             if (null != originalCoords) {
-                final cgWaypoint waypoint = new cgWaypoint();
+                final cgWaypoint waypoint = new cgWaypoint(res.getString(R.string.cache_coordinates_original), WaypointType.WAYPOINT);
 
                 waypoint.setCoords(new Geopoint(originalCoords));
-                waypoint.setWaypointType(WaypointType.WAYPOINT);
-                if (res != null) {
-                    waypoint.setName(res.getString(R.string.cache_coordinates_original));
-                }
 
-                if (null == cache.getWaypoints()) {
-                    cache.setWaypoints(new ArrayList<cgWaypoint>());
-                }
-                cache.getWaypoints().add(waypoint);
+                cache.addWaypoint(waypoint);
                 // cache.setcoordsChanged(true);
             }
         } catch (Geopoint.GeopointException e) {
@@ -1129,23 +1122,21 @@ public class cgBase {
 
                 String[] wp;
                 for (int j = 1; j < wpItems.length; j++) {
-                    final cgWaypoint waypoint = new cgWaypoint();
-
                     wp = wpItems[j].split("<td");
 
+                    // waypoint name
+                    final String name = BaseUtils.getMatch(wp[6], GCConstants.PATTERN_WPNAME, true, 1, res.getString(R.string.waypoint), true);
+
                     // waypoint type
-                    String resulttype = BaseUtils.getMatch(wp[3], GCConstants.PATTERN_WPTYPE, null);
-                    if (null != resulttype) {
-                        waypoint.setWaypointType(WaypointType.findById(resulttype));
-                    }
+                    final String resulttype = BaseUtils.getMatch(wp[3], GCConstants.PATTERN_WPTYPE, null);
+
+                    final cgWaypoint waypoint = new cgWaypoint(name, WaypointType.findById(resulttype));
+
                     // waypoint prefix
                     waypoint.setPrefix(BaseUtils.getMatch(wp[4], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getPrefix(), false));
 
                     // waypoint lookup
                     waypoint.setLookup(BaseUtils.getMatch(wp[5], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getLookup(), false));
-
-                    // waypoint name
-                    waypoint.setName(BaseUtils.getMatch(wp[6], GCConstants.PATTERN_WPNAME, true, 1, waypoint.getName(), true));
 
                     // waypoint latitude and logitude
                     String latlon = Html.fromHtml(BaseUtils.getMatch(wp[7], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, false, 2, "", false)).toString().trim();
@@ -1162,10 +1153,7 @@ public class cgBase {
                     // waypoint note
                     waypoint.setNote(BaseUtils.getMatch(wp[3], GCConstants.PATTERN_WPNOTE, waypoint.getNote()));
 
-                    if (cache.getWaypoints() == null) {
-                        cache.setWaypoints(new ArrayList<cgWaypoint>());
-                    }
-                    cache.getWaypoints().add(waypoint);
+                    cache.addWaypoint(waypoint);
                 }
             }
         }

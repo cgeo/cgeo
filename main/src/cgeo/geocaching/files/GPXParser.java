@@ -305,21 +305,20 @@ public abstract class GPXParser extends FileParser {
                     // lookup cache for waypoint in already parsed caches
                     final cgCache cacheForWaypoint = result.get(cacheGeocodeForWaypoint);
                     if (cacheForWaypoint != null) {
-                        final cgWaypoint waypoint = new cgWaypoint();
+                        final cgWaypoint waypoint = new cgWaypoint(cache.getShortdesc(), convertWaypointSym2Type(sym));
                         waypoint.setId(-1);
-                        waypoint.setWaypointType(convertWaypointSym2Type(sym));
                         waypoint.setGeocode(cacheGeocodeForWaypoint);
                         waypoint.setPrefix(cache.getName().substring(0, 2));
                         waypoint.setLookup("---");
                         // there is no lookup code in gpx file
-                        waypoint.setName(cache.getShortdesc());
                         waypoint.setCoords(cache.getCoords());
                         waypoint.setNote(cache.getDescription());
 
-                        if (cacheForWaypoint.getWaypoints() == null) {
-                            cacheForWaypoint.setWaypoints(new ArrayList<cgWaypoint>());
-                        }
-                        cgWaypoint.mergeWayPoints(cacheForWaypoint.getWaypoints(), Collections.singletonList(waypoint), true);
+                        ArrayList<cgWaypoint> mergedWayPoints = new ArrayList<cgWaypoint>();
+                        mergedWayPoints.addAll(cacheForWaypoint.getWaypoints());
+
+                        cgWaypoint.mergeWayPoints(mergedWayPoints, Collections.singletonList(waypoint), true);
+                        cacheForWaypoint.setWaypoints(mergedWayPoints);
                         result.put(cacheGeocodeForWaypoint, cacheForWaypoint);
                         showProgressMessage(progressHandler, progressStream.getProgress());
                     }

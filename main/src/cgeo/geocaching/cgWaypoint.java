@@ -12,6 +12,7 @@ import java.util.List;
 
 public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
 
+    static final String PREFIX_OWN = "OWN";
     private static final int ORDER_UNDEFINED = -2;
     private int id = 0;
     private String geocode = "geocode";
@@ -25,9 +26,14 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
     private int cachedOrder = ORDER_UNDEFINED;
 
     /**
-     * default constructor, no fields are set
+     * require name and type for every waypoint
+     *
+     * @param name
+     * @param type
      */
-    public cgWaypoint() {
+    public cgWaypoint(final String name, final WaypointType type) {
+        this.name = name;
+        this.waypointType = type;
     }
 
     /**
@@ -103,7 +109,7 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
 
     public void setUserDefined() {
         waypointType = WaypointType.OWN;
-        setPrefix("OWN");
+        setPrefix(PREFIX_OWN);
     }
 
     private int computeOrder() {

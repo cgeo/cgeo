@@ -79,7 +79,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertSame(cache, caches.get(0));
 
         // no waypoints without importing waypoint file
-        assertNull(cache.getWaypoints());
+        assertEquals(0, cache.getWaypoints().size());
     }
 
     public void testGc31j2hWpts() throws IOException, ParserException {

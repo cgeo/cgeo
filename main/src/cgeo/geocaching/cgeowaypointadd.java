@@ -310,12 +310,10 @@ public class cgeowaypointadd extends AbstractActivity {
             }
             final String note = ((EditText) findViewById(R.id.note)).getText().toString().trim();
 
-            final cgWaypoint waypoint = new cgWaypoint();
-            waypoint.setWaypointType(type);
+            final cgWaypoint waypoint = new cgWaypoint(name, type);
             waypoint.setGeocode(geocode);
             waypoint.setPrefix(prefix);
             waypoint.setLookup(lookup);
-            waypoint.setName(name);
             waypoint.setCoords(coords);
             waypoint.setNote(note);
 

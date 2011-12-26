@@ -93,7 +93,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
 
     /**
      * This method constructs a <code>Point</code> for displaying in Locus
-     * 
+     *
      * @param cache
      * @param withWaypoints
      *            whether to give waypoints to Locus or not
@@ -143,7 +143,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
         }
         pg.found = cache.isFound();
 
-        if (withWaypoints && cache.getWaypoints() != null) {
+        if (withWaypoints && cache.hasWaypoints()) {
             pg.waypoints = new ArrayList<PointGeocachingDataWaypoint>();
             for (cgWaypoint waypoint : cache.getWaypoints()) {
                 if (waypoint == null || waypoint.getCoords() == null) {

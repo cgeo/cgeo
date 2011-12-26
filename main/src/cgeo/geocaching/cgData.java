@@ -1309,7 +1309,7 @@ public class cgData {
             }
         }
 
-        if (cache.getWaypoints() != null) {
+        if (cache.hasWaypoints()) {
             if (!saveWaypoints(cache.getGeocode(), cache.getWaypoints(), true)) {
                 statusOk = false;
             }
@@ -1951,12 +1951,7 @@ public class cgData {
                         if (loadFlags.contains(LoadFlag.LOADWAYPOINTS)) {
                             final List<cgWaypoint> waypoints = loadWaypoints(cache.getGeocode());
                             if (CollectionUtils.isNotEmpty(waypoints)) {
-                                if (cache.getWaypoints() == null) {
-                                    cache.setWaypoints(new ArrayList<cgWaypoint>());
-                                } else {
-                                    cache.getWaypoints().clear();
-                                }
-                                cache.getWaypoints().addAll(waypoints);
+                                cache.setWaypoints(waypoints);
                             }
                         }
 
@@ -2246,14 +2241,14 @@ public class cgData {
     }
 
     private static cgWaypoint createWaypointFromDatabaseContent(Cursor cursor) {
-        cgWaypoint waypoint = new cgWaypoint();
+        String name = cursor.getString(cursor.getColumnIndex("name"));
+        WaypointType type = WaypointType.findById(cursor.getString(cursor.getColumnIndex("type")));
+        cgWaypoint waypoint = new cgWaypoint(name, type);
 
         waypoint.setId(cursor.getInt(cursor.getColumnIndex("_id")));
         waypoint.setGeocode(cursor.getString(cursor.getColumnIndex("geocode")));
-        waypoint.setWaypointType(WaypointType.findById(cursor.getString(cursor.getColumnIndex("type"))));
         waypoint.setPrefix(cursor.getString(cursor.getColumnIndex("prefix")));
         waypoint.setLookup(cursor.getString(cursor.getColumnIndex("lookup")));
-        waypoint.setName(cursor.getString(cursor.getColumnIndex("name")));
         waypoint.setLatlon(cursor.getString(cursor.getColumnIndex("latlon")));
         waypoint.setCoords(getCoords(cursor, cursor.getColumnIndex("latitude"), cursor.getColumnIndex("longitude")));
         waypoint.setNote(cursor.getString(cursor.getColumnIndex("note")));
