@@ -3218,6 +3218,7 @@ public class cgData {
 
     public StoredList getList(int id, Resources res) {
         if (id == StoredList.STANDARD_LIST_ID) {
+            init();
             return new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) getStatementStandardList().simpleQueryForLong());
         } else if (id >= 10) {
             init();
