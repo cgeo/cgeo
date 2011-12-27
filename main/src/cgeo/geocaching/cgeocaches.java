@@ -133,7 +133,7 @@ public class cgeocaches extends AbstractListActivity {
     private String keyword = null;
     private String address = null;
     private String username = null;
-    private ParseResult search = null;
+    private SearchResult search = null;
     private List<cgCache> cacheList = new ArrayList<cgCache>();
     private CacheListAdapter adapter = null;
     private LayoutInflater inflater = null;
@@ -1760,7 +1760,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = cgBase.searchByNextPage(this, search, 0, Settings.isShowCaptcha());
+            search = cgBase.searchByNextPage(this, (ParseResult) search, 0, Settings.isShowCaptcha());
 
             handler.sendMessage(new Message());
         }

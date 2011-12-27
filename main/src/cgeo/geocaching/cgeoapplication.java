@@ -374,18 +374,18 @@ public class cgeoapplication extends Application {
         return cachesOut;
     }
 
-    public ParseResult getBatchOfStoredCaches(final boolean detailedOnly, final Geopoint coords, final CacheType cacheType, final int list) {
+    public SearchResult getBatchOfStoredCaches(final boolean detailedOnly, final Geopoint coords, final CacheType cacheType, final int list) {
         final List<String> geocodes = storage.loadBatchOfStoredGeocodes(detailedOnly, coords, cacheType, list);
-        return new ParseResult(geocodes);
+        return new SearchResult(geocodes);
     }
 
     public List<cgDestination> getHistoryOfSearchedLocations() {
         return storage.loadHistoryOfSearchedLocations();
     }
 
-    public ParseResult getHistoryOfCaches(final boolean detailedOnly, final CacheType cacheType) {
+    public SearchResult getHistoryOfCaches(final boolean detailedOnly, final CacheType cacheType) {
         final List<String> geocodes = storage.loadBatchOfHistoricGeocodes(detailedOnly, cacheType);
-        return new ParseResult(geocodes);
+        return new SearchResult(geocodes);
     }
 
     public SearchResult getCachedInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {

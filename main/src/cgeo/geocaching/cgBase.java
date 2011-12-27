@@ -1824,16 +1824,16 @@ public class cgBase {
         return ConnectorFactory.getConnector(geocode).searchByGeocode(geocode, guid, app, listId, handler);
     }
 
-    public static ParseResult searchByOffline(final Geopoint coords, final CacheType cacheType, final int list) {
+    public static SearchResult searchByOffline(final Geopoint coords, final CacheType cacheType, final int list) {
         cgeoapplication app = cgeoapplication.getInstance();
-        final ParseResult search = app.getBatchOfStoredCaches(true, coords, cacheType, list);
+        final SearchResult search = app.getBatchOfStoredCaches(true, coords, cacheType, list);
         search.totalCnt = app.getAllStoredCachesCount(true, cacheType, list);
         return search;
     }
 
-    public static ParseResult searchByHistory(final CacheType cacheType) {
+    public static SearchResult searchByHistory(final CacheType cacheType) {
         final cgeoapplication app = cgeoapplication.getInstance();
-        final ParseResult search = app.getHistoryOfCaches(true, cacheType);
+        final SearchResult search = app.getHistoryOfCaches(true, cacheType);
         search.totalCnt = app.getAllHistoricCachesCount();
 
         return search;
