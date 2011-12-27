@@ -177,13 +177,54 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     if (live) {
                         title.append(res.getString(R.string.map_live));
                     } else {
-                        title.append(mapTitle);
+                        if (mapTitle.contains("["))
+                        {
+                            title.append(mapTitle.substring(0, mapTitle.lastIndexOf("[")));
+                        } else {
+                            title.append(mapTitle);
+                        }
                     }
 
-                    if (caches != null && caches.size() > 0 && !mapTitle.contains("[")) {
-                        title.append(" [");
-                        title.append(caches.size());
-                        title.append(']');
+                    // Number of caches in the viewport.
+
+                    int nbOfCaches = 0;
+                    if (caches != null && cachesCnt > 0) {
+                        if (!isLoading() && caches != null && !caches.isEmpty()) {
+
+                            try {
+                                if (caches != null && caches.size() > 0) {
+                                    final GeoPointImpl mapCenter = mapView
+                                            .getMapViewCenter();
+                                    final int mapCenterLat = mapCenter
+                                            .getLatitudeE6();
+                                    final int mapCenterLon = mapCenter
+                                            .getLongitudeE6();
+                                    final int mapSpanLat = mapView
+                                            .getLatitudeSpan();
+                                    final int mapSpanLon = mapView
+                                            .getLongitudeSpan();
+
+                                    for (cgCache oneCache : caches) {
+                                        if (oneCache != null
+                                                && oneCache.getCoords() != null) {
+                                            if (cgBase.isCacheInViewPort(
+                                                    mapCenterLat, mapCenterLon,
+                                                    mapSpanLat, mapSpanLon,
+                                                    oneCache.getCoords()) == true) {
+                                                nbOfCaches++;
+                                            }
+                                        }
+                                    }
+                                    // set title
+                                    title.append("[");
+                                    title.append(nbOfCaches);
+                                    title.append("]");
+                                }
+                            } catch (Exception e) {
+                                Log.e(Settings.tag, "cgeomap " + e.toString());
+                            }
+
+                        }
                     }
 
                     ActivityMixin.setTitle(activity, title.toString());
@@ -966,7 +1007,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     if (!isLoading()) {
                         showProgressHandler.sendEmptyMessage(HIDE_PROGRESS); // hide progress
                     }
-
+                    displayHandler.sendEmptyMessage(0); // Number of caches
                     yield();
                 } catch (Exception e) {
                     Log.w(Settings.tag, "cgeomap.LoadTimer.run: " + e.toString());
@@ -1239,7 +1280,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 double latMax = Math.max(lat1, lat2);
                 double lonMin = Math.min(lon1, lon2);
                 double lonMax = Math.max(lon1, lon2);
-
 
                 //*** this needs to be in it's own thread
                 // stage 2 - pull and render from geocaching.com
