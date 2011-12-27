@@ -318,8 +318,6 @@ public class cgeowaypointadd extends AbstractActivity {
             waypoint.setNote(note);
 
             if (app.saveOwnWaypoint(id, geocode, waypoint)) {
-                app.removeCacheFromCache(geocode);
-
                 finish();
                 return;
             } else {

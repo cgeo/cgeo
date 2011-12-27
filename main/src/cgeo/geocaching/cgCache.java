@@ -786,6 +786,11 @@ public class cgCache implements ICache {
 
     public void setWaypoints(List<cgWaypoint> waypoints) {
         this.waypoints = waypoints;
+        if (waypoints != null) {
+            for (cgWaypoint waypoint : waypoints) {
+                waypoint.setGeocode(geocode);
+            }
+        }
     }
 
     public List<cgLog> getLogs() {
@@ -977,6 +982,7 @@ public class cgCache implements ICache {
             waypoints = new ArrayList<cgWaypoint>();
         }
         waypoints.add(waypoint);
+        waypoint.setGeocode(geocode);
     }
 
     public boolean hasWaypoints() {
@@ -995,9 +1001,7 @@ public class cgCache implements ICache {
         copy.setUserDefined();
         copy.setName(cgeoapplication.getInstance().getString(R.string.waypoint_copy_of) + " " + copy.getName());
         waypoints.add(index + 1, copy);
-        cgeoapplication.getInstance().saveOwnWaypoint(-1, geocode, copy);
-        cgeoapplication.getInstance().removeCacheFromCache(geocode);
-        return true;
+        return cgeoapplication.getInstance().saveOwnWaypoint(-1, geocode, copy);
     }
 
     private boolean isValidWaypointIndex(int index) {
@@ -1012,7 +1016,7 @@ public class cgCache implements ICache {
 
     /**
      * delete a user defined waypoint
-     * 
+     *
      * @param index
      * @return <code>true</code>, if the waypoint was deleted
      */

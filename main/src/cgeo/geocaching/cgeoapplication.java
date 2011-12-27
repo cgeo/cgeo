@@ -431,7 +431,11 @@ public class cgeoapplication extends Application {
     }
 
     public boolean saveOwnWaypoint(int id, String geocode, cgWaypoint waypoint) {
-        return storage.saveOwnWaypoint(id, geocode, waypoint);
+        if (storage.saveOwnWaypoint(id, geocode, waypoint)) {
+            removeCacheFromCache(geocode);
+            return true;
+        }
+        return false;
     }
 
     public boolean deleteWaypoint(int id) {
