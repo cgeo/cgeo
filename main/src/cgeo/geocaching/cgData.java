@@ -1299,7 +1299,6 @@ public class cgData {
         values.put("favourite", cache.isFavourite() ? 1 : 0);
         values.put("inventoryunknown", cache.getInventoryItems());
         values.put("onWatchlist", cache.isOnWatchlist() ? 1 : 0);
-        // values.put("coordsChanged", cache.coordsChanged() ? 1 : 0);
 
         boolean statusOk = true;
 
