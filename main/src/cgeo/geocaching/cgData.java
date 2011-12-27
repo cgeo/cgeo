@@ -2636,9 +2636,6 @@ public class cgData {
                     do {
                         geocodes.add(cursor.getString(index));
                     } while (cursor.moveToNext());
-                } else {
-                    cursor.close();
-                    return null;
                 }
 
                 cursor.close();
