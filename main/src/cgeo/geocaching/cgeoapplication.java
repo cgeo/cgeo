@@ -495,6 +495,13 @@ public class cgeoapplication extends Application {
         storage.dropStored(listId);
     }
 
+    /**
+     * {@link cgData#dropCaches(List)}
+     */
+    public void dropCaches(final List<String> geocodes) {
+        storage.dropCaches(geocodes);
+    }
+
     public List<cgTrackable> loadInventory(String geocode) {
         return storage.loadInventory(geocode);
     }

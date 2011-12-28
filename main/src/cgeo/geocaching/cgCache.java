@@ -688,6 +688,9 @@ public class cgCache implements ICache {
         this.coords = coords;
     }
 
+    /**
+     * @return true if the coords are from the cache details page and the user has been logged in
+     */
     public boolean isReliableLatLon() {
         return reliableLatLon;
     }

@@ -374,7 +374,13 @@ public class cgBase {
         return StatusCode.NO_ERROR;
     }
 
-    public static boolean checkLogin(String page) {
+    /**
+     * Check if the user has been logged in when he retrieved the data.
+     *
+     * @param page
+     * @return true = User has been logged in, false else
+     */
+    private static boolean checkLogin(String page) {
         if (StringUtils.isBlank(page)) {
             Log.e(Settings.tag, "cgeoBase.checkLogin: No page given");
             return false;
@@ -913,7 +919,7 @@ public class cgBase {
         // on watchlist
         cache.setOnWatchlist(BaseUtils.matches(page, GCConstants.PATTERN_WATCHLIST));
 
-        // latitude and longitude
+        // latitude and longitude. Can only be retrieved if user is logged in
         cache.setLatlon(BaseUtils.getMatch(page, GCConstants.PATTERN_LATLON, true, cache.getLatlon()));
         if (StringUtils.isNotEmpty(cache.getLatlon())) {
             try {
@@ -1196,11 +1202,13 @@ public class cgBase {
             int position = 0;
             List<cgLog> allLogs = cache.getLogs();
             List<cgLog> friendLogs = loadLogsFromDetails(page, cache, true);
-            for (cgLog log : friendLogs) {
-                if (allLogs.contains(log)) {
-                    allLogs.get(allLogs.indexOf(log)).friend = true;
-                } else {
-                    allLogs.add(position++, log);
+            if (friendLogs != null) {
+                for (cgLog log : friendLogs) {
+                    if (allLogs.contains(log)) {
+                        allLogs.get(allLogs.indexOf(log)).friend = true;
+                    } else {
+                        allLogs.add(position++, log);
+                    }
                 }
             }
         }
@@ -2393,11 +2401,20 @@ public class cgBase {
         return getResponseDataOnError(response);
     }
 
+    /**
+     * POST HTTP request. Do the request a second time if the user is not logged in
+     *
+     * @param uri
+     * @return
+     */
     public static String postRequestLogged(final String uri) {
-        final String data = getResponseData(postRequest(uri, null));
+        HttpResponse response = postRequest(uri, null);
+        String data = getResponseData(response);
+
         if (!checkLogin(data)) {
             if (login() == StatusCode.NO_ERROR) {
-                return getResponseData(postRequest(uri, null));
+                response = postRequest(uri, null);
+                data = getResponseData(response);
             } else {
                 Log.i(Settings.tag, "Working as guest.");
             }
@@ -2406,7 +2423,7 @@ public class cgBase {
     }
 
     /**
-     * GET HTTP request
+     * GET HTTP request. Do the request a second time if the user is not logged in
      *
      * @param uri
      * @param params
@@ -2427,7 +2444,6 @@ public class cgBase {
                 Log.i(Settings.tag, "Working as guest.");
             }
         }
-
         return data;
     }
 

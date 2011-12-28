@@ -32,6 +32,7 @@ public class cgBaseTest extends AndroidTestCase {
         Assert.assertEquals(expected.getTerrain(), actual.getTerrain());
         Assert.assertEquals(expected.getLatitude(), actual.getLatitude());
         Assert.assertEquals(expected.getLongitude(), actual.getLongitude());
+        assertTrue(actual.isReliableLatLon());
         Assert.assertEquals(expected.isDisabled(), actual.isDisabled());
         Assert.assertEquals(expected.isOwn(), actual.isOwn());
         Assert.assertEquals(expected.isArchived(), actual.isArchived());

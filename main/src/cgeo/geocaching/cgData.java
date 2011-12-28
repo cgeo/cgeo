@@ -2991,7 +2991,8 @@ public class cgData {
      * @param geocodes
      *            list of geocodes to drop from cache
      */
-    private void dropCaches(final List<String> geocodes) {
+    public void dropCaches(final List<String> geocodes) {
+        init();
         // Drop caches from the database
         final ArrayList<String> quotedGeocodes = new ArrayList<String>(geocodes.size());
         for (final String geocode : geocodes) {
