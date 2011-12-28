@@ -58,7 +58,7 @@ public class cgBaseTest extends AndroidTestCase {
             Assert.assertTrue(actual.getAttributes().contains(attribute));
         }
         for (LogType logType : expected.getLogCounts().keySet()) {
-            Assert.assertEquals(expected.getLogCounts().get(logType), actual.getLogCounts().get(logType));
+            Assert.assertTrue(actual.getLogCounts().get(logType) >= expected.getLogCounts().get(logType));
         }
 
         int actualInventorySize = null != actual.getInventory() ? actual.getInventory().size() : 0;
