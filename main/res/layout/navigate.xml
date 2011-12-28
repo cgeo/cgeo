@@ -24,8 +24,7 @@
 				android:layout_centerHorizontal="true"
 				android:layout_gravity="center"
 				android:textSize="14dip"
-				android:textColor="?text_color"
-				android:text="destination" />
+				android:textColor="?text_color"/>
 		<TextView android:id="@+id/heading"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"

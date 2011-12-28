@@ -31,8 +31,7 @@
 		            android:layout_weight="1">
 		        <TableRow android:id="@+id/tableRow1">
 		            <Button android:id="@+id/ButtonLat"
-		                    style="@style/button"
-		                    android:text="N" />
+		                    style="@style/button"/>
 		            <EditText style="@style/edittext"
 		                    android:id="@+id/EditTextLatDeg"
 		                    android:gravity="right"
@@ -61,8 +60,7 @@
 		        </TableRow>
 		        <TableRow android:id="@+id/tableRow2">
 		            <Button android:id="@+id/ButtonLon"
-		                    style="@style/button"
-		                    android:text="E" />
+		                    style="@style/button"/>
 		            <EditText android:id="@+id/EditTextLonDeg"
 		                    style="@style/edittext"
 		                    android:gravity="right"

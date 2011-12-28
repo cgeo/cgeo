@@ -66,7 +66,6 @@
 		<ImageView android:id="@+id/log_mark"
 				android:layout_width="2dip"
 				android:layout_height="fill_parent"
-				android:layout_centerVertical="true"
 				android:layout_marginTop="2dip"
 				android:layout_marginBottom="2dip"
 				android:scaleType="fitXY"

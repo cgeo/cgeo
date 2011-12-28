@@ -20,6 +20,6 @@
 			android:textAppearance="?android:attr/textAppearanceSmall"
 			android:id="@+id/date" android:layout_width="wrap_content"
 			android:layout_alignParentRight="true" android:layout_alignParentTop="true"
-			android:text="date" android:layout_marginRight="10dp"></TextView>
+			android:layout_marginRight="10dp"></TextView>
 	</RelativeLayout>
 </LinearLayout>
