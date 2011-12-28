@@ -41,6 +41,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -1430,15 +1431,27 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             coordinates.add(cgCoord);
             CachesOverlayItemImpl item = mapProvider.getCachesOverlayItem(cgCoord, cacheType);
 
-            Drawable pin = null;
-            if (iconsCache.containsKey(icon)) {
-                pin = iconsCache.get(icon);
-            } else {
-                pin = getResources().getDrawable(icon);
-                pin.setBounds(0, 0, pin.getIntrinsicWidth(), pin.getIntrinsicHeight());
-                iconsCache.put(icon, pin);
-            }
-            item.setMarker(pin);
+            Drawable marker = getResources().getDrawable(R.drawable.marker); // 33x37
+            Drawable tradi = getResources().getDrawable(R.drawable.type_traditional); // 22x22
+            tradi.setBounds(0, 0, tradi.getIntrinsicWidth(), tradi.getIntrinsicHeight());
+            Drawable mystery = getResources().getDrawable(R.drawable.type_mystery); // 22x22
+            mystery.setBounds(0, 0, mystery.getIntrinsicWidth(), mystery.getIntrinsicHeight());
+            Drawable star_on = getResources().getDrawable(R.drawable.star_on); // 12x12
+            star_on.setBounds(0, 0, star_on.getIntrinsicWidth(), star_on.getIntrinsicHeight());
+            Drawable waypoint = getResources().getDrawable(R.drawable.user_location); // 16x16
+            waypoint.setBounds(0, 0, waypoint.getIntrinsicWidth(), waypoint.getIntrinsicHeight());
+
+            Drawable[] layers = new Drawable[4];
+            layers[0] = marker;
+            layers[1] = cacheType == CacheType.TRADITIONAL ? tradi : mystery;
+            layers[2] = star_on;
+            layers[3] = waypoint;
+            LayerDrawable ld = new LayerDrawable(layers);
+            ld.setBounds(0, 0, ld.getIntrinsicWidth(), ld.getIntrinsicHeight());
+            ld.setLayerInset(1, 5, 5, 5, 5);
+            ld.setLayerInset(2, 0, 20, 20, 0);
+            ld.setLayerInset(3, 16, 20, 0, 0);
+            item.setMarker(ld);
 
             return item;
         }
