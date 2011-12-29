@@ -36,7 +36,6 @@
 					android:layout_marginLeft="10dip"
 					android:layout_marginRight="10dip"
 					android:layout_marginBottom="5dip"
-					android:layout_alignParentLeft="true"
 					android:layout_gravity="left"
 					android:padding="3dip"
 					android:textSize="14dip"
@@ -79,7 +78,6 @@
 					android:layout_marginLeft="10dip"
 					android:layout_marginRight="10dip"
 					android:layout_marginBottom="5dip"
-					android:layout_alignParentLeft="true"
 					android:layout_gravity="left"
 					android:padding="3dip"
 					android:textSize="14dip"
@@ -96,7 +94,6 @@
 				<CheckBox android:id="@+id/publicloc"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_alignParentLeft="true"
 						android:layout_gravity="left"
 						android:padding="1px"
 						android:gravity="center" />
@@ -122,7 +119,6 @@
 					android:layout_marginLeft="10dip"
 					android:layout_marginRight="10dip"
 					android:layout_marginBottom="5dip"
-					android:layout_alignParentLeft="true"
 					android:layout_gravity="left"
 					android:padding="3dip"
 					android:textSize="14dip"
@@ -142,7 +138,6 @@
 				<CheckBox android:id="@+id/twitter_option"
 						android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
-						android:layout_alignParentLeft="true"
 						android:layout_gravity="left"
 						android:padding="1px"
 						android:gravity="center" />
@@ -182,7 +177,6 @@
 						android:id="@+id/signature_help"
 						android:layout_width="wrap_content"
 						android:layout_weight="1"
-						android:layout_alignParentRight="true"
 						android:textSize="14dip"
 						android:text="@string/init_signature_help_button" />
 			</LinearLayout>
@@ -195,7 +189,6 @@
                 <CheckBox android:id="@+id/sigautoinsert"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
                         android:layout_gravity="left"
                         android:padding="1px"
                         android:gravity="center" />
@@ -223,7 +216,6 @@
 					<CheckBox android:id="@+id/autoload"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_alignParentLeft="true"
 							android:layout_gravity="left"
 							android:padding="1px"
 							android:gravity="center" />
@@ -244,7 +236,6 @@
 					<CheckBox android:id="@+id/ratingwanted"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_alignParentLeft="true"
 							android:layout_gravity="left"
 							android:padding="1px"
 							android:gravity="center" />
@@ -265,7 +256,6 @@
 					<CheckBox android:id="@+id/elevationwanted"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_alignParentLeft="true"
 							android:layout_gravity="left"
 							android:padding="1px"
 							android:gravity="center" />
@@ -287,7 +277,6 @@
                         android:id="@+id/friendlogswanted"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
                         android:layout_gravity="left"
                         android:gravity="center"
                         android:padding="1px" />
@@ -308,7 +297,6 @@
                     <CheckBox android:id="@+id/openlastdetailspage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
                             android:layout_gravity="left"
                             android:padding="1px"
                             android:gravity="center" />
@@ -342,7 +330,6 @@
 					<CheckBox android:id="@+id/skin"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_alignParentLeft="true"
 							android:layout_gravity="left"
 							android:padding="1px"
 							android:gravity="center" />
@@ -363,7 +350,6 @@
 					<CheckBox android:id="@+id/address"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_alignParentLeft="true"
 							android:layout_gravity="left"
 							android:padding="1px"
 							android:gravity="center" />
@@ -384,7 +370,6 @@
 					<CheckBox android:id="@+id/captcha"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_alignParentLeft="true"
 							android:layout_gravity="left"
 							android:padding="1px"
 							android:gravity="center" />
@@ -405,7 +390,6 @@
                     <CheckBox android:id="@+id/loaddirectionimg"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
                             android:layout_gravity="left"
                             android:padding="1px"
                             android:gravity="center" />
@@ -426,7 +410,6 @@
 					<CheckBox android:id="@+id/useenglish"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_alignParentLeft="true"
 							android:layout_gravity="left"
 							android:padding="1px"
 							android:gravity="center" />
@@ -447,7 +430,6 @@
 					<CheckBox android:id="@+id/exclude"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_alignParentLeft="true"
 							android:layout_gravity="left"
 							android:padding="1px"
 							android:gravity="center" />
@@ -468,7 +450,6 @@
 					<CheckBox android:id="@+id/disabled"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_alignParentLeft="true"
 							android:layout_gravity="left"
 							android:padding="1px"
 							android:gravity="center" />
@@ -489,7 +470,6 @@
                     <CheckBox android:id="@+id/trackautovisit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
                             android:layout_gravity="left"
                             android:padding="1px"
                             android:gravity="center" />
@@ -510,7 +490,6 @@
 					<CheckBox android:id="@+id/offline"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_alignParentLeft="true"
 							android:layout_gravity="left"
 							android:padding="1px"
 							android:gravity="center" />
@@ -531,7 +510,6 @@
 					<CheckBox android:id="@+id/save_log_img"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_alignParentLeft="true"
 							android:layout_gravity="left"
 							android:padding="1px"
 							android:gravity="center" />
@@ -552,7 +530,6 @@
 					<CheckBox android:id="@+id/units"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_alignParentLeft="true"
 							android:layout_gravity="left"
 							android:padding="1px"
 							android:gravity="center" />
@@ -573,7 +550,6 @@
 					<CheckBox android:id="@+id/gnav"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_alignParentLeft="true"
 							android:layout_gravity="left"
 							android:padding="1px"
 							android:gravity="center" />
@@ -594,7 +570,6 @@
 					<CheckBox android:id="@+id/livelist"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_alignParentLeft="true"
 							android:layout_gravity="left"
 							android:padding="1px"
 							android:gravity="center" />
@@ -615,7 +590,6 @@
 					<CheckBox android:id="@+id/log_offline"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_alignParentLeft="true"
 							android:layout_gravity="left"
 							android:padding="1px"
 							android:gravity="center" />
@@ -636,7 +610,6 @@
 					<CheckBox android:id="@+id/browser"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_alignParentLeft="true"
 							android:layout_gravity="left"
 							android:padding="1px"
 							android:gravity="center" />
@@ -657,7 +630,6 @@
 					<CheckBox android:id="@+id/trail"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_alignParentLeft="true"
 							android:layout_gravity="left"
 							android:padding="1px"
 							android:gravity="center" />
@@ -690,7 +662,6 @@
 					android:layout_marginLeft="10dip"
 					android:layout_marginRight="10dip"
 					android:layout_marginBottom="5dip"
-					android:layout_alignParentLeft="true"
 					android:layout_gravity="left"
 					android:padding="3dip"
 					android:textSize="14dip"
@@ -710,7 +681,6 @@
 					android:layout_marginLeft="10dip"
 					android:layout_marginRight="10dip"
 					android:layout_marginBottom="5dip"
-					android:layout_alignParentLeft="true"
 					android:layout_gravity="left"
 					android:padding="3dip"
 					android:textSize="14dip"
@@ -735,7 +705,8 @@
 						android:id="@+id/mapfile"
 						android:singleLine="true"
 						android:lines="1"
-						android:scrollHorizontally="true" />
+						android:scrollHorizontally="true"
+						android:inputType="textNoSuggestions" />
 			</LinearLayout>
 <!-- ** -->
 			<RelativeLayout style="@style/separator_horizontal_layout" >
@@ -755,7 +726,6 @@
 					android:layout_marginLeft="10dip"
 					android:layout_marginRight="10dip"
 					android:layout_marginBottom="5dip"
-					android:layout_alignParentLeft="true"
 					android:layout_gravity="left"
 					android:padding="3dip"
 					android:textSize="14dip"
@@ -775,7 +745,6 @@
 					android:layout_marginLeft="10dip"
 					android:layout_marginRight="10dip"
 					android:layout_marginBottom="5dip"
-					android:layout_alignParentLeft="true"
 					android:layout_gravity="left"
 					android:padding="3dip"
 					android:textSize="14dip"
@@ -783,19 +752,19 @@
 					android:textColorLink="?text_color_link"
 					android:linksClickable="true"
 					android:text="@string/init_sendToCgeo_name" />
-                        <EditText style="@style/edittext"
+            <EditText style="@style/edittext"
 					android:id="@+id/webDeviceName"
 					android:singleLine="true"
 					android:lines="1"
-                                        android:maxLength="15"
-					android:scrollHorizontally="true" />
+                    android:maxLength="15"
+					android:scrollHorizontally="true"
+					android:inputType="textNoSuggestions" />
 			<TextView
                                         android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_marginLeft="10dip"
 					android:layout_marginRight="10dip"
 					android:layout_marginBottom="5dip"
-					android:layout_alignParentLeft="true"
 					android:layout_gravity="left"
 					android:padding="3dip"
 					android:textSize="14dip"
@@ -818,7 +787,6 @@
 					android:layout_marginLeft="10dip"
 					android:layout_marginRight="10dip"
 					android:layout_marginBottom="5dip"
-					android:layout_alignParentLeft="true"
 					android:layout_gravity="left"
 					android:padding="3dip"
 					android:textSize="14dip"
@@ -851,7 +819,6 @@
 					android:layout_marginLeft="10dip"
 					android:layout_marginRight="10dip"
 					android:layout_marginBottom="5dip"
-					android:layout_alignParentLeft="true"
 					android:layout_gravity="left"
 					android:padding="3dip"
 					android:textSize="14dip"

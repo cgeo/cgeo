@@ -3,7 +3,6 @@ package cgeo.geocaching;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 
@@ -70,7 +69,7 @@ public class StaticMapsProvider {
         }
 
         final StringBuilder waypoints = new StringBuilder();
-        if (CollectionUtils.isNotEmpty(cache.getWaypoints())) {
+        if (cache.hasWaypoints()) {
             for (cgWaypoint waypoint : cache.getWaypoints()) {
                 if (waypoint.getCoords() == null) {
                     continue;

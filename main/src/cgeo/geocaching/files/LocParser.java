@@ -1,8 +1,8 @@
 package cgeo.geocaching.files;
 
+import cgeo.geocaching.ParseResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgCacheWrap;
 import cgeo.geocaching.cgCoord;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -42,12 +42,11 @@ public final class LocParser extends FileParser {
 
     private int listId;
 
-    public static void parseLoc(final cgCacheWrap caches,
-            final String fileContent) {
+    public static void parseLoc(final ParseResult parseResult, final String fileContent) {
         final Map<String, cgCoord> cidCoords = parseCoordinates(fileContent);
 
         // save found cache coordinates
-        for (cgCache cache : caches.cacheList) {
+        for (cgCache cache : parseResult.cacheList) {
             if (cidCoords.containsKey(cache.getGeocode())) {
                 cgCoord coord = cidCoords.get(cache.getGeocode());
 

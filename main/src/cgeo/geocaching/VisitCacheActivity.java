@@ -45,12 +45,12 @@ public class VisitCacheActivity extends cgLogForm {
 
     private LayoutInflater inflater = null;
     private cgCache cache = null;
-    private List<LogType> possibleLogTypes = new ArrayList<LogType>();
     private ProgressDialog waitDialog = null;
     private String cacheid = null;
     private String geocode = null;
     private String text = null;
     private boolean alreadyFound = false;
+    private List<LogType> possibleLogTypes = new ArrayList<LogType>();
     private String[] viewstates = null;
     private boolean gettingViewstate = true;
     private List<cgTrackableLog> trackables = null;
@@ -508,11 +508,16 @@ public class VisitCacheActivity extends cgLogForm {
 
         tweetCheck.setChecked(true);
 
+        final ActivityState lastState = (ActivityState) getLastNonConfigurationInstance();
+        if (lastState != null) {
+            lastState.restore(this);
+        }
+
         if (cgBase.isEmpty(viewstates)) {
             enablePostButton(false);
             new LoadDataThread().start();
         } else {
-            enablePostButton(false);
+            enablePostButton(true);
         }
 
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -749,4 +754,35 @@ public class VisitCacheActivity extends cgLogForm {
         return ((EditText) findViewById(R.id.log)).getText().toString();
     }
 
+    private class ActivityState {
+        private final String[] viewstates;
+        private final List<cgTrackableLog> trackables;
+        private final int attempts;
+        private final List<LogType> possibleLogTypes;
+        private final LogType typeSelected;
+        private final double rating;
+
+        public ActivityState() {
+            this.viewstates = VisitCacheActivity.this.viewstates;
+            this.trackables = VisitCacheActivity.this.trackables;
+            this.attempts = VisitCacheActivity.this.attempts;
+            this.possibleLogTypes = VisitCacheActivity.this.possibleLogTypes;
+            this.typeSelected = VisitCacheActivity.this.typeSelected;
+            this.rating = VisitCacheActivity.this.rating;
+        }
+
+        public void restore(final VisitCacheActivity activity) {
+            activity.viewstates = this.viewstates;
+            activity.trackables = this.trackables;
+            activity.attempts = this.attempts;
+            activity.possibleLogTypes = this.possibleLogTypes;
+            activity.typeSelected = this.typeSelected;
+            activity.rating = this.rating;
+        }
+    }
+
+    @Override
+    public Object onRetainNonConfigurationInstance() {
+        return new ActivityState();
+    }
 }

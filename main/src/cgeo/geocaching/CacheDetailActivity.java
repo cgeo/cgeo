@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.cgData.StorageLocations;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.GeneralAppsFactory;
@@ -105,7 +106,7 @@ public class CacheDetailActivity extends AbstractActivity {
     private cgGeo geolocation;
     private cgCache cache;
     private final Progress progress = new Progress();
-    private cgSearch search;
+    private SearchResult search;
     private final LocationUpdater locationUpdater = new LocationUpdater();
     private String contextMenuUser = null;
     private int contextMenuWPIndex = -1;
@@ -417,7 +418,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 }
                 break;
             case CONTEXT_MENU_WAYPOINT_EDIT:
-                if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
+                if (cache.hasWaypoints() && index < cache.getWaypoints().size()) {
                     final cgWaypoint waypoint = cache.getWaypoints().get(index);
                     Intent editIntent = new Intent(this, cgeowaypointadd.class);
                     editIntent.putExtra("waypoint", waypoint.getId());
@@ -426,52 +427,42 @@ public class CacheDetailActivity extends AbstractActivity {
                 }
                 break;
             case CONTEXT_MENU_WAYPOINT_DUPLICATE:
-                if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
-                    final cgWaypoint copy = new cgWaypoint(cache.getWaypoints().get(index));
-                    copy.setUserDefined();
-                    copy.setName(res.getString(R.string.waypoint_copy_of) + " " + copy.getName());
-                    cache.getWaypoints().add(index + 1, copy);
-                    app.saveOwnWaypoint(-1, cache.getGeocode(), copy);
-                    app.removeCacheFromCache(cache.getGeocode());
+                if (cache.duplicateWaypoint(index)) {
                     notifyDataSetChanged();
                 }
                 break;
             case CONTEXT_MENU_WAYPOINT_DELETE:
-                if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
-                    final cgWaypoint waypoint = cache.getWaypoints().get(index);
-                    if (waypoint.isUserDefined()) {
-                        cache.getWaypoints().remove(index);
-                        app.deleteWaypoint(waypoint.getId());
-                        app.removeCacheFromCache(cache.getGeocode());
-                        notifyDataSetChanged();
-                    }
+                if (cache.deleteWaypoint(index)) {
+                    notifyDataSetChanged();
                 }
                 break;
             case CONTEXT_MENU_WAYPOINT_COMPASS:
-                if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
-                    final cgWaypoint waypoint = cache.getWaypoints().get(index);
+ {
+                final cgWaypoint waypoint = cache.getWaypoint(index);
+                if (waypoint != null) {
                     Collection<cgCoord> coordinatesWithType = new ArrayList<cgCoord>();
                     coordinatesWithType.add(new cgCoord(waypoint));
                     cgeonavigate.startActivity(this, waypoint.getPrefix().trim() + "/" + waypoint.getLookup().trim(), waypoint.getName(), waypoint.getCoords(), coordinatesWithType);
+                }
                 }
                 break;
             case CONTEXT_MENU_WAYPOINT_NAVIGATE:
                 // No processing necessary, sub-menu gets displayed;
                 break;
             case CONTEXT_MENU_WAYPOINT_CACHES_AROUND:
-                if (null != cache.getWaypoints() && index < cache.getWaypoints().size()) {
-                    final cgWaypoint waypoint = cache.getWaypoints().get(index);
+ {
+                final cgWaypoint waypoint = cache.getWaypoint(index);
+                if (waypoint != null) {
                     cgeocaches.startActivityCachesAround(this, waypoint.getCoords());
                 }
+            }
                 break;
             default:
                 // First check the navigation menu, then the option items
-                if (null != cache.getWaypoints() && 0 <= contextMenuWPIndex && contextMenuWPIndex < cache.getWaypoints().size()) {
-                    final cgWaypoint waypoint = cache.getWaypoints().get(contextMenuWPIndex);
-                    if (NavigationAppFactory.onMenuItemSelected(item, geolocation, this,
-                            res, null, null, waypoint, null)) {
-                        return true;
-                    }
+                final cgWaypoint waypoint = cache.getWaypoint(contextMenuWPIndex);
+                if (waypoint != null && NavigationAppFactory.onMenuItemSelected(item, geolocation, this,
+                        res, null, null, waypoint, null)) {
+                    return true;
                 }
                 return onOptionsItemSelected(item);
         }
@@ -562,8 +553,8 @@ public class CacheDetailActivity extends AbstractActivity {
                     return;
                 }
 
-                if (cgeoapplication.getError(search) != null) {
-                    showToast(res.getString(R.string.err_dwld_details_failed_reason) + " " + cgeoapplication.getError(search) + ".");
+                if (SearchResult.getError(search) != null) {
+                    showToast(res.getString(R.string.err_dwld_details_failed_reason) + " " + SearchResult.getError(search) + ".");
 
                     finish();
                     return;
@@ -885,7 +876,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
         // waypoints
         try {
-            if (null != cache.getWaypoints()) {
+            if (cache.hasWaypoints()) {
                 for (cgWaypoint waypoint : cache.getWaypoints()) {
                     if (null != waypoint.getCoords()) {
                         final cgCoord coords = new cgCoord();
@@ -1054,7 +1045,7 @@ public class CacheDetailActivity extends AbstractActivity {
             }
             // show number of waypoints directly in waypoint title
             if (page == Page.WAYPOINTS) {
-                int waypointCount = (cache.getWaypoints() == null ? 0 : cache.getWaypoints().size());
+                int waypointCount = (cache.hasWaypoints() ? cache.getWaypoints().size() : 0);
                 return res.getQuantityString(R.plurals.waypoints, waypointCount, waypointCount);
             }
             return res.getString(page.titleStringId);
@@ -1486,6 +1477,8 @@ public class CacheDetailActivity extends AbstractActivity {
             buttonWatchlistRemove.setOnClickListener(new RemoveFromWatchlistClickListener());
             updateWatchlistBox();
 
+            updateDebugInfos();
+
             // data license
             IConnector connector = ConnectorFactory.getConnector(cache);
             if (connector != null) {
@@ -1840,6 +1833,27 @@ public class CacheDetailActivity extends AbstractActivity {
             offlineRefresh.setVisibility(cache.supportsRefresh() ? View.VISIBLE : View.GONE);
             offlineRefresh.setClickable(true);
         }
+
+        private void updateDebugInfos() {
+
+            if (Settings.isDebugInfos()) {
+                ((LinearLayout) view.findViewById(R.id.debug_box)).setVisibility(View.VISIBLE);
+                final TextView internalsText = (TextView) view.findViewById(R.id.debug_text);
+
+                String sl = "Storage location: ";
+                if (cache.getStorageLocation().contains(StorageLocations.CACHE)) {
+                    sl += "Cache ";
+                }
+                if (cache.getStorageLocation().contains(StorageLocations.DATABASE)) {
+                    sl += "Database (" + cache.getListId() + ")";
+                }
+
+                internalsText.setText(sl);
+            } else {
+                ((LinearLayout) view.findViewById(R.id.debug_box)).setVisibility(View.GONE);
+            }
+        }
+
     }
 
     private class DescriptionViewCreator implements PageViewCreator {
@@ -2291,7 +2305,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             LinearLayout waypoints = (LinearLayout) view.findViewById(R.id.waypoints);
 
-            if (CollectionUtils.isNotEmpty(cache.getWaypoints())) {
+            if (cache.hasWaypoints()) {
                 LinearLayout waypointView;
 
                 // sort waypoints: PP, Sx, FI, OWN
@@ -2313,7 +2327,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     if (StringUtils.isNotBlank(cgBase.waypointTypes.get(wpt.getWaypointType()))) {
                         infoTextList.add(cgBase.waypointTypes.get(wpt.getWaypointType()));
                     }
-                    if ("OWN".equalsIgnoreCase(wpt.getPrefix())) {
+                    if (cgWaypoint.PREFIX_OWN.equalsIgnoreCase(wpt.getPrefix())) {
                         infoTextList.add(res.getString(R.string.waypoint_custom));
                     } else {
                         if (StringUtils.isNotBlank(wpt.getPrefix())) {
@@ -2373,7 +2387,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
                 addWptIntent.putExtra("geocode", cache.getGeocode());
                 int wpCount = 0;
-                if (cache.getWaypoints() != null) {
+                if (cache.hasWaypoints()) {
                     wpCount = cache.getWaypoints().size();
                 }
                 addWptIntent.putExtra("count", wpCount);

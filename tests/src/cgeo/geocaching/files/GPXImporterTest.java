@@ -2,7 +2,7 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgSearch;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
@@ -53,7 +53,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertEquals(GPXImporter.IMPORT_STEP_READ_FILE, iMsg.next().what);
         assertEquals(GPXImporter.IMPORT_STEP_STORE_CACHES, iMsg.next().what);
         assertEquals(GPXImporter.IMPORT_STEP_FINISHED, iMsg.next().what);
-        cgSearch search = (cgSearch) importStepHandler.messages.get(3).obj;
+        SearchResult search = (SearchResult) importStepHandler.messages.get(3).obj;
         assertEquals(Collections.singletonList("GC31J2H"), search.getGeocodes());
 
         cgCache cache = cgeoapplication.getInstance().getCacheByGeocode("GC31J2H");
@@ -82,7 +82,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         runImportThread(importThread);
 
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_READ_WPT_FILE, GPXImporter.IMPORT_STEP_STORE_CACHES, GPXImporter.IMPORT_STEP_FINISHED);
-        cgSearch search = (cgSearch) importStepHandler.messages.get(4).obj;
+        SearchResult search = (SearchResult) importStepHandler.messages.get(4).obj;
         assertEquals(Collections.singletonList("GC31J2H"), search.getGeocodes());
 
         cgCache cache = cgeoapplication.getInstance().getCacheByGeocode("GC31J2H");
@@ -105,7 +105,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         runImportThread(importThread);
 
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_STORE_CACHES, GPXImporter.IMPORT_STEP_FINISHED);
-        cgSearch search = (cgSearch) importStepHandler.messages.get(3).obj;
+        SearchResult search = (SearchResult) importStepHandler.messages.get(3).obj;
         assertEquals(Collections.singletonList("OC5952"), search.getGeocodes());
 
         cgCache cache = cgeoapplication.getInstance().getCacheByGeocode("OC5952");
@@ -145,7 +145,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         runImportThread(importThread);
 
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_STORE_CACHES, GPXImporter.IMPORT_STEP_FINISHED);
-        cgSearch search = (cgSearch) importStepHandler.messages.get(3).obj;
+        SearchResult search = (SearchResult) importStepHandler.messages.get(3).obj;
         assertEquals(Collections.singletonList("GC31J2H"), search.getGeocodes());
 
         cgCache cache = cgeoapplication.getInstance().getCacheByGeocode("GC31J2H");
@@ -163,7 +163,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         runImportThread(importThread);
 
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_READ_WPT_FILE, GPXImporter.IMPORT_STEP_STORE_CACHES, GPXImporter.IMPORT_STEP_FINISHED);
-        cgSearch search = (cgSearch) importStepHandler.messages.get(4).obj;
+        SearchResult search = (SearchResult) importStepHandler.messages.get(4).obj;
         assertEquals(Collections.singletonList("GC31J2H"), search.getGeocodes());
 
         cgCache cache = cgeoapplication.getInstance().getCacheByGeocode("GC31J2H");
@@ -188,7 +188,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         runImportThread(importThread);
 
         assertImportStepMessages(GPXImporter.IMPORT_STEP_START, GPXImporter.IMPORT_STEP_READ_FILE, GPXImporter.IMPORT_STEP_READ_WPT_FILE, GPXImporter.IMPORT_STEP_STORE_CACHES, GPXImporter.IMPORT_STEP_FINISHED);
-        cgSearch search = (cgSearch) importStepHandler.messages.get(4).obj;
+        SearchResult search = (SearchResult) importStepHandler.messages.get(4).obj;
         assertEquals(Collections.singletonList("GC31J2H"), search.getGeocodes());
 
         cgCache cache = cgeoapplication.getInstance().getCacheByGeocode("GC31J2H");

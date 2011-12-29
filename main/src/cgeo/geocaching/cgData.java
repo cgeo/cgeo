@@ -39,6 +39,12 @@ import java.util.regex.Pattern;
 
 public class cgData {
 
+    public enum StorageLocations {
+        HEAP,
+        CACHE,
+        DATABASE,
+    }
+
     /** The list of fields needed for mapping. */
     private static final String[] CACHE_COLUMNS = new String[] {
             "_id", "updated", "reason", "detailed", "detailedupdate", "visiteddate", "geocode", "cacheid", "guid", "type", "name", "own", "owner", "owner_real", "hidden", "hint", "size",
@@ -1252,7 +1258,7 @@ public class cgData {
             values.put("updated", cache.getUpdated());
         }
         values.put("reason", cache.getListId());
-        values.put("detailed", cache.getDetailed() ? 1 : 0);
+        values.put("detailed", cache.isDetailed() ? 1 : 0);
         values.put("detailedupdate", cache.getDetailedUpdate());
         values.put("visiteddate", cache.getVisitedDate());
         values.put("geocode", cache.getGeocode());
@@ -1293,7 +1299,6 @@ public class cgData {
         values.put("favourite", cache.isFavourite() ? 1 : 0);
         values.put("inventoryunknown", cache.getInventoryItems());
         values.put("onWatchlist", cache.isOnWatchlist() ? 1 : 0);
-        // values.put("coordsChanged", cache.coordsChanged() ? 1 : 0);
 
         boolean statusOk = true;
 
@@ -1303,7 +1308,7 @@ public class cgData {
             }
         }
 
-        if (cache.getWaypoints() != null) {
+        if (cache.hasWaypoints()) {
             if (!saveWaypoints(cache.getGeocode(), cache.getWaypoints(), true)) {
                 statusOk = false;
             }
@@ -1945,12 +1950,7 @@ public class cgData {
                         if (loadFlags.contains(LoadFlag.LOADWAYPOINTS)) {
                             final List<cgWaypoint> waypoints = loadWaypoints(cache.getGeocode());
                             if (CollectionUtils.isNotEmpty(waypoints)) {
-                                if (cache.getWaypoints() == null) {
-                                    cache.setWaypoints(new ArrayList<cgWaypoint>());
-                                } else {
-                                    cache.getWaypoints().clear();
-                                }
-                                cache.getWaypoints().addAll(waypoints);
+                                cache.setWaypoints(waypoints);
                             }
                         }
 
@@ -1998,6 +1998,7 @@ public class cgData {
                         if (loadFlags.contains(LoadFlag.LOADOFFLINELOG)) {
                             cache.setLogOffline(hasLogOffline(cache.getGeocode()));
                         }
+                        cache.addStorageLocation(StorageLocations.DATABASE);
 
                         caches.add(cache);
                     } while (cursor.moveToNext());
@@ -2217,7 +2218,7 @@ public class cgData {
                 new String[] { geocode },
                 null,
                 null,
-                null,
+                "_id",
                 "100");
 
         if (cursor != null && cursor.getCount() > 0) {
@@ -2239,14 +2240,14 @@ public class cgData {
     }
 
     private static cgWaypoint createWaypointFromDatabaseContent(Cursor cursor) {
-        cgWaypoint waypoint = new cgWaypoint();
+        String name = cursor.getString(cursor.getColumnIndex("name"));
+        WaypointType type = WaypointType.findById(cursor.getString(cursor.getColumnIndex("type")));
+        cgWaypoint waypoint = new cgWaypoint(name, type);
 
         waypoint.setId(cursor.getInt(cursor.getColumnIndex("_id")));
         waypoint.setGeocode(cursor.getString(cursor.getColumnIndex("geocode")));
-        waypoint.setWaypointType(WaypointType.findById(cursor.getString(cursor.getColumnIndex("type"))));
         waypoint.setPrefix(cursor.getString(cursor.getColumnIndex("prefix")));
         waypoint.setLookup(cursor.getString(cursor.getColumnIndex("lookup")));
-        waypoint.setName(cursor.getString(cursor.getColumnIndex("name")));
         waypoint.setLatlon(cursor.getString(cursor.getColumnIndex("latlon")));
         waypoint.setCoords(getCoords(cursor, cursor.getColumnIndex("latitude"), cursor.getColumnIndex("longitude")));
         waypoint.setNote(cursor.getString(cursor.getColumnIndex("note")));
@@ -2635,9 +2636,6 @@ public class cgData {
                     do {
                         geocodes.add(cursor.getString(index));
                     } while (cursor.moveToNext());
-                } else {
-                    cursor.close();
-                    return null;
                 }
 
                 cursor.close();
@@ -2993,7 +2991,8 @@ public class cgData {
      * @param geocodes
      *            list of geocodes to drop from cache
      */
-    private void dropCaches(final List<String> geocodes) {
+    public void dropCaches(final List<String> geocodes) {
+        init();
         // Drop caches from the database
         final ArrayList<String> quotedGeocodes = new ArrayList<String>(geocodes.size());
         for (final String geocode : geocodes) {
@@ -3211,6 +3210,7 @@ public class cgData {
 
     public StoredList getList(int id, Resources res) {
         if (id == StoredList.STANDARD_LIST_ID) {
+            init();
             return new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) getStatementStandardList().simpleQueryForLong());
         } else if (id >= 10) {
             init();

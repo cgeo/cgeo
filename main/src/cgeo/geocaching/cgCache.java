@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.cgData.StorageLocations;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.GCConnector;
@@ -23,7 +24,9 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -87,8 +90,10 @@ public class cgCache implements ICache {
     private boolean statusCheckedView = false;
     private String directionImg = "";
     private String nameForSorting;
+    private final EnumSet<StorageLocations> storageLocation = EnumSet.of(StorageLocations.HEAP);
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
+
     /**
      * Gather missing information from another cache object.
      *
@@ -626,7 +631,7 @@ public class cgCache implements ICache {
         this.listId = listId;
     }
 
-    public boolean getDetailed() {
+    public boolean isDetailed() {
         return detailed;
     }
 
@@ -683,6 +688,9 @@ public class cgCache implements ICache {
         this.coords = coords;
     }
 
+    /**
+     * @return true if the coords are from the cache details page and the user has been logged in
+     */
     public boolean isReliableLatLon() {
         return reliableLatLon;
     }
@@ -767,12 +775,25 @@ public class cgCache implements ICache {
         this.onWatchlist = onWatchlist;
     }
 
+    /**
+     * return an immutable list of waypoints.
+     *
+     * @return always non <code>null</code>
+     */
     public List<cgWaypoint> getWaypoints() {
-        return waypoints;
+        if (waypoints == null) {
+            return Collections.emptyList();
+        }
+        return Collections.unmodifiableList(waypoints);
     }
 
     public void setWaypoints(List<cgWaypoint> waypoints) {
         this.waypoints = waypoints;
+        if (waypoints != null) {
+            for (cgWaypoint waypoint : waypoints) {
+                waypoint.setGeocode(geocode);
+            }
+        }
     }
 
     public List<cgLog> getLogs() {
@@ -944,4 +965,86 @@ public class cgCache implements ICache {
         return terrain > 0f;
     }
 
+    /**
+     * @return the storageLocation
+     */
+    public EnumSet<StorageLocations> getStorageLocation() {
+        return storageLocation;
+    }
+
+    /**
+     * @param storageLocation
+     *            the storageLocation to set
+     */
+    public void addStorageLocation(StorageLocations sl) {
+        this.storageLocation.add(sl);
+    }
+
+    public void addWaypoint(final cgWaypoint waypoint) {
+        if (null == waypoints) {
+            waypoints = new ArrayList<cgWaypoint>();
+        }
+        waypoints.add(waypoint);
+        waypoint.setGeocode(geocode);
+    }
+
+    public boolean hasWaypoints() {
+        return CollectionUtils.isNotEmpty(waypoints);
+    }
+
+    /**
+     * @param index
+     * @return <code>true</code>, if the waypoint was duplicated
+     */
+    public boolean duplicateWaypoint(int index) {
+        if (!isValidWaypointIndex(index)) {
+            return false;
+        }
+        final cgWaypoint copy = new cgWaypoint(waypoints.get(index));
+        copy.setUserDefined();
+        copy.setName(cgeoapplication.getInstance().getString(R.string.waypoint_copy_of) + " " + copy.getName());
+        waypoints.add(index + 1, copy);
+        return cgeoapplication.getInstance().saveOwnWaypoint(-1, geocode, copy);
+    }
+
+    private boolean isValidWaypointIndex(int index) {
+        if (!hasWaypoints()) {
+            return false;
+        }
+        if (index < 0 || index >= waypoints.size()) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * delete a user defined waypoint
+     *
+     * @param index
+     * @return <code>true</code>, if the waypoint was deleted
+     */
+    public boolean deleteWaypoint(int index) {
+        if (!isValidWaypointIndex(index)) {
+            return false;
+        }
+        final cgWaypoint waypoint = waypoints.get(index);
+        if (waypoint.isUserDefined()) {
+            waypoints.remove(index);
+            cgeoapplication.getInstance().deleteWaypoint(waypoint.getId());
+            cgeoapplication.getInstance().removeCacheFromCache(geocode);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param index
+     * @return waypoint or <code>null</code>
+     */
+    public cgWaypoint getWaypoint(int index) {
+        if (!isValidWaypointIndex(index)) {
+            return null;
+        }
+        return waypoints.get(index);
+    }
 }

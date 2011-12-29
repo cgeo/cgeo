@@ -52,40 +52,14 @@ public class cgeo extends AbstractActivity {
 
     private int version = 0;
     private cgGeo geo = null;
-    private UpdateLocationCallback geoUpdate = new update();
-    private TextView navType = null;
-    private TextView navAccuracy = null;
-    private TextView navSatellites = null;
-    private TextView navLocation = null;
+    private UpdateLocationCallback geoUpdate = null;
     private TextView filterTitle = null;
-    private TextView countBubble = null;
     private boolean cleanupRunning = false;
     private int countBubbleCnt = 0;
     private Geopoint addCoords = null;
     private List<Address> addresses = null;
     private boolean addressObtaining = false;
     private boolean initialized = false;
-    private Handler countBubbleHandler = new Handler() {
-
-        @Override
-        public void handleMessage(Message msg) {
-            try {
-                if (countBubble == null) {
-                    countBubble = (TextView) findViewById(R.id.offline_count);
-                }
-
-                if (countBubbleCnt == 0) {
-                    countBubble.setVisibility(View.GONE);
-                } else {
-                    countBubble.setText(Integer.toString(countBubbleCnt));
-                    countBubble.bringToFront();
-                    countBubble.setVisibility(View.VISIBLE);
-                }
-            } catch (Exception e) {
-                Log.w(Settings.tag, "cgeo.countBubbleHander: " + e.toString());
-            }
-        }
-    };
     private Handler obtainAddressHandler = new Handler() {
 
         @Override
@@ -112,10 +86,7 @@ public class cgeo extends AbstractActivity {
 
                     addCoords = geo.coordsNow;
 
-                    if (navLocation == null) {
-                        navLocation = (TextView) findViewById(R.id.nav_location);
-                    }
-
+                    TextView navLocation = (TextView) findViewById(R.id.nav_location);
                     navLocation.setText(addText.toString());
                 }
             } catch (Exception e) {
@@ -415,12 +386,7 @@ public class cgeo extends AbstractActivity {
         if (filterTitle == null) {
             filterTitle = (TextView) findViewById(R.id.filter_button_title);
         }
-        if (CacheType.ALL == Settings.getCacheType()) {
-            // The text for ALL is R.string.all_types
-            filterTitle.setText(res.getString(R.string.all));
-        } else {
-            filterTitle.setText(Settings.getCacheType().getL10n());
-        }
+        filterTitle.setText(Settings.getCacheType().getL10n());
     }
 
     private void init() {
@@ -442,7 +408,7 @@ public class cgeo extends AbstractActivity {
 
         /*
          * "update" the cache size/type. For a better performance
-         * the resource strings a stored in the enum's. In case of a
+         * the resource strings are stored in the enum's. In case of a
          * locale change the resource strings don't get updated automatically.
          * That's why we have to do it on our own.
          */
@@ -462,16 +428,10 @@ public class cgeo extends AbstractActivity {
             (new firstLogin()).start();
         }
 
-        updateCacheCounter();
-        (new cleanDatabase()).start();
-
         if (geo == null) {
+            geoUpdate = new UpdateLocation();
             geo = app.startGeo(geoUpdate);
         }
-
-        navType = (TextView) findViewById(R.id.nav_type);
-        navAccuracy = (TextView) findViewById(R.id.nav_accuracy);
-        navLocation = (TextView) findViewById(R.id.nav_location);
 
         final View findOnMap = findViewById(R.id.map);
         findOnMap.setClickable(true);
@@ -489,8 +449,6 @@ public class cgeo extends AbstractActivity {
             }
         });
         registerForContextMenu(findByOffline);
-
-        updateCacheCounter();
 
         final View advanced = findViewById(R.id.advanced_button);
         advanced.setClickable(true);
@@ -517,12 +475,15 @@ public class cgeo extends AbstractActivity {
             }
         });
 
+        updateCacheCounter();
+
         setFilterTitle();
         checkRestore();
+        (new cleanDatabase()).start();
     }
 
     private void updateCacheCounter() {
-        (new countBubbleUpdate()).start();
+        (new CountBubbleUpdateThread()).start();
     }
 
     private void checkRestore() {
@@ -551,7 +512,13 @@ public class cgeo extends AbstractActivity {
                 .show();
     }
 
-    private class update implements UpdateLocationCallback {
+    private class UpdateLocation implements UpdateLocationCallback {
+
+        private final View nearestView = findViewById(R.id.nearest);
+        private final TextView navType = (TextView) findViewById(R.id.nav_type);
+        private final TextView navAccuracy = (TextView) findViewById(R.id.nav_accuracy);
+        private final TextView navSatellites = (TextView) findViewById(R.id.nav_satellites);
+        private final TextView navLocation = (TextView) findViewById(R.id.nav_location);
 
         @Override
         public void updateLocation(cgGeo geo) {
@@ -560,22 +527,17 @@ public class cgeo extends AbstractActivity {
             }
 
             try {
-                if (navType == null || navLocation == null || navAccuracy == null) {
-                    navType = (TextView) findViewById(R.id.nav_type);
-                    navAccuracy = (TextView) findViewById(R.id.nav_accuracy);
-                    navSatellites = (TextView) findViewById(R.id.nav_satellites);
-                    navLocation = (TextView) findViewById(R.id.nav_location);
-                }
-
                 if (geo.coordsNow != null) {
-                    View findNearest = findViewById(R.id.nearest);
-                    findNearest.setClickable(true);
-                    findNearest.setOnClickListener(new OnClickListener() {
-                        public void onClick(View v) {
-                            cgeoFindNearest(v);
-                        }
-                    });
-                    findNearest.setBackgroundResource(R.drawable.main_nearby);
+                    if (!nearestView.isClickable()) {
+                        nearestView.setFocusable(true);
+                        nearestView.setClickable(true);
+                        nearestView.setOnClickListener(new OnClickListener() {
+                            public void onClick(View v) {
+                                cgeoFindNearest(v);
+                            }
+                        });
+                        nearestView.setBackgroundResource(R.drawable.main_nearby);
+                    }
 
                     String satellites = null;
                     if (geo.satellitesFixed > 0) {
@@ -603,7 +565,7 @@ public class cgeo extends AbstractActivity {
                             navLocation.setText(res.getString(R.string.loc_no_addr));
                         }
                         if (addCoords == null || (geo.coordsNow.distanceTo(addCoords) > 0.5 && !addressObtaining)) {
-                            (new obtainAddress()).start();
+                            (new ObtainAddressThread()).start();
                         }
                     } else {
                         if (geo.altitudeNow != null) {
@@ -614,12 +576,12 @@ public class cgeo extends AbstractActivity {
                         }
                     }
                 } else {
-                    View findNearest = findViewById(R.id.nearest);
-                    findNearest.setFocusable(false);
-                    findNearest.setClickable(false);
-                    findNearest.setOnClickListener(null);
-                    findNearest.setBackgroundResource(R.drawable.main_nearby_disabled);
-
+                    if (nearestView.isClickable()) {
+                        nearestView.setFocusable(false);
+                        nearestView.setClickable(false);
+                        nearestView.setOnClickListener(null);
+                        nearestView.setBackgroundResource(R.drawable.main_nearby_disabled);
+                    }
                     navType.setText(null);
                     navAccuracy.setText(null);
                     navLocation.setText(res.getString(R.string.loc_trying));
@@ -688,7 +650,29 @@ public class cgeo extends AbstractActivity {
         findViewById(R.id.filter_button).performClick();
     }
 
-    private class countBubbleUpdate extends Thread {
+    private class CountBubbleUpdateThread extends Thread {
+        private Handler countBubbleHandler = new Handler() {
+            private TextView countBubble = null;
+
+            @Override
+            public void handleMessage(Message msg) {
+                try {
+                    if (countBubble == null) {
+                        countBubble = (TextView) findViewById(R.id.offline_count);
+                    }
+
+                    if (countBubbleCnt == 0) {
+                        countBubble.setVisibility(View.GONE);
+                    } else {
+                        countBubble.setText(Integer.toString(countBubbleCnt));
+                        countBubble.bringToFront();
+                        countBubble.setVisibility(View.VISIBLE);
+                    }
+                } catch (Exception e) {
+                    Log.w(Settings.tag, "cgeo.countBubbleHander: " + e.toString());
+                }
+            }
+        };
 
         @Override
         public void run() {
@@ -773,9 +757,9 @@ public class cgeo extends AbstractActivity {
         }
     }
 
-    private class obtainAddress extends Thread {
+    private class ObtainAddressThread extends Thread {
 
-        public obtainAddress() {
+        public ObtainAddressThread() {
             setPriority(Thread.MIN_PRIORITY);
         }
 

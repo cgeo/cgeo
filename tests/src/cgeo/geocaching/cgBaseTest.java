@@ -32,6 +32,7 @@ public class cgBaseTest extends AndroidTestCase {
         Assert.assertEquals(expected.getTerrain(), actual.getTerrain());
         Assert.assertEquals(expected.getLatitude(), actual.getLatitude());
         Assert.assertEquals(expected.getLongitude(), actual.getLongitude());
+        assertTrue(actual.isReliableLatLon());
         Assert.assertEquals(expected.isDisabled(), actual.isDisabled());
         Assert.assertEquals(expected.isOwn(), actual.isOwn());
         Assert.assertEquals(expected.isArchived(), actual.isArchived());
@@ -57,7 +58,7 @@ public class cgBaseTest extends AndroidTestCase {
             Assert.assertTrue(actual.getAttributes().contains(attribute));
         }
         for (LogType logType : expected.getLogCounts().keySet()) {
-            Assert.assertEquals(expected.getLogCounts().get(logType), actual.getLogCounts().get(logType));
+            Assert.assertTrue(actual.getLogCounts().get(logType) >= expected.getLogCounts().get(logType));
         }
 
         int actualInventorySize = null != actual.getInventory() ? actual.getInventory().size() : 0;
@@ -79,8 +80,8 @@ public class cgBaseTest extends AndroidTestCase {
         for (MockedCache mockedCache : RegExPerformanceTest.MOCKED_CACHES) {
             // to get the same results we have to use the date format used when the mocked data was created
             Settings.setGcCustomDate(mockedCache.getDateFormat());
-            cgCacheWrap caches = cgBase.parseCacheFromText(mockedCache.getData(), 0, null);
-            cgCache parsedCache = caches.cacheList.get(0);
+            ParseResult parseResult = cgBase.parseCacheFromText(mockedCache.getData(), 0, null);
+            cgCache parsedCache = parseResult.cacheList.get(0);
             cgBaseTest.testCompareCaches(mockedCache, parsedCache);
         }
         Settings.setGcCustomDate(gcCustomDate);

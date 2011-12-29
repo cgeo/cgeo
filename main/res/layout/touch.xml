@@ -38,13 +38,11 @@
 					<Button style="@style/button"
 							android:id="@+id/type"
 							android:layout_width="0dip"
-							android:layout_weight="1"
-							android:text="type" />
+							android:layout_weight="1"/>
 					<Button style="@style/button"
 							android:id="@+id/date"
 							android:layout_width="0dip"
-							android:layout_weight="1"
-							android:text="date" />
+							android:layout_weight="1"/>
 				</LinearLayout>
 				<EditText style="@style/edittext"
 						android:id="@+id/tracking"
@@ -67,7 +65,6 @@
 					<CheckBox android:id="@+id/tweet"
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:layout_alignParentLeft="true"
 							android:layout_gravity="left"
 							android:padding="1px"
 							android:gravity="center" />

@@ -5,7 +5,6 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LogType;
-import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -24,7 +23,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -38,7 +36,6 @@ public class cgeoapplication extends Application {
     private boolean geoInUse = false;
     private cgDirection dir = null;
     private boolean dirInUse = false;
-    final private Map<String, cgCache> cachesCache = new HashMap<String, cgCache>(); // caching caches into memory
     public boolean firstRun = true; // c:geo is just launched
     public boolean showLoginToast = true; //login toast shown just once.
     private boolean databaseCleaned = false; // database was cleaned
@@ -57,7 +54,7 @@ public class cgeoapplication extends Application {
     public void onLowMemory() {
         Log.i(Settings.tag, "Cleaning applications cache.");
 
-        cachesCache.clear();
+        CacheCache.getInstance().removeAll();
     }
 
     @Override
@@ -239,77 +236,7 @@ public class cgeoapplication extends Application {
         return storage.getCacheidForGeocode(geocode);
     }
 
-    public static StatusCode getError(final cgSearch search) {
-        if (search == null) {
-            return null;
-        }
-
-        return search.error;
-    }
-
-    public static boolean setError(final cgSearch search, final StatusCode error) {
-        if (search == null) {
-            return false;
-        }
-
-        search.error = error;
-
-        return true;
-    }
-
-    public static String getUrl(final cgSearch search) {
-        if (search == null) {
-            return null;
-        }
-
-        return search.url;
-    }
-
-    public static boolean setUrl(final cgSearch search, String url) {
-        if (search == null) {
-            return false;
-        }
-
-        search.url = url;
-
-        return true;
-    }
-
-    public static String[] getViewstates(final cgSearch search) {
-        if (search == null) {
-            return null;
-        }
-
-        return search.viewstates;
-    }
-
-    public static boolean setViewstates(final cgSearch search, String[] viewstates) {
-        if (cgBase.isEmpty(viewstates) || search == null) {
-            return false;
-        }
-
-        search.viewstates = viewstates;
-
-        return true;
-    }
-
-    public static int getTotal(final cgSearch search) {
-        if (search == null) {
-            return 0;
-        }
-
-        return search.totalCnt;
-    }
-
-    public static int getCount(final cgSearch search) {
-        if (search == null) {
-            return 0;
-        }
-
-        return search.getCount();
-    }
-
-    public boolean hasUnsavedCaches(final cgSearch search) {
+    public boolean hasUnsavedCaches(final SearchResult search) {
         if (search == null) {
             return false;
         }
@@ -331,14 +258,16 @@ public class cgeoapplication extends Application {
     }
 
     public cgCache getCacheByGeocode(final String geocode, final EnumSet<LoadFlag> loadFlags) {
-        if (cachesCache.containsKey(geocode)) {
-            return cachesCache.get(geocode);
+        cgCache cache = CacheCache.getInstance().getCacheFromCache(geocode);
+        if (cache != null) {
+            return cache;
         }
 
-        final cgCache cache = storage.loadCache(geocode, loadFlags);
+        cache = storage.loadCache(geocode, loadFlags);
 
-        if (cache != null && cache.getDetailed() && loadFlags == LoadFlags.LOADALL) {
-            putCacheInCache(cache);
+        if (cache != null && cache.isDetailed() && loadFlags == LoadFlags.LOADALL) {
+            // "Store" cache for the next access in the cache
+            CacheCache.getInstance().putCacheInCache(cache);
         }
 
         return cache;
@@ -355,22 +284,14 @@ public class cgeoapplication extends Application {
         return trackable;
     }
 
-    public void removeCacheFromCache(String geocode) {
-        if (geocode != null && cachesCache.containsKey(geocode)) {
-            cachesCache.remove(geocode);
-        }
+    @SuppressWarnings("static-method")
+    public void removeCacheFromCache(final String geocode) {
+        CacheCache.getInstance().removeCacheFromCache(geocode);
     }
 
-    public void putCacheInCache(cgCache cache) {
-        if (cache == null || cache.getGeocode() == null) {
-            return;
-        }
-
-        if (cachesCache.containsKey(cache.getGeocode())) {
-            cachesCache.remove(cache.getGeocode());
-        }
-
-        cachesCache.put(cache.getGeocode(), cache);
+    @SuppressWarnings("static-method")
+    public void putCacheInCache(final cgCache cache) {
+        CacheCache.getInstance().putCacheInCache(cache);
     }
 
     public String[] geocodesInCache() {
@@ -388,7 +309,7 @@ public class cgeoapplication extends Application {
         return getBounds(geocodeList);
     }
 
-    public List<Number> getBounds(final cgSearch search) {
+    public List<Number> getBounds(final SearchResult search) {
         if (search == null) {
             return null;
         }
@@ -404,7 +325,7 @@ public class cgeoapplication extends Application {
         return storage.getBounds(geocodes.toArray());
     }
 
-    public cgCache getCache(final cgSearch search) {
+    public cgCache getCache(final SearchResult search) {
         if (search == null) {
             return null;
         }
@@ -420,15 +341,15 @@ public class cgeoapplication extends Application {
      *            only load waypoints for map usage. All other callers should set this to <code>false</code>
      * @return
      */
-    public List<cgCache> getCaches(final cgSearch search, final boolean loadWaypoints) {
+    public List<cgCache> getCaches(final SearchResult search, final boolean loadWaypoints) {
         return getCaches(search, null, null, null, null, loadWaypoints ? EnumSet.of(LoadFlag.LOADWAYPOINTS, LoadFlag.LOADOFFLINELOG) : EnumSet.of(LoadFlag.LOADOFFLINELOG));
     }
 
-    public List<cgCache> getCaches(final cgSearch search, Long centerLat, Long centerLon, Long spanLat, Long spanLon) {
+    public List<cgCache> getCaches(final SearchResult search, Long centerLat, Long centerLon, Long spanLat, Long spanLon) {
         return getCaches(search, centerLat, centerLon, spanLat, spanLon, EnumSet.of(LoadFlag.LOADWAYPOINTS, LoadFlag.LOADOFFLINELOG));
     }
 
-    public List<cgCache> getCaches(final cgSearch search, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final EnumSet<LoadFlag> loadFlags) {
+    public List<cgCache> getCaches(final SearchResult search, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final EnumSet<LoadFlag> loadFlags) {
         if (search == null) {
             List<cgCache> cachesOut = new ArrayList<cgCache>();
 
@@ -453,28 +374,28 @@ public class cgeoapplication extends Application {
         return cachesOut;
     }
 
-    public cgSearch getBatchOfStoredCaches(final boolean detailedOnly, final Geopoint coords, final CacheType cacheType, final int list) {
+    public SearchResult getBatchOfStoredCaches(final boolean detailedOnly, final Geopoint coords, final CacheType cacheType, final int list) {
         final List<String> geocodes = storage.loadBatchOfStoredGeocodes(detailedOnly, coords, cacheType, list);
-        return new cgSearch(geocodes);
+        return new SearchResult(geocodes);
     }
 
     public List<cgDestination> getHistoryOfSearchedLocations() {
         return storage.loadHistoryOfSearchedLocations();
     }
 
-    public cgSearch getHistoryOfCaches(final boolean detailedOnly, final CacheType cacheType) {
+    public SearchResult getHistoryOfCaches(final boolean detailedOnly, final CacheType cacheType) {
         final List<String> geocodes = storage.loadBatchOfHistoricGeocodes(detailedOnly, cacheType);
-        return new cgSearch(geocodes);
+        return new SearchResult(geocodes);
     }
 
-    public cgSearch getCachedInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
+    public SearchResult getCachedInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
         final List<String> geocodes = storage.getCachedInViewport(centerLat, centerLon, spanLat, spanLon, cacheType);
-        return new cgSearch(geocodes);
+        return new SearchResult(geocodes);
     }
 
-    public cgSearch getStoredInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
+    public SearchResult getStoredInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
         final List<String> geocodes = storage.getStoredInViewport(centerLat, centerLon, spanLat, spanLon, cacheType);
-        return new cgSearch(geocodes);
+        return new SearchResult(geocodes);
     }
 
     public int getAllStoredCachesCount(final boolean detailedOnly, final CacheType cacheType, final Integer list) {
@@ -510,7 +431,11 @@ public class cgeoapplication extends Application {
     }
 
     public boolean saveOwnWaypoint(int id, String geocode, cgWaypoint waypoint) {
-        return storage.saveOwnWaypoint(id, geocode, waypoint);
+        if (storage.saveOwnWaypoint(id, geocode, waypoint)) {
+            removeCacheFromCache(geocode);
+            return true;
+        }
+        return false;
     }
 
     public boolean deleteWaypoint(int id) {
@@ -524,14 +449,6 @@ public class cgeoapplication extends Application {
         return storage.saveInventory("---", list);
     }
 
-    public static void addGeocode(final cgSearch search, final String geocode) {
-        if (search == null || StringUtils.isBlank(geocode)) {
-            return;
-        }
-
-        search.addGeocode(geocode);
-    }
-
     public void addSearch(final List<cgCache> cacheList, final int listId) {
         if (CollectionUtils.isEmpty(cacheList)) {
             return;
@@ -539,17 +456,16 @@ public class cgeoapplication extends Application {
 
         for (final cgCache cache : cacheList) {
             cache.setListId(listId);
-            storeWithMerge(cache, listId >= 1);
+            storeWithMerge(cache, false);
         }
     }
 
-    public boolean addCacheToSearch(cgSearch search, cgCache cache) {
+    public boolean addCacheToSearch(SearchResult search, cgCache cache) {
         if (search == null || cache == null) {
             return false;
         }
 
         final boolean status = storeWithMerge(cache, cache.getListId() >= 1);
-
         if (status) {
             search.addGeocode(cache.getGeocode());
         }
@@ -577,6 +493,13 @@ public class cgeoapplication extends Application {
 
     public void dropStored(int listId) {
         storage.dropStored(listId);
+    }
+
+    /**
+     * {@link cgData#dropCaches(List)}
+     */
+    public void dropCaches(final List<String> geocodes) {
+        storage.dropCaches(geocodes);
     }
 
     public List<cgTrackable> loadInventory(String geocode) {

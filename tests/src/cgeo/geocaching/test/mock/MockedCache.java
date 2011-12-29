@@ -148,4 +148,8 @@ public abstract class MockedCache implements ICache {
     public String getNameForSorting() {
         return getName();
     }
+
+    public Geopoint getCoords() {
+        return coords;
+    }
 }

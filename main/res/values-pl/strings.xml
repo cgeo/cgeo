@@ -709,7 +709,7 @@
   <string name="attribute_abandonedbuilding_no">Nie opuszczona budowla</string>
   <string name="attribute_hike_short_yes">Krótki spacer (mniej niż 1 km)</string>
   <string name="attribute_hike_short_no">Nie krótki spacer</string>
-  <string name="attribute_hike_med_yes">Średni spacer (1-10 km)</string>
+  <string name="attribute_hike_med_yes">Średni spacer (1&#8211;10 km)</string>
   <string name="attribute_hike_med_no">Nie średni spacer</string>
   <string name="attribute_hike_long_yes">Długi spacer (więcej niż 10 km)</string>
   <string name="attribute_hike_long_no">Nie długi spacer</string>
