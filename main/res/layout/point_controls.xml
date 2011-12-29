@@ -24,7 +24,6 @@
 			android:text="@string/search_direction_rel" />
 	</RelativeLayout>
 	<EditText style="@style/edittext" android:id="@+id/bearing"
-		android:inputType="number"
 		android:inputType="numberDecimal" android:hint="@string/waypoint_bearing" />
 	<EditText style="@style/edittext" android:id="@+id/distance"
 		android:inputType="number"
