@@ -1188,6 +1188,9 @@ public class cgBase {
             }
         }
 
+        // logs
+        cache.setLogs(loadLogsFromDetails(page, cache, false, true));
+
         parseResult.cacheList.add(cache);
         return parseResult;
     }
@@ -1196,12 +1199,13 @@ public class cgBase {
         if (CancellableHandler.isCancelled(handler)) {
             return;
         }
-        sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
-        cache.setLogs(loadLogsFromDetails(page, cache, false));
+
+        //cache.setLogs(loadLogsFromDetails(page, cache, false));
         if (Settings.isFriendLogsWanted()) {
+            sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
             int position = 0;
             List<cgLog> allLogs = cache.getLogs();
-            List<cgLog> friendLogs = loadLogsFromDetails(page, cache, true);
+            List<cgLog> friendLogs = loadLogsFromDetails(page, cache, true, false);
             if (friendLogs != null) {
                 for (cgLog log : friendLogs) {
                     if (allLogs.contains(log)) {
@@ -1247,41 +1251,48 @@ public class cgBase {
      * @param friends
      *            retrieve friend logs
      */
-    private static List<cgLog> loadLogsFromDetails(final String page, final cgCache cache, final boolean friends) {
-        final Matcher userTokenMatcher = GCConstants.PATTERN_USERTOKEN2.matcher(page);
-        if (!userTokenMatcher.find()) {
-            Log.e(Settings.tag, "cgBase.loadLogsFromDetails: unable to extract userToken");
-            return null;
-        }
+    private static List<cgLog> loadLogsFromDetails(final String page, final cgCache cache, final boolean friends, final boolean getDataFromPage) {
+        String rawResponse = null;
 
-        final String userToken = userTokenMatcher.group(1);
-        final Parameters params = new Parameters(
-                "tkn", userToken,
-                "idx", "1",
-                "num", String.valueOf(GCConstants.NUMBER_OF_LOGS),
-                "decrypt", "true",
-                // "sp", Boolean.toString(personal), // personal logs
-                "sf", Boolean.toString(friends));
+        if (!getDataFromPage) {
+            final Matcher userTokenMatcher = GCConstants.PATTERN_USERTOKEN2.matcher(page);
+            if (!userTokenMatcher.find()) {
+                Log.e(Settings.tag, "cgBase.loadLogsFromDetails: unable to extract userToken");
+                return null;
+            }
 
-        final HttpResponse response = request("http://www.geocaching.com/seek/geocache.logbook", params, false, false, false);
-        if (response == null) {
-            Log.e(Settings.tag, "cgBase.loadLogsFromDetails: cannot log logs, response is null");
-            return null;
-        }
-        final int statusCode = response.getStatusLine().getStatusCode();
-        if (statusCode != 200) {
-            Log.e(Settings.tag, "cgBase.loadLogsFromDetails: error " + statusCode + " when requesting log information");
-            return null;
+            final String userToken = userTokenMatcher.group(1);
+            final Parameters params = new Parameters(
+                    "tkn", userToken,
+                    "idx", "1",
+                    "num", String.valueOf(GCConstants.NUMBER_OF_LOGS),
+                    "decrypt", "true",
+                    // "sp", Boolean.toString(personal), // personal logs
+                    "sf", Boolean.toString(friends));
+
+            final HttpResponse response = request("http://www.geocaching.com/seek/geocache.logbook", params, false, false, false);
+            if (response == null) {
+                Log.e(Settings.tag, "cgBase.loadLogsFromDetails: cannot log logs, response is null");
+                return null;
+            }
+            final int statusCode = response.getStatusLine().getStatusCode();
+            if (statusCode != 200) {
+                Log.e(Settings.tag, "cgBase.loadLogsFromDetails: error " + statusCode + " when requesting log information");
+                return null;
+            }
+            rawResponse = cgBase.getResponseData(response);
+            if (rawResponse == null) {
+                Log.e(Settings.tag, "cgBase.loadLogsFromDetails: unable to read whole response");
+                return null;
+            }
+        } else {
+            // extract embedded JSON data from page
+            rawResponse = BaseUtils.getMatch(page, GCConstants.PATTERN_LOGBOOK, "");
         }
 
         List<cgLog> logs = new ArrayList<cgLog>();
 
         try {
-            final String rawResponse = cgBase.getResponseData(response);
-            if (rawResponse == null) {
-                Log.e(Settings.tag, "cgBase.loadLogsFromDetails: unable to read whole response");
-                return null;
-            }
             final JSONObject resp = new JSONObject(rawResponse);
             if (!resp.getString("status").equals("success")) {
                 Log.e(Settings.tag, "cgBase.loadLogsFromDetails: status is " + resp.getString("status"));

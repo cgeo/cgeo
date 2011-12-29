@@ -43,6 +43,7 @@ public final class GCConstants {
     public final static Pattern PATTERN_FAVORITE = Pattern.compile("<img src=\"/images/icons/icon_favDelete.png\" alt=\"Remove from your Favorites\" title=\"Remove from your Favorites\" />");
     public final static Pattern PATTERN_FAVORITECOUNT = Pattern.compile("<a id=\"uxFavContainerLink\"[^>]+>[^<]*<div[^<]*<span class=\"favorite-value\">\\D*([0-9]+?)</span>");
     public final static Pattern PATTERN_COUNTLOGS = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p(.+?)</p></span>");
+    public final static Pattern PATTERN_LOGBOOK = Pattern.compile("initalLogs = (\\{.+\\});");
     /** Two groups ! */
     public final static Pattern PATTERN_COUNTLOG = Pattern.compile("<img src=\"/images/icons/([a-z_]+)\\.gif\"[^>]+> (\\d*[,.]?\\d+)");
     public static final Pattern PATTERN_MEMBERS = Pattern.compile("<p class=\"Warning NoBottomSpacing\">This is a Premium Member Only cache.</p>");

@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector;
 
+import cgeo.geocaching.GCConstants;
 import cgeo.geocaching.Parameters;
 import cgeo.geocaching.ParseResult;
 import cgeo.geocaching.R;
@@ -93,6 +94,8 @@ public class GCConnector extends AbstractConnector {
         } else if (StringUtils.isNotBlank(guid)) {
             params.put("guid", guid);
         }
+        params.put("log", "y");
+        params.put("numlogs", String.valueOf(GCConstants.NUMBER_OF_LOGS));
 
         cgBase.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
 
