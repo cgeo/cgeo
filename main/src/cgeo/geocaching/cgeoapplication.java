@@ -456,7 +456,7 @@ public class cgeoapplication extends Application {
 
         for (final cgCache cache : cacheList) {
             cache.setListId(listId);
-            storeWithMerge(cache, listId >= 1);
+            storeWithMerge(cache, false);
         }
     }
 
