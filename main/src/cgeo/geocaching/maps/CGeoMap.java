@@ -826,41 +826,31 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private int nbOfCachesInViewport() {
 
         int nb = 0;
-        if (caches != null && cachesCnt > 0) {
-            if (caches != null && !caches.isEmpty()) {
+        if (caches == null) {
+            return 0;
+        }
 
-                try {
-                    if (caches != null && caches.size() > 0) {
-                        final GeoPointImpl mapCenter = mapView
-                                .getMapViewCenter();
-                        final int mapCenterLat = mapCenter
-                                .getLatitudeE6();
-                        final int mapCenterLon = mapCenter
-                                .getLongitudeE6();
-                        final int mapSpanLat = mapView
-                                .getLatitudeSpan();
-                        final int mapSpanLon = mapView
-                                .getLongitudeSpan();
+        if (!caches.isEmpty()) {
+            try {
+                if (caches.size() > 0) {
+                    final GeoPointImpl mapCenter = mapView.getMapViewCenter();
+                    final int mapCenterLat = mapCenter.getLatitudeE6();
+                    final int mapCenterLon = mapCenter.getLongitudeE6();
+                    final int mapSpanLat = mapView.getLatitudeSpan();
+                    final int mapSpanLon = mapView.getLongitudeSpan();
 
-                        for (cgCache oneCache : caches) {
-                            if (oneCache != null
-                                    && oneCache.getCoords() != null) {
-                                if (cgBase.isCacheInViewPort(
-                                        mapCenterLat, mapCenterLon,
-                                        mapSpanLat, mapSpanLon,
-                                        oneCache.getCoords()) == true) {
-                                    nb++;
-
-                                }
+                    for (cgCache oneCache : caches) {
+                        if (oneCache != null && oneCache.getCoords() != null) {
+                            if (cgBase.isCacheInViewPort(mapCenterLat, mapCenterLon, mapSpanLat, mapSpanLon, oneCache.getCoords()) == true) {
+                                nb++;
                             }
                         }
-
                     }
-                } catch (Exception e) {
-                    Log.e(Settings.tag, "cgeomap " + e.toString());
-                    return nb;
-                }
 
+                }
+            } catch (Exception e) {
+                Log.e(Settings.tag, "cgeomap " + e.toString());
+                return -1;
             }
         }
         return nb;
