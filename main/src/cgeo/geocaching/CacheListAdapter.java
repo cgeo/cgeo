@@ -94,7 +94,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         pixelDensity = metrics.density;
 
         for (final CacheType cacheType : CacheType.values()) {
-            gcIconDrawables.put(cacheType, activity.getResources().getDrawable(cgBase.getCacheIcon(cacheType)));
+            gcIconDrawables.put(cacheType, activity.getResources().getDrawable(cacheType.markerId));
         }
 
         if (Settings.isLightSkin()) {

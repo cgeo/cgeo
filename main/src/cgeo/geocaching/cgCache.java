@@ -87,6 +87,7 @@ public class cgCache implements ICache {
     private List<cgTrackable> inventory = null;
     private Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
     private boolean logOffline = false;
+    private boolean userModifiedCoords = false;
     // temporary values
     private boolean statusChecked = false;
     private boolean statusCheckedView = false;
@@ -239,6 +240,12 @@ public class cgCache implements ICache {
         }
         if (logCounts.size() == 0) {
             logCounts = other.logCounts;
+        }
+        if (userModifiedCoords == false) {
+            userModifiedCoords = other.userModifiedCoords;
+        }
+        if (reliableLatLon == false) {
+            reliableLatLon = other.reliableLatLon;
         }
 
         return isEqualTo(other);
@@ -1080,6 +1087,14 @@ public class cgCache implements ICache {
 
     public boolean hasWaypoints() {
         return CollectionUtils.isNotEmpty(waypoints);
+    }
+
+    public boolean hasUserModifiedCoords() {
+        return userModifiedCoords;
+    }
+
+    public void setUserModifiedCoords(boolean coordsChanged) {
+        this.userModifiedCoords = coordsChanged;
     }
 
     /**
