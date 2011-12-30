@@ -8,8 +8,10 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.geopoint.GeopointParser;
 import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -1046,5 +1048,33 @@ public class cgCache implements ICache {
             return null;
         }
         return waypoints.get(index);
+    }
+
+    public void parseWaypointsFromNote() {
+        if (StringUtils.isBlank(getPersonalNote())) {
+            return;
+        }
+        final Pattern coordPattern = Pattern.compile("\\b[nNsS]{1}\\s*\\d"); // begin of coordinates
+        int count = 1;
+        String note = getPersonalNote();
+        Matcher matcher = coordPattern.matcher(note);
+        while (matcher.find()) {
+            try {
+                final Geopoint point = GeopointParser.parse(note);
+                // coords must have non zero latitude and longitude
+                if (point != null && point.getLatitudeE6() != 0 && point.getLongitudeE6() != 0) {
+                    final String name = cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
+                    final cgWaypoint waypoint = new cgWaypoint(name, WaypointType.WAYPOINT);
+                    waypoint.setCoords(point);
+                    addWaypoint(waypoint);
+                    count++;
+                }
+            } catch (GeopointParser.ParseException e) {
+                // ignore
+            }
+
+            note = note.substring(matcher.start() + 1);
+            matcher = coordPattern.matcher(note);
+        }
     }
 }

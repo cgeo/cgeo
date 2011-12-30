@@ -10,6 +10,7 @@ import cgeo.geocaching.utils.CancellableHandler;
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import junit.framework.Assert;
@@ -90,5 +91,36 @@ public class cgBaseTest extends AndroidTestCase {
     public static void testHumanDistance() {
         assertEquals("?", cgBase.getHumanDistance(null));
         assertEquals("123 km", cgBase.getHumanDistance(123.456f));
+    }
+
+    public static void testWaypointsFromNote() {
+        final cgCache cache = createCache();
+        assertNotNull(cache);
+
+        assertWaypointsFromNote(cache, 0, "  ");
+        assertWaypointsFromNote(cache, 0, "some random strings 1 with n 2 numbers");
+        assertWaypointsFromNote(cache, 0, "Station3 some coords");
+        assertWaypointsFromNote(cache, 1, "Station3: N51 21.523 / E07 02.680");
+        assertWaypointsFromNote(cache, 1, "N51 21.523 / E07 02.680");
+        assertWaypointsFromNote(cache, 0, "N51 21.523");
+        assertWaypointsFromNote(cache, 1, "  n 51° 21.523 - E07 02.680");
+        assertWaypointsFromNote(cache, 2, "Station3: N51 21.523 / E07 02.680\n\r Station4: N52 21.523 / E012 02.680");
+        assertWaypointsFromNote(cache, 0, "51 21 523 / 07 02 680");
+        assertWaypointsFromNote(cache, 0, "N51");
+    }
+
+    private static void assertWaypointsFromNote(final cgCache cache, int waypoints, String note) {
+        cache.setPersonalNote(note);
+        cache.setWaypoints(new ArrayList<cgWaypoint>());
+        cache.parseWaypointsFromNote();
+        assertEquals(waypoints, cache.getWaypoints().size());
+    }
+
+    private static cgCache createCache() {
+        final MockedCache mockedCache = RegExPerformanceTest.MOCKED_CACHES.get(0);
+        // to get the same results we have to use the date format used when the mocked data was created
+        Settings.setGcCustomDate(mockedCache.getDateFormat());
+        final ParseResult parseResult = cgBase.parseCacheFromText(mockedCache.getData(), 0, null);
+        return parseResult.cacheList.get(0);
     }
 }

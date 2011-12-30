@@ -1,8 +1,5 @@
 package cgeo.geocaching.geopoint;
 
-import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.GeopointParser;
-
 import android.test.AndroidTestCase;
 
 import junit.framework.Assert;
@@ -26,6 +23,18 @@ public class GeoPointParserTest extends AndroidTestCase {
         final Geopoint goal = new Geopoint(refLatitude, refLongitude);
         Assert.assertTrue(goal.isEqualTo(GeopointParser.parse("N 49° 56.031 | E 8° 38.564"), 1e-6));
     }
+
+    public static void testCoordinateMissingPart() {
+        // we are trying to parse a _point_, but have only one a latitude. Don't accept the numerical part as longitude!
+        Geopoint point = null;
+        try {
+            point = GeopointParser.parse("N 49° 56.031");
+        } catch (Exception e) {
+            // expected
+        }
+        Assert.assertEquals(null, point);
+    }
+
 
     public static void testSouth() {
         Assert.assertEquals(-refLatitude, GeopointParser.parseLatitude("S 49° 56.031"), 1e-8);

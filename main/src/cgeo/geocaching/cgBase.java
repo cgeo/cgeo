@@ -16,7 +16,6 @@ import cgeo.geocaching.gcvote.GCVoteRating;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
-import cgeo.geocaching.geopoint.GeopointParser;
 import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.HtmlImage;
@@ -93,7 +92,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
@@ -1163,30 +1161,7 @@ public class cgBase {
             }
         }
 
-        // waypoints from personal note
-        if (StringUtils.isNotBlank(cache.getPersonalNote())) {
-            final Pattern coordPattern = Pattern.compile("[nNsS]{1}\\s*\\d"); // begin of coordinates
-            int count = 1;
-            String note = cache.getPersonalNote();
-            Matcher matcher = coordPattern.matcher(note);
-            while (matcher.find()) {
-                try {
-                    final Geopoint point = GeopointParser.parse(note);
-                    if (point != null) {
-                        final String name = cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
-                        final cgWaypoint waypoint = new cgWaypoint(name, WaypointType.WAYPOINT);
-                        waypoint.setCoords(point);
-                        cache.addWaypoint(waypoint);
-                        count++;
-                    }
-                } catch (GeopointParser.ParseException e) {
-                    // ignore
-                }
-
-                note = note.substring(matcher.start() + 1);
-                matcher = coordPattern.matcher(note);
-            }
-        }
+        cache.parseWaypointsFromNote();
 
         // logs
         cache.setLogs(loadLogsFromDetails(page, cache, false, true));
