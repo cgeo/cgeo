@@ -1745,7 +1745,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = cgBase.searchByHistory(coords != null ? Settings.getCacheType() : CacheType.ALL);
+            search = cgeoapplication.getInstance().getHistoryOfCaches(true, coords != null ? Settings.getCacheType() : CacheType.ALL);
             handler.sendMessage(new Message());
         }
     }

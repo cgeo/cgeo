@@ -1819,18 +1819,7 @@ public class cgBase {
     }
 
     public static SearchResult searchByOffline(final Geopoint coords, final CacheType cacheType, final int list) {
-        cgeoapplication app = cgeoapplication.getInstance();
-        final SearchResult search = app.getBatchOfStoredCaches(true, coords, cacheType, list);
-        search.totalCnt = app.getAllStoredCachesCount(true, cacheType, list);
-        return search;
-    }
-
-    public static SearchResult searchByHistory(final CacheType cacheType) {
-        final cgeoapplication app = cgeoapplication.getInstance();
-        final SearchResult search = app.getHistoryOfCaches(true, cacheType);
-        search.totalCnt = app.getAllHistoricCachesCount();
-
-        return search;
+        return cgeoapplication.getInstance().getBatchOfStoredCaches(true, coords, cacheType, list);
     }
 
     /**
