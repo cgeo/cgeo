@@ -1406,22 +1406,26 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 ArrayList<int[]> insets = new ArrayList<int[]>();
 
                 final int[] INSET_TYPE = { 5, 9, 6, 9 }; // center, 22x22
+                final int[] INSET_DISABLED = { 0, 0, 0, 0 }; // center, 33x40
                 final int[] INSET_OWN = { 17, 0, 0, 24 }; // top right, 16x16
                 final int[] INSET_FOUND = { 0, 0, 17, 24 }; // top left, 16x16
                 final int[] INSET_USERMODIFIEDCOORDS = { 17, 24, 0, 0 }; // bottom right, 16x16
                 final int[] INSET_PERSONALNOTE = { 0, 24, 17, 0 }; // bottom left, 16x16
 
                 // background
-                if (cache.isDisabled()) {
-                    layers.add(getResources().getDrawable(R.drawable.marker_disabled)); // 33x40
-                } else if (cache.isReliableLatLon()) {
-                    layers.add(getResources().getDrawable(R.drawable.marker)); // 33x40
+                if (cache.isReliableLatLon()) {
+                    layers.add(getResources().getDrawable(R.drawable.marker_reliable)); // 33x40
                 } else {
                     layers.add(getResources().getDrawable(R.drawable.marker_notreliable)); // 33x40
                 }
                 // cache type
                 layers.add(getResources().getDrawable(cache.getType().markerId)); // 22x22
                 insets.add(INSET_TYPE);
+                // cache disabled
+                if (cache.isDisabled()) {
+                    layers.add(getResources().getDrawable(R.drawable.marker_disabled)); // 33x40
+                    insets.add(INSET_DISABLED);
+                }
                 // own
                 if ( cache.isOwn() ) {
                     layers.add(getResources().getDrawable(R.drawable.marker_own)); // 16x16
