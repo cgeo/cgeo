@@ -117,7 +117,7 @@ public class CachesOverlay extends AbstractItemizedOverlay {
                 if (blockedCircle == null) {
                     blockedCircle = new Paint();
                     blockedCircle.setAntiAlias(true);
-                    blockedCircle.setStrokeWidth(1.0f);
+                    blockedCircle.setStrokeWidth(2.0f);
                     blockedCircle.setARGB(127, 0, 0, 0);
                     blockedCircle.setPathEffect(new DashPathEffect(new float[] { 3, 2 }, 0));
                 }
