@@ -517,10 +517,7 @@ public abstract class GPXParser extends FileParser {
                             boolean attributeActive = Integer.parseInt(attrs.getValue("inc")) != 0;
                             String internalId = CacheAttributeTranslator.getInternalId(attributeId, attributeActive);
                             if (internalId != null) {
-                                if (cache.getAttributes() == null) {
-                                    cache.setAttributes(new ArrayList<String>());
-                                }
-                                cache.getAttributes().add(internalId);
+                                cache.addAttribute(internalId);
                             }
                         }
                     } catch (NumberFormatException e) {

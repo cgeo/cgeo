@@ -1241,11 +1241,10 @@ public class CacheDetailActivity extends AbstractActivity {
             TextView attribView = (TextView) descriptions.getChildAt(0);
 
             StringBuilder buffer = new StringBuilder();
-            String attribute;
             final String packageName = cgeoapplication.getInstance().getBaseContext().getPackageName();
-            for (int i = 0; i < cache.getAttributes().size(); i++) {
-                attribute = cache.getAttributes().get(i);
+            final List<String> attributes = cache.getAttributes();
 
+            for (String attribute : attributes) {
                 // dynamically search for a translation of the attribute
                 int id = res.getIdentifier("attribute_" + attribute, "string", packageName);
                 if (id > 0) {
@@ -1463,7 +1462,7 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             // cache attributes
-            if (CollectionUtils.isNotEmpty(cache.getAttributes())) {
+            if (cache.hasAttributes()) {
                 new AttributeViewBuilder().fillView((LinearLayout) view.findViewById(R.id.attributes_innerbox));
                 view.findViewById(R.id.attributes_box).setVisibility(View.VISIBLE);
             }

@@ -1302,7 +1302,7 @@ public class cgData {
 
         boolean statusOk = true;
 
-        if (cache.getAttributes() != null) {
+        if (cache.hasAttributes()) {
             if (!saveAttributes(cache.getGeocode(), cache.getAttributes())) {
                 statusOk = false;
             }
@@ -1936,15 +1936,7 @@ public class cgData {
                         // and the resolution of the "if" statement could be simply
                         // cache.getAttributes() = attributes
                         if (loadFlags.contains(LoadFlag.LOADATTRIBUTES)) {
-                            final List<String> attributes = loadAttributes(cache.getGeocode());
-                            if (CollectionUtils.isNotEmpty(attributes)) {
-                                if (cache.getAttributes() == null) {
-                                    cache.setAttributes(new ArrayList<String>());
-                                } else {
-                                    cache.getAttributes().clear();
-                                }
-                                cache.getAttributes().addAll(attributes);
-                            }
+                            cache.setAttributes(loadAttributes(cache.getGeocode()));
                         }
 
                         if (loadFlags.contains(LoadFlag.LOADWAYPOINTS)) {

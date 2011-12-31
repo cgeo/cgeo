@@ -114,6 +114,8 @@ public interface ICache extends IBasicCache {
     public Date getHiddenDate();
 
     /**
+     * immutable list of attributes, never <code>null</code>
+     * 
      * @return the list of attributes for this cache
      */
     public List<String> getAttributes();

@@ -960,9 +960,6 @@ public class cgBase {
 
                 while (matcherAttributesInside.find()) {
                     if (matcherAttributesInside.groupCount() > 1 && !matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
-                        if (cache.getAttributes() == null) {
-                            cache.setAttributes(new ArrayList<String>());
-                        }
                         // by default, use the tooltip of the attribute
                         String attribute = matcherAttributesInside.group(2).toLowerCase();
 
@@ -975,7 +972,7 @@ public class cgBase {
                                 attribute = imageName.substring(start + 1, end).replace('-', '_').toLowerCase();
                             }
                         }
-                        cache.getAttributes().add(attribute);
+                        cache.addAttribute(attribute);
                     }
                 }
             }

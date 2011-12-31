@@ -198,10 +198,10 @@ public class cgCache implements ICache {
             myVote = other.getMyVote();
         }
         if (attributes == null) {
-            attributes = other.getAttributes();
+            attributes = other.attributes;
         }
         if (waypoints == null) {
-            waypoints = other.getWaypoints();
+            waypoints = other.waypoints;
         }
         else {
             cgWaypoint.mergeWayPoints(waypoints, other.getWaypoints(), waypoints == null || waypoints.isEmpty());
@@ -555,7 +555,10 @@ public class cgCache implements ICache {
 
     @Override
     public List<String> getAttributes() {
-        return attributes;
+        if (attributes == null) {
+            return Collections.emptyList();
+        }
+        return Collections.unmodifiableList(attributes);
     }
 
     @Override
@@ -1076,5 +1079,16 @@ public class cgCache implements ICache {
             note = note.substring(matcher.start() + 1);
             matcher = coordPattern.matcher(note);
         }
+    }
+
+    public void addAttribute(final String attribute) {
+        if (attributes == null) {
+            attributes = new ArrayList<String>();
+        }
+        attributes.add(attribute);
+    }
+
+    public boolean hasAttributes() {
+        return attributes != null && attributes.size() > 0;
     }
 }

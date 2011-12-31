@@ -136,7 +136,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals("Sehr schöne Runde und wir haben wieder etwas Neues über Hockenheim gelernt. Super Tarnung.\nTFTC, Geoteufel", log.log);
 
         // following info is not contained in pocket query gpx file
-        assertNull(cache.getAttributes());
+        assertEquals(0, cache.getAttributes().size());
     }
 
     private static long parseTime(final String time) {
