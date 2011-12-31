@@ -72,9 +72,9 @@ public class cgCache implements ICache {
     private boolean archived = false;
     private boolean members = false;
     private boolean found = false;
-    private boolean favourite = false;
+    private boolean favorite = false;
     private boolean own = false;
-    private int favouritePoints = 0;
+    private int favoritePoints = 0;
     private float rating = 0; // valid ratings are larger than zero
     private int votes = 0;
     private float myVote = 0; // valid ratings are larger than zero
@@ -185,8 +185,8 @@ public class cgCache implements ICache {
         if (StringUtils.isBlank(description)) {
             description = other.description;
         }
-        if (favouritePoints == 0) {
-            favouritePoints = other.getFavoritePoints();
+        if (favoritePoints == 0) {
+            favoritePoints = other.getFavoritePoints();
         }
         if (rating == 0) {
             rating = other.getRating();
@@ -540,8 +540,13 @@ public class cgCache implements ICache {
 
     @Override
     public boolean isFavorite() {
-        return favourite;
+        return favorite;
     }
+
+    public void setFavorite(boolean favourite) {
+        this.favorite = favourite;
+    }
+
 
     @Override
     public boolean isWatchlist() {
@@ -578,7 +583,7 @@ public class cgCache implements ICache {
 
     @Override
     public int getFavoritePoints() {
-        return favouritePoints;
+        return favoritePoints;
     }
 
     @Override
@@ -728,16 +733,8 @@ public class cgCache implements ICache {
         this.members = members;
     }
 
-    public boolean isFavourite() {
-        return favourite;
-    }
-
-    public void setFavourite(boolean favourite) {
-        this.favourite = favourite;
-    }
-
-    public void setFavouritePoints(int favouriteCnt) {
-        this.favouritePoints = favouriteCnt;
+    public void setFavoritePoints(int favoriteCnt) {
+        this.favoritePoints = favoriteCnt;
     }
 
     public float getRating() {

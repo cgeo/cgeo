@@ -575,7 +575,7 @@ public class cgBase {
             try {
                 result = BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_FAVORITE, false, 1, null, true);
                 if (null != result) {
-                    cache.setFavouritePoints(Integer.parseInt(result));
+                    cache.setFavoritePoints(Integer.parseInt(result));
                 }
             } catch (NumberFormatException e) {
                 Log.w(Settings.tag, "cgeoBase.parseSearch: Failed to parse favourite count");
@@ -825,7 +825,7 @@ public class cgBase {
 
         cache.setMembers(BaseUtils.matches(page, GCConstants.PATTERN_MEMBERS));
 
-        cache.setFavourite(BaseUtils.matches(page, GCConstants.PATTERN_FAVORITE));
+        cache.setFavorite(BaseUtils.matches(page, GCConstants.PATTERN_FAVORITE));
 
         cache.setListId(listId);
 
@@ -902,7 +902,7 @@ public class cgBase {
             }
 
             // favourite
-            cache.setFavouritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_FAVORITECOUNT, true, "0")));
+            cache.setFavoritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_FAVORITECOUNT, true, "0")));
 
             // cache size
             cache.setSize(CacheSize.getById(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_SIZE, true, CacheSize.NOT_CHOSEN.id).toLowerCase()));

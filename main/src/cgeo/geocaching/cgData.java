@@ -1296,7 +1296,7 @@ public class cgData {
         values.put("archived", cache.isArchived() ? 1 : 0);
         values.put("members", cache.isMembers() ? 1 : 0);
         values.put("found", cache.isFound() ? 1 : 0);
-        values.put("favourite", cache.isFavourite() ? 1 : 0);
+        values.put("favourite", cache.isFavorite() ? 1 : 0);
         values.put("inventoryunknown", cache.getInventoryItems());
         values.put("onWatchlist", cache.isOnWatchlist() ? 1 : 0);
 
@@ -2111,7 +2111,7 @@ public class cgData {
         cache.setPersonalNote(cursor.getString(cacheColumnIndex[23]));
         cache.setShortdesc(cursor.getString(cacheColumnIndex[24]));
         // do not set cache.description !
-        cache.setFavouritePoints(cursor.getInt(cacheColumnIndex[25]));
+        cache.setFavoritePoints(cursor.getInt(cacheColumnIndex[25]));
         cache.setRating(cursor.getFloat(cacheColumnIndex[26]));
         cache.setVotes(cursor.getInt(cacheColumnIndex[27]));
         cache.setMyVote(cursor.getFloat(cacheColumnIndex[28]));
@@ -2119,7 +2119,7 @@ public class cgData {
         cache.setArchived(cursor.getInt(cacheColumnIndex[30]) == 1);
         cache.setMembers(cursor.getInt(cacheColumnIndex[31]) == 1);
         cache.setFound(cursor.getInt(cacheColumnIndex[32]) == 1);
-        cache.setFavourite(cursor.getInt(cacheColumnIndex[33]) == 1);
+        cache.setFavorite(cursor.getInt(cacheColumnIndex[33]) == 1);
         cache.setInventoryItems(cursor.getInt(cacheColumnIndex[34]));
         cache.setOnWatchlist(cursor.getInt(cacheColumnIndex[35]) == 1);
         cache.setReliableLatLon(cursor.getInt(cacheColumnIndex[36]) > 0);
