@@ -10,11 +10,9 @@
 	</RelativeLayout>
 	<Button style="@style/button"
 		android:hint="@string/latitude"
-		android:inputType="number"
 		android:id="@+id/buttonLatitude" />
 	<Button style="@style/button"
 		android:hint="@string/longitude"
-		android:inputType="number"
 		android:id="@+id/buttonLongitude" />
 	<Button style="@style/button" android:id="@+id/current"
 		android:text="@string/waypoint_my_coordinates" />
