@@ -135,6 +135,7 @@ public class cgeocaches extends AbstractListActivity {
     private String username = null;
     private SearchResult search = null;
     private List<cgCache> cacheList = new ArrayList<cgCache>();
+    private int maxListId = 100;
     private CacheListAdapter adapter = null;
     private LayoutInflater inflater = null;
     private View listFooter = null;
@@ -1161,6 +1162,9 @@ public class cgeocaches extends AbstractListActivity {
                 for (int i = 0; i < listCount; i++) {
                     StoredList list = cacheLists.get(i);
                     submenu.add(Menu.NONE, CONTEXT_MENU_MOVE_TO_LIST + list.id, Menu.NONE, list.getTitleAndCount());
+                    if (list.id > maxListId) {
+                        maxListId = list.id;
+                    }
                 }
             }
         }
@@ -1244,7 +1248,7 @@ public class cgeocaches extends AbstractListActivity {
                 }
             });
             return true;
-        } else if (id >= CONTEXT_MENU_MOVE_TO_LIST && id < CONTEXT_MENU_MOVE_TO_LIST + 100) {
+        } else if (id >= CONTEXT_MENU_MOVE_TO_LIST && id < CONTEXT_MENU_MOVE_TO_LIST + maxListId) {
             final int newListId = id - CONTEXT_MENU_MOVE_TO_LIST;
             if (adapterInfo != null) {
                 app.moveToList(getCacheFromAdapter(adapterInfo).getGeocode(), newListId);
