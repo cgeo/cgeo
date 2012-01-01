@@ -255,9 +255,9 @@ public class VisitCacheActivity extends cgLogForm {
         cache = app.getCacheByGeocode(geocode);
 
         if (StringUtils.isNotBlank(cache.getName())) {
-            setTitle(res.getString(R.string.log_new_log) + " " + cache.getName());
+            setTitle(res.getString(R.string.log_new_log) + ": " + cache.getName());
         } else {
-            setTitle(res.getString(R.string.log_new_log) + " " + cache.getGeocode().toUpperCase());
+            setTitle(res.getString(R.string.log_new_log) + ": " + cache.getGeocode().toUpperCase());
         }
 
         app.setAction(geocode);
