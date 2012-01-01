@@ -33,6 +33,7 @@ import cgeo.geocaching.utils.CancellableHandler;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -144,8 +145,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private ScaleOverlay overlayScale = null;
     private PositionOverlay overlayPosition = null;
     // data for overlays
+    private static Map<Integer, LayerDrawable> overlays = new HashMap<Integer, LayerDrawable>();
     private int cachesCnt = 0;
-    private Map<Integer, Drawable> iconsCache = new HashMap<Integer, Drawable>();
     /** List of caches in the viewport */
     private List<cgCache> caches = new ArrayList<cgCache>();
     /** List of users in the viewport */
@@ -1401,7 +1402,25 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
             if (cache != null) {
 
+                // TODO blafoo Warum getType() ?
                 CachesOverlayItemImpl item = mapProvider.getCachesOverlayItem(coord, cache.getType());
+
+                int hashcode = new HashCodeBuilder()
+                        .append(cache.isReliableLatLon())
+                        .append(cache.getType().id)
+                        .append(cache.isDisabled())
+                        .append(cache.isOwn())
+                        .append(cache.isFound())
+                        .append(cache.hasUserModifiedCoords())
+                        .append(cache.getPersonalNote())
+                        .toHashCode();
+
+                LayerDrawable ldFromCache = CGeoMap.overlays.get(hashcode);
+                if (ldFromCache != null) {
+                    item.setMarker(ldFromCache);
+                    return item;
+                }
+
                 ArrayList<Drawable> layers = new ArrayList<Drawable>();
                 ArrayList<int[]> insets = new ArrayList<int[]>();
 
@@ -1454,6 +1473,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 for ( int[] inset : insets) {
                     ld.setLayerInset(index++, inset[0], inset[1], inset[2], inset[3]);
                 }
+
+                CGeoMap.overlays.put(hashcode, ld);
 
                 item.setMarker(ld);
                 return item;
@@ -1602,14 +1623,15 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     icon = WaypointType.WAYPOINT.markerId;
                 }
 
+                // TODO blafoo
                 Drawable pin = null;
-                if (iconsCache.containsKey(icon)) {
-                    pin = iconsCache.get(icon);
-                } else {
+                //if (iconsCache.containsKey(icon)) {
+                //    pin = iconsCache.get(icon);
+                //} else {
                     pin = getResources().getDrawable(icon);
                     pin.setBounds(0, 0, pin.getIntrinsicWidth(), pin.getIntrinsicHeight());
-                    iconsCache.put(icon, pin);
-                }
+                //    iconsCache.put(icon, pin);
+                //}
                 item.setMarker(pin);
 
                 overlayCaches.updateItems(item);
