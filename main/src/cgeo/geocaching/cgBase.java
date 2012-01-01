@@ -715,6 +715,12 @@ public class cgBase {
             final JSONObject extra = dataJSON.getJSONObject("cs");
             if (extra != null && extra.length() > 0) {
                 int count = extra.getInt("count");
+                // unused, meaning not clearn boolean li = extra.getBoolean("li");
+                // expected meaning pm=premium member
+                boolean pm = extra.getBoolean("pm");
+                if (Settings.isPremiumMember() && !pm) {
+                    parseResult.error = StatusCode.NOT_LOGGED_IN;
+                }
 
                 if (count > 0 && extra.has("cc")) {
                     final JSONArray cachesData = extra.getJSONArray("cc");
@@ -727,7 +733,9 @@ public class cgBase {
                             }
 
                             final cgCache cacheToAdd = new cgCache();
-                            cacheToAdd.setReliableLatLon(false);
+                            cacheToAdd.setDetailed(false);
+                            // coords could be reliable but we only can detect that for premium members
+                            cacheToAdd.setReliableLatLon(pm);
                             cacheToAdd.setGeocode(oneCache.getString("gc"));
                             cacheToAdd.setCoords(new Geopoint(oneCache.getDouble("lat"), oneCache.getDouble("lon")));
                             cacheToAdd.setName(oneCache.getString("nn"));
@@ -1915,7 +1923,7 @@ public class cgBase {
         final ParseResult parseResult = parseMapJSON(Uri.parse(uri).buildUpon().encodedQuery(params).build().toString(), page);
         if (parseResult == null || CollectionUtils.isEmpty(parseResult.cacheList)) {
             Log.e(Settings.tag, "cgeoBase.searchByViewport: No cache parsed");
-            return parseResult;
+            return null;
         }
 
         final ParseResult search = ParseResult.filterParseResults(parseResult, Settings.isExcludeDisabledCaches(), Settings.isExcludeMyCaches(), Settings.getCacheType());
@@ -3026,8 +3034,6 @@ public class cgBase {
         String usertoken = null;
 
         if (StringUtils.isNotBlank(data)) {
-
-
             final Matcher matcher = GCConstants.PATTERN_USERTOKEN.matcher(data);
             while (matcher.find()) {
                 if (matcher.groupCount() > 0) {

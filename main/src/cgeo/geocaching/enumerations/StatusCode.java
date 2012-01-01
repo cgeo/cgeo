@@ -22,7 +22,8 @@ public enum StatusCode {
     MAINTENANCE(-10, R.string.err_maintenance),
     LOG_POST_ERROR(1000, R.string.err_log_post_failed),
     NO_LOG_TEXT(1001, R.string.warn_log_text_fill),
-    NO_DATA_FROM_SERVER(1002, R.string.err_log_failed_server);
+    NO_DATA_FROM_SERVER(1002, R.string.err_log_failed_server),
+    NOT_LOGGED_IN(-11, R.string.init_login_popup_failed);
 
     final private int error_code;
     final private int error_string;

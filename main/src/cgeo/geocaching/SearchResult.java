@@ -12,10 +12,10 @@ import java.util.List;
 public class SearchResult implements Parcelable {
 
     final private List<String> geocodes;
-    public StatusCode error = null; // 13
-    public String url = ""; // 7
-    public String[] viewstates = null; // 9
-    public int totalCnt = 0; // 9
+    public StatusCode error = null;
+    public String url = "";
+    public String[] viewstates = null;
+    public int totalCnt = 0;
 
     final public static Parcelable.Creator<SearchResult> CREATOR = new Parcelable.Creator<SearchResult>() {
         public SearchResult createFromParcel(Parcel in) {
