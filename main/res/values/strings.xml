@@ -411,7 +411,10 @@
   <string name="init_trackautovisit">Set trackables to \"Visited\" as a default</string>
   <string name="init_sigautoinsert">Insert signature automatically</string>
   <string name="init_loaddirectionimg">Load direction-image if necessary</string>
-
+  <string name="init_default_navigation_tool">Default Navigation</string>
+  <string name="init_default_navigation_tool_description">Here you can select your prefered navigation tool.</string>
+  <string name="init_default_navigation_tool_select">Select tool</string>
+  
   <!-- map sources -->
   <string-array name="map_sources">
     <item>@string/map_source_google_map</item>
@@ -512,6 +515,7 @@
   <string name="cache_dialog_watchlist_add_message">Adding cache to your watchlist…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Removing cache from your watchlist…</string>
+  <string name="cache_menu_default_navigation">Default Navigation</string>
   <string name="cache_menu_navigate">Navigate</string>
   <string name="cache_menu_compass">Compass</string>
   <string name="cache_menu_tbt">Turn-by-Turn</string>
@@ -722,7 +726,9 @@
   <string name="use_compass">Use compass</string>
   <string name="destination_select">Select destination</string>
   <string name="destination_set">Set destination</string>
-
+  <string name="navigation_direct_navigation">Direct Navigation</string>
+  <string name="navigation_target">Target</string>
+  
   <!-- license -->
   <string name="license">License</string>
   <string name="license_show">Show license</string>

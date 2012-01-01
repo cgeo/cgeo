@@ -82,7 +82,6 @@ public class cgeocaches extends AbstractListActivity {
 
     private static final int MAX_LIST_ITEMS = 1000;
     private static final String EXTRAS_LIST_TYPE = "type";
-    private static final int MENU_COMPASS = 1;
     private static final int MENU_REFRESH_STORED = 2;
     private static final int MENU_CACHE_DETAILS = 4;
     private static final int MENU_DROP_CACHES = 5;
@@ -123,6 +122,7 @@ public class cgeocaches extends AbstractListActivity {
     private static final int MENU_SORT_STATE = 63;
     private static final int MENU_RENAME_LIST = 64;
     private static final int MENU_DROP_CACHES_AND_LIST = 65;
+    private static final int MENU_DEFAULT_NAVIGATION = 66;
 
     private static final int CONTEXT_MENU_MOVE_TO_LIST = 1000;
 
@@ -1147,7 +1147,7 @@ public class cgeocaches extends AbstractListActivity {
         }
 
         if (cache.getCoords() != null) {
-            menu.add(0, MENU_COMPASS, 0, res.getString(R.string.cache_menu_compass));
+            menu.add(0, MENU_DEFAULT_NAVIGATION, 0, res.getString(R.string.cache_menu_default_navigation));
             final SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
             NavigationAppFactory.addMenuItems(subMenu, this, res);
             addVisitMenu(menu, cache);
@@ -1219,16 +1219,9 @@ public class cgeocaches extends AbstractListActivity {
             Log.w(Settings.tag, "cgeocaches.onContextItemSelected: " + e.toString());
         }
 
-        if (id == MENU_COMPASS) {
-            final Intent navigateIntent = new Intent(this, cgeonavigate.class);
+        if (id == MENU_DEFAULT_NAVIGATION) {
             final cgCache cache = getCacheFromAdapter(adapterInfo);
-            navigateIntent.putExtra("latitude", cache.getCoords().getLatitude());
-            navigateIntent.putExtra("longitude", cache.getCoords().getLongitude());
-            navigateIntent.putExtra("geocode", cache.getGeocode().toUpperCase());
-            navigateIntent.putExtra("name", cache.getName());
-
-            startActivity(navigateIntent);
-
+            NavigationAppFactory.startDefaultNavigationApplication(geo, this, getResources(), cache, null, null, null);
             return true;
         } else if (id == MENU_LOG_VISIT) {
             return getCacheFromAdapter(adapterInfo).logVisit(this);
