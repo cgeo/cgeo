@@ -1413,6 +1413,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         .append(cache.isFound())
                         .append(cache.hasUserModifiedCoords())
                         .append(cache.getPersonalNote())
+                        .append(cache.isMembersOnly())
                         .toHashCode();
 
                 LayerDrawable ldFromCache = CGeoMap.overlays.get(hashcode);
@@ -1424,12 +1425,13 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 ArrayList<Drawable> layers = new ArrayList<Drawable>();
                 ArrayList<int[]> insets = new ArrayList<int[]>();
 
-                final int[] INSET_TYPE = { 5, 9, 6, 9 }; // center, 22x22
-                final int[] INSET_DISABLED = { 0, 0, 0, 0 }; // center, 33x40
-                final int[] INSET_OWN = { 17, 0, 0, 24 }; // top right, 16x16
-                final int[] INSET_FOUND = { 0, 0, 17, 24 }; // top left, 16x16
-                final int[] INSET_USERMODIFIEDCOORDS = { 17, 24, 0, 0 }; // bottom right, 16x16
-                final int[] INSET_PERSONALNOTE = { 0, 24, 17, 0 }; // bottom left, 16x16
+                final int[] INSET_TYPE = { 5, 8, 6, 10 }; // center, 22x22
+                final int[] INSET_DISABLED = { 0, 16, 0, 19 }; // center, 33x5
+                final int[] INSET_OWN = { 21, 0, 0, 26 }; // top right, 12x12
+                final int[] INSET_FOUND = { 0, 0, 21, 28 }; // top left, 12x12
+                final int[] INSET_USERMODIFIEDCOORDS = { 21, 28, 0, 0 }; // bottom right, 12x12
+                final int[] INSET_PERSONALNOTE = { 0, 28, 21, 0 }; // bottom left, 12x12
+                final int[] INSET_PREMIUM = { 10, 0, 11, 28 }; // top center, 12x12
 
                 // background
                 if (cache.isReliableLatLon()) {
@@ -1442,28 +1444,33 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 insets.add(INSET_TYPE);
                 // cache disabled
                 if (cache.isDisabled()) {
-                    layers.add(getResources().getDrawable(R.drawable.marker_disabled)); // 33x40
+                    layers.add(getResources().getDrawable(R.drawable.marker_disabled)); // 33x5
                     insets.add(INSET_DISABLED);
                 }
                 // own
                 if ( cache.isOwn() ) {
-                    layers.add(getResources().getDrawable(R.drawable.marker_own)); // 16x16
+                    layers.add(getResources().getDrawable(R.drawable.marker_own)); // 12x12
                     insets.add(INSET_OWN);
                 }
                 // found
                 if (cache.isFound()) {
-                    layers.add(getResources().getDrawable(R.drawable.marker_found)); // 16x16
+                    layers.add(getResources().getDrawable(R.drawable.marker_found)); // 12x12
                     insets.add(INSET_FOUND);
                 }
                 // user modified coords
                 if (cache.hasUserModifiedCoords()) {
-                    layers.add(getResources().getDrawable(R.drawable.marker_usermodifiedcoords)); // 16x16
+                    layers.add(getResources().getDrawable(R.drawable.marker_usermodifiedcoords)); // 12x12
                     insets.add(INSET_USERMODIFIEDCOORDS);
                 }
                 // personal note
                 if (cache.getPersonalNote() != null) {
-                    layers.add(getResources().getDrawable(R.drawable.marker_personalnote)); // 16x16
+                    layers.add(getResources().getDrawable(R.drawable.marker_personalnote)); // 12x12
                     insets.add(INSET_PERSONALNOTE);
+                }
+                // premium
+                if (cache.isMembersOnly()) {
+                    layers.add(getResources().getDrawable(R.drawable.marker_premium)); // 12x12
+                    insets.add(INSET_PREMIUM);
                 }
 
                 LayerDrawable ld = new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
