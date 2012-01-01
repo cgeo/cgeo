@@ -70,7 +70,7 @@ public class cgCache implements ICache {
     private String description = null;
     private boolean disabled = false;
     private boolean archived = false;
-    private boolean members = false;
+    private boolean premiumMembersOnly = false;
     private boolean found = false;
     private boolean favorite = false;
     private boolean own = false;
@@ -428,8 +428,12 @@ public class cgCache implements ICache {
     }
 
     @Override
-    public boolean isMembersOnly() {
-        return members;
+    public boolean isPremiumMembersOnly() {
+        return premiumMembersOnly;
+    }
+
+    public void setPremiumMembersOnly(boolean members) {
+        this.premiumMembersOnly = members;
     }
 
     @Override
@@ -723,14 +727,6 @@ public class cgCache implements ICache {
 
     public void setShortdesc(String shortdesc) {
         this.shortdesc = shortdesc;
-    }
-
-    public boolean isMembers() {
-        return members;
-    }
-
-    public void setMembers(boolean members) {
-        this.members = members;
     }
 
     public void setFavoritePoints(int favoriteCnt) {
@@ -1060,9 +1056,9 @@ public class cgCache implements ICache {
         Matcher matcher = coordPattern.matcher(note);
         while (matcher.find()) {
             try {
-                final Geopoint point = GeopointParser.parse(note);
-                // coords must have non zero latitude and longitude
-                if (point != null && point.getLatitudeE6() != 0 && point.getLongitudeE6() != 0) {
+                final Geopoint point = GeopointParser.parse(note.substring(matcher.start()));
+                // coords must have non zero latitude and longitude and at least one part shall have fractional degrees
+                if (point != null && point.getLatitudeE6() != 0 && point.getLongitudeE6() != 0 && ((point.getLatitudeE6() % 1000) != 0 || (point.getLongitudeE6() % 1000) != 0)) {
                     final String name = cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
                     final cgWaypoint waypoint = new cgWaypoint(name, WaypointType.WAYPOINT);
                     waypoint.setCoords(point);

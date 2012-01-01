@@ -90,7 +90,7 @@ public abstract class MockedCache implements ICache {
     }
 
     @Override
-    public boolean isMembersOnly() {
+    public boolean isPremiumMembersOnly() {
         return false;
     }
 

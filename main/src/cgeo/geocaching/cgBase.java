@@ -556,7 +556,7 @@ public class cgBase {
             }
 
             // premium cache
-            cache.setMembers(row.contains("/images/small_profile.gif"));
+            cache.setPremiumMembersOnly(row.contains("/images/small_profile.gif"));
 
             // found it
             cache.setFound(row.contains("/images/icons/icon_smile"));
@@ -823,7 +823,7 @@ public class cgBase {
 
         cache.setArchived(page.contains("<li>This cache has been archived,"));
 
-        cache.setMembers(BaseUtils.matches(page, GCConstants.PATTERN_MEMBERS));
+        cache.setPremiumMembersOnly(BaseUtils.matches(page, GCConstants.PATTERN_PREMIUMMEMBERS));
 
         cache.setFavorite(BaseUtils.matches(page, GCConstants.PATTERN_FAVORITE));
 

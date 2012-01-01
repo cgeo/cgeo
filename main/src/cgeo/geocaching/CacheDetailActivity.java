@@ -1351,7 +1351,7 @@ public class CacheDetailActivity extends AbstractActivity {
             addCacheDetail(R.string.cache_geocode, cache.getGeocode().toUpperCase());
 
             // cache state
-            if (cache.isLogOffline() || cache.isArchived() || cache.isDisabled() || cache.isMembers() || cache.isFound()) {
+            if (cache.isLogOffline() || cache.isArchived() || cache.isDisabled() || cache.isPremiumMembersOnly() || cache.isFound()) {
                 final StringBuilder state = new StringBuilder();
                 if (cache.isLogOffline()) {
                     state.append(res.getString(R.string.cache_status_offline_log));
@@ -1374,7 +1374,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     }
                     state.append(res.getString(R.string.cache_status_disabled));
                 }
-                if (cache.isMembers()) {
+                if (cache.isPremiumMembersOnly()) {
                     if (state.length() > 0) {
                         state.append(", ");
                     }

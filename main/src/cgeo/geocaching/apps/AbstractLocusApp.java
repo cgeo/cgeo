@@ -121,7 +121,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
         pg.cacheID = cache.getGeocode();
         pg.available = !cache.isDisabled();
         pg.archived = cache.isArchived();
-        pg.premiumOnly = cache.isMembers();
+        pg.premiumOnly = cache.isPremiumMembersOnly();
         pg.name = cache.getName();
         pg.placedBy = cache.getOwner();
         if (cache.getHiddenDate() != null) {
