@@ -1060,9 +1060,9 @@ public class cgCache implements ICache {
         Matcher matcher = coordPattern.matcher(note);
         while (matcher.find()) {
             try {
-                final Geopoint point = GeopointParser.parse(note);
-                // coords must have non zero latitude and longitude
-                if (point != null && point.getLatitudeE6() != 0 && point.getLongitudeE6() != 0) {
+                final Geopoint point = GeopointParser.parse(note.substring(matcher.start()));
+                // coords must have non zero latitude and longitude and at least one part shall have fractional degrees
+                if (point != null && point.getLatitudeE6() != 0 && point.getLongitudeE6() != 0 && ((point.getLatitudeE6() % 1000) != 0 || (point.getLongitudeE6() % 1000) != 0)) {
                     final String name = cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
                     final cgWaypoint waypoint = new cgWaypoint(name, WaypointType.WAYPOINT);
                     waypoint.setCoords(point);

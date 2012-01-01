@@ -15,17 +15,19 @@ public class GeopointParser
 {
     private static class ResultWrapper {
         final double result;
-        final int stringLength;
+        final int matcherPos;
+        final int matcherLength;
 
-        public ResultWrapper(final double result, int stringLength) {
+        public ResultWrapper(final double result, int matcherPos, int stringLength) {
             this.result = result;
-            this.stringLength = stringLength;
+            this.matcherPos = matcherPos;
+            this.matcherLength = stringLength;
         }
     }
 
     //                                                         ( 1  )    ( 2  )         ( 3  )       ( 4  )       (        5        )
-    private static final Pattern patternLat = Pattern.compile("([NS])\\s*(\\d+)°?(?:\\s*(\\d+)(?:[.,](\\d+)|'?\\s*(\\d+(?:[.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
-    private static final Pattern patternLon = Pattern.compile("([WE])\\s*(\\d+)°?(?:\\s*(\\d+)(?:[.,](\\d+)|'?\\s*(\\d+(?:[.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
+    private static final Pattern patternLat = Pattern.compile("\\b([NS])\\s*(\\d+)°?(?:\\s*(\\d+)(?:[.,](\\d+)|'?\\s*(\\d+(?:[.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
+    private static final Pattern patternLon = Pattern.compile("\\b([WE])\\s*(\\d+)°?(?:\\s*(\\d+)(?:[.,](\\d+)|'?\\s*(\\d+(?:[.,]\\d+)?)(?:''|\")?)?)?", Pattern.CASE_INSENSITIVE);
 
     private enum LatLon
     {
@@ -41,12 +43,12 @@ public class GeopointParser
      * X DD° MM
      * X DD° MM.MMM
      * X DD° MM SS
-     *
+     * 
      * as well as:
      * DD.DDDDDDD
-     *
+     * 
      * Both . and , are accepted, also variable count of spaces (also 0)
-     *
+     * 
      * @param text
      *            the string to parse
      * @return an Geopoint with parsed latitude and longitude
@@ -55,11 +57,16 @@ public class GeopointParser
      */
     public static Geopoint parse(final String text)
     {
-        ResultWrapper resultWrapper = parseHelper(text, LatLon.LAT);
-        double lat = resultWrapper.result;
+        final ResultWrapper latitudeWrapper = parseHelper(text, LatLon.LAT);
+        final double lat = latitudeWrapper.result;
         // cut away the latitude part when parsing the longitude
-        double lon = parseLongitude(text.substring(resultWrapper.stringLength));
+        final ResultWrapper longitudeWrapper = parseHelper(text.substring(latitudeWrapper.matcherPos + latitudeWrapper.matcherLength), LatLon.LON);
 
+        if (longitudeWrapper.matcherPos - (latitudeWrapper.matcherPos + latitudeWrapper.matcherLength) >= 10) {
+            throw new ParseException("Distance between latitude and longitude text is to large.", LatLon.LON);
+        }
+
+        final double lon = longitudeWrapper.result;
         return new Geopoint(lat, lon);
     }
 
@@ -71,12 +78,12 @@ public class GeopointParser
      * X DD° MM
      * X DD° MM.MMM
      * X DD° MM SS
-     *
+     * 
      * as well as:
      * DD.DDDDDDD
-     *
+     * 
      * Both . and , are accepted, also variable count of spaces (also 0)
-     *
+     * 
      * @param latitude
      *            the latitude string to parse
      * @param longitude
@@ -120,7 +127,7 @@ public class GeopointParser
                 }
             }
 
-            return new ResultWrapper(sign * (degree + minutes / 60.0 + seconds / 3600.0), matcher.group().length());
+            return new ResultWrapper(sign * (degree + minutes / 60.0 + seconds / 3600.0), matcher.start(), matcher.group().length());
 
         } else {
 
@@ -128,8 +135,9 @@ public class GeopointParser
             try {
                 final String[] items = StringUtils.split(text.trim());
                 if (items.length > 0) {
-                    final int index = latlon == LatLon.LON ? items.length - 1 : 0;
-                    return new ResultWrapper(Double.parseDouble(items[index]), items[index].length());
+                    final int index = (latlon == LatLon.LON ? items.length - 1 : 0);
+                    final int pos = (latlon == LatLon.LON ? text.lastIndexOf(items[index]) : text.indexOf(items[index]));
+                    return new ResultWrapper(Double.parseDouble(items[index]), pos, items[index].length());
                 }
             } catch (NumberFormatException e) {
                 // The right exception will be raised below.
