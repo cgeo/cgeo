@@ -1413,7 +1413,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         .append(cache.isFound())
                         .append(cache.hasUserModifiedCoords())
                         .append(cache.getPersonalNote())
-                        .append(cache.isMembersOnly())
+                        .append(cache.isPremiumMembersOnly())
                         .toHashCode();
 
                 LayerDrawable ldFromCache = CGeoMap.overlays.get(hashcode);
@@ -1468,7 +1468,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     insets.add(INSET_PERSONALNOTE);
                 }
                 // premium
-                if (cache.isMembersOnly()) {
+                if (cache.isPremiumMembersOnly()) {
                     layers.add(getResources().getDrawable(R.drawable.marker_premium)); // 12x12
                     insets.add(INSET_PREMIUM);
                 }
