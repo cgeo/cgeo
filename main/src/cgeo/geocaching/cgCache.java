@@ -70,7 +70,7 @@ public class cgCache implements ICache {
     private String description = null;
     private boolean disabled = false;
     private boolean archived = false;
-    private boolean members = false;
+    private boolean premiumMembersOnly = false;
     private boolean found = false;
     private boolean favorite = false;
     private boolean own = false;
@@ -428,8 +428,12 @@ public class cgCache implements ICache {
     }
 
     @Override
-    public boolean isMembersOnly() {
-        return members;
+    public boolean isPremiumMembersOnly() {
+        return premiumMembersOnly;
+    }
+
+    public void setPremiumMembersOnly(boolean members) {
+        this.premiumMembersOnly = members;
     }
 
     @Override
@@ -723,14 +727,6 @@ public class cgCache implements ICache {
 
     public void setShortdesc(String shortdesc) {
         this.shortdesc = shortdesc;
-    }
-
-    public boolean isMembers() {
-        return members;
-    }
-
-    public void setMembers(boolean members) {
-        this.members = members;
     }
 
     public void setFavoritePoints(int favoriteCnt) {

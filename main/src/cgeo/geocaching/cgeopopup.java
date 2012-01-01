@@ -256,7 +256,7 @@ public class cgeopopup extends AbstractActivity {
             detailsList.addView(itemLayout);
 
             // cache state
-            if (cache.isArchived() || cache.isDisabled() || cache.isMembers() || cache.isFound()) {
+            if (cache.isArchived() || cache.isDisabled() || cache.isPremiumMembersOnly() || cache.isFound()) {
                 itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
                 itemName = (TextView) itemLayout.findViewById(R.id.name);
                 itemValue = (TextView) itemLayout.findViewById(R.id.value);
@@ -282,7 +282,7 @@ public class cgeopopup extends AbstractActivity {
                     }
                     state.append(res.getString(R.string.cache_status_disabled));
                 }
-                if (cache.isMembers()) {
+                if (cache.isPremiumMembersOnly()) {
                     if (state.length() > 0) {
                         state.append(", ");
                     }

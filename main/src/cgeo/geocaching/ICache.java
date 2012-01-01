@@ -50,7 +50,7 @@ public interface ICache extends IBasicCache {
     /**
      * @return true is the cache is a Premium Member cache only, false else
      */
-    public boolean isMembersOnly();
+    public boolean isPremiumMembersOnly();
 
     /**
      * @return Decrypted hint

@@ -37,7 +37,7 @@ public class cgBaseTest extends AndroidTestCase {
         Assert.assertEquals(expected.isDisabled(), actual.isDisabled());
         Assert.assertEquals(expected.isOwn(), actual.isOwn());
         Assert.assertEquals(expected.isArchived(), actual.isArchived());
-        Assert.assertEquals(expected.isMembersOnly(), actual.isMembersOnly());
+        Assert.assertEquals(expected.isPremiumMembersOnly(), actual.isPremiumMembersOnly());
         Assert.assertEquals(expected.getOwnerReal(), actual.getOwnerReal());
         Assert.assertEquals(expected.getSize(), actual.getSize());
         Assert.assertEquals(expected.getHint(), actual.getHint());
