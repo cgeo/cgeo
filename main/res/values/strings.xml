@@ -964,6 +964,7 @@
   <!-- changelog -->
   <string name="changelog">\n
     <b>next release</b>\n
+    · new: changed markers in the map with additional informations for stored caches\n
     · \n
     \n\n
     <b>04.01.2012</b>\n
