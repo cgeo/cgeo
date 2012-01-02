@@ -73,7 +73,6 @@
   <string name="log_needs_archived">Vyžaduje archiváciu</string>
   <string name="log_discovered">Nájdený</string>
   <string name="log_reviewed">Poznámka kontroly</string>
-  <string name="log_taken">Navštívené</string>
   <string name="log_tb_nothing">Bezo zmeny</string>
   <string name="log_tb_visit">Návšteva</string>
   <string name="log_tb_drop">Nechať tu</string>
