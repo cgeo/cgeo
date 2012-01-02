@@ -1425,28 +1425,30 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 ArrayList<Drawable> layers = new ArrayList<Drawable>();
                 ArrayList<int[]> insets = new ArrayList<int[]>();
 
+                final int[] INSET_RELIABLE = { 0, 0, 0, 0 }; // center, 22x22
                 final int[] INSET_TYPE = { 5, 8, 6, 10 }; // center, 22x22
-                final int[] INSET_DISABLED = { 0, 16, 0, 19 }; // center, 33x5
                 final int[] INSET_OWN = { 21, 0, 0, 26 }; // top right, 12x12
                 final int[] INSET_FOUND = { 0, 0, 21, 28 }; // top left, 12x12
                 final int[] INSET_USERMODIFIEDCOORDS = { 21, 28, 0, 0 }; // bottom right, 12x12
                 final int[] INSET_PERSONALNOTE = { 0, 28, 21, 0 }; // bottom left, 12x12
                 final int[] INSET_PREMIUM = { 10, 0, 11, 28 }; // top center, 12x12
 
-                // background
+                // background: disabled or not
+                if (cache.isDisabled()) {
+                    layers.add(getResources().getDrawable(R.drawable.marker_disabled)); // 33x40
+                } else {
+                    layers.add(getResources().getDrawable(R.drawable.marker)); // 33x40
+                }
+                // reliable or not
                 if (cache.isReliableLatLon()) {
                     layers.add(getResources().getDrawable(R.drawable.marker_reliable)); // 33x40
                 } else {
                     layers.add(getResources().getDrawable(R.drawable.marker_notreliable)); // 33x40
                 }
+                insets.add(INSET_RELIABLE);
                 // cache type
                 layers.add(getResources().getDrawable(cache.getType().markerId)); // 22x22
                 insets.add(INSET_TYPE);
-                // cache disabled
-                if (cache.isDisabled()) {
-                    layers.add(getResources().getDrawable(R.drawable.marker_disabled)); // 33x5
-                    insets.add(INSET_DISABLED);
-                }
                 // own
                 if ( cache.isOwn() ) {
                     layers.add(getResources().getDrawable(R.drawable.marker_own)); // 12x12
@@ -1474,7 +1476,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 }
 
                 LayerDrawable ld = new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
-                // ld.setBounds(0, 0, ld.getIntrinsicWidth(), ld.getIntrinsicHeight());
 
                 int index = 1;
                 for ( int[] inset : insets) {
