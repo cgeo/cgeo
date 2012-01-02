@@ -1,10 +1,12 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.LogTemplateProvider.LogTemplate;
+import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
+import cgeo.geocaching.ui.DateDialog;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -34,7 +36,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class VisitCacheActivity extends cgLogForm {
+public class VisitCacheActivity extends AbstractActivity implements DateDialog.DateDialogParent {
     static final String EXTRAS_FOUND = "found";
     static final String EXTRAS_TEXT = "text";
     static final String EXTRAS_GEOCODE = "geocode";
@@ -562,7 +564,7 @@ public class VisitCacheActivity extends cgLogForm {
     private class DateListener implements View.OnClickListener {
 
         public void onClick(View arg0) {
-            final Dialog dateDialog = new cgeodate(VisitCacheActivity.this, VisitCacheActivity.this, date);
+            final Dialog dateDialog = new DateDialog(VisitCacheActivity.this, VisitCacheActivity.this, date);
             dateDialog.setCancelable(true);
             dateDialog.show();
         }

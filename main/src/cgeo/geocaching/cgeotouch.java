@@ -1,7 +1,9 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.ui.DateDialog;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -27,7 +29,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class cgeotouch extends cgLogForm {
+public class cgeotouch extends AbstractActivity implements DateDialog.DateDialogParent {
     private cgTrackable trackable = null;
     private List<LogType> logTypes = new ArrayList<LogType>();
     private ProgressDialog waitDialog = null;
@@ -323,7 +325,7 @@ public class cgeotouch extends cgLogForm {
 
     private class cgeotouchDateListener implements View.OnClickListener {
         public void onClick(View arg0) {
-            Dialog dateDialog = new cgeodate(cgeotouch.this, cgeotouch.this, date);
+            Dialog dateDialog = new DateDialog(cgeotouch.this, cgeotouch.this, date);
             dateDialog.setCancelable(true);
             dateDialog.show();
         }
