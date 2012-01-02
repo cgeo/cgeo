@@ -41,16 +41,16 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 
     public static void addMenuItems(final Menu menu, final Activity activity,
             final Resources res) {
-        addMenuItems(menu, activity, res, true);
+        addMenuItems(menu, activity, res, true, false);
     }
 
     public static void addMenuItems(final Menu menu, final Activity activity,
-            final Resources res, final boolean showInternalMap) {
-        for (NavigationApp app : getNavigationApps(res)) {
-            if (app.isInstalled(activity)) {
-                if (showInternalMap || !(app instanceof InternalMap)) {
-                    menu.add(0, app.getId(), 0, app.getName());
-                }
+            final Resources res, final boolean showInternalMap, final boolean showDefaultNavigation) {
+        int defaultNavigationTool = Settings.getDefaultNavigationTool();
+        for (NavigationApp app : getInstalledNavigationApps(activity, res)) {
+            if ((showInternalMap || !(app instanceof InternalMap)) &&
+                    (showDefaultNavigation || defaultNavigationTool != app.getId())) {
+                menu.add(0, app.getId(), 0, app.getName());
             }
         }
     }
@@ -67,13 +67,11 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 
     public static int getOrdinalFromId(final Activity activity, final Resources res, final int id) {
         int ordinal = 0;
-        for (NavigationApp app : getNavigationApps(res)) {
-            if (app.isInstalled(activity)) {
-                if (app.getId() == id) {
-                    return ordinal;
-                }
-                ordinal++;
+        for (NavigationApp app : getInstalledNavigationApps(activity, res)) {
+            if (app.getId() == id) {
+                return ordinal;
             }
+            ordinal++;
         }
         return 0;
     }
