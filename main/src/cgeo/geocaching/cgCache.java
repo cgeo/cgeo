@@ -259,6 +259,9 @@ public class cgCache implements ICache {
      * @return true: page contains guid of cache, false: otherwise
      */
     boolean isGuidContainedInPage(final String page) {
+        if (StringUtils.isBlank(page)) {
+            return false;
+        }
         // check if the guid of the cache is anywhere in the page
         if (StringUtils.isBlank(guid)) {
             return false;
