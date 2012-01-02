@@ -124,8 +124,6 @@ public class cgeocaches extends AbstractListActivity {
     private static final int MENU_RENAME_LIST = 64;
     private static final int MENU_DROP_CACHES_AND_LIST = 65;
 
-    private static final int CONTEXT_MENU_MOVE_TO_LIST = 1000;
-
     private String action = null;
     private CacheListType type = null;
     private Geopoint coords = null;
@@ -135,7 +133,6 @@ public class cgeocaches extends AbstractListActivity {
     private String username = null;
     private SearchResult search = null;
     private List<cgCache> cacheList = new ArrayList<cgCache>();
-    private int maxListId = 100;
     private CacheListAdapter adapter = null;
     private LayoutInflater inflater = null;
     private View listFooter = null;
@@ -1158,14 +1155,7 @@ public class cgeocaches extends AbstractListActivity {
             final List<StoredList> cacheLists = app.getLists();
             final int listCount = cacheLists.size();
             if (listCount > 1) {
-                final SubMenu submenu = menu.addSubMenu(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
-                for (int i = 0; i < listCount; i++) {
-                    StoredList list = cacheLists.get(i);
-                    submenu.add(Menu.NONE, CONTEXT_MENU_MOVE_TO_LIST + list.id, Menu.NONE, list.getTitleAndCount());
-                    if (list.id > maxListId) {
-                        maxListId = list.id;
-                    }
-                }
+                menu.add(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
             }
         }
     }
@@ -1248,14 +1238,25 @@ public class cgeocaches extends AbstractListActivity {
                 }
             });
             return true;
-        } else if (id >= CONTEXT_MENU_MOVE_TO_LIST && id < CONTEXT_MENU_MOVE_TO_LIST + maxListId) {
-            final int newListId = id - CONTEXT_MENU_MOVE_TO_LIST;
-            if (adapterInfo != null) {
-                app.moveToList(getCacheFromAdapter(adapterInfo).getGeocode(), newListId);
+        } else if (id == MENU_MOVE_TO_LIST) {
+            final String geocode = getCacheFromAdapter(adapterInfo).getGeocode();
+            final List<StoredList> cacheLists = app.getLists();
+            ArrayList<String> listNames = new ArrayList<String>();
+            for (StoredList list : cacheLists) {
+                listNames.add(list.getTitleAndCount());
             }
-            adapter.resetChecks();
 
-            refreshCurrentList();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(res.getString(R.string.cache_menu_move_list));
+            builder.setItems(listNames.toArray(new String[listNames.size()]), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int item) {
+                    final int newListId = cacheLists.get(item).id;
+                    app.moveToList(geocode, newListId);
+                    adapter.resetChecks();
+                    refreshCurrentList();
+                }
+            });
+            builder.create().show();
             return true;
         }
 
