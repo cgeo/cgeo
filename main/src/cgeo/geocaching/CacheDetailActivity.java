@@ -597,7 +597,11 @@ public class CacheDetailActivity extends AbstractActivity {
         }
 
         // actionbar: title and icon (default: mystery-icon)
-        setTitle(cache.getGeocode().toUpperCase());
+        if (StringUtils.isNotBlank(cache.getName())) {
+            setTitle(cache.getName() + " (" + cache.getGeocode().toUpperCase() + ")");
+        } else {
+            setTitle(cache.getGeocode().toUpperCase());
+        }
         ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.getType())), null, null, null);
 
         // add available pages (remove old pages first)

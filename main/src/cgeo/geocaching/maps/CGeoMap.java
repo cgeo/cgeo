@@ -15,6 +15,7 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
@@ -1245,22 +1246,33 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 // stage 2 - pull and render from geocaching.com
                 //this should just fetch and insert into the db _and_ be cancel-able if the viewport changes
 
-                if (token == null) {
-                    token = cgBase.getMapUserToken(noMapTokenHandler);
-                }
+                int count = 0;
+                do {
+                    if (token == null) {
+                        token = cgBase.getMapUserToken(noMapTokenHandler);
+                    }
 
-                if (stop) {
-                    displayHandler.sendEmptyMessage(UPDATE_TITLE);
-                    working = false;
+                    if (stop) {
+                        displayHandler.sendEmptyMessage(UPDATE_TITLE);
+                        working = false;
 
-                    return;
-                }
+                        return;
+                    }
 
-                final Viewport viewport = new Viewport(new Geopoint(latMin, lonMin), new Geopoint(latMax, lonMax));
-                search = cgBase.searchByViewport(token, viewport);
-                if (search != null) {
-                    downloaded = true;
-                }
+                    final Viewport viewport = new Viewport(new Geopoint(latMin, lonMin), new Geopoint(latMax, lonMax));
+                    search = cgBase.searchByViewport(token, viewport);
+                    if (search != null) {
+                        downloaded = true;
+                        if (search.error == StatusCode.NOT_LOGGED_IN) {
+                            cgBase.login();
+                            token = null;
+                        } else {
+                            break;
+                        }
+                    }
+                    count++;
+
+                } while (count < 2);
 
                 if (stop) {
                     displayHandler.sendEmptyMessage(UPDATE_TITLE);
