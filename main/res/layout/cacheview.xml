@@ -20,7 +20,7 @@
 
         <ImageView
             style="@style/action_bar_action"
-            android:onClick="startCompassNavigation"
+            android:onClick="startDefaultNavigation"
             android:src="@drawable/actionbar_compass" />
 
         <View style="@style/action_bar_separator" />

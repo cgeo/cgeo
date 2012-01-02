@@ -133,7 +133,7 @@ public class cgeopopup extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 2, 0, res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass); // compass
+        menu.add(0, 2, 0, res.getString(R.string.cache_menu_default_navigation)).setIcon(android.R.drawable.ic_menu_compass); // default navigation tool
 
         SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
         NavigationAppFactory.addMenuItems(subMenu, this, res);
@@ -519,17 +519,10 @@ public class cgeopopup extends AbstractActivity {
     private void navigateTo() {
         if (cache == null || cache.getCoords() == null) {
             showToast(res.getString(R.string.err_location_unknown));
+            return;
         }
 
-        cgeonavigate navigateActivity = new cgeonavigate();
-
-        Intent navigateIntent = new Intent(this, navigateActivity.getClass());
-        navigateIntent.putExtra("latitude", cache.getCoords().getLatitude());
-        navigateIntent.putExtra("longitude", cache.getCoords().getLongitude());
-        navigateIntent.putExtra("geocode", "");
-        navigateIntent.putExtra("name", res.getString(R.string.search_some_destination));
-
-        startActivity(navigateIntent);
+        NavigationAppFactory.startDefaultNavigationApplication(geo, this, getResources(), cache, null, null, null);
     }
 
     private void cachesAround() {

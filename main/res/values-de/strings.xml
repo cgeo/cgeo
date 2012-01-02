@@ -411,7 +411,10 @@
   <string name="init_trackautovisit">Trackables automatisch auf \"besuchen\" setzen</string>
   <string name="init_sigautoinsert">Signatur automatisch einfügen</string>
   <string name="init_loaddirectionimg">Richtungs-Grafik laden wenn nötig</string>
-
+  <string name="init_default_navigation_tool">Standardnavigation</string>
+  <string name="init_default_navigation_tool_description">Hier kannst du dein bevorzugtes Navigationswerkzeug festlegen.</string>
+  <string name="init_default_navigation_tool_select">Wähle Werkzeug</string>
+  
   <!-- map sources -->
   <string name="map_source_google_map">Google: Karte</string>
   <string name="map_source_google_satellite">Google: Satellit</string>
@@ -499,6 +502,7 @@
   <string name="cache_dialog_watchlist_add_message">Füge den Cache deiner Watchlist hinzu…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Entferne den Cache von deiner Watchlist…</string>
+  <string name="cache_menu_default_navigation">Standardnavigation</string>
   <string name="cache_menu_navigate">Navigieren</string>
   <string name="cache_menu_compass">Kompass</string>
   <string name="cache_menu_tbt">Google Maps Navigation</string>
@@ -701,6 +705,8 @@
   <string name="use_compass">Kompass nutzen</string>
   <string name="destination_select">Ziel auswählen</string>
   <string name="destination_set">Ziel setzen</string>
+  <string name="navigation_direct_navigation">Direkte Navigation</string>
+  <string name="navigation_target">Ziel</string>
 
   <!-- license -->
   <string name="license">Lizenz</string>
