@@ -620,7 +620,7 @@
   <string name="search_clear_history">Zmazať históriu</string>
   <string name="search_history_cleared">História zmazaná</string>
 
-  <string name="waypoint_coordinate_formats_plain">Čistý</string>
+  <string name="waypoint_coordinate_formats_plain">Iba text</string>
 
   <!-- visit -->
   <string name="visit_tweet">informovať o nájdení na Twitteri</string>
