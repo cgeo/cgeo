@@ -975,12 +975,19 @@
     · new: allow offline log without any login data stored\n
     · new: ask for restore after reinstallation\n
     · new: context menu to open spoiler/log images online\n
+    · new: create waypoints from personal cache note\n
     · fix: several calendar bugs\n
     · fix: some enhancement due to gc.com update\n
     · fix: new translation IT, several translation-updates\n
-    · fix: lot of design enhancements (icons, font-size, autoresizing text-fields, auto-suggestion, seperators, inventory-actions, stars color and value, many more)\n
+    · fix: lot of design enhancements (icons, font-size, autoresizing text-fields, auto-suggestion, seperators, inventory-actions, stars color and value, keyboard, colors, many more)\n
     · fix: Refresh not stored caches\n
     · fix: batch-actions for trackables not working\n
+    · fix: missing cache-name as title in cache details\n
+    · fix: some map-issues for gc.com-premium-members\n
+    · fix: edited waypoints are overwritten by cache update\n
+    · fix: spoiler images are too small\n
+    · fix: incorrect storage time in cache details\n
+    · fix: incorrect handling of GeoKrety trackables\n
     · 100+ bugfixes and enhancements\n
     \n\n
     <b>08.11.2011</b>\n
