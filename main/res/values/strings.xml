@@ -56,7 +56,7 @@
 
   <!-- logs -->
   <string name="log_found">Found it</string>
-  <string name="log_dnf">Did\'nt find it</string>
+  <string name="log_dnf">Didn\'t find it</string>
   <string name="log_note">Write note</string>
   <string name="log_published">Published</string>
   <string name="log_enabled">Enabled</string>
