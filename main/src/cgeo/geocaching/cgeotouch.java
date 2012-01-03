@@ -112,6 +112,10 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
         if (extras != null) {
             geocode = extras.getString("geocode");
             guid = extras.getString("guid");
+
+            if (StringUtils.isNotBlank(extras.getString("trackingcode"))) {
+                ((EditText) findViewById(R.id.tracking)).setText(extras.getString("trackingcode"));
+            }
         }
 
         trackable = app.getTrackableByGeocode("logging trackable");
