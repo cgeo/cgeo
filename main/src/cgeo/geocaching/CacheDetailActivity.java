@@ -32,6 +32,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -48,6 +50,7 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ImageSpan;
 import android.text.style.StrikethroughSpan;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -1334,6 +1337,11 @@ public class CacheDetailActivity extends AbstractActivity {
 
             view = (ScrollView) getLayoutInflater().inflate(R.layout.cacheview_details, null);
 
+            // Start loading preview map
+            if (Settings.isStoreOfflineMaps()) {
+                new PreviewMapTask().execute((Void) null);
+            }
+
             detailsList = (LinearLayout) view.findViewById(R.id.details_list);
 
             // cache name (full name)
@@ -1851,6 +1859,47 @@ public class CacheDetailActivity extends AbstractActivity {
                 internalsText.setText(sl);
             } else {
                 ((LinearLayout) view.findViewById(R.id.debug_box)).setVisibility(View.GONE);
+            }
+        }
+
+        private class PreviewMapTask extends AsyncTask<Void, Void, BitmapDrawable> {
+            @Override
+            protected BitmapDrawable doInBackground(Void... params) {
+                BitmapDrawable image = null;
+
+                try {
+                    final String latlonMap = cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECDEGREE_COMMA);
+
+                    DisplayMetrics metrics = new DisplayMetrics();
+                    getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+                    final int width = metrics.widthPixels;
+                    final int height = (int) (110 * metrics.density);
+
+                    final String markerUrl = cgBase.urlencode_rfc3986("http://cgeo.carnero.cc/_markers/my_location_mdpi.png");
+
+                    final HtmlImage mapGetter = new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), false, 0, false);
+                    image = mapGetter.getDrawable("http://maps.google.com/maps/api/staticmap?zoom=15&size=" + width + "x" + height + "&maptype=roadmap&markers=icon%3A" + markerUrl + "%7Cshadow:false%7C" + latlonMap + "&sensor=false");
+                } catch (Exception e) {
+                    Log.w(Settings.tag, "CacheDetailActivity.PreviewMapTask", e);
+                }
+
+                return image;
+            }
+
+            @Override
+            protected void onPostExecute(BitmapDrawable image) {
+                if (image == null) {
+                    return;
+                }
+
+                final Bitmap bitmap = image.getBitmap();
+                if (bitmap == null || bitmap.getWidth() <= 10) {
+                    return;
+                }
+
+                ((ImageView) view.findViewById(R.id.map_preview)).setImageDrawable(image);
+                view.findViewById(R.id.map_preview_box).setVisibility(View.VISIBLE);
             }
         }
 
