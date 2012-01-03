@@ -43,6 +43,8 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
     private CheckBox tweetCheck = null;
     private LinearLayout tweetBox = null;
 
+    private static final int MSG_UPDATE_TYPE = 1;
+
     private Handler showProgressHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -53,28 +55,33 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
     private Handler loadDataHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if (cgBase.isEmpty(viewstates) && attempts < 2) {
-                showToast(res.getString(R.string.err_log_load_data_again));
+            if (MSG_UPDATE_TYPE == msg.what) {
+                setType((LogType) msg.obj);
+                showToast(res.getString(R.string.info_log_type_changed));
+            } else {
+                if (cgBase.isEmpty(viewstates) && attempts < 2) {
+                    showToast(res.getString(R.string.err_log_load_data_again));
 
-                loadData thread;
-                thread = new loadData(guid);
-                thread.start();
+                    loadData thread;
+                    thread = new loadData(guid);
+                    thread.start();
 
-                return;
-            } else if (cgBase.isEmpty(viewstates) && attempts >= 2) {
-                showToast(res.getString(R.string.err_log_load_data));
+                    return;
+                } else if (cgBase.isEmpty(viewstates) && attempts >= 2) {
+                    showToast(res.getString(R.string.err_log_load_data));
+                    showProgress(false);
+
+                    return;
+                }
+
+                gettingViewstate = false; // we're done, user can post log
+
+                Button buttonPost = (Button) findViewById(R.id.post);
+                buttonPost.setEnabled(true);
+                buttonPost.setOnClickListener(new postListener());
+
                 showProgress(false);
-
-                return;
             }
-
-            gettingViewstate = false; // we're done, user can post log
-
-            Button buttonPost = (Button) findViewById(R.id.post);
-            buttonPost.setEnabled(true);
-            buttonPost.setOnClickListener(new postListener());
-
-            showProgress(false);
         }
     };
 
@@ -262,7 +269,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
         logTypes.add(LogType.LOG_DISCOVERED_IT);
 
         if (LogType.LOG_UNKNOWN == typeSelected) {
-            typeSelected = LogType.LOG_FOUND_IT;
+            typeSelected = LogType.LOG_RETRIEVED_IT;
         }
         setType(typeSelected);
 
@@ -394,8 +401,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
 
                 if (!logTypes.contains(typeSelected)) {
                     typeSelected = logTypes.get(0);
-                    setType(typeSelected);
-                    showToast(res.getString(R.string.info_log_type_changed));
+                    loadDataHandler.obtainMessage(MSG_UPDATE_TYPE, typeSelected).sendToTarget();
                 }
             } catch (Exception e) {
                 Log.e(Settings.tag, "cgeotouch.loadData.run: " + e.toString());
