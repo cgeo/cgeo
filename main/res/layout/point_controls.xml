@@ -24,6 +24,7 @@
 	<EditText style="@style/edittext" android:id="@+id/bearing"
 		android:inputType="numberDecimal" android:hint="@string/waypoint_bearing" />
 	<EditText style="@style/edittext" android:id="@+id/distance"
+		android:inputType="number"
 		android:hint="@string/waypoint_distance" />
 	<RelativeLayout style="@style/separator_horizontal_layout">
 		<View style="@style/separator_horizontal" />

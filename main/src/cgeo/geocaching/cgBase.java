@@ -16,7 +16,6 @@ import cgeo.geocaching.gcvote.GCVoteRating;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
-import cgeo.geocaching.geopoint.GeopointParser;
 import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.HtmlImage;
@@ -93,7 +92,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
@@ -558,7 +556,7 @@ public class cgBase {
             }
 
             // premium cache
-            cache.setMembers(row.contains("/images/small_profile.gif"));
+            cache.setPremiumMembersOnly(row.contains("/images/small_profile.gif"));
 
             // found it
             cache.setFound(row.contains("/images/icons/icon_smile"));
@@ -577,7 +575,7 @@ public class cgBase {
             try {
                 result = BaseUtils.getMatch(row, GCConstants.PATTERN_SEARCH_FAVORITE, false, 1, null, true);
                 if (null != result) {
-                    cache.setFavouritePoints(Integer.parseInt(result));
+                    cache.setFavoritePoints(Integer.parseInt(result));
                 }
             } catch (NumberFormatException e) {
                 Log.w(Settings.tag, "cgeoBase.parseSearch: Failed to parse favourite count");
@@ -717,6 +715,12 @@ public class cgBase {
             final JSONObject extra = dataJSON.getJSONObject("cs");
             if (extra != null && extra.length() > 0) {
                 int count = extra.getInt("count");
+                // unused, meaning not clearn boolean li = extra.getBoolean("li");
+                // expected meaning pm=premium member
+                boolean pm = extra.getBoolean("pm");
+                if (Settings.isPremiumMember() && !pm) {
+                    parseResult.error = StatusCode.NOT_LOGGED_IN;
+                }
 
                 if (count > 0 && extra.has("cc")) {
                     final JSONArray cachesData = extra.getJSONArray("cc");
@@ -729,7 +733,9 @@ public class cgBase {
                             }
 
                             final cgCache cacheToAdd = new cgCache();
-                            cacheToAdd.setReliableLatLon(false);
+                            cacheToAdd.setDetailed(false);
+                            // coords could be reliable but we only can detect that for premium members
+                            cacheToAdd.setReliableLatLon(pm);
                             cacheToAdd.setGeocode(oneCache.getString("gc"));
                             cacheToAdd.setCoords(new Geopoint(oneCache.getDouble("lat"), oneCache.getDouble("lon")));
                             cacheToAdd.setName(oneCache.getString("nn"));
@@ -825,9 +831,9 @@ public class cgBase {
 
         cache.setArchived(page.contains("<li>This cache has been archived,"));
 
-        cache.setMembers(BaseUtils.matches(page, GCConstants.PATTERN_MEMBERS));
+        cache.setPremiumMembersOnly(BaseUtils.matches(page, GCConstants.PATTERN_PREMIUMMEMBERS));
 
-        cache.setFavourite(BaseUtils.matches(page, GCConstants.PATTERN_FAVORITE));
+        cache.setFavorite(BaseUtils.matches(page, GCConstants.PATTERN_FAVORITE));
 
         cache.setListId(listId);
 
@@ -904,7 +910,7 @@ public class cgBase {
             }
 
             // favourite
-            cache.setFavouritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_FAVORITECOUNT, true, "0")));
+            cache.setFavoritePoints(Integer.parseInt(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_FAVORITECOUNT, true, "0")));
 
             // cache size
             cache.setSize(CacheSize.getById(BaseUtils.getMatch(tableInside, GCConstants.PATTERN_SIZE, true, CacheSize.NOT_CHOSEN.id).toLowerCase()));
@@ -962,9 +968,6 @@ public class cgBase {
 
                 while (matcherAttributesInside.find()) {
                     if (matcherAttributesInside.groupCount() > 1 && !matcherAttributesInside.group(2).equalsIgnoreCase("blank")) {
-                        if (cache.getAttributes() == null) {
-                            cache.setAttributes(new ArrayList<String>());
-                        }
                         // by default, use the tooltip of the attribute
                         String attribute = matcherAttributesInside.group(2).toLowerCase();
 
@@ -977,7 +980,7 @@ public class cgBase {
                                 attribute = imageName.substring(start + 1, end).replace('-', '_').toLowerCase();
                             }
                         }
-                        cache.getAttributes().add(attribute);
+                        cache.addAttribute(attribute);
                     }
                 }
             }
@@ -1163,30 +1166,7 @@ public class cgBase {
             }
         }
 
-        // waypoints from personal note
-        if (StringUtils.isNotBlank(cache.getPersonalNote())) {
-            final Pattern coordPattern = Pattern.compile("[nNsS]{1}\\s*\\d"); // begin of coordinates
-            int count = 1;
-            String note = cache.getPersonalNote();
-            Matcher matcher = coordPattern.matcher(note);
-            while (matcher.find()) {
-                try {
-                    final Geopoint point = GeopointParser.parse(note);
-                    if (point != null) {
-                        final String name = cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
-                        final cgWaypoint waypoint = new cgWaypoint(name, WaypointType.WAYPOINT);
-                        waypoint.setCoords(point);
-                        cache.addWaypoint(waypoint);
-                        count++;
-                    }
-                } catch (GeopointParser.ParseException e) {
-                    // ignore
-                }
-
-                note = note.substring(matcher.start() + 1);
-                matcher = coordPattern.matcher(note);
-            }
-        }
+        cache.parseWaypointsFromNote();
 
         // logs
         cache.setLogs(loadLogsFromDetails(page, cache, false, true));
@@ -1844,18 +1824,7 @@ public class cgBase {
     }
 
     public static SearchResult searchByOffline(final Geopoint coords, final CacheType cacheType, final int list) {
-        cgeoapplication app = cgeoapplication.getInstance();
-        final SearchResult search = app.getBatchOfStoredCaches(true, coords, cacheType, list);
-        search.totalCnt = app.getAllStoredCachesCount(true, cacheType, list);
-        return search;
-    }
-
-    public static SearchResult searchByHistory(final CacheType cacheType) {
-        final cgeoapplication app = cgeoapplication.getInstance();
-        final SearchResult search = app.getHistoryOfCaches(true, cacheType);
-        search.totalCnt = app.getAllHistoricCachesCount();
-
-        return search;
+        return cgeoapplication.getInstance().getBatchOfStoredCaches(true, coords, cacheType, list);
     }
 
     /**
@@ -1954,7 +1923,7 @@ public class cgBase {
         final ParseResult parseResult = parseMapJSON(Uri.parse(uri).buildUpon().encodedQuery(params).build().toString(), page);
         if (parseResult == null || CollectionUtils.isEmpty(parseResult.cacheList)) {
             Log.e(Settings.tag, "cgeoBase.searchByViewport: No cache parsed");
-            return parseResult;
+            return null;
         }
 
         final ParseResult search = ParseResult.filterParseResults(parseResult, Settings.isExcludeDisabledCaches(), Settings.isExcludeMyCaches(), Settings.getCacheType());
@@ -3065,8 +3034,6 @@ public class cgBase {
         String usertoken = null;
 
         if (StringUtils.isNotBlank(data)) {
-
-
             final Matcher matcher = GCConstants.PATTERN_USERTOKEN.matcher(data);
             while (matcher.find()) {
                 if (matcher.groupCount() > 0) {

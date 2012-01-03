@@ -8,8 +8,10 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.geopoint.GeopointParser;
 import cgeo.geocaching.utils.CryptUtils;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -68,11 +70,11 @@ public class cgCache implements ICache {
     private String description = null;
     private boolean disabled = false;
     private boolean archived = false;
-    private boolean members = false;
+    private boolean premiumMembersOnly = false;
     private boolean found = false;
-    private boolean favourite = false;
+    private boolean favorite = false;
     private boolean own = false;
-    private int favouritePoints = 0;
+    private int favoritePoints = 0;
     private float rating = 0; // valid ratings are larger than zero
     private int votes = 0;
     private float myVote = 0; // valid ratings are larger than zero
@@ -183,8 +185,8 @@ public class cgCache implements ICache {
         if (StringUtils.isBlank(description)) {
             description = other.description;
         }
-        if (favouritePoints == 0) {
-            favouritePoints = other.getFavoritePoints();
+        if (favoritePoints == 0) {
+            favoritePoints = other.getFavoritePoints();
         }
         if (rating == 0) {
             rating = other.getRating();
@@ -196,10 +198,10 @@ public class cgCache implements ICache {
             myVote = other.getMyVote();
         }
         if (attributes == null) {
-            attributes = other.getAttributes();
+            attributes = other.attributes;
         }
         if (waypoints == null) {
-            waypoints = other.getWaypoints();
+            waypoints = other.waypoints;
         }
         else {
             cgWaypoint.mergeWayPoints(waypoints, other.getWaypoints(), waypoints == null || waypoints.isEmpty());
@@ -257,6 +259,9 @@ public class cgCache implements ICache {
      * @return true: page contains guid of cache, false: otherwise
      */
     boolean isGuidContainedInPage(final String page) {
+        if (StringUtils.isBlank(page)) {
+            return false;
+        }
         // check if the guid of the cache is anywhere in the page
         if (StringUtils.isBlank(guid)) {
             return false;
@@ -426,8 +431,12 @@ public class cgCache implements ICache {
     }
 
     @Override
-    public boolean isMembersOnly() {
-        return members;
+    public boolean isPremiumMembersOnly() {
+        return premiumMembersOnly;
+    }
+
+    public void setPremiumMembersOnly(boolean members) {
+        this.premiumMembersOnly = members;
     }
 
     @Override
@@ -538,8 +547,13 @@ public class cgCache implements ICache {
 
     @Override
     public boolean isFavorite() {
-        return favourite;
+        return favorite;
     }
+
+    public void setFavorite(boolean favourite) {
+        this.favorite = favourite;
+    }
+
 
     @Override
     public boolean isWatchlist() {
@@ -553,7 +567,10 @@ public class cgCache implements ICache {
 
     @Override
     public List<String> getAttributes() {
-        return attributes;
+        if (attributes == null) {
+            return Collections.emptyList();
+        }
+        return Collections.unmodifiableList(attributes);
     }
 
     @Override
@@ -573,7 +590,7 @@ public class cgCache implements ICache {
 
     @Override
     public int getFavoritePoints() {
-        return favouritePoints;
+        return favoritePoints;
     }
 
     @Override
@@ -715,24 +732,8 @@ public class cgCache implements ICache {
         this.shortdesc = shortdesc;
     }
 
-    public boolean isMembers() {
-        return members;
-    }
-
-    public void setMembers(boolean members) {
-        this.members = members;
-    }
-
-    public boolean isFavourite() {
-        return favourite;
-    }
-
-    public void setFavourite(boolean favourite) {
-        this.favourite = favourite;
-    }
-
-    public void setFavouritePoints(int favouriteCnt) {
-        this.favouritePoints = favouriteCnt;
+    public void setFavoritePoints(int favoriteCnt) {
+        this.favoritePoints = favoriteCnt;
     }
 
     public float getRating() {
@@ -1046,5 +1047,44 @@ public class cgCache implements ICache {
             return null;
         }
         return waypoints.get(index);
+    }
+
+    public void parseWaypointsFromNote() {
+        if (StringUtils.isBlank(getPersonalNote())) {
+            return;
+        }
+        final Pattern coordPattern = Pattern.compile("\\b[nNsS]{1}\\s*\\d"); // begin of coordinates
+        int count = 1;
+        String note = getPersonalNote();
+        Matcher matcher = coordPattern.matcher(note);
+        while (matcher.find()) {
+            try {
+                final Geopoint point = GeopointParser.parse(note.substring(matcher.start()));
+                // coords must have non zero latitude and longitude and at least one part shall have fractional degrees
+                if (point != null && point.getLatitudeE6() != 0 && point.getLongitudeE6() != 0 && ((point.getLatitudeE6() % 1000) != 0 || (point.getLongitudeE6() % 1000) != 0)) {
+                    final String name = cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
+                    final cgWaypoint waypoint = new cgWaypoint(name, WaypointType.WAYPOINT);
+                    waypoint.setCoords(point);
+                    addWaypoint(waypoint);
+                    count++;
+                }
+            } catch (GeopointParser.ParseException e) {
+                // ignore
+            }
+
+            note = note.substring(matcher.start() + 1);
+            matcher = coordPattern.matcher(note);
+        }
+    }
+
+    public void addAttribute(final String attribute) {
+        if (attributes == null) {
+            attributes = new ArrayList<String>();
+        }
+        attributes.add(attribute);
+    }
+
+    public boolean hasAttributes() {
+        return attributes != null && attributes.size() > 0;
     }
 }

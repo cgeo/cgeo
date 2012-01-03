@@ -198,13 +198,14 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
         final Viewport viewport = new Viewport(cache.getCoords(), 0.003, 0.003);
         final ParseResult search = cgBase.searchByViewport(token, viewport);
 
+        // GC2JVEH is a premium members only cache. It can't be "found" by non-premium members
         if (Settings.isPremiumMember()) {
             assertNotNull(search);
             assertTrue(search.cacheList.size() >= 1);
             assertTrue(search.getGeocodes().contains(cache.getGeocode()));
-            Log.d(Settings.tag, "cgeoApplicationTest.testSearchByViewport: Coords = " + cache.getCoords());
-            assertTrue(cache.getCoords().toString().compareTo(cgeoapplication.getInstance().getCacheByGeocode(cache.getGeocode()).getCoords().toString()) == 0);
-            assertFalse(cgeoapplication.getInstance().getCacheByGeocode(cache.getGeocode()).isReliableLatLon());
+            // coords are identical
+            assertTrue(cache.getCoords().isEqualTo(cgeoapplication.getInstance().getCacheByGeocode(cache.getGeocode()).getCoords()));
+            assertTrue(cgeoapplication.getInstance().getCacheByGeocode(cache.getGeocode()).isReliableLatLon());
         }
     }
 

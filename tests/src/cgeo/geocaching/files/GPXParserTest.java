@@ -123,7 +123,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertFalse(cache.isArchived());
         assertFalse(cache.isDisabled());
         assertFalse(cache.isEventCache());
-        assertFalse(cache.isMembersOnly());
+        assertFalse(cache.isPremiumMembersOnly());
         assertFalse(cache.isOwn());
         assertTrue(cache.isFound());
         assertEquals("Station3: Der zerbrochene Stein zählt doppelt.\nFinal: Oben neben dem Tor", cache.getHint());
@@ -136,7 +136,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals("Sehr schöne Runde und wir haben wieder etwas Neues über Hockenheim gelernt. Super Tarnung.\nTFTC, Geoteufel", log.log);
 
         // following info is not contained in pocket query gpx file
-        assertNull(cache.getAttributes());
+        assertEquals(0, cache.getAttributes().size());
     }
 
     private static long parseTime(final String time) {

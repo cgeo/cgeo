@@ -737,6 +737,30 @@
 			<RelativeLayout style="@style/separator_horizontal_layout" >
 				<View style="@style/separator_horizontal" />
 				<TextView style="@style/separator_horizontal_headline"
+						android:text="@string/init_default_navigation_tool" />
+			</RelativeLayout>
+			<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginLeft="10dip"
+					android:layout_marginRight="10dip"
+					android:layout_marginBottom="5dip"
+					android:layout_alignParentLeft="true"
+					android:layout_gravity="left"
+					android:padding="3dip"
+					android:textSize="14dip"
+					android:textColor="?text_color"
+					android:textColorLink="?text_color_link"
+					android:linksClickable="true"
+					android:text="@string/init_default_navigation_tool_description" />
+			<Spinner  android:id="@+id/default_navigation_tool"
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:prompt="@string/init_default_navigation_tool_select" />
+<!-- ** -->
+			<RelativeLayout style="@style/separator_horizontal_layout" >
+				<View style="@style/separator_horizontal" />
+				<TextView style="@style/separator_horizontal_headline"
 						android:text="@string/init_sendToCgeo" />
 			</RelativeLayout>
 			<TextView

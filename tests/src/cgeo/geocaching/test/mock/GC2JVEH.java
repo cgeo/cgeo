@@ -128,7 +128,7 @@ public class GC2JVEH extends MockedCache {
     }
 
     @Override
-    public boolean isMembersOnly() {
+    public boolean isPremiumMembersOnly() {
         return true;
     }
 

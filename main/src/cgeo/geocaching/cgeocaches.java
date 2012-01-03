@@ -82,7 +82,6 @@ public class cgeocaches extends AbstractListActivity {
 
     private static final int MAX_LIST_ITEMS = 1000;
     private static final String EXTRAS_LIST_TYPE = "type";
-    private static final int MENU_COMPASS = 1;
     private static final int MENU_REFRESH_STORED = 2;
     private static final int MENU_CACHE_DETAILS = 4;
     private static final int MENU_DROP_CACHES = 5;
@@ -123,8 +122,7 @@ public class cgeocaches extends AbstractListActivity {
     private static final int MENU_SORT_STATE = 63;
     private static final int MENU_RENAME_LIST = 64;
     private static final int MENU_DROP_CACHES_AND_LIST = 65;
-
-    private static final int CONTEXT_MENU_MOVE_TO_LIST = 1000;
+    private static final int MENU_DEFAULT_NAVIGATION = 66;
 
     private String action = null;
     private CacheListType type = null;
@@ -1146,7 +1144,7 @@ public class cgeocaches extends AbstractListActivity {
         }
 
         if (cache.getCoords() != null) {
-            menu.add(0, MENU_COMPASS, 0, res.getString(R.string.cache_menu_compass));
+            menu.add(0, MENU_DEFAULT_NAVIGATION, 0, res.getString(R.string.cache_menu_default_navigation));
             final SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
             NavigationAppFactory.addMenuItems(subMenu, this, res);
             addVisitMenu(menu, cache);
@@ -1157,11 +1155,7 @@ public class cgeocaches extends AbstractListActivity {
             final List<StoredList> cacheLists = app.getLists();
             final int listCount = cacheLists.size();
             if (listCount > 1) {
-                final SubMenu submenu = menu.addSubMenu(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
-                for (int i = 0; i < listCount; i++) {
-                    StoredList list = cacheLists.get(i);
-                    submenu.add(Menu.NONE, CONTEXT_MENU_MOVE_TO_LIST + list.id, Menu.NONE, list.getTitleAndCount());
-                }
+                menu.add(0, MENU_MOVE_TO_LIST, 0, res.getString(R.string.cache_menu_move_list));
             }
         }
     }
@@ -1215,16 +1209,9 @@ public class cgeocaches extends AbstractListActivity {
             Log.w(Settings.tag, "cgeocaches.onContextItemSelected: " + e.toString());
         }
 
-        if (id == MENU_COMPASS) {
-            final Intent navigateIntent = new Intent(this, cgeonavigate.class);
+        if (id == MENU_DEFAULT_NAVIGATION) {
             final cgCache cache = getCacheFromAdapter(adapterInfo);
-            navigateIntent.putExtra("latitude", cache.getCoords().getLatitude());
-            navigateIntent.putExtra("longitude", cache.getCoords().getLongitude());
-            navigateIntent.putExtra("geocode", cache.getGeocode().toUpperCase());
-            navigateIntent.putExtra("name", cache.getName());
-
-            startActivity(navigateIntent);
-
+            NavigationAppFactory.startDefaultNavigationApplication(geo, this, getResources(), cache, null, null, null);
             return true;
         } else if (id == MENU_LOG_VISIT) {
             return getCacheFromAdapter(adapterInfo).logVisit(this);
@@ -1244,14 +1231,25 @@ public class cgeocaches extends AbstractListActivity {
                 }
             });
             return true;
-        } else if (id >= CONTEXT_MENU_MOVE_TO_LIST && id < CONTEXT_MENU_MOVE_TO_LIST + 100) {
-            final int newListId = id - CONTEXT_MENU_MOVE_TO_LIST;
-            if (adapterInfo != null) {
-                app.moveToList(getCacheFromAdapter(adapterInfo).getGeocode(), newListId);
+        } else if (id == MENU_MOVE_TO_LIST) {
+            final String geocode = getCacheFromAdapter(adapterInfo).getGeocode();
+            final List<StoredList> cacheLists = app.getLists();
+            ArrayList<String> listNames = new ArrayList<String>();
+            for (StoredList list : cacheLists) {
+                listNames.add(list.getTitleAndCount());
             }
-            adapter.resetChecks();
 
-            refreshCurrentList();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle(res.getString(R.string.cache_menu_move_list));
+            builder.setItems(listNames.toArray(new String[listNames.size()]), new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int item) {
+                    final int newListId = cacheLists.get(item).id;
+                    app.moveToList(geocode, newListId);
+                    adapter.resetChecks();
+                    refreshCurrentList();
+                }
+            });
+            builder.create().show();
             return true;
         }
 
@@ -1745,7 +1743,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = cgBase.searchByHistory(coords != null ? Settings.getCacheType() : CacheType.ALL);
+            search = cgeoapplication.getInstance().getHistoryOfCaches(true, coords != null ? Settings.getCacheType() : CacheType.ALL);
             handler.sendMessage(new Message());
         }
     }

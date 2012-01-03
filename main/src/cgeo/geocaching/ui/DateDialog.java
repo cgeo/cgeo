@@ -1,4 +1,8 @@
-package cgeo.geocaching;
+package cgeo.geocaching.ui;
+
+import cgeo.geocaching.R;
+import cgeo.geocaching.R.id;
+import cgeo.geocaching.R.layout;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -9,17 +13,21 @@ import android.widget.DatePicker;
 
 import java.util.Calendar;
 
-public class cgeodate extends Dialog {
+public class DateDialog extends Dialog {
 
-    private cgLogForm parent = null;
-    private Calendar date = Calendar.getInstance();
+    public interface DateDialogParent {
+        abstract public void setDate(final Calendar date);
+    }
 
-    public cgeodate(Activity contextIn, cgLogForm parentIn, Calendar dateIn) {
+    private final DateDialogParent parent;
+    private final Calendar date;
+
+    public DateDialog(Activity contextIn, DateDialogParent parentIn, Calendar dateIn) {
         super(contextIn);
 
         // init
-        date = dateIn;
-        parent = parentIn;
+        this.date = dateIn;
+        this.parent = parentIn;
     }
 
     @Override
@@ -35,11 +43,11 @@ public class cgeodate extends Dialog {
 
         setContentView(R.layout.date);
 
-        DatePicker picker = (DatePicker) findViewById(R.id.picker);
-        picker.init(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DATE), new pickerListener());
+        final DatePicker picker = (DatePicker) findViewById(R.id.picker);
+        picker.init(date.get(Calendar.YEAR), date.get(Calendar.MONTH), date.get(Calendar.DATE), new DatePickerListener());
     }
 
-    public class pickerListener implements DatePicker.OnDateChangedListener {
+    private class DatePickerListener implements DatePicker.OnDateChangedListener {
 
         @Override
         public void onDateChanged(DatePicker picker, int year, int month, int day) {

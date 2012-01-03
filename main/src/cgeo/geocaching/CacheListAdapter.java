@@ -576,7 +576,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
                 infos.add(cgBase.formatShortDate(cache.getHiddenDate().getTime()));
             }
 
-            if (cache.isMembers()) {
+            if (cache.isPremiumMembersOnly()) {
                 infos.add(res.getString(R.string.cache_premium));
             }
             if (cacheListType != CacheListType.OFFLINE && cacheListType != CacheListType.HISTORY && cache.getListId() > 0) {

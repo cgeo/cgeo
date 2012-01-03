@@ -1294,15 +1294,15 @@ public class cgData {
         values.put("myvote", cache.getMyVote());
         values.put("disabled", cache.isDisabled() ? 1 : 0);
         values.put("archived", cache.isArchived() ? 1 : 0);
-        values.put("members", cache.isMembers() ? 1 : 0);
+        values.put("members", cache.isPremiumMembersOnly() ? 1 : 0);
         values.put("found", cache.isFound() ? 1 : 0);
-        values.put("favourite", cache.isFavourite() ? 1 : 0);
+        values.put("favourite", cache.isFavorite() ? 1 : 0);
         values.put("inventoryunknown", cache.getInventoryItems());
         values.put("onWatchlist", cache.isOnWatchlist() ? 1 : 0);
 
         boolean statusOk = true;
 
-        if (cache.getAttributes() != null) {
+        if (cache.hasAttributes()) {
             if (!saveAttributes(cache.getGeocode(), cache.getAttributes())) {
                 statusOk = false;
             }
@@ -1936,15 +1936,7 @@ public class cgData {
                         // and the resolution of the "if" statement could be simply
                         // cache.getAttributes() = attributes
                         if (loadFlags.contains(LoadFlag.LOADATTRIBUTES)) {
-                            final List<String> attributes = loadAttributes(cache.getGeocode());
-                            if (CollectionUtils.isNotEmpty(attributes)) {
-                                if (cache.getAttributes() == null) {
-                                    cache.setAttributes(new ArrayList<String>());
-                                } else {
-                                    cache.getAttributes().clear();
-                                }
-                                cache.getAttributes().addAll(attributes);
-                            }
+                            cache.setAttributes(loadAttributes(cache.getGeocode()));
                         }
 
                         if (loadFlags.contains(LoadFlag.LOADWAYPOINTS)) {
@@ -2119,15 +2111,15 @@ public class cgData {
         cache.setPersonalNote(cursor.getString(cacheColumnIndex[23]));
         cache.setShortdesc(cursor.getString(cacheColumnIndex[24]));
         // do not set cache.description !
-        cache.setFavouritePoints(cursor.getInt(cacheColumnIndex[25]));
+        cache.setFavoritePoints(cursor.getInt(cacheColumnIndex[25]));
         cache.setRating(cursor.getFloat(cacheColumnIndex[26]));
         cache.setVotes(cursor.getInt(cacheColumnIndex[27]));
         cache.setMyVote(cursor.getFloat(cacheColumnIndex[28]));
         cache.setDisabled(cursor.getInt(cacheColumnIndex[29]) == 1);
         cache.setArchived(cursor.getInt(cacheColumnIndex[30]) == 1);
-        cache.setMembers(cursor.getInt(cacheColumnIndex[31]) == 1);
+        cache.setPremiumMembersOnly(cursor.getInt(cacheColumnIndex[31]) == 1);
         cache.setFound(cursor.getInt(cacheColumnIndex[32]) == 1);
-        cache.setFavourite(cursor.getInt(cacheColumnIndex[33]) == 1);
+        cache.setFavorite(cursor.getInt(cacheColumnIndex[33]) == 1);
         cache.setInventoryItems(cursor.getInt(cacheColumnIndex[34]));
         cache.setOnWatchlist(cursor.getInt(cacheColumnIndex[35]) == 1);
         cache.setReliableLatLon(cursor.getInt(cacheColumnIndex[36]) > 0);
