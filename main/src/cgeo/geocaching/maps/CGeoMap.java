@@ -1384,125 +1384,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 working = false;
             }
         }
-
-        /**
-         * Returns a OverlayItem represented by an icon
-         *
-         * @param coord
-         *            The coords
-         * @param cache
-         *            Cache, this will influence the style of the circles drawn around it
-         * @param waypoint
-         *            Waypoint, this will influence the style of the circles drawn around it. Mutally exclusive with
-         *            cache
-         * @return
-         */
-        private CachesOverlayItemImpl getItem(cgCoord coord, cgCache cache, cgWaypoint waypoint) {
-            coordinates.add(coord);
-
-            if (cache != null) {
-
-                // TODO blafoo Warum getType() ?
-                CachesOverlayItemImpl item = mapProvider.getCachesOverlayItem(coord, cache.getType());
-
-                int hashcode = new HashCodeBuilder()
-                        .append(cache.isReliableLatLon())
-                        .append(cache.getType().id)
-                        .append(cache.isDisabled())
-                        .append(cache.isOwn())
-                        .append(cache.isFound())
-                        .append(cache.hasUserModifiedCoords())
-                        .append(cache.getPersonalNote())
-                        .append(cache.isPremiumMembersOnly())
-                        .toHashCode();
-
-                LayerDrawable ldFromCache = CGeoMap.overlays.get(hashcode);
-                if (ldFromCache != null) {
-                    item.setMarker(ldFromCache);
-                    return item;
-                }
-
-                ArrayList<Drawable> layers = new ArrayList<Drawable>();
-                ArrayList<int[]> insets = new ArrayList<int[]>();
-
-                final int[] INSET_RELIABLE = { 0, 0, 0, 0 }; // center, 22x22
-                final int[] INSET_TYPE = { 5, 8, 6, 10 }; // center, 22x22
-                final int[] INSET_OWN = { 21, 0, 0, 26 }; // top right, 12x12
-                final int[] INSET_FOUND = { 0, 0, 21, 28 }; // top left, 12x12
-                final int[] INSET_USERMODIFIEDCOORDS = { 21, 28, 0, 0 }; // bottom right, 12x12
-                final int[] INSET_PERSONALNOTE = { 0, 28, 21, 0 }; // bottom left, 12x12
-                final int[] INSET_PREMIUM = { 10, 0, 11, 28 }; // top center, 12x12
-
-                // background: disabled or not
-                if (cache.isDisabled()) {
-                    layers.add(getResources().getDrawable(R.drawable.marker_disabled)); // 33x40
-                } else {
-                    layers.add(getResources().getDrawable(R.drawable.marker)); // 33x40
-                }
-                // reliable or not
-                if (cache.isReliableLatLon()) {
-                    layers.add(getResources().getDrawable(R.drawable.marker_reliable)); // 33x40
-                } else {
-                    layers.add(getResources().getDrawable(R.drawable.marker_notreliable)); // 33x40
-                }
-                insets.add(INSET_RELIABLE);
-                // cache type
-                layers.add(getResources().getDrawable(cache.getType().markerId)); // 22x22
-                insets.add(INSET_TYPE);
-                // own
-                if ( cache.isOwn() ) {
-                    layers.add(getResources().getDrawable(R.drawable.marker_own)); // 12x12
-                    insets.add(INSET_OWN);
-                }
-                // found
-                if (cache.isFound()) {
-                    layers.add(getResources().getDrawable(R.drawable.marker_found)); // 12x12
-                    insets.add(INSET_FOUND);
-                }
-                // user modified coords
-                if (cache.hasUserModifiedCoords()) {
-                    layers.add(getResources().getDrawable(R.drawable.marker_usermodifiedcoords)); // 12x12
-                    insets.add(INSET_USERMODIFIEDCOORDS);
-                }
-                // personal note
-                if (cache.getPersonalNote() != null) {
-                    layers.add(getResources().getDrawable(R.drawable.marker_personalnote)); // 12x12
-                    insets.add(INSET_PERSONALNOTE);
-                }
-                // premium
-                if (cache.isPremiumMembersOnly()) {
-                    layers.add(getResources().getDrawable(R.drawable.marker_premium)); // 12x12
-                    insets.add(INSET_PREMIUM);
-                }
-
-                LayerDrawable ld = new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
-
-                int index = 1;
-                for ( int[] inset : insets) {
-                    ld.setLayerInset(index++, inset[0], inset[1], inset[2], inset[3]);
-                }
-
-                CGeoMap.overlays.put(hashcode, ld);
-
-                item.setMarker(ld);
-                return item;
-
-            } else if (waypoint != null) {
-
-                CachesOverlayItemImpl item = mapProvider.getCachesOverlayItem(coord, null);
-                Drawable[] layers = new Drawable[2];
-                layers[0] = getResources().getDrawable(R.drawable.marker); // 33x40
-                layers[1] = getResources().getDrawable(waypoint.getWaypointType().markerId); // 16x16
-
-                LayerDrawable ld = new LayerDrawable(layers);
-                ld.setLayerInset(1, 9, 12, 8, 12);
-                item.setMarker(ld);
-                return item;
-            }
-
-            return null;
-
-        }
     }
 
     /**
@@ -1620,28 +1501,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 coord.setCoords(coordsIntent);
                 coord.setName("some place");
 
-                coordinates.add(coord);
-                final CachesOverlayItemImpl item = mapProvider.getCachesOverlayItem(coord, null);
+                final cgWaypoint waypoint = new cgWaypoint("some place", waypointTypeIntent != null ? waypointTypeIntent : WaypointType.WAYPOINT);
 
-                final int icon;
-                if (waypointTypeIntent != null) {
-                    icon = waypointTypeIntent.markerId;
-                }
-                else {
-                    icon = WaypointType.WAYPOINT.markerId;
-                }
-
-                // TODO blafoo
-                Drawable pin = null;
-                //if (iconsCache.containsKey(icon)) {
-                //    pin = iconsCache.get(icon);
-                //} else {
-                    pin = getResources().getDrawable(icon);
-                    pin.setBounds(0, 0, pin.getIntrinsicWidth(), pin.getIntrinsicHeight());
-                //    iconsCache.put(icon, pin);
-                //}
-                item.setMarker(pin);
-
+                final CachesOverlayItemImpl item = getItem(coord, null, waypoint);
                 overlayCaches.updateItems(item);
                 displayHandler.sendEmptyMessage(INVALIDATE_MAP);
 
@@ -1954,6 +1816,124 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         mapIntent.putExtra(EXTRAS_GEOCODE, geocode);
         mapIntent.putExtra(EXTRAS_MAP_TITLE, geocode);
         fromActivity.startActivity(mapIntent);
+    }
+
+    /**
+     * Returns a OverlayItem represented by an icon
+     *
+     * @param coord
+     *            The coords
+     * @param cache
+     *            Cache, this will influence the style of the circles drawn around it
+     * @param waypoint
+     *            Waypoint, this will influence the style of the circles drawn around it. Mutally exclusive with
+     *            cache
+     * @return
+     */
+    private CachesOverlayItemImpl getItem(cgCoord coord, cgCache cache, cgWaypoint waypoint) {
+        coordinates.add(coord);
+
+        if (cache != null) {
+
+            CachesOverlayItemImpl item = mapProvider.getCachesOverlayItem(coord, cache.getType());
+
+            int hashcode = new HashCodeBuilder()
+                .append(cache.isReliableLatLon())
+                .append(cache.getType().id)
+                .append(cache.isDisabled())
+                .append(cache.isOwn())
+                .append(cache.isFound())
+                .append(cache.hasUserModifiedCoords())
+                .append(cache.getPersonalNote())
+                .append(cache.isPremiumMembersOnly())
+                .toHashCode();
+
+            LayerDrawable ldFromCache = CGeoMap.overlays.get(hashcode);
+            if (ldFromCache != null) {
+                item.setMarker(ldFromCache);
+                return item;
+            }
+
+            ArrayList<Drawable> layers = new ArrayList<Drawable>();
+            ArrayList<int[]> insets = new ArrayList<int[]>();
+
+            final int[] INSET_RELIABLE = { 0, 0, 0, 0 }; // center, 22x22
+            final int[] INSET_TYPE = { 5, 8, 6, 10 }; // center, 22x22
+            final int[] INSET_OWN = { 21, 0, 0, 26 }; // top right, 12x12
+            final int[] INSET_FOUND = { 0, 0, 21, 28 }; // top left, 12x12
+            final int[] INSET_USERMODIFIEDCOORDS = { 21, 28, 0, 0 }; // bottom right, 12x12
+            final int[] INSET_PERSONALNOTE = { 0, 28, 21, 0 }; // bottom left, 12x12
+            final int[] INSET_PREMIUM = { 10, 0, 11, 28 }; // top center, 12x12
+
+            // background: disabled or not
+            if (cache.isDisabled()) {
+                layers.add(getResources().getDrawable(R.drawable.marker_disabled)); // 33x40
+            } else {
+                layers.add(getResources().getDrawable(R.drawable.marker)); // 33x40
+            }
+            // reliable or not
+            if (cache.isReliableLatLon()) {
+                layers.add(getResources().getDrawable(R.drawable.marker_reliable)); // 33x40
+            } else {
+                layers.add(getResources().getDrawable(R.drawable.marker_notreliable)); // 33x40
+            }
+            insets.add(INSET_RELIABLE);
+            // cache type
+            layers.add(getResources().getDrawable(cache.getType().markerId)); // 22x22
+            insets.add(INSET_TYPE);
+            // own
+            if ( cache.isOwn() ) {
+                layers.add(getResources().getDrawable(R.drawable.marker_own)); // 12x12
+                insets.add(INSET_OWN);
+            }
+            // found
+            if (cache.isFound()) {
+                layers.add(getResources().getDrawable(R.drawable.marker_found)); // 12x12
+                insets.add(INSET_FOUND);
+            }
+            // user modified coords
+            if (cache.hasUserModifiedCoords()) {
+                layers.add(getResources().getDrawable(R.drawable.marker_usermodifiedcoords)); // 12x12
+                insets.add(INSET_USERMODIFIEDCOORDS);
+            }
+            // personal note
+            if (cache.getPersonalNote() != null) {
+                layers.add(getResources().getDrawable(R.drawable.marker_personalnote)); // 12x12
+                insets.add(INSET_PERSONALNOTE);
+            }
+            // premium
+            if (cache.isPremiumMembersOnly()) {
+                layers.add(getResources().getDrawable(R.drawable.marker_premium)); // 12x12
+                insets.add(INSET_PREMIUM);
+            }
+
+            LayerDrawable ld = new LayerDrawable(layers.toArray(new Drawable[layers.size()]));
+
+            int index = 1;
+            for ( int[] inset : insets) {
+                ld.setLayerInset(index++, inset[0], inset[1], inset[2], inset[3]);
+            }
+
+            CGeoMap.overlays.put(hashcode, ld);
+
+            item.setMarker(ld);
+            return item;
+
+        } else if (waypoint != null) {
+
+            CachesOverlayItemImpl item = mapProvider.getCachesOverlayItem(coord, null);
+            Drawable[] layers = new Drawable[2];
+            layers[0] = getResources().getDrawable(R.drawable.marker); // 33x40
+            layers[1] = getResources().getDrawable(waypoint.getWaypointType().markerId); // 16x16
+
+            LayerDrawable ld = new LayerDrawable(layers);
+            ld.setLayerInset(1, 9, 12, 8, 12);
+            item.setMarker(ld);
+            return item;
+        }
+
+        return null;
+
     }
 
 }
