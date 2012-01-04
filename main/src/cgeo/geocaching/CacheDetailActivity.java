@@ -2204,7 +2204,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 // cache logs
                 RelativeLayout rowView;
 
-                if (cache != null && cache.getLogs(allLogs) != null) {
+                if (cache != null) {
                     for (cgLog log : cache.getLogs(allLogs)) {
                         rowView = (RelativeLayout) getLayoutInflater().inflate(R.layout.cacheview_logs_item, null);
 

@@ -804,9 +804,12 @@ public class cgCache implements ICache {
     /**
      * @param allLogs
      *            true for all logs, false for friend logs only
-     * @return the logs with all entries or just the entries of the friends
+     * @return the logs with all entries or just the entries of the friends, never <code>null</code>
      */
     public List<cgLog> getLogs(boolean allLogs) {
+        if (logs == null) {
+            return Collections.emptyList();
+        }
         if (allLogs) {
             return logs;
         }
