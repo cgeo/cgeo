@@ -1,8 +1,6 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.R.id;
-import cgeo.geocaching.R.layout;
 
 import android.app.Activity;
 import android.app.Dialog;
