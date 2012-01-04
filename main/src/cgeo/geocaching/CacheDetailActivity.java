@@ -2481,7 +2481,8 @@ public class CacheDetailActivity extends AbstractActivity {
 
             view = (ListView) getLayoutInflater().inflate(R.layout.cacheview_inventory, null);
 
-            view.setAdapter(new ArrayAdapter<cgTrackable>(CacheDetailActivity.this, android.R.layout.simple_list_item_1, cache.getInventory()));
+            // TODO: Switch back to Android-resource and delete copied one
+            view.setAdapter(new ArrayAdapter<cgTrackable>(CacheDetailActivity.this, R.layout.simple_list_item_1, cache.getInventory()));
             view.setOnItemClickListener(new OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
