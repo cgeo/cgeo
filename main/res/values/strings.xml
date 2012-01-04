@@ -963,7 +963,7 @@
 
   <!-- changelog -->
   <string name="changelog">\n
-    <b>next release</b>\n
+    <b>04.01.2012</b>\n
     · new: additional page in the details view for logs from friends\n
     · new: horizontal scrollable pages for cache details\n
     · new: click on cache coordinates to change format\n
