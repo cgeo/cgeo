@@ -84,7 +84,9 @@ public class cgeo extends AbstractActivity {
                         addText.append(address.getAdminArea());
                     }
 
-                    addCoords = geo.coordsNow;
+                    if (geo != null) {
+                        addCoords = geo.coordsNow;
+                    }
 
                     TextView navLocation = (TextView) findViewById(R.id.nav_location);
                     navLocation.setText(addText.toString());
