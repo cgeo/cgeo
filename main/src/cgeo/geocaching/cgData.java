@@ -1320,7 +1320,7 @@ public class cgData {
             }
         }
 
-        if (cache.getLogs() != null) {
+        if (CollectionUtils.isNotEmpty(cache.getLogs())) {
             if (!saveLogs(cache.getGeocode(), cache.getLogs())) {
                 statusOk = false;
             }
@@ -1959,15 +1959,7 @@ public class cgData {
                         }
 
                         if (loadFlags.contains(LoadFlag.LOADLOGS)) {
-                            final List<cgLog> logs = loadLogs(cache.getGeocode());
-                            if (CollectionUtils.isNotEmpty(logs)) {
-                                if (cache.getLogs() == null) {
-                                    cache.setLogs(new ArrayList<cgLog>());
-                                } else {
-                                    cache.getLogs().clear();
-                                }
-                                cache.getLogs().addAll(logs);
-                            }
+                            cache.setLogs(loadLogs(cache.getGeocode()));
                             final Map<LogType, Integer> logCounts = loadLogCounts(cache.getGeocode());
                             if (MapUtils.isNotEmpty(logCounts)) {
                                 cache.getLogCounts().clear();

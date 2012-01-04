@@ -697,8 +697,8 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                 logNow.type = typeSelected;
                 logNow.log = log;
 
-                if (cache != null && null != cache.getLogs()) {
-                    cache.getLogs().add(0, logNow);
+                if (cache != null) {
+                    cache.prependLog(logNow);
                 }
                 app.addLog(geocode, logNow);
 

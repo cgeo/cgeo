@@ -1094,4 +1094,18 @@ public class cgCache implements ICache {
     public boolean hasAttributes() {
         return attributes != null && attributes.size() > 0;
     }
+
+    public void prependLog(final cgLog log) {
+        if (logs == null) {
+            logs = new ArrayList<cgLog>();
+        }
+        logs.add(0, log);
+    }
+
+    public void appendLog(final cgLog log) {
+        if (logs == null) {
+            logs = new ArrayList<cgLog>();
+        }
+        logs.add(log);
+    }
 }

@@ -678,10 +678,7 @@ public abstract class GPXParser extends FileParser {
                 @Override
                 public void end() {
                     if (StringUtils.isNotBlank(log.log)) {
-                        if (cache.getLogs() == null) {
-                            cache.setLogs(new ArrayList<cgLog>());
-                        }
-                        cache.getLogs().add(log);
+                        cache.appendLog(log);
                     }
                 }
             });
