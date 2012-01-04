@@ -1,45 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ListView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:fillViewport="true" >
+    android:divider="?background_color"
+    android:fastScrollEnabled="true"
+    android:focusable="false"
+    android:footerDividersEnabled="false"
+    android:headerDividersEnabled="false"
+    android:listSelector="?background_color" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:padding="4dip" >
-
-        <RelativeLayout
-            android:id="@+id/loading"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" >
-
-            <ProgressBar
-                style="@android:style/Widget.ProgressBar.Large.Inverse"
-                android:layout_width="76dip"
-                android:layout_height="76dip"
-                android:layout_centerInParent="true"
-                android:gravity="center"
-                android:indeterminate="true" />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/log_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="12dip"
-            android:textColor="?text_color"
-            android:textSize="14dip"
-            android:visibility="gone" />
-
-        <LinearLayout
-            android:id="@+id/log_list"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone" >
-        </LinearLayout>
-    </LinearLayout>
-
-</ScrollView>
+</ListView>
