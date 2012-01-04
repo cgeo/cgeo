@@ -1934,12 +1934,8 @@ public class CacheDetailActivity extends AbstractActivity {
             view = (ScrollView) getLayoutInflater().inflate(R.layout.cacheview_description, null);
 
             // cache short description
-            if (StringUtils.isNotBlank(cache.getShortdesc())) {
-                TextView descView = (TextView) view.findViewById(R.id.shortdesc);
-                descView.setVisibility(View.VISIBLE);
-                descView.setText(Html.fromHtml(cache.getShortdesc().trim(), new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), true, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
-                descView.setMovementMethod(LinkMovementMethod.getInstance());
-                fixBlackTextColor(descView, cache.getShortdesc());
+            if (StringUtils.isNotBlank(cache.getShortDescription())) {
+                new LoadDescriptionTask().execute(cache.getShortDescription(), view.findViewById(R.id.shortdesc), null);
             }
 
             // long description
@@ -2028,12 +2024,24 @@ public class CacheDetailActivity extends AbstractActivity {
             showDesc.setOnClickListener(null);
             view.findViewById(R.id.loading).setVisibility(View.VISIBLE);
 
-            new LoadLongDescriptionTask().execute((Void) null);
+            new LoadDescriptionTask().execute(cache.getDescription(), view.findViewById(R.id.longdesc), view.findViewById(R.id.loading));
         }
 
-        private class LoadLongDescriptionTask extends AsyncTask<Void, Void, Void> {
-
-            private Spanned longDesc;
+        /**
+         * Loads the description in background. <br />
+         * <br />
+         * Params:
+         * <ol>
+         * <li>description string (String)</li>
+         * <li>target description view (TextView)</li>
+         * <li>loading indicator view (View, may be null)</li>
+         * </ol>
+         */
+        private class LoadDescriptionTask extends AsyncTask<Object, Void, Void> {
+            private View loadingIndicatorView;
+            private TextView descriptionView;
+            private String descriptionString;
+            private Spanned description;
 
             private class HtmlImageCounter implements Html.ImageGetter {
 
@@ -2051,15 +2059,22 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             @Override
-            protected Void doInBackground(Void... params) {
+            protected Void doInBackground(Object... params) {
+                try {
+                    descriptionString = ((String) params[0]).trim();
+                    descriptionView = (TextView) params[1];
+                    loadingIndicatorView = (View) params[2];
+                } catch (Exception e) {
+                }
+
                 // Fast preview: parse only HTML without loading any images
                 HtmlImageCounter imageCounter = new HtmlImageCounter();
-                longDesc = Html.fromHtml(cache.getDescription().trim(), imageCounter, new UnknownTagsHandler());
-                publishProgress(params);
+                description = Html.fromHtml(descriptionString, imageCounter, new UnknownTagsHandler());
+                publishProgress();
                 if (imageCounter.getImageCount() > 0) {
                     // Complete view: parse again with loading images - if necessary ! If there are any images causing problems the user can see at least the preview
-                    longDesc = Html.fromHtml(cache.getDescription().trim(), new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), true, cache.getListId(), false), new UnknownTagsHandler());
-                    publishProgress(params);
+                    description = Html.fromHtml(descriptionString, new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), true, cache.getListId(), false), new UnknownTagsHandler());
+                    publishProgress();
                 }
                 return null;
             }
@@ -2071,20 +2086,21 @@ public class CacheDetailActivity extends AbstractActivity {
              */
             @Override
             protected void onProgressUpdate(Void... values) {
-                if (longDesc != null) {
-                    TextView descView = (TextView) view.findViewById(R.id.longdesc);
-                    if (StringUtils.isNotBlank(cache.getDescription())) {
-                        descView.setText(longDesc, TextView.BufferType.SPANNABLE);
-                        descView.setMovementMethod(LinkMovementMethod.getInstance());
-                        fixBlackTextColor(descView, cache.getDescription());
+                if (description != null) {
+                    if (StringUtils.isNotBlank(descriptionString)) {
+                        descriptionView.setText(description, TextView.BufferType.SPANNABLE);
+                        descriptionView.setMovementMethod(LinkMovementMethod.getInstance());
+                        fixBlackTextColor(descriptionView, descriptionString);
                     }
 
-                    descView.setVisibility(View.VISIBLE);
+                    descriptionView.setVisibility(View.VISIBLE);
                 } else {
                     showToast(res.getString(R.string.err_load_descr_failed));
                 }
 
-                view.findViewById(R.id.loading).setVisibility(View.GONE);
+                if (null != loadingIndicatorView) {
+                    loadingIndicatorView.setVisibility(View.GONE);
+                }
             }
         }
 
