@@ -66,6 +66,8 @@
   <string name="log_retrieved">Mitgenommen</string>
   <string name="log_placed">Abgelegt</string>
   <string name="log_grabbed">Woanders gefunden</string>
+  <string name="log_movecollection">Zur Sammlung hinzufügen</string>
+  <string name="log_moveinventory">Zum Inventar hinzufügen</string>
   <string name="log_maintained">Wartung durchgeführt</string>
   <string name="log_maintenance_needed">Benötigt Wartung</string>
   <string name="log_update">Geänderte Koordinaten</string>

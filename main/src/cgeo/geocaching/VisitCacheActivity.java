@@ -80,8 +80,6 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
             }
 
             if (cgBase.isEmpty(viewstates) && attempts < 2) {
-                showToast(res.getString(R.string.err_log_load_data_again));
-
                 final LoadDataThread thread;
                 thread = new LoadDataThread();
                 thread.start();

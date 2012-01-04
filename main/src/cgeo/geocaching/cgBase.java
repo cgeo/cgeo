@@ -1439,7 +1439,7 @@ public class cgBase {
      *            if not null, the application to use to save the trackable
      * @return the parsed trackable, or null if none could be parsed
      */
-    public static cgTrackable parseTrackable(final String page, final cgeoapplication app) {
+    public static cgTrackable parseTrackable(final String page, final cgeoapplication app, final String possibleTrackingcode) {
         if (StringUtils.isBlank(page)) {
             Log.e(Settings.tag, "cgeoBase.parseTrackable: No page given");
             return null;
@@ -1592,6 +1592,11 @@ public class cgBase {
         } catch (Exception e) {
             // failed to parse logs
             Log.w(Settings.tag, "cgeoBase.parseCache: Failed to parse cache logs");
+        }
+
+        // trackingcode
+        if (!StringUtils.equalsIgnoreCase(trackable.getGeocode(), possibleTrackingcode)) {
+            trackable.setTrackingcode(possibleTrackingcode);
         }
 
         if (app != null) {
@@ -1974,7 +1979,7 @@ public class cgBase {
             return trackable;
         }
 
-        trackable = parseTrackable(page, cgeoapplication.getInstance());
+        trackable = parseTrackable(page, cgeoapplication.getInstance(), geocode);
         if (trackable == null) {
             Log.e(Settings.tag, "cgeoBase.searchTrackable: No trackable parsed");
             return null;

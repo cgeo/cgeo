@@ -43,12 +43,12 @@ public class GeopointParser
      * X DD° MM
      * X DD° MM.MMM
      * X DD° MM SS
-     * 
+     *
      * as well as:
      * DD.DDDDDDD
-     * 
+     *
      * Both . and , are accepted, also variable count of spaces (also 0)
-     * 
+     *
      * @param text
      *            the string to parse
      * @return an Geopoint with parsed latitude and longitude
@@ -78,12 +78,12 @@ public class GeopointParser
      * X DD° MM
      * X DD° MM.MMM
      * X DD° MM SS
-     * 
+     *
      * as well as:
      * DD.DDDDDDD
-     * 
+     *
      * Both . and , are accepted, also variable count of spaces (also 0)
-     * 
+     *
      * @param latitude
      *            the latitude string to parse
      * @param longitude
@@ -123,7 +123,7 @@ public class GeopointParser
                 if (null != matcher.group(4)) {
                     seconds = Double.parseDouble("0." + matcher.group(4)) * 60.0;
                 } else if (null != matcher.group(5)) {
-                    seconds = Double.parseDouble(matcher.group(5));
+                    seconds = Double.parseDouble(matcher.group(5).replace(",", "."));
                 }
             }
 

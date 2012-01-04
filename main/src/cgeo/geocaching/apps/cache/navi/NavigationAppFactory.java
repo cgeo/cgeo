@@ -94,18 +94,23 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 
     public static void startDefaultNavigationApplication(final cgGeo geo, Activity activity, Resources res, cgCache cache,
             final SearchResult search, cgWaypoint waypoint, final Geopoint destination) {
-        int defaultNavigationTool = Settings.getDefaultNavigationTool();
-        if (defaultNavigationTool == 0) {
-            return;
-        }
+        final int defaultNavigationTool = Settings.getDefaultNavigationTool();
+
         NavigationApp app = null;
         List<NavigationApp> installedNavigationApps = getInstalledNavigationApps(activity, res);
-        for (NavigationApp navigationApp : installedNavigationApps) {
-            if (navigationApp.getId() == defaultNavigationTool) {
-                app = navigationApp;
-                break;
+
+        if (defaultNavigationTool == 0) {
+            // assume that 0 is the compass-app
+            app = installedNavigationApps.get(0);
+        } else {
+            for (NavigationApp navigationApp : installedNavigationApps) {
+                if (navigationApp.getId() == defaultNavigationTool) {
+                    app = navigationApp;
+                    break;
+                }
             }
         }
+
         if (app != null) {
             try {
                 app.invoke(geo, activity, res, cache, search, waypoint, destination);

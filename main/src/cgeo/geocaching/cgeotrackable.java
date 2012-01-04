@@ -497,6 +497,7 @@ public class cgeotrackable extends AbstractActivity {
         Intent logTouchIntent = new Intent(this, cgeotouch.class);
         logTouchIntent.putExtra("geocode", trackable.getGeocode().toUpperCase());
         logTouchIntent.putExtra("guid", trackable.getGuid());
+        logTouchIntent.putExtra("trackingcode", trackable.getTrackingcode());
         startActivity(logTouchIntent);
     }
 
