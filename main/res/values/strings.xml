@@ -963,6 +963,9 @@
 
   <!-- changelog -->
   <string name="changelog">\n
+    <b>next release</b>\n
+    · \n
+    \n\n
     <b>04.01.2012</b>\n
     · new: additional page in the details view for logs from friends\n
     · new: horizontal scrollable pages for cache details\n
