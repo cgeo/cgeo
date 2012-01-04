@@ -1449,6 +1449,8 @@ public class cgData {
             return false;
         }
 
+        Log.d(Settings.tag, "cgData.saveWaypoints(drop=" + drop + ")");
+
         boolean ok = false;
         databaseRW.beginTransaction();
         try {
@@ -2172,6 +2174,8 @@ public class cgData {
                 null,
                 null,
                 "1");
+
+        Log.d(Settings.tag, "cgData.loadWaypoint(" + id + ")");
 
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();

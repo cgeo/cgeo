@@ -7,6 +7,7 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.GeopointFormatter;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ import java.util.Map;
 
 public class GC2JVEH extends MockedCache {
 
+    final protected Geopoint userCoords;
+
     @Override
     public String getName() {
         return "Auf den Spuren des Indianer Jones Teil 1";
@@ -25,6 +28,7 @@ public class GC2JVEH extends MockedCache {
 
     public GC2JVEH() {
         super(new Geopoint(52.37225, 9.73537));
+        this.userCoords = new Geopoint("N 52° 22.535 E 009° 44.222");
     }
 
     @Override
@@ -148,4 +152,29 @@ public class GC2JVEH extends MockedCache {
         spoilers.add(mockedImage);
         return spoilers;
     }
+
+    @Override
+    public String getLatitude() {
+        if ("blafoo".equals(this.getMockedDataUser())) {
+            return userCoords.format(GeopointFormatter.Format.LAT_DECMINUTE);
+        }
+        return coords.format(GeopointFormatter.Format.LAT_DECMINUTE);
+    }
+
+    @Override
+    public String getLongitude() {
+        if ("blafoo".equals(this.getMockedDataUser())) {
+            return userCoords.format(GeopointFormatter.Format.LON_DECMINUTE);
+        }
+        return coords.format(GeopointFormatter.Format.LON_DECMINUTE);
+    }
+
+    @Override
+    public Geopoint getCoords() {
+        if ("blafoo".equals(this.getMockedDataUser())) {
+            return userCoords;
+        }
+        return coords;
+    }
+
 }
