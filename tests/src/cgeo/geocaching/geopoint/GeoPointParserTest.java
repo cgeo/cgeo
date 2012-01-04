@@ -23,7 +23,7 @@ public class GeoPointParserTest extends AndroidTestCase {
     }
 
     public static void testCoordinateMissingPart() {
-        // we are trying to parse a _point_, but have only one a latitude. Don't accept the numerical part as longitude!
+        // we are trying to parse a _point_, but have only a latitude. Don't accept the numerical part as longitude!
         Geopoint point = null;
         try {
             point = GeopointParser.parse("N 49° 56.031");
@@ -68,5 +68,15 @@ public class GeoPointParserTest extends AndroidTestCase {
             // expected
         }
         assertEquals(null, point);
+    }
+
+    public static void testComma() {
+        final Geopoint pointComma = GeopointParser.parse("N 46° 27' 55,65''\n" +
+                "E 15° 53' 41,68''");
+        final Geopoint pointDot = GeopointParser.parse("N 46° 27' 55.65''\n" +
+                "E 15° 53' 41.68''");
+        assertNotNull(pointComma);
+        assertNotNull(pointDot);
+        assertTrue(pointComma.isEqualTo(pointDot));
     }
 }

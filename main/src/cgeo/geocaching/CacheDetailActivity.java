@@ -757,6 +757,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     }
                 } while (cursor.moveToNext());
             }
+            cursor.close();
         }
 
         final CharSequence[] items = calendars.values().toArray(new CharSequence[calendars.size()]);

@@ -1050,30 +1050,34 @@ public class cgCache implements ICache {
     }
 
     public void parseWaypointsFromNote() {
-        if (StringUtils.isBlank(getPersonalNote())) {
-            return;
-        }
-        final Pattern coordPattern = Pattern.compile("\\b[nNsS]{1}\\s*\\d"); // begin of coordinates
-        int count = 1;
-        String note = getPersonalNote();
-        Matcher matcher = coordPattern.matcher(note);
-        while (matcher.find()) {
-            try {
-                final Geopoint point = GeopointParser.parse(note.substring(matcher.start()));
-                // coords must have non zero latitude and longitude and at least one part shall have fractional degrees
-                if (point != null && point.getLatitudeE6() != 0 && point.getLongitudeE6() != 0 && ((point.getLatitudeE6() % 1000) != 0 || (point.getLongitudeE6() % 1000) != 0)) {
-                    final String name = cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
-                    final cgWaypoint waypoint = new cgWaypoint(name, WaypointType.WAYPOINT);
-                    waypoint.setCoords(point);
-                    addWaypoint(waypoint);
-                    count++;
-                }
-            } catch (GeopointParser.ParseException e) {
-                // ignore
+        try {
+            if (StringUtils.isBlank(getPersonalNote())) {
+                return;
             }
+            final Pattern coordPattern = Pattern.compile("\\b[nNsS]{1}\\s*\\d"); // begin of coordinates
+            int count = 1;
+            String note = getPersonalNote();
+            Matcher matcher = coordPattern.matcher(note);
+            while (matcher.find()) {
+                try {
+                    final Geopoint point = GeopointParser.parse(note.substring(matcher.start()));
+                    // coords must have non zero latitude and longitude and at least one part shall have fractional degrees
+                    if (point != null && point.getLatitudeE6() != 0 && point.getLongitudeE6() != 0 && ((point.getLatitudeE6() % 1000) != 0 || (point.getLongitudeE6() % 1000) != 0)) {
+                        final String name = cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
+                        final cgWaypoint waypoint = new cgWaypoint(name, WaypointType.WAYPOINT);
+                        waypoint.setCoords(point);
+                        addWaypoint(waypoint);
+                        count++;
+                    }
+                } catch (GeopointParser.ParseException e) {
+                    // ignore
+                }
 
-            note = note.substring(matcher.start() + 1);
-            matcher = coordPattern.matcher(note);
+                note = note.substring(matcher.start() + 1);
+                matcher = coordPattern.matcher(note);
+            }
+        } catch (Exception e) {
+            Log.e(Settings.tag, "cgCache.parseWaypointsFromNote: " + e.toString());
         }
     }
 
