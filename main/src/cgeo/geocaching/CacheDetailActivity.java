@@ -908,7 +908,7 @@ public class CacheDetailActivity extends AbstractActivity {
             return;
         }
 
-        NavigationAppFactory.startDefaultNavigationApplication(geolocation, this, getResources(), cache, null, null, null);
+        NavigationAppFactory.startDefaultNavigationApplication(geolocation, this, getResources(), cache, search, null, null);
     }
 
     /**
