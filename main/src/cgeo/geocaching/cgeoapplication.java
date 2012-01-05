@@ -488,11 +488,12 @@ public class cgeoapplication extends Application {
      */
 
     private boolean storeWithMerge(final cgCache cache, final boolean override) {
+        boolean saveCache = true;
         if (!override) {
             final cgCache oldCache = storage.loadCache(cache.getGeocode(), LoadFlags.LOADALL);
-            cache.gatherMissingFrom(oldCache);
+            saveCache = !cache.gatherMissingFrom(oldCache);
         }
-        return storage.saveCache(cache);
+        return saveCache ? storage.saveCache(cache) : true;
     }
 
     public void dropStored(int listId) {
