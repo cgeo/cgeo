@@ -34,7 +34,8 @@ public final class NavigationAppFactory extends AbstractAppFactory {
                     new GoogleMapsApp(res),
                     new GoogleNavigationApp(res),
                     new StreetviewApp(res),
-                    new OruxMapsApp(res) };
+                    new OruxMapsApp(res),
+                    new NavigonApp() };
         }
         return apps;
     }
