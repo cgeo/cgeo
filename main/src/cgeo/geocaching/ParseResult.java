@@ -37,6 +37,8 @@ public class ParseResult extends SearchResult {
     public static ParseResult filterParseResults(final ParseResult parseResult, final boolean excludeDisabled, final boolean excludeMine, final CacheType cacheType) {
 
         ParseResult result = new ParseResult(parseResult);
+        result.cacheList.clear();
+        result.geocodes.clear();
 
         if (parseResult != null) {
             for (final cgCache cache : parseResult.cacheList) {

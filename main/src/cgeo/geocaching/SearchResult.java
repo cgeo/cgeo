@@ -11,7 +11,7 @@ import java.util.List;
 
 public class SearchResult implements Parcelable {
 
-    final private List<String> geocodes;
+    final protected List<String> geocodes;
     public StatusCode error = null;
     public String url = "";
     public String[] viewstates = null;
