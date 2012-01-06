@@ -255,9 +255,6 @@ public class cgCache implements ICache {
             return false;
         }
 
-        if (geocode.equalsIgnoreCase("GC2CJPF")) {
-            Log.d(Settings.tag, "Treffer");
-        }
         if (
         // updated
         // detailedUpdate
