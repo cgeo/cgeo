@@ -29,6 +29,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.EnumSet;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -2584,10 +2585,10 @@ public class cgData {
         return count;
     }
 
-    public List<String> loadBatchOfStoredGeocodes(final boolean detailedOnly, final Geopoint coords, final CacheType cacheType, final int list) {
+    public Set<String> loadBatchOfStoredGeocodes(final boolean detailedOnly, final Geopoint coords, final CacheType cacheType, final int list) {
         init();
 
-        List<String> geocodes = new ArrayList<String>();
+        Set<String> geocodes = new HashSet<String>();
 
         StringBuilder specifySql = new StringBuilder();
 
@@ -2636,10 +2637,10 @@ public class cgData {
         return geocodes;
     }
 
-    public List<String> loadBatchOfHistoricGeocodes(final boolean detailedOnly, final CacheType cacheType) {
+    public Set<String> loadBatchOfHistoricGeocodes(final boolean detailedOnly, final CacheType cacheType) {
         init();
 
-        List<String> geocodes = new ArrayList<String>();
+        Set<String> geocodes = new HashSet<String>();
 
         StringBuilder specifySql = new StringBuilder();
         specifySql.append("visiteddate > 0");
@@ -2686,22 +2687,22 @@ public class cgData {
         return geocodes;
     }
 
-    public List<String> getCachedInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
+    public Set<String> getCachedInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
         return getInViewport(false, centerLat, centerLon, spanLat, spanLon, cacheType);
     }
 
-    public List<String> getStoredInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
+    public Set<String> getStoredInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
         return getInViewport(true, centerLat, centerLon, spanLat, spanLon, cacheType);
     }
 
-    public List<String> getInViewport(final boolean stored, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
+    public Set<String> getInViewport(final boolean stored, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
         if (centerLat == null || centerLon == null || spanLat == null || spanLon == null) {
             return null;
         }
 
         init();
 
-        List<String> geocodes = new ArrayList<String>();
+        Set<String> geocodes = new HashSet<String>();
 
         // viewport limitation
         double latMin = (centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
