@@ -81,9 +81,7 @@ public class cgGeo {
 
         @Override
         public void onProviderDisabled(String provider) {
-            if (provider.equals(locationProvider)) {
-                geoManager.removeUpdates(this);
-            }
+            // nothing
         }
 
         @Override
