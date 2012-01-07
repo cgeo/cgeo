@@ -30,6 +30,9 @@ public class DistanceComparator extends AbstractCacheComparator {
 
     @Override
     protected int compareCaches(final cgCache cache1, final cgCache cache2) {
+        if (cache1.getCoords() == null && cache2.getCoords() == null) {
+            return 0;
+        }
         if (cache1.getCoords() == null) {
             return 1;
         }
