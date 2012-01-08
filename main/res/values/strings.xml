@@ -964,7 +964,9 @@
   <!-- changelog -->
   <string name="changelog">\n
     <b>next release</b>\n
-    · new: changed markers in the map with additional informations for stored caches\n
+    · new: changed markers in the map with additional informations for stored caches:\n
+       Premium Members only, Personal Note available, Modified coordinates, Reliable coordinates\n
+    · new: caches with modified coordinates are displayed at the modified coords and not at the original coords\n
     · \n
     \n\n
     <b>04.01.2012</b>\n

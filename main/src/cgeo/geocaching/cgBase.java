@@ -713,7 +713,7 @@ public class cgBase {
             final JSONObject extra = dataJSON.getJSONObject("cs");
             if (extra != null && extra.length() > 0) {
                 int count = extra.getInt("count");
-                // unused, meaning not clearn boolean li = extra.getBoolean("li");
+                // unused, meaning not clear boolean li = extra.getBoolean("li");
                 // expected meaning pm=premium member
                 boolean pm = extra.getBoolean("pm");
                 if (Settings.isPremiumMember() && !pm) {

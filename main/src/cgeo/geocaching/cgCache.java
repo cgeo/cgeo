@@ -55,7 +55,7 @@ public class cgCache implements ICache {
     private String ownerReal = "";
     private Date hidden = null;
     private String hint = "";
-    private CacheSize size = null;
+    private CacheSize size = CacheSize.UNKNOWN;
     private float difficulty = 0;
     private float terrain = 0;
     private Float direction = null;
@@ -167,7 +167,7 @@ public class cgCache implements ICache {
         if (StringUtils.isBlank(hint)) {
             hint = other.hint;
         }
-        if (size == null) {
+        if (size == null || CacheSize.UNKNOWN == size) {
             size = other.size;
         }
         if (difficulty == 0) {
