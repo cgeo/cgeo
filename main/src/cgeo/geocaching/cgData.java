@@ -40,6 +40,7 @@ import java.util.regex.Pattern;
 
 public class cgData {
 
+    // TODO: remove plural
     public enum StorageLocations {
         HEAP,
         CACHE,
@@ -1250,6 +1251,10 @@ public class cgData {
         if (cache == null) {
             return false;
         }
+
+        // remember this cache in the caches cache. it is highly likely that we will need it in a few moments and
+        // this way we also remove any stale instance from the caches cache
+        cgeoapplication.getInstance().putCacheInCache(cache);
 
         ContentValues values = new ContentValues();
 
