@@ -1071,7 +1071,7 @@ public class cgeocaches extends AbstractListActivity {
                 return true;
         }
 
-        return CacheListAppFactory.onMenuItemSelected(item, geo, cacheList, this, res, search);
+        return CacheListAppFactory.onMenuItemSelected(item, geo, cacheList, this, search);
     }
 
     private void showFilterMenu(final int submenu) {
@@ -1148,7 +1148,7 @@ public class cgeocaches extends AbstractListActivity {
         if (cache.getCoords() != null) {
             menu.add(0, MENU_DEFAULT_NAVIGATION, 0, res.getString(R.string.cache_menu_default_navigation));
             final SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
-            NavigationAppFactory.addMenuItems(subMenu, this, res);
+            NavigationAppFactory.addMenuItems(subMenu, this);
             addVisitMenu(menu, cache);
             menu.add(0, MENU_CACHE_DETAILS, 0, res.getString(R.string.cache_menu_details));
         }
@@ -1214,7 +1214,7 @@ public class cgeocaches extends AbstractListActivity {
         if (id == MENU_DEFAULT_NAVIGATION) {
             final cgCache cache = getCacheFromAdapter(adapterInfo);
             final SearchResult singleSearch = cgBase.searchByGeocode(cache.getGeocode(), null, 0, false, null);
-            NavigationAppFactory.startDefaultNavigationApplication(geo, this, getResources(), cache, singleSearch, null, null);
+            NavigationAppFactory.startDefaultNavigationApplication(geo, this, cache, singleSearch, null, null);
             return true;
         } else if (id == MENU_LOG_VISIT) {
             return getCacheFromAdapter(adapterInfo).logVisit(this);
@@ -1267,7 +1267,7 @@ public class cgeocaches extends AbstractListActivity {
             final SearchResult singleSearch = cgBase.searchByGeocode(cache.getGeocode(), null, 0, false, null);
 
             if (NavigationAppFactory.onMenuItemSelected(item, geo, this,
-                    res, cache, singleSearch, null, null)) {
+                    cache, singleSearch, null, null)) {
                 return true;
             }
 

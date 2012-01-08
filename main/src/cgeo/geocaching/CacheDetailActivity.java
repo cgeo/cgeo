@@ -382,7 +382,7 @@ public class CacheDetailActivity extends AbstractActivity {
                                 if (waypoint.getCoords() != null) {
                                     menu.add(CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION, index, 0, R.string.cache_menu_default_navigation);
                                     SubMenu subMenu = menu.addSubMenu(CONTEXT_MENU_WAYPOINT_NAVIGATE, index, 0, R.string.cache_menu_navigate).setIcon(android.R.drawable.ic_menu_mapmode);
-                                    NavigationAppFactory.addMenuItems(subMenu, this, res);
+                                    NavigationAppFactory.addMenuItems(subMenu, this);
                                     menu.add(CONTEXT_MENU_WAYPOINT_CACHES_AROUND, index, 0, R.string.cache_menu_around);
                                 }
                                 break;
@@ -442,7 +442,7 @@ public class CacheDetailActivity extends AbstractActivity {
  {
                 final cgWaypoint waypoint = cache.getWaypoint(index);
                 if (waypoint != null) {
-                    NavigationAppFactory.startDefaultNavigationApplication(geolocation, this, getResources(), null, null, waypoint, null);
+                    NavigationAppFactory.startDefaultNavigationApplication(geolocation, this, null, null, waypoint, null);
                 }
                 }
                 break;
@@ -461,7 +461,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 // First check the navigation menu, then the option items
                 final cgWaypoint waypoint = cache.getWaypoint(contextMenuWPIndex);
                 if (waypoint != null && NavigationAppFactory.onMenuItemSelected(item, geolocation, this,
-                        res, null, null, waypoint, null)) {
+                        null, null, waypoint, null)) {
                     return true;
                 }
                 return onOptionsItemSelected(item);
@@ -475,8 +475,8 @@ public class CacheDetailActivity extends AbstractActivity {
             menu.add(0, MENU_DEFAULT_NAVIGATION, 0, res.getString(R.string.cache_menu_default_navigation)).setIcon(android.R.drawable.ic_menu_compass); // default navigation tool
 
             final SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
-            NavigationAppFactory.addMenuItems(subMenu, this, res);
-            GeneralAppsFactory.addMenuItems(subMenu, this, res, cache);
+            NavigationAppFactory.addMenuItems(subMenu, this);
+            GeneralAppsFactory.addMenuItems(subMenu, this, cache);
 
             menu.add(1, MENU_CALENDAR, 0, res.getString(R.string.cache_menu_event)).setIcon(android.R.drawable.ic_menu_agenda); // add event to calendar
             addVisitMenu(menu, cache);
@@ -528,7 +528,7 @@ public class CacheDetailActivity extends AbstractActivity {
             }
             return false;
         }
-        if (NavigationAppFactory.onMenuItemSelected(item, geolocation, this, res, cache, search, null, null)) {
+        if (NavigationAppFactory.onMenuItemSelected(item, geolocation, this, cache, search, null, null)) {
             return true;
         }
         if (GeneralAppsFactory.onMenuItemSelected(item, this, cache)) {
@@ -908,7 +908,7 @@ public class CacheDetailActivity extends AbstractActivity {
             return;
         }
 
-        NavigationAppFactory.startDefaultNavigationApplication(geolocation, this, getResources(), cache, search, null, null);
+        NavigationAppFactory.startDefaultNavigationApplication(geolocation, this, cache, search, null, null);
     }
 
     /**

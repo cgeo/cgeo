@@ -11,7 +11,6 @@ import cgeo.geocaching.geopoint.Geopoint;
 import org.apache.commons.lang3.ArrayUtils;
 
 import android.app.Activity;
-import android.content.res.Resources;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,33 +21,32 @@ import java.util.List;
 public final class NavigationAppFactory extends AbstractAppFactory {
     private static NavigationApp[] apps = new NavigationApp[] {};
 
-    private static NavigationApp[] getNavigationApps(Resources res) {
+    private static NavigationApp[] getNavigationApps() {
         if (ArrayUtils.isEmpty(apps)) {
             apps = new NavigationApp[] {
-                    new CompassApp(res),
-                    new RadarApp(res),
-                    new InternalMap(res),
-                    new StaticMapApp(res),
-                    new LocusApp(res),
-                    new RMapsApp(res),
-                    new GoogleMapsApp(res),
-                    new GoogleNavigationApp(res),
-                    new StreetviewApp(res),
-                    new OruxMapsApp(res),
+                    new CompassApp(),
+                    new RadarApp(),
+                    new InternalMap(),
+                    new StaticMapApp(),
+                    new LocusApp(),
+                    new RMapsApp(),
+                    new GoogleMapsApp(),
+                    new GoogleNavigationApp(),
+                    new StreetviewApp(),
+                    new OruxMapsApp(),
                     new NavigonApp() };
         }
         return apps;
     }
 
-    public static void addMenuItems(final Menu menu, final Activity activity,
-            final Resources res) {
-        addMenuItems(menu, activity, res, true, false);
+    public static void addMenuItems(final Menu menu, final Activity activity) {
+        addMenuItems(menu, activity, true, false);
     }
 
     public static void addMenuItems(final Menu menu, final Activity activity,
-            final Resources res, final boolean showInternalMap, final boolean showDefaultNavigation) {
-        int defaultNavigationTool = Settings.getDefaultNavigationTool();
-        for (NavigationApp app : getInstalledNavigationApps(activity, res)) {
+            final boolean showInternalMap, final boolean showDefaultNavigation) {
+        final int defaultNavigationTool = Settings.getDefaultNavigationTool();
+        for (NavigationApp app : getInstalledNavigationApps(activity)) {
             if ((showInternalMap || !(app instanceof InternalMap)) &&
                     (showDefaultNavigation || defaultNavigationTool != app.getId())) {
                 menu.add(0, app.getId(), 0, app.getName());
@@ -56,9 +54,9 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         }
     }
 
-    public static List<NavigationApp> getInstalledNavigationApps(final Activity activity, final Resources res) {
-        List<NavigationApp> installedNavigationApps = new ArrayList<NavigationApp>();
-        for (NavigationApp app : getNavigationApps(res)) {
+    public static List<NavigationApp> getInstalledNavigationApps(final Activity activity) {
+        final List<NavigationApp> installedNavigationApps = new ArrayList<NavigationApp>();
+        for (NavigationApp app : getNavigationApps()) {
             if (app.isInstalled(activity)) {
                 installedNavigationApps.add(app);
             }
@@ -66,9 +64,9 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         return installedNavigationApps;
     }
 
-    public static int getOrdinalFromId(final Activity activity, final Resources res, final int id) {
+    public static int getOrdinalFromId(final Activity activity, final int id) {
         int ordinal = 0;
-        for (NavigationApp app : getInstalledNavigationApps(activity, res)) {
+        for (NavigationApp app : getInstalledNavigationApps(activity)) {
             if (app.getId() == id) {
                 return ordinal;
             }
@@ -78,13 +76,16 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     }
 
     public static boolean onMenuItemSelected(final MenuItem item,
-            final cgGeo geo, Activity activity, Resources res,
-            cgCache cache,
+            final cgGeo geo, Activity activity, cgCache cache,
             final SearchResult search, cgWaypoint waypoint, final Geopoint destination) {
-        NavigationApp app = (NavigationApp) getAppFromMenuItem(item, apps);
+        if (cache == null && waypoint == null && destination == null) {
+            return false;
+        }
+
+        final NavigationApp app = (NavigationApp) getAppFromMenuItem(item, apps);
         if (app != null) {
             try {
-                return app.invoke(geo, activity, res, cache,
+                return app.invoke(geo, activity, cache,
                         search, waypoint, destination);
             } catch (Exception e) {
                 Log.e(Settings.tag, "NavigationAppFactory.onMenuItemSelected: " + e.toString());
@@ -93,12 +94,12 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         return false;
     }
 
-    public static void startDefaultNavigationApplication(final cgGeo geo, Activity activity, Resources res, cgCache cache,
+    public static void startDefaultNavigationApplication(final cgGeo geo, Activity activity, cgCache cache,
             final SearchResult search, cgWaypoint waypoint, final Geopoint destination) {
         final int defaultNavigationTool = Settings.getDefaultNavigationTool();
 
         NavigationApp app = null;
-        List<NavigationApp> installedNavigationApps = getInstalledNavigationApps(activity, res);
+        final List<NavigationApp> installedNavigationApps = getInstalledNavigationApps(activity);
 
         if (defaultNavigationTool == 0) {
             // assume that 0 is the compass-app
@@ -114,7 +115,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 
         if (app != null) {
             try {
-                app.invoke(geo, activity, res, cache, search, waypoint, destination);
+                app.invoke(geo, activity, cache, search, waypoint, destination);
             } catch (Exception e) {
                 Log.e(Settings.tag, "NavigationAppFactory.startDefaultNavigationApplication: " + e.toString());
             }

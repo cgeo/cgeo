@@ -119,7 +119,7 @@ public class cgeopoint extends AbstractActivity {
     private void createHistoryView() {
         historyListView = (ListView) findViewById(R.id.historyList);
 
-        View pointControls = getLayoutInflater().inflate(
+        final View pointControls = getLayoutInflater().inflate(
                 R.layout.point_controls, null);
         historyListView.addHeaderView(pointControls, null, false);
 
@@ -133,20 +133,19 @@ public class cgeopoint extends AbstractActivity {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
                     long arg3) {
-                Object selection = arg0.getItemAtPosition(arg2);
+                final Object selection = arg0.getItemAtPosition(arg2);
                 if (selection instanceof cgDestination) {
                     navigateTo(((cgDestination) selection).getCoords());
                 }
             }
         });
 
-        final Activity thisActivity = this;
         historyListView.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v,
                     ContextMenuInfo menuInfo) {
-                SubMenu subMenu = menu.addSubMenu(Menu.NONE, CONTEXT_MENU_NAVIGATE, Menu.NONE, res.getString(R.string.cache_menu_navigate));
-                NavigationAppFactory.addMenuItems(subMenu, thisActivity, res);
+                final SubMenu subMenu = menu.addSubMenu(Menu.NONE, CONTEXT_MENU_NAVIGATE, Menu.NONE, res.getString(R.string.cache_menu_navigate));
+                NavigationAppFactory.addMenuItems(subMenu, cgeopoint.this);
 
                 menu.add(Menu.NONE, CONTEXT_MENU_EDIT_WAYPOINT, Menu.NONE, R.string.waypoint_edit);
                 menu.add(Menu.NONE, CONTEXT_MENU_DELETE_WAYPOINT, Menu.NONE, R.string.waypoint_delete);
@@ -181,7 +180,7 @@ public class cgeopoint extends AbstractActivity {
 
             default:
                 if (destination instanceof cgDestination) {
-                    return NavigationAppFactory.onMenuItemSelected(item, geo, this, res, null, null, null, ((cgDestination) destination).getCoords());
+                    return NavigationAppFactory.onMenuItemSelected(item, geo, this, null, null, null, ((cgDestination) destination).getCoords());
                 }
         }
 
@@ -305,7 +304,7 @@ public class cgeopoint extends AbstractActivity {
         menu.add(0, MENU_DEFAULT_NAVIGATION, 0, res.getString(R.string.cache_menu_default_navigation)).setIcon(android.R.drawable.ic_menu_compass); // default navigation tool
 
         SubMenu subMenu = menu.addSubMenu(1, MENU_NAVIGATE, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
-        NavigationAppFactory.addMenuItems(subMenu, this, res);
+        NavigationAppFactory.addMenuItems(subMenu, this);
 
         menu.add(0, MENU_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
 
@@ -364,7 +363,7 @@ public class cgeopoint extends AbstractActivity {
                 return true;
 
             default:
-                return NavigationAppFactory.onMenuItemSelected(item, geo, this, res, null, null, null, coords);
+                return NavigationAppFactory.onMenuItemSelected(item, geo, this, null, null, null, coords);
         }
     }
 
@@ -432,7 +431,7 @@ public class cgeopoint extends AbstractActivity {
             return;
         }
 
-        NavigationAppFactory.startDefaultNavigationApplication(geo, this, getResources(), null, null, null, geopoint);
+        NavigationAppFactory.startDefaultNavigationApplication(geo, this, null, null, null, geopoint);
     }
 
     private void cachesAround() {

@@ -219,7 +219,7 @@ public class cgeowaypoint extends AbstractActivity {
     }
 
     private void addNavigationMenuItems(Menu menu) {
-        NavigationAppFactory.addMenuItems(menu, this, res);
+        NavigationAppFactory.addMenuItems(menu, this);
     }
 
     @Override
@@ -249,7 +249,7 @@ public class cgeowaypoint extends AbstractActivity {
             return true;
         }
 
-        return NavigationAppFactory.onMenuItemSelected(item, geo, this, res, null, null, waypoint, null);
+        return NavigationAppFactory.onMenuItemSelected(item, geo, this, null, null, waypoint, null);
     }
 
     private void cachesAround() {
@@ -316,7 +316,7 @@ public class cgeowaypoint extends AbstractActivity {
             return;
         }
 
-        NavigationAppFactory.startDefaultNavigationApplication(geo, this, getResources(), null, null, waypoint, null);
+        NavigationAppFactory.startDefaultNavigationApplication(geo, this, null, null, waypoint, null);
     }
 
     private boolean navigationPossible() {

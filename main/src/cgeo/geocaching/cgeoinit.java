@@ -575,7 +575,7 @@ public class cgeoinit extends AbstractActivity {
         });
 
         // Default navigation tool settings
-        final List<NavigationApp> apps = NavigationAppFactory.getInstalledNavigationApps(this, getResources());
+        final List<NavigationApp> apps = NavigationAppFactory.getInstalledNavigationApps(this);
         final List<String> appNames = new ArrayList<String>();
         for (NavigationApp navigationApp : apps) {
             appNames.add(navigationApp.getName());
@@ -585,7 +585,7 @@ public class cgeoinit extends AbstractActivity {
         naviAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         defaultNavigationToolSelector.setAdapter(naviAdapter);
         int defaultNavigationTool = Settings.getDefaultNavigationTool();
-        defaultNavigationToolSelector.setSelection(NavigationAppFactory.getOrdinalFromId(this, getResources(), defaultNavigationTool));
+        defaultNavigationToolSelector.setSelection(NavigationAppFactory.getOrdinalFromId(this, defaultNavigationTool));
         defaultNavigationToolSelector.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {

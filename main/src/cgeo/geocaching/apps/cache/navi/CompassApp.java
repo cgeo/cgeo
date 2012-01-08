@@ -10,12 +10,11 @@ import cgeo.geocaching.geopoint.Geopoint;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.Resources;
 
 class CompassApp extends AbstractNavigationApp {
 
-    CompassApp(final Resources res) {
-        super(res.getString(R.string.compass_title), null);
+    CompassApp() {
+        super(getString(R.string.compass_title), null);
     }
 
     @Override
@@ -24,8 +23,7 @@ class CompassApp extends AbstractNavigationApp {
     }
 
     @Override
-    public boolean invoke(cgGeo geo, Activity activity, Resources res,
-            cgCache cache,
+    public boolean invoke(cgGeo geo, Activity activity, cgCache cache,
             final SearchResult search, cgWaypoint waypoint, final Geopoint coords) {
 
         if (cache != null && cache.getGeocode() != null) {
@@ -37,7 +35,7 @@ class CompassApp extends AbstractNavigationApp {
             return true;
         }
         if (coords != null) {
-            cgeonavigate.startActivity(activity, res.getString(R.string.navigation_direct_navigation), res.getString(R.string.navigation_target), coords, null);
+            cgeonavigate.startActivity(activity, getString(R.string.navigation_direct_navigation), getString(R.string.navigation_target), coords, null);
             return true;
         }
         // search is not handled here

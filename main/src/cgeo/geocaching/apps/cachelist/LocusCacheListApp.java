@@ -1,22 +1,17 @@
 package cgeo.geocaching.apps.cachelist;
 
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.apps.AbstractLocusApp;
 
 import org.apache.commons.collections.CollectionUtils;
 
 import android.app.Activity;
-import android.content.res.Resources;
 
 import java.util.List;
 
 class LocusCacheListApp extends AbstractLocusApp implements CacheListApp {
-
-    LocusCacheListApp(Resources res) {
-        super(res);
-    }
 
     /**
      * show caches in Locus
@@ -25,8 +20,7 @@ class LocusCacheListApp extends AbstractLocusApp implements CacheListApp {
      * @author koem
      */
     @Override
-    public boolean invoke(cgGeo geo, List<cgCache> cacheList, Activity activity, Resources res,
-            final SearchResult search) {
+    public boolean invoke(cgGeo geo, List<cgCache> cacheList, Activity activity, final SearchResult search) {
         if (CollectionUtils.isEmpty(cacheList)) {
             return false;
         }

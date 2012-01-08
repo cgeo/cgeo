@@ -1,10 +1,10 @@
 package cgeo.geocaching.apps.cachelist;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.apps.AbstractAppFactory;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -22,12 +22,11 @@ import java.util.List;
 public final class CacheListAppFactory extends AbstractAppFactory {
     private static CacheListApp[] apps = new CacheListApp[] {};
 
-    private static CacheListApp[] getMultiPointNavigationApps(
-            Resources res) {
+    private static CacheListApp[] getMultiPointNavigationApps() {
         if (ArrayUtils.isEmpty(apps)) {
             apps = new CacheListApp[] {
-                    new InternalCacheListMap(res),
-                    new LocusCacheListApp(res) };
+                    new InternalCacheListMap(),
+                    new LocusCacheListApp() };
         }
         return apps;
     }
@@ -41,7 +40,7 @@ public final class CacheListAppFactory extends AbstractAppFactory {
     public static MenuItem addMenuItems(Menu menu,
             Activity activity, Resources res) {
         List<CacheListApp> activeApps = new ArrayList<CacheListApp>();
-        for (CacheListApp app : getMultiPointNavigationApps(res)) {
+        for (CacheListApp app : getMultiPointNavigationApps()) {
             if (app.isInstalled(activity)) {
                 activeApps.add(app);
             }
@@ -63,12 +62,12 @@ public final class CacheListAppFactory extends AbstractAppFactory {
     }
 
     public static boolean onMenuItemSelected(final MenuItem item,
-            final cgGeo geo, final List<cgCache> caches, final Activity activity, final Resources res,
+            final cgGeo geo, final List<cgCache> caches, final Activity activity,
             final SearchResult search) {
         CacheListApp app = (CacheListApp) getAppFromMenuItem(item, apps);
         if (app != null) {
             try {
-                return app.invoke(geo, caches, activity, res, search);
+                return app.invoke(geo, caches, activity, search);
             } catch (Exception e) {
                 Log.e(Settings.tag, "CacheListAppFactory.onMenuItemSelected: " + e.toString());
             }

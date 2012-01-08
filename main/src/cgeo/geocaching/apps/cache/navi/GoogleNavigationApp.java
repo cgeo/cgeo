@@ -1,10 +1,10 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -12,14 +12,13 @@ import cgeo.geocaching.geopoint.Geopoint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.Uri;
 import android.util.Log;
 
 class GoogleNavigationApp extends AbstractNavigationApp {
 
-    GoogleNavigationApp(final Resources res) {
-        super(res.getString(R.string.cache_menu_tbt), null);
+    GoogleNavigationApp() {
+        super(getString(R.string.cache_menu_tbt), null);
     }
 
     @Override
@@ -28,8 +27,7 @@ class GoogleNavigationApp extends AbstractNavigationApp {
     }
 
     @Override
-    public boolean invoke(final cgGeo geo, final Activity activity, final Resources res,
-            final cgCache cache,
+    public boolean invoke(final cgGeo geo, final Activity activity, final cgCache cache,
             final SearchResult search, final cgWaypoint waypoint, final Geopoint coords) {
         if (activity == null) {
             return false;
@@ -47,9 +45,7 @@ class GoogleNavigationApp extends AbstractNavigationApp {
         }
 
         if (!navigationResult) {
-            if (res != null) {
-                ActivityMixin.showToast(activity, res.getString(R.string.err_navigation_no));
-            }
+            ActivityMixin.showToast(activity, getString(R.string.err_navigation_no));
             return false;
         }
 

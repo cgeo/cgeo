@@ -136,7 +136,7 @@ public class cgeopopup extends AbstractActivity {
         menu.add(0, 2, 0, res.getString(R.string.cache_menu_default_navigation)).setIcon(android.R.drawable.ic_menu_compass); // default navigation tool
 
         SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
-        NavigationAppFactory.addMenuItems(subMenu, this, res);
+        NavigationAppFactory.addMenuItems(subMenu, this);
         addVisitMenu(menu, cache);
         menu.add(0, 5, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
         menu.add(0, 7, 0, res.getString(R.string.cache_menu_browser)).setIcon(android.R.drawable.ic_menu_info_details); // browser
@@ -187,7 +187,7 @@ public class cgeopopup extends AbstractActivity {
             return true;
         }
 
-        if (NavigationAppFactory.onMenuItemSelected(item, geo, this, res, cache, null, null, null)) {
+        if (NavigationAppFactory.onMenuItemSelected(item, geo, this, cache, null, null, null)) {
             return true;
         }
 
@@ -522,7 +522,7 @@ public class cgeopopup extends AbstractActivity {
             return;
         }
 
-        NavigationAppFactory.startDefaultNavigationApplication(geo, this, getResources(), cache, null, null, null);
+        NavigationAppFactory.startDefaultNavigationApplication(geo, this, cache, null, null, null);
     }
 
     private void cachesAround() {
