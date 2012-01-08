@@ -234,7 +234,7 @@ public class cgeowaypoint extends AbstractActivity {
             menu.findItem(MENU_ID_DEFAULT_NAVIGATION).setVisible(visible);
             menu.findItem(MENU_ID_CACHES_AROUND).setVisible(visible);
 
-            boolean openGeocache = StringUtils.isEmpty(geocode) && !StringUtils.isEmpty(waypoint.getGeocode());
+            boolean openGeocache = StringUtils.isEmpty(geocode) && StringUtils.isNotEmpty(waypoint.getGeocode());
             menu.findItem(MENU_ID_OPEN_GEOCACHE).setVisible(openGeocache);
         } catch (Exception e) {
             // nothing
