@@ -528,6 +528,7 @@ public class cgeopopup extends AbstractActivity {
     private void cachesAround() {
         if (cache == null || cache.getCoords() == null) {
             showToast(res.getString(R.string.err_location_unknown));
+            return;
         }
 
         cgeocaches.startActivityCachesAround(this, cache.getCoords());
@@ -628,7 +629,6 @@ public class cgeopopup extends AbstractActivity {
     public void goCompass(View view) {
         if (cache == null || cache.getCoords() == null) {
             showToast(res.getString(R.string.cache_coordinates_no));
-
             return;
         }
 
