@@ -1,6 +1,6 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.cgData.StorageLocations;
+import cgeo.geocaching.cgData.StorageLocation;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.GCConnector;
@@ -92,7 +92,7 @@ public class cgCache implements ICache {
     private boolean statusCheckedView = false;
     private String directionImg = "";
     private String nameForSorting;
-    private final EnumSet<StorageLocations> storageLocation = EnumSet.of(StorageLocations.HEAP);
+    private final EnumSet<StorageLocation> storageLocation = EnumSet.of(StorageLocation.HEAP);
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
@@ -1058,7 +1058,7 @@ public class cgCache implements ICache {
     /**
      * @return the storageLocation
      */
-    public EnumSet<StorageLocations> getStorageLocation() {
+    public EnumSet<StorageLocation> getStorageLocation() {
         return storageLocation;
     }
 
@@ -1066,7 +1066,7 @@ public class cgCache implements ICache {
      * @param storageLocation
      *            the storageLocation to set
      */
-    public void addStorageLocation(StorageLocations sl) {
+    public void addStorageLocation(StorageLocation sl) {
         this.storageLocation.add(sl);
     }
 
@@ -1121,7 +1121,7 @@ public class cgCache implements ICache {
         if (waypoint.isUserDefined()) {
             waypoints.remove(index);
             cgeoapplication.getInstance().deleteWaypoint(waypoint.getId());
-            cgeoapplication.getInstance().removeCacheFromCache(geocode);
+            cgeoapplication.removeCacheFromCache(geocode);
             return true;
         }
         return false;

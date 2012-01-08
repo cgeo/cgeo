@@ -280,7 +280,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
     /** Remove cache from DB and cache to ensure that the cache is not loaded from the database */
     private static void deleteCacheFromDBAndLogout(String geocode) {
         cgeoapplication.getInstance().dropCaches(Arrays.asList(geocode));
-        cgeoapplication.getInstance().removeCacheFromCache(geocode);
+        cgeoapplication.removeCacheFromCache(geocode);
 
         cgBase.logout();
         // Modify login data to avoid an automatic login again

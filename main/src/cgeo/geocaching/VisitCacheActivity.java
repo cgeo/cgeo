@@ -710,9 +710,9 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                 }
 
                 if (cache != null) {
-                    app.putCacheInCache(cache);
+                    cgeoapplication.putCacheInCache(cache);
                 } else {
-                    app.removeCacheFromCache(geocode);
+                    cgeoapplication.removeCacheFromCache(geocode);
                 }
             }
 

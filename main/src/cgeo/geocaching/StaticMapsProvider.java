@@ -90,7 +90,7 @@ public class StaticMapsProvider {
 
     private static void downloadMaps(final cgCache cache, final String latlonMap, final int edge,
             final String waypoints) {
-        Thread staticMapsThread = new Thread("getting static map") {
+        final Thread staticMapsThread = new Thread("getting static map") {
             @Override
             public void run() {
                 downloadMapsInThread(cache, latlonMap, edge, waypoints);

@@ -297,7 +297,7 @@ public class cgeowaypoint extends AbstractActivity {
 
         public void onClick(View arg0) {
             if (app.deleteWaypoint(id)) {
-                app.removeCacheFromCache(geocode);
+                cgeoapplication.removeCacheFromCache(geocode);
 
                 finish();
                 return;

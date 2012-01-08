@@ -2696,7 +2696,7 @@ public class cgBase {
             }
 
             app.markStored(cache.getGeocode(), listId);
-            app.removeCacheFromCache(cache.getGeocode());
+            cgeoapplication.removeCacheFromCache(cache.getGeocode());
 
             if (handler != null) {
                 handler.sendMessage(new Message());
@@ -2709,7 +2709,7 @@ public class cgBase {
     public static void dropCache(final cgeoapplication app, final cgCache cache, final Handler handler) {
         try {
             app.markDropped(cache.getGeocode());
-            app.removeCacheFromCache(cache.getGeocode());
+            cgeoapplication.removeCacheFromCache(cache.getGeocode());
 
             handler.sendMessage(new Message());
         } catch (Exception e) {

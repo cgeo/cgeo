@@ -150,7 +150,7 @@ public class GPXImporter {
             int storedCaches = 0;
             for (cgCache cache : caches) {
                 // remove from cache because a cache might be re-imported
-                app.removeCacheFromCache(cache.getGeocode());
+                cgeoapplication.removeCacheFromCache(cache.getGeocode());
                 app.addCacheToSearch(search, cache);
 
                 if (progressHandler.isCancelled()) {

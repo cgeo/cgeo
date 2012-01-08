@@ -286,13 +286,11 @@ public class cgeoapplication extends Application {
         return trackable;
     }
 
-    @SuppressWarnings("static-method")
-    public void removeCacheFromCache(final String geocode) {
+    public static void removeCacheFromCache(final String geocode) {
         CacheCache.getInstance().removeCacheFromCache(geocode);
     }
 
-    @SuppressWarnings("static-method")
-    public void putCacheInCache(final cgCache cache) {
+    public static void putCacheInCache(final cgCache cache) {
         CacheCache.getInstance().putCacheInCache(cache);
     }
 

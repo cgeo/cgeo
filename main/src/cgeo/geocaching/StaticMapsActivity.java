@@ -18,15 +18,15 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class cgeosmaps extends AbstractActivity {
+public class StaticMapsActivity extends AbstractActivity {
 
-    private List<Bitmap> maps = new ArrayList<Bitmap>();
+    private final List<Bitmap> maps = new ArrayList<Bitmap>();
     private String geocode = null;
     private LayoutInflater inflater = null;
     private ProgressDialog waitDialog = null;
     private LinearLayout smapsView = null;
     private BitmapFactory factory = null;
-    private Handler loadMapsHandler = new Handler() {
+    private final Handler loadMapsHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
@@ -66,7 +66,7 @@ public class cgeosmaps extends AbstractActivity {
                 if (waitDialog != null) {
                     waitDialog.dismiss();
                 }
-                Log.e(Settings.tag, "cgeosmaps.loadMapsHandler: " + e.toString());
+                Log.e(Settings.tag, "StaticMapsActivity.loadMapsHandler: " + e.toString());
             }
         }
     };
@@ -80,7 +80,7 @@ public class cgeosmaps extends AbstractActivity {
         setTitle(res.getString(R.string.map_static_title));
 
         // get parameters
-        Bundle extras = getIntent().getExtras();
+        final Bundle extras = getIntent().getExtras();
 
         // try to get data from extras
         if (extras != null) {
@@ -96,7 +96,7 @@ public class cgeosmaps extends AbstractActivity {
         waitDialog = ProgressDialog.show(this, null, res.getString(R.string.map_static_loading), true);
         waitDialog.setCancelable(true);
 
-        (new loadMaps()).start();
+        (new LoadMapsThread()).start();
     }
 
     @Override
@@ -105,7 +105,7 @@ public class cgeosmaps extends AbstractActivity {
 
     }
 
-    private class loadMaps extends Thread {
+    private class LoadMapsThread extends Thread {
 
         @Override
         public void run() {
@@ -121,7 +121,7 @@ public class cgeosmaps extends AbstractActivity {
                             maps.add(image);
                         }
                     } catch (Exception e) {
-                        Log.e(Settings.tag, "cgeosmaps.loadMaps.run.1: " + e.toString());
+                        Log.e(Settings.tag, "StaticMapsActivity.LoadMapsThread.run.1: " + e.toString());
                     }
                 }
 
@@ -133,14 +133,14 @@ public class cgeosmaps extends AbstractActivity {
                                 maps.add(image);
                             }
                         } catch (Exception e) {
-                            Log.e(Settings.tag, "cgeosmaps.loadMaps.run.2: " + e.toString());
+                            Log.e(Settings.tag, "StaticMapsActivity.LoadMapsThread.run.2: " + e.toString());
                         }
                     }
                 }
 
                 loadMapsHandler.sendMessage(new Message());
             } catch (Exception e) {
-                Log.e(Settings.tag, "cgeosmaps.loadMaps.run: " + e.toString());
+                Log.e(Settings.tag, "StaticMapsActivity.LoadMapsThread.run: " + e.toString());
             }
         }
     }

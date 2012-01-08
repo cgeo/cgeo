@@ -1,6 +1,6 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.cgData.StorageLocations;
+import cgeo.geocaching.cgData.StorageLocation;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.GeneralAppsFactory;
@@ -1657,7 +1657,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             @Override
             public void run() {
-                app.removeCacheFromCache(cache.getGeocode());
+                cgeoapplication.removeCacheFromCache(cache.getGeocode());
                 search = cgBase.searchByGeocode(cache.getGeocode(), null, 0, true, handler);
 
                 handler.sendEmptyMessage(0);
@@ -1850,10 +1850,10 @@ public class CacheDetailActivity extends AbstractActivity {
                 final TextView internalsText = (TextView) view.findViewById(R.id.debug_text);
 
                 String sl = "Storage location: ";
-                if (cache.getStorageLocation().contains(StorageLocations.CACHE)) {
+                if (cache.getStorageLocation().contains(StorageLocation.CACHE)) {
                     sl += "Cache ";
                 }
-                if (cache.getStorageLocation().contains(StorageLocations.DATABASE)) {
+                if (cache.getStorageLocation().contains(StorageLocation.DATABASE)) {
                     sl += "Database (" + cache.getListId() + ")";
                 }
 

@@ -1,6 +1,6 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.cgData.StorageLocations;
+import cgeo.geocaching.cgData.StorageLocation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,7 +57,7 @@ public class CacheCache {
             cachesCache.remove(cache.getGeocode());
         }
 
-        cache.addStorageLocation(StorageLocations.CACHE);
+        cache.addStorageLocation(StorageLocation.CACHE);
         cachesCache.put(cache.getGeocode(), cache);
     }
 

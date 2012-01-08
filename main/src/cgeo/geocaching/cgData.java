@@ -40,8 +40,7 @@ import java.util.regex.Pattern;
 
 public class cgData {
 
-    // TODO: remove plural
-    public enum StorageLocations {
+    public enum StorageLocation {
         HEAP,
         CACHE,
         DATABASE,
@@ -1254,7 +1253,7 @@ public class cgData {
 
         // remember this cache in the caches cache. it is highly likely that we will need it in a few moments and
         // this way we also remove any stale instance from the caches cache
-        cgeoapplication.getInstance().putCacheInCache(cache);
+        cgeoapplication.putCacheInCache(cache);
 
         ContentValues values = new ContentValues();
 
@@ -1990,7 +1989,7 @@ public class cgData {
                         if (loadFlags.contains(LoadFlag.LOADOFFLINELOG)) {
                             cache.setLogOffline(hasLogOffline(cache.getGeocode()));
                         }
-                        cache.addStorageLocation(StorageLocations.DATABASE);
+                        cache.addStorageLocation(StorageLocation.DATABASE);
 
                         caches.add(cache);
                     } while (cursor.moveToNext());

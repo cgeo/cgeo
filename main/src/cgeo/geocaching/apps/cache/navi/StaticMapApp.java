@@ -5,7 +5,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgWaypoint;
-import cgeo.geocaching.cgeosmaps;
+import cgeo.geocaching.StaticMapsActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
 
@@ -34,7 +34,7 @@ class StaticMapApp extends AbstractNavigationApp {
         }
 
         if (cache.getGeocode() != null) {
-            final Intent intent = new Intent(activity, cgeosmaps.class);
+            final Intent intent = new Intent(activity, StaticMapsActivity.class);
             intent.putExtra("geocode", cache.getGeocode().toUpperCase());
             activity.startActivity(intent);
             return true;
