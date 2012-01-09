@@ -176,6 +176,7 @@
   <string name="err_waypoint_add_failed">c:geo konnte den Wegpunkt nicht hinzufügen.</string>
   <string name="err_waypoint_load_failed">c:geo konnte den Wegpunkt nicht laden.</string>
   <string name="err_waypoint_delete_failed">c:geo konnte den Wegpunkt nicht löschen.</string>
+  <string name="err_waypoint_open_cache_failed">c:geo konnte die Cachedetails nicht laden.</string>
   <string name="err_point_unknown_position">c:geo konnte deinen Standort nicht bestimmen.</string>
   <string name="err_point_no_position_given_title">Info benötigt</string>
   <string name="err_point_no_position_given">Mindestens Längen- und Breitengrad oder Entfernung und Richtung angeben. Auch alle Angaben sind möglich.</string>
@@ -617,6 +618,7 @@
   <string name="waypoint_done">Fertig</string>
   <string name="waypoint_duplicate">Duplizieren</string>
   <string name="waypoint_copy_of">Kopie von</string>
+  <string name="waypoint_menu_open_cache">Cache öffnen</string>
   <string name="search_history">Verlauf</string>
   <string name="search_history_empty">Keine Ziele bisher</string>
   <string name="search_remove_destination">Ziel gelöscht</string>
