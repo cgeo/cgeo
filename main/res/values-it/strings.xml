@@ -66,6 +66,8 @@
   <string name="log_retrieved">Prelevato</string>
   <string name="log_placed">Inserito</string>
   <string name="log_grabbed">Prelevato da qualche parte</string>
+  <string name="log_movecollection">Sposta in collezione</string>
+  <string name="log_moveinventory">Sposta in inventario</string>  
   <string name="log_maintained">Manutenzione effettuata</string>
   <string name="log_maintenance_needed">Necessita manutenzione</string>
   <string name="log_update">Coordinate aggiornate</string>
@@ -351,7 +353,7 @@
   <string name="init_login_popup_ok">Login ok.</string>
   <string name="init_login_popup_failed">Login fallito.</string>
   <string name="init_login_popup_failed_reason">Login fallito perché </string>
-  <string name="init_go4cache_connect">Connect a Go 4 Cache</string>
+  <string name="init_go4cache_connect">Connetti a Go 4 Cache</string>
   <string name="init_twitter_authorize">Autorizza c:geo</string>
   <string name="init_twitter_publish">Manda un tweet quando trovi una cache</string>
   <string name="init_signature">Firma</string>
@@ -412,7 +414,10 @@
   <string name="init_trackautovisit">Setta i miei oggetti trackables automaticamente su \"visit\" quando invio log</string>
   <string name="init_sigautoinsert">Inserisce la firma automaticamente</string>
   <string name="init_loaddirectionimg">Carica le immagini di direzione se necessario</string>
-
+  <string name="init_default_navigation_tool">Navigatore preferito</string>
+  <string name="init_default_navigation_tool_description">Qui puoi scegliere il tuo strumento di navigazione preferito.</string>
+  <string name="init_default_navigation_tool_select">Scegli navigatore</string>
+  
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Nome dispositivo:</string>
   <string name="init_sendToCgeo_description">\"Send to c:geo\" permette di ricevere cache direttamente dal sito geocaching.com tramite un plugin speciale per Firefox o Chrome. Prima della registrazione leggere <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. È necessario registrare il dispositivo solo se intendi usare send2cgeo. C:geo funzionerà anche senza registrazione e senza send2cgeo.</string>
@@ -497,6 +502,7 @@
   <string name="cache_dialog_watchlist_add_message">Aggiunta cache alla watchlist in corso…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Rimozione cache dalla tua watchlist…</string>
+  <string name="cache_menu_default_navigation">Navigatore preferito</string>
   <string name="cache_menu_navigate">Naviga</string>
   <string name="cache_menu_compass">Bussola</string>
   <string name="cache_menu_tbt">Itinerario guidato</string>
@@ -701,6 +707,8 @@
   <string name="use_compass">Usa Nord da bussola</string>
   <string name="destination_select">Scegli destinazione</string>
   <string name="destination_set">Attiva destinazione</string>
+  <string name="navigation_direct_navigation">Navigazione diretta</string>
+  <string name="navigation_target">Destinazione</string>
 
   <!-- license -->
   <string name="license">Licenza</string>
