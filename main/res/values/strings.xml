@@ -967,6 +967,9 @@
   <!-- changelog -->
   <string name="changelog">\n
     <b>next release</b>\n
+    · new: changed markers in the map with additional informations for stored caches:\n
+       Personal Note available, Modified coordinates, non-reliable coordinates (orange circle)\n
+    · fix: caches with modified coordinates are displayed at the modified coords and not at the original coords\n
     · \n
     \n\n
     <b>04.01.2012</b>\n

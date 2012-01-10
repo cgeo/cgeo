@@ -194,8 +194,6 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
     public static void testSearchByViewport() {
         GC2JVEH cache = new GC2JVEH();
 
-        assertEquals(StatusCode.NO_ERROR, cgBase.login());
-
         final String token = cgBase.getMapUserToken(new Handler());
         final Viewport viewport = new Viewport(cache.getCoords(), 0.003, 0.003);
         final ParseResult search = cgBase.searchByViewport(token, viewport);
