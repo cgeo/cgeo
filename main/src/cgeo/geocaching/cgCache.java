@@ -55,7 +55,7 @@ public class cgCache implements ICache {
     private String ownerReal = "";
     private Date hidden = null;
     private String hint = "";
-    private CacheSize size = null;
+    private CacheSize size = CacheSize.UNKNOWN;
     private float difficulty = 0;
     private float terrain = 0;
     private Float direction = null;
@@ -87,6 +87,7 @@ public class cgCache implements ICache {
     private List<cgTrackable> inventory = null;
     private Map<LogType, Integer> logCounts = new HashMap<LogType, Integer>();
     private boolean logOffline = false;
+    private boolean userModifiedCoords = false;
     // temporary values
     private boolean statusChecked = false;
     private boolean statusCheckedView = false;
@@ -166,7 +167,7 @@ public class cgCache implements ICache {
         if (StringUtils.isBlank(hint)) {
             hint = other.hint;
         }
-        if (size == null) {
+        if (size == null || CacheSize.UNKNOWN == size) {
             size = other.size;
         }
         if (difficulty == 0) {
@@ -239,6 +240,12 @@ public class cgCache implements ICache {
         }
         if (logCounts.size() == 0) {
             logCounts = other.logCounts;
+        }
+        if (userModifiedCoords == false) {
+            userModifiedCoords = other.userModifiedCoords;
+        }
+        if (reliableLatLon == false) {
+            reliableLatLon = other.reliableLatLon;
         }
 
         return isEqualTo(other);
@@ -1080,6 +1087,14 @@ public class cgCache implements ICache {
 
     public boolean hasWaypoints() {
         return CollectionUtils.isNotEmpty(waypoints);
+    }
+
+    public boolean hasUserModifiedCoords() {
+        return userModifiedCoords;
+    }
+
+    public void setUserModifiedCoords(boolean coordsChanged) {
+        this.userModifiedCoords = coordsChanged;
     }
 
     /**

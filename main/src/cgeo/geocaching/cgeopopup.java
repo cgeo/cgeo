@@ -232,7 +232,7 @@ public class cgeopopup extends AbstractActivity {
             detailsList.removeAllViews();
 
             // actionbar icon
-            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.getType())), null, null, null);
+            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cache.getType().markerId), null, null, null);
 
             // cache type
             itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);

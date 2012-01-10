@@ -47,7 +47,7 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
     }
 
     public void setIcon(final Resources res, final TextView nameView) {
-        nameView.setCompoundDrawablesWithIntrinsicBounds(res.getDrawable(waypointType.drawableId), null, null, null);
+        nameView.setCompoundDrawablesWithIntrinsicBounds(res.getDrawable(waypointType.markerId), null, null, null);
     }
 
     public void merge(final cgWaypoint old) {
