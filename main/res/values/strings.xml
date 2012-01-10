@@ -176,6 +176,7 @@
   <string name="err_waypoint_add_failed">Sorry, c:geo failed to add your waypoint.</string>
   <string name="err_waypoint_load_failed">Sorry, c:geo failed to load waypoint.</string>
   <string name="err_waypoint_delete_failed">Sorry, c:geo can\'t delete waypoint.</string>
+  <string name="err_waypoint_open_cache_failed">Sorry, c:geo can\'t open cache details.</string>
   <string name="err_point_unknown_position">Sorry, c:geo can\'t recognize where you are.</string>
   <string name="err_point_no_position_given_title">Info required</string>
   <string name="err_point_no_position_given">Fill at least latitude or longitude or distance and bearing. You can also fill all four fields.</string>
@@ -632,6 +633,7 @@
   <string name="waypoint_done">Done</string>
   <string name="waypoint_duplicate">Duplicate</string>
   <string name="waypoint_copy_of">Copy of</string>
+  <string name="waypoint_menu_open_cache">Open Cache</string>
   <string name="search_history">History</string>
   <string name="search_history_empty">No previous destinations</string>
   <string name="search_remove_destination">Destination removed</string>
@@ -944,6 +946,7 @@
     · Rainer S. (code)\n
     · Ray (code, loc. JA)\n
     · <a href="http://seromenho.com/">Ricardo Seromenho</a> (localization PT)\n
+    · RoadRunner- (code, loc. DE)\n
     · <a href="http://www.blueskysoftware.it/">RomNexus6</a> (localization IT)\n
     · <a href="http://www.sammyshp.de/">SammysHP</a> (code, localization DE)\n
     · <a href="http://www.rfc1149.net/sam.html">Samuel Tardieu</a> (code, localization FR)\n
