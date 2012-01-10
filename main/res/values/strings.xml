@@ -243,7 +243,7 @@
   <string name="caches_nearby_button">Nearby</string>
   <string name="advanced_search_button">Search</string>
   <string name="stored_caches_button">Stored</string>
-  <string name="any_button">Any destination</string>
+  <string name="any_button">Navigate to...</string>
   <string name="unknown_scan">Didn\'t find any geocode in the scan result.</string>
 
   <!-- caches -->
