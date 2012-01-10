@@ -194,6 +194,8 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
     public static void testSearchByViewport() {
         GC2JVEH cache = new GC2JVEH();
 
+        assertEquals(StatusCode.NO_ERROR, cgBase.login());
+
         final String token = cgBase.getMapUserToken(new Handler());
         final Viewport viewport = new Viewport(cache.getCoords(), 0.003, 0.003);
         final ParseResult search = cgBase.searchByViewport(token, viewport);
@@ -201,11 +203,18 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
         // GC2JVEH is a premium members only cache. It can't be "found" by non-premium members
         if (Settings.isPremiumMember()) {
             assertNotNull(search);
-            assertTrue(search.cacheList.size() >= 1);
-            assertTrue(search.getGeocodes().contains(cache.getGeocode()));
-            // coords are identical
-            assertTrue(cache.getCoords().isEqualTo(cgeoapplication.getInstance().getCacheByGeocode(cache.getGeocode()).getCoords()));
-            assertTrue(cgeoapplication.getInstance().getCacheByGeocode(cache.getGeocode()).isReliableLatLon());
+            // coords are identical... if the user is logged in
+            if (search.error != null) {
+                if (search.getGeocodes().contains(cache.getGeocode())) {
+                    assertFalse(cache.getCoords().isEqualTo(cgeoapplication.getInstance().getCacheByGeocode(cache.getGeocode()).getCoords()));
+                    assertFalse(cgeoapplication.getInstance().getCacheByGeocode(cache.getGeocode()).isReliableLatLon());
+                }
+            } else {
+                assertTrue(search.cacheList.size() >= 1);
+                assertTrue(search.getGeocodes().contains(cache.getGeocode()));
+                assertEquals(cache.getCoords().toString(), cgeoapplication.getInstance().getCacheByGeocode(cache.getGeocode()).getCoords().toString());
+                assertTrue(cgeoapplication.getInstance().getCacheByGeocode(cache.getGeocode()).isReliableLatLon());
+            }
         }
     }
 
@@ -232,7 +241,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
             // coords differ
             Log.d(Settings.tag, "cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
             Log.d(Settings.tag, "cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cgeoapplication.getInstance().getCacheByGeocode(cache.getGeocode()).getCoords());
-            assertFalse(cache.getCoords().isEqualTo(cgeoapplication.getInstance().getCacheByGeocode(cache.getGeocode()).getCoords()));
+            assertFalse(cache.getCoords().isEqualTo(cgeoapplication.getInstance().getCacheByGeocode(cache.getGeocode()).getCoords(), 1e-3));
             assertFalse(cgeoapplication.getInstance().getCacheByGeocode(cache.getGeocode()).isReliableLatLon());
 
             // premium cache
