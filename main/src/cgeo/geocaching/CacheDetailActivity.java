@@ -605,7 +605,7 @@ public class CacheDetailActivity extends AbstractActivity {
         } else {
             setTitle(cache.getGeocode().toUpperCase());
         }
-        ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.getType())), null, null, null);
+        ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cache.getType().markerId), null, null, null);
 
         // add available pages (remove old pages first)
         pageOrder.clear();

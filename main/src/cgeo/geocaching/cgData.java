@@ -1304,6 +1304,7 @@ public class cgData {
         values.put("favourite", cache.isFavorite() ? 1 : 0);
         values.put("inventoryunknown", cache.getInventoryItems());
         values.put("onWatchlist", cache.isOnWatchlist() ? 1 : 0);
+        values.put("coordsChanged", cache.hasUserModifiedCoords() ? 1 : 0);
 
         boolean statusOk = true;
 
@@ -2059,7 +2060,7 @@ public class cgData {
             local_cci[34] = cursor.getColumnIndex("inventoryunknown");
             local_cci[35] = cursor.getColumnIndex("onWatchlist");
             local_cci[36] = cursor.getColumnIndex("reliable_latlon");
-            // local_cci[37] = cursor.getColumnIndex("coordsChanged");
+            local_cci[37] = cursor.getColumnIndex("coordsChanged");
             local_cci[38] = cursor.getColumnIndex("latitude");
             local_cci[39] = cursor.getColumnIndex("longitude");
             cacheColumnIndex = local_cci;
@@ -2122,7 +2123,7 @@ public class cgData {
         cache.setInventoryItems(cursor.getInt(cacheColumnIndex[34]));
         cache.setOnWatchlist(cursor.getInt(cacheColumnIndex[35]) == 1);
         cache.setReliableLatLon(cursor.getInt(cacheColumnIndex[36]) > 0);
-        //cache.setCoordsChanged(cursor.getInt(cacheColumnIndex[37]) > 0);
+        cache.setUserModifiedCoords(cursor.getInt(cacheColumnIndex[37]) > 0);
         return cache;
     }
 
