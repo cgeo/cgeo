@@ -90,7 +90,12 @@ public class cgBaseTest extends AndroidTestCase {
 
     public static void testHumanDistance() {
         assertEquals("?", cgBase.getHumanDistance(null));
-        assertEquals("123 km", cgBase.getHumanDistance(123.456f));
+        if (Settings.isUseMetricUnits()) {
+            assertEquals("123 km", cgBase.getHumanDistance(123.456f));
+        }
+        else {
+            assertEquals("77 mi", cgBase.getHumanDistance(123.456f));
+        }
     }
 
     public static void testWaypointsFromNote() {
