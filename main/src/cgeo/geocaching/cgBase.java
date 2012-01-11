@@ -947,8 +947,6 @@ public class cgBase {
             }
         }
 
-        checkFields(cache);
-
         // cache personal note
         cache.setPersonalNote(BaseUtils.getMatch(page, GCConstants.PATTERN_PERSONALNOTE, true, cache.getPersonalNote()));
 
@@ -1320,48 +1318,6 @@ public class cgBase {
         }
 
         return logs;
-    }
-
-    private static void checkFields(cgCache cache) {
-        if (StringUtils.isBlank(cache.getGeocode())) {
-            Log.e(Settings.tag, "cgBase.loadLogsFromDetails: geo code not parsed correctly");
-        }
-        if (StringUtils.isBlank(cache.getName())) {
-            Log.e(Settings.tag, "name not parsed correctly");
-        }
-        if (StringUtils.isBlank(cache.getGuid())) {
-            Log.e(Settings.tag, "guid not parsed correctly");
-        }
-        if (cache.getTerrain() == 0.0) {
-            Log.e(Settings.tag, "terrain not parsed correctly");
-        }
-        if (cache.getDifficulty() == 0.0) {
-            Log.e(Settings.tag, "difficulty not parsed correctly");
-        }
-        if (StringUtils.isBlank(cache.getOwner())) {
-            Log.e(Settings.tag, "owner not parsed correctly");
-        }
-        if (StringUtils.isBlank(cache.getOwnerReal())) {
-            Log.e(Settings.tag, "owner real not parsed correctly");
-        }
-        if (cache.getHiddenDate() == null) {
-            Log.e(Settings.tag, "hidden not parsed correctly");
-        }
-        if (cache.getFavoritePoints() < 0) {
-            Log.e(Settings.tag, "favoriteCount not parsed correctly");
-        }
-        if (cache.getSize() == null) {
-            Log.e(Settings.tag, "size not parsed correctly");
-        }
-        if (cache.getType() == null || cache.getType() == CacheType.UNKNOWN) {
-            Log.e(Settings.tag, "type not parsed correctly");
-        }
-        if (cache.getCoords() == null) {
-            Log.e(Settings.tag, "coordinates not parsed correctly");
-        }
-        if (StringUtils.isBlank(cache.getLocation())) {
-            Log.e(Settings.tag, "location not parsed correctly");
-        }
     }
 
     public static Date parseGcCustomDate(final String input, final String format) throws ParseException {
