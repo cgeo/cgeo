@@ -315,6 +315,17 @@ public class cgeowaypoint extends AbstractActivity {
 
         public void onClick(View arg0) {
             if (app.deleteWaypoint(id)) {
+                if (Settings.isStoreOfflineWpMaps()) {
+                    for (int level = 1; level <= 5; level++) {
+                        try {
+                            if (id > 0) {
+                                StaticMapsProvider.getMapFile(geocode, "wp" + id + "_", level, false).delete();
+                            }
+                        } catch (Exception e) {
+                            Log.e(Settings.tag, "cgeowaypoint.deleteWaypointListener.onClick: " + e.toString());
+                        }
+                    }
+                }
                 cgeoapplication.removeCacheFromCache(geocode);
 
                 finish();

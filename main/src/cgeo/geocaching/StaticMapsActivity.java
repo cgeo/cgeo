@@ -21,6 +21,7 @@ import java.util.List;
 public class StaticMapsActivity extends AbstractActivity {
 
     private final List<Bitmap> maps = new ArrayList<Bitmap>();
+    private Integer waypoint_id = null;
     private String geocode = null;
     private LayoutInflater inflater = null;
     private ProgressDialog waitDialog = null;
@@ -85,6 +86,7 @@ public class StaticMapsActivity extends AbstractActivity {
         // try to get data from extras
         if (extras != null) {
             geocode = extras.getString("geocode");
+            waypoint_id = extras.getInt("waypoint");
         }
 
         if (geocode == null) {
@@ -114,11 +116,22 @@ public class StaticMapsActivity extends AbstractActivity {
                     factory = new BitmapFactory();
                 }
 
+                // TODO Hier testen, warum die Cache-Map nicht geladen werden kann
+                Log.d(Settings.tag, "StaticMapsActivity.run: waypoint_id = " + waypoint_id);
+                Log.d(Settings.tag, "StaticMapsActivity.run: geocode = " + geocode);
+
                 for (int level = 1; level <= 5; level++) {
                     try {
-                        final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, level, false).getPath());
-                        if (image != null) {
-                            maps.add(image);
+                        if (waypoint_id != null) {
+                            final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, "wp" + waypoint_id + "_", level, false).getPath());
+                            if (image != null) {
+                                maps.add(image);
+                            }
+                        } else {
+                            final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, "", level, false).getPath());
+                            if (image != null) {
+                                maps.add(image);
+                            }
                         }
                     } catch (Exception e) {
                         Log.e(Settings.tag, "StaticMapsActivity.LoadMapsThread.run.1: " + e.toString());
@@ -128,9 +141,16 @@ public class StaticMapsActivity extends AbstractActivity {
                 if (maps.isEmpty()) {
                     for (int level = 1; level <= 5; level++) {
                         try {
-                            final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, level, false).getPath());
-                            if (image != null) {
-                                maps.add(image);
+                            if (waypoint_id != null) {
+                                final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, "wp" + waypoint_id + "_", level, false).getPath());
+                                if (image != null) {
+                                    maps.add(image);
+                                }
+                            } else {
+                                final Bitmap image = BitmapFactory.decodeFile(StaticMapsProvider.getMapFile(geocode, "", level, false).getPath());
+                                if (image != null) {
+                                    maps.add(image);
+                                }
                             }
                         } catch (Exception e) {
                             Log.e(Settings.tag, "StaticMapsActivity.LoadMapsThread.run.2: " + e.toString());

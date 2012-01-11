@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.files.LocalStorage;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 
@@ -20,25 +21,25 @@ public class StaticMapsProvider {
      */
     private static final int MIN_MAP_IMAGE_BYTES = 6000;
 
-    public static File getMapFile(final String geocode, final int level, final boolean createDirs) {
-        return LocalStorage.getStorageFile(geocode, "map_" + level, false, createDirs);
+    public static File getMapFile(final String geocode, String prefix, final int level, final boolean createDirs) {
+        return LocalStorage.getStorageFile(geocode, "map_" + prefix + level, false, createDirs);
     }
 
-    private static void downloadMapsInThread(final cgCache cache, String latlonMap, int edge, String waypoints) {
-        downloadMap(cache, 20, "satellite", 1, latlonMap, edge, waypoints);
-        downloadMap(cache, 18, "satellite", 2, latlonMap, edge, waypoints);
-        downloadMap(cache, 16, "roadmap", 3, latlonMap, edge, waypoints);
-        downloadMap(cache, 14, "roadmap", 4, latlonMap, edge, waypoints);
-        downloadMap(cache, 11, "roadmap", 5, latlonMap, edge, waypoints);
+    private static void downloadMapsInThread(final cgCache cache, String prefix, String latlonMap, int edge, String waypoints) {
+        downloadMap(cache, 20, "satellite", prefix, 1, latlonMap, edge, waypoints);
+        downloadMap(cache, 18, "satellite", prefix, 2, latlonMap, edge, waypoints);
+        downloadMap(cache, 16, "roadmap", prefix, 3, latlonMap, edge, waypoints);
+        downloadMap(cache, 14, "roadmap", prefix, 4, latlonMap, edge, waypoints);
+        downloadMap(cache, 11, "roadmap", prefix, 5, latlonMap, edge, waypoints);
     }
 
-    private static void downloadMap(cgCache cache, int zoom, String mapType, int level, String latlonMap, int edge, String waypoints) {
+    private static void downloadMap(cgCache cache, int zoom, String mapType, String prefix, int level, String latlonMap, int edge, String waypoints) {
         final String mapUrl = "http://maps.google.com/maps/api/staticmap?center=" + latlonMap;
         final String markerUrl = getMarkerUrl(cache);
 
         final String url = mapUrl + "&zoom=" + zoom + "&size=" + edge + "x" + edge + "&maptype=" + mapType + "&markers=icon%3A" + markerUrl + "%7C" + latlonMap + waypoints + "&sensor=false";
 
-        final File file = getMapFile(cache.getGeocode(), level, true);
+        final File file = getMapFile(cache.getGeocode(), prefix, level, true);
         final HttpResponse httpResponse = cgBase.request(url, null, false);
 
         if (httpResponse != null) {
@@ -85,15 +86,29 @@ public class StaticMapsProvider {
         }
 
         // download map images in separate background thread for higher performance
-        downloadMaps(cache, latlonMap, edge, waypoints.toString());
+        downloadMaps(cache, "", latlonMap, edge, waypoints.toString());
+
+        // download static map for current waypoints
+        if (!Settings.isStoreOfflineWpMaps()) {
+            return;
+        }
+        if (CollectionUtils.isNotEmpty(cache.getWaypoints())) {
+            for (cgWaypoint waypoint : cache.getWaypoints()) {
+                if (waypoint.getCoords() == null) {
+                    continue;
+                }
+                String wpLatlonMap = waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
+                downloadMaps(cache, "wp" + waypoint.getId() + "_", wpLatlonMap, edge, "");
+            }
+        }
     }
 
-    private static void downloadMaps(final cgCache cache, final String latlonMap, final int edge,
+    private static void downloadMaps(final cgCache cache, final String prefix, final String latlonMap, final int edge,
             final String waypoints) {
-        final Thread staticMapsThread = new Thread("getting static map") {
+        Thread staticMapsThread = new Thread("getting static map") {
             @Override
             public void run() {
-                downloadMapsInThread(cache, latlonMap, edge, waypoints);
+                downloadMapsInThread(cache, prefix, latlonMap, edge, waypoints);
             }
         };
         staticMapsThread.setPriority(Thread.MIN_PRIORITY);

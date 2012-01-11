@@ -381,7 +381,8 @@
   <string name="init_showwaypoints">Show Waypoints on Live map</string>
   <string name="init_showwaypoint_description">If less than the given amount of caches are displayed on the map, their waypoints are shown additionally.</string>
   <string name="init_disabled">Exclude disabled caches</string>
-  <string name="init_offline">Store static maps for offline use</string>
+  <string name="init_offline">Store cache static map for offline use</string>
+  <string name="init_offline_wp">Store waypoint static maps for offline use</string>
   <string name="init_save_log_img">Save Images from Logs</string>
   <string name="init_units">Use Imperial Units instead of Metric Units</string>
   <string name="init_nav">Use Google Navigation</string>
