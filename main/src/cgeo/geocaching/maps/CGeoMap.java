@@ -146,7 +146,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private PositionOverlay overlayPosition = null;
     // data for overlays
     private static final int[][] INSET_RELIABLE = { { 0, 0, 0, 0 }, { 0, 0, 0, 0 } }; // center, 33x40 / 45x51
-    private static final int[][] INSET_TYPE = { { 5, 8, 6, 10 }, { 4, 7, 5, 8 } }; // center, 22x22 / 36x36
+    private static final int[][] INSET_TYPE = { { 5, 8, 6, 10 }, { 4, 4, 5, 11 } }; // center, 22x22 / 36x36
     private static final int[][] INSET_OWN = { { 21, 0, 0, 26 }, { 25, 0, 0, 35 } }; // top right, 12x12 / 16x16
     private static final int[][] INSET_FOUND = { { 0, 0, 21, 28 }, { 0, 0, 25, 35 } }; // top left, 12x12 / 16x16
     private static final int[][] INSET_USERMODIFIEDCOORDS = { { 21, 28, 0, 0 }, { 19, 25, 0, 0 } }; // bottom right, 12x12 / 26x26
