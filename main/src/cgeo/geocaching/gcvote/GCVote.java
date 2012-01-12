@@ -12,6 +12,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -26,12 +27,21 @@ public final class GCVote {
     private static final Pattern patternVote = Pattern.compile("voteUser='([0-9.]+)'", Pattern.CASE_INSENSITIVE);
     private static final Pattern patternVoteElement = Pattern.compile("<vote ([^>]+)>", Pattern.CASE_INSENSITIVE);
 
-    private static Map<String, GCVoteRating> ratingsCache = new HashMap<String, GCVoteRating>(); // key = guid
+    private static class RatingsCache extends LinkedHashMap<String, GCVoteRating> {
+        private static final int MAX_CACHED_RATINGS = 1000;
+
+        @Override
+        protected boolean removeEldestEntry(java.util.Map.Entry<String, GCVoteRating> eldest) {
+            return size() > MAX_CACHED_RATINGS;
+        }
+    }
+
+    private static Map<String, GCVoteRating> ratingsCache = new RatingsCache();
 
     /**
      * Get user rating for a given guid or geocode. For a guid first the ratings cache is checked
      * before a request to gcvote.com is made.
-     * 
+     *
      * @param guid
      * @param geocode
      * @return
