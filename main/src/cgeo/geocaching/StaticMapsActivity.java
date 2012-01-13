@@ -86,7 +86,9 @@ public class StaticMapsActivity extends AbstractActivity {
         // try to get data from extras
         if (extras != null) {
             geocode = extras.getString("geocode");
-            waypoint_id = extras.getInt("waypoint");
+            if (extras.containsKey("waypoint")) {
+                waypoint_id = extras.getInt("waypoint");
+            }
         }
 
         if (geocode == null) {
@@ -115,10 +117,6 @@ public class StaticMapsActivity extends AbstractActivity {
                 if (factory == null) {
                     factory = new BitmapFactory();
                 }
-
-                // TODO Hier testen, warum die Cache-Map nicht geladen werden kann
-                Log.d(Settings.tag, "StaticMapsActivity.run: waypoint_id = " + waypoint_id);
-                Log.d(Settings.tag, "StaticMapsActivity.run: geocode = " + geocode);
 
                 for (int level = 1; level <= 5; level++) {
                     try {
