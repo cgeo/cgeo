@@ -118,6 +118,18 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 
     public static void startDefaultNavigationApplication(final cgGeo geo, Activity activity, cgCache cache,
             final SearchResult search, cgWaypoint waypoint, final Geopoint destination) {
+        NavigationApp app = getDefaultNavigationApplication(activity);
+
+        if (app != null) {
+            try {
+                app.invoke(geo, activity, cache, search, waypoint, destination);
+            } catch (Exception e) {
+                Log.e(Settings.tag, "NavigationAppFactory.startDefaultNavigationApplication: " + e.toString());
+            }
+        }
+    }
+
+    public static NavigationApp getDefaultNavigationApplication(Activity activity) {
         final int defaultNavigationTool = Settings.getDefaultNavigationTool();
 
         NavigationApp app = null;
@@ -134,14 +146,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
                 }
             }
         }
-
-        if (app != null) {
-            try {
-                app.invoke(geo, activity, cache, search, waypoint, destination);
-            } catch (Exception e) {
-                Log.e(Settings.tag, "NavigationAppFactory.startDefaultNavigationApplication: " + e.toString());
-            }
-        }
+        return app;
     }
 
 }

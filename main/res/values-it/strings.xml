@@ -502,7 +502,6 @@
   <string name="cache_dialog_watchlist_add_message">Aggiunta cache alla watchlist in corso…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Rimozione cache dalla tua watchlist…</string>
-  <string name="cache_menu_default_navigation">Navigatore preferito</string>
   <string name="cache_menu_navigate">Naviga</string>
   <string name="cache_menu_compass">Bussola</string>
   <string name="cache_menu_tbt">Itinerario guidato</string>
