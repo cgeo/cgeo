@@ -2634,6 +2634,9 @@ public class cgeocaches extends AbstractListActivity {
             else if (type == CacheListType.HISTORY) {
                 adapter.setComparator(new VisitComparator());
             }
+            else if (adapter.getCacheComparator() != null && adapter.getCacheComparator() instanceof DateComparator) {
+                adapter.setComparator(null);
+            }
         }
     }
 
