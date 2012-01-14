@@ -118,6 +118,10 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         forceSort(coords);
     }
 
+    public CacheComparator getCacheComparator() {
+        return cacheComparator;
+    }
+
     /**
      * Called when a new page of caches was loaded.
      */

@@ -923,6 +923,17 @@ public class CacheDetailActivity extends AbstractActivity {
     }
 
     /**
+     * referenced from XML view
+     */
+    public void showNavigationMenu(@SuppressWarnings("unused") View view) {
+        showNavigationMenu();
+    }
+
+    private void showNavigationMenu() {
+        NavigationAppFactory.showNavigationMenu(geolocation, this, cache, search);
+    }
+
+    /**
      * Opens a context menu to do actions on an username
      */
     private class UserActionsClickListener implements View.OnClickListener {
