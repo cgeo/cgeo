@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.cgData.StorageLocation;
+import cgeo.geocaching.utils.LeastRecentlyUsedCache;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +15,12 @@ import java.util.List;
 public class CacheCache {
 
     private static final int MAX_CACHED_CACHES = 1000;
-    final private Cache<String, cgCache> cachesCache;
+    final private LeastRecentlyUsedCache<String, cgCache> cachesCache;
 
     private static CacheCache instance = null;
 
     private CacheCache() {
-        cachesCache = new Cache<String, cgCache>(MAX_CACHED_CACHES);
+        cachesCache = new LeastRecentlyUsedCache<String, cgCache>(MAX_CACHED_CACHES);
     }
 
     public static CacheCache getInstance() {

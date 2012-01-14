@@ -1,4 +1,4 @@
-package cgeo.geocaching;
+package cgeo.geocaching.utils;
 
 import java.util.LinkedHashMap;
 
@@ -7,12 +7,12 @@ import java.util.LinkedHashMap;
  * 
  * @author blafoo
  */
-public class Cache<K, V> extends LinkedHashMap<K, V> {
+public class LeastRecentlyUsedCache<K, V> extends LinkedHashMap<K, V> {
 
     private static final long serialVersionUID = -5077882607489806620L;
     private final int maxEntries;
 
-    public Cache(int maxEntries) {
+    public LeastRecentlyUsedCache(int maxEntries) {
         this.maxEntries = maxEntries;
     }
 
