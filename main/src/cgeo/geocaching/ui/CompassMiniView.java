@@ -1,5 +1,8 @@
-package cgeo.geocaching;
+package cgeo.geocaching.ui;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.R.drawable;
+import cgeo.geocaching.R.styleable;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import android.content.Context;
@@ -12,7 +15,7 @@ import android.graphics.PaintFlagsDrawFilter;
 import android.util.AttributeSet;
 import android.view.View;
 
-public class cgCompassMini extends View {
+public class CompassMiniView extends View {
     private int arrowSkin = R.drawable.compass_arrow_mini_white;
     private Context context = null;
     private Geopoint cacheCoords = null;
@@ -22,12 +25,12 @@ public class cgCompassMini extends View {
     private PaintFlagsDrawFilter setfil = null;
     private PaintFlagsDrawFilter remfil = null;
 
-    public cgCompassMini(Context contextIn) {
+    public CompassMiniView(Context contextIn) {
         super(contextIn);
         context = contextIn;
     }
 
-    public cgCompassMini(Context contextIn, AttributeSet attrs) {
+    public CompassMiniView(Context contextIn, AttributeSet attrs) {
         super(contextIn, attrs);
         context = contextIn;
 

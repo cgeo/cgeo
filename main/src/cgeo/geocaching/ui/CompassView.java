@@ -1,4 +1,7 @@
-package cgeo.geocaching;
+package cgeo.geocaching.ui;
+
+import cgeo.geocaching.R;
+import cgeo.geocaching.Settings;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -12,7 +15,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
-public class cgCompass extends View {
+public class CompassView extends View {
 
     private changeThread watchdog = null;
     private volatile boolean wantStop = false;
@@ -55,17 +58,17 @@ public class cgCompass extends View {
             try {
                 invalidate();
             } catch (Exception e) {
-                Log.e(Settings.tag, "cgCompass.changeHandler: " + e.toString());
+                Log.e(Settings.tag, "CompassView.changeHandler: " + e.toString());
             }
         }
     };
 
-    public cgCompass(Context contextIn) {
+    public CompassView(Context contextIn) {
         super(contextIn);
         context = contextIn;
     }
 
-    public cgCompass(Context contextIn, AttributeSet attrs) {
+    public CompassView(Context contextIn, AttributeSet attrs) {
         super(contextIn, attrs);
         context = contextIn;
     }
@@ -117,7 +120,7 @@ public class cgCompass extends View {
         }
     }
 
-    protected synchronized void updateNorth(double northHeadingIn, double cacheHeadingIn) {
+    public synchronized void updateNorth(double northHeadingIn, double cacheHeadingIn) {
         if (initialDisplay) {
             // We will force the compass to move brutally if this is the first
             // update since it is visible.
@@ -176,7 +179,7 @@ public class cgCompass extends View {
                     // nothing
                 }
 
-                synchronized (cgCompass.this) {
+                synchronized (CompassView.this) {
                     azimuthShown = smoothUpdate(northMeasured, azimuthShown);
                     cacheHeadingShown = smoothUpdate(cacheHeadingMeasured, cacheHeadingShown);
                 }

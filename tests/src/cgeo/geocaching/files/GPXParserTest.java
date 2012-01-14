@@ -68,6 +68,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals("Baden-Württemberg, Germany", cache.getLocation());
         assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel. A old dream of my childhood, a treasure on a lonely is", cache.getShortdesc());
         assertTrue(new Geopoint(48.85968, 9.18740).isEqualTo(cache.getCoords()));
+        assertTrue(cache.isReliableLatLon());
     }
 
     public void testGc31j2h() throws IOException, ParserException {
@@ -80,6 +81,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
 
         // no waypoints without importing waypoint file
         assertEquals(0, cache.getWaypoints().size());
+        assertTrue(cache.isReliableLatLon());
     }
 
     public void testGc31j2hWpts() throws IOException, ParserException {

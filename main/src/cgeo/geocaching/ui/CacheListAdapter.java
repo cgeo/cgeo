@@ -1,5 +1,15 @@
-package cgeo.geocaching;
+package cgeo.geocaching.ui;
 
+import cgeo.geocaching.CacheDetailActivity;
+import cgeo.geocaching.R;
+import cgeo.geocaching.Settings;
+import cgeo.geocaching.cgBase;
+import cgeo.geocaching.cgCache;
+import cgeo.geocaching.R.color;
+import cgeo.geocaching.R.drawable;
+import cgeo.geocaching.R.id;
+import cgeo.geocaching.R.layout;
+import cgeo.geocaching.R.string;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -52,7 +62,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
     final private Resources res;
     /** Resulting list of caches */
     final private List<cgCache> list;
-    private cgCacheView holder = null;
+    private CacheView holder = null;
     private LayoutInflater inflater = null;
     private CacheComparator cacheComparator = null;
     private Geopoint coords = null;
@@ -62,8 +72,8 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
     private int checked = 0;
     private boolean selectMode = false;
     final private static Map<CacheType, Drawable> gcIconDrawables = new HashMap<CacheType, Drawable>();
-    final private Set<cgCompassMini> compasses = new LinkedHashSet<cgCompassMini>();
-    final private Set<cgDistanceView> distances = new LinkedHashSet<cgDistanceView>();
+    final private Set<CompassMiniView> compasses = new LinkedHashSet<CompassMiniView>();
+    final private Set<DistanceView> distances = new LinkedHashSet<DistanceView>();
     final private int[] ratingBcgs = new int[3];
     final private float pixelDensity;
     private static final int SWIPE_MIN_DISTANCE = 60;
@@ -116,6 +126,10 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
     public void setComparator(final CacheComparator comparator) {
         cacheComparator = comparator;
         forceSort(coords);
+    }
+
+    public CacheComparator getCacheComparator() {
+        return cacheComparator;
     }
 
     /**
@@ -272,11 +286,11 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             lastSort = System.currentTimeMillis();
         }
 
-        for (final cgDistanceView distance : distances) {
+        for (final DistanceView distance : distances) {
             distance.update(coordsIn);
         }
 
-        for (final cgCompassMini compass : compasses) {
+        for (final CompassMiniView compass : compasses) {
             compass.updateCoords(coordsIn);
         }
     }
@@ -293,7 +307,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         azimuth = directionNow;
 
         if (CollectionUtils.isNotEmpty(compasses)) {
-            for (cgCompassMini compass : compasses) {
+            for (CompassMiniView compass : compasses) {
                 compass.updateAzimuth(azimuth);
             }
         }
@@ -346,15 +360,15 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         if (v == null) {
             v = inflater.inflate(R.layout.cache, null);
 
-            holder = new cgCacheView();
+            holder = new CacheView();
             holder.checkbox = (CheckBox) v.findViewById(R.id.checkbox);
             holder.oneInfo = (RelativeLayout) v.findViewById(R.id.one_info);
             holder.oneCheckbox = (RelativeLayout) v.findViewById(R.id.one_checkbox);
             holder.logStatusMark = (ImageView) v.findViewById(R.id.log_status_mark);
             holder.text = (TextView) v.findViewById(R.id.text);
             holder.directionLayout = (RelativeLayout) v.findViewById(R.id.direction_layout);
-            holder.distance = (cgDistanceView) v.findViewById(R.id.distance);
-            holder.direction = (cgCompassMini) v.findViewById(R.id.direction);
+            holder.distance = (DistanceView) v.findViewById(R.id.distance);
+            holder.direction = (CompassMiniView) v.findViewById(R.id.direction);
             holder.dirImgLayout = (RelativeLayout) v.findViewById(R.id.dirimg_layout);
             holder.dirImg = (ImageView) v.findViewById(R.id.dirimg);
             holder.inventory = (RelativeLayout) v.findViewById(R.id.inventory);
@@ -363,7 +377,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
             v.setTag(holder);
         } else {
-            holder = (cgCacheView) v.getTag();
+            holder = (CacheView) v.getTag();
         }
 
         if (cache.isOwn()) {
@@ -490,7 +504,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             holder.directionLayout.setVisibility(View.GONE);
             holder.distance.clear();
 
-            final Bitmap dirImgPre = BitmapFactory.decodeFile(cgDirectionImg.getDirectionFile(cache.getGeocode(), false).getPath());
+            final Bitmap dirImgPre = BitmapFactory.decodeFile(DirectionImage.getDirectionFile(cache.getGeocode(), false).getPath());
             final Bitmap dirImg;
             if (dirImgPre != null) { // null happens for invalid caches (not yet released)
                 dirImg = dirImgPre.copy(Bitmap.Config.ARGB_8888, true);
@@ -682,10 +696,10 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
     class detectGesture extends GestureDetector.SimpleOnGestureListener {
 
-        private cgCacheView holder = null;
+        private CacheView holder = null;
         private cgCache cache = null;
 
-        public detectGesture(cgCacheView holderIn, cgCache cacheIn) {
+        public detectGesture(CacheView holderIn, cgCache cacheIn) {
             holder = holderIn;
             cache = cacheIn;
         }
@@ -752,7 +766,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         }
     }
 
-    private void moveRight(cgCacheView holder, cgCache cache, boolean force) {
+    private void moveRight(CacheView holder, cgCache cache, boolean force) {
         if (cache == null) {
             return;
         }
@@ -787,7 +801,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         cache.setStatusCheckedView(true);
     }
 
-    private void moveLeft(cgCacheView holder, cgCache cache, boolean force) {
+    private void moveLeft(CacheView holder, cgCache cache, boolean force) {
         if (cache == null) {
             return;
         }

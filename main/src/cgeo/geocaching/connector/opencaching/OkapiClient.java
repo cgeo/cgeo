@@ -124,6 +124,7 @@ final public class OkapiClient {
 
     private static cgCache parseCache(final JSONObject response) {
         final cgCache cache = new cgCache();
+        cache.setReliableLatLon(true);
         try {
             cache.setGeocode(response.getString(CACHE_CODE));
             cache.setName(response.getString(CACHE_NAME));

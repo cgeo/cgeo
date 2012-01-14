@@ -1,5 +1,6 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
@@ -11,6 +12,8 @@ import cgeo.geocaching.geopoint.Geopoint;
 import org.apache.commons.lang3.ArrayUtils;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -52,6 +55,25 @@ public final class NavigationAppFactory extends AbstractAppFactory {
                 menu.add(0, app.getId(), 0, app.getName());
             }
         }
+    }
+
+    public static void showNavigationMenu(final cgGeo geo, final Activity activity, final cgCache cache, final SearchResult search) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(R.string.cache_menu_navigate);
+        builder.setIcon(android.R.drawable.ic_menu_mapmode);
+        final List<NavigationApp> installed = getInstalledNavigationApps(activity);
+        String[] items = new String[installed.size()];
+        for (int i = 0; i < installed.size(); i++) {
+            items[i] = installed.get(i).getName();
+        }
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                installed.get(item).invoke(geo, activity, cache, search, null, null);
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+
     }
 
     public static List<NavigationApp> getInstalledNavigationApps(final Activity activity) {

@@ -1,7 +1,13 @@
-package cgeo.geocaching;
+package cgeo.geocaching.ui;
+
+import cgeo.geocaching.R;
+import cgeo.geocaching.Settings;
+import cgeo.geocaching.cgeogpxes;
+import cgeo.geocaching.R.id;
+import cgeo.geocaching.R.layout;
+import cgeo.geocaching.files.GPXImporter;
 
 import android.app.Activity;
-import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,16 +18,15 @@ import android.widget.TextView;
 import java.io.File;
 import java.util.List;
 
-public class cgMapfileListAdapter extends ArrayAdapter<File> {
+public class GPXListAdapter extends ArrayAdapter<File> {
+    private GPXView holder = null;
+    private cgeogpxes parent = null;
+    private LayoutInflater inflater = null;
 
-    private cgSelectMapfile parentView;
-    private LayoutInflater inflater;
-    private MapfileView holder;
-
-    public cgMapfileListAdapter(cgSelectMapfile parentIn, List<File> listIn) {
+    public GPXListAdapter(cgeogpxes parentIn, List<File> listIn) {
         super(parentIn, 0, listIn);
 
-        parentView = parentIn;
+        parent = parentIn;
     }
 
     @Override
@@ -40,23 +45,15 @@ public class cgMapfileListAdapter extends ArrayAdapter<File> {
         View v = rowView;
 
         if (v == null) {
-            v = inflater.inflate(R.layout.mapfile_item, null);
+            v = inflater.inflate(R.layout.gpx_item, null);
 
-            holder = new MapfileView();
-            holder.filepath = (TextView) v.findViewById(R.id.mapfilepath);
-            holder.filename = (TextView) v.findViewById(R.id.mapfilename);
+            holder = new GPXView();
+            holder.filepath = (TextView) v.findViewById(R.id.filepath);
+            holder.filename = (TextView) v.findViewById(R.id.filename);
 
             v.setTag(holder);
         } else {
-            holder = (MapfileView) v.getTag();
-        }
-
-        File current = new File(parentView.getCurrentMapfile());
-
-        if (file.equals(current)) {
-            holder.filename.setTypeface(holder.filename.getTypeface(), Typeface.BOLD);
-        } else {
-            holder.filename.setTypeface(holder.filename.getTypeface(), Typeface.NORMAL);
+            holder = (GPXView) v.getTag();
         }
 
         final touchListener touchLst = new touchListener(file);
@@ -76,14 +73,9 @@ public class cgMapfileListAdapter extends ArrayAdapter<File> {
         }
 
         // tap on item
+        @Override
         public void onClick(View view) {
-            parentView.setMapfile(file.toString());
-            parentView.close();
+            (new GPXImporter(parent, parent.getListId(), null)).importGPX(file);
         }
-    }
-
-    private static class MapfileView {
-        public TextView filepath;
-        public TextView filename;
     }
 }

@@ -1,11 +1,12 @@
-package cgeo.geocaching;
+package cgeo.geocaching.ui;
+
 
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class cgCacheView {
+public class CacheView {
     // layouts & views
     public RelativeLayout oneInfo;
     public RelativeLayout oneCheckbox;
@@ -16,8 +17,8 @@ public class cgCacheView {
     public TextView info;
     public RelativeLayout inventory;
     public RelativeLayout directionLayout;
-    public cgDistanceView distance;
-    public cgCompassMini direction;
+    public DistanceView distance;
+    public CompassMiniView direction;
     public RelativeLayout dirImgLayout;
     public ImageView dirImg;
 }

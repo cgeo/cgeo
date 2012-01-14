@@ -1,9 +1,9 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.activity.Progress;
@@ -152,6 +152,9 @@ public class GPXImporter {
                 // remove from cache because a cache might be re-imported
                 cgeoapplication.removeCacheFromCache(cache.getGeocode());
                 app.addCacheToSearch(search, cache);
+
+                // save memory, imported caches are typically not used immediately
+                cgeoapplication.removeCacheFromCache(cache.getGeocode());
 
                 if (progressHandler.isCancelled()) {
                     throw new CancellationException();

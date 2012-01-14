@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.files.FileList;
 import cgeo.geocaching.files.LocalStorage;
+import cgeo.geocaching.ui.MapfileListAdapter;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +11,7 @@ import android.os.Environment;
 import java.io.File;
 import java.util.List;
 
-public class cgSelectMapfile extends FileList<cgMapfileListAdapter> {
+public class cgSelectMapfile extends FileList<MapfileListAdapter> {
 
     public cgSelectMapfile() {
         super("map");
@@ -35,8 +36,8 @@ public class cgSelectMapfile extends FileList<cgMapfileListAdapter> {
     }
 
     @Override
-    protected cgMapfileListAdapter getAdapter(List<File> files) {
-        return new cgMapfileListAdapter(this, files);
+    protected MapfileListAdapter getAdapter(List<File> files) {
+        return new MapfileListAdapter(this, files);
     }
 
     @Override

@@ -20,6 +20,7 @@ import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.twitter.Twitter;
+import cgeo.geocaching.ui.DirectionImage;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 
@@ -657,7 +658,7 @@ public class cgBase {
         {
             for (cgCache oneCache : parseResult.cacheList) {
                 if (oneCache.getCoords() == null && StringUtils.isNotEmpty(oneCache.getDirectionImg())) {
-                    cgDirectionImg.getDrawable(oneCache.getGeocode(), oneCache.getDirectionImg());
+                    DirectionImage.getDrawable(oneCache.getGeocode(), oneCache.getDirectionImg());
                 }
             }
         }
@@ -1182,7 +1183,6 @@ public class cgBase {
         //cache.setLogs(loadLogsFromDetails(page, cache, false));
         if (Settings.isFriendLogsWanted()) {
             sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_logs);
-            int position = 0;
             List<cgLog> allLogs = cache.getLogs();
             List<cgLog> friendLogs = loadLogsFromDetails(page, cache, true, false);
             if (friendLogs != null) {
@@ -1190,7 +1190,7 @@ public class cgBase {
                     if (allLogs.contains(log)) {
                         allLogs.get(allLogs.indexOf(log)).friend = true;
                     } else {
-                        allLogs.add(position++, log);
+                        allLogs.add(log);
                     }
                 }
             }

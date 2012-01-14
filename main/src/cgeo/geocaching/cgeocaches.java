@@ -31,6 +31,7 @@ import cgeo.geocaching.sorting.StateComparator;
 import cgeo.geocaching.sorting.TerrainComparator;
 import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.sorting.VoteComparator;
+import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.utils.RunnableWithArgument;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -212,7 +213,7 @@ public class cgeocaches extends AbstractListActivity {
                     AlertDialog alert = dialog.create();
                     alert.show();
                 } else if (app != null && SearchResult.getError(search) != null) {
-                    showToast(res.getString(R.string.err_download_fail) + SearchResult.getError(search).getErrorString(res) + ".");
+                    showToast(res.getString(R.string.err_download_fail) + " " + SearchResult.getError(search).getErrorString(res) + ".");
 
                     hideLoading();
                     showProgress(false);
@@ -281,7 +282,7 @@ public class cgeocaches extends AbstractListActivity {
                 }
 
                 if (SearchResult.getError(search) != null) {
-                    showToast(res.getString(R.string.err_download_fail) + SearchResult.getError(search).getErrorString(res) + ".");
+                    showToast(res.getString(R.string.err_download_fail) + " " + SearchResult.getError(search).getErrorString(res) + ".");
 
                     listFooter.setOnClickListener(new MoreCachesListener());
                     hideLoading();
@@ -2634,7 +2635,7 @@ public class cgeocaches extends AbstractListActivity {
             else if (type == CacheListType.HISTORY) {
                 adapter.setComparator(new VisitComparator());
             }
-            else {
+            else if (adapter.getCacheComparator() != null && adapter.getCacheComparator() instanceof DateComparator) {
                 adapter.setComparator(null);
             }
         }

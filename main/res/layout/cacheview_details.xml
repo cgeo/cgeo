@@ -218,7 +218,8 @@
                 android:layout_gravity="center"
                 android:gravity="center"
                 android:scaleType="centerCrop"
-                android:src="@null" />
+                android:src="@null"
+                android:onClick="showNavigationMenu" />
         </LinearLayout>
     </LinearLayout>
 
