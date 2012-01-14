@@ -119,7 +119,7 @@
   <string name="err_none">OK</string>
   <string name="err_start">Communication not started</string>
   <string name="err_parse">Failed Login page parsing</string>
-  <string name="err_server">Unable to contact Geocaching.com. The website may be down or you Internet connection not working.</string>
+  <string name="err_server">Unable to contact Geocaching.com. The website may be down or your Internet connection not working.</string>
   <string name="err_login">No Login information stored</string>
   <string name="err_login_failed">c:geo can\'t log in.</string>
   <string name="err_login_failed_toast">c:geo can\'t log in. c:geo works offline with Stored caches. Check your Login settings or enable Internet connection.</string>
@@ -129,8 +129,8 @@
   <string name="err_wrong">Login information incorrect</string>
   <string name="err_maintenance">Geocaching.com is down for maintenance. c:geo works offline with Stored caches.</string>
   <string name="err_license">You have not agreed to Geocaching.com license agreement, so c:geo can\'t load cache coordinates.</string>
-  <string name="err_unpublished">The requested cache is unpublished</string>
-  <string name="err_premium_only">This Cache is only available to Geocaching.com Premium Members</string>
+  <string name="err_unpublished">The requested cache is unpublished.</string>
+  <string name="err_premium_only">This Cache is only available to Geocaching.com Premium Members.</string>
   <string name="err_store">c:geo can\'t store the cache.</string>
   <string name="err_drop">c:geo can\'t drop cache.</string>
   <string name="err_detail_open">c:geo can\'t open geocache details.</string>
