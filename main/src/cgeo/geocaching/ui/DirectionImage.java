@@ -1,5 +1,7 @@
-package cgeo.geocaching;
+package cgeo.geocaching.ui;
 
+import cgeo.geocaching.Parameters;
+import cgeo.geocaching.cgBase;
 import cgeo.geocaching.files.LocalStorage;
 
 import org.apache.commons.lang3.StringUtils;
@@ -7,7 +9,7 @@ import org.apache.http.HttpResponse;
 
 import java.io.File;
 
-public class cgDirectionImg {
+public class DirectionImage {
 
     public static void getDrawable(final String geocode, final String code) {
         if (StringUtils.isBlank(geocode) || StringUtils.isBlank(code)) {

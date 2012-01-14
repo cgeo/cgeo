@@ -31,6 +31,7 @@ import cgeo.geocaching.sorting.StateComparator;
 import cgeo.geocaching.sorting.TerrainComparator;
 import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.sorting.VoteComparator;
+import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.utils.RunnableWithArgument;
 
 import org.apache.commons.collections.CollectionUtils;

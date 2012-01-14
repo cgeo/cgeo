@@ -20,6 +20,7 @@ import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.twitter.Twitter;
+import cgeo.geocaching.ui.DirectionImage;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 
@@ -657,7 +658,7 @@ public class cgBase {
         {
             for (cgCache oneCache : parseResult.cacheList) {
                 if (oneCache.getCoords() == null && StringUtils.isNotEmpty(oneCache.getDirectionImg())) {
-                    cgDirectionImg.getDrawable(oneCache.getGeocode(), oneCache.getDirectionImg());
+                    DirectionImage.getDrawable(oneCache.getGeocode(), oneCache.getDirectionImg());
                 }
             }
         }

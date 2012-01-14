@@ -4,6 +4,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.files.FileList;
 import cgeo.geocaching.files.GPXImporter;
+import cgeo.geocaching.ui.GPXListAdapter;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -15,7 +16,7 @@ import android.os.Environment;
 import java.io.File;
 import java.util.List;
 
-public class cgeogpxes extends FileList<cgGPXListAdapter> {
+public class cgeogpxes extends FileList<GPXListAdapter> {
     private static final String EXTRAS_LIST_ID = "list";
 
     public cgeogpxes() {
@@ -25,8 +26,8 @@ public class cgeogpxes extends FileList<cgGPXListAdapter> {
     private int listId = 1;
 
     @Override
-    protected cgGPXListAdapter getAdapter(List<File> files) {
-        return new cgGPXListAdapter(this, files);
+    protected GPXListAdapter getAdapter(List<File> files) {
+        return new GPXListAdapter(this, files);
     }
 
     @Override

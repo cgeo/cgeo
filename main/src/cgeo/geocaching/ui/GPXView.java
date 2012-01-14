@@ -1,8 +1,8 @@
-package cgeo.geocaching;
+package cgeo.geocaching.ui;
 
 import android.widget.TextView;
 
-public class cgGPXView {
+public class GPXView {
     // layouts & views
     public TextView filepath;
     public TextView filename;
