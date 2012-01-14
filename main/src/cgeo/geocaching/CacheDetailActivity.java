@@ -47,6 +47,7 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.Spanned;
+import android.text.format.DateUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ImageSpan;
 import android.text.style.StrikethroughSpan;
@@ -1440,8 +1441,15 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             // cache hidden
-            if (cache.getHiddenDate() != null && cache.getHiddenDate().getTime() > 0) {
-                addCacheDetail(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, cgBase.formatFullDate(cache.getHiddenDate().getTime()));
+            if (cache.getHiddenDate() != null) {
+                long time = cache.getHiddenDate().getTime();
+                if (time > 0) {
+                    String dateString = cgBase.formatFullDate(time);
+                    if (cache.isEventCache()) {
+                        dateString = DateUtils.formatDateTime(cgeoapplication.getInstance().getBaseContext(), time, DateUtils.FORMAT_SHOW_WEEKDAY) + ", " + dateString;
+                    }
+                    addCacheDetail(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, dateString);
+                }
             }
 
             // cache location
