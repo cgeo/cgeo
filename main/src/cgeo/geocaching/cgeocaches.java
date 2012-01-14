@@ -212,7 +212,7 @@ public class cgeocaches extends AbstractListActivity {
                     AlertDialog alert = dialog.create();
                     alert.show();
                 } else if (app != null && SearchResult.getError(search) != null) {
-                    showToast(res.getString(R.string.err_download_fail) + SearchResult.getError(search).getErrorString(res) + ".");
+                    showToast(res.getString(R.string.err_download_fail) + " " + SearchResult.getError(search).getErrorString(res) + ".");
 
                     hideLoading();
                     showProgress(false);
@@ -281,7 +281,7 @@ public class cgeocaches extends AbstractListActivity {
                 }
 
                 if (SearchResult.getError(search) != null) {
-                    showToast(res.getString(R.string.err_download_fail) + SearchResult.getError(search).getErrorString(res) + ".");
+                    showToast(res.getString(R.string.err_download_fail) + " " + SearchResult.getError(search).getErrorString(res) + ".");
 
                     listFooter.setOnClickListener(new MoreCachesListener());
                     hideLoading();
