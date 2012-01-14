@@ -33,6 +33,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -44,6 +45,7 @@ import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
+import android.text.Editable;
 import android.text.Html;
 import android.text.Spannable;
 import android.text.Spanned;
@@ -51,6 +53,7 @@ import android.text.format.DateUtils;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ImageSpan;
 import android.text.style.StrikethroughSpan;
+import android.text.style.StyleSpan;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -2077,11 +2080,20 @@ public class CacheDetailActivity extends AbstractActivity {
 
                 // Fast preview: parse only HTML without loading any images
                 HtmlImageCounter imageCounter = new HtmlImageCounter();
-                description = Html.fromHtml(descriptionString, imageCounter, new UnknownTagsHandler());
+                final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
+                description = Html.fromHtml(descriptionString, imageCounter, unknownTagsHandler);
                 publishProgress();
                 if (imageCounter.getImageCount() > 0) {
                     // Complete view: parse again with loading images - if necessary ! If there are any images causing problems the user can see at least the preview
-                    description = Html.fromHtml(descriptionString, new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), true, cache.getListId(), false), new UnknownTagsHandler());
+                    description = Html.fromHtml(descriptionString, new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), true, cache.getListId(), false), unknownTagsHandler);
+                    publishProgress();
+                }
+
+                // if description has HTML table, add a note at the end of the long description
+                if (unknownTagsHandler.isTableDetected() && descriptionView == view.findViewById(R.id.longdesc)) {
+                    final int startPos = description.length();
+                    ((Editable) description).append("\n" + res.getString(R.string.cache_description_table_note));
+                    ((Editable) description).setSpan(new StyleSpan(Typeface.ITALIC), startPos, description.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     publishProgress();
                 }
                 return null;
