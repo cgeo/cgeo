@@ -10,6 +10,7 @@ import android.text.style.StrikethroughSpan;
 public class UnknownTagsHandler implements TagHandler {
 
     private static final int UNDEFINED_POSITION = -1;
+    private static int countCells = 0;
     int strikePos = UNDEFINED_POSITION;
     private boolean tableDetected = false;
 
@@ -47,16 +48,19 @@ public class UnknownTagsHandler implements TagHandler {
     }
 
     private static void handleTd(boolean opening, Editable output) {
-        // insert space for each table column
+        // insert bar for each table column, see https://en.wikipedia.org/wiki/Box-drawing_characters
         if (opening) {
-            output.insert(output.length(), " ");
+            if (countCells++ > 0) {
+                output.append('┆');
+            }
         }
     }
 
     private static void handleTr(boolean opening, Editable output) {
         // insert new line for each table row
         if (opening) {
-            output.insert(output.length(), "\n");
+            output.append('\n');
+            countCells = 0;
         }
     }
 

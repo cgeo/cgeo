@@ -2092,7 +2092,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 // if description has HTML table, add a note at the end of the long description
                 if (unknownTagsHandler.isTableDetected() && descriptionView == view.findViewById(R.id.longdesc)) {
                     final int startPos = description.length();
-                    ((Editable) description).append("\n" + res.getString(R.string.cache_description_table_note));
+                    ((Editable) description).append("\n\n" + res.getString(R.string.cache_description_table_note));
                     ((Editable) description).setSpan(new StyleSpan(Typeface.ITALIC), startPos, description.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                     publishProgress();
                 }
