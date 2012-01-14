@@ -51,11 +51,10 @@ public class StaticMapsProvider {
     }
 
     public static void downloadMaps(cgCache cache, Activity activity) {
-        if (!Settings.isStoreOfflineMaps() || cache.getCoords() == null || StringUtils.isBlank(cache.getGeocode())) {
+        if ((!Settings.isStoreOfflineMaps() && !Settings.isStoreOfflineWpMaps()) || StringUtils.isBlank(cache.getGeocode())) {
             return;
         }
 
-        final String latlonMap = cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
         final Display display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         final int maxWidth = display.getWidth() - 25;
         final int maxHeight = display.getHeight() - 25;
@@ -66,29 +65,28 @@ public class StaticMapsProvider {
             edge = maxHeight;
         }
 
-        final StringBuilder waypoints = new StringBuilder();
-        if (cache.hasWaypoints()) {
-            for (cgWaypoint waypoint : cache.getWaypoints()) {
-                if (waypoint.getCoords() == null) {
-                    continue;
+        if (Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
+            final String latlonMap = cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
+            final StringBuilder waypoints = new StringBuilder();
+            if (cache.hasWaypoints()) {
+                for (cgWaypoint waypoint : cache.getWaypoints()) {
+                    if (waypoint.getCoords() == null) {
+                        continue;
+                    }
+                    String wpMarkerUrl = getWpMarkerUrl(waypoint);
+                    waypoints.append("&markers=icon%3A");
+                    waypoints.append(wpMarkerUrl);
+                    waypoints.append("%7C");
+                    waypoints.append(waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA));
                 }
-                String wpMarkerUrl = getWpMarkerUrl(waypoint);
-                waypoints.append("&markers=icon%3A");
-                waypoints.append(wpMarkerUrl);
-                waypoints.append("%7C");
-                waypoints.append(waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA));
             }
+            // download map images in separate background thread for higher performance
+            final String cacheMarkerUrl = getCacheMarkerUrl(cache);
+            downloadMaps(cache, cacheMarkerUrl, "", latlonMap, edge, waypoints.toString());
         }
-
-        // download map images in separate background thread for higher performance
-        final String cacheMarkerUrl = getCacheMarkerUrl(cache);
-        downloadMaps(cache, cacheMarkerUrl, "", latlonMap, edge, waypoints.toString());
 
         // download static map for current waypoints
-        if (!Settings.isStoreOfflineWpMaps()) {
-            return;
-        }
-        if (CollectionUtils.isNotEmpty(cache.getWaypoints())) {
+        if (Settings.isStoreOfflineWpMaps() && CollectionUtils.isNotEmpty(cache.getWaypoints())) {
             for (cgWaypoint waypoint : cache.getWaypoints()) {
                 if (waypoint.getCoords() == null) {
                     continue;
