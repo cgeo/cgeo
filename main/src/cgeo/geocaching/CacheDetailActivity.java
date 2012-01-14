@@ -554,7 +554,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 }
 
                 if (SearchResult.getError(search) != null) {
-                    showToast(res.getString(R.string.err_dwld_details_failed_reason) + " " + SearchResult.getError(search).getErrorString(res) + ".");
+                    showToast(res.getString(R.string.err_dwld_details_failed) + " " + SearchResult.getError(search).getErrorString(res) + ".");
 
                     finish();
                     return;
