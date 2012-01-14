@@ -115,6 +115,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     private static void assertCacheProperties(cgCache cache) {
         assertNotNull(cache);
         assertFalse(cache.getLocation().startsWith(","));
+        assertTrue(cache.isReliableLatLon());
     }
 
     public void testImportGpxError() throws IOException {

@@ -51,6 +51,7 @@ public final class LocParser extends FileParser {
                 cgCoord coord = cidCoords.get(cache.getGeocode());
 
                 copyCoordToCache(coord, cache);
+                cache.setReliableLatLon(false);
             }
         }
     }
@@ -155,6 +156,7 @@ public final class LocParser extends FileParser {
                 continue;
             }
             cgCache cache = new cgCache();
+            cache.setReliableLatLon(true);
             copyCoordToCache(coord, cache);
             caches.add(cache);
 
