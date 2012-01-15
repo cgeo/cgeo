@@ -71,7 +71,10 @@ public class cgeoimages extends AbstractActivity {
         for (final cgImage img : images) {
             rowView = (LinearLayout) inflater.inflate(R.layout.cache_image_item, null);
 
-            ((TextView) rowView.findViewById(R.id.title)).setText(Html.fromHtml(img.getTitle()));
+            if (StringUtils.isNotBlank(img.getTitle())) {
+                ((TextView) rowView.findViewById(R.id.title)).setText(Html.fromHtml(img.getTitle()));
+                rowView.findViewById(R.id.titleLayout).setVisibility(View.VISIBLE);
+            }
 
             if (StringUtils.isNotBlank(img.getDescription())) {
                 final TextView descView = (TextView) rowView.findViewById(R.id.description);
