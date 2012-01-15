@@ -722,7 +722,7 @@ public class cgeocaches extends AbstractListActivity {
         }
 
         // refresh standard list if it has changed (new caches downloaded)
-        if (type == CacheListType.OFFLINE && listId == StoredList.STANDARD_LIST_ID && search != null) {
+        if (type == CacheListType.OFFLINE && listId >= StoredList.STANDARD_LIST_ID && search != null) {
             SearchResult newSearch = cgBase.searchByOffline(coords, cacheType, listId);
             if (newSearch != null && newSearch.totalCnt != search.totalCnt) {
                 refreshCurrentList();
