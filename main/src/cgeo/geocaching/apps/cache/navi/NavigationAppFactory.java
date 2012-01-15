@@ -27,7 +27,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     private static NavigationApp[] getNavigationApps() {
         if (ArrayUtils.isEmpty(apps)) {
             apps = new NavigationApp[] {
-                    new CompassApp(),
+                    new CompassApp(), // MUST always be the first entry in this array
                     new RadarApp(),
                     new InternalMap(),
                     new StaticMapApp(),
@@ -129,22 +129,28 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         }
     }
 
+    /**
+     * Returns the default navigation tool if correctly set and installed or the compass app as default fallback
+     * 
+     * @param activity
+     * @return never <code>null</code>
+     */
     public static NavigationApp getDefaultNavigationApplication(Activity activity) {
         final int defaultNavigationTool = Settings.getDefaultNavigationTool();
 
         NavigationApp app = null;
         final List<NavigationApp> installedNavigationApps = getInstalledNavigationApps(activity);
 
-        if (defaultNavigationTool == 0) {
+        for (NavigationApp navigationApp : installedNavigationApps) {
+            if (navigationApp.getId() == defaultNavigationTool) {
+                app = navigationApp;
+                break;
+            }
+        }
+        // default navigation tool wasn't set already or couldn't be found (not installed any more for example)
+        if (app == null) {
             // assume that 0 is the compass-app
             app = installedNavigationApps.get(0);
-        } else {
-            for (NavigationApp navigationApp : installedNavigationApps) {
-                if (navigationApp.getId() == defaultNavigationTool) {
-                    app = navigationApp;
-                    break;
-                }
-            }
         }
         return app;
     }
