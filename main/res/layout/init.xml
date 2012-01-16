@@ -310,6 +310,47 @@
                             android:textColor="?text_color"
                             android:text="@string/init_openlastdetailspage" />
                     </LinearLayout>
+				<LinearLayout
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal" >
+					<CheckBox android:id="@+id/offline"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="left"
+							android:padding="1px"
+							android:gravity="center" />
+					<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="center_vertical"
+							android:gravity="left"
+							android:paddingRight="3dip"
+							android:textSize="14dip"
+							android:textColor="?text_color"
+							android:text="@string/init_offline" />
+				</LinearLayout>
+				<LinearLayout
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:orientation="horizontal" >
+					<CheckBox android:id="@+id/offline_wp"
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_alignParentLeft="true"
+							android:layout_gravity="left"
+							android:padding="1px"
+							android:gravity="center" />
+					<TextView
+							android:layout_width="wrap_content"
+							android:layout_height="wrap_content"
+							android:layout_gravity="center_vertical"
+							android:gravity="left"
+							android:paddingRight="3dip"
+							android:textSize="14dip"
+							android:textColor="?text_color"
+							android:text="@string/init_offline_wp" />
+				</LinearLayout>
 			</LinearLayout>
 <!-- ** -->
 			<RelativeLayout style="@style/separator_horizontal_layout" >
@@ -483,47 +524,6 @@
                             android:textColor="?text_color"
                             android:text="@string/init_trackautovisit" />
                 </LinearLayout>
-				<LinearLayout
-						android:layout_width="fill_parent"
-						android:layout_height="wrap_content"
-						android:orientation="horizontal" >
-					<CheckBox android:id="@+id/offline"
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:layout_gravity="left"
-							android:padding="1px"
-							android:gravity="center" />
-					<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:layout_gravity="center_vertical"
-							android:gravity="left"
-							android:paddingRight="3dip"
-							android:textSize="14dip"
-							android:textColor="?text_color"
-							android:text="@string/init_offline" />
-				</LinearLayout>
-				<LinearLayout
-						android:layout_width="fill_parent"
-						android:layout_height="wrap_content"
-						android:orientation="horizontal" >
-					<CheckBox android:id="@+id/offline_wp"
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:layout_alignParentLeft="true"
-							android:layout_gravity="left"
-							android:padding="1px"
-							android:gravity="center" />
-					<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:layout_gravity="center_vertical"
-							android:gravity="left"
-							android:paddingRight="3dip"
-							android:textSize="14dip"
-							android:textColor="?text_color"
-							android:text="@string/init_offline_wp" />
-				</LinearLayout>
 				<LinearLayout
 						android:layout_width="fill_parent"
 						android:layout_height="wrap_content"
