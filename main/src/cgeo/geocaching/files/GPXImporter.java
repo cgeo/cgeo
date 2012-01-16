@@ -26,8 +26,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -45,6 +47,9 @@ public class GPXImporter {
     public static final String GPX_FILE_EXTENSION = ".gpx";
     public static final String ZIP_FILE_EXTENSION = ".zip";
     public static final String WAYPOINTS_FILE_SUFFIX_AND_EXTENSION = "-wpts.gpx";
+
+    private static final List<String> GPX_MIME_TYPES = Arrays.asList(new String[] { "text/xml", "application/xml" });
+    private static final List<String> ZIP_MIME_TYPES = Arrays.asList(new String[] { "application/zip", "application/x-compressed", "application/x-zip-compressed", "application/x-zip", "application/octet-stream" });
 
     private Progress progress = new Progress();
 
@@ -85,19 +90,25 @@ public class GPXImporter {
         final Uri uri = intent.getData();
 
         String mimeType = intent.getType();
-        // if mimetype can't be determined (e.g. for emulators email app), use a default
+        // if mimetype can't be determined (e.g. for emulators email app), derive it from uri file extension
         // contentResolver.getType(uri) doesn't help but throws exception for emulators email app
         //   Permission Denial: reading com.android.email.provider.EmailProvider uri
         // Google search says: there is no solution for this problem
-        // TODO: check if problem occurs with gmail as well
+        // Gmail doesn't work at all, see #967
         if (mimeType == null) {
-            mimeType = "application/zip";
+            if (StringUtils.endsWithIgnoreCase(uri.getPath(), GPX_FILE_EXTENSION)) {
+                mimeType = "application/xml";
+            } else {
+                // if we can't determine a better type, default to zip import
+                // emulator email sends e.g. content://com.android.email.attachmentprovider/1/1/RAW, mimetype=null
+                mimeType = "application/zip";
+            }
         }
 
         Log.i(Settings.tag, "importGPX: " + uri + ", mimetype=" + mimeType);
-        if (StringUtils.equalsIgnoreCase("text/xml", mimeType) || StringUtils.equalsIgnoreCase("application/xml", mimeType)) {
+        if (GPX_MIME_TYPES.contains(mimeType)) {
             new ImportGpxAttachmentThread(uri, contentResolver, listId, importStepHandler, progressHandler).start();
-        } else if (StringUtils.equalsIgnoreCase("application/zip", mimeType)) {
+        } else if (ZIP_MIME_TYPES.contains(mimeType)) {
             new ImportGpxZipAttachmentThread(uri, contentResolver, listId, importStepHandler, progressHandler).start();
         } else {
             importFinished();

@@ -1,8 +1,6 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.R.drawable;
-import cgeo.geocaching.R.styleable;
 import cgeo.geocaching.geopoint.Geopoint;
 
 import android.content.Context;
