@@ -25,6 +25,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     private int listId;
     private File tempDir;
 
+    @SuppressWarnings("deprecation")
     public static void testGetWaypointsFileNameForGpxFileName() {
         assertEquals("1234567-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("1234567.gpx"));
         assertEquals("/mnt/sdcard/1234567-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("/mnt/sdcard/1234567.gpx"));
@@ -38,6 +39,24 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         assertNull(GPXImporter.getWaypointsFileNameForGpxFileName("123.gpy"));
         assertNull(GPXImporter.getWaypointsFileNameForGpxFileName("gpx"));
         assertNull(GPXImporter.getWaypointsFileNameForGpxFileName(".gpx"));
+    }
+
+    public void testGetWaypointsFileNameForGpxFile() {
+        String[] gpxFiles = new String[] { "1234567.gpx", "1.gpx", "1234567.9.gpx",
+                "1234567.GPX", "gpx.gpx.gpx", ".gpx",
+                "1234567_query.gpx", "123-4.gpx", "123(5).gpx" };
+        String[] wptsFiles = new String[] { "1234567-wpts.gpx", "1-wpts.gpx", "1234567.9-wpts.gpx",
+                "1234567-wpts.GPX", "gpx.gpx-wpts.gpx", "-wpts.gpx",
+                "1234567_query-wpts.gpx", "123-wpts-4.gpx", "123-wpts(5).gpx" };
+        for (int i = 0; i < gpxFiles.length; i++) {
+            String gpxFileName = gpxFiles[i];
+            String wptsFileName = wptsFiles[i];
+            File gpx = new File(tempDir, gpxFileName);
+            File wpts = new File(tempDir, wptsFileName);
+            assertEquals(wptsFileName, GPXImporter.getWaypointsFileNameForGpxFile(gpx));
+        }
+        File gpx1 = new File(tempDir, "abc.gpx");
+        assertNull(GPXImporter.getWaypointsFileNameForGpxFile(gpx1));
     }
 
     public void testImportGpx() throws IOException {
