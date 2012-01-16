@@ -20,6 +20,7 @@ import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.DateComparator;
 import cgeo.geocaching.sorting.DifficultyComparator;
+import cgeo.geocaching.sorting.EventDateComparator;
 import cgeo.geocaching.sorting.FindsComparator;
 import cgeo.geocaching.sorting.GeocodeComparator;
 import cgeo.geocaching.sorting.InventoryComparator;
@@ -722,7 +723,7 @@ public class cgeocaches extends AbstractListActivity {
         }
 
         // refresh standard list if it has changed (new caches downloaded)
-        if (type == CacheListType.OFFLINE && listId == StoredList.STANDARD_LIST_ID && search != null) {
+        if (type == CacheListType.OFFLINE && listId >= StoredList.STANDARD_LIST_ID && search != null) {
             SearchResult newSearch = cgBase.searchByOffline(coords, cacheType, listId);
             if (newSearch != null && newSearch.totalCnt != search.totalCnt) {
                 refreshCurrentList();
@@ -2630,12 +2631,12 @@ public class cgeocaches extends AbstractListActivity {
                 }
             }
             if (eventsOnly) {
-                adapter.setComparator(new DateComparator());
+                adapter.setComparator(new EventDateComparator());
             }
             else if (type == CacheListType.HISTORY) {
                 adapter.setComparator(new VisitComparator());
             }
-            else if (adapter.getCacheComparator() != null && adapter.getCacheComparator() instanceof DateComparator) {
+            else if (adapter.getCacheComparator() != null && adapter.getCacheComparator() instanceof EventDateComparator) {
                 adapter.setComparator(null);
             }
         }

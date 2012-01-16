@@ -3,8 +3,6 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgSelectMapfile;
-import cgeo.geocaching.R.id;
-import cgeo.geocaching.R.layout;
 
 import android.app.Activity;
 import android.graphics.Typeface;
