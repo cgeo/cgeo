@@ -3,8 +3,6 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgeogpxes;
-import cgeo.geocaching.R.id;
-import cgeo.geocaching.R.layout;
 import cgeo.geocaching.files.GPXImporter;
 
 import android.app.Activity;
