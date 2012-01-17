@@ -518,7 +518,6 @@
   <string name="cache_dialog_watchlist_add_message">Adding cache to your watchlist…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Removing cache from your watchlist…</string>
-  <string name="cache_menu_default_navigation">Default Navigation</string>
   <string name="cache_menu_navigate">Navigate</string>
   <string name="cache_menu_compass">Compass</string>
   <string name="cache_menu_tbt">Turn-by-Turn</string>

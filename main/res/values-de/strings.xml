@@ -505,7 +505,6 @@
   <string name="cache_dialog_watchlist_add_message">Füge den Cache deiner Watchlist hinzu…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Entferne den Cache von deiner Watchlist…</string>
-  <string name="cache_menu_default_navigation">Standardnavigation</string>
   <string name="cache_menu_navigate">Navigieren</string>
   <string name="cache_menu_compass">Kompass</string>
   <string name="cache_menu_tbt">Google Maps Navigation</string>

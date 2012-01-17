@@ -510,7 +510,6 @@
   <string name="cache_dialog_watchlist_add_message">Lägger till cachen till din watchlist…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Tar bort cachen från din watchlist…</string>
-  <string name="cache_menu_default_navigation">Förvald navigering</string>
   <string name="cache_menu_navigate">Navigera</string>
   <string name="cache_menu_compass">Kompass</string>
   <string name="cache_menu_tbt">Sväng-för-sväng</string>
