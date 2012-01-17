@@ -472,6 +472,7 @@
   <string name="cache_personal_note">Persönliche Notiz</string>
   <string name="cache_description">Beschreibung</string>
   <string name="cache_description_long">Ausführliche Beschreibung</string>
+  <string name="cache_description_table_note">Diese Beschreibung enthält Tabellenelemente, die evtl. nur auf Geocaching.com korrekt angezeigt werden.</string>
   <string name="cache_watchlist">Watchlist</string>
   <string name="cache_watchlist_on">Dieser Cache ist auf deiner Watchlist.</string>
   <string name="cache_watchlist_not_on">Dieser Cache ist nicht auf deiner Watchlist.</string>
@@ -505,7 +506,6 @@
   <string name="cache_dialog_watchlist_add_message">Füge den Cache deiner Watchlist hinzu…</string>
   <string name="cache_dialog_watchlist_remove_title">Watchlist</string>
   <string name="cache_dialog_watchlist_remove_message">Entferne den Cache von deiner Watchlist…</string>
-  <string name="cache_menu_default_navigation">Standardnavigation</string>
   <string name="cache_menu_navigate">Navigieren</string>
   <string name="cache_menu_compass">Kompass</string>
   <string name="cache_menu_tbt">Google Maps Navigation</string>
