@@ -394,22 +394,6 @@ public class GPXImporter {
     };
 
     /**
-     * @param name
-     *            the gpx file name
-     * @return the expected file name of the waypoints file
-     * 
-     * @deprecated use {@link #getWaypointsFileNameForGpxFile(File)} instead
-     */
-    @Deprecated
-    static String getWaypointsFileNameForGpxFileName(String name) {
-        if (StringUtils.endsWithIgnoreCase(name, GPX_FILE_EXTENSION) && (StringUtils.length(name) > GPX_FILE_EXTENSION.length())) {
-            return StringUtils.substringBeforeLast(name, ".") + WAYPOINTS_FILE_SUFFIX_AND_EXTENSION;
-        } else {
-            return null;
-        }
-    }
-
-    /**
      * @param gpxfile
      *            the gpx file
      * @return the expected file name of the waypoints file

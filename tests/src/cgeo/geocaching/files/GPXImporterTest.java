@@ -25,22 +25,6 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     private int listId;
     private File tempDir;
 
-    @SuppressWarnings("deprecation")
-    public static void testGetWaypointsFileNameForGpxFileName() {
-        assertEquals("1234567-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("1234567.gpx"));
-        assertEquals("/mnt/sdcard/1234567-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("/mnt/sdcard/1234567.gpx"));
-        assertEquals("/mnt/sdcard/1-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("/mnt/sdcard/1.gpx"));
-        assertEquals("/mnt/sd.card/1-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("/mnt/sd.card/1.gpx"));
-        assertEquals("1234567.9-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("1234567.9.gpx"));
-        assertEquals("1234567-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("1234567.GPX"));
-        assertEquals("gpx.gpx-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("gpx.gpx.gpx"));
-        assertEquals("/mnt/sdcard/-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("/mnt/sdcard/.gpx"));
-        assertEquals("1234567_query-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("1234567_query.gpx"));
-        assertNull(GPXImporter.getWaypointsFileNameForGpxFileName("123.gpy"));
-        assertNull(GPXImporter.getWaypointsFileNameForGpxFileName("gpx"));
-        assertNull(GPXImporter.getWaypointsFileNameForGpxFileName(".gpx"));
-    }
-
     public void testGetWaypointsFileNameForGpxFile() {
         String[] gpxFiles = new String[] { "1234567.gpx", "1.gpx", "1234567.9.gpx",
                 "1234567.GPX", "gpx.gpx.gpx", ".gpx",
