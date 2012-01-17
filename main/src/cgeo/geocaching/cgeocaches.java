@@ -6,15 +6,14 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cachelist.CacheListAppFactory;
 import cgeo.geocaching.enumerations.CacheListType;
-import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.files.GPXImporter;
-import cgeo.geocaching.filter.FilterBySize;
-import cgeo.geocaching.filter.FilterByTrackables;
-import cgeo.geocaching.filter.FilterByType;
 import cgeo.geocaching.filter.IFilter;
+import cgeo.geocaching.filter.SizeFilter;
+import cgeo.geocaching.filter.TrackablesFilter;
+import cgeo.geocaching.filter.TypeFilter;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.sorting.CacheComparator;
@@ -1046,13 +1045,13 @@ public class cgeocaches extends AbstractListActivity {
                 setComparator(item, new StateComparator());
                 return true;
             case SUBMENU_FILTER_TYPE:
-                showFilterMenu(SUBMENU_FILTER_TYPE);
+                showFilterMenu(TypeFilter.getAllFilters(), res.getString(R.string.caches_filter_type_title));
                 return true;
             case SUBMENU_FILTER_SIZE:
-                showFilterMenu(SUBMENU_FILTER_SIZE);
+                showFilterMenu(SizeFilter.getAllFilters(), res.getString(R.string.caches_filter_size_title));
                 return true;
             case MENU_FILTER_TRACKABLES:
-                setFilter(new FilterByTrackables(res.getString(R.string.caches_filter_track)));
+                setFilter(new TrackablesFilter(res.getString(R.string.caches_filter_track)));
                 return true;
             case MENU_FILTER_CLEAR:
                 if (adapter != null) {
@@ -1076,40 +1075,20 @@ public class cgeocaches extends AbstractListActivity {
         return CacheListAppFactory.onMenuItemSelected(item, geo, cacheList, this, search);
     }
 
-    private void showFilterMenu(final int submenu) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        switch (submenu) {
-            case SUBMENU_FILTER_SIZE:
-                builder.setTitle(res.getString(R.string.caches_filter_size_title));
-                final CacheSize[] cacheSizes = CacheSize.values();
-                ArrayList<String> names = new ArrayList<String>();
-                for (CacheSize cacheSize : cacheSizes) {
-                    names.add(cacheSize.getL10n());
-                }
-                builder.setItems(names.toArray(new String[names.size()]), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int item) {
-                        setFilter(new FilterBySize(cacheSizes[item]));
-                    }
-                });
-                break;
-            case SUBMENU_FILTER_TYPE:
-                builder.setTitle(res.getString(R.string.caches_filter_type_title));
-                final CacheType[] cacheTypes = CacheType.values();
-                ArrayList<String> typeNames = new ArrayList<String>();
-                for (CacheType cacheType : cacheTypes) {
-                    if (cacheType != CacheType.ALL) {
-                        typeNames.add(cacheType.getL10n());
-                    }
-                }
-                builder.setItems(typeNames.toArray(new String[typeNames.size()]), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int item) {
-                        setFilter(new FilterByType(cacheTypes[item]));
-                    }
-                });
-                break;
-            default:
-                break;
+    private void showFilterMenu(final IFilter[] filters, final String menuTitle) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(menuTitle);
+
+        final String[] names = new String[filters.length];
+        for (int i = 0; i < filters.length; i++) {
+            names[i] = filters[i].getName();
         }
+        builder.setItems(names, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                setFilter(filters[item]);
+            }
+        });
+
         builder.create().show();
     }
 
