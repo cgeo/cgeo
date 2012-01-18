@@ -13,6 +13,7 @@ import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.filter.AttributeFilter;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.filter.SizeFilter;
+import cgeo.geocaching.filter.StateFilter;
 import cgeo.geocaching.filter.TrackablesFilter;
 import cgeo.geocaching.filter.TypeFilter;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -128,6 +129,7 @@ public class cgeocaches extends AbstractListActivity {
     private static final int MENU_DROP_CACHES_AND_LIST = 65;
     private static final int MENU_DEFAULT_NAVIGATION = 66;
     private static final int SUBMENU_FILTER_ATTRIBUTES = 67;
+    private static final int SUBMENU_FILTER_STATE = 68;
 
     private String action = null;
     private CacheListType type = null;
@@ -781,6 +783,7 @@ public class cgeocaches extends AbstractListActivity {
         }
         subMenuFilter.add(0, SUBMENU_FILTER_SIZE, 0, res.getString(R.string.caches_filter_size));
         subMenuFilter.add(0, SUBMENU_FILTER_ATTRIBUTES, 0, res.getString(R.string.cache_attributes));
+        subMenuFilter.add(0, SUBMENU_FILTER_STATE, 0, res.getString(R.string.cache_status));
         subMenuFilter.add(0, MENU_FILTER_TRACKABLES, 0, res.getString(R.string.caches_filter_track));
         subMenuFilter.add(0, MENU_FILTER_CLEAR, 0, res.getString(R.string.caches_filter_clear));
 
@@ -1055,6 +1058,9 @@ public class cgeocaches extends AbstractListActivity {
                 return true;
             case SUBMENU_FILTER_ATTRIBUTES:
                 showFilterMenu(AttributeFilter.getAllFilters(), res.getString(R.string.cache_attributes));
+                return true;
+            case SUBMENU_FILTER_STATE:
+                showFilterMenu(StateFilter.getAllFilters(), res.getString(R.string.cache_status));
                 return true;
             case MENU_FILTER_TRACKABLES:
                 setFilter(new TrackablesFilter(res.getString(R.string.caches_filter_track)));
