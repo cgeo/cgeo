@@ -1483,7 +1483,8 @@ public class cgData {
                     putCoords(values, oneWaypoint.getCoords());
                     values.put("note", oneWaypoint.getNote());
 
-                    databaseRW.insert(dbTableWaypoints, null, values);
+                    final long rowId = databaseRW.insert(dbTableWaypoints, null, values);
+                    oneWaypoint.setId((int) rowId);
                 }
             }
 
