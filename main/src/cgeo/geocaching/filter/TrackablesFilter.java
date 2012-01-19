@@ -2,8 +2,8 @@ package cgeo.geocaching.filter;
 
 import cgeo.geocaching.cgCache;
 
-public class FilterByTrackables extends AbstractFilter {
-    public FilterByTrackables(String name) {
+public class TrackablesFilter extends AbstractFilter {
+    public TrackablesFilter(String name) {
         super(name);
     }
 
