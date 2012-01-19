@@ -314,7 +314,7 @@ public final class Settings {
     }
 
     public static int getLastList() {
-        final int listId = sharedPrefs.getInt(KEY_LAST_USED_LIST, -1);
+        final int listId = sharedPrefs.getInt(KEY_LAST_USED_LIST, StoredList.STANDARD_LIST_ID);
 
         return listId;
     }
