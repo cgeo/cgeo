@@ -294,7 +294,7 @@ public class cgeowaypoint extends AbstractActivity {
         }
     }
 
-    private static class update implements UpdateLocationCallback {
+    private class update implements UpdateLocationCallback {
 
         @Override
         public void updateLocation(cgGeo geo) {
@@ -315,6 +315,7 @@ public class cgeowaypoint extends AbstractActivity {
 
         public void onClick(View arg0) {
             if (app.deleteWaypoint(id)) {
+                StaticMapsProvider.removeWpStaticMaps(id, geocode);
                 cgeoapplication.removeCacheFromCache(geocode);
 
                 finish();

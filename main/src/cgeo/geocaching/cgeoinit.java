@@ -464,6 +464,16 @@ public class cgeoinit extends AbstractActivity {
             }
         });
 
+        final CheckBox offlineWpButton = (CheckBox) findViewById(R.id.offline_wp);
+        offlineWpButton.setChecked(Settings.isStoreOfflineWpMaps());
+        offlineWpButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Settings.setStoreOfflineWpMaps(offlineWpButton.isChecked());
+            }
+        });
+
         final CheckBox saveLogImgButton = (CheckBox) findViewById(R.id.save_log_img);
         saveLogImgButton.setChecked(Settings.isStoreLogImages());
         saveLogImgButton.setOnClickListener(new View.OnClickListener() {

@@ -192,6 +192,7 @@ public class cgeowaypointadd extends AbstractActivity {
 
         @Override
         public void updateLocation(cgGeo geo) {
+            Log.d(Settings.tag, "cgeowaypointadd.updateLocation called");
             if (geo == null || geo.coordsNow == null) {
                 return;
             }
@@ -316,8 +317,13 @@ public class cgeowaypointadd extends AbstractActivity {
             waypoint.setLookup(lookup);
             waypoint.setCoords(coords);
             waypoint.setNote(note);
+            waypoint.setId(id);
 
             if (app.saveOwnWaypoint(id, geocode, waypoint)) {
+                StaticMapsProvider.removeWpStaticMaps(id, geocode);
+                if (Settings.isStoreOfflineWpMaps()) {
+                    StaticMapsProvider.storeWaypointStaticMap(app.getCacheByGeocode(geocode), cgeowaypointadd.this, waypoint);
+                }
                 finish();
                 return;
             } else {
