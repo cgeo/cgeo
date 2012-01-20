@@ -1,12 +1,8 @@
 bin/
 gen/
-/main/bin/
-/main/gen/
 /main/local.properties
 /main/private.properties
 /main/res/values/mapsapikey.xml
-/tests/bin/
-/tests/gen/
 /tests/local.properties
 /tests/private.properties
 /main/project/localization/*.missing
