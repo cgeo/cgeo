@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.calendar.ICalendar;
 import cgeo.geocaching.cgData.StorageLocation;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.Progress;
@@ -524,6 +525,7 @@ public class CacheDetailActivity extends AbstractActivity {
             return true;
         } else if (menuItem == MENU_CALENDAR) {
             addToCalendar();
+            // addToCalendarWithIntent();
             return true;
         } else if (menuItem == MENU_SHARE) {
             if (cache != null) {
@@ -724,6 +726,22 @@ public class CacheDetailActivity extends AbstractActivity {
         cgeocaches.startActivityCachesAround(this, cache.getCoords());
 
         finish();
+    }
+
+    private void addToCalendarWithIntent() {
+        // this method is NOT unused :)
+        final Parameters params = new Parameters(
+                ICalendar.PARAM_NAME, cache.getName(),
+                ICalendar.PARAM_NOTE, StringUtils.defaultString(cache.getPersonalNote()),
+                ICalendar.PARAM_HIDDEN_DATE, String.valueOf(cache.getHiddenDate().getTime()),
+                ICalendar.PARAM_URL, StringUtils.defaultString(cache.getUrl()),
+                ICalendar.PARAM_COORDS, cache.getCoords() == null ? "" : cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW),
+                ICalendar.PARAM_LOCATION, StringUtils.defaultString(cache.getLocation()),
+                ICalendar.PARAM_SHORT_DESC, StringUtils.defaultString(cache.getShortDescription())
+                );
+
+        startActivity(new Intent(ICalendar.INTENT,
+                Uri.parse(ICalendar.URI_SCHEME + "://" + ICalendar.URI_HOST + "?" + params.toString())));
     }
 
     /**
