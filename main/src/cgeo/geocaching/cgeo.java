@@ -6,6 +6,7 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.CGeoMap;
 
@@ -422,6 +423,9 @@ public class cgeo extends AbstractActivity {
         }
         for (LogType logType : LogType.values()) {
             logType.setL10n();
+        }
+        for (WaypointType waypointType : WaypointType.values()) {
+            waypointType.setL10n();
         }
 
         Settings.getLogin();

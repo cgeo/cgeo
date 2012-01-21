@@ -101,7 +101,6 @@ public class cgBase {
 
     private static final String passMatch = "(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+";
 
-    public final static Map<WaypointType, String> waypointTypes = new HashMap<WaypointType, String>();
     private final static Map<String, SimpleDateFormat> gcCustomDateFormats;
     static {
         final String[] formats = new String[] {
@@ -149,12 +148,6 @@ public class cgBase {
         context = app.getBaseContext();
         res = app.getBaseContext().getResources();
 
-        // waypoint types
-        for (WaypointType wt : WaypointType.values()) {
-            if (wt != WaypointType.OWN) {
-                waypointTypes.put(wt, res.getString(wt.stringId));
-            }
-        }
 
         try {
             final PackageManager manager = app.getPackageManager();

@@ -10,6 +10,7 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.LogType;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.utils.BaseUtils;
@@ -2439,8 +2440,8 @@ public class CacheDetailActivity extends AbstractActivity {
 
                     // info
                     final List<String> infoTextList = new ArrayList<String>(3);
-                    if (StringUtils.isNotBlank(cgBase.waypointTypes.get(wpt.getWaypointType()))) {
-                        infoTextList.add(cgBase.waypointTypes.get(wpt.getWaypointType()));
+                    if (WaypointType.ALL_TYPES_EXCEPT_OWN.containsKey(wpt.getWaypointType())) {
+                        infoTextList.add(wpt.getWaypointType().getL10n());
                     }
                     if (cgWaypoint.PREFIX_OWN.equalsIgnoreCase(wpt.getPrefix())) {
                         infoTextList.add(res.getString(R.string.waypoint_custom));
