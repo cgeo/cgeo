@@ -71,7 +71,7 @@ public enum WaypointType {
 
     public void setL10n() {
         this.l10n = cgeoapplication.getInstance().getBaseContext().getResources().getString(this.stringId);
-        if (WaypointType.ALL_TYPES_EXCEPT_OWN.containsKey(this)) {
+        if (WaypointType.ALL_TYPES_EXCEPT_OWN != null && WaypointType.ALL_TYPES_EXCEPT_OWN.containsKey(this)) {
             WaypointType.ALL_TYPES_EXCEPT_OWN.put(this, this.getL10n());
         }
     }
