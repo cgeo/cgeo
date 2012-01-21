@@ -35,7 +35,6 @@ public final class CalendarActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
 
         try {
             uri = getIntent().getData();
@@ -58,6 +57,7 @@ public final class CalendarActivity extends Activity {
             finish();
             return;
         }
+        finish();
     }
 
     private String getParameter(final String paramKey) {
@@ -79,6 +79,7 @@ public final class CalendarActivity extends Activity {
         final String[] projection = new String[] { "_id", "displayName" };
         final Uri calendarProvider = Compatibility.getCalendarProviderURI();
 
+        // TODO: Handle missing provider
         final Cursor cursor = managedQuery(calendarProvider, projection, "selected=1", null, null);
 
         final Map<Integer, String> calendars = new HashMap<Integer, String>();

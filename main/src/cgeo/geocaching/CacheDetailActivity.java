@@ -526,7 +526,7 @@ public class CacheDetailActivity extends AbstractActivity {
             return true;
         } else if (menuItem == MENU_CALENDAR) {
             addToCalendar();
-            // addToCalendarWithIntent();
+            //addToCalendarWithIntent();
             return true;
         } else if (menuItem == MENU_SHARE) {
             if (cache != null) {
@@ -741,6 +741,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 ICalendar.PARAM_SHORT_DESC, StringUtils.defaultString(cache.getShortDescription())
                 );
 
+        // TODO: Check if addon is installed, if not, tell the user how to get it.
         startActivity(new Intent(ICalendar.INTENT,
                 Uri.parse(ICalendar.URI_SCHEME + "://" + ICalendar.URI_HOST + "?" + params.toString())));
     }
