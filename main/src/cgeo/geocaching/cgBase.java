@@ -1450,7 +1450,7 @@ public class cgBase {
         trackable.setGeocode(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GEOCODE, true, trackable.getGeocode()).toUpperCase());
 
         // trackable id
-        trackable.setGuid(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_ID, true, trackable.getGuid()));
+        trackable.setGuid(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GUID, true, trackable.getGuid()));
 
         // trackable icon
         trackable.setIconUrl(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_ICON, true, trackable.getIconUrl()));

@@ -381,7 +381,8 @@
   <string name="init_showwaypoints">Wegpunkte auf Live-Karte zeigen</string>
   <string name="init_showwaypoint_description">Wenn weniger als die angegebene Anzahl an Caches auf der Karte sichtbar sind, werden zusätzlich deren Wegpunkte angezeigt.</string>
   <string name="init_disabled">Deaktivierte Caches ausblenden</string>
-  <string name="init_offline">Statische Karten für Offline-Verwendung speichern</string>
+  <string name="init_offline">Statische Karten zum Cache für Offline-Verwendung speichern</string>
+  <string name="init_offline_wp">Statische Karten zu Wegpunkten für Offline-Verwendung speichern</string>
   <string name="init_save_log_img">Logbilder abspeichern</string>
   <string name="init_units">Imperiale Einheiten (Meilen/Fuß)</string>
   <string name="init_nav">Google Navigation verwenden</string>

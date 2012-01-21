@@ -380,7 +380,8 @@
   <string name="init_showwaypoints">Show Waypoints on Live map</string>
   <string name="init_showwaypoint_description">If less than the given amount of caches are displayed on the map, their waypoints are shown additionally.</string>
   <string name="init_disabled">Exclude disabled caches</string>
-  <string name="init_offline">Store static maps for offline use</string>
+  <string name="init_offline">Store cache static maps for offline use</string>
+  <string name="init_offline_wp">Store waypoints static maps for offline use</string>
   <string name="init_save_log_img">Save Images from Logs</string>
   <string name="init_units">Use Imperial Units instead of Metric Units</string>
   <string name="init_nav">Use Google Navigation</string>
@@ -936,6 +937,7 @@
     · <a href="http://github.com/koem">Karsten Priegnitz</a> (code, artwork computation)\n
     · <a href="http://www.geocaching.com/email/?guid=d11a3e3d-7db0-4d43-87f2-7893238844a6">Lineflyer</a> (tester)\n
     · Ludovic Valente (localization FR)\n
+    · marco-jacob (code, loc. DE)\n
     · MichielK (code, loc. NL)\n
     · mucek4 (code, open source project leader)\n
     · ncorreia (code, localization PT)\n
