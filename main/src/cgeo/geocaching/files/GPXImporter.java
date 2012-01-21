@@ -228,13 +228,15 @@ public class GPXImporter {
             importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, (int) cacheFile.length()));
             Collection<cgCache> caches = parser.parse(cacheFile, progressHandler);
 
-            final File wptsFile = new File(cacheFile.getParentFile(), getWaypointsFileNameForGpxFile(cacheFile));
-            if (wptsFile.canRead()) {
-                Log.i(Settings.tag, "Import GPX waypoint file: " + wptsFile.getAbsolutePath());
-                importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_WPT_FILE, R.string.gpx_import_loading_waypoints, (int) wptsFile.length()));
-                caches = parser.parse(wptsFile, progressHandler);
+            final String wptsFilename = getWaypointsFileNameForGpxFile(cacheFile);
+            if (wptsFilename != null) {
+                final File wptsFile = new File(cacheFile.getParentFile(), wptsFilename);
+                if (wptsFile.canRead()) {
+                    Log.i(Settings.tag, "Import GPX waypoint file: " + wptsFile.getAbsolutePath());
+                    importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_WPT_FILE, R.string.gpx_import_loading_waypoints, (int) wptsFile.length()));
+                    caches = parser.parse(wptsFile, progressHandler);
+                }
             }
-
             return caches;
         }
     }

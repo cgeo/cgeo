@@ -25,7 +25,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     private int listId;
     private File tempDir;
 
-    public void testGetWaypointsFileNameForGpxFile() {
+    public void testGetWaypointsFileNameForGpxFile() throws IOException {
         String[] gpxFiles = new String[] { "1234567.gpx", "1.gpx", "1234567.9.gpx",
                 "1234567.GPX", "gpx.gpx.gpx", ".gpx",
                 "1234567_query.gpx", "123-4.gpx", "123(5).gpx" };
@@ -37,7 +37,14 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
             String wptsFileName = wptsFiles[i];
             File gpx = new File(tempDir, gpxFileName);
             File wpts = new File(tempDir, wptsFileName);
+            // the files need to exist - we create them
+            assertTrue(gpx.createNewFile());
+            assertTrue(wpts.createNewFile());
+            // the "real" method check
             assertEquals(wptsFileName, GPXImporter.getWaypointsFileNameForGpxFile(gpx));
+            // they also need to be deleted, because of case sensitive tests that will not work correct on case insensitive file systems
+            gpx.delete();
+            wpts.delete();
         }
         File gpx1 = new File(tempDir, "abc.gpx");
         assertNull(GPXImporter.getWaypointsFileNameForGpxFile(gpx1));
