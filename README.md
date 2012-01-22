@@ -1,5 +1,9 @@
 [c:geo](http://www.cgeo.org) is a simple yet powerful unofficial geocaching client for Android devices. In contrast to other similar applications, c:geo doesn't require a web browser nor file exports. You can just go geocaching with your phone and without any home preparation or worries. Of course, you can go without paying - it's free.
 
+You want to contribute?
+-----------------------
+Perfect! Please **tell us in the [issue tracker](https://github.com/cgeo/c-geo-opensource/issues) before hacking** on your great new feature. It would be bad if you have implemented something great, but we can't include it because it doesn't fit the remaining architecture and code.
+
 Get the source
 --------------
 

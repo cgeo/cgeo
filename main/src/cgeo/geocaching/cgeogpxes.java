@@ -71,7 +71,7 @@ public class cgeogpxes extends FileList<GPXListAdapter> {
                 return false;
             }
             // filter out waypoint files
-            return !StringUtils.endsWithIgnoreCase(filename, GPXImporter.WAYPOINTS_FILE_SUFFIX_AND_EXTENSION);
+            return !StringUtils.containsIgnoreCase(filename, GPXImporter.WAYPOINTS_FILE_SUFFIX);
         }
         return false;
     }

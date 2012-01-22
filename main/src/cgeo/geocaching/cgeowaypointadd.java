@@ -127,7 +127,7 @@ public class cgeowaypointadd extends AbstractActivity {
         Button addWaypoint = (Button) findViewById(R.id.add_waypoint);
         addWaypoint.setOnClickListener(new coordsListener());
 
-        List<String> wayPointNames = new ArrayList<String>(cgBase.waypointTypes.values());
+        List<String> wayPointNames = new ArrayList<String>(WaypointType.ALL_TYPES_EXCEPT_OWN.values());
         AutoCompleteTextView textView = (AutoCompleteTextView) findViewById(R.id.name);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, wayPointNames);
         textView.setAdapter(adapter);
@@ -192,6 +192,7 @@ public class cgeowaypointadd extends AbstractActivity {
 
         @Override
         public void updateLocation(cgGeo geo) {
+            Log.d(Settings.tag, "cgeowaypointadd.updateLocation called");
             if (geo == null || geo.coordsNow == null) {
                 return;
             }
@@ -316,8 +317,13 @@ public class cgeowaypointadd extends AbstractActivity {
             waypoint.setLookup(lookup);
             waypoint.setCoords(coords);
             waypoint.setNote(note);
+            waypoint.setId(id);
 
             if (app.saveOwnWaypoint(id, geocode, waypoint)) {
+                StaticMapsProvider.removeWpStaticMaps(id, geocode);
+                if (Settings.isStoreOfflineWpMaps()) {
+                    StaticMapsProvider.storeWaypointStaticMap(app.getCacheByGeocode(geocode), cgeowaypointadd.this, waypoint);
+                }
                 finish();
                 return;
             } else {
