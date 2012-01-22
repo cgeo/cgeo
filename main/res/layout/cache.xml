@@ -71,7 +71,7 @@
 				android:layout_marginTop="1dip"
 				android:layout_marginBottom="1dip"
 				android:layout_marginRight="30dip" >
-			<view class="cgeo.geocaching.cgDistanceView"
+			<view class="cgeo.geocaching.ui.DistanceView"
 					android:id="@+id/distance"
 					android:layout_width="78dip"
 					android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
 					android:textSize="16dip"
 					android:textColor="?text_color"
 					android:gravity="center" />
-			<view class="cgeo.geocaching.cgCompassMini"
+			<view class="cgeo.geocaching.ui.CompassMiniView"
 					android:id="@+id/direction"
 					android:layout_width="78dip"
 					android:layout_height="28px"

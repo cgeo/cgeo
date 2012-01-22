@@ -6,6 +6,7 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.CGeoMap;
 
@@ -84,7 +85,9 @@ public class cgeo extends AbstractActivity {
                         addText.append(address.getAdminArea());
                     }
 
-                    addCoords = geo.coordsNow;
+                    if (geo != null) {
+                        addCoords = geo.coordsNow;
+                    }
 
                     TextView navLocation = (TextView) findViewById(R.id.nav_location);
                     navLocation.setText(addText.toString());
@@ -250,7 +253,7 @@ public class cgeo extends AbstractActivity {
                 showAbout(null);
                 return true;
             case MENU_HELPERS:
-                startActivity(new Intent(this, cgeohelpers.class));
+                startActivity(new Intent(this, UsefulAppsActivity.class));
                 return true;
             case MENU_SETTINGS:
                 startActivity(new Intent(this, cgeoinit.class));
@@ -420,6 +423,9 @@ public class cgeo extends AbstractActivity {
         }
         for (LogType logType : LogType.values()) {
             logType.setL10n();
+        }
+        for (WaypointType waypointType : WaypointType.values()) {
+            waypointType.setL10n();
         }
 
         Settings.getLogin();

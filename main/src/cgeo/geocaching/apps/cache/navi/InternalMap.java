@@ -1,26 +1,25 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.CGeoMap;
 
 import android.app.Activity;
-import android.content.res.Resources;
+import android.content.Context;
 
-class InternalMap extends AbstractInternalMap {
+class InternalMap extends AbstractNavigationApp {
 
-    InternalMap(Resources res) {
-        super(res.getString(R.string.cache_menu_map), null);
+    InternalMap() {
+        super(getString(R.string.cache_menu_map), null);
     }
 
     @Override
-    public boolean invoke(cgGeo geo, Activity activity, Resources res,
-            cgCache cache,
+    public boolean invoke(cgGeo geo, Activity activity, cgCache cache,
             final SearchResult search, cgWaypoint waypoint, final Geopoint coords) {
         if (search != null) {
             CGeoMap.startActivitySearch(activity, search, cache != null ? cache.getGeocode() : null, true);
@@ -35,6 +34,11 @@ class InternalMap extends AbstractInternalMap {
             CGeoMap.startActivityCoords(activity, coords, WaypointType.WAYPOINT, null);
         }
 
+        return true;
+    }
+
+    @Override
+    public boolean isInstalled(Context context) {
         return true;
     }
 

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">c:geo - Kalender (Erweiterung)</string>
+    <string name="calendars">Kalender</string>
+    <string name="event_success">Event zum Kalender hinzugefügt</string>
+    <string name="event_fail">Hinzufügen des Events zum Kalender fehlgeschlagen</string>
+</resources>

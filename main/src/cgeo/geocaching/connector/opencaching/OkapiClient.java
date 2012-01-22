@@ -1,6 +1,5 @@
 package cgeo.geocaching.connector.opencaching;
 
-import cgeo.geocaching.Parameters;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
@@ -14,6 +13,7 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser;
+import cgeo.geocaching.network.Parameters;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
@@ -124,6 +124,7 @@ final public class OkapiClient {
 
     private static cgCache parseCache(final JSONObject response) {
         final cgCache cache = new cgCache();
+        cache.setReliableLatLon(true);
         try {
             cache.setGeocode(response.getString(CACHE_CODE));
             cache.setName(response.getString(CACHE_NAME));
@@ -149,7 +150,7 @@ final public class OkapiClient {
             }
             cache.setVotes(response.getInt(CACHE_VOTES));
 
-            cache.setFavouritePoints(response.getInt(CACHE_RECOMMENDATIONS));
+            cache.setFavoritePoints(response.getInt(CACHE_RECOMMENDATIONS));
             // not used: req_password
             cache.setDescription(response.getString(CACHE_DESCRIPTION));
             cache.setHint(Html.fromHtml(response.getString(CACHE_HINT)).toString());

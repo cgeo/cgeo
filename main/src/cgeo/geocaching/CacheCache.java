@@ -1,11 +1,10 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.cgData.StorageLocations;
+import cgeo.geocaching.cgData.StorageLocation;
+import cgeo.geocaching.utils.LeastRecentlyUsedCache;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Cache for Caches. Every cache is stored in memory while c:geo is active to
@@ -15,12 +14,13 @@ import java.util.Map;
  */
 public class CacheCache {
 
-    final private Map<String, cgCache> cachesCache; // caching caches into memory
+    private static final int MAX_CACHED_CACHES = 1000;
+    final private LeastRecentlyUsedCache<String, cgCache> cachesCache;
 
     private static CacheCache instance = null;
 
     private CacheCache() {
-        cachesCache = new HashMap<String, cgCache>();
+        cachesCache = new LeastRecentlyUsedCache<String, cgCache>(MAX_CACHED_CACHES);
     }
 
     public static CacheCache getInstance() {
@@ -57,7 +57,7 @@ public class CacheCache {
             cachesCache.remove(cache.getGeocode());
         }
 
-        cache.addStorageLocation(StorageLocations.CACHE);
+        cache.addStorageLocation(StorageLocation.CACHE);
         cachesCache.put(cache.getGeocode(), cache);
     }
 

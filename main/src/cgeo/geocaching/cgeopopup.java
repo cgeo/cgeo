@@ -133,10 +133,10 @@ public class cgeopopup extends AbstractActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 2, 0, res.getString(R.string.cache_menu_compass)).setIcon(android.R.drawable.ic_menu_compass); // compass
+        menu.add(0, 2, 0, NavigationAppFactory.getDefaultNavigationApplication(this).getName()).setIcon(android.R.drawable.ic_menu_compass); // default navigation tool
 
         SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
-        NavigationAppFactory.addMenuItems(subMenu, this, res);
+        NavigationAppFactory.addMenuItems(subMenu, this);
         addVisitMenu(menu, cache);
         menu.add(0, 5, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
         menu.add(0, 7, 0, res.getString(R.string.cache_menu_browser)).setIcon(android.R.drawable.ic_menu_info_details); // browser
@@ -187,7 +187,7 @@ public class cgeopopup extends AbstractActivity {
             return true;
         }
 
-        if (NavigationAppFactory.onMenuItemSelected(item, geo, this, res, cache, null, null, null)) {
+        if (NavigationAppFactory.onMenuItemSelected(item, geo, this, cache, null, null, null)) {
             return true;
         }
 
@@ -232,7 +232,7 @@ public class cgeopopup extends AbstractActivity {
             detailsList.removeAllViews();
 
             // actionbar icon
-            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cgBase.getCacheIcon(cache.getType())), null, null, null);
+            ((TextView) findViewById(R.id.actionbar_title)).setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(cache.getType().markerId), null, null, null);
 
             // cache type
             itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
@@ -256,7 +256,7 @@ public class cgeopopup extends AbstractActivity {
             detailsList.addView(itemLayout);
 
             // cache state
-            if (cache.isArchived() || cache.isDisabled() || cache.isMembers() || cache.isFound()) {
+            if (cache.isArchived() || cache.isDisabled() || cache.isPremiumMembersOnly() || cache.isFound()) {
                 itemLayout = (RelativeLayout) inflater.inflate(R.layout.cache_item, null);
                 itemName = (TextView) itemLayout.findViewById(R.id.name);
                 itemValue = (TextView) itemLayout.findViewById(R.id.value);
@@ -282,7 +282,7 @@ public class cgeopopup extends AbstractActivity {
                     }
                     state.append(res.getString(R.string.cache_status_disabled));
                 }
-                if (cache.isMembers()) {
+                if (cache.isPremiumMembersOnly()) {
                     if (state.length() > 0) {
                         state.append(", ");
                     }
@@ -519,22 +519,16 @@ public class cgeopopup extends AbstractActivity {
     private void navigateTo() {
         if (cache == null || cache.getCoords() == null) {
             showToast(res.getString(R.string.err_location_unknown));
+            return;
         }
 
-        cgeonavigate navigateActivity = new cgeonavigate();
-
-        Intent navigateIntent = new Intent(this, navigateActivity.getClass());
-        navigateIntent.putExtra("latitude", cache.getCoords().getLatitude());
-        navigateIntent.putExtra("longitude", cache.getCoords().getLongitude());
-        navigateIntent.putExtra("geocode", "");
-        navigateIntent.putExtra("name", res.getString(R.string.search_some_destination));
-
-        startActivity(navigateIntent);
+        NavigationAppFactory.startDefaultNavigationApplication(geo, this, cache, null, null, null);
     }
 
     private void cachesAround() {
         if (cache == null || cache.getCoords() == null) {
             showToast(res.getString(R.string.err_location_unknown));
+            return;
         }
 
         cgeocaches.startActivityCachesAround(this, cache.getCoords());
@@ -635,7 +629,6 @@ public class cgeopopup extends AbstractActivity {
     public void goCompass(View view) {
         if (cache == null || cache.getCoords() == null) {
             showToast(res.getString(R.string.cache_coordinates_no));
-
             return;
         }
 

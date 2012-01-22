@@ -1,9 +1,10 @@
 package cgeo.geocaching.gcvote;
 
-import cgeo.geocaching.Parameters;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.utils.LeastRecentlyUsedCache;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -26,11 +27,27 @@ public final class GCVote {
     private static final Pattern patternVote = Pattern.compile("voteUser='([0-9.]+)'", Pattern.CASE_INSENSITIVE);
     private static final Pattern patternVoteElement = Pattern.compile("<vote ([^>]+)>", Pattern.CASE_INSENSITIVE);
 
+    private static final int MAX_CACHED_RATINGS = 1000;
+    private static LeastRecentlyUsedCache<String, GCVoteRating> ratingsCache = new LeastRecentlyUsedCache<String, GCVoteRating>(MAX_CACHED_RATINGS);
+
+    /**
+     * Get user rating for a given guid or geocode. For a guid first the ratings cache is checked
+     * before a request to gcvote.com is made.
+     *
+     * @param guid
+     * @param geocode
+     * @return
+     */
     public static GCVoteRating getRating(String guid, String geocode) {
         List<String> guids = null;
         List<String> geocodes = null;
 
         if (StringUtils.isNotBlank(guid)) {
+
+            GCVoteRating rating = ratingsCache.get(guid);
+            if (rating != null) {
+                return rating;
+            }
             guids = new ArrayList<String>();
             guids.add(guid);
         } else if (StringUtils.isNotBlank(geocode)) {
@@ -50,6 +67,13 @@ public final class GCVote {
         return null;
     }
 
+    /**
+     * Get user ratings from gcvote.com
+     *
+     * @param guids
+     * @param geocodes
+     * @return
+     */
     public static Map<String, GCVoteRating> getRating(List<String> guids, List<String> geocodes) {
         if (guids == null && geocodes == null) {
             return null;
@@ -154,6 +178,7 @@ public final class GCVote {
                 if (StringUtils.isNotBlank(guid)) {
                     GCVoteRating gcvoteRating = new GCVoteRating(rating, votes, myVote);
                     ratings.put(guid, gcvoteRating);
+                    ratingsCache.put(guid, gcvoteRating);
                 }
             }
         } catch (Exception e) {
@@ -163,6 +188,13 @@ public final class GCVote {
         return ratings;
     }
 
+    /**
+     * Transmit user vote to gcvote.com
+     *
+     * @param cache
+     * @param vote
+     * @return
+     */
     public static boolean setRating(cgCache cache, double vote) {
         if (!cache.supportsGCVote()) {
             return false;

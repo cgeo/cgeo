@@ -10,18 +10,7 @@
         android:orientation="vertical"
         android:padding="4dip" >
 
-        <!-- Map preview -->
-
-        <ImageView
-            android:id="@+id/map_preview"
-            android:layout_width="fill_parent"
-            android:layout_height="80dip"
-            android:layout_gravity="center"
-            android:layout_marginBottom="5dip"
-            android:gravity="center"
-            android:scaleType="centerCrop"
-            android:src="@null"
-            android:visibility="gone" />
+        <!-- Details list -->
 
         <LinearLayout
             android:id="@+id/details_list"
@@ -109,7 +98,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
-            <View
+
+            <View
                 style="@style/separator_horizontal"
                 android:layout_marginBottom="9dp"
                 android:layout_marginTop="9dp" />
@@ -145,9 +135,10 @@
                     android:visibility="gone" />
             </RelativeLayout>
         </LinearLayout>
-        
-        <!--  Debug info Box -->
-         <LinearLayout
+
+        <!-- Debug info Box -->
+
+        <LinearLayout
             android:id="@+id/debug_box"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -161,19 +152,19 @@
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content" >
-            
-	            <TextView
-	                    android:id="@+id/debug_text"
-	                    android:layout_width="fill_parent"
-	                    android:layout_height="wrap_content"
-	                    android:layout_alignParentLeft="true"
-	                    android:layout_gravity="left"
-	                    android:layout_marginLeft="6dip"
-	                    android:layout_marginRight="130dip"
-	                    android:paddingRight="3dip"
-	                    android:textColor="?text_color"
-	                    android:textSize="14dip" />
-             </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/debug_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="6dip"
+                    android:layout_marginRight="130dip"
+                    android:paddingRight="3dip"
+                    android:textColor="?text_color"
+                    android:textSize="14dip" />
+            </RelativeLayout>
         </LinearLayout>
 
         <!-- License Box -->
@@ -204,6 +195,31 @@
                 android:textColor="?text_color"
                 android:textColorLink="?text_color_link"
                 android:textSize="14dip" />
+        </LinearLayout>
+
+        <!-- Map Preview Box -->
+
+        <LinearLayout
+            android:id="@+id/map_preview_box"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <View
+                style="@style/separator_horizontal"
+                android:layout_marginBottom="9dp"
+                android:layout_marginTop="9dp" />
+
+            <ImageView
+                android:id="@+id/map_preview"
+                android:layout_width="fill_parent"
+                android:layout_height="80dip"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:scaleType="centerCrop"
+                android:src="@null"
+                android:onClick="showNavigationMenu" />
         </LinearLayout>
     </LinearLayout>
 

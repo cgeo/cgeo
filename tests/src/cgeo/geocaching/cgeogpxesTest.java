@@ -40,6 +40,8 @@ public class cgeogpxesTest extends ActivityInstrumentationTestCase2<cgeogpxes> {
         assertFalse(importGpxActivity.filenameBelongsToList("acde12345678.zip"));
 
         assertFalse(importGpxActivity.filenameBelongsToList("1234567-wpts.gpx"));
+        assertFalse(importGpxActivity.filenameBelongsToList("1234567-wpts-1.gpx"));
+        assertFalse(importGpxActivity.filenameBelongsToList("1234567-wpts(1).gpx"));
     }
 
 }

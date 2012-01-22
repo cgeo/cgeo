@@ -113,6 +113,9 @@ public final class BaseUtils {
      * @return true if data contains the pattern p
      */
     public static boolean matches(final String data, final Pattern p) {
+        if (data == null) {
+            return false;
+        }
         // matcher is faster than String.contains() and more flexible - it takes patterns instead of fixed texts
         return p.matcher(data).find();
 

@@ -7,15 +7,16 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class SearchResult implements Parcelable {
 
-    final private List<String> geocodes;
-    public StatusCode error = null; // 13
-    public String url = ""; // 7
-    public String[] viewstates = null; // 9
-    public int totalCnt = 0; // 9
+    final protected Set<String> geocodes;
+    public StatusCode error = null;
+    public String url = "";
+    public String[] viewstates = null;
+    public int totalCnt = 0;
 
     final public static Parcelable.Creator<SearchResult> CREATOR = new Parcelable.Creator<SearchResult>() {
         public SearchResult createFromParcel(Parcel in) {
@@ -28,33 +29,34 @@ public class SearchResult implements Parcelable {
     };
 
     public SearchResult() {
-        this((List<String>) null);
+        this((Set<String>) null);
     }
 
     public SearchResult(SearchResult searchResult) {
         if (searchResult != null) {
-            this.geocodes = new ArrayList<String>(searchResult.geocodes);
+            this.geocodes = new HashSet<String>(searchResult.geocodes);
             this.error = searchResult.error;
             this.url = searchResult.url;
             this.viewstates = searchResult.viewstates;
             this.totalCnt = searchResult.totalCnt;
         } else {
-            this.geocodes = new ArrayList<String>();
+            this.geocodes = new HashSet<String>();
         }
     }
 
-    public SearchResult(final List<String> geocodes) {
+    public SearchResult(final Set<String> geocodes) {
         if (geocodes == null) {
-            this.geocodes = new ArrayList<String>();
+            this.geocodes = new HashSet<String>();
         } else {
-            this.geocodes = new ArrayList<String>(geocodes.size());
+            this.geocodes = new HashSet<String>(geocodes.size());
             this.geocodes.addAll(geocodes);
         }
     }
 
     public SearchResult(final Parcel in) {
-        geocodes = new ArrayList<String>();
-        in.readStringList(geocodes);
+        ArrayList<String> list = new ArrayList<String>();
+        in.readStringList(list);
+        geocodes = new HashSet<String>(list);
         error = (StatusCode) in.readSerializable();
         url = in.readString();
         final int length = in.readInt();
@@ -67,7 +69,7 @@ public class SearchResult implements Parcelable {
 
     @Override
     public void writeToParcel(final Parcel out, final int flags) {
-        out.writeStringList(geocodes);
+        out.writeStringArray(geocodes.toArray(new String[geocodes.size()]));
         out.writeSerializable(error);
         out.writeString(url);
         if (viewstates == null) {
@@ -84,16 +86,16 @@ public class SearchResult implements Parcelable {
         return 0;
     }
 
-    public List<String> getGeocodes() {
-        return Collections.unmodifiableList(geocodes);
+    public Set<String> getGeocodes() {
+        return Collections.unmodifiableSet(geocodes);
     }
 
     public int getCount() {
         return geocodes.size();
     }
 
-    public void addGeocode(final String geocode) {
-        geocodes.add(geocode);
+    public boolean addGeocode(final String geocode) {
+        return geocodes.add(geocode);
     }
 
     public static StatusCode getError(final SearchResult search) {

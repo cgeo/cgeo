@@ -1,12 +1,16 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.apps.cache.navi.NavigationApp;
+import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.maps.MapProviderFactory;
+import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.twitter.TwitterAuthorizationActivity;
+import cgeo.geocaching.utils.LogTemplateProvider;
+import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -36,6 +40,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.SortedMap;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -460,6 +466,16 @@ public class cgeoinit extends AbstractActivity {
             }
         });
 
+        final CheckBox offlineWpButton = (CheckBox) findViewById(R.id.offline_wp);
+        offlineWpButton.setChecked(Settings.isStoreOfflineWpMaps());
+        offlineWpButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Settings.setStoreOfflineWpMaps(offlineWpButton.isChecked());
+            }
+        });
+
         final CheckBox saveLogImgButton = (CheckBox) findViewById(R.id.save_log_img);
         saveLogImgButton.setChecked(Settings.isStoreLogImages());
         saveLogImgButton.setOnClickListener(new View.OnClickListener() {
@@ -567,6 +583,33 @@ public class cgeoinit extends AbstractActivity {
             @Override
             public void onClick(View v) {
                 Settings.setMapTrail(trailButton.isChecked());
+            }
+        });
+
+        // Default navigation tool settings
+        final List<NavigationApp> apps = NavigationAppFactory.getInstalledNavigationApps(this);
+        final List<String> appNames = new ArrayList<String>();
+        for (NavigationApp navigationApp : apps) {
+            appNames.add(navigationApp.getName());
+        }
+        Spinner defaultNavigationToolSelector = (Spinner) findViewById(R.id.default_navigation_tool);
+        ArrayAdapter<String> naviAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, appNames.toArray(new String[appNames.size()]));
+        naviAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        defaultNavigationToolSelector.setAdapter(naviAdapter);
+        int defaultNavigationTool = Settings.getDefaultNavigationTool();
+        defaultNavigationToolSelector.setSelection(NavigationAppFactory.getOrdinalFromId(this, defaultNavigationTool));
+        defaultNavigationToolSelector.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+                NavigationApp selectedApp = apps.get(arg2);
+                if (selectedApp != null) {
+                    Settings.setDefaultNavigationTool(selectedApp.getId());
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // noop
             }
         });
 

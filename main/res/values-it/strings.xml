@@ -66,6 +66,8 @@
   <string name="log_retrieved">Prelevato</string>
   <string name="log_placed">Inserito</string>
   <string name="log_grabbed">Prelevato da qualche parte</string>
+  <string name="log_movecollection">Sposta in collezione</string>
+  <string name="log_moveinventory">Sposta in inventario</string>  
   <string name="log_maintained">Manutenzione effettuata</string>
   <string name="log_maintenance_needed">Necessita manutenzione</string>
   <string name="log_update">Coordinate aggiornate</string>
@@ -175,6 +177,7 @@
   <string name="err_waypoint_add_failed">c:geo non è riuscito ad aggiungere il tuo waypoint.</string>
   <string name="err_waypoint_load_failed">c:geo non è riuscito a caricare il waypoint.</string>
   <string name="err_waypoint_delete_failed">c:geo non riesce a cancellare il waypoint.</string>
+  <string name="err_waypoint_open_cache_failed">c:geo non riesce ad aprire i dettagli della cache.</string>  
   <string name="err_point_unknown_position">c:geo non capisce dove ti trovi.</string>
   <string name="err_point_no_position_given_title">Info richieste</string>
   <string name="err_point_no_position_given">Inserisci almeno latitudine, o longitudine, o distanza e angolo. Puoi anche inserire tutti e quattro i valori.</string>
@@ -351,7 +354,7 @@
   <string name="init_login_popup_ok">Login ok.</string>
   <string name="init_login_popup_failed">Login fallito.</string>
   <string name="init_login_popup_failed_reason">Login fallito perché </string>
-  <string name="init_go4cache_connect">Connect a Go 4 Cache</string>
+  <string name="init_go4cache_connect">Connetti a Go 4 Cache</string>
   <string name="init_twitter_authorize">Autorizza c:geo</string>
   <string name="init_twitter_publish">Manda un tweet quando trovi una cache</string>
   <string name="init_signature">Firma</string>
@@ -369,7 +372,7 @@
   <string name="init_elevationwanted">Carica dati altitudine cache</string>
   <string name="init_friendlogswanted">Carica logbook addizionale con i log dei miei amici</string>
   <string name="init_openlastdetailspage">Ricorda l\'ultima pagina usata nei dettagli</string>
-  <string name="init_autoload">Auto-carica descrizione estesa</string>
+  <string name="init_autoload">Carica automaticamente descrizione estesa</string>
   <string name="init_other">Altre opzioni</string>
   <string name="init_skin">Tema chiaro\n(richiede riavvio di c:geo)</string>
   <string name="init_address">Visualizza indirizzo su pagina principale</string>
@@ -412,7 +415,10 @@
   <string name="init_trackautovisit">Setta i miei oggetti trackables automaticamente su \"visit\" quando invio log</string>
   <string name="init_sigautoinsert">Inserisce la firma automaticamente</string>
   <string name="init_loaddirectionimg">Carica le immagini di direzione se necessario</string>
-
+  <string name="init_default_navigation_tool">Navigatore preferito</string>
+  <string name="init_default_navigation_tool_description">Qui puoi scegliere il tuo strumento di navigazione preferito.</string>
+  <string name="init_default_navigation_tool_select">Scegli navigatore</string>
+  
   <string name="init_sendToCgeo">Send to c:geo</string>
   <string name="init_sendToCgeo_name">Nome dispositivo:</string>
   <string name="init_sendToCgeo_description">\"Send to c:geo\" permette di ricevere cache direttamente dal sito geocaching.com tramite un plugin speciale per Firefox o Chrome. Prima della registrazione leggere <a href="http://send2.cgeo.org/">http://send2.cgeo.org/</a>. È necessario registrare il dispositivo solo se intendi usare send2cgeo. C:geo funzionerà anche senza registrazione e senza send2cgeo.</string>
@@ -464,6 +470,7 @@
   <string name="cache_personal_note">Note personali</string>
   <string name="cache_description">Descrizione</string>
   <string name="cache_description_long">Descrizione estesa</string>
+  <string name="cache_description_table_note">La descrizione contiene una tabella formattata in modo tale che potresti aver bisogno di andare su geocaching.com per vederla correttamente.</string>  
   <string name="cache_watchlist">Watchlist</string>
   <string name="cache_watchlist_on">Questa cache è nella tua watchlist.</string>
   <string name="cache_watchlist_not_on">Questa cache non è nella tua watchlist.</string>
@@ -611,6 +618,7 @@
   <string name="waypoint_done">Fatto</string>
   <string name="waypoint_duplicate">Duplicato</string>
   <string name="waypoint_copy_of">Copia di</string>
+  <string name="waypoint_menu_open_cache">Apri Cache</string>  
   <string name="search_history">Cronologia</string>
   <string name="search_history_empty">Nessuna precedente destinazione</string>
   <string name="search_remove_destination">Destinazione rimossa</string>
@@ -701,6 +709,8 @@
   <string name="use_compass">Usa Nord da bussola</string>
   <string name="destination_select">Scegli destinazione</string>
   <string name="destination_set">Attiva destinazione</string>
+  <string name="navigation_direct_navigation">Navigazione diretta</string>
+  <string name="navigation_target">Destinazione</string>
 
   <!-- license -->
   <string name="license">Licenza</string>

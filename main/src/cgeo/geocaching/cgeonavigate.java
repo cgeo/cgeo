@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.ui.CompassView;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -48,7 +49,7 @@ public class cgeonavigate extends AbstractActivity {
     private TextView navLocation = null;
     private TextView distanceView = null;
     private TextView headingView = null;
-    private cgCompass compassView = null;
+    private CompassView compassView = null;
     private updaterThread updater = null;
     private Handler updaterHandler = new Handler() {
 
@@ -124,7 +125,7 @@ public class cgeonavigate extends AbstractActivity {
         }
 
         // get textviews once
-        compassView = (cgCompass) findViewById(R.id.rose);
+        compassView = (CompassView) findViewById(R.id.rose);
 
         // start updater thread
         updater = new updaterThread(updaterHandler);
@@ -436,7 +437,9 @@ public class cgeonavigate extends AbstractActivity {
 
     public static void startActivity(final Context context, final String geocode, final String displayedName, final Geopoint coords, final Collection<cgCoord> coordinatesWithType) {
         coordinates.clear();
-        coordinates.addAll(coordinatesWithType);
+        if (coordinatesWithType != null) { // avoid possible NPE
+            coordinates.addAll(coordinatesWithType);
+        }
 
         final Intent navigateIntent = new Intent(context, cgeonavigate.class);
         navigateIntent.putExtra(EXTRAS_LATITUDE, coords.getLatitude());

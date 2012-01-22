@@ -424,7 +424,7 @@ public class cgeotrackable extends AbstractActivity {
             // for non TB trackables, we should just use what we have in the database
             trackable = cgeoapplication.getInstance().getTrackableByGeocode(geocode);
 
-            if ((trackable == null || trackable.isLoggable() && (!StringUtils.startsWithIgnoreCase(geocode, "GK")))) {
+            if ((trackable == null || trackable.isLoggable()) && !StringUtils.startsWithIgnoreCase(geocode, "GK")) {
                 trackable = cgBase.searchTrackable(geocode, guid, id);
             }
             handler.sendMessage(Message.obtain());
@@ -497,6 +497,7 @@ public class cgeotrackable extends AbstractActivity {
         Intent logTouchIntent = new Intent(this, cgeotouch.class);
         logTouchIntent.putExtra("geocode", trackable.getGeocode().toUpperCase());
         logTouchIntent.putExtra("guid", trackable.getGuid());
+        logTouchIntent.putExtra("trackingcode", trackable.getTrackingcode());
         startActivity(logTouchIntent);
     }
 

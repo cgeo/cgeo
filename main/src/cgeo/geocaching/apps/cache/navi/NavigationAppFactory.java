@@ -1,9 +1,10 @@
 package cgeo.geocaching.apps.cache.navi;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -11,61 +12,147 @@ import cgeo.geocaching.geopoint.Geopoint;
 import org.apache.commons.lang3.ArrayUtils;
 
 import android.app.Activity;
-import android.content.res.Resources;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class NavigationAppFactory extends AbstractAppFactory {
     private static NavigationApp[] apps = new NavigationApp[] {};
 
-    private static NavigationApp[] getNavigationApps(Resources res) {
+    private static NavigationApp[] getNavigationApps() {
         if (ArrayUtils.isEmpty(apps)) {
             apps = new NavigationApp[] {
-                    // compass
-                    new RadarApp(res),
-                    new InternalMap(res),
-                    new StaticMapApp(res),
-                    new LocusApp(res),
-                    new RMapsApp(res),
-                    new GoogleMapsApp(res),
-                    new GoogleNavigationApp(res),
-                    new StreetviewApp(res),
-                    new OruxMapsApp(res) };
+                    new CompassApp(), // MUST always be the first entry in this array
+                    new RadarApp(),
+                    new InternalMap(),
+                    new StaticMapApp(),
+                    new LocusApp(),
+                    new RMapsApp(),
+                    new GoogleMapsApp(),
+                    new GoogleNavigationApp(),
+                    new StreetviewApp(),
+                    new OruxMapsApp(),
+                    new NavigonApp() };
         }
         return apps;
     }
 
-    public static void addMenuItems(final Menu menu, final Activity activity,
-            final Resources res) {
-        addMenuItems(menu, activity, res, true);
+    public static void addMenuItems(final Menu menu, final Activity activity) {
+        addMenuItems(menu, activity, true, false);
     }
 
     public static void addMenuItems(final Menu menu, final Activity activity,
-            final Resources res, final boolean showInternalMap) {
-        for (NavigationApp app : getNavigationApps(res)) {
-            if (app.isInstalled(activity)) {
-                if (showInternalMap || !(app instanceof InternalMap)) {
-                    menu.add(0, app.getId(), 0, app.getName());
-                }
+            final boolean showInternalMap, final boolean showDefaultNavigation) {
+        final int defaultNavigationTool = Settings.getDefaultNavigationTool();
+        for (NavigationApp app : getInstalledNavigationApps(activity)) {
+            if ((showInternalMap || !(app instanceof InternalMap)) &&
+                    (showDefaultNavigation || defaultNavigationTool != app.getId())) {
+                menu.add(0, app.getId(), 0, app.getName());
             }
         }
     }
 
+    public static void showNavigationMenu(final cgGeo geo, final Activity activity, final cgCache cache, final SearchResult search) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(R.string.cache_menu_navigate);
+        builder.setIcon(android.R.drawable.ic_menu_mapmode);
+        final List<NavigationApp> installed = getInstalledNavigationApps(activity);
+        String[] items = new String[installed.size()];
+        for (int i = 0; i < installed.size(); i++) {
+            items[i] = installed.get(i).getName();
+        }
+        builder.setItems(items, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                installed.get(item).invoke(geo, activity, cache, search, null, null);
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+
+    }
+
+    public static List<NavigationApp> getInstalledNavigationApps(final Activity activity) {
+        final List<NavigationApp> installedNavigationApps = new ArrayList<NavigationApp>();
+        for (NavigationApp app : getNavigationApps()) {
+            if (app.isInstalled(activity)) {
+                installedNavigationApps.add(app);
+            }
+        }
+        return installedNavigationApps;
+    }
+
+    public static int getOrdinalFromId(final Activity activity, final int id) {
+        int ordinal = 0;
+        for (NavigationApp app : getInstalledNavigationApps(activity)) {
+            if (app.getId() == id) {
+                return ordinal;
+            }
+            ordinal++;
+        }
+        return 0;
+    }
+
     public static boolean onMenuItemSelected(final MenuItem item,
-            final cgGeo geo, Activity activity, Resources res,
-            cgCache cache,
+            final cgGeo geo, Activity activity, cgCache cache,
             final SearchResult search, cgWaypoint waypoint, final Geopoint destination) {
-        NavigationApp app = (NavigationApp) getAppFromMenuItem(item, apps);
+        if (cache == null && waypoint == null && destination == null) {
+            return false;
+        }
+
+        final NavigationApp app = (NavigationApp) getAppFromMenuItem(item, apps);
         if (app != null) {
             try {
-                return app.invoke(geo, activity, res, cache,
+                return app.invoke(geo, activity, cache,
                         search, waypoint, destination);
             } catch (Exception e) {
                 Log.e(Settings.tag, "NavigationAppFactory.onMenuItemSelected: " + e.toString());
             }
         }
         return false;
+    }
+
+    public static void startDefaultNavigationApplication(final cgGeo geo, Activity activity, cgCache cache,
+            final SearchResult search, cgWaypoint waypoint, final Geopoint destination) {
+        NavigationApp app = getDefaultNavigationApplication(activity);
+
+        if (app != null) {
+            try {
+                app.invoke(geo, activity, cache, search, waypoint, destination);
+            } catch (Exception e) {
+                Log.e(Settings.tag, "NavigationAppFactory.startDefaultNavigationApplication: " + e.toString());
+            }
+        }
+    }
+
+    /**
+     * Returns the default navigation tool if correctly set and installed or the compass app as default fallback
+     * 
+     * @param activity
+     * @return never <code>null</code>
+     */
+    public static NavigationApp getDefaultNavigationApplication(Activity activity) {
+        final int defaultNavigationTool = Settings.getDefaultNavigationTool();
+
+        NavigationApp app = null;
+        final List<NavigationApp> installedNavigationApps = getInstalledNavigationApps(activity);
+
+        for (NavigationApp navigationApp : installedNavigationApps) {
+            if (navigationApp.getId() == defaultNavigationTool) {
+                app = navigationApp;
+                break;
+            }
+        }
+        // default navigation tool wasn't set already or couldn't be found (not installed any more for example)
+        if (app == null) {
+            // assume that 0 is the compass-app
+            app = installedNavigationApps.get(0);
+        }
+        return app;
     }
 
 }

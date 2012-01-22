@@ -47,7 +47,7 @@
 				android:textSize="26dip"
 				android:textColor="?text_color"
 				android:text="@null" />
-		<view class="cgeo.geocaching.cgCompass"
+		<view class="cgeo.geocaching.ui.CompassView"
 				android:id="@+id/rose"
 				android:layout_width="fill_parent"
 				android:layout_height="295dip"

@@ -68,6 +68,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals("Baden-Württemberg, Germany", cache.getLocation());
         assertEquals("Ein alter Kindheitstraum, ein Schatz auf einer unbewohnten Insel. A old dream of my childhood, a treasure on a lonely is", cache.getShortdesc());
         assertTrue(new Geopoint(48.85968, 9.18740).isEqualTo(cache.getCoords()));
+        assertTrue(cache.isReliableLatLon());
     }
 
     public void testGc31j2h() throws IOException, ParserException {
@@ -80,6 +81,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
 
         // no waypoints without importing waypoint file
         assertEquals(0, cache.getWaypoints().size());
+        assertTrue(cache.isReliableLatLon());
     }
 
     public void testGc31j2hWpts() throws IOException, ParserException {
@@ -123,7 +125,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertFalse(cache.isArchived());
         assertFalse(cache.isDisabled());
         assertFalse(cache.isEventCache());
-        assertFalse(cache.isMembersOnly());
+        assertFalse(cache.isPremiumMembersOnly());
         assertFalse(cache.isOwn());
         assertTrue(cache.isFound());
         assertEquals("Station3: Der zerbrochene Stein zählt doppelt.\nFinal: Oben neben dem Tor", cache.getHint());
@@ -136,7 +138,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         assertEquals("Sehr schöne Runde und wir haben wieder etwas Neues über Hockenheim gelernt. Super Tarnung.\nTFTC, Geoteufel", log.log);
 
         // following info is not contained in pocket query gpx file
-        assertNull(cache.getAttributes());
+        assertEquals(0, cache.getAttributes().size());
     }
 
     private static long parseTime(final String time) {

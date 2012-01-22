@@ -1,10 +1,7 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.cgCache;
-import cgeo.geocaching.cgGeo;
-import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.geopoint.Geopoint;
 
@@ -12,13 +9,12 @@ import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.net.Uri;
 
-class StreetviewApp extends AbstractNavigationApp {
+class StreetviewApp extends AbstractPointNavigationApp {
 
-    StreetviewApp(final Resources res) {
-        super(res.getString(R.string.cache_menu_streetview), null);
+    StreetviewApp() {
+        super(getString(R.string.cache_menu_streetview), null);
     }
 
     @Override
@@ -26,34 +22,13 @@ class StreetviewApp extends AbstractNavigationApp {
         return true;
     }
 
-    public boolean invoke(cgGeo geo, Activity activity, Resources res,
-            cgCache cache,
-            final SearchResult search, cgWaypoint waypoint, final Geopoint coords) {
-        if (cache == null && waypoint == null && coords == null) {
-            return false;
-        }
-
+    @Override
+    protected void navigate(Activity activity, Geopoint point) {
         try {
-            if (cache != null && cache.getCoords() != null) {
-                startActivity(activity, cache.getCoords());
-            } else if (waypoint != null && waypoint.getCoords() != null) {
-                startActivity(activity, waypoint.getCoords());
-            } else if (coords != null) {
-                startActivity(activity, coords);
-            }
-
-            return true;
+            activity.startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("google.streetview:cbll=" + point.getLatitude() + "," + point.getLongitude())));
         } catch (ActivityNotFoundException e) {
-            if (res != null) {
-                ActivityMixin.showToast(activity, res.getString(R.string.err_application_no));
-            }
+            ActivityMixin.showToast(activity, cgeoapplication.getInstance().getString(R.string.err_application_no));
         }
-
-        return false;
-    }
-
-    private static void startActivity(Activity activity, final Geopoint coords) {
-        activity.startActivity(new Intent(Intent.ACTION_VIEW,
-                Uri.parse("google.streetview:cbll=" + coords.getLatitude() + "," + coords.getLongitude())));
     }
 }
