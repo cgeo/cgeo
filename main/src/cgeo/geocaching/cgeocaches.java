@@ -189,11 +189,8 @@ public class cgeocaches extends AbstractListActivity {
 
                 if (cacheList == null) {
                     showToast(res.getString(R.string.err_list_load_fail));
-                    setMoreCaches(false);
-                } else {
-                    final int count = SearchResult.getTotal(search);
-                    setMoreCaches(type != CacheListType.OFFLINE && count > 0 && cacheList != null && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
                 }
+                setMoreCaches();
 
                 if (cacheList != null && SearchResult.getError(search) == StatusCode.UNAPPROVED_LICENSE) {
                     AlertDialog.Builder dialog = new AlertDialog.Builder(cgeocaches.this);
@@ -280,11 +277,8 @@ public class cgeocaches extends AbstractListActivity {
 
                 if (cacheList == null) {
                     showToast(res.getString(R.string.err_list_load_fail));
-                    setMoreCaches(false);
-                } else {
-                    final int count = SearchResult.getTotal(search);
-                    setMoreCaches(type != CacheListType.OFFLINE && count > 0 && cacheList != null && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
                 }
+                setMoreCaches();
 
                 if (SearchResult.getError(search) != null) {
                     showToast(res.getString(R.string.err_download_fail) + " " + SearchResult.getError(search).getErrorString(res) + ".");
@@ -1355,7 +1349,7 @@ public class cgeocaches extends AbstractListActivity {
         listFooter.setOnClickListener(null);
     }
 
-    private void setMoreCaches(boolean more) {
+    private void setMoreCaches() {
         if (listFooter == null) {
             return;
         }
@@ -1363,7 +1357,13 @@ public class cgeocaches extends AbstractListActivity {
             return;
         }
 
-        if (more) {
+        boolean enableMore = type != CacheListType.OFFLINE && cacheList != null && cacheList.size() < MAX_LIST_ITEMS;
+        if (enableMore) {
+            final int count = SearchResult.getTotal(search);
+            enableMore = enableMore && count > 0 && cacheList.size() < count;
+        }
+
+        if (enableMore) {
             listFooterText.setText(res.getString(R.string.caches_more_caches) + " (" + res.getString(R.string.caches_more_caches_currently) + ": " + cacheList.size() + ")");
             listFooter.setOnClickListener(new MoreCachesListener());
         } else {
@@ -1374,7 +1374,7 @@ public class cgeocaches extends AbstractListActivity {
             }
             listFooter.setOnClickListener(null);
         }
-        listFooter.setClickable(more);
+        listFooter.setClickable(enableMore);
     }
 
     private void init() {
@@ -1387,8 +1387,7 @@ public class cgeocaches extends AbstractListActivity {
         }
 
         if (CollectionUtils.isNotEmpty(cacheList)) {
-            final int count = SearchResult.getTotal(search);
-            setMoreCaches(type != CacheListType.OFFLINE && count > 0 && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
+            setMoreCaches();
         }
 
         setTitle(title);
