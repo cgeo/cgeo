@@ -191,7 +191,8 @@ public class cgeocaches extends AbstractListActivity {
                     setMoreCaches(false);
                 } else {
                     final int count = SearchResult.getTotal(search);
-                    setMoreCaches(count > 0 && cacheList != null && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
+                    final String url = SearchResult.getUrl(search);
+                    setMoreCaches(StringUtils.isNotBlank(url) && count > 0 && cacheList != null && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
                 }
 
                 if (cacheList != null && SearchResult.getError(search) == StatusCode.UNAPPROVED_LICENSE) {
@@ -282,7 +283,8 @@ public class cgeocaches extends AbstractListActivity {
                     setMoreCaches(false);
                 } else {
                     final int count = SearchResult.getTotal(search);
-                    setMoreCaches(count > 0 && cacheList != null && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
+                    final String url = SearchResult.getUrl(search);
+                    setMoreCaches(StringUtils.isNotBlank(url) && count > 0 && cacheList != null && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
                 }
 
                 if (SearchResult.getError(search) != null) {
@@ -1387,7 +1389,8 @@ public class cgeocaches extends AbstractListActivity {
 
         if (CollectionUtils.isNotEmpty(cacheList)) {
             final int count = SearchResult.getTotal(search);
-            setMoreCaches(count > 0 && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
+            final String url = SearchResult.getUrl(search);
+            setMoreCaches(StringUtils.isNotBlank(url) && count > 0 && cacheList.size() < count && cacheList.size() < MAX_LIST_ITEMS);
         }
 
         setTitle(title);
