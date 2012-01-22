@@ -626,22 +626,12 @@ public class cgeopopup extends AbstractActivity {
      * @param view
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void goCompass(View view) {
+    public void goDefaultNavigation(View view) {
         if (cache == null || cache.getCoords() == null) {
             showToast(res.getString(R.string.cache_coordinates_no));
             return;
         }
-
-        cgeonavigate navigateActivity = new cgeonavigate();
-
-        Intent navigateIntent = new Intent(cgeopopup.this, navigateActivity.getClass());
-        navigateIntent.putExtra("latitude", cache.getCoords().getLatitude());
-        navigateIntent.putExtra("longitude", cache.getCoords().getLongitude());
-        navigateIntent.putExtra("geocode", cache.getGeocode().toUpperCase());
-        navigateIntent.putExtra("name", cache.getName());
-
-        startActivity(navigateIntent);
-
+        NavigationAppFactory.startDefaultNavigationApplication(geo, this, cache, null, null, null);
         finish();
     }
 
