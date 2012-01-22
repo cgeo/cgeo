@@ -9,7 +9,7 @@ import android.view.View;
 
 import java.util.Locale;
 
-public class cgeohelpers extends AbstractActivity {
+public class UsefulAppsActivity extends AbstractActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -78,7 +78,7 @@
 			</intent-filter>
 		</activity>
 		<activity
-			android:name=".cgeohelpers"
+			android:name=".UsefulAppsActivity"
 			android:label="@string/app_name"
 			android:windowSoftInputMode="stateHidden"
 			android:configChanges="keyboardHidden|orientation" >

@@ -253,7 +253,7 @@ public class cgeo extends AbstractActivity {
                 showAbout(null);
                 return true;
             case MENU_HELPERS:
-                startActivity(new Intent(this, cgeohelpers.class));
+                startActivity(new Intent(this, UsefulAppsActivity.class));
                 return true;
             case MENU_SETTINGS:
                 startActivity(new Intent(this, cgeoinit.class));

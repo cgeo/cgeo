@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.network.Parameters;
+
 import android.test.AndroidTestCase;
 
 import java.security.InvalidParameterException;

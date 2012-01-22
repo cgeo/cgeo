@@ -1,11 +1,11 @@
 package cgeo.geocaching.twitter;
 
-import cgeo.geocaching.Parameters;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.network.OAuth;
+import cgeo.geocaching.network.Parameters;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;

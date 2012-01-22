@@ -1,6 +1,5 @@
 package cgeo.geocaching.network;
 
-import cgeo.geocaching.Parameters;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.utils.CryptUtils;

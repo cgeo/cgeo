@@ -1,9 +1,9 @@
 package cgeo.geocaching.gcvote;
 
-import cgeo.geocaching.Parameters;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
+import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.LeastRecentlyUsedCache;
 
 import org.apache.commons.lang3.StringUtils;

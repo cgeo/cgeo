@@ -1,4 +1,8 @@
-package cgeo.geocaching;
+package cgeo.geocaching.utils;
+
+import cgeo.geocaching.R;
+import cgeo.geocaching.Settings;
+import cgeo.geocaching.cgBase;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -21,7 +25,7 @@ public class LogTemplateProvider {
             this.resourceId = resourceId;
         }
 
-        abstract String getValue(boolean offline);
+        abstract public String getValue(boolean offline);
 
         public int getResourceId() {
             return resourceId;
@@ -51,21 +55,21 @@ public class LogTemplateProvider {
                     new LogTemplate("DATE", R.string.init_signature_template_date) {
 
                         @Override
-                        String getValue(final boolean offline) {
+                        public String getValue(final boolean offline) {
                             return cgBase.formatFullDate(System.currentTimeMillis());
                         }
                     },
                     new LogTemplate("TIME", R.string.init_signature_template_time) {
 
                         @Override
-                        String getValue(final boolean offline) {
+                        public String getValue(final boolean offline) {
                             return cgBase.formatTime(System.currentTimeMillis());
                         }
                     },
                     new LogTemplate("DATETIME", R.string.init_signature_template_datetime) {
 
                         @Override
-                        String getValue(final boolean offline) {
+                        public String getValue(final boolean offline) {
                             final long currentTime = System.currentTimeMillis();
                             return cgBase.formatFullDate(currentTime) + " " + cgBase.formatTime(currentTime);
                         }
@@ -73,14 +77,14 @@ public class LogTemplateProvider {
                     new LogTemplate("USER", R.string.init_signature_template_user) {
 
                         @Override
-                        String getValue(final boolean offline) {
+                        public String getValue(final boolean offline) {
                             return Settings.getUsername();
                         }
                     },
                     new LogTemplate("NUMBER", R.string.init_signature_template_number) {
 
                         @Override
-                        String getValue(final boolean offline) {
+                        public String getValue(final boolean offline) {
                             if (offline) {
                                 return "";
                             }
