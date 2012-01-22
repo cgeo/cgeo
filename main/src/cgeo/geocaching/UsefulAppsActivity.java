@@ -6,10 +6,16 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.Locale;
 
 public class UsefulAppsActivity extends AbstractActivity {
+
+    private LinearLayout parentLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -17,8 +23,25 @@ public class UsefulAppsActivity extends AbstractActivity {
 
         // init
         setTheme();
-        setContentView(R.layout.helpers);
+        setContentView(R.layout.useful_apps);
         setTitle(res.getString(R.string.helpers));
+        parentLayout = (LinearLayout) findViewById(R.id.parent);
+
+        final Locale loc = Locale.getDefault();
+        final String language = loc.getLanguage();
+
+        final String tutorialUrl;
+        if ("de".equalsIgnoreCase(language)) {
+            tutorialUrl = "gnu.android.app.cgeomanual.de";
+        }
+        else {
+            tutorialUrl = "gnu.android.app.cgeomanual.en";
+        }
+        addApp(R.string.helper_manual_title, R.string.helper_manual_description, R.drawable.helper_manual, tutorialUrl);
+        addApp(R.string.helper_calendar_title, R.string.helper_calendar_description, R.drawable.cgeo, "cgeo.calendar");
+        addApp(R.string.helper_locus_title, R.string.helper_locus_description, R.drawable.helper_locus, "menion.android.locus");
+        addApp(R.string.helper_gpsstatus_title, R.string.helper_gpsstatus_description, R.drawable.helper_gpsstatus, "com.eclipsim.gpsstatus2");
+        addApp(R.string.helper_bluetoothgps_title, R.string.helper_bluetoothgps_description, R.drawable.helper_bluetoothgps, "googoo.android.btgps");
     }
 
     @Override
@@ -37,43 +60,19 @@ public class UsefulAppsActivity extends AbstractActivity {
         finish();
     }
 
-    /**
-     * @param view
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void installManual(View view) {
-        final Locale loc = Locale.getDefault();
-        final String language = loc.getLanguage();
+    private void addApp(final int titleId, final int descriptionId, final int imageId, final String marketUrl) {
+        final LinearLayout layout = (LinearLayout) getLayoutInflater().inflate(R.layout.useful_apps_item, null);
+        ((TextView) layout.findViewById(R.id.title)).setText(res.getString(titleId));
+        ((ImageView) layout.findViewById(R.id.image)).setImageDrawable(res.getDrawable(imageId));
+        ((TextView) layout.findViewById(R.id.description)).setText(res.getString(descriptionId));
+        ((LinearLayout) layout.findViewById(R.id.app_layout)).setOnClickListener(new OnClickListener() {
 
-        if ("de".equalsIgnoreCase(language)) {
-            installFromMarket("gnu.android.app.cgeomanual.de");
-        }
-        else {
-            installFromMarket("gnu.android.app.cgeomanual.en");
-        }
+            @Override
+            public void onClick(View v) {
+                installFromMarket(marketUrl);
+            }
+        });
+        parentLayout.addView(layout);
     }
 
-    /**
-     * @param view
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void installLocus(View view) {
-        installFromMarket("menion.android.locus");
-    }
-
-    /**
-     * @param view
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void installGpsStatus(View view) {
-        installFromMarket("com.eclipsim.gpsstatus2");
-    }
-
-    /**
-     * @param view
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void installBluetoothGps(View view) {
-        installFromMarket("googoo.android.btgps");
-    }
 }
