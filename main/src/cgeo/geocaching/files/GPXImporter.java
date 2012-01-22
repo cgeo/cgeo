@@ -408,7 +408,7 @@ public class GPXImporter {
         File dir = gpxfile.getParentFile();
         String[] filenameList = dir.list();
         for (String filename : filenameList) {
-            if (StringUtils.lastIndexOfIgnoreCase(filename, WAYPOINTS_FILE_SUFFIX) == -1) {
+            if (!StringUtils.containsIgnoreCase(filename, WAYPOINTS_FILE_SUFFIX)) {
                 continue;
             }
             String expectedGpxFileName = StringUtils.substringBeforeLast(filename, WAYPOINTS_FILE_SUFFIX)
