@@ -3,6 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.DateDialog;
 
 import org.apache.commons.lang3.StringUtils;

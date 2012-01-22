@@ -1,6 +1,5 @@
 package cgeo.geocaching.connector.opencaching;
 
-import cgeo.geocaching.Parameters;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
@@ -14,6 +13,7 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser;
+import cgeo.geocaching.network.Parameters;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;

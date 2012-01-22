@@ -1,12 +1,12 @@
 package cgeo.geocaching.twitter;
 
-import cgeo.geocaching.Parameters;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.network.OAuth;
+import cgeo.geocaching.network.Parameters;
 
 import org.apache.http.HttpResponse;
 
