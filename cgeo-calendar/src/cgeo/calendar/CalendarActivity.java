@@ -123,6 +123,13 @@ public final class CalendarActivity extends Activity {
                 final Integer[] keys = calendars.keySet().toArray(new Integer[calendars.size()]);
                 final Integer calendarId = keys[item];
                 addToCalendar(calendarId);
+                finish();
+            }
+        });
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                finish();
             }
         });
         builder.create().show();
