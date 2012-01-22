@@ -57,7 +57,6 @@ public final class CalendarActivity extends Activity {
             finish();
             return;
         }
-        finish();
     }
 
     private String getParameter(final String paramKey) {
