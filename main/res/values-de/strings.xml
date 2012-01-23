@@ -14,6 +14,10 @@
   <string name="latitude">Breitengrad</string>
   <string name="longitude">Längengrad</string>
 
+  <!-- dialog -->
+  <string name="dialog_yes">Ja</string>
+  <string name="dialog_no">Nein</string>
+
   <!-- actionbar -->
   <string name="action_bar_share_title">Link versenden</string>
 
@@ -144,6 +148,7 @@
   <string name="err_detail_no_spoiler">c:geo hat kein Hinweisbild für diesen Cache gefunden.</string>
   <string name="err_detail_no_map_static">c:geo hat keine statische Karte für diesen Cache gefunden.</string>
   <string name="err_detail_not_load_map_static">c:geo konnte die statische Karte nicht laden.</string>
+  <string name="err_detail_ask_store_map_static">c:geo konnte die statische Karte nicht laden. Jetzt speichern?</string>
   <string name="err_detail_still_working">Arbeite noch an anderer Aufgabe.</string>
   <string name="err_watchlist_still_managing">c:geo versucht noch immer deine Watchlist zu aktualisieren.</string>
   <string name="err_watchlist_failed">Ändern der Watchlist nicht erfolgreich.</string>
@@ -222,6 +227,7 @@
   <string name="info_log_type_changed">Logtyp wurde verändert!</string>
 
   <string name="info_fieldnotes_exported_to">Field-Notes exportiert nach</string>
+  <string name="info_storing_static_maps">Speichere statische Karten</string>
 
   <!-- location service -->
   <string name="loc_last">Letzte Position</string>
