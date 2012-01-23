@@ -1153,6 +1153,19 @@ public class cgCache implements ICache {
         return waypoints.get(index);
     }
 
+    /**
+     * @param index
+     * @return waypoint or <code>null</code>
+     */
+    public cgWaypoint getWaypointById(int id) {
+        for (cgWaypoint waypoint : waypoints) {
+            if (waypoint.getId() == id) {
+                return waypoint;
+            }
+        }
+        return null;
+    }
+
     public void parseWaypointsFromNote() {
         try {
             if (StringUtils.isBlank(getPersonalNote())) {
