@@ -85,6 +85,11 @@ public class StaticMapsProvider {
         downloadMaps(cache, wpMarkerUrl, "wp" + waypoint.getId() + "_", wpLatlonMap, edge, "");
     }
 
+    public static void storeCacheStaticMap(cgCache cache, Activity activity) {
+        int edge = StaticMapsProvider.guessMinDisplaySide(activity);
+        storeCacheStaticMap(cache, edge);
+    }
+
     private static void storeCacheStaticMap(cgCache cache, int edge) {
         final String latlonMap = cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
         final StringBuilder waypoints = new StringBuilder();
