@@ -134,7 +134,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
             assertNotNull(search);
             assertEquals(1, search.getGeocodes().size());
             assertTrue(search.getGeocodes().contains(cache.getGeocode()));
-            cgCache searchedCache = search.cacheList.get(0);
+            cgCache searchedCache = cgBase.getFirstElementFromSet(search.cacheList);
             // coords must be null if the user is not logged in
             assertNull(searchedCache.getCoords());
 
