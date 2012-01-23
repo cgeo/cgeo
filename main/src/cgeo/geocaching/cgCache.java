@@ -13,6 +13,7 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser;
 import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.LogTemplateProvider;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;

@@ -35,7 +35,6 @@ public final class CalendarActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
 
         try {
             uri = getIntent().getData();
@@ -79,6 +78,7 @@ public final class CalendarActivity extends Activity {
         final String[] projection = new String[] { "_id", "displayName" };
         final Uri calendarProvider = Compatibility.getCalendarProviderURI();
 
+        // TODO: Handle missing provider
         final Cursor cursor = managedQuery(calendarProvider, projection, "selected=1", null, null);
 
         final Map<Integer, String> calendars = new HashMap<Integer, String>();
@@ -122,6 +122,13 @@ public final class CalendarActivity extends Activity {
                 final Integer[] keys = calendars.keySet().toArray(new Integer[calendars.size()]);
                 final Integer calendarId = keys[item];
                 addToCalendar(calendarId);
+                finish();
+            }
+        });
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                finish();
             }
         });
         builder.create().show();
@@ -152,7 +159,7 @@ public final class CalendarActivity extends Activity {
                 String text = spanned.toString();
                 final ImageSpan[] spans = spanned.getSpans(0, spanned.length(), ImageSpan.class);
                 for (int i = spans.length - 1; i >= 0; i--) {
-                    text = text.substring(0, spanned.getSpanStart(spans[i]) - 1) + text.substring(spanned.getSpanEnd(spans[i]) + 1);
+                    text = text.substring(0, spanned.getSpanStart(spans[i])) + text.substring(spanned.getSpanEnd(spans[i]));
                 }
                 if (text.length() > 0) {
                     description.append("\n\n");

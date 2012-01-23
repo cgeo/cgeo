@@ -25,19 +25,29 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     private int listId;
     private File tempDir;
 
-    public static void testGetWaypointsFileNameForGpxFileName() {
-        assertEquals("1234567-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("1234567.gpx"));
-        assertEquals("/mnt/sdcard/1234567-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("/mnt/sdcard/1234567.gpx"));
-        assertEquals("/mnt/sdcard/1-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("/mnt/sdcard/1.gpx"));
-        assertEquals("/mnt/sd.card/1-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("/mnt/sd.card/1.gpx"));
-        assertEquals("1234567.9-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("1234567.9.gpx"));
-        assertEquals("1234567-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("1234567.GPX"));
-        assertEquals("gpx.gpx-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("gpx.gpx.gpx"));
-        assertEquals("/mnt/sdcard/-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("/mnt/sdcard/.gpx"));
-        assertEquals("1234567_query-wpts.gpx", GPXImporter.getWaypointsFileNameForGpxFileName("1234567_query.gpx"));
-        assertNull(GPXImporter.getWaypointsFileNameForGpxFileName("123.gpy"));
-        assertNull(GPXImporter.getWaypointsFileNameForGpxFileName("gpx"));
-        assertNull(GPXImporter.getWaypointsFileNameForGpxFileName(".gpx"));
+    public void testGetWaypointsFileNameForGpxFile() throws IOException {
+        String[] gpxFiles = new String[] { "1234567.gpx", "1.gpx", "1234567.9.gpx",
+                "1234567.GPX", "gpx.gpx.gpx", ".gpx",
+                "1234567_query.gpx", "123-4.gpx", "123(5).gpx" };
+        String[] wptsFiles = new String[] { "1234567-wpts.gpx", "1-wpts.gpx", "1234567.9-wpts.gpx",
+                "1234567-wpts.GPX", "gpx.gpx-wpts.gpx", "-wpts.gpx",
+                "1234567_query-wpts.gpx", "123-wpts-4.gpx", "123-wpts(5).gpx" };
+        for (int i = 0; i < gpxFiles.length; i++) {
+            String gpxFileName = gpxFiles[i];
+            String wptsFileName = wptsFiles[i];
+            File gpx = new File(tempDir, gpxFileName);
+            File wpts = new File(tempDir, wptsFileName);
+            // the files need to exist - we create them
+            assertTrue(gpx.createNewFile());
+            assertTrue(wpts.createNewFile());
+            // the "real" method check
+            assertEquals(wptsFileName, GPXImporter.getWaypointsFileNameForGpxFile(gpx));
+            // they also need to be deleted, because of case sensitive tests that will not work correct on case insensitive file systems
+            gpx.delete();
+            wpts.delete();
+        }
+        File gpx1 = new File(tempDir, "abc.gpx");
+        assertNull(GPXImporter.getWaypointsFileNameForGpxFile(gpx1));
     }
 
     public void testImportGpx() throws IOException {

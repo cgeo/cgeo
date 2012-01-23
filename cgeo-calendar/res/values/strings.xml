@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">c:geo calendar addon</string>
+    <string name="app_name">c:geo - calendar (add-on)</string>
     <string name="calendars">Calendars</string>
     <string name="event_success">Event cache added to calendar</string>
     <string name="event_fail">Failed to add event cache to calendar</string>

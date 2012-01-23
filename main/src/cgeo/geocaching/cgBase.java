@@ -19,6 +19,7 @@ import cgeo.geocaching.geopoint.GeopointFormatter.Format;
 import cgeo.geocaching.geopoint.IConversion;
 import cgeo.geocaching.geopoint.Viewport;
 import cgeo.geocaching.network.HtmlImage;
+import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.twitter.Twitter;
 import cgeo.geocaching.ui.DirectionImage;
 import cgeo.geocaching.utils.BaseUtils;
@@ -101,7 +102,6 @@ public class cgBase {
 
     private static final String passMatch = "(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+";
 
-    public final static Map<WaypointType, String> waypointTypes = new HashMap<WaypointType, String>();
     private final static Map<String, SimpleDateFormat> gcCustomDateFormats;
     static {
         final String[] formats = new String[] {
@@ -149,12 +149,6 @@ public class cgBase {
         context = app.getBaseContext();
         res = app.getBaseContext().getResources();
 
-        // waypoint types
-        for (WaypointType wt : WaypointType.values()) {
-            if (wt != WaypointType.OWN) {
-                waypointTypes.put(wt, res.getString(wt.stringId));
-            }
-        }
 
         try {
             final PackageManager manager = app.getPackageManager();
@@ -1450,7 +1444,7 @@ public class cgBase {
         trackable.setGeocode(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GEOCODE, true, trackable.getGeocode()).toUpperCase());
 
         // trackable id
-        trackable.setGuid(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_ID, true, trackable.getGuid()));
+        trackable.setGuid(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_GUID, true, trackable.getGuid()));
 
         // trackable icon
         trackable.setIconUrl(BaseUtils.getMatch(page, GCConstants.PATTERN_TRACKABLE_ICON, true, trackable.getIconUrl()));

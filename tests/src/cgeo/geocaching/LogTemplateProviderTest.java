@@ -1,5 +1,7 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.utils.LogTemplateProvider;
+
 import java.util.Calendar;
 
 import junit.framework.TestCase;

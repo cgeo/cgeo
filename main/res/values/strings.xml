@@ -8,7 +8,7 @@
   <string name="detail">Details</string>
   <string name="search">Search</string>
   <string name="settings">Settings</string>
-  <string name="helpers">What to install</string>
+  <string name="helpers">Useful apps</string>
   <string name="about">About c:geo</string>
   <string name="helper">Do you want to learn about <b>c:geo</b>?\nCheck our easy to read manual.</string>
   <string name="latitude">Latitude</string>
@@ -747,6 +747,8 @@
   <!-- helpers -->
   <string name="helper_manual_title">Manual</string>
   <string name="helper_manual_description">Comprehensive manual for c:geo that contains description of all possibilities of this application (even hidden ones).</string>
+  <string name="helper_calendar_title">c:geo calendar add-on</string>
+  <string name="helper_calendar_description">Enables you to export event caches into the calendar on your device.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Simple usable application showing Online maps and allowing to download them directly into Offline mode (raster maps only). Also support track recording, POI handling and many other useful functions.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>

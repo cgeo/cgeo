@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:orientation="vertical"
+		android:background="?background_color" >
+	<LinearLayout style="@style/action_bar">
+		<ImageView style="@style/action_bar_action"
+				android:onClick="goHome" />
+		<View style="@style/action_bar_separator" />
+		<TextView style="@style/action_bar_title" />
+	</LinearLayout>
+	<ScrollView
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:padding="4dip"
+			android:orientation="vertical" >
+		<LinearLayout
+		    	android:id="@+id/parent"
+				android:layout_width="fill_parent"
+				android:layout_height="fill_parent"
+				android:orientation="vertical" >
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>

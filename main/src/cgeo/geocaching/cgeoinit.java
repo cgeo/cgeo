@@ -1,6 +1,5 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationApp;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
@@ -8,7 +7,10 @@ import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.maps.MapProviderFactory;
+import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.twitter.TwitterAuthorizationActivity;
+import cgeo.geocaching.utils.LogTemplateProvider;
+import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
