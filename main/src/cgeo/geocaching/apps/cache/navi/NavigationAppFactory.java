@@ -100,7 +100,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
             return false;
         }
 
-        final NavigationApp app = getAppFromMenuItem(item, NavigationAppsEnum.values());
+        final NavigationApp app = getAppFromMenuItem(item);
         if (app != null) {
             try {
                 return app.invoke(geo, activity, cache,
@@ -112,9 +112,9 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         return false;
     }
 
-    public static NavigationApp getAppFromMenuItem(MenuItem item, NavigationAppsEnum[] apps) {
+    public static NavigationApp getAppFromMenuItem(MenuItem item) {
         final int id = item.getItemId();
-        for (NavigationAppsEnum navApp : apps) {
+        for (NavigationAppsEnum navApp : NavigationAppsEnum.values()) {
             if (navApp.id == id) {
                 return navApp.app;
             }
