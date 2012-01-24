@@ -53,7 +53,6 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.view.WindowManager;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
@@ -311,8 +310,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         // reset status
         noMapTokenShowed = false;
 
-        // set layout
-        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        ActivityMixin.keepScreenOn(activity, true);
 
         // set layout
         ActivityMixin.setTheme(activity);

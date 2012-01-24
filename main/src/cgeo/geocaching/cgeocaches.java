@@ -61,7 +61,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -386,7 +385,6 @@ public class cgeocaches extends AbstractListActivity {
                     waitDialog.dismiss();
                     waitDialog.setOnCancelListener(null);
                 }
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                 showToast(res.getString(R.string.sendToCgeo_download_fail));
                 finish();
                 return;
@@ -395,7 +393,6 @@ public class cgeocaches extends AbstractListActivity {
                     waitDialog.dismiss();
                     waitDialog.setOnCancelListener(null);
                 }
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                 showToast(res.getString(R.string.sendToCgeo_no_registration));
                 finish();
                 return;
@@ -418,7 +415,6 @@ public class cgeocaches extends AbstractListActivity {
                     waitDialog.dismiss();
                     waitDialog.setOnCancelListener(null);
                 }
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             }
         }
     };
@@ -518,6 +514,10 @@ public class cgeocaches extends AbstractListActivity {
      * the navigation menu item for the cache list (not the context menu!), or <code>null</code>
      */
     private MenuItem navigationMenu;
+
+    public cgeocaches() {
+        super(true);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -1576,7 +1576,6 @@ public class cgeocaches extends AbstractListActivity {
     public void importWeb() {
         detailProgress = 0;
 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         showProgress(false);
         waitDialog = new ProgressDialog(this);
         waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
