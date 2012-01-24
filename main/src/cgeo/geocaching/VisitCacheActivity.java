@@ -711,11 +711,6 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                     }
                 }
 
-                if (cache != null) {
-                    cgeoapplication.putCacheInCache(cache);
-                } else {
-                    cgeoapplication.removeCacheFromCache(geocode);
-                }
             }
 
             if (status == StatusCode.NO_ERROR) {
