@@ -1,8 +1,8 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
-import cgeo.geocaching.apps.cache.navi.NavigationApp;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
@@ -30,6 +30,7 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -40,7 +41,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.concurrent.atomic.AtomicReference;
@@ -587,23 +587,39 @@ public class cgeoinit extends AbstractActivity {
         });
 
         // Default navigation tool settings
-        final List<NavigationApp> apps = NavigationAppFactory.getInstalledNavigationApps(this);
-        final List<String> appNames = new ArrayList<String>();
-        for (NavigationApp navigationApp : apps) {
-            appNames.add(navigationApp.getName());
-        }
         Spinner defaultNavigationToolSelector = (Spinner) findViewById(R.id.default_navigation_tool);
-        ArrayAdapter<String> naviAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, appNames.toArray(new String[appNames.size()]));
+        final List<NavigationAppsEnum> apps = NavigationAppFactory.getInstalledNavigationApps(this);
+        ArrayAdapter<NavigationAppsEnum> naviAdapter = new ArrayAdapter<NavigationAppsEnum>(this, android.R.layout.simple_spinner_item, apps.toArray(new NavigationAppsEnum[apps.size()])) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                TextView textView = (TextView) super.getView(position, convertView, parent);
+                textView.setText(getItem(position).app.getName());
+                return textView;
+            }
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                TextView textView = (TextView) super.getDropDownView(position, convertView, parent);
+                textView.setText(getItem(position).app.getName());
+                return textView;
+            }
+        };
         naviAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         defaultNavigationToolSelector.setAdapter(naviAdapter);
         int defaultNavigationTool = Settings.getDefaultNavigationTool();
-        defaultNavigationToolSelector.setSelection(NavigationAppFactory.getOrdinalFromId(this, defaultNavigationTool));
+        int ordinal = 0;
+        for (int i = 0; i < apps.size(); i++) {
+            if (apps.get(i).id == defaultNavigationTool) {
+                ordinal = i;
+                break;
+            }
+        }
+        defaultNavigationToolSelector.setSelection(ordinal);
         defaultNavigationToolSelector.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                NavigationApp selectedApp = apps.get(arg2);
-                if (selectedApp != null) {
-                    Settings.setDefaultNavigationTool(selectedApp.getId());
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                NavigationAppsEnum item = (NavigationAppsEnum) parent.getItemAtPosition(position);
+                if (item != null) {
+                    Settings.setDefaultNavigationTool(item.id);
                 }
             }
 
