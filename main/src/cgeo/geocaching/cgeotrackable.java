@@ -465,7 +465,9 @@ public class cgeotrackable extends AbstractActivity {
                     });
                 }
 
-                ((TextView) rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log, new HtmlImage(cgeotrackable.this, null, false, 0, false), null), TextView.BufferType.SPANNABLE);
+                TextView logView = (TextView) rowView.findViewById(R.id.log);
+                logView.setMovementMethod(LinkMovementMethod.getInstance());
+                logView.setText(Html.fromHtml(log.log, new HtmlImage(cgeotrackable.this, null, false, 0, false), null), TextView.BufferType.SPANNABLE);
 
                 ((TextView) rowView.findViewById(R.id.author)).setOnClickListener(new userActions());
                 listView.addView(rowView);

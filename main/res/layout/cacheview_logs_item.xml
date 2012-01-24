@@ -86,6 +86,7 @@
 				android:gravity="left"
 				android:padding="3dip"
 				android:textSize="14dip"
-				android:textColor="?text_color" />
+				android:textColor="?text_color"
+				android:autoLink="web" />
 	</LinearLayout>
 </RelativeLayout>
