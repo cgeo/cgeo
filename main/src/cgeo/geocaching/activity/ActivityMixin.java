@@ -19,6 +19,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -144,6 +145,12 @@ public final class ActivityMixin {
         }
         else {
             menu.add(1, IAbstractActivity.MENU_LOG_VISIT, 0, res.getString(R.string.cache_menu_visit)).setIcon(MENU_ICON_LOG_VISIT);
+        }
+    }
+
+    public static void keepScreenOn(final Activity abstractActivity, boolean keepScreenOn) {
+        if (keepScreenOn) {
+            abstractActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
     }
 }

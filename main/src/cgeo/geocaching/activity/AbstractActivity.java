@@ -20,6 +20,7 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
 
     protected cgeoapplication app = null;
     protected Resources res = null;
+    private boolean keepScreenOn = false;
 
     protected AbstractActivity() {
         this(null);
@@ -27,6 +28,11 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
 
     protected AbstractActivity(final String helpTopic) {
         this.helpTopic = helpTopic;
+    }
+
+    protected AbstractActivity(final String helpTopic, final boolean keepScreenOn) {
+        this(helpTopic);
+        this.keepScreenOn = keepScreenOn;
     }
 
     final public void goHome(final View view) {
@@ -77,6 +83,8 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
 
         // Restore cookie store if needed
         cgBase.restoreCookieStore(Settings.getCookieStore());
+
+        ActivityMixin.keepScreenOn(this, keepScreenOn);
     }
 
     public void addVisitMenu(Menu menu, cgCache cache) {
@@ -86,4 +94,5 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
     protected static void disableSuggestions(final EditText edit) {
         Compatibility.disableSuggestions(edit);
     }
+
 }
