@@ -8,12 +8,6 @@
 		<ImageView style="@style/action_bar_icon_cgeo"
 				android:onClick="showAbout" />
 		<TextView style="@style/action_bar_title" />
-		<ImageView style="@style/action_bar_icon_user" 
-		    android:id="@+id/view_iconlogin"
-        	android:onClick="displayInfoUser" />
-    	<TextView style="@style/action_bar_login" android:id="@+id/view_login" />
-    	<ProgressBar style="@style/action_bar_progress"
-        	android:visibility="gone" />
 		<View style="@style/action_bar_separator" />
 		<ImageView style="@style/action_bar_action"
 				android:src="@drawable/actionbar_search"
@@ -175,6 +169,9 @@
 			android:layout_marginRight="6dip"
 			android:layout_marginLeft="6dip"
 			android:orientation="vertical">
+		<TextView android:id="@+id/user_info"
+				style="@style/location_current"
+				android:text="@string/init_login_popup_working"/>
 		<TextView android:id="@+id/nav_location"
 				style="@style/location_current"
 				android:text="@string/loc_trying" />
