@@ -93,6 +93,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 
 import javax.net.ssl.HostnameVerifier;
@@ -581,6 +582,9 @@ public class cgBase {
                 }
             }
 
+            // location is reliable because the search return correct coords independant of the login status
+            cache.setReliableLatLon(true);
+
             parseResult.cacheList.add(cache);
         }
 
@@ -782,7 +786,7 @@ public class cgBase {
     public static ParseResult parseCache(final String page, final int listId, final CancellableHandler handler) {
         final ParseResult parseResult = parseCacheFromText(page, listId, handler);
         if (parseResult != null && !parseResult.cacheList.isEmpty()) {
-            final cgCache cache = parseResult.cacheList.get(0);
+            final cgCache cache = cgBase.getFirstElementFromSet(parseResult.cacheList);
             getExtraOnlineInfo(cache, page, handler);
             cache.setUpdated(System.currentTimeMillis());
             cache.setDetailedUpdate(cache.getUpdated());
@@ -3070,4 +3074,13 @@ public class cgBase {
 
         return starsContainer;
     }
+
+    @SuppressWarnings("unchecked")
+    public static <T> T getFirstElementFromSet(Set<T> set) {
+        if (set != null && set.size() >= 1) {
+            return ((T[]) set.toArray())[0];
+        }
+        return null;
+    }
+
 }

@@ -1847,15 +1847,11 @@ public class cgData {
             geocodes = null;
         }
 
-        List<cgCache> caches = loadCaches(geocodes, null, null, null, null, loadFlags);
-        if (CollectionUtils.isNotEmpty(caches)) {
-            return caches.get(0);
-        }
-
-        return null;
+        Set<cgCache> caches = loadCaches(geocodes, null, null, null, null, loadFlags);
+        return cgBase.getFirstElementFromSet(caches);
     }
 
-    public List<cgCache> loadCaches(final Object[] geocodes, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final EnumSet<LoadFlag> loadFlags) {
+    public Set<cgCache> loadCaches(final Object[] geocodes, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final EnumSet<LoadFlag> loadFlags) {
         init();
         // Using more than one of the parametersets results in overly comlex wheres
         if ((geocodes != null && geocodes.length > 0)
@@ -1867,7 +1863,7 @@ public class cgData {
         }
         StringBuilder where = new StringBuilder();
         Cursor cursor = null;
-        List<cgCache> caches = new ArrayList<cgCache>();
+        Set<cgCache> caches = new HashSet<cgCache>();
 
         try {
             if (geocodes != null && geocodes.length > 0) {

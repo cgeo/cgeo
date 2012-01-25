@@ -15,12 +15,18 @@ public abstract class AbstractListActivity extends ListActivity implements
         IAbstractActivity {
 
     private String helpTopic;
+    private boolean keepScreenOn = false;
 
     protected cgeoapplication app = null;
     protected Resources res = null;
 
     protected AbstractListActivity() {
         this(null);
+    }
+
+    protected AbstractListActivity(final boolean keepScreenOn) {
+        this(null);
+        this.keepScreenOn = keepScreenOn;
     }
 
     protected AbstractListActivity(final String helpTopic) {
@@ -67,6 +73,8 @@ public abstract class AbstractListActivity extends ListActivity implements
         res = this.getResources();
         app = (cgeoapplication) this.getApplication();
         cgBase.initialize(app);
+
+        ActivityMixin.keepScreenOn(this, keepScreenOn);
     }
 
     final public void setTitle(final String title) {

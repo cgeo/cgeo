@@ -341,19 +341,19 @@ public class cgeoapplication extends Application {
      *            only load waypoints for map usage. All other callers should set this to <code>false</code>
      * @return
      */
-    public List<cgCache> getCaches(final SearchResult search, final boolean loadWaypoints) {
+    public Set<cgCache> getCaches(final SearchResult search, final boolean loadWaypoints) {
         return getCaches(search, null, null, null, null, loadWaypoints ? EnumSet.of(LoadFlag.LOADWAYPOINTS, LoadFlag.LOADOFFLINELOG) : EnumSet.of(LoadFlag.LOADOFFLINELOG));
     }
 
-    public List<cgCache> getCaches(final SearchResult search, Long centerLat, Long centerLon, Long spanLat, Long spanLon) {
+    public Set<cgCache> getCaches(final SearchResult search, Long centerLat, Long centerLon, Long spanLat, Long spanLon) {
         return getCaches(search, centerLat, centerLon, spanLat, spanLon, EnumSet.of(LoadFlag.LOADWAYPOINTS, LoadFlag.LOADOFFLINELOG));
     }
 
-    public List<cgCache> getCaches(final SearchResult search, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final EnumSet<LoadFlag> loadFlags) {
+    public Set<cgCache> getCaches(final SearchResult search, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final EnumSet<LoadFlag> loadFlags) {
         if (search == null) {
-            List<cgCache> cachesOut = new ArrayList<cgCache>();
+            Set<cgCache> cachesOut = new HashSet<cgCache>();
 
-            final List<cgCache> cachesPre = storage.loadCaches(null, centerLat, centerLon, spanLat, spanLon, loadFlags);
+            final Set<cgCache> cachesPre = storage.loadCaches(null, centerLat, centerLon, spanLat, spanLon, loadFlags);
             if (cachesPre != null) {
                 cachesOut.addAll(cachesPre);
             }
@@ -361,12 +361,12 @@ public class cgeoapplication extends Application {
             return cachesOut;
         }
 
-        List<cgCache> cachesOut = new ArrayList<cgCache>();
+        Set<cgCache> cachesOut = new HashSet<cgCache>();
 
         final Set<String> geocodeList = search.getGeocodes();
 
         // The list of geocodes is sufficient. more parameters generate an overly complex select.
-        final List<cgCache> cachesPre = storage.loadCaches(geocodeList.toArray(), null, null, null, null, loadFlags);
+        final Set<cgCache> cachesPre = storage.loadCaches(geocodeList.toArray(), null, null, null, null, loadFlags);
         if (cachesPre != null) {
             cachesOut.addAll(cachesPre);
         }
@@ -453,7 +453,7 @@ public class cgeoapplication extends Application {
         return storage.saveInventory("---", list);
     }
 
-    public void addSearch(final List<cgCache> cacheList, final int listId) {
+    public void addSearch(final Set<cgCache> cacheList, final int listId) {
         if (CollectionUtils.isEmpty(cacheList)) {
             return;
         }
@@ -494,6 +494,7 @@ public class cgeoapplication extends Application {
             saveCache = !cache.gatherMissingFrom(oldCache);
         }
         return saveCache ? storage.saveCache(cache) : true;
+
     }
 
     public void dropStored(int listId) {

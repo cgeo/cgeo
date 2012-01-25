@@ -3,8 +3,7 @@ package cgeo.geocaching;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -12,7 +11,7 @@ import java.util.Set;
  */
 public class ParseResult extends SearchResult {
 
-    public List<cgCache> cacheList = new ArrayList<cgCache>();
+    public Set<cgCache> cacheList = new HashSet<cgCache>();
 
     public ParseResult() {
         super();

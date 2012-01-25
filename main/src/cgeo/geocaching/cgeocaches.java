@@ -61,7 +61,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -172,7 +171,7 @@ public class cgeocaches extends AbstractListActivity {
                     setTitle(title + " [" + SearchResult.getCount(search) + "]");
                     cacheList.clear();
 
-                    final List<cgCache> cacheListTmp = app.getCaches(search, false);
+                    final Set<cgCache> cacheListTmp = app.getCaches(search, false);
                     if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                         cacheList.addAll(cacheListTmp);
                         cacheListTmp.clear();
@@ -260,7 +259,7 @@ public class cgeocaches extends AbstractListActivity {
                     setTitle(title + " [" + SearchResult.getCount(search) + "]");
                     cacheList.clear();
 
-                    final List<cgCache> cacheListTmp = app.getCaches(search, false);
+                    final Set<cgCache> cacheListTmp = app.getCaches(search, false);
                     if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                         cacheList.addAll(cacheListTmp);
                         cacheListTmp.clear();
@@ -336,7 +335,7 @@ public class cgeocaches extends AbstractListActivity {
                 }
             } else {
                 if (cacheList != null && search != null) {
-                    final List<cgCache> cacheListTmp = app.getCaches(search, false);
+                    final Set<cgCache> cacheListTmp = app.getCaches(search, false);
                     if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                         cacheList.clear();
                         cacheList.addAll(cacheListTmp);
@@ -386,7 +385,6 @@ public class cgeocaches extends AbstractListActivity {
                     waitDialog.dismiss();
                     waitDialog.setOnCancelListener(null);
                 }
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                 showToast(res.getString(R.string.sendToCgeo_download_fail));
                 finish();
                 return;
@@ -395,7 +393,6 @@ public class cgeocaches extends AbstractListActivity {
                     waitDialog.dismiss();
                     waitDialog.setOnCancelListener(null);
                 }
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                 showToast(res.getString(R.string.sendToCgeo_no_registration));
                 finish();
                 return;
@@ -406,7 +403,7 @@ public class cgeocaches extends AbstractListActivity {
 
                 cacheList.clear();
 
-                final List<cgCache> cacheListTmp = app.getCaches(search, false);
+                final Set<cgCache> cacheListTmp = app.getCaches(search, false);
                 if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                     cacheList.addAll(cacheListTmp);
                     cacheListTmp.clear();
@@ -418,7 +415,6 @@ public class cgeocaches extends AbstractListActivity {
                     waitDialog.dismiss();
                     waitDialog.setOnCancelListener(null);
                 }
-                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             }
         }
     };
@@ -434,7 +430,7 @@ public class cgeocaches extends AbstractListActivity {
 
             cacheList.clear();
 
-            final List<cgCache> cacheListTmp = app.getCaches(search, false);
+            final Set<cgCache> cacheListTmp = app.getCaches(search, false);
             if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                 cacheList.addAll(cacheListTmp);
                 cacheListTmp.clear();
@@ -514,10 +510,15 @@ public class cgeocaches extends AbstractListActivity {
     };
 
     private ContextMenuInfo lastMenuInfo;
+    private String contextMenuGeocode = "";
     /**
      * the navigation menu item for the cache list (not the context menu!), or <code>null</code>
      */
     private MenuItem navigationMenu;
+
+    public cgeocaches() {
+        super(true);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -1133,6 +1134,8 @@ public class cgeocaches extends AbstractListActivity {
             menu.setHeaderTitle(cache.getGeocode());
         }
 
+        contextMenuGeocode = cache.getGeocode();
+
         if (cache.getCoords() != null) {
             menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication(this).getName());
             final SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
@@ -1273,7 +1276,12 @@ public class cgeocaches extends AbstractListActivity {
      * @return the pointed cache
      */
     private cgCache getCacheFromAdapter(final AdapterContextMenuInfo adapterInfo) {
-        return adapter.getItem(adapterInfo.position);
+        final cgCache cache = adapter.getItem(adapterInfo.position);
+        if (cache.getGeocode().equalsIgnoreCase(contextMenuGeocode)) {
+            return cache;
+        }
+
+        return adapter.findCacheByGeocode(contextMenuGeocode);
     }
 
     private boolean setFilter(IFilter filter) {
@@ -1576,7 +1584,6 @@ public class cgeocaches extends AbstractListActivity {
     public void importWeb() {
         detailProgress = 0;
 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         showProgress(false);
         waitDialog = new ProgressDialog(this);
         waitDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
