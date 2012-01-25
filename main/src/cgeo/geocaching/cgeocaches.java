@@ -1277,7 +1277,7 @@ public class cgeocaches extends AbstractListActivity {
      */
     private cgCache getCacheFromAdapter(final AdapterContextMenuInfo adapterInfo) {
         final cgCache cache = adapter.getItem(adapterInfo.position);
-        if (cache.getGeocode().compareToIgnoreCase(contextMenuGeocode) == 0) {
+        if (cache.getGeocode().equalsIgnoreCase(contextMenuGeocode)) {
             return cache;
         }
 
