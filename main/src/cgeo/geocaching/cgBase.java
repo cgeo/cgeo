@@ -3083,4 +3083,14 @@ public class cgBase {
         return null;
     }
 
+
+    public static String UsernameLogin(String page) {
+        return "blafoo";
+    }
+
+    public static String UserNbCaches(String page) {
+        return "498";
+    }
+
 }
+
