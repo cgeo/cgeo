@@ -2339,7 +2339,9 @@ public class CacheDetailActivity extends AbstractActivity {
                         }
 
                         ((TextView) rowView.findViewById(R.id.author)).setOnClickListener(new UserActionsClickListener());
-                        ((TextView) logLayout.findViewById(R.id.log)).setOnClickListener(new DecryptLogClickListener());
+                        TextView logView = (TextView) logLayout.findViewById(R.id.log);
+                        logView.setMovementMethod(LinkMovementMethod.getInstance());
+                        logView.setOnClickListener(new DecryptLogClickListener());
 
                         loglist.add(rowView);
                     }
