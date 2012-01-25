@@ -603,6 +603,7 @@
   <!-- waypoint -->
   <string name="waypoint">Wegpunkt</string>
   <string name="waypoint_title">Wegpunkt</string>
+  <string name="waypoint_cache_coordinates">Cache Koordinaten</string>
   <string name="waypoint_custom">Benutzerdefiniert</string>
   <string name="waypoint_my_coordinates">Meine Koordinaten</string>
   <string name="waypoint_bearing">Richtung</string>

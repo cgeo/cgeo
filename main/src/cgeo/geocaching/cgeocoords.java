@@ -29,6 +29,7 @@ public class cgeocoords extends Dialog {
 
     final private AbstractActivity context;
     final private cgGeo geo;
+    final private cgCache cache;
     private Geopoint gp;
 
     private EditText eLat, eLon;
@@ -44,10 +45,11 @@ public class cgeocoords extends Dialog {
 
     private coordInputFormatEnum currentFormat = null;
 
-    public cgeocoords(final AbstractActivity context, final Geopoint gp, final cgGeo geo) {
+    public cgeocoords(final AbstractActivity context, final cgCache cache, final Geopoint gp, final cgGeo geo) {
         super(context);
         this.context = context;
         this.geo = geo;
+        this.cache = cache;
 
         if (gp != null) {
             this.gp = gp;
@@ -131,6 +133,8 @@ public class cgeocoords extends Dialog {
 
         final Button buttonCurrent = (Button) findViewById(R.id.current);
         buttonCurrent.setOnClickListener(new CurrentListener());
+        final Button buttonCache = (Button) findViewById(R.id.cache);
+        buttonCache.setOnClickListener(new CacheListener());
         final Button buttonDone = (Button) findViewById(R.id.done);
         buttonDone.setOnClickListener(new InputDoneListener());
     }
@@ -477,6 +481,20 @@ public class cgeocoords extends Dialog {
             }
 
             gp = geo.coordsNow;
+            updateGUI();
+        }
+    }
+
+    private class CacheListener implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            if (cache == null || cache.getCoords() == null) {
+                context.showToast(context.getResources().getString(R.string.err_location_unknown));
+                return;
+            }
+
+            gp = cache.getCoords();
             updateGUI();
         }
     }

@@ -229,7 +229,8 @@ public class cgeowaypointadd extends AbstractActivity {
             if (waypoint != null && waypoint.getCoords() != null) {
                 gp = waypoint.getCoords();
             }
-            cgeocoords coordsDialog = new cgeocoords(cgeowaypointadd.this, gp, geo);
+            cgCache cache = app.getCacheByGeocode(geocode);
+            cgeocoords coordsDialog = new cgeocoords(cgeowaypointadd.this, cache, gp, geo);
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
                 @Override

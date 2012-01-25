@@ -617,6 +617,7 @@
   <!-- waypoint -->
   <string name="waypoint">Waypoint</string>
   <string name="waypoint_title">Waypoint</string>
+  <string name="waypoint_cache_coordinates">Cache coordinates</string>
   <string name="waypoint_custom">Custom</string>
   <string name="waypoint_my_coordinates">My coordinates</string>
   <string name="waypoint_bearing">Bearing</string>
