@@ -127,6 +127,15 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         return cacheComparator;
     }
 
+    public cgCache findCacheByGeocode(String geocode) {
+        for (int i = 0; i < getCount(); i++) {
+            if (getItem(i).getGeocode().equalsIgnoreCase(geocode)) {
+                return getItem(i);
+            }
+        }
+
+        return null;
+    }
     /**
      * Called when a new page of caches was loaded.
      */
