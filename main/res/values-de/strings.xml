@@ -227,7 +227,7 @@
   <string name="info_log_type_changed">Logtyp wurde verändert!</string>
 
   <string name="info_fieldnotes_exported_to">Field-Notes exportiert nach</string>
-  <string name="info_storing_static_maps">Speichere statische Karten</string>
+  <string name="info_storing_static_maps">Versuche, statische Karten zu speichern</string>
 
   <!-- location service -->
   <string name="loc_last">Letzte Position</string>

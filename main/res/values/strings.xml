@@ -226,7 +226,7 @@
   <string name="info_log_type_changed">Type of log has been changed!</string>
 
   <string name="info_fieldnotes_exported_to">Field Notes exported to</string>
-  <string name="info_storing_static_maps">Storing static maps now</string>
+  <string name="info_storing_static_maps">Trying to store static maps</string>
 
   <!-- location service -->
   <string name="loc_last">Last known</string>
