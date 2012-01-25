@@ -582,6 +582,9 @@ public class cgBase {
                 }
             }
 
+            // location is reliable because the search return correct coords independant of the login status
+            cache.setReliableLatLon(true);
+
             parseResult.cacheList.add(cache);
         }
 
