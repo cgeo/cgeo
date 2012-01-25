@@ -1234,4 +1234,23 @@ public class cgCache implements ICache {
     public String toString() {
         return this.geocode + " " + this.name;
     }
+
+    @Override
+    public int hashCode() {
+        return geocode.hashCode() * name.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        return isEqualTo((cgCache) obj);
+    }
 }
