@@ -9,7 +9,7 @@
 		<View style="@style/action_bar_separator" />
 		<ImageView style="@style/action_bar_action"
 				android:src="@drawable/actionbar_compass"
-				android:onClick="goCompass" />
+				android:onClick="goDefaultNavigation" />
 		<View style="@style/action_bar_separator"
 		 		android:id="@+id/separator"
 		 />

@@ -1,4 +1,4 @@
-package cgeo.geocaching;
+package cgeo.geocaching.network;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.utils.URLEncodedUtils;

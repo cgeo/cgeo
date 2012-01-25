@@ -17,7 +17,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -67,15 +66,13 @@ public class cgeonavigate extends AbstractActivity {
     private String geocode;
 
     public cgeonavigate() {
-        super("c:geo-compass");
+        super("c:geo-compass", true);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // set layout
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setTheme();
         setContentView(R.layout.navigate);
         setTitle(res.getString(R.string.compass_title));

@@ -1,8 +1,8 @@
 package cgeo.geocaching.ui;
 
-import cgeo.geocaching.Parameters;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.files.LocalStorage;
+import cgeo.geocaching.network.Parameters;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;

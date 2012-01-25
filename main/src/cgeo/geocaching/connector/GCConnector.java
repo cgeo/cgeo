@@ -1,7 +1,6 @@
 package cgeo.geocaching.connector;
 
 import cgeo.geocaching.GCConstants;
-import cgeo.geocaching.Parameters;
 import cgeo.geocaching.ParseResult;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
@@ -9,6 +8,7 @@ import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.CancellableHandler;
 
 import org.apache.commons.collections.CollectionUtils;

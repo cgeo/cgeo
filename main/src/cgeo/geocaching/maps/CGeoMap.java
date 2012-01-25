@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps;
 
+import cgeo.geocaching.ParseResult;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
@@ -52,7 +53,6 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.view.WindowManager;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
@@ -61,8 +61,10 @@ import android.widget.ViewSwitcher.ViewFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Class representing the Map in c:geo
@@ -112,7 +114,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private WaypointType waypointTypeIntent = null;
     private int[] mapStateIntent = null;
     // status data
-    private SearchResult search = null;
+    private ParseResult search = null;
     private String token = null;
     private boolean noMapTokenShowed = false;
     // map status data
@@ -155,7 +157,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private static Map<Integer, LayerDrawable> overlaysCache = new HashMap<Integer, LayerDrawable>();
     private int cachesCnt = 0;
     /** List of caches in the viewport */
-    private List<cgCache> caches = new ArrayList<cgCache>();
+    private Set<cgCache> caches = new HashSet<cgCache>();
     /** List of users in the viewport */
     private List<Go4CacheUser> users = new ArrayList<Go4CacheUser>();
     private List<cgCoord> coordinates = new ArrayList<cgCoord>();
@@ -308,8 +310,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         // reset status
         noMapTokenShowed = false;
 
-        // set layout
-        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        ActivityMixin.keepScreenOn(activity, true);
 
         // set layout
         ActivityMixin.setTheme(activity);
@@ -1142,12 +1143,12 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 // stage 1 - pull and render from the DB only
 
                 if (fromDetailIntent || searchIntent != null) {
-                    search = searchIntent;
+                    search = new ParseResult(searchIntent);
                 } else {
                     if (!live || !Settings.isLiveMap()) {
-                        search = app.getStoredInViewport(centerLat, centerLon, spanLat, spanLon, Settings.getCacheType());
+                        search = new ParseResult(app.getStoredInViewport(centerLat, centerLon, spanLat, spanLon, Settings.getCacheType()));
                     } else {
-                        search = app.getCachedInViewport(centerLat, centerLon, spanLat, spanLon, Settings.getCacheType());
+                        search = new ParseResult(app.getCachedInViewport(centerLat, centerLon, spanLat, spanLon, Settings.getCacheType()));
                     }
                 }
 
@@ -1169,13 +1170,11 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     final boolean excludeMine = Settings.isExcludeMyCaches();
                     final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
 
-                    for (int i = caches.size() - 1; i >= 0; i--) {
-                        cgCache cache = caches.get(i);
+                    for (cgCache cache : caches) {
                         if ((cache.isFound() && excludeMine) || (cache.isOwn() && excludeMine) || (cache.isDisabled() && excludeDisabled)) {
-                            caches.remove(i);
+                            caches.remove(cache);
                         }
                     }
-
                 }
 
                 if (stop) {

@@ -1,10 +1,10 @@
 package cgeo.geocaching.connector.opencaching;
 
-import cgeo.geocaching.Parameters;
 import cgeo.geocaching.ParseResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
 
