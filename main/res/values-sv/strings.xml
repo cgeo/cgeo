@@ -8,7 +8,7 @@
   <string name="detail">Detaljer</string>
   <string name="search">Sök</string>
   <string name="settings">Inställningar</string>
-  <string name="helpers">Program att installera</string>
+  <string name="helpers">Bra program att installera</string>
   <string name="about">Om c:geo</string>
   <string name="helper">Vill du lära dig mer om <b>c:geo</b>?\nLäs manualen (på engelska).</string>
   <string name="latitude">Latitud</string>
@@ -119,18 +119,18 @@
   <string name="err_none">Ok</string>
   <string name="err_start">Kommunikationen har inte påbörjats</string>
   <string name="err_parse">Misslyckades att analysera inloggningssidan</string>
-  <string name="err_server">Misslyckades att ansluta till Geocaching.com (servern eller anslutningen nere?)</string>
+  <string name="err_server">Misslyckades att ansluta till Geocaching.com. Hemsidan kan vara ur funktion eller så är det problem med din anslutningen till Internet.</string>
   <string name="err_login">Inloggningsinformationen ej sparad</string>
   <string name="err_login_failed">Tyvärr kan c:geo inte logga in.</string>
-  <string name="err_login_failed_toast">Tyvärr kan c:geo inte logga in. c:geo kommer att köra i offline läge. Kontrollera dina inloggningsuppgifter i inställningarna och aktivera din internetanslutning.</string>
+  <string name="err_login_failed_toast">Tyvärr kan c:geo inte logga in. c:geo kommer att köra i offline läge med sparade cacher. Kontrollera dina inloggningsuppgifter och aktivera din internetanslutning.</string>
   <string name="err_unknown">Okänt fel</string>
   <string name="err_comm">Okänt kommunikationsfel</string>
   <string name="err_missing_auth">Användarnamn och/eller lösenord saknas.</string>
   <string name="err_wrong">Felaktiga inloggningsuppgifter</string>
-  <string name="err_maintenance">Arbete pågår med servern Geocaching.com, försök igen senare. c:geo fungerar under tiden i offline läge.</string>
-  <string name="err_license">användaren inte har bekräftat licensavtalet med Geocaching.com</string>
+  <string name="err_maintenance">Arbete pågår med servern Geocaching.com. c:geo fungerar under tiden i offline läge med sparade cacher.</string>
+  <string name="err_license">Du har inte bekräftat licensavtalet med Geocaching.com, så c:geo kan inte läsa in koordinater för cacherna.</string>
   <string name="err_unpublished">Den sökta cachen är opubliserad.</string>
-  <string name="err_premium_only">Cachen är enbart för premium medlemmar på Geocaching.com</string>
+  <string name="err_premium_only">Cachen är enbart för premium medlemmar på Geocaching.com.</string>
   <string name="err_store">Tyvärr kan c:geo inte spara cachen.</string>
   <string name="err_drop">Tyvärr kan c:geo inte ta bort cachen.</string>
   <string name="err_detail_open">Tyvärr kan c:geo inte visa detaljer om geocachen.</string>
@@ -158,7 +158,6 @@
   <string name="err_store_failed">Tyvärr kan c:geo inte spara geocachen.</string>
   <string name="err_refresh_failed">Tyvärr kan c:geo inte uppdatera geocachen.</string>
   <string name="err_dwld_details_failed">Tyvärr misslyckades c:geo att ladda detaljer.</string>
-  <string name="err_dwld_details_failed_reason">Tyvärr misslyckades c:geo att ladda detaljer pga</string>
   <string name="err_load_descr_failed">Tyvärr kan c:geo inte ladda beskrivningen.</string>
   <string name="err_location_unknown">c:geo har inte koordinaterna för cachen.</string>
   <string name="err_missing_device_name">Vänligen ange ett namn för din enhet innan registering.</string>
@@ -176,6 +175,7 @@
   <string name="err_waypoint_add_failed">Tyvärr misslyckades c:geo att lägga till din punkt.</string>
   <string name="err_waypoint_load_failed">Tyvärr misslyckades c:geo att ladda punkten.</string>
   <string name="err_waypoint_delete_failed">Tyvärr kan c:geo inte ta bort punkten.</string>
+  <string name="err_waypoint_open_cache_failed">c:geo kan inte öppna beskrivningen av cachen.</string>
   <string name="err_point_unknown_position">Tyvärr kan c:geo inte bestämma din position.</string>
   <string name="err_point_no_position_given_title">Mer info krävs</string>
   <string name="err_point_no_position_given">Ange minst latitud och longitud eller avstånd och riktning. Du kan också ange alla fyra.</string>
@@ -380,7 +380,8 @@
   <string name="init_showwaypoints">Extra punkter på Live kartan</string>
   <string name="init_showwaypoint_description">Gräns för antal cacher där extra punkter (parkering eller tillagd lösning) börjar visas i Live kartan. Bör vara mellan 5 och 50.</string>
   <string name="init_disabled">Dölj inaktiva cacher</string>
-  <string name="init_offline">Spara kartor för användning offline</string>
+  <string name="init_offline">Spara kartor för cacher för användning offline</string>
+  <string name="init_offline_wp">Spara kartor för extra punkter för användning offline</string>
   <string name="init_save_log_img">Spara bilder från loggar</string>
   <string name="init_units">Använd amerikanska enheter för avstånd</string>
   <string name="init_nav">Använd Google Navigering</string>
@@ -476,6 +477,7 @@
   <string name="cache_personal_note">Personlig anteckning</string>
   <string name="cache_description">Beskrivning</string>
   <string name="cache_description_long">Lång beskrivning</string>
+  <string name="cache_description_table_note">Varning från c:geo! Beskrivningen innehåller HTML-tabeller som eventuellt kan behöva öppnas i en webbläsare för att visas på önskat sätt.</string>
   <string name="cache_watchlist">Watchlist</string>
   <string name="cache_watchlist_on">Den här cachen finns i din watchlist.</string>
   <string name="cache_watchlist_not_on">Den här cachen finns inte i din watchlist.</string>
@@ -624,6 +626,7 @@
   <string name="waypoint_done">Klar</string>
   <string name="waypoint_duplicate">Duplicera</string>
   <string name="waypoint_copy_of">Kopia av</string>
+  <string name="waypoint_menu_open_cache">Visa cache</string>
   <string name="search_history">Historik</string>
   <string name="search_history_empty">Inga tidigare målpunkter</string>
   <string name="search_remove_destination">Punkten borttagen</string>
@@ -725,6 +728,8 @@
   <!-- helpers -->
   <string name="helper_manual_title">Manual</string>
   <string name="helper_manual_description">En utförlig manual för c:geo som beskriver alla möjligheter och ger en hel del tips. Manualen finns enbart på engelska.</string>
+  <string name="helper_calendar_title">c:geo kalendertillägg</string>
+  <string name="helper_calendar_description">Gör det möjligt att exportera event till din kalender.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Ett enkelt program för att visa Online kartor men som också medger nedladdning av raster kartor för användning i Offline läge. Stödjer även inspelning av väg (track recording), POI hantering och många andra användbara funktioner.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
