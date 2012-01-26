@@ -14,10 +14,6 @@
   <string name="latitude">Latitude</string>
   <string name="longitude">Longitude</string>
 
-  <!-- dialog -->
-  <string name="dialog_yes">Yes</string>
-  <string name="dialog_no">No</string>
-
   <!-- actionbar -->
   <string name="action_bar_share_title">Share link to cache</string>
 

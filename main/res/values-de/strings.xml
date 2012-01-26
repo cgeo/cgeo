@@ -14,10 +14,6 @@
   <string name="latitude">Breitengrad</string>
   <string name="longitude">Längengrad</string>
 
-  <!-- dialog -->
-  <string name="dialog_yes">Ja</string>
-  <string name="dialog_no">Nein</string>
-
   <!-- actionbar -->
   <string name="action_bar_share_title">Link versenden</string>
 
