@@ -137,7 +137,7 @@ public class cgeocoords extends Dialog {
         if (cache != null) {
             buttonCache.setOnClickListener(new CacheListener());
         } else {
-            buttonCache.setVisibility(View.INVISIBLE);
+            buttonCache.setVisibility(View.GONE);
         }
         final Button buttonDone = (Button) findViewById(R.id.done);
         buttonDone.setOnClickListener(new InputDoneListener());
