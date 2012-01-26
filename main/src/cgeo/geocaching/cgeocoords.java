@@ -134,7 +134,11 @@ public class cgeocoords extends Dialog {
         final Button buttonCurrent = (Button) findViewById(R.id.current);
         buttonCurrent.setOnClickListener(new CurrentListener());
         final Button buttonCache = (Button) findViewById(R.id.cache);
-        buttonCache.setOnClickListener(new CacheListener());
+        if (cache != null) {
+            buttonCache.setOnClickListener(new CacheListener());
+        } else {
+            buttonCache.setVisibility(View.INVISIBLE);
+        }
         final Button buttonDone = (Button) findViewById(R.id.done);
         buttonDone.setOnClickListener(new InputDoneListener());
     }
