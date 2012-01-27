@@ -2153,6 +2153,8 @@ public class cgBase {
                 }
 
                 getLoginStatus(page);
+                // the log-successful-page contains still the old value
+                actualCachesFound++;
                 return StatusCode.NO_ERROR;
             }
         } catch (Exception e) {
