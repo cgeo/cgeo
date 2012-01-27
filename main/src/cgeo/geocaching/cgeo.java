@@ -9,6 +9,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.ui.CacheListAdapter;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -61,6 +62,28 @@ public class cgeo extends AbstractActivity {
     private List<Address> addresses = null;
     private boolean addressObtaining = false;
     private boolean initialized = false;
+
+    private Handler updateUserInfoHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+
+            TextView userInfoView = (TextView) findViewById(R.id.user_info);
+
+            String userInfo = "geocaching.com" + CacheListAdapter.SEPARATOR;
+            if (cgBase.isActualLoginStatus()) {
+                userInfo += cgBase.getActualUserName();
+                if (cgBase.getActualCachesFound() >= 0) {
+                    userInfo += " (" + String.valueOf(cgBase.getActualCachesFound()) + ")";
+                }
+                userInfo += CacheListAdapter.SEPARATOR;
+            }
+            userInfo += cgBase.getActualStatus();
+
+            userInfoView.setText(userInfo);
+        }
+    };
+
     private Handler obtainAddressHandler = new Handler() {
 
         @Override
@@ -179,6 +202,8 @@ public class cgeo extends AbstractActivity {
     @Override
     public void onResume() {
         super.onResume();
+
+        updateUserInfoHandler.sendEmptyMessage(-1);
 
         init();
     }
@@ -742,11 +767,13 @@ public class cgeo extends AbstractActivity {
                 return;
             }
 
+            // login
             final StatusCode status = cgBase.login();
 
             if (status == StatusCode.NO_ERROR) {
                 app.firstRun = false;
                 cgBase.detectGcCustomDate();
+                updateUserInfoHandler.sendEmptyMessage(-1);
             }
 
             if (app.showLoginToast) {
@@ -808,4 +835,5 @@ public class cgeo extends AbstractActivity {
     public void goSearch(View view) {
         onSearchRequested();
     }
+
 }

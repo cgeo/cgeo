@@ -141,6 +141,13 @@ public class cgBase {
 
     public static final int UPDATE_LOAD_PROGRESS_DETAIL = 42186;
 
+    // false = not logged in
+    private static boolean actualLoginStatus = false;
+    private static String actualUserName = "";
+    private static String actualMemberStatus = "";
+    private static int actualCachesFound = -1;
+    private static String actualStatus = "";
+
     private cgBase() {
         //initialize(app);
         throw new UnsupportedOperationException(); // static class, not to be instantiated
@@ -150,6 +157,7 @@ public class cgBase {
         context = app.getBaseContext();
         res = app.getBaseContext().getResources();
 
+        cgBase.actualStatus = res.getString(R.string.init_login_popup_working);
 
         try {
             final PackageManager manager = app.getPackageManager();
@@ -304,7 +312,7 @@ public class cgBase {
             return StatusCode.CONNECTION_FAILED; // no loginpage
         }
 
-        if (checkLogin(loginData)) {
+        if (getLoginStatus(loginData)) {
             Log.i(Settings.tag, "Already logged in Geocaching.com as " + login.left);
             switchToEnglish(loginData);
             return StatusCode.NO_ERROR; // logged in
@@ -331,7 +339,7 @@ public class cgBase {
         loginData = getResponseData(loginResponse);
 
         if (StringUtils.isNotBlank(loginData)) {
-            if (checkLogin(loginData)) {
+            if (getLoginStatus(loginData)) {
                 Log.i(Settings.tag, "Successfully logged in Geocaching.com as " + login.left);
 
                 switchToEnglish(loginData);
@@ -372,21 +380,33 @@ public class cgBase {
      * @param page
      * @return true = User has been logged in, false else
      */
-    private static boolean checkLogin(String page) {
+    private static boolean getLoginStatus(String page) {
         if (StringUtils.isBlank(page)) {
             Log.e(Settings.tag, "cgeoBase.checkLogin: No page given");
             return false;
         }
 
-        // on every page
-        if (BaseUtils.matches(page, GCConstants.PATTERN_LOGGEDIN2)) {
+        cgBase.actualStatus = res.getString(R.string.init_login_popup_ok);
+
+        // on every page except login page
+        cgBase.actualLoginStatus = BaseUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME);
+        if (cgBase.actualLoginStatus) {
+            cgBase.actualUserName = BaseUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???");
+            cgBase.actualMemberStatus = BaseUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, "???");
+            cgBase.actualCachesFound = Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0"));
             return true;
         }
 
-        // after login
-        if (BaseUtils.matches(page, GCConstants.PATTERN_LOGGEDIN)) {
+        // login page
+        cgBase.actualLoginStatus = BaseUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE);
+        if (cgBase.actualLoginStatus) {
+            cgBase.actualUserName = Settings.getUsername();
+            cgBase.actualMemberStatus = Settings.getMemberStatus();
+            // number of caches found is not part of this page
             return true;
         }
+
+        cgBase.actualStatus = res.getString(R.string.err_login_failed);
 
         return false;
     }
@@ -1414,7 +1434,9 @@ public class cgBase {
 
             Settings.setMemberStatus(BaseUtils.getMatch(profile, GCConstants.PATTERN_MEMBER_STATUS, true, null));
 
-            final String avatarURL = BaseUtils.getMatch(profile, GCConstants.PATTERN_AVATAR_IMAGE, false, null);
+            cgBase.actualCachesFound = Integer.parseInt(BaseUtils.getMatch(profile, GCConstants.PATTERN_CACHES_FOUND, true, "-1"));
+
+            final String avatarURL = BaseUtils.getMatch(profile, GCConstants.PATTERN_AVATAR_IMAGE_PROFILE_PAGE, false, null);
             if (null != avatarURL) {
                 final HtmlImage imgGetter = new HtmlImage(context, "", false, 0, false);
                 return imgGetter.getDrawable(avatarURL);
@@ -1763,7 +1785,7 @@ public class cgBase {
         putViewstates(params, viewstates);
 
         String page = getResponseData(postRequest(uri, params));
-        if (!checkLogin(page)) {
+        if (!getLoginStatus(page)) {
             final StatusCode loginState = login();
             if (loginState == StatusCode.NO_ERROR) {
                 page = getResponseData(postRequest(uri, params));
@@ -1859,6 +1881,8 @@ public class cgBase {
 
         final ParseResult search = ParseResult.filterParseResults(parseResult, Settings.isExcludeDisabledCaches(), false, cacheType);
         cgeoapplication.getInstance().addSearch(search.cacheList, listId);
+
+        getLoginStatus(page);
 
         return search;
     }
@@ -2052,7 +2076,7 @@ public class cgBase {
 
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/seek/log.aspx").encodedQuery("ID=" + cacheid).build().toString();
         String page = getResponseData(postRequest(uri, params));
-        if (!checkLogin(page)) {
+        if (!getLoginStatus(page)) {
             final StatusCode loginState = login();
             if (loginState == StatusCode.NO_ERROR) {
                 page = getResponseData(postRequest(uri, params));
@@ -2128,6 +2152,7 @@ public class cgBase {
                     app.saveVisitDate(geocode);
                 }
 
+                getLoginStatus(page);
                 return StatusCode.NO_ERROR;
             }
         } catch (Exception e) {
@@ -2177,7 +2202,7 @@ public class cgBase {
 
         final String uri = new Uri.Builder().scheme("http").authority("www.geocaching.com").path("/track/log.aspx").encodedQuery("wid=" + tbid).build().toString();
         String page = getResponseData(postRequest(uri, params));
-        if (!checkLogin(page)) {
+        if (!getLoginStatus(page)) {
             final StatusCode loginState = login();
             if (loginState == StatusCode.NO_ERROR) {
                 page = getResponseData(postRequest(uri, params));
@@ -2393,7 +2418,7 @@ public class cgBase {
         HttpResponse response = postRequest(uri, null);
         String data = getResponseData(response);
 
-        if (!checkLogin(data)) {
+        if (!getLoginStatus(data)) {
             if (login() == StatusCode.NO_ERROR) {
                 response = postRequest(uri, null);
                 data = getResponseData(response);
@@ -2418,7 +2443,7 @@ public class cgBase {
         HttpResponse response = request(uri, params, xContentType, my, addF);
         String data = getResponseData(response);
 
-        if (!checkLogin(data)) {
+        if (!getLoginStatus(data)) {
             if (login() == StatusCode.NO_ERROR) {
                 response = request(uri, params, xContentType, my, addF);
                 data = getResponseData(response);
@@ -3083,4 +3108,41 @@ public class cgBase {
         return null;
     }
 
+    public static boolean isActualLoginStatus() {
+        return actualLoginStatus;
+    }
+
+    public static void setActualLoginStatus(boolean actualLoginStatus) {
+        cgBase.actualLoginStatus = actualLoginStatus;
+    }
+
+    public static String getActualUserName() {
+        return actualUserName;
+    }
+
+    public static void setActualUserName(String actualUserName) {
+        cgBase.actualUserName = actualUserName;
+    }
+
+    public static String getActualMemberStatus() {
+        return actualMemberStatus;
+    }
+
+    public static void setActualMemberStatus(String actualMemberStatus) {
+        cgBase.actualMemberStatus = actualMemberStatus;
+    }
+
+    public static int getActualCachesFound() {
+        return actualCachesFound;
+    }
+
+    public static void setActualCachesFound(int actualCachesFound) {
+        cgBase.actualCachesFound = actualCachesFound;
+    }
+
+    public static String getActualStatus() {
+        return actualStatus;
+    }
+
 }
+

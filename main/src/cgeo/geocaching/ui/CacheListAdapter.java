@@ -79,7 +79,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
      * time in milliseconds after which the list may be resorted due to position updates
      */
     private static final int PAUSE_BETWEEN_LIST_SORT = 1000;
-    private static final String SEPARATOR = " · ";
+    public static final String SEPARATOR = " · ";
     private IFilter currentFilter = null;
     private List<cgCache> originalList = null;
     private final CacheListType cacheListType;
