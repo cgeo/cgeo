@@ -1893,7 +1893,7 @@ public class cgData {
         }
         StringBuilder where = new StringBuilder();
         Cursor cursor = null;
-        Set<cgCache> caches = new HashSet<cgCache>();
+        final Set<cgCache> caches = new HashSet<cgCache>();
 
         try {
             if (geocodes != null && geocodes.size() > 0) {
@@ -2023,9 +2023,6 @@ public class cgData {
 
                         caches.add(cache);
                     } while (cursor.moveToNext());
-                } else {
-                    cursor.close();
-                    return null;
                 }
             }
         } catch (Exception e) {
