@@ -1686,8 +1686,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             @Override
             public void run() {
-                int listId = cache.getListId() > 1 ? cache.getListId() : 1;
-                cgBase.storeCache(app, CacheDetailActivity.this, cache, null, listId, handler);
+                cache.store(CacheDetailActivity.this, handler);
             }
         }
 
@@ -1920,6 +1919,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     final int width = metrics.widthPixels;
                     final int height = (int) (110 * metrics.density);
 
+                    // TODO move this code to StaticMapProvider and use its constant values
                     final String markerUrl = cgBase.urlencode_rfc3986("http://cgeo.carnero.cc/_markers/my_location_mdpi.png");
 
                     final HtmlImage mapGetter = new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), false, 0, false);
@@ -2339,7 +2339,9 @@ public class CacheDetailActivity extends AbstractActivity {
                         }
 
                         ((TextView) rowView.findViewById(R.id.author)).setOnClickListener(new UserActionsClickListener());
-                        ((TextView) logLayout.findViewById(R.id.log)).setOnClickListener(new DecryptLogClickListener());
+                        TextView logView = (TextView) logLayout.findViewById(R.id.log);
+                        logView.setMovementMethod(LinkMovementMethod.getInstance());
+                        logView.setOnClickListener(new DecryptLogClickListener());
 
                         loglist.add(rowView);
                     }

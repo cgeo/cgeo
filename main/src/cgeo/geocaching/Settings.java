@@ -194,7 +194,7 @@ public final class Settings {
     }
 
     public static String getMemberStatus() {
-        return sharedPrefs.getString(KEY_MEMBER_STATUS, null);
+        return sharedPrefs.getString(KEY_MEMBER_STATUS, "");
     }
 
     public static boolean setMemberStatus(final String memberStatus) {
@@ -631,6 +631,10 @@ public final class Settings {
     }
 
     public static boolean isFriendLogsWanted() {
+        if (!isLogin()) {
+            // don't show a friends log if the user is anonymous
+            return false;
+        }
         return sharedPrefs.getBoolean(KEY_FRIENDLOGS_WANTED, true);
     }
 

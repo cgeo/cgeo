@@ -48,12 +48,11 @@
 					android:layout_width="74dip"
 					android:layout_height="wrap_content"
 					android:layout_margin="4dip"
-					android:orientation="vertical"
-					android:onClick="cgeoFindNearest" >
+					android:orientation="vertical">
 				<View
 						android:id="@+id/nearest"
 						style="@style/icon_mainscreen"
-						android:background="@drawable/main_nearby" />
+						android:background="@drawable/main_nearby_disabled" />
 				<TextView
 						style="@style/icon_mainscreen_text"
 						android:text="@string/caches_nearby_button" />
@@ -169,6 +168,9 @@
 			android:layout_marginRight="6dip"
 			android:layout_marginLeft="6dip"
 			android:orientation="vertical">
+		<TextView android:id="@+id/user_info"
+				style="@style/location_current"
+				android:text="@string/init_login_popup_working"/>
 		<TextView android:id="@+id/nav_location"
 				style="@style/location_current"
 				android:text="@string/loc_trying" />

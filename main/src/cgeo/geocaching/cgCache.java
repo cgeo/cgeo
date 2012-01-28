@@ -12,6 +12,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser;
+import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.LogTemplateProvider;
 
@@ -1154,6 +1155,19 @@ public class cgCache implements ICache {
         return waypoints.get(index);
     }
 
+    /**
+     * @param index
+     * @return waypoint or <code>null</code>
+     */
+    public cgWaypoint getWaypointById(int id) {
+        for (cgWaypoint waypoint : waypoints) {
+            if (waypoint.getId() == id) {
+                return waypoint;
+            }
+        }
+        return null;
+    }
+
     public void parseWaypointsFromNote() {
         try {
             if (StringUtils.isBlank(getPersonalNote())) {
@@ -1220,5 +1234,29 @@ public class cgCache implements ICache {
     @Override
     public String toString() {
         return this.geocode + " " + this.name;
+    }
+
+    @Override
+    public int hashCode() {
+        return geocode.hashCode() * name.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        return isEqualTo((cgCache) obj);
+    }
+
+    public void store(Activity activity, CancellableHandler handler) {
+        final int listId = Math.max(getListId(), StoredList.STANDARD_LIST_ID);
+        cgBase.storeCache(activity, this, null, listId, handler);
     }
 }

@@ -144,6 +144,7 @@
   <string name="err_detail_no_spoiler">c:geo found no spoiler images for this cache.</string>
   <string name="err_detail_no_map_static">c:geo found no static maps for this cache.</string>
   <string name="err_detail_not_load_map_static">c:geo failed to load static maps.</string>
+  <string name="err_detail_ask_store_map_static">c:geo failed to load static maps. Store now?</string>
   <string name="err_detail_still_working">Still working on another task.</string>
   <string name="err_watchlist_still_managing">Still managing your watchlist.</string>
   <string name="err_watchlist_failed">Changing your watchlist failed.</string>
@@ -221,6 +222,7 @@
   <string name="info_log_type_changed">Type of log has been changed!</string>
 
   <string name="info_fieldnotes_exported_to">Field Notes exported to</string>
+  <string name="info_storing_static_maps">Trying to store static maps</string>
 
   <!-- location service -->
   <string name="loc_last">Last known</string>
@@ -479,7 +481,7 @@
   <string name="cache_attributes_no_icons">(refresh cache to show attribute icons)</string>
   <string name="cache_inventory">Inventory</string>
   <string name="cache_log_offline">Offline Log</string>
-  <string name="cache_log_images_loading">Loading Log images …</string>
+  <string name="cache_log_images_loading">Loading Log images…</string>
   <string name="cache_log_images_title">Log images</string>
   <string name="cache_log_image_default_title">Photo</string>
   <string name="cache_personal_note">Personal note</string>

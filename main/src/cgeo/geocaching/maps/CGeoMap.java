@@ -1170,7 +1170,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     final boolean excludeMine = Settings.isExcludeMyCaches();
                     final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
 
-                    for (cgCache cache : caches) {
+                    final ArrayList<cgCache> tempList = new ArrayList<cgCache>(caches);
+                    for (cgCache cache : tempList) {
                         if ((cache.isFound() && excludeMine) || (cache.isOwn() && excludeMine) || (cache.isDisabled() && excludeDisabled)) {
                             caches.remove(cache);
                         }
@@ -1289,8 +1290,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                //TODO Portree Only overwrite if we got some. Otherwise maybe error icon
-                //TODO Merge not to show locally found caches
                 caches = app.getCaches(search, centerLat, centerLon, spanLat, spanLon);
 
                 if (stop) {
@@ -1622,7 +1621,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                             break;
                         }
 
-                        cgBase.storeCache(app, activity, null, geocode, 1, handler);
+                        cgBase.storeCache(activity, null, geocode, 1, handler);
                     }
                 } catch (Exception e) {
                     Log.e(Settings.tag, "cgeocaches.LoadDetails.run: " + e.toString());

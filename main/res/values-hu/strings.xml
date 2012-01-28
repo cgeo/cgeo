@@ -445,7 +445,7 @@
   <string name="cache_attributes_no_icons">(frissítsd a ládát, hogy lásd a tulajdonság ikonokat)</string>
   <string name="cache_inventory">Tárgyak</string>
   <string name="cache_log_offline">Offline bejegyzés</string>
-  <string name="cache_log_images_loading">Bejegyzés kép betöltése …</string>
+  <string name="cache_log_images_loading">Bejegyzés kép betöltése…</string>
   <string name="cache_log_images_title">Bejegyzés kép</string>
   <string name="cache_log_image_default_title">Fotó</string>
   <string name="cache_personal_note">Személyes megjegyzés</string>

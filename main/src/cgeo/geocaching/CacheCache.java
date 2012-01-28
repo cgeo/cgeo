@@ -3,9 +3,6 @@ package cgeo.geocaching;
 import cgeo.geocaching.cgData.StorageLocation;
 import cgeo.geocaching.utils.LeastRecentlyUsedCache;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Cache for Caches. Every cache is stored in memory while c:geo is active to
  * speed up the app and to minimize network request - which are slow.
@@ -72,23 +69,6 @@ public class CacheCache {
         }
 
         return null;
-    }
-
-    /**
-     * @param geocode
-     *            Geocode of the cache to retrieve from the cache
-     * @return cache if found, null else
-     */
-    public List<cgCache> getCachesFromCache(final List<String> geocodes) {
-        if (geocodes == null || geocodes.isEmpty()) {
-            return null;
-        }
-
-        ArrayList<cgCache> caches = new ArrayList<cgCache>();
-        for (String geocode : geocodes) {
-            caches.add(getCacheFromCache(geocode));
-        }
-        return caches;
     }
 
 }

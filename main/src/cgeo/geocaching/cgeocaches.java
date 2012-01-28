@@ -510,6 +510,7 @@ public class cgeocaches extends AbstractListActivity {
     };
 
     private ContextMenuInfo lastMenuInfo;
+    private String contextMenuGeocode = "";
     /**
      * the navigation menu item for the cache list (not the context menu!), or <code>null</code>
      */
@@ -1133,6 +1134,8 @@ public class cgeocaches extends AbstractListActivity {
             menu.setHeaderTitle(cache.getGeocode());
         }
 
+        contextMenuGeocode = cache.getGeocode();
+
         if (cache.getCoords() != null) {
             menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication(this).getName());
             final SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
@@ -1273,7 +1276,12 @@ public class cgeocaches extends AbstractListActivity {
      * @return the pointed cache
      */
     private cgCache getCacheFromAdapter(final AdapterContextMenuInfo adapterInfo) {
-        return adapter.getItem(adapterInfo.position);
+        final cgCache cache = adapter.getItem(adapterInfo.position);
+        if (cache.getGeocode().equalsIgnoreCase(contextMenuGeocode)) {
+            return cache;
+        }
+
+        return adapter.findCacheByGeocode(contextMenuGeocode);
     }
 
     private boolean setFilter(IFilter filter) {
@@ -1938,7 +1946,7 @@ public class cgeocaches extends AbstractListActivity {
                     }
 
                     detailProgress++;
-                    cgBase.storeCache(app, cgeocaches.this, cache, null, listIdLD, null);
+                    cgBase.storeCache(cgeocaches.this, cache, null, listIdLD, null);
 
                     handler.sendEmptyMessage(cacheList.indexOf(cache));
 
@@ -2013,8 +2021,7 @@ public class cgeocaches extends AbstractListActivity {
                         handler.sendMessage(mes);
                         yield();
 
-                        cgBase.storeCache(app, cgeocaches.this, null, GCcode,
-                                listIdLFW, null);
+                        cgBase.storeCache(cgeocaches.this, null, GCcode, listIdLFW, null);
 
                         Message mes1 = new Message();
                         mes1.what = 2;

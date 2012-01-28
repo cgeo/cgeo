@@ -49,6 +49,8 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         public final int id;
     }
 
+    private static final int MENU_ITEM_OFFSET = 12345;
+
     public static void addMenuItems(final Menu menu, final Activity activity) {
         addMenuItems(menu, activity, true, false);
     }
@@ -59,17 +61,17 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         for (NavigationAppsEnum navApp : getInstalledNavigationApps(activity)) {
             if ((showInternalMap || !(navApp.app instanceof InternalMap)) &&
                     (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
-                menu.add(0, navApp.id, 0, navApp.app.getName());
+                menu.add(0, MENU_ITEM_OFFSET + navApp.id, 0, navApp.app.getName());
             }
         }
     }
 
     public static void showNavigationMenu(final cgGeo geo, final Activity activity, final cgCache cache, final SearchResult search) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.cache_menu_navigate);
         builder.setIcon(android.R.drawable.ic_menu_mapmode);
         final List<NavigationAppsEnum> installed = getInstalledNavigationApps(activity);
-        String[] items = new String[installed.size()];
+        final String[] items = new String[installed.size()];
         for (int i = 0; i < installed.size(); i++) {
             items[i] = installed.get(i).app.getName();
         }
@@ -78,7 +80,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
                 installed.get(item).app.invoke(geo, activity, cache, search, null, null);
             }
         });
-        AlertDialog alert = builder.create();
+        final AlertDialog alert = builder.create();
         alert.show();
 
     }
@@ -115,7 +117,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     public static NavigationApp getAppFromMenuItem(MenuItem item) {
         final int id = item.getItemId();
         for (NavigationAppsEnum navApp : NavigationAppsEnum.values()) {
-            if (navApp.id == id) {
+            if (MENU_ITEM_OFFSET + navApp.id == id) {
                 return navApp.app;
             }
         }
@@ -124,7 +126,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 
     public static void startDefaultNavigationApplication(final cgGeo geo, Activity activity, cgCache cache,
             final SearchResult search, cgWaypoint waypoint, final Geopoint destination) {
-        NavigationApp app = getDefaultNavigationApplication(activity);
+        final NavigationApp app = getDefaultNavigationApplication(activity);
 
         if (app != null) {
             try {
@@ -144,21 +146,15 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     public static NavigationApp getDefaultNavigationApplication(Activity activity) {
         final int defaultNavigationTool = Settings.getDefaultNavigationTool();
 
-        NavigationApp app = null;
         final List<NavigationAppsEnum> installedNavigationApps = getInstalledNavigationApps(activity);
 
         for (NavigationAppsEnum navigationApp : installedNavigationApps) {
             if (navigationApp.id == defaultNavigationTool) {
-                app = navigationApp.app;
-                break;
+                return navigationApp.app;
             }
         }
         // default navigation tool wasn't set already or couldn't be found (not installed any more for example)
-        if (app == null) {
-            // assume that 0 is the compass-app
-            app = installedNavigationApps.get(0).app;
-        }
-        return app;
+        return NavigationAppsEnum.COMPASS.app;
     }
 
 }
