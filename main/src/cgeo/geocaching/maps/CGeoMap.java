@@ -1170,7 +1170,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     final boolean excludeMine = Settings.isExcludeMyCaches();
                     final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
 
-                    for (cgCache cache : caches) {
+                    final ArrayList<cgCache> tempList = new ArrayList<cgCache>(caches);
+                    for (cgCache cache : tempList) {
                         if ((cache.isFound() && excludeMine) || (cache.isOwn() && excludeMine) || (cache.isDisabled() && excludeDisabled)) {
                             caches.remove(cache);
                         }
