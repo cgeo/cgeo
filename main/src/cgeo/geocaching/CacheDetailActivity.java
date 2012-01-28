@@ -1919,6 +1919,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     final int width = metrics.widthPixels;
                     final int height = (int) (110 * metrics.density);
 
+                    // TODO move this code to StaticMapProvider and use its constant values
                     final String markerUrl = cgBase.urlencode_rfc3986("http://cgeo.carnero.cc/_markers/my_location_mdpi.png");
 
                     final HtmlImage mapGetter = new HtmlImage(CacheDetailActivity.this, cache.getGeocode(), false, 0, false);

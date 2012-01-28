@@ -391,7 +391,7 @@ public class cgBase {
             return false;
         }
 
-        cgBase.actualStatus = res.getString(R.string.init_login_popup_ok);
+        setActualStatus(res.getString(R.string.init_login_popup_ok));
 
         // on every page except login page
         cgBase.setActualLoginStatus(BaseUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME));
@@ -411,7 +411,7 @@ public class cgBase {
             return true;
         }
 
-        cgBase.actualStatus = res.getString(R.string.init_login_popup_failed);
+        setActualStatus(res.getString(R.string.init_login_popup_failed));
 
         return false;
     }
@@ -1439,7 +1439,7 @@ public class cgBase {
 
             Settings.setMemberStatus(BaseUtils.getMatch(profile, GCConstants.PATTERN_MEMBER_STATUS, true, null));
 
-            cgBase.actualCachesFound = Integer.parseInt(BaseUtils.getMatch(profile, GCConstants.PATTERN_CACHES_FOUND, true, "-1"));
+            setActualCachesFound(Integer.parseInt(BaseUtils.getMatch(profile, GCConstants.PATTERN_CACHES_FOUND, true, "-1")));
 
             final String avatarURL = BaseUtils.getMatch(profile, GCConstants.PATTERN_AVATAR_IMAGE_PROFILE_PAGE, false, null);
             if (null != avatarURL) {
@@ -2159,7 +2159,9 @@ public class cgBase {
 
                 getLoginStatus(page);
                 // the log-successful-page contains still the old value
-                actualCachesFound++;
+                if (getActualCachesFound() >= 0) {
+                    setActualCachesFound(getActualCachesFound() + 1);
+                }
                 return StatusCode.NO_ERROR;
             }
         } catch (Exception e) {
@@ -3136,7 +3138,7 @@ public class cgBase {
         return actualMemberStatus;
     }
 
-    private static void setActualMemberStatus(String actualMemberStatus) {
+    private static void setActualMemberStatus(final String actualMemberStatus) {
         cgBase.actualMemberStatus = actualMemberStatus;
     }
 
@@ -3144,7 +3146,7 @@ public class cgBase {
         return actualCachesFound;
     }
 
-    private static void setActualCachesFound(int actualCachesFound) {
+    private static void setActualCachesFound(final int actualCachesFound) {
         cgBase.actualCachesFound = actualCachesFound;
     }
 
@@ -3152,7 +3154,7 @@ public class cgBase {
         return actualStatus;
     }
 
-    private static void setActualStatus(String actualStatus) {
+    private static void setActualStatus(final String actualStatus) {
         cgBase.actualStatus = actualStatus;
     }
 
