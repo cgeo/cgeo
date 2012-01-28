@@ -12,6 +12,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser;
+import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.LogTemplateProvider;
 
@@ -1252,5 +1253,10 @@ public class cgCache implements ICache {
             return false;
         }
         return isEqualTo((cgCache) obj);
+    }
+
+    public void store(Activity activity, CancellableHandler handler) {
+        final int listId = Math.max(getListId(), StoredList.STANDARD_LIST_ID);
+        cgBase.storeCache(activity, this, null, listId, handler);
     }
 }

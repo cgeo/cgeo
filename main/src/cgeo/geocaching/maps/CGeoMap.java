@@ -1621,7 +1621,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                             break;
                         }
 
-                        cgBase.storeCache(app, activity, null, geocode, 1, handler);
+                        cgBase.storeCache(activity, null, geocode, 1, handler);
                     }
                 } catch (Exception e) {
                     Log.e(Settings.tag, "cgeocaches.LoadDetails.run: " + e.toString());

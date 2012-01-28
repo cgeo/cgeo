@@ -1686,8 +1686,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             @Override
             public void run() {
-                int listId = cache.getListId() > 1 ? cache.getListId() : 1;
-                cgBase.storeCache(app, CacheDetailActivity.this, cache, null, listId, handler);
+                cache.store(CacheDetailActivity.this, handler);
             }
         }
 

@@ -2649,8 +2649,9 @@ public class cgBase {
         return path.delete();
     }
 
-    public static void storeCache(cgeoapplication app, Activity activity, cgCache origCache, String geocode, int listId, CancellableHandler handler) {
+    public static void storeCache(Activity activity, cgCache origCache, String geocode, int listId, CancellableHandler handler) {
         try {
+            cgeoapplication app = cgeoapplication.getInstance();
             cgCache cache;
             // get cache details, they may not yet be complete
             if (origCache != null) {

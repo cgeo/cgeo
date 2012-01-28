@@ -1946,7 +1946,7 @@ public class cgeocaches extends AbstractListActivity {
                     }
 
                     detailProgress++;
-                    cgBase.storeCache(app, cgeocaches.this, cache, null, listIdLD, null);
+                    cgBase.storeCache(cgeocaches.this, cache, null, listIdLD, null);
 
                     handler.sendEmptyMessage(cacheList.indexOf(cache));
 
@@ -2021,8 +2021,7 @@ public class cgeocaches extends AbstractListActivity {
                         handler.sendMessage(mes);
                         yield();
 
-                        cgBase.storeCache(app, cgeocaches.this, null, GCcode,
-                                listIdLFW, null);
+                        cgBase.storeCache(cgeocaches.this, null, GCcode, listIdLFW, null);
 
                         Message mes1 = new Message();
                         mes1.what = 2;
