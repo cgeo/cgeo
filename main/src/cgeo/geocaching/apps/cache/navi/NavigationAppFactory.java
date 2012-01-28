@@ -49,6 +49,8 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         public final int id;
     }
 
+    private static final int MENU_ITEM_OFFSET = 12345;
+
     public static void addMenuItems(final Menu menu, final Activity activity) {
         addMenuItems(menu, activity, true, false);
     }
@@ -59,7 +61,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         for (NavigationAppsEnum navApp : getInstalledNavigationApps(activity)) {
             if ((showInternalMap || !(navApp.app instanceof InternalMap)) &&
                     (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
-                menu.add(0, navApp.id, 0, navApp.app.getName());
+                menu.add(0, MENU_ITEM_OFFSET + navApp.id, 0, navApp.app.getName());
             }
         }
     }
@@ -115,7 +117,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     public static NavigationApp getAppFromMenuItem(MenuItem item) {
         final int id = item.getItemId();
         for (NavigationAppsEnum navApp : NavigationAppsEnum.values()) {
-            if (navApp.id == id) {
+            if (MENU_ITEM_OFFSET + navApp.id == id) {
                 return navApp.app;
             }
         }
