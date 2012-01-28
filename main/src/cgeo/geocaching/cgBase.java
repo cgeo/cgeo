@@ -153,11 +153,14 @@ public class cgBase {
         throw new UnsupportedOperationException(); // static class, not to be instantiated
     }
 
+    /**
+     * Called from AbstractActivity.onCreate() and AbstractListActivity.onCreate()
+     *
+     * @param app
+     */
     public static void initialize(final cgeoapplication app) {
         context = app.getBaseContext();
         res = app.getBaseContext().getResources();
-
-        cgBase.actualStatus = res.getString(R.string.init_login_popup_working);
 
         try {
             final PackageManager manager = app.getPackageManager();
@@ -297,10 +300,12 @@ public class cgBase {
         final ImmutablePair<String, String> login = Settings.getLogin();
 
         if (login == null || StringUtils.isEmpty(login.left) || StringUtils.isEmpty(login.right)) {
+            cgBase.setActualStatus(res.getString(R.string.err_login));
             Log.e(Settings.tag, "cgeoBase.login: No login information stored");
             return StatusCode.NO_LOGIN_INFO_STORED;
         }
 
+        cgBase.setActualStatus(res.getString(R.string.init_login_popup_working));
         HttpResponse loginResponse = request("https://www.geocaching.com/login/default.aspx", null, false, false, false);
         String loginData = getResponseData(loginResponse);
         if (loginResponse != null && loginResponse.getStatusLine().getStatusCode() == 503 && BaseUtils.matches(loginData, GCConstants.PATTERN_MAINTENANCE)) {
@@ -389,24 +394,24 @@ public class cgBase {
         cgBase.actualStatus = res.getString(R.string.init_login_popup_ok);
 
         // on every page except login page
-        cgBase.actualLoginStatus = BaseUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME);
-        if (cgBase.actualLoginStatus) {
-            cgBase.actualUserName = BaseUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???");
-            cgBase.actualMemberStatus = BaseUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, "???");
-            cgBase.actualCachesFound = Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0"));
+        cgBase.setActualLoginStatus(BaseUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME));
+        if (cgBase.isActualLoginStatus()) {
+            cgBase.setActualUserName(BaseUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???"));
+            cgBase.setActualMemberStatus(BaseUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, "???"));
+            cgBase.setActualCachesFound(Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0")));
             return true;
         }
 
         // login page
-        cgBase.actualLoginStatus = BaseUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE);
-        if (cgBase.actualLoginStatus) {
-            cgBase.actualUserName = Settings.getUsername();
-            cgBase.actualMemberStatus = Settings.getMemberStatus();
+        cgBase.setActualLoginStatus(BaseUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE));
+        if (cgBase.isActualLoginStatus()) {
+            cgBase.setActualUserName(Settings.getUsername());
+            cgBase.setActualMemberStatus(Settings.getMemberStatus());
             // number of caches found is not part of this page
             return true;
         }
 
-        cgBase.actualStatus = res.getString(R.string.err_login_failed);
+        cgBase.actualStatus = res.getString(R.string.init_login_popup_failed);
 
         return false;
     }
@@ -3114,7 +3119,7 @@ public class cgBase {
         return actualLoginStatus;
     }
 
-    public static void setActualLoginStatus(boolean actualLoginStatus) {
+    private static void setActualLoginStatus(boolean actualLoginStatus) {
         cgBase.actualLoginStatus = actualLoginStatus;
     }
 
@@ -3122,7 +3127,7 @@ public class cgBase {
         return actualUserName;
     }
 
-    public static void setActualUserName(String actualUserName) {
+    private static void setActualUserName(String actualUserName) {
         cgBase.actualUserName = actualUserName;
     }
 
@@ -3130,7 +3135,7 @@ public class cgBase {
         return actualMemberStatus;
     }
 
-    public static void setActualMemberStatus(String actualMemberStatus) {
+    private static void setActualMemberStatus(String actualMemberStatus) {
         cgBase.actualMemberStatus = actualMemberStatus;
     }
 
@@ -3138,12 +3143,16 @@ public class cgBase {
         return actualCachesFound;
     }
 
-    public static void setActualCachesFound(int actualCachesFound) {
+    private static void setActualCachesFound(int actualCachesFound) {
         cgBase.actualCachesFound = actualCachesFound;
     }
 
     public static String getActualStatus() {
         return actualStatus;
+    }
+
+    private static void setActualStatus(String actualStatus) {
+        cgBase.actualStatus = actualStatus;
     }
 
 }
