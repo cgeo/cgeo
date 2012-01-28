@@ -469,7 +469,7 @@
   <string name="cache_attributes_no_icons">(aktualisiere den Cache um die Attribut-Icons anzuzeigen)</string>
   <string name="cache_inventory">Inventar</string>
   <string name="cache_log_offline">Offline-Log</string>
-  <string name="cache_log_images_loading">Lade Logbild …</string>
+  <string name="cache_log_images_loading">Lade Logbild…</string>
   <string name="cache_log_images_title">Logbild</string>
   <string name="cache_log_image_default_title">Bild</string>
   <string name="cache_personal_note">Persönliche Notiz</string>
