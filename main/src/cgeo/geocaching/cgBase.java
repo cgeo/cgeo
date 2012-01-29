@@ -737,7 +737,8 @@ public class cgBase {
             final JSONObject extra = dataJSON.getJSONObject("cs");
             if (extra != null && extra.length() > 0) {
                 int count = extra.getInt("count");
-                // check login status (presumably meaning of the 'li' member
+                // currently unused: 'pm', true for premium members
+                // check login status
                 boolean li = extra.getBoolean("li");
                 if (!li) {
                     parseResult.error = StatusCode.NOT_LOGGED_IN;
