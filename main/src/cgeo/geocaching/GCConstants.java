@@ -57,9 +57,9 @@ public final class GCConstants {
     public final static Pattern PATTERN_WATCHLIST = Pattern.compile("icon_stop_watchlist.gif");
 
     // Info box top-right
-    public static final Pattern PATTERN_LOGIN_NAME = Pattern.compile("<strong>\\W*Hello,[^<]*<a[^>]+>([^<]+)</a>[^<]*</strong>");
+    public static final Pattern PATTERN_LOGIN_NAME = Pattern.compile("\"SignedInProfileLink\">([^<]+)</a>");
     public static final Pattern PATTERN_MEMBER_STATUS = Pattern.compile("<span id=\"ctl00_litPMLevel\" style=\"display: block;\">([^<]+)</span>");
-    public static final Pattern PATTERN_CACHES_FOUND = Pattern.compile("<img src=\"/images/icons/icon_smile.png\" title=\"Caches Found\" /> (\\d+)&");
+    public static final Pattern PATTERN_CACHES_FOUND = Pattern.compile("title=\"Caches Found\"\\s*/>\\s*(\\d+)<");
 
     public static final Pattern PATTERN_AVATAR_IMAGE_PROFILE_PAGE = Pattern.compile("<img src=\"(http://img.geocaching.com/user/avatar/[0-9a-f-]+\\.jpg)\"[^>]*\\salt=\"Avatar\"");
     public static final Pattern PATTERN_LOGIN_NAME_LOGIN_PAGE = Pattern.compile("<span class=\"Success\">You are logged in as[^<]*<strong[^>]*>([^<]+)</strong>[^<]*</span>");
