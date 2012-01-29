@@ -137,7 +137,7 @@
 			android:layout_alignParentBottom="true"
 			android:layout_marginLeft="16dip"
 			android:layout_marginRight="16dip"
-			android:layout_marginBottom="48dip"
+			android:layout_marginBottom="64dip"
 			android:background="@drawable/helper_bcg" >
 		<ImageView
 				android:layout_width="32dip"
