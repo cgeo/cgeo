@@ -574,6 +574,10 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             cacheInfo.append(cgBase.formatTime(cache.getVisitedDate()));
             cacheInfo.append("; ");
             cacheInfo.append(cgBase.formatDate(cache.getVisitedDate()));
+            if (StringUtils.isNotBlank(cache.getGeocode())) {
+                cacheInfo.append(SEPARATOR);
+                cacheInfo.append(StringUtils.upperCase(cache.getGeocode()));
+            }
             holder.info.setText(cacheInfo.toString());
         } else {
             ArrayList<String> infos = new ArrayList<String>();
