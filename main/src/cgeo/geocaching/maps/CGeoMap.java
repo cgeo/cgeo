@@ -1,9 +1,9 @@
 package cgeo.geocaching.maps;
 
-import cgeo.geocaching.ParseResult;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.StoredList;
 import cgeo.geocaching.UpdateDirectionCallback;
 import cgeo.geocaching.UpdateLocationCallback;
 import cgeo.geocaching.cgBase;
@@ -16,6 +16,8 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -60,6 +62,7 @@ import android.widget.TextView;
 import android.widget.ViewSwitcher.ViewFactory;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -114,7 +117,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private WaypointType waypointTypeIntent = null;
     private int[] mapStateIntent = null;
     // status data
-    private ParseResult search = null;
+    private SearchResult search = null;
     private String token = null;
     private boolean noMapTokenShowed = false;
     // map status data
@@ -689,12 +692,11 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 mapView.repaintRequired(overlayCaches);
                 return true;
             case MENU_AS_LIST: {
-                final SearchResult search = new SearchResult();
+                final SearchResult searchResult = new SearchResult();
                 search.totalCnt = caches.size();
                 for (cgCache cache : caches) {
-                    search.addGeocode(cache.getGeocode());
+                    searchResult.addCache(cache);
                 }
-                app.addSearch(caches, 0);
                 cgeocaches.startActivityMap(activity, search);
                 return true;
             }
@@ -1143,12 +1145,12 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 // stage 1 - pull and render from the DB only
 
                 if (fromDetailIntent || searchIntent != null) {
-                    search = new ParseResult(searchIntent);
+                    search = new SearchResult(searchIntent);
                 } else {
                     if (!live || !Settings.isLiveMap()) {
-                        search = new ParseResult(app.getStoredInViewport(centerLat, centerLon, spanLat, spanLon, Settings.getCacheType()));
+                        search = new SearchResult(app.getStoredInViewport(centerLat, centerLon, spanLat, spanLon, Settings.getCacheType()));
                     } else {
-                        search = new ParseResult(app.getCachedInViewport(centerLat, centerLon, spanLat, spanLon, Settings.getCacheType()));
+                        search = new SearchResult(app.getCachedInViewport(centerLat, centerLon, spanLat, spanLon, Settings.getCacheType()));
                     }
                 }
 
@@ -1163,7 +1165,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                caches = app.getCaches(search, true);
+                caches = search.getCachesFromSearchResult(EnumSet.of(LoadFlag.LOADCACHEONLY));
 
                 //if in live map and stored caches are found / disables are also shown.
                 if (live && Settings.isLiveMap()) {
@@ -1290,7 +1292,11 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                caches = app.getCaches(search, centerLat, centerLon, spanLat, spanLon);
+                if (search == null) {
+                    caches = app.loadCaches(centerLat, centerLon, spanLat, spanLon, EnumSet.of(LoadFlag.LOADWAYPOINTS, LoadFlag.LOADOFFLINELOG));
+                } else {
+                    caches = search.getCachesFromSearchResult(LoadFlags.LOADCACHEONLY);
+                }
 
                 if (stop) {
                     displayHandler.sendEmptyMessage(UPDATE_TITLE);
@@ -1621,7 +1627,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                             break;
                         }
 
-                        cgBase.storeCache(activity, null, geocode, 1, handler);
+                        cgBase.storeCache(activity, null, geocode, StoredList.STANDARD_LIST_ID, handler);
                     }
                 } catch (Exception e) {
                     Log.e(Settings.tag, "cgeocaches.LoadDetails.run: " + e.toString());

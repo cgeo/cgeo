@@ -1,8 +1,8 @@
 package cgeo.geocaching.connector;
 
 import cgeo.geocaching.GCConstants;
-import cgeo.geocaching.ParseResult;
 import cgeo.geocaching.R;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
@@ -81,7 +81,7 @@ public class GCConnector extends AbstractConnector {
     }
 
     @Override
-    public ParseResult searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final int listId, final CancellableHandler handler) {
+    public SearchResult searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final int listId, final CancellableHandler handler) {
 
         if (app == null) {
             Log.e(Settings.tag, "cgeoBase.searchByGeocode: No application found");
@@ -102,7 +102,7 @@ public class GCConnector extends AbstractConnector {
         final String page = cgBase.requestLogged("http://www.geocaching.com/seek/cache_details.aspx", params, false, false, false);
 
         if (StringUtils.isEmpty(page)) {
-            ParseResult search = new ParseResult();
+            SearchResult search = new SearchResult();
             if (app.isThere(geocode, guid, true, false)) {
                 if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
                     Log.i(Settings.tag, "Loading old cache from cache.");
@@ -120,16 +120,14 @@ public class GCConnector extends AbstractConnector {
             return search;
         }
 
-        final ParseResult parseResult = cgBase.parseCache(page, listId, handler);
+        final SearchResult searchResult = cgBase.parseCache(page, listId, handler);
 
-        if (parseResult == null || CollectionUtils.isEmpty(parseResult.cacheList)) {
-
+        if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
             Log.e(Settings.tag, "cgeoBase.searchByGeocode: No cache parsed");
-            return parseResult;
+            return searchResult;
         }
 
-        ParseResult search = ParseResult.filterParseResults(parseResult, false, false, Settings.getCacheType());
-        app.addSearch(search.cacheList, listId);
+        SearchResult search = searchResult.filterSearchResults(false, false, Settings.getCacheType(), listId);
 
         return search;
     }

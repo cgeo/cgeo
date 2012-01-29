@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -323,7 +324,7 @@ public class cgeowaypointadd extends AbstractActivity {
             if (app.saveOwnWaypoint(id, geocode, waypoint)) {
                 StaticMapsProvider.removeWpStaticMaps(id, geocode);
                 if (Settings.isStoreOfflineWpMaps()) {
-                    StaticMapsProvider.storeWaypointStaticMap(app.getCacheByGeocode(geocode), cgeowaypointadd.this, waypoint);
+                    StaticMapsProvider.storeWaypointStaticMap(app.loadCache(geocode, LoadFlags.LOADCACHEONLY), cgeowaypointadd.this, waypoint);
                 }
                 finish();
                 return;

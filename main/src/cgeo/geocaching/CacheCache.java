@@ -27,7 +27,7 @@ public class CacheCache {
         return instance;
     }
 
-    public void removeAll() {
+    public void removeAllFromCache() {
         cachesCache.clear();
     }
 
@@ -42,8 +42,11 @@ public class CacheCache {
     }
 
     /**
+     * "Store" a cache in the CacheCache. If the cache is already in the CacheCache the cache gets replaced.
+     *
      * @param cache
-     *            Cache to "store" in the cache
+     *            Cache
+     * 
      */
     public void putCacheInCache(final cgCache cache) {
         if (cache == null || cache.getGeocode() == null) {

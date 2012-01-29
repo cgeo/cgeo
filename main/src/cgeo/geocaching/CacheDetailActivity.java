@@ -9,6 +9,8 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.GeopointFormatter;
@@ -179,7 +181,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
         // TODO Why can it happen that search is not null? onCreate should be called only once and it is not set before.
         if (search != null) {
-            cache = app.getCache(search);
+            cache = search.getFirstCacheFromResult(LoadFlags.LOADALL);
             if (cache != null && cache.getGeocode() != null) {
                 geocode = cache.getGeocode();
             }
@@ -559,8 +561,8 @@ public class CacheDetailActivity extends AbstractActivity {
                     return;
                 }
 
-                if (SearchResult.getError(search) != null) {
-                    showToast(res.getString(R.string.err_dwld_details_failed) + " " + SearchResult.getError(search).getErrorString(res) + ".");
+                if (search.getError() != null) {
+                    showToast(res.getString(R.string.err_dwld_details_failed) + " " + search.getError().getErrorString(res) + ".");
 
                     finish();
                     return;
@@ -591,7 +593,7 @@ public class CacheDetailActivity extends AbstractActivity {
             return;
         }
 
-        cache = app.getCache(search);
+        cache = search.getFirstCacheFromResult(LoadFlags.LOADALL);
 
         if (cache == null) {
             progress.dismiss();
@@ -1583,7 +1585,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     storeThread = null;
 
                     try {
-                        cache = app.getCache(search); // reload cache details
+                        cache = search.getFirstCacheFromResult(LoadFlags.LOADALL); // reload cache details
                     } catch (Exception e) {
                         showToast(res.getString(R.string.err_store_failed));
 
@@ -1610,7 +1612,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     refreshThread = null;
 
                     try {
-                        cache = app.getCache(search); // reload cache details
+                        cache = search.getFirstCacheFromResult(LoadFlags.LOADALL); // reload cache details
                     } catch (Exception e) {
                         showToast(res.getString(R.string.err_refresh_failed));
 
@@ -1697,7 +1699,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             @Override
             public void run() {
-                cgeoapplication.removeCacheFromCache(cache.getGeocode());
+                app.removeCache(cache.getGeocode(), RemoveFlag.REMOVECACHEONLY);
                 search = cgBase.searchByGeocode(cache.getGeocode(), null, 0, true, handler);
 
                 handler.sendEmptyMessage(0);
@@ -1728,7 +1730,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             @Override
             public void run() {
-                cgBase.dropCache(app, cache, handler);
+                cgBase.dropCache(cache, handler);
             }
         }
 
@@ -1849,7 +1851,7 @@ public class CacheDetailActivity extends AbstractActivity {
             final Button offlineRefresh = (Button) view.findViewById(R.id.offline_refresh);
             final Button offlineStore = (Button) view.findViewById(R.id.offline_store);
 
-            if (cache.getListId() >= 1) {
+            if (cache.getListId() >= StoredList.STANDARD_LIST_ID) {
                 long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
 
                 String ago = "";

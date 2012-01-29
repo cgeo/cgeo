@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 
 public class StoredList {
+    public static final int TEMPORARY_LIST_ID = 0;
     public static final int STANDARD_LIST_ID = 1;
 
     public final int id;

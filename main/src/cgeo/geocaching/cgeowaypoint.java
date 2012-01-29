@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -310,7 +311,7 @@ public class cgeowaypoint extends AbstractActivity {
         public void onClick(View arg0) {
             if (app.deleteWaypoint(id)) {
                 StaticMapsProvider.removeWpStaticMaps(id, geocode);
-                cgeoapplication.removeCacheFromCache(geocode);
+                app.removeCache(geocode, RemoveFlag.REMOVECACHEONLY);
 
                 finish();
                 return;
