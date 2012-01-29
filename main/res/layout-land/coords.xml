@@ -88,16 +88,25 @@
 		                    android:selectAllOnFocus="true" />
 		        </TableRow>
 		    </TableLayout>
-        	<EditText style="@style/edittext"
-		            android:layout_width="fill_parent"
-		            android:layout_height="wrap_content"
+		    <LinearLayout
+		        android:id="@+id/linearLayout2"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content" >
+		        <EditText
 		            android:id="@+id/latitude"
-		            android:hint="@string/latitude" />
-		    <EditText style="@style/edittext"
+		            style="@style/edittext"
 		            android:layout_width="fill_parent"
 		            android:layout_height="wrap_content"
+		            android:layout_weight="1"
+		            android:hint="@string/latitude" />
+		        <EditText
 		            android:id="@+id/longitude"
+		            style="@style/edittext"
+		            android:layout_width="fill_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="1"
 		            android:hint="@string/longitude" />
+		    </LinearLayout>
 		    <Button style="@style/button"
 		            android:layout_width="fill_parent"
 		            android:layout_height="wrap_content"

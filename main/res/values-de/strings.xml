@@ -606,8 +606,8 @@
   <string name="waypoint_cache_coordinates">Cache Koordinaten</string>
   <string name="waypoint_custom">Benutzerdefiniert</string>
   <string name="waypoint_my_coordinates">Meine Koordinaten</string>
-  <string name="waypoint_bearing">Richtung</string>
-  <string name="waypoint_distance">Entfernung</string>
+  <string name="waypoint_bearing">Richtung in °</string>
+  <string name="waypoint_distance">Entfernung in m</string>
   <string name="waypoint_name">Name</string>
   <string name="waypoint_edit">Bearbeiten</string>
   <string name="waypoint_delete">Löschen</string>
