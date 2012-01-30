@@ -570,15 +570,11 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         holder.favourite.setBackgroundResource(favoriteBack);
 
         if (cacheListType == CacheListType.HISTORY && cache.getVisitedDate() > 0) {
-            StringBuilder cacheInfo = new StringBuilder(50);
-            cacheInfo.append(cgBase.formatTime(cache.getVisitedDate()));
-            cacheInfo.append("; ");
-            cacheInfo.append(cgBase.formatDate(cache.getVisitedDate()));
-            if (StringUtils.isNotBlank(cache.getGeocode())) {
-                cacheInfo.append(SEPARATOR);
-                cacheInfo.append(StringUtils.upperCase(cache.getGeocode()));
-            }
-            holder.info.setText(cacheInfo.toString());
+            ArrayList<String> infos = new ArrayList<String>();
+            infos.add(StringUtils.upperCase(cache.getGeocode()));
+            infos.add(cgBase.formatDate(cache.getVisitedDate()));
+            infos.add(cgBase.formatTime(cache.getVisitedDate()));
+            holder.info.setText(StringUtils.join(infos, SEPARATOR));
         } else {
             ArrayList<String> infos = new ArrayList<String>();
             if (StringUtils.isNotBlank(cache.getGeocode())) {
