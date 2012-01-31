@@ -21,13 +21,8 @@ public class cgBaseTest extends AndroidTestCase {
         String page = MockedCache.readCachePage("GC2CJPF");
         Assert.assertEquals("blafoo", BaseUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???"));
         Assert.assertEquals("Premium Member", BaseUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, "???"));
-        // Caches found including Challenges
         int cachesFound = Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0"));
         Assert.assertTrue(cachesFound >= 491);
-        // Caches found without Challenges
-        page = "<strong><img src=\"/images/icons/icon_smile.png\" title=\"Caches Found\" /> 149</strong>";
-        cachesFound = Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0"));
-        Assert.assertEquals(149, cachesFound);
     }
 
     public static void testReplaceWhitespaces() {
