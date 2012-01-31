@@ -16,7 +16,9 @@ import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import com.viewpagerindicator.TitlePageIndicator;
@@ -89,6 +91,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -118,6 +121,7 @@ public class CacheDetailActivity extends AbstractActivity {
     private SearchResult search;
     private final LocationUpdater locationUpdater = new LocationUpdater();
     private String contextMenuUser = null;
+    private CharSequence contextMenuLogText = null;
     private int contextMenuWPIndex = -1;
 
     /**
@@ -369,6 +373,15 @@ public class CacheDetailActivity extends AbstractActivity {
                 menu.add(viewId, 2, 0, res.getString(R.string.user_menu_view_found));
                 menu.add(viewId, 3, 0, res.getString(R.string.user_menu_open_browser));
                 break;
+            case R.id.log:
+                contextMenuLogText = ((TextView) view).getText();
+                menu.setHeaderTitle(res.getString(R.string.log_context_menu_title));
+                menu.add(viewId, 1, 0, res.getString(R.string.log_context_menu_copy));
+                menu.add(viewId, 2, 0, res.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()));
+                if (Settings.isUseEnglish() && Locale.getDefault() != Locale.ENGLISH) {
+                    menu.add(viewId, 3, 0, res.getString(R.string.translate_to_english));
+                }
+                break;
             case -1:
                 if (null != cache.getWaypoints()) {
                     try {
@@ -425,6 +438,22 @@ public class CacheDetailActivity extends AbstractActivity {
                     default:
                         break;
                 }
+                break;
+            case R.id.log:
+                switch (index) {
+                    case 1:
+                        ClipboardUtils.copyToClipboardAsPlainText(contextMenuLogText);
+                        return true;
+                    case 2:
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(TranslationUtils.buildTranslationURI(Locale.getDefault().getLanguage(), contextMenuLogText.toString()))));
+                        return true;
+                    case 3:
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(TranslationUtils.buildTranslationURI(Locale.ENGLISH.getLanguage(), contextMenuLogText.toString()))));
+                        return true;
+                    default:
+                        break;
+                }
+
                 break;
             case CONTEXT_MENU_WAYPOINT_EDIT:
                 if (cache.hasWaypoints() && index < cache.getWaypoints().size()) {
@@ -2342,6 +2371,7 @@ public class CacheDetailActivity extends AbstractActivity {
                         TextView logView = (TextView) logLayout.findViewById(R.id.log);
                         logView.setMovementMethod(LinkMovementMethod.getInstance());
                         logView.setOnClickListener(new DecryptLogClickListener());
+                        registerForContextMenu(logView);
 
                         loglist.add(rowView);
                     }

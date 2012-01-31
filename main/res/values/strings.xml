@@ -114,7 +114,14 @@
   <string name="log_new_log">Log</string>
   <string name="log_new_log_text">Log Text</string>
   <string name="log_announcement">Announcement</string>
+  <string name="log_context_menu_title">Options</string>
+  <string name="log_context_menu_copy">Copy Log Text</string>
 
+  <!-- translation -->
+  <string name="translate_to_sys_lang">Translate to %s</string>
+  <string name="translate_to_english">Translate to English</string>
+  
+  
   <!-- errors, warnings, info toasts -->
   <string name="err_none">OK</string>
   <string name="err_start">Communication not started</string>
