@@ -263,7 +263,7 @@ public class cgeoadvsearch extends AbstractActivity {
 
         @Override
         public void onClick(View arg0) {
-            cgeocoords coordsDialog = new cgeocoords(cgeoadvsearch.this, null, geo);
+            cgeocoords coordsDialog = new cgeocoords(cgeoadvsearch.this, null, null, geo);
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
                 @Override
