@@ -988,7 +988,6 @@ public final class Settings {
     }
 
     public static boolean isDebugInfos() {
-        Settings.setDebugInfos(true);
         return sharedPrefs.getBoolean(KEY_DEBUG_INFORMATIONS, false);
     }
 
