@@ -16,7 +16,6 @@ import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -210,18 +209,11 @@ public class cgeowaypoint extends AbstractActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, MENU_ID_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication(this).getName()).setIcon(android.R.drawable.ic_menu_compass); // default navigation tool
-
-        SubMenu subMenu = menu.addSubMenu(1, MENU_ID_NAVIGATION, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
-        addNavigationMenuItems(subMenu);
-
+        menu.add(0, MENU_ID_NAVIGATION, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
         menu.add(0, MENU_ID_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
         menu.add(0, MENU_ID_OPEN_GEOCACHE, 0, res.getString(R.string.waypoint_menu_open_cache)).setIcon(android.R.drawable.ic_menu_mylocation); // open geocache
 
         return true;
-    }
-
-    private void addNavigationMenuItems(Menu menu) {
-        NavigationAppFactory.addMenuItems(menu, this);
     }
 
     @Override
@@ -255,9 +247,11 @@ public class cgeowaypoint extends AbstractActivity {
         } else if (menuItem == MENU_ID_OPEN_GEOCACHE) {
             goToGeocache();
             return true;
+        } else if (menuItem == MENU_ID_NAVIGATION) {
+            NavigationAppFactory.showNavigationMenu(geo, this, null, null, waypoint, null);
+            return true;
         }
-
-        return NavigationAppFactory.onMenuItemSelected(item, geo, this, null, null, waypoint, null);
+        return false;
     }
 
     private void cachesAround() {
@@ -351,12 +345,16 @@ public class cgeowaypoint extends AbstractActivity {
             ContextMenuInfo menuInfo) {
         if (navigationPossible()) {
             menu.setHeaderTitle(res.getString(R.string.cache_menu_navigate));
-            addNavigationMenuItems(menu);
+            NavigationAppFactory.addMenuItems(menu, this);
         }
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
-        return onOptionsItemSelected(item);
+        boolean handled = onOptionsItemSelected(item);
+        if (handled) {
+            return true;
+        }
+        return NavigationAppFactory.onMenuItemSelected(item, geo, this, null, null, waypoint, null);
     }
 }
