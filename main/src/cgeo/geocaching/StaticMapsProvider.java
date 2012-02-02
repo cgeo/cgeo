@@ -52,11 +52,21 @@ public class StaticMapsProvider {
     }
 
     public static void downloadMaps(cgCache cache, Activity activity) {
+        final Display display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        downloadMaps(cache, display);
+    }
+
+    public static void downloadMaps(cgCache cache, cgeoapplication app) {
+        final Display display = ((WindowManager) app.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        downloadMaps(cache, display);
+    }
+
+    private static void downloadMaps(cgCache cache, Display display) {
         if ((!Settings.isStoreOfflineMaps() && !Settings.isStoreOfflineWpMaps()) || StringUtils.isBlank(cache.getGeocode())) {
             return;
         }
 
-        int edge = guessMinDisplaySide(activity);
+        int edge = guessMinDisplaySide(display);
 
         if (Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
             storeCacheStaticMap(cache, edge);
@@ -71,7 +81,8 @@ public class StaticMapsProvider {
     }
 
     public static void storeWaypointStaticMap(cgCache cache, Activity activity, cgWaypoint waypoint) {
-        int edge = StaticMapsProvider.guessMinDisplaySide(activity);
+        final Display display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        int edge = StaticMapsProvider.guessMinDisplaySide(display);
         storeWaypointStaticMap(cache, edge, waypoint);
     }
 
@@ -86,7 +97,8 @@ public class StaticMapsProvider {
     }
 
     public static void storeCacheStaticMap(cgCache cache, Activity activity) {
-        int edge = StaticMapsProvider.guessMinDisplaySide(activity);
+        final Display display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+        int edge = StaticMapsProvider.guessMinDisplaySide(display);
         storeCacheStaticMap(cache, edge);
     }
 
@@ -110,8 +122,7 @@ public class StaticMapsProvider {
         downloadMaps(cache, cacheMarkerUrl, "", latlonMap, edge, waypoints.toString());
     }
 
-    private static int guessMinDisplaySide(Activity activity) {
-        final Display display = ((WindowManager) activity.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
+    private static int guessMinDisplaySide(Display display) {
         final int maxWidth = display.getWidth() - 25;
         final int maxHeight = display.getHeight() - 25;
         int edge = 0;
