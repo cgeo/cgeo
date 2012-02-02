@@ -442,7 +442,7 @@ public class CacheDetailActivity extends AbstractActivity {
             case R.id.log:
                 switch (index) {
                     case 1:
-                        ClipboardUtils.copyToClipboardAsPlainText(contextMenuLogText);
+                        ClipboardUtils.copyToClipboard(contextMenuLogText);
                         return true;
                     case 2:
                         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(TranslationUtils.buildTranslationURI(Locale.getDefault().getLanguage(), contextMenuLogText.toString()))));

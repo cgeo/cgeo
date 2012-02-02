@@ -14,11 +14,11 @@ public final class ClipboardUtils {
 
     /**
      * Places the text passed in onto the clipboard as text
-     * 
+     *
      * @param text
      *            The text to place in the clipboard.
      */
-    public static void copyToClipboardAsPlainText(final CharSequence text) {
+    public static void copyToClipboard(final CharSequence text) {
         final ClipboardManager clipboard = (ClipboardManager) cgeoapplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
         clipboard.setText(text);
     }
