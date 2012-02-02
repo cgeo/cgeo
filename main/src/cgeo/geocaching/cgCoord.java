@@ -20,7 +20,7 @@ public class cgCoord implements IBasicCache, IWaypoint {
     private Geopoint coords = new Geopoint(0, 0);
     private float difficulty = 0;
     private float terrain = 0;
-    private CacheSize size = null;
+    private CacheSize size = CacheSize.UNKNOWN;
 
     public cgCoord() {
     }

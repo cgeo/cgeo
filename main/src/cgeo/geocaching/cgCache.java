@@ -507,6 +507,9 @@ public class cgCache implements ICache {
 
     @Override
     public CacheSize getSize() {
+        if (size == null) {
+            return CacheSize.UNKNOWN;
+        }
         return size;
     }
 
@@ -986,7 +989,12 @@ public class cgCache implements ICache {
     }
 
     public void setSize(CacheSize size) {
-        this.size = size;
+        if (size == null) {
+            this.size = CacheSize.UNKNOWN;
+        }
+        else {
+            this.size = size;
+        }
     }
 
     public void setDifficulty(float difficulty) {

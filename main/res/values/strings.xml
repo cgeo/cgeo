@@ -619,10 +619,11 @@
   <!-- waypoint -->
   <string name="waypoint">Waypoint</string>
   <string name="waypoint_title">Waypoint</string>
+  <string name="waypoint_cache_coordinates">Cache coordinates</string>
   <string name="waypoint_custom">Custom</string>
   <string name="waypoint_my_coordinates">My coordinates</string>
-  <string name="waypoint_bearing">Bearing</string>
-  <string name="waypoint_distance">Distance</string>
+  <string name="waypoint_bearing">Bearing in °</string>
+  <string name="waypoint_distance">Distance in m</string>
   <string name="waypoint_name">Name</string>
   <string name="waypoint_edit">Edit</string>
   <string name="waypoint_delete">Delete</string>
