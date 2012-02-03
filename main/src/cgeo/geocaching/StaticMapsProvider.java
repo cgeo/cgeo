@@ -162,4 +162,37 @@ public class StaticMapsProvider {
             }
         }
     }
+
+    /**
+     * Check if at least one map file exists for the given geocode.
+     * 
+     * @param geocode
+     * @return <code>true</code> if at least one mapfile exists; <code>false</code> otherwise
+     */
+    public static boolean doesExistStaticMapForCache(String geocode) {
+        for (int level = 1; level <= 5; level++) {
+            File mapFile = StaticMapsProvider.getMapFile(geocode, "", level, false);
+            if (mapFile != null && mapFile.exists()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if at least one map file exists for the given geocode and waypoint ID.
+     *
+     * @param geocode
+     * @param waypointId
+     * @return <code>true</code> if at least one mapfile exists; <code>false</code> otherwise
+     */
+    public static boolean doesExistStaticMapForWaypoint(String geocode, int waypointId) {
+        for (int level = 1; level <= 5; level++) {
+            File mapFile = StaticMapsProvider.getMapFile(geocode, "wp" + waypointId + "_", level, false);
+            if (mapFile != null && mapFile.exists()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

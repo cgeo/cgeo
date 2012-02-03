@@ -3,11 +3,15 @@ package cgeo.geocaching.apps.cache.navi;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.StaticMapsProvider;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgWaypoint;
+import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.geopoint.Geopoint;
+
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -113,10 +117,13 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         builder.setIcon(android.R.drawable.ic_menu_mapmode);
         final List<NavigationAppsEnum> items = new ArrayList<NavigationAppFactory.NavigationAppsEnum>();
         final int defaultNavigationTool = Settings.getDefaultNavigationTool();
-//        final boolean isOffline = cache != null ? cgeoapplication.getInstance().isOffline(cache.getGeocode(), null) : false;
-        //        (isOffline && NavigationAppsEnum.STATIC_MAP.id == navApp.id) <== must be changed, isn't working for waypoints for example
+        final boolean hasStaticMaps = hasStaticMap(cache, waypoint);
         for (NavigationAppsEnum navApp : getInstalledNavigationApps(activity)) {
-            if ((showInternalMap || !(navApp.app instanceof InternalMap)) &&
+            if (NavigationAppsEnum.STATIC_MAP.id == navApp.id) {
+                if (hasStaticMaps) {
+                    items.add(navApp);
+                }
+            } else if ((showInternalMap || !(navApp.app instanceof InternalMap)) &&
                     (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
                 items.add(navApp);
             }
@@ -150,7 +157,23 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         });
         final AlertDialog alert = builder.create();
         alert.show();
+    }
 
+    private static boolean hasStaticMap(cgCache cache, cgWaypoint waypoint) {
+        if (waypoint != null) {
+            String geocode = waypoint.getGeocode();
+            int id = waypoint.getId();
+            if (StringUtils.isNotEmpty(geocode) && cgeoapplication.getInstance().isOffline(geocode, null)) {
+                return StaticMapsProvider.doesExistStaticMapForWaypoint(geocode, id);
+            }
+        }
+        if (cache != null) {
+            String geocode = cache.getGeocode();
+            if (StringUtils.isNotEmpty(geocode) && cgeoapplication.getInstance().isOffline(geocode, null)) {
+                return StaticMapsProvider.doesExistStaticMapForCache(geocode);
+            }
+        }
+        return false;
     }
 
     /**
