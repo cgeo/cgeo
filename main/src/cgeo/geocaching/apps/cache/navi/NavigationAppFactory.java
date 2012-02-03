@@ -6,7 +6,6 @@ import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgWaypoint;
-import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.apps.AbstractAppFactory;
 import cgeo.geocaching.geopoint.Geopoint;
 
@@ -114,11 +113,11 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         builder.setIcon(android.R.drawable.ic_menu_mapmode);
         final List<NavigationAppsEnum> items = new ArrayList<NavigationAppFactory.NavigationAppsEnum>();
         final int defaultNavigationTool = Settings.getDefaultNavigationTool();
-        final boolean isOffline = cache != null ? cgeoapplication.getInstance().isOffline(cache.getGeocode(), null) : false;
+//        final boolean isOffline = cache != null ? cgeoapplication.getInstance().isOffline(cache.getGeocode(), null) : false;
+        //        (isOffline && NavigationAppsEnum.STATIC_MAP.id == navApp.id) <== must be changed, isn't working for waypoints for example
         for (NavigationAppsEnum navApp : getInstalledNavigationApps(activity)) {
             if ((showInternalMap || !(navApp.app instanceof InternalMap)) &&
-                    (showDefaultNavigation || defaultNavigationTool != navApp.id) &&
-                    (isOffline && NavigationAppsEnum.STATIC_MAP.id == navApp.id)) {
+                    (showDefaultNavigation || defaultNavigationTool != navApp.id)) {
                 items.add(navApp);
             }
         }
