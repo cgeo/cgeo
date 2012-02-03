@@ -22,6 +22,7 @@ public class LoadFlags {
 
     public final static EnumSet<LoadFlag> LOADCACHEONLY = EnumSet.of(LoadFlag.LOADCACHEONLY);
     public final static EnumSet<LoadFlag> LOADDBMINIMAL = EnumSet.of(LoadFlag.LOADDBMINIMAL);
+    public final static EnumSet<LoadFlag> LOADWAYPOINTS = EnumSet.of(LoadFlag.LOADDBMINIMAL, LoadFlag.LOADWAYPOINTS);
     public final static EnumSet<LoadFlag> LOADALL = EnumSet.range(LoadFlag.LOADATTRIBUTES, LoadFlag.LOADOFFLINELOG);
 
     public enum SaveFlag {

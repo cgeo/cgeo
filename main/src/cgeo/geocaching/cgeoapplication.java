@@ -309,11 +309,13 @@ public class cgeoapplication extends Application {
         return search;
     }
 
+    /** Retrieve all stored caches from DB */
     public SearchResult getCachedInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
         final Set<String> geocodes = storage.loadCachedInViewport(centerLat, centerLon, spanLat, spanLon, cacheType);
         return new SearchResult(geocodes);
     }
 
+    /** Retrieve stored caches from DB with listId >= 1 */
     public SearchResult getStoredInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
         final Set<String> geocodes = storage.loadStoredInViewport(centerLat, centerLon, spanLat, spanLon, cacheType);
         return new SearchResult(geocodes);

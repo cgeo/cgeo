@@ -1963,7 +1963,6 @@ public class cgBase {
         }
 
         final SearchResult search = searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(), Settings.isExcludeMyCaches(), Settings.getCacheType(), StoredList.TEMPORARY_LIST_ID);
-
         return search;
     }
 

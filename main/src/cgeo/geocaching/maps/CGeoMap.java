@@ -1138,10 +1138,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                //LeeB - I think this can be done better:
-                //1. fetch and draw(in another thread) caches from the db (fast? db read will be the slow bit)
-                //2. fetch and draw(in another thread) and then insert into the db caches from geocaching.com - dont draw/insert if exist in memory?
-
                 // stage 1 - pull and render from the DB only
 
                 if (fromDetailIntent || searchIntent != null) {
@@ -1165,7 +1161,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                caches = search.getCachesFromSearchResult(EnumSet.of(LoadFlag.LOADCACHEONLY));
+                caches = search.getCachesFromSearchResult(EnumSet.of(LoadFlag.LOADWAYPOINTS));
 
                 //if in live map and stored caches are found / disables are also shown.
                 if (live && Settings.isLiveMap()) {
@@ -1292,9 +1288,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                if (search == null) {
-                    caches = app.loadCaches(centerLat, centerLon, spanLat, spanLon, EnumSet.of(LoadFlag.LOADWAYPOINTS, LoadFlag.LOADOFFLINELOG));
-                } else {
+                if (search != null) {
                     caches = search.getCachesFromSearchResult(LoadFlags.LOADCACHEONLY);
                 }
 

@@ -1212,10 +1212,12 @@ public class cgData {
     }
 
     /**
+     * Save/store a cache to the CacheCache
+     *
      * @param cache
      *            the Cache to save in the CacheCache/DB
      * @param saveFlag
-     *            Not used
+     *
      * @return true = cache saved successfully to the CacheCache/DB
      */
     public boolean saveCache(cgCache cache, LoadFlags.SaveFlag saveFlag) {
@@ -1223,14 +1225,13 @@ public class cgData {
             return false;
         }
 
-        cacheCache.putCacheInCache(cache);
-
+        // merge always with data already stored in the CacheCache or DB
         if (saveFlag == SaveFlag.SAVECACHEONLY) {
+            cache.gatherMissingFrom(cacheCache.getCacheFromCache(cache.getGeocode()));
+            cacheCache.putCacheInCache(cache);
             return true;
         }
-
-        final cgCache oldCache = loadCache(cache.getGeocode(), LoadFlags.LOADALL);
-        boolean updateRequired = !cache.gatherMissingFrom(oldCache);
+        boolean updateRequired = !cache.gatherMissingFrom(loadCache(cache.getGeocode(), LoadFlags.LOADALL));
 
         // only save a cache to the database if
         // - the cache is detailed
@@ -1240,6 +1241,8 @@ public class cgData {
             return false;
         }
 
+        cache.addStorageLocation(StorageLocation.DATABASE);
+        cacheCache.putCacheInCache(cache);
         Log.d(Settings.tag, "Saving " + cache.toString() + " (" + cache.getListId() + ") to DB");
 
         ContentValues values = new ContentValues();
@@ -1803,20 +1806,18 @@ public class cgData {
         }
 
         Set<cgCache> result = new HashSet<cgCache>();
-        Set<String> remainingGeocodes = new HashSet<String>();
+        // "preload" the result with the data from the CacheCache
         for (String geocode : geocodes) {
             cgCache cache = cacheCache.getCacheFromCache(geocode);
             if (cache != null) {
                 result.add(cache);
-            } else {
-                remainingGeocodes.add(geocode);
             }
         }
         if (!loadFlags.contains(LoadFlag.LOADCACHEONLY)) {
-            // only query the DB if a cache is not in the CacheCache.
-            // The CacheCache contains the same information for a cache as the DB
-            Set<cgCache> cachesFromDB = loadCaches(remainingGeocodes, null, null, null, null, loadFlags);
+            Set<cgCache> cachesFromDB = loadCaches(geocodes, null, null, null, null, loadFlags);
+            // replace/add caches from the DB to the result
             if (cachesFromDB != null) {
+                result.removeAll(cachesFromDB);
                 result.addAll(cachesFromDB);
             }
         }
@@ -2085,7 +2086,7 @@ public class cgData {
         cache.setReliableLatLon(cursor.getInt(cacheColumnIndex[36]) > 0);
         cache.setUserModifiedCoords(cursor.getInt(cacheColumnIndex[37]) > 0);
 
-        Log.d(Settings.tag, "Loading" + cache.toString() + " (" + cache.getListId() + ") from DB");
+        Log.d(Settings.tag, "Loading " + cache.toString() + " (" + cache.getListId() + ") from DB");
 
         return cache;
     }
@@ -2837,10 +2838,17 @@ public class cgData {
         return result;
     }
 
+    /** delete caches from the DB store 3 days or more before */
     public void clean() {
         clean(false);
     }
 
+    /**
+     * Remove caches with listId = 0
+     *
+     * @param more
+     *            true = all caches false = caches stored 3 days or more before
+     */
     public void clean(boolean more) {
         init();
 
@@ -2889,19 +2897,17 @@ public class cgData {
 
             final int size = geocodes.size();
             if (size > 0) {
-                Log.d(Settings.tag, "Database clean: removing " + size + " geocaches");
+                Log.d(Settings.tag, "Database clean: removing " + size + " geocaches from listId=0");
 
                 removeCaches(geocodes, RemoveFlag.REMOVECACHEONLY);
+                databaseRW.execSQL("delete from " + dbTableCaches + " where " + cgData.whereGeocodeIn(geocodes));
             }
 
-            databaseRW.execSQL("delete from " + dbTableCaches + " where geocode = \"\"");
+            final SQLiteStatement countSql = databaseRO.compileStatement("select count(_id) from " + dbTableCaches + " where reason = 0");
+            final int count = (int) countSql.simpleQueryForLong();
+            countSql.close();
+            Log.d(Settings.tag, "Database clean: " + count + " geocaches remaining for listId=0");
 
-            if (Log.isLoggable(Settings.tag, Log.DEBUG)) {
-                final SQLiteStatement countSql = databaseRO.compileStatement("select count(_id) from " + dbTableCaches + " where reason = 0");
-                final int count = (int) countSql.simpleQueryForLong();
-                countSql.close();
-                Log.d(Settings.tag, "Database clean: " + count + " cached geocaches remaining");
-            }
         } catch (Exception e) {
             Log.w(Settings.tag, "cgData.clean: " + e.toString());
         }

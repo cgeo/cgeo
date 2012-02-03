@@ -24,6 +24,7 @@ public class SearchResult implements Parcelable {
     private String url = "";
     public String[] viewstates = null;
     public int totalCnt = 0;
+    private boolean preloadRequired = false;
 
     final public static Parcelable.Creator<SearchResult> CREATOR = new Parcelable.Creator<SearchResult>() {
         public SearchResult createFromParcel(Parcel in) {
@@ -46,6 +47,7 @@ public class SearchResult implements Parcelable {
             this.url = searchResult.url;
             this.viewstates = searchResult.viewstates;
             this.totalCnt = searchResult.totalCnt;
+            this.preloadRequired = searchResult.preloadRequired;
         } else {
             this.geocodes = new HashSet<String>();
         }
@@ -57,6 +59,7 @@ public class SearchResult implements Parcelable {
         } else {
             this.geocodes = new HashSet<String>(geocodes.size());
             this.geocodes.addAll(geocodes);
+            preloadRequired = true;
         }
     }
 
@@ -166,16 +169,13 @@ public class SearchResult implements Parcelable {
         return null;
     }
 
-    public Set<cgCache> getCaches(final EnumSet<LoadFlag> loadFlags) {
-        return cgeoapplication.getInstance().loadCaches(geocodes, loadFlags);
-    }
-
     public Set<cgCache> getCachesFromSearchResult(final EnumSet<LoadFlag> loadFlags) {
         return cgeoapplication.getInstance().loadCaches(geocodes, loadFlags);
     }
 
     /** Add the geocode to the search. No cache is loaded into the CacheCache */
     public boolean addGeocode(final String geocode) {
+        preloadRequired = true;
         return geocodes.add(geocode);
     }
 
@@ -201,8 +201,11 @@ public class SearchResult implements Parcelable {
      * Load the caches from the search that are stored in the database into the CacheCache
      */
     private void preloadToCache() {
-        for (final String geocode : geocodes) {
-            cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOADDBMINIMAL);
+        if (preloadRequired) {
+            for (final String geocode : geocodes) {
+                cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOADDBMINIMAL);
+            }
+            preloadRequired = false;
         }
     }
 }
