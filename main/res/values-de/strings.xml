@@ -566,6 +566,7 @@
 
   <!-- file list base -->
   <string name="file_searching_in">Suche nach Dateien\nin</string>
+  <string name="file_searching_sdcard_in">Keine Dateien in Standardverzeichnissen gefunden:\n%1$s\n\nDurchsuche komplette SD-Karte:\n</string>
   <string name="file_list_no_files">c:geo hat keine passenden Dateien gefunden.</string>
   <string name="file_searching">Suche nach passenden Dateien</string>
   <string name="file_title_searching">Suche</string>
