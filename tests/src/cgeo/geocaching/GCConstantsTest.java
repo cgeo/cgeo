@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.BaseUtils;
 
 import android.test.AndroidTestCase;
@@ -14,5 +15,14 @@ public class GCConstantsTest extends AndroidTestCase {
 
     private static String parseLocation(final String html) {
         return BaseUtils.getMatch(html, GCConstants.PATTERN_LOCATION, true, "");
+    }
+
+    public static void testCacheCount() {
+        assertCacheCount(149, "<strong><img src=\"/images/icons/icon_smile.png\" title=\"Caches Found\" /> 149</strong>");
+        assertCacheCount(491, MockedCache.readCachePage("GC2CJPF"));
+    }
+
+    private static void assertCacheCount(final int count, final String html) {
+        assertEquals(count, Integer.valueOf(BaseUtils.getMatch(html, GCConstants.PATTERN_CACHES_FOUND, true, "0")).intValue());
     }
 }

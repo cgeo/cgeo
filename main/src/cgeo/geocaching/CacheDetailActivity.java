@@ -388,8 +388,7 @@ public class CacheDetailActivity extends AbstractActivity {
                                 }
                                 if (waypoint.getCoords() != null) {
                                     menu.add(CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION, index, 0, NavigationAppFactory.getDefaultNavigationApplication(this).getName());
-                                    SubMenu subMenu = menu.addSubMenu(CONTEXT_MENU_WAYPOINT_NAVIGATE, index, 0, R.string.cache_menu_navigate).setIcon(android.R.drawable.ic_menu_mapmode);
-                                    NavigationAppFactory.addMenuItems(subMenu, this);
+                                    menu.add(CONTEXT_MENU_WAYPOINT_NAVIGATE, index, 0, R.string.cache_menu_navigate).setIcon(android.R.drawable.ic_menu_mapmode);
                                     menu.add(CONTEXT_MENU_WAYPOINT_CACHES_AROUND, index, 0, R.string.cache_menu_around);
                                 }
                                 break;
@@ -454,7 +453,12 @@ public class CacheDetailActivity extends AbstractActivity {
                 }
                 break;
             case CONTEXT_MENU_WAYPOINT_NAVIGATE:
-                // No processing necessary, sub-menu gets displayed;
+ {
+                final cgWaypoint waypoint = cache.getWaypoint(contextMenuWPIndex);
+                if (waypoint != null) {
+                    NavigationAppFactory.showNavigationMenu(geolocation, this, null, null, waypoint, null);
+                }
+            }
                 break;
             case CONTEXT_MENU_WAYPOINT_CACHES_AROUND:
  {
@@ -465,12 +469,6 @@ public class CacheDetailActivity extends AbstractActivity {
             }
                 break;
             default:
-                // First check the navigation menu, then the option items
-                final cgWaypoint waypoint = cache.getWaypoint(contextMenuWPIndex);
-                if (waypoint != null && NavigationAppFactory.onMenuItemSelected(item, geolocation, this,
-                        null, null, waypoint, null)) {
-                    return true;
-                }
                 return onOptionsItemSelected(item);
         }
         return false;
@@ -951,7 +949,7 @@ public class CacheDetailActivity extends AbstractActivity {
     }
 
     private void showNavigationMenu() {
-        NavigationAppFactory.showNavigationMenu(geolocation, this, cache, search);
+        NavigationAppFactory.showNavigationMenu(geolocation, this, cache, search, null, null);
     }
 
     /**

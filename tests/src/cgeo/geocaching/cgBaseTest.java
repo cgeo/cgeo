@@ -17,6 +17,14 @@ import junit.framework.Assert;
 
 public class cgBaseTest extends AndroidTestCase {
 
+    public static void testRegEx() {
+        String page = MockedCache.readCachePage("GC2CJPF");
+        Assert.assertEquals("blafoo", BaseUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???"));
+        Assert.assertEquals("Premium Member", BaseUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, "???"));
+        int cachesFound = Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0"));
+        Assert.assertTrue(cachesFound >= 491);
+    }
+
     public static void testReplaceWhitespaces() {
         Assert.assertEquals("foo bar baz ", BaseUtils.replaceWhitespace(new String("  foo\n\tbar   \r   baz  ")));
     }

@@ -1,15 +1,11 @@
 package cgeo.geocaching.apps;
 
+import cgeo.geocaching.cgeo;
 import cgeo.geocaching.cgeoapplication;
-
-import org.apache.commons.collections.CollectionUtils;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
-
-import java.util.List;
 
 public abstract class AbstractApp implements App {
 
@@ -48,21 +44,7 @@ public abstract class AbstractApp implements App {
         if (getLaunchIntent(context) != null) {
             return true;
         }
-        return isIntentAvailable(context, intent);
-    }
-
-    private static boolean isIntentAvailable(Context context, String action) {
-        final Intent intent = new Intent(action);
-
-        return isIntentAvailable(context, intent);
-    }
-
-    protected static boolean isIntentAvailable(Context context, Intent intent) {
-        final PackageManager packageManager = context.getPackageManager();
-        final List<ResolveInfo> list = packageManager.queryIntentActivities(
-                intent, PackageManager.MATCH_DEFAULT_ONLY);
-
-        return CollectionUtils.isNotEmpty(list);
+        return cgeo.isIntentAvailable(context, intent);
     }
 
     @Override

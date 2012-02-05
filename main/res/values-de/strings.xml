@@ -122,7 +122,7 @@
   <string name="err_server">Verbindung zu Geocaching.com konnte nicht hergestellt werden (Server oder Verbindung inaktiv?)</string>
   <string name="err_login">Keine Anmeldedaten gespeichert.</string>
   <string name="err_login_failed">Login fehlgeschlagen.</string>
-  <string name="err_login_failed_toast">c:geo konnte sich nicht einloggen. c:geo arbeitet im Offline-Modus. Überprüfe den Login in den Einstellungen oder stelle eine Internetverbindung her.</string>
+  <string name="err_login_failed_toast">c:geo konnte sich nicht einloggen und arbeitet im Offline-Modus. Überprüfe deine Login-Daten in den Einstellungen oder stelle eine Internetverbindung her.</string>
   <string name="err_unknown">Unbekannter Fehler</string>
   <string name="err_comm">Unbekannter Kommunikationsfehler</string>
   <string name="err_missing_auth">Benutzername oder Passwort nicht gesetzt.</string>
@@ -566,6 +566,7 @@
 
   <!-- file list base -->
   <string name="file_searching_in">Suche nach Dateien\nin</string>
+  <string name="file_searching_sdcard_in">Keine Dateien in Standardverzeichnissen gefunden:\n%1$s\n\nDurchsuche komplette SD-Karte:\n</string>
   <string name="file_list_no_files">c:geo hat keine passenden Dateien gefunden.</string>
   <string name="file_searching">Suche nach passenden Dateien</string>
   <string name="file_title_searching">Suche</string>
@@ -605,10 +606,11 @@
   <!-- waypoint -->
   <string name="waypoint">Wegpunkt</string>
   <string name="waypoint_title">Wegpunkt</string>
+  <string name="waypoint_cache_coordinates">Cache Koordinaten</string>
   <string name="waypoint_custom">Benutzerdefiniert</string>
   <string name="waypoint_my_coordinates">Meine Koordinaten</string>
-  <string name="waypoint_bearing">Richtung</string>
-  <string name="waypoint_distance">Entfernung</string>
+  <string name="waypoint_bearing">Richtung in °</string>
+  <string name="waypoint_distance">Entfernung in m</string>
   <string name="waypoint_name">Name</string>
   <string name="waypoint_edit">Bearbeiten</string>
   <string name="waypoint_delete">Löschen</string>
