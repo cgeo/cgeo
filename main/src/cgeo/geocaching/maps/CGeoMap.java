@@ -1849,6 +1849,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 .append(cache.isFound())
                 .append(cache.hasUserModifiedCoords())
                 .append(cache.getPersonalNote())
+                    .append(cache.isLogOffline())
                 .toHashCode();
 
             LayerDrawable ldFromCache = CGeoMap.overlaysCache.get(hashcode);
@@ -1884,6 +1885,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             // found
             if (cache.isFound()) {
                 layers.add(getResources().getDrawable(R.drawable.marker_found));
+                insets.add(INSET_FOUND[resolution]);
+                // if not, perhaps logged offline
+            } else if (cache.isLogOffline()) {
+                layers.add(getResources().getDrawable(R.drawable.marker_found_offline));
                 insets.add(INSET_FOUND[resolution]);
             }
             // user modified coords
