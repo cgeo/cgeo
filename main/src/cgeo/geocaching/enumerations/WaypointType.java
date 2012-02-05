@@ -13,29 +13,31 @@ import java.util.Map;
  * @author koem
  */
 public enum WaypointType {
-    FINAL("flag", R.string.wp_final, R.drawable.waypoint_flag, false),
-    OWN("own", R.string.wp_waypoint, R.drawable.waypoint_waypoint, true),
-    PARKING("pkg", R.string.wp_pkg, R.drawable.waypoint_pkg, false),
-    PUZZLE("puzzle", R.string.wp_puzzle, R.drawable.waypoint_puzzle, false),
-    STAGE("stage", R.string.wp_stage, R.drawable.waypoint_stage, false),
-    TRAILHEAD("trailhead", R.string.wp_trailhead, R.drawable.waypoint_trailhead, false),
-    WAYPOINT("waypoint", R.string.wp_waypoint, R.drawable.waypoint_waypoint, false),
-    OWN_PARKING("own_pkg", R.string.wp_pkg, R.drawable.waypoint_pkg, true),
-    OWN_FINAL("own_flag", R.string.wp_final, R.drawable.waypoint_flag, true),
-    OWN_STAGE("own_stage", R.string.wp_stage, R.drawable.waypoint_stage, true);
+    FINAL("flag", R.string.wp_final, R.drawable.waypoint_flag, false, true),
+    OWN("own", R.string.wp_waypoint, R.drawable.waypoint_waypoint, true, false),
+    PARKING("pkg", R.string.wp_pkg, R.drawable.waypoint_pkg, false, false),
+    PUZZLE("puzzle", R.string.wp_puzzle, R.drawable.waypoint_puzzle, false, false),
+    STAGE("stage", R.string.wp_stage, R.drawable.waypoint_stage, false, false),
+    TRAILHEAD("trailhead", R.string.wp_trailhead, R.drawable.waypoint_trailhead, false, false),
+    WAYPOINT("waypoint", R.string.wp_waypoint, R.drawable.waypoint_waypoint, false, false),
+    OWN_PARKING("own_pkg", R.string.wp_pkg, R.drawable.waypoint_pkg, true, false),
+    OWN_FINAL("own_flag", R.string.wp_final, R.drawable.waypoint_flag, true, true),
+    OWN_STAGE("own_stage", R.string.wp_stage, R.drawable.waypoint_stage, true, false);
 
     public final String id;
     public final int stringId;
     private String l10n; // not final because the locale can be changed
     public final int markerId;
     public final boolean isOwn;
+    public final boolean isFinal;
 
-    private WaypointType(String id, int stringId, int markerId, boolean isOwn) {
+    private WaypointType(String id, int stringId, int markerId, boolean isOwn, boolean isFinal) {
         this.id = id;
         this.stringId = stringId;
         setL10n();
         this.markerId = markerId;
         this.isOwn = isOwn;
+        this.isFinal = isFinal;
     }
 
     /**
