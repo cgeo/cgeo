@@ -6,8 +6,10 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.ui.CacheListAdapter;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -60,6 +62,28 @@ public class cgeo extends AbstractActivity {
     private List<Address> addresses = null;
     private boolean addressObtaining = false;
     private boolean initialized = false;
+
+    private Handler updateUserInfoHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+
+            TextView userInfoView = (TextView) findViewById(R.id.user_info);
+
+            String userInfo = "geocaching.com" + CacheListAdapter.SEPARATOR;
+            if (cgBase.isActualLoginStatus()) {
+                userInfo += cgBase.getActualUserName();
+                if (cgBase.getActualCachesFound() >= 0) {
+                    userInfo += " (" + String.valueOf(cgBase.getActualCachesFound()) + ")";
+                }
+                userInfo += CacheListAdapter.SEPARATOR;
+            }
+            userInfo += cgBase.getActualStatus();
+
+            userInfoView.setText(userInfo);
+        }
+    };
+
     private Handler obtainAddressHandler = new Handler() {
 
         @Override
@@ -84,7 +108,9 @@ public class cgeo extends AbstractActivity {
                         addText.append(address.getAdminArea());
                     }
 
-                    addCoords = geo.coordsNow;
+                    if (geo != null) {
+                        addCoords = geo.coordsNow;
+                    }
 
                     TextView navLocation = (TextView) findViewById(R.id.nav_location);
                     navLocation.setText(addText.toString());
@@ -177,6 +203,8 @@ public class cgeo extends AbstractActivity {
     public void onResume() {
         super.onResume();
 
+        updateUserInfoHandler.sendEmptyMessage(-1);
+
         init();
     }
 
@@ -234,12 +262,12 @@ public class cgeo extends AbstractActivity {
         return true;
     }
 
-    private static boolean isIntentAvailable(Context context, String intent) {
+    public static boolean isIntentAvailable(Context context, String intent) {
         final PackageManager packageManager = context.getPackageManager();
         final List<ResolveInfo> list = packageManager.queryIntentActivities(
                 new Intent(intent), PackageManager.MATCH_DEFAULT_ONLY);
 
-        return list.size() > 0;
+        return CollectionUtils.isNotEmpty(list);
     }
 
     @Override
@@ -250,7 +278,7 @@ public class cgeo extends AbstractActivity {
                 showAbout(null);
                 return true;
             case MENU_HELPERS:
-                startActivity(new Intent(this, cgeohelpers.class));
+                startActivity(new Intent(this, UsefulAppsActivity.class));
                 return true;
             case MENU_SETTINGS:
                 startActivity(new Intent(this, cgeoinit.class));
@@ -420,6 +448,9 @@ public class cgeo extends AbstractActivity {
         }
         for (LogType logType : LogType.values()) {
             logType.setL10n();
+        }
+        for (WaypointType waypointType : WaypointType.values()) {
+            waypointType.setL10n();
         }
 
         Settings.getLogin();
@@ -736,11 +767,13 @@ public class cgeo extends AbstractActivity {
                 return;
             }
 
+            // login
             final StatusCode status = cgBase.login();
 
             if (status == StatusCode.NO_ERROR) {
                 app.firstRun = false;
                 cgBase.detectGcCustomDate();
+                updateUserInfoHandler.sendEmptyMessage(-1);
             }
 
             if (app.showLoginToast) {
@@ -802,4 +835,5 @@ public class cgeo extends AbstractActivity {
     public void goSearch(View view) {
         onSearchRequested();
     }
+
 }

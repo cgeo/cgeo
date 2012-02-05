@@ -1,8 +1,10 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.geopoint.Geopoint;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import android.app.ProgressDialog;
 import android.location.Address;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -79,32 +82,34 @@ public class cgeoaddresses extends AbstractActivity {
                         return;
                     } else {
                         LinearLayout oneAddPre = null;
+                        final Geopoint lastLoc = cgeoapplication.getInstance().getLastCoords();
                         for (Address address : addresses) {
                             oneAddPre = (LinearLayout) inflater.inflate(R.layout.address_button, null);
 
                             Button oneAdd = (Button) oneAddPre.findViewById(R.id.button);
-                            int index = 0;
-                            StringBuilder allAdd = new StringBuilder();
-                            StringBuilder allAddLine = new StringBuilder();
 
-                            while (address.getAddressLine(index) != null) {
-                                if (allAdd.length() > 0) {
-                                    allAdd.append('\n');
+                            final int maxIndex = address.getMaxAddressLineIndex();
+                            final ArrayList<String> lines = new ArrayList<String>();
+                            for (int i = 0; i <= maxIndex; i++) {
+                                String line = address.getAddressLine(i);
+                                if (StringUtils.isNotBlank(line)) {
+                                    lines.add(line);
                                 }
-                                if (allAddLine.length() > 0) {
-                                    allAddLine.append("; ");
-                                }
-
-                                allAdd.append(address.getAddressLine(index));
-                                allAddLine.append(address.getAddressLine(index));
-
-                                index++;
                             }
 
-                            oneAdd.setText(allAdd.toString());
-                            oneAdd.setLines(allAdd.toString().split("\n").length);
+                            final String listTitle = StringUtils.join(lines, "; ");
+
+                            if (lastLoc != null) {
+                                if (address.hasLatitude() && address.hasLongitude()) {
+                                    lines.add(cgBase.getHumanDistance(lastLoc.distanceTo(new Geopoint(address.getLatitude(), address.getLongitude()))));
+                                }
+                            }
+
+                            oneAdd.setText(StringUtils.join(lines, "\n"));
+                            oneAdd.setLines(lines.size());
                             oneAdd.setClickable(true);
-                            oneAdd.setOnClickListener(new buttonListener(address.getLatitude(), address.getLongitude(), allAddLine.toString()));
+
+                            oneAdd.setOnClickListener(new buttonListener(address.getLatitude(), address.getLongitude(), listTitle));
                             addList.addView(oneAddPre);
                         }
                     }

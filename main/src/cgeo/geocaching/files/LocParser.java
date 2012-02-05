@@ -125,7 +125,7 @@ public final class LocParser extends FileParser {
                 } else if (size == 8) {
                     pointCoord.setSize(CacheSize.SMALL);
                 } else {
-                    pointCoord.setSize(null);
+                    pointCoord.setSize(CacheSize.UNKNOWN);
                 }
             }
 
@@ -155,6 +155,7 @@ public final class LocParser extends FileParser {
                 continue;
             }
             cgCache cache = new cgCache();
+            cache.setReliableLatLon(true);
             copyCoordToCache(coord, cache);
             caches.add(cache);
 

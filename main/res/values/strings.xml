@@ -8,7 +8,7 @@
   <string name="detail">Details</string>
   <string name="search">Search</string>
   <string name="settings">Settings</string>
-  <string name="helpers">What to install</string>
+  <string name="helpers">Useful apps</string>
   <string name="about">About c:geo</string>
   <string name="helper">Do you want to learn about <b>c:geo</b>?\nCheck our easy to read manual.</string>
   <string name="latitude">Latitude</string>
@@ -56,7 +56,7 @@
 
   <!-- logs -->
   <string name="log_found">Found it</string>
-  <string name="log_dnf">Did\'nt find it</string>
+  <string name="log_dnf">Didn\'t find it</string>
   <string name="log_note">Write note</string>
   <string name="log_published">Published</string>
   <string name="log_enabled">Enabled</string>
@@ -66,6 +66,8 @@
   <string name="log_retrieved">Retrieved</string>
   <string name="log_placed">Placed</string>
   <string name="log_grabbed">Grabbed Somewhere</string>
+  <string name="log_movecollection">Move to Collection</string>
+  <string name="log_moveinventory">Move to Inventory</string>
   <string name="log_maintained">Maintenance Performed</string>
   <string name="log_maintenance_needed">Needs Maintenance</string>
   <string name="log_update">Updated Coordinates</string>
@@ -117,84 +119,85 @@
   <string name="err_none">OK</string>
   <string name="err_start">Communication not started</string>
   <string name="err_parse">Failed Login page parsing</string>
-  <string name="err_server">Failed connection to Geocaching.com (server or connection down?)</string>
+  <string name="err_server">Unable to contact Geocaching.com. The website may be down or your Internet connection not working.</string>
   <string name="err_login">No Login information stored</string>
-  <string name="err_login_failed">Sorry, c:geo can\'t log in.</string>
-  <string name="err_login_failed_toast">Sorry, c:geo can\'t log in. c:geo works in offline mode. Check your Login in settings or enable Internet connection.</string>
+  <string name="err_login_failed">c:geo can\'t log in.</string>
+  <string name="err_login_failed_toast">c:geo can\'t log in. c:geo works offline with Stored caches. Check your Login settings or enable Internet connection.</string>
   <string name="err_unknown">Unknown error</string>
   <string name="err_comm">Unknown communication error</string>
   <string name="err_missing_auth">No username and/or password set.</string>
-  <string name="err_wrong">Wrong Login information</string>
-  <string name="err_maintenance">Geocaching.com site is under maintenance, try again later. c:geo works in offline mode.</string>
-  <string name="err_license">User has not agreed to Geocaching.com license agreement, so c:geo can\'t load caches coordinates.</string>
-  <string name="err_unpublished">The requested cache was unpublished</string>
-  <string name="err_premium_only">This Cache is only available to Geocaching.com Premium Members</string>
-  <string name="err_store">Sorry, c:geo can\'t store the cache.</string>
-  <string name="err_drop">Sorry, c:geo can\'t drop cache.</string>
-  <string name="err_detail_open">Sorry, c:geo can\'t open geocache details.</string>
-  <string name="err_detail_cache">Sorry, c:geo can\'t display geocache you want. Is it really geocache?</string>
-  <string name="err_detail_cache_find">Sorry, c:geo can\'t find geocache</string>
-  <string name="err_detail_cache_find_some">Sorry, c:geo can\'t find that geocache.</string>
-  <string name="err_detail_cache_find_any">Sorry, c:geo can\'t find any geocache.</string>
-  <string name="err_detail_cache_find_next">Sorry, c:geo can\'t find next geocaches.</string>
-  <string name="err_detail_cache_forgot">Sorry, c:geo forgot which geocache you want.</string>
-  <string name="err_detail_cache_forgot_visit">Sorry, c:geo forgot which cache you visited.</string>
+  <string name="err_wrong">Login information incorrect</string>
+  <string name="err_maintenance">Geocaching.com is down for maintenance. c:geo works offline with Stored caches.</string>
+  <string name="err_license">You have not agreed to Geocaching.com license agreement, so c:geo can\'t load cache coordinates.</string>
+  <string name="err_unpublished">The requested cache is unpublished.</string>
+  <string name="err_premium_only">This Cache is only available to Geocaching.com Premium Members.</string>
+  <string name="err_store">c:geo can\'t store the cache.</string>
+  <string name="err_drop">c:geo can\'t drop cache.</string>
+  <string name="err_detail_open">c:geo can\'t open geocache details.</string>
+  <string name="err_detail_cache">c:geo can\'t display the geocache you want. Is it really a geocache?</string>
+  <string name="err_detail_cache_find">c:geo can\'t find geocache</string>
+  <string name="err_detail_cache_find_some">c:geo can\'t find that geocache.</string>
+  <string name="err_detail_cache_find_any">c:geo can\'t find any geocache.</string>
+  <string name="err_detail_cache_find_next">c:geo can\'t find next geocaches.</string>
+  <string name="err_detail_cache_forgot">c:geo forgot which geocache you want.</string>
+  <string name="err_detail_cache_forgot_visit">c:geo forgot which cache you visited.</string>
   <string name="err_detail_no_spoiler">c:geo found no spoiler images for this cache.</string>
   <string name="err_detail_no_map_static">c:geo found no static maps for this cache.</string>
-  <string name="err_detail_not_load_map_static">Sorry, c:geo failed to load static maps.</string>
+  <string name="err_detail_not_load_map_static">c:geo failed to load static maps.</string>
+  <string name="err_detail_ask_store_map_static">c:geo failed to load static maps. Store now?</string>
   <string name="err_detail_still_working">Still working on another task.</string>
   <string name="err_watchlist_still_managing">Still managing your watchlist.</string>
   <string name="err_watchlist_failed">Changing your watchlist failed.</string>
   <string name="err_navigation_no">c:geo can\'t find any supported navigation.</string>
   <string name="err_application_no">c:geo can\'t find any suitable application.</string>
-  <string name="err_auth_initialize">Sorry, c:geo failed to initialize authorization process.</string>
+  <string name="err_auth_initialize">c:geo failed to initialize authorization process.</string>
   <string name="err_auth_process">Authorization process failed.</string>
-  <string name="err_cannot_log_visit">c:geo has not enough information to log visit. Please, do it from full cache details.</string>
-  <string name="err_init_cleared">Sorry, c:geo can\'t clear login information.</string>
-  <string name="err_download_fail">Sorry, c:geo failed to download caches because of </string>
-  <string name="err_list_load_fail">Sorry, c:geo failed to load cache list.</string>
-  <string name="err_store_failed">Sorry, c:geo can\'t store geocache.</string>
-  <string name="err_refresh_failed">Sorry, c:geo can\'t refresh geocache.</string>
-  <string name="err_dwld_details_failed">Sorry, c:geo failed to download cache details.</string>
-  <string name="err_dwld_details_failed_reason">Sorry, c:geo failed to download cache details because of</string>
-  <string name="err_load_descr_failed">Sorry, c:geo can\'t load description.</string>
+  <string name="err_cannot_log_visit">c:geo is unable to log your visit. Please log your visit from full cache details screen.</string>
+  <string name="err_init_cleared">c:geo can\'t clear login information.</string>
+  <string name="err_download_fail">c:geo failed to download caches.</string>
+  <string name="err_list_load_fail">c:geo failed to load cache list.</string>
+  <string name="err_store_failed">c:geo can\'t store geocache.</string>
+  <string name="err_refresh_failed">c:geo can\'t refresh geocache.</string>
+  <string name="err_dwld_details_failed">c:geo failed to download cache details.</string>
+  <string name="err_load_descr_failed">c:geo can\'t load description.</string>
   <string name="err_location_unknown">c:geo doesn\'t know location of cache.</string>
   <string name="err_missing_device_name">Please enter a device name before registering.</string>
 
-  <string name="err_tb_display">Sorry, c:geo can\'t display trackable you want. Is it really trackable?</string>
-  <string name="err_tb_details_open">Sorry, c:geo can\'t open trackable details.</string>
-  <string name="err_tb_details_download">Sorry, c:geo failed to download trackable details because of</string>
-  <string name="err_tb_forgot">Sorry, c:geo forgot which trackable you want.</string>
-  <string name="err_tb_forgot_saw">Sorry, c:geo forgot which trackable you saw.</string>
-  <string name="err_tb_find">Sorry, c:geo can\'t find trackable</string>
-  <string name="err_tb_find_that">Sorry, c:geo can\'t find that trackable.</string>
+  <string name="err_tb_display">c:geo can\'t display trackable you want. Is it really a trackable?</string>
+  <string name="err_tb_details_open">c:geo can\'t open trackable details.</string>
+  <string name="err_tb_details_download">c:geo failed to download trackable details.</string>
+  <string name="err_tb_forgot">c:geo forgot which trackable you want.</string>
+  <string name="err_tb_forgot_saw">c:geo forgot which trackable you saw.</string>
+  <string name="err_tb_find">c:geo can\'t find trackable</string>
+  <string name="err_tb_find_that">c:geo can\'t find that trackable.</string>
 
-  <string name="err_waypoint_cache_unknown">Sorry, c:geo doesn\'t know to which cache you want to add waypoint.</string>
-  <string name="err_waypoint_unknown">Sorry, c:geo forgot what waypoint you want to display.</string>
-  <string name="err_waypoint_add_failed">Sorry, c:geo failed to add your waypoint.</string>
-  <string name="err_waypoint_load_failed">Sorry, c:geo failed to load waypoint.</string>
-  <string name="err_waypoint_delete_failed">Sorry, c:geo can\'t delete waypoint.</string>
-  <string name="err_point_unknown_position">Sorry, c:geo can\'t recognize where you are.</string>
+  <string name="err_waypoint_cache_unknown">c:geo doesn\'t know to which cache you want to add waypoint.</string>
+  <string name="err_waypoint_unknown">c:geo forgot what waypoint you want to display.</string>
+  <string name="err_waypoint_add_failed">c:geo failed to add your waypoint.</string>
+  <string name="err_waypoint_load_failed">c:geo failed to load waypoint.</string>
+  <string name="err_waypoint_delete_failed">c:geo can\'t delete waypoint.</string>
+  <string name="err_waypoint_open_cache_failed">c:geo can\'t open cache details.</string>
+  <string name="err_point_unknown_position">c:geo can\'t recognize where you are.</string>
   <string name="err_point_no_position_given_title">Info required</string>
   <string name="err_point_no_position_given">Fill at least latitude or longitude or distance and bearing. You can also fill all four fields.</string>
   <string name="err_point_curr_position_unavailable">c:geo still doesn\'t have current coordinates. Please, wait a while…</string>
   <string name="err_point_bear_and_dist_title">Need some help?</string>
   <string name="err_point_bear_and_dist">Fill both bearing and distance. Bearing is angle 0 to 360 degrees relative to north. Distance with or without units.</string>
-  <string name="err_point_location_error">Sorry, c:geo can\'t get location of waypoint.</string>
+  <string name="err_point_location_error">c:geo can\'t get location of waypoint.</string>
 
-  <string name="err_log_load_data">Sorry, c:geo can\'t load data required to log visit.</string>
-  <string name="err_log_load_data_again">Sorry, c:geo can\'t load data required to log visit. Trying again.</string>
+  <string name="err_log_load_data">c:geo can\'t load data required to log visit.</string>
+  <string name="err_log_load_data_again">c:geo can\'t load data required to log visit. Trying again.</string>
   <string name="err_log_load_data_still">c:geo is still loading data required to post log. Please wait a little while longer.</string>
-  <string name="err_log_failed_server">Sorry, c:geo failed to post log because server is not responding.</string>
+  <string name="err_log_failed_server">c:geo failed to post log because server is not responding.</string>
   <string name="err_log_post_failed">It seems that your log was not posted. Please check it on Geocaching.com.</string>
 
-  <string name="err_search_address_no_match">Sorry, c:geo found no matching place.</string>
-  <string name="err_search_address_forgot">Sorry, c:geo forgot address you try to find.</string>
+  <string name="err_search_address_no_match">c:geo found no matching place.</string>
+  <string name="err_search_address_forgot">c:geo forgot the address you tried to find.</string>
   <string name="err_search_address">Searching for places</string>
-  <string name="err_parse_lat">Sorry, c:geo can\'t parse latitude.</string>
-  <string name="err_parse_lon">Sorry, c:geo can\'t parse longitude.</string>
-  <string name="err_parse_dist">Sorry, c:geo can\'t parse distance.</string>
-  <string name="err_parse_lat_lon">Sorry, c:geo can\'t parse latitude or longitude.</string>
+  <string name="err_parse_lat">c:geo can\'t parse latitude.</string>
+  <string name="err_parse_lon">c:geo can\'t parse longitude.</string>
+  <string name="err_parse_dist">c:geo can\'t parse distance.</string>
+  <string name="err_parse_lat_lon">c:geo can\'t parse latitude or longitude.</string>
 
   <string name="err_fieldnotes_export_failed">Export of Field Notes failed.</string>
 
@@ -204,13 +207,13 @@
   <string name="warn_no_keyword">No Keyword given.</string>
   <string name="warn_no_username">No Username given.</string>
   <string name="warn_search_help_title">Need some help?</string>
-  <string name="warn_search_help_address">Fill in an address or location name. For example use a postal address \"Radlicka 100, Prague, Czech Republic\", a city name \"Berlin\" or just a name of something like \"Yellowstone Park\".</string>
-  <string name="warn_search_help_gccode">Fill in the code of a geocache. For example \"GC1VCAZ\".</string>
-  <string name="warn_search_help_keyword">Fill some word that is supposed to be somewhere in the cache name you are trying to find.</string>
-  <string name="warn_search_help_user">Fill in a username at Geocaching.com.</string>
-  <string name="warn_search_help_tb">Fill in code of trackable. For example \"TB29QMZ\".</string>
+  <string name="warn_search_help_address">Enter an address or location name. For example use a postal address \"Radlicka 100, Prague, Czech Republic\", a city name \"Berlin\" or just a name of something like \"Yellowstone Park\".</string>
+  <string name="warn_search_help_gccode">Enter the code for a geocache. For example \"GC1VCAZ\".</string>
+  <string name="warn_search_help_keyword">Enter all or part of a geocache name. For example \"Night Cache\".</string>
+  <string name="warn_search_help_user">Enter a username from Geocaching.com.</string>
+  <string name="warn_search_help_tb">Enter the code for a trackable. For example \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Please fill in text for your log.</string>
-  <string name="warn_load_images">Sorry, c:geo failed to load images.</string>
+  <string name="warn_load_images">c:geo failed to load images.</string>
 
 
   <string name="info_log_posted">c:geo successfully submitted the log.</string>
@@ -219,6 +222,7 @@
   <string name="info_log_type_changed">Type of log has been changed!</string>
 
   <string name="info_fieldnotes_exported_to">Field Notes exported to</string>
+  <string name="info_storing_static_maps">Trying to store static maps</string>
 
   <!-- location service -->
   <string name="loc_last">Last known</string>
@@ -356,7 +360,7 @@
   <string name="init_signature">Signature</string>
   <string name="init_signature_help_button">Help</string>
   <string name="init_signature_help_title">Signature Tips and Tricks</string>
-  <string name="init_signature_help_text">Write your signature to use it in the log text.\nSpecial strings that can be used are: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nThese will be expanded when the signature is inserted.</string>
+  <string name="init_signature_help_text">Enter your signature to use it in the log text.\nSpecial strings that can be used are: [DATE] , [TIME], [DATETIME], [USER] &amp; [NUMBER].\nThese will be expanded when the signature is inserted.</string>
   <string name="init_signature_template_button">Insert Template</string>
   <string name="init_signature_template_date">Date</string>
   <string name="init_signature_template_time">Time</string>
@@ -375,10 +379,11 @@
   <string name="init_captcha">Show CAPTCHA if necessary</string>
   <string name="init_useenglish">Use English language for c:geo\n(Restart needed)</string>
   <string name="init_exclude">Exclude own and found caches</string>
-  <string name="init_showwaypoints">Show Waypoints in Live map</string>
-  <string name="init_showwaypoint_description">Limit of caches on Live-map below which waypoints are shown.</string>
+  <string name="init_showwaypoints">Show Waypoints on Live map</string>
+  <string name="init_showwaypoint_description">If less than the given amount of caches are displayed on the map, their waypoints are shown additionally.</string>
   <string name="init_disabled">Exclude disabled caches</string>
-  <string name="init_offline">Store static maps for offline use</string>
+  <string name="init_offline">Store cache static maps for offline use</string>
+  <string name="init_offline_wp">Store waypoints static maps for offline use</string>
   <string name="init_save_log_img">Save Images from Logs</string>
   <string name="init_units">Use Imperial Units instead of Metric Units</string>
   <string name="init_nav">Use Google Navigation</string>
@@ -411,7 +416,10 @@
   <string name="init_trackautovisit">Set trackables to \"Visited\" as a default</string>
   <string name="init_sigautoinsert">Insert signature automatically</string>
   <string name="init_loaddirectionimg">Load direction-image if necessary</string>
-
+  <string name="init_default_navigation_tool">Default Navigation</string>
+  <string name="init_default_navigation_tool_description">Here you can select your preferred navigation tool.</string>
+  <string name="init_default_navigation_tool_select">Select tool</string>
+  
   <!-- map sources -->
   <string-array name="map_sources">
     <item>@string/map_source_google_map</item>
@@ -473,12 +481,13 @@
   <string name="cache_attributes_no_icons">(refresh cache to show attribute icons)</string>
   <string name="cache_inventory">Inventory</string>
   <string name="cache_log_offline">Offline Log</string>
-  <string name="cache_log_images_loading">Loading Log images …</string>
+  <string name="cache_log_images_loading">Loading Log images…</string>
   <string name="cache_log_images_title">Log images</string>
   <string name="cache_log_image_default_title">Photo</string>
   <string name="cache_personal_note">Personal note</string>
   <string name="cache_description">Description</string>
   <string name="cache_description_long">Long Description</string>
+  <string name="cache_description_table_note">Description contains table formatting which may need to be viewed at geocaching.com to be seen correctly.</string>
   <string name="cache_watchlist">Watchlist</string>
   <string name="cache_watchlist_on">This cache is on your watchlist.</string>
   <string name="cache_watchlist_not_on">This cache is not on your watchlist.</string>
@@ -571,7 +580,8 @@
       
   <!-- file list base -->
   <string name="file_searching_in">Searching for files\nin</string>
-  <string name="file_list_no_files">Sorry, c:geo found no appropriate files.</string>
+  <string name="file_searching_sdcard_in">No files found in default folders:\n%1$s\n\nSearching whole SD card for files:\n</string>
+  <string name="file_list_no_files">c:geo found no appropriate files.</string>
   <string name="file_searching">Searching for matching files</string>
   <string name="file_title_searching">Searching</string>
 
@@ -610,10 +620,11 @@
   <!-- waypoint -->
   <string name="waypoint">Waypoint</string>
   <string name="waypoint_title">Waypoint</string>
+  <string name="waypoint_cache_coordinates">Cache coordinates</string>
   <string name="waypoint_custom">Custom</string>
   <string name="waypoint_my_coordinates">My coordinates</string>
-  <string name="waypoint_bearing">Bearing</string>
-  <string name="waypoint_distance">Distance</string>
+  <string name="waypoint_bearing">Bearing in °</string>
+  <string name="waypoint_distance">Distance in m</string>
   <string name="waypoint_name">Name</string>
   <string name="waypoint_edit">Edit</string>
   <string name="waypoint_delete">Delete</string>
@@ -626,6 +637,7 @@
   <string name="waypoint_done">Done</string>
   <string name="waypoint_duplicate">Duplicate</string>
   <string name="waypoint_copy_of">Copy of</string>
+  <string name="waypoint_menu_open_cache">Open Cache</string>
   <string name="search_history">History</string>
   <string name="search_history_empty">No previous destinations</string>
   <string name="search_remove_destination">Destination removed</string>
@@ -722,7 +734,9 @@
   <string name="use_compass">Use compass</string>
   <string name="destination_select">Select destination</string>
   <string name="destination_set">Set destination</string>
-
+  <string name="navigation_direct_navigation">Direct Navigation</string>
+  <string name="navigation_target">Target</string>
+  
   <!-- license -->
   <string name="license">License</string>
   <string name="license_show">Show license</string>
@@ -731,6 +745,8 @@
   <!-- helpers -->
   <string name="helper_manual_title">Manual</string>
   <string name="helper_manual_description">Comprehensive manual for c:geo that contains description of all possibilities of this application (even hidden ones).</string>
+  <string name="helper_calendar_title">c:geo calendar add-on</string>
+  <string name="helper_calendar_description">Enables you to export event caches into the calendar on your device.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Simple usable application showing Online maps and allowing to download them directly into Offline mode (raster maps only). Also support track recording, POI handling and many other useful functions.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
@@ -927,6 +943,7 @@
     · <a href="http://github.com/koem">Karsten Priegnitz</a> (code, artwork computation)\n
     · <a href="http://www.geocaching.com/email/?guid=d11a3e3d-7db0-4d43-87f2-7893238844a6">Lineflyer</a> (tester)\n
     · Ludovic Valente (localization FR)\n
+    · marco-jacob (code, loc. DE)\n
     · MichielK (code, loc. NL)\n
     · mucek4 (code, open source project leader)\n
     · ncorreia (code, localization PT)\n
@@ -936,6 +953,7 @@
     · Rainer S. (code)\n
     · Ray (code, loc. JA)\n
     · <a href="http://seromenho.com/">Ricardo Seromenho</a> (localization PT)\n
+    · RoadRunner- (code, loc. DE)\n
     · <a href="http://www.blueskysoftware.it/">RomNexus6</a> (localization IT)\n
     · <a href="http://www.sammyshp.de/">SammysHP</a> (code, localization DE)\n
     · <a href="http://www.rfc1149.net/sam.html">Samuel Tardieu</a> (code, localization FR)\n
@@ -956,6 +974,12 @@
   <!-- changelog -->
   <string name="changelog">\n
     <b>next release</b>\n
+    · new: changed markers in the map with additional informations for stored caches:\n
+       Personal Note available, Modified coordinates, non-reliable coordinates (orange circle)\n
+    · fix: caches with modified coordinates are displayed at the modified coords and not at the original coords\n
+    · \n
+    \n\n
+    <b>04.01.2012</b>\n
     · new: additional page in the details view for logs from friends\n
     · new: horizontal scrollable pages for cache details\n
     · new: click on cache coordinates to change format\n
@@ -969,12 +993,19 @@
     · new: allow offline log without any login data stored\n
     · new: ask for restore after reinstallation\n
     · new: context menu to open spoiler/log images online\n
+    · new: create waypoints from personal cache note\n
     · fix: several calendar bugs\n
     · fix: some enhancement due to gc.com update\n
     · fix: new translation IT, several translation-updates\n
-    · fix: lot of design enhancements (icons, font-size, autoresizing text-fields, auto-suggestion, seperators, inventory-actions, stars color and value, many more)\n
+    · fix: lot of design enhancements (icons, font-size, autoresizing text-fields, auto-suggestion, seperators, inventory-actions, stars color and value, keyboard, colors, many more)\n
     · fix: Refresh not stored caches\n
     · fix: batch-actions for trackables not working\n
+    · fix: missing cache-name as title in cache details\n
+    · fix: some map-issues for gc.com-premium-members\n
+    · fix: edited waypoints are overwritten by cache update\n
+    · fix: spoiler images are too small\n
+    · fix: incorrect storage time in cache details\n
+    · fix: incorrect handling of GeoKrety trackables\n
     · 100+ bugfixes and enhancements\n
     \n\n
     <b>08.11.2011</b>\n

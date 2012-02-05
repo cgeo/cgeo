@@ -37,6 +37,8 @@ public enum LogType {
     LOG_VISIT(1001, "icon_visited", "visit", R.string.log_tb_visit),
     LOG_WEBCAM_PHOTO_TAKEN(11, "icon_camera", "webcam photo taken", R.string.log_webcam),
     LOG_ANNOUNCEMENT(74, "icon_announcement", "announcement", R.string.log_announcement),
+    LOG_MOVE_COLLECTION(69, "conflict_collection_icon_note", "unused_collection", R.string.log_movecollection),
+    LOG_MOVE_INVENTORY(70, "conflict_inventory_icon_note", "unused_inventory", R.string.log_moveinventory),
     LOG_UNKNOWN(0, "unknown", "", R.string.err_unknown); // LogType not init. yet
 
     public final int id;

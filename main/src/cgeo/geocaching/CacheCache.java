@@ -1,11 +1,7 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.cgData.StorageLocations;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import cgeo.geocaching.cgData.StorageLocation;
+import cgeo.geocaching.utils.LeastRecentlyUsedCache;
 
 /**
  * Cache for Caches. Every cache is stored in memory while c:geo is active to
@@ -15,12 +11,13 @@ import java.util.Map;
  */
 public class CacheCache {
 
-    final private Map<String, cgCache> cachesCache; // caching caches into memory
+    private static final int MAX_CACHED_CACHES = 1000;
+    final private LeastRecentlyUsedCache<String, cgCache> cachesCache;
 
     private static CacheCache instance = null;
 
     private CacheCache() {
-        cachesCache = new HashMap<String, cgCache>();
+        cachesCache = new LeastRecentlyUsedCache<String, cgCache>(MAX_CACHED_CACHES);
     }
 
     public static CacheCache getInstance() {
@@ -57,7 +54,7 @@ public class CacheCache {
             cachesCache.remove(cache.getGeocode());
         }
 
-        cache.addStorageLocation(StorageLocations.CACHE);
+        cache.addStorageLocation(StorageLocation.CACHE);
         cachesCache.put(cache.getGeocode(), cache);
     }
 
@@ -72,23 +69,6 @@ public class CacheCache {
         }
 
         return null;
-    }
-
-    /**
-     * @param geocode
-     *            Geocode of the cache to retrieve from the cache
-     * @return cache if found, null else
-     */
-    public List<cgCache> getCachesFromCache(final List<String> geocodes) {
-        if (geocodes == null || geocodes.isEmpty()) {
-            return null;
-        }
-
-        ArrayList<cgCache> caches = new ArrayList<cgCache>();
-        for (String geocode : geocodes) {
-            caches.add(getCacheFromCache(geocode));
-        }
-        return caches;
     }
 
 }

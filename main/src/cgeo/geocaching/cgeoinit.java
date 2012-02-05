@@ -1,12 +1,16 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
+import cgeo.geocaching.apps.cache.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.maps.MapProviderFactory;
+import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.twitter.TwitterAuthorizationActivity;
+import cgeo.geocaching.utils.LogTemplateProvider;
+import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -26,6 +30,7 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -36,6 +41,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.io.File;
+import java.util.List;
 import java.util.SortedMap;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -460,6 +466,16 @@ public class cgeoinit extends AbstractActivity {
             }
         });
 
+        final CheckBox offlineWpButton = (CheckBox) findViewById(R.id.offline_wp);
+        offlineWpButton.setChecked(Settings.isStoreOfflineWpMaps());
+        offlineWpButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Settings.setStoreOfflineWpMaps(offlineWpButton.isChecked());
+            }
+        });
+
         final CheckBox saveLogImgButton = (CheckBox) findViewById(R.id.save_log_img);
         saveLogImgButton.setChecked(Settings.isStoreLogImages());
         saveLogImgButton.setOnClickListener(new View.OnClickListener() {
@@ -567,6 +583,49 @@ public class cgeoinit extends AbstractActivity {
             @Override
             public void onClick(View v) {
                 Settings.setMapTrail(trailButton.isChecked());
+            }
+        });
+
+        // Default navigation tool settings
+        Spinner defaultNavigationToolSelector = (Spinner) findViewById(R.id.default_navigation_tool);
+        final List<NavigationAppsEnum> apps = NavigationAppFactory.getInstalledNavigationApps(this);
+        ArrayAdapter<NavigationAppsEnum> naviAdapter = new ArrayAdapter<NavigationAppsEnum>(this, android.R.layout.simple_spinner_item, apps.toArray(new NavigationAppsEnum[apps.size()])) {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent) {
+                TextView textView = (TextView) super.getView(position, convertView, parent);
+                textView.setText(getItem(position).app.getName());
+                return textView;
+            }
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                TextView textView = (TextView) super.getDropDownView(position, convertView, parent);
+                textView.setText(getItem(position).app.getName());
+                return textView;
+            }
+        };
+        naviAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        defaultNavigationToolSelector.setAdapter(naviAdapter);
+        int defaultNavigationTool = Settings.getDefaultNavigationTool();
+        int ordinal = 0;
+        for (int i = 0; i < apps.size(); i++) {
+            if (apps.get(i).id == defaultNavigationTool) {
+                ordinal = i;
+                break;
+            }
+        }
+        defaultNavigationToolSelector.setSelection(ordinal);
+        defaultNavigationToolSelector.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                NavigationAppsEnum item = (NavigationAppsEnum) parent.getItemAtPosition(position);
+                if (item != null) {
+                    Settings.setDefaultNavigationTool(item.id);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+                // noop
             }
         });
 

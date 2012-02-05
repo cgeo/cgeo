@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.Parameters;
+import cgeo.geocaching.GCConstants;
 import cgeo.geocaching.ParseResult;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
@@ -8,6 +8,7 @@ import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.CancellableHandler;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -93,6 +94,8 @@ public class GCConnector extends AbstractConnector {
         } else if (StringUtils.isNotBlank(guid)) {
             params.put("guid", guid);
         }
+        params.put("log", "y");
+        params.put("numlogs", String.valueOf(GCConstants.NUMBER_OF_LOGS));
 
         cgBase.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
 

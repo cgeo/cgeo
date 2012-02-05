@@ -23,7 +23,7 @@ abstract class AbstractGeneralApp extends AbstractApp implements GeneralApp {
         if (packageName == null) {
             return false;
         }
-        Intent intent = getLaunchIntent(activity);
+        final Intent intent = getLaunchIntent(activity);
         if (intent != null) {
             intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
             activity.startActivity(intent);

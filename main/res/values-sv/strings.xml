@@ -8,7 +8,7 @@
   <string name="detail">Detaljer</string>
   <string name="search">Sök</string>
   <string name="settings">Inställningar</string>
-  <string name="helpers">Program att installera</string>
+  <string name="helpers">Bra program att installera</string>
   <string name="about">Om c:geo</string>
   <string name="helper">Vill du lära dig mer om <b>c:geo</b>?\nLäs manualen (på engelska).</string>
   <string name="latitude">Latitud</string>
@@ -66,14 +66,15 @@
   <string name="log_retrieved">Hämtade från</string>
   <string name="log_placed">Lämnade i</string>
   <string name="log_grabbed">Tagen från annan</string>
+  <string name="log_movecollection">Flytta till Collection</string>
+  <string name="log_moveinventory">Flytta till Inventory</string>
   <string name="log_maintained">Underhåll utfört</string>
   <string name="log_maintenance_needed">Behöver underhåll</string>
   <string name="log_update">Uppdaterade koordinaterna</string>
   <string name="log_archived">Arkiverad</string>
   <string name="log_needs_archived">Behöver arkiveras</string>
   <string name="log_discovered">Såg den</string>
-  <string name="log_reviewed">Meddelande till reviewern</string>
-  <string name="log_taken">Besökte</string>
+  <string name="log_reviewed">Meddelande från reviewern</string>
   <string name="log_tb_nothing">Gör inget</string>
   <string name="log_tb_visit">Besök</string>
   <string name="log_tb_drop">Lämna här</string>
@@ -100,15 +101,15 @@
   <string name="log_stars_4">4 stjärnor</string>
   <string name="log_stars_45">4.5 stjärnor</string>
   <string name="log_stars_5">5 stjärnor</string>
-  <string name="log_stars_1_description">dålig</string>
-  <string name="log_stars_15_description">halvdålig</string>
-  <string name="log_stars_2_description">under medel</string>
-  <string name="log_stars_25_description">inte så dålig</string>
-  <string name="log_stars_3_description">medel</string>
-  <string name="log_stars_35_description">inte alls dålig</string>
-  <string name="log_stars_4_description">bättre än medel</string>
-  <string name="log_stars_45_description">mycket bra</string>
-  <string name="log_stars_5_description">enastående</string>
+  <string name="log_stars_1_description">Dålig</string>
+  <string name="log_stars_15_description">Halvdålig</string>
+  <string name="log_stars_2_description">Under medel</string>
+  <string name="log_stars_25_description">Inte så dålig</string>
+  <string name="log_stars_3_description">Medel</string>
+  <string name="log_stars_35_description">Inte alls dålig</string>
+  <string name="log_stars_4_description">Bättre än medel</string>
+  <string name="log_stars_45_description">Mycket bra</string>
+  <string name="log_stars_5_description">Enastående</string>
   <string name="log_webcam">Foto taget med Webcam</string>
   <string name="log_new_log">Logga</string>
   <string name="log_new_log_text">Loggtext</string>
@@ -118,18 +119,18 @@
   <string name="err_none">Ok</string>
   <string name="err_start">Kommunikationen har inte påbörjats</string>
   <string name="err_parse">Misslyckades att analysera inloggningssidan</string>
-  <string name="err_server">Misslyckades att ansluta till Geocaching.com (servern eller anslutningen nere?)</string>
+  <string name="err_server">Misslyckades att ansluta till Geocaching.com. Hemsidan kan vara ur funktion eller så är det problem med din anslutningen till Internet.</string>
   <string name="err_login">Inloggningsinformationen ej sparad</string>
   <string name="err_login_failed">Tyvärr kan c:geo inte logga in.</string>
-  <string name="err_login_failed_toast">Tyvärr kan c:geo inte logga in. c:geo kommer att köra i offline läge. Kontrollera dina inloggningsuppgifter i inställningarna och aktivera din internetanslutning.</string>
+  <string name="err_login_failed_toast">Tyvärr kan c:geo inte logga in. c:geo kommer att köra i offline läge med sparade cacher. Kontrollera dina inloggningsuppgifter och aktivera din internetanslutning.</string>
   <string name="err_unknown">Okänt fel</string>
   <string name="err_comm">Okänt kommunikationsfel</string>
   <string name="err_missing_auth">Användarnamn och/eller lösenord saknas.</string>
   <string name="err_wrong">Felaktiga inloggningsuppgifter</string>
-  <string name="err_maintenance">Arbete pågår med servern Geocaching.com, försök igen senare. c:geo fungerar under tiden i offline läge.</string>
-  <string name="err_license">användaren inte har bekräftat licensavtalet med Geocaching.com</string>
+  <string name="err_maintenance">Arbete pågår med servern Geocaching.com. c:geo fungerar under tiden i offline läge med sparade cacher.</string>
+  <string name="err_license">Du har inte bekräftat licensavtalet med Geocaching.com, så c:geo kan inte läsa in koordinater för cacherna.</string>
   <string name="err_unpublished">Den sökta cachen är opubliserad.</string>
-  <string name="err_premium_only">Cachen är enbart för premium medlemmar på Geocaching.com</string>
+  <string name="err_premium_only">Cachen är enbart för premium medlemmar på Geocaching.com.</string>
   <string name="err_store">Tyvärr kan c:geo inte spara cachen.</string>
   <string name="err_drop">Tyvärr kan c:geo inte ta bort cachen.</string>
   <string name="err_detail_open">Tyvärr kan c:geo inte visa detaljer om geocachen.</string>
@@ -157,7 +158,6 @@
   <string name="err_store_failed">Tyvärr kan c:geo inte spara geocachen.</string>
   <string name="err_refresh_failed">Tyvärr kan c:geo inte uppdatera geocachen.</string>
   <string name="err_dwld_details_failed">Tyvärr misslyckades c:geo att ladda detaljer.</string>
-  <string name="err_dwld_details_failed_reason">Tyvärr misslyckades c:geo att ladda detaljer pga</string>
   <string name="err_load_descr_failed">Tyvärr kan c:geo inte ladda beskrivningen.</string>
   <string name="err_location_unknown">c:geo har inte koordinaterna för cachen.</string>
   <string name="err_missing_device_name">Vänligen ange ett namn för din enhet innan registering.</string>
@@ -175,6 +175,7 @@
   <string name="err_waypoint_add_failed">Tyvärr misslyckades c:geo att lägga till din punkt.</string>
   <string name="err_waypoint_load_failed">Tyvärr misslyckades c:geo att ladda punkten.</string>
   <string name="err_waypoint_delete_failed">Tyvärr kan c:geo inte ta bort punkten.</string>
+  <string name="err_waypoint_open_cache_failed">c:geo kan inte öppna beskrivningen av cachen.</string>
   <string name="err_point_unknown_position">Tyvärr kan c:geo inte bestämma din position.</string>
   <string name="err_point_no_position_given_title">Mer info krävs</string>
   <string name="err_point_no_position_given">Ange minst latitud och longitud eller avstånd och riktning. Du kan också ange alla fyra.</string>
@@ -261,19 +262,19 @@
   <string name="caches_on_map">Visa på karta</string>
   <string name="caches_sort">Sortering</string>
   <string name="caches_sort_title">Sortera efter</string>
-  <string name="caches_sort_distance">avstånd</string>
-  <string name="caches_sort_difficulty">svårighet</string>
-  <string name="caches_sort_terrain">terräng</string>
-  <string name="caches_sort_size">storlek</string>
-  <string name="caches_sort_favorites">favoriter</string>
-  <string name="caches_sort_name">namn</string>
+  <string name="caches_sort_distance">Avstånd</string>
+  <string name="caches_sort_difficulty">Svårighet</string>
+  <string name="caches_sort_terrain">Terräng</string>
+  <string name="caches_sort_size">Storlek</string>
+  <string name="caches_sort_favorites">Favoriter</string>
+  <string name="caches_sort_name">Namn</string>
   <string name="caches_sort_gccode">GC-kod (ålder)</string>
-  <string name="caches_sort_rating">betyg (GC-vote)</string>
-  <string name="caches_sort_vote">betyg (eget)</string>
-  <string name="caches_sort_inventory">antal trackable</string>
-  <string name="caches_sort_date">datum</string>
-  <string name="caches_sort_finds">antal som hittat</string>
-  <string name="caches_sort_state">status</string>
+  <string name="caches_sort_rating">Betyg (GC-vote)</string>
+  <string name="caches_sort_vote">Betyg (eget)</string>
+  <string name="caches_sort_inventory">Antal trackable</string>
+  <string name="caches_sort_date">Datum</string>
+  <string name="caches_sort_finds">Antal som hittat</string>
+  <string name="caches_sort_state">Status</string>
   <string name="caches_select">Välj från lista</string>
   <string name="caches_select_mode">Markeringsläge</string>
   <string name="caches_select_mode_exit">Avsluta markeringsläge</string>
@@ -345,7 +346,7 @@
   <string name="init_username">Användare</string>
   <string name="init_password">Lösenord</string>
   <string name="init_passvote">Lösenord</string>
-  <string name="init_login">Testa inloggning &amp; datumformat</string>
+  <string name="init_login">Testa och spara inloggning</string>
   <string name="init_login_popup">Inloggning</string>
   <string name="init_login_popup_working">Testar inloggning mot Geocaching.com…</string>
   <string name="init_login_popup_ok">Inloggning ok.</string>
@@ -377,9 +378,10 @@
   <string name="init_useenglish">Använd engelska i c:geo (kräver omstart)</string>
   <string name="init_exclude">Dölj egna och hittade cacher</string>
   <string name="init_showwaypoints">Extra punkter på Live kartan</string>
-  <string name="init_showwaypoint_description">Nivå där extra punkter (parkering eller tillagd lösning) börjar visas i Live kartan.</string>
+  <string name="init_showwaypoint_description">Gräns för antal cacher där extra punkter (parkering eller tillagd lösning) börjar visas i Live kartan. Bör vara mellan 5 och 50.</string>
   <string name="init_disabled">Dölj inaktiva cacher</string>
-  <string name="init_offline">Spara kartor för användning offline</string>
+  <string name="init_offline">Spara kartor för cacher för användning offline</string>
+  <string name="init_offline_wp">Spara kartor för extra punkter för användning offline</string>
   <string name="init_save_log_img">Spara bilder från loggar</string>
   <string name="init_units">Använd amerikanska enheter för avstånd</string>
   <string name="init_nav">Använd Google Navigering</string>
@@ -408,9 +410,13 @@
   <string name="init_mapsources_description">Här kan du vilken typ av kartor du vill använda. Som alternativ till Google Maps finns olika varianter av OpenStreetMap och till och med offline kartor (se <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> för detaljer).</string>
   <string name="init_mapsource_select">Välj kartkälla</string>
   <string name="init_select_mapfile">…</string>
+  <string name="init_maptrail">Visa spår på kartan</string>
   <string name="init_trackautovisit">Sätt trackable automatiskt till \"besök\" vid loggning av en cache</string>
   <string name="init_sigautoinsert">Infoga signatur automatiskt i loggar</string>
   <string name="init_loaddirectionimg">Ladda rikningsbild om det behövs</string>
+  <string name="init_default_navigation_tool">Förvald navigering</string>
+  <string name="init_default_navigation_tool_description">Här kan du välja ditt förvalda navigeringsprogram.</string>
+  <string name="init_default_navigation_tool_select">Välj program</string>
 
   <!-- map sources -->
   <string name="map_source_google_map">Google: Map</string>
@@ -471,12 +477,18 @@
   <string name="cache_personal_note">Personlig anteckning</string>
   <string name="cache_description">Beskrivning</string>
   <string name="cache_description_long">Lång beskrivning</string>
+  <string name="cache_description_table_note">Varning från c:geo! Beskrivningen innehåller HTML-tabeller som eventuellt kan behöva öppnas i en webbläsare för att visas på önskat sätt.</string>
   <string name="cache_watchlist">Watchlist</string>
   <string name="cache_watchlist_on">Den här cachen finns i din watchlist.</string>
   <string name="cache_watchlist_not_on">Den här cachen finns inte i din watchlist.</string>
   <string name="cache_watchlist_add">Lägg till i watchlist</string>
   <string name="cache_watchlist_remove">Ta bort från watchlist</string>
   <string name="cache_waypoints">Punkter</string>
+  <plurals name="waypoints">
+      <item quantity="zero">Punkter</item>
+      <item quantity="one">1 Punkt</item>
+      <item quantity="other">%d Punkter</item>
+  </plurals>
   <string name="cache_waypoints_add">Lägg till punkt</string>
   <string name="cache_hint">Tips</string>
   <string name="cache_logs">Loggbok</string>
@@ -564,9 +576,9 @@
   <string name="file_title_searching">Söker</string>
 
   <!-- gpx -->
-  <string name="gpx_import_loading_caches">Läser in cacher från .gpx filen.\nLäst:</string>
-  <string name="gpx_import_loading_waypoints">Läser in punkter från .gpx file\nLäst:</string>
-  <string name="gpx_import_storing">Skriver cacher till databasen\nSparat:</string>
+  <string name="gpx_import_loading_caches">Läser in cacher från .gpx filen</string>
+  <string name="gpx_import_loading_waypoints">Läser in punkter från .gpx file</string>
+  <string name="gpx_import_storing">Skriver cacher till databasen</string>
   <string name="gpx_import_caches_imported">cacher importerade</string>
   <string name="gpx_import_title">Importera GPX</string>
   <string name="gpx_import_title_reading_file">Läser fil</string>
@@ -614,6 +626,7 @@
   <string name="waypoint_done">Klar</string>
   <string name="waypoint_duplicate">Duplicera</string>
   <string name="waypoint_copy_of">Kopia av</string>
+  <string name="waypoint_menu_open_cache">Visa cache</string>
   <string name="search_history">Historik</string>
   <string name="search_history_empty">Inga tidigare målpunkter</string>
   <string name="search_remove_destination">Punkten borttagen</string>
@@ -704,6 +717,8 @@
   <string name="use_compass">Använd kompass</string>
   <string name="destination_select">Välj målpunkt</string>
   <string name="destination_set">Sätt målpunkt</string>
+  <string name="navigation_direct_navigation">Direkt navigering</string>
+  <string name="navigation_target">Mål</string>
 
   <!-- license -->
   <string name="license">Licens</string>
@@ -713,6 +728,8 @@
   <!-- helpers -->
   <string name="helper_manual_title">Manual</string>
   <string name="helper_manual_description">En utförlig manual för c:geo som beskriver alla möjligheter och ger en hel del tips. Manualen finns enbart på engelska.</string>
+  <string name="helper_calendar_title">c:geo kalendertillägg</string>
+  <string name="helper_calendar_description">Gör det möjligt att exportera event till din kalender.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Ett enkelt program för att visa Online kartor men som också medger nedladdning av raster kartor för användning i Offline läge. Stödjer även inspelning av väg (track recording), POI hantering och många andra användbara funktioner.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
@@ -736,4 +753,9 @@
   <string name="go4cache_looking_around">Tittar omkring</string>
   <string name="go4cache_tweeting">Tweeting</string>
   <string name="go4cache_heading_to">På väg mot</string>
+  <plurals name="go4cache_time_minutes">
+	<item quantity="zero">just nu</item>
+	<item quantity="one">en minut sedan</item>
+	<item quantity="other">%d minuter sedan</item>
+  </plurals>
 </resources>

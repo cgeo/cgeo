@@ -1,10 +1,14 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.LogTemplateProvider.LogTemplate;
+import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
+import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.ui.DateDialog;
+import cgeo.geocaching.utils.LogTemplateProvider;
+import cgeo.geocaching.utils.LogTemplateProvider.LogTemplate;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -34,7 +38,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class VisitCacheActivity extends cgLogForm {
+public class VisitCacheActivity extends AbstractActivity implements DateDialog.DateDialogParent {
     static final String EXTRAS_FOUND = "found";
     static final String EXTRAS_TEXT = "text";
     static final String EXTRAS_GEOCODE = "geocode";
@@ -78,8 +82,6 @@ public class VisitCacheActivity extends cgLogForm {
             }
 
             if (cgBase.isEmpty(viewstates) && attempts < 2) {
-                showToast(res.getString(R.string.err_log_load_data_again));
-
                 final LoadDataThread thread;
                 thread = new LoadDataThread();
                 thread.start();
@@ -255,9 +257,9 @@ public class VisitCacheActivity extends cgLogForm {
         cache = app.getCacheByGeocode(geocode);
 
         if (StringUtils.isNotBlank(cache.getName())) {
-            setTitle(res.getString(R.string.log_new_log) + " " + cache.getName());
+            setTitle(res.getString(R.string.log_new_log) + ": " + cache.getName());
         } else {
-            setTitle(res.getString(R.string.log_new_log) + " " + cache.getGeocode().toUpperCase());
+            setTitle(res.getString(R.string.log_new_log) + ": " + cache.getGeocode().toUpperCase());
         }
 
         app.setAction(geocode);
@@ -562,7 +564,7 @@ public class VisitCacheActivity extends cgLogForm {
     private class DateListener implements View.OnClickListener {
 
         public void onClick(View arg0) {
-            final Dialog dateDialog = new cgeodate(VisitCacheActivity.this, VisitCacheActivity.this, date);
+            final Dialog dateDialog = new DateDialog(VisitCacheActivity.this, VisitCacheActivity.this, date);
             dateDialog.setCancelable(true);
             dateDialog.show();
         }
@@ -697,8 +699,8 @@ public class VisitCacheActivity extends cgLogForm {
                 logNow.type = typeSelected;
                 logNow.log = log;
 
-                if (cache != null && null != cache.getLogs()) {
-                    cache.getLogs().add(0, logNow);
+                if (cache != null) {
+                    cache.prependLog(logNow);
                 }
                 app.addLog(geocode, logNow);
 
@@ -709,11 +711,6 @@ public class VisitCacheActivity extends cgLogForm {
                     }
                 }
 
-                if (cache != null) {
-                    app.putCacheInCache(cache);
-                } else {
-                    app.removeCacheFromCache(geocode);
-                }
             }
 
             if (status == StatusCode.NO_ERROR) {

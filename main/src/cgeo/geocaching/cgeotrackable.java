@@ -424,7 +424,7 @@ public class cgeotrackable extends AbstractActivity {
             // for non TB trackables, we should just use what we have in the database
             trackable = cgeoapplication.getInstance().getTrackableByGeocode(geocode);
 
-            if ((trackable == null || trackable.isLoggable() && (!StringUtils.startsWithIgnoreCase(geocode, "GK")))) {
+            if ((trackable == null || trackable.isLoggable()) && !StringUtils.startsWithIgnoreCase(geocode, "GK")) {
                 trackable = cgBase.searchTrackable(geocode, guid, id);
             }
             handler.sendMessage(Message.obtain());
@@ -465,7 +465,9 @@ public class cgeotrackable extends AbstractActivity {
                     });
                 }
 
-                ((TextView) rowView.findViewById(R.id.log)).setText(Html.fromHtml(log.log, new HtmlImage(cgeotrackable.this, null, false, 0, false), null), TextView.BufferType.SPANNABLE);
+                TextView logView = (TextView) rowView.findViewById(R.id.log);
+                logView.setMovementMethod(LinkMovementMethod.getInstance());
+                logView.setText(Html.fromHtml(log.log, new HtmlImage(cgeotrackable.this, null, false, 0, false), null), TextView.BufferType.SPANNABLE);
 
                 ((TextView) rowView.findViewById(R.id.author)).setOnClickListener(new userActions());
                 listView.addView(rowView);
@@ -497,6 +499,7 @@ public class cgeotrackable extends AbstractActivity {
         Intent logTouchIntent = new Intent(this, cgeotouch.class);
         logTouchIntent.putExtra("geocode", trackable.getGeocode().toUpperCase());
         logTouchIntent.putExtra("guid", trackable.getGuid());
+        logTouchIntent.putExtra("trackingcode", trackable.getTrackingcode());
         startActivity(logTouchIntent);
     }
 

@@ -34,6 +34,7 @@ public class cgTrackable implements ILogable {
     private String details = null;
     private String image = null;
     private List<cgLog> logs = new ArrayList<cgLog>();
+    private String trackingcode = null;
 
     public String getUrl() {
         if (StringUtils.startsWithIgnoreCase(geocode, "GK")) {
@@ -212,5 +213,13 @@ public class cgTrackable implements ILogable {
             return false;
         }
         return true;
+    }
+
+    public String getTrackingcode() {
+        return trackingcode;
+    }
+
+    public void setTrackingcode(String trackingcode) {
+        this.trackingcode = trackingcode;
     }
 }

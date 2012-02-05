@@ -73,7 +73,6 @@
   <string name="log_needs_archived">Vyžaduje archiváciu</string>
   <string name="log_discovered">Nájdený</string>
   <string name="log_reviewed">Poznámka kontroly</string>
-  <string name="log_taken">Navštívené</string>
   <string name="log_tb_nothing">Bezo zmeny</string>
   <string name="log_tb_visit">Návšteva</string>
   <string name="log_tb_drop">Nechať tu</string>
@@ -367,6 +366,7 @@
   <string name="init_details">Detaily skrýše</string>
   <string name="init_ratingwanted">Načítať hodnotenie skrýše z GCvote.com</string>
   <string name="init_elevationwanted">Načítať údaje o stúpaní skrýše</string>
+  <string name="init_friendlogswanted">Načítať dodatočnú stránku s logmi od priateľov</string>
   <string name="init_openlastdetailspage">Otvoriť detaily na naposledy použitej stránke</string>
   <string name="init_autoload">Automatické načítanie dlhého popisu</string>
   <string name="init_other">Ďalšie možnosti</string>
@@ -407,6 +407,7 @@
   <string name="init_mapsources_description">Tu môžete vybrať zdroje pre vaše mapy. Je to alternatíva ku Google mapám rôznych OpenStreetMap styles sú dostupné a dokonca offline mapové súbory (podrobnosti nájdete na <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a>).</string>
   <string name="init_mapsource_select">Vyberte zdroj máp</string>
   <string name="init_select_mapfile">…</string>
+  <string name="init_maptrail">Zobraziť stopu na mape</string>
   <string name="init_trackautovisit">Nastaviť trasovateľné predmety automaticky na „navštívené“</string>
   <string name="init_sigautoinsert">Automaticky vložiť podpis</string>
   <string name="init_loaddirectionimg">Ak je to potrebné načítať obrázok zo smerom</string>
@@ -479,6 +480,7 @@
   <string name="cache_waypoints_add">Pridať bod</string>
   <string name="cache_hint">Nápoveda</string>
   <string name="cache_logs">Logbook</string>
+  <string name="cache_logsfriends">Logbook (priatelia)</string>
   <string name="cache_dialog_loading_details">Načítanie detailov skrýše…</string>
   <string name="cache_dialog_loading_details_status_loadpage">Načítanie stránky</string>
   <string name="cache_dialog_loading_details_status_details">Spracovanie detailov</string>
@@ -618,7 +620,7 @@
   <string name="search_clear_history">Zmazať históriu</string>
   <string name="search_history_cleared">História zmazaná</string>
 
-  <string name="waypoint_coordinate_formats_plain">Čistý</string>
+  <string name="waypoint_coordinate_formats_plain">Iba text</string>
 
   <!-- visit -->
   <string name="visit_tweet">informovať o nájdení na Twitteri</string>

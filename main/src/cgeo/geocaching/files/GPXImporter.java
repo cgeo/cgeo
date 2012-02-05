@@ -1,9 +1,9 @@
 package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.activity.Progress;
@@ -26,8 +26,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -44,7 +46,11 @@ public class GPXImporter {
 
     public static final String GPX_FILE_EXTENSION = ".gpx";
     public static final String ZIP_FILE_EXTENSION = ".zip";
-    public static final String WAYPOINTS_FILE_SUFFIX_AND_EXTENSION = "-wpts.gpx";
+    public static final String WAYPOINTS_FILE_SUFFIX = "-wpts";
+    public static final String WAYPOINTS_FILE_SUFFIX_AND_EXTENSION = WAYPOINTS_FILE_SUFFIX + GPX_FILE_EXTENSION;
+
+    private static final List<String> GPX_MIME_TYPES = Arrays.asList(new String[] { "text/xml", "application/xml" });
+    private static final List<String> ZIP_MIME_TYPES = Arrays.asList(new String[] { "application/zip", "application/x-compressed", "application/x-zip-compressed", "application/x-zip", "application/octet-stream" });
 
     private Progress progress = new Progress();
 
@@ -85,19 +91,25 @@ public class GPXImporter {
         final Uri uri = intent.getData();
 
         String mimeType = intent.getType();
-        // if mimetype can't be determined (e.g. for emulators email app), use a default
+        // if mimetype can't be determined (e.g. for emulators email app), derive it from uri file extension
         // contentResolver.getType(uri) doesn't help but throws exception for emulators email app
         //   Permission Denial: reading com.android.email.provider.EmailProvider uri
         // Google search says: there is no solution for this problem
-        // TODO: check if problem occurs with gmail as well
+        // Gmail doesn't work at all, see #967
         if (mimeType == null) {
-            mimeType = "application/zip";
+            if (StringUtils.endsWithIgnoreCase(uri.getPath(), GPX_FILE_EXTENSION)) {
+                mimeType = "application/xml";
+            } else {
+                // if we can't determine a better type, default to zip import
+                // emulator email sends e.g. content://com.android.email.attachmentprovider/1/1/RAW, mimetype=null
+                mimeType = "application/zip";
+            }
         }
 
         Log.i(Settings.tag, "importGPX: " + uri + ", mimetype=" + mimeType);
-        if (StringUtils.equalsIgnoreCase("text/xml", mimeType) || StringUtils.equalsIgnoreCase("application/xml", mimeType)) {
+        if (GPX_MIME_TYPES.contains(mimeType)) {
             new ImportGpxAttachmentThread(uri, contentResolver, listId, importStepHandler, progressHandler).start();
-        } else if (StringUtils.equalsIgnoreCase("application/zip", mimeType)) {
+        } else if (ZIP_MIME_TYPES.contains(mimeType)) {
             new ImportGpxZipAttachmentThread(uri, contentResolver, listId, importStepHandler, progressHandler).start();
         } else {
             importFinished();
@@ -150,8 +162,11 @@ public class GPXImporter {
             int storedCaches = 0;
             for (cgCache cache : caches) {
                 // remove from cache because a cache might be re-imported
-                app.removeCacheFromCache(cache.getGeocode());
+                cgeoapplication.removeCacheFromCache(cache.getGeocode());
                 app.addCacheToSearch(search, cache);
+
+                // save memory, imported caches are typically not used immediately
+                cgeoapplication.removeCacheFromCache(cache.getGeocode());
 
                 if (progressHandler.isCancelled()) {
                     throw new CancellationException();
@@ -213,13 +228,15 @@ public class GPXImporter {
             importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_FILE, R.string.gpx_import_loading_caches, (int) cacheFile.length()));
             Collection<cgCache> caches = parser.parse(cacheFile, progressHandler);
 
-            final File wptsFile = new File(cacheFile.getParentFile(), getWaypointsFileNameForGpxFileName(cacheFile.getName()));
-            if (wptsFile.canRead()) {
-                Log.i(Settings.tag, "Import GPX waypoint file: " + wptsFile.getAbsolutePath());
-                importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_WPT_FILE, R.string.gpx_import_loading_waypoints, (int) wptsFile.length()));
-                caches = parser.parse(wptsFile, progressHandler);
+            final String wptsFilename = getWaypointsFileNameForGpxFile(cacheFile);
+            if (wptsFilename != null) {
+                final File wptsFile = new File(cacheFile.getParentFile(), wptsFilename);
+                if (wptsFile.canRead()) {
+                    Log.i(Settings.tag, "Import GPX waypoint file: " + wptsFile.getAbsolutePath());
+                    importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_READ_WPT_FILE, R.string.gpx_import_loading_waypoints, (int) wptsFile.length()));
+                    caches = parser.parse(wptsFile, progressHandler);
+                }
             }
-
             return caches;
         }
     }
@@ -378,13 +395,29 @@ public class GPXImporter {
         }
     };
 
-    // 1234567.gpx -> 1234567-wpts.gpx
-    static String getWaypointsFileNameForGpxFileName(String name) {
-        if (StringUtils.endsWithIgnoreCase(name, GPX_FILE_EXTENSION) && (StringUtils.length(name) > GPX_FILE_EXTENSION.length())) {
-            return StringUtils.substringBeforeLast(name, ".") + WAYPOINTS_FILE_SUFFIX_AND_EXTENSION;
-        } else {
+    /**
+     * @param gpxfile
+     *            the gpx file
+     * @return the expected file name of the waypoints file
+     */
+    static String getWaypointsFileNameForGpxFile(final File gpxfile) {
+        if (gpxfile == null || !gpxfile.canRead()) {
             return null;
         }
+        final String gpxFileName = gpxfile.getName();
+        File dir = gpxfile.getParentFile();
+        String[] filenameList = dir.list();
+        for (String filename : filenameList) {
+            if (!StringUtils.containsIgnoreCase(filename, WAYPOINTS_FILE_SUFFIX)) {
+                continue;
+            }
+            String expectedGpxFileName = StringUtils.substringBeforeLast(filename, WAYPOINTS_FILE_SUFFIX)
+                    + StringUtils.substringAfterLast(filename, WAYPOINTS_FILE_SUFFIX);
+            if (gpxFileName.equals(expectedGpxFileName)) {
+                return filename;
+            }
+        }
+        return null;
     }
 
     protected void importFinished() {

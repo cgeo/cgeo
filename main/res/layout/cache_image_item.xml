@@ -3,7 +3,9 @@
 		android:layout_width="fill_parent"
 		android:layout_height="wrap_content"
 		android:orientation="vertical" >
-	<RelativeLayout style="@style/separator_horizontal_layout" >
+	<RelativeLayout style="@style/separator_horizontal_layout"
+		android:id="@+id/titleLayout"
+		android:visibility="gone" >
 		<View style="@style/separator_horizontal" />
 		<TextView style="@style/separator_horizontal_headline"
 				android:id="@+id/title"

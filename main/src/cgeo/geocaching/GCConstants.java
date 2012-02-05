@@ -43,9 +43,10 @@ public final class GCConstants {
     public final static Pattern PATTERN_FAVORITE = Pattern.compile("<img src=\"/images/icons/icon_favDelete.png\" alt=\"Remove from your Favorites\" title=\"Remove from your Favorites\" />");
     public final static Pattern PATTERN_FAVORITECOUNT = Pattern.compile("<a id=\"uxFavContainerLink\"[^>]+>[^<]*<div[^<]*<span class=\"favorite-value\">\\D*([0-9]+?)</span>");
     public final static Pattern PATTERN_COUNTLOGS = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p(.+?)</p></span>");
+    public final static Pattern PATTERN_LOGBOOK = Pattern.compile("initalLogs = (\\{.+\\});");
     /** Two groups ! */
     public final static Pattern PATTERN_COUNTLOG = Pattern.compile("<img src=\"/images/icons/([a-z_]+)\\.gif\"[^>]+> (\\d*[,.]?\\d+)");
-    public static final Pattern PATTERN_MEMBERS = Pattern.compile("<p class=\"Warning NoBottomSpacing\">This is a Premium Member Only cache.</p>");
+    public static final Pattern PATTERN_PREMIUMMEMBERS = Pattern.compile("<p class=\"Warning NoBottomSpacing\">This is a Premium Member Only cache.</p>");
     public final static Pattern PATTERN_ATTRIBUTES = Pattern.compile("<h3 class=\"WidgetHeader\">[^<]*<img[^>]+>\\W*Attributes[^<]*</h3>[^<]*<div class=\"WidgetBody\">((?:[^<]*<img src=\"[^\"]+\" alt=\"[^\"]+\"[^>]*>)+?)[^<]*<p");
     /** Two groups ! */
     public final static Pattern PATTERN_ATTRIBUTESINSIDE = Pattern.compile("[^<]*<img src=\"([^\"]+)\" alt=\"([^\"]+?)\"");
@@ -55,17 +56,19 @@ public final class GCConstants {
     public final static Pattern PATTERN_INVENTORYINSIDE = Pattern.compile("[^<]*<li>[^<]*<a href=\"[a-z0-9\\-\\_\\.\\?\\/\\:\\@]*\\/track\\/details\\.aspx\\?guid=([0-9a-z\\-]+)[^\"]*\"[^>]*>[^<]*<img src=\"[^\"]+\"[^>]*>[^<]*<span>([^<]+)<\\/span>[^<]*<\\/a>[^<]*<\\/li>");
     public final static Pattern PATTERN_WATCHLIST = Pattern.compile("icon_stop_watchlist.gif");
 
-    public static final Pattern PATTERN_LOGGEDIN = Pattern.compile("<span class=\"Success\">You are logged in as[^<]*<strong[^>]*>([^<]+)</strong>[^<]*</span>");
-    public static final Pattern PATTERN_LOGGEDIN2 = Pattern.compile("<strong>\\W*Hello,[^<]*<a[^>]+>([^<]+)</a>[^<]*</strong>");
+    // Info box top-right
+    public static final Pattern PATTERN_LOGIN_NAME = Pattern.compile("\"SignedInProfileLink\">([^<]+)</a>");
+    public static final Pattern PATTERN_MEMBER_STATUS = Pattern.compile("<span id=\"ctl00_litPMLevel\" style=\"display: block;\">([^<]+)</span>");
+    public static final Pattern PATTERN_CACHES_FOUND = Pattern.compile("title=\"Caches Found\"\\s*/>\\s*(\\d+)");
+    public static final Pattern PATTERN_AVATAR_IMAGE_PROFILE_PAGE = Pattern.compile("<img src=\"(http://img.geocaching.com/user/avatar/[0-9a-f-]+\\.jpg)\"[^>]*\\salt=\"Avatar\"");
+    public static final Pattern PATTERN_LOGIN_NAME_LOGIN_PAGE = Pattern.compile("<span class=\"Success\">You are logged in as[^<]*<strong[^>]*>([^<]+)</strong>[^<]*</span>");
     public static final Pattern PATTERN_USERLOGGEDIN = Pattern.compile("<strong>Hello, <a href=\"/my/default.aspx\" title=\"View Profile for[^\"]*\" class=\"SignedInProfileLink\">(.*?)</a></strong>");
-    public static final Pattern PATTERN_AVATAR_IMAGE = Pattern.compile("<img src=\"(http://img.geocaching.com/user/avatar/[0-9a-f-]+\\.jpg)\"[^>]*\\salt=\"Avatar\"");
-    public static final Pattern PATTERN_MEMBER_STATUS = Pattern.compile("<p class=\"NoBottomSpacing\" id=\"memberStatus\">([^<]+)<br");
     public static final Pattern PATTERN_CUSTOMDATE = Pattern.compile("<option selected=\"selected\" value=\"([ /Mdy-]+)\">");
 
     /**
      * Patterns for parsing trackables
      */
-    public final static Pattern PATTERN_TRACKABLE_ID = Pattern.compile("<a id=\"ctl00_ContentBody_LogLink\" title=\"[^\"]*\" href=\".*log\\.aspx\\?wid=([a-z0-9\\-]+)\"[^>]*>[^<]*</a>");
+    public final static Pattern PATTERN_TRACKABLE_GUID = Pattern.compile("<a id=\"ctl00_ContentBody_lnkPrint\" title=\"[^\"]*\" href=\".*sheet\\.aspx\\?guid=([a-z0-9\\-]+)\"[^>]*>[^<]*</a>");
     public final static Pattern PATTERN_TRACKABLE_GEOCODE = Pattern.compile("<span id=\"ctl00_ContentBody_BugDetails_BugTBNum\" String=\"[^\"]*\">Use[^<]*<strong>(TB[0-9A-Z]+)[^<]*</strong> to reference this item.[^<]*</span>");
     public final static Pattern PATTERN_TRACKABLE_NAME = Pattern.compile("<h2[^>]*>(?:[^<]*<img[^>]*>)?[^<]*<span id=\"ctl00_ContentBody_lbHeading\">([^<]+)</span>[^<]*</h2>");
     /** Two groups ! */

@@ -37,7 +37,7 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     }
 
     public void testParseTrackableWithoutReleaseDate() {
-        cgTrackable trackable = cgBase.parseTrackable(getFileContent(R.raw.tb14wfv), null);
+        cgTrackable trackable = cgBase.parseTrackable(getFileContent(R.raw.tb14wfv), null, null);
         assertNotNull(trackable);
         assertEquals("The Brickster", trackable.getName());
         assertEquals("Adrian C", trackable.getOwner());
@@ -50,6 +50,6 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
     }
 
     private cgTrackable getTB2R124() {
-        return cgBase.parseTrackable(BaseUtils.replaceWhitespace(getFileContent(R.raw.trackable_tb2r124)), null);
+        return cgBase.parseTrackable(BaseUtils.replaceWhitespace(getFileContent(R.raw.trackable_tb2r124)), null, null);
     }
 }

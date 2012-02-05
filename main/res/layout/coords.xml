@@ -88,7 +88,7 @@
 		                    android:selectAllOnFocus="true" />
 		        </TableRow>
 		    </TableLayout>
-		    <EditText style="@style/edittext"
+        	<EditText style="@style/edittext"
 		            android:layout_width="fill_parent"
 		            android:layout_height="wrap_content"
 		            android:id="@+id/latitude"
@@ -103,6 +103,11 @@
 		            android:layout_height="wrap_content"
 		            android:id="@+id/current"
 		            android:text="@string/waypoint_my_coordinates" />
+		    <Button style="@style/button"
+		            android:layout_width="fill_parent"
+		            android:layout_height="wrap_content"
+		            android:id="@+id/cache"
+		            android:text="@string/waypoint_cache_coordinates" />
 		    <Button style="@style/button"
 		            android:layout_width="fill_parent"
 		            android:layout_height="wrap_content"

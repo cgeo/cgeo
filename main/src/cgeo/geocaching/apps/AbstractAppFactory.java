@@ -5,7 +5,7 @@ import android.view.MenuItem;
 public abstract class AbstractAppFactory {
 
     protected static App getAppFromMenuItem(MenuItem item, final App[] availableApps) {
-        int id = item.getItemId();
+        final int id = item.getItemId();
         for (App app : availableApps) {
             if (app.getId() == id) {
                 return app;

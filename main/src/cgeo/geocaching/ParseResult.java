@@ -3,15 +3,15 @@ package cgeo.geocaching;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Search result including list of caches
  */
 public class ParseResult extends SearchResult {
 
-    public List<cgCache> cacheList = new ArrayList<cgCache>();
+    public Set<cgCache> cacheList = new HashSet<cgCache>();
 
     public ParseResult() {
         super();
@@ -26,7 +26,7 @@ public class ParseResult extends SearchResult {
         cacheList.addAll(parseResult.cacheList);
     }
 
-    public ParseResult(final List<String> geocodes) {
+    public ParseResult(final Set<String> geocodes) {
         super(geocodes);
         cgeoapplication app = cgeoapplication.getInstance();
         for (String geocode : geocodes) {
@@ -37,6 +37,8 @@ public class ParseResult extends SearchResult {
     public static ParseResult filterParseResults(final ParseResult parseResult, final boolean excludeDisabled, final boolean excludeMine, final CacheType cacheType) {
 
         ParseResult result = new ParseResult(parseResult);
+        result.cacheList.clear();
+        result.geocodes.clear();
 
         if (parseResult != null) {
             for (final cgCache cache : parseResult.cacheList) {
@@ -45,8 +47,9 @@ public class ParseResult extends SearchResult {
                         (excludeMine && (cache.isOwn() || cache.isFound())) ||
                         (cacheType != CacheType.ALL && cacheType != cache.getType());
                 if (!excludeCache) {
-                    result.addGeocode(cache.getGeocode());
-                    result.cacheList.add(cache);
+                    if (result.addGeocode(cache.getGeocode())) {
+                        result.cacheList.add(cache);
+                    }
                 }
             }
         }

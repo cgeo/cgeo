@@ -29,6 +29,7 @@ public final class Settings {
     private static final String KEY_ANYLATITUDE = "anylatitude";
     private static final String KEY_PUBLICLOC = "publicloc";
     private static final String KEY_USE_OFFLINEMAPS = "offlinemaps";
+    private static final String KEY_USE_OFFLINEWPMAPS = "offlinewpmaps";
     private static final String KEY_WEB_DEVICE_CODE = "webDeviceCode";
     private static final String KEY_WEBDEVICE_NAME = "webDeviceName";
     private static final String KEY_MAP_LIVE = "maplive";
@@ -75,6 +76,7 @@ public final class Settings {
     private static final String KEY_OPEN_LAST_DETAILS_PAGE = "opendetailslastpage";
     private static final String KEY_LAST_DETAILS_PAGE = "lastdetailspage";
     private static final String KEY_DEBUG_INFORMATIONS = "debuginfos";
+    private static final String KEY_DEFAULT_NAVIGATION_TOOL = "defaultNavigationTool";
 
     private final static int unitsMetric = 1;
     private final static int unitsImperial = 2;
@@ -192,7 +194,7 @@ public final class Settings {
     }
 
     public static String getMemberStatus() {
-        return sharedPrefs.getString(KEY_MEMBER_STATUS, null);
+        return sharedPrefs.getString(KEY_MEMBER_STATUS, "");
     }
 
     public static boolean setMemberStatus(final String memberStatus) {
@@ -313,7 +315,7 @@ public final class Settings {
     }
 
     public static int getLastList() {
-        final int listId = sharedPrefs.getInt(KEY_LAST_USED_LIST, -1);
+        final int listId = sharedPrefs.getInt(KEY_LAST_USED_LIST, StoredList.STANDARD_LIST_ID);
 
         return listId;
     }
@@ -544,6 +546,20 @@ public final class Settings {
         });
     }
 
+    public static boolean isStoreOfflineWpMaps() {
+        return 0 != sharedPrefs.getInt(KEY_USE_OFFLINEWPMAPS, 1);
+    }
+
+    public static void setStoreOfflineWpMaps(final boolean offlineMaps) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putInt(KEY_USE_OFFLINEWPMAPS, offlineMaps ? 1 : 0);
+            }
+        });
+    }
+
     public static boolean isStoreLogImages() {
         return sharedPrefs.getBoolean(KEY_STORE_LOG_IMAGES, false);
     }
@@ -615,6 +631,10 @@ public final class Settings {
     }
 
     public static boolean isFriendLogsWanted() {
+        if (!isLogin()) {
+            // don't show a friends log if the user is anonymous
+            return false;
+        }
         return sharedPrefs.getBoolean(KEY_FRIENDLOGS_WANTED, true);
     }
 
@@ -977,6 +997,20 @@ public final class Settings {
             @Override
             public void edit(Editor edit) {
                 edit.putBoolean(KEY_DEBUG_INFORMATIONS, showDebugInfos);
+            }
+        });
+    }
+
+    public static int getDefaultNavigationTool() {
+        return sharedPrefs.getInt(KEY_DEFAULT_NAVIGATION_TOOL, 0);
+    }
+
+    public static void setDefaultNavigationTool(final int defaultNavigationTool) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putInt(KEY_DEFAULT_NAVIGATION_TOOL, defaultNavigationTool);
             }
         });
     }

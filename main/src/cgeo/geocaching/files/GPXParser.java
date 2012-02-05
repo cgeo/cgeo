@@ -68,7 +68,7 @@ public abstract class GPXParser extends FileParser {
     final protected String namespace;
     final private String version;
 
-    private cgCache cache = new cgCache();
+    private cgCache cache;
     private cgTrackable trackable = new cgTrackable();
     private cgLog log = new cgLog();
 
@@ -237,6 +237,7 @@ public abstract class GPXParser extends FileParser {
 
     @Override
     public Collection<cgCache> parse(final InputStream stream, final CancellableHandler progressHandler) throws IOException, ParserException {
+        resetCache();
         final RootElement root = new RootElement(namespace, "gpx");
         final Element waypoint = root.getChild(namespace, "wpt");
 
@@ -517,10 +518,7 @@ public abstract class GPXParser extends FileParser {
                             boolean attributeActive = Integer.parseInt(attrs.getValue("inc")) != 0;
                             String internalId = CacheAttributeTranslator.getInternalId(attributeId, attributeActive);
                             if (internalId != null) {
-                                if (cache.getAttributes() == null) {
-                                    cache.setAttributes(new ArrayList<String>());
-                                }
-                                cache.getAttributes().add(internalId);
+                                cache.addAttribute(internalId);
                             }
                         }
                     } catch (NumberFormatException e) {
@@ -681,10 +679,7 @@ public abstract class GPXParser extends FileParser {
                 @Override
                 public void end() {
                     if (StringUtils.isNotBlank(log.log)) {
-                        if (cache.getLogs() == null) {
-                            cache.setLogs(new ArrayList<cgLog>());
-                        }
-                        cache.getLogs().add(log);
+                        cache.appendLog(log);
                     }
                 }
             });
@@ -801,6 +796,7 @@ public abstract class GPXParser extends FileParser {
         cmt = null;
 
         cache = new cgCache();
+        cache.setReliableLatLon(true);
         for (int i = 0; i < userData.length; i++) {
             userData[i] = null;
         }

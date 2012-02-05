@@ -128,7 +128,7 @@ public class GC2JVEH extends MockedCache {
     }
 
     @Override
-    public boolean isMembersOnly() {
+    public boolean isPremiumMembersOnly() {
         return true;
     }
 
@@ -148,4 +148,5 @@ public class GC2JVEH extends MockedCache {
         spoilers.add(mockedImage);
         return spoilers;
     }
+
 }

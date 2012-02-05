@@ -432,7 +432,7 @@
   <string name="cache_attributes">Atributos</string>
   <string name="cache_inventory">Inventario</string>
   <string name="cache_log_offline">Registro desconectado</string>
-  <string name="cache_log_images_loading">Cargando imagen de registro …</string>
+  <string name="cache_log_images_loading">Cargando imagen de registro…</string>
   <string name="cache_log_images_title">Imagen de resgistro</string>
   <string name="cache_log_image_default_title">Foto</string>
   <string name="cache_personal_note">Nota personal</string>
