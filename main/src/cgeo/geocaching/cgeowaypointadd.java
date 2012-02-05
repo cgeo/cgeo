@@ -310,6 +310,16 @@ public class cgeowaypointadd extends AbstractActivity {
             if (name.length() == 0) {
                 name = res.getString(R.string.waypoint) + " " + String.valueOf(wpCount + 1);
             }
+            // If own waypoint, check the name for type
+            if (type == WaypointType.OWN) {
+                if (StringUtils.startsWith(name, WaypointType.OWN_FINAL.getL10n())) {
+                    type = WaypointType.OWN_FINAL;
+                } else if (StringUtils.startsWith(name, WaypointType.OWN_STAGE.getL10n())) {
+                    type = WaypointType.OWN_STAGE;
+                } else if (StringUtils.startsWith(name, WaypointType.OWN_PARKING.getL10n())) {
+                    type = WaypointType.OWN_PARKING;
+                }
+            }
             final String note = ((EditText) findViewById(R.id.note)).getText().toString().trim();
 
             final cgWaypoint waypoint = new cgWaypoint(name, type);
