@@ -16,6 +16,7 @@ import cgeo.geocaching.sorting.VisitComparator;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,6 +24,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.text.Spannable;
 import android.text.Spanned;
 import android.text.style.StrikethroughSpan;
@@ -66,7 +68,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
     private boolean sort = true;
     private int checked = 0;
     private boolean selectMode = false;
-    final private static Map<CacheType, Drawable> gcIconDrawables = new HashMap<CacheType, Drawable>();
+    final private static Map<Integer, Drawable> gcIconDrawables = new HashMap<Integer, Drawable>();
     final private Set<CompassMiniView> compasses = new LinkedHashSet<CompassMiniView>();
     final private Set<DistanceView> distances = new LinkedHashSet<DistanceView>();
     final private int[] ratingBcgs = new int[3];
@@ -98,8 +100,28 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         pixelDensity = metrics.density;
 
+        Drawable modifiedCoordinatesMarker = activity.getResources().getDrawable(R.drawable.marker_usermodifiedcoords);
         for (final CacheType cacheType : CacheType.values()) {
-            gcIconDrawables.put(cacheType, activity.getResources().getDrawable(cacheType.markerId));
+            // unmodified icon
+            int hashCode = new HashCodeBuilder()
+                    .append(cacheType)
+                    .append(false)
+                    .toHashCode();
+            gcIconDrawables.put(hashCode, activity.getResources().getDrawable(cacheType.markerId));
+            // icon with flag for user modified coordinates
+            hashCode = new HashCodeBuilder()
+                    .append(cacheType)
+                    .append(true)
+                    .toHashCode();
+            Drawable[] layers = new Drawable[2];
+            layers[0] = activity.getResources().getDrawable(cacheType.markerId);
+            layers[1] = modifiedCoordinatesMarker;
+            LayerDrawable ld = new LayerDrawable(layers);
+            ld.setLayerInset(1,
+                    layers[0].getIntrinsicWidth() - layers[1].getIntrinsicWidth(),
+                    layers[0].getIntrinsicHeight() - layers[1].getIntrinsicHeight(),
+                    0, 0);
+            gcIconDrawables.put(hashCode, ld);
         }
 
         if (Settings.isLightSkin()) {
@@ -458,8 +480,10 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
         }
 
         holder.text.setText(cache.getNameSp(), TextView.BufferType.SPANNABLE);
-        if (gcIconDrawables.containsKey(cache.getType())) { // cache icon
-            holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(cache.getType()), null, null, null);
+        int hashCode = new HashCodeBuilder()
+                .append(cache.getType()).append(cache.hasUserModifiedCoords()).toHashCode();
+        if (gcIconDrawables.containsKey(hashCode)) { // cache icon
+            holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(hashCode), null, null, null);
         } else { // unknown cache type, "mystery" icon
             holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(CacheType.MYSTERY), null, null, null);
         }
