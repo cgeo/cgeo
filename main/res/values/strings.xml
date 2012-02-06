@@ -117,7 +117,6 @@
   
   <!-- copy -->
   <string name="options_context_menu_title">Options</string>
-  <string name="copy_coords">Copy Coordinates</string>
   <string name="copy_desc">Copy Description</string>
   <string name="copy_personalnote">Copy Personal Note</string>
   <string name="copy_hint">Copy Hint</string>
@@ -126,7 +125,6 @@
   <!-- translation -->
   <string name="translate_to_sys_lang">Translate to %s</string>
   <string name="translate_to_english">Translate to English</string>
-  
   
   <!-- errors, warnings, info toasts -->
   <string name="err_none">OK</string>
