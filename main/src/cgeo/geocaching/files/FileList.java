@@ -2,6 +2,7 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.StoredList;
 import cgeo.geocaching.activity.AbstractListActivity;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -29,8 +30,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
     private ProgressDialog waitDialog = null;
     private loadFiles searchingThread = null;
     private boolean endSearching = false;
-    private int listId = 1;
-
+    private int listId = StoredList.STANDARD_LIST_ID;
     final private Handler changeWaitDialogHandler = new Handler() {
         private String searchInfo;
 
@@ -105,8 +105,8 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
         if (extras != null) {
             listId = extras.getInt("list");
         }
-        if (listId <= 0) {
-            listId = 1;
+        if (listId <= StoredList.TEMPORARY_LIST_ID) {
+            listId = StoredList.STANDARD_LIST_ID;
         }
 
         setAdapter();

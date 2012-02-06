@@ -1,9 +1,9 @@
 package cgeo.geocaching.maps;
 
-import cgeo.geocaching.ParseResult;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.StoredList;
 import cgeo.geocaching.UpdateDirectionCallback;
 import cgeo.geocaching.UpdateLocationCallback;
 import cgeo.geocaching.cgBase;
@@ -16,6 +16,7 @@ import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -114,7 +115,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
     private WaypointType waypointTypeIntent = null;
     private int[] mapStateIntent = null;
     // status data
-    private ParseResult search = null;
+    private SearchResult search = null;
     private String token = null;
     private boolean noMapTokenShowed = false;
     // map status data
@@ -689,12 +690,11 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 mapView.repaintRequired(overlayCaches);
                 return true;
             case MENU_AS_LIST: {
-                final SearchResult search = new SearchResult();
+                final SearchResult searchResult = new SearchResult();
                 search.totalCnt = caches.size();
                 for (cgCache cache : caches) {
-                    search.addGeocode(cache.getGeocode());
+                    searchResult.addCache(cache);
                 }
-                app.addSearch(caches, 0);
                 cgeocaches.startActivityMap(activity, search);
                 return true;
             }
@@ -1136,19 +1136,17 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                //LeeB - I think this can be done better:
-                //1. fetch and draw(in another thread) caches from the db (fast? db read will be the slow bit)
-                //2. fetch and draw(in another thread) and then insert into the db caches from geocaching.com - dont draw/insert if exist in memory?
-
-                // stage 1 - pull and render from the DB only
+                // stage 1 - pull and render from the DB only for live map
 
                 if (fromDetailIntent || searchIntent != null) {
-                    search = new ParseResult(searchIntent);
+                    // map started from another activity
+                    search = new SearchResult(searchIntent);
                 } else {
+                    // live map
                     if (!live || !Settings.isLiveMap()) {
-                        search = new ParseResult(app.getStoredInViewport(centerLat, centerLon, spanLat, spanLon, Settings.getCacheType()));
+                        search = new SearchResult(app.getStoredInViewport(centerLat, centerLon, spanLat, spanLon, Settings.getCacheType()));
                     } else {
-                        search = new ParseResult(app.getCachedInViewport(centerLat, centerLon, spanLat, spanLon, Settings.getCacheType()));
+                        search = new SearchResult(app.getCachedInViewport(centerLat, centerLon, spanLat, spanLon, Settings.getCacheType()));
                     }
                 }
 
@@ -1163,7 +1161,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                caches = app.getCaches(search, true);
+                caches = search.getCachesFromSearchResult(LoadFlags.LOADWAYPOINTS);
 
                 //if in live map and stored caches are found / disables are also shown.
                 if (live && Settings.isLiveMap()) {
@@ -1290,7 +1288,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                caches = app.getCaches(search, centerLat, centerLon, spanLat, spanLon);
+                if (search != null) {
+                    caches = search.getCachesFromSearchResult(LoadFlags.LOADCACHEORDB);
+                }
 
                 if (stop) {
                     displayHandler.sendEmptyMessage(UPDATE_TITLE);
@@ -1621,7 +1621,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                             break;
                         }
 
-                        cgBase.storeCache(activity, null, geocode, 1, handler);
+                        cgBase.storeCache(activity, null, geocode, StoredList.STANDARD_LIST_ID, handler);
                     }
                 } catch (Exception e) {
                     Log.e(Settings.tag, "cgeocaches.LoadDetails.run: " + e.toString());
@@ -1680,7 +1680,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 if (geocodeCenter != null) {
                     viewport = app.getBounds(geocodeCenter);
                 } else {
-                    viewport = app.getBounds(searchCenter);
+                    if (searchCenter != null) {
+                        viewport = app.getBounds(searchCenter.getGeocodes());
+                    }
                 }
 
                 if (viewport == null || viewport.size() < 5) {

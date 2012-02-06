@@ -3,6 +3,10 @@ package cgeo.geocaching;
 import cgeo.geocaching.cgData.StorageLocation;
 import cgeo.geocaching.utils.LeastRecentlyUsedCache;
 
+import org.apache.commons.lang3.StringUtils;
+
+import android.util.Log;
+
 /**
  * Cache for Caches. Every cache is stored in memory while c:geo is active to
  * speed up the app and to minimize network request - which are slow.
@@ -27,7 +31,7 @@ public class CacheCache {
         return instance;
     }
 
-    public void removeAll() {
+    public void removeAllFromCache() {
         cachesCache.clear();
     }
 
@@ -35,27 +39,33 @@ public class CacheCache {
      * @param geocode
      *            Geocode of the cache to remove from the cache
      */
-    public void removeCacheFromCache(final String geocode) {
-        if (geocode != null && cachesCache.containsKey(geocode)) {
-            cachesCache.remove(geocode);
+    public void removeCacheFromCache(final String geocode, boolean dump) {
+        if (StringUtils.isBlank(geocode)) {
+            throw new IllegalArgumentException("geocode must not be empty");
+        }
+        cachesCache.remove(geocode);
+        if (dump) {
+            dump();
         }
     }
 
     /**
+     * "Store" a cache in the CacheCache. If the cache is already in the CacheCache the cache gets replaced.
+     *
      * @param cache
-     *            Cache to "store" in the cache
+     *            Cache
+     *
      */
     public void putCacheInCache(final cgCache cache) {
-        if (cache == null || cache.getGeocode() == null) {
-            return;
+        if (cache == null) {
+            throw new IllegalArgumentException("cache must not be null");
         }
-
-        if (cachesCache.containsKey(cache.getGeocode())) {
-            cachesCache.remove(cache.getGeocode());
+        if (StringUtils.isBlank(cache.getGeocode())) {
+            throw new IllegalArgumentException("geocode must not be empty");
         }
-
         cache.addStorageLocation(StorageLocation.CACHE);
         cachesCache.put(cache.getGeocode(), cache);
+        dump();
     }
 
     /**
@@ -64,11 +74,24 @@ public class CacheCache {
      * @return cache if found, null else
      */
     public cgCache getCacheFromCache(final String geocode) {
-        if (geocode != null && cachesCache.containsKey(geocode)) {
-            return cachesCache.get(geocode);
+        if (StringUtils.isBlank(geocode)) {
+            throw new IllegalArgumentException("geocode must not be empty");
         }
+        return cachesCache.get(geocode);
+    }
 
-        return null;
+    private void dump() {
+        // Log.d(Settings.tag, this.toString());
+        Log.d(Settings.tag, "CacheCache size = " + cachesCache.size());
+    }
+
+    @Override
+    public String toString() {
+        String result = "";
+        for (String geocode : cachesCache.keySet()) {
+            result += geocode + " ";
+        }
+        return result;
     }
 
 }

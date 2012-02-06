@@ -974,6 +974,8 @@
   <!-- changelog -->
   <string name="changelog">\n
     <b>next release</b>\n
+    · fix: deletion of outdated caches did not work
+    · changed internal caching causing a better overall performance
     · new: changed markers in the map with additional informations for stored caches:\n
        Personal Note available, Modified coordinates, non-reliable coordinates (orange circle)\n
     · fix: caches with modified coordinates are displayed at the modified coords and not at the original coords\n

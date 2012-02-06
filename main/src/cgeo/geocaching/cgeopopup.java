@@ -4,6 +4,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteRating;
@@ -199,7 +200,7 @@ public class cgeopopup extends AbstractActivity {
 
         app.setAction(geocode);
 
-        cache = app.getCacheByGeocode(geocode);
+        cache = app.loadCache(geocode, LoadFlags.LOADCACHEORDB);
 
         if (cache == null) {
             showToast(res.getString(R.string.err_detail_cache_find));
@@ -586,7 +587,7 @@ public class cgeopopup extends AbstractActivity {
 
         @Override
         public void run() {
-            cgBase.dropCache(app, cache, handler);
+            cgBase.dropCache(cache, handler);
         }
     }
 

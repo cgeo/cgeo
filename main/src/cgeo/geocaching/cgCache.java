@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.GCConnector;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -45,7 +46,7 @@ public class cgCache implements ICache {
     private long updated = 0;
     private long detailedUpdate = 0;
     private long visitedDate = 0;
-    private int listId = 0;
+    private int listId = StoredList.TEMPORARY_LIST_ID;
     private boolean detailed = false;
     private String geocode = "";
     private String cacheId = "";
@@ -136,7 +137,7 @@ public class cgCache implements ICache {
         if (visitedDate == 0) {
             visitedDate = other.getVisitedDate();
         }
-        if (listId == 0) {
+        if (listId == StoredList.TEMPORARY_LIST_ID) {
             listId = other.listId;
         }
         if (StringUtils.isBlank(geocode)) {
@@ -1146,7 +1147,7 @@ public class cgCache implements ICache {
         if (waypoint.isUserDefined()) {
             waypoints.remove(index);
             cgeoapplication.getInstance().deleteWaypoint(waypoint.getId());
-            cgeoapplication.removeCacheFromCache(geocode);
+            cgeoapplication.getInstance().removeCache(geocode, EnumSet.of(RemoveFlag.REMOVECACHE));
             return true;
         }
         return false;
@@ -1260,7 +1261,8 @@ public class cgCache implements ICache {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        return isEqualTo((cgCache) obj);
+        // just compare the geocode even if that is not what "equals" normaly does
+        return geocode != null ? geocode.compareTo(((cgCache) obj).geocode) == 0 : false;
     }
 
     public void store(Activity activity, CancellableHandler handler) {

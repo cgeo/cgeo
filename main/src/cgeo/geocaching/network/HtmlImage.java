@@ -2,6 +2,7 @@ package cgeo.geocaching.network;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.StoredList;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.files.LocalStorage;
@@ -193,7 +194,7 @@ public class HtmlImage implements Html.ImageGetter {
 
     private Bitmap loadCachedImage(final File file) {
         if (file.exists()) {
-            if (listId > 0 || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000))) {
+            if (listId >= StoredList.STANDARD_LIST_ID || file.lastModified() > (new Date().getTime() - (24 * 60 * 60 * 1000))) {
                 setSampleSize(file);
                 return BitmapFactory.decodeFile(file.getPath(), bfOptions);
             }
