@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractListActivity {
+    private static final int MSG_SEARCH_WHOLE_SD_CARD = 1;
 
     private List<File> files = new ArrayList<File>();
     private T adapter = null;
@@ -29,15 +30,36 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
     private loadFiles searchingThread = null;
     private boolean endSearching = false;
     private int listId = 1;
+
     final private Handler changeWaitDialogHandler = new Handler() {
+        private String searchInfo;
 
         @Override
         public void handleMessage(Message msg) {
             if (msg.obj != null && waitDialog != null) {
-                waitDialog.setMessage(res.getString(R.string.file_searching_in) + " " + (String) msg.obj);
+                if (searchInfo == null) {
+                    searchInfo = res.getString(R.string.file_searching_in) + " ";
+                }
+                if (msg.what == MSG_SEARCH_WHOLE_SD_CARD) {
+                    searchInfo = String.format(res.getString(R.string.file_searching_sdcard_in), getDefaultFolders());
+                }
+                waitDialog.setMessage(searchInfo + (String) msg.obj);
             }
         }
+
+        private String getDefaultFolders() {
+            StringBuilder sb = new StringBuilder();
+            for (File f : getBaseFolders()) {
+                String fName = f.getPath();
+                if (sb.length() > 0) {
+                    sb.append("\n");
+                }
+                sb.append(fName);
+            }
+            return sb.toString();
+        }
     };
+
     final private Handler loadFilesHandler = new Handler() {
 
         @Override
@@ -162,6 +184,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
                         }
                     }
                     if (!loaded) {
+                        changeWaitDialogHandler.sendMessage(Message.obtain(changeWaitDialogHandler, MSG_SEARCH_WHOLE_SD_CARD, Environment.getExternalStorageDirectory().getName()));
                         listDir(list, Environment.getExternalStorageDirectory());
                     }
                 } else {
@@ -171,14 +194,12 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
                 Log.e(Settings.tag, "cgFileList.loadFiles.run: " + e.toString());
             }
 
-            final Message msg = new Message();
-            msg.obj = "loaded directories";
-            changeWaitDialogHandler.sendMessage(msg);
+            changeWaitDialogHandler.sendMessage(Message.obtain(changeWaitDialogHandler, 0, "loaded directories"));
 
             files.addAll(list);
             list.clear();
 
-            loadFilesHandler.sendMessage(new Message());
+            loadFilesHandler.sendMessage(Message.obtain(loadFilesHandler));
         }
     }
 
@@ -209,9 +230,7 @@ public abstract class FileList<T extends ArrayAdapter<File>> extends AbstractLis
                     if (name.length() > 16) {
                         name = name.substring(0, 14) + "...";
                     }
-                    final Message msg = new Message();
-                    msg.obj = name;
-                    changeWaitDialogHandler.sendMessage(msg);
+                    changeWaitDialogHandler.sendMessage(Message.obtain(changeWaitDialogHandler, 0, name));
 
                     listDir(result, file); // go deeper
                 }

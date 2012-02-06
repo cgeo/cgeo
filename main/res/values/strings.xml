@@ -587,6 +587,7 @@
       
   <!-- file list base -->
   <string name="file_searching_in">Searching for files\nin</string>
+  <string name="file_searching_sdcard_in">No files found in default folders:\n%1$s\n\nSearching whole SD card for files:\n</string>
   <string name="file_list_no_files">c:geo found no appropriate files.</string>
   <string name="file_searching">Searching for matching files</string>
   <string name="file_title_searching">Searching</string>
@@ -626,10 +627,11 @@
   <!-- waypoint -->
   <string name="waypoint">Waypoint</string>
   <string name="waypoint_title">Waypoint</string>
+  <string name="waypoint_cache_coordinates">Cache coordinates</string>
   <string name="waypoint_custom">Custom</string>
   <string name="waypoint_my_coordinates">My coordinates</string>
-  <string name="waypoint_bearing">Bearing</string>
-  <string name="waypoint_distance">Distance</string>
+  <string name="waypoint_bearing">Bearing in °</string>
+  <string name="waypoint_distance">Distance in m</string>
   <string name="waypoint_name">Name</string>
   <string name="waypoint_edit">Edit</string>
   <string name="waypoint_delete">Delete</string>

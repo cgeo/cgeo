@@ -262,12 +262,12 @@ public class cgeo extends AbstractActivity {
         return true;
     }
 
-    private static boolean isIntentAvailable(Context context, String intent) {
+    public static boolean isIntentAvailable(Context context, String intent) {
         final PackageManager packageManager = context.getPackageManager();
         final List<ResolveInfo> list = packageManager.queryIntentActivities(
                 new Intent(intent), PackageManager.MATCH_DEFAULT_ONLY);
 
-        return list.size() > 0;
+        return CollectionUtils.isNotEmpty(list);
     }
 
     @Override

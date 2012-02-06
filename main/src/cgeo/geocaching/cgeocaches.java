@@ -130,6 +130,7 @@ public class cgeocaches extends AbstractListActivity {
     private static final int MENU_DEFAULT_NAVIGATION = 66;
     private static final int SUBMENU_FILTER_ATTRIBUTES = 67;
     private static final int SUBMENU_FILTER_STATE = 68;
+    private static final int MENU_NAVIGATION = 69;
 
     private String action = null;
     private CacheListType type = null;
@@ -1138,8 +1139,7 @@ public class cgeocaches extends AbstractListActivity {
 
         if (cache.getCoords() != null) {
             menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication(this).getName());
-            final SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
-            NavigationAppFactory.addMenuItems(subMenu, this);
+            menu.add(1, MENU_NAVIGATION, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
             addVisitMenu(menu, cache);
             menu.add(0, MENU_CACHE_DETAILS, 0, res.getString(R.string.cache_menu_details));
         }
@@ -1207,6 +1207,12 @@ public class cgeocaches extends AbstractListActivity {
             final SearchResult singleSearch = cgBase.searchByGeocode(cache.getGeocode(), null, 0, false, null);
             NavigationAppFactory.startDefaultNavigationApplication(geo, this, cache, singleSearch, null, null);
             return true;
+        } else if (id == MENU_NAVIGATION) {
+            // create a search for a single cache (as if in details view)
+            final cgCache cache = getCacheFromAdapter(adapterInfo);
+            final SearchResult singleSearch = cgBase.searchByGeocode(cache.getGeocode(), null, 0, false, null);
+            NavigationAppFactory.showNavigationMenu(geo, this, cache, singleSearch, null, null);
+            return true;
         } else if (id == MENU_LOG_VISIT) {
             return getCacheFromAdapter(adapterInfo).logVisit(this);
         } else if (id == MENU_CACHE_DETAILS) {
@@ -1255,12 +1261,6 @@ public class cgeocaches extends AbstractListActivity {
         if (adapterInfo != null) {
             // create a search for a single cache (as if in details view)
             final cgCache cache = getCacheFromAdapter(adapterInfo);
-            final SearchResult singleSearch = cgBase.searchByGeocode(cache.getGeocode(), null, 0, false, null);
-
-            if (NavigationAppFactory.onMenuItemSelected(item, geo, this,
-                    cache, singleSearch, null, null)) {
-                return true;
-            }
 
             int logType = id - MENU_LOG_VISIT_OFFLINE;
             cache.logOffline(this, LogType.getById(logType));

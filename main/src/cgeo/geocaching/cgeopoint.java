@@ -19,7 +19,6 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.view.View.OnCreateContextMenuListener;
 import android.view.ViewGroup;
@@ -144,9 +143,7 @@ public class cgeopoint extends AbstractActivity {
             @Override
             public void onCreateContextMenu(ContextMenu menu, View v,
                     ContextMenuInfo menuInfo) {
-                final SubMenu subMenu = menu.addSubMenu(Menu.NONE, CONTEXT_MENU_NAVIGATE, Menu.NONE, res.getString(R.string.cache_menu_navigate));
-                NavigationAppFactory.addMenuItems(subMenu, cgeopoint.this);
-
+                menu.add(Menu.NONE, CONTEXT_MENU_NAVIGATE, Menu.NONE, res.getString(R.string.cache_menu_navigate));
                 menu.add(Menu.NONE, CONTEXT_MENU_EDIT_WAYPOINT, Menu.NONE, R.string.waypoint_edit);
                 menu.add(Menu.NONE, CONTEXT_MENU_DELETE_WAYPOINT, Menu.NONE, R.string.waypoint_delete);
             }
@@ -162,6 +159,10 @@ public class cgeopoint extends AbstractActivity {
         switch (item.getItemId()) {
             case CONTEXT_MENU_NAVIGATE:
                 contextMenuItemPosition = position;
+                if (destination instanceof cgDestination) {
+                    NavigationAppFactory.showNavigationMenu(geo, this, null, null, null, ((cgDestination) destination).getCoords());
+                    return true;
+                }
                 break;
 
             case CONTEXT_MENU_DELETE_WAYPOINT:
@@ -177,11 +178,7 @@ public class cgeopoint extends AbstractActivity {
                     lonButton.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
                 }
                 return true;
-
             default:
-                if (destination instanceof cgDestination) {
-                    return NavigationAppFactory.onMenuItemSelected(item, geo, this, null, null, null, ((cgDestination) destination).getCoords());
-                }
         }
 
         return super.onContextItemSelected(item);
@@ -285,7 +282,7 @@ public class cgeopoint extends AbstractActivity {
             if (latButton.getText().length() > 0 && lonButton.getText().length() > 0) {
                 gp = new Geopoint(latButton.getText().toString() + " " + lonButton.getText().toString());
             }
-            cgeocoords coordsDialog = new cgeocoords(cgeopoint.this, gp, geo);
+            cgeocoords coordsDialog = new cgeocoords(cgeopoint.this, null, gp, geo);
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
                 @Override
@@ -303,8 +300,7 @@ public class cgeopoint extends AbstractActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication(this).getName()).setIcon(android.R.drawable.ic_menu_compass); // default navigation tool
 
-        SubMenu subMenu = menu.addSubMenu(1, MENU_NAVIGATE, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
-        NavigationAppFactory.addMenuItems(subMenu, this);
+        menu.add(0, MENU_NAVIGATE, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_more);
 
         menu.add(0, MENU_CACHES_AROUND, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
 
@@ -362,8 +358,11 @@ public class cgeopoint extends AbstractActivity {
                 clearHistory();
                 return true;
 
+            case MENU_NAVIGATE:
+                NavigationAppFactory.showNavigationMenu(geo, this, null, null, null, coords);
+                return true;
             default:
-                return NavigationAppFactory.onMenuItemSelected(item, geo, this, null, null, null, coords);
+                return false;
         }
     }
 

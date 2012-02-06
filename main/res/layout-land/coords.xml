@@ -88,26 +88,35 @@
 		                    android:selectAllOnFocus="true" />
 		        </TableRow>
 		    </TableLayout>
-        	<EditText style="@style/edittext"
-		            android:layout_width="fill_parent"
-		            android:layout_height="wrap_content"
-		            android:id="@+id/latitude"
-		            android:hint="@string/latitude" />
-		    <EditText style="@style/edittext"
-		            android:layout_width="fill_parent"
-		            android:layout_height="wrap_content"
-		            android:id="@+id/longitude"
-		            android:hint="@string/longitude" />
-		    <Button style="@style/button"
-		            android:layout_width="fill_parent"
-		            android:layout_height="wrap_content"
-		            android:id="@+id/current"
-		            android:text="@string/waypoint_my_coordinates" />
-		    <Button style="@style/button"
-		            android:layout_width="fill_parent"
-		            android:layout_height="wrap_content"
-		            android:id="@+id/cache"
-		            android:text="@string/waypoint_cache_coordinates" />
+	        <EditText
+	            android:id="@+id/latitude"
+	            style="@style/edittext"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:hint="@string/latitude" />
+	        <EditText
+	            android:id="@+id/longitude"
+	            style="@style/edittext"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:hint="@string/longitude" />
+		    <LinearLayout
+		        android:id="@+id/linearLayout2"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content" >
+			    <Button style="@style/button"
+			            android:layout_width="fill_parent"
+			            android:layout_height="wrap_content"
+			            android:id="@+id/current"
+			            android:layout_weight="1"
+			            android:text="@string/waypoint_my_coordinates" />
+			    <Button style="@style/button"
+			            android:layout_width="fill_parent"
+			            android:layout_height="wrap_content"
+			            android:id="@+id/cache"
+			            android:layout_weight="1"
+			            android:text="@string/waypoint_cache_coordinates" />
+		    </LinearLayout>
 		    <Button style="@style/button"
 		            android:layout_width="fill_parent"
 		            android:layout_height="wrap_content"
