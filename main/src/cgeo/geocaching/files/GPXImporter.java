@@ -30,6 +30,7 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.zip.ZipEntry;
@@ -163,7 +164,7 @@ public class GPXImporter {
             int storedCaches = 0;
             for (cgCache cache : caches) {
                 search.addCache(cache);
-                if (app.saveCache(cache, SaveFlag.SAVEDB)) {
+                if (app.saveCache(cache, EnumSet.of(SaveFlag.SAVEDB))) {
                     storedCaches++;
                 }
 

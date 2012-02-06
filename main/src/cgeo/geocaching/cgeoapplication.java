@@ -222,18 +222,22 @@ public class cgeoapplication extends Application {
         databaseCleaned = true;
     }
 
+    /** {@link cgData#isThere(String, String, boolean, boolean)} */
     public boolean isThere(String geocode, String guid, boolean detailed, boolean checkTime) {
         return storage.isThere(geocode, guid, detailed, checkTime);
     }
 
+    /** {@link cgData#isOffline(String, String)} */
     public boolean isOffline(String geocode, String guid) {
         return storage.isOffline(geocode, guid);
     }
 
+    /** {@link cgData#getGeocodeForGuid(String)} */
     public String getGeocode(String guid) {
         return storage.getGeocodeForGuid(guid);
     }
 
+    /** {@link cgData#getCacheidForGeocode(String)} */
     public String getCacheid(String geocode) {
         return storage.getCacheidForGeocode(geocode);
     }
@@ -262,6 +266,7 @@ public class cgeoapplication extends Application {
         return trackable;
     }
 
+    /** {@link cgData#allDetailedThere()} */
     public String[] geocodesInCache() {
         return storage.allDetailedThere();
     }
@@ -277,19 +282,12 @@ public class cgeoapplication extends Application {
         return getBounds(geocodeList);
     }
 
-    public List<Number> getBounds(final SearchResult search) {
-        if (search == null) {
-            return null;
-        }
-
-        return getBounds(search.getGeocodes());
-    }
-
+    /** {@link cgData#getBounds(Set)} */
     public List<Number> getBounds(final Set<String> geocodes) {
         return storage.getBounds(geocodes);
     }
 
-    /** Retrieve all stored caches for a specified list */
+    /** {@link cgData#loadBatchOfStoredGeocodes(boolean, Geopoint, CacheType, int)} */
     public SearchResult getBatchOfStoredCaches(final boolean detailedOnly, final Geopoint coords, final CacheType cacheType, final int listId) {
         final Set<String> geocodes = storage.loadBatchOfStoredGeocodes(detailedOnly, coords, cacheType, listId);
         final SearchResult search = new SearchResult(geocodes);
@@ -297,6 +295,7 @@ public class cgeoapplication extends Application {
         return search;
     }
 
+    /** {@link cgData#loadHistoryOfSearchedLocations()} */
     public List<cgDestination> getHistoryOfSearchedLocations() {
         return storage.loadHistoryOfSearchedLocations();
     }
@@ -309,58 +308,67 @@ public class cgeoapplication extends Application {
         return search;
     }
 
-    /** Retrieve all stored caches from DB */
+    /** {@link cgData#loadCachedInViewport(Long, Long, Long, Long, CacheType)} */
     public SearchResult getCachedInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
         final Set<String> geocodes = storage.loadCachedInViewport(centerLat, centerLon, spanLat, spanLon, cacheType);
         return new SearchResult(geocodes);
     }
 
-    /** Retrieve stored caches from DB with listId >= 1 */
+    /** {@link cgData#loadStoredInViewport(Long, Long, Long, Long, CacheType)} */
     public SearchResult getStoredInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
         final Set<String> geocodes = storage.loadStoredInViewport(centerLat, centerLon, spanLat, spanLon, cacheType);
         return new SearchResult(geocodes);
     }
 
+    /** {@link cgData#getAllStoredCachesCount(boolean, CacheType, Integer)} */
     public int getAllStoredCachesCount(final boolean detailedOnly, final CacheType cacheType, final Integer list) {
         return storage.getAllStoredCachesCount(detailedOnly, cacheType, list);
     }
 
+    /** {@link cgData#getAllHistoricCachesCount()} */
     public int getAllHistoricCachesCount() {
         return storage.getAllHistoricCachesCount();
     }
 
+    /** {@link cgData#moveToList(String, int)} */
     public void markStored(String geocode, int listId) {
         storage.moveToList(geocode, listId);
     }
 
+    /** {@link cgData#moveToList(String, int)} */
     public void markDropped(String geocode) {
         storage.moveToList(geocode, StoredList.TEMPORARY_LIST_ID);
     }
 
+    /** {@link cgData#markFound(String)} */
     public boolean markFound(String geocode) {
         return storage.markFound(geocode);
     }
 
+    /** {@link cgData#clearSearchedDestinations()} */
     public boolean clearSearchedDestinations() {
         return storage.clearSearchedDestinations();
     }
 
+    /** {@link cgData#saveSearchedDestination(cgDestination)} */
     public boolean saveSearchedDestination(cgDestination destination) {
         return storage.saveSearchedDestination(destination);
     }
 
+    /** {@link cgData#saveWaypoints(String, List, boolean)} */
     public boolean saveWaypoints(String geocode, List<cgWaypoint> waypoints, boolean drop) {
         return storage.saveWaypoints(geocode, waypoints, drop);
     }
 
     public boolean saveOwnWaypoint(int id, String geocode, cgWaypoint waypoint) {
         if (storage.saveOwnWaypoint(id, geocode, waypoint)) {
-            this.removeCache(geocode, RemoveFlag.REMOVECACHEONLY);
+            this.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVECACHE));
             return true;
         }
         return false;
     }
 
+    /** {@link cgData#deleteWaypoint(int)} */
     public boolean deleteWaypoint(int id) {
         return storage.deleteWaypoint(id);
     }
@@ -372,23 +380,27 @@ public class cgeoapplication extends Application {
         return storage.saveInventory("---", list);
     }
 
-    /** @see cgData.dropList **/
+    /** {@link cgData#dropList(int)} **/
     public void dropList(int listId) {
         storage.dropList(listId);
     }
 
+    /** {@link cgData#loadInventory(String)} */
     public List<cgTrackable> loadInventory(String geocode) {
         return storage.loadInventory(geocode);
     }
 
+    /** {@link cgData#loadLogCounts(String)} */
     public Map<LogType, Integer> loadLogCounts(String geocode) {
         return storage.loadLogCounts(geocode);
     }
 
+    /** {@link cgData#loadSpoilers(String)} */
     public List<cgImage> loadSpoilers(String geocode) {
         return storage.loadSpoilers(geocode);
     }
 
+    /** {@link cgData#loadWaypoint(int)} */
     public cgWaypoint loadWaypoint(int id) {
         return storage.loadWaypoint(id);
     }
@@ -434,81 +446,99 @@ public class cgeoapplication extends Application {
         return lastCoords;
     }
 
+    /** {@link cgData#saveLogOffline(String, Date, LogType, String)} */
     public boolean saveLogOffline(String geocode, Date date, LogType logtype, String log) {
         return storage.saveLogOffline(geocode, date, logtype, log);
     }
 
+    /** {@link cgData#loadLogOffline(String)} */
     public cgLog loadLogOffline(String geocode) {
         return storage.loadLogOffline(geocode);
     }
 
+    /** {@link cgData#clearLogOffline(String)} */
     public void clearLogOffline(String geocode) {
         storage.clearLogOffline(geocode);
     }
 
+    /** {@link cgData#setVisitDate(String, long)} */
     public void saveVisitDate(String geocode) {
         storage.setVisitDate(geocode, System.currentTimeMillis());
     }
 
+    /** {@link cgData#setVisitDate(String, long)} */
     public void clearVisitDate(String geocode) {
         storage.setVisitDate(geocode, 0);
     }
 
+    /** {@link cgData#getLists(Resources)} */
     public List<StoredList> getLists() {
         return storage.getLists(getResources());
     }
 
+    /** {@link cgData#getList(int, Resources))} */
     public StoredList getList(int id) {
         return storage.getList(id, getResources());
     }
 
+    /** {@link cgData#createList(String)} */
     public int createList(String title) {
         return storage.createList(title);
     }
 
+    /** {@link cgData#renameList(int, String)} */
     public int renameList(final int listId, final String title) {
         return storage.renameList(listId, title);
     }
 
+    /** {@link cgData#removeList(int)} */
     public boolean removeList(int id) {
         return storage.removeList(id);
     }
 
+    /** {@link cgData#removeSearchedDestination(cgDestination)} */
     public boolean removeSearchedDestinations(cgDestination destination) {
         return storage.removeSearchedDestination(destination);
     }
 
+    /** {@link cgData#moveToList(String, int)} */
     public void moveToList(String geocode, int listId) {
         storage.moveToList(geocode, listId);
     }
 
+    /** {@link cgData#getCacheDescription(String)} */
     public String getCacheDescription(String geocode) {
         return storage.getCacheDescription(geocode);
     }
 
-
+    /** {@link cgData#loadCaches} */
     public cgCache loadCache(final String geocode, final EnumSet<LoadFlag> loadFlags) {
         return storage.loadCache(geocode, loadFlags);
     }
 
+    /** {@link cgData#loadCaches} */
     public Set<cgCache> loadCaches(final Set<String> geocodes, final EnumSet<LoadFlag> loadFlags) {
         return storage.loadCaches(geocodes, loadFlags);
     }
 
+    /** {@link cgData#loadCaches} */
     public Set<cgCache> loadCaches(Long centerLat, Long centerLon, Long spanLat, Long spanLon, final EnumSet<LoadFlag> loadFlags) {
         return storage.loadCaches(null, centerLat, centerLon, spanLat, spanLon, loadFlags);
     }
 
-    public boolean saveCache(cgCache cache, LoadFlags.SaveFlag saveFlag) {
-        return storage.saveCache(cache, saveFlag);
+    /** {@link cgData#saveCache} */
+    public boolean saveCache(cgCache cache, EnumSet<LoadFlags.SaveFlag> saveFlags) {
+        return storage.saveCache(cache, saveFlags);
     }
 
-    public void removeCache(String geocode, LoadFlags.RemoveFlag removeFlag) {
-        storage.removeCache(geocode, removeFlag);
+    /** {@link cgData#removeCache} */
+    public void removeCache(String geocode, EnumSet<LoadFlags.RemoveFlag> removeFlags) {
+        storage.removeCache(geocode, removeFlags);
     }
 
-    public void removeCaches(final Set<String> geocodes, LoadFlags.RemoveFlag removeFlag) {
-        storage.removeCaches(geocodes, removeFlag);
+    /** {@link cgData#removeCaches} */
+    public void removeCaches(final Set<String> geocodes, EnumSet<LoadFlags.RemoveFlag> removeFlags) {
+        storage.removeCaches(geocodes, removeFlags);
     }
 
 }

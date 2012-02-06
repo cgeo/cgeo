@@ -22,6 +22,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.EnumSet;
+
 public class cgeowaypoint extends AbstractActivity {
 
     private static final int MENU_ID_NAVIGATION = 0;
@@ -311,7 +313,7 @@ public class cgeowaypoint extends AbstractActivity {
         public void onClick(View arg0) {
             if (app.deleteWaypoint(id)) {
                 StaticMapsProvider.removeWpStaticMaps(id, geocode);
-                app.removeCache(geocode, RemoveFlag.REMOVECACHEONLY);
+                app.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVECACHE));
 
                 finish();
                 return;

@@ -67,7 +67,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         SearchResult search = (SearchResult) importStepHandler.messages.get(3).obj;
         assertEquals(Collections.singletonList("GC31J2H"), new ArrayList<String>(search.getGeocodes()));
 
-        cgCache cache = cgeoapplication.getInstance().loadCache("GC31J2H", LoadFlags.LOADCACHEONLY);
+        cgCache cache = cgeoapplication.getInstance().loadCache("GC31J2H", LoadFlags.LOADCACHEORDB);
         assertCacheProperties(cache);
 
         // can't assert, for whatever reason the waypoints are remembered in DB
@@ -96,7 +96,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         SearchResult search = (SearchResult) importStepHandler.messages.get(4).obj;
         assertEquals(Collections.singletonList("GC31J2H"), new ArrayList<String>(search.getGeocodes()));
 
-        cgCache cache = cgeoapplication.getInstance().loadCache("GC31J2H", LoadFlags.LOADCACHEONLY);
+        cgCache cache = cgeoapplication.getInstance().loadCache("GC31J2H", LoadFlags.LOADCACHEORDB);
         assertCacheProperties(cache);
         assertEquals(2, cache.getWaypoints().size());
     }
@@ -119,7 +119,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         SearchResult search = (SearchResult) importStepHandler.messages.get(3).obj;
         assertEquals(Collections.singletonList("OC5952"), new ArrayList<String>(search.getGeocodes()));
 
-        cgCache cache = cgeoapplication.getInstance().loadCache("OC5952", LoadFlags.LOADCACHEONLY);
+        cgCache cache = cgeoapplication.getInstance().loadCache("OC5952", LoadFlags.LOADCACHEORDB);
         assertCacheProperties(cache);
     }
 
@@ -160,7 +160,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         SearchResult search = (SearchResult) importStepHandler.messages.get(3).obj;
         assertEquals(Collections.singletonList("GC31J2H"), new ArrayList<String>(search.getGeocodes()));
 
-        cgCache cache = cgeoapplication.getInstance().loadCache("GC31J2H", LoadFlags.LOADCACHEONLY);
+        cgCache cache = cgeoapplication.getInstance().loadCache("GC31J2H", LoadFlags.LOADCACHEORDB);
         assertCacheProperties(cache);
 
         // can't assert, for whatever reason the waypoints are remembered in DB
@@ -178,7 +178,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         SearchResult search = (SearchResult) importStepHandler.messages.get(4).obj;
         assertEquals(Collections.singletonList("GC31J2H"), new ArrayList<String>(search.getGeocodes()));
 
-        cgCache cache = cgeoapplication.getInstance().loadCache("GC31J2H", LoadFlags.LOADCACHEONLY);
+        cgCache cache = cgeoapplication.getInstance().loadCache("GC31J2H", LoadFlags.LOADCACHEORDB);
         assertCacheProperties(cache);
         assertEquals(1, cache.getWaypoints().size()); // this is the original pocket query result without test waypoint
     }
@@ -203,7 +203,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         SearchResult search = (SearchResult) importStepHandler.messages.get(4).obj;
         assertEquals(Collections.singletonList("GC31J2H"), new ArrayList<String>(search.getGeocodes()));
 
-        cgCache cache = cgeoapplication.getInstance().loadCache("GC31J2H", LoadFlags.LOADCACHEONLY);
+        cgCache cache = cgeoapplication.getInstance().loadCache("GC31J2H", LoadFlags.LOADCACHEORDB);
         assertCacheProperties(cache);
         assertEquals(1, cache.getWaypoints().size()); // this is the original pocket query result without test waypoint
     }

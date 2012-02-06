@@ -39,6 +39,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.List;
 
 public class VisitCacheActivity extends AbstractActivity implements DateDialog.DateDialogParent {
@@ -257,7 +258,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
             geocode = app.getGeocode(cacheid);
         }
 
-        cache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOADCACHEONLY);
+        cache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOADCACHEORDB);
 
         if (StringUtils.isNotBlank(cache.getName())) {
             setTitle(res.getString(R.string.log_new_log) + ": " + cache.getName());
@@ -715,9 +716,9 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                 }
 
                 if (cache != null) {
-                    app.saveCache(cache, SaveFlag.SAVECACHEONLY);
+                    app.saveCache(cache, EnumSet.of(SaveFlag.SAVECACHE));
                 } else {
-                    app.removeCache(geocode, RemoveFlag.REMOVECACHEONLY);
+                    app.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVECACHE));
                 }
             }
 

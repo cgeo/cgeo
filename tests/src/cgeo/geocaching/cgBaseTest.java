@@ -93,7 +93,7 @@ public class cgBaseTest extends AndroidTestCase {
             // to get the same results we have to use the date format used when the mocked data was created
             Settings.setGcCustomDate(mockedCache.getDateFormat());
             SearchResult searchResult = cgBase.parseCacheFromText(mockedCache.getData(), 0, null);
-            cgCache parsedCache = searchResult.getFirstCacheFromResult(LoadFlags.LOADCACHEONLY);
+            cgCache parsedCache = searchResult.getFirstCacheFromResult(LoadFlags.LOADCACHEORDB);
             cgBaseTest.testCompareCaches(mockedCache, parsedCache);
         }
         Settings.setGcCustomDate(gcCustomDate);
@@ -162,6 +162,6 @@ public class cgBaseTest extends AndroidTestCase {
         // to get the same results we have to use the date format used when the mocked data was created
         Settings.setGcCustomDate(mockedCache.getDateFormat());
         final SearchResult searchResult = cgBase.parseCacheFromText(mockedCache.getData(), 0, null);
-        return searchResult.getFirstCacheFromResult(LoadFlags.LOADCACHEONLY);
+        return searchResult.getFirstCacheFromResult(LoadFlags.LOADCACHEORDB);
     }
 }

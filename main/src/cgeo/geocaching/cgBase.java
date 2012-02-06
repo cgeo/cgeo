@@ -91,6 +91,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -682,7 +683,7 @@ public class cgBase {
         if (Settings.getLoadDirImg())
         {
             for (String geocode : searchResult.getGeocodes()) {
-                cgCache oneCache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOADCACHEONLY);
+                cgCache oneCache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOADCACHEORDB);
                 if (oneCache.getCoords() == null && StringUtils.isNotEmpty(oneCache.getDirectionImg())) {
                     DirectionImage.getDrawable(oneCache.getGeocode(), oneCache.getDirectionImg());
                 }
@@ -700,7 +701,7 @@ public class cgBase {
                     if (MapUtils.isNotEmpty(ratings)) {
                         // save found cache coordinates
                         for (String geocode : searchResult.getGeocodes()) {
-                            cgCache cache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOADCACHEONLY);
+                            cgCache cache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOADCACHEORDB);
                             if (ratings.containsKey(cache.getGuid())) {
                                 GCVoteRating rating = ratings.get(cache.getGuid());
 
@@ -801,7 +802,7 @@ public class cgBase {
                         }
                     }
                 } else {
-                    Log.w(Settings.tag, "There are no caches in viewport");
+                    Log.w(Settings.tag, "There are no caches in viewport. Probably the viewport is to big");
                 }
                 searchResult.totalCnt = searchResult.getGeocodes().size();
             }
@@ -815,7 +816,7 @@ public class cgBase {
     public static SearchResult parseCache(final String page, final int listId, final CancellableHandler handler) {
         final SearchResult searchResult = parseCacheFromText(page, listId, handler);
         if (searchResult != null && !searchResult.getGeocodes().isEmpty()) {
-            final cgCache cache = searchResult.getFirstCacheFromResult(LoadFlags.LOADCACHEONLY);
+            final cgCache cache = searchResult.getFirstCacheFromResult(LoadFlags.LOADCACHEORDB);
             getExtraOnlineInfo(cache, page, handler);
             cache.setUpdated(System.currentTimeMillis());
             cache.setDetailedUpdate(cache.getUpdated());
@@ -826,7 +827,7 @@ public class cgBase {
             // save full detailed caches
             sendLoadProgressDetail(handler, R.string.cache_dialog_offline_save_message);
             cache.setListId(StoredList.TEMPORARY_LIST_ID);
-            cgeoapplication.getInstance().saveCache(cache, SaveFlag.SAVEDB);
+            cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVEDB));
         }
         return searchResult;
     }
@@ -2312,7 +2313,7 @@ public class cgBase {
     };
 
     public static void postTweetCache(String geocode) {
-        final cgCache cache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOADCACHEONLY);
+        final cgCache cache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOADCACHEORDB);
         String status;
         final String url = cache.getUrl();
         if (url.length() >= 100) {
@@ -2662,13 +2663,13 @@ public class cgBase {
                 // only reload the cache, if it was already stored or has not all details (by checking the description)
                 if (origCache.getListId() >= StoredList.STANDARD_LIST_ID || StringUtils.isBlank(origCache.getDescription())) {
                     final SearchResult search = searchByGeocode(origCache.getGeocode(), null, listId, false, null);
-                    cache = search.getFirstCacheFromResult(LoadFlags.LOADCACHEONLY);
+                    cache = search.getFirstCacheFromResult(LoadFlags.LOADCACHEORDB);
                 } else {
                     cache = origCache;
                 }
             } else if (StringUtils.isNotBlank(geocode)) {
                 final SearchResult search = searchByGeocode(geocode, null, listId, false, null);
-                cache = search.getFirstCacheFromResult(LoadFlags.LOADCACHEONLY);
+                cache = search.getFirstCacheFromResult(LoadFlags.LOADCACHEORDB);
             } else {
                 cache = null;
             }
@@ -2730,7 +2731,7 @@ public class cgBase {
             }
 
             cache.setListId(listId);
-            cgeoapplication.getInstance().saveCache(cache, SaveFlag.SAVEDB);
+            cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVEDB));
 
             if (handler != null) {
                 handler.sendMessage(new Message());
@@ -2743,7 +2744,7 @@ public class cgBase {
     public static void dropCache(final cgCache cache, final Handler handler) {
         try {
             cgeoapplication.getInstance().markDropped(cache.getGeocode());
-            cgeoapplication.getInstance().removeCache(cache.getGeocode(), RemoveFlag.REMOVECACHEONLY);
+            cgeoapplication.getInstance().removeCache(cache.getGeocode(), EnumSet.of(RemoveFlag.REMOVECACHE));
 
             handler.sendMessage(new Message());
         } catch (Exception e) {

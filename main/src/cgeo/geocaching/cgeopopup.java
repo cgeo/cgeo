@@ -200,7 +200,7 @@ public class cgeopopup extends AbstractActivity {
 
         app.setAction(geocode);
 
-        cache = app.loadCache(geocode, LoadFlags.LOADCACHEONLY);
+        cache = app.loadCache(geocode, LoadFlags.LOADCACHEORDB);
 
         if (cache == null) {
             showToast(res.getString(R.string.err_detail_cache_find));

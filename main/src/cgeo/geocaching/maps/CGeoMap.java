@@ -17,7 +17,6 @@ import cgeo.geocaching.cgeocaches;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -62,7 +61,6 @@ import android.widget.TextView;
 import android.widget.ViewSwitcher.ViewFactory;
 
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -1138,11 +1136,13 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                // stage 1 - pull and render from the DB only
+                // stage 1 - pull and render from the DB only for live map
 
                 if (fromDetailIntent || searchIntent != null) {
+                    // map started from another activity
                     search = new SearchResult(searchIntent);
                 } else {
+                    // live map
                     if (!live || !Settings.isLiveMap()) {
                         search = new SearchResult(app.getStoredInViewport(centerLat, centerLon, spanLat, spanLon, Settings.getCacheType()));
                     } else {
@@ -1161,7 +1161,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                caches = search.getCachesFromSearchResult(EnumSet.of(LoadFlag.LOADWAYPOINTS));
+                caches = search.getCachesFromSearchResult(LoadFlags.LOADWAYPOINTS);
 
                 //if in live map and stored caches are found / disables are also shown.
                 if (live && Settings.isLiveMap()) {
@@ -1289,7 +1289,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 }
 
                 if (search != null) {
-                    caches = search.getCachesFromSearchResult(LoadFlags.LOADCACHEONLY);
+                    caches = search.getCachesFromSearchResult(LoadFlags.LOADCACHEORDB);
                 }
 
                 if (stop) {
@@ -1680,7 +1680,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 if (geocodeCenter != null) {
                     viewport = app.getBounds(geocodeCenter);
                 } else {
-                    viewport = app.getBounds(searchCenter);
+                    if (searchCenter != null) {
+                        viewport = app.getBounds(searchCenter.getGeocodes());
+                    }
                 }
 
                 if (viewport == null || viewport.size() < 5) {

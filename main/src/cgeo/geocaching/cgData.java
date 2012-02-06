@@ -1118,6 +1118,8 @@ public class cgData {
         return false;
     }
 
+    /** Cache stored in DB with listId >= 1 */
+    // TODO Simply like getCacheDescription()
     public boolean isOffline(String geocode, String guid) {
         init();
 
@@ -1220,18 +1222,21 @@ public class cgData {
      *
      * @return true = cache saved successfully to the CacheCache/DB
      */
-    public boolean saveCache(cgCache cache, LoadFlags.SaveFlag saveFlag) {
+    public boolean saveCache(cgCache cache, EnumSet<LoadFlags.SaveFlag> saveFlags) {
         if (cache == null) {
-            return false;
+            throw new IllegalArgumentException("cache must not be null");
         }
 
         // merge always with data already stored in the CacheCache or DB
-        if (saveFlag == SaveFlag.SAVECACHEONLY) {
+        if (saveFlags.contains(SaveFlag.SAVECACHE)) {
             cache.gatherMissingFrom(cacheCache.getCacheFromCache(cache.getGeocode()));
             cacheCache.putCacheInCache(cache);
+        }
+
+        if (!saveFlags.contains(SaveFlag.SAVEDB)) {
             return true;
         }
-        boolean updateRequired = !cache.gatherMissingFrom(loadCache(cache.getGeocode(), LoadFlags.LOADALL));
+        boolean updateRequired = !cache.gatherMissingFrom(loadCache(cache.getGeocode(), LoadFlags.LOADALLDBONLY));
 
         // only save a cache to the database if
         // - the cache is detailed
@@ -1750,7 +1755,7 @@ public class cgData {
             return null;
         }
 
-        Set<cgCache> caches = loadCaches(geocodes, LoadFlags.LOADDBMINIMAL);
+        Set<cgCache> caches = loadCaches(geocodes, LoadFlags.LOADCACHEORDB);
 
         Double latMin = 360.0;
         Double latMax = 0.0;
@@ -1781,7 +1786,7 @@ public class cgData {
      */
     public cgCache loadCache(final String geocode, final EnumSet<LoadFlag> loadFlags) {
         if (StringUtils.isBlank(geocode)) {
-            return null;
+            throw new IllegalArgumentException("geocode must not be empty");
         }
 
         Set<String> geocodes = new HashSet<String>();
@@ -1806,20 +1811,47 @@ public class cgData {
         }
 
         Set<cgCache> result = new HashSet<cgCache>();
-        // "preload" the result with the data from the CacheCache
-        for (String geocode : geocodes) {
-            cgCache cache = cacheCache.getCacheFromCache(geocode);
-            if (cache != null) {
-                result.add(cache);
+        Set<String> remaining = new HashSet<String>(geocodes);
+
+        if (loadFlags.contains(LoadFlag.LOADCACHEBEFORE)) {
+            for (String geocode : new HashSet<String>(remaining)) {
+                cgCache cache = cacheCache.getCacheFromCache(geocode);
+                if (cache != null) {
+                    result.add(cache);
+                    remaining.remove(cache.getGeocode());
+                }
             }
         }
-        if (!loadFlags.contains(LoadFlag.LOADCACHEONLY)) {
-            Set<cgCache> cachesFromDB = loadCaches(geocodes, null, null, null, null, loadFlags);
-            // replace/add caches from the DB to the result
+
+        if (loadFlags.contains(LoadFlag.LOADDBMINIMAL) ||
+                loadFlags.contains(LoadFlag.LOADATTRIBUTES) ||
+                loadFlags.contains(LoadFlag.LOADWAYPOINTS) ||
+                loadFlags.contains(LoadFlag.LOADSPOILERS) ||
+                loadFlags.contains(LoadFlag.LOADLOGS) ||
+                loadFlags.contains(LoadFlag.LOADINVENTORY) ||
+                loadFlags.contains(LoadFlag.LOADOFFLINELOG)) {
+
+            Set<cgCache> cachesFromDB = loadCaches(remaining, null, null, null, null, loadFlags);
             if (cachesFromDB != null) {
-                result.removeAll(cachesFromDB);
                 result.addAll(cachesFromDB);
+                for (cgCache cache : cachesFromDB) {
+                    remaining.remove(cache.getGeocode());
+                }
             }
+        }
+
+        if (loadFlags.contains(LoadFlag.LOADCACHEAFTER)) {
+            for (String geocode : new HashSet<String>(remaining)) {
+                cgCache cache = cacheCache.getCacheFromCache(geocode);
+                if (cache != null) {
+                    result.add(cache);
+                    remaining.remove(cache.getGeocode());
+                }
+            }
+        }
+
+        if (remaining.size() >= 1) {
+            Log.e(Settings.tag, "cgData.loadCaches(" + remaining.toString() + " failed");
         }
         return result;
     }
@@ -1849,6 +1881,8 @@ public class cgData {
                 && spanLon != null) {
             throw new IllegalArgumentException("Please use only one parameter");
         }
+
+        Log.d(Settings.tag, "cgData.loadCaches(" + geocodes.toString() + ") from DB");
 
         init();
 
@@ -2564,6 +2598,7 @@ public class cgData {
         return count;
     }
 
+    /** Retrieve all stored caches for a specified list */
     public Set<String> loadBatchOfStoredGeocodes(final boolean detailedOnly, final Geopoint coords, final CacheType cacheType, final int listId) {
         init();
 
@@ -2666,10 +2701,12 @@ public class cgData {
         return geocodes;
     }
 
+    /** Retrieve all stored caches from DB */
     public Set<String> loadCachedInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
         return loadInViewport(false, centerLat, centerLon, spanLat, spanLon, cacheType);
     }
 
+    /** Retrieve stored caches from DB with listId >= 1 */
     public Set<String> loadStoredInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
         return loadInViewport(true, centerLat, centerLon, spanLat, spanLon, cacheType);
     }
@@ -2750,7 +2787,7 @@ public class cgData {
                 cursor.close();
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.getOfflineInViewport: " + e.toString());
+            Log.e(Settings.tag, "cgData.loadInViewport: " + e.toString());
         }
 
         return geocodes;
@@ -2899,7 +2936,7 @@ public class cgData {
             if (size > 0) {
                 Log.d(Settings.tag, "Database clean: removing " + size + " geocaches from listId=0");
 
-                removeCaches(geocodes, RemoveFlag.REMOVECACHEONLY);
+                removeCaches(geocodes, EnumSet.of(RemoveFlag.REMOVECACHE));
                 databaseRW.execSQL("delete from " + dbTableCaches + " where " + cgData.whereGeocodeIn(geocodes));
             }
 
@@ -2937,10 +2974,10 @@ public class cgData {
         cacheCache.removeAllFromCache();
     }
 
-    public void removeCache(final String geocode, LoadFlags.RemoveFlag removeFlag) {
+    public void removeCache(final String geocode, EnumSet<LoadFlags.RemoveFlag> removeFlags) {
         Set<String> geocodes = new HashSet<String>();
         geocodes.add(geocode);
-        removeCaches(geocodes, removeFlag);
+        removeCaches(geocodes, removeFlags);
     }
 
     /**
@@ -2949,45 +2986,46 @@ public class cgData {
      * @param geocodes
      *            list of geocodes to drop from cache
      */
-    public void removeCaches(final Set<String> geocodes, LoadFlags.RemoveFlag removeFlag) {
+    public void removeCaches(final Set<String> geocodes, EnumSet<LoadFlags.RemoveFlag> removeFlags) {
         if (CollectionUtils.isEmpty(geocodes)) {
             return;
         }
 
         init();
 
-        for (final String geocode : geocodes) {
-            cacheCache.removeCacheFromCache(geocode);
-        }
-        if (removeFlag == RemoveFlag.REMOVECACHEONLY) {
-            return;
-        }
-
-        // Drop caches from the database
-        final ArrayList<String> quotedGeocodes = new ArrayList<String>(geocodes.size());
-        for (final String geocode : geocodes) {
-            quotedGeocodes.add('"' + geocode + '"');
-        }
-        final String geocodeList = StringUtils.join(quotedGeocodes.toArray(), ',');
-        final String baseWhereClause = "geocode in (" + geocodeList + ")";
-        databaseRW.beginTransaction();
-        try {
-            databaseRW.delete(dbTableCaches, baseWhereClause, null);
-            databaseRW.delete(dbTableAttributes, baseWhereClause, null);
-            databaseRW.delete(dbTableSpoilers, baseWhereClause, null);
-            databaseRW.delete(dbTableLogs, baseWhereClause, null);
-            databaseRW.delete(dbTableLogCount, baseWhereClause, null);
-            databaseRW.delete(dbTableLogsOffline, baseWhereClause, null);
-            databaseRW.delete(dbTableWaypoints, baseWhereClause + " and type <> \"own\"", null);
-            databaseRW.delete(dbTableTrackables, baseWhereClause, null);
-            databaseRW.setTransactionSuccessful();
-        } finally {
-            databaseRW.endTransaction();
+        if (removeFlags.contains(RemoveFlag.REMOVECACHE)) {
+            for (final String geocode : geocodes) {
+                cacheCache.removeCacheFromCache(geocode, true);
+            }
         }
 
-        // Delete cache directories
-        for (final String geocode : geocodes) {
-            cgBase.deleteDirectory(LocalStorage.getStorageDir(geocode));
+        if (removeFlags.contains(RemoveFlag.REMOVEDB)) {
+            // Drop caches from the database
+            final ArrayList<String> quotedGeocodes = new ArrayList<String>(geocodes.size());
+            for (final String geocode : geocodes) {
+                quotedGeocodes.add('"' + geocode + '"');
+            }
+            final String geocodeList = StringUtils.join(quotedGeocodes.toArray(), ',');
+            final String baseWhereClause = "geocode in (" + geocodeList + ")";
+            databaseRW.beginTransaction();
+            try {
+                databaseRW.delete(dbTableCaches, baseWhereClause, null);
+                databaseRW.delete(dbTableAttributes, baseWhereClause, null);
+                databaseRW.delete(dbTableSpoilers, baseWhereClause, null);
+                databaseRW.delete(dbTableLogs, baseWhereClause, null);
+                databaseRW.delete(dbTableLogCount, baseWhereClause, null);
+                databaseRW.delete(dbTableLogsOffline, baseWhereClause, null);
+                databaseRW.delete(dbTableWaypoints, baseWhereClause + " and type <> \"own\"", null);
+                databaseRW.delete(dbTableTrackables, baseWhereClause, null);
+                databaseRW.setTransactionSuccessful();
+            } finally {
+                databaseRW.endTransaction();
+            }
+
+            // Delete cache directories
+            for (final String geocode : geocodes) {
+                cgBase.deleteDirectory(LocalStorage.getStorageDir(geocode));
+            }
         }
     }
 

@@ -88,6 +88,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -181,7 +182,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
         // TODO Why can it happen that search is not null? onCreate should be called only once and it is not set before.
         if (search != null) {
-            cache = search.getFirstCacheFromResult(LoadFlags.LOADALL);
+            cache = search.getFirstCacheFromResult(LoadFlags.LOADALLDBONLY);
             if (cache != null && cache.getGeocode() != null) {
                 geocode = cache.getGeocode();
             }
@@ -593,7 +594,7 @@ public class CacheDetailActivity extends AbstractActivity {
             return;
         }
 
-        cache = search.getFirstCacheFromResult(LoadFlags.LOADALL);
+        cache = search.getFirstCacheFromResult(LoadFlags.LOADALLDBONLY);
 
         if (cache == null) {
             progress.dismiss();
@@ -1585,7 +1586,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     storeThread = null;
 
                     try {
-                        cache = search.getFirstCacheFromResult(LoadFlags.LOADALL); // reload cache details
+                        cache = search.getFirstCacheFromResult(LoadFlags.LOADALLDBONLY); // reload cache details
                     } catch (Exception e) {
                         showToast(res.getString(R.string.err_store_failed));
 
@@ -1612,7 +1613,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     refreshThread = null;
 
                     try {
-                        cache = search.getFirstCacheFromResult(LoadFlags.LOADALL); // reload cache details
+                        cache = search.getFirstCacheFromResult(LoadFlags.LOADALLDBONLY); // reload cache details
                     } catch (Exception e) {
                         showToast(res.getString(R.string.err_refresh_failed));
 
@@ -1699,7 +1700,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             @Override
             public void run() {
-                app.removeCache(cache.getGeocode(), RemoveFlag.REMOVECACHEONLY);
+                app.removeCache(cache.getGeocode(), EnumSet.of(RemoveFlag.REMOVECACHE));
                 search = cgBase.searchByGeocode(cache.getGeocode(), null, 0, true, handler);
 
                 handler.sendEmptyMessage(0);

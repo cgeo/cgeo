@@ -1147,7 +1147,7 @@ public class cgCache implements ICache {
         if (waypoint.isUserDefined()) {
             waypoints.remove(index);
             cgeoapplication.getInstance().deleteWaypoint(waypoint.getId());
-            cgeoapplication.getInstance().removeCache(geocode, RemoveFlag.REMOVECACHEONLY);
+            cgeoapplication.getInstance().removeCache(geocode, EnumSet.of(RemoveFlag.REMOVECACHE));
             return true;
         }
         return false;
@@ -1261,7 +1261,8 @@ public class cgCache implements ICache {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        return isEqualTo((cgCache) obj);
+        // just compare the geocode even if that is not what "equals" normaly does
+        return geocode != null ? geocode.compareTo(((cgCache) obj).geocode) == 0 : false;
     }
 
     public void store(Activity activity, CancellableHandler handler) {
