@@ -3,6 +3,7 @@ package cgeo.geocaching.files;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.StaticMapsProvider;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.IAbstractActivity;
@@ -163,7 +164,11 @@ public class GPXImporter {
             for (cgCache cache : caches) {
                 // remove from cache because a cache might be re-imported
                 cgeoapplication.removeCacheFromCache(cache.getGeocode());
-                app.addCacheToSearch(search, cache);
+                boolean success = app.addCacheToSearch(search, cache);
+                if (success) {
+                    // How to get Activity or display size from app
+                    StaticMapsProvider.downloadMaps(cache, app);
+                }
 
                 // save memory, imported caches are typically not used immediately
                 cgeoapplication.removeCacheFromCache(cache.getGeocode());
