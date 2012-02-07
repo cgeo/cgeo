@@ -104,7 +104,7 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
     }
 
     public boolean isUserDefined() {
-        return waypointType == WaypointType.OWN;
+        return waypointType.isOwn;
     }
 
     public void setUserDefined() {
@@ -115,14 +115,17 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
     private int computeOrder() {
         switch (waypointType) {
             case PARKING:
+            case OWN_PARKING:
                 return -1;
             case TRAILHEAD:
                 return 1;
             case STAGE: // puzzles and stages with same value
+            case OWN_STAGE:
                 return 2;
             case PUZZLE:
                 return 2;
             case FINAL:
+            case OWN_FINAL:
                 return 3;
             case OWN:
                 return 4;

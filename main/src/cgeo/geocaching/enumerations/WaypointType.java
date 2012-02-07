@@ -13,24 +13,31 @@ import java.util.Map;
  * @author koem
  */
 public enum WaypointType {
-    FINAL("flag", R.string.wp_final, R.drawable.waypoint_flag),
-    OWN("own", R.string.wp_waypoint, R.drawable.waypoint_waypoint),
-    PARKING("pkg", R.string.wp_pkg, R.drawable.waypoint_pkg),
-    PUZZLE("puzzle", R.string.wp_puzzle, R.drawable.waypoint_puzzle),
-    STAGE("stage", R.string.wp_stage, R.drawable.waypoint_stage),
-    TRAILHEAD("trailhead", R.string.wp_trailhead, R.drawable.waypoint_trailhead),
-    WAYPOINT("waypoint", R.string.wp_waypoint, R.drawable.waypoint_waypoint);
+    FINAL("flag", R.string.wp_final, R.drawable.waypoint_flag, false, true),
+    OWN("own", R.string.wp_waypoint, R.drawable.waypoint_waypoint, true, false),
+    PARKING("pkg", R.string.wp_pkg, R.drawable.waypoint_pkg, false, false),
+    PUZZLE("puzzle", R.string.wp_puzzle, R.drawable.waypoint_puzzle, false, false),
+    STAGE("stage", R.string.wp_stage, R.drawable.waypoint_stage, false, false),
+    TRAILHEAD("trailhead", R.string.wp_trailhead, R.drawable.waypoint_trailhead, false, false),
+    WAYPOINT("waypoint", R.string.wp_waypoint, R.drawable.waypoint_waypoint, false, false),
+    OWN_PARKING("own_pkg", R.string.wp_pkg, R.drawable.waypoint_pkg, true, false),
+    OWN_FINAL("own_flag", R.string.wp_final, R.drawable.waypoint_flag, true, true),
+    OWN_STAGE("own_stage", R.string.wp_stage, R.drawable.waypoint_stage, true, false);
 
     public final String id;
     public final int stringId;
     private String l10n; // not final because the locale can be changed
     public final int markerId;
+    public final boolean isOwn;
+    public final boolean isFinal;
 
-    private WaypointType(String id, int stringId, int markerId) {
+    private WaypointType(String id, int stringId, int markerId, boolean isOwn, boolean isFinal) {
         this.id = id;
         this.stringId = stringId;
         setL10n();
         this.markerId = markerId;
+        this.isOwn = isOwn;
+        this.isFinal = isFinal;
     }
 
     /**
@@ -43,7 +50,7 @@ public enum WaypointType {
         final HashMap<String, WaypointType> mapping = new HashMap<String, WaypointType>();
         for (WaypointType wt : values()) {
             mapping.put(wt.id, wt);
-            if (wt != WaypointType.OWN) {
+            if (!wt.isOwn) {
                 ALL_TYPES_EXCEPT_OWN.put(wt, wt.getL10n());
             }
         }
