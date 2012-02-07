@@ -7,6 +7,7 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.activity.Progress;
+import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.utils.CancellableHandler;
 
 import org.apache.commons.lang3.StringUtils;
@@ -29,6 +30,7 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.zip.ZipEntry;
@@ -138,7 +140,7 @@ public class GPXImporter {
                 SearchResult search = storeParsedCaches(caches);
                 Log.i(Settings.tag, "Imported successfully " + caches.size() + " caches.");
 
-                importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED, SearchResult.getCount(search), 0, search));
+                importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED, search.getCount(), 0, search));
             } catch (IOException e) {
                 Log.i(Settings.tag, "Importing caches failed - error reading data: " + e.getMessage());
                 importStepHandler.sendMessage(importStepHandler.obtainMessage(IMPORT_STEP_FINISHED_WITH_ERROR, R.string.gpx_import_error_io, 0, e.getLocalizedMessage()));
@@ -161,17 +163,15 @@ public class GPXImporter {
             final cgeoapplication app = cgeoapplication.getInstance();
             int storedCaches = 0;
             for (cgCache cache : caches) {
-                // remove from cache because a cache might be re-imported
-                cgeoapplication.removeCacheFromCache(cache.getGeocode());
-                app.addCacheToSearch(search, cache);
-
-                // save memory, imported caches are typically not used immediately
-                cgeoapplication.removeCacheFromCache(cache.getGeocode());
+                search.addCache(cache);
+                if (app.saveCache(cache, EnumSet.of(SaveFlag.SAVEDB))) {
+                    storedCaches++;
+                }
 
                 if (progressHandler.isCancelled()) {
                     throw new CancellationException();
                 }
-                progressHandler.sendMessage(progressHandler.obtainMessage(0, ++storedCaches, 0));
+                progressHandler.sendMessage(progressHandler.obtainMessage(0, storedCaches, 0));
             }
             return search;
         }

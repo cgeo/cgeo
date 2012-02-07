@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector.opencaching;
 
-import cgeo.geocaching.ParseResult;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
@@ -33,17 +33,15 @@ public class ApiOpenCachingConnector extends OpenCachingConnector {
     }
 
     @Override
-    public ParseResult searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final int listId, final CancellableHandler handler) {
+    public SearchResult searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final int listId, final CancellableHandler handler) {
         final cgCache cache = OkapiClient.getCache(geocode);
         if (cache == null) {
             return null;
         }
-        final ParseResult parseResult = new ParseResult();
-        parseResult.cacheList.add(cache);
+        final SearchResult searchResult = new SearchResult();
+        searchResult.addCache(cache);
 
-        final ParseResult search = ParseResult.filterParseResults(parseResult, false, false, Settings.getCacheType());
-        app.addSearch(search.cacheList, listId);
-
+        final SearchResult search = searchResult.filterSearchResults(false, false, Settings.getCacheType(), listId);
         return search;
     }
 }

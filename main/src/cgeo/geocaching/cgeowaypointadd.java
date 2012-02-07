@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.DistanceParser;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -229,7 +230,7 @@ public class cgeowaypointadd extends AbstractActivity {
             if (waypoint != null && waypoint.getCoords() != null) {
                 gp = waypoint.getCoords();
             }
-            cgCache cache = app.getCacheByGeocode(geocode);
+            cgCache cache = app.loadCache(geocode, LoadFlags.LOADWAYPOINTS);
             cgeocoords coordsDialog = new cgeocoords(cgeowaypointadd.this, cache, gp, geo);
             coordsDialog.setCancelable(true);
             coordsDialog.setOnCoordinateUpdate(new cgeocoords.CoordinateUpdate() {
@@ -323,7 +324,7 @@ public class cgeowaypointadd extends AbstractActivity {
             if (app.saveOwnWaypoint(id, geocode, waypoint)) {
                 StaticMapsProvider.removeWpStaticMaps(id, geocode);
                 if (Settings.isStoreOfflineWpMaps()) {
-                    StaticMapsProvider.storeWaypointStaticMap(app.getCacheByGeocode(geocode), cgeowaypointadd.this, waypoint);
+                    StaticMapsProvider.storeWaypointStaticMap(app.loadCache(geocode, LoadFlags.LOADCACHEORDB), cgeowaypointadd.this, waypoint);
                 }
                 finish();
                 return;

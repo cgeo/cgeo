@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.enumerations.LoadFlags;
 
 import org.apache.commons.collections.CollectionUtils;
 
@@ -85,7 +86,7 @@ public class StaticMapsActivity extends AbstractActivity {
             dialog.dismiss();
             switch (which) {
             case DialogInterface.BUTTON_POSITIVE:
-                    cgCache cache = app.getCacheByGeocode(geocode);
+                    cgCache cache = app.loadCache(geocode, LoadFlags.LOADCACHEORDB);
                     if (waypoint_id == null) {
                         StaticMapsProvider.storeCacheStaticMap(cache, StaticMapsActivity.this);
                     } else {
