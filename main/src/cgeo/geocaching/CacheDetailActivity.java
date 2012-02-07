@@ -6,7 +6,6 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.GeneralAppsFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.LogType;
@@ -23,18 +22,13 @@ import com.viewpagerindicator.TitlePageIndicator;
 import com.viewpagerindicator.TitleProvider;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.R.color;
-import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -54,7 +48,6 @@ import android.text.Spannable;
 import android.text.Spanned;
 import android.text.format.DateUtils;
 import android.text.method.LinkMovementMethod;
-import android.text.style.ImageSpan;
 import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
 import android.util.DisplayMetrics;
@@ -85,7 +78,6 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -524,8 +516,7 @@ public class CacheDetailActivity extends AbstractActivity {
             cachesAround();
             return true;
         } else if (menuItem == MENU_CALENDAR) {
-            addToCalendar();
-            //addToCalendarWithIntent();
+            addToCalendarWithIntent();
             return true;
         } else if (menuItem == MENU_SHARE) {
             if (cache != null) {
@@ -743,140 +734,6 @@ public class CacheDetailActivity extends AbstractActivity {
         // TODO: Check if addon is installed, if not, tell the user how to get it.
         startActivity(new Intent(ICalendar.INTENT,
                 Uri.parse(ICalendar.URI_SCHEME + "://" + ICalendar.URI_HOST + "?" + params.toString())));
-    }
-
-    /**
-     * Adds the cache to the Android-calendar if it is an event.
-     */
-    private void addToCalendar() {
-        String[] projection = new String[] { "_id", "displayName" };
-        Uri calendarProvider = Compatibility.getCalendarProviderURI();
-
-        Cursor cursor = managedQuery(calendarProvider, projection, "selected=1", null, null);
-
-        final Map<Integer, String> calendars = new HashMap<Integer, String>();
-        int cnt = 0;
-        if (cursor != null) {
-            cnt = cursor.getCount();
-
-            if (cnt > 0) {
-                cursor.moveToFirst();
-
-                int calId = 0;
-                String calIdPre = null;
-                String calName = null;
-                int calIdIn = cursor.getColumnIndex("_id");
-                int calNameIn = cursor.getColumnIndex("displayName");
-
-                do {
-                    calIdPre = cursor.getString(calIdIn);
-                    if (calIdPre != null) {
-                        calId = Integer.parseInt(calIdPre);
-                    }
-                    calName = cursor.getString(calNameIn);
-
-                    if (calId > 0 && calName != null) {
-                        calendars.put(calId, calName);
-                    }
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-        }
-
-        final CharSequence[] items = calendars.values().toArray(new CharSequence[calendars.size()]);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.cache_calendars);
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
-                addToCalendarFn(calendars, item);
-            }
-        });
-        AlertDialog alert = builder.create();
-        alert.show();
-    }
-
-    /**
-     * Helper for {@link addToCalendar()}.
-     *
-     * @param calendars
-     *
-     * @param index
-     *            The selected calendar
-     */
-    private void addToCalendarFn(Map<Integer, String> calendars, int index) {
-        if (MapUtils.isEmpty(calendars)) {
-            return;
-        }
-
-        try {
-            Uri calendarProvider = Compatibility.getCalenderEventsProviderURI();
-
-            final Integer[] keys = calendars.keySet().toArray(new Integer[calendars.size()]);
-            final Integer calId = keys[index];
-
-            final Date eventDate = cache.getHiddenDate();
-            eventDate.setHours(0);
-            eventDate.setMinutes(0);
-            eventDate.setSeconds(0);
-
-            StringBuilder description = new StringBuilder();
-            description.append(cache.getUrl());
-            if (StringUtils.isNotBlank(cache.getShortdesc())) {
-                // remove images in short description
-                Spanned spanned = Html.fromHtml(cache.getShortdesc(), null, null);
-                String text = spanned.toString();
-                ImageSpan[] spans = spanned.getSpans(0, spanned.length(), ImageSpan.class);
-                for (int i = spans.length - 1; i >= 0; i--) {
-                    text = StringUtils.left(text, spanned.getSpanStart(spans[i]) - 1) + StringUtils.substring(text, spanned.getSpanEnd(spans[i]) + 1);
-                }
-                if (StringUtils.isNotBlank(text)) {
-                    description.append("\n\n");
-                    description.append(text);
-                }
-            }
-
-            if (StringUtils.isNotBlank(cache.getPersonalNote())) {
-                description.append("\n\n").append(Html.fromHtml(cache.getPersonalNote()).toString());
-            }
-
-            ContentValues event = new ContentValues();
-            event.put("calendar_id", calId);
-            event.put("dtstart", eventDate.getTime() + 43200000); // noon
-            event.put("dtend", eventDate.getTime() + 43200000 + 3600000); // + one hour
-            event.put("eventTimezone", "UTC");
-            event.put("title", Html.fromHtml(cache.getName()).toString());
-            event.put("description", description.toString());
-            StringBuilder location = new StringBuilder();
-            if (cache.getCoords() != null) {
-                location.append(cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW));
-            }
-            if (StringUtils.isNotBlank(cache.getLocation())) {
-                boolean addParentheses = false;
-                if (location.length() > 0) {
-                    addParentheses = true;
-                    location.append(" (");
-                }
-
-                location.append(Html.fromHtml(cache.getLocation()).toString());
-                if (addParentheses) {
-                    location.append(')');
-                }
-            }
-            if (location.length() > 0) {
-                event.put("eventLocation", location.toString());
-            }
-            event.put("allDay", 1);
-            event.put("hasAlarm", 0);
-
-            getContentResolver().insert(calendarProvider, event);
-
-            showToast(res.getString(R.string.event_success));
-        } catch (Exception e) {
-            showToast(res.getString(R.string.event_fail));
-
-            Log.e(Settings.tag, "CacheDetailActivity.addToCalendarFn: " + e.toString());
-        }
     }
 
     /**
