@@ -1112,7 +1112,8 @@ public class cgBase {
             final String originalCoords = BaseUtils.getMatch(page, GCConstants.PATTERN_LATLON_ORIG, false, null);
 
             if (null != originalCoords) {
-                final cgWaypoint waypoint = new cgWaypoint(res.getString(R.string.cache_coordinates_original), WaypointType.WAYPOINT);
+                // res = null in unit tests
+                final cgWaypoint waypoint = new cgWaypoint(res != null ? res.getString(R.string.cache_coordinates_original) : "", WaypointType.WAYPOINT);
                 waypoint.setCoords(new Geopoint(originalCoords));
                 cache.addWaypoint(waypoint);
                 cache.setUserModifiedCoords(true);
@@ -1156,7 +1157,8 @@ public class cgBase {
                     wp = wpItems[j].split("<td");
 
                     // waypoint name
-                    final String name = BaseUtils.getMatch(wp[6], GCConstants.PATTERN_WPNAME, true, 1, res.getString(R.string.waypoint), true);
+                    // res = null in unit tests
+                    final String name = BaseUtils.getMatch(wp[6], GCConstants.PATTERN_WPNAME, true, 1, res != null ? res.getString(R.string.waypoint) : null, true);
 
                     // waypoint type
                     final String resulttype = BaseUtils.getMatch(wp[3], GCConstants.PATTERN_WPTYPE, null);

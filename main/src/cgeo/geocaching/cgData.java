@@ -2562,6 +2562,9 @@ public class cgData {
     }
 
     public int getAllStoredCachesCount(final boolean detailedOnly, final CacheType cacheType, final Integer list) {
+        if (cacheType == null) {
+            throw new IllegalArgumentException("cacheType must not be null");
+        }
         String listSql = null;
         String listSqlW = null;
         if (list == null) {
@@ -2617,6 +2620,13 @@ public class cgData {
     }
 
     public Set<String> loadBatchOfStoredGeocodes(final boolean detailedOnly, final Geopoint coords, final CacheType cacheType, final int list) {
+        if (coords == null) {
+            throw new IllegalArgumentException("coords must not be null");
+        }
+        if (cacheType == null) {
+            throw new IllegalArgumentException("cacheType must not be null");
+        }
+
         init();
 
         Set<String> geocodes = new HashSet<String>();
@@ -3252,6 +3262,13 @@ public class cgData {
         return null;
     }
 
+    /**
+     * Create a new list
+     *
+     * @param name
+     *            Name
+     * @return new listId
+     */
     public int createList(String name) {
         int id = -1;
         if (StringUtils.isBlank(name)) {
@@ -3279,6 +3296,13 @@ public class cgData {
         }
     }
 
+    /**
+     * @param listId
+     *            List to change
+     * @param name
+     *            New name of list
+     * @return Number of lists changed
+     */
     public int renameList(final int listId, final String name) {
         if (StringUtils.isBlank(name)) {
             return 0;
