@@ -776,10 +776,6 @@ public class cgeo extends AbstractActivity {
                 updateUserInfoHandler.sendEmptyMessage(-1);
             }
 
-            // TODO blafoo remove
-            // cgeoapplication.getInstance().cleanDatabase(true);
-            // Settings.setDebugInfos(true);
-
             if (app.showLoginToast) {
                 firstLoginHandler.sendMessage(firstLoginHandler.obtainMessage(0, status));
                 app.showLoginToast = false;

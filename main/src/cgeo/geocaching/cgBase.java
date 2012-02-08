@@ -802,7 +802,7 @@ public class cgBase {
                         }
                     }
                 } else {
-                    Log.w(Settings.tag, "There are no caches in viewport. Probably the viewport is to big");
+                    Log.w(Settings.tag, "There are no caches in viewport. Probably the viewport is too big");
                 }
                 searchResult.totalCnt = searchResult.getGeocodes().size();
             }
@@ -1474,7 +1474,7 @@ public class cgBase {
      *            if not null, the application to use to save the trackable
      * @return the parsed trackable, or null if none could be parsed
      */
-    public static cgTrackable parseTrackable(final String page, cgeoapplication app, final String possibleTrackingcode) {
+    public static cgTrackable parseTrackable(final String page, final cgeoapplication app, final String possibleTrackingcode) {
         if (StringUtils.isBlank(page)) {
             Log.e(Settings.tag, "cgeoBase.parseTrackable: No page given");
             return null;
