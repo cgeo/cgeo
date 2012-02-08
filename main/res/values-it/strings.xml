@@ -8,7 +8,7 @@
   <string name="detail">Dettaglio</string>
   <string name="search">Cerca</string>
   <string name="settings">Settaggi</string>
-  <string name="helpers">Cosa installare</string>
+  <string name="helpers">Apps utili</string>
   <string name="about">About c:geo</string>
   <string name="helper">Vuoi imparare di più su <b>c:geo</b>?\nLeggi il facile manuale.</string>
   <string name="latitude">Latitudine</string>
@@ -145,6 +145,7 @@
   <string name="err_detail_no_spoiler">c:geo non trova alcuna immagine spoiler per questa cache.</string>
   <string name="err_detail_no_map_static">c:geo non trova static maps per questa cache.</string>
   <string name="err_detail_not_load_map_static">c:geo non riesce a caricare la static map.</string>
+  <string name="err_detail_ask_store_map_static">c:geo non riesce a caricare la static map. La salvo ora?</string>
   <string name="err_detail_still_working">Momentaneamente occupato a svolgere un altro compito.</string>
   <string name="err_watchlist_still_managing">Sto ancora gestendo la tua watchlist.</string>
   <string name="err_watchlist_failed">La modifica alla tua watchlist è fallita.</string>
@@ -223,6 +224,7 @@
   <string name="info_log_type_changed">Il tipo di log è cambiato!</string>
 
   <string name="info_fieldnotes_exported_to">Note esportate verso </string>
+  <string name="info_storing_static_maps">Tento di salvare la static map</string>
 
   <!-- location service -->
   <string name="loc_last">Ultima nota</string>
@@ -382,7 +384,8 @@
   <string name="init_showwaypoints">Mostra waypoints sulla mappa</string>
   <string name="init_showwaypoint_description">Numero di cache al di sotto del quale mostrare waypoints sulla mappa.</string>
   <string name="init_disabled">Esclude cache non attive</string>
-  <string name="init_offline">Conserva le mappe per uso offline</string>
+  <string name="init_offline">Salva le mappe per uso offline</string>
+  <string name="init_offline_wp">Salva i waypoints delle mappe per uso offline</string>
   <string name="init_save_log_img">Salva immagini contenute nei log</string>
   <string name="init_units">Usa miglia/piedi</string>
   <string name="init_nav">Usa Google Navigation</string>
@@ -563,6 +566,7 @@
       
   <!-- file list base -->
   <string name="file_searching_in">Ricerca file\nin</string>
+  <string name="file_searching_sdcard_in">Nessun file trovato nella cartella di default:\n%1$s\n\nRicerca in tutta la SD i files:\n</string>
   <string name="file_list_no_files">c:geo non ha trovato file appropriati.</string>
   <string name="file_searching">Ricerca file corrispondenti</string>
   <string name="file_title_searching">Ricerca in corso</string>
@@ -602,10 +606,11 @@
   <!-- waypoint -->
   <string name="waypoint">Waypoint</string>
   <string name="waypoint_title">Waypoint</string>
+  <string name="waypoint_cache_coordinates">Coordinate Cache</string>
   <string name="waypoint_custom">Custom</string>
   <string name="waypoint_my_coordinates">Coordinate attuali</string>
-  <string name="waypoint_bearing">Angolo</string>
-  <string name="waypoint_distance">Distanza</string>
+  <string name="waypoint_bearing">Angolo in gradi</string>
+  <string name="waypoint_distance">Distanza in metri</string>
   <string name="waypoint_name">Nome</string>
   <string name="waypoint_edit">Modifica</string>
   <string name="waypoint_delete">Elimina</string>
@@ -720,6 +725,8 @@
   <!-- helpers -->
   <string name="helper_manual_title">Manual</string>
   <string name="helper_manual_description">Manuale dettagliato di c:geo che contiene la descrizione di tutte le possibilità offerte da questa applicazione, comprese quelle nascoste (in inglese).</string>
+  <string name="helper_calendar_title">c:geo calendario add-on</string>
+  <string name="helper_calendar_description">Permette di esportare gli eventi cache nel calendario del tuo dispositivo.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Applicazione semplice da usare che mostra mappe online permettendo di scaricarle direttamente per l\'uso offline (solo mappe raster). Supporta inoltra la registrazione di traccia, gestione dei waypoints e altre utili funzioni.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>
