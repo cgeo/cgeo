@@ -59,8 +59,7 @@ or use the Ant view of Eclipse
 
 ### Debugging ###
 
-1. Add android:debuggable="true" in the application settings of `AndroidManifest.xml`
-2. In Eclipse, create a Debug Configuration for an Android Application using the menu Run->Debug Configurations
+In Eclipse, create a Debug Configuration for an Android Application using the menu Run->Debug Configurations
 
 ### Testing ###
 
