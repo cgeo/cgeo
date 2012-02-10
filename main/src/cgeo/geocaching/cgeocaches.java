@@ -1203,14 +1203,11 @@ public class cgeocaches extends AbstractListActivity {
 
         if (id == MENU_DEFAULT_NAVIGATION) {
             final cgCache cache = getCacheFromAdapter(adapterInfo);
-            final SearchResult singleSearch = cgBase.searchByGeocode(cache.getGeocode(), null, 0, false, null);
-            NavigationAppFactory.startDefaultNavigationApplication(geo, this, cache, singleSearch, null, null);
+            NavigationAppFactory.startDefaultNavigationApplication(geo, this, cache, null, null, null);
             return true;
         } else if (id == MENU_NAVIGATION) {
-            // create a search for a single cache (as if in details view)
             final cgCache cache = getCacheFromAdapter(adapterInfo);
-            final SearchResult singleSearch = cgBase.searchByGeocode(cache.getGeocode(), null, 0, false, null);
-            NavigationAppFactory.showNavigationMenu(geo, this, cache, singleSearch, null, null);
+            NavigationAppFactory.showNavigationMenu(geo, this, cache, null, null, null);
             return true;
         } else if (id == MENU_LOG_VISIT) {
             return getCacheFromAdapter(adapterInfo).logVisit(this);

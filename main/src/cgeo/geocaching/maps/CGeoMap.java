@@ -727,6 +727,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                         mapState[2] = mapView.getMapZoomLevel();
                         mapState[3] = followMyLocation ? 1 : 0;
                         mapIntent.putExtra(EXTRAS_MAPSTATE, mapState);
+                        mapIntent.putExtra(EXTRAS_MAP_TITLE, mapTitle);
 
                         // start the new map
                         activity.startActivity(mapIntent);
@@ -1138,9 +1139,12 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
                 // stage 1 - pull and render from the DB only for live map
 
-                if (fromDetailIntent || searchIntent != null) {
+                if (fromDetailIntent || searchIntent != null || geocodeIntent != null) {
                     // map started from another activity
                     search = new SearchResult(searchIntent);
+                    if (geocodeIntent != null) {
+                        search.addGeocode(geocodeIntent);
+                    }
                 } else {
                     // live map
                     if (!live || !Settings.isLiveMap()) {
