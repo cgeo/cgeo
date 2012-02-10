@@ -8,9 +8,11 @@
   <string name="detail">Detalhes</string>
   <string name="search">Pesquisar</string>
   <string name="settings">Definições</string>
-  <string name="helpers">O que instalar</string>
+  <string name="helpers">Apps Úteis</string>
   <string name="about">Sobre c:geo</string>
   <string name="helper">Quer aprender acerca do <b>c:geo</b>?\nVeja o nosso prático manual.</string>
+  <string name="latitude">Latitude</string>
+  <string name="longitude">Longitude</string>
   
   <!-- actionbar -->
   <string name="action_bar_share_title">Partilhar ligação para a cache</string>
@@ -33,15 +35,16 @@
   <string name="ape">Cache projecto APE</string>
   <string name="gchq">Groundspeak hq</string>
   <string name="gps">Cache exposição GPS</string>
+  <string name="unknown">Tipo Desconhecido</string>
 
   <!-- cache sizes -->
-  <string name="cache_size_micro">micro</string>
-  <string name="cache_size_small">pequena</string>
-  <string name="cache_size_regular">normal</string>
-  <string name="cache_size_large">grande</string>
-  <string name="cache_size_other">outra</string>
-  <string name="cache_size_virtual">virtual</string>
-  <string name="cache_size_notchosen">não especificado</string>
+  <string name="cache_size_micro">Micro</string>
+  <string name="cache_size_small">Pequena</string>
+  <string name="cache_size_regular">Normal</string>
+  <string name="cache_size_large">Grande</string>
+  <string name="cache_size_other">Outra</string>
+  <string name="cache_size_virtual">Virtual</string>
+  <string name="cache_size_notchosen">Não especificado</string>
 
   <!-- waypoints -->
   <string name="wp_final">Localização final</string>
@@ -63,28 +66,30 @@
   <string name="log_retrieved">Retirado</string>
   <string name="log_placed">Colocado</string>
   <string name="log_grabbed">Agarrado</string>
+  <string name="log_movecollection">Mover para colecção</string>
+  <string name="log_moveinventory">Mover para inventário</string>
   <string name="log_maintained">Manutenção efectuada</string>
   <string name="log_maintenance_needed">Precisa manutenção</string>
   <string name="log_update">Coordenadas actualizadas</string>
   <string name="log_archived">Arquivada</string>
-  <string name="log_needs_archived">Precisa arquivos</string>
+  <string name="log_needs_archived">Precisa logbook</string>
   <string name="log_discovered">Descoberta</string>
   <string name="log_reviewed">Nota de revisor</string>
-  <string name="log_taken">Visita</string>
   <string name="log_tb_nothing">Não fazer nada</string>
-  <string name="log_tb_visit">Visita</string>
+  <string name="log_tb_visit">Visitei</string>
   <string name="log_tb_drop">Deixei aqui</string>
   <string name="log_tb_changeall">Alterar todos</string>
   <string name="log_save">Gravar</string>
   <string name="log_saving">A gravar o log…</string>
   <string name="log_clear">Limpar</string>
   <string name="log_post">Publicar log</string>
-  <string name="log_post_rate">Publicar log &amp; votar</string>
-  <string name="log_post_no_rate">Publicar log &amp; não votar</string>
+  <string name="log_post_rate">Publicar log &amp; Votar</string>
+  <string name="log_post_no_rate">Publicar log &amp; Não votar</string>
+  <string name="log_post_not_possible">A carregar página de log…</string>
   <string name="log_add">Adicionar</string>
   <string name="log_date">Data</string>
   <string name="log_time">Hora</string>
-  <string name="log_date_time">Data &amp; hora</string>
+  <string name="log_date_time">Data &amp; Hora</string>
   <string name="log_rating">Pontuação</string>
   <string name="log_no_rating">Não votar</string>
   <string name="log_stars_1">1 estrela</string>
@@ -96,17 +101,17 @@
   <string name="log_stars_4">4 estrelas</string>
   <string name="log_stars_45">4.5 estrelas</string>
   <string name="log_stars_5">5 estrelas</string>
-  <string name="log_stars_1_description">terrível</string>
-  <string name="log_stars_15_description">muito má</string>
-  <string name="log_stars_2_description">má</string>
-  <string name="log_stars_25_description">abaixo da média</string>
-  <string name="log_stars_3_description">mediana</string>
-  <string name="log_stars_35_description">acima da média</string>
-  <string name="log_stars_4_description">boa</string>
-  <string name="log_stars_45_description">muito boa</string>
-  <string name="log_stars_5_description">excelente</string>
+  <string name="log_stars_1_description">Terrível</string>
+  <string name="log_stars_15_description">Muito má</string>
+  <string name="log_stars_2_description">Má</string>
+  <string name="log_stars_25_description">Abaixo da média</string>
+  <string name="log_stars_3_description">Mediana</string>
+  <string name="log_stars_35_description">Acima da média</string>
+  <string name="log_stars_4_description">Boa</string>
+  <string name="log_stars_45_description">Muito boa</string>
+  <string name="log_stars_5_description">Excelente</string>
   <string name="log_webcam">Fotografia tirada pela webcam</string>
-  <string name="log_new_log">Log</string>
+  <string name="log_new_log">Registar</string>
   <string name="log_new_log_text">Registar texto</string>
   <string name="log_announcement">Anúncio</string>
 
@@ -116,76 +121,83 @@
   <string name="err_parse">Falha na análise da página de login</string>
   <string name="err_server">Falha na ligação a Geocaching.com (servidor ou ligação em baixo?)</string>
   <string name="err_login">Informação de login não gravada</string>
-  <string name="err_login_failed">Desculpe, o c:geo não consegue fazer login.</string>
+  <string name="err_login_failed">O c:geo não consegue fazer login.</string>
+  <string name="err_login_failed_toast">O c:geo não consegue fazer login. O c:geo funciona offline com as caches Arquivadas. Verifique as definições de login ou habilite a ligação de dados.</string>
   <string name="err_unknown">Erro desconhecido</string>
   <string name="err_comm">Erro de comunicação desconhecido</string>
   <string name="err_missing_auth">Sem nome de utilizador/password definidos.</string>
   <string name="err_wrong">Dados de login inválidos</string>
+  <string name="err_maintenance">Geocaching.com está em manutenção. O c:geo funciona offline com as caches Arquivadas.</string>
   <string name="err_license">O utilizador não concordou com a licença de utilização de Geocaching.com, por isso c:geo não pode carregar as coordenadas da cache.</string>
-  <string name="err_store">Desculpe, o c:geo não pode arquivar a cache.</string>
-  <string name="err_drop">Desculpe, o c:geo não pode apagar a cache.</string>
-  <string name="err_detail_open">Desculpe, o c:geo não pode abrir os detalhes da geocache.</string>
-  <string name="err_detail_cache">Desculpe, o c:geo não pode mostrar a cache pretendida. É mesmo uma geocache?</string>
-  <string name="err_detail_cache_find">Desculpe, o c:geo não encontra a geocache</string>
-  <string name="err_detail_cache_find_some">Desculpe, o c:geo não encontra essa geocache.</string>
-  <string name="err_detail_cache_find_any">Desculpe, o c:geo não encontra qualquer geocache.</string>
-  <string name="err_detail_cache_find_next">Desculpe, o c:geo não encontra as próximas geocaches.</string>
-  <string name="err_detail_cache_forgot">Desculpe, o c:geo esqueceu a geocache pretendida.</string>
-  <string name="err_detail_cache_forgot_visit">Desculpe, o c:geo esqueceu a cache que visitou.</string>
+  <string name="err_unpublished">A cache pedida não está publicada.</string>
+  <string name="err_premium_only">Esta cache só está disponível para membros premium do Geocaching.com.</string>
+  <string name="err_store">O c:geo não consegue arquivar a cache.</string>
+  <string name="err_drop">O c:geo não consegue apagar a cache.</string>
+  <string name="err_detail_open">O c:geo não consegue abrir os detalhes da geocache.</string>
+  <string name="err_detail_cache">O c:geo não consegue mostrar a cache pretendida. É mesmo uma geocache?</string>
+  <string name="err_detail_cache_find">O c:geo não encontra a geocache</string>
+  <string name="err_detail_cache_find_some">O c:geo não encontra essa geocache.</string>
+  <string name="err_detail_cache_find_any">O c:geo não encontra qualquer geocache.</string>
+  <string name="err_detail_cache_find_next">O c:geo não encontra as próximas geocaches.</string>
+  <string name="err_detail_cache_forgot">O c:geo esqueceu a geocache pretendida.</string>
+  <string name="err_detail_cache_forgot_visit">O c:geo esqueceu a cache que visitou.</string>
   <string name="err_detail_no_spoiler">O c:geo não encontrou images spoiler para esta cache.</string>
   <string name="err_detail_no_map_static">O c:geo não encontrou mapas estáticos para esta cache.</string>
-  <string name="err_detail_not_load_map_static">Desculpe, o c:geo falhou o carregamento de mapas estáticos.</string>
+  <string name="err_detail_not_load_map_static">O c:geo falhou o carregamento de mapas estáticos.</string>
+  <string name="err_detail_ask_store_map_static">O c:geo falhou o carregamento de mapas estáticos. Arquivar agora?</string>
+  <string name="err_detail_still_working">A trabalhar noutra tarefa.</string>
   <string name="err_watchlist_still_managing">Ainda a gerir a sua watchlist.</string>
   <string name="err_watchlist_failed">A gestão da sua watchlist falhou.</string>
   <string name="err_navigation_no">O c:geo não encontra nenhuma navegação suportada.</string>
   <string name="err_application_no">O c:geo não encontra a aplicação correcta.</string>
-  <string name="err_auth_initialize">Desculpe, o c:geo falhou a iniciar o processo de autorização.</string>
+  <string name="err_auth_initialize">O c:geo falhou a iniciar o processo de autorização.</string>
   <string name="err_auth_process">Processo de autorização falhou.</string>
   <string name="err_cannot_log_visit">O c:geo não tem informação suficiente para registar a visita. Por favor, faça-o a partir dos detalhes completos da cache.</string>
-  <string name="err_init_cleared">Desculpe, o c:geo não consegue limpar os dados de login.</string>
-  <string name="err_download_fail">Desculpe, o c:geo falhou o download das caches porque </string>
-  <string name="err_list_load_fail">Desculpe, o c:geo falhou a carregar a lista das caches.</string>
-  <string name="err_store_failed">Desculpe, o c:geo não pode arquivar a geocache.</string>
-  <string name="err_refresh_failed">Desculpe, o c:geo não consegue actualizar a geocache.</string>
-  <string name="err_dwld_details_failed">Desculpe, o c:geo falhou o download dos detalhes da cache.</string>
-  <string name="err_dwld_details_failed_reason">Desculpe, o c:geo falhou o download dos detalhes da cache porque</string>
-  <string name="err_load_descr_failed">Desculpe, o c:geo não consegue carregar a descrição.</string>
+  <string name="err_init_cleared">O c:geo não consegue limpar os dados de login.</string>
+  <string name="err_download_fail">O c:geo falhou o download das caches porque </string>
+  <string name="err_list_load_fail">O c:geo falhou a carregar a lista das caches.</string>
+  <string name="err_store_failed">O c:geo não pode arquivar a geocache.</string>
+  <string name="err_refresh_failed">O c:geo não consegue actualizar a geocache.</string>
+  <string name="err_dwld_details_failed">O c:geo falhou o download dos detalhes da cache.</string>
+  <string name="err_load_descr_failed">O c:geo não consegue carregar a descrição.</string>
   <string name="err_location_unknown">O c:geo não sabe a localização da cache.</string>
   <string name="err_missing_device_name">Por favor insira um nome para este dispositivo antes de registar.</string>
 
-  <string name="err_tb_display">"Desculpe, o c:geo não consegue mostrar o trackable pretendido. É mesmo um trackable?</string>
-  <string name="err_tb_details_open">Desculpe, o c:geo não consegue abrir os detalhes do trackable.</string>
-  <string name="err_tb_details_download">Desculpe, o c:geo falhou o download dos detalhes do trackable porque</string>
-  <string name="err_tb_forgot">Desculpe, o c:geo esqueceu o trackable pretendido.</string>
-  <string name="err_tb_forgot_saw">Desculpe, o c:geo esqueceu o trackable que viu.</string>
-  <string name="err_tb_find">Desculpe, o c:geo não encontra o trackable</string>
-  <string name="err_tb_find_that">Desculpe, o c:geo não encontra esse trackable.</string>
+  <string name="err_tb_display">O c:geo não consegue mostrar o trackable pretendido. É mesmo um trackable?</string>
+  <string name="err_tb_details_open">O c:geo não consegue abrir os detalhes do trackable.</string>
+  <string name="err_tb_details_download">O c:geo falhou o download dos detalhes do trackable porque</string>
+  <string name="err_tb_forgot">O c:geo esqueceu o trackable pretendido.</string>
+  <string name="err_tb_forgot_saw">O c:geo esqueceu o trackable que viu.</string>
+  <string name="err_tb_find">O c:geo não encontra o trackable</string>
+  <string name="err_tb_find_that">O c:geo não encontra esse trackable.</string>
 
-  <string name="err_waypoint_cache_unknown">Desculpe, o c:geo não sabe a que cache quer adicionar o ponto de referência.</string>
-  <string name="err_waypoint_unknown">Desculpe, o c:geo esqueceu qual o ponto de referência que pretende visualizar.</string>
-  <string name="err_waypoint_add_failed">Desculpe, o c:geo falhou o adicionamento do seu ponto de referência.</string>
-  <string name="err_waypoint_load_failed">Desculpe, o c:geo falhou o carregamento do ponto de referência.</string>
-  <string name="err_waypoint_delete_failed">Desculpe, o c:geo falhou a remoção do ponto de referência.</string>
-  <string name="err_point_unknown_position">Desculpe, o c:geo não conseguiu reconhecer a sua localização.</string>
+  <string name="err_waypoint_cache_unknown">O c:geo não sabe a que cache quer adicionar o ponto de referência.</string>
+  <string name="err_waypoint_unknown">O c:geo esqueceu qual o ponto de referência que pretende visualizar.</string>
+  <string name="err_waypoint_add_failed">O c:geo falhou o adicionamento do seu ponto de referência.</string>
+  <string name="err_waypoint_load_failed">O c:geo falhou o carregamento do ponto de referência.</string>
+  <string name="err_waypoint_delete_failed">O c:geo falhou a remoção do ponto de referência.</string>
+  <string name="err_waypoint_open_cache_failed">O c:geo não consegue abrir os detalhes da cache.</string>
+  <string name="err_point_unknown_position">O c:geo não conseguiu reconhecer a sua localização.</string>
   <string name="err_point_no_position_given_title">Informação requerida</string>
   <string name="err_point_no_position_given">Preencha pelo menos a latitude, a longitude, a distância ou a direcção. Também pode preencher os quatro campos.</string>
   <string name="err_point_curr_position_unavailable">O c:geo ainda não possui as coordenadas actuais. Por favor, aguarde um instante…</string>
   <string name="err_point_bear_and_dist_title">Precisa de ajuda?</string>
   <string name="err_point_bear_and_dist">Preencha a direcção e a distância. A direcção é o ângulo de 0 a 360 graus relativo ao norte. A distância pode ser introduzida com ou sem unidades.</string>
-  <string name="err_point_location_error">Desculpe, o c:geo não conseguiu obter a localização do ponto de referência.</string>
+  <string name="err_point_location_error">O c:geo não conseguiu obter a localização do ponto de referência.</string>
 
-  <string name="err_log_load_data">Desculpe, o c:geo não consegue carregar os dados necessários para registar a sua visita.</string>
-  <string name="err_log_load_data_again">Desculpe, o c:geo não consegue carregar os dados necessários para registar a sua visita. A tentar de novo.</string>
-  <string name="err_log_load_data_still">O c:geo ainda está a carregar dados necessários para publicar o registo. Por favor espere mais um pouco.</string>
-  <string name="err_log_failed_server">Desculpe, o c:geo falhou a publicação do registo porque o servidor não responde.</string>
-  <string name="err_log_post_failed">Desculpe, o c:geo falhou a publicação do registo.</string>
+  <string name="err_log_load_data">O c:geo não consegue carregar os dados necessários para registar a sua visita.</string>
+  <string name="err_log_load_data_again">O c:geo não consegue carregar os dados necessários para registar a sua visita. A tentar de novo.</string>
+  <string name="err_log_load_data_still">O c:geo ainda está a carregar dados necessários para publicar o log. Por favor espere mais um pouco.</string>
+  <string name="err_log_failed_server">O c:geo falhou a publicação do log porque o servidor não responde.</string>
+  <string name="err_log_post_failed">O c:geo falhou a publicação do log.</string>
 
-  <string name="err_search_address_no_match">Desculpe, o c:geo não encontrou um local que corresponda.</string>
-  <string name="err_search_address_forgot">Desculpe, o c:geo esqueceu o endereço que procura.</string>
+  <string name="err_search_address_no_match">O c:geo não encontrou um local que corresponda.</string>
+  <string name="err_search_address_forgot">O c:geo esqueceu o endereço que procura.</string>
   <string name="err_search_address">À procura de locais</string>
-  <string name="err_parse_lat">Desculpe, o c:geo não pode analisar a latitue.</string>
-  <string name="err_parse_lon">Desculpe, o c:geo não pode analisar a logitude.</string>
-  <string name="err_parse_dist">Desculpe, o c:geo não pode analisar a distância.</string>
+  <string name="err_parse_lat">O c:geo não consegue analisar a latitue.</string>
+  <string name="err_parse_lon">O c:geo não consegue analisar a logitude.</string>
+  <string name="err_parse_dist">O c:geo não consegue analisar a distância.</string>
+  <string name="err_parse_lat_lon">O c:geo não consegue analisar a latitue ou a longitude.</string>
 
   <string name="err_fieldnotes_export_failed">A exportação das Notas de Campo falhou.</string>
 
@@ -200,15 +212,17 @@
   <string name="warn_search_help_keyword">Preencha acom uma palavra que é suposto estar algures no nome da cache que está a tentar encontrar.</string>
   <string name="warn_search_help_user">Preencha o nome de utilizador em Geocaching.com.</string>
   <string name="warn_search_help_tb">Preencha o código do trackable. Por exemplo \"TB29QMZ\".</string>
-  <string name="warn_log_text_fill">Por favor, preencha algum texto para o registo.</string>
+  <string name="warn_log_text_fill">Por favor, preencha algum texto para o log.</string>
+  <string name="warn_load_images">c:geo falhou ao carregar as imagens.</string>
 
 
-  <string name="info_log_posted">O c:geo publicou o registo com sucesso.</string>
-  <string name="info_log_saved">O c:geo gravou o registo com sucesso.</string>
-  <string name="info_log_cleared">O registo foi limpo.</string>
-  <string name="info_log_type_changed">O tipo de registo foi alterado!</string>
+  <string name="info_log_posted">O c:geo publicou o log com sucesso.</string>
+  <string name="info_log_saved">O c:geo gravou o log com sucesso.</string>
+  <string name="info_log_cleared">O log foi limpo.</string>
+  <string name="info_log_type_changed">O tipo de log foi alterado!</string>
 
   <string name="info_fieldnotes_exported_to">Notas de campo exportadas para</string>
+  <string name="info_storing_static_maps">A tentar arquivar mapas estáticos.</string>
 
   <!-- location service -->
   <string name="loc_last">Último conhecido</string>
@@ -224,6 +238,7 @@
   <string name="menu_settings">Definições</string>
   <string name="menu_history">Histórico</string>
   <string name="menu_filter">Filtro</string>
+  <string name="menu_scan_geo">Scan geocode</string>
 
   <!-- main screen -->
   <string name="live_map_button">Ao vivo</string>
@@ -231,6 +246,7 @@
   <string name="advanced_search_button">Pesquisar</string>
   <string name="stored_caches_button">Arquivo</string>
   <string name="any_button">Destino</string>
+  <string name="unknown_scan">Sem resultados do scan.</string>
 
   <!-- caches -->
   <string name="caches_no_cache">Nenhuma cache</string>
@@ -425,7 +441,7 @@
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Atributos</string>
   <string name="cache_inventory">Inventário</string>
-  <string name="cache_log_offline">Registo Offline</string>
+  <string name="cache_log_offline">Log Offline</string>
   <string name="cache_log_images_loading">A carregar imagem do log…</string>
   <string name="cache_log_images_title">Imagem do log</string>
   <string name="cache_log_image_default_title">Foto</string>
@@ -440,7 +456,7 @@
   <string name="cache_waypoints">Pontos de referência</string>
   <string name="cache_waypoints_add">Adicionar ponto de referência</string>
   <string name="cache_hint">Pista</string>
-  <string name="cache_logs">Livro de registo</string>
+  <string name="cache_logs">Logbook</string>
   <string name="cache_dialog_loading_details">A carregar os detalhes da cache…</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">A gravar cache para utilizar offline…</string>
@@ -471,7 +487,7 @@
   <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
   <string name="cache_status">Estado</string>
-  <string name="cache_status_offline_log">Registo gravado</string>
+  <string name="cache_status_offline_log">Log gravado</string>
   <string name="cache_status_found">Encontrada</string>
   <string name="cache_status_archived">Arquivada</string>
   <string name="cache_status_disabled">Desactivada</string>
@@ -501,7 +517,7 @@
 
   <!-- file list base -->
   <string name="file_searching_in">A procurar ficheiros\nem</string>
-  <string name="file_list_no_files">Desculpe, o c:geo não encontrou ficheiros adequados.</string>
+  <string name="file_list_no_files">O c:geo não encontrou ficheiros adequados.</string>
   <string name="file_searching">A procurar ficheiros</string>
   <string name="file_title_searching">A procurar</string>
 
