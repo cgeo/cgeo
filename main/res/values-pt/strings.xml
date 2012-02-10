@@ -421,6 +421,14 @@
   <string name="init_default_navigation_tool_select">Ferramenta de selecção</string>
 
   <!-- map sources -->
+  <string-array name="map_sources">
+    <item>@string/map_source_google_map</item>
+    <item>@string/map_source_google_satellite</item>
+    <item>@string/map_source_osm_mapnik</item>
+    <item>@string/map_source_osm_osmarender</item>
+    <item>@string/map_source_osm_cyclemap</item>
+    <item>@string/map_source_osm_offline</item>
+  </string-array>  
   <string name="map_source_google_map">Google: Mapa</string>
   <string name="map_source_google_satellite">Google: Satélite</string>
   <string name="map_source_osm_mapnik">OSM: Mapnik</string>
@@ -436,6 +444,10 @@
   <string name="init_sendToCgeo_register_ok">Registo bem sucedido. O código PIN é ####. Use-o no site do c:geo para adicionar este dispositivo ao seu browser.</string>
   <string name="init_sendToCgeo_register_fail">O registo falhou.</string>
 
+  <string name="sendToCgeo_download_fail">c:geo falhou o download das caches. Sem ligação à internet ou send2c:geo está em baixo.</string>
+  <string name="sendToCgeo_no_registration">c:geo falhou o download das caches. Registo do send2c:geo expirou. Faça o registo nas definições.</string>
+
+  
   <!-- auth -->
   <string name="auth_twitter">Twitter</string>
   <string name="auth_authorize">Autorizar c:geo</string>
@@ -466,6 +478,7 @@
   <string name="cache_offline_time_days">dias atrás</string>
   <string name="cache_premium">Premium</string>
   <string name="cache_attributes">Atributos</string>
+  <string name="cache_attributes_no_icons">(actualize a cache para mostrar os ícones dos atributos)</string>
   <string name="cache_inventory">Inventário</string>
   <string name="cache_log_offline">Log Offline</string>
   <string name="cache_log_images_loading">A carregar imagem do log…</string>
@@ -474,16 +487,30 @@
   <string name="cache_personal_note">Nota pessoal</string>
   <string name="cache_description">Descrição</string>
   <string name="cache_description_long">Descrição longa</string>
+  <string name="cache_description_table_note">A descrição contém a formatação da tabela que pode ser necessário para ser vista correctamente em Geocaching.com.</string>
   <string name="cache_watchlist">Lista de observação</string>
   <string name="cache_watchlist_on">Esta cache está na sua lista de observação.</string>
   <string name="cache_watchlist_not_on">Esta cache não está na sua lista de observação.</string>
   <string name="cache_watchlist_add">Adicionar à lista de observação</string>
   <string name="cache_watchlist_remove">Remover da lista de observação</string>
   <string name="cache_waypoints">Pontos de referência</string>
+  <plurals name="waypoints">
+      <item quantity="one">1 Waypoint</item>
+      <item quantity="other">%d Waypoints</item>
+  </plurals>
   <string name="cache_waypoints_add">Adicionar ponto de referência</string>
   <string name="cache_hint">Pista</string>
   <string name="cache_logs">Logbook</string>
+  <string name="cache_logsfriends">Logbook (Amigos)</string>
   <string name="cache_dialog_loading_details">A carregar os detalhes da cache…</string>
+  <string name="cache_dialog_loading_details_status_loadpage">A carregar a página</string>
+  <string name="cache_dialog_loading_details_status_details">A processar os detalhes</string>
+  <string name="cache_dialog_loading_details_status_spoilers">A carregar as imagens spoiler</string>
+  <string name="cache_dialog_loading_details_status_logs">A carregar os logs</string>
+  <string name="cache_dialog_loading_details_status_waypoints">A processar os waypoints</string>
+  <string name="cache_dialog_loading_details_status_gcvote">A carregar GCVote</string>
+  <string name="cache_dialog_loading_details_status_elevation">A carregar os dados de elevação</string>
+  <string name="cache_dialog_loading_details_status_render">A renderizar a vista</string>
   <string name="cache_dialog_offline_save_title">Offline</string>
   <string name="cache_dialog_offline_save_message">A gravar cache para utilizar offline…</string>
   <string name="cache_dialog_offline_drop_title">Offline</string>
@@ -502,8 +529,10 @@
   <string name="cache_menu_map_static">Mapas estáticos</string>
   <string name="cache_menu_rmaps">Rmaps</string>
   <string name="cache_menu_map_ext">Mostrar no mapa ext.</string>
+  <string name="cache_menu_streetview">Vista de rua</string>
   <string name="cache_menu_browser">Abrir no browser</string>
   <string name="cache_menu_visit">Registar visita</string>
+  <string name="cache_menu_visit_offline">Registar visita offline</string>
   <string name="cache_menu_spoilers">Imagens spoiler</string>
   <string name="cache_menu_around">Caches próximas</string>
   <string name="cache_menu_event">Adicionar ao calendário</string>
@@ -512,6 +541,7 @@
   <string name="cache_menu_move_list">Mover para outra lista</string>
   <string name="cache_menu_gcc">GCC</string>
   <string name="cache_menu_whereyougo">WhereYouGo</string>
+  <string name="cache_menu_oruxmaps">OruxMaps</string>  
   <string name="cache_status">Estado</string>
   <string name="cache_status_offline_log">Log gravado</string>
   <string name="cache_status_found">Encontrada</string>
@@ -521,10 +551,12 @@
   <string name="cache_geocode">Código-GC</string>
   <string name="cache_name">Nome</string>
   <string name="cache_type">Tipo</string>
+  <string name="cache_size">Tamanho</string>
   <string name="cache_distance">Distância</string>
   <string name="cache_difficulty">Dificuldade</string>
   <string name="cache_terrain">Terreno</string>
   <string name="cache_rating">Pontuação</string>
+  <string name="cache_own_rating">A minha pontuação</string>
   <string name="cache_rating_of">de</string>
   <string name="cache_favourite">Favorita</string>
   <string name="cache_owner">Dono</string>
@@ -532,6 +564,7 @@
   <string name="cache_event">Data</string>
   <string name="cache_location">Localização</string>
   <string name="cache_coordinates">Coordenadas</string>
+  <string name="cache_coordinates_original">Coordenadas originais</string>
   <string name="cache_calendars">Selecionar calendário</string>
   <string name="cache_spoiler_images_title">Imagens spoiler</string>
   <string name="cache_spoiler_images_loading">A carregar imagens spoiler…</string>
@@ -540,18 +573,32 @@
   <string name="cache_export_fieldnote">Exportar como Notas de Campo</string>
   <string name="cache_clear_history">Apagar histórico</string>
   <string name="cache_remove_from_history">Remover do histórico</string>
+  <string name="cache_license">Licença</string>
+  <string name="cache_image">Imagem</string>
+  <string name="cache_image_open_file">Abrir como ficheiro</string>
+  <string name="cache_image_open_browser">Abrir no browser</string>
 
   <!-- file list base -->
   <string name="file_searching_in">A procurar ficheiros\nem</string>
+  <string name="file_searching_sdcard_in">Nenhum ficheiro encontrado nas pastas predefinidas:\n%1$s\n\nA procurar no cartão de memória por ficheiros:\n</string>
   <string name="file_list_no_files">O c:geo não encontrou ficheiros adequados.</string>
   <string name="file_searching">A procurar ficheiros</string>
   <string name="file_title_searching">A procurar</string>
 
   <!-- gpx -->
-  <string name="gpx_import_caches_imported">Caches importadas</string>
+  <string name="gpx_import_loading_caches">A carregar as caches do ficheiro .gpx</string>
+  <string name="gpx_import_loading_waypoints">A carregar o ficheiro dos waypoints</string>
+  <string name="gpx_import_storing">A gravar as caches na base de dados</string>
+  <string name="gpx_import_caches_imported">caches importadas</string>
   <string name="gpx_import_title">Importar GPX</string>
   <string name="gpx_import_title_reading_file">A ler o ficheiro</string>
   <string name="gpx_import_title_caches_imported">Resultado</string>
+  <string name="gpx_import_title_caches_import_failed">A importação falhou</string>
+  <string name="gpx_import_error_io">Não consegue ler o ficheiro</string>
+  <string name="gpx_import_error_parser">Formato de ficheiro errado</string>
+  <string name="gpx_import_error_unexpected">Erro inesperado</string>
+  <string name="gpx_import_confirm">Quer importat o ficheiro GPX para o c:geo?</string>
+  <string name="gpx_import_canceled">A importação GPX foi cancelada</string>
 
   <!-- map file select -->
   <string name="map_file_select_title">Seleccione ficheiro de mapa</string>
@@ -573,9 +620,10 @@
   <!-- waypoint -->
   <string name="waypoint">Ponto de referência</string>
   <string name="waypoint_title">Ponto de referência</string>
-  <string name="waypoint_custom">Custom</string>
+  <string name="waypoint_cache_coordinates">Coordenadas da cache</string>
+  <string name="waypoint_custom">Personalizado</string>
   <string name="waypoint_my_coordinates">Minhas coordenadas</string>
-  <string name="waypoint_bearing">Direcção</string>
+  <string name="waypoint_bearing">Direcção em º</string>
   <string name="waypoint_distance">Distância</string>
   <string name="waypoint_name">Nome</string>
   <string name="waypoint_edit">Editar</string>
@@ -586,12 +634,24 @@
   <string name="waypoint_save">Gravar</string>
   <string name="waypoint_loading">A carregar ponto de referência…</string>
   <string name="waypoint_unknown_coordinates">Coordenadas desconhecidas</string>
+  <string name="waypoint_done">Feito</string>
+  <string name="waypoint_duplicate">Duplicar</string>
+  <string name="waypoint_copy_of">Cópia de</string>
+  <string name="waypoint_menu_open_cache">Abrir cache</string>
   <string name="search_history">Histórico</string>
   <string name="search_history_empty">Não existem destinos recentes</string>
   <string name="search_remove_destination">Destino removido</string>
   <string name="search_clear_history">Limpar histórico</string>
   <string name="search_history_cleared">Histórico limpo</string>
 
+  <string-array name="waypoint_coordinate_formats">
+    <item>@string/waypoint_coordinate_formats_plain</item>
+    <item>DDD.DDDDD°</item>
+    <item>DDD°MM.MMM\'</item>
+    <item>DDD°MM\'SS.SSS\"</item>
+  </string-array>
+  <string name="waypoint_coordinate_formats_plain">Plano</string>
+  
   <!-- visit -->
   <string name="visit_tweet">Publicar esta descoberta no Twitter</string>
 
