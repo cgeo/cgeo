@@ -253,6 +253,7 @@
   <string name="caches_more_caches">Mais caches</string>
   <string name="caches_more_caches_no">Mais nenhuma cache</string>
   <string name="caches_more_caches_loading">A carregar caches…</string>
+  <string name="caches_more_caches_currently">actualmente</string>
   <string name="caches_downloading">Downloading caches…\nETE: </string>
   <string name="caches_eta_ltm">Menos de um minuto</string>
   <string name="caches_eta_mins"> minutos</string>
@@ -274,6 +275,8 @@
   <string name="caches_sort_vote">votos (pontuação própria)</string>
   <string name="caches_sort_inventory">somatório do inventário</string>
   <string name="caches_sort_date">data</string>
+  <string name="caches_sort_finds">Encontradas</string>
+  <string name="caches_sort_state">Estado</string>
   <string name="caches_select">Selecionar da lista</string>
   <string name="caches_select_mode">Modo de selecção</string>
   <string name="caches_select_mode_exit">Sair do modo de selecção</string>
@@ -286,6 +289,7 @@
   <string name="caches_drop_all_ask">Quer remover todas as caches do dispositivo?</string>
   <string name="caches_drop_stored">Apagar do arquivo</string>
   <string name="caches_drop_progress">A remover caches</string>
+  <string name="caches_drop_all_and_list">Apagar todas e remover lista</string>
   <string name="caches_refresh_selected">Actualizar seleccionada</string>
   <string name="caches_refresh_all">Actualizar todas</string>
   <string name="caches_move_selected">Mover seleccionadas</string>
@@ -297,9 +301,9 @@
   <string name="caches_recaptcha_continue">Continuar</string>
   <string name="caches_filter">Filtrar</string>
   <string name="caches_filter_title">Filtrar por</string>
-  <string name="caches_filter_size">tamanho</string>
-  <string name="caches_filter_type">tipo</string>
-  <string name="caches_filter_track">com trackables</string>
+  <string name="caches_filter_size">Tamanho</string>
+  <string name="caches_filter_type">Tipo</string>
+  <string name="caches_filter_track">Com trackables</string>
   <string name="caches_filter_clear">Limpar filtros</string>
   <string name="caches_filter_size_title">Escolha o tamanho</string>
   <string name="caches_filter_type_title">Escolha o tipo</string>
@@ -311,6 +315,7 @@
   <string name="list_menu_create">Criar nova lista</string>
   <string name="list_menu_drop">Apagar lista actual</string>
   <string name="list_menu_change">Mudar de lista</string>
+  <string name="list_menu_rename">Mudar o nome da lista corrente.</string>
   <string name="list_title">Escolha uma lista</string>
   <string name="list_inbox">Arquivadas</string>
   <string name="list_wpt">Pontos de referência</string>
@@ -324,6 +329,8 @@
   <string name="list_dialog_remove">Remover</string>
   <string name="list_dialog_remove_ok">A lista foi removida</string>
   <string name="list_dialog_remove_err">O c:geo falhou a remoção da lista actual</string>
+  <string name="list_dialog_rename_title">Mudar o nome da lista</string>
+  <string name="list_dialog_rename">Mudar o nome</string>
 
   <!-- about -->
   <string name="about_changelog">Changelog</string>
@@ -357,20 +364,30 @@
   <string name="init_signature_template_button">Inserir modelo</string>
   <string name="init_signature_template_date">Data</string>
   <string name="init_signature_template_time">Hora</string>
+  <string name="init_signature_template_datetime">Data &amp; Hora</string>
   <string name="init_signature_template_user">Utilizador</string>
   <string name="init_signature_template_number">Número</string>
+  <string name="init_details">Detalhes da cache</string>
+  <string name="init_ratingwanted">Carregar a pontuação da cache de GCvote.com</string>
+  <string name="init_elevationwanted">Carregar dados de elevação de cache</string>
+  <string name="init_friendlogswanted">Carregar página adicional de logs de amigos</string>
+  <string name="init_openlastdetailspage">Abrir detalhes da última página vizualizada</string>
+  <string name="init_autoload">Carregar automaticamente a descrição longa</string>
   <string name="init_other">Outras opções</string>
   <string name="init_skin">Tema leve (precisa reiniciar o c:geo)</string>
   <string name="init_address">Mostrar endereços no ecrã principal</string>
   <string name="init_captcha">Mostrar CAPTCHA se necessário</string>
   <string name="init_useenglish">Utilizar inglês no c:geo\n(necessário reiniciar)</string>
   <string name="init_exclude">Excluir caches encontradas e minhas</string>
+  <string name="init_showwaypoints">Mostrar Waypoints no mapa ao vivo</string>
+  <string name="init_showwaypoint_description">Se menos do que o número de caches encontradas são mostradas no mapa, os seus waypoints são mostrados adicionalmente.</string>
   <string name="init_disabled">Excluir caches desactivadas</string>
-  <string name="init_offline">Armazenar mapas para uso offline</string>
+  <string name="init_offline">Armazenar a cache de mapas estáticos para utilização offline</string>
+  <string name="init_offline_wp">Armazenar waypoints de mapas estáticos para utilização offline</string>
   <string name="init_save_log_img">Guardar imagens dos Logs</string>
   <string name="init_units">Utilizar distância nas unidades do sistema imperial</string>
   <string name="init_nav">Utilizar Google Navigation</string>
-  <string name="init_autoload">Carregar automaticamente a descrição longa</string>
+  <string name="init_log_offline">Activar offline log\n(Não mostrar online log quando fôr logar, não enviar o log online)</string>
   <string name="init_livelist">Mostrar a direcção para a cache na lista</string>
   <string name="init_browser">Utilizar o c:geo como browser principal</string>
   <string name="init_altitude">Correcção de altitude</string>
@@ -379,20 +396,29 @@
   <string name="init_cleared">O c:geo limpou a informação de login.</string>
   <string name="init_backup">Backup</string>
   <string name="init_backup_backup">Backup</string>
+  <string name="init_backup_running">A criar um backup da base de dados de caches…</string>
   <string name="init_backup_note">Por favor note que esta opção irá fazer backup/restauro da base de dados de caches e pontos de referência, mas não das definições. A sua informação de login (passwords) não irá deixar esta aplicação.</string>
   <string name="init_backup_restore">Restaurar</string>
   <string name="init_backup_success">A base de dados do c:geo foi copiada com sucesso</string>
   <string name="init_backup_failed">O backup da base de dados do c:geo falhou.</string>
+  <string name="init_backup_unnecessary">Base de dados vazia, não é necessário um backup.</string>
   <string name="init_restore_success">Restauro concluído.</string>
   <string name="init_restore_failed">O restauro falhou.</string>
+  <string name="init_restore_running">A restaurar a base de dados de caches…</string>
+  <string name="init_restore_confirm">Base de dados vazia. Quer restaurar o backup?</string>
   <string name="init_backup_last">Disponível backup de</string>
   <string name="init_backup_last_no">Não existe nenhum ficheiro de backup.</string>
   <string name="init_mapsources">Fontes de mapa</string>
   <string name="init_mapsources_description">Aqui pode seleccionar a fonte dos seus mapas. Como alternativa ao Google Maps, vários estilos de OpenStreetMap estão disponíveis, e até ficheiros de mapas offline (veja <a href="http://code.google.com/p/mapsforge/">http://code.google.com/p/mapsforge/</a> para mais detalhes).</string>
   <string name="init_mapsource_select">Seleccione a fonte de mapa</string>
   <string name="init_select_mapfile">…</string>
+  <string name="init_maptrail">Mostrar rasto no mapa</string>
   <string name="init_trackautovisit">Marcar automaticamente os trackables como \"visitados\"</string>
   <string name="init_sigautoinsert">Inserir assinatura automaticamente</string>
+  <string name="init_loaddirectionimg">Carregar a imagem de dricção se necessário</string>
+  <string name="init_default_navigation_tool">Navegador principal</string>
+  <string name="init_default_navigation_tool_description">Aqui pode selecionar o seu navegador preferido.</string>
+  <string name="init_default_navigation_tool_select">Ferramenta de selecção</string>
 
   <!-- map sources -->
   <string name="map_source_google_map">Google: Mapa</string>
