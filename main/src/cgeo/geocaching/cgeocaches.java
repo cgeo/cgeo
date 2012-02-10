@@ -1206,7 +1206,6 @@ public class cgeocaches extends AbstractListActivity {
             NavigationAppFactory.startDefaultNavigationApplication(geo, this, cache, null, null, null);
             return true;
         } else if (id == MENU_NAVIGATION) {
-            // create a search for a single cache (as if in details view)
             final cgCache cache = getCacheFromAdapter(adapterInfo);
             NavigationAppFactory.showNavigationMenu(geo, this, cache, null, null, null);
             return true;
