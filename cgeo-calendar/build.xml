@@ -39,6 +39,11 @@
          application and should be checked into Version Control Systems. -->
     <loadproperties srcFile="project.properties" />
 
+    <!-- The private.properties file sets api-keys as well as keystore,
+         certificate and passwords (if you want).
+         See /templates/private.properties for more information. -->
+    <property file="private.properties" />
+
     <!-- quick check on sdk.dir -->
     <fail
             message="sdk.dir is missing. Make sure to generate local.properties using 'android update project' or to inject it through an env var"
