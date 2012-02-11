@@ -80,7 +80,7 @@
   <string name="log_tb_drop">Dropped Off</string>
   <string name="log_tb_changeall">Change All</string>
   <string name="log_save">Save</string>
-  <string name="log_saving">Saving log…</string>
+  <string name="log_saving">Sending log…</string>
   <string name="log_clear">Clear</string>
   <string name="log_post">Submit Log</string>
   <string name="log_post_rate">Submit Log &amp; Rate</string>
