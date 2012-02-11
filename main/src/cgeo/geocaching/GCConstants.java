@@ -13,9 +13,6 @@ import java.util.regex.Pattern;
  */
 public final class GCConstants {
 
-    /** Number of logs to retrieve from GC.com */
-    public final static int NUMBER_OF_LOGS = 35;
-
     /**
      * Patterns for parsing the result of a (detailed) search
      */

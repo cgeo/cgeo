@@ -999,7 +999,7 @@ public class cgData {
         List<String> list = new ArrayList<String>();
 
         try {
-            long timestamp = System.currentTimeMillis() - (3 * 24 * 60 * 60 * 1000);
+            long timestamp = System.currentTimeMillis() - Constants.DAYS_AFTER_CACHE_IS_DELETED;
             cursor = databaseRO.query(
                     dbTableCaches,
                     new String[] { "geocode" },
@@ -1100,12 +1100,12 @@ public class cgData {
                 return false;
             }
 
-            if (checkTime && detailed && dataDetailedUpdate < (System.currentTimeMillis() - (3 * 24 * 60 * 60 * 1000))) {
+            if (checkTime && detailed && dataDetailedUpdate < (System.currentTimeMillis() - Constants.DAYS_AFTER_CACHE_IS_DELETED)) {
                 // we want to check time for detailed cache, but data are older than 3 hours
                 return false;
             }
 
-            if (checkTime && !detailed && dataUpdated < (System.currentTimeMillis() - (3 * 24 * 60 * 60 * 1000))) {
+            if (checkTime && !detailed && dataUpdated < (System.currentTimeMillis() - Constants.DAYS_AFTER_CACHE_IS_DELETED)) {
                 // we want to check time for short cache, but data are older than 3 hours
                 return false;
             }
@@ -2914,7 +2914,7 @@ public class cgData {
                         null,
                         null);
             } else {
-                long timestamp = System.currentTimeMillis() - (3 * 24 * 60 * 60 * 1000);
+                long timestamp = System.currentTimeMillis() - Constants.DAYS_AFTER_CACHE_IS_DELETED;
                 String timestampString = Long.toString(timestamp);
                 cursor = databaseRO.query(
                         dbTableCaches,

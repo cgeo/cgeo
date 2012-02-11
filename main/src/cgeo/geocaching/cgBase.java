@@ -1278,7 +1278,7 @@ public class cgBase {
             final Parameters params = new Parameters(
                     "tkn", userToken,
                     "idx", "1",
-                    "num", String.valueOf(GCConstants.NUMBER_OF_LOGS),
+                    "num", String.valueOf(Constants.NUMBER_OF_LOGS),
                     "decrypt", "true",
                     // "sp", Boolean.toString(personal), // personal logs
                     "sf", Boolean.toString(friends));
