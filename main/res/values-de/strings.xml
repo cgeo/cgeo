@@ -80,7 +80,7 @@
   <string name="log_tb_drop">Ablegen</string>
   <string name="log_tb_changeall">Alle ändern</string>
   <string name="log_save">Speichern</string>
-  <string name="log_saving">Log wird gespeichert…</string>
+  <string name="log_saving">Log wird gesendet…</string>
   <string name="log_clear">Leeren</string>
   <string name="log_post">Loggen</string>
   <string name="log_post_rate">Loggen &amp; bewerten</string>
