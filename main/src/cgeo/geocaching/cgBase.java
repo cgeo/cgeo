@@ -130,12 +130,6 @@ public class cgBase {
     private final static SimpleDateFormat dateTbIn2 = new SimpleDateFormat("EEEEE, MMMMM dd, yyyy", Locale.ENGLISH); // Saturday, March 28, 2009
     public static String version = null;
 
-    /**
-     * FIXME: browser id should become part of settings (where it can be created more easily depending on the current
-     * settings)
-     */
-    private static String idBrowser = "Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Chrome/5.0.375.86 Safari/533.4";
-
     private static Context context;
     private static Resources res;
 
@@ -171,36 +165,6 @@ public class cgBase {
         } catch (PackageManager.NameNotFoundException e) {
             Log.e(Settings.tag, "unable to get version information", e);
             version = null;
-        }
-
-        if (Settings.isBrowser()) {
-            final long rndBrowser = Math.round(Math.random() * 6);
-            switch ((int) rndBrowser) {
-                case 0:
-                    idBrowser = "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/533.1 (KHTML, like Gecko) Chrome/5.0.322.2 Safari/533.1";
-                    break;
-                case 1:
-                    idBrowser = "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; WOW64; Trident/4.0; SLCC2; .NET CLR 2.0.50727; .NET CLR 3.5.30729; .NET CLR 3.0.30729; Media Center PC 6.0; MDDC)";
-                    break;
-                case 2:
-                    idBrowser = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3";
-                    break;
-                case 3:
-                    idBrowser = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-us) AppleWebKit/531.21.8 (KHTML, like Gecko) Version/4.0.4 Safari/531.21.10";
-                    break;
-                case 4:
-                    idBrowser = "Mozilla/5.0 (iPod; U; CPU iPhone OS 2_2_1 like Mac OS X; en-us) AppleWebKit/525.18.1 (KHTML, like Gecko) Version/3.1.1 Mobile/5H11a Safari/525.20";
-                    break;
-                case 5:
-                    idBrowser = "Mozilla/5.0 (Linux; U; Android 1.1; en-gb; dream) AppleWebKit/525.10+ (KHTML, like Gecko) Version/3.0.4 Mobile Safari/523.12.2";
-                    break;
-                case 6:
-                    idBrowser = "Mozilla/5.0 (X11; U; Linux i686; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Chrome/5.0.375.86 Safari/533.4";
-                    break;
-                default:
-                    idBrowser = "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-US) AppleWebKit/532.9 (KHTML, like Gecko) Chrome/5.0.307.11 Safari/532.9";
-                    break;
-            }
         }
     }
 
@@ -2576,11 +2540,9 @@ public class cgBase {
     }
 
     private static HttpResponse request(final HttpRequestBase request) {
-        if (Settings.isBrowser()) {
-            request.setHeader("Accept-Charset", "utf-8,iso-8859-1;q=0.8,utf-16;q=0.8,*;q=0.7");
-            request.setHeader("Accept-Language", "en-US,*;q=0.9");
-            request.getParams().setParameter(CoreProtocolPNames.USER_AGENT, idBrowser);
-        }
+        request.setHeader("Accept-Charset", "utf-8,iso-8859-1;q=0.8,utf-16;q=0.8,*;q=0.7");
+        request.setHeader("Accept-Language", "en-US,*;q=0.9");
+        request.getParams().setParameter(CoreProtocolPNames.USER_AGENT, Constants.USER_AGENT);
         return doRequest(request);
     }
 

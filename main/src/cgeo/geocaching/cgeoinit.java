@@ -527,16 +527,6 @@ public class cgeoinit extends AbstractActivity {
             }
         });
 
-        final CheckBox browserButton = (CheckBox) findViewById(R.id.browser);
-        browserButton.setChecked(Settings.isBrowser());
-        browserButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setAsBrowser(browserButton.isChecked());
-            }
-        });
-
         // Altitude settings
         EditText altitudeEdit = (EditText) findViewById(R.id.altitude);
         altitudeEdit.setText(String.valueOf(Settings.getAltCorrection()));
