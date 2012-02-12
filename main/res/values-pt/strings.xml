@@ -490,7 +490,6 @@
   <string name="cache_event">Data</string>
   <string name="cache_location">Localização</string>
   <string name="cache_coordinates">Coordenadas</string>
-  <string name="cache_calendars">Selecionar calendário</string>
   <string name="cache_spoiler_images_title">Imagens spoiler</string>
   <string name="cache_spoiler_images_loading">A carregar imagens spoiler…</string>
   <string name="cache_log_types">Tipos de log</string>

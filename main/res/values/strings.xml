@@ -80,7 +80,7 @@
   <string name="log_tb_drop">Dropped Off</string>
   <string name="log_tb_changeall">Change All</string>
   <string name="log_save">Save</string>
-  <string name="log_saving">Saving log…</string>
+  <string name="log_saving">Sending log…</string>
   <string name="log_clear">Clear</string>
   <string name="log_post">Submit Log</string>
   <string name="log_post_rate">Submit Log &amp; Rate</string>
@@ -349,6 +349,7 @@
   <string name="init_password">Password</string>
   <string name="init_passvote">Password</string>
   <string name="init_login">Check and save Login</string>
+  <string name="init_logout">Logout</string>
   <string name="init_login_popup">Login</string>
   <string name="init_login_popup_working">Logging into Geocaching.com…</string>
   <string name="init_login_popup_ok">Login ok.</string>
@@ -565,7 +566,6 @@
   <string name="cache_location">Location</string>
   <string name="cache_coordinates">Coordinates</string>
   <string name="cache_coordinates_original">Original Coordinates</string>
-  <string name="cache_calendars">Select calendar</string>
   <string name="cache_spoiler_images_title">Spoiler images</string>
   <string name="cache_spoiler_images_loading">Loading spoiler images…</string>
   <string name="cache_log_types">Log types</string>
@@ -746,6 +746,7 @@
   <string name="helper_manual_title">Manual</string>
   <string name="helper_manual_description">Comprehensive manual for c:geo that contains description of all possibilities of this application (even hidden ones).</string>
   <string name="helper_calendar_title">c:geo calendar add-on</string>
+  <string name="helper_calendar_missing">c:geo calendar add-on not installed</string>
   <string name="helper_calendar_description">Enables you to export event caches into the calendar on your device.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Simple usable application showing Online maps and allowing to download them directly into Offline mode (raster maps only). Also support track recording, POI handling and many other useful functions.</string>
@@ -974,9 +975,13 @@
   <!-- changelog -->
   <string name="changelog">\n
     <b>next release</b>\n
-    · new: changed markers in the map with additional informations for stored caches:\n
+    · New: Calendar add-on. c:geo doesn\'t require calendar permission anymore
+    · Fix: Deletion of outdated caches did not work
+    · Fix: Changed internal caching causing a better overall performance
+    · New: Login status at start screen
+    · New: Changed markers in the map with additional informations for stored caches:\n
        Personal Note available, Modified coordinates, non-reliable coordinates (orange circle)\n
-    · fix: caches with modified coordinates are displayed at the modified coords and not at the original coords\n
+    · Fix: Caches with modified coordinates are displayed at the modified coords and not at the original coords\n
     · \n
     \n\n
     <b>04.01.2012</b>\n

@@ -80,7 +80,7 @@
   <string name="log_tb_drop">Ablegen</string>
   <string name="log_tb_changeall">Alle ändern</string>
   <string name="log_save">Speichern</string>
-  <string name="log_saving">Log wird gespeichert…</string>
+  <string name="log_saving">Log wird gesendet…</string>
   <string name="log_clear">Leeren</string>
   <string name="log_post">Loggen</string>
   <string name="log_post_rate">Loggen &amp; bewerten</string>
@@ -350,6 +350,7 @@
   <string name="init_password">Passwort</string>
   <string name="init_passvote">Passwort</string>
   <string name="init_login">Anmeldedaten überprüfen und speichern</string>
+  <string name="init_logout">Abmelden</string>
   <string name="init_login_popup">Login</string>
   <string name="init_login_popup_working">Bei Geocaching.com anmelden…</string>
   <string name="init_login_popup_ok">Login erfolgreich.</string>
@@ -551,7 +552,6 @@
   <string name="cache_location">Bundesland</string>
   <string name="cache_coordinates">Koordinaten</string>
   <string name="cache_coordinates_original">Ursprüngliche Koordinaten</string>
-  <string name="cache_calendars">Kalender auswählen</string>
   <string name="cache_spoiler_images_title">Hinweisbilder</string>
   <string name="cache_spoiler_images_loading">Lade Hinweisbilder…</string>
   <string name="cache_log_types">Logs</string>
@@ -725,6 +725,9 @@
   <!-- helpers -->
   <string name="helper_manual_title">Anleitung</string>
   <string name="helper_manual_description">Umfangreiche Anleitung für c:geo mit Beschreibung aller Möglichkeiten dieser App (auch versteckte).</string>
+  <string name="helper_calendar_title">c:geo Kalendar Add-on</string>
+  <string name="helper_calendar_missing">c:geo Kalendar Add-on nicht installiert</string>
+  <string name="helper_calendar_description">Ermöglicht die Übernahme von Event Caches in den Kalendar.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Sehr gute App für Online- und Offline-Karten (nur Rasterkarten) mit vielen weiteren Funktionen wie z.B. Trackaufzeichnung, POIs und vieles mehr.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>

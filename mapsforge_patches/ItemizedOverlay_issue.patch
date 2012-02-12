@@ -1,0 +1,14 @@
+Index: mapsforge/src/org/mapsforge/android/maps/ItemizedOverlay.java
+===================================================================
+--- mapsforge/src/org/mapsforge/android/maps/ItemizedOverlay.java	(revision 1216)
++++ mapsforge/src/org/mapsforge/android/maps/ItemizedOverlay.java	(working copy)
+@@ -140,7 +140,8 @@
+ 
+ 		synchronized (this.visibleItems) {
+ 			// iterate over all visible items
+-			for (Integer itemIndex : this.visibleItems) {
++			for (int i = this.visibleItems.size() - 1; i >= 0; --i) {
++				Integer itemIndex = this.visibleItems.get(i);
+ 				// get the current item
+ 				checkOverlayItem = createItem(itemIndex.intValue());
+ 				if (checkOverlayItem == null) {

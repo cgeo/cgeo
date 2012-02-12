@@ -444,7 +444,7 @@ public class cgeotouch extends AbstractActivity implements DateDialog.DateDialog
             if (status == StatusCode.NO_ERROR && Settings.isUseTwitter() &&
                     Settings.isTwitterLoginValid() &&
                     tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
-                cgBase.postTweetTrackable(app, geocode);
+                cgBase.postTweetTrackable(geocode);
             }
 
             return status;

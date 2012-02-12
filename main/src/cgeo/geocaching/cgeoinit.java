@@ -229,6 +229,14 @@ public class cgeoinit extends AbstractActivity {
         Button logMeIn = (Button) findViewById(R.id.log_me_in);
         logMeIn.setOnClickListener(new logIn());
 
+        Button logMeOut = (Button) findViewById(R.id.log_me_out);
+        logMeOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                cgBase.logout();
+            }
+        });
+
         TextView legalNote = (TextView) findViewById(R.id.legal_note);
         legalNote.setClickable(true);
         legalNote.setOnClickListener(new View.OnClickListener() {
@@ -524,16 +532,6 @@ public class cgeoinit extends AbstractActivity {
             public void onClick(View v) {
                 Settings.setLogOffline(!Settings.getLogOffline());
                 logOffline.setChecked(Settings.getLogOffline());
-            }
-        });
-
-        final CheckBox browserButton = (CheckBox) findViewById(R.id.browser);
-        browserButton.setChecked(Settings.isBrowser());
-        browserButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setAsBrowser(browserButton.isChecked());
             }
         });
 

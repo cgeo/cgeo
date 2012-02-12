@@ -533,7 +533,6 @@
   <string name="cache_event">Datum</string>
   <string name="cache_location">Locatie</string>
   <string name="cache_coordinates">Coördinaten</string>
-  <string name="cache_calendars">Selecteer kalender</string>
   <string name="cache_spoiler_images_title">Spoiler afbeeldingen</string>
   <string name="cache_spoiler_images_loading">Spoiler afbeeldingen laden…</string>
   <string name="cache_log_types">Log types</string>

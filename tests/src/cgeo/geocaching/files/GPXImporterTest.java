@@ -4,6 +4,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 import cgeo.geocaching.test.R;
 import cgeo.geocaching.utils.CancellableHandler;
@@ -66,7 +67,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         SearchResult search = (SearchResult) importStepHandler.messages.get(3).obj;
         assertEquals(Collections.singletonList("GC31J2H"), new ArrayList<String>(search.getGeocodes()));
 
-        cgCache cache = cgeoapplication.getInstance().getCacheByGeocode("GC31J2H");
+        cgCache cache = cgeoapplication.getInstance().loadCache("GC31J2H", LoadFlags.LOADCACHEORDB);
         assertCacheProperties(cache);
 
         // can't assert, for whatever reason the waypoints are remembered in DB
@@ -95,7 +96,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         SearchResult search = (SearchResult) importStepHandler.messages.get(4).obj;
         assertEquals(Collections.singletonList("GC31J2H"), new ArrayList<String>(search.getGeocodes()));
 
-        cgCache cache = cgeoapplication.getInstance().getCacheByGeocode("GC31J2H");
+        cgCache cache = cgeoapplication.getInstance().loadCache("GC31J2H", LoadFlags.LOADCACHEORDB);
         assertCacheProperties(cache);
         assertEquals(2, cache.getWaypoints().size());
     }
@@ -118,7 +119,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         SearchResult search = (SearchResult) importStepHandler.messages.get(3).obj;
         assertEquals(Collections.singletonList("OC5952"), new ArrayList<String>(search.getGeocodes()));
 
-        cgCache cache = cgeoapplication.getInstance().getCacheByGeocode("OC5952");
+        cgCache cache = cgeoapplication.getInstance().loadCache("OC5952", LoadFlags.LOADCACHEORDB);
         assertCacheProperties(cache);
     }
 
@@ -159,7 +160,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         SearchResult search = (SearchResult) importStepHandler.messages.get(3).obj;
         assertEquals(Collections.singletonList("GC31J2H"), new ArrayList<String>(search.getGeocodes()));
 
-        cgCache cache = cgeoapplication.getInstance().getCacheByGeocode("GC31J2H");
+        cgCache cache = cgeoapplication.getInstance().loadCache("GC31J2H", LoadFlags.LOADCACHEORDB);
         assertCacheProperties(cache);
 
         // can't assert, for whatever reason the waypoints are remembered in DB
@@ -177,7 +178,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         SearchResult search = (SearchResult) importStepHandler.messages.get(4).obj;
         assertEquals(Collections.singletonList("GC31J2H"), new ArrayList<String>(search.getGeocodes()));
 
-        cgCache cache = cgeoapplication.getInstance().getCacheByGeocode("GC31J2H");
+        cgCache cache = cgeoapplication.getInstance().loadCache("GC31J2H", LoadFlags.LOADCACHEORDB);
         assertCacheProperties(cache);
         assertEquals(1, cache.getWaypoints().size()); // this is the original pocket query result without test waypoint
     }
@@ -202,7 +203,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         SearchResult search = (SearchResult) importStepHandler.messages.get(4).obj;
         assertEquals(Collections.singletonList("GC31J2H"), new ArrayList<String>(search.getGeocodes()));
 
-        cgCache cache = cgeoapplication.getInstance().getCacheByGeocode("GC31J2H");
+        cgCache cache = cgeoapplication.getInstance().loadCache("GC31J2H", LoadFlags.LOADCACHEORDB);
         assertCacheProperties(cache);
         assertEquals(1, cache.getWaypoints().size()); // this is the original pocket query result without test waypoint
     }
@@ -250,7 +251,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
 
     @Override
     protected void tearDown() throws Exception {
-        cgeoapplication.getInstance().dropStored(listId);
+        cgeoapplication.getInstance().dropList(listId);
         cgeoapplication.getInstance().removeList(listId);
         deleteDirectory(tempDir);
         super.tearDown();

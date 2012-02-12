@@ -2,7 +2,10 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
+import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
+import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.files.LocalStorage;
@@ -59,6 +62,7 @@ public class cgData {
      */
     private static int[] cacheColumnIndex;
     private Context context = null;
+    private CacheCache cacheCache = null;
     private String path = null;
     private cgDbHelper dbHelper = null;
     private SQLiteDatabase databaseRO = null;
@@ -240,6 +244,7 @@ public class cgData {
 
     public cgData(Context contextIn) {
         context = contextIn;
+        cacheCache = CacheCache.getInstance();
     }
 
     public synchronized void init() {
@@ -297,6 +302,9 @@ public class cgData {
     }
 
     public void closeDb() {
+
+        cacheCache.removeAllFromCache();
+
         initialized = false;
         closePreparedStatements();
 
@@ -991,7 +999,7 @@ public class cgData {
         List<String> list = new ArrayList<String>();
 
         try {
-            long timestamp = System.currentTimeMillis() - (3 * 24 * 60 * 60 * 1000);
+            long timestamp = System.currentTimeMillis() - Constants.DAYS_AFTER_CACHE_IS_DELETED;
             cursor = databaseRO.query(
                     dbTableCaches,
                     new String[] { "geocode" },
@@ -1092,12 +1100,12 @@ public class cgData {
                 return false;
             }
 
-            if (checkTime && detailed && dataDetailedUpdate < (System.currentTimeMillis() - (3 * 24 * 60 * 60 * 1000))) {
+            if (checkTime && detailed && dataDetailedUpdate < (System.currentTimeMillis() - Constants.DAYS_AFTER_CACHE_IS_DELETED)) {
                 // we want to check time for detailed cache, but data are older than 3 hours
                 return false;
             }
 
-            if (checkTime && !detailed && dataUpdated < (System.currentTimeMillis() - (3 * 24 * 60 * 60 * 1000))) {
+            if (checkTime && !detailed && dataUpdated < (System.currentTimeMillis() - Constants.DAYS_AFTER_CACHE_IS_DELETED)) {
                 // we want to check time for short cache, but data are older than 3 hours
                 return false;
             }
@@ -1110,11 +1118,13 @@ public class cgData {
         return false;
     }
 
+    /** Cache stored in DB with listId >= 1 */
+    // TODO Simply like getCacheDescription()
     public boolean isOffline(String geocode, String guid) {
         init();
 
         Cursor cursor = null;
-        long listId = 0;
+        long listId = StoredList.TEMPORARY_LIST_ID;
 
         try {
             if (StringUtils.isNotBlank(geocode)) {
@@ -1158,111 +1168,87 @@ public class cgData {
             Log.e(Settings.tag, "cgData.isOffline: " + e.toString());
         }
 
-        return listId >= 1;
+        return listId >= StoredList.STANDARD_LIST_ID;
     }
 
     public String getGeocodeForGuid(String guid) {
         if (StringUtils.isBlank(guid)) {
             return null;
         }
-
         init();
 
-        Cursor cursor = null;
-        String geocode = null;
-
         try {
-            cursor = databaseRO.query(
-                    dbTableCaches,
-                    new String[] { "geocode" },
-                    "guid = ?",
-                    new String[] { guid },
-                    null,
-                    null,
-                    null,
-                    "1");
-
-            if (cursor != null) {
-                int index = 0;
-
-                if (cursor.getCount() > 0) {
-                    cursor.moveToFirst();
-
-                    index = cursor.getColumnIndex("geocode");
-                    geocode = cursor.getString(index);
-                }
+            final SQLiteStatement description = getStatementGeocode();
+            synchronized (description) {
+                description.bindString(1, guid);
+                return description.simpleQueryForString();
             }
+        } catch (SQLiteDoneException e) {
+            // Do nothing, it only means we have no information on the cache
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.getGeocodeForGuid: " + e.toString());
+            Log.e(Settings.tag, "cgData.getGeocodeForGuid", e);
         }
 
-        if (cursor != null) {
-            cursor.close();
-        }
-
-        return geocode;
+        return null;
     }
 
     public String getCacheidForGeocode(String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return null;
         }
-
         init();
 
-        Cursor cursor = null;
-        String cacheid = null;
-
         try {
-            cursor = databaseRO.query(
-                    dbTableCaches,
-                    new String[] { "cacheid" },
-                    "geocode = ?",
-                    new String[] { geocode },
-                    null,
-                    null,
-                    null,
-                    "1");
-
-            if (cursor != null) {
-                int index = 0;
-
-                if (cursor.getCount() > 0) {
-                    cursor.moveToFirst();
-
-                    index = cursor.getColumnIndex("cacheid");
-                    cacheid = cursor.getString(index);
-                }
+            final SQLiteStatement description = getStatementCacheId();
+            synchronized (description) {
+                description.bindString(1, geocode);
+                return description.simpleQueryForString();
             }
+        } catch (SQLiteDoneException e) {
+            // Do nothing, it only means we have no information on the cache
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.getCacheidForGeocode: " + e.toString());
+            Log.e(Settings.tag, "cgData.getCacheidForGeocode", e);
         }
 
-        if (cursor != null) {
-            cursor.close();
-        }
-
-        return cacheid;
+        return null;
     }
 
     /**
+     * Save/store a cache to the CacheCache
+     *
      * @param cache
-     * @return true = cache saved successfully to the DB
+     *            the Cache to save in the CacheCache/DB
+     * @param saveFlag
+     *
+     * @return true = cache saved successfully to the CacheCache/DB
      */
-    public boolean saveCache(cgCache cache) {
-        //LeeB - writing to the DB is slow
+    public boolean saveCache(cgCache cache, EnumSet<LoadFlags.SaveFlag> saveFlags) {
         if (cache == null) {
+            throw new IllegalArgumentException("cache must not be null");
+        }
+
+        // merge always with data already stored in the CacheCache or DB
+        if (saveFlags.contains(SaveFlag.SAVECACHE)) {
+            cache.gatherMissingFrom(cacheCache.getCacheFromCache(cache.getGeocode()));
+            cacheCache.putCacheInCache(cache);
+        }
+
+        if (!saveFlags.contains(SaveFlag.SAVEDB)) {
+            return true;
+        }
+        boolean updateRequired = !cache.gatherMissingFrom(loadCache(cache.getGeocode(), LoadFlags.LOADALLDBONLY));
+
+        // only save a cache to the database if
+        // - the cache is detailed
+        // - there are changes
+        // - the cache is only stored in the CacheCache so far
+        if ((!updateRequired || !cache.isDetailed()) && cache.getStorageLocation().contains(StorageLocation.DATABASE)) {
             return false;
         }
 
-        // remember this cache in the caches cache. it is highly likely that we will need it in a few moments and
-        // this way we also remove any stale instance from the caches cache
-        cgeoapplication.putCacheInCache(cache);
-
-        // only save fully detailed caches in the database
-        if (!cache.isDetailed()) {
-            return false;
-        }
+        cache.addStorageLocation(StorageLocation.DATABASE);
+        cacheCache.putCacheInCache(cache);
+        Log.d(Settings.tag, "Saving " + cache.toString() + " (" + cache.getListId() + ") to DB");
 
         ContentValues values = new ContentValues();
 
@@ -1361,37 +1347,32 @@ public class cgData {
         init();
 
         //try to update record else insert fresh..
+        boolean result = false;
+        databaseRW.beginTransaction();
         try {
             int rows = databaseRW.update(dbTableCaches, values, "geocode = ?", new String[] { cache.getGeocode() });
-            if (rows > 0) {
-                values = null;
-                return true;
+            if (rows == 0) {
+                // cache is not in the DB, insert it
+                /* long id = */databaseRW.insert(dbTableCaches, null, values);
             }
+            databaseRW.setTransactionSuccessful();
+            result = true;
         } catch (Exception e) {
             // nothing
-        }
-
-        try {
-            long id = databaseRW.insert(dbTableCaches, null, values);
-            if (id > 0) {
-                values = null;
-                return true;
-            }
-        } catch (Exception e) {
-            // nothing
+        } finally {
+            databaseRW.endTransaction();
         }
 
         values = null;
-
-        return false;
+        return result;
     }
 
     public boolean saveAttributes(String geocode, List<String> attributes) {
-        init();
-
         if (StringUtils.isBlank(geocode) || attributes == null) {
             return false;
         }
+
+        init();
 
         databaseRW.beginTransaction();
         try {
@@ -1458,11 +1439,11 @@ public class cgData {
     }
 
     public boolean saveWaypoints(String geocode, List<cgWaypoint> waypoints, boolean drop) {
-        init();
-
         if (StringUtils.isBlank(geocode) || waypoints == null) {
             return false;
         }
+
+        init();
 
         Log.d(Settings.tag, "cgData.saveWaypoints(drop=" + drop + ")");
 
@@ -1539,11 +1520,11 @@ public class cgData {
     }
 
     public boolean saveOwnWaypoint(int id, String geocode, cgWaypoint waypoint) {
-        init();
-
         if ((StringUtils.isBlank(geocode) && id <= 0) || waypoint == null) {
             return false;
         }
+
+        init();
 
         boolean ok = false;
         databaseRW.beginTransaction();
@@ -1580,11 +1561,11 @@ public class cgData {
     }
 
     public boolean deleteWaypoint(int id) {
-        init();
-
         if (id == 0) {
             return false;
         }
+
+        init();
 
         int deleted = databaseRW.delete(dbTableWaypoints, "_id = " + id, null);
 
@@ -1596,11 +1577,11 @@ public class cgData {
     }
 
     public boolean saveSpoilers(String geocode, List<cgImage> spoilers) {
-        init();
-
         if (StringUtils.isBlank(geocode) || spoilers == null) {
             return false;
         }
+
+        init();
 
         databaseRW.beginTransaction();
         try {
@@ -1633,11 +1614,11 @@ public class cgData {
     }
 
     public boolean saveLogs(String geocode, List<cgLog> logs, boolean drop) {
-        init();
-
         if (StringUtils.isBlank(geocode) || logs == null) {
             return false;
         }
+
+        init();
 
         databaseRW.beginTransaction();
         try {
@@ -1689,11 +1670,11 @@ public class cgData {
     }
 
     public boolean saveLogCount(String geocode, Map<LogType, Integer> logCounts, boolean drop) {
-        init();
-
         if (StringUtils.isBlank(geocode) || MapUtils.isEmpty(logCounts)) {
             return false;
         }
+
+        init();
 
         databaseRW.beginTransaction();
         try {
@@ -1723,11 +1704,11 @@ public class cgData {
     }
 
     public boolean saveInventory(String geocode, List<cgTrackable> trackables) {
-        init();
-
         if (trackables == null) {
             return false;
         }
+
+        init();
 
         databaseRW.beginTransaction();
         try {
@@ -1769,153 +1750,146 @@ public class cgData {
         return true;
     }
 
-    public List<Number> getBounds(Object[] geocodes) {
-        init();
+    public List<Number> getBounds(Set<String> geocodes) {
+        if (CollectionUtils.isEmpty(geocodes)) {
+            return null;
+        }
 
-        Cursor cursor = null;
+        Set<cgCache> caches = loadCaches(geocodes, LoadFlags.LOADCACHEORDB);
+
+        Double latMin = 360.0;
+        Double latMax = 0.0;
+        Double lonMin = 360.0;
+        Double lonMax = 0.0;
+        for (cgCache cache : caches) {
+            latMin = Math.min(cache.getCoords().getLatitude(), latMin);
+            latMax = Math.max(cache.getCoords().getLatitude(), latMax);
+            lonMin = Math.min(cache.getCoords().getLongitude(), lonMin);
+            lonMax = Math.max(cache.getCoords().getLongitude(), lonMax);
+        }
 
         final List<Number> viewport = new ArrayList<Number>();
-
-        try {
-            final StringBuilder where = new StringBuilder();
-
-            if (geocodes != null && geocodes.length > 0) {
-                StringBuilder all = new StringBuilder();
-                for (Object one : geocodes) {
-                    if (all.length() > 0) {
-                        all.append(", ");
-                    }
-                    all.append('"');
-                    all.append((String) one);
-                    all.append('"');
-                }
-
-                if (where.length() > 0) {
-                    where.append(" and ");
-                }
-                where.append("geocode in (");
-                where.append(all);
-                where.append(')');
-            }
-
-            cursor = databaseRO.query(
-                    dbTableCaches,
-                    new String[] { "count(_id) as cnt", "min(latitude) as latMin", "max(latitude) as latMax", "min(longitude) as lonMin", "max(longitude) as lonMax" },
-                    where.toString(),
-                    null,
-                    null,
-                    null,
-                    null,
-                    null);
-
-            if (cursor != null) {
-                int cnt = cursor.getCount();
-
-                if (cnt > 0) {
-                    cursor.moveToFirst();
-
-                    viewport.add(cursor.getInt(cursor.getColumnIndex("cnt")));
-                    viewport.add(cursor.getDouble(cursor.getColumnIndex("latMin")));
-                    viewport.add(cursor.getDouble(cursor.getColumnIndex("latMax")));
-                    viewport.add(cursor.getDouble(cursor.getColumnIndex("lonMin")));
-                    viewport.add(cursor.getDouble(cursor.getColumnIndex("lonMax")));
-                }
-            }
-        } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.getBounds: " + e.toString());
-        }
-
-        if (cursor != null) {
-            cursor.close();
-        }
-
+        viewport.add(caches.size());
+        viewport.add(latMin);
+        viewport.add(latMax);
+        viewport.add(lonMin);
+        viewport.add(lonMax);
         return viewport;
     }
 
     /**
-     * Loads a single Cache.
+     * Load a single Cache.
      *
      * @param geocode
      *            The Geocode GCXXXX
-     * @param guid
-     * @param loadAttributes
-     * @param loadWaypoints
-     * @param loadSpoilers
-     * @param loadLogs
-     * @param loadInventory
-     * @param loadOfflineLogs
-     * @return the loaded cache
+     * @return the loaded cache (if found). Can be null
      */
-
     public cgCache loadCache(final String geocode, final EnumSet<LoadFlag> loadFlags) {
         if (StringUtils.isBlank(geocode)) {
-            return null;
+            throw new IllegalArgumentException("geocode must not be empty");
         }
 
         Set<String> geocodes = new HashSet<String>();
         geocodes.add(geocode);
 
         Set<cgCache> caches = loadCaches(geocodes, loadFlags);
-        return cgBase.getFirstElementFromSet(caches);
+        if (caches != null && caches.size() >= 1) {
+            return (cgCache) caches.toArray()[0];
+        }
+        return null;
     }
 
+    /**
+     * Load caches.
+     *
+     * @param geocodes
+     * @return Set of loaded caches. Never null.
+     */
     public Set<cgCache> loadCaches(final Set<String> geocodes, final EnumSet<LoadFlag> loadFlags) {
-        if (geocodes == null || geocodes.size() == 0) {
+        if (CollectionUtils.isEmpty(geocodes)) {
             return new HashSet<cgCache>();
         }
 
         Set<cgCache> result = new HashSet<cgCache>();
-        Set<String> remainingGeocodes = new HashSet<String>();
-        for (String geocode : geocodes) {
-            cgCache cache = cgeoapplication.getCacheFromCache(geocode);
-            if (cache != null) {
-                result.add(cache);
-            } else {
-                remainingGeocodes.add(geocode);
+        Set<String> remaining = new HashSet<String>(geocodes);
+
+        if (loadFlags.contains(LoadFlag.LOADCACHEBEFORE)) {
+            for (String geocode : new HashSet<String>(remaining)) {
+                cgCache cache = cacheCache.getCacheFromCache(geocode);
+                if (cache != null) {
+                    result.add(cache);
+                    remaining.remove(cache.getGeocode());
+                }
             }
         }
-        Set<cgCache> cachesFromDB = loadCaches(remainingGeocodes, null, null, null, null, loadFlags);
-        if (cachesFromDB != null) {
-            result.addAll(cachesFromDB);
+
+        if (loadFlags.contains(LoadFlag.LOADDBMINIMAL) ||
+                loadFlags.contains(LoadFlag.LOADATTRIBUTES) ||
+                loadFlags.contains(LoadFlag.LOADWAYPOINTS) ||
+                loadFlags.contains(LoadFlag.LOADSPOILERS) ||
+                loadFlags.contains(LoadFlag.LOADLOGS) ||
+                loadFlags.contains(LoadFlag.LOADINVENTORY) ||
+                loadFlags.contains(LoadFlag.LOADOFFLINELOG)) {
+
+            Set<cgCache> cachesFromDB = loadCaches(remaining, null, null, null, null, loadFlags);
+            if (cachesFromDB != null) {
+                result.addAll(cachesFromDB);
+                for (cgCache cache : cachesFromDB) {
+                    remaining.remove(cache.getGeocode());
+                }
+            }
+        }
+
+        if (loadFlags.contains(LoadFlag.LOADCACHEAFTER)) {
+            for (String geocode : new HashSet<String>(remaining)) {
+                cgCache cache = cacheCache.getCacheFromCache(geocode);
+                if (cache != null) {
+                    result.add(cache);
+                    remaining.remove(cache.getGeocode());
+                }
+            }
+        }
+
+        if (remaining.size() >= 1) {
+            Log.e(Settings.tag, "cgData.loadCaches(" + remaining.toString() + " failed");
         }
         return result;
     }
 
+    /**
+     * Load caches.
+     *
+     * @param geocodes
+     *            OR
+     * @param centerLat
+     * @param centerLon
+     * @param spanLat
+     * @param spanLon
+     * @param loadFlags
+     * @return Set of loaded caches. Never null.
+     */
     public Set<cgCache> loadCaches(final Set<String> geocodes, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final EnumSet<LoadFlag> loadFlags) {
-        init();
+        final Set<cgCache> caches = new HashSet<cgCache>();
+        if (CollectionUtils.isEmpty(geocodes)) {
+            return caches;
+        }
         // Using more than one of the parametersets results in overly comlex wheres
-        if ((geocodes != null && geocodes.size() > 0)
+        if (CollectionUtils.isNotEmpty(geocodes)
                 && centerLat != null
                 && centerLon != null
                 && spanLat != null
                 && spanLon != null) {
             throw new IllegalArgumentException("Please use only one parameter");
         }
-        StringBuilder where = new StringBuilder();
+
+        Log.d(Settings.tag, "cgData.loadCaches(" + geocodes.toString() + ") from DB");
+
+        init();
+
         Cursor cursor = null;
-        final Set<cgCache> caches = new HashSet<cgCache>();
 
         try {
-            if (geocodes != null && geocodes.size() > 0) {
-                StringBuilder all = new StringBuilder();
-                for (Object one : geocodes) {
-                    if (all.length() > 0) {
-                        all.append(", ");
-                    }
-                    all.append('"');
-                    all.append((String) one);
-                    all.append('"');
-                }
-
-                if (where.length() > 0) {
-                    where.append(" and ");
-                }
-                where.append("geocode in (");
-                where.append(all);
-                where.append(')');
-            } else {
-                return caches;
-            }
+            StringBuilder where = cgData.whereGeocodeIn(geocodes);
 
             // viewport limitation
             if (centerLat != null && centerLon != null && spanLat != null && spanLon != null) {
@@ -1964,13 +1938,9 @@ public class cgData {
                     cursor.moveToFirst();
 
                     do {
-                        //Extracted Method
-                        cgCache cache = createCacheFromDatabaseContent(cursor);
+                        //Extracted Method = LOADDBMINIMAL
+                        cgCache cache = cgData.createCacheFromDatabaseContent(cursor);
 
-                        // FIXME: in the following code (and similar blocks below), the
-                        // cache.getAttributes() entity probably does not need to be preserved,
-                        // and the resolution of the "if" statement could be simply
-                        // cache.getAttributes() = attributes
                         if (loadFlags.contains(LoadFlag.LOADATTRIBUTES)) {
                             cache.setAttributes(loadAttributes(cache.getGeocode()));
                         }
@@ -2019,14 +1989,14 @@ public class cgData {
                             cache.setLogOffline(hasLogOffline(cache.getGeocode()));
                         }
                         cache.addStorageLocation(StorageLocation.DATABASE);
-                        cgeoapplication.putCacheInCache(cache);
+                        cacheCache.putCacheInCache(cache);
 
                         caches.add(cache);
                     } while (cursor.moveToNext());
                 }
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.loadCaches: " + e.toString());
+            Log.e(Settings.tag, "cgData.getCaches: " + e.toString());
         }
 
         if (cursor != null) {
@@ -2037,12 +2007,11 @@ public class cgData {
     }
 
     /**
-     * maps a Cache from the cursor. Doesn't next.
+     * creates a Cache from the cursor. Doesn't next.
      *
      * @param cursor
-     * @return
+     * @return Cache from DB
      */
-
     private static cgCache createCacheFromDatabaseContent(Cursor cursor) {
         int index;
         cgCache cache = new cgCache();
@@ -2150,6 +2119,9 @@ public class cgData {
         cache.setOnWatchlist(cursor.getInt(cacheColumnIndex[35]) == 1);
         cache.setReliableLatLon(cursor.getInt(cacheColumnIndex[36]) > 0);
         cache.setUserModifiedCoords(cursor.getInt(cacheColumnIndex[37]) > 0);
+
+        Log.d(Settings.tag, "Loading " + cache.toString() + " (" + cache.getListId() + ") from DB");
+
         return cache;
     }
 
@@ -2561,7 +2533,20 @@ public class cgData {
         return trackable;
     }
 
+    /**
+     * Number of caches stored. The number is shown on the starting activitiy of c:geo
+     *
+     * @param detailedOnly
+     * @param cacheType
+     * @param list
+     * @return
+     */
     public int getAllStoredCachesCount(final boolean detailedOnly, final CacheType cacheType, final Integer list) {
+        if (cacheType == null) {
+            throw new IllegalArgumentException("cacheType must not be null");
+        }
+        init();
+
         String listSql = null;
         String listSqlW = null;
         if (list == null) {
@@ -2616,7 +2601,13 @@ public class cgData {
         return count;
     }
 
-    public Set<String> loadBatchOfStoredGeocodes(final boolean detailedOnly, final Geopoint coords, final CacheType cacheType, final int list) {
+    public Set<String> loadBatchOfStoredGeocodes(final boolean detailedOnly, final Geopoint coords, final CacheType cacheType, final int listId) {
+        if (coords == null) {
+            throw new IllegalArgumentException("coords must not be null");
+        }
+        if (cacheType == null) {
+            throw new IllegalArgumentException("cacheType must not be null");
+        }
         init();
 
         Set<String> geocodes = new HashSet<String>();
@@ -2624,7 +2615,7 @@ public class cgData {
         StringBuilder specifySql = new StringBuilder();
 
         specifySql.append("reason = ");
-        specifySql.append(Math.max(list, 1));
+        specifySql.append(Math.max(listId, 1));
 
         if (detailedOnly) {
             specifySql.append(" and detailed = 1 ");
@@ -2718,15 +2709,17 @@ public class cgData {
         return geocodes;
     }
 
-    public Set<String> getCachedInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
-        return getInViewport(false, centerLat, centerLon, spanLat, spanLon, cacheType);
+    /** Retrieve all stored caches from DB */
+    public Set<String> loadCachedInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
+        return loadInViewport(false, centerLat, centerLon, spanLat, spanLon, cacheType);
     }
 
-    public Set<String> getStoredInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
-        return getInViewport(true, centerLat, centerLon, spanLat, spanLon, cacheType);
+    /** Retrieve stored caches from DB with listId >= 1 */
+    public Set<String> loadStoredInViewport(final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
+        return loadInViewport(true, centerLat, centerLon, spanLat, spanLon, cacheType);
     }
 
-    public Set<String> getInViewport(final boolean stored, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
+    public Set<String> loadInViewport(final boolean stored, final Long centerLat, final Long centerLon, final Long spanLat, final Long spanLon, final CacheType cacheType) {
         if (centerLat == null || centerLon == null || spanLat == null || spanLon == null) {
             return null;
         }
@@ -2802,7 +2795,7 @@ public class cgData {
                 cursor.close();
             }
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.getOfflineInViewport: " + e.toString());
+            Log.e(Settings.tag, "cgData.loadInViewport: " + e.toString());
         }
 
         return geocodes;
@@ -2860,40 +2853,6 @@ public class cgData {
         return geocodes;
     }
 
-    public void markStored(final String geocode, final int listId) {
-        if (StringUtils.isBlank(geocode)) {
-            return;
-        }
-
-        init();
-
-        ContentValues values = new ContentValues();
-        values.put("reason", Math.max(listId, 1));
-        databaseRW.update(dbTableCaches, values, "geocode = ? and reason < 1", new String[] { geocode });
-    }
-
-    public boolean markDropped(String geocode) {
-        if (StringUtils.isBlank(geocode)) {
-            return false;
-        }
-
-        init();
-
-        try {
-            ContentValues values = new ContentValues();
-            values.put("reason", 0);
-            int rows = databaseRW.update(dbTableCaches, values, "geocode = ?", new String[] { geocode });
-
-            if (rows > 0) {
-                return true;
-            }
-        } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.markDropped: " + e.toString());
-        }
-
-        return false;
-    }
-
     public boolean markFound(String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return false;
@@ -2901,32 +2860,47 @@ public class cgData {
 
         init();
 
+        boolean result = false;
+        databaseRW.beginTransaction();
         try {
             ContentValues values = new ContentValues();
             values.put("found", 1);
             int rows = databaseRW.update(dbTableCaches, values, "geocode = ?", new String[] { geocode });
-
             if (rows > 0) {
-                return true;
+                // update CacheCache
+                cgCache cache = cacheCache.getCacheFromCache(geocode);
+                if (cache != null) {
+                    cache.setFound(true);
+                    cacheCache.putCacheInCache(cache);
+                }
+                result = true;
             }
-        } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.markFound: " + e.toString());
+            databaseRW.setTransactionSuccessful();
+        } finally {
+            databaseRW.endTransaction();
         }
 
-        return false;
+        return result;
     }
 
+    /** delete caches from the DB store 3 days or more before */
     public void clean() {
         clean(false);
     }
 
+    /**
+     * Remove caches with listId = 0
+     *
+     * @param more
+     *            true = all caches false = caches stored 3 days or more before
+     */
     public void clean(boolean more) {
         init();
 
         Log.d(Settings.tag, "Database clean: started");
 
         Cursor cursor = null;
-        List<String> geocodes = new ArrayList<String>();
+        Set<String> geocodes = new HashSet<String>();
 
         try {
             if (more) {
@@ -2940,7 +2914,7 @@ public class cgData {
                         null,
                         null);
             } else {
-                long timestamp = System.currentTimeMillis() - (3 * 24 * 60 * 60 * 1000);
+                long timestamp = System.currentTimeMillis() - Constants.DAYS_AFTER_CACHE_IS_DELETED;
                 String timestampString = Long.toString(timestamp);
                 cursor = databaseRO.query(
                         dbTableCaches,
@@ -2968,19 +2942,17 @@ public class cgData {
 
             final int size = geocodes.size();
             if (size > 0) {
-                Log.d(Settings.tag, "Database clean: removing " + size + " geocaches");
+                Log.d(Settings.tag, "Database clean: removing " + size + " geocaches from listId=0");
 
-                dropCaches(geocodes);
+                removeCaches(geocodes, EnumSet.of(RemoveFlag.REMOVECACHE));
+                databaseRW.execSQL("delete from " + dbTableCaches + " where " + cgData.whereGeocodeIn(geocodes));
             }
 
-            databaseRW.execSQL("delete from " + dbTableCaches + " where geocode = \"\"");
+            final SQLiteStatement countSql = databaseRO.compileStatement("select count(_id) from " + dbTableCaches + " where reason = 0");
+            final int count = (int) countSql.simpleQueryForLong();
+            countSql.close();
+            Log.d(Settings.tag, "Database clean: " + count + " geocaches remaining for listId=0");
 
-            if (Log.isLoggable(Settings.tag, Log.DEBUG)) {
-                final SQLiteStatement countSql = databaseRO.compileStatement("select count(_id) from " + dbTableCaches + " where reason = 0");
-                final int count = (int) countSql.simpleQueryForLong();
-                countSql.close();
-                Log.d(Settings.tag, "Database clean: " + count + " cached geocaches remaining");
-            }
         } catch (Exception e) {
             Log.w(Settings.tag, "cgData.clean: " + e.toString());
         }
@@ -2989,20 +2961,31 @@ public class cgData {
     }
 
     /**
-     * Drop stored list by putting the caches in automatic mode (reason = 0)
+     * Drop stored list by putting the caches in automatic mode (listId = 0)
      *
      * @param listId
      *            the list id to remove the caches from
      */
-    public void dropStored(int listId) {
+    public void dropList(int listId) {
         init();
         try {
             final ContentValues values = new ContentValues();
-            values.put("reason", 0);
+            values.put("reason", StoredList.TEMPORARY_LIST_ID);
             databaseRW.update(dbTableCaches, values, "reason = ?", new String[] { Integer.toString(listId) });
         } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.dropStored: error when updating reason", e);
+            Log.e(Settings.tag, "cgData.dropList: error when updating reason", e);
         }
+    }
+
+    public void removeAllFromCache() {
+        // clean up CacheCache
+        cacheCache.removeAllFromCache();
+    }
+
+    public void removeCache(final String geocode, EnumSet<LoadFlags.RemoveFlag> removeFlags) {
+        Set<String> geocodes = new HashSet<String>();
+        geocodes.add(geocode);
+        removeCaches(geocodes, removeFlags);
     }
 
     /**
@@ -3011,27 +2994,46 @@ public class cgData {
      * @param geocodes
      *            list of geocodes to drop from cache
      */
-    public void dropCaches(final List<String> geocodes) {
-        init();
-        // Drop caches from the database
-        final ArrayList<String> quotedGeocodes = new ArrayList<String>(geocodes.size());
-        for (final String geocode : geocodes) {
-            quotedGeocodes.add('"' + geocode + '"'); // FIXME: there ought to be a better way of doing this
+    public void removeCaches(final Set<String> geocodes, EnumSet<LoadFlags.RemoveFlag> removeFlags) {
+        if (CollectionUtils.isEmpty(geocodes)) {
+            return;
         }
-        final String geocodeList = StringUtils.join(quotedGeocodes.toArray(), ',');
-        final String baseWhereClause = "geocode in (" + geocodeList + ")";
-        databaseRW.delete(dbTableCaches, baseWhereClause, null);
-        databaseRW.delete(dbTableAttributes, baseWhereClause, null);
-        databaseRW.delete(dbTableSpoilers, baseWhereClause, null);
-        databaseRW.delete(dbTableLogs, baseWhereClause, null);
-        databaseRW.delete(dbTableLogCount, baseWhereClause, null);
-        databaseRW.delete(dbTableLogsOffline, baseWhereClause, null);
-        databaseRW.delete(dbTableWaypoints, baseWhereClause + " and type <> \"own\"", null);
-        databaseRW.delete(dbTableTrackables, baseWhereClause, null);
 
-        // Delete cache directories
-        for (final String geocode : geocodes) {
-            cgBase.deleteDirectory(LocalStorage.getStorageDir(geocode));
+        init();
+
+        if (removeFlags.contains(RemoveFlag.REMOVECACHE)) {
+            for (final String geocode : geocodes) {
+                cacheCache.removeCacheFromCache(geocode);
+            }
+        }
+
+        if (removeFlags.contains(RemoveFlag.REMOVEDB)) {
+            // Drop caches from the database
+            final ArrayList<String> quotedGeocodes = new ArrayList<String>(geocodes.size());
+            for (final String geocode : geocodes) {
+                quotedGeocodes.add('"' + geocode + '"');
+            }
+            final String geocodeList = StringUtils.join(quotedGeocodes.toArray(), ',');
+            final String baseWhereClause = "geocode in (" + geocodeList + ")";
+            databaseRW.beginTransaction();
+            try {
+                databaseRW.delete(dbTableCaches, baseWhereClause, null);
+                databaseRW.delete(dbTableAttributes, baseWhereClause, null);
+                databaseRW.delete(dbTableSpoilers, baseWhereClause, null);
+                databaseRW.delete(dbTableLogs, baseWhereClause, null);
+                databaseRW.delete(dbTableLogCount, baseWhereClause, null);
+                databaseRW.delete(dbTableLogsOffline, baseWhereClause, null);
+                databaseRW.delete(dbTableWaypoints, baseWhereClause + " and type <> \"own\"", null);
+                databaseRW.delete(dbTableTrackables, baseWhereClause, null);
+                databaseRW.setTransactionSuccessful();
+            } finally {
+                databaseRW.endTransaction();
+            }
+
+            // Delete cache directories
+            for (final String geocode : geocodes) {
+                cgBase.deleteDirectory(LocalStorage.getStorageDir(geocode));
+            }
         }
     }
 
@@ -3043,6 +3045,7 @@ public class cgData {
             return false;
         }
 
+        init();
         boolean status = false;
 
         ContentValues values = new ContentValues();
@@ -3152,33 +3155,29 @@ public class cgData {
         return false;
     }
 
-    public void saveVisitDate(String geocode) {
+    public void setVisitDate(String geocode, long visitedDate) {
         if (StringUtils.isBlank(geocode)) {
             return;
         }
 
-        ContentValues values = new ContentValues();
-        values.put("visiteddate", System.currentTimeMillis());
+        init();
 
+        databaseRW.beginTransaction();
         try {
-            databaseRW.update(dbTableCaches, values, "geocode = ?", new String[] { geocode });
-        } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.saveVisitDate: " + e.toString());
-        }
-    }
-
-    public void clearVisitDate(String geocode) {
-        if (StringUtils.isBlank(geocode)) {
-            return;
-        }
-
-        ContentValues values = new ContentValues();
-        values.put("visiteddate", 0);
-
-        try {
-            databaseRW.update(dbTableCaches, values, "geocode = ?", new String[] { geocode });
-        } catch (Exception e) {
-            Log.e(Settings.tag, "cgData.clearVisitDate: " + e.toString());
+            ContentValues values = new ContentValues();
+            values.put("visiteddate", visitedDate);
+            int rows = databaseRW.update(dbTableCaches, values, "geocode = ?", new String[] { geocode });
+            if (rows > 0) {
+                // update CacheCache
+                cgCache cache = cacheCache.getCacheFromCache(geocode);
+                if (cache != null) {
+                    cache.setFound(true);
+                    cacheCache.putCacheInCache(cache);
+                }
+            }
+            databaseRW.setTransactionSuccessful();
+        } finally {
+            databaseRW.endTransaction();
         }
     }
 
@@ -3229,12 +3228,10 @@ public class cgData {
     }
 
     public StoredList getList(int id, Resources res) {
+        init();
         if (id == StoredList.STANDARD_LIST_ID) {
-            init();
             return new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), (int) getStatementStandardList().simpleQueryForLong());
         } else if (id >= 10) {
-            init();
-
             Cursor cursor = databaseRO.query(
                     dbTableLists,
                     new String[] { "_id", "title" },
@@ -3252,6 +3249,13 @@ public class cgData {
         return null;
     }
 
+    /**
+     * Create a new list
+     *
+     * @param name
+     *            Name
+     * @return new listId
+     */
     public int createList(String name) {
         int id = -1;
         if (StringUtils.isBlank(name)) {
@@ -3279,6 +3283,13 @@ public class cgData {
         }
     }
 
+    /**
+     * @param listId
+     *            List to change
+     * @param name
+     *            New name of list
+     * @return Number of lists changed
+     */
     public int renameList(final int listId, final String name) {
         if (StringUtils.isBlank(name)) {
             return 0;
@@ -3302,9 +3313,9 @@ public class cgData {
         return count;
     }
 
-    public boolean removeList(int id) {
+    public boolean removeList(int listId) {
         boolean status = false;
-        if (id < 10) {
+        if (listId < 10) {
             return status;
         }
 
@@ -3312,12 +3323,12 @@ public class cgData {
 
         databaseRW.beginTransaction();
         try {
-            int cnt = databaseRW.delete(dbTableLists, "_id = " + (id - 10), null);
+            int cnt = databaseRW.delete(dbTableLists, "_id = " + (listId - 10), null);
 
             if (cnt > 0) {
                 ContentValues values = new ContentValues();
                 values.put("reason", 1);
-                databaseRW.update(dbTableCaches, values, "reason = " + id, null);
+                databaseRW.update(dbTableCaches, values, "reason = " + listId, null);
 
                 status = true;
             }
@@ -3331,19 +3342,27 @@ public class cgData {
     }
 
     public void moveToList(String geocode, int listId) {
-        if (StringUtils.isBlank(geocode) || listId <= 0) {
+        if (StringUtils.isBlank(geocode)) {
             return;
         }
 
+        init();
+
+        ContentValues values = new ContentValues();
+        values.put("reason", listId);
         databaseRW.beginTransaction();
         try {
-            ContentValues values = new ContentValues();
-            values.put("reason", listId);
             databaseRW.update(dbTableCaches, values, "geocode = ?", new String[] { geocode });
-
             databaseRW.setTransactionSuccessful();
         } finally {
             databaseRW.endTransaction();
+        }
+
+        // update CacheCache
+        cgCache cache = cacheCache.getCacheFromCache(geocode);
+        if (cache != null) {
+            cache.setListId(listId);
+            cacheCache.putCacheInCache(cache);
         }
     }
 
@@ -3363,7 +3382,6 @@ public class cgData {
             init();
 
             databaseRW.beginTransaction();
-
             try {
                 databaseRW.delete(dbTableSearchDestionationHistory, "_id = " + destination.getId(), null);
                 databaseRW.setTransactionSuccessful();
@@ -3385,8 +3403,22 @@ public class cgData {
         return statementDescription;
     }
 
+    private synchronized SQLiteStatement getStatementCacheId() {
+        if (statementDescription == null) {
+            statementDescription = databaseRO.compileStatement("SELECT cacheid FROM " + dbTableCaches + " WHERE geocode = ?");
+        }
+        return statementDescription;
+    }
+
+    private synchronized SQLiteStatement getStatementGeocode() {
+        if (statementDescription == null) {
+            statementDescription = databaseRO.compileStatement("SELECT geocode FROM " + dbTableCaches + " WHERE guid = ?");
+        }
+        return statementDescription;
+    }
+
     public String getCacheDescription(String geocode) {
-        if (geocode == null) {
+        if (StringUtils.isBlank(geocode)) {
             return null;
         }
         init();
@@ -3421,4 +3453,27 @@ public class cgData {
     public static void resetNewlyCreatedDatabase() {
         newlyCreatedDatabase = false;
     }
+
+    private static StringBuilder whereGeocodeIn(Set<String> geocodes) {
+        final StringBuilder where = new StringBuilder();
+
+        if (geocodes != null && geocodes.size() > 0) {
+            StringBuilder all = new StringBuilder();
+            for (String geocode : geocodes) {
+                if (all.length() > 0) {
+                    all.append(", ");
+                }
+                all.append('"');
+                all.append(geocode);
+                all.append('"');
+            }
+
+            where.append("geocode in (");
+            where.append(all);
+            where.append(')');
+        }
+
+        return where;
+    }
+
 }

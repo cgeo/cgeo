@@ -1,6 +1,7 @@
 package cgeo.geocaching.ui;
 
 import cgeo.geocaching.CacheDetailActivity;
+import cgeo.geocaching.Constants;
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgBase;
@@ -81,7 +82,6 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
      * time in milliseconds after which the list may be resorted due to position updates
      */
     private static final int PAUSE_BETWEEN_LIST_SORT = 1000;
-    public static final String SEPARATOR = " · ";
     private IFilter currentFilter = null;
     private List<cgCache> originalList = null;
     private final CacheListType cacheListType;
@@ -598,7 +598,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             infos.add(StringUtils.upperCase(cache.getGeocode()));
             infos.add(cgBase.formatDate(cache.getVisitedDate()));
             infos.add(cgBase.formatTime(cache.getVisitedDate()));
-            holder.info.setText(StringUtils.join(infos, SEPARATOR));
+            holder.info.setText(StringUtils.join(infos, Constants.SEPARATOR));
         } else {
             ArrayList<String> infos = new ArrayList<String>();
             if (StringUtils.isNotBlank(cache.getGeocode())) {
@@ -624,7 +624,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
             if (cacheListType != CacheListType.OFFLINE && cacheListType != CacheListType.HISTORY && cache.getListId() > 0) {
                 infos.add(res.getString(R.string.cache_offline));
             }
-            holder.info.setText(StringUtils.join(infos, SEPARATOR));
+            holder.info.setText(StringUtils.join(infos, Constants.SEPARATOR));
         }
 
         return v;

@@ -50,12 +50,23 @@
 					android:id="@+id/password"
 					android:hint="@string/init_password"
 					android:password="true" />
-			<Button style="@style/button"
-					android:id="@+id/log_me_in"
-                    android:lines="2"
-                    android:singleLine="false"
-                    android:scrollHorizontally="false"
-					android:text="@string/init_login" />
+			<LinearLayout
+					android:layout_width="fill_parent"
+					android:layout_height="wrap_content"
+					android:layout_margin="3dip"
+					android:orientation="horizontal"
+					android:padding="3dip" >
+				<Button style="@style/button"
+						android:id="@+id/log_me_in"
+						android:layout_width="0dip"
+						android:layout_weight="1"
+						android:text="@string/init_login" />
+				<Button style="@style/button"
+						android:id="@+id/log_me_out"
+						android:layout_width="0dip"
+						android:layout_weight="1"
+						android:text="@string/init_logout" />
+			</LinearLayout>
 <!-- ** -->
 			<RelativeLayout style="@style/separator_horizontal_layout" >
 				<View style="@style/separator_horizontal" />
@@ -623,26 +634,6 @@
 							android:textSize="14dip"
 							android:textColor="?text_color"
 							android:text="@string/init_log_offline" />
-				</LinearLayout>
-				<LinearLayout
-						android:layout_width="fill_parent"
-						android:layout_height="wrap_content"
-						android:orientation="horizontal" >
-					<CheckBox android:id="@+id/browser"
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:layout_gravity="left"
-							android:padding="1px"
-							android:gravity="center" />
-					<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:layout_gravity="center_vertical"
-							android:gravity="left"
-							android:paddingRight="3dip"
-							android:textSize="14dip"
-							android:textColor="?text_color"
-							android:text="@string/init_browser" />
 				</LinearLayout>
 				<LinearLayout
 						android:layout_width="fill_parent"

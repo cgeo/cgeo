@@ -542,7 +542,6 @@
   <string name="cache_location">Lieu</string>
   <string name="cache_coordinates">Coordonnées</string>
   <string name="cache_coordinates_original">Coordonnées d\'origine</string>
-  <string name="cache_calendars">Choisir un agenda</string>
   <string name="cache_spoiler_images_title">Images indices</string>
   <string name="cache_spoiler_images_loading">Chargement des images indices…</string>
   <string name="cache_log_types">Types de visites</string>
