@@ -342,6 +342,7 @@ public class cgBase {
 
         clearCookies();
         Settings.setCookieStore(null);
+        setActualStatus("-");
         return StatusCode.NO_ERROR;
     }
 
