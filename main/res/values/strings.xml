@@ -975,13 +975,13 @@
   <!-- changelog -->
   <string name="changelog">\n
     <b>next release</b>\n
-    · new: calendar add-on. c:geo doesn\'t require anymore calendar permission.
-    · fix: deletion of outdated caches did not work
-    · fix: changed internal caching causing a better overall performance
-    · new: login status at start screen
-    · new: changed markers in the map with additional informations for stored caches:\n
+    · New: Calendar add-on. c:geo doesn\'t require calendar permission anymore
+    · Fix: Deletion of outdated caches did not work
+    · Fix: Changed internal caching causing a better overall performance
+    · New: Login status at start screen
+    · New: Changed markers in the map with additional informations for stored caches:\n
        Personal Note available, Modified coordinates, non-reliable coordinates (orange circle)\n
-    · fix: caches with modified coordinates are displayed at the modified coords and not at the original coords\n
+    · Fix: Caches with modified coordinates are displayed at the modified coords and not at the original coords\n
     · \n
     \n\n
     <b>04.01.2012</b>\n
