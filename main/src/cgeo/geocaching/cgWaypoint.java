@@ -24,6 +24,7 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
     private Geopoint coords = null;
     private String note = "";
     private int cachedOrder = ORDER_UNDEFINED;
+    private boolean own = false;
 
     /**
      * require name and type for every waypoint
@@ -31,9 +32,10 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
      * @param name
      * @param type
      */
-    public cgWaypoint(final String name, final WaypointType type) {
+    public cgWaypoint(final String name, final WaypointType type, final boolean own) {
         this.name = name;
         this.waypointType = type;
+        this.own = own;
     }
 
     /**
@@ -104,11 +106,11 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
     }
 
     public boolean isUserDefined() {
-        return waypointType == WaypointType.OWN;
+        return own || WaypointType.OWN == waypointType;
     }
 
     public void setUserDefined() {
-        waypointType = WaypointType.OWN;
+        own = true;
         setPrefix(PREFIX_OWN);
     }
 

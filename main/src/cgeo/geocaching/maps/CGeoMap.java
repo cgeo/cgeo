@@ -1510,7 +1510,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 coord.setCoords(coordsIntent);
                 coord.setName("some place");
 
-                final cgWaypoint waypoint = new cgWaypoint("some place", waypointTypeIntent != null ? waypointTypeIntent : WaypointType.WAYPOINT);
+                final cgWaypoint waypoint = new cgWaypoint("some place", waypointTypeIntent != null ? waypointTypeIntent : WaypointType.WAYPOINT, false);
 
                 final CachesOverlayItemImpl item = getItem(coord, null, waypoint);
                 overlayCaches.updateItems(item);

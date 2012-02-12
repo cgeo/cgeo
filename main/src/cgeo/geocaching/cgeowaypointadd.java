@@ -18,10 +18,13 @@ import android.os.Message;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +40,9 @@ public class cgeowaypointadd extends AbstractActivity {
     private WaypointType type = WaypointType.OWN;
     private String prefix = "OWN";
     private String lookup = "---";
+    private boolean own = true;
+    ArrayList<WaypointType> wpTypes = null;
+
     /**
      * number of waypoints that the corresponding cache has until now
      */
@@ -58,6 +64,7 @@ public class cgeowaypointadd extends AbstractActivity {
                     type = waypoint.getWaypointType();
                     prefix = waypoint.getPrefix();
                     lookup = waypoint.getLookup();
+                    own = waypoint.isUserDefined();
 
                     app.setAction(geocode);
 
@@ -72,6 +79,10 @@ public class cgeowaypointadd extends AbstractActivity {
                         waitDialog.dismiss();
                         waitDialog = null;
                     }
+                }
+
+                if (own) {
+                    initializeWaypointTypeSelector();
                 }
             } catch (Exception e) {
                 if (waitDialog != null) {
@@ -134,10 +145,15 @@ public class cgeowaypointadd extends AbstractActivity {
         textView.setAdapter(adapter);
 
         if (id > 0) {
+            Spinner waypointTypeSelector = (Spinner) findViewById(R.id.type);
+            waypointTypeSelector.setVisibility(View.GONE);
+
             waitDialog = ProgressDialog.show(this, null, res.getString(R.string.waypoint_loading), true);
             waitDialog.setCancelable(true);
 
             (new loadWaypoint()).start();
+        } else {
+            initializeWaypointTypeSelector();
         }
 
         disableSuggestions((EditText) findViewById(R.id.distance));
@@ -187,6 +203,21 @@ public class cgeowaypointadd extends AbstractActivity {
         }
 
         super.onPause();
+    }
+
+    private void initializeWaypointTypeSelector() {
+
+        Spinner waypointTypeSelector = (Spinner) findViewById(R.id.type);
+
+        wpTypes = new ArrayList<WaypointType>(WaypointType.ALL_TYPES_EXCEPT_OWN.keySet());
+        ArrayAdapter<WaypointType> wpAdapter = new ArrayAdapter<WaypointType>(this, android.R.layout.simple_spinner_item, wpTypes.toArray(new WaypointType[] {}));
+        wpAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        waypointTypeSelector.setAdapter(wpAdapter);
+
+        waypointTypeSelector.setSelection(wpTypes.indexOf(type));
+        waypointTypeSelector.setOnItemSelectedListener(new changeWaypointType(this));
+
+        waypointTypeSelector.setVisibility(View.VISIBLE);
     }
 
     private class update implements UpdateLocationCallback {
@@ -244,6 +275,30 @@ public class cgeowaypointadd extends AbstractActivity {
                 }
             });
             coordsDialog.show();
+        }
+    }
+
+    private class changeWaypointType implements OnItemSelectedListener {
+
+        private changeWaypointType(cgeowaypointadd wpView) {
+            this.wpView = wpView;
+        }
+
+        private cgeowaypointadd wpView;
+
+        @Override
+        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
+                long arg3) {
+            if (null != wpView.wpTypes) {
+                wpView.type = wpView.wpTypes.get(arg2);
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> arg0) {
+            if (null != wpView.wpTypes) {
+                arg0.setSelection(wpView.wpTypes.indexOf(wpView.type));
+            }
         }
     }
 
@@ -313,7 +368,7 @@ public class cgeowaypointadd extends AbstractActivity {
             }
             final String note = ((EditText) findViewById(R.id.note)).getText().toString().trim();
 
-            final cgWaypoint waypoint = new cgWaypoint(name, type);
+            final cgWaypoint waypoint = new cgWaypoint(name, type, own);
             waypoint.setGeocode(geocode);
             waypoint.setPrefix(prefix);
             waypoint.setLookup(lookup);
