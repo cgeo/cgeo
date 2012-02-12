@@ -723,20 +723,25 @@ public class CacheDetailActivity extends AbstractActivity {
     }
 
     private void addToCalendarWithIntent() {
-        // this method is NOT unused :)
-        final Parameters params = new Parameters(
-                ICalendar.PARAM_NAME, cache.getName(),
-                ICalendar.PARAM_NOTE, StringUtils.defaultString(cache.getPersonalNote()),
-                ICalendar.PARAM_HIDDEN_DATE, String.valueOf(cache.getHiddenDate().getTime()),
-                ICalendar.PARAM_URL, StringUtils.defaultString(cache.getUrl()),
-                ICalendar.PARAM_COORDS, cache.getCoords() == null ? "" : cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW),
-                ICalendar.PARAM_LOCATION, StringUtils.defaultString(cache.getLocation()),
-                ICalendar.PARAM_SHORT_DESC, StringUtils.defaultString(cache.getShortDescription())
-                );
 
-        // TODO: Check if addon is installed, if not, tell the user how to get it.
-        startActivity(new Intent(ICalendar.INTENT,
-                Uri.parse(ICalendar.URI_SCHEME + "://" + ICalendar.URI_HOST + "?" + params.toString())));
+        final boolean calendarAddOnAvailable = cgBase.isIntentAvailable(this, ICalendar.INTENT);
+
+        if (calendarAddOnAvailable) {
+            final Parameters params = new Parameters(
+                    ICalendar.PARAM_NAME, cache.getName(),
+                    ICalendar.PARAM_NOTE, StringUtils.defaultString(cache.getPersonalNote()),
+                    ICalendar.PARAM_HIDDEN_DATE, String.valueOf(cache.getHiddenDate().getTime()),
+                    ICalendar.PARAM_URL, StringUtils.defaultString(cache.getUrl()),
+                    ICalendar.PARAM_COORDS, cache.getCoords() == null ? "" : cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW),
+                    ICalendar.PARAM_LOCATION, StringUtils.defaultString(cache.getLocation()),
+                    ICalendar.PARAM_SHORT_DESC, StringUtils.defaultString(cache.getShortDescription())
+                    );
+
+            startActivity(new Intent(ICalendar.INTENT,
+                    Uri.parse(ICalendar.URI_SCHEME + "://" + ICalendar.URI_HOST + "?" + params.toString())));
+        } else {
+            showToast(res.getString(R.string.helper_calendar_missing));
+        }
     }
 
     /**

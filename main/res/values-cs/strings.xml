@@ -331,7 +331,6 @@
   <string name="cache_event">datum</string>
   <string name="cache_location">místo</string>
   <string name="cache_coordinates">souřadnice</string>
-  <string name="cache_calendars">vyberte kalendář</string>
   <string name="cache_spoiler_images_title">Spoiler images</string>
   <string name="cache_spoiler_images_loading">Loading spoiler images…</string>
 

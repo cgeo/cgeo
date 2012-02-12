@@ -552,7 +552,6 @@
   <string name="cache_location">Bundesland</string>
   <string name="cache_coordinates">Koordinaten</string>
   <string name="cache_coordinates_original">Ursprüngliche Koordinaten</string>
-  <string name="cache_calendars">Kalender auswählen</string>
   <string name="cache_spoiler_images_title">Hinweisbilder</string>
   <string name="cache_spoiler_images_loading">Lade Hinweisbilder…</string>
   <string name="cache_log_types">Logs</string>
@@ -726,6 +725,9 @@
   <!-- helpers -->
   <string name="helper_manual_title">Anleitung</string>
   <string name="helper_manual_description">Umfangreiche Anleitung für c:geo mit Beschreibung aller Möglichkeiten dieser App (auch versteckte).</string>
+  <string name="helper_calendar_title">c:geo Kalendar Add-on</string>
+  <string name="helper_calendar_missing">c:geo Kalendar Add-on nicht installiert</string>
+  <string name="helper_calendar_description">Ermöglicht die Übernahme von Event Caches in den Kalendar.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Sehr gute App für Online- und Offline-Karten (nur Rasterkarten) mit vielen weiteren Funktionen wie z.B. Trackaufzeichnung, POIs und vieles mehr.</string>
   <string name="helper_gpsstatus_title">GPS Status</string>

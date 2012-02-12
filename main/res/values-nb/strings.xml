@@ -318,7 +318,6 @@
   <string name="cache_event">Dato</string>
   <string name="cache_location">Lokasjon</string>
   <string name="cache_coordinates">Koordinater</string>
-  <string name="cache_calendars">Velg kalender</string>
 
   <!-- gpx -->
   <string name="gpx_import_caches_imported">Cacher importert</string>

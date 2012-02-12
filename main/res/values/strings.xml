@@ -566,7 +566,6 @@
   <string name="cache_location">Location</string>
   <string name="cache_coordinates">Coordinates</string>
   <string name="cache_coordinates_original">Original Coordinates</string>
-  <string name="cache_calendars">Select calendar</string>
   <string name="cache_spoiler_images_title">Spoiler images</string>
   <string name="cache_spoiler_images_loading">Loading spoiler images…</string>
   <string name="cache_log_types">Log types</string>
@@ -747,6 +746,7 @@
   <string name="helper_manual_title">Manual</string>
   <string name="helper_manual_description">Comprehensive manual for c:geo that contains description of all possibilities of this application (even hidden ones).</string>
   <string name="helper_calendar_title">c:geo calendar add-on</string>
+  <string name="helper_calendar_missing">c:geo calendar add-on not installed</string>
   <string name="helper_calendar_description">Enables you to export event caches into the calendar on your device.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Simple usable application showing Online maps and allowing to download them directly into Offline mode (raster maps only). Also support track recording, POI handling and many other useful functions.</string>
@@ -975,6 +975,7 @@
   <!-- changelog -->
   <string name="changelog">\n
     <b>next release</b>\n
+    · new: calendar add-on. c:geo doesn\'t require anymore calendar permission.
     · fix: deletion of outdated caches did not work
     · fix: changed internal caching causing a better overall performance
     · new: login status at start screen

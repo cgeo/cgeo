@@ -551,7 +551,6 @@
   <string name="cache_location">Luogo</string>
   <string name="cache_coordinates">Coordinate</string>
   <string name="cache_coordinates_original">Coordinate originali</string>
-  <string name="cache_calendars">Scegli calendario</string>
   <string name="cache_spoiler_images_title">Immagini spoiler</string>
   <string name="cache_spoiler_images_loading">Caricamento immagini spoiler…</string>
   <string name="cache_log_types">Tipi di Log</string>

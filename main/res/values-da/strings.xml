@@ -233,7 +233,6 @@
   <string name="cache_event">Dato</string>
   <string name="cache_location">Lokation</string>
   <string name="cache_coordinates">Koordinater</string>
-  <string name="cache_calendars">Vælg kalender</string>
 
   <!-- event -->
   <string name="event_success">Eventcache tilføjet til kalender</string>
