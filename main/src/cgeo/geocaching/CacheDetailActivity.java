@@ -988,7 +988,7 @@ public class CacheDetailActivity extends AbstractActivity {
     }
 
     /**
-     * Opens a context menu to do actions on an username
+     * Opens a dialog to do actions on an username
      */
     private class UserActionsClickListener implements View.OnClickListener {
 
@@ -1001,12 +1001,7 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             clickedItemText = ((TextView) view).getText().toString();
-            /*
-             * menu.setHeaderTitle(res.getString(R.string.user_menu_title) + " " + clickedItemText);
-             * menu.add(viewId, 1, 0, res.getString(R.string.user_menu_view_hidden));
-             * menu.add(viewId, 2, 0, res.getString(R.string.user_menu_view_found));
-             * menu.add(viewId, 3, 0, res.getString(R.string.user_menu_open_browser));
-             */
+
             final CharSequence[] items = {res.getString(R.string.user_menu_view_hidden),
                     res.getString(R.string.user_menu_view_found),
                     res.getString(R.string.user_menu_open_browser)
@@ -1033,27 +1028,6 @@ public class CacheDetailActivity extends AbstractActivity {
             });
             AlertDialog alert = builder.create();
             alert.show();
-
-            /*
-             * case 1:
-             * cgeocaches.startActivityOwner(this, clickedItemText.toString());
-             * return true;
-             * case 2:
-             * cgeocaches.startActivityUserName(this, clickedItemText.toString());
-             * return true;
-             * case 3:
-             * startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" +
-             * URLEncoder.encode(clickedItemText.toString()))));
-             * return true;
-             */
-            /*
-             * try {
-             * registerForContextMenu(view);
-             * openContextMenu(view);
-             * } catch (Exception e) {
-             * // nothing
-             * }
-             */
         }
     }
 
