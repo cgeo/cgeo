@@ -1925,7 +1925,7 @@ public class cgBase {
 
         final SearchResult searchResult = parseMapJSON(Uri.parse(uri).buildUpon().encodedQuery(params).build().toString(), page);
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
-            Log.e(Settings.tag, "cgeoBase.searchByViewport: No cache parsed");
+            Log.e(Settings.tag, "cgeoBase.searchByViewport: No cache parsed for viewport " + viewport);
             return null;
         }
 
@@ -3124,12 +3124,12 @@ public class cgBase {
      * found, this method returns false.
      *
      * From: http://android-developers.blogspot.com/2009/01/can-i-use-this-intent.html
-     * 
+     *
      * @param context
      *            The application's environment.
      * @param action
      *            The Intent action to check for availability.
-     * 
+     *
      * @return True if an Intent with the specified action can be sent and
      *         responded to, false otherwise.
      */

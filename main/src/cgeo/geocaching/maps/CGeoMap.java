@@ -859,8 +859,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
      */
     private class LoadTimer extends Thread {
         private LoadThread loadThread = null;
-        private DownloadThread downloadThread = null;
-        private DisplayThread displayThread = null;
+        private DownloadThread downloadThread = new DownloadThread(0L, 0L, 0L, 0L);
+        private DisplayThread displayThread = new DisplayThread(0L, 0L, 0L, 0L);
 
         public LoadTimer() {
             super("Load Timer");
@@ -987,11 +987,17 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
 
         public void startNewDisplayThread(long centerLat, long centerLon, long spanLat, long spanLon) {
-            if (displayThread != null && displayThread.isWorking()) {
+            if (displayThread.isWorking()) {
+                // create new thread
                 displayThread.stopIt();
+                displayThread = null;
+                displayThread = new DisplayThread(centerLat, centerLon, spanLat, spanLon);
+                displayThread.start();
+            } else {
+                // reuse thread
+                displayThread.setCenterSpan(centerLat, centerLon, spanLat, spanLon);
+                displayThread.run();
             }
-            displayThread = new DisplayThread(centerLat, centerLon, spanLat, spanLon);
-            displayThread.start();
         }
 
         public boolean isLoading() {
@@ -1008,11 +1014,17 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
 
         public void startNewDownloadThread(final long centerLat, final long centerLon, final long spanLat, final long spanLon) {
-            if (downloadThread != null && downloadThread.isWorking()) {
+            if (downloadThread.isWorking()) {
+                // create new thread
                 downloadThread.stopIt();
+                downloadThread = null;
+                downloadThread = new DownloadThread(centerLat, centerLon, spanLat, spanLon);
+                downloadThread.start();
+            } else {
+                // reuse thread
+                downloadThread.setCenterSpan(centerLat, centerLon, spanLat, spanLon);
+                downloadThread.run();
             }
-            downloadThread = new DownloadThread(centerLat, centerLon, spanLat, spanLon);
-            downloadThread.start();
         }
 
         public void stopDisplayThread() {
@@ -1230,17 +1242,9 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         }
 
         @Override
-        public void run() { //first time we enter we have crappy long/lat....
+        public void run() {
             try {
-                stop = false;
                 working = true;
-
-                if (stop) {
-                    displayHandler.sendEmptyMessage(UPDATE_TITLE);
-                    working = false;
-
-                    return;
-                }
 
                 double lat1 = (centerLat / 1e6) - ((spanLat / 1e6) / 2) - ((spanLat / 1e6) / 4);
                 double lat2 = (centerLat / 1e6) + ((spanLat / 1e6) / 2) + ((spanLat / 1e6) / 4);
@@ -1259,15 +1263,16 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
                 int count = 0;
                 do {
+                    if (stop) {
+                        throw new ThreadDeath();
+                    }
+
                     if (token == null) {
                         token = cgBase.getMapUserToken(noMapTokenHandler);
                     }
 
                     if (stop) {
-                        displayHandler.sendEmptyMessage(UPDATE_TITLE);
-                        working = false;
-
-                        return;
+                        throw new ThreadDeath();
                     }
 
                     final Viewport viewport = new Viewport(new Geopoint(latMin, lonMin), new Geopoint(latMax, lonMax));
@@ -1286,10 +1291,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 } while (count < 2);
 
                 if (stop) {
-                    displayHandler.sendEmptyMessage(UPDATE_TITLE);
-                    working = false;
-
-                    return;
+                    throw new ThreadDeath();
                 }
 
                 if (search != null) {
@@ -1297,17 +1299,18 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 }
 
                 if (stop) {
-                    displayHandler.sendEmptyMessage(UPDATE_TITLE);
-                    working = false;
-
-                    return;
+                    throw new ThreadDeath();
                 }
 
                 //render
                 if (loadTimer != null) {
                     loadTimer.startNewDisplayThread(centerLat, centerLon, spanLat, spanLon);
                 }
+            } catch (ThreadDeath e) {
+                Log.d(Settings.tag, "DownloadThread stopped");
+                displayHandler.sendEmptyMessage(UPDATE_TITLE);
             } finally {
+                stop = false;
                 working = false;
             }
         }
@@ -1326,14 +1329,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         @Override
         public void run() {
             try {
-                stop = false;
                 working = true;
 
                 if (mapView == null || caches == null) {
-                    displayHandler.sendEmptyMessage(UPDATE_TITLE);
-                    working = false;
-
-                    return;
+                    throw new ThreadDeath();
                 }
 
                 // display caches
@@ -1343,10 +1342,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 if (!cachesProtected.isEmpty()) {
                     for (cgCache cacheOne : cachesProtected) {
                         if (stop) {
-                            displayHandler.sendEmptyMessage(UPDATE_TITLE);
-                            working = false;
-
-                            return;
+                            throw new ThreadDeath();
                         }
 
                         if (cacheOne.getCoords() == null) {
@@ -1375,10 +1371,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     cachesCnt = cachesProtected.size();
 
                     if (stop) {
-                        displayHandler.sendEmptyMessage(UPDATE_TITLE);
-                        working = false;
-
-                        return;
+                        throw new ThreadDeath();
                     }
 
                 } else {
@@ -1389,7 +1382,11 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 cachesProtected.clear();
 
                 displayHandler.sendEmptyMessage(UPDATE_TITLE);
+            } catch (ThreadDeath e) {
+                Log.d(Settings.tag, "DisplayThread stopped");
+                displayHandler.sendEmptyMessage(UPDATE_TITLE);
             } finally {
+                stop = false;
                 working = false;
             }
         }
@@ -1413,7 +1410,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             final Viewport viewport = new Viewport(center, spanLat / 1e6 * 1.5, spanLon / 1e6 * 1.5);
 
             try {
-                stop = false;
                 working = true;
                 usersThreadRun = System.currentTimeMillis();
 
@@ -1454,7 +1450,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         @Override
         public void run() {
             try {
-                stop = false;
                 working = true;
 
                 if (mapView == null || CollectionUtils.isEmpty(users)) {
@@ -1531,7 +1526,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
     private abstract static class DoThread extends Thread {
 
-        protected boolean working = true;
+        protected boolean working = false;
         protected boolean stop = false;
         protected long centerLat = 0L;
         protected long centerLon = 0L;
@@ -1539,6 +1534,10 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         protected long spanLon = 0L;
 
         public DoThread(long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
+            setCenterSpan(centerLatIn, centerLonIn, spanLatIn, spanLonIn);
+        }
+
+        public void setCenterSpan(long centerLatIn, long centerLonIn, long spanLatIn, long spanLonIn) {
             centerLat = centerLatIn;
             centerLon = centerLonIn;
             spanLat = spanLatIn;
