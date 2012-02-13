@@ -117,6 +117,7 @@
   
   <!-- copy -->
   <string name="options_context_menu_title">Options</string>
+  <string name="copy_coords">Copy Coordinates</string>
   <string name="copy_desc">Copy Description</string>
   <string name="copy_personalnote">Copy Personal Note</string>
   <string name="copy_hint">Copy Hint</string>
@@ -125,6 +126,7 @@
   <!-- translation -->
   <string name="translate_to_sys_lang">Translate to %s</string>
   <string name="translate_to_english">Translate to English</string>
+  <string name="translate_length_warning">Translate may fail with large amounts of text.</string>
   
   <!-- errors, warnings, info toasts -->
   <string name="err_none">OK</string>
@@ -941,6 +943,7 @@
     · blafoo (code)\n
     · Bonemaro (tester)\n
     · BudBundi (localization DE, tester)\n
+    · campbeb (code)\n
     · Charles (localization FR)\n
     · Denny (localization DA)\n
     · Eisbehr (code, open source project leader)\n
@@ -985,6 +988,7 @@
   <!-- changelog -->
   <string name="changelog">\n
     <b>next release</b>\n
+    · New: Copy and translate available with long press\n
     · new: changed markers in the map with additional informations for stored caches:\n
        Personal Note available, Modified coordinates, non-reliable coordinates (orange circle)\n
     · fix: caches with modified coordinates are displayed at the modified coords and not at the original coords\n

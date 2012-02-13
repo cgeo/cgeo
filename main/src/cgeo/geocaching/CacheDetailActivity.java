@@ -120,7 +120,6 @@ public class CacheDetailActivity extends AbstractActivity {
     private final Progress progress = new Progress();
     private SearchResult search;
     private final LocationUpdater locationUpdater = new LocationUpdater();
-    private String contextMenuUser = null;
     private CharSequence clickedItemText = null;
     private int contextMenuWPIndex = -1;
 
@@ -356,22 +355,9 @@ public class CacheDetailActivity extends AbstractActivity {
         final int viewId = view.getId();
         contextMenuWPIndex = -1;
         switch (viewId) {
-            case R.id.author:
-            case R.id.value:
-                if (viewId == R.id.author) { // Author of a log entry
-                    contextMenuUser = ((TextView) view).getText().toString();
-                } else if (viewId == R.id.value) { // The owner of the cache
-                    if (StringUtils.isNotBlank(cache.getOwnerReal())) {
-                        contextMenuUser = cache.getOwnerReal();
-                    } else {
-                        contextMenuUser = cache.getOwner();
-                    }
-                }
-
-                menu.setHeaderTitle(res.getString(R.string.user_menu_title) + " " + contextMenuUser);
-                menu.add(viewId, 1, 0, res.getString(R.string.user_menu_view_hidden));
-                menu.add(viewId, 2, 0, res.getString(R.string.user_menu_view_found));
-                menu.add(viewId, 3, 0, res.getString(R.string.user_menu_open_browser));
+            case R.id.value: // coordinates
+                clickedItemText = ((TextView) view).getText();
+                buildOptionsContextmenu(menu, viewId, res.getString(R.string.copy_coords), true);
                 break;
             case R.id.shortdesc:
                 clickedItemText = ((TextView) view).getText();
@@ -437,10 +423,14 @@ public class CacheDetailActivity extends AbstractActivity {
         menu.setHeaderTitle(res.getString(R.string.options_context_menu_title));
         menu.add(viewId, 1, 0, copyPrompt);
         if (!copyOnly) {
+            if (clickedItemText.length() > TranslationUtils.translationTextLengthToWarn) {
+                showToast(res.getString(R.string.translate_length_warning));
+            }
             menu.add(viewId, 2, 0, res.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()));
             if (Settings.isUseEnglish() && Locale.getDefault() != Locale.ENGLISH) {
                 menu.add(viewId, 3, 0, res.getString(R.string.translate_to_english));
             }
+
         }
     }
 
@@ -449,37 +439,21 @@ public class CacheDetailActivity extends AbstractActivity {
         final int groupId = item.getGroupId();
         final int index = item.getItemId();
         switch (groupId) {
-            case R.id.author:
             case R.id.value:
-                final int itemId = item.getItemId();
-                switch (itemId) {
-                    case 1:
-                        cgeocaches.startActivityOwner(this, contextMenuUser);
-                        return true;
-                    case 2:
-                        cgeocaches.startActivityUserName(this, contextMenuUser);
-                        return true;
-                    case 3:
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(contextMenuUser))));
-                        return true;
-                    default:
-                        break;
-                }
-                break;
             case R.id.shortdesc:
             case R.id.longdesc:
             case R.id.personalnote:
             case R.id.hint:
             case R.id.log:
                 switch (index) {
-                    case 1:
+                    case 1: // copy
                         ClipboardUtils.copyToClipboard(clickedItemText);
                         return true;
-                    case 2:
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(TranslationUtils.buildTranslationURI(Locale.getDefault().getLanguage(), clickedItemText.toString()))));
+                    case 2: // translate to system language
+                        TranslationUtils.startActivityTranslate(this, Locale.getDefault().getLanguage(), clickedItemText.toString());
                         return true;
-                    case 3:
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(TranslationUtils.buildTranslationURI(Locale.ENGLISH.getLanguage(), clickedItemText.toString()))));
+                    case 3: // translate to English
+                        TranslationUtils.startActivityTranslate(this, Locale.ENGLISH.getLanguage(), clickedItemText.toString());
                         return true;
                     default:
                         break;
@@ -1026,12 +1000,60 @@ public class CacheDetailActivity extends AbstractActivity {
                 return;
             }
 
-            try {
-                registerForContextMenu(view);
-                openContextMenu(view);
-            } catch (Exception e) {
-                // nothing
-            }
+            clickedItemText = ((TextView) view).getText().toString();
+            /*
+             * menu.setHeaderTitle(res.getString(R.string.user_menu_title) + " " + clickedItemText);
+             * menu.add(viewId, 1, 0, res.getString(R.string.user_menu_view_hidden));
+             * menu.add(viewId, 2, 0, res.getString(R.string.user_menu_view_found));
+             * menu.add(viewId, 3, 0, res.getString(R.string.user_menu_open_browser));
+             */
+            final CharSequence[] items = {res.getString(R.string.user_menu_view_hidden),
+                    res.getString(R.string.user_menu_view_found),
+                    res.getString(R.string.user_menu_open_browser)
+            };
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(CacheDetailActivity.this);
+            builder.setTitle(res.getString(R.string.user_menu_title) + " " + clickedItemText);
+            builder.setItems(items, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int item) {
+                    switch (item) {
+                        case 0:
+                            cgeocaches.startActivityOwner(CacheDetailActivity.this, clickedItemText.toString());
+                            return;
+                        case 1:
+                            cgeocaches.startActivityUserName(CacheDetailActivity.this, clickedItemText.toString());
+                            return;
+                        case 2:
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(clickedItemText.toString()))));
+                            return;
+                        default:
+                            break;
+                    }
+                }
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
+
+            /*
+             * case 1:
+             * cgeocaches.startActivityOwner(this, clickedItemText.toString());
+             * return true;
+             * case 2:
+             * cgeocaches.startActivityUserName(this, clickedItemText.toString());
+             * return true;
+             * case 3:
+             * startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" +
+             * URLEncoder.encode(clickedItemText.toString()))));
+             * return true;
+             */
+            /*
+             * try {
+             * registerForContextMenu(view);
+             * openContextMenu(view);
+             * } catch (Exception e) {
+             * // nothing
+             * }
+             */
         }
     }
 
@@ -1553,8 +1575,8 @@ public class CacheDetailActivity extends AbstractActivity {
 
             // cache coordinates
             if (cache.getCoords() != null) {
-                addCacheDetail(R.string.cache_coordinates, cache.getCoords().toString())
-                        .setOnClickListener(new View.OnClickListener() {
+                TextView valueView = addCacheDetail(R.string.cache_coordinates, cache.getCoords().toString());
+                valueView.setOnClickListener(new View.OnClickListener() {
                             private int position = 0;
                             private GeopointFormatter.Format[] availableFormats = new GeopointFormatter.Format[] {
                                     GeopointFormatter.Format.LAT_LON_DECMINUTE,
@@ -1571,6 +1593,7 @@ public class CacheDetailActivity extends AbstractActivity {
                                 valueView.setText(cache.getCoords().format(availableFormats[position]));
                             }
                         });
+                registerForContextMenu(valueView);
             }
 
             // cache attributes
