@@ -22,11 +22,11 @@ public class cgDataTest extends ApplicationTestCase<cgeoapplication> {
         createApplication();
     }
 
-    public static void testLists() {
+    public static void testStoredLists() {
 
         cgeoapplication app = cgeoapplication.getInstance();
-        int listId1 = -1;
-        int listId2 = -1;
+        int listId1 = StoredList.STANDARD_LIST_ID;
+        int listId2 = StoredList.STANDARD_LIST_ID;
 
         // create caches
         final cgCache cache1 = cgBaseTest.createCache(0);
@@ -64,7 +64,7 @@ public class cgDataTest extends ApplicationTestCase<cgeoapplication> {
             app.moveToList(cache1.getGeocode(), listId2);
             assertEquals(1, app.getAllStoredCachesCount(false, CacheType.ALL, listId2));
 
-            // remove list (cache1=1, cache2=listId2)
+            // remove list (cache1=listId2, cache2=listId2)
             assertTrue(app.removeList(listId1));
 
             // mark dropped (cache1=1, cache2=0)
@@ -72,8 +72,7 @@ public class cgDataTest extends ApplicationTestCase<cgeoapplication> {
 
             // mark stored (cache1=1, cache2=listId2)
             app.markStored(cache2.getGeocode(), listId2);
-            StoredList list2 = app.getList(listId2);
-            //assertEquals(1, list2.count);
+            assertEquals(2, app.getAllStoredCachesCount(false, CacheType.ALL, listId2));
 
             // drop stored (cache1=0, cache2=0)
             app.dropList(listId2);
