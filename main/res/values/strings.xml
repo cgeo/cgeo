@@ -362,7 +362,6 @@
   <string name="init_password">Password</string>
   <string name="init_passvote">Password</string>
   <string name="init_login">Check and save Login</string>
-  <string name="init_logout">Logout</string>
   <string name="init_login_popup">Login</string>
   <string name="init_login_popup_working">Logging into Geocaching.com…</string>
   <string name="init_login_popup_ok">Login ok.</string>
