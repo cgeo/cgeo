@@ -6,7 +6,6 @@ import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.geopoint.Geopoint;
-import cgeo.geocaching.geopoint.GeopointFormatter;
 
 import java.text.ParseException;
 import java.util.Arrays;
@@ -18,11 +17,8 @@ import java.util.Map;
 
 public class GC2CJPF extends MockedCache {
 
-    final protected Geopoint userCoords;
-
     public GC2CJPF() {
         super(new Geopoint(52425067, 9664200));
-        this.userCoords = new Geopoint("N 52° 25.111 E 009° 39.111");
     }
 
     @Override
@@ -167,23 +163,6 @@ public class GC2CJPF extends MockedCache {
     @Override
     public int getFavoritePoints() {
         return 7;
-    }
-
-    @Override
-    public String getLatitude() {
-        if ("blafoo".equals(this.getMockedDataUser())) {
-            return userCoords.format(GeopointFormatter.Format.LAT_DECMINUTE);
-        }
-        return coords.format(GeopointFormatter.Format.LAT_DECMINUTE);
-    }
-
-    @Override
-    public String getLongitude() {
-        if ("blafoo".equals(this.getMockedDataUser())) {
-            return userCoords.format(GeopointFormatter.Format.LON_DECMINUTE);
-        }
-        return coords.format(GeopointFormatter.Format.LON_DECMINUTE);
-
     }
 
 }
