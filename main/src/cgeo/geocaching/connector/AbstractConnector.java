@@ -66,4 +66,10 @@ public abstract class AbstractConnector implements IConnector {
         // don't accept any file by default
         return false;
     }
+
+    @Override
+    public boolean isReliableLatLon(boolean cacheHasReliableLatLon) {
+        // let every cache have reliable coordinates by default
+        return true;
+    }
 }

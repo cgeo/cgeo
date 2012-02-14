@@ -32,4 +32,8 @@ public class Viewport {
     public double getLongitudeMax() {
         return topRight.getLongitude();
     }
+
+    public String toString() {
+        return "(" + bottomLeft.toString() + "," + topRight.toString() + ")";
+    }
 }

@@ -136,4 +136,9 @@ public class GCConnector extends AbstractConnector {
     public boolean isZippedGPXFile(final String fileName) {
         return gpxZipFilePattern.matcher(fileName).matches();
     }
+
+    @Override
+    public boolean isReliableLatLon(boolean cacheHasReliableLatLon) {
+        return cacheHasReliableLatLon;
+    }
 }

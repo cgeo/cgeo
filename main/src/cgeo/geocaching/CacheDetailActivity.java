@@ -17,7 +17,9 @@ import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import com.viewpagerindicator.TitlePageIndicator;
@@ -28,7 +30,9 @@ import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.R.color;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
@@ -84,6 +88,7 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -112,7 +117,7 @@ public class CacheDetailActivity extends AbstractActivity {
     private final Progress progress = new Progress();
     private SearchResult search;
     private final LocationUpdater locationUpdater = new LocationUpdater();
-    private String contextMenuUser = null;
+    private CharSequence clickedItemText = null;
     private int contextMenuWPIndex = -1;
 
     /**
@@ -347,22 +352,35 @@ public class CacheDetailActivity extends AbstractActivity {
         final int viewId = view.getId();
         contextMenuWPIndex = -1;
         switch (viewId) {
-            case R.id.author:
-            case R.id.value:
-                if (viewId == R.id.author) { // Author of a log entry
-                    contextMenuUser = ((TextView) view).getText().toString();
-                } else if (viewId == R.id.value) { // The owner of the cache
-                    if (StringUtils.isNotBlank(cache.getOwnerReal())) {
-                        contextMenuUser = cache.getOwnerReal();
-                    } else {
-                        contextMenuUser = cache.getOwner();
-                    }
+            case R.id.value: // coordinates
+                clickedItemText = ((TextView) view).getText();
+                buildOptionsContextmenu(menu, viewId, res.getString(R.string.copy_coords), true);
+                break;
+            case R.id.shortdesc:
+                clickedItemText = ((TextView) view).getText();
+                buildOptionsContextmenu(menu, viewId, res.getString(R.string.copy_desc), false);
+                break;
+            case R.id.longdesc:
+                // combine short and long description
+                String shortDesc = cache.getShortDescription();
+                if (shortDesc.compareTo("") == 0) {
+                    clickedItemText = ((TextView) view).getText();
+                } else {
+                    clickedItemText = shortDesc + "\n\n" + ((TextView) view).getText();
                 }
-
-                menu.setHeaderTitle(res.getString(R.string.user_menu_title) + " " + contextMenuUser);
-                menu.add(viewId, 1, 0, res.getString(R.string.user_menu_view_hidden));
-                menu.add(viewId, 2, 0, res.getString(R.string.user_menu_view_found));
-                menu.add(viewId, 3, 0, res.getString(R.string.user_menu_open_browser));
+                buildOptionsContextmenu(menu, viewId, res.getString(R.string.copy_desc), false);
+                break;
+            case R.id.personalnote:
+                clickedItemText = ((TextView) view).getText();
+                buildOptionsContextmenu(menu, viewId, res.getString(R.string.copy_personalnote), true);
+                break;
+            case R.id.hint:
+                clickedItemText = ((TextView) view).getText();
+                buildOptionsContextmenu(menu, viewId, res.getString(R.string.copy_hint), false);
+                break;
+            case R.id.log:
+                clickedItemText = ((TextView) view).getText();
+                buildOptionsContextmenu(menu, viewId, res.getString(R.string.copy_log), false);
                 break;
             case -1:
                 if (null != cache.getWaypoints()) {
@@ -398,27 +416,46 @@ public class CacheDetailActivity extends AbstractActivity {
         }
     }
 
+    private void buildOptionsContextmenu(ContextMenu menu, int viewId, String copyPrompt, boolean copyOnly) {
+        menu.setHeaderTitle(res.getString(R.string.options_context_menu_title));
+        menu.add(viewId, 1, 0, copyPrompt);
+        if (!copyOnly) {
+            if (clickedItemText.length() > TranslationUtils.translationTextLengthToWarn) {
+                showToast(res.getString(R.string.translate_length_warning));
+            }
+            menu.add(viewId, 2, 0, res.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()));
+            if (Settings.isUseEnglish() && Locale.getDefault() != Locale.ENGLISH) {
+                menu.add(viewId, 3, 0, res.getString(R.string.translate_to_english));
+            }
+
+        }
+    }
+
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         final int groupId = item.getGroupId();
         final int index = item.getItemId();
         switch (groupId) {
-            case R.id.author:
             case R.id.value:
-                final int itemId = item.getItemId();
-                switch (itemId) {
-                    case 1:
-                        cgeocaches.startActivityOwner(this, contextMenuUser);
+            case R.id.shortdesc:
+            case R.id.longdesc:
+            case R.id.personalnote:
+            case R.id.hint:
+            case R.id.log:
+                switch (index) {
+                    case 1: // copy
+                        ClipboardUtils.copyToClipboard(clickedItemText);
                         return true;
-                    case 2:
-                        cgeocaches.startActivityUserName(this, contextMenuUser);
+                    case 2: // translate to system language
+                        TranslationUtils.startActivityTranslate(this, Locale.getDefault().getLanguage(), clickedItemText.toString());
                         return true;
-                    case 3:
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(contextMenuUser))));
+                    case 3: // translate to English
+                        TranslationUtils.startActivityTranslate(this, Locale.ENGLISH.getLanguage(), clickedItemText.toString());
                         return true;
                     default:
                         break;
                 }
+
                 break;
             case CONTEXT_MENU_WAYPOINT_EDIT:
                 if (cache.hasWaypoints() && index < cache.getWaypoints().size()) {
@@ -818,7 +855,7 @@ public class CacheDetailActivity extends AbstractActivity {
     }
 
     /**
-     * Opens a context menu to do actions on an username
+     * Opens a dialog to do actions on an username
      */
     private class UserActionsClickListener implements View.OnClickListener {
 
@@ -830,12 +867,34 @@ public class CacheDetailActivity extends AbstractActivity {
                 return;
             }
 
-            try {
-                registerForContextMenu(view);
-                openContextMenu(view);
-            } catch (Exception e) {
-                // nothing
-            }
+            clickedItemText = ((TextView) view).getText().toString();
+
+            final CharSequence[] items = {res.getString(R.string.user_menu_view_hidden),
+                    res.getString(R.string.user_menu_view_found),
+                    res.getString(R.string.user_menu_open_browser)
+            };
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(CacheDetailActivity.this);
+            builder.setTitle(res.getString(R.string.user_menu_title) + " " + clickedItemText);
+            builder.setItems(items, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int item) {
+                    switch (item) {
+                        case 0:
+                            cgeocaches.startActivityOwner(CacheDetailActivity.this, clickedItemText.toString());
+                            return;
+                        case 1:
+                            cgeocaches.startActivityUserName(CacheDetailActivity.this, clickedItemText.toString());
+                            return;
+                        case 2:
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(clickedItemText.toString()))));
+                            return;
+                        default:
+                            break;
+                    }
+                }
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
         }
     }
 
@@ -1357,8 +1416,8 @@ public class CacheDetailActivity extends AbstractActivity {
 
             // cache coordinates
             if (cache.getCoords() != null) {
-                addCacheDetail(R.string.cache_coordinates, cache.getCoords().toString())
-                        .setOnClickListener(new View.OnClickListener() {
+                TextView valueView = addCacheDetail(R.string.cache_coordinates, cache.getCoords().toString());
+                valueView.setOnClickListener(new View.OnClickListener() {
                             private int position = 0;
                             private GeopointFormatter.Format[] availableFormats = new GeopointFormatter.Format[] {
                                     GeopointFormatter.Format.LAT_LON_DECMINUTE,
@@ -1375,6 +1434,7 @@ public class CacheDetailActivity extends AbstractActivity {
                                 valueView.setText(cache.getCoords().format(availableFormats[position]));
                             }
                         });
+                registerForContextMenu(valueView);
             }
 
             // cache attributes
@@ -1842,6 +1902,7 @@ public class CacheDetailActivity extends AbstractActivity {
             // cache short description
             if (StringUtils.isNotBlank(cache.getShortDescription())) {
                 new LoadDescriptionTask().execute(cache.getShortDescription(), view.findViewById(R.id.shortdesc), null);
+                registerForContextMenu(view.findViewById(R.id.shortdesc));
             }
 
             // long description
@@ -1867,6 +1928,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 personalNoteText.setVisibility(View.VISIBLE);
                 personalNoteText.setText(cache.getPersonalNote(), TextView.BufferType.SPANNABLE);
                 personalNoteText.setMovementMethod(LinkMovementMethod.getInstance());
+                registerForContextMenu(personalNoteText);
             }
             else {
                 ((LinearLayout) view.findViewById(R.id.personalnote_box)).setVisibility(View.GONE);
@@ -1892,6 +1954,7 @@ public class CacheDetailActivity extends AbstractActivity {
                         hintView.setText(CryptUtils.rot13(hintView.getText().toString()));
                     }
                 });
+                registerForContextMenu(hintView);
             } else {
                 TextView hintView = ((TextView) view.findViewById(R.id.hint));
                 hintView.setVisibility(View.GONE);
@@ -1931,6 +1994,7 @@ public class CacheDetailActivity extends AbstractActivity {
             view.findViewById(R.id.loading).setVisibility(View.VISIBLE);
 
             new LoadDescriptionTask().execute(cache.getDescription(), view.findViewById(R.id.longdesc), view.findViewById(R.id.loading));
+            registerForContextMenu(view.findViewById(R.id.longdesc));
         }
 
         /**
@@ -2205,6 +2269,7 @@ public class CacheDetailActivity extends AbstractActivity {
                         TextView logView = (TextView) logLayout.findViewById(R.id.log);
                         logView.setMovementMethod(LinkMovementMethod.getInstance());
                         logView.setOnClickListener(new DecryptLogClickListener());
+                        registerForContextMenu(logView);
 
                         loglist.add(rowView);
                     }
