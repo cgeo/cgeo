@@ -214,7 +214,12 @@ public class cgeowaypointadd extends AbstractActivity {
         wpAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         waypointTypeSelector.setAdapter(wpAdapter);
 
-        waypointTypeSelector.setSelection(wpTypes.indexOf(type));
+        int typeIndex = wpTypes.indexOf(type);
+        if (typeIndex < 0) {
+            typeIndex = wpTypes.indexOf(WaypointType.WAYPOINT);
+        }
+
+        waypointTypeSelector.setSelection(typeIndex);
         waypointTypeSelector.setOnItemSelectedListener(new changeWaypointType(this));
 
         waypointTypeSelector.setVisibility(View.VISIBLE);

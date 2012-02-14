@@ -45,6 +45,7 @@ public class cgWaypoint implements IWaypoint, Comparable<cgWaypoint> {
      */
     public cgWaypoint(final cgWaypoint other) {
         merge(other);
+        this.waypointType = other.getWaypointType();
         id = 0;
     }
 
