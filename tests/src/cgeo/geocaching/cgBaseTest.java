@@ -12,7 +12,6 @@ import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import junit.framework.Assert;
 
@@ -34,7 +33,6 @@ public class cgBaseTest extends AndroidTestCase {
         Assert.assertEquals(125.663703918457, cgBase.getElevation(new Geopoint(48.0, 2.0)), 0.1);
     }
 
-    @SuppressWarnings("unused")
     public static void testCompareCaches(ICache expected, cgCache actual) {
         Assert.assertEquals(expected.getGeocode(), actual.getGeocode());
         Assert.assertTrue(expected.getType() == actual.getType());
@@ -60,11 +58,10 @@ public class cgBaseTest extends AndroidTestCase {
         Assert.assertEquals(expected.getPersonalNote(), actual.getPersonalNote());
         Assert.assertEquals(expected.isFound(), actual.isFound());
         Assert.assertEquals(expected.isFavorite(), actual.isFavorite());
+        System.out.println(expected.getFavoritePoints() + " " + actual.getFavoritePoints());
         Assert.assertTrue(expected.getFavoritePoints() <= actual.getFavoritePoints());
         Assert.assertEquals(expected.isWatchlist(), actual.isWatchlist());
-        Date date1 = expected.getHiddenDate();
-        Date date2 = actual.getHiddenDate();
-        Assert.assertEquals(date1.toString(), date2.toString());
+        Assert.assertEquals(expected.getHiddenDate().toString(), actual.getHiddenDate().toString());
         for (String attribute : expected.getAttributes()) {
             Assert.assertTrue(actual.getAttributes().contains(attribute));
         }
@@ -72,10 +69,7 @@ public class cgBaseTest extends AndroidTestCase {
             Assert.assertTrue(actual.getLogCounts().get(logType) >= expected.getLogCounts().get(logType));
         }
 
-        int actualInventorySize = null != actual.getInventory() ? actual.getInventory().size() : 0;
-        int expectedInventorySize = null != expected.getInventory() ? expected.getInventory().size() : 0;
-        // the inventory can differ to often.
-        // Assert.assertEquals(expectedInventorySize, actualInventorySize);
+        // the inventory can differ to often, therefore we don't compare them
 
         int actualSpoilersSize = null != actual.getSpoilers() ? actual.getSpoilers().size() : 0;
         int expectedSpoilersSize = null != expected.getSpoilers() ? expected.getSpoilers().size() : 0;
