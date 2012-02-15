@@ -1087,7 +1087,7 @@ public class cgBase {
 
             if (null != originalCoords) {
                 // res is null during the unit tests
-                final cgWaypoint waypoint = new cgWaypoint(res != null ? res.getString(R.string.cache_coordinates_original) : "res = null", WaypointType.WAYPOINT);
+                final cgWaypoint waypoint = new cgWaypoint(res != null ? res.getString(R.string.cache_coordinates_original) : "res = null", WaypointType.WAYPOINT, false);
                 waypoint.setCoords(new Geopoint(originalCoords));
                 cache.addWaypoint(waypoint);
                 cache.setUserModifiedCoords(true);
@@ -1137,7 +1137,7 @@ public class cgBase {
                     // waypoint type
                     final String resulttype = BaseUtils.getMatch(wp[3], GCConstants.PATTERN_WPTYPE, null);
 
-                    final cgWaypoint waypoint = new cgWaypoint(name, WaypointType.findById(resulttype));
+                    final cgWaypoint waypoint = new cgWaypoint(name, WaypointType.findById(resulttype), false);
 
                     // waypoint prefix
                     waypoint.setPrefix(BaseUtils.getMatch(wp[4], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getPrefix(), false));

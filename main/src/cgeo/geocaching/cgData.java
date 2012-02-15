@@ -54,7 +54,7 @@ public class cgData {
             "_id", "updated", "reason", "detailed", "detailedupdate", "visiteddate", "geocode", "cacheid", "guid", "type", "name", "own", "owner", "owner_real", "hidden", "hint", "size",
             "difficulty", "distance", "direction", "terrain", "latlon", "location", "latitude", "longitude", "elevation", "shortdesc",
             "favourite_cnt", "rating", "votes", "myvote", "disabled", "archived", "members", "found", "favourite", "inventorycoins", "inventorytags",
-            "inventoryunknown", "onWatchlist", "personal_note", "reliable_latlon", "coordsChanged"
+            "inventoryunknown", "onWatchlist", "personal_note", "reliable_latlon", "coordsChanged", "finalDefined"
             // reason is replaced by listId in cgCache
     };
     /**
@@ -67,7 +67,7 @@ public class cgData {
     private cgDbHelper dbHelper = null;
     private SQLiteDatabase databaseRO = null;
     private SQLiteDatabase databaseRW = null;
-    private static final int dbVersion = 61;
+    private static final int dbVersion = 62;
     private static final String dbName = "data";
     private static final String dbTableCaches = "cg_caches";
     private static final String dbTableLists = "cg_lists";
@@ -125,7 +125,8 @@ public class cgData {
             + "inventorytags integer default 0, "
             + "inventoryunknown integer default 0, "
             + "onWatchlist integer default 0, "
-            + "coordsChanged integer default 0"
+            + "coordsChanged integer default 0, "
+            + "finalDefined integer default 0"
             + "); ";
     private static final String dbCreateLists = ""
             + "create table " + dbTableLists + " ("
@@ -158,7 +159,8 @@ public class cgData {
             + "latlon text, "
             + "latitude double, "
             + "longitude double, "
-            + "note text "
+            + "note text, "
+            + "own integer default 0"
             + "); ";
     private static final String dbCreateSpoilers = ""
             + "create table " + dbTableSpoilers + " ("
@@ -921,7 +923,17 @@ public class cgData {
 
                         }
                     }
+                    // Introduces finalDefined on caches and own on waypoints
+                    if (oldVersion < 62) {
+                        try {
+                            db.execSQL("alter table " + dbTableCaches + " add column finalDefined integer default 0");
+                            db.execSQL("alter table " + dbTableWaypoints + " add column own integer default 0");
+                            db.execSQL("update " + dbTableWaypoints + " set own = 1 where type = 'own'");
+                        } catch (Exception e) {
+                            Log.e(Settings.tag, "Failed to upgrade to ver. 62: " + e.toString());
 
+                        }
+                    }
                 }
 
                 db.setTransactionSuccessful();
@@ -1300,6 +1312,7 @@ public class cgData {
         values.put("inventoryunknown", cache.getInventoryItems());
         values.put("onWatchlist", cache.isOnWatchlist() ? 1 : 0);
         values.put("coordsChanged", cache.hasUserModifiedCoords() ? 1 : 0);
+        values.put("finalDefined", cache.hasFinalDefined() ? 1 : 0);
 
         boolean statusOk = true;
 
@@ -1451,7 +1464,7 @@ public class cgData {
         databaseRW.beginTransaction();
         try {
             if (drop) {
-                databaseRW.delete(dbTableWaypoints, "geocode = ? and type <> ?", new String[] { geocode, "own" });
+                databaseRW.delete(dbTableWaypoints, "geocode = ? and type <> ? and own = 0", new String[] { geocode, "own" });
             }
 
             if (!waypoints.isEmpty()) {
@@ -1472,6 +1485,7 @@ public class cgData {
                     values.put("latlon", oneWaypoint.getLatlon());
                     putCoords(values, oneWaypoint.getCoords());
                     values.put("note", oneWaypoint.getNote());
+                    values.put("own", oneWaypoint.isUserDefined() ? 1 : 0);
 
                     final long rowId = databaseRW.insert(dbTableWaypoints, null, values);
                     oneWaypoint.setId((int) rowId);
@@ -1539,6 +1553,7 @@ public class cgData {
             values.put("latlon", waypoint.getLatlon());
             putCoords(values, waypoint.getCoords());
             values.put("note", waypoint.getNote());
+            values.put("own", waypoint.isUserDefined() ? 1 : 0);
 
             if (id <= 0) {
                 final long rowId = databaseRW.insert(dbTableWaypoints, null, values);
@@ -2017,7 +2032,7 @@ public class cgData {
         cgCache cache = new cgCache();
 
         if (cacheColumnIndex == null) {
-            int[] local_cci = new int[40]; // use a local variable to avoid having the not yet fully initialized array be visible to other threads
+            int[] local_cci = new int[41]; // use a local variable to avoid having the not yet fully initialized array be visible to other threads
             local_cci[0] = cursor.getColumnIndex("updated");
             local_cci[1] = cursor.getColumnIndex("reason");
             local_cci[2] = cursor.getColumnIndex("detailed");
@@ -2058,6 +2073,7 @@ public class cgData {
             local_cci[37] = cursor.getColumnIndex("coordsChanged");
             local_cci[38] = cursor.getColumnIndex("latitude");
             local_cci[39] = cursor.getColumnIndex("longitude");
+            local_cci[40] = cursor.getColumnIndex("finalDefined");
             cacheColumnIndex = local_cci;
         }
 
@@ -2119,6 +2135,7 @@ public class cgData {
         cache.setOnWatchlist(cursor.getInt(cacheColumnIndex[35]) == 1);
         cache.setReliableLatLon(cursor.getInt(cacheColumnIndex[36]) > 0);
         cache.setUserModifiedCoords(cursor.getInt(cacheColumnIndex[37]) > 0);
+        cache.setFinalDefined(cursor.getInt(cacheColumnIndex[40]) > 0);
 
         Log.d(Settings.tag, "Loading " + cache.toString() + " (" + cache.getListId() + ") from DB");
 
@@ -2171,7 +2188,7 @@ public class cgData {
 
         Cursor cursor = databaseRO.query(
                 dbTableWaypoints,
-                new String[] { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latlon", "latitude", "longitude", "note" },
+                new String[] { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latlon", "latitude", "longitude", "note", "own" },
                 "_id = ?",
                 new String[] { Integer.toString(id) },
                 null,
@@ -2205,7 +2222,7 @@ public class cgData {
 
         Cursor cursor = databaseRO.query(
                 dbTableWaypoints,
-                new String[] { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latlon", "latitude", "longitude", "note" },
+                new String[] { "_id", "geocode", "updated", "type", "prefix", "lookup", "name", "latlon", "latitude", "longitude", "note", "own" },
                 "geocode = ?",
                 new String[] { geocode },
                 null,
@@ -2234,7 +2251,8 @@ public class cgData {
     private static cgWaypoint createWaypointFromDatabaseContent(Cursor cursor) {
         String name = cursor.getString(cursor.getColumnIndex("name"));
         WaypointType type = WaypointType.findById(cursor.getString(cursor.getColumnIndex("type")));
-        cgWaypoint waypoint = new cgWaypoint(name, type);
+        boolean own = cursor.getInt(cursor.getColumnIndex("own")) != 0;
+        cgWaypoint waypoint = new cgWaypoint(name, type, own);
 
         waypoint.setId(cursor.getInt(cursor.getColumnIndex("_id")));
         waypoint.setGeocode(cursor.getString(cursor.getColumnIndex("geocode")));
