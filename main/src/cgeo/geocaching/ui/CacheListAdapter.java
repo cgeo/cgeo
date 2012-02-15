@@ -481,7 +481,7 @@ public class CacheListAdapter extends ArrayAdapter<cgCache> {
 
         holder.text.setText(cache.getNameSp(), TextView.BufferType.SPANNABLE);
         int hashCode = new HashCodeBuilder()
-                .append(cache.getType()).append(cache.hasUserModifiedCoords()).toHashCode();
+                .append(cache.getType()).append(cache.hasUserModifiedCoords() || cache.hasFinalDefined()).toHashCode();
         if (gcIconDrawables.containsKey(hashCode)) { // cache icon
             holder.text.setCompoundDrawablesWithIntrinsicBounds(gcIconDrawables.get(hashCode), null, null, null);
         } else { // unknown cache type, "mystery" icon
