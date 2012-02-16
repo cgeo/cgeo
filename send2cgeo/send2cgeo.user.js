@@ -3,8 +3,8 @@
 // @namespace      http://send2.cgeo.org/
 // @description    Add Send to c:geo button to geocaching.com
 // @include        http://www.geocaching.com/seek/cache_details*
-// @include        http://www.geocaching.com/map/beta*
-// @version 	   0.24
+// @include        http://www.geocaching.com/map/default*
+// @version        0.25
 // ==/UserScript==
 
 // Inserts javascript that will be called by the s2cgeo button
@@ -20,13 +20,13 @@ var map = document.getElementById('cacheDetailsTemplate');
 if( map != null )
 {
     var html = 'Log Visit</span></a> <br /> '
-             + '<a href="javascript:s2cgeo(\'${cache.gc}\');" '
+             + '<a class="lnk ui-block-b" href="javascript:s2cgeo(\'{{=gc}}\');" '
              + 'class="lnk">'
              + '<img src="/images/sendtogps/sendtogps_icon.png" '
              + 'align="absmiddle" border="0"> '
-             + '<span>Send to c:geo</span></a>';
+             + '<span>Send to c:geo</span>';
     
-    map.innerHTML = map.innerHTML.replace('Log Visit</span></a>', html);
+    map.innerHTML = map.innerHTML.replace('Log Visit</span>', html);
 }
 else
 {
