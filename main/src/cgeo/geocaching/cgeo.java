@@ -600,6 +600,26 @@ public class cgeo extends AbstractActivity {
      */
     public void cgeoFindOnMap(View v) {
         findViewById(R.id.map).setPressed(true);
+        if (Settings.isLiveMapWarningShown()) {
+            startLifeMap();
+            return;
+        }
+        Settings.setLiveMapWarningShown();
+        new AlertDialog.Builder(this)
+                .setTitle(res.getString(R.string.warn_livemap_title))
+                .setMessage(res.getString(R.string.warn_livemap_msg))
+                .setCancelable(false)
+                .setPositiveButton(getString(android.R.string.ok), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                        startLifeMap();
+                    }
+                })
+                .create()
+                .show();
+    }
+
+    private void startLifeMap() {
         CGeoMap.startActivityLiveMap(this);
     }
 
@@ -751,6 +771,9 @@ public class cgeo extends AbstractActivity {
 
                 // invoke settings activity to insert login details
                 if (status == StatusCode.NO_LOGIN_INFO_STORED) {
+                    // switch off live-map warning for new installs
+                    Settings.setLiveMapWarningShown();
+
                     final Context context = cgeo.this;
                     final Intent initIntent = new Intent(context, cgeoinit.class);
                     context.startActivity(initIntent);

@@ -213,6 +213,9 @@
   <string name="warn_search_help_tb">Fill in code of trackable. For example \"TB29QMZ\".</string>
   <string name="warn_log_text_fill">Please fill in text for your log.</string>
   <string name="warn_load_images">Sorry, c:geo failed to load images.</string>
+  
+  <string name="warn_livemap_title">Warning</string>
+  <string name="warn_livemap_msg">With the geocaching.com update on 14.02.2012 the functionality used by c:geo for displaying the life map was removed.\nThat means that the live-map now shows only stored caches.\nTo get new caches online use \'Nearby\' or one of the other searches.</string>
 
 
   <string name="info_log_posted">c:geo successfully submitted the log.</string>
@@ -963,6 +966,9 @@
 
   <!-- changelog -->
   <string name="changelog">\n
+    <b>16.02.2012</b>\n
+    · fix: Remove live-map functionality in adaption to GC.com changes\n
+    \n\n
     <b>04.01.2012</b>\n
     · new: additional page in the details view for logs from friends\n
     · new: horizontal scrollable pages for cache details\n

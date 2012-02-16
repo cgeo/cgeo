@@ -76,6 +76,7 @@ public final class Settings {
     private static final String KEY_LAST_DETAILS_PAGE = "lastdetailspage";
     private static final String KEY_DEBUG_INFORMATIONS = "debuginfos";
     private static final String KEY_DEFAULT_NAVIGATION_TOOL = "defaultNavigationTool";
+    private static final String KEY_LIVEMAP_WARNING_SHOWN = "liveMapWarningShown";
 
     private final static int unitsMetric = 1;
     private final static int unitsImperial = 2;
@@ -798,6 +799,20 @@ public final class Settings {
             @Override
             public void edit(Editor edit) {
                 edit.putInt(KEY_HELP_SHOWN, 1);
+            }
+        });
+    }
+
+    public static boolean isLiveMapWarningShown() {
+        return sharedPrefs.getInt(KEY_LIVEMAP_WARNING_SHOWN, 0) != 0;
+    }
+
+    public static void setLiveMapWarningShown() {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putInt(KEY_LIVEMAP_WARNING_SHOWN, 1);
             }
         });
     }
