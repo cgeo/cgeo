@@ -3,7 +3,7 @@
 // @namespace      http://send2.cgeo.org/
 // @description    Add Send to c:geo button to geocaching.com
 // @include        http://www.geocaching.com/seek/cache_details*
-// @include        http://www.geocaching.com/map/default*
+// @include        http://www.geocaching.com/map/*
 // @version        0.25
 // ==/UserScript==
 
