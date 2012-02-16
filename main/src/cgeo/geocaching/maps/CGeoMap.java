@@ -1179,8 +1179,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
                 caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS));
 
-                //if in live map and stored caches are found / disables are also shown.
-                if (live && Settings.isLiveMap()) {
+                if (live) {
                     final boolean excludeMine = Settings.isExcludeMyCaches();
                     final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
 
