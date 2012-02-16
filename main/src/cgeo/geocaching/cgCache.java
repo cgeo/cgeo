@@ -1183,7 +1183,7 @@ public class cgCache implements ICache {
         if (waypoint.isUserDefined()) {
             waypoints.remove(index);
             cgeoapplication.getInstance().deleteWaypoint(waypoint.getId());
-            cgeoapplication.getInstance().removeCache(geocode, EnumSet.of(RemoveFlag.REMOVECACHE));
+            cgeoapplication.getInstance().removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
             // Check status if Final is defined
             if (isFinalWithCoords(waypoint)) {
                 finalDefined = false;

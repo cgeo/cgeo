@@ -1177,7 +1177,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOADWAYPOINTS));
+                caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS));
 
                 //if in live map and stored caches are found / disables are also shown.
                 if (live && Settings.isLiveMap()) {
@@ -1295,7 +1295,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 }
 
                 if (search != null) {
-                    caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOADCACHEORDB));
+                    caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
                 }
 
                 if (stop) {

@@ -34,7 +34,7 @@ public class AttributeFilter extends AbstractFilter {
 
     @Override
     public boolean accepts(final cgCache cache) {
-        final cgCache fullCache = cgeoapplication.getInstance().loadCache(cache.getGeocode(), EnumSet.of(LoadFlag.LOADATTRIBUTES));
+        final cgCache fullCache = cgeoapplication.getInstance().loadCache(cache.getGeocode(), EnumSet.of(LoadFlag.LOAD_ATTRIBUTES));
         return fullCache.getAttributes().contains(attribute);
     }
 

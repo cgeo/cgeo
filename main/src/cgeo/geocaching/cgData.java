@@ -1240,15 +1240,15 @@ public class cgData {
         }
 
         // merge always with data already stored in the CacheCache or DB
-        if (saveFlags.contains(SaveFlag.SAVECACHE)) {
+        if (saveFlags.contains(SaveFlag.SAVE_CACHE)) {
             cache.gatherMissingFrom(cacheCache.getCacheFromCache(cache.getGeocode()));
             cacheCache.putCacheInCache(cache);
         }
 
-        if (!saveFlags.contains(SaveFlag.SAVEDB)) {
+        if (!saveFlags.contains(SaveFlag.SAVE_DB)) {
             return true;
         }
-        boolean updateRequired = !cache.gatherMissingFrom(loadCache(cache.getGeocode(), LoadFlags.LOADALLDBONLY));
+        boolean updateRequired = !cache.gatherMissingFrom(loadCache(cache.getGeocode(), LoadFlags.LOAD_ALL_DB_ONLY));
 
         // only save a cache to the database if
         // - the cache is detailed
@@ -1770,7 +1770,7 @@ public class cgData {
             return null;
         }
 
-        Set<cgCache> caches = loadCaches(geocodes, LoadFlags.LOADCACHEORDB);
+        Set<cgCache> caches = loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
 
         Double latMin = 360.0;
         Double latMax = 0.0;
@@ -1828,7 +1828,7 @@ public class cgData {
         Set<cgCache> result = new HashSet<cgCache>();
         Set<String> remaining = new HashSet<String>(geocodes);
 
-        if (loadFlags.contains(LoadFlag.LOADCACHEBEFORE)) {
+        if (loadFlags.contains(LoadFlag.LOAD_CACHE_BEFORE)) {
             for (String geocode : new HashSet<String>(remaining)) {
                 cgCache cache = cacheCache.getCacheFromCache(geocode);
                 if (cache != null) {
@@ -1838,13 +1838,13 @@ public class cgData {
             }
         }
 
-        if (loadFlags.contains(LoadFlag.LOADDBMINIMAL) ||
-                loadFlags.contains(LoadFlag.LOADATTRIBUTES) ||
-                loadFlags.contains(LoadFlag.LOADWAYPOINTS) ||
-                loadFlags.contains(LoadFlag.LOADSPOILERS) ||
-                loadFlags.contains(LoadFlag.LOADLOGS) ||
-                loadFlags.contains(LoadFlag.LOADINVENTORY) ||
-                loadFlags.contains(LoadFlag.LOADOFFLINELOG)) {
+        if (loadFlags.contains(LoadFlag.LOAD_DB_MINIMAL) ||
+                loadFlags.contains(LoadFlag.LOAD_ATTRIBUTES) ||
+                loadFlags.contains(LoadFlag.LOAD_WAYPOINTS) ||
+                loadFlags.contains(LoadFlag.LOAD_SPOILERS) ||
+                loadFlags.contains(LoadFlag.LOAD_LOGS) ||
+                loadFlags.contains(LoadFlag.LOAD_INVENTORY) ||
+                loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
 
             Set<cgCache> cachesFromDB = loadCaches(remaining, null, null, null, null, loadFlags);
             if (cachesFromDB != null) {
@@ -1855,7 +1855,7 @@ public class cgData {
             }
         }
 
-        if (loadFlags.contains(LoadFlag.LOADCACHEAFTER)) {
+        if (loadFlags.contains(LoadFlag.LOAD_CACHE_AFTER)) {
             for (String geocode : new HashSet<String>(remaining)) {
                 cgCache cache = cacheCache.getCacheFromCache(geocode);
                 if (cache != null) {
@@ -1866,7 +1866,7 @@ public class cgData {
         }
 
         if (remaining.size() >= 1) {
-            Log.e(Settings.tag, "cgData.loadCaches(" + remaining.toString() + " failed");
+            Log.e(Settings.tag, "cgData.loadCaches(" + remaining.toString() + ") failed");
         }
         return result;
     }
@@ -1956,18 +1956,18 @@ public class cgData {
                         //Extracted Method = LOADDBMINIMAL
                         cgCache cache = cgData.createCacheFromDatabaseContent(cursor);
 
-                        if (loadFlags.contains(LoadFlag.LOADATTRIBUTES)) {
+                        if (loadFlags.contains(LoadFlag.LOAD_ATTRIBUTES)) {
                             cache.setAttributes(loadAttributes(cache.getGeocode()));
                         }
 
-                        if (loadFlags.contains(LoadFlag.LOADWAYPOINTS)) {
+                        if (loadFlags.contains(LoadFlag.LOAD_WAYPOINTS)) {
                             final List<cgWaypoint> waypoints = loadWaypoints(cache.getGeocode());
                             if (CollectionUtils.isNotEmpty(waypoints)) {
                                 cache.setWaypoints(waypoints);
                             }
                         }
 
-                        if (loadFlags.contains(LoadFlag.LOADSPOILERS)) {
+                        if (loadFlags.contains(LoadFlag.LOAD_SPOILERS)) {
                             final List<cgImage> spoilers = loadSpoilers(cache.getGeocode());
                             if (CollectionUtils.isNotEmpty(spoilers)) {
                                 if (cache.getSpoilers() == null) {
@@ -1979,7 +1979,7 @@ public class cgData {
                             }
                         }
 
-                        if (loadFlags.contains(LoadFlag.LOADLOGS)) {
+                        if (loadFlags.contains(LoadFlag.LOAD_LOGS)) {
                             cache.setLogs(loadLogs(cache.getGeocode()));
                             final Map<LogType, Integer> logCounts = loadLogCounts(cache.getGeocode());
                             if (MapUtils.isNotEmpty(logCounts)) {
@@ -1988,7 +1988,7 @@ public class cgData {
                             }
                         }
 
-                        if (loadFlags.contains(LoadFlag.LOADINVENTORY)) {
+                        if (loadFlags.contains(LoadFlag.LOAD_INVENTORY)) {
                             final List<cgTrackable> inventory = loadInventory(cache.getGeocode());
                             if (CollectionUtils.isNotEmpty(inventory)) {
                                 if (cache.getInventory() == null) {
@@ -2000,7 +2000,7 @@ public class cgData {
                             }
                         }
 
-                        if (loadFlags.contains(LoadFlag.LOADOFFLINELOG)) {
+                        if (loadFlags.contains(LoadFlag.LOAD_OFFLINE_LOG)) {
                             cache.setLogOffline(hasLogOffline(cache.getGeocode()));
                         }
                         cache.addStorageLocation(StorageLocation.DATABASE);
@@ -2962,7 +2962,7 @@ public class cgData {
             if (size > 0) {
                 Log.d(Settings.tag, "Database clean: removing " + size + " geocaches from listId=0");
 
-                removeCaches(geocodes, EnumSet.of(RemoveFlag.REMOVECACHE));
+                removeCaches(geocodes, EnumSet.of(RemoveFlag.REMOVE_CACHE));
                 databaseRW.execSQL("delete from " + dbTableCaches + " where " + cgData.whereGeocodeIn(geocodes));
             }
 
@@ -3019,13 +3019,13 @@ public class cgData {
 
         init();
 
-        if (removeFlags.contains(RemoveFlag.REMOVECACHE)) {
+        if (removeFlags.contains(RemoveFlag.REMOVE_CACHE)) {
             for (final String geocode : geocodes) {
                 cacheCache.removeCacheFromCache(geocode);
             }
         }
 
-        if (removeFlags.contains(RemoveFlag.REMOVEDB)) {
+        if (removeFlags.contains(RemoveFlag.REMOVE_DB)) {
             // Drop caches from the database
             final ArrayList<String> quotedGeocodes = new ArrayList<String>(geocodes.size());
             for (final String geocode : geocodes) {

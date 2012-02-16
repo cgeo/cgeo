@@ -50,7 +50,7 @@ public final class LocParser extends FileParser {
         // save found cache coordinates
         for (String geocode : searchResult.getGeocodes()) {
             if (cidCoords.containsKey(geocode)) {
-                cgCache cache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOADCACHEORDB);
+                cgCache cache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
                 cgCoord coord = cidCoords.get(cache.getGeocode());
 
                 copyCoordToCache(coord, cache);

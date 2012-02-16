@@ -173,7 +173,7 @@ public class cgeocaches extends AbstractListActivity {
                     setTitle(title + " [" + search.getCount() + "]");
                     cacheList.clear();
 
-                    final Set<cgCache> caches = search.getCachesFromSearchResult(LoadFlags.LOADCACHEORDB);
+                    final Set<cgCache> caches = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
                     if (CollectionUtils.isNotEmpty(caches)) {
                         cacheList.addAll(caches);
                         Collections.sort(cacheList, gcComparator);
@@ -259,7 +259,7 @@ public class cgeocaches extends AbstractListActivity {
                     setTitle(title + " [" + search.getCount() + "]");
                     cacheList.clear();
 
-                    final Set<cgCache> caches = search.getCachesFromSearchResult(LoadFlags.LOADCACHEORDB);
+                    final Set<cgCache> caches = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
                     if (CollectionUtils.isNotEmpty(caches)) {
                         cacheList.addAll(caches);
                         caches.clear();
@@ -335,7 +335,7 @@ public class cgeocaches extends AbstractListActivity {
                 }
             } else {
                 if (cacheList != null && search != null) {
-                    final Set<cgCache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOADCACHEORDB);
+                    final Set<cgCache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
                     if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                         cacheList.clear();
                         cacheList.addAll(cacheListTmp);
@@ -403,7 +403,7 @@ public class cgeocaches extends AbstractListActivity {
 
                 cacheList.clear();
 
-                final Set<cgCache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOADCACHEORDB);
+                final Set<cgCache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
                 if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                     cacheList.addAll(cacheListTmp);
                     cacheListTmp.clear();
@@ -430,7 +430,7 @@ public class cgeocaches extends AbstractListActivity {
 
             cacheList.clear();
 
-            final Set<cgCache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOADCACHEORDB);
+            final Set<cgCache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
             if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                 cacheList.addAll(cacheListTmp);
                 cacheListTmp.clear();

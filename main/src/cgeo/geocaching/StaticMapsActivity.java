@@ -86,7 +86,7 @@ public class StaticMapsActivity extends AbstractActivity {
             dialog.dismiss();
             switch (which) {
             case DialogInterface.BUTTON_POSITIVE:
-                    cgCache cache = app.loadCache(geocode, LoadFlags.LOADCACHEORDB);
+                    cgCache cache = app.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
                     if (waypoint_id == null) {
                         StaticMapsProvider.storeCacheStaticMap(cache, StaticMapsActivity.this);
                     } else {

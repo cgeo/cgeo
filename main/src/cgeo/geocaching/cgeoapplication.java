@@ -362,7 +362,7 @@ public class cgeoapplication extends Application {
 
     public boolean saveOwnWaypoint(int id, String geocode, cgWaypoint waypoint) {
         if (storage.saveOwnWaypoint(id, geocode, waypoint)) {
-            this.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVECACHE));
+            this.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
             return true;
         }
         return false;

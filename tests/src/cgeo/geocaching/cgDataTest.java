@@ -49,8 +49,8 @@ public class cgDataTest extends ApplicationTestCase<cgeoapplication> {
             cache2.setListId(listId1);
 
             // save caches to DB (cache1=listId1, cache2=listId1)
-            app.saveCache(cache1, LoadFlags.SAVEALL);
-            app.saveCache(cache2, LoadFlags.SAVEALL);
+            app.saveCache(cache1, LoadFlags.SAVE_ALL);
+            app.saveCache(cache2, LoadFlags.SAVE_ALL);
             assertTrue(app.getAllStoredCachesCount(false, CacheType.ALL, null) >= 2);
 
             // rename list (cache1=listId1, cache2=listId1)
@@ -83,7 +83,7 @@ public class cgDataTest extends ApplicationTestCase<cgeoapplication> {
             Set<String> geocodes = new HashSet<String>();
             geocodes.add(cache1.getGeocode());
             geocodes.add(cache2.getGeocode());
-            app.removeCaches(geocodes, LoadFlags.REMOVEALL);
+            app.removeCaches(geocodes, LoadFlags.REMOVE_ALL);
 
             // remove list
             app.removeList(listId1);
