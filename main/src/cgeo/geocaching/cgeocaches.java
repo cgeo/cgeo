@@ -1887,7 +1887,9 @@ public class cgeocaches extends AbstractListActivity {
             setPriority(Thread.MIN_PRIORITY);
 
             handler = handlerIn;
-            this.listIdLD = listId;
+
+            // in case of online lists, set the list id to the standard list
+            this.listIdLD = Math.max(listId, StoredList.STANDARD_LIST_ID);
 
             if (adapter != null) {
                 checked = adapter.getChecked();
