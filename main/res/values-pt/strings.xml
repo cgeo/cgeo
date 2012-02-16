@@ -80,12 +80,12 @@
   <string name="log_tb_drop">Deixei aqui</string>
   <string name="log_tb_changeall">Alterar todos</string>
   <string name="log_save">Gravar</string>
-  <string name="log_saving">A gravar o log…</string>
+  <string name="log_saving">A gravar o registo…</string>
   <string name="log_clear">Limpar</string>
-  <string name="log_post">Publicar log</string>
-  <string name="log_post_rate">Publicar log &amp; Votar</string>
-  <string name="log_post_no_rate">Publicar log &amp; Não votar</string>
-  <string name="log_post_not_possible">A carregar página de log…</string>
+  <string name="log_post">Publicar o registo</string>
+  <string name="log_post_rate">Publicar registo &amp; Votar</string>
+  <string name="log_post_no_rate">Publicar registo &amp; Não votar</string>
+  <string name="log_post_not_possible">A carregar página de registo…</string>
   <string name="log_add">Adicionar</string>
   <string name="log_date">Data</string>
   <string name="log_time">Hora</string>
@@ -187,9 +187,9 @@
 
   <string name="err_log_load_data">O c:geo não consegue carregar os dados necessários para registar a sua visita.</string>
   <string name="err_log_load_data_again">O c:geo não consegue carregar os dados necessários para registar a sua visita. A tentar de novo.</string>
-  <string name="err_log_load_data_still">O c:geo ainda está a carregar dados necessários para publicar o log. Por favor espere mais um pouco.</string>
-  <string name="err_log_failed_server">O c:geo falhou a publicação do log porque o servidor não responde.</string>
-  <string name="err_log_post_failed">O c:geo falhou a publicação do log.</string>
+  <string name="err_log_load_data_still">O c:geo ainda está a carregar dados necessários para publicar o registo. Por favor espere mais um pouco.</string>
+  <string name="err_log_failed_server">O c:geo falhou a publicação do registo porque o servidor não responde.</string>
+  <string name="err_log_post_failed">O c:geo falhou a publicação do registo.</string>
 
   <string name="err_search_address_no_match">O c:geo não encontrou um local que corresponda.</string>
   <string name="err_search_address_forgot">O c:geo esqueceu o endereço que procura.</string>
@@ -212,14 +212,14 @@
   <string name="warn_search_help_keyword">Preencha acom uma palavra que é suposto estar algures no nome da cache que está a tentar encontrar.</string>
   <string name="warn_search_help_user">Preencha o nome de utilizador em Geocaching.com.</string>
   <string name="warn_search_help_tb">Preencha o código do trackable. Por exemplo \"TB29QMZ\".</string>
-  <string name="warn_log_text_fill">Por favor, preencha algum texto para o log.</string>
+  <string name="warn_log_text_fill">Por favor, preencha algum texto para o registo.</string>
   <string name="warn_load_images">c:geo falhou ao carregar as imagens.</string>
 
 
-  <string name="info_log_posted">O c:geo publicou o log com sucesso.</string>
-  <string name="info_log_saved">O c:geo gravou o log com sucesso.</string>
-  <string name="info_log_cleared">O log foi limpo.</string>
-  <string name="info_log_type_changed">O tipo de log foi alterado!</string>
+  <string name="info_log_posted">O c:geo publicou o registo com sucesso.</string>
+  <string name="info_log_saved">O c:geo gravou o registo com sucesso.</string>
+  <string name="info_log_cleared">O registo foi limpo.</string>
+  <string name="info_log_type_changed">O tipo de registo foi alterado!</string>
 
   <string name="info_fieldnotes_exported_to">Notas de campo exportadas para</string>
   <string name="info_storing_static_maps">A tentar arquivar mapas estáticos.</string>
@@ -360,7 +360,7 @@
   <string name="init_signature">Assinatura</string>
   <string name="init_signature_help_button">Ajuda</string>
   <string name="init_signature_help_title">Dicas para assinaturas</string>
-  <string name="init_signature_help_text">Escreva a sua assinatura, para adicionar ao texto do log.\nPode usar algumas palavras-chave: [DATE] , [TIME], [USER] &amp; [NUMBER].\nEstas serão expandidas quando a assinatura for inserida.</string>
+  <string name="init_signature_help_text">Escreva a sua assinatura, para adicionar ao texto de registo na cache.\nPode usar algumas palavras-chave: [DATE] , [TIME], [USER] &amp; [NUMBER].\nEstas serão expandidas quando a assinatura for inserida.</string>
   <string name="init_signature_template_button">Inserir modelo</string>
   <string name="init_signature_template_date">Data</string>
   <string name="init_signature_template_time">Hora</string>
@@ -370,7 +370,7 @@
   <string name="init_details">Detalhes da cache</string>
   <string name="init_ratingwanted">Carregar a pontuação da cache de GCvote.com</string>
   <string name="init_elevationwanted">Carregar dados de elevação de cache</string>
-  <string name="init_friendlogswanted">Carregar página adicional de logs de amigos</string>
+  <string name="init_friendlogswanted">Carregar página adicional de registos de amigos</string>
   <string name="init_openlastdetailspage">Abrir detalhes da última página vizualizada</string>
   <string name="init_autoload">Carregar automaticamente a descrição longa</string>
   <string name="init_other">Outras opções</string>
@@ -384,10 +384,10 @@
   <string name="init_disabled">Excluir caches desactivadas</string>
   <string name="init_offline">Armazenar a cache de mapas estáticos para utilização offline</string>
   <string name="init_offline_wp">Armazenar waypoints de mapas estáticos para utilização offline</string>
-  <string name="init_save_log_img">Guardar imagens dos Logs</string>
+  <string name="init_save_log_img">Guardar imagens dos registos</string>
   <string name="init_units">Utilizar distância nas unidades do sistema imperial</string>
   <string name="init_nav">Utilizar Google Navigation</string>
-  <string name="init_log_offline">Activar offline log\n(Não mostrar online log quando fôr logar, não enviar o log online)</string>
+  <string name="init_log_offline">Activar registo offline\n(Não mostrar o registo online quando fôr registar, não enviar o registo online)</string>
   <string name="init_livelist">Mostrar a direcção para a cache na lista</string>
   <string name="init_browser">Utilizar o c:geo como browser principal</string>
   <string name="init_altitude">Correcção de altitude</string>
@@ -480,9 +480,9 @@
   <string name="cache_attributes">Atributos</string>
   <string name="cache_attributes_no_icons">(actualize a cache para mostrar os ícones dos atributos)</string>
   <string name="cache_inventory">Inventário</string>
-  <string name="cache_log_offline">Log Offline</string>
-  <string name="cache_log_images_loading">A carregar imagem do log…</string>
-  <string name="cache_log_images_title">Imagem do log</string>
+  <string name="cache_log_offline">Registo Offline</string>
+  <string name="cache_log_images_loading">A carregar imagem do registo…</string>
+  <string name="cache_log_images_title">Imagem do registo</string>
   <string name="cache_log_image_default_title">Foto</string>
   <string name="cache_personal_note">Nota pessoal</string>
   <string name="cache_description">Descrição</string>
@@ -506,7 +506,7 @@
   <string name="cache_dialog_loading_details_status_loadpage">A carregar a página</string>
   <string name="cache_dialog_loading_details_status_details">A processar os detalhes</string>
   <string name="cache_dialog_loading_details_status_spoilers">A carregar as imagens spoiler</string>
-  <string name="cache_dialog_loading_details_status_logs">A carregar os logs</string>
+  <string name="cache_dialog_loading_details_status_logs">A carregar os registo</string>
   <string name="cache_dialog_loading_details_status_waypoints">A processar os waypoints</string>
   <string name="cache_dialog_loading_details_status_gcvote">A carregar GCVote</string>
   <string name="cache_dialog_loading_details_status_elevation">A carregar os dados de elevação</string>
@@ -668,6 +668,7 @@
   <string name="map_static_title">Mapas estáticos</string>
   <string name="map_static_loading">A carregar mapas estáticos…</string>
   <string name="map_token_err">Como o c:geo apenas pode transferir dados parciais, as coordenadas das caches podem não ser precisas.</string>
+  <string name="map_as_list">Mostrar como lista</string>
 
   <!-- search -->
   <string name="search_bar_hint">Procurar caches</string>
@@ -691,9 +692,11 @@
   <string name="search_tb_hint">Identificação do trackable</string>
   <string name="search_tb_button">Pesquisar por trackable</string>
   <string name="search_destination">Destino</string>
+  <string name="search_some_destination">Qualquer destino</string>
   <string name="search_direction_rel">A partir desta posição</string>
   <string name="search_address_started">Pesquisar por lugares</string>
   <string name="search_address_result">Encontrar lugares</string>
+  <string name="search_own_caches">Pesquisar as minhas caches</string>
 
   <!-- trackable -->
   <string name="trackable">Trackable</string>
@@ -731,6 +734,8 @@
   <string name="use_compass">Utilizar Bússola</string>
   <string name="destination_select">Seleccionar destino</string>
   <string name="destination_set">Definir destino</string>
+  <string name="navigation_direct_navigation">Navegação directa</string>
+  <string name="navigation_target">Destino</string>
 
   <!-- license -->
   <string name="license">Licença</string>
@@ -740,6 +745,8 @@
   <!-- helpers -->
   <string name="helper_manual_title">Manual</string>
   <string name="helper_manual_description">Manual prático do c:geo, que contém a descrição de todas as funcionalidades desta aplicação (mesmo as que estão escondidas).</string>
+  <string name="helper_calendar_title">Add on calendário para c:geo </string>
+  <string name="helper_calendar_description">Permite exportar caches evento para o calendário do seu dispositivo.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Aplicação simples e útil, que mostra mapas online e permite transferi-los directamente para o modo offline (apenas mapas raster). Também suporta a gravação de caminhos, gestão de PDI e muitas outras funções úteis.</string>
   <string name="helper_gpsstatus_title">Estado do GPS</string>
@@ -889,6 +896,8 @@
   
   <!-- next things -->
   <string name="legal_note">Para utilizar os serviços de Geocaching.com, tem de concordar com os termos e condições da <a href="http://www.geocaching.com/about/termsofuse.aspx">declaração Groundspeak</a>.</string>
+  <string name="quote">Para tornar o geocaching mais fácil, para tornar os utilizadores mais preguiçosos.</string>
+  <string name="powered_by">carnero</string>
   <string name="author">Autor: <a href="http://carnero.cc/">carnero</a></string>
   <string name="support">Suporte: <a href="mailto:support@cgeo.org">support@cgeo.org</a></string>
   <string name="website">Site na internet: <a href="http://cgeo.org/">cgeo.org</a></string>
@@ -900,4 +909,13 @@
   <string name="about_auth_1">O processo seguinte permite ao <b>c:geo</b> aceder ao Twitter - se concordar.</string>
   <string name="about_auth_2">Premir o botão \"Autorizar c:geo\" dará início ao processo. Este processo irá abrir a página do Twitter no seu browser. Faça login nesta página e autorize o <b>c:geo</b> a aceder à sua conta. Se autorizar, o Twitter irá mostrar um código PIN numérico. Este PIN deverá ser copiado para o <b>c:geo</b> e sujeito a confirmação. E é tudo.</string>
   
+  <!-- go4cache -->
+  <string name="go4cache_looking_around">Olhando à volta</string>
+  <string name="go4cache_tweeting">Tweeting</string>
+  <string name="go4cache_heading_to">Em direcção a</string>
+  <plurals name="go4cache_time_minutes">
+  <item quantity="one">um Minuto atrás</item>
+	<item quantity="other">%d Minutos atrás</item>
+  </plurals>
+      
 </resources>
