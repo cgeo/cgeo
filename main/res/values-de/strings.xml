@@ -114,8 +114,21 @@
   <string name="log_new_log">Loggen</string>
   <string name="log_new_log_text">Log-Text</string>
   <string name="log_announcement">Ankündigung</string>
+  
+  <!-- copy -->
+  <string name="options_context_menu_title">Optionen</string>
+  <string name="copy_coords">Koordinaten kopieren</string>
+  <string name="copy_desc">Beschreibung kopieren</string>
+  <string name="copy_personalnote">Persönliche Notiz kopieren</string>
+  <string name="copy_hint">Hinweis kopieren</string>
+  <string name="copy_log">Log kopieren</string>
 
-  <!-- errors, warnings, info toasts -->
+<!-- translation -->
+  <string name="translate_to_sys_lang">Übersetze in %s</string>
+  <string name="translate_to_english">Übersetze in Englisch</string>
+  <string name="translate_length_warning">Die Übersetzung kann bei sehr langen Texten evtl. fehlschlagen.</string>
+  
+<!-- errors, warnings, info toasts -->
   <string name="err_none">OK</string>
   <string name="err_start">Kommunikation nicht gestartet</string>
   <string name="err_parse">Parsing der Anmeldung gescheitert</string>
