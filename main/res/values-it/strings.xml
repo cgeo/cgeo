@@ -81,7 +81,7 @@
   <string name="log_tb_drop">Lasciato</string>
   <string name="log_tb_changeall">Cambia tutto</string>
   <string name="log_save">Salva</string>
-  <string name="log_saving">Salvataggio log…</string>
+  <string name="log_saving">Invio log…</string>
   <string name="log_clear">Azzera</string>
   <string name="log_post">Invia log</string>
   <string name="log_post_rate">Invia log + voto</string>
@@ -116,6 +116,19 @@
   <string name="log_new_log_text">Testo Log</string>
   <string name="log_announcement">Annuncio</string>
 
+  <!-- copy -->
+  <string name="options_context_menu_title">Opzioni</string>
+  <string name="copy_coords">Copia Coordinate</string>
+  <string name="copy_desc">Copia Descrizione</string>
+  <string name="copy_personalnote">Copia Note Personali</string>
+  <string name="copy_hint">Copia Aiuto</string>
+  <string name="copy_log">Copia Log</string>
+  
+  <!-- translation -->
+  <string name="translate_to_sys_lang">Translate to %s</string>
+  <string name="translate_to_english">Translate to English</string>
+  <string name="translate_length_warning">Translate may fail with large amounts of text.</string>
+  
   <!-- errors, warnings, info toasts -->
   <string name="err_none">Ok</string>
   <string name="err_start">Comunicazione non avviata</string>
@@ -725,6 +738,7 @@
   <string name="helper_manual_title">Manual</string>
   <string name="helper_manual_description">Manuale dettagliato di c:geo che contiene la descrizione di tutte le possibilità offerte da questa applicazione, comprese quelle nascoste (in inglese).</string>
   <string name="helper_calendar_title">c:geo calendario add-on</string>
+  <string name="helper_calendar_missing">c:geo calendario add-on non installato</string>
   <string name="helper_calendar_description">Permette di esportare gli eventi cache nel calendario del tuo dispositivo.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Applicazione semplice da usare che mostra mappe online permettendo di scaricarle direttamente per l\'uso offline (solo mappe raster). Supporta inoltra la registrazione di traccia, gestione dei waypoints e altre utili funzioni.</string>
@@ -732,6 +746,8 @@
   <string name="helper_gpsstatus_description">Puoi usare il radar di questa applicazione con c:geo. Offre inoltre molte informazioni addizionali legate al GPS.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Permette di utilizzare un GPS esterno, garantendo maggiore precisione, migliore ricezione e prolungando la durata della batteria del telefono.</string>
+  <string name="helper_barcode_title">Barcode Scanner</string>
+  <string name="helper_barcode_description">Ci sono script Greasemonkey e siti web che consentono di visualizzare un geocode come codice a barre. Con questa app c:geo può leggere il geocode direttamente dallo schermo del tuo computer.</string>
 
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Cani permessi</string>
