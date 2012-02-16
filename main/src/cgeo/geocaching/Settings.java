@@ -308,7 +308,7 @@ public final class Settings {
 
             @Override
             public void edit(Editor edit) {
-                edit.putInt(KEY_MAP_LIVE, live ? 1 : 0);
+                edit.putInt(KEY_MAP_LIVE, 0);
             }
         });
     }
@@ -700,7 +700,7 @@ public final class Settings {
     }
 
     public static boolean isLiveMap() {
-        return sharedPrefs.getInt(KEY_MAP_LIVE, 1) != 0;
+        return false;
     }
 
     public static boolean isMapTrail() {

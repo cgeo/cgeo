@@ -523,7 +523,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         SubMenu submenu = menu.addSubMenu(1, MENU_SELECT_MAPVIEW, 0, res.getString(R.string.map_view_map)).setIcon(android.R.drawable.ic_menu_mapmode);
         addMapViewMenuItems(submenu);
 
-        menu.add(0, MENU_MAP_LIVE, 0, res.getString(R.string.map_live_disable)).setIcon(R.drawable.ic_menu_refresh);
+        menu.add(0, MENU_MAP_LIVE, 0, res.getString(R.string.map_live_enable)).setIcon(R.drawable.ic_menu_refresh);
         menu.add(0, MENU_STORE_CACHES, 0, res.getString(R.string.caches_store_offline)).setIcon(android.R.drawable.ic_menu_set_as).setEnabled(false);
         menu.add(0, MENU_TRAIL_MODE, 0, res.getString(R.string.map_trail_hide)).setIcon(R.drawable.ic_menu_trail);
         menu.add(0, MENU_CIRCLE_MODE, 0, res.getString(R.string.map_circles_hide)).setIcon(R.drawable.ic_menu_circle);
@@ -551,16 +551,8 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
             }
 
             item = menu.findItem(MENU_MAP_LIVE); // live map
-            if (live) {
-                if (Settings.isLiveMap()) {
-                    item.setTitle(res.getString(R.string.map_live_disable));
-                } else {
-                    item.setTitle(res.getString(R.string.map_live_enable));
-                }
-            } else {
-                item.setEnabled(false);
-                item.setTitle(res.getString(R.string.map_live_enable));
-            }
+            item.setEnabled(false);
+            item.setTitle(res.getString(R.string.map_live_enable));
 
             menu.findItem(MENU_STORE_CACHES).setEnabled(live && !isLoading() && CollectionUtils.isNotEmpty(caches) && app.hasUnsavedCaches(search));
 
@@ -588,10 +580,6 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 Settings.setMapTrail(!Settings.isMapTrail());
                 return true;
             case MENU_MAP_LIVE:
-                Settings.setLiveMap(!Settings.isLiveMap());
-                liveChanged = true;
-                search = null;
-                searchIntent = null;
                 return true;
             case MENU_STORE_CACHES:
                 if (live && !isLoading() && CollectionUtils.isNotEmpty(caches)) {
