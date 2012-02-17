@@ -15,6 +15,7 @@ import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -1943,17 +1944,16 @@ public class CacheDetailActivity extends AbstractActivity {
 
             if (StringUtils.isNotBlank(cache.getHint())) {
                 TextView hintView = ((TextView) view.findViewById(R.id.hint));
-                hintView.setText(CryptUtils.rot13(cache.getHint().trim()));
+                if (BaseUtils.containsHtml(cache.getHint())) {
+                    hintView.setText(Html.fromHtml(cache.getHint(), new HtmlImage(CacheDetailActivity.this, null, false, cache.getListId(), false), null), TextView.BufferType.SPANNABLE);
+                    hintView.setText(CryptUtils.rot13((Spannable) hintView.getText()));
+                }
+                else {
+                    hintView.setText(CryptUtils.rot13(cache.getHint().trim()));
+                }
                 hintView.setVisibility(View.VISIBLE);
                 hintView.setClickable(true);
-                hintView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        // code hint
-                        TextView hintView = (TextView) view;
-                        hintView.setText(CryptUtils.rot13(hintView.getText().toString()));
-                    }
-                });
+                hintView.setOnClickListener(new DecryptTextClickListener());
                 registerForContextMenu(hintView);
             } else {
                 TextView hintView = ((TextView) view.findViewById(R.id.hint));
@@ -2268,7 +2268,7 @@ public class CacheDetailActivity extends AbstractActivity {
                         ((TextView) rowView.findViewById(R.id.author)).setOnClickListener(new UserActionsClickListener());
                         TextView logView = (TextView) logLayout.findViewById(R.id.log);
                         logView.setMovementMethod(LinkMovementMethod.getInstance());
-                        logView.setOnClickListener(new DecryptLogClickListener());
+                        logView.setOnClickListener(new DecryptTextClickListener());
                         registerForContextMenu(logView);
 
                         loglist.add(rowView);
@@ -2296,30 +2296,6 @@ public class CacheDetailActivity extends AbstractActivity {
                     loglistView.addView(log);
                 }
                 loglistView.setVisibility(View.VISIBLE);
-            }
-        }
-
-        private class DecryptLogClickListener implements View.OnClickListener {
-
-            public void onClick(View view) {
-                if (view == null) {
-                    return;
-                }
-
-                try {
-                    final TextView logView = (TextView) view;
-                    CharSequence text = logView.getText();
-                    if (text instanceof Spannable) {
-                        Spannable span = (Spannable) text;
-                        logView.setText(CryptUtils.rot13(span));
-                    }
-                    else {
-                        String string = (String) text;
-                        logView.setText(CryptUtils.rot13(string));
-                    }
-                } catch (Exception e) {
-                    // nothing
-                }
             }
         }
     }
