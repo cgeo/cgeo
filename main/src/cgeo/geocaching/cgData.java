@@ -1770,17 +1770,20 @@ public class cgData {
             return null;
         }
 
-        Set<cgCache> caches = loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
+        final Set<cgCache> caches = loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
 
-        Double latMin = 360.0;
-        Double latMax = 0.0;
-        Double lonMin = 360.0;
-        Double lonMax = 0.0;
+        double latMin = 360.0;
+        double latMax = -360.0;
+        double lonMin = 360.0;
+        double lonMax = -360.0;
         for (cgCache cache : caches) {
-            latMin = Math.min(cache.getCoords().getLatitude(), latMin);
-            latMax = Math.max(cache.getCoords().getLatitude(), latMax);
-            lonMin = Math.min(cache.getCoords().getLongitude(), lonMin);
-            lonMax = Math.max(cache.getCoords().getLongitude(), lonMax);
+            final Geopoint coords = cache.getCoords();
+            double latitude = coords.getLatitude();
+            latMin = Math.min(latitude, latMin);
+            latMax = Math.max(latitude, latMax);
+            double longitude = coords.getLongitude();
+            lonMin = Math.min(longitude, lonMin);
+            lonMax = Math.max(longitude, lonMax);
         }
 
         final List<Number> viewport = new ArrayList<Number>();
