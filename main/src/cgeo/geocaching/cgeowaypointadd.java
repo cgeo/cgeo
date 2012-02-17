@@ -37,6 +37,7 @@ public class cgeowaypointadd extends AbstractActivity {
     private UpdateLocationCallback geoUpdate = new update();
     private ProgressDialog waitDialog = null;
     private cgWaypoint waypoint = null;
+    private Geopoint gpTemp = null;
     private WaypointType type = WaypointType.OWN;
     private String prefix = "OWN";
     private String lookup = "---";
@@ -53,11 +54,6 @@ public class cgeowaypointadd extends AbstractActivity {
         public void handleMessage(Message msg) {
             try {
                 if (waypoint == null) {
-                    if (waitDialog != null) {
-                        waitDialog.dismiss();
-                        waitDialog = null;
-                    }
-
                     id = -1;
                 } else {
                     geocode = waypoint.getGeocode();
@@ -74,22 +70,18 @@ public class cgeowaypointadd extends AbstractActivity {
                     }
                     ((EditText) findViewById(R.id.name)).setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.getName())).toString());
                     ((EditText) findViewById(R.id.note)).setText(Html.fromHtml(StringUtils.trimToEmpty(waypoint.getNote())).toString());
-
-                    if (waitDialog != null) {
-                        waitDialog.dismiss();
-                        waitDialog = null;
-                    }
                 }
 
                 if (own) {
                     initializeWaypointTypeSelector();
                 }
             } catch (Exception e) {
+                Log.e(Settings.tag, "cgeowaypointadd.loadWaypointHandler: " + e.toString());
+            } finally {
                 if (waitDialog != null) {
                     waitDialog.dismiss();
                     waitDialog = null;
                 }
-                Log.e(Settings.tag, "cgeowaypointadd.loadWaypointHandler: " + e.toString());
             }
         }
     };
@@ -265,6 +257,8 @@ public class cgeowaypointadd extends AbstractActivity {
             Geopoint gp = null;
             if (waypoint != null && waypoint.getCoords() != null) {
                 gp = waypoint.getCoords();
+            } else if (gpTemp != null) {
+                gp = gpTemp;
             }
             cgCache cache = app.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
             cgeocoords coordsDialog = new cgeocoords(cgeowaypointadd.this, cache, gp, geo);
@@ -276,6 +270,8 @@ public class cgeowaypointadd extends AbstractActivity {
                     ((Button) findViewById(R.id.buttonLongitude)).setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
                     if (waypoint != null) {
                         waypoint.setCoords(gp);
+                    } else {
+                        gpTemp = gp;
                     }
                 }
             });
