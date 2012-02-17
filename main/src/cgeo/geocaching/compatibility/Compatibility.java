@@ -14,28 +14,21 @@ import android.view.Display;
 import android.view.Surface;
 import android.widget.EditText;
 
-import java.lang.reflect.Method;
-
 public final class Compatibility {
 
     private final static int sdkVersion = Integer.parseInt(Build.VERSION.SDK);
     private final static boolean isLevel8 = sdkVersion >= 8;
     private final static boolean isLevel5 = sdkVersion >= 5;
 
-    private static Method dataChangedMethod = null;
-    private static Method getRotationMethod = null;
-    private static AndroidLevel11Interface level11;
+    private final static AndroidLevel8Interface level8;
+    private final static AndroidLevel11Interface level11;
 
     static {
         if (isLevel8) {
-            try {
-                final Class<?> cl = Class.forName("cgeo.geocaching.compatibility.AndroidLevel8");
-                dataChangedMethod = cl.getDeclaredMethod("dataChanged", String.class);
-                getRotationMethod = cl.getDeclaredMethod("getRotation", Activity.class);
-            } catch (final Exception e) {
-                // Exception can be ClassNotFoundException, SecurityException or NoSuchMethodException
-                Log.e(Settings.tag, "Cannot load AndroidLevel8 class", e);
-            }
+            level8 = new AndroidLevel8();
+        }
+        else {
+            level8 = new AndroidLevel8Dummy();
         }
         if (sdkVersion >= 11) {
             level11 = new AndroidLevel11();
@@ -49,7 +42,7 @@ public final class Compatibility {
             final Activity activity) {
         if (isLevel8) {
             try {
-                final int rotation = (Integer) getRotationMethod.invoke(null, activity);
+                final int rotation = level8.getRotation(activity);
                 if (rotation == Surface.ROTATION_90) {
                     return directionNowPre + 90;
                 } else if (rotation == Surface.ROTATION_180) {
@@ -81,14 +74,7 @@ public final class Compatibility {
     }
 
     public static void dataChanged(final String name) {
-        if (isLevel8) {
-            try {
-                dataChangedMethod.invoke(null, name);
-            } catch (final Exception e) {
-                // This should never happen: IllegalArgumentException, IllegalAccessException or InvocationTargetException
-                Log.e(Settings.tag, "Cannot call dataChanged()", e);
-            }
-        }
+        level8.dataChanged(name);
     }
 
     public static void disableSuggestions(EditText edit) {

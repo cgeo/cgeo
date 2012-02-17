@@ -7,14 +7,14 @@ import android.app.backup.BackupManager;
 import android.util.Log;
 import android.view.Display;
 
-public class AndroidLevel8 {
+public class AndroidLevel8 implements AndroidLevel8Interface {
 
-    static public int getRotation(final Activity activity) {
+    public int getRotation(final Activity activity) {
         Display display = activity.getWindowManager().getDefaultDisplay();
         return display.getRotation();
     }
 
-    static public void dataChanged(final String name) {
+    public void dataChanged(final String name) {
         Log.i(Settings.tag, "Requesting settings backup with settings manager");
         BackupManager.dataChanged(name);
     }
