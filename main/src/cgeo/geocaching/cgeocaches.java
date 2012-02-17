@@ -8,6 +8,7 @@ import cgeo.geocaching.apps.cachelist.CacheListAppFactory;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.files.GPXImporter;
@@ -78,6 +79,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -173,7 +175,9 @@ public class cgeocaches extends AbstractListActivity {
                     setTitle(title + " [" + search.getCount() + "]");
                     cacheList.clear();
 
-                    final Set<cgCache> caches = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+                    EnumSet<LoadFlag> loadFlags = LoadFlags.LOAD_CACHE_OR_DB;
+                    loadFlags.add(LoadFlag.LOAD_OFFLINE_LOG);
+                    final Set<cgCache> caches = search.getCachesFromSearchResult(loadFlags);
                     if (CollectionUtils.isNotEmpty(caches)) {
                         cacheList.addAll(caches);
                         Collections.sort(cacheList, gcComparator);
