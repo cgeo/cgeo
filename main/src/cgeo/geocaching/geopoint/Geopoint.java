@@ -234,7 +234,7 @@ public final class Geopoint
     /**
      * Returns formatted coordinates with default format.
      * Default format is decimalminutes, e.g. N 52° 36.123 E 010° 03.456
-     *
+     * 
      * @return formatted coordinates
      */
     @Override
@@ -346,8 +346,13 @@ public final class Geopoint
 
         public static Geopoint createGeopoint(final String latDir, final String latDeg, final String latDegFrac,
                 final String lonDir, final String lonDeg, final String lonDegFrac) {
-            double lat = Double.parseDouble(latDeg + "." + addZeros(Integer.parseInt(latDegFrac), 5));
-            double lon = Double.parseDouble(lonDeg + "." + addZeros(Integer.parseInt(lonDegFrac), 5));
+            double lat = 0.0d;
+            double lon = 0.0d;
+            try {
+                lat = Double.parseDouble(latDeg + "." + addZeros(Integer.parseInt(latDegFrac), 5));
+                lon = Double.parseDouble(lonDeg + "." + addZeros(Integer.parseInt(lonDegFrac), 5));
+            } catch (NumberFormatException e) {
+            }
             lat *= "S".equalsIgnoreCase(latDir) ? -1 : 1;
             lon *= "W".equalsIgnoreCase(lonDir) ? -1 : 1;
             return new Geopoint(lat, lon);
@@ -391,8 +396,13 @@ public final class Geopoint
 
         public static Geopoint createGeopoint(final String latDir, final String latDeg, final String latMin, final String latMinFrac,
                 final String lonDir, final String lonDeg, final String lonMin, final String lonMinFrac) {
-            double lat = Double.parseDouble(latDeg) + Double.parseDouble(latMin + "." + addZeros(Integer.parseInt(latMinFrac), 3)) / D60;
-            double lon = Double.parseDouble(lonDeg) + Double.parseDouble(lonMin + "." + addZeros(Integer.parseInt(lonMinFrac), 3)) / D60;
+            double lat = 0.0d;
+            double lon = 0.0d;
+            try {
+                lat = Double.parseDouble(latDeg) + Double.parseDouble(latMin + "." + addZeros(Integer.parseInt(latMinFrac), 3)) / D60;
+                lon = Double.parseDouble(lonDeg) + Double.parseDouble(lonMin + "." + addZeros(Integer.parseInt(lonMinFrac), 3)) / D60;
+            } catch (NumberFormatException e) {
+            }
             lat *= "S".equalsIgnoreCase(latDir) ? -1 : 1;
             lon *= "W".equalsIgnoreCase(lonDir) ? -1 : 1;
             return new Geopoint(lat, lon);
@@ -442,8 +452,13 @@ public final class Geopoint
 
         public static Geopoint createGeopoint(final String latDir, final String latDeg, final String latMin, final String latSec, final String latSecFrac,
                 final String lonDir, final String lonDeg, final String lonMin, final String lonSec, final String lonSecFrac) {
-            double lat = Double.parseDouble(latDeg) + Double.parseDouble(latMin) / D60 + Double.parseDouble(latSec + "." + addZeros(Integer.parseInt(latSecFrac), 3)) / D3600;
-            double lon = Double.parseDouble(lonDeg) + Double.parseDouble(lonMin) / D60 + Double.parseDouble(lonSec + "." + addZeros(Integer.parseInt(lonSecFrac), 3)) / D3600;
+            double lat = 0.0d;
+            double lon = 0.0d;
+            try {
+                lat = Double.parseDouble(latDeg) + Double.parseDouble(latMin) / D60 + Double.parseDouble(latSec + "." + addZeros(Integer.parseInt(latSecFrac), 3)) / D3600;
+                lon = Double.parseDouble(lonDeg) + Double.parseDouble(lonMin) / D60 + Double.parseDouble(lonSec + "." + addZeros(Integer.parseInt(lonSecFrac), 3)) / D3600;
+            } catch (NumberFormatException e) {
+            }
             lat *= "S".equalsIgnoreCase(latDir) ? -1 : 1;
             lon *= "W".equalsIgnoreCase(lonDir) ? -1 : 1;
             return new Geopoint(lat, lon);
