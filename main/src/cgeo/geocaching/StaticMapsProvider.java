@@ -26,7 +26,7 @@ public class StaticMapsProvider {
         return LocalStorage.getStorageFile(geocode, "map_" + prefix + level, false, createDirs);
     }
 
-    private static void downloadMapsInThread(final cgCache cache, String markerUrl, String prefix, String latlonMap, int edge, String waypoints) {
+    private static void downloadDifferentZooms(final cgCache cache, String markerUrl, String prefix, String latlonMap, int edge, String waypoints) {
         downloadMap(cache, 20, "satellite", markerUrl, prefix, 1, latlonMap, edge, waypoints);
         downloadMap(cache, 18, "satellite", markerUrl, prefix, 2, latlonMap, edge, waypoints);
         downloadMap(cache, 16, "roadmap", markerUrl, prefix, 3, latlonMap, edge, waypoints);
@@ -59,38 +59,38 @@ public class StaticMapsProvider {
         int edge = guessMinDisplaySide(activity);
 
         if (Settings.isStoreOfflineMaps() && cache.getCoords() != null) {
-            storeCacheStaticMap(cache, edge);
+            storeCacheStaticMap(cache, edge, false);
         }
 
         // download static map for current waypoints
         if (Settings.isStoreOfflineWpMaps() && CollectionUtils.isNotEmpty(cache.getWaypoints())) {
             for (cgWaypoint waypoint : cache.getWaypoints()) {
-                storeWaypointStaticMap(cache, edge, waypoint);
+                storeWaypointStaticMap(cache, edge, waypoint, false);
             }
         }
     }
 
-    public static void storeWaypointStaticMap(cgCache cache, Activity activity, cgWaypoint waypoint) {
+    public static void storeWaypointStaticMap(cgCache cache, Activity activity, cgWaypoint waypoint, boolean waitForResult) {
         int edge = StaticMapsProvider.guessMinDisplaySide(activity);
-        storeWaypointStaticMap(cache, edge, waypoint);
+        storeWaypointStaticMap(cache, edge, waypoint, waitForResult);
     }
 
-    private static void storeWaypointStaticMap(cgCache cache, int edge, cgWaypoint waypoint) {
+    private static void storeWaypointStaticMap(cgCache cache, int edge, cgWaypoint waypoint, final boolean waitForResult) {
         if (waypoint.getCoords() == null) {
             return;
         }
         String wpLatlonMap = waypoint.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
         String wpMarkerUrl = getWpMarkerUrl(waypoint);
         // download map images in separate background thread for higher performance
-        downloadMaps(cache, wpMarkerUrl, "wp" + waypoint.getId() + "_", wpLatlonMap, edge, "");
+        downloadMaps(cache, wpMarkerUrl, "wp" + waypoint.getId() + "_", wpLatlonMap, edge, "", waitForResult);
     }
 
-    public static void storeCacheStaticMap(cgCache cache, Activity activity) {
-        int edge = StaticMapsProvider.guessMinDisplaySide(activity);
-        storeCacheStaticMap(cache, edge);
+    public static void storeCacheStaticMap(cgCache cache, Activity activity, final boolean waitForResult) {
+        int edge = guessMinDisplaySide(activity);
+        storeCacheStaticMap(cache, edge, waitForResult);
     }
 
-    private static void storeCacheStaticMap(cgCache cache, int edge) {
+    private static void storeCacheStaticMap(cgCache cache, int edge, final boolean waitForResult) {
         final String latlonMap = cache.getCoords().format(Format.LAT_LON_DECDEGREE_COMMA);
         final StringBuilder waypoints = new StringBuilder();
         if (cache.hasWaypoints()) {
@@ -107,7 +107,7 @@ public class StaticMapsProvider {
         }
         // download map images in separate background thread for higher performance
         final String cacheMarkerUrl = getCacheMarkerUrl(cache);
-        downloadMaps(cache, cacheMarkerUrl, "", latlonMap, edge, waypoints.toString());
+        downloadMaps(cache, cacheMarkerUrl, "", latlonMap, edge, waypoints.toString(), waitForResult);
     }
 
     private static int guessMinDisplaySide(Activity activity) {
@@ -124,15 +124,20 @@ public class StaticMapsProvider {
     }
 
     private static void downloadMaps(final cgCache cache, final String markerUrl, final String prefix, final String latlonMap, final int edge,
-            final String waypoints) {
-        Thread staticMapsThread = new Thread("getting static map") {
-            @Override
-            public void run() {
-                downloadMapsInThread(cache, markerUrl, prefix, latlonMap, edge, waypoints);
-            }
-        };
-        staticMapsThread.setPriority(Thread.MIN_PRIORITY);
-        staticMapsThread.start();
+            final String waypoints, boolean waitForResult) {
+        if (waitForResult) {
+            downloadDifferentZooms(cache, markerUrl, prefix, latlonMap, edge, waypoints);
+        }
+        else {
+            Thread staticMapsThread = new Thread("getting static map") {
+                @Override
+                public void run() {
+                    downloadDifferentZooms(cache, markerUrl, prefix, latlonMap, edge, waypoints);
+                }
+            };
+            staticMapsThread.setPriority(Thread.MIN_PRIORITY);
+            staticMapsThread.start();
+        }
     }
 
     private static String getCacheMarkerUrl(final cgCache cache) {
@@ -165,7 +170,7 @@ public class StaticMapsProvider {
 
     /**
      * Check if at least one map file exists for the given geocode.
-     * 
+     *
      * @param geocode
      * @return <code>true</code> if at least one mapfile exists; <code>false</code> otherwise
      */

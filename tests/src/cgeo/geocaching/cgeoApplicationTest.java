@@ -31,6 +31,9 @@ import junit.framework.Assert;
 
 public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
 
+    /** With the GC.com update on 14.02.2012 the live map got disabled. As a consequence the tests are disabled, too */
+    public static final boolean LIVEMAPENABLED = false;
+
     public cgeoApplicationTest() {
         super(cgeoapplication.class);
     }
@@ -102,7 +105,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
         if (Settings.isPremiumMember() || search.error == null) {
             assertEquals(1, search.getGeocodes().size());
             assertTrue(search.getGeocodes().contains(geocode));
-            return cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOADCACHEORDB);
+            return cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         }
         assertEquals(0, search.getGeocodes().size());
         return null;
@@ -135,7 +138,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
             assertNotNull(search);
             assertEquals(1, search.getGeocodes().size());
             assertTrue(search.getGeocodes().contains(cache.getGeocode()));
-            cgCache searchedCache = search.getFirstCacheFromResult(LoadFlags.LOADCACHEORDB);
+            cgCache searchedCache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
             // coords must be null if the user is not logged in
             assertNull(searchedCache.getCoords());
 
@@ -193,25 +196,28 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
      */
     @MediumTest
     public static void testSearchByViewport() {
-        GC2JVEH cache = new GC2JVEH();
 
-        final String token = cgBase.getMapUserToken(new Handler());
-        final Viewport viewport = new Viewport(cache.getCoords(), 0.003, 0.003);
-        final SearchResult search = cgBase.searchByViewport(token, viewport);
+        if (LIVEMAPENABLED) {
+            GC2JVEH cache = new GC2JVEH();
 
-        // GC2JVEH is a premium members only cache. It can't be "found" by non-premium members
-        if (Settings.isPremiumMember()) {
-            assertNotNull(search);
-            // coords are identical... if the user is logged in
-            if (search.error != null) {
-                if (search.getGeocodes().contains(cache.getGeocode())) {
-                    assertFalse(cache.getCoords().isEqualTo(cgeoapplication.getInstance().loadCache(cache.getGeocode(), LoadFlags.LOADCACHEORDB).getCoords()));
-                    assertFalse(cgeoapplication.getInstance().loadCache(cache.getGeocode(), LoadFlags.LOADCACHEORDB).isReliableLatLon());
+            final String token = cgBase.getMapUserToken(new Handler());
+            final Viewport viewport = new Viewport(cache.getCoords(), 0.003, 0.003);
+            final SearchResult search = cgBase.searchByViewport(token, viewport);
+
+            // GC2JVEH is a premium members only cache. It can't be "found" by non-premium members
+            if (Settings.isPremiumMember()) {
+                assertNotNull(search);
+                // coords are identical... if the user is logged in
+                if (search.error != null) {
+                    if (search.getGeocodes().contains(cache.getGeocode())) {
+                        assertFalse(cache.getCoords().isEqualTo(cgeoapplication.getInstance().loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB).getCoords()));
+                        assertFalse(cgeoapplication.getInstance().loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB).isReliableLatLon());
+                    }
+                } else {
+                    assertTrue(search.getGeocodes().contains(cache.getGeocode()));
+                    assertEquals(cache.getCoords().toString(), cgeoapplication.getInstance().loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB).getCoords().toString());
+                    assertTrue(cgeoapplication.getInstance().loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB).isReliableLatLon());
                 }
-            } else {
-                assertTrue(search.getGeocodes().contains(cache.getGeocode()));
-                assertEquals(cache.getCoords().toString(), cgeoapplication.getInstance().loadCache(cache.getGeocode(), LoadFlags.LOADCACHEORDB).getCoords().toString());
-                assertTrue(cgeoapplication.getInstance().loadCache(cache.getGeocode(), LoadFlags.LOADCACHEORDB).isReliableLatLon());
             }
         }
     }
@@ -221,42 +227,45 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
      */
     @MediumTest
     public static void testSearchByViewportNotLoggedIn() {
-        ImmutablePair<String, String> login = Settings.getLogin();
 
-        try {
+        if (LIVEMAPENABLED) {
+            ImmutablePair<String, String> login = Settings.getLogin();
 
-            final String token = null; // without a valid token we are "logged off"
+            try {
 
-            // non premium cache
-            MockedCache cache = new GC2CJPF();
-            deleteCacheFromDBAndLogout(cache.getGeocode());
+                final String token = null; // without a valid token we are "logged off"
 
-            Viewport viewport = new Viewport(cache.getCoords(), 0.003, 0.003);
-            SearchResult search = cgBase.searchByViewport(token, viewport);
+                // non premium cache
+                MockedCache cache = new GC2CJPF();
+                deleteCacheFromDBAndLogout(cache.getGeocode());
 
-            assertNotNull(search);
-            assertTrue(search.getGeocodes().contains(cache.getGeocode()));
-            // coords differ
-            Log.d(Settings.tag, "cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
-            Log.d(Settings.tag, "cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cgeoapplication.getInstance().loadCache(cache.getGeocode(), LoadFlags.LOADCACHEORDB).getCoords());
-            assertFalse(cache.getCoords().isEqualTo(cgeoapplication.getInstance().loadCache(cache.getGeocode(), LoadFlags.LOADCACHEORDB).getCoords(), 1e-3));
-            assertFalse(cgeoapplication.getInstance().loadCache(cache.getGeocode(), LoadFlags.LOADCACHEORDB).isReliableLatLon());
+                Viewport viewport = new Viewport(cache.getCoords(), 0.003, 0.003);
+                SearchResult search = cgBase.searchByViewport(token, viewport);
 
-            // premium cache
-            cache = new GC2JVEH();
-            deleteCacheFromDBAndLogout(cache.getGeocode());
+                assertNotNull(search);
+                assertTrue(search.getGeocodes().contains(cache.getGeocode()));
+                // coords differ
+                Log.d(Settings.tag, "cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords expected = " + cache.getCoords());
+                Log.d(Settings.tag, "cgeoApplicationTest.testSearchByViewportNotLoggedIn: Coords actual = " + cgeoapplication.getInstance().loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB).getCoords());
+                assertFalse(cache.getCoords().isEqualTo(cgeoapplication.getInstance().loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB).getCoords(), 1e-3));
+                assertFalse(cgeoapplication.getInstance().loadCache(cache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB).isReliableLatLon());
 
-            viewport = new Viewport(cache.getCoords(), 0.003, 0.003);
-            search = cgBase.searchByViewport(token, viewport);
+                // premium cache
+                cache = new GC2JVEH();
+                deleteCacheFromDBAndLogout(cache.getGeocode());
 
-            assertNotNull(search);
-            // It's a premium member cache only and thus not visible to guests
-            assertFalse(search.getGeocodes().contains(cache.getGeocode()));
+                viewport = new Viewport(cache.getCoords(), 0.003, 0.003);
+                search = cgBase.searchByViewport(token, viewport);
 
-        } finally {
-            // restore user and password
-            Settings.setLogin(login.left, login.right);
-            cgBase.login();
+                assertNotNull(search);
+                // It's a premium member cache only and thus not visible to guests
+                assertFalse(search.getGeocodes().contains(cache.getGeocode()));
+
+            } finally {
+                // restore user and password
+                Settings.setLogin(login.left, login.right);
+                cgBase.login();
+            }
         }
     }
 
@@ -286,7 +295,7 @@ public class cgeoApplicationTest extends ApplicationTestCase<cgeoapplication> {
 
     /** Remove cache from DB and cache to ensure that the cache is not loaded from the database */
     private static void deleteCacheFromDBAndLogout(String geocode) {
-        cgeoapplication.getInstance().removeCache(geocode, LoadFlags.REMOVEALL);
+        cgeoapplication.getInstance().removeCache(geocode, LoadFlags.REMOVE_ALL);
 
         cgBase.logout();
         // Modify login data to avoid an automatic login again

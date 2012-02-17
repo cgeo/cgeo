@@ -60,6 +60,11 @@
                 android:id="@+id/name"
                 style="@style/edittext"
                 android:hint="@string/waypoint_name" />
+            
+            <Spinner 
+                android:id="@+id/type"
+                android:layout_width="fill_parent"
+				android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/note"

@@ -343,7 +343,6 @@ public class cgBase {
 
         clearCookies();
         Settings.setCookieStore(null);
-        setActualStatus("-");
         return StatusCode.NO_ERROR;
     }
 
@@ -649,7 +648,7 @@ public class cgBase {
         if (Settings.getLoadDirImg())
         {
             for (String geocode : searchResult.getGeocodes()) {
-                cgCache oneCache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOADCACHEORDB);
+                cgCache oneCache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
                 if (oneCache.getCoords() == null && StringUtils.isNotEmpty(oneCache.getDirectionImg())) {
                     DirectionImage.getDrawable(oneCache.getGeocode(), oneCache.getDirectionImg());
                 }
@@ -667,7 +666,7 @@ public class cgBase {
                     if (MapUtils.isNotEmpty(ratings)) {
                         // save found cache coordinates
                         for (String geocode : searchResult.getGeocodes()) {
-                            cgCache cache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOADCACHEORDB);
+                            cgCache cache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
                             if (ratings.containsKey(cache.getGuid())) {
                                 GCVoteRating rating = ratings.get(cache.getGuid());
 
@@ -782,7 +781,7 @@ public class cgBase {
     public static SearchResult parseCache(final String page, final int listId, final CancellableHandler handler) {
         final SearchResult searchResult = parseCacheFromText(page, listId, handler);
         if (searchResult != null && !searchResult.getGeocodes().isEmpty()) {
-            final cgCache cache = searchResult.getFirstCacheFromResult(LoadFlags.LOADCACHEORDB);
+            final cgCache cache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
             getExtraOnlineInfo(cache, page, handler);
             cache.setUpdated(System.currentTimeMillis());
             cache.setDetailedUpdate(cache.getUpdated());
@@ -793,7 +792,7 @@ public class cgBase {
             // save full detailed caches
             sendLoadProgressDetail(handler, R.string.cache_dialog_offline_save_message);
             cache.setListId(StoredList.TEMPORARY_LIST_ID);
-            cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVEDB));
+            cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
         }
         return searchResult;
     }
@@ -1088,7 +1087,7 @@ public class cgBase {
 
             if (null != originalCoords) {
                 // res is null during the unit tests
-                final cgWaypoint waypoint = new cgWaypoint(res != null ? res.getString(R.string.cache_coordinates_original) : "res = null", WaypointType.WAYPOINT);
+                final cgWaypoint waypoint = new cgWaypoint(res != null ? res.getString(R.string.cache_coordinates_original) : "res = null", WaypointType.WAYPOINT, false);
                 waypoint.setCoords(new Geopoint(originalCoords));
                 cache.addWaypoint(waypoint);
                 cache.setUserModifiedCoords(true);
@@ -1138,7 +1137,7 @@ public class cgBase {
                     // waypoint type
                     final String resulttype = BaseUtils.getMatch(wp[3], GCConstants.PATTERN_WPTYPE, null);
 
-                    final cgWaypoint waypoint = new cgWaypoint(name, WaypointType.findById(resulttype));
+                    final cgWaypoint waypoint = new cgWaypoint(name, WaypointType.findById(resulttype), false);
 
                     // waypoint prefix
                     waypoint.setPrefix(BaseUtils.getMatch(wp[4], GCConstants.PATTERN_WPPREFIXORLOOKUPORLATLON, true, 2, waypoint.getPrefix(), false));
@@ -2279,7 +2278,7 @@ public class cgBase {
     };
 
     public static void postTweetCache(String geocode) {
-        final cgCache cache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOADCACHEORDB);
+        final cgCache cache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
         String status;
         final String url = cache.getUrl();
         if (url.length() >= 100) {
@@ -2627,13 +2626,13 @@ public class cgBase {
                 // only reload the cache, if it was already stored or has not all details (by checking the description)
                 if (origCache.getListId() >= StoredList.STANDARD_LIST_ID || StringUtils.isBlank(origCache.getDescription())) {
                     final SearchResult search = searchByGeocode(origCache.getGeocode(), null, listId, false, null);
-                    cache = search.getFirstCacheFromResult(LoadFlags.LOADCACHEORDB);
+                    cache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
                 } else {
                     cache = origCache;
                 }
             } else if (StringUtils.isNotBlank(geocode)) {
                 final SearchResult search = searchByGeocode(geocode, null, listId, false, null);
-                cache = search.getFirstCacheFromResult(LoadFlags.LOADCACHEORDB);
+                cache = search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
             } else {
                 cache = null;
             }
@@ -2695,7 +2694,7 @@ public class cgBase {
             }
 
             cache.setListId(listId);
-            cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVEDB));
+            cgeoapplication.getInstance().saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB));
 
             if (handler != null) {
                 handler.sendMessage(new Message());
@@ -2708,7 +2707,7 @@ public class cgBase {
     public static void dropCache(final cgCache cache, final Handler handler) {
         try {
             cgeoapplication.getInstance().markDropped(cache.getGeocode());
-            cgeoapplication.getInstance().removeCache(cache.getGeocode(), EnumSet.of(RemoveFlag.REMOVECACHE));
+            cgeoapplication.getInstance().removeCache(cache.getGeocode(), EnumSet.of(RemoveFlag.REMOVE_CACHE));
 
             handler.sendMessage(new Message());
         } catch (Exception e) {

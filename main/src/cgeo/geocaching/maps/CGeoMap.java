@@ -1177,7 +1177,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                     return;
                 }
 
-                caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOADWAYPOINTS));
+                caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS));
 
                 //if in live map and stored caches are found / disables are also shown.
                 if (live && Settings.isLiveMap()) {
@@ -1295,7 +1295,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 }
 
                 if (search != null) {
-                    caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOADCACHEORDB));
+                    caches.addAll(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
                 }
 
                 if (stop) {
@@ -1505,7 +1505,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
                 coord.setCoords(coordsIntent);
                 coord.setName("some place");
 
-                final cgWaypoint waypoint = new cgWaypoint("some place", waypointTypeIntent != null ? waypointTypeIntent : WaypointType.WAYPOINT);
+                final cgWaypoint waypoint = new cgWaypoint("some place", waypointTypeIntent != null ? waypointTypeIntent : WaypointType.WAYPOINT, false);
 
                 final CachesOverlayItemImpl item = getItem(coord, null, waypoint);
                 overlayCaches.updateItems(item);

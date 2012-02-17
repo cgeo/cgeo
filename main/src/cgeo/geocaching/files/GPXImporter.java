@@ -164,7 +164,7 @@ public class GPXImporter {
             int storedCaches = 0;
             for (cgCache cache : caches) {
                 search.addCache(cache);
-                if (app.saveCache(cache, EnumSet.of(SaveFlag.SAVEDB))) {
+                if (app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_DB))) {
                     storedCaches++;
                 }
 

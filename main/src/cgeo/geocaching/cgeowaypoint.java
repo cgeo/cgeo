@@ -313,7 +313,7 @@ public class cgeowaypoint extends AbstractActivity {
         public void onClick(View arg0) {
             if (app.deleteWaypoint(id)) {
                 StaticMapsProvider.removeWpStaticMaps(id, geocode);
-                app.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVECACHE));
+                app.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
 
                 finish();
                 return;

@@ -258,7 +258,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
             geocode = app.getGeocode(cacheid);
         }
 
-        cache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOADCACHEORDB);
+        cache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
 
         if (StringUtils.isNotBlank(cache.getName())) {
             setTitle(res.getString(R.string.log_new_log) + ": " + cache.getName());
@@ -716,9 +716,9 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                 }
 
                 if (cache != null) {
-                    app.saveCache(cache, EnumSet.of(SaveFlag.SAVECACHE));
+                    app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
                 } else {
-                    app.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVECACHE));
+                    app.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
                 }
             }
 

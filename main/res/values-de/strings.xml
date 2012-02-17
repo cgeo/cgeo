@@ -114,8 +114,21 @@
   <string name="log_new_log">Loggen</string>
   <string name="log_new_log_text">Log-Text</string>
   <string name="log_announcement">Ankündigung</string>
+  
+  <!-- copy -->
+  <string name="options_context_menu_title">Optionen</string>
+  <string name="copy_coords">Koordinaten kopieren</string>
+  <string name="copy_desc">Beschreibung kopieren</string>
+  <string name="copy_personalnote">Persönliche Notiz kopieren</string>
+  <string name="copy_hint">Hinweis kopieren</string>
+  <string name="copy_log">Log kopieren</string>
 
-  <!-- errors, warnings, info toasts -->
+<!-- translation -->
+  <string name="translate_to_sys_lang">Übersetze in %s</string>
+  <string name="translate_to_english">Übersetze in Englisch</string>
+  <string name="translate_length_warning">Die Übersetzung kann bei sehr langen Texten evtl. fehlschlagen.</string>
+  
+<!-- errors, warnings, info toasts -->
   <string name="err_none">OK</string>
   <string name="err_start">Kommunikation nicht gestartet</string>
   <string name="err_parse">Parsing der Anmeldung gescheitert</string>
@@ -350,7 +363,6 @@
   <string name="init_password">Passwort</string>
   <string name="init_passvote">Passwort</string>
   <string name="init_login">Anmeldedaten überprüfen und speichern</string>
-  <string name="init_logout">Abmelden</string>
   <string name="init_login_popup">Login</string>
   <string name="init_login_popup_working">Bei Geocaching.com anmelden…</string>
   <string name="init_login_popup_ok">Login erfolgreich.</string>
@@ -725,16 +737,18 @@
   <!-- helpers -->
   <string name="helper_manual_title">Anleitung</string>
   <string name="helper_manual_description">Umfangreiche Anleitung für c:geo mit Beschreibung aller Möglichkeiten dieser App (auch versteckte).</string>
-  <string name="helper_calendar_title">c:geo Kalendar Add-on</string>
-  <string name="helper_calendar_missing">c:geo Kalendar Add-on nicht installiert</string>
-  <string name="helper_calendar_description">Ermöglicht die Übernahme von Event Caches in den Kalendar.</string>
+  <string name="helper_calendar_title">c:geo Kalender Add-on</string>
+  <string name="helper_calendar_missing">c:geo Kalender Add-on nicht installiert</string>
+  <string name="helper_calendar_description">Ermöglicht die Übernahme von Event-Caches in den Kalender.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Sehr gute App für Online- und Offline-Karten (nur Rasterkarten) mit vielen weiteren Funktionen wie z.B. Trackaufzeichnung, POIs und vieles mehr.</string>
-  <string name="helper_gpsstatus_title">GPS Status</string>
-  <string name="helper_gpsstatus_description">Das Radar dieser App kann in c:geo verwendet und zusätzlich viele GPS-bezogene Information abgerufen werden.</string>
+  <string name="helper_gpsstatus_title">GPS-Status</string>
+  <string name="helper_gpsstatus_description">Das Radar dieser App kann in c:geo verwendet und zusätzlich viele GPS-bezogene Informationen abgerufen werden.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Ermöglicht ein externes GPS zu verwenden, um die Standortgenauigkeit zu erhöhen und die Batterie zu schonen.</string>
-
+  <string name="helper_barcode_title">Barcode-Scanner</string>
+  <string name="helper_barcode_description">Es gibt GreaseMonkey-Scripte und Webseiten, die Geocodes als Strichcode darstellen können. Bei Verwendung dieser Skripte kann c:geo über diese App den Geocode eines Caches direkt vom Bildschirm des Computers ablesen.</string>
+  
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Hunde erlaubt</string>
   <string name="attribute_dogs_no">Hunde nicht erlaubt</string>
