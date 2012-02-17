@@ -771,9 +771,6 @@ public class cgeo extends AbstractActivity {
 
                 // invoke settings activity to insert login details
                 if (status == StatusCode.NO_LOGIN_INFO_STORED) {
-                    // switch off live-map warning for new installs
-                    Settings.setLiveMapWarningShown();
-
                     final Context context = cgeo.this;
                     final Intent initIntent = new Intent(context, cgeoinit.class);
                     context.startActivity(initIntent);

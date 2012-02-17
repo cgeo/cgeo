@@ -215,7 +215,7 @@
   <string name="warn_load_images">Sorry, c:geo failed to load images.</string>
   
   <string name="warn_livemap_title">Warning</string>
-  <string name="warn_livemap_msg">With the geocaching.com update on 14.02.2012 the functionality used by c:geo for displaying the life map was removed.\nThat means that the live-map now shows only stored caches.\nTo get new caches online use \'Nearby\' or one of the other searches.</string>
+  <string name="warn_livemap_msg">With the geocaching.com update on 14.02.2012 the functionality used by c:geo for displaying the life map was removed.\nThat means that the live-map now shows only stored caches.\nTo get new caches online use \'Nearby\' or one of the other searches.\nFor updates on the status of development see http://www.cgeo.org</string>
 
 
   <string name="info_log_posted">c:geo successfully submitted the log.</string>
