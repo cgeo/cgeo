@@ -686,6 +686,8 @@ public class cgBase {
         return searchResult;
     }
 
+    // TODO Valentine Remove with merge
+    @Deprecated
     public static SearchResult parseMapJSON(final String uri, final String data) {
         if (StringUtils.isEmpty(data)) {
             Log.e(Settings.tag, "cgeoBase.parseMapJSON: No page given");
@@ -1869,6 +1871,8 @@ public class cgBase {
         return searchByAny(thread, cacheType, false, listId, showCaptcha, params);
     }
 
+    // TODO Valentine Remove with merge
+    @Deprecated
     public static SearchResult searchByViewport(final String userToken, final Viewport viewport) {
 
         String page = null;
@@ -1896,8 +1900,18 @@ public class cgBase {
         return search;
     }
 
-    private static String requestJSONgc(final String uri, final String params) {
-        String page;
+    public static String requestJSON(final String url, final String referer) {
+        final HttpGet request = new HttpGet(url);
+        request.addHeader("Content-Type", "application/json; charset=UTF-8");
+        request.addHeader("X-Requested-With", "XMLHttpRequest");
+        request.addHeader("Accept", "application/json, text/javascript, */*; q=0.01");
+        request.addHeader("Referer", referer);
+        return getResponseData(request(request));
+    }
+
+    // TODO Valentine Remove with merge
+    @Deprecated
+    public static String requestJSONgc(final String uri, final String params) {
         final HttpPost request = new HttpPost("http://www.geocaching.com/map/default.aspx/MapAction");
         try {
             request.setEntity(new StringEntity(params, HTTP.UTF_8));
@@ -1909,7 +1923,7 @@ public class cgBase {
         request.addHeader("X-Requested-With", "XMLHttpRequest");
         request.addHeader("Accept", "application/json, text/javascript, */*; q=0.01");
         request.addHeader("Referer", uri);
-        page = getResponseData(request(request));
+        String page = getResponseData(request(request));
         return page;
     }
 

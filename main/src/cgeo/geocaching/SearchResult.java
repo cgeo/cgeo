@@ -178,6 +178,11 @@ public class SearchResult implements Parcelable {
         return geocodes.add(geocode);
     }
 
+    /** Add the geocodes to the search. No caches are loaded into the CacheCache */
+    public boolean addGeocodes(Set<String> geocodes) {
+        return this.geocodes.addAll(geocodes);
+    }
+
     /** Add the cache geocode to the search and store the cache in the CacheCache */
     public boolean addCache(final cgCache cache) {
         addGeocode(cache.getGeocode());
