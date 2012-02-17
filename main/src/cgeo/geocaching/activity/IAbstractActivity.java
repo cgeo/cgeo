@@ -27,4 +27,5 @@ public interface IAbstractActivity {
 
     void addVisitMenu(Menu menu, cgCache cache);
 
+    public void invalidateOptionsMenuCompatible();
 }

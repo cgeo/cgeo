@@ -29,7 +29,7 @@ import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 import cgeo.geocaching.maps.interfaces.MapControllerImpl;
 import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
-import cgeo.geocaching.maps.interfaces.OnDragListener;
+import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.OtherCachersOverlayItemImpl;
 import cgeo.geocaching.utils.CancellableHandler;
 
@@ -70,7 +70,7 @@ import java.util.Set;
 /**
  * Class representing the Map in c:geo
  */
-public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory {
+public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFactory {
 
     /** Handler Messages */
     private static final int HIDE_PROGRESS = 0;
@@ -597,12 +597,14 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
         switch (id) {
             case MENU_TRAIL_MODE:
                 Settings.setMapTrail(!Settings.isMapTrail());
+                ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
             case MENU_MAP_LIVE:
                 Settings.setLiveMap(!Settings.isLiveMap());
                 liveChanged = true;
                 search = null;
                 searchIntent = null;
+                ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
             case MENU_STORE_CACHES:
                 if (live && !isLoading() && CollectionUtils.isNotEmpty(caches)) {
@@ -688,6 +690,7 @@ public class CGeoMap extends AbstractMap implements OnDragListener, ViewFactory 
 
                 overlayCaches.switchCircles();
                 mapView.repaintRequired(overlayCaches);
+                ActivityMixin.invalidateOptionsMenu(activity);
                 return true;
             case MENU_AS_LIST: {
                 final SearchResult searchResult = new SearchResult();

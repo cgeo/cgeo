@@ -69,7 +69,7 @@ public interface MapViewImpl {
      */
     void repaintRequired(GeneralOverlay overlay);
 
-    void setOnDragListener(OnDragListener onDragListener);
+    void setOnDragListener(OnMapDragListener onDragListener);
 
     /**
      * Indicates if overlay text or line colours should be dark (normal case)

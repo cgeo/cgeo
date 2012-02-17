@@ -98,4 +98,9 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
     protected void restartActivity() {
         Compatibility.restartActivity(this);
     }
+
+    public void invalidateOptionsMenuCompatible() {
+        ActivityMixin.invalidateOptionsMenu(this);
+    }
+
 }

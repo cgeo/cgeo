@@ -232,8 +232,7 @@ public class cgeonavigate extends AbstractActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
-        MenuItem item;
-        item = menu.findItem(1);
+        MenuItem item = menu.findItem(MENU_SWITCH_COMPASS_GPS);
         if (Settings.isUseCompass()) {
             item.setTitle(res.getString(R.string.use_gps));
         } else {
@@ -252,6 +251,7 @@ public class cgeonavigate extends AbstractActivity {
         } else if (id == MENU_SWITCH_COMPASS_GPS) {
             boolean oldSetting = Settings.isUseCompass();
             Settings.setUseCompass(!oldSetting);
+            invalidateOptionsMenuCompatible();
             if (oldSetting) {
                 if (dir != null) {
                     dir = app.removeDir();

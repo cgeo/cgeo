@@ -977,24 +977,31 @@ public class cgeocaches extends AbstractListActivity {
                 if (adapter != null) {
                     adapter.switchSelectMode();
                 }
+                invalidateOptionsMenuCompatible();
                 return true;
             case MENU_REFRESH_STORED:
                 refreshStored();
+                invalidateOptionsMenuCompatible();
                 return true;
             case MENU_DROP_CACHES:
                 dropStored(false);
+                invalidateOptionsMenuCompatible();
                 return false;
             case MENU_DROP_CACHES_AND_LIST:
                 dropStored(true);
+                invalidateOptionsMenuCompatible();
                 return true;
             case MENU_IMPORT_GPX:
                 importGpx();
+                invalidateOptionsMenuCompatible();
                 return false;
             case MENU_CREATE_LIST:
                 createList(null);
+                invalidateOptionsMenuCompatible();
                 return false;
             case MENU_DROP_LIST:
                 removeList(true);
+                invalidateOptionsMenuCompatible();
                 return false;
             case MENU_RENAME_LIST:
                 renameList();
@@ -1003,6 +1010,7 @@ public class cgeocaches extends AbstractListActivity {
                 if (adapter != null) {
                     adapter.invertSelection();
                 }
+                invalidateOptionsMenuCompatible();
                 return false;
             case MENU_SORT_DISTANCE:
                 setComparator(item, null);
@@ -1027,6 +1035,7 @@ public class cgeocaches extends AbstractListActivity {
                 return false;
             case MENU_SWITCH_LIST:
                 selectList(null);
+                invalidateOptionsMenuCompatible();
                 return false;
             case MENU_SORT_RATING:
                 setComparator(item, new RatingComparator());
@@ -1074,9 +1083,11 @@ public class cgeocaches extends AbstractListActivity {
                 return false;
             case MENU_REMOVE_FROM_HISTORY:
                 removeFromHistoryCheck();
+                invalidateOptionsMenuCompatible();
                 return false;
             case MENU_MOVE_TO_LIST:
                 moveCachesToOtherList();
+                invalidateOptionsMenuCompatible();
                 return true;
         }
 
@@ -1284,6 +1295,7 @@ public class cgeocaches extends AbstractListActivity {
         if (adapter != null) {
             adapter.setFilter(filter);
             prepareFilterBar();
+            invalidateOptionsMenuCompatible();
             return true;
         }
         return false;
@@ -2377,6 +2389,7 @@ public class cgeocaches extends AbstractListActivity {
         setLoadingCaches();
 
         (new MoveCachesToListThread(listId, new MoveHandler())).start();
+        invalidateOptionsMenuCompatible();
     }
 
     private class MoveHandler extends Handler {

@@ -6,7 +6,7 @@ package cgeo.geocaching.maps.interfaces;
  * @author cachapa
  *
  */
-public interface OnDragListener {
+public interface OnMapDragListener {
 
     public void onDrag();
 

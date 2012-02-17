@@ -24,6 +24,7 @@ public final class Compatibility {
 
     private static Method dataChangedMethod = null;
     private static Method getRotationMethod = null;
+    private static AndroidLevel11Interface level11;
 
     static {
         if (isLevel8) {
@@ -35,6 +36,12 @@ public final class Compatibility {
                 // Exception can be ClassNotFoundException, SecurityException or NoSuchMethodException
                 Log.e(Settings.tag, "Cannot load AndroidLevel8 class", e);
             }
+        }
+        if (sdkVersion >= 11) {
+            level11 = new AndroidLevel11();
+        }
+        else {
+            level11 = new AndroidLevel11Dummy();
         }
     }
 
@@ -107,6 +114,10 @@ public final class Compatibility {
             activity.overridePendingTransition(0, 0);
         }
         activity.startActivity(intent);
+    }
+
+    public static void invalidateOptionsMenu(final Activity activity) {
+        level11.invalidateOptionsMenu(activity);
     }
 
 }

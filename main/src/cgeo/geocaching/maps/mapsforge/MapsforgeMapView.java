@@ -10,7 +10,7 @@ import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 import cgeo.geocaching.maps.interfaces.MapControllerImpl;
 import cgeo.geocaching.maps.interfaces.MapProjectionImpl;
 import cgeo.geocaching.maps.interfaces.MapViewImpl;
-import cgeo.geocaching.maps.interfaces.OnDragListener;
+import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.OverlayImpl;
 import cgeo.geocaching.maps.interfaces.OverlayImpl.overlayType;
 
@@ -33,7 +33,7 @@ import android.view.MotionEvent;
 
 public class MapsforgeMapView extends MapView implements MapViewImpl {
     private GestureDetector gestureDetector;
-    private OnDragListener onDragListener;
+    private OnMapDragListener onDragListener;
 
     public MapsforgeMapView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -205,7 +205,7 @@ public class MapsforgeMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public void setOnDragListener(OnDragListener onDragListener) {
+    public void setOnDragListener(OnMapDragListener onDragListener) {
         this.onDragListener = onDragListener;
     }
 

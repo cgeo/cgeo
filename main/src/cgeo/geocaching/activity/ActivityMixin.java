@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeo;
+import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.enumerations.LogType;
 
 import org.apache.commons.lang3.StringUtils;
@@ -152,5 +153,9 @@ public final class ActivityMixin {
         if (keepScreenOn) {
             abstractActivity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
+    }
+
+    public static void invalidateOptionsMenu(Activity activity) {
+        Compatibility.invalidateOptionsMenu(activity);
     }
 }

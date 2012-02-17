@@ -3,6 +3,7 @@ package cgeo.geocaching.activity;
 import cgeo.geocaching.cgBase;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.compatibility.Compatibility;
 
 import android.app.ListActivity;
 import android.content.res.Resources;
@@ -85,4 +86,8 @@ public abstract class AbstractListActivity extends ListActivity implements
         ActivityMixin.addVisitMenu(this, menu, cache);
     }
 
+    @Override
+    public void invalidateOptionsMenuCompatible() {
+        Compatibility.invalidateOptionsMenu(this);
+    }
 }
