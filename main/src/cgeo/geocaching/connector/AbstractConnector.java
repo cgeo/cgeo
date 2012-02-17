@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.ParseResult;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -44,12 +44,12 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
-    public ParseResult searchByCoordinate(Geopoint center) {
+    public SearchResult searchByCoordinate(Geopoint center) {
         return null;
     }
 
     @Override
-    public ParseResult searchByGeocode(String geocode, String guid, cgeoapplication app, int listId, CancellableHandler handler) {
+    public SearchResult searchByGeocode(String geocode, String guid, cgeoapplication app, int listId, CancellableHandler handler) {
         return null;
     }
 
@@ -65,5 +65,11 @@ public abstract class AbstractConnector implements IConnector {
     public boolean isZippedGPXFile(String fileName) {
         // don't accept any file by default
         return false;
+    }
+
+    @Override
+    public boolean isReliableLatLon(boolean cacheHasReliableLatLon) {
+        // let every cache have reliable coordinates by default
+        return true;
     }
 }

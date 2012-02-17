@@ -6,9 +6,10 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.cache.GeneralAppsFactory;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
-import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.GeopointFormatter;
@@ -16,25 +17,24 @@ import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
+import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CryptUtils;
+import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import com.viewpagerindicator.TitlePageIndicator;
 import com.viewpagerindicator.TitleProvider;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import android.R.color;
 import android.app.AlertDialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -54,7 +54,6 @@ import android.text.Spannable;
 import android.text.Spanned;
 import android.text.format.DateUtils;
 import android.text.method.LinkMovementMethod;
-import android.text.style.ImageSpan;
 import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
 import android.util.DisplayMetrics;
@@ -85,10 +84,11 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -117,7 +117,7 @@ public class CacheDetailActivity extends AbstractActivity {
     private final Progress progress = new Progress();
     private SearchResult search;
     private final LocationUpdater locationUpdater = new LocationUpdater();
-    private String contextMenuUser = null;
+    private CharSequence clickedItemText = null;
     private int contextMenuWPIndex = -1;
 
     /**
@@ -179,7 +179,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
         // TODO Why can it happen that search is not null? onCreate should be called only once and it is not set before.
         if (search != null) {
-            cache = app.getCache(search);
+            cache = search.getFirstCacheFromResult(LoadFlags.LOAD_ALL_DB_ONLY);
             if (cache != null && cache.getGeocode() != null) {
                 geocode = cache.getGeocode();
             }
@@ -352,22 +352,35 @@ public class CacheDetailActivity extends AbstractActivity {
         final int viewId = view.getId();
         contextMenuWPIndex = -1;
         switch (viewId) {
-            case R.id.author:
-            case R.id.value:
-                if (viewId == R.id.author) { // Author of a log entry
-                    contextMenuUser = ((TextView) view).getText().toString();
-                } else if (viewId == R.id.value) { // The owner of the cache
-                    if (StringUtils.isNotBlank(cache.getOwnerReal())) {
-                        contextMenuUser = cache.getOwnerReal();
-                    } else {
-                        contextMenuUser = cache.getOwner();
-                    }
+            case R.id.value: // coordinates
+                clickedItemText = ((TextView) view).getText();
+                buildOptionsContextmenu(menu, viewId, res.getString(R.string.copy_coords), true);
+                break;
+            case R.id.shortdesc:
+                clickedItemText = ((TextView) view).getText();
+                buildOptionsContextmenu(menu, viewId, res.getString(R.string.copy_desc), false);
+                break;
+            case R.id.longdesc:
+                // combine short and long description
+                String shortDesc = cache.getShortDescription();
+                if (shortDesc.compareTo("") == 0) {
+                    clickedItemText = ((TextView) view).getText();
+                } else {
+                    clickedItemText = shortDesc + "\n\n" + ((TextView) view).getText();
                 }
-
-                menu.setHeaderTitle(res.getString(R.string.user_menu_title) + " " + contextMenuUser);
-                menu.add(viewId, 1, 0, res.getString(R.string.user_menu_view_hidden));
-                menu.add(viewId, 2, 0, res.getString(R.string.user_menu_view_found));
-                menu.add(viewId, 3, 0, res.getString(R.string.user_menu_open_browser));
+                buildOptionsContextmenu(menu, viewId, res.getString(R.string.copy_desc), false);
+                break;
+            case R.id.personalnote:
+                clickedItemText = ((TextView) view).getText();
+                buildOptionsContextmenu(menu, viewId, res.getString(R.string.copy_personalnote), true);
+                break;
+            case R.id.hint:
+                clickedItemText = ((TextView) view).getText();
+                buildOptionsContextmenu(menu, viewId, res.getString(R.string.copy_hint), false);
+                break;
+            case R.id.log:
+                clickedItemText = ((TextView) view).getText();
+                buildOptionsContextmenu(menu, viewId, res.getString(R.string.copy_log), false);
                 break;
             case -1:
                 if (null != cache.getWaypoints()) {
@@ -388,8 +401,7 @@ public class CacheDetailActivity extends AbstractActivity {
                                 }
                                 if (waypoint.getCoords() != null) {
                                     menu.add(CONTEXT_MENU_WAYPOINT_DEFAULT_NAVIGATION, index, 0, NavigationAppFactory.getDefaultNavigationApplication(this).getName());
-                                    SubMenu subMenu = menu.addSubMenu(CONTEXT_MENU_WAYPOINT_NAVIGATE, index, 0, R.string.cache_menu_navigate).setIcon(android.R.drawable.ic_menu_mapmode);
-                                    NavigationAppFactory.addMenuItems(subMenu, this);
+                                    menu.add(CONTEXT_MENU_WAYPOINT_NAVIGATE, index, 0, R.string.cache_menu_navigate).setIcon(android.R.drawable.ic_menu_mapmode);
                                     menu.add(CONTEXT_MENU_WAYPOINT_CACHES_AROUND, index, 0, R.string.cache_menu_around);
                                 }
                                 break;
@@ -404,27 +416,46 @@ public class CacheDetailActivity extends AbstractActivity {
         }
     }
 
+    private void buildOptionsContextmenu(ContextMenu menu, int viewId, String copyPrompt, boolean copyOnly) {
+        menu.setHeaderTitle(res.getString(R.string.options_context_menu_title));
+        menu.add(viewId, 1, 0, copyPrompt);
+        if (!copyOnly) {
+            if (clickedItemText.length() > TranslationUtils.translationTextLengthToWarn) {
+                showToast(res.getString(R.string.translate_length_warning));
+            }
+            menu.add(viewId, 2, 0, res.getString(R.string.translate_to_sys_lang, Locale.getDefault().getDisplayLanguage()));
+            if (Settings.isUseEnglish() && Locale.getDefault() != Locale.ENGLISH) {
+                menu.add(viewId, 3, 0, res.getString(R.string.translate_to_english));
+            }
+
+        }
+    }
+
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         final int groupId = item.getGroupId();
         final int index = item.getItemId();
         switch (groupId) {
-            case R.id.author:
             case R.id.value:
-                final int itemId = item.getItemId();
-                switch (itemId) {
-                    case 1:
-                        cgeocaches.startActivityOwner(this, contextMenuUser);
+            case R.id.shortdesc:
+            case R.id.longdesc:
+            case R.id.personalnote:
+            case R.id.hint:
+            case R.id.log:
+                switch (index) {
+                    case 1: // copy
+                        ClipboardUtils.copyToClipboard(clickedItemText);
                         return true;
-                    case 2:
-                        cgeocaches.startActivityUserName(this, contextMenuUser);
+                    case 2: // translate to system language
+                        TranslationUtils.startActivityTranslate(this, Locale.getDefault().getLanguage(), clickedItemText.toString());
                         return true;
-                    case 3:
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(contextMenuUser))));
+                    case 3: // translate to English
+                        TranslationUtils.startActivityTranslate(this, Locale.ENGLISH.getLanguage(), clickedItemText.toString());
                         return true;
                     default:
                         break;
                 }
+
                 break;
             case CONTEXT_MENU_WAYPOINT_EDIT:
                 if (cache.hasWaypoints() && index < cache.getWaypoints().size()) {
@@ -454,7 +485,12 @@ public class CacheDetailActivity extends AbstractActivity {
                 }
                 break;
             case CONTEXT_MENU_WAYPOINT_NAVIGATE:
-                // No processing necessary, sub-menu gets displayed;
+ {
+                final cgWaypoint waypoint = cache.getWaypoint(contextMenuWPIndex);
+                if (waypoint != null) {
+                    NavigationAppFactory.showNavigationMenu(geolocation, this, null, null, waypoint, null);
+                }
+            }
                 break;
             case CONTEXT_MENU_WAYPOINT_CACHES_AROUND:
  {
@@ -465,12 +501,6 @@ public class CacheDetailActivity extends AbstractActivity {
             }
                 break;
             default:
-                // First check the navigation menu, then the option items
-                final cgWaypoint waypoint = cache.getWaypoint(contextMenuWPIndex);
-                if (waypoint != null && NavigationAppFactory.onMenuItemSelected(item, geolocation, this,
-                        null, null, waypoint, null)) {
-                    return true;
-                }
                 return onOptionsItemSelected(item);
         }
         return false;
@@ -526,8 +556,7 @@ public class CacheDetailActivity extends AbstractActivity {
             cachesAround();
             return true;
         } else if (menuItem == MENU_CALENDAR) {
-            addToCalendar();
-            //addToCalendarWithIntent();
+            addToCalendarWithIntent();
             return true;
         } else if (menuItem == MENU_SHARE) {
             if (cache != null) {
@@ -561,8 +590,8 @@ public class CacheDetailActivity extends AbstractActivity {
                     return;
                 }
 
-                if (SearchResult.getError(search) != null) {
-                    showToast(res.getString(R.string.err_dwld_details_failed) + " " + SearchResult.getError(search).getErrorString(res) + ".");
+                if (search.getError() != null) {
+                    showToast(res.getString(R.string.err_dwld_details_failed) + " " + search.getError().getErrorString(res) + ".");
 
                     finish();
                     return;
@@ -593,7 +622,7 @@ public class CacheDetailActivity extends AbstractActivity {
             return;
         }
 
-        cache = app.getCache(search);
+        cache = search.getFirstCacheFromResult(LoadFlags.LOAD_ALL_DB_ONLY);
 
         if (cache == null) {
             progress.dismiss();
@@ -731,153 +760,24 @@ public class CacheDetailActivity extends AbstractActivity {
     }
 
     private void addToCalendarWithIntent() {
-        // this method is NOT unused :)
-        final Parameters params = new Parameters(
-                ICalendar.PARAM_NAME, cache.getName(),
-                ICalendar.PARAM_NOTE, StringUtils.defaultString(cache.getPersonalNote()),
-                ICalendar.PARAM_HIDDEN_DATE, String.valueOf(cache.getHiddenDate().getTime()),
-                ICalendar.PARAM_URL, StringUtils.defaultString(cache.getUrl()),
-                ICalendar.PARAM_COORDS, cache.getCoords() == null ? "" : cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW),
-                ICalendar.PARAM_LOCATION, StringUtils.defaultString(cache.getLocation()),
-                ICalendar.PARAM_SHORT_DESC, StringUtils.defaultString(cache.getShortDescription())
-                );
 
-        // TODO: Check if addon is installed, if not, tell the user how to get it.
-        startActivity(new Intent(ICalendar.INTENT,
-                Uri.parse(ICalendar.URI_SCHEME + "://" + ICalendar.URI_HOST + "?" + params.toString())));
-    }
+        final boolean calendarAddOnAvailable = cgBase.isIntentAvailable(this, ICalendar.INTENT);
 
-    /**
-     * Adds the cache to the Android-calendar if it is an event.
-     */
-    private void addToCalendar() {
-        String[] projection = new String[] { "_id", "displayName" };
-        Uri calendarProvider = Compatibility.getCalendarProviderURI();
+        if (calendarAddOnAvailable) {
+            final Parameters params = new Parameters(
+                    ICalendar.PARAM_NAME, cache.getName(),
+                    ICalendar.PARAM_NOTE, StringUtils.defaultString(cache.getPersonalNote()),
+                    ICalendar.PARAM_HIDDEN_DATE, String.valueOf(cache.getHiddenDate().getTime()),
+                    ICalendar.PARAM_URL, StringUtils.defaultString(cache.getUrl()),
+                    ICalendar.PARAM_COORDS, cache.getCoords() == null ? "" : cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW),
+                    ICalendar.PARAM_LOCATION, StringUtils.defaultString(cache.getLocation()),
+                    ICalendar.PARAM_SHORT_DESC, StringUtils.defaultString(cache.getShortDescription())
+                    );
 
-        Cursor cursor = managedQuery(calendarProvider, projection, "selected=1", null, null);
-
-        final Map<Integer, String> calendars = new HashMap<Integer, String>();
-        int cnt = 0;
-        if (cursor != null) {
-            cnt = cursor.getCount();
-
-            if (cnt > 0) {
-                cursor.moveToFirst();
-
-                int calId = 0;
-                String calIdPre = null;
-                String calName = null;
-                int calIdIn = cursor.getColumnIndex("_id");
-                int calNameIn = cursor.getColumnIndex("displayName");
-
-                do {
-                    calIdPre = cursor.getString(calIdIn);
-                    if (calIdPre != null) {
-                        calId = Integer.parseInt(calIdPre);
-                    }
-                    calName = cursor.getString(calNameIn);
-
-                    if (calId > 0 && calName != null) {
-                        calendars.put(calId, calName);
-                    }
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-        }
-
-        final CharSequence[] items = calendars.values().toArray(new CharSequence[calendars.size()]);
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.cache_calendars);
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
-                addToCalendarFn(calendars, item);
-            }
-        });
-        AlertDialog alert = builder.create();
-        alert.show();
-    }
-
-    /**
-     * Helper for {@link addToCalendar()}.
-     *
-     * @param calendars
-     *
-     * @param index
-     *            The selected calendar
-     */
-    private void addToCalendarFn(Map<Integer, String> calendars, int index) {
-        if (MapUtils.isEmpty(calendars)) {
-            return;
-        }
-
-        try {
-            Uri calendarProvider = Compatibility.getCalenderEventsProviderURI();
-
-            final Integer[] keys = calendars.keySet().toArray(new Integer[calendars.size()]);
-            final Integer calId = keys[index];
-
-            final Date eventDate = cache.getHiddenDate();
-            eventDate.setHours(0);
-            eventDate.setMinutes(0);
-            eventDate.setSeconds(0);
-
-            StringBuilder description = new StringBuilder();
-            description.append(cache.getUrl());
-            if (StringUtils.isNotBlank(cache.getShortdesc())) {
-                // remove images in short description
-                Spanned spanned = Html.fromHtml(cache.getShortdesc(), null, null);
-                String text = spanned.toString();
-                ImageSpan[] spans = spanned.getSpans(0, spanned.length(), ImageSpan.class);
-                for (int i = spans.length - 1; i >= 0; i--) {
-                    text = StringUtils.left(text, spanned.getSpanStart(spans[i]) - 1) + StringUtils.substring(text, spanned.getSpanEnd(spans[i]) + 1);
-                }
-                if (StringUtils.isNotBlank(text)) {
-                    description.append("\n\n");
-                    description.append(text);
-                }
-            }
-
-            if (StringUtils.isNotBlank(cache.getPersonalNote())) {
-                description.append("\n\n").append(Html.fromHtml(cache.getPersonalNote()).toString());
-            }
-
-            ContentValues event = new ContentValues();
-            event.put("calendar_id", calId);
-            event.put("dtstart", eventDate.getTime() + 43200000); // noon
-            event.put("dtend", eventDate.getTime() + 43200000 + 3600000); // + one hour
-            event.put("eventTimezone", "UTC");
-            event.put("title", Html.fromHtml(cache.getName()).toString());
-            event.put("description", description.toString());
-            StringBuilder location = new StringBuilder();
-            if (cache.getCoords() != null) {
-                location.append(cache.getCoords().format(GeopointFormatter.Format.LAT_LON_DECMINUTE_RAW));
-            }
-            if (StringUtils.isNotBlank(cache.getLocation())) {
-                boolean addParentheses = false;
-                if (location.length() > 0) {
-                    addParentheses = true;
-                    location.append(" (");
-                }
-
-                location.append(Html.fromHtml(cache.getLocation()).toString());
-                if (addParentheses) {
-                    location.append(')');
-                }
-            }
-            if (location.length() > 0) {
-                event.put("eventLocation", location.toString());
-            }
-            event.put("allDay", 1);
-            event.put("hasAlarm", 0);
-
-            getContentResolver().insert(calendarProvider, event);
-
-            showToast(res.getString(R.string.event_success));
-        } catch (Exception e) {
-            showToast(res.getString(R.string.event_fail));
-
-            Log.e(Settings.tag, "CacheDetailActivity.addToCalendarFn: " + e.toString());
+            startActivity(new Intent(ICalendar.INTENT,
+                    Uri.parse(ICalendar.URI_SCHEME + "://" + ICalendar.URI_HOST + "?" + params.toString())));
+        } else {
+            showToast(res.getString(R.string.helper_calendar_missing));
         }
     }
 
@@ -951,11 +851,11 @@ public class CacheDetailActivity extends AbstractActivity {
     }
 
     private void showNavigationMenu() {
-        NavigationAppFactory.showNavigationMenu(geolocation, this, cache, search);
+        NavigationAppFactory.showNavigationMenu(geolocation, this, cache, search, null, null);
     }
 
     /**
-     * Opens a context menu to do actions on an username
+     * Opens a dialog to do actions on an username
      */
     private class UserActionsClickListener implements View.OnClickListener {
 
@@ -967,12 +867,34 @@ public class CacheDetailActivity extends AbstractActivity {
                 return;
             }
 
-            try {
-                registerForContextMenu(view);
-                openContextMenu(view);
-            } catch (Exception e) {
-                // nothing
-            }
+            clickedItemText = ((TextView) view).getText().toString();
+
+            final CharSequence[] items = {res.getString(R.string.user_menu_view_hidden),
+                    res.getString(R.string.user_menu_view_found),
+                    res.getString(R.string.user_menu_open_browser)
+            };
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(CacheDetailActivity.this);
+            builder.setTitle(res.getString(R.string.user_menu_title) + " " + clickedItemText);
+            builder.setItems(items, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int item) {
+                    switch (item) {
+                        case 0:
+                            cgeocaches.startActivityOwner(CacheDetailActivity.this, clickedItemText.toString());
+                            return;
+                        case 1:
+                            cgeocaches.startActivityUserName(CacheDetailActivity.this, clickedItemText.toString());
+                            return;
+                        case 2:
+                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/profile/?u=" + URLEncoder.encode(clickedItemText.toString()))));
+                            return;
+                        default:
+                            break;
+                    }
+                }
+            });
+            AlertDialog alert = builder.create();
+            alert.show();
         }
     }
 
@@ -1494,8 +1416,8 @@ public class CacheDetailActivity extends AbstractActivity {
 
             // cache coordinates
             if (cache.getCoords() != null) {
-                addCacheDetail(R.string.cache_coordinates, cache.getCoords().toString())
-                        .setOnClickListener(new View.OnClickListener() {
+                TextView valueView = addCacheDetail(R.string.cache_coordinates, cache.getCoords().toString());
+                valueView.setOnClickListener(new View.OnClickListener() {
                             private int position = 0;
                             private GeopointFormatter.Format[] availableFormats = new GeopointFormatter.Format[] {
                                     GeopointFormatter.Format.LAT_LON_DECMINUTE,
@@ -1512,6 +1434,7 @@ public class CacheDetailActivity extends AbstractActivity {
                                 valueView.setText(cache.getCoords().format(availableFormats[position]));
                             }
                         });
+                registerForContextMenu(valueView);
             }
 
             // cache attributes
@@ -1585,7 +1508,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     storeThread = null;
 
                     try {
-                        cache = app.getCache(search); // reload cache details
+                        cache = search.getFirstCacheFromResult(LoadFlags.LOAD_ALL_DB_ONLY); // reload cache details
                     } catch (Exception e) {
                         showToast(res.getString(R.string.err_store_failed));
 
@@ -1612,7 +1535,7 @@ public class CacheDetailActivity extends AbstractActivity {
                     refreshThread = null;
 
                     try {
-                        cache = app.getCache(search); // reload cache details
+                        cache = search.getFirstCacheFromResult(LoadFlags.LOAD_ALL_DB_ONLY); // reload cache details
                     } catch (Exception e) {
                         showToast(res.getString(R.string.err_refresh_failed));
 
@@ -1699,7 +1622,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             @Override
             public void run() {
-                cgeoapplication.removeCacheFromCache(cache.getGeocode());
+                app.removeCache(cache.getGeocode(), EnumSet.of(RemoveFlag.REMOVE_CACHE));
                 search = cgBase.searchByGeocode(cache.getGeocode(), null, 0, true, handler);
 
                 handler.sendEmptyMessage(0);
@@ -1730,7 +1653,7 @@ public class CacheDetailActivity extends AbstractActivity {
 
             @Override
             public void run() {
-                cgBase.dropCache(app, cache, handler);
+                cgBase.dropCache(cache, handler);
             }
         }
 
@@ -1851,7 +1774,7 @@ public class CacheDetailActivity extends AbstractActivity {
             final Button offlineRefresh = (Button) view.findViewById(R.id.offline_refresh);
             final Button offlineStore = (Button) view.findViewById(R.id.offline_store);
 
-            if (cache.getListId() >= 1) {
+            if (cache.getListId() >= StoredList.STANDARD_LIST_ID) {
                 long diff = (System.currentTimeMillis() / (60 * 1000)) - (cache.getDetailedUpdate() / (60 * 1000)); // minutes
 
                 String ago = "";
@@ -1979,6 +1902,7 @@ public class CacheDetailActivity extends AbstractActivity {
             // cache short description
             if (StringUtils.isNotBlank(cache.getShortDescription())) {
                 new LoadDescriptionTask().execute(cache.getShortDescription(), view.findViewById(R.id.shortdesc), null);
+                registerForContextMenu(view.findViewById(R.id.shortdesc));
             }
 
             // long description
@@ -2004,6 +1928,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 personalNoteText.setVisibility(View.VISIBLE);
                 personalNoteText.setText(cache.getPersonalNote(), TextView.BufferType.SPANNABLE);
                 personalNoteText.setMovementMethod(LinkMovementMethod.getInstance());
+                registerForContextMenu(personalNoteText);
             }
             else {
                 ((LinearLayout) view.findViewById(R.id.personalnote_box)).setVisibility(View.GONE);
@@ -2029,6 +1954,7 @@ public class CacheDetailActivity extends AbstractActivity {
                         hintView.setText(CryptUtils.rot13(hintView.getText().toString()));
                     }
                 });
+                registerForContextMenu(hintView);
             } else {
                 TextView hintView = ((TextView) view.findViewById(R.id.hint));
                 hintView.setVisibility(View.GONE);
@@ -2068,6 +1994,7 @@ public class CacheDetailActivity extends AbstractActivity {
             view.findViewById(R.id.loading).setVisibility(View.VISIBLE);
 
             new LoadDescriptionTask().execute(cache.getDescription(), view.findViewById(R.id.longdesc), view.findViewById(R.id.loading));
+            registerForContextMenu(view.findViewById(R.id.longdesc));
         }
 
         /**
@@ -2342,6 +2269,7 @@ public class CacheDetailActivity extends AbstractActivity {
                         TextView logView = (TextView) logLayout.findViewById(R.id.log);
                         logView.setMovementMethod(LinkMovementMethod.getInstance());
                         logView.setOnClickListener(new DecryptLogClickListener());
+                        registerForContextMenu(logView);
 
                         loglist.add(rowView);
                     }

@@ -404,7 +404,6 @@
   <string name="cache_event">日時</string>
   <string name="cache_location">場所</string>
   <string name="cache_coordinates">座標</string>
-  <string name="cache_calendars">カレンダーを選択</string>
   <string name="cache_spoiler_images_title">スポイラー画像</string>
   <string name="cache_spoiler_images_loading">スポイラー画像をロード中…</string>
   <string name="cache_log_types">ログタイプ</string>

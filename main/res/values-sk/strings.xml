@@ -544,7 +544,6 @@
   <string name="cache_location">Miesto</string>
   <string name="cache_coordinates">Súradnice</string>
   <string name="cache_coordinates_original">Pôvodné súradnice</string>
-  <string name="cache_calendars">vyberte kalendár</string>
   <string name="cache_spoiler_images_title">Spoilerové obrázky</string>
   <string name="cache_spoiler_images_loading">Načítanie spoilerových obrázkov…</string>
   <string name="cache_log_types">Typy záznamov</string>

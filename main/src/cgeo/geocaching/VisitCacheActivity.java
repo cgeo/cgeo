@@ -1,6 +1,9 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
+import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.LogTypeTrackable;
 import cgeo.geocaching.enumerations.StatusCode;
@@ -36,6 +39,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.EnumSet;
 import java.util.List;
 
 public class VisitCacheActivity extends AbstractActivity implements DateDialog.DateDialogParent {
@@ -254,7 +258,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
             geocode = app.getGeocode(cacheid);
         }
 
-        cache = app.getCacheByGeocode(geocode);
+        cache = cgeoapplication.getInstance().loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
 
         if (StringUtils.isNotBlank(cache.getName())) {
             setTitle(res.getString(R.string.log_new_log) + ": " + cache.getName());
@@ -688,7 +692,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
 
     public StatusCode postLogFn(String log) {
         try {
-            final StatusCode status = cgBase.postLog(app, geocode, cacheid, viewstates, typeSelected,
+            final StatusCode status = cgBase.postLog(geocode, cacheid, viewstates, typeSelected,
                     date.get(Calendar.YEAR), (date.get(Calendar.MONTH) + 1), date.get(Calendar.DATE),
                     log, trackables);
 
@@ -711,6 +715,11 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
                     }
                 }
 
+                if (cache != null) {
+                    app.saveCache(cache, EnumSet.of(SaveFlag.SAVE_CACHE));
+                } else {
+                    app.removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+                }
             }
 
             if (status == StatusCode.NO_ERROR) {
@@ -720,7 +729,7 @@ public class VisitCacheActivity extends AbstractActivity implements DateDialog.D
             if (status == StatusCode.NO_ERROR && typeSelected == LogType.LOG_FOUND_IT && Settings.isUseTwitter()
                     && Settings.isTwitterLoginValid()
                     && tweetCheck.isChecked() && tweetBox.getVisibility() == View.VISIBLE) {
-                cgBase.postTweetCache(app, geocode);
+                cgBase.postTweetCache(geocode);
             }
 
             if (status == StatusCode.NO_ERROR && typeSelected == LogType.LOG_FOUND_IT && Settings.isGCvoteLogin()) {

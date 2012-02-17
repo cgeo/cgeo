@@ -527,16 +527,6 @@ public class cgeoinit extends AbstractActivity {
             }
         });
 
-        final CheckBox browserButton = (CheckBox) findViewById(R.id.browser);
-        browserButton.setChecked(Settings.isBrowser());
-        browserButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                Settings.setAsBrowser(browserButton.isChecked());
-            }
-        });
-
         // Altitude settings
         EditText altitudeEdit = (EditText) findViewById(R.id.altitude);
         altitudeEdit.setText(String.valueOf(Settings.getAltCorrection()));
@@ -589,7 +579,7 @@ public class cgeoinit extends AbstractActivity {
         // Default navigation tool settings
         Spinner defaultNavigationToolSelector = (Spinner) findViewById(R.id.default_navigation_tool);
         final List<NavigationAppsEnum> apps = NavigationAppFactory.getInstalledNavigationApps(this);
-        ArrayAdapter<NavigationAppsEnum> naviAdapter = new ArrayAdapter<NavigationAppsEnum>(this, android.R.layout.simple_spinner_item, apps.toArray(new NavigationAppsEnum[apps.size()])) {
+        ArrayAdapter<NavigationAppsEnum> naviAdapter = new ArrayAdapter<NavigationAppsEnum>(this, android.R.layout.simple_spinner_item, apps) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
                 TextView textView = (TextView) super.getView(position, convertView, parent);

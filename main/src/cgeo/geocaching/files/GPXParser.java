@@ -2,6 +2,7 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.Settings;
+import cgeo.geocaching.StoredList;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgLog;
 import cgeo.geocaching.cgTrackable;
@@ -64,7 +65,7 @@ public abstract class GPXParser extends FileParser {
 
     private static final Pattern PATTERN_MILLISECONDS = Pattern.compile("\\.\\d{3,7}");
 
-    private int listId = 1;
+    private int listId = StoredList.STANDARD_LIST_ID;
     final protected String namespace;
     final private String version;
 
@@ -306,7 +307,7 @@ public abstract class GPXParser extends FileParser {
                     // lookup cache for waypoint in already parsed caches
                     final cgCache cacheForWaypoint = result.get(cacheGeocodeForWaypoint);
                     if (cacheForWaypoint != null) {
-                        final cgWaypoint waypoint = new cgWaypoint(cache.getShortdesc(), convertWaypointSym2Type(sym));
+                        final cgWaypoint waypoint = new cgWaypoint(cache.getShortdesc(), convertWaypointSym2Type(sym), false);
                         waypoint.setId(-1);
                         waypoint.setGeocode(cacheGeocodeForWaypoint);
                         waypoint.setPrefix(cache.getName().substring(0, 2));

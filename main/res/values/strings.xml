@@ -80,7 +80,7 @@
   <string name="log_tb_drop">Dropped Off</string>
   <string name="log_tb_changeall">Change All</string>
   <string name="log_save">Save</string>
-  <string name="log_saving">Saving log…</string>
+  <string name="log_saving">Sending log…</string>
   <string name="log_clear">Clear</string>
   <string name="log_post">Submit Log</string>
   <string name="log_post_rate">Submit Log &amp; Rate</string>
@@ -114,7 +114,20 @@
   <string name="log_new_log">Log</string>
   <string name="log_new_log_text">Log Text</string>
   <string name="log_announcement">Announcement</string>
-
+  
+  <!-- copy -->
+  <string name="options_context_menu_title">Options</string>
+  <string name="copy_coords">Copy Coordinates</string>
+  <string name="copy_desc">Copy Description</string>
+  <string name="copy_personalnote">Copy Personal Note</string>
+  <string name="copy_hint">Copy Hint</string>
+  <string name="copy_log">Copy Log</string>
+  
+  <!-- translation -->
+  <string name="translate_to_sys_lang">Translate to %s</string>
+  <string name="translate_to_english">Translate to English</string>
+  <string name="translate_length_warning">Translate may fail with large amounts of text.</string>
+  
   <!-- errors, warnings, info toasts -->
   <string name="err_none">OK</string>
   <string name="err_start">Communication not started</string>
@@ -565,7 +578,6 @@
   <string name="cache_location">Location</string>
   <string name="cache_coordinates">Coordinates</string>
   <string name="cache_coordinates_original">Original Coordinates</string>
-  <string name="cache_calendars">Select calendar</string>
   <string name="cache_spoiler_images_title">Spoiler images</string>
   <string name="cache_spoiler_images_loading">Loading spoiler images…</string>
   <string name="cache_log_types">Log types</string>
@@ -746,6 +758,7 @@
   <string name="helper_manual_title">Manual</string>
   <string name="helper_manual_description">Comprehensive manual for c:geo that contains description of all possibilities of this application (even hidden ones).</string>
   <string name="helper_calendar_title">c:geo calendar add-on</string>
+  <string name="helper_calendar_missing">c:geo calendar add-on not installed</string>
   <string name="helper_calendar_description">Enables you to export event caches into the calendar on your device.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Simple usable application showing Online maps and allowing to download them directly into Offline mode (raster maps only). Also support track recording, POI handling and many other useful functions.</string>
@@ -753,7 +766,9 @@
   <string name="helper_gpsstatus_description">You can use radar from this application with c:geo. It also offers a lot of other GPS-related information.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Allows you to use external GPS device to get better reception, more precise location and can spare battery of your phone.</string>
-
+  <string name="helper_barcode_title">Barcode Scanner</string>
+  <string name="helper_barcode_description">There are Greasemonkey scripts and websites which allow to display a geocode as barcode. With this app c:geo can read that geocode directly from the screen of your computer.</string>
+  
   <!--  attributes (permissions -> allowed, not allowed) -->
   <string name="attribute_dogs_yes">Dogs allowed</string>
   <string name="attribute_dogs_no">Dogs not allowed</string>
@@ -930,6 +945,7 @@
     · blafoo (code)\n
     · Bonemaro (tester)\n
     · BudBundi (localization DE, tester)\n
+    · campbeb (code)\n
     · Charles (localization FR)\n
     · Denny (localization DA)\n
     · Eisbehr (code, open source project leader)\n
@@ -974,9 +990,14 @@
   <!-- changelog -->
   <string name="changelog">\n
     <b>next release</b>\n
-    · new: changed markers in the map with additional informations for stored caches:\n
+    · New: Calendar add-on. c:geo doesn\'t require calendar permission anymore\n
+    · Fix: Deletion of outdated caches did not work\n
+    · Fix: Changed internal caching causing a better overall performance\n
+    · New: Login status at start screen\n
+    · New: Changed markers in the map with additional informations for stored caches:\n
        Personal Note available, Modified coordinates, non-reliable coordinates (orange circle)\n
-    · fix: caches with modified coordinates are displayed at the modified coords and not at the original coords\n
+    · Fix: Caches with modified coordinates are displayed at the modified coords and not at the original coords\n
+    · New: Copy and translate available with long press\n
     · \n
     \n\n
     <b>04.01.2012</b>\n

@@ -3,10 +3,13 @@ package cgeo.geocaching.filter;
 import cgeo.geocaching.R;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
+import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 
 import org.apache.commons.lang3.StringUtils;
 
 import android.content.res.Resources;
+
+import java.util.EnumSet;
 
 public class AttributeFilter extends AbstractFilter {
 
@@ -31,7 +34,7 @@ public class AttributeFilter extends AbstractFilter {
 
     @Override
     public boolean accepts(final cgCache cache) {
-        final cgCache fullCache = cgeoapplication.getInstance().getCacheByGeocode(cache.getGeocode());
+        final cgCache fullCache = cgeoapplication.getInstance().loadCache(cache.getGeocode(), EnumSet.of(LoadFlag.LOAD_ATTRIBUTES));
         return fullCache.getAttributes().contains(attribute);
     }
 

@@ -1,10 +1,12 @@
 bin/
 gen/
+/main/project/localization/*.missing
+/main/project/attributes/drawable/*
+/main/project/attributes/iconlist1res.html
 /main/local.properties
 /main/private.properties
 /main/res/values/mapsapikey.xml
 /tests/local.properties
 /tests/private.properties
-/main/project/localization/*.missing
-/main/project/attributes/drawable/*
-/main/project/attributes/iconlist1res.html
+/cgeo-calendar/local.properties
+/cgeo-calendar/private.properties

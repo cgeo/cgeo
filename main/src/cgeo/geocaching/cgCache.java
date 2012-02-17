@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.GCConnector;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -45,7 +46,7 @@ public class cgCache implements ICache {
     private long updated = 0;
     private long detailedUpdate = 0;
     private long visitedDate = 0;
-    private int listId = 0;
+    private int listId = StoredList.TEMPORARY_LIST_ID;
     private boolean detailed = false;
     private String geocode = "";
     private String cacheId = "";
@@ -96,6 +97,7 @@ public class cgCache implements ICache {
     private String directionImg = "";
     private String nameForSorting;
     private final EnumSet<StorageLocation> storageLocation = EnumSet.of(StorageLocation.HEAP);
+    private boolean finalDefined = false;
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
 
@@ -122,6 +124,7 @@ public class cgCache implements ICache {
             favorite = other.favorite;
             onWatchlist = other.onWatchlist;
             logOffline = other.logOffline;
+            finalDefined = other.finalDefined;
         }
 
         /*
@@ -136,7 +139,7 @@ public class cgCache implements ICache {
         if (visitedDate == 0) {
             visitedDate = other.getVisitedDate();
         }
-        if (listId == 0) {
+        if (listId == StoredList.TEMPORARY_LIST_ID) {
             listId = other.listId;
         }
         if (StringUtils.isBlank(geocode)) {
@@ -311,7 +314,8 @@ public class cgCache implements ICache {
                 logs == other.logs &&
                 inventory == other.inventory &&
                 logCounts == other.logCounts &&
-                logOffline == other.logOffline) {
+                logOffline == other.logOffline &&
+                finalDefined == other.finalDefined) {
             return true;
         }
         return false;
@@ -807,7 +811,7 @@ public class cgCache implements ICache {
      * @return true if the coords are from the cache details page and the user has been logged in
      */
     public boolean isReliableLatLon() {
-        return reliableLatLon;
+        return getConnector().isReliableLatLon(reliableLatLon);
     }
 
     public void setReliableLatLon(boolean reliableLatLon) {
@@ -888,9 +892,13 @@ public class cgCache implements ICache {
 
     public void setWaypoints(List<cgWaypoint> waypoints) {
         this.waypoints = waypoints;
+        finalDefined = false;
         if (waypoints != null) {
             for (cgWaypoint waypoint : waypoints) {
                 waypoint.setGeocode(geocode);
+                if (isFinalWithCoords(waypoint)) {
+                    finalDefined = true;
+                }
             }
         }
     }
@@ -1093,10 +1101,39 @@ public class cgCache implements ICache {
         }
         waypoints.add(waypoint);
         waypoint.setGeocode(geocode);
+        if (isFinalWithCoords(waypoint)) {
+            finalDefined = true;
+        }
     }
 
     public boolean hasWaypoints() {
         return CollectionUtils.isNotEmpty(waypoints);
+    }
+
+    public boolean hasFinalDefined() {
+        return finalDefined;
+    }
+
+    // Only for loading
+    public void setFinalDefined(boolean finalDefined) {
+        this.finalDefined = finalDefined;
+    }
+
+    /**
+     * Checks whether a given waypoint is a final and has coordinates
+     *
+     * @param waypoint
+     *            Waypoint to check
+     * @return True - waypoint is final and has coordinates, False - otherwise
+     */
+    private static boolean isFinalWithCoords(cgWaypoint waypoint) {
+        if (null != waypoint.getWaypointType() && WaypointType.FINAL == waypoint.getWaypointType()) {
+            if (null != waypoint.getCoords()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public boolean hasUserModifiedCoords() {
@@ -1146,7 +1183,16 @@ public class cgCache implements ICache {
         if (waypoint.isUserDefined()) {
             waypoints.remove(index);
             cgeoapplication.getInstance().deleteWaypoint(waypoint.getId());
-            cgeoapplication.removeCacheFromCache(geocode);
+            cgeoapplication.getInstance().removeCache(geocode, EnumSet.of(RemoveFlag.REMOVE_CACHE));
+            // Check status if Final is defined
+            if (isFinalWithCoords(waypoint)) {
+                finalDefined = false;
+                for (cgWaypoint wp : waypoints) {
+                    if (isFinalWithCoords(wp)) {
+                        finalDefined = true;
+                    }
+                }
+            }
             return true;
         }
         return false;
@@ -1191,7 +1237,7 @@ public class cgCache implements ICache {
                     // coords must have non zero latitude and longitude and at least one part shall have fractional degrees
                     if (point != null && point.getLatitudeE6() != 0 && point.getLongitudeE6() != 0 && ((point.getLatitudeE6() % 1000) != 0 || (point.getLongitudeE6() % 1000) != 0)) {
                         final String name = cgeoapplication.getInstance().getString(R.string.cache_personal_note) + " " + count;
-                        final cgWaypoint waypoint = new cgWaypoint(name, WaypointType.WAYPOINT);
+                        final cgWaypoint waypoint = new cgWaypoint(name, WaypointType.WAYPOINT, false);
                         waypoint.setCoords(point);
                         addWaypoint(waypoint);
                         count++;
@@ -1260,7 +1306,8 @@ public class cgCache implements ICache {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        return isEqualTo((cgCache) obj);
+        // just compare the geocode even if that is not what "equals" normaly does
+        return geocode != null ? geocode.compareTo(((cgCache) obj).geocode) == 0 : false;
     }
 
     public void store(Activity activity, CancellableHandler handler) {

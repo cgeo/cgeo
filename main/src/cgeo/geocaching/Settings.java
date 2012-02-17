@@ -52,7 +52,6 @@ public final class Settings {
     private static final String KEY_ELEVATION_WANTED = "elevationwanted";
     private static final String KEY_FRIENDLOGS_WANTED = "friendlogswanted";
     private static final String KEY_USE_ENGLISH = "useenglish";
-    private static final String KEY_AS_BROWSER = "asbrowser";
     private static final String KEY_USE_COMPASS = "usecompass";
     private static final String KEY_AUTO_VISIT_TRACKABLES = "trackautovisit";
     private static final String KEY_AUTO_INSERT_SIGNATURE = "sigautoinsert";
@@ -436,10 +435,6 @@ public final class Settings {
         return sharedPrefs.getString(KEY_GC_CUSTOM_DATE, null);
     }
 
-    public static boolean isBrowser() {
-        return 0 != sharedPrefs.getInt(KEY_AS_BROWSER, 1);
-    }
-
     public static boolean isExcludeMyCaches() {
         return 0 != sharedPrefs.getInt(KEY_EXCLUDE_OWN, 0);
     }
@@ -462,16 +457,6 @@ public final class Settings {
             @Override
             public void edit(Editor edit) {
                 edit.putInt(KEY_EXCLUDE_OWN, exclude ? 1 : 0);
-            }
-        });
-    }
-
-    public static void setAsBrowser(final boolean asBrowser) {
-        editSharedSettings(new PrefRunnable() {
-
-            @Override
-            public void edit(Editor edit) {
-                edit.putInt(KEY_AS_BROWSER, asBrowser ? 1 : 0);
             }
         });
     }

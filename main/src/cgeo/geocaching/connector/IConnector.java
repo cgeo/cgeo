@@ -1,6 +1,6 @@
 package cgeo.geocaching.connector;
 
-import cgeo.geocaching.ParseResult;
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.geopoint.Geopoint;
@@ -75,7 +75,7 @@ public interface IConnector {
      */
     public boolean supportsCachesAround();
 
-    public ParseResult searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final int listId, final CancellableHandler handler);
+    public SearchResult searchByGeocode(final String geocode, final String guid, final cgeoapplication app, final int listId, final CancellableHandler handler);
 
     /**
      * search caches by coordinate. must be implemented if {@link supportsCachesAround} returns <code>true</true>
@@ -83,7 +83,7 @@ public interface IConnector {
      * @param center
      * @return
      */
-    public ParseResult searchByCoordinate(final Geopoint center);
+    public SearchResult searchByCoordinate(final Geopoint center);
 
     /**
      * return true if this is a ZIP file containing a GPX file
@@ -92,4 +92,13 @@ public interface IConnector {
      * @return
      */
     public boolean isZippedGPXFile(final String fileName);
+
+    /**
+     * return true if coordinates of a cache are reliable. only implemented by GC connector
+     *
+     * @param cacheHasReliableLatLon
+     *            flag of the cache
+     * @return
+     */
+    public boolean isReliableLatLon(boolean cacheHasReliableLatLon);
 }

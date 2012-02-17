@@ -7,6 +7,7 @@ import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.cachelist.CacheListAppFactory;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.files.GPXImporter;
@@ -130,6 +131,7 @@ public class cgeocaches extends AbstractListActivity {
     private static final int MENU_DEFAULT_NAVIGATION = 66;
     private static final int SUBMENU_FILTER_ATTRIBUTES = 67;
     private static final int SUBMENU_FILTER_STATE = 68;
+    private static final int MENU_NAVIGATION = 69;
 
     private String action = null;
     private CacheListType type = null;
@@ -159,7 +161,7 @@ public class cgeocaches extends AbstractListActivity {
     private DropDetailsThread threadR = null;
     private ExportFieldNotesThread threadF = null;
     private RemoveFromHistoryThread threadH = null;
-    private int listId = 0;
+    private int listId = StoredList.TEMPORARY_LIST_ID;
     private List<StoredList> lists = null;
     private GeocodeComparator gcComparator = new GeocodeComparator();
     private Handler loadCachesHandler = new Handler() {
@@ -168,14 +170,12 @@ public class cgeocaches extends AbstractListActivity {
         public void handleMessage(Message msg) {
             try {
                 if (search != null) {
-                    setTitle(title + " [" + SearchResult.getCount(search) + "]");
+                    setTitle(title + " [" + search.getCount() + "]");
                     cacheList.clear();
 
-                    final Set<cgCache> cacheListTmp = app.getCaches(search, false);
-                    if (CollectionUtils.isNotEmpty(cacheListTmp)) {
-                        cacheList.addAll(cacheListTmp);
-                        cacheListTmp.clear();
-
+                    final Set<cgCache> caches = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+                    if (CollectionUtils.isNotEmpty(caches)) {
+                        cacheList.addAll(caches);
                         Collections.sort(cacheList, gcComparator);
                     }
                 } else {
@@ -191,7 +191,7 @@ public class cgeocaches extends AbstractListActivity {
                 }
                 setMoreCaches();
 
-                if (cacheList != null && SearchResult.getError(search) == StatusCode.UNAPPROVED_LICENSE) {
+                if (cacheList != null && search != null && search.getError() == StatusCode.UNAPPROVED_LICENSE) {
                     AlertDialog.Builder dialog = new AlertDialog.Builder(cgeocaches.this);
                     dialog.setTitle(res.getString(R.string.license));
                     dialog.setMessage(res.getString(R.string.err_license));
@@ -213,8 +213,8 @@ public class cgeocaches extends AbstractListActivity {
 
                     AlertDialog alert = dialog.create();
                     alert.show();
-                } else if (app != null && SearchResult.getError(search) != null) {
-                    showToast(res.getString(R.string.err_download_fail) + " " + SearchResult.getError(search).getErrorString(res) + ".");
+                } else if (app != null && search != null && search.getError() != null) {
+                    showToast(res.getString(R.string.err_download_fail) + " " + search.getError().getErrorString(res) + ".");
 
                     hideLoading();
                     showProgress(false);
@@ -256,13 +256,13 @@ public class cgeocaches extends AbstractListActivity {
         public void handleMessage(Message msg) {
             try {
                 if (search != null) {
-                    setTitle(title + " [" + SearchResult.getCount(search) + "]");
+                    setTitle(title + " [" + search.getCount() + "]");
                     cacheList.clear();
 
-                    final Set<cgCache> cacheListTmp = app.getCaches(search, false);
-                    if (CollectionUtils.isNotEmpty(cacheListTmp)) {
-                        cacheList.addAll(cacheListTmp);
-                        cacheListTmp.clear();
+                    final Set<cgCache> caches = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
+                    if (CollectionUtils.isNotEmpty(caches)) {
+                        cacheList.addAll(caches);
+                        caches.clear();
                         Collections.sort(cacheList, gcComparator);
                     }
                     if (adapter != null) {
@@ -279,8 +279,8 @@ public class cgeocaches extends AbstractListActivity {
                 }
                 setMoreCaches();
 
-                if (SearchResult.getError(search) != null) {
-                    showToast(res.getString(R.string.err_download_fail) + " " + SearchResult.getError(search).getErrorString(res) + ".");
+                if (search != null && search.getError() != null) {
+                    showToast(res.getString(R.string.err_download_fail) + " " + search.getError().getErrorString(res) + ".");
 
                     listFooter.setOnClickListener(new MoreCachesListener());
                     hideLoading();
@@ -335,7 +335,7 @@ public class cgeocaches extends AbstractListActivity {
                 }
             } else {
                 if (cacheList != null && search != null) {
-                    final Set<cgCache> cacheListTmp = app.getCaches(search, false);
+                    final Set<cgCache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
                     if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                         cacheList.clear();
                         cacheList.addAll(cacheListTmp);
@@ -403,7 +403,7 @@ public class cgeocaches extends AbstractListActivity {
 
                 cacheList.clear();
 
-                final Set<cgCache> cacheListTmp = app.getCaches(search, false);
+                final Set<cgCache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
                 if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                     cacheList.addAll(cacheListTmp);
                     cacheListTmp.clear();
@@ -430,7 +430,7 @@ public class cgeocaches extends AbstractListActivity {
 
             cacheList.clear();
 
-            final Set<cgCache> cacheListTmp = app.getCaches(search, false);
+            final Set<cgCache> cacheListTmp = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
             if (CollectionUtils.isNotEmpty(cacheListTmp)) {
                 cacheList.addAll(cacheListTmp);
                 cacheListTmp.clear();
@@ -557,7 +557,7 @@ public class cgeocaches extends AbstractListActivity {
         switch (type) {
             case OFFLINE:
                 listId = Settings.getLastList();
-                if (listId <= 0) {
+                if (listId <= StoredList.TEMPORARY_LIST_ID) {
                     listId = StoredList.STANDARD_LIST_ID;
                     title = res.getString(R.string.stored_caches_button);
                 } else {
@@ -657,7 +657,7 @@ public class cgeocaches extends AbstractListActivity {
                 setTitle(title);
                 showProgress(true);
                 SearchResult result = extras != null ? (SearchResult) extras.get("search") : null;
-                search = new ParseResult(result);
+                search = new SearchResult(result);
                 loadCachesHandler.sendMessage(Message.obtain());
                 break;
             default:
@@ -723,7 +723,7 @@ public class cgeocaches extends AbstractListActivity {
 
         // refresh standard list if it has changed (new caches downloaded)
         if (type == CacheListType.OFFLINE && listId >= StoredList.STANDARD_LIST_ID && search != null) {
-            SearchResult newSearch = cgBase.searchByOffline(coords, cacheType, listId);
+            SearchResult newSearch = cgBase.searchByStored(coords, cacheType, listId);
             if (newSearch != null && newSearch.totalCnt != search.totalCnt) {
                 refreshCurrentList();
             }
@@ -867,7 +867,7 @@ public class cgeocaches extends AbstractListActivity {
             }
 
             boolean hasSelection = adapter != null && adapter.getChecked() > 0;
-            boolean isNonDefaultList = listId != 1;
+            boolean isNonDefaultList = listId != StoredList.STANDARD_LIST_ID;
 
             if (type == CacheListType.OFFLINE) { // only offline list
                 if (hasSelection) {
@@ -1138,8 +1138,7 @@ public class cgeocaches extends AbstractListActivity {
 
         if (cache.getCoords() != null) {
             menu.add(0, MENU_DEFAULT_NAVIGATION, 0, NavigationAppFactory.getDefaultNavigationApplication(this).getName());
-            final SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
-            NavigationAppFactory.addMenuItems(subMenu, this);
+            menu.add(1, MENU_NAVIGATION, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
             addVisitMenu(menu, cache);
             menu.add(0, MENU_CACHE_DETAILS, 0, res.getString(R.string.cache_menu_details));
         }
@@ -1204,8 +1203,11 @@ public class cgeocaches extends AbstractListActivity {
 
         if (id == MENU_DEFAULT_NAVIGATION) {
             final cgCache cache = getCacheFromAdapter(adapterInfo);
-            final SearchResult singleSearch = cgBase.searchByGeocode(cache.getGeocode(), null, 0, false, null);
-            NavigationAppFactory.startDefaultNavigationApplication(geo, this, cache, singleSearch, null, null);
+            NavigationAppFactory.startDefaultNavigationApplication(geo, this, cache, null, null, null);
+            return true;
+        } else if (id == MENU_NAVIGATION) {
+            final cgCache cache = getCacheFromAdapter(adapterInfo);
+            NavigationAppFactory.showNavigationMenu(geo, this, cache, null, null, null);
             return true;
         } else if (id == MENU_LOG_VISIT) {
             return getCacheFromAdapter(adapterInfo).logVisit(this);
@@ -1218,7 +1220,7 @@ public class cgeocaches extends AbstractListActivity {
 
             return true;
         } else if (id == MENU_DROP_CACHE) {
-            cgBase.dropCache(app, getCacheFromAdapter(adapterInfo), new Handler() {
+            cgBase.dropCache(getCacheFromAdapter(adapterInfo), new Handler() {
                 @Override
                 public void handleMessage(Message msg) {
                     refreshCurrentList();
@@ -1255,12 +1257,6 @@ public class cgeocaches extends AbstractListActivity {
         if (adapterInfo != null) {
             // create a search for a single cache (as if in details view)
             final cgCache cache = getCacheFromAdapter(adapterInfo);
-            final SearchResult singleSearch = cgBase.searchByGeocode(cache.getGeocode(), null, 0, false, null);
-
-            if (NavigationAppFactory.onMenuItemSelected(item, geo, this,
-                    cache, singleSearch, null, null)) {
-                return true;
-            }
 
             int logType = id - MENU_LOG_VISIT_OFFLINE;
             cache.logOffline(this, LogType.getById(logType));
@@ -1366,8 +1362,8 @@ public class cgeocaches extends AbstractListActivity {
         }
 
         boolean enableMore = type != CacheListType.OFFLINE && cacheList != null && cacheList.size() < MAX_LIST_ITEMS;
-        if (enableMore) {
-            final int count = SearchResult.getTotal(search);
+        if (enableMore && search != null) {
+            final int count = search.getTotal();
             enableMore = enableMore && count > 0 && cacheList.size() < count;
         }
 
@@ -1731,7 +1727,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = cgBase.searchByOffline(coords, Settings.getCacheType(), listId);
+            search = cgBase.searchByStored(coords, Settings.getCacheType(), listId);
             handler.sendMessage(new Message());
         }
     }
@@ -1761,7 +1757,7 @@ public class cgeocaches extends AbstractListActivity {
 
         @Override
         public void run() {
-            search = cgBase.searchByNextPage(this, (ParseResult) search, 0, Settings.isShowCaptcha());
+            search = cgBase.searchByNextPage(this, search, 0, Settings.isShowCaptcha());
 
             handler.sendMessage(new Message());
         }
@@ -1891,7 +1887,9 @@ public class cgeocaches extends AbstractListActivity {
             setPriority(Thread.MIN_PRIORITY);
 
             handler = handlerIn;
-            this.listIdLD = listId;
+
+            // in case of online lists, set the list id to the standard list
+            this.listIdLD = Math.max(listId, StoredList.STANDARD_LIST_ID);
 
             if (adapter != null) {
                 checked = adapter.getChecked();
@@ -2536,7 +2534,7 @@ public class cgeocaches extends AbstractListActivity {
             searchToUse = new SearchResult(geocodes);
         }
 
-        int count = SearchResult.getCount(searchToUse);
+        int count = searchToUse.getCount();
         String mapTitle = title;
         if (count > 0) {
             mapTitle = title + " [" + count + "]";

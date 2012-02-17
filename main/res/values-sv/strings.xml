@@ -144,6 +144,7 @@
   <string name="err_detail_no_spoiler">c:geo hittade inga spoiler bilder för den här cachen.</string>
   <string name="err_detail_no_map_static">c:geo hittade inga sparade kartor för denna cache.</string>
   <string name="err_detail_not_load_map_static">Tyvärr misslyckades c:geo att ladda sparade kartor.</string>
+  <string name="err_detail_ask_store_map_static">c:geo kunde inte läsa in statiska kartor. Ladda ner nu?</string>
   <string name="err_detail_still_working">Arbetar fortfarande med annat.</string>
   <string name="err_watchlist_still_managing">Hanterar fortfarande din watchlist.</string>
   <string name="err_watchlist_failed">Hanteringen av din watchlist misslyckades.</string>
@@ -221,6 +222,7 @@
   <string name="info_log_type_changed">Typen av logg har ändrats!</string>
 
   <string name="info_fieldnotes_exported_to">Field Notes har exporterats till</string>
+  <string name="info_storing_static_maps">Försöker ladda ner statiska kartor</string>
 
   <!-- location service -->
   <string name="loc_last">Senast kända</string>
@@ -556,7 +558,6 @@
   <string name="cache_location">Plats</string>
   <string name="cache_coordinates">Koordinater</string>
   <string name="cache_coordinates_original">Ursprungliga koordinater</string>
-  <string name="cache_calendars">Välj kalender</string>
   <string name="cache_spoiler_images_title">Spoiler bilder</string>
   <string name="cache_spoiler_images_loading">Laddar spoiler bilder…</string>
   <string name="cache_log_types">Loggtyper</string>
@@ -571,6 +572,7 @@
 
   <!-- file list base -->
   <string name="file_searching_in">Söker efter filer\ni</string>
+  <string name="file_searching_sdcard_in">Hittade inga filer i förvalda kataloger:\n%1$s\n\nSöker på hela SD kortet efter filer:\n</string>
   <string name="file_list_no_files">Tyvärr hittade c:geo inga lämpliga filer.</string>
   <string name="file_searching">Söker efter matchande filer</string>
   <string name="file_title_searching">Söker</string>
@@ -610,10 +612,11 @@
   <!-- waypoint -->
   <string name="waypoint">Punkt</string>
   <string name="waypoint_title">Punkt</string>
+  <string name="waypoint_cache_coordinates">Cache koordinater</string>
   <string name="waypoint_custom">Egen</string>
   <string name="waypoint_my_coordinates">Mina koordinater</string>
-  <string name="waypoint_bearing">Riktning</string>
-  <string name="waypoint_distance">Avstånd</string>
+  <string name="waypoint_bearing">Riktning (°)</string>
+  <string name="waypoint_distance">Avstånd (meter)</string>
   <string name="waypoint_name">Namn</string>
   <string name="waypoint_edit">Redigera</string>
   <string name="waypoint_delete">Ta bort</string>

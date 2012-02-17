@@ -23,7 +23,7 @@ public class cgeogpxes extends FileList<GPXListAdapter> {
         super(new String[] { "gpx", "loc", "zip" });
     }
 
-    private int listId = 1;
+    private int listId = StoredList.STANDARD_LIST_ID;
 
     @Override
     protected GPXListAdapter getAdapter(List<File> files) {
@@ -43,7 +43,7 @@ public class cgeogpxes extends FileList<GPXListAdapter> {
         if (extras != null) {
             listId = extras.getInt(EXTRAS_LIST_ID);
         }
-        if (listId <= 0) {
+        if (listId <= StoredList.TEMPORARY_LIST_ID) {
             listId = StoredList.STANDARD_LIST_ID;
         }
     }

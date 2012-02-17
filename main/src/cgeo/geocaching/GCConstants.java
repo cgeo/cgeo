@@ -13,9 +13,6 @@ import java.util.regex.Pattern;
  */
 public final class GCConstants {
 
-    /** Number of logs to retrieve from GC.com */
-    public final static int NUMBER_OF_LOGS = 35;
-
     /**
      * Patterns for parsing the result of a (detailed) search
      */
@@ -59,7 +56,8 @@ public final class GCConstants {
     // Info box top-right
     public static final Pattern PATTERN_LOGIN_NAME = Pattern.compile("\"SignedInProfileLink\">([^<]+)</a>");
     public static final Pattern PATTERN_MEMBER_STATUS = Pattern.compile("<span id=\"ctl00_litPMLevel\" style=\"display: block;\">([^<]+)</span>");
-    public static final Pattern PATTERN_CACHES_FOUND = Pattern.compile("title=\"Caches Found\"\\s*/>\\s*(\\d+)");
+    /** Use replaceAll(",","") on the resulting string before converting to an int */
+    public static final Pattern PATTERN_CACHES_FOUND = Pattern.compile("title=\"Caches Found\"\\s*/>\\s*([\\d,]+)");
     public static final Pattern PATTERN_AVATAR_IMAGE_PROFILE_PAGE = Pattern.compile("<img src=\"(http://img.geocaching.com/user/avatar/[0-9a-f-]+\\.jpg)\"[^>]*\\salt=\"Avatar\"");
     public static final Pattern PATTERN_LOGIN_NAME_LOGIN_PAGE = Pattern.compile("<span class=\"Success\">You are logged in as[^<]*<strong[^>]*>([^<]+)</strong>[^<]*</span>");
     public static final Pattern PATTERN_USERLOGGEDIN = Pattern.compile("<strong>Hello, <a href=\"/my/default.aspx\" title=\"View Profile for[^\"]*\" class=\"SignedInProfileLink\">(.*?)</a></strong>");

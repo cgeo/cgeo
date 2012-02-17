@@ -4,6 +4,7 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.apps.cache.navi.NavigationAppFactory;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteRating;
@@ -22,7 +23,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.SubMenu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -134,9 +134,7 @@ public class cgeopopup extends AbstractActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add(0, 2, 0, NavigationAppFactory.getDefaultNavigationApplication(this).getName()).setIcon(android.R.drawable.ic_menu_compass); // default navigation tool
-
-        SubMenu subMenu = menu.addSubMenu(1, 0, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
-        NavigationAppFactory.addMenuItems(subMenu, this);
+        menu.add(0, 3, 0, res.getString(R.string.cache_menu_navigate)).setIcon(android.R.drawable.ic_menu_mapmode);
         addVisitMenu(menu, cache);
         menu.add(0, 5, 0, res.getString(R.string.cache_menu_around)).setIcon(android.R.drawable.ic_menu_rotate); // caches around
         menu.add(0, 7, 0, res.getString(R.string.cache_menu_browser)).setIcon(android.R.drawable.ic_menu_info_details); // browser
@@ -150,12 +148,12 @@ public class cgeopopup extends AbstractActivity {
 
         try {
             if (cache != null && cache.getCoords() != null) {
-                menu.findItem(0).setVisible(true);
                 menu.findItem(2).setVisible(true);
+                menu.findItem(3).setVisible(true);
                 menu.findItem(5).setVisible(true);
             } else {
-                menu.findItem(0).setVisible(false);
                 menu.findItem(2).setVisible(false);
+                menu.findItem(3).setVisible(false);
                 menu.findItem(5).setVisible(false);
             }
 
@@ -175,6 +173,9 @@ public class cgeopopup extends AbstractActivity {
         if (menuItem == 2) {
             navigateTo();
             return true;
+        } else if (menuItem == 3) {
+            NavigationAppFactory.showNavigationMenu(geo, this, cache, null, null, null);
+            return true;
         } else if (menuItem == 5) {
             cachesAround();
             return true;
@@ -184,10 +185,6 @@ public class cgeopopup extends AbstractActivity {
             return true;
         } else if (menuItem == 7) {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.geocaching.com/seek/cache_details.aspx?wp=" + cache.getGeocode())));
-            return true;
-        }
-
-        if (NavigationAppFactory.onMenuItemSelected(item, geo, this, cache, null, null, null)) {
             return true;
         }
 
@@ -203,7 +200,7 @@ public class cgeopopup extends AbstractActivity {
 
         app.setAction(geocode);
 
-        cache = app.getCacheByGeocode(geocode);
+        cache = app.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
 
         if (cache == null) {
             showToast(res.getString(R.string.err_detail_cache_find));
@@ -590,7 +587,7 @@ public class cgeopopup extends AbstractActivity {
 
         @Override
         public void run() {
-            cgBase.dropCache(app, cache, handler);
+            cgBase.dropCache(cache, handler);
         }
     }
 
