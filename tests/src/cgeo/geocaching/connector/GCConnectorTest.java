@@ -13,7 +13,6 @@ public class GCConnectorTest extends AndroidTestCase {
 
     @SuppressWarnings("null")
     public static void testGetViewport() {
-
         cgBase.login();
 
         String sessionToken = GCBase.getSessionToken();

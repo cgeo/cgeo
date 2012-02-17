@@ -1915,7 +1915,6 @@ public class cgBase {
         request.addHeader("X-Requested-With", "XMLHttpRequest");
         request.addHeader("Accept", "application/json, text/javascript, */*; q=0.01");
         request.addHeader("Referer", referer);
-
         return getResponseData(request(request), false);
     }
 
