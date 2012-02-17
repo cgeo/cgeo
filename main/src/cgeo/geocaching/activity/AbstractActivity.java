@@ -95,4 +95,7 @@ public abstract class AbstractActivity extends Activity implements IAbstractActi
         Compatibility.disableSuggestions(edit);
     }
 
+    protected void restartActivity() {
+        Compatibility.restartActivity(this);
+    }
 }

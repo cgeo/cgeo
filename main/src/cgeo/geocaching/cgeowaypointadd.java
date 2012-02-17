@@ -384,7 +384,7 @@ public class cgeowaypointadd extends AbstractActivity {
             if (app.saveOwnWaypoint(id, geocode, waypoint)) {
                 StaticMapsProvider.removeWpStaticMaps(id, geocode);
                 if (Settings.isStoreOfflineWpMaps()) {
-                    StaticMapsProvider.storeWaypointStaticMap(app.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB), cgeowaypointadd.this, waypoint);
+                    StaticMapsProvider.storeWaypointStaticMap(app.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB), cgeowaypointadd.this, waypoint, false);
                 }
                 finish();
                 return;

@@ -15,6 +15,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -23,6 +25,7 @@ import java.util.List;
 
 public class StaticMapsActivity extends AbstractActivity {
 
+    private static final int MENU_REFRESH = 1;
     private final List<Bitmap> maps = new ArrayList<Bitmap>();
     private Integer waypoint_id = null;
     private String geocode = null;
@@ -85,25 +88,13 @@ public class StaticMapsActivity extends AbstractActivity {
         public void onClick(DialogInterface dialog, int which) {
             dialog.dismiss();
             switch (which) {
-            case DialogInterface.BUTTON_POSITIVE:
-                    cgCache cache = app.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-                    if (waypoint_id == null) {
-                        StaticMapsProvider.storeCacheStaticMap(cache, StaticMapsActivity.this);
-                    } else {
-                        cgWaypoint waypoint = cache.getWaypointById(waypoint_id);
-                        if (waypoint != null) {
-                            StaticMapsProvider.storeWaypointStaticMap(cache, StaticMapsActivity.this, waypoint);
-                        } else {
-                            showToast(res.getString(R.string.err_detail_not_load_map_static));
-                            break;
-                        }
-                    }
-                    showToast(res.getString(R.string.info_storing_static_maps));
-                break;
+                case DialogInterface.BUTTON_POSITIVE:
+                    downloadStaticMaps();
+                    break;
 
-            case DialogInterface.BUTTON_NEGATIVE:
+                case DialogInterface.BUTTON_NEGATIVE:
                     showToast(res.getString(R.string.err_detail_not_load_map_static));
-                break;
+                    break;
             }
             finish();
         }
@@ -196,6 +187,38 @@ public class StaticMapsActivity extends AbstractActivity {
                 loadMapsHandler.sendMessage(new Message());
             } catch (Exception e) {
                 Log.e(Settings.tag, "StaticMapsActivity.LoadMapsThread.run: " + e.toString());
+            }
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add(0, MENU_REFRESH, 0, res.getString(R.string.cache_offline_refresh));
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == MENU_REFRESH) {
+            downloadStaticMaps();
+            restartActivity();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void downloadStaticMaps() {
+        final cgCache cache = app.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        if (waypoint_id == null) {
+            showToast(res.getString(R.string.info_storing_static_maps));
+            StaticMapsProvider.storeCacheStaticMap(cache, this, true);
+        } else {
+            final cgWaypoint waypoint = cache.getWaypointById(waypoint_id);
+            if (waypoint != null) {
+                showToast(res.getString(R.string.info_storing_static_maps));
+                StaticMapsProvider.storeWaypointStaticMap(cache, this, waypoint, true);
+            } else {
+                showToast(res.getString(R.string.err_detail_not_load_map_static));
             }
         }
     }
