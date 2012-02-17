@@ -5,6 +5,10 @@ import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.compatibility.Compatibility;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.Geopoint.DDD;
+import cgeo.geocaching.geopoint.Geopoint.DMM;
+import cgeo.geocaching.geopoint.Geopoint.DMS;
+import cgeo.geocaching.geopoint.Geopoint.Direction;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser.ParseException;
 
@@ -147,41 +151,10 @@ public class cgeocoords extends Dialog {
         if (gp == null) {
             return;
         }
-        double lat = 0.0;
-        if (gp.getLatitude() < 0) {
-            bLat.setText("S");
-        } else {
-            bLat.setText("N");
-        }
 
-        lat = Math.abs(gp.getLatitude());
-
-        double lon = 0.0;
-        if (gp.getLongitude() < 0) {
-            bLon.setText("W");
-        } else {
-            bLon.setText("E");
-        }
-
-        lon = Math.abs(gp.getLongitude());
-
-        final int latDeg = (int) Math.floor(lat);
-        final int latDegFrac = (int) Math.round((lat - latDeg) * 100000);
-
-        final int latMin = (int) Math.floor((lat - latDeg) * 60);
-        final int latMinFrac = (int) Math.round(((lat - latDeg) * 60 - latMin) * 1000);
-
-        final int latSec = (int) Math.floor(((lat - latDeg) * 60 - latMin) * 60);
-        final int latSecFrac = (int) Math.round((((lat - latDeg) * 60 - latMin) * 60 - latSec) * 1000);
-
-        final int lonDeg = (int) Math.floor(lon);
-        final int lonDegFrac = (int) Math.round((lon - lonDeg) * 100000);
-
-        final int lonMin = (int) Math.floor((lon - lonDeg) * 60);
-        final int lonMinFrac = (int) Math.round(((lon - lonDeg) * 60 - lonMin) * 1000);
-
-        final int lonSec = (int) Math.floor(((lon - lonDeg) * 60 - lonMin) * 60);
-        final int lonSecFrac = (int) Math.round((((lon - lonDeg) * 60 - lonMin) * 60 - lonSec) * 1000);
+        Direction dir = gp.asDirection();
+        bLat.setText(String.valueOf(dir.latDir));
+        bLon.setText(String.valueOf(dir.lonDir));
 
         switch (currentFormat) {
             case Plain:
@@ -207,10 +180,11 @@ public class cgeocoords extends Dialog {
                 tLatSep2.setText("°");
                 tLonSep2.setText("°");
 
-                eLatDeg.setText(addZeros(latDeg, 2));
-                eLatMin.setText(addZeros(latDegFrac, 5));
-                eLonDeg.setText(addZeros(lonDeg, 3));
-                eLonMin.setText(addZeros(lonDegFrac, 5));
+                DDD ddd = gp.asDDD();
+                eLatDeg.setText(addZeros(ddd.latDeg, 2));
+                eLatMin.setText(addZeros(ddd.latDegFrac, 5));
+                eLonDeg.setText(addZeros(ddd.lonDeg, 3));
+                eLonMin.setText(addZeros(ddd.lonDegFrac, 5));
                 break;
             case Min: // DDD° MM.MMM
                 findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
@@ -230,12 +204,13 @@ public class cgeocoords extends Dialog {
                 tLatSep3.setText("'");
                 tLonSep3.setText("'");
 
-                eLatDeg.setText(addZeros(latDeg, 2));
-                eLatMin.setText(addZeros(latMin, 2));
-                eLatSec.setText(addZeros(latMinFrac, 3));
-                eLonDeg.setText(addZeros(lonDeg, 3));
-                eLonMin.setText(addZeros(lonMin, 2));
-                eLonSec.setText(addZeros(lonMinFrac, 3));
+                DMM dmm = gp.asDMM();
+                eLatDeg.setText(addZeros(dmm.latDeg, 2));
+                eLatMin.setText(addZeros(dmm.latMin, 2));
+                eLatSec.setText(addZeros(dmm.latMinFrac, 3));
+                eLonDeg.setText(addZeros(dmm.lonDeg, 3));
+                eLonMin.setText(addZeros(dmm.lonMin, 2));
+                eLonSec.setText(addZeros(dmm.lonMinFrac, 3));
                 break;
             case Sec: // DDD° MM SS.SSS
                 findViewById(R.id.coordTable).setVisibility(View.VISIBLE);
@@ -255,14 +230,15 @@ public class cgeocoords extends Dialog {
                 tLatSep3.setText(".");
                 tLonSep3.setText(".");
 
-                eLatDeg.setText(addZeros(latDeg, 2));
-                eLatMin.setText(addZeros(latMin, 2));
-                eLatSec.setText(addZeros(latSec, 2));
-                eLatSub.setText(addZeros(latSecFrac, 3));
-                eLonDeg.setText(addZeros(lonDeg, 3));
-                eLonMin.setText(addZeros(lonMin, 2));
-                eLonSec.setText(addZeros(lonSec, 2));
-                eLonSub.setText(addZeros(lonSecFrac, 3));
+                DMS dms = gp.asDMS();
+                eLatDeg.setText(addZeros(dms.latDeg, 2));
+                eLatMin.setText(addZeros(dms.latMin, 2));
+                eLatSec.setText(addZeros(dms.latSec, 2));
+                eLatSub.setText(addZeros(dms.latSecFrac, 3));
+                eLonDeg.setText(addZeros(dms.lonDeg, 3));
+                eLonMin.setText(addZeros(dms.lonMin, 2));
+                eLonSec.setText(addZeros(dms.lonSec, 2));
+                eLonSub.setText(addZeros(dms.lonSecFrac, 3));
                 break;
         }
     }
@@ -385,51 +361,35 @@ public class cgeocoords extends Dialog {
             return true;
         }
 
-        int latDeg = 0, latMin = 0, latSec = 0;
-        int lonDeg = 0, lonMin = 0, lonSec = 0;
-        double latDegFrac = 0.0, latMinFrac = 0.0, latSecFrac = 0.0;
-        double lonDegFrac = 0.0, lonMinFrac = 0.0, lonSecFrac = 0.0;
-
-        try {
-            latDeg = Integer.parseInt(eLatDeg.getText().toString());
-            lonDeg = Integer.parseInt(eLonDeg.getText().toString());
-            latDegFrac = Double.parseDouble("0." + eLatMin.getText().toString());
-            lonDegFrac = Double.parseDouble("0." + eLonMin.getText().toString());
-            latMin = Integer.parseInt(eLatMin.getText().toString());
-            lonMin = Integer.parseInt(eLonMin.getText().toString());
-            latMinFrac = Double.parseDouble("0." + eLatSec.getText().toString());
-            lonMinFrac = Double.parseDouble("0." + eLonSec.getText().toString());
-            latSec = Integer.parseInt(eLatSec.getText().toString());
-            lonSec = Integer.parseInt(eLonSec.getText().toString());
-            latSecFrac = Double.parseDouble("0." + eLatSub.getText().toString());
-            lonSecFrac = Double.parseDouble("0." + eLonSub.getText().toString());
-
-        } catch (NumberFormatException e) {
-        }
-
-        double latitude = 0.0;
-        double longitude = 0.0;
+        String latDir = bLat.getText().toString();
+        String lonDir = bLon.getText().toString();
+        String latDeg = eLatDeg.getText().toString();
+        String lonDeg = eLonDeg.getText().toString();
+        String latDegFrac = eLatMin.getText().toString();
+        String lonDegFrac = eLonMin.getText().toString();
+        String latMin = eLatMin.getText().toString();
+        String lonMin = eLonMin.getText().toString();
+        String latMinFrac = eLatSec.getText().toString();
+        String lonMinFrac = eLonSec.getText().toString();
+        String latSec = eLatSec.getText().toString();
+        String lonSec = eLonSec.getText().toString();
+        String latSecFrac = eLatSub.getText().toString();
+        String lonSecFrac = eLonSub.getText().toString();
 
         switch (currentFormat) {
             case Deg:
-                latitude = latDeg + latDegFrac;
-                longitude = lonDeg + lonDegFrac;
+                gp = DDD.createGeopoint(latDir, latDeg, latDegFrac, lonDir, lonDeg, lonDegFrac);
                 break;
             case Min:
-                latitude = latDeg + latMin / 60.0 + latMinFrac / 60.0;
-                longitude = lonDeg + lonMin / 60.0 + lonMinFrac / 60.0;
+                gp = DMM.createGeopoint(latDir, latDeg, latMin, latMinFrac, lonDir, lonDeg, lonMin, lonMinFrac);
                 break;
             case Sec:
-                latitude = latDeg + latMin / 60.0 + latSec / 60.0 / 60.0 + latSecFrac / 60.0 / 60.0;
-                longitude = lonDeg + lonMin / 60.0 + lonSec / 60.0 / 60.0 + lonSecFrac / 60.0 / 60.0;
+                gp = DMS.createGeopoint(latDir, latDeg, latMin, latSec, latSecFrac, lonDir, lonDeg, lonMin, lonSec, lonSecFrac);
                 break;
             case Plain:
                 // This case has been handled above
         }
-        latitude *= (bLat.getText().toString().equalsIgnoreCase("S") ? -1 : 1);
-        longitude *= (bLon.getText().toString().equalsIgnoreCase("W") ? -1 : 1);
 
-        gp = new Geopoint(latitude, longitude);
         return true;
     }
 
