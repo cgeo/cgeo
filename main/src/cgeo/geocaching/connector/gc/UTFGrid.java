@@ -5,6 +5,7 @@ package cgeo.geocaching.connector.gc;
  * @author blafoo
  *
  * @see https://github.com/mapbox/mbtiles-spec/blob/master/1.1/utfgrid.md
+<<<<<<< HEAD
  *
  */
 public final class UTFGrid {
