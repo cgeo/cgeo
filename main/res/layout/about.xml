@@ -70,37 +70,14 @@
 						android:layout_width="280dip"
 						android:singleLine="false"
 						android:lines="2"
-						android:onClick="donateMore"
+						android:onClick="donate"
 						android:text="@string/about_donation_more" />
-				<!-- Button style="@style/button"
-						android:id="@+id/donation_less"
-						android:layout_width="100dip"
-						android:singleLine="false"
-						android:lines="2"
-						android:onClick="donateLess"
-						android:text="@string/about_donation_less" /-->
 			</LinearLayout>
 			<RelativeLayout style="@style/separator_horizontal_layout" >
 				<View style="@style/separator_horizontal" />
 				<TextView style="@style/separator_horizontal_headline"
 						android:text="@string/about_detail" />
 			</RelativeLayout>
-			<!-- TextView android:id="@+id/author"
-					android:layout_width="wrap_content"
-					android:layout_height="wrap_content"
-					android:layout_marginLeft="10dip"
-					android:layout_marginRight="10dip"
-					android:layout_marginBottom="5dip"
-					android:layout_alignParentRight="true"
-					android:layout_gravity="left"
-					android:textSize="14dip"
-					android:textColor="?text_color"
-					android:textColorLink="?text_color_link"
-					android:linksClickable="false"
-					android:focusable="true"
-					android:clickable="true"
-					android:onClick="author"
-					android:text="@string/author" /-->
 			<TextView android:id="@+id/support"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
@@ -181,13 +158,15 @@
 				<TextView style="@style/separator_horizontal_headline"
 						android:text="@string/about_changelog" />
 			</RelativeLayout>
-			<TextView
+			<TextView android:id="@+id/changelog"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
 					android:layout_margin="7dip"
 					android:layout_gravity="left"
 					android:paddingLeft="3dip"
 					android:textSize="12dip"
+                    android:linksClickable="true"
+                    android:textColorLink="?text_color_link"
 					android:textColor="?text_color"
 					android:text="@string/changelog" />
 			<RelativeLayout style="@style/separator_horizontal_layout" >

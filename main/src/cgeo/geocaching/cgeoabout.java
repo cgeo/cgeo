@@ -25,17 +25,6 @@ public class cgeoabout extends AbstractActivity {
         init();
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
     private void init() {
         try {
             PackageManager manager = this.getPackageManager();
@@ -46,6 +35,7 @@ public class cgeoabout extends AbstractActivity {
             manager = null;
 
             ((TextView) findViewById(R.id.contributors)).setMovementMethod(LinkMovementMethod.getInstance());
+            ((TextView) findViewById(R.id.changelog)).setMovementMethod(LinkMovementMethod.getInstance());
         } catch (Exception e) {
             Log.e(Settings.tag, "cgeoabout.init: Failed to obtain package version.");
         }
@@ -55,24 +45,8 @@ public class cgeoabout extends AbstractActivity {
      * @param view
      *            unused here but needed since this method is referenced from XML layout
      */
-    public void donateMore(View view) {
+    public void donate(View view) {
         startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FMLNN8GXZKJEE")));
-    }
-
-    /**
-     * @param view
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void donateLess(View view) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FMLNN8GXZKJEE")));
-    }
-
-    /**
-     * @param view
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void author(View view) {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://carnero.cc/")));
     }
 
     /**
