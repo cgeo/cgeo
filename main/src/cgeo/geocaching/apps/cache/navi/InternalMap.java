@@ -1,7 +1,6 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgWaypoint;
@@ -20,12 +19,10 @@ class InternalMap extends AbstractNavigationApp {
 
     @Override
     public boolean invoke(cgGeo geo, Activity activity, cgCache cache,
-            final SearchResult search, cgWaypoint waypoint, final Geopoint coords) {
-        if (search != null) {
-            CGeoMap.startActivitySearch(activity, search, cache != null ? cache.getGeocode() : null, true);
-        }
-        else if (cache != null) {
+            cgWaypoint waypoint, final Geopoint coords) {
+        if (cache != null) {
             CGeoMap.startActivityGeoCode(activity, cache.getGeocode());
+            // may need some code from CGeoMap.startActivitySearch(activity, search, cache != null ? cache.getGeocode() : null, true);
         }
         else if (waypoint != null) {
             CGeoMap.startActivityCoords(activity, waypoint.getCoords(), waypoint.getWaypointType(), waypoint.getName());

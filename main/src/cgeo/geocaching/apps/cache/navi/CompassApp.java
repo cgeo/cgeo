@@ -1,7 +1,6 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgWaypoint;
@@ -24,7 +23,7 @@ class CompassApp extends AbstractNavigationApp {
 
     @Override
     public boolean invoke(cgGeo geo, Activity activity, cgCache cache,
-            final SearchResult search, cgWaypoint waypoint, final Geopoint coords) {
+            cgWaypoint waypoint, final Geopoint coords) {
 
         if (cache != null && cache.getGeocode() != null) {
             cgeonavigate.startActivity(activity, cache.getGeocode(), cache.getName(), cache.getCoords(), null);

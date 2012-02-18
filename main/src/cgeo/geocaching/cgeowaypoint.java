@@ -251,7 +251,7 @@ public class cgeowaypoint extends AbstractActivity {
             goToGeocache();
             return true;
         } else if (menuItem == MENU_ID_NAVIGATION) {
-            NavigationAppFactory.showNavigationMenu(geo, this, null, null, waypoint, null);
+            NavigationAppFactory.showNavigationMenu(geo, this, null, waypoint, null);
             return true;
         }
         return false;
@@ -332,7 +332,7 @@ public class cgeowaypoint extends AbstractActivity {
             return;
         }
 
-        NavigationAppFactory.startDefaultNavigationApplication(geo, this, null, null, waypoint, null);
+        NavigationAppFactory.startDefaultNavigationApplication(geo, this, null, waypoint, null);
     }
 
     private boolean navigationPossible() {

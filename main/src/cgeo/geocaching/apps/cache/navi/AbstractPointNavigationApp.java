@@ -1,6 +1,5 @@
 package cgeo.geocaching.apps.cache.navi;
 
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgWaypoint;
@@ -25,7 +24,7 @@ abstract class AbstractPointNavigationApp extends AbstractNavigationApp {
     }
 
     @Override
-    public final boolean invoke(cgGeo geo, Activity activity, cgCache cache, SearchResult search, cgWaypoint waypoint, Geopoint coords) {
+    public final boolean invoke(cgGeo geo, Activity activity, cgCache cache, cgWaypoint waypoint, Geopoint coords) {
         if (cache == null && waypoint == null && coords == null) {
             return false;
         }

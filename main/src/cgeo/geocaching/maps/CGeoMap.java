@@ -87,7 +87,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private static final String EXTRAS_WPTTYPE = "wpttype";
     private static final String EXTRAS_MAPSTATE = "mapstate";
     private static final String EXTRAS_SEARCH = "search";
-    private static final String EXTRAS_DETAIL = "detail";
     private static final int MENU_SELECT_MAPVIEW = 1;
     private static final int MENU_MAP_LIVE = 2;
     private static final int MENU_STORE_CACHES = 3;
@@ -107,8 +106,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
     private cgDirection dir = null;
     private UpdateLocationCallback geoUpdate = new UpdateLoc();
     private UpdateDirectionCallback dirUpdate = new UpdateDir();
-    // from intent
-    private boolean fromDetailIntent = false;
     private SearchResult searchIntent = null;
     private String geocodeIntent = null;
     private Geopoint coordsIntent = null;
@@ -345,7 +342,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         }
 
         if (overlayCaches == null) {
-            overlayCaches = mapView.createAddMapOverlay(mapView.getContext(), getResources().getDrawable(R.drawable.marker), fromDetailIntent);
+            overlayCaches = mapView.createAddMapOverlay(mapView.getContext(), getResources().getDrawable(R.drawable.marker));
         }
 
         if (overlayScale == null) {
@@ -368,7 +365,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         // get parameters
         Bundle extras = activity.getIntent().getExtras();
         if (extras != null) {
-            fromDetailIntent = extras.getBoolean(EXTRAS_DETAIL);
             searchIntent = (SearchResult) extras.getParcelable(EXTRAS_SEARCH);
             geocodeIntent = extras.getString(EXTRAS_GEOCODE);
             final double latitudeIntent = extras.getDouble(EXTRAS_LATITUDE);
@@ -715,7 +711,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                         // prepare information to restart a similar view
                         Intent mapIntent = new Intent(activity, Settings.getMapProvider().getMapClass());
 
-                        mapIntent.putExtra(EXTRAS_DETAIL, fromDetailIntent);
                         mapIntent.putExtra(EXTRAS_SEARCH, searchIntent);
                         mapIntent.putExtra(EXTRAS_GEOCODE, geocodeIntent);
                         if (coordsIntent != null) {
@@ -1154,7 +1149,7 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
                 // stage 1 - pull and render from the DB only for live map
 
-                if (fromDetailIntent || searchIntent != null || geocodeIntent != null) {
+                if (searchIntent != null || geocodeIntent != null) {
                     // map started from another activity
                     search = new SearchResult(searchIntent);
                     if (geocodeIntent != null) {
@@ -1794,9 +1789,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
         return new Intent(context, Settings.getMapProvider().getMapClass());
     }
 
-    public static void startActivitySearch(final Activity fromActivity, final SearchResult search, final String title, boolean detail) {
+    public static void startActivitySearch(final Activity fromActivity, final SearchResult search, final String title) {
         final Intent mapIntent = newIntent(fromActivity);
-        mapIntent.putExtra(EXTRAS_DETAIL, detail);
         mapIntent.putExtra(EXTRAS_SEARCH, search);
         if (StringUtils.isNotBlank(title)) {
             mapIntent.putExtra(CGeoMap.EXTRAS_MAP_TITLE, title);
@@ -1810,7 +1804,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     public static void startActivityCoords(final Activity fromActivity, final Geopoint coords, final WaypointType type, final String title) {
         final Intent mapIntent = newIntent(fromActivity);
-        mapIntent.putExtra(EXTRAS_DETAIL, false);
         mapIntent.putExtra(EXTRAS_LATITUDE, coords.getLatitude());
         mapIntent.putExtra(EXTRAS_LONGITUDE, coords.getLongitude());
         if (type != null) {
@@ -1824,7 +1817,6 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
 
     public static void startActivityGeoCode(final Activity fromActivity, final String geocode) {
         final Intent mapIntent = newIntent(fromActivity);
-        mapIntent.putExtra(EXTRAS_DETAIL, false);
         mapIntent.putExtra(EXTRAS_GEOCODE, geocode);
         mapIntent.putExtra(EXTRAS_MAP_TITLE, geocode);
         fromActivity.startActivity(mapIntent);

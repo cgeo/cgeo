@@ -1,7 +1,6 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.StaticMapsActivity;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
@@ -25,8 +24,7 @@ class StaticMapApp extends AbstractNavigationApp {
     }
 
     @Override
-    public boolean invoke(cgGeo geo, Activity activity, cgCache cache,
-            final SearchResult search, cgWaypoint waypoint, final Geopoint coords) {
+    public boolean invoke(cgGeo geo, Activity activity, cgCache cache, cgWaypoint waypoint, final Geopoint coords) {
 
         String geocode = null;
         if (cache != null && cache.getListId() != 0) {

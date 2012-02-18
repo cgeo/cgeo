@@ -27,9 +27,9 @@ public class GoogleCacheOverlay extends ItemizedOverlay<GoogleCacheOverlayItem> 
     private CachesOverlay base;
     private Lock lock = new ReentrantLock();
 
-    public GoogleCacheOverlay(Context contextIn, Drawable markerIn, boolean fromDetailIn) {
+    public GoogleCacheOverlay(Context contextIn, Drawable markerIn) {
         super(boundCenterBottom(markerIn));
-        base = new CachesOverlay(this, contextIn, fromDetailIn);
+        base = new CachesOverlay(this, contextIn);
     }
 
     @Override

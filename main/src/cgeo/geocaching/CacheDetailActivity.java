@@ -481,7 +481,7 @@ public class CacheDetailActivity extends AbstractActivity {
  {
                 final cgWaypoint waypoint = cache.getWaypoint(index);
                 if (waypoint != null) {
-                    NavigationAppFactory.startDefaultNavigationApplication(geolocation, this, null, null, waypoint, null);
+                    NavigationAppFactory.startDefaultNavigationApplication(geolocation, this, null, waypoint, null);
                 }
                 }
                 break;
@@ -489,7 +489,7 @@ public class CacheDetailActivity extends AbstractActivity {
  {
                 final cgWaypoint waypoint = cache.getWaypoint(contextMenuWPIndex);
                 if (waypoint != null) {
-                    NavigationAppFactory.showNavigationMenu(geolocation, this, null, null, waypoint, null);
+                    NavigationAppFactory.showNavigationMenu(geolocation, this, null, waypoint, null);
                 }
             }
                 break;
@@ -834,7 +834,8 @@ public class CacheDetailActivity extends AbstractActivity {
             return;
         }
 
-        NavigationAppFactory.startDefaultNavigationApplication(geolocation, this, cache, search, null, null);
+        //TODO: previously this used also the search argument "search". check if still needed
+        NavigationAppFactory.startDefaultNavigationApplication(geolocation, this, cache, null, null);
     }
 
     /**
@@ -852,7 +853,7 @@ public class CacheDetailActivity extends AbstractActivity {
     }
 
     private void showNavigationMenu() {
-        NavigationAppFactory.showNavigationMenu(geolocation, this, cache, search, null, null);
+        NavigationAppFactory.showNavigationMenu(geolocation, this, cache, null, null);
     }
 
     /**

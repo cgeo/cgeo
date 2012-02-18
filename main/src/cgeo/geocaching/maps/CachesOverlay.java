@@ -34,7 +34,6 @@ public class CachesOverlay extends AbstractItemizedOverlay {
 
     private List<CachesOverlayItemImpl> items = new ArrayList<CachesOverlayItemImpl>();
     private Context context = null;
-    private boolean fromDetail = false;
     private boolean displayCircles = false;
     private ProgressDialog waitDialog = null;
     private Point center = new Point();
@@ -44,13 +43,12 @@ public class CachesOverlay extends AbstractItemizedOverlay {
     private PaintFlagsDrawFilter remfil = null;
     private MapProvider mapProvider = null;
 
-    public CachesOverlay(ItemizedOverlayImpl ovlImpl, Context contextIn, boolean fromDetailIn) {
+    public CachesOverlay(ItemizedOverlayImpl ovlImpl, Context contextIn) {
         super(ovlImpl);
 
         populate();
 
         context = contextIn;
-        fromDetail = fromDetailIn;
 
         mapProvider = Settings.getMapProvider();
     }
@@ -207,7 +205,6 @@ public class CachesOverlay extends AbstractItemizedOverlay {
             if (StringUtils.isNotBlank(coordinate.getCoordType()) && coordinate.getCoordType().equalsIgnoreCase("cache") && StringUtils.isNotBlank(coordinate.getGeocode())) {
                 Intent popupIntent = new Intent(context, cgeopopup.class);
 
-                popupIntent.putExtra("fromdetail", fromDetail);
                 popupIntent.putExtra("geocode", coordinate.getGeocode());
 
                 context.startActivity(popupIntent);

@@ -160,7 +160,7 @@ public class cgeopoint extends AbstractActivity {
             case CONTEXT_MENU_NAVIGATE:
                 contextMenuItemPosition = position;
                 if (destination instanceof cgDestination) {
-                    NavigationAppFactory.showNavigationMenu(geo, this, null, null, null, ((cgDestination) destination).getCoords());
+                    NavigationAppFactory.showNavigationMenu(geo, this, null, null, ((cgDestination) destination).getCoords());
                     return true;
                 }
                 break;
@@ -359,7 +359,7 @@ public class cgeopoint extends AbstractActivity {
                 return true;
 
             case MENU_NAVIGATE:
-                NavigationAppFactory.showNavigationMenu(geo, this, null, null, null, coords);
+                NavigationAppFactory.showNavigationMenu(geo, this, null, null, coords);
                 return true;
             default:
                 return false;
@@ -430,7 +430,7 @@ public class cgeopoint extends AbstractActivity {
             return;
         }
 
-        NavigationAppFactory.startDefaultNavigationApplication(geo, this, null, null, null, geopoint);
+        NavigationAppFactory.startDefaultNavigationApplication(geo, this, null, null, geopoint);
     }
 
     private void cachesAround() {

@@ -79,13 +79,12 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @param geo
      * @param activity
      * @param cache
-     * @param search
      * @param waypoint
      * @param destination
      */
     public static void showNavigationMenu(final cgGeo geo, final Activity activity,
-            final cgCache cache, final SearchResult search, final cgWaypoint waypoint, final Geopoint destination) {
-        showNavigationMenu(geo, activity, cache, search, waypoint, destination, true, false);
+            final cgCache cache, final cgWaypoint waypoint, final Geopoint destination) {
+        showNavigationMenu(geo, activity, cache, waypoint, destination, true, false);
     }
 
     /**
@@ -95,8 +94,6 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @param geo
      * @param activity
      * @param cache
-     *            may be <code>null</code>
-     * @param search
      *            may be <code>null</code>
      * @param waypoint
      *            may be <code>null</code>
@@ -110,7 +107,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @see #showNavigationMenu(cgGeo, Activity, cgCache, SearchResult, cgWaypoint, Geopoint)
      */
     public static void showNavigationMenu(final cgGeo geo, final Activity activity,
-            final cgCache cache, final SearchResult search, final cgWaypoint waypoint, final Geopoint destination,
+            final cgCache cache, final cgWaypoint waypoint, final Geopoint destination,
             final boolean showInternalMap, final boolean showDefaultNavigation) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setTitle(R.string.cache_menu_navigate);
@@ -152,7 +149,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         builder.setAdapter(adapter, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
                 NavigationAppsEnum selectedItem = adapter.getItem(item);
-                selectedItem.app.invoke(geo, activity, cache, search, waypoint, destination);
+                selectedItem.app.invoke(geo, activity, cache, waypoint, destination);
             }
         });
         final AlertDialog alert = builder.create();
@@ -260,8 +257,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
         final NavigationApp app = getAppFromMenuItem(item);
         if (app != null) {
             try {
-                return app.invoke(geo, activity, cache,
-                        search, waypoint, destination);
+                return app.invoke(geo, activity, cache, waypoint, destination);
             } catch (Exception e) {
                 Log.e(Settings.tag, "NavigationAppFactory.onMenuItemSelected: " + e.toString());
             }
@@ -290,12 +286,12 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @param destination
      */
     public static void startDefaultNavigationApplication(final cgGeo geo, Activity activity, cgCache cache,
-            final SearchResult search, cgWaypoint waypoint, final Geopoint destination) {
+            cgWaypoint waypoint, final Geopoint destination) {
         final NavigationApp app = getDefaultNavigationApplication(activity);
 
         if (app != null) {
             try {
-                app.invoke(geo, activity, cache, search, waypoint, destination);
+                app.invoke(geo, activity, cache, waypoint, destination);
             } catch (Exception e) {
                 Log.e(Settings.tag, "NavigationAppFactory.startDefaultNavigationApplication: " + e.toString());
             }

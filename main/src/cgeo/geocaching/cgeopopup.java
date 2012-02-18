@@ -34,7 +34,6 @@ import android.widget.TextView;
 
 public class cgeopopup extends AbstractActivity {
 
-    private boolean fromDetail = false;
     private LayoutInflater inflater = null;
     private String geocode = null;
     private cgCache cache = null;
@@ -119,7 +118,6 @@ public class cgeopopup extends AbstractActivity {
         // get parameters
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            fromDetail = extras.getBoolean("fromdetail");
             geocode = extras.getString("geocode");
         }
 
@@ -157,8 +155,7 @@ public class cgeopopup extends AbstractActivity {
                 menu.findItem(5).setVisible(false);
             }
 
-            boolean visitPossible = !fromDetail && Settings.isLogin();
-            menu.findItem(MENU_LOG_VISIT).setEnabled(visitPossible);
+            menu.findItem(MENU_LOG_VISIT).setEnabled(Settings.isLogin());
         } catch (Exception e) {
             // nothing
         }
@@ -174,7 +171,7 @@ public class cgeopopup extends AbstractActivity {
             navigateTo();
             return true;
         } else if (menuItem == 3) {
-            NavigationAppFactory.showNavigationMenu(geo, this, cache, null, null, null);
+            NavigationAppFactory.showNavigationMenu(geo, this, cache, null, null);
             return true;
         } else if (menuItem == 5) {
             cachesAround();
@@ -376,8 +373,9 @@ public class cgeopopup extends AbstractActivity {
                 }
             }
 
+            final boolean moreDetails = cache.isDetailed();
             // more details
-            if (!fromDetail) {
+            if (moreDetails) {
                 ((LinearLayout) findViewById(R.id.more_details_box)).setVisibility(View.VISIBLE);
 
                 Button buttonMore = (Button) findViewById(R.id.more_details);
@@ -396,7 +394,7 @@ public class cgeopopup extends AbstractActivity {
                 ((LinearLayout) findViewById(R.id.more_details_box)).setVisibility(View.GONE);
             }
 
-            if (!fromDetail) {
+            if (moreDetails) {
                 ((LinearLayout) findViewById(R.id.offline_box)).setVisibility(View.VISIBLE);
 
                 // offline use
@@ -519,7 +517,7 @@ public class cgeopopup extends AbstractActivity {
             return;
         }
 
-        NavigationAppFactory.startDefaultNavigationApplication(geo, this, cache, null, null, null);
+        NavigationAppFactory.startDefaultNavigationApplication(geo, this, cache, null, null);
     }
 
     private void cachesAround() {
@@ -629,7 +627,7 @@ public class cgeopopup extends AbstractActivity {
             showToast(res.getString(R.string.cache_coordinates_no));
             return;
         }
-        NavigationAppFactory.startDefaultNavigationApplication(geo, this, cache, null, null, null);
+        NavigationAppFactory.startDefaultNavigationApplication(geo, this, cache, null, null);
         finish();
     }
 

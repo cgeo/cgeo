@@ -1,7 +1,6 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
 import cgeo.geocaching.cgWaypoint;
@@ -22,8 +21,7 @@ class RMapsApp extends AbstractNavigationApp {
     }
 
     @Override
-    public boolean invoke(cgGeo geo, Activity activity, cgCache cache,
-            final SearchResult search, cgWaypoint waypoint, final Geopoint coords) {
+    public boolean invoke(cgGeo geo, Activity activity, cgCache cache, cgWaypoint waypoint, final Geopoint coords) {
         try {
             final ArrayList<String> locations = new ArrayList<String>();
             if (cache != null && cache.getCoords() != null) {

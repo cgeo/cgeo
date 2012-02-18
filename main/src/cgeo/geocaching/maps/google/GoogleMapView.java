@@ -105,9 +105,9 @@ public class GoogleMapView extends MapView implements MapViewImpl {
     }
 
     @Override
-    public CachesOverlay createAddMapOverlay(Context context, Drawable drawable, boolean fromDetailIntent) {
+    public CachesOverlay createAddMapOverlay(Context context, Drawable drawable) {
 
-        GoogleCacheOverlay ovl = new GoogleCacheOverlay(context, drawable, fromDetailIntent);
+        GoogleCacheOverlay ovl = new GoogleCacheOverlay(context, drawable);
         getOverlays().add(ovl);
         return ovl.getBase();
     }

@@ -1218,11 +1218,11 @@ public class cgeocaches extends AbstractListActivity {
 
         if (id == MENU_DEFAULT_NAVIGATION) {
             final cgCache cache = getCacheFromAdapter(adapterInfo);
-            NavigationAppFactory.startDefaultNavigationApplication(geo, this, cache, null, null, null);
+            NavigationAppFactory.startDefaultNavigationApplication(geo, this, cache, null, null);
             return true;
         } else if (id == MENU_NAVIGATION) {
             final cgCache cache = getCacheFromAdapter(adapterInfo);
-            NavigationAppFactory.showNavigationMenu(geo, this, cache, null, null, null);
+            NavigationAppFactory.showNavigationMenu(geo, this, cache, null, null);
             return true;
         } else if (id == MENU_LOG_VISIT) {
             return getCacheFromAdapter(adapterInfo).logVisit(this);
@@ -2556,7 +2556,7 @@ public class cgeocaches extends AbstractListActivity {
         if (count > 0) {
             mapTitle = title + " [" + count + "]";
         }
-        CGeoMap.startActivitySearch(this, searchToUse, mapTitle, false);
+        CGeoMap.startActivitySearch(this, searchToUse, mapTitle);
     }
 
     @Override

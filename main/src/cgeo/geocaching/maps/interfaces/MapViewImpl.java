@@ -48,8 +48,7 @@ public interface MapViewImpl {
 
     Context getContext();
 
-    CachesOverlay createAddMapOverlay(Context context,
-            Drawable drawable, boolean fromDetailIntent);
+    CachesOverlay createAddMapOverlay(Context context, Drawable drawable);
 
     OtherCachersOverlay createAddUsersOverlay(Context context, Drawable markerIn);
 
@@ -63,7 +62,7 @@ public interface MapViewImpl {
      * Map-library unspecific method to request a repaint of either
      * a specific overlay, that changed, or the mapview as a whole
      * (if overlay is null)
-     * 
+     *
      * @param overlay
      *            Overlay to repaint or null if the mapview has changed
      */

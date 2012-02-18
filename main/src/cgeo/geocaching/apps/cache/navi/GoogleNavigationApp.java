@@ -1,7 +1,6 @@
 package cgeo.geocaching.apps.cache.navi;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.cgCache;
 import cgeo.geocaching.cgGeo;
@@ -27,8 +26,7 @@ class GoogleNavigationApp extends AbstractNavigationApp {
     }
 
     @Override
-    public boolean invoke(final cgGeo geo, final Activity activity, final cgCache cache,
-            final SearchResult search, final cgWaypoint waypoint, final Geopoint coords) {
+    public boolean invoke(final cgGeo geo, final Activity activity, final cgCache cache, final cgWaypoint waypoint, final Geopoint coords) {
         if (activity == null) {
             return false;
         }

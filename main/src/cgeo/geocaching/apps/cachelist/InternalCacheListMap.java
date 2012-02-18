@@ -25,7 +25,7 @@ class InternalCacheListMap extends AbstractApp implements CacheListApp {
 
     @Override
     public boolean invoke(cgGeo geo, List<cgCache> caches, Activity activity, final SearchResult search) {
-        CGeoMap.startActivitySearch(activity, search, null, false);
+        CGeoMap.startActivitySearch(activity, search, null);
         return true;
     }
 }
