@@ -24,6 +24,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.net.Uri;
+import android.os.Handler;
 import android.text.Spannable;
 import android.util.Log;
 
@@ -100,6 +101,20 @@ public class cgCache implements ICache {
     private boolean finalDefined = false;
 
     private static final Pattern NUMBER_PATTERN = Pattern.compile("\\d+");
+
+    private Handler changeNotificationHandler = null;
+
+    public void setChangeNotificationHandler(Handler newNotificationHandler) {
+        changeNotificationHandler = newNotificationHandler;
+    }
+
+    /**
+     * Sends a change notification to interested parties
+     */
+    private void notifyChange() {
+        if (changeNotificationHandler != null)
+            changeNotificationHandler.sendEmptyMessage(0);
+    }
 
     /**
      * Gather missing information from another cache object.
@@ -253,7 +268,12 @@ public class cgCache implements ICache {
             reliableLatLon = other.reliableLatLon;
         }
 
-        return isEqualTo(other);
+        boolean isEqual = isEqualTo(other);
+
+        if (!isEqual)
+            notifyChange();
+
+        return isEqual;
     }
 
     /**
@@ -412,6 +432,8 @@ public class cgCache implements ICache {
         }
         cgeoapplication app = (cgeoapplication) ((Activity) fromActivity).getApplication();
         final boolean status = app.saveLogOffline(geocode, date.getTime(), logType, log);
+
+        notifyChange();
 
         Resources res = ((Activity) fromActivity).getResources();
         if (status) {

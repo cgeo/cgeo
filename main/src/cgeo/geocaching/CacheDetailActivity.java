@@ -156,6 +156,13 @@ public class CacheDetailActivity extends AbstractActivity {
     // some views that must be available from everywhere // TODO: Reference can block GC?
     private TextView cacheDistanceView;
 
+    private Handler cacheChangeNotificationHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            notifyDataSetChanged();
+        }
+    };
+
     public CacheDetailActivity() {
         // identifier for manual
         super("c:geolocation-cache-details");
@@ -318,6 +325,9 @@ public class CacheDetailActivity extends AbstractActivity {
             notifyDataSetChanged();
             refreshOnResume = false;
         }
+        if (cache != null) {
+            cache.setChangeNotificationHandler(cacheChangeNotificationHandler);
+        }
     }
 
     @Override
@@ -333,6 +343,10 @@ public class CacheDetailActivity extends AbstractActivity {
     public void onStop() {
         if (geolocation != null) {
             geolocation = app.removeGeo();
+        }
+
+        if (cache != null) {
+            cache.setChangeNotificationHandler(cacheChangeNotificationHandler);
         }
 
         super.onStop();
