@@ -85,13 +85,16 @@ public class LogTemplateProvider {
 
                         @Override
                         public String getValue(final boolean offline) {
-                            if (offline) {
-                                return "";
+                            int current = cgBase.getActualCachesFound();
+                            if (current == 0) {
+                                if (offline) {
+                                    return "";
+                                }
+                                final String page = cgBase.getResponseData(cgBase.request("http://www.geocaching.com/email/", null, false, false, false));
+                                current = parseFindCount(page);
                             }
-                            String findCount = "";
-                            final String page = cgBase.getResponseData(cgBase.request("http://www.geocaching.com/email/", null, false, false, false));
-                            int current = parseFindCount(page);
 
+                            String findCount = "";
                             if (current >= 0) {
                                 findCount = String.valueOf(current + 1);
                             }
