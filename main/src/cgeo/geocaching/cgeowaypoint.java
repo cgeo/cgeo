@@ -358,6 +358,6 @@ public class cgeowaypoint extends AbstractActivity {
         if (handled) {
             return true;
         }
-        return NavigationAppFactory.onMenuItemSelected(item, geo, this, null, null, waypoint, null);
+        return NavigationAppFactory.onMenuItemSelected(item, geo, this, null, waypoint, null);
     }
 }

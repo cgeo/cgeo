@@ -566,7 +566,7 @@ public class CacheDetailActivity extends AbstractActivity {
             }
             return false;
         }
-        if (NavigationAppFactory.onMenuItemSelected(item, geolocation, this, cache, search, null, null)) {
+        if (NavigationAppFactory.onMenuItemSelected(item, geolocation, this, cache, null, null)) {
             return true;
         }
         if (GeneralAppsFactory.onMenuItemSelected(item, this, cache)) {

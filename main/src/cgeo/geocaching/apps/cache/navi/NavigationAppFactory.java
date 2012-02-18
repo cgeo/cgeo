@@ -90,7 +90,7 @@ public final class NavigationAppFactory extends AbstractAppFactory {
     /**
      * Specialized way to handle selection of navigation tool.<br />
      * A dialog is created for tool selection and the selected tool is started afterwards.
-     *
+     * 
      * @param geo
      * @param activity
      * @param cache
@@ -103,8 +103,8 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      *            should be <code>false</code> only when called from within the internal map
      * @param showDefaultNavigation
      *            should be <code>false</code> by default
-     *
-     * @see #showNavigationMenu(cgGeo, Activity, cgCache, SearchResult, cgWaypoint, Geopoint)
+     * 
+     * @see #showNavigationMenu(cgGeo, Activity, cgCache, cgWaypoint, Geopoint)
      */
     public static void showNavigationMenu(final cgGeo geo, final Activity activity,
             final cgCache cache, final cgWaypoint waypoint, final Geopoint destination,
@@ -211,11 +211,11 @@ public final class NavigationAppFactory extends AbstractAppFactory {
 
     /**
      * Adds the installed navigation tools to the given menu.
-     * Use {@link #onMenuItemSelected(MenuItem, cgGeo, Activity, cgCache, SearchResult, cgWaypoint, Geopoint)} on
+     * Use {@link #onMenuItemSelected(MenuItem, cgGeo, Activity, cgCache, cgWaypoint, Geopoint)} on
      * selection event to start the selected navigation tool.
      *
      * <b>Only use this way if
-     * {@link #showNavigationMenu(cgGeo, Activity, cgCache, SearchResult, cgWaypoint, Geopoint, boolean, boolean)} is
+     * {@link #showNavigationMenu(cgGeo, Activity, cgCache, cgWaypoint, Geopoint, boolean, boolean)} is
      * not suitable for the given usecase.</b>
      *
      * @param menu
@@ -242,14 +242,12 @@ public final class NavigationAppFactory extends AbstractAppFactory {
      * @param geo
      * @param activity
      * @param cache
-     * @param search
      * @param waypoint
      * @param destination
      * @return
      */
     public static boolean onMenuItemSelected(final MenuItem item,
-            final cgGeo geo, Activity activity, cgCache cache,
-            final SearchResult search, cgWaypoint waypoint, final Geopoint destination) {
+            final cgGeo geo, Activity activity, cgCache cache, cgWaypoint waypoint, final Geopoint destination) {
         if (cache == null && waypoint == null && destination == null) {
             return false;
         }
