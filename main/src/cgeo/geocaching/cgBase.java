@@ -350,9 +350,9 @@ public class cgBase {
      * Check if the user has been logged in when he retrieved the data.
      *
      * @param page
-     * @return true = User has been logged in, false else
+     * @return <code>true</code> if user is logged in, <code>false</code> otherwise
      */
-    private static boolean getLoginStatus(String page) {
+    private static boolean getLoginStatus(final String page) {
         if (StringUtils.isBlank(page)) {
             Log.e(Settings.tag, "cgeoBase.checkLogin: No page given");
             return false;
@@ -361,25 +361,24 @@ public class cgBase {
         setActualStatus(res.getString(R.string.init_login_popup_ok));
 
         // on every page except login page
-        cgBase.setActualLoginStatus(BaseUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME));
-        if (cgBase.isActualLoginStatus()) {
-            cgBase.setActualUserName(BaseUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???"));
-            cgBase.setActualMemberStatus(BaseUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, "???"));
-            cgBase.setActualCachesFound(Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll(",", "")));
+        setActualLoginStatus(BaseUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME));
+        if (isActualLoginStatus()) {
+            setActualUserName(BaseUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???"));
+            setActualMemberStatus(BaseUtils.getMatch(page, GCConstants.PATTERN_MEMBER_STATUS, true, "???"));
+            setActualCachesFound(Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll(",", "")));
             return true;
         }
 
         // login page
-        cgBase.setActualLoginStatus(BaseUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE));
-        if (cgBase.isActualLoginStatus()) {
-            cgBase.setActualUserName(Settings.getUsername());
-            cgBase.setActualMemberStatus(Settings.getMemberStatus());
+        setActualLoginStatus(BaseUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME_LOGIN_PAGE));
+        if (isActualLoginStatus()) {
+            setActualUserName(Settings.getUsername());
+            setActualMemberStatus(Settings.getMemberStatus());
             // number of caches found is not part of this page
             return true;
         }
 
         setActualStatus(res.getString(R.string.init_login_popup_failed));
-
         return false;
     }
 
@@ -387,8 +386,11 @@ public class cgBase {
         final String ENGLISH = "English&#9660;";
         if (previousPage != null && previousPage.indexOf(ENGLISH) >= 0) {
             Log.i(Settings.tag, "Geocaching.com language already set to English");
+            // get find count
+            getLoginStatus(getResponseData(request("http://www.geocaching.com/email/", null, false)));
         } else {
             final String page = getResponseData(request("http://www.geocaching.com/default.aspx", null, false));
+            getLoginStatus(page);
             if (page == null) {
                 Log.e(Settings.tag, "Failed to read viewstates to set geocaching.com language");
             }
