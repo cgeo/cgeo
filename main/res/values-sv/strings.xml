@@ -616,7 +616,7 @@
   <string name="waypoint_custom">Egen</string>
   <string name="waypoint_my_coordinates">Mina koordinater</string>
   <string name="waypoint_bearing">Riktning (°)</string>
-  <string name="waypoint_distance">Avstånd (meter)</string>
+  <string name="waypoint_distance">Avstånd</string>
   <string name="waypoint_name">Namn</string>
   <string name="waypoint_edit">Redigera</string>
   <string name="waypoint_delete">Ta bort</string>
