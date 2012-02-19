@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">c:geo - calendar (doplnok)</string>
+    <string name="calendars">Kalendáre</string>
+    <string name="event_success">Skrýša udalosti pridaná do kalendára</string>
+    <string name="event_fail">Nepodarilo sa pridať skrýšu udalostí do kalendára</string>
+</resources>
