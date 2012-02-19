@@ -115,6 +115,19 @@
   <string name="log_new_log_text">Loggtext</string>
   <string name="log_announcement">Kungörelse</string>
 
+  <!-- copy -->
+  <string name="options_context_menu_title">Välj</string>
+  <string name="copy_coords">Kopiera Koordinaterna</string>
+  <string name="copy_desc">Kopiera Beskrivningen</string>
+  <string name="copy_personalnote">Kopiera Personliga anteckningen</string>
+  <string name="copy_hint">Kopiera Hint</string>
+  <string name="copy_log">Kopiera Logg</string>
+  
+  <!-- translation -->
+  <string name="translate_to_sys_lang">Översätt till %s</string>
+  <string name="translate_to_english">Översätt till Engelska</string>
+  <string name="translate_length_warning">Översättningen kan misslyckas med långa texter.</string>
+
   <!-- errors, warnings, info toasts -->
   <string name="err_none">Ok</string>
   <string name="err_start">Kommunikationen har inte påbörjats</string>
@@ -732,6 +745,7 @@
   <string name="helper_manual_title">Manual</string>
   <string name="helper_manual_description">En utförlig manual för c:geo som beskriver alla möjligheter och ger en hel del tips. Manualen finns enbart på engelska.</string>
   <string name="helper_calendar_title">c:geo kalendertillägg</string>
+  <string name="helper_calendar_missing">c:geo kalendertillägg är inte installerat</string>
   <string name="helper_calendar_description">Gör det möjligt att exportera event till din kalender.</string>
   <string name="helper_locus_title">Locus</string>
   <string name="helper_locus_description">Ett enkelt program för att visa Online kartor men som också medger nedladdning av raster kartor för användning i Offline läge. Stödjer även inspelning av väg (track recording), POI hantering och många andra användbara funktioner.</string>
@@ -739,6 +753,8 @@
   <string name="helper_gpsstatus_description">Erbjuder många GPS-relaterade funktioner. Radar-funktionen i detta program kan användas i c:geo.</string>
   <string name="helper_bluetoothgps_title">Bluetooth GPS</string>
   <string name="helper_bluetoothgps_description">Gör det möjligt att använda en extern GPS enhet för att få bättre mottagning, mer exakt position och kan även spara på batteriet i telefonen.</string>
+  <string name="helper_barcode_title">Streckkodsläsare</string>
+  <string name="helper_barcode_description">Det finns Greasemonkey-script och hemsidor som visar GC-koder som streckkoder/QR-koder. Med den här appen kan c:geo scanna in GC-koden direkt från skärmen på din dator.</string>
 
   <!-- next things -->
   <string name="legal_note">För att använda tjänster hos Geocaching.com, måste regler och villkor i <a href="http://www.geocaching.com/about/termsofuse.aspx">Groundspeaks avtal</a> godkännas.</string>
