@@ -492,7 +492,7 @@
   <string name="cache_personal_note">Osobná poznámka</string>
   <string name="cache_description">Popis</string>
   <string name="cache_description_long">Dlhý popis</string>
-  <string name="cache_description_table_note">Popis obsahuje formátovanie tabuľky, ktorý môže byť pre správne zobrazenie potrebné otvoriť v geocaching.com.<string>
+  <string name="cache_description_table_note">Popis obsahuje formátovanie tabuľky, ktorý môže byť pre správne zobrazenie potrebné otvoriť v geocaching.com.</string>
   <string name="cache_watchlist">Zoznam sledovaných</string>
   <string name="cache_watchlist_on">Skrýša je vo vašom zozname sledovaných.</string>
   <string name="cache_watchlist_not_on">Skrýša nie je vo vašom zozname sledovaných.</string>
