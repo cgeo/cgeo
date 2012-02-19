@@ -270,8 +270,9 @@ public class cgCache implements ICache {
 
         boolean isEqual = isEqualTo(other);
 
-        if (!isEqual)
+        if (!isEqual) {
             notifyChange();
+        }
 
         return isEqual;
     }
