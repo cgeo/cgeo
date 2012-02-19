@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">c:geo - kalender (tillägg)</string>
+    <string name="calendars">Kalendrar</string>
+    <string name="event_success">Event cache inlagt i kalender</string>
+    <string name="event_fail">Misslyckades att lägga in event cache i kalendern</string>
+</resources>
