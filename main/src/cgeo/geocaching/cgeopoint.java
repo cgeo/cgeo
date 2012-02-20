@@ -24,10 +24,12 @@ import android.view.View.OnCreateContextMenuListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.List;
@@ -97,6 +99,9 @@ public class cgeopoint extends AbstractActivity {
     private static final int CONTEXT_MENU_EDIT_WAYPOINT = 3;
 
     private int contextMenuItemPosition;
+
+    String distanceUnit = "";
+    private static final String[] distanceUnits = { "m", "km", "ft", "yd", "mi" };
 
     public cgeopoint() {
         super("c:geo-navigate-any");
@@ -273,6 +278,27 @@ public class cgeopoint extends AbstractActivity {
 
         getDestionationHistoryAdapter().notifyDataSetChanged();
         disableSuggestions((EditText) findViewById(R.id.distance));
+
+        initializeDistanceUnitSelector();
+    }
+
+    private void initializeDistanceUnitSelector() {
+
+        Spinner distanceUnitSelector = (Spinner) findViewById(R.id.distanceUnit);
+
+        ArrayAdapter<String> unitAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, distanceUnits);
+        unitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        distanceUnitSelector.setAdapter(unitAdapter);
+
+        if (Settings.isUseMetricUnits()) {
+            distanceUnitSelector.setSelection(0); // m
+            distanceUnit = cgeopoint.distanceUnits[0];
+        } else {
+            distanceUnitSelector.setSelection(2); // ft
+            distanceUnit = cgeopoint.distanceUnits[2];
+        }
+
+        distanceUnitSelector.setOnItemSelectedListener(new changeDistanceUnit(this));
     }
 
     private class coordDialogListener implements View.OnClickListener {
@@ -293,6 +319,25 @@ public class cgeopoint extends AbstractActivity {
                 }
             });
             coordsDialog.show();
+        }
+    }
+
+    private class changeDistanceUnit implements OnItemSelectedListener {
+
+        private changeDistanceUnit(cgeopoint unitView) {
+            this.unitView = unitView;
+        }
+
+        private cgeopoint unitView;
+
+        @Override
+        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
+                long arg3) {
+            unitView.distanceUnit = cgeopoint.distanceUnits[arg2];
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> arg0) {
         }
     }
 
@@ -483,7 +528,8 @@ public class cgeopoint extends AbstractActivity {
         Geopoint coords = null;
 
         String bearingText = ((EditText) findViewById(R.id.bearing)).getText().toString();
-        String distanceText = ((EditText) findViewById(R.id.distance)).getText().toString();
+        // combine distance from EditText and distanceUnit saved from Spinner
+        String distanceText = ((EditText) findViewById(R.id.distance)).getText().toString() + distanceUnit;
         String latText = latButton.getText().toString();
         String lonText = lonButton.getText().toString();
 
