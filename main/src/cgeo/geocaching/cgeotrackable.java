@@ -335,7 +335,7 @@ public class cgeotrackable extends AbstractActivity {
         if (viewId == R.id.author) { // Log item author
             contextMenuUser = ((TextView) view).getText().toString();
         } else { // Trackable owner, and user holding trackable now
-            RelativeLayout itemLayout = (RelativeLayout) view;
+            RelativeLayout itemLayout = (RelativeLayout) view.getParent();
             TextView itemName = (TextView) itemLayout.findViewById(R.id.name);
 
             String selectedName = itemName.getText().toString();
@@ -490,7 +490,7 @@ public class cgeotrackable extends AbstractActivity {
                 registerForContextMenu(view);
                 openContextMenu(view);
             } catch (Exception e) {
-                // nothing
+                Log.e(Settings.tag, "cgeotrackable.userActions.onClick ", e);
             }
         }
     }
