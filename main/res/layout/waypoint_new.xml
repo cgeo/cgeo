@@ -31,7 +31,7 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
             android:orientation="vertical" >
 
@@ -51,12 +51,26 @@
                 android:hint="@string/waypoint_bearing"
                 android:inputType="numberDecimal" />
 
-            <EditText
-                android:id="@+id/distance"
-                style="@style/edittext"
-                android:hint="@string/waypoint_distance" />
+	        <LinearLayout
+	            android:layout_width="fill_parent"
+    	        android:layout_height="wrap_content"
+            	android:orientation="horizontal" >
+            
+	            <EditText
+                	android:id="@+id/distance"
+                	style="@style/edittext"
+                	android:hint="@string/waypoint_distance"
+                	android:inputType="numberDecimal"
+                	android:layout_width="0dip"
+                	android:layout_weight="1" />
 
-            <AutoCompleteTextView
+	            <Spinner 
+                	android:id="@+id/distanceUnit"
+                	android:layout_width="wrap_content"
+					android:layout_height="wrap_content" />
+        	</LinearLayout>
+
+	        <AutoCompleteTextView
                 android:id="@+id/name"
                 style="@style/edittext"
                 android:hint="@string/waypoint_name" />
