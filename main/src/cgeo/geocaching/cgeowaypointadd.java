@@ -44,8 +44,6 @@ public class cgeowaypointadd extends AbstractActivity {
     private boolean own = true;
     ArrayList<WaypointType> wpTypes = null;
     String distanceUnit = "";
-    private static final String[] distanceUnits = { "m", "km", "ft", "yd", "mi" };
-
 
     /**
      * number of waypoints that the corresponding cache has until now
@@ -228,16 +226,14 @@ public class cgeowaypointadd extends AbstractActivity {
 
         Spinner distanceUnitSelector = (Spinner) findViewById(R.id.distanceUnit);
 
-        ArrayAdapter<String> unitAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, distanceUnits);
-        unitAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        distanceUnitSelector.setAdapter(unitAdapter);
-
-        if (Settings.isUseMetricUnits()) {
-            distanceUnitSelector.setSelection(0); // m
-            distanceUnit = cgeowaypointadd.distanceUnits[0];
-        } else {
-            distanceUnitSelector.setSelection(2); // ft
-            distanceUnit = cgeowaypointadd.distanceUnits[2];
+        if (StringUtils.isBlank(distanceUnit)) {
+            if (Settings.isUseMetricUnits()) {
+                distanceUnitSelector.setSelection(0); // m
+                distanceUnit = res.getStringArray(R.array.distance_units)[0];
+            } else {
+                distanceUnitSelector.setSelection(2); // ft
+                distanceUnit = res.getStringArray(R.array.distance_units)[2];
+            }
         }
 
         distanceUnitSelector.setOnItemSelectedListener(new changeDistanceUnit(this));
@@ -340,7 +336,7 @@ public class cgeowaypointadd extends AbstractActivity {
         @Override
         public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
                 long arg3) {
-            unitView.distanceUnit = cgeowaypointadd.distanceUnits[arg2];
+            unitView.distanceUnit = (String) arg0.getItemAtPosition(arg2);
         }
 
         @Override

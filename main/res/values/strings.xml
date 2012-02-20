@@ -664,6 +664,20 @@
   </string-array>
   <string name="waypoint_coordinate_formats_plain">Plain</string>
 
+  <!-- distance units -->
+  <string-array name="distance_units">
+    <item>@string/unit_m</item>
+    <item>@string/unit_km</item>
+    <item>@string/unit_ft</item>
+    <item>@string/unit_yd</item>
+    <item>@string/unit_mi</item>
+  </string-array>
+  <string name="unit_m">m</string>
+  <string name="unit_km">km</string>
+  <string name="unit_ft">ft</string>
+  <string name="unit_yd">yd</string>
+  <string name="unit_mi">mi</string>
+  
   <!-- visit -->
   <string name="visit_tweet">Post this find to Twitter</string>
 
