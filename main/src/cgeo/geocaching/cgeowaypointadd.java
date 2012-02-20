@@ -43,6 +43,7 @@ public class cgeowaypointadd extends AbstractActivity {
     private String lookup = "---";
     private boolean own = true;
     ArrayList<WaypointType> wpTypes = null;
+    String distanceUnit = "";
 
     /**
      * number of waypoints that the corresponding cache has until now
@@ -75,6 +76,8 @@ public class cgeowaypointadd extends AbstractActivity {
                 if (own) {
                     initializeWaypointTypeSelector();
                 }
+
+                initializeDistanceUnitSelector();
             } catch (Exception e) {
                 Log.e(Settings.tag, "cgeowaypointadd.loadWaypointHandler: " + e.toString());
             } finally {
@@ -148,6 +151,8 @@ public class cgeowaypointadd extends AbstractActivity {
             initializeWaypointTypeSelector();
         }
 
+        initializeDistanceUnitSelector();
+
         disableSuggestions((EditText) findViewById(R.id.distance));
     }
 
@@ -215,6 +220,23 @@ public class cgeowaypointadd extends AbstractActivity {
         waypointTypeSelector.setOnItemSelectedListener(new changeWaypointType(this));
 
         waypointTypeSelector.setVisibility(View.VISIBLE);
+    }
+
+    private void initializeDistanceUnitSelector() {
+
+        Spinner distanceUnitSelector = (Spinner) findViewById(R.id.distanceUnit);
+
+        if (StringUtils.isBlank(distanceUnit)) {
+            if (Settings.isUseMetricUnits()) {
+                distanceUnitSelector.setSelection(0); // m
+                distanceUnit = res.getStringArray(R.array.distance_units)[0];
+            } else {
+                distanceUnitSelector.setSelection(2); // ft
+                distanceUnit = res.getStringArray(R.array.distance_units)[2];
+            }
+        }
+
+        distanceUnitSelector.setOnItemSelectedListener(new changeDistanceUnit(this));
     }
 
     private class update implements UpdateLocationCallback {
@@ -303,11 +325,31 @@ public class cgeowaypointadd extends AbstractActivity {
         }
     }
 
+    private class changeDistanceUnit implements OnItemSelectedListener {
+
+        private changeDistanceUnit(cgeowaypointadd unitView) {
+            this.unitView = unitView;
+        }
+
+        private cgeowaypointadd unitView;
+
+        @Override
+        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
+                long arg3) {
+            unitView.distanceUnit = (String) arg0.getItemAtPosition(arg2);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> arg0) {
+        }
+    }
+
     private class coordsListener implements View.OnClickListener {
 
         public void onClick(View arg0) {
             final String bearingText = ((EditText) findViewById(R.id.bearing)).getText().toString();
-            final String distanceText = ((EditText) findViewById(R.id.distance)).getText().toString();
+            // combine distance from EditText and distanceUnit saved from Spinner
+            final String distanceText = ((EditText) findViewById(R.id.distance)).getText().toString() + distanceUnit;
             final String latText = ((Button) findViewById(R.id.buttonLatitude)).getText().toString();
             final String lonText = ((Button) findViewById(R.id.buttonLongitude)).getText().toString();
 
