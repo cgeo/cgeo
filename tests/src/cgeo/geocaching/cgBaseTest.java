@@ -8,6 +8,8 @@ import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.BaseUtils;
 import cgeo.geocaching.utils.CancellableHandler;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.test.AndroidTestCase;
 import android.test.suitebuilder.annotation.MediumTest;
 
@@ -89,6 +91,7 @@ public class cgBaseTest extends AndroidTestCase {
             Settings.setGcCustomDate(mockedCache.getDateFormat());
             SearchResult searchResult = cgBase.parseCacheFromText(mockedCache.getData(), 0, null);
             cgCache parsedCache = searchResult.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
+            assertTrue(StringUtils.isNotBlank(mockedCache.getMockedDataUser()));
             cgBaseTest.testCompareCaches(mockedCache, parsedCache);
         }
         Settings.setGcCustomDate(gcCustomDate);
