@@ -13,6 +13,7 @@ import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.GeopointFormatter;
+import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.ui.DecryptTextClickListener;
@@ -690,7 +691,7 @@ public class CacheDetailActivity extends AbstractActivity {
                 StringBuilder dist = new StringBuilder();
 
                 if (geo.coordsNow != null && cache != null && cache.getCoords() != null) {
-                    dist.append(cgBase.getHumanDistance(geo.coordsNow.distanceTo(cache.getCoords())));
+                    dist.append(HumanDistance.getHumanDistance(geo.coordsNow.distanceTo(cache.getCoords())));
                 }
 
                 if (cache != null && cache.getElevation() != null) {
@@ -1358,7 +1359,7 @@ public class CacheDetailActivity extends AbstractActivity {
             }
 
             // distance
-            cacheDistanceView = addCacheDetail(R.string.cache_distance, cache.getDistance() != null ? "~" + cgBase.getHumanDistance(cache.getDistance()) : "--");
+            cacheDistanceView = addCacheDetail(R.string.cache_distance, cache.getDistance() != null ? "~" + HumanDistance.getHumanDistance(cache.getDistance()) : "--");
 
             // difficulty
             if (cache.getDifficulty() > 0) {

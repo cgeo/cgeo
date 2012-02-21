@@ -8,17 +8,21 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.utils.BaseUtils;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.List;
 
+import junit.framework.Assert;
+
 public abstract class MockedCache implements ICache {
 
     final protected Geopoint coords;
-    String data;
-    String mockedDataUser;
+    private String data;
+    private String mockedDataUser;
 
     protected MockedCache(final Geopoint coords) {
         this.coords = coords;
@@ -28,15 +32,16 @@ public abstract class MockedCache implements ICache {
     }
 
     public String getMockedDataUser() {
+        Assert.assertTrue(StringUtils.isNotBlank(this.mockedDataUser));
         return mockedDataUser;
     }
 
     public void setMockedDataUser(String mockedDataUser) {
         this.mockedDataUser = mockedDataUser;
+        Assert.assertTrue(StringUtils.isNotBlank(this.mockedDataUser));
     }
 
-    @SuppressWarnings("static-method")
-    public String getDateFormat() {
+    public static String getDateFormat() {
         return "dd/MM/yyyy";
     }
 

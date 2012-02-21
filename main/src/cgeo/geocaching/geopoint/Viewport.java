@@ -33,6 +33,7 @@ public class Viewport {
         return topRight.getLongitude();
     }
 
+    @Override
     public String toString() {
         return "(" + bottomLeft.toString() + "," + topRight.toString() + ")";
     }

@@ -1,6 +1,7 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
+import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.network.HtmlImage;
 
 import org.apache.commons.lang3.StringUtils;
@@ -157,7 +158,7 @@ public class cgeotrackable extends AbstractActivity {
 
                 // trackable distance
                 if (trackable.getDistance() >= 0) {
-                    addDetail(R.string.trackable_distance, cgBase.getHumanDistance(trackable.getDistance()));
+                    addDetail(R.string.trackable_distance, HumanDistance.getHumanDistance(trackable.getDistance()));
                 }
 
                 // trackable goal

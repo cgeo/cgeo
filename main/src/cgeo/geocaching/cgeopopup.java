@@ -8,6 +8,7 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.gcvote.GCVoteRating;
+import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.utils.CancellableHandler;
 
 import org.apache.commons.lang3.StringUtils;
@@ -502,7 +503,7 @@ public class cgeopopup extends AbstractActivity {
 
             try {
                 if (geo.coordsNow != null && cache != null && cache.getCoords() != null) {
-                    cacheDistance.setText(cgBase.getHumanDistance(geo.coordsNow.distanceTo(cache.getCoords())));
+                    cacheDistance.setText(HumanDistance.getHumanDistance(geo.coordsNow.distanceTo(cache.getCoords())));
                     cacheDistance.bringToFront();
                 }
             } catch (Exception e) {

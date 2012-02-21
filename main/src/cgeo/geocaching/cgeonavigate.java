@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.ui.CompassView;
 
@@ -329,7 +330,7 @@ public class cgeonavigate extends AbstractActivity {
         }
 
         cacheHeading = geo.coordsNow.bearingTo(dstCoords);
-        distanceView.setText(cgBase.getHumanDistance(geo.coordsNow.distanceTo(dstCoords)));
+        distanceView.setText(HumanDistance.getHumanDistance(geo.coordsNow.distanceTo(dstCoords)));
         headingView.setText(Math.round(cacheHeading) + "°");
     }
 
@@ -372,7 +373,7 @@ public class cgeonavigate extends AbstractActivity {
                     }
 
                     if (geo.altitudeNow != null) {
-                        final String humanAlt = cgBase.getHumanDistance(geo.altitudeNow.floatValue() / 1000);
+                        final String humanAlt = HumanDistance.getHumanDistance(geo.altitudeNow.floatValue() / 1000);
                         navLocation.setText(geo.coordsNow + " | " + humanAlt);
                     } else {
                         navLocation.setText(geo.coordsNow.toString());

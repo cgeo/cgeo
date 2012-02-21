@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.HumanDistance;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -101,7 +102,7 @@ public class cgeoaddresses extends AbstractActivity {
 
                             if (lastLoc != null) {
                                 if (address.hasLatitude() && address.hasLongitude()) {
-                                    lines.add(cgBase.getHumanDistance(lastLoc.distanceTo(new Geopoint(address.getLatitude(), address.getLongitude()))));
+                                    lines.add(HumanDistance.getHumanDistance(lastLoc.distanceTo(new Geopoint(address.getLatitude(), address.getLongitude()))));
                                 }
                             }
 

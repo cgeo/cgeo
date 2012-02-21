@@ -76,6 +76,7 @@ public enum WaypointType {
         }
     }
 
+    @Override
     public final String toString() {
         return getL10n();
     }

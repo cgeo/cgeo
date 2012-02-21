@@ -8,6 +8,7 @@ import cgeo.geocaching.enumerations.LogType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.geopoint.Geopoint;
+import cgeo.geocaching.geopoint.HumanDistance;
 import cgeo.geocaching.maps.CGeoMap;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -599,7 +600,7 @@ public class cgeo extends AbstractActivity {
                         }
                     } else {
                         if (geo.altitudeNow != null) {
-                            final String humanAlt = cgBase.getHumanDistance(geo.altitudeNow.floatValue() / 1000);
+                            final String humanAlt = HumanDistance.getHumanDistance(geo.altitudeNow.floatValue() / 1000);
                             navLocation.setText(geo.coordsNow + " | " + humanAlt);
                         } else {
                             navLocation.setText(geo.coordsNow.toString());
