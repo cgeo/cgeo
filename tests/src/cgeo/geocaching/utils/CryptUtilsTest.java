@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.connector.gc.GCBase;
+
 import junit.framework.TestCase;
 
 public class CryptUtilsTest extends TestCase {
@@ -11,8 +13,8 @@ public class CryptUtilsTest extends TestCase {
     }
 
     public static void testConvertToGcBase31() {
-        assertEquals("1186660", CryptUtils.convertToGcBase31("GC1PKK9"));
-        assertEquals("4660", CryptUtils.convertToGcBase31("GC1234"));
-        assertEquals("61731", CryptUtils.convertToGcBase31("GCF123"));
+        assertEquals(1186660, GCBase.gccodeToGCId("GC1PKK9"));
+        assertEquals(4660, GCBase.gccodeToGCId("GC1234"));
+        assertEquals(61731, GCBase.gccodeToGCId("GCF123"));
     }
 }

@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.IAbstractActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.GCConnector;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.gc.GCBase;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
@@ -14,7 +15,6 @@ import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.GeopointFormatter;
 import cgeo.geocaching.geopoint.GeopointParser;
 import cgeo.geocaching.utils.CancellableHandler;
-import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.LogTemplateProvider;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -577,7 +577,7 @@ public class cgCache implements ICache {
     @Override
     public String getCacheId() {
         if (StringUtils.isBlank(cacheId) && getConnector().equals(GCConnector.getInstance())) {
-            return CryptUtils.convertToGcBase31(geocode);
+            return String.valueOf(GCBase.gccodeToGCId(geocode));
         }
 
         return cacheId;
