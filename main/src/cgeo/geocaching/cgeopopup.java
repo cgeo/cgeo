@@ -26,6 +26,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -128,6 +129,16 @@ public class cgeopopup extends AbstractActivity {
             finish();
             return;
         }
+
+        ImageView defaultNavigationImageView = (ImageView) findViewById(R.id.defaultNavigation);
+        defaultNavigationImageView.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                startDefaultNavigation2();
+                return true;
+            }
+        });
+
     }
 
     @Override
@@ -629,6 +640,18 @@ public class cgeopopup extends AbstractActivity {
             return;
         }
         NavigationAppFactory.startDefaultNavigationApplication(geo, this, cache, null, null);
+        finish();
+    }
+
+    /**
+     * Tries to navigate to the {@link cgCache} of this activity.
+     */
+    private void startDefaultNavigation2() {
+        if (cache == null || cache.getCoords() == null) {
+            showToast(res.getString(R.string.cache_coordinates_no));
+            return;
+        }
+        NavigationAppFactory.startDefaultNavigationApplication2(geo, this, cache, null, null);
         finish();
     }
 

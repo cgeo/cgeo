@@ -432,6 +432,7 @@
   <string name="init_default_navigation_tool">Default Navigation</string>
   <string name="init_default_navigation_tool_description">Here you can select your preferred navigation tool.</string>
   <string name="init_default_navigation_tool_select">Select tool</string>
+  <string name="init_default_navigation_tool_2_description">Here you can select your 2nd preferred navigation tool. It\'s accessible in the action bar by long click at the navigation icon.</string>
   
   <!-- map sources -->
   <string-array name="map_sources">

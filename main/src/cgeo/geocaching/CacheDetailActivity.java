@@ -65,6 +65,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewParent;
@@ -261,6 +262,15 @@ public class CacheDetailActivity extends AbstractActivity {
         } catch (Exception e) {
             // nothing, we lost the window
         }
+
+        ImageView defaultNavigationImageView = (ImageView) findViewById(R.id.defaultNavigation);
+        defaultNavigationImageView.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                startDefaultNavigation2();
+                return true;
+            }
+        });
 
         // initialize ViewPager
         viewPager = (ViewPager) findViewById(R.id.viewpager);
@@ -837,6 +847,19 @@ public class CacheDetailActivity extends AbstractActivity {
 
         //TODO: previously this used also the search argument "search". check if still needed
         NavigationAppFactory.startDefaultNavigationApplication(geolocation, this, cache, null, null);
+    }
+
+    /**
+     * Tries to navigate to the {@link cgCache} of this activity.
+     */
+    private void startDefaultNavigation2() {
+        if (cache == null || cache.getCoords() == null) {
+            showToast(res.getString(R.string.err_location_unknown));
+            return;
+        }
+
+        //TODO: previously this used also the search argument "search". check if still needed
+        NavigationAppFactory.startDefaultNavigationApplication2(geolocation, this, cache, null, null);
     }
 
     /**

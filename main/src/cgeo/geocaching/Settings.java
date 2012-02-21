@@ -76,6 +76,7 @@ public final class Settings {
     private static final String KEY_LAST_DETAILS_PAGE = "lastdetailspage";
     private static final String KEY_DEBUG_INFORMATIONS = "debuginfos";
     private static final String KEY_DEFAULT_NAVIGATION_TOOL = "defaultNavigationTool";
+    private static final String KEY_DEFAULT_NAVIGATION_TOOL_2 = "defaultNavigationTool2";
 
     private final static int unitsMetric = 1;
     private final static int unitsImperial = 2;
@@ -996,6 +997,20 @@ public final class Settings {
             @Override
             public void edit(Editor edit) {
                 edit.putInt(KEY_DEFAULT_NAVIGATION_TOOL, defaultNavigationTool);
+            }
+        });
+    }
+
+    public static int getDefaultNavigationTool2() {
+        return sharedPrefs.getInt(KEY_DEFAULT_NAVIGATION_TOOL_2, 0);
+    }
+
+    public static void setDefaultNavigationTool2(final int defaultNavigationTool) {
+        editSharedSettings(new PrefRunnable() {
+
+            @Override
+            public void edit(Editor edit) {
+                edit.putInt(KEY_DEFAULT_NAVIGATION_TOOL_2, defaultNavigationTool);
             }
         });
     }
