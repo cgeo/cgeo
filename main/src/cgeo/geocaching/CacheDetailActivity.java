@@ -320,13 +320,12 @@ public class CacheDetailActivity extends AbstractActivity {
         if (geolocation == null) {
             geolocation = app.startGeo(locationUpdater);
         }
-
+        if (cache != null) {
+            cache.setChangeNotificationHandler(cacheChangeNotificationHandler);
+        }
         if (refreshOnResume) {
             notifyDataSetChanged();
             refreshOnResume = false;
-        }
-        if (cache != null) {
-            cache.setChangeNotificationHandler(cacheChangeNotificationHandler);
         }
     }
 
@@ -346,7 +345,7 @@ public class CacheDetailActivity extends AbstractActivity {
         }
 
         if (cache != null) {
-            cache.setChangeNotificationHandler(cacheChangeNotificationHandler);
+            cache.setChangeNotificationHandler(null);
         }
 
         super.onStop();
