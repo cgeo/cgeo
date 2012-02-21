@@ -7,6 +7,7 @@ import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -171,6 +172,9 @@ public class SearchResult implements Parcelable {
 
     /** Add the geocode to the search. No cache is loaded into the CacheCache */
     public boolean addGeocode(final String geocode) {
+        if (StringUtils.isBlank(geocode)) {
+            throw new IllegalArgumentException("geocode must not be blank");
+        }
         return geocodes.add(geocode);
     }
 
