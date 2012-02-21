@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.gc;
 
+import cgeo.geocaching.GCConstants;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.Settings;
 import cgeo.geocaching.StoredList;
@@ -8,10 +9,11 @@ import cgeo.geocaching.cgCache;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.geopoint.Geopoint;
 import cgeo.geocaching.geopoint.Viewport;
+import cgeo.geocaching.utils.BaseUtils;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.http.HttpResponse;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,19 +41,34 @@ public class GCBase {
 
     // TODO Valentine remove before merge
     /** go online or use mocked data ? */
-    public static final boolean IS_ONLINE = false;
+    public static final boolean IS_ONLINE = true;
 
 
     // TODO Valentine move to connector before merge
+    /**
+     * @param viewport
+     * @param zoomlevel
+     *            initial zoomlevel
+     * @autoAdjust Auto-adjust zoomlevel
+     * @param sessionToken
+     * @return
+     */
     @SuppressWarnings("null")
-    public static SearchResult searchByViewport(final Viewport viewport) {
+    public static SearchResult searchByViewport(final Viewport viewport, final int zoomlevel, final boolean autoAdjust, final String sessionToken) {
+
+        assert zoomlevel >= Tile.ZOOMLEVEL_MIN && zoomlevel <= Tile.ZOOMLEVEL_MAX : "zoomlevel out of bounds.";
+
+        Geopoint centerOfViewport = new Geopoint((viewport.getLatitudeMin() + viewport.getLatitudeMax()) / 2, (viewport.getLongitudeMin() + viewport.getLongitudeMax()) / 2);
+        final String referer = GCConstants.URL_LIVE_MAP +
+                "?ll=" + centerOfViewport.getLatitude() +
+                "," + centerOfViewport.getLongitude();
 
         final SearchResult searchResult = new SearchResult();
+        searchResult.setUrl(referer);
 
-        List<ImmutablePair<Integer, Integer>> tiles = getTilesForViewport(viewport);
-        // TODO Valentine Use the coords from the viewport for the referer
-        final String referer = "http://www.geocaching.com/map/default.aspx?ll=52.4162,9.59412";
-        for (ImmutablePair<Integer, Integer> tile : tiles) {
+        List<Tile> tiles = getTilesForViewport(viewport, zoomlevel, autoAdjust);
+
+        for (Tile tile : tiles) {
             /*
              * http://www.geocaching.com/map/ --- map-url
              * map.info? --- request for JSON
@@ -60,18 +77,25 @@ public class GCBase {
              * z=14 --- zoom
              * _=1329484185663 --- token/filter, not required
              */
-            final String url = "http://www.geocaching.com/map/map.info?x=" + tile.left + "&y=" + tile.right + "&z=14";
-            String page = "";
+            String url = GCConstants.URL_MAP_INFO +
+                    "?x=" + tile.getX() +
+                    "&y=" + tile.getY() +
+                    "&z=" + tile.getZoomlevel();
+            if (StringUtils.isNotEmpty(sessionToken)) {
+                url += "&st=" + sessionToken;
+            }
+
+            String data = "";
             if (IS_ONLINE) {
-                page = cgBase.requestJSON(url, referer);
+                data = cgBase.requestJSON(url, referer);
             } else {
-                page = "{\"grid\":[\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"               04$                                              \",\"               /5'                                              \",\"               .6&                                              \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                       %:(      \",\"                                                       #;,      \",\"                                                       !<)      \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"  8-1                                                           \",\"  9+2                                                           \",\"  7*3                                                           \",\"                                                                \"],\"keys\":[\"\",\"55_55\",\"55_54\",\"17_25\",\"55_53\",\"17_27\",\"17_26\",\"57_53\",\"57_55\",\"3_62\",\"3_61\",\"57_54\",\"3_60\",\"15_27\",\"15_26\",\"15_25\",\"4_60\",\"4_61\",\"4_62\",\"16_25\",\"16_26\",\"16_27\",\"2_62\",\"2_60\",\"2_61\",\"56_53\",\"56_54\",\"56_55\"],\"data\":{\"55_55\":[{\"i\":\"gEaR\",\"n\":\"Spiel & Sport\"}],\"" +
+                data = "{\"grid\":[\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"               04$                                              \",\"               /5'                                              \",\"               .6&                                              \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                       %:(      \",\"                                                       #;,      \",\"                                                       !<)      \",\"                                                                \",\"                                                                \",\"                                                                \",\"                                                                \",\"  8-1                                                           \",\"  9+2                                                           \",\"  7*3                                                           \",\"                                                                \"],\"keys\":[\"\",\"55_55\",\"55_54\",\"17_25\",\"55_53\",\"17_27\",\"17_26\",\"57_53\",\"57_55\",\"3_62\",\"3_61\",\"57_54\",\"3_60\",\"15_27\",\"15_26\",\"15_25\",\"4_60\",\"4_61\",\"4_62\",\"16_25\",\"16_26\",\"16_27\",\"2_62\",\"2_60\",\"2_61\",\"56_53\",\"56_54\",\"56_55\"],\"data\":{\"55_55\":[{\"i\":\"gEaR\",\"n\":\"Spiel & Sport\"}],\"" +
                         "55_54\":[{\"i\":\"gEaR\",\"n\":\"Spiel & Sport\"}],\"17_25\":[{\"i\":\"Rkzt\",\"n\":\"EDSSW:  Rathaus \"}],\"55_53\":[{\"i\":\"gEaR\",\"n\":\"Spiel & Sport\"}],\"17_27\":[{\"i\":\"Rkzt\",\"n\":\"EDSSW:  Rathaus \"}],\"17_26\":[{\"i\":\"Rkzt\",\"n\":\"EDSSW:  Rathaus \"}],\"57_53\":[{\"i\":\"gEaR\",\"n\":\"Spiel & Sport\"}],\"57_55\":[{\"i\":\"gEaR\",\"n\":\"Spiel & Sport\"}],\"3_62\":[{\"i\":\"gOWz\",\"n\":\"Baumarktserie - Wer Wo Was -\"}],\"3_61\":[{\"i\":\"gOWz\",\"n\":\"Baumarktserie - Wer Wo Was -\"}],\"57_54\":[{\"i\":\"gEaR\",\"n\":\"Spiel & Sport\"}],\"3_60\":[{\"i\":\"gOWz\",\"n\":\"Baumarktserie - Wer Wo Was -\"}],\"15_27\":[{\"i\":\"Rkzt\",\"n\":\"EDSSW:  Rathaus \"}],\"15_26\":[{\"i\":\"Rkzt\",\"n\":\"EDSSW:  Rathaus \"}],\"15_25\":[{\"i\":\"Rkzt\",\"n\":\"EDSSW:  Rathaus \"}],\"4_60\":[{\"i\":\"gOWz\",\"n\":\"Baumarktserie - Wer Wo Was -\"}],\"4_61\":[{\"i\":\"gOWz\",\"n\":\"Baumarktserie - Wer Wo Was -\"}],\"4_62\":[{\"i\":\"gOWz\",\"n\":\"Baumarktserie - Wer Wo Was -\"}],\"16_25\":[{\"i\":\"Rkzt\",\"n\":\"EDSSW:  Rathaus \"}],\"16_26\":[{\"i\":\"Rkzt\",\"n\":\"EDSSW:  Rathaus \"}],\"16_27\":[{\"i\":\"Rkzt\",\"n\":\"EDSSW:  Rathaus \"}],\"2_62\":[{\"i\":\"gOWz\",\"n\":\"Baumarktserie - Wer Wo Was -\"}],\"2_60\":[{\"i\":\"gOWz\",\"n\":\"Baumarktserie - Wer Wo Was -\"}],\"2_61\":[{\"i\":\"gOWz\",\"n\":\"Baumarktserie - Wer Wo Was -\"}],\"56_53\":[{\"i\":\"gEaR\",\"n\":\"Spiel & Sport\"}],\"56_54\":[{\"i\":\"gEaR\",\"n\":\"Spiel & Sport\"}],\"56_55\":[{\"i\":\"gEaR\",\"n\":\"Spiel & Sport\"}]}}";
             }
-            if (StringUtils.isBlank(page)) {
-                Log.e(Settings.tag, "GCBase.searchByViewport: No data from server for tile (" + tile.left + "/" + tile.right + ")");
+            if (StringUtils.isEmpty(data)) {
+                Log.e(Settings.tag, "GCBase.searchByViewport: No data from server for tile (" + tile.getX() + "/" + tile.getY() + ")");
             }
-            final SearchResult search = parseMapJSON(url, page);
+            final SearchResult search = parseMapJSON(data, tile);
             if (search == null || CollectionUtils.isEmpty(search.getGeocodes())) {
                 Log.e(Settings.tag, "GCBase.searchByViewport: No cache parsed for viewport " + viewport);
             }
@@ -85,18 +109,17 @@ public class GCBase {
     /**
      * @param url
      *            URL used to retrieve data.
-     * @param page
+     * @param data
      *            Retrieved data.
      * @return SearchResult. Never null.
      */
-    public static SearchResult parseMapJSON(final String url, final String page) {
+    public static SearchResult parseMapJSON(final String data, Tile tile) {
 
         final SearchResult searchResult = new SearchResult();
-        searchResult.setUrl(url);
 
         try {
 
-            if (StringUtils.isEmpty(page)) {
+            if (StringUtils.isEmpty(data)) {
                 throw new JSONException("No page given");
             }
 
@@ -106,10 +129,10 @@ public class GCBase {
             //  "data":{"55_55":[{"i":"gEaR","n":"Spiel & Sport"}],"55_54":[{"i":"gEaR","n":"Spiel & Sport"}],"17_25":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"55_53":[{"i":"gEaR","n":"Spiel & Sport"}],"17_27":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"17_26":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"57_53":[{"i":"gEaR","n":"Spiel & Sport"}],"57_55":[{"i":"gEaR","n":"Spiel & Sport"}],"3_62":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"3_61":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"57_54":[{"i":"gEaR","n":"Spiel & Sport"}],"3_60":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"15_27":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"15_26":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"15_25":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"4_60":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"4_61":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"4_62":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"16_25":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"16_26":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"16_27":[{"i":"Rkzt","n":"EDSSW:  Rathaus "}],"2_62":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"2_60":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"2_61":[{"i":"gOWz","n":"Baumarktserie - Wer Wo Was -"}],"56_53":[{"i":"gEaR","n":"Spiel & Sport"}],"56_54":[{"i":"gEaR","n":"Spiel & Sport"}],"56_55":[{"i":"gEaR","n":"Spiel & Sport"}]}
             //  }
 
-            final JSONObject json = new JSONObject(page);
+            final JSONObject json = new JSONObject(data);
 
             final JSONArray grid = json.getJSONArray("grid");
-            if (grid == null || grid.length() != 64) {
+            if (grid == null || grid.length() != (UTFGrid.GRID_MAXY + 1)) {
                 throw new JSONException("No grid inside JSON");
             }
             final JSONArray keys = json.getJSONArray("keys");
@@ -122,21 +145,29 @@ public class GCBase {
             }
 
             // attach all keys with the cache positions in the tile
-            Map<String, ImmutablePair<Integer, Integer>> keyPositions = new HashMap<String, ImmutablePair<Integer, Integer>>(); // JSON key, (x/y) in grid
+            Map<String, UTFGridPosition> keyPositions = new HashMap<String, UTFGridPosition>(); // JSON key, (x/y) in grid
             for (int y = 0; y < grid.length(); y++) {
-                byte[] row = grid.getString(y).getBytes();
-                for (int x = 0; x < row.length; x++) {
-                    if (row[x] != 32) {
-                        byte id = UTFGrid.getUTFGridId(row[x]);
-                        keyPositions.put(keys.getString(id), new ImmutablePair<Integer, Integer>(x, y));
+                String rowUTF8 = grid.getString(y);
+                if (rowUTF8.length() != (UTFGrid.GRID_MAXX + 1)) {
+                    throw new JSONException("Grid has wrong size");
+                }
+
+                for (int x = 0; x < UTFGrid.GRID_MAXX; x++) {
+                    char c = rowUTF8.charAt(x);
+                    if (c != ' ') {
+                        short id = UTFGrid.getUTFGridId(c);
+                        keyPositions.put(keys.getString(id), new UTFGridPosition(x, y));
                     }
                 }
             }
 
+            // Optimization:
+            // the grid can get ignored. The keys are the grid position in the format x_y
+
             // iterate over the data and construct all caches in this tile
             Map<String, cgCache> caches = new HashMap<String, cgCache>(); // JSON id, cache
-            Map<String, List<ImmutablePair<Integer, Integer>>> positions = new HashMap<String, List<ImmutablePair<Integer, Integer>>>(); // JSON id as key
-            for (int i = 0; i < keys.length(); i++) {
+            Map<String, List<UTFGridPosition>> positions = new HashMap<String, List<UTFGridPosition>>(); // JSON id as key
+            for (int i = 1; i < keys.length(); i++) { // index 0 is empty
                 String key = keys.getString(i);
                 if (StringUtils.isNotBlank(key)) {
                     JSONArray dataForKey = dataObject.getJSONArray(key);
@@ -155,28 +186,31 @@ public class GCBase {
                             caches.put(id, cache);
                         }
 
-                        List<ImmutablePair<Integer, Integer>> pos = positions.get(id);
-                        if (pos == null) {
-                            pos = new ArrayList<ImmutablePair<Integer, Integer>>();
+                        List<UTFGridPosition> listOfPositions = positions.get(id);
+                        if (listOfPositions == null) {
+                            listOfPositions = new ArrayList<UTFGridPosition>();
                         }
-                        pos.add(keyPositions.get(key));
-                        positions.put(id, pos);
+                        UTFGridPosition pos = keyPositions.get(key);
+                        if (pos == null) {
+                            Log.e(Settings.tag, "key " + key + " not found in keyPositions");
+                        } else {
+                            listOfPositions.add(pos);
+                        }
+                        positions.put(id, listOfPositions);
                     }
                 }
             }
 
             for (String id : positions.keySet()) {
-                List<ImmutablePair<Integer, Integer>> pos = positions.get(id);
+                List<UTFGridPosition> pos = positions.get(id);
                 cgCache cache = caches.get(id);
-                cache.setCoords(getCoordsForUTFGrid(pos));
+                cache.setCoords(getCoordsForUTFGrid(tile, pos));
 
-                Log.d(Settings.tag, "id= " + id + " geocode= " + cache.getGeocode());
-                for (ImmutablePair<Integer, Integer> ImmutablePair : pos) {
-                    Log.d(Settings.tag, "(" + ImmutablePair.left + "," + ImmutablePair.right + ")");
-                }
+                Log.d(Settings.tag, "id=" + id + " geocode=" + cache.getGeocode() + " coords=" + cache.getCoords().toString());
 
                 searchResult.addCache(cache);
             }
+            Log.d(Settings.tag, "Retrieved " + searchResult.getCount() + " caches for tile " + tile.toString());
 
         } catch (Exception e) {
             Log.e(Settings.tag, "GCBase.parseMapJSON", e);
@@ -186,24 +220,58 @@ public class GCBase {
     }
 
     /**
-     * Calculate tiles for the given viewport
+     * Calculate needed tiles for the given viewport
      *
      * @param viewport
      * @return
      */
-    protected static List<ImmutablePair<Integer, Integer>> getTilesForViewport(Viewport viewport) {
-        // TODO Valentine Calculate tile number
-        ImmutablePair<Integer, Integer> tile = new ImmutablePair<Integer, Integer>(8633, 5381); // = N 52° 24,516 E 009° 42,592
-        List<ImmutablePair<Integer, Integer>> tiles = new ArrayList<ImmutablePair<Integer, Integer>>();
-        tiles.add(tile);
-        return tiles;
+    protected static List<Tile> getTilesForViewport(final Viewport viewport, final int zoomlevel, final boolean autoAdjust) {
+        Tile tileBottomLeft = new Tile(viewport.bottomLeft, zoomlevel);
+        Tile tileTopRight = new Tile(viewport.topRight, zoomlevel);
 
+        int minX = Math.min(tileBottomLeft.getX(), tileTopRight.getX());
+        int maxX = Math.max(tileBottomLeft.getX(), tileTopRight.getX());
+        int minY = Math.min(tileBottomLeft.getY(), tileTopRight.getY());
+        int maxY = Math.max(tileBottomLeft.getY(), tileTopRight.getY());
+
+        // The recursion is a compromise between number of requests and precision.
+        // The smaller the zoomlevel the smaller the number of requests the more inaccurate the coords are
+        // The bigger the zoomlevel the bigger the number of requests the more accurate the coords are
+        // For really usable coords a zoomlevel >= 13 is required
+        if (autoAdjust && zoomlevel >= Tile.ZOOMLEVEL_MIN && ((maxX - minX + 1) * (maxY - minY + 1) > 4)) {
+            return getTilesForViewport(viewport, zoomlevel - 1, autoAdjust);
+        }
+
+        List<Tile> tiles = new ArrayList<Tile>();
+
+        if (tileBottomLeft.getX() == tileTopRight.getX() &&
+                tileBottomLeft.getY() == tileTopRight.getY()) {
+            tiles.add(tileBottomLeft);
+            return tiles;
+        }
+
+        for (int x = minX; x <= maxX; x++) {
+            for (int y = minY; y <= maxY; y++) {
+                tiles.add(new Tile(x, y, zoomlevel));
+            }
+        }
+        Log.d(Settings.tag, "# tiles=" + tiles.size() + " " + minX + "/" + minY + " " + maxX + "/" + maxY);
+        return tiles;
     }
 
     /** Calculate from a list of positions (x/y) the coords */
-    protected static Geopoint getCoordsForUTFGrid(List<ImmutablePair<Integer, Integer>> positions) {
-        // TODO Valentine Calculate coords
-        return new Geopoint("N 52° 24,516 E 009° 42,592");
+    protected static Geopoint getCoordsForUTFGrid(Tile tile, List<UTFGridPosition> positions) {
+        int minX = UTFGrid.GRID_MAXX;
+        int maxX = 0;
+        int minY = UTFGrid.GRID_MAXY;
+        int maxY = 0;
+        for (UTFGridPosition pos : positions) {
+            minX = Math.min(minX, pos.x);
+            maxX = Math.max(maxX, pos.x);
+            minY = Math.min(minY, pos.y);
+            maxY = Math.max(maxY, pos.y);
+        }
+        return tile.getCoord(new UTFGridPosition((minX + maxX) / 2, (minY + maxY) / 2));
     }
 
     /**
@@ -287,6 +355,7 @@ public class GCBase {
         return GCBase.gcidToGCCode(gcid);
     }
 
+    // TODO Valentine
     /** Request further details in the live mapa for a given id */
     public void requestDetailsFromMap(@SuppressWarnings("unused") String id) {
         /**
@@ -299,6 +368,13 @@ public class GCBase {
          * :"regular.gif"},"type":{"text":"Multi-cache"
          * ,"value":3},"owner":{"text":"kai2707","value":"5c4b0915-5cec-4fa1-8afd-4b3ca67e004e"}}]}
          */
+    }
+
+    /** Get session token from the Live Map. Needed for following requests */
+    public static String getSessionToken() {
+        final HttpResponse response = cgBase.request(GCConstants.URL_LIVE_MAP, null, false);
+        final String data = cgBase.getResponseData(response);
+        return BaseUtils.getMatch(data, GCConstants.PATTERN_SESSIONTOKEN, "");
     }
 
 }

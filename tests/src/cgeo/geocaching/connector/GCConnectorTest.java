@@ -37,7 +37,6 @@ public class GCConnectorTest extends AndroidTestCase {
             assertTrue(searchResult != null);
             assertTrue(searchResult.getGeocodes().contains("GC211WG"));
         }
-
     }
 
     public static void testBaseCodings() {
