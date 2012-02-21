@@ -14,6 +14,8 @@ import cgeo.geocaching.geopoint.Geopoint;
 public class Tile {
 
     public static final int TILE_SIZE = 256;
+    public static final int ZOOMLEVEL_MAX = 18;
+    public static final int ZOOMLEVEL_MIN = 0;
 
     private final int tileX;
     private final int tileY;
@@ -66,21 +68,25 @@ public class Tile {
         return (int) ((1 - (Math.log(Math.tan(lat_rad) + (1 / Math.cos(lat_rad))) / Math.PI)) / 2 * numberOfTiles);
     }
 
-    /** Calculate latitude/longitude for a given x/y position in this tile. */
+    /**
+     * Calculate latitude/longitude for a given x/y position in this tile.
+     *
+     * @see http://developers.cloudmade.com/projects/tiles/examples/convert-coordinates-to-tile-numbers
+     */
     public Geopoint getCoord(UTFGridPosition pos) {
-
-        long numberOfPixels = TILE_SIZE * numberOfTiles;
 
         double pixX = tileX * TILE_SIZE + pos.x * 4;
         double pixY = tileY * TILE_SIZE + pos.y * 4;
-
-        pixY += -1 * numberOfPixels / 2;
-        double radius = numberOfPixels / (2.0 * Math.PI);
-        double lat = (Math.PI / 2) - (2 * Math.atan(Math.exp(-1.0 * pixY / radius)));
-        lat = -1 * Math.toDegrees(lat);
+        long numberOfPixels = TILE_SIZE * numberOfTiles;
 
         double lon = ((360.0 * pixX) / numberOfPixels) - 180.0;
-        return new Geopoint(lat, lon);
+        double latRad = Math.atan(Math.sinh(Math.PI * (1 - 2 * pixY / numberOfPixels)));
+        return new Geopoint(latRad * Geopoint.rad2deg, lon);
     }
 
+    @Override
+    public String toString() {
+        return String.format("(%d/%d), zoom=%d", tileX, tileY, zoomlevel).toString();
+
+    }
 }

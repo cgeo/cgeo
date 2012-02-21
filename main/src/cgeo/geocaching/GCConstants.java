@@ -13,6 +13,11 @@ import java.util.regex.Pattern;
  */
 public final class GCConstants {
 
+    /** Live Map */
+    public final static String URL_LIVE_MAP = "http://www.geocaching.com/map/default.aspx";
+    /** Caches in a tile */
+    public final static String URL_MAP_INFO = "http://www.geocaching.com/map/map.info";
+
     /**
      * Patterns for parsing the result of a (detailed) search
      */
@@ -132,4 +137,7 @@ public final class GCConstants {
     public final static Pattern PATTERN_VIEWSTATEFIELDCOUNT = Pattern.compile("id=\"__VIEWSTATEFIELDCOUNT\"[^(value)]+value=\"(\\d+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     public final static Pattern PATTERN_VIEWSTATES = Pattern.compile("id=\"__VIEWSTATE(\\d*)\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     public final static Pattern PATTERN_USERTOKEN2 = Pattern.compile("userToken\\s*=\\s*'([^']+)'");
+
+    /** Live Map since 14.02.2012 */
+    public final static Pattern PATTERN_SESSIONTOKEN = Pattern.compile("sessionToken:'([^']+)'");
 }

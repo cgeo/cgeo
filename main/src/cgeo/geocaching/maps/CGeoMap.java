@@ -15,6 +15,7 @@ import cgeo.geocaching.cgWaypoint;
 import cgeo.geocaching.cgeoapplication;
 import cgeo.geocaching.cgeocaches;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.connector.gc.GCBase;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
@@ -1265,7 +1266,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     }
 
                     if (token == null) {
-                        token = cgBase.getMapUserToken(noMapTokenHandler);
+                        // token = cgBase.getMapUserToken(noMapTokenHandler);
+                        token = GCBase.getSessionToken();
                     }
 
                     if (stop) {
@@ -1273,7 +1275,8 @@ public class CGeoMap extends AbstractMap implements OnMapDragListener, ViewFacto
                     }
 
                     final Viewport viewport = new Viewport(new Geopoint(latMin, lonMin), new Geopoint(latMax, lonMax));
-                    search = cgBase.searchByViewport(token, viewport);
+                    // search = cgBase.searchByViewport(token, viewport);
+                    search = GCBase.searchByViewport(viewport, 14, true, token);
                     if (search != null) {
                         downloaded = true;
                         if (search.error == StatusCode.NOT_LOGGED_IN) {

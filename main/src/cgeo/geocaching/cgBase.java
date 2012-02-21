@@ -271,7 +271,10 @@ public class cgBase {
             return StatusCode.NO_LOGIN_INFO_STORED;
         }
 
-        cgBase.setActualStatus(res.getString(R.string.init_login_popup_working));
+        // res is null during the unit tests
+        if (res != null) {
+            cgBase.setActualStatus(res.getString(R.string.init_login_popup_working));
+        }
         HttpResponse loginResponse = request("https://www.geocaching.com/login/default.aspx", null, false, false, false);
         String loginData = getResponseData(loginResponse);
         if (loginResponse != null && loginResponse.getStatusLine().getStatusCode() == 503 && BaseUtils.matches(loginData, GCConstants.PATTERN_MAINTENANCE)) {
@@ -357,7 +360,10 @@ public class cgBase {
             return false;
         }
 
-        setActualStatus(res.getString(R.string.init_login_popup_ok));
+        // res is null during the unit tests
+        if (res != null) {
+            setActualStatus(res.getString(R.string.init_login_popup_ok));
+        }
 
         // on every page except login page
         setActualLoginStatus(BaseUtils.matches(page, GCConstants.PATTERN_LOGIN_NAME));
@@ -377,7 +383,10 @@ public class cgBase {
             return true;
         }
 
-        setActualStatus(res.getString(R.string.init_login_popup_failed));
+        // res is null during the unit tests
+        if (res != null) {
+            setActualStatus(res.getString(R.string.init_login_popup_failed));
+        }
         return false;
     }
 
@@ -1906,7 +1915,8 @@ public class cgBase {
         request.addHeader("X-Requested-With", "XMLHttpRequest");
         request.addHeader("Accept", "application/json, text/javascript, */*; q=0.01");
         request.addHeader("Referer", referer);
-        return getResponseData(request(request));
+
+        return getResponseData(request(request), false);
     }
 
     // TODO Valentine Remove with merge
@@ -2348,9 +2358,10 @@ public class cgBase {
         return getViewstates(getResponseData(response));
     }
 
-    static public String getResponseDataOnError(final HttpResponse response) {
+    static public String getResponseDataOnError(final HttpResponse response, boolean replaceWhitespace) {
         try {
-            return BaseUtils.replaceWhitespace(EntityUtils.toString(response.getEntity(), HTTP.UTF_8));
+            String data = EntityUtils.toString(response.getEntity(), HTTP.UTF_8);
+            return replaceWhitespace ? BaseUtils.replaceWhitespace(data) : data;
         } catch (Exception e) {
             Log.e(Settings.tag, "getResponseData", e);
             return null;
@@ -2358,10 +2369,14 @@ public class cgBase {
     }
 
     static public String getResponseData(final HttpResponse response) {
+        return getResponseData(response, true);
+    }
+
+    static public String getResponseData(final HttpResponse response, boolean replaceWhitespace) {
         if (!isSuccess(response)) {
             return null;
         }
-        return getResponseDataOnError(response);
+        return getResponseDataOnError(response, replaceWhitespace);
     }
 
     /**
@@ -2893,6 +2908,8 @@ public class cgBase {
         return false;
     }
 
+    // TODO Valentine Remove with merge
+    @Deprecated
     public static String getMapUserToken(final Handler noTokenHandler) {
         final HttpResponse response = request("http://www.geocaching.com/map/default.aspx", null, false);
         final String data = getResponseData(response);
