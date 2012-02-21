@@ -21,6 +21,8 @@ public class GCConstantsTest extends AndroidTestCase {
         assertCacheCount(149, "<strong><img src=\"/images/icons/icon_smile.png\" title=\"Caches Found\" /> 149</strong>");
         assertCacheCount(513, MockedCache.readCachePage("GC2CJPF"));
         assertCacheCount(1510, "<strong><img src=\"/images/icons/icon_smile.png\" title=\"Caches Found\" /> 1,510&nbsp;&middot;&nbsp;<img src=\"/images/challenges/types/sm/challenge.png\" title=\"Challenges Completed\" /> 2</strong>");
+        assertCacheCount(67, "<strong><img title=\"Caches Found\" src=\"/images/icons/icon_smile.png\"/> 67</strong>");
+        assertCacheCount(1067, "<strong><img title=\"Caches Found\" src=\"/images/icons/icon_smile.png\"/> 1,067</strong>");
     }
 
     private static void assertCacheCount(final int count, final String html) {
