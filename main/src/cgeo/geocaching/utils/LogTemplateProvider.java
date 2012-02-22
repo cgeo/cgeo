@@ -127,6 +127,6 @@ public class LogTemplateProvider {
             return -1;
         }
 
-        return Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "-1").replaceAll(",", ""));
+        return Integer.parseInt(BaseUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, "-1").replaceAll("[,\\.]", ""));
     }
 }

@@ -23,9 +23,12 @@ public class GCConstantsTest extends AndroidTestCase {
         assertCacheCount(1510, "<strong><img src=\"/images/icons/icon_smile.png\" title=\"Caches Found\" /> 1,510&nbsp;&middot;&nbsp;<img src=\"/images/challenges/types/sm/challenge.png\" title=\"Challenges Completed\" /> 2</strong>");
         assertCacheCount(67, "<strong><img title=\"Caches Found\" src=\"/images/icons/icon_smile.png\"/> 67</strong>");
         assertCacheCount(1067, "<strong><img title=\"Caches Found\" src=\"/images/icons/icon_smile.png\"/> 1,067</strong>");
+        // now checking usage of "." as thousands separator
+        assertCacheCount(1510, "<strong><img src=\"/images/icons/icon_smile.png\" title=\"Caches Found\" /> 1.510&nbsp;&middot;&nbsp;<img src=\"/images/challenges/types/sm/challenge.png\" title=\"Challenges Completed\" /> 2</strong>");
+        assertCacheCount(1067, "<strong><img title=\"Caches Found\" src=\"/images/icons/icon_smile.png\"/> 1.067</strong>");
     }
 
     private static void assertCacheCount(final int count, final String html) {
-        assertEquals(count, Integer.parseInt(BaseUtils.getMatch(html, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll(",", "")));
+        assertEquals(count, Integer.parseInt(BaseUtils.getMatch(html, GCConstants.PATTERN_CACHES_FOUND, true, "0").replaceAll("[,\\.]", "")));
     }
 }

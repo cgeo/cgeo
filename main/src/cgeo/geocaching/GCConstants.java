@@ -56,8 +56,8 @@ public final class GCConstants {
     // Info box top-right
     public static final Pattern PATTERN_LOGIN_NAME = Pattern.compile("\"SignedInProfileLink\">([^<]+)</a>");
     public static final Pattern PATTERN_MEMBER_STATUS = Pattern.compile("<span id=\"ctl00_litPMLevel\" style=\"display: block;\">([^<]+)</span>");
-    /** Use replaceAll(",","") on the resulting string before converting to an int */
-    public static final Pattern PATTERN_CACHES_FOUND = Pattern.compile("title=\"Caches Found\"[\\s\\w=\"/\\.]*/>\\s*([\\d,]+)");
+    /** Use replaceAll("[,\\.]","") on the resulting string before converting to an int */
+    public static final Pattern PATTERN_CACHES_FOUND = Pattern.compile("title=\"Caches Found\"[\\s\\w=\"/\\.]*/>\\s*([\\d,\\.]+)");
     public static final Pattern PATTERN_AVATAR_IMAGE_PROFILE_PAGE = Pattern.compile("<img src=\"(http://img.geocaching.com/user/avatar/[0-9a-f-]+\\.jpg)\"[^>]*\\salt=\"Avatar\"");
     public static final Pattern PATTERN_LOGIN_NAME_LOGIN_PAGE = Pattern.compile("<span class=\"Success\">You are logged in as[^<]*<strong[^>]*>([^<]+)</strong>[^<]*</span>");
     public static final Pattern PATTERN_CUSTOMDATE = Pattern.compile("<option selected=\"selected\" value=\"([ /Mdy-]+)\">");
